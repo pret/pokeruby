@@ -614,20 +614,14 @@ gUnknown_081FB048: ; 81FB048
 gUnknown_081FC1D0: ; 81FC1D0
 	.incbin "baserom.gba", 0x001fc1d0, 0x10
 
-gUnknown_081FC1E0: ; 81FC1E0
-	.incbin "baserom.gba", 0x001fc1e0, 0x336
+; 81FC1E0
+	.include "data/pokedex_order.s"
 
-gUnknown_081FC516: ; 81FC516
-	.incbin "baserom.gba", 0x001fc516, 0x336
+; 81FCB84
+	.include "data/spinda_spot_graphics.s"
 
-gUnknown_081FC84C: ; 81FC84C
-	.incbin "baserom.gba", 0x001fc84c, 0x338
-
-gUnknown_081FCB84: ; 81FCB84
-	.incbin "baserom.gba", 0x001fcb84, 0x2
-
-gUnknown_081FCB86: ; 81FCB86
-	.incbin "baserom.gba", 0x001fcb86, 0x25e
+; 81FCC14
+	.incbin "baserom.gba", 0x001FCC14, 0x1D0
 
 gUnknown_081FCDE4: ; 81FCDE4
 	.incbin "baserom.gba", 0x001fcde4, 0x28c
