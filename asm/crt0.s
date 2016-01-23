@@ -44,7 +44,7 @@ sp_irq: .4byte IWRAM_END - 0x60
 	.arm
 	.align 2
 	.globl IntrMain
-IntrMain: ; 8000248
+IntrMain: ; 800010C
 	mov r3, REG_BASE
 	add r3, r3, 0x200
 	ldr r2, [r3, OFFSET_REG_IE - 0x200]
