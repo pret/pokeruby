@@ -608,11 +608,8 @@ gUnknown_081FAF5C: ; 81FAF5C
 gUnknown_081FB048: ; 81FB048
 	.incbin "baserom.gba", 0x001fb048, 0xe4
 
-gUnknown_081FB12C: ; 81FB12C
-	.incbin "baserom.gba", 0x001fb12c, 0x4
-
-gUnknown_081FB130: ; 81FB130
-	.incbin "baserom.gba", 0x001fb130, 0x10a0
+; 81FB12C
+	.include "data/battle_moves.s"
 
 gUnknown_081FC1D0: ; 81FC1D0
 	.incbin "baserom.gba", 0x001fc1d0, 0x10
