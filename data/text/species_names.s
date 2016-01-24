@@ -1,4 +1,4 @@
-gSpeciesNames: ; 83185C8
+gSpeciesNames: ; 81F716C
 	.charmapstr "??????????$", 11
 	.charmapstr "BULBASAUR$", 11
 	.charmapstr "IVYSAUR$", 11
