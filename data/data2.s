@@ -623,8 +623,10 @@ gUnknown_081FC1D0: ; 81FC1D0
 ; 81FCC14
 	.include "data/item_effects.s"
 
-gUnknown_081FD070: ; 81FD070
-	.incbin "baserom.gba", 0x001fd070, 0x80
+; 81FD070
+	.include "data/nature_stat_table.s"
+
+	.align 2
 
 gUnknown_081FD0F0: ; 81FD0F0
 	.incbin "baserom.gba", 0x001fd0f0, 0xce0
