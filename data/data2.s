@@ -479,13 +479,15 @@ gUnknown_081F9870: ; 81F9870
 	.incbin "baserom.gba", 0x001f9870, 0x80
 
 gUnknown_081F98F0: ; 81F98F0
-	.incbin "baserom.gba", 0x001f98f0, 0x820
+	.incbin "baserom.gba", 0x001f98f0, 0xdc
 
-gUnknown_081FA110: ; 81FA110
-	.incbin "baserom.gba", 0x001fa110, 0x138
+; 81F99CC
+	.include "data/text/ability_descriptions.s"
 
-gUnknown_081FA248: ; 81FA248
-	.incbin "baserom.gba", 0x001fa248, 0x3f8
+; 81FA248
+	.include "data/text/ability_names.s"
+
+	.align 2
 
 gUnknown_081FA640: ; 81FA640
 	.incbin "baserom.gba", 0x001fa640, 0x38
