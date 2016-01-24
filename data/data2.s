@@ -2717,13 +2717,13 @@ gUnknown_083BC660: ; 83BC660
 	.incbin "baserom.gba", 0x003bc660, 0x8
 
 gUnknown_083BC668: ; 83BC668
-	.incbin "baserom.gba", 0x003bc668, 0x4370
+	.incbin "baserom.gba", 0x003bc668, 0x18
 
-gUnknown_083C09D8: ; 83C09D8
-	.incbin "baserom.gba", 0x003c09d8, 0x62c
+; 83BC680
+	.include "data/text/move_descriptions.s"
 
-gUnknown_083C1004: ; 83C1004
-	.incbin "baserom.gba", 0x003c1004, 0x64
+; 83C0F60
+	.include "data/text/nature_names.s"
 
 gUnknown_083C1068: ; 83C1068
 	.incbin "baserom.gba", 0x003c1068, 0x150
