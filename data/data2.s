@@ -439,8 +439,11 @@ gUnknown_081F050C: ; 81F050C
 ; 81F716C
 	.include "data/text/species_names.s"
 
-gUnknown_081F8320: ; 81F8320
-	.incbin "baserom.gba", 0x001f8320, 0x1254
+; 81F8320
+	.include "data/text/move_names.s"
+
+; 81F9527
+	.incbin "baserom.gba", 0x001F9527, 0x4D
 
 gUnknown_081F9574: ; 81F9574
 	.incbin "baserom.gba", 0x001f9574, 0x18
