@@ -374,26 +374,23 @@ gUnknown_081E7C64: ; 81E7C64
 gUnknown_081E7C74: ; 81E7C74
 	.incbin "baserom.gba", 0x001e7c74, 0x6e0
 
-gUnknown_081E8354: ; 81E8354
-	.incbin "baserom.gba", 0x001e8354, 0xaf0
-
-gUnknown_081E8E44: ; 81E8E44
-	.incbin "baserom.gba", 0x001e8e44, 0x2d0
+; 81E8354
+	.include "data/graphics/pokemon/front_pic_table.s"
 
 gUnknown_081E9114: ; 81E9114
 	.incbin "baserom.gba", 0x001e9114, 0x6e0
 
-gUnknown_081E97F4: ; 81E97F4
-	.incbin "baserom.gba", 0x001e97f4, 0xdc0
+; 81E97F4
+	.include "data/graphics/pokemon/back_pic_table.s"
 
-gUnknown_081EA5B4: ; 81EA5B4
-	.incbin "baserom.gba", 0x001ea5b4, 0xaf0
+; 81EA5B4
+	.include "data/graphics/pokemon/palette_table.s"
 
-gUnknown_081EB0A4: ; 81EB0A4
-	.incbin "baserom.gba", 0x001eb0a4, 0x2d0
+; 81EB374
+	.include "data/graphics/pokemon/shiny_palette_table.s"
 
-gUnknown_081EB374: ; 81EB374
-	.incbin "baserom.gba", 0x001eb374, 0xf30
+; 81EC134
+	.incbin "baserom.gba", 0x001EC134, 0x170
 
 gUnknown_081EC2A4: ; 81EC2A4
 	.incbin "baserom.gba", 0x001ec2a4, 0x14c
@@ -2490,8 +2487,8 @@ gUnknown_083B1858: ; 83B1858
 gUnknown_083B4EC4: ; 83B4EC4
 	.incbin "baserom.gba", 0x003b4ec4, 0x20
 
-gUnknown_083B4EE4: ; 83B4EE4
-	.incbin "baserom.gba", 0x003b4ee4, 0x674
+; 83B4EE4
+	.include "data/graphics/pokemon/footprint_table.s"
 
 gUnknown_083B5558: ; 83B5558
 	.incbin "baserom.gba", 0x003b5558, 0x2c
@@ -2700,14 +2697,14 @@ gUnknown_083BBC88: ; 83BBC88
 gUnknown_083BBCA0: ; 83BBCA0
 	.incbin "baserom.gba", 0x003bbca0, 0x80
 
-gUnknown_083BBD20: ; 83BBD20
-	.incbin "baserom.gba", 0x003bbd20, 0x6e0
+; 83BBD20
+	.include "data/graphics/pokemon/icon_table.s"
 
-gUnknown_083BC400: ; 83BC400
-	.incbin "baserom.gba", 0x003bc400, 0x1b8
+; 83BC400
+	.include "data/graphics/pokemon/icon_palette_indices.s"
 
-gUnknown_083BC5B8: ; 83BC5B8
-	.incbin "baserom.gba", 0x003bc5b8, 0x30
+; 83BC5B8
+	.include "data/graphics/pokemon/icon_palette_table.s"
 
 gUnknown_083BC5E8: ; 83BC5E8
 	.incbin "baserom.gba", 0x003bc5e8, 0x44
@@ -7858,7 +7855,13 @@ gUnknown_08D004E0: ; 8D004E0
 	.incbin "baserom.gba", 0x00d004e0, 0x44
 
 gUnknown_08D00524: ; 8D00524
-	.incbin "baserom.gba", 0x00d00524, 0x2bac
+	.incbin "baserom.gba", 0x00d00524, 0x1000
+
+; 8D01524
+	.include "data/graphics/pokemon/circled_question_mark_graphics.s"
+
+; 8D019E4
+	.incbin "baserom.gba", 0xd019e4, 0x16EC
 
 gUnknown_08D030D0: ; 8D030D0
 	.incbin "baserom.gba", 0x00d030d0, 0x6b78
@@ -8002,7 +8005,22 @@ gUnknown_08D2EDFC: ; 8D2EDFC
 	.incbin "baserom.gba", 0x00d2edfc, 0x4c
 
 gUnknown_08D2EE48: ; 8D2EE48
-	.incbin "baserom.gba", 0x00d2ee48, 0x12ebc8
+	.incbin "baserom.gba", 0x00d2ee48, 0xF44
+
+; 8D2FD8C
+	.include "data/graphics/pokemon/graphics.s"
+
+	.incbin "baserom.gba", 0xe48d38, 0x148b8
+
+	.align 2
+
+gMonIcon_QuestionMark: ; 8E5D5F0
+	.incbin "graphics/pokemon/question_mark/icon.4bpp"
+
+	.align 2
+
+gMonFootprint_QuestionMark: ; 8E5D9F0
+	.incbin "graphics/pokemon/question_mark/footprint.1bpp"
 
 gUnknown_08E5DA10: ; 8E5DA10
 	.incbin "baserom.gba", 0x00e5da10, 0xe8
@@ -8113,7 +8131,13 @@ gUnknown_08E6978C: ; 8E6978C
 	.incbin "baserom.gba", 0x00e6978c, 0xf78
 
 gUnknown_08E6A704: ; 8E6A704
-	.incbin "baserom.gba", 0x00e6a704, 0x19fc
+	.incbin "baserom.gba", 0x00e6a704, 0xD8
+
+gMonIcon_Egg: ; 8E6A7DC
+	.incbin "graphics/pokemon/egg/icon.4bpp"
+
+; 8E6ABDC
+	.incbin "baserom.gba", 0x00E6ABDC, 0x1524
 
 gUnknown_08E6C100: ; 8E6C100
 	.incbin "baserom.gba", 0x00e6c100, 0x820
@@ -8451,8 +8475,10 @@ gUnknown_08E964B8: ; 8E964B8
 gUnknown_08E966B8: ; 8E966B8
 	.incbin "baserom.gba", 0x00e966b8, 0x20
 
-gUnknown_08E966D8: ; 8E966D8
-	.incbin "baserom.gba", 0x00e966d8, 0x60
+gMonIconPalettes: ; 8E966D8
+	.incbin "graphics/pokemon_icon_palettes/0.gbapal"
+	.incbin "graphics/pokemon_icon_palettes/1.gbapal"
+	.incbin "graphics/pokemon_icon_palettes/2.gbapal"
 
 gUnknown_08E96738: ; 8E96738
 	.incbin "baserom.gba", 0x00e96738, 0x150
