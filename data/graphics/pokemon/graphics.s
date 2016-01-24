@@ -7530,23 +7530,23 @@ gMonFootprint_Celebi: ; 8DDD698
 
 	.align 2
 
-gMonFrontPic_DoubleQuestionMark: ; 8DDD6B8
-	.incbin "graphics/pokemon/double_question_mark/front.4bpp.lz"
+gMonFrontPic_QuestionMark: ; 8DDD6B8
+	.incbin "graphics/pokemon/question_mark/front.4bpp.lz"
 
 	.align 2
 
-gMonPalette_DoubleQuestionMark: ; 8DDD838
-	.incbin "graphics/pokemon/double_question_mark/normal.gbapal.lz"
+gMonPalette_QuestionMark: ; 8DDD838
+	.incbin "graphics/pokemon/question_mark/normal.gbapal.lz"
 
 	.align 2
 
-gMonBackPic_DoubleQuestionMark: ; 8DDD84C
-	.incbin "graphics/pokemon/double_question_mark/back.4bpp.lz"
+gMonBackPic_QuestionMark: ; 8DDD84C
+	.incbin "graphics/pokemon/question_mark/back.4bpp.lz"
 
 	.align 2
 
-gMonShinyPalette_DoubleQuestionMark: ; 8DDD9D0
-	.incbin "graphics/pokemon/double_question_mark/shiny.gbapal.lz"
+gMonShinyPalette_QuestionMark: ; 8DDD9D0
+	.incbin "graphics/pokemon/question_mark/shiny.gbapal.lz"
 
 	.align 2
 

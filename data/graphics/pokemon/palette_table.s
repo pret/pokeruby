@@ -253,31 +253,31 @@ gMonPaletteTable: ; 81EA5B4
 	obj_pal gMonPalette_Lugia, 249
 	obj_pal gMonPalette_HoOh, 250
 	obj_pal gMonPalette_Celebi, 251
-	obj_pal gMonPalette_DoubleQuestionMark, 252
-	obj_pal gMonPalette_DoubleQuestionMark, 253
-	obj_pal gMonPalette_DoubleQuestionMark, 254
-	obj_pal gMonPalette_DoubleQuestionMark, 255
-	obj_pal gMonPalette_DoubleQuestionMark, 256
-	obj_pal gMonPalette_DoubleQuestionMark, 257
-	obj_pal gMonPalette_DoubleQuestionMark, 258
-	obj_pal gMonPalette_DoubleQuestionMark, 259
-	obj_pal gMonPalette_DoubleQuestionMark, 260
-	obj_pal gMonPalette_DoubleQuestionMark, 261
-	obj_pal gMonPalette_DoubleQuestionMark, 262
-	obj_pal gMonPalette_DoubleQuestionMark, 263
-	obj_pal gMonPalette_DoubleQuestionMark, 264
-	obj_pal gMonPalette_DoubleQuestionMark, 265
-	obj_pal gMonPalette_DoubleQuestionMark, 266
-	obj_pal gMonPalette_DoubleQuestionMark, 267
-	obj_pal gMonPalette_DoubleQuestionMark, 268
-	obj_pal gMonPalette_DoubleQuestionMark, 269
-	obj_pal gMonPalette_DoubleQuestionMark, 270
-	obj_pal gMonPalette_DoubleQuestionMark, 271
-	obj_pal gMonPalette_DoubleQuestionMark, 272
-	obj_pal gMonPalette_DoubleQuestionMark, 273
-	obj_pal gMonPalette_DoubleQuestionMark, 274
-	obj_pal gMonPalette_DoubleQuestionMark, 275
-	obj_pal gMonPalette_DoubleQuestionMark, 276
+	obj_pal gMonPalette_QuestionMark, 252
+	obj_pal gMonPalette_QuestionMark, 253
+	obj_pal gMonPalette_QuestionMark, 254
+	obj_pal gMonPalette_QuestionMark, 255
+	obj_pal gMonPalette_QuestionMark, 256
+	obj_pal gMonPalette_QuestionMark, 257
+	obj_pal gMonPalette_QuestionMark, 258
+	obj_pal gMonPalette_QuestionMark, 259
+	obj_pal gMonPalette_QuestionMark, 260
+	obj_pal gMonPalette_QuestionMark, 261
+	obj_pal gMonPalette_QuestionMark, 262
+	obj_pal gMonPalette_QuestionMark, 263
+	obj_pal gMonPalette_QuestionMark, 264
+	obj_pal gMonPalette_QuestionMark, 265
+	obj_pal gMonPalette_QuestionMark, 266
+	obj_pal gMonPalette_QuestionMark, 267
+	obj_pal gMonPalette_QuestionMark, 268
+	obj_pal gMonPalette_QuestionMark, 269
+	obj_pal gMonPalette_QuestionMark, 270
+	obj_pal gMonPalette_QuestionMark, 271
+	obj_pal gMonPalette_QuestionMark, 272
+	obj_pal gMonPalette_QuestionMark, 273
+	obj_pal gMonPalette_QuestionMark, 274
+	obj_pal gMonPalette_QuestionMark, 275
+	obj_pal gMonPalette_QuestionMark, 276
 	obj_pal gMonPalette_Treecko, 277
 	obj_pal gMonPalette_Grovyle, 278
 	obj_pal gMonPalette_Sceptile, 279

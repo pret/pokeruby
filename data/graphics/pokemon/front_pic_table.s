@@ -253,31 +253,31 @@ gMonFrontPicTable: ; 81E8354
 	obj_tiles gMonFrontPic_Lugia, 0x800, 249
 	obj_tiles gMonFrontPic_HoOh, 0x800, 250
 	obj_tiles gMonFrontPic_Celebi, 0x800, 251
-	obj_tiles gMonFrontPic_DoubleQuestionMark, 0x800, 252
-	obj_tiles gMonFrontPic_DoubleQuestionMark, 0x800, 253
-	obj_tiles gMonFrontPic_DoubleQuestionMark, 0x800, 254
-	obj_tiles gMonFrontPic_DoubleQuestionMark, 0x800, 255
-	obj_tiles gMonFrontPic_DoubleQuestionMark, 0x800, 256
-	obj_tiles gMonFrontPic_DoubleQuestionMark, 0x800, 257
-	obj_tiles gMonFrontPic_DoubleQuestionMark, 0x800, 258
-	obj_tiles gMonFrontPic_DoubleQuestionMark, 0x800, 259
-	obj_tiles gMonFrontPic_DoubleQuestionMark, 0x800, 260
-	obj_tiles gMonFrontPic_DoubleQuestionMark, 0x800, 261
-	obj_tiles gMonFrontPic_DoubleQuestionMark, 0x800, 262
-	obj_tiles gMonFrontPic_DoubleQuestionMark, 0x800, 263
-	obj_tiles gMonFrontPic_DoubleQuestionMark, 0x800, 264
-	obj_tiles gMonFrontPic_DoubleQuestionMark, 0x800, 265
-	obj_tiles gMonFrontPic_DoubleQuestionMark, 0x800, 266
-	obj_tiles gMonFrontPic_DoubleQuestionMark, 0x800, 267
-	obj_tiles gMonFrontPic_DoubleQuestionMark, 0x800, 268
-	obj_tiles gMonFrontPic_DoubleQuestionMark, 0x800, 269
-	obj_tiles gMonFrontPic_DoubleQuestionMark, 0x800, 270
-	obj_tiles gMonFrontPic_DoubleQuestionMark, 0x800, 271
-	obj_tiles gMonFrontPic_DoubleQuestionMark, 0x800, 272
-	obj_tiles gMonFrontPic_DoubleQuestionMark, 0x800, 273
-	obj_tiles gMonFrontPic_DoubleQuestionMark, 0x800, 274
-	obj_tiles gMonFrontPic_DoubleQuestionMark, 0x800, 275
-	obj_tiles gMonFrontPic_DoubleQuestionMark, 0x800, 276
+	obj_tiles gMonFrontPic_QuestionMark, 0x800, 252
+	obj_tiles gMonFrontPic_QuestionMark, 0x800, 253
+	obj_tiles gMonFrontPic_QuestionMark, 0x800, 254
+	obj_tiles gMonFrontPic_QuestionMark, 0x800, 255
+	obj_tiles gMonFrontPic_QuestionMark, 0x800, 256
+	obj_tiles gMonFrontPic_QuestionMark, 0x800, 257
+	obj_tiles gMonFrontPic_QuestionMark, 0x800, 258
+	obj_tiles gMonFrontPic_QuestionMark, 0x800, 259
+	obj_tiles gMonFrontPic_QuestionMark, 0x800, 260
+	obj_tiles gMonFrontPic_QuestionMark, 0x800, 261
+	obj_tiles gMonFrontPic_QuestionMark, 0x800, 262
+	obj_tiles gMonFrontPic_QuestionMark, 0x800, 263
+	obj_tiles gMonFrontPic_QuestionMark, 0x800, 264
+	obj_tiles gMonFrontPic_QuestionMark, 0x800, 265
+	obj_tiles gMonFrontPic_QuestionMark, 0x800, 266
+	obj_tiles gMonFrontPic_QuestionMark, 0x800, 267
+	obj_tiles gMonFrontPic_QuestionMark, 0x800, 268
+	obj_tiles gMonFrontPic_QuestionMark, 0x800, 269
+	obj_tiles gMonFrontPic_QuestionMark, 0x800, 270
+	obj_tiles gMonFrontPic_QuestionMark, 0x800, 271
+	obj_tiles gMonFrontPic_QuestionMark, 0x800, 272
+	obj_tiles gMonFrontPic_QuestionMark, 0x800, 273
+	obj_tiles gMonFrontPic_QuestionMark, 0x800, 274
+	obj_tiles gMonFrontPic_QuestionMark, 0x800, 275
+	obj_tiles gMonFrontPic_QuestionMark, 0x800, 276
 	obj_tiles gMonFrontPic_Treecko, 0x800, 277
 	obj_tiles gMonFrontPic_Grovyle, 0x800, 278
 	obj_tiles gMonFrontPic_Sceptile, 0x800, 279

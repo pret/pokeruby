@@ -253,31 +253,31 @@ gMonShinyPaletteTable: ; 81EB374
 	obj_pal gMonShinyPalette_Lugia, 749
 	obj_pal gMonShinyPalette_HoOh, 750
 	obj_pal gMonShinyPalette_Celebi, 751
-	obj_pal gMonShinyPalette_DoubleQuestionMark, 752
-	obj_pal gMonShinyPalette_DoubleQuestionMark, 753
-	obj_pal gMonShinyPalette_DoubleQuestionMark, 754
-	obj_pal gMonShinyPalette_DoubleQuestionMark, 755
-	obj_pal gMonShinyPalette_DoubleQuestionMark, 756
-	obj_pal gMonShinyPalette_DoubleQuestionMark, 757
-	obj_pal gMonShinyPalette_DoubleQuestionMark, 758
-	obj_pal gMonShinyPalette_DoubleQuestionMark, 759
-	obj_pal gMonShinyPalette_DoubleQuestionMark, 760
-	obj_pal gMonShinyPalette_DoubleQuestionMark, 761
-	obj_pal gMonShinyPalette_DoubleQuestionMark, 762
-	obj_pal gMonShinyPalette_DoubleQuestionMark, 763
-	obj_pal gMonShinyPalette_DoubleQuestionMark, 764
-	obj_pal gMonShinyPalette_DoubleQuestionMark, 765
-	obj_pal gMonShinyPalette_DoubleQuestionMark, 766
-	obj_pal gMonShinyPalette_DoubleQuestionMark, 767
-	obj_pal gMonShinyPalette_DoubleQuestionMark, 768
-	obj_pal gMonShinyPalette_DoubleQuestionMark, 769
-	obj_pal gMonShinyPalette_DoubleQuestionMark, 770
-	obj_pal gMonShinyPalette_DoubleQuestionMark, 771
-	obj_pal gMonShinyPalette_DoubleQuestionMark, 772
-	obj_pal gMonShinyPalette_DoubleQuestionMark, 773
-	obj_pal gMonShinyPalette_DoubleQuestionMark, 774
-	obj_pal gMonShinyPalette_DoubleQuestionMark, 775
-	obj_pal gMonShinyPalette_DoubleQuestionMark, 776
+	obj_pal gMonShinyPalette_QuestionMark, 752
+	obj_pal gMonShinyPalette_QuestionMark, 753
+	obj_pal gMonShinyPalette_QuestionMark, 754
+	obj_pal gMonShinyPalette_QuestionMark, 755
+	obj_pal gMonShinyPalette_QuestionMark, 756
+	obj_pal gMonShinyPalette_QuestionMark, 757
+	obj_pal gMonShinyPalette_QuestionMark, 758
+	obj_pal gMonShinyPalette_QuestionMark, 759
+	obj_pal gMonShinyPalette_QuestionMark, 760
+	obj_pal gMonShinyPalette_QuestionMark, 761
+	obj_pal gMonShinyPalette_QuestionMark, 762
+	obj_pal gMonShinyPalette_QuestionMark, 763
+	obj_pal gMonShinyPalette_QuestionMark, 764
+	obj_pal gMonShinyPalette_QuestionMark, 765
+	obj_pal gMonShinyPalette_QuestionMark, 766
+	obj_pal gMonShinyPalette_QuestionMark, 767
+	obj_pal gMonShinyPalette_QuestionMark, 768
+	obj_pal gMonShinyPalette_QuestionMark, 769
+	obj_pal gMonShinyPalette_QuestionMark, 770
+	obj_pal gMonShinyPalette_QuestionMark, 771
+	obj_pal gMonShinyPalette_QuestionMark, 772
+	obj_pal gMonShinyPalette_QuestionMark, 773
+	obj_pal gMonShinyPalette_QuestionMark, 774
+	obj_pal gMonShinyPalette_QuestionMark, 775
+	obj_pal gMonShinyPalette_QuestionMark, 776
 	obj_pal gMonShinyPalette_Treecko, 777
 	obj_pal gMonShinyPalette_Grovyle, 778
 	obj_pal gMonShinyPalette_Sceptile, 779
