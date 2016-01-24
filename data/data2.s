@@ -422,8 +422,10 @@ gUnknown_081ECAFC: ; 81ECAFC
 gUnknown_081ECB14: ; 81ECB14
 	.incbin "baserom.gba", 0x001ecb14, 0x36f4
 
-gUnknown_081F0208: ; 81F0208
-	.incbin "baserom.gba", 0x001f0208, 0x2f4
+; 81F0208
+	.include "data/text/trainer_class_names.s"
+
+	.align 2
 
 gUnknown_081F04FC: ; 81F04FC
 	.incbin "baserom.gba", 0x001f04fc, 0x4
