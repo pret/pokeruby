@@ -626,10 +626,8 @@ gUnknown_081FC1D0: ; 81FC1D0
 ; 81FD070
 	.include "data/nature_stat_table.s"
 
-	.align 2
-
-gUnknown_081FD0F0: ; 81FD0F0
-	.incbin "baserom.gba", 0x001fd0f0, 0xce0
+; 81FD0F0
+	.include "data/tm_hm_learnsets.s"
 
 gUnknown_081FDDD0: ; 81FDDD0
 	.incbin "baserom.gba", 0x001fddd0, 0x4d
