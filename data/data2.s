@@ -621,10 +621,7 @@ gUnknown_081FC1D0: ; 81FC1D0
 	.include "data/spinda_spot_graphics.s"
 
 ; 81FCC14
-	.incbin "baserom.gba", 0x001FCC14, 0x1D0
-
-gUnknown_081FCDE4: ; 81FCDE4
-	.incbin "baserom.gba", 0x001fcde4, 0x28c
+	.include "data/item_effects.s"
 
 gUnknown_081FD070: ; 81FD070
 	.incbin "baserom.gba", 0x001fd070, 0x80
