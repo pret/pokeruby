@@ -3968,8 +3968,8 @@ gUnknown_083DEFFA: ; 83DEFFA
 gUnknown_083DFE14: ; 83DFE14
 	.incbin "baserom.gba", 0x003dfe14, 0x58
 
-gUnknown_083DFE6C: ; 83DFE6C
-	.incbin "baserom.gba", 0x003dfe6c, 0x58
+; 83DFE6C
+	.include "data/text/easy_chat/group_name_table.s"
 
 gUnknown_083DFEC4: ; 83DFEC4
 	.incbin "baserom.gba", 0x003dfec4, 0x4
@@ -7404,7 +7404,10 @@ gUnknown_0842C7CB: ; 842C7CB
 	.incbin "baserom.gba", 0x0042c7cb, 0xb
 
 gUnknown_0842C7D6: ; 842C7D6
-	.incbin "baserom.gba", 0x0042c7d6, 0xba
+	.incbin "baserom.gba", 0x0042c7d6, 0x5
+
+; 842C7DB
+	.include "data/text/easy_chat/group_name_strings.s"
 
 gUnknown_0842C890: ; 842C890
 	.incbin "baserom.gba", 0x0042c890, 0x4
