@@ -398,11 +398,14 @@ gUnknown_081EC2A4: ; 81EC2A4
 gUnknown_081EC3F0: ; 81EC3F0
 	.incbin "baserom.gba", 0x001ec3f0, 0x14c
 
-gUnknown_081EC53C: ; 81EC53C
-	.incbin "baserom.gba", 0x001ec53c, 0x298
+; 81EC53C
+	.include "data/graphics/trainers/front_pic_table.s"
 
-gUnknown_081EC7D4: ; 81EC7D4
-	.incbin "baserom.gba", 0x001ec7d4, 0x2f8
+; 81EC7D4
+	.include "data/graphics/trainers/front_pic_palette_table.s"
+
+; 81ECA6C
+	.incbin "baserom.gba", 0x1ECA6C, 0x60
 
 gUnknown_081ECACC: ; 81ECACC
 	.incbin "baserom.gba", 0x001ecacc, 0xc
@@ -410,11 +413,11 @@ gUnknown_081ECACC: ; 81ECACC
 gUnknown_081ECAD8: ; 81ECAD8
 	.incbin "baserom.gba", 0x001ecad8, 0xc
 
-gUnknown_081ECAE4: ; 81ECAE4
-	.incbin "baserom.gba", 0x001ecae4, 0x18
+; 81ECAE4
+	.include "data/graphics/trainers/back_pic_table.s"
 
-gUnknown_081ECAFC: ; 81ECAFC
-	.incbin "baserom.gba", 0x001ecafc, 0x18
+; 81ECAFC
+	.include "data/graphics/trainers/back_pic_palette_table.s"
 
 gUnknown_081ECB14: ; 81ECB14
 	.incbin "baserom.gba", 0x001ecb14, 0x36f4
@@ -8010,7 +8013,8 @@ gUnknown_08D2EE48: ; 8D2EE48
 ; 8D2FD8C
 	.include "data/graphics/pokemon/graphics.s"
 
-	.incbin "baserom.gba", 0xe48d38, 0x148b8
+; 8E48D38
+	.include "data/graphics/trainers/graphics.s"
 
 	.align 2
 
