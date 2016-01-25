@@ -475,8 +475,10 @@ gUnknown_081F96D0: ; 81F96D0
 gUnknown_081F9720: ; 81F9720
 	.incbin "baserom.gba", 0x001f9720, 0x150
 
-gUnknown_081F9870: ; 81F9870
-	.incbin "baserom.gba", 0x001f9870, 0x80
+; 81F9870
+	.include "data/text/type_names.s"
+
+	.align 2
 
 gUnknown_081F98F0: ; 81F98F0
 	.incbin "baserom.gba", 0x001f98f0, 0xdc
