@@ -3951,10 +3951,10 @@ gUnknown_083DBEA8: ; 83DBEA8
 	.incbin "baserom.gba", 0x003dbea8, 0x4
 
 gUnknown_083DBEAC: ; 83DBEAC
-	.incbin "baserom.gba", 0x003dbeac, 0x2234
+	.incbin "baserom.gba", 0x003dbeac, 0x80
 
-gUnknown_083DE0E0: ; 83DE0E0
-	.incbin "baserom.gba", 0x003de0e0, 0x58
+; 83DBF2C
+	.include "data/text/easy_chat/groups.s"
 
 gUnknown_083DE138: ; 83DE138
 	.incbin "baserom.gba", 0x003de138, 0xe8a
