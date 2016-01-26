@@ -19,7 +19,7 @@
 	.include "data/text/easy_chat/groups/move_1/words.s"
 	.include "data/text/easy_chat/groups/move_2/words.s"
 	.include "data/text/easy_chat/groups/trendy_saying/words.s"
-	.include "data/text/easy_chat/groups/pokemon2/words.s"
+	.include "data/text/easy_chat/groups/pokemon_2/words.s"
 
 	.align 2
 

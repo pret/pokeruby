@@ -19,7 +19,7 @@
 	.include "data/text/easy_chat/groups/move_1/order.s"
 	.include "data/text/easy_chat/groups/move_2/order.s"
 	.include "data/text/easy_chat/groups/trendy_saying/order.s"
-	.include "data/text/easy_chat/groups/pokemon2/order.s"
+	.include "data/text/easy_chat/groups/pokemon_2/order.s"
 
 	.align 2
 
