@@ -3966,10 +3966,7 @@ gUnknown_083DEFC2: ; 83DEFC2
 	.include "data/text/easy_chat/group_sizes.s"
 
 ; 83DF010
-	.incbin "baserom.gba", 0x3DF010, 0xE04
-
-gUnknown_083DFE14: ; 83DFE14
-	.incbin "baserom.gba", 0x003dfe14, 0x58
+	.include "data/text/easy_chat/group_orders.s"
 
 ; 83DFE6C
 	.include "data/text/easy_chat/group_name_table.s"
