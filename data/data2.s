@@ -3954,7 +3954,7 @@ gUnknown_083DBEAC: ; 83DBEAC
 	.incbin "baserom.gba", 0x003dbeac, 0x80
 
 ; 83DBF2C
-	.include "data/text/easy_chat/groups.s"
+	.include "data/text/easy_chat/group_words.s"
 
 gUnknown_083DE138: ; 83DE138
 	.incbin "baserom.gba", 0x003de138, 0xe8a
