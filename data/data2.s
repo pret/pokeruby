@@ -3962,8 +3962,11 @@ gUnknown_083DE138: ; 83DE138
 gUnknown_083DEFC2: ; 83DEFC2
 	.incbin "baserom.gba", 0x003defc2, 0x38
 
-gUnknown_083DEFFA: ; 83DEFFA
-	.incbin "baserom.gba", 0x003deffa, 0xe1a
+; 83DEFFA
+	.include "data/text/easy_chat/group_sizes.s"
+
+; 83DF010
+	.incbin "baserom.gba", 0x3DF010, 0xE04
 
 gUnknown_083DFE14: ; 83DFE14
 	.incbin "baserom.gba", 0x003dfe14, 0x58
