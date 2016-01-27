@@ -638,8 +638,8 @@ gUnknown_081FC1D0: ; 81FC1D0
 ; 81FDDD0
 	.include "data/trainer_class_index_tables.s"
 
-gUnknown_081FDE6A: ; 81FDE6A
-	.incbin "baserom.gba", 0x001fde6a, 0x10e
+; 81FDE6A
+	.include "data/cry_id_table.s"
 
 ; 81FDF78
 	.include "data/experience_tables/tables.s"
