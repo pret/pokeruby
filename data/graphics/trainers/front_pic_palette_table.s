@@ -37,7 +37,7 @@ gTrainerFrontPicPaletteTable: ; 81EC7D4
 	obj_pal gTrainerPalette_BattleGirl, 33
 	obj_pal gTrainerPalette_CyclingTriathleteF, 34
 	obj_pal gTrainerPalette_SwimmerM, 35
-	obj_pal gTrainerPalette_WinstrateF, 36
+	obj_pal gTrainerPalette_PokefanF, 36
 	obj_pal gTrainerPalette_ExpertM, 37
 	obj_pal gTrainerPalette_ExpertF, 38
 	obj_pal gTrainerPalette_SwimmingTriathleteM, 39
@@ -65,7 +65,7 @@ gTrainerFrontPicPaletteTable: ; 81EC7D4
 	obj_pal gTrainerPalette_PsychicM, 61
 	obj_pal gTrainerPalette_PsychicF, 62
 	obj_pal gTrainerPalette_SchoolKidF, 63
-	obj_pal gTrainerPalette_WinstrateM, 64
+	obj_pal gTrainerPalette_PokefanM, 64
 	obj_pal gTrainerPalette_SisAndBro, 65
 	obj_pal gTrainerPalette_OldCouple, 66
 	obj_pal gTrainerPalette_AquaAdminM, 67

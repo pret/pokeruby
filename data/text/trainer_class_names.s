@@ -7,8 +7,8 @@ gTrainerClassNames: ; 81F0208
 	.charmapstr "AROMA LADY$", 13
 	.charmapstr "RUIN MANIAC$", 13
 	.charmapstr "INTERVIEWER$", 13
-	.charmapstr "TUBER$", 13
-	.charmapstr "TUBER$", 13
+	.charmapstr "TUBER$", 13 ; うきわガール (Inner Tube Girl) in Japanese
+	.charmapstr "TUBER$", 13 ; うきわボーイ (Inner Tube Boy) in Japanese
 	.charmapstr "COOLTRAINER$", 13
 	.charmapstr "HEX MANIAC$", 13
 	.charmapstr "LADY$", 13

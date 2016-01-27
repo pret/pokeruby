@@ -635,11 +635,8 @@ gUnknown_081FC1D0: ; 81FC1D0
 ; 81FD0F0
 	.include "data/tm_hm_learnsets.s"
 
-gUnknown_081FDDD0: ; 81FDDD0
-	.incbin "baserom.gba", 0x001fddd0, 0x4d
-
-gUnknown_081FDE1D: ; 81FDE1D
-	.incbin "baserom.gba", 0x001fde1d, 0x4d
+; 81FDDD0
+	.include "data/trainer_class_index_tables.s"
 
 gUnknown_081FDE6A: ; 81FDE6A
 	.incbin "baserom.gba", 0x001fde6a, 0x10e

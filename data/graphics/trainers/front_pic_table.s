@@ -37,7 +37,7 @@ gTrainerFrontPicTable: ; 81EC53C
 	obj_tiles gTrainerFrontPic_BattleGirl, 0x1000, 33
 	obj_tiles gTrainerFrontPic_CyclingTriathleteF, 0x800, 34
 	obj_tiles gTrainerFrontPic_SwimmerM, 0x800, 35
-	obj_tiles gTrainerFrontPic_WinstrateF, 0x800, 36
+	obj_tiles gTrainerFrontPic_PokefanF, 0x800, 36
 	obj_tiles gTrainerFrontPic_ExpertM, 0x800, 37
 	obj_tiles gTrainerFrontPic_ExpertF, 0x800, 38
 	obj_tiles gTrainerFrontPic_SwimmingTriathleteM, 0x800, 39
@@ -65,7 +65,7 @@ gTrainerFrontPicTable: ; 81EC53C
 	obj_tiles gTrainerFrontPic_PsychicM, 0x800, 61
 	obj_tiles gTrainerFrontPic_PsychicF, 0x800, 62
 	obj_tiles gTrainerFrontPic_SchoolKidF, 0x800, 63
-	obj_tiles gTrainerFrontPic_WinstrateM, 0x1000, 64
+	obj_tiles gTrainerFrontPic_PokefanM, 0x1000, 64
 	obj_tiles gTrainerFrontPic_SisAndBro, 0x800, 65
 	obj_tiles gTrainerFrontPic_OldCouple, 0x800, 66
 	obj_tiles gTrainerFrontPic_AquaAdminM, 0x800, 67

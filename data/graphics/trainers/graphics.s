@@ -180,8 +180,8 @@ gTrainerFrontPic_SwimmerM: ; 8E500C8
 
 	.align 2
 
-gTrainerFrontPic_WinstrateF: ; 8E50388
-	.incbin "graphics/trainers/winstrate_f/front.4bpp.lz"
+gTrainerFrontPic_PokefanF: ; 8E50388
+	.incbin "graphics/trainers/pokefan_f/front.4bpp.lz"
 
 	.align 2
 
@@ -320,8 +320,8 @@ gTrainerFrontPic_SchoolKidF: ; 8E55CE4
 
 	.align 2
 
-gTrainerFrontPic_WinstrateM: ; 8E55F80
-	.incbin "graphics/trainers/winstrate_m/front.4bpp.lz"
+gTrainerFrontPic_PokefanM: ; 8E55F80
+	.incbin "graphics/trainers/pokefan_m/front.4bpp.lz"
 
 	.align 2
 
@@ -550,8 +550,8 @@ gTrainerPalette_SwimmerM: ; 8E5A550
 
 	.align 2
 
-gTrainerPalette_WinstrateF: ; 8E5A578
-	.incbin "graphics/trainers/winstrate_f/palette.gbapal.lz"
+gTrainerPalette_PokefanF: ; 8E5A578
+	.incbin "graphics/trainers/pokefan_f/palette.gbapal.lz"
 
 	.align 2
 
@@ -690,8 +690,8 @@ gTrainerPalette_SchoolKidF: ; 8E5A9B0
 
 	.align 2
 
-gTrainerPalette_WinstrateM: ; 8E5A9D8
-	.incbin "graphics/trainers/winstrate_m/palette.gbapal.lz"
+gTrainerPalette_PokefanM: ; 8E5A9D8
+	.incbin "graphics/trainers/pokefan_m/palette.gbapal.lz"
 
 	.align 2
 
