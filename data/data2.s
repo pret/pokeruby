@@ -2,14 +2,44 @@
 
 	.align 2
 
-gUnknown_081E280C: ; 81E280C
-	.incbin "baserom.gba", 0x001e280c, 0x1
+gGameVersion: ; 81E280C
+	.byte 2 ; Ruby
 
-gUnknown_081E280D: ; 81E280D
-	.incbin "baserom.gba", 0x001e280d, 0x17
+gGameLanguage: ; 81E280D
+	.byte 2 ; English
 
-gUnknown_081E2824: ; 81E2824
-	.incbin "baserom.gba", 0x001e2824, 0x75
+	.align 2
+
+; compile date/time
+	.asciz "2002 10 15 20:34"
+
+	.align 2
+
+gIntrTableTemplate: ; 81E2824
+	.4byte SerialIntr
+	.4byte Timer3Intr
+	.4byte HBlankIntr
+	.4byte VBlankIntr
+	.4byte VCountIntr
+	.4byte IntrDummy
+	.4byte IntrDummy
+	.4byte IntrDummy
+	.4byte IntrDummy
+	.4byte IntrDummy
+	.4byte IntrDummy
+	.4byte IntrDummy
+	.4byte IntrDummy
+	.4byte IntrDummy
+
+; Unreferenced error message.
+; It means "The DMA transfer request table has exceeded its limit."
+	.charmapstr "DMA OVER{next}"
+	.charmapstr "DMAてんそう{next}"
+	.charmapstr "リクエストテ-ブルが{next}"
+	.charmapstr "オ-バ-しました$"
+
+; 81E2881
+	.incbin "baserom.gba", 0x1E2881, 0x18
 
 gUnknown_081E2899: ; 81E2899
 	.incbin "baserom.gba", 0x001e2899, 0x1b
