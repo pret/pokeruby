@@ -49,7 +49,7 @@ gEasyChatGroupName_Misc: ; 842C853
 gEasyChatGroupName_Adjectives: ; 842C859
 	.charmapstr "ADJECTIVES$"
 
-gEasyChatGroupName_Event: ; 842C864
+gEasyChatGroupName_Events: ; 842C864
 	.charmapstr "EVENT.$"
 
 gEasyChatGroupName_Move1: ; 842C86B

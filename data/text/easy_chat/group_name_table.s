@@ -18,7 +18,7 @@ gEasyChatGroupNames: ; 83DFE6C
 	.4byte gEasyChatGroupName_Time
 	.4byte gEasyChatGroupName_Misc
 	.4byte gEasyChatGroupName_Adjectives
-	.4byte gEasyChatGroupName_Event
+	.4byte gEasyChatGroupName_Events
 	.4byte gEasyChatGroupName_Move1
 	.4byte gEasyChatGroupName_Move2
 	.4byte gEasyChatGroupName_TrendySaying

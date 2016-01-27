@@ -1,23 +1,23 @@
 gEasyChatGroupSizes: ; 83DEFFA
-	.byte 202 ; Pokémon
-	.byte  19 ; Trainer
-	.byte 109 ; Status
-	.byte  63 ; Battle
-	.byte  42 ; Greetings
-	.byte  75 ; People
-	.byte  63 ; Voices
-	.byte  60 ; Speech
-	.byte  69 ; Endings
-	.byte  69 ; Feelings
-	.byte  69 ; Conditions
-	.byte  78 ; Actions
-	.byte  45 ; Lifestyle
-	.byte  54 ; Hobbies
-	.byte  45 ; Time
-	.byte  42 ; Misc.
-	.byte  36 ; Adjectives
-	.byte  22 ; Event.
-	.byte 153 ; Move 1
-	.byte 194 ; Move 2
-	.byte  33 ; Trendy Saying
-	.byte 251 ; Pokémon2
+	.byte 202 ; POKEMON
+	.byte  19 ; TRAINER
+	.byte 109 ; STATUS
+	.byte  63 ; BATTLE
+	.byte  42 ; GREETINGS
+	.byte  75 ; PEOPLE
+	.byte  63 ; VOICES
+	.byte  60 ; SPEECH
+	.byte  69 ; ENDINGS
+	.byte  69 ; FEELINGS
+	.byte  69 ; CONDITIONS
+	.byte  78 ; ACTIONS
+	.byte  45 ; LIFESTYLE
+	.byte  54 ; HOBBIES
+	.byte  45 ; TIME
+	.byte  42 ; MISC
+	.byte  36 ; ADJECTIVES
+	.byte  22 ; EVENTS
+	.byte 153 ; MOVE_1
+	.byte 194 ; MOVE_2
+	.byte  33 ; TRENDY_SAYING
+	.byte 251 ; POKEMON_2

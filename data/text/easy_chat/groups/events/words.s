@@ -1,4 +1,4 @@
-gEasyChatGroupWords_Event: ; 83DDA8D
+gEasyChatGroupWords_Events: ; 83DDA8D
 	.charmapstr "APPEAL$"
 	.charmapstr "EVENTS$"
 	.charmapstr "STAY-AT-HOME$"

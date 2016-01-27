@@ -15,7 +15,7 @@
 	.include "data/text/easy_chat/groups/time/order.s"
 	.include "data/text/easy_chat/groups/misc/order.s"
 	.include "data/text/easy_chat/groups/adjectives/order.s"
-	.include "data/text/easy_chat/groups/event/order.s"
+	.include "data/text/easy_chat/groups/events/order.s"
 	.include "data/text/easy_chat/groups/move_1/order.s"
 	.include "data/text/easy_chat/groups/move_2/order.s"
 	.include "data/text/easy_chat/groups/trendy_saying/order.s"
@@ -45,7 +45,7 @@ gEasyChatGroupOrders: ; 83DFE14
 	.4byte gEasyChatGroupOrder_Time
 	.4byte gEasyChatGroupOrder_Misc
 	.4byte gEasyChatGroupOrder_Adjectives
-	.4byte gEasyChatGroupOrder_Event
+	.4byte gEasyChatGroupOrder_Events
 	.4byte gEasyChatGroupOrder_Move1
 	.4byte gEasyChatGroupOrder_Move2
 	.4byte gEasyChatGroupOrder_TrendySaying

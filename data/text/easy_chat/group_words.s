@@ -15,7 +15,7 @@
 	.include "data/text/easy_chat/groups/time/words.s"
 	.include "data/text/easy_chat/groups/misc/words.s"
 	.include "data/text/easy_chat/groups/adjectives/words.s"
-	.include "data/text/easy_chat/groups/event/words.s"
+	.include "data/text/easy_chat/groups/events/words.s"
 	.include "data/text/easy_chat/groups/move_1/words.s"
 	.include "data/text/easy_chat/groups/move_2/words.s"
 	.include "data/text/easy_chat/groups/trendy_saying/words.s"
@@ -41,7 +41,7 @@ gEasyChatGroupWords: ; 83DE0E0
 	.4byte gEasyChatGroupWords_Time
 	.4byte gEasyChatGroupWords_Misc
 	.4byte gEasyChatGroupWords_Adjectives
-	.4byte gEasyChatGroupWords_Event
+	.4byte gEasyChatGroupWords_Events
 	.4byte gEasyChatGroupWords_Move1
 	.4byte gEasyChatGroupWords_Move2
 	.4byte gEasyChatGroupWords_TrendySaying
