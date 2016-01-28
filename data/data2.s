@@ -5798,20 +5798,17 @@ gUnknown_08402E40: ; 8402E40
 gUnknown_08402E80: ; 8402E80
 	.incbin "baserom.gba", 0x00402e80, 0x80
 
-gUnknown_08402F00: ; 8402F00
-	.incbin "baserom.gba", 0x00402f00, 0xc
+; 8402F00
+	.include "data/battle_tower/trainers.s"
 
-gUnknown_08402F0C: ; 8402F0C
-	.incbin "baserom.gba", 0x00402f0c, 0x954
+; 8403860
+	.include "data/battle_tower/held_items.s"
 
-gUnknown_08403860: ; 8403860
-	.incbin "baserom.gba", 0x00403860, 0x80
+; 84038E0
+	.include "data/battle_tower/level_50_mons.s"
 
-gUnknown_084038E0: ; 84038E0
-	.incbin "baserom.gba", 0x004038e0, 0x12c0
-
-gUnknown_08404BA0: ; 8404BA0
-	.incbin "baserom.gba", 0x00404ba0, 0x12c0
+; 8404BA0
+	.include "data/battle_tower/level_100_mons.s"
 
 gUnknown_08405E60: ; 8405E60
 	.incbin "baserom.gba", 0x00405e60, 0x1e
