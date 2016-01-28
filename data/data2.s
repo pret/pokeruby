@@ -2910,7 +2910,19 @@ gUnknown_083C1F98: ; 83C1F98
 	.include "data/items.s"
 
 ; 83C9150
-	.incbin "baserom.gba", 0x3C9160, 0x90
+; Unreferenced debug strings.
+	.string "テストです$" ; "test"
+	.string "Contest$"
+	.string "Contest results$"
+	.string "パラメータへんこう$" ; "Change parameter"
+	.string "わざ へんこう$" ; "Change move"
+	.string "Contest (comm.)$"
+	.string "Init comm. data$"
+	.string "Set highest score$"
+	.string "Reset highest score$"
+	.string "Set all art museum items$"
+
+	.align 2
 
 gUnknown_083C91F0: ; 83C91F0
 	.incbin "baserom.gba", 0x003c91f0, 0x38
