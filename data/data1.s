@@ -1,10 +1,7 @@
 ; the first big chunk of data
 
-gUnknown_0814AE30: ; 814AE30
-	.incbin "baserom.gba", 0x0014ae30, 0x318
-
-gUnknown_0814B148: ; 814B148
-	.incbin "baserom.gba", 0x0014b148, 0x4
+; 814AE30
+	.include "data/script_cmd_table.s"
 
 gUnknown_0814B14C: ; 814B14C
 	.incbin "baserom.gba", 0x0014b14c, 0x48
