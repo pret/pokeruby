@@ -255,6 +255,9 @@
 	.charmap_const PKMN, 0x53, 0x54
 	.charmap_const POKEBLOCK, 0x55, 0x56, 0x57, 0x58, 0x59
 
+	; indicates the end of a town/city name (before " TOWN" or " CITY")
+	.charmap_const NAME_END, 0xFC, 0x00
+
 ; string placeholders
 	; unknown (0xFD, 0x00)
 	.charmap_const PLAYER,             0xFD, 0x01

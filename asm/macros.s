@@ -5,7 +5,7 @@
 	.include "asm/macros/map.s"
 	.include "asm/macros/field_effect_script.s"
 
-	.macro region_map_entry x, y, width, height, name
+	.macro region_map_location x, y, width, height, name
 	.byte \x
 	.byte \y
 	.byte \width

@@ -4343,10 +4343,10 @@ gUnknown_083E6B04: ; 83E6B04
 	.incbin "baserom.gba", 0x003e6b04, 0x34c
 
 gUnknown_083E6E50: ; 83E6E50
-	.incbin "baserom.gba", 0x003e6e50, 0x574
+	.incbin "baserom.gba", 0x003e6e50, 0x1A4
 
-gUnknown_083E73C4: ; 83E73C4
-	.incbin "baserom.gba", 0x003e73c4, 0x2c0
+; 83E6FF4
+	.include "data/region_map_locations.s"
 
 gUnknown_083E7684: ; 83E7684
 	.incbin "baserom.gba", 0x003e7684, 0x64

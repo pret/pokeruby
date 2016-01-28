@@ -1303,4 +1303,5 @@ gEggMoves: ; 82091DC
 	.2byte MOVE_CURSE
 	.2byte MOVE_HYPNOSIS
 	.2byte MOVE_DREAM_EATER
+
 	.2byte -1
