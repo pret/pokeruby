@@ -2906,10 +2906,11 @@ gUnknown_083C1F98: ; 83C1F98
 ; 83C2028
 	.include "data/text/item_descriptions.s"
 
-	.align 2
+; 83C5564
+	.include "data/items.s"
 
-gUnknown_083C5564: ; 83C5564
-	.incbin "baserom.gba", 0x003c5564, 0x3c8c
+; 83C9150
+	.incbin "baserom.gba", 0x3C9160, 0x90
 
 gUnknown_083C91F0: ; 83C91F0
 	.incbin "baserom.gba", 0x003c91f0, 0x38
