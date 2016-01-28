@@ -258,9 +258,9 @@
 ; string placeholders
 	; unknown (0xFD, 0x00)
 	.charmap_const PLAYER,             0xFD, 0x01
-	.charmap_const STRVAR_1,           0xFD, 0x02
-	.charmap_const STRVAR_2,           0xFD, 0x03
-	.charmap_const STRVAR_3,           0xFD, 0x04
+	.charmap_const STR_VAR_1,          0xFD, 0x02
+	.charmap_const STR_VAR_2,          0xFD, 0x03
+	.charmap_const STR_VAR_3,          0xFD, 0x04
 	; unknown (0xFD, 0x05)
 	.charmap_const RIVAL,              0xFD, 0x06
 ; version-dependent strings
