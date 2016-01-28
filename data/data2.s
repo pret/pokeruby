@@ -2901,7 +2901,12 @@ gUnknown_083C1F7C: ; 83C1F7C
 	.incbin "baserom.gba", 0x003c1f7c, 0x1c
 
 gUnknown_083C1F98: ; 83C1F98
-	.incbin "baserom.gba", 0x003c1f98, 0x35cc
+	.incbin "baserom.gba", 0x003c1f98, 0x90
+
+; 83C2028
+	.include "data/text/item_descriptions.s"
+
+	.align 2
 
 gUnknown_083C5564: ; 83C5564
 	.incbin "baserom.gba", 0x003c5564, 0x3c8c
