@@ -740,8 +740,10 @@ gUnknown_082087C4: ; 82087C4
 gUnknown_082087DC: ; 82087DC
 	.incbin "baserom.gba", 0x002087dc, 0xa00
 
-gUnknown_082091DC: ; 82091DC
-	.incbin "baserom.gba", 0x002091dc, 0x8e8
+; 82091DC
+	.include "data/egg_moves.s"
+
+	.align 2
 
 gUnknown_08209AC4: ; 8209AC4
 	.incbin "baserom.gba", 0x00209ac4, 0x10
