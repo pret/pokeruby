@@ -1,59 +1,59 @@
 gRibbonDescriptionPart1_Champion:
-	.charmapstr "CHAMPION-beating, HALL$"
+	.string "CHAMPION-beating, HALL$"
 
 gRibbonDescriptionPart2_Champion:
-	.charmapstr "OF FAME Member RIBBON$"
+	.string "OF FAME Member RIBBON$"
 
 gRibbonDescriptionPart1_CoolContest:
-	.charmapstr "COOL CONTEST$"
+	.string "COOL CONTEST$"
 
 gRibbonDescriptionPart1_BeautyContest:
-	.charmapstr "BEAUTY CONTEST$"
+	.string "BEAUTY CONTEST$"
 
 gRibbonDescriptionPart1_CuteContest:
-	.charmapstr "CUTE CONTEST$"
+	.string "CUTE CONTEST$"
 
 gRibbonDescriptionPart1_SmartContest:
-	.charmapstr "SMART CONTEST$"
+	.string "SMART CONTEST$"
 
 gRibbonDescriptionPart1_ToughContest:
-	.charmapstr "TOUGH CONTEST$"
+	.string "TOUGH CONTEST$"
 
 gRibbonDescriptionPart2_NormalRank:
-	.charmapstr "Normal Rank winner!$"
+	.string "Normal Rank winner!$"
 
 gRibbonDescriptionPart2_SuperRank:
-	.charmapstr "Super Rank winner!$"
+	.string "Super Rank winner!$"
 
 gRibbonDescriptionPart2_HyperRank:
-	.charmapstr "Hyper Rank winner!$"
+	.string "Hyper Rank winner!$"
 
 gRibbonDescriptionPart2_MasterRank:
-	.charmapstr "Master Rank winner!$"
+	.string "Master Rank winner!$"
 
 gRibbonDescriptionPart1_Winning:
-	.charmapstr "RIBBON for clearing LV50$"
+	.string "RIBBON for clearing LV50$"
 
 gRibbonDescriptionPart2_Winning:
-	.charmapstr "at the BATTLE TOWER.$"
+	.string "at the BATTLE TOWER.$"
 
 gRibbonDescriptionPart1_Victory:
-	.charmapstr "Won for clearing LV100$"
+	.string "Won for clearing LV100$"
 
 gRibbonDescriptionPart2_Victory:
-	.charmapstr "at the BATTLE TOWER.$"
+	.string "at the BATTLE TOWER.$"
 
 gRibbonDescriptionPart1_Artist:
-	.charmapstr "RIBBON for being chosen$"
+	.string "RIBBON for being chosen$"
 
 gRibbonDescriptionPart2_Artist:
-	.charmapstr "as a super sketch model.$"
+	.string "as a super sketch model.$"
 
 gRibbonDescriptionPart1_Effort:
-	.charmapstr "RIBBON awarded for$"
+	.string "RIBBON awarded for$"
 
 gRibbonDescriptionPart2_Effort:
-	.charmapstr "being a hard worker.$"
+	.string "being a hard worker.$"
 
 	.align 2, 0
 

@@ -273,3 +273,5 @@
 	.charmapconst GROUDON,  0xFD, 0x0D
 
 	.charmapconst next, 0xFE
+
+	.charmapescape 'n', 0xFE

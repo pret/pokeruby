@@ -3,7 +3,7 @@
 gBattleTowerTrainers: ; 8402F00
 ; 0
 	.byte TRAINER_CLASS_YOUNGSTER
-	.charmapstr "ALVIN$", 8
+	.string "ALVIN$", 8
 	.byte 0x01 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -16,7 +16,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 1
 	.byte TRAINER_CLASS_BIRD_KEEPER
-	.charmapstr "DIRK$", 8
+	.string "DIRK$", 8
 	.byte 0x01 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -29,7 +29,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 2
 	.byte TRAINER_CLASS_LADY
-	.charmapstr "CYBIL$", 8
+	.string "CYBIL$", 8
 	.byte 0x02 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -42,7 +42,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 3
 	.byte TRAINER_CLASS_BLACK_BELT
-	.charmapstr "CHEN$", 8
+	.string "CHEN$", 8
 	.byte 0x05 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -55,7 +55,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 4
 	.byte TRAINER_CLASS_NINJA_BOY
-	.charmapstr "YOSHI$", 8
+	.string "YOSHI$", 8
 	.byte 0x05 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -68,7 +68,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 5
 	.byte TRAINER_CLASS_SCHOOL_KID_F
-	.charmapstr "TINA$", 8
+	.string "TINA$", 8
 	.byte 0x0A ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -81,7 +81,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 6
 	.byte TRAINER_CLASS_BUG_MANIAC
-	.charmapstr "COREY$", 8
+	.string "COREY$", 8
 	.byte 0x41 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -94,7 +94,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 7
 	.byte TRAINER_CLASS_FISHERMAN
-	.charmapstr "GORDON$", 8
+	.string "GORDON$", 8
 	.byte 0x01 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -107,7 +107,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 8
 	.byte TRAINER_CLASS_TUBER_F
-	.charmapstr "ANN$", 8
+	.string "ANN$", 8
 	.byte 0x02 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -120,7 +120,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 9
 	.byte TRAINER_CLASS_POKEFAN_F
-	.charmapstr "JULIA$", 8
+	.string "JULIA$", 8
 	.byte 0x42 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -133,7 +133,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 10
 	.byte TRAINER_CLASS_GENTLEMAN
-	.charmapstr "GREGORY$", 8
+	.string "GREGORY$", 8
 	.byte 0x01 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -146,7 +146,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 11
 	.byte TRAINER_CLASS_CAMPER
-	.charmapstr "KEITH$", 8
+	.string "KEITH$", 8
 	.byte 0x01 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -159,7 +159,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 12
 	.byte TRAINER_CLASS_RUNNING_TRIATHLETE_F
-	.charmapstr "KENDRA$", 8
+	.string "KENDRA$", 8
 	.byte 0x0A ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -172,7 +172,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 13
 	.byte TRAINER_CLASS_HIKER
-	.charmapstr "DEV$", 8
+	.string "DEV$", 8
 	.byte 0x01 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -185,7 +185,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 14
 	.byte TRAINER_CLASS_BATTLE_GIRL
-	.charmapstr "CASSIE$", 8
+	.string "CASSIE$", 8
 	.byte 0x0A ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -198,7 +198,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 15
 	.byte TRAINER_CLASS_PSYCHIC_M
-	.charmapstr "JULIAN$", 8
+	.string "JULIAN$", 8
 	.byte 0x05 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -211,7 +211,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 16
 	.byte TRAINER_CLASS_LASS
-	.charmapstr "JOYCE$", 8
+	.string "JOYCE$", 8
 	.byte 0x02 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -224,7 +224,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 17
 	.byte TRAINER_CLASS_GUITARIST
-	.charmapstr "LES$", 8
+	.string "LES$", 8
 	.byte 0x01 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -237,7 +237,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 18
 	.byte TRAINER_CLASS_RICH_BOY
-	.charmapstr "CLINTON$", 8
+	.string "CLINTON$", 8
 	.byte 0x01 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -250,7 +250,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 19
 	.byte TRAINER_CLASS_BUG_CATCHER
-	.charmapstr "LEWIS$", 8
+	.string "LEWIS$", 8
 	.byte 0x01 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -263,7 +263,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 20
 	.byte TRAINER_CLASS_PICNICKER
-	.charmapstr "RACHAEL$", 8
+	.string "RACHAEL$", 8
 	.byte 0x02 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -276,7 +276,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 21
 	.byte TRAINER_CLASS_COLLECTOR
-	.charmapstr "HAROLD$", 8
+	.string "HAROLD$", 8
 	.byte 0x09 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -289,7 +289,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 22
 	.byte TRAINER_CLASS_TUBER_M
-	.charmapstr "KIPP$", 8
+	.string "KIPP$", 8
 	.byte 0x01 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -302,7 +302,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 23
 	.byte TRAINER_CLASS_KINDLER
-	.charmapstr "IRWIN$", 8
+	.string "IRWIN$", 8
 	.byte 0x05 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -315,7 +315,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 24
 	.byte TRAINER_CLASS_PSYCHIC_F
-	.charmapstr "EILEEN$", 8
+	.string "EILEEN$", 8
 	.byte 0x0A ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -328,7 +328,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 25
 	.byte TRAINER_CLASS_SWIMMER_F
-	.charmapstr "ANNE$", 8
+	.string "ANNE$", 8
 	.byte 0x02 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -341,7 +341,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 26
 	.byte TRAINER_CLASS_CYCLING_TRIATHLETE_F
-	.charmapstr "RUTH$", 8
+	.string "RUTH$", 8
 	.byte 0x06 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -354,7 +354,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 27
 	.byte TRAINER_CLASS_POKEMANIAC
-	.charmapstr "JEREMY$", 8
+	.string "JEREMY$", 8
 	.byte 0x40 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -367,7 +367,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 28
 	.byte TRAINER_CLASS_SAILOR
-	.charmapstr "TREVOR$", 8
+	.string "TREVOR$", 8
 	.byte 0x09 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -380,7 +380,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 29
 	.byte TRAINER_CLASS_POKEMON_BREEDER_F
-	.charmapstr "COLETTE$", 8
+	.string "COLETTE$", 8
 	.byte 0x06 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -393,7 +393,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 30
 	.byte TRAINER_CLASS_HEX_MANIAC
-	.charmapstr "PAULA$", 8
+	.string "PAULA$", 8
 	.byte 0x42 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -406,7 +406,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 31
 	.byte TRAINER_CLASS_RUIN_MANIAC
-	.charmapstr "STANLY$", 8
+	.string "STANLY$", 8
 	.byte 0x41 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -419,7 +419,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 32
 	.byte TRAINER_CLASS_SWIMMING_TRIATHLETE_M
-	.charmapstr "TROY$", 8
+	.string "TROY$", 8
 	.byte 0x09 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -432,7 +432,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 33
 	.byte TRAINER_CLASS_SCHOOL_KID_M
-	.charmapstr "ED$", 8
+	.string "ED$", 8
 	.byte 0x08 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -445,7 +445,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 34
 	.byte TRAINER_CLASS_POKEMON_RANGER_F
-	.charmapstr "ELLEN$", 8
+	.string "ELLEN$", 8
 	.byte 0x04 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -458,7 +458,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 35
 	.byte TRAINER_CLASS_SWIMMER_M
-	.charmapstr "ARNIE$", 8
+	.string "ARNIE$", 8
 	.byte 0x09 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -471,7 +471,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 36
 	.byte TRAINER_CLASS_RUNNING_TRIATHLETE_M
-	.charmapstr "HAL$", 8
+	.string "HAL$", 8
 	.byte 0x09 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -484,7 +484,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 37
 	.byte TRAINER_CLASS_BEAUTY
-	.charmapstr "LAUREN$", 8
+	.string "LAUREN$", 8
 	.byte 0x06 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -497,7 +497,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 38
 	.byte TRAINER_CLASS_AROMA_LADY
-	.charmapstr "STACY$", 8
+	.string "STACY$", 8
 	.byte 0x06 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -510,7 +510,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 39
 	.byte TRAINER_CLASS_COLLECTOR
-	.charmapstr "DARYL$", 8
+	.string "DARYL$", 8
 	.byte 0x81 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -523,7 +523,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 40
 	.byte TRAINER_CLASS_SWIMMING_TRIATHLETE_F
-	.charmapstr "KATHY$", 8
+	.string "KATHY$", 8
 	.byte 0x04 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -536,7 +536,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 41
 	.byte TRAINER_CLASS_POKEMON_RANGER_M
-	.charmapstr "HARRIS$", 8
+	.string "HARRIS$", 8
 	.byte 0x0C ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -549,7 +549,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 42
 	.byte TRAINER_CLASS_POKEFAN_M
-	.charmapstr "GLENN$", 8
+	.string "GLENN$", 8
 	.byte 0x80 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -562,7 +562,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 43
 	.byte TRAINER_CLASS_CYCLING_TRIATHLETE_M
-	.charmapstr "NICO$", 8
+	.string "NICO$", 8
 	.byte 0x04 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -575,7 +575,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 44
 	.byte TRAINER_CLASS_POKEMON_BREEDER_M
-	.charmapstr "BAILEY$", 8
+	.string "BAILEY$", 8
 	.byte 0x41 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -588,7 +588,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 45
 	.byte TRAINER_CLASS_PARASOL_LADY
-	.charmapstr "ABBIE$", 8
+	.string "ABBIE$", 8
 	.byte 0x08 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -601,7 +601,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 46
 	.byte TRAINER_CLASS_CAMPER
-	.charmapstr "AL$", 8
+	.string "AL$", 8
 	.byte 0x0C ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -614,7 +614,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 47
 	.byte TRAINER_CLASS_SCHOOL_KID_F
-	.charmapstr "PEGGY$", 8
+	.string "PEGGY$", 8
 	.byte 0x42 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -627,7 +627,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 48
 	.byte TRAINER_CLASS_BEAUTY
-	.charmapstr "NAOMI$", 8
+	.string "NAOMI$", 8
 	.byte 0x04 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -640,7 +640,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 49
 	.byte TRAINER_CLASS_NINJA_BOY
-	.charmapstr "KENJI$", 8
+	.string "KENJI$", 8
 	.byte 0x0C ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -653,7 +653,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 50
 	.byte TRAINER_CLASS_CYCLING_TRIATHLETE_M
-	.charmapstr "ROSS$", 8
+	.string "ROSS$", 8
 	.byte 0x01 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -666,7 +666,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 51
 	.byte TRAINER_CLASS_POKEMON_RANGER_F
-	.charmapstr "EDNA$", 8
+	.string "EDNA$", 8
 	.byte 0x02 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -679,7 +679,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 52
 	.byte TRAINER_CLASS_RUIN_MANIAC
-	.charmapstr "ANTON$", 8
+	.string "ANTON$", 8
 	.byte 0x41 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -692,7 +692,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 53
 	.byte TRAINER_CLASS_SWIMMER_M
-	.charmapstr "MITCH$", 8
+	.string "MITCH$", 8
 	.byte 0x81 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -705,7 +705,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 54
 	.byte TRAINER_CLASS_HEX_MANIAC
-	.charmapstr "ROD$", 8
+	.string "ROD$", 8
 	.byte 0x42 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -718,7 +718,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 55
 	.byte TRAINER_CLASS_RUNNING_TRIATHLETE_M
-	.charmapstr "RICH$", 8
+	.string "RICH$", 8
 	.byte 0x01 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -731,7 +731,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 56
 	.byte TRAINER_CLASS_POKEFAN_M
-	.charmapstr "DANIEL$", 8
+	.string "DANIEL$", 8
 	.byte 0x80 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -744,7 +744,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 57
 	.byte TRAINER_CLASS_PSYCHIC_F
-	.charmapstr "GLORIA$", 8
+	.string "GLORIA$", 8
 	.byte 0x82 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -757,7 +757,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 58
 	.byte TRAINER_CLASS_GUITARIST
-	.charmapstr "NELSON$", 8
+	.string "NELSON$", 8
 	.byte 0x01 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -770,7 +770,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 59
 	.byte TRAINER_CLASS_KINDLER
-	.charmapstr "FERRIS$", 8
+	.string "FERRIS$", 8
 	.byte 0x41 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -783,7 +783,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 60
 	.byte TRAINER_CLASS_AROMA_LADY
-	.charmapstr "AMANDA$", 8
+	.string "AMANDA$", 8
 	.byte 0x82 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -796,7 +796,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 61
 	.byte TRAINER_CLASS_SWIMMING_TRIATHLETE_M
-	.charmapstr "MASON$", 8
+	.string "MASON$", 8
 	.byte 0x10 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -809,7 +809,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 62
 	.byte TRAINER_CLASS_DRAGON_TAMER
-	.charmapstr "NATE$", 8
+	.string "NATE$", 8
 	.byte 0x10 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -822,7 +822,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 63
 	.byte TRAINER_CLASS_LASS
-	.charmapstr "MIRIAM$", 8
+	.string "MIRIAM$", 8
 	.byte 0x82 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -835,7 +835,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 64
 	.byte TRAINER_CLASS_POKEMANIAC
-	.charmapstr "THEO$", 8
+	.string "THEO$", 8
 	.byte 0x40 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -848,7 +848,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 65
 	.byte TRAINER_CLASS_SWIMMING_TRIATHLETE_F
-	.charmapstr "PAMELA$", 8
+	.string "PAMELA$", 8
 	.byte 0x10 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -861,7 +861,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 66
 	.byte TRAINER_CLASS_POKEFAN_F
-	.charmapstr "ALISSA$", 8
+	.string "ALISSA$", 8
 	.byte 0x20 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -874,7 +874,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 67
 	.byte TRAINER_CLASS_GENTLEMAN
-	.charmapstr "ARTHUR$", 8
+	.string "ARTHUR$", 8
 	.byte 0x20 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -887,7 +887,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 68
 	.byte TRAINER_CLASS_SWIMMER_F
-	.charmapstr "MARCY$", 8
+	.string "MARCY$", 8
 	.byte 0x82 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -900,7 +900,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 69
 	.byte TRAINER_CLASS_COOL_TRAINER_M
-	.charmapstr "MILLER$", 8
+	.string "MILLER$", 8
 	.byte 0x10 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -913,7 +913,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 70
 	.byte TRAINER_CLASS_BIRD_KEEPER
-	.charmapstr "OLIVER$", 8
+	.string "OLIVER$", 8
 	.byte 0x11 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -926,7 +926,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 71
 	.byte TRAINER_CLASS_CYCLING_TRIATHLETE_F
-	.charmapstr "MOLLY$", 8
+	.string "MOLLY$", 8
 	.byte 0x12 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -939,7 +939,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 72
 	.byte TRAINER_CLASS_BUG_MANIAC
-	.charmapstr "JASON$", 8
+	.string "JASON$", 8
 	.byte 0x40 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -952,7 +952,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 73
 	.byte TRAINER_CLASS_BATTLE_GIRL
-	.charmapstr "AVA$", 8
+	.string "AVA$", 8
 	.byte 0x20 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -965,7 +965,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 74
 	.byte TRAINER_CLASS_FISHERMAN
-	.charmapstr "HANK$", 8
+	.string "HANK$", 8
 	.byte 0x10 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -978,7 +978,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 75
 	.byte TRAINER_CLASS_SAILOR
-	.charmapstr "PETER$", 8
+	.string "PETER$", 8
 	.byte 0x20 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -991,7 +991,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 76
 	.byte TRAINER_CLASS_EXPERT_F
-	.charmapstr "MINDY$", 8
+	.string "MINDY$", 8
 	.byte 0x20 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -1004,7 +1004,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 77
 	.byte TRAINER_CLASS_BUG_MANIAC
-	.charmapstr "DWIGHT$", 8
+	.string "DWIGHT$", 8
 	.byte 0x11 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -1017,7 +1017,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 78
 	.byte TRAINER_CLASS_POKEMON_BREEDER_F
-	.charmapstr "REENA$", 8
+	.string "REENA$", 8
 	.byte 0x12 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -1030,7 +1030,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 79
 	.byte TRAINER_CLASS_PARASOL_LADY
-	.charmapstr "MEGAN$", 8
+	.string "MEGAN$", 8
 	.byte 0x10 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -1043,7 +1043,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 80
 	.byte TRAINER_CLASS_RUNNING_TRIATHLETE_F
-	.charmapstr "SIERRA$", 8
+	.string "SIERRA$", 8
 	.byte 0x04 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -1056,7 +1056,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 81
 	.byte TRAINER_CLASS_POKEMON_RANGER_M
-	.charmapstr "ARNOLD$", 8
+	.string "ARNOLD$", 8
 	.byte 0x08 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -1069,7 +1069,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 82
 	.byte TRAINER_CLASS_BLACK_BELT
-	.charmapstr "XIN$", 8
+	.string "XIN$", 8
 	.byte 0x04 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -1082,7 +1082,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 83
 	.byte TRAINER_CLASS_COOL_TRAINER_F
-	.charmapstr "KELLY$", 8
+	.string "KELLY$", 8
 	.byte 0x02 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -1095,7 +1095,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 84
 	.byte TRAINER_CLASS_COLLECTOR
-	.charmapstr "VANCE$", 8
+	.string "VANCE$", 8
 	.byte 0x80 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -1108,7 +1108,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 85
 	.byte TRAINER_CLASS_SWIMMING_TRIATHLETE_M
-	.charmapstr "TOBY$", 8
+	.string "TOBY$", 8
 	.byte 0x01 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -1121,7 +1121,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 86
 	.byte TRAINER_CLASS_GENTLEMAN
-	.charmapstr "NORTON$", 8
+	.string "NORTON$", 8
 	.byte 0x20 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -1134,7 +1134,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 87
 	.byte TRAINER_CLASS_BATTLE_GIRL
-	.charmapstr "ZOE$", 8
+	.string "ZOE$", 8
 	.byte 0x02 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -1147,7 +1147,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 88
 	.byte TRAINER_CLASS_BEAUTY
-	.charmapstr "EMMA$", 8
+	.string "EMMA$", 8
 	.byte 0x20 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -1160,7 +1160,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 89
 	.byte TRAINER_CLASS_HIKER
-	.charmapstr "VINCE$", 8
+	.string "VINCE$", 8
 	.byte 0x04 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -1173,7 +1173,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 90
 	.byte TRAINER_CLASS_EXPERT_M
-	.charmapstr "MARV$", 8
+	.string "MARV$", 8
 	.byte 0x10 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -1186,7 +1186,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 91
 	.byte TRAINER_CLASS_POKEMON_BREEDER_M
-	.charmapstr "TODD$", 8
+	.string "TODD$", 8
 	.byte 0x40 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -1199,7 +1199,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 92
 	.byte TRAINER_CLASS_GUITARIST
-	.charmapstr "GAVIN$", 8
+	.string "GAVIN$", 8
 	.byte 0x01 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -1212,7 +1212,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 93
 	.byte TRAINER_CLASS_PSYCHIC_M
-	.charmapstr "QUINN$", 8
+	.string "QUINN$", 8
 	.byte 0x08 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -1225,7 +1225,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 94
 	.byte TRAINER_CLASS_COOL_TRAINER_F
-	.charmapstr "JENN$", 8
+	.string "JENN$", 8
 	.byte 0x02 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -1238,7 +1238,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 95
 	.byte TRAINER_CLASS_EXPERT_M
-	.charmapstr "JOEL$", 8
+	.string "JOEL$", 8
 	.byte 0x10 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -1251,7 +1251,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 96
 	.byte TRAINER_CLASS_DRAGON_TAMER
-	.charmapstr "KYLE$", 8
+	.string "KYLE$", 8
 	.byte 0x0C ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -1264,7 +1264,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 97
 	.byte TRAINER_CLASS_COOL_TRAINER_M
-	.charmapstr "BRET$", 8
+	.string "BRET$", 8
 	.byte 0x01 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -1277,7 +1277,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 98
 	.byte TRAINER_CLASS_EXPERT_F
-	.charmapstr "CARRIE$", 8
+	.string "CARRIE$", 8
 	.byte 0x10 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue
@@ -1290,7 +1290,7 @@ gBattleTowerTrainers: ; 8402F00
 
 ; 99
 	.byte TRAINER_CLASS_LADY
-	.charmapstr "GILLIAN$", 8
+	.string "GILLIAN$", 8
 	.byte 0x02 ; team flags
 	.2byte 0 ; padding
 ; pre-battle dialogue

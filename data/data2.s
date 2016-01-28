@@ -33,10 +33,10 @@ gIntrTableTemplate: ; 81E2824
 
 ; Unreferenced error message.
 ; It means "The DMA transfer request table has exceeded its limit."
-	.charmapstr "DMA OVER{next}"
-	.charmapstr "DMAてんそう{next}"
-	.charmapstr "リクエストテーブルが{next}"
-	.charmapstr "オーバーしました$"
+	.string "DMA OVER\n"
+	.string "DMAてんそう\n"
+	.string "リクエストテーブルが\n"
+	.string "オーバーしました$"
 
 ; 81E2881
 	.incbin "baserom.gba", 0x1E2881, 0x18

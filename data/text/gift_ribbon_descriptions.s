@@ -1,143 +1,143 @@
 gGiftRibbonDescriptionPart1_2003RegionalTourney:
-	.charmapstr "2003 REGIONAL TOURNEY$"
+	.string "2003 REGIONAL TOURNEY$"
 
 gGiftRibbonDescriptionPart2_Champion:
-	.charmapstr "CHAMPION RIBBON$"
+	.string "CHAMPION RIBBON$"
 
 gGiftRibbonDescriptionPart1_2003NationalTourney:
-	.charmapstr "2003 NATIONAL TOURNEY$"
+	.string "2003 NATIONAL TOURNEY$"
 
 gGiftRibbonDescriptionPart1_2003GlobalCup:
-	.charmapstr "2003 GLOBAL CUP$"
+	.string "2003 GLOBAL CUP$"
 
 gGiftRibbonDescriptionPart2_RunnerUp:
-	.charmapstr "Runner-up RIBBON$"
+	.string "Runner-up RIBBON$"
 
 gGiftRibbonDescriptionPart2_Semifinalist:
-	.charmapstr "Semifinalist RIBBON$"
+	.string "Semifinalist RIBBON$"
 
 gGiftRibbonDescriptionPart1_2004RegionalTourney:
-	.charmapstr "2004 REGIONAL TOURNEY$"
+	.string "2004 REGIONAL TOURNEY$"
 
 gGiftRibbonDescriptionPart1_2004NationalTourney:
-	.charmapstr "2004 NATIONAL TOURNEY$"
+	.string "2004 NATIONAL TOURNEY$"
 
 gGiftRibbonDescriptionPart1_2004GlobalCup:
-	.charmapstr "2004 GLOBAL CUP$"
+	.string "2004 GLOBAL CUP$"
 
 gGiftRibbonDescriptionPart1_2005RegionalTourney:
-	.charmapstr "2005 REGIONAL TOURNEY$"
+	.string "2005 REGIONAL TOURNEY$"
 
 gGiftRibbonDescriptionPart1_2005NationalTourney:
-	.charmapstr "2005 NATIONAL TOURNEY$"
+	.string "2005 NATIONAL TOURNEY$"
 
 gGiftRibbonDescriptionPart1_2005GlobalCup:
-	.charmapstr "2005 GLOBAL CUP$"
+	.string "2005 GLOBAL CUP$"
 
 gGiftRibbonDescriptionPart1_PokemonBattleCup:
-	.charmapstr "POKéMON BATTLE CUP$"
+	.string "POKéMON BATTLE CUP$"
 
 gGiftRibbonDescriptionPart2_Participation:
-	.charmapstr "Participation RIBBON$"
+	.string "Participation RIBBON$"
 
 gGiftRibbonDescriptionPart1_PokemonLeague:
-	.charmapstr "POKéMON LEAGUE$"
+	.string "POKéMON LEAGUE$"
 
 gGiftRibbonDescriptionPart1_AdvanceCup:
-	.charmapstr "ADVANCE CUP$"
+	.string "ADVANCE CUP$"
 
 gGiftRibbonDescriptionPart1_PokemonTournament:
-	.charmapstr "POKéMON Tournament$"
+	.string "POKéMON Tournament$"
 
 gGiftRibbonDescriptionPart2_Participation2:
-	.charmapstr "Participation RIBBON$"
+	.string "Participation RIBBON$"
 
 gGiftRibbonDescriptionPart1_PokemonEvent:
-	.charmapstr "POKéMON Event$"
+	.string "POKéMON Event$"
 
 gGiftRibbonDescriptionPart1_PokemonFestival:
-	.charmapstr "POKéMON Festival$"
+	.string "POKéMON Festival$"
 
 gGiftRibbonDescriptionPart1_DifficultyClearing:
-	.charmapstr "Difficulty-clearing$"
+	.string "Difficulty-clearing$"
 
 gGiftRibbonDescriptionPart2_Commemorative:
-	.charmapstr "Commemorative RIBBON$"
+	.string "Commemorative RIBBON$"
 
 gGiftRibbonDescriptionPart1_ClearingAllDifficulties:
-	.charmapstr "RIBBON awarded for$"
+	.string "RIBBON awarded for$"
 
 gGiftRibbonDescriptionPart2_ClearingAllDifficulties:
-	.charmapstr "clearing all difficulties.$"
+	.string "clearing all difficulties.$"
 
 gGiftRibbonDescriptionPart1_100StraightWin:
-	.charmapstr "100-straight Win$"
+	.string "100-straight Win$"
 
 gGiftRibbonDescriptionPart1_DarknessTower:
-	.charmapstr "DARKNESS TOWER Clear$"
+	.string "DARKNESS TOWER Clear$"
 
 gGiftRibbonDescriptionPart1_RedTower:
-	.charmapstr "RED TOWER Clear$"
+	.string "RED TOWER Clear$"
 
 gGiftRibbonDescriptionPart1_BlackironTower:
-	.charmapstr "BLACKIRON TOWER Clear$"
+	.string "BLACKIRON TOWER Clear$"
 
 gGiftRibbonDescriptionPart1_FinalTower:
-	.charmapstr "FINAL TOWER Clear$"
+	.string "FINAL TOWER Clear$"
 
 gGiftRibbonDescriptionPart1_LegendMaking:
-	.charmapstr "Legend-making$"
+	.string "Legend-making$"
 
 gGiftRibbonDescriptionPart1_PokemonCenterTokyo:
-	.charmapstr "POKéMON CENTER TOKYO$"
+	.string "POKéMON CENTER TOKYO$"
 
 gGiftRibbonDescriptionPart1_PokemonCenterOsaka:
-	.charmapstr "POKéMON CENTER OSAKA$"
+	.string "POKéMON CENTER OSAKA$"
 
 gGiftRibbonDescriptionPart1_PokemonCenterNagoya:
-	.charmapstr "POKéMON CENTER NAGOYA$"
+	.string "POKéMON CENTER NAGOYA$"
 
 gGiftRibbonDescriptionPart1_PokemonCenterNY:
-	.charmapstr "POKéMON CENTER NY$"
+	.string "POKéMON CENTER NY$"
 
 gGiftRibbonDescriptionPart1_SummerHolidays:
-	.charmapstr "Summer Holidays RIBBON$"
+	.string "Summer Holidays RIBBON$"
 
 gGiftRibbonDescriptionPart2_EmptyString:
-	.charmapstr "$"
+	.string "$"
 
 gGiftRibbonDescriptionPart1_WinterHolidays:
-	.charmapstr "Winter Holidays RIBBON$"
+	.string "Winter Holidays RIBBON$"
 
 gGiftRibbonDescriptionPart1_SpringHolidays:
-	.charmapstr "Spring Holidays RIBBON$"
+	.string "Spring Holidays RIBBON$"
 
 gGiftRibbonDescriptionPart1_Evergreen:
-	.charmapstr "Evergreen RIBBON$"
+	.string "Evergreen RIBBON$"
 
 gGiftRibbonDescriptionPart1_SpecialHoliday:
-	.charmapstr "Special Holiday RIBBON$"
+	.string "Special Holiday RIBBON$"
 
 gGiftRibbonDescriptionPart1_HardWorker:
-	.charmapstr "Hard Worker RIBBON$"
+	.string "Hard Worker RIBBON$"
 
 gGiftRibbonDescriptionPart1_LotsOfFriends:
-	.charmapstr "Lots of Friends RIBBON$"
+	.string "Lots of Friends RIBBON$"
 
 gGiftRibbonDescriptionPart1_FullOfEnergy:
-	.charmapstr "Full of Energy RIBBON$"
+	.string "Full of Energy RIBBON$"
 
 gGiftRibbonDescriptionPart1_LovedPokemon:
-	.charmapstr "A commemorative RIBBON$"
+	.string "A commemorative RIBBON$"
 
 gGiftRibbonDescriptionPart2_LovedPokemon:
-	.charmapstr "for a loved POKéMON.$"
+	.string "for a loved POKéMON.$"
 
 gGiftRibbonDescriptionPart1_LoveForPokemon:
-	.charmapstr "RIBBON that shows$"
+	.string "RIBBON that shows$"
 
 gGiftRibbonDescriptionPart2_LoveForPokemon:
-	.charmapstr "love for POKéMON.$"
+	.string "love for POKéMON.$"
 
 	.align 2, 0
 
