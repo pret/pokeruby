@@ -3218,13 +3218,13 @@ gUnknown_083CC732: ; 83CC732
 	.incbin "baserom.gba", 0x003cc732, 0x6
 
 gUnknown_083CC738: ; 83CC738
-	.incbin "baserom.gba", 0x003cc738, 0xb78
+	.incbin "baserom.gba", 0x003cc738, 0x8
 
-gUnknown_083CD2B0: ; 83CD2B0
-	.incbin "baserom.gba", 0x003cd2b0, 0x1c
+; 83CC740
+	.include "data/text/berry_descriptions.s"
 
-gUnknown_083CD2CC: ; 83CD2CC
-	.incbin "baserom.gba", 0x003cd2cc, 0x4b4
+; 83CD2CC
+	.include "data/berries.s"
 
 gUnknown_083CD780: ; 83CD780
 	.incbin "baserom.gba", 0x003cd780, 0x680
