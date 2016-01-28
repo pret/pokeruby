@@ -35,8 +35,8 @@ gIntrTableTemplate: ; 81E2824
 ; It means "The DMA transfer request table has exceeded its limit."
 	.charmapstr "DMA OVER{next}"
 	.charmapstr "DMAてんそう{next}"
-	.charmapstr "リクエストテ-ブルが{next}"
-	.charmapstr "オ-バ-しました$"
+	.charmapstr "リクエストテーブルが{next}"
+	.charmapstr "オーバーしました$"
 
 ; 81E2881
 	.incbin "baserom.gba", 0x1E2881, 0x18
