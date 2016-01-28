@@ -4071,13 +4071,16 @@ gUnknown_083E05F4: ; 83E05F4
 	.incbin "baserom.gba", 0x003e05f4, 0x210
 
 gUnknown_083E0804: ; 83E0804
-	.incbin "baserom.gba", 0x003e0804, 0x938
+	.incbin "baserom.gba", 0x003e0804, 0x7C4
 
-gUnknown_083E113C: ; 83E113C
-	.incbin "baserom.gba", 0x003e113c, 0x450
+; 83E0FC8
+	.include "data/text/ribbon_descriptions.s"
 
-gUnknown_083E158C: ; 83E158C
-	.incbin "baserom.gba", 0x003e158c, 0x1b10
+; 83E1204
+	.include "data/text/gift_ribbon_descriptions.s"
+
+; 83E178C
+	.incbin "baserom.gba", 0x003e178c, 0x1910
 
 gUnknown_083E309C: ; 83E309C
 	.incbin "baserom.gba", 0x003e309c, 0x114
