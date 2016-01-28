@@ -251,27 +251,27 @@
 
 	.charmap "ー", 0xAE
 
-	.charmapconst PK, 0x53
-	.charmapconst PKMN, 0x53, 0x54
-	.charmapconst POKEBLOCK, 0x55, 0x56, 0x57, 0x58, 0x59
+	.charmap_const PK, 0x53
+	.charmap_const PKMN, 0x53, 0x54
+	.charmap_const POKEBLOCK, 0x55, 0x56, 0x57, 0x58, 0x59
 
 ; string placeholders
 	; unknown (0xFD, 0x00)
-	.charmapconst PLAYER,             0xFD, 0x01
-	.charmapconst STRVAR_1,           0xFD, 0x02
-	.charmapconst STRVAR_2,           0xFD, 0x03
-	.charmapconst STRVAR_3,           0xFD, 0x04
+	.charmap_const PLAYER,             0xFD, 0x01
+	.charmap_const STRVAR_1,           0xFD, 0x02
+	.charmap_const STRVAR_2,           0xFD, 0x03
+	.charmap_const STRVAR_3,           0xFD, 0x04
 	; unknown (0xFD, 0x05)
-	.charmapconst RIVAL,              0xFD, 0x06
+	.charmap_const RIVAL,              0xFD, 0x06
 ; version-dependent strings
-	.charmapconst VERSION,            0xFD, 0x07 ; "RUBY" / "SAPPHIRE"
-	.charmapconst EVIL_TEAM,          0xFD, 0x08 ; "MAGMA" / "AQUA"
-	.charmapconst GOOD_TEAM,          0xFD, 0x09 ; "AQUA" / "MAGMA"
-	.charmapconst EVIL_TEAM_LEADER,   0xFD, 0x0A ; "MAXIE" / "ARCHIE"
-	.charmapconst GOOD_TEAM_LEADER,   0xFD, 0x0B ; "ARCHIE" / "MAXIE"
-	.charmapconst CUR_VERSION_MASCOT, 0xFD, 0x0C ; "GROUDON" / "KYOGRE"
-	.charmapconst OPP_VERSION_MASCOT, 0xFD, 0x0D ; "KYOGRE" / "GROUDON"
+	.charmap_const VERSION,            0xFD, 0x07 ; "RUBY" / "SAPPHIRE"
+	.charmap_const EVIL_TEAM,          0xFD, 0x08 ; "MAGMA" / "AQUA"
+	.charmap_const GOOD_TEAM,          0xFD, 0x09 ; "AQUA" / "MAGMA"
+	.charmap_const EVIL_TEAM_LEADER,   0xFD, 0x0A ; "MAXIE" / "ARCHIE"
+	.charmap_const GOOD_TEAM_LEADER,   0xFD, 0x0B ; "ARCHIE" / "MAXIE"
+	.charmap_const CUR_VERSION_MASCOT, 0xFD, 0x0C ; "GROUDON" / "KYOGRE"
+	.charmap_const OPP_VERSION_MASCOT, 0xFD, 0x0D ; "KYOGRE" / "GROUDON"
 
-	.charmapescape 'l', 0xFA ; scroll up window
-	.charmapescape 'p', 0xFB ; new paragraph
-	.charmapescape 'n', 0xFE ; new line
+	.charmap_escape 'l', 0xFA ; scroll up window text
+	.charmap_escape 'p', 0xFB ; new paragraph
+	.charmap_escape 'n', 0xFE ; new line
