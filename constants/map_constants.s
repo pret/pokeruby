@@ -55,9 +55,6 @@
 	map_group UNDERWATER_2     ; 0.51
 	map_group UNDERWATER_3     ; 0.52
 	map_group UNDERWATER_4     ; 0.53
-	map_group UNDERWATER_5     ; 0.54
-	map_group UNDERWATER_6     ; 0.55
-	map_group UNDERWATER_7     ; 0.56
 
 	new_map_group
 	map_group LITTLEROOT_TOWN_BRENDANS_HOUSE_1F    ; 1.0
@@ -91,25 +88,23 @@
 	map_group LAVARIDGE_TOWN_POKEMON_CENTER_2F ; 4.6
 
 	new_map_group
-	map_group FALLARBOR_TOWN_MART                    ; 5.0
-	map_group FALLARBOR_TOWN_BATTLE_TENT_LOBBY       ; 5.1
-	map_group FALLARBOR_TOWN_BATTLE_TENT_CORRIDOR    ; 5.2
-	map_group FALLARBOR_TOWN_BATTLE_TENT_BATTLE_ROOM ; 5.3
-	map_group FALLARBOR_TOWN_POKEMON_CENTER_1F       ; 5.4
-	map_group FALLARBOR_TOWN_POKEMON_CENTER_2F       ; 5.5
-	map_group FALLARBOR_TOWN_HOUSE_1                 ; 5.6
-	map_group FALLARBOR_TOWN_HOUSE_2                 ; 5.7
+	map_group FALLARBOR_TOWN_MART              ; 5.0
+	map_group FALLARBOR_TOWN_CONTEST_LOBBY     ; 5.1
+	map_group FALLARBOR_TOWN_CONTEST_HALL      ; 5.2
+	map_group FALLARBOR_TOWN_POKEMON_CENTER_1F ; 5.3
+	map_group FALLARBOR_TOWN_POKEMON_CENTER_2F ; 5.4
+	map_group FALLARBOR_TOWN_HOUSE_1           ; 5.5
+	map_group FALLARBOR_TOWN_HOUSE_2           ; 5.6
 
 	new_map_group
-	map_group VERDANTURF_TOWN_BATTLE_TENT_LOBBY       ; 6.0
-	map_group VERDANTURF_TOWN_BATTLE_TENT_CORRIDOR    ; 6.1
-	map_group VERDANTURF_TOWN_BATTLE_TENT_BATTLE_ROOM ; 6.2
-	map_group VERDANTURF_TOWN_MART                    ; 6.3
-	map_group VERDANTURF_TOWN_POKEMON_CENTER_1F       ; 6.4
-	map_group VERDANTURF_TOWN_POKEMON_CENTER_2F       ; 6.5
-	map_group VERDANTURF_TOWN_WANDAS_HOUSE            ; 6.6
-	map_group VERDANTURF_TOWN_FRIENDSHIP_RATERS_HOUSE ; 6.7
-	map_group VERDANTURF_TOWN_HOUSE                   ; 6.8
+	map_group VERDANTURF_TOWN_CONTEST_LOBBY           ; 6.0
+	map_group VERDANTURF_TOWN_CONTEST_HALL            ; 6.1
+	map_group VERDANTURF_TOWN_MART                    ; 6.2
+	map_group VERDANTURF_TOWN_POKEMON_CENTER_1F       ; 6.3
+	map_group VERDANTURF_TOWN_POKEMON_CENTER_2F       ; 6.4
+	map_group VERDANTURF_TOWN_WANDAS_HOUSE            ; 6.5
+	map_group VERDANTURF_TOWN_FRIENDSHIP_RATERS_HOUSE ; 6.6
+	map_group VERDANTURF_TOWN_HOUSE                   ; 6.7
 
 	new_map_group
 	map_group PACIFIDLOG_TOWN_POKEMON_CENTER_1F ; 7.0
@@ -130,20 +125,19 @@
 	map_group PETALBURG_CITY_MART              ; 8.6
 
 	new_map_group
-	map_group SLATEPORT_CITY_STERNS_SHIPYARD_1F      ; 9.0
-	map_group SLATEPORT_CITY_STERNS_SHIPYARD_2F      ; 9.1
-	map_group SLATEPORT_CITY_BATTLE_TENT_LOBBY       ; 9.2
-	map_group SLATEPORT_CITY_BATTLE_TENT_CORRIDOR    ; 9.3
-	map_group SLATEPORT_CITY_BATTLE_TENT_BATTLE_ROOM ; 9.4
-	map_group SLATEPORT_CITY_HOUSE_1                 ; 9.5
-	map_group SLATEPORT_CITY_POKEMON_FAN_CLUB        ; 9.6
-	map_group SLATEPORT_CITY_OCEANIC_MUSEUM_1F       ; 9.7
-	map_group SLATEPORT_CITY_OCEANIC_MUSEUM_2F       ; 9.8
-	map_group SLATEPORT_CITY_HARBOR                  ; 9.9
-	map_group SLATEPORT_CITY_HOUSE_2                 ; 9.10
-	map_group SLATEPORT_CITY_POKEMON_CENTER_1F       ; 9.11
-	map_group SLATEPORT_CITY_POKEMON_CENTER_2F       ; 9.12
-	map_group SLATEPORT_CITY_MART                    ; 9.13
+	map_group SLATEPORT_CITY_STERNS_SHIPYARD_1F ; 9.0
+	map_group SLATEPORT_CITY_STERNS_SHIPYARD_2F ; 9.1
+	map_group SLATEPORT_CITY_CONTEST_LOBBY      ; 9.2
+	map_group SLATEPORT_CITY_CONTEST_HALL       ; 9.3
+	map_group SLATEPORT_CITY_HOUSE_1            ; 9.4
+	map_group SLATEPORT_CITY_POKEMON_FAN_CLUB   ; 9.5
+	map_group SLATEPORT_CITY_OCEANIC_MUSEUM_1F  ; 9.6
+	map_group SLATEPORT_CITY_OCEANIC_MUSEUM_2F  ; 9.7
+	map_group SLATEPORT_CITY_HARBOR             ; 9.8
+	map_group SLATEPORT_CITY_HOUSE_2            ; 9.9
+	map_group SLATEPORT_CITY_POKEMON_CENTER_1F  ; 9.10
+	map_group SLATEPORT_CITY_POKEMON_CENTER_2F  ; 9.11
+	map_group SLATEPORT_CITY_MART               ; 9.12
 
 	new_map_group
 	map_group MAUVILLE_CITY_GYM               ; 10.0
@@ -198,18 +192,19 @@
 	map_group LILYCOVE_CITY_UNUSED_MART               ; 13.8
 	map_group LILYCOVE_CITY_POKEMON_TRAINER_FAN_CLUB  ; 13.9
 	map_group LILYCOVE_CITY_HARBOR                    ; 13.10
-	map_group LILYCOVE_CITY_MOVE_DELETERS_HOUSE       ; 13.11
-	map_group LILYCOVE_CITY_HOUSE_1                   ; 13.12
-	map_group LILYCOVE_CITY_HOUSE_2                   ; 13.13
-	map_group LILYCOVE_CITY_HOUSE_3                   ; 13.14
-	map_group LILYCOVE_CITY_HOUSE_4                   ; 13.15
-	map_group LILYCOVE_CITY_DEPARTMENT_STORE_1F       ; 13.16
-	map_group LILYCOVE_CITY_DEPARTMENT_STORE_2F       ; 13.17
-	map_group LILYCOVE_CITY_DEPARTMENT_STORE_3F       ; 13.18
-	map_group LILYCOVE_CITY_DEPARTMENT_STORE_4F       ; 13.19
-	map_group LILYCOVE_CITY_DEPARTMENT_STORE_5F       ; 13.20
-	map_group LILYCOVE_CITY_DEPARTMENT_STORE_ROOFTOP  ; 13.21
-	map_group LILYCOVE_CITY_DEPARTMENT_STORE_ELEVATOR ; 13.22
+	map_group LILYCOVE_CITY_EMPTY_MAP                 ; 13.11
+	map_group LILYCOVE_CITY_MOVE_DELETERS_HOUSE       ; 13.12
+	map_group LILYCOVE_CITY_HOUSE_1                   ; 13.13
+	map_group LILYCOVE_CITY_HOUSE_2                   ; 13.14
+	map_group LILYCOVE_CITY_HOUSE_3                   ; 13.15
+	map_group LILYCOVE_CITY_HOUSE_4                   ; 13.16
+	map_group LILYCOVE_CITY_DEPARTMENT_STORE_1F       ; 13.17
+	map_group LILYCOVE_CITY_DEPARTMENT_STORE_2F       ; 13.18
+	map_group LILYCOVE_CITY_DEPARTMENT_STORE_3F       ; 13.19
+	map_group LILYCOVE_CITY_DEPARTMENT_STORE_4F       ; 13.20
+	map_group LILYCOVE_CITY_DEPARTMENT_STORE_5F       ; 13.21
+	map_group LILYCOVE_CITY_DEPARTMENT_STORE_ROOFTOP  ; 13.22
+	map_group LILYCOVE_CITY_DEPARTMENT_STORE_ELEVATOR ; 13.23
 
 	new_map_group
 	map_group MOSSDEEP_CITY_GYM               ; 14.0
@@ -227,21 +222,19 @@
 	map_group MOSSDEEP_CITY_GAME_CORNER_B1F   ; 14.12
 
 	new_map_group
-	map_group SOOTOPOLIS_CITY_GYM_1F                   ; 15.0
-	map_group SOOTOPOLIS_CITY_GYM_B1F                  ; 15.1
-	map_group SOOTOPOLIS_CITY_POKEMON_CENTER_1F        ; 15.2
-	map_group SOOTOPOLIS_CITY_POKEMON_CENTER_2F        ; 15.3
-	map_group SOOTOPOLIS_CITY_MART                     ; 15.4
-	map_group SOOTOPOLIS_CITY_HOUSE_1                  ; 15.5
-	map_group SOOTOPOLIS_CITY_HOUSE_2                  ; 15.6
-	map_group SOOTOPOLIS_CITY_HOUSE_3                  ; 15.7
-	map_group SOOTOPOLIS_CITY_HOUSE_4                  ; 15.8
-	map_group SOOTOPOLIS_CITY_HOUSE_5                  ; 15.9
-	map_group SOOTOPOLIS_CITY_HOUSE_6                  ; 15.10
-	map_group SOOTOPOLIS_CITY_HOUSE_7                  ; 15.11
-	map_group SOOTOPOLIS_CITY_LOTAD_AND_SEEDOT_HOUSE   ; 15.12
-	map_group SOOTOPOLIS_CITY_MYSTERY_EVENTS_HOUSE_1F  ; 15.13
-	map_group SOOTOPOLIS_CITY_MYSTERY_EVENTS_HOUSE_B1F ; 15.14
+	map_group SOOTOPOLIS_CITY_GYM_1F            ; 15.0
+	map_group SOOTOPOLIS_CITY_GYM_B1F           ; 15.1
+	map_group SOOTOPOLIS_CITY_POKEMON_CENTER_1F ; 15.2
+	map_group SOOTOPOLIS_CITY_POKEMON_CENTER_2F ; 15.3
+	map_group SOOTOPOLIS_CITY_MART              ; 15.4
+	map_group SOOTOPOLIS_CITY_HOUSE_1           ; 15.5
+	map_group SOOTOPOLIS_CITY_HOUSE_2           ; 15.6
+	map_group SOOTOPOLIS_CITY_HOUSE_3           ; 15.7
+	map_group SOOTOPOLIS_CITY_HOUSE_4           ; 15.8
+	map_group SOOTOPOLIS_CITY_HOUSE_5           ; 15.9
+	map_group SOOTOPOLIS_CITY_HOUSE_6           ; 15.10
+	map_group SOOTOPOLIS_CITY_HOUSE_7           ; 15.11
+	map_group SOOTOPOLIS_CITY_HOUSE_8           ; 15.12
 
 	new_map_group
 	map_group EVER_GRANDE_CITY_SIDNEYS_ROOM      ; 16.0
@@ -249,16 +242,15 @@
 	map_group EVER_GRANDE_CITY_GLACIAS_ROOM      ; 16.2
 	map_group EVER_GRANDE_CITY_DRAKES_ROOM       ; 16.3
 	map_group EVER_GRANDE_CITY_CHAMPIONS_ROOM    ; 16.4
-	map_group EVER_GRANDE_CITY_HALL_1            ; 16.5
-	map_group EVER_GRANDE_CITY_HALL_2            ; 16.6
-	map_group EVER_GRANDE_CITY_HALL_3            ; 16.7
-	map_group EVER_GRANDE_CITY_HALL_4            ; 16.8
-	map_group EVER_GRANDE_CITY_HALL_5            ; 16.9
-	map_group EVER_GRANDE_CITY_POKEMON_LEAGUE_1F ; 16.10
+	map_group EVER_GRANDE_CITY_CORRIDOR_1        ; 16.5
+	map_group EVER_GRANDE_CITY_CORRIDOR_2        ; 16.6
+	map_group EVER_GRANDE_CITY_CORRIDOR_3        ; 16.7
+	map_group EVER_GRANDE_CITY_CORRIDOR_4        ; 16.8
+	map_group EVER_GRANDE_CITY_CORRIDOR_5        ; 16.9
+	map_group EVER_GRANDE_CITY_POKEMON_LEAGUE    ; 16.10
 	map_group EVER_GRANDE_CITY_HALL_OF_FAME      ; 16.11
 	map_group EVER_GRANDE_CITY_POKEMON_CENTER_1F ; 16.12
 	map_group EVER_GRANDE_CITY_POKEMON_CENTER_2F ; 16.13
-	map_group EVER_GRANDE_CITY_POKEMON_LEAGUE_2F ; 16.14
 
 	new_map_group
 	map_group ROUTE_104_MR_BRINEYS_HOUSE         ; 17.0
@@ -287,114 +279,92 @@
 	map_group ROUTE_121_SAFARI_ZONE_ENTRANCE ; 23.0
 
 	new_map_group
-	map_group METEOR_FALLS_1F_1R                        ; 24.0
-	map_group METEOR_FALLS_1F_2R                        ; 24.1
-	map_group METEOR_FALLS_B1F_1R                       ; 24.2
-	map_group METEOR_FALLS_B1F_2R                       ; 24.3
-	map_group RUSTURF_TUNNEL                            ; 24.4
-	map_group UNDERWATER_SOOTOPOLIS_CITY                ; 24.5
-	map_group DESERT_RUINS                              ; 24.6
-	map_group GRANITE_CAVE_1F                           ; 24.7
-	map_group GRANITE_CAVE_B1F                          ; 24.8
-	map_group GRANITE_CAVE_B2F                          ; 24.9
-	map_group GRANITE_CAVE_STEVENS_ROOM                 ; 24.10
-	map_group PETALBURG_WOODS                           ; 24.11
-	map_group MT_CHIMNEY                                ; 24.12
-	map_group JAGGED_PASS                               ; 24.13
-	map_group FIERY_PATH                                ; 24.14
-	map_group MT_PYRE_1F                                ; 24.15
-	map_group MT_PYRE_2F                                ; 24.16
-	map_group MT_PYRE_3F                                ; 24.17
-	map_group MT_PYRE_4F                                ; 24.18
-	map_group MT_PYRE_5F                                ; 24.19
-	map_group MT_PYRE_6F                                ; 24.20
-	map_group MT_PYRE_EXTERIOR                          ; 24.21
-	map_group MT_PYRE_SUMMIT                            ; 24.22
-	map_group AQUA_HIDEOUT_1F                           ; 24.23
-	map_group AQUA_HIDEOUT_B1F                          ; 24.24
-	map_group AQUA_HIDEOUT_B2F                          ; 24.25
-	map_group UNDERWATER_SEAFLOOR_CAVERN                ; 24.26
-	map_group SEAFLOOR_CAVERN_ENTRANCE                  ; 24.27
-	map_group SEAFLOOR_CAVERN_ROOM_1                    ; 24.28
-	map_group SEAFLOOR_CAVERN_ROOM_2                    ; 24.29
-	map_group SEAFLOOR_CAVERN_ROOM_3                    ; 24.30
-	map_group SEAFLOOR_CAVERN_ROOM_4                    ; 24.31
-	map_group SEAFLOOR_CAVERN_ROOM_5                    ; 24.32
-	map_group SEAFLOOR_CAVERN_ROOM_6                    ; 24.33
-	map_group SEAFLOOR_CAVERN_ROOM_7                    ; 24.34
-	map_group SEAFLOOR_CAVERN_ROOM_8                    ; 24.35
-	map_group SEAFLOOR_CAVERN_ROOM_9                    ; 24.36
-	map_group CAVE_OF_ORIGIN_ENTRANCE                   ; 24.37
-	map_group CAVE_OF_ORIGIN_1F                         ; 24.38
-	map_group CAVE_OF_ORIGIN_UNUSED_RUBY_SAPPHIRE_MAP_1 ; 24.39
-	map_group CAVE_OF_ORIGIN_UNUSED_RUBY_SAPPHIRE_MAP_2 ; 24.40
-	map_group CAVE_OF_ORIGIN_UNUSED_RUBY_SAPPHIRE_MAP_3 ; 24.41
-	map_group CAVE_OF_ORIGIN_B1F                        ; 24.42
-	map_group VICTORY_ROAD_1F                           ; 24.43
-	map_group VICTORY_ROAD_B1F                          ; 24.44
-	map_group VICTORY_ROAD_B2F                          ; 24.45
-	map_group SHOAL_CAVE_LOW_TIDE_ENTRANCE_ROOM         ; 24.46
-	map_group SHOAL_CAVE_LOW_TIDE_INNER_ROOM            ; 24.47
-	map_group SHOAL_CAVE_LOW_TIDE_STAIRS_ROOM           ; 24.48
-	map_group SHOAL_CAVE_LOW_TIDE_LOWER_ROOM            ; 24.49
-	map_group SHOAL_CAVE_HIGH_TIDE_ENTRANCE_ROOM        ; 24.50
-	map_group SHOAL_CAVE_HIGH_TIDE_INNER_ROOM           ; 24.51
-	map_group NEW_MAUVILLE_ENTRANCE                     ; 24.52
-	map_group NEW_MAUVILLE_INSIDE                       ; 24.53
-	map_group ABANDONED_SHIP_DECK                       ; 24.54
-	map_group ABANDONED_SHIP_CORRIDORS_1F               ; 24.55
-	map_group ABANDONED_SHIP_ROOMS_1F                   ; 24.56
-	map_group ABANDONED_SHIP_CORRIDORS_B1F              ; 24.57
-	map_group ABANDONED_SHIP_ROOMS_B1F                  ; 24.58
-	map_group ABANDONED_SHIP_ROOMS_2_B1F                ; 24.59
-	map_group ABANDONED_SHIP_UNDERWATER_1               ; 24.60
-	map_group ABANDONED_SHIP_ROOM_B1F                   ; 24.61
-	map_group ABANDONED_SHIP_ROOMS_2_1F                 ; 24.62
-	map_group ABANDONED_SHIP_CAPTAINS_OFFICE            ; 24.63
-	map_group ABANDONED_SHIP_UNDERWATER_2               ; 24.64
-	map_group ABANDONED_SHIP_HIDDEN_FLOOR_CORRIDORS     ; 24.65
-	map_group ABANDONED_SHIP_HIDDEN_FLOOR_ROOMS         ; 24.66
-	map_group ISLAND_CAVE                               ; 24.67
-	map_group ANCIENT_TOMB                              ; 24.68
-	map_group UNDERWATER_ROUTE_134                      ; 24.69
-	map_group UNDERWATER_SEALED_CHAMBER                 ; 24.70
-	map_group SEALED_CHAMBER_OUTER_ROOM                 ; 24.71
-	map_group SEALED_CHAMBER_INNER_ROOM                 ; 24.72
-	map_group SCORCHED_SLAB                             ; 24.73
-	map_group AQUA_HIDEOUT_UNUSED_RUBY_MAP_1            ; 24.74
-	map_group AQUA_HIDEOUT_UNUSED_RUBY_MAP_2            ; 24.75
-	map_group AQUA_HIDEOUT_UNUSED_RUBY_MAP_3            ; 24.76
-	map_group SKY_PILLAR_ENTRANCE                       ; 24.77
-	map_group SKY_PILLAR_OUTSIDE                        ; 24.78
-	map_group SKY_PILLAR_1F                             ; 24.79
-	map_group SKY_PILLAR_2F                             ; 24.80
-	map_group SKY_PILLAR_3F                             ; 24.81
-	map_group SKY_PILLAR_4F                             ; 24.82
-	map_group SHOAL_CAVE_LOW_TIDE_ICE_ROOM              ; 24.83
-	map_group SKY_PILLAR_5F                             ; 24.84
-	map_group SKY_PILLAR_TOP                            ; 24.85
-	map_group MAGMA_HIDEOUT_1F                          ; 24.86
-	map_group MAGMA_HIDEOUT_2F_1R                       ; 24.87
-	map_group MAGMA_HIDEOUT_2F_2R                       ; 24.88
-	map_group MAGMA_HIDEOUT_3F_1R                       ; 24.89
-	map_group MAGMA_HIDEOUT_3F_2R                       ; 24.90
-	map_group MAGMA_HIDEOUT_4F                          ; 24.91
-	map_group MAGMA_HIDEOUT_3F_3R                       ; 24.92
-	map_group MAGMA_HIDEOUT_2F_3R                       ; 24.93
-	map_group MIRAGE_TOWER_1F                           ; 24.94
-	map_group MIRAGE_TOWER_2F                           ; 24.95
-	map_group MIRAGE_TOWER_3F                           ; 24.96
-	map_group MIRAGE_TOWER_4F                           ; 24.97
-	map_group DESERT_UNDERPASS                          ; 24.98
-	map_group ARTISAN_CAVE_B1F                          ; 24.99
-	map_group ARTISAN_CAVE_1F                           ; 24.100
-	map_group UNDERWATER_MARINE_CAVE                    ; 24.101
-	map_group MARINE_CAVE_ENTRANCE                      ; 24.102
-	map_group MARINE_CAVE_END                           ; 24.103
-	map_group TERRA_CAVE_ENTRANCE                       ; 24.104
-	map_group TERRA_CAVE_END                            ; 24.105
-	map_group ALTERING_CAVE                             ; 24.106
-	map_group METEOR_FALLS_STEVENS_CAVE                 ; 24.107
+	map_group METEOR_FALLS_1F_1R                    ; 24.0
+	map_group METEOR_FALLS_1F_2R                    ; 24.1
+	map_group METEOR_FALLS_B1F_1R                   ; 24.2
+	map_group METEOR_FALLS_B1F_2R                   ; 24.3
+	map_group RUSTURF_TUNNEL                        ; 24.4
+	map_group UNDERWATER_SOOTOPOLIS_CITY            ; 24.5
+	map_group DESERT_RUINS                          ; 24.6
+	map_group GRANITE_CAVE_1F                       ; 24.7
+	map_group GRANITE_CAVE_B1F                      ; 24.8
+	map_group GRANITE_CAVE_B2F                      ; 24.9
+	map_group GRANITE_CAVE_STEVENS_ROOM             ; 24.10
+	map_group PETALBURG_WOODS                       ; 24.11
+	map_group MT_CHIMNEY                            ; 24.12
+	map_group JAGGED_PASS                           ; 24.13
+	map_group FIERY_PATH                            ; 24.14
+	map_group MT_PYRE_1F                            ; 24.15
+	map_group MT_PYRE_2F                            ; 24.16
+	map_group MT_PYRE_3F                            ; 24.17
+	map_group MT_PYRE_4F                            ; 24.18
+	map_group MT_PYRE_5F                            ; 24.19
+	map_group MT_PYRE_6F                            ; 24.20
+	map_group MT_PYRE_EXTERIOR                      ; 24.21
+	map_group MT_PYRE_SUMMIT                        ; 24.22
+	map_group AQUA_HIDEOUT_1F                       ; 24.23
+	map_group AQUA_HIDEOUT_B1F                      ; 24.24
+	map_group AQUA_HIDEOUT_B2F                      ; 24.25
+	map_group UNDERWATER_SEAFLOOR_CAVERN            ; 24.26
+	map_group SEAFLOOR_CAVERN_ENTRANCE              ; 24.27
+	map_group SEAFLOOR_CAVERN_ROOM_1                ; 24.28
+	map_group SEAFLOOR_CAVERN_ROOM_2                ; 24.29
+	map_group SEAFLOOR_CAVERN_ROOM_3                ; 24.30
+	map_group SEAFLOOR_CAVERN_ROOM_4                ; 24.31
+	map_group SEAFLOOR_CAVERN_ROOM_5                ; 24.32
+	map_group SEAFLOOR_CAVERN_ROOM_6                ; 24.33
+	map_group SEAFLOOR_CAVERN_ROOM_7                ; 24.34
+	map_group SEAFLOOR_CAVERN_ROOM_8                ; 24.35
+	map_group SEAFLOOR_CAVERN_ROOM_9                ; 24.36
+	map_group CAVE_OF_ORIGIN_ENTRANCE               ; 24.37
+	map_group CAVE_OF_ORIGIN_1F                     ; 24.38
+	map_group CAVE_OF_ORIGIN_B1F                    ; 24.39
+	map_group CAVE_OF_ORIGIN_B2F                    ; 24.40
+	map_group CAVE_OF_ORIGIN_B3F                    ; 24.41
+	map_group CAVE_OF_ORIGIN_B4F                    ; 24.42
+	map_group VICTORY_ROAD_1F                       ; 24.43
+	map_group VICTORY_ROAD_B1F                      ; 24.44
+	map_group VICTORY_ROAD_B2F                      ; 24.45
+	map_group SHOAL_CAVE_LOW_TIDE_ENTRANCE_ROOM     ; 24.46
+	map_group SHOAL_CAVE_LOW_TIDE_INNER_ROOM        ; 24.47
+	map_group SHOAL_CAVE_LOW_TIDE_STAIRS_ROOM       ; 24.48
+	map_group SHOAL_CAVE_LOW_TIDE_LOWER_ROOM        ; 24.49
+	map_group SHOAL_CAVE_HIGH_TIDE_ENTRANCE_ROOM    ; 24.50
+	map_group SHOAL_CAVE_HIGH_TIDE_INNER_ROOM       ; 24.51
+	map_group NEW_MAUVILLE_ENTRANCE                 ; 24.52
+	map_group NEW_MAUVILLE_INSIDE                   ; 24.53
+	map_group ABANDONED_SHIP_DECK                   ; 24.54
+	map_group ABANDONED_SHIP_CORRIDORS_1F           ; 24.55
+	map_group ABANDONED_SHIP_ROOMS_1F               ; 24.56
+	map_group ABANDONED_SHIP_CORRIDORS_B1F          ; 24.57
+	map_group ABANDONED_SHIP_ROOMS_B1F              ; 24.58
+	map_group ABANDONED_SHIP_ROOMS_2_B1F            ; 24.59
+	map_group ABANDONED_SHIP_UNDERWATER_1           ; 24.60
+	map_group ABANDONED_SHIP_ROOM_B1F               ; 24.61
+	map_group ABANDONED_SHIP_ROOMS_2_1F             ; 24.62
+	map_group ABANDONED_SHIP_CAPTAINS_OFFICE        ; 24.63
+	map_group ABANDONED_SHIP_UNDERWATER_2           ; 24.64
+	map_group ABANDONED_SHIP_HIDDEN_FLOOR_CORRIDORS ; 24.65
+	map_group ABANDONED_SHIP_HIDDEN_FLOOR_ROOMS     ; 24.66
+	map_group ISLAND_CAVE                           ; 24.67
+	map_group ANCIENT_TOMB                          ; 24.68
+	map_group UNDERWATER_ROUTE_134                  ; 24.69
+	map_group UNDERWATER_SEALED_CHAMBER             ; 24.70
+	map_group SEALED_CHAMBER_OUTER_ROOM             ; 24.71
+	map_group SEALED_CHAMBER_INNER_ROOM             ; 24.72
+	map_group SCORCHED_SLAB                         ; 24.73
+	map_group MAGMA_HIDEOUT_1F                      ; 24.74
+	map_group MAGMA_HIDEOUT_B1F                     ; 24.75
+	map_group MAGMA_HIDEOUT_B2F                     ; 24.76
+	map_group SKY_PILLAR_ENTRANCE                   ; 24.77
+	map_group SKY_PILLAR_OUTSIDE                    ; 24.78
+	map_group SKY_PILLAR_1F                         ; 24.79
+	map_group SKY_PILLAR_2F                         ; 24.80
+	map_group SKY_PILLAR_3F                         ; 24.81
+	map_group SKY_PILLAR_4F                         ; 24.82
+	map_group SHOAL_CAVE_LOW_TIDE_ICE_ROOM          ; 24.83
+	map_group SKY_PILLAR_5F                         ; 24.84
+	map_group SKY_PILLAR_TOP                        ; 24.85
 
 	new_map_group
 	map_group SECRET_BASE_RED_CAVE_1    ; 25.0
@@ -441,114 +411,20 @@
 	map_group SS_TIDAL_CORRIDOR         ; 25.41
 	map_group SS_TIDAL_LOWER_DECK       ; 25.42
 	map_group SS_TIDAL_ROOMS            ; 25.43
-	map_group BATTLE_PYRAMID_SQUARE_01  ; 25.44
-	map_group BATTLE_PYRAMID_SQUARE_02  ; 25.45
-	map_group BATTLE_PYRAMID_SQUARE_03  ; 25.46
-	map_group BATTLE_PYRAMID_SQUARE_04  ; 25.47
-	map_group BATTLE_PYRAMID_SQUARE_05  ; 25.48
-	map_group BATTLE_PYRAMID_SQUARE_06  ; 25.49
-	map_group BATTLE_PYRAMID_SQUARE_07  ; 25.50
-	map_group BATTLE_PYRAMID_SQUARE_08  ; 25.51
-	map_group BATTLE_PYRAMID_SQUARE_09  ; 25.52
-	map_group BATTLE_PYRAMID_SQUARE_10  ; 25.53
-	map_group BATTLE_PYRAMID_SQUARE_11  ; 25.54
-	map_group BATTLE_PYRAMID_SQUARE_12  ; 25.55
-	map_group BATTLE_PYRAMID_SQUARE_13  ; 25.56
-	map_group BATTLE_PYRAMID_SQUARE_14  ; 25.57
-	map_group BATTLE_PYRAMID_SQUARE_15  ; 25.58
-	map_group BATTLE_PYRAMID_SQUARE_16  ; 25.59
-	map_group UNION_ROOM                ; 25.60
 
 	new_map_group
-	map_group SAFARI_ZONE_NORTHWEST                                ; 26.0
-	map_group SAFARI_ZONE_NORTH                                    ; 26.1
-	map_group SAFARI_ZONE_SOUTHWEST                                ; 26.2
-	map_group SAFARI_ZONE_SOUTH                                    ; 26.3
-	map_group BATTLE_FRONTIER_OUTSIDE_WEST                         ; 26.4
-	map_group BATTLE_FRONTIER_BATTLE_TOWER_LOBBY                   ; 26.5
-	map_group BATTLE_FRONTIER_BATTLE_TOWER_ELEVATOR                ; 26.6
-	map_group BATTLE_FRONTIER_BATTLE_TOWER_CORRIDOR                ; 26.7
-	map_group BATTLE_FRONTIER_BATTLE_TOWER_BATTLE_ROOM             ; 26.8
-	map_group SOUTHERN_ISLAND_EXTERIOR                             ; 26.9
-	map_group SOUTHERN_ISLAND_INTERIOR                             ; 26.10
-	map_group SAFARI_ZONE_REST_HOUSE                               ; 26.11
-	map_group SAFARI_ZONE_NORTHEAST                                ; 26.12
-	map_group SAFARI_ZONE_SOUTHEAST                                ; 26.13
-	map_group BATTLE_FRONTIER_OUTSIDE_EAST                         ; 26.14
-	map_group BATTLE_FRONTIER_BATTLE_TOWER_MULTI_BATTLE_ROOM       ; 26.15
-	map_group BATTLE_FRONTIER_BATTLE_TOWER_CORRIDOR_2              ; 26.16
-	map_group BATTLE_FRONTIER_BATTLE_TOWER_BATTLE_ROOM_2           ; 26.17
-	map_group BATTLE_FRONTIER_BATTLE_DOME_LOBBY                    ; 26.18
-	map_group BATTLE_FRONTIER_BATTLE_DOME_CORRIDOR                 ; 26.19
-	map_group BATTLE_FRONTIER_BATTLE_DOME_PRE_BATTLE_ROOM          ; 26.20
-	map_group BATTLE_FRONTIER_BATTLE_DOME_BATTLE_ROOM              ; 26.21
-	map_group BATTLE_FRONTIER_BATTLE_PALACE_LOBBY                  ; 26.22
-	map_group BATTLE_FRONTIER_BATTLE_PALACE_CORRIDOR               ; 26.23
-	map_group BATTLE_FRONTIER_BATTLE_PALACE_BATTLE_ROOM            ; 26.24
-	map_group BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY                 ; 26.25
-	map_group BATTLE_FRONTIER_BATTLE_PYRAMID_EMPTY_SQUARE          ; 26.26
-	map_group BATTLE_FRONTIER_BATTLE_PYRAMID_TOP                   ; 26.27
-	map_group BATTLE_FRONTIER_BATTLE_ARENA_LOBBY                   ; 26.28
-	map_group BATTLE_FRONTIER_BATTLE_ARENA_CORRIDOR                ; 26.29
-	map_group BATTLE_FRONTIER_BATTLE_ARENA_BATTLE_ROOM             ; 26.30
-	map_group BATTLE_FRONTIER_BATTLE_FACTORY_LOBBY                 ; 26.31
-	map_group BATTLE_FRONTIER_BATTLE_FACTORY_PRE_BATTLE_ROOM       ; 26.32
-	map_group BATTLE_FRONTIER_BATTLE_FACTORY_BATTLE_ROOM           ; 26.33
-	map_group BATTLE_FRONTIER_BATTLE_PIKE_LOBBY                    ; 26.34
-	map_group BATTLE_FRONTIER_BATTLE_PIKE_CORRIDOR                 ; 26.35
-	map_group BATTLE_FRONTIER_BATTLE_PIKE_THREE_PATH_ROOM          ; 26.36
-	map_group BATTLE_FRONTIER_BATTLE_PIKE_RANDOM_ROOM_1            ; 26.37
-	map_group BATTLE_FRONTIER_BATTLE_PIKE_RANDOM_ROOM_2            ; 26.38
-	map_group BATTLE_FRONTIER_BATTLE_PIKE_RANDOM_ROOM_3            ; 26.39
-	map_group BATTLE_FRONTIER_RANKING_HALL                         ; 26.40
-	map_group BATTLE_FRONTIER_LOUNGE_1                             ; 26.41
-	map_group BATTLE_FRONTIER_BATTLE_POINT_EXCHANGE_SERVICE_CORNER ; 26.42
-	map_group BATTLE_FRONTIER_LOUNGE_2                             ; 26.43
-	map_group BATTLE_FRONTIER_LOUNGE_3                             ; 26.44
-	map_group BATTLE_FRONTIER_LOUNGE_4                             ; 26.45
-	map_group BATTLE_FRONTIER_SCOTTS_HOUSE                         ; 26.46
-	map_group BATTLE_FRONTIER_LOUNGE_5                             ; 26.47
-	map_group BATTLE_FRONTIER_LOUNGE_6                             ; 26.48
-	map_group BATTLE_FRONTIER_LOUNGE_7                             ; 26.49
-	map_group BATTLE_FRONTIER_RECEPTION_GATE                       ; 26.50
-	map_group BATTLE_FRONTIER_LOUNGE_8                             ; 26.51
-	map_group BATTLE_FRONTIER_LOUNGE_9                             ; 26.52
-	map_group BATTLE_FRONTIER_POKEMON_CENTER_1F                    ; 26.53
-	map_group BATTLE_FRONTIER_POKEMON_CENTER_2F                    ; 26.54
-	map_group BATTLE_FRONTIER_MART                                 ; 26.55
-	map_group FARAWAY_ISLAND_ENTRANCE                              ; 26.56
-	map_group FARAWAY_ISLAND_INTERIOR                              ; 26.57
-	map_group BIRTH_ISLAND_EXTERIOR                                ; 26.58
-	map_group BIRTH_ISLAND_HARBOR                                  ; 26.59
-	map_group TRAINER_HILL_ENTRANCE                                ; 26.60
-	map_group TRAINER_HILL_1F                                      ; 26.61
-	map_group TRAINER_HILL_2F                                      ; 26.62
-	map_group TRAINER_HILL_3F                                      ; 26.63
-	map_group TRAINER_HILL_4F                                      ; 26.64
-	map_group TRAINER_HILL_ROOF                                    ; 26.65
-	map_group NAVEL_ROCK_EXTERIOR                                  ; 26.66
-	map_group NAVEL_ROCK_HARBOR                                    ; 26.67
-	map_group NAVEL_ROCK_ENTRANCE                                  ; 26.68
-	map_group NAVEL_ROCK_B1F                                       ; 26.69
-	map_group NAVEL_ROCK_FORK                                      ; 26.70
-	map_group NAVEL_ROCK_UP_1                                      ; 26.71
-	map_group NAVEL_ROCK_UP_2                                      ; 26.72
-	map_group NAVEL_ROCK_UP_3                                      ; 26.73
-	map_group NAVEL_ROCK_UP_4                                      ; 26.74
-	map_group NAVEL_ROCK_TOP                                       ; 26.75
-	map_group NAVEL_ROCK_DOWN_01                                   ; 26.76
-	map_group NAVEL_ROCK_DOWN_02                                   ; 26.77
-	map_group NAVEL_ROCK_DOWN_03                                   ; 26.78
-	map_group NAVEL_ROCK_DOWN_04                                   ; 26.79
-	map_group NAVEL_ROCK_DOWN_05                                   ; 26.80
-	map_group NAVEL_ROCK_DOWN_06                                   ; 26.81
-	map_group NAVEL_ROCK_DOWN_07                                   ; 26.82
-	map_group NAVEL_ROCK_DOWN_08                                   ; 26.83
-	map_group NAVEL_ROCK_DOWN_09                                   ; 26.84
-	map_group NAVEL_ROCK_DOWN_10                                   ; 26.85
-	map_group NAVEL_ROCK_DOWN_11                                   ; 26.86
-	map_group NAVEL_ROCK_BOTTOM                                    ; 26.87
-	map_group TRAINER_HILL_ELEVATOR                                ; 26.88
+	map_group SAFARI_ZONE_NORTHWEST    ; 26.0
+	map_group SAFARI_ZONE_NORTHEAST    ; 26.1
+	map_group SAFARI_ZONE_SOUTHWEST    ; 26.2
+	map_group SAFARI_ZONE_SOUTHEAST    ; 26.3
+	map_group BATTLE_TOWER_OUTSIDE     ; 26.4
+	map_group BATTLE_TOWER_LOBBY       ; 26.5
+	map_group BATTLE_TOWER_ELEVATOR    ; 26.6
+	map_group BATTLE_TOWER_CORRIDOR    ; 26.7
+	map_group BATTLE_TOWER_BATTLE_ROOM ; 26.8
+	map_group SOUTHERN_ISLAND_EXTERIOR ; 26.9
+	map_group SOUTHERN_ISLAND_INTERIOR ; 26.10
+	map_group SAFARI_ZONE_REST_HOUSE   ; 26.11
 
 	new_map_group
 	map_group ROUTE_104_PROTOTYPE                          ; 27.0
@@ -558,19 +434,19 @@
 	map_group ROUTE_109_SEASHORE_HOUSE ; 28.0
 
 	new_map_group
-	map_group ROUTE_110_TRICK_HOUSE_ENTRANCE            ; 29.0
-	map_group ROUTE_110_TRICK_HOUSE_END                 ; 29.1
-	map_group ROUTE_110_TRICK_HOUSE_CORRIDOR            ; 29.2
-	map_group ROUTE_110_TRICK_HOUSE_PUZZLE_1            ; 29.3
-	map_group ROUTE_110_TRICK_HOUSE_PUZZLE_2            ; 29.4
-	map_group ROUTE_110_TRICK_HOUSE_PUZZLE_3            ; 29.5
-	map_group ROUTE_110_TRICK_HOUSE_PUZZLE_4            ; 29.6
-	map_group ROUTE_110_TRICK_HOUSE_PUZZLE_5            ; 29.7
-	map_group ROUTE_110_TRICK_HOUSE_PUZZLE_6            ; 29.8
-	map_group ROUTE_110_TRICK_HOUSE_PUZZLE_7            ; 29.9
-	map_group ROUTE_110_TRICK_HOUSE_PUZZLE_8            ; 29.10
-	map_group ROUTE_110_SEASIDE_CYCLING_ROAD_ENTRANCE_1 ; 29.11
-	map_group ROUTE_110_SEASIDE_CYCLING_ROAD_ENTRANCE_2 ; 29.12
+	map_group ROUTE_110_TRICK_HOUSE_ENTRANCE                ; 29.0
+	map_group ROUTE_110_TRICK_HOUSE_END                     ; 29.1
+	map_group ROUTE_110_TRICK_HOUSE_CORRIDOR                ; 29.2
+	map_group ROUTE_110_TRICK_HOUSE_PUZZLE_1                ; 29.3
+	map_group ROUTE_110_TRICK_HOUSE_PUZZLE_2                ; 29.4
+	map_group ROUTE_110_TRICK_HOUSE_PUZZLE_3                ; 29.5
+	map_group ROUTE_110_TRICK_HOUSE_PUZZLE_4                ; 29.6
+	map_group ROUTE_110_TRICK_HOUSE_PUZZLE_5                ; 29.7
+	map_group ROUTE_110_TRICK_HOUSE_PUZZLE_6                ; 29.8
+	map_group ROUTE_110_TRICK_HOUSE_PUZZLE_7                ; 29.9
+	map_group ROUTE_110_TRICK_HOUSE_PUZZLE_8                ; 29.10
+	map_group ROUTE_110_SEASIDE_CYCLING_ROAD_SOUTH_ENTRANCE ; 29.11
+	map_group ROUTE_110_SEASIDE_CYCLING_ROAD_NORTH_ENTRANCE ; 29.12
 
 	new_map_group
 	map_group ROUTE_113_GLASS_WORKSHOP ; 30.0
