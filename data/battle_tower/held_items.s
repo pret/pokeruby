@@ -1,3 +1,5 @@
+	.align 1
+
 gBattleTowerHeldItems: ; 8403860
 	.2byte ITEM_NONE
 	.2byte ITEM_KINGS_ROCK
