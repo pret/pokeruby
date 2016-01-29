@@ -450,21 +450,16 @@ gUnknown_081ECAD8: ; 81ECAD8
 	.include "data/graphics/trainers/back_pic_palette_table.s"
 
 gUnknown_081ECB14: ; 81ECB14
-	.incbin "baserom.gba", 0x001ecb14, 0x36f4
+	.incbin "baserom.gba", 0x001ecb14, 0x19C
+
+; 81ECCB0
+	.include "data/trainer_parties.s"
 
 ; 81F0208
 	.include "data/text/trainer_class_names.s"
 
-	.align 2
-
-gUnknown_081F04FC: ; 81F04FC
-	.incbin "baserom.gba", 0x001f04fc, 0x4
-
-gUnknown_081F0500: ; 81F0500
-	.incbin "baserom.gba", 0x001f0500, 0xc
-
-gUnknown_081F050C: ; 81F050C
-	.incbin "baserom.gba", 0x001f050c, 0x6c60
+; 81F04FC
+	.include "data/trainers.s"
 
 ; 81F716C
 	.include "data/text/species_names.s"
