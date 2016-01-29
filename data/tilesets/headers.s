@@ -8,7 +8,7 @@ gTileset_General: ; 8286CF4
 	.4byte gTilesetPalettes_General
 	.4byte gMetatiles_General
 	.4byte gMetatileAttributes_General
-	.4byte sub_8072FC4
+	.4byte TilesetCB_General
 
 	.align 2
 
@@ -20,7 +20,7 @@ gTileset_Petalburg: ; 8286D0C
 	.4byte gTilesetPalettes_Petalburg
 	.4byte gMetatiles_Petalburg
 	.4byte gMetatileAttributes_Petalburg
-	.4byte sub_8073110
+	.4byte TilesetCB_Petalburg
 
 	.align 2
 
@@ -32,7 +32,7 @@ gTileset_Rustboro: ; 8286D24
 	.4byte gTilesetPalettes_Rustboro
 	.4byte gMetatiles_Rustboro
 	.4byte gMetatileAttributes_Rustboro
-	.4byte sub_8073138
+	.4byte TilesetCB_Rustboro
 
 	.align 2
 
@@ -44,7 +44,7 @@ gTileset_Dewford: ; 8286D3C
 	.4byte gTilesetPalettes_Dewford
 	.4byte gMetatiles_Dewford
 	.4byte gMetatileAttributes_Dewford
-	.4byte sub_8073164
+	.4byte TilesetCB_Dewford
 
 	.align 2
 
@@ -56,7 +56,7 @@ gTileset_Slateport: ; 8286D54
 	.4byte gTilesetPalettes_Slateport
 	.4byte gMetatiles_Slateport
 	.4byte gMetatileAttributes_Slateport
-	.4byte sub_807318C
+	.4byte TilesetCB_Slateport
 
 	.align 2
 
@@ -68,7 +68,7 @@ gTileset_Mauville: ; 8286D6C
 	.4byte gTilesetPalettes_Mauville
 	.4byte gMetatiles_Mauville
 	.4byte gMetatileAttributes_Mauville
-	.4byte sub_80731B4
+	.4byte TilesetCB_Mauville
 
 	.align 2
 
@@ -80,7 +80,7 @@ gTileset_Lavaridge: ; 8286D84
 	.4byte gTilesetPalettes_Lavaridge
 	.4byte gMetatiles_Lavaridge
 	.4byte gMetatileAttributes_Lavaridge
-	.4byte sub_80731E4
+	.4byte TilesetCB_Lavaridge
 
 	.align 2
 
@@ -92,7 +92,7 @@ gTileset_Fallarbor: ; 8286D9C
 	.4byte gTilesetPalettes_Fallarbor
 	.4byte gMetatiles_Fallarbor
 	.4byte gMetatileAttributes_Fallarbor
-	.4byte sub_8073210
+	.4byte TilesetCB_Fallarbor
 
 	.align 2
 
@@ -104,7 +104,7 @@ gTileset_Fortree: ; 8286DB4
 	.4byte gTilesetPalettes_Fortree
 	.4byte gMetatiles_Fortree
 	.4byte gMetatileAttributes_Fortree
-	.4byte sub_8073238
+	.4byte TilesetCB_Fortree
 
 	.align 2
 
@@ -116,7 +116,7 @@ gTileset_Lilycove: ; 8286DCC
 	.4byte gTilesetPalettes_Lilycove
 	.4byte gMetatiles_Lilycove
 	.4byte gMetatileAttributes_Lilycove
-	.4byte sub_8073260
+	.4byte TilesetCB_Lilycove
 
 	.align 2
 
@@ -128,7 +128,7 @@ gTileset_Mossdeep: ; 8286DE4
 	.4byte gTilesetPalettes_Mossdeep
 	.4byte gMetatiles_Mossdeep
 	.4byte gMetatileAttributes_Mossdeep
-	.4byte sub_8073288
+	.4byte TilesetCB_Mossdeep
 
 	.align 2
 
@@ -140,7 +140,7 @@ gTileset_EverGrande: ; 8286DFC
 	.4byte gTilesetPalettes_EverGrande
 	.4byte gMetatiles_EverGrande
 	.4byte gMetatileAttributes_EverGrande
-	.4byte sub_80732B0
+	.4byte TilesetCB_EverGrande
 
 	.align 2
 
@@ -152,7 +152,7 @@ gTileset_Pacifidlog: ; 8286E14
 	.4byte gTilesetPalettes_Pacifidlog
 	.4byte gMetatiles_Pacifidlog
 	.4byte gMetatileAttributes_Pacifidlog
-	.4byte sub_80732DC
+	.4byte TilesetCB_Pacifidlog
 
 	.align 2
 
@@ -164,7 +164,7 @@ gTileset_Sootopolis: ; 8286E2C
 	.4byte gTilesetPalettes_Sootopolis
 	.4byte gMetatiles_Sootopolis
 	.4byte gMetatileAttributes_Sootopolis
-	.4byte sub_807330C
+	.4byte TilesetCB_Sootopolis
 
 	.align 2
 
@@ -176,7 +176,7 @@ gTileset_Building: ; 8286E44
 	.4byte gTilesetPalettes_Building
 	.4byte gMetatiles_Building
 	.4byte gMetatileAttributes_Building
-	.4byte sub_8072FEC
+	.4byte TilesetCB_Building
 
 	.align 2
 
@@ -212,7 +212,7 @@ gTileset_Cave: ; 8286E8C
 	.4byte gTilesetPalettes_Cave
 	.4byte gMetatiles_Cave
 	.4byte gMetatileAttributes_Cave
-	.4byte sub_807337C
+	.4byte TilesetCB_Cave
 
 	.align 2
 
@@ -344,7 +344,7 @@ gTileset_BikeShop: ; 8286F94
 	.4byte gTilesetPalettes_BikeShop
 	.4byte gMetatiles_BikeShop
 	.4byte gMetatileAttributes_BikeShop
-	.4byte sub_80733F8
+	.4byte TilesetCB_BikeShop
 
 	.align 2
 
@@ -512,7 +512,7 @@ gTileset_Underwater: ; 82870E4
 	.4byte gTilesetPalettes_Underwater
 	.4byte gMetatiles_Underwater
 	.4byte gMetatileAttributes_Underwater
-	.4byte sub_8073334
+	.4byte TilesetCB_Underwater
 
 	.align 2
 
@@ -536,7 +536,7 @@ gTileset_SootopolisGym: ; 8287114
 	.4byte gTilesetPalettes_SootopolisGym
 	.4byte gMetatiles_SootopolisGym
 	.4byte gMetatileAttributes_SootopolisGym
-	.4byte sub_8073358
+	.4byte TilesetCB_SootopolisGym
 
 	.align 2
 
@@ -596,7 +596,7 @@ gTileset_MauvilleGym: ; 828718C
 	.4byte gTilesetPalettes_MauvilleGym
 	.4byte gMetatiles_MauvilleGym
 	.4byte gMetatileAttributes_MauvilleGym
-	.4byte sub_80733CC
+	.4byte TilesetCB_MauvilleGym
 
 	.align 2
 
@@ -680,7 +680,7 @@ gTileset_EliteFour: ; 8287234
 	.4byte gTilesetPalettes_EliteFour
 	.4byte gMetatiles_EliteFour
 	.4byte gMetatileAttributes_EliteFour
-	.4byte sub_80733A8
+	.4byte TilesetCB_EliteFour
 
 	.align 2
 

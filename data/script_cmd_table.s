@@ -1,7 +1,7 @@
 	.align 2
 
 gScriptCmdTable: ; 814AE30
-	.4byte sub_806586C
+	.4byte s00_nop
 	.4byte sub_8065870
 	.4byte s02_end
 	.4byte s03_return
@@ -200,4 +200,4 @@ gScriptCmdTable: ; 814AE30
 	.4byte sC4_unknown
 	.4byte sub_8067BFC
 gScriptCmdTableEnd:
-	.4byte sub_806586C
+	.4byte s00_nop
