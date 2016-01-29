@@ -15,3 +15,4 @@
 	.include "constants/berry_constants.s"
 	.include "constants/field_object_constants.s"
 	.include "constants/battle_tower_constants.s"
+	.include "constants/opponent_constants.s"
