@@ -267,13 +267,13 @@
 	; unknown (0xFD, 0x05)
 	.charmap_const RIVAL,              0xFD, 0x06
 ; version-dependent strings
-	.charmap_const VERSION,            0xFD, 0x07 ; "RUBY" / "SAPPHIRE"
-	.charmap_const EVIL_TEAM,          0xFD, 0x08 ; "MAGMA" / "AQUA"
-	.charmap_const GOOD_TEAM,          0xFD, 0x09 ; "AQUA" / "MAGMA"
-	.charmap_const EVIL_TEAM_LEADER,   0xFD, 0x0A ; "MAXIE" / "ARCHIE"
-	.charmap_const GOOD_TEAM_LEADER,   0xFD, 0x0B ; "ARCHIE" / "MAXIE"
+	.charmap_const VERSION,            0xFD, 0x07 ; "RUBY"    / "SAPPHIRE"
+	.charmap_const EVIL_TEAM,          0xFD, 0x08 ; "MAGMA"   / "AQUA"
+	.charmap_const GOOD_TEAM,          0xFD, 0x09 ; "AQUA"    / "MAGMA"
+	.charmap_const EVIL_TEAM_LEADER,   0xFD, 0x0A ; "MAXIE"   / "ARCHIE"
+	.charmap_const GOOD_TEAM_LEADER,   0xFD, 0x0B ; "ARCHIE"  / "MAXIE"
 	.charmap_const CUR_VERSION_MASCOT, 0xFD, 0x0C ; "GROUDON" / "KYOGRE"
-	.charmap_const OPP_VERSION_MASCOT, 0xFD, 0x0D ; "KYOGRE" / "GROUDON"
+	.charmap_const OPP_VERSION_MASCOT, 0xFD, 0x0D ; "KYOGRE"  / "GROUDON"
 
 	.charmap_escape 'l', 0xFA ; scroll up window text
 	.charmap_escape 'p', 0xFB ; new paragraph
