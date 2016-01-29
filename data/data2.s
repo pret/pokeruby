@@ -2893,8 +2893,8 @@ gUnknown_083C1D74: ; 83C1D74
 gUnknown_083C1E04: ; 83C1E04
 	.incbin "baserom.gba", 0x003c1e04, 0x18
 
-gUnknown_083C1E1C: ; 83C1E1C
-	.incbin "baserom.gba", 0x003c1e1c, 0x158
+; 83C1E1C
+	.include "data/graphics/berries/graphics_table.s"
 
 gUnknown_083C1F74: ; 83C1F74
 	.incbin "baserom.gba", 0x003c1f74, 0x8
@@ -8316,7 +8316,13 @@ gUnknown_08E788E4: ; 8E788E4
 	.incbin "baserom.gba", 0x00e788e4, 0x1a0
 
 gUnknown_08E78A84: ; 8E78A84
-	.incbin "baserom.gba", 0x00e78a84, 0x6118
+	.incbin "baserom.gba", 0x00e78a84, 0x27c
+
+; 8E78D00
+	.include "data/graphics/berries/graphics.s"
+
+; 8E7E7D0
+	.incbin "baserom.gba", 0xE7E7D0, 0x3CC
 
 gUnknown_08E7EB9C: ; 8E7EB9C
 	.incbin "baserom.gba", 0x00e7eb9c, 0xa0
