@@ -1188,7 +1188,16 @@ gUnknown_082166AC: ; 82166AC
 	.incbin "baserom.gba", 0x002166ac, 0x2c
 
 gUnknown_082166D8: ; 82166D8
-	.incbin "baserom.gba", 0x002166d8, 0xee840
+	.incbin "baserom.gba", 0x002166d8, 0x8
+
+; 82166E0
+	.include "data/tilesets/graphics.s"
+
+; 8259C1C
+	.include "data/tilesets/metatiles.s"
+
+; 8286CF4
+	.incbin "baserom.gba", 0x286CF4, 0x7E224
 
 gUnknown_08304F18: ; 8304F18
 	.incbin "baserom.gba", 0x00304f18, 0x3670
@@ -8491,7 +8500,32 @@ gUnknown_08E8F844: ; 8E8F844
 	.incbin "baserom.gba", 0x00e8f844, 0xbb4
 
 gUnknown_08E903F8: ; 8E903F8
-	.incbin "baserom.gba", 0x00e903f8, 0x4118
+	.incbin "baserom.gba", 0x00e903f8, 0x1D20
+
+	.align 2
+
+gTilesetTiles_General: ; 8E92118
+	.incbin "data/tilesets/primary/general/tiles.4bpp.lz"
+
+	.align 2
+
+gTilesetPalettes_General: ; 8E94310
+	.incbin "data/tilesets/primary/general/palettes/00.gbapal"
+	.incbin "data/tilesets/primary/general/palettes/01.gbapal"
+	.incbin "data/tilesets/primary/general/palettes/02.gbapal"
+	.incbin "data/tilesets/primary/general/palettes/03.gbapal"
+	.incbin "data/tilesets/primary/general/palettes/04.gbapal"
+	.incbin "data/tilesets/primary/general/palettes/05.gbapal"
+	.incbin "data/tilesets/primary/general/palettes/06.gbapal"
+	.incbin "data/tilesets/primary/general/palettes/07.gbapal"
+	.incbin "data/tilesets/primary/general/palettes/08.gbapal"
+	.incbin "data/tilesets/primary/general/palettes/09.gbapal"
+	.incbin "data/tilesets/primary/general/palettes/10.gbapal"
+	.incbin "data/tilesets/primary/general/palettes/11.gbapal"
+	.incbin "data/tilesets/primary/general/palettes/12.gbapal"
+	.incbin "data/tilesets/primary/general/palettes/13.gbapal"
+	.incbin "data/tilesets/primary/general/palettes/14.gbapal"
+	.incbin "data/tilesets/primary/general/palettes/15.gbapal"
 
 gUnknown_08E94510: ; 8E94510
 	.incbin "baserom.gba", 0x00e94510, 0x40

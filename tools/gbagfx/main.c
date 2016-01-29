@@ -228,13 +228,44 @@ void HandlePngToFullwidthJapaneseFontCommand(char *inputPath, char *outputPath, 
 	FreeImage(&image);
 }
 
-void HandleLZCompressCommand(char *inputPath, char *outputPath, int argc UNUSED, char **argv UNUSED)
+void HandleLZCompressCommand(char *inputPath, char *outputPath, int argc, char **argv)
 {
+	int overflowSize = 0;
+
+	for (int i = 3; i < argc; i++) {
+		char *option = argv[i];
+
+		if (strcmp(option, "-overflow") == 0) {
+			if (i + 1 >= argc)
+				FATAL_ERROR("No size following \"-overflow\".\n");
+
+			i++;
+
+			if (!ParseNumber(argv[i], NULL, 10, &overflowSize))
+				FATAL_ERROR("Failed to parse overflow size.\n");
+
+			if (overflowSize < 1)
+				FATAL_ERROR("Overflow size must be positive.\n");
+		} else {
+			FATAL_ERROR("Unrecognized option \"%s\".\n", option);
+		}
+	}
+
+	// The overflow option allows a quirk in some of Ruby/Sapphire's tilesets
+	// to be reproduced. It works by appending a number of zeros to the data
+	// before compressing it and then amending the LZ header's size field to
+	// reflect the expected size. This will cause an overflow when decompressing
+	// the data.
+
 	int fileSize;
-	unsigned char *buffer = ReadWholeFile(inputPath, &fileSize);
+	unsigned char *buffer = ReadWholeFileZeroPadded(inputPath, &fileSize, overflowSize);
 
 	int compressedSize;
-	unsigned char *compressedData = LZCompress(buffer, fileSize, &compressedSize);
+	unsigned char *compressedData = LZCompress(buffer, fileSize + overflowSize, &compressedSize);
+
+	compressedData[1] = (unsigned char)fileSize;
+	compressedData[2] = (unsigned char)(fileSize >> 8);
+	compressedData[3] = (unsigned char)(fileSize >> 16);
 
 	free(buffer);
 
@@ -297,7 +328,7 @@ int main(int argc, char **argv)
 
 	for (int i = 0; handlers[i].function != NULL; i++) {
 		if ((handlers[i].inputFileExtension == NULL || strcmp(handlers[i].inputFileExtension, inputFileExtension) == 0)
-			&& (handlers[i].outputFileExtension == NULL || strcmp(handlers[i].outputFileExtension, outputFileExtension) == 0)) {
+		 && (handlers[i].outputFileExtension == NULL || strcmp(handlers[i].outputFileExtension, outputFileExtension) == 0)) {
 			handlers[i].function(inputPath, outputPath, argc, argv);
 			return 0;
 		}

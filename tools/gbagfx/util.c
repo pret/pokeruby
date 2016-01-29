@@ -84,6 +84,32 @@ unsigned char *ReadWholeFile(char *path, int *size)
 	return buffer;
 }
 
+unsigned char *ReadWholeFileZeroPadded(char *path, int *size, int padAmount)
+{
+	FILE *fp = fopen(path, "rb");
+
+	if (fp == NULL)
+		FATAL_ERROR("Failed to open \"%s\" for reading.\n", path);
+
+	fseek(fp, 0, SEEK_END);
+
+	*size = ftell(fp);
+
+	unsigned char *buffer = calloc(*size + padAmount, 1);
+
+	if (buffer == NULL)
+		FATAL_ERROR("Failed to allocate memory for reading \"%s\".\n", path);
+
+	rewind(fp);
+
+	if (fread(buffer, *size, 1, fp) != 1)
+		FATAL_ERROR("Failed to read \"%s\".\n", path);
+
+	fclose(fp);
+
+	return buffer;
+}
+
 void WriteWholeFile(char *path, void *buffer, int bufferSize)
 {
 	FILE *fp = fopen(path, "wb");

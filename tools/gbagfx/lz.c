@@ -8,28 +8,28 @@
 unsigned char *LZDecompress(unsigned char *src, int srcSize, int *uncompressedSize)
 {
 	if (srcSize < 4)
-		return NULL;
+		goto fail;
 
 	int destSize = (src[3] << 16) | (src[2] << 8) | src[1];
 
 	unsigned char *dest = malloc(destSize);
 
 	if (dest == NULL)
-		return NULL;
+		goto fail;
 
 	int srcPos = 4;
 	int destPos = 0;
 
 	for (;;) {
 		if (srcPos >= srcSize)
-			return NULL;
+			goto fail;
 
 		unsigned char flags = src[srcPos++];
 
 		for (int i = 0; i < 8; i++) {
 			if (flags & 0x80) {
 				if (srcPos + 1 >= srcSize)
-					return NULL;
+					goto fail;
 
 				int blockSize = (src[srcPos] >> 4) + 3;
 				int blockDistance = (((src[srcPos] & 0xF) << 8) | src[srcPos + 1]) + 1;
@@ -38,14 +38,20 @@ unsigned char *LZDecompress(unsigned char *src, int srcSize, int *uncompressedSi
 
 				int blockPos = destPos - blockDistance;
 
-				if (destPos + blockSize > destSize || blockPos < 0)
-					return NULL;
+				// Some Ruby/Sapphire tilesets overflow.
+				if (destPos + blockSize > destSize) {
+					blockSize = destSize - destPos;
+					fprintf(stderr, "Destination buffer overflow.\n");
+				}
+
+				if (blockPos < 0)
+					goto fail;
 
 				for (int j = 0; j < blockSize; j++)
 					dest[destPos++] = dest[blockPos + j];
 			} else {
 				if (srcPos >= srcSize || destPos >= destSize)
-					return NULL;
+					goto fail;
 
 				dest[destPos++] = src[srcPos++];
 			}
@@ -58,6 +64,9 @@ unsigned char *LZDecompress(unsigned char *src, int srcSize, int *uncompressedSi
 			flags <<= 1;
 		}
 	}
+
+fail:
+	FATAL_ERROR("Fatal error while decompressing LZ file.\n");
 }
 
 unsigned char *LZCompress(unsigned char *src, int srcSize, int *compressedSize)
@@ -65,7 +74,7 @@ unsigned char *LZCompress(unsigned char *src, int srcSize, int *compressedSize)
 	const int minDistance = 2; // for compatibility with LZ77UnCompVram()
 
 	if (srcSize <= 0)
-		return NULL;
+		goto fail;
 
 	int worstCaseDestSize = 4 + srcSize + ((srcSize + 7) / 8);
 
@@ -75,7 +84,7 @@ unsigned char *LZCompress(unsigned char *src, int srcSize, int *compressedSize)
 	unsigned char *dest = malloc(worstCaseDestSize);
 
 	if (dest == NULL)
-		return NULL;
+		goto fail;
 
 	// header
 	dest[0] = 0x10; // LZ compression type
@@ -140,4 +149,7 @@ unsigned char *LZCompress(unsigned char *src, int srcSize, int *compressedSize)
 			}
 		}
 	}
+
+fail:
+	FATAL_ERROR("Fatal error while compressing LZ file.\n");
 }

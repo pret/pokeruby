@@ -49,7 +49,8 @@ clean:
 	$(RM) genasm/*
 	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.latfont' -o -iname '*.hwjpnfont' -o -iname '*.fwjpnfont' \) -exec rm {} +
 
-include graphics_file_rules.mk
+include castform.mk
+include tilesets.mk
 
 %.png: ;
 %.pal: ;
