@@ -13,7 +13,7 @@
 	.4byte gMapName_\name
 	.endm
 
-	.macro obj_tiles address, uncompressed_size, tag = 0
+	.macro obj_tiles address, uncompressed_size, tag
 	.4byte \address
 	.2byte \uncompressed_size
 	.2byte \tag
@@ -23,6 +23,13 @@
 	.4byte \address
 	.2byte \tag
 	.2byte 0; padding
+	.endm
+
+; For object animation frames.
+	.macro obj_frame_tiles address, uncompressed_size
+	.4byte \address
+	.2byte \uncompressed_size
+	.2byte 0 ; padding
 	.endm
 
 	.macro zero_fill count
@@ -36,10 +43,11 @@
 	.byte 3, 4, \slot, \slot, \slot
 	.endm
 
-	.macro sprite_oam x, y, priority, tile_num_offset, size
-	.byte \x
-	.byte \y
+	.macro subsprite x, y, priority, tile_num_offset, size
+	.2byte \x
+	.2byte \y
 	.2byte ((\priority) << 14) | ((\tile_num_offset) << 4) | SPRITE_SIZE_\size
+	.2byte 0 ; padding
 	.endm
 
 	.macro obj_image_anim_frame pic_id, duration, flags = 0

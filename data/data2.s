@@ -47,14 +47,33 @@ gUnknown_081E2899: ; 81E2899
 gUnknown_081E28B4: ; 81E28B4
 	.incbin "baserom.gba", 0x001e28b4, 0x44
 
-gUnknown_081E28F8: ; 81E28F8
-	.incbin "baserom.gba", 0x001e28f8, 0xc
+	.align 2
 
-gUnknown_081E2904: ; 81E2904
-	.incbin "baserom.gba", 0x001e2904, 0xc
+; off-screen and low priority relative to background
+gDummyBaseOam: ; 81E28F8
+	.2byte 160 ; Y
+	.2byte 304 ; X
+	.2byte 3 << 10 ; priority
 
-gUnknown_081E2910: ; 81E2910
-	.incbin "baserom.gba", 0x001e2910, 0x4
+	.align 2
+
+gDummyObjectImageAnim: ; 81E2900
+	obj_image_anim_end
+
+	.align 2
+
+gDummyObjectImageAnimTable: ; 81E2904
+	.4byte gDummyObjectImageAnim
+
+	.align 2
+
+gDummyObjectRotScalAnim: ; 81E2908
+	obj_rot_scal_anim_end
+
+	.align 2
+
+gDummyObjectRotScalAnimTable: ; 81E2910
+	.4byte gDummyObjectRotScalAnim
 
 gUnknown_081E2914: ; 81E2914
 	.incbin "baserom.gba", 0x001e2914, 0x18
@@ -1293,13 +1312,13 @@ gUnknown_0830FD24: ; 830FD24
 	.incbin "baserom.gba", 0x0030fd24, 0x18
 
 gUnknown_0830FD3C: ; 830FD3C
-	.incbin "baserom.gba", 0x0030fd3c, 0x5aba8
+	.incbin "baserom.gba", 0x0030fd3c, 0xc
 
-gUnknown_0836A8E4: ; 836A8E4
-	.incbin "baserom.gba", 0x0036a8e4, 0x908
+; 830FD48
+	.include "data/graphics/field_objects/map_object_graphics.s"
 
-gUnknown_0836B1EC: ; 836B1EC
-	.incbin "baserom.gba", 0x0036b1ec, 0x289c
+; 8368528
+	.include "data/graphics/field_objects/field_effect_object_graphics.s"
 
 gUnknown_0836DA88: ; 836DA88
 	.incbin "baserom.gba", 0x0036da88, 0x134
@@ -1310,11 +1329,26 @@ gUnknown_0836DBBC: ; 836DBBC
 gUnknown_0836DC09: ; 836DC09
 	.incbin "baserom.gba", 0x0036dc09, 0x4f
 
-gUnknown_0836DC58: ; 836DC58
-	.incbin "baserom.gba", 0x0036dc58, 0x368
+; 836DC58
+	.include "data/graphics/field_objects/map_object_graphics_info_pointers.s"
 
-gUnknown_0836DFC0: ; 836DFC0
-	.incbin "baserom.gba", 0x0036dfc0, 0x57bc
+; 836DFC0
+	.include "data/graphics/field_objects/field_effect_object_template_pointers.s"
+
+; 836E050
+	.include "data/graphics/field_objects/map_object_pic_tables.s"
+
+; 83708C8
+	.include "data/graphics/field_objects/map_object_anims.s"
+
+; 83711C4
+	.include "data/graphics/field_objects/base_oam.s"
+
+; 8371204
+	.include "data/graphics/field_objects/map_object_subsprites.s"
+
+; 83718D4
+	.include "data/graphics/field_objects/map_object_graphics_info.s"
 
 gUnknown_0837377C: ; 837377C
 	.incbin "baserom.gba", 0x0037377c, 0xf8
@@ -1326,16 +1360,13 @@ gUnknown_083738E4: ; 83738E4
 	.incbin "baserom.gba", 0x003738e4, 0xb8
 
 gUnknown_0837399C: ; 837399C
-	.incbin "baserom.gba", 0x0037399c, 0x978
+	.incbin "baserom.gba", 0x0037399c, 0x10
 
-gUnknown_08374314: ; 8374314
-	.incbin "baserom.gba", 0x00374314, 0xac
+; 83739AC
+	.include "data/graphics/field_objects/berry_tree_graphics_tables.s"
 
-gUnknown_083743C0: ; 83743C0
-	.incbin "baserom.gba", 0x003743c0, 0xac
-
-gUnknown_0837446C: ; 837446C
-	.incbin "baserom.gba", 0x0037446c, 0xda0
+; 8374524
+	.include "data/graphics/field_objects/field_effect_objects.s"
 
 gUnknown_0837520C: ; 837520C
 	.incbin "baserom.gba", 0x0037520c, 0x10
@@ -2036,26 +2067,11 @@ gUnknown_0837DEE4: ; 837DEE4
 gUnknown_0837DEF4: ; 837DEF4
 	.incbin "baserom.gba", 0x0037def4, 0x270
 
-gUnknown_0837E164: ; 837E164
-	.incbin "baserom.gba", 0x0037e164, 0x440
+gBattleAnimPicTable: ; 837E164
+	.incbin "baserom.gba", 0x0037e164, 0x908
 
-gUnknown_0837E5A4: ; 837E5A4
-	.incbin "baserom.gba", 0x0037e5a4, 0x308
-
-gUnknown_0837E8AC: ; 837E8AC
-	.incbin "baserom.gba", 0x0037e8ac, 0x120
-
-gUnknown_0837E9CC: ; 837E9CC
-	.incbin "baserom.gba", 0x0037e9cc, 0x4e0
-
-gUnknown_0837EEAC: ; 837EEAC
-	.incbin "baserom.gba", 0x0037eeac, 0x308
-
-gUnknown_0837F1B4: ; 837F1B4
-	.incbin "baserom.gba", 0x0037f1b4, 0x120
-
-gUnknown_0837F2D4: ; 837F2D4
-	.incbin "baserom.gba", 0x0037f2d4, 0xa0
+gBattleAnimPaletteTable: ; 837EA6C
+	.incbin "baserom.gba", 0x37EA6C, 0x908
 
 gUnknown_0837F374: ; 837F374
 	.incbin "baserom.gba", 0x0037f374, 0x144
@@ -2307,7 +2323,19 @@ gUnknown_0839DBFC: ; 839DBFC
 	.incbin "baserom.gba", 0x0039dbfc, 0x4
 
 gUnknown_0839DC00: ; 839DC00
-	.incbin "baserom.gba", 0x0039dc00, 0xd14
+	.incbin "baserom.gba", 0x0039dc00, 0x854
+
+	.align 2
+
+gFieldEffectObjectPalette4: ; 839E454
+	.incbin "graphics/field_effect_objects/palettes/04.gbapal"
+
+	.incbin "baserom.gba", 0x39e474, 0x480
+
+	.align 2
+
+gFieldEffectObjectPalette5: ; 839E8F4
+	.incbin "graphics/field_effect_objects/palettes/05.gbapal"
 
 gUnknown_0839E914: ; 839E914
 	.incbin "baserom.gba", 0x0039e914, 0x200
@@ -2337,7 +2365,19 @@ gUnknown_0839F114: ; 839F114
 	.incbin "baserom.gba", 0x0039f114, 0x14
 
 gUnknown_0839F128: ; 839F128
-	.incbin "baserom.gba", 0x0039f128, 0x78
+	.incbin "baserom.gba", 0x0039f128, 0x18
+
+	.align 2
+
+gFieldEffectObjectPaletteInfo4: ; 839F140
+	obj_pal gFieldEffectObjectPalette4, 0x1007
+
+	.align 2
+
+gFieldEffectObjectPaletteInfo5: ; 839F148
+	obj_pal gFieldEffectObjectPalette5, 0x1010
+
+	.incbin "baserom.gba", 0x39F150, 0x50
 
 gUnknown_0839F1A0: ; 839F1A0
 	.incbin "baserom.gba", 0x0039f1a0, 0x28
@@ -2826,7 +2866,12 @@ gUnknown_083C15B4: ; 83C15B4
 	.incbin "baserom.gba", 0x003c15b4, 0x8
 
 gUnknown_083C15BC: ; 83C15BC
-	.incbin "baserom.gba", 0x003c15bc, 0x44
+	.incbin "baserom.gba", 0x003c15bc, 0x3C
+
+	.align 2
+
+gFieldEffectObjectPaletteInfo6: ; 83C15F8
+	obj_pal gFieldEffectObjectPalette6, 0x1000
 
 gUnknown_083C1600: ; 83C1600
 	.incbin "baserom.gba", 0x003c1600, 0x18
@@ -3648,7 +3693,21 @@ gUnknown_083D18A8: ; 83D18A8
 	.incbin "baserom.gba", 0x003d18a8, 0x18
 
 gUnknown_083D18C0: ; 83D18C0
-	.incbin "baserom.gba", 0x003d18c0, 0xd54
+	.incbin "baserom.gba", 0x003d18c0, 0x36C
+
+	.align 2
+
+gFieldEffectObjectPalette7: ; 83D1C2C
+	.incbin "graphics/field_effect_objects/palettes/07.gbapal"
+
+	.incbin "baserom.gba", 0x3d1c4c, 0x580
+
+	.align 2
+
+gFieldEffectObjectPalette8: ; 83D21CC
+	.incbin "graphics/field_effect_objects/palettes/08.gbapal"
+
+	.incbin "baserom.gba", 0x3d21ec, 0x428
 
 gUnknown_083D2614: ; 83D2614
 	.incbin "baserom.gba", 0x003d2614, 0x18
@@ -3657,16 +3716,46 @@ gUnknown_083D262C: ; 83D262C
 	.incbin "baserom.gba", 0x003d262c, 0x18
 
 gUnknown_083D2644: ; 83D2644
-	.incbin "baserom.gba", 0x003d2644, 0x5c
+	.incbin "baserom.gba", 0x003d2644, 0x18
+
+	.align 2
+
+gFieldEffectObjectPaletteInfo7: ; 83D265C
+	obj_pal gFieldEffectObjectPalette7, 0x1003
+
+	.align 2
+
+gFieldEffectObjectPaletteInfo8: ; 83D2664
+	obj_pal gFieldEffectObjectPalette8, 0x1008
+
+	.incbin "baserom.gba", 0x3d266c, 0x34
 
 gUnknown_083D26A0: ; 83D26A0
-	.incbin "baserom.gba", 0x003d26a0, 0x1d8
+	.incbin "baserom.gba", 0x003d26a0, 0x18
+
+	.align 2
+
+; This uses one of the secret base palettes, so there is no "09.pal" file.
+gFieldEffectObjectPaletteInfo9: ; 83D26B8
+	obj_pal gTilesetPalettes_SecretBase + 5 * 0x20, 0x100E
+
+	.incbin "baserom.gba", 0x3d26c0, 0x1b8
 
 gUnknown_083D2878: ; 83D2878
 	.incbin "baserom.gba", 0x003d2878, 0x1c
 
 gUnknown_083D2894: ; 83D2894
-	.incbin "baserom.gba", 0x003d2894, 0xb8
+	.incbin "baserom.gba", 0x003d2894, 0x18
+
+	.align 2
+
+gMapObjectPic_MovingBox: ; 83D28AC
+	.incbin "graphics/map_objects/pics/misc/moving_box.4bpp"
+
+	.align 2
+
+gMapObjectPalette19: ; 83D292C
+	.incbin "graphics/map_objects/palettes/19.gbapal"
 
 gUnknown_083D294C: ; 83D294C
 	.incbin "baserom.gba", 0x003d294c, 0x13
@@ -5303,8 +5392,17 @@ gUnknown_083FD948: ; 83FD948
 gUnknown_083FD98C: ; 83FD98C
 	.incbin "baserom.gba", 0x003fd98c, 0x6c
 
-gUnknown_083FD9F8: ; 83FD9F8
-	.incbin "baserom.gba", 0x003fd9f8, 0x108
+	.align 2
+
+gFieldEffectObjectPalette10: ; 83FD9F8
+	.incbin "graphics/field_effect_objects/palettes/10.gbapal"
+
+	.align 2
+
+gFieldEffectObjectPaletteInfo10: ; 83FDA18
+	obj_pal gFieldEffectObjectPalette10, 0x1009
+
+	.incbin "baserom.gba", 0x3FDA20, 0xE0
 
 gUnknown_083FDB00: ; 83FDB00
 	.incbin "baserom.gba", 0x003fdb00, 0x14

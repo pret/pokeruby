@@ -990,8 +990,10 @@ gUnknown_081D9B29: ; 81D9B29
 gUnknown_081D9B2D: ; 81D9B2D
 	.incbin "baserom.gba", 0x001d9b2d, 0x7
 
-gUnknown_081D9B34: ; 81D9B34
-	.incbin "baserom.gba", 0x001d9b34, 0x314
+; 81D9B34
+	.include "data/field_effect_scripts.s"
+
+	.align 2
 
 gUnknown_081D9E48: ; 81D9E48
 	.incbin "baserom.gba", 0x001d9e48, 0x34
