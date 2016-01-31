@@ -44,17 +44,17 @@ void PlayTimeCounter_Update()
         {
             gSaveBlock2.playTimeVBlanks = 0;
             gSaveBlock2.playTimeSeconds++;
-            
+
             if (gSaveBlock2.playTimeSeconds > 59)
             {
                 gSaveBlock2.playTimeSeconds = 0;
                 gSaveBlock2.playTimeMinutes++;
-                
+
                 if (gSaveBlock2.playTimeMinutes > 59)
                 {
                     gSaveBlock2.playTimeMinutes = 0;
                     gSaveBlock2.playTimeHours++;
-                    
+
                     if (gSaveBlock2.playTimeHours > 999)
                         PlayTimeCounter_SetToMax();
                 }
@@ -66,6 +66,7 @@ void PlayTimeCounter_Update()
 void PlayTimeCounter_SetToMax()
 {
     gPlayTimeCounterState = MAXED_OUT;
+
     gSaveBlock2.playTimeHours = 999;
     gSaveBlock2.playTimeMinutes = 59;
     gSaveBlock2.playTimeSeconds = 59;
