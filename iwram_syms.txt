@@ -1,0 +1,1 @@
+gUnknownStringVar = 0x3002900;

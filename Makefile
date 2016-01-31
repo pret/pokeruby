@@ -65,9 +65,11 @@ $(OBJS): $(CSRCS:src/%.c=genasm/%.s)
 # TODO: fix this .syntax hack
 
 genasm/prefix.tmp:
+	mkdir -p genasm
 	echo -e "\t.syntax divided" >$@
 
 genasm/suffix.tmp:
+	mkdir -p genasm
 	echo -e "\t.syntax unified" >$@
 
 genasm/%.s: src/%.c genasm/prefix.tmp genasm/suffix.tmp
@@ -82,5 +84,5 @@ genasm/%.s: src/%.c genasm/prefix.tmp genasm/suffix.tmp
 
 # Link objects to produce the ROM.
 $(ROM): $(OBJS)
-	./pokeld -T ld_script.txt -T wram_syms.txt -o $(ELF) $(OBJS)
+	./pokeld -T ld_script.txt -T iwram_syms.txt -T ewram_syms.txt -o $(ELF) $(OBJS)
 	./pokeobjcopy -O binary $(ELF) $(ROM)

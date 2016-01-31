@@ -1,0 +1,5 @@
+gStringVar1 = 0x20231CC;
+gStringVar2 = 0x20232CC;
+gStringVar3 = 0x20233CC;
+
+gSaveBlock2 = 0x2024EA4;

@@ -348,20 +348,8 @@ gUnknown_081E7294: ; 81E7294
 gUnknown_081E72B0: ; 81E72B0
 	.incbin "baserom.gba", 0x001e72b0, 0x3
 
-gUnknown_081E72B3: ; 81E72B3
-	.incbin "baserom.gba", 0x001e72b3, 0x11
-
-gUnknown_081E72C4: ; 81E72C4
-	.incbin "baserom.gba", 0x001e72c4, 0x28
-
-gUnknown_081E72EC: ; 81E72EC
-	.incbin "baserom.gba", 0x001e72ec, 0x4
-
-gUnknown_081E72F0: ; 81E72F0
-	.incbin "baserom.gba", 0x001e72f0, 0x8
-
-gUnknown_081E72F8: ; 81E72F8
-	.incbin "baserom.gba", 0x001e72f8, 0x38
+; 81E72B3
+	.include "data/string_util.s"
 
 gUnknown_081E7330: ; 81E7330
 	.incbin "baserom.gba", 0x001e7330, 0x20
@@ -6253,41 +6241,44 @@ gUnknown_0840CB4C: ; 840CB4C
 gUnknown_0840D288: ; 840D288
 	.incbin "baserom.gba", 0x0040d288, 0x9f8
 
-gUnknown_0840DC80: ; 840DC80
-	.incbin "baserom.gba", 0x0040dc80, 0x1
+gExpandedPlaceholder_Empty: ; 840DC80
+	.string "$"
 
-gUnknown_0840DC81: ; 840DC81
-	.incbin "baserom.gba", 0x0040dc81, 0x1
+gExpandedPlaceholder_MaleEmpty: ; 840DC81
+	.string "$"
 
-gUnknown_0840DC82: ; 840DC82
-	.incbin "baserom.gba", 0x0040dc82, 0xa
+gExpandedPlaceholder_FemaleEmpty: ; 840DC82
+	.string "$"
 
-gUnknown_0840DC8C: ; 840DC8C
-	.incbin "baserom.gba", 0x0040dc8c, 0x5
+gExpandedPlaceholder_Sapphire: ; 840DC83
+	.string "SAPPHIRE$"
 
-gUnknown_0840DC91: ; 840DC91
-	.incbin "baserom.gba", 0x0040dc91, 0x5
+gExpandedPlaceholder_Ruby: ; 840DC8C
+	.string "RUBY$"
 
-gUnknown_0840DC96: ; 840DC96
-	.incbin "baserom.gba", 0x0040dc96, 0x6
+gExpandedPlaceholder_Aqua: ; 840DC91
+	.string "AQUA$"
 
-gUnknown_0840DC9C: ; 840DC9C
-	.incbin "baserom.gba", 0x0040dc9c, 0x7
+gExpandedPlaceholder_Magma: ; 840DC96
+	.string "MAGMA$"
 
-gUnknown_0840DCA3: ; 840DCA3
-	.incbin "baserom.gba", 0x0040dca3, 0x6
+gExpandedPlaceholder_Archie: ; 840DC9C
+	.string "ARCHIE$"
 
-gUnknown_0840DCA9: ; 840DCA9
-	.incbin "baserom.gba", 0x0040dca9, 0x7
+gExpandedPlaceholder_Maxie: ; 840DCA3
+	.string "MAXIE$"
 
-gUnknown_0840DCB0: ; 840DCB0
-	.incbin "baserom.gba", 0x0040dcb0, 0x8
+gExpandedPlaceholder_Kyogre: ; 840DCA9
+	.string "KYOGRE$"
 
-gUnknown_0840DCB8: ; 840DCB8
-	.incbin "baserom.gba", 0x0040dcb8, 0x8
+gExpandedPlaceholder_Groudon: ; 840DCB0
+	.string "GROUDON$"
 
-gUnknown_0840DCC0: ; 840DCC0
-	.incbin "baserom.gba", 0x0040dcc0, 0x4
+gExpandedPlaceholder_Brendan: ; 840DCB8
+	.string "BRENDAN$"
+
+gExpandedPlaceholder_May: ; 840DCC0
+	.string "MAY$"
 
 gUnknown_0840DCC4: ; 840DCC4
 	.incbin "baserom.gba", 0x0040dcc4, 0x4
