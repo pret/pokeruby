@@ -1,4 +1,5 @@
 #include "global.h"
+#include "string_util.h"
 
 #define CHAR_SPACE         0x00
 #define CHAR_QUESTION_MARK 0xAC
@@ -8,14 +9,6 @@
 #define EOS                 0xFF // end of string
 
 #define MAX_PLACEHOLDER_ID 0xD
-
-#define MALE   0
-#define FEMALE 1
-
-struct SaveBlock2 {
-    u8 playerName[8];
-    u8 playerGender;
-};
 
 typedef u8 *(*ExpandPlaceholderFunc)();
 
@@ -40,16 +33,6 @@ extern u8 gExpandedPlaceholder_Brendan[];
 extern u8 gExpandedPlaceholder_May[];
 
 extern u8 gUnknownStringVar[];
-extern u8 gStringVar1[];
-extern u8 gStringVar2[];
-extern u8 gStringVar3[];
-extern struct SaveBlock2 gSaveBlock2;
-
-enum StringConvertMode {
-    STR_CONV_MODE_LEFT_ALIGN,
-    STR_CONV_MODE_RIGHT_ALIGN,
-    STR_CONV_MODE_LEADING_ZEROS
-};
 
 extern u8 GetExtCtrlCodeLength(u8 code);
 
@@ -492,7 +475,7 @@ u8 *ExpandPlaceholder_RivalName()
         return gExpandedPlaceholder_Brendan;
 }
 
-#define VERSION_DEPENDENT_PH_LIST          \
+#define VERSION_DEPENDENT_PLACEHOLDER_LIST \
     X(Version,          Ruby,    Sapphire) \
     X(EvilTeam,         Magma,   Aqua)     \
     X(GoodTeam,         Aqua,    Magma)    \
@@ -504,11 +487,11 @@ u8 *ExpandPlaceholder_RivalName()
 #ifdef SAPPHIRE
 #define X(ph, r, s) \
 u8 *ExpandPlaceholder_##ph() { return gExpandedPlaceholder_##s; }
-VERSION_DEPENDENT_PH_LIST
+VERSION_DEPENDENT_PLACEHOLDER_LIST
 #else
 #define X(ph, r, s) \
 u8 *ExpandPlaceholder_##ph() { return gExpandedPlaceholder_##r; }
-VERSION_DEPENDENT_PH_LIST
+VERSION_DEPENDENT_PLACEHOLDER_LIST
 #endif
 
 #undef X
@@ -554,7 +537,7 @@ u8 *StringCopyPadded(u8 *dest, u8 *src, u8 c, u16 n)
     return dest;
 }
 
-u8 *StringFillEOS(u8 *dest, u16 n)
+u8 *StringFillWithTerminator(u8 *dest, u16 n)
 {
     return StringFill(dest, EOS, n);
 }

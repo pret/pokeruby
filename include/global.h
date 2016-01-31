@@ -31,4 +31,22 @@ typedef u32 bool32;
 #include "gba/syscall.h"
 #include "gba/macro.h"
 
+extern u8 gStringVar1[];
+extern u8 gStringVar2[];
+extern u8 gStringVar3[];
+
+enum
+{
+    MALE,
+    FEMALE
+};
+
+struct SaveBlock2
+{
+    u8 playerName[8];
+    u8 playerGender;
+};
+
+extern struct SaveBlock2 gSaveBlock2;
+
 #endif // GUARD_GLOBAL_H
