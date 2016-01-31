@@ -4579,48 +4579,48 @@ gMapObjectPic_Boy5_2: ; 8350A28
 
 	.align 2
 
-gMapObjectPic_ContestOldMan_0: ; 8350B28
-	.incbin "graphics/map_objects/pics/people/contest_old_man/0.4bpp"
+gMapObjectPic_ContestJudge_0: ; 8350B28
+	.incbin "graphics/map_objects/pics/people/contest_judge/0.4bpp"
 
 	.align 2
 
-gMapObjectPic_ContestOldMan_1: ; 8350C28
-	.incbin "graphics/map_objects/pics/people/contest_old_man/1.4bpp"
+gMapObjectPic_ContestJudge_1: ; 8350C28
+	.incbin "graphics/map_objects/pics/people/contest_judge/1.4bpp"
 
 	.align 2
 
-gMapObjectPic_ContestOldMan_2: ; 8350D28
-	.incbin "graphics/map_objects/pics/people/contest_old_man/2.4bpp"
+gMapObjectPic_ContestJudge_2: ; 8350D28
+	.incbin "graphics/map_objects/pics/people/contest_judge/2.4bpp"
 
 	.align 2
 
-gMapObjectPic_ContestOldMan_3: ; 8350E28
-	.incbin "graphics/map_objects/pics/people/contest_old_man/3.4bpp"
+gMapObjectPic_ContestJudge_3: ; 8350E28
+	.incbin "graphics/map_objects/pics/people/contest_judge/3.4bpp"
 
 	.align 2
 
-gMapObjectPic_ContestOldMan_4: ; 8350F28
-	.incbin "graphics/map_objects/pics/people/contest_old_man/4.4bpp"
+gMapObjectPic_ContestJudge_4: ; 8350F28
+	.incbin "graphics/map_objects/pics/people/contest_judge/4.4bpp"
 
 	.align 2
 
-gMapObjectPic_ContestOldMan_5: ; 8351028
-	.incbin "graphics/map_objects/pics/people/contest_old_man/5.4bpp"
+gMapObjectPic_ContestJudge_5: ; 8351028
+	.incbin "graphics/map_objects/pics/people/contest_judge/5.4bpp"
 
 	.align 2
 
-gMapObjectPic_ContestOldMan_6: ; 8351128
-	.incbin "graphics/map_objects/pics/people/contest_old_man/6.4bpp"
+gMapObjectPic_ContestJudge_6: ; 8351128
+	.incbin "graphics/map_objects/pics/people/contest_judge/6.4bpp"
 
 	.align 2
 
-gMapObjectPic_ContestOldMan_7: ; 8351228
-	.incbin "graphics/map_objects/pics/people/contest_old_man/7.4bpp"
+gMapObjectPic_ContestJudge_7: ; 8351228
+	.incbin "graphics/map_objects/pics/people/contest_judge/7.4bpp"
 
 	.align 2
 
-gMapObjectPic_ContestOldMan_8: ; 8351328
-	.incbin "graphics/map_objects/pics/people/contest_old_man/8.4bpp"
+gMapObjectPic_ContestJudge_8: ; 8351328
+	.incbin "graphics/map_objects/pics/people/contest_judge/8.4bpp"
 
 	.align 2
 

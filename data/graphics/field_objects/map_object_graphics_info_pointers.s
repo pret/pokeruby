@@ -191,7 +191,7 @@ gMapObjectGraphicsInfoPointers: ; 836DC58
 	.4byte gMapObjectGraphicsInfo_Latias
 	.4byte gMapObjectGraphicsInfo_Latios
 	.4byte gMapObjectGraphicsInfo_Boy5
-	.4byte gMapObjectGraphicsInfo_ContestOldMan
+	.4byte gMapObjectGraphicsInfo_ContestJudge
 	.4byte gMapObjectGraphicsInfo_BrendanWatering
 	.4byte gMapObjectGraphicsInfo_MayWatering
 	.4byte gMapObjectGraphicsInfo_BrendanDecorating

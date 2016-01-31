@@ -188,7 +188,7 @@
 	.set MAP_OBJ_GFX_LATIAS,                    187
 	.set MAP_OBJ_GFX_LATIOS,                    188
 	.set MAP_OBJ_GFX_BOY_5,                     189
-	.set MAP_OBJ_GFX_CONTEST_OLD_MAN,           190
+	.set MAP_OBJ_GFX_CONTEST_JUDGE,             190
 	.set MAP_OBJ_GFX_BRENDAN_WATERING,          191
 	.set MAP_OBJ_GFX_MAY_WATERING,              192
 	.set MAP_OBJ_GFX_BRENDAN_DECORATING,        193

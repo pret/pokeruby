@@ -3420,7 +3420,7 @@ gMapObjectGraphicsInfo_Boy5: ; 8373368
 
 	.align 2
 
-gMapObjectGraphicsInfo_ContestOldMan: ; 837338C
+gMapObjectGraphicsInfo_ContestJudge: ; 837338C
 	.2byte 0xFFFF ; tiles tag
 	.2byte 0x1105 ; palette tag
 	.2byte 0x11FF ; palette tag 2
@@ -3433,7 +3433,7 @@ gMapObjectGraphicsInfo_ContestOldMan: ; 837338C
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
-	.4byte gMapObjectPicTable_ContestOldMan
+	.4byte gMapObjectPicTable_ContestJudge
 	.4byte gDummyObjectRotScalAnimTable
 
 	.align 2

@@ -1814,16 +1814,16 @@ gMapObjectPicTable_Boy5: ; 8370358
 
 	.align 2
 
-gMapObjectPicTable_ContestOldMan: ; 83703A0
-	obj_frame_tiles gMapObjectPic_ContestOldMan_0, 0x100
-	obj_frame_tiles gMapObjectPic_ContestOldMan_1, 0x100
-	obj_frame_tiles gMapObjectPic_ContestOldMan_2, 0x100
-	obj_frame_tiles gMapObjectPic_ContestOldMan_3, 0x100
-	obj_frame_tiles gMapObjectPic_ContestOldMan_4, 0x100
-	obj_frame_tiles gMapObjectPic_ContestOldMan_5, 0x100
-	obj_frame_tiles gMapObjectPic_ContestOldMan_6, 0x100
-	obj_frame_tiles gMapObjectPic_ContestOldMan_7, 0x100
-	obj_frame_tiles gMapObjectPic_ContestOldMan_8, 0x100
+gMapObjectPicTable_ContestJudge: ; 83703A0
+	obj_frame_tiles gMapObjectPic_ContestJudge_0, 0x100
+	obj_frame_tiles gMapObjectPic_ContestJudge_1, 0x100
+	obj_frame_tiles gMapObjectPic_ContestJudge_2, 0x100
+	obj_frame_tiles gMapObjectPic_ContestJudge_3, 0x100
+	obj_frame_tiles gMapObjectPic_ContestJudge_4, 0x100
+	obj_frame_tiles gMapObjectPic_ContestJudge_5, 0x100
+	obj_frame_tiles gMapObjectPic_ContestJudge_6, 0x100
+	obj_frame_tiles gMapObjectPic_ContestJudge_7, 0x100
+	obj_frame_tiles gMapObjectPic_ContestJudge_8, 0x100
 
 	.align 2
 
