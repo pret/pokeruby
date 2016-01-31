@@ -1,1 +1,3 @@
+gPlayTimeCounterState = 0x300057C;
+
 gUnknownStringVar = 0x3002900;

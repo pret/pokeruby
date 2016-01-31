@@ -45,6 +45,12 @@ struct SaveBlock2
 {
     u8 playerName[8];
     u8 playerGender;
+    u16 playerTrainerId;
+    u16 playerSecretId;
+    u16 playTimeHours;
+    u8 playTimeMinutes;
+    u8 playTimeSeconds;
+    u8 playTimeVBlanks;
 };
 
 extern struct SaveBlock2 gSaveBlock2;
