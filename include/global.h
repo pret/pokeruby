@@ -1,6 +1,8 @@
 #ifndef GUARD_GLOBAL_H
 #define GUARD_GLOBAL_H
 
+#include <stddef.h>
+
 typedef unsigned char  u8;
 typedef unsigned short u16;
 typedef unsigned int   u32;
@@ -21,8 +23,6 @@ typedef double f64;
 typedef u8  bool8;
 typedef u16 bool16;
 typedef u32 bool32;
-
-#define NULL (void *)0
 
 #define TRUE  1
 #define FALSE 0

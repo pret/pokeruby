@@ -1,4 +1,5 @@
 #include "global.h"
+#include "play_time.h"
 
 enum
 {

@@ -1,3 +1,5 @@
 gPlayTimeCounterState = 0x300057C;
 
+gRtcLocked = 0x3000F36;
+
 gUnknownStringVar = 0x3002900;

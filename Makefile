@@ -62,6 +62,8 @@ include tilesets.mk
 
 $(OBJS): $(CSRCS:src/%.c=genasm/%.s)
 
+genasm/librtc.s: CFLAGS := -mthumb-interwork -Iinclude
+
 # TODO: fix this .syntax hack
 
 genasm/prefix.tmp:
