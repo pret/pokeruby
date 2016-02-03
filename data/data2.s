@@ -363,11 +363,8 @@ gUnknown_081E75CC: ; 81E75CC
 gUnknown_081E75FC: ; 81E75FC
 	.incbin "baserom.gba", 0x001e75fc, 0x14
 
-gUnknown_081E7610: ; 81E7610
-	.incbin "baserom.gba", 0x001e7610, 0xc
-
-gUnknown_081E761C: ; 81E761C
-	.incbin "baserom.gba", 0x001e761c, 0x30
+; 81E7610
+	.include "data/rtc_util.s"
 
 gUnknown_081E764C: ; 81E764C
 	.incbin "baserom.gba", 0x001e764c, 0x40

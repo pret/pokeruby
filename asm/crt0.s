@@ -12,7 +12,7 @@ GPIOPortData: ; 80000C4
 GPIOPortDirection: ; 80000C6
 	.2byte 0
 
-GPIOPortReadWrite: ; 80000C8
+GPIOPortReadEnable: ; 80000C8
 	.2byte 0
 
 	.rept 6

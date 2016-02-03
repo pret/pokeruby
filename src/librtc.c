@@ -1,29 +1,22 @@
-#include "global.h"
+#include "gba/gba.h"
+#include "rtc.h"
 
-struct RtcInfo
-{
-    u8 year;
-    u8 month;
-    u8 dayOfMonth;
-    u8 dayOfWeek;
-    u8 hour;
-    u8 minute;
-    u8 second;
-    u8 control;
-    u8 unknown1;
-    u8 unknown2;
-};
+#define RTC_CTRL_UNK1          0x02 // unknown
+#define RTC_CTRL_IRQ_ENABLE    0x08 // per-minute IRQ enable
+#define RTC_CTRL_UNK2          0x20 // unknown
+#define RTC_CTRL_24HOUR        0x40 // 0: 12-hour mode, 1: 24-hour mode
+#define RTC_CTRL_POWER_FAILURE 0x80 // power failure occurred
 
-#define OFFSET_YEAR         offsetof(struct RtcInfo, year)
-#define OFFSET_MONTH        offsetof(struct RtcInfo, month)
-#define OFFSET_DAY_OF_MONTH offsetof(struct RtcInfo, dayOfMonth)
-#define OFFSET_DAY_OF_WEEK  offsetof(struct RtcInfo, dayOfWeek)
-#define OFFSET_HOUR         offsetof(struct RtcInfo, hour)
-#define OFFSET_MINUTE       offsetof(struct RtcInfo, minute)
-#define OFFSET_SECOND       offsetof(struct RtcInfo, second)
-#define OFFSET_CONTROL      offsetof(struct RtcInfo, control)
-#define OFFSET_UNKNOWN1     offsetof(struct RtcInfo, unknown1)
-#define OFFSET_UNKNOWN2     offsetof(struct RtcInfo, unknown2)
+#define OFFSET_YEAR        offsetof(struct RtcInfo, year)
+#define OFFSET_MONTH       offsetof(struct RtcInfo, month)
+#define OFFSET_DAY         offsetof(struct RtcInfo, day)
+#define OFFSET_DAY_OF_WEEK offsetof(struct RtcInfo, dayOfWeek)
+#define OFFSET_HOUR        offsetof(struct RtcInfo, hour)
+#define OFFSET_MINUTE      offsetof(struct RtcInfo, minute)
+#define OFFSET_SECOND      offsetof(struct RtcInfo, second)
+#define OFFSET_CONTROL     offsetof(struct RtcInfo, control)
+#define OFFSET_UNKNOWN1    offsetof(struct RtcInfo, unknown1)
+#define OFFSET_UNKNOWN2    offsetof(struct RtcInfo, unknown2)
 
 #define RTC_BUF(info, index) (*((u8 *)(info) + (index)))
 
@@ -33,57 +26,56 @@ struct RtcInfo
 #define RTC_TIME_BUF(info, index) (*((u8 *)(info) + OFFSET_HOUR + (index)))
 #define RTC_TIME_BUF_LEN (OFFSET_SECOND - OFFSET_HOUR + 1)
 
+#define RTC_CMD_RESET       0x60
+#define RTC_CMD_WR_CONTROL  0x62
+#define RTC_CMD_RD_CONTROL  0x63
+#define RTC_CMD_WR_DATETIME 0x64
+#define RTC_CMD_RD_DATETIME 0x65
+#define RTC_CMD_WR_TIME     0x66
+#define RTC_CMD_RD_TIME     0x67
+#define RTC_CMD_WR_UNKNOWN  0x68
+
 extern vu16 GPIOPortData;
 extern vu16 GPIOPortDirection;
-extern vu16 GPIOPortReadWrite;
+extern vu16 GPIOPortReadEnable;
 
 extern bool8 gRtcLocked;
 
-void RTC_SetReadWrite();
-void RTC_SetReadOnly();
-u8 RTC_Init();
-bool8 RTC_Reset();
-bool8 RTC_GetControlReg(struct RtcInfo *rtc);
-bool8 RTC_SetControlReg(struct RtcInfo *rtc);
-bool8 RTC_GetDateTime(struct RtcInfo *rtc);
-bool8 RTC_SetDateTime(struct RtcInfo *rtc);
-bool8 RTC_GetTime(struct RtcInfo *rtc);
-bool8 RTC_SetTime(struct RtcInfo *rtc);
-bool8 RTC_SetUnknownData(struct RtcInfo *rtc);
-s32 RTC_WriteByte(u8 value);
-s32 RTC_WriteByteReversed(u8 value);
-u8 RTC_ReadByte();
-void RTC_SetReadWriteInternal();
-void RTC_SetReadOnlyInternal();
+s32 RTC_WriteCommand(u8 value);
+s32 RTC_WriteData(u8 value);
+u8 RTC_ReadData();
+void RTC_EnableGpioPortRead();
+void RTC_DisableGpioPortRead();
 
-void RTC_SetReadWrite()
+void RTC_Unprotect()
 {
-    RTC_SetReadWriteInternal();
+    RTC_EnableGpioPortRead();
     gRtcLocked = FALSE;
 }
 
-void RTC_SetReadOnly()
+void RTC_Protect()
 {
-    RTC_SetReadOnlyInternal();
+    RTC_DisableGpioPortRead();
     gRtcLocked = TRUE;
 }
 
-u8 RTC_Init()
+u8 RTC_Probe()
 {
-    u8 v2;
+    u8 errorCode;
     struct RtcInfo rtc;
 
-    if (!RTC_GetControlReg(&rtc))
+    if (!RTC_GetControl(&rtc))
         return 0;
 
-    v2 = 0;
+    errorCode = 0;
 
-    if ((rtc.control & 0xC0) == 0x80 || !(rtc.control & 0xC0))
+    if ((rtc.control & (RTC_INFO_CTRL_POWER_FAILURE | RTC_INFO_CTRL_24HOUR)) == RTC_INFO_CTRL_POWER_FAILURE
+     || (rtc.control & (RTC_INFO_CTRL_POWER_FAILURE | RTC_INFO_CTRL_24HOUR)) == 0)
     {
         if (!RTC_Reset())
             return 0;
 
-        v2++;
+        errorCode++;
     }
 
     RTC_GetTime(&rtc);
@@ -91,12 +83,12 @@ u8 RTC_Init()
     if (rtc.second & 0x80)
     {
         if (!RTC_Reset())
-            return (v2 << 4) & 0xF0;
+            return (errorCode << 4) & 0xF0;
 
-        v2++;
+        errorCode++;
     }
 
-    return (v2 << 4) | 1;
+    return (errorCode << 4) | 1;
 }
 
 bool8 RTC_Reset()
@@ -114,21 +106,21 @@ bool8 RTC_Reset()
 
     GPIOPortDirection = 7;
 
-    RTC_WriteByte(0x60);
+    RTC_WriteCommand(RTC_CMD_RESET);
 
     GPIOPortData = 1;
     GPIOPortData = 1;
 
     gRtcLocked = FALSE;
 
-    rtc.control = 0x40;
+    rtc.control = RTC_INFO_CTRL_24HOUR;
 
-    result = RTC_SetControlReg(&rtc);
+    result = RTC_SetControl(&rtc);
 
     return result;
 }
 
-bool8 RTC_GetControlReg(struct RtcInfo *rtc)
+bool8 RTC_GetControl(struct RtcInfo *rtc)
 {
     u8 controlData;
 
@@ -142,13 +134,16 @@ bool8 RTC_GetControlReg(struct RtcInfo *rtc)
 
     GPIOPortDirection = 7;
 
-    RTC_WriteByte(0x63);
+    RTC_WriteCommand(RTC_CMD_RD_CONTROL);
 
     GPIOPortDirection = 5;
 
-    controlData = RTC_ReadByte();
+    controlData = RTC_ReadData();
 
-    rtc->control = (controlData & 0xC0) | ((controlData & 0x20) >> 3) | ((controlData & 8) >> 2) | ((controlData & 2) >> 1);
+    rtc->control = (controlData & (RTC_CTRL_POWER_FAILURE | RTC_CTRL_24HOUR))
+                 | ((controlData & RTC_CTRL_UNK2) >> 3)
+                 | ((controlData & RTC_CTRL_IRQ_ENABLE) >> 2)
+                 | ((controlData & RTC_CTRL_UNK1) >> 1);
 
     GPIOPortData = 1;
     GPIOPortData = 1;
@@ -158,7 +153,7 @@ bool8 RTC_GetControlReg(struct RtcInfo *rtc)
     return TRUE;
 }
 
-bool8 RTC_SetControlReg(struct RtcInfo *rtc)
+bool8 RTC_SetControl(struct RtcInfo *rtc)
 {
     u8 controlData;
 
@@ -170,13 +165,16 @@ bool8 RTC_SetControlReg(struct RtcInfo *rtc)
     GPIOPortData = 1;
     GPIOPortData = 5;
 
-    controlData = ((rtc->control & 4) << 3) | (1 << 6) | ((rtc->control & 2) << 2) | ((rtc->control & 1) << 1);
+    controlData = RTC_CTRL_24HOUR
+                | ((rtc->control & RTC_INFO_CTRL_UNK2) << 3)
+                | ((rtc->control & RTC_INFO_CTRL_IRQ_ENABLE) << 2)
+                | ((rtc->control & RTC_INFO_CTRL_UNK1) << 1);
 
     GPIOPortDirection = 7;
 
-    RTC_WriteByte(0x62);
+    RTC_WriteCommand(RTC_CMD_WR_CONTROL);
 
-    RTC_WriteByteReversed(controlData);
+    RTC_WriteData(controlData);
 
     GPIOPortData = 1;
     GPIOPortData = 1;
@@ -200,12 +198,12 @@ bool8 RTC_GetDateTime(struct RtcInfo *rtc)
 
     GPIOPortDirection = 7;
 
-    RTC_WriteByte(0x65);
+    RTC_WriteCommand(RTC_CMD_RD_DATETIME);
 
     GPIOPortDirection = 5;
 
     for (i = 0; i < RTC_DATETIME_BUF_LEN; i++)
-        RTC_DATETIME_BUF(rtc, i) = RTC_ReadByte();
+        RTC_DATETIME_BUF(rtc, i) = RTC_ReadData();
 
     RTC_BUF(rtc, OFFSET_HOUR) &= 0x7F;
 
@@ -231,10 +229,10 @@ bool8 RTC_SetDateTime(struct RtcInfo *rtc)
 
     GPIOPortDirection = 7;
 
-    RTC_WriteByte(0x64);
+    RTC_WriteCommand(RTC_CMD_WR_DATETIME);
 
     for (i = 0; i < RTC_DATETIME_BUF_LEN; i++)
-        RTC_WriteByteReversed(RTC_DATETIME_BUF(rtc, i));
+        RTC_WriteData(RTC_DATETIME_BUF(rtc, i));
 
     GPIOPortData = 1;
     GPIOPortData = 1;
@@ -258,12 +256,12 @@ bool8 RTC_GetTime(struct RtcInfo *rtc)
 
     GPIOPortDirection = 7;
 
-    RTC_WriteByte(0x67);
+    RTC_WriteCommand(RTC_CMD_RD_TIME);
 
     GPIOPortDirection = 5;
 
     for (i = 0; i < RTC_TIME_BUF_LEN; i++)
-        RTC_TIME_BUF(rtc, i) = RTC_ReadByte();
+        RTC_TIME_BUF(rtc, i) = RTC_ReadData();
 
     RTC_BUF(rtc, OFFSET_HOUR) &= 0x7F;
 
@@ -289,10 +287,10 @@ bool8 RTC_SetTime(struct RtcInfo *rtc)
 
     GPIOPortDirection = 7;
 
-    RTC_WriteByte(0x66);
+    RTC_WriteCommand(RTC_CMD_WR_TIME);
 
     for (i = 0; i < RTC_TIME_BUF_LEN; i++)
-        RTC_WriteByteReversed(RTC_TIME_BUF(rtc, i));
+        RTC_WriteData(RTC_TIME_BUF(rtc, i));
 
     GPIOPortData = 1;
     GPIOPortData = 1;
@@ -312,9 +310,13 @@ bool8 RTC_SetUnknownData(struct RtcInfo *rtc)
 
     gRtcLocked = TRUE;
 
+    // unknown1 appears to be a BCD number in the range 0-11,
+    // so it may be an hour in 12-hour format.
+    // Months are normally 1-12.
+
     a[0] = ((rtc->unknown1 & 0xF) + 10 * ((rtc->unknown1 >> 4) & 0xF));
 
-    if (a[0] <= 0xB)
+    if (a[0] < 12)
         a[0] = rtc->unknown1;
     else
         a[0] = rtc->unknown1 | 0x80;
@@ -326,10 +328,10 @@ bool8 RTC_SetUnknownData(struct RtcInfo *rtc)
 
     GPIOPortDirection = 7;
 
-    RTC_WriteByte(0x68);
+    RTC_WriteCommand(RTC_CMD_WR_UNKNOWN);
 
     for (i = 0; i < 2; i++)
-        RTC_WriteByteReversed(a[i]);
+        RTC_WriteData(a[i]);
 
     GPIOPortData = 1;
     GPIOPortData = 1;
@@ -339,7 +341,7 @@ bool8 RTC_SetUnknownData(struct RtcInfo *rtc)
     return TRUE;
 }
 
-s32 RTC_WriteByte(u8 value)
+s32 RTC_WriteCommand(u8 value)
 {
     u8 i;
     u8 temp;
@@ -356,7 +358,7 @@ s32 RTC_WriteByte(u8 value)
     // control reaches end of non-void function
 }
 
-s32 RTC_WriteByteReversed(u8 value)
+s32 RTC_WriteData(u8 value)
 {
     u8 i;
     u8 temp;
@@ -373,7 +375,7 @@ s32 RTC_WriteByteReversed(u8 value)
     // control reaches end of non-void function
 }
 
-u8 RTC_ReadByte()
+u8 RTC_ReadData()
 {
     u8 i;
     u8 temp;
@@ -395,12 +397,12 @@ u8 RTC_ReadByte()
     return value;
 }
 
-void RTC_SetReadWriteInternal()
+void RTC_EnableGpioPortRead()
 {
-    GPIOPortReadWrite = 1;
+    GPIOPortReadEnable = 1;
 }
 
-void RTC_SetReadOnlyInternal()
+void RTC_DisableGpioPortRead()
 {
-    GPIOPortReadWrite = 0;
+    GPIOPortReadEnable = 0;
 }

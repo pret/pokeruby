@@ -1,13 +1,6 @@
 #include "global.h"
 #include "string_util.h"
 
-#define CHAR_SPACE         0x00
-#define CHAR_QUESTION_MARK 0xAC
-
-#define EXT_CTRL_CODE_BEGIN 0xFC // extended control code
-#define PLACEHOLDER_BEGIN   0xFD // string placeholder
-#define EOS                 0xFF // end of string
-
 #define MAX_PLACEHOLDER_ID 0xD
 
 typedef u8 *(*ExpandPlaceholderFunc)();
