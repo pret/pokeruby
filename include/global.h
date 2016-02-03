@@ -3,6 +3,10 @@
 
 #include "gba/gba.h"
 
+#ifndef REVISION
+#define REVISION 0
+#endif
+
 extern u8 gStringVar1[];
 extern u8 gStringVar2[];
 extern u8 gStringVar3[];
