@@ -6,7 +6,7 @@
 extern const struct RtcInfo gDefaultRtcInfo;
 extern const s32 gNumDaysInMonths[];
 
-extern u16 gRtcErrorFlags;
+extern u16 gRtcStatus;
 extern struct RtcInfo gRtcInfo;
 extern u8 gRtcProbeResult;
 extern u16 gRtcSavedIme;
@@ -90,7 +90,7 @@ u16 RtcGetDayCount(struct RtcInfo *rtc)
 
 void RtcInit()
 {
-    gRtcErrorFlags = 0;
+    gRtcStatus = 0;
 
     RtcDisableInterrupts();
     RTC_Unprotect();
@@ -99,27 +99,27 @@ void RtcInit()
 
     if (!(gRtcProbeResult & 0xF))
     {
-        gRtcErrorFlags = 1;
+        gRtcStatus = RTC_STAT_INIT_ERROR;
         return;
     }
 
     if (gRtcProbeResult & 0xF0)
-        gRtcErrorFlags = 2;
+        gRtcStatus = RTC_STAT_INIT_WARNING;
     else
-        gRtcErrorFlags = 0;
+        gRtcStatus = 0;
 
     RtcGetRawInfo(&gRtcInfo);
-    gRtcErrorFlags = RtcCheckInfo(&gRtcInfo);
+    gRtcStatus = RtcCheckInfo(&gRtcInfo);
 }
 
-u16 RtcGetErrorFlags()
+u16 RtcGetStatus()
 {
-    return gRtcErrorFlags;
+    return gRtcStatus;
 }
 
 void RtcGetInfo(struct RtcInfo *rtc)
 {
-    if (gRtcErrorFlags & 0xFF0)
+    if (gRtcStatus & RTC_STAT_ERROR_FLAGS)
         *rtc = gDefaultRtcInfo;
     else
         RtcGetRawInfo(rtc);
@@ -153,51 +153,51 @@ u16 RtcCheckInfo(struct RtcInfo *rtc)
     s32 value;
 
     if (rtc->control & RTC_INFO_CTRL_POWER_FAILURE)
-        errorFlags |= 0x20;
+        errorFlags |= RTC_STAT_ERR_POWER_FAILURE;
 
     if (!(rtc->control & RTC_INFO_CTRL_24HOUR))
-        errorFlags |= 0x10;
+        errorFlags |= RTC_STAT_ERR_12HOUR_CLOCK;
 
     year = ConvertBcdToBinary(rtc->year);
 
     if (year == 0xFF)
-        errorFlags |= 0x40;
+        errorFlags |= RTC_STAT_ERR_INVALID_YEAR;
 
     month = ConvertBcdToBinary(rtc->month);
 
     if (month == 0xFF || month == 0 || month > 12)
-        errorFlags |= 0x80;
+        errorFlags |= RTC_STAT_ERR_INVALID_MONTH;
 
     value = ConvertBcdToBinary(rtc->day);
 
     if (value == 0xFF)
-        errorFlags |= 0x100;
+        errorFlags |= RTC_STAT_ERR_INVALID_DAY;
 
     if (month == MONTH_FEB)
     {
         if (value > IsLeapYear(year) + gNumDaysInMonths[month - 1])
-            errorFlags |= 0x100;
+            errorFlags |= RTC_STAT_ERR_INVALID_DAY;
     }
     else
     {
         if (value > gNumDaysInMonths[month - 1])
-            errorFlags |= 0x100;
+            errorFlags |= RTC_STAT_ERR_INVALID_DAY;
     }
 
     value = ConvertBcdToBinary(rtc->hour);
 
     if (value > 24)
-        errorFlags |= 0x200;
+        errorFlags |= RTC_STAT_ERR_INVALID_HOUR;
 
     value = ConvertBcdToBinary(rtc->minute);
 
     if (value > 60)
-        errorFlags |= 0x400;
+        errorFlags |= RTC_STAT_ERR_INVALID_MINUTE;
 
     value = ConvertBcdToBinary(rtc->second);
 
     if (value > 60)
-        errorFlags |= 0x800;
+        errorFlags |= RTC_STAT_ERR_INVALID_SECOND;
 
     return errorFlags;
 }
@@ -287,19 +287,19 @@ void RtcCalcLocalTime()
     RtcCalcTimeDifference(&gRtcInfo, &gLocalTime, &gSaveBlock2.localTimeOffset);
 }
 
-void RtcInitLocalTimeOffset(s32 hours, s32 minutes)
+void RtcInitLocalTimeOffset(s32 hour, s32 minute)
 {
-    RtcCalcLocalTimeOffset(0, hours, minutes, 0);
+    RtcCalcLocalTimeOffset(0, hour, minute, 0);
 }
 
 void RtcCalcLocalTimeOffset(s32 days, s32 hours, s32 minutes, s32 seconds)
 {
-  gLocalTime.days = days;
-  gLocalTime.hours = hours;
-  gLocalTime.minutes = minutes;
-  gLocalTime.seconds = seconds;
-  RtcGetInfo(&gRtcInfo);
-  RtcCalcTimeDifference(&gRtcInfo, &gSaveBlock2.localTimeOffset, &gLocalTime);
+    gLocalTime.days = days;
+    gLocalTime.hours = hours;
+    gLocalTime.minutes = minutes;
+    gLocalTime.seconds = seconds;
+    RtcGetInfo(&gRtcInfo);
+    RtcCalcTimeDifference(&gRtcInfo, &gSaveBlock2.localTimeOffset, &gLocalTime);
 }
 
 void CalcTimeDifference(struct Time *result, struct Time *t1, struct Time *t2)
