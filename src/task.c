@@ -10,6 +10,7 @@ extern struct Task gTasks[];
 
 static void InsertTask(u8 newTaskId);
 static u8 FindFirstActiveTask();
+static void TaskDummy(u8 taskId);
 
 void ResetTasks()
 {
@@ -228,7 +229,7 @@ static u8 FindFirstActiveTask()
     return taskId;
 }
 
-void TaskDummy(u8 taskId)
+static void TaskDummy(u8 taskId)
 {
 }
 
