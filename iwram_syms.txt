@@ -10,3 +10,5 @@ gRtcLocked = 0x3000F36;
 gUnknownStringVar = 0x3002900;
 
 gLocalTime = 0x3004038;
+
+gTasks = 0x3004B20;
