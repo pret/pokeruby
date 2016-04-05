@@ -3,11 +3,11 @@
 
 #include "gba/gba.h"
 
-#define RTC_INFO_CTRL_UNK1          0x01 // unknown
-#define RTC_INFO_CTRL_IRQ_ENABLE    0x02 // per-minute IRQ enable
-#define RTC_INFO_CTRL_UNK2          0x04 // unknown
-#define RTC_INFO_CTRL_24HOUR        0x40 // 0: 12-hour mode, 1: 24-hour mode
-#define RTC_INFO_CTRL_POWER_FAILURE 0x80 // power failure occurred
+#define SIIRTCINFO_INTFE  0x01 // frequency interrupt enable
+#define SIIRTCINFO_INTME  0x02 // per-minute interrupt enable
+#define SIIRTCINFO_INTAE  0x04 // alarm interrupt enable
+#define SIIRTCINFO_24HOUR 0x40 // 0: 12-hour mode, 1: 24-hour mode
+#define SIIRTCINFO_POWER  0x80 // power on or power failure occurred
 
 enum
 {
@@ -25,7 +25,7 @@ enum
     MONTH_DEC
 };
 
-struct RtcInfo
+struct SiiRtcInfo
 {
     u8 year;
     u8 month;
@@ -34,21 +34,21 @@ struct RtcInfo
     u8 hour;
     u8 minute;
     u8 second;
-    u8 control;
-    u8 unknown1;
-    u8 unknown2;
+    u8 status;
+    u8 alarmHour;
+    u8 alarmMinute;
 };
 
-void RTC_Unprotect();
-void RTC_Protect();
-u8 RTC_Probe();
-bool8 RTC_Reset();
-bool8 RTC_GetControl(struct RtcInfo *rtc);
-bool8 RTC_SetControl(struct RtcInfo *rtc);
-bool8 RTC_GetDateTime(struct RtcInfo *rtc);
-bool8 RTC_SetDateTime(struct RtcInfo *rtc);
-bool8 RTC_GetTime(struct RtcInfo *rtc);
-bool8 RTC_SetTime(struct RtcInfo *rtc);
-bool8 RTC_SetUnknownData(struct RtcInfo *rtc);
+void SiiRtcUnprotect();
+void SiiRtcProtect();
+u8 SiiRtcProbe();
+bool8 SiiRtcReset();
+bool8 SiiRtcGetStatus(struct SiiRtcInfo *rtc);
+bool8 SiiRtcSetStatus(struct SiiRtcInfo *rtc);
+bool8 SiiRtcGetDateTime(struct SiiRtcInfo *rtc);
+bool8 SiiRtcSetDateTime(struct SiiRtcInfo *rtc);
+bool8 SiiRtcGetTime(struct SiiRtcInfo *rtc);
+bool8 SiiRtcSetTime(struct SiiRtcInfo *rtc);
+bool8 SiiRtcSetAlarm(struct SiiRtcInfo *rtc);
 
 #endif // GUARD_RTC_H

@@ -1,88 +1,104 @@
 #include "gba/gba.h"
 #include "rtc.h"
 
-#define RTC_CTRL_UNK1          0x02 // unknown
-#define RTC_CTRL_IRQ_ENABLE    0x08 // per-minute IRQ enable
-#define RTC_CTRL_UNK2          0x20 // unknown
-#define RTC_CTRL_24HOUR        0x40 // 0: 12-hour mode, 1: 24-hour mode
-#define RTC_CTRL_POWER_FAILURE 0x80 // power failure occurred
+#define STATUS_INTFE  0x02 // frequency interrupt enable
+#define STATUS_INTME  0x08 // per-minute interrupt enable
+#define STATUS_INTAE  0x20 // alarm interrupt enable
+#define STATUS_24HOUR 0x40 // 0: 12-hour mode, 1: 24-hour mode
+#define STATUS_POWER  0x80 // power on or power failure occurred
 
-#define OFFSET_YEAR        offsetof(struct RtcInfo, year)
-#define OFFSET_MONTH       offsetof(struct RtcInfo, month)
-#define OFFSET_DAY         offsetof(struct RtcInfo, day)
-#define OFFSET_DAY_OF_WEEK offsetof(struct RtcInfo, dayOfWeek)
-#define OFFSET_HOUR        offsetof(struct RtcInfo, hour)
-#define OFFSET_MINUTE      offsetof(struct RtcInfo, minute)
-#define OFFSET_SECOND      offsetof(struct RtcInfo, second)
-#define OFFSET_CONTROL     offsetof(struct RtcInfo, control)
-#define OFFSET_UNKNOWN1    offsetof(struct RtcInfo, unknown1)
-#define OFFSET_UNKNOWN2    offsetof(struct RtcInfo, unknown2)
+#define TEST_MODE 0x80 // flag in the "second" byte
 
-#define RTC_BUF(info, index) (*((u8 *)(info) + (index)))
+#define ALARM_AM 0x00
+#define ALARM_PM 0x80
 
-#define RTC_DATETIME_BUF(info, index) (*((u8 *)(info) + OFFSET_YEAR + (index)))
-#define RTC_DATETIME_BUF_LEN (OFFSET_SECOND - OFFSET_YEAR + 1)
+#define OFFSET_YEAR         offsetof(struct SiiRtcInfo, year)
+#define OFFSET_MONTH        offsetof(struct SiiRtcInfo, month)
+#define OFFSET_DAY          offsetof(struct SiiRtcInfo, day)
+#define OFFSET_DAY_OF_WEEK  offsetof(struct SiiRtcInfo, dayOfWeek)
+#define OFFSET_HOUR         offsetof(struct SiiRtcInfo, hour)
+#define OFFSET_MINUTE       offsetof(struct SiiRtcInfo, minute)
+#define OFFSET_SECOND       offsetof(struct SiiRtcInfo, second)
+#define OFFSET_STATUS       offsetof(struct SiiRtcInfo, status)
+#define OFFSET_ALARM_HOUR   offsetof(struct SiiRtcInfo, alarmHour)
+#define OFFSET_ALARM_MINUTE offsetof(struct SiiRtcInfo, alarmMinute)
 
-#define RTC_TIME_BUF(info, index) (*((u8 *)(info) + OFFSET_HOUR + (index)))
-#define RTC_TIME_BUF_LEN (OFFSET_SECOND - OFFSET_HOUR + 1)
+#define INFO_BUF(info, index) (*((u8 *)(info) + (index)))
 
-#define RTC_CMD_RESET       0x60
-#define RTC_CMD_WR_CONTROL  0x62
-#define RTC_CMD_RD_CONTROL  0x63
-#define RTC_CMD_WR_DATETIME 0x64
-#define RTC_CMD_RD_DATETIME 0x65
-#define RTC_CMD_WR_TIME     0x66
-#define RTC_CMD_RD_TIME     0x67
-#define RTC_CMD_WR_UNKNOWN  0x68
+#define DATETIME_BUF(info, index) INFO_BUF(info, OFFSET_YEAR + index)
+#define DATETIME_BUF_LEN (OFFSET_SECOND - OFFSET_YEAR + 1)
+
+#define TIME_BUF(info, index) INFO_BUF(info, OFFSET_HOUR + index)
+#define TIME_BUF_LEN (OFFSET_SECOND - OFFSET_HOUR + 1)
+
+#define WR 0 // command for writing data
+#define RD 1 // command for reading data
+
+#define CMD(n) (0x60 | (n << 1))
+
+#define CMD_RESET    CMD(0)
+#define CMD_STATUS   CMD(1)
+#define CMD_DATETIME CMD(2)
+#define CMD_TIME     CMD(3)
+#define CMD_ALARM    CMD(4)
 
 extern vu16 GPIOPortData;
 extern vu16 GPIOPortDirection;
 extern vu16 GPIOPortReadEnable;
 
-extern bool8 gRtcLocked;
+extern bool8 gSiiRtcLocked;
 
-s32 RTC_WriteCommand(u8 value);
-s32 RTC_WriteData(u8 value);
-u8 RTC_ReadData();
-void RTC_EnableGpioPortRead();
-void RTC_DisableGpioPortRead();
+static int WriteCommand(u8 value);
+static int WriteData(u8 value);
+static u8 ReadData();
+static void EnableGpioPortRead();
+static void DisableGpioPortRead();
 
-void RTC_Unprotect()
+void SiiRtcUnprotect()
 {
-    RTC_EnableGpioPortRead();
-    gRtcLocked = FALSE;
+    EnableGpioPortRead();
+    gSiiRtcLocked = FALSE;
 }
 
-void RTC_Protect()
+void SiiRtcProtect()
 {
-    RTC_DisableGpioPortRead();
-    gRtcLocked = TRUE;
+    DisableGpioPortRead();
+    gSiiRtcLocked = TRUE;
 }
 
-u8 RTC_Probe()
+u8 SiiRtcProbe()
 {
     u8 errorCode;
-    struct RtcInfo rtc;
+    struct SiiRtcInfo rtc;
 
-    if (!RTC_GetControl(&rtc))
+    if (!SiiRtcGetStatus(&rtc))
         return 0;
 
     errorCode = 0;
 
-    if ((rtc.control & (RTC_INFO_CTRL_POWER_FAILURE | RTC_INFO_CTRL_24HOUR)) == RTC_INFO_CTRL_POWER_FAILURE
-     || (rtc.control & (RTC_INFO_CTRL_POWER_FAILURE | RTC_INFO_CTRL_24HOUR)) == 0)
+    if ((rtc.status & (SIIRTCINFO_POWER | SIIRTCINFO_24HOUR)) == SIIRTCINFO_POWER
+     || (rtc.status & (SIIRTCINFO_POWER | SIIRTCINFO_24HOUR)) == 0)
     {
-        if (!RTC_Reset())
+        // The RTC is in 12-hour mode. Reset it and switch to 24-hour mode.
+
+        // Note that the conditions are redundant and equivalent to simply
+        // "(rtc.status & SIIRTCINFO_24HOUR) == 0". It's possible that this
+        // was also intended to handle resetting the clock after power failure
+        // but a mistake was made.
+
+        if (!SiiRtcReset())
             return 0;
 
         errorCode++;
     }
 
-    RTC_GetTime(&rtc);
+    SiiRtcGetTime(&rtc);
 
-    if (rtc.second & 0x80)
+    if (rtc.second & TEST_MODE)
     {
-        if (!RTC_Reset())
+        // The RTC is in test mode. Reset it to leave test mode.
+
+        if (!SiiRtcReset())
             return (errorCode << 4) & 0xF0;
 
         errorCode++;
@@ -91,257 +107,256 @@ u8 RTC_Probe()
     return (errorCode << 4) | 1;
 }
 
-bool8 RTC_Reset()
+bool8 SiiRtcReset()
 {
     u8 result;
-    struct RtcInfo rtc;
+    struct SiiRtcInfo rtc;
 
-    if (gRtcLocked == TRUE)
+    if (gSiiRtcLocked == TRUE)
         return FALSE;
 
-    gRtcLocked = TRUE;
+    gSiiRtcLocked = TRUE;
 
     GPIOPortData = 1;
     GPIOPortData = 5;
 
     GPIOPortDirection = 7;
 
-    RTC_WriteCommand(RTC_CMD_RESET);
+    WriteCommand(CMD_RESET | WR);
 
     GPIOPortData = 1;
     GPIOPortData = 1;
 
-    gRtcLocked = FALSE;
+    gSiiRtcLocked = FALSE;
 
-    rtc.control = RTC_INFO_CTRL_24HOUR;
+    rtc.status = SIIRTCINFO_24HOUR;
 
-    result = RTC_SetControl(&rtc);
+    result = SiiRtcSetStatus(&rtc);
 
     return result;
 }
 
-bool8 RTC_GetControl(struct RtcInfo *rtc)
+bool8 SiiRtcGetStatus(struct SiiRtcInfo *rtc)
 {
-    u8 controlData;
+    u8 statusData;
 
-    if (gRtcLocked == TRUE)
+    if (gSiiRtcLocked == TRUE)
         return FALSE;
 
-    gRtcLocked = TRUE;
+    gSiiRtcLocked = TRUE;
 
     GPIOPortData = 1;
     GPIOPortData = 5;
 
     GPIOPortDirection = 7;
 
-    RTC_WriteCommand(RTC_CMD_RD_CONTROL);
+    WriteCommand(CMD_STATUS | RD);
 
     GPIOPortDirection = 5;
 
-    controlData = RTC_ReadData();
+    statusData = ReadData();
 
-    rtc->control = (controlData & (RTC_CTRL_POWER_FAILURE | RTC_CTRL_24HOUR))
-                 | ((controlData & RTC_CTRL_UNK2) >> 3)
-                 | ((controlData & RTC_CTRL_IRQ_ENABLE) >> 2)
-                 | ((controlData & RTC_CTRL_UNK1) >> 1);
+    rtc->status = (statusData & (STATUS_POWER | STATUS_24HOUR))
+                | ((statusData & STATUS_INTAE) >> 3)
+                | ((statusData & STATUS_INTME) >> 2)
+                | ((statusData & STATUS_INTFE) >> 1);
 
     GPIOPortData = 1;
     GPIOPortData = 1;
 
-    gRtcLocked = FALSE;
+    gSiiRtcLocked = FALSE;
 
     return TRUE;
 }
 
-bool8 RTC_SetControl(struct RtcInfo *rtc)
+bool8 SiiRtcSetStatus(struct SiiRtcInfo *rtc)
 {
-    u8 controlData;
+    u8 statusData;
 
-    if (gRtcLocked == TRUE)
+    if (gSiiRtcLocked == TRUE)
         return FALSE;
 
-    gRtcLocked = TRUE;
+    gSiiRtcLocked = TRUE;
 
     GPIOPortData = 1;
     GPIOPortData = 5;
 
-    controlData = RTC_CTRL_24HOUR
-                | ((rtc->control & RTC_INFO_CTRL_UNK2) << 3)
-                | ((rtc->control & RTC_INFO_CTRL_IRQ_ENABLE) << 2)
-                | ((rtc->control & RTC_INFO_CTRL_UNK1) << 1);
+    statusData = STATUS_24HOUR
+               | ((rtc->status & SIIRTCINFO_INTAE) << 3)
+               | ((rtc->status & SIIRTCINFO_INTME) << 2)
+               | ((rtc->status & SIIRTCINFO_INTFE) << 1);
 
     GPIOPortDirection = 7;
 
-    RTC_WriteCommand(RTC_CMD_WR_CONTROL);
+    WriteCommand(CMD_STATUS | WR);
 
-    RTC_WriteData(controlData);
+    WriteData(statusData);
 
     GPIOPortData = 1;
     GPIOPortData = 1;
 
-    gRtcLocked = FALSE;
+    gSiiRtcLocked = FALSE;
 
     return TRUE;
 }
 
-bool8 RTC_GetDateTime(struct RtcInfo *rtc)
+bool8 SiiRtcGetDateTime(struct SiiRtcInfo *rtc)
 {
     u8 i;
 
-    if (gRtcLocked == TRUE)
+    if (gSiiRtcLocked == TRUE)
         return FALSE;
 
-    gRtcLocked = TRUE;
+    gSiiRtcLocked = TRUE;
 
     GPIOPortData = 1;
     GPIOPortData = 5;
 
     GPIOPortDirection = 7;
 
-    RTC_WriteCommand(RTC_CMD_RD_DATETIME);
+    WriteCommand(CMD_DATETIME | RD);
 
     GPIOPortDirection = 5;
 
-    for (i = 0; i < RTC_DATETIME_BUF_LEN; i++)
-        RTC_DATETIME_BUF(rtc, i) = RTC_ReadData();
+    for (i = 0; i < DATETIME_BUF_LEN; i++)
+        DATETIME_BUF(rtc, i) = ReadData();
 
-    RTC_BUF(rtc, OFFSET_HOUR) &= 0x7F;
+    INFO_BUF(rtc, OFFSET_HOUR) &= 0x7F;
 
     GPIOPortData = 1;
     GPIOPortData = 1;
 
-    gRtcLocked = FALSE;
+    gSiiRtcLocked = FALSE;
 
     return TRUE;
 }
 
-bool8 RTC_SetDateTime(struct RtcInfo *rtc)
+bool8 SiiRtcSetDateTime(struct SiiRtcInfo *rtc)
 {
     u8 i;
 
-    if (gRtcLocked == TRUE)
+    if (gSiiRtcLocked == TRUE)
         return FALSE;
 
-    gRtcLocked = TRUE;
+    gSiiRtcLocked = TRUE;
 
     GPIOPortData = 1;
     GPIOPortData = 5;
 
     GPIOPortDirection = 7;
 
-    RTC_WriteCommand(RTC_CMD_WR_DATETIME);
+    WriteCommand(CMD_DATETIME | WR);
 
-    for (i = 0; i < RTC_DATETIME_BUF_LEN; i++)
-        RTC_WriteData(RTC_DATETIME_BUF(rtc, i));
+    for (i = 0; i < DATETIME_BUF_LEN; i++)
+        WriteData(DATETIME_BUF(rtc, i));
 
     GPIOPortData = 1;
     GPIOPortData = 1;
 
-    gRtcLocked = FALSE;
+    gSiiRtcLocked = FALSE;
 
     return TRUE;
 }
 
-bool8 RTC_GetTime(struct RtcInfo *rtc)
+bool8 SiiRtcGetTime(struct SiiRtcInfo *rtc)
 {
     u8 i;
 
-    if (gRtcLocked == TRUE)
+    if (gSiiRtcLocked == TRUE)
         return FALSE;
 
-    gRtcLocked = TRUE;
+    gSiiRtcLocked = TRUE;
 
     GPIOPortData = 1;
     GPIOPortData = 5;
 
     GPIOPortDirection = 7;
 
-    RTC_WriteCommand(RTC_CMD_RD_TIME);
+    WriteCommand(CMD_TIME | RD);
 
     GPIOPortDirection = 5;
 
-    for (i = 0; i < RTC_TIME_BUF_LEN; i++)
-        RTC_TIME_BUF(rtc, i) = RTC_ReadData();
+    for (i = 0; i < TIME_BUF_LEN; i++)
+        TIME_BUF(rtc, i) = ReadData();
 
-    RTC_BUF(rtc, OFFSET_HOUR) &= 0x7F;
+    INFO_BUF(rtc, OFFSET_HOUR) &= 0x7F;
 
     GPIOPortData = 1;
     GPIOPortData = 1;
 
-    gRtcLocked = FALSE;
+    gSiiRtcLocked = FALSE;
 
     return TRUE;
 }
 
-bool8 RTC_SetTime(struct RtcInfo *rtc)
+bool8 SiiRtcSetTime(struct SiiRtcInfo *rtc)
 {
     u8 i;
 
-    if (gRtcLocked == TRUE)
+    if (gSiiRtcLocked == TRUE)
         return FALSE;
 
-    gRtcLocked = TRUE;
+    gSiiRtcLocked = TRUE;
 
     GPIOPortData = 1;
     GPIOPortData = 5;
 
     GPIOPortDirection = 7;
 
-    RTC_WriteCommand(RTC_CMD_WR_TIME);
+    WriteCommand(CMD_TIME | WR);
 
-    for (i = 0; i < RTC_TIME_BUF_LEN; i++)
-        RTC_WriteData(RTC_TIME_BUF(rtc, i));
+    for (i = 0; i < TIME_BUF_LEN; i++)
+        WriteData(TIME_BUF(rtc, i));
 
     GPIOPortData = 1;
     GPIOPortData = 1;
 
-    gRtcLocked = FALSE;
+    gSiiRtcLocked = FALSE;
 
     return TRUE;
 }
 
-bool8 RTC_SetUnknownData(struct RtcInfo *rtc)
+bool8 SiiRtcSetAlarm(struct SiiRtcInfo *rtc)
 {
     u8 i;
-    u8 a[2];
+    u8 alarmData[2];
 
-    if (gRtcLocked == TRUE)
+    if (gSiiRtcLocked == TRUE)
         return FALSE;
 
-    gRtcLocked = TRUE;
+    gSiiRtcLocked = TRUE;
 
-    // unknown1 appears to be a BCD number in the range 0-11,
-    // so it may be an hour in 12-hour format.
-    // Months are normally 1-12.
+    // Decode BCD.
+    alarmData[0] = (rtc->alarmHour & 0xF) + 10 * ((rtc->alarmHour >> 4) & 0xF);
 
-    a[0] = ((rtc->unknown1 & 0xF) + 10 * ((rtc->unknown1 >> 4) & 0xF));
+    // The AM/PM flag must be set correctly even in 24-hour mode.
 
-    if (a[0] < 12)
-        a[0] = rtc->unknown1;
+    if (alarmData[0] < 12)
+        alarmData[0] = rtc->alarmHour | ALARM_AM;
     else
-        a[0] = rtc->unknown1 | 0x80;
+        alarmData[0] = rtc->alarmHour | ALARM_PM;
 
-    a[1] = rtc->unknown2;
+    alarmData[1] = rtc->alarmMinute;
 
     GPIOPortData = 1;
     GPIOPortData = 5;
 
     GPIOPortDirection = 7;
 
-    RTC_WriteCommand(RTC_CMD_WR_UNKNOWN);
+    WriteCommand(CMD_ALARM | WR);
 
     for (i = 0; i < 2; i++)
-        RTC_WriteData(a[i]);
+        WriteData(alarmData[i]);
 
     GPIOPortData = 1;
     GPIOPortData = 1;
 
-    gRtcLocked = FALSE;
+    gSiiRtcLocked = FALSE;
 
     return TRUE;
 }
 
-s32 RTC_WriteCommand(u8 value)
+static int WriteCommand(u8 value)
 {
     u8 i;
     u8 temp;
@@ -358,7 +373,7 @@ s32 RTC_WriteCommand(u8 value)
     // control reaches end of non-void function
 }
 
-s32 RTC_WriteData(u8 value)
+static int WriteData(u8 value)
 {
     u8 i;
     u8 temp;
@@ -375,7 +390,7 @@ s32 RTC_WriteData(u8 value)
     // control reaches end of non-void function
 }
 
-u8 RTC_ReadData()
+static u8 ReadData()
 {
     u8 i;
     u8 temp;
@@ -397,12 +412,12 @@ u8 RTC_ReadData()
     return value;
 }
 
-void RTC_EnableGpioPortRead()
+static void EnableGpioPortRead()
 {
     GPIOPortReadEnable = 1;
 }
 
-void RTC_DisableGpioPortRead()
+static void DisableGpioPortRead()
 {
     GPIOPortReadEnable = 0;
 }

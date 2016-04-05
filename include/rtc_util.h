@@ -3,22 +3,22 @@
 
 #include "global.h"
 
-#define RTC_STAT_INIT_ERROR         0x0001
-#define RTC_STAT_INIT_WARNING       0x0002
+#define RTC_INIT_ERROR         0x0001
+#define RTC_INIT_WARNING       0x0002
 
-#define RTC_STAT_ERR_12HOUR_CLOCK   0x0010
-#define RTC_STAT_ERR_POWER_FAILURE  0x0020
-#define RTC_STAT_ERR_INVALID_YEAR   0x0040
-#define RTC_STAT_ERR_INVALID_MONTH  0x0080
-#define RTC_STAT_ERR_INVALID_DAY    0x0100
-#define RTC_STAT_ERR_INVALID_HOUR   0x0200
-#define RTC_STAT_ERR_INVALID_MINUTE 0x0400
-#define RTC_STAT_ERR_INVALID_SECOND 0x0800
+#define RTC_ERR_12HOUR_CLOCK   0x0010
+#define RTC_ERR_POWER_FAILURE  0x0020
+#define RTC_ERR_INVALID_YEAR   0x0040
+#define RTC_ERR_INVALID_MONTH  0x0080
+#define RTC_ERR_INVALID_DAY    0x0100
+#define RTC_ERR_INVALID_HOUR   0x0200
+#define RTC_ERR_INVALID_MINUTE 0x0400
+#define RTC_ERR_INVALID_SECOND 0x0800
 
-#define RTC_STAT_ERROR_FLAGS        0x0FF0
+#define RTC_ERROR_FLAGS        0x0FF0
 
 void RtcInit();
-u16 RtcGetStatus();
+u16 RtcGetErrorStatus();
 void RtcReset();
 void FormatDecimalTime(u8 *dest, s32 hour, s32 minute, s32 second);
 void FormatHexTime(u8 *dest, s32 hour, s32 minute, s32 second);

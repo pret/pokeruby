@@ -1,11 +1,11 @@
-gRtcStatus = 0x3000458;
-gRtcInfo = 0x3000460;
+gRtcErrorStatus = 0x3000458;
+gRtc = 0x3000460;
 gRtcProbeResult = 0x300046C;
 gRtcSavedIme = 0x300046E;
 
 gPlayTimeCounterState = 0x300057C;
 
-gRtcLocked = 0x3000F36;
+gSiiRtcLocked = 0x3000F36;
 
 gUnknownStringVar = 0x3002900;
 
