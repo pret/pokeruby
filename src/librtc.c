@@ -1,3 +1,7 @@
+// Ruby/Sapphire/Emerald cartridges contain a Seiko Instruments Inc. (SII)
+// S-3511A real-time clock (RTC). This library ("SIIRTC_V001") is for
+// communicating with the RTC.
+
 #include "gba/gba.h"
 #include "rtc.h"
 
