@@ -15,7 +15,7 @@
 #define RTC_ERR_INVALID_MINUTE 0x0400
 #define RTC_ERR_INVALID_SECOND 0x0800
 
-#define RTC_ERROR_FLAGS        0x0FF0
+#define RTC_ERR_FLAG_MASK      0x0FF0
 
 void RtcInit();
 u16 RtcGetErrorStatus();

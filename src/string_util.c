@@ -317,7 +317,7 @@ u8 *ConvertIntToHexStringN(u8 *dest, s32 value, enum StringConvertMode mode, u8 
         }
         else if (digit != 0 || powerOfSixteen == 1)
         {
-            state = 1;
+            state = WRITING_DIGITS;
             out = dest++;
 
             if (digit <= 0xF)

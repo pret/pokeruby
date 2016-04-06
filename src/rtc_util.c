@@ -3,7 +3,7 @@
 #include "rtc_util.h"
 #include "string_util.h"
 
-extern const struct SiiRtcInfo gDefaultRtcInfo;
+extern const struct SiiRtcInfo gRtcDummy;
 extern const s32 gNumDaysInMonths[];
 
 extern u16 gRtcErrorStatus;
@@ -133,8 +133,8 @@ u16 RtcGetErrorStatus()
 
 void RtcGetInfo(struct SiiRtcInfo *rtc)
 {
-    if (gRtcErrorStatus & RTC_ERROR_FLAGS)
-        *rtc = gDefaultRtcInfo;
+    if (gRtcErrorStatus & RTC_ERR_FLAG_MASK)
+        *rtc = gRtcDummy;
     else
         RtcGetRawInfo(rtc);
 }

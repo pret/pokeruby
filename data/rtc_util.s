@@ -1,7 +1,8 @@
 	.align 2
 
+; Dummy values used when the RTC is in an invalid state.
 ; 2000 Jan 1 00:00:00
-gDefaultRtcInfo: ; 81E7610
+gRtcDummy: ; 81E7610
 	.byte 0
 	.byte 1
 	.byte 1
