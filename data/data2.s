@@ -364,7 +364,7 @@ gUnknown_081E75FC: ; 81E75FC
 	.incbin "baserom.gba", 0x001e75fc, 0x14
 
 ; 81E7610
-	.include "data/rtc_util.s"
+	.include "data/rtc.s"
 
 gUnknown_081E764C: ; 81E764C
 	.incbin "baserom.gba", 0x001e764c, 0x40

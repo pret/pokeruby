@@ -1,54 +1,34 @@
-#ifndef GUARD_RTC_H
-#define GUARD_RTC_H
+#ifndef GUARD_RTC_UTIL_H
+#define GUARD_RTC_UTIL_H
 
-#include "gba/gba.h"
+#include "global.h"
 
-#define SIIRTCINFO_INTFE  0x01 // frequency interrupt enable
-#define SIIRTCINFO_INTME  0x02 // per-minute interrupt enable
-#define SIIRTCINFO_INTAE  0x04 // alarm interrupt enable
-#define SIIRTCINFO_24HOUR 0x40 // 0: 12-hour mode, 1: 24-hour mode
-#define SIIRTCINFO_POWER  0x80 // power on or power failure occurred
+#define RTC_INIT_ERROR         0x0001
+#define RTC_INIT_WARNING       0x0002
 
-enum
-{
-    MONTH_JAN = 1,
-    MONTH_FEB,
-    MONTH_MAR,
-    MONTH_APR,
-    MONTH_MAY,
-    MONTH_JUN,
-    MONTH_JUL,
-    MONTH_AUG,
-    MONTH_SEP,
-    MONTH_OCT,
-    MONTH_NOV,
-    MONTH_DEC
-};
+#define RTC_ERR_12HOUR_CLOCK   0x0010
+#define RTC_ERR_POWER_FAILURE  0x0020
+#define RTC_ERR_INVALID_YEAR   0x0040
+#define RTC_ERR_INVALID_MONTH  0x0080
+#define RTC_ERR_INVALID_DAY    0x0100
+#define RTC_ERR_INVALID_HOUR   0x0200
+#define RTC_ERR_INVALID_MINUTE 0x0400
+#define RTC_ERR_INVALID_SECOND 0x0800
 
-struct SiiRtcInfo
-{
-    u8 year;
-    u8 month;
-    u8 day;
-    u8 dayOfWeek;
-    u8 hour;
-    u8 minute;
-    u8 second;
-    u8 status;
-    u8 alarmHour;
-    u8 alarmMinute;
-};
+#define RTC_ERR_FLAG_MASK      0x0FF0
 
-void SiiRtcUnprotect();
-void SiiRtcProtect();
-u8 SiiRtcProbe();
-bool8 SiiRtcReset();
-bool8 SiiRtcGetStatus(struct SiiRtcInfo *rtc);
-bool8 SiiRtcSetStatus(struct SiiRtcInfo *rtc);
-bool8 SiiRtcGetDateTime(struct SiiRtcInfo *rtc);
-bool8 SiiRtcSetDateTime(struct SiiRtcInfo *rtc);
-bool8 SiiRtcGetTime(struct SiiRtcInfo *rtc);
-bool8 SiiRtcSetTime(struct SiiRtcInfo *rtc);
-bool8 SiiRtcSetAlarm(struct SiiRtcInfo *rtc);
+void RtcInit();
+u16 RtcGetErrorStatus();
+void RtcReset();
+void FormatDecimalTime(u8 *dest, s32 hour, s32 minute, s32 second);
+void FormatHexTime(u8 *dest, s32 hour, s32 minute, s32 second);
+void FormatHexRtcTime(u8 *dest);
+void FormatDecimalDate(u8 *dest, s32 year, s32 month, s32 day);
+void FormatHexDate(u8 *dest, s32 year, s32 month, s32 day);
+void RtcCalcLocalTime();
+void RtcInitLocalTimeOffset(s32 hour, s32 minute);
+void RtcCalcLocalTimeOffset(s32 days, s32 hours, s32 minutes, s32 seconds);
+void CalcTimeDifference(struct Time *result, struct Time *t1, struct Time *t2);
+u32 RtcGetMinuteCount();
 
-#endif // GUARD_RTC_H
+#endif // GUARD_RTC_UTIL_H
