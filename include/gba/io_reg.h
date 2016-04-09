@@ -128,6 +128,7 @@
 #define REG_OFFSET_DMA3CNT_L   0xdc
 #define REG_OFFSET_DMA3CNT_H   0xde
 
+#define REG_OFFSET_TMCNT       0x100
 #define REG_OFFSET_TM0CNT      0x100
 #define REG_OFFSET_TM0CNT_L    0x100
 #define REG_OFFSET_TM0CNT_H    0x102
@@ -280,6 +281,7 @@
 #define REG_ADDR_DMA3CNT_L   (REG_BASE + REG_OFFSET_DMA3CNT_L)
 #define REG_ADDR_DMA3CNT_H   (REG_BASE + REG_OFFSET_DMA3CNT_H)
 
+#define REG_ADDR_TMCNT       (REG_BASE + REG_OFFSET_TMCNT)
 #define REG_ADDR_TM0CNT      (REG_BASE + REG_OFFSET_TM0CNT)
 #define REG_ADDR_TM0CNT_L    (REG_BASE + REG_OFFSET_TM0CNT_L)
 #define REG_ADDR_TM0CNT_H    (REG_BASE + REG_OFFSET_TM0CNT_H)
@@ -353,9 +355,13 @@
 #define REG_DMA3CNT_L   (*(vu16 *)REG_ADDR_DMA3CNT_L)
 #define REG_DMA3CNT_H   (*(vu16 *)REG_ADDR_DMA3CNT_H)
 
+#define REG_TMCNT(n)    (*(vu16 *)(REG_ADDR_TMCNT + ((n) * 4)))
+
 #define REG_IME         (*(vu16 *)REG_ADDR_IME)
 #define REG_IE          (*(vu16 *)REG_ADDR_IE)
 #define REG_IF          (*(vu16 *)REG_ADDR_IF)
+
+#define REG_WAITCNT     (*(vu16 *)REG_ADDR_WAITCNT)
 
 // I/O register fields
 
@@ -411,5 +417,50 @@
 #define INTR_FLAG_DMA3    (1 << 11)
 #define INTR_FLAG_KEYPAD  (1 << 12)
 #define INTR_FLAG_GAMEPAK (1 << 13)
+
+// WAITCNT
+#define WAITCNT_SRAM_4          (0 << 0)
+#define WAITCNT_SRAM_3          (1 << 0)
+#define WAITCNT_SRAM_2          (2 << 0)
+#define WAITCNT_SRAM_8          (3 << 0)
+#define WAITCNT_SRAM_MASK       (3 << 0)
+
+#define WAITCNT_WS0_N_4         (0 << 2)
+#define WAITCNT_WS0_N_3         (1 << 2)
+#define WAITCNT_WS0_N_2         (2 << 2)
+#define WAITCNT_WS0_N_8         (3 << 2)
+#define WAITCNT_WS0_N_MASK      (3 << 2)
+
+#define WAITCNT_WS0_S_2         (0 << 4)
+#define WAITCNT_WS0_S_1         (1 << 4)
+
+#define WAITCNT_WS1_N_4         (0 << 5)
+#define WAITCNT_WS1_N_3         (1 << 5)
+#define WAITCNT_WS1_N_2         (2 << 5)
+#define WAITCNT_WS1_N_8         (3 << 5)
+#define WAITCNT_WS1_N_MASK      (3 << 5)
+
+#define WAITCNT_WS1_S_4         (0 << 7)
+#define WAITCNT_WS1_S_1         (1 << 7)
+
+#define WAITCNT_WS2_N_4         (0 << 8)
+#define WAITCNT_WS2_N_3         (1 << 8)
+#define WAITCNT_WS2_N_2         (2 << 8)
+#define WAITCNT_WS2_N_8         (3 << 8)
+#define WAITCNT_WS2_N_MASK      (3 << 8)
+
+#define WAITCNT_WS2_S_8         (0 << 10)
+#define WAITCNT_WS2_S_1         (1 << 10)
+
+#define WAITCNT_PHI_OUT_NONE    (0 << 11)
+#define WAITCNT_PHI_OUT_4MHZ    (1 << 11)
+#define WAITCNT_PHI_OUT_8MHZ    (2 << 11)
+#define WAITCNT_PHI_OUT_16MHZ   (3 << 11)
+#define WAITCNT_PHI_OUT_MASK    (3 << 11)
+
+#define WAITCNT_PREFETCH_ENABLE (1 << 14)
+
+#define WAITCNT_AGB (0 << 15)
+#define WAITCNT_CGB (1 << 15)
 
 #endif // GUARD_GBA_IO_REG_H

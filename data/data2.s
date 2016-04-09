@@ -7984,7 +7984,7 @@ gUnknown_0845545C: ; 845545C
 gUnknown_0845548C: ; 845548C
 	.incbin "baserom.gba", 0x0045548c, 0x25b31c
 
-gUnknown_086B07A8: ; 86B07A8
+sSetupInfos: ; 86B07A8
 	.incbin "baserom.gba", 0x006b07a8, 0x150
 
 gUnknown_086B08F8: ; 86B08F8

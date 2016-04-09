@@ -17,12 +17,12 @@ do {                                                                            
 #define CpuCopy16(src, dest, size) CPU_COPY(src, dest, size, 16)
 #define CpuCopy32(src, dest, size) CPU_COPY(src, dest, size, 32)
 
-#define DmaSet(dmaNum, src, dest, controlData)    \
+#define DmaSet(dmaNum, src, dest, control)        \
 do {                                              \
     vu32 *dmaRegs = (vu32 *)REG_ADDR_DMA##dmaNum; \
     dmaRegs[0] = (vu32)(src);                     \
     dmaRegs[1] = (vu32)(dest);                    \
-    dmaRegs[2] = (vu32)(controlData);             \
+    dmaRegs[2] = (vu32)(control);                 \
     dmaRegs[2];                                   \
 } while (0)
 

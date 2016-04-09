@@ -5,6 +5,8 @@
 #define CPU_SET_16BIT     0x00000000
 #define CPU_SET_32BIT     0x04000000
 
-extern void CpuSet(void *src, void *dest, u32 controlData);
+extern void CpuSet(void *src, void *dest, u32 control);
+
+extern void VBlankIntrWait(void);
 
 #endif // GUARD_GBA_SYSCALL_H

@@ -64,6 +64,10 @@ $(OBJS): $(CSRCS:src/%.c=genasm/%.s)
 
 genasm/siirtc.s: CFLAGS := -mthumb-interwork -Iinclude
 
+genasm/agb_flash.s: CFLAGS := -O -mthumb-interwork -Iinclude
+genasm/agb_flash_1m.s: CFLAGS := -O -mthumb-interwork -Iinclude
+genasm/agb_flash_mx.s: CFLAGS := -O -mthumb-interwork -Iinclude
+
 # TODO: fix this .syntax hack
 
 genasm/prefix.tmp:
