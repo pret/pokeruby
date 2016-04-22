@@ -1,4 +1,4 @@
-gEasyChatGroupWords_Feelings: ; 83DCE9B
+gEasyChatGroupWords_Feelings: @ 83DCE9B
 	.string "MEET$"
 	.string "PLAY$"
 	.string "HURRIED$"

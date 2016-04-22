@@ -17,6 +17,7 @@ void ResetTasks();
 u8 CreateTask(TaskFunc func, u8 priority);
 void DestroyTask(u8 taskId);
 void RunTasks();
+void TaskDummy(u8 taskId);
 void SetTaskFuncWithFollowupFunc(u8 taskId, TaskFunc func, TaskFunc followupFunc);
 void SwitchTaskToFollowupFunc(u8 taskId);
 bool8 FuncIsActiveTask(TaskFunc func);

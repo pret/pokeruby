@@ -1,6 +1,6 @@
 	.align 2
-
-gTrainerFrontPicTable: ; 81EC53C
+	.global gTrainerFrontPicTable
+gTrainerFrontPicTable: @ 81EC53C
 	obj_tiles gTrainerFrontPic_Brendan, 0x800, 0
 	obj_tiles gTrainerFrontPic_May, 0x800, 1
 	obj_tiles gTrainerFrontPic_Lass, 0x800, 2

@@ -1,6 +1,6 @@
 	.align 1
 
-gEasyChatGroupOrder_TrendySaying: ; 83DFBDA
+gEasyChatGroupOrder_TrendySaying: @ 83DFBDA
 	.2byte 7
 	.2byte 2
 	.2byte 28

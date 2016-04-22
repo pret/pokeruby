@@ -1,6 +1,6 @@
 	.align 1
 
-gEasyChatGroupOrder_Greetings: ; 83DF322
+gEasyChatGroupOrder_Greetings: @ 83DF322
 	.2byte 12
 	.2byte 25
 	.2byte 32

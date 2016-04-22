@@ -1,4 +1,5 @@
-gTrainerClassNames: ; 81F0208
+	.global gTrainerClassNames
+gTrainerClassNames: @ 81F0208
 	.string "{PKMN} TRAINER$", 13
 	.string "{PKMN} TRAINER$", 13
 	.string "AQUA LEADER$", 13
@@ -7,8 +8,8 @@ gTrainerClassNames: ; 81F0208
 	.string "AROMA LADY$", 13
 	.string "RUIN MANIAC$", 13
 	.string "INTERVIEWER$", 13
-	.string "TUBER$", 13 ; うきわガール (Inner Tube Girl) in Japanese
-	.string "TUBER$", 13 ; うきわボーイ (Inner Tube Boy) in Japanese
+	.string "TUBER$", 13 @ うきわガール (Inner Tube Girl) in Japanese
+	.string "TUBER$", 13 @ うきわボーイ (Inner Tube Boy) in Japanese
 	.string "COOLTRAINER$", 13
 	.string "HEX MANIAC$", 13
 	.string "LADY$", 13

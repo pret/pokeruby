@@ -1,4 +1,5 @@
-gMoveNames: ; 81F8320
+	.global gMoveNames
+gMoveNames: @ 81F8320
 	.string "-$$$$$$$", 13
 	.string "POUND$", 13
 	.string "KARATE CHOP$", 13

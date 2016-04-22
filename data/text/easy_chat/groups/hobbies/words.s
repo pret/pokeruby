@@ -1,4 +1,4 @@
-gEasyChatGroupWords_Hobbies: ; 83DD5B1
+gEasyChatGroupWords_Hobbies: @ 83DD5B1
 	.string "IDOL$"
 	.string "ANIME$"
 	.string "SONG$"

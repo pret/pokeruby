@@ -1,6 +1,6 @@
 	.align 1
 
-gEasyChatGroupOrder_Speech: ; 83DF48A
+gEasyChatGroupOrder_Speech: @ 83DF48A
 	.2byte 19
 	.2byte 18
 	.2byte 27

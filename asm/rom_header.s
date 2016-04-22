@@ -1,3 +1,4 @@
+	.global RomHeaderNintendoLogo
 RomHeaderNintendoLogo:
 	.incbin "baserom.gba", 0x4, 0xA0 - 0x4
 
@@ -20,9 +21,7 @@ RomHeaderDeviceType:
 	.byte 0
 
 RomHeaderReserved1:
-	.rept 7
-	.byte 0
-	.endr
+	.space 7
 
 RomHeaderSoftwareVersion:
 	.byte 0
@@ -31,6 +30,4 @@ RomHeaderChecksum:
 	.byte 0x41
 
 RomHeaderReserved2:
-	.rept 2
-	.byte 0
-	.endr
+	.space 2

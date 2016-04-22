@@ -1,6 +1,6 @@
 	.align 1
 
-gEasyChatGroupOrder_Feelings: ; 83DF58C
+gEasyChatGroupOrder_Feelings: @ 83DF58C
 	.2byte 40
 	.2byte 39
 	.2byte 24

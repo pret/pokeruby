@@ -1,4 +1,4 @@
-gEasyChatGroupWords_People: ; 83DC85A
+gEasyChatGroupWords_People: @ 83DC85A
 	.string "OPPONENT$"
 	.string "I$"
 	.string "YOU$"

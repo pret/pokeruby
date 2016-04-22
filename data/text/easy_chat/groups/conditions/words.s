@@ -1,4 +1,4 @@
-gEasyChatGroupWords_Conditions: ; 83DD07D
+gEasyChatGroupWords_Conditions: @ 83DD07D
 	.string "HOT$"
 	.string "EXISTS$"
 	.string "EXCESS$"

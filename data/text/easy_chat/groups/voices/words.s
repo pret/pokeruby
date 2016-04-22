@@ -1,4 +1,4 @@
-gEasyChatGroupWords_Voices: ; 83DCA20
+gEasyChatGroupWords_Voices: @ 83DCA20
 	.string "!$"
 	.string "!!$"
 	.string "?!$"

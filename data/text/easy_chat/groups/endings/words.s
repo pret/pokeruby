@@ -1,4 +1,4 @@
-gEasyChatGroupWords_Endings: ; 83DCD23
+gEasyChatGroupWords_Endings: @ 83DCD23
 	.string "WILL$"
 	.string "WILL BE HERE$"
 	.string "OR$"

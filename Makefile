@@ -21,11 +21,11 @@ SCANINC := tools/scaninc/scaninc
 .PHONY: rom tools gbagfx scaninc clean compare deps
 
 CSRCS := $(wildcard src/*.c)
-OBJS := asm/rom.o
-
-$(foreach obj, $(OBJS), \
-	$(eval $(obj)_deps := $(shell $(SCANINC) $(obj:.o=.s))) \
-)
+OBJS := asm/crt0.o asm/rom1.o asm/rom2.o asm/rom3.o asm/rom4.o asm/rom5.o \
+	asm/libgcnmultiboot.o asm/libmks4agb.o asm/libagbsyscall.o asm/libgcc.o \
+	src/string_util.o src/rtc.o src/play_time.o src/task.o \
+	src/agb_flash.o src/agb_flash_1m.o src/agb_flash_mx.o src/siirtc.o \
+	data/data1.o data/data2.o
 
 ROM := pokeruby.gba
 ELF := $(ROM:.gba=.elf)
@@ -46,7 +46,6 @@ compare: $(ROM)
 
 clean:
 	$(RM) $(ROM) $(ELF) $(OBJS)
-	$(RM) genasm/*
 	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.latfont' -o -iname '*.hwjpnfont' -o -iname '*.fwjpnfont' \) -exec rm {} +
 
 include castform.mk
@@ -60,32 +59,20 @@ include tilesets.mk
 %.gbapal: %.pal ; $(GFX) $< $@
 %.lz: % ; $(GFX) $< $@
 
-$(OBJS): $(CSRCS:src/%.c=genasm/%.s)
+$(OBJS): $(CSRCS:src/%.c=src/%.s)
 
-genasm/siirtc.s: CFLAGS := -mthumb-interwork -Iinclude
+src/siirtc.s: CFLAGS := -mthumb-interwork -Iinclude
 
-genasm/agb_flash.s: CFLAGS := -O -mthumb-interwork -Iinclude
-genasm/agb_flash_1m.s: CFLAGS := -O -mthumb-interwork -Iinclude
-genasm/agb_flash_mx.s: CFLAGS := -O -mthumb-interwork -Iinclude
+src/agb_flash.s: CFLAGS := -O -mthumb-interwork -Iinclude
+src/agb_flash_1m.s: CFLAGS := -O -mthumb-interwork -Iinclude
+src/agb_flash_mx.s: CFLAGS := -O -mthumb-interwork -Iinclude
 
-# TODO: fix this .syntax hack
+src/%.s: src/%.c
+	$(CC) $(CFLAGS) -o $@ $< -S
+	echo -e ".text\n\t.align\t2, 0\n" >> $@
 
-genasm/prefix.tmp:
-	mkdir -p genasm
-	echo -e "\t.syntax divided" >$@
-
-genasm/suffix.tmp:
-	mkdir -p genasm
-	echo -e "\t.syntax unified" >$@
-
-genasm/%.s: src/%.c genasm/prefix.tmp genasm/suffix.tmp
-	mkdir -p genasm
-	$(CC) $(CFLAGS) -o $@.tmp $< -S
-	cat genasm/prefix.tmp $@.tmp genasm/suffix.tmp >$@.tmp2
-	perl fix_local_labels.pl $@.tmp2 $@
-	$(RM) $@.tmp $@.tmp2
-
-%.o: %.s $$($$@_deps)
+%.o: dep = $(shell $(SCANINC) $(@D)/$*.s)
+%.o: %.s $$(dep)
 	$(AS) $(ASFLAGS) -o $@ $<
 
 # Link objects to produce the ROM.

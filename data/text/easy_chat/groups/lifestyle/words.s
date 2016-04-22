@@ -1,4 +1,4 @@
-gEasyChatGroupWords_Lifestyle: ; 83DD468
+gEasyChatGroupWords_Lifestyle: @ 83DD468
 	.string "CHORES$"
 	.string "HOME$"
 	.string "MONEY$"

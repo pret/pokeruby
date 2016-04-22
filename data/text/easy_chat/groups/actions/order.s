@@ -1,6 +1,6 @@
 	.align 1
 
-gEasyChatGroupOrder_Actions: ; 83DF6A0
+gEasyChatGroupOrder_Actions: @ 83DF6A0
 	.2byte 72
 	.2byte 14
 	.2byte 48

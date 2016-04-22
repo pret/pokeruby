@@ -1,2702 +1,2702 @@
 	.align 2
-
-gBattleTowerLevel50Mons: ; 84038E0
-; 0
+	.global gBattleTowerLevel50Mons
+gBattleTowerLevel50Mons: @ 84038E0
+@ 0
 	.2byte SPECIES_PIKACHU
 	.byte BATTLE_TOWER_ITEM_ORAN_BERRY
-	.byte 0x42 ; team flags
+	.byte 0x42 @ team flags
 	.2byte MOVE_QUICK_ATTACK, MOVE_THUNDER_WAVE, MOVE_THUNDER_SHOCK, MOVE_GROWL
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_DEFENSE
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 1
+@ 1
 	.2byte SPECIES_BEAUTIFLY
 	.byte BATTLE_TOWER_ITEM_MIRACLE_SEED
-	.byte 0x41 ; team flags
+	.byte 0x41 @ team flags
 	.2byte MOVE_ABSORB, MOVE_STUN_SPORE, MOVE_GUST, MOVE_SAFEGUARD
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_SPEED | F_EV_SPREAD_DEFENSE | F_EV_SPREAD_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_BRAVE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 2
+@ 2
 	.2byte SPECIES_SWELLOW
 	.byte BATTLE_TOWER_ITEM_SHARP_BEAK
-	.byte 0x07 ; team flags
+	.byte 0x07 @ team flags
 	.2byte MOVE_PECK, MOVE_WING_ATTACK, MOVE_AERIAL_ACE, MOVE_AGILITY
 	.byte F_EV_SPREAD_ATTACK
 	.byte NATURE_GENTLE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 3
+@ 3
 	.2byte SPECIES_WALREIN
 	.byte BATTLE_TOWER_ITEM_SCOPE_LENS
-	.byte 0x0B ; team flags
+	.byte 0x0B @ team flags
 	.2byte MOVE_HAIL, MOVE_ENCORE, MOVE_ICE_BALL, MOVE_TOXIC
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_ADAMANT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 4
+@ 4
 	.2byte SPECIES_SEAKING
 	.byte BATTLE_TOWER_ITEM_MYSTIC_WATER
-	.byte 0x07 ; team flags
+	.byte 0x07 @ team flags
 	.2byte MOVE_PECK, MOVE_FLAIL, MOVE_FURY_ATTACK, MOVE_SURF
 	.byte F_EV_SPREAD_SPEED
 	.byte NATURE_HASTY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 5
+@ 5
 	.2byte SPECIES_TORCHIC
 	.byte BATTLE_TOWER_ITEM_KINGS_ROCK
-	.byte 0x42 ; team flags
+	.byte 0x42 @ team flags
 	.2byte MOVE_FIRE_SPIN, MOVE_PROTECT, MOVE_SAND_ATTACK, MOVE_SLASH
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_SP_ATTACK
 	.byte NATURE_RELAXED
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 6
+@ 6
 	.2byte SPECIES_MASQUERAIN
 	.byte BATTLE_TOWER_ITEM_WHITE_HERB
-	.byte 0x41 ; team flags
+	.byte 0x41 @ team flags
 	.2byte MOVE_STUN_SPORE, MOVE_WATER_SPORT, MOVE_QUICK_ATTACK, MOVE_GUST
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_IMPISH
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 7
+@ 7
 	.2byte SPECIES_ILLUMISE
 	.byte BATTLE_TOWER_ITEM_NONE
-	.byte 0x41 ; team flags
+	.byte 0x41 @ team flags
 	.2byte MOVE_FLATTER, MOVE_COVET, MOVE_WISH, MOVE_FACADE
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_DEFENSE
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 8
+@ 8
 	.2byte SPECIES_DELCATTY
 	.byte BATTLE_TOWER_ITEM_SILK_SCARF
-	.byte 0x42 ; team flags
+	.byte 0x42 @ team flags
 	.2byte MOVE_ATTRACT, MOVE_TAIL_WHIP, MOVE_FAINT_ATTACK, MOVE_DIG
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_LONELY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 9
+@ 9
 	.2byte SPECIES_KECLEON
 	.byte BATTLE_TOWER_ITEM_PERSIM_BERRY
-	.byte 0x0B ; team flags
+	.byte 0x0B @ team flags
 	.2byte MOVE_TAIL_WHIP, MOVE_SLASH, MOVE_LICK, MOVE_SCREECH
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_DEFENSE
 	.byte NATURE_BRAVE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 10
+@ 10
 	.2byte SPECIES_MIGHTYENA
 	.byte BATTLE_TOWER_ITEM_PECHA_BERRY
-	.byte 0x05 ; team flags
+	.byte 0x05 @ team flags
 	.2byte MOVE_BITE, MOVE_TAKE_DOWN, MOVE_ROAR, MOVE_HOWL
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_ATTACK
 	.byte NATURE_DOCILE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 11
+@ 11
 	.2byte SPECIES_SLAKING
 	.byte BATTLE_TOWER_ITEM_BLACK_GLASSES
-	.byte 0x05 ; team flags
+	.byte 0x05 @ team flags
 	.2byte MOVE_FAINT_ATTACK, MOVE_COUNTER, MOVE_SCRATCH, MOVE_TAUNT
 	.byte F_EV_SPREAD_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_LAX
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 12
+@ 12
 	.2byte SPECIES_MACHOKE
 	.byte BATTLE_TOWER_ITEM_CHESTO_BERRY
-	.byte 0x05 ; team flags
+	.byte 0x05 @ team flags
 	.2byte MOVE_LEER, MOVE_DIG, MOVE_LOW_KICK, MOVE_FOCUS_PUNCH
 	.byte F_EV_SPREAD_SPEED
 	.byte NATURE_TIMID
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 13
+@ 13
 	.2byte SPECIES_RHYDON
 	.byte BATTLE_TOWER_ITEM_PERSIM_BERRY
-	.byte 0x05 ; team flags
+	.byte 0x05 @ team flags
 	.2byte MOVE_STRENGTH, MOVE_ROCK_TOMB, MOVE_STOMP, MOVE_ROCK_SMASH
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_HP
 	.byte NATURE_QUIRKY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 14
+@ 14
 	.2byte SPECIES_CACTURNE
 	.byte BATTLE_TOWER_ITEM_POISON_BARB
-	.byte 0x0B ; team flags
+	.byte 0x0B @ team flags
 	.2byte MOVE_POISON_STING, MOVE_GROWTH, MOVE_ABSORB, MOVE_SOLAR_BEAM
 	.byte F_EV_SPREAD_SP_ATTACK
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 15
+@ 15
 	.2byte SPECIES_ZIGZAGOON
 	.byte BATTLE_TOWER_ITEM_KINGS_ROCK
-	.byte 0x0A ; team flags
+	.byte 0x0A @ team flags
 	.2byte MOVE_FLAIL, MOVE_SAND_ATTACK, MOVE_REST, MOVE_SURF
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_ATTACK
 	.byte NATURE_SASSY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 16
+@ 16
 	.2byte SPECIES_DODRIO
 	.byte BATTLE_TOWER_ITEM_SHARP_BEAK
-	.byte 0x03 ; team flags
+	.byte 0x03 @ team flags
 	.2byte MOVE_PURSUIT, MOVE_TRI_ATTACK, MOVE_GROWL, MOVE_AGILITY
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_SPEED | F_EV_SPREAD_DEFENSE | F_EV_SPREAD_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_SERIOUS
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 17
+@ 17
 	.2byte SPECIES_WHISCASH
 	.byte BATTLE_TOWER_ITEM_QUICK_CLAW
-	.byte 0x0B ; team flags
+	.byte 0x0B @ team flags
 	.2byte MOVE_WATER_GUN, MOVE_AMNESIA, MOVE_MAGNITUDE, MOVE_MUD_SLAP
 	.byte F_EV_SPREAD_DEFENSE | F_EV_SPREAD_ATTACK
 	.byte NATURE_LAX
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 18
+@ 18
 	.2byte SPECIES_NINJASK
 	.byte BATTLE_TOWER_ITEM_SILVER_POWDER
-	.byte 0x41 ; team flags
+	.byte 0x41 @ team flags
 	.2byte MOVE_SAND_ATTACK, MOVE_FURY_CUTTER, MOVE_AGILITY, MOVE_HARDEN
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_SPEED | F_EV_SPREAD_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_QUIET
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 19
+@ 19
 	.2byte SPECIES_DUSCLOPS
 	.byte BATTLE_TOWER_ITEM_PECHA_BERRY
-	.byte 0x01 ; team flags
+	.byte 0x01 @ team flags
 	.2byte MOVE_PROTECT, MOVE_NIGHT_SHADE, MOVE_ASTONISH, MOVE_WILL_O_WISP
 	.byte F_EV_SPREAD_HP
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 20
+@ 20
 	.2byte SPECIES_CAMERUPT
 	.byte BATTLE_TOWER_ITEM_CHARCOAL
-	.byte 0x07 ; team flags
+	.byte 0x07 @ team flags
 	.2byte MOVE_DIG, MOVE_EMBER, MOVE_GROWL, MOVE_ROCK_SMASH
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_ATTACK
 	.byte NATURE_BOLD
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 21
+@ 21
 	.2byte SPECIES_SPINDA
 	.byte BATTLE_TOWER_ITEM_CHERI_BERRY
-	.byte 0x4A ; team flags
+	.byte 0x4A @ team flags
 	.2byte MOVE_TEETER_DANCE, MOVE_FLAIL, MOVE_PSYCH_UP, MOVE_DOUBLE_EDGE
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_HP
 	.byte NATURE_CALM
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 22
+@ 22
 	.2byte SPECIES_SEVIPER
 	.byte BATTLE_TOWER_ITEM_POISON_BARB
-	.byte 0x09 ; team flags
+	.byte 0x09 @ team flags
 	.2byte MOVE_SCREECH, MOVE_GLARE, MOVE_DIG, MOVE_POISON_FANG
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_DEFENSE
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 23
+@ 23
 	.2byte SPECIES_FLYGON
 	.byte BATTLE_TOWER_ITEM_QUICK_CLAW
-	.byte 0x49 ; team flags
+	.byte 0x49 @ team flags
 	.2byte MOVE_SAND_ATTACK, MOVE_SAND_TOMB, MOVE_FACADE, MOVE_TOXIC
 	.byte F_EV_SPREAD_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 24
+@ 24
 	.2byte SPECIES_AZUMARILL
 	.byte BATTLE_TOWER_ITEM_WHITE_HERB
-	.byte 0x42 ; team flags
+	.byte 0x42 @ team flags
 	.2byte MOVE_BUBBLE_BEAM, MOVE_TAIL_WHIP, MOVE_RAIN_DANCE, MOVE_ROLLOUT
 	.byte F_EV_SPREAD_DEFENSE | F_EV_SPREAD_ATTACK
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 25
+@ 25
 	.2byte SPECIES_ZANGOOSE
 	.byte BATTLE_TOWER_ITEM_MENTAL_HERB
-	.byte 0x07 ; team flags
+	.byte 0x07 @ team flags
 	.2byte MOVE_STRENGTH, MOVE_TAUNT, MOVE_CRUSH_CLAW, MOVE_DETECT
 	.byte F_EV_SPREAD_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 26
+@ 26
 	.2byte SPECIES_MEDICHAM
 	.byte BATTLE_TOWER_ITEM_SCOPE_LENS
-	.byte 0x07 ; team flags
+	.byte 0x07 @ team flags
 	.2byte MOVE_REVERSAL, MOVE_MEDITATE, MOVE_CONFUSION, MOVE_FACADE
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_DEFENSE
 	.byte NATURE_HASTY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 27
+@ 27
 	.2byte SPECIES_ROSELIA
 	.byte BATTLE_TOWER_ITEM_MIRACLE_SEED
-	.byte 0x0A ; team flags
+	.byte 0x0A @ team flags
 	.2byte MOVE_GROWTH, MOVE_MEGA_DRAIN, MOVE_TOXIC, MOVE_CUT
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_SP_ATTACK
 	.byte NATURE_NAUGHTY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 28
+@ 28
 	.2byte SPECIES_SWALOT
 	.byte BATTLE_TOWER_ITEM_LUM_BERRY
-	.byte 0x0B ; team flags
+	.byte 0x0B @ team flags
 	.2byte MOVE_STOCKPILE, MOVE_SPIT_UP, MOVE_SLUDGE, MOVE_POISON_GAS
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_SPEED | F_EV_SPREAD_DEFENSE | F_EV_SPREAD_ATTACK
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 29
+@ 29
 	.2byte SPECIES_MAGNETON
 	.byte BATTLE_TOWER_ITEM_MAGNET
-	.byte 0x0B ; team flags
+	.byte 0x0B @ team flags
 	.2byte MOVE_SUPERSONIC, MOVE_THUNDER_WAVE, MOVE_SCREECH, MOVE_TRI_ATTACK
 	.byte F_EV_SPREAD_SPEED
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 30
+@ 30
 	.2byte SPECIES_GARDEVOIR
 	.byte BATTLE_TOWER_ITEM_TWISTED_SPOON
-	.byte 0x09 ; team flags
+	.byte 0x09 @ team flags
 	.2byte MOVE_CONFUSION, MOVE_TOXIC, MOVE_TORMENT, MOVE_PROTECT
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_HP
 	.byte NATURE_BOLD
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 31
+@ 31
 	.2byte SPECIES_RELICANTH
 	.byte BATTLE_TOWER_ITEM_MYSTIC_WATER
-	.byte 0x01 ; team flags
+	.byte 0x01 @ team flags
 	.2byte MOVE_SURF, MOVE_ANCIENT_POWER, MOVE_ROCK_TOMB, MOVE_HARDEN
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_DEFENSE
 	.byte NATURE_TIMID
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 32
+@ 32
 	.2byte SPECIES_NINETALES
 	.byte BATTLE_TOWER_ITEM_RAWST_BERRY
-	.byte 0x03 ; team flags
+	.byte 0x03 @ team flags
 	.2byte MOVE_CONFUSE_RAY, MOVE_FIRE_SPIN, MOVE_QUICK_ATTACK, MOVE_FLAMETHROWER
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_DEFENSE | F_EV_SPREAD_ATTACK
 	.byte NATURE_HASTY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 33
+@ 33
 	.2byte SPECIES_SHARPEDO
 	.byte BATTLE_TOWER_ITEM_BLACK_GLASSES
-	.byte 0x05 ; team flags
+	.byte 0x05 @ team flags
 	.2byte MOVE_BITE, MOVE_SKULL_BASH, MOVE_RAIN_DANCE, MOVE_SURF
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_SPEED | F_EV_SPREAD_ATTACK
 	.byte NATURE_RELAXED
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 34
+@ 34
 	.2byte SPECIES_GIRAFARIG
 	.byte BATTLE_TOWER_ITEM_KINGS_ROCK
-	.byte 0x03 ; team flags
+	.byte 0x03 @ team flags
 	.2byte MOVE_STRENGTH, MOVE_PSYBEAM, MOVE_AGILITY, MOVE_EARTHQUAKE
 	.byte F_EV_SPREAD_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_IMPISH
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 35
+@ 35
 	.2byte SPECIES_PELIPPER
 	.byte BATTLE_TOWER_ITEM_SITRUS_BERRY
-	.byte 0x0B ; team flags
+	.byte 0x0B @ team flags
 	.2byte MOVE_MIST, MOVE_STOCKPILE, MOVE_SWALLOW, MOVE_SPIT_UP
 	.byte F_EV_SPREAD_DEFENSE
 	.byte NATURE_QUIRKY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 36
+@ 36
 	.2byte SPECIES_SABLEYE
 	.byte BATTLE_TOWER_ITEM_CHERI_BERRY
-	.byte 0x09 ; team flags
+	.byte 0x09 @ team flags
 	.2byte MOVE_SHADOW_BALL, MOVE_NIGHT_SHADE, MOVE_SNATCH, MOVE_FAKE_OUT
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_ATTACK
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 37
+@ 37
 	.2byte SPECIES_LUNATONE
 	.byte BATTLE_TOWER_ITEM_HARD_STONE
-	.byte 0x0B ; team flags
+	.byte 0x0B @ team flags
 	.2byte MOVE_COSMIC_POWER, MOVE_SANDSTORM, MOVE_PSYCHIC, MOVE_ROCK_THROW
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_DEFENSE
 	.byte NATURE_GENTLE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 38
+@ 38
 	.2byte SPECIES_LUDICOLO
 	.byte BATTLE_TOWER_ITEM_NONE
-	.byte 0x0B ; team flags
+	.byte 0x0B @ team flags
 	.2byte MOVE_THIEF, MOVE_FAKE_OUT, MOVE_SURF, MOVE_RAIN_DANCE
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_ATTACK
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 39
+@ 39
 	.2byte SPECIES_GRUMPIG
 	.byte BATTLE_TOWER_ITEM_SALAC_BERRY
-	.byte 0x0B ; team flags
+	.byte 0x0B @ team flags
 	.2byte MOVE_ODOR_SLEUTH, MOVE_CONFUSE_RAY, MOVE_MAGIC_COAT, MOVE_PSYCHIC
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_DEFENSE
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 40
+@ 40
 	.2byte SPECIES_BRELOOM
 	.byte BATTLE_TOWER_ITEM_QUICK_CLAW
-	.byte 0x0B ; team flags
+	.byte 0x0B @ team flags
 	.2byte MOVE_CUT, MOVE_LEECH_SEED, MOVE_MEGA_DRAIN, MOVE_STUN_SPORE
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_DEFENSE
 	.byte NATURE_SASSY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 41
+@ 41
 	.2byte SPECIES_WAILORD
 	.byte BATTLE_TOWER_ITEM_MYSTIC_WATER
-	.byte 0x03 ; team flags
+	.byte 0x03 @ team flags
 	.2byte MOVE_WATER_SPOUT, MOVE_ROLLOUT, MOVE_MIST, MOVE_RAIN_DANCE
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_DEFENSE
 	.byte NATURE_GENTLE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 42
+@ 42
 	.2byte SPECIES_WEEZING
 	.byte BATTLE_TOWER_ITEM_POISON_BARB
-	.byte 0x05 ; team flags
+	.byte 0x05 @ team flags
 	.2byte MOVE_SMOG, MOVE_SELF_DESTRUCT, MOVE_TOXIC, MOVE_SLUDGE_BOMB
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_DEFENSE
 	.byte NATURE_BASHFUL
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 43
+@ 43
 	.2byte SPECIES_KADABRA
 	.byte BATTLE_TOWER_ITEM_LEPPA_BERRY
-	.byte 0x0B ; team flags
+	.byte 0x0B @ team flags
 	.2byte MOVE_FUTURE_SIGHT, MOVE_FOCUS_PUNCH, MOVE_SKILL_SWAP, MOVE_SNATCH
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_DEFENSE
 	.byte NATURE_CAREFUL
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 44
+@ 44
 	.2byte SPECIES_MANECTRIC
 	.byte BATTLE_TOWER_ITEM_MAGNET
-	.byte 0x07 ; team flags
+	.byte 0x07 @ team flags
 	.2byte MOVE_THUNDER_WAVE, MOVE_BITE, MOVE_SPARK, MOVE_QUICK_ATTACK
 	.byte F_EV_SPREAD_SP_ATTACK
 	.byte NATURE_RASH
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 45
+@ 45
 	.2byte SPECIES_RAICHU
 	.byte BATTLE_TOWER_ITEM_ASPEAR_BERRY
-	.byte 0x03 ; team flags
+	.byte 0x03 @ team flags
 	.2byte MOVE_QUICK_ATTACK, MOVE_AGILITY, MOVE_LIGHT_SCREEN, MOVE_THUNDERBOLT
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_HP
 	.byte NATURE_QUIET
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 46
+@ 46
 	.2byte SPECIES_XATU
 	.byte BATTLE_TOWER_ITEM_TWISTED_SPOON
-	.byte 0x03 ; team flags
+	.byte 0x03 @ team flags
 	.2byte MOVE_NIGHT_SHADE, MOVE_PECK, MOVE_CONFUSE_RAY, MOVE_FUTURE_SIGHT
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_SPEED | F_EV_SPREAD_DEFENSE
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 47
+@ 47
 	.2byte SPECIES_LOUDRED
 	.byte BATTLE_TOWER_ITEM_SITRUS_BERRY
-	.byte 0x05 ; team flags
+	.byte 0x05 @ team flags
 	.2byte MOVE_UPROAR, MOVE_STOMP, MOVE_SCREECH, MOVE_EARTHQUAKE
 	.byte F_EV_SPREAD_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_MODEST
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 48
+@ 48
 	.2byte SPECIES_SOLROCK
 	.byte BATTLE_TOWER_ITEM_LEFTOVERS
-	.byte 0x03 ; team flags
+	.byte 0x03 @ team flags
 	.2byte MOVE_ROCK_THROW, MOVE_SUNNY_DAY, MOVE_SOLAR_BEAM, MOVE_SANDSTORM
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_DEFENSE
 	.byte NATURE_MILD
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 49
+@ 49
 	.2byte SPECIES_CLAYDOL
 	.byte BATTLE_TOWER_ITEM_BRIGHT_POWDER
-	.byte 0x03 ; team flags
+	.byte 0x03 @ team flags
 	.2byte MOVE_SANDSTORM, MOVE_REFLECT, MOVE_ROCK_TOMB, MOVE_STRENGTH
 	.byte F_EV_SPREAD_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_SERIOUS
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 50
+@ 50
 	.2byte SPECIES_CRAWDAUNT
 	.byte BATTLE_TOWER_ITEM_SCOPE_LENS
-	.byte 0x03 ; team flags
+	.byte 0x03 @ team flags
 	.2byte MOVE_WATER_PULSE, MOVE_KNOCK_OFF, MOVE_HARDEN, MOVE_CUT
 	.byte F_EV_SPREAD_HP
 	.byte NATURE_JOLLY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 51
+@ 51
 	.2byte SPECIES_GOLBAT
 	.byte BATTLE_TOWER_ITEM_WHITE_HERB
-	.byte 0x09 ; team flags
+	.byte 0x09 @ team flags
 	.2byte MOVE_CONFUSE_RAY, MOVE_WING_ATTACK, MOVE_MEAN_LOOK, MOVE_BITE
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_SPEED
 	.byte NATURE_BRAVE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 52
+@ 52
 	.2byte SPECIES_BELLOSSOM
 	.byte BATTLE_TOWER_ITEM_MIRACLE_SEED
-	.byte 0x0A ; team flags
+	.byte 0x0A @ team flags
 	.2byte MOVE_SOLAR_BEAM, MOVE_PETAL_DANCE, MOVE_SWEET_SCENT, MOVE_BULLET_SEED
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_SPEED | F_EV_SPREAD_DEFENSE | F_EV_SPREAD_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_NAIVE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 53
+@ 53
 	.2byte SPECIES_DONPHAN
 	.byte BATTLE_TOWER_ITEM_KINGS_ROCK
-	.byte 0x05 ; team flags
+	.byte 0x05 @ team flags
 	.2byte MOVE_ROCK_SMASH, MOVE_RAPID_SPIN, MOVE_FLAIL, MOVE_HORN_ATTACK
 	.byte F_EV_SPREAD_DEFENSE | F_EV_SPREAD_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_IMPISH
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 54
+@ 54
 	.2byte SPECIES_NOSEPASS
 	.byte BATTLE_TOWER_ITEM_PERSIM_BERRY
-	.byte 0x0B ; team flags
+	.byte 0x0B @ team flags
 	.2byte MOVE_SANDSTORM, MOVE_ROCK_SLIDE, MOVE_BLOCK, MOVE_THUNDER_WAVE
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_SPEED | F_EV_SPREAD_DEFENSE
 	.byte NATURE_JOLLY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 55
+@ 55
 	.2byte SPECIES_PINSIR
 	.byte BATTLE_TOWER_ITEM_CHESTO_BERRY
-	.byte 0x05 ; team flags
+	.byte 0x05 @ team flags
 	.2byte MOVE_SWORDS_DANCE, MOVE_HARDEN, MOVE_CUT, MOVE_SEISMIC_TOSS
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_DEFENSE
 	.byte NATURE_DOCILE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 56
+@ 56
 	.2byte SPECIES_GOLDUCK
 	.byte BATTLE_TOWER_ITEM_BRIGHT_POWDER
-	.byte 0x0B ; team flags
+	.byte 0x0B @ team flags
 	.2byte MOVE_DISABLE, MOVE_PSYCH_UP, MOVE_WATER_PULSE, MOVE_BRICK_BREAK
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_SPEED | F_EV_SPREAD_DEFENSE
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 57
+@ 57
 	.2byte SPECIES_SHIFTRY
 	.byte BATTLE_TOWER_ITEM_MENTAL_HERB
-	.byte 0x07 ; team flags
+	.byte 0x07 @ team flags
 	.2byte MOVE_TORMENT, MOVE_EXTRASENSORY, MOVE_SOLAR_BEAM, MOVE_AERIAL_ACE
 	.byte F_EV_SPREAD_DEFENSE
 	.byte NATURE_NAIVE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 58
+@ 58
 	.2byte SPECIES_DUSTOX
 	.byte BATTLE_TOWER_ITEM_SILVER_POWDER
-	.byte 0x01 ; team flags
+	.byte 0x01 @ team flags
 	.2byte MOVE_CONFUSION, MOVE_SILVER_WIND, MOVE_PSYBEAM, MOVE_WHIRLWIND
 	.byte F_EV_SPREAD_SPEED
 	.byte NATURE_SERIOUS
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 59
+@ 59
 	.2byte SPECIES_SHUPPET
 	.byte BATTLE_TOWER_ITEM_SCOPE_LENS
-	.byte 0x03 ; team flags
+	.byte 0x03 @ team flags
 	.2byte MOVE_WILL_O_WISP, MOVE_NIGHT_SHADE, MOVE_FAINT_ATTACK, MOVE_CURSE
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_DEFENSE
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 60
+@ 60
 	.2byte SPECIES_SEAKING
 	.byte BATTLE_TOWER_ITEM_MYSTIC_WATER
-	.byte 0x07 ; team flags
+	.byte 0x07 @ team flags
 	.2byte MOVE_RAIN_DANCE, MOVE_SURF, MOVE_HORN_ATTACK, MOVE_HORN_DRILL
 	.byte F_EV_SPREAD_SP_DEFENSE
 	.byte NATURE_LONELY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 61
+@ 61
 	.2byte SPECIES_SKARMORY
 	.byte BATTLE_TOWER_ITEM_SITRUS_BERRY
-	.byte 0x07 ; team flags
+	.byte 0x07 @ team flags
 	.2byte MOVE_STEEL_WING, MOVE_SAND_ATTACK, MOVE_SWIFT, MOVE_AGILITY
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_DEFENSE
 	.byte NATURE_RELAXED
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 62
+@ 62
 	.2byte SPECIES_TORKOAL
 	.byte BATTLE_TOWER_ITEM_FOCUS_BAND
-	.byte 0x43 ; team flags
+	.byte 0x43 @ team flags
 	.2byte MOVE_FLAMETHROWER, MOVE_IRON_DEFENSE, MOVE_BODY_SLAM, MOVE_PROTECT
 	.byte F_EV_SPREAD_DEFENSE | F_EV_SPREAD_ATTACK
 	.byte NATURE_NAUGHTY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 63
+@ 63
 	.2byte SPECIES_GOLEM
 	.byte BATTLE_TOWER_ITEM_SOFT_SAND
-	.byte 0x05 ; team flags
+	.byte 0x05 @ team flags
 	.2byte MOVE_MAGNITUDE, MOVE_EXPLOSION, MOVE_STRENGTH, MOVE_SANDSTORM
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_ATTACK
 	.byte NATURE_DOCILE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 64
+@ 64
 	.2byte SPECIES_GARDEVOIR
 	.byte BATTLE_TOWER_ITEM_TWISTED_SPOON
-	.byte 0x41 ; team flags
+	.byte 0x41 @ team flags
 	.2byte MOVE_REFLECT, MOVE_PSYCHIC, MOVE_IMPRISON, MOVE_TOXIC
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_DEFENSE
 	.byte NATURE_HASTY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 65
+@ 65
 	.2byte SPECIES_SANDSLASH
 	.byte BATTLE_TOWER_ITEM_BRIGHT_POWDER
-	.byte 0x07 ; team flags
+	.byte 0x07 @ team flags
 	.2byte MOVE_SANDSTORM, MOVE_SLASH, MOVE_EARTHQUAKE, MOVE_SWIFT
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_DEFENSE
 	.byte NATURE_ADAMANT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 66
+@ 66
 	.2byte SPECIES_WOBBUFFET
 	.byte BATTLE_TOWER_ITEM_SALAC_BERRY
-	.byte 0x0B ; team flags
+	.byte 0x0B @ team flags
 	.2byte MOVE_COUNTER, MOVE_MIRROR_COAT, MOVE_SAFEGUARD, MOVE_DESTINY_BOND
 	.byte F_EV_SPREAD_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_CALM
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 67
+@ 67
 	.2byte SPECIES_TENTACRUEL
 	.byte BATTLE_TOWER_ITEM_CHERI_BERRY
-	.byte 0x05 ; team flags
+	.byte 0x05 @ team flags
 	.2byte MOVE_CONSTRICT, MOVE_SURF, MOVE_HYPER_BEAM, MOVE_SCREECH
 	.byte F_EV_SPREAD_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_IMPISH
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 68
+@ 68
 	.2byte SPECIES_TROPIUS
 	.byte BATTLE_TOWER_ITEM_LEFTOVERS
-	.byte 0x05 ; team flags
+	.byte 0x05 @ team flags
 	.2byte MOVE_SUNNY_DAY, MOVE_SOLAR_BEAM, MOVE_SYNTHESIS, MOVE_RAZOR_LEAF
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_DEFENSE
 	.byte NATURE_DOCILE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 69
+@ 69
 	.2byte SPECIES_MAWILE
 	.byte BATTLE_TOWER_ITEM_METAL_COAT
-	.byte 0x43 ; team flags
+	.byte 0x43 @ team flags
 	.2byte MOVE_IRON_DEFENSE, MOVE_SLUDGE_BOMB, MOVE_CRUNCH, MOVE_STRENGTH
 	.byte F_EV_SPREAD_ATTACK
 	.byte NATURE_CALM
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 70
+@ 70
 	.2byte SPECIES_MUK
 	.byte BATTLE_TOWER_ITEM_RAWST_BERRY
-	.byte 0x09 ; team flags
+	.byte 0x09 @ team flags
 	.2byte MOVE_SLUDGE, MOVE_ACID_ARMOR, MOVE_GIGA_DRAIN, MOVE_DISABLE
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_DEFENSE | F_EV_SPREAD_ATTACK
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 71
+@ 71
 	.2byte SPECIES_MAGCARGO
 	.byte BATTLE_TOWER_ITEM_CHARCOAL
-	.byte 0x0D ; team flags
+	.byte 0x0D @ team flags
 	.2byte MOVE_FLAMETHROWER, MOVE_ROCK_THROW, MOVE_HARDEN, MOVE_AMNESIA
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_SP_ATTACK
 	.byte NATURE_NAUGHTY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 72
+@ 72
 	.2byte SPECIES_LINOONE
 	.byte BATTLE_TOWER_ITEM_PECHA_BERRY
-	.byte 0x07 ; team flags
+	.byte 0x07 @ team flags
 	.2byte MOVE_HEADBUTT, MOVE_TAIL_WHIP, MOVE_SURF, MOVE_DIG
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_DEFENSE | F_EV_SPREAD_ATTACK
 	.byte NATURE_QUIRKY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 73
+@ 73
 	.2byte SPECIES_ELECTRODE
 	.byte BATTLE_TOWER_ITEM_ASPEAR_BERRY
-	.byte 0x05 ; team flags
+	.byte 0x05 @ team flags
 	.2byte MOVE_LIGHT_SCREEN, MOVE_THUNDERBOLT, MOVE_SWIFT, MOVE_ROLLOUT
 	.byte F_EV_SPREAD_SPEED
 	.byte NATURE_SERIOUS
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 74
+@ 74
 	.2byte SPECIES_DUSCLOPS
 	.byte BATTLE_TOWER_ITEM_SPELL_TAG
-	.byte 0x09 ; team flags
+	.byte 0x09 @ team flags
 	.2byte MOVE_MEAN_LOOK, MOVE_NIGHT_SHADE, MOVE_SKILL_SWAP, MOVE_SHADOW_BALL
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_SPEED | F_EV_SPREAD_HP
 	.byte NATURE_NAIVE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 75
+@ 75
 	.2byte SPECIES_VILEPLUME
 	.byte BATTLE_TOWER_ITEM_MIRACLE_SEED
-	.byte 0x0A ; team flags
+	.byte 0x0A @ team flags
 	.2byte MOVE_TOXIC, MOVE_MOONLIGHT, MOVE_GIGA_DRAIN, MOVE_STUN_SPORE
 	.byte F_EV_SPREAD_HP
 	.byte NATURE_DOCILE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 76
+@ 76
 	.2byte SPECIES_CROBAT
 	.byte BATTLE_TOWER_ITEM_LEPPA_BERRY
-	.byte 0x05 ; team flags
+	.byte 0x05 @ team flags
 	.2byte MOVE_BITE, MOVE_HAZE, MOVE_WING_ATTACK, MOVE_STEEL_WING
 	.byte F_EV_SPREAD_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_TIMID
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 77
+@ 77
 	.2byte SPECIES_CORSOLA
 	.byte BATTLE_TOWER_ITEM_SCOPE_LENS
-	.byte 0x0A ; team flags
+	.byte 0x0A @ team flags
 	.2byte MOVE_RECOVER, MOVE_MIRROR_COAT, MOVE_HAIL, MOVE_SURF
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_DEFENSE
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 78
+@ 78
 	.2byte SPECIES_STARMIE
 	.byte BATTLE_TOWER_ITEM_MYSTIC_WATER
-	.byte 0x0B ; team flags
+	.byte 0x0B @ team flags
 	.2byte MOVE_RAPID_SPIN, MOVE_WATER_PULSE, MOVE_REFLECT, MOVE_SKILL_SWAP
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_SPEED
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 79
+@ 79
 	.2byte SPECIES_EXPLOUD
 	.byte BATTLE_TOWER_ITEM_LEFTOVERS
-	.byte 0x41 ; team flags
+	.byte 0x41 @ team flags
 	.2byte MOVE_HYPER_BEAM, MOVE_HOWL, MOVE_UPROAR, MOVE_EARTHQUAKE
 	.byte F_EV_SPREAD_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 80
+@ 80
 	.2byte SPECIES_ALAKAZAM
 	.byte BATTLE_TOWER_ITEM_TWISTED_SPOON
-	.byte 0x0B ; team flags
+	.byte 0x0B @ team flags
 	.2byte MOVE_PSYBEAM, MOVE_SNATCH, MOVE_REFLECT, MOVE_HYPER_BEAM
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_RELAXED
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 81
+@ 81
 	.2byte SPECIES_HERACROSS
 	.byte BATTLE_TOWER_ITEM_QUICK_CLAW
-	.byte 0x05 ; team flags
+	.byte 0x05 @ team flags
 	.2byte MOVE_HORN_ATTACK, MOVE_COUNTER, MOVE_REVERSAL, MOVE_LEER
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_BOLD
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 82
+@ 82
 	.2byte SPECIES_CASTFORM
 	.byte BATTLE_TOWER_ITEM_SITRUS_BERRY
-	.byte 0x0B ; team flags
+	.byte 0x0B @ team flags
 	.2byte MOVE_WEATHER_BALL, MOVE_SUNNY_DAY, MOVE_RAIN_DANCE, MOVE_HAIL
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_LAX
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 83
+@ 83
 	.2byte SPECIES_VIGOROTH
 	.byte BATTLE_TOWER_ITEM_FOCUS_BAND
-	.byte 0x05 ; team flags
+	.byte 0x05 @ team flags
 	.2byte MOVE_FOCUS_PUNCH, MOVE_REVERSAL, MOVE_COUNTER, MOVE_TAUNT
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 84
+@ 84
 	.2byte SPECIES_DUSKULL
 	.byte BATTLE_TOWER_ITEM_BRIGHT_POWDER
-	.byte 0x09 ; team flags
+	.byte 0x09 @ team flags
 	.2byte MOVE_TOXIC, MOVE_CONFUSE_RAY, MOVE_SHADOW_BALL, MOVE_WILL_O_WISP
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 85
+@ 85
 	.2byte SPECIES_LANTURN
 	.byte BATTLE_TOWER_ITEM_QUICK_CLAW
-	.byte 0x07 ; team flags
+	.byte 0x07 @ team flags
 	.2byte MOVE_FLAIL, MOVE_SURF, MOVE_SPARK, MOVE_TAKE_DOWN
 	.byte F_EV_SPREAD_SPEED
 	.byte NATURE_SASSY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 86
+@ 86
 	.2byte SPECIES_HARIYAMA
 	.byte BATTLE_TOWER_ITEM_KINGS_ROCK
-	.byte 0x05 ; team flags
+	.byte 0x05 @ team flags
 	.2byte MOVE_STRENGTH, MOVE_FAKE_OUT, MOVE_FACADE, MOVE_SAND_ATTACK
 	.byte F_EV_SPREAD_SPEED
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 87
+@ 87
 	.2byte SPECIES_KINGDRA
 	.byte BATTLE_TOWER_ITEM_MYSTIC_WATER
-	.byte 0x43 ; team flags
+	.byte 0x43 @ team flags
 	.2byte MOVE_AGILITY, MOVE_DIVE, MOVE_ICE_BEAM, MOVE_PROTECT
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_ATTACK
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 88
+@ 88
 	.2byte SPECIES_GYARADOS
 	.byte BATTLE_TOWER_ITEM_DRAGON_FANG
-	.byte 0x41 ; team flags
+	.byte 0x41 @ team flags
 	.2byte MOVE_RAIN_DANCE, MOVE_SURF, MOVE_WATER_PULSE, MOVE_HYPER_BEAM
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_SPEED | F_EV_SPREAD_DEFENSE | F_EV_SPREAD_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_IMPISH
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 89
+@ 89
 	.2byte SPECIES_AGGRON
 	.byte BATTLE_TOWER_ITEM_METAL_COAT
-	.byte 0x45 ; team flags
+	.byte 0x45 @ team flags
 	.2byte MOVE_EARTHQUAKE, MOVE_BRICK_BREAK, MOVE_METAL_CLAW, MOVE_ROAR
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_DEFENSE
 	.byte NATURE_RELAXED
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 90
+@ 90
 	.2byte SPECIES_ABSOL
 	.byte BATTLE_TOWER_ITEM_KINGS_ROCK
-	.byte 0xC7 ; team flags
+	.byte 0xC7 @ team flags
 	.2byte MOVE_SWORDS_DANCE, MOVE_IRON_TAIL, MOVE_SLASH, MOVE_FACADE
 	.byte F_EV_SPREAD_ATTACK
 	.byte NATURE_LAX
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 91
+@ 91
 	.2byte SPECIES_SWELLOW
 	.byte BATTLE_TOWER_ITEM_SHARP_BEAK
-	.byte 0x0F ; team flags
+	.byte 0x0F @ team flags
 	.2byte MOVE_DOUBLE_TEAM, MOVE_FLY, MOVE_TOXIC, MOVE_STEEL_WING
 	.byte 0
 	.byte NATURE_HASTY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 92
+@ 92
 	.2byte SPECIES_MACHAMP
 	.byte BATTLE_TOWER_ITEM_BLACK_BELT
-	.byte 0x05 ; team flags
+	.byte 0x05 @ team flags
 	.2byte MOVE_STRENGTH, MOVE_CROSS_CHOP, MOVE_EARTHQUAKE, MOVE_FLAMETHROWER
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_DEFENSE
 	.byte NATURE_HASTY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 93
+@ 93
 	.2byte SPECIES_SWAMPERT
 	.byte BATTLE_TOWER_ITEM_NEVER_MELT_ICE
-	.byte 0x41 ; team flags
+	.byte 0x41 @ team flags
 	.2byte MOVE_PROTECT, MOVE_ICE_BEAM, MOVE_HYPER_BEAM, MOVE_SURF
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_SPEED | F_EV_SPREAD_DEFENSE | F_EV_SPREAD_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_DOCILE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 94
+@ 94
 	.2byte SPECIES_SCEPTILE
 	.byte BATTLE_TOWER_ITEM_MIRACLE_SEED
-	.byte 0x41 ; team flags
+	.byte 0x41 @ team flags
 	.2byte MOVE_LEAF_BLADE, MOVE_DRAGON_CLAW, MOVE_AGILITY, MOVE_PROTECT
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_SPEED | F_EV_SPREAD_DEFENSE | F_EV_SPREAD_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_DOCILE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 95
+@ 95
 	.2byte SPECIES_BLAZIKEN
 	.byte BATTLE_TOWER_ITEM_CHARCOAL
-	.byte 0x41 ; team flags
+	.byte 0x41 @ team flags
 	.2byte MOVE_BLAZE_KICK, MOVE_MIRROR_MOVE, MOVE_EARTHQUAKE, MOVE_PROTECT
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_SPEED | F_EV_SPREAD_DEFENSE | F_EV_SPREAD_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_DOCILE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 96
+@ 96
 	.2byte SPECIES_ALTARIA
 	.byte BATTLE_TOWER_ITEM_DRAGON_FANG
-	.byte 0x43 ; team flags
+	.byte 0x43 @ team flags
 	.2byte MOVE_DRAGON_CLAW, MOVE_DRAGON_DANCE, MOVE_TOXIC, MOVE_DOUBLE_TEAM
 	.byte F_EV_SPREAD_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_DOCILE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 97
+@ 97
 	.2byte SPECIES_LUDICOLO
 	.byte BATTLE_TOWER_ITEM_BLACK_BELT
-	.byte 0x43 ; team flags
+	.byte 0x43 @ team flags
 	.2byte MOVE_BRICK_BREAK, MOVE_WATER_PULSE, MOVE_RAIN_DANCE, MOVE_FOCUS_PUNCH
 	.byte F_EV_SPREAD_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_HASTY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 98
+@ 98
 	.2byte SPECIES_SABLEYE
 	.byte BATTLE_TOWER_ITEM_SPELL_TAG
-	.byte 0x49 ; team flags
+	.byte 0x49 @ team flags
 	.2byte MOVE_SHADOW_BALL, MOVE_SNATCH, MOVE_DIG, MOVE_CONFUSE_RAY
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_DEFENSE
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 99
+@ 99
 	.2byte SPECIES_ZANGOOSE
 	.byte BATTLE_TOWER_ITEM_BLACK_GLASSES
-	.byte 0x0F ; team flags
+	.byte 0x0F @ team flags
 	.2byte MOVE_FACADE, MOVE_THUNDERBOLT, MOVE_CRUSH_CLAW, MOVE_DETECT
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_HP
 	.byte NATURE_CALM
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 100
+@ 100
 	.2byte SPECIES_LINOONE
 	.byte BATTLE_TOWER_ITEM_CHESTO_BERRY
-	.byte 0x0F ; team flags
+	.byte 0x0F @ team flags
 	.2byte MOVE_IRON_TAIL, MOVE_HEADBUTT, MOVE_ATTRACT, MOVE_ICE_BEAM
 	.byte F_EV_SPREAD_DEFENSE | F_EV_SPREAD_ATTACK
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 101
+@ 101
 	.2byte SPECIES_WHISCASH
 	.byte BATTLE_TOWER_ITEM_SOFT_SAND
-	.byte 0x07 ; team flags
+	.byte 0x07 @ team flags
 	.2byte MOVE_MUD_SLAP, MOVE_EARTHQUAKE, MOVE_SURF, MOVE_AMNESIA
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_SPEED | F_EV_SPREAD_HP
 	.byte NATURE_BOLD
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 102
+@ 102
 	.2byte SPECIES_SOLROCK
 	.byte BATTLE_TOWER_ITEM_HARD_STONE
-	.byte 0x43 ; team flags
+	.byte 0x43 @ team flags
 	.2byte MOVE_EARTHQUAKE, MOVE_LIGHT_SCREEN, MOVE_ROCK_SLIDE, MOVE_CONFUSION
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_BASHFUL
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 103
+@ 103
 	.2byte SPECIES_STARMIE
 	.byte BATTLE_TOWER_ITEM_BRIGHT_POWDER
-	.byte 0x03 ; team flags
+	.byte 0x03 @ team flags
 	.2byte MOVE_RECOVER, MOVE_RAIN_DANCE, MOVE_SURF, MOVE_CONFUSE_RAY
 	.byte F_EV_SPREAD_DEFENSE | F_EV_SPREAD_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_NAIVE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 104
+@ 104
 	.2byte SPECIES_CACTURNE
 	.byte BATTLE_TOWER_ITEM_LEFTOVERS
-	.byte 0x0F ; team flags
+	.byte 0x0F @ team flags
 	.2byte MOVE_INGRAIN, MOVE_LEECH_SEED, MOVE_PROTECT, MOVE_FRUSTRATION
 	.byte 0
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 105
+@ 105
 	.2byte SPECIES_SHIFTRY
 	.byte BATTLE_TOWER_ITEM_FOCUS_BAND
-	.byte 0x05 ; team flags
+	.byte 0x05 @ team flags
 	.2byte MOVE_FRUSTRATION, MOVE_HYPER_BEAM, MOVE_GIGA_DRAIN, MOVE_TORMENT
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_SPEED | F_EV_SPREAD_DEFENSE
 	.byte NATURE_ADAMANT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 106
+@ 106
 	.2byte SPECIES_MANECTRIC
 	.byte BATTLE_TOWER_ITEM_MAGNET
-	.byte 0x0F ; team flags
+	.byte 0x0F @ team flags
 	.2byte MOVE_THUNDER, MOVE_THUNDER_WAVE, MOVE_IRON_TAIL, MOVE_ROAR
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_ADAMANT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 107
+@ 107
 	.2byte SPECIES_KECLEON
 	.byte BATTLE_TOWER_ITEM_BRIGHT_POWDER
-	.byte 0xC3 ; team flags
+	.byte 0xC3 @ team flags
 	.2byte MOVE_THUNDERBOLT, MOVE_FOCUS_PUNCH, MOVE_IRON_TAIL, MOVE_FLAMETHROWER
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_QUIET
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 108
+@ 108
 	.2byte SPECIES_PINSIR
 	.byte BATTLE_TOWER_ITEM_SOFT_SAND
-	.byte 0x8D ; team flags
+	.byte 0x8D @ team flags
 	.2byte MOVE_GUILLOTINE, MOVE_SUBMISSION, MOVE_EARTHQUAKE, MOVE_ROCK_TOMB
 	.byte F_EV_SPREAD_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 109
+@ 109
 	.2byte SPECIES_METANG
 	.byte BATTLE_TOWER_ITEM_METAL_COAT
-	.byte 0x05 ; team flags
+	.byte 0x05 @ team flags
 	.2byte MOVE_EARTHQUAKE, MOVE_SHADOW_BALL, MOVE_PSYCHIC, MOVE_METEOR_MASH
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_DEFENSE | F_EV_SPREAD_ATTACK
 	.byte NATURE_IMPISH
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 110
+@ 110
 	.2byte SPECIES_CLAYDOL
 	.byte BATTLE_TOWER_ITEM_PECHA_BERRY
-	.byte 0x43 ; team flags
+	.byte 0x43 @ team flags
 	.2byte MOVE_EARTHQUAKE, MOVE_SELF_DESTRUCT, MOVE_SANDSTORM, MOVE_PROTECT
 	.byte F_EV_SPREAD_DEFENSE | F_EV_SPREAD_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_LAX
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 111
+@ 111
 	.2byte SPECIES_MASQUERAIN
 	.byte BATTLE_TOWER_ITEM_PERSIM_BERRY
-	.byte 0x0A ; team flags
+	.byte 0x0A @ team flags
 	.2byte MOVE_TOXIC, MOVE_SILVER_WIND, MOVE_ATTRACT, MOVE_ICE_BEAM
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_SP_ATTACK
 	.byte NATURE_QUIET
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 112
+@ 112
 	.2byte SPECIES_RELICANTH
 	.byte BATTLE_TOWER_ITEM_LIECHI_BERRY
-	.byte 0xC5 ; team flags
+	.byte 0xC5 @ team flags
 	.2byte MOVE_ROCK_TOMB, MOVE_DOUBLE_EDGE, MOVE_SURF, MOVE_EARTHQUAKE
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_ATTACK
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 113
+@ 113
 	.2byte SPECIES_WALREIN
 	.byte BATTLE_TOWER_ITEM_SALAC_BERRY
-	.byte 0x0D ; team flags
+	.byte 0x0D @ team flags
 	.2byte MOVE_SURF, MOVE_ENCORE, MOVE_BLIZZARD, MOVE_HYPER_BEAM
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_ATTACK
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 114
+@ 114
 	.2byte SPECIES_WAILORD
 	.byte BATTLE_TOWER_ITEM_APICOT_BERRY
-	.byte 0x0B ; team flags
+	.byte 0x0B @ team flags
 	.2byte MOVE_WATER_SPOUT, MOVE_REST, MOVE_AMNESIA, MOVE_HAIL
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_DEFENSE
 	.byte NATURE_HASTY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 115
+@ 115
 	.2byte SPECIES_GIRAFARIG
 	.byte BATTLE_TOWER_ITEM_GANLON_BERRY
-	.byte 0x4F ; team flags
+	.byte 0x4F @ team flags
 	.2byte MOVE_DOUBLE_TEAM, MOVE_CRUNCH, MOVE_PSYCHIC, MOVE_EARTHQUAKE
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_DEFENSE | F_EV_SPREAD_ATTACK
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 116
+@ 116
 	.2byte SPECIES_MEDICHAM
 	.byte BATTLE_TOWER_ITEM_APICOT_BERRY
-	.byte 0x4B ; team flags
+	.byte 0x4B @ team flags
 	.2byte MOVE_CALM_MIND, MOVE_REVERSAL, MOVE_ROCK_TOMB, MOVE_PSYCHIC
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_SPEED | F_EV_SPREAD_DEFENSE | F_EV_SPREAD_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_RELAXED
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 117
+@ 117
 	.2byte SPECIES_TROPIUS
 	.byte BATTLE_TOWER_ITEM_MENTAL_HERB
-	.byte 0xC7 ; team flags
+	.byte 0xC7 @ team flags
 	.2byte MOVE_EARTHQUAKE, MOVE_SYNTHESIS, MOVE_RAZOR_LEAF, MOVE_HYPER_BEAM
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_SPEED | F_EV_SPREAD_ATTACK
 	.byte NATURE_BOLD
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 118
+@ 118
 	.2byte SPECIES_NINJASK
 	.byte BATTLE_TOWER_ITEM_SCOPE_LENS
-	.byte 0x05 ; team flags
+	.byte 0x05 @ team flags
 	.2byte MOVE_DOUBLE_TEAM, MOVE_SLASH, MOVE_SWORDS_DANCE, MOVE_LEECH_LIFE
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_LAX
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 119
+@ 119
 	.2byte SPECIES_CAMERUPT
 	.byte BATTLE_TOWER_ITEM_CHARCOAL
-	.byte 0x0D ; team flags
+	.byte 0x0D @ team flags
 	.2byte MOVE_EARTHQUAKE, MOVE_OVERHEAT, MOVE_SUNNY_DAY, MOVE_ROCK_SLIDE
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_CAREFUL
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 120
+@ 120
 	.2byte SPECIES_SHARPEDO
 	.byte BATTLE_TOWER_ITEM_KINGS_ROCK
-	.byte 0x05 ; team flags
+	.byte 0x05 @ team flags
 	.2byte MOVE_CRUNCH, MOVE_SURF, MOVE_EARTHQUAKE, MOVE_PROTECT
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_SPEED | F_EV_SPREAD_ATTACK
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 121
+@ 121
 	.2byte SPECIES_WIGGLYTUFF
 	.byte BATTLE_TOWER_ITEM_SALAC_BERRY
-	.byte 0x0E ; team flags
+	.byte 0x0E @ team flags
 	.2byte MOVE_PROTECT, MOVE_TOXIC, MOVE_DOUBLE_TEAM, MOVE_DIG
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_DEFENSE
 	.byte NATURE_LAX
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 122
+@ 122
 	.2byte SPECIES_SEVIPER
 	.byte BATTLE_TOWER_ITEM_POISON_BARB
-	.byte 0x05 ; team flags
+	.byte 0x05 @ team flags
 	.2byte MOVE_SLUDGE_BOMB, MOVE_HAZE, MOVE_CRUNCH, MOVE_FLAMETHROWER
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_ATTACK
 	.byte NATURE_NAIVE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 123
+@ 123
 	.2byte SPECIES_CRADILY
 	.byte BATTLE_TOWER_ITEM_LEFTOVERS
-	.byte 0xC1 ; team flags
+	.byte 0xC1 @ team flags
 	.2byte MOVE_ROCK_TOMB, MOVE_CONFUSE_RAY, MOVE_INGRAIN, MOVE_EARTHQUAKE
 	.byte F_EV_SPREAD_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 124
+@ 124
 	.2byte SPECIES_ARMALDO
 	.byte BATTLE_TOWER_ITEM_RAWST_BERRY
-	.byte 0xC1 ; team flags
+	.byte 0xC1 @ team flags
 	.2byte MOVE_EARTHQUAKE, MOVE_SANDSTORM, MOVE_PROTECT, MOVE_SLASH
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_DEFENSE | F_EV_SPREAD_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 125
+@ 125
 	.2byte SPECIES_MAGNETON
 	.byte BATTLE_TOWER_ITEM_PERSIM_BERRY
-	.byte 0x0D ; team flags
+	.byte 0x0D @ team flags
 	.2byte MOVE_ZAP_CANNON, MOVE_SUPERSONIC, MOVE_TOXIC, MOVE_PROTECT
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_SPEED
 	.byte NATURE_ADAMANT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 126
+@ 126
 	.2byte SPECIES_LANTURN
 	.byte BATTLE_TOWER_ITEM_QUICK_CLAW
-	.byte 0x06 ; team flags
+	.byte 0x06 @ team flags
 	.2byte MOVE_THUNDER, MOVE_SURF, MOVE_ICE_BEAM, MOVE_RAIN_DANCE
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_DEFENSE
 	.byte NATURE_ADAMANT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 127
+@ 127
 	.2byte SPECIES_SWALOT
 	.byte BATTLE_TOWER_ITEM_CHERI_BERRY
-	.byte 0x8B ; team flags
+	.byte 0x8B @ team flags
 	.2byte MOVE_SLUDGE_BOMB, MOVE_SNATCH, MOVE_ENCORE, MOVE_BODY_SLAM
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_ATTACK
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 128
+@ 128
 	.2byte SPECIES_SKARMORY
 	.byte BATTLE_TOWER_ITEM_METAL_COAT
-	.byte 0x81 ; team flags
+	.byte 0x81 @ team flags
 	.2byte MOVE_STEEL_WING, MOVE_AGILITY, MOVE_TORMENT, MOVE_FACADE
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_LAX
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 129
+@ 129
 	.2byte SPECIES_DONPHAN
 	.byte BATTLE_TOWER_ITEM_WHITE_HERB
-	.byte 0x0D ; team flags
+	.byte 0x0D @ team flags
 	.2byte MOVE_EARTHQUAKE, MOVE_FLAIL, MOVE_ROAR, MOVE_IRON_TAIL
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 130
+@ 130
 	.2byte SPECIES_HERACROSS
 	.byte BATTLE_TOWER_ITEM_FOCUS_BAND
-	.byte 0x41 ; team flags
+	.byte 0x41 @ team flags
 	.2byte MOVE_FACADE, MOVE_REVERSAL, MOVE_MEGAHORN, MOVE_EARTHQUAKE
 	.byte F_EV_SPREAD_DEFENSE | F_EV_SPREAD_ATTACK
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 131
+@ 131
 	.2byte SPECIES_BANETTE
 	.byte BATTLE_TOWER_ITEM_PETAYA_BERRY
-	.byte 0x83 ; team flags
+	.byte 0x83 @ team flags
 	.2byte MOVE_SHADOW_BALL, MOVE_HYPER_BEAM, MOVE_THUNDERBOLT, MOVE_SKILL_SWAP
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_DEFENSE
 	.byte NATURE_CAREFUL
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 132
+@ 132
 	.2byte SPECIES_SANDSLASH
 	.byte BATTLE_TOWER_ITEM_BRIGHT_POWDER
-	.byte 0x0F ; team flags
+	.byte 0x0F @ team flags
 	.2byte MOVE_SANDSTORM, MOVE_TOXIC, MOVE_SLASH, MOVE_EARTHQUAKE
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_LAX
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 133
+@ 133
 	.2byte SPECIES_CRAWDAUNT
 	.byte BATTLE_TOWER_ITEM_SCOPE_LENS
-	.byte 0x05 ; team flags
+	.byte 0x05 @ team flags
 	.2byte MOVE_GUILLOTINE, MOVE_CRABHAMMER, MOVE_BLIZZARD, MOVE_SLUDGE_BOMB
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_SPEED | F_EV_SPREAD_DEFENSE | F_EV_SPREAD_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_DOCILE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 134
+@ 134
 	.2byte SPECIES_GRUMPIG
 	.byte BATTLE_TOWER_ITEM_TWISTED_SPOON
-	.byte 0x8B ; team flags
+	.byte 0x8B @ team flags
 	.2byte MOVE_MAGIC_COAT, MOVE_PSYCHIC, MOVE_REFLECT, MOVE_CONFUSE_RAY
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_LONELY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 135
+@ 135
 	.2byte SPECIES_RHYDON
 	.byte BATTLE_TOWER_ITEM_CHOICE_BAND
-	.byte 0x45 ; team flags
+	.byte 0x45 @ team flags
 	.2byte MOVE_IRON_TAIL, MOVE_EARTHQUAKE, MOVE_SURF, MOVE_FIRE_BLAST
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_SP_ATTACK
 	.byte NATURE_RASH
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 136
+@ 136
 	.2byte SPECIES_ALAKAZAM
 	.byte BATTLE_TOWER_ITEM_PETAYA_BERRY
-	.byte 0x8B ; team flags
+	.byte 0x8B @ team flags
 	.2byte MOVE_PSYCHIC, MOVE_REFLECT, MOVE_RECOVER, MOVE_SKILL_SWAP
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_DEFENSE
 	.byte NATURE_HASTY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 137
+@ 137
 	.2byte SPECIES_DUSCLOPS
 	.byte BATTLE_TOWER_ITEM_SITRUS_BERRY
-	.byte 0x41 ; team flags
+	.byte 0x41 @ team flags
 	.2byte MOVE_SHADOW_BALL, MOVE_WILL_O_WISP, MOVE_BLIZZARD, MOVE_PSYCHIC
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_ATTACK
 	.byte NATURE_CAREFUL
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 138
+@ 138
 	.2byte SPECIES_TORKOAL
 	.byte BATTLE_TOWER_ITEM_LEFTOVERS
-	.byte 0x09 ; team flags
+	.byte 0x09 @ team flags
 	.2byte MOVE_FLAMETHROWER, MOVE_AMNESIA, MOVE_IRON_TAIL, MOVE_REST
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_SP_ATTACK
 	.byte NATURE_NAIVE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 139
+@ 139
 	.2byte SPECIES_ELECTRODE
 	.byte BATTLE_TOWER_ITEM_LUM_BERRY
-	.byte 0x09 ; team flags
+	.byte 0x09 @ team flags
 	.2byte MOVE_SCREECH, MOVE_EXPLOSION, MOVE_MIRROR_COAT, MOVE_PROTECT
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_HP
 	.byte NATURE_RASH
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 140
+@ 140
 	.2byte SPECIES_BRELOOM
 	.byte BATTLE_TOWER_ITEM_LIECHI_BERRY
-	.byte 0x0B ; team flags
+	.byte 0x0B @ team flags
 	.2byte MOVE_IRON_TAIL, MOVE_FOCUS_PUNCH, MOVE_DOUBLE_TEAM, MOVE_LEECH_SEED
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_LAX
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 141
+@ 141
 	.2byte SPECIES_MUK
 	.byte BATTLE_TOWER_ITEM_POISON_BARB
-	.byte 0x05 ; team flags
+	.byte 0x05 @ team flags
 	.2byte MOVE_SLUDGE_BOMB, MOVE_THUNDERBOLT, MOVE_FLAMETHROWER, MOVE_FOCUS_PUNCH
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_NAIVE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 142
+@ 142
 	.2byte SPECIES_WEEZING
 	.byte BATTLE_TOWER_ITEM_QUICK_CLAW
-	.byte 0x05 ; team flags
+	.byte 0x05 @ team flags
 	.2byte MOVE_EXPLOSION, MOVE_SLUDGE_BOMB, MOVE_SHADOW_BALL, MOVE_FLAMETHROWER
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_NAIVE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 143
+@ 143
 	.2byte SPECIES_RAICHU
 	.byte BATTLE_TOWER_ITEM_SCOPE_LENS
-	.byte 0x4E ; team flags
+	.byte 0x4E @ team flags
 	.2byte MOVE_THUNDERBOLT, MOVE_DOUBLE_TEAM, MOVE_FOCUS_PUNCH, MOVE_ATTRACT
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_SPEED | F_EV_SPREAD_DEFENSE | F_EV_SPREAD_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_JOLLY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 144
+@ 144
 	.2byte SPECIES_TENTACRUEL
 	.byte BATTLE_TOWER_ITEM_MYSTIC_WATER
-	.byte 0x09 ; team flags
+	.byte 0x09 @ team flags
 	.2byte MOVE_DOUBLE_TEAM, MOVE_TOXIC, MOVE_SURF, MOVE_SLUDGE_BOMB
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_BOLD
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 145
+@ 145
 	.2byte SPECIES_EXPLOUD
 	.byte BATTLE_TOWER_ITEM_CHOICE_BAND
-	.byte 0x05 ; team flags
+	.byte 0x05 @ team flags
 	.2byte MOVE_BLIZZARD, MOVE_FLAMETHROWER, MOVE_EARTHQUAKE, MOVE_RETURN
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_BASHFUL
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 146
+@ 146
 	.2byte SPECIES_XATU
 	.byte BATTLE_TOWER_ITEM_WHITE_HERB
-	.byte 0x43 ; team flags
+	.byte 0x43 @ team flags
 	.2byte MOVE_PSYCHIC, MOVE_REST, MOVE_CONFUSE_RAY, MOVE_TOXIC
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_SPEED
 	.byte NATURE_BRAVE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 147
+@ 147
 	.2byte SPECIES_GOLEM
 	.byte BATTLE_TOWER_ITEM_SALAC_BERRY
-	.byte 0x05 ; team flags
+	.byte 0x05 @ team flags
 	.2byte MOVE_EXPLOSION, MOVE_EARTHQUAKE, MOVE_ROCK_TOMB, MOVE_FLAMETHROWER
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_IMPISH
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 148
+@ 148
 	.2byte SPECIES_GOLDUCK
 	.byte BATTLE_TOWER_ITEM_PECHA_BERRY
-	.byte 0x83 ; team flags
+	.byte 0x83 @ team flags
 	.2byte MOVE_SURF, MOVE_ATTRACT, MOVE_CALM_MIND, MOVE_BLIZZARD
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_SPEED | F_EV_SPREAD_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_HASTY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 149
+@ 149
 	.2byte SPECIES_NINETALES
 	.byte BATTLE_TOWER_ITEM_CHARCOAL
-	.byte 0x4A ; team flags
+	.byte 0x4A @ team flags
 	.2byte MOVE_FLAMETHROWER, MOVE_ATTRACT, MOVE_TOXIC, MOVE_CONFUSE_RAY
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_DEFENSE
 	.byte NATURE_QUIET
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 150
+@ 150
 	.2byte SPECIES_KINGDRA
 	.byte BATTLE_TOWER_ITEM_CHESTO_BERRY
-	.byte 0x13 ; team flags
+	.byte 0x13 @ team flags
 	.2byte MOVE_DOUBLE_TEAM, MOVE_REST, MOVE_SURF, MOVE_DRAGON_BREATH
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_DEFENSE
 	.byte NATURE_ADAMANT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 151
+@ 151
 	.2byte SPECIES_SLAKING
 	.byte BATTLE_TOWER_ITEM_LEFTOVERS
-	.byte 0x03 ; team flags
+	.byte 0x03 @ team flags
 	.2byte MOVE_CURSE, MOVE_AMNESIA, MOVE_YAWN, MOVE_FOCUS_PUNCH
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_DEFENSE
 	.byte NATURE_LAX
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 152
+@ 152
 	.2byte SPECIES_GYARADOS
 	.byte BATTLE_TOWER_ITEM_CHERI_BERRY
-	.byte 0x03 ; team flags
+	.byte 0x03 @ team flags
 	.2byte MOVE_THUNDER, MOVE_EARTHQUAKE, MOVE_HYDRO_PUMP, MOVE_RAIN_DANCE
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_SP_ATTACK
 	.byte NATURE_NAUGHTY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 153
+@ 153
 	.2byte SPECIES_HARIYAMA
 	.byte BATTLE_TOWER_ITEM_SALAC_BERRY
-	.byte 0x21 ; team flags
+	.byte 0x21 @ team flags
 	.2byte MOVE_BELLY_DRUM, MOVE_ENDURE, MOVE_EARTHQUAKE, MOVE_REVERSAL
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_SPEED
 	.byte NATURE_SASSY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 154
+@ 154
 	.2byte SPECIES_ABSOL
 	.byte BATTLE_TOWER_ITEM_KINGS_ROCK
-	.byte 0xC3 ; team flags
+	.byte 0xC3 @ team flags
 	.2byte MOVE_FAINT_ATTACK, MOVE_DOUBLE_EDGE, MOVE_SHADOW_BALL, MOVE_FLAMETHROWER
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_SPEED | F_EV_SPREAD_DEFENSE
 	.byte NATURE_RELAXED
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 155
+@ 155
 	.2byte SPECIES_ALTARIA
 	.byte BATTLE_TOWER_ITEM_SITRUS_BERRY
-	.byte 0x83 ; team flags
+	.byte 0x83 @ team flags
 	.2byte MOVE_DRAGON_DANCE, MOVE_MIRROR_MOVE, MOVE_DRAGON_CLAW, MOVE_EARTHQUAKE
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_SPEED
 	.byte NATURE_RASH
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 156
+@ 156
 	.2byte SPECIES_MACHAMP
 	.byte BATTLE_TOWER_ITEM_BLACK_BELT
-	.byte 0x11 ; team flags
+	.byte 0x11 @ team flags
 	.2byte MOVE_CROSS_CHOP, MOVE_FOCUS_PUNCH, MOVE_ROCK_TOMB, MOVE_ENCORE
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_SPEED
 	.byte NATURE_SASSY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 157
+@ 157
 	.2byte SPECIES_FLYGON
 	.byte BATTLE_TOWER_ITEM_DRAGON_FANG
-	.byte 0x43 ; team flags
+	.byte 0x43 @ team flags
 	.2byte MOVE_CRUNCH, MOVE_DRAGON_CLAW, MOVE_EARTHQUAKE, MOVE_FLAMETHROWER
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_NAIVE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 158
+@ 158
 	.2byte SPECIES_BLAZIKEN
 	.byte BATTLE_TOWER_ITEM_PETAYA_BERRY
-	.byte 0x33 ; team flags
+	.byte 0x33 @ team flags
 	.2byte MOVE_COUNTER, MOVE_ROCK_SLIDE, MOVE_FOCUS_PUNCH, MOVE_FLAMETHROWER
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_ATTACK
 	.byte NATURE_GENTLE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 159
+@ 159
 	.2byte SPECIES_GLALIE
 	.byte BATTLE_TOWER_ITEM_NEVER_MELT_ICE
-	.byte 0x81 ; team flags
+	.byte 0x81 @ team flags
 	.2byte MOVE_BLIZZARD, MOVE_CRUNCH, MOVE_ICY_WIND, MOVE_DOUBLE_TEAM
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_SPEED | F_EV_SPREAD_DEFENSE | F_EV_SPREAD_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_JOLLY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 160
+@ 160
 	.2byte SPECIES_HUNTAIL
 	.byte BATTLE_TOWER_ITEM_MYSTIC_WATER
-	.byte 0xA1 ; team flags
+	.byte 0xA1 @ team flags
 	.2byte MOVE_RAIN_DANCE, MOVE_HYDRO_PUMP, MOVE_CRUNCH, MOVE_BLIZZARD
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_QUIET
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 161
+@ 161
 	.2byte SPECIES_MILOTIC
 	.byte BATTLE_TOWER_ITEM_GANLON_BERRY
-	.byte 0xD3 ; team flags
+	.byte 0xD3 @ team flags
 	.2byte MOVE_SURF, MOVE_ATTRACT, MOVE_RECOVER, MOVE_TOXIC
 	.byte F_EV_SPREAD_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_HASTY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 162
+@ 162
 	.2byte SPECIES_GOREBYSS
 	.byte BATTLE_TOWER_ITEM_PECHA_BERRY
-	.byte 0x83 ; team flags
+	.byte 0x83 @ team flags
 	.2byte MOVE_PSYCHIC, MOVE_SURF, MOVE_BLIZZARD, MOVE_SHADOW_BALL
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_ADAMANT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 163
+@ 163
 	.2byte SPECIES_SCEPTILE
 	.byte BATTLE_TOWER_ITEM_SCOPE_LENS
-	.byte 0x53 ; team flags
+	.byte 0x53 @ team flags
 	.2byte MOVE_LEAF_BLADE, MOVE_ENDEAVOR, MOVE_EARTHQUAKE, MOVE_ROCK_TOMB
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_SPEED
 	.byte NATURE_BASHFUL
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 164
+@ 164
 	.2byte SPECIES_SWAMPERT
 	.byte BATTLE_TOWER_ITEM_LEFTOVERS
-	.byte 0x53 ; team flags
+	.byte 0x53 @ team flags
 	.2byte MOVE_EARTHQUAKE, MOVE_SURF, MOVE_MUD_SHOT, MOVE_BLIZZARD
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_NAIVE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 165
+@ 165
 	.2byte SPECIES_AGGRON
 	.byte BATTLE_TOWER_ITEM_MENTAL_HERB
-	.byte 0x41 ; team flags
+	.byte 0x41 @ team flags
 	.2byte MOVE_DOUBLE_EDGE, MOVE_FLAMETHROWER, MOVE_IRON_TAIL, MOVE_BLIZZARD
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_BOLD
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 166
+@ 166
 	.2byte SPECIES_CRADILY
 	.byte BATTLE_TOWER_ITEM_BRIGHT_POWDER
-	.byte 0xE1 ; team flags
+	.byte 0xE1 @ team flags
 	.2byte MOVE_STOCKPILE, MOVE_SPIT_UP, MOVE_SWALLOW, MOVE_DOUBLE_TEAM
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_LAX
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 167
+@ 167
 	.2byte SPECIES_ARMALDO
 	.byte BATTLE_TOWER_ITEM_QUICK_CLAW
-	.byte 0xC1 ; team flags
+	.byte 0xC1 @ team flags
 	.2byte MOVE_EARTHQUAKE, MOVE_HYPER_BEAM, MOVE_SLASH, MOVE_SWORDS_DANCE
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_LAX
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 168
+@ 168
 	.2byte SPECIES_BRELOOM
 	.byte BATTLE_TOWER_ITEM_SHELL_BELL
-	.byte 0x82 ; team flags
+	.byte 0x82 @ team flags
 	.2byte MOVE_FOCUS_PUNCH, MOVE_COUNTER, MOVE_MACH_PUNCH, MOVE_SNATCH
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_LAX
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 169
+@ 169
 	.2byte SPECIES_LUDICOLO
 	.byte BATTLE_TOWER_ITEM_PETAYA_BERRY
-	.byte 0x83 ; team flags
+	.byte 0x83 @ team flags
 	.2byte MOVE_RAIN_DANCE, MOVE_SURF, MOVE_PROTECT, MOVE_TOXIC
 	.byte F_EV_SPREAD_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_HASTY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 170
+@ 170
 	.2byte SPECIES_SHIFTRY
 	.byte BATTLE_TOWER_ITEM_SCOPE_LENS
-	.byte 0x03 ; team flags
+	.byte 0x03 @ team flags
 	.2byte MOVE_TORMENT, MOVE_FAINT_ATTACK, MOVE_SHADOW_BALL, MOVE_EXPLOSION
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_NAIVE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 171
+@ 171
 	.2byte SPECIES_TROPIUS
 	.byte BATTLE_TOWER_ITEM_APICOT_BERRY
-	.byte 0xC3 ; team flags
+	.byte 0xC3 @ team flags
 	.2byte MOVE_SUNNY_DAY, MOVE_SYNTHESIS, MOVE_SOLAR_BEAM, MOVE_LEECH_SEED
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_DEFENSE
 	.byte NATURE_QUIET
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 172
+@ 172
 	.2byte SPECIES_GRUMPIG
 	.byte BATTLE_TOWER_ITEM_MACHO_BRACE
-	.byte 0x23 ; team flags
+	.byte 0x23 @ team flags
 	.2byte MOVE_TRICK, MOVE_SKILL_SWAP, MOVE_PSYCHIC, MOVE_REST
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 173
+@ 173
 	.2byte SPECIES_TORKOAL
 	.byte BATTLE_TOWER_ITEM_LUM_BERRY
-	.byte 0x81 ; team flags
+	.byte 0x81 @ team flags
 	.2byte MOVE_IRON_DEFENSE, MOVE_TOXIC, MOVE_REST, MOVE_FLAMETHROWER
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_NAIVE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 174
+@ 174
 	.2byte SPECIES_MANECTRIC
 	.byte BATTLE_TOWER_ITEM_NONE
-	.byte 0x03 ; team flags
+	.byte 0x03 @ team flags
 	.2byte MOVE_THUNDERBOLT, MOVE_CRUNCH, MOVE_ROAR, MOVE_THIEF
 	.byte F_EV_SPREAD_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_HASTY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 175
+@ 175
 	.2byte SPECIES_PINSIR
 	.byte BATTLE_TOWER_ITEM_LEPPA_BERRY
-	.byte 0x61 ; team flags
+	.byte 0x61 @ team flags
 	.2byte MOVE_GUILLOTINE, MOVE_EARTHQUAKE, MOVE_DOUBLE_TEAM, MOVE_ROCK_TOMB
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_LAX
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 176
+@ 176
 	.2byte SPECIES_STARMIE
 	.byte BATTLE_TOWER_ITEM_CHESTO_BERRY
-	.byte 0x93 ; team flags
+	.byte 0x93 @ team flags
 	.2byte MOVE_LIGHT_SCREEN, MOVE_THUNDERBOLT, MOVE_SURF, MOVE_REST
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_ADAMANT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 177
+@ 177
 	.2byte SPECIES_HERACROSS
 	.byte BATTLE_TOWER_ITEM_SALAC_BERRY
-	.byte 0x51 ; team flags
+	.byte 0x51 @ team flags
 	.2byte MOVE_MEGAHORN, MOVE_REVERSAL, MOVE_EARTHQUAKE, MOVE_COUNTER
 	.byte F_EV_SPREAD_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 178
+@ 178
 	.2byte SPECIES_WALREIN
 	.byte BATTLE_TOWER_ITEM_NEVER_MELT_ICE
-	.byte 0x83 ; team flags
+	.byte 0x83 @ team flags
 	.2byte MOVE_BLIZZARD, MOVE_EARTHQUAKE, MOVE_SURF, MOVE_ROCK_SLIDE
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_CAREFUL
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 179
+@ 179
 	.2byte SPECIES_ALAKAZAM
 	.byte BATTLE_TOWER_ITEM_SITRUS_BERRY
-	.byte 0x13 ; team flags
+	.byte 0x13 @ team flags
 	.2byte MOVE_PSYCHIC, MOVE_RECOVER, MOVE_ENCORE, MOVE_SNATCH
 	.byte F_EV_SPREAD_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_HASTY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 180
+@ 180
 	.2byte SPECIES_MILOTIC
 	.byte BATTLE_TOWER_ITEM_APICOT_BERRY
-	.byte 0x93 ; team flags
+	.byte 0x93 @ team flags
 	.2byte MOVE_SURF, MOVE_BLIZZARD, MOVE_RECOVER, MOVE_DOUBLE_TEAM
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_HP
 	.byte NATURE_QUIET
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 181
+@ 181
 	.2byte SPECIES_REGICE
 	.byte BATTLE_TOWER_ITEM_CHESTO_BERRY
-	.byte 0x11 ; team flags
+	.byte 0x11 @ team flags
 	.2byte MOVE_REST, MOVE_CURSE, MOVE_BLIZZARD, MOVE_EARTHQUAKE
 	.byte F_EV_SPREAD_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_MILD
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 182
+@ 182
 	.2byte SPECIES_REGISTEEL
 	.byte BATTLE_TOWER_ITEM_LUM_BERRY
-	.byte 0x11 ; team flags
+	.byte 0x11 @ team flags
 	.2byte MOVE_REST, MOVE_IRON_DEFENSE, MOVE_THUNDERBOLT, MOVE_EARTHQUAKE
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_ATTACK
 	.byte NATURE_MILD
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 183
+@ 183
 	.2byte SPECIES_REGIROCK
 	.byte BATTLE_TOWER_ITEM_QUICK_CLAW
-	.byte 0x91 ; team flags
+	.byte 0x91 @ team flags
 	.2byte MOVE_ROCK_TOMB, MOVE_EARTHQUAKE, MOVE_THUNDERBOLT, MOVE_EXPLOSION
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_HP
 	.byte NATURE_SASSY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 184
+@ 184
 	.2byte SPECIES_DUSCLOPS
 	.byte BATTLE_TOWER_ITEM_SPELL_TAG
-	.byte 0x20 ; team flags
+	.byte 0x20 @ team flags
 	.2byte MOVE_SHADOW_BALL, MOVE_EARTHQUAKE, MOVE_BLIZZARD, MOVE_DESTINY_BOND
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_SPEED
 	.byte NATURE_NAUGHTY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 185
+@ 185
 	.2byte SPECIES_SEAKING
 	.byte BATTLE_TOWER_ITEM_LEPPA_BERRY
-	.byte 0xB2 ; team flags
+	.byte 0xB2 @ team flags
 	.2byte MOVE_HORN_DRILL, MOVE_AGILITY, MOVE_SLEEP_TALK, MOVE_REST
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_BRAVE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 186
+@ 186
 	.2byte SPECIES_CAMERUPT
 	.byte BATTLE_TOWER_ITEM_BRIGHT_POWDER
-	.byte 0x00 ; team flags
+	.byte 0x00 @ team flags
 	.2byte MOVE_EARTHQUAKE, MOVE_ERUPTION, MOVE_ROCK_SLIDE, MOVE_FLAMETHROWER
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_NAIVE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 187
+@ 187
 	.2byte SPECIES_LANTURN
 	.byte BATTLE_TOWER_ITEM_SALAC_BERRY
-	.byte 0x82 ; team flags
+	.byte 0x82 @ team flags
 	.2byte MOVE_THUNDERBOLT, MOVE_SURF, MOVE_THUNDER_WAVE, MOVE_BLIZZARD
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_SPEED | F_EV_SPREAD_HP
 	.byte NATURE_BRAVE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 188
+@ 188
 	.2byte SPECIES_WEEZING
 	.byte BATTLE_TOWER_ITEM_SALAC_BERRY
-	.byte 0x20 ; team flags
+	.byte 0x20 @ team flags
 	.2byte MOVE_SLUDGE_BOMB, MOVE_THUNDERBOLT, MOVE_FIRE_BLAST, MOVE_EXPLOSION
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_HP
 	.byte NATURE_SERIOUS
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 189
+@ 189
 	.2byte SPECIES_WHISCASH
 	.byte BATTLE_TOWER_ITEM_PETAYA_BERRY
-	.byte 0x41 ; team flags
+	.byte 0x41 @ team flags
 	.2byte MOVE_EARTHQUAKE, MOVE_SURF, MOVE_ROCK_TOMB, MOVE_ATTRACT
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_DEFENSE | F_EV_SPREAD_ATTACK
 	.byte NATURE_RELAXED
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 190
+@ 190
 	.2byte SPECIES_AGGRON
 	.byte BATTLE_TOWER_ITEM_LIECHI_BERRY
-	.byte 0x11 ; team flags
+	.byte 0x11 @ team flags
 	.2byte MOVE_DOUBLE_EDGE, MOVE_EARTHQUAKE, MOVE_SURF, MOVE_DRAGON_CLAW
 	.byte F_EV_SPREAD_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_GENTLE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 191
+@ 191
 	.2byte SPECIES_CACTURNE
 	.byte BATTLE_TOWER_ITEM_SCOPE_LENS
-	.byte 0x63 ; team flags
+	.byte 0x63 @ team flags
 	.2byte MOVE_DYNAMIC_PUNCH, MOVE_COUNTER, MOVE_FAINT_ATTACK, MOVE_GIGA_DRAIN
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_ATTACK
 	.byte NATURE_RELAXED
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 192
+@ 192
 	.2byte SPECIES_SHARPEDO
 	.byte BATTLE_TOWER_ITEM_KINGS_ROCK
-	.byte 0x01 ; team flags
+	.byte 0x01 @ team flags
 	.2byte MOVE_CRUNCH, MOVE_DOUBLE_EDGE, MOVE_SURF, MOVE_SWAGGER
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_ATTACK
 	.byte NATURE_SASSY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 193
+@ 193
 	.2byte SPECIES_ABSOL
 	.byte BATTLE_TOWER_ITEM_SALAC_BERRY
-	.byte 0x82 ; team flags
+	.byte 0x82 @ team flags
 	.2byte MOVE_DOUBLE_EDGE, MOVE_FACADE, MOVE_SWORDS_DANCE, MOVE_QUICK_ATTACK
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 194
+@ 194
 	.2byte SPECIES_WAILORD
 	.byte BATTLE_TOWER_ITEM_LEPPA_BERRY
-	.byte 0x23 ; team flags
+	.byte 0x23 @ team flags
 	.2byte MOVE_HYDRO_PUMP, MOVE_EARTHQUAKE, MOVE_ATTRACT, MOVE_FISSURE
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_HP
 	.byte NATURE_TIMID
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 195
+@ 195
 	.2byte SPECIES_TENTACRUEL
 	.byte BATTLE_TOWER_ITEM_SITRUS_BERRY
-	.byte 0x21 ; team flags
+	.byte 0x21 @ team flags
 	.2byte MOVE_HYDRO_PUMP, MOVE_SLUDGE_BOMB, MOVE_GIGA_DRAIN, MOVE_MIRROR_COAT
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_HP
 	.byte NATURE_RASH
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 196
+@ 196
 	.2byte SPECIES_LUDICOLO
 	.byte BATTLE_TOWER_ITEM_LEFTOVERS
-	.byte 0xA2 ; team flags
+	.byte 0xA2 @ team flags
 	.2byte MOVE_RAIN_DANCE, MOVE_SURF, MOVE_TOXIC, MOVE_DOUBLE_TEAM
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 197
+@ 197
 	.2byte SPECIES_WOBBUFFET
 	.byte BATTLE_TOWER_ITEM_LEFTOVERS
-	.byte 0x23 ; team flags
+	.byte 0x23 @ team flags
 	.2byte MOVE_ENCORE, MOVE_COUNTER, MOVE_MIRROR_COAT, MOVE_DESTINY_BOND
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_HP
 	.byte NATURE_SERIOUS
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 198
+@ 198
 	.2byte SPECIES_RHYDON
 	.byte BATTLE_TOWER_ITEM_QUICK_CLAW
-	.byte 0x21 ; team flags
+	.byte 0x21 @ team flags
 	.2byte MOVE_EARTHQUAKE, MOVE_MEGAHORN, MOVE_HORN_DRILL, MOVE_ROCK_SLIDE
 	.byte F_EV_SPREAD_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_GENTLE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 199
+@ 199
 	.2byte SPECIES_GLALIE
 	.byte BATTLE_TOWER_ITEM_SALAC_BERRY
-	.byte 0x21 ; team flags
+	.byte 0x21 @ team flags
 	.2byte MOVE_CRUNCH, MOVE_BLIZZARD, MOVE_HAIL, MOVE_EARTHQUAKE
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_HP
 	.byte NATURE_SERIOUS
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 200
+@ 200
 	.2byte SPECIES_SCEPTILE
 	.byte BATTLE_TOWER_ITEM_SCOPE_LENS
-	.byte 0x13 ; team flags
+	.byte 0x13 @ team flags
 	.2byte MOVE_LEAF_BLADE, MOVE_EARTHQUAKE, MOVE_DRAGON_CLAW, MOVE_CRUNCH
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_SPEED
 	.byte NATURE_BRAVE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 201
+@ 201
 	.2byte SPECIES_BLAZIKEN
 	.byte BATTLE_TOWER_ITEM_LIECHI_BERRY
-	.byte 0x17 ; team flags
+	.byte 0x17 @ team flags
 	.2byte MOVE_BLAZE_KICK, MOVE_ROCK_TOMB, MOVE_ENDURE, MOVE_REVERSAL
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_HP
 	.byte NATURE_RASH
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 202
+@ 202
 	.2byte SPECIES_SWAMPERT
 	.byte BATTLE_TOWER_ITEM_SHELL_BELL
-	.byte 0x17 ; team flags
+	.byte 0x17 @ team flags
 	.2byte MOVE_SURF, MOVE_EARTHQUAKE, MOVE_MUD_SHOT, MOVE_BLIZZARD
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_ATTACK
 	.byte NATURE_SERIOUS
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 203
+@ 203
 	.2byte SPECIES_GARDEVOIR
 	.byte BATTLE_TOWER_ITEM_SALAC_BERRY
-	.byte 0x19 ; team flags
+	.byte 0x19 @ team flags
 	.2byte MOVE_PSYCHIC, MOVE_THUNDERBOLT, MOVE_DESTINY_BOND, MOVE_WILL_O_WISP
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_SPEED
 	.byte NATURE_BRAVE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 204
+@ 204
 	.2byte SPECIES_BRELOOM
 	.byte BATTLE_TOWER_ITEM_SALAC_BERRY
-	.byte 0xF6 ; team flags
+	.byte 0xF6 @ team flags
 	.2byte MOVE_SPORE, MOVE_FOCUS_PUNCH, MOVE_BRICK_BREAK, MOVE_SLUDGE_BOMB
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_ATTACK
 	.byte NATURE_SASSY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 205
+@ 205
 	.2byte SPECIES_ALAKAZAM
 	.byte BATTLE_TOWER_ITEM_GANLON_BERRY
-	.byte 0x1B ; team flags
+	.byte 0x1B @ team flags
 	.2byte MOVE_PSYCHIC, MOVE_THUNDER_PUNCH, MOVE_REFLECT, MOVE_RECOVER
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_HP
 	.byte NATURE_HASTY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 206
+@ 206
 	.2byte SPECIES_SHIFTRY
 	.byte BATTLE_TOWER_ITEM_CHESTO_BERRY
-	.byte 0x89 ; team flags
+	.byte 0x89 @ team flags
 	.2byte MOVE_FAINT_ATTACK, MOVE_SHADOW_BALL, MOVE_DOUBLE_TEAM, MOVE_REST
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_ATTACK
 	.byte NATURE_SERIOUS
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 207
+@ 207
 	.2byte SPECIES_HARIYAMA
 	.byte BATTLE_TOWER_ITEM_SCOPE_LENS
-	.byte 0x85 ; team flags
+	.byte 0x85 @ team flags
 	.2byte MOVE_CROSS_CHOP, MOVE_EARTHQUAKE, MOVE_FACADE, MOVE_FAKE_OUT
 	.byte F_EV_SPREAD_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_GENTLE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 208
+@ 208
 	.2byte SPECIES_CROBAT
 	.byte BATTLE_TOWER_ITEM_BRIGHT_POWDER
-	.byte 0x49 ; team flags
+	.byte 0x49 @ team flags
 	.2byte MOVE_ATTRACT, MOVE_CONFUSE_RAY, MOVE_BITE, MOVE_DOUBLE_TEAM
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_ATTACK
 	.byte NATURE_SASSY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 209
+@ 209
 	.2byte SPECIES_MACHAMP
 	.byte BATTLE_TOWER_ITEM_SCOPE_LENS
-	.byte 0x15 ; team flags
+	.byte 0x15 @ team flags
 	.2byte MOVE_CROSS_CHOP, MOVE_FLAMETHROWER, MOVE_EARTHQUAKE, MOVE_ROCK_SLIDE
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_HP
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 210
+@ 210
 	.2byte SPECIES_MANECTRIC
 	.byte BATTLE_TOWER_ITEM_PETAYA_BERRY
-	.byte 0x0B ; team flags
+	.byte 0x0B @ team flags
 	.2byte MOVE_THUNDERBOLT, MOVE_THUNDER_WAVE, MOVE_ROAR, MOVE_CRUNCH
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_SPEED
 	.byte NATURE_BRAVE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 211
+@ 211
 	.2byte SPECIES_ELECTRODE
 	.byte BATTLE_TOWER_ITEM_LUM_BERRY
-	.byte 0x27 ; team flags
+	.byte 0x27 @ team flags
 	.2byte MOVE_THUNDERBOLT, MOVE_PROTECT, MOVE_MIRROR_COAT, MOVE_EXPLOSION
 	.byte F_EV_SPREAD_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_BASHFUL
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 212
+@ 212
 	.2byte SPECIES_MUK
 	.byte BATTLE_TOWER_ITEM_QUICK_CLAW
-	.byte 0x05 ; team flags
+	.byte 0x05 @ team flags
 	.2byte MOVE_SLUDGE_BOMB, MOVE_FLAMETHROWER, MOVE_THUNDERBOLT, MOVE_EXPLOSION
 	.byte F_EV_SPREAD_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_GENTLE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 213
+@ 213
 	.2byte SPECIES_FLYGON
 	.byte BATTLE_TOWER_ITEM_PETAYA_BERRY
-	.byte 0x4D ; team flags
+	.byte 0x4D @ team flags
 	.2byte MOVE_DRAGON_CLAW, MOVE_EARTHQUAKE, MOVE_FLAMETHROWER, MOVE_CRUNCH
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_SPEED
 	.byte NATURE_SERIOUS
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 214
+@ 214
 	.2byte SPECIES_STARMIE
 	.byte BATTLE_TOWER_ITEM_APICOT_BERRY
-	.byte 0x1B ; team flags
+	.byte 0x1B @ team flags
 	.2byte MOVE_SURF, MOVE_THUNDERBOLT, MOVE_RECOVER, MOVE_CONFUSE_RAY
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_SPEED
 	.byte NATURE_BRAVE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 215
+@ 215
 	.2byte SPECIES_DODRIO
 	.byte BATTLE_TOWER_ITEM_LIECHI_BERRY
-	.byte 0x2B ; team flags
+	.byte 0x2B @ team flags
 	.2byte MOVE_DRILL_PECK, MOVE_TRI_ATTACK, MOVE_AGILITY, MOVE_FACADE
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_ATTACK
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 216
+@ 216
 	.2byte SPECIES_RAICHU
 	.byte BATTLE_TOWER_ITEM_FOCUS_BAND
-	.byte 0x0A ; team flags
+	.byte 0x0A @ team flags
 	.2byte MOVE_THUNDERBOLT, MOVE_THUNDER_WAVE, MOVE_REVERSAL, MOVE_ATTRACT
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_SPEED
 	.byte NATURE_SERIOUS
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 217
+@ 217
 	.2byte SPECIES_GOLDUCK
 	.byte BATTLE_TOWER_ITEM_LIECHI_BERRY
-	.byte 0x0A ; team flags
+	.byte 0x0A @ team flags
 	.2byte MOVE_SURF, MOVE_CROSS_CHOP, MOVE_ICE_BEAM, MOVE_HYPER_BEAM
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_ATTACK
 	.byte NATURE_SERIOUS
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 218
+@ 218
 	.2byte SPECIES_HERACROSS
 	.byte BATTLE_TOWER_ITEM_LIECHI_BERRY
-	.byte 0x54 ; team flags
+	.byte 0x54 @ team flags
 	.2byte MOVE_MEGAHORN, MOVE_ROCK_TOMB, MOVE_ENDURE, MOVE_REVERSAL
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_ATTACK
 	.byte NATURE_SASSY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 219
+@ 219
 	.2byte SPECIES_WALREIN
 	.byte BATTLE_TOWER_ITEM_CHESTO_BERRY
-	.byte 0x06 ; team flags
+	.byte 0x06 @ team flags
 	.2byte MOVE_SURF, MOVE_ICE_BEAM, MOVE_EARTHQUAKE, MOVE_REST
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_NAIVE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 220
+@ 220
 	.2byte SPECIES_KINGDRA
 	.byte BATTLE_TOWER_ITEM_CHESTO_BERRY
-	.byte 0x1D ; team flags
+	.byte 0x1D @ team flags
 	.2byte MOVE_SURF, MOVE_TOXIC, MOVE_PROTECT, MOVE_REST
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_ADAMANT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 221
+@ 221
 	.2byte SPECIES_SALAMENCE
 	.byte BATTLE_TOWER_ITEM_LUM_BERRY
-	.byte 0x9C ; team flags
+	.byte 0x9C @ team flags
 	.2byte MOVE_DRAGON_CLAW, MOVE_EARTHQUAKE, MOVE_CRUNCH, MOVE_REST
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_ADAMANT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 222
+@ 222
 	.2byte SPECIES_METAGROSS
 	.byte BATTLE_TOWER_ITEM_SHELL_BELL
-	.byte 0x15 ; team flags
+	.byte 0x15 @ team flags
 	.2byte MOVE_METEOR_MASH, MOVE_PSYCHIC, MOVE_EARTHQUAKE, MOVE_LIGHT_SCREEN
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 223
+@ 223
 	.2byte SPECIES_REGIROCK
 	.byte BATTLE_TOWER_ITEM_BRIGHT_POWDER
-	.byte 0xB5 ; team flags
+	.byte 0xB5 @ team flags
 	.2byte MOVE_EARTHQUAKE, MOVE_ANCIENT_POWER, MOVE_FOCUS_PUNCH, MOVE_EXPLOSION
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_ATTACK
 	.byte NATURE_GENTLE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 224
+@ 224
 	.2byte SPECIES_REGICE
 	.byte BATTLE_TOWER_ITEM_CHESTO_BERRY
-	.byte 0x96 ; team flags
+	.byte 0x96 @ team flags
 	.2byte MOVE_ICE_BEAM, MOVE_THUNDERBOLT, MOVE_DOUBLE_TEAM, MOVE_REST
 	.byte F_EV_SPREAD_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_HASTY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 225
+@ 225
 	.2byte SPECIES_REGISTEEL
 	.byte BATTLE_TOWER_ITEM_QUICK_CLAW
-	.byte 0x94 ; team flags
+	.byte 0x94 @ team flags
 	.2byte MOVE_METAL_CLAW, MOVE_EARTHQUAKE, MOVE_THUNDERBOLT, MOVE_EXPLOSION
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_ATTACK
 	.byte NATURE_GENTLE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 226
+@ 226
 	.2byte SPECIES_LATIAS
 	.byte BATTLE_TOWER_ITEM_LUM_BERRY
-	.byte 0x96 ; team flags
+	.byte 0x96 @ team flags
 	.2byte MOVE_MIST_BALL, MOVE_THUNDERBOLT, MOVE_REST, MOVE_DRAGON_CLAW
 	.byte F_EV_SPREAD_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_MILD
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 227
+@ 227
 	.2byte SPECIES_LATIOS
 	.byte BATTLE_TOWER_ITEM_APICOT_BERRY
-	.byte 0x95 ; team flags
+	.byte 0x95 @ team flags
 	.2byte MOVE_LUSTER_PURGE, MOVE_REFLECT, MOVE_RECOVER, MOVE_DRAGON_CLAW
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_SPEED
 	.byte NATURE_BRAVE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 228
+@ 228
 	.2byte SPECIES_MILOTIC
 	.byte BATTLE_TOWER_ITEM_LEFTOVERS
-	.byte 0x96 ; team flags
+	.byte 0x96 @ team flags
 	.2byte MOVE_SURF, MOVE_TOXIC, MOVE_RECOVER, MOVE_MIRROR_COAT
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_SPEED | F_EV_SPREAD_DEFENSE
 	.byte NATURE_BRAVE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 229
+@ 229
 	.2byte SPECIES_SLAKING
 	.byte BATTLE_TOWER_ITEM_CHOICE_BAND
-	.byte 0x05 ; team flags
+	.byte 0x05 @ team flags
 	.2byte MOVE_HYPER_BEAM, MOVE_EARTHQUAKE, MOVE_NONE, MOVE_NONE
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_ATTACK
 	.byte NATURE_SERIOUS
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 230
+@ 230
 	.2byte SPECIES_SCEPTILE
 	.byte BATTLE_TOWER_ITEM_LEFTOVERS
-	.byte 0x1F ; team flags
+	.byte 0x1F @ team flags
 	.2byte MOVE_GIGA_DRAIN, MOVE_DOUBLE_TEAM, MOVE_LEECH_SEED, MOVE_ATTRACT
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_QUIET
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 231
+@ 231
 	.2byte SPECIES_BLAZIKEN
 	.byte BATTLE_TOWER_ITEM_CHESTO_BERRY
-	.byte 0x17 ; team flags
+	.byte 0x17 @ team flags
 	.2byte MOVE_BLAZE_KICK, MOVE_EARTHQUAKE, MOVE_ROCK_SLIDE, MOVE_REST
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_SPEED
 	.byte NATURE_BRAVE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 232
+@ 232
 	.2byte SPECIES_SWAMPERT
 	.byte BATTLE_TOWER_ITEM_SHELL_BELL
-	.byte 0x17 ; team flags
+	.byte 0x17 @ team flags
 	.2byte MOVE_MUDDY_WATER, MOVE_MUD_SHOT, MOVE_MIRROR_COAT, MOVE_ICE_BEAM
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 233
+@ 233
 	.2byte SPECIES_GARDEVOIR
 	.byte BATTLE_TOWER_ITEM_SALAC_BERRY
-	.byte 0x7B ; team flags
+	.byte 0x7B @ team flags
 	.2byte MOVE_PSYCHIC, MOVE_SHADOW_BALL, MOVE_DESTINY_BOND, MOVE_SNATCH
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_SPEED | F_EV_SPREAD_DEFENSE
 	.byte NATURE_RELAXED
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 234
+@ 234
 	.2byte SPECIES_BRELOOM
 	.byte BATTLE_TOWER_ITEM_SALAC_BERRY
-	.byte 0x56 ; team flags
+	.byte 0x56 @ team flags
 	.2byte MOVE_SPORE, MOVE_COUNTER, MOVE_IRON_TAIL, MOVE_GIGA_DRAIN
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_ATTACK
 	.byte NATURE_SASSY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 235
+@ 235
 	.2byte SPECIES_ALAKAZAM
 	.byte BATTLE_TOWER_ITEM_BRIGHT_POWDER
-	.byte 0x0A ; team flags
+	.byte 0x0A @ team flags
 	.2byte MOVE_PSYCHIC, MOVE_THUNDER_PUNCH, MOVE_FIRE_PUNCH, MOVE_RECOVER
 	.byte F_EV_SPREAD_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_HASTY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 236
+@ 236
 	.2byte SPECIES_HARIYAMA
 	.byte BATTLE_TOWER_ITEM_FOCUS_BAND
-	.byte 0x05 ; team flags
+	.byte 0x05 @ team flags
 	.2byte MOVE_CROSS_CHOP, MOVE_ROCK_TOMB, MOVE_ENDURE, MOVE_REVERSAL
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_SASSY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 237
+@ 237
 	.2byte SPECIES_GYARADOS
 	.byte BATTLE_TOWER_ITEM_SHELL_BELL
-	.byte 0x0C ; team flags
+	.byte 0x0C @ team flags
 	.2byte MOVE_HYPER_BEAM, MOVE_THUNDERBOLT, MOVE_EARTHQUAKE, MOVE_ICE_BEAM
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_ATTACK
 	.byte NATURE_BOLD
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 238
+@ 238
 	.2byte SPECIES_CROBAT
 	.byte BATTLE_TOWER_ITEM_BRIGHT_POWDER
-	.byte 0x49 ; team flags
+	.byte 0x49 @ team flags
 	.2byte MOVE_TOXIC, MOVE_CONFUSE_RAY, MOVE_ATTRACT, MOVE_PROTECT
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_SPEED
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 239
+@ 239
 	.2byte SPECIES_MACHAMP
 	.byte BATTLE_TOWER_ITEM_SCOPE_LENS
-	.byte 0x15 ; team flags
+	.byte 0x15 @ team flags
 	.2byte MOVE_CROSS_CHOP, MOVE_COUNTER, MOVE_EARTHQUAKE, MOVE_FACADE
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_HP
 	.byte NATURE_SERIOUS
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 240
+@ 240
 	.2byte SPECIES_MANECTRIC
 	.byte BATTLE_TOWER_ITEM_CHESTO_BERRY
-	.byte 0x63 ; team flags
+	.byte 0x63 @ team flags
 	.2byte MOVE_THUNDER, MOVE_THUNDER_WAVE, MOVE_REST, MOVE_CRUNCH
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_HP
 	.byte NATURE_BRAVE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 241
+@ 241
 	.2byte SPECIES_ELECTRODE
 	.byte BATTLE_TOWER_ITEM_SALAC_BERRY
-	.byte 0x07 ; team flags
+	.byte 0x07 @ team flags
 	.2byte MOVE_THUNDERBOLT, MOVE_SCREECH, MOVE_MIRROR_COAT, MOVE_EXPLOSION
 	.byte F_EV_SPREAD_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_MODEST
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 242
+@ 242
 	.2byte SPECIES_MUK
 	.byte BATTLE_TOWER_ITEM_LIECHI_BERRY
-	.byte 0x45 ; team flags
+	.byte 0x45 @ team flags
 	.2byte MOVE_SLUDGE_BOMB, MOVE_GIGA_DRAIN, MOVE_ROCK_TOMB, MOVE_EXPLOSION
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_HP
 	.byte NATURE_RASH
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 243
+@ 243
 	.2byte SPECIES_FLYGON
 	.byte BATTLE_TOWER_ITEM_LUM_BERRY
-	.byte 0x4D ; team flags
+	.byte 0x4D @ team flags
 	.2byte MOVE_DRAGON_CLAW, MOVE_EARTHQUAKE, MOVE_IRON_TAIL, MOVE_ROCK_TOMB
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_ATTACK
 	.byte NATURE_IMPISH
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 244
+@ 244
 	.2byte SPECIES_STARMIE
 	.byte BATTLE_TOWER_ITEM_CHESTO_BERRY
-	.byte 0x1B ; team flags
+	.byte 0x1B @ team flags
 	.2byte MOVE_LIGHT_SCREEN, MOVE_THUNDERBOLT, MOVE_SURF, MOVE_REST
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_SPEED
 	.byte NATURE_QUIET
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 245
+@ 245
 	.2byte SPECIES_NINETALES
 	.byte BATTLE_TOWER_ITEM_SITRUS_BERRY
-	.byte 0x0A ; team flags
+	.byte 0x0A @ team flags
 	.2byte MOVE_CONFUSE_RAY, MOVE_OVERHEAT, MOVE_FLAMETHROWER, MOVE_IRON_TAIL
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_SPEED
 	.byte NATURE_QUIET
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 246
+@ 246
 	.2byte SPECIES_GOLEM
 	.byte BATTLE_TOWER_ITEM_SALAC_BERRY
-	.byte 0x25 ; team flags
+	.byte 0x25 @ team flags
 	.2byte MOVE_EARTHQUAKE, MOVE_ROAR, MOVE_FIRE_BLAST, MOVE_EXPLOSION
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_SPEED
 	.byte NATURE_SERIOUS
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 247
+@ 247
 	.2byte SPECIES_GOLDUCK
 	.byte BATTLE_TOWER_ITEM_PETAYA_BERRY
-	.byte 0x27 ; team flags
+	.byte 0x27 @ team flags
 	.2byte MOVE_HYDRO_PUMP, MOVE_CROSS_CHOP, MOVE_BLIZZARD, MOVE_PSYCH_UP
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_ATTACK
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 248
+@ 248
 	.2byte SPECIES_HERACROSS
 	.byte BATTLE_TOWER_ITEM_SALAC_BERRY
-	.byte 0x55 ; team flags
+	.byte 0x55 @ team flags
 	.2byte MOVE_MEGAHORN, MOVE_EARTHQUAKE, MOVE_COUNTER, MOVE_REVERSAL
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_ATTACK
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 249
+@ 249
 	.2byte SPECIES_WALREIN
 	.byte BATTLE_TOWER_ITEM_SALAC_BERRY
-	.byte 0x36 ; team flags
+	.byte 0x36 @ team flags
 	.2byte MOVE_SURF, MOVE_BLIZZARD, MOVE_ROCK_SLIDE, MOVE_SHEER_COLD
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_HP
 	.byte NATURE_SERIOUS
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 250
+@ 250
 	.2byte SPECIES_KINGDRA
 	.byte BATTLE_TOWER_ITEM_LEFTOVERS
-	.byte 0x5C ; team flags
+	.byte 0x5C @ team flags
 	.2byte MOVE_HYDRO_PUMP, MOVE_PROTECT, MOVE_DRAGON_BREATH, MOVE_DOUBLE_TEAM
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_ADAMANT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 251
+@ 251
 	.2byte SPECIES_SALAMENCE
 	.byte BATTLE_TOWER_ITEM_KINGS_ROCK
-	.byte 0x9D ; team flags
+	.byte 0x9D @ team flags
 	.2byte MOVE_DRAGON_CLAW, MOVE_EARTHQUAKE, MOVE_FLAMETHROWER, MOVE_ROCK_TOMB
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_SPEED
 	.byte NATURE_SERIOUS
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 252
+@ 252
 	.2byte SPECIES_METAGROSS
 	.byte BATTLE_TOWER_ITEM_QUICK_CLAW
-	.byte 0x15 ; team flags
+	.byte 0x15 @ team flags
 	.2byte MOVE_METEOR_MASH, MOVE_PSYCHIC, MOVE_EARTHQUAKE, MOVE_HYPER_BEAM
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_ATTACK
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 253
+@ 253
 	.2byte SPECIES_REGIROCK
 	.byte BATTLE_TOWER_ITEM_QUICK_CLAW
-	.byte 0x95 ; team flags
+	.byte 0x95 @ team flags
 	.2byte MOVE_EARTHQUAKE, MOVE_ROCK_TOMB, MOVE_FACADE, MOVE_EXPLOSION
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_ATTACK
 	.byte NATURE_GENTLE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 254
+@ 254
 	.2byte SPECIES_REGICE
 	.byte BATTLE_TOWER_ITEM_SHELL_BELL
-	.byte 0x96 ; team flags
+	.byte 0x96 @ team flags
 	.2byte MOVE_BLIZZARD, MOVE_THUNDERBOLT, MOVE_HAIL, MOVE_EXPLOSION
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_DEFENSE
 	.byte NATURE_CAREFUL
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 255
+@ 255
 	.2byte SPECIES_REGISTEEL
 	.byte BATTLE_TOWER_ITEM_QUICK_CLAW
-	.byte 0x94 ; team flags
+	.byte 0x94 @ team flags
 	.2byte MOVE_METAL_CLAW, MOVE_EARTHQUAKE, MOVE_ANCIENT_POWER, MOVE_EXPLOSION
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_ATTACK
 	.byte NATURE_GENTLE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 256
+@ 256
 	.2byte SPECIES_LATIAS
 	.byte BATTLE_TOWER_ITEM_APICOT_BERRY
-	.byte 0x96 ; team flags
+	.byte 0x96 @ team flags
 	.2byte MOVE_MIST_BALL, MOVE_REFLECT, MOVE_RECOVER, MOVE_DRAGON_CLAW
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_HP
 	.byte NATURE_BRAVE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 257
+@ 257
 	.2byte SPECIES_LATIOS
 	.byte BATTLE_TOWER_ITEM_SHELL_BELL
-	.byte 0x95 ; team flags
+	.byte 0x95 @ team flags
 	.2byte MOVE_LUSTER_PURGE, MOVE_ICE_BEAM, MOVE_RECOVER, MOVE_DRAGON_CLAW
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_SPEED
 	.byte NATURE_QUIET
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 258
+@ 258
 	.2byte SPECIES_MILOTIC
 	.byte BATTLE_TOWER_ITEM_APICOT_BERRY
-	.byte 0xD6 ; team flags
+	.byte 0xD6 @ team flags
 	.2byte MOVE_SURF, MOVE_ICE_BEAM, MOVE_RECOVER, MOVE_DOUBLE_TEAM
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_ADAMANT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 259
+@ 259
 	.2byte SPECIES_KECLEON
 	.byte BATTLE_TOWER_ITEM_CHOICE_BAND
-	.byte 0x69 ; team flags
+	.byte 0x69 @ team flags
 	.2byte MOVE_TRICK, MOVE_REST, MOVE_IRON_TAIL, MOVE_DISABLE
 	.byte F_EV_SPREAD_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_QUIRKY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 260
+@ 260
 	.2byte SPECIES_SCEPTILE
 	.byte BATTLE_TOWER_ITEM_CHESTO_BERRY
-	.byte 0x5F ; team flags
+	.byte 0x5F @ team flags
 	.2byte MOVE_LEAF_BLADE, MOVE_EARTHQUAKE, MOVE_REST, MOVE_CRUNCH
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_SPEED | F_EV_SPREAD_DEFENSE
 	.byte NATURE_BRAVE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 261
+@ 261
 	.2byte SPECIES_BLAZIKEN
 	.byte BATTLE_TOWER_ITEM_LUM_BERRY
-	.byte 0x7F ; team flags
+	.byte 0x7F @ team flags
 	.2byte MOVE_FOCUS_PUNCH, MOVE_COUNTER, MOVE_SWAGGER, MOVE_ROCK_TOMB
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_HP
 	.byte NATURE_SASSY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 262
+@ 262
 	.2byte SPECIES_SWAMPERT
 	.byte BATTLE_TOWER_ITEM_LUM_BERRY
-	.byte 0x57 ; team flags
+	.byte 0x57 @ team flags
 	.2byte MOVE_IRON_TAIL, MOVE_CURSE, MOVE_DOUBLE_TEAM, MOVE_REST
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_LAX
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 263
+@ 263
 	.2byte SPECIES_GARDEVOIR
 	.byte BATTLE_TOWER_ITEM_CHESTO_BERRY
-	.byte 0x3B ; team flags
+	.byte 0x3B @ team flags
 	.2byte MOVE_SHADOW_BALL, MOVE_PSYCHIC, MOVE_REST, MOVE_IMPRISON
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_HP
 	.byte NATURE_BRAVE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 264
+@ 264
 	.2byte SPECIES_BRELOOM
 	.byte BATTLE_TOWER_ITEM_SALAC_BERRY
-	.byte 0x56 ; team flags
+	.byte 0x56 @ team flags
 	.2byte MOVE_SPORE, MOVE_FOCUS_PUNCH, MOVE_SLUDGE_BOMB, MOVE_IRON_TAIL
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_ATTACK
 	.byte NATURE_SASSY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 265
+@ 265
 	.2byte SPECIES_ALAKAZAM
 	.byte BATTLE_TOWER_ITEM_CHOICE_BAND
-	.byte 0x1A ; team flags
+	.byte 0x1A @ team flags
 	.2byte MOVE_PSYCHIC, MOVE_TRICK, MOVE_RECOVER, MOVE_SNATCH
 	.byte F_EV_SPREAD_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_HASTY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 266
+@ 266
 	.2byte SPECIES_HARIYAMA
 	.byte BATTLE_TOWER_ITEM_SALAC_BERRY
-	.byte 0x65 ; team flags
+	.byte 0x65 @ team flags
 	.2byte MOVE_REVENGE, MOVE_COUNTER, MOVE_FOCUS_PUNCH, MOVE_REVERSAL
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_HP
 	.byte NATURE_SASSY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 267
+@ 267
 	.2byte SPECIES_LUDICOLO
 	.byte BATTLE_TOWER_ITEM_LEFTOVERS
-	.byte 0x54 ; team flags
+	.byte 0x54 @ team flags
 	.2byte MOVE_RAIN_DANCE, MOVE_PROTECT, MOVE_TOXIC, MOVE_SURF
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_QUIET
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 268
+@ 268
 	.2byte SPECIES_CROBAT
 	.byte BATTLE_TOWER_ITEM_BRIGHT_POWDER
-	.byte 0x4B ; team flags
+	.byte 0x4B @ team flags
 	.2byte MOVE_SLUDGE_BOMB, MOVE_BITE, MOVE_AIR_CUTTER, MOVE_SHADOW_BALL
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_SPEED
 	.byte NATURE_BRAVE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 269
+@ 269
 	.2byte SPECIES_MACHAMP
 	.byte BATTLE_TOWER_ITEM_SCOPE_LENS
-	.byte 0x75 ; team flags
+	.byte 0x75 @ team flags
 	.2byte MOVE_CROSS_CHOP, MOVE_ROCK_SLIDE, MOVE_DYNAMIC_PUNCH, MOVE_ROCK_TOMB
 	.byte F_EV_SPREAD_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 270
+@ 270
 	.2byte SPECIES_MANECTRIC
 	.byte BATTLE_TOWER_ITEM_PETAYA_BERRY
-	.byte 0x0A ; team flags
+	.byte 0x0A @ team flags
 	.2byte MOVE_THUNDERBOLT, MOVE_THUNDER_WAVE, MOVE_ATTRACT, MOVE_CRUNCH
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_QUIET
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 271
+@ 271
 	.2byte SPECIES_ELECTRODE
 	.byte BATTLE_TOWER_ITEM_LIECHI_BERRY
-	.byte 0x64 ; team flags
+	.byte 0x64 @ team flags
 	.2byte MOVE_THUNDER, MOVE_DOUBLE_TEAM, MOVE_MIRROR_COAT, MOVE_EXPLOSION
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_HP
 	.byte NATURE_BASHFUL
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 272
+@ 272
 	.2byte SPECIES_MUK
 	.byte BATTLE_TOWER_ITEM_SALAC_BERRY
-	.byte 0x49 ; team flags
+	.byte 0x49 @ team flags
 	.2byte MOVE_SLUDGE_BOMB, MOVE_FLAMETHROWER, MOVE_THUNDERBOLT, MOVE_SHADOW_PUNCH
 	.byte F_EV_SPREAD_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_GENTLE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 273
+@ 273
 	.2byte SPECIES_FLYGON
 	.byte BATTLE_TOWER_ITEM_BRIGHT_POWDER
-	.byte 0xCD ; team flags
+	.byte 0xCD @ team flags
 	.2byte MOVE_PROTECT, MOVE_DIG, MOVE_TOXIC, MOVE_SANDSTORM
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_LAX
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 274
+@ 274
 	.2byte SPECIES_STARMIE
 	.byte BATTLE_TOWER_ITEM_KINGS_ROCK
-	.byte 0x5B ; team flags
+	.byte 0x5B @ team flags
 	.2byte MOVE_SURF, MOVE_THUNDERBOLT, MOVE_BLIZZARD, MOVE_PSYCHIC
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_SPEED
 	.byte NATURE_BRAVE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 275
+@ 275
 	.2byte SPECIES_LUDICOLO
 	.byte BATTLE_TOWER_ITEM_LEFTOVERS
-	.byte 0x1A ; team flags
+	.byte 0x1A @ team flags
 	.2byte MOVE_RAIN_DANCE, MOVE_LEECH_SEED, MOVE_DIVE, MOVE_PROTECT
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_SPEED
 	.byte NATURE_BRAVE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 276
+@ 276
 	.2byte SPECIES_RAICHU
 	.byte BATTLE_TOWER_ITEM_LIECHI_BERRY
-	.byte 0x4A ; team flags
+	.byte 0x4A @ team flags
 	.2byte MOVE_THUNDER, MOVE_REVERSAL, MOVE_FACADE, MOVE_IRON_TAIL
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_DEFENSE | F_EV_SPREAD_ATTACK
 	.byte NATURE_TIMID
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 277
+@ 277
 	.2byte SPECIES_GOLDUCK
 	.byte BATTLE_TOWER_ITEM_SALAC_BERRY
-	.byte 0x0A ; team flags
+	.byte 0x0A @ team flags
 	.2byte MOVE_SURF, MOVE_PSYCHIC, MOVE_ICE_BEAM, MOVE_IRON_TAIL
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_SPEED
 	.byte NATURE_DOCILE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 278
+@ 278
 	.2byte SPECIES_HERACROSS
 	.byte BATTLE_TOWER_ITEM_LIECHI_BERRY
-	.byte 0x15 ; team flags
+	.byte 0x15 @ team flags
 	.2byte MOVE_MEGAHORN, MOVE_EARTHQUAKE, MOVE_FACADE, MOVE_ROCK_TOMB
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_DEFENSE | F_EV_SPREAD_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 279
+@ 279
 	.2byte SPECIES_WALREIN
 	.byte BATTLE_TOWER_ITEM_LEPPA_BERRY
-	.byte 0x26 ; team flags
+	.byte 0x26 @ team flags
 	.2byte MOVE_SURF, MOVE_ICE_BEAM, MOVE_FISSURE, MOVE_SHEER_COLD
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 280
+@ 280
 	.2byte SPECIES_KINGDRA
 	.byte BATTLE_TOWER_ITEM_SHELL_BELL
-	.byte 0x4D ; team flags
+	.byte 0x4D @ team flags
 	.2byte MOVE_HYDRO_PUMP, MOVE_BLIZZARD, MOVE_HYPER_BEAM, MOVE_DISABLE
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_QUIET
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 281
+@ 281
 	.2byte SPECIES_SALAMENCE
 	.byte BATTLE_TOWER_ITEM_PETAYA_BERRY
-	.byte 0x9C ; team flags
+	.byte 0x9C @ team flags
 	.2byte MOVE_DRAGON_CLAW, MOVE_EARTHQUAKE, MOVE_FIRE_BLAST, MOVE_HYDRO_PUMP
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_SPEED
 	.byte NATURE_NAUGHTY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 282
+@ 282
 	.2byte SPECIES_METAGROSS
 	.byte BATTLE_TOWER_ITEM_LIECHI_BERRY
-	.byte 0xB5 ; team flags
+	.byte 0xB5 @ team flags
 	.2byte MOVE_METEOR_MASH, MOVE_PSYCHIC, MOVE_PURSUIT, MOVE_ROCK_TOMB
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_SPEED
 	.byte NATURE_BRAVE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 283
+@ 283
 	.2byte SPECIES_REGIROCK
 	.byte BATTLE_TOWER_ITEM_APICOT_BERRY
-	.byte 0x95 ; team flags
+	.byte 0x95 @ team flags
 	.2byte MOVE_EARTHQUAKE, MOVE_TOXIC, MOVE_SUPERPOWER, MOVE_REST
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_HP
 	.byte NATURE_SERIOUS
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 284
+@ 284
 	.2byte SPECIES_REGICE
 	.byte BATTLE_TOWER_ITEM_LAX_INCENSE
-	.byte 0x96 ; team flags
+	.byte 0x96 @ team flags
 	.2byte MOVE_ICE_BEAM, MOVE_THUNDERBOLT, MOVE_ANCIENT_POWER, MOVE_EXPLOSION
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_DEFENSE
 	.byte NATURE_RASH
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 285
+@ 285
 	.2byte SPECIES_REGISTEEL
 	.byte BATTLE_TOWER_ITEM_LEFTOVERS
-	.byte 0xB4 ; team flags
+	.byte 0xB4 @ team flags
 	.2byte MOVE_CURSE, MOVE_AMNESIA, MOVE_RETURN, MOVE_REST
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_LAX
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 286
+@ 286
 	.2byte SPECIES_LATIAS
 	.byte BATTLE_TOWER_ITEM_SHELL_BELL
-	.byte 0x92 ; team flags
+	.byte 0x92 @ team flags
 	.2byte MOVE_MIST_BALL, MOVE_THUNDERBOLT, MOVE_EARTHQUAKE, MOVE_ICE_BEAM
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_SPEED
 	.byte NATURE_QUIET
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 287
+@ 287
 	.2byte SPECIES_LATIOS
 	.byte BATTLE_TOWER_ITEM_SHELL_BELL
-	.byte 0x91 ; team flags
+	.byte 0x91 @ team flags
 	.2byte MOVE_LUSTER_PURGE, MOVE_THUNDERBOLT, MOVE_EARTHQUAKE, MOVE_SURF
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_SPEED
 	.byte NATURE_QUIET
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 288
+@ 288
 	.2byte SPECIES_MILOTIC
 	.byte BATTLE_TOWER_ITEM_BRIGHT_POWDER
-	.byte 0xB2 ; team flags
+	.byte 0xB2 @ team flags
 	.2byte MOVE_SURF, MOVE_ICE_BEAM, MOVE_RECOVER, MOVE_ATTRACT
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_SPEED
 	.byte NATURE_BRAVE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 289
+@ 289
 	.2byte SPECIES_SLAKING
 	.byte BATTLE_TOWER_ITEM_SALAC_BERRY
-	.byte 0x65 ; team flags
+	.byte 0x65 @ team flags
 	.2byte MOVE_YAWN, MOVE_SLASH, MOVE_COUNTER, MOVE_HYPER_BEAM
 	.byte F_EV_SPREAD_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_DOCILE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 290
+@ 290
 	.2byte SPECIES_SCEPTILE
 	.byte BATTLE_TOWER_ITEM_SHELL_BELL
-	.byte 0xDF ; team flags
+	.byte 0xDF @ team flags
 	.2byte MOVE_LEAF_BLADE, MOVE_DETECT, MOVE_DRAGON_CLAW, MOVE_CRUNCH
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_SPEED
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 291
+@ 291
 	.2byte SPECIES_BLAZIKEN
 	.byte BATTLE_TOWER_ITEM_SALAC_BERRY
-	.byte 0xD7 ; team flags
+	.byte 0xD7 @ team flags
 	.2byte MOVE_BLAZE_KICK, MOVE_SKY_UPPERCUT, MOVE_EARTHQUAKE, MOVE_ROCK_SLIDE
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_ATTACK
 	.byte NATURE_DOCILE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 292
+@ 292
 	.2byte SPECIES_SWAMPERT
 	.byte BATTLE_TOWER_ITEM_PETAYA_BERRY
-	.byte 0x5F ; team flags
+	.byte 0x5F @ team flags
 	.2byte MOVE_SURF, MOVE_EARTHQUAKE, MOVE_ICE_BEAM, MOVE_ROCK_TOMB
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_SPEED | F_EV_SPREAD_HP
 	.byte NATURE_SASSY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 293
+@ 293
 	.2byte SPECIES_SHEDINJA
 	.byte BATTLE_TOWER_ITEM_BRIGHT_POWDER
-	.byte 0xDB ; team flags
+	.byte 0xDB @ team flags
 	.2byte MOVE_CONFUSE_RAY, MOVE_SHADOW_BALL, MOVE_TOXIC, MOVE_HYPER_BEAM
 	.byte F_EV_SPREAD_SPEED | F_EV_SPREAD_ATTACK
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 294
+@ 294
 	.2byte SPECIES_METAGROSS
 	.byte BATTLE_TOWER_ITEM_QUICK_CLAW
-	.byte 0x94 ; team flags
+	.byte 0x94 @ team flags
 	.2byte MOVE_METEOR_MASH, MOVE_PSYCHIC, MOVE_SHADOW_BALL, MOVE_EARTHQUAKE
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_ATTACK
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 295
+@ 295
 	.2byte SPECIES_GRUMPIG
 	.byte BATTLE_TOWER_ITEM_MACHO_BRACE
-	.byte 0x4B ; team flags
+	.byte 0x4B @ team flags
 	.2byte MOVE_PSYCHIC, MOVE_CONFUSE_RAY, MOVE_TRICK, MOVE_REFLECT
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_HP
 	.byte NATURE_QUIET
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 296
+@ 296
 	.2byte SPECIES_LATIAS
 	.byte BATTLE_TOWER_ITEM_LUM_BERRY
-	.byte 0x92 ; team flags
+	.byte 0x92 @ team flags
 	.2byte MOVE_MIST_BALL, MOVE_RECOVER, MOVE_ATTRACT, MOVE_DRAGON_CLAW
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_ADAMANT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 297
+@ 297
 	.2byte SPECIES_LATIOS
 	.byte BATTLE_TOWER_ITEM_KINGS_ROCK
-	.byte 0x91 ; team flags
+	.byte 0x91 @ team flags
 	.2byte MOVE_LUSTER_PURGE, MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_DRAGON_CLAW
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_SPEED
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 298
+@ 298
 	.2byte SPECIES_STARMIE
 	.byte BATTLE_TOWER_ITEM_LUM_BERRY
-	.byte 0x1A ; team flags
+	.byte 0x1A @ team flags
 	.2byte MOVE_SURF, MOVE_THUNDERBOLT, MOVE_PSYCHIC, MOVE_ICE_BEAM
 	.byte F_EV_SPREAD_SP_ATTACK | F_EV_SPREAD_SPEED
 	.byte NATURE_QUIET
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 
-; 299
+@ 299
 	.2byte SPECIES_MACHAMP
 	.byte BATTLE_TOWER_ITEM_SCOPE_LENS
-	.byte 0x14 ; team flags
+	.byte 0x14 @ team flags
 	.2byte MOVE_CROSS_CHOP, MOVE_COUNTER, MOVE_ROCK_TOMB, MOVE_FLAMETHROWER
 	.byte F_EV_SPREAD_SP_DEFENSE | F_EV_SPREAD_HP
 	.byte NATURE_HARDY
-	.2byte 0 ; padding
+	.2byte 0 @ padding

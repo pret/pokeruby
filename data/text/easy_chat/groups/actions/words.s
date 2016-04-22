@@ -1,4 +1,4 @@
-gEasyChatGroupWords_Actions: ; 83DD26E
+gEasyChatGroupWords_Actions: @ 83DD26E
 	.string "MEETS$"
 	.string "CONCEDE$"
 	.string "GIVE$"

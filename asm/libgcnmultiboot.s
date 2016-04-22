@@ -1,33 +1,42 @@
-; This library can be used to download and execute a multi-boot image from
-; a GameCube using the JOY Bus protocol over the link cable.
+@ This library can be used to download and execute a multi-boot image from
+@ a GameCube using the JOY Bus protocol over the link cable.
 
-	.set GCMB_STRUCT_BASE_DEST_PTR,       0x20
-	.set GCMB_STRUCT_CUR_DEST_PTR,        0x24
-	.set GCMB_STRUCT_SERIAL_INTR_HANDLER, 0x28
+	.include "asm/macros.s"
+	.include "constants/constants.s"
+
+	.equiv GCMB_STRUCT_BASE_DEST_PTR,       0x20
+	.equiv GCMB_STRUCT_CUR_DEST_PTR,        0x24
+	.equiv GCMB_STRUCT_SERIAL_INTR_HANDLER, 0x28
+
+	.equiv ROM_HEADER_NINTENDO_LOGO_OFFSET, 0x4
+
+	.syntax unified
+
+	.text
 
 	thumb_func_start GameCubeMultiBoot_Hash
-GameCubeMultiBoot_Hash: ; 81DCB38
+GameCubeMultiBoot_Hash: @ 81DCB38
 	push {r4,lr}
 	ldr r4, pool_HashVal
 	eors r3, r1
 	movs r2, 0x20
 
-$loop:
+GameCubeMultiBoot_Hash_Loop:
 	lsrs r3, 1
-	bcc $skipEor
+	bcc GameCubeMultiBoot_Hash_SkipEor
 
 	eors r3, r4
 
-$skipEor:
+GameCubeMultiBoot_Hash_SkipEor:
 	subs r2, 0x1
-	bne $loop
+	bne GameCubeMultiBoot_Hash_Loop
 
 	pop {r4,pc}
 	thumb_func_end GameCubeMultiBoot_Hash
 
 	thumb_func_start GameCubeMultiBoot_Main
-; void GameCubeMultiBoot_Main(struct GameCubeMultiBoot *mb);
-GameCubeMultiBoot_Main: ; 81DCB4C
+@ void GameCubeMultiBoot_Main(struct GameCubeMultiBoot *mb)@
+GameCubeMultiBoot_Main: @ 81DCB4C
 	ldr r1, [r0, GCMB_STRUCT_SERIAL_INTR_HANDLER]
 	cmp r1, 0
 	beq _081DCB72
@@ -61,7 +70,7 @@ _081DCB72:
 	bcc _081DCC3E
 	push {r4-r6}
 	movs r1, 0x98
-	adds r2, RomHeaderNintendoLogo - RomBase
+	adds r2, ROM_HEADER_NINTENDO_LOGO_OFFSET
 	ldr r4, pool_NintendoLogo
 _081DCB8E:
 	ldm r2!, {r5}
@@ -166,41 +175,41 @@ _081DCC3E:
 
 pool_HashVal: .4byte 0xa1c1
 
-pool_Kawa: .ascii "Kawa" ; name of BIOS developer
+pool_Kawa: .ascii "Kawa" @ name of BIOS developer
 
 pool_NintendoLogo: .4byte RomHeaderNintendoLogo
 
 	thumb_func_start GameCubeMultiBoot_ExecuteProgram
-; void GameCubeMultiBoot_ExecuteProgram(struct GameCubeMultiBoot *mb);
-GameCubeMultiBoot_ExecuteProgram: ; 81DCC4C
+@ void GameCubeMultiBoot_ExecuteProgram(struct GameCubeMultiBoot *mb)@
+GameCubeMultiBoot_ExecuteProgram: @ 81DCC4C
 	ldrb r1, [r0, 0x2]
 	cmp r1, 0x2
-	bne $unableToExecute
+	bne GameCubeMultiBoot_ExecuteProgram_Fail
 	ldr r3, pool_InterruptRegs
 	movs r1, 0
 	strh r1, [r3, OFFSET_REG_IME - 0x200]
 	ldr r1, pool_MultiBootLoadAddr
 	adds r1, 0xC0
 	bx r1
-$unableToExecute:
+GameCubeMultiBoot_ExecuteProgram_Fail:
 	bx lr
 	thumb_func_end GameCubeMultiBoot_ExecuteProgram
 
 	thumb_func_start GameCubeMultiBoot_Init
-; void GameCubeMultiBoot_Init(struct GameCubeMultiBoot *mb);
-GameCubeMultiBoot_Init: ; 81DCC60
+@ void GameCubeMultiBoot_Init(struct GameCubeMultiBoot *mb)@
+GameCubeMultiBoot_Init: @ 81DCC60
 	ldr r3, pool_InterruptRegs
 
-; Save IME register.
+@ Save IME register.
 	ldrh r2, [r3, OFFSET_REG_IME - 0x200]
 
-; Disable interrupts.
+@ Disable interrupts.
 	movs r1, 0
 	strh r1, [r3, OFFSET_REG_IME - 0x200]
 
-; Set the handler to the "Stop" routine.
-; Unless the first command that is received is a device reset command, the
-; "Stop" routine will be executed and no further commands will be processed.
+@ Set the handler to the "Stop" routine.
+@ Unless the first command that is received is a device reset command, the
+@ "Stop" routine will be executed and no further commands will be processed.
 	adr r3, GcMbIntrHandler_Stop
 	str r3, [r0, GCMB_STRUCT_SERIAL_INTR_HANDLER]
 
@@ -212,11 +221,11 @@ GameCubeMultiBoot_Init: ; 81DCC60
 	adds r3, r0, 0
 	adds r3, GCMB_STRUCT_BASE_DEST_PTR
 
-; clear all but the last 3 fields of the struct
-$clearStructLoop:
+@ clear all but the last 3 fields of the struct
+GameCubeMultiBoot_Init_ClearStructLoop:
 	stm r0!, {r1}
 	cmp r0, r3
-	blo $clearStructLoop
+	blo GameCubeMultiBoot_Init_ClearStructLoop
 
 	pop {r0,r3}
 	lsrs r3, 1
@@ -226,43 +235,43 @@ $clearStructLoop:
 
 	ldr r3, pool_SerialRegs
 
-; Turn off JOY Bus mode.
+@ Turn off JOY Bus mode.
 	lsls r0, r3, 10
 	strh r0, [r3, OFFSET_REG_RCNT - 0x120]
 
-; Turn on JOY Bus mode.
+@ Turn on JOY Bus mode.
 	movs r0, 0xC0
 	lsls r0, 8
 	strh r0, [r3, OFFSET_REG_RCNT - 0x120]
 
-; Init JOY Bus registers.
+@ Init JOY Bus registers.
 	movs r0, 0x47
 	strh r0, [r3, OFFSET_REG_JOYCNT - 0x120]
 	strh r1, [r3, OFFSET_REG_JOYSTAT - 0x120]
 
 	ldr r3, pool_InterruptRegs
 
-; Acknowledge serial interrupt.
+@ Acknowledge serial interrupt.
 	movs r0, INTR_FLAG_SERIAL
 	strh r0, [r3, OFFSET_REG_IF - 0x200]
 
-; Enable serial interrupt.
+@ Enable serial interrupt.
 	ldrh r1, [r3, OFFSET_REG_IE - 0x200]
 	orrs r1, r0
 	strh r1, [r3, OFFSET_REG_IE - 0x200]
 
-; Restore IME register.
+@ Restore IME register.
 	strh r2, [r3, OFFSET_REG_IME - 0x200]
 
 	bx lr
 	thumb_func_end GameCubeMultiBoot_Init
 
 	non_word_aligned_thumb_func_start GameCubeMultiBoot_HandleSerialInterrupt
-; void GameCubeMultiBoot_HandleSerialInterrupt(struct GameCubeMultiBoot *mb);
-GameCubeMultiBoot_HandleSerialInterrupt: ; 81DCCAA
+@ void GameCubeMultiBoot_HandleSerialInterrupt(struct GameCubeMultiBoot *mb)@
+GameCubeMultiBoot_HandleSerialInterrupt: @ 81DCCAA
 	ldr r3, pool_SerialRegs
 
-; Acknowledge reset/receive/send flags.
+@ Acknowledge reset/receive/send flags.
 	ldrh r1, [r3, OFFSET_REG_JOYCNT - 0x120]
 	strh r1, [r3, OFFSET_REG_JOYCNT - 0x120]
 
@@ -273,16 +282,16 @@ GameCubeMultiBoot_HandleSerialInterrupt: ; 81DCCAA
 	cmp r2, 0
 	beq GameCubeMultiBoot_HandleSerialInterruptDone
 
-	lsrs r1, 1 ; was a device reset command received?
-	bcs GameCubeMultiBoot_BeginHandshake ; branch if so
+	lsrs r1, 1 @ was a device reset command received?
+	bcs GameCubeMultiBoot_BeginHandshake @ branch if so
 
 	mov pc, r2
 
 	.align 2, 0
 
-; Zero the status and the interrupt handler pointer.
-; Commands from the GameCube will not be processed after this is executed
-; unless GameCubeMultiBoot_Init() is called again.
+@ Zero the status and the interrupt handler pointer.
+@ Commands from the GameCube will not be processed after this is executed
+@ unless GameCubeMultiBoot_Init() is called again.
 GcMbIntrHandler_Stop:
 	movs r2, 0
 	strh r2, [r3, OFFSET_REG_JOYSTAT - 0x120]
@@ -317,27 +326,27 @@ GameCubeMultiBoot_BeginHandshake:
 
 	.align 2, 0
 
-GcMbIntrHandler_CheckGameCodeSent: ; 81DCCEC
+GcMbIntrHandler_CheckGameCodeSent: @ 81DCCEC
 	lsls r1, 31
-	bcc GcMbIntrHandler_Stop ; stop if send failed
-	bmi GameCubeMultiBoot_CheckHandshakeResponse ; branch if receive is complete
+	bcc GcMbIntrHandler_Stop @ stop if send failed
+	bmi GameCubeMultiBoot_CheckHandshakeResponse @ branch if receive is complete
 
-; If the response hasn't been fully received yet,
-; check again upon the next interrupt.
+@ If the response hasn't been fully received yet,
+@ check again upon the next interrupt.
 	adr r2, GcMbIntrHandler_CheckHandshakeResponse
 	b GameCubeMultiBoot_SetInterruptHandler
 
 	.align 2, 0
 
-GcMbIntrHandler_CheckHandshakeResponse: ; 81DCCF8
-	lsrs r1, 1 ; is receive complete?
-	bcc GcMbIntrHandler_Stop ; stop if not
+GcMbIntrHandler_CheckHandshakeResponse: @ 81DCCF8
+	lsrs r1, 1 @ is receive complete?
+	bcc GcMbIntrHandler_Stop @ stop if not
 
 GameCubeMultiBoot_CheckHandshakeResponse:
 	ldr r1, [r3, OFFSET_REG_JOY_RECV - 0x120]
 	ldr r2, pool_RubyUSAGameCode
 	cmp r1, r2
-	bne GcMbIntrHandler_Stop ; stop if the GameCube didn't reply with the same game code
+	bne GcMbIntrHandler_Stop @ stop if the GameCube didn't reply with the same game code
 	ldrb r1, [r0, 0x3]
 	strb r1, [r0, 0xB]
 	adr r2, GcMbIntrHandler_81DCD0C
@@ -345,9 +354,9 @@ GameCubeMultiBoot_CheckHandshakeResponse:
 
 	.align 2, 0
 
-GcMbIntrHandler_81DCD0C: ; 81DCD0C
-	lsrs r1, 1 ; is receive complete?
-	bcc GcMbIntrHandler_Stop ; branch if not
+GcMbIntrHandler_81DCD0C: @ 81DCD0C
+	lsrs r1, 1 @ is receive complete?
+	bcc GcMbIntrHandler_Stop @ branch if not
 	ldr r1, [r3, OFFSET_REG_JOY_RECV - 0x120]
 	lsrs r2, r1, 24
 	cmp r2, 0xDD
@@ -383,18 +392,18 @@ _081DCD3A:
 
 	.align 2, 0
 
-GcMbIntrHandler_81DCD4C: ; 81DCD4C
+GcMbIntrHandler_81DCD4C: @ 81DCD4C
 	lsls r1, 31
-	bcc GcMbIntrHandler_Stop ; stop if send failed
-	bmi _081DCD5C ; branch if receive is complete
+	bcc GcMbIntrHandler_Stop @ stop if send failed
+	bmi _081DCD5C @ branch if receive is complete
 	adr r2, GcMbIntrHandler_81DCD58
 	b GameCubeMultiBoot_SetInterruptHandler
 
 	.align 2, 0
 
-GcMbIntrHandler_81DCD58: ; 81DCD58
-	lsrs r1, 1 ; is receive complete?
-	bcc GcMbIntrHandler_Stop ; branch if not
+GcMbIntrHandler_81DCD58: @ 81DCD58
+	lsrs r1, 1 @ is receive complete?
+	bcc GcMbIntrHandler_Stop @ branch if not
 _081DCD5C:
 	ldr r1, [r3, OFFSET_REG_JOY_RECV - 0x120]
 	ldr r2, _081DCDFC
@@ -415,9 +424,9 @@ _081DCD6E:
 
 	.align 2, 0
 
-GcMbIntrHandler_81DCD7C: ; 81DCD7C
-	lsrs r1, 1 ; is receive complete?
-	bcc GcMbIntrHandler_Stop ; branch if not
+GcMbIntrHandler_81DCD7C: @ 81DCD7C
+	lsrs r1, 1 @ is receive complete?
+	bcc GcMbIntrHandler_Stop @ branch if not
 	ldr r2, [r0, GCMB_STRUCT_CUR_DEST_PTR]
 	movs r1, 0x4
 	ands r1, r2
@@ -456,18 +465,18 @@ _081DCDAA:
 
 	.align 2, 0
 
-GcMbIntrHandler_81DCDB8: ; 81DCDB8
+GcMbIntrHandler_81DCDB8: @ 81DCDB8
 	lsls r1, 31
-	bcc _081DCDAA ; branch if send failed
-	bmi _081DCDC8 ; branch if receive is complete
+	bcc _081DCDAA @ branch if send failed
+	bmi _081DCDC8 @ branch if receive is complete
 	adr r2, GcMbIntrHandler_81DCDC4
 	b GameCubeMultiBoot_SetInterruptHandler
 
 	.align 2, 0
 
-GcMbIntrHandler_81DCDC4: ; 81DCDC4
-	lsrs r1, 1 ; is receive complete?
-	bcc _081DCDAA ; branch if not
+GcMbIntrHandler_81DCDC4: @ 81DCDC4
+	lsrs r1, 1 @ is receive complete?
+	bcc _081DCDAA @ branch if not
 
 _081DCDC8:
 	ldr r1, [r3, OFFSET_REG_JOY_RECV - 0x120]
@@ -480,45 +489,45 @@ _081DCDC8:
 
 	.align 2, 0
 
-GcMbIntrHandler_81DCDD8: ; 81DCDD8
+GcMbIntrHandler_81DCDD8: @ 81DCDD8
 	b GcMbIntrHandler_Stop
 
 	thumb_func_end GameCubeMultiBoot_HandleSerialInterrupt
 
 	non_word_aligned_thumb_func_start GameCubeMultiBoot_Quit
-; void GameCubeMultiBoot_Quit();
-GameCubeMultiBoot_Quit: ; 81DCDDA
+@ void GameCubeMultiBoot_Quit()@
+GameCubeMultiBoot_Quit: @ 81DCDDA
 	ldr r3, pool_InterruptRegs
 
-; Save IME register.
+@ Save IME register.
 	ldrh r2, [r3, OFFSET_REG_IME - 0x200]
 
-; Disable interrupts.
+@ Disable interrupts.
 	movs r1, 0
 	strh r1, [r3, OFFSET_REG_IME - 0x200]
 
 	ldr r3, pool_SerialRegs
 
-; Acknowledge all JOYCNT flags.
+@ Acknowledge all JOYCNT flags.
 	movs r0, 0x7
 	strh r0, [r3, OFFSET_REG_JOYCNT - 0x120]
 
-; Turn off JOY Bus mode.
+@ Turn off JOY Bus mode.
 	lsls r0, r3, 10
-	strh r0, [r3, OFFSET_REG_RCNT - 0x120] ; store 0x8000
+	strh r0, [r3, OFFSET_REG_RCNT - 0x120] @ store 0x8000
 
 	ldr r3, pool_InterruptRegs
 
-; Acknowledge serial interrupt.
+@ Acknowledge serial interrupt.
 	movs r0, INTR_FLAG_SERIAL
 	strh r0, [r3, OFFSET_REG_IF - 0x200]
 
-; Disable serial interrupt.
+@ Disable serial interrupt.
 	ldrh r1, [r3, OFFSET_REG_IE - 0x200]
 	bics r1, r0
 	strh r1, [r3, OFFSET_REG_IE - 0x200]
 
-; Restore IME register.
+@ Restore IME register.
 	strh r2, [r3, OFFSET_REG_IME - 0x200]
 
 	bx lr
@@ -537,3 +546,5 @@ pool_RegDispstat: .4byte REG_DISPSTAT
 pool_RubyUSAGameCode: .ascii "AXVE"
 
 pool_MultiBootLoadAddr: .4byte EWRAM_START
+
+	.align 2, 0 @ Don't pad with nop.

@@ -1,6 +1,6 @@
 	.align 1
 
-gEasyChatGroupOrder_Adjectives: ; 83DF8B0
+gEasyChatGroupOrder_Adjectives: @ 83DF8B0
 	.2byte 35
 	.2byte 23
 	.2byte 20

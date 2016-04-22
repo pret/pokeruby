@@ -1,4 +1,5 @@
-gTypeNames: ; 81F9870
+	.global gTypeNames
+gTypeNames: @ 81F9870
 	.string "NORMAL$", 7
 	.string "FIGHT$", 7
 	.string "FLYING$", 7

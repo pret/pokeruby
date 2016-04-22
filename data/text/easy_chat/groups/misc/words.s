@@ -1,4 +1,4 @@
-gEasyChatGroupWords_Misc: ; 83DD860
+gEasyChatGroupWords_Misc: @ 83DD860
 	.string "HIGHS$"
 	.string "LOWS$"
 	.string "UM$"

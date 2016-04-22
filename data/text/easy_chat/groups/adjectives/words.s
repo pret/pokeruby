@@ -1,4 +1,4 @@
-gEasyChatGroupWords_Adjectives: ; 83DD96C
+gEasyChatGroupWords_Adjectives: @ 83DD96C
 	.string "WANDERING$"
 	.string "RICKETY$"
 	.string "ROCK-SOLID$"

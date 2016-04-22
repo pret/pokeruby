@@ -1,6 +1,6 @@
 	.align 2
-
-gMonBackPicTable: ; 81E97F4
+	.global gMonBackPicTable
+gMonBackPicTable: @ 81E97F4
 	obj_tiles gMonBackPic_CircledQuestionMark, 0x800, 0
 	obj_tiles gMonBackPic_Bulbasaur, 0x800, 1
 	obj_tiles gMonBackPic_Ivysaur, 0x800, 2

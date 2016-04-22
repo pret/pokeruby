@@ -1,6 +1,6 @@
 	.align 1
 
-gEasyChatGroupOrder_Battle: ; 83DF2A4
+gEasyChatGroupOrder_Battle: @ 83DF2A4
 	.2byte 53
 	.2byte 39
 	.2byte 18

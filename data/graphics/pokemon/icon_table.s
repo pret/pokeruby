@@ -1,6 +1,6 @@
 	.align 2
-
-gMonIconTable: ; 83BBD20
+	.global gMonIconTable
+gMonIconTable: @ 83BBD20
 	.4byte gMonIcon_Bulbasaur
 	.4byte gMonIcon_Bulbasaur
 	.4byte gMonIcon_Ivysaur

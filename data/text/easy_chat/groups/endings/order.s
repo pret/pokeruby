@@ -1,6 +1,6 @@
 	.align 1
 
-gEasyChatGroupOrder_Endings: ; 83DF502
+gEasyChatGroupOrder_Endings: @ 83DF502
 	.2byte 32
 	.2byte 39
 	.2byte 63

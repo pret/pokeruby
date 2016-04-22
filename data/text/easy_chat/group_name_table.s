@@ -1,6 +1,6 @@
 	.align 2
-
-gEasyChatGroupNames: ; 83DFE6C
+	.global gEasyChatGroupNames
+gEasyChatGroupNames: @ 83DFE6C
 	.4byte gEasyChatGroupName_Pokemon
 	.4byte gEasyChatGroupName_Trainer
 	.4byte gEasyChatGroupName_Status

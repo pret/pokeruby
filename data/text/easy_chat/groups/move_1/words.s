@@ -1,6 +1,6 @@
 	.align 1
 
-gEasyChatGroupWords_Move1: ; 83DDB3C
+gEasyChatGroupWords_Move1: @ 83DDB3C
 	.2byte MOVE_THUNDERBOLT
 	.2byte MOVE_IRON_TAIL
 	.2byte MOVE_ICE_BALL

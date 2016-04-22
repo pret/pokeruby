@@ -21,13 +21,13 @@
 	.include "data/text/easy_chat/groups/trendy_saying/order.s"
 	.include "data/text/easy_chat/groups/pokemon_2/order.s"
 
+@ This table is used to find the alphabetical order of each group of words
+@ when listing them. The words must be reordered because they are stored in
+@ Japanese order so that their meaning is preserved when they are transferred
+@ between different language editions of the games.
 	.align 2
-
-; This table is used to find the alphabetical order of each group of words
-; when listing them. The words must be reordered because they are stored in
-; Japanese order so that their meaning is preserved when they are transferred
-; between different language editions of the games.
-gEasyChatGroupOrders: ; 83DFE14
+	.global gEasyChatGroupOrders
+gEasyChatGroupOrders: @ 83DFE14
 	.4byte gEasyChatGroupOrder_Pokemon
 	.4byte gEasyChatGroupOrder_Trainer
 	.4byte gEasyChatGroupOrder_Status

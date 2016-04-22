@@ -1,6 +1,6 @@
 	.align 1
 
-gEasyChatGroupWords_Pokemon2: ; 83DDEE8
+gEasyChatGroupWords_Pokemon2: @ 83DDEE8
 	.2byte SPECIES_EKANS
 	.2byte SPECIES_ARBOK
 	.2byte SPECIES_SEAKING

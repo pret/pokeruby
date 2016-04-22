@@ -1,6 +1,6 @@
 	.align 2
-
-gEggMoves: ; 82091DC
+	.global gEggMoves
+gEggMoves: @ 82091DC
 	egg_moves_begin SPECIES_BULBASAUR
 	.2byte MOVE_LIGHT_SCREEN
 	.2byte MOVE_SKULL_BASH

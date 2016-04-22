@@ -1,9 +1,10 @@
-gDigits: ; 81E72B3
-	.charmapstr "0123456789ABCDEF"
+	.global gDigits
+gDigits: @ 81E72B3
+	.string "0123456789ABCDEF"
 
 	.align 2
-
-gPowersOfTen: ; 81E72C4
+	.global gPowersOfTen
+gPowersOfTen: @ 81E72C4
 	.4byte          1
 	.4byte         10
 	.4byte        100
@@ -15,15 +16,17 @@ gPowersOfTen: ; 81E72C4
 	.4byte  100000000
 	.4byte 1000000000
 
-gUnknown_081E72EC: ; 81E72EC
+	.global gUnknown_081E72EC
+gUnknown_081E72EC: @ 81E72EC
 	.byte 0xFC, 0x06, 0x06, 0xFF
 
-gUnknown_081E72F0: ; 81E72F0
+	.global gUnknown_081E72F0
+gUnknown_081E72F0: @ 81E72F0
 	.byte 0xFE, 0xFC, 0x0E, 0x02, 0xFF
 
 	.align 2
-
-gExpandPlaceholderFuncTable: ; 81E72F8
+	.global gExpandPlaceholderFuncTable
+gExpandPlaceholderFuncTable: @ 81E72F8
 	.4byte ExpandPlaceholder_UnknownStringVar
 	.4byte ExpandPlaceholder_PlayerName
 	.4byte ExpandPlaceholder_StringVar1

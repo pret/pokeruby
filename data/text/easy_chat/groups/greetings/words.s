@@ -1,4 +1,4 @@
-gEasyChatGroupWords_Greetings: ; 83DC70F
+gEasyChatGroupWords_Greetings: @ 83DC70F
 	.string "THANKS$"
 	.string "YES$"
 	.string "HERE GOES$"

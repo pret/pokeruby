@@ -1,6 +1,6 @@
 	.align 1
 
-gEasyChatGroupOrder_Hobbies: ; 83DF796
+gEasyChatGroupOrder_Hobbies: @ 83DF796
 	.2byte 43
 	.2byte 1
 	.2byte 45

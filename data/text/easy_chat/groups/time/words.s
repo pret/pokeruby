@@ -1,4 +1,4 @@
-gEasyChatGroupWords_Time: ; 83DD72D
+gEasyChatGroupWords_Time: @ 83DD72D
 	.string "FALL$"
 	.string "MORNING$"
 	.string "TOMORROW$"

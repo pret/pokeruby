@@ -1,6 +1,6 @@
 	.align 1
 
-gEasyChatGroupOrder_Pokemon: ; 83DF010
+gEasyChatGroupOrder_Pokemon: @ 83DF010
 	.2byte 63
 	.2byte 376
 	.2byte 384

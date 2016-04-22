@@ -1,6 +1,6 @@
 	.align 2
-
-gMonFrontPicTable: ; 81E8354
+	.global gMonFrontPicTable
+gMonFrontPicTable: @ 81E8354
 	obj_tiles gMonFrontPic_CircledQuestionMark, 0x800, 0
 	obj_tiles gMonFrontPic_Bulbasaur, 0x800, 1
 	obj_tiles gMonFrontPic_Ivysaur, 0x800, 2

@@ -1,4 +1,4 @@
-gEasyChatGroupWords_Speech: ; 83DCB82
+gEasyChatGroupWords_Speech: @ 83DCB82
 	.string "LISTEN$"
 	.string "NOT VERY$"
 	.string "MEAN$"

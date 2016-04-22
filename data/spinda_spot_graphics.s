@@ -1,8 +1,8 @@
 	.align 2
-
-gSpindaSpotGraphics: ; 81FCB84
-	.byte 16 ; X
-	.byte 14 ; Y
+	.global gSpindaSpotGraphics
+gSpindaSpotGraphics: @ 81FCB84
+	.byte 16 @ X
+	.byte 14 @ Y
 	.2byte 0b0000000001110000
 	.2byte 0b0000000111111100
 	.2byte 0b0000001111111110
@@ -21,8 +21,8 @@ gSpindaSpotGraphics: ; 81FCB84
 	.2byte 0b0000000000000000
 	.2byte 0b0000000000000000
 
-	.byte 40 ; X
-	.byte 15 ; Y
+	.byte 40 @ X
+	.byte 15 @ Y
 	.2byte 0b0000000111100000
 	.2byte 0b0000001111111000
 	.2byte 0b0000011111111100
@@ -41,8 +41,8 @@ gSpindaSpotGraphics: ; 81FCB84
 	.2byte 0b0000000000000000
 	.2byte 0b0000000000000000
 
-	.byte 22 ; X
-	.byte 32 ; Y
+	.byte 22 @ X
+	.byte 32 @ Y
 	.2byte 0b0000000000011100
 	.2byte 0b0000000000111110
 	.2byte 0b0000000001111111
@@ -61,8 +61,8 @@ gSpindaSpotGraphics: ; 81FCB84
 	.2byte 0b0000000000000000
 	.2byte 0b0000000000000000
 
-	.byte 34 ; X
-	.byte 33 ; Y
+	.byte 34 @ X
+	.byte 33 @ Y
 	.2byte 0b0000000000111100
 	.2byte 0b0000000001111110
 	.2byte 0b0000000011111111

@@ -1,6 +1,6 @@
 	.align 1
 
-gEasyChatGroupOrder_Move1: ; 83DF924
+gEasyChatGroupOrder_Move1: @ 83DF924
 	.2byte 71
 	.2byte 177
 	.2byte 97

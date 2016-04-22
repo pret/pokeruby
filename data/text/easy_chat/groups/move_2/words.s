@@ -1,6 +1,6 @@
 	.align 1
 
-gEasyChatGroupWords_Move2: ; 83DDC6E
+gEasyChatGroupWords_Move2: @ 83DDC6E
 	.2byte MOVE_TACKLE
 	.2byte MOVE_EXPLOSION
 	.2byte MOVE_DIVE

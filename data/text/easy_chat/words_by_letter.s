@@ -1,6 +1,6 @@
 	.align 1
-
-gEasyChatWordsAlphabetized: ; 83DE138
+	.global gEasyChatWordsAlphabetized
+gEasyChatWordsAlphabetized: @ 83DE138
 gEasyChatWordsByLetter_Others:
 	ec_word EXCL
 	ec_word EXCL_EXCL
@@ -1892,8 +1892,8 @@ gEasyChatWordsByLetter_Z:
 gEasyChatWordsByLetter_End:
 
 	.align 1
-
-gEasyChatWordsByLetter: ; 83DEFC2
+	.global gEasyChatWordsByLetter
+gEasyChatWordsByLetter: @ 83DEFC2
 	ec_words_by_letter Others
 	ec_words_by_letter A
 	ec_words_by_letter B

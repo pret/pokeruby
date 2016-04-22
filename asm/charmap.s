@@ -85,7 +85,7 @@
 	.charmap ":", 0xF0
 	.charmap "$", 0xFF
 
-; Hiragana
+@ Hiragana
 	.charmap "あ", 0x01
 	.charmap "い", 0x02
 	.charmap "う", 0x03
@@ -167,7 +167,7 @@
 	.charmap "ぽ", 0x4F
 	.charmap "っ", 0x50
 
-; Katakana
+@ Katakana
 	.charmap "ア", 0x51
 	.charmap "イ", 0x52
 	.charmap "ウ", 0x53
@@ -255,26 +255,26 @@
 	.charmap_const PKMN, 0x53, 0x54
 	.charmap_const POKEBLOCK, 0x55, 0x56, 0x57, 0x58, 0x59
 
-	; indicates the end of a town/city name (before " TOWN" or " CITY")
+	@ indicates the end of a town/city name (before " TOWN" or " CITY")
 	.charmap_const NAME_END, 0xFC, 0x00
 
-; string placeholders
-	; unknown (0xFD, 0x00)
+@ string placeholders
+	@ unknown (0xFD, 0x00)
 	.charmap_const PLAYER,             0xFD, 0x01
 	.charmap_const STR_VAR_1,          0xFD, 0x02
 	.charmap_const STR_VAR_2,          0xFD, 0x03
 	.charmap_const STR_VAR_3,          0xFD, 0x04
-	; unknown (0xFD, 0x05)
+	@ unknown (0xFD, 0x05)
 	.charmap_const RIVAL,              0xFD, 0x06
-; version-dependent strings
-	.charmap_const VERSION,            0xFD, 0x07 ; "RUBY"    / "SAPPHIRE"
-	.charmap_const EVIL_TEAM,          0xFD, 0x08 ; "MAGMA"   / "AQUA"
-	.charmap_const GOOD_TEAM,          0xFD, 0x09 ; "AQUA"    / "MAGMA"
-	.charmap_const EVIL_TEAM_LEADER,   0xFD, 0x0A ; "MAXIE"   / "ARCHIE"
-	.charmap_const GOOD_TEAM_LEADER,   0xFD, 0x0B ; "ARCHIE"  / "MAXIE"
-	.charmap_const CUR_VERSION_MASCOT, 0xFD, 0x0C ; "GROUDON" / "KYOGRE"
-	.charmap_const OPP_VERSION_MASCOT, 0xFD, 0x0D ; "KYOGRE"  / "GROUDON"
+@ version-dependent strings
+	.charmap_const VERSION,            0xFD, 0x07 @ "RUBY"    / "SAPPHIRE"
+	.charmap_const EVIL_TEAM,          0xFD, 0x08 @ "MAGMA"   / "AQUA"
+	.charmap_const GOOD_TEAM,          0xFD, 0x09 @ "AQUA"    / "MAGMA"
+	.charmap_const EVIL_TEAM_LEADER,   0xFD, 0x0A @ "MAXIE"   / "ARCHIE"
+	.charmap_const GOOD_TEAM_LEADER,   0xFD, 0x0B @ "ARCHIE"  / "MAXIE"
+	.charmap_const CUR_VERSION_MASCOT, 0xFD, 0x0C @ "GROUDON" / "KYOGRE"
+	.charmap_const OPP_VERSION_MASCOT, 0xFD, 0x0D @ "KYOGRE"  / "GROUDON"
 
-	.charmap_escape 'l', 0xFA ; scroll up window text
-	.charmap_escape 'p', 0xFB ; new paragraph
-	.charmap_escape 'n', 0xFE ; new line
+	.charmap_escape 'l', 0xFA @ scroll up window text
+	.charmap_escape 'p', 0xFB @ new paragraph
+	.charmap_escape 'n', 0xFE @ new line

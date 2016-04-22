@@ -1,6 +1,6 @@
 	.align 1
 
-gEasyChatGroupOrder_Lifestyle: ; 83DF73C
+gEasyChatGroupOrder_Lifestyle: @ 83DF73C
 	.2byte 3
 	.2byte 4
 	.2byte 0

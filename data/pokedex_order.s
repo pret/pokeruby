@@ -1,6 +1,6 @@
-	.align 2
-
-gSpeciesToHoennPokedexNum: ; 81FC1E0
+	.align 2 @ TODO: Find out if this could be 1.
+	.global gSpeciesToHoennPokedexNum
+gSpeciesToHoennPokedexNum: @ 81FC1E0
 	.2byte 203
 	.2byte 204
 	.2byte 205
@@ -413,7 +413,9 @@ gSpeciesToHoennPokedexNum: ; 81FC1E0
 	.2byte 202
 	.2byte 151
 
-gSpeciesToNationalPokedexNum: ; 81FC516
+	.align 1
+	.global gSpeciesToNationalPokedexNum
+gSpeciesToNationalPokedexNum: @ 81FC516
 	.2byte 1
 	.2byte 2
 	.2byte 3
@@ -826,7 +828,9 @@ gSpeciesToNationalPokedexNum: ; 81FC516
 	.2byte 386
 	.2byte 358
 
-gHoennToNationalOrder: ; 81FC84C
+	.align 1
+	.global gHoennToNationalOrder
+gHoennToNationalOrder: @ 81FC84C
 	.2byte 252
 	.2byte 253
 	.2byte 254

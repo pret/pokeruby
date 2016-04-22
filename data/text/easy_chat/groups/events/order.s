@@ -1,6 +1,6 @@
 	.align 1
 
-gEasyChatGroupOrder_Events: ; 83DF8F8
+gEasyChatGroupOrder_Events: @ 83DF8F8
 	.2byte 0
 	.2byte 14
 	.2byte 12

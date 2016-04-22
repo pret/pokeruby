@@ -1,4 +1,4 @@
-gEasyChatGroupWords_Trainer: ; 83DC0C0
+gEasyChatGroupWords_Trainer: @ 83DC0C0
 	.string "I CHOOSE YOU$"
 	.string "GOTCHA$"
 	.string "TRADE$"

@@ -1,6 +1,6 @@
 	.align 1
 
-gEasyChatGroupWords_Pokemon: ; 83DBF2C
+gEasyChatGroupWords_Pokemon: @ 83DBF2C
 	.2byte SPECIES_ARMALDO
 	.2byte SPECIES_BEAUTIFLY
 	.2byte SPECIES_MEDITITE

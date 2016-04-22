@@ -1,4 +1,4 @@
-gEasyChatGroupWords_Status: ; 83DC152
+gEasyChatGroupWords_Status: @ 83DC152
 	.string "DARK$"
 	.string "STENCH$"
 	.string "THICK FAT$"

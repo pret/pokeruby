@@ -1,4 +1,4 @@
-gEasyChatGroupWords_Events: ; 83DDA8D
+gEasyChatGroupWords_Events: @ 83DDA8D
 	.string "APPEAL$"
 	.string "EVENTS$"
 	.string "STAY-AT-HOME$"

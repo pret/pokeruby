@@ -1,6 +1,6 @@
 	.align 1
 
-gEasyChatGroupOrder_Status: ; 83DF1CA
+gEasyChatGroupOrder_Status: @ 83DF1CA
 	.2byte 13
 	.2byte 9
 	.2byte 5

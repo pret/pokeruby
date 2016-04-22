@@ -55,9 +55,9 @@ gRibbonDescriptionPart1_Effort:
 gRibbonDescriptionPart2_Effort:
 	.string "being a hard worker.$"
 
-	.align 2, 0
-
-gRibbonDescriptions: ; 83E113C
+	.align 2
+	.global gRibbonDescriptions
+gRibbonDescriptions: @ 83E113C
 	.4byte gRibbonDescriptionPart1_Champion,      gRibbonDescriptionPart2_Champion
 	.4byte gRibbonDescriptionPart1_CoolContest,   gRibbonDescriptionPart2_NormalRank
 	.4byte gRibbonDescriptionPart1_CoolContest,   gRibbonDescriptionPart2_SuperRank

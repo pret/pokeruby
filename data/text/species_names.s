@@ -1,4 +1,5 @@
-gSpeciesNames: ; 81F716C
+	.global gSpeciesNames
+gSpeciesNames: @ 81F716C
 	.string "??????????$", 11
 	.string "BULBASAUR$", 11
 	.string "IVYSAUR$", 11

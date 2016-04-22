@@ -1,6 +1,6 @@
 	.align 2
-
-gMonFootprintTable: ; 83B4EE4
+	.global gMonFootprintTable
+gMonFootprintTable: @ 83B4EE4
 	.4byte gMonFootprint_Bulbasaur
 	.4byte gMonFootprint_Bulbasaur
 	.4byte gMonFootprint_Ivysaur

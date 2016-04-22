@@ -1,6 +1,6 @@
 	.align 1
 
-gEasyChatGroupOrder_Time: ; 83DF802
+gEasyChatGroupOrder_Time: @ 83DF802
 	.2byte 29
 	.2byte 39
 	.2byte 6

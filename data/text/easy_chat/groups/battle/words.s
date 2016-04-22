@@ -1,4 +1,4 @@
-gEasyChatGroupWords_Battle: ; 83DC53C
+gEasyChatGroupWords_Battle: @ 83DC53C
 	.string "MATCH UP$"
 	.string "GO$"
 	.string "NO. 1$"

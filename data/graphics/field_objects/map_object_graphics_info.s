@@ -1,15 +1,15 @@
 	.align 2
 
-gMapObjectGraphicsInfo_BrendanNormal: ; 83718D4
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1100 ; palette tag
-	.2byte 0x1102 ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 0 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_BrendanNormal: @ 83718D4
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1100 @ palette tag
+	.2byte 0x1102 @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 0 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_BrendanMayNormal
@@ -18,16 +18,16 @@ gMapObjectGraphicsInfo_BrendanNormal: ; 83718D4
 
 	.align 2
 
-gMapObjectGraphicsInfo_BrendanMachBike: ; 83718F8
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1100 ; palette tag
-	.2byte 0x1102 ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 0 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_BrendanMachBike: @ 83718F8
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1100 @ palette tag
+	.2byte 0x1102 @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 0 @ flags, shadow size, palette slot
 	.byte TRACKS_BIKE_TIRE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gMapObjectSubspriteTables_32x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -36,16 +36,16 @@ gMapObjectGraphicsInfo_BrendanMachBike: ; 83718F8
 
 	.align 2
 
-gMapObjectGraphicsInfo_BrendanAcroBike: ; 837191C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1100 ; palette tag
-	.2byte 0x1102 ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 0 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_BrendanAcroBike: @ 837191C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1100 @ palette tag
+	.2byte 0x1102 @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 0 @ flags, shadow size, palette slot
 	.byte TRACKS_BIKE_TIRE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gMapObjectSubspriteTables_32x32
 	.4byte gMapObjectImageAnimTable_AcroBike
@@ -54,16 +54,16 @@ gMapObjectGraphicsInfo_BrendanAcroBike: ; 837191C
 
 	.align 2
 
-gMapObjectGraphicsInfo_BrendanSurfing: ; 8371940
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1100 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte F_DISABLE_REFLECTION_PALETTE_LOAD | (SHADOW_SIZE_M << 4) | 0 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_BrendanSurfing: @ 8371940
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1100 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte F_DISABLE_REFLECTION_PALETTE_LOAD | (SHADOW_SIZE_M << 4) | 0 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gMapObjectSubspriteTables_32x32
 	.4byte gMapObjectImageAnimTable_Surfing
@@ -72,16 +72,16 @@ gMapObjectGraphicsInfo_BrendanSurfing: ; 8371940
 
 	.align 2
 
-gMapObjectGraphicsInfo_BrendanFieldMove: ; 8371964
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1100 ; palette tag
-	.2byte 0x1102 ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 0 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_BrendanFieldMove: @ 8371964
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1100 @ palette tag
+	.2byte 0x1102 @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 0 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gMapObjectSubspriteTables_32x32
 	.4byte gMapObjectImageAnimTable_FieldMove
@@ -90,16 +90,16 @@ gMapObjectGraphicsInfo_BrendanFieldMove: ; 8371964
 
 	.align 2
 
-gMapObjectGraphicsInfo_QuintyPlump: ; 8371988
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x110B ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_L << 4) | 10 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_QuintyPlump: @ 8371988
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x110B @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_L << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gMapObjectSubspriteTables_32x32
 	.4byte gMapObjectImageAnimTable_QuintyPlump
@@ -108,16 +108,16 @@ gMapObjectGraphicsInfo_QuintyPlump: ; 8371988
 
 	.align 2
 
-gMapObjectGraphicsInfo_LittleBoy1: ; 83719AC
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_LittleBoy1: @ 83719AC
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Standard
@@ -126,16 +126,16 @@ gMapObjectGraphicsInfo_LittleBoy1: ; 83719AC
 
 	.align 2
 
-gMapObjectGraphicsInfo_LittleGirl1: ; 83719D0
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_LittleGirl1: @ 83719D0
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -144,16 +144,16 @@ gMapObjectGraphicsInfo_LittleGirl1: ; 83719D0
 
 	.align 2
 
-gMapObjectGraphicsInfo_Boy1: ; 83719F4
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Boy1: @ 83719F4
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -162,16 +162,16 @@ gMapObjectGraphicsInfo_Boy1: ; 83719F4
 
 	.align 2
 
-gMapObjectGraphicsInfo_Girl1: ; 8371A18
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Girl1: @ 8371A18
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -180,16 +180,16 @@ gMapObjectGraphicsInfo_Girl1: ; 8371A18
 
 	.align 2
 
-gMapObjectGraphicsInfo_Boy2: ; 8371A3C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Boy2: @ 8371A3C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -198,16 +198,16 @@ gMapObjectGraphicsInfo_Boy2: ; 8371A3C
 
 	.align 2
 
-gMapObjectGraphicsInfo_Girl2: ; 8371A60
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Girl2: @ 8371A60
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -216,16 +216,16 @@ gMapObjectGraphicsInfo_Girl2: ; 8371A60
 
 	.align 2
 
-gMapObjectGraphicsInfo_LittleBoy2: ; 8371A84
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_LittleBoy2: @ 8371A84
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Standard
@@ -234,16 +234,16 @@ gMapObjectGraphicsInfo_LittleBoy2: ; 8371A84
 
 	.align 2
 
-gMapObjectGraphicsInfo_LittleGirl2: ; 8371AA8
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_LittleGirl2: @ 8371AA8
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Standard
@@ -252,16 +252,16 @@ gMapObjectGraphicsInfo_LittleGirl2: ; 8371AA8
 
 	.align 2
 
-gMapObjectGraphicsInfo_Boy3: ; 8371ACC
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Boy3: @ 8371ACC
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -270,16 +270,16 @@ gMapObjectGraphicsInfo_Boy3: ; 8371ACC
 
 	.align 2
 
-gMapObjectGraphicsInfo_Girl3: ; 8371AF0
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Girl3: @ 8371AF0
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -288,16 +288,16 @@ gMapObjectGraphicsInfo_Girl3: ; 8371AF0
 
 	.align 2
 
-gMapObjectGraphicsInfo_Boy4: ; 8371B14
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Boy4: @ 8371B14
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -306,16 +306,16 @@ gMapObjectGraphicsInfo_Boy4: ; 8371B14
 
 	.align 2
 
-gMapObjectGraphicsInfo_Woman1: ; 8371B38
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Woman1: @ 8371B38
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -324,16 +324,16 @@ gMapObjectGraphicsInfo_Woman1: ; 8371B38
 
 	.align 2
 
-gMapObjectGraphicsInfo_FatMan: ; 8371B5C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_FatMan: @ 8371B5C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -342,16 +342,16 @@ gMapObjectGraphicsInfo_FatMan: ; 8371B5C
 
 	.align 2
 
-gMapObjectGraphicsInfo_Woman2: ; 8371B80
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Woman2: @ 8371B80
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -360,16 +360,16 @@ gMapObjectGraphicsInfo_Woman2: ; 8371B80
 
 	.align 2
 
-gMapObjectGraphicsInfo_Man1: ; 8371BA4
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Man1: @ 8371BA4
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -378,16 +378,16 @@ gMapObjectGraphicsInfo_Man1: ; 8371BA4
 
 	.align 2
 
-gMapObjectGraphicsInfo_Woman3: ; 8371BC8
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Woman3: @ 8371BC8
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -396,16 +396,16 @@ gMapObjectGraphicsInfo_Woman3: ; 8371BC8
 
 	.align 2
 
-gMapObjectGraphicsInfo_OldMan1: ; 8371BEC
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_OldMan1: @ 8371BEC
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -414,16 +414,16 @@ gMapObjectGraphicsInfo_OldMan1: ; 8371BEC
 
 	.align 2
 
-gMapObjectGraphicsInfo_OldWoman1: ; 8371C10
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_OldWoman1: @ 8371C10
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -432,16 +432,16 @@ gMapObjectGraphicsInfo_OldWoman1: ; 8371C10
 
 	.align 2
 
-gMapObjectGraphicsInfo_Man2: ; 8371C34
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Man2: @ 8371C34
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -450,16 +450,16 @@ gMapObjectGraphicsInfo_Man2: ; 8371C34
 
 	.align 2
 
-gMapObjectGraphicsInfo_Woman4: ; 8371C58
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Woman4: @ 8371C58
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -468,16 +468,16 @@ gMapObjectGraphicsInfo_Woman4: ; 8371C58
 
 	.align 2
 
-gMapObjectGraphicsInfo_Man3: ; 8371C7C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Man3: @ 8371C7C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -486,16 +486,16 @@ gMapObjectGraphicsInfo_Man3: ; 8371C7C
 
 	.align 2
 
-gMapObjectGraphicsInfo_Woman5: ; 8371CA0
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Woman5: @ 8371CA0
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -504,16 +504,16 @@ gMapObjectGraphicsInfo_Woman5: ; 8371CA0
 
 	.align 2
 
-gMapObjectGraphicsInfo_Cook: ; 8371CC4
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Cook: @ 8371CC4
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -522,16 +522,16 @@ gMapObjectGraphicsInfo_Cook: ; 8371CC4
 
 	.align 2
 
-gMapObjectGraphicsInfo_Woman6: ; 8371CE8
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Woman6: @ 8371CE8
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -540,16 +540,16 @@ gMapObjectGraphicsInfo_Woman6: ; 8371CE8
 
 	.align 2
 
-gMapObjectGraphicsInfo_OldMan2: ; 8371D0C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_OldMan2: @ 8371D0C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -558,16 +558,16 @@ gMapObjectGraphicsInfo_OldMan2: ; 8371D0C
 
 	.align 2
 
-gMapObjectGraphicsInfo_OldWoman2: ; 8371D30
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_OldWoman2: @ 8371D30
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -576,16 +576,16 @@ gMapObjectGraphicsInfo_OldWoman2: ; 8371D30
 
 	.align 2
 
-gMapObjectGraphicsInfo_Camper: ; 8371D54
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Camper: @ 8371D54
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -594,16 +594,16 @@ gMapObjectGraphicsInfo_Camper: ; 8371D54
 
 	.align 2
 
-gMapObjectGraphicsInfo_Picnicker: ; 8371D78
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Picnicker: @ 8371D78
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -612,16 +612,16 @@ gMapObjectGraphicsInfo_Picnicker: ; 8371D78
 
 	.align 2
 
-gMapObjectGraphicsInfo_Man4: ; 8371D9C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Man4: @ 8371D9C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -630,16 +630,16 @@ gMapObjectGraphicsInfo_Man4: ; 8371D9C
 
 	.align 2
 
-gMapObjectGraphicsInfo_Woman7: ; 8371DC0
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Woman7: @ 8371DC0
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -648,16 +648,16 @@ gMapObjectGraphicsInfo_Woman7: ; 8371DC0
 
 	.align 2
 
-gMapObjectGraphicsInfo_Youngster: ; 8371DE4
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Youngster: @ 8371DE4
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -666,16 +666,16 @@ gMapObjectGraphicsInfo_Youngster: ; 8371DE4
 
 	.align 2
 
-gMapObjectGraphicsInfo_BugCatcher: ; 8371E08
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_BugCatcher: @ 8371E08
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -684,16 +684,16 @@ gMapObjectGraphicsInfo_BugCatcher: ; 8371E08
 
 	.align 2
 
-gMapObjectGraphicsInfo_PsychicM: ; 8371E2C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_PsychicM: @ 8371E2C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -702,16 +702,16 @@ gMapObjectGraphicsInfo_PsychicM: ; 8371E2C
 
 	.align 2
 
-gMapObjectGraphicsInfo_SchoolKidM: ; 8371E50
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_SchoolKidM: @ 8371E50
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -720,16 +720,16 @@ gMapObjectGraphicsInfo_SchoolKidM: ; 8371E50
 
 	.align 2
 
-gMapObjectGraphicsInfo_Maniac: ; 8371E74
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Maniac: @ 8371E74
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -738,16 +738,16 @@ gMapObjectGraphicsInfo_Maniac: ; 8371E74
 
 	.align 2
 
-gMapObjectGraphicsInfo_HexManiac: ; 8371E98
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_HexManiac: @ 8371E98
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -756,16 +756,16 @@ gMapObjectGraphicsInfo_HexManiac: ; 8371E98
 
 	.align 2
 
-gMapObjectGraphicsInfo_Woman8: ; 8371EBC
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Woman8: @ 8371EBC
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -774,16 +774,16 @@ gMapObjectGraphicsInfo_Woman8: ; 8371EBC
 
 	.align 2
 
-gMapObjectGraphicsInfo_SwimmerM: ; 8371EE0
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_SwimmerM: @ 8371EE0
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -792,16 +792,16 @@ gMapObjectGraphicsInfo_SwimmerM: ; 8371EE0
 
 	.align 2
 
-gMapObjectGraphicsInfo_SwimmerF: ; 8371F04
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_SwimmerF: @ 8371F04
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -810,16 +810,16 @@ gMapObjectGraphicsInfo_SwimmerF: ; 8371F04
 
 	.align 2
 
-gMapObjectGraphicsInfo_BlackBelt: ; 8371F28
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_BlackBelt: @ 8371F28
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -828,16 +828,16 @@ gMapObjectGraphicsInfo_BlackBelt: ; 8371F28
 
 	.align 2
 
-gMapObjectGraphicsInfo_Beauty: ; 8371F4C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Beauty: @ 8371F4C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -846,16 +846,16 @@ gMapObjectGraphicsInfo_Beauty: ; 8371F4C
 
 	.align 2
 
-gMapObjectGraphicsInfo_Scientist1: ; 8371F70
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Scientist1: @ 8371F70
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -864,16 +864,16 @@ gMapObjectGraphicsInfo_Scientist1: ; 8371F70
 
 	.align 2
 
-gMapObjectGraphicsInfo_Lass: ; 8371F94
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Lass: @ 8371F94
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -882,16 +882,16 @@ gMapObjectGraphicsInfo_Lass: ; 8371F94
 
 	.align 2
 
-gMapObjectGraphicsInfo_Gentleman: ; 8371FB8
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Gentleman: @ 8371FB8
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -900,16 +900,16 @@ gMapObjectGraphicsInfo_Gentleman: ; 8371FB8
 
 	.align 2
 
-gMapObjectGraphicsInfo_Sailor: ; 8371FDC
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Sailor: @ 8371FDC
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -918,16 +918,16 @@ gMapObjectGraphicsInfo_Sailor: ; 8371FDC
 
 	.align 2
 
-gMapObjectGraphicsInfo_Fisherman: ; 8372000
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Fisherman: @ 8372000
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -936,16 +936,16 @@ gMapObjectGraphicsInfo_Fisherman: ; 8372000
 
 	.align 2
 
-gMapObjectGraphicsInfo_RunningTriathleteM: ; 8372024
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_RunningTriathleteM: @ 8372024
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -954,16 +954,16 @@ gMapObjectGraphicsInfo_RunningTriathleteM: ; 8372024
 
 	.align 2
 
-gMapObjectGraphicsInfo_RunningTriathleteF: ; 8372048
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_RunningTriathleteF: @ 8372048
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -972,16 +972,16 @@ gMapObjectGraphicsInfo_RunningTriathleteF: ; 8372048
 
 	.align 2
 
-gMapObjectGraphicsInfo_TuberF: ; 837206C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_TuberF: @ 837206C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Standard
@@ -990,16 +990,16 @@ gMapObjectGraphicsInfo_TuberF: ; 837206C
 
 	.align 2
 
-gMapObjectGraphicsInfo_TuberM: ; 8372090
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_TuberM: @ 8372090
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Standard
@@ -1008,16 +1008,16 @@ gMapObjectGraphicsInfo_TuberM: ; 8372090
 
 	.align 2
 
-gMapObjectGraphicsInfo_Hiker: ; 83720B4
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Hiker: @ 83720B4
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -1026,16 +1026,16 @@ gMapObjectGraphicsInfo_Hiker: ; 83720B4
 
 	.align 2
 
-gMapObjectGraphicsInfo_CyclingTriathleteM: ; 83720D8
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_CyclingTriathleteM: @ 83720D8
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_BIKE_TIRE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gMapObjectSubspriteTables_32x32
 	.4byte gMapObjectImageAnimTable_AcroBike
@@ -1044,16 +1044,16 @@ gMapObjectGraphicsInfo_CyclingTriathleteM: ; 83720D8
 
 	.align 2
 
-gMapObjectGraphicsInfo_CyclingTriathleteF: ; 83720FC
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_CyclingTriathleteF: @ 83720FC
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_BIKE_TIRE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gMapObjectSubspriteTables_32x32
 	.4byte gMapObjectImageAnimTable_AcroBike
@@ -1062,16 +1062,16 @@ gMapObjectGraphicsInfo_CyclingTriathleteF: ; 83720FC
 
 	.align 2
 
-gMapObjectGraphicsInfo_Nurse: ; 8372120
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Nurse: @ 8372120
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Nurse
@@ -1080,16 +1080,16 @@ gMapObjectGraphicsInfo_Nurse: ; 8372120
 
 	.align 2
 
-gMapObjectGraphicsInfo_ItemBall: ; 8372144
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_ItemBall: @ 8372144
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -1098,34 +1098,34 @@ gMapObjectGraphicsInfo_ItemBall: ; 8372144
 
 	.align 2
 
-gMapObjectGraphicsInfo_BerryTree: ; 8372168
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_BerryTree: @ 8372168
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
-	.4byte NULL ; OAM tables
+	.4byte NULL @ OAM tables
 	.4byte gMapObjectImageAnimTable_BerryTree
 	.4byte gMapObjectPicTable_PechaBerryTree
 	.4byte gDummyObjectRotScalAnimTable
 
 	.align 2
 
-gMapObjectGraphicsInfo_BerryTreeEarlyStages: ; 837218C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_BerryTreeEarlyStages: @ 837218C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_BerryTree
@@ -1134,16 +1134,16 @@ gMapObjectGraphicsInfo_BerryTreeEarlyStages: ; 837218C
 
 	.align 2
 
-gMapObjectGraphicsInfo_BerryTreeLateStages: ; 83721B0
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_BerryTreeLateStages: @ 83721B0
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_BerryTree
@@ -1152,16 +1152,16 @@ gMapObjectGraphicsInfo_BerryTreeLateStages: ; 83721B0
 
 	.align 2
 
-gMapObjectGraphicsInfo_ProfBirch: ; 83721D4
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_ProfBirch: @ 83721D4
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -1170,16 +1170,16 @@ gMapObjectGraphicsInfo_ProfBirch: ; 83721D4
 
 	.align 2
 
-gMapObjectGraphicsInfo_Man5: ; 83721F8
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Man5: @ 83721F8
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -1188,16 +1188,16 @@ gMapObjectGraphicsInfo_Man5: ; 83721F8
 
 	.align 2
 
-gMapObjectGraphicsInfo_Man6: ; 837221C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Man6: @ 837221C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -1206,16 +1206,16 @@ gMapObjectGraphicsInfo_Man6: ; 837221C
 
 	.align 2
 
-gMapObjectGraphicsInfo_ReporterM: ; 8372240
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_ReporterM: @ 8372240
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -1224,16 +1224,16 @@ gMapObjectGraphicsInfo_ReporterM: ; 8372240
 
 	.align 2
 
-gMapObjectGraphicsInfo_ReporterF: ; 8372264
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_ReporterF: @ 8372264
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -1242,16 +1242,16 @@ gMapObjectGraphicsInfo_ReporterF: ; 8372264
 
 	.align 2
 
-gMapObjectGraphicsInfo_Bard: ; 8372288
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Bard: @ 8372288
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -1260,16 +1260,16 @@ gMapObjectGraphicsInfo_Bard: ; 8372288
 
 	.align 2
 
-gMapObjectGraphicsInfo_Hipster: ; 83722AC
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Hipster: @ 83722AC
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -1278,16 +1278,16 @@ gMapObjectGraphicsInfo_Hipster: ; 83722AC
 
 	.align 2
 
-gMapObjectGraphicsInfo_Trader: ; 83722D0
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Trader: @ 83722D0
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -1296,16 +1296,16 @@ gMapObjectGraphicsInfo_Trader: ; 83722D0
 
 	.align 2
 
-gMapObjectGraphicsInfo_Storyteller: ; 83722F4
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Storyteller: @ 83722F4
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -1314,16 +1314,16 @@ gMapObjectGraphicsInfo_Storyteller: ; 83722F4
 
 	.align 2
 
-gMapObjectGraphicsInfo_Giddy: ; 8372318
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Giddy: @ 8372318
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -1332,16 +1332,16 @@ gMapObjectGraphicsInfo_Giddy: ; 8372318
 
 	.align 2
 
-gMapObjectGraphicsInfo_UnusedMauvilleOldMan1: ; 837233C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_UnusedMauvilleOldMan1: @ 837233C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -1350,16 +1350,16 @@ gMapObjectGraphicsInfo_UnusedMauvilleOldMan1: ; 837233C
 
 	.align 2
 
-gMapObjectGraphicsInfo_UnusedMauvilleOldMan2: ; 8372360
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_UnusedMauvilleOldMan2: @ 8372360
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -1368,16 +1368,16 @@ gMapObjectGraphicsInfo_UnusedMauvilleOldMan2: ; 8372360
 
 	.align 2
 
-gMapObjectGraphicsInfo_UnusedNatuDoll: ; 8372384
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_UnusedNatuDoll: @ 8372384
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -1386,16 +1386,16 @@ gMapObjectGraphicsInfo_UnusedNatuDoll: ; 8372384
 
 	.align 2
 
-gMapObjectGraphicsInfo_UnusedMagnemiteDoll: ; 83723A8
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_UnusedMagnemiteDoll: @ 83723A8
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -1404,16 +1404,16 @@ gMapObjectGraphicsInfo_UnusedMagnemiteDoll: ; 83723A8
 
 	.align 2
 
-gMapObjectGraphicsInfo_UnusedSquirtleDoll: ; 83723CC
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_UnusedSquirtleDoll: @ 83723CC
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -1422,16 +1422,16 @@ gMapObjectGraphicsInfo_UnusedSquirtleDoll: ; 83723CC
 
 	.align 2
 
-gMapObjectGraphicsInfo_UnusedWooperDoll: ; 83723F0
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_UnusedWooperDoll: @ 83723F0
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -1440,16 +1440,16 @@ gMapObjectGraphicsInfo_UnusedWooperDoll: ; 83723F0
 
 	.align 2
 
-gMapObjectGraphicsInfo_UnusedPikachuDoll: ; 8372414
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 3 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_UnusedPikachuDoll: @ 8372414
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -1458,16 +1458,16 @@ gMapObjectGraphicsInfo_UnusedPikachuDoll: ; 8372414
 
 	.align 2
 
-gMapObjectGraphicsInfo_UnusedPorygon2Doll: ; 8372438
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_UnusedPorygon2Doll: @ 8372438
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -1476,16 +1476,16 @@ gMapObjectGraphicsInfo_UnusedPorygon2Doll: ; 8372438
 
 	.align 2
 
-gMapObjectGraphicsInfo_CuttableTree: ; 837245C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_CuttableTree: @ 837245C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_CuttableTree
@@ -1494,16 +1494,16 @@ gMapObjectGraphicsInfo_CuttableTree: ; 837245C
 
 	.align 2
 
-gMapObjectGraphicsInfo_MartEmployee: ; 8372480
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_MartEmployee: @ 8372480
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -1512,16 +1512,16 @@ gMapObjectGraphicsInfo_MartEmployee: ; 8372480
 
 	.align 2
 
-gMapObjectGraphicsInfo_RooftopSaleWoman: ; 83724A4
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_RooftopSaleWoman: @ 83724A4
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -1530,16 +1530,16 @@ gMapObjectGraphicsInfo_RooftopSaleWoman: ; 83724A4
 
 	.align 2
 
-gMapObjectGraphicsInfo_Teala: ; 83724C8
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Teala: @ 83724C8
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -1548,16 +1548,16 @@ gMapObjectGraphicsInfo_Teala: ; 83724C8
 
 	.align 2
 
-gMapObjectGraphicsInfo_BreakableRock: ; 83724EC
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_BreakableRock: @ 83724EC
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_BreakableRock
@@ -1566,16 +1566,16 @@ gMapObjectGraphicsInfo_BreakableRock: ; 83724EC
 
 	.align 2
 
-gMapObjectGraphicsInfo_PushableBoulder: ; 8372510
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_PushableBoulder: @ 8372510
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -1584,16 +1584,16 @@ gMapObjectGraphicsInfo_PushableBoulder: ; 8372510
 
 	.align 2
 
-gMapObjectGraphicsInfo_MrBrineysBoat: ; 8372534
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_MrBrineysBoat: @ 8372534
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gMapObjectSubspriteTables_32x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -1602,16 +1602,16 @@ gMapObjectGraphicsInfo_MrBrineysBoat: ; 8372534
 
 	.align 2
 
-gMapObjectGraphicsInfo_MayNormal: ; 8372558
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1110 ; palette tag
-	.2byte 0x1102 ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 0 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_MayNormal: @ 8372558
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1110 @ palette tag
+	.2byte 0x1102 @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 0 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_BrendanMayNormal
@@ -1620,16 +1620,16 @@ gMapObjectGraphicsInfo_MayNormal: ; 8372558
 
 	.align 2
 
-gMapObjectGraphicsInfo_MayMachBike: ; 837257C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1110 ; palette tag
-	.2byte 0x1102 ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 0 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_MayMachBike: @ 837257C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1110 @ palette tag
+	.2byte 0x1102 @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 0 @ flags, shadow size, palette slot
 	.byte TRACKS_BIKE_TIRE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gMapObjectSubspriteTables_32x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -1638,16 +1638,16 @@ gMapObjectGraphicsInfo_MayMachBike: ; 837257C
 
 	.align 2
 
-gMapObjectGraphicsInfo_MayAcroBike: ; 83725A0
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1110 ; palette tag
-	.2byte 0x1102 ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 0 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_MayAcroBike: @ 83725A0
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1110 @ palette tag
+	.2byte 0x1102 @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 0 @ flags, shadow size, palette slot
 	.byte TRACKS_BIKE_TIRE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gMapObjectSubspriteTables_32x32
 	.4byte gMapObjectImageAnimTable_AcroBike
@@ -1656,16 +1656,16 @@ gMapObjectGraphicsInfo_MayAcroBike: ; 83725A0
 
 	.align 2
 
-gMapObjectGraphicsInfo_MaySurfing: ; 83725C4
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1110 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte F_DISABLE_REFLECTION_PALETTE_LOAD | (SHADOW_SIZE_M << 4) | 0 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_MaySurfing: @ 83725C4
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1110 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte F_DISABLE_REFLECTION_PALETTE_LOAD | (SHADOW_SIZE_M << 4) | 0 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gMapObjectSubspriteTables_32x32
 	.4byte gMapObjectImageAnimTable_Surfing
@@ -1674,16 +1674,16 @@ gMapObjectGraphicsInfo_MaySurfing: ; 83725C4
 
 	.align 2
 
-gMapObjectGraphicsInfo_MayFieldMove: ; 83725E8
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1110 ; palette tag
-	.2byte 0x1102 ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 0 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_MayFieldMove: @ 83725E8
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1110 @ palette tag
+	.2byte 0x1102 @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 0 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gMapObjectSubspriteTables_32x32
 	.4byte gMapObjectImageAnimTable_FieldMove
@@ -1692,16 +1692,16 @@ gMapObjectGraphicsInfo_MayFieldMove: ; 83725E8
 
 	.align 2
 
-gMapObjectGraphicsInfo_Truck: ; 837260C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x110D ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 1152 ; image size
-	.2byte 48 ; width
-	.2byte 48 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Truck: @ 837260C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x110D @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 1152 @ image size
+	.2byte 48 @ width
+	.2byte 48 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gMapObjectSubspriteTables_Truck
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -1710,16 +1710,16 @@ gMapObjectGraphicsInfo_Truck: ; 837260C
 
 	.align 2
 
-gMapObjectGraphicsInfo_MachokeCarryingBox: ; 8372630
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x110E ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_MachokeCarryingBox: @ 8372630
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x110E @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gMapObjectSubspriteTables_32x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -1728,16 +1728,16 @@ gMapObjectGraphicsInfo_MachokeCarryingBox: ; 8372630
 
 	.align 2
 
-gMapObjectGraphicsInfo_MachokeFacingAway: ; 8372654
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x110E ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_MachokeFacingAway: @ 8372654
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x110E @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gMapObjectSubspriteTables_32x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -1746,16 +1746,16 @@ gMapObjectGraphicsInfo_MachokeFacingAway: ; 8372654
 
 	.align 2
 
-gMapObjectGraphicsInfo_BirchsBag: ; 8372678
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 3 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_BirchsBag: @ 8372678
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -1764,16 +1764,16 @@ gMapObjectGraphicsInfo_BirchsBag: ; 8372678
 
 	.align 2
 
-gMapObjectGraphicsInfo_Poochyena: ; 837269C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x110F ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Poochyena: @ 837269C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x110F @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gMapObjectSubspriteTables_32x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -1782,16 +1782,16 @@ gMapObjectGraphicsInfo_Poochyena: ; 837269C
 
 	.align 2
 
-gMapObjectGraphicsInfo_Artist: ; 83726C0
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Artist: @ 83726C0
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -1800,16 +1800,16 @@ gMapObjectGraphicsInfo_Artist: ; 83726C0
 
 	.align 2
 
-gMapObjectGraphicsInfo_RivalBrendanNormal: ; 83726E4
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1100 ; palette tag
-	.2byte 0x1102 ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_RivalBrendanNormal: @ 83726E4
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1100 @ palette tag
+	.2byte 0x1102 @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_BrendanMayNormal
@@ -1818,16 +1818,16 @@ gMapObjectGraphicsInfo_RivalBrendanNormal: ; 83726E4
 
 	.align 2
 
-gMapObjectGraphicsInfo_RivalBrendanMachBike: ; 8372708
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1100 ; palette tag
-	.2byte 0x1102 ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_RivalBrendanMachBike: @ 8372708
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1100 @ palette tag
+	.2byte 0x1102 @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_BIKE_TIRE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gMapObjectSubspriteTables_32x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -1836,16 +1836,16 @@ gMapObjectGraphicsInfo_RivalBrendanMachBike: ; 8372708
 
 	.align 2
 
-gMapObjectGraphicsInfo_RivalBrendanAcroBike: ; 837272C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1100 ; palette tag
-	.2byte 0x1102 ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_RivalBrendanAcroBike: @ 837272C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1100 @ palette tag
+	.2byte 0x1102 @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_BIKE_TIRE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gMapObjectSubspriteTables_32x32
 	.4byte gMapObjectImageAnimTable_AcroBike
@@ -1854,16 +1854,16 @@ gMapObjectGraphicsInfo_RivalBrendanAcroBike: ; 837272C
 
 	.align 2
 
-gMapObjectGraphicsInfo_RivalBrendanSurfing: ; 8372750
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1100 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte F_DISABLE_REFLECTION_PALETTE_LOAD | (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_RivalBrendanSurfing: @ 8372750
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1100 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte F_DISABLE_REFLECTION_PALETTE_LOAD | (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gMapObjectSubspriteTables_32x32
 	.4byte gMapObjectImageAnimTable_Surfing
@@ -1872,16 +1872,16 @@ gMapObjectGraphicsInfo_RivalBrendanSurfing: ; 8372750
 
 	.align 2
 
-gMapObjectGraphicsInfo_RivalBrendanFieldMove: ; 8372774
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1100 ; palette tag
-	.2byte 0x1102 ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_RivalBrendanFieldMove: @ 8372774
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1100 @ palette tag
+	.2byte 0x1102 @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gMapObjectSubspriteTables_32x32
 	.4byte gMapObjectImageAnimTable_FieldMove
@@ -1890,16 +1890,16 @@ gMapObjectGraphicsInfo_RivalBrendanFieldMove: ; 8372774
 
 	.align 2
 
-gMapObjectGraphicsInfo_RivalMayNormal: ; 8372798
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1110 ; palette tag
-	.2byte 0x1102 ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_RivalMayNormal: @ 8372798
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1110 @ palette tag
+	.2byte 0x1102 @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_BrendanMayNormal
@@ -1908,16 +1908,16 @@ gMapObjectGraphicsInfo_RivalMayNormal: ; 8372798
 
 	.align 2
 
-gMapObjectGraphicsInfo_RivalMayMachBike: ; 83727BC
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1110 ; palette tag
-	.2byte 0x1102 ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_RivalMayMachBike: @ 83727BC
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1110 @ palette tag
+	.2byte 0x1102 @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_BIKE_TIRE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gMapObjectSubspriteTables_32x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -1926,16 +1926,16 @@ gMapObjectGraphicsInfo_RivalMayMachBike: ; 83727BC
 
 	.align 2
 
-gMapObjectGraphicsInfo_RivalMayAcroBike: ; 83727E0
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1110 ; palette tag
-	.2byte 0x1102 ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_RivalMayAcroBike: @ 83727E0
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1110 @ palette tag
+	.2byte 0x1102 @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_BIKE_TIRE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gMapObjectSubspriteTables_32x32
 	.4byte gMapObjectImageAnimTable_AcroBike
@@ -1944,16 +1944,16 @@ gMapObjectGraphicsInfo_RivalMayAcroBike: ; 83727E0
 
 	.align 2
 
-gMapObjectGraphicsInfo_RivalMaySurfing: ; 8372804
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1110 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte F_DISABLE_REFLECTION_PALETTE_LOAD | (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_RivalMaySurfing: @ 8372804
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1110 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte F_DISABLE_REFLECTION_PALETTE_LOAD | (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gMapObjectSubspriteTables_32x32
 	.4byte gMapObjectImageAnimTable_Surfing
@@ -1962,16 +1962,16 @@ gMapObjectGraphicsInfo_RivalMaySurfing: ; 8372804
 
 	.align 2
 
-gMapObjectGraphicsInfo_RivalMayFieldMove: ; 8372828
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1110 ; palette tag
-	.2byte 0x1102 ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_RivalMayFieldMove: @ 8372828
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1110 @ palette tag
+	.2byte 0x1102 @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gMapObjectSubspriteTables_32x32
 	.4byte gMapObjectImageAnimTable_FieldMove
@@ -1980,16 +1980,16 @@ gMapObjectGraphicsInfo_RivalMayFieldMove: ; 8372828
 
 	.align 2
 
-gMapObjectGraphicsInfo_Cameraman: ; 837284C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Cameraman: @ 837284C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -1998,16 +1998,16 @@ gMapObjectGraphicsInfo_Cameraman: ; 837284C
 
 	.align 2
 
-gMapObjectGraphicsInfo_BrendanUnderwater: ; 8372870
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1115 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte F_DISABLE_REFLECTION_PALETTE_LOAD | (SHADOW_SIZE_M << 4) | 0 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_BrendanUnderwater: @ 8372870
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1115 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte F_DISABLE_REFLECTION_PALETTE_LOAD | (SHADOW_SIZE_M << 4) | 0 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gMapObjectSubspriteTables_32x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -2016,16 +2016,16 @@ gMapObjectGraphicsInfo_BrendanUnderwater: ; 8372870
 
 	.align 2
 
-gMapObjectGraphicsInfo_MayUnderwater: ; 8372894
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1115 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte F_DISABLE_REFLECTION_PALETTE_LOAD | (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_MayUnderwater: @ 8372894
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1115 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte F_DISABLE_REFLECTION_PALETTE_LOAD | (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gMapObjectSubspriteTables_32x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -2034,16 +2034,16 @@ gMapObjectGraphicsInfo_MayUnderwater: ; 8372894
 
 	.align 2
 
-gMapObjectGraphicsInfo_MovingBox: ; 83728B8
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1112 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 10 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_MovingBox: @ 83728B8
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1112 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -2052,16 +2052,16 @@ gMapObjectGraphicsInfo_MovingBox: ; 83728B8
 
 	.align 2
 
-gMapObjectGraphicsInfo_CableCar: ; 83728DC
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1113 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 2048 ; image size
-	.2byte 64 ; width
-	.2byte 64 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_CableCar: @ 83728DC
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1113 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 2048 @ image size
+	.2byte 64 @ width
+	.2byte 64 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_64x64
 	.4byte gMapObjectSubspriteTables_CableCar
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -2070,16 +2070,16 @@ gMapObjectGraphicsInfo_CableCar: ; 83728DC
 
 	.align 2
 
-gMapObjectGraphicsInfo_Scientist2: ; 8372900
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Scientist2: @ 8372900
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -2088,16 +2088,16 @@ gMapObjectGraphicsInfo_Scientist2: ; 8372900
 
 	.align 2
 
-gMapObjectGraphicsInfo_Man7: ; 8372924
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Man7: @ 8372924
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -2106,16 +2106,16 @@ gMapObjectGraphicsInfo_Man7: ; 8372924
 
 	.align 2
 
-gMapObjectGraphicsInfo_AquaMemberM: ; 8372948
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_AquaMemberM: @ 8372948
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -2124,16 +2124,16 @@ gMapObjectGraphicsInfo_AquaMemberM: ; 8372948
 
 	.align 2
 
-gMapObjectGraphicsInfo_AquaMemberF: ; 837296C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_AquaMemberF: @ 837296C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -2142,16 +2142,16 @@ gMapObjectGraphicsInfo_AquaMemberF: ; 837296C
 
 	.align 2
 
-gMapObjectGraphicsInfo_MagmaMemberM: ; 8372990
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_MagmaMemberM: @ 8372990
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -2160,16 +2160,16 @@ gMapObjectGraphicsInfo_MagmaMemberM: ; 8372990
 
 	.align 2
 
-gMapObjectGraphicsInfo_MagmaMemberF: ; 83729B4
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_MagmaMemberF: @ 83729B4
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -2178,16 +2178,16 @@ gMapObjectGraphicsInfo_MagmaMemberF: ; 83729B4
 
 	.align 2
 
-gMapObjectGraphicsInfo_Sidney: ; 83729D8
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Sidney: @ 83729D8
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -2196,16 +2196,16 @@ gMapObjectGraphicsInfo_Sidney: ; 83729D8
 
 	.align 2
 
-gMapObjectGraphicsInfo_Phoebe: ; 83729FC
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Phoebe: @ 83729FC
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -2214,16 +2214,16 @@ gMapObjectGraphicsInfo_Phoebe: ; 83729FC
 
 	.align 2
 
-gMapObjectGraphicsInfo_Glacia: ; 8372A20
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Glacia: @ 8372A20
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -2232,16 +2232,16 @@ gMapObjectGraphicsInfo_Glacia: ; 8372A20
 
 	.align 2
 
-gMapObjectGraphicsInfo_Drake: ; 8372A44
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Drake: @ 8372A44
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -2250,16 +2250,16 @@ gMapObjectGraphicsInfo_Drake: ; 8372A44
 
 	.align 2
 
-gMapObjectGraphicsInfo_Roxanne: ; 8372A68
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Roxanne: @ 8372A68
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -2268,16 +2268,16 @@ gMapObjectGraphicsInfo_Roxanne: ; 8372A68
 
 	.align 2
 
-gMapObjectGraphicsInfo_Brawly: ; 8372A8C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Brawly: @ 8372A8C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -2286,16 +2286,16 @@ gMapObjectGraphicsInfo_Brawly: ; 8372A8C
 
 	.align 2
 
-gMapObjectGraphicsInfo_Wattson: ; 8372AB0
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Wattson: @ 8372AB0
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -2304,16 +2304,16 @@ gMapObjectGraphicsInfo_Wattson: ; 8372AB0
 
 	.align 2
 
-gMapObjectGraphicsInfo_Flannery: ; 8372AD4
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Flannery: @ 8372AD4
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -2322,16 +2322,16 @@ gMapObjectGraphicsInfo_Flannery: ; 8372AD4
 
 	.align 2
 
-gMapObjectGraphicsInfo_Norman: ; 8372AF8
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Norman: @ 8372AF8
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -2340,16 +2340,16 @@ gMapObjectGraphicsInfo_Norman: ; 8372AF8
 
 	.align 2
 
-gMapObjectGraphicsInfo_Winona: ; 8372B1C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Winona: @ 8372B1C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -2358,16 +2358,16 @@ gMapObjectGraphicsInfo_Winona: ; 8372B1C
 
 	.align 2
 
-gMapObjectGraphicsInfo_Liza: ; 8372B40
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Liza: @ 8372B40
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -2376,16 +2376,16 @@ gMapObjectGraphicsInfo_Liza: ; 8372B40
 
 	.align 2
 
-gMapObjectGraphicsInfo_Tate: ; 8372B64
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Tate: @ 8372B64
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -2394,16 +2394,16 @@ gMapObjectGraphicsInfo_Tate: ; 8372B64
 
 	.align 2
 
-gMapObjectGraphicsInfo_Wallace: ; 8372B88
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Wallace: @ 8372B88
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -2412,16 +2412,16 @@ gMapObjectGraphicsInfo_Wallace: ; 8372B88
 
 	.align 2
 
-gMapObjectGraphicsInfo_Steven: ; 8372BAC
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Steven: @ 8372BAC
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -2430,16 +2430,16 @@ gMapObjectGraphicsInfo_Steven: ; 8372BAC
 
 	.align 2
 
-gMapObjectGraphicsInfo_Wally: ; 8372BD0
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Wally: @ 8372BD0
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -2448,16 +2448,16 @@ gMapObjectGraphicsInfo_Wally: ; 8372BD0
 
 	.align 2
 
-gMapObjectGraphicsInfo_LittleBoy3: ; 8372BF4
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_LittleBoy3: @ 8372BF4
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Standard
@@ -2466,16 +2466,16 @@ gMapObjectGraphicsInfo_LittleBoy3: ; 8372BF4
 
 	.align 2
 
-gMapObjectGraphicsInfo_BrendanFishing: ; 8372C18
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1100 ; palette tag
-	.2byte 0x1102 ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 0 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_BrendanFishing: @ 8372C18
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1100 @ palette tag
+	.2byte 0x1102 @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 0 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gMapObjectSubspriteTables_32x32
 	.4byte gMapObjectImageAnimTable_Fishing
@@ -2484,16 +2484,16 @@ gMapObjectGraphicsInfo_BrendanFishing: ; 8372C18
 
 	.align 2
 
-gMapObjectGraphicsInfo_MayFishing: ; 8372C3C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1110 ; palette tag
-	.2byte 0x1102 ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 0 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_MayFishing: @ 8372C3C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1110 @ palette tag
+	.2byte 0x1102 @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 0 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gMapObjectSubspriteTables_32x32
 	.4byte gMapObjectImageAnimTable_Fishing
@@ -2502,16 +2502,16 @@ gMapObjectGraphicsInfo_MayFishing: ; 8372C3C
 
 	.align 2
 
-gMapObjectGraphicsInfo_HotSpringsOldWoman: ; 8372C60
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_HotSpringsOldWoman: @ 8372C60
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -2520,16 +2520,16 @@ gMapObjectGraphicsInfo_HotSpringsOldWoman: ; 8372C60
 
 	.align 2
 
-gMapObjectGraphicsInfo_SSTidal: ; 8372C84
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1114 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 1920 ; image size
-	.2byte 96 ; width
-	.2byte 40 ; height
-	.byte (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_SSTidal: @ 8372C84
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1114 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 1920 @ image size
+	.2byte 96 @ width
+	.2byte 40 @ height
+	.byte (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_8x8
 	.4byte gMapObjectSubspriteTables_SSTidal
 	.4byte gMapObjectImageAnimTable_Standard
@@ -2538,16 +2538,16 @@ gMapObjectGraphicsInfo_SSTidal: ; 8372C84
 
 	.align 2
 
-gMapObjectGraphicsInfo_SubmarineShadow: ; 8372CA8
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x111A ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 1408 ; image size
-	.2byte 88 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_SubmarineShadow: @ 8372CA8
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x111A @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 1408 @ image size
+	.2byte 88 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_8x8
 	.4byte gMapObjectSubspriteTables_SubmarineShadow
 	.4byte gMapObjectImageAnimTable_Standard
@@ -2556,16 +2556,16 @@ gMapObjectGraphicsInfo_SubmarineShadow: ; 8372CA8
 
 	.align 2
 
-gMapObjectGraphicsInfo_PichuDoll: ; 8372CCC
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 3 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_PichuDoll: @ 8372CCC
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -2574,16 +2574,16 @@ gMapObjectGraphicsInfo_PichuDoll: ; 8372CCC
 
 	.align 2
 
-gMapObjectGraphicsInfo_PikachuDoll: ; 8372CF0
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 3 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_PikachuDoll: @ 8372CF0
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -2592,16 +2592,16 @@ gMapObjectGraphicsInfo_PikachuDoll: ; 8372CF0
 
 	.align 2
 
-gMapObjectGraphicsInfo_MarillDoll: ; 8372D14
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_MarillDoll: @ 8372D14
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -2610,16 +2610,16 @@ gMapObjectGraphicsInfo_MarillDoll: ; 8372D14
 
 	.align 2
 
-gMapObjectGraphicsInfo_TogepiDoll: ; 8372D38
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_TogepiDoll: @ 8372D38
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -2628,16 +2628,16 @@ gMapObjectGraphicsInfo_TogepiDoll: ; 8372D38
 
 	.align 2
 
-gMapObjectGraphicsInfo_CyndaquilDoll: ; 8372D5C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 5 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_CyndaquilDoll: @ 8372D5C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -2646,16 +2646,16 @@ gMapObjectGraphicsInfo_CyndaquilDoll: ; 8372D5C
 
 	.align 2
 
-gMapObjectGraphicsInfo_ChikoritaDoll: ; 8372D80
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_ChikoritaDoll: @ 8372D80
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -2664,16 +2664,16 @@ gMapObjectGraphicsInfo_ChikoritaDoll: ; 8372D80
 
 	.align 2
 
-gMapObjectGraphicsInfo_TotodileDoll: ; 8372DA4
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_TotodileDoll: @ 8372DA4
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -2682,16 +2682,16 @@ gMapObjectGraphicsInfo_TotodileDoll: ; 8372DA4
 
 	.align 2
 
-gMapObjectGraphicsInfo_JigglypuffDoll: ; 8372DC8
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_JigglypuffDoll: @ 8372DC8
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -2700,16 +2700,16 @@ gMapObjectGraphicsInfo_JigglypuffDoll: ; 8372DC8
 
 	.align 2
 
-gMapObjectGraphicsInfo_MeowthDoll: ; 8372DEC
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 3 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_MeowthDoll: @ 8372DEC
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -2718,16 +2718,16 @@ gMapObjectGraphicsInfo_MeowthDoll: ; 8372DEC
 
 	.align 2
 
-gMapObjectGraphicsInfo_ClefairyDoll: ; 8372E10
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_ClefairyDoll: @ 8372E10
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -2736,16 +2736,16 @@ gMapObjectGraphicsInfo_ClefairyDoll: ; 8372E10
 
 	.align 2
 
-gMapObjectGraphicsInfo_DittoDoll: ; 8372E34
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 5 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_DittoDoll: @ 8372E34
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -2754,16 +2754,16 @@ gMapObjectGraphicsInfo_DittoDoll: ; 8372E34
 
 	.align 2
 
-gMapObjectGraphicsInfo_SmoochumDoll: ; 8372E58
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 5 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_SmoochumDoll: @ 8372E58
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -2772,16 +2772,16 @@ gMapObjectGraphicsInfo_SmoochumDoll: ; 8372E58
 
 	.align 2
 
-gMapObjectGraphicsInfo_TreeckoDoll: ; 8372E7C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_TreeckoDoll: @ 8372E7C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -2790,16 +2790,16 @@ gMapObjectGraphicsInfo_TreeckoDoll: ; 8372E7C
 
 	.align 2
 
-gMapObjectGraphicsInfo_TorchicDoll: ; 8372EA0
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 3 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_TorchicDoll: @ 8372EA0
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -2808,16 +2808,16 @@ gMapObjectGraphicsInfo_TorchicDoll: ; 8372EA0
 
 	.align 2
 
-gMapObjectGraphicsInfo_MudkipDoll: ; 8372EC4
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_MudkipDoll: @ 8372EC4
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -2826,16 +2826,16 @@ gMapObjectGraphicsInfo_MudkipDoll: ; 8372EC4
 
 	.align 2
 
-gMapObjectGraphicsInfo_DuskullDoll: ; 8372EE8
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 5 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_DuskullDoll: @ 8372EE8
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -2844,16 +2844,16 @@ gMapObjectGraphicsInfo_DuskullDoll: ; 8372EE8
 
 	.align 2
 
-gMapObjectGraphicsInfo_WynautDoll: ; 8372F0C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_WynautDoll: @ 8372F0C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -2862,16 +2862,16 @@ gMapObjectGraphicsInfo_WynautDoll: ; 8372F0C
 
 	.align 2
 
-gMapObjectGraphicsInfo_BaltoyDoll: ; 8372F30
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_BaltoyDoll: @ 8372F30
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -2880,16 +2880,16 @@ gMapObjectGraphicsInfo_BaltoyDoll: ; 8372F30
 
 	.align 2
 
-gMapObjectGraphicsInfo_KecleonDoll: ; 8372F54
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_KecleonDoll: @ 8372F54
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -2898,16 +2898,16 @@ gMapObjectGraphicsInfo_KecleonDoll: ; 8372F54
 
 	.align 2
 
-gMapObjectGraphicsInfo_AzurillDoll: ; 8372F78
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_AzurillDoll: @ 8372F78
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -2916,16 +2916,16 @@ gMapObjectGraphicsInfo_AzurillDoll: ; 8372F78
 
 	.align 2
 
-gMapObjectGraphicsInfo_SkittyDoll: ; 8372F9C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_SkittyDoll: @ 8372F9C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -2934,16 +2934,16 @@ gMapObjectGraphicsInfo_SkittyDoll: ; 8372F9C
 
 	.align 2
 
-gMapObjectGraphicsInfo_SwabluDoll: ; 8372FC0
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_SwabluDoll: @ 8372FC0
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -2952,16 +2952,16 @@ gMapObjectGraphicsInfo_SwabluDoll: ; 8372FC0
 
 	.align 2
 
-gMapObjectGraphicsInfo_GulpinDoll: ; 8372FE4
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_GulpinDoll: @ 8372FE4
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -2970,16 +2970,16 @@ gMapObjectGraphicsInfo_GulpinDoll: ; 8372FE4
 
 	.align 2
 
-gMapObjectGraphicsInfo_LotadDoll: ; 8373008
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_LotadDoll: @ 8373008
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -2988,16 +2988,16 @@ gMapObjectGraphicsInfo_LotadDoll: ; 8373008
 
 	.align 2
 
-gMapObjectGraphicsInfo_SeedotDoll: ; 837302C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_SeedotDoll: @ 837302C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -3006,16 +3006,16 @@ gMapObjectGraphicsInfo_SeedotDoll: ; 837302C
 
 	.align 2
 
-gMapObjectGraphicsInfo_PikaCushion: ; 8373050
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 3 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_PikaCushion: @ 8373050
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -3024,16 +3024,16 @@ gMapObjectGraphicsInfo_PikaCushion: ; 8373050
 
 	.align 2
 
-gMapObjectGraphicsInfo_RoundCushion: ; 8373074
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_RoundCushion: @ 8373074
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -3042,16 +3042,16 @@ gMapObjectGraphicsInfo_RoundCushion: ; 8373074
 
 	.align 2
 
-gMapObjectGraphicsInfo_KissCushion: ; 8373098
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 5 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_KissCushion: @ 8373098
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -3060,16 +3060,16 @@ gMapObjectGraphicsInfo_KissCushion: ; 8373098
 
 	.align 2
 
-gMapObjectGraphicsInfo_ZigzagCushion: ; 83730BC
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_ZigzagCushion: @ 83730BC
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -3078,16 +3078,16 @@ gMapObjectGraphicsInfo_ZigzagCushion: ; 83730BC
 
 	.align 2
 
-gMapObjectGraphicsInfo_SpinCushion: ; 83730E0
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_SpinCushion: @ 83730E0
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -3096,16 +3096,16 @@ gMapObjectGraphicsInfo_SpinCushion: ; 83730E0
 
 	.align 2
 
-gMapObjectGraphicsInfo_DiamondCushion: ; 8373104
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 5 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_DiamondCushion: @ 8373104
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -3114,16 +3114,16 @@ gMapObjectGraphicsInfo_DiamondCushion: ; 8373104
 
 	.align 2
 
-gMapObjectGraphicsInfo_BallCushion: ; 8373128
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_BallCushion: @ 8373128
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -3132,16 +3132,16 @@ gMapObjectGraphicsInfo_BallCushion: ; 8373128
 
 	.align 2
 
-gMapObjectGraphicsInfo_GrassCushion: ; 837314C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_GrassCushion: @ 837314C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -3150,16 +3150,16 @@ gMapObjectGraphicsInfo_GrassCushion: ; 837314C
 
 	.align 2
 
-gMapObjectGraphicsInfo_FireCushion: ; 8373170
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 3 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_FireCushion: @ 8373170
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -3168,16 +3168,16 @@ gMapObjectGraphicsInfo_FireCushion: ; 8373170
 
 	.align 2
 
-gMapObjectGraphicsInfo_WaterCushion: ; 8373194
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_WaterCushion: @ 8373194
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -3186,16 +3186,16 @@ gMapObjectGraphicsInfo_WaterCushion: ; 8373194
 
 	.align 2
 
-gMapObjectGraphicsInfo_BigSnorlaxDoll: ; 83731B8
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_BigSnorlaxDoll: @ 83731B8
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gMapObjectSubspriteTables_32x32
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -3204,16 +3204,16 @@ gMapObjectGraphicsInfo_BigSnorlaxDoll: ; 83731B8
 
 	.align 2
 
-gMapObjectGraphicsInfo_BigRhydonDoll: ; 83731DC
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_BigRhydonDoll: @ 83731DC
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gMapObjectSubspriteTables_32x32
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -3222,16 +3222,16 @@ gMapObjectGraphicsInfo_BigRhydonDoll: ; 83731DC
 
 	.align 2
 
-gMapObjectGraphicsInfo_BigLaprasDoll: ; 8373200
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_BigLaprasDoll: @ 8373200
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gMapObjectSubspriteTables_32x32
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -3240,16 +3240,16 @@ gMapObjectGraphicsInfo_BigLaprasDoll: ; 8373200
 
 	.align 2
 
-gMapObjectGraphicsInfo_BigVenusaurDoll: ; 8373224
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_BigVenusaurDoll: @ 8373224
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gMapObjectSubspriteTables_32x32
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -3258,16 +3258,16 @@ gMapObjectGraphicsInfo_BigVenusaurDoll: ; 8373224
 
 	.align 2
 
-gMapObjectGraphicsInfo_BigCharizardDoll: ; 8373248
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_BigCharizardDoll: @ 8373248
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gMapObjectSubspriteTables_32x32
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -3276,16 +3276,16 @@ gMapObjectGraphicsInfo_BigCharizardDoll: ; 8373248
 
 	.align 2
 
-gMapObjectGraphicsInfo_BigBlastoiseDoll: ; 837326C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_BigBlastoiseDoll: @ 837326C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gMapObjectSubspriteTables_32x32
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -3294,16 +3294,16 @@ gMapObjectGraphicsInfo_BigBlastoiseDoll: ; 837326C
 
 	.align 2
 
-gMapObjectGraphicsInfo_BigWailmerDoll: ; 8373290
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_BigWailmerDoll: @ 8373290
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gMapObjectSubspriteTables_32x32
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -3312,16 +3312,16 @@ gMapObjectGraphicsInfo_BigWailmerDoll: ; 8373290
 
 	.align 2
 
-gMapObjectGraphicsInfo_BigRegirockDoll: ; 83732B4
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_BigRegirockDoll: @ 83732B4
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gMapObjectSubspriteTables_32x32
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -3330,16 +3330,16 @@ gMapObjectGraphicsInfo_BigRegirockDoll: ; 83732B4
 
 	.align 2
 
-gMapObjectGraphicsInfo_BigRegiceDoll: ; 83732D8
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_BigRegiceDoll: @ 83732D8
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gMapObjectSubspriteTables_32x32
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -3348,16 +3348,16 @@ gMapObjectGraphicsInfo_BigRegiceDoll: ; 83732D8
 
 	.align 2
 
-gMapObjectGraphicsInfo_BigRegisteelDoll: ; 83732FC
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_BigRegisteelDoll: @ 83732FC
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gMapObjectSubspriteTables_32x32
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -3366,16 +3366,16 @@ gMapObjectGraphicsInfo_BigRegisteelDoll: ; 83732FC
 
 	.align 2
 
-gMapObjectGraphicsInfo_Latias: ; 8373320
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Latias: @ 8373320
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gMapObjectSubspriteTables_32x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -3384,16 +3384,16 @@ gMapObjectGraphicsInfo_Latias: ; 8373320
 
 	.align 2
 
-gMapObjectGraphicsInfo_Latios: ; 8373344
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Latios: @ 8373344
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gMapObjectSubspriteTables_32x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -3402,16 +3402,16 @@ gMapObjectGraphicsInfo_Latios: ; 8373344
 
 	.align 2
 
-gMapObjectGraphicsInfo_Boy5: ; 8373368
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Boy5: @ 8373368
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -3420,16 +3420,16 @@ gMapObjectGraphicsInfo_Boy5: ; 8373368
 
 	.align 2
 
-gMapObjectGraphicsInfo_ContestJudge: ; 837338C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_ContestJudge: @ 837338C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -3438,16 +3438,16 @@ gMapObjectGraphicsInfo_ContestJudge: ; 837338C
 
 	.align 2
 
-gMapObjectGraphicsInfo_BrendanWatering: ; 83733B0
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1100 ; palette tag
-	.2byte 0x1102 ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 0 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_BrendanWatering: @ 83733B0
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1100 @ palette tag
+	.2byte 0x1102 @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 0 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gMapObjectSubspriteTables_32x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -3456,16 +3456,16 @@ gMapObjectGraphicsInfo_BrendanWatering: ; 83733B0
 
 	.align 2
 
-gMapObjectGraphicsInfo_MayWatering: ; 83733D4
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1110 ; palette tag
-	.2byte 0x1102 ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 0 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_MayWatering: @ 83733D4
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1110 @ palette tag
+	.2byte 0x1102 @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 0 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gMapObjectSubspriteTables_32x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -3474,16 +3474,16 @@ gMapObjectGraphicsInfo_MayWatering: ; 83733D4
 
 	.align 2
 
-gMapObjectGraphicsInfo_BrendanDecorating: ; 83733F8
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1100 ; palette tag
-	.2byte 0x1102 ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_BrendanDecorating: @ 83733F8
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1100 @ palette tag
+	.2byte 0x1102 @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -3492,16 +3492,16 @@ gMapObjectGraphicsInfo_BrendanDecorating: ; 83733F8
 
 	.align 2
 
-gMapObjectGraphicsInfo_MayDecorating: ; 837341C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1110 ; palette tag
-	.2byte 0x1102 ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_MayDecorating: @ 837341C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1110 @ palette tag
+	.2byte 0x1102 @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -3510,16 +3510,16 @@ gMapObjectGraphicsInfo_MayDecorating: ; 837341C
 
 	.align 2
 
-gMapObjectGraphicsInfo_Archie: ; 8373440
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Archie: @ 8373440
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -3528,16 +3528,16 @@ gMapObjectGraphicsInfo_Archie: ; 8373440
 
 	.align 2
 
-gMapObjectGraphicsInfo_Maxie: ; 8373464
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Maxie: @ 8373464
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -3546,16 +3546,16 @@ gMapObjectGraphicsInfo_Maxie: ; 8373464
 
 	.align 2
 
-gMapObjectGraphicsInfo_Kyogre1: ; 8373488
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Kyogre1: @ 8373488
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gMapObjectSubspriteTables_32x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -3564,16 +3564,16 @@ gMapObjectGraphicsInfo_Kyogre1: ; 8373488
 
 	.align 2
 
-gMapObjectGraphicsInfo_Groudon1: ; 83734AC
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Groudon1: @ 83734AC
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gMapObjectSubspriteTables_32x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -3582,16 +3582,16 @@ gMapObjectGraphicsInfo_Groudon1: ; 83734AC
 
 	.align 2
 
-gMapObjectGraphicsInfo_Fossil: ; 83734D0
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Fossil: @ 83734D0
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Inanimate
@@ -3600,16 +3600,16 @@ gMapObjectGraphicsInfo_Fossil: ; 83734D0
 
 	.align 2
 
-gMapObjectGraphicsInfo_Regirock: ; 83734F4
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Regirock: @ 83734F4
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gMapObjectSubspriteTables_32x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -3618,16 +3618,16 @@ gMapObjectGraphicsInfo_Regirock: ; 83734F4
 
 	.align 2
 
-gMapObjectGraphicsInfo_Regice: ; 8373518
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Regice: @ 8373518
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gMapObjectSubspriteTables_32x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -3636,16 +3636,16 @@ gMapObjectGraphicsInfo_Regice: ; 8373518
 
 	.align 2
 
-gMapObjectGraphicsInfo_Registeel: ; 837353C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Registeel: @ 837353C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gMapObjectSubspriteTables_32x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -3654,16 +3654,16 @@ gMapObjectGraphicsInfo_Registeel: ; 837353C
 
 	.align 2
 
-gMapObjectGraphicsInfo_Skitty: ; 8373560
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Skitty: @ 8373560
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Standard
@@ -3672,16 +3672,16 @@ gMapObjectGraphicsInfo_Skitty: ; 8373560
 
 	.align 2
 
-gMapObjectGraphicsInfo_Kecleon1: ; 8373584
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Kecleon1: @ 8373584
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Standard
@@ -3690,16 +3690,16 @@ gMapObjectGraphicsInfo_Kecleon1: ; 8373584
 
 	.align 2
 
-gMapObjectGraphicsInfo_Kyogre2: ; 83735A8
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1116 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Kyogre2: @ 83735A8
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1116 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gMapObjectSubspriteTables_32x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -3708,16 +3708,16 @@ gMapObjectGraphicsInfo_Kyogre2: ; 83735A8
 
 	.align 2
 
-gMapObjectGraphicsInfo_Groudon2: ; 83735CC
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1118 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Groudon2: @ 83735CC
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1118 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gMapObjectSubspriteTables_32x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -3726,16 +3726,16 @@ gMapObjectGraphicsInfo_Groudon2: ; 83735CC
 
 	.align 2
 
-gMapObjectGraphicsInfo_Rayquaza: ; 83735F0
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Rayquaza: @ 83735F0
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gMapObjectSubspriteTables_32x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -3744,16 +3744,16 @@ gMapObjectGraphicsInfo_Rayquaza: ; 83735F0
 
 	.align 2
 
-gMapObjectGraphicsInfo_Zigzagoon: ; 8373614
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Zigzagoon: @ 8373614
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Standard
@@ -3762,16 +3762,16 @@ gMapObjectGraphicsInfo_Zigzagoon: ; 8373614
 
 	.align 2
 
-gMapObjectGraphicsInfo_Pikachu: ; 8373638
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Pikachu: @ 8373638
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Standard
@@ -3780,16 +3780,16 @@ gMapObjectGraphicsInfo_Pikachu: ; 8373638
 
 	.align 2
 
-gMapObjectGraphicsInfo_Azumarill: ; 837365C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Azumarill: @ 837365C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Standard
@@ -3798,16 +3798,16 @@ gMapObjectGraphicsInfo_Azumarill: ; 837365C
 
 	.align 2
 
-gMapObjectGraphicsInfo_Wingull: ; 8373680
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Wingull: @ 8373680
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Standard
@@ -3816,16 +3816,16 @@ gMapObjectGraphicsInfo_Wingull: ; 8373680
 
 	.align 2
 
-gMapObjectGraphicsInfo_Kecleon2: ; 83736A4
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x1102 ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Kecleon2: @ 83736A4
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x1102 @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Standard
@@ -3834,16 +3834,16 @@ gMapObjectGraphicsInfo_Kecleon2: ; 83736A4
 
 	.align 2
 
-gMapObjectGraphicsInfo_TuberMSwimming: ; 83736C8
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_TuberMSwimming: @ 83736C8
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Standard
@@ -3852,16 +3852,16 @@ gMapObjectGraphicsInfo_TuberMSwimming: ; 83736C8
 
 	.align 2
 
-gMapObjectGraphicsInfo_Azurill: ; 83736EC
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Azurill: @ 83736EC
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gMapObjectSubspriteTables_16x16
 	.4byte gMapObjectImageAnimTable_Standard
@@ -3870,16 +3870,16 @@ gMapObjectGraphicsInfo_Azurill: ; 83736EC
 
 	.align 2
 
-gMapObjectGraphicsInfo_Mom: ; 8373710
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_Mom: @ 8373710
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_Standard
@@ -3888,16 +3888,16 @@ gMapObjectGraphicsInfo_Mom: ; 8373710
 
 	.align 2
 
-gMapObjectGraphicsInfo_LinkBrendan: ; 8373734
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1110 ; palette tag
-	.2byte 0x1102 ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_LinkBrendan: @ 8373734
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1110 @ palette tag
+	.2byte 0x1102 @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_BrendanMayNormal
@@ -3906,16 +3906,16 @@ gMapObjectGraphicsInfo_LinkBrendan: ; 8373734
 
 	.align 2
 
-gMapObjectGraphicsInfo_LinkMay: ; 8373758
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1110 ; palette tag
-	.2byte 0x1102 ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gMapObjectGraphicsInfo_LinkMay: @ 8373758
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1110 @ palette tag
+	.2byte 0x1102 @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gMapObjectSubspriteTables_16x32
 	.4byte gMapObjectImageAnimTable_BrendanMayNormal

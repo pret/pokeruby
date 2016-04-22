@@ -1,4 +1,4 @@
-gEasyChatGroupWords_TrendySaying: ; 83DDDF2
+gEasyChatGroupWords_TrendySaying: @ 83DDDF2
 	.string "KTHX, BYE.$"
 	.string "YES, SIR!$"
 	.string "AVANT GARDE$"

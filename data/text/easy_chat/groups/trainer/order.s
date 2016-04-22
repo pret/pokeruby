@@ -1,6 +1,6 @@
 	.align 1
 
-gEasyChatGroupOrder_Trainer: ; 83DF1A4
+gEasyChatGroupOrder_Trainer: @ 83DF1A4
 	.2byte 7
 	.2byte 8
 	.2byte 5

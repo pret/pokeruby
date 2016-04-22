@@ -1,6 +1,6 @@
 	.align 1
 
-gEasyChatGroupOrder_People: ; 83DF376
+gEasyChatGroupOrder_People: @ 83DF376
 	.2byte 13
 	.2byte 52
 	.2byte 31
