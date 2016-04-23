@@ -13,4 +13,4 @@
 pokeas
 pokeld
 pokeobjcopy
-genasm/*
+src/*.s

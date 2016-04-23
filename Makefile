@@ -1,4 +1,4 @@
-AS      := pokeas
+AS      := arm-none-eabi-as
 ASFLAGS := -mcpu=arm7tdmi
 
 CC     := gbacc
@@ -88,5 +88,5 @@ $(DATA_ASM_OBJS): %.o: %.s $$(dep)
 
 # Link objects to produce the ROM.
 $(ROM): $(OBJS)
-	./pokeld -T ld_script.txt -T iwram_syms.txt -T ewram_syms.txt -o $(ELF) $(OBJS)
-	./pokeobjcopy -O binary $(ELF) $(ROM)
+	arm-none-eabi-ld -T ld_script.txt -T iwram_syms.txt -T ewram_syms.txt -o $(ELF) $(OBJS)
+	arm-none-eabi-objcopy -O binary $(ELF) $(ROM)

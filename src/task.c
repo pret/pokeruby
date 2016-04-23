@@ -113,7 +113,7 @@ static void InsertTask(u8 newTaskId)
 	mov	r1, #255\n\
 	strb	r1, [r0, #6]\n\
 	b	.LInsertTask_done\n\
-	.align	2\n\
+	.align	2, 0\n\
 .LInsertTask_gTasks1:\n\
 	.word	gTasks\n\
 .LInsertTask_foundActiveTask:\n\
@@ -149,7 +149,7 @@ static void InsertTask(u8 newTaskId)
 .LInsertTask_insertAtHead:\n\
 	strb	r4, [r3, #5]\n\
 	b	.LInsertTask_done\n\
-	.align	2\n\
+	.align	2, 0\n\
 .LInsertTask_gTasks2:\n\
 	.word	gTasks\n\
 .LInsertTask_next:\n\
