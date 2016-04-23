@@ -10,6 +10,8 @@ GFX := @tools/gbagfx/gbagfx
 
 SCANINC := tools/scaninc/scaninc
 
+PREPROC := tools/preproc/preproc
+
 # Clear the default suffixes.
 .SUFFIXES:
 
@@ -20,25 +22,31 @@ SCANINC := tools/scaninc/scaninc
 
 .PHONY: rom tools gbagfx scaninc clean compare deps
 
-CSRCS := $(wildcard src/*.c)
-OBJS := asm/crt0.o asm/rom1.o asm/rom2.o asm/rom3.o asm/rom4.o asm/rom5.o \
-	asm/libgcnmultiboot.o asm/libmks4agb.o asm/libagbsyscall.o asm/libgcc.o \
-	src/string_util.o src/rtc.o src/play_time.o src/task.o \
-	src/agb_flash.o src/agb_flash_1m.o src/agb_flash_mx.o src/siirtc.o \
-	data/data1.o data/data2.o
+C_SRCS := $(wildcard src/*.c)
+C_OBJS := $(C_SRCS:%.c=%.o)
+
+ASM_OBJS := asm/crt0.o asm/rom1.o asm/rom2.o asm/rom3.o asm/rom4.o asm/rom5.o \
+	asm/libgcnmultiboot.o asm/libmks4agb.o asm/libagbsyscall.o asm/libgcc.o
+
+DATA_ASM_OBJS := data/data1.o data/data2.o
+
+OBJS := $(C_OBJS) $(ASM_OBJS) $(DATA_ASM_OBJS)
 
 ROM := pokeruby.gba
 ELF := $(ROM:.gba=.elf)
 
 rom: $(ROM)
 
-tools: gbagfx scaninc
+tools: gbagfx scaninc preproc
 
 gbagfx:
 	cd tools/gbagfx && make
 
 scaninc:
 	cd tools/scaninc && make
+
+preproc:
+	cd tools/preproc && make
 
 # For contributors to make sure a change didn't affect the contents of the ROM.
 compare: $(ROM)
@@ -59,21 +67,24 @@ include tilesets.mk
 %.gbapal: %.pal ; $(GFX) $< $@
 %.lz: % ; $(GFX) $< $@
 
-$(OBJS): $(CSRCS:src/%.c=src/%.s)
+src/siirtc.o: CFLAGS := -mthumb-interwork -Iinclude
 
-src/siirtc.s: CFLAGS := -mthumb-interwork -Iinclude
+src/agb_flash.o: CFLAGS := -O -mthumb-interwork -Iinclude
+src/agb_flash_1m.o: CFLAGS := -O -mthumb-interwork -Iinclude
+src/agb_flash_mx.o: CFLAGS := -O -mthumb-interwork -Iinclude
 
-src/agb_flash.s: CFLAGS := -O -mthumb-interwork -Iinclude
-src/agb_flash_1m.s: CFLAGS := -O -mthumb-interwork -Iinclude
-src/agb_flash_mx.s: CFLAGS := -O -mthumb-interwork -Iinclude
+$(C_OBJS): %.o : %.c
+	$(CC) $(CFLAGS) -o $*.s $< -S
+	echo -e ".text\n\t.align\t2, 0\n" >> $*.s
+	$(AS) $(ASFLAGS) -o $@ $*.s
 
-src/%.s: src/%.c
-	$(CC) $(CFLAGS) -o $@ $< -S
-	echo -e ".text\n\t.align\t2, 0\n" >> $@
+%.o : dep = $(shell $(SCANINC) $*.s)
 
-%.o: dep = $(shell $(SCANINC) $(@D)/$*.s)
-%.o: %.s $$(dep)
+$(ASM_OBJS): %.o: %.s $$(dep)
 	$(AS) $(ASFLAGS) -o $@ $<
+
+$(DATA_ASM_OBJS): %.o: %.s $$(dep)
+	$(PREPROC) $< charmap.txt | $(AS) $(ASFLAGS) -o $@
 
 # Link objects to produce the ROM.
 $(ROM): $(OBJS)

@@ -2,7 +2,6 @@
 
 	.include "asm/macros.s"
 	.include "constants/constants.s"
-	.include "asm/charmap.s"
 
 	.section script_data, "aw", %progbits
 
