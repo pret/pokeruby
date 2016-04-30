@@ -30,7 +30,7 @@ PREPROC := tools/preproc/preproc
 
 .PRECIOUS: %.1bpp %.4bpp %.8bpp %.gbapal %.lz
 
-.PHONY: rom tools gbagfx scaninc preproc clean compare
+.PHONY: rom clean compare
 
 C_SRCS := $(wildcard src/*.c)
 C_OBJS := $(C_SRCS:%.c=%.o)
@@ -46,17 +46,6 @@ ROM := pokeruby.gba
 ELF := $(ROM:.gba=.elf)
 
 rom: $(ROM)
-
-tools: gbagfx scaninc preproc
-
-gbagfx:
-	cd tools/gbagfx && make
-
-scaninc:
-	cd tools/scaninc && make
-
-preproc:
-	cd tools/preproc && make
 
 # For contributors to make sure a change didn't affect the contents of the ROM.
 compare: $(ROM)

@@ -13,7 +13,7 @@ Then get the compiler from https://github.com/YamaArashi/agbcc and run the follo
 
 Then in the pokeruby directory, build the tools.
 
-	make tools
+	build_tools.sh
 
 Finally, build the rom.
 
