@@ -25,20 +25,20 @@
 
 #ifdef _MSC_VER
 
-#define FATAL_ERROR(format, ...)          \
-do                                        \
-{                                         \
-    fprintf(stderr, format, __VA_ARGS__); \
-    exit(1);                              \
+#define FATAL_ERROR(format, ...)               \
+do                                             \
+{                                              \
+    std::fprintf(stderr, format, __VA_ARGS__); \
+    std::exit(1);                              \
 } while (0)
 
 #else
 
-#define FATAL_ERROR(format, ...)            \
-do                                          \
-{                                           \
-    fprintf(stderr, format, ##__VA_ARGS__); \
-    exit(1);                                \
+#define FATAL_ERROR(format, ...)                 \
+do                                               \
+{                                                \
+    std::fprintf(stderr, format, ##__VA_ARGS__); \
+    std::exit(1);                                \
 } while (0)
 
 #endif // _MSC_VER

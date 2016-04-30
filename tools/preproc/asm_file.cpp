@@ -77,15 +77,14 @@ AsmFile::~AsmFile()
 void AsmFile::RemoveComments()
 {
     long pos = 0;
-    bool inString = false;
-    char stringChar;
+    char stringChar = 0;
 
     for (;;)
     {
         if (m_buffer[pos] == 0)
             return;
 
-        if (inString)
+        if (stringChar != 0)
         {
             if (m_buffer[pos] == '\\' && m_buffer[pos + 1] == stringChar)
             {
@@ -94,7 +93,7 @@ void AsmFile::RemoveComments()
             else
             {
                 if (m_buffer[pos] == stringChar)
-                    inString = false;
+                    stringChar = 0;
                 pos++;
             }
         }
@@ -108,15 +107,14 @@ void AsmFile::RemoveComments()
             m_buffer[pos++] = ' ';
             m_buffer[pos++] = ' ';
 
-            bool inCommentString = false;
-            char commentStringChar;
+            char commentStringChar = 0;
 
             for (;;)
             {
                 if (m_buffer[pos] == 0)
                     return;
 
-                if (inCommentString)
+                if (commentStringChar != 0)
                 {
                     if (m_buffer[pos] == '\\' && m_buffer[pos + 1] == commentStringChar)
                     {
@@ -126,7 +124,7 @@ void AsmFile::RemoveComments()
                     else
                     {
                         if (m_buffer[pos] == commentStringChar)
-                            inCommentString = false;
+                            commentStringChar = 0;
                         if (m_buffer[pos] != '\n')
                             m_buffer[pos] = ' ';
                         pos++;
@@ -143,10 +141,7 @@ void AsmFile::RemoveComments()
                     else
                     {
                         if (m_buffer[pos] == '"' || m_buffer[pos] == '\'')
-                        {
                             commentStringChar = m_buffer[pos];
-                            inCommentString = true;
-                        }
                         if (m_buffer[pos] != '\n')
                             m_buffer[pos] = ' ';
                         pos++;
@@ -157,10 +152,7 @@ void AsmFile::RemoveComments()
         else
         {
             if (m_buffer[pos] == '"' || m_buffer[pos] == '\'')
-            {
                 stringChar = m_buffer[pos];
-                inString = true;
-            }
             pos++;
         }
     }
@@ -553,7 +545,7 @@ do                                        \
 void AsmFile::RaiseError(const char* format, ...)
 {
     DO_REPORT("error");
-    exit(1);
+    std::exit(1);
 }
 
 // Reports a warning diagnostic.

@@ -1,8 +1,18 @@
-AS      := arm-none-eabi-as
+AS      := $(DEVKITARM)/bin/arm-none-eabi-as
 ASFLAGS := -mcpu=arm7tdmi
 
-CC     := gbacc
-CFLAGS := -mthumb-interwork -O2 -Iinclude
+CC1    := tools/agbcc/bin/agbcc
+CFLAGS := -mthumb-interwork -O2
+
+CPP      := cpp
+CPPFLAGS := -I tools/agbcc/include -iquote include
+
+LD      := $(DEVKITARM)/bin/arm-none-eabi-ld
+LDFLAGS := -T ld_script.txt -T iwram_syms.txt -T ewram_syms.txt
+
+OBJCOPY := $(DEVKITARM)/bin/arm-none-eabi-objcopy
+
+LIBGCC := tools/agbcc/lib/libgcc.a
 
 SHA1 := sha1sum -c
 
@@ -20,15 +30,15 @@ PREPROC := tools/preproc/preproc
 
 .PRECIOUS: %.1bpp %.4bpp %.8bpp %.gbapal %.lz
 
-.PHONY: rom tools gbagfx scaninc clean compare deps
+.PHONY: rom tools gbagfx scaninc preproc clean compare
 
 C_SRCS := $(wildcard src/*.c)
 C_OBJS := $(C_SRCS:%.c=%.o)
 
 ASM_OBJS := asm/crt0.o asm/rom1.o asm/rom2.o asm/rom3.o asm/rom4.o asm/rom5.o \
-	asm/libgcnmultiboot.o asm/libmks4agb.o asm/libagbsyscall.o asm/libgcc.o
+	asm/libgcnmultiboot.o asm/libmks4agb.o asm/libagbsyscall.o asm/libc.o
 
-DATA_ASM_OBJS := data/data1.o data/data2.o
+DATA_ASM_OBJS := data/data1.o data/data2.o data/graphics.o
 
 OBJS := $(C_OBJS) $(ASM_OBJS) $(DATA_ASM_OBJS)
 
@@ -67,14 +77,14 @@ include tilesets.mk
 %.gbapal: %.pal ; $(GFX) $< $@
 %.lz: % ; $(GFX) $< $@
 
-src/siirtc.o: CFLAGS := -mthumb-interwork -Iinclude
+src/siirtc.o: CFLAGS := -mthumb-interwork
 
-src/agb_flash.o: CFLAGS := -O -mthumb-interwork -Iinclude
-src/agb_flash_1m.o: CFLAGS := -O -mthumb-interwork -Iinclude
-src/agb_flash_mx.o: CFLAGS := -O -mthumb-interwork -Iinclude
+src/agb_flash.o: CFLAGS := -O -mthumb-interwork
+src/agb_flash_1m.o: CFLAGS := -O -mthumb-interwork
+src/agb_flash_mx.o: CFLAGS := -O -mthumb-interwork
 
 $(C_OBJS): %.o : %.c
-	$(CC) $(CFLAGS) -o $*.s $< -S
+	$(CPP) $(CPPFLAGS) $< | $(CC1) $(CFLAGS) -o $*.s
 	echo -e ".text\n\t.align\t2, 0\n" >> $*.s
 	$(AS) $(ASFLAGS) -o $@ $*.s
 
@@ -88,5 +98,5 @@ $(DATA_ASM_OBJS): %.o: %.s $$(dep)
 
 # Link objects to produce the ROM.
 $(ROM): $(OBJS)
-	arm-none-eabi-ld -T ld_script.txt -T iwram_syms.txt -T ewram_syms.txt -o $(ELF) $(OBJS)
-	arm-none-eabi-objcopy -O binary $(ELF) $(ROM)
+	$(LD) $(LDFLAGS) -o $(ELF) $(OBJS) $(LIBGCC)
+	$(OBJCOPY) -O binary --gap-fill 0xFF $(ELF) $(ROM)

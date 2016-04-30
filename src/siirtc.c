@@ -46,9 +46,11 @@
 #define CMD_TIME     CMD(3)
 #define CMD_ALARM    CMD(4)
 
-extern vu16 GPIOPortData;
+#define GPIO_PORT_DATA        (*(vu16 *)0x80000C4)
+#define GPIO_PORT_DIRECTION   (*(vu16 *)0x80000C6)
+#define GPIO_PORT_READ_ENABLE (*(vu16 *)0x80000C8)
+
 extern vu16 GPIOPortDirection;
-extern vu16 GPIOPortReadEnable;
 
 extern bool8 gSiiRtcLocked;
 
@@ -57,6 +59,8 @@ static int WriteData(u8 value);
 static u8 ReadData();
 static void EnableGpioPortRead();
 static void DisableGpioPortRead();
+
+static const char AgbLibRtcVersion[] = "SIIRTC_V001";
 
 void SiiRtcUnprotect()
 {
@@ -121,15 +125,15 @@ bool8 SiiRtcReset()
 
     gSiiRtcLocked = TRUE;
 
-    GPIOPortData = 1;
-    GPIOPortData = 5;
+    GPIO_PORT_DATA = 1;
+    GPIO_PORT_DATA = 5;
 
-    GPIOPortDirection = 7;
+    GPIO_PORT_DIRECTION = 7;
 
     WriteCommand(CMD_RESET | WR);
 
-    GPIOPortData = 1;
-    GPIOPortData = 1;
+    GPIO_PORT_DATA = 1;
+    GPIO_PORT_DATA = 1;
 
     gSiiRtcLocked = FALSE;
 
@@ -149,14 +153,14 @@ bool8 SiiRtcGetStatus(struct SiiRtcInfo *rtc)
 
     gSiiRtcLocked = TRUE;
 
-    GPIOPortData = 1;
-    GPIOPortData = 5;
+    GPIO_PORT_DATA = 1;
+    GPIO_PORT_DATA = 5;
 
-    GPIOPortDirection = 7;
+    GPIO_PORT_DIRECTION = 7;
 
     WriteCommand(CMD_STATUS | RD);
 
-    GPIOPortDirection = 5;
+    GPIO_PORT_DIRECTION = 5;
 
     statusData = ReadData();
 
@@ -165,8 +169,8 @@ bool8 SiiRtcGetStatus(struct SiiRtcInfo *rtc)
                 | ((statusData & STATUS_INTME) >> 2)
                 | ((statusData & STATUS_INTFE) >> 1);
 
-    GPIOPortData = 1;
-    GPIOPortData = 1;
+    GPIO_PORT_DATA = 1;
+    GPIO_PORT_DATA = 1;
 
     gSiiRtcLocked = FALSE;
 
@@ -182,22 +186,22 @@ bool8 SiiRtcSetStatus(struct SiiRtcInfo *rtc)
 
     gSiiRtcLocked = TRUE;
 
-    GPIOPortData = 1;
-    GPIOPortData = 5;
+    GPIO_PORT_DATA = 1;
+    GPIO_PORT_DATA = 5;
 
     statusData = STATUS_24HOUR
                | ((rtc->status & SIIRTCINFO_INTAE) << 3)
                | ((rtc->status & SIIRTCINFO_INTME) << 2)
                | ((rtc->status & SIIRTCINFO_INTFE) << 1);
 
-    GPIOPortDirection = 7;
+    GPIO_PORT_DIRECTION = 7;
 
     WriteCommand(CMD_STATUS | WR);
 
     WriteData(statusData);
 
-    GPIOPortData = 1;
-    GPIOPortData = 1;
+    GPIO_PORT_DATA = 1;
+    GPIO_PORT_DATA = 1;
 
     gSiiRtcLocked = FALSE;
 
@@ -213,22 +217,22 @@ bool8 SiiRtcGetDateTime(struct SiiRtcInfo *rtc)
 
     gSiiRtcLocked = TRUE;
 
-    GPIOPortData = 1;
-    GPIOPortData = 5;
+    GPIO_PORT_DATA = 1;
+    GPIO_PORT_DATA = 5;
 
-    GPIOPortDirection = 7;
+    GPIO_PORT_DIRECTION = 7;
 
     WriteCommand(CMD_DATETIME | RD);
 
-    GPIOPortDirection = 5;
+    GPIO_PORT_DIRECTION = 5;
 
     for (i = 0; i < DATETIME_BUF_LEN; i++)
         DATETIME_BUF(rtc, i) = ReadData();
 
     INFO_BUF(rtc, OFFSET_HOUR) &= 0x7F;
 
-    GPIOPortData = 1;
-    GPIOPortData = 1;
+    GPIO_PORT_DATA = 1;
+    GPIO_PORT_DATA = 1;
 
     gSiiRtcLocked = FALSE;
 
@@ -244,18 +248,18 @@ bool8 SiiRtcSetDateTime(struct SiiRtcInfo *rtc)
 
     gSiiRtcLocked = TRUE;
 
-    GPIOPortData = 1;
-    GPIOPortData = 5;
+    GPIO_PORT_DATA = 1;
+    GPIO_PORT_DATA = 5;
 
-    GPIOPortDirection = 7;
+    GPIO_PORT_DIRECTION = 7;
 
     WriteCommand(CMD_DATETIME | WR);
 
     for (i = 0; i < DATETIME_BUF_LEN; i++)
         WriteData(DATETIME_BUF(rtc, i));
 
-    GPIOPortData = 1;
-    GPIOPortData = 1;
+    GPIO_PORT_DATA = 1;
+    GPIO_PORT_DATA = 1;
 
     gSiiRtcLocked = FALSE;
 
@@ -271,22 +275,22 @@ bool8 SiiRtcGetTime(struct SiiRtcInfo *rtc)
 
     gSiiRtcLocked = TRUE;
 
-    GPIOPortData = 1;
-    GPIOPortData = 5;
+    GPIO_PORT_DATA = 1;
+    GPIO_PORT_DATA = 5;
 
-    GPIOPortDirection = 7;
+    GPIO_PORT_DIRECTION = 7;
 
     WriteCommand(CMD_TIME | RD);
 
-    GPIOPortDirection = 5;
+    GPIO_PORT_DIRECTION = 5;
 
     for (i = 0; i < TIME_BUF_LEN; i++)
         TIME_BUF(rtc, i) = ReadData();
 
     INFO_BUF(rtc, OFFSET_HOUR) &= 0x7F;
 
-    GPIOPortData = 1;
-    GPIOPortData = 1;
+    GPIO_PORT_DATA = 1;
+    GPIO_PORT_DATA = 1;
 
     gSiiRtcLocked = FALSE;
 
@@ -302,18 +306,18 @@ bool8 SiiRtcSetTime(struct SiiRtcInfo *rtc)
 
     gSiiRtcLocked = TRUE;
 
-    GPIOPortData = 1;
-    GPIOPortData = 5;
+    GPIO_PORT_DATA = 1;
+    GPIO_PORT_DATA = 5;
 
-    GPIOPortDirection = 7;
+    GPIO_PORT_DIRECTION = 7;
 
     WriteCommand(CMD_TIME | WR);
 
     for (i = 0; i < TIME_BUF_LEN; i++)
         WriteData(TIME_BUF(rtc, i));
 
-    GPIOPortData = 1;
-    GPIOPortData = 1;
+    GPIO_PORT_DATA = 1;
+    GPIO_PORT_DATA = 1;
 
     gSiiRtcLocked = FALSE;
 
@@ -342,18 +346,18 @@ bool8 SiiRtcSetAlarm(struct SiiRtcInfo *rtc)
 
     alarmData[1] = rtc->alarmMinute;
 
-    GPIOPortData = 1;
-    GPIOPortData = 5;
+    GPIO_PORT_DATA = 1;
+    GPIO_PORT_DATA = 5;
 
-    GPIOPortDirection = 7;
+    GPIOPortDirection = 7; // Why is this the only instance that uses a symbol?
 
     WriteCommand(CMD_ALARM | WR);
 
     for (i = 0; i < 2; i++)
         WriteData(alarmData[i]);
 
-    GPIOPortData = 1;
-    GPIOPortData = 1;
+    GPIO_PORT_DATA = 1;
+    GPIO_PORT_DATA = 1;
 
     gSiiRtcLocked = FALSE;
 
@@ -368,10 +372,10 @@ static int WriteCommand(u8 value)
     for (i = 0; i < 8; i++)
     {
         temp = ((value >> (7 - i)) & 1);
-        GPIOPortData = (temp << 1) | 4;
-        GPIOPortData = (temp << 1) | 4;
-        GPIOPortData = (temp << 1) | 4;
-        GPIOPortData = (temp << 1) | 5;
+        GPIO_PORT_DATA = (temp << 1) | 4;
+        GPIO_PORT_DATA = (temp << 1) | 4;
+        GPIO_PORT_DATA = (temp << 1) | 4;
+        GPIO_PORT_DATA = (temp << 1) | 5;
     }
 
     // control reaches end of non-void function
@@ -385,10 +389,10 @@ static int WriteData(u8 value)
     for (i = 0; i < 8; i++)
     {
         temp = ((value >> i) & 1);
-        GPIOPortData = (temp << 1) | 4;
-        GPIOPortData = (temp << 1) | 4;
-        GPIOPortData = (temp << 1) | 4;
-        GPIOPortData = (temp << 1) | 5;
+        GPIO_PORT_DATA = (temp << 1) | 4;
+        GPIO_PORT_DATA = (temp << 1) | 4;
+        GPIO_PORT_DATA = (temp << 1) | 4;
+        GPIO_PORT_DATA = (temp << 1) | 5;
     }
 
     // control reaches end of non-void function
@@ -402,14 +406,14 @@ static u8 ReadData()
 
     for (i = 0; i < 8; i++)
     {
-        GPIOPortData = 4;
-        GPIOPortData = 4;
-        GPIOPortData = 4;
-        GPIOPortData = 4;
-        GPIOPortData = 4;
-        GPIOPortData = 5;
+        GPIO_PORT_DATA = 4;
+        GPIO_PORT_DATA = 4;
+        GPIO_PORT_DATA = 4;
+        GPIO_PORT_DATA = 4;
+        GPIO_PORT_DATA = 4;
+        GPIO_PORT_DATA = 5;
 
-        temp = ((GPIOPortData & 2) >> 1);
+        temp = ((GPIO_PORT_DATA & 2) >> 1);
         value = (value >> 1) | (temp << 7); // UB: accessing uninitialized var
     }
 
@@ -418,10 +422,10 @@ static u8 ReadData()
 
 static void EnableGpioPortRead()
 {
-    GPIOPortReadEnable = 1;
+    GPIO_PORT_READ_ENABLE = 1;
 }
 
 static void DisableGpioPortRead()
 {
-    GPIOPortReadEnable = 0;
+    GPIO_PORT_READ_ENABLE = 0;
 }

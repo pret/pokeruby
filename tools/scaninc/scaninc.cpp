@@ -218,12 +218,9 @@ std::string AsmFile::ReadPath()
 		if (c == '\n')
 			FATAL_INPUT_ERROR("unexpected end of line character in include string\n");
 
-		if (c == '\\') {
-			c = GetChar();
-
-			if (c != '"')
-				FATAL_INPUT_ERROR("unknown escape \"\\%c\" in include string\n", c);
-		}
+		// Don't bother allowing any escape sequences.
+		if (c == '\\')
+			FATAL_INPUT_ERROR("unexpected escape '\\%c' in include string\n", c);
 
 		length++;
 

@@ -61,8 +61,6 @@ static const unsigned char s_transitionTable[] =
 };
 
 // Decodes UTF-8 encoded Unicode code point at "s".
-// If the encoding is valid, it returns the code point and advances "s" past the byte sequence.
-// If the encoding is not valid, it returns -1 and doesn't advance "s".
 UnicodeChar DecodeUtf8(const char* s)
 {
     UnicodeChar unicodeChar;

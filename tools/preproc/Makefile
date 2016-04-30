@@ -1,6 +1,6 @@
 CXX := g++
 
-CXXFLAGS := -std=c++14 -O2
+CXXFLAGS := -std=c++14 -O2 -Wall -Wno-switch
 
 SRCS := asm_file.cpp charmap.cpp preproc.cpp utf8.cpp
 

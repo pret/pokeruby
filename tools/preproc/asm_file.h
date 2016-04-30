@@ -65,7 +65,7 @@ private:
     void ExpectEmptyRestOfLine();
     void ReportDiagnostic(const char* type, const char* format, std::va_list args);
     void RaiseError(const char* format, ...);
-    void RaiseWarning(const char *format, ...);
+    void RaiseWarning(const char* format, ...);
 };
 
 #endif // ASM_FILE_H

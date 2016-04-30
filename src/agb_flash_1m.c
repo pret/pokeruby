@@ -2,13 +2,19 @@
 #include "gba/flash_internal.h"
 
 static const char AgbLibFlashVersion[] = "FLASH1M_V103";
-extern const struct FlashSetupInfo *sSetupInfos[];
+
+const struct FlashSetupInfo * const sSetupInfos[] =
+{
+    &MX29L010,
+    &LE26FV10N1TS,
+    &DefaultFlash
+};
 
 u16 IdentifyFlash(void)
 {
     u16 result;
     u16 flashId;
-    const struct FlashSetupInfo **setupInfo;
+    const struct FlashSetupInfo * const *setupInfo;
 
     REG_WAITCNT = (REG_WAITCNT & ~WAITCNT_SRAM_MASK) | WAITCNT_SRAM_8;
 

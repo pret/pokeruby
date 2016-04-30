@@ -51,6 +51,7 @@ public:
     void ExpectEqualsSign();
     std::string ReadSequence();
     void ExpectEmptyRestOfLine();
+    void RaiseError(const char* format, ...);
 
 private:
     char* m_buffer;
@@ -59,7 +60,6 @@ private:
     long m_lineNum;
     std::string m_filename;
 
-    void RaiseError(const char* format, ...);
     void RemoveComments();
     std::string ReadConstant();
     void SkipWhitespace();
@@ -309,6 +309,8 @@ void CharmapReader::RaiseError(const char* format, ...)
     va_end(args);
 
     std::fprintf(stderr, "%s:%ld: error: %s\n", m_filename.c_str(), m_lineNum, buffer);
+
+    std::exit(1);
 }
 
 void CharmapReader::RemoveComments()
@@ -382,12 +384,18 @@ Charmap::Charmap(std::string filename)
         switch (lhs.type)
         {
         case LhsType::Char:
+            if (m_chars.find(lhs.code) != m_chars.end())
+                reader.RaiseError("redefining char");
             m_chars[lhs.code] = sequence;
             break;
         case LhsType::Escape:
+            if (m_escapes[lhs.code].length() != 0)
+                reader.RaiseError("redefining escape");
             m_escapes[lhs.code] = sequence;
             break;
         case LhsType::Constant:
+            if (m_constants.find(lhs.name) != m_constants.end())
+                reader.RaiseError("redefining constant");
             m_constants[lhs.name] = sequence;
             break;
         }

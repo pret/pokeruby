@@ -1,6 +1,17 @@
 ENTRY(Start)
 
+/* TODO: Split up data2.o so that this isn't needed. */
+__clz_tab = 0x86B08F8;
+
 SECTIONS {
+    .bss :
+    ALIGN(4)
+    {
+        . = 0x3000F38;
+        tools/agbcc/lib/libgcc.a:dp-bit.o(.bss);
+        tools/agbcc/lib/libgcc.a:fp-bit.o(.bss);
+    }
+
     . = 0x8000000;
 
     .text :
@@ -34,13 +45,41 @@ SECTIONS {
         src/agb_flash_mx.o(.text);
         src/siirtc.o(.text);
         asm/libagbsyscall.o(.text);
-        asm/libgcc.o(.text);
+        tools/agbcc/lib/libgcc.a:_call_via_rX.o(.text);
+        tools/agbcc/lib/libgcc.a:_divsi3.o(.text);
+        tools/agbcc/lib/libgcc.a:_dvmd_tls.o(.text);
+        tools/agbcc/lib/libgcc.a:_fixunsdfsi.o(.text);
+        tools/agbcc/lib/libgcc.a:_fixunssfsi.o(.text);
+        tools/agbcc/lib/libgcc.a:_modsi3.o(.text);
+        tools/agbcc/lib/libgcc.a:_muldi3.o(.text);
+        tools/agbcc/lib/libgcc.a:_udivdi3.o(.text);
+        tools/agbcc/lib/libgcc.a:_udivsi3.o(.text);
+        tools/agbcc/lib/libgcc.a:_umodsi3.o(.text);
+        tools/agbcc/lib/libgcc.a:dp-bit.o(.text);
+        tools/agbcc/lib/libgcc.a:fp-bit.o(.text);
+        tools/agbcc/lib/libgcc.a:_lshrdi3.o(.text);
+        tools/agbcc/lib/libgcc.a:_negdi2.o(.text);
+        asm/libc.o(.text);
     } =0
 
     .rodata :
     ALIGN(4)
     {
         data/data2.o(.rodata);
+        src/agb_flash.o(.rodata);
+        src/agb_flash_1m.o(.rodata);
+        src/agb_flash_mx.o(.rodata);
+        src/agb_flash_le.o(.rodata);
+        src/siirtc.o(.rodata);
+        tools/agbcc/lib/libgcc.a:_udivdi3.o(.rodata);
+    } =0
+
+    . = 0x8D00000;
+
+    gfx_data :
+    ALIGN(4)
+    {
+        data/graphics.o(gfx_data);
     } =0
 
     /* Discard everything not specifically mentioned above. */

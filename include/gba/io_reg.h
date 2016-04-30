@@ -402,6 +402,14 @@
 #define DMA_INTR_ENABLE   0x4000
 #define DMA_ENABLE        0x8000
 
+// timer
+#define TIMER_1CLK        0x00
+#define TIMER_64CLK       0x01
+#define TIMER_256CLK      0x02
+#define TIMER_1024CLK     0x03
+#define TIMER_INTR_ENABLE 0x40
+#define TIMER_ENABLE      0x80
+
 // interrupt flags
 #define INTR_FLAG_VBLANK  (1 <<  0)
 #define INTR_FLAG_HBLANK  (1 <<  1)
