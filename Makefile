@@ -5,7 +5,7 @@ CC1    := tools/agbcc/bin/agbcc
 CFLAGS := -mthumb-interwork -O2
 
 CPP      := cpp
-CPPFLAGS := -I tools/agbcc/include -iquote include
+CPPFLAGS := -I tools/agbcc/include -iquote include -nostdinc -undef
 
 LD      := $(DEVKITARM)/bin/arm-none-eabi-ld
 LDFLAGS := -T ld_script.txt -T iwram_syms.txt -T ewram_syms.txt
