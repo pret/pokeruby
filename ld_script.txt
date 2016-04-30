@@ -1,8 +1,5 @@
 ENTRY(Start)
 
-/* TODO: Split up data2.o so that this isn't needed. */
-__clz_tab = 0x86B08F8;
-
 SECTIONS {
     .bss :
     ALIGN(4)
