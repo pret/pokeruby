@@ -31,4 +31,8 @@ typedef u32 bool32;
 #include "gba/syscall.h"
 #include "gba/macro.h"
 
+#define SOUND_INFO_PTR (*(struct SoundInfo **)0x3007FF0)
+#define INTR_CHECK     (*(u16 *)0x3007FF8)
+#define INTR_VECTOR    (*(u32 *)0x3007FFC)
+
 #endif // GUARD_GBA_GBA_H
