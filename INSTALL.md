@@ -1,10 +1,8 @@
 # Linux
 
-Install [**devkitARM**](http://devkitpro.org/wiki/Getting_Started/devkitARM) or compile [**GNU Binutils**](https://www.gnu.org/software/binutils/) with target "arm-none-eabi".
+Install [**devkitARM**](http://devkitpro.org/wiki/Getting_Started/devkitARM).
 
-Either way, make sure that there is an environment variable called DEVKITARM with the path of the directory before the "bin" directory containing "arm-none-eabi-as", "arm-none-eabi-ld" and "arm-none-eabi-objcopy".
-
-For example, if you install binutils at "/usr/local", make DEVKITARM equal "/usr/local".
+Make sure that there is an environment variable called DEVKITARM with the path of the directory before the "bin" directory containing "arm-none-eabi-as", "arm-none-eabi-cpp", "arm-none-eabi-ld" and "arm-none-eabi-objcopy".
 
 Then get the compiler from https://github.com/YamaArashi/agbcc and run the following commands.
 

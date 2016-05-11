@@ -4,7 +4,7 @@ ASFLAGS := -mcpu=arm7tdmi
 CC1    := tools/agbcc/bin/agbcc
 CFLAGS := -mthumb-interwork -O2
 
-CPP      := cpp
+CPP      := $(DEVKITARM)/bin/arm-none-eabi-cpp
 CPPFLAGS := -I tools/agbcc/include -iquote include -nostdinc -undef
 
 LD      := $(DEVKITARM)/bin/arm-none-eabi-ld
