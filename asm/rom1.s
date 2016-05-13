@@ -417,7 +417,7 @@ _0800057E:
 	ldrh r4, [r5]
 	movs r6, 0
 	strh r6, [r5]
-	bl SoundVSync_rev01
+	bl m4aSoundVSync
 	strh r4, [r5]
 	ldr r4, _080005DC
 	ldr r0, [r4, 0x20]
@@ -579,7 +579,7 @@ DoSoftReset: @ 80006B4
 	ldr r1, _08000710
 	movs r0, 0
 	strh r0, [r1]
-	bl SoundVSyncOff_rev01
+	bl m4aSoundVSyncOff
 	bl remove_some_task
 	ldr r1, _08000714
 	ldrh r2, [r1, 0xA]

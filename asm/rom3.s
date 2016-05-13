@@ -71034,7 +71034,7 @@ _0802D47C:
 	ldr r1, _0802D4E4
 	movs r2, 0x80
 	lsls r2, 1
-	bl MPlayVolumeControl
+	bl m4aMPlayVolumeControl
 _0802D488:
 	ldr r7, _0802D4E8
 	ldr r4, _0802D4EC
@@ -71374,7 +71374,7 @@ sub_802D730: @ 802D730
 	ldr r1, _0802D78C
 	movs r2, 0x80
 	lsls r2, 1
-	bl MPlayVolumeControl
+	bl m4aMPlayVolumeControl
 	ldr r2, _0802D790
 	ldrb r1, [r4]
 	lsls r0, r1, 1
@@ -71508,7 +71508,7 @@ c3_0802FDF4: @ 802D86C
 	ldr r1, _0802D898
 	movs r2, 0x80
 	lsls r2, 1
-	bl MPlayVolumeControl
+	bl m4aMPlayVolumeControl
 	adds r0, r4, 0
 	bl DestroyTask
 _0802D88E:
@@ -79191,9 +79191,9 @@ mplay_80342A4: @ 8031724
 	cmp r0, 0x1D
 	bls _08031768
 	ldr r0, _08031774
-	bl MPlayStop_rev01
+	bl m4aMPlayStop
 	ldr r0, _08031778
-	bl MPlayStop_rev01
+	bl m4aMPlayStop
 _08031764:
 	cmp r5, 0
 	beq _0803177C
@@ -82009,7 +82009,7 @@ _08032DE4:
 	ldr r1, _08032E18
 	movs r2, 0x80
 	lsls r2, 1
-	bl MPlayVolumeControl
+	bl m4aMPlayVolumeControl
 _08032DF0:
 	ldr r2, _08032E1C
 	ldrb r1, [r2]
@@ -91138,7 +91138,7 @@ _080377F8:
 	ldr r1, _0803782C
 	movs r2, 0x80
 	lsls r2, 1
-	bl MPlayVolumeControl
+	bl m4aMPlayVolumeControl
 _08037804:
 	ldr r2, _08037830
 	ldrb r1, [r2]
@@ -122467,7 +122467,7 @@ _08046D5A:
 	cmp r0, 0
 	beq _08046DAE
 	ldr r0, _08046DA0
-	bl MPlayStop_rev01
+	bl m4aMPlayStop
 	b _08046DAE
 	.align 2, 0
 _08046D90: .4byte 0x02024a6a
@@ -122479,7 +122479,7 @@ _08046DA4:
 	ldr r0, _08046DC8
 	ldr r1, _08046DCC
 	movs r2, 0x80
-	bl MPlayVolumeControl
+	bl m4aMPlayVolumeControl
 _08046DAE:
 	bl battle_type_is_double
 	lsls r0, 24
@@ -136649,7 +136649,7 @@ sub_804E290: @ 804E290
 	subs r2, 0x80
 	lsls r2, 17
 	asrs r2, 16
-	bl MPlayPitchControl
+	bl m4aMPlayPitchControl
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -140194,7 +140194,7 @@ _0804FFE4:
 	lsls r1, 16
 	lsrs r1, 16
 	ldr r0, _08050030
-	bl MPlayTempoControl
+	bl m4aMPlayTempoControl
 	b _0805003E
 	.align 2, 0
 _08050018: .4byte 0x00002345
@@ -140208,7 +140208,7 @@ _08050034:
 	ldr r0, _08050098
 	movs r1, 0x80
 	lsls r1, 1
-	bl MPlayTempoControl
+	bl m4aMPlayTempoControl
 _0805003E:
 	ldr r1, [sp]
 	adds r1, 0x2
@@ -141475,7 +141475,7 @@ _080509B4:
 	ldr r0, _080509C8
 	movs r1, 0x80
 	lsls r1, 1
-	bl MPlayTempoControl
+	bl m4aMPlayTempoControl
 	movs r4, 0
 	b _080509E4
 	.align 2, 0
@@ -141537,7 +141537,7 @@ _08050A32:
 	movs r1, 0
 	strb r1, [r0]
 	ldr r0, _08050A48
-	bl MPlayStop_rev01
+	bl m4aMPlayStop
 _08050A40:
 	bl sub_804E290
 	b _08050CB6

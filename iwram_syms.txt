@@ -1,3 +1,5 @@
+/* .bss starts at 0x3000000 */
+
 gRtcErrorStatus = 0x3000458;
 gRtc = 0x3000460;
 gRtcProbeResult = 0x300046C;
@@ -5,18 +7,17 @@ gRtcSavedIme = 0x300046E;
 
 gPlayTimeCounterState = 0x300057C;
 
-sTimerNum = 0x3000F28;
-sTimerCount = 0x3000F2A;
-sTimerReg = 0x3000F2C;
-sSavedIme = 0x3000F30;
+/* .bss.code starts at 0x3000F60 */
 
-gSiiRtcLocked = 0x3000F36;
+/* COMMON starts at 0x3001760 */
 
 gUnknownStringVar = 0x3002900;
 
 gLocalTime = 0x3004038;
 
 gTasks = 0x3004B20;
+
+gMPlayMemAccArea = 0x3007440;
 
 gFlashTimeoutFlag = 0x3007490;
 PollFlashStatus = 0x3007494;

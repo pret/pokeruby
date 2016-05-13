@@ -73977,7 +73977,7 @@ pause_music_for_sound_maybe: @ 8074E38
 	lsls r4, 24
 	lsrs r4, 24
 	ldr r0, _08074E60
-	bl MPlayStop_rev01
+	bl m4aMPlayStop
 	ldr r0, _08074E64
 	lsls r4, 2
 	adds r4, r0
@@ -74163,7 +74163,7 @@ _08074F80:
 	ldr r1, _08074FB4
 	adds r0, r4, 0
 	movs r2, 0
-	bl MPlayVolumeControl
+	bl m4aMPlayVolumeControl
 	adds r0, r5, 0
 	bl m4aSongNumStop
 	adds r0, r4, 0
@@ -74274,7 +74274,7 @@ cry_related: @ 8075044
 	ldr r0, _08075084
 	ldr r1, _08075088
 	movs r2, 0x55
-	bl MPlayVolumeControl
+	bl m4aMPlayVolumeControl
 	lsls r4, 24
 	asrs r4, 24
 	movs r0, 0
@@ -74343,7 +74343,7 @@ _080750DA:
 	ldr r0, _08075108
 	ldr r1, _0807510C
 	movs r2, 0x55
-	bl MPlayVolumeControl
+	bl m4aMPlayVolumeControl
 	lsls r1, r5, 24
 	asrs r1, 24
 	str r4, [sp]
@@ -74398,7 +74398,7 @@ _0807513E:
 	ldr r0, _08075170
 	ldr r1, _08075174
 	movs r2, 0x55
-	bl MPlayVolumeControl
+	bl m4aMPlayVolumeControl
 _08075154:
 	lsls r1, r5, 24
 	asrs r1, 24
@@ -74431,7 +74431,7 @@ sub_8075178: @ 8075178
 	ldr r0, _080751B4
 	ldr r1, _080751B8
 	movs r2, 0x55
-	bl MPlayVolumeControl
+	bl m4aMPlayVolumeControl
 	str r4, [sp]
 	adds r0, r5, 0
 	movs r1, 0
@@ -74695,7 +74695,7 @@ sub_8075398: @ 8075398
 	push {lr}
 	ldr r0, _080753AC
 	ldr r0, [r0]
-	bl MPlayStop_rev01
+	bl m4aMPlayStop
 	bl sub_8000724
 	pop {r0}
 	bx r0
@@ -74708,7 +74708,7 @@ sub_80753B0: @ 80753B0
 	push {lr}
 	ldr r0, _080753C0
 	ldr r0, [r0]
-	bl MPlayStop_rev01
+	bl m4aMPlayStop
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -74778,7 +74778,7 @@ _08075420:
 	ldr r1, _0807544C
 	movs r2, 0x80
 	lsls r2, 1
-	bl MPlayVolumeControl
+	bl m4aMPlayVolumeControl
 	adds r0, r4, 0
 	bl DestroyTask
 _0807543E:
@@ -74864,11 +74864,11 @@ audio_play_and_stuff: @ 80754A4
 	adds r0, r6, 0
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl MPlayPanpotControl
+	bl m4aMPlayPanpotControl
 	mov r0, r8
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl MPlayPanpotControl
+	bl m4aMPlayPanpotControl
 	pop {r3}
 	mov r8, r3
 	pop {r4-r6}
@@ -74897,7 +74897,7 @@ sub_80754F8: @ 80754F8
 	asrs r4, 24
 	adds r0, r5, 0
 	adds r2, r4, 0
-	bl MPlayPanpotControl
+	bl m4aMPlayPanpotControl
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -74923,7 +74923,7 @@ sub_807552C: @ 807552C
 	asrs r4, 24
 	adds r0, r5, 0
 	adds r2, r4, 0
-	bl MPlayPanpotControl
+	bl m4aMPlayPanpotControl
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -74942,11 +74942,11 @@ sub_8075560: @ 8075560
 	asrs r4, 24
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl MPlayPanpotControl
+	bl m4aMPlayPanpotControl
 	ldr r0, _0807558C
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl MPlayPanpotControl
+	bl m4aMPlayPanpotControl
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -75341,7 +75341,7 @@ _08075896:
 	bne _08075894
 	ldr r0, _080758D4
 	movs r2, 0x80
-	bl MPlayVolumeControl
+	bl m4aMPlayVolumeControl
 _080758AE:
 	ldr r0, _080758D8
 	movs r1, 0
@@ -75936,9 +75936,9 @@ _08075D14: .4byte 0x03004af0
 _08075D18: .4byte 0x0202f7b0
 _08075D1C:
 	ldr r0, _08075D98
-	bl MPlayStop_rev01
+	bl m4aMPlayStop
 	ldr r0, _08075D9C
-	bl MPlayStop_rev01
+	bl m4aMPlayStop
 _08075D28:
 	ldr r1, _08075DA0
 	movs r0, 0
@@ -75976,7 +75976,7 @@ _08075D5A:
 	ldr r1, _08075DA4
 	movs r2, 0x80
 	lsls r2, 1
-	bl MPlayVolumeControl
+	bl m4aMPlayVolumeControl
 	bl sub_8076BE0
 	lsls r0, 24
 	cmp r0, 0
@@ -79235,9 +79235,9 @@ ma20_wait_for_something: @ 8077684
 	cmp r0, 0x5A
 	bls _080776D2
 	ldr r0, _080776C4
-	bl MPlayStop_rev01
+	bl m4aMPlayStop
 	ldr r0, _080776C8
-	bl MPlayStop_rev01
+	bl m4aMPlayStop
 	strh r5, [r4]
 	b _080776F6
 	.align 2, 0
@@ -79746,9 +79746,9 @@ _08077A90: .4byte 0x02020004
 ma2F_stop_music: @ 8077A94
 	push {lr}
 	ldr r0, _08077AB0
-	bl MPlayStop_rev01
+	bl m4aMPlayStop
 	ldr r0, _08077AB4
-	bl MPlayStop_rev01
+	bl m4aMPlayStop
 	ldr r1, _08077AB8
 	ldr r0, [r1]
 	adds r0, 0x1

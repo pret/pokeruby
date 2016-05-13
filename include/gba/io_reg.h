@@ -447,6 +447,26 @@
 #define DISPSTAT_HBLANK_INTR 0x0010 // H-Blank interrupt enabled
 #define DISPSTAT_VCOUNT_INTR 0x0020 // V-Count interrupt enabled
 
+// SOUNDCNT_H
+#define SOUND_CGB_MIX_QUARTER 0x0000
+#define SOUND_CGB_MIX_HALF    0x0001
+#define SOUND_CGB_MIX_FULL    0x0002
+#define SOUND_A_MIX_HALF      0x0000
+#define SOUND_A_MIX_FULL      0x0004
+#define SOUND_B_MIX_HALF      0x0000
+#define SOUND_B_MIX_FULL      0x0008
+#define SOUND_ALL_MIX_FULL    0x000E
+#define SOUND_A_RIGHT_OUTPUT  0x0100
+#define SOUND_A_LEFT_OUTPUT   0x0200
+#define SOUND_A_TIMER_0       0x0000
+#define SOUND_A_TIMER_1       0x0400
+#define SOUND_A_FIFO_RESET    0x0800
+#define SOUND_B_RIGHT_OUTPUT  0x1000
+#define SOUND_B_LEFT_OUTPUT   0x2000
+#define SOUND_B_TIMER_0       0x0000
+#define SOUND_B_TIMER_1       0x4000
+#define SOUND_B_FIFO_RESET    0x8000
+
 // SOUNDCNT_X
 #define SOUND_1_ON          0x0001
 #define SOUND_2_ON          0x0002

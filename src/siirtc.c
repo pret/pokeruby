@@ -52,7 +52,8 @@
 
 extern vu16 GPIOPortDirection;
 
-extern bool8 gSiiRtcLocked;
+static u16 sUnused;
+static bool8 sLocked;
 
 static int WriteCommand(u8 value);
 static int WriteData(u8 value);
@@ -65,13 +66,13 @@ static const char AgbLibRtcVersion[] = "SIIRTC_V001";
 void SiiRtcUnprotect()
 {
     EnableGpioPortRead();
-    gSiiRtcLocked = FALSE;
+    sLocked = FALSE;
 }
 
 void SiiRtcProtect()
 {
     DisableGpioPortRead();
-    gSiiRtcLocked = TRUE;
+    sLocked = TRUE;
 }
 
 u8 SiiRtcProbe()
@@ -120,10 +121,10 @@ bool8 SiiRtcReset()
     u8 result;
     struct SiiRtcInfo rtc;
 
-    if (gSiiRtcLocked == TRUE)
+    if (sLocked == TRUE)
         return FALSE;
 
-    gSiiRtcLocked = TRUE;
+    sLocked = TRUE;
 
     GPIO_PORT_DATA = 1;
     GPIO_PORT_DATA = 5;
@@ -135,7 +136,7 @@ bool8 SiiRtcReset()
     GPIO_PORT_DATA = 1;
     GPIO_PORT_DATA = 1;
 
-    gSiiRtcLocked = FALSE;
+    sLocked = FALSE;
 
     rtc.status = SIIRTCINFO_24HOUR;
 
@@ -148,10 +149,10 @@ bool8 SiiRtcGetStatus(struct SiiRtcInfo *rtc)
 {
     u8 statusData;
 
-    if (gSiiRtcLocked == TRUE)
+    if (sLocked == TRUE)
         return FALSE;
 
-    gSiiRtcLocked = TRUE;
+    sLocked = TRUE;
 
     GPIO_PORT_DATA = 1;
     GPIO_PORT_DATA = 5;
@@ -172,7 +173,7 @@ bool8 SiiRtcGetStatus(struct SiiRtcInfo *rtc)
     GPIO_PORT_DATA = 1;
     GPIO_PORT_DATA = 1;
 
-    gSiiRtcLocked = FALSE;
+    sLocked = FALSE;
 
     return TRUE;
 }
@@ -181,10 +182,10 @@ bool8 SiiRtcSetStatus(struct SiiRtcInfo *rtc)
 {
     u8 statusData;
 
-    if (gSiiRtcLocked == TRUE)
+    if (sLocked == TRUE)
         return FALSE;
 
-    gSiiRtcLocked = TRUE;
+    sLocked = TRUE;
 
     GPIO_PORT_DATA = 1;
     GPIO_PORT_DATA = 5;
@@ -203,7 +204,7 @@ bool8 SiiRtcSetStatus(struct SiiRtcInfo *rtc)
     GPIO_PORT_DATA = 1;
     GPIO_PORT_DATA = 1;
 
-    gSiiRtcLocked = FALSE;
+    sLocked = FALSE;
 
     return TRUE;
 }
@@ -212,10 +213,10 @@ bool8 SiiRtcGetDateTime(struct SiiRtcInfo *rtc)
 {
     u8 i;
 
-    if (gSiiRtcLocked == TRUE)
+    if (sLocked == TRUE)
         return FALSE;
 
-    gSiiRtcLocked = TRUE;
+    sLocked = TRUE;
 
     GPIO_PORT_DATA = 1;
     GPIO_PORT_DATA = 5;
@@ -234,7 +235,7 @@ bool8 SiiRtcGetDateTime(struct SiiRtcInfo *rtc)
     GPIO_PORT_DATA = 1;
     GPIO_PORT_DATA = 1;
 
-    gSiiRtcLocked = FALSE;
+    sLocked = FALSE;
 
     return TRUE;
 }
@@ -243,10 +244,10 @@ bool8 SiiRtcSetDateTime(struct SiiRtcInfo *rtc)
 {
     u8 i;
 
-    if (gSiiRtcLocked == TRUE)
+    if (sLocked == TRUE)
         return FALSE;
 
-    gSiiRtcLocked = TRUE;
+    sLocked = TRUE;
 
     GPIO_PORT_DATA = 1;
     GPIO_PORT_DATA = 5;
@@ -261,7 +262,7 @@ bool8 SiiRtcSetDateTime(struct SiiRtcInfo *rtc)
     GPIO_PORT_DATA = 1;
     GPIO_PORT_DATA = 1;
 
-    gSiiRtcLocked = FALSE;
+    sLocked = FALSE;
 
     return TRUE;
 }
@@ -270,10 +271,10 @@ bool8 SiiRtcGetTime(struct SiiRtcInfo *rtc)
 {
     u8 i;
 
-    if (gSiiRtcLocked == TRUE)
+    if (sLocked == TRUE)
         return FALSE;
 
-    gSiiRtcLocked = TRUE;
+    sLocked = TRUE;
 
     GPIO_PORT_DATA = 1;
     GPIO_PORT_DATA = 5;
@@ -292,7 +293,7 @@ bool8 SiiRtcGetTime(struct SiiRtcInfo *rtc)
     GPIO_PORT_DATA = 1;
     GPIO_PORT_DATA = 1;
 
-    gSiiRtcLocked = FALSE;
+    sLocked = FALSE;
 
     return TRUE;
 }
@@ -301,10 +302,10 @@ bool8 SiiRtcSetTime(struct SiiRtcInfo *rtc)
 {
     u8 i;
 
-    if (gSiiRtcLocked == TRUE)
+    if (sLocked == TRUE)
         return FALSE;
 
-    gSiiRtcLocked = TRUE;
+    sLocked = TRUE;
 
     GPIO_PORT_DATA = 1;
     GPIO_PORT_DATA = 5;
@@ -319,7 +320,7 @@ bool8 SiiRtcSetTime(struct SiiRtcInfo *rtc)
     GPIO_PORT_DATA = 1;
     GPIO_PORT_DATA = 1;
 
-    gSiiRtcLocked = FALSE;
+    sLocked = FALSE;
 
     return TRUE;
 }
@@ -329,10 +330,10 @@ bool8 SiiRtcSetAlarm(struct SiiRtcInfo *rtc)
     u8 i;
     u8 alarmData[2];
 
-    if (gSiiRtcLocked == TRUE)
+    if (sLocked == TRUE)
         return FALSE;
 
-    gSiiRtcLocked = TRUE;
+    sLocked = TRUE;
 
     // Decode BCD.
     alarmData[0] = (rtc->alarmHour & 0xF) + 10 * ((rtc->alarmHour >> 4) & 0xF);
@@ -359,7 +360,7 @@ bool8 SiiRtcSetAlarm(struct SiiRtcInfo *rtc)
     GPIO_PORT_DATA = 1;
     GPIO_PORT_DATA = 1;
 
-    gSiiRtcLocked = FALSE;
+    sLocked = FALSE;
 
     return TRUE;
 }

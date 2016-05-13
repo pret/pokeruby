@@ -1,10 +1,10 @@
 #include "gba/gba.h"
 #include "gba/flash_internal.h"
 
-extern u8 sTimerNum;
-extern u16 sTimerCount;
-extern vu16 *sTimerReg;
-extern u16 sSavedIme;
+static u8 sTimerNum;
+static u16 sTimerCount;
+static vu16 *sTimerReg;
+static u16 sSavedIme;
 
 extern u8 gFlashTimeoutFlag;
 extern u8 (*PollFlashStatus)(u8 *);

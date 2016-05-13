@@ -1,12 +1,22 @@
 ENTRY(Start)
 
+gNumMusicPlayers = 4;
+gMaxLines = 60;
+
 SECTIONS {
-    .bss :
+    . = 0x3000000;
+
+    iwram (NOLOAD) :
     ALIGN(4)
     {
-        . = 0x3000F38;
+        . = 0xF28;
+        src/agb_flash.o(.bss);
+        src/siirtc.o(.bss);
         tools/agbcc/lib/libgcc.a:dp-bit.o(.bss);
         tools/agbcc/lib/libgcc.a:fp-bit.o(.bss);
+        src/m4a_2.o(.bss.code);
+        . = 0x5FD0;
+        src/m4a_2.o(iwram_data);
     }
 
     . = 0x8000000;
@@ -36,7 +46,10 @@ SECTIONS {
     ALIGN(4)
     {
         asm/libgcnmultiboot.o(.text);
-        asm/libmks4agb.o(.text);
+        asm/m4a_1.o(.text);
+        src/m4a_2.o(.text);
+        asm/m4a_3.o(.text);
+        src/m4a_4.o(.text);
         src/agb_flash.o(.text);
         src/agb_flash_1m.o(.text);
         src/agb_flash_mx.o(.text);
@@ -63,6 +76,8 @@ SECTIONS {
     ALIGN(4)
     {
         data/data2.o(.rodata);
+        src/m4a_tables.o(.rodata);
+        data/sound_data.o(.rodata);
         src/agb_flash.o(.rodata);
         src/agb_flash_1m.o(.rodata);
         src/agb_flash_mx.o(.rodata);

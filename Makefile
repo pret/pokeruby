@@ -36,9 +36,9 @@ C_SRCS := $(wildcard src/*.c)
 C_OBJS := $(C_SRCS:%.c=%.o)
 
 ASM_OBJS := asm/crt0.o asm/rom1.o asm/rom2.o asm/rom3.o asm/rom4.o asm/rom5.o \
-	asm/libgcnmultiboot.o asm/libmks4agb.o asm/libagbsyscall.o asm/libc.o
+	asm/libgcnmultiboot.o asm/m4a_1.o asm/m4a_3.o asm/libagbsyscall.o asm/libc.o
 
-DATA_ASM_OBJS := data/data1.o data/data2.o data/graphics.o
+DATA_ASM_OBJS := data/data1.o data/data2.o data/graphics.o data/sound_data.o
 
 OBJS := $(C_OBJS) $(ASM_OBJS) $(DATA_ASM_OBJS)
 
@@ -71,6 +71,9 @@ src/siirtc.o: CFLAGS := -mthumb-interwork
 src/agb_flash.o: CFLAGS := -O -mthumb-interwork
 src/agb_flash_1m.o: CFLAGS := -O -mthumb-interwork
 src/agb_flash_mx.o: CFLAGS := -O -mthumb-interwork
+
+src/m4a_2.o: CC1 := tools/agbcc/bin/old_agbcc
+src/m4a_4.o: CC1 := tools/agbcc/bin/old_agbcc
 
 $(C_OBJS): %.o : %.c
 	$(CPP) $(CPPFLAGS) $< | $(CC1) $(CFLAGS) -o $*.s
