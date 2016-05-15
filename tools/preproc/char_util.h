@@ -56,6 +56,12 @@ inline bool IsAsciiPrintable(unsigned char c)
     return (c >= ' ' && c <= '~');
 }
 
+// Returns whether the character can start the identifier of a "{FOO}" constant in strings.
+inline bool IsIdentifierStartingChar(unsigned char c)
+{
+    return IsAsciiAlpha(c) || c == '_';
+}
+
 // Returns whether the character can be used in the identifier of a "{FOO}" constant in strings.
 inline bool IsIdentifierChar(unsigned char c)
 {

@@ -56,11 +56,11 @@ private:
     std::string m_filename;
 
     bool ConsumeComma();
-    int ReadPadLength();
+    int ReadInteger(int maxValue);
     void RemoveComments();
     bool CheckForDirective(std::string name);
     std::string ReadCharOrEscape();
-    std::string ReadConstant();
+    std::string ReadBracketedConstants();
     void SkipWhitespace();
     void ExpectEmptyRestOfLine();
     void ReportDiagnostic(const char* type, const char* format, std::va_list args);

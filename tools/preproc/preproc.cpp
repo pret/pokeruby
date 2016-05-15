@@ -64,15 +64,18 @@ int main(int argc, char **argv)
             unsigned char s[kMaxStringLength];
             int length = stack.top().ReadString(s);
 
-            printf("\t.byte ");
-            for (int i = 0; i < length; i++)
+            if (length > 0)
             {
-                printf("0x%02X", s[i]);
+                printf("\t.byte ");
+                for (int i = 0; i < length; i++)
+                {
+                    printf("0x%02X", s[i]);
 
-                if (i < length - 1)
-                    printf(", ");
+                    if (i < length - 1)
+                        printf(", ");
+                }
+                putchar('\n');
             }
-            putchar('\n');
             break;
         }
         case Directive::Unknown:

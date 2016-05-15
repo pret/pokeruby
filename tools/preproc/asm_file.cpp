@@ -314,39 +314,63 @@ std::string AsmFile::ReadCharOrEscape()
 }
 
 // Reads a charmap constant, i.e. "{FOO}".
-std::string AsmFile::ReadConstant()
+std::string AsmFile::ReadBracketedConstants()
 {
+    std::string totalSequence;
+
     m_pos++; // Assume we're on the left curly bracket.
 
-    long startPos = m_pos;
-
-    while (IsIdentifierChar(m_buffer[m_pos]))
-        m_pos++;
-
-    if (m_buffer[m_pos] != '}')
+    while (m_buffer[m_pos] != '}')
     {
-        if (m_buffer[m_pos] == 0)
+        SkipWhitespace();
+
+        if (IsIdentifierStartingChar(m_buffer[m_pos]))
+        {
+            long startPos = m_pos;
+
+            m_pos++;
+
+            while (IsIdentifierChar(m_buffer[m_pos]))
+                m_pos++;
+
+            std::string sequence = g_charmap->Constant(std::string(&m_buffer[startPos], m_pos - startPos));
+
+            if (sequence.length() == 0)
+            {
+                m_buffer[m_pos] = 0;
+                RaiseError("unknown constant '%s'", &m_buffer[startPos]);
+            }
+
+            totalSequence += sequence;
+        }
+        else if (IsAsciiDigit(m_buffer[m_pos]))
+        {
+            int value = ReadInteger(255);
+
+            if (value == -1)
+                RaiseError("integers within curly brackets cannot exceed 255");
+
+            totalSequence += (char)value;
+        }
+        else if (m_buffer[m_pos] == 0)
         {
             if (m_pos >= m_size)
-                RaiseError("unexpected EOF in identifier");
+                RaiseError("unexpected EOF after left curly bracket");
             else
-                RaiseError("unexpected null character in identifier");
+                RaiseError("unexpected null character within curly brackets");
         }
-
-        RaiseError("unexpected character in identifier");
-    }
-
-    std::string sequence = g_charmap->Constant(std::string(&m_buffer[startPos], m_pos - startPos));
-
-    if (sequence.length() == 0)
-    {
-        m_buffer[m_pos] = 0;
-        RaiseError("unknown constant '%s'", &m_buffer[startPos]);
+        else
+        {
+            if (IsAsciiPrintable(m_buffer[m_pos]))
+                RaiseError("unexpected character '%c' within curly brackets", m_buffer[m_pos]);
+            else
+                RaiseError("unexpected character '\\x%02X' within curly brackets", m_buffer[m_pos]);
+        }
     }
 
     m_pos++; // Go past the right curly bracket.
 
-    return sequence;
+    return totalSequence;
 }
 
 // Reads a charmap string.
@@ -363,7 +387,7 @@ int AsmFile::ReadString(unsigned char* s)
 
     while (m_buffer[m_pos] != '"')
     {
-        std::string sequence = (m_buffer[m_pos] == '{') ? ReadConstant() : ReadCharOrEscape();
+        std::string sequence = (m_buffer[m_pos] == '{') ? ReadBracketedConstants() : ReadCharOrEscape();
 
         for (const char& c : sequence)
         {
@@ -381,7 +405,10 @@ int AsmFile::ReadString(unsigned char* s)
     if (ConsumeComma())
     {
         SkipWhitespace();
-        int padLength = ReadPadLength();
+        int padLength = ReadInteger(kMaxStringLength);
+
+        if (padLength == -1)
+            RaiseError("pad length greater than maximum length (%d)", kMaxStringLength);
 
         while (length < padLength)
         {
@@ -424,8 +451,8 @@ static int ConvertDigit(char c, int radix)
     return (digit < radix) ? digit : -1;
 }
 
-// Reads the pad length for a charmap string.
-int AsmFile::ReadPadLength()
+// Reads an integer. If the integer is greater than maxValue, it returns -1.
+int AsmFile::ReadInteger(int maxValue)
 {
     if (!IsAsciiDigit(m_buffer[m_pos]))
         RaiseError("expected integer");
@@ -438,15 +465,15 @@ int AsmFile::ReadPadLength()
         m_pos += 2;
     }
 
-    int n = 0;
+    unsigned n = 0;
     int digit;
 
     while ((digit = ConvertDigit(m_buffer[m_pos], radix)) != -1)
     {
         n = n * radix + digit;
 
-        if (n > kMaxStringLength)
-            RaiseError("pad length greater than maximum length (%d)", kMaxStringLength);
+        if (n > (unsigned)maxValue)
+            return -1;
 
         m_pos++;
     }

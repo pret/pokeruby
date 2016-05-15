@@ -183,7 +183,7 @@ Lhs CharmapReader::ReadLhs()
             lhs.type = LhsType::Char;
         }
     }
-    else if (IsIdentifierChar(m_buffer[m_pos]))
+    else if (IsIdentifierStartingChar(m_buffer[m_pos]))
     {
         lhs.type = LhsType::Constant;
         lhs.name = ReadConstant();
