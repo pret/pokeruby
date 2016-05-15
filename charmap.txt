@@ -255,9 +255,6 @@ PK        = 53
 PKMN      = 53 54
 POKEBLOCK = 55 56 57 58 59
 
-@ indicates the end of a town/city name (before " TOWN" or " CITY")
-NAME_END = FC 00
-
 @ string placeholders
 @ unknown           (FD 00)
 PLAYER             = FD 01
@@ -274,6 +271,52 @@ EVIL_TEAM_LEADER   = FD 0A @ "MAXIE"   / "ARCHIE"
 GOOD_TEAM_LEADER   = FD 0B @ "ARCHIE"  / "MAXIE"
 CUR_VERSION_MASCOT = FD 0C @ "GROUDON" / "KYOGRE"
 OPP_VERSION_MASCOT = FD 0D @ "KYOGRE"  / "GROUDON"
+
+@ indicates the end of a town/city name (before " TOWN" or " CITY")
+NAME_END = FC 00
+
+@ more text functions
+
+COLOR = FC 01 @ use a color listed below right after
+HIGHLIGHT = FC 02 @ same as fc 01
+SHADOW = FC 03 @ same as fc 01
+COLOR_HIGHLIGHT_SHADOW = FC 04 @ takes 3 bytes
+@ FD 05 unknown
+SIZE = FC 06 @ note that anything other than "SMALL" is invalid
+@ FC 07 unknown
+PAUSE = FC 08 @ manually print the wait byte after this, havent mapped them
+PAUSE_UNTIL_PRESS = FC 09
+@ 0A and 0B are unknown
+ESCAPE = FC 0C
+SHIFT_TEXT = FC 0D 
+@ 0E and 0F are unknown
+PLAY_MUSIC = FC 10
+@ 10-14 are unknown
+ENLARGE = FC 15
+SET_TO_DEFAULT_SIZE = FC 16
+PAUSE_MUSIC = FC 17
+RESUME_MUSIC = FC 18
+
+@ colors
+
+TRANSPARENT = 00
+DARK_GREY = 01
+RED = 02
+GREEN = 03
+BLUE = 04
+YELLOW = 05
+CYAN = 06
+MAGENTA = 07
+LIGHT_GREY = 08
+BLACK = 09
+BLACK2 = 0A @ duplicate of black?
+SILVER = 0B
+WHITE = 0C
+SKY_BLUE = 0D
+LIGHT_BLUE = 0E
+WHITE2 = 0F @ duplicate of white?
+
+@ for wait and shift, use \x00 to print the byte so constants dont need to be defined
 
 '\l' = FA @ scroll up window text
 '\p' = FB @ new paragraph

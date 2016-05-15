@@ -1218,18 +1218,18 @@ gUnknown_0820C334: @ 820C334
 	.global gUnknown_0820C335
 gUnknown_0820C335: @ 820C335
 	.incbin "baserom.gba", 0x0020c335, 0x7
+	
+	.global gUnknownText_0820C33C
+gUnknownText_0820C33C:
+	.string "$"
 
-	.global gUnknown_0820C33C
-gUnknown_0820C33C: @ 820C33C
-	.incbin "baserom.gba", 0x0020c33c, 0x1
+	.global gUnknownText_0820C33D
+gUnknownText_0820C33D: @ 820C33D
+	.string "♂$"
 
-	.global gUnknown_0820C33D
-gUnknown_0820C33D: @ 820C33D
-	.incbin "baserom.gba", 0x0020c33d, 0x2
-
-	.global gUnknown_0820C33F
-gUnknown_0820C33F: @ 820C33F
-	.incbin "baserom.gba", 0x0020c33f, 0x2
+	.global gUnknownText_0820C33F
+gUnknownText_0820C33F: @ 820C33F
+	.string "♀$"
 
 	.global gUnknown_0820C341
 gUnknown_0820C341: @ 820C341
@@ -9894,25 +9894,43 @@ gUnknown_0842C622: @ 842C622
 gUnknown_0842C62F: @ 842C62F
 	.incbin "baserom.gba", 0x0042c62f, 0x11
 
-	.global gUnknown_0842C640
-gUnknown_0842C640: @ 842C640
-	.incbin "baserom.gba", 0x0042c640, 0x176
+	.global gUnknownText_0842C640
+gUnknownText_0842C640: @ 842C640
+	.string "Take good care of {STR_VAR_3}!$"
+	.string "CANCEL$"
+	.string "Choose a POKéMON.$"
+	.string "SUMMARY$"
+	.string "TRADE$"
+	.string "Cancel trade?$"
+	.string "Press the B Button to exit.$"
+	.string "SUMMARY$"
+	.string "TRADE$"
+	.string "{COLOR DARK_GREY}{HIGHLIGHT WHITE2}{SHADOW LIGHT_GREY}Link standby...\nPlease wait.$"
+	.string "{COLOR DARK_GREY}{HIGHLIGHT WHITE2}{SHADOW LIGHT_GREY}The trade has\nbeen canceled.$"
+	.string "{COLOR DARK_GREY}{HIGHLIGHT WHITE2}{SHADOW LIGHT_GREY}That’s your only\nPOKéMON for battle.$"
+	.string "{COLOR DARK_GREY}{HIGHLIGHT WHITE2}{SHADOW LIGHT_GREY}Your friend can’t\ntrade that one.$"
+	.string "{COLOR DARK_GREY}{HIGHLIGHT WHITE2}{SHADOW LIGHT_GREY}Waiting for your\nfriend to finish...$"
+	.string "{COLOR DARK_GREY}{HIGHLIGHT WHITE2}{SHADOW LIGHT_GREY}Your friend wants\nto trade POKéMON.$"
+	.string "$"
 
-	.global gUnknown_0842C7B6
-gUnknown_0842C7B6: @ 842C7B6
-	.incbin "baserom.gba", 0x0042c7b6, 0x14
+	.global gUnknownText_0842C7B6 @ trade functions? could be in-game as well
+gUnknownText_0842C7B6: 
+	.string "Is this trade okay?$"
 
-	.global gUnknown_0842C7CA
-gUnknown_0842C7CA: @ 842C7CA
-	.incbin "baserom.gba", 0x0042c7ca, 0x1
+	.global gUnknownText_0842C7CA
+gUnknownText_0842C7CA:
+	.string "$"
 
-	.global gUnknown_0842C7CB
-gUnknown_0842C7CB: @ 842C7CB
-	.incbin "baserom.gba", 0x0042c7cb, 0xb
-
-	.global gUnknown_0842C7D6
-gUnknown_0842C7D6: @ 842C7D6
-	.incbin "baserom.gba", 0x0042c7d6, 0x5
+	.global gUnknownText_0842C7CB @ this is probably related to battle
+gUnknownText_0842C7CB:
+	.string "\n$"
+	.string "/$"
+	.string "Lv$"
+	.string "---$"
+	
+	.global gUnknownText_0842C7D6
+gUnknownText_0842C7D6:
+	.string "????$"
 
 @ 842C7DB
 	.include "data/text/easy_chat/group_name_strings.s"

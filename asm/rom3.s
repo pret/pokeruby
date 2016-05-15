@@ -126815,7 +126815,7 @@ sub_8049088: @ 8049088
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080490B0: .4byte gUnknown_0842C7B6
+_080490B0: .4byte gUnknownText_0842C7B6
 _080490B4: .4byte 0x03004824
 _080490B8: .4byte 0x06010000
 	thumb_func_end sub_8049088
@@ -129040,7 +129040,7 @@ _0804A230: .4byte 0x02020004
 _0804A234: .4byte gUnknown_0820C29C
 _0804A238: .4byte gUnknown_0820C334
 _0804A23C: .4byte gUnknown_0820C335
-_0804A240: .4byte gUnknown_0842C7CA
+_0804A240: .4byte gUnknownText_0842C7CA
 _0804A244:
 	ldr r0, _0804A2A4
 	ldr r0, [r0, 0x14]
@@ -129247,9 +129247,9 @@ _0804A3D4:
 	bls _0804A3B8
 	b _0804A404
 	.align 2, 0
-_0804A3E8: .4byte gUnknown_0820C33C
+_0804A3E8: .4byte gUnknownText_0820C33C
 _0804A3EC: .4byte gMoveNames
-_0804A3F0: .4byte gUnknown_0842C7CB
+_0804A3F0: .4byte gUnknownText_0842C7CB
 _0804A3F4:
 	ldr r1, _0804A414
 	adds r0, r6, 0
@@ -129266,8 +129266,8 @@ _0804A404:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804A414: .4byte gUnknown_0820C33C
-_0804A418: .4byte gUnknown_0842C7D6
+_0804A414: .4byte gUnknownText_0820C33C
+_0804A418: .4byte gUnknownText_0842C7D6
 	thumb_func_end sub_804A33C
 
 	thumb_func_start sub_804A41C
@@ -135015,7 +135015,7 @@ _0804D43E:
 	.align 2, 0
 _0804D480: .4byte 0x00000173
 _0804D484: .4byte 0x020234cc
-_0804D488: .4byte gUnknown_0842C640
+_0804D488: .4byte gUnknownText_0842C640
 _0804D48C:
 	ldr r2, [r6]
 	adds r1, r2, 0
