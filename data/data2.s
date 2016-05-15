@@ -4513,11 +4513,11 @@ gUnknown_083D02C8: @ 83D02C8
 
 	.global gUnknown_083D02D1
 gUnknown_083D02D1: @ 83D02D1
-	.incbin "baserom.gba", 0x003d02d1, 0x4
+	.string "BGM$"
 
 	.global gUnknown_083D02D5
 gUnknown_083D02D5: @ 83D02D5
-	.incbin "baserom.gba", 0x003d02d5, 0x4
+	.string "SE $"
 
 	.global gUnknown_083D02D9
 gUnknown_083D02D9: @ 83D02D9
@@ -4525,11 +4525,11 @@ gUnknown_083D02D9: @ 83D02D9
 
 	.global gUnknown_083D02E6
 gUnknown_083D02E6: @ 83D02E6
-	.incbin "baserom.gba", 0x003d02e6, 0xc
+	.string "L‥UP R‥DOWN$"
 
 	.global gUnknown_083D02F2
 gUnknown_083D02F2: @ 83D02F2
-	.incbin "baserom.gba", 0x003d02f2, 0xe
+	.string "R‥DRIVER-TEST$"
 
 	.global gUnknown_083D0300
 gUnknown_083D0300: @ 83D0300
@@ -4545,39 +4545,39 @@ gUnknown_083D031C: @ 83D031C
 
 	.global gUnknown_083D0327
 gUnknown_083D0327: @ 83D0327
-	.incbin "baserom.gba", 0x003d0327, 0xa
+	.string "VOICE‥‥‥‥$"
 
 	.global gUnknown_083D0331
 gUnknown_083D0331: @ 83D0331
-	.incbin "baserom.gba", 0x003d0331, 0xa
+	.string "VOLUME‥‥‥$"
 
 	.global gUnknown_083D033B
 gUnknown_083D033B: @ 83D033B
-	.incbin "baserom.gba", 0x003d033b, 0xa
+	.string "PANPOT‥‥‥$"
 
 	.global gUnknown_083D0345
 gUnknown_083D0345: @ 83D0345
-	.incbin "baserom.gba", 0x003d0345, 0xa
+	.string "PITCH‥‥‥‥$"
 
 	.global gUnknown_083D034F
 gUnknown_083D034F: @ 83D034F
-	.incbin "baserom.gba", 0x003d034f, 0xa
+	.string "LENGTH‥‥‥$"
 
 	.global gUnknown_083D0359
 gUnknown_083D0359: @ 83D0359
-	.incbin "baserom.gba", 0x003d0359, 0xa
+	.string "RELEASE‥‥$"
 
 	.global gUnknown_083D0363
 gUnknown_083D0363: @ 83D0363
-	.incbin "baserom.gba", 0x003d0363, 0xa
+	.string "PROGRESS‥$"
 
 	.global gUnknown_083D036D
 gUnknown_083D036D: @ 83D036D
-	.incbin "baserom.gba", 0x003d036d, 0xa
+	.string "CHORUS‥‥‥$"
 
 	.global gUnknown_083D0377
 gUnknown_083D0377: @ 83D0377
-	.incbin "baserom.gba", 0x003d0377, 0xa
+	.string "PRIORITY‥$"
 
 	.global gUnknown_083D0381
 gUnknown_083D0381: @ 83D0381
@@ -4613,27 +4613,22 @@ gUnknown_083D03F8: @ 83D03F8
 
 	.global gUnknown_083D03FD
 gUnknown_083D03FD: @ 83D03FD
-	.incbin "baserom.gba", 0x003d03fd, 0x3
+	.string "SE$"
 
 	.global gUnknown_083D0400
 gUnknown_083D0400: @ 83D0400
-	.incbin "baserom.gba", 0x003d0400, 0x4
+	.string "PAN$"
 
 	.global gUnknown_083D0404
 gUnknown_083D0404: @ 83D0404
-	.incbin "baserom.gba", 0x003d0404, 0x5
+	.string "  LR$"
 
 	.global gUnknown_083D0409
 gUnknown_083D0409: @ 83D0409
-	.incbin "baserom.gba", 0x003d0409, 0x3a3
+	.string "  RL$"
 
-	.global gUnknown_083D07AC
-gUnknown_083D07AC: @ 83D07AC
-	.incbin "baserom.gba", 0x003d07ac, 0x7cc
-
-	.global gUnknown_083D0F78
-gUnknown_083D0F78: @ 83D0F78
-	.incbin "baserom.gba", 0x003d0f78, 0x3e0
+@ 83D040E
+	.include "data/text/song_names.s"
 
 	.global gUnknown_083D1358
 gUnknown_083D1358: @ 83D1358
