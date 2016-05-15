@@ -11,6 +11,7 @@ SECTIONS {
     {
         . = 0xF28;
         src/agb_flash.o(.bss);
+        . = 0xF36;
         src/siirtc.o(.bss);
         tools/agbcc/lib/libgcc.a:dp-bit.o(.bss);
         tools/agbcc/lib/libgcc.a:fp-bit.o(.bss);
