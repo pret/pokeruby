@@ -49,4 +49,12 @@
 #define DmaCopy16(dmaNum, src, dest, size) DMA_COPY(dmaNum, src, dest, size, 16)
 #define DmaCopy32(dmaNum, src, dest, size) DMA_COPY(dmaNum, src, dest, size, 32)
 
+#define DmaStop(dmaNum)                                         \
+{                                                               \
+    vu16 *dmaRegs = (vu16 *)REG_ADDR_DMA##dmaNum;               \
+    dmaRegs[5] &= ~(DMA_START_MASK | DMA_DREQ_ON | DMA_REPEAT); \
+    dmaRegs[5] &= ~DMA_ENABLE;                                  \
+    dmaRegs[5];                                                 \
+}
+
 #endif // GUARD_GBA_MACRO_H

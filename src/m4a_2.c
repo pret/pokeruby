@@ -4,14 +4,13 @@
 
 BSS_CODE ALIGNED(4) char SoundMainRAM_Buffer[0x800] = {0};
 
-IWRAM_DATA struct SoundInfo gSoundInfo = {0};
-IWRAM_DATA struct PokemonCrySong gPokemonCrySongs[MAX_POKEMON_CRIES] = {0};
-IWRAM_DATA u8 gUnused_3006FE8[8] = {0}; // padding for alignment
-IWRAM_DATA struct MusicPlayerInfo gPokemonCryMusicPlayers[MAX_POKEMON_CRIES] = {0};
-IWRAM_DATA void *gMPlayJumpTable[36] = {0};
-IWRAM_DATA struct CgbChannel gCgbChans[4] = {0};
-IWRAM_DATA struct MusicPlayerTrack gPokemonCryTracks[MAX_POKEMON_CRIES * 2] = {0};
-IWRAM_DATA struct PokemonCrySong gPokemonCrySong = {0};
+COMM_4(struct SoundInfo gSoundInfo)
+COMM_4(struct PokemonCrySong gPokemonCrySongs[MAX_POKEMON_CRIES])
+COMM_4(struct MusicPlayerInfo gPokemonCryMusicPlayers[MAX_POKEMON_CRIES])
+COMM_4(void *gMPlayJumpTable[36])
+COMM_4(struct CgbChannel gCgbChans[4])
+COMM_4(struct MusicPlayerTrack gPokemonCryTracks[MAX_POKEMON_CRIES * 2])
+COMM_4(struct PokemonCrySong gPokemonCrySong)
 
 u32 MidiKeyToFreq(struct WaveData *wav, u8 key, u8 fineAdjust)
 {
