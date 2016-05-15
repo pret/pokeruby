@@ -251,7 +251,6 @@ void MPlayExtender(struct CgbChannel *cgbChans)
 {
     struct SoundInfo *soundInfo;
     u32 ident;
-    register u32 maxLines asm("r0");
 
     REG_SOUNDCNT_X = SOUND_MASTER_ENABLE
                    | SOUND_4_ON
@@ -291,9 +290,7 @@ void MPlayExtender(struct CgbChannel *cgbChans)
     soundInfo->CgbSound = CgbSound;
     soundInfo->CgbOscOff = CgbOscOff;
     soundInfo->MidiKeyToCgbFreq = MidiKeyToCgbFreq;
-
-    maxLines = MAX_LINES;
-    soundInfo->maxLines = maxLines;
+    soundInfo->maxLines = MAX_LINES;
 
     CpuFill32(cgbChans, 0, sizeof(struct CgbChannel) * 4);
 
