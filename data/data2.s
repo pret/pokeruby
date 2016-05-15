@@ -1223,13 +1223,13 @@ gUnknown_0820C335: @ 820C335
 gUnknownText_0820C33C:
 	.string "$"
 
-	.global gUnknown_0820C33D
-gUnknown_0820C33D: @ 820C33D
-	.incbin "baserom.gba", 0x0020c33d, 0x2
+	.global gUnknownText_0820C33D
+gUnknownText_0820C33D: @ 820C33D
+	.string "♂$"
 
-	.global gUnknown_0820C33F
-gUnknown_0820C33F: @ 820C33F
-	.incbin "baserom.gba", 0x0020c33f, 0x2
+	.global gUnknownText_0820C33F
+gUnknownText_0820C33F: @ 820C33F
+	.string "♀$"
 
 	.global gUnknown_0820C341
 gUnknown_0820C341: @ 820C341
@@ -9905,12 +9905,12 @@ gUnknownText_0842C640: @ 842C640
 	.string "Press the B Button to exit.$"
 	.string "SUMMARY$"
 	.string "TRADE$"
-	.string "{COLOR}{DARK_GREY}{HIGHLIGHT}{WHITE2}{SHADOW}{LIGHT_GREY}Link standby...\nPlease wait.$"
-	.string "{COLOR}{DARK_GREY}{HIGHLIGHT}{WHITE2}{SHADOW}{LIGHT_GREY}The trade has\nbeen canceled.$"
-	.string "{COLOR}{DARK_GREY}{HIGHLIGHT}{WHITE2}{SHADOW}{LIGHT_GREY}That’s your only\nPOKéMON for battle.$"
-	.string "{COLOR}{DARK_GREY}{HIGHLIGHT}{WHITE2}{SHADOW}{LIGHT_GREY}Your friend can’t\ntrade that one.$"
-	.string "{COLOR}{DARK_GREY}{HIGHLIGHT}{WHITE2}{SHADOW}{LIGHT_GREY}Waiting for your\nfriend to finish...$"
-	.string "{COLOR}{DARK_GREY}{HIGHLIGHT}{WHITE2}{SHADOW}{LIGHT_GREY}Your friend wants\nto trade POKéMON.$"
+	.string "{COLOR DARK_GREY}{HIGHLIGHT WHITE2}{SHADOW LIGHT_GREY}Link standby...\nPlease wait.$"
+	.string "{COLOR DARK_GREY}{HIGHLIGHT WHITE2}{SHADOW LIGHT_GREY}The trade has\nbeen canceled.$"
+	.string "{COLOR DARK_GREY}{HIGHLIGHT WHITE2}{SHADOW LIGHT_GREY}That’s your only\nPOKéMON for battle.$"
+	.string "{COLOR DARK_GREY}{HIGHLIGHT WHITE2}{SHADOW LIGHT_GREY}Your friend can’t\ntrade that one.$"
+	.string "{COLOR DARK_GREY}{HIGHLIGHT WHITE2}{SHADOW LIGHT_GREY}Waiting for your\nfriend to finish...$"
+	.string "{COLOR DARK_GREY}{HIGHLIGHT WHITE2}{SHADOW LIGHT_GREY}Your friend wants\nto trade POKéMON.$"
 	.string "$"
 
 	.global gUnknownText_0842C7B6 @ trade functions? could be in-game as well
