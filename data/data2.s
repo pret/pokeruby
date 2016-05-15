@@ -1218,17 +1218,17 @@ gUnknown_0820C334: @ 820C334
 	.global gUnknown_0820C335
 gUnknown_0820C335: @ 820C335
 	.incbin "baserom.gba", 0x0020c335, 0x7
-	
-	.global gUnknownText_0820C33C
-gUnknownText_0820C33C:
+
+	.global gUnknown_0820C33C
+gUnknown_0820C33C:
 	.string "$"
 
-	.global gUnknownText_0820C33D
-gUnknownText_0820C33D: @ 820C33D
+	.global gUnknown_0820C33D
+gUnknown_0820C33D: @ 820C33D
 	.string "♂$"
 
-	.global gUnknownText_0820C33F
-gUnknownText_0820C33F: @ 820C33F
+	.global gUnknown_0820C33F
+gUnknown_0820C33F: @ 820C33F
 	.string "♀$"
 
 	.global gUnknown_0820C341
@@ -9894,8 +9894,8 @@ gUnknown_0842C622: @ 842C622
 gUnknown_0842C62F: @ 842C62F
 	.incbin "baserom.gba", 0x0042c62f, 0x11
 
-	.global gUnknownText_0842C640
-gUnknownText_0842C640: @ 842C640
+	.global gUnknown_0842C640
+gUnknown_0842C640: @ 842C640
 	.string "Take good care of {STR_VAR_3}!$"
 	.string "CANCEL$"
 	.string "Choose a POKéMON.$"
@@ -9913,23 +9913,23 @@ gUnknownText_0842C640: @ 842C640
 	.string "{COLOR DARK_GREY}{HIGHLIGHT WHITE2}{SHADOW LIGHT_GREY}Your friend wants\nto trade POKéMON.$"
 	.string "$"
 
-	.global gUnknownText_0842C7B6 @ trade functions? could be in-game as well
-gUnknownText_0842C7B6: 
+	.global gUnknown_0842C7B6 @ trade functions? could be in-game as well
+gUnknown_0842C7B6:
 	.string "Is this trade okay?$"
 
-	.global gUnknownText_0842C7CA
-gUnknownText_0842C7CA:
+	.global gUnknown_0842C7CA
+gUnknown_0842C7CA:
 	.string "$"
 
-	.global gUnknownText_0842C7CB @ this is probably related to battle
-gUnknownText_0842C7CB:
+	.global gUnknown_0842C7CB @ this is probably related to battle
+gUnknown_0842C7CB:
 	.string "\n$"
 	.string "/$"
 	.string "Lv$"
 	.string "---$"
-	
-	.global gUnknownText_0842C7D6
-gUnknownText_0842C7D6:
+
+	.global gUnknown_0842C7D6
+gUnknown_0842C7D6:
 	.string "????$"
 
 @ 842C7DB
