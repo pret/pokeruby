@@ -2,7 +2,7 @@
 
 #define BSS_CODE __attribute__((section(".bss.code")))
 
-BSS_CODE char SoundMainRAM_Buffer[0x800] = {0};
+BSS_CODE ALIGNED(4) char SoundMainRAM_Buffer[0x800] = {0};
 
 IWRAM_DATA struct SoundInfo gSoundInfo = {0};
 IWRAM_DATA struct PokemonCrySong gPokemonCrySongs[MAX_POKEMON_CRIES] = {0};
