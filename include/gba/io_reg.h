@@ -421,6 +421,9 @@
 #define REG_TM3CNT_L    (*(vu16 *)REG_ADDR_TM3CNT_L)
 #define REG_TM3CNT_H    (*(vu16 *)REG_ADDR_TM3CNT_H)
 
+#define REG_KEYINPUT    (*(vu16 *)REG_ADDR_KEYINPUT)
+#define REG_KEYCNT      (*(vu16 *)REG_ADDR_KEYCNT)
+
 #define REG_IME         (*(vu16 *)REG_ADDR_IME)
 #define REG_IE          (*(vu16 *)REG_ADDR_IE)
 #define REG_IF          (*(vu16 *)REG_ADDR_IF)
@@ -501,6 +504,22 @@
 #define TIMER_1024CLK     0x03
 #define TIMER_INTR_ENABLE 0x40
 #define TIMER_ENABLE      0x80
+
+// keys
+#define A_BUTTON        0x0001
+#define B_BUTTON        0x0002
+#define SELECT_BUTTON   0x0004
+#define START_BUTTON    0x0008
+#define DPAD_RIGHT      0x0010
+#define DPAD_LEFT       0x0020
+#define DPAD_UP         0x0040
+#define DPAD_DOWN       0x0080
+#define R_BUTTON        0x0100
+#define L_BUTTON        0x0200
+#define KEYS_MASK       0x03FF
+#define KEY_INTR_ENABLE 0x0400
+#define KEY_OR_INTR     0x0000
+#define KEY_AND_INTR    0x8000
 
 // interrupt flags
 #define INTR_FLAG_VBLANK  (1 <<  0)

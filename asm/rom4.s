@@ -38,9 +38,9 @@ _08052D18:
 	thumb_func_start set_player_trainer_id
 set_player_trainer_id: @ 8052D2C
 	push {r4,lr}
-	bl GenerateRandomNumber
+	bl Random
 	adds r4, r0, 0
-	bl GenerateRandomNumber
+	bl Random
 	lsls r4, 16
 	lsls r0, 16
 	lsrs r0, 16
@@ -2587,7 +2587,7 @@ sub_8054050: @ 8054050
 	cmp r0, 0
 	beq _080540C0
 _08054084:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x58
@@ -2596,7 +2596,7 @@ _08054084:
 	adds r4, 0xD4
 	lsls r4, 24
 	lsrs r4, 24
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1E
@@ -2658,7 +2658,7 @@ _08054110:
 	movs r0, 0x1
 	b _0805415C
 _08054114:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x96
@@ -2671,7 +2671,7 @@ _08054114:
 	movs r0, 0x3
 	b _0805415C
 _08054130:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r4, 0x96
@@ -16700,7 +16700,7 @@ fish1: @ 805A3D4
 	bl memcpy
 	movs r0, 0
 	strh r0, [r5, 0x20]
-	bl GenerateRandomNumber
+	bl Random
 	movs r2, 0x26
 	ldrsh r1, [r5, r2]
 	lsls r1, 1
@@ -16787,7 +16787,7 @@ fish3: @ 805A490
 	strh r0, [r4, 0x8]
 	strh r1, [r4, 0xA]
 	strh r1, [r4, 0xC]
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0xA
@@ -16906,7 +16906,7 @@ party_menu_update_status_condition_object: @ 805A56C
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805A590
-	bl GenerateRandomNumber
+	bl Random
 	movs r1, 0x1
 	ands r1, r0
 	cmp r1, 0
@@ -17033,7 +17033,7 @@ fish8: @ 805A64C
 	blt _0805A6A2
 	cmp r1, 0x1
 	bgt _0805A6A6
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64
@@ -21762,7 +21762,7 @@ sub_805C930: @ 805C930
 	cmp r0, 0
 	beq _0805C964
 	ldr r5, _0805C960
-	bl GenerateRandomNumber
+	bl Random
 	movs r4, 0x3
 	adds r1, r4, 0
 	ands r1, r0
@@ -21816,7 +21816,7 @@ sub_805C98C: @ 805C98C
 	mov r0, sp
 	movs r2, 0x4
 	bl memcpy
-	bl GenerateRandomNumber
+	bl Random
 	movs r1, 0x3
 	ands r1, r0
 	mov r2, sp
@@ -22507,7 +22507,7 @@ sub_805CE6C: @ 805CE6C
 	cmp r0, 0
 	beq _0805CEA2
 	ldr r4, _0805CEAC
-	bl GenerateRandomNumber
+	bl Random
 	movs r5, 0x3
 	adds r1, r5, 0
 	ands r1, r0
@@ -22577,7 +22577,7 @@ sub_805CEE0: @ 805CEE0
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _0805CF10
-	bl GenerateRandomNumber
+	bl Random
 	movs r1, 0x3
 	ands r1, r0
 	mov r2, sp
@@ -22679,7 +22679,7 @@ sub_805CFAC: @ 805CFAC
 	cmp r0, 0
 	beq _0805CFE0
 	ldr r5, _0805CFDC
-	bl GenerateRandomNumber
+	bl Random
 	movs r4, 0x3
 	adds r1, r4, 0
 	ands r1, r0
@@ -22733,7 +22733,7 @@ sub_805D008: @ 805D008
 	mov r0, sp
 	movs r2, 0x2
 	bl memcpy
-	bl GenerateRandomNumber
+	bl Random
 	movs r7, 0x1
 	adds r1, r7, 0
 	ands r1, r0
@@ -22894,7 +22894,7 @@ sub_805D130: @ 805D130
 	cmp r0, 0
 	beq _0805D164
 	ldr r5, _0805D160
-	bl GenerateRandomNumber
+	bl Random
 	movs r4, 0x3
 	adds r1, r4, 0
 	ands r1, r0
@@ -22948,7 +22948,7 @@ sub_805D18C: @ 805D18C
 	mov r0, sp
 	movs r2, 0x2
 	bl memcpy
-	bl GenerateRandomNumber
+	bl Random
 	movs r7, 0x1
 	adds r1, r7, 0
 	ands r1, r0
@@ -23501,7 +23501,7 @@ sub_805D578: @ 805D578
 	cmp r0, 0
 	beq _0805D5AE
 	ldr r4, _0805D5B8
-	bl GenerateRandomNumber
+	bl Random
 	movs r5, 0x3
 	adds r1, r5, 0
 	ands r1, r0
@@ -23571,7 +23571,7 @@ sub_805D5EC: @ 805D5EC
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _0805D61C
-	bl GenerateRandomNumber
+	bl Random
 	movs r1, 0x1
 	ands r1, r0
 	mov r2, sp
@@ -23674,7 +23674,7 @@ sub_805D6B8: @ 805D6B8
 	cmp r0, 0
 	beq _0805D6EE
 	ldr r4, _0805D6F8
-	bl GenerateRandomNumber
+	bl Random
 	movs r5, 0x3
 	adds r1, r5, 0
 	ands r1, r0
@@ -23744,7 +23744,7 @@ sub_805D72C: @ 805D72C
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _0805D75C
-	bl GenerateRandomNumber
+	bl Random
 	movs r1, 0x1
 	ands r1, r0
 	mov r2, sp
@@ -23847,7 +23847,7 @@ sub_805D7F8: @ 805D7F8
 	cmp r0, 0
 	beq _0805D82E
 	ldr r4, _0805D838
-	bl GenerateRandomNumber
+	bl Random
 	movs r5, 0x3
 	adds r1, r5, 0
 	ands r1, r0
@@ -23917,7 +23917,7 @@ sub_805D86C: @ 805D86C
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _0805D89C
-	bl GenerateRandomNumber
+	bl Random
 	movs r1, 0x1
 	ands r1, r0
 	mov r2, sp
@@ -24020,7 +24020,7 @@ sub_805D938: @ 805D938
 	cmp r0, 0
 	beq _0805D96E
 	ldr r4, _0805D978
-	bl GenerateRandomNumber
+	bl Random
 	movs r5, 0x3
 	adds r1, r5, 0
 	ands r1, r0
@@ -24090,7 +24090,7 @@ sub_805D9AC: @ 805D9AC
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _0805D9DC
-	bl GenerateRandomNumber
+	bl Random
 	movs r1, 0x1
 	ands r1, r0
 	mov r2, sp
@@ -24193,7 +24193,7 @@ sub_805DA78: @ 805DA78
 	cmp r0, 0
 	beq _0805DAAE
 	ldr r4, _0805DAB8
-	bl GenerateRandomNumber
+	bl Random
 	movs r5, 0x3
 	adds r1, r5, 0
 	ands r1, r0
@@ -24263,7 +24263,7 @@ sub_805DAEC: @ 805DAEC
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _0805DB1C
-	bl GenerateRandomNumber
+	bl Random
 	movs r1, 0x1
 	ands r1, r0
 	mov r2, sp
@@ -24366,7 +24366,7 @@ sub_805DBB8: @ 805DBB8
 	cmp r0, 0
 	beq _0805DBEE
 	ldr r4, _0805DBF8
-	bl GenerateRandomNumber
+	bl Random
 	movs r5, 0x3
 	adds r1, r5, 0
 	ands r1, r0
@@ -24436,7 +24436,7 @@ sub_805DC2C: @ 805DC2C
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _0805DC5C
-	bl GenerateRandomNumber
+	bl Random
 	movs r1, 0x1
 	ands r1, r0
 	mov r2, sp
@@ -24539,7 +24539,7 @@ sub_805DCF8: @ 805DCF8
 	cmp r0, 0
 	beq _0805DD2E
 	ldr r4, _0805DD38
-	bl GenerateRandomNumber
+	bl Random
 	movs r5, 0x3
 	adds r1, r5, 0
 	ands r1, r0
@@ -24609,7 +24609,7 @@ sub_805DD6C: @ 805DD6C
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _0805DD9C
-	bl GenerateRandomNumber
+	bl Random
 	movs r1, 0x3
 	ands r1, r0
 	mov r2, sp
@@ -24712,7 +24712,7 @@ sub_805DE38: @ 805DE38
 	cmp r0, 0
 	beq _0805DE6E
 	ldr r4, _0805DE78
-	bl GenerateRandomNumber
+	bl Random
 	movs r5, 0x3
 	adds r1, r5, 0
 	ands r1, r0
@@ -24782,7 +24782,7 @@ sub_805DEAC: @ 805DEAC
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _0805DEDC
-	bl GenerateRandomNumber
+	bl Random
 	movs r1, 0x3
 	ands r1, r0
 	mov r2, sp
@@ -24885,7 +24885,7 @@ sub_805DF78: @ 805DF78
 	cmp r0, 0
 	beq _0805DFAE
 	ldr r4, _0805DFB8
-	bl GenerateRandomNumber
+	bl Random
 	movs r5, 0x3
 	adds r1, r5, 0
 	ands r1, r0
@@ -24955,7 +24955,7 @@ sub_805DFEC: @ 805DFEC
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _0805E01C
-	bl GenerateRandomNumber
+	bl Random
 	movs r1, 0x3
 	ands r1, r0
 	mov r2, sp
@@ -25058,7 +25058,7 @@ sub_805E0B8: @ 805E0B8
 	cmp r0, 0
 	beq _0805E0EE
 	ldr r4, _0805E0F8
-	bl GenerateRandomNumber
+	bl Random
 	movs r5, 0x3
 	adds r1, r5, 0
 	ands r1, r0
@@ -25128,7 +25128,7 @@ sub_805E12C: @ 805E12C
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _0805E15C
-	bl GenerateRandomNumber
+	bl Random
 	movs r1, 0x3
 	ands r1, r0
 	mov r2, sp
@@ -42911,7 +42911,7 @@ s8F_get_random_val: @ 8065F0C
 	lsls r4, 16
 	lsrs r4, 16
 	ldr r5, _08065F3C
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r4, 0
@@ -74678,7 +74678,7 @@ sub_8075374: @ 8075374
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _08075390
-	bl sub_8000724
+	bl ClearPokemonCrySongs
 	movs r0, 0x1
 	b _08075392
 	.align 2, 0
@@ -74696,7 +74696,7 @@ sub_8075398: @ 8075398
 	ldr r0, _080753AC
 	ldr r0, [r0]
 	bl m4aMPlayStop
-	bl sub_8000724
+	bl ClearPokemonCrySongs
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -74723,7 +74723,7 @@ sub_80753C4: @ 80753C4
 	bl sub_81DF594
 	cmp r0, 0
 	bne _080753E0
-	bl sub_8000724
+	bl ClearPokemonCrySongs
 	movs r0, 0
 	b _080753E2
 	.align 2, 0

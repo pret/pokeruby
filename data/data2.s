@@ -5,36 +5,6 @@
 
 	.section .rodata
 
-	.global gGameVersion
-gGameVersion: @ 81E280C
-	.byte 2 @ Ruby
-
-	.global gGameLanguage
-gGameLanguage: @ 81E280D
-	.byte 2 @ English
-
-@ compile date/time
-	.align 2
-	.asciz "2002 10 15 20:34"
-
-	.align 2
-	.global gIntrTableTemplate
-gIntrTableTemplate: @ 81E2824
-	.4byte SerialIntr
-	.4byte Timer3Intr
-	.4byte HBlankIntr
-	.4byte VBlankIntr
-	.4byte VCountIntr
-	.4byte IntrDummy
-	.4byte IntrDummy
-	.4byte IntrDummy
-	.4byte IntrDummy
-	.4byte IntrDummy
-	.4byte IntrDummy
-	.4byte IntrDummy
-	.4byte IntrDummy
-	.4byte IntrDummy
-
 @ Unreferenced error message.
 @ It means "The DMA transfer request table has exceeded its limit."
 	.string "DMA OVER\n"

@@ -180,7 +180,7 @@ sub_80071A4: @ 80071A4
 	ldr r6, _0800725C
 	movs r5, 0xFF
 _080071E4:
-	bl GenerateRandomNumber
+	bl Random
 	adds r1, r4, r6
 	lsls r0, 16
 	lsrs r0, 16

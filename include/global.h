@@ -35,7 +35,8 @@ struct SaveBlock2
     u8 playTimeMinutes;
     u8 playTimeSeconds;
     u8 playTimeVBlanks;
-    u8 filler[0x85];
+    u8 optionsButtonMode;
+    u8 filler[0x84];
     struct Time localTimeOffset;
 };
 

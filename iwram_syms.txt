@@ -13,7 +13,15 @@ gPlayTimeCounterState = 0x300057C;
 
 gUnknownStringVar = 0x3002900;
 
+gUnknown_3002A20 = 0x3002A20;
+gUnknown_3002A60 = 0x3002A60;
+gUnknown_3002F90 = 0x3002F90;
+gUnknown_3003040 = 0x3003040;
+gUnknown_30033A9 = 0x30033A9;
+
 gLocalTime = 0x3004038;
+
+gUnknown_3004820 = 0x3004820;
 
 gTasks = 0x3004B20;
 
