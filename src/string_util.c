@@ -469,13 +469,13 @@ u8 *ExpandPlaceholder_RivalName()
 }
 
 #define VERSION_DEPENDENT_PLACEHOLDER_LIST \
-    X(Version,          Ruby,    Sapphire) \
-    X(EvilTeam,         Magma,   Aqua)     \
-    X(GoodTeam,         Aqua,    Magma)    \
-    X(EvilTeamLeader,   Maxie,   Archie)   \
-    X(GoodTeamLeader,   Archie,  Maxie)    \
-    X(CurVersionMascot, Groudon, Kyogre)   \
-    X(OppVersionMascot, Kyogre,  Groudon)
+    X(Version,       Ruby,    Sapphire)    \
+    X(EvilTeam,      Magma,   Aqua)        \
+    X(GoodTeam,      Aqua,    Magma)       \
+    X(EvilLeader,    Maxie,   Archie)      \
+    X(GoodLeader,    Archie,  Maxie)       \
+    X(EvilLegendary, Groudon, Kyogre)      \
+    X(GoodLegendary, Kyogre,  Groudon)
 
 #ifdef SAPPHIRE
 #define X(ph, r, s) \
