@@ -3273,12 +3273,12 @@ gUnknown_083A05EC: @ 83A05EC
 gUnknown_083A05F1: @ 83A05F1
 	.incbin "baserom.gba", 0x003a05f1, 0x7
 
-@ 83A05F8
-	.include "data/pokedex_entries.s"
+	.global gUnknown_083A05F8
+gUnknown_083A05F8: @ 83A05F8
+	.string "$"
 
-	.global gUnknown_083B1858
-gUnknown_083B1858: @ 83B1858
-	.incbin "baserom.gba", 0x003b1858, 0x366c
+@ 83A05F9
+	.include "data/pokedex_entries.s"
 
 	.global gUnknown_083B4EC4
 gUnknown_083B4EC4: @ 83B4EC4

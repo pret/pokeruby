@@ -257,21 +257,21 @@ PKMN      = 53 54
 POKEBLOCK = 55 56 57 58 59
 
 @ string placeholders
-@ unknown           (FD 00)
-PLAYER             = FD 01
-STR_VAR_1          = FD 02
-STR_VAR_2          = FD 03
-STR_VAR_3          = FD 04
-@ unknown           (FD 05)
-RIVAL              = FD 06
+@ unknown       (FD 00)
+PLAYER         = FD 01
+STR_VAR_1      = FD 02
+STR_VAR_2      = FD 03
+STR_VAR_3      = FD 04
+@ unknown       (FD 05)
+RIVAL          = FD 06
 @ version-dependent strings
-VERSION            = FD 07 @ "RUBY"    / "SAPPHIRE"
-EVIL_TEAM          = FD 08 @ "MAGMA"   / "AQUA"
-GOOD_TEAM          = FD 09 @ "AQUA"    / "MAGMA"
-EVIL_TEAM_LEADER   = FD 0A @ "MAXIE"   / "ARCHIE"
-GOOD_TEAM_LEADER   = FD 0B @ "ARCHIE"  / "MAXIE"
-CUR_VERSION_MASCOT = FD 0C @ "GROUDON" / "KYOGRE"
-OPP_VERSION_MASCOT = FD 0D @ "KYOGRE"  / "GROUDON"
+VERSION        = FD 07 @ "RUBY"    / "SAPPHIRE"
+EVIL_TEAM      = FD 08 @ "MAGMA"   / "AQUA"
+GOOD_TEAM      = FD 09 @ "AQUA"    / "MAGMA"
+EVIL_LEADER    = FD 0A @ "MAXIE"   / "ARCHIE"
+GOOD_LEADER    = FD 0B @ "ARCHIE"  / "MAXIE"
+EVIL_LEGENDARY = FD 0C @ "GROUDON" / "KYOGRE"
+GOOD_LEGENDARY = FD 0D @ "KYOGRE"  / "GROUDON"
 
 @ indicates the end of a town/city name (before " TOWN" or " CITY")
 NAME_END = FC 00

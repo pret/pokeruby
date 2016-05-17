@@ -37,7 +37,7 @@ gExpandPlaceholderFuncTable: @ 81E72F8
 	.4byte ExpandPlaceholder_Version
 	.4byte ExpandPlaceholder_EvilTeam
 	.4byte ExpandPlaceholder_GoodTeam
-	.4byte ExpandPlaceholder_EvilTeamLeader
-	.4byte ExpandPlaceholder_GoodTeamLeader
-	.4byte ExpandPlaceholder_CurVersionMascot
-	.4byte ExpandPlaceholder_OppVersionMascot
+	.4byte ExpandPlaceholder_EvilLeader
+	.4byte ExpandPlaceholder_GoodLeader
+	.4byte ExpandPlaceholder_EvilLegendary
+	.4byte ExpandPlaceholder_GoodLegendary

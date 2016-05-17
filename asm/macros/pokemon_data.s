@@ -1,8 +1,8 @@
-	.macro pokedex_entry category_name, height, width, text_pointer, pokemon_scale, pokemon_offset, trainer_scale, trainer_offset
-	.charmapstr "\category_name", 12
+	.macro pokedex_entry pokemon_name, height, width, pokemon_scale, pokemon_offset, trainer_scale, trainer_offset
 	.2byte \height @ in decimeters
 	.2byte \width @ in hectograms
-	.4byte \text_pointer
+	.4byte DexDescription_\pokemon_name\()_1
+	.4byte DexDescription_\pokemon_name\()_2
 	.2byte 0 @ unused
 	.2byte \pokemon_scale
 	.2byte \pokemon_offset
