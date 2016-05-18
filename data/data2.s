@@ -10056,18 +10056,17 @@ gUnknown_084118A0: @ 84118A0
 gUnknown_084118D1: @ 84118D1
 @ replacing .incbin "baserom.gba", 0x004118d1, 0x34
 	.string "The in-game clock adjustment system\nis now useable.$"
-
+	
 	.global gUnknown_08411905
-gUnknown_08411905: @ 8411905
+	gUnknown_08411905: @ 8411905
 @ replacing .incbin "baserom.gba", 0x00411905, 0x27
-	.string "SAVING...\nDON’T TURN OFF THE POWER.$"
-	.string " "
+    .string "SAVING...\nDON’T TURN OFF THE POWER.$"
 
-.align 2
-	.global gUnknown_0841192C
+    .align 2
+    .global gUnknown_0841192C
 gUnknown_0841192C: @ 841192C
-@ replacing .incbin "baserom.gba", 0x0041192c, 0x14
-	.incbin "baserom.gba", 0x0041192c, 0x14
+  @ replacing .incbin "baserom.gba", 0x0041192c, 0x14
+  .incbin "baserom.gba", 0x0041192c, 0x14
 
 	.global gUnknown_08411940
 gUnknown_08411940: @ 8411940
