@@ -8802,187 +8802,187 @@ gUnknown_0840EF0C: @ 840EF0C
 
 	.global gUnknown_0840EF72
 gUnknown_0840EF72: @ 840EF72
-	.incbin "baserom.gba", 0x0040ef72, 0x3
+	.string "HP$"
 
 	.global gUnknown_0840EF75
 gUnknown_0840EF75: @ 840EF75
-	.incbin "baserom.gba", 0x0040ef75, 0x8
+	.string "SP. ATK$"
 
 	.global gUnknown_0840EF7D
 gUnknown_0840EF7D: @ 840EF7D
-	.incbin "baserom.gba", 0x0040ef7d, 0x8
+	.string "SP. DEF$"
 
 	.global gUnknown_0840EF85
 gUnknown_0840EF85: @ 840EF85
-	.incbin "baserom.gba", 0x0040ef85, 0x1c
+	.string "It won’t have any effect.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840EFA1
 gUnknown_0840EFA1: @ 840EFA1
-	.incbin "baserom.gba", 0x0040efa1, 0x2b
+	.string "This item can’t be used on\nthat POKéMON.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840EFCC
 gUnknown_0840EFCC: @ 840EFCC
-	.incbin "baserom.gba", 0x0040efcc, 0x1c
+	.string "{STR_VAR_1} can’t be switched\nout!{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840EFE8
 gUnknown_0840EFE8: @ 840EFE8
-	.incbin "baserom.gba", 0x0040efe8, 0x1b
+	.string "{STR_VAR_1} is already\nin battle!{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F003
 gUnknown_0840F003: @ 840F003
-	.incbin "baserom.gba", 0x0040f003, 0x20
+	.string "{STR_VAR_1} has already been\nselected.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F023
 gUnknown_0840F023: @ 840F023
-	.incbin "baserom.gba", 0x0040f023, 0x23
+	.string "{STR_VAR_1} has no energy\nleft to battle!{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F046
 gUnknown_0840F046: @ 840F046
-	.incbin "baserom.gba", 0x0040f046, 0x33
+	.string "You can’t switch {STR_VAR_1}’s\nPOKéMON with one of yours!{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F079
 gUnknown_0840F079: @ 840F079
-	.incbin "baserom.gba", 0x0040f079, 0x17
+	.string "An EGG can’t battle!{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F090
 gUnknown_0840F090: @ 840F090
-	.incbin "baserom.gba", 0x0040f090, 0x32
+	.string "This can’t be used until a new\nBADGE is obtained.$"
 
 	.global gUnknown_0840F0C2
 gUnknown_0840F0C2: @ 840F0C2
-	.incbin "baserom.gba", 0x0040f0c2, 0x26
+	.string "No more than three POKéMON\nmay enter.$"
 
 	.global gUnknown_0840F0E8
 gUnknown_0840F0E8: @ 840F0E8
-	.incbin "baserom.gba", 0x0040f0e8, 0x22
+	.string "Send the removed MAIL to\nyour PC?$"
 
 	.global gUnknown_0840F10A
 gUnknown_0840F10A: @ 840F10A
-	.incbin "baserom.gba", 0x0040f10a, 0x20
+	.string "The MAIL was sent to your PC.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F12A
 gUnknown_0840F12A: @ 840F12A
-	.incbin "baserom.gba", 0x0040f12a, 0x1d
+	.string "Your PC’s MAILBOX is full.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F147
 gUnknown_0840F147: @ 840F147
-	.incbin "baserom.gba", 0x0040f147, 0x38
+	.string "If the MAIL is removed, the\nmessage will be lost. Okay?$"
 
 	.global gUnknown_0840F17F
 gUnknown_0840F17F: @ 840F17F
-	.incbin "baserom.gba", 0x0040f17f, 0x2f
+	.string "MAIL must be removed before\nholding an item.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F1AE
 gUnknown_0840F1AE: @ 840F1AE
-	.incbin "baserom.gba", 0x0040f1ae, 0x1f
+	.string "{STR_VAR_1} was given the\n{STR_VAR_2} to hold.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F1CD
 gUnknown_0840F1CD: @ 840F1CD
-	.incbin "baserom.gba", 0x0040f1cd, 0x46
+	.string "{STR_VAR_1} is already holding\none {STR_VAR_2}.\pWould you like to switch the\ntwo items?$"
 
 	.global gUnknown_0840F213
 gUnknown_0840F213: @ 840F213
-	.incbin "baserom.gba", 0x0040f213, 0x1d
+	.string "{STR_VAR_1} isn’t\nholding anything.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F230
 gUnknown_0840F230: @ 840F230
-	.incbin "baserom.gba", 0x0040f230, 0x1b
+	.string "Received the {STR_VAR_2}\nfrom {STR_VAR_1}.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F24B
 gUnknown_0840F24B: @ 840F24B
-	.incbin "baserom.gba", 0x0040f24b, 0x23
+	.string "MAIL was taken from the\nPOKéMON.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F26E
 gUnknown_0840F26E: @ 840F26E
-	.incbin "baserom.gba", 0x0040f26e, 0x2d
+	.string "The {STR_VAR_2} was taken and\nreplaced with the {STR_VAR_1}.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F29B
 gUnknown_0840F29B: @ 840F29B
-	.incbin "baserom.gba", 0x0040f29b, 0x38
+	.string "This POKéMON is holding an item.\nIt cannot hold MAIL.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F2D3
 gUnknown_0840F2D3: @ 840F2D3
-	.incbin "baserom.gba", 0x0040f2d3, 0x29
+	.string "MAIL was transferred from\nthe MAILBOX.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F2FC
 gUnknown_0840F2FC: @ 840F2FC
-	.incbin "baserom.gba", 0x0040f2fc, 0x3c
+	.string "The BAG is full. The POKéMON’s\nitem could not be removed.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F338
 gUnknown_0840F338: @ 840F338
-	.incbin "baserom.gba", 0x0040f338, 0xf
+	.string "{STR_VAR_1} learned\n{STR_VAR_2}!$"
 
 	.global gUnknown_0840F347
 gUnknown_0840F347: @ 840F347
-	.incbin "baserom.gba", 0x0040f347, 0x35
+	.string "{STR_VAR_1} and {STR_VAR_2}\nare not compatible.\p{STR_VAR_2} can’t be learned.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F37C
 gUnknown_0840F37C: @ 840F37C
-	.incbin "baserom.gba", 0x0040f37c, 0x74
+	.string "{STR_VAR_1} wants to learn the\nmove {STR_VAR_2}.\pHowever, {STR_VAR_1} already\nknows four moves.\pShould a move be deleted and\nreplaced with {STR_VAR_2}?$"
 
 	.global gUnknown_0840F3F0
 gUnknown_0840F3F0: @ 840F3F0
-	.incbin "baserom.gba", 0x0040f3f0, 0x19
+	.string "Stop trying to teach\n{STR_VAR_2}?$"
 
 	.global gUnknown_0840F409
 gUnknown_0840F409: @ 840F409
-	.incbin "baserom.gba", 0x0040f409, 0x20
+	.string "{STR_VAR_1} did not learn the\nmove {STR_VAR_2}.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F429
 gUnknown_0840F429: @ 840F429
-	.incbin "baserom.gba", 0x0040f429, 0x22
+	.string "Which move should be forgotten?{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F44B
 gUnknown_0840F44B: @ 840F44B
-	.incbin "baserom.gba", 0x0040f44b, 0x53
+	.string "{PAUSE 32}1, {PAUSE 15}2, and{PAUSE 15}... {PAUSE 15}... {PAUSE 15}... {PAUSE 15}{PLAY_MUSIC 0x38} Poof!\p{STR_VAR_1} forgot how to\nuse {STR_VAR_2}.\pAnd...{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F49E
 gUnknown_0840F49E: @ 840F49E
-	.incbin "baserom.gba", 0x0040f49e, 0x17
+	.string "{STR_VAR_1} already knows\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F4B5
 gUnknown_0840F4B5: @ 840F4B5
-	.incbin "baserom.gba", 0x0040f4b5, 0x25
+	.string "{STR_VAR_1}’s HP was restored by\n{STR_VAR_2} points.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F4DA
 gUnknown_0840F4DA: @ 840F4DA
-	.incbin "baserom.gba", 0x0040f4da, 0x21
+	.string "{STR_VAR_1} was cured of its\npoisoning.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F4FB
 gUnknown_0840F4FB: @ 840F4FB
-	.incbin "baserom.gba", 0x0040f4fb, 0x1d
+	.string "{STR_VAR_1} was cured of\nparalysis.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F518
 gUnknown_0840F518: @ 840F518
-	.incbin "baserom.gba", 0x0040f518, 0xe
+	.string "{STR_VAR_1} woke up.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F526
 gUnknown_0840F526: @ 840F526
-	.incbin "baserom.gba", 0x0040f526, 0x18
+	.string "{STR_VAR_1}’s burn was healed.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F53E
 gUnknown_0840F53E: @ 840F53E
-	.incbin "baserom.gba", 0x0040f53e, 0x15
+	.string "{STR_VAR_1} was thawed out.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F553
 gUnknown_0840F553: @ 840F553
-	.incbin "baserom.gba", 0x0040f553, 0x13
+	.string "PP was restored.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F566
 gUnknown_0840F566: @ 840F566
-	.incbin "baserom.gba", 0x0040f566, 0x16
+	.string "{STR_VAR_1} regained health.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F57C
 gUnknown_0840F57C: @ 840F57C
-	.incbin "baserom.gba", 0x0040f57c, 0x15
+	.string "{STR_VAR_1} became healthy.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F591
 gUnknown_0840F591: @ 840F591
-	.incbin "baserom.gba", 0x0040f591, 0x15
+	.string "{STR_VAR_1}’s PP increased.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F5A6
 gUnknown_0840F5A6: @ 840F5A6
-	.incbin "baserom.gba", 0x0040f5a6, 0x1b
+	.string "{STR_VAR_1} was elevated to\nLv. {STR_VAR_2}.$"
 
 	.global gUnknown_0840F5C1
 gUnknown_0840F5C1: @ 840F5C1
