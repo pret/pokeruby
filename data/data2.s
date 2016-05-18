@@ -8196,59 +8196,75 @@ gExpandedPlaceholder_May: @ 840DCC0
 
 	.global gUnknown_0840DCC4
 gUnknown_0840DCC4: @ 840DCC4
-	.incbin "baserom.gba", 0x0040dcc4, 0x4
+	.string "EGG$"
 
 	.global gUnknown_0840DCC8
 gUnknown_0840DCC8: @ 840DCC8
-	.incbin "baserom.gba", 0x0040dcc8, 0x8
+	.string "POKéMON$"
 
 	.global gUnknown_0840DCD0
 gUnknown_0840DCD0: @ 840DCD0
-	.incbin "baserom.gba", 0x0040dcd0, 0x9
+	.string "NEW GAME$"
 
 	.global gUnknown_0840DCD9
 gUnknown_0840DCD9: @ 840DCD9
-	.incbin "baserom.gba", 0x0040dcd9, 0x9
+	.string "CONTINUE$"
 
 	.global gUnknown_0840DCE2
 gUnknown_0840DCE2: @ 840DCE2
-	.incbin "baserom.gba", 0x0040dce2, 0x7
+	.string "OPTION$"
 
 	.global gUnknown_0840DCE9
 gUnknown_0840DCE9: @ 840DCE9
-	.incbin "baserom.gba", 0x0040dce9, 0x198
+	.string "MYSTERY EVENTS$"
+	.string "Updating save file using external\ndata. Please wait.$"
+	.string "The save file has been updated.$"
+	.string "The save file has been updated.\pFurther game data cannot be saved\nto the backup memory.\pPlease exchange the backup memory.\pFor details, please contact the\nNintendo Service Center.$"
+	.string "The save file could not be updated.\pPlease exchange the backup\nmemory.\pFor details, please contact the\nNintendo Service Center.$"
 
 	.global gUnknown_0840DE81
 gUnknown_0840DE81: @ 840DE81
-	.incbin "baserom.gba", 0x0040de81, 0x41
+	.string "The save file is corrupt. The\nprevious save file will be loaded.$"
 
 	.global gUnknown_0840DEC2
 gUnknown_0840DEC2: @ 840DEC2
-	.incbin "baserom.gba", 0x0040dec2, 0x23
+	.string " The save file has been deleted...$" @ there's a blank spot at the beginning of this string. No idea why.
 
 	.global gUnknown_0840DEE5
 gUnknown_0840DEE5: @ 840DEE5
-	.incbin "baserom.gba", 0x0040dee5, 0x2b
+	.string "The 1M sub-circuit board is\nnot installed.$"
 
 	.global gUnknown_0840DF10
 gUnknown_0840DF10: @ 840DF10
-	.incbin "baserom.gba", 0x0040df10, 0x6c
+	.string "The internal battery has run dry.\nThe game can be played.\pHowever, clock-based events will\nno longer occur.$"
 
 	.global gUnknown_0840DF7C
 gUnknown_0840DF7C: @ 840DF7C
-	.incbin "baserom.gba", 0x0040df7c, 0x7
+	.string "PLAYER$"
 
 	.global gUnknown_0840DF83
 gUnknown_0840DF83: @ 840DF83
-	.incbin "baserom.gba", 0x0040df83, 0x8
+	.string "POKéDEX$"
 
 	.global gUnknown_0840DF8B
 gUnknown_0840DF8B: @ 840DF8B
-	.incbin "baserom.gba", 0x0040df8b, 0x5
+	.string "TIME$"
 
 	.global gUnknown_0840DF90
 gUnknown_0840DF90: @ 840DF90
-	.incbin "baserom.gba", 0x0040df90, 0x67
+	.string "BADGES$"
+	.string "BOY$"
+	.string "GIRL$"
+	.string "NEW NAME$"
+	.string "LANDON$"
+	.string "TERRY$"
+	.string "SETH$"
+	.string "TOM$"
+	.string "TERRA$"
+	.string "KIMMY$"
+	.string "NICOLA$"
+	.string "SARA$"
+	.string "This is what we call\na POKéMON.$"
 
 	.global gUnknown_0840DFF7
 gUnknown_0840DFF7: @ 840DFF7
@@ -8256,83 +8272,134 @@ gUnknown_0840DFF7: @ 840DFF7
 
 	.global gUnknown_0840DFF9
 gUnknown_0840DFF9: @ 840DFF9
-	.incbin "baserom.gba", 0x0040dff9, 0x1a
+	.string "            ????? POKéMON$" @ why 12 spaces?
 
 	.global gUnknown_0840E013
 gUnknown_0840E013: @ 840E013
-	.incbin "baserom.gba", 0x0040e013, 0xa
+	.incbin "baserom.gba", 0x0040e013, 0xa @ unknown size of dummy pokemon
 
 	.global gUnknown_0840E01D
 gUnknown_0840E01D: @ 840E01D
-	.incbin "baserom.gba", 0x0040e01d, 0xd
+	.string "????.? lbs.$"
+	.string "$"
 
 	.global gUnknown_0840E02A
 gUnknown_0840E02A: @ 840E02A
-	.incbin "baserom.gba", 0x0040e02a, 0xb
+	.incbin "baserom.gba", 0x0040e02a, 0xb @ unknown cry of dummy pokemon
 
 	.global gUnknown_0840E035
 gUnknown_0840E035: @ 840E035
-	.incbin "baserom.gba", 0x0040e035, 0x12
+	.string "SIZE COMPARED TO $"
 
 	.global gUnknown_0840E047
 gUnknown_0840E047: @ 840E047
-	.incbin "baserom.gba", 0x0040e047, 0x20
+	.string "POKéDEX registration completed.$"
 
 	.global gUnknown_0840E067
 gUnknown_0840E067: @ 840E067
-	.incbin "baserom.gba", 0x0040e067, 0x1a
+	.string "Searching...\nPlease wait.$"
 
 	.global gUnknown_0840E081
 gUnknown_0840E081: @ 840E081
-	.incbin "baserom.gba", 0x0040e081, 0x12
+	.string "Search completed.$"
 
 	.global gUnknown_0840E093
 gUnknown_0840E093: @ 840E093
-	.incbin "baserom.gba", 0x0040e093, 0x3bc
-
+	.string "No matching POKéMON were found.$"
+	.string "Search for POKéMON based on\nselected parameters.$"
+	.string "Switch POKéDEX listings.$"
+	.string "Return to the POKéDEX.$"
+	.string "Select the POKéDEX mode.$"
+	.string "Select the POKéDEX listing mode.$"
+	.string "List by the first letter in the name.\n/Spotted POKéMON only.$"
+	.string "List by body color.\n/Spotted POKéMON only.$"
+	.string "List by type.\n/Owned POKéMON only.$"
+	.string "Execute search/switch.$"
+	.string "HOENN DEX$"
+	.string "NATIONAL DEX$"
+	.string "NUMERICAL MODE$"
+	.string "A TO Z MODE$"
+	.string "HEAVIEST MODE$"
+	.string "LIGHTEST MODE$"
+	.string "TALLEST MODE$"
+	.string "SMALLEST MODE$"
+	.string "ABC$"
+	.string "DEF$"
+	.string "GHI$"
+	.string "JKL$"
+	.string "MNO$"
+	.string "PQR$"
+	.string "STU$"
+	.string "VWX$"
+	.string "YZ$"
+	.string "RED$"
+	.string "BLUE$"
+	.string "YELLOW$"
+	.string "GREEN$"
+	.string "BLACK$"
+	.string "BROWN$"
+	.string "PURPLE$"
+	.string "GRAY$"
+	.string "WHITE$"
+	.string "PINK$"
+	.string "HOENN region’s POKéDEX$"
+	.string "National edition POKéDEX$"
+	.string "POKéMON are listed according to their\nnumber.$"
+	.string "Spotted and owned POKéMON are listed\nalphabetically.$"
+	.string "Owned POKéMON are listed from the\nheaviest to the lightest.$"
+	.string "Owned POKéMON are listed from the\nlightest to the heaviest.$"
+	.string "Owned POKéMON are listed from the\ntallest to the smallest.$"
+	.string "Owned POKéMON are listed from the\nsmallest to the tallest.$"
+	.string "$"
+	.string "DON’T SPECIFY.$"
+	.string "NONE$"
+	.string "{RIGHT_ARROW}$" @ its a black arrow pointing right
+	.string " $"
+	
 	.global gUnknown_0840E44F
 gUnknown_0840E44F: @ 840E44F
-	.incbin "baserom.gba", 0x0040e44f, 0x7e
+	.string "Welcome to the HALL OF FAME!$"
+	.string "Spotted POKéMON: {STR_VAR_1}!\nOwned POKéMON: {STR_VAR_2}!\pPROF. BIRCH’s POKéDEX rating!\pPROF. BIRCH: Let’s see...\p$"
 
 	.global gUnknown_0840E4CD
 gUnknown_0840E4CD: @ 840E4CD
-	.incbin "baserom.gba", 0x0040e4cd, 0x24
+	.string "SAVING...\nDON’T TURN OFF THE POWER.$"
 
 	.global gUnknown_0840E4F1
 gUnknown_0840E4F1: @ 840E4F1
-	.incbin "baserom.gba", 0x0040e4f1, 0x22
+	.string "The HALL OF FAME data is corrupt.$"
 
 	.global gUnknown_0840E513
 gUnknown_0840E513: @ 840E513
-	.incbin "baserom.gba", 0x0040e513, 0x12
+	.string "HALL OF FAME No. $"
 
 	.global gUnknown_0840E525
 gUnknown_0840E525: @ 840E525
-	.incbin "baserom.gba", 0x0040e525, 0x22
+	.string "LEAGUE CHAMPION!\nCONGRATULATIONS!$"
 
 	.global gUnknown_0840E547
 gUnknown_0840E547: @ 840E547
-	.incbin "baserom.gba", 0x0040e547, 0x5
+	.string "No. $"
 
 	.global gUnknown_0840E54C
 gUnknown_0840E54C: @ 840E54C
-	.incbin "baserom.gba", 0x0040e54c, 0x5
+	.string "Lv. $"
 
 	.global gUnknown_0840E551
 gUnknown_0840E551: @ 840E551
-	.incbin "baserom.gba", 0x0040e551, 0x8
+	.string "IDNo. /$"
 
 	.global gUnknown_0840E559
 gUnknown_0840E559: @ 840E559
-	.incbin "baserom.gba", 0x0040e559, 0x7
+	.string "NAME /$"
 
 	.global gUnknown_0840E560
 gUnknown_0840E560: @ 840E560
-	.incbin "baserom.gba", 0x0040e560, 0x8
+	.string "IDNo. /$" @ identical string for no reason?
 
 	.global gUnknown_0840E568
 gUnknown_0840E568: @ 840E568
-	.incbin "baserom.gba", 0x0040e568, 0x43
+	.string "{HIGHLIGHT WHITE2}{COLOR DARK_GREY}PROF. BIRCH is in trouble!\nRelease a POKéMON and rescue him!$"
 
 	.global gUnknown_0840E5AB
 gUnknown_0840E5AB: @ 840E5AB
