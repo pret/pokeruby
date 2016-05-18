@@ -8596,175 +8596,209 @@ gUnknown_0840E94E: @ 840E94E
 
 	.global gUnknown_0840E992
 gUnknown_0840E992: @ 840E992
-	.incbin "baserom.gba", 0x0040e992, 0x36
+	.string "The machine’s indicating something\nright underfoot!{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840E9C8
 gUnknown_0840E9C8: @ 840E9C8
-	.incbin "baserom.gba", 0x0040e9c8, 0x2d
+	.string "... ... ... ... Nope!\nThere’s no response.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840E9F5
 gUnknown_0840E9F5: @ 840E9F5
-	.incbin "baserom.gba", 0x0040e9f5, 0x11
+	.string "Your COINS:\n{STR_VAR_1}{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840EA06
 gUnknown_0840EA06: @ 840EA06
-	.incbin "baserom.gba", 0x0040ea06, 0x10
+	.string "Booted up a TM.$"
 
 	.global gUnknown_0840EA16
 gUnknown_0840EA16: @ 840EA16
-	.incbin "baserom.gba", 0x0040ea16, 0x11
+	.string "Booted up an HM.$"
 
 	.global gUnknown_0840EA27
 gUnknown_0840EA27: @ 840EA27
-	.incbin "baserom.gba", 0x0040ea27, 0x28
+	.string "It contained\n{STR_VAR_1}.\pTeach {STR_VAR_1}\nto a POKéMON?$"
 
 	.global gUnknown_0840EA4F
 gUnknown_0840EA4F: @ 840EA4F
-	.incbin "baserom.gba", 0x0040ea4f, 0x12
+	.string "{PLAYER} used the\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840EA61
 gUnknown_0840EA61: @ 840EA61
-	.incbin "baserom.gba", 0x0040ea61, 0x34
+	.string "But the effects of a REPEL lingered\nfrom earlier.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840EA95
 gUnknown_0840EA95: @ 840EA95
-	.incbin "baserom.gba", 0x0040ea95, 0x2e
+	.string "{PLAYER} used the\n{STR_VAR_2}.\pWild POKéMON will be lured.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840EAC3
 gUnknown_0840EAC3: @ 840EAC3
-	.incbin "baserom.gba", 0x0040eac3, 0x31
+	.string "{PLAYER} used the\n{STR_VAR_2}.\pWild POKéMON will be repelled.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840EAF4
 gUnknown_0840EAF4: @ 840EAF4
-	.incbin "baserom.gba", 0x0040eaf4, 0x13
+	.string "The BOX is full.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840EB07
 gUnknown_0840EB07: @ 840EB07
-	.incbin "baserom.gba", 0x0040eb07, 0x7
+	.string "SIZE /$"
 
 	.global gUnknown_0840EB0E
 gUnknown_0840EB0E: @ 840EB0E
-	.incbin "baserom.gba", 0x0040eb0e, 0x7
+	.string "FIRM /$"
 
 	.global gUnknown_0840EB15
 gUnknown_0840EB15: @ 840EB15
-	.incbin "baserom.gba", 0x0040eb15, 0xd8
+	.string "{STR_VAR_1}.{STR_VAR_2}”$"
+	.string "Very soft$"
+	.string "Soft$"
+	.string "Hard$"
+	.string "Very hard$"
+	.string "Super hard$"
+	.string "RED {POKEBLOCK}$"
+	.string "BLUE {POKEBLOCK}$"
+	.string "PINK {POKEBLOCK}$"
+	.string "GREEN {POKEBLOCK}$"
+	.string "YELLOW {POKEBLOCK}$"
+	.string "PURPLE {POKEBLOCK}$"
+	.string "INDIGO {POKEBLOCK}$"
+	.string "BROWN {POKEBLOCK}$"
+	.string "LITEBLUE {POKEBLOCK}$"
+	.string "OLIVE {POKEBLOCK}$"
+	.string "GRAY {POKEBLOCK}$"
+	.string "BLACK {POKEBLOCK}$"
+	.string "WHITE {POKEBLOCK}$"
+	.string "GOLD {POKEBLOCK}$"
 
 	.global gUnknown_0840EBED
 gUnknown_0840EBED: @ 840EBED
-	.incbin "baserom.gba", 0x0040ebed, 0x6
+	.string "SPICY$"
 
 	.global gUnknown_0840EBF3
 gUnknown_0840EBF3: @ 840EBF3
-	.incbin "baserom.gba", 0x0040ebf3, 0x4
+	.string "DRY$"
 
 	.global gUnknown_0840EBF7
 gUnknown_0840EBF7: @ 840EBF7
-	.incbin "baserom.gba", 0x0040ebf7, 0x6
+	.string "SWEET$"
 
 	.global gUnknown_0840EBFD
 gUnknown_0840EBFD: @ 840EBFD
-	.incbin "baserom.gba", 0x0040ebfd, 0x7
+	.string "BITTER$"
 
 	.global gUnknown_0840EC04
 gUnknown_0840EC04: @ 840EC04
-	.incbin "baserom.gba", 0x0040ec04, 0x10
+	.string "SOUR$"
+	.string "TASTY$"
+	.string "FEEL$"
 
 	.global gUnknown_0840EC14
 gUnknown_0840EC14: @ 840EC14
-	.incbin "baserom.gba", 0x0040ec14, 0xb
+	.string "Stow CASE.$"
 
 	.global gUnknown_0840EC1F
 gUnknown_0840EC1F: @ 840EC1F
-	.incbin "baserom.gba", 0x0040ec1f, 0x14
+	.string "Throw away this\n{STR_VAR_1}?$"
 
 	.global gUnknown_0840EC33
 gUnknown_0840EC33: @ 840EC33
-	.incbin "baserom.gba", 0x0040ec33, 0x18
+	.string "The {STR_VAR_1}\nwas thrown away.$"
 
 	.global gUnknown_0840EC4B
 gUnknown_0840EC4B: @ 840EC4B
-	.incbin "baserom.gba", 0x0040ec4b, 0x11
+	.string "{STR_VAR_1} ate the\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840EC5C
 gUnknown_0840EC5C: @ 840EC5C
-	.incbin "baserom.gba", 0x0040ec5c, 0x19
+	.string "{STR_VAR_1} happily ate the\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840EC75
 gUnknown_0840EC75: @ 840EC75
-	.incbin "baserom.gba", 0x0040ec75, 0x2c
+	.string "{STR_VAR_1} disdainfully ate the\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}$"
+	.string "BUY$"
+	.string "SELL$"
+	.string "QUIT$"
 
 	.global gUnknown_0840ECA1
 gUnknown_0840ECA1: @ 840ECA1
-	.incbin "baserom.gba", 0x0040eca1, 0xf
+	.string "Quit shopping.$"
 
 	.global gUnknown_0840ECB0
 gUnknown_0840ECB0: @ 840ECB0
-	.incbin "baserom.gba", 0x0040ecb0, 0x28
+	.string "{STR_VAR_1}? Certainly.\nHow many would you like?$"
 
 	.global gUnknown_0840ECD8
 gUnknown_0840ECD8: @ 840ECD8
-	.incbin "baserom.gba", 0x0040ecd8, 0x29
+	.string "{STR_VAR_1}? And you wanted {STR_VAR_2}?\nThat will be ¥{STR_VAR_3}.$"
 
 	.global gUnknown_0840ED01
 gUnknown_0840ED01: @ 840ED01
-	.incbin "baserom.gba", 0x0040ed01, 0x2b
+	.string "{STR_VAR_1}, is it?\nThat’ll be ¥{STR_VAR_2}. Do you want it?$"
 
 	.global gUnknown_0840ED2C
 gUnknown_0840ED2C: @ 840ED2C
-	.incbin "baserom.gba", 0x0040ed2c, 0x32
+	.string "You wanted {STR_VAR_1}?\nThat’ll be ¥{STR_VAR_2}. Will that be okay?$"
 
 	.global gUnknown_0840ED5E
 gUnknown_0840ED5E: @ 840ED5E
-	.incbin "baserom.gba", 0x0040ed5e, 0x22
+	.string "Here you go!\nThank you very much.$"
 
 	.global gUnknown_0840ED80
 gUnknown_0840ED80: @ 840ED80
-	.incbin "baserom.gba", 0x0040ed80, 0x29
+	.string "Thank you!\nI’ll send it to your home PC.$"
 
 	.global gUnknown_0840EDA9
 gUnknown_0840EDA9: @ 840EDA9
-	.incbin "baserom.gba", 0x0040eda9, 0x29
+	.string "Thanks!\nI’ll send it to your PC at home.$"
 
 	.global gUnknown_0840EDD2
 gUnknown_0840EDD2: @ 840EDD2
-	.incbin "baserom.gba", 0x0040edd2, 0x1f
+	.string "You don’t have enough money.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840EDF1
 gUnknown_0840EDF1: @ 840EDF1
-	.incbin "baserom.gba", 0x0040edf1, 0x23
+	.string "You have no more room for items.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840EE14
 gUnknown_0840EE14: @ 840EE14
-	.incbin "baserom.gba", 0x0040ee14, 0x1c
+	.string "The space for {STR_VAR_1} is full.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840EE30
 gUnknown_0840EE30: @ 840EE30
-	.incbin "baserom.gba", 0x0040ee30, 0x2c
+	.string "Is there anything else I can help\nyou with?$"
 
 	.global gUnknown_0840EE5C
 gUnknown_0840EE5C: @ 840EE5C
-	.incbin "baserom.gba", 0x0040ee5c, 0x23
+	.string "Can I help you with anything else?$"
 
 	.global gUnknown_0840EE7F
 gUnknown_0840EE7F: @ 840EE7F
-	.incbin "baserom.gba", 0x0040ee7f, 0x25
+	.string "I’ll throw in a PREMIER BALL, too.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840EEA4
 gUnknown_0840EEA4: @ 840EEA4
-	.incbin "baserom.gba", 0x0040eea4, 0x20
+	.string "{STR_VAR_2}? Oh, no.\nI can’t buy that.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840EEC4
 gUnknown_0840EEC4: @ 840EEC4
-	.incbin "baserom.gba", 0x0040eec4, 0x25
+	.string "{STR_VAR_2}?\nHow many would you like to sell?$"
 
 	.global gUnknown_0840EEE9
 gUnknown_0840EEE9: @ 840EEE9
-	.incbin "baserom.gba", 0x0040eee9, 0x23
+	.string "I can pay ¥{STR_VAR_1}.\nWould that be okay?$"
 
 	.global gUnknown_0840EF0C
 gUnknown_0840EF0C: @ 840EF0C
-	.incbin "baserom.gba", 0x0040ef0c, 0x66
+	.string "Turned over the {STR_VAR_2}\nand received ¥{STR_VAR_1}.$"
+	.string "¥{STR_VAR_1}$"
+	.string "SHIFT$"
+	.string "SEND OUT$"
+	.string "SWITCH$"
+	.string "SUMMARY$"
+	.string "MOVES$"
+	.string "ENTER$"
+	.string "NO ENTRY$"
+	.string "TAKE$"
+	.string "READ$"
 
 	.global gUnknown_0840EF72
 gUnknown_0840EF72: @ 840EF72
