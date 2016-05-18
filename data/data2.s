@@ -8934,7 +8934,7 @@ gUnknown_0840F429: @ 840F429
 
 	.global gUnknown_0840F44B
 gUnknown_0840F44B: @ 840F44B
-	.string "{PAUSE 32}1, {PAUSE 15}2, and{PAUSE 15}... {PAUSE 15}... {PAUSE 15}... {PAUSE 15}{PLAY_MUSIC 0x38} Poof!\p{STR_VAR_1} forgot how to\nuse {STR_VAR_2}.\pAnd...{PAUSE_UNTIL_PRESS}$"
+	.string "{PAUSE 32}1, {PAUSE 15}2, and{PAUSE 15}... {PAUSE 15}... {PAUSE 15}... {PAUSE 15}{PLAY_MUSIC 0x0038} Poof!\p{STR_VAR_1} forgot how to\nuse {STR_VAR_2}.\pAnd...{PAUSE_UNTIL_PRESS}$" @ there isnt supposed to be a space there, but play_music macro doesnt use little endian, so im forced to add a space
 
 	.global gUnknown_0840F49E
 gUnknown_0840F49E: @ 840F49E
@@ -8986,135 +8986,177 @@ gUnknown_0840F5A6: @ 840F5A6
 
 	.global gUnknown_0840F5C1
 gUnknown_0840F5C1: @ 840F5C1
-	.incbin "baserom.gba", 0x0040f5c1, 0x16
+	.string "{STR_VAR_1}’s {STR_VAR_2} was\nraised.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F5D7
 gUnknown_0840F5D7: @ 840F5D7
-	.incbin "baserom.gba", 0x0040f5d7, 0x23
+	.string "{STR_VAR_1} snapped out of its\nconfusion.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F5FA
 gUnknown_0840F5FA: @ 840F5FA
-	.incbin "baserom.gba", 0x0040f5fa, 0x1cc
+	.string "{STR_VAR_1} got over its\ninfatuation.{PAUSE_UNTIL_PRESS}$"
+	.string "Choose a POKéMON.$"
+	.string "Move to where?$"
+	.string "Teach which POKéMON?$"
+	.string "Use on which POKéMON?$"
+	.string "Give to which POKéMON?$"
+	.string "Do what with {STR_VAR_1}?$"
+	.string "There’s nothing to CUT.$"
+	.string "You can’t SURF here.$"
+	.string "You’re already SURFING.$"
+	.string "Can’t use that here.$"
+	.string "Restore which move?$"
+	.string "Boost PP of which move?$"
+	.string "Do what with an item?$"
+	.string "No POKéMON for battle!$"
+	.string "Choose a POKéMON.$"
+	.string "Not enough HP...$"
+	.string "Three POKéMON are needed.$"
+	.string "POKéMON can’t be the same.$"
+	.string "No identical hold items.$"
+	.string "Teach which POKéMON?$"
 
 	.global gUnknown_0840F7C6
 gUnknown_0840F7C6: @ 840F7C6
-	.incbin "baserom.gba", 0x0040f7c6, 0x7
+	.string "ATTACK$"
 
 	.global gUnknown_0840F7CD
 gUnknown_0840F7CD: @ 840F7CD
-	.incbin "baserom.gba", 0x0040f7cd, 0x8
+	.string "DEFENSE$"
 
 	.global gUnknown_0840F7D5
 gUnknown_0840F7D5: @ 840F7D5
-	.incbin "baserom.gba", 0x0040f7d5, 0x8
+	.string "SP. ATK$"
 
 	.global gUnknown_0840F7DD
 gUnknown_0840F7DD: @ 840F7DD
-	.incbin "baserom.gba", 0x0040f7dd, 0x8
+	.string "SP. DEF$"
 
 	.global gUnknown_0840F7E5
 gUnknown_0840F7E5: @ 840F7E5
-	.incbin "baserom.gba", 0x0040f7e5, 0x6
+	.string "SPEED$"
 
 	.global gUnknown_0840F7EB
 gUnknown_0840F7EB: @ 840F7EB
-	.incbin "baserom.gba", 0x0040f7eb, 0x3
+	.string "HP$"
 
 	.global gUnknown_0840F7EE
 gUnknown_0840F7EE: @ 840F7EE
-	.incbin "baserom.gba", 0x0040f7ee, 0x1
+	.string "$"
 
 	.global gUnknown_0840F7EF
 gUnknown_0840F7EF: @ 840F7EF
-	.incbin "baserom.gba", 0x0040f7ef, 0x4
+	.string "OT/$"
 
 	.global gUnknown_0840F7F3
 gUnknown_0840F7F3: @ 840F7F3
-	.incbin "baserom.gba", 0x0040f7f3, 0x6
+	.string "TYPE/$"
 
 	.global gUnknown_0840F7F9
 gUnknown_0840F7F9: @ 840F7F9
-	.incbin "baserom.gba", 0x0040f7f9, 0x6
+	.string "POWER$"
 
 	.global gUnknown_0840F7FF
 gUnknown_0840F7FF: @ 840F7FF
-	.incbin "baserom.gba", 0x0040f7ff, 0x9
+	.string "ACCURACY$"
 
 	.global gUnknown_0840F808
 gUnknown_0840F808: @ 840F808
-	.incbin "baserom.gba", 0x0040f808, 0x7
+	.string "APPEAL$"
 
 	.global gUnknown_0840F80F
 gUnknown_0840F80F: @ 840F80F
-	.incbin "baserom.gba", 0x0040f80f, 0x4
+	.string "JAM$"
 
 	.global gUnknown_0840F813
 gUnknown_0840F813: @ 840F813
-	.incbin "baserom.gba", 0x0040f813, 0x7
+	.string "STATUS$"
 
 	.global gUnknown_0840F81A
 gUnknown_0840F81A: @ 840F81A
-	.incbin "baserom.gba", 0x0040f81a, 0xc
+	.string "EXP. POINTS$"
 
 	.global gUnknown_0840F826
 gUnknown_0840F826: @ 840F826
-	.incbin "baserom.gba", 0x0040f826, 0x9
+	.string "NEXT LV.$"
 
 	.global gUnknown_0840F82F
 gUnknown_0840F82F: @ 840F82F
-	.incbin "baserom.gba", 0x0040f82f, 0x55
+	.string "RIBBONS: 00$"
+	.string "EVENT$"
+	.string "SWITCH$"
+	.string "POKéMON INFO$"
+	.string "POKéMON SKILLS$"
+	.string "BATTLE MOVES$"
+	.string "C0NTEST MOVES$" @why the l33t 0, that's stupid
+	.string "INFO$"
 
 	.global gUnknown_0840F884
 gUnknown_0840F884: @ 840F884
-	.incbin "baserom.gba", 0x0040f884, 0x37
+	.string "It looks like this EGG will\ntake a long time to hatch.$"
 
 	.global gUnknown_0840F8BB
 gUnknown_0840F8BB: @ 840F8BB
-	.incbin "baserom.gba", 0x0040f8bb, 0x33
+	.string "What will hatch from this?\nIt will take some time.$"
 
 	.global gUnknown_0840F8EE
 gUnknown_0840F8EE: @ 840F8EE
-	.incbin "baserom.gba", 0x0040f8ee, 0x2d
+	.string "It moves occasionally.\nIt should hatch soon.$"
 
 	.global gUnknown_0840F91B
 gUnknown_0840F91B: @ 840F91B
-	.incbin "baserom.gba", 0x0040f91b, 0x29
+	.string "It’s making sounds.\nIt’s about to hatch!$"
 
 	.global gUnknown_0840F944
 gUnknown_0840F944: @ 840F944
-	.incbin "baserom.gba", 0x0040f944, 0x21
+	.string "HM moves can’t be\nforgotten now.$"
 
 	.global gUnknown_0840F965
 gUnknown_0840F965: @ 840F965
-	.incbin "baserom.gba", 0x0040f965, 0x8
+	.string "’s BASE$"
 
 	.global gUnknown_0840F96D
 gUnknown_0840F96D: @ 840F96D
-	.incbin "baserom.gba", 0x0040f96d, 0x2b
+	.string "Is it okay to delete {STR_VAR_1}\nfrom the REGISTRY?$"
 
 	.global gUnknown_0840F998
 gUnknown_0840F998: @ 840F998
-	.incbin "baserom.gba", 0x0040f998, 0x23
+	.string "The registered data was deleted.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F9BB
 gUnknown_0840F9BB: @ 840F9BB
-	.incbin "baserom.gba", 0x0040f9bb, 0xa9
+	.string "There is no REGISTRY.{PAUSE_UNTIL_PRESS}$"
+	.string "DEL REGIST.$"
+	.string "DECORATE$"
+	.string "PUT AWAY$"
+	.string "TOSS$"
+	.string "Put out the selected decoration item.$"
+	.string "Store the chosen decoration in the PC.$"
+	.string "Throw away unwanted decorations.$"
 
 	.global gUnknown_0840FA64
 gUnknown_0840FA64: @ 840FA64
-	.incbin "baserom.gba", 0x0040fa64, 0x4e
+	.string "There are no decorations.{PAUSE_UNTIL_PRESS}$"
+	.string "DESK$"
+	.string "CHAIR$"
+	.string "PLANT$"
+	.string "ORNAMENT$"
+	.string "MAT$"
+	.string "POSTER$"
+	.string "DOLL$"
+	.string "CUSHION$"
 
 	.global gUnknown_0840FAB2
 gUnknown_0840FAB2: @ 840FAB2
-	.incbin "baserom.gba", 0x0040fab2, 0x5
+	.string "GOLD$"
 
 	.global gUnknown_0840FAB7
 gUnknown_0840FAB7: @ 840FAB7
-	.incbin "baserom.gba", 0x0040fab7, 0x7
+	.string "SILVER$"
 
 	.global gUnknown_0840FABE
 gUnknown_0840FABE: @ 840FABE
-	.incbin "baserom.gba", 0x0040fabe, 0xf
+	.string "Place it here?$"
 
 	.global gUnknown_0840FACD
 gUnknown_0840FACD: @ 840FACD
