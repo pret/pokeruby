@@ -10061,8 +10061,9 @@ gUnknown_084118D1: @ 84118D1
 gUnknown_08411905: @ 8411905
 @ replacing .incbin "baserom.gba", 0x00411905, 0x27
 	.string "SAVING...\nDON’T TURN OFF THE POWER.$"
-	.string "   "
+	.string " "
 
+.align 2
 	.global gUnknown_0841192C
 gUnknown_0841192C: @ 841192C
 @ replacing .incbin "baserom.gba", 0x0041192c, 0x14
