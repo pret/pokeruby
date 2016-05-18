@@ -8403,71 +8403,84 @@ gUnknown_0840E568: @ 840E568
 
 	.global gUnknown_0840E5AB
 gUnknown_0840E5AB: @ 840E5AB
-	.incbin "baserom.gba", 0x0040e5ab, 0x22
+	.string "{HIGHLIGHT WHITE2}{COLOR DARK_GREY}Do you choose this POKéMON?$"
 
 	.global gUnknown_0840E5CD
 gUnknown_0840E5CD: @ 840E5CD
-	.incbin "baserom.gba", 0x0040e5cd, 0x8
+	.string "POKéMON$"
 
 	.global gUnknown_0840E5D5
 gUnknown_0840E5D5: @ 840E5D5
-	.incbin "baserom.gba", 0x0040e5d5, 0x2f
+	.string "Save error.\pPlease exchange the\nbackup memory.$"
 
 	.global gUnknown_0840E604
 gUnknown_0840E604: @ 840E604
-	.incbin "baserom.gba", 0x0040e604, 0x37
+	.string "FLY to where?$"
+	.string "USE$"
+	.string "TOSS$"
+	.string "REGISTER$"
+	.string "GIVE$"
+	.string "CHECK TAG$"
+	.string "CONFIRM$"
 
 	.global gUnknown_0840E63B
 gUnknown_0840E63B: @ 840E63B
-	.incbin "baserom.gba", 0x0040e63b, 0x5
+	.string "WALK$"
 
 	.global gUnknown_0840E640
 gUnknown_0840E640: @ 840E640
-	.incbin "baserom.gba", 0x0040e640, 0x5
+	.string "EXIT$"
 
 	.global gUnknown_0840E645
 gUnknown_0840E645: @ 840E645
-	.incbin "baserom.gba", 0x0040e645, 0x7
+	.string "CANCEL$"
 
 	.global gUnknown_0840E64C
 gUnknown_0840E64C: @ 840E64C
-	.incbin "baserom.gba", 0x0040e64c, 0x1d
+	.string "$"
+	.string "CANCEL$"
+	.string "ITEM$"
+	.string "MAIL$"
+	.string "TAKE$"
+	.string "STORE$"
 
 	.global gUnknown_0840E669
 gUnknown_0840E669: @ 840E669
-	.incbin "baserom.gba", 0x0040e669, 0x6
+	.string "CHECK$"
 
 	.global gUnknown_0840E66F
 gUnknown_0840E66F: @ 840E66F
-	.incbin "baserom.gba", 0x0040e66f, 0x5
+	.string "NONE$"
 
 	.global gUnknown_0840E674
 gUnknown_0840E674: @ 840E674
-	.incbin "baserom.gba", 0x0040e674, 0x4
+	.string "???$"
 
 	.global gUnknown_0840E678
 gUnknown_0840E678: @ 840E678
-	.incbin "baserom.gba", 0x0040e678, 0x8
+	.string "?????$"
+	.string "/$"
 
 	.global gUnknown_0840E680
 gUnknown_0840E680: @ 840E680
-	.incbin "baserom.gba", 0x0040e680, 0x2
+	.string "-$"
 
 	.global gUnknown_0840E682
 gUnknown_0840E682: @ 840E682
-	.incbin "baserom.gba", 0x0040e682, 0x3
+	.string "--$"
 
 	.global gUnknown_0840E685
 gUnknown_0840E685: @ 840E685
-	.incbin "baserom.gba", 0x0040e685, 0x4
+	.string "---$"
 
 	.global gUnknown_0840E689
 gUnknown_0840E689: @ 840E689
-	.incbin "baserom.gba", 0x0040e689, 0x2
+	.string "♂$"
 
 	.global gUnknown_0840E68B
 gUnknown_0840E68B: @ 840E68B
-	.incbin "baserom.gba", 0x0040e68b, 0x6
+	.string "♀$"
+	.string "Lv.$"
 
 	.global gUnknown_0840E691
 gUnknown_0840E691: @ 840E691
@@ -8475,103 +8488,111 @@ gUnknown_0840E691: @ 840E691
 
 	.global gUnknown_0840E697
 gUnknown_0840E697: @ 840E697
-	.incbin "baserom.gba", 0x0040e697, 0x1e
+	.string "Go back to the\nprevious menu.$"
 
 	.global gUnknown_0840E6B5
 gUnknown_0840E6B5: @ 840E6B5
-	.incbin "baserom.gba", 0x0040e6b5, 0x1b
+	.string "What would you like to do?$"
 
 	.global gUnknown_0840E6D0
 gUnknown_0840E6D0: @ 840E6D0
-	.incbin "baserom.gba", 0x0040e6d0, 0x4
+	.string "×{STR_VAR_1}$"
 
 	.global gUnknown_0840E6D4
 gUnknown_0840E6D4: @ 840E6D4
-	.incbin "baserom.gba", 0x0040e6d4, 0x7
+	.string " BERRY$"
 
 	.global gUnknown_0840E6DB
 gUnknown_0840E6DB: @ 840E6DB
-	.incbin "baserom.gba", 0x0040e6db, 0x9
+	.string "{STR_VAR_1} COINS$"
 
 	.global gUnknown_0840E6E4
 gUnknown_0840E6E4: @ 840E6E4
-	.incbin "baserom.gba", 0x0040e6e4, 0x5c
+	.string "CLOSE BAG$"
+	.string "the field.$"
+	.string "the battle.$"
+	.string "the POKéMON LIST.$"
+	.string "the shop.$"
+	.string "the field.$"
+	.string "the field.$"
+	.string "the PC.$"
+	.string " "
 
 	.global gUnknown_0840E740
 gUnknown_0840E740: @ 840E740
-	.incbin "baserom.gba", 0x0040e740, 0x1c
+	.incbin "baserom.gba", 0x0040e740, 0x1c @ not text, probably pointers?
 
 	.global gUnknown_0840E75C
 gUnknown_0840E75C: @ 840E75C
-	.incbin "baserom.gba", 0x0040e75c, 0xa
+	.string "Return to$"
 
 	.global gUnknown_0840E766
 gUnknown_0840E766: @ 840E766
-	.incbin "baserom.gba", 0x0040e766, 0x1b
+	.string "What would you\nlike to do?$"
 
 	.global gUnknown_0840E781
 gUnknown_0840E781: @ 840E781
-	.incbin "baserom.gba", 0x0040e781, 0x1b
+	.string "You can’t write\nMAIL here.$"
 
 	.global gUnknown_0840E79C
 gUnknown_0840E79C: @ 840E79C
-	.incbin "baserom.gba", 0x0040e79c, 0x17
+	.string "There is no\nPOKéMON.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840E7B3
 gUnknown_0840E7B3: @ 840E7B3
-	.incbin "baserom.gba", 0x0040e7b3, 0x18
+	.string "Switch with which\nitem?$"
 
 	.global gUnknown_0840E7CB
 gUnknown_0840E7CB: @ 840E7CB
-	.incbin "baserom.gba", 0x0040e7cb, 0x12
+	.string "{STR_VAR_1} can’t be held.$"
 
 	.global gUnknown_0840E7DD
 gUnknown_0840E7DD: @ 840E7DD
-	.incbin "baserom.gba", 0x0040e7dd, 0x17
+	.string "{STR_VAR_1} can’t be held here.$"
 
 	.global gUnknown_0840E7F4
 gUnknown_0840E7F4: @ 840E7F4
-	.incbin "baserom.gba", 0x0040e7f4, 0x21
+	.string "How many do you\nwant to deposit?$"
 
 	.global gUnknown_0840E815
 gUnknown_0840E815: @ 840E815
-	.incbin "baserom.gba", 0x0040e815, 0x14
+	.string "Deposited {STR_VAR_2}\n{STR_VAR_1}(s).$"
 
 	.global gUnknown_0840E829
 gUnknown_0840E829: @ 840E829
-	.incbin "baserom.gba", 0x0040e829, 0x20
+	.string "There’s no room to\nstore items.$"
 
 	.global gUnknown_0840E849
 gUnknown_0840E849: @ 840E849
-	.incbin "baserom.gba", 0x0040e849, 0x2f
+	.string "You can’t store\nsomeone else’s item\nin the PC.$"
 
 	.global gUnknown_0840E878
 gUnknown_0840E878: @ 840E878
-	.incbin "baserom.gba", 0x0040e878, 0x27
+	.string "That’s much too\nimportant to toss\nout!$"
 
 	.global gUnknown_0840E89F
 gUnknown_0840E89F: @ 840E89F
-	.incbin "baserom.gba", 0x0040e89f, 0x13
+	.string "Toss out how many?$"
 
 	.global gUnknown_0840E8B2
 gUnknown_0840E8B2: @ 840E8B2
-	.incbin "baserom.gba", 0x0040e8b2, 0x15
+	.string "Threw away {STR_VAR_2}\n{STR_VAR_1}(s).$"
 
 	.global gUnknown_0840E8C7
 gUnknown_0840E8C7: @ 840E8C7
-	.incbin "baserom.gba", 0x0040e8c7, 0x23
+	.string "Is it okay to\nthrow away {STR_VAR_2}\n{STR_VAR_1}(s)?$"
 
 	.global gUnknown_0840E8EA
 gUnknown_0840E8EA: @ 840E8EA
-	.incbin "baserom.gba", 0x0040e8ea, 0x3f
+	.string "DAD’s advice...\n{PLAYER}, there’s a time and place for\leverything!{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840E929
 gUnknown_0840E929: @ 840E929
-	.incbin "baserom.gba", 0x0040e929, 0x25
+	.string "You can’t dismount your BIKE here.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840E94E
 gUnknown_0840E94E: @ 840E94E
-	.incbin "baserom.gba", 0x0040e94e, 0x44
+	.string "Oh!\nThe machine’s responding!\pThere’s an item buried around here!{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840E992
 gUnknown_0840E992: @ 840E992
