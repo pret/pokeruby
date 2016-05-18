@@ -9909,7 +9909,7 @@ gUnknown_084112CD: @ 84112CD
 @ replacing .incbin "baserom.gba", 0x004112cd, 0xa
 	.string "Interview$"
 
-	.global gUnknown_084112D7 @ 2 bytes missing before this
+	.global gUnknown_084112D7
 gUnknown_084112D7: @ 84112D7
 @ replacing .incbin "baserom.gba", 0x004112d7, 0x74
 	.string "Good saying$"
@@ -10015,7 +10015,7 @@ gUnknown_084117DB: @ 84117DB
 	.global gUnknown_084117E3
 gUnknown_084117E3: @ 84117E3
 @ replacing .incbin "baserom.gba", 0x004117e3, 0x21
-	.string "Reset RTC?\nA: Confirm, B: Cancel$" @ 2 bytes missing before this
+	.string "Reset RTC?\nA: Confirm, B: Cancel$"
 
 	.global gUnknown_08411804
 gUnknown_08411804: @ 8411804
