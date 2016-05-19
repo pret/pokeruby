@@ -7032,387 +7032,873 @@ gUnknown_083FDFF4: @ 83FDFF4
 
 	.global gUnknown_083FE4F4
 gUnknown_083FE4F4: @ 83FE4F4
-	.incbin "baserom.gba", 0x003fe4f4, 0x969
+@ replacing .incbin "baserom.gba", 0x003fe4f4, 0x969
+	.incbin "baserom.gba", 0x003fe4f4, 0xe7
+	.string "{STRING 0} gained{PLAYER}\n{STRING 42} EXP. Points!\p$"
+	.string "$"
+	.string " a boosted$"
+	.string "{STRING 0} grew to\nLV. {PLAYER}!{UNKNOWN_A}\p$"
+	.string "{STRING 0} learned\n{PLAYER}!{UNKNOWN_A}\p$"
+	.string "{STRING 0} is trying to\nlearn {PLAYER}.\p$"
+	.string "But, {STRING 0} can’t learn\nmore than four moves.\p$"
+	.string "Delete a move to make\nroom for {PLAYER}?$"
+	.string "{STRING 0} forgot\n{PLAYER}.\p$"
+	.string "{PAUSE 32}Stop learning\n{PLAYER}?$"
+	.string "{STRING 0} did not learn\n{PLAYER}.\p$"
+	.string "Use next POKéMON?$"
+	.string "{ATTACKING_MON}’s\nattack missed!$"
+	.string "{DEFENDING_MON}\nprotected itself!$"
+	.string "{DEFENDING_MON} avoided\ndamage with {STRING 22}!$"
+	.string "{DEFENDING_MON} makes GROUND\nmoves miss with {STRING 22}!$"
+	.string "{DEFENDING_MON} avoided\nthe attack!$"
+	.string "It doesn’t affect\n{DEFENDING_MON}...$"
+	.string "{ATTACKING_MON}\nfainted!\p$"
+	.string "{DEFENDING_MON}\nfainted!\p$"
+	.string "{STRING 32} got ¥{STRING 0}\nfor winning!\p$"
+	.string "{STRING 32} is out of\nuseable POKéMON!\p$"
+	.string "{STRING 32} whited out!{PAUSE_UNTIL_PRESS}$"
+	.string "{STRING 16} prevents\nescape with {STRING 23}!\p$"
+	.string "Can’t escape!\p$"
+	.string "{ATTACKING_MON}\ncan’t escape!$"
+	.string "Hit {STRING 0} time(s)!$"
+	.string "{STRING 14}\nfell asleep!$"
+	.string "{STRING 16}’s {STRING 23}\nmade {STRING 14} sleep!$"
+	.string "{DEFENDING_MON} is\nalready asleep!$"
+	.string "{ATTACKING_MON} is\nalready asleep!$"
+	.string "{DEFENDING_MON}\nwasn’t affected!$"
+	.string "{STRING 14}\nwas poisoned!$"
+	.string "{STRING 16}’s {STRING 23}\npoisoned {STRING 14}!$"
+	.string "{ATTACKING_MON} is hurt\nby poison!$"
+	.string "{DEFENDING_MON} is already\npoisoned.$"
+	.string "{STRING 14} is badly\npoisoned!$"
+	.string "{DEFENDING_MON} had its\nenergy drained!$"
+	.string "{STRING 14} was burned!$"
+	.string "{STRING 16}’s {STRING 23}\nburned {STRING 14}!$"
+	.string "{ATTACKING_MON} is hurt\nby its burn!$"
+	.string "{DEFENDING_MON} already\nhas a burn.$"
+	.string "{STRING 14} was\nfrozen solid!$"
+	.string "{STRING 16}’s {STRING 23}\nfroze {STRING 14} solid!$"
+	.string "{ATTACKING_MON} is\nfrozen solid!$"
+	.string "{DEFENDING_MON} was\ndefrosted!$"
+	.string "{ATTACKING_MON} was\ndefrosted!$"
+	.string "{ATTACKING_MON} was\ndefrosted by {STRING 17}!$"
+	.string "{STRING 14} is paralyzed!\nIt may be unable to move!$"
+	.string "{STRING 16}’s {STRING 23}\nparalyzed {STRING 14}!\lIt may be unable to move!$"
+	.string "{ATTACKING_MON} is paralyzed!\nIt can’t move!$"
+	.string "{DEFENDING_MON} is\nalready paralyzed!$"
+	.string "{DEFENDING_MON} was\nhealed of paralysis!$"
+	.string "{DEFENDING_MON}’s\ndream was eaten!$"
+	.string "{ATTACKING_MON}’s {STRING 0}\nwon’t go higher!$"
+	.string "{DEFENDING_MON}’s {STRING 0}\nwon’t go lower!$"
+	.string "Your team’s {STRING 0}\nstopped working!$"
+	.string "The foe’s {STRING 0}\nstopped working!$"
+	.string "{ATTACKING_MON} is\nconfused!$"
+	.string "{ATTACKING_MON} snapped\nout of confusion!$"
+	.string "{STRING 14} became\nconfused!$"
+	.string "{DEFENDING_MON} is\nalready confused!$"
+	.string "{DEFENDING_MON}\nfell in love!$"
+	.string "{ATTACKING_MON} is in love\nwith {STRING 16}!$"
+	.string "{ATTACKING_MON} is\nimmobilized by love!$"
+	.string "{DEFENDING_MON} was\nblown away!$"
+	.string "{ATTACKING_MON} transformed\ninto the {STRING 0} type!$"
+	.string "{ATTACKING_MON} flinched!$"
+	.string "{DEFENDING_MON} regained\nhealth!$"
+	.string "{DEFENDING_MON}’s\nHP is full!$"
+	.string "{STRING 38}’s {STRING 17}\nraised SP. DEF!$"
+	.string "{STRING 38}’s {STRING 17}\nraised SP. DEF a little!$"
+	.string "{STRING 38}’s {STRING 17}\nraised DEFENSE!$"
+	.string "{STRING 38}’s {STRING 17}\nraised DEFENSE a little!$"
+	.string "{STRING 38} is covered\nby a veil!$"
+	.string "{DEFENDING_MON} is protected\nby SAFEGUARD!$"
+	.string "{STRING 40}’s SAFEGUARD\nfaded!$"
+	.string "{ATTACKING_MON} went\nto sleep!$"
+	.string "{ATTACKING_MON} slept and\nbecame healthy!$"
+	.string "{ATTACKING_MON} whipped\nup a whirlwind!$"
+	.string "{ATTACKING_MON} took\nin sunlight!$"
+	.string "{ATTACKING_MON} lowered\nits head!$"
+	.string "{ATTACKING_MON} is glowing!$"
+	.string "{ATTACKING_MON} flew\nup high!$"
+	.string "{ATTACKING_MON} dug a hole!$"
+	.string "{ATTACKING_MON} hid\nunderwater!$"
+	.string "{ATTACKING_MON} sprang up!$"
+	.string "{DEFENDING_MON} was squeezed by\n{ATTACKING_MON}’s BIND!$"
+	.string "{DEFENDING_MON} was trapped\nin the vortex!$"
+	.string "{DEFENDING_MON} was trapped\nby SAND TOMB!$"
+	.string "{DEFENDING_MON} was WRAPPED by\n{ATTACKING_MON}!$"
+	.string "{ATTACKING_MON} CLAMPED\n{DEFENDING_MON}!$"
+	.string "{ATTACKING_MON} is hurt\nby {STRING 0}!$"
+	.string "{ATTACKING_MON} was freed\nfrom {STRING 0}!$"
+	.string "{ATTACKING_MON} kept going\nand crashed!$"
 
 	.global gUnknown_083FEE5D
 gUnknown_083FEE5D: @ 83FEE5D
-	.incbin "baserom.gba", 0x003fee5d, 0x35
+@ replacing .incbin "baserom.gba", 0x003fee5d, 0x35
+	.string "{STRING 38} became\nshrouded in MIST!$"
+	.string "{STRING 16} is protected\nby MIST!$"
 
 	.global gUnknown_083FEE92
 gUnknown_083FEE92: @ 83FEE92
-	.incbin "baserom.gba", 0x003fee92, 0xe38
+@ replacing .incbin "baserom.gba", 0x003fee92, 0xe38
+	.string "{ATTACKING_MON} is getting\npumped!$"
+	.string "{ATTACKING_MON} is hit\nwith recoil!$"
+	.string "{ATTACKING_MON} protected\nitself!$"
+	.string "{ATTACKING_MON} is buffeted\nby the sandstorm!$"
+	.string "{ATTACKING_MON} is stricken\nby HAIL!$"
+	.string "{STRING 36}’s {STRING 0}\nwore off!$"
+	.string "{DEFENDING_MON} was seeded!$"
+	.string "{DEFENDING_MON} evaded\nthe attack!$"
+	.string "{ATTACKING_MON}’s health is\nsapped by LEECH SEED!$"
+	.string "{ATTACKING_MON} is fast\nasleep.$"
+	.string "{ATTACKING_MON} woke up!$"
+	.string "But {STRING 16}’s UPROAR\nkept it awake!$"
+	.string "{ATTACKING_MON} woke up\nin the UPROAR!$"
+	.string "{ATTACKING_MON} caused\nan UPROAR!$"
+	.string "{ATTACKING_MON} is making\nan UPROAR!$"
+	.string "{ATTACKING_MON} calmed down.$"
+	.string "But {DEFENDING_MON} can’t\nsleep in an UPROAR!$"
+	.string "{ATTACKING_MON} STOCKPILED\n{STRING 0}!$"
+	.string "{ATTACKING_MON} can’t\nSTOCKPILE any more!$"
+	.string "But {DEFENDING_MON} can’t\nsleep in an UPROAR!$"
+	.string "But the UPROAR kept\n{DEFENDING_MON} awake!$"
+	.string "{DEFENDING_MON} stayed awake\nusing its {STRING 22}!$"
+	.string "{ATTACKING_MON} is storing\nenergy!$"
+	.string "{ATTACKING_MON} unleashed\nenergy!$"
+	.string "{ATTACKING_MON} became\nconfused out of fatigue!$"
+	.string "{STRING 32} picked up\n¥{STRING 0}!\p$"
+	.string "{DEFENDING_MON} is\nunaffected!$"
+	.string "{ATTACKING_MON} transformed\ninto {STRING 0}!$"
+	.string "{ATTACKING_MON} made\na SUBSTITUTE!$"
+	.string "{ATTACKING_MON} already\nhas a SUBSTITUTE!$"
+	.string "The SUBSTITUTE took damage\nfor {DEFENDING_MON}!\p$"
+	.string "{DEFENDING_MON}’s\nSUBSTITUTE faded!\p$"
+	.string "{ATTACKING_MON} must\nrecharge!$"
+	.string "{DEFENDING_MON}’s RAGE\nis building!$"
+	.string "{DEFENDING_MON}’s {STRING 0}\nwas disabled!$"
+	.string "{ATTACKING_MON} is disabled\nno more!$"
+	.string "{DEFENDING_MON} got\nan ENCORE!$"
+	.string "{ATTACKING_MON}’s ENCORE\nended!$"
+	.string "{ATTACKING_MON} took aim\nat {DEFENDING_MON}!$"
+	.string "{ATTACKING_MON} SKETCHED\n{STRING 0}!$"
+	.string "{ATTACKING_MON} is trying\nto take its foe with it!$"
+	.string "{DEFENDING_MON} took\n{ATTACKING_MON} with it!$"
+	.string "Reduced {DEFENDING_MON}’s\n{STRING 0} by {PLAYER}!$"
+	.string "{ATTACKING_MON} stole\n{DEFENDING_MON}’s {STRING 19}!$"
+	.string "{DEFENDING_MON} can’t\nescape now!$"
+	.string "{DEFENDING_MON} fell into\na NIGHTMARE!$"
+	.string "{ATTACKING_MON} is locked\nin a NIGHTMARE!$"
+	.string "{ATTACKING_MON} cut its own HP\nand laid a CURSE on\l{DEFENDING_MON}!$"
+	.string "{ATTACKING_MON} is afflicted\nby the CURSE!$"
+	.string "{STRING 37} POKéMON team had SPIKES\nscattered around it!$"
+	.string "{STRING 16} is hurt\nby SPIKES!$"
+	.string "{ATTACKING_MON} identified\n{DEFENDING_MON}!$"
+	.string "{ATTACKING_MON}’s PERISH count\nfell to {STRING 0}!$"
+	.string "{ATTACKING_MON} braced\nitself!$"
+	.string "{DEFENDING_MON} ENDURED\nthe hit!$"
+	.string "MAGNITUDE {STRING 0}!$"
+	.string "{ATTACKING_MON} cut its own HP\nand maximized ATTACK!$"
+	.string "{ATTACKING_MON} copied\n{DEFENDING_MON}’s stat changes!$"
+	.string "{ATTACKING_MON} got free of\n{DEFENDING_MON}’s {STRING 0}!$"
+	.string "{ATTACKING_MON} shed\nLEECH SEED!$"
+	.string "{ATTACKING_MON} blew away\nSPIKES!$"
+	.string "{ATTACKING_MON} fled from\nbattle!$"
+	.string "{ATTACKING_MON} foresaw\nan attack!$"
+	.string "{DEFENDING_MON} took\n{STRING 0}’s attack!$"
+	.string "{ATTACKING_MON} chose\n{STRING 17} as its destiny!$"
+	.string "{STRING 0}’s attack!$"
+	.string "{ATTACKING_MON} became the\ncenter of attention!$"
+	.string "{ATTACKING_MON} began\ncharging power!$"
+	.string "NATURE POWER turned into\n{STRING 17}!$"
+	.string "{ATTACKING_MON}’s status\nreturned to normal!$"
+	.string "{DEFENDING_MON} was subjected\nto TORMENT!$"
+	.string "{ATTACKING_MON} is tightening\nits focus!$"
+	.string "{DEFENDING_MON} fell for\nthe TAUNT!$"
+	.string "{ATTACKING_MON} is ready to\nhelp {DEFENDING_MON}!$"
+	.string "{ATTACKING_MON} switched\nitems with its opponent!$"
+	.string "{ATTACKING_MON} obtained\n{STRING 0}.$"
+	.string "{DEFENDING_MON} obtained\n{PLAYER}.$"
+	.string "{ATTACKING_MON} obtained\n{STRING 0}.\p{DEFENDING_MON} obtained\n{PLAYER}.$"
+	.string "{ATTACKING_MON} copied\n{DEFENDING_MON}’s {STRING 22}!$"
+	.string "{ATTACKING_MON} made a WISH!$"
+	.string "{STRING 0}’s WISH\ncame true!$"
+	.string "{ATTACKING_MON} planted its roots!$"
+	.string "{ATTACKING_MON} absorbed\nnutrients with its roots!$"
+	.string "{DEFENDING_MON} anchored\nitself with its roots!$"
+	.string "{ATTACKING_MON} made\n{DEFENDING_MON} drowsy!$"
+	.string "{ATTACKING_MON} knocked off\n{DEFENDING_MON}’s {STRING 19}!$"
+	.string "{ATTACKING_MON} swapped abilities\nwith its opponent!$"
+	.string "{ATTACKING_MON} sealed the\nopponent’s move(s)!$"
+	.string "{ATTACKING_MON} wants the\nopponent to bear a GRUDGE!$"
+	.string "{ATTACKING_MON}’s {STRING 0}\nlost all its PP due to\lthe GRUDGE!$"
+	.string "{ATTACKING_MON} shrouded\nitself in {STRING 17}!$"
+	.string "{ATTACKING_MON}’s {STRING 17}\nwas bounced back by MAGIC COAT!$"
+	.string "{ATTACKING_MON} awaits its foe\nto make a move!$"
+	.string "{DEFENDING_MON} SNATCHED\n{STRING 16}’s move!$"
+	.string "Electricity’s power was\nweakened!$"
+	.string "Fire’s power was\nweakened!$"
+	.string "{ATTACKING_MON} found\none {STRING 19}!$"
+	.string "A soothing aroma wafted\nthrough the area!$"
+	.string "Items can’t be used now.{PAUSE 64}$"
+	.string "For {STRING 16},\n{STRING 19} {STRING 0}$"
+	.string "{STRING 16} used\n{STRING 19} to hustle!$"
+	.string "{ATTACKING_MON} lost its\nfocus and couldn’t move!$"
+	.string "{DEFENDING_MON} was\ndragged out!\p$"
+	.string "The wall shattered!$"
+	.string "But it had no effect!$"
+	.string "{STRING 15} has no\nmoves left!\p$"
+	.string "{STRING 15}’s {STRING 17}\nis disabled!\p$"
+	.string "{STRING 15} can’t use the same\nmove twice in a row due to the TORMENT!\p$"
+	.string "{STRING 15} can’t use\n{STRING 17} after the TAUNT!\p$"
+	.string "{STRING 15} can’t use the\nsealed {STRING 17}!\p$"
+	.string "{STRING 16}’s {STRING 23}\nmade it rain!$"
+	.string "{STRING 16}’s {STRING 23}\nraised its SPEED!$"
+	.string "{DEFENDING_MON} was protected\nby {STRING 22}!$"
+	.string "{DEFENDING_MON}’s {STRING 22}\nprevents {ATTACKING_MON}\lfrom using {STRING 17}!$"
+	.string "{DEFENDING_MON} restored HP\nusing its {STRING 22}!$"
+	.string "{DEFENDING_MON}’s {STRING 22}\nmade {STRING 17} useless!$"
+	.string "{DEFENDING_MON}’s {STRING 22}\nmade it the {STRING 0} type!$"
+	.string "{STRING 14}’s {STRING 22}\nprevents paralysis!$"
+	.string "{DEFENDING_MON}’s {STRING 22}\nprevents romance!$"
+	.string "{STRING 14}’s {STRING 22}\nprevents poisoning!$"
+	.string "{DEFENDING_MON}’s {STRING 22}\nprevents confusion!$"
+	.string "{DEFENDING_MON}’s {STRING 22}\nraised its FIRE power!$"
+	.string "{DEFENDING_MON} anchors\nitself with {STRING 22}!$"
+	.string "{STRING 16}’s {STRING 23}\ncuts {DEFENDING_MON}’s ATTACK!$"
+	.string "{STRING 16}’s {STRING 23}\nprevents stat loss!$"
+	.string "{DEFENDING_MON}’s {STRING 22}\nhurt {ATTACKING_MON}!$"
+	.string "{STRING 16} TRACED\n{STRING 0}’s {PLAYER}!$"
+	.string "{STRING 14}’s {STRING 24}\nprevents burns!$"
+	.string "{DEFENDING_MON}’s {STRING 22}\nblocks {STRING 17}!$"
+	.string "{STRING 16}’s {STRING 23}\nblocks {STRING 17}!$"
+	.string "{ATTACKING_MON}’s {STRING 21}\nrestored some HP!$"
+	.string "{STRING 16}’s {STRING 23}\nwhipped up a sandstorm!$"
+	.string "{STRING 16}’s {STRING 23}\nintensified the sun’s rays!$"
+	.string "{STRING 16}’s {STRING 23}\nprevents {STRING 0} loss!$"
+	.string "{DEFENDING_MON}’s {STRING 22}\ninfatuated {ATTACKING_MON}!$"
+	.string "{DEFENDING_MON}’s {STRING 22}\nmade {STRING 17} ineffective!$"
+	.string "{STRING 16}’s {STRING 23}\ncured its {STRING 0} problem!$"
+	.string "It sucked up the\nLIQUID OOZE!$"
+	.string "{STRING 16} transformed!$"
+	.string "{DEFENDING_MON}’s {STRING 22}\ntook the attack!$"
 
 	.global gUnknown_083FFCCA
 gUnknown_083FFCCA: @ 83FFCCA
-	.incbin "baserom.gba", 0x003ffcca, 0xe9
+@ replacing .incbin "baserom.gba", 0x003ffcca, 0xe9
+	.string "{STRING 0}’s {STRING 20}\nprevents switching!\p$"
+	.string "{DEFENDING_MON}’s {STRING 22}\nprevented {STRING 16}’s\l{STRING 0} from working!$"
+	.string "{STRING 16}’s {STRING 23}\nmade it ineffective!$"
+	.string "{STRING 14}’s {STRING 24}\nprevents flinching!$"
+	.string "{ATTACKING_MON}’s {STRING 21}\nprevents {DEFENDING_MON}’s\l{STRING 22} from working!$"
+	.string "{STRING 16}’s {STRING 23}\ncured its {STRING 0} problem!$"
+	.string "{STRING 16}’s {STRING 23}\nhad no effect on {STRING 14}!$"
+	.string "sharply $"
 
 	.global gUnknown_083FFDB3
 gUnknown_083FFDB3: @ 83FFDB3
-	.incbin "baserom.gba", 0x003ffdb3, 0x20
+@ replacing .incbin "baserom.gba", 0x003ffdb3, 0x20
+	.string "rose!$"
+	.string "harshly $"
+	.string "fell!$"
+	.string "{ATTACKING_MON}’s {STRING 0}\n{PLAYER}$"
 
 	.global gUnknown_083FFDD3
 gUnknown_083FFDD3: @ 83FFDD3
-	.incbin "baserom.gba", 0x003ffdd3, 0x129
+@ replacing .incbin "baserom.gba", 0x003ffdd3, 0x129
+	.string "{DEFENDING_MON}’s {STRING 0}\n{PLAYER}$"
+	.string "Using {STRING 19}, the {STRING 0}\nof {STRING 16} {PLAYER}$"
+	.string "{ATTACKING_MON}’s {STRING 0}\n{PLAYER}$"
+	.string "{DEFENDING_MON}’s {STRING 0}\n{PLAYER}$"
+	.string "{ATTACKING_MON}’s stats won’t\ngo any higher!$"
+	.string "{DEFENDING_MON}’s stats won’t\ngo any lower!$"
+	.string "A critical hit!$"
+	.string "It’s a one-hit KO!$"
+	.string "{PAUSE 32}1, {PAUSE 15}2 and...{PAUSE 15} ...{PAUSE 15} ...{PAUSE 15}\n{PAUSE 15}{PLAY_SE SE_KON}Poof!\p$"
+	.string "And...\p$"
+	.string "HM moves can’t be\nforgotten now.\p$"
+	.string "It’s not very effective...$"
+	.string "It’s super effective!$"
 
 	.global gUnknown_083FFEFC
 gUnknown_083FFEFC: @ 83FFEFC
-	.incbin "baserom.gba", 0x003ffefc, 0x5a
+@ replacing .incbin "baserom.gba", 0x003ffefc, 0x5a
+	.string "{PLAY_SE SE_NIGERU}Got away safely!\p$"
+	.string "{PLAY_SE SE_NIGERU}{ATTACKING_MON} fled\nusing its {STRING 19}!\p$"
+	.string "{PLAY_SE SE_NIGERU}{ATTACKING_MON} fled\nusing {STRING 21}!\p$"
+	.string "{PLAY_SE SE_NIGERU}Wild {STRING 0} fled!$"
 
 	.global gUnknown_083FFF56
 gUnknown_083FFF56: @ 83FFF56
-	.incbin "baserom.gba", 0x003fff56, 0x14
+@ replacing .incbin "baserom.gba", 0x003fff56, 0x14
+	.string "Player defeated\n{STRING 29}!$"
 
 	.global gUnknown_083FFF6A
 gUnknown_083FFF6A: @ 83FFF6A
-	.incbin "baserom.gba", 0x003fff6a, 0x17
+@ replacing .incbin "baserom.gba", 0x003fff6a, 0x17
+	.string "Player beat {STRING 30}\nand {STRING 29}!$"
 
 	.global gUnknown_083FFF81
 gUnknown_083FFF81: @ 83FFF81
-	.incbin "baserom.gba", 0x003fff81, 0x18
+@ replacing .incbin "baserom.gba", 0x003fff81, 0x18
+	.string "Player lost against\n{STRING 29}!$"
 
 	.global gUnknown_083FFF99
 gUnknown_083FFF99: @ 83FFF99
-	.incbin "baserom.gba", 0x003fff99, 0x1a
+@ replacing .incbin "baserom.gba", 0x003fff99, 0x1a
+	.string "Player lost to {STRING 30}\nand {STRING 29}!$"
 
 	.global gUnknown_083FFFB3
 gUnknown_083FFFB3: @ 83FFFB3
-	.incbin "baserom.gba", 0x003fffb3, 0x18
+@ replacing .incbin "baserom.gba", 0x003fffb3, 0x18
+	.string "Player tied against\n{STRING 29}!$"
 
 	.global gUnknown_083FFFCB
 gUnknown_083FFFCB: @ 83FFFCB
-	.incbin "baserom.gba", 0x003fffcb, 0x1f
+@ replacing .incbin "baserom.gba", 0x003fffcb, 0x1f
+	.string "Player tied against {STRING 30}\nand {STRING 29}!$"
 
 	.global gUnknown_083FFFEA
 gUnknown_083FFFEA: @ 83FFFEA
-	.incbin "baserom.gba", 0x003fffea, 0xd
+@ replacing .incbin "baserom.gba", 0x003fffea, 0xd
+	.string "{PLAY_SE SE_NIGERU}{STRING 29} fled!$"
 
 	.global gUnknown_083FFFF7
 gUnknown_083FFFF7: @ 83FFFF7
-	.incbin "baserom.gba", 0x003ffff7, 0x55e
+@ replacing .incbin "baserom.gba", 0x003ffff7, 0x55e
+	.string "{PLAY_SE SE_NIGERU}{STRING 29} and\n{STRING 30} fled!$"
+	.string "No! There’s no running\nfrom a TRAINER battle!\p$"
+	.string "Can’t escape!\p$"
+	.string "PROF. BIRCH: D-don’t leave\nme here like this!\p$"
+	.string "But nothing happened!$"
+	.string "But it failed!$"
+	.string "It hurt itself in its\nconfusion!$"
+	.string "The MIRROR MOVE failed!$"
+	.string "It started to rain!$"
+	.string "A downpour started!$"
+	.string "Rain continues to fall.$"
+	.string "The downpour continues.$"
+	.string "The rain stopped.$"
+	.string "A sandstorm brewed!$"
+	.string "The sandstorm rages.$"
+	.string "The sandstorm subsided.$"
+	.string "The sunlight got bright!$"
+	.string "The sunlight is strong.$"
+	.string "The sunlight faded.$"
+	.string "It started to hail!$"
+	.string "Hail continues to fall.$"
+	.string "The hail  stopped.$"
+	.string "But it failed to SPIT UP\na thing!$"
+	.string "But it failed to SWALLOW\na thing!$"
+	.string "The wind turned into a\nHEAT WAVE!$"
+	.string "All stat changes were\neliminated!$"
+	.string "Coins scattered everywhere!$"
+	.string "It was too weak to make\na SUBSTITUTE!$"
+	.string "The battlers shared\ntheir pain!$"
+	.string "A bell chimed!$"
+	.string "All affected POKéMON will\nfaint in 3 turns!$"
+	.string "There’s no PP left for\nthis move!\p$"
+	.string "But there was no PP left\nfor the move!$"
+	.string "{ATTACKING_MON} ignored\norders while asleep!$"
+	.string "{ATTACKING_MON} ignored\norders!$"
+	.string "{ATTACKING_MON} began to nap!$"
+	.string "{ATTACKING_MON} is\nloafing around!$"
+	.string "{ATTACKING_MON} won’t\nobey!$"
+	.string "{ATTACKING_MON} turned away!$"
+	.string "{ATTACKING_MON} pretended\nto not notice!$"
+	.string "{STRING 25} {STRING 26} is\nabout to use {PLAYER}.\pWill {STRING 32} change\nPOKéMON?$"
+	.string "{ATTACKING_MON} learned\n{STRING 0}!$"
+	.string "Player defeated\n{STRING 25} {STRING 26}!\p$"
+	.string "{STRING 32} crept closer to\n{STR_VAR_2}!$"
+	.string "{STRING 32} can’t get any closer!$"
+	.string "{STR_VAR_2} is watching\ncarefully!$"
+	.string "{STR_VAR_2} is curious about\nthe {STRING 0}!$"
+	.string "{STR_VAR_2} is enthralled by\nthe {STRING 0}!$"
+	.string "{STR_VAR_2} completely ignored\nthe {STRING 0}!$"
+	.string "{STRING 32} threw a {POKEBLOCK}\nat the {STR_VAR_2}!$"
+	.string "{PLAY_SE SE_PINPON}ANNOUNCER: You’re out of\nSAFARI BALLS! Game over!\p$"
 
 	.global gUnknown_08400555
 gUnknown_08400555: @ 8400555
-	.incbin "baserom.gba", 0x00400555, 0x13
+@ replacing .incbin "baserom.gba", 0x00400555, 0x13
+	.string "Wild {STR_VAR_2} appeared!\p$"
 
 	.global gUnknown_08400568
 gUnknown_08400568: @ 8400568
-	.incbin "baserom.gba", 0x00400568, 0x13
+@ replacing .incbin "baserom.gba", 0x00400568, 0x13
+	.string "Wild {STR_VAR_2} appeared!\p$"
 
 	.global gUnknown_0840057B
 gUnknown_0840057B: @ 840057B
-	.incbin "baserom.gba", 0x0040057b, 0x15
+@ replacing .incbin "baserom.gba", 0x0040057b, 0x15
+	.string "Wild {STR_VAR_2} appeared!{PAUSE 127}$"
 
 	.global gUnknown_08400590
 gUnknown_08400590: @ 8400590
-	.incbin "baserom.gba", 0x00400590, 0x1a
+@ replacing .incbin "baserom.gba", 0x00400590, 0x1a
+	.string "Wild {STRING 5} and\n{STR_VAR_2} appeared!\p$"
 
 	.global gUnknown_084005AA
 gUnknown_084005AA: @ 84005AA
-	.incbin "baserom.gba", 0x004005aa, 0x1d
+@ replacing .incbin "baserom.gba", 0x004005aa, 0x1d
+	.string "{STRING 25} {STRING 26}\nwould like to battle!\p$"
 
 	.global gUnknown_084005C7
 gUnknown_084005C7: @ 84005C7
-	.incbin "baserom.gba", 0x004005c7, 0x14
+@ replacing .incbin "baserom.gba", 0x004005c7, 0x14
+	.string "{STRING 29}\nwants to battle!$"
 
 	.global gUnknown_084005DB
 gUnknown_084005DB: @ 84005DB
-	.incbin "baserom.gba", 0x004005db, 0x1a
+@ replacing .incbin "baserom.gba", 0x004005db, 0x1a
+	.string "{STRING 29} and {STRING 30}\nwant to battle!$"
 
 	.global gUnknown_084005F5
 gUnknown_084005F5: @ 84005F5
-	.incbin "baserom.gba", 0x004005f5, 0x13
+@ replacing .incbin "baserom.gba", 0x004005f5, 0x13
+	.string "{STRING 25} {STRING 26} sent\nout {STR_VAR_2}!$"
 
 	.global gUnknown_08400608
 gUnknown_08400608: @ 8400608
-	.incbin "baserom.gba", 0x00400608, 0x1a
+@ replacing .incbin "baserom.gba", 0x00400608, 0x1a
+	.string "{STRING 25} {STRING 26} sent\nout {STR_VAR_2} and {STRING 5}!$"
 
 	.global gUnknown_08400622
 gUnknown_08400622: @ 8400622
-	.incbin "baserom.gba", 0x00400622, 0x13
+@ replacing .incbin "baserom.gba", 0x00400622, 0x13
+	.string "{STRING 25} {STRING 26} sent\nout {STRING 0}!$"
 
 	.global gUnknown_08400635
 gUnknown_08400635: @ 8400635
-	.incbin "baserom.gba", 0x00400635, 0x10
+@ replacing .incbin "baserom.gba", 0x00400635, 0x10
+	.string "{STRING 29} sent\nout {STR_VAR_2}!$"
 
 	.global gUnknown_08400645
 gUnknown_08400645: @ 8400645
-	.incbin "baserom.gba", 0x00400645, 0x17
+@ replacing .incbin "baserom.gba", 0x00400645, 0x17
+	.string "{STRING 29} sent out\n{STR_VAR_2} and {STRING 5}!$"
 
 	.global gUnknown_0840065C
 gUnknown_0840065C: @ 840065C
-	.incbin "baserom.gba", 0x0040065c, 0x20
+@ replacing .incbin "baserom.gba", 0x0040065c, 0x20
+	.string "{STRING 29} sent out\n{VERSION}!\p{STRING 30} sent out\n{GOOD_TEAM}!$"
 
 	.global gUnknown_0840067C
 gUnknown_0840067C: @ 840067C
-	.incbin "baserom.gba", 0x0040067c, 0x10
+@ replacing .incbin "baserom.gba", 0x0040067c, 0x10
+	.string "{STRING 29} sent out\n{STRING 0}!$"
 
 	.global gUnknown_0840068C
 gUnknown_0840068C: @ 840068C
-	.incbin "baserom.gba", 0x0040068c, 0x10
+@ replacing .incbin "baserom.gba", 0x0040068c, 0x10
+	.string "{STRING 31} sent out\n{STRING 0}!$"
 
 	.global gUnknown_0840069C
 gUnknown_0840069C: @ 840069C
-	.incbin "baserom.gba", 0x0040069c, 0x8
+@ replacing .incbin "baserom.gba", 0x0040069c, 0x8
+	.string "Go! {STR_VAR_1}!$"
 
 	.global gUnknown_084006A4
 gUnknown_084006A4: @ 84006A4
-	.incbin "baserom.gba", 0x004006a4, 0xf
+@ replacing .incbin "baserom.gba", 0x004006a4, 0xf
+	.string "Go! {STR_VAR_1} and\n{STR_VAR_3}!$"
 
 	.global gUnknown_084006B3
 gUnknown_084006B3: @ 84006B3
-	.incbin "baserom.gba", 0x004006b3, 0x8
+@ replacing .incbin "baserom.gba", 0x004006b3, 0x8
+	.string "Go! {STRING 0}!$"
 
 	.global gUnknown_084006BB
 gUnknown_084006BB: @ 84006BB
-	.incbin "baserom.gba", 0x004006bb, 0xb
+@ replacing .incbin "baserom.gba", 0x004006bb, 0xb
+	.string "Do it! {STRING 0}!$"
 
 	.global gUnknown_084006C6
 gUnknown_084006C6: @ 84006C6
-	.incbin "baserom.gba", 0x004006c6, 0xf
+@ replacing .incbin "baserom.gba", 0x004006c6, 0xf
+	.string "Go for it, {STRING 0}!$"
 
 	.global gUnknown_084006D5
 gUnknown_084006D5: @ 84006D5
-	.incbin "baserom.gba", 0x004006d5, 0x1c
+@ replacing .incbin "baserom.gba", 0x004006d5, 0x1c
+	.string "Your foe’s weak!\nGet’m, {STRING 0}!$"
 
 	.global gUnknown_084006F1
 gUnknown_084006F1: @ 84006F1
-	.incbin "baserom.gba", 0x004006f1, 0x18
+@ replacing .incbin "baserom.gba", 0x004006f1, 0x18
+	.string "{STRING 28} sent out\n{EVIL_TEAM}!\pGo! {RIVAL}!$"
 
 	.global gUnknown_08400709
 gUnknown_08400709: @ 8400709
-	.incbin "baserom.gba", 0x00400709, 0x1e
+@ replacing .incbin "baserom.gba", 0x00400709, 0x1e
+	.string "{STRING 0}, that’s enough!\nCome back!$"
 
 	.global gUnknown_08400727
 gUnknown_08400727: @ 8400727
-	.incbin "baserom.gba", 0x00400727, 0xf
+@ replacing .incbin "baserom.gba", 0x00400727, 0xf
+	.string "{STRING 0}, come back!$"
 
 	.global gUnknown_08400736
 gUnknown_08400736: @ 8400736
-	.incbin "baserom.gba", 0x00400736, 0x13
+@ replacing .incbin "baserom.gba", 0x00400736, 0x13
+	.string "{STRING 0}, OK!\nCome back!$"
 
 	.global gUnknown_08400749
 gUnknown_08400749: @ 8400749
-	.incbin "baserom.gba", 0x00400749, 0x15
+@ replacing .incbin "baserom.gba", 0x00400749, 0x15
+	.string "{STRING 0}, good!\nCome back!$"
 
 	.global gUnknown_0840075E
 gUnknown_0840075E: @ 840075E
-	.incbin "baserom.gba", 0x0040075e, 0x13
+@ replacing .incbin "baserom.gba", 0x0040075e, 0x13
+	.string "{STRING 25} {STRING 26}\nwithdrew {STRING 0}!$"
 
 	.global gUnknown_08400771
 gUnknown_08400771: @ 8400771
-	.incbin "baserom.gba", 0x00400771, 0x10
+@ replacing .incbin "baserom.gba", 0x00400771, 0x10
+	.string "{STRING 29} withdrew\n{STRING 0}!$"
 
 	.global gUnknown_08400781
 gUnknown_08400781: @ 8400781
-	.incbin "baserom.gba", 0x00400781, 0x10
+@ replacing .incbin "baserom.gba", 0x00400781, 0x10
+	.string "{STRING 31} withdrew\n{STRING 0}!$"
 
 	.global gUnknown_08400791
 gUnknown_08400791: @ 8400791
-	.incbin "baserom.gba", 0x00400791, 0x6
+@ replacing .incbin "baserom.gba", 0x00400791, 0x6
+	.string "Wild $"
 
 	.global gUnknown_08400797
 gUnknown_08400797: @ 8400797
-	.incbin "baserom.gba", 0x00400797, 0x5
+@ replacing .incbin "baserom.gba", 0x00400797, 0x5
+	.string "Foe $"
 
 	.global gUnknown_0840079C
 gUnknown_0840079C: @ 840079C
-	.incbin "baserom.gba", 0x0040079c, 0x5
+@ replacing .incbin "baserom.gba", 0x0040079c, 0x5
+	.string "Foe $"
 
 	.global gUnknown_084007A1
 gUnknown_084007A1: @ 84007A1
-	.incbin "baserom.gba", 0x004007a1, 0x6
+@ replacing .incbin "baserom.gba", 0x004007a1, 0x6
+	.string "Ally $"
 
 	.global gUnknown_084007A7
 gUnknown_084007A7: @ 84007A7
-	.incbin "baserom.gba", 0x004007a7, 0x5
+@ replacing .incbin "baserom.gba", 0x004007a7, 0x5
+	.string "Foe $"
 
 	.global gUnknown_084007AC
 gUnknown_084007AC: @ 84007AC
-	.incbin "baserom.gba", 0x004007ac, 0x6
+@ replacing .incbin "baserom.gba", 0x004007ac, 0x6
+	.string "Ally $"
 
 	.global gUnknown_084007B2
 gUnknown_084007B2: @ 84007B2
-	.incbin "baserom.gba", 0x004007b2, 0x5
+@ replacing .incbin "baserom.gba", 0x004007b2, 0x5
+	.string "Foe $"
 
 	.global gUnknown_084007B7
 gUnknown_084007B7: @ 84007B7
-	.incbin "baserom.gba", 0x004007b7, 0x6
+@ replacing .incbin "baserom.gba", 0x004007b7, 0x6
+	.string "Ally $"
 
 	.global gUnknown_084007BD
 gUnknown_084007BD: @ 84007BD
-	.incbin "baserom.gba", 0x004007bd, 0xb
+@ replacing .incbin "baserom.gba", 0x004007bd, 0xb
+	.string "{ATTACKING_MON} used\n{PLAYER}$"
 
 	.global gUnknown_084007C8
 gUnknown_084007C8: @ 84007C8
-	.incbin "baserom.gba", 0x004007c8, 0x2
+@ replacing .incbin "baserom.gba", 0x004007c8, 0x2
+	.string "!$"
 
 	.global gUnknown_084007CA
 gUnknown_084007CA: @ 84007CA
-	.incbin "baserom.gba", 0x004007ca, 0x2
+@ replacing .incbin "baserom.gba", 0x004007ca, 0x2
+	.string "!$"
 
 	.global gUnknown_084007CC
 gUnknown_084007CC: @ 84007CC
-	.incbin "baserom.gba", 0x004007cc, 0x2
+@ replacing .incbin "baserom.gba", 0x004007cc, 0x2
+	.string "!$"
 
 	.global gUnknown_084007CE
 gUnknown_084007CE: @ 84007CE
-	.incbin "baserom.gba", 0x004007ce, 0x2
+@ replacing .incbin "baserom.gba", 0x004007ce, 0x2
+	.string "!$"
 
 	.global gUnknown_084007D0
 gUnknown_084007D0: @ 84007D0
-	.incbin "baserom.gba", 0x004007d0, 0x21d
+@ replacing .incbin "baserom.gba", 0x004007d0, 0x21d
+	.string "!$"
+	.string "HP$"
+	.string "ATTACK$"
+	.string "DEFENSE$"
+	.string "SPEED$"
+	.string "SP. ATK$"
+	.string "SP. DEF$"
+	.string "accuracy$"
+	.string "evasiveness$"
+	.string "was too spicy!$"
+	.string "was too dry!$"
+	.string "was too sweet!$"
+	.string "was too bitter!$"
+	.string "was too sour!$"
+	.string "{STRING 32} used\n{STRING 19}!$"
+	.string "WALLY used\n{STRING 19}!$"
+	.string "{STRING 25} {STRING 26}\nused {STRING 19}!$"
+	.string "The TRAINER blocked the BALL!$"
+	.string "Don’t be a thief!$"
+	.string "It dodged the thrown BALL!\nThis POKéMON can’t be caught!$"
+	.string "You missed the POKéMON!$"
+	.string "Oh, no!\nThe POKéMON broke free!$"
+	.string "Aww!\nIt appeared to be caught!$"
+	.string "Aargh!\nAlmost had it!$"
+	.string "Shoot!\nIt was so close, too!$"
+	.string "Gotcha!\n{STR_VAR_2} was caught!{UNKNOWN_A}{PLAY_BGM BGM_KACHI22}\p$"
+	.string "Gotcha!\n{STR_VAR_2} was caught!{UNKNOWN_A}{PLAY_BGM BGM_KACHI22}{PAUSE 127}$"
+	.string "Give a nickname to the\ncaptured {STR_VAR_2}?$"
+	.string "{STR_VAR_2} was sent to\n{STRING 35} PC.$"
 
 	.global gUnknown_084009ED
 gUnknown_084009ED: @ 84009ED
-	.incbin "baserom.gba", 0x004009ed, 0xa
+@ replacing .incbin "baserom.gba", 0x004009ed, 0xa
+	.string "someone’s$"
 
 	.global gUnknown_084009F7
 gUnknown_084009F7: @ 84009F7
-	.incbin "baserom.gba", 0x004009f7, 0x81
+@ replacing .incbin "baserom.gba", 0x004009f7, 0x81
+	.string "LANETTE’s$"
+	.string "{STR_VAR_2}’s data was\nadded to the POKéDEX.\p$"
+	.string "It is raining.$"
+	.string "A sandstorm is raging.$"
+	.string "The BOX is full!\nYou can’t catch any more!\p$"
 
 	.global gUnknown_08400A78
 gUnknown_08400A78: @ 8400A78
-	.incbin "baserom.gba", 0x00400a78, 0xd
+@ replacing .incbin "baserom.gba", 0x00400a78, 0xd
+	.string "ENIGMA BERRY$"
 
 	.global gUnknown_08400A85
 gUnknown_08400A85: @ 8400A85
-	.incbin "baserom.gba", 0x00400a85, 0x1c5
+@ replacing .incbin "baserom.gba", 0x00400a85, 0x1c5
+	.string " BERRY$"
+	.string "{STRING 16}’s {STRING 19}\ncured paralysis!$"
+	.string "{STRING 16}’s {STRING 19}\ncured poison!$"
+	.string "{STRING 16}’s {STRING 19}\nhealed its burn!$"
+	.string "{STRING 16}’s {STRING 19}\ndefrosted it!$"
+	.string "{STRING 16}’s {STRING 19}\nwoke it from its sleep!$"
+	.string "{STRING 16}’s {STRING 19}\nsnapped it out of confusion!$"
+	.string "{STRING 16}’s {STRING 19}\ncured its {STRING 0} problem!$"
+	.string "{STRING 16}’s {STRING 19}\nnormalized its status!$"
+	.string "{STRING 16}’s {STRING 19}\nrestored health!$"
+	.string "{STRING 16}’s {STRING 19}\nrestored {STRING 0}’s PP!$"
+	.string "{STRING 16}’s {STRING 19}\nrestored its status!$"
+	.string "{STRING 16}’s {STRING 19}\nrestored its HP a little!$"
+	.string "{STRING 19} allows the\nuse of only {STRING 17}!\p$"
+	.string "{DEFENDING_MON} hung on\nusing its {STRING 19}!$"
+	.string "$"
+	.string "You throw a BALL now, right?\nI... I’ll do my best!$"
 
 	.global gUnknown_08400C4A
 gUnknown_08400C4A: @ 8400C4A
-	.incbin "baserom.gba", 0x00400c4a, 0x16
+@ replacing .incbin "baserom.gba", 0x00400c4a, 0x16
+	.string "What?\n{STR_VAR_1} is evolving!$"
 
 	.global gUnknown_08400C60
 gUnknown_08400C60: @ 8400C60
-	.incbin "baserom.gba", 0x00400c60, 0x2d
+@ replacing .incbin "baserom.gba", 0x00400c60, 0x2d
+	.string "Congratulations! Your {STR_VAR_1}\nevolved into {STR_VAR_2}!{UNKNOWN_A}\p$"
 
 	.global gUnknown_08400C8D
 gUnknown_08400C8D: @ 8400C8D
-	.incbin "baserom.gba", 0x00400c8d, 0x1b
+@ replacing .incbin "baserom.gba", 0x00400c8d, 0x1b
+	.string "Huh? {STR_VAR_1}\nstopped evolving!\p$"
 
 	.global gUnknown_08400CA8
 gUnknown_08400CA8: @ 8400CA8
-	.incbin "baserom.gba", 0x00400ca8, 0x13
+@ replacing .incbin "baserom.gba", 0x00400ca8, 0x13
+	.string "What should\n{STRING 15} do?$"
 
 	.global gUnknown_08400CBB
 gUnknown_08400CBB: @ 8400CBB
-	.incbin "baserom.gba", 0x00400cbb, 0x11
+@ replacing .incbin "baserom.gba", 0x00400cbb, 0x11
+	.string "What will\n{STRING 32} do?$"
 
 	.global gUnknown_08400CCC
 gUnknown_08400CCC: @ 8400CCC
-	.incbin "baserom.gba", 0x00400ccc, 0x14
+@ replacing .incbin "baserom.gba", 0x00400ccc, 0x14
+	.string "What will\nWALLY do?$"
 
 	.global gUnknown_08400CE0
 gUnknown_08400CE0: @ 8400CE0
-	.incbin "baserom.gba", 0x00400ce0, 0x13
+@ replacing .incbin "baserom.gba", 0x00400ce0, 0x13
+	.string "{PAUSE 16}Link standby...$"
 
 	.global gUnknown_08400CF3
 gUnknown_08400CF3: @ 8400CF3
-	.incbin "baserom.gba", 0x00400cf3, 0x22
+@ replacing .incbin "baserom.gba", 0x00400cf3, 0x22
+	.string "{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW SKY_BLUE LIGHT_BLUE WHITE2}FIGHT{CLEAR_TO 0x2E}BAG\nPOKéMON{CLEAR_TO 0x2E}RUN$"
 
 	.global gUnknown_08400D15
 gUnknown_08400D15: @ 8400D15
-	.incbin "baserom.gba", 0x00400d15, 0x23
+@ replacing .incbin "baserom.gba", 0x00400d15, 0x23
+	.string "{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW SKY_BLUE LIGHT_BLUE WHITE2}BALL{CLEAR_TO 0x2E}{POKEBLOCK}\nGO NEAR{CLEAR_TO 0x2E}RUN$"
 
 	.global gUnknown_08400D38
 gUnknown_08400D38: @ 8400D38
-	.incbin "baserom.gba", 0x00400d38, 0x11
+@ replacing .incbin "baserom.gba", 0x00400d38, 0x11
+	.string "{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW SKY_BLUE LIGHT_BLUE WHITE2}PP\nTYPE/$"
 
 	.global gUnknown_08400D49
 gUnknown_08400D49: @ 8400D49
-	.incbin "baserom.gba", 0x00400d49, 0x9
+@ replacing .incbin "baserom.gba", 0x00400d49, 0x9
+	.string "{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW SKY_BLUE LIGHT_BLUE WHITE2}$"
 
 	.global gUnknown_08400D52
 gUnknown_08400D52: @ 8400D52
-	.incbin "baserom.gba", 0x00400d52, 0x28
+@ replacing .incbin "baserom.gba", 0x00400d52, 0x28
+	.string "{COLOR_HIGHLIGHT_SHADOW SKY_BLUE LIGHT_BLUE WHITE2}{PALETTE 5}Which move should\nbe forgotten?$"
 
 	.global gUnknown_08400D7A
 gUnknown_08400D7A: @ 8400D7A
-	.incbin "baserom.gba", 0x00400d7a, 0xf
+@ replacing .incbin "baserom.gba", 0x00400d7a, 0xf
+	.string "{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW SKY_BLUE LIGHT_BLUE WHITE2}Yes\nNo$"
 
 	.global gUnknown_08400D89
 gUnknown_08400D89: @ 8400D89
-	.incbin "baserom.gba", 0x00400d89, 0x16
+@ replacing .incbin "baserom.gba", 0x00400d89, 0x16
+	.string "{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW SKY_BLUE LIGHT_BLUE WHITE2}Switch\nwhich?$"
 
 	.global gUnknown_08400D9F
 gUnknown_08400D9F: @ 8400D9F
-	.incbin "baserom.gba", 0x00400d9f, 0xb
+@ replacing .incbin "baserom.gba", 0x00400d9f, 0xb
+	.string "{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW SKY_BLUE LIGHT_BLUE WHITE2}$"
+	.string "{RIGHT_ARROW}$"
 
 	.global gUnknown_08400DAA
 gUnknown_08400DAA: @ 8400DAA
-	.incbin "baserom.gba", 0x00400daa, 0x2
+@ replacing .incbin "baserom.gba", 0x00400daa, 0x2
+	.string "+$"
 
 	.global gUnknown_08400DAC
 gUnknown_08400DAC: @ 8400DAC
-	.incbin "baserom.gba", 0x00400dac, 0x2a
+@ replacing .incbin "baserom.gba", 0x00400dac, 0x2a
+	.string "-$"
+	.string "HP     $"
+	.string "ATTACK $"
+	.string "DEFENSE$"
+	.string "SP. ATK$"
+	.string "SP. DEF$"
 
 	.global gUnknown_08400DD6
 gUnknown_08400DD6: @ 8400DD6
-	.incbin "baserom.gba", 0x00400dd6, 0x10
+@ replacing .incbin "baserom.gba", 0x00400dd6, 0x10
+	.string "{HIGHLIGHT RED}SAFARI BALLS$"
 
 	.global gUnknown_08400DE6
 gUnknown_08400DE6: @ 8400DE6
-	.incbin "baserom.gba", 0x00400de6, 0xa
+@ replacing .incbin "baserom.gba", 0x00400de6, 0xa
+	.string "{HIGHLIGHT RED}Left: $"
 
 	.global gUnknown_08400DF0
 gUnknown_08400DF0: @ 8400DF0
-	.incbin "baserom.gba", 0x00400df0, 0x33
+@ replacing .incbin "baserom.gba", 0x00400df0, 0x33
+	.string "{HIGHLIGHT RED}$"
+	.string "sleep$"
+	.string "poison$"
+	.string "burn$"
+	.string "paralysis$"
+	.string "ice$"
+	.string "confusion$"
+	.string "love$"
 
 	.global gUnknown_08400E23
 gUnknown_08400E23: @ 8400E23
-	.incbin "baserom.gba", 0x00400e23, 0x6
+@ replacing .incbin "baserom.gba", 0x00400e23, 0x6
+	.string " and $"
 
 	.global gUnknown_08400E29
 gUnknown_08400E29: @ 8400E29
-	.incbin "baserom.gba", 0x00400e29, 0x3
+@ replacing .incbin "baserom.gba", 0x00400e29, 0x3
+	.string ", $"
 
 	.global gUnknown_08400E2C
 gUnknown_08400E2C: @ 8400E2C
-	.incbin "baserom.gba", 0x00400e2c, 0x2
+@ replacing .incbin "baserom.gba", 0x00400e2c, 0x2
+	.string " $"
 
 	.global gUnknown_08400E2E
 gUnknown_08400E2E: @ 8400E2E
-	.incbin "baserom.gba", 0x00400e2e, 0x2
+@ replacing .incbin "baserom.gba", 0x00400e2e, 0x2
+	.string "\l$"
 
 	.global gUnknown_08400E30
 gUnknown_08400E30: @ 8400E30
-	.incbin "baserom.gba", 0x00400e30, 0x2
+@ replacing .incbin "baserom.gba", 0x00400e30, 0x2
+	.string "\n$"
 
 	.global gUnknown_08400E32
 gUnknown_08400E32: @ 8400E32
-	.incbin "baserom.gba", 0x00400e32, 0x4
+@ replacing .incbin "baserom.gba", 0x00400e32, 0x4
+	.string "are$"
 
 	.global gUnknown_08400E36
 gUnknown_08400E36: @ 8400E36
-	.incbin "baserom.gba", 0x00400e36, 0x4
+@ replacing .incbin "baserom.gba", 0x00400e36, 0x4
+	.string "are$"
 
 	.global gUnknown_08400E3A
 gUnknown_08400E3A: @ 8400E3A
-	.incbin "baserom.gba", 0x00400e3a, 0x8
+@ replacing .incbin "baserom.gba", 0x00400e3a, 0x8
+	.string "Bad EGG$"
 
 	.global gUnknown_08400E42
 gUnknown_08400E42: @ 8400E42
-	.incbin "baserom.gba", 0x00400e42, 0x6
+@ replacing .incbin "baserom.gba", 0x00400e42, 0x6
+	.string "WALLY$"
 
 	.global gUnknown_08400E48
 gUnknown_08400E48: @ 8400E48
-	.incbin "baserom.gba", 0x00400e48, 0x7
+@ replacing .incbin "baserom.gba", 0x00400e48, 0x7
+	.string "{HIGHLIGHT TRANSPARENT}Win$"
 
 	.global gUnknown_08400E4F
 gUnknown_08400E4F: @ 8400E4F
-	.incbin "baserom.gba", 0x00400e4f, 0x8
+@ replacing .incbin "baserom.gba", 0x00400e4f, 0x8
+	.string "{HIGHLIGHT TRANSPARENT}Loss$"
 
 	.global gUnknown_08400E57
 gUnknown_08400E57: @ 8400E57
-	.incbin "baserom.gba", 0x00400e57, 0x7
+@ replacing .incbin "baserom.gba", 0x00400e57, 0x7
+	.string "{HIGHLIGHT TRANSPARENT}Tie$"
 
 	.global gUnknown_08400E5E
 gUnknown_08400E5E: @ 8400E5E
-	.incbin "baserom.gba", 0x00400e5e, 0x4
+@ replacing .incbin "baserom.gba", 0x00400e5e, 0x4
+	.string " is$"
 
 	.global gUnknown_08400E62
 gUnknown_08400E62: @ 8400E62
-	.incbin "baserom.gba", 0x00400e62, 0xf6
+@ replacing .incbin "baserom.gba", 0x00400e62, 0xf6
+	.string "’s$"
+	.string "a NORMAL move$"
+	.string "a FIGHTING move$"
+	.string "a FLYING move$"
+	.string "a POISON move$"
+	.string "a GROUND move$"
+	.string "a ROCK move$"
+	.string "a BUG move$"
+	.string "a GHOST move$"
+	.string "a STEEL move$"
+	.string "a ??? move$"
+	.string "a FIRE move$"
+	.string "a WATER move$"
+	.string "a GRASS move$"
+	.string "an ELECTRIC move$"
+	.string "a PSYCHIC move$"
+	.string "an ICE move$"
+	.string "a DRAGON move$"
+	.string "a DARK move$"
+	.string "   "
 
 	.global gUnknown_08400F58
 gUnknown_08400F58: @ 8400F58
@@ -8098,7 +8584,7 @@ gUnknown_0840B869: @ 840B869
 
 	.global gUnknown_0840C5F0
 gUnknown_0840C5F0: @ 840C5F0
-	.incbin "baserom.gba", 0x0040c5f0, 0x410
+	.incbin "baserom.gba", 0x0040c5f0, 0x410 @ pointer table to something
 
 	.global gUnknown_0840CA00
 gUnknown_0840CA00: @ 840CA00
@@ -8935,7 +9421,7 @@ gUnknown_0840F429: @ 840F429
 
 	.global gUnknown_0840F44B
 gUnknown_0840F44B: @ 840F44B
-	.string "{PAUSE 32}1, {PAUSE 15}2, and{PAUSE 15}... {PAUSE 15}... {PAUSE 15}... {PAUSE 15}{PLAY_MUSIC SE_KON}Poof!\p{STR_VAR_1} forgot how to\nuse {STR_VAR_2}.\pAnd...{PAUSE_UNTIL_PRESS}$"
+	.string "{PAUSE 32}1, {PAUSE 15}2, and{PAUSE 15}... {PAUSE 15}... {PAUSE 15}... {PAUSE 15}{PLAY_SE SE_KON}Poof!\p{STR_VAR_1} forgot how to\nuse {STR_VAR_2}.\pAnd...{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F49E
 gUnknown_0840F49E: @ 840F49E
@@ -9436,9 +9922,9 @@ gUnknown_0840FF75: @ 840FF75 @ replacing .incbin "baserom.gba", 0x0040ff75, 0x7d
 	.string "6$"
 	.string "7$"
 	.string "8$"
-	.string "FRESH WATER{UNKNOWN_13}ぶ¥200$"
-	.string "SODA POP{UNKNOWN_13}ぶ¥300$"
-	.string "LEMONADE{UNKNOWN_13}ぶ¥350$"
+	.string "FRESH WATER{CLEAR_TO 0x48}¥200$"
+	.string "SODA POP{CLEAR_TO 0x48}¥300$"
+	.string "LEMONADE{CLEAR_TO 0x48}¥350$"
 	.string "HOW TO RIDE$"
 	.string "HOW TO TURN$"
 	.string "SANDY SLOPES$"
@@ -9659,22 +10145,22 @@ gUnknown_08410C40: @ 8410C40 @ replacing .incbin "baserom.gba", 0x00410c40, 0x14
 	.global gUnknown_08410C54
 gUnknown_08410C54: @ 8410C54 @ replacing .incbin "baserom.gba", 0x00410c54, 0x1ce
 	.string "BOX$"
-	.string "{UNKNOWN_11} Check the map of the HOENN region.$"
-	.string "{UNKNOWN_11} Check POKéMON in detail.$"
-	.string "{UNKNOWN_11} Check TRAINER information.$"
-	.string "{UNKNOWN_11} Check obtained RIBBONS.$"
-	.string "{UNKNOWN_11} Put away the POKéNAV.$"
-	.string "{UNKNOWN_11} There are no RIBBON winners.$"
-	.string "{UNKNOWN_11} No TRAINERS are registered.$"
-	.string "{UNKNOWN_11} Check party POKéMON in detail.$"
-	.string "{UNKNOWN_11} Check all POKéMON in detail.$"
-	.string "{UNKNOWN_11} Return to the POKéNAV menu.$"
-	.string "{UNKNOWN_11} Find cool POKéMON.$"
-	.string "{UNKNOWN_11} Find beautiful POKéMON.$"
-	.string "{UNKNOWN_11} Find cute POKéMON.$"
-	.string "{UNKNOWN_11} Find smart POKéMON.$"
-	.string "{UNKNOWN_11} Find tough POKéMON.$"
-	.string "{UNKNOWN_11} Return to the CONDITION menu.$"
+	.string "{CLEAR} Check the map of the HOENN region.$"
+	.string "{CLEAR} Check POKéMON in detail.$"
+	.string "{CLEAR} Check TRAINER information.$"
+	.string "{CLEAR} Check obtained RIBBONS.$"
+	.string "{CLEAR} Put away the POKéNAV.$"
+	.string "{CLEAR} There are no RIBBON winners.$"
+	.string "{CLEAR} No TRAINERS are registered.$"
+	.string "{CLEAR} Check party POKéMON in detail.$"
+	.string "{CLEAR} Check all POKéMON in detail.$"
+	.string "{CLEAR} Return to the POKéNAV menu.$"
+	.string "{CLEAR} Find cool POKéMON.$"
+	.string "{CLEAR} Find beautiful POKéMON.$"
+	.string "{CLEAR} Find cute POKéMON.$"
+	.string "{CLEAR} Find smart POKéMON.$"
+	.string "{CLEAR} Find tough POKéMON.$"
+	.string "{CLEAR} Return to the CONDITION menu.$"
 
 	.global gUnknown_08410E22
 gUnknown_08410E22: @ 8410E22 @ replacing .incbin "baserom.gba", 0x00410e22, 0xf
@@ -9686,20 +10172,17 @@ gUnknown_08410E31: @ 8410E31 @ replacing .incbin "baserom.gba", 0x00410e31, 0xf
 
 	.global gUnknown_08410E40
 gUnknown_08410E40: @ 8410E40 @ replacing .incbin "baserom.gba", 0x00410e40, 0xc
-	.string "{UNKNOWN_5}"
-	.byte 0x05
+	.string "{PALETTE 5}"
 	.string "STRATEGY$"
 
 	.global gUnknown_08410E4C
 gUnknown_08410E4C: @ 8410E4C @ replacing .incbin "baserom.gba", 0x00410e4c, 0x15
-	.string "{UNKNOWN_5}"
-	.byte 0x05
+	.string "{PALETTE 5}"
 	.string "TRAINER’S POKéMON$"
 
 	.global gUnknown_08410E61
 gUnknown_08410E61: @ 8410E61 @ replacing .incbin "baserom.gba", 0x00410e61, 0x15
-	.string "{UNKNOWN_5}"
-	.byte 0x05
+	.string "{PALETTE 5}"
 	.string "SELF-INTRODUCTION$"
 
 	.global gUnknown_08410E76

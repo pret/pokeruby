@@ -263,8 +263,9 @@ PK        = 53
 PKMN      = 53 54
 POKEBLOCK = 55 56 57 58 59
 
+STRING = FD
+
 @ string placeholders
-@ unknown       (FD 00)
 PLAYER         = FD 01
 STR_VAR_1      = FD 02
 STR_VAR_2      = FD 03
@@ -280,6 +281,16 @@ GOOD_LEADER    = FD 0B @ "ARCHIE"  / "MAXIE"
 EVIL_LEGENDARY = FD 0C @ "GROUDON" / "KYOGRE"
 GOOD_LEGENDARY = FD 0D @ "KYOGRE"  / "GROUDON"
 
+@ battle macros
+
+UNKNOWN_STR = FD 00
+
+ATTACKING_TRAINER = FD 08
+DEFENDING_TRAINER = FD 09
+
+ATTACKING_MON = FD 0C
+DEFENDING_MON = FD 0D
+
 @ indicates the end of a town/city name (before " TOWN" or " CITY")
 NAME_END = FC 00
 
@@ -289,25 +300,24 @@ COLOR = FC 01 @ use a color listed below right after
 HIGHLIGHT = FC 02 @ same as fc 01
 SHADOW = FC 03 @ same as fc 01
 COLOR_HIGHLIGHT_SHADOW = FC 04 @ takes 3 bytes
-UNKNOWN_5 = FC 05 @ used in credits
+PALETTE = FC 05 @ used in credits
 SIZE = FC 06 @ note that anything other than "SMALL" is invalid
 UNKNOWN_7 = FC 07
 PAUSE = FC 08 @ manually print the wait byte after this, havent mapped them
 PAUSE_UNTIL_PRESS = FC 09
 UNKNOWN_A = FC 0A
-UNKNOWN_B = FC 0B
+PLAY_BGM = FC 0B
 ESCAPE = FC 0C
 SHIFT_TEXT = FC 0D 
 UNKNOWN_E = FC 0E
 UNKNOWN_F = FC 0F
-PLAY_MUSIC = FC 10
-UNKNOWN_10 = FC 10
-UNKNOWN_11 = FC 11 @ this one is apparently used somewhere, find out what this is please
-UNKNOWN_12 = FC 12
-UNKNOWN_13 = FC 13
+PLAY_SE = FC 10
+CLEAR = FC 11
+SKIP = FC 12
+CLEAR_TO = FC 13
 UNKNOWN_14 = FC 14
-ENLARGE = FC 15
-SET_TO_DEFAULT_SIZE = FC 16
+JPN = FC 15
+ENG = FC 16
 PAUSE_MUSIC = FC 17
 RESUME_MUSIC = FC 18
 

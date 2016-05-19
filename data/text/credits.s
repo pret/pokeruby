@@ -3,81 +3,81 @@ gUnknown_0840B878:
 	.incbin "baserom.gba", 0x0040B878, 0xF @ unknown
 
 Category_Credits:
-	.string "{UNKNOWN_5 9}Credits$"
+	.string "{PALETTE 9}Credits$"
 Category_ExecutiveDirector:
-	.string "{UNKNOWN_5 9}Executive Director$"
+	.string "{PALETTE 9}Executive Director$"
 Category_Director:
-	.string "{UNKNOWN_5 9}Director$"
+	.string "{PALETTE 9}Director$"
 Category_ArtDirector:
-	.string "{UNKNOWN_5 9}Art Director$"
+	.string "{PALETTE 9}Art Director$"
 Category_BattleDirector:
-	.string "{UNKNOWN_5 9}Battle Director$"
+	.string "{PALETTE 9}Battle Director$"
 Category_MainProgrammer:
-	.string "{UNKNOWN_5 9}Main Programmer$"
+	.string "{PALETTE 9}Main Programmer$"
 Category_BattleSystemProgrammer:
-	.string "{UNKNOWN_5 9}Battle System Programmer$"
+	.string "{PALETTE 9}Battle System Programmer$"
 Category_FieldSystemProgrammer:
-	.string "{UNKNOWN_5 9}Field System Programmer$"
+	.string "{PALETTE 9}Field System Programmer$"
 Category_Programmers:
-	.string "{UNKNOWN_5 9}Programmers$"
+	.string "{PALETTE 9}Programmers$"
 Category_MainGraphicDesigner:
-	.string "{UNKNOWN_5 9}Main Graphic Designer$"
+	.string "{PALETTE 9}Main Graphic Designer$"
 Category_POKeMONGraphicDesigners:
-	.string "{UNKNOWN_5 9}POKéMON & Graphic Designers$"
+	.string "{PALETTE 9}POKéMON & Graphic Designers$"
 Category_POKeMONDesigners:
-	.string "{UNKNOWN_5 9}POKéMON Designers$"
+	.string "{PALETTE 9}POKéMON Designers$"
 Category_MusicComposition:
-	.string "{UNKNOWN_5 9}Music Composition$"
+	.string "{PALETTE 9}Music Composition$"
 Category_SoundEffectsPOKeMONVoices:
-	.string "{UNKNOWN_5 9}Sound Effects & POKéMON Voices$"
+	.string "{PALETTE 9}Sound Effects & POKéMON Voices$"
 Category_GameDesigners:
-	.string "{UNKNOWN_5 9}Game Designers$"
+	.string "{PALETTE 9}Game Designers$"
 Category_PlotScenario:
-	.string "{UNKNOWN_5 9}Plot Scenario$"
+	.string "{PALETTE 9}Plot Scenario$"
 Category_GameScenario:
-	.string "{UNKNOWN_5 9}Game Scenario$"
+	.string "{PALETTE 9}Game Scenario$"
 Category_ScriptDesigners:
-	.string "{UNKNOWN_5 9}Script Designers$"
+	.string "{PALETTE 9}Script Designers$"
 Category_MapDesigners:
-	.string "{UNKNOWN_5 9}Map Designers$"
+	.string "{PALETTE 9}Map Designers$"
 Category_MapDataDesigners:
-	.string "{UNKNOWN_5 9}Map Data Designers$"
+	.string "{PALETTE 9}Map Data Designers$"
 Category_ParametricDesigners:
-	.string "{UNKNOWN_5 9}Parametric Designers$"
+	.string "{PALETTE 9}Parametric Designers$"
 Category_POKeDEXText:
-	.string "{UNKNOWN_5 9}POKéDEX Text$"
+	.string "{PALETTE 9}POKéDEX Text$"
 Category_EnvironmentToolProgrammers:
-	.string "{UNKNOWN_5 9}Environment & Tool Programmers$"
+	.string "{PALETTE 9}Environment & Tool Programmers$"
 Category_ProductTesting:
-	.string "{UNKNOWN_5 9}Product Testing$"
+	.string "{PALETTE 9}Product Testing$"
 Category_SpecialThanks:
-	.string "{UNKNOWN_5 9}Special Thanks$"
+	.string "{PALETTE 9}Special Thanks$"
 Category_Coordinators:
-	.string "{UNKNOWN_5 9}Coordinators$"
+	.string "{PALETTE 9}Coordinators$"
 Category_Producers:
-	.string "{UNKNOWN_5 9}Producers$"
+	.string "{PALETTE 9}Producers$"
 Category_ExecutiveProducers:
-	.string "{UNKNOWN_5 9}Executive Producers$"
+	.string "{PALETTE 9}Executive Producers$"
 Category_InformationSupervisors:
-	.string "{UNKNOWN_5 9}Information Supervisors$"
+	.string "{PALETTE 9}Information Supervisors$"
 Category_TaskManagers:
-	.string "{UNKNOWN_5 9}Task Managers$"
+	.string "{PALETTE 9}Task Managers$"
 Category_BrailleCodeCheck:
-	.string "{UNKNOWN_5 9}Braille Code Check$"
+	.string "{PALETTE 9}Braille Code Check$"
 Category_EnglishVersionCoordinators:
-	.string "{UNKNOWN_5 9}English Version Coordinators$"
+	.string "{PALETTE 9}English Version Coordinators$"
 Category_Translator:
-	.string "{UNKNOWN_5 9}Translator$"
+	.string "{PALETTE 9}Translator$"
 Category_ProductSupport:
-	.string "{UNKNOWN_5 9}Product Support$"
+	.string "{PALETTE 9}Product Support$"
 Category_Artwork:
-	.string "{UNKNOWN_5 9}Artwork$"
+	.string "{PALETTE 9}Artwork$"
 Category_TextEditor:
-	.string "{UNKNOWN_5 9}Text Editor$"
+	.string "{PALETTE 9}Text Editor$"
 Category_NOAProductTesting:
-	.string "{UNKNOWN_5 9}NOA Product Testing$"
+	.string "{PALETTE 9}NOA Product Testing$"
 Category_GraphicDesigners:
-	.string "{UNKNOWN_5 9}Graphic Designers$"
+	.string "{PALETTE 9}Graphic Designers$"
 Text_SatoshiTajiri:
 	.string "Satoshi Tajiri$"
 Text_Masuda:
@@ -275,8 +275,8 @@ Text_RNZFotB:
 Text_CreditsTerminator:
 	.string "$"
 Text_Version:
-	.string "{UNKNOWN_5 9}POKéMON RUBY VERSION$"
-	
+	.string "{PALETTE 9}POKéMON RUBY VERSION$"
+
 @ pointer table
 
 	credits_entry 0, Text_CreditsTerminator
