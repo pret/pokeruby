@@ -8094,9 +8094,7 @@ gUnknown_0840B85A: @ 840B85A
 gUnknown_0840B869: @ 840B869
 	.incbin "baserom.gba", 0x0040b869, 0xf
 
-	.global gUnknown_0840B878
-gUnknown_0840B878: @ 840B878
-	.incbin "baserom.gba", 0x0040b878, 0xd78
+	.include "data/text/credits.s"
 
 	.global gUnknown_0840C5F0
 gUnknown_0840C5F0: @ 840C5F0

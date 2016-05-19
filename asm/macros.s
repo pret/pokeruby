@@ -97,3 +97,8 @@
 	.2byte 0x7fff
 	.fill 6 @ padding
 	.endm
+	
+	.macro credits_entry number, text
+	.4byte \number
+	.4byte \text
+	.endm
