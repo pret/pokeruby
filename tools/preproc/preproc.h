@@ -21,6 +21,8 @@
 #ifndef PREPROC_H
 #define PREPROC_H
 
+#include <cstdio>
+#include <cstdlib>
 #include "charmap.h"
 
 #ifdef _MSC_VER
@@ -44,7 +46,7 @@ do                                               \
 #endif // _MSC_VER
 
 const int kMaxPath = 256;
-const int kMaxStringLength = 256;
+const int kMaxStringLength = 1024;
 const unsigned long kMaxCharmapSequenceLength = 16;
 
 extern Charmap* g_charmap;

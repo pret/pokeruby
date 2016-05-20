@@ -18,35 +18,29 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+#include <string>
 #include <stack>
 #include "preproc.h"
 #include "asm_file.h"
+#include "c_file.h"
 #include "charmap.h"
 
 Charmap* g_charmap;
 
-int main(int argc, char **argv)
+void PreprocAsmFile(std::string filename)
 {
-    if (argc != 3)
-    {
-        fprintf(stderr, "Usage: %s ASM_FILE CHARMAP_FILE", argv[0]);
-        return 1;
-    }
-
-    g_charmap = new Charmap(argv[2]);
-
     std::stack<AsmFile> stack;
 
-    stack.push(AsmFile(argv[1]));
+    stack.push(AsmFile(filename));
 
     for (;;)
     {
         while (stack.top().IsAtEnd())
         {
             stack.pop();
-            
+
             if (stack.empty())
-                return 0;
+                return;
             else
                 stack.top().OutputLocation();
         }
@@ -83,4 +77,56 @@ int main(int argc, char **argv)
             break;
         }
     }
+}
+
+void PreprocCFile(std::string filename)
+{
+    CFile cFile(filename);
+    cFile.Preproc();
+}
+
+char* GetFileExtension(char* filename)
+{
+    char* extension = filename;
+
+    while (*extension != 0)
+        extension++;
+
+    while (extension > filename && *extension != '.')
+        extension--;
+
+    if (extension == filename)
+        return nullptr;
+
+    extension++;
+
+    if (*extension == 0)
+        return nullptr;
+
+    return extension;
+}
+
+int main(int argc, char **argv)
+{
+    if (argc != 3)
+    {
+        fprintf(stderr, "Usage: %s SRC_FILE CHARMAP_FILE", argv[0]);
+        return 1;
+    }
+
+    g_charmap = new Charmap(argv[2]);
+
+    char* extension = GetFileExtension(argv[1]);
+
+    if (!extension)
+        FATAL_ERROR("\"%s\" has no file extension.\n", argv[1]);
+
+    if ((extension[0] == 's') && extension[1] == 0)
+        PreprocAsmFile(argv[1]);
+    else if ((extension[0] == 'c' || extension[0] == 'i') && extension[1] == 0)
+        PreprocCFile(argv[1]);
+    else
+        FATAL_ERROR("\"%s\" has an unknown file extension of \"%s\".\n", argv[1], extension);
+
+    return 0;
 }
