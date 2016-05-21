@@ -91,7 +91,7 @@ static void GetAffineAnimFrame(u8 matrixNum, struct Sprite *sprite, struct Affin
 static void ApplyAffineAnimFrame(u8 matrixNum, struct AffineAnimFrameCmd *frameCmd);
 static void ResetAffineAnimData(void);
 static u8 IndexOfSpriteTileTag(u16 tag);
-static void AddSpriteTileRange(u16 tag, u16 start, u16 count);
+static void AllocSpriteTileRange(u16 tag, u16 start, u16 count);
 static void ApplySpritePalette(u8 *src, u16 paletteOffset);
 
 typedef void (*AnimFunc)(struct Sprite *);
@@ -322,7 +322,7 @@ void ResetSpriteData(void)
     ResetAllSprites();
     ClearSpriteCopyRequests();
     ResetAffineAnimData();
-    ClearSpriteTileRanges();
+    FreeSpriteTileRanges();
     gOamLimit = 64;
     gReservedSpriteTileCount = 0;
     AllocSpriteTiles(0);
@@ -1470,7 +1470,7 @@ u16 LoadSpriteSheet(struct SpriteSheet *sheet)
     }
     else
     {
-        AddSpriteTileRange(sheet->tag, (u16)tileStart, sheet->size / TILE_SIZE_4BPP);
+        AllocSpriteTileRange(sheet->tag, (u16)tileStart, sheet->size / TILE_SIZE_4BPP);
         CpuCopy16(sheet->data, (u8 *)OBJ_VRAM0 + TILE_SIZE_4BPP * tileStart, sheet->size);
         return (u16)tileStart;
     }
@@ -1493,7 +1493,7 @@ u16 AllocTilesForSpriteSheet(struct SpriteSheet *sheet)
     }
     else
     {
-        AddSpriteTileRange(sheet->tag, (u16)tileStart, sheet->size / TILE_SIZE_4BPP);
+        AllocSpriteTileRange(sheet->tag, (u16)tileStart, sheet->size / TILE_SIZE_4BPP);
         return (u16)tileStart;
     }
 }
@@ -1541,7 +1541,7 @@ void FreeSpriteTilesByTag(u16 tag)
     }
 }
 
-void ClearSpriteTileRanges(void)
+void FreeSpriteTileRanges(void)
 {
     u8 i;
 
@@ -1584,7 +1584,7 @@ u16 GetSpriteTileTagByTileStart(u16 start)
     return 0xFFFF;
 }
 
-static void AddSpriteTileRange(u16 tag, u16 start, u16 count)
+static void AllocSpriteTileRange(u16 tag, u16 start, u16 count)
 {
     u8 freeIndex = IndexOfSpriteTileTag(0xFFFF);
     sSpriteTileRangeTags[freeIndex] = tag;
@@ -1608,7 +1608,7 @@ u16 LoadSpriteSheetDeferred(struct SpriteSheet *sheet)
     }
     else
     {
-        AddSpriteTileRange(sheet->tag, (u16)tileStart, sheet->size / TILE_SIZE_4BPP);
+        AllocSpriteTileRange(sheet->tag, (u16)tileStart, sheet->size / TILE_SIZE_4BPP);
         RequestSpriteSheetCopy(sheet);
         return (u16)tileStart;
     }
