@@ -3627,7 +3627,7 @@ _080548C4:
 	bl sub_8054814
 	bl sub_8054C54
 	ldr r0, _080548DC
-	bl ShowBg
+	bl sub_8002A34
 	ldr r0, _080548E0
 	bl sub_8071C4C
 	b _08054928
@@ -3735,7 +3735,7 @@ _080549B4:
 	bl sub_8054814
 	bl sub_8054C54
 	ldr r0, _080549CC
-	bl ShowBg
+	bl sub_8002A34
 	ldr r0, _080549D0
 	bl sub_8071C4C
 	b _08054A38
@@ -3897,7 +3897,7 @@ _08054B0C:
 	bl sub_8054814
 	bl sub_8054C54
 	ldr r0, _08054B24
-	bl ShowBg
+	bl sub_8002A34
 	ldr r0, _08054B28
 	bl sub_8071C4C
 	b _08054B70
@@ -4042,7 +4042,7 @@ sub_8054C2C: @ 8054C2C
 	bl sub_8054814
 	bl sub_8054C54
 	ldr r0, _08054C4C
-	bl ShowBg
+	bl sub_8002A34
 	ldr r0, _08054C50
 	bl sub_8071C4C
 	bl mapdata_load_assets_to_gpu_and_full_redraw
@@ -52984,7 +52984,7 @@ _0806AB16:
 	bl sub_8073B94
 	ldr r4, _0806ABA0
 	adds r0, r4, 0
-	bl ShowBg
+	bl sub_8002A34
 	adds r0, r4, 0
 	bl sub_8071C4C
 	movs r1, 0x80
@@ -53879,7 +53879,7 @@ _0806B2B2:
 _0806B2CC: .4byte 0x0201b000
 _0806B2D0:
 	ldr r0, _0806B2E0
-	bl ShowBg
+	bl sub_8002A34
 	ldr r1, _0806B2E4
 	ldr r0, _0806B2E8
 	adds r1, r0
@@ -67054,7 +67054,7 @@ _08071AA4:
 _08071AB6:
 	ldr r4, _08071AD4
 	adds r0, r4, 0
-	bl ShowBg
+	bl sub_8002A34
 	adds r0, r4, 0
 	bl sub_8071C4C
 	movs r1, 0x80

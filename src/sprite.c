@@ -322,7 +322,7 @@ void ResetSpriteData(void)
     ResetAllSprites();
     ClearSpriteCopyRequests();
     ResetAffineAnimData();
-    FreeAllSpriteTiles();
+    ClearSpriteTileRanges();
     gOamLimit = 64;
     gReservedSpriteTileCount = 0;
     AllocSpriteTiles(0);
@@ -1541,7 +1541,7 @@ void FreeSpriteTilesByTag(u16 tag)
     }
 }
 
-void FreeAllSpriteTiles(void)
+void ClearSpriteTileRanges(void)
 {
     u8 i;
 

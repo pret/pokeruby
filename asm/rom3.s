@@ -112,7 +112,7 @@ sub_8009708: @ 8009708
 	bl ResetSpriteData
 	bl FreeAllSpritePalettes
 	ldr r0, _080097D4
-	bl ShowBg
+	bl sub_8002A34
 	ldr r0, _080097D8
 	bl sub_8071C4C
 	cmp r4, 0
@@ -1398,7 +1398,7 @@ task_new_game_prof_birch_speech_1: @ 800A1F4
 	lsls r4, 24
 	lsrs r4, 24
 	ldr r0, _0800A2B0
-	bl ShowBg
+	bl sub_8002A34
 	ldr r0, _0800A2B4
 	bl sub_8071C4C
 	ldr r0, _0800A2B8
@@ -3312,7 +3312,7 @@ new_game_prof_birch_speech_part2_start: @ 800B060
 	adds r0, r5, 0
 	bl AddBirchSpeechObjects
 	ldr r0, _0800B168
-	bl ShowBg
+	bl sub_8002A34
 	ldr r0, _0800B16C
 	bl sub_8071C4C
 	ldr r0, _0800B170
@@ -10383,7 +10383,7 @@ _0800E868:
 	bl sub_80895F8
 	ldr r4, _0800E92C
 	adds r0, r4, 0
-	bl ShowBg
+	bl sub_8002A34
 	bl sub_8073B94
 	ldr r0, _0800E930
 	movs r1, 0
@@ -13369,7 +13369,7 @@ _08010084:
 	cmp r1, 0x9F
 	ble _08010084
 	adds r0, r5, 0
-	bl ShowBg
+	bl sub_8002A34
 	bl sub_8073B94
 	ldr r0, _08010164
 	movs r4, 0
@@ -114380,7 +114380,7 @@ _08042D8C: .4byte 0x0202e8ce
 _08042D90:
 	ldr r5, _08042DBC
 	adds r0, r5, 0
-	bl ShowBg
+	bl sub_8002A34
 	ldr r4, _08042DC0
 	ldr r0, [r4]
 	adds r0, 0x8
@@ -124798,7 +124798,7 @@ _08047F48:
 	bl sub_8071C4C
 	ldr r4, _0804802C
 	adds r0, r4, 0
-	bl ShowBg
+	bl sub_8002A34
 	ldr r0, [r5]
 	adds r0, 0x4
 	adds r1, r4, 0
@@ -125493,7 +125493,7 @@ _0804857C:
 	bl sub_8071C4C
 	ldr r4, _08048644
 	adds r0, r4, 0
-	bl ShowBg
+	bl sub_8002A34
 	ldr r0, [r5]
 	adds r0, 0x4
 	adds r1, r4, 0
@@ -131419,7 +131419,7 @@ _0804B47C:
 	bl sub_804B228
 	ldr r4, _0804B57C
 	adds r0, r4, 0
-	bl ShowBg
+	bl sub_8002A34
 	ldr r0, [r6]
 	adds r0, 0x4
 	adds r1, r4, 0
@@ -131821,7 +131821,7 @@ _0804B7F4:
 	bl sub_804B228
 	ldr r4, _0804B900
 	adds r0, r4, 0
-	bl ShowBg
+	bl sub_8002A34
 	ldr r0, [r5]
 	adds r0, 0x4
 	adds r1, r4, 0
@@ -137006,7 +137006,7 @@ _0804E5AC:
 	bl SetVBlankCallback
 	ldr r4, _0804E60C
 	adds r0, r4, 0
-	bl ShowBg
+	bl sub_8002A34
 	adds r0, r4, 0
 	bl sub_8071C4C
 	ldr r3, _0804E610
@@ -137665,7 +137665,7 @@ _0804EBBC:
 	bl SetVBlankCallback
 	ldr r4, _0804EC64
 	adds r0, r4, 0
-	bl ShowBg
+	bl sub_8002A34
 	adds r0, r4, 0
 	bl sub_8071C4C
 	ldr r1, _0804EC68
@@ -138314,7 +138314,7 @@ sub_804F0F4: @ 804F0F4
 	bl SetVBlankCallback
 	ldr r4, _0804F15C
 	adds r0, r4, 0
-	bl ShowBg
+	bl sub_8002A34
 	adds r0, r4, 0
 	bl sub_8071C4C
 	ldr r1, _0804F160
@@ -144906,7 +144906,7 @@ sub_80524BC: @ 80524BC
 	bl SetVBlankCallback
 	ldr r4, _08052520
 	adds r0, r4, 0
-	bl ShowBg
+	bl sub_8002A34
 	adds r0, r4, 0
 	bl sub_8071C4C
 	ldr r0, _08052524

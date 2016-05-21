@@ -27,13 +27,14 @@
 // alignment would be if the variable were uninitialized.
 #define COMM(decl, n) IWRAM_DATA ALIGNED(1 << n) decl = {0};
 #define COMM_2(decl) COMM(decl, 2)
+#define COMM_3(decl) COMM(decl, 3)
 #define COMM_4(decl) COMM(decl, 4)
 
 #define SOUND_INFO_PTR (*(struct SoundInfo **)0x3007FF0)
 #define INTR_CHECK     (*(u16 *)0x3007FF8)
 #define INTR_VECTOR    (*(void **)0x3007FFC)
 
-#define OBJ_VRAM0 0x6010000 // when BG is in tilemap mode
+#define OBJ_VRAM0 0x6010000 // when BG is in tiled mode
 #define OBJ_VRAM1 0x6014000 // when BG is in bitmap mode
 
 #define OAM 0x7000000

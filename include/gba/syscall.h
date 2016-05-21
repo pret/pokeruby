@@ -23,6 +23,10 @@ void VBlankIntrWait(void);
 
 void CpuSet(void *src, void *dest, u32 control);
 
+#define CPU_FAST_SET_SRC_FIXED 0x01000000
+
+void CpuFastSet(void *src, void *dest, u32 control);
+
 void ObjAffineSet(struct ObjAffineSrcData *src, void *dest, s32 count, s32 offset);
 
 #endif // GUARD_GBA_SYSCALL_H

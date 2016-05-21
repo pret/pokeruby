@@ -164,7 +164,7 @@ sub_80071A4: @ 80071A4
 	bl SetVBlankCallback
 	ldr r4, _0800724C
 	adds r0, r4, 0
-	bl ShowBg
+	bl sub_8002A34
 	adds r0, r4, 0
 	bl sub_8071C4C
 	bl sub_8007CEC
@@ -2849,7 +2849,7 @@ sub_80085BC: @ 80085BC
 	bl SetVBlankCallback
 	ldr r4, _0800863C
 	adds r0, r4, 0
-	bl ShowBg
+	bl sub_8002A34
 	adds r0, r4, 0
 	bl sub_8071C4C
 	bl sub_8071EF4

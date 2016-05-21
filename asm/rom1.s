@@ -78,8 +78,8 @@ sub_8002A1C: @ 8002A1C
 _08002A30: .4byte gUnknown_081E66B2
 	thumb_func_end sub_8002A1C
 
-	thumb_func_start ShowBg
-ShowBg: @ 8002A34
+	thumb_func_start sub_8002A34
+sub_8002A34: @ 8002A34
 	push {r4,lr}
 	adds r4, r0, 0
 	bl SyncBgVisibilityAndMode
@@ -90,7 +90,7 @@ ShowBg: @ 8002A34
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end ShowBg
+	thumb_func_end sub_8002A34
 
 	thumb_func_start sub_8002A50
 sub_8002A50: @ 8002A50

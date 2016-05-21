@@ -17,6 +17,16 @@
 #define CpuCopy16(src, dest, size) CPU_COPY(src, dest, size, 16)
 #define CpuCopy32(src, dest, size) CPU_COPY(src, dest, size, 32)
 
+#define CpuFastFill(dest, value, size)                               \
+{                                                                    \
+    vu32 tmp = (vu32)(value);                                        \
+    CpuFastSet((void *)&tmp,                                         \
+               dest,                                                 \
+               CPU_FAST_SET_SRC_FIXED | ((size)/(32/8) & 0x1FFFFF)); \
+}
+
+#define CpuFastCopy(src, dest, size) CpuFastSet(src, dest, ((size)/(32/8) & 0x1FFFFF))
+
 #define DmaSet(dmaNum, src, dest, control)        \
 {                                                 \
     vu32 *dmaRegs = (vu32 *)REG_ADDR_DMA##dmaNum; \
