@@ -112,7 +112,7 @@ sub_8009708: @ 8009708
 	bl ResetSpriteData
 	bl FreeAllSpritePalettes
 	ldr r0, _080097D4
-	bl sub_8002A34
+	bl SetUpWindowConfig
 	ldr r0, _080097D8
 	bl sub_8071C4C
 	cmp r4, 0
@@ -132,8 +132,8 @@ _080097C4: .4byte 0x85000100
 _080097C8: .4byte 0x05000002
 _080097CC: .4byte 0x810001ff
 _080097D0: .4byte gUnknown_081E797C
-_080097D4: .4byte gUnknown_081E6C3C
-_080097D8: .4byte gUnknown_081E6CE4
+_080097D4: .4byte gWindowConfig_81E6C3C
+_080097D8: .4byte gWindowConfig_81E6CE4
 _080097DC:
 	movs r0, 0x1
 	negs r0, r0
@@ -1398,7 +1398,7 @@ task_new_game_prof_birch_speech_1: @ 800A1F4
 	lsls r4, 24
 	lsrs r4, 24
 	ldr r0, _0800A2B0
-	bl sub_8002A34
+	bl SetUpWindowConfig
 	ldr r0, _0800A2B4
 	bl sub_8071C4C
 	ldr r0, _0800A2B8
@@ -1474,8 +1474,8 @@ task_new_game_prof_birch_speech_1: @ 800A1F4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800A2B0: .4byte gUnknown_081E6C3C
-_0800A2B4: .4byte gUnknown_081E6CE4
+_0800A2B0: .4byte gWindowConfig_81E6C3C
+_0800A2B4: .4byte gWindowConfig_81E6CE4
 _0800A2B8: .4byte 0x04000040
 _0800A2BC: .4byte gUnknown_081E768C
 _0800A2C0: .4byte gUnknown_081E7834
@@ -3312,7 +3312,7 @@ new_game_prof_birch_speech_part2_start: @ 800B060
 	adds r0, r5, 0
 	bl AddBirchSpeechObjects
 	ldr r0, _0800B168
-	bl sub_8002A34
+	bl SetUpWindowConfig
 	ldr r0, _0800B16C
 	bl sub_8071C4C
 	ldr r0, _0800B170
@@ -3335,8 +3335,8 @@ _0800B158: .4byte gUnknown_081E764C
 _0800B15C: .4byte sub_800AAEC
 _0800B160: .4byte 0x03004b20
 _0800B164: .4byte 0x0000ffc4
-_0800B168: .4byte gUnknown_081E6C3C
-_0800B16C: .4byte gUnknown_081E6CE4
+_0800B168: .4byte gWindowConfig_81E6C3C
+_0800B16C: .4byte gWindowConfig_81E6CE4
 _0800B170: .4byte 0x02024ea4
 _0800B174:
 	strh r0, [r4, 0x14]
@@ -8967,7 +8967,7 @@ _0800DC9C:
 	adds r0, r4, 0
 	movs r2, 0xA0
 	movs r3, 0x15
-	bl CreateTextRenderer
+	bl InitWindow
 	adds r0, r4, 0
 	bl sub_8002F44
 	ldr r1, _0800DCC8
@@ -9018,7 +9018,7 @@ _0800DD08:
 	adds r0, r4, 0
 	movs r2, 0xA0
 	movs r3, 0x15
-	bl CreateTextRenderer
+	bl InitWindow
 	adds r0, r4, 0
 	bl sub_8002F44
 	ldr r1, _0800DD34
@@ -9053,7 +9053,7 @@ _0800DD38:
 	adds r0, r4, 0
 	movs r2, 0xA0
 	movs r3, 0x15
-	bl CreateTextRenderer
+	bl InitWindow
 	adds r0, r4, 0
 	bl sub_8002F44
 	ldr r1, _0800DD8C
@@ -9090,7 +9090,7 @@ _0800DDA8:
 	adds r0, r4, 0
 	movs r2, 0xA0
 	movs r3, 0x6
-	bl CreateTextRenderer
+	bl InitWindow
 	adds r0, r4, 0
 	bl sub_8002F44
 	ldr r1, _0800DDEC
@@ -9099,7 +9099,7 @@ _0800DDA8:
 	movs r2, 0xA8
 	movs r3, 0x15
 _0800DDCA:
-	bl CreateTextRenderer
+	bl InitWindow
 	adds r0, r4, 0
 	bl sub_8002F44
 	b _0800DE1C
@@ -9118,7 +9118,7 @@ _0800DDF0:
 	adds r0, r4, 0
 	movs r2, 0xA0
 	movs r3, 0x15
-	bl CreateTextRenderer
+	bl InitWindow
 	adds r0, r4, 0
 	bl sub_8002F44
 	ldr r1, _0800DE2C
@@ -9126,7 +9126,7 @@ _0800DDF0:
 	adds r0, r4, 0
 	movs r2, 0xA8
 	movs r3, 0x6
-	bl CreateTextRenderer
+	bl InitWindow
 	adds r0, r4, 0
 	bl sub_8002F44
 _0800DE1C:
@@ -10383,7 +10383,7 @@ _0800E868:
 	bl sub_80895F8
 	ldr r4, _0800E92C
 	adds r0, r4, 0
-	bl sub_8002A34
+	bl SetUpWindowConfig
 	bl sub_8073B94
 	ldr r0, _0800E930
 	movs r1, 0
@@ -10407,13 +10407,13 @@ _0800E868:
 	strb r0, [r1]
 	ldr r0, _0800E954
 	adds r1, r4, 0
-	bl sub_8002D54
+	bl InitWindowFromConfig
 	ldr r0, _0800E958
 	ldr r1, _0800E95C
-	bl sub_8002D54
+	bl InitWindowFromConfig
 	ldr r0, _0800E960
 	ldr r1, _0800E964
-	bl sub_8002D54
+	bl InitWindowFromConfig
 	bl sub_800D6D4
 	bl sub_800DAB8
 	bl ResetSpriteData
@@ -10444,7 +10444,7 @@ _0800E91C: .4byte 0x03004240
 _0800E920: .4byte 0x03004de0
 _0800E924: .4byte gUnknown_081F9674
 _0800E928: .4byte 0x0000ff10
-_0800E92C: .4byte gUnknown_081E6C58
+_0800E92C: .4byte gWindowConfig_81E6C58
 _0800E930: .4byte 0x030042a4
 _0800E934: .4byte 0x030042a0
 _0800E938: .4byte 0x030042c0
@@ -10456,9 +10456,9 @@ _0800E94C: .4byte 0x030041b8
 _0800E950: .4byte 0x0300428c
 _0800E954: .4byte 0x03004210
 _0800E958: .4byte 0x030041d0
-_0800E95C: .4byte gUnknown_081E71D0
+_0800E95C: .4byte gWindowConfig_81E71D0
 _0800E960: .4byte 0x03004250
-_0800E964: .4byte gUnknown_081E71EC
+_0800E964: .4byte gWindowConfig_81E71EC
 _0800E968: .4byte 0x030028f8
 _0800E96C: .4byte sub_800FCFC
 _0800E970: .4byte 0x020239f8
@@ -10848,7 +10848,7 @@ shedinja_something: @ 800EC44
 	bl PokemonGetField
 	ldr r1, _0800EC98
 	mov r0, sp
-	bl CompareStringWithoutExtendedControlCodes
+	bl StringCompareWithoutExtCtrlCodes
 	cmp r0, 0
 	bne _0800EC8C
 	adds r0, r4, 0
@@ -11341,7 +11341,7 @@ _0800F03E:
 	bl pokemon_get_gender
 	strb r0, [r5, 0x1C]
 	adds r0, r7, 0
-	bl StripExtendedControlCodes
+	bl SkipExtCtrlCodes
 	adds r0, r4, 0
 	movs r1, 0x3
 	bl PokemonGetField
@@ -13369,7 +13369,7 @@ _08010084:
 	cmp r1, 0x9F
 	ble _08010084
 	adds r0, r5, 0
-	bl sub_8002A34
+	bl SetUpWindowConfig
 	bl sub_8073B94
 	ldr r0, _08010164
 	movs r4, 0
@@ -13390,13 +13390,13 @@ _08010084:
 	strh r4, [r0]
 	ldr r0, _08010184
 	adds r1, r5, 0
-	bl sub_8002D54
+	bl InitWindowFromConfig
 	ldr r0, _08010188
 	ldr r1, _0801018C
-	bl sub_8002D54
+	bl InitWindowFromConfig
 	ldr r0, _08010190
 	ldr r1, _08010194
-	bl sub_8002D54
+	bl InitWindowFromConfig
 	bl sub_800D6D4
 	ldr r0, _08010198
 	movs r1, 0
@@ -13448,7 +13448,7 @@ _0801014C: .4byte 0x00005051
 _08010150: .4byte 0x030042c4
 _08010154: .4byte 0x03004240
 _08010158: .4byte 0x03004de0
-_0801015C: .4byte gUnknown_081E6C58
+_0801015C: .4byte gWindowConfig_81E6C58
 _08010160: .4byte 0x0000ff10
 _08010164: .4byte 0x030042a4
 _08010168: .4byte 0x030042a0
@@ -13460,9 +13460,9 @@ _0801017C: .4byte 0x030041b0
 _08010180: .4byte 0x030041b8
 _08010184: .4byte 0x03004210
 _08010188: .4byte 0x030041d0
-_0801018C: .4byte gUnknown_081E71D0
+_0801018C: .4byte gWindowConfig_81E71D0
 _08010190: .4byte 0x03004250
-_08010194: .4byte gUnknown_081E71EC
+_08010194: .4byte gWindowConfig_81E71EC
 _08010198: .4byte gUnknown_08D004E0
 _0801019C: .4byte 0x0400004a
 _080101A0: .4byte 0x030028f8
@@ -51793,7 +51793,7 @@ sub_8023A80: @ 8023A80
 	str r0, [sp]
 	adds r0, r4, 0
 	movs r3, 0x19
-	bl CreateTextRenderer
+	bl InitWindow
 	adds r0, r4, 0
 	bl sub_8002F44
 	ldr r1, _08023AD0
@@ -53784,7 +53784,7 @@ _08024AC4:
 	str r0, [sp]
 	adds r0, r4, 0
 	movs r3, 0xC
-	bl CreateTextRenderer
+	bl InitWindow
 	adds r0, r4, 0
 	bl sub_8002F44
 	ldr r1, _08024AEC
@@ -53905,7 +53905,7 @@ _08024BC0:
 	str r0, [sp]
 	adds r0, r4, 0
 	movs r3, 0xC
-	bl CreateTextRenderer
+	bl InitWindow
 	adds r0, r4, 0
 	bl sub_8002F44
 	ldr r1, _08024BFC
@@ -69759,7 +69759,7 @@ _0802C9F4:
 	adds r0, r4, 0
 	movs r2, 0x17
 	movs r3, 0x37
-	bl sub_8004758
+	bl FillWindowRect
 	ldr r1, _0802CA50
 	movs r2, 0xA4
 	lsls r2, 2
@@ -69767,7 +69767,7 @@ _0802C9F4:
 	str r0, [sp]
 	adds r0, r4, 0
 	movs r3, 0x17
-	bl CreateTextRenderer
+	bl InitWindow
 	adds r0, r4, 0
 	bl sub_8002F44
 	ldr r1, _0802CA54
@@ -70297,7 +70297,7 @@ _0802CE1C:
 	adds r0, r4, 0
 	movs r2, 0x17
 	movs r3, 0x37
-	bl sub_8004758
+	bl FillWindowRect
 	ldr r1, _0802CF40
 	movs r2, 0xA4
 	lsls r2, 2
@@ -70305,7 +70305,7 @@ _0802CE1C:
 	str r0, [sp]
 	adds r0, r4, 0
 	movs r3, 0x17
-	bl CreateTextRenderer
+	bl InitWindow
 	adds r0, r4, 0
 	bl sub_8002F44
 	bl sub_802E220
@@ -70349,7 +70349,7 @@ _0802CE78:
 	adds r0, r4, 0
 	movs r2, 0x17
 	movs r3, 0x37
-	bl sub_8004758
+	bl FillWindowRect
 	ldr r1, _0802CF40
 	movs r2, 0xA4
 	lsls r2, 2
@@ -70357,7 +70357,7 @@ _0802CE78:
 	str r0, [sp]
 	adds r0, r4, 0
 	movs r3, 0x17
-	bl CreateTextRenderer
+	bl InitWindow
 	adds r0, r4, 0
 	bl sub_8002F44
 	bl sub_802E220
@@ -72631,7 +72631,7 @@ _0802E194:
 _0802E196:
 	str r0, [sp]
 	adds r0, r4, 0
-	bl CreateTextRenderer
+	bl InitWindow
 	ldr r0, _0802E1AC
 	bl sub_8002F44
 	add sp, 0x4
@@ -72662,7 +72662,7 @@ sub_802E1B0: @ 802E1B0
 	str r2, [sp, 0x4]
 	movs r2, 0x1
 	movs r3, 0x37
-	bl sub_8004758
+	bl FillWindowRect
 	movs r6, 0
 _0802E1DA:
 	lsls r0, r6, 24
@@ -72761,7 +72761,7 @@ sub_802E220: @ 802E220
 	str r0, [sp]
 	adds r0, r4, 0
 	movs r3, 0x19
-	bl CreateTextRenderer
+	bl InitWindow
 	adds r0, r4, 0
 	bl sub_8002F44
 _0802E2B0:
@@ -72801,7 +72801,7 @@ sub_802E2D4: @ 802E2D4
 	adds r0, r4, 0
 	movs r2, 0x17
 	movs r3, 0x37
-	bl sub_8004758
+	bl FillWindowRect
 	ldr r1, _0802E324
 	movs r2, 0xA4
 	lsls r2, 2
@@ -72809,7 +72809,7 @@ sub_802E2D4: @ 802E2D4
 	str r0, [sp]
 	adds r0, r4, 0
 	movs r3, 0x13
-	bl CreateTextRenderer
+	bl InitWindow
 	b _0802E388
 	.align 2, 0
 _0802E314: .4byte 0x02023a60
@@ -72853,7 +72853,7 @@ _0802E328:
 	adds r0, r4, 0
 	movs r2, 0x17
 	movs r3, 0x39
-	bl sub_8004758
+	bl FillWindowRect
 	ldr r1, _0802E398
 	movs r2, 0xB0
 	lsls r2, 2
@@ -72861,7 +72861,7 @@ _0802E328:
 	str r0, [sp]
 	adds r0, r4, 0
 	movs r3, 0x17
-	bl CreateTextRenderer
+	bl InitWindow
 _0802E388:
 	ldr r0, _0802E3AC
 	bl sub_8002F44
@@ -76725,7 +76725,7 @@ sub_803037C: @ 803037C
 	movs r1, 0xA
 	movs r2, 0x2
 	movs r3, 0xF
-	bl sub_8004758
+	bl FillWindowRect
 	movs r0, 0x10
 	str r0, [sp]
 	movs r0, 0x26
@@ -76734,7 +76734,7 @@ sub_803037C: @ 803037C
 	movs r1, 0xA
 	movs r2, 0x2
 	movs r3, 0x23
-	bl sub_8004758
+	bl FillWindowRect
 	ldr r1, _08030440
 	ldr r0, _08030444
 	ldrb r0, [r0]
@@ -76749,7 +76749,7 @@ sub_803037C: @ 803037C
 	str r0, [sp]
 	adds r0, r4, 0
 	movs r3, 0x12
-	bl CreateTextRenderer
+	bl InitWindow
 	adds r0, r4, 0
 	bl sub_8002F44
 	ldr r1, _08030450
@@ -76783,7 +76783,7 @@ _080303EC:
 	str r0, [sp]
 	adds r0, r4, 0
 	movs r3, 0x2
-	bl CreateTextRenderer
+	bl InitWindow
 	adds r0, r4, 0
 	bl sub_8002F44
 	add sp, 0x8
@@ -76878,7 +76878,7 @@ sub_80304A8: @ 80304A8
 	str r0, [sp]
 	adds r0, r4, 0
 	movs r3, 0x17
-	bl CreateTextRenderer
+	bl InitWindow
 	adds r0, r4, 0
 	bl sub_8002F44
 _08030500:
@@ -97793,7 +97793,7 @@ _0803AE68:
 	mov r2, r9
 	bl pokemon_setattr
 	add r0, sp, 0x10
-	bl StripExtendedControlCodes
+	bl SkipExtCtrlCodes
 	adds r0, r7, 0
 	movs r1, 0x2
 	add r2, sp, 0x10
@@ -101911,10 +101911,10 @@ _0803CE42:
 	strb r0, [r1]
 	adds r0, r7, 0
 	adds r1, r3, 0
-	bl StopMusicWhileStringIsPrinted
+	bl SetStringCharset
 _0803CE50:
 	adds r0, r7, 0
-	bl StringGetLength
+	bl StringLength
 	lsls r0, 16
 	lsrs r4, r0, 16
 	b _0803D1DC
@@ -107791,7 +107791,7 @@ sub_803FB68: @ 803FB68
 	ldr r4, _0803FBB8
 	adds r0, r4
 	adds r1, r5, 0
-	bl CompareStringWithoutExtendedControlCodes
+	bl StringCompareWithoutExtCtrlCodes
 	cmp r0, 0
 	bne _0803FBA8
 	mov r2, r8
@@ -110162,7 +110162,7 @@ _08040D68:
 	subs r1, 0xB
 _08040D70:
 	adds r0, r4, 0
-	bl CompareStringWithoutExtendedControlCodes
+	bl StringCompareWithoutExtCtrlCodes
 	movs r3, 0
 	cmp r0, 0
 	bne _08040D7E
@@ -113036,7 +113036,7 @@ sub_80422C4: @ 80422C4
 	bl PokemonGetEncryptedField
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl StopMusicWhileStringIsPrinted
+	bl SetStringCharset
 _080422FC:
 	adds r4, r6, 0
 	adds r4, 0x50
@@ -114069,13 +114069,13 @@ sub_8042ABC: @ 8042ABC
 	adds r6, 0x2C
 	mov r0, sp
 	adds r1, r6, 0
-	bl CompareStringWithoutExtendedControlCodes
+	bl StringCompareWithoutExtCtrlCodes
 	cmp r0, 0
 	bne _08042B08
 	ldr r0, _08042B30
 	adds r1, r5, 0
 	adds r1, 0x24
-	bl CompareStringWithoutExtendedControlCodes
+	bl StringCompareWithoutExtCtrlCodes
 	cmp r0, 0
 	beq _08042B40
 _08042B08:
@@ -114380,12 +114380,12 @@ _08042D8C: .4byte 0x0202e8ce
 _08042D90:
 	ldr r5, _08042DBC
 	adds r0, r5, 0
-	bl sub_8002A34
+	bl SetUpWindowConfig
 	ldr r4, _08042DC0
 	ldr r0, [r4]
 	adds r0, 0x8
 	adds r1, r5, 0
-	bl sub_8002D54
+	bl InitWindowFromConfig
 	movs r0, 0x14
 	bl sub_8064EF4
 	ldr r1, [r4]
@@ -114396,7 +114396,7 @@ _08042D90:
 	bl sub_8064F08
 	b _08042F04
 	.align 2, 0
-_08042DBC: .4byte gUnknown_081E6F84
+_08042DBC: .4byte gWindowConfig_81E6F84
 _08042DC0: .4byte 0x0300481c
 _08042DC4:
 	ldr r0, _08042DFC
@@ -124544,7 +124544,7 @@ sub_8047CE8: @ 8047CE8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08047D44: .4byte gUnknown_081E725C
+_08047D44: .4byte gWindowConfig_81E725C
 _08047D48: .4byte 0x020296cc
 _08047D4C: .4byte 0x02024ea4
 _08047D50: .4byte 0x03002978
@@ -124558,7 +124558,7 @@ sub_8047D58: @ 8047D58
 	push {r7}
 	sub sp, 0x18
 	ldr r0, _08047E30
-	bl StringGetLength
+	bl StringLength
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0
@@ -124609,7 +124609,7 @@ _08047D86:
 	lsls r0, 2
 	ldr r1, _08047E3C
 	adds r0, r1
-	bl StringGetLength
+	bl StringLength
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0
@@ -124798,11 +124798,11 @@ _08047F48:
 	bl sub_8071C4C
 	ldr r4, _0804802C
 	adds r0, r4, 0
-	bl sub_8002A34
+	bl SetUpWindowConfig
 	ldr r0, [r5]
 	adds r0, 0x4
 	adds r1, r4, 0
-	bl sub_8002D54
+	bl InitWindowFromConfig
 	movs r0, 0x14
 	bl sub_8064EF4
 	ldr r1, [r5]
@@ -124875,8 +124875,8 @@ _08048018: .4byte 0x03004824
 _0804801C: .4byte 0x02017000
 _08048020: .4byte 0x06002800
 _08048024: .4byte sub_80489F4
-_08048028: .4byte gUnknown_081E6CE4
-_0804802C: .4byte gUnknown_081E6F84
+_08048028: .4byte gWindowConfig_81E6CE4
+_0804802C: .4byte gWindowConfig_81E6F84
 _08048030: .4byte 0x03000508
 _08048034: .4byte 0x03001770
 _08048038: .4byte 0x0000043c
@@ -125035,7 +125035,7 @@ _08048172:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_80047C8
+	bl FillWindowRect_DefaultPalette
 	movs r1, 0x80
 	lsls r1, 19
 	movs r0, 0
@@ -125493,11 +125493,11 @@ _0804857C:
 	bl sub_8071C4C
 	ldr r4, _08048644
 	adds r0, r4, 0
-	bl sub_8002A34
+	bl SetUpWindowConfig
 	ldr r0, [r5]
 	adds r0, 0x4
 	adds r1, r4, 0
-	bl sub_8002D54
+	bl InitWindowFromConfig
 	movs r0, 0x14
 	bl sub_8064EF4
 	ldr r1, [r5]
@@ -125560,8 +125560,8 @@ _08048630: .4byte 0x03004824
 _08048634: .4byte 0x02017000
 _08048638: .4byte 0x06002800
 _0804863C: .4byte sub_80489F4
-_08048640: .4byte gUnknown_081E6CE4
-_08048644: .4byte gUnknown_081E6F84
+_08048640: .4byte gWindowConfig_81E6CE4
+_08048644: .4byte gWindowConfig_81E6F84
 _08048648: .4byte 0x03000508
 _0804864C: .4byte 0x03001770
 _08048650: .4byte 0x0000043c
@@ -126766,7 +126766,7 @@ _0804901E:
 	bl PokemonGetField
 	mov r0, sp
 	ldr r1, _08049074
-	bl CompareStringWithoutExtendedControlCodes
+	bl StringCompareWithoutExtCtrlCodes
 	cmp r0, 0
 	bne _0804905E
 	adds r0, r4, 0
@@ -128816,7 +128816,7 @@ _08049F8E:
 	str r1, [sp, 0x4]
 	movs r1, 0
 	movs r3, 0
-	bl sub_80047C8
+	bl FillWindowRect_DefaultPalette
 	ldr r1, _0804A09C
 	ldr r0, [r1]
 	adds r0, 0xC8
@@ -129148,7 +129148,7 @@ _0804A2F4:
 _0804A31E:
 	ldr r0, _0804A338
 	adds r1, r5, 0
-	bl GetStringWidthGivenTextRendererTemplate
+	bl GetStringWidthGivenWindowConfig
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0xC
@@ -129157,7 +129157,7 @@ _0804A31E:
 	bx r1
 	.align 2, 0
 _0804A334: .4byte 0x030045c0
-_0804A338: .4byte gUnknown_081E7294
+_0804A338: .4byte gWindowConfig_81E7294
 	thumb_func_end sub_804A2B4
 
 	thumb_func_start sub_804A33C
@@ -129339,7 +129339,7 @@ _0804A484:
 	mov r1, sp
 	adds r1, 0x22
 	ldr r0, _0804A518
-	bl GetStringWidthGivenTextRendererTemplate
+	bl GetStringWidthGivenWindowConfig
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x32
@@ -129395,7 +129395,7 @@ _0804A504:
 	bx r0
 	.align 2, 0
 _0804A514: .4byte 0x030045c0
-_0804A518: .4byte gUnknown_081E7294
+_0804A518: .4byte gWindowConfig_81E7294
 	thumb_func_end sub_804A41C
 
 	thumb_func_start sub_804A51C
@@ -129791,7 +129791,7 @@ sub_804A80C: @ 804A80C
 	str r1, [sp, 0x4]
 	movs r1, 0
 	movs r3, 0
-	bl sub_80047C8
+	bl FillWindowRect_DefaultPalette
 	movs r0, 0x1
 	bl sub_804A41C
 	add sp, 0x8
@@ -129821,7 +129821,7 @@ sub_804A840: @ 804A840
 	str r1, [sp, 0x4]
 	movs r1, 0
 	movs r3, 0
-	bl sub_80047C8
+	bl FillWindowRect_DefaultPalette
 	ldr r0, [r4]
 	adds r0, 0xC8
 	ldr r3, _0804A8A4
@@ -129860,7 +129860,7 @@ _0804A8A8:
 	str r1, [sp, 0x4]
 	movs r1, 0
 	movs r3, 0
-	bl sub_80047C8
+	bl FillWindowRect_DefaultPalette
 	ldr r0, [r4]
 	adds r0, 0xC8
 	ldr r3, _0804A92C
@@ -130408,7 +130408,7 @@ sub_804ACD8: @ 804ACD8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804ACF0: .4byte gUnknown_081E725C
+_0804ACF0: .4byte gWindowConfig_81E725C
 	thumb_func_end sub_804ACD8
 
 	thumb_func_start sub_804ACF4
@@ -131419,11 +131419,11 @@ _0804B47C:
 	bl sub_804B228
 	ldr r4, _0804B57C
 	adds r0, r4, 0
-	bl sub_8002A34
+	bl SetUpWindowConfig
 	ldr r0, [r6]
 	adds r0, 0x4
 	adds r1, r4, 0
-	bl sub_8002D54
+	bl InitWindowFromConfig
 	movs r0, 0x2
 	bl sub_8064EF4
 	ldr r1, [r6]
@@ -131514,7 +131514,7 @@ _0804B47C:
 _0804B570: .4byte 0x03004828
 _0804B574: .4byte 0x0201f000
 _0804B578: .4byte sub_804B210
-_0804B57C: .4byte gUnknown_081E6F84
+_0804B57C: .4byte gWindowConfig_81E6F84
 _0804B580: .4byte 0x03002b74
 _0804B584: .4byte 0x00001144
 _0804B588: .4byte 0x03001770
@@ -131821,11 +131821,11 @@ _0804B7F4:
 	bl sub_804B228
 	ldr r4, _0804B900
 	adds r0, r4, 0
-	bl sub_8002A34
+	bl SetUpWindowConfig
 	ldr r0, [r5]
 	adds r0, 0x4
 	adds r1, r4, 0
-	bl sub_8002D54
+	bl InitWindowFromConfig
 	movs r0, 0x2
 	bl sub_8064EF4
 	ldr r1, [r5]
@@ -131899,7 +131899,7 @@ _0804B8F0: .4byte 0x030045c0
 _0804B8F4: .4byte 0x03004828
 _0804B8F8: .4byte 0x0201f000
 _0804B8FC: .4byte sub_804B210
-_0804B900: .4byte gUnknown_081E717C
+_0804B900: .4byte gWindowConfig_81E717C
 _0804B904: .4byte 0x03002b74
 _0804B908: .4byte 0x00001144
 _0804B90C: .4byte 0x03001770
@@ -133424,7 +133424,7 @@ _0804C718:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x1D
-	bl sub_80047FC
+	bl ZeroFillWindowRect
 	ldr r4, _0804C794
 	ldr r1, _0804C798
 	adds r0, r4, 0
@@ -134934,7 +134934,7 @@ _0804D3C4:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x1D
-	bl sub_80047FC
+	bl ZeroFillWindowRect
 	ldr r4, _0804D414
 	ldr r1, _0804D418
 	adds r0, r4, 0
@@ -134994,7 +134994,7 @@ _0804D43E:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x1D
-	bl sub_80047FC
+	bl ZeroFillWindowRect
 	ldr r4, _0804D484
 	ldr r1, _0804D488
 	adds r0, r4, 0
@@ -136142,7 +136142,7 @@ _0804DE4C:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x1D
-	bl sub_80047FC
+	bl ZeroFillWindowRect
 	ldr r4, _0804DE94
 	ldr r1, _0804DE98
 	adds r0, r4, 0
@@ -136233,7 +136233,7 @@ _0804DF14:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x1D
-	bl sub_80047FC
+	bl ZeroFillWindowRect
 	ldr r2, [r4]
 	adds r0, r2, 0x4
 	ldr r1, _0804DF50
@@ -137006,7 +137006,7 @@ _0804E5AC:
 	bl SetVBlankCallback
 	ldr r4, _0804E60C
 	adds r0, r4, 0
-	bl sub_8002A34
+	bl SetUpWindowConfig
 	adds r0, r4, 0
 	bl sub_8071C4C
 	ldr r3, _0804E610
@@ -137039,7 +137039,7 @@ _0804E5AC:
 	bl sub_8051474
 	b _0804E71A
 	.align 2, 0
-_0804E60C: .4byte gUnknown_081E6F68
+_0804E60C: .4byte gWindowConfig_81E6F68
 _0804E610: .4byte 0x03004854
 _0804E614:
 	bl sub_804E2EC
@@ -137665,7 +137665,7 @@ _0804EBBC:
 	bl SetVBlankCallback
 	ldr r4, _0804EC64
 	adds r0, r4, 0
-	bl sub_8002A34
+	bl SetUpWindowConfig
 	adds r0, r4, 0
 	bl sub_8071C4C
 	ldr r1, _0804EC68
@@ -137737,7 +137737,7 @@ _0804EC2A:
 	b _0804F0CE
 	.align 2, 0
 _0804EC60: .4byte sub_804E2BC
-_0804EC64: .4byte gUnknown_081E6F68
+_0804EC64: .4byte gWindowConfig_81E6F68
 _0804EC68: .4byte 0x03002b74
 _0804EC6C: .4byte 0x00004422
 _0804EC70: .4byte 0x03004854
@@ -138314,7 +138314,7 @@ sub_804F0F4: @ 804F0F4
 	bl SetVBlankCallback
 	ldr r4, _0804F15C
 	adds r0, r4, 0
-	bl sub_8002A34
+	bl SetUpWindowConfig
 	adds r0, r4, 0
 	bl sub_8071C4C
 	ldr r1, _0804F160
@@ -138348,7 +138348,7 @@ sub_804F0F4: @ 804F0F4
 	bx r0
 	.align 2, 0
 _0804F158: .4byte sub_804E2BC
-_0804F15C: .4byte gUnknown_081E6F68
+_0804F15C: .4byte gWindowConfig_81E6F68
 _0804F160: .4byte 0x03002b74
 _0804F164: .4byte 0x00004422
 _0804F168: .4byte 0x03004854
@@ -143180,7 +143180,7 @@ _08051730:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x10
-	bl sub_80047FC
+	bl ZeroFillWindowRect
 	movs r0, 0x4
 	movs r1, 0x4
 	movs r2, 0xA
@@ -144021,7 +144021,7 @@ _08051D56:
 	adds r0, r4, r1
 	ldrb r1, [r0, 0x1A]
 	adds r0, r7, 0
-	bl StopMusicWhileStringIsPrinted
+	bl SetStringCharset
 	adds r0, r7, 0
 	ldr r1, _08051F20
 	bl StringAppend
@@ -144906,7 +144906,7 @@ sub_80524BC: @ 80524BC
 	bl SetVBlankCallback
 	ldr r4, _08052520
 	adds r0, r4, 0
-	bl sub_8002A34
+	bl SetUpWindowConfig
 	adds r0, r4, 0
 	bl sub_8071C4C
 	ldr r0, _08052524
@@ -144936,7 +144936,7 @@ sub_80524BC: @ 80524BC
 	bx r0
 	.align 2, 0
 _0805251C: .4byte sub_804E2D8
-_08052520: .4byte gUnknown_081E6CE4
+_08052520: .4byte gWindowConfig_81E6CE4
 _08052524: .4byte 0x03001770
 _08052528: .4byte 0x03000560
 _0805252C: .4byte sub_8052AF8

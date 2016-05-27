@@ -34,6 +34,11 @@
 #define INTR_CHECK     (*(u16 *)0x3007FF8)
 #define INTR_VECTOR    (*(void **)0x3007FFC)
 
+#define BG_VRAM 0x6000000
+
+#define BG_CHAR_ADDR(n)   (BG_VRAM + (0x4000 * (n)))
+#define BG_SCREEN_ADDR(n) (BG_VRAM + (0x800 * (n)))
+
 #define OBJ_VRAM0 0x6010000 // when BG is in tiled mode
 #define OBJ_VRAM1 0x6014000 // when BG is in bitmap mode
 

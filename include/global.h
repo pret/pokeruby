@@ -7,6 +7,9 @@
 #define REVISION 0
 #endif
 
+// Prevent cross-jump optimization.
+#define BLOCK_CROSS_JUMP asm("");
+
 extern u8 gStringVar1[];
 extern u8 gStringVar2[];
 extern u8 gStringVar3[];
@@ -42,7 +45,9 @@ struct SaveBlock2
     u8 playTimeSeconds;
     u8 playTimeVBlanks;
     u8 optionsButtonMode;
-    u8 filler[0x84];
+    u8 optionsTextSpeed:3;
+    u8 optionsUnk:5;
+    u8 filler[0x83];
     struct Time localTimeOffset;
 };
 

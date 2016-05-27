@@ -39,7 +39,7 @@ struct OamDimensions
     s8 height;
 };
 
-void gpu_pal_apply(u8 *, u16, u32);
+void gpu_pal_apply(u16 *, u16, u32);
 void sub_814A590(void);
 
 static void UpdateOamCoords(void);
@@ -92,7 +92,7 @@ static void ApplyAffineAnimFrame(u8 matrixNum, struct AffineAnimFrameCmd *frameC
 static void ResetAffineAnimData(void);
 static u8 IndexOfSpriteTileTag(u16 tag);
 static void AllocSpriteTileRange(u16 tag, u16 start, u16 count);
-static void ApplySpritePalette(u8 *src, u16 paletteOffset);
+static void DoLoadSpritePalette(u16 *src, u16 paletteOffset);
 
 typedef void (*AnimFunc)(struct Sprite *);
 typedef void (*AnimCmdFunc)(struct Sprite *);
@@ -291,8 +291,6 @@ static const struct OamDimensions sOamDimensions[3][4] =
         { 32, 64 },
     },
 };
-
-extern struct Main gMain;
 
 static u16 sSpriteTileRangeTags[MAX_SPRITES];
 static u16 sSpriteTileRanges[MAX_SPRITES * 2];
@@ -1638,7 +1636,7 @@ u8 LoadSpritePalette(struct SpritePalette *palette)
     else
     {
         sSpritePaletteTags[index] = palette->tag;
-        ApplySpritePalette(palette->data, index * 16);
+        DoLoadSpritePalette(palette->data, index * 16);
         return index;
     }
 }
@@ -1651,7 +1649,7 @@ void LoadSpritePalettes(struct SpritePalette *palettes)
             break;
 }
 
-static void ApplySpritePalette(u8 *src, u16 paletteOffset)
+static void DoLoadSpritePalette(u16 *src, u16 paletteOffset)
 {
     gpu_pal_apply(src, paletteOffset + 0x100, 32);
 }

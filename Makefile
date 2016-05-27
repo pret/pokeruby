@@ -30,12 +30,12 @@ PREPROC := tools/preproc/preproc
 
 .PRECIOUS: %.1bpp %.4bpp %.8bpp %.gbapal %.lz
 
-.PHONY: rom clean compare
+.PHONY: all rom clean compare generated
 
 C_SRCS := $(wildcard src/*.c)
 C_OBJS := $(C_SRCS:%.c=%.o)
 
-ASM_OBJS := asm/crt0.o asm/rom1.o asm/rom2.o asm/rom3.o asm/rom4.o asm/rom5.o \
+ASM_OBJS := asm/crt0.o asm/rom2.o asm/rom3.o asm/rom4.o asm/rom5.o \
 	asm/libgcnmultiboot.o asm/m4a_1.o asm/m4a_3.o asm/libagbsyscall.o asm/libc.o
 
 DATA_ASM_OBJS := data/data1.o data/data2.o data/graphics.o data/sound_data.o
@@ -45,18 +45,24 @@ OBJS := $(C_OBJS) $(ASM_OBJS) $(DATA_ASM_OBJS)
 ROM := pokeruby.gba
 ELF := $(ROM:.gba=.elf)
 
+all:
+	$(MAKE) generated
+	$(MAKE) rom
+
 rom: $(ROM)
 
 # For contributors to make sure a change didn't affect the contents of the ROM.
-compare: $(ROM)
+compare: all
 	@$(SHA1) rom.sha1
 
 clean:
 	rm -f $(ROM) $(ELF) $(OBJS) $(C_SRCS:%.c=%.i)
-	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.latfont' -o -iname '*.hwjpnfont' -o -iname '*.fwjpnfont' \) -exec rm {} +
+	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' \) -exec rm {} +
 
 include castform.mk
 include tilesets.mk
+include fonts.mk
+include generated.mk
 
 %.png: ;
 %.pal: ;
@@ -92,4 +98,4 @@ $(DATA_ASM_OBJS): %.o: %.s $$(dep)
 # Link objects to produce the ROM.
 $(ROM): $(OBJS)
 	$(LD) $(LDFLAGS) -o $(ELF) $(OBJS) $(LIBGCC)
-	$(OBJCOPY) -O binary --gap-fill 0xFF $(ELF) $(ROM)
+	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0x9000000 $(ELF) $(ROM)

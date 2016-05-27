@@ -11,6 +11,7 @@ SECTIONS {
     {
         src/main.o(ewram_data);
         src/sprite.o(ewram_data);
+        src/text.o(ewram_data);
     }
 
     . = 0x3000000;
@@ -19,6 +20,7 @@ SECTIONS {
     ALIGN(4)
     {
         src/sprite.o(.bss);
+        src/text.o(.bss);
         . = 0xF28;
         src/agb_flash.o(.bss);
         . = 0xF36;
@@ -28,6 +30,7 @@ SECTIONS {
         src/m4a_2.o(.bss.code);
         src/main.o(iwram_data);
         src/sprite.o(iwram_data);
+        src/text.o(iwram_data);
         . = 0x5FD0;
         src/m4a_2.o(iwram_data);
     }
@@ -40,7 +43,7 @@ SECTIONS {
         asm/crt0.o(.text);
         src/main.o(.text);
         src/sprite.o(.text);
-        asm/rom1.o(.text);
+        src/text.o(.text);
         src/string_util.o(.text);
         asm/rom2.o(.text);
         src/rtc.o(.text);
@@ -93,6 +96,8 @@ SECTIONS {
         src/main.o(.rodata);
         src/sprite.o(.rodata);
         . += 0x8; /* Why the gap? */
+        src/text.o(.rodata);
+        src/string_util.o(.rodata);
         data/data2.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);
