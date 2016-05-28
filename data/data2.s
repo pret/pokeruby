@@ -1278,8 +1278,7 @@ gUnknown_08216284: @ 8216284
 	.4byte 0x08216273 @pointers
 	.4byte 0x08216278
 	.4byte 0x0821627D
-	.2byte 0xCAA2 @unknown
-	.string "$"
+	.string "1P$"
 	.align 2
 	.string "2P$"
 	.align 2
