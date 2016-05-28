@@ -4326,7 +4326,22 @@ gUnknown_083CE398: @ 83CE398
 
 	.global gUnknown_083CE3A8
 gUnknown_083CE3A8: @ 83CE3A8
-	.incbin "baserom.gba", 0x003ce3a8, 0x1b0
+@ replacing .incbin "baserom.gba", 0x003ce3a8, 0x1b0
+	.string " A B C  D E F    . $"
+	.string " G H I  J K L    , $"
+	.string " M N O  P Q R S    $"
+	.string " T U V  W X Y Z    $"
+	.string " a b c  d e f    . $"
+	.string " g h i  j k l    , $"
+	.string " m n o  p q r s    $"
+	.string " t u v  w x y z    $"
+	.string " 0  1  2  3  4     $"
+	.string " 5  6  7  8  9     $"
+	.string " !  ?  ♂  ♀  /  -  $"
+	.string " …  “  ”  ‘  ’     $"
+	.incbin "baserom.gba", 0x003ce498, 0x1a
+	.string ":$"
+	.incbin "baserom.gba", 0x003ce4b4, 0xa4
 
 	.global gUnknown_083CE558
 gUnknown_083CE558: @ 83CE558
