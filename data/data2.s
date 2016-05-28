@@ -3824,263 +3824,587 @@ gUnknown_083C9408: @ 83C9408
 
 	.global gUnknown_083CA308
 gUnknown_083CA308: @ 83CA308
-	.incbin "baserom.gba", 0x003ca308, 0x8
+@ replacing .incbin "baserom.gba", 0x003ca308, 0x8
+.incbin "baserom.gba", 0x003ca308, 0x8
 
 	.global gUnknown_083CA310
 gUnknown_083CA310: @ 83CA310
-	.incbin "baserom.gba", 0x003ca310, 0x8
+@ replacing .incbin "baserom.gba", 0x003ca310, 0x8
+.incbin "baserom.gba", 0x003ca310, 0x8
 
 	.global gUnknown_083CA318
 gUnknown_083CA318: @ 83CA318
-	.incbin "baserom.gba", 0x003ca318, 0x18
+@ replacing .incbin "baserom.gba", 0x003ca318, 0x18
+.incbin "baserom.gba", 0x003ca318, 0x18
 
 	.global gUnknown_083CA330
 gUnknown_083CA330: @ 83CA330
-	.incbin "baserom.gba", 0x003ca330, 0x8
+@ replacing .incbin "baserom.gba", 0x003ca330, 0x8
+.incbin "baserom.gba", 0x003ca330, 0x8
 
 	.global gUnknown_083CA338
 gUnknown_083CA338: @ 83CA338
-	.incbin "baserom.gba", 0x003ca338, 0x4
+@ replacing .incbin "baserom.gba", 0x003ca338, 0x4
+.incbin "baserom.gba", 0x003ca338, 0x4
 
 	.global gUnknown_083CA33C
 gUnknown_083CA33C: @ 83CA33C
-	.incbin "baserom.gba", 0x003ca33c, 0x4
+@ replacing .incbin "baserom.gba", 0x003ca33c, 0x4
+.incbin "baserom.gba", 0x003ca33c, 0x4
 
 	.global gUnknown_083CA340
 gUnknown_083CA340: @ 83CA340
-	.incbin "baserom.gba", 0x003ca340, 0x1
+@ replacing .incbin "baserom.gba", 0x003ca340, 0x1
+.incbin "baserom.gba", 0x003ca340, 0x1
 
 	.global gUnknown_083CA341
 gUnknown_083CA341: @ 83CA341
-	.incbin "baserom.gba", 0x003ca341, 0xf
+@ replacing .incbin "baserom.gba", 0x003ca341, 0xf
+.incbin "baserom.gba", 0x003ca341, 0xf
 
 	.global gUnknown_083CA350
 gUnknown_083CA350: @ 83CA350
-	.incbin "baserom.gba", 0x003ca350, 0x5c
+@ replacing .incbin "baserom.gba", 0x003ca350, 0x5c
+.incbin "baserom.gba", 0x003ca350, 0x5c
 
 	.global gUnknown_083CA3AC
 gUnknown_083CA3AC: @ 83CA3AC
-	.incbin "baserom.gba", 0x003ca3ac, 0x18
+@ replacing .incbin "baserom.gba", 0x003ca3ac, 0x18
+.incbin "baserom.gba", 0x003ca3ac, 0x18
 
 	.global gUnknown_083CA3C4
 gUnknown_083CA3C4: @ 83CA3C4
-	.incbin "baserom.gba", 0x003ca3c4, 0x20
+@ replacing .incbin "baserom.gba", 0x003ca3c4, 0x20
+.incbin "baserom.gba", 0x003ca3c4, 0x20
 
 	.global gUnknown_083CA3E4
 gUnknown_083CA3E4: @ 83CA3E4
-	.incbin "baserom.gba", 0x003ca3e4, 0x10
+@ replacing .incbin "baserom.gba", 0x003ca3e4, 0x10
+.incbin "baserom.gba", 0x003ca3e4, 0x10
 
 	.global gUnknown_083CA3F4
 gUnknown_083CA3F4: @ 83CA3F4
-	.incbin "baserom.gba", 0x003ca3f4, 0x70
+@ replacing .incbin "baserom.gba", 0x003ca3f4, 0x70
+.incbin "baserom.gba", 0x003ca3f4, 0x70
 
 	.global gUnknown_083CA464
 gUnknown_083CA464: @ 83CA464
-	.incbin "baserom.gba", 0x003ca464, 0x8
+@ replacing .incbin "baserom.gba", 0x003ca464, 0x8
+.incbin "baserom.gba", 0x003ca464, 0x8
 
 	.global gUnknown_083CA46C
 gUnknown_083CA46C: @ 83CA46C
-	.incbin "baserom.gba", 0x003ca46c, 0x8
+@ replacing .incbin "baserom.gba", 0x003ca46c, 0x8
+.incbin "baserom.gba", 0x003ca46c, 0x8
 
 	.global gUnknown_083CA474
 gUnknown_083CA474: @ 83CA474
-	.incbin "baserom.gba", 0x003ca474, 0x10
+@ replacing .incbin "baserom.gba", 0x003ca474, 0x10
+.incbin "baserom.gba", 0x003ca474, 0x10
 
 	.global gUnknown_083CA484
 gUnknown_083CA484: @ 83CA484
-	.incbin "baserom.gba", 0x003ca484, 0x20
+@ replacing .incbin "baserom.gba", 0x003ca484, 0x20
+.incbin "baserom.gba", 0x003ca484, 0x20
 
 	.global gUnknown_083CA4A4
 gUnknown_083CA4A4: @ 83CA4A4
-	.incbin "baserom.gba", 0x003ca4a4, 0x18
+@ replacing .incbin "baserom.gba", 0x003ca4a4, 0x18
+.incbin "baserom.gba", 0x003ca4a4, 0x18
 
 	.global gUnknown_083CA4BC
 gUnknown_083CA4BC: @ 83CA4BC
-	.incbin "baserom.gba", 0x003ca4bc, 0x8
+@ replacing .incbin "baserom.gba", 0x003ca4bc, 0x8
+.incbin "baserom.gba", 0x003ca4bc, 0x8
 
 	.global gUnknown_083CA4C4
 gUnknown_083CA4C4: @ 83CA4C4
-	.incbin "baserom.gba", 0x003ca4c4, 0x8
+@ replacing .incbin "baserom.gba", 0x003ca4c4, 0x8
+.incbin "baserom.gba", 0x003ca4c4, 0x8
 
 	.global gUnknown_083CA4CC
 gUnknown_083CA4CC: @ 83CA4CC
-	.incbin "baserom.gba", 0x003ca4cc, 0x8
+@ replacing .incbin "baserom.gba", 0x003ca4cc, 0x8
+.incbin "baserom.gba", 0x003ca4cc, 0x8
 
 	.global gUnknown_083CA4D4
 gUnknown_083CA4D4: @ 83CA4D4
-	.incbin "baserom.gba", 0x003ca4d4, 0x900
+@ replacing .incbin "baserom.gba", 0x003ca4d4, 0x900
+.incbin "baserom.gba", 0x003ca4d4, 0x31
+.string "After this move, the user is\nmore easily startled.$"
+.string "Makes a great appeal, but\nallows no more to the end.$"
+.string "Can be repeatedly used\nwithout boring the JUDGE.$"
+.string "Can avoid being startled\nby others once.$"
+.string "Can avoid being startled\nby others.$"
+.string "Can avoid being startled\nby others a little.$"
+.string "After this move, the user is\nless likely to be startled.$"
+.string "Slightly startles the\nPOKéMON in front.$"
+.string "Slightly startles those\nthat have made appeals.$"
+.string "Startles the POKéMON that\nappealed before the user.$"
+.string "Startles all POKéMON that\nhave done their appeals.$"
+.string "Badly startles the\nPOKéMON in front.$"
+.string "Badly startles those that\nhave made appeals.$"
+.string "Startles the POKéMON that\nappealed before the user.$"
+.string "Startles all POKéMON that\nappealed before the user.$"
+.string "Shifts the JUDGE’s\nattention from others.$"
+.string "Startles the POKéMON that\nhas the JUDGE’s attention.$"
+.string "Jams the others, and misses\none turn of appeals.$"
+.string "Startles POKéMON that\nmade a same-type appeal.$"
+.string "Badly startles POKéMON\nthat made COOL appeals.$"
+.string "Badly startles POKéMON\nthat made BEAUTY appeals.$"
+.string "Badly startles POKéMON\nthat made CUTE appeals.$"
+.string "Badly startles POKéMON\nthat made SMART appeals.$"
+.string "Badly startles POKéMON\nthat made TOUGH appeals.$"
+.string "Makes one POKéMON after\nthe user nervous.$"
+.string "Makes all POKéMON after\nthe user nervous.$"
+.string "Worsens the condition of\nthose that made appeals.$"
+.string "Badly startles POKéMON in\ngood condition.$"
+.string "The appeal works great if\nperformed first.$"
+.string "The appeal works great if\nperformed last.$"
+.string "Makes the appeal as good\nas those before it.$"
+.string "Makes the appeal as good\nas the one before it.$"
+.string "The appeal works better\nthe later it is performed.$"
+.string "The appeal’s quality varies\ndepending on its timing.$"
+.string "Works well if it’s the same\ntype as the one before.$"
+.string "Works well if different in\ntype than the one before.$"
+.string "Affected by how well the\nappeal in front goes.$"
+.string "Ups the user’s condition.\nHelps prevent nervousness.$"
+.string "The appeal works well if the\nuser’s condition is good.$"
+.string "The next appeal can be made\nearlier next turn.$"
+.string "The next appeal can be made\nlater next turn.$"
+.string "Makes the next turn’s order\nmore easily scrambled.$"
+.string "Scrambles the order of\nappeals on the next turn.$"
+.string "An appeal that excites the\naudience in any CONTEST.$"
+.string "Badly startles all POKéMON\nthat made good appeals.$"
+.string "The appeal works best the\nmore the crowd is excited.$"
+.string "Temporarily stops the\ncrowd from growing excited.$"
+.align 1
 
 	.global gUnknown_083CADD4
 gUnknown_083CADD4: @ 83CADD4
-	.incbin "baserom.gba", 0x003cadd4, 0x19c
+@ replacing .incbin "baserom.gba", 0x003cadd4, 0x19c
+.4byte 0x083ca4ec, 0x083ca505, 0x083ca538, 0x083ca56d, 0x083ca59e, 0x083ca5c7, 0x083ca5eb, 0x083ca618
+.4byte 0x083ca651, 0x083ca679, 0x083ca6a9, 0x083ca6dd, 0x083ca710, 0x083ca735, 0x083ca762, 0x083ca796
+.4byte 0x083ca7ca, 0x083ca7f4, 0x083ca829, 0x083ca85a, 0x083ca889, 0x083ca8b8, 0x083ca8e9, 0x083ca918
+.4byte 0x083ca948, 0x083ca978, 0x083ca9a2, 0x083ca9cc, 0x083ca9fe, 0x083caa28, 0x083caa53, 0x083caa7d
+.4byte 0x083caaaa, 0x083caad9, 0x083cab0c, 0x083cab41, 0x083cab75, 0x083cabaa, 0x083cabd9, 0x083cac0e
+.4byte 0x083cac45, 0x083cac74, 0x083caca1, 0x083cacd4, 0x083cad05, 0x083cad39, 0x083cad6c, 0x083cada1
+.string "RAIN DANCE$"
+.string "RAGE$"
+.string "FOCUS ENERGY$"
+.string "HYPNOSIS$"
+.string "SOFTBOILED$"
+.string "HORN ATTACK$"
+.string "SWORDS DANCE$"
+.string "CONVERSION$"
+.string "SUNNY DAY$"
+.string "REST$"
+.string "VICEGRIP$"
+.string "DEFENSE CURL$"
+.string "LOCK-ON$"
+.align 2
+.4byte 0x083CAE94
+.4byte 0x083CAE94
+.4byte 0x083CAE9F
+.4byte 0x083CAEA4
+.4byte 0x083CAEB1
+.4byte 0x083CAEBA
+.4byte 0x083CAEC5
+.4byte 0x083CAED1
+.4byte 0x083CAEDE
+.4byte 0x083CAEE9
+.4byte 0x083CAEF3
+.4byte 0x083CAEF8
+.4byte 0x083CAF01
+.4byte 0x083CAF0E
+.string "COOL$"
+.string "BEAUTY$"
+.string "CUTE$"
+.string "SMART$"
+.string "TOUGH$"
+.align 2
 
 	.global gUnknown_083CAF70
 gUnknown_083CAF70: @ 83CAF70
-	.incbin "baserom.gba", 0x003caf70, 0x14
+@ replacing .incbin "baserom.gba", 0x003caf70, 0x14
+.incbin "baserom.gba", 0x003caf70, 0x14
 
 	.global gUnknown_083CAF84
 gUnknown_083CAF84: @ 83CAF84
-	.incbin "baserom.gba", 0x003caf84, 0x2a
+@ replacing .incbin "baserom.gba", 0x003caf84, 0x2a
+.string "Appeal no. {NAME_END}!\nWhich move will be played?$"
 
 	.global gUnknown_083CAFAE
 gUnknown_083CAFAE: @ 83CAFAE
-	.incbin "baserom.gba", 0x003cafae, 0x29
+@ replacing .incbin "baserom.gba", 0x003cafae, 0x29
+.string "Appeal no. {NAME_END}!\nBut it can’t participate!$"
 
 	.global gUnknown_083CAFD7
 gUnknown_083CAFD7: @ 83CAFD7
-	.incbin "baserom.gba", 0x003cafd7, 0x36
+@ replacing .incbin "baserom.gba", 0x003cafd7, 0x36
+.string "{STR_VAR_1} appealed with\n{STR_VAR_2}!$"
+.string "The other POKéMON\nmade moves.{PAUSE 60}$"
 
 	.global gUnknown_083CB00D
 gUnknown_083CB00D: @ 83CB00D
-	.incbin "baserom.gba", 0x003cb00d, 0x1f
+@ replacing .incbin "baserom.gba", 0x003cb00d, 0x1f
+.string "{STR_VAR_1} was watching\nthe others.{PAUSE 60}$"
 
 	.global gUnknown_083CB02C
 gUnknown_083CB02C: @ 83CB02C
-	.incbin "baserom.gba", 0x003cb02c, 0x2c4
+@ replacing .incbin "baserom.gba", 0x003cb02c, 0x2c4
+.string "We’re all out of\nAppeal Time!{PAUSE 60}$"
+.string "{STR_VAR_1}’s {STR_VAR_3}\nmove {STR_VAR_2}!{PAUSE 60}$"
+.string "TRICK$"
+.string "SPECIAL$"
+.string "But the appeal was\njammed.$"
+.string "It followed another\nPOKéMON’s lead.$"
+.string "But it messed up.$"
+.string "It went better than\nusual.$"
+.string "The JUDGE looked away\nfor some reason.$"
+.string "It worked hard to build on\npast mistakes.$"
+.string "It can’t make any more\nmoves.$"
+.string "It worked frighteningly\nwell.$"
+.string "It worked as hard as the\nstandout POKéMON.$"
+.string "The JUDGE looked on\nexpectantly.$"
+.string "It worked rather well.$"
+.string "It worked a little better\nthan usual.$"
+.align 2
+.4byte 0x083CB06F
+.4byte 0x083CB08A
+.4byte 0x083CB0AE
+.4byte 0x083CB0C0
+.4byte 0x083CB0C0 @ there's a duplicate pointer for some reason
+.4byte 0x083CB0DB
+.4byte 0x083CB102
+.4byte 0x083CB12C
+.4byte 0x083CB14A
+.4byte 0x083CB168
+.4byte 0x083CB193
+.4byte 0x083CB1B4
+.4byte 0x083CB1CB
+.string "{STR_VAR_1} failed to\nstand out at all...{PAUSE_UNTIL_PRESS}$"
+.string "{STR_VAR_1} didn’t stand\nout very much...{PAUSE_UNTIL_PRESS}$"
+.string "{STR_VAR_1} caught a\nlittle attention.{PAUSE_UNTIL_PRESS}$"
+.string "{STR_VAR_1} attracted a\nlot of attention.{PAUSE_UNTIL_PRESS}$"
+.string "{STR_VAR_1} commanded\ntotal attention.{PAUSE_UNTIL_PRESS}$"
+.string "{STR_VAR_1} hasn’t made\nits appeal.{PAUSE_UNTIL_PRESS}$"
+.align 2
 
 	.global gUnknown_083CB2F0
 gUnknown_083CB2F0: @ 83CB2F0
-	.incbin "baserom.gba", 0x003cb2f0, 0xa62
+@ replacing .incbin "baserom.gba", 0x003cb2f0, 0xa62
+.4byte 0x083CB228
+.4byte 0x083CB24B
+.4byte 0x083CB26E
+.4byte 0x083CB28E
+.4byte 0x083CB2B1
+.4byte 0x083CB2D1
+.string "Anticipation swelled for\n{STR_VAR_1}’s appeal next.$"
+.string "The JUDGE was very\nsatisfied.$"
+.string "$"
+.string "The JUDGE ’s views on\n{STR_VAR_1} held firm.$"
+.string "{STR_VAR_1}’s {STR_VAR_3}\nchanged perceptions.$"
+.string "{STR_VAR_1}’s appeal\neffect wore off.$"
+.string "The special appeal’s\neffect wore off.$"
+.string "Everyone’s appeals were\nmade to look the same.$"
+.string "{STR_VAR_2}’s appeal was\ncheapened.$"
+.string "It cheapened the appeal\nof those ahead.$"
+.string "It stole attention away\nfrom {STR_VAR_2}.$"
+.string "It cheapened\n{STR_VAR_2}’s appeal.$"
+.string "It severely cheapened\nother appeals.$"
+.string "Anticipation swelled for\n{STR_VAR_1}’s appeal next.$"
+.string "It cheapened the appeal\nof those ahead.$"
+.string "It cheapened the JUDGE’s\nfavorite appeal.$"
+.string "The appeals of others\nwere cheapened by half.$"
+.string "It stood out to make up\nfor being jammed.$"
+.string "It can’t participate in\nappeals any more.$"
+.string "It touched the JUDGE for\na fantastic appeal.$"
+.string "Anticipation rose for\nupcoming appeals.$"
+.string "It stood out as much as\nspecial appeals.$"
+.string "It stood out as much as\n{STR_VAR_1}.$"
+.string "Jammed appeals were made\neven less noticeable.$"
+.string "Everyone’s appeals were\nmade the same.$"
+.string "Its {STR_VAR_1} is full.\nIt worsened its appeal.$"
+.align 2
+.4byte 0x083cb352
+.4byte 0x083cb376
+.4byte 0x083cb351
+.4byte 0x083cb393
+.4byte 0x083cb3b0
+.4byte 0x083cb3d6
+.4byte 0x083cb405
+.4byte 0x083cb420
+.4byte 0x083cb448
+.4byte 0x083cb469
+.4byte 0x083cb483
+.4byte 0x083cb4a8
+.4byte 0x083cb4d3
+.4byte 0x083cb4fb
+.4byte 0x083cb525
+.4byte 0x083cb553
+.4byte 0x083cb57d
+.4byte 0x083cb5a7
+.4byte 0x083cb5d4
+.4byte 0x083cb5fc
+.4byte 0x083cb625
+.4byte 0x083cb351
+.4byte 0x083cb351
+.4byte 0x083cb351
+.4byte 0x083cb641
+.4byte 0x083cb670
+.string "It became more conscious\nof the other POKéMON.{PAUSE 60}$"
+.string "{STR_VAR_1} can’t make an\nappeal after this.{PAUSE 60}$"
+.string "It settled down just a\nlittle bit.{PAUSE 60}$"
+.string "It became oblivious to\nthe other POKéMON.{PAUSE 60}$"
+.string "It became less aware of\nthe other POKéMON.{PAUSE 60}$"
+.string "It stopped caring about\nother POKéMON much.{PAUSE 60}$"
+.string "It tried to startle the\nother POKéMON.{PAUSE 60}$"
+.string "It tried to dazzle the\nothers.{PAUSE 60}$"
+.string "The JUDGE looked away\nfrom {STR_VAR_1}.{PAUSE 60}$"
+.string "It tried to unnerve the\nnext POKéMON.{PAUSE 60}$"
+.string "{STR_VAR_1} became\nnervous.{PAUSE 60}$"
+.string "The appeal tried to\nunnerve waiting POKéMON.{PAUSE 60}$"
+.string "It taunted POKéMON\ndoing well.{PAUSE 60}$"
+.string "{STR_VAR_1} regained its\nform.{PAUSE 60}$"
+.string "It tried to jam POKéMON\ndoing well.{PAUSE 60}$"
+.string "The standout {STR_VAR_1}\nhustled even more.{PAUSE 60}$"
+.string "The largely unnoticed\n{STR_VAR_1} worked hard.{PAUSE 60}$"
+.string "It worked as much as\nPOKéMON before it.{PAUSE 60}$"
+.string "{STR_VAR_1}’s appeal did\nnot go well.{PAUSE 60}$"
+.string "It worked as much as the\npreceding POKéMON.{PAUSE 60}$"
+.string "{STR_VAR_1}’s appeal did\nnot go well.{PAUSE 60}$"
+.string "{STR_VAR_1}’s appeal\ncouldn’t be shown well.{PAUSE 60}$"
+.string "{STR_VAR_1}’s appeal\nwent slightly well.{PAUSE 60}$"
+.string "{STR_VAR_1}’s appeal\nwent pretty well.{PAUSE 60}$"
+.string "{STR_VAR_1}’s appeal\nwent excellently.{PAUSE 60}$"
+.string "{STR_VAR_1}’s appeal was\na dud.{PAUSE 60}$"
+.string "{STR_VAR_1}’s appeal did\nnot work very well.{PAUSE 60}$"
+.string "{STR_VAR_1}’s appeal\nwent slightly well.{PAUSE 60}$"
+.string "{STR_VAR_1}’s appeal\nwent pretty well.{PAUSE 60}$"
+.string "{STR_VAR_1}’s appeal\nwent very well.{PAUSE 60}$"
+.string "{STR_VAR_1}’s appeal\nwent excellently.{PAUSE 60}$"
+.string "It’s the same type as the\nPOKéMON before - good!{PAUSE 60}$"
+.string "It’s not the same type as\nthe one before - good!{PAUSE 60}$"
+.string "It stood out much more\nthan the POKéMON before.{PAUSE 60}$"
+.string "It didn’t do as well as the\nPOKéMON before.{PAUSE 60}$"
+.string "{STR_VAR_1}’s condition\nrose above usual.{PAUSE 60}$"
+.string "{STR_VAR_1}’s hot status\nmade it a great appeal!{PAUSE 60}$"
+.string "It moved up in line for\nthe next appeal.{PAUSE 60}$"
+.string "It moved back in line once\nfor the next appeal.{PAUSE 60}$"
+.string "It scrambled up the\norder for the next turn.{PAUSE 60}$"
 
 	.global gUnknown_083CBD52
 gUnknown_083CBD52: @ 83CBD52
-	.incbin "baserom.gba", 0x003cbd52, 0x27
+@ replacing .incbin "baserom.gba", 0x003cbd52, 0x27
+.string "The JUDGE looked at\n{STR_VAR_1} expectantly.{PAUSE 60}$"
 
 	.global gUnknown_083CBD79
 gUnknown_083CBD79: @ 83CBD79
-	.incbin "baserom.gba", 0x003cbd79, 0x24
+@ replacing .incbin "baserom.gba", 0x003cbd79, 0x24
+.string "The appeal combo went\nover well.{PAUSE 60}$"
 
 	.global gUnknown_083CBD9D
 gUnknown_083CBD9D: @ 83CBD9D
-	.incbin "baserom.gba", 0x003cbd9d, 0x29
+@ replacing .incbin "baserom.gba", 0x003cbd9d, 0x29
+.string "The appeal combo went\nover very well.{PAUSE 60}$"
 
 	.global gUnknown_083CBDC6
 gUnknown_083CBDC6: @ 83CBDC6
-	.incbin "baserom.gba", 0x003cbdc6, 0x19a
+@ replacing .incbin "baserom.gba", 0x003cbdc6, 0x19a
+.string "The appeal combo went\nover excellently.{PAUSE 60}$"
+.string "{STR_VAR_1} managed to\navert its gaze.{PAUSE 60}$"
+.string "{STR_VAR_1} managed to\navoid seeing it.{PAUSE 60}$"
+.string "{STR_VAR_1} isn’t fazed\nby that sort of thing.{PAUSE 60}$"
+.string "{STR_VAR_1} became a\nlittle distracted.{PAUSE 60}$"
+.string "It tried to startle the\nother POKéMON.{PAUSE 60}$"
+.string "{STR_VAR_1} looked down\nout of distraction.{PAUSE 60}$"
+.string "{STR_VAR_1} turned back\nout of distraction.{PAUSE 60}$"
+.string "{STR_VAR_1} couldn’t help\nuttering a cry.{PAUSE 60}$"
+.string "{STR_VAR_1} couldn’t help\nleaping up.{PAUSE 60}$"
+.string "{STR_VAR_1} tripped over\nout of distraction.{PAUSE 60}$"
 
 	.global gUnknown_083CBF60
 gUnknown_083CBF60: @ 83CBF60
-	.incbin "baserom.gba", 0x003cbf60, 0x115
+@ replacing .incbin "baserom.gba", 0x003cbf60, 0x115
+.string "{STR_VAR_1} was too\nnervous to move.{PAUSE 60}$"
+.string "But it messed up.{PAUSE 60}$"
+.string "But it failed to make\nthe target nervous.{PAUSE 60}$"
+.string "But it failed to make\nanyone nervous.{PAUSE 60}$"
+.string "But it was ignored...{PAUSE 60}$"
+.string "But it couldn’t improve\nits condition...{PAUSE 60}$"
+.string "Its bad condition\nresulted in a weak appeal.{PAUSE 60}$"
+.string "{STR_VAR_1} was\nunaffected.{PAUSE 60}$"
 
 	.global gUnknown_083CC075
 gUnknown_083CC075: @ 83CC075
-	.incbin "baserom.gba", 0x003cc075, 0x2b
+@ replacing .incbin "baserom.gba", 0x003cc075, 0x2b
+.string "{STR_VAR_1} disappointed\nby repeating an appeal.{PAUSE 60}$"
 
 	.global gUnknown_083CC0A0
 gUnknown_083CC0A0: @ 83CC0A0
-	.incbin "baserom.gba", 0x003cc0a0, 0x1c
+@ replacing .incbin "baserom.gba", 0x003cc0a0, 0x1c
+.string "{STR_VAR_1}’s {STR_VAR_3}\nwent over great.{PAUSE 60}$"
 
 	.global gUnknown_083CC0BC
 gUnknown_083CC0BC: @ 83CC0BC
-	.incbin "baserom.gba", 0x003cc0bc, 0x27
+@ replacing .incbin "baserom.gba", 0x003cc0bc, 0x27
+.string "{STR_VAR_1}’s {STR_VAR_3}\ndidn’t go over well here...{PAUSE 60}$"
 
 	.global gUnknown_083CC0E3
 gUnknown_083CC0E3: @ 83CC0E3
-	.incbin "baserom.gba", 0x003cc0e3, 0x20
+@ replacing .incbin "baserom.gba", 0x003cc0e3, 0x20
+.string "{STR_VAR_1}’s {STR_VAR_3}\ngot the crowd going.{PAUSE 60}$"
 
 	.global gUnknown_083CC103
 gUnknown_083CC103: @ 83CC103
-	.incbin "baserom.gba", 0x003cc103, 0x47
+@ replacing .incbin "baserom.gba", 0x003cc103, 0x47
+.string "{STR_VAR_1} can’t appeal\nnext turn...{PAUSE 60}$"
+.string "It attracted the crowd’s\nattention.{PAUSE 60}$"
 
 	.global gUnknown_083CC14A
 gUnknown_083CC14A: @ 83CC14A
-	.incbin "baserom.gba", 0x003cc14a, 0x24
+@ replacing .incbin "baserom.gba", 0x003cc14a, 0x24
+.string "The crowd continues to\nwatch {STR_VAR_3}.{PAUSE 60}$"
 
 	.global gUnknown_083CC16E
 gUnknown_083CC16E: @ 83CC16E
-	.incbin "baserom.gba", 0x003cc16e, 0x1a
+@ replacing .incbin "baserom.gba", 0x003cc16e, 0x1a
+.string "{STR_VAR_1}’s\n{STR_VAR_2} is ignored.{PAUSE 60}$"
+.align 2
 
 	.global gUnknown_083CC188
 gUnknown_083CC188: @ 83CC188
-	.incbin "baserom.gba", 0x003cc188, 0xf8
+@ replacing .incbin "baserom.gba", 0x003cc188, 0xf8
+.incbin "baserom.gba", 0x003cc188, 0xf8
 
 	.global gUnknown_083CC280
 gUnknown_083CC280: @ 83CC280
-	.incbin "baserom.gba", 0x003cc280, 0x8
+@ replacing .incbin "baserom.gba", 0x003cc280, 0x8
+.string "shyness$"
 
 	.global gUnknown_083CC288
 gUnknown_083CC288: @ 83CC288
-	.incbin "baserom.gba", 0x003cc288, 0x8
+@ replacing .incbin "baserom.gba", 0x003cc288, 0x8
+.string "anxiety$"
 
 	.global gUnknown_083CC290
 gUnknown_083CC290: @ 83CC290
-	.incbin "baserom.gba", 0x003cc290, 0x9
+@ replacing .incbin "baserom.gba", 0x003cc290, 0x9
+.string "laziness$"
 
 	.global gUnknown_083CC299
 gUnknown_083CC299: @ 83CC299
-	.incbin "baserom.gba", 0x003cc299, 0xa
+@ replacing .incbin "baserom.gba", 0x003cc299, 0xa
+.string "hesitancy$"
 
 	.global gUnknown_083CC2A3
 gUnknown_083CC2A3: @ 83CC2A3
-	.incbin "baserom.gba", 0x003cc2a3, 0x35
+@ replacing .incbin "baserom.gba", 0x003cc2a3, 0x35
+.string "fear$"
+.string "coolness$"
+.string "beauty$"
+.string "cuteness$"
+.string "smartness$"
+.string "toughness$"
+.align 2
 
 	.global gUnknown_083CC2D8
 gUnknown_083CC2D8: @ 83CC2D8
-	.incbin "baserom.gba", 0x003cc2d8, 0x14
+@ replacing .incbin "baserom.gba", 0x003cc2d8, 0x14
+.incbin "baserom.gba", 0x003cc2d8, 0x14
 
 	.global gUnknown_083CC2EC
 gUnknown_083CC2EC: @ 83CC2EC
-	.incbin "baserom.gba", 0x003cc2ec, 0x44
+@ replacing .incbin "baserom.gba", 0x003cc2ec, 0x44
+.string "TENSION:$"
+.string "COOL Move$"
+.string "BEAUTY Move$"
+.string "CUTE Move$"
+.string "SMART Move$"
+.string "TOUGH Move$"
+.string "???$"
+.align 2
 
 	.global gUnknown_083CC330
 gUnknown_083CC330: @ 83CC330
-	.incbin "baserom.gba", 0x003cc330, 0x25
+@ replacing .incbin "baserom.gba", 0x003cc330, 0x25
+.incbin "baserom.gba", 0x003cc330, 0x1d
+.string "{HIGHLIGHT TRANSPARENT}{COLOR MAGENTA} $"
 
 	.global gUnknown_083CC355
 gUnknown_083CC355: @ 83CC355
-	.incbin "baserom.gba", 0x003cc355, 0xc
+@ replacing .incbin "baserom.gba", 0x003cc355, 0xc
+.string "Missed turn$"
 
 	.global gUnknown_083CC361
 gUnknown_083CC361: @ 83CC361
-	.incbin "baserom.gba", 0x003cc361, 0x3f
+@ replacing .incbin "baserom.gba", 0x003cc361, 0x3f
+.string "Link standby...$"
+.string "{COLOR WHITE2}$"
+.string "The winner is {STR_VAR_1}’s {STR_VAR_2}!\nCongratulations!$"
+.incbin "baserom.gba", 0x003cc39d, 0x3
 
 	.global gUnknown_083CC3A0
 gUnknown_083CC3A0: @ 83CC3A0
-	.incbin "baserom.gba", 0x003cc3a0, 0x7
+@ replacing .incbin "baserom.gba", 0x003cc3a0, 0x7
+.string "{COLOR GREEN}{SHADOW RED}$"
 
 	.global gUnknown_083CC3A7
 gUnknown_083CC3A7: @ 83CC3A7
-	.incbin "baserom.gba", 0x003cc3a7, 0x5
+@ replacing .incbin "baserom.gba", 0x003cc3a7, 0x5
+.string "{COLOR LIGHT_GREY}$"
+.string " "
 
 	.global gUnknown_083CC3AC
 gUnknown_083CC3AC: @ 83CC3AC
-	.incbin "baserom.gba", 0x003cc3ac, 0x8
+@ replacing .incbin "baserom.gba", 0x003cc3ac, 0x8
+.incbin "baserom.gba", 0x003cc3ac, 0x8
 
 	.global gUnknown_083CC3B4
 gUnknown_083CC3B4: @ 83CC3B4
-	.incbin "baserom.gba", 0x003cc3b4, 0xa0
+@ replacing .incbin "baserom.gba", 0x003cc3b4, 0xa0
+.incbin "baserom.gba", 0x003cc3b4, 0xa0
 
 	.global gUnknown_083CC454
 gUnknown_083CC454: @ 83CC454
-	.incbin "baserom.gba", 0x003cc454, 0x60
+@ replacing .incbin "baserom.gba", 0x003cc454, 0x60
+.incbin "baserom.gba", 0x003cc454, 0x60
 
 	.global gUnknown_083CC4B4
 gUnknown_083CC4B4: @ 83CC4B4
-	.incbin "baserom.gba", 0x003cc4b4, 0x20
+@ replacing .incbin "baserom.gba", 0x003cc4b4, 0x20
+.incbin "baserom.gba", 0x003cc4b4, 0x20
 
 	.global gUnknown_083CC4D4
 gUnknown_083CC4D4: @ 83CC4D4
-	.incbin "baserom.gba", 0x003cc4d4, 0x68
+@ replacing .incbin "baserom.gba", 0x003cc4d4, 0x68
+.incbin "baserom.gba", 0x003cc4d4, 0x68
 
 	.global gUnknown_083CC53C
 gUnknown_083CC53C: @ 83CC53C
-	.incbin "baserom.gba", 0x003cc53c, 0x60
+@ replacing .incbin "baserom.gba", 0x003cc53c, 0x60
+.incbin "baserom.gba", 0x003cc53c, 0x60
 
 	.global gUnknown_083CC59C
 gUnknown_083CC59C: @ 83CC59C
-	.incbin "baserom.gba", 0x003cc59c, 0x6
+@ replacing .incbin "baserom.gba", 0x003cc59c, 0x6
+.incbin "baserom.gba", 0x003cc59c, 0x6
 
 	.global gUnknown_083CC5A2
 gUnknown_083CC5A2: @ 83CC5A2
-	.incbin "baserom.gba", 0x003cc5a2, 0x2
+@ replacing .incbin "baserom.gba", 0x003cc5a2, 0x2
+.incbin "baserom.gba", 0x003cc5a2, 0x2
 
 	.global gUnknown_083CC5A4
 gUnknown_083CC5A4: @ 83CC5A4
-	.incbin "baserom.gba", 0x003cc5a4, 0x10
+@ replacing .incbin "baserom.gba", 0x003cc5a4, 0x10
+.incbin "baserom.gba", 0x003cc5a4, 0x10
 
 	.global gUnknown_083CC5B4
 gUnknown_083CC5B4: @ 83CC5B4
-	.incbin "baserom.gba", 0x003cc5b4, 0x1c
+@ replacing .incbin "baserom.gba", 0x003cc5b4, 0x1c
+.incbin "baserom.gba", 0x003cc5b4, 0x1c
 
 	.global gUnknown_083CC5D0
 gUnknown_083CC5D0: @ 83CC5D0
