@@ -3,50 +3,7 @@
 #include "gba/flash_internal.h"
 #include "siirtc.h"
 #include "rtc.h"
-
-typedef void (*MainCallback)(void);
-typedef void (*IntrCallback)(void);
-typedef void (*IntrFunc)(void);
-
-struct OamData
-{
-    u32 a, b;
-};
-
-struct Main
-{
-    MainCallback callback1;
-    MainCallback callback2;
-
-    u32 field_8;
-
-    IntrCallback vblankCallback;
-    IntrCallback hblankCallback;
-    IntrCallback vcountCallback;
-    IntrCallback serialCallback;
-
-    vu16 intrCheck;
-
-    u32 vblankCounter1;
-    u32 vblankCounter2;
-
-    u16 heldKeysRaw;           // held keys without L=A remapping
-    u16 newKeysRaw;            // newly pressed keys without L=A remapping
-    u16 heldKeys;              // held keys with L=A remapping
-    u16 newKeys;               // newly pressed keys with L=A remapping
-    u16 newAndRepeatedKeys;    // newly pressed keys plus key repeat
-    u16 keyRepeatCounter;      // counts down to 0, triggering key repeat
-    bool16 watchedKeysPressed; // whether one of the watched keys was pressed
-    u16 watchedKeysMask;       // bit mask for watched keys
-
-    u32 field_38;
-
-    struct OamData oamBuffer[128];
-
-    u8 state;
-
-    bool8 oamLoadDisabled;
-};
+#include "main.h"
 
 extern struct SoundInfo gSoundInfo;
 extern u16 gUnknown_3002A20;

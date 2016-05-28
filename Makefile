@@ -52,7 +52,7 @@ compare: $(ROM)
 	@$(SHA1) rom.sha1
 
 clean:
-	$(RM) $(ROM) $(ELF) $(OBJS)
+	rm -f $(ROM) $(ELF) $(OBJS) $(C_SRCS:%.c=%.i)
 	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.latfont' -o -iname '*.hwjpnfont' -o -iname '*.fwjpnfont' \) -exec rm {} +
 
 include castform.mk
@@ -76,8 +76,9 @@ src/m4a_2.o: CC1 := tools/agbcc/bin/old_agbcc
 src/m4a_4.o: CC1 := tools/agbcc/bin/old_agbcc
 
 $(C_OBJS): %.o : %.c
-	$(CPP) $(CPPFLAGS) $< | $(CC1) $(CFLAGS) -o $*.s
-	echo -e ".text\n\t.align\t2, 0\n" >> $*.s
+	@$(CPP) $(CPPFLAGS) $< -o $*.i
+	@$(PREPROC) $*.i charmap.txt | $(CC1) $(CFLAGS) -o $*.s
+	@echo -e ".text\n\t.align\t2, 0\n" >> $*.s
 	$(AS) $(ASFLAGS) -o $@ $*.s
 
 %.o : dep = $(shell $(SCANINC) $*.s)

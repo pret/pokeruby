@@ -24,6 +24,7 @@
 #include "asm_file.h"
 #include "char_util.h"
 #include "utf8.h"
+#include "string_parser.h"
 
 AsmFile::AsmFile(std::string filename) : m_filename(filename)
 {
@@ -35,6 +36,9 @@ AsmFile::AsmFile(std::string filename) : m_filename(filename)
     std::fseek(fp, 0, SEEK_END);
 
     m_size = std::ftell(fp);
+
+    if (m_size < 0)
+        FATAL_ERROR("File size of \"%s\" is less than zero.\n", filename.c_str());
 
     m_buffer = new char[m_size + 1];
 
@@ -246,169 +250,29 @@ std::string AsmFile::ReadPath()
     return std::string(&m_buffer[startPos], length);
 }
 
-// Reads a charmap char or escape sequence.
-std::string AsmFile::ReadCharOrEscape()
-{
-    std::string sequence;
-
-    bool isEscape = (m_buffer[m_pos] == '\\');
-
-    if (isEscape)
-    {
-        m_pos++;
-
-        if (m_buffer[m_pos] == '"')
-        {
-            sequence = g_charmap->Char('"');
-
-            if (sequence.length() == 0)
-                RaiseError("no mapping exists for double quote");
-
-            return sequence;
-        }
-        else if (m_buffer[m_pos] == '\\')
-        {
-            sequence = g_charmap->Char('\\');
-
-            if (sequence.length() == 0)
-                RaiseError("no mapping exists for backslash");
-
-            return sequence;
-        }
-    }
-
-    unsigned char c = m_buffer[m_pos];
-
-    if (c == 0)
-    {
-        if (m_pos >= m_size)
-            RaiseError("unexpected EOF in UTF-8 string");
-        else
-            RaiseError("unexpected null character in UTF-8 string");
-    }
-
-    if (IsAscii(c) && !IsAsciiPrintable(c))
-        RaiseError("unexpected character U+%X in UTF-8 string", c);
-
-    UnicodeChar unicodeChar = DecodeUtf8(&m_buffer[m_pos]);
-    m_pos += unicodeChar.encodingLength;
-    std::int32_t code = unicodeChar.code;
-
-    if (code == -1)
-        RaiseError("invalid encoding in UTF-8 string");
-
-    if (isEscape && code >= 128)
-        RaiseError("escapes using non-ASCII characters are invalid");
-
-    sequence = isEscape ? g_charmap->Escape(code) : g_charmap->Char(code);
-
-    if (sequence.length() == 0)
-    {
-        if (isEscape)
-            RaiseError("unknown escape '\\%c'", code);
-        else
-            RaiseError("unknown character U+%X", code);
-    }
-
-    return sequence;
-}
-
-// Reads a charmap constant, i.e. "{FOO}".
-std::string AsmFile::ReadBracketedConstants()
-{
-    std::string totalSequence;
-
-    m_pos++; // Assume we're on the left curly bracket.
-
-    while (m_buffer[m_pos] != '}')
-    {
-        SkipWhitespace();
-
-        if (IsIdentifierStartingChar(m_buffer[m_pos]))
-        {
-            long startPos = m_pos;
-
-            m_pos++;
-
-            while (IsIdentifierChar(m_buffer[m_pos]))
-                m_pos++;
-
-            std::string sequence = g_charmap->Constant(std::string(&m_buffer[startPos], m_pos - startPos));
-
-            if (sequence.length() == 0)
-            {
-                m_buffer[m_pos] = 0;
-                RaiseError("unknown constant '%s'", &m_buffer[startPos]);
-            }
-
-            totalSequence += sequence;
-        }
-        else if (IsAsciiDigit(m_buffer[m_pos]))
-        {
-            int value = ReadInteger(255);
-
-            if (value == -1)
-                RaiseError("integers within curly brackets cannot exceed 255");
-
-            totalSequence += (char)value;
-        }
-        else if (m_buffer[m_pos] == 0)
-        {
-            if (m_pos >= m_size)
-                RaiseError("unexpected EOF after left curly bracket");
-            else
-                RaiseError("unexpected null character within curly brackets");
-        }
-        else
-        {
-            if (IsAsciiPrintable(m_buffer[m_pos]))
-                RaiseError("unexpected character '%c' within curly brackets", m_buffer[m_pos]);
-            else
-                RaiseError("unexpected character '\\x%02X' within curly brackets", m_buffer[m_pos]);
-        }
-    }
-
-    m_pos++; // Go past the right curly bracket.
-
-    return totalSequence;
-}
-
 // Reads a charmap string.
 int AsmFile::ReadString(unsigned char* s)
 {
     SkipWhitespace();
 
-    if (m_buffer[m_pos] != '"')
-        RaiseError("expected UTF-8 string literal");
+    int length;
+    StringParser stringParser(m_buffer, m_size);
 
-    m_pos++;
-
-    int length = 0;
-
-    while (m_buffer[m_pos] != '"')
+    try
     {
-        std::string sequence = (m_buffer[m_pos] == '{') ? ReadBracketedConstants() : ReadCharOrEscape();
-
-        for (const char& c : sequence)
-        {
-            if (length == kMaxStringLength)
-                RaiseError("mapped string longer than %d bytes", length);
-
-            s[length++] = c;
-        }
+        m_pos += stringParser.ParseString(m_pos, s, length);
     }
-
-    m_pos++; // Go past the right quote.
+    catch (std::runtime_error e)
+    {
+        RaiseError(e.what());
+    }
 
     SkipWhitespace();
 
     if (ConsumeComma())
     {
         SkipWhitespace();
-        int padLength = ReadInteger(kMaxStringLength);
-
-        if (padLength == -1)
-            RaiseError("pad length greater than maximum length (%d)", kMaxStringLength);
+        int padLength = ReadPadLength();
 
         while (length < padLength)
         {
@@ -452,7 +316,7 @@ static int ConvertDigit(char c, int radix)
 }
 
 // Reads an integer. If the integer is greater than maxValue, it returns -1.
-int AsmFile::ReadInteger(int maxValue)
+int AsmFile::ReadPadLength()
 {
     if (!IsAsciiDigit(m_buffer[m_pos]))
         RaiseError("expected integer");
@@ -472,8 +336,8 @@ int AsmFile::ReadInteger(int maxValue)
     {
         n = n * radix + digit;
 
-        if (n > (unsigned)maxValue)
-            return -1;
+        if (n > kMaxStringLength)
+            RaiseError("pad length greater than maximum length (%d)", kMaxStringLength);
 
         m_pos++;
     }

@@ -3012,10 +3012,10 @@ c2_overworld_basic: @ 8054370
 	push {lr}
 	bl script_env_2_run_current_script
 	bl RunTasks
-	bl CallObjectCallbacks
+	bl AnimateSprites
 	bl CameraUpdate
 	bl UpdateCameraPanning
-	bl PrepareSpritesForOamLoad
+	bl BuildOamBuffer
 	bl fade_and_return_progress_probably
 	bl sub_8072EDC
 	pop {r0}
@@ -3541,8 +3541,8 @@ _080547F0: .4byte VBlankCB_Field
 	thumb_func_start VBlankCB_Field
 VBlankCB_Field: @ 80547F4
 	push {lr}
-	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl LoadOam
+	bl ProcessSpriteCopyRequests
 	bl sub_8089668
 	bl sub_8057A58
 	bl copy_pal_bg_faded_to_pal_ram
@@ -3627,7 +3627,7 @@ _080548C4:
 	bl sub_8054814
 	bl sub_8054C54
 	ldr r0, _080548DC
-	bl ShowBg
+	bl sub_8002A34
 	ldr r0, _080548E0
 	bl sub_8071C4C
 	b _08054928
@@ -3735,7 +3735,7 @@ _080549B4:
 	bl sub_8054814
 	bl sub_8054C54
 	ldr r0, _080549CC
-	bl ShowBg
+	bl sub_8002A34
 	ldr r0, _080549D0
 	bl sub_8071C4C
 	b _08054A38
@@ -3897,7 +3897,7 @@ _08054B0C:
 	bl sub_8054814
 	bl sub_8054C54
 	ldr r0, _08054B24
-	bl ShowBg
+	bl sub_8002A34
 	ldr r0, _08054B28
 	bl sub_8071C4C
 	b _08054B70
@@ -4023,8 +4023,8 @@ _08054BE2:
 	ldr r0, [r1, 0x8]
 	movs r0, 0
 	movs r1, 0x80
-	bl ResetSpriteRange
-	bl LoadOamFromSprites
+	bl ResetOamRange
+	bl LoadOam
 	add sp, 0x4
 	pop {r4-r7}
 	pop {r0}
@@ -4042,7 +4042,7 @@ sub_8054C2C: @ 8054C2C
 	bl sub_8054814
 	bl sub_8054C54
 	ldr r0, _08054C4C
-	bl ShowBg
+	bl sub_8002A34
 	ldr r0, _08054C50
 	bl sub_8071C4C
 	bl mapdata_load_assets_to_gpu_and_full_redraw
@@ -4169,7 +4169,7 @@ sub_8054D4C: @ 8054D4C
 	push {r4,lr}
 	adds r4, r0, 0
 	bl ResetTasks
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl sub_8073B94
 	bl dp12_8087EA4
 	bl ResetCameraUpdateInfo
@@ -5980,7 +5980,7 @@ sub_8055A9C: @ 8055A9C
 	lsls r0, 2
 	ldr r1, _08055AE4
 	adds r0, r1
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _08055AC8:
 	movs r0, 0
 	strb r0, [r5]
@@ -6595,7 +6595,7 @@ sub_8055ED8: @ 8055ED8
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	b _08055F56
 	.align 2, 0
 _08055F3C: .4byte 0x02029818
@@ -6607,7 +6607,7 @@ _08055F44:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl StartObjectImageAnimIfDifferent
+	bl StartSpriteAnimIfDifferent
 _08055F56:
 	adds r0, r5, 0
 	movs r1, 0
@@ -11551,7 +11551,7 @@ DrawDoorMetatileAt: @ 8057DEC
 	lsrs r2, 16
 	movs r0, 0x1
 	adds r1, r5, 0
-	bl sub_8057E88
+	bl DrawMetatile
 	movs r0, 0x1
 	strb r0, [r6, 0x4]
 _08057E14:
@@ -11608,7 +11608,7 @@ _08057E64:
 	lsls r1, r4, 4
 	adds r1, r5, r1
 	mov r2, r8
-	bl sub_8057E88
+	bl DrawMetatile
 	pop {r3}
 	mov r8, r3
 	pop {r4-r7}
@@ -11618,8 +11618,8 @@ _08057E64:
 _08057E84: .4byte 0xfffffe00
 	thumb_func_end DrawMetatileAt
 
-	thumb_func_start sub_8057E88
-sub_8057E88: @ 8057E88
+	thumb_func_start DrawMetatile
+DrawMetatile: @ 8057E88
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -11830,7 +11830,7 @@ _08058010:
 	.align 2, 0
 _0805801C: .4byte 0x020211cc
 _08058020: .4byte 0x00003014
-	thumb_func_end sub_8057E88
+	thumb_func_end DrawMetatile
 
 	thumb_func_start MapPosToBgTilemapOffset
 MapPosToBgTilemapOffset: @ 8058024
@@ -11930,7 +11930,7 @@ InitCameraUpdateCallback: @ 80580AC
 	lsls r0, 2
 	ldr r1, _080580E4
 	adds r0, r1
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _080580C8:
 	adds r0, r5, 0
 	bl AddCameraObject
@@ -15717,7 +15717,7 @@ sub_8059BF4: @ 8059BF4
 	ldr r1, _08059C38
 	adds r0, r1
 	movs r1, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -15759,7 +15759,7 @@ sub_8059C3C: @ 8059C3C
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -15804,14 +15804,14 @@ sub_8059C94: @ 8059C94
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldrb r1, [r6, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
 	add r0, r8
 	movs r1, 0x1
-	bl SeekObjectImageAnim
+	bl SeekSpriteAnim
 	pop {r3}
 	mov r8, r3
 	pop {r4-r6}
@@ -15855,7 +15855,7 @@ sub_8059D08: @ 8059D08
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -16595,7 +16595,7 @@ sub_805A2D0: @ 805A2D0
 	lsls r0, 2
 	ldr r1, _0805A344
 	adds r0, r1
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	adds r0, r5, 0
 	bl DestroyTask
 _0805A336:
@@ -16931,7 +16931,7 @@ _0805A596:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _0805A5BC:
 	movs r0, 0x1
 	pop {r4}
@@ -17213,7 +17213,7 @@ sub_805A7BC: @ 805A7BC
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldr r0, _0805A804
 	bl sub_8072044
 	movs r0, 0xD
@@ -17248,7 +17248,7 @@ sub_805A808: @ 805A808
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldr r0, _0805A854
 	bl sub_8072044
 	ldrh r0, [r5, 0x8]
@@ -17398,7 +17398,7 @@ sub_805A954: @ 805A954
 	ldr r1, _0805AA44
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl AnimateObject
+	bl AnimateSprite
 	movs r0, 0
 	strh r0, [r4, 0x24]
 	strh r0, [r4, 0x26]
@@ -17583,7 +17583,7 @@ sub_805AAB0: @ 805AAB0
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x1F
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _0805AB50
@@ -17603,10 +17603,10 @@ sub_805AAB0: @ 805AAB0
 	orrs r0, r1
 	strb r0, [r4, 0x1]
 	adds r0, r4, 0
-	bl obj_alloc_rotscale_entry
+	bl InitSpriteAffineAnim
 	adds r0, r4, 0
 	movs r1, 0
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	adds r4, 0x3E
 	ldrb r0, [r4]
 	movs r6, 0x4
@@ -17616,7 +17616,7 @@ sub_805AAB0: @ 805AAB0
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x1F
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r4, r0, 4
@@ -17629,10 +17629,10 @@ sub_805AAB0: @ 805AAB0
 	orrs r5, r0
 	strb r5, [r4, 0x1]
 	adds r0, r4, 0
-	bl obj_alloc_rotscale_entry
+	bl InitSpriteAffineAnim
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	adds r4, 0x3E
 	ldrb r0, [r4]
 	orrs r0, r6
@@ -18241,7 +18241,7 @@ RemoveFieldObjectInternal: @ 805AF4C
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r2
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	add sp, 0x8
 	pop {r4}
 	pop {r0}
@@ -18355,7 +18355,7 @@ _0805B050:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r7, r0, 24
 	cmp r7, 0x40
@@ -18461,7 +18461,7 @@ _0805B08C:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _0805B13E:
 	ldrb r0, [r5, 0xB]
 	lsrs r0, 4
@@ -18569,7 +18569,7 @@ _0805B1E4:
 	lsls r0, 2
 	adds r0, r4
 	adds r1, r2, 0
-	bl SetSpriteOamTables_NoPriorityFromTable
+	bl SetSubspriteTables
 _0805B218:
 	adds r0, r5, 0
 _0805B21A:
@@ -18806,7 +18806,7 @@ _0805B3C0:
 	asrs r2, 16
 	mov r0, sp
 	adds r3, r4, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0x40
@@ -18820,7 +18820,7 @@ _0805B3C0:
 	ldr r0, _0805B40C
 	adds r4, r0
 	adds r0, r4, 0
-	bl SetSpriteOamTables_NoPriorityFromTable
+	bl SetSubspriteTables
 	adds r4, 0x42
 	ldrb r1, [r4]
 	movs r0, 0x3F
@@ -18900,7 +18900,7 @@ sub_805B410: @ 805B410
 	ldrsh r2, [r6, r0]
 	mov r0, sp
 	movs r3, 0
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r6, r0, 24
 	cmp r6, 0x40
@@ -18959,7 +18959,7 @@ _0805B4FC:
 	cmp r1, 0
 	beq _0805B518
 	adds r0, r5, 0
-	bl SetSpriteOamTables_NoPriorityFromTable
+	bl SetSubspriteTables
 	adds r2, r5, 0
 	adds r2, 0x42
 	ldrb r0, [r2]
@@ -18982,7 +18982,7 @@ _0805B518:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _0805B53C:
 	adds r0, r6, 0
 	add sp, 0x24
@@ -19359,7 +19359,7 @@ _0805B7FC:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r7, r0, 24
 	cmp r7, 0x40
@@ -19426,7 +19426,7 @@ _0805B88A:
 	cmp r1, 0
 	beq _0805B896
 	adds r0, r4, 0
-	bl SetSpriteOamTables_NoPriorityFromTable
+	bl SetSubspriteTables
 _0805B896:
 	ldrb r1, [r5, 0xC]
 	lsls r1, 28
@@ -19460,7 +19460,7 @@ _0805B896:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _0805B8DC:
 	adds r0, r6, 0
 	bl sub_805B914
@@ -19734,14 +19734,14 @@ FieldObjectTurn: @ 805BAC0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldrb r1, [r6, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r5
 	movs r1, 0
-	bl SeekObjectImageAnim
+	bl SeekSpriteAnim
 _0805BB06:
 	pop {r4-r6}
 	pop {r0}
@@ -19871,7 +19871,7 @@ _0805BBC4:
 	strb r0, [r7, 0x5]
 	adds r0, r7, 0
 	adds r1, r6, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _0805BBFC:
 	pop {r4-r7}
 	pop {r0}
@@ -20146,7 +20146,7 @@ _0805BDE0: .4byte 0x02020004
 	thumb_func_start gpu_pal_allocator_reset__manage_upper_four
 gpu_pal_allocator_reset__manage_upper_four: @ 805BDE4
 	push {lr}
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	ldr r1, _0805BDF4
 	movs r0, 0xC
 	strb r0, [r1]
@@ -20215,13 +20215,13 @@ sub_805BE58: @ 805BE58
 	push {r4,lr}
 	adds r4, r0, 0
 	ldrh r0, [r4, 0x4]
-	bl IndexOfObjectPaletteTag
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
 	bne _0805BE76
 	adds r0, r4, 0
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	lsls r0, 24
 	lsrs r0, 24
 	b _0805BE78
@@ -20798,7 +20798,7 @@ AddCameraObject: @ 805C284
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x4
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _0805C2C4
@@ -29169,7 +29169,7 @@ _0805FE50:
 _0805FE56:
 	ldrb r1, [r1]
 	adds r0, r3, 0
-	bl SeekObjectImageAnim
+	bl SeekSpriteAnim
 _0805FE5E:
 	pop {r4}
 	pop {r0}
@@ -29197,7 +29197,7 @@ sub_805FE64: @ 805FE64
 _0805FE84:
 	adds r0, r1, 0
 	adds r1, r2, 0
-	bl SeekObjectImageAnim
+	bl SeekSpriteAnim
 _0805FE8C:
 	pop {r0}
 	bx r0
@@ -33886,7 +33886,7 @@ sub_8061F5C: @ 8061F5C
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r0}
@@ -35166,7 +35166,7 @@ sub_806283C: @ 806283C
 	orrs r0, r1
 	strb r0, [r4, 0x1]
 	adds r0, r4, 0
-	bl obj_alloc_rotscale_entry
+	bl InitSpriteAffineAnim
 	adds r2, r4, 0
 	adds r2, 0x2C
 	ldrb r0, [r2]
@@ -35191,7 +35191,7 @@ sub_806286C: @ 806286C
 	ldrb r0, [r4, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl rotscale_free_entry
+	bl FreeOamMatrix
 	ldrb r0, [r4, 0x1]
 	movs r1, 0x4
 	negs r1, r1
@@ -35202,7 +35202,7 @@ sub_806286C: @ 806286C
 	lsrs r2, 6
 	movs r3, 0
 	adds r0, r4, 0
-	bl CalcVecFromObjectCenterToObjectUpperLeft
+	bl CalcCenterToCornerVec
 	movs r0, 0x1
 	pop {r4}
 	pop {r1}
@@ -35224,7 +35224,7 @@ sub_806289C: @ 806289C
 	strb r0, [r2]
 	adds r0, r4, 0
 	movs r1, 0
-	bl StartObjectRotScalAnimIfDifferent
+	bl StartSpriteAffineAnimIfDifferent
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl sub_80628D0
@@ -35276,7 +35276,7 @@ sub_80628FC: @ 80628FC
 	strb r0, [r2]
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_80020A0
+	bl ChangeSpriteAffineAnimIfDifferent
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl sub_8062930
@@ -35649,7 +35649,7 @@ sub_8062B8C: @ 8062B8C
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl StartObjectImageAnimIfDifferent
+	bl StartSpriteAnimIfDifferent
 	adds r0, r6, 0
 	bl DoShadowFieldEffect
 	add sp, 0x4
@@ -36376,10 +36376,10 @@ sub_80630D0: @ 80630D0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r0, r4, 0
 	movs r1, 0
-	bl SeekObjectImageAnim
+	bl SeekSpriteAnim
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -36732,10 +36732,10 @@ sub_8063338: @ 8063338
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r0, r4, 0
 	movs r1, 0
-	bl SeekObjectImageAnim
+	bl SeekSpriteAnim
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -39667,7 +39667,7 @@ obj_anim_image_set_and_seek: @ 806483C
 	ands r1, r3
 	strb r1, [r4]
 	adds r1, r2, 0
-	bl SeekObjectImageAnim
+	bl SeekSpriteAnim
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -39876,7 +39876,7 @@ _0806499E:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	b _080649EE
 	.align 2, 0
 _080649DC: .4byte 0x02020004
@@ -52240,7 +52240,7 @@ _0806A566:
 	b _0806A596
 _0806A590:
 	adds r0, r3, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _0806A596:
 	pop {r0}
 	bx r0
@@ -52373,7 +52373,7 @@ _0806A682:
 	b _0806A696
 _0806A690:
 	adds r0, r3, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _0806A696:
 	pop {r0}
 	bx r0
@@ -52388,13 +52388,13 @@ sub_806A69C: @ 806A69C
 	lsls r5, 24
 	lsrs r5, 24
 	ldr r0, _0806A70C
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	ldr r0, _0806A710
 	mov r8, r0
 	movs r1, 0x35
 	movs r2, 0x44
 	movs r3, 0
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r1, r0, 24
 	ldr r6, _0806A714
@@ -52414,7 +52414,7 @@ sub_806A69C: @ 806A69C
 	movs r1, 0x35
 	movs r2, 0x44
 	movs r3, 0
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r1, r0, 24
 	lsls r0, r1, 4
@@ -52447,7 +52447,7 @@ sub_806A724: @ 806A724
 	push {lr}
 	ldr r0, _0806A734
 	ldrh r0, [r0, 0x4]
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -52975,16 +52975,16 @@ _0806AB16:
 	ldr r0, [r1, 0x8]
 	movs r0, 0
 	movs r1, 0x80
-	bl ResetSpriteRange
-	bl LoadOamFromSprites
+	bl ResetOamRange
+	bl LoadOam
 	bl remove_some_task
 	bl dp12_8087EA4
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetTasks
 	bl sub_8073B94
 	ldr r4, _0806ABA0
 	adds r0, r4, 0
-	bl ShowBg
+	bl sub_8002A34
 	adds r0, r4, 0
 	bl sub_8071C4C
 	movs r1, 0x80
@@ -53018,8 +53018,8 @@ _0806ABAC: .4byte sub_806ACCC
 sub_806ABB0: @ 806ABB0
 	push {lr}
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl fade_and_return_progress_probably
 	pop {r0}
 	bx r0
@@ -53028,8 +53028,8 @@ sub_806ABB0: @ 806ABB0
 	thumb_func_start sub_806ABC8
 sub_806ABC8: @ 806ABC8
 	push {lr}
-	bl ProcessObjectCopyRequests
-	bl LoadOamFromSprites
+	bl ProcessSpriteCopyRequests
+	bl LoadOam
 	bl copy_pal_bg_faded_to_pal_ram
 	pop {r0}
 	bx r0
@@ -53394,8 +53394,8 @@ _0806AED8: .4byte 0x0202f388
 sub_806AEDC: @ 806AEDC
 	push {r4-r6,lr}
 	sub sp, 0x4
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	ldr r0, _0806AF2C
 	ldrb r1, [r0]
 	lsls r0, r1, 1
@@ -53435,8 +53435,8 @@ _0806AF30: .4byte gUnknown_08376BB4
 	thumb_func_start sub_806AF34
 sub_806AF34: @ 806AF34
 	push {lr}
-	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl LoadOam
+	bl ProcessSpriteCopyRequests
 	bl copy_pal_bg_faded_to_pal_ram
 	bl sub_806B548
 	pop {r0}
@@ -53837,7 +53837,7 @@ _0806B270: .4byte 0x00000266
 _0806B274: .4byte 0x03001770
 _0806B278: .4byte 0x0000043c
 _0806B27C:
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	b _0806B426
 _0806B282:
 	ldr r0, _0806B2A0
@@ -53860,7 +53860,7 @@ _0806B2A0: .4byte 0x0201b000
 _0806B2A4: .4byte 0x03001770
 _0806B2A8: .4byte 0x0000043c
 _0806B2AC:
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	b _0806B426
 _0806B2B2:
 	ldr r4, _0806B2CC
@@ -53879,7 +53879,7 @@ _0806B2B2:
 _0806B2CC: .4byte 0x0201b000
 _0806B2D0:
 	ldr r0, _0806B2E0
-	bl ShowBg
+	bl sub_8002A34
 	ldr r1, _0806B2E4
 	ldr r0, _0806B2E8
 	adds r1, r0
@@ -55256,7 +55256,7 @@ sub_806BD58: @ 806BD58
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806BD7C: .4byte nullsub_2
+_0806BD7C: .4byte SpriteCallbackDummy
 	thumb_func_end sub_806BD58
 
 	thumb_func_start sub_806BD80
@@ -57032,7 +57032,7 @@ _0806CAD8: .4byte 0x03004b20
 _0806CADC: .4byte TaskDummy
 _0806CAE0: .4byte 0x02001000
 _0806CAE4: .4byte sub_806CB74
-_0806CAE8: .4byte nullsub_2
+_0806CAE8: .4byte SpriteCallbackDummy
 _0806CAEC: .4byte 0x0001a272
 _0806CAF0: .4byte 0x02020004
 _0806CAF4: .4byte gUnknown_083769A8
@@ -57204,7 +57204,7 @@ sub_806CC2C: @ 806CC2C
 	lsls r0, 2
 	ldr r1, _0806CC6C
 	adds r0, r1
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	movs r0, 0
 	movs r1, 0
 	bl sub_806D538
@@ -59038,9 +59038,9 @@ _0806DA94: .4byte sub_806DA0C
 sub_806DA98: @ 806DA98
 	push {lr}
 	ldr r0, _0806DAAC
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	ldr r0, _0806DAB0
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -59125,7 +59125,7 @@ sub_806DB0C: @ 806DB0C
 	lsrs r3, 24
 	movs r1, 0xFA
 	movs r2, 0xAA
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r4, r0, 4
@@ -59145,7 +59145,7 @@ sub_806DB0C: @ 806DB0C
 	strh r6, [r5, 0x3C]
 	adds r0, r5, 0
 	mov r1, r9
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldr r1, [r4]
 	adds r0, r5, 0
 	bl _call_via_r1
@@ -59282,7 +59282,7 @@ _0806DC50:
 	movs r1, 0xFA
 	movs r2, 0xAA
 	movs r3, 0x4
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r4, r0, 4
@@ -59343,7 +59343,7 @@ sub_806DCD4: @ 806DCD4
 	movs r1, 0xFA
 	movs r2, 0xAA
 	movs r3, 0x4
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldr r1, _0806DD30
@@ -59386,7 +59386,7 @@ _0806DD46:
 	adds r0, r5, 0
 	movs r1, 0
 _0806DD4A:
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r2, r5, 0
 	adds r2, 0x3E
 	ldrb r1, [r2]
@@ -59728,7 +59728,7 @@ _0806DFD8:
 	adds r0, r4, 0
 	movs r1, 0
 _0806DFE6:
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r4, 0x3E
 	ldrb r1, [r4]
 	movs r0, 0x5
@@ -67046,7 +67046,7 @@ _08071A98: .4byte 0x040000d4
 _08071A9C: .4byte 0x81000200
 _08071AA0: .4byte 0x81000800
 _08071AA4:
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetTasks
 	bl sub_8073B94
 	bl dp12_8087EA4
@@ -67054,7 +67054,7 @@ _08071AA4:
 _08071AB6:
 	ldr r4, _08071AD4
 	adds r0, r4, 0
-	bl ShowBg
+	bl sub_8002A34
 	adds r0, r4, 0
 	bl sub_8071C4C
 	movs r1, 0x80
@@ -75373,9 +75373,9 @@ _080758E4: .4byte 0x03004244
 move_anim_8072740: @ 80758E8
 	push {r4,lr}
 	adds r4, r0, 0
-	bl obj_free_rotscale_entry
+	bl FreeSpriteOamMatrix
 	adds r0, r4, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	ldr r1, _08075904
 	ldrb r0, [r1]
 	subs r0, 0x1
@@ -75601,9 +75601,9 @@ ma01_080728D0: @ 8075A78
 	adds r0, r1
 	ldrh r5, [r0, 0x6]
 	adds r0, r5, 0
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	adds r0, r5, 0
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	ldr r0, [r6]
 	adds r0, 0x2
 	str r0, [r6]
@@ -75732,7 +75732,7 @@ _08075B74:
 	lsrs r3, 24
 	adds r0, r7, 0
 	adds r1, r4, 0
-	bl AddObjectAndAnimateForOneFrame
+	bl CreateSpriteAndAnimate
 	ldr r1, _08075BB4
 	ldrb r0, [r1]
 	adds r0, 0x1
@@ -75954,12 +75954,12 @@ _08075D36:
 	lsls r0, 3
 	adds r0, r6
 	ldrh r0, [r0, 0x6]
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	ldrh r0, [r4]
 	lsls r0, 3
 	adds r0, r6
 	ldrh r0, [r0, 0x6]
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	ldrh r1, [r4]
 	adds r0, r7, 0
 	orrs r0, r1
@@ -81220,7 +81220,7 @@ _0807856C:
 move_anim_8074EE0: @ 8078574
 	push {r4,lr}
 	adds r4, r0, 0
-	bl obj_free_rotscale_entry
+	bl FreeSpriteOamMatrix
 	adds r0, r4, 0
 	bl move_anim_8072740
 	pop {r4}
@@ -82569,7 +82569,7 @@ _08078F0E:
 	lsrs r2, 6
 	lsls r3, 30
 	lsrs r3, 30
-	bl CalcVecFromObjectCenterToObjectUpperLeft
+	bl CalcCenterToCornerVec
 	pop {r3}
 	mov r8, r3
 	pop {r4-r7}
@@ -82619,7 +82619,7 @@ sub_8078F40: @ 8078F40
 	lsrs r2, 6
 	lsls r3, 30
 	lsrs r3, 30
-	bl CalcVecFromObjectCenterToObjectUpperLeft
+	bl CalcCenterToCornerVec
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -82701,7 +82701,7 @@ sub_8078FDC: @ 8078FDC
 	lsls r3, 30
 	lsrs r3, 30
 	adds r0, r4, 0
-	bl CalcVecFromObjectCenterToObjectUpperLeft
+	bl CalcCenterToCornerVec
 _0807902A:
 	ldr r6, _08079090
 	lsls r0, r7, 16
@@ -82784,7 +82784,7 @@ sub_8079098: @ 8079098
 	lsls r3, 30
 	lsrs r3, 30
 	adds r0, r4, 0
-	bl CalcVecFromObjectCenterToObjectUpperLeft
+	bl CalcCenterToCornerVec
 	add sp, 0x4
 	pop {r4}
 	pop {r0}
@@ -83519,7 +83519,7 @@ obj_delete_but_dont_free_vram: @ 8079658
 	movs r2, 0x40
 	orrs r1, r2
 	strb r1, [r3]
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	pop {r0}
 	bx r0
 	thumb_func_end obj_delete_but_dont_free_vram
@@ -83830,7 +83830,7 @@ sub_80798AC: @ 80798AC
 	lsrs r4, r0, 24
 	ldr r0, _080798CC
 	ldrh r0, [r0]
-	bl IndexOfObjectPaletteTag
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0xFF
@@ -84748,7 +84748,7 @@ sub_8079F44: @ 8079F44
 	lsls r0, r7, 3
 	ldr r1, _08079FE0
 	adds r0, r1
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	lsls r0, 16
 	lsrs r0, 16
 	mov r10, r0
@@ -84758,7 +84758,7 @@ sub_8079F44: @ 8079F44
 	lsls r0, 3
 	adds r0, r1
 	ldrh r0, [r0, 0x2]
-	bl AllocObjectPalette
+	bl AllocSpritePalette
 	lsls r0, 24
 	lsrs r4, r0, 24
 	mov r0, r8
@@ -84883,7 +84883,7 @@ _0807A09E:
 	lsls r2, 16
 	asrs r2, 16
 	ldr r3, [sp, 0x14]
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r4, r0, 24
 	bl sub_8076BE0
@@ -84901,7 +84901,7 @@ _0807A09E:
 	str r2, [r1]
 	adds r0, r3
 	movs r1, 0
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 _0807A0D0:
 	adds r0, r4, 0
 	add sp, 0x18
@@ -84922,7 +84922,7 @@ _0807A0F0: .4byte gUnknown_081E7C18
 	thumb_func_start sub_807A0F4
 sub_807A0F4: @ 807A0F4
 	push {lr}
-	bl RemoveObjectAndFreeResources
+	bl DestroySpriteAndFreeResources
 	pop {r0}
 	bx r0
 	thumb_func_end sub_807A0F4
@@ -85476,7 +85476,7 @@ sub_807A4A0: @ 807A4A0
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0807A538: .4byte nullsub_2
+_0807A538: .4byte SpriteCallbackDummy
 _0807A53C: .4byte 0x02020004
 _0807A540: .4byte 0xfffffc00
 	thumb_func_end sub_807A4A0
@@ -85589,7 +85589,7 @@ _0807A5FE:
 	strh r0, [r4, 0x38]
 	ldrb r1, [r1, 0xC]
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldr r1, _0807A634
 	adds r0, r4, 0
 	bl oamt_set_x3A_32
@@ -85692,7 +85692,7 @@ _0807A6D0:
 	subs r1, r2
 	strh r1, [r0, 0x24]
 	ldr r0, _0807A73C
-	bl AllocObjectPalette
+	bl AllocSpritePalette
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x10]
@@ -85853,7 +85853,7 @@ _0807A830:
 	cmp r0, 0
 	bne _0807A844
 	ldr r0, _0807A84C
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	adds r0, r5, 0
 	bl move_anim_task_del
 _0807A844:

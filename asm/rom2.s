@@ -157,14 +157,14 @@ _080071A0: .4byte gUnknown_081E29A8
 	thumb_func_start sub_80071A4
 sub_80071A4: @ 80071A4
 	push {r4-r6,lr}
-	bl ResetAllObjectData
-	bl ResetObjectPaletteAllocator
+	bl ResetSpriteData
+	bl FreeAllSpritePalettes
 	bl ResetTasks
 	ldr r0, _08007248
 	bl SetVBlankCallback
 	ldr r4, _0800724C
 	adds r0, r4, 0
-	bl ShowBg
+	bl sub_8002A34
 	adds r0, r4, 0
 	bl sub_8071C4C
 	bl sub_8007CEC
@@ -204,8 +204,8 @@ _080071E4:
 	movs r1, 0
 	bl CreateTask
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl fade_and_return_progress_probably
 	ldr r1, _08007264
 	movs r0, 0
@@ -310,8 +310,8 @@ _080072FC: .4byte gGameVersion
 	thumb_func_start sub_8007300
 sub_8007300: @ 8007300
 	push {lr}
-	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl LoadOam
+	bl ProcessSpriteCopyRequests
 	bl copy_pal_bg_faded_to_pal_ram
 	pop {r0}
 	bx r0
@@ -663,8 +663,8 @@ c2_08009A8C: @ 80075CC
 	movs r2, 0
 	bl sub_8007428
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl fade_and_return_progress_probably
 	pop {r0}
 	bx r0
@@ -2837,8 +2837,8 @@ _080085B8: .4byte 0x0300295c
 	thumb_func_start sub_80085BC
 sub_80085BC: @ 80085BC
 	push {r4,lr}
-	bl ResetAllObjectData
-	bl ResetObjectPaletteAllocator
+	bl ResetSpriteData
+	bl FreeAllSpritePalettes
 	bl pal_fade_control_reset_maybe
 	movs r0, 0
 	movs r1, 0
@@ -2849,7 +2849,7 @@ sub_80085BC: @ 80085BC
 	bl SetVBlankCallback
 	ldr r4, _0800863C
 	adds r0, r4, 0
-	bl ShowBg
+	bl sub_8002A34
 	adds r0, r4, 0
 	bl sub_8071C4C
 	bl sub_8071EF4
@@ -2873,8 +2873,8 @@ sub_80085BC: @ 80085BC
 	bl CreateTask
 	bl sub_8074D08
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl fade_and_return_progress_probably
 	ldr r0, _0800864C
 	bl SetMainCallback2

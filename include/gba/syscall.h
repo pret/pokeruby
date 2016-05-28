@@ -15,12 +15,18 @@ void SoftReset(u32 resetFlags);
 
 void RegisterRamReset(u32 resetFlags);
 
+void VBlankIntrWait(void);
+
 #define CPU_SET_SRC_FIXED 0x01000000
 #define CPU_SET_16BIT     0x00000000
 #define CPU_SET_32BIT     0x04000000
 
 void CpuSet(void *src, void *dest, u32 control);
 
-void VBlankIntrWait(void);
+#define CPU_FAST_SET_SRC_FIXED 0x01000000
+
+void CpuFastSet(void *src, void *dest, u32 control);
+
+void ObjAffineSet(struct ObjAffineSrcData *src, void *dest, s32 count, s32 offset);
 
 #endif // GUARD_GBA_SYSCALL_H

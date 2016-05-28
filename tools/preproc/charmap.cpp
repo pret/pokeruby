@@ -76,6 +76,9 @@ CharmapReader::CharmapReader(std::string filename) : m_filename(filename)
 
     m_size = std::ftell(fp);
 
+    if (m_size < 0)
+        FATAL_ERROR("File size of \"%s\" is less than zero.\n", filename.c_str());
+
     m_buffer = new char[m_size + 1];
 
     std::rewind(fp);

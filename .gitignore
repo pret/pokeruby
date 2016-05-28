@@ -1,5 +1,6 @@
 *.exe
 *.o
+*.i
 *.elf
 *.gba
 *.1bpp

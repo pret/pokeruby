@@ -17,6 +17,12 @@ enum
     FEMALE
 };
 
+struct Coords16
+{
+    s16 x;
+    s16 y;
+};
+
 struct Time
 {
     s16 days;
