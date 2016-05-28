@@ -1263,11 +1263,34 @@ gUnknown_0821602C: @ 821602C
 
 	.global gUnknown_08216249
 gUnknown_08216249: @ 8216249
-	.incbin "baserom.gba", 0x00216249, 0x3b
+@ replacing .incbin "baserom.gba", 0x00216249, 0x3b
+	.byte 0xFB @probably not a /p
+	.string "$"
+	.incbin "baserom.gba", 0x0021624b, 0x28
+	.string "2Pok$"
+	.string "3Pok$"
+	.string "4Pok$"
+	.align 2
 
 	.global gUnknown_08216284
 gUnknown_08216284: @ 8216284
-	.incbin "baserom.gba", 0x00216284, 0x34
+@ replacing .incbin "baserom.gba", 0x00216284, 0x34
+	.4byte 0x08216273 @pointers
+	.4byte 0x08216278
+	.4byte 0x0821627D
+	.2byte 0xCAA2 @unknown
+	.string "$"
+	.align 2
+	.string "2P$"
+	.align 2
+	.string "3P$"
+	.align 2
+	.string "4P$"
+	.align 2
+	.string "MISTER$"
+	.string "LADDIE$"
+	.string "LASSIE$"
+	.align 2
 
 	.global gUnknown_082162B8
 gUnknown_082162B8: @ 82162B8
@@ -1395,7 +1418,9 @@ gUnknown_082165F8: @ 82165F8
 
 	.global gUnknown_082165FA
 gUnknown_082165FA: @ 82165FA
-	.incbin "baserom.gba", 0x002165fa, 0x6
+@ replacing .incbin "baserom.gba", 0x002165fa, 0x6
+	.string "BPM$"
+	.string "-$"
 
 	.global gUnknown_08216600
 gUnknown_08216600: @ 8216600
@@ -3820,7 +3845,8 @@ gUnknown_083C9400: @ 83C9400
 
 	.global gUnknown_083C9408
 gUnknown_083C9408: @ 83C9408
-	.incbin "baserom.gba", 0x003c9408, 0xf00
+
+	.include "data/contest_opponents.s"
 
 	.global gUnknown_083CA308
 gUnknown_083CA308: @ 83CA308
