@@ -1,15 +1,64 @@
 #include "global.h"
 #include "string_util.h"
+#include "text.h"
 
 #define MAX_PLACEHOLDER_ID 0xD
 
-typedef u8 *(*ExpandPlaceholderFunc)();
+static u8 *ExpandPlaceholder_UnknownStringVar(void);
+static u8 *ExpandPlaceholder_PlayerName(void);
+static u8 *ExpandPlaceholder_StringVar1(void);
+static u8 *ExpandPlaceholder_StringVar2(void);
+static u8 *ExpandPlaceholder_StringVar3(void);
+static u8 *ExpandPlaceholder_UnknownString(void);
+static u8 *ExpandPlaceholder_RivalName(void);
+static u8 *ExpandPlaceholder_Version(void);
+static u8 *ExpandPlaceholder_EvilTeam(void);
+static u8 *ExpandPlaceholder_GoodTeam(void);
+static u8 *ExpandPlaceholder_EvilLeader(void);
+static u8 *ExpandPlaceholder_GoodLeader(void);
+static u8 *ExpandPlaceholder_EvilLegendary(void);
+static u8 *ExpandPlaceholder_GoodLegendary(void);
 
-extern u8 gDigits[];
-extern s32 gPowersOfTen[];
-extern u8 gUnknown_081E72EC[];
-extern u8 gUnknown_081E72F0[];
-extern ExpandPlaceholderFunc gExpandPlaceholderFuncTable[];
+const u8 gEmptyString_81E72B0[] = _"";
+const u8 gRightPointingTriangleString[] = _"▶";
+const u8 sDigits[] = @"0123456789ABCDEF";
+
+const s32 sPowersOfTen[] =
+{
+             1,
+            10,
+           100,
+          1000,
+         10000,
+        100000,
+       1000000,
+      10000000,
+     100000000,
+    1000000000,
+};
+
+const u8 sSetBrailleFont[] = { 0xFC, 0x06, 0x06, 0xFF };
+const u8 sGotoLine2[] = { 0xFE, 0xFC, 0x0E, 0x02, 0xFF };
+
+typedef u8 *(*ExpandPlaceholderFunc)(void);
+
+const ExpandPlaceholderFunc sExpandPlaceholderFuncs[] =
+{
+    ExpandPlaceholder_UnknownStringVar,
+    ExpandPlaceholder_PlayerName,
+    ExpandPlaceholder_StringVar1,
+    ExpandPlaceholder_StringVar2,
+    ExpandPlaceholder_StringVar3,
+    ExpandPlaceholder_UnknownString,
+    ExpandPlaceholder_RivalName,
+    ExpandPlaceholder_Version,
+    ExpandPlaceholder_EvilTeam,
+    ExpandPlaceholder_GoodTeam,
+    ExpandPlaceholder_EvilLeader,
+    ExpandPlaceholder_GoodLeader,
+    ExpandPlaceholder_EvilLegendary,
+    ExpandPlaceholder_GoodLegendary,
+};
 
 extern u8 gExpandedPlaceholder_Empty[];
 extern u8 gExpandedPlaceholder_MaleEmpty[];
@@ -26,10 +75,6 @@ extern u8 gExpandedPlaceholder_Brendan[];
 extern u8 gExpandedPlaceholder_May[];
 
 extern u8 gUnknownStringVar[];
-
-extern u8 GetExtCtrlCodeLength(u8 code);
-
-u8 *GetExpandedPlaceholder(u32 id);
 
 u8 *StringCopy10(u8 *dest, u8 *src)
 {
@@ -116,7 +161,7 @@ u8 *StringAppendN(u8 *dest, u8 *src, u8 n)
     return StringCopyN(dest, src, n);
 }
 
-u16 StringGetLength(u8 *str)
+u16 StringLength(u8 *str)
 {
     u16 length = 0;
 
@@ -163,7 +208,7 @@ u8 *ConvertIntToDecimalStringN(u8 *dest, s32 value, enum StringConvertMode mode,
 {
     enum { WAITING_FOR_NONZERO_DIGIT, WRITING_DIGITS, WRITING_SPACES } state;
     s32 powerOfTen;
-    s32 largestPowerOfTen = gPowersOfTen[n - 1];
+    s32 largestPowerOfTen = sPowersOfTen[n - 1];
 
     state = WAITING_FOR_NONZERO_DIGIT;
 
@@ -185,7 +230,7 @@ u8 *ConvertIntToDecimalStringN(u8 *dest, s32 value, enum StringConvertMode mode,
             out = dest++;
 
             if (digit <= 9)
-                c = gDigits[digit];
+                c = sDigits[digit];
             else
                 c = CHAR_QUESTION_MARK;
 
@@ -197,7 +242,7 @@ u8 *ConvertIntToDecimalStringN(u8 *dest, s32 value, enum StringConvertMode mode,
             out = dest++;
 
             if (digit <= 9)
-                c = gDigits[digit];
+                c = sDigits[digit];
             else
                 c = CHAR_QUESTION_MARK;
 
@@ -215,15 +260,15 @@ u8 *ConvertIntToDecimalStringN(u8 *dest, s32 value, enum StringConvertMode mode,
     return dest;
 }
 
-u8 *ConvertIntToDecimalStringN_UnknownExtCtrlCode(u8 *dest, s32 value, enum StringConvertMode mode, u8 n)
+u8 *ConvertIntToDecimalStringN_DigitWidth6(u8 *dest, s32 value, enum StringConvertMode mode, u8 n)
 {
     enum { WAITING_FOR_NONZERO_DIGIT, WRITING_DIGITS, WRITING_SPACES } state;
     s32 powerOfTen;
-    s32 largestPowerOfTen = gPowersOfTen[n - 1];
+    s32 largestPowerOfTen = sPowersOfTen[n - 1];
 
     *dest++ = EXT_CTRL_CODE_BEGIN;
     *dest++ = 0x14;
-    *dest++ = 0x06;
+    *dest++ = 6;
 
     state = WAITING_FOR_NONZERO_DIGIT;
 
@@ -245,7 +290,7 @@ u8 *ConvertIntToDecimalStringN_UnknownExtCtrlCode(u8 *dest, s32 value, enum Stri
             out = dest++;
 
             if (digit <= 9)
-                c = gDigits[digit];
+                c = sDigits[digit];
             else
                 c = CHAR_QUESTION_MARK;
 
@@ -257,7 +302,7 @@ u8 *ConvertIntToDecimalStringN_UnknownExtCtrlCode(u8 *dest, s32 value, enum Stri
             out = dest++;
 
             if (digit <= 9)
-                c = gDigits[digit];
+                c = sDigits[digit];
             else
                 c = CHAR_QUESTION_MARK;
 
@@ -309,7 +354,7 @@ u8 *ConvertIntToHexStringN(u8 *dest, s32 value, enum StringConvertMode mode, u8 
             out = dest++;
 
             if (digit <= 0xF)
-                c = gDigits[digit];
+                c = sDigits[digit];
             else
                 c = CHAR_QUESTION_MARK;
 
@@ -321,7 +366,7 @@ u8 *ConvertIntToHexStringN(u8 *dest, s32 value, enum StringConvertMode mode, u8 
             out = dest++;
 
             if (digit <= 0xF)
-                c = gDigits[digit];
+                c = sDigits[digit];
             else
                 c = CHAR_QUESTION_MARK;
 
@@ -346,7 +391,7 @@ u8 *ConvertIntToDecimalString(u8 *dest, s32 value)
 
     do
     {
-        temp[length++] = gDigits[value % 10];
+        temp[length++] = sDigits[value % 10];
         value /= 10;
     } while (value != 0);
 
@@ -397,15 +442,15 @@ u8 *StringExpandPlaceholders(u8 *dest, u8 *src)
     }
 }
 
-u8 *UnknownStringFunc(u8 *dest, u8 *src)
+u8 *StringBraille(u8 *dest, u8 *src)
 {
-    u8 array1[4];
-    u8 array2[5];
+    u8 setBrailleFont[4];
+    u8 gotoLine2[5];
 
-    memcpy(array1, gUnknown_081E72EC, 4);
-    memcpy(array2, gUnknown_081E72F0, 5);
+    memcpy(setBrailleFont, sSetBrailleFont, 4);
+    memcpy(gotoLine2, sGotoLine2, 5);
 
-    dest = StringCopy(dest, array1);
+    dest = StringCopy(dest, setBrailleFont);
 
     for (;;)
     {
@@ -417,7 +462,7 @@ u8 *UnknownStringFunc(u8 *dest, u8 *src)
             *dest = c;
             return dest;
         case 0xFE:
-            dest = StringCopy(dest, array2);
+            dest = StringCopy(dest, gotoLine2);
             break;
         default:
             *dest++ = c;
@@ -427,32 +472,32 @@ u8 *UnknownStringFunc(u8 *dest, u8 *src)
     }
 }
 
-u8 *ExpandPlaceholder_UnknownStringVar()
+u8 *ExpandPlaceholder_UnknownStringVar(void)
 {
     return gUnknownStringVar;
 }
 
-u8 *ExpandPlaceholder_PlayerName()
+u8 *ExpandPlaceholder_PlayerName(void)
 {
     return gSaveBlock2.playerName;
 }
 
-u8 *ExpandPlaceholder_StringVar1()
+u8 *ExpandPlaceholder_StringVar1(void)
 {
     return gStringVar1;
 }
 
-u8 *ExpandPlaceholder_StringVar2()
+u8 *ExpandPlaceholder_StringVar2(void)
 {
     return gStringVar2;
 }
 
-u8 *ExpandPlaceholder_StringVar3()
+u8 *ExpandPlaceholder_StringVar3(void)
 {
     return gStringVar3;
 }
 
-u8 *ExpandPlaceholder_UnknownString()
+u8 *ExpandPlaceholder_UnknownString(void)
 {
     if (gSaveBlock2.playerGender == MALE)
         return gExpandedPlaceholder_MaleEmpty;
@@ -460,7 +505,7 @@ u8 *ExpandPlaceholder_UnknownString()
         return gExpandedPlaceholder_FemaleEmpty;
 }
 
-u8 *ExpandPlaceholder_RivalName()
+u8 *ExpandPlaceholder_RivalName(void)
 {
     if (gSaveBlock2.playerGender == MALE)
         return gExpandedPlaceholder_May;
@@ -479,11 +524,11 @@ u8 *ExpandPlaceholder_RivalName()
 
 #ifdef SAPPHIRE
 #define X(ph, r, s) \
-u8 *ExpandPlaceholder_##ph() { return gExpandedPlaceholder_##s; }
+static u8 *ExpandPlaceholder_##ph(void) { return gExpandedPlaceholder_##s; }
 VERSION_DEPENDENT_PLACEHOLDER_LIST
 #else
 #define X(ph, r, s) \
-u8 *ExpandPlaceholder_##ph() { return gExpandedPlaceholder_##r; }
+static u8 *ExpandPlaceholder_##ph(void) { return gExpandedPlaceholder_##r; }
 VERSION_DEPENDENT_PLACEHOLDER_LIST
 #endif
 
@@ -494,7 +539,7 @@ u8 *GetExpandedPlaceholder(u32 id)
     if (id > MAX_PLACEHOLDER_ID)
         return gExpandedPlaceholder_Empty;
     else
-        return gExpandPlaceholderFuncTable[id]();
+        return sExpandPlaceholderFuncs[id]();
 }
 
 u8 *StringFill(u8 *dest, u8 c, u16 n)

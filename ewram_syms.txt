@@ -1,5 +1,7 @@
-gStringVar1 = 0x20231CC;
-gStringVar2 = 0x20232CC;
-gStringVar3 = 0x20233CC;
+gUnknown_020239F8 = 0x20239F8;
+
+gUnknown_0203869A = 0x203869A;
+
+gTileBuffer = 0x2039360;
 
 gSaveBlock2 = 0x2024EA4;

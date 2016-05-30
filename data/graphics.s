@@ -1053,10 +1053,18 @@ gUnknown_08EA260C: @ 8EA260C
 gUnknown_08EA2A44: @ 8EA2A44
 	.incbin "baserom.gba", 0x00ea2a44, 0x200
 
-	.global gUnknown_08EA2C44
-gUnknown_08EA2C44: @ 8EA2C44
-	.incbin "baserom.gba", 0x00ea2c44, 0x3f80
+	.global gFont3LatinGlyphs
+gFont3LatinGlyphs: @ 8EA2C44
+	.incbin "graphics/fonts/font3_lat.4bpp"
 
-	.global gUnknown_08EA6BC4
-gUnknown_08EA6BC4: @ 8EA6BC4
-	.incbin "baserom.gba", 0x00ea6bc4
+	.global gFont4LatinGlyphs
+gFont4LatinGlyphs: @ 8EA6BC4
+	.incbin "graphics/fonts/font4_lat.4bpp"
+
+	.global gFont3JapaneseGlyphs
+gFont3JapaneseGlyphs: @ 8EA8744
+	.incbin "graphics/fonts/font3_jpn.4bpp"
+
+	.global gFont4JapaneseGlyphs
+gFont4JapaneseGlyphs: @ 8EAC6C4
+	.incbin "graphics/fonts/font4_jpn.4bpp"

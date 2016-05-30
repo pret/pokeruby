@@ -3627,13 +3627,13 @@ _080548C4:
 	bl sub_8054814
 	bl sub_8054C54
 	ldr r0, _080548DC
-	bl sub_8002A34
+	bl SetUpWindowConfig
 	ldr r0, _080548E0
 	bl sub_8071C4C
 	b _08054928
 	.align 2, 0
-_080548DC: .4byte gUnknown_081E6C3C
-_080548E0: .4byte gUnknown_081E6CE4
+_080548DC: .4byte gWindowConfig_81E6C3C
+_080548E0: .4byte gWindowConfig_81E6CE4
 _080548E4:
 	bl move_tilemap_camera_to_upper_left_corner
 	b _08054928
@@ -3735,13 +3735,13 @@ _080549B4:
 	bl sub_8054814
 	bl sub_8054C54
 	ldr r0, _080549CC
-	bl sub_8002A34
+	bl SetUpWindowConfig
 	ldr r0, _080549D0
 	bl sub_8071C4C
 	b _08054A38
 	.align 2, 0
-_080549CC: .4byte gUnknown_081E6C3C
-_080549D0: .4byte gUnknown_081E6CE4
+_080549CC: .4byte gWindowConfig_81E6C3C
+_080549D0: .4byte gWindowConfig_81E6CE4
 _080549D4:
 	bl move_tilemap_camera_to_upper_left_corner
 	b _08054A38
@@ -3897,13 +3897,13 @@ _08054B0C:
 	bl sub_8054814
 	bl sub_8054C54
 	ldr r0, _08054B24
-	bl sub_8002A34
+	bl SetUpWindowConfig
 	ldr r0, _08054B28
 	bl sub_8071C4C
 	b _08054B70
 	.align 2, 0
-_08054B24: .4byte gUnknown_081E6C3C
-_08054B28: .4byte gUnknown_081E6CE4
+_08054B24: .4byte gWindowConfig_81E6C3C
+_08054B28: .4byte gWindowConfig_81E6CE4
 _08054B2C:
 	bl move_tilemap_camera_to_upper_left_corner
 	b _08054B70
@@ -4042,15 +4042,15 @@ sub_8054C2C: @ 8054C2C
 	bl sub_8054814
 	bl sub_8054C54
 	ldr r0, _08054C4C
-	bl sub_8002A34
+	bl SetUpWindowConfig
 	ldr r0, _08054C50
 	bl sub_8071C4C
 	bl mapdata_load_assets_to_gpu_and_full_redraw
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08054C4C: .4byte gUnknown_081E6C3C
-_08054C50: .4byte gUnknown_081E6CE4
+_08054C4C: .4byte gWindowConfig_81E6C3C
+_08054C50: .4byte gWindowConfig_81E6CE4
 	thumb_func_end sub_8054C2C
 
 	thumb_func_start sub_8054C54
@@ -4155,9 +4155,9 @@ _08054D20: .4byte 0x04000050
 _08054D24: .4byte gUnknown_081E29E0
 _08054D28: .4byte 0x04000052
 _08054D2C: .4byte 0x0000070d
-_08054D30: .4byte gUnknown_081E29B8
-_08054D34: .4byte gUnknown_081E29C8
-_08054D38: .4byte gUnknown_081E29A8
+_08054D30: .4byte gBGHOffsetRegs
+_08054D34: .4byte gBGVOffsetRegs
+_08054D38: .4byte gBGControlRegs
 _08054D3C: .4byte 0x00001d41
 _08054D40: .4byte 0x00001e43
 _08054D44: .4byte gUnknown_081E29D8
@@ -11124,10 +11124,10 @@ _08057AE0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08057AE8: .4byte gUnknown_081E29B8
+_08057AE8: .4byte gBGHOffsetRegs
 _08057AEC: .4byte 0x03000590
 _08057AF0: .4byte 0x03000598
-_08057AF4: .4byte gUnknown_081E29C8
+_08057AF4: .4byte gBGVOffsetRegs
 _08057AF8: .4byte 0x0300059a
 _08057AFC: .4byte 0x040000d4
 _08057B00: .4byte 0x020219cc
@@ -39974,14 +39974,14 @@ sub_8064A74: @ 8064A74
 	bl sub_80651C8
 	ldr r0, _08064A98
 	ldr r1, _08064A9C
-	bl sub_8002D54
+	bl InitWindowFromConfig
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08064A90: .4byte 0x030005a8
 _08064A94: .4byte 0x0202e9d2
 _08064A98: .4byte 0x0202e87c
-_08064A9C: .4byte gUnknown_081E6CE4
+_08064A9C: .4byte gWindowConfig_81E6CE4
 	thumb_func_end sub_8064A74
 
 	thumb_func_start sub_8064AA0
@@ -40017,7 +40017,7 @@ _08064ACE:
 _08064AD8: .4byte 0x0202e87c
 _08064ADC:
 	ldr r0, _08064AEC
-	bl sub_8065330
+	bl draw_win
 _08064AE2:
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
@@ -40271,7 +40271,7 @@ sub_8064CA0: @ 8064CA0
 	push {lr}
 	bl task_del_textbox
 	ldr r0, _08064CB8
-	bl sub_8065330
+	bl draw_win
 	ldr r1, _08064CBC
 	movs r0, 0
 	strb r0, [r1]
@@ -41009,14 +41009,14 @@ copy_textbox_border_tile_patterns_to_vram: @ 8065200
 	adds r4, r0, 0
 	bl sub_8065348
 	adds r0, r4, 0
-	bl sub_8065330
+	bl draw_win
 	pop {r4}
 	pop {r0}
 	bx r0
 	thumb_func_end copy_textbox_border_tile_patterns_to_vram
 
-	thumb_func_start sub_8065214
-sub_8065214: @ 8065214
+	thumb_func_start draw_win_3
+draw_win_3: @ 8065214
 	push {r4-r6,lr}
 	ldr r4, [sp, 0x10]
 	lsls r0, 16
@@ -41076,10 +41076,10 @@ _0806526E:
 	bx r1
 	.align 2, 0
 _0806527C: .4byte gUnknown_08376290
-	thumb_func_end sub_8065214
+	thumb_func_end draw_win_3
 
-	thumb_func_start sub_8065280
-sub_8065280: @ 8065280
+	thumb_func_start draw_win_2
+draw_win_2: @ 8065280
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -41137,7 +41137,7 @@ _080652E2:
 	adds r1, r4, 0
 	adds r2, r5, 0
 	ldr r3, [sp, 0x10]
-	bl sub_8065214
+	bl draw_win_3
 	ldr r1, [sp, 0x8]
 	adds r2, r1, r4
 	adds r2, r6, r2
@@ -41171,10 +41171,10 @@ _0806531C:
 	bx r0
 	.align 2, 0
 _0806532C: .4byte 0x030005ae
-	thumb_func_end sub_8065280
+	thumb_func_end draw_win_2
 
-	thumb_func_start sub_8065330
-sub_8065330: @ 8065330
+	thumb_func_start draw_win
+draw_win: @ 8065330
 	push {lr}
 	sub sp, 0x4
 	movs r1, 0x4
@@ -41182,11 +41182,11 @@ sub_8065330: @ 8065330
 	movs r1, 0
 	movs r2, 0xE
 	movs r3, 0x1A
-	bl sub_8065280
+	bl draw_win_2
 	add sp, 0x4
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8065330
+	thumb_func_end draw_win
 
 	thumb_func_start sub_8065348
 sub_8065348: @ 8065348
@@ -45546,7 +45546,7 @@ sub_806730C: @ 806730C
 	ldr r4, _08067360
 	adds r1, 0x6
 	adds r0, r4, 0
-	bl UnknownStringFunc
+	bl StringBraille
 	adds r0, r5, 0
 	adds r1, r6, 0
 	mov r2, r8
@@ -52984,7 +52984,7 @@ _0806AB16:
 	bl sub_8073B94
 	ldr r4, _0806ABA0
 	adds r0, r4, 0
-	bl sub_8002A34
+	bl SetUpWindowConfig
 	adds r0, r4, 0
 	bl sub_8071C4C
 	movs r1, 0x80
@@ -53008,7 +53008,7 @@ _0806AB16:
 _0806AB94: .4byte 0x040000d4
 _0806AB98: .4byte 0x81000200
 _0806AB9C: .4byte 0x81000800
-_0806ABA0: .4byte gUnknown_081E6CE4
+_0806ABA0: .4byte gWindowConfig_81E6CE4
 _0806ABA4: .4byte sub_806ABC8
 _0806ABA8: .4byte sub_806ABB0
 _0806ABAC: .4byte sub_806ACCC
@@ -53879,34 +53879,34 @@ _0806B2B2:
 _0806B2CC: .4byte 0x0201b000
 _0806B2D0:
 	ldr r0, _0806B2E0
-	bl sub_8002A34
+	bl SetUpWindowConfig
 	ldr r1, _0806B2E4
 	ldr r0, _0806B2E8
 	adds r1, r0
 	b _0806B42C
 	.align 2, 0
-_0806B2E0: .4byte gUnknown_081E6C90
+_0806B2E0: .4byte gWindowConfig_81E6C90
 _0806B2E4: .4byte 0x03001770
 _0806B2E8: .4byte 0x0000043c
 _0806B2EC:
 	ldr r4, _0806B308
 	ldr r1, _0806B30C
 	adds r0, r4, 0
-	bl sub_8002D54
+	bl InitWindowFromConfig
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_8002BFC
+	bl MultistepInitWindowTileData
 	ldr r1, _0806B310
 	ldr r2, _0806B314
 	adds r1, r2
 	b _0806B42C
 	.align 2, 0
 _0806B308: .4byte 0x03004210
-_0806B30C: .4byte gUnknown_081E6C90
+_0806B30C: .4byte gWindowConfig_81E6C90
 _0806B310: .4byte 0x03001770
 _0806B314: .4byte 0x0000043c
 _0806B318:
-	bl sub_8002C54
+	bl MultistepLoadFont
 	cmp r0, 0
 	bne _0806B322
 	b _0806B450
@@ -53986,7 +53986,7 @@ _0806B3C0:
 	bl sub_8071C58
 	b _0806B426
 	.align 2, 0
-_0806B3C8: .4byte gUnknown_081E6CC8
+_0806B3C8: .4byte gWindowConfig_81E6CC8
 _0806B3CC:
 	bl sub_8071C94
 	cmp r0, 0
@@ -58465,7 +58465,7 @@ sub_806D5B8: @ 806D5B8
 	mov r1, r10
 	mov r2, r9
 	mov r3, r8
-	bl sub_80047FC
+	bl ZeroFillWindowRect
 	movs r0, 0
 	str r0, [sp, 0x4]
 	lsls r5, 10
@@ -58547,7 +58547,7 @@ sub_806D668: @ 806D668
 	mov r1, r10
 	mov r2, r9
 	mov r3, r8
-	bl sub_80047FC
+	bl ZeroFillWindowRect
 	movs r0, 0
 	str r0, [sp, 0x4]
 	lsls r5, 10
@@ -58672,7 +58672,7 @@ _0806D7C8: .4byte gUnknown_08E71354
 _0806D7CC: .4byte gUnknown_08E71788
 _0806D7D0: .4byte 0x06003800
 _0806D7D4: .4byte gUnknown_08E716A0
-_0806D7D8: .4byte gUnknown_081E66B2
+_0806D7D8: .4byte gFontDefaultPalette
 _0806D7DC: .4byte gUnknown_08E71894
 _0806D7E0: .4byte 0x06006000
 _0806D7E4: .4byte gUnknown_08E71934
@@ -59776,7 +59776,7 @@ box_print: @ 806E000
 	.align 2, 0
 _0806E040: .4byte 0x02039360
 _0806E044: .4byte 0x01000100
-_0806E048: .4byte gUnknown_081E6CAC
+_0806E048: .4byte gWindowConfig_81E6CAC
 _0806E04C: .4byte 0x06014000
 	thumb_func_end box_print
 
@@ -60073,7 +60073,7 @@ _0806E278: .4byte gUnknown_08376738
 _0806E27C: .4byte 0x020231cc
 _0806E280: .4byte 0x02039460
 _0806E284: .4byte 0x01000020
-_0806E288: .4byte gUnknown_081E6CAC
+_0806E288: .4byte gWindowConfig_81E6CAC
 _0806E28C: .4byte 0xffffff00
 _0806E290: .4byte 0x06014200
 	thumb_func_end sub_806E1F4
@@ -60339,7 +60339,7 @@ sub_806E420: @ 806E420
 _0806E48C: .4byte 0x020231cc
 _0806E490: .4byte 0x02039460
 _0806E494: .4byte 0x01000040
-_0806E498: .4byte gUnknown_081E6CAC
+_0806E498: .4byte gWindowConfig_81E6CAC
 _0806E49C: .4byte 0xffffff00
 _0806E4A0: .4byte 0x06014300
 	thumb_func_end sub_806E420
@@ -65966,7 +65966,7 @@ sub_8071284: @ 8071284
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080712AC: .4byte gUnknown_081E6CE4
+_080712AC: .4byte gWindowConfig_81E6CE4
 _080712B0: .4byte task50_startmenu
 	thumb_func_end sub_8071284
 
@@ -67054,7 +67054,7 @@ _08071AA4:
 _08071AB6:
 	ldr r4, _08071AD4
 	adds r0, r4, 0
-	bl sub_8002A34
+	bl SetUpWindowConfig
 	adds r0, r4, 0
 	bl sub_8071C4C
 	movs r1, 0x80
@@ -67065,7 +67065,7 @@ _08071AB6:
 	strh r0, [r1]
 	b _08071B10
 	.align 2, 0
-_08071AD4: .4byte gUnknown_081E6CE4
+_08071AD4: .4byte gWindowConfig_81E6CE4
 _08071AD8:
 	movs r0, 0x1
 	negs r0, r0
@@ -67284,7 +67284,7 @@ sub_8071C64: @ 8071C64
 	ldr r0, _08071C90
 	str r0, [r1]
 	adds r1, r3, 0
-	bl sub_8002D54
+	bl InitWindowFromConfig
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -67328,7 +67328,7 @@ _08071CD0:
 	ldr r0, [r0]
 	ldr r1, _08071CEC
 	ldrh r1, [r1]
-	bl sub_8002BFC
+	bl MultistepInitWindowTileData
 	strh r0, [r4]
 	b _08071D06
 	.align 2, 0
@@ -67336,7 +67336,7 @@ _08071CE4: .4byte 0x0202e9d0
 _08071CE8: .4byte 0x0202e9c8
 _08071CEC: .4byte 0x0202e9ce
 _08071CF0:
-	bl sub_8002C54
+	bl MultistepLoadFont
 	cmp r0, 0
 	beq _08071D40
 	b _08071D06
@@ -67389,12 +67389,12 @@ sub_8071D48: @ 8071D48
 	ldr r0, _08071D90
 	str r0, [r5]
 	adds r1, r2, 0
-	bl sub_8002D54
+	bl InitWindowFromConfig
 	ldr r1, _08071D94
 	strh r4, [r1]
 	ldr r0, [r5]
 	ldrh r1, [r1]
-	bl sub_8002A50
+	bl InitWindowTileData
 	ldr r1, _08071D98
 	strh r0, [r1]
 	ldrh r0, [r1]
@@ -67429,7 +67429,7 @@ sub_8071DA4: @ 8071DA4
 	ldr r0, _08071DEC
 	str r0, [r5]
 	adds r1, r2, 0
-	bl sub_8002D54
+	bl InitWindowFromConfig
 	ldr r0, _08071DF0
 	strh r4, [r0]
 	ldrh r0, [r0]
@@ -67444,7 +67444,7 @@ sub_8071DA4: @ 8071DA4
 	strh r0, [r1]
 	ldr r0, [r5]
 	ldrh r1, [r1]
-	bl sub_8002A50
+	bl InitWindowTileData
 	ldr r1, _08071DFC
 	strh r0, [r1]
 	pop {r4,r5}
@@ -67492,7 +67492,7 @@ sub_8071E2C: @ 8071E2C
 	adds r1, r0, 0
 	ldr r4, _08071E48
 	ldr r0, [r4]
-	bl sub_8002D54
+	bl InitWindowFromConfig
 	ldr r1, [r4]
 	ldr r0, _08071E4C
 	ldrh r0, [r0]
@@ -67553,7 +67553,7 @@ Reset: @ 8071E84
 	adds r1, r4, 0
 	adds r2, r5, 0
 	adds r3, r6, 0
-	bl sub_80047FC
+	bl ZeroFillWindowRect
 	add sp, 0x4
 	pop {r4-r6}
 	pop {r0}
@@ -67583,7 +67583,7 @@ sub_8071EBC: @ 8071EBC
 	adds r1, r4, 0
 	adds r2, r5, 0
 	adds r3, r6, 0
-	bl sub_800482C
+	bl FillWindowRectWithBlankTile
 	add sp, 0x4
 	pop {r4-r6}
 	pop {r0}
@@ -67693,7 +67693,7 @@ sub_8071F98: @ 8071F98
 	ldr r0, _08071FB8
 	ldr r0, [r0]
 	adds r1, r3, 0
-	bl sub_800467C
+	bl GetWindowTilemapEntry
 	lsls r0, 16
 	lsrs r0, 16
 	pop {r1}
@@ -67727,7 +67727,7 @@ sub_8071FBC: @ 8071FBC
 	adds r1, r4, 0
 	adds r2, r5, 0
 	adds r3, r6, 0
-	bl sub_8004690
+	bl DrawWindowRect
 	add sp, 0x8
 	pop {r4-r6}
 	pop {r0}
@@ -67842,7 +67842,7 @@ sub_80720B0: @ 80720B0
 	push {lr}
 	ldr r0, _080720C0
 	ldr r0, [r0]
-	bl sub_8004318
+	bl ClearWindowTextLines
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -69099,7 +69099,7 @@ sub_80729D8: @ 80729D8
 	adds r1, r6, 0
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl AddTextPrinterParametrized2
+	bl sub_8004D04
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x8
@@ -69320,7 +69320,7 @@ sub_8072B80: @ 8072B80
 	str r1, [sp]
 	add r1, sp, 0x4
 	mov r2, r8
-	bl sub_8004B24
+	bl AlignString
 	ldr r0, [r4]
 	ldr r1, _08072BD4
 	ldrh r2, [r1]
@@ -69387,7 +69387,7 @@ sub_8072C14: @ 8072C14
 	adds r1, r5, 0
 	adds r2, r6, 0
 	adds r3, r4, 0
-	bl sub_8004988
+	bl AlignInt1
 	add sp, 0x4
 	pop {r4-r6}
 	pop {r1}
@@ -69413,7 +69413,7 @@ sub_8072C44: @ 8072C44
 	adds r1, r5, 0
 	adds r2, r6, 0
 	adds r3, r4, 0
-	bl sub_8004A48
+	bl AlignInt2
 	add sp, 0x4
 	pop {r4-r6}
 	pop {r1}
@@ -69439,7 +69439,7 @@ sub_8072C74: @ 8072C74
 	adds r1, r5, 0
 	adds r2, r6, 0
 	adds r3, r4, 0
-	bl sub_8004B24
+	bl AlignString
 	add sp, 0x4
 	pop {r4-r6}
 	pop {r1}
@@ -69503,7 +69503,7 @@ sub_8072CF4: @ 8072CF4
 	lsrs r1, 24
 	ldr r0, _08072D08
 	ldr r0, [r0]
-	bl IsTextPrinterActive
+	bl sub_80037C8
 	pop {r1}
 	bx r1
 	.align 2, 0

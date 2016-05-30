@@ -2,6 +2,7 @@
 #include "siirtc.h"
 #include "rtc.h"
 #include "string_util.h"
+#include "text.h"
 
 extern const struct SiiRtcInfo gRtcDummy;
 extern const s32 gNumDaysInMonths[];

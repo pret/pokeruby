@@ -73,6 +73,7 @@ CFile::~CFile()
 void CFile::Preproc()
 {
     bool inConcatMode = false;
+    bool noTerminator = false;
     char stringChar = 0;
 
     while (m_pos < m_size)
@@ -100,10 +101,13 @@ void CFile::Preproc()
         else
         {
             if (inConcatMode ? m_buffer[m_pos] == '"'
-                             : m_buffer[m_pos] == '_' && m_buffer[m_pos + 1] == '"')
+                             : (m_buffer[m_pos] == '_' || m_buffer[m_pos] == '@') && m_buffer[m_pos + 1] == '"')
             {
                 if (!inConcatMode)
-                    m_pos++; // skip past underscore
+                {
+                    noTerminator = (m_buffer[m_pos] == '@');
+                    m_pos++; // skip past underscore or at-sign
+                }
 
                 unsigned char s[kMaxStringLength];
                 int length;
@@ -144,7 +148,11 @@ void CFile::Preproc()
 
                 if ((c != ' ' && c != '\t' && c != '\n') && inConcatMode)
                 {
-                    std::printf("0xFF }");
+                    if (noTerminator)
+                        std::printf(" }");
+                    else
+                        std::printf("0xFF }");
+
                     inConcatMode = false;
                 }
 

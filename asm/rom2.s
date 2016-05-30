@@ -151,7 +151,7 @@ _08007190: .4byte 0x040000d4
 _08007194: .4byte gUnknown_081E7350
 _08007198: .4byte 0x80000110
 _0800719C: .4byte 0x03002fb0
-_080071A0: .4byte gUnknown_081E29A8
+_080071A0: .4byte gBGControlRegs
 	thumb_func_end sub_8007128
 
 	thumb_func_start sub_80071A4
@@ -164,7 +164,7 @@ sub_80071A4: @ 80071A4
 	bl SetVBlankCallback
 	ldr r4, _0800724C
 	adds r0, r4, 0
-	bl sub_8002A34
+	bl SetUpWindowConfig
 	adds r0, r4, 0
 	bl sub_8071C4C
 	bl sub_8007CEC
@@ -221,7 +221,7 @@ _080071E4:
 	bx r0
 	.align 2, 0
 _08007248: .4byte sub_8007300
-_0800724C: .4byte gUnknown_081E6CE4
+_0800724C: .4byte gWindowConfig_81E6CE4
 _08007250: .4byte 0x03002b74
 _08007254: .4byte 0x00001111
 _08007258: .4byte 0x03001770
@@ -1077,7 +1077,7 @@ _08007908:
 	adds r0, r2, r1
 	adds r1, r2
 	ldrb r1, [r1, 0x12]
-	bl StopMusicWhileStringIsPrinted
+	bl SetStringCharset
 	b _0800798A
 	.align 2, 0
 _0800791C: .4byte 0x03002978
@@ -2420,7 +2420,7 @@ _0800828A:
 	mov r1, r8
 	adds r0, r2, r1
 	adds r1, r2, r7
-	bl CompareStringWithoutExtendedControlCodes
+	bl StringCompareWithoutExtCtrlCodes
 	cmp r0, 0
 	beq _080082BE
 _080082AE:
@@ -2849,7 +2849,7 @@ sub_80085BC: @ 80085BC
 	bl SetVBlankCallback
 	ldr r4, _0800863C
 	adds r0, r4, 0
-	bl sub_8002A34
+	bl SetUpWindowConfig
 	adds r0, r4, 0
 	bl sub_8071C4C
 	bl sub_8071EF4
@@ -2883,7 +2883,7 @@ sub_80085BC: @ 80085BC
 	bx r0
 	.align 2, 0
 _08008638: .4byte sub_8007300
-_0800863C: .4byte gUnknown_081E7198
+_0800863C: .4byte gWindowConfig_81E7198
 _08008640: .4byte 0x04000052
 _08008644: .4byte 0x03001bb4
 _08008648: .4byte sub_8007080

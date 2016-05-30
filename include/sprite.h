@@ -16,7 +16,7 @@ struct SpriteFrameImage
 
 struct SpritePalette
 {
-    u8 *data;
+    u16 *data;
     u16 tag;
 };
 

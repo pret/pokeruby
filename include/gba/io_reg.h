@@ -335,9 +335,21 @@
 
 // I/O registers
 
-#define REG_DISPCNT     (*(vu32 *)REG_ADDR_DISPCNT)
+#define REG_DISPCNT     (*(vu16 *)REG_ADDR_DISPCNT)
 #define REG_DISPSTAT    (*(vu16 *)REG_ADDR_DISPSTAT)
 #define REG_VCOUNT      (*(vu16 *)REG_ADDR_VCOUNT)
+#define REG_BG0CNT      (*(vu16 *)REG_ADDR_BG0CNT)
+#define REG_BG1CNT      (*(vu16 *)REG_ADDR_BG1CNT)
+#define REG_BG2CNT      (*(vu16 *)REG_ADDR_BG2CNT)
+#define REG_BG3CNT      (*(vu16 *)REG_ADDR_BG3CNT)
+#define REG_BG0HOFS     (*(vu16 *)REG_ADDR_BG0HOFS)
+#define REG_BG0VOFS     (*(vu16 *)REG_ADDR_BG0VOFS)
+#define REG_BG1HOFS     (*(vu16 *)REG_ADDR_BG1HOFS)
+#define REG_BG1VOFS     (*(vu16 *)REG_ADDR_BG1VOFS)
+#define REG_BG2HOFS     (*(vu16 *)REG_ADDR_BG2HOFS)
+#define REG_BG2VOFS     (*(vu16 *)REG_ADDR_BG2VOFS)
+#define REG_BG3HOFS     (*(vu16 *)REG_ADDR_BG3HOFS)
+#define REG_BG3VOFS     (*(vu16 *)REG_ADDR_BG3VOFS)
 
 #define REG_SOUND1CNT_L (*(vu16 *)REG_ADDR_SOUND1CNT_L)
 #define REG_NR10        (*(vu8  *)REG_ADDR_NR10)
@@ -441,6 +453,15 @@
 #define DISPCNT_MODE_5       0x0005
 #define DISPCNT_OBJ_1D_MAP   0x0040
 #define DISPCNT_FORCED_BLANK 0x0080
+#define DISPCNT_BG0_ON       0x0100
+#define DISPCNT_BG1_ON       0x0200
+#define DISPCNT_BG2_ON       0x0400
+#define DISPCNT_BG3_ON       0x0800
+#define DISPCNT_BG_ALL_ON    0x0F00
+#define DISPCNT_OBJ_ON       0x1000
+#define DISPCNT_WIN0_ON      0x2000
+#define DISPCNT_WIN1_ON      0x4000
+#define DISPCNT_OBJWIN_ON    0x8000
 
 // DISPSTAT
 #define DISPSTAT_VBLANK      0x0001 // in V-Blank

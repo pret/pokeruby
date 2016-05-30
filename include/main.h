@@ -42,4 +42,6 @@ struct Main
     u8 oamLoadDisabled:1;
 };
 
+extern struct Main gMain;
+
 #endif // GUARD_MAIN_H
