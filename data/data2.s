@@ -11069,112 +11069,112 @@ gUnknown_0842C34C: @ 842C34C
 	.global gUnknown_0842C3A6
 gUnknown_0842C3A6: @ 842C3A6
 @ replacing .incbin "baserom.gba", 0x0042c3a6, 0xa
-	.string "{PALETTE 0x09}OPTION$"
+	.string "{PALETTE 9}OPTION$"
 
 	.global gUnknown_0842C3B0
 gUnknown_0842C3B0: @ 842C3B0
 @ replacing .incbin "baserom.gba", 0x0042c3b0, 0xe
-	.string "{PALETTE 0x09}TEXT SPEED$"
+	.string "{PALETTE 9}TEXT SPEED$"
 
 	.global gUnknown_0842C3BE
 gUnknown_0842C3BE: @ 842C3BE
 @ replacing .incbin "baserom.gba", 0x0042c3be, 0x10
-	.string "{PALETTE 0x09}BATTLE SCENE$"
+	.string "{PALETTE 9}BATTLE SCENE$"
 
 	.global gUnknown_0842C3CE
 gUnknown_0842C3CE: @ 842C3CE
 @ replacing .incbin "baserom.gba", 0x0042c3ce, 0x10
-	.string "{PALETTE 0x09}BATTLE STYLE$"
+	.string "{PALETTE 9}BATTLE STYLE$"
 
 	.global gUnknown_0842C3DE
 gUnknown_0842C3DE: @ 842C3DE
 @ replacing .incbin "baserom.gba", 0x0042c3de, 0x9
-	.string "{PALETTE 0x09}SOUND$"
+	.string "{PALETTE 9}SOUND$"
 
 	.global gUnknown_0842C3E7
 gUnknown_0842C3E7: @ 842C3E7
 @ replacing .incbin "baserom.gba", 0x0042c3e7, 0x9
-	.string "{PALETTE 0x09}FRAME$"
+	.string "{PALETTE 9}FRAME$"
 
 	.global gUnknown_0842C3F0
 gUnknown_0842C3F0: @ 842C3F0
 @ replacing .incbin "baserom.gba", 0x0042c3f0, 0xa
-	.string "{PALETTE 0x09}CANCEL$"
+	.string "{PALETTE 9}CANCEL$"
 
 	.global gUnknown_0842C3FA
 gUnknown_0842C3FA: @ 842C3FA
 @ replacing .incbin "baserom.gba", 0x0042c3fa, 0xf
-	.string "{PALETTE 0x09}BUTTON MODE$"
+	.string "{PALETTE 9}BUTTON MODE$"
 
 	.global gUnknown_0842C409
 gUnknown_0842C409: @ 842C409
 @ replacing .incbin "baserom.gba", 0x0042c409, 0x8
-	.string "{PALETTE 0x0F}SLOW$"
+	.string "{PALETTE 15}SLOW$"
 
 	.global gUnknown_0842C411
 gUnknown_0842C411: @ 842C411
 @ replacing .incbin "baserom.gba", 0x0042c411, 0x7
-	.string "{PALETTE 0x0F}MID$"
+	.string "{PALETTE 15}MID$"
 
 	.global gUnknown_0842C418
 gUnknown_0842C418: @ 842C418
 @ replacing .incbin "baserom.gba", 0x0042c418, 0x8
-	.string "{PALETTE 0x0F}FAST$"
+	.string "{PALETTE 15}FAST$"
 
 	.global gUnknown_0842C420
 gUnknown_0842C420: @ 842C420
 @ replacing .incbin "baserom.gba", 0x0042c420, 0x6
-	.string "{PALETTE 0x0F}ON$"
+	.string "{PALETTE 15}ON$"
 
 	.global gUnknown_0842C426
 gUnknown_0842C426: @ 842C426
 @ replacing .incbin "baserom.gba", 0x0042c426, 0x7
-	.string "{PALETTE 0x0F}OFF$"
+	.string "{PALETTE 15}OFF$"
 
 	.global gUnknown_0842C42D
 gUnknown_0842C42D: @ 842C42D
 @ replacing .incbin "baserom.gba", 0x0042c42d, 0x9
-	.string "{PALETTE 0x0F}SHIFT$"
+	.string "{PALETTE 15}SHIFT$"
 
 	.global gUnknown_0842C436
 gUnknown_0842C436: @ 842C436
 @ replacing .incbin "baserom.gba", 0x0042c436, 0x7
-	.string "{PALETTE 0x0F}SET$"
+	.string "{PALETTE 15}SET$"
 
 	.global gUnknown_0842C43D
 gUnknown_0842C43D: @ 842C43D
 @ replacing .incbin "baserom.gba", 0x0042c43d, 0x8
-	.string "{PALETTE 0x0F}MONO$"
+	.string "{PALETTE 15}MONO$"
 
 	.global gUnknown_0842C445
 gUnknown_0842C445: @ 842C445
 @ replacing .incbin "baserom.gba", 0x0042c445, 0xa
-	.string "{PALETTE 0x0F}STEREO$"
+	.string "{PALETTE 15}STEREO$"
 
 	.global gUnknown_0842C44F
 gUnknown_0842C44F: @ 842C44F
 @ replacing .incbin "baserom.gba", 0x0042c44f, 0x8
-	.string "{PALETTE 0x0F}TYPE$"
+	.string "{PALETTE 15}TYPE$"
 
 	.global gUnknown_0842C457
 gUnknown_0842C457: @ 842C457
 @ replacing .incbin "baserom.gba", 0x0042c457, 0x4
-	.string "{PALETTE 0x08}$"
+	.string "{PALETTE 8}$"
 
 	.global gUnknown_0842C45B
 gUnknown_0842C45B: @ 842C45B
 @ replacing .incbin "baserom.gba", 0x0042c45b, 0xa
-	.string "{PALETTE 0x0F}NORMAL$"
+	.string "{PALETTE 15}NORMAL$"
 
 	.global gUnknown_0842C465
 gUnknown_0842C465: @ 842C465
 @ replacing .incbin "baserom.gba", 0x0042c465, 0x6
-	.string "{PALETTE 0x0F}LR$"
+	.string "{PALETTE 15}LR$"
 
 	.global gUnknown_0842C46B
 gUnknown_0842C46B: @ 842C46B
 @ replacing .incbin "baserom.gba", 0x0042c46b, 0x3e
-	.string "{PALETTE 0x0F}L=A$"
+	.string "{PALETTE 15}L=A$"
 	.string "POKéDEX$"
 	.string "POKéMON$"
 	.string "BAG$"
