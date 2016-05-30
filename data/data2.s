@@ -15,12 +15,27 @@ gUnknown_081E7350: @ 81E7350
 
 	.global gUnknown_081E75CC
 gUnknown_081E75CC: @ 81E75CC
-	.incbin "baserom.gba", 0x001e75cc, 0x30
+	.4byte 0x03002A70 @ RAM pointers
+	.4byte 200
+	.4byte 0x03002A70
+	.4byte 200
+	.4byte 0x03002A70
+	.4byte 100
+	.4byte 0x03002A70
+	.4byte 220
+	.4byte 0x03002A70
+	.4byte 40
+	.4byte 0x15645D63 @unknown
+	.string "$"
 
+	.align 2
 	.global gUnknown_081E75FC
 gUnknown_081E75FC: @ 81E75FC
-	.incbin "baserom.gba", 0x001e75fc, 0x14
+	.ascii "GameFreak inc."
+	.align 2
+	.string "$"
 
+	.align 2
 @ 81E7610
 	.include "data/rtc.s"
 
