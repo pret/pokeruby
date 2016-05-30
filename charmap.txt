@@ -49,6 +49,7 @@ LV          = 34
 PK          = 53
 PKMN        = 53 54
 POKEBLOCK   = 55 56 57 58 59
+'Í'         = 5A
 '%'         = 5B
 '('         = 5C
 ')'         = 5D
@@ -72,7 +73,6 @@ RIGHT_ARROW = 7C
 '?'         = AC
 '.'         = AD
 '-'         = AE
-'·'         = AF
 '…'         = B0
 '“'         = B1
 '”'         = B2
@@ -138,6 +138,13 @@ RIGHT_ARROW = 7C
 'z'         = EE
 '▶'         = EF
 ':'         = F0
+'Ä'         = F1
+'Ö'         = F2
+'Ü'         = F3
+'ä'         = F4
+'ö'         = F5
+'ü'         = F6
+@ Arrows at F7-FA are duplicates of 79-7C. Unused?
 TALL_PLUS   = FC 0C FB
 '$'         = FF
 
@@ -305,7 +312,9 @@ TALL_PLUS   = FC 0C FB
 'ポ' = 9F
 'ッ' = A0
 
+@ Japanese punctuation
 'ー' = AE
+'·' = AF
 '‥' = B0
 
 STRING = FD
