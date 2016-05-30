@@ -10993,7 +10993,38 @@ gUnknown_084170F4: @ 84170F4
 
 	.global gUnknown_0842C1F4
 gUnknown_0842C1F4: @ 842C1F4
-	.incbin "baserom.gba", 0x0042c1f4, 0xa8
+@ replacing .incbin "baserom.gba", 0x0042c1f4, 0xa8
+	.4byte 0x084171c4
+	.4byte 0x084197a4
+	.4byte 0x08419b34
+	.4byte 0x0841afa4
+	.4byte 0x0841bb74
+	.4byte 0x0841c354
+	.4byte 0x0841d164
+	.4byte 0x0841dd34
+	.4byte 0x0841e874
+	.4byte 0x0841f564
+	.4byte 0x08420254
+	.4byte 0x08420f44
+	.4byte 0x08421de4
+	.4byte 0x08422654
+	.4byte 0x08423074
+	.4byte 0x084238e4
+	.4byte 0x084240c4
+	.4byte 0x08424784
+	.4byte 0x08424ba4
+	.4byte 0x08426854
+	.4byte 0x08428cb4
+	.4byte 0x084292e4
+	.string "1st round$"
+	.string "2nd round$"
+	.string "3rd round$"
+	.string "4th round$"
+	.string "5th round$"
+	.string "6th round$"
+	.string "7th round$"
+	.string "8th round$"
+
 
 	.global gUnknown_0842C29C
 gUnknown_0842C29C: @ 842C29C
@@ -11713,7 +11744,8 @@ gUnknown_0842D479: @ 842D479
 	.global gUnknown_0842D498
 gUnknown_0842D498: @ 842D498
 @ replacing .incbin "baserom.gba", 0x0042d498, 0x7
-	.string " BERRY$"
+	.string " "
+	.string "BERRY$"
 
 	.global gUnknown_0842D49F
 gUnknown_0842D49F: @ 842D49F
