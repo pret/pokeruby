@@ -2574,11 +2574,10 @@ gUnknown_0839B510: @ 839B510
 
 	.global gUnknown_0839B528
 gUnknown_0839B528: @ 839B528
-	.incbin "baserom.gba", 0x0039b528, 0x1f2c
+	.incbin "baserom.gba", 0x0039b528, 0x18
 
-	.global gUnknown_0839D454
-gUnknown_0839D454: @ 839D454
-	.incbin "baserom.gba", 0x0039d454, 0x7a8
+@ 839B540
+	.include "data/wild_mons.s"
 
 	.global gUnknown_0839DBFC
 gUnknown_0839DBFC: @ 839DBFC
