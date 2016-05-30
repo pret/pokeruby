@@ -8794,7 +8794,7 @@ gUnknown_0840E093: @ 840E093
 	.string "$"
 	.string "DON’T SPECIFY.$"
 	.string "NONE$"
-	.string "{RIGHT_TRIANGLE_ARROW}$" @ its a black arrow pointing right
+	.string "▶$" @ right-pointing triangle
 	.string " $"
 
 	.global gUnknown_0840E44F
@@ -8925,9 +8925,7 @@ gUnknown_0840E68B: @ 840E68B
 
 	.global gUnknown_0840E691
 gUnknown_0840E691: @ 840E691 @ replacing .incbin "baserom.gba", 0x0040e691, 0x6
-	.string "{ESCAPE}"
-	.byte 0xFB
-	.string "$"
+	.string "{TALL_PLUS}$"
 	.string "{RIGHT_ARROW}$"
 
 	.global gUnknown_0840E697
