@@ -255,7 +255,7 @@ extern u16 gUnknown_020239F8;
 extern u8 gUnknown_0203869A;
 extern u8 gTileBuffer[];
 
-vu16 * const gBGControlRegs[] =
+vu16 *const gBGControlRegs[] =
 {
     &REG_BG0CNT,
     &REG_BG1CNT,
@@ -263,7 +263,7 @@ vu16 * const gBGControlRegs[] =
     &REG_BG3CNT,
 };
 
-vu16 * const gBGHorizontalOffsetRegs[] =
+vu16 *const gBGHOffsetRegs[] =
 {
     &REG_BG0HOFS,
     &REG_BG1HOFS,
@@ -271,7 +271,7 @@ vu16 * const gBGHorizontalOffsetRegs[] =
     &REG_BG3HOFS,
 };
 
-vu16 * const gBGVerticalOffsetRegs[] =
+vu16 *const gBGVOffsetRegs[] =
 {
     &REG_BG0VOFS,
     &REG_BG1VOFS,
@@ -1785,8 +1785,8 @@ const struct WindowConfig gWindowConfig_81E7294 =
 static void UpdateBGRegs(struct WindowConfig *winConfig)
 {
     u8 bgNum = winConfig->bgNum;
-    *gBGHorizontalOffsetRegs[bgNum] = 0;
-    *gBGVerticalOffsetRegs[bgNum] = 0;
+    *gBGHOffsetRegs[bgNum] = 0;
+    *gBGVOffsetRegs[bgNum] = 0;
     *gBGControlRegs[bgNum] = winConfig->priority | (winConfig->screenBaseBlock << 8) | (winConfig->charBaseBlock << 2);
 }
 

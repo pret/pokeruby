@@ -4155,8 +4155,8 @@ _08054D20: .4byte 0x04000050
 _08054D24: .4byte gUnknown_081E29E0
 _08054D28: .4byte 0x04000052
 _08054D2C: .4byte 0x0000070d
-_08054D30: .4byte gBGHorizontalOffsetRegs
-_08054D34: .4byte gBGVerticalOffsetRegs
+_08054D30: .4byte gBGHOffsetRegs
+_08054D34: .4byte gBGVOffsetRegs
 _08054D38: .4byte gBGControlRegs
 _08054D3C: .4byte 0x00001d41
 _08054D40: .4byte 0x00001e43
@@ -11124,10 +11124,10 @@ _08057AE0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08057AE8: .4byte gBGHorizontalOffsetRegs
+_08057AE8: .4byte gBGHOffsetRegs
 _08057AEC: .4byte 0x03000590
 _08057AF0: .4byte 0x03000598
-_08057AF4: .4byte gBGVerticalOffsetRegs
+_08057AF4: .4byte gBGVOffsetRegs
 _08057AF8: .4byte 0x0300059a
 _08057AFC: .4byte 0x040000d4
 _08057B00: .4byte 0x020219cc
