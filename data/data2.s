@@ -10647,33 +10647,99 @@ gUnknown_08417068: @ 8417068
 
 	.global gUnknown_084170F4
 gUnknown_084170F4: @ 84170F4
-	.incbin "baserom.gba", 0x004170f4, 0x15100
+	.incbin "baserom.gba", 0x004170f4, 0xD0
+
+__unknown_84171C4:
+	.incbin "baserom.gba", 0x4171C4, 0x25E0
+
+__unknown_84197A4:
+	.incbin "baserom.gba", 0x4197A4, 0x390
+
+__unknown_8419B34:
+	.incbin "baserom.gba", 0x419B34, 0x1470
+
+__unknown_841AFA4:
+	.incbin "baserom.gba", 0x41AFA4, 0xBD0
+
+__unknown_841BB74:
+	.incbin "baserom.gba", 0x41BB74, 0x7E0
+
+__unknown_841C354:
+	.incbin "baserom.gba", 0x41C354, 0xE10
+
+__unknown_841D164:
+	.incbin "baserom.gba", 0x41D164, 0xBD0
+
+__unknown_841DD34:
+	.incbin "baserom.gba", 0x41DD34, 0xB40
+
+__unknown_841E874:
+	.incbin "baserom.gba", 0x41E874, 0xCF0
+
+__unknown_841F564:
+	.incbin "baserom.gba", 0x41F564, 0xCF0
+
+__unknown_8420254:
+	.incbin "baserom.gba", 0x420254, 0xCF0
+
+__unknown_8420F44:
+	.incbin "baserom.gba", 0x420F44, 0xEA0
+
+__unknown_8421DE4:
+	.incbin "baserom.gba", 0x421DE4, 0x870
+
+__unknown_8422654:
+	.incbin "baserom.gba", 0x422654, 0xA20
+
+__unknown_8423074:
+	.incbin "baserom.gba", 0x423074, 0x870
+
+__unknown_84238E4:
+	.incbin "baserom.gba", 0x4238E4, 0x7E0
+
+__unknown_84240C4:
+	.incbin "baserom.gba", 0x4240C4, 0x6C0
+
+__unknown_8424784:
+	.incbin "baserom.gba", 0x424784, 0x420
+
+__unknown_8424BA4:
+	.incbin "baserom.gba", 0x424BA4, 0x1CB0
+
+__unknown_8426854:
+	.incbin "baserom.gba", 0x426854, 0x2460
+
+__unknown_8428CB4:
+	.incbin "baserom.gba", 0x428CB4, 0x630
+
+__unknown_84292E4:
+	.incbin "baserom.gba", 0x4292E4, 0x2F10
 
 	.global gUnknown_0842C1F4
 gUnknown_0842C1F4: @ 842C1F4
 @ replacing .incbin "baserom.gba", 0x0042c1f4, 0xa8
-	.4byte 0x084171c4
-	.4byte 0x084197a4
-	.4byte 0x08419b34
-	.4byte 0x0841afa4
-	.4byte 0x0841bb74
-	.4byte 0x0841c354
-	.4byte 0x0841d164
-	.4byte 0x0841dd34
-	.4byte 0x0841e874
-	.4byte 0x0841f564
-	.4byte 0x08420254
-	.4byte 0x08420f44
-	.4byte 0x08421de4
-	.4byte 0x08422654
-	.4byte 0x08423074
-	.4byte 0x084238e4
-	.4byte 0x084240c4
-	.4byte 0x08424784
-	.4byte 0x08424ba4
-	.4byte 0x08426854
-	.4byte 0x08428cb4
-	.4byte 0x084292e4
+	.4byte __unknown_84171C4
+	.4byte __unknown_84197A4
+	.4byte __unknown_8419B34
+	.4byte __unknown_841AFA4
+	.4byte __unknown_841BB74
+	.4byte __unknown_841C354
+	.4byte __unknown_841D164
+	.4byte __unknown_841DD34
+	.4byte __unknown_841E874
+	.4byte __unknown_841F564
+	.4byte __unknown_8420254
+	.4byte __unknown_8420F44
+	.4byte __unknown_8421DE4
+	.4byte __unknown_8422654
+	.4byte __unknown_8423074
+	.4byte __unknown_84238E4
+	.4byte __unknown_84240C4
+	.4byte __unknown_8424784
+	.4byte __unknown_8424BA4
+	.4byte __unknown_8426854
+	.4byte __unknown_8428CB4
+	.4byte __unknown_84292E4
 	.string "1st round$"
 	.string "2nd round$"
 	.string "3rd round$"
