@@ -11025,174 +11025,243 @@ gUnknown_0842C1F4: @ 842C1F4
 	.string "7th round$"
 	.string "8th round$"
 
-
 	.global gUnknown_0842C29C
 gUnknown_0842C29C: @ 842C29C
-	.incbin "baserom.gba", 0x0042c29c, 0x4a
+@ replacing .incbin "baserom.gba", 0x0042c29c, 0x4a
+	.4byte 0x0842c24c @ pointers in pairs of two?
+	.4byte 0x0814a4b9
+	.4byte 0x0842c256
+	.4byte 0x0814a4b9
+	.4byte 0x0842c260
+	.4byte 0x0814a4b9
+	.4byte 0x0842c26a
+	.4byte 0x0814a4b9
+	.4byte 0x0842c274
+	.4byte 0x0814a4b9
+	.4byte 0x0842c27e
+	.4byte 0x0814a4b9
+	.4byte 0x0842c288
+	.4byte 0x0814a4b9
+	.4byte 0x0842c292
+	.4byte 0x0814a4b9
+	.string "TOP SPEED$"
 
 	.global gUnknown_0842C2E6
 gUnknown_0842C2E6: @ 842C2E6
-	.incbin "baserom.gba", 0x0042c2e6, 0x24
+@ replacing .incbin "baserom.gba", 0x0042c2e6, 0x24
+	.string "BERRY BLENDER\nMAXIMUM SPEED RECORD!$"
 
 	.global gUnknown_0842C30A
 gUnknown_0842C30A: @ 842C30A
-	.incbin "baserom.gba", 0x0042c30a, 0x1e
+@ replacing .incbin "baserom.gba", 0x0042c30a, 0x1e
+	.string "2 PLAYERS\n3 PLAYERS\n4 PLAYERS$"
 
 	.global gUnknown_0842C328
 gUnknown_0842C328: @ 842C328
-	.incbin "baserom.gba", 0x0042c328, 0x24
+@ replacing .incbin "baserom.gba", 0x0042c328, 0x24
+	.string "SAVING...\nDON’T TURN OFF THE POWER.$"
 
 	.global gUnknown_0842C34C
 gUnknown_0842C34C: @ 842C34C
-	.incbin "baserom.gba", 0x0042c34c, 0x5a
+@ replacing .incbin "baserom.gba", 0x0042c34c, 0x5a
+	.string "{HIGHLIGHT TRANSPARENT}{COLOR WHITE2}Link error...\nCheck your Game Link cable connection,\nand turn the power off and on.$"
 
 	.global gUnknown_0842C3A6
 gUnknown_0842C3A6: @ 842C3A6
-	.incbin "baserom.gba", 0x0042c3a6, 0xa
+@ replacing .incbin "baserom.gba", 0x0042c3a6, 0xa
+	.string "{PALETTE BLACK}OPTION$"
 
 	.global gUnknown_0842C3B0
 gUnknown_0842C3B0: @ 842C3B0
-	.incbin "baserom.gba", 0x0042c3b0, 0xe
+@ replacing .incbin "baserom.gba", 0x0042c3b0, 0xe
+	.string "{PALETTE BLACK}TEXT SPEED$"
 
 	.global gUnknown_0842C3BE
 gUnknown_0842C3BE: @ 842C3BE
-	.incbin "baserom.gba", 0x0042c3be, 0x10
+@ replacing .incbin "baserom.gba", 0x0042c3be, 0x10
+	.string "{PALETTE BLACK}BATTLE SCENE$"
 
 	.global gUnknown_0842C3CE
 gUnknown_0842C3CE: @ 842C3CE
-	.incbin "baserom.gba", 0x0042c3ce, 0x10
+@ replacing .incbin "baserom.gba", 0x0042c3ce, 0x10
+	.string "{PALETTE BLACK}BATTLE STYLE$"
 
 	.global gUnknown_0842C3DE
 gUnknown_0842C3DE: @ 842C3DE
-	.incbin "baserom.gba", 0x0042c3de, 0x9
+@ replacing .incbin "baserom.gba", 0x0042c3de, 0x9
+	.string "{PALETTE BLACK}SOUND$"
 
 	.global gUnknown_0842C3E7
 gUnknown_0842C3E7: @ 842C3E7
-	.incbin "baserom.gba", 0x0042c3e7, 0x9
+@ replacing .incbin "baserom.gba", 0x0042c3e7, 0x9
+	.string "{PALETTE BLACK}FRAME$"
 
 	.global gUnknown_0842C3F0
 gUnknown_0842C3F0: @ 842C3F0
-	.incbin "baserom.gba", 0x0042c3f0, 0xa
+@ replacing .incbin "baserom.gba", 0x0042c3f0, 0xa
+	.string "{PALETTE BLACK}CANCEL$"
 
 	.global gUnknown_0842C3FA
 gUnknown_0842C3FA: @ 842C3FA
-	.incbin "baserom.gba", 0x0042c3fa, 0xf
+@ replacing .incbin "baserom.gba", 0x0042c3fa, 0xf
+	.string "{PALETTE BLACK}BUTTON MODE$"
 
 	.global gUnknown_0842C409
 gUnknown_0842C409: @ 842C409
-	.incbin "baserom.gba", 0x0042c409, 0x8
+@ replacing .incbin "baserom.gba", 0x0042c409, 0x8
+	.string "{PALETTE WHITE2}SLOW$"
 
 	.global gUnknown_0842C411
 gUnknown_0842C411: @ 842C411
-	.incbin "baserom.gba", 0x0042c411, 0x7
+@ replacing .incbin "baserom.gba", 0x0042c411, 0x7
+	.string "{PALETTE WHITE2}MID$"
 
 	.global gUnknown_0842C418
 gUnknown_0842C418: @ 842C418
-	.incbin "baserom.gba", 0x0042c418, 0x8
+@ replacing .incbin "baserom.gba", 0x0042c418, 0x8
+	.string "{PALETTE WHITE2}FAST$"
 
 	.global gUnknown_0842C420
 gUnknown_0842C420: @ 842C420
-	.incbin "baserom.gba", 0x0042c420, 0x6
+@ replacing .incbin "baserom.gba", 0x0042c420, 0x6
+	.string "{PALETTE WHITE2}ON$"
 
 	.global gUnknown_0842C426
 gUnknown_0842C426: @ 842C426
-	.incbin "baserom.gba", 0x0042c426, 0x7
+@ replacing .incbin "baserom.gba", 0x0042c426, 0x7
+	.string "{PALETTE WHITE2}OFF$"
 
 	.global gUnknown_0842C42D
 gUnknown_0842C42D: @ 842C42D
-	.incbin "baserom.gba", 0x0042c42d, 0x9
+@ replacing .incbin "baserom.gba", 0x0042c42d, 0x9
+	.string "{PALETTE WHITE2}SHIFT$"
 
 	.global gUnknown_0842C436
 gUnknown_0842C436: @ 842C436
-	.incbin "baserom.gba", 0x0042c436, 0x7
+@ replacing .incbin "baserom.gba", 0x0042c436, 0x7
+	.string "{PALETTE WHITE2}SET$"
 
 	.global gUnknown_0842C43D
 gUnknown_0842C43D: @ 842C43D
-	.incbin "baserom.gba", 0x0042c43d, 0x8
+@ replacing .incbin "baserom.gba", 0x0042c43d, 0x8
+	.string "{PALETTE WHITE2}MONO$"
 
 	.global gUnknown_0842C445
 gUnknown_0842C445: @ 842C445
-	.incbin "baserom.gba", 0x0042c445, 0xa
+@ replacing .incbin "baserom.gba", 0x0042c445, 0xa
+	.string "{PALETTE WHITE2}STEREO$"
 
 	.global gUnknown_0842C44F
 gUnknown_0842C44F: @ 842C44F
-	.incbin "baserom.gba", 0x0042c44f, 0x8
+@ replacing .incbin "baserom.gba", 0x0042c44f, 0x8
+	.string "{PALETTE WHITE2}TYPE$"
 
 	.global gUnknown_0842C457
 gUnknown_0842C457: @ 842C457
-	.incbin "baserom.gba", 0x0042c457, 0x4
+@ replacing .incbin "baserom.gba", 0x0042c457, 0x4
+	.string "{PALETTE LIGHT_GREY}$"
 
 	.global gUnknown_0842C45B
 gUnknown_0842C45B: @ 842C45B
-	.incbin "baserom.gba", 0x0042c45b, 0xa
+@ replacing .incbin "baserom.gba", 0x0042c45b, 0xa
+	.string "{PALETTE WHITE2}NORMAL$"
 
 	.global gUnknown_0842C465
 gUnknown_0842C465: @ 842C465
-	.incbin "baserom.gba", 0x0042c465, 0x6
+@ replacing .incbin "baserom.gba", 0x0042c465, 0x6
+	.string "{PALETTE WHITE2}LR$"
 
 	.global gUnknown_0842C46B
 gUnknown_0842C46B: @ 842C46B
-	.incbin "baserom.gba", 0x0042c46b, 0x3e
+@ replacing .incbin "baserom.gba", 0x0042c46b, 0x3e
+	.string "{PALETTE WHITE2}L=A$"
+	.string "POKéDEX$"
+	.string "POKéMON$"
+	.string "BAG$"
+	.string "POKéNAV$"
+	.string "{PLAYER}$"
+	.string "SAVE$"
+	.string "OPTION$"
+	.string "EXIT$"
+	.string "RETIRE$"
 
 	.global gUnknown_0842C4A9
 gUnknown_0842C4A9: @ 842C4A9
-	.incbin "baserom.gba", 0x0042c4a9, 0x17
+@ replacing .incbin "baserom.gba", 0x0042c4a9, 0x17
+	.string "SAFARI BALLS\nStock: {STR_VAR_1}$"
 
 	.global gUnknown_0842C4C0
 gUnknown_0842C4C0: @ 842C4C0
-	.incbin "baserom.gba", 0x0042c4c0, 0x29
+@ replacing .incbin "baserom.gba", 0x0042c4c0, 0x29
+	.string "Link standby...\n... ... B Button: Cancel$"
 
 	.global gUnknown_0842C4E9
 gUnknown_0842C4E9: @ 842C4E9
-	.incbin "baserom.gba", 0x0042c4e9, 0x3b
+@ replacing .incbin "baserom.gba", 0x0042c4e9, 0x3b
+	.string "Press the A Button to load event.\n... ... B Button: Cancel$"
 
 	.global gUnknown_0842C524
 gUnknown_0842C524: @ 842C524
-	.incbin "baserom.gba", 0x0042c524, 0x11
+@ replacing .incbin "baserom.gba", 0x0042c524, 0x11
+	.string "Loading event...$"
 
 	.global gUnknown_0842C535
 gUnknown_0842C535: @ 842C535
-	.incbin "baserom.gba", 0x0042c535, 0x3c
+@ replacing .incbin "baserom.gba", 0x0042c535, 0x3c
+	.string "Don’t remove the Game Link cable.\nDon’t turn off the power.$"
 
 	.global gUnknown_0842C571
 gUnknown_0842C571: @ 842C571
-	.incbin "baserom.gba", 0x0042c571, 0x1e
+@ replacing .incbin "baserom.gba", 0x0042c571, 0x1e
+	.string "The event was safely loaded.$"
+	.string "$"
 
 	.global gUnknown_0842C58F
 gUnknown_0842C58F: @ 842C58F
-	.incbin "baserom.gba", 0x0042c58f, 0x26
+@ replacing .incbin "baserom.gba", 0x0042c58f, 0x26
+	.string "Loading error.\nEnding session.$"
+	.string "$$$$$$$"
 
 	.global gUnknown_0842C5B5
 gUnknown_0842C5B5: @ 842C5B5
-	.incbin "baserom.gba", 0x0042c5b5, 0x6
+@ replacing .incbin "baserom.gba", 0x0042c5b5, 0x6
+	.string "HOENN$"
 
 	.global gUnknown_0842C5BB
 gUnknown_0842C5BB: @ 842C5BB
-	.incbin "baserom.gba", 0x0042c5bb, 0xc
+@ replacing .incbin "baserom.gba", 0x0042c5bb, 0xc
+	.string "Oh! A bite!$"
 
 	.global gUnknown_0842C5C7
 gUnknown_0842C5C7: @ 842C5C7
-	.incbin "baserom.gba", 0x0042c5c7, 0x1b
+@ replacing .incbin "baserom.gba", 0x0042c5c7, 0x1b
+	.string "A POKéMON’s on the hook!{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0842C5E2
 gUnknown_0842C5E2: @ 842C5E2
-	.incbin "baserom.gba", 0x0042c5e2, 0x17
+@ replacing .incbin "baserom.gba", 0x0042c5e2, 0x17
+	.string "Not even a nibble...{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0842C5F9
 gUnknown_0842C5F9: @ 842C5F9
-	.incbin "baserom.gba", 0x0042c5f9, 0x12
+@ replacing .incbin "baserom.gba", 0x0042c5f9, 0x12
+	.string "It got away...{PAUSE_UNTIL_PRESS}$"
+	.string "$"
 
 	.global gUnknown_0842C60B
 gUnknown_0842C60B: @ 842C60B
-	.incbin "baserom.gba", 0x0042c60b, 0x17
+@ replacing .incbin "baserom.gba", 0x0042c60b, 0x17
+	.string "{STR_VAR_2} will be sent to {STR_VAR_1}.$"
 
 	.global gUnknown_0842C622
 gUnknown_0842C622: @ 842C622
-	.incbin "baserom.gba", 0x0042c622, 0xd
+@ replacing .incbin "baserom.gba", 0x0042c622, 0xd
+	.string "Bye-bye, {STR_VAR_2}!$"
 
 	.global gUnknown_0842C62F
 gUnknown_0842C62F: @ 842C62F
-	.incbin "baserom.gba", 0x0042c62f, 0x11
+@ replacing .incbin "baserom.gba", 0x0042c62f, 0x11
+	.string "{STR_VAR_1} sent over {STR_VAR_3}.$"
 
 	.global gUnknown_0842C640
 gUnknown_0842C640: @ 842C640
