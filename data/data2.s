@@ -4432,7 +4432,7 @@ gUnknown_083D02BA: @ 83D02BA
 
 	.global gUnknown_083D02C8
 gUnknown_083D02C8: @ 83D02C8
-	.incbin "baserom.gba", 0x003d02c8, 0x9
+	.string "サウンドチェック$" @ Sound Check
 
 	.global gUnknown_083D02D1
 gUnknown_083D02D1: @ 83D02D1
