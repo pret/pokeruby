@@ -4370,10 +4370,16 @@ gUnknown_083CF58C: @ 83CF58C
 @ 83D00AC
 	.include "data/contest_effects.s"
 
-	.global gUnknown_083D016C
-gUnknown_083D016C: @ 83D016C
-	.incbin "baserom.gba", 0x003d016c, 0x40
+@ A lookup table with TRUE for each combo starter ID and FALSE for ID 0,
+@ which means "not a combo starter move".
+	.global gComboStarterLookupTable
+gComboStarterLookupTable: @ 83D016C
+	.byte FALSE
+	.rept 62
+	.byte TRUE
+	.endr
 
+	.align 2
 	.global gUnknown_083D01AC
 gUnknown_083D01AC: @ 83D01AC
 	.incbin "baserom.gba", 0x003d01ac, 0xc0
