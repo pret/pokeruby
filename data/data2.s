@@ -4379,10 +4379,8 @@ gComboStarterLookupTable: @ 83D016C
 	.byte TRUE
 	.endr
 
-	.align 2
-	.global gUnknown_083D01AC
-gUnknown_083D01AC: @ 83D01AC
-	.incbin "baserom.gba", 0x003d01ac, 0xc0
+@ 83D01AC
+	.include "data/contest_effect_funcs.s"
 
 	.global gUnknown_083D026C
 gUnknown_083D026C: @ 83D026C
