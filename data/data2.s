@@ -11606,13 +11606,92 @@ gUnknown_0842D4FC: @ 842D4FC
 
 	.global gUnknown_0842D4FF
 gUnknown_0842D4FF: @ 842D4FF
-@ replacing .incbin "baserom.gba", 0x0042d4ff, 0x1c41
-	.incbin "baserom.gba", 0x0042d4ff, 0x1c41
+	.string "Is this the correct time?$"
+
+	.align 2
+OutlineCursorTiles_00:
+	.incbin "graphics/interface/outline_cursor_00.4bpp"
+
+	.align 2
+OutlineCursorTiles_01:
+	.incbin "graphics/interface/outline_cursor_01.4bpp"
+
+	.align 2
+OutlineCursorTiles_02:
+	.incbin "graphics/interface/outline_cursor_02.4bpp"
+
+	.align 2
+OutlineCursorTiles_03:
+	.incbin "graphics/interface/outline_cursor_03.4bpp"
+
+	.align 2
+OutlineCursorTiles_04:
+	.incbin "graphics/interface/outline_cursor_04.4bpp"
+
+	.align 2
+OutlineCursorTiles_05:
+	.incbin "graphics/interface/outline_cursor_05.4bpp"
+
+	.align 2
+OutlineCursorTiles_06:
+	.incbin "graphics/interface/outline_cursor_06.4bpp"
+
+	.align 2
+OutlineCursorTiles_07:
+	.incbin "graphics/interface/outline_cursor_07.4bpp"
+
+	.align 2
+OutlineCursorTiles_08:
+	.incbin "graphics/interface/outline_cursor_08.4bpp"
+
+	.align 2
+OutlineCursorTiles_09:
+	.incbin "graphics/interface/outline_cursor_09.4bpp"
+
+	.align 2
+OutlineCursorTiles_10:
+	.incbin "graphics/interface/outline_cursor_10.4bpp"
+
+	.align 2
+OutlineCursorTiles_11:
+	.incbin "graphics/interface/outline_cursor_11.4bpp"
+
+	.align 2
+OutlineCursorTiles_12:
+	.incbin "graphics/interface/outline_cursor_12.4bpp"
+
+	.align 2
+OutlineCursorTiles_13:
+	.incbin "graphics/interface/outline_cursor_13.4bpp"
+
+	.align 2
+OutlineCursorTiles_14:
+	.incbin "graphics/interface/outline_cursor_14.4bpp"
+
+	.align 2
+OutlineCursorTiles_15:
+	.incbin "graphics/interface/outline_cursor_15.4bpp"
+
+	.incbin "baserom.gba", 0x42F11C, 0x24
 
 	.global gUnknown_0842F140
 gUnknown_0842F140: @ 842F140
-@ replacing .incbin "baserom.gba", 0x0042f140, 0x80
-	.incbin "baserom.gba", 0x0042f140, 0x80
+	obj_tiles OutlineCursorTiles_00, 0x1C0, 0xFFF0
+	obj_tiles OutlineCursorTiles_01, 0x1C0, 0xFFF0
+	obj_tiles OutlineCursorTiles_02, 0x1C0, 0xFFF0
+	obj_tiles OutlineCursorTiles_03, 0x1C0, 0xFFF0
+	obj_tiles OutlineCursorTiles_04, 0x1C0, 0xFFF0
+	obj_tiles OutlineCursorTiles_05, 0x1C0, 0xFFF0
+	obj_tiles OutlineCursorTiles_06, 0x1C0, 0xFFF0
+	obj_tiles OutlineCursorTiles_07, 0x1C0, 0xFFF0
+	obj_tiles OutlineCursorTiles_08, 0x1C0, 0xFFF0
+	obj_tiles OutlineCursorTiles_09, 0x1C0, 0xFFF0
+	obj_tiles OutlineCursorTiles_10, 0x1C0, 0xFFF0
+	obj_tiles OutlineCursorTiles_11, 0x1C0, 0xFFF0
+	obj_tiles OutlineCursorTiles_12, 0x1C0, 0xFFF0
+	obj_tiles OutlineCursorTiles_13, 0x1C0, 0xFFF0
+	obj_tiles OutlineCursorTiles_14, 0x1C0, 0xFFF0
+	obj_tiles OutlineCursorTiles_15, 0x1C0, 0xFFF0
 
 	.global gUnknown_0842F1C0
 gUnknown_0842F1C0: @ 842F1C0
