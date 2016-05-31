@@ -4364,9 +4364,8 @@ gUnknown_083CF584: @ 83CF584
 gUnknown_083CF58C: @ 83CF58C
 	.incbin "baserom.gba", 0x003cf58c, 0x8
 
-	.global gUnknown_083CF594
-gUnknown_083CF594: @ 83CF594
-	.incbin "baserom.gba", 0x003cf594, 0xb18
+@ 83CF594
+	.include "data/contest_moves.s"
 
 	.global gUnknown_083D00AC
 gUnknown_083D00AC: @ 83D00AC
