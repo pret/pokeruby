@@ -4,15 +4,15 @@
 
 	.text
 
-	thumb_func_start sub_8007080
-sub_8007080: @ 8007080
+	thumb_func_start Task_DestroySelf
+Task_DestroySelf: @ 8007080
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
 	bl DestroyTask
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8007080
+	thumb_func_end Task_DestroySelf
 
 	thumb_func_start sub_8007090
 sub_8007090: @ 8007090
@@ -226,10 +226,10 @@ _08007250: .4byte 0x03002b74
 _08007254: .4byte 0x00001111
 _08007258: .4byte 0x03001770
 _0800725C: .4byte 0x02024eae
-_08007260: .4byte sub_8007080
+_08007260: .4byte Task_DestroySelf
 _08007264: .4byte 0x03000444
-_08007268: .4byte task00_link_test
-_0800726C: .4byte c2_08009A8C
+_08007268: .4byte Task_LinkTest
+_0800726C: .4byte CB2_80075CC
 	thumb_func_end sub_80071A4
 
 	thumb_func_start sub_8007270
@@ -654,8 +654,8 @@ _080075C4: .4byte 0x03001bf8
 _080075C8: .4byte 0x03002fc0
 	thumb_func_end sub_8007510
 
-	thumb_func_start c2_08009A8C
-c2_08009A8C: @ 80075CC
+	thumb_func_start CB2_80075CC
+CB2_80075CC: @ 80075CC
 	push {lr}
 	bl sub_8007510
 	movs r0, 0x1
@@ -668,7 +668,7 @@ c2_08009A8C: @ 80075CC
 	bl fade_and_return_progress_probably
 	pop {r0}
 	bx r0
-	thumb_func_end c2_08009A8C
+	thumb_func_end CB2_80075CC
 
 	thumb_func_start sub_80075F0
 sub_80075F0: @ 80075F0
@@ -2125,8 +2125,8 @@ _08008050: .4byte 0x00002222
 _08008054: .4byte 0x03002fc0
 	thumb_func_end sub_800802C
 
-	thumb_func_start task00_link_test
-task00_link_test: @ 8008058
+	thumb_func_start Task_LinkTest
+Task_LinkTest: @ 8008058
 	push {r4-r6,lr}
 	ldr r0, _08008164
 	ldrb r0, [r0]
@@ -2249,7 +2249,7 @@ _08008174: .4byte 0x03004030
 _08008178: .4byte 0x03002918
 _0800817C: .4byte 0x03002964
 _08008180: .4byte 0x03003048
-	thumb_func_end task00_link_test
+	thumb_func_end Task_LinkTest
 
 	thumb_func_start sub_8008184
 sub_8008184: @ 8008184
@@ -2886,7 +2886,7 @@ _08008638: .4byte sub_8007300
 _0800863C: .4byte gWindowConfig_81E7198
 _08008640: .4byte 0x04000052
 _08008644: .4byte 0x03001bb4
-_08008648: .4byte sub_8007080
+_08008648: .4byte Task_DestroySelf
 _0800864C: .4byte sub_8008650
 	thumb_func_end sub_80085BC
 
