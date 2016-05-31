@@ -496,7 +496,9 @@ gUnknown_08209AC4: @ 8209AC4
 
 	.global gUnknown_08209AD4
 gUnknown_08209AD4: @ 8209AD4
-	.incbin "baserom.gba", 0x00209ad4, 0x8dc
+	.string "タマゴ$"
+
+	.incbin "baserom.gba", 0x00209ad8, 0x8d8
 
 	.global gUnknown_0820A3B0
 gUnknown_0820A3B0: @ 820A3B0
@@ -7980,7 +7982,11 @@ gUnknown_08401E14: @ 8401E14
 
 	.global gUnknown_08401E24
 gUnknown_08401E24: @ 8401E24
-	.incbin "baserom.gba", 0x00401e24, 0x8
+	.byte 0x1E, 0x1F @ flash sectors
+
+@ XXX: Unused? And why is this aligned?
+	.align 2
+	.string "タマゴ$"
 
 	.global gUnknown_08401E2C
 gUnknown_08401E2C: @ 8401E2C
