@@ -10717,7 +10717,6 @@ __unknown_84292E4:
 
 	.global gUnknown_0842C1F4
 gUnknown_0842C1F4: @ 842C1F4
-@ replacing .incbin "baserom.gba", 0x0042c1f4, 0xa8
 	.4byte __unknown_84171C4
 	.4byte __unknown_84197A4
 	.4byte __unknown_8419B34
@@ -10740,34 +10739,42 @@ gUnknown_0842C1F4: @ 842C1F4
 	.4byte __unknown_8426854
 	.4byte __unknown_8428CB4
 	.4byte __unknown_84292E4
+
+__unknown_string_1stRound:
 	.string "1st round$"
+
+__unknown_string_2ndRound:
 	.string "2nd round$"
+
+__unknown_string_3rdRound:
 	.string "3rd round$"
+
+__unknown_string_4thRound:
 	.string "4th round$"
+
+__unknown_string_5thRound:
 	.string "5th round$"
+
+__unknown_string_6thRound:
 	.string "6th round$"
+
+__unknown_string_7thRound:
 	.string "7th round$"
+
+__unknown_string_8thRound:
 	.string "8th round$"
 
 	.global gUnknown_0842C29C
 gUnknown_0842C29C: @ 842C29C
-@ replacing .incbin "baserom.gba", 0x0042c29c, 0x4a
-	.4byte 0x0842c24c @ pointers in pairs of two?
-	.4byte 0x0814a4b9
-	.4byte 0x0842c256
-	.4byte 0x0814a4b9
-	.4byte 0x0842c260
-	.4byte 0x0814a4b9
-	.4byte 0x0842c26a
-	.4byte 0x0814a4b9
-	.4byte 0x0842c274
-	.4byte 0x0814a4b9
-	.4byte 0x0842c27e
-	.4byte 0x0814a4b9
-	.4byte 0x0842c288
-	.4byte 0x0814a4b9
-	.4byte 0x0842c292
-	.4byte 0x0814a4b9
+	.4byte __unknown_string_1stRound, sub_814A4B8
+	.4byte __unknown_string_2ndRound, sub_814A4B8
+	.4byte __unknown_string_3rdRound, sub_814A4B8
+	.4byte __unknown_string_4thRound, sub_814A4B8
+	.4byte __unknown_string_5thRound, sub_814A4B8
+	.4byte __unknown_string_6thRound, sub_814A4B8
+	.4byte __unknown_string_7thRound, sub_814A4B8
+	.4byte __unknown_string_8thRound, sub_814A4B8
+
 	.string "TOP SPEED$"
 
 	.global gUnknown_0842C2E6
