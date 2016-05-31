@@ -6940,17 +6940,17 @@ gUnknown_083FDFF4: @ 83FDFF4
 	.global gUnknown_083FE4F4
 gUnknown_083FE4F4: @ 83FE4F4
 	.incbin "baserom.gba", 0x003fe4f4, 0xe7
-	.string "{STRING 0} gained{PLAYER}\n{STRING 42} EXP. Points!\p$"
+	.string "{STRING 0} gained{STRING 1}\n{STRING 42} EXP. Points!\p$"
 	.string "$"
 	.string " a boosted$"
-	.string "{STRING 0} grew to\nLV. {PLAYER}!{UNKNOWN_A}\p$"
-	.string "{STRING 0} learned\n{PLAYER}!{UNKNOWN_A}\p$"
-	.string "{STRING 0} is trying to\nlearn {PLAYER}.\p$"
+	.string "{STRING 0} grew to\nLV. {STRING 1}!{UNKNOWN_A}\p$"
+	.string "{STRING 0} learned\n{STRING 1}!{UNKNOWN_A}\p$"
+	.string "{STRING 0} is trying to\nlearn {STRING 1}.\p$"
 	.string "But, {STRING 0} can’t learn\nmore than four moves.\p$"
-	.string "Delete a move to make\nroom for {PLAYER}?$"
-	.string "{STRING 0} forgot\n{PLAYER}.\p$"
-	.string "{PAUSE 32}Stop learning\n{PLAYER}?$"
-	.string "{STRING 0} did not learn\n{PLAYER}.\p$"
+	.string "Delete a move to make\nroom for {STRING 1}?$"
+	.string "{STRING 0} forgot\n{STRING 1}.\p$"
+	.string "{PAUSE 32}Stop learning\n{STRING 1}?$"
+	.string "{STRING 0} did not learn\n{STRING 1}.\p$"
 	.string "Use next POKéMON?$"
 	.string "{ATTACKING_MON}’s\nattack missed!$"
 	.string "{DEFENDING_MON}\nprotected itself!$"
@@ -7085,7 +7085,7 @@ gUnknown_083FEE92: @ 83FEE92
 	.string "{ATTACKING_MON} SKETCHED\n{STRING 0}!$"
 	.string "{ATTACKING_MON} is trying\nto take its foe with it!$"
 	.string "{DEFENDING_MON} took\n{ATTACKING_MON} with it!$"
-	.string "Reduced {DEFENDING_MON}’s\n{STRING 0} by {PLAYER}!$"
+	.string "Reduced {DEFENDING_MON}’s\n{STRING 0} by {STRING 1}!$"
 	.string "{ATTACKING_MON} stole\n{DEFENDING_MON}’s {STRING 19}!$"
 	.string "{DEFENDING_MON} can’t\nescape now!$"
 	.string "{DEFENDING_MON} fell into\na NIGHTMARE!$"
@@ -7119,8 +7119,8 @@ gUnknown_083FEE92: @ 83FEE92
 	.string "{ATTACKING_MON} is ready to\nhelp {DEFENDING_MON}!$"
 	.string "{ATTACKING_MON} switched\nitems with its opponent!$"
 	.string "{ATTACKING_MON} obtained\n{STRING 0}.$"
-	.string "{DEFENDING_MON} obtained\n{PLAYER}.$"
-	.string "{ATTACKING_MON} obtained\n{STRING 0}.\p{DEFENDING_MON} obtained\n{PLAYER}.$"
+	.string "{DEFENDING_MON} obtained\n{STRING 1}.$"
+	.string "{ATTACKING_MON} obtained\n{STRING 0}.\p{DEFENDING_MON} obtained\n{STRING 1}.$"
 	.string "{ATTACKING_MON} copied\n{DEFENDING_MON}’s {STRING 22}!$"
 	.string "{ATTACKING_MON} made a WISH!$"
 	.string "{STRING 0}’s WISH\ncame true!$"
@@ -7169,7 +7169,7 @@ gUnknown_083FEE92: @ 83FEE92
 	.string "{STRING 16}’s {STRING 23}\ncuts {DEFENDING_MON}’s ATTACK!$"
 	.string "{STRING 16}’s {STRING 23}\nprevents stat loss!$"
 	.string "{DEFENDING_MON}’s {STRING 22}\nhurt {ATTACKING_MON}!$"
-	.string "{STRING 16} TRACED\n{STRING 0}’s {PLAYER}!$"
+	.string "{STRING 16} TRACED\n{STRING 0}’s {STRING 1}!$"
 	.string "{STRING 14}’s {STRING 24}\nprevents burns!$"
 	.string "{DEFENDING_MON}’s {STRING 22}\nblocks {STRING 17}!$"
 	.string "{STRING 16}’s {STRING 23}\nblocks {STRING 17}!$"
@@ -7200,14 +7200,14 @@ gUnknown_083FFDB3: @ 83FFDB3
 	.string "rose!$"
 	.string "harshly $"
 	.string "fell!$"
-	.string "{ATTACKING_MON}’s {STRING 0}\n{PLAYER}$"
+	.string "{ATTACKING_MON}’s {STRING 0}\n{STRING 1}$"
 
 	.global gUnknown_083FFDD3
 gUnknown_083FFDD3: @ 83FFDD3
-	.string "{DEFENDING_MON}’s {STRING 0}\n{PLAYER}$"
-	.string "Using {STRING 19}, the {STRING 0}\nof {STRING 16} {PLAYER}$"
-	.string "{ATTACKING_MON}’s {STRING 0}\n{PLAYER}$"
-	.string "{DEFENDING_MON}’s {STRING 0}\n{PLAYER}$"
+	.string "{DEFENDING_MON}’s {STRING 0}\n{STRING 1}$"
+	.string "Using {STRING 19}, the {STRING 0}\nof {STRING 16} {STRING 1}$"
+	.string "{ATTACKING_MON}’s {STRING 0}\n{STRING 1}$"
+	.string "{DEFENDING_MON}’s {STRING 0}\n{STRING 1}$"
 	.string "{ATTACKING_MON}’s stats won’t\ngo any higher!$"
 	.string "{DEFENDING_MON}’s stats won’t\ngo any lower!$"
 	.string "A critical hit!$"
@@ -7295,33 +7295,33 @@ gUnknown_083FFFF7: @ 83FFFF7
 	.string "{ATTACKING_MON} won’t\nobey!$"
 	.string "{ATTACKING_MON} turned away!$"
 	.string "{ATTACKING_MON} pretended\nto not notice!$"
-	.string "{STRING 25} {STRING 26} is\nabout to use {PLAYER}.\pWill {STRING 32} change\nPOKéMON?$"
+	.string "{STRING 25} {STRING 26} is\nabout to use {STRING 1}.\pWill {STRING 32} change\nPOKéMON?$"
 	.string "{ATTACKING_MON} learned\n{STRING 0}!$"
 	.string "Player defeated\n{STRING 25} {STRING 26}!\p$"
-	.string "{STRING 32} crept closer to\n{STR_VAR_2}!$"
+	.string "{STRING 32} crept closer to\n{STRING 3}!$"
 	.string "{STRING 32} can’t get any closer!$"
-	.string "{STR_VAR_2} is watching\ncarefully!$"
-	.string "{STR_VAR_2} is curious about\nthe {STRING 0}!$"
-	.string "{STR_VAR_2} is enthralled by\nthe {STRING 0}!$"
-	.string "{STR_VAR_2} completely ignored\nthe {STRING 0}!$"
-	.string "{STRING 32} threw a {POKEBLOCK}\nat the {STR_VAR_2}!$"
+	.string "{STRING 3} is watching\ncarefully!$"
+	.string "{STRING 3} is curious about\nthe {STRING 0}!$"
+	.string "{STRING 3} is enthralled by\nthe {STRING 0}!$"
+	.string "{STRING 3} completely ignored\nthe {STRING 0}!$"
+	.string "{STRING 32} threw a {POKEBLOCK}\nat the {STRING 3}!$"
 	.string "{PLAY_SE SE_PINPON}ANNOUNCER: You’re out of\nSAFARI BALLS! Game over!\p$"
 
 	.global gUnknown_08400555
 gUnknown_08400555: @ 8400555
-	.string "Wild {STR_VAR_2} appeared!\p$"
+	.string "Wild {STRING 3} appeared!\p$"
 
 	.global gUnknown_08400568
 gUnknown_08400568: @ 8400568
-	.string "Wild {STR_VAR_2} appeared!\p$"
+	.string "Wild {STRING 3} appeared!\p$"
 
 	.global gUnknown_0840057B
 gUnknown_0840057B: @ 840057B
-	.string "Wild {STR_VAR_2} appeared!{PAUSE 127}$"
+	.string "Wild {STRING 3} appeared!{PAUSE 127}$"
 
 	.global gUnknown_08400590
 gUnknown_08400590: @ 8400590
-	.string "Wild {STRING 5} and\n{STR_VAR_2} appeared!\p$"
+	.string "Wild {STRING 5} and\n{STRING 3} appeared!\p$"
 
 	.global gUnknown_084005AA
 gUnknown_084005AA: @ 84005AA
@@ -7337,11 +7337,11 @@ gUnknown_084005DB: @ 84005DB
 
 	.global gUnknown_084005F5
 gUnknown_084005F5: @ 84005F5
-	.string "{STRING 25} {STRING 26} sent\nout {STR_VAR_2}!$"
+	.string "{STRING 25} {STRING 26} sent\nout {STRING 3}!$"
 
 	.global gUnknown_08400608
 gUnknown_08400608: @ 8400608
-	.string "{STRING 25} {STRING 26} sent\nout {STR_VAR_2} and {STRING 5}!$"
+	.string "{STRING 25} {STRING 26} sent\nout {STRING 3} and {STRING 5}!$"
 
 	.global gUnknown_08400622
 gUnknown_08400622: @ 8400622
@@ -7349,15 +7349,15 @@ gUnknown_08400622: @ 8400622
 
 	.global gUnknown_08400635
 gUnknown_08400635: @ 8400635
-	.string "{STRING 29} sent\nout {STR_VAR_2}!$"
+	.string "{STRING 29} sent\nout {STRING 3}!$"
 
 	.global gUnknown_08400645
 gUnknown_08400645: @ 8400645
-	.string "{STRING 29} sent out\n{STR_VAR_2} and {STRING 5}!$"
+	.string "{STRING 29} sent out\n{STRING 3} and {STRING 5}!$"
 
 	.global gUnknown_0840065C
 gUnknown_0840065C: @ 840065C
-	.string "{STRING 29} sent out\n{VERSION}!\p{STRING 30} sent out\n{GOOD_TEAM}!$"
+	.string "{STRING 29} sent out\n{STRING 7}!\p{STRING 30} sent out\n{STRING 9}!$"
 
 	.global gUnknown_0840067C
 gUnknown_0840067C: @ 840067C
@@ -7369,11 +7369,11 @@ gUnknown_0840068C: @ 840068C
 
 	.global gUnknown_0840069C
 gUnknown_0840069C: @ 840069C
-	.string "Go! {STR_VAR_1}!$"
+	.string "Go! {STRING 2}!$"
 
 	.global gUnknown_084006A4
 gUnknown_084006A4: @ 84006A4
-	.string "Go! {STR_VAR_1} and\n{STR_VAR_3}!$"
+	.string "Go! {STRING 2} and\n{STRING 4}!$"
 
 	.global gUnknown_084006B3
 gUnknown_084006B3: @ 84006B3
@@ -7393,7 +7393,7 @@ gUnknown_084006D5: @ 84006D5
 
 	.global gUnknown_084006F1
 gUnknown_084006F1: @ 84006F1
-	.string "{STRING 28} sent out\n{EVIL_TEAM}!\pGo! {RIVAL}!$"
+	.string "{STRING 28} sent out\n{STRING 8}!\pGo! {STRING 6}!$"
 
 	.global gUnknown_08400709
 gUnknown_08400709: @ 8400709
@@ -7457,7 +7457,7 @@ gUnknown_084007B7: @ 84007B7
 
 	.global gUnknown_084007BD
 gUnknown_084007BD: @ 84007BD
-	.string "{ATTACKING_MON} used\n{PLAYER}$"
+	.string "{ATTACKING_MON} used\n{STRING 1}$"
 
 	.global gUnknown_084007C8
 gUnknown_084007C8: @ 84007C8
@@ -7502,10 +7502,10 @@ gUnknown_084007D0: @ 84007D0
 	.string "Aww!\nIt appeared to be caught!$"
 	.string "Aargh!\nAlmost had it!$"
 	.string "Shoot!\nIt was so close, too!$"
-	.string "Gotcha!\n{STR_VAR_2} was caught!{UNKNOWN_A}{PLAY_BGM BGM_KACHI22}\p$"
-	.string "Gotcha!\n{STR_VAR_2} was caught!{UNKNOWN_A}{PLAY_BGM BGM_KACHI22}{PAUSE 127}$"
-	.string "Give a nickname to the\ncaptured {STR_VAR_2}?$"
-	.string "{STR_VAR_2} was sent to\n{STRING 35} PC.$"
+	.string "Gotcha!\n{STRING 3} was caught!{UNKNOWN_A}{PLAY_BGM BGM_KACHI22}\p$"
+	.string "Gotcha!\n{STRING 3} was caught!{UNKNOWN_A}{PLAY_BGM BGM_KACHI22}{PAUSE 127}$"
+	.string "Give a nickname to the\ncaptured {STRING 3}?$"
+	.string "{STRING 3} was sent to\n{STRING 35} PC.$"
 
 	.global gUnknown_084009ED
 gUnknown_084009ED: @ 84009ED
@@ -7514,7 +7514,7 @@ gUnknown_084009ED: @ 84009ED
 	.global gUnknown_084009F7
 gUnknown_084009F7: @ 84009F7
 	.string "LANETTE’s$"
-	.string "{STR_VAR_2}’s data was\nadded to the POKéDEX.\p$"
+	.string "{STRING 3}’s data was\nadded to the POKéDEX.\p$"
 	.string "It is raining.$"
 	.string "A sandstorm is raging.$"
 	.string "The BOX is full!\nYou can’t catch any more!\p$"
@@ -7545,15 +7545,15 @@ gUnknown_08400A85: @ 8400A85
 
 	.global gUnknown_08400C4A
 gUnknown_08400C4A: @ 8400C4A
-	.string "What?\n{STR_VAR_1} is evolving!$"
+	.string "What?\n{STRING 2} is evolving!$"
 
 	.global gUnknown_08400C60
 gUnknown_08400C60: @ 8400C60
-	.string "Congratulations! Your {STR_VAR_1}\nevolved into {STR_VAR_2}!{UNKNOWN_A}\p$"
+	.string "Congratulations! Your {STRING 2}\nevolved into {STRING 3}!{UNKNOWN_A}\p$"
 
 	.global gUnknown_08400C8D
 gUnknown_08400C8D: @ 8400C8D
-	.string "Huh? {STR_VAR_1}\nstopped evolving!\p$"
+	.string "Huh? {STRING 2}\nstopped evolving!\p$"
 
 	.global gUnknown_08400CA8
 gUnknown_08400CA8: @ 8400CA8
@@ -9962,22 +9962,22 @@ gUnknown_08410C40: @ 8410C40
 	.global gUnknown_08410C54
 gUnknown_08410C54: @ 8410C54
 	.string "BOX$"
-	.string "{CLEAR} Check the map of the HOENN region.$"
-	.string "{CLEAR} Check POKéMON in detail.$"
-	.string "{CLEAR} Check TRAINER information.$"
-	.string "{CLEAR} Check obtained RIBBONS.$"
-	.string "{CLEAR} Put away the POKéNAV.$"
-	.string "{CLEAR} There are no RIBBON winners.$"
-	.string "{CLEAR} No TRAINERS are registered.$"
-	.string "{CLEAR} Check party POKéMON in detail.$"
-	.string "{CLEAR} Check all POKéMON in detail.$"
-	.string "{CLEAR} Return to the POKéNAV menu.$"
-	.string "{CLEAR} Find cool POKéMON.$"
-	.string "{CLEAR} Find beautiful POKéMON.$"
-	.string "{CLEAR} Find cute POKéMON.$"
-	.string "{CLEAR} Find smart POKéMON.$"
-	.string "{CLEAR} Find tough POKéMON.$"
-	.string "{CLEAR} Return to the CONDITION menu.$"
+	.string "{CLEAR 0}Check the map of the HOENN region.$"
+	.string "{CLEAR 0}Check POKéMON in detail.$"
+	.string "{CLEAR 0}Check TRAINER information.$"
+	.string "{CLEAR 0}Check obtained RIBBONS.$"
+	.string "{CLEAR 0}Put away the POKéNAV.$"
+	.string "{CLEAR 0}There are no RIBBON winners.$"
+	.string "{CLEAR 0}No TRAINERS are registered.$"
+	.string "{CLEAR 0}Check party POKéMON in detail.$"
+	.string "{CLEAR 0}Check all POKéMON in detail.$"
+	.string "{CLEAR 0}Return to the POKéNAV menu.$"
+	.string "{CLEAR 0}Find cool POKéMON.$"
+	.string "{CLEAR 0}Find beautiful POKéMON.$"
+	.string "{CLEAR 0}Find cute POKéMON.$"
+	.string "{CLEAR 0}Find smart POKéMON.$"
+	.string "{CLEAR 0}Find tough POKéMON.$"
+	.string "{CLEAR 0}Return to the CONDITION menu.$"
 
 	.global gUnknown_08410E22
 gUnknown_08410E22: @ 8410E22
