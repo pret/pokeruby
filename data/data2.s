@@ -89,7 +89,10 @@ gUnknown_081E7C18: @ 81E7C18
 
 	.global gUnknown_081E7C64
 gUnknown_081E7C64: @ 81E7C64
-	.4byte 0x081e7c44, 0x081e7c4c, 0x081e7c54, 0x081e7c5c
+	.4byte 0x081e7c44
+	.4byte 0x081e7c4c
+	.4byte 0x081e7c54
+	.4byte 0x081e7c5c
 
 	.global gUnknown_081E7C74
 gUnknown_081E7C74: @ 81E7C74
@@ -133,7 +136,9 @@ gUnknown_081EC3F0: @ 81EC3F0
 
 	.global gUnknown_081ECACC
 gUnknown_081ECACC: @ 81ECACC
-	.4byte 0x081ecab4, 0x081ecabc, 0x081ecac4
+	.4byte 0x081ecab4
+	.4byte 0x081ecabc
+	.4byte 0x081ecac4
 
 	.global gUnknown_081ECAD8
 gUnknown_081ECAD8: @ 81ECAD8
@@ -507,7 +512,10 @@ gUnknown_082087DC: @ 82087DC
 	.align 2
 	.global gUnknown_08209AC4
 gUnknown_08209AC4: @ 8209AC4
-	.4byte 0x0842cb86, 0x0842cbab, 0x0842cbc6, 0x0842cbed
+	.4byte 0x0842cb86
+	.4byte 0x0842cbab
+	.4byte 0x0842cbc6
+	.4byte 0x0842cbed
 
 	.global gUnknown_08209AD4
 gUnknown_08209AD4: @ 8209AD4
@@ -781,7 +789,10 @@ gUnknown_0820C308: @ 820C308
 
 	.global gUnknown_0820C320
 gUnknown_0820C320: @ 820C320
-	.4byte 0x0842c6a7, 0x0804a9f5, 0x0842c6af, 0x0804aa01
+	.4byte 0x0842c6a7
+	.4byte 0x0804a9f5
+	.4byte 0x0842c6af
+	.4byte 0x0804aa01
 
 	.global gUnknown_0820C330
 gUnknown_0820C330: @ 820C330
@@ -971,7 +982,7 @@ gUnknown_08216249: @ 8216249
 
 	.global gUnknown_08216284
 gUnknown_08216284: @ 8216284 berry blender helpers?
-	.4byte 0x08216273 @pointers
+	.4byte 0x08216273
 	.4byte 0x08216278
 	.4byte 0x0821627D
 	.string "1P$"
@@ -989,7 +1000,9 @@ gUnknown_08216284: @ 8216284 berry blender helpers?
 
 	.global gUnknown_082162B8
 gUnknown_082162B8: @ 82162B8
-	.4byte 0x082162a0, 0x082162a7, 0x082162ae
+	.4byte 0x082162a0
+	.4byte 0x082162a7
+	.4byte 0x082162ae
 
 	.global gUnknown_082162C4
 gUnknown_082162C4: @ 82162C4
@@ -1138,7 +1151,9 @@ gUnknown_08216694: @ 8216694
 
 	.global gUnknown_082166A0
 gUnknown_082166A0: @ 82166A0
-	.4byte 0x08055c69, 0x08055c89, 0x08055c8d
+	.4byte 0x08055c69
+	.4byte 0x08055c89
+	.4byte 0x08055c8d
 
 	.global gUnknown_082166AC
 gUnknown_082166AC: @ 82166AC
@@ -1146,7 +1161,8 @@ gUnknown_082166AC: @ 82166AC
 
 	.global gUnknown_082166D8
 gUnknown_082166D8: @ 82166D8
-	.4byte 0x08055d31, 0x08055d39
+	.4byte 0x08055d31
+	.4byte 0x08055d39
 
 @ 82166E0
 	.include "data/tilesets/graphics.s"
@@ -1195,7 +1211,9 @@ gUnknown_0830FBA0: @ 830FBA0
 
 	.global gUnknown_0830FBEC
 gUnknown_0830FBEC: @ 830FBEC
-	.4byte 0x08058ce9, 0x08058cfd, 0x08058d0d
+	.4byte 0x08058ce9
+	.4byte 0x08058cfd
+	.4byte 0x08058d0d
 
 	.global gUnknown_0830FBF8
 gUnknown_0830FBF8: @ 830FBF8
@@ -1211,7 +1229,10 @@ gUnknown_0830FC14: @ 830FC14
 
 	.global gUnknown_0830FC34
 gUnknown_0830FC34: @ 830FC34
-	.4byte 0x08056f9d, 0x08056f85, 0x08056f71, 0x08056f5d
+	.4byte 0x08056f9d
+	.4byte 0x08056f85
+	.4byte 0x08056f71
+	.4byte 0x08056f5d
 
 	.global gUnknown_0830FC44
 gUnknown_0830FC44: @ 830FC44
@@ -1227,11 +1248,16 @@ gUnknown_0830FC64: @ 830FC64
 
 	.global gUnknown_0830FC78
 gUnknown_0830FC78: @ 830FC78
-	.4byte 0x08056f9d, 0x08056f85, 0x08056f71, 0x08056f5d
+	.4byte 0x08056f9d
+	.4byte 0x08056f85
+	.4byte 0x08056f71
+	.4byte 0x08056f5d
 
 	.global gUnknown_0830FC88
 gUnknown_0830FC88: @ 830FC88
-	.4byte 0x08059e85, 0x08059ea5, 0x08059f41
+	.4byte 0x08059e85
+	.4byte 0x08059ea5
+	.4byte 0x08059f41
 
 	.global gUnknown_0830FC94
 gUnknown_0830FC94: @ 830FC94
@@ -1239,7 +1265,10 @@ gUnknown_0830FC94: @ 830FC94
 
 	.global gUnknown_0830FC98
 gUnknown_0830FC98: @ 830FC98
-	.4byte 0x0805a0d9, 0x0805a101, 0x0805a179, 0x0805a1b9
+	.4byte 0x0805a0d9
+	.4byte 0x0805a101
+	.4byte 0x0805a179
+	.4byte 0x0805a1b9
 
 	.global gUnknown_0830FCA8
 gUnknown_0830FCA8: @ 830FCA8
@@ -1283,7 +1312,9 @@ gUnknown_0830FD24: @ 830FD24
 
 	.global gUnknown_0830FD3C
 gUnknown_0830FD3C: @ 830FD3C
-	.4byte 0x0805c2f1, 0x0805c32d, 0x0805c365
+	.4byte 0x0805c2f1
+	.4byte 0x0805c32d
+	.4byte 0x0805c365
 
 @ 830FD48
 	.include "data/graphics/field_objects/map_object_graphics.s"
@@ -1338,7 +1369,10 @@ gUnknown_083738E4: @ 83738E4
 
 	.global gUnknown_0837399C
 gUnknown_0837399C: @ 837399C
-	.4byte 0x0837394c, 0x08373960, 0x08373974, 0x08373988
+	.4byte 0x0837394c
+	.4byte 0x08373960
+	.4byte 0x08373974
+	.4byte 0x08373988
 
 @ 83739AC
 	.include "data/graphics/field_objects/berry_tree_graphics_tables.s"
@@ -1388,7 +1422,9 @@ gUnknown_083752C0: @ 83752C0
 
 	.global gUnknown_083752C4
 gUnknown_083752C4: @ 83752C4
-	.4byte 0x0805d275, 0x0805d2a1, 0x0805d2c1
+	.4byte 0x0805d275
+	.4byte 0x0805d2a1
+	.4byte 0x0805d2c1
 
 	.global gUnknown_083752D0
 gUnknown_083752D0: @ 83752D0
@@ -1468,7 +1504,10 @@ gUnknown_083753C8: @ 83753C8
 
 	.global gUnknown_083753CC
 gUnknown_083753CC: @ 83753CC
-	.4byte 0x0805e1b9, 0x0805e1e5, 0x0805e209, 0x0805e235
+	.4byte 0x0805e1b9
+	.4byte 0x0805e1e5
+	.4byte 0x0805e209
+	.4byte 0x0805e235
 
 	.global gUnknown_083753DC
 gUnknown_083753DC: @ 83753DC
@@ -1484,11 +1523,16 @@ gUnknown_083753F4: @ 83753F4
 
 	.global gUnknown_083753FC
 gUnknown_083753FC: @ 83753FC
-	.4byte 0x0805e3c1, 0x0805e3d5, 0x0805e40d, 0x0805e4c5
+	.4byte 0x0805e3c1
+	.4byte 0x0805e3d5
+	.4byte 0x0805e40d
+	.4byte 0x0805e4c5
 
 	.global gUnknown_0837540C
 gUnknown_0837540C: @ 837540C
-	.4byte 0x0805e4ed, 0x0805e621, 0x0805e5b5
+	.4byte 0x0805e4ed
+	.4byte 0x0805e621
+	.4byte 0x0805e5b5
 
 	.global gUnknown_08375418
 gUnknown_08375418: @ 8375418
@@ -1496,7 +1540,9 @@ gUnknown_08375418: @ 8375418
 
 	.global gUnknown_0837541C
 gUnknown_0837541C: @ 837541C
-	.4byte 0x0805e4ed, 0x0805e6ad, 0x0805e5b5
+	.4byte 0x0805e4ed
+	.4byte 0x0805e6ad
+	.4byte 0x0805e5b5
 
 	.global gUnknown_08375428
 gUnknown_08375428: @ 8375428
@@ -1504,7 +1550,9 @@ gUnknown_08375428: @ 8375428
 
 	.global gUnknown_0837542C
 gUnknown_0837542C: @ 837542C
-	.4byte 0x0805e4ed, 0x0805e739, 0x0805e5b5
+	.4byte 0x0805e4ed
+	.4byte 0x0805e739
+	.4byte 0x0805e5b5
 
 	.global gUnknown_08375438
 gUnknown_08375438: @ 8375438
@@ -1512,7 +1560,9 @@ gUnknown_08375438: @ 8375438
 
 	.global gUnknown_0837543C
 gUnknown_0837543C: @ 837543C
-	.4byte 0x0805e4ed, 0x0805e7c5, 0x0805e5b5
+	.4byte 0x0805e4ed
+	.4byte 0x0805e7c5
+	.4byte 0x0805e5b5
 
 	.global gUnknown_08375448
 gUnknown_08375448: @ 8375448
@@ -1520,7 +1570,9 @@ gUnknown_08375448: @ 8375448
 
 	.global gUnknown_0837544C
 gUnknown_0837544C: @ 837544C
-	.4byte 0x0805e4ed, 0x0805e851, 0x0805e5b5
+	.4byte 0x0805e4ed
+	.4byte 0x0805e851
+	.4byte 0x0805e5b5
 
 	.global gUnknown_08375458
 gUnknown_08375458: @ 8375458
@@ -1528,7 +1580,9 @@ gUnknown_08375458: @ 8375458
 
 	.global gUnknown_0837545C
 gUnknown_0837545C: @ 837545C
-	.4byte 0x0805e4ed, 0x0805e8dd, 0x0805e5b5
+	.4byte 0x0805e4ed
+	.4byte 0x0805e8dd
+	.4byte 0x0805e5b5
 
 	.global gUnknown_08375468
 gUnknown_08375468: @ 8375468
@@ -1536,11 +1590,15 @@ gUnknown_08375468: @ 8375468
 
 	.global gUnknown_0837546C
 gUnknown_0837546C: @ 837546C
-	.4byte 0x0805e4ed, 0x0805e969, 0x0805e5b5
+	.4byte 0x0805e4ed
+	.4byte 0x0805e969
+	.4byte 0x0805e5b5
 
 	.global gUnknown_08375478
 gUnknown_08375478: @ 8375478
-	.4byte 0x0805e4ed, 0x0805e9f5, 0x0805e5b5
+	.4byte 0x0805e4ed
+	.4byte 0x0805e9f5
+	.4byte 0x0805e5b5
 
 	.global gUnknown_08375484
 gUnknown_08375484: @ 8375484
@@ -1548,7 +1606,9 @@ gUnknown_08375484: @ 8375484
 
 	.global gUnknown_08375488
 gUnknown_08375488: @ 8375488
-	.4byte 0x0805e4ed, 0x0805ea81, 0x0805e5b5
+	.4byte 0x0805e4ed
+	.4byte 0x0805ea81
+	.4byte 0x0805e5b5
 
 	.global gUnknown_08375494
 gUnknown_08375494: @ 8375494
@@ -1556,7 +1616,9 @@ gUnknown_08375494: @ 8375494
 
 	.global gUnknown_08375498
 gUnknown_08375498: @ 8375498
-	.4byte 0x0805e4ed, 0x0805eb0d, 0x0805e5b5
+	.4byte 0x0805e4ed
+	.4byte 0x0805eb0d
+	.4byte 0x0805e5b5
 
 	.global gUnknown_083754A4
 gUnknown_083754A4: @ 83754A4
@@ -1564,7 +1626,9 @@ gUnknown_083754A4: @ 83754A4
 
 	.global gUnknown_083754A8
 gUnknown_083754A8: @ 83754A8
-	.4byte 0x0805e4ed, 0x0805eb99, 0x0805e5b5
+	.4byte 0x0805e4ed
+	.4byte 0x0805eb99
+	.4byte 0x0805e5b5
 
 	.global gUnknown_083754B4
 gUnknown_083754B4: @ 83754B4
@@ -1572,7 +1636,9 @@ gUnknown_083754B4: @ 83754B4
 
 	.global gUnknown_083754B8
 gUnknown_083754B8: @ 83754B8
-	.4byte 0x0805e4ed, 0x0805ec25, 0x0805e5b5
+	.4byte 0x0805e4ed
+	.4byte 0x0805ec25
+	.4byte 0x0805e5b5
 
 	.global gUnknown_083754C4
 gUnknown_083754C4: @ 83754C4
@@ -1580,7 +1646,9 @@ gUnknown_083754C4: @ 83754C4
 
 	.global gUnknown_083754C8
 gUnknown_083754C8: @ 83754C8
-	.4byte 0x0805e4ed, 0x0805ecb1, 0x0805e5b5
+	.4byte 0x0805e4ed
+	.4byte 0x0805ecb1
+	.4byte 0x0805e5b5
 
 	.global gUnknown_083754D4
 gUnknown_083754D4: @ 83754D4
@@ -1588,7 +1656,9 @@ gUnknown_083754D4: @ 83754D4
 
 	.global gUnknown_083754D8
 gUnknown_083754D8: @ 83754D8
-	.4byte 0x0805e4ed, 0x0805ed3d, 0x0805e5b5
+	.4byte 0x0805e4ed
+	.4byte 0x0805ed3d
+	.4byte 0x0805e5b5
 
 	.global gUnknown_083754E4
 gUnknown_083754E4: @ 83754E4
@@ -1596,7 +1666,9 @@ gUnknown_083754E4: @ 83754E4
 
 	.global gUnknown_083754E8
 gUnknown_083754E8: @ 83754E8
-	.4byte 0x0805e4ed, 0x0805edc9, 0x0805e5b5
+	.4byte 0x0805e4ed
+	.4byte 0x0805edc9
+	.4byte 0x0805e5b5
 
 	.global gUnknown_083754F4
 gUnknown_083754F4: @ 83754F4
@@ -1604,7 +1676,9 @@ gUnknown_083754F4: @ 83754F4
 
 	.global gUnknown_083754F8
 gUnknown_083754F8: @ 83754F8
-	.4byte 0x0805e4ed, 0x0805ee55, 0x0805e5b5
+	.4byte 0x0805e4ed
+	.4byte 0x0805ee55
+	.4byte 0x0805e5b5
 
 	.global gUnknown_08375504
 gUnknown_08375504: @ 8375504
@@ -1612,7 +1686,9 @@ gUnknown_08375504: @ 8375504
 
 	.global gUnknown_08375508
 gUnknown_08375508: @ 8375508
-	.4byte 0x0805e4ed, 0x0805eee1, 0x0805e5b5
+	.4byte 0x0805e4ed
+	.4byte 0x0805eee1
+	.4byte 0x0805e5b5
 
 	.global gUnknown_08375514
 gUnknown_08375514: @ 8375514
@@ -1620,7 +1696,9 @@ gUnknown_08375514: @ 8375514
 
 	.global gUnknown_08375518
 gUnknown_08375518: @ 8375518
-	.4byte 0x0805e4ed, 0x0805ef6d, 0x0805e5b5
+	.4byte 0x0805e4ed
+	.4byte 0x0805ef6d
+	.4byte 0x0805e5b5
 
 	.global gUnknown_08375524
 gUnknown_08375524: @ 8375524
@@ -1628,7 +1706,9 @@ gUnknown_08375524: @ 8375524
 
 	.global gUnknown_08375528
 gUnknown_08375528: @ 8375528
-	.4byte 0x0805e4ed, 0x0805eff9, 0x0805e5b5
+	.4byte 0x0805e4ed
+	.4byte 0x0805eff9
+	.4byte 0x0805e5b5
 
 	.global gUnknown_08375534
 gUnknown_08375534: @ 8375534
@@ -1636,7 +1716,9 @@ gUnknown_08375534: @ 8375534
 
 	.global gUnknown_08375538
 gUnknown_08375538: @ 8375538
-	.4byte 0x0805e4ed, 0x0805f085, 0x0805e5b5
+	.4byte 0x0805e4ed
+	.4byte 0x0805f085
+	.4byte 0x0805e5b5
 
 	.global gUnknown_08375544
 gUnknown_08375544: @ 8375544
@@ -1644,7 +1726,9 @@ gUnknown_08375544: @ 8375544
 
 	.global gUnknown_08375548
 gUnknown_08375548: @ 8375548
-	.4byte 0x0805e4ed, 0x0805f111, 0x0805e5b5
+	.4byte 0x0805e4ed
+	.4byte 0x0805f111
+	.4byte 0x0805e5b5
 
 	.global gUnknown_08375554
 gUnknown_08375554: @ 8375554
@@ -1652,7 +1736,9 @@ gUnknown_08375554: @ 8375554
 
 	.global gUnknown_08375558
 gUnknown_08375558: @ 8375558
-	.4byte 0x0805e4ed, 0x0805f19d, 0x0805e5b5
+	.4byte 0x0805e4ed
+	.4byte 0x0805f19d
+	.4byte 0x0805e5b5
 
 	.global gUnknown_08375564
 gUnknown_08375564: @ 8375564
@@ -1660,7 +1746,9 @@ gUnknown_08375564: @ 8375564
 
 	.global gUnknown_08375568
 gUnknown_08375568: @ 8375568
-	.4byte 0x0805e4ed, 0x0805f229, 0x0805e5b5
+	.4byte 0x0805e4ed
+	.4byte 0x0805f229
+	.4byte 0x0805e5b5
 
 	.global gUnknown_08375574
 gUnknown_08375574: @ 8375574
@@ -1668,7 +1756,9 @@ gUnknown_08375574: @ 8375574
 
 	.global gUnknown_08375578
 gUnknown_08375578: @ 8375578
-	.4byte 0x0805e4ed, 0x0805f2b5, 0x0805e5b5
+	.4byte 0x0805e4ed
+	.4byte 0x0805f2b5
+	.4byte 0x0805e5b5
 
 	.global gUnknown_08375584
 gUnknown_08375584: @ 8375584
@@ -1676,7 +1766,9 @@ gUnknown_08375584: @ 8375584
 
 	.global gUnknown_08375588
 gUnknown_08375588: @ 8375588
-	.4byte 0x0805f341, 0x0805f365, 0x0805f3c5
+	.4byte 0x0805f341
+	.4byte 0x0805f365
+	.4byte 0x0805f3c5
 
 	.global gUnknown_08375594
 gUnknown_08375594: @ 8375594
@@ -1684,7 +1776,9 @@ gUnknown_08375594: @ 8375594
 
 	.global gUnknown_083755C0
 gUnknown_083755C0: @ 83755C0
-	.4byte 0x0805f341, 0x0805f925, 0x0805f3c5
+	.4byte 0x0805f341
+	.4byte 0x0805f925
+	.4byte 0x0805f3c5
 
 	.global gUnknown_083755CC
 gUnknown_083755CC: @ 83755CC
@@ -1692,19 +1786,24 @@ gUnknown_083755CC: @ 83755CC
 
 	.global gUnknown_083755D0
 gUnknown_083755D0: @ 83755D0
-	.4byte 0x0805fb65, 0x0805fb05
+	.4byte 0x0805fb65
+	.4byte 0x0805fb05
 
 	.global gUnknown_083755D8
 gUnknown_083755D8: @ 83755D8
-	.4byte 0x0805fbd5, 0x0805fb05
+	.4byte 0x0805fbd5
+	.4byte 0x0805fb05
 
 	.global gUnknown_083755E0
 gUnknown_083755E0: @ 83755E0
-	.4byte 0x0805fc45, 0x0805fb05
+	.4byte 0x0805fc45
+	.4byte 0x0805fb05
 
 	.global gUnknown_083755E8
 gUnknown_083755E8: @ 83755E8
-	.4byte 0x0805fcb5, 0x0805fce9, 0x0805fd09
+	.4byte 0x0805fcb5
+	.4byte 0x0805fce9
+	.4byte 0x0805fd09
 
 	.global gUnknown_083755F4
 gUnknown_083755F4: @ 83755F4
@@ -1772,11 +1871,17 @@ gUnknown_0837567B: @ 837567B
 
 	.global gUnknown_08375684
 gUnknown_08375684: @ 8375684
-	.4byte 0x08057631, 0x08057611, 0x080575ed, 0x080575c9
+	.4byte 0x08057631
+	.4byte 0x08057611
+	.4byte 0x080575ed
+	.4byte 0x080575c9
 
 	.global gUnknown_08375694
 gUnknown_08375694: @ 8375694
-	.4byte 0x08057611, 0x08057631, 0x080575c9, 0x080575ed
+	.4byte 0x08057611
+	.4byte 0x08057631
+	.4byte 0x080575c9
+	.4byte 0x080575ed
 
 	.global gUnknown_083756A4
 gUnknown_083756A4: @ 83756A4
@@ -1932,7 +2037,10 @@ gUnknown_08376028: @ 8376028
 
 	.global gUnknown_08376040
 gUnknown_08376040: @ 8376040
-	.4byte 0x08056e01, 0x08056ded, 0x08056dd9, 0x08056dc5
+	.4byte 0x08056e01
+	.4byte 0x08056ded
+	.4byte 0x08056dd9
+	.4byte 0x08056dc5
 
 	.global gUnknown_08376050
 gUnknown_08376050: @ 8376050
@@ -1948,7 +2056,9 @@ gUnknown_08376070: @ 8376070
 
 	.global gUnknown_08376080
 gUnknown_08376080: @ 8376080
-	.4byte 0x08063ff9, 0x08063ffd, 0x0806404d
+	.4byte 0x08063ff9
+	.4byte 0x08063ffd
+	.4byte 0x0806404d
 
 	.global gUnknown_0837608C
 gUnknown_0837608C: @ 837608C
@@ -1972,7 +2082,9 @@ gUnknown_08376194: @ 8376194
 
 	.global gUnknown_083761D0
 gUnknown_083761D0: @ 83761D0
-	.4byte 0x0837619e, 0x083761ae, 0x083761be
+	.4byte 0x0837619e
+	.4byte 0x083761ae
+	.4byte 0x083761be
 
 	.global gUnknown_083761DC
 gUnknown_083761DC: @ 83761DC
@@ -2212,7 +2324,10 @@ gUnknown_0837BB54: @ 837BB54
 
 	.global gUnknown_0837BB84
 gUnknown_0837BB84: @ 837BB84
-	.4byte 0x0837b5e4, 0x0837b5e4, 0x0837b7e4, 0x0837b7e4
+	.4byte 0x0837b5e4
+	.4byte 0x0837b5e4
+	.4byte 0x0837b7e4
+	.4byte 0x0837b7e4
 
 	.global gUnknown_0837BB94
 gUnknown_0837BB94: @ 837BB94
@@ -2248,7 +2363,9 @@ gUnknown_0837CA7C: @ 837CA7C
 
 	.global gUnknown_0837D684
 gUnknown_0837D684: @ 837D684
-	.4byte 0x0837ca84, 0x0837cc04, 0x0837cd84
+	.4byte 0x0837ca84
+	.4byte 0x0837cc04
+	.4byte 0x0837cd84
 
 	.global gUnknown_0837D690
 gUnknown_0837D690: @ 837D690
@@ -2256,7 +2373,10 @@ gUnknown_0837D690: @ 837D690
 
 	.global gUnknown_0837D83C
 gUnknown_0837D83C: @ 837D83C
-	.4byte 0x0837d79c, 0x0837d7bc, 0x0837d7dc, 0x0837d7fc
+	.4byte 0x0837d79c
+	.4byte 0x0837d7bc
+	.4byte 0x0837d7dc
+	.4byte 0x0837d7fc
 
 	.global gUnknown_0837D84C
 gUnknown_0837D84C: @ 837D84C
@@ -2268,7 +2388,8 @@ gUnknown_0837DC74: @ 837DC74
 
 	.global gUnknown_0837DEDC
 gUnknown_0837DEDC: @ 837DEDC
-	.4byte 0x0837dc7c, 0x0837dd9c
+	.4byte 0x0837dc7c
+	.4byte 0x0837dd9c
 
 	.global gUnknown_0837DEE4
 gUnknown_0837DEE4: @ 837DEE4
@@ -2396,7 +2517,10 @@ gUnknown_08396FC8: @ 8396FC8
 
 	.global gUnknown_083970B8
 gUnknown_083970B8: @ 83970B8
-	.4byte 0x0807cc25, 0x0807ccad, 0x0807ceb9, 0x0807ceb9
+	.4byte 0x0807cc25
+	.4byte 0x0807ccad
+	.4byte 0x0807ceb9
+	.4byte 0x0807ceb9
 
 	.global gUnknown_083970C8
 gUnknown_083970C8: @ 83970C8
@@ -2564,7 +2688,10 @@ gUnknown_0839B1F0: @ 839B1F0
 
 	.global gUnknown_0839B21C
 gUnknown_0839B21C: @ 839B21C
-	.4byte 0x0839b200, 0x0839b207, 0x0839b20e, 0x0839b215
+	.4byte 0x0839b200
+	.4byte 0x0839b207
+	.4byte 0x0839b20e
+	.4byte 0x0839b215
 
 	.global gUnknown_0839B22C
 gUnknown_0839B22C: @ 839B22C
@@ -2592,7 +2719,10 @@ gUnknown_0839B2C0: @ 839B2C0
 
 	.global gUnknown_0839B488
 gUnknown_0839B488: @ 839B488
-	.4byte 0x08084109, 0x0808414d, 0x08084191, 0x080841d5
+	.4byte 0x08084109
+	.4byte 0x0808414d
+	.4byte 0x08084191
+	.4byte 0x080841d5
 
 	.global gUnknown_0839B498
 gUnknown_0839B498: @ 839B498
@@ -2709,11 +2839,17 @@ gUnknown_0839F250: @ 839F250
 
 	.global gUnknown_0839F268
 gUnknown_0839F268: @ 839F268
-	.4byte 0x08085df5, 0x08085e31, 0x08085e6d, 0x08085e95
+	.4byte 0x08085df5
+	.4byte 0x08085e31
+	.4byte 0x08085e6d
+	.4byte 0x08085e95
 
 	.global gUnknown_0839F278
 gUnknown_0839F278: @ 839F278
-	.4byte 0x08085f41, 0x08085fb5, 0x08085fe5, 0x0808600d
+	.4byte 0x08085f41
+	.4byte 0x08085fb5
+	.4byte 0x08085fe5
+	.4byte 0x0808600d
 
 	.global gUnknown_0839F288
 gUnknown_0839F288: @ 839F288
@@ -2753,7 +2889,9 @@ gUnknown_0839F31C: @ 839F31C
 
 	.global gUnknown_0839F330
 gUnknown_0839F330: @ 839F330
-	.4byte 0x08087125, 0x08087139, 0x08087161
+	.4byte 0x08087125
+	.4byte 0x08087139
+	.4byte 0x08087161
 
 	.global gUnknown_0839F33C
 gUnknown_0839F33C: @ 839F33C
@@ -2761,7 +2899,10 @@ gUnknown_0839F33C: @ 839F33C
 
 	.global gUnknown_0839F354
 gUnknown_0839F354: @ 839F354
-	.4byte 0x080874cd, 0x080874fd, 0x08087549, 0x0808759d
+	.4byte 0x080874cd
+	.4byte 0x080874fd
+	.4byte 0x08087549
+	.4byte 0x0808759d
 
 	.global gUnknown_0839F364
 gUnknown_0839F364: @ 839F364
@@ -2769,7 +2910,8 @@ gUnknown_0839F364: @ 839F364
 
 	.global gUnknown_0839F378
 gUnknown_0839F378: @ 839F378
-	.4byte 0x080878f5, 0x08087915
+	.4byte 0x080878f5
+	.4byte 0x08087915
 
 	.global gUnknown_0839F380
 gUnknown_0839F380: @ 839F380
@@ -2777,15 +2919,21 @@ gUnknown_0839F380: @ 839F380
 
 	.global gUnknown_0839F388
 gUnknown_0839F388: @ 839F388
-	.4byte 0x08087aa5, 0x08087ac9
+	.4byte 0x08087aa5
+	.4byte 0x08087ac9
 
 	.global gUnknown_0839F390
 gUnknown_0839F390: @ 839F390
-	.4byte 0x08087bed, 0x08087c15, 0x08087ca5, 0x08087d79
+	.4byte 0x08087bed
+	.4byte 0x08087c15
+	.4byte 0x08087ca5
+	.4byte 0x08087d79
 
 	.global gUnknown_0839F3A0
 gUnknown_0839F3A0: @ 839F3A0
-	.4byte 0x08087e4d, 0x08087ed9, 0x08087fdd
+	.4byte 0x08087e4d
+	.4byte 0x08087ed9
+	.4byte 0x08087fdd
 
 	.global gUnknown_0839F3AC
 gUnknown_0839F3AC: @ 839F3AC
@@ -2805,7 +2953,8 @@ gUnknown_0839F3F8: @ 839F3F8
 
 	.global gUnknown_0839F44C
 gUnknown_0839F44C: @ 839F44C
-	.4byte 0x0839f41c, 0x0839f434
+	.4byte 0x0839f41c
+	.4byte 0x0839f434
 
 	.global gUnknown_0839F454
 gUnknown_0839F454: @ 839F454
@@ -2943,7 +3092,10 @@ gUnknown_083B5584: @ 83B5584
 
 	.global gUnknown_083B5794
 gUnknown_083B5794: @ 83B5794
-	.4byte 0x083b5594, 0x083b5614, 0x083b5694, 0x083b5714
+	.4byte 0x083b5594
+	.4byte 0x083b5614
+	.4byte 0x083b5694
+	.4byte 0x083b5714
 
 	.global gUnknown_083B57A4
 gUnknown_083B57A4: @ 83B57A4
@@ -3035,7 +3187,8 @@ gUnknown_083B5ED8: @ 83B5ED8
 
 	.global gUnknown_083B5EEC
 gUnknown_083B5EEC: @ 83B5EEC
-	.4byte 0x08e8cac0, 0x08e8d4c0
+	.4byte 0x08e8cac0
+	.4byte 0x08e8d4c0
 
 	.global gUnknown_083B5EF4
 gUnknown_083B5EF4: @ 83B5EF4
@@ -3183,7 +3336,9 @@ gUnknown_083BB2F0: @ 83BB2F0
 
 	.global gUnknown_083BBBC8
 gUnknown_083BBBC8: @ 83BBBC8
-	.4byte 0x0809b151, 0x0809b1d9, 0x0809b24d
+	.4byte 0x0809b151
+	.4byte 0x0809b1d9
+	.4byte 0x0809b24d
 
 	.global gUnknown_083BBBD4
 gUnknown_083BBBD4: @ 83BBBD4
@@ -3228,7 +3383,8 @@ gUnknown_083BC62C: @ 83BC62C
 
 	.global gUnknown_083BC660
 gUnknown_083BC660: @ 83BC660
-	.4byte 0x083bc640, 0x083bc650
+	.4byte 0x083bc640
+	.4byte 0x083bc650
 
 	.global gUnknown_083BC668
 gUnknown_083BC668: @ 83BC668
@@ -3302,15 +3458,22 @@ gUnknown_083C157E: @ 83C157E
 
 	.global gUnknown_083C1580
 gUnknown_083C1580: @ 83C1580
-	.4byte 0x0809fc0d, 0x0809feb9
+	.4byte 0x0809fc0d
+	.4byte 0x0809feb9
 
 	.global gUnknown_083C1588
 gUnknown_083C1588: @ 83C1588
-	.4byte 0x0809f63d, 0x0809f651, 0x0809f665, 0x0809f665
+	.4byte 0x0809f63d
+	.4byte 0x0809f651
+	.4byte 0x0809f665
+	.4byte 0x0809f665
 
 	.global gUnknown_083C1598
 gUnknown_083C1598: @ 83C1598
-	.4byte 0x0809fe6d, 0x080a0091, 0x080a015d, 0x080a015d
+	.4byte 0x0809fe6d
+	.4byte 0x080a0091
+	.4byte 0x080a015d
+	.4byte 0x080a015d
 
 	.global gUnknown_083C15A8
 gUnknown_083C15A8: @ 83C15A8
@@ -3363,11 +3526,13 @@ gUnknown_083C16BC: @ 83C16BC
 
 	.global gUnknown_083C16F4
 gUnknown_083C16F4: @ 83C16F4
-	.4byte 0x080a5e61, 0x080a5e91
+	.4byte 0x080a5e61
+	.4byte 0x080a5e91
 
 	.global gUnknown_083C16FC
 gUnknown_083C16FC: @ 83C16FC
-	.4byte 0x080a65ad, 0x080a6619
+	.4byte 0x080a65ad
+	.4byte 0x080a6619
 
 	.global gUnknown_083C1704
 gUnknown_083C1704: @ 83C1704
@@ -3530,7 +3695,10 @@ gUnknown_083C93B4: @ 83C93B4
 
 	.global gUnknown_083C93F0
 gUnknown_083C93F0: @ 83C93F0
-	.4byte 0x083c93c8, 0x083c93d2, 0x083c93dc, 0x083c93e6
+	.4byte 0x083c93c8
+	.4byte 0x083c93d2
+	.4byte 0x083c93dc
+	.4byte 0x083c93e6
 
 	.global gUnknown_083C9400
 gUnknown_083C9400: @ 83C9400
@@ -3543,522 +3711,564 @@ gUnknown_083C9408: @ 83C9408
 
 	.global gUnknown_083CA308
 gUnknown_083CA308: @ 83CA308
-.incbin "baserom.gba", 0x003ca308, 0x8
+	.incbin "baserom.gba", 0x003ca308, 0x8
 
 	.global gUnknown_083CA310
 gUnknown_083CA310: @ 83CA310
-.incbin "baserom.gba", 0x003ca310, 0x8
+	.incbin "baserom.gba", 0x003ca310, 0x8
 
 	.global gUnknown_083CA318
 gUnknown_083CA318: @ 83CA318
-.incbin "baserom.gba", 0x003ca318, 0x18
+	.incbin "baserom.gba", 0x003ca318, 0x18
 
 	.global gUnknown_083CA330
 gUnknown_083CA330: @ 83CA330
-.incbin "baserom.gba", 0x003ca330, 0x8
+	.incbin "baserom.gba", 0x003ca330, 0x8
 
 	.global gUnknown_083CA338
 gUnknown_083CA338: @ 83CA338
-.incbin "baserom.gba", 0x003ca338, 0x4
+	.incbin "baserom.gba", 0x003ca338, 0x4
 
 	.global gUnknown_083CA33C
 gUnknown_083CA33C: @ 83CA33C
-.incbin "baserom.gba", 0x003ca33c, 0x4
+	.incbin "baserom.gba", 0x003ca33c, 0x4
 
 	.global gUnknown_083CA340
 gUnknown_083CA340: @ 83CA340
-.incbin "baserom.gba", 0x003ca340, 0x1
+	.incbin "baserom.gba", 0x003ca340, 0x1
 
 	.global gUnknown_083CA341
 gUnknown_083CA341: @ 83CA341
-.incbin "baserom.gba", 0x003ca341, 0xf
+	.incbin "baserom.gba", 0x003ca341, 0xf
 
 	.global gUnknown_083CA350
 gUnknown_083CA350: @ 83CA350
-.incbin "baserom.gba", 0x003ca350, 0x5c
+	.incbin "baserom.gba", 0x003ca350, 0x5c
 
 	.global gUnknown_083CA3AC
 gUnknown_083CA3AC: @ 83CA3AC
-.incbin "baserom.gba", 0x003ca3ac, 0x18
+	.incbin "baserom.gba", 0x003ca3ac, 0x18
 
 	.global gUnknown_083CA3C4
 gUnknown_083CA3C4: @ 83CA3C4
-.incbin "baserom.gba", 0x003ca3c4, 0x20
+	.incbin "baserom.gba", 0x003ca3c4, 0x20
 
 	.global gUnknown_083CA3E4
 gUnknown_083CA3E4: @ 83CA3E4
-.incbin "baserom.gba", 0x003ca3e4, 0x10
+	.incbin "baserom.gba", 0x003ca3e4, 0x10
 
 	.global gUnknown_083CA3F4
 gUnknown_083CA3F4: @ 83CA3F4
-.incbin "baserom.gba", 0x003ca3f4, 0x70
+	.incbin "baserom.gba", 0x003ca3f4, 0x70
 
 	.global gUnknown_083CA464
 gUnknown_083CA464: @ 83CA464
-.incbin "baserom.gba", 0x003ca464, 0x8
+	.incbin "baserom.gba", 0x003ca464, 0x8
 
 	.global gUnknown_083CA46C
 gUnknown_083CA46C: @ 83CA46C
-.incbin "baserom.gba", 0x003ca46c, 0x8
+	.incbin "baserom.gba", 0x003ca46c, 0x8
 
 	.global gUnknown_083CA474
 gUnknown_083CA474: @ 83CA474
-.incbin "baserom.gba", 0x003ca474, 0x10
+	.incbin "baserom.gba", 0x003ca474, 0x10
 
 	.global gUnknown_083CA484
 gUnknown_083CA484: @ 83CA484
-.incbin "baserom.gba", 0x003ca484, 0x20
+	.incbin "baserom.gba", 0x003ca484, 0x20
 
 	.global gUnknown_083CA4A4
 gUnknown_083CA4A4: @ 83CA4A4
-.incbin "baserom.gba", 0x003ca4a4, 0x18
+	.incbin "baserom.gba", 0x003ca4a4, 0x18
 
 	.global gUnknown_083CA4BC
 gUnknown_083CA4BC: @ 83CA4BC
-.incbin "baserom.gba", 0x003ca4bc, 0x8
+	.incbin "baserom.gba", 0x003ca4bc, 0x8
 
 	.global gUnknown_083CA4C4
 gUnknown_083CA4C4: @ 83CA4C4
-.incbin "baserom.gba", 0x003ca4c4, 0x8
+	.incbin "baserom.gba", 0x003ca4c4, 0x8
 
 	.global gUnknown_083CA4CC
 gUnknown_083CA4CC: @ 83CA4CC
-.incbin "baserom.gba", 0x003ca4cc, 0x8
+	.incbin "baserom.gba", 0x003ca4cc, 0x8
 
 	.global gUnknown_083CA4D4
 gUnknown_083CA4D4: @ 83CA4D4
-.incbin "baserom.gba", 0x003ca4d4, 0x31
-.string "After this move, the user is\nmore easily startled.$"
-.string "Makes a great appeal, but\nallows no more to the end.$"
-.string "Can be repeatedly used\nwithout boring the JUDGE.$"
-.string "Can avoid being startled\nby others once.$"
-.string "Can avoid being startled\nby others.$"
-.string "Can avoid being startled\nby others a little.$"
-.string "After this move, the user is\nless likely to be startled.$"
-.string "Slightly startles the\nPOKéMON in front.$"
-.string "Slightly startles those\nthat have made appeals.$"
-.string "Startles the POKéMON that\nappealed before the user.$"
-.string "Startles all POKéMON that\nhave done their appeals.$"
-.string "Badly startles the\nPOKéMON in front.$"
-.string "Badly startles those that\nhave made appeals.$"
-.string "Startles the POKéMON that\nappealed before the user.$"
-.string "Startles all POKéMON that\nappealed before the user.$"
-.string "Shifts the JUDGE’s\nattention from others.$"
-.string "Startles the POKéMON that\nhas the JUDGE’s attention.$"
-.string "Jams the others, and misses\none turn of appeals.$"
-.string "Startles POKéMON that\nmade a same-type appeal.$"
-.string "Badly startles POKéMON\nthat made COOL appeals.$"
-.string "Badly startles POKéMON\nthat made BEAUTY appeals.$"
-.string "Badly startles POKéMON\nthat made CUTE appeals.$"
-.string "Badly startles POKéMON\nthat made SMART appeals.$"
-.string "Badly startles POKéMON\nthat made TOUGH appeals.$"
-.string "Makes one POKéMON after\nthe user nervous.$"
-.string "Makes all POKéMON after\nthe user nervous.$"
-.string "Worsens the condition of\nthose that made appeals.$"
-.string "Badly startles POKéMON in\ngood condition.$"
-.string "The appeal works great if\nperformed first.$"
-.string "The appeal works great if\nperformed last.$"
-.string "Makes the appeal as good\nas those before it.$"
-.string "Makes the appeal as good\nas the one before it.$"
-.string "The appeal works better\nthe later it is performed.$"
-.string "The appeal’s quality varies\ndepending on its timing.$"
-.string "Works well if it’s the same\ntype as the one before.$"
-.string "Works well if different in\ntype than the one before.$"
-.string "Affected by how well the\nappeal in front goes.$"
-.string "Ups the user’s condition.\nHelps prevent nervousness.$"
-.string "The appeal works well if the\nuser’s condition is good.$"
-.string "The next appeal can be made\nearlier next turn.$"
-.string "The next appeal can be made\nlater next turn.$"
-.string "Makes the next turn’s order\nmore easily scrambled.$"
-.string "Scrambles the order of\nappeals on the next turn.$"
-.string "An appeal that excites the\naudience in any CONTEST.$"
-.string "Badly startles all POKéMON\nthat made good appeals.$"
-.string "The appeal works best the\nmore the crowd is excited.$"
-.string "Temporarily stops the\ncrowd from growing excited.$"
-.align 1
+	.incbin "baserom.gba", 0x003ca4d4, 0x31
+	.string "After this move, the user is\nmore easily startled.$"
+	.string "Makes a great appeal, but\nallows no more to the end.$"
+	.string "Can be repeatedly used\nwithout boring the JUDGE.$"
+	.string "Can avoid being startled\nby others once.$"
+	.string "Can avoid being startled\nby others.$"
+	.string "Can avoid being startled\nby others a little.$"
+	.string "After this move, the user is\nless likely to be startled.$"
+	.string "Slightly startles the\nPOKéMON in front.$"
+	.string "Slightly startles those\nthat have made appeals.$"
+	.string "Startles the POKéMON that\nappealed before the user.$"
+	.string "Startles all POKéMON that\nhave done their appeals.$"
+	.string "Badly startles the\nPOKéMON in front.$"
+	.string "Badly startles those that\nhave made appeals.$"
+	.string "Startles the POKéMON that\nappealed before the user.$"
+	.string "Startles all POKéMON that\nappealed before the user.$"
+	.string "Shifts the JUDGE’s\nattention from others.$"
+	.string "Startles the POKéMON that\nhas the JUDGE’s attention.$"
+	.string "Jams the others, and misses\none turn of appeals.$"
+	.string "Startles POKéMON that\nmade a same-type appeal.$"
+	.string "Badly startles POKéMON\nthat made COOL appeals.$"
+	.string "Badly startles POKéMON\nthat made BEAUTY appeals.$"
+	.string "Badly startles POKéMON\nthat made CUTE appeals.$"
+	.string "Badly startles POKéMON\nthat made SMART appeals.$"
+	.string "Badly startles POKéMON\nthat made TOUGH appeals.$"
+	.string "Makes one POKéMON after\nthe user nervous.$"
+	.string "Makes all POKéMON after\nthe user nervous.$"
+	.string "Worsens the condition of\nthose that made appeals.$"
+	.string "Badly startles POKéMON in\ngood condition.$"
+	.string "The appeal works great if\nperformed first.$"
+	.string "The appeal works great if\nperformed last.$"
+	.string "Makes the appeal as good\nas those before it.$"
+	.string "Makes the appeal as good\nas the one before it.$"
+	.string "The appeal works better\nthe later it is performed.$"
+	.string "The appeal’s quality varies\ndepending on its timing.$"
+	.string "Works well if it’s the same\ntype as the one before.$"
+	.string "Works well if different in\ntype than the one before.$"
+	.string "Affected by how well the\nappeal in front goes.$"
+	.string "Ups the user’s condition.\nHelps prevent nervousness.$"
+	.string "The appeal works well if the\nuser’s condition is good.$"
+	.string "The next appeal can be made\nearlier next turn.$"
+	.string "The next appeal can be made\nlater next turn.$"
+	.string "Makes the next turn’s order\nmore easily scrambled.$"
+	.string "Scrambles the order of\nappeals on the next turn.$"
+	.string "An appeal that excites the\naudience in any CONTEST.$"
+	.string "Badly startles all POKéMON\nthat made good appeals.$"
+	.string "The appeal works best the\nmore the crowd is excited.$"
+	.string "Temporarily stops the\ncrowd from growing excited.$"
+	.align 1
 
 	.global gUnknown_083CADD4
 gUnknown_083CADD4: @ 83CADD4
-.4byte 0x083ca4ec, 0x083ca505, 0x083ca538, 0x083ca56d, 0x083ca59e, 0x083ca5c7, 0x083ca5eb, 0x083ca618
-.4byte 0x083ca651, 0x083ca679, 0x083ca6a9, 0x083ca6dd, 0x083ca710, 0x083ca735, 0x083ca762, 0x083ca796
-.4byte 0x083ca7ca, 0x083ca7f4, 0x083ca829, 0x083ca85a, 0x083ca889, 0x083ca8b8, 0x083ca8e9, 0x083ca918
-.4byte 0x083ca948, 0x083ca978, 0x083ca9a2, 0x083ca9cc, 0x083ca9fe, 0x083caa28, 0x083caa53, 0x083caa7d
-.4byte 0x083caaaa, 0x083caad9, 0x083cab0c, 0x083cab41, 0x083cab75, 0x083cabaa, 0x083cabd9, 0x083cac0e
-.4byte 0x083cac45, 0x083cac74, 0x083caca1, 0x083cacd4, 0x083cad05, 0x083cad39, 0x083cad6c, 0x083cada1
-.string "RAIN DANCE$"
-.string "RAGE$"
-.string "FOCUS ENERGY$"
-.string "HYPNOSIS$"
-.string "SOFTBOILED$"
-.string "HORN ATTACK$"
-.string "SWORDS DANCE$"
-.string "CONVERSION$"
-.string "SUNNY DAY$"
-.string "REST$"
-.string "VICEGRIP$"
-.string "DEFENSE CURL$"
-.string "LOCK-ON$"
-.align 2
-.4byte 0x083CAE94
-.4byte 0x083CAE94
-.4byte 0x083CAE9F
-.4byte 0x083CAEA4
-.4byte 0x083CAEB1
-.4byte 0x083CAEBA
-.4byte 0x083CAEC5
-.4byte 0x083CAED1
-.4byte 0x083CAEDE
-.4byte 0x083CAEE9
-.4byte 0x083CAEF3
-.4byte 0x083CAEF8
-.4byte 0x083CAF01
-.4byte 0x083CAF0E
-.string "COOL$"
-.string "BEAUTY$"
-.string "CUTE$"
-.string "SMART$"
-.string "TOUGH$"
-.align 2
+	.4byte 0x083ca4ec
+	.4byte 0x083ca505
+	.4byte 0x083ca538
+	.4byte 0x083ca56d
+	.4byte 0x083ca59e
+	.4byte 0x083ca5c7
+	.4byte 0x083ca5eb
+	.4byte 0x083ca618
+	.4byte 0x083ca651
+	.4byte 0x083ca679
+	.4byte 0x083ca6a9
+	.4byte 0x083ca6dd
+	.4byte 0x083ca710
+	.4byte 0x083ca735
+	.4byte 0x083ca762
+	.4byte 0x083ca796
+	.4byte 0x083ca7ca
+	.4byte 0x083ca7f4
+	.4byte 0x083ca829
+	.4byte 0x083ca85a
+	.4byte 0x083ca889
+	.4byte 0x083ca8b8
+	.4byte 0x083ca8e9
+	.4byte 0x083ca918
+	.4byte 0x083ca948
+	.4byte 0x083ca978
+	.4byte 0x083ca9a2
+	.4byte 0x083ca9cc
+	.4byte 0x083ca9fe
+	.4byte 0x083caa28
+	.4byte 0x083caa53
+	.4byte 0x083caa7d
+	.4byte 0x083caaaa
+	.4byte 0x083caad9
+	.4byte 0x083cab0c
+	.4byte 0x083cab41
+	.4byte 0x083cab75
+	.4byte 0x083cabaa
+	.4byte 0x083cabd9
+	.4byte 0x083cac0e
+	.4byte 0x083cac45
+	.4byte 0x083cac74
+	.4byte 0x083caca1
+	.4byte 0x083cacd4
+	.4byte 0x083cad05
+	.4byte 0x083cad39
+	.4byte 0x083cad6c
+	.4byte 0x083cada1
+	.string "RAIN DANCE$"
+	.string "RAGE$"
+	.string "FOCUS ENERGY$"
+	.string "HYPNOSIS$"
+	.string "SOFTBOILED$"
+	.string "HORN ATTACK$"
+	.string "SWORDS DANCE$"
+	.string "CONVERSION$"
+	.string "SUNNY DAY$"
+	.string "REST$"
+	.string "VICEGRIP$"
+	.string "DEFENSE CURL$"
+	.string "LOCK-ON$"
+	.align 2
+	.4byte 0x083CAE94
+	.4byte 0x083CAE94
+	.4byte 0x083CAE9F
+	.4byte 0x083CAEA4
+	.4byte 0x083CAEB1
+	.4byte 0x083CAEBA
+	.4byte 0x083CAEC5
+	.4byte 0x083CAED1
+	.4byte 0x083CAEDE
+	.4byte 0x083CAEE9
+	.4byte 0x083CAEF3
+	.4byte 0x083CAEF8
+	.4byte 0x083CAF01
+	.4byte 0x083CAF0E
+	.string "COOL$"
+	.string "BEAUTY$"
+	.string "CUTE$"
+	.string "SMART$"
+	.string "TOUGH$"
+	.align 2
 
 	.global gUnknown_083CAF70
 gUnknown_083CAF70: @ 83CAF70
-.incbin "baserom.gba", 0x003caf70, 0x14
+	.incbin "baserom.gba", 0x003caf70, 0x14
 
 	.global gUnknown_083CAF84
 gUnknown_083CAF84: @ 83CAF84
-.string "Appeal no. {NAME_END}!\nWhich move will be played?$"
+	.string "Appeal no. {NAME_END}!\nWhich move will be played?$"
 
 	.global gUnknown_083CAFAE
 gUnknown_083CAFAE: @ 83CAFAE
-.string "Appeal no. {NAME_END}!\nBut it can’t participate!$"
+	.string "Appeal no. {NAME_END}!\nBut it can’t participate!$"
 
 	.global gUnknown_083CAFD7
 gUnknown_083CAFD7: @ 83CAFD7
-.string "{STR_VAR_1} appealed with\n{STR_VAR_2}!$"
-.string "The other POKéMON\nmade moves.{PAUSE 60}$"
+	.string "{STR_VAR_1} appealed with\n{STR_VAR_2}!$"
+	.string "The other POKéMON\nmade moves.{PAUSE 60}$"
 
 	.global gUnknown_083CB00D
 gUnknown_083CB00D: @ 83CB00D
-.string "{STR_VAR_1} was watching\nthe others.{PAUSE 60}$"
+	.string "{STR_VAR_1} was watching\nthe others.{PAUSE 60}$"
 
 	.global gUnknown_083CB02C
 gUnknown_083CB02C: @ 83CB02C
-.string "We’re all out of\nAppeal Time!{PAUSE 60}$"
-.string "{STR_VAR_1}’s {STR_VAR_3}\nmove {STR_VAR_2}!{PAUSE 60}$"
-.string "TRICK$"
-.string "SPECIAL$"
-.string "But the appeal was\njammed.$"
-.string "It followed another\nPOKéMON’s lead.$"
-.string "But it messed up.$"
-.string "It went better than\nusual.$"
-.string "The JUDGE looked away\nfor some reason.$"
-.string "It worked hard to build on\npast mistakes.$"
-.string "It can’t make any more\nmoves.$"
-.string "It worked frighteningly\nwell.$"
-.string "It worked as hard as the\nstandout POKéMON.$"
-.string "The JUDGE looked on\nexpectantly.$"
-.string "It worked rather well.$"
-.string "It worked a little better\nthan usual.$"
-.align 2
-.4byte 0x083CB06F
-.4byte 0x083CB08A
-.4byte 0x083CB0AE
-.4byte 0x083CB0C0
-.4byte 0x083CB0C0 @ there's a duplicate pointer for some reason
-.4byte 0x083CB0DB
-.4byte 0x083CB102
-.4byte 0x083CB12C
-.4byte 0x083CB14A
-.4byte 0x083CB168
-.4byte 0x083CB193
-.4byte 0x083CB1B4
-.4byte 0x083CB1CB
-.string "{STR_VAR_1} failed to\nstand out at all...{PAUSE_UNTIL_PRESS}$"
-.string "{STR_VAR_1} didn’t stand\nout very much...{PAUSE_UNTIL_PRESS}$"
-.string "{STR_VAR_1} caught a\nlittle attention.{PAUSE_UNTIL_PRESS}$"
-.string "{STR_VAR_1} attracted a\nlot of attention.{PAUSE_UNTIL_PRESS}$"
-.string "{STR_VAR_1} commanded\ntotal attention.{PAUSE_UNTIL_PRESS}$"
-.string "{STR_VAR_1} hasn’t made\nits appeal.{PAUSE_UNTIL_PRESS}$"
-.align 2
+	.string "We’re all out of\nAppeal Time!{PAUSE 60}$"
+	.string "{STR_VAR_1}’s {STR_VAR_3}\nmove {STR_VAR_2}!{PAUSE 60}$"
+	.string "TRICK$"
+	.string "SPECIAL$"
+	.string "But the appeal was\njammed.$"
+	.string "It followed another\nPOKéMON’s lead.$"
+	.string "But it messed up.$"
+	.string "It went better than\nusual.$"
+	.string "The JUDGE looked away\nfor some reason.$"
+	.string "It worked hard to build on\npast mistakes.$"
+	.string "It can’t make any more\nmoves.$"
+	.string "It worked frighteningly\nwell.$"
+	.string "It worked as hard as the\nstandout POKéMON.$"
+	.string "The JUDGE looked on\nexpectantly.$"
+	.string "It worked rather well.$"
+	.string "It worked a little better\nthan usual.$"
+	.align 2
+	.4byte 0x083CB06F
+	.4byte 0x083CB08A
+	.4byte 0x083CB0AE
+	.4byte 0x083CB0C0
+	.4byte 0x083CB0C0
+	.4byte 0x083CB0DB
+	.4byte 0x083CB102
+	.4byte 0x083CB12C
+	.4byte 0x083CB14A
+	.4byte 0x083CB168
+	.4byte 0x083CB193
+	.4byte 0x083CB1B4
+	.4byte 0x083CB1CB
+	.string "{STR_VAR_1} failed to\nstand out at all...{PAUSE_UNTIL_PRESS}$"
+	.string "{STR_VAR_1} didn’t stand\nout very much...{PAUSE_UNTIL_PRESS}$"
+	.string "{STR_VAR_1} caught a\nlittle attention.{PAUSE_UNTIL_PRESS}$"
+	.string "{STR_VAR_1} attracted a\nlot of attention.{PAUSE_UNTIL_PRESS}$"
+	.string "{STR_VAR_1} commanded\ntotal attention.{PAUSE_UNTIL_PRESS}$"
+	.string "{STR_VAR_1} hasn’t made\nits appeal.{PAUSE_UNTIL_PRESS}$"
+	.align 2
 
 	.global gUnknown_083CB2F0
 gUnknown_083CB2F0: @ 83CB2F0
-.4byte 0x083CB228
-.4byte 0x083CB24B
-.4byte 0x083CB26E
-.4byte 0x083CB28E
-.4byte 0x083CB2B1
-.4byte 0x083CB2D1
-.string "Anticipation swelled for\n{STR_VAR_1}’s appeal next.$"
-.string "The JUDGE was very\nsatisfied.$"
-.string "$"
-.string "The JUDGE ’s views on\n{STR_VAR_1} held firm.$"
-.string "{STR_VAR_1}’s {STR_VAR_3}\nchanged perceptions.$"
-.string "{STR_VAR_1}’s appeal\neffect wore off.$"
-.string "The special appeal’s\neffect wore off.$"
-.string "Everyone’s appeals were\nmade to look the same.$"
-.string "{STR_VAR_2}’s appeal was\ncheapened.$"
-.string "It cheapened the appeal\nof those ahead.$"
-.string "It stole attention away\nfrom {STR_VAR_2}.$"
-.string "It cheapened\n{STR_VAR_2}’s appeal.$"
-.string "It severely cheapened\nother appeals.$"
-.string "Anticipation swelled for\n{STR_VAR_1}’s appeal next.$"
-.string "It cheapened the appeal\nof those ahead.$"
-.string "It cheapened the JUDGE’s\nfavorite appeal.$"
-.string "The appeals of others\nwere cheapened by half.$"
-.string "It stood out to make up\nfor being jammed.$"
-.string "It can’t participate in\nappeals any more.$"
-.string "It touched the JUDGE for\na fantastic appeal.$"
-.string "Anticipation rose for\nupcoming appeals.$"
-.string "It stood out as much as\nspecial appeals.$"
-.string "It stood out as much as\n{STR_VAR_1}.$"
-.string "Jammed appeals were made\neven less noticeable.$"
-.string "Everyone’s appeals were\nmade the same.$"
-.string "Its {STR_VAR_1} is full.\nIt worsened its appeal.$"
-.align 2
-.4byte 0x083cb352
-.4byte 0x083cb376
-.4byte 0x083cb351
-.4byte 0x083cb393
-.4byte 0x083cb3b0
-.4byte 0x083cb3d6
-.4byte 0x083cb405
-.4byte 0x083cb420
-.4byte 0x083cb448
-.4byte 0x083cb469
-.4byte 0x083cb483
-.4byte 0x083cb4a8
-.4byte 0x083cb4d3
-.4byte 0x083cb4fb
-.4byte 0x083cb525
-.4byte 0x083cb553
-.4byte 0x083cb57d
-.4byte 0x083cb5a7
-.4byte 0x083cb5d4
-.4byte 0x083cb5fc
-.4byte 0x083cb625
-.4byte 0x083cb351
-.4byte 0x083cb351
-.4byte 0x083cb351
-.4byte 0x083cb641
-.4byte 0x083cb670
-.string "It became more conscious\nof the other POKéMON.{PAUSE 60}$"
-.string "{STR_VAR_1} can’t make an\nappeal after this.{PAUSE 60}$"
-.string "It settled down just a\nlittle bit.{PAUSE 60}$"
-.string "It became oblivious to\nthe other POKéMON.{PAUSE 60}$"
-.string "It became less aware of\nthe other POKéMON.{PAUSE 60}$"
-.string "It stopped caring about\nother POKéMON much.{PAUSE 60}$"
-.string "It tried to startle the\nother POKéMON.{PAUSE 60}$"
-.string "It tried to dazzle the\nothers.{PAUSE 60}$"
-.string "The JUDGE looked away\nfrom {STR_VAR_1}.{PAUSE 60}$"
-.string "It tried to unnerve the\nnext POKéMON.{PAUSE 60}$"
-.string "{STR_VAR_1} became\nnervous.{PAUSE 60}$"
-.string "The appeal tried to\nunnerve waiting POKéMON.{PAUSE 60}$"
-.string "It taunted POKéMON\ndoing well.{PAUSE 60}$"
-.string "{STR_VAR_1} regained its\nform.{PAUSE 60}$"
-.string "It tried to jam POKéMON\ndoing well.{PAUSE 60}$"
-.string "The standout {STR_VAR_1}\nhustled even more.{PAUSE 60}$"
-.string "The largely unnoticed\n{STR_VAR_1} worked hard.{PAUSE 60}$"
-.string "It worked as much as\nPOKéMON before it.{PAUSE 60}$"
-.string "{STR_VAR_1}’s appeal did\nnot go well.{PAUSE 60}$"
-.string "It worked as much as the\npreceding POKéMON.{PAUSE 60}$"
-.string "{STR_VAR_1}’s appeal did\nnot go well.{PAUSE 60}$"
-.string "{STR_VAR_1}’s appeal\ncouldn’t be shown well.{PAUSE 60}$"
-.string "{STR_VAR_1}’s appeal\nwent slightly well.{PAUSE 60}$"
-.string "{STR_VAR_1}’s appeal\nwent pretty well.{PAUSE 60}$"
-.string "{STR_VAR_1}’s appeal\nwent excellently.{PAUSE 60}$"
-.string "{STR_VAR_1}’s appeal was\na dud.{PAUSE 60}$"
-.string "{STR_VAR_1}’s appeal did\nnot work very well.{PAUSE 60}$"
-.string "{STR_VAR_1}’s appeal\nwent slightly well.{PAUSE 60}$"
-.string "{STR_VAR_1}’s appeal\nwent pretty well.{PAUSE 60}$"
-.string "{STR_VAR_1}’s appeal\nwent very well.{PAUSE 60}$"
-.string "{STR_VAR_1}’s appeal\nwent excellently.{PAUSE 60}$"
-.string "It’s the same type as the\nPOKéMON before - good!{PAUSE 60}$"
-.string "It’s not the same type as\nthe one before - good!{PAUSE 60}$"
-.string "It stood out much more\nthan the POKéMON before.{PAUSE 60}$"
-.string "It didn’t do as well as the\nPOKéMON before.{PAUSE 60}$"
-.string "{STR_VAR_1}’s condition\nrose above usual.{PAUSE 60}$"
-.string "{STR_VAR_1}’s hot status\nmade it a great appeal!{PAUSE 60}$"
-.string "It moved up in line for\nthe next appeal.{PAUSE 60}$"
-.string "It moved back in line once\nfor the next appeal.{PAUSE 60}$"
-.string "It scrambled up the\norder for the next turn.{PAUSE 60}$"
+	.4byte 0x083CB228
+	.4byte 0x083CB24B
+	.4byte 0x083CB26E
+	.4byte 0x083CB28E
+	.4byte 0x083CB2B1
+	.4byte 0x083CB2D1
+	.string "Anticipation swelled for\n{STR_VAR_1}’s appeal next.$"
+	.string "The JUDGE was very\nsatisfied.$"
+	.string "$"
+	.string "The JUDGE ’s views on\n{STR_VAR_1} held firm.$"
+	.string "{STR_VAR_1}’s {STR_VAR_3}\nchanged perceptions.$"
+	.string "{STR_VAR_1}’s appeal\neffect wore off.$"
+	.string "The special appeal’s\neffect wore off.$"
+	.string "Everyone’s appeals were\nmade to look the same.$"
+	.string "{STR_VAR_2}’s appeal was\ncheapened.$"
+	.string "It cheapened the appeal\nof those ahead.$"
+	.string "It stole attention away\nfrom {STR_VAR_2}.$"
+	.string "It cheapened\n{STR_VAR_2}’s appeal.$"
+	.string "It severely cheapened\nother appeals.$"
+	.string "Anticipation swelled for\n{STR_VAR_1}’s appeal next.$"
+	.string "It cheapened the appeal\nof those ahead.$"
+	.string "It cheapened the JUDGE’s\nfavorite appeal.$"
+	.string "The appeals of others\nwere cheapened by half.$"
+	.string "It stood out to make up\nfor being jammed.$"
+	.string "It can’t participate in\nappeals any more.$"
+	.string "It touched the JUDGE for\na fantastic appeal.$"
+	.string "Anticipation rose for\nupcoming appeals.$"
+	.string "It stood out as much as\nspecial appeals.$"
+	.string "It stood out as much as\n{STR_VAR_1}.$"
+	.string "Jammed appeals were made\neven less noticeable.$"
+	.string "Everyone’s appeals were\nmade the same.$"
+	.string "Its {STR_VAR_1} is full.\nIt worsened its appeal.$"
+	.align 2
+	.4byte 0x083cb352
+	.4byte 0x083cb376
+	.4byte 0x083cb351
+	.4byte 0x083cb393
+	.4byte 0x083cb3b0
+	.4byte 0x083cb3d6
+	.4byte 0x083cb405
+	.4byte 0x083cb420
+	.4byte 0x083cb448
+	.4byte 0x083cb469
+	.4byte 0x083cb483
+	.4byte 0x083cb4a8
+	.4byte 0x083cb4d3
+	.4byte 0x083cb4fb
+	.4byte 0x083cb525
+	.4byte 0x083cb553
+	.4byte 0x083cb57d
+	.4byte 0x083cb5a7
+	.4byte 0x083cb5d4
+	.4byte 0x083cb5fc
+	.4byte 0x083cb625
+	.4byte 0x083cb351
+	.4byte 0x083cb351
+	.4byte 0x083cb351
+	.4byte 0x083cb641
+	.4byte 0x083cb670
+	.string "It became more conscious\nof the other POKéMON.{PAUSE 60}$"
+	.string "{STR_VAR_1} can’t make an\nappeal after this.{PAUSE 60}$"
+	.string "It settled down just a\nlittle bit.{PAUSE 60}$"
+	.string "It became oblivious to\nthe other POKéMON.{PAUSE 60}$"
+	.string "It became less aware of\nthe other POKéMON.{PAUSE 60}$"
+	.string "It stopped caring about\nother POKéMON much.{PAUSE 60}$"
+	.string "It tried to startle the\nother POKéMON.{PAUSE 60}$"
+	.string "It tried to dazzle the\nothers.{PAUSE 60}$"
+	.string "The JUDGE looked away\nfrom {STR_VAR_1}.{PAUSE 60}$"
+	.string "It tried to unnerve the\nnext POKéMON.{PAUSE 60}$"
+	.string "{STR_VAR_1} became\nnervous.{PAUSE 60}$"
+	.string "The appeal tried to\nunnerve waiting POKéMON.{PAUSE 60}$"
+	.string "It taunted POKéMON\ndoing well.{PAUSE 60}$"
+	.string "{STR_VAR_1} regained its\nform.{PAUSE 60}$"
+	.string "It tried to jam POKéMON\ndoing well.{PAUSE 60}$"
+	.string "The standout {STR_VAR_1}\nhustled even more.{PAUSE 60}$"
+	.string "The largely unnoticed\n{STR_VAR_1} worked hard.{PAUSE 60}$"
+	.string "It worked as much as\nPOKéMON before it.{PAUSE 60}$"
+	.string "{STR_VAR_1}’s appeal did\nnot go well.{PAUSE 60}$"
+	.string "It worked as much as the\npreceding POKéMON.{PAUSE 60}$"
+	.string "{STR_VAR_1}’s appeal did\nnot go well.{PAUSE 60}$"
+	.string "{STR_VAR_1}’s appeal\ncouldn’t be shown well.{PAUSE 60}$"
+	.string "{STR_VAR_1}’s appeal\nwent slightly well.{PAUSE 60}$"
+	.string "{STR_VAR_1}’s appeal\nwent pretty well.{PAUSE 60}$"
+	.string "{STR_VAR_1}’s appeal\nwent excellently.{PAUSE 60}$"
+	.string "{STR_VAR_1}’s appeal was\na dud.{PAUSE 60}$"
+	.string "{STR_VAR_1}’s appeal did\nnot work very well.{PAUSE 60}$"
+	.string "{STR_VAR_1}’s appeal\nwent slightly well.{PAUSE 60}$"
+	.string "{STR_VAR_1}’s appeal\nwent pretty well.{PAUSE 60}$"
+	.string "{STR_VAR_1}’s appeal\nwent very well.{PAUSE 60}$"
+	.string "{STR_VAR_1}’s appeal\nwent excellently.{PAUSE 60}$"
+	.string "It’s the same type as the\nPOKéMON before - good!{PAUSE 60}$"
+	.string "It’s not the same type as\nthe one before - good!{PAUSE 60}$"
+	.string "It stood out much more\nthan the POKéMON before.{PAUSE 60}$"
+	.string "It didn’t do as well as the\nPOKéMON before.{PAUSE 60}$"
+	.string "{STR_VAR_1}’s condition\nrose above usual.{PAUSE 60}$"
+	.string "{STR_VAR_1}’s hot status\nmade it a great appeal!{PAUSE 60}$"
+	.string "It moved up in line for\nthe next appeal.{PAUSE 60}$"
+	.string "It moved back in line once\nfor the next appeal.{PAUSE 60}$"
+	.string "It scrambled up the\norder for the next turn.{PAUSE 60}$"
 
 	.global gUnknown_083CBD52
 gUnknown_083CBD52: @ 83CBD52
-.string "The JUDGE looked at\n{STR_VAR_1} expectantly.{PAUSE 60}$"
+	.string "The JUDGE looked at\n{STR_VAR_1} expectantly.{PAUSE 60}$"
 
 	.global gUnknown_083CBD79
 gUnknown_083CBD79: @ 83CBD79
-.string "The appeal combo went\nover well.{PAUSE 60}$"
+	.string "The appeal combo went\nover well.{PAUSE 60}$"
 
 	.global gUnknown_083CBD9D
 gUnknown_083CBD9D: @ 83CBD9D
-.string "The appeal combo went\nover very well.{PAUSE 60}$"
+	.string "The appeal combo went\nover very well.{PAUSE 60}$"
 
 	.global gUnknown_083CBDC6
 gUnknown_083CBDC6: @ 83CBDC6
-.string "The appeal combo went\nover excellently.{PAUSE 60}$"
-.string "{STR_VAR_1} managed to\navert its gaze.{PAUSE 60}$"
-.string "{STR_VAR_1} managed to\navoid seeing it.{PAUSE 60}$"
-.string "{STR_VAR_1} isn’t fazed\nby that sort of thing.{PAUSE 60}$"
-.string "{STR_VAR_1} became a\nlittle distracted.{PAUSE 60}$"
-.string "It tried to startle the\nother POKéMON.{PAUSE 60}$"
-.string "{STR_VAR_1} looked down\nout of distraction.{PAUSE 60}$"
-.string "{STR_VAR_1} turned back\nout of distraction.{PAUSE 60}$"
-.string "{STR_VAR_1} couldn’t help\nuttering a cry.{PAUSE 60}$"
-.string "{STR_VAR_1} couldn’t help\nleaping up.{PAUSE 60}$"
-.string "{STR_VAR_1} tripped over\nout of distraction.{PAUSE 60}$"
+	.string "The appeal combo went\nover excellently.{PAUSE 60}$"
+	.string "{STR_VAR_1} managed to\navert its gaze.{PAUSE 60}$"
+	.string "{STR_VAR_1} managed to\navoid seeing it.{PAUSE 60}$"
+	.string "{STR_VAR_1} isn’t fazed\nby that sort of thing.{PAUSE 60}$"
+	.string "{STR_VAR_1} became a\nlittle distracted.{PAUSE 60}$"
+	.string "It tried to startle the\nother POKéMON.{PAUSE 60}$"
+	.string "{STR_VAR_1} looked down\nout of distraction.{PAUSE 60}$"
+	.string "{STR_VAR_1} turned back\nout of distraction.{PAUSE 60}$"
+	.string "{STR_VAR_1} couldn’t help\nuttering a cry.{PAUSE 60}$"
+	.string "{STR_VAR_1} couldn’t help\nleaping up.{PAUSE 60}$"
+	.string "{STR_VAR_1} tripped over\nout of distraction.{PAUSE 60}$"
 
 	.global gUnknown_083CBF60
 gUnknown_083CBF60: @ 83CBF60
-.string "{STR_VAR_1} was too\nnervous to move.{PAUSE 60}$"
-.string "But it messed up.{PAUSE 60}$"
-.string "But it failed to make\nthe target nervous.{PAUSE 60}$"
-.string "But it failed to make\nanyone nervous.{PAUSE 60}$"
-.string "But it was ignored...{PAUSE 60}$"
-.string "But it couldn’t improve\nits condition...{PAUSE 60}$"
-.string "Its bad condition\nresulted in a weak appeal.{PAUSE 60}$"
-.string "{STR_VAR_1} was\nunaffected.{PAUSE 60}$"
+	.string "{STR_VAR_1} was too\nnervous to move.{PAUSE 60}$"
+	.string "But it messed up.{PAUSE 60}$"
+	.string "But it failed to make\nthe target nervous.{PAUSE 60}$"
+	.string "But it failed to make\nanyone nervous.{PAUSE 60}$"
+	.string "But it was ignored...{PAUSE 60}$"
+	.string "But it couldn’t improve\nits condition...{PAUSE 60}$"
+	.string "Its bad condition\nresulted in a weak appeal.{PAUSE 60}$"
+	.string "{STR_VAR_1} was\nunaffected.{PAUSE 60}$"
 
 	.global gUnknown_083CC075
 gUnknown_083CC075: @ 83CC075
-.string "{STR_VAR_1} disappointed\nby repeating an appeal.{PAUSE 60}$"
+	.string "{STR_VAR_1} disappointed\nby repeating an appeal.{PAUSE 60}$"
 
 	.global gUnknown_083CC0A0
 gUnknown_083CC0A0: @ 83CC0A0
-.string "{STR_VAR_1}’s {STR_VAR_3}\nwent over great.{PAUSE 60}$"
+	.string "{STR_VAR_1}’s {STR_VAR_3}\nwent over great.{PAUSE 60}$"
 
 	.global gUnknown_083CC0BC
 gUnknown_083CC0BC: @ 83CC0BC
-.string "{STR_VAR_1}’s {STR_VAR_3}\ndidn’t go over well here...{PAUSE 60}$"
+	.string "{STR_VAR_1}’s {STR_VAR_3}\ndidn’t go over well here...{PAUSE 60}$"
 
 	.global gUnknown_083CC0E3
 gUnknown_083CC0E3: @ 83CC0E3
-.string "{STR_VAR_1}’s {STR_VAR_3}\ngot the crowd going.{PAUSE 60}$"
+	.string "{STR_VAR_1}’s {STR_VAR_3}\ngot the crowd going.{PAUSE 60}$"
 
 	.global gUnknown_083CC103
 gUnknown_083CC103: @ 83CC103
-.string "{STR_VAR_1} can’t appeal\nnext turn...{PAUSE 60}$"
-.string "It attracted the crowd’s\nattention.{PAUSE 60}$"
+	.string "{STR_VAR_1} can’t appeal\nnext turn...{PAUSE 60}$"
+	.string "It attracted the crowd’s\nattention.{PAUSE 60}$"
 
 	.global gUnknown_083CC14A
 gUnknown_083CC14A: @ 83CC14A
-.string "The crowd continues to\nwatch {STR_VAR_3}.{PAUSE 60}$"
+	.string "The crowd continues to\nwatch {STR_VAR_3}.{PAUSE 60}$"
 
 	.global gUnknown_083CC16E
 gUnknown_083CC16E: @ 83CC16E
-.string "{STR_VAR_1}’s\n{STR_VAR_2} is ignored.{PAUSE 60}$"
-.align 2
+	.string "{STR_VAR_1}’s\n{STR_VAR_2} is ignored.{PAUSE 60}$"
+	.align 2
 
 	.global gUnknown_083CC188
 gUnknown_083CC188: @ 83CC188
-.incbin "baserom.gba", 0x003cc188, 0xf8
+	.incbin "baserom.gba", 0x003cc188, 0xf8
 
 	.global gUnknown_083CC280
 gUnknown_083CC280: @ 83CC280
-.string "shyness$"
+	.string "shyness$"
 
 	.global gUnknown_083CC288
 gUnknown_083CC288: @ 83CC288
-.string "anxiety$"
+	.string "anxiety$"
 
 	.global gUnknown_083CC290
 gUnknown_083CC290: @ 83CC290
-.string "laziness$"
+	.string "laziness$"
 
 	.global gUnknown_083CC299
 gUnknown_083CC299: @ 83CC299
-.string "hesitancy$"
+	.string "hesitancy$"
 
 	.global gUnknown_083CC2A3
 gUnknown_083CC2A3: @ 83CC2A3
-.string "fear$"
-.string "coolness$"
-.string "beauty$"
-.string "cuteness$"
-.string "smartness$"
-.string "toughness$"
-.align 2
+	.string "fear$"
+	.string "coolness$"
+	.string "beauty$"
+	.string "cuteness$"
+	.string "smartness$"
+	.string "toughness$"
+	.align 2
 
 	.global gUnknown_083CC2D8
 gUnknown_083CC2D8: @ 83CC2D8
-.incbin "baserom.gba", 0x003cc2d8, 0x14
+	.incbin "baserom.gba", 0x003cc2d8, 0x14
 
 	.global gUnknown_083CC2EC
 gUnknown_083CC2EC: @ 83CC2EC
-.string "TENSION:$"
-.string "COOL Move$"
-.string "BEAUTY Move$"
-.string "CUTE Move$"
-.string "SMART Move$"
-.string "TOUGH Move$"
-.string "???$"
-.align 2
+	.string "TENSION:$"
+	.string "COOL Move$"
+	.string "BEAUTY Move$"
+	.string "CUTE Move$"
+	.string "SMART Move$"
+	.string "TOUGH Move$"
+	.string "???$"
+	.align 2
 
 	.global gUnknown_083CC330
 gUnknown_083CC330: @ 83CC330
-.incbin "baserom.gba", 0x003cc330, 0x1d
-.string "{HIGHLIGHT TRANSPARENT}{COLOR MAGENTA} $"
+	.incbin "baserom.gba", 0x003cc330, 0x1d
+	.string "{HIGHLIGHT TRANSPARENT}{COLOR MAGENTA} $"
 
 	.global gUnknown_083CC355
 gUnknown_083CC355: @ 83CC355
-.string "Missed turn$"
+	.string "Missed turn$"
 
 	.global gUnknown_083CC361
 gUnknown_083CC361: @ 83CC361
-.string "Link standby...$"
-.string "{COLOR WHITE2}$"
-.string "The winner is {STR_VAR_1}’s {STR_VAR_2}!\nCongratulations!$"
-.incbin "baserom.gba", 0x003cc39d, 0x3
+	.string "Link standby...$"
+	.string "{COLOR WHITE2}$"
+	.string "The winner is {STR_VAR_1}’s {STR_VAR_2}!\nCongratulations!$"
+	.incbin "baserom.gba", 0x003cc39d, 0x3
 
 	.global gUnknown_083CC3A0
 gUnknown_083CC3A0: @ 83CC3A0
-.string "{COLOR GREEN}{SHADOW RED}$"
+	.string "{COLOR GREEN}{SHADOW RED}$"
 
 	.global gUnknown_083CC3A7
 gUnknown_083CC3A7: @ 83CC3A7
-.string "{COLOR LIGHT_GREY}$"
-.string " "
+	.string "{COLOR LIGHT_GREY}$"
+	.string " "
 
 	.global gUnknown_083CC3AC
 gUnknown_083CC3AC: @ 83CC3AC
-.incbin "baserom.gba", 0x003cc3ac, 0x8
+	.incbin "baserom.gba", 0x003cc3ac, 0x8
 
 	.global gUnknown_083CC3B4
 gUnknown_083CC3B4: @ 83CC3B4
-.incbin "baserom.gba", 0x003cc3b4, 0xa0
+	.incbin "baserom.gba", 0x003cc3b4, 0xa0
 
 	.global gUnknown_083CC454
 gUnknown_083CC454: @ 83CC454
-.incbin "baserom.gba", 0x003cc454, 0x60
+	.incbin "baserom.gba", 0x003cc454, 0x60
 
 	.global gUnknown_083CC4B4
 gUnknown_083CC4B4: @ 83CC4B4
-.incbin "baserom.gba", 0x003cc4b4, 0x20
+	.incbin "baserom.gba", 0x003cc4b4, 0x20
 
 	.global gUnknown_083CC4D4
 gUnknown_083CC4D4: @ 83CC4D4
-.incbin "baserom.gba", 0x003cc4d4, 0x68
+	.incbin "baserom.gba", 0x003cc4d4, 0x68
 
 	.global gUnknown_083CC53C
 gUnknown_083CC53C: @ 83CC53C
-.incbin "baserom.gba", 0x003cc53c, 0x60
+	.incbin "baserom.gba", 0x003cc53c, 0x60
 
 	.global gUnknown_083CC59C
 gUnknown_083CC59C: @ 83CC59C
-.incbin "baserom.gba", 0x003cc59c, 0x6
+	.incbin "baserom.gba", 0x003cc59c, 0x6
 
 	.global gUnknown_083CC5A2
 gUnknown_083CC5A2: @ 83CC5A2
-.incbin "baserom.gba", 0x003cc5a2, 0x2
+	.incbin "baserom.gba", 0x003cc5a2, 0x2
 
 	.global gUnknown_083CC5A4
 gUnknown_083CC5A4: @ 83CC5A4
-.incbin "baserom.gba", 0x003cc5a4, 0x10
+	.incbin "baserom.gba", 0x003cc5a4, 0x10
 
 	.global gUnknown_083CC5B4
 gUnknown_083CC5B4: @ 83CC5B4
-.incbin "baserom.gba", 0x003cc5b4, 0x1c
+	.incbin "baserom.gba", 0x003cc5b4, 0x1c
 
 	.global gUnknown_083CC5D0
 gUnknown_083CC5D0: @ 83CC5D0
@@ -4078,7 +4288,8 @@ gUnknown_083CC6EB: @ 83CC6EB
 
 	.global gUnknown_083CC708
 gUnknown_083CC708: @ 83CC708
-	.4byte 0x080b3bf5, 0x080b3d7d
+	.4byte 0x080b3bf5
+	.4byte 0x080b3d7d
 
 	.global gUnknown_083CC710
 gUnknown_083CC710: @ 83CC710
@@ -4136,11 +4347,15 @@ gUnknown_083CE218: @ 83CE218
 
 	.global gUnknown_083CE240
 gUnknown_083CE240: @ 83CE240
-	.4byte 0x080b6109, 0x080b6149, 0x080b6171, 0x080b6195
+	.4byte 0x080b6109
+	.4byte 0x080b6149
+	.4byte 0x080b6171
+	.4byte 0x080b6195
 
 	.global gUnknown_083CE250
 gUnknown_083CE250: @ 83CE250
-	.4byte 0x080b626d, 0x080b6275
+	.4byte 0x080b626d
+	.4byte 0x080b6275
 
 	.global gUnknown_083CE258
 gUnknown_083CE258: @ 83CE258
@@ -4160,7 +4375,10 @@ gUnknown_083CE274: @ 83CE274
 
 	.global gUnknown_083CE27C
 gUnknown_083CE27C: @ 83CE27C
-	.4byte 0x080b6669, 0x080b6681, 0x080b66ed, 0x080b6759
+	.4byte 0x080b6669
+	.4byte 0x080b6681
+	.4byte 0x080b66ed
+	.4byte 0x080b6759
 
 	.global gUnknown_083CE28C
 gUnknown_083CE28C: @ 83CE28C
@@ -4176,7 +4394,10 @@ gUnknown_083CE2AF: @ 83CE2AF
 
 	.global gUnknown_083CE2B4
 gUnknown_083CE2B4: @ 83CE2B4
-	.4byte 0x080b6b5d, 0x080b6b99, 0x080b6b9d, 0x080b6c09
+	.4byte 0x080b6b5d
+	.4byte 0x080b6b99
+	.4byte 0x080b6b9d
+	.4byte 0x080b6c09
 
 	.global gUnknown_083CE2C4
 gUnknown_083CE2C4: @ 83CE2C4
@@ -4196,7 +4417,10 @@ gUnknown_083CE2D8: @ 83CE2D8
 
 	.global gUnknown_083CE2E0
 gUnknown_083CE2E0: @ 83CE2E0
-	.4byte 0x080b6e65, 0x080b6e69, 0x080b6ebd, 0x080b6efd
+	.4byte 0x080b6e65
+	.4byte 0x080b6e69
+	.4byte 0x080b6ebd
+	.4byte 0x080b6efd
 
 	.global gUnknown_083CE2F0
 gUnknown_083CE2F0: @ 83CE2F0
@@ -4216,11 +4440,15 @@ gUnknown_083CE328: @ 83CE328
 
 	.global gUnknown_083CE358
 gUnknown_083CE358: @ 83CE358
-	.4byte 0x080b78f5, 0x080b78f5, 0x080b78f9, 0x080b78f9
+	.4byte 0x080b78f5
+	.4byte 0x080b78f5
+	.4byte 0x080b78f9
+	.4byte 0x080b78f9
 
 	.global gUnknown_083CE368
 gUnknown_083CE368: @ 83CE368
-	.4byte 0x080b7921, 0x080b7925
+	.4byte 0x080b7921
+	.4byte 0x080b7925
 
 	.global gUnknown_083CE370
 gUnknown_083CE370: @ 83CE370
@@ -4228,7 +4456,10 @@ gUnknown_083CE370: @ 83CE370
 
 	.global gUnknown_083CE398
 gUnknown_083CE398: @ 83CE398
-	.4byte 0x083ce374, 0x083ce380, 0x083ce38c, 0x083ce38c
+	.4byte 0x083ce374
+	.4byte 0x083ce380
+	.4byte 0x083ce38c
+	.4byte 0x083ce38c
 
 	.global gUnknown_083CE3A8
 gUnknown_083CE3A8: @ 83CE3A8
@@ -4531,11 +4762,15 @@ gUnknown_083D1374: @ 83D1374
 
 	.global gUnknown_083D13D4
 gUnknown_083D13D4: @ 83D13D4
-	.4byte 0x0840f9d3, 0x080bca85, 0x0840e640, 0x080bcbf9
+	.4byte 0x0840f9d3
+	.4byte 0x080bca85
+	.4byte 0x0840e640
+	.4byte 0x080bcbf9
 
 	.global gUnknown_083D13E4
 gUnknown_083D13E4: @ 83D13E4
-	.4byte 0x080bcb91, 0x080bcbc1
+	.4byte 0x080bcb91
+	.4byte 0x080bcbc1
 
 	.global gUnknown_083D13EC
 gUnknown_083D13EC: @ 83D13EC
@@ -4603,11 +4838,14 @@ gUnknown_083D15D0: @ 83D15D0
 
 	.global gUnknown_083D15EC
 gUnknown_083D15EC: @ 83D15EC
-	.4byte 0x081aa344, 0x081aa5f3
+	.4byte 0x081aa344
+	.4byte 0x081aa5f3
 
 	.global gUnknown_083D15F4
 gUnknown_083D15F4: @ 83D15F4
-	.4byte 0x081abc51, 0x081abd94, 0x081abdf2
+	.4byte 0x081abc51
+	.4byte 0x081abd94
+	.4byte 0x081abdf2
 
 	.global gUnknown_083D1600
 gUnknown_083D1600: @ 83D1600
@@ -4815,11 +5053,14 @@ gUnknown_083D613C: @ 83D613C
 
 	.global gUnknown_083D61DC
 gUnknown_083D61DC: @ 83D61DC
-	.4byte 0x083d619c, 0x083d61bc
+	.4byte 0x083d619c
+	.4byte 0x083d61bc
 
 	.global gUnknown_083D61E4
 gUnknown_083D61E4: @ 83D61E4
-	.4byte 0x0808b021, 0x080545e5, 0x0810b96d
+	.4byte 0x0808b021
+	.4byte 0x080545e5
+	.4byte 0x0810b96d
 
 	.global gUnknown_083D61F0
 gUnknown_083D61F0: @ 83D61F0
@@ -5051,11 +5292,16 @@ gUnknown_083DB56C: @ 83DB56C
 
 	.global gUnknown_083DB594
 gUnknown_083DB594: @ 83DB594
-	.4byte 0x080e5169, 0x080e517d, 0x080e51c5, 0x080e5271
+	.4byte 0x080e5169
+	.4byte 0x080e517d
+	.4byte 0x080e51c5
+	.4byte 0x080e5271
 
 	.global gUnknown_083DB5A4
 gUnknown_083DB5A4: @ 83DB5A4
-	.4byte 0x080593ad, 0x080593c5, 0x080593f5
+	.4byte 0x080593ad
+	.4byte 0x080593c5
+	.4byte 0x080593f5
 
 	.global gUnknown_083DB5B0
 gUnknown_083DB5B0: @ 83DB5B0
@@ -5135,11 +5381,17 @@ gUnknown_083DBBFC: @ 83DBBFC
 
 	.global gUnknown_083DBC8C
 gUnknown_083DBC8C: @ 83DBC8C
-	.4byte 0x083dbc3c, 0x083dbc44, 0x083dbc4c, 0x083dbc54
+	.4byte 0x083dbc3c
+	.4byte 0x083dbc44
+	.4byte 0x083dbc4c
+	.4byte 0x083dbc54
 
 	.global gUnknown_083DBC9C
 gUnknown_083DBC9C: @ 83DBC9C
-	.4byte 0x083dbc5c, 0x083dbc64, 0x083dbc6c, 0x083dbc74
+	.4byte 0x083dbc5c
+	.4byte 0x083dbc64
+	.4byte 0x083dbc6c
+	.4byte 0x083dbc74
 
 	.global gUnknown_083DBCAC
 gUnknown_083DBCAC: @ 83DBCAC
@@ -5151,7 +5403,8 @@ gUnknown_083DBCC4: @ 83DBCC4
 
 	.global gUnknown_083DBD10
 gUnknown_083DBD10: @ 83DBD10
-	.4byte 0x083dbd00, 0x083dbd08
+	.4byte 0x083dbd00
+	.4byte 0x083dbd08
 
 	.global gUnknown_083DBD18
 gUnknown_083DBD18: @ 83DBD18
@@ -5339,7 +5592,9 @@ gUnknown_083E31B0: @ 83E31B0
 
 	.global gUnknown_083E31CC
 gUnknown_083E31CC: @ 83E31CC
-	.4byte 0x08410d2b, 0x08410d4d, 0x08410d6d
+	.4byte 0x08410d2b
+	.4byte 0x08410d4d
+	.4byte 0x08410d6d
 
 	.global gUnknown_083E31D8
 gUnknown_083E31D8: @ 83E31D8
@@ -5531,7 +5786,8 @@ gUnknown_083E5274: @ 83E5274
 
 	.global gUnknown_083E52AC
 gUnknown_083E52AC: @ 83E52AC
-	.4byte 0x083e529c, 0x083e52a4
+	.4byte 0x083e529c
+	.4byte 0x083e52a4
 
 	.global gUnknown_083E52B4
 gUnknown_083E52B4: @ 83E52B4
@@ -5738,7 +5994,10 @@ gUnknown_083EC604: @ 83EC604
 
 	.global gUnknown_083EC624
 gUnknown_083EC624: @ 83EC624
-	.4byte 0x0840f9f6, 0x0840fa1c, 0x0840fa43, 0x0840e697
+	.4byte 0x0840f9f6
+	.4byte 0x0840fa1c
+	.4byte 0x0840fa43
+	.4byte 0x0840e697
 
 	.global gUnknown_083EC634
 gUnknown_083EC634: @ 83EC634
@@ -5770,15 +6029,20 @@ gUnknown_083EC954: @ 83EC954
 
 	.global gUnknown_083EC95C
 gUnknown_083EC95C: @ 83EC95C
-	.4byte 0x081000c5, 0x0810065d
+	.4byte 0x081000c5
+	.4byte 0x0810065d
 
 	.global gUnknown_083EC964
 gUnknown_083EC964: @ 83EC964
-	.4byte 0x0810026d, 0x0810065d
+	.4byte 0x0810026d
+	.4byte 0x0810065d
 
 	.global gUnknown_083EC96C
 gUnknown_083EC96C: @ 83EC96C
-	.4byte 0x080ffab1, 0x080ffb09, 0x08100f89, 0x08100fb5
+	.4byte 0x080ffab1
+	.4byte 0x080ffb09
+	.4byte 0x08100f89
+	.4byte 0x08100fb5
 
 	.global gUnknown_083EC97C
 gUnknown_083EC97C: @ 83EC97C
@@ -5790,7 +6054,8 @@ gUnknown_083EC984: @ 83EC984
 
 	.global gUnknown_083EC9CC
 gUnknown_083EC9CC: @ 83EC9CC
-	.4byte 0x0810153d, 0x08100eed
+	.4byte 0x0810153d
+	.4byte 0x08100eed
 
 	.global gUnknown_083EC9D4
 gUnknown_083EC9D4: @ 83EC9D4
@@ -5818,7 +6083,9 @@ gUnknown_083ECAAC: @ 83ECAAC
 
 	.global gUnknown_083ECB20
 gUnknown_083ECB20: @ 83ECB20
-	.4byte 0x08102a9d, 0x08102ad1, 0x08102b81
+	.4byte 0x08102a9d
+	.4byte 0x08102ad1
+	.4byte 0x08102b81
 
 	.global gUnknown_083ECB2C
 gUnknown_083ECB2C: @ 83ECB2C
@@ -5826,11 +6093,15 @@ gUnknown_083ECB2C: @ 83ECB2C
 
 	.global gUnknown_083ECB40
 gUnknown_083ECB40: @ 83ECB40
-	.4byte 0x0810305d, 0x081032c1, 0x081033dd
+	.4byte 0x0810305d
+	.4byte 0x081032c1
+	.4byte 0x081033dd
 
 	.global gUnknown_083ECB4C
 gUnknown_083ECB4C: @ 83ECB4C
-	.4byte 0x081034f5, 0x08103541, 0x0810380d
+	.4byte 0x081034f5
+	.4byte 0x08103541
+	.4byte 0x0810380d
 
 	.global gUnknown_083ECB58
 gUnknown_083ECB58: @ 83ECB58
@@ -5838,27 +6109,39 @@ gUnknown_083ECB58: @ 83ECB58
 
 	.global gUnknown_083ECB64
 gUnknown_083ECB64: @ 83ECB64
-	.4byte 0x08103155, 0x081031b5, 0x081031b5
+	.4byte 0x08103155
+	.4byte 0x081031b5
+	.4byte 0x081031b5
 
 	.global gUnknown_083ECB70
 gUnknown_083ECB70: @ 83ECB70
-	.4byte 0x081032e9, 0x081032e9, 0x0810333d
+	.4byte 0x081032e9
+	.4byte 0x081032e9
+	.4byte 0x0810333d
 
 	.global gUnknown_083ECB7C
 gUnknown_083ECB7C: @ 83ECB7C
-	.4byte 0x0810341d, 0x0810341d, 0x0810347d
+	.4byte 0x0810341d
+	.4byte 0x0810341d
+	.4byte 0x0810347d
 
 	.global gUnknown_083ECB88
 gUnknown_083ECB88: @ 83ECB88
-	.4byte 0x08103565, 0x081035ed, 0x08103669
+	.4byte 0x08103565
+	.4byte 0x081035ed
+	.4byte 0x08103669
 
 	.global gUnknown_083ECB94
 gUnknown_083ECB94: @ 83ECB94
-	.4byte 0x08103831, 0x08103911, 0x08103a79
+	.4byte 0x08103831
+	.4byte 0x08103911
+	.4byte 0x08103a79
 
 	.global gUnknown_083ECBA0
 gUnknown_083ECBA0: @ 83ECBA0
-	.4byte 0x08103c79, 0x08103cad, 0x08103cc9
+	.4byte 0x08103c79
+	.4byte 0x08103cad
+	.4byte 0x08103cc9
 
 	.global gUnknown_083ECBAC
 gUnknown_083ECBAC: @ 83ECBAC
@@ -5866,7 +6149,10 @@ gUnknown_083ECBAC: @ 83ECBAC
 
 	.global gUnknown_083ECBB4
 gUnknown_083ECBB4: @ 83ECBB4
-	.4byte 0x08104119, 0x0810411d, 0x08104145, 0x081041ad
+	.4byte 0x08104119
+	.4byte 0x0810411d
+	.4byte 0x08104145
+	.4byte 0x081041ad
 
 	.global gUnknown_083ECBC4
 gUnknown_083ECBC4: @ 83ECBC4
@@ -6146,7 +6432,9 @@ gUnknown_083EDD3B: @ 83EDD3B
 
 	.global gUnknown_083EDDA0
 gUnknown_083EDDA0: @ 83EDDA0
-	.4byte 0x083edd3e, 0x083edd5e, 0x083edd7e
+	.4byte 0x083edd3e
+	.4byte 0x083edd5e
+	.4byte 0x083edd7e
 
 	.global gUnknown_083EDDAC
 gUnknown_083EDDAC: @ 83EDDAC
@@ -6154,7 +6442,10 @@ gUnknown_083EDDAC: @ 83EDDAC
 
 	.global gUnknown_083EDE10
 gUnknown_083EDE10: @ 83EDE10
-	.4byte 0x083eddb0, 0x083eddd0, 0x083eddf0, 0x08e97788
+	.4byte 0x083eddb0
+	.4byte 0x083eddd0
+	.4byte 0x083eddf0
+	.4byte 0x08e97788
 
 	.global gUnknown_083EDE20
 gUnknown_083EDE20: @ 83EDE20
@@ -6254,7 +6545,10 @@ gUnknown_083F62BC: @ 83F62BC
 
 	.global gUnknown_083F62D8
 gUnknown_083F62D8: @ 83F62D8
-	.4byte 0x0840fd34, 0x0840fd3c, 0x0840fd43, 0x0840fd4a
+	.4byte 0x0840fd34
+	.4byte 0x0840fd3c
+	.4byte 0x0840fd43
+	.4byte 0x0840fd4a
 
 	.global gUnknown_083F62E8
 gUnknown_083F62E8: @ 83F62E8
@@ -6298,7 +6592,8 @@ gUnknown_083F76E4: @ 83F76E4
 
 	.global gUnknown_083F778C
 gUnknown_083F778C: @ 83F778C
-	.4byte 0x083f775c, 0x083f7774
+	.4byte 0x083f775c
+	.4byte 0x083f7774
 
 	.global gUnknown_083F7794
 gUnknown_083F7794: @ 83F7794
@@ -6358,7 +6653,10 @@ gUnknown_083F7E28: @ 83F7E28
 
 	.global gUnknown_083F7EA8
 gUnknown_083F7EA8: @ 83F7EA8
-	.4byte 0x080a5b41, 0x080545e5, 0x0802e425, 0x080545e5
+	.4byte 0x080a5b41
+	.4byte 0x080545e5
+	.4byte 0x0802e425
+	.4byte 0x080545e5
 
 	.global gUnknown_083F7EB8
 gUnknown_083F7EB8: @ 83F7EB8
@@ -6582,11 +6880,13 @@ gUnknown_083F8E9C: @ 83F8E9C
 
 	.global gUnknown_083F8EB4
 gUnknown_083F8EB4: @ 83F8EB4
-	.4byte 0x0811755d, 0x081175c1
+	.4byte 0x0811755d
+	.4byte 0x081175c1
 
 	.global gUnknown_083F8EBC
 gUnknown_083F8EBC: @ 83F8EBC
-	.4byte 0x0811577d, 0x081157ad
+	.4byte 0x0811577d
+	.4byte 0x081157ad
 
 	.global gUnknown_083F8EC4
 gUnknown_083F8EC4: @ 83F8EC4
@@ -6814,19 +7114,26 @@ gUnknown_083FD750: @ 83FD750
 
 	.global gUnknown_083FD794
 gUnknown_083FD794: @ 83FD794
-	.4byte 0x0811ab89, 0x0811abd9, 0x0811ac0d, 0x0811ac35
+	.4byte 0x0811ab89
+	.4byte 0x0811abd9
+	.4byte 0x0811ac0d
+	.4byte 0x0811ac35
 
 	.global gUnknown_083FD7A4
 gUnknown_083FD7A4: @ 83FD7A4
-	.4byte 0x0811aced, 0x0811ad1d, 0x0811ad81
+	.4byte 0x0811aced
+	.4byte 0x0811ad1d
+	.4byte 0x0811ad81
 
 	.global gUnknown_083FD7B0
 gUnknown_083FD7B0: @ 83FD7B0
-	.4byte 0x0811ade5, 0x0811ae71
+	.4byte 0x0811ade5
+	.4byte 0x0811ae71
 
 	.global gUnknown_083FD7B8
 gUnknown_083FD7B8: @ 83FD7B8
-	.4byte 0x0811af7d, 0x0811b001
+	.4byte 0x0811af7d
+	.4byte 0x0811b001
 
 	.global gUnknown_083FD7C0
 gUnknown_083FD7C0: @ 83FD7C0
@@ -6834,7 +7141,9 @@ gUnknown_083FD7C0: @ 83FD7C0
 
 	.global gUnknown_083FD7D8
 gUnknown_083FD7D8: @ 83FD7D8
-	.4byte 0x0811b5b1, 0x0811b5fd, 0x0811b689
+	.4byte 0x0811b5b1
+	.4byte 0x0811b5fd
+	.4byte 0x0811b689
 
 	.global gUnknown_083FD7E4
 gUnknown_083FD7E4: @ 83FD7E4
@@ -6854,11 +7163,14 @@ gUnknown_083FD7F8: @ 83FD7F8
 
 	.global gUnknown_083FD814
 gUnknown_083FD814: @ 83FD814
-	.4byte 0x0811bcf5, 0x0811bd61
+	.4byte 0x0811bcf5
+	.4byte 0x0811bd61
 
 	.global gUnknown_083FD81C
 gUnknown_083FD81C: @ 83FD81C
-	.4byte 0x0811bed9, 0x0811bf2d, 0x0811bfc5
+	.4byte 0x0811bed9
+	.4byte 0x0811bf2d
+	.4byte 0x0811bfc5
 
 	.global gUnknown_083FD828
 gUnknown_083FD828: @ 83FD828
@@ -6890,7 +7202,9 @@ gUnknown_083FD8A0: @ 83FD8A0
 
 	.global gUnknown_083FD8A4
 gUnknown_083FD8A4: @ 83FD8A4
-	.4byte 0x0811ca95, 0x0811cb21, 0x0811cbe9
+	.4byte 0x0811ca95
+	.4byte 0x0811cb21
+	.4byte 0x0811cbe9
 
 	.global gUnknown_083FD8B0
 gUnknown_083FD8B0: @ 83FD8B0
@@ -6902,7 +7216,9 @@ gUnknown_083FD8C4: @ 83FD8C4
 
 	.global gUnknown_083FD8D4
 gUnknown_083FD8D4: @ 83FD8D4
-	.4byte 0x0811d0f1, 0x0811d145, 0x0811d19d
+	.4byte 0x0811d0f1
+	.4byte 0x0811d145
+	.4byte 0x0811d19d
 
 	.global gUnknown_083FD8E0
 gUnknown_083FD8E0: @ 83FD8E0
@@ -7840,7 +8156,8 @@ gUnknown_08401D96: @ 8401D96
 
 	.global gUnknown_08401D9C
 gUnknown_08401D9C: @ 8401D9C
-	.4byte 0x08123eb9, 0x08123f45
+	.4byte 0x08123eb9
+	.4byte 0x08123f45
 
 	.global gUnknown_08401DA4
 gUnknown_08401DA4: @ 8401DA4
@@ -7872,11 +8189,14 @@ gUnknown_08401E36: @ 8401E36
 
 	.global gUnknown_08401E40
 gUnknown_08401E40: @ 8401E40
-	.4byte 0x081275a1, 0x081275c5
+	.4byte 0x081275a1
+	.4byte 0x081275c5
 
 	.global gUnknown_08401E48
 gUnknown_08401E48: @ 8401E48
-	.4byte 0x08127da1, 0x08127dd1, 0x08127e31
+	.4byte 0x08127da1
+	.4byte 0x08127dd1
+	.4byte 0x08127e31
 
 	.global gUnknown_08401E54
 gUnknown_08401E54: @ 8401E54
@@ -8096,7 +8416,10 @@ gUnknown_084061A4: @ 84061A4
 
 	.global gUnknown_08406288
 gUnknown_08406288: @ 8406288
-	.4byte 0x0840fdb7, 0x0840fda0, 0x0840fdd3, 0x0840e697
+	.4byte 0x0840fdb7
+	.4byte 0x0840fda0
+	.4byte 0x0840fdd3
+	.4byte 0x0840e697
 
 	.global gUnknown_08406298
 gUnknown_08406298: @ 8406298
@@ -8116,11 +8439,13 @@ gUnknown_084062C0: @ 84062C0
 
 	.global gUnknown_084062E0
 gUnknown_084062E0: @ 84062E0
-	.4byte 0x0813a83d, 0x0813a879
+	.4byte 0x0813a83d
+	.4byte 0x0813a879
 
 	.global gUnknown_084062E8
 gUnknown_084062E8: @ 84062E8
-	.4byte 0x0813b579, 0x0813b611
+	.4byte 0x0813b579
+	.4byte 0x0813b611
 
 	.global gUnknown_084062F0
 gUnknown_084062F0: @ 84062F0
@@ -8430,7 +8755,9 @@ gUnknown_0840CA54: @ 840CA54
 
 	.global gUnknown_0840CA94
 gUnknown_0840CA94: @ 840CA94
-	.4byte 0x0840ca64, 0x0840ca78, 0x0840ca8c
+	.4byte 0x0840ca64
+	.4byte 0x0840ca78
+	.4byte 0x0840ca8c
 
 	.global gUnknown_0840CAA0
 gUnknown_0840CAA0: @ 840CAA0
@@ -10421,7 +10748,10 @@ gUnknown_08416B54: @ 8416B54
 
 	.global gUnknown_08416B84
 gUnknown_08416B84: @ 8416B84
-	.4byte 0x08416b64, 0x08416b6c, 0x08416b74, 0x08416b7c
+	.4byte 0x08416b64
+	.4byte 0x08416b6c
+	.4byte 0x08416b74
+	.4byte 0x08416b7c
 
 	.global gUnknown_08416B94
 gUnknown_08416B94: @ 8416B94
@@ -10433,7 +10763,9 @@ gUnknown_08416BDC: @ 8416BDC
 
 	.global gUnknown_08416C04
 gUnknown_08416C04: @ 8416C04
-	.4byte 0x08416bec, 0x08416bf4, 0x08416bfc
+	.4byte 0x08416bec
+	.4byte 0x08416bf4
+	.4byte 0x08416bfc
 
 	.global gUnknown_08416C10
 gUnknown_08416C10: @ 8416C10
