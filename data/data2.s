@@ -512,10 +512,10 @@ gUnknown_082087DC: @ 82087DC
 	.align 2
 	.global gUnknown_08209AC4
 gUnknown_08209AC4: @ 8209AC4
-	.4byte 0x0842cb86
-	.4byte 0x0842cbab
-	.4byte 0x0842cbc6
-	.4byte 0x0842cbed
+	.4byte DaycareText_GetAlongVeryWell
+	.4byte DaycareText_GetAlong
+	.4byte DaycareText_DontLikeOther
+	.4byte DaycareText_PlayOther
 
 	.global gUnknown_08209AD4
 gUnknown_08209AD4: @ 8209AD4
@@ -789,9 +789,9 @@ gUnknown_0820C308: @ 820C308
 
 	.global gUnknown_0820C320
 gUnknown_0820C320: @ 820C320
-	.4byte 0x0842c6a7
-	.4byte 0x0804a9f5
-	.4byte 0x0842c6af
+	.4byte TradeText_Summary2
+	.4byte 0x0804a9f5 @unknown
+	.4byte TradeText_Trade2
 	.4byte 0x0804aa01
 
 	.global gUnknown_0820C330
@@ -940,11 +940,13 @@ gUnknown_08215A80: @ 8215A80
 
 	.global gUnknown_08215A98
 gUnknown_08215A98: @ 8215A98
-	.incbin "baserom.gba", 0x00215a98, 0x28
+	.incbin "baserom.gba", 0x00215a98, 0x18
+Unknown_08215AB0:
+	.incbin "baserom.gba", 0x00215ab0, 0x10
 
 	.global gUnknown_08215AC0
 gUnknown_08215AC0: @ 8215AC0
-	.4byte 0x08215ab0
+	.4byte Unknown_08215AB0
 
 	.global gUnknown_08215AC4
 gUnknown_08215AC4: @ 8215AC4
@@ -972,19 +974,22 @@ gUnknown_0821602C: @ 821602C
 
 	.global gUnknown_08216249
 gUnknown_08216249: @ 8216249
-	.byte 0xFB @probably not a /p
+	.byte 0xFB
 	.string "$"
 	.incbin "baserom.gba", 0x0021624b, 0x28
+UnknownText_2Pok:
 	.string "2Pok$"
+UnknownText_3Pok:
 	.string "3Pok$"
+UnknownText_4Pok:
 	.string "4Pok$"
 	.align 2
 
 	.global gUnknown_08216284
 gUnknown_08216284: @ 8216284 berry blender helpers?
-	.4byte 0x08216273
-	.4byte 0x08216278
-	.4byte 0x0821627D
+	.4byte UnknownText_2Pok
+	.4byte UnknownText_3Pok
+	.4byte UnknownText_4Pok
 	.string "1P$"
 	.align 2
 	.string "2P$"
@@ -993,16 +998,19 @@ gUnknown_08216284: @ 8216284 berry blender helpers?
 	.align 2
 	.string "4P$"
 	.align 2
+UnknownText_Mister:
 	.string "MISTER$"
+UnknownText_Laddie:
 	.string "LADDIE$"
+UnknownText_Lassie:
 	.string "LASSIE$"
 	.align 2
 
 	.global gUnknown_082162B8
 gUnknown_082162B8: @ 82162B8
-	.4byte 0x082162a0
-	.4byte 0x082162a7
-	.4byte 0x082162ae
+	.4byte UnknownText_Mister
+	.4byte UnknownText_Laddie
+	.4byte UnknownText_Lassie
 
 	.global gUnknown_082162C4
 gUnknown_082162C4: @ 82162C4
@@ -4352,9 +4360,9 @@ gUnknown_083D1374: @ 83D1374
 
 	.global gUnknown_083D13D4
 gUnknown_083D13D4: @ 83D13D4
-	.4byte 0x0840f9d3
+	.4byte SecretBaseText_DelRegist
 	.4byte 0x080bca85
-	.4byte 0x0840e640
+	.4byte UnknownText_Exit
 	.4byte 0x080bcbf9
 
 	.global gUnknown_083D13E4
@@ -5182,9 +5190,9 @@ gUnknown_083E31B0: @ 83E31B0
 
 	.global gUnknown_083E31CC
 gUnknown_083E31CC: @ 83E31CC
-	.4byte 0x08410d2b
-	.4byte 0x08410d4d
-	.4byte 0x08410d6d
+	.4byte PCText_CheckParty
+	.4byte PCText_CheckPokeAll
+	.4byte PCText_ReturnToNav
 
 	.global gUnknown_083E31D8
 gUnknown_083E31D8: @ 83E31D8
@@ -5584,10 +5592,10 @@ gUnknown_083EC604: @ 83EC604
 
 	.global gUnknown_083EC624
 gUnknown_083EC624: @ 83EC624
-	.4byte 0x0840f9f6
-	.4byte 0x0840fa1c
-	.4byte 0x0840fa43
-	.4byte 0x0840e697
+	.4byte SecretBaseText_PutOutDecor
+	.4byte SecretBaseText_StoreChosenDecor
+	.4byte SecretBaseText_ThrowAwayDecor
+	.4byte MenuText_GoBackToPrev
 
 	.global gUnknown_083EC634
 gUnknown_083EC634: @ 83EC634
@@ -6135,10 +6143,10 @@ gUnknown_083F62BC: @ 83F62BC
 
 	.global gUnknown_083F62D8
 gUnknown_083F62D8: @ 83F62D8
-	.4byte 0x0840fd34
-	.4byte 0x0840fd3c
-	.4byte 0x0840fd43
-	.4byte 0x0840fd4a
+	.4byte SecretBaseText_Tristan
+	.4byte SecretBaseText_Philip
+	.4byte SecretBaseText_Dennis
+	.4byte SecretBaseText_Roberto
 
 	.global gUnknown_083F62E8
 gUnknown_083F62E8: @ 83F62E8
@@ -8006,10 +8014,10 @@ gUnknown_084061A4: @ 84061A4
 
 	.global gUnknown_08406288
 gUnknown_08406288: @ 8406288
-	.4byte 0x0840fdb7
-	.4byte 0x0840fda0
-	.4byte 0x0840fdd3
-	.4byte 0x0840e697
+	.4byte PCText_TakeOutItems
+	.4byte PCText_StoreItems
+	.4byte PCText_ThrowAwayItems
+	.4byte MenuText_GoBackToPrev
 
 	.global gUnknown_08406298
 gUnknown_08406298: @ 8406298
@@ -8341,13 +8349,20 @@ gUnknown_0840CA00: @ 840CA00
 
 	.global gUnknown_0840CA54
 gUnknown_0840CA54: @ 840CA54
-	.incbin "baserom.gba", 0x0040ca54, 0x40
+Unknown_840CA54:
+	.incbin "baserom.gba", 0x0040ca54, 0x10
+Unknown_840CA64:
+	.incbin "baserom.gba", 0x0040ca64, 0x14
+Unknown_840CA78:
+	.incbin "baserom.gba", 0x0040ca78, 0x14
+Unknown_840CA8C:
+	.incbin "baserom.gba", 0x0040ca8c, 0x8
 
 	.global gUnknown_0840CA94
 gUnknown_0840CA94: @ 840CA94
-	.4byte 0x0840ca64
-	.4byte 0x0840ca78
-	.4byte 0x0840ca8c
+	.4byte Unknown_840CA64
+	.4byte Unknown_840CA78
+	.4byte Unknown_840CA8C
 
 	.global gUnknown_0840CAA0
 gUnknown_0840CAA0: @ 840CAA0
@@ -8664,6 +8679,7 @@ gUnknown_0840E63B: @ 840E63B
 
 	.global gUnknown_0840E640
 gUnknown_0840E640: @ 840E640
+UnknownText_Exit:
 	.string "EXIT$"
 
 	.global gUnknown_0840E645
@@ -8724,6 +8740,7 @@ gUnknown_0840E691: @ 840E691
 
 	.global gUnknown_0840E697
 gUnknown_0840E697: @ 840E697
+MenuText_GoBackToPrev:
 	.string "Go back to the\nprevious menu.$"
 
 	.global gUnknown_0840E6B5
@@ -9361,13 +9378,21 @@ gUnknown_0840F998: @ 840F998
 
 	.global gUnknown_0840F9BB
 gUnknown_0840F9BB: @ 840F9BB
+SecretBaseText_NoRegistry:
 	.string "There is no REGISTRY.{PAUSE_UNTIL_PRESS}$"
+SecretBaseText_DelRegist:
 	.string "DEL REGIST.$"
+SecretBaseText_Decorate:
 	.string "DECORATE$"
+SecretBaseText_PutAway:
 	.string "PUT AWAY$"
+SecretBaseText_Toss:
 	.string "TOSS$"
+SecretBaseText_PutOutDecor:
 	.string "Put out the selected decoration item.$"
+SecretBaseText_StoreChosenDecor:
 	.string "Store the chosen decoration in the PC.$"
+SecretBaseText_ThrowAwayDecor:
 	.string "Throw away unwanted decorations.$"
 
 	.global gUnknown_0840FA64
@@ -9449,23 +9474,38 @@ gUnknown_0840FCEA: @ 840FCEA
 
 	.global gUnknown_0840FD11
 gUnknown_0840FD11: @ 840FD11
+SecretBaseText_NoDecorInUse:
 	.string "There are no decorations in use.{PAUSE_UNTIL_PRESS}$"
+SecretBaseText_Tristan:
 	.string "TRISTAN$"
+SecretBaseText_Philip:
 	.string "PHILIP$"
+SecretBaseText_Dennis:
 	.string "DENNIS$"
+SecretBaseText_Roberto:
 	.string "ROBERTO$"
+SecretBaseText_TurnOff:
 	.string "TURN OFF$"
+SecretBaseText_Decoration:
 	.string "DECORATION$"
+SecretBaseText_ItemStorage:
 	.string "ITEM STORAGE$"
 
 	.global gUnknown_0840FD73
 gUnknown_0840FD73: @ 840FD73
+PCText_Mailbox:
 	.string "MAILBOX$"
+PCText_DepositItem:
 	.string "DEPOSIT ITEM$"
+PCText_WithdrawItem:
 	.string "WITHDRAW ITEM$"
+PCText_TossItem:
 	.string "TOSS ITEM$"
+PCText_StoreItems:
 	.string "Store items in the PC.$"
+PCText_TakeOutItems:
 	.string "Take out items from the PC.$"
+PCText_ThrowAwayItems:
 	.string "Throw away items stored in the PC.$"
 
 	.global gUnknown_0840FDF6
@@ -9817,70 +9857,135 @@ gUnknown_0841085E: @ 841085E
 
 	.global gUnknown_08410866
 gUnknown_08410866: @ 8410866
+PCText_Cancel:
 	.string "CANCEL$"
+PCText_ExitBox:
 	.string "Exit from the BOX.$"
+PCText_WhatYouDo:
 	.string "What would you like to do?$"
+PCText_PickATheme:
 	.string "Please pick a theme.$"
+PCText_PickAWallpaper:
 	.string "Please pick out wallpaper.$"
+PCText_IsSelected:
 	.string " is selected.$"
+PCText_JumpToBox:
 	.string "Jump to which BOX?$"
+PCText_DepositToWhichBox:
 	.string "Deposit in which BOX?$"
+PCText_DepoxitToBox:
 	.string " was deposited.$"
+PCText_BoxIsFull:
 	.string "The BOX is full.$"
+PCText_ReleasePoke:
 	.string "Release this POKéMON?$"
+PCText_WasReleased:
 	.string " was released.$"
+PCText_ByeBye:
 	.string "Bye-bye, !$"
+PCText_MarkPoke:
 	.string "Mark your POKéMON.$"
+PCText_LastPoke:
 	.string "That’s your last POKéMON!$"
+PCText_PartyFull:
 	.string "Your party’s full!$"
+PCText_HoldingPoke:
 	.string "You’re holding a POKéMON!$"
+PCText_WhichOneWillTake:
 	.string "Which one will you take?$"
+PCText_CantReleaseEgg:
 	.string "You can’t release an EGG.$"
+PCText_ContinueBox:
 	.string "Continue BOX operations?$"
+PCText_CameBack:
 	.string " came back!$"
+PCText_Worried:
 	.string "Was it worried about you?$"
+PCText_Surprise:
 	.string "... ... ... ... ...!$"
+PCText_PleaseRemoveMail:
 	.string "Please remove the MAIL.$"
+PCText_Cancel2:
 	.string "CANCEL$"
+PCText_Deposit:
 	.string "DEPOSIT$"
+PCText_Withdraw:
 	.string "WITHDRAW$"
+PCText_Switch:
 	.string "SWITCH$"
+PCText_Move:
 	.string "MOVE$"
+PCText_Place:
 	.string "PLACE$"
+PCText_Summary:
 	.string "SUMMARY$"
+PCText_Release:
 	.string "RELEASE$"
+PCText_Mark:
 	.string "MARK$"
+PCText_Name:
 	.string "NAME$"
+PCText_Jump:
 	.string "JUMP$"
+PCText_Wallpaper:
 	.string "WALLPAPER$"
+PCText_Scenery1:
 	.string "SCENERY 1$"
+PCText_Scenery2:
 	.string "SCENERY 2$"
+PCText_Scenery3:
 	.string "SCENERY 3$"
+PCText_Etc:
 	.string "ETCETERA$"
+PCText_Forest:
 	.string "FOREST$"
+PCText_City:
 	.string "CITY$"
+PCText_Desert:
 	.string "DESERT$"
+PCText_Savanna:
 	.string "SAVANNA$"
+PCText_Crag:
 	.string "CRAG$"
+PCText_Volcano:
 	.string "VOLCANO$"
+PCText_Snow:
 	.string "SNOW$"
+PCText_Cave:
 	.string "CAVE$"
+PCText_Beach:
 	.string "BEACH$"
+PCText_Seafloor:
 	.string "SEAFLOOR$"
+PCText_River:
 	.string "RIVER$"
+PCText_Sky:
 	.string "SKY$"
+PCText_Polka:
 	.string "POLKA-DOT$"
+PCText_PokeCenter:
 	.string "POKéCENTER$"
+PCText_Machine:
 	.string "MACHINE$"
+PCText_Plain:
 	.string "PLAIN$"
+PCText_WhatDoYouWant:
 	.string "What do you want?$"
+PCText_WithdrawPoke:
 	.string "WITHDRAW POKéMON$"
+PCText_DepositPoke:
 	.string "DEPOSIT POKéMON$"
+PCText_MovePoke:
 	.string "MOVE POKéMON$"
+PCText_SeeYa:
 	.string "SEE YA!$"
+PCText_MovePokeToBox:
 	.string "Move POKéMON stored in BOXES to\nyour party.$"
+PCText_StorePokeToBox:
 	.string "Store POKéMON in your party in BOXES.$"
+PCText_OrganizePokeBox:
 	.string "Organize the POKéMON in BOXES and\nin your party.$"
+PCText_ReturnToMenu:
 	.string "Return to the previous menu.$"
 
 	.global gUnknown_08410C1C
@@ -9893,22 +9998,39 @@ gUnknown_08410C40: @ 8410C40
 
 	.global gUnknown_08410C54
 gUnknown_08410C54: @ 8410C54
+PCText_BOX:
 	.string "BOX$"
+PCText_CheckMap:
 	.string "{CLEAR 0}Check the map of the HOENN region.$"
+PCText_CheckPoke:
 	.string "{CLEAR 0}Check POKéMON in detail.$"
+PCText_CheckTrainer:
 	.string "{CLEAR 0}Check TRAINER information.$"
+PCText_CheckRibbons:
 	.string "{CLEAR 0}Check obtained RIBBONS.$"
+PCText_PutAwayNav:
 	.string "{CLEAR 0}Put away the POKéNAV.$"
+PCText_NoRibbonWin:
 	.string "{CLEAR 0}There are no RIBBON winners.$"
+PCText_NoTrainers:
 	.string "{CLEAR 0}No TRAINERS are registered.$"
+PCText_CheckParty:
 	.string "{CLEAR 0}Check party POKéMON in detail.$"
+PCText_CheckPokeAll:
 	.string "{CLEAR 0}Check all POKéMON in detail.$"
+PCText_ReturnToNav:
 	.string "{CLEAR 0}Return to the POKéNAV menu.$"
+PCText_FindCool:
 	.string "{CLEAR 0}Find cool POKéMON.$"
+PCText_FindBeauty:
 	.string "{CLEAR 0}Find beautiful POKéMON.$"
+PCText_FindCute:
 	.string "{CLEAR 0}Find cute POKéMON.$"
+PCText_FindSmart:
 	.string "{CLEAR 0}Find smart POKéMON.$"
+PCText_FindTough:
 	.string "{CLEAR 0}Find tough POKéMON.$"
+PCText_ReturnToCondition:
 	.string "{CLEAR 0}Return to the CONDITION menu.$"
 
 	.global gUnknown_08410E22
@@ -10218,19 +10340,25 @@ gUnknown_08412050: @ 8412050
 
 	.global gUnknown_084120A4
 gUnknown_084120A4: @ 84120A4
-	.incbin "baserom.gba", 0x004120a4, 0x48
+Unknown_84120A4:
+	.incbin "baserom.gba", 0x004120a4, 0x38
+Unknown_84120DC:
+	.incbin "baserom.gba", 0x004120dc, 0x10
 
 	.global gUnknown_084120EC
 gUnknown_084120EC: @ 84120EC
-	.incbin "baserom.gba", 0x004120ec, 0xb4
+Unknown_8412EC:
+	.incbin "baserom.gba", 0x004120ec, 0x4
+Unknown_84120F0:
+	.incbin "baserom.gba", 0x004120f0, 0xb0
 
 	.global gUnknown_084121A0
 gUnknown_084121A0: @ 84121A0
-	.4byte 0x084120dc
+	.4byte Unknown_84120DC
 
 	.global gUnknown_084121A4
 gUnknown_084121A4: @ 84121A4
-	.4byte 0x084120f0
+	.4byte Unknown_84120F0
 
 	.global gUnknown_084121A8
 gUnknown_084121A8: @ 84121A8
@@ -10334,14 +10462,23 @@ gUnknown_08416B3C: @ 8416B3C
 
 	.global gUnknown_08416B54
 gUnknown_08416B54: @ 8416B54
-	.incbin "baserom.gba", 0x00416b54, 0x30
+Unknown_8416B54:
+	.incbin "baserom.gba", 0x00416b54, 0x10
+Unknown_8416B64:
+	.incbin "baserom.gba", 0x00416b64, 0x8
+Unknown_8416B6C:
+	.incbin "baserom.gba", 0x00416b6c, 0x8
+Unknown_8416B74:
+	.incbin "baserom.gba", 0x00416b74, 0x8
+Unknown_8416B7C:
+	.incbin "baserom.gba", 0x00416b7c, 0x8
 
 	.global gUnknown_08416B84
 gUnknown_08416B84: @ 8416B84
-	.4byte 0x08416b64
-	.4byte 0x08416b6c
-	.4byte 0x08416b74
-	.4byte 0x08416b7c
+	.4byte Unknown_8416B64
+	.4byte Unknown_8416B6C
+	.4byte Unknown_8416B74
+	.4byte Unknown_8416B7C
 
 	.global gUnknown_08416B94
 gUnknown_08416B94: @ 8416B94
@@ -10349,13 +10486,20 @@ gUnknown_08416B94: @ 8416B94
 
 	.global gUnknown_08416BDC
 gUnknown_08416BDC: @ 8416BDC
-	.incbin "baserom.gba", 0x00416bdc, 0x28
+Unknown_8416BDC:
+	.incbin "baserom.gba", 0x00416bdc, 0x10
+Unknown_8416BEC:
+	.incbin "baserom.gba", 0x00416bec, 0x8
+Unknown_8416BF4:
+	.incbin "baserom.gba", 0x00416bf4, 0x8
+Unknown_8416BFC:
+	.incbin "baserom.gba", 0x00416bfc, 0x8
 
 	.global gUnknown_08416C04
 gUnknown_08416C04: @ 8416C04
-	.4byte 0x08416bec
-	.4byte 0x08416bf4
-	.4byte 0x08416bfc
+	.4byte Unknown_8416BEC
+	.4byte Unknown_8416BF4
+	.4byte Unknown_8416BFC
 
 	.global gUnknown_08416C10
 gUnknown_08416C10: @ 8416C10
@@ -10363,11 +10507,14 @@ gUnknown_08416C10: @ 8416C10
 
 	.global gUnknown_08416C70
 gUnknown_08416C70: @ 8416C70
-	.incbin "baserom.gba", 0x00416c70, 0x18
+Unknown_8416C70:
+	.incbin "baserom.gba", 0x00416c70, 0x10
+Unknown_8416C80:
+	.incbin "baserom.gba", 0x00416c80, 0x8
 
 	.global gUnknown_08416C88
 gUnknown_08416C88: @ 8416C88
-	.4byte 0x08416c80
+	.4byte Unknown_8416C80
 
 	.global gUnknown_08416C8C
 gUnknown_08416C8C: @ 8416C8C
@@ -10758,11 +10905,15 @@ gUnknown_0842C640: @ 842C640
 	.string "Take good care of {STR_VAR_3}!$"
 	.string "CANCEL$"
 	.string "Choose a POKéMON.$"
+TradeText_Summary1:
 	.string "SUMMARY$"
+TradeText_Trade1:
 	.string "TRADE$"
 	.string "Cancel trade?$"
 	.string "Press the B Button to exit.$"
+TradeText_Summary2:
 	.string "SUMMARY$"
+TradeText_Trade2:
 	.string "TRADE$"
 	.string "{COLOR DARK_GREY}{HIGHLIGHT WHITE2}{SHADOW LIGHT_GREY}Link standby...\nPlease wait.$"
 	.string "{COLOR DARK_GREY}{HIGHLIGHT WHITE2}{SHADOW LIGHT_GREY}The trade has\nbeen canceled.$"
@@ -10946,9 +11097,13 @@ gUnknown_0842CADB: @ 842CADB
 	.global gUnknown_0842CAF7
 gUnknown_0842CAF7: @ 842CAF7
 	.string "REEL TIME\nHere’s your chance to take\naim and nail marks!\nThe Reel Time continues for\nas often as the drawn number.\nIt all ends on a Big Bonus.$"
+DaycareText_GetAlongVeryWell:
 	.string "The two seem to get along very well.$"
+DaycareText_GetAlong:
 	.string "The two seem to get along.$"
+DaycareText_DontLikeOther:
 	.string "The two don’t seem to like each other.$"
+DaycareText_PlayOther:
 	.string "The two prefer to play with other\nPOKéMON than each other.$"
 
 	.global gUnknown_0842CC28
@@ -11369,11 +11524,14 @@ gUnknown_0842F250: @ 842F250
 
 	.global gUnknown_0842F298
 gUnknown_0842F298: @ 842F298
-	.incbin "baserom.gba", 0x0042f298, 0x324
+Unknown_842F298:
+	.incbin "baserom.gba", 0x0042f298, 0x2C0
+Unknown_842F558:
+	.incbin "baserom.gba", 0x0042f558, 0x64
 
 	.global gUnknown_0842F5BC
 gUnknown_0842F5BC: @ 842F5BC
-	.4byte 0x0842f558
+	.4byte Unknown_842F558
 
 	.global gUnknown_0842F5C0
 gUnknown_0842F5C0: @ 842F5C0
