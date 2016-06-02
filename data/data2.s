@@ -7020,101 +7020,254 @@ gUnknown_083FDFF4: @ 83FDFF4
 
 	.global gUnknown_083FE4F4
 gUnknown_083FE4F4: @ 83FE4F4
-	.incbin "baserom.gba", 0x003fe4f4, 0xe7
+	.4byte 0x0811e3e5 @ not text pointers. graphics maybe?
+	.4byte 0x0811ec05
+	.4byte 0x0811ec11
+	.4byte 0x0811f665
+	.4byte 0x0811f6d9
+	.4byte 0x0811f7f5
+	.4byte 0x0811f9d1
+	.4byte 0x0811fae5
+	.4byte 0x0811fc31
+	.4byte 0x0811fc3d
+	.4byte 0x0811fce9
+	.4byte 0x0811fdcd
+	.4byte 0x0811fdd9
+	.4byte 0x0811fde5
+	.4byte 0x0811fdf1
+	.4byte 0x0811fdfd
+	.4byte 0x08120095
+	.4byte 0x081200f9
+	.4byte 0x08120105
+	.4byte 0x08120111
+	.4byte 0x0812011d
+	.4byte 0x08120129
+	.4byte 0x08120135
+	.4byte 0x08120141
+	.4byte 0x0812014d
+	.4byte 0x0812023d
+	.4byte 0x08120249
+	.4byte 0x081202bd
+	.4byte 0x08120325
+	.4byte 0x08120331
+	.4byte 0x0812033d
+	.4byte 0x08120349
+	.4byte 0x08120355
+	.4byte 0x08120361
+	.4byte 0x0812036d
+	.4byte 0x08120379
+	.4byte 0x08120385
+	.4byte 0x08120391
+	.4byte 0x081203ad
+	.4byte 0x081203e5
+	.4byte 0x081203fd
+	.4byte 0x08120425
+	.4byte 0x08120495
+	.4byte 0x081204a1
+	.4byte 0x081204e5
+	.4byte 0x08120515
+	.4byte 0x08120555
+	.4byte 0x08120589
+	.4byte 0x08120829
+	.4byte 0x08120921
+	.4byte 0x0812096d
+	.4byte 0x08120979
+	.4byte 0x081209d9
+	.4byte 0x08120a41
+	.4byte 0x08120a4d
+	.4byte 0x08120a59
+	.4byte 0x08120aa5
+BattleText_UnknownString:
+	.string "{STRING 33}$"
+BattleText_GainExpPoints:
 	.string "{STRING 0} gained{STRING 1}\n{STRING 42} EXP. Points!\p$"
+BattleText_Terminator:
 	.string "$"
+BattleText_BoostedExp:
 	.string " a boosted$"
+BattleText_GrewLevel:
 	.string "{STRING 0} grew to\nLV. {STRING 1}!{UNKNOWN_A}\p$"
+BattleText_LearnedMove:
 	.string "{STRING 0} learned\n{STRING 1}!{UNKNOWN_A}\p$"
+BattleText_TryingToLearnMove:
 	.string "{STRING 0} is trying to\nlearn {STRING 1}.\p$"
+BattleText_CantLearnMore:
 	.string "But, {STRING 0} can’t learn\nmore than four moves.\p$"
+BattleText_DeleteMove:
 	.string "Delete a move to make\nroom for {STRING 1}?$"
+BattleText_DeletedMove:
 	.string "{STRING 0} forgot\n{STRING 1}.\p$"
+BattleText_StopLearning:
 	.string "{PAUSE 32}Stop learning\n{STRING 1}?$"
+BattleText_DidNotLearn:
 	.string "{STRING 0} did not learn\n{STRING 1}.\p$"
+BattleText_UseNext:
 	.string "Use next POKéMON?$"
+BattleText_AttackMissed:
 	.string "{ATTACKING_MON}’s\nattack missed!$"
+BattleText_ProtectedItself:
 	.string "{DEFENDING_MON}\nprotected itself!$"
+BattleText_AvoidedDamage:
 	.string "{DEFENDING_MON} avoided\ndamage with {STRING 22}!$"
+BattleText_GroundMoveNegate:
 	.string "{DEFENDING_MON} makes GROUND\nmoves miss with {STRING 22}!$"
+BattleText_AvoidedAttack:
 	.string "{DEFENDING_MON} avoided\nthe attack!$"
+BattleText_DoesntAffect:
 	.string "It doesn’t affect\n{DEFENDING_MON}...$"
+BattleText_AttackingFainted:
 	.string "{ATTACKING_MON}\nfainted!\p$"
+BattleText_DefendingFainted:
 	.string "{DEFENDING_MON}\nfainted!\p$"
+BattleText_WinningPrize:
 	.string "{STRING 32} got ¥{STRING 0}\nfor winning!\p$"
+BattleText_OutOfUsablePoke:
 	.string "{STRING 32} is out of\nuseable POKéMON!\p$"
+BattleText_WhitedOut:
 	.string "{STRING 32} whited out!{PAUSE_UNTIL_PRESS}$"
+BattleText_PreventEscape:
 	.string "{STRING 16} prevents\nescape with {STRING 23}!\p$"
+BattleText_CantEscape:
 	.string "Can’t escape!\p$"
+BattleText_AttackingCantEscape:
 	.string "{ATTACKING_MON}\ncan’t escape!$"
+BattleText_HitMulti:
 	.string "Hit {STRING 0} time(s)!$"
+BattleText_FellAsleep:
 	.string "{STRING 14}\nfell asleep!$"
+BattleText_MadeAsleep:
 	.string "{STRING 16}’s {STRING 23}\nmade {STRING 14} sleep!$"
+BattleText_DefendingAsleep:
 	.string "{DEFENDING_MON} is\nalready asleep!$"
+BattleText_AttackingAsleep:
 	.string "{ATTACKING_MON} is\nalready asleep!$"
+BattleText_WasntAffected:
 	.string "{DEFENDING_MON}\nwasn’t affected!$"
+BattleText_Poisoned:
 	.string "{STRING 14}\nwas poisoned!$"
+BattleText_Poisoned2:
 	.string "{STRING 16}’s {STRING 23}\npoisoned {STRING 14}!$"
+BattleText_PoisonHurt:
 	.string "{ATTACKING_MON} is hurt\nby poison!$"
+BattleText_AlreadyPoisoned:
 	.string "{DEFENDING_MON} is already\npoisoned.$"
+BattleText_BadlyPoisoned:
 	.string "{STRING 14} is badly\npoisoned!$"
+BattleText_EnergyDrained:
 	.string "{DEFENDING_MON} had its\nenergy drained!$"
+BattleText_Burned:
 	.string "{STRING 14} was burned!$"
+BattleText_Burned2:
 	.string "{STRING 16}’s {STRING 23}\nburned {STRING 14}!$"
+BattleText_BurnHurt:
 	.string "{ATTACKING_MON} is hurt\nby its burn!$"
+BattleText_AlreadyBurned:
 	.string "{DEFENDING_MON} already\nhas a burn.$"
+BattleText_Frozen:
 	.string "{STRING 14} was\nfrozen solid!$"
+BattleText_Frozen2:
 	.string "{STRING 16}’s {STRING 23}\nfroze {STRING 14} solid!$"
+BattleText_FrozenSolid:
 	.string "{ATTACKING_MON} is\nfrozen solid!$"
+BattleText_DefendingDefrosted:
 	.string "{DEFENDING_MON} was\ndefrosted!$"
+BattleText_AttackingDefrosted:
 	.string "{ATTACKING_MON} was\ndefrosted!$"
+BattleText_Defrosted:
 	.string "{ATTACKING_MON} was\ndefrosted by {STRING 17}!$"
+BattleText_Paralyzed:
 	.string "{STRING 14} is paralyzed!\nIt may be unable to move!$"
+BattleText_Paralyzed2:
 	.string "{STRING 16}’s {STRING 23}\nparalyzed {STRING 14}!\lIt may be unable to move!$"
+BattleText_Paralyzed3:
 	.string "{ATTACKING_MON} is paralyzed!\nIt can’t move!$"
+BattleText_AlreadyParalyzed:
 	.string "{DEFENDING_MON} is\nalready paralyzed!$"
+BattleText_ParalysisHealed:
 	.string "{DEFENDING_MON} was\nhealed of paralysis!$"
+BattleText_DreamEaten:
 	.string "{DEFENDING_MON}’s\ndream was eaten!$"
+BattleText_AttackingStatNoHigher:
 	.string "{ATTACKING_MON}’s {STRING 0}\nwon’t go higher!$"
+BattleText_DefendingStatNoHigher:
 	.string "{DEFENDING_MON}’s {STRING 0}\nwon’t go lower!$"
+BattleText_StoppedWorking:
 	.string "Your team’s {STRING 0}\nstopped working!$"
+BattleText_StoppedWorking2:
 	.string "The foe’s {STRING 0}\nstopped working!$"
+BattleText_Confused:
 	.string "{ATTACKING_MON} is\nconfused!$"
+BattleText_ConfusionSnapOut:
 	.string "{ATTACKING_MON} snapped\nout of confusion!$"
+BattleText_BecameConfused:
 	.string "{STRING 14} became\nconfused!$"
+BattleText_AlreadyConfused:
 	.string "{DEFENDING_MON} is\nalready confused!$"
+BattleText_FellLove:
 	.string "{DEFENDING_MON}\nfell in love!$"
+BattleText_InLoveWith:
 	.string "{ATTACKING_MON} is in love\nwith {STRING 16}!$"
+BattleText_ImmobilizedBy:
 	.string "{ATTACKING_MON} is\nimmobilized by love!$"
+BattleText_BlownAway:
 	.string "{DEFENDING_MON} was\nblown away!$"
+BattleText_TypeTransform:
 	.string "{ATTACKING_MON} transformed\ninto the {STRING 0} type!$"
+BattleText_Flinched:
 	.string "{ATTACKING_MON} flinched!$"
+BattleText_RegainedHealth:
 	.string "{DEFENDING_MON} regained\nhealth!$"
+BattleText_HPFull:
 	.string "{DEFENDING_MON}’s\nHP is full!$"
+BattleText_RaisedSpDef:
 	.string "{STRING 38}’s {STRING 17}\nraised SP. DEF!$"
+BattleText_RaisedSpDefLittle:
 	.string "{STRING 38}’s {STRING 17}\nraised SP. DEF a little!$"
+BattleText_RaisedDefense:
 	.string "{STRING 38}’s {STRING 17}\nraised DEFENSE!$"
+BattleText_RaisedDefenseLittle:
 	.string "{STRING 38}’s {STRING 17}\nraised DEFENSE a little!$"
+BattleText_CoveredVeil:
 	.string "{STRING 38} is covered\nby a veil!$"
+BattleText_SafeguardActive:
 	.string "{DEFENDING_MON} is protected\nby SAFEGUARD!$"
+BattleText_SafeguardFaded:
 	.string "{STRING 40}’s SAFEGUARD\nfaded!$"
+BattleText_WentToSleep:
 	.string "{ATTACKING_MON} went\nto sleep!$"
+BattleText_SpeltHealthy:
 	.string "{ATTACKING_MON} slept and\nbecame healthy!$"
+BattleText_WhipWhirlwind:
 	.string "{ATTACKING_MON} whipped\nup a whirlwind!$"
+BattleText_TookSunlight:
 	.string "{ATTACKING_MON} took\nin sunlight!$"
+BattleText_LoweredHead:
 	.string "{ATTACKING_MON} lowered\nits head!$"
+BattleText_IsGlowing:
 	.string "{ATTACKING_MON} is glowing!$"
+BattleText_FlewHigh:
 	.string "{ATTACKING_MON} flew\nup high!$"
+BattleText_DugHole:
 	.string "{ATTACKING_MON} dug a hole!$"
+BattleText_HidUnderwater:
 	.string "{ATTACKING_MON} hid\nunderwater!$"
+BattleText_SprangUp:
 	.string "{ATTACKING_MON} sprang up!$"
+BattleText_SqueezedBind:
 	.string "{DEFENDING_MON} was squeezed by\n{ATTACKING_MON}’s BIND!$"
+BattleText_TrappedVortex:
 	.string "{DEFENDING_MON} was trapped\nin the vortex!$"
+BattleText_TrappedBy:
 	.string "{DEFENDING_MON} was trapped\nby SAND TOMB!$"
+BattleText_Wrapped:
 	.string "{DEFENDING_MON} was WRAPPED by\n{ATTACKING_MON}!$"
+BattleText_Clamped:
 	.string "{ATTACKING_MON} CLAMPED\n{DEFENDING_MON}!$"
+BattleText_HurtBy:
 	.string "{ATTACKING_MON} is hurt\nby {STRING 0}!$"
+BattleText_FreedFrom:
 	.string "{ATTACKING_MON} was freed\nfrom {STRING 0}!$"
+BattleText_KeptGoingCrash:
 	.string "{ATTACKING_MON} kept going\nand crashed!$"
 
 	.global gUnknown_083FEE5D
@@ -7558,34 +7711,63 @@ gUnknown_084007CE: @ 84007CE
 
 	.global gUnknown_084007D0
 gUnknown_084007D0: @ 84007D0
+BattleText_Exclamation:
 	.string "!$"
+BattleStatText_HP:
 	.string "HP$"
+BattleStatText_Attack:
 	.string "ATTACK$"
+BattleStatText_Defense:
 	.string "DEFENSE$"
+BattleStatText_Speed:
 	.string "SPEED$"
+BattleStatText_SpAtk:
 	.string "SP. ATK$"
+BattleStatText_SpDef:
 	.string "SP. DEF$"
+BattleStatText_Accuracy:
 	.string "accuracy$"
+BattleStatText_Evasion:
 	.string "evasiveness$"
+ContestStatText_TooSpicy:
 	.string "was too spicy!$"
+ContestStatText_TooDry:
 	.string "was too dry!$"
+ContestStatText_TooSweet:
 	.string "was too sweet!$"
+ContestStatText_TooBitter:
 	.string "was too bitter!$"
+ContestStatText_TooSour:
 	.string "was too sour!$"
+BattleText_Used1:
 	.string "{STRING 32} used\n{STRING 19}!$"
+BattleText_TutorialUsed:
 	.string "WALLY used\n{STRING 19}!$"
+BattleText_Used2:
 	.string "{STRING 25} {STRING 26}\nused {STRING 19}!$"
+BattleText_BlockBall:
 	.string "The TRAINER blocked the BALL!$"
+BattleText_DontBeAThief:
 	.string "Don’t be a thief!$"
+BattleText_DodgeBall:
 	.string "It dodged the thrown BALL!\nThis POKéMON can’t be caught!$"
+BattleText_MissPoke:
 	.string "You missed the POKéMON!$"
+BattleText_BallBrokeOhNo:
 	.string "Oh, no!\nThe POKéMON broke free!$"
+BattleText_BallBrokeAppeared:
 	.string "Aww!\nIt appeared to be caught!$"
+BattleText_BallBrokeAlmost:
 	.string "Aargh!\nAlmost had it!$"
+BattleText_BallBrokeSoClose:
 	.string "Shoot!\nIt was so close, too!$"
+BattleText_BallCaught1:
 	.string "Gotcha!\n{STRING 3} was caught!{UNKNOWN_A}{PLAY_BGM BGM_KACHI22}\p$"
+BattleText_BallCaught2:
 	.string "Gotcha!\n{STRING 3} was caught!{UNKNOWN_A}{PLAY_BGM BGM_KACHI22}{PAUSE 127}$"
+BattleText_GiveNickname:
 	.string "Give a nickname to the\ncaptured {STRING 3}?$"
+BattleText_SentToPC:
 	.string "{STRING 3} was sent to\n{STRING 35} PC.$"
 
 	.global gUnknown_084009ED
@@ -7794,15 +7976,376 @@ gUnknown_08400E62: @ 8400E62
 
 	.global gUnknown_08400F58
 gUnknown_08400F58: @ 8400F58
-	.incbin "baserom.gba", 0x00400f58, 0x20
+	.4byte BattleStatText_HP
+	.4byte BattleStatText_Attack
+	.4byte BattleStatText_Defense
+	.4byte BattleStatText_Speed
+	.4byte BattleStatText_SpAtk
+	.4byte BattleStatText_SpDef
+	.4byte BattleStatText_Accuracy
+	.4byte BattleStatText_Evasion
 
 	.global gUnknown_08400F78
 gUnknown_08400F78: @ 8400F78
-	.incbin "baserom.gba", 0x00400f78, 0x14
+	.4byte ContestStatText_TooSpicy
+	.4byte ContestStatText_TooDry
+	.4byte ContestStatText_TooSweet
+	.4byte ContestStatText_TooBitter
+	.4byte ContestStatText_TooSour
 
 	.global gUnknown_08400F8C
 gUnknown_08400F8C: @ 8400F8C
-	.incbin "baserom.gba", 0x00400f8c, 0x57c
+	.4byte BattleText_UnknownString
+	.4byte BattleText_GainExpPoints
+	.4byte BattleText_GrewLevel
+	.4byte BattleText_LearnedMove
+	.4byte BattleText_TryingToLearnMove
+	.4byte BattleText_CantLearnMore
+	.4byte BattleText_DeleteMove
+	.4byte BattleText_DeletedMove
+	.4byte BattleText_StopLearning
+	.4byte BattleText_DidNotLearn
+	.4byte 0x0840043b
+	.4byte 0x083fe6e1
+	.4byte 0x083fe6f5
+	.4byte 0x083ffe0e
+	.4byte 0x083fe70a
+	.4byte 0x083fe760
+	.4byte 0x083fe778
+	.4byte 0x083fe785
+	.4byte 0x083fe792
+	.4byte 0x083fe7ab
+	.4byte 0x083fe7ca
+	.4byte 0x083fe7db
+	.4byte 0x083fe818
+	.4byte 0x083fe828
+	.4byte 0x083fe838
+	.4byte 0x083fe84f
+	.4byte 0x083fe865
+	.4byte 0x083fe87b
+	.4byte 0x083fe88f
+	.4byte 0x083fe8a0
+	.4byte 0x083fe8b5
+	.4byte 0x083fe8cb
+	.4byte 0x083fe8e3
+	.4byte 0x083fe8f9
+	.4byte 0x083fe914
+	.4byte 0x083fe923
+	.4byte 0x083fe936
+	.4byte 0x083fe965
+	.4byte 0x083fe97a
+	.4byte 0x083fe992
+	.4byte 0x083fe9a6
+	.4byte 0x083fe9b8
+	.4byte 0x083fe9ca
+	.4byte 0x083fe9e2
+	.4byte 0x083fea0d
+	.4byte 0x083fea3d
+	.4byte 0x083fea5d
+	.4byte 0x083fea76
+	.4byte 0x083fea92
+	.4byte 0x083feaa8
+	.4byte 0x083feac1
+	.4byte 0x083fead9
+	.4byte 0x083feaf9
+	.4byte 0x083feb17
+	.4byte 0x083feb27
+	.4byte 0x083feb44
+	.4byte 0x083feb58
+	.4byte 0x083feb70
+	.4byte 0x083feb81
+	.4byte 0x083feb98
+	.4byte 0x083febb3
+	.4byte 0x083febc6
+	.4byte 0x083febe7
+	.4byte 0x083febf4
+	.4byte 0x083fec08
+	.4byte 0x083fec19
+	.4byte 0x083fec52
+	.4byte 0x083fec8b
+	.4byte 0x083feca4
+	.4byte 0x083fecc2
+	.4byte 0x083fecd8
+	.4byte 0x083fecea
+	.4byte 0x083fed07
+	.4byte 0x083fed22
+	.4byte 0x083fed37
+	.4byte 0x083fed4c
+	.4byte 0x083fed5b
+	.4byte 0x083fed6c
+	.4byte 0x083fed9c
+	.4byte 0x083fedba
+	.4byte 0x083fedf5
+	.4byte 0x083fee0b
+	.4byte 0x083fee1a
+	.4byte 0x083fee2c
+	.4byte 0x083fee42
+	.4byte 0x083fee5d
+	.4byte 0x083fee79
+	.4byte 0x083fee92
+	.4byte 0x083feea8
+	.4byte 0x083feebf
+	.4byte 0x083feed4
+	.4byte 0x083feef5
+	.4byte 0x083fef1f
+	.4byte 0x083fef2e
+	.4byte 0x083fef44
+	.4byte 0x083fef69
+	.4byte 0x083fef7c
+	.4byte 0x083fef88
+	.4byte 0x083fefa7
+	.4byte 0x083fefc1
+	.4byte 0x083fefd6
+	.4byte 0x083fefee
+	.4byte 0x083feffe
+	.4byte 0x083ff01f
+	.4byte 0x083ff031
+	.4byte 0x083ff04e
+	.4byte 0x083ff06f
+	.4byte 0x083ff08d
+	.4byte 0x083ff0ab
+	.4byte 0x083ff0c1
+	.4byte 0x083ff0d6
+	.4byte 0x083ff0f9
+	.4byte 0x083ff10c
+	.4byte 0x083ff11e
+	.4byte 0x083ff136
+	.4byte 0x083ff14c
+	.4byte 0x083ff169
+	.4byte 0x083ff18d
+	.4byte 0x083ff1a5
+	.4byte 0x083ff1b7
+	.4byte 0x083ff1ce
+	.4byte 0x083ff927
+	.4byte 0x083ff1e4
+	.4byte 0x083ff1fc
+	.4byte 0x083ff20e
+	.4byte 0x083ff221
+	.4byte 0x083ff234
+	.4byte 0x083ff244
+	.4byte 0x083ff26a
+	.4byte 0x083ff27e
+	.4byte 0x083ff295
+	.4byte 0x083ff2a7
+	.4byte 0x083ff2bc
+	.4byte 0x083ff2d6
+	.4byte 0x083ff2f3
+	.4byte 0x083ff31d
+	.4byte 0x083ff33b
+	.4byte 0x083ff36b
+	.4byte 0x083ff381
+	.4byte 0x083ff393
+	.4byte 0x083ff3b1
+	.4byte 0x083ff3c3
+	.4byte 0x083ff3d7
+	.4byte 0x083ff3e5
+	.4byte 0x083ff40d
+	.4byte 0x083ff42a
+	.4byte 0x083ff442
+	.4byte 0x083ff456
+	.4byte 0x083ff46b
+	.4byte 0x083ff480
+	.4byte 0x083ff496
+	.4byte 0x083ff4c7
+	.4byte 0x083ff4d4
+	.4byte 0x083ff4f7
+	.4byte 0x083ff510
+	.4byte 0x083ff52d
+	.4byte 0x083ff910
+	.4byte 0x083ff54d
+	.4byte 0x083ff93d
+	.4byte 0x083ff56a
+	.4byte 0x083ff586
+	.4byte 0x083ff97c
+	.4byte 0x083ff59d
+	.4byte 0x083ff5b5
+	.4byte 0x083ff61a
+	.4byte 0x083ff62d
+	.4byte 0x083ff63d
+	.4byte 0x083ff652
+	.4byte 0x083ff668
+	.4byte 0x083ff68e
+	.4byte 0x083ff6b1
+	.4byte 0x083ff6c4
+	.4byte 0x083ff6dc
+	.4byte 0x083ff704
+	.4byte 0x083ff99e
+	.4byte 0x083ff726
+	.4byte 0x083ff74e
+	.4byte 0x083ff779
+	.4byte 0x083ff793
+	.4byte 0x083ff7bb
+	.4byte 0x083ff7dd
+	.4byte 0x083ff9bb
+	.4byte 0x083ff9d1
+	.4byte 0x083ff9eb
+	.4byte 0x083ffa03
+	.4byte 0x083ffa26
+	.4byte 0x083ffa5c
+	.4byte 0x083ffa79
+	.4byte 0x083ffa95
+	.4byte 0x083ffaaf
+	.4byte 0x083ffacb
+	.4byte 0x083ffae7
+	.4byte 0x083ffb06
+	.4byte 0x083ffb21
+	.4byte 0x083ffb3b
+	.4byte 0x083ffb57
+	.4byte 0x083ffb68
+	.4byte 0x083ffdaa
+	.4byte 0x083ffdb3
+	.4byte 0x083ffdb9
+	.4byte 0x083ffdc2
+	.4byte 0x083ffdc8
+	.4byte 0x083ffdd3
+	.4byte 0x083ffdf8
+	.4byte 0x083ffe03
+	.4byte 0x083ffe4d
+	.4byte 0x083ffe5d
+	.4byte 0x083ffe70
+	.4byte 0x083ffea1
+	.4byte 0x083ffecb
+	.4byte 0x083ffee6
+	.4byte 0x083ffefc
+	.4byte 0x083fff44
+	.4byte 0x0840000b
+	.4byte 0x0840003a
+	.4byte 0x08400049
+	.4byte 0x08400078
+	.4byte 0x0840008e
+	.4byte 0x0840009d
+	.4byte 0x084000be
+	.4byte 0x084000d6
+	.4byte 0x084000ea
+	.4byte 0x084000fe
+	.4byte 0x08400116
+	.4byte 0x0840012e
+	.4byte 0x08400140
+	.4byte 0x08400154
+	.4byte 0x08400169
+	.4byte 0x08400181
+	.4byte 0x0840019a
+	.4byte 0x084001b2
+	.4byte 0x084001c6
+	.4byte 0x084001da
+	.4byte 0x084001f2
+	.4byte 0x08400205
+	.4byte 0x08400227
+	.4byte 0x08400249
+	.4byte 0x0840026b
+	.4byte 0x0840028d
+	.4byte 0x084002a9
+	.4byte 0x084002cf
+	.4byte 0x084002ef
+	.4byte 0x084002fe
+	.4byte 0x0840032a
+	.4byte 0x0840034d
+	.4byte 0x08400858
+	.4byte 0x08400864
+	.4byte 0x08400882
+	.4byte 0x084008a0
+	.4byte 0x084008b2
+	.4byte 0x084008eb
+	.4byte 0x08400903
+	.4byte 0x08400923
+	.4byte 0x08400942
+	.4byte 0x08400958
+	.4byte 0x08400975
+	.4byte 0x08400993
+	.4byte 0x084009b3
+	.4byte 0x084009d7
+	.4byte 0x08400a01
+	.4byte 0x08400a26
+	.4byte 0x08400a35
+	.4byte BattleText_CantEscape
+	.4byte 0x08400374
+	.4byte 0x08400394
+	.4byte 0x084003a7
+	.4byte 0x084003b8
+	.4byte 0x084003ce
+	.4byte 0x084003dd
+	.4byte 0x084003ed
+	.4byte 0x08400409
+	.4byte 0x08400462
+	.4byte 0x08400479
+	.4byte 0x08400492
+	.4byte 0x084004ac
+	.4byte 0x084004c8
+	.4byte 0x084004e4
+	.4byte 0x08400502
+	.4byte 0x0840051e
+	.4byte 0x08400a8c
+	.4byte 0x08400aa5
+	.4byte 0x08400abb
+	.4byte 0x08400ad4
+	.4byte 0x08400aea
+	.4byte 0x08400b0a
+	.4byte 0x08400b2f
+	.4byte 0x08400b6c
+	.4byte 0x08400b85
+	.4byte 0x08400b9f
+	.4byte 0x08400bbc
+	.4byte 0x08400bde
+	.4byte 0x08400bfd
+	.4byte 0x08400c16
+	.4byte 0x083ffb7b
+	.4byte 0x083ffb93
+	.4byte 0x083ffbb9
+	.4byte 0x083ffbd3
+	.4byte 0x083ffc17
+	.4byte 0x083ffc31
+	.4byte 0x083ffc48
+	.4byte 0x083ffc65
+	.4byte 0x083ffc83
+	.4byte 0x083ffca1
+	.4byte 0x083ff7f4
+	.4byte 0x083ff816
+	.4byte 0x083fed7b
+	.4byte 0x083fed8e
+	.4byte 0x083ffea9
+	.4byte 0x083ff831
+	.4byte 0x0840044a
+	.4byte 0x083ff842
+	.4byte 0x083ff86c
+	.4byte 0x083ff888
+	.4byte 0x083ffdde
+	.4byte 0x083ff896
+	.4byte 0x083ffa43
+	.4byte 0x083fedd8
+	.4byte 0x083fe5f8
+	.4byte 0x083fe5f9
+	.4byte 0x083ffbf3
+	.4byte 0x083fe725
+	.4byte 0x08400c17
+	.4byte 0x083ffcb1
+	.4byte 0x083ff4ab
+	.4byte 0x083ff8ac
+	.4byte 0x083fe6cf
+	.4byte 0x083fff12
+	.4byte 0x083fff2d
+	.4byte 0x083ff8d1
+	.4byte 0x083ffce7
+	.4byte 0x08400b4d
+	.4byte 0x08400873
+	.4byte 0x08400a4c
+	.4byte 0x083fe749
+	.4byte 0x083ffd0f
+	.4byte 0x083ffd2c
+	.4byte 0x083fe94e
+	.4byte 0x083ffe2e
+	.4byte 0x083ffba6
+	.4byte 0x083fef0d
+	.4byte 0x083fec6a
+	.4byte 0x083fec31
+	.4byte 0x083ff8e6
+	.4byte 0x083ffd48
+	.4byte 0x083ffd6f
+	.4byte 0x083fe807
+	.4byte 0x083ff5da
+	.4byte 0x083ff5ea
+	.4byte 0x083ff5fa
+	.4byte 0x083ff8fa
+	.4byte 0x083ffd8d
 
 	.global gUnknown_08401508
 gUnknown_08401508: @ 8401508
@@ -7814,11 +8357,33 @@ gUnknown_0840164C: @ 840164C
 
 	.global gUnknown_0840165C
 gUnknown_0840165C: @ 840165C
-	.incbin "baserom.gba", 0x0040165c, 0x18
+	.4byte 0x08400dae
+	.4byte 0x08400dc6
+	.4byte 0x08400db6
+	.4byte 0x08400dce
+	.4byte 0x08400dbe
+	.4byte 0x084007e4
 
 	.global gUnknown_08401674
 gUnknown_08401674: @ 8401674
-	.incbin "baserom.gba", 0x00401674, 0x48
+	.4byte 0x08400e65
+	.4byte 0x08400e73
+	.4byte 0x08400e83
+	.4byte 0x08400e91
+	.4byte 0x08400e9f
+	.4byte 0x08400ead
+	.4byte 0x08400eb9
+	.4byte 0x08400ec4
+	.4byte 0x08400ed1
+	.4byte 0x08400ede
+	.4byte 0x08400ee9
+	.4byte 0x08400ef5
+	.4byte 0x08400f02
+	.4byte 0x08400f0f
+	.4byte 0x08400f20
+	.4byte 0x08400f2f
+	.4byte 0x08400f3b
+	.4byte 0x08400f49
 
 	.global gUnknown_084016BC
 gUnknown_084016BC: @ 84016BC
