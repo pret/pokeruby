@@ -428,19 +428,19 @@ gUnknown_081FA6CC: @ 81FA6CC
 	.global gUnknown_081FA6D4
 gUnknown_081FA6D4: @ 81FA6D4
 	.4byte 0x081fa69c
-	.4byte 0x08400dfa
+	.4byte BattleText_PoisonStatus
 	.4byte 0x081fa6a4
-	.4byte 0x08400df4
+	.4byte BattleText_Sleep
 	.4byte 0x081fa6ac
-	.4byte 0x08400e06
+	.4byte BattleText_Paralysis
 	.4byte 0x081fa6b4
-	.4byte 0x08400e01
+	.4byte BattleText_Burn
 	.4byte 0x081fa6bc
-	.4byte 0x08400e10
+	.4byte BattleText_IceStatus
 	.4byte 0x081fa6c4
-	.4byte 0x08400e14
+	.4byte BattleText_Confusion
 	.4byte 0x081fa6cc
-	.4byte 0x08400e1e
+	.4byte BattleText_Love
 
 	.global gUnknown_081FA70C
 gUnknown_081FA70C: @ 81FA70C
@@ -11802,10 +11802,12 @@ PCText_ReturnToMenu:
 
 	.global gUnknown_08410C1C
 gUnknown_08410C1C: @ 8410C1C
+PCText_OnlyOne:
 	.string "There is just one POKéMON with you.$"
 
 	.global gUnknown_08410C40
 gUnknown_08410C40: @ 8410C40
+PCText_PartyFull2:
 	.string "Your party is full!$"
 
 	.global gUnknown_08410C54
@@ -11847,273 +11849,373 @@ PCText_ReturnToCondition:
 
 	.global gUnknown_08410E22
 gUnknown_08410E22: @ 8410E22
+OtherText_NumberRegistered:
 	.string "No. registered$"
 
 	.global gUnknown_08410E31
 gUnknown_08410E31: @ 8410E31
+OtherText_NumberBattles:
 	.string "No. of battles$"
 
 	.global gUnknown_08410E40
 gUnknown_08410E40: @ 8410E40
-	.string "{PALETTE 5}"
-	.string "STRATEGY$"
+OtherText_Strategy:
+	.string "{PALETTE 5}STRATEGY$"
 
 	.global gUnknown_08410E4C
 gUnknown_08410E4C: @ 8410E4C
-	.string "{PALETTE 5}"
-	.string "TRAINER’S POKéMON$"
+OtherText_TrainersPokemon:
+	.string "{PALETTE 5}TRAINER’S POKéMON$"
 
 	.global gUnknown_08410E61
 gUnknown_08410E61: @ 8410E61
-	.string "{PALETTE 5}"
-	.string "SELF-INTRODUCTION$"
+OtherText_SelfIntroduction:
+	.string "{PALETTE 5}SELF-INTRODUCTION$"
 
 	.global gUnknown_08410E76
 gUnknown_08410E76: @ 8410E76
+OtherText_Nature2:
 	.string "NATURE/$"
 
 	.global gUnknown_08410E7E
 gUnknown_08410E7E: @ 8410E7E
+OtherText_InParty:
 	.string "IN PARTY$"
 
 	.global gUnknown_08410E87
 gUnknown_08410E87: @ 8410E87
+OtherText_Number:
 	.string "No. $"
 
 	.global gUnknown_08410E8C
 gUnknown_08410E8C: @ 8410E8C
+OtherText_Ribbons:
 	.string "RIBBONS$"
+OtherText_MakeProfilePage1:
 	.string "Make your profile by combining$"
+OtherText_MakeProfilePage2:
 	.string "four words or phrases.$"
+OtherText_MakeMessagePage1:
 	.string "Make a message with 6 phrases.$"
+OtherText_MakeMessagePage2:
 	.string "Max. two 12-letter phrases/line.$"
+OtherText_DescribeFeelingsPage1:
 	.string "Find words that describe your$"
+OtherText_DescribeFeelingsPage2:
 	.string "feelings right now.$"
+OtherText_WithFourPhrases:
 	.string "With four phrases,$"
+OtherText_CombineNinePhrasesPage1:
 	.string "Combine nine phrases and$"
+OtherText_CombineNinePhrasesPage2:
 	.string "make a message.$"
+OtherText_ImproveBardSongPage1:
 	.string "Change just one word or phrase$"
+OtherText_ImproveBardSongPage2:
 	.string "and improve the BARD’s song.$"
+OtherText_YourProfile:
 	.string "Your profile $"
+OtherText_YourFeelingBattle:
 	.string "Your feeling at the battle’s start$"
+OtherText_SetWinMessage:
 	.string "What you say if you win a battle$"
+OtherText_SetLossMessage:
 	.string "What you say if you lose a battle$"
+OtherText_TheAnswer:
 	.string "The answer$"
+OtherText_MailMessage:
 	.string "The MAIL message$"
+OtherText_MailSalutation:
 	.string "The MAIL salutation$"
+OtherText_NewSong:
 	.string "The new song$"
+OtherText_CombineTwoPhrasesPage1:
 	.string "Combine two phrases and$"
+OtherText_CombineTwoPhrasesPage2:
 	.string "make a trendy saying.$"
+OtherText_ConfirmTrendyPage1:
 	.string "The trendy saying$"
+OtherText_ConfirmTrendyPage2:
 	.string "is as shown. Okay?$"
+OtherText_HipsterPage1:
 	.string "I’ll combine two phrases and$"
+OtherText_HipsterPage2:
 	.string "teach you a good saying.$"
 
 	.global gUnknown_084110EE
 gUnknown_084110EE: @ 84110EE
+OtherText_TextDeletedConfirmPage1:
 	.string "All the text being edited will$"
 
 	.global gUnknown_0841110D
 gUnknown_0841110D: @ 841110D
+OtherText_TextDeletedConfirmPage2:
 	.string "be deleted. Is that okay?$"
 
 	.global gUnknown_08411127
 gUnknown_08411127: @ 8411127
+OtherText_QuitEditing:
 	.string "Quit editing?$"
 
 	.global gUnknown_08411135
 gUnknown_08411135: @ 8411135
+OtherText_EditedTextNoSavePage1:
 	.string "The edited text will not be saved.$"
 
 	.global gUnknown_08411158
 gUnknown_08411158: @ 8411158
+OtherText_EditedTextNoSavePage2:
 	.string "Is that okay?$"
 
 	.global gUnknown_08411166
 gUnknown_08411166: @ 8411166
+OtherText_EnterAPhraseOrWord:
 	.string "Please enter a phrase or word.$"
 
 	.global gUnknown_08411185
 gUnknown_08411185: @ 8411185
+OtherText_TextNoDelete:
 	.string "The entire text can’t be deleted.$"
 
 	.global gUnknown_084111A7
 gUnknown_084111A7: @ 84111A7
+OtherText_OnlyOnePhrase:
 	.string "Only one phrase may be changed.$"
 
 	.global gUnknown_084111C7
 gUnknown_084111C7: @ 84111C7
+OtherText_OriginalSongRestored:
 	.string "The original song will be restored.$"
 
 	.global gUnknown_084111EB
 gUnknown_084111EB: @ 84111EB
+OtherText_TrendyAlready:
 	.string "That’s trendy already!$"
 
 	.global gUnknown_08411202
 gUnknown_08411202: @ 8411202
+OtherText_CombineTwoPhrases:
 	.string "Combine two words or phrases.$"
 
 	.global gUnknown_08411220
 gUnknown_08411220: @ 8411220
+OtherText_QuitGivingInfo:
 	.string "Quit giving information?$"
 
 	.global gUnknown_08411239
 gUnknown_08411239: @ 8411239
+OtherText_StopGivingMail:
 	.string "Stop giving the POKéMON MAIL?$"
 
 	.global gUnknown_08411257
 gUnknown_08411257: @ 8411257
+OtherText_Profile:
 	.string "PROFILE$"
 
 	.global gUnknown_0841125F
 gUnknown_0841125F: @ 841125F
+OtherText_AtBattleStart:
 	.string "At the battle’s start.$"
 
 	.global gUnknown_08411276
 gUnknown_08411276: @ 8411276
+OtherText_UponWinningBattle:
 	.string "Upon winning a battle.$"
 
 	.global gUnknown_0841128D
 gUnknown_0841128D: @ 841128D
+OtherText_UponLosingBattle:
 	.string "Upon losing a battle.$"
 
 	.global gUnknown_084112A3
 gUnknown_084112A3: @ 84112A3
+OtherText_TheBardsSong:
 	.string "The BARD’s Song$"
 
 	.global gUnknown_084112B3
 gUnknown_084112B3: @ 84112B3
+OtherText_WhatsHipHappening:
 	.string "What’s hip and happening?$"
 
 	.global gUnknown_084112CD
 gUnknown_084112CD: @ 84112CD
+OtherText_Interview:
 	.string "Interview$"
 
 	.global gUnknown_084112D7
 gUnknown_084112D7: @ 84112D7
+OtherText_GoodSaying:
 	.string "Good saying$"
+OtherText_SoPretty:
 	.string " so pretty!$"
+OtherText_SoDarling:
 	.string " so darling!$"
+OtherText_SoRelaxed:
 	.string " so relaxed!$"
+OtherText_SoSunny:
 	.string " so sunny!$"
+OtherText_SoDesirable:
 	.string " so desirable!$"
+OtherText_SoExciting:
 	.string " so exciting!$"
+OtherText_SoAmusing:
 	.string " so amusing!$"
+OtherText_SoMagical:
 	.string " so magical!$"
 
 	.global gUnknown_0841134B
 gUnknown_0841134B: @ 841134B
+OtherText_Is:
 	.string " is$"
 
 	.global gUnknown_0841134F
 gUnknown_0841134F: @ 841134F
+OtherText_DontYouAgree:
 	.string "\nDon’t you agree?$"
+OtherText_WantVacationNicePlace:
 	.string "I so want to go on a vacation.\nWould you happen to know a nice place?$"
+OtherText_BoughtCrayonsIsNice:
 	.string "I bought crayons with 120 colors!\nDon’t you think that’s nice?$"
+OtherText_IfWeCouldFloat:
 	.string "Wouldn’t it be nice if we could float\naway on a cloud of bubbles?$"
+OtherText_SandWashesAwayMakeSad:
 	.string "When you write on a sandy beach,\nthey wash away. It makes me sad.$"
+OtherText_WhatsBottomSeaLike:
 	.string "What’s the bottom of the sea like?\nJust once I would so love to go!$"
+OtherText_SeeSettingSun:
 	.string "When you see the setting sun, does it\nmake you want to go home?$"
+OtherText_LyingInGreenGrass:
 	.string "Lying back in the green grass...\nOh, it’s so, so nice!$"
+OtherText_SecretBasesWonderful:
 	.string "SECRET BASES are so wonderful!\nCan’t you feel the excitement?$"
+OtherText_PokeLeague:
 	.string "POKéMON LEAGUE$"
+OtherText_PokeCenter:
 	.string "POKéMON CENTER$"
 
 	.global gUnknown_08411581
 gUnknown_08411581: @ 8411581
+OtherText_GetAPokeBlock:
 	.string " gets a {POKEBLOCK}?$"
+OtherText_Coolness:
 	.string "Coolness $"
+OtherText_Beauty:
 	.string "Beauty $"
+OtherText_Cuteness:
 	.string "Cuteness $"
+OtherText_Smartness:
 	.string "Smartness $"
+OtherText_Toughness:
 	.string "Toughness $"
 
 	.global gUnknown_084115C2
 gUnknown_084115C2: @ 84115C2
+SystemText_WasEnhanced:
 	.string "was enhanced!$"
 
 	.global gUnknown_084115D0
 gUnknown_084115D0: @ 84115D0
+SystemText_NothingChanged:
 	.string "Nothing changed!$"
 
 	.global gUnknown_084115E1
 gUnknown_084115E1: @ 84115E1
+OtherText_WontEat:
 	.string "It won’t eat anymore...$"
 
 	.global gUnknown_084115F9
 gUnknown_084115F9: @ 84115F9
+SystemText_SaveFailedBackupCheck:
 	.string "Save failed.\nChecking the backup memory...\nPlease wait.\n{COLOR RED}“Time required: 1 minute”$"
 
 	.global gUnknown_0841164E
 gUnknown_0841164E: @ 841164E
+SystemText_BackupDamagedGameContinue:
 	.string "The backup memory is damaged or\nthe internal battery has run dry.\nThe game can be played. However,\nprogress cannot be saved.$"
 
 	.global gUnknown_084116CB
 gUnknown_084116CB: @ 84116CB
+SystemText_GameplayEnded:
 	.string "{COLOR RED}“Gameplay cannot be continued.\nReturning to the title screen...”$"
 
 	.global gUnknown_0841170F
 gUnknown_0841170F: @ 841170F
+SystemText_CheckCompleteSaveAttempt:
 	.string "Check completed.\nAttempting to save again.\nPlease wait.$"
 
 	.global gUnknown_08411747
 gUnknown_08411747: @ 8411747
+SystemText_SaveCompletedGameEnd:
 	.string "Save completed.\n{COLOR RED}“Gameplay cannot be continued.\nReturning to the title screen.”$"
 
 	.global gUnknown_08411799
 gUnknown_08411799: @ 8411799
+SystemText_SaveCompletedPressA:
 	.string "Save completed.\n{COLOR RED}“Please press the A Button.”$"
 
 	.global gUnknown_084117C9
 gUnknown_084117C9: @ 84117C9
+OtherText_Ferry:
 	.string "FERRY$"
 
 	.global gUnknown_084117CF
 gUnknown_084117CF: @ 84117CF
+OtherText_SecretBase:
 	.string "SECRET BASE$"
 
 	.global gUnknown_084117DB
 gUnknown_084117DB: @ 84117DB
+OtherText_Hideout:
 	.string "HIDEOUT$"
 
 	.global gUnknown_084117E3
 gUnknown_084117E3: @ 84117E3
+SystemText_ResetRTCPrompt:
 	.string "Reset RTC?\nA: Confirm, B: Cancel$"
 
 	.global gUnknown_08411804
 gUnknown_08411804: @ 8411804
+SystemText_PresentTime:
 	.string "Present time in game$"
 
 	.global gUnknown_08411819
 gUnknown_08411819: @ 8411819
+SystemText_PreviousTime:
 	.string "Previous time in game$"
 
 	.global gUnknown_0841182F
 gUnknown_0841182F: @ 841182F
+SystemText_PleaseResetTime:
 	.string "Please reset the time.$"
 
 	.global gUnknown_08411846
 gUnknown_08411846: @ 8411846
+SystemText_ClockResetDataSave:
 	.string "The clock has been reset.\nData will be saved. Please wait.$"
 
 	.global gUnknown_08411881
 gUnknown_08411881: @ 8411881
+SystemText_SaveCompleted:
 	.string "Save completed.$"
 
 	.global gUnknown_08411891
 gUnknown_08411891: @ 8411891
+SystemText_SaveFailed:
 	.string "Save failed...$"
 
 	.global gUnknown_084118A0
 gUnknown_084118A0: @ 84118A0
+SystemText_NoSaveFileNoTime:
 	.string "There is no save file, so the time\ncan’t be set.$"
 
 	.global gUnknown_084118D1
 gUnknown_084118D1: @ 84118D1
+SystemText_ClockAdjustmentUsable:
 	.string "The in-game clock adjustment system\nis now useable.$"
 
 	.global gUnknown_08411905
 gUnknown_08411905: @ 8411905
+SystemText_Saving:
     .string "SAVING...\nDON’T TURN OFF THE POWER.$"
 
     .align 2
@@ -12603,225 +12705,297 @@ gUnknown_0842C29C: @ 842C29C
 	.4byte __unknown_string_6thRound, sub_814A4B8
 	.4byte __unknown_string_7thRound, sub_814A4B8
 	.4byte __unknown_string_8thRound, sub_814A4B8
-
+OtherText_TopSpeed:
 	.string "TOP SPEED$"
 
 	.global gUnknown_0842C2E6
 gUnknown_0842C2E6: @ 842C2E6
+MultiText_BerryBlenderMaxSpeedRecord:
 	.string "BERRY BLENDER\nMAXIMUM SPEED RECORD!$"
 
 	.global gUnknown_0842C30A
 gUnknown_0842C30A: @ 842C30A
+MultiText_2P3P4P:
 	.string "2 PLAYERS\n3 PLAYERS\n4 PLAYERS$"
 
 	.global gUnknown_0842C328
 gUnknown_0842C328: @ 842C328
+MultiText_Saving:
 	.string "SAVING...\nDON’T TURN OFF THE POWER.$"
 
 	.global gUnknown_0842C34C
 gUnknown_0842C34C: @ 842C34C
+MultiText_LinkError:
 	.string "{HIGHLIGHT TRANSPARENT}{COLOR WHITE2}Link error...\nCheck your Game Link cable connection,\nand turn the power off and on.$"
 
 	.global gUnknown_0842C3A6
 gUnknown_0842C3A6: @ 842C3A6
+SystemText_OptionMenu:
 	.string "{PALETTE 9}OPTION$"
 
 	.global gUnknown_0842C3B0
 gUnknown_0842C3B0: @ 842C3B0
+SystemText_TextSpeed:
 	.string "{PALETTE 9}TEXT SPEED$"
 
 	.global gUnknown_0842C3BE
 gUnknown_0842C3BE: @ 842C3BE
+SystemText_BattleScene:
 	.string "{PALETTE 9}BATTLE SCENE$"
 
 	.global gUnknown_0842C3CE
 gUnknown_0842C3CE: @ 842C3CE
+SystemText_BattleStyle:
 	.string "{PALETTE 9}BATTLE STYLE$"
 
 	.global gUnknown_0842C3DE
 gUnknown_0842C3DE: @ 842C3DE
+SystemText_Sound:
 	.string "{PALETTE 9}SOUND$"
 
 	.global gUnknown_0842C3E7
 gUnknown_0842C3E7: @ 842C3E7
+SystemText_Frame:
 	.string "{PALETTE 9}FRAME$"
 
 	.global gUnknown_0842C3F0
 gUnknown_0842C3F0: @ 842C3F0
+SystemText_Cancel:
 	.string "{PALETTE 9}CANCEL$"
 
 	.global gUnknown_0842C3FA
 gUnknown_0842C3FA: @ 842C3FA
+SystemText_ButtonMode:
 	.string "{PALETTE 9}BUTTON MODE$"
 
 	.global gUnknown_0842C409
 gUnknown_0842C409: @ 842C409
+SystemText_TextSpeedSlow:
 	.string "{PALETTE 15}SLOW$"
 
 	.global gUnknown_0842C411
 gUnknown_0842C411: @ 842C411
+SystemText_Mid:
 	.string "{PALETTE 15}MID$"
 
 	.global gUnknown_0842C418
 gUnknown_0842C418: @ 842C418
+SystemText_Fast:
 	.string "{PALETTE 15}FAST$"
 
 	.global gUnknown_0842C420
 gUnknown_0842C420: @ 842C420
+SystemText_On:
 	.string "{PALETTE 15}ON$"
 
 	.global gUnknown_0842C426
 gUnknown_0842C426: @ 842C426
+SystemText_Off:
 	.string "{PALETTE 15}OFF$"
 
 	.global gUnknown_0842C42D
 gUnknown_0842C42D: @ 842C42D
+SystemText_Shift:
 	.string "{PALETTE 15}SHIFT$"
 
 	.global gUnknown_0842C436
 gUnknown_0842C436: @ 842C436
+SystemText_Set:
 	.string "{PALETTE 15}SET$"
 
 	.global gUnknown_0842C43D
 gUnknown_0842C43D: @ 842C43D
+SystemText_Mono:
 	.string "{PALETTE 15}MONO$"
 
 	.global gUnknown_0842C445
 gUnknown_0842C445: @ 842C445
+SystemText_Stereo:
 	.string "{PALETTE 15}STEREO$"
 
 	.global gUnknown_0842C44F
 gUnknown_0842C44F: @ 842C44F
+SystemText_Type:
 	.string "{PALETTE 15}TYPE$"
 
 	.global gUnknown_0842C457
 gUnknown_0842C457: @ 842C457
+SystemText_Terminator:
 	.string "{PALETTE 8}$"
 
 	.global gUnknown_0842C45B
 gUnknown_0842C45B: @ 842C45B
+SystemText_Normal:
 	.string "{PALETTE 15}NORMAL$"
 
 	.global gUnknown_0842C465
 gUnknown_0842C465: @ 842C465
+SystemText_LR:
 	.string "{PALETTE 15}LR$"
 
 	.global gUnknown_0842C46B
 gUnknown_0842C46B: @ 842C46B
+SystemText_LA:
 	.string "{PALETTE 15}L=A$"
+SystemText_Pokedex:
 	.string "POKéDEX$"
+SystemText_Pokemon:
 	.string "POKéMON$"
+SystemText_BAG:
 	.string "BAG$"
+SystemText_Pokenav:
 	.string "POKéNAV$"
+SystemText_Player:
 	.string "{PLAYER}$"
+SystemText_Save:
 	.string "SAVE$"
+SystemText_Option:
 	.string "OPTION$"
+SystemText_Exit:
 	.string "EXIT$"
+SystemText_Retire: @ safari zone?
 	.string "RETIRE$"
 
 	.global gUnknown_0842C4A9
 gUnknown_0842C4A9: @ 842C4A9
+OtherText_SafariStock:
 	.string "SAFARI BALLS\nStock: {STR_VAR_1}$"
 
 	.global gUnknown_0842C4C0
 gUnknown_0842C4C0: @ 842C4C0
+SystemText_LinkStandby:
 	.string "Link standby...\n... ... B Button: Cancel$"
 
 	.global gUnknown_0842C4E9
 gUnknown_0842C4E9: @ 842C4E9
+SystemText_LoadEventPressA:
 	.string "Press the A Button to load event.\n... ... B Button: Cancel$"
 
 	.global gUnknown_0842C524
 gUnknown_0842C524: @ 842C524
+SystemText_LoadingEvent:
 	.string "Loading event...$"
 
 	.global gUnknown_0842C535
 gUnknown_0842C535: @ 842C535
+SystemText_DontCutLink:
 	.string "Don’t remove the Game Link cable.\nDon’t turn off the power.$"
 
 	.global gUnknown_0842C571
 gUnknown_0842C571: @ 842C571
+SystemText_EventLoadSuccess:
 	.string "The event was safely loaded.$"
+SystemText_Terminator2:
 	.string "$"
 
 	.global gUnknown_0842C58F
 gUnknown_0842C58F: @ 842C58F
+SystemText_LoadingError:
 	.string "Loading error.\nEnding session.$"
+SystemText_Terminator3:
 	.string "$$$$$$$"
 
 	.global gUnknown_0842C5B5
 gUnknown_0842C5B5: @ 842C5B5
+OtherText_Hoenn:
 	.string "HOENN$"
 
 	.global gUnknown_0842C5BB
 gUnknown_0842C5BB: @ 842C5BB
+OtherText_OhABite:
 	.string "Oh! A bite!$"
 
 	.global gUnknown_0842C5C7
 gUnknown_0842C5C7: @ 842C5C7
+OtherText_PokeOnHook:
 	.string "A POKéMON’s on the hook!{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0842C5E2
 gUnknown_0842C5E2: @ 842C5E2
+OtherText_NotANibble:
 	.string "Not even a nibble...{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0842C5F9
 gUnknown_0842C5F9: @ 842C5F9
+OtherText_ItGotAway:
 	.string "It got away...{PAUSE_UNTIL_PRESS}$"
+OtherText_Terminator:
 	.string "$"
 
 	.global gUnknown_0842C60B
 gUnknown_0842C60B: @ 842C60B
+TradeText_WillBeSent:
 	.string "{STR_VAR_2} will be sent to {STR_VAR_1}.$"
 
 	.global gUnknown_0842C622
 gUnknown_0842C622: @ 842C622
+TradeText_ByeBye:
 	.string "Bye-bye, {STR_VAR_2}!$"
 
 	.global gUnknown_0842C62F
 gUnknown_0842C62F: @ 842C62F
+TradeText_SentOverPoke:
 	.string "{STR_VAR_1} sent over {STR_VAR_3}.$"
 
 	.global gUnknown_0842C640
 gUnknown_0842C640: @ 842C640
+TradeText_TakeGoodCare:
 	.string "Take good care of {STR_VAR_3}!$"
+TradeText_Cancel:
 	.string "CANCEL$"
+TradeText_ChoosePoke:
 	.string "Choose a POKéMON.$"
 TradeText_Summary1:
 	.string "SUMMARY$"
 TradeText_Trade1:
 	.string "TRADE$"
+TradeText_CancelTradePrompt:
 	.string "Cancel trade?$"
+TradeText_PressBToExit:
 	.string "Press the B Button to exit.$"
 TradeText_Summary2:
 	.string "SUMMARY$"
 TradeText_Trade2:
 	.string "TRADE$"
+TradeText_LinkStandby:
 	.string "{COLOR DARK_GREY}{HIGHLIGHT WHITE2}{SHADOW LIGHT_GREY}Link standby...\nPlease wait.$"
+TradeText_TradeCancelled:
 	.string "{COLOR DARK_GREY}{HIGHLIGHT WHITE2}{SHADOW LIGHT_GREY}The trade has\nbeen canceled.$"
+TradeText_OnlyPoke:
 	.string "{COLOR DARK_GREY}{HIGHLIGHT WHITE2}{SHADOW LIGHT_GREY}That’s your only\nPOKéMON for battle.$"
+TradeText_NonTradablePoke:
 	.string "{COLOR DARK_GREY}{HIGHLIGHT WHITE2}{SHADOW LIGHT_GREY}Your friend can’t\ntrade that one.$"
+TradeText_WaitingForFriend:
 	.string "{COLOR DARK_GREY}{HIGHLIGHT WHITE2}{SHADOW LIGHT_GREY}Waiting for your\nfriend to finish...$"
+TradeText_WantToTrade:
 	.string "{COLOR DARK_GREY}{HIGHLIGHT WHITE2}{SHADOW LIGHT_GREY}Your friend wants\nto trade POKéMON.$"
+TradeText_Terminator:
 	.string "$"
 
 	.global gUnknown_0842C7B6 @ trade functions? could be in-game as well
 gUnknown_0842C7B6:
+TradeText_TradeOkayPrompt:
 	.string "Is this trade okay?$"
 
 	.global gUnknown_0842C7CA
 gUnknown_0842C7CA:
+OtherText_Terminator2:
 	.string "$"
 
 	.global gUnknown_0842C7CB @ this is probably related to battle
 gUnknown_0842C7CB:
+OtherText_NewLine:
 	.string "\n$"
+OtherText_Escape:
 	.string "/$"
+OtherText_Level:
 	.string "Lv$"
+OtherText_ThreeDashes:
 	.string "---$"
 
 	.global gUnknown_0842C7D6
 gUnknown_0842C7D6:
+OtherText_FourQuestions:
 	.string "????$"
 
 @ 842C7DB
@@ -12829,155 +13003,196 @@ gUnknown_0842C7D6:
 
 	.global gUnknown_0842C890
 gUnknown_0842C890: @ 842C890
+OtherText_ThreeQuestions:
 	.string "???$"
 
 	.global gUnknown_0842C894
 gUnknown_0842C894: @ 842C894
+OtherText_From:
 	.string "From $"
 
 	.global gUnknown_0842C89A
 gUnknown_0842C89A: @ 842C89A
+OtherText_MixingRecordsWithFriend:
 	.string "Mixing records...$"
 
 	.global gUnknown_0842C8AC
 gUnknown_0842C8AC: @ 842C8AC
+OtherText_MixingComplete:
 	.string "Record mixing completed.\nThank you for waiting.$"
 
 	.global gUnknown_0842C8DC
 gUnknown_0842C8DC: @ 842C8DC
+OtherText_TrainersTrainerCard: @ redundant but couldnt think of a better desc
 	.string "’s TRAINER CARD$"
 
 	.global gUnknown_0842C8EC
 gUnknown_0842C8EC: @ 842C8EC
+OtherText_FirstHOF:
 	.string "FIRST HALL OF FAME$"
 
 	.global gUnknown_0842C8FF
 gUnknown_0842C8FF: @ 842C8FF
+OtherText_LinkCableBattles:
 	.string "LINK CABLE BATTLES  W/            L/$"
 
 	.global gUnknown_0842C924
 gUnknown_0842C924: @ 842C924
+OtherText_BattleTowerWinRecord:
 	.string "BATTLE TOWER W/{CLEAR_TO 0x72}&{CLEAR_TO 0x98}STRAIGHT$"
 
 	.global gUnknown_0842C943
 gUnknown_0842C943: @ 842C943
+OtherText_ContestRecord:
 	.string "CONTESTS W/FRIENDS W/$"
 
 	.global gUnknown_0842C959
 gUnknown_0842C959: @ 842C959
+OtherText_MixingRecord:
 	.string "{POKEBLOCK}S W/FRIENDS$"
 
 	.global gUnknown_0842C96A
 gUnknown_0842C96A: @ 842C96A
+OtherText_TradeRecord:
 	.string "POKéMON TRADES$"
 
 	.global gUnknown_0842C979
 gUnknown_0842C979: @ 842C979
+OtherText_Boy:
 	.string "BOY$"
 
 	.global gUnknown_0842C97D
 gUnknown_0842C97D: @ 842C97D
+OtherText_Girl:
 	.string "GIRL$"
+OtherText_Terminator3:
 	.string "$"
 
 	.global gUnknown_0842C983
 gUnknown_0842C983: @ 842C983
+OtherText_Player:
 	.string "PLAYER$"
 
 	.global gUnknown_0842C98A
 gUnknown_0842C98A: @ 842C98A
+OtherText_Badges:
 	.string "BADGES$"
 	.string "$"
 
 	.global gUnknown_0842C992
 gUnknown_0842C992: @ 842C992
+OtherText_Pokedex:
 	.string "POKéDEX$"
 
 	.global gUnknown_0842C99A
 gUnknown_0842C99A: @ 842C99A
+OtherText_PlayTime:
 	.string "PLAY TIME$"
 
 	.global gUnknown_0842C9A4
 gUnknown_0842C9A4: @ 842C9A4
+OtherText_SentToPc:
 	.string "{STR_VAR_1} was sent to\nthe PC.{PAUSE_UNTIL_PRESS}$"
+OtherText_YourName:
 	.string "YOUR NAME?$"
+OtherText_BoxName:
 	.string "BOX NAME?$"
+OtherText_PokeName:
 	.string "{STR_VAR_1}’s nickname?$"
 
 	.global gUnknown_0842C9E1
 gUnknown_0842C9E1: @ 842C9E1
-	.string "MARCO$"
+OtherText_Marco:
+	.string "MARCO$" @ polo
 
 	.global gUnknown_0842C9E7
 gUnknown_0842C9E7: @ 842C9E7
+OtherText_Coins:
 	.string "{STR_VAR_1} COINS$"
 
 	.global gUnknown_0842C9F0
 gUnknown_0842C9F0: @ 842C9F0
+OtherText_BattleResults:
 	.string "{PLAYER}’s BATTLE RESULTS$"
 
 	.global gUnknown_0842CA04
 gUnknown_0842CA04: @ 842CA04
+OtherText_WinRecord:
 	.string "TOTAL RECORD W/{STR_VAR_1} L/{STR_VAR_2} D/{STR_VAR_3}$"
 
 	.global gUnknown_0842CA20
 gUnknown_0842CA20: @ 842CA20
+OtherText_WinLoseDraw:
 	.string "WIN        LOSE        DRAW$"
 
 	.global gUnknown_0842CA3C
 gUnknown_0842CA3C: @ 842CA3C
+OtherText_SevenDashes:
 	.string "-------$"
 
 	.global gUnknown_0842CA44
 gUnknown_0842CA44: @ 842CA44
+OtherText_FourDashes:
 	.string "----$"
 
 	.global gUnknown_0842CA49
 gUnknown_0842CA49: @ 842CA49
+OtherText_BattleTowerResults:
 	.string "{PLAYER}’s BATTLE TOWER RESULTS$"
 
 	.global gUnknown_0842CA63
 gUnknown_0842CA63: @ 842CA63
+OtherText_Lv50:
 	.string "LV 50$"
 
 	.global gUnknown_0842CA69
 gUnknown_0842CA69: @ 842CA69
+OtherText_Lv100:
 	.string "LV 100$"
 
 	.global gUnknown_0842CA70
 gUnknown_0842CA70: @ 842CA70
+OtherText_WinStreak:
 	.string "{STR_VAR_1}W STREAK$"
 
 	.global gUnknown_0842CA7B
 gUnknown_0842CA7B: @ 842CA7B
+OtherText_Current:
 	.string "CURRENT$"
 
 	.global gUnknown_0842CA83
 gUnknown_0842CA83: @ 842CA83
+OtherText_Record:
 	.string "RECORD$"
 
 	.global gUnknown_0842CA8A
 gUnknown_0842CA8A: @ 842CA8A
+OtherText_Prev:
 	.string "PREV.$"
 
 	.global gUnknown_0842CA90
 gUnknown_0842CA90: @ 842CA90
+OtherText_QuitGamePrompt:
 	.string "Quit the game?$"
 
 	.global gUnknown_0842CA9F
 gUnknown_0842CA9F: @ 842CA9F
+OtherText_MaxCoins:
 	.string "You’ve got 9,999 COINS.$"
 
 	.global gUnknown_0842CAB7
 gUnknown_0842CAB7: @ 842CAB7
+OtherText_OutOfCoins:
 	.string "You’ve run out of COINS.\nGame over!$"
 
 	.global gUnknown_0842CADB
 gUnknown_0842CADB: @ 842CADB
+OtherText_DontHaveThreeCoins:
 	.string "You don’t have three COINS.$"
 
 	.global gUnknown_0842CAF7
 gUnknown_0842CAF7: @ 842CAF7
+OtherText_ReelTime:
 	.string "REEL TIME\nHere’s your chance to take\naim and nail marks!\nThe Reel Time continues for\nas often as the drawn number.\nIt all ends on a Big Bonus.$"
 DaycareText_GetAlongVeryWell:
 	.string "The two seem to get along very well.$"
@@ -12990,317 +13205,435 @@ DaycareText_PlayOther:
 
 	.global gUnknown_0842CC28
 gUnknown_0842CC28: @ 842CC28
+OtherText_NewLine2:
 	.string "\n$"
 
 	.global gUnknown_0842CC2A
 gUnknown_0842CC2A: @ 842CC2A
+OtherText_Cancel:
 	.string "CANCEL$"
+OtherText_Lv:
 	.string "LV$"
 
 	.global gUnknown_0842CC34
 gUnknown_0842CC34: @ 842CC34
+OtherText_Egg:
 	.string "EGG$"
 
 	.global gUnknown_0842CC38
 gUnknown_0842CC38: @ 842CC38
+OtherText_HatchedFromEgg:
 	.string "{COLOR WHITE2}{HIGHLIGHT TRANSPARENT}{SHADOW DARK_GREY}{STR_VAR_1} hatched from the EGG!$"
 
 	.global gUnknown_0842CC5A
 gUnknown_0842CC5A: @ 842CC5A
+OtherText_NickHatchPrompt:
 	.string "{COLOR WHITE2}{HIGHLIGHT TRANSPARENT}{SHADOW DARK_GREY}Would you like to nickname the newly\nhatched {STR_VAR_1}?$"
+OtherText_Battle:
 	.string "BATTLE$"
+OtherText_Contest:
 	.string "CONTEST$"
+OtherText_Type:
 	.string "TYPE/$"
+OtherText_PP:
 	.string "PP/$"
+OtherText_Power:
 	.string "POWER$"
+OtherText_Accuracy:
 	.string "ACCURACY$"
+OtherText_Appeal:
 	.string "APPEAL$"
+OtherText_Jam:
 	.string "JAM$"
 
 	.global gUnknown_0842CCC7
 gUnknown_0842CCC7: @ 842CCC7
+OtherText_TeachWhichMove:
 	.string "Teach which move to {STR_VAR_1}?$"
 
 	.global gUnknown_0842CCDF
 gUnknown_0842CCDF: @ 842CCDF
+OtherText_TeachSpecificMove:
 	.string "Teach {STR_VAR_2}?$"
 
 	.global gUnknown_0842CCE9
 gUnknown_0842CCE9: @ 842CCE9
+OtherText_PokeLearnedMove:
 	.string "{STR_VAR_1} learned {STR_VAR_2}.$"
 
 	.global gUnknown_0842CCF8
 gUnknown_0842CCF8: @ 842CCF8
+OtherText_DeleteOlderMove:
 	.string "{STR_VAR_1} is trying to learn\n{STR_VAR_2}.\pBut {STR_VAR_1} can’t learn more\nthan four moves.\pDelete an older move to make\nroom for {STR_VAR_2}?$"
 
 	.global gUnknown_0842CD65
 gUnknown_0842CD65: @ 842CD65
+OtherText_StopLearningMove:
 	.string "Stop learning {STR_VAR_2}?$"
 
 	.global gUnknown_0842CD77
 gUnknown_0842CD77: @ 842CD77
+OtherText_ForgotMove123:
 	.string "{PAUSE 32}1, {PAUSE 15}2 {PAUSE 15}...{PAUSE 15}...{PAUSE 15}...{PAUSE 15} {PLAY_SE 0x0038}Poof!\p$"
 
 	.global gUnknown_0842CDA3
 gUnknown_0842CDA3: @ 842CDA3
+OtherText_ForgotMove:
 	.string "{STR_VAR_1} forgot {STR_VAR_3}.\pAnd...\p{STR_VAR_1} learned {STR_VAR_2}.$"
+OtherText_DidNotLearnMove:
 	.string "{STR_VAR_1} did not learn\n{STR_VAR_2}.$"
 
 	.global gUnknown_0842CDDC
 gUnknown_0842CDDC: @ 842CDDC
+OtherText_GiveUpTeachingMove:
 	.string "Give up trying to teach a new move\nto {STR_VAR_1}?$"
 
 	.global gUnknown_0842CE06
 gUnknown_0842CE06: @ 842CE06
+OtherText_WhichMoveToForget:
 	.string "Which move should be forgotten?\p$"
 
 	.global gUnknown_0842CE27
 gUnknown_0842CE27: @ 842CE27
+OtherText_ClearAllSaveDataPrompt:
 	.string "Clear all save data areas?$"
 
 	.global gUnknown_0842CE42
 gUnknown_0842CE42: @ 842CE42
+OtherText_ClearingData:
 	.string "Clearing data...\nPlease wait.$"
 
 	.global gUnknown_0842CE60
 gUnknown_0842CE60: @ 842CE60
+ContestText_AnnounceResults:
 	.string "Announcing the results!$"
 
 	.global gUnknown_0842CE78
 gUnknown_0842CE78: @ 842CE78
+ContestText_PreliminaryResults:
 	.string "The preliminary results!$"
 
 	.global gUnknown_0842CE91
 gUnknown_0842CE91: @ 842CE91
+ContestText_Round2Results:
 	.string "Round 2 results!$"
 
 	.global gUnknown_0842CEA2
 gUnknown_0842CEA2: @ 842CEA2
+ContestText_PokeWon:
 	.string "{STR_VAR_1}’s {STR_VAR_2} won!$"
 
 	.global gUnknown_0842CEAF
 gUnknown_0842CEAF: @ 842CEAF
+OtherText_LinkStandby:
 	.string "Link standby...$"
+OtherText_FlowerShop:
 	.string "FLOWER SHOP$"
+OtherText_PetalburdWoods:
 	.string "PETALBURG WOODS$"
+OtherText_BrineysCottage:
 	.string "MR. BRINEY’S COTTAGE$"
+OtherText_AbandonedShip:
 	.string "ABANDONED SHIP$"
+OtherText_SeashoreHouse:
 	.string "SEASHORE HOUSE$"
+OtherText_SlateportBeach:
 	.string "SLATEPORT BEACH$"
+OtherText_CyclingRoad:
 	.string "CYCLING ROAD$"
+OtherText_NewMauville:
 	.string "NEW MAUVILLE$"
+OtherText_TrickHouse:
 	.string "TRICK HOUSE$"
+OtherText_OldLadyRestShop:
 	.string "OLD LADY’S REST STOP$"
+OtherText_Desert:
 	.string "DESERT$"
+OtherText_WinstrateFamily:
 	.string "THE WINSTRATE FAMILY$"
+OtherText_CableCar:
 	.string "CABLE CAR$"
+OtherText_GlassWorkshop:
 	.string "GLASS WORKSHOP$"
+OtherText_WeatherInstitute:
 	.string "WEATHER INSTITUTE$"
+OtherText_MeteorFalls:
 	.string "METEOR FALLS$"
+OtherText_TunnelersRestHouse:
 	.string "TUNNELER’S REST HOUSE$"
+OtherText_RusturfTunnel:
 	.string "RUSTURF TUNNEL$"
+OtherText_PokemonDayCare:
 	.string "POKéMON DAY CARE$"
+OtherText_SafariZoneEntrance:
 	.string "SAFARI ZONE ENTRANCE$"
+OtherText_MtPyre:
 	.string "MT. PYRE$"
+OtherText_ShoalCave:
 	.string "SHOAL CAVE$"
+OtherText_SeafloorCavern:
 	.string "SEAFLOOR CAVERN$"
+OtherText_GraniteCave:
 	.string "GRANITE CAVE$"
+OtherText_OceanCurrent:
 	.string "OCEAN CURRENT$"
+OtherText_LanetteHouse:
 	.string "LANETTE’S HOUSE$"
+OtherText_FieryPath:
 	.string "FIERY PATH$"
+OtherText_JaggedPass:
 	.string "JAGGED PASS$"
+OtherText_SkyPillar:
 	.string "SKY PILLAR$"
+OtherText_BerryMasterHouse:
 	.string "BERRY MASTER’S HOUSE$"
+OtherText_IslandCave:
 	.string "ISLAND CAVE$"
+OtherText_DesertRuins:
 	.string "DESERT RUINS$"
+OtherText_ScorchedSlab:
 	.string "SCORCHED SLAB$"
+OtherText_AncientTomb:
 	.string "ANCIENT TOMB$"
+OtherText_SealedChamber:
 	.string "SEALED CHAMBER$"
+OtherText_FossilManiacsHouse:
 	.string "FOSSIL MANIAC’S HOUSE$"
+OtherText_HuntersHouse:
 	.string "HUNTER’S HOUSE$"
 
 	.global gUnknown_0842D0E6
 gUnknown_0842D0E6: @ 842D0E6
+OtherText_Terminator4:
 	.string "$"
 
 	.global gUnknown_0842D0E7
 gUnknown_0842D0E7: @ 842D0E7
+OtherText_Nature:
 	.string " nature, $"
 
 	.global gUnknown_0842D0F1
 gUnknown_0842D0F1: @ 842D0F1
+OtherText_Comma:
 	.string ",$"
 
 	.global gUnknown_0842D0F3
 gUnknown_0842D0F3: @ 842D0F3
+OtherText_Met:
 	.string " (met).$"
 
 	.global gUnknown_0842D0FB
 gUnknown_0842D0FB: @ 842D0FB
+OtherText_Egg2:
 	.string " (EGG).$"
 
 	.global gUnknown_0842D103
 gUnknown_0842D103: @ 842D103
+OtherText_ObtainedInTrade:
 	.string "obtained in a trade.$"
 
 	.global gUnknown_0842D118
 gUnknown_0842D118: @ 842D118
+OtherText_FatefulEncounter:
 	.string "fateful encounter.$"
 
 	.global gUnknown_0842D12B
 gUnknown_0842D12B: @ 842D12B
+OtherText_Met2:
 	.string " (met).$"
 
 	.global gUnknown_0842D133
 gUnknown_0842D133: @ 842D133
+OtherText_EggDayCare:
 	.string "An odd POKéMON EGG found\nby the DAY CARE couple.$"
 
 	.global gUnknown_0842D164
 gUnknown_0842D164: @ 842D164
+OtherText_EggNicePlace:
 	.string "A peculiar POKéMON EGG\nobtained at the nice place.$"
 
 	.global gUnknown_0842D197
 gUnknown_0842D197: @ 842D197
+OtherText_EggObtainedInTrade:
 	.string "A peculiar POKéMON EGG\nobtained in a trade.$"
 
 	.global gUnknown_0842D1C3
 gUnknown_0842D1C3: @ 842D1C3
+OtherText_EggHotSprings:
 	.string "A POKéMON EGG obtained\nat the hot springs.$"
 
 	.global gUnknown_0842D1EE
 gUnknown_0842D1EE: @ 842D1EE
+OtherText_LinkStandby2:
 	.string "Link standby...$"
 
 	.global gUnknown_0842D1FE
 gUnknown_0842D1FE: @ 842D1FE
+OtherText_YesNo:
 	.string "{COLOR DARK_GREY}{HIGHLIGHT WHITE2}{SHADOW LIGHT_GREY}YES\nNO$"
+OtherText_Player2:
 	.string "{HIGHLIGHT TRANSPARENT}PLAYER$"
+OtherText_Terminator5:
 	.string "{HIGHLIGHT TRANSPARENT}$"
 
 	.global gUnknown_0842D21C
 gUnknown_0842D21C: @ 842D21C
+OtherText_HoennDex:
 	.string "HOENN$"
 
 	.global gUnknown_0842D222
 gUnknown_0842D222: @ 842D222
+OtherText_NationalDex:
 	.string "NATIONAL$"
 
 	.global gUnknown_0842D22B
 gUnknown_0842D22B: @ 842D22B
+OtherText_DiplomaCertification:
 	.string "{HIGHLIGHT TRANSPARENT}Player: {CLEAR 0x10}{COLOR RED}{PLAYER}\n\n{COLOR DARK_GREY}{STR_VAR_1} POKéDEX\nThis document certifies\nthat you have successfully\ncompleted your POKéDEX.\n\n{CLEAR_TO 0x42}{COLOR RED}GAME FREAK$"
+OtherText_DiplomaGameFreak:
 	.string "{COLOR RED}{HIGHLIGHT TRANSPARENT}GAME FREAK$"
 
 	.global gUnknown_0842D2BC
 gUnknown_0842D2BC: @ 842D2BC
+OtherText_PLink:
 	.string "{STR_VAR_1}P LINK$"
 
 	.global gUnknown_0842D2C5
 gUnknown_0842D2C5: @ 842D2C5
+OtherText_YesNo2:
 	.string "YES\nNO$"
+OtherText_Terminating:
 	.string "Terminating.$"
 
 	.global gUnknown_0842D2D9
 gUnknown_0842D2D9: @ 842D2D9
+OtherText_LinkNotFound:
 	.string "Link partner(s) not found.\nPlease try again.\p$"
 
 	.global gUnknown_0842D307
 gUnknown_0842D307: @ 842D307
+OtherText_BerryBlenderChoose:
 	.string "Starting up the BERRY BLENDER.\pPlease select a BERRY from your BAG\nto put in the BERRY BLENDER.\p$"
 
 	.global gUnknown_0842D368
 gUnknown_0842D368: @ 842D368
+OtherText_PokeBlockMade:
 	.string " was made!$"
 
 	.global gUnknown_0842D373
 gUnknown_0842D373: @ 842D373
+OtherText_PressAToStart:
 	.string "Press the A Button to start.$"
 
 	.global gUnknown_0842D390
 gUnknown_0842D390: @ 842D390
+OtherText_PleaseWait:
 	.string "Please wait a while.$"
 
 	.global gUnknown_0842D3A5
 gUnknown_0842D3A5: @ 842D3A5
+OtherText_LinkStandby3:
 	.string "Link standby...$"
 
 	.global gUnknown_0842D3B5
 gUnknown_0842D3B5: @ 842D3B5
+OtherText_BlendAnotherBerryPrompt:
 	.string "Would you like to blend another BERRY?$"
 
 	.global gUnknown_0842D3DC
 gUnknown_0842D3DC: @ 842D3DC
+OtherText_OutOfBerries:
 	.string "You’ve run out of BERRIES for\nblending in the BERRY BLENDER.\p$"
 
 	.global gUnknown_0842D41A
 gUnknown_0842D41A: @ 842D41A
+OtherText_CaseIsFull:
 	.string "Your {POKEBLOCK} CASE is full.\p$"
 
 	.global gUnknown_0842D434
 gUnknown_0842D434: @ 842D434
+OtherText_NoBerriesForBlend:
 	.string " has no BERRIES to put in\nthe BERRY BLENDER.$"
 
 	.global gUnknown_0842D461
 gUnknown_0842D461: @ 842D461
+OtherText_OtherCaseIsFull:
 	.string "’s {POKEBLOCK} CASE is full.\p$"
 
 	.global gUnknown_0842D479
 gUnknown_0842D479: @ 842D479
+OtherText_ResultOfBlending:
 	.string "RESULTS OF BLENDING$"
+OtherText_BerryUsed:
 	.string "BERRY USED$"
 
 	.global gUnknown_0842D498
 gUnknown_0842D498: @ 842D498
-	.string " "
-	.string "BERRY$"
+OtherText_Berry:
+	.string " BERRY$"
 
 	.global gUnknown_0842D49F
 gUnknown_0842D49F: @ 842D49F
+OtherText_RequiredTime:
 	.string "REQUIRED TIME$"
 
 	.global gUnknown_0842D4AD
 gUnknown_0842D4AD: @ 842D4AD
+OtherText_Min:
 	.string "MIN.$"
 
 	.global gUnknown_0842D4B2
 gUnknown_0842D4B2: @ 842D4B2
+OtherText_Sec:
 	.string "SEC.$"
 
 	.global gUnknown_0842D4B7
 gUnknown_0842D4B7: @ 842D4B7
+OtherText_MaxSpeed:
 	.string "MAXIMUM SPEED$"
 
 	.global gUnknown_0842D4C5
 gUnknown_0842D4C5: @ 842D4C5
+OtherText_RPM:
 	.string "RPM$"
+OtherText_RPMPeriod:
 	.string ".$"
 
 	.global gUnknown_0842D4CB
 gUnknown_0842D4CB: @ 842D4CB
+OtherText_Ranking:
 	.string "RANKING$"
 
 	.global gUnknown_0842D4D3
 gUnknown_0842D4D3: @ 842D4D3
+OtherText_BlockLevelIs:
 	.string "The level is $"
 
 	.global gUnknown_0842D4E1
 gUnknown_0842D4E1: @ 842D4E1
+OtherText_BlockFeelIs:
 	.string ", and the feel is $"
 
 	.global gUnknown_0842D4F4
 gUnknown_0842D4F4: @ 842D4F4
+OtherText_Period:
 	.string ".$"
 
 	.global gUnknown_0842D4F6
 gUnknown_0842D4F6: @ 842D4F6
+OtherText_Day:
 	.string "DAY$"
+OtherText_DayColon:
 	.string ":$"
 
 	.global gUnknown_0842D4FC
 gUnknown_0842D4FC: @ 842D4FC
+OtherText_OK:
 	.string "OK$"
 
 	.global gUnknown_0842D4FF
 gUnknown_0842D4FF: @ 842D4FF
+OtherText_CorrectTimePrompt:
 	.string "Is this the correct time?$"
 
 	.align 2
@@ -13441,41 +13774,52 @@ gUnknown_0842F790: @ 842F790
 
 	.global gUnknown_0842F798
 gUnknown_0842F798: @ 842F798
+OtherText_BerryObtainedDadHasIt:
 	.string "Obtained a {STR_VAR_2} BERRY!\nDad has it at PETALBURG GYM.$"
 
 	.global gUnknown_0842F7CA
 gUnknown_0842F7CA: @ 842F7CA
+OtherText_BerryTransformed:
 	.string "The {STR_VAR_1} BERRY transformed into\none {STR_VAR_2} BERRY.$"
 
 	.global gUnknown_0842F7F6
 gUnknown_0842F7F6: @ 842F7F6
+OtherText_BerryAlreadyObtained:
 	.string "The {STR_VAR_1} BERRY has already been\nobtained.$"
 
 	.global gUnknown_0842F81E
 gUnknown_0842F81E: @ 842F81E
+OtherText_SpecialRibbonReceived:
 	.string "A special RIBBON was awarded to your\nparty POKéMON.$"
 
 	.global gUnknown_0842F852
 gUnknown_0842F852: @ 842F852
+OtherText_DexUpgraded:
 	.string "The POKéDEX has been upgraded with\nthe NATIONAL MODE.$"
 
 	.global gUnknown_0842F888
 gUnknown_0842F888: @ 842F888
+OtherText_RareWordAdded:
 	.string "A rare word has been added.$"
 
 	.global gUnknown_0842F8A4
 gUnknown_0842F8A4: @ 842F8A4
+OtherText_PokeWasSentOver:
 	.string "{STR_VAR_1} was sent over!$"
 
 	.global gUnknown_0842F8B6
 gUnknown_0842F8B6: @ 842F8B6
+OtherText_PartyIsFull:
 	.string "Your party is full.\n{STR_VAR_1} could not be sent over.$"
 
 	.global gUnknown_0842F8E5
 gUnknown_0842F8E5: @ 842F8E5
+OtherText_NewTrainerInHoenn:
 	.string "A new TRAINER has arrived in HOENN.$"
+OtherText_BattleTowerNewAdversary:
 	.string "A new adversary has arrived in the\nBATTLE TOWER.$"
 
 	.global gUnknown_0842F93A
 gUnknown_0842F93A: @ 842F93A
+OtherText_DataCannotUseVersion:
 	.string "This data cannot be used in\nthis version.$"
