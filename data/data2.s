@@ -11400,271 +11400,496 @@ gUnknown_0840FF65: @ 840FF65
 
 	.global gUnknown_0840FF75
 gUnknown_0840FF75: @ 840FF75
+@ come back to this one and clean up
+OtherText_Unknown1:
 	.string "’s $"
+OtherText_Cool:
 	.string "COOL $"
+OtherText_Beauty2:
 	.string "BEAUTY $"
+OtherText_Cute:
 	.string "CUTE $"
+OtherText_Smart:
 	.string "SMART $"
+OtherText_Tough:
 	.string "TOUGH $"
+OtherText_NonstopSuperCool:
 	.string "Nonstop super-cool -\nthe inestimable $"
+OtherText_Terminator6:
 	.string "$"
+OtherText_GoodLookingPoke:
 	.string "Hey, there!\nThe good-looking POKéMON $"
+OtherText_Terminator7:
 	.string "$"
+OtherText_MarvelousGreat:
 	.string "The marvelous, wonderful, and\nvery great $"
+OtherText_Terminator8:
 	.string "$"
+OtherText_CenturyLastVenus:
 	.string "This century’s last Venus -\nthe beautiful $"
+OtherText_Terminator9:
 	.string "$"
+OtherText_Terminator10:
 	.string "$"
+OtherText_DazzlingSlime:
 	.string "’s dazzling,\nglittering smile$"
+OtherText_PokeCenterIdol:
 	.string "POKéMON CENTER’s super idol -\nthe incomparable $"
+OtherText_Terminator11:
 	.string "$"
+OtherText_LovelyAndSweet:
 	.string "The lovely and sweet $"
+OtherText_Terminator12:
 	.string "$"
+OtherText_ThePretty:
 	.string "The pretty $"
+OtherText_WinningPortrait:
 	.string "’s\nwinning portrait$"
+OtherText_GiveUsWink:
 	.string "Give us a wink!\nThe cutie POKéMON $"
+OtherText_Terminator13:
 	.string "$"
+OtherText_SmartnessMaestro:
 	.string "The smartness maestro -\nThe wise POKéMON $"
+OtherText_Terminator14:
 	.string "$"
+OtherText_ChosenPokeAmong:
 	.string "The chosen POKéMON -\nThe one among POKéMON $"
+OtherText_Terminator15:
 	.string "$"
+OtherText_TheExcellent:
 	.string "The excellent $"
+OtherText_ItsMomentOfElegance:
 	.string "’s\nmoment of elegance$"
+OtherText_PowerfullyMuscular:
 	.string "The powerfully muscular\nspeedster $"
+OtherText_Terminator16:
 	.string "$"
+OtherText_StrongErEst:
 	.string "The strong, stronger, and\nstrongest $"
+OtherText_Terminator17:
 	.string "$"
+OtherText_MightyTough:
 	.string "The mighty tough\nhyper POKéMON $"
+OtherText_Exclamation:
 	.string "!$"
+OtherText_Petalburg:
 	.string "PETALBURG$"
+OtherText_Slateport:
 	.string "SLATEPORT$"
+OtherText_Littleroot:
 	.string "LITTLEROOT$"
+OtherText_Lilycove:
 	.string "LILYCOVE$"
+OtherText_Dewford:
 	.string "DEWFORD$"
+OtherText_Enter:
 	.string "ENTER$"
+OtherText_Info:
 	.string "INFO$"
+OtherText_WhatsAContest:
 	.string "What’s a CONTEST?$"
+OtherText_TypesOfContest:
 	.string "Types of CONTESTS$"
+OtherText_Ranks:
 	.string "Ranks$"
+OtherText_Judging:
 	.string "Judging$"
+OtherText_CoolContest:
 	.string "COOL CONTEST$"
+OtherText_BeautyContest:
 	.string "BEAUTY CONTEST$"
+OtherText_CuteContest:
 	.string "CUTE CONTEST$"
+OtherText_SmartContest:
 	.string "SMART CONTEST$"
+OtherText_ToughContest:
 	.string "TOUGH CONTEST$"
+OtherText_Decoration:
 	.string "DECORATION$"
+OtherText_PackUp:
 	.string "PACK UP$"
+OtherText_Count:
 	.string "COUNT$"
+OtherText_Registry:
 	.string "REGISTRY$"
+OtherText_Information:
 	.string "INFORMATION$"
+OtherText_Mach:
 	.string "MACH$"
+OtherText_Acro:
 	.string "ACRO$"
+OtherText_Poison:
 	.string "PSN$"
+OtherText_Paralysis:
 	.string "PAR$"
+OtherText_Sleep:
 	.string "SLP$"
+OtherText_Burn:
 	.string "BRN$"
+OtherText_Frozen:
 	.string "FRZ$"
+OtherText_Quit:
 	.string "QUIT$"
+OtherText_SawIt:
 	.string "Saw it$"
+OtherText_NotYet:
 	.string "Not yet$"
+OtherText_Yes:
 	.string "YES$"
+OtherText_No:
 	.string "NO$"
+OtherText_Info2:
 	.string "INFO$"
+OtherText_SingleBattle:
 	.string "SINGLE BATTLE$"
+OtherText_DoubleBattle:
 	.string "DOUBLE BATTLE$"
+OtherText_MultiBattle:
 	.string "MULTI BATTLE$"
+OtherText_MrBriney:
 	.string "MR. BRINEY$"
+OtherText_MakeAChallenge:
 	.string "Make a challenge.$"
+OtherText_ObtainInformation:
 	.string "Obtain information.$"
+OtherText_Lv50_2:
 	.string "LV. 50$"
+OtherText_Lv100_2:
 	.string "LV. 100$"
+OtherText_Zigzagoon:
 	.string "ZIGZAGOON$"
+OtherText_Nincada:
 	.string "NINCADA$"
+OtherText_Poochyena:
 	.string "POOCHYENA$"
+OtherText_Nincada2:
 	.string "NINCADA$"
+OtherText_Lotad:
 	.string "LOTAD$"
+OtherText_Roselia:
 	.string "ROSELIA$"
+OtherText_Shroomish:
 	.string "SHROOMISH$"
+OtherText_Nincada3:
 	.string "NINCADA$"
+OtherText_Surskit:
 	.string "SURSKIT$"
+OtherText_Treecko:
 	.string "TREECKO$"
+OtherText_Torchic:
 	.string "TORCHIC$"
+OtherText_Mudkip:
 	.string "MUDKIP$"
+OtherText_Seedot:
 	.string "SEEDOT$"
+OtherText_Shroomish2:
 	.string "SHROOMISH$"
+OtherText_Spinda:
 	.string "SPINDA$"
+OtherText_Shroomish3:
 	.string "SHROOMISH$"
+OtherText_Zigzagoon2:
 	.string "ZIGZAGOON$"
+OtherText_Wurmple:
 	.string "WURMPLE$"
+OtherText_PokeBall:
 	.string "POKé BALL$"
+OtherText_SuperPotion:
 	.string "SUPER POTION$"
+OtherText_SamePrice:
 	.string "Same price$"
+OtherText_Yen135:
 	.string "¥135$"
+OtherText_Yen155:
 	.string "¥155$"
+OtherText_Yen175:
 	.string "¥175$"
+OtherText_CostMore:
 	.string "They will cost more.$"
+OtherText_CostLess:
 	.string "They will cost less.$"
+OtherText_SamePrice2:
 	.string "Same price$"
+OtherText_MaleSymbol:
 	.string "♂$"
+OtherText_FemaleSymbol:
 	.string "♀$"
+OtherText_Neither:
 	.string "Neither$"
+OtherText_Males:
 	.string "Males$"
+OtherText_Females:
 	.string "Females$"
+OtherText_SameNumber:
 	.string "Same number$"
+OtherText_Male:
 	.string "Male$"
+OtherText_Female:
 	.string "Female$"
+OtherText_ItDepends:
 	.string "It depends$"
+OtherText_Six2:
 	.string "6$"
+OtherText_Eight2:
 	.string "8$"
+OtherText_Ten:
 	.string "10$"
+OtherText_One:
 	.string "1$"
+OtherText_Two:
 	.string "2$"
+OtherText_Three:
 	.string "3$"
+OtherText_Six:
 	.string "6$"
+OtherText_Seven:
 	.string "7$"
+OtherText_Eight:
 	.string "8$"
+OtherText_FreshWater:
 	.string "FRESH WATER{CLEAR_TO 0x48}¥200$"
+OtherText_SodaPop:
 	.string "SODA POP{CLEAR_TO 0x48}¥300$"
+OtherText_Lemonade:
 	.string "LEMONADE{CLEAR_TO 0x48}¥350$"
+OtherText_HowToRide:
 	.string "HOW TO RIDE$"
+OtherText_HowToTurn:
 	.string "HOW TO TURN$"
+OtherText_SandySlopes:
 	.string "SANDY SLOPES$"
+OtherText_Wheelies:
 	.string "WHEELIES$"
+OtherText_BunnyHops:
 	.string "BUNNY-HOPS$"
+OtherText_Jumping:
 	.string "JUMPING$"
+OtherText_Satisfied:
 	.string "Satisfied$"
+OtherText_Dissatisfied:
 	.string "Dissatisfied$"
+OtherText_Deepseatooth:
 	.string "DEEPSEATOOTH$"
+OtherText_Deepseascale:
 	.string "DEEPSEASCALE$"
+OtherText_BlueFlute2:
 	.string "BLUE FLUTE$"
+OtherText_YellowFlute2:
 	.string "YELLOW FLUTE$"
+OtherText_RedFlute2:
 	.string "RED FLUTE$"
+OtherText_WhiteFlute2:
 	.string "WHITE FLUTE$"
+OtherText_BlackFlute2:
 	.string "BLACK FLUTE$"
+OtherText_GlassChair:
 	.string "GLASS CHAIR$"
+OtherText_GlassDesk:
 	.string "GLASS DESK$"
+OtherText_TreeckoDoll:
 	.string "TREECKO DOLL 1,000 COINS$"
+OtherText_TorchicDoll:
 	.string "TORCHIC DOLL 1,000 COINS$"
+OtherText_MudkipDoll:
 	.string "MUDKIP DOLL   1,000 COINS$"
+OtherText_50Coins:
 	.string "  50 COINS    ¥1,000$"
+OtherText_500Coins:
 	.string "500 COINS  ¥10,000$"
+OtherText_Excellent:
 	.string "Excellent!$"
+OtherText_NotSoHot:
 	.string "Not so hot$"
+OtherText_RedShard:
 	.string "RED SHARD$"
+OtherText_YellowShard:
 	.string "YELLOW SHARD$"
+OtherText_BlueShard:
 	.string "BLUE SHARD$"
+OtherText_GreenShard:
 	.string "GREEN SHARD$"
+OtherText_BattleTower:
 	.string "BATTLE TOWER$"
+OtherText_Right:
 	.string "Right$"
+OtherText_Left:
 	.string "Left$"
+OtherText_TM32:
 	.string "TM32  1,500 COINS$"
+OtherText_TM29:
 	.string "TM29  3,500 COINS$"
+OtherText_TM35:
 	.string "TM35  4,000 COINS$"
+OtherText_TM24:
 	.string "TM24  4,000 COINS$"
+OtherText_TM13:
 	.string "TM13  4,000 COINS$"
+OtherText_1F_2:
 	.string "1F$"
+OtherText_2F_2:
 	.string "2F$"
+OtherText_3F_2:
 	.string "3F$"
+OtherText_4F_2:
 	.string "4F$"
+OtherText_5F_2:
 	.string "5F$"
+OtherText_Cool2:
 	.string "COOL$"
+OtherText_Beauty3:
 	.string "BEAUTY$"
+OtherText_Cute2:
 	.string "CUTE$"
+OtherText_Smart2:
 	.string "SMART$"
+OtherText_Tough2:
 	.string "TOUGH$"
+OtherText_Normal:
 	.string "NORMAL$"
+OtherText_Super:
 	.string "SUPER$"
+OtherText_Hyper:
 	.string "HYPER$"
+OtherText_Master:
 	.string "MASTER$"
+OtherText_Cool3:
 	.string "COOL$"
+OtherText_Beauty4:
 	.string "BEAUTY$"
+OtherText_Cute3:
 	.string "CUTE$"
+OtherText_Smart3:
 	.string "SMART$"
+OtherText_Tough3:
 	.string "TOUGH$"
+OtherText_Items:
 	.string "ITEMS$"
+OtherText_KeyItems:
 	.string "KEY ITEMS$"
+OtherText_Balls:
 	.string "BALLS$"
+OtherText_TMsHMs:
 	.string "TMs & HMs$"
+OtherText_Berries:
 	.string "BERRIES$"
 
 	.global gUnknown_08410753
 gUnknown_08410753: @ 8410753
+PCText_SomeonesPC:
 	.string "SOMEONE’S PC$"
 
 	.global gUnknown_08410760
 gUnknown_08410760: @ 8410760
+PCText_LanettesPC:
 	.string "LANETTE’S PC$"
 
 	.global gUnknown_0841076D
 gUnknown_0841076D: @ 841076D
+PCText_PlayersPC:
 	.string "{PLAYER}’s PC$"
 
 	.global gUnknown_08410775
 gUnknown_08410775: @ 8410775
+PCText_HallOfFame:
 	.string "HALL OF FAME$"
 
 	.global gUnknown_08410782
 gUnknown_08410782: @ 8410782
+PCText_LogOff:
 	.string "LOG OFF$"
 
 	.global gUnknown_0841078A
 gUnknown_0841078A: @ 841078A
+OtherText_99Times:
 	.string "99 times +$"
 
 	.global gUnknown_08410795
 gUnknown_08410795: @ 8410795
+OtherText_1Minute:
 	.string "1 minute +$"
 
 	.global gUnknown_084107A0
 gUnknown_084107A0: @ 84107A0
+OtherText_Seconds:
 	.string " seconds$"
 
 	.global gUnknown_084107A9
 gUnknown_084107A9: @ 84107A9
+OtherText_Times:
 	.string " times$"
+OtherText_Period2:
 	.string ".$"
 
 	.global gUnknown_084107B2
 gUnknown_084107B2: @ 84107B2
+OtherText_BigGuy:
 	.string "Big guy$"
 
 	.global gUnknown_084107BA
 gUnknown_084107BA: @ 84107BA
+OtherText_BigGirl:
 	.string "Big girl$"
 
 	.global gUnknown_084107C3
 gUnknown_084107C3: @ 84107C3
+OtherText_Son:
 	.string "son$"
 
 	.global gUnknown_084107C7
 gUnknown_084107C7: @ 84107C7
+OtherText_Daughter:
 	.string "daughter$"
+OtherText_BlueFlute:
 	.string "BLUE FLUTE$"
+OtherText_YellowFlute:
 	.string "YELLOW FLUTE$"
+OtherText_RedFlute:
 	.string "RED FLUTE$"
+OtherText_WhiteFlute:
 	.string "WHITE FLUTE$"
+OtherText_BlackFlute:
 	.string "BLACK FLUTE$"
+OtherText_PrettyChair:
 	.string "PRETTY CHAIR$"
+OtherText_PrettyDesk:
 	.string "PRETTY DESK$"
+OtherText_1F:
 	.string "1F$"
+OtherText_2F:
 	.string "2F$"
+OtherText_3F:
 	.string "3F$"
+OtherText_4F:
 	.string "4F$"
+OtherText_5F:
 	.string "5F$"
+OtherText_6F:
 	.string "6F$"
+OtherText_7F:
 	.string "7F$"
+OtherText_8F:
 	.string "8F$"
+OtherText_9F:
 	.string "9F$"
+OtherText_10F:
 	.string "10F$"
+OtherText_11F:
 	.string "11F$"
+OtherText_B1F:
 	.string "B1F$"
+OtherText_B2F:
 	.string "B2F$"
+OtherText_B3F:
 	.string "B3F$"
+OtherText_B4F:
 	.string "B4F$"
+OtherText_Rooftop:
 	.string "ROOFTOP$"
 
 	.global gUnknown_0841085E
 gUnknown_0841085E: @ 841085E
+OtherText_NowOn:
 	.string "Now on:$"
 
 	.global gUnknown_08410866
@@ -13329,7 +13554,7 @@ OtherText_LinkStandby:
 	.string "Link standby...$"
 OtherText_FlowerShop:
 	.string "FLOWER SHOP$"
-OtherText_PetalburdWoods:
+OtherText_PetalburgWoods:
 	.string "PETALBURG WOODS$"
 OtherText_BrineysCottage:
 	.string "MR. BRINEY’S COTTAGE$"
