@@ -10,7 +10,9 @@ include/fonts/down_arrow_tiles.h \
 include/fonts/unknown_palette_81E6692.h \
 include/fonts/default_palette.h
 
-generated: $(GEN_FONT_HEADERS)
+LINK_HEADERS := include/link/digit_tiles.h include/link/digit_palette.h
+
+generated: $(GEN_FONT_HEADERS) $(LINK_HEADERS)
 
 include/fonts/font0_lat_glyphs.h: graphics/fonts/font0_lat.1bpp
 	$(BIN2C) $< sFont0LatinGlyphs >$@ -static -col 8 -pad 4
@@ -35,3 +37,9 @@ include/fonts/unknown_palette_81E6692.h: graphics/fonts/unknown_81E6692.gbapal
 
 include/fonts/default_palette.h: graphics/fonts/default.gbapal
 	$(BIN2C) $< gFontDefaultPalette >$@ -size 2 -pad 6
+
+include/link/digit_tiles.h: graphics/interface/link_test_digits.4bpp
+	$(BIN2C) $< sLinkTestDigitTiles >$@ -static -size 4 -pad 10
+
+include/link/digit_palette.h: graphics/interface/link_test_digits.gbapal
+	$(BIN2C) $< sLinkTestDigitPalette >$@ -static -size 2 -pad 6

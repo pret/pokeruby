@@ -4249,7 +4249,7 @@ sub_800B858: @ 800B858
 	ands r0, r1
 	cmp r0, 0
 	beq _0800B876
-	bl sub_8007378
+	bl OpenLink
 	ldr r0, _0800B880
 	movs r1, 0
 	bl CreateTask
@@ -4619,7 +4619,7 @@ _0800BB84: .4byte 0x02024a72
 _0800BB88: .4byte sub_8037510
 _0800BB8C: .4byte 0x02024a68
 _0800BB90:
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldrh r1, [r6]
@@ -5462,8 +5462,8 @@ _0800C21A:
 	adds r0, 0x1
 	b _0800C352
 _0800C220:
-	bl sub_8008300
-	bl sub_8008310
+	bl GetLinkPlayerCount_2
+	bl IsLinkMaster
 	lsls r0, 24
 	cmp r0, 0
 	beq _0800C248
@@ -5544,7 +5544,7 @@ _0800C28C:
 	adds r5, r2
 	adds r1, r5
 	adds r2, r6, 0
-	bl sub_8007E88
+	bl SendBlock
 	ldrh r0, [r4, 0x1E]
 	adds r0, 0x1
 	strh r0, [r4, 0x1E]
@@ -5649,7 +5649,7 @@ _0800C394: .4byte 0x03002970
 _0800C398: .4byte 0x00002211
 _0800C39C: .4byte 0x03002b80
 _0800C3A0:
-	bl sub_8007EE4
+	bl GetBlockRecievedStatus
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _0800C468
@@ -5662,7 +5662,7 @@ _0800C3A0:
 	cmp r0, 0
 	beq _0800C446
 	adds r0, r4, 0
-	bl sub_8007F30
+	bl ResetBlockReceivedFlag
 	lsls r0, r4, 8
 	mov r2, r10
 	adds r3, r0, r2
@@ -5738,7 +5738,7 @@ _0800C446:
 	lsls r0, r1, 24
 	lsrs r4, r0, 24
 _0800C44C:
-	bl sub_8007B78
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -10871,7 +10871,7 @@ sub_800EC9C: @ 800EC9C
 	bl RunTasks
 	bl AnimateSprites
 	bl BuildOamBuffer
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r4, r0, 24
 	ldr r0, _0800ECD4
@@ -10939,7 +10939,7 @@ _0800ED2E:
 	lsrs r0, 24
 	adds r1, r4, 0
 	movs r2, 0x20
-	bl sub_8007E88
+	bl SendBlock
 	ldr r0, _0800ED60
 	strb r5, [r0]
 	b _0800F008
@@ -10960,14 +10960,14 @@ _0800ED64:
 	.align 2, 0
 _0800ED78: .4byte 0x02024d1e
 _0800ED7C:
-	bl sub_8007EE4
+	bl GetBlockRecievedStatus
 	movs r1, 0x3
 	ands r1, r0
 	cmp r1, 0x3
 	beq _0800ED8A
 	b _0800F008
 _0800ED8A:
-	bl sub_8007F18
+	bl ResetBlockReceivedFlags
 	movs r3, 0
 	ldr r0, _0800EDA8
 	ldrh r1, [r0]
@@ -11108,19 +11108,19 @@ _0800EE94:
 	lsrs r0, 24
 	ldr r1, _0800EEA8
 	movs r2, 0xC8
-	bl sub_8007E88
+	bl SendBlock
 	b _0800EF96
 	.align 2, 0
 _0800EEA8: .4byte 0x03004360
 _0800EEAC:
-	bl sub_8007EE4
+	bl GetBlockRecievedStatus
 	movs r1, 0x3
 	ands r1, r0
 	cmp r1, 0x3
 	beq _0800EEBA
 	b _0800F008
 _0800EEBA:
-	bl sub_8007F18
+	bl ResetBlockReceivedFlags
 	ldr r0, _0800EED0
 	lsls r1, r5, 8
 	ldr r2, _0800EED4
@@ -11143,19 +11143,19 @@ _0800EEE4:
 	lsrs r0, 24
 	ldr r1, _0800EEF8
 	movs r2, 0xC8
-	bl sub_8007E88
+	bl SendBlock
 	b _0800EF96
 	.align 2, 0
 _0800EEF8: .4byte 0x03004428
 _0800EEFC:
-	bl sub_8007EE4
+	bl GetBlockRecievedStatus
 	movs r1, 0x3
 	ands r1, r0
 	cmp r1, 0x3
 	beq _0800EF0A
 	b _0800F008
 _0800EF0A:
-	bl sub_8007F18
+	bl ResetBlockReceivedFlags
 	ldr r0, _0800EF20
 	lsls r1, r5, 8
 	ldr r2, _0800EF24
@@ -11176,17 +11176,17 @@ _0800EF28:
 	lsrs r0, 24
 	ldr r1, _0800EF44
 	movs r2, 0xC8
-	bl sub_8007E88
+	bl SendBlock
 	b _0800EF96
 	.align 2, 0
 _0800EF44: .4byte 0x030044f0
 _0800EF48:
-	bl sub_8007EE4
+	bl GetBlockRecievedStatus
 	movs r1, 0x3
 	ands r1, r0
 	cmp r1, 0x3
 	bne _0800F008
-	bl sub_8007F18
+	bl ResetBlockReceivedFlags
 	ldr r4, _0800EFA0
 	lsls r1, r5, 8
 	ldr r0, _0800EFA4
@@ -11383,7 +11383,7 @@ sub_800F104: @ 800F104
 	mov r7, r9
 	mov r6, r8
 	push {r6,r7}
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldr r4, _0800F148
@@ -11441,7 +11441,7 @@ _0800F17E:
 	lsrs r0, 24
 	adds r1, r4, 0
 	movs r2, 0x60
-	bl sub_8007E88
+	bl SendBlock
 	ldrb r0, [r5]
 	adds r0, 0x1
 	strb r0, [r5]
@@ -11449,12 +11449,12 @@ _0800F17E:
 	.align 2, 0
 _0800F19C: .4byte 0x03002fa4
 _0800F1A0:
-	bl sub_8007EE4
+	bl GetBlockRecievedStatus
 	movs r1, 0xF
 	ands r1, r0
 	cmp r1, 0xF
 	bne _0800F27A
-	bl sub_8007F18
+	bl ResetBlockReceivedFlags
 	movs r4, 0
 	lsls r0, r6, 3
 	subs r0, r6
@@ -11571,7 +11571,7 @@ sub_800F298: @ 800F298
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldr r0, _0800F2D0
@@ -11631,20 +11631,20 @@ _0800F316:
 	lsrs r0, 24
 	adds r1, r4, 0
 	movs r2, 0x20
-	bl sub_8007E88
+	bl SendBlock
 	b _0800F770
 	.align 2, 0
 _0800F338: .4byte 0x03002fa4
 _0800F33C: .4byte 0x02000000
 _0800F340:
-	bl sub_8007EE4
+	bl GetBlockRecievedStatus
 	movs r1, 0xF
 	ands r1, r0
 	cmp r1, 0xF
 	beq _0800F34E
 	b _0800F7E0
 _0800F34E:
-	bl sub_8007F18
+	bl ResetBlockReceivedFlags
 	movs r4, 0
 	ldr r0, _0800F36C
 	ldrh r1, [r0]
@@ -11864,20 +11864,20 @@ _0800F4EA:
 	lsrs r0, 24
 	ldr r1, _0800F500
 	movs r2, 0xC8
-	bl sub_8007E88
+	bl SendBlock
 	b _0800F770
 	.align 2, 0
 _0800F4FC: .4byte 0x02024d1e
 _0800F500: .4byte 0x0201d000
 _0800F504:
-	bl sub_8007EE4
+	bl GetBlockRecievedStatus
 	movs r1, 0xF
 	ands r1, r0
 	cmp r1, 0xF
 	beq _0800F512
 	b _0800F7E0
 _0800F512:
-	bl sub_8007F18
+	bl ResetBlockReceivedFlags
 	movs r4, 0
 	lsls r0, r6, 3
 	subs r0, r6
@@ -12014,19 +12014,19 @@ _0800F604:
 	lsrs r0, 24
 	ldr r1, _0800F618
 	movs r2, 0x64
-	bl sub_8007E88
+	bl SendBlock
 	b _0800F770
 	.align 2, 0
 _0800F618: .4byte 0x0201d0c8
 _0800F61C:
-	bl sub_8007EE4
+	bl GetBlockRecievedStatus
 	movs r1, 0xF
 	ands r1, r0
 	cmp r1, 0xF
 	beq _0800F62A
 	b _0800F7E0
 _0800F62A:
-	bl sub_8007F18
+	bl ResetBlockReceivedFlags
 	movs r4, 0
 	lsls r0, r6, 3
 	subs r0, r6
@@ -23791,7 +23791,7 @@ _080155C0:
 	str r0, [r5]
 	adds r4, 0x1
 _080155CE:
-	bl sub_8007B78
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -68499,7 +68499,7 @@ dp01_tbl1_exec_completed: @ 802BF9C
 	ands r0, r1
 	cmp r0, 0
 	beq _0802BFF0
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	mov r1, sp
 	strb r0, [r1]
 	movs r0, 0x2
@@ -92136,7 +92136,7 @@ dp01_tbl4_exec_completed: @ 8038004
 	ands r0, r1
 	cmp r0, 0
 	beq _08038058
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	mov r1, sp
 	strb r0, [r1]
 	movs r0, 0x2
@@ -94857,7 +94857,7 @@ _08039710: .4byte 0x03002970
 _08039714:
 	movs r5, 0
 	ldr r4, _0803986C
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	movs r1, 0x1
 	eors r0, r1
 	lsls r0, 24
@@ -101911,7 +101911,7 @@ _0803CE42:
 	strb r0, [r1]
 	adds r0, r7, 0
 	adds r1, r3, 0
-	bl SetStringCharset
+	bl ConvertInternationalString
 _0803CE50:
 	adds r0, r7, 0
 	bl StringLength
@@ -107816,7 +107816,7 @@ sub_803FBBC: @ 803FBBC
 	push {r4,r5,lr}
 	movs r5, 0
 	ldr r4, _0803FBE4
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 3
@@ -110106,7 +110106,7 @@ _08040D04: .4byte 0x0000ffff
 	thumb_func_start sub_8040D08
 sub_8040D08: @ 8040D08
 	push {r4,lr}
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r4, _08040D38
@@ -113036,7 +113036,7 @@ sub_80422C4: @ 80422C4
 	bl PokemonGetEncryptedField
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl SetStringCharset
+	bl ConvertInternationalString
 _080422FC:
 	adds r4, r6, 0
 	adds r4, 0x50
@@ -124512,7 +124512,7 @@ sub_8047CE8: @ 8047CE8
 	adds r0, r6, 0
 	movs r3, 0xC
 	bl sub_804AFB8
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	ldr r1, [r5, 0xC]
 	movs r3, 0x80
@@ -124598,7 +124598,7 @@ _08047D86:
 	adds r5, 0x1
 	cmp r5, 0x2
 	ble _08047D86
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	movs r1, 0x80
 	lsls r1, 17
@@ -124888,7 +124888,7 @@ _08048048:
 	ldr r3, _0804809C
 	adds r0, r3, 0
 	strh r0, [r1]
-	bl sub_8007378
+	bl OpenLink
 	movs r6, 0
 	movs r4, 0
 _08048058:
@@ -124954,7 +124954,7 @@ _080480CE:
 _080480D8: .4byte 0x03004824
 _080480DC: .4byte 0x0000043c
 _080480E0:
-	bl sub_8008300
+	bl GetLinkPlayerCount_2
 	adds r4, r0, 0
 	bl sub_800820C
 	lsls r4, 24
@@ -124963,7 +124963,7 @@ _080480E0:
 	bcs _080480F4
 	b _080484C6
 _080480F4:
-	bl sub_8008310
+	bl IsLinkMaster
 	lsls r0, 24
 	cmp r0, 0
 	beq _08048120
@@ -124998,7 +124998,7 @@ _08048130:
 	beq _0804813A
 	b _080484C6
 _0804813A:
-	bl sub_8007C48
+	bl IsLinkPlayerDataExchangeComplete
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -126420,7 +126420,7 @@ _08048D3E:
 sub_8048D44: @ 8048D44
 	push {r4-r7,lr}
 	sub sp, 0xC
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldr r6, _08048D90
@@ -126440,7 +126440,7 @@ sub_8048D44: @ 8048D44
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_8008184
+	bl SetLinkDebugValues
 	ldr r0, [r6]
 	adds r0, 0x75
 	ldrb r0, [r0]
@@ -126494,7 +126494,7 @@ _08048DF8:
 	bne _08048E04
 	b _0804907C
 _08048E04:
-	bl sub_8007EE4
+	bl GetBlockRecievedStatus
 	lsls r0, 24
 	cmp r0, 0
 	bne _08048E18
@@ -126504,7 +126504,7 @@ _08048E04:
 	.align 2, 0
 _08048E14: .4byte 0x03004824
 _08048E18:
-	bl sub_8007F18
+	bl ResetBlockReceivedFlags
 	ldr r0, _08048E24
 	ldr r1, [r0]
 	b _08049006
@@ -126522,7 +126522,7 @@ _08048E32:
 	.align 2, 0
 _08048E38: .4byte 0x03004824
 _08048E3C:
-	bl sub_8007EE4
+	bl GetBlockRecievedStatus
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
@@ -126538,7 +126538,7 @@ _08048E4A:
 	adds r1, r2
 	movs r2, 0xC8
 	bl sub_8048D24
-	bl sub_8007F18
+	bl ResetBlockReceivedFlags
 	ldr r0, _08048E70
 	ldr r1, [r0]
 	b _08049006
@@ -126570,7 +126570,7 @@ _08048E9A:
 	.align 2, 0
 _08048EA0: .4byte 0x03004824
 _08048EA4:
-	bl sub_8007EE4
+	bl GetBlockRecievedStatus
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
@@ -126586,7 +126586,7 @@ _08048EB2:
 	adds r1, r2
 	movs r2, 0xC8
 	bl sub_8048D24
-	bl sub_8007F18
+	bl ResetBlockReceivedFlags
 	ldr r0, _08048ED8
 	ldr r1, [r0]
 	b _08049006
@@ -126618,7 +126618,7 @@ _08048F02:
 	.align 2, 0
 _08048F08: .4byte 0x03004824
 _08048F0C:
-	bl sub_8007EE4
+	bl GetBlockRecievedStatus
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
@@ -126634,7 +126634,7 @@ _08048F1A:
 	adds r1, r2
 	movs r2, 0xC8
 	bl sub_8048D24
-	bl sub_8007F18
+	bl ResetBlockReceivedFlags
 	ldr r0, _08048F40
 	ldr r1, [r0]
 	b _08049006
@@ -126666,7 +126666,7 @@ _08048F6A:
 	.align 2, 0
 _08048F70: .4byte 0x03004824
 _08048F74:
-	bl sub_8007EE4
+	bl GetBlockRecievedStatus
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
@@ -126682,7 +126682,7 @@ _08048F82:
 	adds r1, r2
 	movs r2, 0xD8
 	bl sub_8048D24
-	bl sub_8007F18
+	bl ResetBlockReceivedFlags
 	ldr r0, _08048FA8
 	ldr r1, [r0]
 	b _08049006
@@ -126714,7 +126714,7 @@ _08048FD2:
 	.align 2, 0
 _08048FD8: .4byte 0x03004824
 _08048FDC:
-	bl sub_8007EE4
+	bl GetBlockRecievedStatus
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
@@ -126730,7 +126730,7 @@ _08048FDC:
 	adds r1, r2
 	movs r2, 0xB
 	bl sub_8048D24
-	bl sub_8007F18
+	bl ResetBlockReceivedFlags
 	ldr r1, [r4]
 _08049006:
 	adds r1, 0x75
@@ -126889,7 +126889,7 @@ _0804913E:
 	strb r1, [r0]
 _08049142:
 	movs r0, 0
-	bl sub_8007F30
+	bl ResetBlockReceivedFlag
 _08049148:
 	movs r2, 0x2
 	adds r0, r4, 0
@@ -126963,7 +126963,7 @@ _080491D2:
 	strb r2, [r0]
 _080491D4:
 	movs r0, 0x1
-	bl sub_8007F30
+	bl ResetBlockReceivedFlag
 _080491DA:
 	pop {r4}
 	pop {r0}
@@ -127079,14 +127079,14 @@ _080492B6:
 	strb r1, [r0]
 _080492B8:
 	movs r0, 0
-	bl sub_8007F30
+	bl ResetBlockReceivedFlag
 _080492BE:
 	movs r0, 0x2
 	ands r0, r5
 	cmp r0, 0
 	beq _080492CC
 	movs r0, 0x1
-	bl sub_8007F30
+	bl ResetBlockReceivedFlag
 _080492CC:
 	add sp, 0x4
 	pop {r4,r5}
@@ -127350,10 +127350,10 @@ _080494D4: .4byte 0x0000ddee
 	thumb_func_start sub_80494D8
 sub_80494D8: @ 80494D8
 	push {r4,lr}
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_8007EE4
+	bl GetBlockRecievedStatus
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
@@ -127367,7 +127367,7 @@ _080494FA:
 	adds r0, r4, 0
 	bl sub_80491E4
 _08049500:
-	bl sub_8007F18
+	bl ResetBlockReceivedFlags
 _08049504:
 	cmp r4, 0
 	bne _0804950C
@@ -127528,7 +127528,7 @@ sub_8049620: @ 8049620
 	adds r0, 0x7B
 	movs r1, 0x5
 	strb r1, [r0]
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -127549,7 +127549,7 @@ sub_8049620: @ 8049620
 	ldr r1, [r4]
 	adds r1, 0x8C
 	movs r2, 0x14
-	bl sub_8007E88
+	bl SendBlock
 	b _08049678
 	.align 2, 0
 _08049668: .4byte 0x03004824
@@ -127735,7 +127735,7 @@ _080497C8:
 	ldr r1, [r1]
 	adds r1, 0x8C
 	movs r2, 0x14
-	bl sub_8007E88
+	bl SendBlock
 _080497EC:
 	add sp, 0x8
 	pop {r4}
@@ -128092,7 +128092,7 @@ _08049A88:
 	ldr r1, [r5]
 	adds r1, 0x8C
 	movs r2, 0x14
-	bl sub_8007E88
+	bl SendBlock
 _08049AB4:
 	add sp, 0xC
 	pop {r4,r5}
@@ -128169,7 +128169,7 @@ _08049B28:
 	ldr r1, [r4]
 	adds r1, 0x8C
 	movs r2, 0x14
-	bl sub_8007E88
+	bl SendBlock
 _08049B56:
 	ldr r0, _08049B5C
 	ldr r0, [r0]
@@ -128207,7 +128207,7 @@ _08049B8C:
 	ldr r1, [r4]
 	adds r1, 0x8C
 	movs r2, 0x14
-	bl sub_8007E88
+	bl SendBlock
 	ldr r0, [r4]
 _08049BAA:
 	adds r0, 0x7B
@@ -128322,7 +128322,7 @@ _08049C84:
 	thumb_func_start sub_8049C8C
 sub_8049C8C: @ 8049C8C
 	push {r4,lr}
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	cmp r0, 0
 	bne _08049CAE
@@ -130249,7 +130249,7 @@ _0804AB98:
 	ldr r1, [r1]
 	adds r1, 0x8C
 	movs r2, 0x14
-	bl sub_8007E88
+	bl SendBlock
 	b _0804ABD2
 	.align 2, 0
 _0804ABB0: .4byte 0x03004824
@@ -131201,7 +131201,7 @@ sub_804B2B0: @ 804B2B0
 	.align 2, 0
 _0804B2C0: .4byte 0x03002fa4
 _0804B2C4:
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
 _0804B2CC:
@@ -131408,7 +131408,7 @@ _0804B47C:
 	movs r0, 0
 	strh r0, [r1]
 	bl ResetTasks
-	bl AllocZeroed
+	bl CloseLink
 	ldr r6, _0804B570
 	ldr r5, _0804B574
 	str r5, [r6]
@@ -131527,7 +131527,7 @@ _0804B5A0: .4byte 0x040000d4
 _0804B5A4: .4byte 0x80000280
 _0804B5A8: .4byte gUnknown_08D004E0
 _0804B5AC:
-	bl sub_8007378
+	bl OpenLink
 	ldr r1, _0804B5C8
 	ldr r2, _0804B5CC
 	adds r1, r2
@@ -131565,13 +131565,13 @@ _0804B5E8:
 _0804B5F4: .4byte 0x03004828
 _0804B5F8: .4byte 0x0000043c
 _0804B5FC:
-	bl sub_8008310
+	bl IsLinkMaster
 	lsls r0, 24
 	cmp r0, 0
 	bne _0804B608
 	b _0804B746
 _0804B608:
-	bl sub_8008300
+	bl GetLinkPlayerCount_2
 	adds r4, r0, 0
 	bl sub_800820C
 	lsls r4, 24
@@ -131607,7 +131607,7 @@ _0804B648:
 	beq _0804B656
 	b _0804B76E
 _0804B656:
-	bl sub_8007C48
+	bl IsLinkPlayerDataExchangeComplete
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -132060,7 +132060,7 @@ _0804BA60: .4byte 0x03004360
 	thumb_func_start sub_804BA64
 sub_804BA64: @ 804BA64
 	push {lr}
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	ldr r2, _0804BA90
 	movs r1, 0x80
@@ -132214,7 +132214,7 @@ _0804BB90:
 	ldr r1, [r4]
 	adds r1, 0x9E
 	movs r2, 0x14
-	bl sub_8007E88
+	bl SendBlock
 	ldr r1, [r4]
 	adds r1, 0xBD
 	ldrb r0, [r1]
@@ -132929,7 +132929,7 @@ sub_804C1A8: @ 804C1A8
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0804C23C
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	ldr r3, _0804C220
 	movs r2, 0x80
@@ -135210,7 +135210,7 @@ _0804D60E:
 _0804D612:
 	strb r0, [r1]
 _0804D614:
-	bl sub_8008710
+	bl HasLinkErrorOccurred
 	lsls r0, 24
 	cmp r0, 0
 	bne _0804D622
@@ -135232,7 +135232,7 @@ _0804D638: .4byte 0x020297d8
 sub_804D63C: @ 804D63C
 	push {r4-r6,lr}
 	bl sub_804B2B0
-	bl sub_8007EE4
+	bl GetBlockRecievedStatus
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r6, 0x1
@@ -135258,7 +135258,7 @@ _0804D664:
 	strb r6, [r0]
 _0804D674:
 	movs r0, 0
-	bl sub_8007F30
+	bl ResetBlockReceivedFlag
 _0804D67A:
 	movs r0, 0x2
 	ands r0, r5
@@ -135279,7 +135279,7 @@ _0804D67A:
 	strb r1, [r0]
 _0804D69C:
 	movs r0, 0x1
-	bl sub_8007F30
+	bl ResetBlockReceivedFlag
 _0804D6A2:
 	pop {r4-r6}
 	pop {r0}
@@ -135979,7 +135979,7 @@ sub_804DC18: @ 804DC18
 	ldr r1, [r4]
 	adds r1, 0x9E
 	movs r2, 0x14
-	bl sub_8007E88
+	bl SendBlock
 	ldr r0, [r4]
 	adds r0, 0x9C
 	movs r1, 0x2
@@ -136460,7 +136460,7 @@ _0804E10C:
 	ldr r0, _0804E140
 	bl SetMainCallback2
 _0804E11A:
-	bl sub_8008710
+	bl HasLinkErrorOccurred
 	lsls r0, 24
 	cmp r0, 0
 	bne _0804E128
@@ -137883,8 +137883,8 @@ _0804ED94:
 	bne _0804EDA0
 	b _0804F0CE
 _0804EDA0:
-	bl sub_8007F18
-	bl link_get_multiplayer_id
+	bl ResetBlockReceivedFlags
+	bl GetMultiplayerId
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804EDB0
@@ -137907,7 +137907,7 @@ _0804EDB8:
 	b _0804F0CE
 _0804EDCE:
 	bl sub_8071EF4
-	bl sub_8007EE4
+	bl GetBlockRecievedStatus
 	adds r4, r0, 0
 	bl sub_8008198
 	lsls r4, 24
@@ -137942,12 +137942,12 @@ _0804EDF0:
 	strh r0, [r1]
 	adds r5, 0x1
 _0804EE18:
-	bl sub_8007B78
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r5, r0
 	blt _0804EDF0
-	bl sub_8007F18
+	bl ResetBlockReceivedFlags
 	b _0804F0AA
 	.align 2, 0
 _0804EE2C: .4byte 0x03002b80
@@ -137963,7 +137963,7 @@ _0804EE30:
 	bl sub_804E7C0
 	b _0804EE7A
 _0804EE46:
-	bl sub_8007B78
+	bl GetLinkPlayerCount
 	ldr r2, _0804EE98
 	ldr r1, [r2]
 	adds r1, 0x88
@@ -138576,7 +138576,7 @@ _0804F2B6:
 	lsls r1, r6, 24
 	lsrs r1, 24
 	bl StartSpriteAnim
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	ldr r1, [r7]
 	adds r1, 0x9A
@@ -140271,7 +140271,7 @@ sub_80500A8: @ 80500A8
 	movs r6, 0
 	ldr r5, _080500EC
 	ldr r4, [r5]
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r0, 23
 	adds r4, 0xA2
@@ -140337,7 +140337,7 @@ _0805010A:
 	ldr r0, [r4]
 	adds r0, 0x54
 	ldrh r4, [r0]
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -140453,7 +140453,7 @@ _08050218:
 	lsls r5, 1
 	adds r1, r5
 	ldrh r1, [r1]
-	bl sub_8008184
+	bl SetLinkDebugValues
 	bl sub_804FE70
 	ldr r0, [r4]
 	adds r0, r5
@@ -141437,7 +141437,7 @@ _08050950: .4byte gUnknown_0842D2C5
 sub_8050954: @ 8050954
 	push {r4-r7,lr}
 	bl sub_8051474
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	ldr r0, _08050978
 	ldr r0, [r0]
 	adds r0, 0x6F
@@ -141471,7 +141471,7 @@ _08050980:
 	.4byte _08050C64
 	.4byte _08050C98
 _080509B4:
-	bl sub_8007B60
+	bl ClearLinkCallback
 	ldr r0, _080509C8
 	movs r1, 0x80
 	lsls r1, 1
@@ -141544,7 +141544,7 @@ _08050A40:
 	.align 2, 0
 _08050A48: .4byte 0x03007400
 _08050A4C:
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	cmp r0, 0
 	beq _08050A58
@@ -141574,13 +141574,13 @@ _08050A64:
 	strh r2, [r0]
 	movs r0, 0
 	movs r2, 0x28
-	bl sub_8007E88
+	bl SendBlock
 	ldr r1, [r4]
 	b _08050C86
 	.align 2, 0
 _08050A90: .4byte 0x03004854
 _08050A94:
-	bl sub_8007EE4
+	bl GetBlockRecievedStatus
 	lsls r0, 24
 	cmp r0, 0
 	bne _08050AA0
@@ -141603,7 +141603,7 @@ _08050AA0:
 	ldrb r0, [r1]
 	adds r0, 0x1
 	strb r0, [r1]
-	bl sub_8007F18
+	bl ResetBlockReceivedFlags
 	b _08050CB6
 	.align 2, 0
 _08050AC8: .4byte 0x03002b80
@@ -142582,7 +142582,7 @@ _080512B8:
 _080512C4:
 	strh r1, [r0]
 _080512C6:
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	cmp r0, 0
 	beq _080512D2
@@ -142651,7 +142651,7 @@ _08051348:
 	lsls r0, 24
 	lsrs r4, r0, 24
 _0805134E:
-	bl sub_8007B78
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -142666,7 +142666,7 @@ _08051368:
 	lsls r0, 24
 	lsrs r4, r0, 24
 _0805136E:
-	bl sub_8007B78
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -142680,7 +142680,7 @@ _0805136E:
 	cmp r0, 0
 	bne _08051368
 _0805138A:
-	bl sub_8007B78
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -142696,7 +142696,7 @@ _080513A4:
 	lsls r0, 24
 	lsrs r4, r0, 24
 _080513AA:
-	bl sub_8007B78
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -142714,7 +142714,7 @@ _080513C6:
 	movs r6, 0
 	ldr r0, _080513E8
 	strh r0, [r5]
-	bl sub_8007B78
+	bl GetLinkPlayerCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -143154,7 +143154,7 @@ sub_80516F8: @ 80516F8
 	ldrb r0, [r6]
 	cmp r0, 0
 	beq _0805180C
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
@@ -144021,7 +144021,7 @@ _08051D56:
 	adds r0, r4, r1
 	ldrb r1, [r0, 0x1A]
 	adds r0, r7, 0
-	bl SetStringCharset
+	bl ConvertInternationalString
 	adds r0, r7, 0
 	ldr r1, _08051F20
 	bl StringAppend

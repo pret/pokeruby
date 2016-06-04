@@ -350,6 +350,7 @@
 #define REG_BG2VOFS     (*(vu16 *)REG_ADDR_BG2VOFS)
 #define REG_BG3HOFS     (*(vu16 *)REG_ADDR_BG3HOFS)
 #define REG_BG3VOFS     (*(vu16 *)REG_ADDR_BG3VOFS)
+#define REG_BLDALPHA    (*(vu16 *)REG_ADDR_BLDALPHA)
 
 #define REG_SOUND1CNT_L (*(vu16 *)REG_ADDR_SOUND1CNT_L)
 #define REG_NR10        (*(vu8  *)REG_ADDR_NR10)
@@ -433,8 +434,20 @@
 #define REG_TM3CNT_L    (*(vu16 *)REG_ADDR_TM3CNT_L)
 #define REG_TM3CNT_H    (*(vu16 *)REG_ADDR_TM3CNT_H)
 
+#define REG_SIOCNT      (*(vu16 *)REG_ADDR_SIOCNT)
+#define REG_SIODATA8    (*(vu16 *)REG_ADDR_SIODATA8)
+#define REG_SIODATA32   (*(vu32 *)REG_ADDR_SIODATA32)
+#define REG_SIOMLT_SEND (*(vu16 *)REG_ADDR_SIOMLT_SEND)
+#define REG_SIOMLT_RECV (*(vu64 *)REG_ADDR_SIOMLT_RECV)
+#define REG_SIOMULTI0   (*(vu16 *)REG_ADDR_SIOMULTI0)
+#define REG_SIOMULTI1   (*(vu16 *)REG_ADDR_SIOMULTI1)
+#define REG_SIOMULTI2   (*(vu16 *)REG_ADDR_SIOMULTI2)
+#define REG_SIOMULTI3   (*(vu16 *)REG_ADDR_SIOMULTI3)
+
 #define REG_KEYINPUT    (*(vu16 *)REG_ADDR_KEYINPUT)
 #define REG_KEYCNT      (*(vu16 *)REG_ADDR_KEYCNT)
+
+#define REG_RCNT        (*(vu16 *)REG_ADDR_RCNT)
 
 #define REG_IME         (*(vu16 *)REG_ADDR_IME)
 #define REG_IE          (*(vu16 *)REG_ADDR_IE)
@@ -525,6 +538,31 @@
 #define TIMER_1024CLK     0x03
 #define TIMER_INTR_ENABLE 0x40
 #define TIMER_ENABLE      0x80
+
+// serial
+#define SIO_8BIT_MODE      0x0000 // Normal 8-bit communication mode
+#define SIO_32BIT_MODE     0x1000 // Normal 32-bit communication mode
+#define SIO_MULTI_MODE     0x2000 // Multi-player communication mode
+#define SIO_UART_MODE      0x3000 // UART communication mode
+
+#define SIO_9600_BPS       0x0000 // baud rate   9600 bps
+#define SIO_38400_BPS      0x0001 //            38400 bps
+#define SIO_57600_BPS      0x0002 //            57600 bps
+#define SIO_115200_BPS     0x0003 //           115200 bps
+
+#define SIO_MULTI_SI       0x0004 // Multi-player communication SI terminal
+#define SIO_MULTI_SD       0x0008 //                            SD terminal
+
+#define SIO_ERROR          0x0040 // Detect error
+#define SIO_START          0x0080 // Start transfer
+#define SIO_ENABLE         0x0080 // Enable SIO
+
+#define SIO_INTR_ENABLE    0x4000
+
+#define SIO_MULTI_SI_SHIFT 2
+#define SIO_MULTI_SI_MASK  0x1
+#define SIO_MULTI_DI_SHIFT 3
+#define SIO_MULTI_DI_MASK  0x1
 
 // keys
 #define A_BUTTON        0x0001

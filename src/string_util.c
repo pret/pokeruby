@@ -19,11 +19,14 @@ static u8 *ExpandPlaceholder_GoodLeader(void);
 static u8 *ExpandPlaceholder_EvilLegendary(void);
 static u8 *ExpandPlaceholder_GoodLegendary(void);
 
+COMM_4(u8 gUnknownStringVar[16])
+
 const u8 gEmptyString_81E72B0[] = _"";
 const u8 gRightPointingTriangleString[] = _"▶";
-const u8 sDigits[] = @"0123456789ABCDEF";
 
-const s32 sPowersOfTen[] =
+static const u8 sDigits[] = @"0123456789ABCDEF";
+
+static const s32 sPowersOfTen[] =
 {
              1,
             10,
@@ -37,12 +40,12 @@ const s32 sPowersOfTen[] =
     1000000000,
 };
 
-const u8 sSetBrailleFont[] = { 0xFC, 0x06, 0x06, 0xFF };
-const u8 sGotoLine2[] = { 0xFE, 0xFC, 0x0E, 0x02, 0xFF };
+static const u8 sSetBrailleFont[] = { 0xFC, 0x06, 0x06, 0xFF };
+static const u8 sGotoLine2[] = { 0xFE, 0xFC, 0x0E, 0x02, 0xFF };
 
 typedef u8 *(*ExpandPlaceholderFunc)(void);
 
-const ExpandPlaceholderFunc sExpandPlaceholderFuncs[] =
+static const ExpandPlaceholderFunc sExpandPlaceholderFuncs[] =
 {
     ExpandPlaceholder_UnknownStringVar,
     ExpandPlaceholder_PlayerName,
@@ -73,8 +76,6 @@ extern u8 gExpandedPlaceholder_Kyogre[];
 extern u8 gExpandedPlaceholder_Groudon[];
 extern u8 gExpandedPlaceholder_Brendan[];
 extern u8 gExpandedPlaceholder_May[];
-
-extern u8 gUnknownStringVar[];
 
 u8 *StringCopy10(u8 *dest, u8 *src)
 {

@@ -313,6 +313,7 @@ TALL_PLUS   = FC 0C FB
 'ッ' = A0
 
 @ Japanese punctuation
+'　' = 00
 'ー' = AE
 '·' = AF
 '‥' = B0

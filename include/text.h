@@ -76,5 +76,6 @@ extern const struct WindowConfig gWindowConfig_81E7278;
 extern const struct WindowConfig gWindowConfig_81E7294;
 
 u8 GetExtCtrlCodeLength(u8 code);
+void ConvertInternationalString(u8 *s, u8 language);
 
 #endif // GUARD_TEXT_H

@@ -42,6 +42,12 @@ struct Main
     u8 oamLoadDisabled:1;
 };
 
+extern u8 gUnknown_3001764;
 extern struct Main gMain;
+extern u8 gUnknown_3001BB4;
+extern bool8 gLinkVSyncDisabled;
+
+extern const u8 gGameVersion;
+extern const u8 gGameLanguage;
 
 #endif // GUARD_MAIN_H

@@ -2,15 +2,11 @@
 #include "gba/m4a_internal.h"
 #include "gba/flash_internal.h"
 #include "siirtc.h"
-#include "rtc.h"
 #include "main.h"
+#include "rtc.h"
+#include "link.h"
 
 extern struct SoundInfo gSoundInfo;
-extern u16 gUnknown_3002A20;
-extern u32 gUnknown_3002A60;
-extern u16 gUnknown_3002F90;
-extern u8 gUnknown_3003040;
-extern u8 gUnknown_30033A9[];
 extern u32 gUnknown_3004820;
 extern u32 IntrMain[];
 
@@ -53,20 +49,17 @@ COMM_4(struct Main gMain)
 COMM_2(u16 gKeyRepeatContinueDelay)
 COMM_2(u8 gUnknown_3001BB4)
 COMM_4(IntrFunc gIntrTable[INTR_COUNT])
-COMM_2(u8 gUnknown_3001BF8)
+COMM_2(bool8 gLinkVSyncDisabled)
 COMM_4(u32 IntrMain_Buffer[0x200])
 COMM_2(u8 gPcmDmaCounter)
 
 EWRAM_DATA void (*gFlashTimerIntrFunc)(void) = NULL;
 
-extern void sub_8008BEC(void);
 extern void sub_800C35C(void);
 extern u16 Random(void);
 extern void SeedRng(u16);
 extern void remove_some_task(void);
 extern void c2_copyright_1();
-extern u32 sub_8008848(u8 *, u16 *, u16 *);
-extern void sub_80075F0(u16 *);
 extern u32 sub_80558AC(void);
 extern u32 sub_8055910(void);
 extern u32 sub_8055940(void);
@@ -74,7 +67,7 @@ extern void sound_something(void);
 extern void CheckForFlashMemory(void);
 extern void sound_sources_off(void);
 
-void CallCallbacksWrapper(void);
+void UpdateLinkAndCallCallbacks(void);
 void InitMainCallbacks(void);
 void CallCallbacks(void);
 void SetMainCallback2(MainCallback callback);
@@ -120,24 +113,24 @@ void AgbMain()
          && (gMain.heldKeysRaw & B_START_SELECT) == B_START_SELECT)
             DoSoftReset();
 
-        if (gUnknown_30033A9[0] > 1 && sub_8055910() == 1)
+        if (gLink.sendQueue.count > 1 && sub_8055910() == 1)
         {
             gUnknown_3001764 = 1;
-            CallCallbacksWrapper();
+            UpdateLinkAndCallCallbacks();
             gUnknown_3001764 = 0;
         }
         else
         {
             gUnknown_3001764 = 0;
-            CallCallbacksWrapper();
+            UpdateLinkAndCallCallbacks();
 
-            if (gUnknown_30033A9[0xC84] > 1)
+            if (gLink.recvQueue.count > 1)
             {
                 if (sub_80558AC() == 1)
                 {
                     gMain.newKeys = 0;
                     gUnknown_3001764 = 1;
-                    CallCallbacksWrapper();
+                    UpdateLinkAndCallCallbacks();
                     gUnknown_3001764 = 0;
                 }
             }
@@ -149,12 +142,11 @@ void AgbMain()
     }
 }
 
-// The conditions seem to be related to serial communication.
-void CallCallbacksWrapper(void)
+void UpdateLinkAndCallCallbacks(void)
 {
-    gUnknown_3002A60 = sub_8008848(&gUnknown_3003040, &gUnknown_3002F90, &gUnknown_3002A20);
-    sub_80075F0(&gMain.heldKeys);
-    if (!(gUnknown_3002A60 & 0x100) || sub_8055940() != 1)
+    gLinkStatus = LinkMain1(&gShouldAdvanceLinkState, gSendCmd, gRecvCmds);
+    LinkMain2(&gMain.heldKeys);
+    if (!(gLinkStatus & LINK_STAT_RECEIVED_NOTHING) || sub_8055940() != 1)
         CallCallbacks();
 }
 
@@ -289,8 +281,8 @@ void VBlankIntr(void)
 {
     u16 savedIme;
 
-    if (gUnknown_3001BF8 == 0)
-        sub_8008BEC();
+    if (!gLinkVSyncDisabled)
+        LinkVSync();
 
     savedIme = REG_IME;
     REG_IME = 0;
