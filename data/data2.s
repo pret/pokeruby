@@ -31,6 +31,7 @@ gUnknown_081E75CC: @ 81E75CC
 	.align 2
 	.global gUnknown_081E75FC
 gUnknown_081E75FC: @ 81E75FC
+SystemText_GameFreak:
 	.ascii "GameFreak inc."
 	.align 2
 	.string "$"
@@ -1359,22 +1360,23 @@ gUnknown_0820C33C:
 
 	.global gUnknown_0820C33D
 gUnknown_0820C33D: @ 820C33D
+OtherText_MaleSymbol3:
 	.string "♂$"
 
 	.global gUnknown_0820C33F
 gUnknown_0820C33F: @ 820C33F
+OtherText_FemaleSymbol3:
 	.string "♀$"
 
 	.global gUnknown_0820C341
 gUnknown_0820C341: @ 820C341
-	.string "$"
-
-	.string "$"
+	.string "$$"
 
 	.align 2
 	.4byte gTileBuffer
 
 @ Unused debug strings?
+@ Not labeling these yet
 	.string "かいめの そうしん$", 13
 	.string "かいめの じゅしん$", 13
 	.string "ポケモンアイコンセット$", 13
@@ -1537,12 +1539,16 @@ gUnknown_08216284: @ 8216284 berry blender helpers?
 	.4byte UnknownText_2Pok
 	.4byte UnknownText_3Pok
 	.4byte UnknownText_4Pok
+OtherText_1P:
 	.string "1P$"
 	.align 2
+OtherText_2P:
 	.string "2P$"
 	.align 2
+OtherText_3P:
 	.string "3P$"
 	.align 2
+OtherText_4P:
 	.string "4P$"
 	.align 2
 UnknownText_Mister:
@@ -1681,7 +1687,9 @@ gUnknown_082165F8: @ 82165F8
 
 	.global gUnknown_082165FA
 gUnknown_082165FA: @ 82165FA
+OtherText_BPM:
 	.string "BPM$"
+OtherText_Dash:
 	.string "-$"
 
 	.global gUnknown_08216600
@@ -4601,6 +4609,7 @@ gUnknown_083A05F1: @ 83A05F1
 
 	.global gUnknown_083A05F8
 gUnknown_083A05F8: @ 83A05F8
+@ not sure if this is even a string, wont label
 	.string "$"
 
 @ 83A05F9
@@ -5229,6 +5238,7 @@ gUnknown_083C1F98: @ 83C1F98
 
 @ 83C9150
 @ Unreferenced debug strings.
+@ not referenced. wont label
 	.string "テストです$" @ "test"
 	.string "Contest$"
 	.string "Contest results$"
@@ -5457,25 +5467,32 @@ gUnknown_083CA4CC: @ 83CA4CC
 	.global gUnknown_083CC330
 gUnknown_083CC330: @ 83CC330
 	.incbin "baserom.gba", 0x003cc330, 0x1d
+@ not labeling until im sure what this is.
 	.string "{HIGHLIGHT TRANSPARENT}{COLOR MAGENTA} $"
 
 	.global gUnknown_083CC355
 gUnknown_083CC355: @ 83CC355
+UnknownText_MissedTurn:
 	.string "Missed turn$"
 
 	.global gUnknown_083CC361
 gUnknown_083CC361: @ 83CC361
+UnknownText_LinkStandby:
 	.string "Link standby...$"
+UnknownText_UnknownFormatting:
 	.string "{COLOR WHITE2}$"
+UnknownText_WinnerIs:
 	.string "The winner is {STR_VAR_1}’s {STR_VAR_2}!\nCongratulations!$"
 	.incbin "baserom.gba", 0x003cc39d, 0x3
 
 	.global gUnknown_083CC3A0
 gUnknown_083CC3A0: @ 83CC3A0
+UnknownText_UnknownFormatting2:
 	.string "{COLOR GREEN}{SHADOW RED}$"
 
 	.global gUnknown_083CC3A7
 gUnknown_083CC3A7: @ 83CC3A7
+UnknownText_UnknownFormatting3:
 	.string "{COLOR LIGHT_GREY}$"
 
 	.align 2
@@ -5755,6 +5772,7 @@ gUnknown_083CE398: @ 83CE398
 
 	.global gUnknown_083CE3A8
 gUnknown_083CE3A8: @ 83CE3A8
+@ not labeling this yet when its not fully dissassembled
 	.string " A B C  D E F    . $"
 	.string " G H I  J K L    , $"
 	.string " M N O  P Q R S    $"
@@ -5923,14 +5941,17 @@ gUnknown_083D02BA: @ 83D02BA
 
 	.global gUnknown_083D02C8
 gUnknown_083D02C8: @ 83D02C8
+DebugText_SoundCheckJap:
 	.string "サウンドチェック$" @ Sound Check
 
 	.global gUnknown_083D02D1
 gUnknown_083D02D1: @ 83D02D1
+DebugText_BGM:
 	.string "BGM$"
 
 	.global gUnknown_083D02D5
 gUnknown_083D02D5: @ 83D02D5
+DebugText_SE:
 	.string "SE $"
 
 	.global gUnknown_083D02D9
@@ -5939,10 +5960,12 @@ gUnknown_083D02D9: @ 83D02D9
 
 	.global gUnknown_083D02E6
 gUnknown_083D02E6: @ 83D02E6
+DebugText_UpDown:
 	.string "L‥UP R‥DOWN$"
 
 	.global gUnknown_083D02F2
 gUnknown_083D02F2: @ 83D02F2
+DebugText_DriverTest:
 	.string "R‥DRIVER-TEST$"
 
 	.global gUnknown_083D0300
@@ -5959,38 +5982,47 @@ gUnknown_083D031C: @ 83D031C
 
 	.global gUnknown_083D0327
 gUnknown_083D0327: @ 83D0327
+DebugText_Voice:
 	.string "VOICE‥‥‥‥$"
 
 	.global gUnknown_083D0331
 gUnknown_083D0331: @ 83D0331
+DebugText_Volume:
 	.string "VOLUME‥‥‥$"
 
 	.global gUnknown_083D033B
 gUnknown_083D033B: @ 83D033B
+DebugText_Panpot:
 	.string "PANPOT‥‥‥$"
 
 	.global gUnknown_083D0345
 gUnknown_083D0345: @ 83D0345
+DebugText_Pitch:
 	.string "PITCH‥‥‥‥$"
 
 	.global gUnknown_083D034F
 gUnknown_083D034F: @ 83D034F
+DebugText_Length:
 	.string "LENGTH‥‥‥$"
 
 	.global gUnknown_083D0359
 gUnknown_083D0359: @ 83D0359
+DebugText_Release:
 	.string "RELEASE‥‥$"
 
 	.global gUnknown_083D0363
 gUnknown_083D0363: @ 83D0363
+DebugText_Progress:
 	.string "PROGRESS‥$"
 
 	.global gUnknown_083D036D
 gUnknown_083D036D: @ 83D036D
+DebugText_Chorus:
 	.string "CHORUS‥‥‥$"
 
 	.global gUnknown_083D0377
 gUnknown_083D0377: @ 83D0377
+DebugText_Priority:
 	.string "PRIORITY‥$"
 
 	.global gUnknown_083D0381
@@ -6027,18 +6059,22 @@ gUnknown_083D03F8: @ 83D03F8
 
 	.global gUnknown_083D03FD
 gUnknown_083D03FD: @ 83D03FD
+OtherText_SE:
 	.string "SE$"
 
 	.global gUnknown_083D0400
 gUnknown_083D0400: @ 83D0400
+OtherText_Pan:
 	.string "PAN$"
 
 	.global gUnknown_083D0404
 gUnknown_083D0404: @ 83D0404
+OtherText_LR:
 	.string "  LR$"
 
 	.global gUnknown_083D0409
 gUnknown_083D0409: @ 83D0409
+OtherText_RL:
 	.string "  RL$"
 
 @ 83D040E
