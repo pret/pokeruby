@@ -1,23 +1,10 @@
 /* .bss starts at 0x3000000 */
 
-gRtcErrorStatus = 0x3000458;
-gRtc = 0x3000460;
-gRtcProbeResult = 0x300046C;
-gRtcSavedIme = 0x300046E;
-
 gPlayTimeCounterState = 0x300057C;
 
 /* .bss.code starts at 0x3000F60 */
 
 /* COMMON starts at 0x3001760 */
-
-gUnknownStringVar = 0x3002900;
-
-gUnknown_3002A20 = 0x3002A20;
-gUnknown_3002A60 = 0x3002A60;
-gUnknown_3002F90 = 0x3002F90;
-gUnknown_3003040 = 0x3003040;
-gUnknown_30033A9 = 0x30033A9;
 
 gLocalTime = 0x3004038;
 

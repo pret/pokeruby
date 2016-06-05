@@ -4,15 +4,31 @@
 #include "string_util.h"
 #include "text.h"
 
-extern const struct SiiRtcInfo gRtcDummy;
-extern const s32 gNumDaysInMonths[];
+static u16 sErrorStatus;
+static struct SiiRtcInfo sRtc;
+static u8 sProbeResult;
+static u16 sSavedIme;
 
-extern u16 gRtcErrorStatus;
-extern struct SiiRtcInfo gRtc;
-extern u8 gRtcProbeResult;
-extern u16 gRtcSavedIme;
-
+// TODO: Define this in C. Gas prevents it from working at the moment.
 extern struct Time gLocalTime;
+
+static const struct SiiRtcInfo sRtcDummy = {0, MONTH_JAN, 1}; // 2000 Jan 1
+
+static const s32 sNumDaysInMonths[12] =
+{
+    31,
+    28,
+    31,
+    30,
+    31,
+    30,
+    31,
+    31,
+    30,
+    31,
+    30,
+    31,
+};
 
 void RtcDisableInterrupts();
 void RtcRestoreInterrupts();
@@ -29,13 +45,13 @@ void RtcCalcTimeDifference(struct SiiRtcInfo *rtc, struct Time *result, struct T
 
 void RtcDisableInterrupts()
 {
-    gRtcSavedIme = REG_IME;
+    sSavedIme = REG_IME;
     REG_IME = 0;
 }
 
 void RtcRestoreInterrupts()
 {
-    REG_IME = gRtcSavedIme;
+    REG_IME = sSavedIme;
 }
 
 u32 ConvertBcdToBinary(u8 bcd)
@@ -85,7 +101,7 @@ u16 ConvertDateToDayCount(u8 year, u8 month, u8 day)
 #endif
 
     for (i = 0; i < month - 1; i++)
-        dayCount += gNumDaysInMonths[i];
+        dayCount += sNumDaysInMonths[i];
 
     if (month > MONTH_FEB && IsLeapYear(year) == TRUE)
         dayCount++;
@@ -105,37 +121,37 @@ u16 RtcGetDayCount(struct SiiRtcInfo *rtc)
 
 void RtcInit()
 {
-    gRtcErrorStatus = 0;
+    sErrorStatus = 0;
 
     RtcDisableInterrupts();
     SiiRtcUnprotect();
-    gRtcProbeResult = SiiRtcProbe();
+    sProbeResult = SiiRtcProbe();
     RtcRestoreInterrupts();
 
-    if (!(gRtcProbeResult & 0xF))
+    if (!(sProbeResult & 0xF))
     {
-        gRtcErrorStatus = RTC_INIT_ERROR;
+        sErrorStatus = RTC_INIT_ERROR;
         return;
     }
 
-    if (gRtcProbeResult & 0xF0)
-        gRtcErrorStatus = RTC_INIT_WARNING;
+    if (sProbeResult & 0xF0)
+        sErrorStatus = RTC_INIT_WARNING;
     else
-        gRtcErrorStatus = 0;
+        sErrorStatus = 0;
 
-    RtcGetRawInfo(&gRtc);
-    gRtcErrorStatus = RtcCheckInfo(&gRtc);
+    RtcGetRawInfo(&sRtc);
+    sErrorStatus = RtcCheckInfo(&sRtc);
 }
 
 u16 RtcGetErrorStatus()
 {
-    return gRtcErrorStatus;
+    return sErrorStatus;
 }
 
 void RtcGetInfo(struct SiiRtcInfo *rtc)
 {
-    if (gRtcErrorStatus & RTC_ERR_FLAG_MASK)
-        *rtc = gRtcDummy;
+    if (sErrorStatus & RTC_ERR_FLAG_MASK)
+        *rtc = sRtcDummy;
     else
         RtcGetRawInfo(rtc);
 }
@@ -190,12 +206,12 @@ u16 RtcCheckInfo(struct SiiRtcInfo *rtc)
 
     if (month == MONTH_FEB)
     {
-        if (value > IsLeapYear(year) + gNumDaysInMonths[month - 1])
+        if (value > IsLeapYear(year) + sNumDaysInMonths[month - 1])
             errorFlags |= RTC_ERR_INVALID_DAY;
     }
     else
     {
-        if (value > gNumDaysInMonths[month - 1])
+        if (value > sNumDaysInMonths[month - 1])
             errorFlags |= RTC_ERR_INVALID_DAY;
     }
 
@@ -246,7 +262,7 @@ void FormatHexTime(u8 *dest, s32 hour, s32 minute, s32 second)
 
 void FormatHexRtcTime(u8 *dest)
 {
-    FormatHexTime(dest, gRtc.hour, gRtc.minute, gRtc.second);
+    FormatHexTime(dest, sRtc.hour, sRtc.minute, sRtc.second);
 }
 
 void FormatDecimalDate(u8 *dest, s32 year, s32 month, s32 day)
@@ -298,8 +314,8 @@ void RtcCalcTimeDifference(struct SiiRtcInfo *rtc, struct Time *result, struct T
 
 void RtcCalcLocalTime()
 {
-    RtcGetInfo(&gRtc);
-    RtcCalcTimeDifference(&gRtc, &gLocalTime, &gSaveBlock2.localTimeOffset);
+    RtcGetInfo(&sRtc);
+    RtcCalcTimeDifference(&sRtc, &gLocalTime, &gSaveBlock2.localTimeOffset);
 }
 
 void RtcInitLocalTimeOffset(s32 hour, s32 minute)
@@ -313,8 +329,8 @@ void RtcCalcLocalTimeOffset(s32 days, s32 hours, s32 minutes, s32 seconds)
     gLocalTime.hours = hours;
     gLocalTime.minutes = minutes;
     gLocalTime.seconds = seconds;
-    RtcGetInfo(&gRtc);
-    RtcCalcTimeDifference(&gRtc, &gSaveBlock2.localTimeOffset, &gLocalTime);
+    RtcGetInfo(&sRtc);
+    RtcCalcTimeDifference(&sRtc, &gSaveBlock2.localTimeOffset, &gLocalTime);
 }
 
 void CalcTimeDifference(struct Time *result, struct Time *t1, struct Time *t2)
@@ -345,6 +361,6 @@ void CalcTimeDifference(struct Time *result, struct Time *t1, struct Time *t2)
 
 u32 RtcGetMinuteCount()
 {
-    RtcGetInfo(&gRtc);
-    return (24 * 60) * RtcGetDayCount(&gRtc) + 60 * gRtc.hour + gRtc.minute;
+    RtcGetInfo(&sRtc);
+    return (24 * 60) * RtcGetDayCount(&sRtc) + 60 * sRtc.hour + sRtc.minute;
 }
