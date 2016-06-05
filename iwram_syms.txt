@@ -15,14 +15,3 @@ word_3004858 = 0x3004858;
 gTasks = 0x3004B20;
 
 gMPlayMemAccArea = 0x3007440;
-
-gFlashTimeoutFlag = 0x3007490;
-PollFlashStatus = 0x3007494;
-WaitForFlashWrite = 0x3007498;
-ProgramFlashSector = 0x300749C;
-gFlash = 0x30074A0;
-ProgramFlashByte = 0x30074A4;
-gFlashNumRemainingBytes = 0x30074A8;
-EraseFlashChip = 0x30074AC;
-EraseFlashSector = 0x30074B0;
-gFlashMaxTime = 0x30074B4;

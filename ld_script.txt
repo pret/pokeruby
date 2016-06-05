@@ -48,6 +48,9 @@ SECTIONS {
 
         . = 0x5FD0;
         src/m4a_2.o(iwram_data);
+
+        . = 0x7490;
+        src/agb_flash.o(iwram_data);
     }
 
     . = 0x8000000;
