@@ -3720,9 +3720,9 @@ u8 GetStringWidthGivenWindowConfig(struct WindowConfig *winConfig, u8 *s)
     return GetStringWidth(&sTempWindow, s);
 }
 
-void SetStringCharset(u8 *s, u8 charset)
+void ConvertInternationalString(u8 *s, u8 language)
 {
-    if (charset == CHARSET_JAPANESE)
+    if (language == CHARSET_JAPANESE)
     {
         u8 i;
         u8 length;

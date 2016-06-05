@@ -10,6 +10,8 @@
 // Prevent cross-jump optimization.
 #define BLOCK_CROSS_JUMP asm("");
 
+#define ARRAY_COUNT(array) (sizeof(array) / sizeof((array)[0]))
+
 extern u8 gStringVar1[];
 extern u8 gStringVar2[];
 extern u8 gStringVar3[];
@@ -38,8 +40,8 @@ struct SaveBlock2
 {
     u8 playerName[8];
     u8 playerGender;
-    u16 playerTrainerId;
-    u16 playerSecretId;
+    u8 sb2_field_9;
+    u8 playerTrainerId[4];
     u16 playTimeHours;
     u8 playTimeMinutes;
     u8 playTimeSeconds;

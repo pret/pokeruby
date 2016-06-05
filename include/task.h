@@ -10,8 +10,10 @@ struct Task
     u8 prev;
     u8 next;
     u8 priority;
-    u16 data[16];
+    s16 data[16];
 };
+
+extern struct Task gTasks[];
 
 void ResetTasks();
 u8 CreateTask(TaskFunc func, u8 priority);

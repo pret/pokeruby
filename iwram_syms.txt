@@ -23,6 +23,8 @@ gLocalTime = 0x3004038;
 
 gUnknown_3004820 = 0x3004820;
 
+word_3004858 = 0x3004858;
+
 gTasks = 0x3004B20;
 
 gMPlayMemAccArea = 0x3007440;

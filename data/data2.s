@@ -5,38 +5,9 @@
 
 	.section .rodata
 
-	.global gUnknown_081E7330
-gUnknown_081E7330: @ 81E7330
-	.incbin "baserom.gba", 0x001e7330, 0x20
-
-	.global gUnknown_081E7350
-gUnknown_081E7350: @ 81E7350
-	.incbin "baserom.gba", 0x001e7350, 0x27c
-
-	.global gUnknown_081E75CC
-gUnknown_081E75CC: @ 81E75CC
-	.4byte 0x03002A70 @ RAM pointers
-	.4byte 200
-	.4byte 0x03002A70
-	.4byte 200
-	.4byte 0x03002A70
-	.4byte 100
-	.4byte 0x03002A70
-	.4byte 220
-	.4byte 0x03002A70
-	.4byte 40
-	.4byte 0x15645D63 @unknown
-	.string "$"
-
-	.align 2
-	.global gUnknown_081E75FC
-gUnknown_081E75FC: @ 81E75FC
-SystemText_GameFreak:
-	.ascii "GameFreak inc."
-	.align 2
-	.string "$"
-
-	.align 2
+<<<<<<< HEAD
+=======
+>>>>>>> upstream/master
 @ 81E7610
 	.include "data/rtc.s"
 

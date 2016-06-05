@@ -35,7 +35,7 @@ PREPROC := tools/preproc/preproc
 C_SRCS := $(wildcard src/*.c)
 C_OBJS := $(C_SRCS:%.c=%.o)
 
-ASM_OBJS := asm/crt0.o asm/rom2.o asm/rom3.o asm/rom4.o asm/rom5.o \
+ASM_OBJS := asm/crt0.o asm/rom3.o asm/rom4.o asm/rom5.o \
 	asm/libgcnmultiboot.o asm/m4a_1.o asm/m4a_3.o asm/libagbsyscall.o asm/libc.o
 
 DATA_ASM_OBJS := data/data1.o data/data2.o data/graphics.o data/sound_data.o

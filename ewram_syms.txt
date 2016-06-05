@@ -1,7 +1,12 @@
+unk_2000000 = 0x2000000;
+unk_2004000 = 0x2004000;
+
 gUnknown_020239F8 = 0x20239F8;
+
+gSaveBlock2 = 0x2024EA4;
+
+word_203855E = 0x203855E;
 
 gUnknown_0203869A = 0x203869A;
 
 gTileBuffer = 0x2039360;
-
-gSaveBlock2 = 0x2024EA4;
