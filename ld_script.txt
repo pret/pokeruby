@@ -15,6 +15,7 @@ SECTIONS {
         src/string_util.o(ewram_data);
         . += 0x2E8; /* big gap */
         src/link.o(ewram_data);
+        src/rtc.o(ewram_data);
     }
 
     . = 0x3000000;
@@ -27,6 +28,8 @@ SECTIONS {
         src/text.o(.bss);
         src/string_util.o(.bss);
         src/link.o(.bss);
+        src/rtc.o(.bss);
+
         . = 0xF28;
         src/agb_flash.o(.bss);
         . = 0xF36;
@@ -41,6 +44,7 @@ SECTIONS {
         src/text.o(iwram_data);
         src/string_util.o(iwram_data);
         src/link.o(iwram_data);
+        src/rtc.o(iwram_data);
 
         . = 0x5FD0;
         src/m4a_2.o(iwram_data);
@@ -110,6 +114,7 @@ SECTIONS {
         src/text.o(.rodata);
         src/string_util.o(.rodata);
         src/link.o(.rodata);
+        src/rtc.o(.rodata);
         data/data2.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);

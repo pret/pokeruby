@@ -5,9 +5,6 @@
 
 	.section .rodata
 
-@ 81E7610
-	.include "data/rtc.s"
-
 	.global gUnknown_081E764C
 gUnknown_081E764C: @ 81E764C
 	.incbin "baserom.gba", 0x001e764c, 0x40
