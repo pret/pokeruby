@@ -18,6 +18,18 @@
     rangeCounts[index * 2] = count;                \
 }
 
+#define ALLOC_SPRITE_TILE(n)                             \
+{                                                        \
+    gSpriteTileAllocBitmap[(n) / 8] |= (1 << ((n) % 8)); \
+}
+
+#define FREE_SPRITE_TILE(n)                               \
+{                                                         \
+    gSpriteTileAllocBitmap[(n) / 8] &= ~(1 << ((n) % 8)); \
+}
+
+#define SPRITE_TILE_IS_ALLOCATED(n) ((gSpriteTileAllocBitmap[(n) / 8] >> ((n) % 8)) & 1)
+
 struct OamMatrix
 {
     s16 a;
@@ -441,6 +453,10 @@ static void SortSprites(void)
             gSpriteOrder[j] = gSpriteOrder[j - 1];
             gSpriteOrder[j - 1] = temp;
 
+            // UB: If j equals 1, then j-- makes j equal 0.
+            // Then, gSpriteOrder[-1] gets accessed below.
+            // Although this doesn't result in a bug in the ROM,
+            // the behavior is undefined.
             j--;
 
             sprite1 = &gSprites[gSpriteOrder[j - 1]];
@@ -641,7 +657,7 @@ void DestroySprite(struct Sprite *sprite)
             u16 i;
             u16 tileEnd = (sprite->images->size / TILE_SIZE_4BPP) + sprite->oam.tileNum;
             for (i = sprite->oam.tileNum; i < tileEnd; i++)
-                gSpriteTileAllocBitmap[i / 8] &= ~(1 << (i % 8));
+                FREE_SPRITE_TILE(i);
         }
         ResetSprite(sprite);
     }
@@ -728,8 +744,9 @@ static s16 AllocSpriteTiles(u16 tileCount)
 
     if (tileCount == 0)
     {
+        // Free all unreserved tiles if the tile count is 0.
         for (i = gReservedSpriteTileCount; i < TOTAL_OBJ_TILE_COUNT; i++)
-            gSpriteTileAllocBitmap[i / 8] &= ~(1 << (i % 8));
+            FREE_SPRITE_TILE(i);
 
         return 0;
     }
@@ -738,7 +755,7 @@ static s16 AllocSpriteTiles(u16 tileCount)
 
     for (;;)
     {
-        while ((gSpriteTileAllocBitmap[i / 8] >> (i % 8)) & 1)
+        while (SPRITE_TILE_IS_ALLOCATED(i))
         {
             i++;
 
@@ -756,7 +773,7 @@ static s16 AllocSpriteTiles(u16 tileCount)
             if (i == TOTAL_OBJ_TILE_COUNT)
                 return -1;
 
-            if (!((gSpriteTileAllocBitmap[i / 8] >> (i % 8)) & 1))
+            if (!SPRITE_TILE_IS_ALLOCATED(i))
                 numTilesFound++;
             else
                 break;
@@ -767,7 +784,7 @@ static s16 AllocSpriteTiles(u16 tileCount)
     }
 
     for (i = start; i < tileCount + start; i++)
-        gSpriteTileAllocBitmap[i / 8] |= (1 << (i % 8));
+        ALLOC_SPRITE_TILE(i);
 
     return start;
 }
@@ -1533,7 +1550,7 @@ void FreeSpriteTilesByTag(u16 tag)
         count = rangeCounts[index * 2];
 
         for (i = start; i < start + count; i++)
-            gSpriteTileAllocBitmap[i / 8] &= ~(1 << (i % 8));
+            FREE_SPRITE_TILE(i);
 
         sSpriteTileRangeTags[index] = 0xFFFF;
     }

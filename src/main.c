@@ -199,7 +199,7 @@ void ReadKeys(void)
     gMain.newKeys = gMain.newKeysRaw;
     gMain.newAndRepeatedKeys = gMain.newKeysRaw;
 
-    // Bug: Key repeat won't work when pressing L using L=A button mode
+    // BUG: Key repeat won't work when pressing L using L=A button mode
     // because it compares the raw key input with the remapped held keys.
     // Note that newAndRepeatedKeys is never remapped either.
 
