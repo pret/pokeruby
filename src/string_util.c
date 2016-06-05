@@ -9,7 +9,7 @@ static u8 *ExpandPlaceholder_PlayerName(void);
 static u8 *ExpandPlaceholder_StringVar1(void);
 static u8 *ExpandPlaceholder_StringVar2(void);
 static u8 *ExpandPlaceholder_StringVar3(void);
-static u8 *ExpandPlaceholder_UnknownString(void);
+static u8 *ExpandPlaceholder_KunChan(void);
 static u8 *ExpandPlaceholder_RivalName(void);
 static u8 *ExpandPlaceholder_Version(void);
 static u8 *ExpandPlaceholder_EvilTeam(void);
@@ -52,7 +52,7 @@ static const ExpandPlaceholderFunc sExpandPlaceholderFuncs[] =
     ExpandPlaceholder_StringVar1,
     ExpandPlaceholder_StringVar2,
     ExpandPlaceholder_StringVar3,
-    ExpandPlaceholder_UnknownString,
+    ExpandPlaceholder_KunChan,
     ExpandPlaceholder_RivalName,
     ExpandPlaceholder_Version,
     ExpandPlaceholder_EvilTeam,
@@ -64,8 +64,8 @@ static const ExpandPlaceholderFunc sExpandPlaceholderFuncs[] =
 };
 
 extern u8 gExpandedPlaceholder_Empty[];
-extern u8 gExpandedPlaceholder_MaleEmpty[];
-extern u8 gExpandedPlaceholder_FemaleEmpty[];
+extern u8 gExpandedPlaceholder_Kun[];
+extern u8 gExpandedPlaceholder_Chan[];
 extern u8 gExpandedPlaceholder_Sapphire[];
 extern u8 gExpandedPlaceholder_Ruby[];
 extern u8 gExpandedPlaceholder_Aqua[];
@@ -498,12 +498,12 @@ u8 *ExpandPlaceholder_StringVar3(void)
     return gStringVar3;
 }
 
-u8 *ExpandPlaceholder_UnknownString(void)
+u8 *ExpandPlaceholder_KunChan(void)
 {
     if (gSaveBlock2.playerGender == MALE)
-        return gExpandedPlaceholder_MaleEmpty;
+        return gExpandedPlaceholder_Kun;
     else
-        return gExpandedPlaceholder_FemaleEmpty;
+        return gExpandedPlaceholder_Chan;
 }
 
 u8 *ExpandPlaceholder_RivalName(void)
