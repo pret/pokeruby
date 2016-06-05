@@ -325,7 +325,7 @@ PLAYER         = FD 01
 STR_VAR_1      = FD 02
 STR_VAR_2      = FD 03
 STR_VAR_3      = FD 04
-@ unknown       (FD 05)
+KUN_CHAN       = FD 05
 RIVAL          = FD 06
 @ version-dependent strings
 VERSION        = FD 07 @ "RUBY"    / "SAPPHIRE"

@@ -10233,12 +10233,12 @@ gUnknown_0840D288: @ 840D288
 gExpandedPlaceholder_Empty: @ 840DC80
 	.string "$"
 
-	.global gExpandedPlaceholder_MaleEmpty
-gExpandedPlaceholder_MaleEmpty: @ 840DC81
+	.global gExpandedPlaceholder_Kun
+gExpandedPlaceholder_Kun: @ 840DC81
 	.string "$"
 
-	.global gExpandedPlaceholder_FemaleEmpty
-gExpandedPlaceholder_FemaleEmpty: @ 840DC82
+	.global gExpandedPlaceholder_Chan
+gExpandedPlaceholder_Chan: @ 840DC82
 	.string "$"
 
 	.global gExpandedPlaceholder_Sapphire

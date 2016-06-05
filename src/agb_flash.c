@@ -6,16 +6,16 @@ static u16 sTimerCount;
 static vu16 *sTimerReg;
 static u16 sSavedIme;
 
-extern u8 gFlashTimeoutFlag;
-extern u8 (*PollFlashStatus)(u8 *);
-extern u16 (*WaitForFlashWrite)(u8 phase, u8 *addr, u8 lastData);
-extern u16 (*ProgramFlashSector)(u16 sectorNum, u8 *src);
-extern const struct FlashType *gFlash;
-extern u16 (*ProgramFlashByte)(u16 sectorNum, u32 offset, u8 data);
-extern u16 gFlashNumRemainingBytes;
-extern u16 (*EraseFlashChip)();
-extern u16 (*EraseFlashSector)(u16 sectorNum);
-extern const u16 *gFlashMaxTime;
+COMM_2(u8 gFlashTimeoutFlag)
+COMM_2(u8 (*PollFlashStatus)(u8 *))
+COMM_2(u16 (*WaitForFlashWrite)(u8 phase, u8 *addr, u8 lastData))
+COMM_2(u16 (*ProgramFlashSector)(u16 sectorNum, u8 *src))
+COMM_2(const struct FlashType *gFlash)
+COMM_2(u16 (*ProgramFlashByte)(u16 sectorNum, u32 offset, u8 data))
+COMM_2(u16 gFlashNumRemainingBytes)
+COMM_2(u16 (*EraseFlashChip)())
+COMM_2(u16 (*EraseFlashSector)(u16 sectorNum))
+COMM_2(const u16 *gFlashMaxTime)
 
 void SetReadFlash1(u16 *dest);
 
