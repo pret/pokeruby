@@ -5,9 +5,6 @@
 
 	.section .rodata
 
-<<<<<<< HEAD
-=======
->>>>>>> upstream/master
 @ 81E7610
 	.include "data/rtc.s"
 
