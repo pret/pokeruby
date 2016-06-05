@@ -62,11 +62,14 @@ gUnknown_081E796C: @ 81E796C
 
 	.global gUnknown_081E797C
 gUnknown_081E797C: @ 81E797C
-	.incbin "baserom.gba", 0x001e797c, 0x30
+Unknown_081E797C:
+	.incbin "baserom.gba", 0x001e797c, 0x20
+Unknown_081E799C:
+	.incbin "baserom.gba", 0x001e799c, 0x10
 
 	.global gUnknown_081E79AC
 gUnknown_081E79AC: @ 81E79AC
-	.4byte 0x081e799c
+	.4byte Unknown_081E799C
 
 	.global gUnknown_081E79B0
 gUnknown_081E79B0: @ 81E79B0
@@ -1291,12 +1294,12 @@ gUnknown_0820C134: @ 820C134
 
 	.global gUnknown_0820C14C
 gUnknown_0820C14C: @ 820C14C
-	.4byte 0x0842C656
-	.4byte 0x0842C65D
-	.4byte 0x0842C66F
-	.4byte 0x0842C677
-	.4byte 0x0842C67D
-	.4byte 0x0842C68B
+	.4byte TradeText_Cancel
+	.4byte TradeText_ChoosePoke
+	.4byte TradeText_Summary1
+	.4byte TradeText_Trade1
+	.4byte TradeText_CancelTradePrompt
+	.4byte TradeText_PressBToExit
 
 	.global gUnknown_0820C164
 gUnknown_0820C164: @ 820C164
@@ -1324,12 +1327,12 @@ gUnknown_0820C2E9: @ 820C2E9
 
 	.global gUnknown_0820C2F0
 gUnknown_0820C2F0: @ 820C2F0
-	.4byte 0x0842c6b5
-	.4byte 0x0842c6db
-	.4byte 0x0842c701
-	.4byte 0x0842c72f
-	.4byte 0x0842c75a
-	.4byte 0x0842c788
+	.4byte TradeText_LinkStandby
+	.4byte TradeText_TradeCancelled
+	.4byte TradeText_OnlyPoke
+	.4byte TradeText_NonTradablePoke
+	.4byte TradeText_WaitingForFriend
+	.4byte TradeText_WantToTrade
 
 	.global gUnknown_0820C308
 gUnknown_0820C308: @ 820C308
@@ -3287,27 +3290,27 @@ gUnknown_0837660C: @ 837660C
 
 	.global gUnknown_08376624
 gUnknown_08376624: @ 8376624
-	.4byte 0x0840F619
-	.4byte 0x0840F62B
-	.4byte 0x0840F63A
-	.4byte 0x0840F64F
-	.4byte 0x0840F665
-	.4byte 0x0840F67C
-	.4byte 0x0840F68D
-	.4byte 0x0840F6A5
-	.4byte 0x0840F6BA
-	.4byte 0x0840F6D2
-	.4byte 0x0840F6E7
-	.4byte 0x0840F6FB
-	.4byte 0x0840E64C
-	.4byte 0x0840F713
-	.4byte 0x0840F729
-	.4byte 0x0840F740
-	.4byte 0x0840F752
-	.4byte 0x0840F763
-	.4byte 0x0840F77D
-	.4byte 0x0840F798
-	.4byte 0x0840F7B1
+	.4byte OtherText_ChoosePoke
+	.4byte OtherText_MovePokeTo
+	.4byte OtherText_TeachWhat
+	.4byte OtherText_UseWhat
+	.4byte OtherText_GiveWhat
+	.4byte OtherText_DoWhat
+	.4byte OtherText_NothingToCut
+	.4byte OtherText_CantSurf
+	.4byte OtherText_AlreadySurfing
+	.4byte OtherText_CantUseThatHere
+	.4byte OtherText_RestoreWhatMove
+	.4byte OtherText_BoostPP
+	.4byte OtherText_Terminator19
+	.4byte OtherText_DoWhatWithItem
+	.4byte OtherText_NoPokeForBattle
+	.4byte OtherText_ChoosePoke2
+	.4byte OtherText_NotEnoughHP
+	.4byte OtherText_ThreePokeNeeded
+	.4byte OtherText_PokeCantBeSame
+	.4byte OtherText_NoIdenticalHoldItems
+	.4byte OtherText_TeachWhichPoke
 
 	.global gUnknown_08376678
 gUnknown_08376678: @ 8376678
@@ -3379,12 +3382,12 @@ gUnknown_08376CEC: @ 8376CEC
 
 	.global gUnknown_08376D04
 gUnknown_08376D04: @ 8376D04
-	.4byte 0x0840f7eb
-	.4byte 0x0840f7c6
-	.4byte 0x0840f7cd
-	.4byte 0x0840f7d5
-	.4byte 0x0840f7dd
-	.4byte 0x0840f7e5
+	.4byte OtherText_HP
+	.4byte OtherText_Attack
+	.4byte OtherText_Defense
+	.4byte OtherText_SpAtk
+	.4byte OtherText_SpDef
+	.4byte OtherText_Speed
 
 	.global gUnknown_08376D1C
 gUnknown_08376D1C: @ 8376D1C
@@ -3392,25 +3395,25 @@ gUnknown_08376D1C: @ 8376D1C
 
 	.global gUnknown_08376D24
 gUnknown_08376D24: @ 8376D24
-	.4byte 0x0842c472
+	.4byte SystemText_Pokedex
 	.4byte 0x08071419
-	.4byte 0x0842c47a
+	.4byte SystemText_Pokemon
 	.4byte 0x0807144d
-	.4byte 0x0842c482
+	.4byte SystemText_BAG
 	.4byte 0x08071479
-	.4byte 0x0842c486
+	.4byte SystemText_Pokenav
 	.4byte 0x080714a5
-	.4byte 0x0842c48e
+	.4byte SystemText_Player
 	.4byte 0x080714d1
-	.4byte 0x0842c491
+	.4byte SystemText_Save
 	.4byte 0x080714fd
-	.4byte 0x0842c496
+	.4byte SystemText_Option
 	.4byte 0x08071519
-	.4byte 0x0842c49d
+	.4byte SystemText_Exit
 	.4byte 0x08071555
-	.4byte 0x0842c4a2
+	.4byte SystemText_Retire
 	.4byte 0x08071561
-	.4byte 0x0842c48e
+	.4byte SystemText_Player @ duplicate?
 	.4byte 0x08071571
 
 	.global gUnknown_08376D74
@@ -4458,25 +4461,25 @@ gUnknown_0839F470: @ 839F470
 
 	.global gUnknown_0839F494
 gUnknown_0839F494: @ 839F494
-	.4byte 0x0840ef4b
+	.4byte OtherText_Summary
 	.4byte 0x08089fcd
-	.4byte 0x0840ef44
+	.4byte OtherText_Switch2
 	.4byte 0x0808a02d
-	.4byte 0x0840e654
+	.4byte OtherText_Item
 	.4byte 0x0808a141
-	.4byte 0x0840e645
+	.4byte OtherText_Cancel2
 	.4byte 0x0808a919
-	.4byte 0x0840e624
+	.4byte OtherText_Give2
 	.4byte 0x0808a631
-	.4byte 0x0840e65e
+	.4byte OtherText_Take2
 	.4byte 0x0808a689
-	.4byte 0x0840ef68
+	.4byte OtherText_Take
 	.4byte 0x0808a6b9
-	.4byte 0x0840e659
+	.4byte OtherText_Mail
 	.4byte 0x0808a6e9
-	.4byte 0x0840ef6d
+	.4byte OtherText_Read2
 	.4byte 0x0808a811
-	.4byte 0x0840e645
+	.4byte OtherText_Cancel2
 	.4byte 0x0808a939
 	.4byte 0x081f83e3
 	.4byte 0x0808a985
@@ -4928,39 +4931,39 @@ gUnknown_083BBC88: @ 83BBC88
 
 	.global gUnknown_083BBCA0
 gUnknown_083BBCA0: @ 83BBCA0
-	.4byte 0x08410a4c
-	.4byte 0x08410a53
-	.4byte 0x08410a5b
-	.4byte 0x08410a6b
-	.4byte 0x08410a64
-	.4byte 0x08410a70
-	.4byte 0x08410a76
-	.4byte 0x08410a7e
-	.4byte 0x08410a86
-	.4byte 0x08410a90
-	.4byte 0x08410a95
-	.4byte 0x08410a8b
-	.4byte 0x08410a9f
-	.4byte 0x08410aa9
-	.4byte 0x08410ab3
-	.4byte 0x08410abd
-	.4byte 0x08410ac6
-	.4byte 0x08410acd
-	.4byte 0x08410ad2
-	.4byte 0x08410ad9
-	.4byte 0x08410ae1
-	.4byte 0x08410ae6
-	.4byte 0x08410aee
-	.4byte 0x08410af3
-	.4byte 0x08410af8
-	.4byte 0x08410afe
-	.4byte 0x08410b07
-	.4byte 0x08410b0d
-	.4byte 0x08410b11
-	.4byte 0x08410b1b
-	.4byte 0x08410b26
-	.4byte 0x08410b2e
-
+	.4byte PCText_Cancel2
+	.4byte PCText_Deposit
+	.4byte PCText_Withdraw
+	.4byte PCText_Move
+	.4byte PCText_Switch
+	.4byte PCText_Place
+	.4byte PCText_Summary
+	.4byte PCText_Release
+	.4byte PCText_Mark
+	.4byte PCText_Jump
+	.4byte PCText_Wallpaper
+	.4byte PCText_Name
+	.4byte PCText_Scenery1
+	.4byte PCText_Scenery2
+	.4byte PCText_Scenery3
+	.4byte PCText_Etc
+	.4byte PCText_Forest
+	.4byte PCText_City
+	.4byte PCText_Desert
+	.4byte PCText_Savanna
+	.4byte PCText_Crag
+	.4byte PCText_Volcano
+	.4byte PCText_Snow
+	.4byte PCText_Cave
+	.4byte PCText_Beach
+	.4byte PCText_Seafloor
+	.4byte PCText_River
+	.4byte PCText_Sky
+	.4byte PCText_Polka
+	.4byte PCText_PokeCenter
+	.4byte PCText_Machine
+	.4byte PCText_Plain
+	
 @ 83BBD20
 	.include "data/graphics/pokemon/icon_table.s"
 
@@ -5542,11 +5545,11 @@ gUnknown_083CC5D0: @ 83CC5D0
 
 	.global gUnknown_083CC6D0
 gUnknown_083CC6D0: @ 83CC6D0
-	.4byte 0x0840ec93
+	.4byte ContestStatsText_Buy
 	.4byte 0x080b2efd
-	.4byte 0x0840ec97
+	.4byte ContestStatsText_Sell
 	.4byte 0x080b2f31
-	.4byte 0x0840ec9c
+	.4byte ContestStatsText_Quit2
 	.4byte 0x080b2f65
 
 	.global gUnknown_083CC6E8
@@ -7136,13 +7139,13 @@ gUnknown_083E309C: @ 83E309C
 
 	.global gUnknown_083E31B0
 gUnknown_083E31B0: @ 83E31B0
-	.4byte 0x08410c58
-	.4byte 0x08410c7e
-	.4byte 0x08410c9a
-	.4byte 0x08410cb8
-	.4byte 0x08410cd3
-	.4byte 0x08410cec
-	.4byte 0x08410d0c
+	.4byte PCText_CheckMap
+	.4byte PCText_CheckPoke
+	.4byte PCText_CheckTrainer
+	.4byte PCText_CheckRibbons
+	.4byte PCText_PutAwayNav
+	.4byte PCText_NoRibbonWin
+	.4byte PCText_NoTrainers
 
 	.global gUnknown_083E31CC
 gUnknown_083E31CC: @ 83E31CC
@@ -7152,12 +7155,12 @@ gUnknown_083E31CC: @ 83E31CC
 
 	.global gUnknown_083E31D8
 gUnknown_083E31D8: @ 83E31D8
-	.4byte 0x08410d8c
-	.4byte 0x08410da2
-	.4byte 0x08410dbd
-	.4byte 0x08410dd3
-	.4byte 0x08410dea
-	.4byte 0x08410e01
+	.4byte PCText_FindCool
+	.4byte PCText_FindBeauty
+	.4byte PCText_FindCute
+	.4byte PCText_FindSmart
+	.4byte PCText_FindTough
+	.4byte PCText_ReturnToCondition
 
 	.global gUnknown_083E31F0
 gUnknown_083E31F0: @ 83E31F0
@@ -7394,25 +7397,25 @@ gUnknown_083E537C: @ 83E537C
 
 	.global gUnknown_083E5388
 gUnknown_083E5388: @ 83E5388
-	.4byte 0x084112e3
-	.4byte 0x084112ef
-	.4byte 0x084112fc
-	.4byte 0x08411309
-	.4byte 0x08411314
-	.4byte 0x08411323
-	.4byte 0x08411331
-	.4byte 0x0841133e
+	.4byte OtherText_SoPretty
+	.4byte OtherText_SoDarling
+	.4byte OtherText_SoRelaxed
+	.4byte OtherText_SoSunny
+	.4byte OtherText_SoDesirable
+	.4byte OtherText_SoExciting
+	.4byte OtherText_SoAmusing
+	.4byte OtherText_SoMagical
 
 	.global gUnknown_083E53A8
 gUnknown_083E53A8: @ 83E53A8
-	.4byte 0x08411361
-	.4byte 0x084113a7
-	.4byte 0x084113e6
-	.4byte 0x08411428
-	.4byte 0x0841146a
-	.4byte 0x084114ae
-	.4byte 0x084114ee
-	.4byte 0x08411525
+	.4byte OtherText_WantVacationNicePlace
+	.4byte OtherText_BoughtCrayonsIsNice
+	.4byte OtherText_IfWeCouldFloat
+	.4byte OtherText_SandWashesAwayMakeSad
+	.4byte OtherText_WhatsBottomSeaLike
+	.4byte OtherText_SeeSettingSun
+	.4byte OtherText_LyingInGreenGrass
+	.4byte OtherText_SecretBasesWonderful
 
 	.global gUnknown_083E53C8
 gUnknown_083E53C8: @ 83E53C8
@@ -7594,24 +7597,24 @@ gUnknown_083EB6E0: @ 83EB6E0
 
 	.global gUnknown_083EC5E4
 gUnknown_083EC5E4: @ 83EC5E4
-	.4byte 0x0840fa80
-	.4byte 0x0840fa85
-	.4byte 0x0840fa8b
-	.4byte 0x0840fa91
-	.4byte 0x0840fa9a
-	.4byte 0x0840fa9e
-	.4byte 0x0840faa5
-	.4byte 0x0840faaa
+	.4byte SecretBaseText_Desk
+	.4byte SecretBaseText_Chair
+	.4byte SecretBaseText_Plant
+	.4byte SecretBaseText_Ornament
+	.4byte SecretBaseText_Mat
+	.4byte SecretBaseText_Poster
+	.4byte SecretBaseText_Doll
+	.4byte SecretBaseText_Cushion
 
 	.global gUnknown_083EC604
 gUnknown_083EC604: @ 83EC604
-	.4byte 0x0840f9df
+	.4byte SecretBaseText_Decorate
 	.4byte 0x080ff161
-	.4byte 0x0840f9e8
+	.4byte SecretBaseText_PutAway
 	.4byte 0x08100a0d
-	.4byte 0x0840f9f1
+	.4byte SecretBaseText_Toss
 	.4byte 0x08101701
-	.4byte 0x0840e640
+	.4byte UnknownText_Exit
 	.4byte 0x080fe3c5
 
 	.global gUnknown_083EC624
@@ -8261,44 +8264,44 @@ gUnknown_083F5B9C: @ 83F5B9C
 
 	.global gUnknown_083F60AC
 gUnknown_083F60AC: @ 83F60AC
-	.4byte 0x0840FF79
-	.4byte 0x0840FF7F
-	.4byte 0x0840FF87
-	.4byte 0x0840FF8D
-	.4byte 0x0840FF94
+	.4byte OtherText_Cool
+	.4byte OtherText_Beauty2
+	.4byte OtherText_Cute
+	.4byte OtherText_Smart
+	.4byte OtherText_Tough
 
 	.global gUnknown_083F60C0
 gUnknown_083F60C0: @ 83F60C0
-	.4byte 0x0840ff9b
-	.4byte 0x0840ffc1
-	.4byte 0x0840ffc2
-	.4byte 0x0840ffe8
-	.4byte 0x0840ffe9
-	.4byte 0x08410013
-	.4byte 0x08410014
-	.4byte 0x0841003f
-	.4byte 0x08410040
-	.4byte 0x08410041
-	.4byte 0x0841005f
-	.4byte 0x0841008f
-	.4byte 0x08410090
-	.4byte 0x084100a6
-	.4byte 0x084100a7
-	.4byte 0x084100b3
-	.4byte 0x084100c7
-	.4byte 0x084100ea
-	.4byte 0x084100eb
-	.4byte 0x08410142
-	.4byte 0x08410116
-	.4byte 0x08410142
-	.4byte 0x08410143
-	.4byte 0x08410152
-	.4byte 0x08410168
-	.4byte 0x0841018b
-	.4byte 0x0841018c
-	.4byte 0x084101b1
-	.4byte 0x084101b2
-	.4byte 0x084101d2
+	.4byte OtherText_NonstopSuperCool
+	.4byte OtherText_Terminator6
+	.4byte OtherText_GoodLookingPoke
+	.4byte OtherText_Terminator7
+	.4byte OtherText_MarvelousGreat
+	.4byte OtherText_Terminator8
+	.4byte OtherText_CenturyLastVenus
+	.4byte OtherText_Terminator9
+	.4byte OtherText_Terminator10
+	.4byte OtherText_DazzlingSlime
+	.4byte OtherText_PokeCenterIdol
+	.4byte OtherText_Terminator11
+	.4byte OtherText_LovelyAndSweet
+	.4byte OtherText_Terminator12
+	.4byte OtherText_ThePretty
+	.4byte OtherText_WinningPortrait
+	.4byte OtherText_GiveUsWink
+	.4byte OtherText_Terminator13
+	.4byte OtherText_SmartnessMaestro
+	.4byte OtherText_Terminator15
+	.4byte OtherText_ChosenPokeAmong
+	.4byte OtherText_Terminator15
+	.4byte OtherText_TheExcellent
+	.4byte OtherText_ItsMomentOfElegance
+	.4byte OtherText_PowerfullyMuscular
+	.4byte OtherText_Terminator16
+	.4byte OtherText_StrongErEst
+	.4byte OtherText_Terminator17
+	.4byte OtherText_MightyTough
+	.4byte OtherText_Exclamation
 
 	.global gUnknown_083F6138
 gUnknown_083F6138: @ 83F6138
@@ -8535,15 +8538,15 @@ gUnknown_083F7EB8: @ 83F7EB8
 
 	.global gUnknown_083F7EF4
 gUnknown_083F7EF4: @ 83F7EF4
-	.4byte 0x0840e612
+	.4byte OtherText_Use
 	.4byte 0x0810c509
-	.4byte 0x0840e616
+	.4byte OtherText_Toss
 	.4byte 0x0810c5c1
-	.4byte 0x0840e645
+	.4byte OtherText_Cancel2
 	.4byte 0x0810c749
-	.4byte 0x0840e612
+	.4byte OtherText_Use
 	.4byte 0x0810c789
-	.4byte 0x0840e612
+	.4byte OtherText_Use
 	.4byte 0x0810c855
 
 	.global gUnknown_083F7F1C
@@ -8639,33 +8642,33 @@ gUnknown_083F8376: @ 83F8376
 
 	.global gUnknown_083F8380
 gUnknown_083F8380: @ 83F8380
-	.4byte 0x08410823
-	.4byte 0x08410826
-	.4byte 0x08410829
-	.4byte 0x0841082c
-	.4byte 0x0841082f
-	.4byte 0x08410832
-	.4byte 0x08410835
-	.4byte 0x08410838
-	.4byte 0x0841083b
-	.4byte 0x0841083e
-	.4byte 0x08410842
-	.4byte 0x08410846
-	.4byte 0x0841084a
-	.4byte 0x0841084e
-	.4byte 0x08410852
-	.4byte 0x08410856
+	.4byte OtherText_1F
+	.4byte OtherText_2F
+	.4byte OtherText_3F
+	.4byte OtherText_4F
+	.4byte OtherText_5F
+	.4byte OtherText_6F
+	.4byte OtherText_7F
+	.4byte OtherText_8F
+	.4byte OtherText_9F
+	.4byte OtherText_10F
+	.4byte OtherText_11F
+	.4byte OtherText_B1F
+	.4byte OtherText_B2F
+	.4byte OtherText_B3F
+	.4byte OtherText_B4F
+	.4byte OtherText_Rooftop
 
 	.global gUnknown_083F83C0
 gUnknown_083F83C0: @ 83F83C0
-	.4byte 0x084107d0
-	.4byte 0x084107db
-	.4byte 0x084107e8
-	.4byte 0x084107f2
-	.4byte 0x084107fe
-	.4byte 0x0841080a
-	.4byte 0x08410817
-	.4byte 0x0840e645
+	.4byte OtherText_BlueFlute
+	.4byte OtherText_YellowFlute
+	.4byte OtherText_RedFlute
+	.4byte OtherText_WhiteFlute
+	.4byte OtherText_BlackFlute
+	.4byte OtherText_PrettyChair
+	.4byte OtherText_PrettyDesk
+	.4byte OtherText_Cancel2
 
 	.global gUnknown_083F83E0
 gUnknown_083F83E0: @ 83F83E0
@@ -9255,13 +9258,13 @@ gUnknown_084017A8: @ 84017A8
 
 	.global gUnknown_084017B0
 gUnknown_084017B0: @ 84017B0
-	.4byte 0x0840ef4b
+	.4byte OtherText_Summary
 	.4byte 0x0812265d
-	.4byte 0x0840ef59
+	.4byte OtherText_Enter2
 	.4byte 0x08122695
-	.4byte 0x0840ef5f
+	.4byte OtherText_NoEntry
 	.4byte 0x08122771
-	.4byte 0x0840e640
+	.4byte UnknownText_Exit
 	.4byte 0x08122839
 	.4byte 0x02030001
 	.4byte 0x03000300
@@ -9711,11 +9714,11 @@ gUnknown_0840612C: @ 840612C
 
 	.global gUnknown_08406134
 gUnknown_08406134: @ 8406134
-	.4byte 0x08411590
-	.4byte 0x084115b7
-	.4byte 0x084115ac
-	.4byte 0x084115a2
-	.4byte 0x0841159a
+	.4byte OtherText_Coolness
+	.4byte OtherText_Toughness
+	.4byte OtherText_Smartness
+	.4byte OtherText_Cuteness
+	.4byte OtherText_Beauty
 
 	.global gUnknown_08406148
 gUnknown_08406148: @ 8406148
@@ -9802,13 +9805,13 @@ gUnknown_08406288: @ 8406288
 
 	.global gUnknown_08406298
 gUnknown_08406298: @ 8406298
-	.4byte 0x0840fd66
+	.4byte SecretBaseText_ItemStorage
 	.4byte 0x08139e41
-	.4byte 0x0840fd73
+	.4byte PCText_Mailbox
 	.4byte 0x08139e6d
-	.4byte 0x0840fd5b
+	.4byte SecretBaseText_Decoration
 	.4byte 0x08139ed9
-	.4byte 0x0840fd52
+	.4byte SecretBaseText_TurnOff
 	.4byte 0x08139ef9
 
 	.global gUnknown_084062B8
@@ -9821,13 +9824,13 @@ gUnknown_084062BC: @ 84062BC
 
 	.global gUnknown_084062C0
 gUnknown_084062C0: @ 84062C0
-	.4byte 0x0840fd88
+	.4byte PCText_WithdrawItem
 	.4byte 0x0813a119
-	.4byte 0x0840fd7b
+	.4byte PCText_DepositItem
 	.4byte 0x0813a0a1
-	.4byte 0x0840fd96
+	.4byte PCText_TossItem
 	.4byte 0x0813a199
-	.4byte 0x0840e640
+	.4byte UnknownText_Exit
 	.4byte 0x0813a21d
 
 	.global gUnknown_084062E0
@@ -9846,13 +9849,13 @@ gUnknown_084062F0: @ 84062F0
 
 	.global gUnknown_084062F8
 gUnknown_084062F8: @ 84062F8
-	.4byte 0x0840fe63
+	.4byte OtherText_Read
 	.4byte 0x0813b429
-	.4byte 0x0840fe68
+	.4byte OtherText_MoveToBag
 	.4byte 0x0813b511
-	.4byte 0x0840fe74
+	.4byte OtherText_Give
 	.4byte 0x0813b631
-	.4byte 0x0840e645
+	.4byte OtherText_Cancel2
 	.4byte 0x0813b735
 
 	.global gUnknown_08406318
@@ -10108,17 +10111,32 @@ gUnknown_0840B57C: @ 840B57C
 
 	.global gUnknown_0840B5A0
 gUnknown_0840B5A0: @ 840B5A0
-	.incbin "baserom.gba", 0x0040b5a0, 0xfc
+Unknown_840B5A0:
+	.incbin "baserom.gba", 0x0040b5a0, 0x1C
+Unknown_840B5BC:
+	.incbin "baserom.gba", 0x0040b5bc, 0x20
+Unknown_840B5DC:
+	.incbin "baserom.gba", 0x0040b5dc, 0x20
+Unknown_840B5FC:
+	.incbin "baserom.gba", 0x0040b5fc, 0x20
+Unknown_840B61C:
+	.incbin "baserom.gba", 0x0040b61c, 0x20
+Unknown_840B63C:
+	.incbin "baserom.gba", 0x0040b63c, 0x20
+Unknown_840B65C:
+	.incbin "baserom.gba", 0x0040b65c, 0x20
+Unknown_840B67C:
+	.incbin "baserom.gba", 0x0040b67c, 0x20
 
 	.global gUnknown_0840B69C
 gUnknown_0840B69C: @ 840B69C
-	.4byte 0x0840b5bc
-	.4byte 0x0840b5dc
-	.4byte 0x0840b5fc
-	.4byte 0x0840b61c
-	.4byte 0x0840b63c
-	.4byte 0x0840b65c
-	.4byte 0x0840b67c
+	.4byte Unknown_840B5BC
+	.4byte Unknown_840B5DC
+	.4byte Unknown_840B5FC
+	.4byte Unknown_840B61C
+	.4byte Unknown_840B63C
+	.4byte Unknown_840B65C
+	.4byte Unknown_840B67C
 
 	.global gUnknown_0840B6B8
 gUnknown_0840B6B8: @ 840B6B8
@@ -10164,15 +10182,24 @@ gUnknown_0840C5F0: @ 840C5F0
 
 	.global gUnknown_0840CA00
 gUnknown_0840CA00: @ 840CA00
-	.incbin "baserom.gba", 0x0040ca00, 0x54
+Unknown_840CA00:
+	.incbin "baserom.gba", 0x0040ca00, 0x8
+Unknown_840CA08:
+	.incbin "baserom.gba", 0x0040ca08, 0x14
+Unknown_840CA1C:
+	.incbin "baserom.gba", 0x0040ca1c, 0x14
+Unknown_840CA30:
+	.incbin "baserom.gba", 0x0040ca30, 0x10
+Unknown_840CA40:
+	.incbin "baserom.gba", 0x0040ca40, 0x14
 
 	.global gUnknown_0840CA54
 gUnknown_0840CA54: @ 840CA54
 Unknown_840CA54:
-	.4byte 0x0840ca08
-	.4byte 0x0840ca1c
-	.4byte 0x0840ca30
-	.4byte 0x0840ca40
+	.4byte Unknown_840CA08
+	.4byte Unknown_840CA1C
+	.4byte Unknown_840CA30
+	.4byte Unknown_840CA40
 Unknown_840CA64:
 	.incbin "baserom.gba", 0x0040ca64, 0x14
 Unknown_840CA78:
