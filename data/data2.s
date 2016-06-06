@@ -572,49 +572,49 @@ gUnknown_081FA678: @ 81FA678
 	.4byte sub_8013C9C
 	.4byte sub_8013C9C
 
-	.global gUnknown_081FA69C
-gUnknown_081FA69C: @ 81FA69C
-	.incbin "baserom.gba", 0x001fa69c, 0x8
+	.global gStatusConditionString_PoisonJpn
+gStatusConditionString_PoisonJpn: @ 81FA69C
+	.string "どく$$$$$$"
 
-	.global gUnknown_081FA6A4
-gUnknown_081FA6A4: @ 81FA6A4
-	.incbin "baserom.gba", 0x001fa6a4, 0x8
+	.global gStatusConditionString_SleepJpn
+gStatusConditionString_SleepJpn: @ 81FA6A4
+	.string "ねむり$$$$$"
 
-	.global gUnknown_081FA6AC
-gUnknown_081FA6AC: @ 81FA6AC
-	.incbin "baserom.gba", 0x001fa6ac, 0x8
+	.global gStatusConditionString_ParalysisJpn
+gStatusConditionString_ParalysisJpn: @ 81FA6AC
+	.string "まひ$$$$$$"
 
-	.global gUnknown_081FA6B4
-gUnknown_081FA6B4: @ 81FA6B4
-	.incbin "baserom.gba", 0x001fa6b4, 0x8
+	.global gStatusConditionString_BurnJpn
+gStatusConditionString_BurnJpn: @ 81FA6B4
+	.string "やけど$$$$$"
 
-	.global gUnknown_081FA6BC
-gUnknown_081FA6BC: @ 81FA6BC
-	.incbin "baserom.gba", 0x001fa6bc, 0x8
+	.global gStatusConditionString_IceJpn
+gStatusConditionString_IceJpn: @ 81FA6BC
+	.string "こおり$$$$$"
 
-	.global gUnknown_081FA6C4
-gUnknown_081FA6C4: @ 81FA6C4
-	.incbin "baserom.gba", 0x001fa6c4, 0x8
+	.global gStatusConditionString_ConfusionJpn
+gStatusConditionString_ConfusionJpn: @ 81FA6C4
+	.string "こんらん$$$$"
 
-	.global gUnknown_081FA6CC
-gUnknown_081FA6CC: @ 81FA6CC
-	.incbin "baserom.gba", 0x001fa6cc, 0x8
+	.global gStatusConditionString_LoveJpn
+gStatusConditionString_LoveJpn: @ 81FA6CC
+	.string "メロメロ$$$$"
 
 	.global gUnknown_081FA6D4
 gUnknown_081FA6D4: @ 81FA6D4
-	.4byte gUnknown_081FA69C
+	.4byte gStatusConditionString_PoisonJpn
 	.4byte BattleText_PoisonStatus
-	.4byte gUnknown_081FA6A4
+	.4byte gStatusConditionString_SleepJpn
 	.4byte BattleText_Sleep
-	.4byte gUnknown_081FA6AC
+	.4byte gStatusConditionString_ParalysisJpn
 	.4byte BattleText_Paralysis
-	.4byte gUnknown_081FA6B4
+	.4byte gStatusConditionString_BurnJpn
 	.4byte BattleText_Burn
-	.4byte gUnknown_081FA6BC
+	.4byte gStatusConditionString_IceJpn
 	.4byte BattleText_IceStatus
-	.4byte gUnknown_081FA6C4
+	.4byte gStatusConditionString_ConfusionJpn
 	.4byte BattleText_Confusion
-	.4byte gUnknown_081FA6CC
+	.4byte gStatusConditionString_LoveJpn
 	.4byte BattleText_Love
 
 	.global gUnknown_081FA70C

@@ -30121,11 +30121,11 @@ _08018960:
 	bl _08019F22
 	.align 2, 0
 _08018990: .4byte 0x030041c0
-_08018994: .4byte gUnknown_081FA69C
-_08018998: .4byte gUnknown_081FA6A4
-_0801899C: .4byte gUnknown_081FA6AC
-_080189A0: .4byte gUnknown_081FA6B4
-_080189A4: .4byte gUnknown_081FA6BC
+_08018994: .4byte gStatusConditionString_PoisonJpn
+_08018998: .4byte gStatusConditionString_SleepJpn
+_0801899C: .4byte gStatusConditionString_ParalysisJpn
+_080189A0: .4byte gStatusConditionString_BurnJpn
+_080189A4: .4byte gStatusConditionString_IceJpn
 _080189A8: .4byte 0x02000000
 _080189AC: .4byte 0x02024a60
 _080189B0: .4byte 0x00016003
@@ -31452,7 +31452,7 @@ _080195AA:
 	.align 2, 0
 _080195B0: .4byte 0x00000f88
 _080195B4: .4byte 0x030041c0
-_080195B8: .4byte gUnknown_081FA69C
+_080195B8: .4byte gStatusConditionString_PoisonJpn
 _080195BC:
 	movs r0, 0x58
 	mov r1, r10
@@ -31476,7 +31476,7 @@ _080195D6:
 	b _080196DC
 	.align 2, 0
 _080195E4: .4byte 0x030041c0
-_080195E8: .4byte gUnknown_081FA6C4
+_080195E8: .4byte gStatusConditionString_ConfusionJpn
 _080195EC:
 	movs r0, 0x58
 	mov r3, r10
@@ -31495,7 +31495,7 @@ _080195EC:
 	b _0801969C
 	.align 2, 0
 _0801960C: .4byte 0x030041c0
-_08019610: .4byte gUnknown_081FA6AC
+_08019610: .4byte gStatusConditionString_ParalysisJpn
 _08019614:
 	movs r0, 0x58
 	mov r3, r10
@@ -31523,7 +31523,7 @@ _08019614:
 	.align 2, 0
 _08019644: .4byte 0xf7ffffff
 _08019648: .4byte 0x030041c0
-_0801964C: .4byte gUnknown_081FA6A4
+_0801964C: .4byte gStatusConditionString_SleepJpn
 _08019650:
 	movs r0, 0x58
 	mov r1, r10
@@ -31545,7 +31545,7 @@ _08019650:
 	b _080196DC
 	.align 2, 0
 _08019678: .4byte 0x030041c0
-_0801967C: .4byte gUnknown_081FA6B4
+_0801967C: .4byte gStatusConditionString_BurnJpn
 _08019680:
 	movs r0, 0x58
 	mov r3, r10
@@ -31568,7 +31568,7 @@ _0801969C:
 	b _080196DC
 	.align 2, 0
 _080196A8: .4byte 0x030041c0
-_080196AC: .4byte gUnknown_081FA6BC
+_080196AC: .4byte gStatusConditionString_IceJpn
 _080196B0:
 	movs r0, 0x58
 	mov r1, r10
@@ -31603,7 +31603,7 @@ _080196DC:
 	b _0801973C
 	.align 2, 0
 _080196EC: .4byte 0x030041c0
-_080196F0: .4byte gUnknown_081FA6CC
+_080196F0: .4byte gStatusConditionString_LoveJpn
 _080196F4:
 	mov r0, r9
 	cmp r0, 0x3
@@ -34313,13 +34313,13 @@ _0801ACB6:
 	b _0801ACEC
 	.align 2, 0
 _0801ACC4: .4byte 0x030041c0
-_0801ACC8: .4byte gUnknown_081FA69C
+_0801ACC8: .4byte gStatusConditionString_PoisonJpn
 _0801ACCC: .4byte 0xf7ffffff
-_0801ACD0: .4byte gUnknown_081FA6A4
-_0801ACD4: .4byte gUnknown_081FA6AC
-_0801ACD8: .4byte gUnknown_081FA6B4
-_0801ACDC: .4byte gUnknown_081FA6BC
-_0801ACE0: .4byte gUnknown_081FA6C4
+_0801ACD0: .4byte gStatusConditionString_SleepJpn
+_0801ACD4: .4byte gStatusConditionString_ParalysisJpn
+_0801ACD8: .4byte gStatusConditionString_BurnJpn
+_0801ACDC: .4byte gStatusConditionString_IceJpn
+_0801ACE0: .4byte gStatusConditionString_ConfusionJpn
 _0801ACE4: .4byte 0x02024d1e
 _0801ACE8:
 	ldr r1, _0801AD18
@@ -34402,7 +34402,7 @@ _0801AD62:
 	.align 2, 0
 _0801AD84: .4byte 0xfff0ffff
 _0801AD88: .4byte 0x030041c0
-_0801AD8C: .4byte gUnknown_081FA6CC
+_0801AD8C: .4byte gStatusConditionString_LoveJpn
 _0801AD90: .4byte gUnknown_081D9A44
 _0801AD94: .4byte 0x02024d1e
 _0801AD98: .4byte 0x02000000
@@ -34747,7 +34747,7 @@ _0801B06C:
 _0801B090: .4byte 0x02024a80
 _0801B094: .4byte 0xfff0ffff
 _0801B098: .4byte 0x030041c0
-_0801B09C: .4byte gUnknown_081FA6CC
+_0801B09C: .4byte gStatusConditionString_LoveJpn
 _0801B0A0: .4byte 0x02024d1e
 _0801B0A4: .4byte 0x02024c10
 _0801B0A8: .4byte gUnknown_081D9A4A
@@ -34854,13 +34854,13 @@ _0801B168:
 	.align 2, 0
 _0801B170: .4byte 0x02024a80
 _0801B174: .4byte 0x030041c0
-_0801B178: .4byte gUnknown_081FA69C
+_0801B178: .4byte gStatusConditionString_PoisonJpn
 _0801B17C: .4byte 0xf7ffffff
-_0801B180: .4byte gUnknown_081FA6A4
-_0801B184: .4byte gUnknown_081FA6AC
-_0801B188: .4byte gUnknown_081FA6B4
-_0801B18C: .4byte gUnknown_081FA6BC
-_0801B190: .4byte gUnknown_081FA6C4
+_0801B180: .4byte gStatusConditionString_SleepJpn
+_0801B184: .4byte gStatusConditionString_ParalysisJpn
+_0801B188: .4byte gStatusConditionString_BurnJpn
+_0801B18C: .4byte gStatusConditionString_IceJpn
+_0801B190: .4byte gStatusConditionString_ConfusionJpn
 _0801B194: .4byte 0x02024d1e
 _0801B198: .4byte 0x02024c10
 _0801B19C: .4byte gUnknown_081D9A4A
