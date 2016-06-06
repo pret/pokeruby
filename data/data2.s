@@ -545,32 +545,32 @@ gUnknown_081F98F0: @ 81F98F0
 	.align 2
 	.global gUnknown_081FA640
 gUnknown_081FA640: @ 81FA640
-	.4byte 0x08013fe9
-	.4byte 0x080147a1
-	.4byte 0x080146f5
-	.4byte 0x08014bf5
-	.4byte 0x08014d51
-	.4byte 0x08014d99
-	.4byte 0x08014df9
-	.4byte 0x08014ebd
-	.4byte 0x08014f81
-	.4byte 0x08014fbd
-	.4byte 0x0801b595
-	.4byte 0x08015035
-	.4byte 0x08015095
-	.4byte 0x08015061
+	.4byte sub_8013FE8
+	.4byte sub_80147A0
+	.4byte sub_80146F4
+	.4byte sub_8014BF4
+	.4byte sub_8014D50
+	.4byte sub_8014D98
+	.4byte sub_8014DF8
+	.4byte sub_8014EBC
+	.4byte bs8_exit_by_flight
+	.4byte sub_8014FBC
+	.4byte sub_801B594
+	.4byte bsB_exit_by_move
+	.4byte bsC_8016D70
+	.4byte sub_8015060
 
 	.global gUnknown_081FA678
 gUnknown_081FA678: @ 81FA678
-	.4byte 0x08011dc9
-	.4byte 0x08013999
-	.4byte 0x08013b65
-	.4byte 0x08013b65
-	.4byte 0x08013bdd
-	.4byte 0x08013c9d
-	.4byte 0x08013c49
-	.4byte 0x08013c9d
-	.4byte 0x08013c9d
+	.4byte bc_8013B1C
+	.4byte sub_8013998
+	.4byte sub_8013B64
+	.4byte sub_8013B64
+	.4byte sub_8013BDC
+	.4byte sub_8013C9C
+	.4byte sub_8013C48
+	.4byte sub_8013C9C
+	.4byte sub_8013C9C
 
 	.global gUnknown_081FA69C
 gUnknown_081FA69C: @ 81FA69C
@@ -635,254 +635,254 @@ gUnknown_081FA724: @ 81FA724
 
 	.global gUnknown_081FA73C
 gUnknown_081FA73C: @ 81FA73C
-	.4byte 0x0801bc51
-	.4byte 0x0801c2bd
-	.4byte 0x0801c649
-	.4byte 0x0801c69d
-	.4byte 0x0801c879
-	.4byte 0x0801c9ed
-	.4byte 0x0801ccc5
-	.4byte 0x0801d5b1
-	.4byte 0x0801d761
-	.4byte 0x0801d8ed
-	.4byte 0x0801da61
-	.4byte 0x0801da81
-	.4byte 0x0801db4d
-	.4byte 0x0801df49
-	.4byte 0x0801df9d
-	.4byte 0x0801e06d
-	.4byte 0x0801e21d
-	.4byte 0x0801e25d
-	.4byte 0x0801e2a1
-	.4byte 0x0801e2fd
-	.4byte 0x0801e351
-	.4byte 0x0801f615
-	.4byte 0x0801f709
-	.4byte 0x0801f719
-	.4byte 0x0801f729
-	.4byte 0x0801f7ad
-	.4byte 0x0801fb35
-	.4byte 0x0801fb71
-	.4byte 0x0801fbd5
-	.4byte 0x0801fc4d
-	.4byte 0x0801fcc5
-	.4byte 0x0801fdb5
-	.4byte 0x0801fe2d
-	.4byte 0x0801ff25
-	.4byte 0x0801ffa9
-	.4byte 0x08020005
-	.4byte 0x080209b5
-	.4byte 0x08020b9d
-	.4byte 0x08020bb5
-	.4byte 0x08020bcd
-	.4byte 0x08020c15
-	.4byte 0x08020c35
-	.4byte 0x08020cd5
-	.4byte 0x08020d7d
-	.4byte 0x08020e31
-	.4byte 0x08020eb9
-	.4byte 0x08020f3d
-	.4byte 0x08020f65
-	.4byte 0x08020f91
-	.4byte 0x08020fbd
-	.4byte 0x08021011
-	.4byte 0x0802107d
-	.4byte 0x080210a9
-	.4byte 0x080210e1
-	.4byte 0x08021125
-	.4byte 0x08021151
-	.4byte 0x08021189
-	.4byte 0x080211cd
-	.4byte 0x0802120d
-	.4byte 0x0802122d
-	.4byte 0x08021285
-	.4byte 0x08021291
-	.4byte 0x080212b1
-	.4byte 0x080212c9
-	.4byte 0x0801c099
-	.4byte 0x080212f9
-	.4byte 0x08021329
-	.4byte 0x08021385
-	.4byte 0x080213d1
-	.4byte 0x080213f1
-	.4byte 0x080214b5
-	.4byte 0x08021581
-	.4byte 0x080215fd
-	.4byte 0x080217f9
-	.4byte 0x080222dd
-	.4byte 0x0802252d
-	.4byte 0x0802257d
-	.4byte 0x080225f1
-	.4byte 0x08022785
-	.4byte 0x08022831
-	.4byte 0x08022a99
-	.4byte 0x0802331d
-	.4byte 0x08023525
-	.4byte 0x080237cd
-	.4byte 0x0802380d
-	.4byte 0x08023849
-	.4byte 0x08023885
-	.4byte 0x080238b5
-	.4byte 0x080238ed
-	.4byte 0x08023921
-	.4byte 0x08023af9
-	.4byte 0x08023e75
-	.4byte 0x08023f85
-	.4byte 0x08024015
-	.4byte 0x08024195
-	.4byte 0x08024249
-	.4byte 0x08024299
-	.4byte 0x080242c9
-	.4byte 0x08024391
-	.4byte 0x080243c1
-	.4byte 0x08024425
-	.4byte 0x080244b5
-	.4byte 0x0802455d
-	.4byte 0x080245f1
-	.4byte 0x080246a1
-	.4byte 0x080246d9
-	.4byte 0x08024855
-	.4byte 0x080248c1
-	.4byte 0x080248fd
-	.4byte 0x08024c4d
-	.4byte 0x08024c65
-	.4byte 0x08024c85
-	.4byte 0x08024cb9
-	.4byte 0x08024d15
-	.4byte 0x08024d2d
-	.4byte 0x08024d71
-	.4byte 0x08024e2d
-	.4byte 0x08024ee9
-	.4byte 0x08024f41
-	.4byte 0x08025131
-	.4byte 0x0802526d
-	.4byte 0x08025389
-	.4byte 0x080253e9
-	.4byte 0x0802548d
-	.4byte 0x08025509
-	.4byte 0x080256d1
-	.4byte 0x08025725
-	.4byte 0x080257dd
-	.4byte 0x0802589d
-	.4byte 0x0802591d
-	.4byte 0x080259ed
-	.4byte 0x08025a35
-	.4byte 0x08025ae1
-	.4byte 0x08025b5d
-	.4byte 0x08025bd9
-	.4byte 0x08025d01
-	.4byte 0x08025ded
-	.4byte 0x080262c5
-	.4byte 0x08026319
-	.4byte 0x0802636d
-	.4byte 0x080263dd
-	.4byte 0x0802641d
-	.4byte 0x08026469
-	.4byte 0x08026591
-	.4byte 0x0802688d
-	.4byte 0x08026a31
-	.4byte 0x08026ac1
-	.4byte 0x08026b79
-	.4byte 0x08026e59
-	.4byte 0x08026e95
-	.4byte 0x08026eed
-	.4byte 0x08027065
-	.4byte 0x08027239
-	.4byte 0x08027349
-	.4byte 0x080273dd
-	.4byte 0x08027439
-	.4byte 0x080275d9
-	.4byte 0x080276dd
-	.4byte 0x080278b9
-	.4byte 0x08027961
-	.4byte 0x08027991
-	.4byte 0x080279e5
-	.4byte 0x08027add
-	.4byte 0x08027bd5
-	.4byte 0x08027d19
-	.4byte 0x08027e4d
-	.4byte 0x08027f45
-	.4byte 0x0802813d
-	.4byte 0x08028195
-	.4byte 0x08028421
-	.4byte 0x08028559
-	.4byte 0x080285e9
-	.4byte 0x08028601
-	.4byte 0x08028669
-	.4byte 0x08028859
-	.4byte 0x08028ad5
-	.4byte 0x08028b71
-	.4byte 0x08028bfd
-	.4byte 0x08028c2d
-	.4byte 0x08028ce5
-	.4byte 0x08028e61
-	.4byte 0x08028ec9
-	.4byte 0x08028f7d
-	.4byte 0x08029001
-	.4byte 0x080290bd
-	.4byte 0x0802914d
-	.4byte 0x08029271
-	.4byte 0x080293e9
-	.4byte 0x08029441
-	.4byte 0x080294c1
-	.4byte 0x08029509
-	.4byte 0x0802964d
-	.4byte 0x0802967d
-	.4byte 0x08029785
-	.4byte 0x080298ad
-	.4byte 0x08029921
-	.4byte 0x08029a49
-	.4byte 0x08029c59
-	.4byte 0x08029cdd
-	.4byte 0x08029d6d
-	.4byte 0x08029dad
-	.4byte 0x08029e05
-	.4byte 0x08029ea1
-	.4byte 0x08029eed
-	.4byte 0x08029f51
-	.4byte 0x08029fc5
-	.4byte 0x0802a049
-	.4byte 0x0802a0a1
-	.4byte 0x0802a0fd
-	.4byte 0x0802a171
-	.4byte 0x0802a219
-	.4byte 0x0802a4b1
-	.4byte 0x0802a529
-	.4byte 0x0802a5fd
-	.4byte 0x0802a655
-	.4byte 0x0802a6bd
-	.4byte 0x0802a72d
-	.4byte 0x0802a799
-	.4byte 0x0802a7fd
-	.4byte 0x0802a895
-	.4byte 0x0802a995
-	.4byte 0x0802a9ed
-	.4byte 0x0802aa85
-	.4byte 0x0802abfd
-	.4byte 0x0802ac81
-	.4byte 0x0802acfd
-	.4byte 0x0802add9
-	.4byte 0x0802ae5d
-	.4byte 0x0802aeb1
-	.4byte 0x0802af69
-	.4byte 0x0802b055
-	.4byte 0x0802b0c1
-	.4byte 0x0802b109
-	.4byte 0x0802b1c1
-	.4byte 0x0802b28d
-	.4byte 0x0802b331
-	.4byte 0x0802b3e1
-	.4byte 0x0802b4b5
-	.4byte 0x0802b51d
-	.4byte 0x0802b5b9
-	.4byte 0x0802b961
-	.4byte 0x0802b9e1
-	.4byte 0x0802ba91
-	.4byte 0x0802bc91
-	.4byte 0x0802bef1
-	.4byte 0x0802bf21
-	.4byte 0x0802bf49
-	.4byte 0x0802bf55
+	.4byte atk00_attackcanceler
+	.4byte atk01_accuracycheck
+	.4byte atk02_attackstring
+	.4byte atk03_ppreduce
+	.4byte atk04_critcalc
+	.4byte atk05_cmd5
+	.4byte sub_801CCC4
+	.4byte atk07_cmd7
+	.4byte atk08_cmd8
+	.4byte sub_801D8EC
+	.4byte sub_801DA60
+	.4byte sub_801DA80
+	.4byte atk0C_datahpupdate
+	.4byte atk0D_critmessage
+	.4byte atk0E_missmessage
+	.4byte atk0F_resultmessage
+	.4byte atk10_printstring
+	.4byte atk11_printstring2
+	.4byte atk12_waitmessage
+	.4byte atk13_printfromtable
+	.4byte atk14_printfromtable2
+	.4byte atk15_seteffectwithchancetarget
+	.4byte sub_801F708
+	.4byte sub_801F718
+	.4byte sub_801F728
+	.4byte sub_801F7AC
+	.4byte sub_801FB34
+	.4byte atkE2_cmde2
+	.4byte atk1C_jumpifstatus
+	.4byte atk1D_jumpifsecondarystatus
+	.4byte atk1E_jumpifability
+	.4byte sub_801FDB4
+	.4byte sub_801FE2C
+	.4byte atk21_jumpifspecialstatusflag
+	.4byte sub_801FFA8
+	.4byte sub_8020004
+	.4byte sub_80209B4
+	.4byte atk25_cmd25
+	.4byte sub_8020BB4
+	.4byte atk27_cmd27
+	.4byte sub_8020C14
+	.4byte atk29_jumpifbyte
+	.4byte sub_8020CD4
+	.4byte sub_8020D7C
+	.4byte sub_8020E30
+	.4byte sub_8020EB8
+	.4byte sub_8020F3C
+	.4byte sub_8020F64
+	.4byte sub_8020F90
+	.4byte atk31_copyarray
+	.4byte atk32_memcpy_with_offset
+	.4byte sub_802107C
+	.4byte atk34_orhalfword
+	.4byte atk35_orword
+	.4byte sub_8021124
+	.4byte atk37_bichalfword
+	.4byte atk38_bicword
+	.4byte atk39_pause
+	.4byte sub_802120C
+	.4byte atk3B_8022C68
+	.4byte atk3C_return
+	.4byte sub_8021290
+	.4byte sub_80212B0
+	.4byte atk3F_end3
+	.4byte atk40_801DBA0
+	.4byte atk41_call
+	.4byte atk42_jumpiftype2
+	.4byte sub_8021384
+	.4byte sub_80213D0
+	.4byte atk46_cmd46
+	.4byte sub_80214B4
+	.4byte sub_8021580
+	.4byte atk48_playstatchangeanimation
+	.4byte sub_80217F8
+	.4byte atk4A_damagecalc2
+	.4byte atk4B_cmd4b
+	.4byte atk4C_switch1
+	.4byte sub_80225F0
+	.4byte sub_8022784
+	.4byte sub_8022830
+	.4byte atk50_openpartyscreen
+	.4byte sub_802331C
+	.4byte sub_8023524
+	.4byte sub_80237CC
+	.4byte atk54_802511C
+	.4byte sub_8023848
+	.4byte atk56_8025194
+	.4byte atk57_80251C4_flee
+	.4byte atk58_cmd58
+	.4byte atk59_8025230
+	.4byte sub_8023AF8
+	.4byte atk5B_80256E0
+	.4byte atk5C_cmd5c
+	.4byte sub_8024014
+	.4byte atk5E_8025A70
+	.4byte atk5F_8025B24
+	.4byte atk60_cmd60
+	.4byte atk61_8025BA4
+	.4byte atk62_08025C6C
+	.4byte atk63_jumptoattack
+	.4byte atk64_statusanimation
+	.4byte atk65_8025D90
+	.4byte atk66_8025E38
+	.4byte atk67_8025ECC
+	.4byte sub_80246A0
+	.4byte atk69_8025FE0
+	.4byte atk6A_stash_item_for_side
+	.4byte sub_80248C0
+	.4byte sub_80248FC
+	.4byte sub_8024C4C
+	.4byte atk6E_state0_side_becomes_attacker
+	.4byte atk6F_8026810
+	.4byte atk70_record_ability_usage_of_side
+	.4byte atk71_80268A0
+	.4byte atk72_flee
+	.4byte atk73_cmd73
+	.4byte atk74_hp_tresholds_2
+	.4byte atk75_8026A58
+	.4byte sub_8024F40
+	.4byte atk77_setprotect
+	.4byte atk78_faintifabilitynotdamp
+	.4byte atk79_setuserhptozero
+	.4byte sub_80253E8
+	.4byte sub_802548C
+	.4byte sub_8025508
+	.4byte sub_80256D0
+	.4byte atk7E_setreflect
+	.4byte sub_80257DC
+	.4byte atk80_manipulatedamage
+	.4byte atk81_setrest
+	.4byte atk82_jumpifnotfirstturn
+	.4byte sub_8025A34
+	.4byte sub_8025AE0
+	.4byte sub_8025B5C
+	.4byte atk86_stockpiletobasedamage
+	.4byte sub_8025D00
+	.4byte atk88_negativedamage
+	.4byte atk89_statbuffchange
+	.4byte atk8A_normalisebuffs
+	.4byte atk8B_setbide
+	.4byte atk8C_confuseifrepeatingattackends
+	.4byte atk8D_setloopcounter
+	.4byte sub_8026468
+	.4byte sub_8026590
+	.4byte sub_802688C
+	.4byte atk91_givemoney
+	.4byte atk92_setlightscreen
+	.4byte sub_8026B78
+	.4byte atk94_gethalfcurrentenemyhp
+	.4byte sub_8026E94
+	.4byte sub_8026EEC
+	.4byte sub_8027064
+	.4byte sub_8027238
+	.4byte sub_8027348
+	.4byte atk9A_setincreasedcriticalchance
+	.4byte atk9B_transformdataexecution
+	.4byte sub_80275D8
+	.4byte atk9D_copyattack
+	.4byte sub_80278B8
+	.4byte sub_8027960
+	.4byte atkA0_psywavedamageeffect
+	.4byte atkA1_counterdamagecalculator
+	.4byte atkA2_mirrorcoatdamagecalculator
+	.4byte atkA3_disablelastusedattack
+	.4byte atkA4_setencore
+	.4byte sub_8027E4C
+	.4byte sub_8027F44
+	.4byte atkA7_setalwayshitflag
+	.4byte atkA8_copymovepermanently
+	.4byte sub_8028420
+	.4byte sub_8028558
+	.4byte atkAB_802A458
+	.4byte atkAC_remaininghptopower
+	.4byte sub_8028668
+	.4byte sub_8028858
+	.4byte sub_8028AD4
+	.4byte sub_8028B70
+	.4byte sub_8028BFC
+	.4byte atkB2_setperishsong
+	.4byte atkB3_rolloutdamagecalculation
+	.4byte atkB4_jumpifconfusedandattackmaxed
+	.4byte sub_8028EC8
+	.4byte atkB6_happinesstodamagecalculation
+	.4byte atkB7_presentdamagecalculation
+	.4byte sub_80290BC
+	.4byte atkB9_magnitudedamagecalculation
+	.4byte sub_8029270
+	.4byte sub_80293E8
+	.4byte atkBC_maxattackhalvehp
+	.4byte atkBD_copyfoestats
+	.4byte atkBE_breakfree
+	.4byte sub_802964C
+	.4byte atkC0_recoverbasedonsunlight
+	.4byte sub_8029784
+	.4byte atkC2_selectnexttarget
+	.4byte atkC3_setfutureattack
+	.4byte atkC4_802B910
+	.4byte atkC5_hidepreattack
+	.4byte atkC6_unhidepostattack
+	.4byte atkC7_setminimize
+	.4byte sub_8029DAC
+	.4byte atkC9_jumpifattackandspecialattackcannotfall
+	.4byte atkCA_setforcedtarget
+	.4byte atkCB_setcharge
+	.4byte atkCC_callterrainattack
+	.4byte atkCD_cureifburnedparalysedorpoisoned
+	.4byte atkCE_settorment
+	.4byte atkCF_jumpifnodamage
+	.4byte atkD0_settaunt
+	.4byte sub_802A170
+	.4byte sub_802A218
+	.4byte sub_802A4B0
+	.4byte atkD4_802C408
+	.4byte sub_802A5FC
+	.4byte atkD6_doubledamagedealtifdamaged
+	.4byte sub_802A6BC
+	.4byte atkD8_setdamagetohealthdifference
+	.4byte atkD9_scaledamagebyhealthratio
+	.4byte atkDA_abilityswap
+	.4byte atkDB_imprisoneffect
+	.4byte atkDC_setgrudge
+	.4byte atkDD_weightdamagecalculation
+	.4byte atkDE_asistattackselect
+	.4byte atkDF_setmagiccoat
+	.4byte atkE0_setstealstatchange
+	.4byte atkE1_802CBE4
+	.4byte sub_802ADD8
+	.4byte atkE3_jumpiffainted
+	.4byte sub_802AEB0
+	.4byte sub_802AF68
+	.4byte atkE6_castform_transform
+	.4byte atkE7_castform_switch
+	.4byte atkE8_settypebasedhalvers
+	.4byte sub_802B1C0
+	.4byte atkEA_recycleitem
+	.4byte atkEB_settypetoterrain
+	.4byte sub_802B3E0
+	.4byte sub_802B4B4
+	.4byte sub_802B51C
+	.4byte sub_802B5B8
+	.4byte sub_802B960
+	.4byte sub_802B9E0
+	.4byte sub_802BA90
+	.4byte atkF3_receive_new_pokemon_maybe
+	.4byte sub_802BEF0
+	.4byte sub_802BF20
+	.4byte sub_802BF48
+	.4byte sub_802BF54
 
 	.global gUnknown_081FAB1C
 gUnknown_081FAB1C: @ 81FAB1C
@@ -938,63 +938,63 @@ gUnknown_081FAD90: @ 81FAD90
 
 	.global gUnknown_081FAD98
 gUnknown_081FAD98: @ 81FAD98
-	.4byte 0x0802e4d1
-	.4byte 0x0802ecf1
-	.4byte 0x0802ed79
-	.4byte 0x0802f7cd
-	.4byte 0x0802f841
-	.4byte 0x0802f8a9
-	.4byte 0x0802faa1
-	.4byte 0x0802fbb5
-	.4byte 0x0802fce1
-	.4byte 0x0802fdbd
-	.4byte 0x0802fe7d
-	.4byte 0x0802ff61
-	.4byte 0x0802ff81
-	.4byte 0x0802ffd1
-	.4byte 0x0803002d
-	.4byte 0x0803005d
-	.4byte 0x080302f5
-	.4byte 0x08030359
-	.4byte 0x0803037d
-	.4byte 0x08030465
-	.4byte 0x08030469
-	.4byte 0x08030531
-	.4byte 0x08030595
-	.4byte 0x08030675
-	.4byte 0x08030699
-	.4byte 0x08030799
-	.4byte 0x08030835
-	.4byte 0x080308a9
-	.4byte 0x08030911
-	.4byte 0x0803097d
-	.4byte 0x08030989
-	.4byte 0x08030a3d
-	.4byte 0x08030a6d
-	.4byte 0x08030a79
-	.4byte 0x08030a8d
-	.4byte 0x08030aa1
-	.4byte 0x08030ab5
-	.4byte 0x08030ac9
-	.4byte 0x08030ae5
-	.4byte 0x08030b1d
-	.4byte 0x08030b35
-	.4byte 0x08030b5d
-	.4byte 0x08030bcd
-	.4byte 0x08030bd9
-	.4byte 0x08030c1d
-	.4byte 0x08030c4d
-	.4byte 0x08030c8d
-	.4byte 0x08030cc1
-	.4byte 0x08030fad
-	.4byte 0x080310a5
-	.4byte 0x080310f1
-	.4byte 0x08031115
-	.4byte 0x08031175
-	.4byte 0x080311dd
-	.4byte 0x08031239
-	.4byte 0x080312a1
-	.4byte 0x080312ed
+	.4byte dp01t_00_1_getattr
+	.4byte sub_802ECF0
+	.4byte dp01t_02_1_setattr
+	.4byte sub_802F7CC
+	.4byte sub_802F840
+	.4byte sub_802F8A8
+	.4byte sub_802FAA0
+	.4byte sub_802FBB4
+	.4byte sub_802FCE0
+	.4byte sub_802FDBC
+	.4byte sub_802FE7C
+	.4byte sub_802FF60
+	.4byte sub_802FF80
+	.4byte sub_802FFD0
+	.4byte sub_803002C
+	.4byte dp01t_0F_1_move_anim
+	.4byte sub_80302F4
+	.4byte dp01t_11_1_message_for_player_only
+	.4byte sub_803037C
+	.4byte nullsub_42
+	.4byte sub_8030468
+	.4byte sub_8030530
+	.4byte sub_8030594
+	.4byte sub_8030674
+	.4byte sub_8030698
+	.4byte sub_8030798
+	.4byte sub_8030834
+	.4byte sub_80308A8
+	.4byte sub_8030910
+	.4byte sub_803097C
+	.4byte sub_8030988
+	.4byte sub_8030A3C
+	.4byte sub_8030A6C
+	.4byte sub_8030A78
+	.4byte sub_8030A8C
+	.4byte sub_8030AA0
+	.4byte sub_8030AB4
+	.4byte sub_8030AC8
+	.4byte sub_8030AE4
+	.4byte sub_8030B1C
+	.4byte sub_8030B34
+	.4byte dp01t_29_1_blink
+	.4byte sub_8030BCC
+	.4byte sub_8030BD8
+	.4byte sub_8030C1C
+	.4byte sub_8030C4C
+	.4byte dp01t_2E_1_battle_intro
+	.4byte sub_8030CC0
+	.4byte sub_8030FAC
+	.4byte sub_80310A4
+	.4byte sub_80310F0
+	.4byte dp01t_33_1_enemy_move
+	.4byte bx_exec_buffer_A_ch0_tbl1
+	.4byte dp01t_35_1_link_standby_message_and_free_vram
+	.4byte sub_8031238
+	.4byte sub_80312A0
+	.4byte nullsub_43
 
 	.global gUnknown_081FAE7C
 gUnknown_081FAE7C: @ 81FAE7C
@@ -1045,63 +1045,63 @@ gUnknown_081FAF5C: @ 81FAF5C
 
 	.global gUnknown_081FB048
 gUnknown_081FB048: @ 81FB048
-	.4byte 0x0803807d
-	.4byte 0x0803889d
-	.4byte 0x080388a9
-	.4byte 0x08039221
-	.4byte 0x08039295
-	.4byte 0x080393e5
-	.4byte 0x080395b5
-	.4byte 0x080396d1
-	.4byte 0x080398a5
-	.4byte 0x080398b1
-	.4byte 0x0803995d
-	.4byte 0x08039a01
-	.4byte 0x08039a0d
-	.4byte 0x08039a19
-	.4byte 0x08039a25
-	.4byte 0x08039a31
-	.4byte 0x08039cc9
-	.4byte 0x08039d2d
-	.4byte 0x08039d39
-	.4byte 0x08039d45
-	.4byte 0x08039d51
-	.4byte 0x08039d5d
-	.4byte 0x08039d69
-	.4byte 0x08039d75
-	.4byte 0x08039d81
-	.4byte 0x08039e71
-	.4byte 0x08039e7d
-	.4byte 0x08039ef1
-	.4byte 0x08039f59
-	.4byte 0x08039f65
-	.4byte 0x08039f71
-	.4byte 0x08039f7d
-	.4byte 0x08039f89
-	.4byte 0x08039f95
-	.4byte 0x08039fa1
-	.4byte 0x08039fad
-	.4byte 0x08039fb9
-	.4byte 0x08039fc5
-	.4byte 0x08039fe1
-	.4byte 0x0803a019
-	.4byte 0x0803a031
-	.4byte 0x0803a059
-	.4byte 0x0803a0c9
-	.4byte 0x0803a0d5
-	.4byte 0x0803a119
-	.4byte 0x0803a149
-	.4byte 0x0803a185
-	.4byte 0x0803a1b9
-	.4byte 0x0803a3dd
-	.4byte 0x0803a521
-	.4byte 0x0803a56d
-	.4byte 0x0803a579
-	.4byte 0x0803a5d9
-	.4byte 0x0803a641
-	.4byte 0x0803a64d
-	.4byte 0x0803a659
-	.4byte 0x0803a6bd
+	.4byte dp01t_00_4_getattr
+	.4byte sub_803889C
+	.4byte sub_80388A8
+	.4byte sub_8039220
+	.4byte sub_8039294
+	.4byte sub_80393E4
+	.4byte sub_80395B4
+	.4byte sub_80396D0
+	.4byte sub_80398A4
+	.4byte sub_80398B0
+	.4byte sub_803995C
+	.4byte sub_8039A00
+	.4byte sub_8039A0C
+	.4byte sub_8039A18
+	.4byte sub_8039A24
+	.4byte sub_8039A30
+	.4byte sub_8039CC8
+	.4byte sub_8039D2C
+	.4byte sub_8039D38
+	.4byte sub_8039D44
+	.4byte sub_8039D50
+	.4byte sub_8039D5C
+	.4byte sub_8039D68
+	.4byte sub_8039D74
+	.4byte sub_8039D80
+	.4byte sub_8039E70
+	.4byte sub_8039E7C
+	.4byte sub_8039EF0
+	.4byte sub_8039F58
+	.4byte sub_8039F64
+	.4byte sub_8039F70
+	.4byte sub_8039F7C
+	.4byte sub_8039F88
+	.4byte sub_8039F94
+	.4byte sub_8039FA0
+	.4byte sub_8039FAC
+	.4byte sub_8039FB8
+	.4byte sub_8039FC4
+	.4byte sub_8039FE0
+	.4byte sub_803A018
+	.4byte sub_803A030
+	.4byte dp01t_29_4_blink
+	.4byte sub_803A0C8
+	.4byte sub_803A0D4
+	.4byte sub_803A118
+	.4byte sub_803A148
+	.4byte dp01t_2E_4_battle_intro
+	.4byte sub_803A1B8
+	.4byte sub_803A3DC
+	.4byte sub_803A520
+	.4byte sub_803A56C
+	.4byte sub_803A578
+	.4byte bx_exec_buffer_A_ch0_tbl4
+	.4byte sub_803A640
+	.4byte sub_803A64C
+	.4byte sub_803A658
+	.4byte nullsub_48
 
 @ 81FB12C
 	.include "data/battle_moves.s"
@@ -1512,9 +1512,9 @@ gUnknown_0820C308: @ 820C308
 	.global gUnknown_0820C320
 gUnknown_0820C320: @ 820C320
 	.4byte TradeText_Summary2
-	.4byte 0x0804a9f5 @unknown
+	.4byte sub_804A9F4 @unknown
 	.4byte TradeText_Trade2
-	.4byte 0x0804aa01
+	.4byte sub_804AA00
 
 	.global gUnknown_0820C330
 gUnknown_0820C330: @ 820C330
@@ -1888,28 +1888,28 @@ gUnknown_08216694: @ 8216694
 
 	.global gUnknown_082166A0
 gUnknown_082166A0: @ 82166A0
-	.4byte 0x08055c69
-	.4byte 0x08055c89
-	.4byte 0x08055c8d
+	.4byte sub_8055C68
+	.4byte sub_8055C88
+	.4byte sub_8055C8C
 
 	.global gUnknown_082166AC
 gUnknown_082166AC: @ 82166AC
-	.4byte 0x08055cad
-	.4byte 0x08055cb1
-	.4byte 0x08055cb1
-	.4byte 0x08055cb1
-	.4byte 0x08055cb1
-	.4byte 0x08055cad
-	.4byte 0x08055cad
-	.4byte 0x08055d19
-	.4byte 0x08055d19
-	.4byte 0x08055d19
-	.4byte 0x08055d19
+	.4byte sub_8055CAC
+	.4byte sub_8055CB0
+	.4byte sub_8055CB0
+	.4byte sub_8055CB0
+	.4byte sub_8055CB0
+	.4byte sub_8055CAC
+	.4byte sub_8055CAC
+	.4byte sub_8055D18
+	.4byte sub_8055D18
+	.4byte sub_8055D18
+	.4byte sub_8055D18
 
 	.global gUnknown_082166D8
 gUnknown_082166D8: @ 82166D8
-	.4byte 0x08055d31
-	.4byte 0x08055d39
+	.4byte sub_8055D30
+	.4byte sub_8055D38
 
 @ 82166E0
 	.include "data/tilesets/graphics.s"
@@ -1950,60 +1950,60 @@ gUnknown_0830F9B4: @ 830F9B4
 
 	.global gUnknown_0830FB58
 gUnknown_0830FB58: @ 830FB58
-	.4byte 0x08057051
-	.4byte 0x0805703d
-	.4byte 0x0805708d
-	.4byte 0x08057079
-	.4byte 0x080570a1
-	.4byte 0x080570b5
-	.4byte 0x080570dd
-	.4byte 0x080570c9
-	.4byte 0x080570f1
-	.4byte 0x08057105
-	.4byte 0x0805712d
-	.4byte 0x08057119
-	.4byte 0x08057141
-	.4byte 0x08057155
-	.4byte 0x08057679
-	.4byte 0x08057771
-	.4byte 0x08057785
-	.4byte 0x08057841
+	.4byte MetatileBehavior_IsTrickHouseSlipperyFloor
+	.4byte MetatileBehavior_IsIce_2
+	.4byte MetatileBehavior_IsWalkSouth
+	.4byte MetatileBehavior_IsWalkNorth
+	.4byte MetatileBehavior_IsWalkWest
+	.4byte MetatileBehavior_IsWalkEast
+	.4byte MetatileBehavior_IsSouthwardCurrent
+	.4byte MetatileBehavior_IsNorthwardCurrent
+	.4byte MetatileBehavior_IsWestwardCurrent
+	.4byte MetatileBehavior_IsEastwardCurrent
+	.4byte MetatileBehavior_IsSlideSouth
+	.4byte MetatileBehavior_IsSlideNorth
+	.4byte MetatileBehavior_IsSlideWest
+	.4byte MetatileBehavior_IsSlideEast
+	.4byte MetatileBehavior_IsWaterfall
+	.4byte MetatileBehavior_0xBB
+	.4byte MetatileBehavior_0xBC
+	.4byte MetatileBehavior_IsMuddySlope
 
 	.global gUnknown_0830FBA0
 gUnknown_0830FBA0: @ 830FBA0
-	.4byte 0x080589a1
-	.4byte 0x08058a99
-	.4byte 0x08058a99
-	.4byte 0x08058aad
-	.4byte 0x08058ac5
-	.4byte 0x08058add
-	.4byte 0x08058af5
-	.4byte 0x08058b0d
-	.4byte 0x08058b25
-	.4byte 0x08058b3d
-	.4byte 0x08058b55
-	.4byte 0x08058ba5
-	.4byte 0x08058bbd
-	.4byte 0x08058bd5
-	.4byte 0x08058bed
-	.4byte 0x08058b0d
-	.4byte 0x08058c05
-	.4byte 0x08058c11
-	.4byte 0x08058c1d
+	.4byte ForcedMovement_None
+	.4byte ForcedMovement_Slip
+	.4byte ForcedMovement_Slip
+	.4byte sub_8058AAC
+	.4byte sub_8058AC4
+	.4byte sub_8058ADC
+	.4byte sub_8058AF4
+	.4byte sub_8058B0C
+	.4byte sub_8058B24
+	.4byte sub_8058B3C
+	.4byte sub_8058B54
+	.4byte ForcedMovement_SlideSouth
+	.4byte ForcedMovement_SlideNorth
+	.4byte ForcedMovement_SlideWest
+	.4byte ForcedMovement_SlideEast
+	.4byte sub_8058B0C
+	.4byte sub_8058C04
+	.4byte sub_8058C10
+	.4byte ForcedMovement_MuddySlope
 
 	.global gUnknown_0830FBEC
 gUnknown_0830FBEC: @ 830FBEC
-	.4byte 0x08058ce9
-	.4byte 0x08058cfd
-	.4byte 0x08058d0d
+	.4byte PlayerNotOnBikeNotMoving
+	.4byte PlayerNotOnBikeTurningInPlace
+	.4byte sub_8058D0C
 
 	.global gUnknown_0830FBF8
 gUnknown_0830FBF8: @ 830FBF8
-	.4byte 0x08057855
-	.4byte 0x08057869
-	.4byte 0x0805787d
-	.4byte 0x08057891
-	.4byte 0x080578a5
+	.4byte MetatileBehavior_IsBumpySlope
+	.4byte MetatileBehavior_IsIsolatedVerticalRail
+	.4byte MetatileBehavior_IsIsolatedHorizontalRail
+	.4byte MetatileBehavior_IsVerticalRail
+	.4byte MetatileBehavior_IsHorizontalRail
 
 	.global gUnknown_0830FC0C
 gUnknown_0830FC0C: @ 830FC0C
@@ -2011,21 +2011,21 @@ gUnknown_0830FC0C: @ 830FC0C
 
 	.global gUnknown_0830FC14
 gUnknown_0830FC14: @ 830FC14
-	.4byte 0x080590cd
-	.4byte 0x080590f9
-	.4byte 0x0805912d
-	.4byte 0x08059165
-	.4byte 0x080591c1
-	.4byte 0x080591f5
-	.4byte 0x080590c9
-	.4byte 0x080590c9
+	.4byte PlayerAvatarTransition_Normal
+	.4byte PlayerAvatarTransition_MachBike
+	.4byte PlayerAvatarTransition_AcroBike
+	.4byte PlayerAvatarTransition_Surfing
+	.4byte PlayerAvatarTransition_Underwater
+	.4byte sub_80591F4
+	.4byte nullsub_49
+	.4byte nullsub_49
 
 	.global gUnknown_0830FC34
 gUnknown_0830FC34: @ 830FC34
-	.4byte 0x08056f9d
-	.4byte 0x08056f85
-	.4byte 0x08056f71
-	.4byte 0x08056f5d
+	.4byte MetatileBehavior_IsSouthArrowWarp
+	.4byte MetatileBehavior_IsNorthArrowWarp
+	.4byte MetatileBehavior_IsWestArrowWarp
+	.4byte MetatileBehavior_IsEastArrowWarp
 
 	.global gUnknown_0830FC44
 gUnknown_0830FC44: @ 830FC44
@@ -2041,27 +2041,27 @@ gUnknown_0830FC64: @ 830FC64
 
 	.global gUnknown_0830FC78
 gUnknown_0830FC78: @ 830FC78
-	.4byte 0x08056f9d
-	.4byte 0x08056f85
-	.4byte 0x08056f71
-	.4byte 0x08056f5d
+	.4byte MetatileBehavior_IsSouthArrowWarp
+	.4byte MetatileBehavior_IsNorthArrowWarp
+	.4byte MetatileBehavior_IsWestArrowWarp
+	.4byte MetatileBehavior_IsEastArrowWarp
 
 	.global gUnknown_0830FC88
 gUnknown_0830FC88: @ 830FC88
-	.4byte 0x08059e85
-	.4byte 0x08059ea5
-	.4byte 0x08059f41
+	.4byte sub_8059E84
+	.4byte sub_8059EA4
+	.4byte sub_8059F40
 
 	.global gUnknown_0830FC94
 gUnknown_0830FC94: @ 830FC94
-	.4byte 0x0805a001
+	.4byte sub_805A000
 
 	.global gUnknown_0830FC98
 gUnknown_0830FC98: @ 830FC98
-	.4byte 0x0805a0d9
-	.4byte 0x0805a101
-	.4byte 0x0805a179
-	.4byte 0x0805a1b9
+	.4byte sub_805A0D8
+	.4byte sub_805A100
+	.4byte sub_805A178
+	.4byte sub_805A1B8
 
 	.global gUnknown_0830FCA8
 gUnknown_0830FCA8: @ 830FCA8
@@ -2073,22 +2073,22 @@ gUnknown_0830FCAC: @ 830FCAC
 
 	.global gUnknown_0830FCB4
 gUnknown_0830FCB4: @ 830FCB4
-	.4byte 0x0805a3b5
-	.4byte 0x0805a3d5
-	.4byte 0x0805a46d
-	.4byte 0x0805a491
-	.4byte 0x0805a4d9
-	.4byte 0x0805a56d
-	.4byte 0x0805a5cd
-	.4byte 0x0805a5f5
-	.4byte 0x0805a64d
-	.4byte 0x0805a6b5
-	.4byte 0x0805a6dd
-	.4byte 0x0805a7bd
-	.4byte 0x0805a809
-	.4byte 0x0805a859
-	.4byte 0x0805a875
-	.4byte 0x0805a915
+	.4byte sub_805A3B4
+	.4byte fish1
+	.4byte fish2
+	.4byte fish3
+	.4byte fish4
+	.4byte party_menu_update_status_condition_object
+	.4byte sub_805A5CC
+	.4byte fish7
+	.4byte fish8
+	.4byte sub_805A6B4
+	.4byte sub_805A6DC
+	.4byte sub_805A7BC
+	.4byte sub_805A808
+	.4byte fishD
+	.4byte sub_805A874
+	.4byte fishF
 
 	.global gUnknown_0830FCF4
 gUnknown_0830FCF4: @ 830FCF4
@@ -2120,9 +2120,9 @@ gUnknown_0830FD24: @ 830FD24
 
 	.global gUnknown_0830FD3C
 gUnknown_0830FD3C: @ 830FD3C
-	.4byte 0x0805c2f1
-	.4byte 0x0805c32d
-	.4byte 0x0805c365
+	.4byte CameraObject_0
+	.4byte CameraObject_1
+	.4byte CameraObject_2
 
 @ 830FD48
 	.include "data/graphics/field_objects/map_object_graphics.s"
@@ -2132,83 +2132,83 @@ gUnknown_0830FD3C: @ 830FD3C
 
 	.global gUnknown_0836DA88
 gUnknown_0836DA88: @ 836DA88
-	.4byte 0x0805c885
-	.4byte 0x0805cde9
-	.4byte 0x0805c8ad
-	.4byte 0x0805cf29
-	.4byte 0x0805cf29
-	.4byte 0x0805d0ad
-	.4byte 0x0805d0ad
-	.4byte 0x0805d231
-	.4byte 0x0805d231
-	.4byte 0x0805d231
-	.4byte 0x0805d231
-	.4byte 0x080587b5
-	.4byte 0x0805d2d1
-	.4byte 0x0805d4f5
-	.4byte 0x0805d635
-	.4byte 0x0805d775
-	.4byte 0x0805d8b5
-	.4byte 0x0805d9f5
-	.4byte 0x0805db35
-	.4byte 0x0805dc75
-	.4byte 0x0805ddb5
-	.4byte 0x0805def5
-	.4byte 0x0805e035
-	.4byte 0x0805e175
-	.4byte 0x0805e279
-	.4byte 0x0805e37d
-	.4byte 0x0805e37d
-	.4byte 0x0805e37d
-	.4byte 0x0805e37d
-	.4byte 0x0805e5dd
-	.4byte 0x0805e669
-	.4byte 0x0805e6f5
-	.4byte 0x0805e781
-	.4byte 0x0805e80d
-	.4byte 0x0805e899
-	.4byte 0x0805e925
-	.4byte 0x0805e9b1
-	.4byte 0x0805ea3d
-	.4byte 0x0805eac9
-	.4byte 0x0805eb55
-	.4byte 0x0805ebe1
-	.4byte 0x0805ec6d
-	.4byte 0x0805ecf9
-	.4byte 0x0805ed85
-	.4byte 0x0805ee11
-	.4byte 0x0805ee9d
-	.4byte 0x0805ef29
-	.4byte 0x0805efb5
-	.4byte 0x0805f041
-	.4byte 0x0805f0cd
-	.4byte 0x0805f159
-	.4byte 0x0805f1e5
-	.4byte 0x0805f271
-	.4byte 0x0805f2fd
-	.4byte 0x0805f2fd
-	.4byte 0x0805f2fd
-	.4byte 0x0805f2fd
-	.4byte 0x0805f989
-	.4byte 0x0805fa05
-	.4byte 0x0805f8e1
-	.4byte 0x0805f8e1
-	.4byte 0x0805f8e1
-	.4byte 0x0805f8e1
-	.4byte 0x0805fa75
-	.4byte 0x0805fb21
-	.4byte 0x0805fb21
-	.4byte 0x0805fb21
-	.4byte 0x0805fb21
-	.4byte 0x0805fb91
-	.4byte 0x0805fb91
-	.4byte 0x0805fb91
-	.4byte 0x0805fb91
-	.4byte 0x0805fc01
-	.4byte 0x0805fc01
-	.4byte 0x0805fc01
-	.4byte 0x0805fc01
-	.4byte 0x0805fc71
+	.4byte sub_805C884
+	.4byte sub_805CDE8
+	.4byte sub_805C8AC
+	.4byte sub_805CF28
+	.4byte sub_805CF28
+	.4byte sub_805D0AC
+	.4byte sub_805D0AC
+	.4byte sub_805D230
+	.4byte sub_805D230
+	.4byte sub_805D230
+	.4byte sub_805D230
+	.4byte sub_80587B4
+	.4byte FieldObjectCB_BerryTree
+	.4byte sub_805D4F4
+	.4byte sub_805D634
+	.4byte sub_805D774
+	.4byte sub_805D8B4
+	.4byte sub_805D9F4
+	.4byte sub_805DB34
+	.4byte sub_805DC74
+	.4byte sub_805DDB4
+	.4byte sub_805DEF4
+	.4byte sub_805E034
+	.4byte sub_805E174
+	.4byte sub_805E278
+	.4byte sub_805E37C
+	.4byte sub_805E37C
+	.4byte sub_805E37C
+	.4byte sub_805E37C
+	.4byte sub_805E5DC
+	.4byte sub_805E668
+	.4byte sub_805E6F4
+	.4byte sub_805E780
+	.4byte sub_805E80C
+	.4byte sub_805E898
+	.4byte sub_805E924
+	.4byte sub_805E9B0
+	.4byte sub_805EA3C
+	.4byte sub_805EAC8
+	.4byte sub_805EB54
+	.4byte sub_805EBE0
+	.4byte sub_805EC6C
+	.4byte sub_805ECF8
+	.4byte sub_805ED84
+	.4byte sub_805EE10
+	.4byte sub_805EE9C
+	.4byte sub_805EF28
+	.4byte sub_805EFB4
+	.4byte sub_805F040
+	.4byte sub_805F0CC
+	.4byte sub_805F158
+	.4byte sub_805F1E4
+	.4byte sub_805F270
+	.4byte sub_805F2FC
+	.4byte sub_805F2FC
+	.4byte sub_805F2FC
+	.4byte sub_805F2FC
+	.4byte FieldObjectCB_TreeDisguise
+	.4byte FieldObjectCB_MountainDisguise
+	.4byte sub_805F8E0
+	.4byte sub_805F8E0
+	.4byte sub_805F8E0
+	.4byte sub_805F8E0
+	.4byte FieldObjectCB_Hidden1
+	.4byte sub_805FB20
+	.4byte sub_805FB20
+	.4byte sub_805FB20
+	.4byte sub_805FB20
+	.4byte sub_805FB90
+	.4byte sub_805FB90
+	.4byte sub_805FB90
+	.4byte sub_805FB90
+	.4byte sub_805FC00
+	.4byte sub_805FC00
+	.4byte sub_805FC00
+	.4byte sub_805FC00
+	.4byte sub_805FC70
 
 	.global gUnknown_0836DBBC
 gUnknown_0836DBBC: @ 836DBBC
@@ -2283,13 +2283,13 @@ gUnknown_0837521C: @ 837521C
 
 	.global gUnknown_08375224
 gUnknown_08375224: @ 8375224
-	.4byte 0x0805c8f1
-	.4byte 0x0805c905
-	.4byte 0x0805c931
-	.4byte 0x0805c96d
-	.4byte 0x0805c98d
-	.4byte 0x0805c9d9
-	.4byte 0x0805ca09
+	.4byte sub_805C8F0
+	.4byte sub_805C904
+	.4byte sub_805C930
+	.4byte sub_805C96C
+	.4byte sub_805C98C
+	.4byte sub_805C9D8
+	.4byte sub_805CA08
 
 	.global gUnknown_08375240
 gUnknown_08375240: @ 8375240
@@ -2297,35 +2297,35 @@ gUnknown_08375240: @ 8375240
 
 	.global gUnknown_08375244
 gUnknown_08375244: @ 8375244
-	.4byte 0x0805caad
-	.4byte 0x0805cadd
-	.4byte 0x0805caed
-	.4byte 0x0805cb01
-	.4byte 0x0805cb5d
-	.4byte 0x0805cbb9
-	.4byte 0x0805cc15
-	.4byte 0x0805cc71
-	.4byte 0x0805ccad
-	.4byte 0x0805cce9
-	.4byte 0x0805cd25
+	.4byte sub_805CAAC
+	.4byte sub_805CADC
+	.4byte sub_805CAEC
+	.4byte sub_805CB00
+	.4byte sub_805CB5C
+	.4byte sub_805CBB8
+	.4byte sub_805CC14
+	.4byte sub_805CC70
+	.4byte sub_805CCAC
+	.4byte sub_805CCE8
+	.4byte sub_805CD24
 
 	.global gUnknown_08375270
 gUnknown_08375270: @ 8375270
-	.4byte 0x0805ce2d
-	.4byte 0x0805ce41
-	.4byte 0x0805ce6d
-	.4byte 0x0805ceb1
-	.4byte 0x0805cee1
+	.4byte sub_805CE2C
+	.4byte sub_805CE40
+	.4byte sub_805CE6C
+	.4byte sub_805CEB0
+	.4byte sub_805CEE0
 
 	.global gUnknown_08375284
 gUnknown_08375284: @ 8375284
-	.4byte 0x0805cf6d
-	.4byte 0x0805cf81
-	.4byte 0x0805cfad
-	.4byte 0x0805cfe9
-	.4byte 0x0805d009
-	.4byte 0x0805d055
-	.4byte 0x0805d085
+	.4byte sub_805CF6C
+	.4byte sub_805CF80
+	.4byte sub_805CFAC
+	.4byte sub_805CFE8
+	.4byte sub_805D008
+	.4byte sub_805D054
+	.4byte sub_805D084
 
 	.global gUnknown_083752A0
 gUnknown_083752A0: @ 83752A0
@@ -2333,13 +2333,13 @@ gUnknown_083752A0: @ 83752A0
 
 	.global gUnknown_083752A4
 gUnknown_083752A4: @ 83752A4
-	.4byte 0x0805d0f1
-	.4byte 0x0805d105
-	.4byte 0x0805d131
-	.4byte 0x0805d16d
-	.4byte 0x0805d18d
-	.4byte 0x0805d1d9
-	.4byte 0x0805d209
+	.4byte sub_805D0F0
+	.4byte sub_805D104
+	.4byte sub_805D130
+	.4byte sub_805D16C
+	.4byte sub_805D18C
+	.4byte sub_805D1D8
+	.4byte sub_805D208
 
 	.global gUnknown_083752C0
 gUnknown_083752C0: @ 83752C0
@@ -2347,41 +2347,41 @@ gUnknown_083752C0: @ 83752C0
 
 	.global gUnknown_083752C4
 gUnknown_083752C4: @ 83752C4
-	.4byte 0x0805d275
-	.4byte 0x0805d2a1
-	.4byte 0x0805d2c1
+	.4byte sub_805D274
+	.4byte sub_805D2A0
+	.4byte sub_805D2C0
 
 	.global gUnknown_083752D0
 gUnknown_083752D0: @ 83752D0
-	.4byte 0x0805d335
-	.4byte 0x0805d3ed
-	.4byte 0x0805d40d
-	.4byte 0x0805d459
-	.4byte 0x0805d4a9
+	.4byte do_berry_tree_growth_sparkle_1
+	.4byte sub_805D3EC
+	.4byte do_berry_tree_growth_sparkle_2
+	.4byte sub_805D458
+	.4byte sub_805D4A8
 
 	.global gUnknown_083752E4
 gUnknown_083752E4: @ 83752E4
-	.4byte 0x0805d539
-	.4byte 0x0805d54d
-	.4byte 0x0805d579
-	.4byte 0x0805d5bd
-	.4byte 0x0805d5ed
+	.4byte sub_805D538
+	.4byte sub_805D54C
+	.4byte sub_805D578
+	.4byte sub_805D5BC
+	.4byte sub_805D5EC
 
 	.global gUnknown_083752F8
 gUnknown_083752F8: @ 83752F8
-	.4byte 0x0805d679
-	.4byte 0x0805d68d
-	.4byte 0x0805d6b9
-	.4byte 0x0805d6fd
-	.4byte 0x0805d72d
+	.4byte sub_805D678
+	.4byte sub_805D68C
+	.4byte sub_805D6B8
+	.4byte sub_805D6FC
+	.4byte sub_805D72C
 
 	.global gUnknown_0837530C
 gUnknown_0837530C: @ 837530C
-	.4byte 0x0805d7b9
-	.4byte 0x0805d7cd
-	.4byte 0x0805d7f9
-	.4byte 0x0805d83d
-	.4byte 0x0805d86d
+	.4byte sub_805D7B8
+	.4byte sub_805D7CC
+	.4byte sub_805D7F8
+	.4byte sub_805D83C
+	.4byte sub_805D86C
 
 	.global gUnknown_08375320
 gUnknown_08375320: @ 8375320
@@ -2389,11 +2389,11 @@ gUnknown_08375320: @ 8375320
 
 	.global gUnknown_08375324
 gUnknown_08375324: @ 8375324
-	.4byte 0x0805d8f9
-	.4byte 0x0805d90d
-	.4byte 0x0805d939
-	.4byte 0x0805d97d
-	.4byte 0x0805d9ad
+	.4byte sub_805D8F8
+	.4byte sub_805D90C
+	.4byte sub_805D938
+	.4byte sub_805D97C
+	.4byte sub_805D9AC
 
 	.global gUnknown_08375338
 gUnknown_08375338: @ 8375338
@@ -2401,11 +2401,11 @@ gUnknown_08375338: @ 8375338
 
 	.global gUnknown_0837533C
 gUnknown_0837533C: @ 837533C
-	.4byte 0x0805da39
-	.4byte 0x0805da4d
-	.4byte 0x0805da79
-	.4byte 0x0805dabd
-	.4byte 0x0805daed
+	.4byte sub_805DA38
+	.4byte sub_805DA4C
+	.4byte sub_805DA78
+	.4byte sub_805DABC
+	.4byte sub_805DAEC
 
 	.global gUnknown_08375350
 gUnknown_08375350: @ 8375350
@@ -2413,11 +2413,11 @@ gUnknown_08375350: @ 8375350
 
 	.global gUnknown_08375354
 gUnknown_08375354: @ 8375354
-	.4byte 0x0805db79
-	.4byte 0x0805db8d
-	.4byte 0x0805dbb9
-	.4byte 0x0805dbfd
-	.4byte 0x0805dc2d
+	.4byte sub_805DB78
+	.4byte sub_805DB8C
+	.4byte sub_805DBB8
+	.4byte sub_805DBFC
+	.4byte sub_805DC2C
 
 	.global gUnknown_08375368
 gUnknown_08375368: @ 8375368
@@ -2425,11 +2425,11 @@ gUnknown_08375368: @ 8375368
 
 	.global gUnknown_0837536C
 gUnknown_0837536C: @ 837536C
-	.4byte 0x0805dcb9
-	.4byte 0x0805dccd
-	.4byte 0x0805dcf9
-	.4byte 0x0805dd3d
-	.4byte 0x0805dd6d
+	.4byte sub_805DCB8
+	.4byte sub_805DCCC
+	.4byte sub_805DCF8
+	.4byte sub_805DD3C
+	.4byte sub_805DD6C
 
 	.global gUnknown_08375380
 gUnknown_08375380: @ 8375380
@@ -2437,11 +2437,11 @@ gUnknown_08375380: @ 8375380
 
 	.global gUnknown_08375384
 gUnknown_08375384: @ 8375384
-	.4byte 0x0805ddf9
-	.4byte 0x0805de0d
-	.4byte 0x0805de39
-	.4byte 0x0805de7d
-	.4byte 0x0805dead
+	.4byte sub_805DDF8
+	.4byte sub_805DE0C
+	.4byte sub_805DE38
+	.4byte sub_805DE7C
+	.4byte sub_805DEAC
 
 	.global gUnknown_08375398
 gUnknown_08375398: @ 8375398
@@ -2449,11 +2449,11 @@ gUnknown_08375398: @ 8375398
 
 	.global gUnknown_0837539C
 gUnknown_0837539C: @ 837539C
-	.4byte 0x0805df39
-	.4byte 0x0805df4d
-	.4byte 0x0805df79
-	.4byte 0x0805dfbd
-	.4byte 0x0805dfed
+	.4byte sub_805DF38
+	.4byte sub_805DF4C
+	.4byte sub_805DF78
+	.4byte sub_805DFBC
+	.4byte sub_805DFEC
 
 	.global gUnknown_083753B0
 gUnknown_083753B0: @ 83753B0
@@ -2461,11 +2461,11 @@ gUnknown_083753B0: @ 83753B0
 
 	.global gUnknown_083753B4
 gUnknown_083753B4: @ 83753B4
-	.4byte 0x0805e079
-	.4byte 0x0805e08d
-	.4byte 0x0805e0b9
-	.4byte 0x0805e0fd
-	.4byte 0x0805e12d
+	.4byte sub_805E078
+	.4byte sub_805E08C
+	.4byte sub_805E0B8
+	.4byte sub_805E0FC
+	.4byte sub_805E12C
 
 	.global gUnknown_083753C8
 gUnknown_083753C8: @ 83753C8
@@ -2473,10 +2473,10 @@ gUnknown_083753C8: @ 83753C8
 
 	.global gUnknown_083753CC
 gUnknown_083753CC: @ 83753CC
-	.4byte 0x0805e1b9
-	.4byte 0x0805e1e5
-	.4byte 0x0805e209
-	.4byte 0x0805e235
+	.4byte sub_805E1B8
+	.4byte sub_805E1E4
+	.4byte sub_805E208
+	.4byte sub_805E234
 
 	.global gUnknown_083753DC
 gUnknown_083753DC: @ 83753DC
@@ -2484,10 +2484,10 @@ gUnknown_083753DC: @ 83753DC
 
 	.global gUnknown_083753E4
 gUnknown_083753E4: @ 83753E4
-	.4byte 0x0805e2bd
-	.4byte 0x0805e2e9
-	.4byte 0x0805e30d
-	.4byte 0x0805e339
+	.4byte sub_805E2BC
+	.4byte sub_805E2E8
+	.4byte sub_805E30C
+	.4byte sub_805E338
 
 	.global gUnknown_083753F4
 gUnknown_083753F4: @ 83753F4
@@ -2495,16 +2495,16 @@ gUnknown_083753F4: @ 83753F4
 
 	.global gUnknown_083753FC
 gUnknown_083753FC: @ 83753FC
-	.4byte 0x0805e3c1
-	.4byte 0x0805e3d5
-	.4byte 0x0805e40d
-	.4byte 0x0805e4c5
+	.4byte sub_805E3C0
+	.4byte sub_805E3D4
+	.4byte sub_805E40C
+	.4byte sub_805E4C4
 
 	.global gUnknown_0837540C
 gUnknown_0837540C: @ 837540C
-	.4byte 0x0805e4ed
-	.4byte 0x0805e621
-	.4byte 0x0805e5b5
+	.4byte sub_805E4EC
+	.4byte sub_805E620
+	.4byte sub_805E5B4
 
 	.global gUnknown_08375418
 gUnknown_08375418: @ 8375418
@@ -2512,9 +2512,9 @@ gUnknown_08375418: @ 8375418
 
 	.global gUnknown_0837541C
 gUnknown_0837541C: @ 837541C
-	.4byte 0x0805e4ed
-	.4byte 0x0805e6ad
-	.4byte 0x0805e5b5
+	.4byte sub_805E4EC
+	.4byte sub_805E6AC
+	.4byte sub_805E5B4
 
 	.global gUnknown_08375428
 gUnknown_08375428: @ 8375428
@@ -2522,9 +2522,9 @@ gUnknown_08375428: @ 8375428
 
 	.global gUnknown_0837542C
 gUnknown_0837542C: @ 837542C
-	.4byte 0x0805e4ed
-	.4byte 0x0805e739
-	.4byte 0x0805e5b5
+	.4byte sub_805E4EC
+	.4byte sub_805E738
+	.4byte sub_805E5B4
 
 	.global gUnknown_08375438
 gUnknown_08375438: @ 8375438
@@ -2532,9 +2532,9 @@ gUnknown_08375438: @ 8375438
 
 	.global gUnknown_0837543C
 gUnknown_0837543C: @ 837543C
-	.4byte 0x0805e4ed
-	.4byte 0x0805e7c5
-	.4byte 0x0805e5b5
+	.4byte sub_805E4EC
+	.4byte sub_805E7C4
+	.4byte sub_805E5B4
 
 	.global gUnknown_08375448
 gUnknown_08375448: @ 8375448
@@ -2542,9 +2542,9 @@ gUnknown_08375448: @ 8375448
 
 	.global gUnknown_0837544C
 gUnknown_0837544C: @ 837544C
-	.4byte 0x0805e4ed
-	.4byte 0x0805e851
-	.4byte 0x0805e5b5
+	.4byte sub_805E4EC
+	.4byte sub_805E850
+	.4byte sub_805E5B4
 
 	.global gUnknown_08375458
 gUnknown_08375458: @ 8375458
@@ -2552,9 +2552,9 @@ gUnknown_08375458: @ 8375458
 
 	.global gUnknown_0837545C
 gUnknown_0837545C: @ 837545C
-	.4byte 0x0805e4ed
-	.4byte 0x0805e8dd
-	.4byte 0x0805e5b5
+	.4byte sub_805E4EC
+	.4byte sub_805E8DC
+	.4byte sub_805E5B4
 
 	.global gUnknown_08375468
 gUnknown_08375468: @ 8375468
@@ -2562,15 +2562,15 @@ gUnknown_08375468: @ 8375468
 
 	.global gUnknown_0837546C
 gUnknown_0837546C: @ 837546C
-	.4byte 0x0805e4ed
-	.4byte 0x0805e969
-	.4byte 0x0805e5b5
+	.4byte sub_805E4EC
+	.4byte sub_805E968
+	.4byte sub_805E5B4
 
 	.global gUnknown_08375478
 gUnknown_08375478: @ 8375478
-	.4byte 0x0805e4ed
-	.4byte 0x0805e9f5
-	.4byte 0x0805e5b5
+	.4byte sub_805E4EC
+	.4byte sub_805E9F4
+	.4byte sub_805E5B4
 
 	.global gUnknown_08375484
 gUnknown_08375484: @ 8375484
@@ -2578,9 +2578,9 @@ gUnknown_08375484: @ 8375484
 
 	.global gUnknown_08375488
 gUnknown_08375488: @ 8375488
-	.4byte 0x0805e4ed
-	.4byte 0x0805ea81
-	.4byte 0x0805e5b5
+	.4byte sub_805E4EC
+	.4byte sub_805EA80
+	.4byte sub_805E5B4
 
 	.global gUnknown_08375494
 gUnknown_08375494: @ 8375494
@@ -2588,9 +2588,9 @@ gUnknown_08375494: @ 8375494
 
 	.global gUnknown_08375498
 gUnknown_08375498: @ 8375498
-	.4byte 0x0805e4ed
-	.4byte 0x0805eb0d
-	.4byte 0x0805e5b5
+	.4byte sub_805E4EC
+	.4byte sub_805EB0C
+	.4byte sub_805E5B4
 
 	.global gUnknown_083754A4
 gUnknown_083754A4: @ 83754A4
@@ -2598,9 +2598,9 @@ gUnknown_083754A4: @ 83754A4
 
 	.global gUnknown_083754A8
 gUnknown_083754A8: @ 83754A8
-	.4byte 0x0805e4ed
-	.4byte 0x0805eb99
-	.4byte 0x0805e5b5
+	.4byte sub_805E4EC
+	.4byte sub_805EB98
+	.4byte sub_805E5B4
 
 	.global gUnknown_083754B4
 gUnknown_083754B4: @ 83754B4
@@ -2608,9 +2608,9 @@ gUnknown_083754B4: @ 83754B4
 
 	.global gUnknown_083754B8
 gUnknown_083754B8: @ 83754B8
-	.4byte 0x0805e4ed
-	.4byte 0x0805ec25
-	.4byte 0x0805e5b5
+	.4byte sub_805E4EC
+	.4byte sub_805EC24
+	.4byte sub_805E5B4
 
 	.global gUnknown_083754C4
 gUnknown_083754C4: @ 83754C4
@@ -2618,9 +2618,9 @@ gUnknown_083754C4: @ 83754C4
 
 	.global gUnknown_083754C8
 gUnknown_083754C8: @ 83754C8
-	.4byte 0x0805e4ed
-	.4byte 0x0805ecb1
-	.4byte 0x0805e5b5
+	.4byte sub_805E4EC
+	.4byte sub_805ECB0
+	.4byte sub_805E5B4
 
 	.global gUnknown_083754D4
 gUnknown_083754D4: @ 83754D4
@@ -2628,9 +2628,9 @@ gUnknown_083754D4: @ 83754D4
 
 	.global gUnknown_083754D8
 gUnknown_083754D8: @ 83754D8
-	.4byte 0x0805e4ed
-	.4byte 0x0805ed3d
-	.4byte 0x0805e5b5
+	.4byte sub_805E4EC
+	.4byte sub_805ED3C
+	.4byte sub_805E5B4
 
 	.global gUnknown_083754E4
 gUnknown_083754E4: @ 83754E4
@@ -2638,9 +2638,9 @@ gUnknown_083754E4: @ 83754E4
 
 	.global gUnknown_083754E8
 gUnknown_083754E8: @ 83754E8
-	.4byte 0x0805e4ed
-	.4byte 0x0805edc9
-	.4byte 0x0805e5b5
+	.4byte sub_805E4EC
+	.4byte sub_805EDC8
+	.4byte sub_805E5B4
 
 	.global gUnknown_083754F4
 gUnknown_083754F4: @ 83754F4
@@ -2648,9 +2648,9 @@ gUnknown_083754F4: @ 83754F4
 
 	.global gUnknown_083754F8
 gUnknown_083754F8: @ 83754F8
-	.4byte 0x0805e4ed
-	.4byte 0x0805ee55
-	.4byte 0x0805e5b5
+	.4byte sub_805E4EC
+	.4byte sub_805EE54
+	.4byte sub_805E5B4
 
 	.global gUnknown_08375504
 gUnknown_08375504: @ 8375504
@@ -2658,9 +2658,9 @@ gUnknown_08375504: @ 8375504
 
 	.global gUnknown_08375508
 gUnknown_08375508: @ 8375508
-	.4byte 0x0805e4ed
-	.4byte 0x0805eee1
-	.4byte 0x0805e5b5
+	.4byte sub_805E4EC
+	.4byte sub_805EEE0
+	.4byte sub_805E5B4
 
 	.global gUnknown_08375514
 gUnknown_08375514: @ 8375514
@@ -2668,9 +2668,9 @@ gUnknown_08375514: @ 8375514
 
 	.global gUnknown_08375518
 gUnknown_08375518: @ 8375518
-	.4byte 0x0805e4ed
-	.4byte 0x0805ef6d
-	.4byte 0x0805e5b5
+	.4byte sub_805E4EC
+	.4byte sub_805EF6C
+	.4byte sub_805E5B4
 
 	.global gUnknown_08375524
 gUnknown_08375524: @ 8375524
@@ -2678,9 +2678,9 @@ gUnknown_08375524: @ 8375524
 
 	.global gUnknown_08375528
 gUnknown_08375528: @ 8375528
-	.4byte 0x0805e4ed
-	.4byte 0x0805eff9
-	.4byte 0x0805e5b5
+	.4byte sub_805E4EC
+	.4byte sub_805EFF8
+	.4byte sub_805E5B4
 
 	.global gUnknown_08375534
 gUnknown_08375534: @ 8375534
@@ -2688,9 +2688,9 @@ gUnknown_08375534: @ 8375534
 
 	.global gUnknown_08375538
 gUnknown_08375538: @ 8375538
-	.4byte 0x0805e4ed
-	.4byte 0x0805f085
-	.4byte 0x0805e5b5
+	.4byte sub_805E4EC
+	.4byte sub_805F084
+	.4byte sub_805E5B4
 
 	.global gUnknown_08375544
 gUnknown_08375544: @ 8375544
@@ -2698,9 +2698,9 @@ gUnknown_08375544: @ 8375544
 
 	.global gUnknown_08375548
 gUnknown_08375548: @ 8375548
-	.4byte 0x0805e4ed
-	.4byte 0x0805f111
-	.4byte 0x0805e5b5
+	.4byte sub_805E4EC
+	.4byte sub_805F110
+	.4byte sub_805E5B4
 
 	.global gUnknown_08375554
 gUnknown_08375554: @ 8375554
@@ -2708,9 +2708,9 @@ gUnknown_08375554: @ 8375554
 
 	.global gUnknown_08375558
 gUnknown_08375558: @ 8375558
-	.4byte 0x0805e4ed
-	.4byte 0x0805f19d
-	.4byte 0x0805e5b5
+	.4byte sub_805E4EC
+	.4byte sub_805F19C
+	.4byte sub_805E5B4
 
 	.global gUnknown_08375564
 gUnknown_08375564: @ 8375564
@@ -2718,9 +2718,9 @@ gUnknown_08375564: @ 8375564
 
 	.global gUnknown_08375568
 gUnknown_08375568: @ 8375568
-	.4byte 0x0805e4ed
-	.4byte 0x0805f229
-	.4byte 0x0805e5b5
+	.4byte sub_805E4EC
+	.4byte sub_805F228
+	.4byte sub_805E5B4
 
 	.global gUnknown_08375574
 gUnknown_08375574: @ 8375574
@@ -2728,9 +2728,9 @@ gUnknown_08375574: @ 8375574
 
 	.global gUnknown_08375578
 gUnknown_08375578: @ 8375578
-	.4byte 0x0805e4ed
-	.4byte 0x0805f2b5
-	.4byte 0x0805e5b5
+	.4byte sub_805E4EC
+	.4byte sub_805F2B4
+	.4byte sub_805E5B4
 
 	.global gUnknown_08375584
 gUnknown_08375584: @ 8375584
@@ -2738,54 +2738,54 @@ gUnknown_08375584: @ 8375584
 
 	.global gUnknown_08375588
 gUnknown_08375588: @ 8375588
-	.4byte 0x0805f341
-	.4byte 0x0805f365
-	.4byte 0x0805f3c5
+	.4byte mss_npc_reset_oampriv3_1_unk2_unk3
+	.4byte sub_805F364
+	.4byte sub_805F3C4
 
 	.global gUnknown_08375594
 gUnknown_08375594: @ 8375594
-	.4byte 0x0805f3ed
-	.4byte 0x0805f3f1
-	.4byte 0x0805f439
-	.4byte 0x0805f4f1
-	.4byte 0x0805f5a9
-	.4byte 0x0805f661
-	.4byte 0x0805f719
-	.4byte 0x0805f761
-	.4byte 0x0805f819
-	.4byte 0x0805f3ed
-	.4byte 0x0805f3ed
+	.4byte sub_805F3EC
+	.4byte sub_805F3F0
+	.4byte sub_805F438
+	.4byte sub_805F4F0
+	.4byte sub_805F5A8
+	.4byte sub_805F660
+	.4byte cph_IM_DIFFERENT
+	.4byte sub_805F760
+	.4byte oac_hopping
+	.4byte sub_805F3EC
+	.4byte sub_805F3EC
 
 	.global gUnknown_083755C0
 gUnknown_083755C0: @ 83755C0
-	.4byte 0x0805f341
-	.4byte 0x0805f925
-	.4byte 0x0805f3c5
+	.4byte mss_npc_reset_oampriv3_1_unk2_unk3
+	.4byte mss_08062EA4
+	.4byte sub_805F3C4
 
 	.global gUnknown_083755CC
 gUnknown_083755CC: @ 83755CC
-	.4byte 0x0805faf9
+	.4byte sub_805FAF8
 
 	.global gUnknown_083755D0
 gUnknown_083755D0: @ 83755D0
-	.4byte 0x0805fb65
-	.4byte 0x0805fb05
+	.4byte sub_805FB64
+	.4byte sub_805FB04
 
 	.global gUnknown_083755D8
 gUnknown_083755D8: @ 83755D8
-	.4byte 0x0805fbd5
-	.4byte 0x0805fb05
+	.4byte sub_805FBD4
+	.4byte sub_805FB04
 
 	.global gUnknown_083755E0
 gUnknown_083755E0: @ 83755E0
-	.4byte 0x0805fc45
-	.4byte 0x0805fb05
+	.4byte sub_805FC44
+	.4byte sub_805FB04
 
 	.global gUnknown_083755E8
 gUnknown_083755E8: @ 83755E8
-	.4byte 0x0805fcb5
-	.4byte 0x0805fce9
-	.4byte 0x0805fd09
+	.4byte sub_805FCB4
+	.4byte sub_805FCE8
+	.4byte sub_805FD08
 
 	.global gUnknown_083755F4
 gUnknown_083755F4: @ 83755F4
@@ -2853,17 +2853,17 @@ gUnknown_0837567B: @ 837567B
 
 	.global gUnknown_08375684
 gUnknown_08375684: @ 8375684
-	.4byte 0x08057631
-	.4byte 0x08057611
-	.4byte 0x080575ed
-	.4byte 0x080575c9
+	.4byte MetatileBehavior_IsSouthBlocked
+	.4byte MetatileBehavior_IsNorthBlocked
+	.4byte MetatileBehavior_IsWestBlocked
+	.4byte MetatileBehavior_IsEastBlocked
 
 	.global gUnknown_08375694
 gUnknown_08375694: @ 8375694
-	.4byte 0x08057611
-	.4byte 0x08057631
-	.4byte 0x080575c9
-	.4byte 0x080575ed
+	.4byte MetatileBehavior_IsNorthBlocked
+	.4byte MetatileBehavior_IsSouthBlocked
+	.4byte MetatileBehavior_IsEastBlocked
+	.4byte MetatileBehavior_IsWestBlocked
 
 	.global gUnknown_083756A4
 gUnknown_083756A4: @ 83756A4
@@ -3129,46 +3129,46 @@ gUnknown_08375778: @ 8375778
 	.4byte 0x08375fe4
 	.4byte 0x08375ff0
 	.4byte 0x08375ffc
-	.4byte 0x08060ce1
-	.4byte 0x08063475
-	.4byte 0x08060cf1
-	.4byte 0x08063475
-	.4byte 0x08060d01
-	.4byte 0x08063475
-	.4byte 0x08060d11
-	.4byte 0x08063475
+	.4byte sub_8060CE0
+	.4byte sub_8063474
+	.4byte sub_8060CF0
+	.4byte sub_8063474
+	.4byte sub_8060D00
+	.4byte sub_8063474
+	.4byte sub_8060D10
+	.4byte sub_8063474
 
 	.global gUnknown_083759C0
 gUnknown_083759C0: @ 83759C0
-	.4byte 0x0805fd49
-	.4byte 0x0805fd59
-	.4byte 0x0805fd59
-	.4byte 0x0805fd69
-	.4byte 0x0805fd79
-	.4byte 0x08060f3d
-	.4byte 0x08060f5d
-	.4byte 0x08063475
-	.4byte 0x08060f7d
-	.4byte 0x08060f9d
-	.4byte 0x08063475
-	.4byte 0x08060fbd
-	.4byte 0x08060fdd
-	.4byte 0x08063475
-	.4byte 0x08060ffd
-	.4byte 0x0806101d
-	.4byte 0x08063475
-	.4byte 0x0806103d
-	.4byte 0x0806105d
-	.4byte 0x08063475
-	.4byte 0x0806107d
-	.4byte 0x0806109d
-	.4byte 0x08063475
-	.4byte 0x080610bd
-	.4byte 0x080610dd
-	.4byte 0x08063475
-	.4byte 0x080610fd
-	.4byte 0x0806111d
-	.4byte 0x08063475
+	.4byte get_go_image_anim_num
+	.4byte get_go_fast_image_anim_num
+	.4byte get_go_fast_image_anim_num
+	.4byte get_go_faster_image_anim_num
+	.4byte sub_805FD78
+	.4byte sub_8060F3C
+	.4byte sub_8060F5C
+	.4byte sub_8063474
+	.4byte sub_8060F7C
+	.4byte sub_8060F9C
+	.4byte sub_8063474
+	.4byte sub_8060FBC
+	.4byte sub_8060FDC
+	.4byte sub_8063474
+	.4byte sub_8060FFC
+	.4byte sub_806101C
+	.4byte sub_8063474
+	.4byte sub_806103C
+	.4byte sub_806105C
+	.4byte sub_8063474
+	.4byte sub_806107C
+	.4byte sub_806109C
+	.4byte sub_8063474
+	.4byte sub_80610BC
+	.4byte sub_80610DC
+	.4byte sub_8063474
+	.4byte sub_80610FC
+	.4byte sub_806111C
+	.4byte sub_8063474
 
 	.global gUnknown_08375A34
 gUnknown_08375A34: @ 8375A34
@@ -3184,12 +3184,12 @@ gUnknown_08376008: @ 8376008
 
 	.global gUnknown_08376010
 gUnknown_08376010: @ 8376010
-	.4byte 0x080573d1
-	.4byte 0x080573e5
-	.4byte 0x080573bd
-	.4byte 0x08056f39
-	.4byte 0x08057525
-	.4byte 0x08056d9d
+	.4byte MetatileBehavior_IsTallGrass
+	.4byte MetatileBehavior_IsLongGrass
+	.4byte MetatileBehavior_IsPuddle
+	.4byte MetatileBehavior_IsSurfableWaterOrUnderwater
+	.4byte MetatileBehavior_IsShallowFlowingWater
+	.4byte sub_8056D9C
 
 	.global gUnknown_08376028
 gUnknown_08376028: @ 8376028
@@ -3197,10 +3197,10 @@ gUnknown_08376028: @ 8376028
 
 	.global gUnknown_08376040
 gUnknown_08376040: @ 8376040
-	.4byte 0x08056e01
-	.4byte 0x08056ded
-	.4byte 0x08056dd9
-	.4byte 0x08056dc5
+	.4byte MetatileBehavior_IsJumpSouth
+	.4byte MetatileBehavior_IsJumpNorth
+	.4byte MetatileBehavior_IsJumpWest
+	.4byte MetatileBehavior_IsJumpEast
 
 	.global gUnknown_08376050
 gUnknown_08376050: @ 8376050
@@ -3219,9 +3219,9 @@ gUnknown_08376070: @ 8376070
 
 	.global gUnknown_08376080
 gUnknown_08376080: @ 8376080
-	.4byte 0x08063ff9
-	.4byte 0x08063ffd
-	.4byte 0x0806404d
+	.4byte nullsub_50
+	.4byte DoTracksGroundEffect_Footprints
+	.4byte DoTracksGroundEffect_BikeTireTracks
 
 	.global gUnknown_0837608C
 gUnknown_0837608C: @ 837608C
@@ -3233,62 +3233,62 @@ gUnknown_08376090: @ 8376090
 
 	.global gUnknown_083760A0
 gUnknown_083760A0: @ 83760A0
-	.4byte 0x08063e49
-	.4byte 0x08063e95
-	.4byte 0x08063ee1
-	.4byte 0x08063f2d
-	.4byte 0x08063f79
-	.4byte 0x08063f85
-	.4byte 0x08063f91
-	.4byte 0x08063fa1
-	.4byte 0x08063fcd
-	.4byte 0x0806409d
-	.4byte 0x080640a9
-	.4byte 0x080640b9
-	.4byte 0x080640c9
-	.4byte 0x08064121
-	.4byte 0x08064149
-	.4byte 0x08064179
-	.4byte 0x080641a9
-	.4byte 0x080641d9
-	.4byte 0x080641e9
-	.4byte 0x080641f9
-	.4byte 0x0806454d
-	.4byte 0x0806454d
-	.4byte 0x0806454d
-	.4byte 0x0806454d
-	.4byte 0x0806454d
-	.4byte 0x0806454d
-	.4byte 0x0806454d
-	.4byte 0x0806454d
-	.4byte 0x0806454d
-	.4byte 0x0806454d
-	.4byte 0x0806454d
-	.4byte 0x0806454d
-	.4byte 0x0806454d
-	.4byte 0x0806454d
-	.4byte 0x0806454d
-	.4byte 0x0806454d
-	.4byte 0x0806456d
-	.4byte 0x0806456d
-	.4byte 0x0806456d
-	.4byte 0x0806456d
-	.4byte 0x0806456d
-	.4byte 0x0806456d
-	.4byte 0x0806456d
-	.4byte 0x0806456d
-	.4byte 0x0806456d
-	.4byte 0x08064591
-	.4byte 0x08064591
-	.4byte 0x0806456d
-	.4byte 0x08064591
-	.4byte 0x08064591
-	.4byte 0x080645b9
-	.4byte 0x080645b9
-	.4byte 0x080645b9
-	.4byte 0x080645b9
-	.4byte 0x080645dd
-	.4byte 0x080645dd
+	.4byte GroundEffect_SpawnOnTallGrass
+	.4byte sub_8063E94
+	.4byte sub_8063EE0
+	.4byte sub_8063F2C
+	.4byte GroundEffect_WaterReflection
+	.4byte GroundEffect_IceReflection
+	.4byte GroundEffect_FlowingWater
+	.4byte sub_8063FA0
+	.4byte sub_8063FCC
+	.4byte GroundEffect_Ripple
+	.4byte GroundEffect_StepOnPuddle
+	.4byte GroundEffect_SandHeap
+	.4byte GroundEffect_JumpOnTallGrass
+	.4byte GroundEffect_JumpOnLongGrass
+	.4byte GroundEffect_JumpOnShallowWater
+	.4byte GroundEffect_JumpOnWater
+	.4byte GroundEffect_JumpLandingDust
+	.4byte GroundEffect_ShortGrass
+	.4byte GroundEffect_HotSprings
+	.4byte GroundEffect_Seaweed
+	.4byte little_step
+	.4byte little_step
+	.4byte little_step
+	.4byte little_step
+	.4byte little_step
+	.4byte little_step
+	.4byte little_step
+	.4byte little_step
+	.4byte little_step
+	.4byte little_step
+	.4byte little_step
+	.4byte little_step
+	.4byte little_step
+	.4byte little_step
+	.4byte little_step
+	.4byte little_step
+	.4byte sub_806456C
+	.4byte sub_806456C
+	.4byte sub_806456C
+	.4byte sub_806456C
+	.4byte sub_806456C
+	.4byte sub_806456C
+	.4byte sub_806456C
+	.4byte sub_806456C
+	.4byte sub_806456C
+	.4byte sub_8064590
+	.4byte sub_8064590
+	.4byte sub_806456C
+	.4byte sub_8064590
+	.4byte sub_8064590
+	.4byte sub_80645B8
+	.4byte sub_80645B8
+	.4byte sub_80645B8
+	.4byte sub_80645B8
+	.4byte sub_80645DC
+	.4byte sub_80645DC
 
 	.global gUnknown_08376180
 gUnknown_08376180: @ 8376180
@@ -3398,14 +3398,14 @@ gUnknown_083762FC: @ 83762FC
 
 	.global gUnknown_08376364
 gUnknown_08376364: @ 8376364
-	.4byte 0x080695dd
-	.4byte 0x08069f65
-	.4byte 0x08069aa1
-	.4byte 0x08069865
-	.4byte 0x08069dd5
-	.4byte 0x080c7701
-	.4byte 0x080bcf1d
-	.4byte 0x0806a07d
+	.4byte nullsub_51
+	.4byte sub_8069F64
+	.4byte sub_8069AA0
+	.4byte sub_8069864
+	.4byte sub_8069DD4
+	.4byte sub_80C7700
+	.4byte sub_80BCF1C
+	.4byte sub_806A07C
 
 	.global gUnknown_08376384
 gUnknown_08376384: @ 8376384
@@ -3567,25 +3567,25 @@ gUnknown_08376D1C: @ 8376D1C
 	.global gUnknown_08376D24
 gUnknown_08376D24: @ 8376D24
 	.4byte SystemText_Pokedex
-	.4byte 0x08071419
+	.4byte StartMenu_Pokedex
 	.4byte SystemText_Pokemon
-	.4byte 0x0807144d
+	.4byte sub_807144C
 	.4byte SystemText_BAG
-	.4byte 0x08071479
+	.4byte sub_8071478
 	.4byte SystemText_Pokenav
-	.4byte 0x080714a5
+	.4byte sub_80714A4
 	.4byte SystemText_Player
-	.4byte 0x080714d1
+	.4byte sub_80714D0
 	.4byte SystemText_Save
-	.4byte 0x080714fd
+	.4byte sub_80714FC
 	.4byte SystemText_Option
-	.4byte 0x08071519
+	.4byte sub_8071518
 	.4byte SystemText_Exit
-	.4byte 0x08071555
+	.4byte sub_8071554
 	.4byte SystemText_Retire
-	.4byte 0x08071561
+	.4byte sub_8071560
 	.4byte SystemText_Player @ duplicate?
-	.4byte 0x08071571
+	.4byte sub_8071570
 
 	.global gUnknown_08376D74
 gUnknown_08376D74: @ 8376D74
@@ -3871,54 +3871,54 @@ gUnknown_0837F374: @ 837F374
 
 	.global gUnknown_0837F4B8
 gUnknown_0837F4B8: @ 837F4B8
-	.4byte 0x08075a11
-	.4byte 0x08075a79
-	.4byte 0x08075ac5
-	.4byte 0x08075bb9
-	.4byte 0x08075c35
-	.4byte 0x08075c75
-	.4byte 0x08075ca9
-	.4byte 0x08075cad
-	.4byte 0x08075cb1
-	.4byte 0x08075db9
-	.4byte 0x08075de1
-	.4byte 0x0807665d
-	.4byte 0x08076a3d
-	.4byte 0x08076aa1
-	.4byte 0x08076abd
-	.4byte 0x08076af1
-	.4byte 0x08076b05
-	.4byte 0x08076b39
-	.4byte 0x08076b79
-	.4byte 0x08076bbd
-	.4byte 0x08076c09
-	.4byte 0x08076ecd
-	.4byte 0x08076f11
-	.4byte 0x08076f45
-	.4byte 0x08076f79
-	.4byte 0x0807716d
-	.4byte 0x080771a5
-	.4byte 0x080771d1
-	.4byte 0x08077475
-	.4byte 0x08077559
-	.4byte 0x08076a79
-	.4byte 0x08077611
-	.4byte 0x08077685
-	.4byte 0x08077709
-	.4byte 0x080767c5
-	.4byte 0x080768d1
-	.4byte 0x0807775d
-	.4byte 0x08076c4d
-	.4byte 0x08077321
-	.4byte 0x080773b5
-	.4byte 0x0807779d
-	.4byte 0x08077809
-	.4byte 0x0807784d
-	.4byte 0x080778d1
-	.4byte 0x0807790d
-	.4byte 0x0807794d
-	.4byte 0x080779fd
-	.4byte 0x08077a95
+	.4byte ma00_load_graphics
+	.4byte ma01_080728D0
+	.4byte ma02_instanciate_template
+	.4byte sub_8075BB8
+	.4byte ma04_wait_countdown
+	.4byte sub_8075C74
+	.4byte nullsub_53
+	.4byte nullsub_88
+	.4byte sub_8075CB0
+	.4byte ma09_play_sound
+	.4byte sub_8075DE0
+	.4byte ma0B_0807324C
+	.4byte sub_8076A3C
+	.4byte sub_8076AA0
+	.4byte ma0E_call
+	.4byte sub_8076AF0
+	.4byte ma10_080736AC
+	.4byte ma11_if_else
+	.4byte ma12_cond_if
+	.4byte sub_8076BBC
+	.4byte ma14_load_background
+	.4byte ma15_load_battle_screen_elements
+	.4byte ma16_wait_for_battle_screen_elements_s2
+	.4byte sub_8076F44
+	.4byte ma18_load_background_probably
+	.4byte ma19_08073BC8
+	.4byte ma1A_8073C00
+	.4byte ma1B_8073C2C
+	.4byte ma1C_8073ED0
+	.4byte ma1D_08073FB4
+	.4byte sub_8076A78
+	.4byte sub_8077610
+	.4byte ma20_wait_for_something
+	.4byte ma21_08074164
+	.4byte sub_80767C4
+	.4byte ma23_8073484
+	.4byte sub_807775C
+	.4byte sub_8076C4C
+	.4byte sub_8077320
+	.4byte sub_80773B4
+	.4byte sub_807779C
+	.4byte sub_8077808
+	.4byte sub_807784C
+	.4byte ma2B_make_side_invisible
+	.4byte ma2C_make_side_visible
+	.4byte sub_807794C
+	.4byte sub_80779FC
+	.4byte ma2F_stop_music
 
 	.global gUnknown_0837F578
 gUnknown_0837F578: @ 837F578
@@ -4018,73 +4018,73 @@ gUnknown_08396FC4: @ 8396FC4
 
 	.global gUnknown_08396FC8
 gUnknown_08396FC8: @ 8396FC8
-	.4byte 0x0807cae9
-	.4byte 0x0807cb09
-	.4byte 0x0807cae9
-	.4byte 0x0807cb0d
-	.4byte 0x0807de79
-	.4byte 0x0807def5
-	.4byte 0x0807dec5
-	.4byte 0x0807df55
-	.4byte 0x0807df9d
-	.4byte 0x0807dfcd
-	.4byte 0x0807dfc1
-	.4byte 0x0807dfd1
-	.4byte 0x0807e365
-	.4byte 0x0807e401
-	.4byte 0x0807e3d1
-	.4byte 0x0807e461
-	.4byte 0x0807e9c9
-	.4byte 0x0807ea85
-	.4byte 0x0807ea19
-	.4byte 0x0807eac1
-	.4byte 0x0807ee81
-	.4byte 0x0807efc1
-	.4byte 0x0807eef5
-	.4byte 0x0807f34d
-	.4byte 0x0807f49d
-	.4byte 0x0807f52d
-	.4byte 0x0807f4fd
-	.4byte 0x0807f5ed
-	.4byte 0x0807f7f9
-	.4byte 0x0807f889
-	.4byte 0x0807f859
-	.4byte 0x0807f935
-	.4byte 0x0807fe9d
-	.4byte 0x0807ff4d
-	.4byte 0x0807ff1d
-	.4byte 0x0807ffc9
-	.4byte 0x0807fb25
-	.4byte 0x0807fbd9
-	.4byte 0x0807fba9
-	.4byte 0x0807fc3d
-	.4byte 0x0807f49d
-	.4byte 0x0807f52d
-	.4byte 0x0807f4fd
-	.4byte 0x0807f5ed
-	.4byte 0x08080431
-	.4byte 0x0808046d
-	.4byte 0x08080461
-	.4byte 0x08080471
-	.4byte 0x0807e111
-	.4byte 0x0807e175
-	.4byte 0x0807e145
-	.4byte 0x0807e259
-	.4byte 0x0807ef25
-	.4byte 0x0807efc1
-	.4byte 0x0807ef91
-	.4byte 0x0807f34d
-	.4byte 0x08080475
-	.4byte 0x080804f9
-	.4byte 0x080804c9
-	.4byte 0x0808056d
+	.4byte sub_807CAE8
+	.4byte nullsub_38
+	.4byte sub_807CAE8
+	.4byte sub_807CB0C
+	.4byte sub_807DE78
+	.4byte sub_807DEF4
+	.4byte sub_807DEC4
+	.4byte sub_807DF54
+	.4byte sub_807DF9C
+	.4byte nullsub_55
+	.4byte sub_807DFC0
+	.4byte sub_807DFD0
+	.4byte sub_807E364
+	.4byte sub_807E400
+	.4byte sub_807E3D0
+	.4byte sub_807E460
+	.4byte sub_807E9C8
+	.4byte snowflakes_progress2
+	.4byte sub_807EA18
+	.4byte sub_807EAC0
+	.4byte sub_807EE80
+	.4byte sub_807EFC0
+	.4byte sub_807EEF4
+	.4byte sub_807F34C
+	.4byte sub_807F49C
+	.4byte sub_807F52C
+	.4byte sub_807F4FC
+	.4byte sub_807F5EC
+	.4byte sub_807F7F8
+	.4byte sub_807F888
+	.4byte sub_807F858
+	.4byte sub_807F934
+	.4byte sub_807FE9C
+	.4byte sub_807FF4C
+	.4byte sub_807FF1C
+	.4byte sub_807FFC8
+	.4byte sub_807FB24
+	.4byte sub_807FBD8
+	.4byte sub_807FBA8
+	.4byte sub_807FC3C
+	.4byte sub_807F49C
+	.4byte sub_807F52C
+	.4byte sub_807F4FC
+	.4byte sub_807F5EC
+	.4byte sub_8080430
+	.4byte nullsub_56
+	.4byte sub_8080460
+	.4byte sub_8080470
+	.4byte sub_807E110
+	.4byte sub_807E174
+	.4byte sub_807E144
+	.4byte sub_807E258
+	.4byte sub_807EF24
+	.4byte sub_807EFC0
+	.4byte sub_807EF90
+	.4byte sub_807F34C
+	.4byte sub_8080474
+	.4byte sub_80804F8
+	.4byte sub_80804C8
+	.4byte sub_808056C
 
 	.global gUnknown_083970B8
 gUnknown_083970B8: @ 83970B8
-	.4byte 0x0807cc25
-	.4byte 0x0807ccad
-	.4byte 0x0807ceb9
-	.4byte 0x0807ceb9
+	.4byte sub_807CC24
+	.4byte sub_807CCAC
+	.4byte nullsub_39
+	.4byte nullsub_39
 
 	.global gUnknown_083970C8
 gUnknown_083970C8: @ 83970C8
@@ -4295,25 +4295,25 @@ gUnknown_0839B2C0: @ 839B2C0
 
 	.global gUnknown_0839B488
 gUnknown_0839B488: @ 839B488
-	.4byte 0x08084109
-	.4byte 0x0808414d
-	.4byte 0x08084191
-	.4byte 0x080841d5
+	.4byte IsTrainerInRangeSouth
+	.4byte IsTrainerInRangeNorth
+	.4byte IsTrainerInRangeWest
+	.4byte IsTrainerInRangeEast
 
 	.global gUnknown_0839B498
 gUnknown_0839B498: @ 839B498
-	.4byte 0x08084395
-	.4byte 0x08084399
-	.4byte 0x080843dd
-	.4byte 0x0808441d
-	.4byte 0x08084479
-	.4byte 0x08084535
-	.4byte 0x08084579
-	.4byte 0x080845ad
-	.4byte 0x080845c9
-	.4byte 0x080845fd
-	.4byte 0x08084655
-	.4byte 0x080846c9
+	.4byte sub_8084394
+	.4byte sub_8084398
+	.4byte sub_80843DC
+	.4byte sub_808441C
+	.4byte sub_8084478
+	.4byte sub_8084534
+	.4byte sub_8084578
+	.4byte sub_80845AC
+	.4byte sub_80845C8
+	.4byte sub_80845FC
+	.4byte sub_8084654
+	.4byte sub_80846C8
 
 	.global gUnknown_0839B4C8
 gUnknown_0839B4C8: @ 839B4C8
@@ -4374,14 +4374,14 @@ gUnknown_0839EE54: @ 839EE54
 
 	.global gUnknown_0839F0D4
 gUnknown_0839F0D4: @ 839F0D4
-	.4byte 0x080856b1
-	.4byte 0x080856c5
-	.4byte 0x080856d9
-	.4byte 0x080856ed
-	.4byte 0x08085701
-	.4byte 0x08085705
-	.4byte 0x0808572d
-	.4byte 0x08085751
+	.4byte FieldEffectCmd_loadtiles
+	.4byte FieldEffectCmd_loadfadedpal
+	.4byte FieldEffectCmd_loadpal
+	.4byte FieldEffectCmd_callnative
+	.4byte sub_8085700
+	.4byte FieldEffectCmd_loadgfx_callnative
+	.4byte FieldEffectCmd_loadtiles_callnative
+	.4byte FieldEffectCmd_loadfadedpal_callnative
 
 	.global gUnknown_0839F0F4
 gUnknown_0839F0F4: @ 839F0F4
@@ -4433,28 +4433,28 @@ gUnknown_0839F250: @ 839F250
 
 	.global gUnknown_0839F268
 gUnknown_0839F268: @ 839F268
-	.4byte 0x08085df5
-	.4byte 0x08085e31
-	.4byte 0x08085e6d
-	.4byte 0x08085e95
+	.4byte sub_8085DF4
+	.4byte sub_8085E30
+	.4byte sub_8085E6C
+	.4byte sub_8085E94
 
 	.global gUnknown_0839F278
 gUnknown_0839F278: @ 839F278
-	.4byte 0x08085f41
-	.4byte 0x08085fb5
-	.4byte 0x08085fe5
-	.4byte 0x0808600d
+	.4byte sub_8085F40
+	.4byte sub_8085FB4
+	.4byte sub_8085FE4
+	.4byte sub_808600C
 
 	.global gUnknown_0839F288
 gUnknown_0839F288: @ 839F288
-	.4byte 0x080860bd
-	.4byte 0x08086155
-	.4byte 0x08086189
-	.4byte 0x080862c9
-	.4byte 0x080863bd
-	.4byte 0x080863d9
-	.4byte 0x080863e1
-	.4byte 0x08086405
+	.4byte sub_80860BC
+	.4byte sub_8086154
+	.4byte sub_8086188
+	.4byte sub_80862C8
+	.4byte sub_80863BC
+	.4byte sub_80863D8
+	.4byte sub_80863E0
+	.4byte nullsub_57
 
 	.global gUnknown_0839F2A8
 gUnknown_0839F2A8: @ 839F2A8
@@ -4474,75 +4474,75 @@ gUnknown_0839F2C8: @ 839F2C8
 
 	.global gUnknown_0839F2CC
 gUnknown_0839F2CC: @ 839F2CC
-	.4byte 0x080867ad
-	.4byte 0x08086855
-	.4byte 0x08086871
-	.4byte 0x080868e5
-	.4byte 0x0808699d
-	.4byte 0x080869b9
-	.4byte 0x080869f9
+	.4byte sub_80867AC
+	.4byte sub_8086854
+	.4byte sub_8086870
+	.4byte sub_80868E4
+	.4byte sub_808699C
+	.4byte sub_80869B8
+	.4byte sub_80869F8
 
 	.global gUnknown_0839F2E8
 gUnknown_0839F2E8: @ 839F2E8
-	.4byte 0x08086aa1
-	.4byte 0x08086ac1
-	.4byte 0x08086b31
-	.4byte 0x08086b55
-	.4byte 0x08086b65
-	.4byte 0x08086b89
+	.4byte sub_8086AA0
+	.4byte sub_8086AC0
+	.4byte sub_8086B30
+	.4byte sub_8086B54
+	.4byte sub_8086B64
+	.4byte sub_8086B88
 
 	.global gUnknown_0839F300
 gUnknown_0839F300: @ 839F300
-	.4byte 0x08086cf5
-	.4byte 0x08086d71
-	.4byte 0x08086db1
-	.4byte 0x08086e11
-	.4byte 0x08086e51
-	.4byte 0x08086eb1
-	.4byte 0x08086ed5
+	.4byte sub_8086CF4
+	.4byte sub_8086D70
+	.4byte sub_8086DB0
+	.4byte sub_8086E10
+	.4byte sub_8086E50
+	.4byte sub_8086EB0
+	.4byte sub_8086ED4
 
 	.global gUnknown_0839F31C
 gUnknown_0839F31C: @ 839F31C
-	.4byte 0x08086fb1
-	.4byte 0x08086fd1
-	.4byte 0x0808700d
-	.4byte 0x08087031
-	.4byte 0x08087059
+	.4byte sub_8086FB0
+	.4byte waterfall_1_do_anim_probably
+	.4byte waterfall_2_wait_anim_finish_probably
+	.4byte sub_8087030
+	.4byte sub_8087058
 
 	.global gUnknown_0839F330
 gUnknown_0839F330: @ 839F330
-	.4byte 0x08087125
-	.4byte 0x08087139
-	.4byte 0x08087161
+	.4byte sub_8087124
+	.4byte dive_2_unknown
+	.4byte dive_3_unknown
 
 	.global gUnknown_0839F33C
 gUnknown_0839F33C: @ 839F33C
-	.4byte 0x0808722d
-	.4byte 0x08087265
-	.4byte 0x08087299
-	.4byte 0x080872e5
-	.4byte 0x080873d9
-	.4byte 0x080873f5
+	.4byte sub_808722C
+	.4byte sub_8087264
+	.4byte sub_8087298
+	.4byte sub_80872E4
+	.4byte sub_80873D8
+	.4byte sub_80873F4
 
 	.global gUnknown_0839F354
 gUnknown_0839F354: @ 839F354
-	.4byte 0x080874cd
-	.4byte 0x080874fd
-	.4byte 0x08087549
-	.4byte 0x0808759d
+	.4byte sub_80874CC
+	.4byte sub_80874FC
+	.4byte sub_8087548
+	.4byte sub_808759C
 
 	.global gUnknown_0839F364
 gUnknown_0839F364: @ 839F364
-	.4byte 0x080876c9
-	.4byte 0x080876f9
-	.4byte 0x08087775
-	.4byte 0x080877ad
-	.4byte 0x080877d5
+	.4byte sub_80876C8
+	.4byte sub_80876F8
+	.4byte sub_8087774
+	.4byte sub_80877AC
+	.4byte sub_80877D4
 
 	.global gUnknown_0839F378
 gUnknown_0839F378: @ 839F378
-	.4byte 0x080878f5
-	.4byte 0x08087915
+	.4byte sub_80878F4
+	.4byte sub_8087914
 
 	.global gUnknown_0839F380
 gUnknown_0839F380: @ 839F380
@@ -4550,62 +4550,62 @@ gUnknown_0839F380: @ 839F380
 
 	.global gUnknown_0839F388
 gUnknown_0839F388: @ 839F388
-	.4byte 0x08087aa5
-	.4byte 0x08087ac9
+	.4byte sub_8087AA4
+	.4byte sub_8087AC8
 
 	.global gUnknown_0839F390
 gUnknown_0839F390: @ 839F390
-	.4byte 0x08087bed
-	.4byte 0x08087c15
-	.4byte 0x08087ca5
-	.4byte 0x08087d79
+	.4byte sub_8087BEC
+	.4byte sub_8087C14
+	.4byte sub_8087CA4
+	.4byte sub_8087D78
 
 	.global gUnknown_0839F3A0
 gUnknown_0839F3A0: @ 839F3A0
-	.4byte 0x08087e4d
-	.4byte 0x08087ed9
-	.4byte 0x08087fdd
+	.4byte sub_8087E4C
+	.4byte sub_8087ED8
+	.4byte sub_8087FDC
 
 	.global gUnknown_0839F3AC
 gUnknown_0839F3AC: @ 839F3AC
-	.4byte 0x08088151
-	.4byte 0x080881c1
-	.4byte 0x08088229
-	.4byte 0x080882b5
-	.4byte 0x080882e5
-	.4byte 0x08088339
-	.4byte 0x08088381
+	.4byte sub_8088150
+	.4byte sub_80881C0
+	.4byte sub_8088228
+	.4byte sub_80882B4
+	.4byte sub_80882E4
+	.4byte sub_8088338
+	.4byte sub_8088380
 
 	.global gUnknown_0839F3C8
 gUnknown_0839F3C8: @ 839F3C8
-	.4byte 0x080884ad
-	.4byte 0x080884e9
-	.4byte 0x08088555
-	.4byte 0x080885a9
-	.4byte 0x080885d9
-	.4byte 0x0808860d
-	.4byte 0x0808862d
+	.4byte sub_80884AC
+	.4byte sub_80884E8
+	.4byte sub_8088554
+	.4byte sub_80885A8
+	.4byte sub_80885D8
+	.4byte sub_808860C
+	.4byte sub_808862C
 
 	.global gUnknown_0839F3E4
 gUnknown_0839F3E4: @ 839F3E4
-	.4byte 0x08088985
-	.4byte 0x080889e5
-	.4byte 0x08088a31
-	.4byte 0x08088a79
-	.4byte 0x08088af5
+	.4byte sub_8088984
+	.4byte sub_80889E4
+	.4byte sub_8088A30
+	.4byte sub_8088A78
+	.4byte sub_8088AF4
 
 	.global gUnknown_0839F3F8
 gUnknown_0839F3F8: @ 839F3F8
 Unknown_839F3F8:
-	.4byte 0x08088ca1
-	.4byte 0x08088cf9
-	.4byte 0x08088d3d
-	.4byte 0x08088d95
-	.4byte 0x08088dd9
-	.4byte 0x08088e2d
-	.4byte 0x08088eb5
-	.4byte 0x08088f11
-	.4byte 0x08088f31
+	.4byte sub_8088CA0
+	.4byte sub_8088CF8
+	.4byte sub_8088D3C
+	.4byte sub_8088D94
+	.4byte sub_8088DD8
+	.4byte sub_8088E2C
+	.4byte sub_8088EB4
+	.4byte sub_8088F10
+	.4byte sub_8088F30
 Unknown_839F41C:
 	.incbin "baserom.gba", 0x0039f41c, 0x18
 Unknown_839F434:
@@ -4618,13 +4618,13 @@ gUnknown_0839F44C: @ 839F44C
 
 	.global gUnknown_0839F454
 gUnknown_0839F454: @ 839F454
-	.4byte 0x080892a1
-	.4byte 0x08089355
-	.4byte 0x080893c1
-	.4byte 0x08089415
-	.4byte 0x0808948d
-	.4byte 0x080894c5
-	.4byte 0x080894fd
+	.4byte sub_80892A0
+	.4byte sub_8089354
+	.4byte sub_80893C0
+	.4byte sub_8089414
+	.4byte sub_808948C
+	.4byte sub_80894C4
+	.4byte fishE
 
 	.global gUnknown_0839F470
 gUnknown_0839F470: @ 839F470
@@ -4633,53 +4633,53 @@ gUnknown_0839F470: @ 839F470
 	.global gUnknown_0839F494
 gUnknown_0839F494: @ 839F494
 	.4byte OtherText_Summary
-	.4byte 0x08089fcd
+	.4byte sub_8089FCC
 	.4byte OtherText_Switch2
-	.4byte 0x0808a02d
+	.4byte sub_808A02C
 	.4byte OtherText_Item
-	.4byte 0x0808a141
+	.4byte sub_808A140
 	.4byte OtherText_Cancel2
-	.4byte 0x0808a919
+	.4byte sub_808A918
 	.4byte OtherText_Give2
-	.4byte 0x0808a631
+	.4byte sub_808A630
 	.4byte OtherText_Take2
-	.4byte 0x0808a689
+	.4byte sub_808A688
 	.4byte OtherText_Take
-	.4byte 0x0808a6b9
+	.4byte sub_808A6B8
 	.4byte OtherText_Mail
-	.4byte 0x0808a6e9
+	.4byte sub_808A6E8
 	.4byte OtherText_Read2
-	.4byte 0x0808a811
+	.4byte sub_808A810
 	.4byte OtherText_Cancel2
-	.4byte 0x0808a939
+	.4byte sub_808A938
 	.4byte gMoveNames + 13 * MOVE_CUT
-	.4byte 0x0808a985
+	.4byte sub_808A984
 	.4byte gMoveNames + 13 * MOVE_FLASH
-	.4byte 0x0808a985
+	.4byte sub_808A984
 	.4byte gMoveNames + 13 * MOVE_ROCK_SMASH
-	.4byte 0x0808a985
+	.4byte sub_808A984
 	.4byte gMoveNames + 13 * MOVE_STRENGTH
-	.4byte 0x0808a985
+	.4byte sub_808A984
 	.4byte gMoveNames + 13 * MOVE_SURF
-	.4byte 0x0808a985
+	.4byte sub_808A984
 	.4byte gMoveNames + 13 * MOVE_FLY
-	.4byte 0x0808a985
+	.4byte sub_808A984
 	.4byte gMoveNames + 13 * MOVE_DIVE
-	.4byte 0x0808a985
+	.4byte sub_808A984
 	.4byte gMoveNames + 13 * MOVE_WATERFALL
-	.4byte 0x0808a985
+	.4byte sub_808A984
 	.4byte gMoveNames + 13 * MOVE_TELEPORT
-	.4byte 0x0808a985
+	.4byte sub_808A984
 	.4byte gMoveNames + 13 * MOVE_DIG
-	.4byte 0x0808a985
+	.4byte sub_808A984
 	.4byte gMoveNames + 13 * MOVE_SECRET_POWER
-	.4byte 0x0808a985
+	.4byte sub_808A984
 	.4byte gMoveNames + 13 * MOVE_MILK_DRINK
-	.4byte 0x0808a985
+	.4byte sub_808A984
 	.4byte gMoveNames + 13 * MOVE_SOFT_BOILED
-	.4byte 0x0808a985
+	.4byte sub_808A984
 	.4byte gMoveNames + 13 * MOVE_SWEET_SCENT
-	.4byte 0x0808a985
+	.4byte sub_808A984
 
 	.global gUnknown_0839F554
 gUnknown_0839F554: @ 839F554
@@ -4905,21 +4905,21 @@ gUnknown_083B5AB8: @ 83B5AB8
 
 	.global gUnknown_083B5EBC
 gUnknown_083B5EBC: @ 83B5EBC
-	.4byte 0x08093865
-	.4byte 0x080938a9
-	.4byte 0x080938cd
-	.4byte 0x08093919
-	.4byte 0x08093939
-	.4byte 0x08093955
-	.4byte 0x08093981
+	.4byte sub_8093864
+	.4byte sub_80938A8
+	.4byte rfu_NI_stopReceivingData
+	.4byte sub_8093918
+	.4byte sub_8093938
+	.4byte sub_8093954
+	.4byte sub_8093980
 
 	.global gUnknown_083B5ED8
 gUnknown_083B5ED8: @ 83B5ED8
-	.4byte 0x08093aa1
-	.4byte 0x08093af1
-	.4byte 0x08093c0d
-	.4byte 0x08093c39
-	.4byte 0x08093d51
+	.4byte sub_8093AA0
+	.4byte sub_8093AF0
+	.4byte sub_8093C0C
+	.4byte sub_8093C38
+	.4byte sub_8093D50
 
 	.global gUnknown_083B5EEC
 gUnknown_083B5EEC: @ 83B5EEC
@@ -5076,9 +5076,9 @@ gUnknown_083BB2F0: @ 83BB2F0
 
 	.global gUnknown_083BBBC8
 gUnknown_083BBBC8: @ 83BBBC8
-	.4byte 0x0809b151
-	.4byte 0x0809b1d9
-	.4byte 0x0809b24d
+	.4byte sub_809B150
+	.4byte sub_809B1D8
+	.4byte sub_809B24C
 
 	.global gUnknown_083BBBD4
 gUnknown_083BBBD4: @ 83BBBD4
@@ -5238,22 +5238,22 @@ gUnknown_083C157E: @ 83C157E
 
 	.global gUnknown_083C1580
 gUnknown_083C1580: @ 83C1580
-	.4byte 0x0809fc0d
-	.4byte 0x0809feb9
+	.4byte sub_809FC0C
+	.4byte sub_809FEB8
 
 	.global gUnknown_083C1588
 gUnknown_083C1588: @ 83C1588
-	.4byte 0x0809f63d
-	.4byte 0x0809f651
-	.4byte 0x0809f665
-	.4byte 0x0809f665
+	.4byte sub_809F63C
+	.4byte sub_809F650
+	.4byte sub_809F664
+	.4byte sub_809F664
 
 	.global gUnknown_083C1598
 gUnknown_083C1598: @ 83C1598
-	.4byte 0x0809fe6d
-	.4byte 0x080a0091
-	.4byte 0x080a015d
-	.4byte 0x080a015d
+	.4byte sub_809FE6C
+	.4byte sub_80A0090
+	.4byte sub_80A015C
+	.4byte sub_80A015C
 
 	.global gUnknown_083C15A8
 gUnknown_083C15A8: @ 83C15A8
@@ -5302,30 +5302,30 @@ gUnknown_083C16B8: @ 83C16B8
 
 	.global gUnknown_083C16BC
 gUnknown_083C16BC: @ 83C16BC
-	.4byte 0x080a59d1
-	.4byte 0x080a599d
-	.4byte 0x080a7025
-	.4byte 0x080a70d9
-	.4byte 0x080a6215
-	.4byte 0x080a61ed
-	.4byte 0x080a6355
-	.4byte 0x080a631d
-	.4byte 0x080a6919
-	.4byte 0x080a68f1
-	.4byte 0x080a59d1
-	.4byte 0x080a69b9
-	.4byte 0x080a6c6d
-	.4byte 0x080a6a4d
+	.4byte sub_80A59D0
+	.4byte sub_80A599C
+	.4byte sub_80A7024
+	.4byte sub_80A70D8
+	.4byte sub_80A6214
+	.4byte sub_80A61EC
+	.4byte sub_80A6354
+	.4byte sub_80A631C
+	.4byte sub_80A6918
+	.4byte sub_80A68F0
+	.4byte sub_80A59D0
+	.4byte sub_80A69B8
+	.4byte sub_80A6C6C
+	.4byte sub_80A6A4C
 
 	.global gUnknown_083C16F4
 gUnknown_083C16F4: @ 83C16F4
-	.4byte 0x080a5e61
-	.4byte 0x080a5e91
+	.4byte sub_80A5E60
+	.4byte sub_80A5E90
 
 	.global gUnknown_083C16FC
 gUnknown_083C16FC: @ 83C16FC
-	.4byte 0x080a65ad
-	.4byte 0x080a6619
+	.4byte sub_80A65AC
+	.4byte sub_80A6618
 
 	.global gUnknown_083C1704
 gUnknown_083C1704: @ 83C1704
@@ -5428,19 +5428,19 @@ gUnknown_083C1F98: @ 83C1F98
 	.global gUnknown_083C91F0
 gUnknown_083C91F0: @ 83C91F0
 	.4byte 0x083c9166
-	.4byte 0x080a9c1d
+	.4byte sub_80A9C1C
 	.4byte 0x083c916e
-	.4byte 0x080a9bbd
+	.4byte sub_80A9BBC
 	.4byte 0x083c9190
-	.4byte 0x080a9c35
+	.4byte sub_80A9C34
 	.4byte 0x083c91a0
-	.4byte 0x080a9c41
+	.4byte sub_80A9C40
 	.4byte 0x083c91b0
-	.4byte 0x080aafdd
+	.4byte sub_80AAFDC
 	.4byte 0x083c91c2
-	.4byte 0x080aafed
+	.4byte sub_80AAFEC
 	.4byte 0x083c91d6
-	.4byte 0x080ab02d
+	.4byte sub_80AB02C
 
 	.global gUnknown_083C9228
 gUnknown_083C9228: @ 83C9228
@@ -5484,24 +5484,24 @@ gUnknown_083C92CC: @ 83C92CC
 
 	.global gUnknown_083C92E4
 gUnknown_083C92E4: @ 83C92E4
-	.4byte 0x080aa8c9
-	.4byte 0x080aa8d9
-	.4byte 0x080aa8e9
-	.4byte 0x080aa8f9
-	.4byte 0x080aac5d
-	.4byte 0x080aac5d
-	.4byte 0x080aa931
-	.4byte 0x080aa975
-	.4byte 0x080aa9b9
-	.4byte 0x080aa9fd
-	.4byte 0x080aaa41
-	.4byte 0x080aaa85
-	.4byte 0x080aaaf1
-	.4byte 0x080aab31
-	.4byte 0x080aab71
-	.4byte 0x080aabb1
-	.4byte 0x080aabf1
-	.4byte 0x080aad45
+	.4byte sub_80AA8C8
+	.4byte sub_80AA8D8
+	.4byte sub_80AA8E8
+	.4byte sub_80AA8F8
+	.4byte sub_80AAC5C
+	.4byte sub_80AAC5C
+	.4byte sub_80AA930
+	.4byte sub_80AA974
+	.4byte sub_80AA9B8
+	.4byte sub_80AA9FC
+	.4byte sub_80AAA40
+	.4byte sub_80AAA84
+	.4byte sub_80AAAF0
+	.4byte sub_80AAB30
+	.4byte sub_80AAB70
+	.4byte sub_80AABB0
+	.4byte sub_80AABF0
+	.4byte sub_80AAD44
 
 	.global gUnknown_083C932C
 gUnknown_083C932C: @ 83C932C
@@ -5717,11 +5717,11 @@ gUnknown_083CC5D0: @ 83CC5D0
 	.global gUnknown_083CC6D0
 gUnknown_083CC6D0: @ 83CC6D0
 	.4byte ContestStatsText_Buy
-	.4byte 0x080b2efd
+	.4byte sub_80B2EFC
 	.4byte ContestStatsText_Sell
-	.4byte 0x080b2f31
+	.4byte sub_80B2F30
 	.4byte ContestStatsText_Quit2
-	.4byte 0x080b2f65
+	.4byte HandleShopMenuQuit
 
 	.global gUnknown_083CC6E8
 gUnknown_083CC6E8: @ 83CC6E8
@@ -5733,8 +5733,8 @@ gUnknown_083CC6EB: @ 83CC6EB
 
 	.global gUnknown_083CC708
 gUnknown_083CC708: @ 83CC708
-	.4byte 0x080b3bf5
-	.4byte 0x080b3d7d
+	.4byte sub_80B3BF4
+	.4byte sub_80B3D7C
 
 	.global gUnknown_083CC710
 gUnknown_083CC710: @ 83CC710
@@ -5788,28 +5788,28 @@ gUnknown_083CE048: @ 83CE048
 
 	.global gUnknown_083CE218
 gUnknown_083CE218: @ 83CE218
-	.4byte 0x080B5EA9
-	.4byte 0x080B5ED1
-	.4byte 0x080B5F01
-	.4byte 0x080B5F11
-	.4byte 0x080B5F39
-	.4byte 0x080B5F71
-	.4byte 0x080B5FED
-	.4byte 0x080B604D
-	.4byte 0x080B606D
-	.4byte 0x080B6095
+	.4byte sub_80B5EA8
+	.4byte sub_80B5ED0
+	.4byte sub_80B5F00
+	.4byte sub_80B5F10
+	.4byte sub_80B5F38
+	.4byte sub_80B5F70
+	.4byte pokemon_store
+	.4byte sub_80B604C
+	.4byte sub_80B606C
+	.4byte sub_80B6094
 
 	.global gUnknown_083CE240
 gUnknown_083CE240: @ 83CE240
-	.4byte 0x080B6109
-	.4byte 0x080B6149
-	.4byte 0x080B6171
-	.4byte 0x080B6195
+	.4byte sub_80B6108
+	.4byte sub_80B6148
+	.4byte sub_80B6170
+	.4byte sub_80B6194
 
 	.global gUnknown_083CE250
 gUnknown_083CE250: @ 83CE250
-	.4byte 0x080B626D
-	.4byte 0x080B6275
+	.4byte sub_80B626C
+	.4byte sub_80B6274
 
 	.global gUnknown_083CE258
 gUnknown_083CE258: @ 83CE258
@@ -5829,10 +5829,10 @@ gUnknown_083CE274: @ 83CE274
 
 	.global gUnknown_083CE27C
 gUnknown_083CE27C: @ 83CE27C
-	.4byte 0x080b6669
-	.4byte 0x080b6681
-	.4byte 0x080b66ed
-	.4byte 0x080b6759
+	.4byte sub_80B6668
+	.4byte sub_80B6680
+	.4byte sub_80B66EC
+	.4byte sub_80B6758
 
 	.global gUnknown_083CE28C
 gUnknown_083CE28C: @ 83CE28C
@@ -5849,10 +5849,10 @@ gUnknown_083CE2AF: @ 83CE2AF
 
 	.global gUnknown_083CE2B4
 gUnknown_083CE2B4: @ 83CE2B4
-	.4byte 0x080b6b5d
-	.4byte 0x080b6b99
-	.4byte 0x080b6b9d
-	.4byte 0x080b6c09
+	.4byte sub_80B6B5C
+	.4byte sub_80B6B98
+	.4byte sub_80B6B9C
+	.4byte sub_80B6C08
 
 	.global gUnknown_083CE2C4
 gUnknown_083CE2C4: @ 83CE2C4
@@ -5872,19 +5872,19 @@ gUnknown_083CE2D8: @ 83CE2D8
 
 	.global gUnknown_083CE2E0
 gUnknown_083CE2E0: @ 83CE2E0
-	.4byte 0x080b6e65
-	.4byte 0x080b6e69
-	.4byte 0x080b6ebd
-	.4byte 0x080b6efd
+	.4byte nullsub_40
+	.4byte sub_80B6E68
+	.4byte sub_80B6EBC
+	.4byte sub_80B6EFC
 
 	.global gUnknown_083CE2F0
 gUnknown_083CE2F0: @ 83CE2F0
-	.4byte 0x080B7661
-	.4byte 0x080B7651
-	.4byte 0x080B7651
-	.4byte 0x080B7671
-	.4byte 0x080B7671
-	.4byte 0x080B7661
+	.4byte sub_80B7660
+	.4byte sub_80B7650
+	.4byte sub_80B7650
+	.4byte sub_80B7670
+	.4byte sub_80B7670
+	.4byte sub_80B7660
 
 	.global gUnknown_083CE308
 gUnknown_083CE308: @ 83CE308
@@ -5892,12 +5892,12 @@ gUnknown_083CE308: @ 83CE308
 
 	.global gUnknown_083CE310
 gUnknown_083CE310: @ 83CE310
-	.4byte 0x080b7845
-	.4byte 0x080b7839
-	.4byte 0x080b7839
-	.4byte 0x080b7851
-	.4byte 0x080b7851
-	.4byte 0x080b7845
+	.4byte sub_80B7844
+	.4byte sub_80B7838
+	.4byte sub_80B7838
+	.4byte sub_80B7850
+	.4byte sub_80B7850
+	.4byte sub_80B7844
 
 	.global gUnknown_083CE328
 gUnknown_083CE328: @ 83CE328
@@ -5916,15 +5916,15 @@ gUnknown_083CE328: @ 83CE328
 
 	.global gUnknown_083CE358
 gUnknown_083CE358: @ 83CE358
-	.4byte 0x080b78f5
-	.4byte 0x080b78f5
-	.4byte 0x080b78f9
-	.4byte 0x080b78f9
+	.4byte nullsub_61
+	.4byte nullsub_61
+	.4byte sub_80B78F8
+	.4byte sub_80B78F8
 
 	.global gUnknown_083CE368
 gUnknown_083CE368: @ 83CE368
-	.4byte 0x080b7921
-	.4byte 0x080b7925
+	.4byte nullsub_62
+	.4byte sub_80B7924
 
 	.global gUnknown_083CE370
 gUnknown_083CE370: @ 83CE370
@@ -6265,14 +6265,14 @@ gUnknown_083D1374: @ 83D1374
 	.global gUnknown_083D13D4
 gUnknown_083D13D4: @ 83D13D4
 	.4byte SecretBaseText_DelRegist
-	.4byte 0x080bca85
+	.4byte sub_80BCA84
 	.4byte UnknownText_Exit
-	.4byte 0x080bcbf9
+	.4byte sub_80BCBF8
 
 	.global gUnknown_083D13E4
 gUnknown_083D13E4: @ 83D13E4
-	.4byte 0x080bcb91
-	.4byte 0x080bcbc1
+	.4byte sub_80BCB90
+	.4byte sub_80BCBC0
 
 	.global gUnknown_083D13EC
 gUnknown_083D13EC: @ 83D13EC
@@ -6660,9 +6660,9 @@ gUnknown_083D61DC: @ 83D61DC
 
 	.global gUnknown_083D61E4
 gUnknown_083D61E4: @ 83D61E4
-	.4byte 0x0808b021
-	.4byte 0x080545e5
-	.4byte 0x0810b96d
+	.4byte sub_808B020
+	.4byte c2_exit_to_overworld_2_switch
+	.4byte sub_810B96C
 
 	.global gUnknown_083D61F0
 gUnknown_083D61F0: @ 83D61F0
@@ -6890,55 +6890,55 @@ gUnknown_083DB568: @ 83DB568
 
 	.global gUnknown_083DB56C
 gUnknown_083DB56C: @ 83DB56C
-	.4byte 0x080e448d
-	.4byte 0x080e448d
-	.4byte 0x080e46cd
-	.4byte 0x080e46cd
-	.4byte 0x080e46cd
-	.4byte 0x080e448d
-	.4byte 0x080e448d
-	.4byte 0x080e448d
-	.4byte 0x080e49c1
-	.4byte 0x080e49c1
+	.4byte task_battle_intro_80BC47C
+	.4byte task_battle_intro_80BC47C
+	.4byte task00_battle_intro_80BC6C8
+	.4byte task00_battle_intro_80BC6C8
+	.4byte task00_battle_intro_80BC6C8
+	.4byte task_battle_intro_80BC47C
+	.4byte task_battle_intro_80BC47C
+	.4byte task_battle_intro_80BC47C
+	.4byte task_battle_intro_anim
+	.4byte task_battle_intro_anim
 
 	.global gUnknown_083DB594
 gUnknown_083DB594: @ 83DB594
-	.4byte 0x080e5169
-	.4byte 0x080e517d
-	.4byte 0x080e51c5
-	.4byte 0x080e5271
+	.4byte sub_80E5168
+	.4byte sub_80E517C
+	.4byte sub_80E51C4
+	.4byte sub_80E5270
 
 	.global gUnknown_083DB5A4
 gUnknown_083DB5A4: @ 83DB5A4
-	.4byte 0x080593ad
-	.4byte 0x080593c5
-	.4byte 0x080593f5
+	.4byte PlayerGoSpeed0
+	.4byte sub_80593C4
+	.4byte sub_80593F4
 
 	.global gUnknown_083DB5B0
 gUnknown_083DB5B0: @ 83DB5B0
-	.4byte 0x080e56f9
-	.4byte 0x080e5709
-	.4byte 0x080e5745
-	.4byte 0x080e57bd
-	.4byte 0x080e57f9
-	.4byte 0x080e5835
-	.4byte 0x080e5871
-	.4byte 0x080e58ad
-	.4byte 0x080e5921
-	.4byte 0x080e5991
-	.4byte 0x080e59a1
-	.4byte 0x080e5a31
-	.4byte 0x080e5ac1
+	.4byte sub_80E56F8
+	.4byte sub_80E5708
+	.4byte sub_80E5744
+	.4byte sub_80E57BC
+	.4byte sub_80E57F8
+	.4byte sub_80E5834
+	.4byte sub_80E5870
+	.4byte sub_80E58AC
+	.4byte sub_80E5920
+	.4byte sub_80E5990
+	.4byte sub_80E59A0
+	.4byte sub_80E5A30
+	.4byte sub_80E5AC0
 
 	.global gUnknown_083DB5E4
 gUnknown_083DB5E4: @ 83DB5E4
-	.4byte 0x080e5341
-	.4byte 0x080e53dd
-	.4byte 0x080e5455
-	.4byte 0x080e54f5
-	.4byte 0x080e559d
-	.4byte 0x080e5679
-	.4byte 0x080e56d5
+	.4byte CheckMovementInputAcroBikeNormal
+	.4byte CheckMovementInputAcroBikeChangingDirection
+	.4byte CheckMovementInputAcroBikeStandingWheelie
+	.4byte CheckMovementInputAcroBikeBunnyHop
+	.4byte CheckMovementInputAcroBikeMovingWheelie
+	.4byte CheckMovementInputAcroBikeUnknownMode5
+	.4byte CheckMovementInputAcroBikeUnknownMode6
 
 	.global gUnknown_083DB600
 gUnknown_083DB600: @ 83DB600
@@ -7780,13 +7780,13 @@ gUnknown_083EC5E4: @ 83EC5E4
 	.global gUnknown_083EC604
 gUnknown_083EC604: @ 83EC604
 	.4byte SecretBaseText_Decorate
-	.4byte 0x080ff161
+	.4byte sub_80FF160
 	.4byte SecretBaseText_PutAway
-	.4byte 0x08100a0d
+	.4byte sub_8100A0C
 	.4byte SecretBaseText_Toss
-	.4byte 0x08101701
+	.4byte sub_8101700
 	.4byte UnknownText_Exit
-	.4byte 0x080fe3c5
+	.4byte gpu_pal_decompress_alloc_tag_and_upload
 
 	.global gUnknown_083EC624
 gUnknown_083EC624: @ 83EC624
@@ -7797,14 +7797,14 @@ gUnknown_083EC624: @ 83EC624
 
 	.global gUnknown_083EC634
 gUnknown_083EC634: @ 83EC634
-	.4byte 0x080ff5bd
-	.4byte 0x080ff059
-	.4byte 0x081017a1
-	.4byte 0x080ff059
-	.4byte 0x081017a1
-	.4byte 0x080ff059
-	.4byte 0x08109d05
-	.4byte 0x080ff059
+	.4byte sub_80FF5BC
+	.4byte sub_80FF058
+	.4byte sub_81017A0
+	.4byte sub_80FF058
+	.4byte sub_81017A0
+	.4byte sub_80FF058
+	.4byte sub_8109D04
+	.4byte sub_80FF058
 
 	.global gUnknown_083EC654
 gUnknown_083EC654: @ 83EC654
@@ -7832,20 +7832,20 @@ gUnknown_083EC954: @ 83EC954
 
 	.global gUnknown_083EC95C
 gUnknown_083EC95C: @ 83EC95C
-	.4byte 0x081000c5
-	.4byte 0x0810065d
+	.4byte sub_81000C4
+	.4byte sub_810065C
 
 	.global gUnknown_083EC964
 gUnknown_083EC964: @ 83EC964
-	.4byte 0x0810026d
-	.4byte 0x0810065d
+	.4byte sub_810026C
+	.4byte sub_810065C
 
 	.global gUnknown_083EC96C
 gUnknown_083EC96C: @ 83EC96C
-	.4byte 0x080ffab1
-	.4byte 0x080ffb09
-	.4byte 0x08100f89
-	.4byte 0x08100fb5
+	.4byte sub_80FFAB0
+	.4byte sub_80FFB08
+	.4byte sub_8100F88
+	.4byte sub_8100FB4
 
 	.global gUnknown_083EC97C
 gUnknown_083EC97C: @ 83EC97C
@@ -7857,8 +7857,8 @@ gUnknown_083EC984: @ 83EC984
 
 	.global gUnknown_083EC9CC
 gUnknown_083EC9CC: @ 83EC9CC
-	.4byte 0x0810153d
-	.4byte 0x08100eed
+	.4byte sub_810153C
+	.4byte sub_8100EEC
 
 	.global gUnknown_083EC9D4
 gUnknown_083EC9D4: @ 83EC9D4
@@ -7882,61 +7882,61 @@ gUnknown_083ECAA0: @ 83ECAA0
 
 	.global gUnknown_083ECAAC
 gUnknown_083ECAAC: @ 83ECAAC
-	.4byte 0x08101d5d
-	.4byte 0x08101d8d
-	.4byte 0x08101db1
-	.4byte 0x08101df5
-	.4byte 0x08101e11
-	.4byte 0x08101e3d
-	.4byte 0x08101f45
-	.4byte 0x08101f61
-	.4byte 0x08101f89
-	.4byte 0x08101fa5
-	.4byte 0x08102009
-	.4byte 0x08102035
-	.4byte 0x08102059
-	.4byte 0x08102091
-	.4byte 0x081020c9
-	.4byte 0x081021e1
-	.4byte 0x081021fd
-	.4byte 0x08102265
-	.4byte 0x081022a1
-	.4byte 0x081022cd
-	.4byte 0x081022f1
-	.4byte 0x08102319
-	.4byte 0x08102345
-	.4byte 0x0810239d
-	.4byte 0x081023b9
-	.4byte 0x081023e1
-	.4byte 0x081023fd
-	.4byte 0x08102425
-	.4byte 0x08102461
+	.4byte sub_8101D5C
+	.4byte sub_8101D8C
+	.4byte sub_8101DB0
+	.4byte sub_8101DF4
+	.4byte sub_8101E10
+	.4byte sub_8101E3C
+	.4byte sub_8101F44
+	.4byte sub_8101F60
+	.4byte sub_8101F88
+	.4byte sub_8101FA4
+	.4byte sub_8102008
+	.4byte sub_8102034
+	.4byte sub_8102058
+	.4byte sub_8102090
+	.4byte sub_81020C8
+	.4byte sub_81021E0
+	.4byte sub_81021FC
+	.4byte sub_8102264
+	.4byte sub_81022A0
+	.4byte sub_81022CC
+	.4byte sub_81022F0
+	.4byte sub_8102318
+	.4byte sub_8102344
+	.4byte sub_810239C
+	.4byte sub_81023B8
+	.4byte sub_81023E0
+	.4byte sub_81023FC
+	.4byte sub_8102424
+	.4byte sub_8102460
 
 	.global gUnknown_083ECB20
 gUnknown_083ECB20: @ 83ECB20
-	.4byte 0x08102a9d
-	.4byte 0x08102ad1
-	.4byte 0x08102b81
+	.4byte sub_8102A9C
+	.4byte sub_8102AD0
+	.4byte sub_8102B80
 
 	.global gUnknown_083ECB2C
 gUnknown_083ECB2C: @ 83ECB2C
-	.4byte 0x08102ea1
-	.4byte 0x08102ea5
-	.4byte 0x08102ec1
-	.4byte 0x08102f4d
-	.4byte 0x08103009
+	.4byte sub_8102EA0
+	.4byte sub_8102EA4
+	.4byte sub_8102EC0
+	.4byte sub_8102F4C
+	.4byte sub_8103008
 
 	.global gUnknown_083ECB40
 gUnknown_083ECB40: @ 83ECB40
-	.4byte 0x0810305d
-	.4byte 0x081032c1
-	.4byte 0x081033dd
+	.4byte sub_810305C
+	.4byte sub_81032C0
+	.4byte sub_81033DC
 
 	.global gUnknown_083ECB4C
 gUnknown_083ECB4C: @ 83ECB4C
-	.4byte 0x081034f5
-	.4byte 0x08103541
-	.4byte 0x0810380d
+	.4byte sub_81034F4
+	.4byte sub_8103540
+	.4byte sub_810380C
 
 	.global gUnknown_083ECB58
 gUnknown_083ECB58: @ 83ECB58
@@ -7944,39 +7944,39 @@ gUnknown_083ECB58: @ 83ECB58
 
 	.global gUnknown_083ECB64
 gUnknown_083ECB64: @ 83ECB64
-	.4byte 0x08103155
-	.4byte 0x081031b5
-	.4byte 0x081031b5
+	.4byte sub_8103154
+	.4byte sub_81031B4
+	.4byte sub_81031B4
 
 	.global gUnknown_083ECB70
 gUnknown_083ECB70: @ 83ECB70
-	.4byte 0x081032e9
-	.4byte 0x081032e9
-	.4byte 0x0810333d
+	.4byte sub_81032E8
+	.4byte sub_81032E8
+	.4byte sub_810333C
 
 	.global gUnknown_083ECB7C
 gUnknown_083ECB7C: @ 83ECB7C
-	.4byte 0x0810341d
-	.4byte 0x0810341d
-	.4byte 0x0810347d
+	.4byte sub_810341C
+	.4byte sub_810341C
+	.4byte sub_810347C
 
 	.global gUnknown_083ECB88
 gUnknown_083ECB88: @ 83ECB88
-	.4byte 0x08103565
-	.4byte 0x081035ed
-	.4byte 0x08103669
+	.4byte sub_8103564
+	.4byte j5_08111E84
+	.4byte sub_8103668
 
 	.global gUnknown_083ECB94
 gUnknown_083ECB94: @ 83ECB94
-	.4byte 0x08103831
-	.4byte 0x08103911
-	.4byte 0x08103a79
+	.4byte sub_8103830
+	.4byte sub_8103910
+	.4byte sub_8103A78
 
 	.global gUnknown_083ECBA0
 gUnknown_083ECBA0: @ 83ECBA0
-	.4byte 0x08103c79
-	.4byte 0x08103cad
-	.4byte 0x08103cc9
+	.4byte sub_8103C78
+	.4byte sub_8103CAC
+	.4byte sub_8103CC8
 
 	.global gUnknown_083ECBAC
 gUnknown_083ECBAC: @ 83ECBAC
@@ -7984,10 +7984,10 @@ gUnknown_083ECBAC: @ 83ECBAC
 
 	.global gUnknown_083ECBB4
 gUnknown_083ECBB4: @ 83ECBB4
-	.4byte 0x08104119
-	.4byte 0x0810411d
-	.4byte 0x08104145
-	.4byte 0x081041ad
+	.4byte nullsub_68
+	.4byte sub_810411C
+	.4byte sub_8104144
+	.4byte sub_81041AC
 
 	.global gUnknown_083ECBC4
 gUnknown_083ECBC4: @ 83ECBC4
@@ -7999,25 +7999,25 @@ gUnknown_083ECBC6: @ 83ECBC6
 
 	.global gUnknown_083ECBD0
 gUnknown_083ECBD0: @ 83ECBD0
-	.4byte 0x0810437d
-	.4byte 0x081043ed
-	.4byte 0x08104469
-	.4byte 0x08104499
-	.4byte 0x08104549
-	.4byte 0x08104599
-	.4byte 0x081045cd
-	.4byte 0x0810463d
-	.4byte 0x081046c1
-	.4byte 0x08104765
-	.4byte 0x08104795
-	.4byte 0x081047ed
-	.4byte 0x08104861
-	.4byte 0x081048a9
-	.4byte 0x081048cd
-	.4byte 0x08104941
-	.4byte 0x081049c9
-	.4byte 0x08104795
-	.4byte 0x081049f9
+	.4byte sub_810437C
+	.4byte sub_81043EC
+	.4byte sub_8104468
+	.4byte sub_8104498
+	.4byte sub_8104548
+	.4byte sub_8104598
+	.4byte sub_81045CC
+	.4byte sub_810463C
+	.4byte sub_81046C0
+	.4byte sub_8104764
+	.4byte sub_8104794
+	.4byte sub_81047EC
+	.4byte sub_8104860
+	.4byte sub_81048A8
+	.4byte sub_81048CC
+	.4byte sub_8104940
+	.4byte sub_81049C8
+	.4byte sub_8104794
+	.4byte sub_81049F8
 
 	.global gUnknown_083ECC1C
 gUnknown_083ECC1C: @ 83ECC1C
@@ -8033,19 +8033,19 @@ gUnknown_083ECC28: @ 83ECC28
 
 	.global gUnknown_083ECC30
 gUnknown_083ECC30: @ 83ECC30
-	.4byte 0x08104b3d
-	.4byte 0x08104b61
-	.4byte 0x08104b81
-	.4byte 0x08104b61
-	.4byte 0x08104bc9
-	.4byte 0x08104b61
-	.4byte 0x08104bfd
-	.4byte 0x08104b61
-	.4byte 0x08104c45
+	.4byte sub_8104B3C
+	.4byte sub_8104B60
+	.4byte sub_8104B80
+	.4byte sub_8104B60
+	.4byte sub_8104BC8
+	.4byte sub_8104B60
+	.4byte sub_8104BFC
+	.4byte sub_8104B60
+	.4byte sub_8104C44
 
 	.global gUnknown_083ECC54
 gUnknown_083ECC54: @ 83ECC54
-	.4byte 0x08104ea5
+	.4byte nullsub_69
 
 	.global gUnknown_083ECC58
 gUnknown_083ECC58: @ 83ECC58
@@ -8484,100 +8484,100 @@ gUnknown_083F6140: @ 83F6140
 
 	.global gUnknown_083F6144
 gUnknown_083F6144: @ 83F6144
-	.4byte 0x0810752d
-	.4byte 0x0810756d
-	.4byte 0x081075ad
-	.4byte 0x081075ed
-	.4byte 0x0810762d
-	.4byte 0x08107669
-	.4byte 0x081076d1
-	.4byte 0x08107739
-	.4byte 0x081077a1
-	.4byte 0x08107809
-	.4byte 0x0810787d
-	.4byte 0x081078f1
-	.4byte 0x08107965
-	.4byte 0x081079d9
-	.4byte 0x08107a49
-	.4byte 0x08107ab9
-	.4byte 0x08107b35
-	.4byte 0x08107bb1
-	.4byte 0x08107be9
-	.4byte 0x08107c21
-	.4byte 0x08107c59
-	.4byte 0x08107c91
-	.4byte 0x08107ce1
-	.4byte 0x08107d31
-	.4byte 0x08107d81
-	.4byte 0x08107dd1
-	.4byte 0x08107e11
-	.4byte 0x08107e51
-	.4byte 0x08107eb5
-	.4byte 0x08107f1d
-	.4byte 0x08107f85
-	.4byte 0x08107ff1
-	.4byte 0x08108061
-	.4byte 0x081080d1
-	.4byte 0x081080f1
-	.4byte 0x081081cd
-	.4byte 0x081081f5
-	.4byte 0x081083d5
-	.4byte 0x08108425
-	.4byte 0x0810845d
-	.4byte 0x08108495
-	.4byte 0x081084e1
-	.4byte 0x0810852d
-	.4byte 0x08108531
-	.4byte 0x08108535
-	.4byte 0x08108631
-	.4byte 0x08108649
-	.4byte 0x08108671
-	.4byte 0x081087a1
-	.4byte 0x0810888d
-	.4byte 0x0810895d
-	.4byte 0x08108961
-	.4byte 0x08108965
-	.4byte 0x08108a29
-	.4byte 0x08108aed
-	.4byte 0x08108b49
-	.4byte 0x08108b91
-	.4byte 0x08108bd9
-	.4byte 0x08108c41
-	.4byte 0x08108ca9
-	.4byte 0x08108d11
-	.4byte 0x08108d79
-	.4byte 0x08108e65
-	.4byte 0x08108f3d
-	.4byte 0x08109011
-	.4byte 0x081090e5
-	.4byte 0x081091d5
-	.4byte 0x081092a9
-	.4byte 0x08109331
-	.4byte 0x081093b9
-	.4byte 0x081093c9
-	.4byte 0x0810942d
-	.4byte 0x0810943d
-	.4byte 0x081094b9
-	.4byte 0x0810950d
-	.4byte 0x08109555
-	.4byte 0x0810959d
-	.4byte 0x081095c1
-	.4byte 0x08109605
-	.4byte 0x0810962d
-	.4byte 0x08109655
-	.4byte 0x0810967d
-	.4byte 0x081096c5
-	.4byte 0x081096c9
-	.4byte 0x081096cd
-	.4byte 0x081096d1
-	.4byte 0x081096d5
-	.4byte 0x081096d9
-	.4byte 0x081096dd
-	.4byte 0x0810970d
-	.4byte 0x0810972d
-	.4byte 0x0810974d
-	.4byte 0x08109825
-	.4byte 0x08109875
+	.4byte sub_810752C
+	.4byte sub_810756C
+	.4byte sub_81075AC
+	.4byte sub_81075EC
+	.4byte sub_810762C
+	.4byte sub_8107668
+	.4byte sub_81076D0
+	.4byte sub_8107738
+	.4byte sub_81077A0
+	.4byte sub_8107808
+	.4byte sub_810787C
+	.4byte sub_81078F0
+	.4byte sub_8107964
+	.4byte sub_81079D8
+	.4byte sub_8107A48
+	.4byte sub_8107AB8
+	.4byte sub_8107B34
+	.4byte sub_8107BB0
+	.4byte sub_8107BE8
+	.4byte sub_8107C20
+	.4byte sub_8107C58
+	.4byte sub_8107C90
+	.4byte sub_8107CE0
+	.4byte sub_8107D30
+	.4byte sub_8107D80
+	.4byte sub_8107DD0
+	.4byte sub_8107E10
+	.4byte sub_8107E50
+	.4byte sub_8107EB4
+	.4byte sub_8107F1C
+	.4byte sub_8107F84
+	.4byte sub_8107FF0
+	.4byte sub_8108060
+	.4byte sub_81080D0
+	.4byte sub_81080F0
+	.4byte sub_81081CC
+	.4byte sub_81081F4
+	.4byte sub_81083D4
+	.4byte sub_8108424
+	.4byte sub_810845C
+	.4byte tai28_unk
+	.4byte tai29_unk
+	.4byte nullsub_25
+	.4byte nullsub_26
+	.4byte tai2C_unk
+	.4byte sub_8108630
+	.4byte sub_8108648
+	.4byte sub_8108670
+	.4byte tai30_unk
+	.4byte dp15_simulate_damage_bonus_jump_if_eq
+	.4byte nullsub_71
+	.4byte nullsub_90
+	.4byte sub_8108964
+	.4byte sub_8108A28
+	.4byte sub_8108AEC
+	.4byte sub_8108B48
+	.4byte sub_8108B90
+	.4byte sub_8108BD8
+	.4byte sub_8108C40
+	.4byte sub_8108CA8
+	.4byte sub_8108D10
+	.4byte tai3D_unk
+	.4byte dp15_determine_move_damage_jump_if_not_fatal
+	.4byte tai40_unk
+	.4byte sub_8109010
+	.4byte sub_81090E4
+	.4byte sub_81091D4
+	.4byte tai43_unk
+	.4byte sub_8109330
+	.4byte sub_81093B8
+	.4byte sub_81093C8
+	.4byte sub_810942C
+	.4byte dp15_get_held_item_x12__8
+	.4byte tai49_unk
+	.4byte sub_810950C
+	.4byte sub_8109554
+	.4byte sub_810959C
+	.4byte sub_81095C0
+	.4byte sub_8109604
+	.4byte sub_810962C
+	.4byte sub_8109654
+	.4byte sub_810967C
+	.4byte nullsub_27
+	.4byte nullsub_28
+	.4byte nullsub_29
+	.4byte nullsub_30
+	.4byte nullsub_31
+	.4byte nullsub_32
+	.4byte sub_81096DC
+	.4byte sub_810970C
+	.4byte sub_810972C
+	.4byte dp15_compare_attacker_defender_levels
+	.4byte sub_8109824
+	.4byte sub_8109874
 
 	.global gUnknown_083F62BC
 gUnknown_083F62BC: @ 83F62BC
@@ -8698,10 +8698,10 @@ gUnknown_083F7E28: @ 83F7E28
 
 	.global gUnknown_083F7EA8
 gUnknown_083F7EA8: @ 83F7EA8
-	.4byte 0x080a5b41
-	.4byte 0x080545e5
-	.4byte 0x0802e425
-	.4byte 0x080545e5
+	.4byte sub_80A5B40
+	.4byte c2_exit_to_overworld_2_switch
+	.4byte sub_802E424
+	.4byte c2_exit_to_overworld_2_switch
 
 	.global gUnknown_083F7EB8
 gUnknown_083F7EB8: @ 83F7EB8
@@ -8710,15 +8710,15 @@ gUnknown_083F7EB8: @ 83F7EB8
 	.global gUnknown_083F7EF4
 gUnknown_083F7EF4: @ 83F7EF4
 	.4byte OtherText_Use
-	.4byte 0x0810c509
+	.4byte sub_810C508
 	.4byte OtherText_Toss
-	.4byte 0x0810c5c1
+	.4byte sub_810C5C0
 	.4byte OtherText_Cancel2
-	.4byte 0x0810c749
+	.4byte sub_810C748
 	.4byte OtherText_Use
-	.4byte 0x0810c789
+	.4byte sub_810C788
 	.4byte OtherText_Use
-	.4byte 0x0810c855
+	.4byte sub_810C854
 
 	.global gUnknown_083F7F1C
 gUnknown_083F7F1C: @ 83F7F1C
@@ -8959,13 +8959,13 @@ gUnknown_083F8E9C: @ 83F8E9C
 
 	.global gUnknown_083F8EB4
 gUnknown_083F8EB4: @ 83F8EB4
-	.4byte 0x0811755d
-	.4byte 0x081175c1
+	.4byte sub_811755C
+	.4byte sub_81175C0
 
 	.global gUnknown_083F8EBC
 gUnknown_083F8EBC: @ 83F8EBC
-	.4byte 0x0811577d
-	.4byte 0x081157ad
+	.4byte sub_811577C
+	.4byte sub_81157AC
 
 	.global gUnknown_083F8EC4
 gUnknown_083F8EC4: @ 83F8EC4
@@ -9185,81 +9185,81 @@ gUnknown_083FD708: @ 83FD708
 
 	.global gUnknown_083FD70C
 gUnknown_083FD70C: @ 83FD70C
-	.4byte 0x0811ac65
-	.4byte 0x0811ac65
-	.4byte 0x0811ac65
-	.4byte 0x0811ac65
-	.4byte 0x0811ac65
-	.4byte 0x0811ac65
-	.4byte 0x0811ac65
-	.4byte 0x0811ac65
-	.4byte 0x0811ac65
-	.4byte 0x0811ac65
-	.4byte 0x0811ac65
-	.4byte 0x0811ac65
-	.4byte 0x0811ac65
-	.4byte 0x0811ac65
-	.4byte 0x0811ac65
-	.4byte 0x0811ac65
-	.4byte 0x0811ac65
+	.4byte sub_811AC64
+	.4byte sub_811AC64
+	.4byte sub_811AC64
+	.4byte sub_811AC64
+	.4byte sub_811AC64
+	.4byte sub_811AC64
+	.4byte sub_811AC64
+	.4byte sub_811AC64
+	.4byte sub_811AC64
+	.4byte sub_811AC64
+	.4byte sub_811AC64
+	.4byte sub_811AC64
+	.4byte sub_811AC64
+	.4byte sub_811AC64
+	.4byte sub_811AC64
+	.4byte sub_811AC64
+	.4byte sub_811AC64
 
 	.global gUnknown_083FD750
 gUnknown_083FD750: @ 83FD750
-	.4byte 0x0811acb5
-	.4byte 0x0811adad
-	.4byte 0x0811af45
-	.4byte 0x0811b0f1
-	.4byte 0x0811b579
-	.4byte 0x0811b7e9
-	.4byte 0x0811bcbd
-	.4byte 0x0811bea1
-	.4byte 0x0811ca5d
-	.4byte 0x0811ccdd
-	.4byte 0x0811d0b9
-	.4byte 0x0811d1c9
-	.4byte 0x0811c08d
-	.4byte 0x0811c0ad
-	.4byte 0x0811c0cd
-	.4byte 0x0811c0ed
-	.4byte 0x0811c10d
+	.4byte sub_811ACB4
+	.4byte sub_811ADAC
+	.4byte sub_811AF44
+	.4byte sub_811B0F0
+	.4byte sub_811B578
+	.4byte sub_811B7E8
+	.4byte sub_811BCBC
+	.4byte sub_811BEA0
+	.4byte sub_811CA5C
+	.4byte sub_811CCDC
+	.4byte sub_811D0B8
+	.4byte sub_811D1C8
+	.4byte sub_811C08C
+	.4byte sub_811C0AC
+	.4byte sub_811C0CC
+	.4byte sub_811C0EC
+	.4byte sub_811C10C
 
 	.global gUnknown_083FD794
 gUnknown_083FD794: @ 83FD794
-	.4byte 0x0811ab89
-	.4byte 0x0811abd9
-	.4byte 0x0811ac0d
-	.4byte 0x0811ac35
+	.4byte sub_811AB88
+	.4byte sub_811ABD8
+	.4byte sub_811AC0C
+	.4byte sub_811AC34
 
 	.global gUnknown_083FD7A4
 gUnknown_083FD7A4: @ 83FD7A4
-	.4byte 0x0811aced
-	.4byte 0x0811ad1d
-	.4byte 0x0811ad81
+	.4byte sub_811ACEC
+	.4byte sub_811AD1C
+	.4byte sub_811AD80
 
 	.global gUnknown_083FD7B0
 gUnknown_083FD7B0: @ 83FD7B0
-	.4byte 0x0811ade5
-	.4byte 0x0811ae71
+	.4byte sub_811ADE4
+	.4byte sub_811AE70
 
 	.global gUnknown_083FD7B8
 gUnknown_083FD7B8: @ 83FD7B8
-	.4byte 0x0811af7d
-	.4byte 0x0811b001
+	.4byte sub_811AF7C
+	.4byte sub_811B000
 
 	.global gUnknown_083FD7C0
 gUnknown_083FD7C0: @ 83FD7C0
-	.4byte 0x0811b129
-	.4byte 0x0811b1d9
-	.4byte 0x0811b269
-	.4byte 0x0811b2f5
-	.4byte 0x0811b381
-	.4byte 0x0811b3ed
+	.4byte sub_811B128
+	.4byte sub_811B1D8
+	.4byte sub_811B268
+	.4byte sub_811B2F4
+	.4byte sub_811B380
+	.4byte sub_811B3EC
 
 	.global gUnknown_083FD7D8
 gUnknown_083FD7D8: @ 83FD7D8
-	.4byte 0x0811b5b1
-	.4byte 0x0811b5fd
-	.4byte 0x0811b689
+	.4byte sub_811B5B0
+	.4byte sub_811B5FC
+	.4byte sub_811B688
 
 	.global gUnknown_083FD7E4
 gUnknown_083FD7E4: @ 83FD7E4
@@ -9275,37 +9275,37 @@ gUnknown_083FD7F2: @ 83FD7F2
 
 	.global gUnknown_083FD7F8
 gUnknown_083FD7F8: @ 83FD7F8
-	.4byte 0x0811b821
-	.4byte 0x0811b885
-	.4byte 0x0811b90d
-	.4byte 0x0811b9f1
-	.4byte 0x0811ba71
-	.4byte 0x0811bb61
-	.4byte 0x0811bbed
+	.4byte sub_811B820
+	.4byte sub_811B884
+	.4byte sub_811B90C
+	.4byte sub_811B9F0
+	.4byte sub_811BA70
+	.4byte sub_811BB60
+	.4byte sub_811BBEC
 
 	.global gUnknown_083FD814
 gUnknown_083FD814: @ 83FD814
-	.4byte 0x0811bcf5
-	.4byte 0x0811bd61
+	.4byte sub_811BCF4
+	.4byte sub_811BD60
 
 	.global gUnknown_083FD81C
 gUnknown_083FD81C: @ 83FD81C
-	.4byte 0x0811bed9
-	.4byte 0x0811bf2d
-	.4byte 0x0811bfc5
+	.4byte sub_811BED8
+	.4byte sub_811BF2C
+	.4byte sub_811BFC4
 
 	.global gUnknown_083FD828
 gUnknown_083FD828: @ 83FD828
-	.4byte 0x0811c165
-	.4byte 0x0811c1cd
-	.4byte 0x0811c2a5
-	.4byte 0x0811c38d
-	.4byte 0x0811c401
-	.4byte 0x0811c43d
-	.4byte 0x0811c4f1
-	.4byte 0x0811c5b5
-	.4byte 0x0811c5e9
-	.4byte 0x0811c631
+	.4byte sub_811C164
+	.4byte sub_811C1CC
+	.4byte sub_811C2A4
+	.4byte sub_811C38C
+	.4byte sub_811C400
+	.4byte sub_811C43C
+	.4byte sub_811C4F0
+	.4byte sub_811C5B4
+	.4byte sub_811C5E8
+	.4byte sub_811C630
 
 	.global gUnknown_083FD850
 gUnknown_083FD850: @ 83FD850
@@ -9321,13 +9321,13 @@ gUnknown_083FD86A: @ 83FD86A
 
 	.global gUnknown_083FD880
 gUnknown_083FD880: @ 83FD880
-	.4byte 0x0811c935
-	.4byte 0x0811c939
-	.4byte 0x0811c985
-	.4byte 0x0811c9b9
-	.4byte 0x0811c935
-	.4byte 0x0811c9e5
-	.4byte 0x0811c935
+	.4byte sub_811C934
+	.4byte sub_811C938
+	.4byte sub_811C984
+	.4byte sub_811C9B8
+	.4byte sub_811C934
+	.4byte sub_811C9E4
+	.4byte sub_811C934
 
 	.global gUnknown_083FD89C
 gUnknown_083FD89C: @ 83FD89C
@@ -9339,17 +9339,17 @@ gUnknown_083FD8A0: @ 83FD8A0
 
 	.global gUnknown_083FD8A4
 gUnknown_083FD8A4: @ 83FD8A4
-	.4byte 0x0811ca95
-	.4byte 0x0811cb21
-	.4byte 0x0811cbe9
+	.4byte sub_811CA94
+	.4byte sub_811CB20
+	.4byte sub_811CBE8
 
 	.global gUnknown_083FD8B0
 gUnknown_083FD8B0: @ 83FD8B0
-	.4byte 0x0811cd15
-	.4byte 0x0811cda1
-	.4byte 0x0811ce15
-	.4byte 0x0811ce4d
-	.4byte 0x0811ceb1
+	.4byte sub_811CD14
+	.4byte sub_811CDA0
+	.4byte sub_811CE14
+	.4byte sub_811CE4C
+	.4byte sub_811CEB0
 
 	.global gUnknown_083FD8C4
 gUnknown_083FD8C4: @ 83FD8C4
@@ -9357,17 +9357,17 @@ gUnknown_083FD8C4: @ 83FD8C4
 
 	.global gUnknown_083FD8D4
 gUnknown_083FD8D4: @ 83FD8D4
-	.4byte 0x0811d0f1
-	.4byte 0x0811d145
-	.4byte 0x0811d19d
+	.4byte sub_811D0F0
+	.4byte sub_811D144
+	.4byte sub_811D19C
 
 	.global gUnknown_083FD8E0
 gUnknown_083FD8E0: @ 83FD8E0
-	.4byte 0x0811d201
-	.4byte 0x0811d261
-	.4byte 0x0811d2d9
-	.4byte 0x0811d3b1
-	.4byte 0x0811d41d
+	.4byte sub_811D200
+	.4byte sub_811D260
+	.4byte sub_811D2D8
+	.4byte sub_811D3B0
+	.4byte sub_811D41C
 
 	.global gUnknown_083FD8F4
 gUnknown_083FD8F4: @ 83FD8F4
@@ -9430,13 +9430,13 @@ gUnknown_084017A8: @ 84017A8
 	.global gUnknown_084017B0
 gUnknown_084017B0: @ 84017B0
 	.4byte OtherText_Summary
-	.4byte 0x0812265d
+	.4byte sub_812265C
 	.4byte OtherText_Enter2
-	.4byte 0x08122695
+	.4byte sub_8122694
 	.4byte OtherText_NoEntry
-	.4byte 0x08122771
+	.4byte sub_8122770
 	.4byte UnknownText_Exit
-	.4byte 0x08122839
+	.4byte sub_8122838
 	.4byte 0x02030001
 	.4byte 0x03000300
 
@@ -9514,8 +9514,8 @@ gUnknown_08401D96: @ 8401D96
 
 	.global gUnknown_08401D9C
 gUnknown_08401D9C: @ 8401D9C
-	.4byte 0x08123eb9
-	.4byte 0x08123f45
+	.4byte sub_8123EB8
+	.4byte sub_8123F44
 
 	.global gUnknown_08401DA4
 gUnknown_08401DA4: @ 8401DA4
@@ -9547,14 +9547,14 @@ gUnknown_08401E36: @ 8401E36
 
 	.global gUnknown_08401E40
 gUnknown_08401E40: @ 8401E40
-	.4byte 0x081275a1
-	.4byte 0x081275c5
+	.4byte sub_81275A0
+	.4byte sub_81275C4
 
 	.global gUnknown_08401E48
 gUnknown_08401E48: @ 8401E48
-	.4byte 0x08127da1
-	.4byte 0x08127dd1
-	.4byte 0x08127e31
+	.4byte sub_8127DA0
+	.4byte sub_8127DD0
+	.4byte sub_8127E30
 
 	.global gUnknown_08401E54
 gUnknown_08401E54: @ 8401E54
@@ -9566,142 +9566,142 @@ gUnknown_08401E5A: @ 8401E5A
 
 	.global gUnknown_08401E60
 gUnknown_08401E60: @ 8401E60
-	.4byte 0x08128aa9
-	.4byte 0x08128af1
-	.4byte 0x08128b0d
-	.4byte 0x08128b4d
-	.4byte 0x08128b8d
-	.4byte 0x08128bcd
-	.4byte 0x08128c0d
-	.4byte 0x08128c2d
-	.4byte 0x08128c6d
-	.4byte 0x08128cad
-	.4byte 0x08128ced
-	.4byte 0x08128d2d
-	.4byte 0x08128d51
-	.4byte 0x08128d91
-	.4byte 0x08128dd1
-	.4byte 0x08128e11
-	.4byte 0x08128e51
-	.4byte 0x08128e91
-	.4byte 0x08128ed1
-	.4byte 0x08128f11
-	.4byte 0x08128f51
-	.4byte 0x08128f91
-	.4byte 0x08128fbd
-	.4byte 0x08129009
-	.4byte 0x08129055
-	.4byte 0x081290a1
-	.4byte 0x081290ed
-	.4byte 0x08129115
-	.4byte 0x08129161
-	.4byte 0x081291ad
-	.4byte 0x081291f9
-	.4byte 0x08129245
-	.4byte 0x08129265
-	.4byte 0x081292a5
-	.4byte 0x081292e5
-	.4byte 0x08129325
-	.4byte 0x08129369
-	.4byte 0x081293ad
-	.4byte 0x081293f1
-	.4byte 0x08129435
-	.4byte 0x08129471
-	.4byte 0x081294b1
-	.4byte 0x081294f1
-	.4byte 0x08129539
-	.4byte 0x08129579
-	.4byte 0x081295b9
-	.4byte 0x08129639
-	.4byte 0x0812967d
-	.4byte 0x081296fd
-	.4byte 0x08129741
-	.4byte 0x08129799
-	.4byte 0x081297d9
-	.4byte 0x08129819
-	.4byte 0x08129859
-	.4byte 0x08129899
-	.4byte 0x081298f1
-	.4byte 0x08129931
-	.4byte 0x08129971
-	.4byte 0x081299b1
-	.4byte 0x081299f1
-	.4byte 0x08129a45
-	.4byte 0x08129a85
-	.4byte 0x08129ac5
-	.4byte 0x08129b05
-	.4byte 0x08129b45
-	.4byte 0x08129bb9
-	.4byte 0x08129bfd
-	.4byte 0x08129c41
-	.4byte 0x08129cb5
-	.4byte 0x08129cf9
-	.4byte 0x08129d3d
-	.4byte 0x08129d99
-	.4byte 0x08129ddd
-	.4byte 0x08129e21
-	.4byte 0x08129e65
-	.4byte 0x08129ea5
-	.4byte 0x08129ee5
-	.4byte 0x08129f25
-	.4byte 0x08129f65
-	.4byte 0x08129fbd
-	.4byte 0x08129ffd
-	.4byte 0x0812a03d
-	.4byte 0x0812a07d
-	.4byte 0x0812a0bd
-	.4byte 0x0812a101
-	.4byte 0x0812a145
-	.4byte 0x0812a189
-	.4byte 0x0812a1c5
-	.4byte 0x0812a209
-	.4byte 0x0812a24d
-	.4byte 0x0812a295
-	.4byte 0x0812a2d9
-	.4byte 0x0812a31d
-	.4byte 0x0812a361
-	.4byte 0x0812a3a5
-	.4byte 0x0812a3e5
-	.4byte 0x0812a429
-	.4byte 0x0812a46d
-	.4byte 0x0812a4b1
-	.4byte 0x0812a4f5
-	.4byte 0x0812a539
-	.4byte 0x0812a579
-	.4byte 0x0812a5b9
-	.4byte 0x0812a5f9
-	.4byte 0x0812a639
-	.4byte 0x0812a675
-	.4byte 0x0812a6b5
-	.4byte 0x0812a6f5
-	.4byte 0x0812a735
-	.4byte 0x0812a775
-	.4byte 0x0812a7c5
-	.4byte 0x0812a805
-	.4byte 0x0812a845
-	.4byte 0x0812a86d
-	.4byte 0x0812a899
-	.4byte 0x0812a8cd
-	.4byte 0x0812a8fd
-	.4byte 0x0812a92d
-	.4byte 0x0812a979
-	.4byte 0x0812a9c5
-	.4byte 0x0812aa11
-	.4byte 0x0812aa5d
-	.4byte 0x0812aaad
-	.4byte 0x0812aafd
-	.4byte 0x0812ab4d
-	.4byte 0x0812ab9d
-	.4byte 0x0812abe9
-	.4byte 0x0812ac35
-	.4byte 0x0812ac55
-	.4byte 0x0812ac85
-	.4byte 0x0812acfd
-	.4byte 0x0812ad51
-	.4byte 0x0812ad95
-	.4byte 0x0812add9
-	.4byte 0x0812ae45
-	.4byte 0x0812ae89
+	.4byte sub_8128AA8
+	.4byte sub_8128AF0
+	.4byte sub_8128B0C
+	.4byte sub_8128B4C
+	.4byte sub_8128B8C
+	.4byte sub_8128BCC
+	.4byte sub_8128C0C
+	.4byte sub_8128C2C
+	.4byte sub_8128C6C
+	.4byte sub_8128CAC
+	.4byte sub_8128CEC
+	.4byte sub_8128D2C
+	.4byte sub_8128D50
+	.4byte sub_8128D90
+	.4byte sub_8128DD0
+	.4byte sub_8128E10
+	.4byte sub_8128E50
+	.4byte sub_8128E90
+	.4byte sub_8128ED0
+	.4byte sub_8128F10
+	.4byte sub_8128F50
+	.4byte sub_8128F90
+	.4byte sub_8128FBC
+	.4byte sub_8129008
+	.4byte sub_8129054
+	.4byte sub_81290A0
+	.4byte sub_81290EC
+	.4byte sub_8129114
+	.4byte sub_8129160
+	.4byte sub_81291AC
+	.4byte sub_81291F8
+	.4byte sub_8129244
+	.4byte sub_8129264
+	.4byte sub_81292A4
+	.4byte sub_81292E4
+	.4byte sub_8129324
+	.4byte sub_8129368
+	.4byte sub_81293AC
+	.4byte sub_81293F0
+	.4byte sub_8129434
+	.4byte sub_8129470
+	.4byte sub_81294B0
+	.4byte sub_81294F0
+	.4byte sub_8129538
+	.4byte sub_8129578
+	.4byte sub_81295B8
+	.4byte sub_8129638
+	.4byte sub_812967C
+	.4byte sub_81296FC
+	.4byte sub_8129740
+	.4byte sub_8129798
+	.4byte sub_81297D8
+	.4byte sub_8129818
+	.4byte sub_8129858
+	.4byte sub_8129898
+	.4byte sub_81298F0
+	.4byte sub_8129930
+	.4byte sub_8129970
+	.4byte sub_81299B0
+	.4byte sub_81299F0
+	.4byte sub_8129A44
+	.4byte sub_8129A84
+	.4byte sub_8129AC4
+	.4byte sub_8129B04
+	.4byte sub_8129B44
+	.4byte sub_8129BB8
+	.4byte sub_8129BFC
+	.4byte sub_8129C40
+	.4byte sub_8129CB4
+	.4byte sub_8129CF8
+	.4byte sub_8129D3C
+	.4byte sub_8129D98
+	.4byte sub_8129DDC
+	.4byte sub_8129E20
+	.4byte sub_8129E64
+	.4byte sub_8129EA4
+	.4byte sub_8129EE4
+	.4byte sub_8129F24
+	.4byte sub_8129F64
+	.4byte sub_8129FBC
+	.4byte sub_8129FFC
+	.4byte sub_812A03C
+	.4byte sub_812A07C
+	.4byte sub_812A0BC
+	.4byte sub_812A100
+	.4byte sub_812A144
+	.4byte sub_812A188
+	.4byte sub_812A1C4
+	.4byte sub_812A208
+	.4byte sub_812A24C
+	.4byte sub_812A294
+	.4byte sub_812A2D8
+	.4byte sub_812A31C
+	.4byte sub_812A360
+	.4byte sub_812A3A4
+	.4byte sub_812A3E4
+	.4byte sub_812A428
+	.4byte sub_812A46C
+	.4byte sub_812A4B0
+	.4byte sub_812A4F4
+	.4byte sub_812A538
+	.4byte sub_812A578
+	.4byte sub_812A5B8
+	.4byte sub_812A5F8
+	.4byte sub_812A638
+	.4byte sub_812A674
+	.4byte sub_812A6B4
+	.4byte sub_812A6F4
+	.4byte sub_812A734
+	.4byte sub_812A774
+	.4byte sub_812A7C4
+	.4byte sub_812A804
+	.4byte sub_812A844
+	.4byte sub_812A86C
+	.4byte sub_812A898
+	.4byte sub_812A8CC
+	.4byte sub_812A8FC
+	.4byte sub_812A92C
+	.4byte sub_812A978
+	.4byte sub_812A9C4
+	.4byte sub_812AA10
+	.4byte sub_812AA5C
+	.4byte sub_812AAAC
+	.4byte sub_812AAFC
+	.4byte sub_812AB4C
+	.4byte sub_812AB9C
+	.4byte sub_812ABE8
+	.4byte sub_812AC34
+	.4byte sub_812AC54
+	.4byte sub_812AC84
+	.4byte sub_812ACFC
+	.4byte sub_812AD50
+	.4byte sub_812AD94
+	.4byte sub_812ADD8
+	.4byte sub_812AE44
+	.4byte sub_812AE88
 
 	.global gUnknown_08402080
 gUnknown_08402080: @ 8402080
@@ -9909,63 +9909,63 @@ gUnknown_0840618C: @ 840618C
 
 	.global gUnknown_084061A4
 gUnknown_084061A4: @ 84061A4
-	.4byte 0x08137a11
-	.4byte 0x08138231
-	.4byte 0x0813823d
-	.4byte 0x08138c91
-	.4byte 0x08138c9d
-	.4byte 0x08138ca9
-	.4byte 0x08138cb5
-	.4byte 0x08138d39
-	.4byte 0x08138e05
-	.4byte 0x08138ed1
-	.4byte 0x08138edd
-	.4byte 0x08138ee9
-	.4byte 0x08138ef5
-	.4byte 0x08138f45
-	.4byte 0x08138fa1
-	.4byte 0x08138fad
-	.4byte 0x08139209
-	.4byte 0x08139275
-	.4byte 0x08139299
-	.4byte 0x08139379
-	.4byte 0x08139385
-	.4byte 0x081393ed
-	.4byte 0x0813942d
-	.4byte 0x08139439
-	.4byte 0x08139445
-	.4byte 0x08139545
-	.4byte 0x08139551
-	.4byte 0x0813955d
-	.4byte 0x08139569
-	.4byte 0x08139575
-	.4byte 0x08139581
-	.4byte 0x0813958d
-	.4byte 0x08139599
-	.4byte 0x081395a5
-	.4byte 0x081395b1
-	.4byte 0x081395bd
-	.4byte 0x081395c9
-	.4byte 0x081395d5
-	.4byte 0x081395e1
-	.4byte 0x081395ed
-	.4byte 0x081395f9
-	.4byte 0x08139605
-	.4byte 0x08139675
-	.4byte 0x08139681
-	.4byte 0x081396b1
-	.4byte 0x081396e1
-	.4byte 0x0813971d
-	.4byte 0x08139751
-	.4byte 0x08139aa1
-	.4byte 0x08139b21
-	.4byte 0x08139b2d
-	.4byte 0x08139b39
-	.4byte 0x08139b45
-	.4byte 0x08139ba1
-	.4byte 0x08139bad
-	.4byte 0x08139bb9
-	.4byte 0x08139c15
+	.4byte dp01t_00_5_getattr
+	.4byte sub_8138230
+	.4byte sub_813823C
+	.4byte sub_8138C90
+	.4byte sub_8138C9C
+	.4byte sub_8138CA8
+	.4byte sub_8138CB4
+	.4byte sub_8138D38
+	.4byte sub_8138E04
+	.4byte sub_8138ED0
+	.4byte sub_8138EDC
+	.4byte sub_8138EE8
+	.4byte sub_8138EF4
+	.4byte sub_8138F44
+	.4byte sub_8138FA0
+	.4byte sub_8138FAC
+	.4byte sub_8139208
+	.4byte dp01t_11_5_message_for_player_only
+	.4byte sub_8139298
+	.4byte sub_8139378
+	.4byte sub_8139384
+	.4byte sub_81393EC
+	.4byte sub_813942C
+	.4byte sub_8139438
+	.4byte sub_8139444
+	.4byte sub_8139544
+	.4byte sub_8139550
+	.4byte sub_813955C
+	.4byte sub_8139568
+	.4byte sub_8139574
+	.4byte sub_8139580
+	.4byte sub_813958C
+	.4byte sub_8139598
+	.4byte sub_81395A4
+	.4byte sub_81395B0
+	.4byte sub_81395BC
+	.4byte sub_81395C8
+	.4byte sub_81395D4
+	.4byte sub_81395E0
+	.4byte sub_81395EC
+	.4byte sub_81395F8
+	.4byte sub_8139604
+	.4byte sub_8139674
+	.4byte sub_8139680
+	.4byte sub_81396B0
+	.4byte sub_81396E0
+	.4byte dp01t_2E_5_battle_intro
+	.4byte sub_8139750
+	.4byte sub_8139AA0
+	.4byte sub_8139B20
+	.4byte sub_8139B2C
+	.4byte sub_8139B38
+	.4byte sub_8139B44
+	.4byte sub_8139BA0
+	.4byte sub_8139BAC
+	.4byte sub_8139BB8
+	.4byte nullsub_80
 
 	.global gUnknown_08406288
 gUnknown_08406288: @ 8406288
@@ -9977,13 +9977,13 @@ gUnknown_08406288: @ 8406288
 	.global gUnknown_08406298
 gUnknown_08406298: @ 8406298
 	.4byte SecretBaseText_ItemStorage
-	.4byte 0x08139e41
+	.4byte sub_8139E40
 	.4byte PCText_Mailbox
-	.4byte 0x08139e6d
+	.4byte sub_8139E6C
 	.4byte SecretBaseText_Decoration
-	.4byte 0x08139ed9
+	.4byte sub_8139ED8
 	.4byte SecretBaseText_TurnOff
-	.4byte 0x08139ef9
+	.4byte sub_8139EF8
 
 	.global gUnknown_084062B8
 gUnknown_084062B8: @ 84062B8
@@ -9996,23 +9996,23 @@ gUnknown_084062BC: @ 84062BC
 	.global gUnknown_084062C0
 gUnknown_084062C0: @ 84062C0
 	.4byte PCText_WithdrawItem
-	.4byte 0x0813a119
+	.4byte sub_813A118
 	.4byte PCText_DepositItem
-	.4byte 0x0813a0a1
+	.4byte sub_813A0A0
 	.4byte PCText_TossItem
-	.4byte 0x0813a199
+	.4byte sub_813A198
 	.4byte UnknownText_Exit
-	.4byte 0x0813a21d
+	.4byte sub_813A21C
 
 	.global gUnknown_084062E0
 gUnknown_084062E0: @ 84062E0
-	.4byte 0x0813a83d
-	.4byte 0x0813a879
+	.4byte sub_813A83C
+	.4byte sub_813A878
 
 	.global gUnknown_084062E8
 gUnknown_084062E8: @ 84062E8
-	.4byte 0x0813b579
-	.4byte 0x0813b611
+	.4byte sub_813B578
+	.4byte sub_813B610
 
 	.global gUnknown_084062F0
 gUnknown_084062F0: @ 84062F0
@@ -10021,13 +10021,13 @@ gUnknown_084062F0: @ 84062F0
 	.global gUnknown_084062F8
 gUnknown_084062F8: @ 84062F8
 	.4byte OtherText_Read
-	.4byte 0x0813b429
+	.4byte sub_813B428
 	.4byte OtherText_MoveToBag
-	.4byte 0x0813b511
+	.4byte sub_813B510
 	.4byte OtherText_Give
-	.4byte 0x0813b631
+	.4byte sub_813B630
 	.4byte OtherText_Cancel2
-	.4byte 0x0813b735
+	.4byte sub_813B734
 
 	.global gUnknown_08406318
 gUnknown_08406318: @ 8406318
@@ -10231,18 +10231,18 @@ gUnknown_0840B378: @ 840B378
 
 	.global gUnknown_0840B384
 gUnknown_0840B384: @ 840B384
-	.4byte 0x08140931
-	.4byte 0x08140dc5
-	.4byte 0x08140c15
-	.4byte 0x08140ce9
-	.4byte 0x08141059
-	.4byte 0x08140c15
-	.4byte 0x08140b3d
-	.4byte 0x08140ce9
-	.4byte 0x08140f25
-	.4byte 0x08140a65
-	.4byte 0x08140dc5
-	.4byte 0x08141165
+	.4byte sub_8140930
+	.4byte sub_8140DC4
+	.4byte sub_8140C14
+	.4byte sub_8140CE8
+	.4byte sub_8141058
+	.4byte sub_8140C14
+	.4byte sub_8140B3C
+	.4byte sub_8140CE8
+	.4byte sub_8140F24
+	.4byte sub_8140A64
+	.4byte sub_8140DC4
+	.4byte sub_8141164
 
 	.global gUnknown_0840B3B4
 gUnknown_0840B3B4: @ 840B3B4
