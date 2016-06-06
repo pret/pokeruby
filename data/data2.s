@@ -27,11 +27,14 @@ gUnknown_081E796C: @ 81E796C
 
 	.global gUnknown_081E797C
 gUnknown_081E797C: @ 81E797C
-	.incbin "baserom.gba", 0x001e797c, 0x30
+Unknown_081E797C:
+	.incbin "baserom.gba", 0x001e797c, 0x20
+Unknown_081E799C:
+	.incbin "baserom.gba", 0x001e799c, 0x10
 
 	.global gUnknown_081E79AC
 gUnknown_081E79AC: @ 81E79AC
-	.incbin "baserom.gba", 0x001e79ac, 0x4
+	.4byte Unknown_081E799C
 
 	.global gUnknown_081E79B0
 gUnknown_081E79B0: @ 81E79B0
@@ -43,19 +46,64 @@ gUnknown_081E79C0: @ 81E79C0
 
 	.global gUnknown_081E79E8
 gUnknown_081E79E8: @ 81E79E8
-	.incbin "baserom.gba", 0x001e79e8, 0x204
+Unknown_81E79E8:
+	.incbin "baserom.gba", 0x001e79e8, 0xB8
+Unknown_81E7AA0:
+	.incbin "baserom.gba", 0x001e7aa0, 0x20
+Unknown_81E7AC0:
+	.incbin "baserom.gba", 0x001e7ac0, 0x18
+Unknown_81E7AD8:
+	.incbin "baserom.gba", 0x001e7ad8, 0x18
+Unknown_81E7AF0:
+	.incbin "baserom.gba", 0x001e7af0, 0x20
+Unknown_81E7B10:
+	.incbin "baserom.gba", 0x001e7b10, 0x10
+Unknown_81E7B20:
+	.incbin "baserom.gba", 0x001e7b20, 0x10
+Unknown_81E7B30:
+	.incbin "baserom.gba", 0x001e7b30, 0x64
+Unknown_81E7B94:
+	.incbin "baserom.gba", 0x001e7b94, 0x10
+Unknown_81E7BA4:
+	.incbin "baserom.gba", 0x001e7ba4, 0x18
+Unknown_81E7BBC:
+	.incbin "baserom.gba", 0x001e7bbc, 0x20
+Unknown_81E7BDC:
+	.incbin "baserom.gba", 0x001e7bdc, 0x10
 
 	.global gUnknown_081E7BEC
 gUnknown_081E7BEC: @ 81E7BEC
-	.incbin "baserom.gba", 0x001e7bec, 0x2c
+	.4byte Unknown_81E7AA0
+	.4byte Unknown_81E7AC0
+	.4byte Unknown_81E7AD8
+	.4byte Unknown_81E7AF0
+	.4byte Unknown_81E7B10
+	.4byte Unknown_81E7B20
+	.4byte Unknown_81E7B94
+	.4byte Unknown_81E7BA4
+	.4byte Unknown_81E7BBC
+	.4byte Unknown_81E7B30
+	.4byte Unknown_81E7BDC
 
 	.global gUnknown_081E7C18
 gUnknown_081E7C18: @ 81E7C18
-	.incbin "baserom.gba", 0x001e7c18, 0x4c
+Unknown_81E7C18:
+	.incbin "baserom.gba", 0x001e7c18, 0x2c
+Unknown_81E7C44:
+	.incbin "baserom.gba", 0x001e7c44, 0x8
+Unknown_81E7C4C:
+	.incbin "baserom.gba", 0x001e7c4c, 0x8
+Unknown_81E7C54:
+	.incbin "baserom.gba", 0x001e7c54, 0x8
+Unknown_81E7C5C:
+	.incbin "baserom.gba", 0x001e7c5c, 0x8
 
 	.global gUnknown_081E7C64
 gUnknown_081E7C64: @ 81E7C64
-	.incbin "baserom.gba", 0x001e7c64, 0x10
+	.4byte Unknown_81E7C44
+	.4byte Unknown_81E7C4C
+	.4byte Unknown_81E7C54
+	.4byte Unknown_81E7C5C
 
 	.global gUnknown_081E7C74
 gUnknown_081E7C74: @ 81E7C74
@@ -78,11 +126,260 @@ gUnknown_081E9114: @ 81E9114
 	.include "data/graphics/pokemon/shiny_palette_table.s"
 
 @ 81EC134
-	.incbin "baserom.gba", 0x001EC134, 0x170
+Unknown_81EC134:
+	.incbin "baserom.gba", 0x001EC134, 0x18
+Unknown_81EC14C:
+	.incbin "baserom.gba", 0x001EC14C, 0x4
+Unknown_81EC150:
+	.incbin "baserom.gba", 0x001EC150, 0x4
+Unknown_81EC154:
+	.incbin "baserom.gba", 0x001EC154, 0x8
+Unknown_81EC15C:
+	.incbin "baserom.gba", 0x001EC15C, 0x4
+Unknown_81EC160:
+	.incbin "baserom.gba", 0x001EC160, 0x4
+Unknown_81EC164:
+	.incbin "baserom.gba", 0x001EC164, 0x4
+Unknown_81EC168:
+	.incbin "baserom.gba", 0x001EC168, 0x4
+Unknown_81EC16C:
+	.incbin "baserom.gba", 0x001EC16C, 0x8
+Unknown_81EC174:
+	.incbin "baserom.gba", 0x001EC174, 0x8
+Unknown_81EC17C:
+	.incbin "baserom.gba", 0x001EC17C, 0x4
+Unknown_81EC180:
+	.incbin "baserom.gba", 0x001EC180, 0x4
+Unknown_81EC184:
+	.incbin "baserom.gba", 0x001EC184, 0x4
+Unknown_81EC188:
+	.incbin "baserom.gba", 0x001EC188, 0x4
+Unknown_81EC18C:
+	.incbin "baserom.gba", 0x001EC18C, 0x4
+Unknown_81EC190:
+	.incbin "baserom.gba", 0x001EC190, 0x4
+Unknown_81EC194:
+	.incbin "baserom.gba", 0x001EC194, 0x4
+Unknown_81EC198:
+	.incbin "baserom.gba", 0x001EC198, 0x4
+Unknown_81EC19C:
+	.incbin "baserom.gba", 0x001EC19C, 0x4
+Unknown_81EC1A0:
+	.incbin "baserom.gba", 0x001EC1A0, 0x4
+Unknown_81EC1A4:
+	.incbin "baserom.gba", 0x001EC1A4, 0x4
+Unknown_81EC1A8:
+	.incbin "baserom.gba", 0x001EC1A8, 0x4
+Unknown_81EC1AC:
+	.incbin "baserom.gba", 0x001EC1AC, 0x4
+Unknown_81EC1B0:
+	.incbin "baserom.gba", 0x001EC1B0, 0x4
+Unknown_81EC1B4:
+	.incbin "baserom.gba", 0x001EC1B4, 0x4
+Unknown_81EC1B8:
+	.incbin "baserom.gba", 0x001EC1B8, 0x4
+Unknown_81EC1BC:
+	.incbin "baserom.gba", 0x001EC1BC, 0x4
+Unknown_81EC1C0:
+	.incbin "baserom.gba", 0x001EC1C0, 0x4
+Unknown_81EC1C4:
+	.incbin "baserom.gba", 0x001EC1C4, 0x4
+Unknown_81EC1C8:
+	.incbin "baserom.gba", 0x001EC1C8, 0x4
+Unknown_81EC1CC:
+	.incbin "baserom.gba", 0x001EC1CC, 0x4
+Unknown_81EC1D0:
+	.incbin "baserom.gba", 0x001EC1D0, 0x4
+Unknown_81EC1D4:
+	.incbin "baserom.gba", 0x001EC1D4, 0x4
+Unknown_81EC1D8:
+	.incbin "baserom.gba", 0x001EC1D8, 0x4
+Unknown_81EC1DC:
+	.incbin "baserom.gba", 0x001EC1DC, 0x4
+Unknown_81EC1E0:
+	.incbin "baserom.gba", 0x001EC1E0, 0x4
+Unknown_81EC1E4:
+	.incbin "baserom.gba", 0x001EC1E4, 0x4
+Unknown_81EC1E8:
+	.incbin "baserom.gba", 0x001EC1E8, 0x4
+Unknown_81EC1EC:
+	.incbin "baserom.gba", 0x001EC1EC, 0x4
+Unknown_81EC1F0:
+	.incbin "baserom.gba", 0x001EC1F0, 0x4
+Unknown_81EC1F4:
+	.incbin "baserom.gba", 0x001EC1F4, 0x4
+Unknown_81EC1F8:
+	.incbin "baserom.gba", 0x001EC1F8, 0x4
+Unknown_81EC1FC:
+	.incbin "baserom.gba", 0x001EC1FC, 0x4
+Unknown_81EC200:
+	.incbin "baserom.gba", 0x001EC200, 0x4
+Unknown_81EC204:
+	.incbin "baserom.gba", 0x001EC204, 0x4
+Unknown_81EC208:
+	.incbin "baserom.gba", 0x001EC208, 0x4
+Unknown_81EC20C:
+	.incbin "baserom.gba", 0x001EC20C, 0x4
+Unknown_81EC210:
+	.incbin "baserom.gba", 0x001EC210, 0x4
+Unknown_81EC214:
+	.incbin "baserom.gba", 0x001EC214, 0x4
+Unknown_81EC218:
+	.incbin "baserom.gba", 0x001EC218, 0x4
+Unknown_81EC21C:
+	.incbin "baserom.gba", 0x001EC21C, 0x4
+Unknown_81EC220:
+	.incbin "baserom.gba", 0x001EC220, 0x4
+Unknown_81EC224:
+	.incbin "baserom.gba", 0x001EC224, 0x4
+Unknown_81EC228:
+	.incbin "baserom.gba", 0x001EC228, 0x4
+Unknown_81EC22C:
+	.incbin "baserom.gba", 0x001EC22C, 0x4
+Unknown_81EC230:
+	.incbin "baserom.gba", 0x001EC230, 0x4
+Unknown_81EC234:
+	.incbin "baserom.gba", 0x001EC234, 0x4
+Unknown_81EC238:
+	.incbin "baserom.gba", 0x001EC238, 0x4
+Unknown_81EC23C:
+	.incbin "baserom.gba", 0x001EC23C, 0x4
+Unknown_81EC240:
+	.incbin "baserom.gba", 0x001EC240, 0x4
+Unknown_81EC244:
+	.incbin "baserom.gba", 0x001EC244, 0x4
+Unknown_81EC248:
+	.incbin "baserom.gba", 0x001EC248, 0x4
+Unknown_81EC24C:
+	.incbin "baserom.gba", 0x001EC24C, 0x4
+Unknown_81EC250:
+	.incbin "baserom.gba", 0x001EC250, 0x4
+Unknown_81EC254:
+	.incbin "baserom.gba", 0x001EC254, 0x4
+Unknown_81EC258:
+	.incbin "baserom.gba", 0x001EC258, 0x4
+Unknown_81EC25C:
+	.incbin "baserom.gba", 0x001EC25C, 0x4
+Unknown_81EC260:
+	.incbin "baserom.gba", 0x001EC260, 0x4
+Unknown_81EC264:
+	.incbin "baserom.gba", 0x001EC264, 0x4
+Unknown_81EC268:
+	.incbin "baserom.gba", 0x001EC268, 0x4
+Unknown_81EC26C:
+	.incbin "baserom.gba", 0x001EC26C, 0x4
+Unknown_81EC270:
+	.incbin "baserom.gba", 0x001EC270, 0x4
+Unknown_81EC274:
+	.incbin "baserom.gba", 0x001EC274, 0x4
+Unknown_81EC278:
+	.incbin "baserom.gba", 0x001EC278, 0x4
+Unknown_81EC27C:
+	.incbin "baserom.gba", 0x001EC27C, 0x4
+Unknown_81EC280:
+	.incbin "baserom.gba", 0x001EC280, 0x4
+Unknown_81EC284:
+	.incbin "baserom.gba", 0x001EC284, 0x4
+Unknown_81EC288:
+	.incbin "baserom.gba", 0x001EC288, 0x4
+Unknown_81EC28C:
+	.incbin "baserom.gba", 0x001EC28C, 0x4
+Unknown_81EC290:
+	.incbin "baserom.gba", 0x001EC290, 0x4
+Unknown_81EC294:
+	.incbin "baserom.gba", 0x001EC294, 0x4
+Unknown_81EC298:
+	.incbin "baserom.gba", 0x001EC298, 0x4
+Unknown_81EC29C:
+	.incbin "baserom.gba", 0x001EC29C, 0x4
+Unknown_81EC2A0:
+	.incbin "baserom.gba", 0x001EC2A0, 0x4
 
 	.global gUnknown_081EC2A4
 gUnknown_081EC2A4: @ 81EC2A4
-	.incbin "baserom.gba", 0x001ec2a4, 0x14c
+	.4byte Unknown_81EC14C
+	.4byte Unknown_81EC150
+	.4byte Unknown_81EC154
+	.4byte Unknown_81EC15C
+	.4byte Unknown_81EC160
+	.4byte Unknown_81EC164
+	.4byte Unknown_81EC168
+	.4byte Unknown_81EC16C
+	.4byte Unknown_81EC174
+	.4byte Unknown_81EC17C
+	.4byte Unknown_81EC180
+	.4byte Unknown_81EC184
+	.4byte Unknown_81EC188
+	.4byte Unknown_81EC18C
+	.4byte Unknown_81EC190
+	.4byte Unknown_81EC194
+	.4byte Unknown_81EC198
+	.4byte Unknown_81EC19C
+	.4byte Unknown_81EC1A0
+	.4byte Unknown_81EC1A4
+	.4byte Unknown_81EC1A8
+	.4byte Unknown_81EC1AC
+	.4byte Unknown_81EC1B0
+	.4byte Unknown_81EC1B4
+	.4byte Unknown_81EC1B8
+	.4byte Unknown_81EC1BC
+	.4byte Unknown_81EC1C0
+	.4byte Unknown_81EC1C4
+	.4byte Unknown_81EC1C8
+	.4byte Unknown_81EC1CC
+	.4byte Unknown_81EC1D0
+	.4byte Unknown_81EC1D4
+	.4byte Unknown_81EC1D8
+	.4byte Unknown_81EC1DC
+	.4byte Unknown_81EC1E0
+	.4byte Unknown_81EC1E4
+	.4byte Unknown_81EC1E8
+	.4byte Unknown_81EC1EC
+	.4byte Unknown_81EC1F0
+	.4byte Unknown_81EC1F4
+	.4byte Unknown_81EC1F8
+	.4byte Unknown_81EC1FC
+	.4byte Unknown_81EC200
+	.4byte Unknown_81EC204
+	.4byte Unknown_81EC208
+	.4byte Unknown_81EC20C
+	.4byte Unknown_81EC210
+	.4byte Unknown_81EC214
+	.4byte Unknown_81EC218
+	.4byte Unknown_81EC21C
+	.4byte Unknown_81EC220
+	.4byte Unknown_81EC224
+	.4byte Unknown_81EC228
+	.4byte Unknown_81EC22C
+	.4byte Unknown_81EC230
+	.4byte Unknown_81EC234
+	.4byte Unknown_81EC238
+	.4byte Unknown_81EC23C
+	.4byte Unknown_81EC240
+	.4byte Unknown_81EC244
+	.4byte Unknown_81EC248
+	.4byte Unknown_81EC24C
+	.4byte Unknown_81EC250
+	.4byte Unknown_81EC254
+	.4byte Unknown_81EC258
+	.4byte Unknown_81EC25C
+	.4byte Unknown_81EC260
+	.4byte Unknown_81EC264
+	.4byte Unknown_81EC268
+	.4byte Unknown_81EC26C
+	.4byte Unknown_81EC270
+	.4byte Unknown_81EC274
+	.4byte Unknown_81EC278
+	.4byte Unknown_81EC27C
+	.4byte Unknown_81EC280
+	.4byte Unknown_81EC284
+	.4byte Unknown_81EC288
+	.4byte Unknown_81EC28C
+	.4byte Unknown_81EC290
+	.4byte Unknown_81EC294
+	.4byte Unknown_81EC298
+	.4byte Unknown_81EC29C
+	.4byte Unknown_81EC2A0
 
 	.global gUnknown_081EC3F0
 gUnknown_081EC3F0: @ 81EC3F0
@@ -95,11 +392,20 @@ gUnknown_081EC3F0: @ 81EC3F0
 	.include "data/graphics/trainers/front_pic_palette_table.s"
 
 @ 81ECA6C
-	.incbin "baserom.gba", 0x1ECA6C, 0x60
+Unknown_81ECA6C:
+	.incbin "baserom.gba", 0x1ECA6C, 0x48
+Unknown_81ECAB4:
+	.incbin "baserom.gba", 0x1ECAB4, 0x8
+Unknown_81ECABC:
+	.incbin "baserom.gba", 0x1ECABC, 0x8
+Unknown_81ECAC4:
+	.incbin "baserom.gba", 0x1ECAC4, 0x8
 
 	.global gUnknown_081ECACC
 gUnknown_081ECACC: @ 81ECACC
-	.incbin "baserom.gba", 0x001ecacc, 0xc
+	.4byte Unknown_81ECAB4
+	.4byte Unknown_81ECABC
+	.4byte Unknown_81ECAC4
 
 	.global gUnknown_081ECAD8
 gUnknown_081ECAD8: @ 81ECAD8
@@ -147,7 +453,56 @@ gUnknown_081F95A4: @ 81F95A4
 
 	.global gUnknown_081F95AC
 gUnknown_081F95AC: @ 81F95AC
-	.incbin "baserom.gba", 0x001f95ac, 0xc8
+	.4byte 0x08e5de3c
+	.4byte 0x08e5e424
+	.4byte 0x08e639e4
+	.4byte 0x08e63f6c
+	.4byte 0x08e5e3ec
+	.4byte 0x08e5e6d4
+	.4byte 0x08e5ed8c
+	.4byte 0x08e64128
+	.4byte 0x08e64838
+	.4byte 0x08e5ed4c
+	.4byte 0x08e5f03c
+	.4byte 0x08e5f67c
+	.4byte 0x08e64a70
+	.4byte 0x08e64fb4
+	.4byte 0x08e5f634
+	.4byte 0x08e5f92c
+	.4byte 0x08e5ff2c
+	.4byte 0x08e6515c
+	.4byte 0x08e65628
+	.4byte 0x08e5fee4
+	.4byte 0x08e601dc
+	.4byte 0x08e607f4
+	.4byte 0x08e657b8
+	.4byte 0x08e65dc4
+	.4byte 0x08e607b0
+	.4byte 0x08e60aa4
+	.4byte 0x08e6108c
+	.4byte 0x08e65f68
+	.4byte 0x08e664b4
+	.4byte 0x08e6104c
+	.4byte 0x08e6133c
+	.4byte 0x08e61938
+	.4byte 0x08e66600
+	.4byte 0x08e66be0
+	.4byte 0x08e618fc
+	.4byte 0x08e61be8
+	.4byte 0x08e62228
+	.4byte 0x08e66d74
+	.4byte 0x08e67590
+	.4byte 0x08e621e0
+	.4byte 0x08e62514
+	.4byte 0x08e62afc
+	.4byte 0x08e67838
+	.4byte 0x08e67c48
+	.4byte 0x08e63664
+	.4byte 0x08e62514
+	.4byte 0x08e62afc
+	.4byte 0x08e67838
+	.4byte 0x08e67c48
+	.4byte 0x08e624d8
 
 	.global gUnknown_081F9674
 gUnknown_081F9674: @ 81F9674
@@ -190,11 +545,32 @@ gUnknown_081F98F0: @ 81F98F0
 	.align 2
 	.global gUnknown_081FA640
 gUnknown_081FA640: @ 81FA640
-	.incbin "baserom.gba", 0x001fa640, 0x38
+	.4byte 0x08013fe9
+	.4byte 0x080147a1
+	.4byte 0x080146f5
+	.4byte 0x08014bf5
+	.4byte 0x08014d51
+	.4byte 0x08014d99
+	.4byte 0x08014df9
+	.4byte 0x08014ebd
+	.4byte 0x08014f81
+	.4byte 0x08014fbd
+	.4byte 0x0801b595
+	.4byte 0x08015035
+	.4byte 0x08015095
+	.4byte 0x08015061
 
 	.global gUnknown_081FA678
 gUnknown_081FA678: @ 81FA678
-	.incbin "baserom.gba", 0x001fa678, 0x24
+	.4byte 0x08011dc9
+	.4byte 0x08013999
+	.4byte 0x08013b65
+	.4byte 0x08013b65
+	.4byte 0x08013bdd
+	.4byte 0x08013c9d
+	.4byte 0x08013c49
+	.4byte 0x08013c9d
+	.4byte 0x08013c9d
 
 	.global gUnknown_081FA69C
 gUnknown_081FA69C: @ 81FA69C
@@ -226,7 +602,20 @@ gUnknown_081FA6CC: @ 81FA6CC
 
 	.global gUnknown_081FA6D4
 gUnknown_081FA6D4: @ 81FA6D4
-	.incbin "baserom.gba", 0x001fa6d4, 0x38
+	.4byte gUnknown_081FA69C
+	.4byte BattleText_PoisonStatus
+	.4byte gUnknown_081FA6A4
+	.4byte BattleText_Sleep
+	.4byte gUnknown_081FA6AC
+	.4byte BattleText_Paralysis
+	.4byte gUnknown_081FA6B4
+	.4byte BattleText_Burn
+	.4byte gUnknown_081FA6BC
+	.4byte BattleText_IceStatus
+	.4byte gUnknown_081FA6C4
+	.4byte BattleText_Confusion
+	.4byte gUnknown_081FA6CC
+	.4byte BattleText_Love
 
 	.global gUnknown_081FA70C
 gUnknown_081FA70C: @ 81FA70C
@@ -246,7 +635,254 @@ gUnknown_081FA724: @ 81FA724
 
 	.global gUnknown_081FA73C
 gUnknown_081FA73C: @ 81FA73C
-	.incbin "baserom.gba", 0x001fa73c, 0x3e0
+	.4byte 0x0801bc51
+	.4byte 0x0801c2bd
+	.4byte 0x0801c649
+	.4byte 0x0801c69d
+	.4byte 0x0801c879
+	.4byte 0x0801c9ed
+	.4byte 0x0801ccc5
+	.4byte 0x0801d5b1
+	.4byte 0x0801d761
+	.4byte 0x0801d8ed
+	.4byte 0x0801da61
+	.4byte 0x0801da81
+	.4byte 0x0801db4d
+	.4byte 0x0801df49
+	.4byte 0x0801df9d
+	.4byte 0x0801e06d
+	.4byte 0x0801e21d
+	.4byte 0x0801e25d
+	.4byte 0x0801e2a1
+	.4byte 0x0801e2fd
+	.4byte 0x0801e351
+	.4byte 0x0801f615
+	.4byte 0x0801f709
+	.4byte 0x0801f719
+	.4byte 0x0801f729
+	.4byte 0x0801f7ad
+	.4byte 0x0801fb35
+	.4byte 0x0801fb71
+	.4byte 0x0801fbd5
+	.4byte 0x0801fc4d
+	.4byte 0x0801fcc5
+	.4byte 0x0801fdb5
+	.4byte 0x0801fe2d
+	.4byte 0x0801ff25
+	.4byte 0x0801ffa9
+	.4byte 0x08020005
+	.4byte 0x080209b5
+	.4byte 0x08020b9d
+	.4byte 0x08020bb5
+	.4byte 0x08020bcd
+	.4byte 0x08020c15
+	.4byte 0x08020c35
+	.4byte 0x08020cd5
+	.4byte 0x08020d7d
+	.4byte 0x08020e31
+	.4byte 0x08020eb9
+	.4byte 0x08020f3d
+	.4byte 0x08020f65
+	.4byte 0x08020f91
+	.4byte 0x08020fbd
+	.4byte 0x08021011
+	.4byte 0x0802107d
+	.4byte 0x080210a9
+	.4byte 0x080210e1
+	.4byte 0x08021125
+	.4byte 0x08021151
+	.4byte 0x08021189
+	.4byte 0x080211cd
+	.4byte 0x0802120d
+	.4byte 0x0802122d
+	.4byte 0x08021285
+	.4byte 0x08021291
+	.4byte 0x080212b1
+	.4byte 0x080212c9
+	.4byte 0x0801c099
+	.4byte 0x080212f9
+	.4byte 0x08021329
+	.4byte 0x08021385
+	.4byte 0x080213d1
+	.4byte 0x080213f1
+	.4byte 0x080214b5
+	.4byte 0x08021581
+	.4byte 0x080215fd
+	.4byte 0x080217f9
+	.4byte 0x080222dd
+	.4byte 0x0802252d
+	.4byte 0x0802257d
+	.4byte 0x080225f1
+	.4byte 0x08022785
+	.4byte 0x08022831
+	.4byte 0x08022a99
+	.4byte 0x0802331d
+	.4byte 0x08023525
+	.4byte 0x080237cd
+	.4byte 0x0802380d
+	.4byte 0x08023849
+	.4byte 0x08023885
+	.4byte 0x080238b5
+	.4byte 0x080238ed
+	.4byte 0x08023921
+	.4byte 0x08023af9
+	.4byte 0x08023e75
+	.4byte 0x08023f85
+	.4byte 0x08024015
+	.4byte 0x08024195
+	.4byte 0x08024249
+	.4byte 0x08024299
+	.4byte 0x080242c9
+	.4byte 0x08024391
+	.4byte 0x080243c1
+	.4byte 0x08024425
+	.4byte 0x080244b5
+	.4byte 0x0802455d
+	.4byte 0x080245f1
+	.4byte 0x080246a1
+	.4byte 0x080246d9
+	.4byte 0x08024855
+	.4byte 0x080248c1
+	.4byte 0x080248fd
+	.4byte 0x08024c4d
+	.4byte 0x08024c65
+	.4byte 0x08024c85
+	.4byte 0x08024cb9
+	.4byte 0x08024d15
+	.4byte 0x08024d2d
+	.4byte 0x08024d71
+	.4byte 0x08024e2d
+	.4byte 0x08024ee9
+	.4byte 0x08024f41
+	.4byte 0x08025131
+	.4byte 0x0802526d
+	.4byte 0x08025389
+	.4byte 0x080253e9
+	.4byte 0x0802548d
+	.4byte 0x08025509
+	.4byte 0x080256d1
+	.4byte 0x08025725
+	.4byte 0x080257dd
+	.4byte 0x0802589d
+	.4byte 0x0802591d
+	.4byte 0x080259ed
+	.4byte 0x08025a35
+	.4byte 0x08025ae1
+	.4byte 0x08025b5d
+	.4byte 0x08025bd9
+	.4byte 0x08025d01
+	.4byte 0x08025ded
+	.4byte 0x080262c5
+	.4byte 0x08026319
+	.4byte 0x0802636d
+	.4byte 0x080263dd
+	.4byte 0x0802641d
+	.4byte 0x08026469
+	.4byte 0x08026591
+	.4byte 0x0802688d
+	.4byte 0x08026a31
+	.4byte 0x08026ac1
+	.4byte 0x08026b79
+	.4byte 0x08026e59
+	.4byte 0x08026e95
+	.4byte 0x08026eed
+	.4byte 0x08027065
+	.4byte 0x08027239
+	.4byte 0x08027349
+	.4byte 0x080273dd
+	.4byte 0x08027439
+	.4byte 0x080275d9
+	.4byte 0x080276dd
+	.4byte 0x080278b9
+	.4byte 0x08027961
+	.4byte 0x08027991
+	.4byte 0x080279e5
+	.4byte 0x08027add
+	.4byte 0x08027bd5
+	.4byte 0x08027d19
+	.4byte 0x08027e4d
+	.4byte 0x08027f45
+	.4byte 0x0802813d
+	.4byte 0x08028195
+	.4byte 0x08028421
+	.4byte 0x08028559
+	.4byte 0x080285e9
+	.4byte 0x08028601
+	.4byte 0x08028669
+	.4byte 0x08028859
+	.4byte 0x08028ad5
+	.4byte 0x08028b71
+	.4byte 0x08028bfd
+	.4byte 0x08028c2d
+	.4byte 0x08028ce5
+	.4byte 0x08028e61
+	.4byte 0x08028ec9
+	.4byte 0x08028f7d
+	.4byte 0x08029001
+	.4byte 0x080290bd
+	.4byte 0x0802914d
+	.4byte 0x08029271
+	.4byte 0x080293e9
+	.4byte 0x08029441
+	.4byte 0x080294c1
+	.4byte 0x08029509
+	.4byte 0x0802964d
+	.4byte 0x0802967d
+	.4byte 0x08029785
+	.4byte 0x080298ad
+	.4byte 0x08029921
+	.4byte 0x08029a49
+	.4byte 0x08029c59
+	.4byte 0x08029cdd
+	.4byte 0x08029d6d
+	.4byte 0x08029dad
+	.4byte 0x08029e05
+	.4byte 0x08029ea1
+	.4byte 0x08029eed
+	.4byte 0x08029f51
+	.4byte 0x08029fc5
+	.4byte 0x0802a049
+	.4byte 0x0802a0a1
+	.4byte 0x0802a0fd
+	.4byte 0x0802a171
+	.4byte 0x0802a219
+	.4byte 0x0802a4b1
+	.4byte 0x0802a529
+	.4byte 0x0802a5fd
+	.4byte 0x0802a655
+	.4byte 0x0802a6bd
+	.4byte 0x0802a72d
+	.4byte 0x0802a799
+	.4byte 0x0802a7fd
+	.4byte 0x0802a895
+	.4byte 0x0802a995
+	.4byte 0x0802a9ed
+	.4byte 0x0802aa85
+	.4byte 0x0802abfd
+	.4byte 0x0802ac81
+	.4byte 0x0802acfd
+	.4byte 0x0802add9
+	.4byte 0x0802ae5d
+	.4byte 0x0802aeb1
+	.4byte 0x0802af69
+	.4byte 0x0802b055
+	.4byte 0x0802b0c1
+	.4byte 0x0802b109
+	.4byte 0x0802b1c1
+	.4byte 0x0802b28d
+	.4byte 0x0802b331
+	.4byte 0x0802b3e1
+	.4byte 0x0802b4b5
+	.4byte 0x0802b51d
+	.4byte 0x0802b5b9
+	.4byte 0x0802b961
+	.4byte 0x0802b9e1
+	.4byte 0x0802ba91
+	.4byte 0x0802bc91
+	.4byte 0x0802bef1
+	.4byte 0x0802bf21
+	.4byte 0x0802bf49
+	.4byte 0x0802bf55
 
 	.global gUnknown_081FAB1C
 gUnknown_081FAB1C: @ 81FAB1C
@@ -302,7 +938,63 @@ gUnknown_081FAD90: @ 81FAD90
 
 	.global gUnknown_081FAD98
 gUnknown_081FAD98: @ 81FAD98
-	.incbin "baserom.gba", 0x001fad98, 0xe4
+	.4byte 0x0802e4d1
+	.4byte 0x0802ecf1
+	.4byte 0x0802ed79
+	.4byte 0x0802f7cd
+	.4byte 0x0802f841
+	.4byte 0x0802f8a9
+	.4byte 0x0802faa1
+	.4byte 0x0802fbb5
+	.4byte 0x0802fce1
+	.4byte 0x0802fdbd
+	.4byte 0x0802fe7d
+	.4byte 0x0802ff61
+	.4byte 0x0802ff81
+	.4byte 0x0802ffd1
+	.4byte 0x0803002d
+	.4byte 0x0803005d
+	.4byte 0x080302f5
+	.4byte 0x08030359
+	.4byte 0x0803037d
+	.4byte 0x08030465
+	.4byte 0x08030469
+	.4byte 0x08030531
+	.4byte 0x08030595
+	.4byte 0x08030675
+	.4byte 0x08030699
+	.4byte 0x08030799
+	.4byte 0x08030835
+	.4byte 0x080308a9
+	.4byte 0x08030911
+	.4byte 0x0803097d
+	.4byte 0x08030989
+	.4byte 0x08030a3d
+	.4byte 0x08030a6d
+	.4byte 0x08030a79
+	.4byte 0x08030a8d
+	.4byte 0x08030aa1
+	.4byte 0x08030ab5
+	.4byte 0x08030ac9
+	.4byte 0x08030ae5
+	.4byte 0x08030b1d
+	.4byte 0x08030b35
+	.4byte 0x08030b5d
+	.4byte 0x08030bcd
+	.4byte 0x08030bd9
+	.4byte 0x08030c1d
+	.4byte 0x08030c4d
+	.4byte 0x08030c8d
+	.4byte 0x08030cc1
+	.4byte 0x08030fad
+	.4byte 0x080310a5
+	.4byte 0x080310f1
+	.4byte 0x08031115
+	.4byte 0x08031175
+	.4byte 0x080311dd
+	.4byte 0x08031239
+	.4byte 0x080312a1
+	.4byte 0x080312ed
 
 	.global gUnknown_081FAE7C
 gUnknown_081FAE7C: @ 81FAE7C
@@ -342,7 +1034,10 @@ gUnknown_081FAF34: @ 81FAF34
 
 	.global gUnknown_081FAF4C
 gUnknown_081FAF4C: @ 81FAF4C
-	.incbin "baserom.gba", 0x001faf4c, 0x10
+	.4byte 0x02008000
+	.4byte 0x0200a000
+	.4byte 0x0200c000
+	.4byte 0x0200e000
 
 	.global gUnknown_081FAF5C
 gUnknown_081FAF5C: @ 81FAF5C
@@ -350,7 +1045,63 @@ gUnknown_081FAF5C: @ 81FAF5C
 
 	.global gUnknown_081FB048
 gUnknown_081FB048: @ 81FB048
-	.incbin "baserom.gba", 0x001fb048, 0xe4
+	.4byte 0x0803807d
+	.4byte 0x0803889d
+	.4byte 0x080388a9
+	.4byte 0x08039221
+	.4byte 0x08039295
+	.4byte 0x080393e5
+	.4byte 0x080395b5
+	.4byte 0x080396d1
+	.4byte 0x080398a5
+	.4byte 0x080398b1
+	.4byte 0x0803995d
+	.4byte 0x08039a01
+	.4byte 0x08039a0d
+	.4byte 0x08039a19
+	.4byte 0x08039a25
+	.4byte 0x08039a31
+	.4byte 0x08039cc9
+	.4byte 0x08039d2d
+	.4byte 0x08039d39
+	.4byte 0x08039d45
+	.4byte 0x08039d51
+	.4byte 0x08039d5d
+	.4byte 0x08039d69
+	.4byte 0x08039d75
+	.4byte 0x08039d81
+	.4byte 0x08039e71
+	.4byte 0x08039e7d
+	.4byte 0x08039ef1
+	.4byte 0x08039f59
+	.4byte 0x08039f65
+	.4byte 0x08039f71
+	.4byte 0x08039f7d
+	.4byte 0x08039f89
+	.4byte 0x08039f95
+	.4byte 0x08039fa1
+	.4byte 0x08039fad
+	.4byte 0x08039fb9
+	.4byte 0x08039fc5
+	.4byte 0x08039fe1
+	.4byte 0x0803a019
+	.4byte 0x0803a031
+	.4byte 0x0803a059
+	.4byte 0x0803a0c9
+	.4byte 0x0803a0d5
+	.4byte 0x0803a119
+	.4byte 0x0803a149
+	.4byte 0x0803a185
+	.4byte 0x0803a1b9
+	.4byte 0x0803a3dd
+	.4byte 0x0803a521
+	.4byte 0x0803a56d
+	.4byte 0x0803a579
+	.4byte 0x0803a5d9
+	.4byte 0x0803a641
+	.4byte 0x0803a64d
+	.4byte 0x0803a659
+	.4byte 0x0803a6bd
 
 @ 81FB12C
 	.include "data/battle_moves.s"
@@ -473,7 +1224,10 @@ gUnknown_082087DC: @ 82087DC
 	.align 2
 	.global gUnknown_08209AC4
 gUnknown_08209AC4: @ 8209AC4
-	.incbin "baserom.gba", 0x00209ac4, 0x10
+	.4byte DaycareText_GetAlongVeryWell
+	.4byte DaycareText_GetAlong
+	.4byte DaycareText_DontLikeOther
+	.4byte DaycareText_PlayOther
 
 	.global gUnknown_08209AD4
 gUnknown_08209AD4: @ 8209AD4
@@ -711,7 +1465,12 @@ gUnknown_0820C134: @ 820C134
 
 	.global gUnknown_0820C14C
 gUnknown_0820C14C: @ 820C14C
-	.incbin "baserom.gba", 0x0020c14c, 0x18
+	.4byte TradeText_Cancel
+	.4byte TradeText_ChoosePoke
+	.4byte TradeText_Summary1
+	.4byte TradeText_Trade1
+	.4byte TradeText_CancelTradePrompt
+	.4byte TradeText_PressBToExit
 
 	.global gUnknown_0820C164
 gUnknown_0820C164: @ 820C164
@@ -739,7 +1498,12 @@ gUnknown_0820C2E9: @ 820C2E9
 
 	.global gUnknown_0820C2F0
 gUnknown_0820C2F0: @ 820C2F0
-	.incbin "baserom.gba", 0x0020c2f0, 0x18
+	.4byte TradeText_LinkStandby
+	.4byte TradeText_TradeCancelled
+	.4byte TradeText_OnlyPoke
+	.4byte TradeText_NonTradablePoke
+	.4byte TradeText_WaitingForFriend
+	.4byte TradeText_WantToTrade
 
 	.global gUnknown_0820C308
 gUnknown_0820C308: @ 820C308
@@ -747,7 +1511,10 @@ gUnknown_0820C308: @ 820C308
 
 	.global gUnknown_0820C320
 gUnknown_0820C320: @ 820C320
-	.incbin "baserom.gba", 0x0020c320, 0x10
+	.4byte TradeText_Summary2
+	.4byte 0x0804a9f5 @unknown
+	.4byte TradeText_Trade2
+	.4byte 0x0804aa01
 
 	.global gUnknown_0820C330
 gUnknown_0820C330: @ 820C330
@@ -767,22 +1534,23 @@ gUnknown_0820C33C:
 
 	.global gUnknown_0820C33D
 gUnknown_0820C33D: @ 820C33D
+OtherText_MaleSymbol3:
 	.string "♂$"
 
 	.global gUnknown_0820C33F
 gUnknown_0820C33F: @ 820C33F
+OtherText_FemaleSymbol3:
 	.string "♀$"
 
 	.global gUnknown_0820C341
 gUnknown_0820C341: @ 820C341
-	.string "$"
-
-	.string "$"
+	.string "$$"
 
 	.align 2
 	.4byte gTileBuffer
 
 @ Unused debug strings?
+@ Not labeling these yet
 	.string "かいめの そうしん$", 13
 	.string "かいめの じゅしん$", 13
 	.string "ポケモンアイコンセット$", 13
@@ -895,11 +1663,13 @@ gUnknown_08215A80: @ 8215A80
 
 	.global gUnknown_08215A98
 gUnknown_08215A98: @ 8215A98
-	.incbin "baserom.gba", 0x00215a98, 0x28
+	.incbin "baserom.gba", 0x00215a98, 0x18
+Unknown_08215AB0:
+	.incbin "baserom.gba", 0x00215ab0, 0x10
 
 	.global gUnknown_08215AC0
 gUnknown_08215AC0: @ 8215AC0
-	.incbin "baserom.gba", 0x00215ac0, 0x4
+	.4byte Unknown_08215AB0
 
 	.global gUnknown_08215AC4
 gUnknown_08215AC4: @ 8215AC4
@@ -927,35 +1697,47 @@ gUnknown_0821602C: @ 821602C
 
 	.global gUnknown_08216249
 gUnknown_08216249: @ 8216249
-	.byte 0xFB @probably not a /p
+	.byte 0xFB
 	.string "$"
 	.incbin "baserom.gba", 0x0021624b, 0x28
+UnknownText_2Pok:
 	.string "2Pok$"
+UnknownText_3Pok:
 	.string "3Pok$"
+UnknownText_4Pok:
 	.string "4Pok$"
 	.align 2
 
 	.global gUnknown_08216284
-gUnknown_08216284: @ 8216284
-	.4byte 0x08216273 @pointers
-	.4byte 0x08216278
-	.4byte 0x0821627D
+gUnknown_08216284: @ 8216284 berry blender helpers?
+	.4byte UnknownText_2Pok
+	.4byte UnknownText_3Pok
+	.4byte UnknownText_4Pok
+OtherText_1P:
 	.string "1P$"
 	.align 2
+OtherText_2P:
 	.string "2P$"
 	.align 2
+OtherText_3P:
 	.string "3P$"
 	.align 2
+OtherText_4P:
 	.string "4P$"
 	.align 2
+UnknownText_Mister:
 	.string "MISTER$"
+UnknownText_Laddie:
 	.string "LADDIE$"
+UnknownText_Lassie:
 	.string "LASSIE$"
 	.align 2
 
 	.global gUnknown_082162B8
 gUnknown_082162B8: @ 82162B8
-	.incbin "baserom.gba", 0x002162b8, 0xc
+	.4byte UnknownText_Mister
+	.4byte UnknownText_Laddie
+	.4byte UnknownText_Lassie
 
 	.global gUnknown_082162C4
 gUnknown_082162C4: @ 82162C4
@@ -1079,7 +1861,9 @@ gUnknown_082165F8: @ 82165F8
 
 	.global gUnknown_082165FA
 gUnknown_082165FA: @ 82165FA
+OtherText_BPM:
 	.string "BPM$"
+OtherText_Dash:
 	.string "-$"
 
 	.global gUnknown_08216600
@@ -1104,15 +1888,28 @@ gUnknown_08216694: @ 8216694
 
 	.global gUnknown_082166A0
 gUnknown_082166A0: @ 82166A0
-	.incbin "baserom.gba", 0x002166a0, 0xc
+	.4byte 0x08055c69
+	.4byte 0x08055c89
+	.4byte 0x08055c8d
 
 	.global gUnknown_082166AC
 gUnknown_082166AC: @ 82166AC
-	.incbin "baserom.gba", 0x002166ac, 0x2c
+	.4byte 0x08055cad
+	.4byte 0x08055cb1
+	.4byte 0x08055cb1
+	.4byte 0x08055cb1
+	.4byte 0x08055cb1
+	.4byte 0x08055cad
+	.4byte 0x08055cad
+	.4byte 0x08055d19
+	.4byte 0x08055d19
+	.4byte 0x08055d19
+	.4byte 0x08055d19
 
 	.global gUnknown_082166D8
 gUnknown_082166D8: @ 82166D8
-	.incbin "baserom.gba", 0x002166d8, 0x8
+	.4byte 0x08055d31
+	.4byte 0x08055d39
 
 @ 82166E0
 	.include "data/tilesets/graphics.s"
@@ -1153,19 +1950,60 @@ gUnknown_0830F9B4: @ 830F9B4
 
 	.global gUnknown_0830FB58
 gUnknown_0830FB58: @ 830FB58
-	.incbin "baserom.gba", 0x0030fb58, 0x48
+	.4byte 0x08057051
+	.4byte 0x0805703d
+	.4byte 0x0805708d
+	.4byte 0x08057079
+	.4byte 0x080570a1
+	.4byte 0x080570b5
+	.4byte 0x080570dd
+	.4byte 0x080570c9
+	.4byte 0x080570f1
+	.4byte 0x08057105
+	.4byte 0x0805712d
+	.4byte 0x08057119
+	.4byte 0x08057141
+	.4byte 0x08057155
+	.4byte 0x08057679
+	.4byte 0x08057771
+	.4byte 0x08057785
+	.4byte 0x08057841
 
 	.global gUnknown_0830FBA0
 gUnknown_0830FBA0: @ 830FBA0
-	.incbin "baserom.gba", 0x0030fba0, 0x4c
+	.4byte 0x080589a1
+	.4byte 0x08058a99
+	.4byte 0x08058a99
+	.4byte 0x08058aad
+	.4byte 0x08058ac5
+	.4byte 0x08058add
+	.4byte 0x08058af5
+	.4byte 0x08058b0d
+	.4byte 0x08058b25
+	.4byte 0x08058b3d
+	.4byte 0x08058b55
+	.4byte 0x08058ba5
+	.4byte 0x08058bbd
+	.4byte 0x08058bd5
+	.4byte 0x08058bed
+	.4byte 0x08058b0d
+	.4byte 0x08058c05
+	.4byte 0x08058c11
+	.4byte 0x08058c1d
 
 	.global gUnknown_0830FBEC
 gUnknown_0830FBEC: @ 830FBEC
-	.incbin "baserom.gba", 0x0030fbec, 0xc
+	.4byte 0x08058ce9
+	.4byte 0x08058cfd
+	.4byte 0x08058d0d
 
 	.global gUnknown_0830FBF8
 gUnknown_0830FBF8: @ 830FBF8
-	.incbin "baserom.gba", 0x0030fbf8, 0x14
+	.4byte 0x08057855
+	.4byte 0x08057869
+	.4byte 0x0805787d
+	.4byte 0x08057891
+	.4byte 0x080578a5
 
 	.global gUnknown_0830FC0C
 gUnknown_0830FC0C: @ 830FC0C
@@ -1173,11 +2011,21 @@ gUnknown_0830FC0C: @ 830FC0C
 
 	.global gUnknown_0830FC14
 gUnknown_0830FC14: @ 830FC14
-	.incbin "baserom.gba", 0x0030fc14, 0x20
+	.4byte 0x080590cd
+	.4byte 0x080590f9
+	.4byte 0x0805912d
+	.4byte 0x08059165
+	.4byte 0x080591c1
+	.4byte 0x080591f5
+	.4byte 0x080590c9
+	.4byte 0x080590c9
 
 	.global gUnknown_0830FC34
 gUnknown_0830FC34: @ 830FC34
-	.incbin "baserom.gba", 0x0030fc34, 0x10
+	.4byte 0x08056f9d
+	.4byte 0x08056f85
+	.4byte 0x08056f71
+	.4byte 0x08056f5d
 
 	.global gUnknown_0830FC44
 gUnknown_0830FC44: @ 830FC44
@@ -1193,19 +2041,27 @@ gUnknown_0830FC64: @ 830FC64
 
 	.global gUnknown_0830FC78
 gUnknown_0830FC78: @ 830FC78
-	.incbin "baserom.gba", 0x0030fc78, 0x10
+	.4byte 0x08056f9d
+	.4byte 0x08056f85
+	.4byte 0x08056f71
+	.4byte 0x08056f5d
 
 	.global gUnknown_0830FC88
 gUnknown_0830FC88: @ 830FC88
-	.incbin "baserom.gba", 0x0030fc88, 0xc
+	.4byte 0x08059e85
+	.4byte 0x08059ea5
+	.4byte 0x08059f41
 
 	.global gUnknown_0830FC94
 gUnknown_0830FC94: @ 830FC94
-	.incbin "baserom.gba", 0x0030fc94, 0x4
+	.4byte 0x0805a001
 
 	.global gUnknown_0830FC98
 gUnknown_0830FC98: @ 830FC98
-	.incbin "baserom.gba", 0x0030fc98, 0x10
+	.4byte 0x0805a0d9
+	.4byte 0x0805a101
+	.4byte 0x0805a179
+	.4byte 0x0805a1b9
 
 	.global gUnknown_0830FCA8
 gUnknown_0830FCA8: @ 830FCA8
@@ -1217,7 +2073,22 @@ gUnknown_0830FCAC: @ 830FCAC
 
 	.global gUnknown_0830FCB4
 gUnknown_0830FCB4: @ 830FCB4
-	.incbin "baserom.gba", 0x0030fcb4, 0x40
+	.4byte 0x0805a3b5
+	.4byte 0x0805a3d5
+	.4byte 0x0805a46d
+	.4byte 0x0805a491
+	.4byte 0x0805a4d9
+	.4byte 0x0805a56d
+	.4byte 0x0805a5cd
+	.4byte 0x0805a5f5
+	.4byte 0x0805a64d
+	.4byte 0x0805a6b5
+	.4byte 0x0805a6dd
+	.4byte 0x0805a7bd
+	.4byte 0x0805a809
+	.4byte 0x0805a859
+	.4byte 0x0805a875
+	.4byte 0x0805a915
 
 	.global gUnknown_0830FCF4
 gUnknown_0830FCF4: @ 830FCF4
@@ -1249,7 +2120,9 @@ gUnknown_0830FD24: @ 830FD24
 
 	.global gUnknown_0830FD3C
 gUnknown_0830FD3C: @ 830FD3C
-	.incbin "baserom.gba", 0x0030fd3c, 0xc
+	.4byte 0x0805c2f1
+	.4byte 0x0805c32d
+	.4byte 0x0805c365
 
 @ 830FD48
 	.include "data/graphics/field_objects/map_object_graphics.s"
@@ -1259,7 +2132,83 @@ gUnknown_0830FD3C: @ 830FD3C
 
 	.global gUnknown_0836DA88
 gUnknown_0836DA88: @ 836DA88
-	.incbin "baserom.gba", 0x0036da88, 0x134
+	.4byte 0x0805c885
+	.4byte 0x0805cde9
+	.4byte 0x0805c8ad
+	.4byte 0x0805cf29
+	.4byte 0x0805cf29
+	.4byte 0x0805d0ad
+	.4byte 0x0805d0ad
+	.4byte 0x0805d231
+	.4byte 0x0805d231
+	.4byte 0x0805d231
+	.4byte 0x0805d231
+	.4byte 0x080587b5
+	.4byte 0x0805d2d1
+	.4byte 0x0805d4f5
+	.4byte 0x0805d635
+	.4byte 0x0805d775
+	.4byte 0x0805d8b5
+	.4byte 0x0805d9f5
+	.4byte 0x0805db35
+	.4byte 0x0805dc75
+	.4byte 0x0805ddb5
+	.4byte 0x0805def5
+	.4byte 0x0805e035
+	.4byte 0x0805e175
+	.4byte 0x0805e279
+	.4byte 0x0805e37d
+	.4byte 0x0805e37d
+	.4byte 0x0805e37d
+	.4byte 0x0805e37d
+	.4byte 0x0805e5dd
+	.4byte 0x0805e669
+	.4byte 0x0805e6f5
+	.4byte 0x0805e781
+	.4byte 0x0805e80d
+	.4byte 0x0805e899
+	.4byte 0x0805e925
+	.4byte 0x0805e9b1
+	.4byte 0x0805ea3d
+	.4byte 0x0805eac9
+	.4byte 0x0805eb55
+	.4byte 0x0805ebe1
+	.4byte 0x0805ec6d
+	.4byte 0x0805ecf9
+	.4byte 0x0805ed85
+	.4byte 0x0805ee11
+	.4byte 0x0805ee9d
+	.4byte 0x0805ef29
+	.4byte 0x0805efb5
+	.4byte 0x0805f041
+	.4byte 0x0805f0cd
+	.4byte 0x0805f159
+	.4byte 0x0805f1e5
+	.4byte 0x0805f271
+	.4byte 0x0805f2fd
+	.4byte 0x0805f2fd
+	.4byte 0x0805f2fd
+	.4byte 0x0805f2fd
+	.4byte 0x0805f989
+	.4byte 0x0805fa05
+	.4byte 0x0805f8e1
+	.4byte 0x0805f8e1
+	.4byte 0x0805f8e1
+	.4byte 0x0805f8e1
+	.4byte 0x0805fa75
+	.4byte 0x0805fb21
+	.4byte 0x0805fb21
+	.4byte 0x0805fb21
+	.4byte 0x0805fb21
+	.4byte 0x0805fb91
+	.4byte 0x0805fb91
+	.4byte 0x0805fb91
+	.4byte 0x0805fb91
+	.4byte 0x0805fc01
+	.4byte 0x0805fc01
+	.4byte 0x0805fc01
+	.4byte 0x0805fc01
+	.4byte 0x0805fc71
 
 	.global gUnknown_0836DBBC
 gUnknown_0836DBBC: @ 836DBBC
@@ -1300,11 +2249,23 @@ gUnknown_08373874: @ 8373874
 
 	.global gUnknown_083738E4
 gUnknown_083738E4: @ 83738E4
-	.incbin "baserom.gba", 0x003738e4, 0xb8
+Unknown_83738E4:
+	.incbin "baserom.gba", 0x003738e4, 0x68
+Unknown_837394C:
+	.incbin "baserom.gba", 0x0037394C, 0x14
+Unknown_8373960:
+	.incbin "baserom.gba", 0x00373960, 0x14
+Unknown_8373974:
+	.incbin "baserom.gba", 0x00373974, 0x14
+Unknown_8373988:
+	.incbin "baserom.gba", 0x00373988, 0x14
 
 	.global gUnknown_0837399C
 gUnknown_0837399C: @ 837399C
-	.incbin "baserom.gba", 0x0037399c, 0x10
+	.4byte Unknown_837394C
+	.4byte Unknown_8373960
+	.4byte Unknown_8373974
+	.4byte Unknown_8373988
 
 @ 83739AC
 	.include "data/graphics/field_objects/berry_tree_graphics_tables.s"
@@ -1322,7 +2283,13 @@ gUnknown_0837521C: @ 837521C
 
 	.global gUnknown_08375224
 gUnknown_08375224: @ 8375224
-	.incbin "baserom.gba", 0x00375224, 0x1c
+	.4byte 0x0805c8f1
+	.4byte 0x0805c905
+	.4byte 0x0805c931
+	.4byte 0x0805c96d
+	.4byte 0x0805c98d
+	.4byte 0x0805c9d9
+	.4byte 0x0805ca09
 
 	.global gUnknown_08375240
 gUnknown_08375240: @ 8375240
@@ -1330,15 +2297,35 @@ gUnknown_08375240: @ 8375240
 
 	.global gUnknown_08375244
 gUnknown_08375244: @ 8375244
-	.incbin "baserom.gba", 0x00375244, 0x2c
+	.4byte 0x0805caad
+	.4byte 0x0805cadd
+	.4byte 0x0805caed
+	.4byte 0x0805cb01
+	.4byte 0x0805cb5d
+	.4byte 0x0805cbb9
+	.4byte 0x0805cc15
+	.4byte 0x0805cc71
+	.4byte 0x0805ccad
+	.4byte 0x0805cce9
+	.4byte 0x0805cd25
 
 	.global gUnknown_08375270
 gUnknown_08375270: @ 8375270
-	.incbin "baserom.gba", 0x00375270, 0x14
+	.4byte 0x0805ce2d
+	.4byte 0x0805ce41
+	.4byte 0x0805ce6d
+	.4byte 0x0805ceb1
+	.4byte 0x0805cee1
 
 	.global gUnknown_08375284
 gUnknown_08375284: @ 8375284
-	.incbin "baserom.gba", 0x00375284, 0x1c
+	.4byte 0x0805cf6d
+	.4byte 0x0805cf81
+	.4byte 0x0805cfad
+	.4byte 0x0805cfe9
+	.4byte 0x0805d009
+	.4byte 0x0805d055
+	.4byte 0x0805d085
 
 	.global gUnknown_083752A0
 gUnknown_083752A0: @ 83752A0
@@ -1346,7 +2333,13 @@ gUnknown_083752A0: @ 83752A0
 
 	.global gUnknown_083752A4
 gUnknown_083752A4: @ 83752A4
-	.incbin "baserom.gba", 0x003752a4, 0x1c
+	.4byte 0x0805d0f1
+	.4byte 0x0805d105
+	.4byte 0x0805d131
+	.4byte 0x0805d16d
+	.4byte 0x0805d18d
+	.4byte 0x0805d1d9
+	.4byte 0x0805d209
 
 	.global gUnknown_083752C0
 gUnknown_083752C0: @ 83752C0
@@ -1354,23 +2347,41 @@ gUnknown_083752C0: @ 83752C0
 
 	.global gUnknown_083752C4
 gUnknown_083752C4: @ 83752C4
-	.incbin "baserom.gba", 0x003752c4, 0xc
+	.4byte 0x0805d275
+	.4byte 0x0805d2a1
+	.4byte 0x0805d2c1
 
 	.global gUnknown_083752D0
 gUnknown_083752D0: @ 83752D0
-	.incbin "baserom.gba", 0x003752d0, 0x14
+	.4byte 0x0805d335
+	.4byte 0x0805d3ed
+	.4byte 0x0805d40d
+	.4byte 0x0805d459
+	.4byte 0x0805d4a9
 
 	.global gUnknown_083752E4
 gUnknown_083752E4: @ 83752E4
-	.incbin "baserom.gba", 0x003752e4, 0x14
+	.4byte 0x0805d539
+	.4byte 0x0805d54d
+	.4byte 0x0805d579
+	.4byte 0x0805d5bd
+	.4byte 0x0805d5ed
 
 	.global gUnknown_083752F8
 gUnknown_083752F8: @ 83752F8
-	.incbin "baserom.gba", 0x003752f8, 0x14
+	.4byte 0x0805d679
+	.4byte 0x0805d68d
+	.4byte 0x0805d6b9
+	.4byte 0x0805d6fd
+	.4byte 0x0805d72d
 
 	.global gUnknown_0837530C
 gUnknown_0837530C: @ 837530C
-	.incbin "baserom.gba", 0x0037530c, 0x14
+	.4byte 0x0805d7b9
+	.4byte 0x0805d7cd
+	.4byte 0x0805d7f9
+	.4byte 0x0805d83d
+	.4byte 0x0805d86d
 
 	.global gUnknown_08375320
 gUnknown_08375320: @ 8375320
@@ -1378,7 +2389,11 @@ gUnknown_08375320: @ 8375320
 
 	.global gUnknown_08375324
 gUnknown_08375324: @ 8375324
-	.incbin "baserom.gba", 0x00375324, 0x14
+	.4byte 0x0805d8f9
+	.4byte 0x0805d90d
+	.4byte 0x0805d939
+	.4byte 0x0805d97d
+	.4byte 0x0805d9ad
 
 	.global gUnknown_08375338
 gUnknown_08375338: @ 8375338
@@ -1386,7 +2401,11 @@ gUnknown_08375338: @ 8375338
 
 	.global gUnknown_0837533C
 gUnknown_0837533C: @ 837533C
-	.incbin "baserom.gba", 0x0037533c, 0x14
+	.4byte 0x0805da39
+	.4byte 0x0805da4d
+	.4byte 0x0805da79
+	.4byte 0x0805dabd
+	.4byte 0x0805daed
 
 	.global gUnknown_08375350
 gUnknown_08375350: @ 8375350
@@ -1394,7 +2413,11 @@ gUnknown_08375350: @ 8375350
 
 	.global gUnknown_08375354
 gUnknown_08375354: @ 8375354
-	.incbin "baserom.gba", 0x00375354, 0x14
+	.4byte 0x0805db79
+	.4byte 0x0805db8d
+	.4byte 0x0805dbb9
+	.4byte 0x0805dbfd
+	.4byte 0x0805dc2d
 
 	.global gUnknown_08375368
 gUnknown_08375368: @ 8375368
@@ -1402,7 +2425,11 @@ gUnknown_08375368: @ 8375368
 
 	.global gUnknown_0837536C
 gUnknown_0837536C: @ 837536C
-	.incbin "baserom.gba", 0x0037536c, 0x14
+	.4byte 0x0805dcb9
+	.4byte 0x0805dccd
+	.4byte 0x0805dcf9
+	.4byte 0x0805dd3d
+	.4byte 0x0805dd6d
 
 	.global gUnknown_08375380
 gUnknown_08375380: @ 8375380
@@ -1410,7 +2437,11 @@ gUnknown_08375380: @ 8375380
 
 	.global gUnknown_08375384
 gUnknown_08375384: @ 8375384
-	.incbin "baserom.gba", 0x00375384, 0x14
+	.4byte 0x0805ddf9
+	.4byte 0x0805de0d
+	.4byte 0x0805de39
+	.4byte 0x0805de7d
+	.4byte 0x0805dead
 
 	.global gUnknown_08375398
 gUnknown_08375398: @ 8375398
@@ -1418,7 +2449,11 @@ gUnknown_08375398: @ 8375398
 
 	.global gUnknown_0837539C
 gUnknown_0837539C: @ 837539C
-	.incbin "baserom.gba", 0x0037539c, 0x14
+	.4byte 0x0805df39
+	.4byte 0x0805df4d
+	.4byte 0x0805df79
+	.4byte 0x0805dfbd
+	.4byte 0x0805dfed
 
 	.global gUnknown_083753B0
 gUnknown_083753B0: @ 83753B0
@@ -1426,7 +2461,11 @@ gUnknown_083753B0: @ 83753B0
 
 	.global gUnknown_083753B4
 gUnknown_083753B4: @ 83753B4
-	.incbin "baserom.gba", 0x003753b4, 0x14
+	.4byte 0x0805e079
+	.4byte 0x0805e08d
+	.4byte 0x0805e0b9
+	.4byte 0x0805e0fd
+	.4byte 0x0805e12d
 
 	.global gUnknown_083753C8
 gUnknown_083753C8: @ 83753C8
@@ -1434,7 +2473,10 @@ gUnknown_083753C8: @ 83753C8
 
 	.global gUnknown_083753CC
 gUnknown_083753CC: @ 83753CC
-	.incbin "baserom.gba", 0x003753cc, 0x10
+	.4byte 0x0805e1b9
+	.4byte 0x0805e1e5
+	.4byte 0x0805e209
+	.4byte 0x0805e235
 
 	.global gUnknown_083753DC
 gUnknown_083753DC: @ 83753DC
@@ -1442,7 +2484,10 @@ gUnknown_083753DC: @ 83753DC
 
 	.global gUnknown_083753E4
 gUnknown_083753E4: @ 83753E4
-	.incbin "baserom.gba", 0x003753e4, 0x10
+	.4byte 0x0805e2bd
+	.4byte 0x0805e2e9
+	.4byte 0x0805e30d
+	.4byte 0x0805e339
 
 	.global gUnknown_083753F4
 gUnknown_083753F4: @ 83753F4
@@ -1450,11 +2495,16 @@ gUnknown_083753F4: @ 83753F4
 
 	.global gUnknown_083753FC
 gUnknown_083753FC: @ 83753FC
-	.incbin "baserom.gba", 0x003753fc, 0x10
+	.4byte 0x0805e3c1
+	.4byte 0x0805e3d5
+	.4byte 0x0805e40d
+	.4byte 0x0805e4c5
 
 	.global gUnknown_0837540C
 gUnknown_0837540C: @ 837540C
-	.incbin "baserom.gba", 0x0037540c, 0xc
+	.4byte 0x0805e4ed
+	.4byte 0x0805e621
+	.4byte 0x0805e5b5
 
 	.global gUnknown_08375418
 gUnknown_08375418: @ 8375418
@@ -1462,15 +2512,19 @@ gUnknown_08375418: @ 8375418
 
 	.global gUnknown_0837541C
 gUnknown_0837541C: @ 837541C
-	.incbin "baserom.gba", 0x0037541c, 0xc
+	.4byte 0x0805e4ed
+	.4byte 0x0805e6ad
+	.4byte 0x0805e5b5
 
 	.global gUnknown_08375428
 gUnknown_08375428: @ 8375428
-	.incbin "baserom.gba", 0x00375428, 0x4
+	.4byte 0x02010304
 
 	.global gUnknown_0837542C
 gUnknown_0837542C: @ 837542C
-	.incbin "baserom.gba", 0x0037542c, 0xc
+	.4byte 0x0805e4ed
+	.4byte 0x0805e739
+	.4byte 0x0805e5b5
 
 	.global gUnknown_08375438
 gUnknown_08375438: @ 8375438
@@ -1478,7 +2532,9 @@ gUnknown_08375438: @ 8375438
 
 	.global gUnknown_0837543C
 gUnknown_0837543C: @ 837543C
-	.incbin "baserom.gba", 0x0037543c, 0xc
+	.4byte 0x0805e4ed
+	.4byte 0x0805e7c5
+	.4byte 0x0805e5b5
 
 	.global gUnknown_08375448
 gUnknown_08375448: @ 8375448
@@ -1486,7 +2542,9 @@ gUnknown_08375448: @ 8375448
 
 	.global gUnknown_0837544C
 gUnknown_0837544C: @ 837544C
-	.incbin "baserom.gba", 0x0037544c, 0xc
+	.4byte 0x0805e4ed
+	.4byte 0x0805e851
+	.4byte 0x0805e5b5
 
 	.global gUnknown_08375458
 gUnknown_08375458: @ 8375458
@@ -1494,19 +2552,25 @@ gUnknown_08375458: @ 8375458
 
 	.global gUnknown_0837545C
 gUnknown_0837545C: @ 837545C
-	.incbin "baserom.gba", 0x0037545c, 0xc
+	.4byte 0x0805e4ed
+	.4byte 0x0805e8dd
+	.4byte 0x0805e5b5
 
 	.global gUnknown_08375468
 gUnknown_08375468: @ 8375468
-	.incbin "baserom.gba", 0x00375468, 0x4
+	.4byte 0x02010403
 
 	.global gUnknown_0837546C
 gUnknown_0837546C: @ 837546C
-	.incbin "baserom.gba", 0x0037546c, 0xc
+	.4byte 0x0805e4ed
+	.4byte 0x0805e969
+	.4byte 0x0805e5b5
 
 	.global gUnknown_08375478
 gUnknown_08375478: @ 8375478
-	.incbin "baserom.gba", 0x00375478, 0xc
+	.4byte 0x0805e4ed
+	.4byte 0x0805e9f5
+	.4byte 0x0805e5b5
 
 	.global gUnknown_08375484
 gUnknown_08375484: @ 8375484
@@ -1514,7 +2578,9 @@ gUnknown_08375484: @ 8375484
 
 	.global gUnknown_08375488
 gUnknown_08375488: @ 8375488
-	.incbin "baserom.gba", 0x00375488, 0xc
+	.4byte 0x0805e4ed
+	.4byte 0x0805ea81
+	.4byte 0x0805e5b5
 
 	.global gUnknown_08375494
 gUnknown_08375494: @ 8375494
@@ -1522,7 +2588,9 @@ gUnknown_08375494: @ 8375494
 
 	.global gUnknown_08375498
 gUnknown_08375498: @ 8375498
-	.incbin "baserom.gba", 0x00375498, 0xc
+	.4byte 0x0805e4ed
+	.4byte 0x0805eb0d
+	.4byte 0x0805e5b5
 
 	.global gUnknown_083754A4
 gUnknown_083754A4: @ 83754A4
@@ -1530,7 +2598,9 @@ gUnknown_083754A4: @ 83754A4
 
 	.global gUnknown_083754A8
 gUnknown_083754A8: @ 83754A8
-	.incbin "baserom.gba", 0x003754a8, 0xc
+	.4byte 0x0805e4ed
+	.4byte 0x0805eb99
+	.4byte 0x0805e5b5
 
 	.global gUnknown_083754B4
 gUnknown_083754B4: @ 83754B4
@@ -1538,15 +2608,19 @@ gUnknown_083754B4: @ 83754B4
 
 	.global gUnknown_083754B8
 gUnknown_083754B8: @ 83754B8
-	.incbin "baserom.gba", 0x003754b8, 0xc
+	.4byte 0x0805e4ed
+	.4byte 0x0805ec25
+	.4byte 0x0805e5b5
 
 	.global gUnknown_083754C4
 gUnknown_083754C4: @ 83754C4
-	.incbin "baserom.gba", 0x003754c4, 0x4
+	.4byte 0x02030401
 
 	.global gUnknown_083754C8
 gUnknown_083754C8: @ 83754C8
-	.incbin "baserom.gba", 0x003754c8, 0xc
+	.4byte 0x0805e4ed
+	.4byte 0x0805ecb1
+	.4byte 0x0805e5b5
 
 	.global gUnknown_083754D4
 gUnknown_083754D4: @ 83754D4
@@ -1554,7 +2628,9 @@ gUnknown_083754D4: @ 83754D4
 
 	.global gUnknown_083754D8
 gUnknown_083754D8: @ 83754D8
-	.incbin "baserom.gba", 0x003754d8, 0xc
+	.4byte 0x0805e4ed
+	.4byte 0x0805ed3d
+	.4byte 0x0805e5b5
 
 	.global gUnknown_083754E4
 gUnknown_083754E4: @ 83754E4
@@ -1562,7 +2638,9 @@ gUnknown_083754E4: @ 83754E4
 
 	.global gUnknown_083754E8
 gUnknown_083754E8: @ 83754E8
-	.incbin "baserom.gba", 0x003754e8, 0xc
+	.4byte 0x0805e4ed
+	.4byte 0x0805edc9
+	.4byte 0x0805e5b5
 
 	.global gUnknown_083754F4
 gUnknown_083754F4: @ 83754F4
@@ -1570,7 +2648,9 @@ gUnknown_083754F4: @ 83754F4
 
 	.global gUnknown_083754F8
 gUnknown_083754F8: @ 83754F8
-	.incbin "baserom.gba", 0x003754f8, 0xc
+	.4byte 0x0805e4ed
+	.4byte 0x0805ee55
+	.4byte 0x0805e5b5
 
 	.global gUnknown_08375504
 gUnknown_08375504: @ 8375504
@@ -1578,7 +2658,9 @@ gUnknown_08375504: @ 8375504
 
 	.global gUnknown_08375508
 gUnknown_08375508: @ 8375508
-	.incbin "baserom.gba", 0x00375508, 0xc
+	.4byte 0x0805e4ed
+	.4byte 0x0805eee1
+	.4byte 0x0805e5b5
 
 	.global gUnknown_08375514
 gUnknown_08375514: @ 8375514
@@ -1586,7 +2668,9 @@ gUnknown_08375514: @ 8375514
 
 	.global gUnknown_08375518
 gUnknown_08375518: @ 8375518
-	.incbin "baserom.gba", 0x00375518, 0xc
+	.4byte 0x0805e4ed
+	.4byte 0x0805ef6d
+	.4byte 0x0805e5b5
 
 	.global gUnknown_08375524
 gUnknown_08375524: @ 8375524
@@ -1594,7 +2678,9 @@ gUnknown_08375524: @ 8375524
 
 	.global gUnknown_08375528
 gUnknown_08375528: @ 8375528
-	.incbin "baserom.gba", 0x00375528, 0xc
+	.4byte 0x0805e4ed
+	.4byte 0x0805eff9
+	.4byte 0x0805e5b5
 
 	.global gUnknown_08375534
 gUnknown_08375534: @ 8375534
@@ -1602,7 +2688,9 @@ gUnknown_08375534: @ 8375534
 
 	.global gUnknown_08375538
 gUnknown_08375538: @ 8375538
-	.incbin "baserom.gba", 0x00375538, 0xc
+	.4byte 0x0805e4ed
+	.4byte 0x0805f085
+	.4byte 0x0805e5b5
 
 	.global gUnknown_08375544
 gUnknown_08375544: @ 8375544
@@ -1610,7 +2698,9 @@ gUnknown_08375544: @ 8375544
 
 	.global gUnknown_08375548
 gUnknown_08375548: @ 8375548
-	.incbin "baserom.gba", 0x00375548, 0xc
+	.4byte 0x0805e4ed
+	.4byte 0x0805f111
+	.4byte 0x0805e5b5
 
 	.global gUnknown_08375554
 gUnknown_08375554: @ 8375554
@@ -1618,7 +2708,9 @@ gUnknown_08375554: @ 8375554
 
 	.global gUnknown_08375558
 gUnknown_08375558: @ 8375558
-	.incbin "baserom.gba", 0x00375558, 0xc
+	.4byte 0x0805e4ed
+	.4byte 0x0805f19d
+	.4byte 0x0805e5b5
 
 	.global gUnknown_08375564
 gUnknown_08375564: @ 8375564
@@ -1626,7 +2718,9 @@ gUnknown_08375564: @ 8375564
 
 	.global gUnknown_08375568
 gUnknown_08375568: @ 8375568
-	.incbin "baserom.gba", 0x00375568, 0xc
+	.4byte 0x0805e4ed
+	.4byte 0x0805f229
+	.4byte 0x0805e5b5
 
 	.global gUnknown_08375574
 gUnknown_08375574: @ 8375574
@@ -1634,43 +2728,64 @@ gUnknown_08375574: @ 8375574
 
 	.global gUnknown_08375578
 gUnknown_08375578: @ 8375578
-	.incbin "baserom.gba", 0x00375578, 0xc
+	.4byte 0x0805e4ed
+	.4byte 0x0805f2b5
+	.4byte 0x0805e5b5
 
 	.global gUnknown_08375584
 gUnknown_08375584: @ 8375584
-	.incbin "baserom.gba", 0x00375584, 0x4
+	.4byte 0x02030104
 
 	.global gUnknown_08375588
 gUnknown_08375588: @ 8375588
-	.incbin "baserom.gba", 0x00375588, 0xc
+	.4byte 0x0805f341
+	.4byte 0x0805f365
+	.4byte 0x0805f3c5
 
 	.global gUnknown_08375594
 gUnknown_08375594: @ 8375594
-	.incbin "baserom.gba", 0x00375594, 0x2c
+	.4byte 0x0805f3ed
+	.4byte 0x0805f3f1
+	.4byte 0x0805f439
+	.4byte 0x0805f4f1
+	.4byte 0x0805f5a9
+	.4byte 0x0805f661
+	.4byte 0x0805f719
+	.4byte 0x0805f761
+	.4byte 0x0805f819
+	.4byte 0x0805f3ed
+	.4byte 0x0805f3ed
 
 	.global gUnknown_083755C0
 gUnknown_083755C0: @ 83755C0
-	.incbin "baserom.gba", 0x003755c0, 0xc
+	.4byte 0x0805f341
+	.4byte 0x0805f925
+	.4byte 0x0805f3c5
 
 	.global gUnknown_083755CC
 gUnknown_083755CC: @ 83755CC
-	.incbin "baserom.gba", 0x003755cc, 0x4
+	.4byte 0x0805faf9
 
 	.global gUnknown_083755D0
 gUnknown_083755D0: @ 83755D0
-	.incbin "baserom.gba", 0x003755d0, 0x8
+	.4byte 0x0805fb65
+	.4byte 0x0805fb05
 
 	.global gUnknown_083755D8
 gUnknown_083755D8: @ 83755D8
-	.incbin "baserom.gba", 0x003755d8, 0x8
+	.4byte 0x0805fbd5
+	.4byte 0x0805fb05
 
 	.global gUnknown_083755E0
 gUnknown_083755E0: @ 83755E0
-	.incbin "baserom.gba", 0x003755e0, 0x8
+	.4byte 0x0805fc45
+	.4byte 0x0805fb05
 
 	.global gUnknown_083755E8
 gUnknown_083755E8: @ 83755E8
-	.incbin "baserom.gba", 0x003755e8, 0xc
+	.4byte 0x0805fcb5
+	.4byte 0x0805fce9
+	.4byte 0x0805fd09
 
 	.global gUnknown_083755F4
 gUnknown_083755F4: @ 83755F4
@@ -1738,11 +2853,17 @@ gUnknown_0837567B: @ 837567B
 
 	.global gUnknown_08375684
 gUnknown_08375684: @ 8375684
-	.incbin "baserom.gba", 0x00375684, 0x10
+	.4byte 0x08057631
+	.4byte 0x08057611
+	.4byte 0x080575ed
+	.4byte 0x080575c9
 
 	.global gUnknown_08375694
 gUnknown_08375694: @ 8375694
-	.incbin "baserom.gba", 0x00375694, 0x10
+	.4byte 0x08057611
+	.4byte 0x08057631
+	.4byte 0x080575c9
+	.4byte 0x080575ed
 
 	.global gUnknown_083756A4
 gUnknown_083756A4: @ 83756A4
@@ -1870,11 +2991,184 @@ gUnknown_08375767: @ 8375767
 
 	.global gUnknown_08375778
 gUnknown_08375778: @ 8375778
-	.incbin "baserom.gba", 0x00375778, 0x248
+	.4byte 0x083759a0
+	.4byte 0x083759a8
+	.4byte 0x083759b0
+	.4byte 0x083759b8
+	.4byte 0x083759d4
+	.4byte 0x083759e0
+	.4byte 0x083759ec
+	.4byte 0x083759f8
+	.4byte 0x08375a04
+	.4byte 0x08375a10
+	.4byte 0x08375a1c
+	.4byte 0x08375a28
+	.4byte 0x08375a40
+	.4byte 0x08375a4c
+	.4byte 0x08375a58
+	.4byte 0x08375a64
+	.4byte 0x08375a70
+	.4byte 0x08375a7c
+	.4byte 0x08375a88
+	.4byte 0x08375a94
+	.4byte 0x08375aa0
+	.4byte 0x08375aac
+	.4byte 0x08375ab8
+	.4byte 0x08375ac4
+	.4byte 0x08375ad0
+	.4byte 0x08375adc
+	.4byte 0x08375ae8
+	.4byte 0x08375af4
+	.4byte 0x08375b00
+	.4byte 0x08375b0c
+	.4byte 0x08375b18
+	.4byte 0x08375b24
+	.4byte 0x08375b30
+	.4byte 0x08375b3c
+	.4byte 0x08375b48
+	.4byte 0x08375b54
+	.4byte 0x08375b60
+	.4byte 0x08375b6c
+	.4byte 0x08375b78
+	.4byte 0x08375b84
+	.4byte 0x08375b90
+	.4byte 0x08375b9c
+	.4byte 0x08375ba8
+	.4byte 0x08375bb4
+	.4byte 0x08375bc0
+	.4byte 0x08375bcc
+	.4byte 0x08375bd8
+	.4byte 0x08375be4
+	.4byte 0x08375bf0
+	.4byte 0x08375bfc
+	.4byte 0x08375c08
+	.4byte 0x08375c14
+	.4byte 0x08375c20
+	.4byte 0x08375c2c
+	.4byte 0x08375c38
+	.4byte 0x08375c44
+	.4byte 0x08375c50
+	.4byte 0x08375c5c
+	.4byte 0x08375c68
+	.4byte 0x08375c74
+	.4byte 0x08375c80
+	.4byte 0x08375c8c
+	.4byte 0x08375c98
+	.4byte 0x08375ca0
+	.4byte 0x08375ca8
+	.4byte 0x08375cb0
+	.4byte 0x08375cb8
+	.4byte 0x08375cc4
+	.4byte 0x08375cd0
+	.4byte 0x08375cdc
+	.4byte 0x08375ce8
+	.4byte 0x08375cf4
+	.4byte 0x08375d00
+	.4byte 0x08375d0c
+	.4byte 0x08375d18
+	.4byte 0x08375d24
+	.4byte 0x08375d30
+	.4byte 0x08375d3c
+	.4byte 0x08375d48
+	.4byte 0x08375d50
+	.4byte 0x08375d5c
+	.4byte 0x08375d64
+	.4byte 0x08375d6c
+	.4byte 0x08375d74
+	.4byte 0x08375d7c
+	.4byte 0x08375d84
+	.4byte 0x08375d8c
+	.4byte 0x08375d94
+	.4byte 0x08375d9c
+	.4byte 0x08375da4
+	.4byte 0x08375db0
+	.4byte 0x08375dc0
+	.4byte 0x08375dd0
+	.4byte 0x08375dd8
+	.4byte 0x08375de0
+	.4byte 0x08375de8
+	.4byte 0x08375df0
+	.4byte 0x08375dfc
+	.4byte 0x08375e08
+	.4byte 0x08375e10
+	.4byte 0x08375e18
+	.4byte 0x08375e20
+	.4byte 0x08375e28
+	.4byte 0x08375e34
+	.4byte 0x08375e40
+	.4byte 0x08375e4c
+	.4byte 0x08375e58
+	.4byte 0x08375e64
+	.4byte 0x08375e70
+	.4byte 0x08375e7c
+	.4byte 0x08375eb8
+	.4byte 0x08375ec4
+	.4byte 0x08375ed0
+	.4byte 0x08375edc
+	.4byte 0x08375ee8
+	.4byte 0x08375ef4
+	.4byte 0x08375f00
+	.4byte 0x08375f0c
+	.4byte 0x08375f18
+	.4byte 0x08375f24
+	.4byte 0x08375f30
+	.4byte 0x08375f3c
+	.4byte 0x08375f48
+	.4byte 0x08375f54
+	.4byte 0x08375f60
+	.4byte 0x08375f6c
+	.4byte 0x08375f78
+	.4byte 0x08375f84
+	.4byte 0x08375f90
+	.4byte 0x08375f9c
+	.4byte 0x08375fa8
+	.4byte 0x08375fb4
+	.4byte 0x08375fc0
+	.4byte 0x08375fcc
+	.4byte 0x08375fd8
+	.4byte 0x08375fe4
+	.4byte 0x08375ff0
+	.4byte 0x08375ffc
+	.4byte 0x08060ce1
+	.4byte 0x08063475
+	.4byte 0x08060cf1
+	.4byte 0x08063475
+	.4byte 0x08060d01
+	.4byte 0x08063475
+	.4byte 0x08060d11
+	.4byte 0x08063475
 
 	.global gUnknown_083759C0
 gUnknown_083759C0: @ 83759C0
-	.incbin "baserom.gba", 0x003759c0, 0x74
+	.4byte 0x0805fd49
+	.4byte 0x0805fd59
+	.4byte 0x0805fd59
+	.4byte 0x0805fd69
+	.4byte 0x0805fd79
+	.4byte 0x08060f3d
+	.4byte 0x08060f5d
+	.4byte 0x08063475
+	.4byte 0x08060f7d
+	.4byte 0x08060f9d
+	.4byte 0x08063475
+	.4byte 0x08060fbd
+	.4byte 0x08060fdd
+	.4byte 0x08063475
+	.4byte 0x08060ffd
+	.4byte 0x0806101d
+	.4byte 0x08063475
+	.4byte 0x0806103d
+	.4byte 0x0806105d
+	.4byte 0x08063475
+	.4byte 0x0806107d
+	.4byte 0x0806109d
+	.4byte 0x08063475
+	.4byte 0x080610bd
+	.4byte 0x080610dd
+	.4byte 0x08063475
+	.4byte 0x080610fd
+	.4byte 0x0806111d
+	.4byte 0x08063475
 
 	.global gUnknown_08375A34
 gUnknown_08375A34: @ 8375A34
@@ -1890,7 +3184,12 @@ gUnknown_08376008: @ 8376008
 
 	.global gUnknown_08376010
 gUnknown_08376010: @ 8376010
-	.incbin "baserom.gba", 0x00376010, 0x18
+	.4byte 0x080573d1
+	.4byte 0x080573e5
+	.4byte 0x080573bd
+	.4byte 0x08056f39
+	.4byte 0x08057525
+	.4byte 0x08056d9d
 
 	.global gUnknown_08376028
 gUnknown_08376028: @ 8376028
@@ -1898,7 +3197,10 @@ gUnknown_08376028: @ 8376028
 
 	.global gUnknown_08376040
 gUnknown_08376040: @ 8376040
-	.incbin "baserom.gba", 0x00376040, 0x10
+	.4byte 0x08056e01
+	.4byte 0x08056ded
+	.4byte 0x08056dd9
+	.4byte 0x08056dc5
 
 	.global gUnknown_08376050
 gUnknown_08376050: @ 8376050
@@ -1906,7 +3208,10 @@ gUnknown_08376050: @ 8376050
 
 	.global gUnknown_08376060
 gUnknown_08376060: @ 8376060
-	.incbin "baserom.gba", 0x00376060, 0x10
+	.4byte 0x02020202 @ are these even pointers?
+	.4byte 0x02010201
+	.4byte 0x02010201
+	.4byte 0x02000001
 
 	.global gUnknown_08376070
 gUnknown_08376070: @ 8376070
@@ -1914,7 +3219,9 @@ gUnknown_08376070: @ 8376070
 
 	.global gUnknown_08376080
 gUnknown_08376080: @ 8376080
-	.incbin "baserom.gba", 0x00376080, 0xc
+	.4byte 0x08063ff9
+	.4byte 0x08063ffd
+	.4byte 0x0806404d
 
 	.global gUnknown_0837608C
 gUnknown_0837608C: @ 837608C
@@ -1926,19 +3233,87 @@ gUnknown_08376090: @ 8376090
 
 	.global gUnknown_083760A0
 gUnknown_083760A0: @ 83760A0
-	.incbin "baserom.gba", 0x003760a0, 0xe0
+	.4byte 0x08063e49
+	.4byte 0x08063e95
+	.4byte 0x08063ee1
+	.4byte 0x08063f2d
+	.4byte 0x08063f79
+	.4byte 0x08063f85
+	.4byte 0x08063f91
+	.4byte 0x08063fa1
+	.4byte 0x08063fcd
+	.4byte 0x0806409d
+	.4byte 0x080640a9
+	.4byte 0x080640b9
+	.4byte 0x080640c9
+	.4byte 0x08064121
+	.4byte 0x08064149
+	.4byte 0x08064179
+	.4byte 0x080641a9
+	.4byte 0x080641d9
+	.4byte 0x080641e9
+	.4byte 0x080641f9
+	.4byte 0x0806454d
+	.4byte 0x0806454d
+	.4byte 0x0806454d
+	.4byte 0x0806454d
+	.4byte 0x0806454d
+	.4byte 0x0806454d
+	.4byte 0x0806454d
+	.4byte 0x0806454d
+	.4byte 0x0806454d
+	.4byte 0x0806454d
+	.4byte 0x0806454d
+	.4byte 0x0806454d
+	.4byte 0x0806454d
+	.4byte 0x0806454d
+	.4byte 0x0806454d
+	.4byte 0x0806454d
+	.4byte 0x0806456d
+	.4byte 0x0806456d
+	.4byte 0x0806456d
+	.4byte 0x0806456d
+	.4byte 0x0806456d
+	.4byte 0x0806456d
+	.4byte 0x0806456d
+	.4byte 0x0806456d
+	.4byte 0x0806456d
+	.4byte 0x08064591
+	.4byte 0x08064591
+	.4byte 0x0806456d
+	.4byte 0x08064591
+	.4byte 0x08064591
+	.4byte 0x080645b9
+	.4byte 0x080645b9
+	.4byte 0x080645b9
+	.4byte 0x080645b9
+	.4byte 0x080645dd
+	.4byte 0x080645dd
 
 	.global gUnknown_08376180
 gUnknown_08376180: @ 8376180
-	.incbin "baserom.gba", 0x00376180, 0x14
+	.4byte 0x083760f0
+	.4byte 0x08376130
+	.4byte 0x08376150
+	.4byte 0x08376168
+	.4byte 0x08376178
 
 	.global gUnknown_08376194
 gUnknown_08376194: @ 8376194
-	.incbin "baserom.gba", 0x00376194, 0x3c
+Unknown_8376194:
+	.incbin "baserom.gba", 0x00376194, 0xA
+Unknown_837619E:
+	.incbin "baserom.gba", 0x0037619e, 0x10
+Unknown_83761AE:
+	.incbin "baserom.gba", 0x003761ae, 0x10
+Unknown_83761BE:
+	.incbin "baserom.gba", 0x003761be, 0x12
 
 	.global gUnknown_083761D0
 gUnknown_083761D0: @ 83761D0
-	.incbin "baserom.gba", 0x003761d0, 0xc
+	.4byte Unknown_837619E
+	.4byte Unknown_83761AE
+	.4byte Unknown_83761BE
 
 	.global gUnknown_083761DC
 gUnknown_083761DC: @ 83761DC
@@ -1958,7 +3333,46 @@ gUnknown_083761EC: @ 83761EC
 
 	.global gUnknown_083761F0
 gUnknown_083761F0: @ 83761F0
-	.incbin "baserom.gba", 0x003761f0, 0xa0
+	.4byte 0x08e9addc
+	.4byte 0x08e9aefc
+	.4byte 0x08e9af1c
+	.4byte 0x08e9b03c
+	.4byte 0x08e9b05c
+	.4byte 0x08e9b17c
+	.4byte 0x08e9b19c
+	.4byte 0x08e9b2bc
+	.4byte 0x08e9b2dc
+	.4byte 0x08e9b3fc
+	.4byte 0x08e9b41c
+	.4byte 0x08e9b53c
+	.4byte 0x08e9b55c
+	.4byte 0x08e9b67c
+	.4byte 0x08e9b69c
+	.4byte 0x08e9b7bc
+	.4byte 0x08e9b7dc
+	.4byte 0x08e9b8fc
+	.4byte 0x08e9b91c
+	.4byte 0x08e9ba3c
+	.4byte 0x08e9ba5c
+	.4byte 0x08e9bb7c
+	.4byte 0x08e9bb9c
+	.4byte 0x08e9bcbc
+	.4byte 0x08e9bcdc
+	.4byte 0x08e9bdfc
+	.4byte 0x08e9be1c
+	.4byte 0x08e9bf3c
+	.4byte 0x08e9bf5c
+	.4byte 0x08e9c07c
+	.4byte 0x08e9c09c
+	.4byte 0x08e9c1bc
+	.4byte 0x08e9c1dc
+	.4byte 0x08e9c2fc
+	.4byte 0x08e9c31c
+	.4byte 0x08e9c43c
+	.4byte 0x08e9c45c
+	.4byte 0x08e9c57c
+	.4byte 0x08e9c59c
+	.4byte 0x08e9c6bc
 
 	.global gUnknown_08376290
 gUnknown_08376290: @ 8376290
@@ -1974,7 +3388,9 @@ gUnknown_083762DC: @ 83762DC
 
 	.global gUnknown_083762F0
 gUnknown_083762F0: @ 83762F0
-	.incbin "baserom.gba", 0x003762f0, 0xc
+	.4byte 0x020231cc
+	.4byte 0x020232cc
+	.4byte 0x020233cc
 
 	.global gUnknown_083762FC
 gUnknown_083762FC: @ 83762FC
@@ -1982,7 +3398,14 @@ gUnknown_083762FC: @ 83762FC
 
 	.global gUnknown_08376364
 gUnknown_08376364: @ 8376364
-	.incbin "baserom.gba", 0x00376364, 0x20
+	.4byte 0x080695dd
+	.4byte 0x08069f65
+	.4byte 0x08069aa1
+	.4byte 0x08069865
+	.4byte 0x08069dd5
+	.4byte 0x080c7701
+	.4byte 0x080bcf1d
+	.4byte 0x0806a07d
 
 	.global gUnknown_08376384
 gUnknown_08376384: @ 8376384
@@ -2038,7 +3461,27 @@ gUnknown_0837660C: @ 837660C
 
 	.global gUnknown_08376624
 gUnknown_08376624: @ 8376624
-	.incbin "baserom.gba", 0x00376624, 0x54
+	.4byte OtherText_ChoosePoke
+	.4byte OtherText_MovePokeTo
+	.4byte OtherText_TeachWhat
+	.4byte OtherText_UseWhat
+	.4byte OtherText_GiveWhat
+	.4byte OtherText_DoWhat
+	.4byte OtherText_NothingToCut
+	.4byte OtherText_CantSurf
+	.4byte OtherText_AlreadySurfing
+	.4byte OtherText_CantUseThatHere
+	.4byte OtherText_RestoreWhatMove
+	.4byte OtherText_BoostPP
+	.4byte OtherText_Terminator19
+	.4byte OtherText_DoWhatWithItem
+	.4byte OtherText_NoPokeForBattle
+	.4byte OtherText_ChoosePoke2
+	.4byte OtherText_NotEnoughHP
+	.4byte OtherText_ThreePokeNeeded
+	.4byte OtherText_PokeCantBeSame
+	.4byte OtherText_NoIdenticalHoldItems
+	.4byte OtherText_TeachWhichPoke
 
 	.global gUnknown_08376678
 gUnknown_08376678: @ 8376678
@@ -2110,7 +3553,12 @@ gUnknown_08376CEC: @ 8376CEC
 
 	.global gUnknown_08376D04
 gUnknown_08376D04: @ 8376D04
-	.incbin "baserom.gba", 0x00376d04, 0x18
+	.4byte OtherText_HP
+	.4byte OtherText_Attack
+	.4byte OtherText_Defense
+	.4byte OtherText_SpAtk
+	.4byte OtherText_SpDef
+	.4byte OtherText_Speed
 
 	.global gUnknown_08376D1C
 gUnknown_08376D1C: @ 8376D1C
@@ -2118,7 +3566,26 @@ gUnknown_08376D1C: @ 8376D1C
 
 	.global gUnknown_08376D24
 gUnknown_08376D24: @ 8376D24
-	.incbin "baserom.gba", 0x00376d24, 0x50
+	.4byte SystemText_Pokedex
+	.4byte 0x08071419
+	.4byte SystemText_Pokemon
+	.4byte 0x0807144d
+	.4byte SystemText_BAG
+	.4byte 0x08071479
+	.4byte SystemText_Pokenav
+	.4byte 0x080714a5
+	.4byte SystemText_Player
+	.4byte 0x080714d1
+	.4byte SystemText_Save
+	.4byte 0x080714fd
+	.4byte SystemText_Option
+	.4byte 0x08071519
+	.4byte SystemText_Exit
+	.4byte 0x08071555
+	.4byte SystemText_Retire
+	.4byte 0x08071561
+	.4byte SystemText_Player @ duplicate?
+	.4byte 0x08071571
 
 	.global gUnknown_08376D74
 gUnknown_08376D74: @ 8376D74
@@ -2158,7 +3625,19 @@ gUnknown_0837ADB4: @ 837ADB4
 
 	.global gUnknown_0837B5C4
 gUnknown_0837B5C4: @ 837B5C4
-	.incbin "baserom.gba", 0x0037b5c4, 0x520
+Unknown_837B5C4:
+	.4byte 0x0837adc4
+	.4byte 0x0837aec4
+	.4byte 0x0837afc4
+	.4byte 0x0837b0c4
+	.4byte 0x0837b1c4
+	.4byte 0x0837b2c4
+	.4byte 0x0837b3c4
+	.4byte 0x0837b4c4
+Unknown_837B5E4:
+	.incbin "baserom.gba", 0x0037b5e4, 0x200
+Unknown_837B7E4:
+	.incbin "baserom.gba", 0x0037b7e4, 0x300
 
 	.global gUnknown_0837BAE4
 gUnknown_0837BAE4: @ 837BAE4
@@ -2170,15 +3649,40 @@ gUnknown_0837BB04: @ 837BB04
 
 	.global gUnknown_0837BB24
 gUnknown_0837BB24: @ 837BB24
-	.incbin "baserom.gba", 0x0037bb24, 0x30
+	.4byte 0x0837b5e4
+	.4byte 0x0837b5e4
+	.4byte 0x0837b664
+	.4byte 0x0837b6e4
+	.4byte 0x0837b764
+	.4byte 0x0837b764
+	.4byte 0x0837b764
+	.4byte 0x0837b764
+	.4byte 0x0837b764
+	.4byte 0x0837b764
+	.4byte 0x0837b6e4
+	.4byte 0x0837b664
 
 	.global gUnknown_0837BB54
 gUnknown_0837BB54: @ 837BB54
-	.incbin "baserom.gba", 0x0037bb54, 0x30
+	.4byte 0x0837b864
+	.4byte 0x0837b864
+	.4byte 0x0837b8e4
+	.4byte 0x0837b964
+	.4byte 0x0837b9e4
+	.4byte 0x0837b9e4
+	.4byte 0x0837b9e4
+	.4byte 0x0837b9e4
+	.4byte 0x0837b9e4
+	.4byte 0x0837b9e4
+	.4byte 0x0837b964
+	.4byte 0x0837b8e4
 
 	.global gUnknown_0837BB84
 gUnknown_0837BB84: @ 837BB84
-	.incbin "baserom.gba", 0x0037bb84, 0x10
+	.4byte Unknown_837B5E4
+	.4byte Unknown_837B5E4
+	.4byte Unknown_837B7E4
+	.4byte Unknown_837B7E4
 
 	.global gUnknown_0837BB94
 gUnknown_0837BB94: @ 837BB94
@@ -2210,19 +3714,41 @@ gUnknown_0837C95C: @ 837C95C
 
 	.global gUnknown_0837CA7C
 gUnknown_0837CA7C: @ 837CA7C
-	.incbin "baserom.gba", 0x0037ca7c, 0xc08
+Unknown_837CA7C:
+	.4byte 0x0837c97c
+	.4byte 0x0837c9fc
+Unknown_837CA84:
+	.incbin "baserom.gba", 0x0037ca84, 0x180
+Unknown_837CC04:
+	.incbin "baserom.gba", 0x0037cc04, 0x180
+Unknown_837CD84:
+	.incbin "baserom.gba", 0x0037cd84, 0x900
 
 	.global gUnknown_0837D684
 gUnknown_0837D684: @ 837D684
-	.incbin "baserom.gba", 0x0037d684, 0xc
+	.4byte Unknown_837CA84
+	.4byte Unknown_837CC04
+	.4byte Unknown_837CD84
 
 	.global gUnknown_0837D690
 gUnknown_0837D690: @ 837D690
-	.incbin "baserom.gba", 0x0037d690, 0x1ac
+Unknown_837D690:
+	.incbin "baserom.gba", 0x0037d690, 0x10c
+Unknown_837D79C:
+	.incbin "baserom.gba", 0x0037d79c, 0x20
+Unknown_837D7BC:
+	.incbin "baserom.gba", 0x0037d7bc, 0x20
+Unknown_837D7DC:
+	.incbin "baserom.gba", 0x0037d7dc, 0x20
+Unknown_837D7FC:
+	.incbin "baserom.gba", 0x0037d7fc, 0x40
 
 	.global gUnknown_0837D83C
 gUnknown_0837D83C: @ 837D83C
-	.incbin "baserom.gba", 0x0037d83c, 0x10
+	.4byte Unknown_837D79C
+	.4byte Unknown_837D7BC
+	.4byte Unknown_837D7DC
+	.4byte Unknown_837D7FC
 
 	.global gUnknown_0837D84C
 gUnknown_0837D84C: @ 837D84C
@@ -2230,11 +3756,18 @@ gUnknown_0837D84C: @ 837D84C
 
 	.global gUnknown_0837DC74
 gUnknown_0837DC74: @ 837DC74
-	.incbin "baserom.gba", 0x0037dc74, 0x268
+Unknown_837DC74:
+	.4byte 0x0837d854
+	.4byte 0x0837da54
+Unknown_837DD7C:
+	.incbin "baserom.gba", 0x0037dc7c, 0x120
+Unknown_837DD9C:
+	.incbin "baserom.gba", 0x0037dd9c, 0x140
 
 	.global gUnknown_0837DEDC
 gUnknown_0837DEDC: @ 837DEDC
-	.incbin "baserom.gba", 0x0037dedc, 0x8
+	.4byte Unknown_837DD7C
+	.4byte Unknown_837DD9C
 
 	.global gUnknown_0837DEE4
 gUnknown_0837DEE4: @ 837DEE4
@@ -2254,11 +3787,138 @@ gBattleAnimPaletteTable: @ 837EA6C
 
 	.global gUnknown_0837F374
 gUnknown_0837F374: @ 837F374
-	.incbin "baserom.gba", 0x0037f374, 0x144
+	.4byte 0x08d1cba8
+	.4byte 0x08d1d1a0
+	.4byte 0x08d1d1c0
+	.4byte 0x08d1cba8
+	.4byte 0x08d1d1a0
+	.4byte 0x08d1d1c0
+	.4byte 0x08e6abdc
+	.4byte 0x08e6b8a4
+	.4byte 0x08e6b8c0
+	.4byte 0x08d1ec70
+	.4byte 0x08d1ee40
+	.4byte 0x08d1ee64
+	.4byte 0x08d25f98
+	.4byte 0x08d25f70
+	.4byte 0x08d26d04
+	.4byte 0x08d25f98
+	.4byte 0x08d25f70
+	.4byte 0x08d27200
+	.4byte 0x08d25f98
+	.4byte 0x08d25f70
+	.4byte 0x08d276d0
+	.4byte 0x08d28cd0
+	.4byte 0x08d28e78
+	.4byte 0x08d28ec8
+	.4byte 0x08d28cd0
+	.4byte 0x08d28e78
+	.4byte 0x08d29058
+	.4byte 0x08d2a168
+	.4byte 0x08d2a128
+	.4byte 0x08d29e30
+	.4byte 0x08d2a168
+	.4byte 0x08d2a128
+	.4byte 0x08d2a6e8
+	.4byte 0x08d2c190
+	.4byte 0x08d2cb2c
+	.4byte 0x08d2cb54
+	.4byte 0x08d2b408
+	.4byte 0x08d2c170
+	.4byte 0x08d2abb4
+	.4byte 0x08d2b408
+	.4byte 0x08d2c170
+	.4byte 0x08d2ae7c
+	.4byte 0x08d2b408
+	.4byte 0x08d2c170
+	.4byte 0x08d2b178
+	.4byte 0x08e6877c
+	.4byte 0x08e690ec
+	.4byte 0x08e69110
+	.4byte 0x08e6d690
+	.4byte 0x08e6d668
+	.4byte 0x08e6d8f0
+	.4byte 0x08e69f7c
+	.4byte 0x08e6a0d8
+	.4byte 0x08e6a100
+	.4byte 0x08d28cd0
+	.4byte 0x08d28ea0
+	.4byte 0x08d28ec8
+	.4byte 0x08d28cd0
+	.4byte 0x08d28ea0
+	.4byte 0x08d29058
+	.4byte 0x08d291e4
+	.4byte 0x08d29c0c
+	.4byte 0x08d29c2c
+	.4byte 0x08e6ebc4
+	.4byte 0x08e6eeb8
+	.4byte 0x08e6eed4
+	.4byte 0x08d2a168
+	.4byte 0x08d2a148
+	.4byte 0x08d29e30
+	.4byte 0x08d2a168
+	.4byte 0x08d2a148
+	.4byte 0x08d2a6e8
+	.4byte 0x08d25f98
+	.4byte 0x08e6bbdc
+	.4byte 0x08d26d04
+	.4byte 0x08d25f98
+	.4byte 0x08e6bbdc
+	.4byte 0x08d27200
+	.4byte 0x08d25f98
+	.4byte 0x08e6bbdc
+	.4byte 0x08d276d0
 
 	.global gUnknown_0837F4B8
 gUnknown_0837F4B8: @ 837F4B8
-	.incbin "baserom.gba", 0x0037f4b8, 0xc0
+	.4byte 0x08075a11
+	.4byte 0x08075a79
+	.4byte 0x08075ac5
+	.4byte 0x08075bb9
+	.4byte 0x08075c35
+	.4byte 0x08075c75
+	.4byte 0x08075ca9
+	.4byte 0x08075cad
+	.4byte 0x08075cb1
+	.4byte 0x08075db9
+	.4byte 0x08075de1
+	.4byte 0x0807665d
+	.4byte 0x08076a3d
+	.4byte 0x08076aa1
+	.4byte 0x08076abd
+	.4byte 0x08076af1
+	.4byte 0x08076b05
+	.4byte 0x08076b39
+	.4byte 0x08076b79
+	.4byte 0x08076bbd
+	.4byte 0x08076c09
+	.4byte 0x08076ecd
+	.4byte 0x08076f11
+	.4byte 0x08076f45
+	.4byte 0x08076f79
+	.4byte 0x0807716d
+	.4byte 0x080771a5
+	.4byte 0x080771d1
+	.4byte 0x08077475
+	.4byte 0x08077559
+	.4byte 0x08076a79
+	.4byte 0x08077611
+	.4byte 0x08077685
+	.4byte 0x08077709
+	.4byte 0x080767c5
+	.4byte 0x080768d1
+	.4byte 0x0807775d
+	.4byte 0x08076c4d
+	.4byte 0x08077321
+	.4byte 0x080773b5
+	.4byte 0x0807779d
+	.4byte 0x08077809
+	.4byte 0x0807784d
+	.4byte 0x080778d1
+	.4byte 0x0807790d
+	.4byte 0x0807794d
+	.4byte 0x080779fd
+	.4byte 0x08077a95
 
 	.global gUnknown_0837F578
 gUnknown_0837F578: @ 837F578
@@ -2354,15 +4014,77 @@ gUnknown_08396FA8: @ 8396FA8
 
 	.global gUnknown_08396FC4
 gUnknown_08396FC4: @ 8396FC4
-	.incbin "baserom.gba", 0x00396fc4, 0x4
+	.4byte 0x0202f7e8
 
 	.global gUnknown_08396FC8
 gUnknown_08396FC8: @ 8396FC8
-	.incbin "baserom.gba", 0x00396fc8, 0xf0
+	.4byte 0x0807cae9
+	.4byte 0x0807cb09
+	.4byte 0x0807cae9
+	.4byte 0x0807cb0d
+	.4byte 0x0807de79
+	.4byte 0x0807def5
+	.4byte 0x0807dec5
+	.4byte 0x0807df55
+	.4byte 0x0807df9d
+	.4byte 0x0807dfcd
+	.4byte 0x0807dfc1
+	.4byte 0x0807dfd1
+	.4byte 0x0807e365
+	.4byte 0x0807e401
+	.4byte 0x0807e3d1
+	.4byte 0x0807e461
+	.4byte 0x0807e9c9
+	.4byte 0x0807ea85
+	.4byte 0x0807ea19
+	.4byte 0x0807eac1
+	.4byte 0x0807ee81
+	.4byte 0x0807efc1
+	.4byte 0x0807eef5
+	.4byte 0x0807f34d
+	.4byte 0x0807f49d
+	.4byte 0x0807f52d
+	.4byte 0x0807f4fd
+	.4byte 0x0807f5ed
+	.4byte 0x0807f7f9
+	.4byte 0x0807f889
+	.4byte 0x0807f859
+	.4byte 0x0807f935
+	.4byte 0x0807fe9d
+	.4byte 0x0807ff4d
+	.4byte 0x0807ff1d
+	.4byte 0x0807ffc9
+	.4byte 0x0807fb25
+	.4byte 0x0807fbd9
+	.4byte 0x0807fba9
+	.4byte 0x0807fc3d
+	.4byte 0x0807f49d
+	.4byte 0x0807f52d
+	.4byte 0x0807f4fd
+	.4byte 0x0807f5ed
+	.4byte 0x08080431
+	.4byte 0x0808046d
+	.4byte 0x08080461
+	.4byte 0x08080471
+	.4byte 0x0807e111
+	.4byte 0x0807e175
+	.4byte 0x0807e145
+	.4byte 0x0807e259
+	.4byte 0x0807ef25
+	.4byte 0x0807efc1
+	.4byte 0x0807ef91
+	.4byte 0x0807f34d
+	.4byte 0x08080475
+	.4byte 0x080804f9
+	.4byte 0x080804c9
+	.4byte 0x0808056d
 
 	.global gUnknown_083970B8
 gUnknown_083970B8: @ 83970B8
-	.incbin "baserom.gba", 0x003970b8, 0x10
+	.4byte 0x0807cc25
+	.4byte 0x0807ccad
+	.4byte 0x0807ceb9
+	.4byte 0x0807ceb9
 
 	.global gUnknown_083970C8
 gUnknown_083970C8: @ 83970C8
@@ -2478,7 +4200,7 @@ gUnknown_0839ACD4: @ 839ACD4
 
 	.global gUnknown_0839ACD8
 gUnknown_0839ACD8: @ 839ACD8
-	.incbin "baserom.gba", 0x0039acd8, 0x4
+	.4byte 0x02030202
 
 	.global gUnknown_0839ACDC
 gUnknown_0839ACDC: @ 839ACDC
@@ -2526,11 +4248,26 @@ gUnknown_0839AE70: @ 839AE70
 
 	.global gUnknown_0839B1F0
 gUnknown_0839B1F0: @ 839B1F0
-	.incbin "baserom.gba", 0x0039b1f0, 0x2c
+Unknown_839B1F0:
+	.4byte 0x08080807
+	.4byte 0x080a0809
+	.4byte 0x080c080b
+	.4byte 0x080e080d
+Unknown_839B200:
+	.incbin "baserom.gba", 0x0039b200, 0x7
+Unknown_839B207:
+	.incbin "baserom.gba", 0x0039b207, 0x7
+Unknown_839B20E:
+	.incbin "baserom.gba", 0x0039b20e, 0x7
+Unknown_839B215:
+	.incbin "baserom.gba", 0x0039b215, 0x7
 
 	.global gUnknown_0839B21C
 gUnknown_0839B21C: @ 839B21C
-	.incbin "baserom.gba", 0x0039b21c, 0x10
+	.4byte Unknown_839B200
+	.4byte Unknown_839B207
+	.4byte Unknown_839B20E
+	.4byte Unknown_839B215
 
 	.global gUnknown_0839B22C
 gUnknown_0839B22C: @ 839B22C
@@ -2558,11 +4295,25 @@ gUnknown_0839B2C0: @ 839B2C0
 
 	.global gUnknown_0839B488
 gUnknown_0839B488: @ 839B488
-	.incbin "baserom.gba", 0x0039b488, 0x10
+	.4byte 0x08084109
+	.4byte 0x0808414d
+	.4byte 0x08084191
+	.4byte 0x080841d5
 
 	.global gUnknown_0839B498
 gUnknown_0839B498: @ 839B498
-	.incbin "baserom.gba", 0x0039b498, 0x30
+	.4byte 0x08084395
+	.4byte 0x08084399
+	.4byte 0x080843dd
+	.4byte 0x0808441d
+	.4byte 0x08084479
+	.4byte 0x08084535
+	.4byte 0x08084579
+	.4byte 0x080845ad
+	.4byte 0x080845c9
+	.4byte 0x080845fd
+	.4byte 0x08084655
+	.4byte 0x080846c9
 
 	.global gUnknown_0839B4C8
 gUnknown_0839B4C8: @ 839B4C8
@@ -2623,7 +4374,14 @@ gUnknown_0839EE54: @ 839EE54
 
 	.global gUnknown_0839F0D4
 gUnknown_0839F0D4: @ 839F0D4
-	.incbin "baserom.gba", 0x0039f0d4, 0x20
+	.4byte 0x080856b1
+	.4byte 0x080856c5
+	.4byte 0x080856d9
+	.4byte 0x080856ed
+	.4byte 0x08085701
+	.4byte 0x08085705
+	.4byte 0x0808572d
+	.4byte 0x08085751
 
 	.global gUnknown_0839F0F4
 gUnknown_0839F0F4: @ 839F0F4
@@ -2675,15 +4433,28 @@ gUnknown_0839F250: @ 839F250
 
 	.global gUnknown_0839F268
 gUnknown_0839F268: @ 839F268
-	.incbin "baserom.gba", 0x0039f268, 0x10
+	.4byte 0x08085df5
+	.4byte 0x08085e31
+	.4byte 0x08085e6d
+	.4byte 0x08085e95
 
 	.global gUnknown_0839F278
 gUnknown_0839F278: @ 839F278
-	.incbin "baserom.gba", 0x0039f278, 0x10
+	.4byte 0x08085f41
+	.4byte 0x08085fb5
+	.4byte 0x08085fe5
+	.4byte 0x0808600d
 
 	.global gUnknown_0839F288
 gUnknown_0839F288: @ 839F288
-	.incbin "baserom.gba", 0x0039f288, 0x20
+	.4byte 0x080860bd
+	.4byte 0x08086155
+	.4byte 0x08086189
+	.4byte 0x080862c9
+	.4byte 0x080863bd
+	.4byte 0x080863d9
+	.4byte 0x080863e1
+	.4byte 0x08086405
 
 	.global gUnknown_0839F2A8
 gUnknown_0839F2A8: @ 839F2A8
@@ -2703,39 +4474,75 @@ gUnknown_0839F2C8: @ 839F2C8
 
 	.global gUnknown_0839F2CC
 gUnknown_0839F2CC: @ 839F2CC
-	.incbin "baserom.gba", 0x0039f2cc, 0x1c
+	.4byte 0x080867ad
+	.4byte 0x08086855
+	.4byte 0x08086871
+	.4byte 0x080868e5
+	.4byte 0x0808699d
+	.4byte 0x080869b9
+	.4byte 0x080869f9
 
 	.global gUnknown_0839F2E8
 gUnknown_0839F2E8: @ 839F2E8
-	.incbin "baserom.gba", 0x0039f2e8, 0x18
+	.4byte 0x08086aa1
+	.4byte 0x08086ac1
+	.4byte 0x08086b31
+	.4byte 0x08086b55
+	.4byte 0x08086b65
+	.4byte 0x08086b89
 
 	.global gUnknown_0839F300
 gUnknown_0839F300: @ 839F300
-	.incbin "baserom.gba", 0x0039f300, 0x1c
+	.4byte 0x08086cf5
+	.4byte 0x08086d71
+	.4byte 0x08086db1
+	.4byte 0x08086e11
+	.4byte 0x08086e51
+	.4byte 0x08086eb1
+	.4byte 0x08086ed5
 
 	.global gUnknown_0839F31C
 gUnknown_0839F31C: @ 839F31C
-	.incbin "baserom.gba", 0x0039f31c, 0x14
+	.4byte 0x08086fb1
+	.4byte 0x08086fd1
+	.4byte 0x0808700d
+	.4byte 0x08087031
+	.4byte 0x08087059
 
 	.global gUnknown_0839F330
 gUnknown_0839F330: @ 839F330
-	.incbin "baserom.gba", 0x0039f330, 0xc
+	.4byte 0x08087125
+	.4byte 0x08087139
+	.4byte 0x08087161
 
 	.global gUnknown_0839F33C
 gUnknown_0839F33C: @ 839F33C
-	.incbin "baserom.gba", 0x0039f33c, 0x18
+	.4byte 0x0808722d
+	.4byte 0x08087265
+	.4byte 0x08087299
+	.4byte 0x080872e5
+	.4byte 0x080873d9
+	.4byte 0x080873f5
 
 	.global gUnknown_0839F354
 gUnknown_0839F354: @ 839F354
-	.incbin "baserom.gba", 0x0039f354, 0x10
+	.4byte 0x080874cd
+	.4byte 0x080874fd
+	.4byte 0x08087549
+	.4byte 0x0808759d
 
 	.global gUnknown_0839F364
 gUnknown_0839F364: @ 839F364
-	.incbin "baserom.gba", 0x0039f364, 0x14
+	.4byte 0x080876c9
+	.4byte 0x080876f9
+	.4byte 0x08087775
+	.4byte 0x080877ad
+	.4byte 0x080877d5
 
 	.global gUnknown_0839F378
 gUnknown_0839F378: @ 839F378
-	.incbin "baserom.gba", 0x0039f378, 0x8
+	.4byte 0x080878f5
+	.4byte 0x08087915
 
 	.global gUnknown_0839F380
 gUnknown_0839F380: @ 839F380
@@ -2743,39 +4550,81 @@ gUnknown_0839F380: @ 839F380
 
 	.global gUnknown_0839F388
 gUnknown_0839F388: @ 839F388
-	.incbin "baserom.gba", 0x0039f388, 0x8
+	.4byte 0x08087aa5
+	.4byte 0x08087ac9
 
 	.global gUnknown_0839F390
 gUnknown_0839F390: @ 839F390
-	.incbin "baserom.gba", 0x0039f390, 0x10
+	.4byte 0x08087bed
+	.4byte 0x08087c15
+	.4byte 0x08087ca5
+	.4byte 0x08087d79
 
 	.global gUnknown_0839F3A0
 gUnknown_0839F3A0: @ 839F3A0
-	.incbin "baserom.gba", 0x0039f3a0, 0xc
+	.4byte 0x08087e4d
+	.4byte 0x08087ed9
+	.4byte 0x08087fdd
 
 	.global gUnknown_0839F3AC
 gUnknown_0839F3AC: @ 839F3AC
-	.incbin "baserom.gba", 0x0039f3ac, 0x1c
+	.4byte 0x08088151
+	.4byte 0x080881c1
+	.4byte 0x08088229
+	.4byte 0x080882b5
+	.4byte 0x080882e5
+	.4byte 0x08088339
+	.4byte 0x08088381
 
 	.global gUnknown_0839F3C8
 gUnknown_0839F3C8: @ 839F3C8
-	.incbin "baserom.gba", 0x0039f3c8, 0x1c
+	.4byte 0x080884ad
+	.4byte 0x080884e9
+	.4byte 0x08088555
+	.4byte 0x080885a9
+	.4byte 0x080885d9
+	.4byte 0x0808860d
+	.4byte 0x0808862d
 
 	.global gUnknown_0839F3E4
 gUnknown_0839F3E4: @ 839F3E4
-	.incbin "baserom.gba", 0x0039f3e4, 0x14
+	.4byte 0x08088985
+	.4byte 0x080889e5
+	.4byte 0x08088a31
+	.4byte 0x08088a79
+	.4byte 0x08088af5
 
 	.global gUnknown_0839F3F8
 gUnknown_0839F3F8: @ 839F3F8
-	.incbin "baserom.gba", 0x0039f3f8, 0x54
+Unknown_839F3F8:
+	.4byte 0x08088ca1
+	.4byte 0x08088cf9
+	.4byte 0x08088d3d
+	.4byte 0x08088d95
+	.4byte 0x08088dd9
+	.4byte 0x08088e2d
+	.4byte 0x08088eb5
+	.4byte 0x08088f11
+	.4byte 0x08088f31
+Unknown_839F41C:
+	.incbin "baserom.gba", 0x0039f41c, 0x18
+Unknown_839F434:
+	.incbin "baserom.gba", 0x0039f434, 0x18
 
 	.global gUnknown_0839F44C
 gUnknown_0839F44C: @ 839F44C
-	.incbin "baserom.gba", 0x0039f44c, 0x8
+	.4byte Unknown_839F41C
+	.4byte Unknown_839F434
 
 	.global gUnknown_0839F454
 gUnknown_0839F454: @ 839F454
-	.incbin "baserom.gba", 0x0039f454, 0x1c
+	.4byte 0x080892a1
+	.4byte 0x08089355
+	.4byte 0x080893c1
+	.4byte 0x08089415
+	.4byte 0x0808948d
+	.4byte 0x080894c5
+	.4byte 0x080894fd
 
 	.global gUnknown_0839F470
 gUnknown_0839F470: @ 839F470
@@ -2783,7 +4632,54 @@ gUnknown_0839F470: @ 839F470
 
 	.global gUnknown_0839F494
 gUnknown_0839F494: @ 839F494
-	.incbin "baserom.gba", 0x0039f494, 0xc0
+	.4byte OtherText_Summary
+	.4byte 0x08089fcd
+	.4byte OtherText_Switch2
+	.4byte 0x0808a02d
+	.4byte OtherText_Item
+	.4byte 0x0808a141
+	.4byte OtherText_Cancel2
+	.4byte 0x0808a919
+	.4byte OtherText_Give2
+	.4byte 0x0808a631
+	.4byte OtherText_Take2
+	.4byte 0x0808a689
+	.4byte OtherText_Take
+	.4byte 0x0808a6b9
+	.4byte OtherText_Mail
+	.4byte 0x0808a6e9
+	.4byte OtherText_Read2
+	.4byte 0x0808a811
+	.4byte OtherText_Cancel2
+	.4byte 0x0808a939
+	.4byte gMoveNames + 13 * MOVE_CUT
+	.4byte 0x0808a985
+	.4byte gMoveNames + 13 * MOVE_FLASH
+	.4byte 0x0808a985
+	.4byte gMoveNames + 13 * MOVE_ROCK_SMASH
+	.4byte 0x0808a985
+	.4byte gMoveNames + 13 * MOVE_STRENGTH
+	.4byte 0x0808a985
+	.4byte gMoveNames + 13 * MOVE_SURF
+	.4byte 0x0808a985
+	.4byte gMoveNames + 13 * MOVE_FLY
+	.4byte 0x0808a985
+	.4byte gMoveNames + 13 * MOVE_DIVE
+	.4byte 0x0808a985
+	.4byte gMoveNames + 13 * MOVE_WATERFALL
+	.4byte 0x0808a985
+	.4byte gMoveNames + 13 * MOVE_TELEPORT
+	.4byte 0x0808a985
+	.4byte gMoveNames + 13 * MOVE_DIG
+	.4byte 0x0808a985
+	.4byte gMoveNames + 13 * MOVE_SECRET_POWER
+	.4byte 0x0808a985
+	.4byte gMoveNames + 13 * MOVE_MILK_DRINK
+	.4byte 0x0808a985
+	.4byte gMoveNames + 13 * MOVE_SOFT_BOILED
+	.4byte 0x0808a985
+	.4byte gMoveNames + 13 * MOVE_SWEET_SCENT
+	.4byte 0x0808a985
 
 	.global gUnknown_0839F554
 gUnknown_0839F554: @ 839F554
@@ -2887,6 +4783,7 @@ gUnknown_083A05F1: @ 83A05F1
 
 	.global gUnknown_083A05F8
 gUnknown_083A05F8: @ 83A05F8
+@ not sure if this is even a string, wont label
 	.string "$"
 
 @ 83A05F9
@@ -2905,11 +4802,26 @@ gUnknown_083B5558: @ 83B5558
 
 	.global gUnknown_083B5584
 gUnknown_083B5584: @ 83B5584
-	.incbin "baserom.gba", 0x003b5584, 0x210
+Unknown_83B5584:
+	.4byte 0x02008000
+	.4byte 0x0200c000
+	.4byte 0x02010000
+	.4byte 0x02014000
+Unknown_83B5594:
+	.incbin "baserom.gba", 0x003b5594, 0x80
+Unknown_83B5614:
+	.incbin "baserom.gba", 0x003b5614, 0x80
+Unknown_83B5694:
+	.incbin "baserom.gba", 0x003b5694, 0x80
+Unknown_83B5714:
+	.incbin "baserom.gba", 0x003b5714, 0x80
 
 	.global gUnknown_083B5794
 gUnknown_083B5794: @ 83B5794
-	.incbin "baserom.gba", 0x003b5794, 0x10
+	.4byte Unknown_83B5594
+	.4byte Unknown_83B5614
+	.4byte Unknown_83B5694
+	.4byte Unknown_83B5714
 
 	.global gUnknown_083B57A4
 gUnknown_083B57A4: @ 83B57A4
@@ -2993,15 +4905,26 @@ gUnknown_083B5AB8: @ 83B5AB8
 
 	.global gUnknown_083B5EBC
 gUnknown_083B5EBC: @ 83B5EBC
-	.incbin "baserom.gba", 0x003b5ebc, 0x1c
+	.4byte 0x08093865
+	.4byte 0x080938a9
+	.4byte 0x080938cd
+	.4byte 0x08093919
+	.4byte 0x08093939
+	.4byte 0x08093955
+	.4byte 0x08093981
 
 	.global gUnknown_083B5ED8
 gUnknown_083B5ED8: @ 83B5ED8
-	.incbin "baserom.gba", 0x003b5ed8, 0x14
+	.4byte 0x08093aa1
+	.4byte 0x08093af1
+	.4byte 0x08093c0d
+	.4byte 0x08093c39
+	.4byte 0x08093d51
 
 	.global gUnknown_083B5EEC
 gUnknown_083B5EEC: @ 83B5EEC
-	.incbin "baserom.gba", 0x003b5eec, 0x8
+	.4byte 0x08e8cac0
+	.4byte 0x08e8d4c0
 
 	.global gUnknown_083B5EF4
 gUnknown_083B5EF4: @ 83B5EF4
@@ -3009,7 +4932,11 @@ gUnknown_083B5EF4: @ 83B5EF4
 
 	.global gUnknown_083B5EF8
 gUnknown_083B5EF8: @ 83B5EF8
-	.incbin "baserom.gba", 0x003b5ef8, 0x14
+	.4byte 0x08e8c8e0
+	.4byte 0x08e8c940
+	.4byte 0x08e8c9a0
+	.4byte 0x08e8ca00
+	.4byte 0x08e8ca60
 
 	.global gUnknown_083B5F0C
 gUnknown_083B5F0C: @ 83B5F0C
@@ -3085,7 +5012,7 @@ gUnknown_083B6DB4: @ 83B6DB4
 
 	.global gUnknown_083B6DB8
 gUnknown_083B6DB8: @ 83B6DB8
-	.incbin "baserom.gba", 0x003b6db8, 0x4
+	.4byte 0x02039360
 
 	.global gUnknown_083B6DBC
 gUnknown_083B6DBC: @ 83B6DBC
@@ -3149,7 +5076,9 @@ gUnknown_083BB2F0: @ 83BB2F0
 
 	.global gUnknown_083BBBC8
 gUnknown_083BBBC8: @ 83BBBC8
-	.incbin "baserom.gba", 0x003bbbc8, 0xc
+	.4byte 0x0809b151
+	.4byte 0x0809b1d9
+	.4byte 0x0809b24d
 
 	.global gUnknown_083BBBD4
 gUnknown_083BBBD4: @ 83BBBD4
@@ -3173,8 +5102,39 @@ gUnknown_083BBC88: @ 83BBC88
 
 	.global gUnknown_083BBCA0
 gUnknown_083BBCA0: @ 83BBCA0
-	.incbin "baserom.gba", 0x003bbca0, 0x80
-
+	.4byte PCText_Cancel2
+	.4byte PCText_Deposit
+	.4byte PCText_Withdraw
+	.4byte PCText_Move
+	.4byte PCText_Switch
+	.4byte PCText_Place
+	.4byte PCText_Summary
+	.4byte PCText_Release
+	.4byte PCText_Mark
+	.4byte PCText_Jump
+	.4byte PCText_Wallpaper
+	.4byte PCText_Name
+	.4byte PCText_Scenery1
+	.4byte PCText_Scenery2
+	.4byte PCText_Scenery3
+	.4byte PCText_Etc
+	.4byte PCText_Forest
+	.4byte PCText_City
+	.4byte PCText_Desert
+	.4byte PCText_Savanna
+	.4byte PCText_Crag
+	.4byte PCText_Volcano
+	.4byte PCText_Snow
+	.4byte PCText_Cave
+	.4byte PCText_Beach
+	.4byte PCText_Seafloor
+	.4byte PCText_River
+	.4byte PCText_Sky
+	.4byte PCText_Polka
+	.4byte PCText_PokeCenter
+	.4byte PCText_Machine
+	.4byte PCText_Plain
+	
 @ 83BBD20
 	.include "data/graphics/pokemon/icon_table.s"
 
@@ -3190,11 +5150,21 @@ gUnknown_083BC5E8: @ 83BC5E8
 
 	.global gUnknown_083BC62C
 gUnknown_083BC62C: @ 83BC62C
-	.incbin "baserom.gba", 0x003bc62c, 0x34
+Unknown_83BC62C:
+	.4byte 0x083bc5f0
+	.4byte 0x083bc5fc
+	.4byte 0x083bc608
+	.4byte 0x083bc614
+	.4byte 0x083bc620
+Unknown_83BC640:
+	.incbin "baserom.gba", 0x003bc640, 0x10
+Unknown_83BC650:
+	.incbin "baserom.gba", 0x003bc650, 0x10
 
 	.global gUnknown_083BC660
 gUnknown_083BC660: @ 83BC660
-	.incbin "baserom.gba", 0x003bc660, 0x8
+	.4byte Unknown_83BC640
+	.4byte Unknown_83BC650
 
 	.global gUnknown_083BC668
 gUnknown_083BC668: @ 83BC668
@@ -3268,15 +5238,22 @@ gUnknown_083C157E: @ 83C157E
 
 	.global gUnknown_083C1580
 gUnknown_083C1580: @ 83C1580
-	.incbin "baserom.gba", 0x003c1580, 0x8
+	.4byte 0x0809fc0d
+	.4byte 0x0809feb9
 
 	.global gUnknown_083C1588
 gUnknown_083C1588: @ 83C1588
-	.incbin "baserom.gba", 0x003c1588, 0x10
+	.4byte 0x0809f63d
+	.4byte 0x0809f651
+	.4byte 0x0809f665
+	.4byte 0x0809f665
 
 	.global gUnknown_083C1598
 gUnknown_083C1598: @ 83C1598
-	.incbin "baserom.gba", 0x003c1598, 0x10
+	.4byte 0x0809fe6d
+	.4byte 0x080a0091
+	.4byte 0x080a015d
+	.4byte 0x080a015d
 
 	.global gUnknown_083C15A8
 gUnknown_083C15A8: @ 83C15A8
@@ -3325,15 +5302,30 @@ gUnknown_083C16B8: @ 83C16B8
 
 	.global gUnknown_083C16BC
 gUnknown_083C16BC: @ 83C16BC
-	.incbin "baserom.gba", 0x003c16bc, 0x38
+	.4byte 0x080a59d1
+	.4byte 0x080a599d
+	.4byte 0x080a7025
+	.4byte 0x080a70d9
+	.4byte 0x080a6215
+	.4byte 0x080a61ed
+	.4byte 0x080a6355
+	.4byte 0x080a631d
+	.4byte 0x080a6919
+	.4byte 0x080a68f1
+	.4byte 0x080a59d1
+	.4byte 0x080a69b9
+	.4byte 0x080a6c6d
+	.4byte 0x080a6a4d
 
 	.global gUnknown_083C16F4
 gUnknown_083C16F4: @ 83C16F4
-	.incbin "baserom.gba", 0x003c16f4, 0x8
+	.4byte 0x080a5e61
+	.4byte 0x080a5e91
 
 	.global gUnknown_083C16FC
 gUnknown_083C16FC: @ 83C16FC
-	.incbin "baserom.gba", 0x003c16fc, 0x8
+	.4byte 0x080a65ad
+	.4byte 0x080a6619
 
 	.global gUnknown_083C1704
 gUnknown_083C1704: @ 83C1704
@@ -3345,11 +5337,14 @@ gUnknown_083C1708: @ 83C1708
 
 	.global gUnknown_083C170A
 gUnknown_083C170A: @ 83C170A
-	.incbin "baserom.gba", 0x003c170a, 0x5ba
+Unknown_83C170A:
+	.incbin "baserom.gba", 0x003c170a, 0x592
+Unknown_83C1C9C:
+	.incbin "baserom.gba", 0x003c1c9c, 0x28
 
 	.global gUnknown_083C1CC4
 gUnknown_083C1CC4: @ 83C1CC4
-	.incbin "baserom.gba", 0x003c1cc4, 0x4
+	.4byte Unknown_83C1C9C
 
 	.global gUnknown_083C1CC8
 gUnknown_083C1CC8: @ 83C1CC8
@@ -3365,11 +5360,14 @@ gUnknown_083C1CD8: @ 83C1CD8
 
 	.global gUnknown_083C1CE0
 gUnknown_083C1CE0: @ 83C1CE0
-	.incbin "baserom.gba", 0x003c1ce0, 0x40
+Unknown_83C1CE0:
+	.incbin "baserom.gba", 0x003c1ce0, 0x20
+Unknown_83C1D00:
+	.incbin "baserom.gba", 0x003c1d00, 0x20
 
 	.global gUnknown_083C1D20
 gUnknown_083C1D20: @ 83C1D20
-	.incbin "baserom.gba", 0x003c1d20, 0x4
+	.4byte Unknown_83C1D00
 
 	.global gUnknown_083C1D24
 gUnknown_083C1D24: @ 83C1D24
@@ -3414,6 +5412,7 @@ gUnknown_083C1F98: @ 83C1F98
 
 @ 83C9150
 @ Unreferenced debug strings.
+@ not referenced. wont label
 	.string "テストです$" @ "test"
 	.string "Contest$"
 	.string "Contest results$"
@@ -3428,7 +5427,20 @@ gUnknown_083C1F98: @ 83C1F98
 	.align 2
 	.global gUnknown_083C91F0
 gUnknown_083C91F0: @ 83C91F0
-	.incbin "baserom.gba", 0x003c91f0, 0x38
+	.4byte 0x083c9166
+	.4byte 0x080a9c1d
+	.4byte 0x083c916e
+	.4byte 0x080a9bbd
+	.4byte 0x083c9190
+	.4byte 0x080a9c35
+	.4byte 0x083c91a0
+	.4byte 0x080a9c41
+	.4byte 0x083c91b0
+	.4byte 0x080aafdd
+	.4byte 0x083c91c2
+	.4byte 0x080aafed
+	.4byte 0x083c91d6
+	.4byte 0x080ab02d
 
 	.global gUnknown_083C9228
 gUnknown_083C9228: @ 83C9228
@@ -3472,7 +5484,24 @@ gUnknown_083C92CC: @ 83C92CC
 
 	.global gUnknown_083C92E4
 gUnknown_083C92E4: @ 83C92E4
-	.incbin "baserom.gba", 0x003c92e4, 0x48
+	.4byte 0x080aa8c9
+	.4byte 0x080aa8d9
+	.4byte 0x080aa8e9
+	.4byte 0x080aa8f9
+	.4byte 0x080aac5d
+	.4byte 0x080aac5d
+	.4byte 0x080aa931
+	.4byte 0x080aa975
+	.4byte 0x080aa9b9
+	.4byte 0x080aa9fd
+	.4byte 0x080aaa41
+	.4byte 0x080aaa85
+	.4byte 0x080aaaf1
+	.4byte 0x080aab31
+	.4byte 0x080aab71
+	.4byte 0x080aabb1
+	.4byte 0x080aabf1
+	.4byte 0x080aad45
 
 	.global gUnknown_083C932C
 gUnknown_083C932C: @ 83C932C
@@ -3492,11 +5521,27 @@ gUnknown_083C9364: @ 83C9364
 
 	.global gUnknown_083C93B4
 gUnknown_083C93B4: @ 83C93B4
-	.incbin "baserom.gba", 0x003c93b4, 0x3c
+Unknown_83C93B4:
+	.4byte 0x083c937c
+	.4byte 0x083c9387
+	.4byte 0x083c9392
+	.4byte 0x083c939d
+	.4byte 0x083c93a8
+Unknown_83C93C8:
+	.incbin "baserom.gba", 0x003c93c8, 0xA
+Unknown_83C93D2:
+	.incbin "baserom.gba", 0x003c93d2, 0xA
+Unknown_83C93DC:
+	.incbin "baserom.gba", 0x003c93dc, 0xA
+Unknown_83C93E6:
+	.incbin "baserom.gba", 0x003c93e6, 0xA
 
 	.global gUnknown_083C93F0
 gUnknown_083C93F0: @ 83C93F0
-	.incbin "baserom.gba", 0x003c93f0, 0x10
+	.4byte Unknown_83C93C8
+	.4byte Unknown_83C93D2
+	.4byte Unknown_83C93DC
+	.4byte Unknown_83C93E6
 
 	.global gUnknown_083C9400
 gUnknown_083C9400: @ 83C9400
@@ -3509,522 +5554,161 @@ gUnknown_083C9408: @ 83C9408
 
 	.global gUnknown_083CA308
 gUnknown_083CA308: @ 83CA308
-.incbin "baserom.gba", 0x003ca308, 0x8
+	.incbin "baserom.gba", 0x003ca308, 0x8
 
 	.global gUnknown_083CA310
 gUnknown_083CA310: @ 83CA310
-.incbin "baserom.gba", 0x003ca310, 0x8
+	.incbin "baserom.gba", 0x003ca310, 0x8
 
 	.global gUnknown_083CA318
 gUnknown_083CA318: @ 83CA318
-.incbin "baserom.gba", 0x003ca318, 0x18
+	.incbin "baserom.gba", 0x003ca318, 0x18
 
 	.global gUnknown_083CA330
 gUnknown_083CA330: @ 83CA330
-.incbin "baserom.gba", 0x003ca330, 0x8
+	.incbin "baserom.gba", 0x003ca330, 0x8
 
 	.global gUnknown_083CA338
 gUnknown_083CA338: @ 83CA338
-.incbin "baserom.gba", 0x003ca338, 0x4
+	.incbin "baserom.gba", 0x003ca338, 0x4
 
 	.global gUnknown_083CA33C
 gUnknown_083CA33C: @ 83CA33C
-.incbin "baserom.gba", 0x003ca33c, 0x4
+	.incbin "baserom.gba", 0x003ca33c, 0x4
 
 	.global gUnknown_083CA340
 gUnknown_083CA340: @ 83CA340
-.incbin "baserom.gba", 0x003ca340, 0x1
+	.incbin "baserom.gba", 0x003ca340, 0x1
 
 	.global gUnknown_083CA341
 gUnknown_083CA341: @ 83CA341
-.incbin "baserom.gba", 0x003ca341, 0xf
+	.incbin "baserom.gba", 0x003ca341, 0xf
 
 	.global gUnknown_083CA350
 gUnknown_083CA350: @ 83CA350
-.incbin "baserom.gba", 0x003ca350, 0x5c
+	.incbin "baserom.gba", 0x003ca350, 0x5c
 
 	.global gUnknown_083CA3AC
 gUnknown_083CA3AC: @ 83CA3AC
-.incbin "baserom.gba", 0x003ca3ac, 0x18
+	.incbin "baserom.gba", 0x003ca3ac, 0x18
 
 	.global gUnknown_083CA3C4
 gUnknown_083CA3C4: @ 83CA3C4
-.incbin "baserom.gba", 0x003ca3c4, 0x20
+	.incbin "baserom.gba", 0x003ca3c4, 0x20
 
 	.global gUnknown_083CA3E4
 gUnknown_083CA3E4: @ 83CA3E4
-.incbin "baserom.gba", 0x003ca3e4, 0x10
+	.incbin "baserom.gba", 0x003ca3e4, 0x10
 
 	.global gUnknown_083CA3F4
 gUnknown_083CA3F4: @ 83CA3F4
-.incbin "baserom.gba", 0x003ca3f4, 0x70
+	.incbin "baserom.gba", 0x003ca3f4, 0x70
 
 	.global gUnknown_083CA464
 gUnknown_083CA464: @ 83CA464
-.incbin "baserom.gba", 0x003ca464, 0x8
+	.incbin "baserom.gba", 0x003ca464, 0x8
 
 	.global gUnknown_083CA46C
 gUnknown_083CA46C: @ 83CA46C
-.incbin "baserom.gba", 0x003ca46c, 0x8
+	.incbin "baserom.gba", 0x003ca46c, 0x8
 
 	.global gUnknown_083CA474
 gUnknown_083CA474: @ 83CA474
-.incbin "baserom.gba", 0x003ca474, 0x10
+	.incbin "baserom.gba", 0x003ca474, 0x10
 
 	.global gUnknown_083CA484
 gUnknown_083CA484: @ 83CA484
-.incbin "baserom.gba", 0x003ca484, 0x20
+	.incbin "baserom.gba", 0x003ca484, 0x20
 
 	.global gUnknown_083CA4A4
 gUnknown_083CA4A4: @ 83CA4A4
-.incbin "baserom.gba", 0x003ca4a4, 0x18
+	.incbin "baserom.gba", 0x003ca4a4, 0x18
 
 	.global gUnknown_083CA4BC
 gUnknown_083CA4BC: @ 83CA4BC
-.incbin "baserom.gba", 0x003ca4bc, 0x8
+	.incbin "baserom.gba", 0x003ca4bc, 0x8
 
 	.global gUnknown_083CA4C4
 gUnknown_083CA4C4: @ 83CA4C4
-.incbin "baserom.gba", 0x003ca4c4, 0x8
+	.incbin "baserom.gba", 0x003ca4c4, 0x8
 
 	.global gUnknown_083CA4CC
 gUnknown_083CA4CC: @ 83CA4CC
-.incbin "baserom.gba", 0x003ca4cc, 0x8
+	.incbin "baserom.gba", 0x003ca4cc, 0x8
 
-	.global gUnknown_083CA4D4
-gUnknown_083CA4D4: @ 83CA4D4
-.incbin "baserom.gba", 0x003ca4d4, 0x31
-.string "After this move, the user is\nmore easily startled.$"
-.string "Makes a great appeal, but\nallows no more to the end.$"
-.string "Can be repeatedly used\nwithout boring the JUDGE.$"
-.string "Can avoid being startled\nby others once.$"
-.string "Can avoid being startled\nby others.$"
-.string "Can avoid being startled\nby others a little.$"
-.string "After this move, the user is\nless likely to be startled.$"
-.string "Slightly startles the\nPOKéMON in front.$"
-.string "Slightly startles those\nthat have made appeals.$"
-.string "Startles the POKéMON that\nappealed before the user.$"
-.string "Startles all POKéMON that\nhave done their appeals.$"
-.string "Badly startles the\nPOKéMON in front.$"
-.string "Badly startles those that\nhave made appeals.$"
-.string "Startles the POKéMON that\nappealed before the user.$"
-.string "Startles all POKéMON that\nappealed before the user.$"
-.string "Shifts the JUDGE’s\nattention from others.$"
-.string "Startles the POKéMON that\nhas the JUDGE’s attention.$"
-.string "Jams the others, and misses\none turn of appeals.$"
-.string "Startles POKéMON that\nmade a same-type appeal.$"
-.string "Badly startles POKéMON\nthat made COOL appeals.$"
-.string "Badly startles POKéMON\nthat made BEAUTY appeals.$"
-.string "Badly startles POKéMON\nthat made CUTE appeals.$"
-.string "Badly startles POKéMON\nthat made SMART appeals.$"
-.string "Badly startles POKéMON\nthat made TOUGH appeals.$"
-.string "Makes one POKéMON after\nthe user nervous.$"
-.string "Makes all POKéMON after\nthe user nervous.$"
-.string "Worsens the condition of\nthose that made appeals.$"
-.string "Badly startles POKéMON in\ngood condition.$"
-.string "The appeal works great if\nperformed first.$"
-.string "The appeal works great if\nperformed last.$"
-.string "Makes the appeal as good\nas those before it.$"
-.string "Makes the appeal as good\nas the one before it.$"
-.string "The appeal works better\nthe later it is performed.$"
-.string "The appeal’s quality varies\ndepending on its timing.$"
-.string "Works well if it’s the same\ntype as the one before.$"
-.string "Works well if different in\ntype than the one before.$"
-.string "Affected by how well the\nappeal in front goes.$"
-.string "Ups the user’s condition.\nHelps prevent nervousness.$"
-.string "The appeal works well if the\nuser’s condition is good.$"
-.string "The next appeal can be made\nearlier next turn.$"
-.string "The next appeal can be made\nlater next turn.$"
-.string "Makes the next turn’s order\nmore easily scrambled.$"
-.string "Scrambles the order of\nappeals on the next turn.$"
-.string "An appeal that excites the\naudience in any CONTEST.$"
-.string "Badly startles all POKéMON\nthat made good appeals.$"
-.string "The appeal works best the\nmore the crowd is excited.$"
-.string "Temporarily stops the\ncrowd from growing excited.$"
-.align 1
-
-	.global gUnknown_083CADD4
-gUnknown_083CADD4: @ 83CADD4
-.4byte 0x083ca4ec, 0x083ca505, 0x083ca538, 0x083ca56d, 0x083ca59e, 0x083ca5c7, 0x083ca5eb, 0x083ca618
-.4byte 0x083ca651, 0x083ca679, 0x083ca6a9, 0x083ca6dd, 0x083ca710, 0x083ca735, 0x083ca762, 0x083ca796
-.4byte 0x083ca7ca, 0x083ca7f4, 0x083ca829, 0x083ca85a, 0x083ca889, 0x083ca8b8, 0x083ca8e9, 0x083ca918
-.4byte 0x083ca948, 0x083ca978, 0x083ca9a2, 0x083ca9cc, 0x083ca9fe, 0x083caa28, 0x083caa53, 0x083caa7d
-.4byte 0x083caaaa, 0x083caad9, 0x083cab0c, 0x083cab41, 0x083cab75, 0x083cabaa, 0x083cabd9, 0x083cac0e
-.4byte 0x083cac45, 0x083cac74, 0x083caca1, 0x083cacd4, 0x083cad05, 0x083cad39, 0x083cad6c, 0x083cada1
-.string "RAIN DANCE$"
-.string "RAGE$"
-.string "FOCUS ENERGY$"
-.string "HYPNOSIS$"
-.string "SOFTBOILED$"
-.string "HORN ATTACK$"
-.string "SWORDS DANCE$"
-.string "CONVERSION$"
-.string "SUNNY DAY$"
-.string "REST$"
-.string "VICEGRIP$"
-.string "DEFENSE CURL$"
-.string "LOCK-ON$"
-.align 2
-.4byte 0x083CAE94
-.4byte 0x083CAE94
-.4byte 0x083CAE9F
-.4byte 0x083CAEA4
-.4byte 0x083CAEB1
-.4byte 0x083CAEBA
-.4byte 0x083CAEC5
-.4byte 0x083CAED1
-.4byte 0x083CAEDE
-.4byte 0x083CAEE9
-.4byte 0x083CAEF3
-.4byte 0x083CAEF8
-.4byte 0x083CAF01
-.4byte 0x083CAF0E
-.string "COOL$"
-.string "BEAUTY$"
-.string "CUTE$"
-.string "SMART$"
-.string "TOUGH$"
-.align 2
-
-	.global gUnknown_083CAF70
-gUnknown_083CAF70: @ 83CAF70
-.incbin "baserom.gba", 0x003caf70, 0x14
-
-	.global gUnknown_083CAF84
-gUnknown_083CAF84: @ 83CAF84
-.string "Appeal no. {NAME_END}!\nWhich move will be played?$"
-
-	.global gUnknown_083CAFAE
-gUnknown_083CAFAE: @ 83CAFAE
-.string "Appeal no. {NAME_END}!\nBut it can’t participate!$"
-
-	.global gUnknown_083CAFD7
-gUnknown_083CAFD7: @ 83CAFD7
-.string "{STR_VAR_1} appealed with\n{STR_VAR_2}!$"
-.string "The other POKéMON\nmade moves.{PAUSE 60}$"
-
-	.global gUnknown_083CB00D
-gUnknown_083CB00D: @ 83CB00D
-.string "{STR_VAR_1} was watching\nthe others.{PAUSE 60}$"
-
-	.global gUnknown_083CB02C
-gUnknown_083CB02C: @ 83CB02C
-.string "We’re all out of\nAppeal Time!{PAUSE 60}$"
-.string "{STR_VAR_1}’s {STR_VAR_3}\nmove {STR_VAR_2}!{PAUSE 60}$"
-.string "TRICK$"
-.string "SPECIAL$"
-.string "But the appeal was\njammed.$"
-.string "It followed another\nPOKéMON’s lead.$"
-.string "But it messed up.$"
-.string "It went better than\nusual.$"
-.string "The JUDGE looked away\nfor some reason.$"
-.string "It worked hard to build on\npast mistakes.$"
-.string "It can’t make any more\nmoves.$"
-.string "It worked frighteningly\nwell.$"
-.string "It worked as hard as the\nstandout POKéMON.$"
-.string "The JUDGE looked on\nexpectantly.$"
-.string "It worked rather well.$"
-.string "It worked a little better\nthan usual.$"
-.align 2
-.4byte 0x083CB06F
-.4byte 0x083CB08A
-.4byte 0x083CB0AE
-.4byte 0x083CB0C0
-.4byte 0x083CB0C0 @ there's a duplicate pointer for some reason
-.4byte 0x083CB0DB
-.4byte 0x083CB102
-.4byte 0x083CB12C
-.4byte 0x083CB14A
-.4byte 0x083CB168
-.4byte 0x083CB193
-.4byte 0x083CB1B4
-.4byte 0x083CB1CB
-.string "{STR_VAR_1} failed to\nstand out at all...{PAUSE_UNTIL_PRESS}$"
-.string "{STR_VAR_1} didn’t stand\nout very much...{PAUSE_UNTIL_PRESS}$"
-.string "{STR_VAR_1} caught a\nlittle attention.{PAUSE_UNTIL_PRESS}$"
-.string "{STR_VAR_1} attracted a\nlot of attention.{PAUSE_UNTIL_PRESS}$"
-.string "{STR_VAR_1} commanded\ntotal attention.{PAUSE_UNTIL_PRESS}$"
-.string "{STR_VAR_1} hasn’t made\nits appeal.{PAUSE_UNTIL_PRESS}$"
-.align 2
-
-	.global gUnknown_083CB2F0
-gUnknown_083CB2F0: @ 83CB2F0
-.4byte 0x083CB228
-.4byte 0x083CB24B
-.4byte 0x083CB26E
-.4byte 0x083CB28E
-.4byte 0x083CB2B1
-.4byte 0x083CB2D1
-.string "Anticipation swelled for\n{STR_VAR_1}’s appeal next.$"
-.string "The JUDGE was very\nsatisfied.$"
-.string "$"
-.string "The JUDGE ’s views on\n{STR_VAR_1} held firm.$"
-.string "{STR_VAR_1}’s {STR_VAR_3}\nchanged perceptions.$"
-.string "{STR_VAR_1}’s appeal\neffect wore off.$"
-.string "The special appeal’s\neffect wore off.$"
-.string "Everyone’s appeals were\nmade to look the same.$"
-.string "{STR_VAR_2}’s appeal was\ncheapened.$"
-.string "It cheapened the appeal\nof those ahead.$"
-.string "It stole attention away\nfrom {STR_VAR_2}.$"
-.string "It cheapened\n{STR_VAR_2}’s appeal.$"
-.string "It severely cheapened\nother appeals.$"
-.string "Anticipation swelled for\n{STR_VAR_1}’s appeal next.$"
-.string "It cheapened the appeal\nof those ahead.$"
-.string "It cheapened the JUDGE’s\nfavorite appeal.$"
-.string "The appeals of others\nwere cheapened by half.$"
-.string "It stood out to make up\nfor being jammed.$"
-.string "It can’t participate in\nappeals any more.$"
-.string "It touched the JUDGE for\na fantastic appeal.$"
-.string "Anticipation rose for\nupcoming appeals.$"
-.string "It stood out as much as\nspecial appeals.$"
-.string "It stood out as much as\n{STR_VAR_1}.$"
-.string "Jammed appeals were made\neven less noticeable.$"
-.string "Everyone’s appeals were\nmade the same.$"
-.string "Its {STR_VAR_1} is full.\nIt worsened its appeal.$"
-.align 2
-.4byte 0x083cb352
-.4byte 0x083cb376
-.4byte 0x083cb351
-.4byte 0x083cb393
-.4byte 0x083cb3b0
-.4byte 0x083cb3d6
-.4byte 0x083cb405
-.4byte 0x083cb420
-.4byte 0x083cb448
-.4byte 0x083cb469
-.4byte 0x083cb483
-.4byte 0x083cb4a8
-.4byte 0x083cb4d3
-.4byte 0x083cb4fb
-.4byte 0x083cb525
-.4byte 0x083cb553
-.4byte 0x083cb57d
-.4byte 0x083cb5a7
-.4byte 0x083cb5d4
-.4byte 0x083cb5fc
-.4byte 0x083cb625
-.4byte 0x083cb351
-.4byte 0x083cb351
-.4byte 0x083cb351
-.4byte 0x083cb641
-.4byte 0x083cb670
-.string "It became more conscious\nof the other POKéMON.{PAUSE 60}$"
-.string "{STR_VAR_1} can’t make an\nappeal after this.{PAUSE 60}$"
-.string "It settled down just a\nlittle bit.{PAUSE 60}$"
-.string "It became oblivious to\nthe other POKéMON.{PAUSE 60}$"
-.string "It became less aware of\nthe other POKéMON.{PAUSE 60}$"
-.string "It stopped caring about\nother POKéMON much.{PAUSE 60}$"
-.string "It tried to startle the\nother POKéMON.{PAUSE 60}$"
-.string "It tried to dazzle the\nothers.{PAUSE 60}$"
-.string "The JUDGE looked away\nfrom {STR_VAR_1}.{PAUSE 60}$"
-.string "It tried to unnerve the\nnext POKéMON.{PAUSE 60}$"
-.string "{STR_VAR_1} became\nnervous.{PAUSE 60}$"
-.string "The appeal tried to\nunnerve waiting POKéMON.{PAUSE 60}$"
-.string "It taunted POKéMON\ndoing well.{PAUSE 60}$"
-.string "{STR_VAR_1} regained its\nform.{PAUSE 60}$"
-.string "It tried to jam POKéMON\ndoing well.{PAUSE 60}$"
-.string "The standout {STR_VAR_1}\nhustled even more.{PAUSE 60}$"
-.string "The largely unnoticed\n{STR_VAR_1} worked hard.{PAUSE 60}$"
-.string "It worked as much as\nPOKéMON before it.{PAUSE 60}$"
-.string "{STR_VAR_1}’s appeal did\nnot go well.{PAUSE 60}$"
-.string "It worked as much as the\npreceding POKéMON.{PAUSE 60}$"
-.string "{STR_VAR_1}’s appeal did\nnot go well.{PAUSE 60}$"
-.string "{STR_VAR_1}’s appeal\ncouldn’t be shown well.{PAUSE 60}$"
-.string "{STR_VAR_1}’s appeal\nwent slightly well.{PAUSE 60}$"
-.string "{STR_VAR_1}’s appeal\nwent pretty well.{PAUSE 60}$"
-.string "{STR_VAR_1}’s appeal\nwent excellently.{PAUSE 60}$"
-.string "{STR_VAR_1}’s appeal was\na dud.{PAUSE 60}$"
-.string "{STR_VAR_1}’s appeal did\nnot work very well.{PAUSE 60}$"
-.string "{STR_VAR_1}’s appeal\nwent slightly well.{PAUSE 60}$"
-.string "{STR_VAR_1}’s appeal\nwent pretty well.{PAUSE 60}$"
-.string "{STR_VAR_1}’s appeal\nwent very well.{PAUSE 60}$"
-.string "{STR_VAR_1}’s appeal\nwent excellently.{PAUSE 60}$"
-.string "It’s the same type as the\nPOKéMON before - good!{PAUSE 60}$"
-.string "It’s not the same type as\nthe one before - good!{PAUSE 60}$"
-.string "It stood out much more\nthan the POKéMON before.{PAUSE 60}$"
-.string "It didn’t do as well as the\nPOKéMON before.{PAUSE 60}$"
-.string "{STR_VAR_1}’s condition\nrose above usual.{PAUSE 60}$"
-.string "{STR_VAR_1}’s hot status\nmade it a great appeal!{PAUSE 60}$"
-.string "It moved up in line for\nthe next appeal.{PAUSE 60}$"
-.string "It moved back in line once\nfor the next appeal.{PAUSE 60}$"
-.string "It scrambled up the\norder for the next turn.{PAUSE 60}$"
-
-	.global gUnknown_083CBD52
-gUnknown_083CBD52: @ 83CBD52
-.string "The JUDGE looked at\n{STR_VAR_1} expectantly.{PAUSE 60}$"
-
-	.global gUnknown_083CBD79
-gUnknown_083CBD79: @ 83CBD79
-.string "The appeal combo went\nover well.{PAUSE 60}$"
-
-	.global gUnknown_083CBD9D
-gUnknown_083CBD9D: @ 83CBD9D
-.string "The appeal combo went\nover very well.{PAUSE 60}$"
-
-	.global gUnknown_083CBDC6
-gUnknown_083CBDC6: @ 83CBDC6
-.string "The appeal combo went\nover excellently.{PAUSE 60}$"
-.string "{STR_VAR_1} managed to\navert its gaze.{PAUSE 60}$"
-.string "{STR_VAR_1} managed to\navoid seeing it.{PAUSE 60}$"
-.string "{STR_VAR_1} isn’t fazed\nby that sort of thing.{PAUSE 60}$"
-.string "{STR_VAR_1} became a\nlittle distracted.{PAUSE 60}$"
-.string "It tried to startle the\nother POKéMON.{PAUSE 60}$"
-.string "{STR_VAR_1} looked down\nout of distraction.{PAUSE 60}$"
-.string "{STR_VAR_1} turned back\nout of distraction.{PAUSE 60}$"
-.string "{STR_VAR_1} couldn’t help\nuttering a cry.{PAUSE 60}$"
-.string "{STR_VAR_1} couldn’t help\nleaping up.{PAUSE 60}$"
-.string "{STR_VAR_1} tripped over\nout of distraction.{PAUSE 60}$"
-
-	.global gUnknown_083CBF60
-gUnknown_083CBF60: @ 83CBF60
-.string "{STR_VAR_1} was too\nnervous to move.{PAUSE 60}$"
-.string "But it messed up.{PAUSE 60}$"
-.string "But it failed to make\nthe target nervous.{PAUSE 60}$"
-.string "But it failed to make\nanyone nervous.{PAUSE 60}$"
-.string "But it was ignored...{PAUSE 60}$"
-.string "But it couldn’t improve\nits condition...{PAUSE 60}$"
-.string "Its bad condition\nresulted in a weak appeal.{PAUSE 60}$"
-.string "{STR_VAR_1} was\nunaffected.{PAUSE 60}$"
-
-	.global gUnknown_083CC075
-gUnknown_083CC075: @ 83CC075
-.string "{STR_VAR_1} disappointed\nby repeating an appeal.{PAUSE 60}$"
-
-	.global gUnknown_083CC0A0
-gUnknown_083CC0A0: @ 83CC0A0
-.string "{STR_VAR_1}’s {STR_VAR_3}\nwent over great.{PAUSE 60}$"
-
-	.global gUnknown_083CC0BC
-gUnknown_083CC0BC: @ 83CC0BC
-.string "{STR_VAR_1}’s {STR_VAR_3}\ndidn’t go over well here...{PAUSE 60}$"
-
-	.global gUnknown_083CC0E3
-gUnknown_083CC0E3: @ 83CC0E3
-.string "{STR_VAR_1}’s {STR_VAR_3}\ngot the crowd going.{PAUSE 60}$"
-
-	.global gUnknown_083CC103
-gUnknown_083CC103: @ 83CC103
-.string "{STR_VAR_1} can’t appeal\nnext turn...{PAUSE 60}$"
-.string "It attracted the crowd’s\nattention.{PAUSE 60}$"
-
-	.global gUnknown_083CC14A
-gUnknown_083CC14A: @ 83CC14A
-.string "The crowd continues to\nwatch {STR_VAR_3}.{PAUSE 60}$"
-
-	.global gUnknown_083CC16E
-gUnknown_083CC16E: @ 83CC16E
-.string "{STR_VAR_1}’s\n{STR_VAR_2} is ignored.{PAUSE 60}$"
-.align 2
-
-	.global gUnknown_083CC188
-gUnknown_083CC188: @ 83CC188
-.incbin "baserom.gba", 0x003cc188, 0xf8
-
-	.global gUnknown_083CC280
-gUnknown_083CC280: @ 83CC280
-.string "shyness$"
-
-	.global gUnknown_083CC288
-gUnknown_083CC288: @ 83CC288
-.string "anxiety$"
-
-	.global gUnknown_083CC290
-gUnknown_083CC290: @ 83CC290
-.string "laziness$"
-
-	.global gUnknown_083CC299
-gUnknown_083CC299: @ 83CC299
-.string "hesitancy$"
-
-	.global gUnknown_083CC2A3
-gUnknown_083CC2A3: @ 83CC2A3
-.string "fear$"
-.string "coolness$"
-.string "beauty$"
-.string "cuteness$"
-.string "smartness$"
-.string "toughness$"
-.align 2
-
-	.global gUnknown_083CC2D8
-gUnknown_083CC2D8: @ 83CC2D8
-.incbin "baserom.gba", 0x003cc2d8, 0x14
-
-	.global gUnknown_083CC2EC
-gUnknown_083CC2EC: @ 83CC2EC
-.string "TENSION:$"
-.string "COOL Move$"
-.string "BEAUTY Move$"
-.string "CUTE Move$"
-.string "SMART Move$"
-.string "TOUGH Move$"
-.string "???$"
-.align 2
+	.include "data/text/contest_strings.s"
 
 	.global gUnknown_083CC330
 gUnknown_083CC330: @ 83CC330
-.incbin "baserom.gba", 0x003cc330, 0x1d
-.string "{HIGHLIGHT TRANSPARENT}{COLOR MAGENTA} $"
+	.incbin "baserom.gba", 0x003cc330, 0x1d
+@ not labeling until im sure what this is.
+	.string "{HIGHLIGHT TRANSPARENT}{COLOR MAGENTA} $"
 
 	.global gUnknown_083CC355
 gUnknown_083CC355: @ 83CC355
-.string "Missed turn$"
+UnknownText_MissedTurn:
+	.string "Missed turn$"
 
 	.global gUnknown_083CC361
 gUnknown_083CC361: @ 83CC361
-.string "Link standby...$"
-.string "{COLOR WHITE2}$"
-.string "The winner is {STR_VAR_1}’s {STR_VAR_2}!\nCongratulations!$"
-.incbin "baserom.gba", 0x003cc39d, 0x3
+UnknownText_LinkStandby:
+	.string "Link standby...$"
+UnknownText_UnknownFormatting:
+	.string "{COLOR WHITE2}$"
+UnknownText_WinnerIs:
+	.string "The winner is {STR_VAR_1}’s {STR_VAR_2}!\nCongratulations!$"
+	.incbin "baserom.gba", 0x003cc39d, 0x3
 
 	.global gUnknown_083CC3A0
 gUnknown_083CC3A0: @ 83CC3A0
-.string "{COLOR GREEN}{SHADOW RED}$"
+UnknownText_UnknownFormatting2:
+	.string "{COLOR GREEN}{SHADOW RED}$"
 
 	.global gUnknown_083CC3A7
 gUnknown_083CC3A7: @ 83CC3A7
-.string "{COLOR LIGHT_GREY}$"
-.string " "
+UnknownText_UnknownFormatting3:
+	.string "{COLOR LIGHT_GREY}$"
 
+	.align 2
 	.global gUnknown_083CC3AC
 gUnknown_083CC3AC: @ 83CC3AC
-.incbin "baserom.gba", 0x003cc3ac, 0x8
+	.incbin "baserom.gba", 0x003cc3ac, 0x8
 
 	.global gUnknown_083CC3B4
 gUnknown_083CC3B4: @ 83CC3B4
-.incbin "baserom.gba", 0x003cc3b4, 0xa0
+	.incbin "baserom.gba", 0x003cc3b4, 0xa0
 
 	.global gUnknown_083CC454
 gUnknown_083CC454: @ 83CC454
-.incbin "baserom.gba", 0x003cc454, 0x60
+	.incbin "baserom.gba", 0x003cc454, 0x60
 
 	.global gUnknown_083CC4B4
 gUnknown_083CC4B4: @ 83CC4B4
-.incbin "baserom.gba", 0x003cc4b4, 0x20
+	.incbin "baserom.gba", 0x003cc4b4, 0x20
 
 	.global gUnknown_083CC4D4
 gUnknown_083CC4D4: @ 83CC4D4
-.incbin "baserom.gba", 0x003cc4d4, 0x68
+	.incbin "baserom.gba", 0x003cc4d4, 0x68
 
 	.global gUnknown_083CC53C
 gUnknown_083CC53C: @ 83CC53C
-.incbin "baserom.gba", 0x003cc53c, 0x60
+	.incbin "baserom.gba", 0x003cc53c, 0x60
 
 	.global gUnknown_083CC59C
 gUnknown_083CC59C: @ 83CC59C
-.incbin "baserom.gba", 0x003cc59c, 0x6
+	.incbin "baserom.gba", 0x003cc59c, 0x6
 
 	.global gUnknown_083CC5A2
 gUnknown_083CC5A2: @ 83CC5A2
-.incbin "baserom.gba", 0x003cc5a2, 0x2
+	.incbin "baserom.gba", 0x003cc5a2, 0x2
 
 	.global gUnknown_083CC5A4
 gUnknown_083CC5A4: @ 83CC5A4
-.incbin "baserom.gba", 0x003cc5a4, 0x10
+	.incbin "baserom.gba", 0x003cc5a4, 0x10
 
 	.global gUnknown_083CC5B4
 gUnknown_083CC5B4: @ 83CC5B4
-.incbin "baserom.gba", 0x003cc5b4, 0x1c
+	.incbin "baserom.gba", 0x003cc5b4, 0x1c
 
 	.global gUnknown_083CC5D0
 gUnknown_083CC5D0: @ 83CC5D0
@@ -4032,7 +5716,12 @@ gUnknown_083CC5D0: @ 83CC5D0
 
 	.global gUnknown_083CC6D0
 gUnknown_083CC6D0: @ 83CC6D0
-	.incbin "baserom.gba", 0x003cc6d0, 0x18
+	.4byte ContestStatsText_Buy
+	.4byte 0x080b2efd
+	.4byte ContestStatsText_Sell
+	.4byte 0x080b2f31
+	.4byte ContestStatsText_Quit2
+	.4byte 0x080b2f65
 
 	.global gUnknown_083CC6E8
 gUnknown_083CC6E8: @ 83CC6E8
@@ -4044,7 +5733,8 @@ gUnknown_083CC6EB: @ 83CC6EB
 
 	.global gUnknown_083CC708
 gUnknown_083CC708: @ 83CC708
-	.incbin "baserom.gba", 0x003cc708, 0x8
+	.4byte 0x080b3bf5
+	.4byte 0x080b3d7d
 
 	.global gUnknown_083CC710
 gUnknown_083CC710: @ 83CC710
@@ -4098,15 +5788,28 @@ gUnknown_083CE048: @ 83CE048
 
 	.global gUnknown_083CE218
 gUnknown_083CE218: @ 83CE218
-	.incbin "baserom.gba", 0x003ce218, 0x28
+	.4byte 0x080B5EA9
+	.4byte 0x080B5ED1
+	.4byte 0x080B5F01
+	.4byte 0x080B5F11
+	.4byte 0x080B5F39
+	.4byte 0x080B5F71
+	.4byte 0x080B5FED
+	.4byte 0x080B604D
+	.4byte 0x080B606D
+	.4byte 0x080B6095
 
 	.global gUnknown_083CE240
 gUnknown_083CE240: @ 83CE240
-	.incbin "baserom.gba", 0x003ce240, 0x10
+	.4byte 0x080B6109
+	.4byte 0x080B6149
+	.4byte 0x080B6171
+	.4byte 0x080B6195
 
 	.global gUnknown_083CE250
 gUnknown_083CE250: @ 83CE250
-	.incbin "baserom.gba", 0x003ce250, 0x8
+	.4byte 0x080B626D
+	.4byte 0x080B6275
 
 	.global gUnknown_083CE258
 gUnknown_083CE258: @ 83CE258
@@ -4126,11 +5829,15 @@ gUnknown_083CE274: @ 83CE274
 
 	.global gUnknown_083CE27C
 gUnknown_083CE27C: @ 83CE27C
-	.incbin "baserom.gba", 0x003ce27c, 0x10
+	.4byte 0x080b6669
+	.4byte 0x080b6681
+	.4byte 0x080b66ed
+	.4byte 0x080b6759
 
 	.global gUnknown_083CE28C
 gUnknown_083CE28C: @ 83CE28C
-	.incbin "baserom.gba", 0x003ce28c, 0x8
+	.4byte 0x02000006
+	.4byte 0x02000004
 
 	.global gUnknown_083CE294
 gUnknown_083CE294: @ 83CE294
@@ -4142,7 +5849,10 @@ gUnknown_083CE2AF: @ 83CE2AF
 
 	.global gUnknown_083CE2B4
 gUnknown_083CE2B4: @ 83CE2B4
-	.incbin "baserom.gba", 0x003ce2b4, 0x10
+	.4byte 0x080b6b5d
+	.4byte 0x080b6b99
+	.4byte 0x080b6b9d
+	.4byte 0x080b6c09
 
 	.global gUnknown_083CE2C4
 gUnknown_083CE2C4: @ 83CE2C4
@@ -4162,11 +5872,19 @@ gUnknown_083CE2D8: @ 83CE2D8
 
 	.global gUnknown_083CE2E0
 gUnknown_083CE2E0: @ 83CE2E0
-	.incbin "baserom.gba", 0x003ce2e0, 0x10
+	.4byte 0x080b6e65
+	.4byte 0x080b6e69
+	.4byte 0x080b6ebd
+	.4byte 0x080b6efd
 
 	.global gUnknown_083CE2F0
 gUnknown_083CE2F0: @ 83CE2F0
-	.incbin "baserom.gba", 0x003ce2f0, 0x18
+	.4byte 0x080B7661
+	.4byte 0x080B7651
+	.4byte 0x080B7651
+	.4byte 0x080B7671
+	.4byte 0x080B7671
+	.4byte 0x080B7661
 
 	.global gUnknown_083CE308
 gUnknown_083CE308: @ 83CE308
@@ -4174,30 +5892,61 @@ gUnknown_083CE308: @ 83CE308
 
 	.global gUnknown_083CE310
 gUnknown_083CE310: @ 83CE310
-	.incbin "baserom.gba", 0x003ce310, 0x18
+	.4byte 0x080b7845
+	.4byte 0x080b7839
+	.4byte 0x080b7839
+	.4byte 0x080b7851
+	.4byte 0x080b7851
+	.4byte 0x080b7845
 
 	.global gUnknown_083CE328
 gUnknown_083CE328: @ 83CE328
-	.incbin "baserom.gba", 0x003ce328, 0x30
+	.4byte 0x081e6edc
+	.4byte 0x081e6ef8
+	.4byte 0x081e6ea4
+	.4byte 0x081e6ec0
+	.4byte 0x081e6ea4
+	.4byte 0x081e6ec0
+	.4byte 0x081e6f14
+	.4byte 0x081e6f30
+	.4byte 0x081e6f14
+	.4byte 0x081e6f30
+	.4byte 0x081e6edc
+	.4byte 0x081e6ef8
 
 	.global gUnknown_083CE358
 gUnknown_083CE358: @ 83CE358
-	.incbin "baserom.gba", 0x003ce358, 0x10
+	.4byte 0x080b78f5
+	.4byte 0x080b78f5
+	.4byte 0x080b78f9
+	.4byte 0x080b78f9
 
 	.global gUnknown_083CE368
 gUnknown_083CE368: @ 83CE368
-	.incbin "baserom.gba", 0x003ce368, 0x8
+	.4byte 0x080b7921
+	.4byte 0x080b7925
 
 	.global gUnknown_083CE370
 gUnknown_083CE370: @ 83CE370
-	.incbin "baserom.gba", 0x003ce370, 0x28
+Unknown_83CE370:
+	.incbin "baserom.gba", 0x003ce370, 0x4
+Unknown_83CE374:
+	.incbin "baserom.gba", 0x003ce374, 0xC
+Unknown_83CE380:
+	.incbin "baserom.gba", 0x003ce380, 0xC
+Unknown_83CE38C:
+	.incbin "baserom.gba", 0x003ce38c, 0xC
 
 	.global gUnknown_083CE398
 gUnknown_083CE398: @ 83CE398
-	.incbin "baserom.gba", 0x003ce398, 0x10
+	.4byte Unknown_83CE374
+	.4byte Unknown_83CE380
+	.4byte Unknown_83CE38C
+	.4byte Unknown_83CE38C
 
 	.global gUnknown_083CE3A8
 gUnknown_083CE3A8: @ 83CE3A8
+@ not labeling this yet when its not fully dissassembled
 	.string " A B C  D E F    . $"
 	.string " G H I  J K L    , $"
 	.string " M N O  P Q R S    $"
@@ -4318,31 +6067,31 @@ gComboStarterLookupTable: @ 83D016C
 
 	.global gUnknown_083D026C
 gUnknown_083D026C: @ 83D026C
-	.incbin "baserom.gba", 0x003d026c, 0x4
+	.4byte 0x0202713c
 
 	.global gUnknown_083D0270
 gUnknown_083D0270: @ 83D0270
-	.incbin "baserom.gba", 0x003d0270, 0x4
+	.4byte 0x02027e6c
 
 	.global gUnknown_083D0274
 gUnknown_083D0274: @ 83D0274
-	.incbin "baserom.gba", 0x003d0274, 0x4
+	.4byte 0x020281f0
 
 	.global gUnknown_083D0278
 gUnknown_083D0278: @ 83D0278
-	.incbin "baserom.gba", 0x003d0278, 0x4
+	.4byte 0x020284c8
 
 	.global gUnknown_083D027C
 gUnknown_083D027C: @ 83D027C
-	.incbin "baserom.gba", 0x003d027c, 0x4
+	.4byte 0x02028508
 
 	.global gUnknown_083D0280
 gUnknown_083D0280: @ 83D0280
-	.incbin "baserom.gba", 0x003d0280, 0x4
+	.4byte 0x02038738
 
 	.global gUnknown_083D0284
 gUnknown_083D0284: @ 83D0284
-	.incbin "baserom.gba", 0x003d0284, 0x4
+	.4byte 0x02024f4c
 
 	.global gUnknown_083D0288
 gUnknown_083D0288: @ 83D0288
@@ -4366,14 +6115,17 @@ gUnknown_083D02BA: @ 83D02BA
 
 	.global gUnknown_083D02C8
 gUnknown_083D02C8: @ 83D02C8
+DebugText_SoundCheckJap:
 	.string "サウンドチェック$" @ Sound Check
 
 	.global gUnknown_083D02D1
 gUnknown_083D02D1: @ 83D02D1
+DebugText_BGM:
 	.string "BGM$"
 
 	.global gUnknown_083D02D5
 gUnknown_083D02D5: @ 83D02D5
+DebugText_SE:
 	.string "SE $"
 
 	.global gUnknown_083D02D9
@@ -4382,10 +6134,12 @@ gUnknown_083D02D9: @ 83D02D9
 
 	.global gUnknown_083D02E6
 gUnknown_083D02E6: @ 83D02E6
+DebugText_UpDown:
 	.string "L‥UP R‥DOWN$"
 
 	.global gUnknown_083D02F2
 gUnknown_083D02F2: @ 83D02F2
+DebugText_DriverTest:
 	.string "R‥DRIVER-TEST$"
 
 	.global gUnknown_083D0300
@@ -4402,38 +6156,47 @@ gUnknown_083D031C: @ 83D031C
 
 	.global gUnknown_083D0327
 gUnknown_083D0327: @ 83D0327
+DebugText_Voice:
 	.string "VOICE‥‥‥‥$"
 
 	.global gUnknown_083D0331
 gUnknown_083D0331: @ 83D0331
+DebugText_Volume:
 	.string "VOLUME‥‥‥$"
 
 	.global gUnknown_083D033B
 gUnknown_083D033B: @ 83D033B
+DebugText_Panpot:
 	.string "PANPOT‥‥‥$"
 
 	.global gUnknown_083D0345
 gUnknown_083D0345: @ 83D0345
+DebugText_Pitch:
 	.string "PITCH‥‥‥‥$"
 
 	.global gUnknown_083D034F
 gUnknown_083D034F: @ 83D034F
+DebugText_Length:
 	.string "LENGTH‥‥‥$"
 
 	.global gUnknown_083D0359
 gUnknown_083D0359: @ 83D0359
+DebugText_Release:
 	.string "RELEASE‥‥$"
 
 	.global gUnknown_083D0363
 gUnknown_083D0363: @ 83D0363
+DebugText_Progress:
 	.string "PROGRESS‥$"
 
 	.global gUnknown_083D036D
 gUnknown_083D036D: @ 83D036D
+DebugText_Chorus:
 	.string "CHORUS‥‥‥$"
 
 	.global gUnknown_083D0377
 gUnknown_083D0377: @ 83D0377
+DebugText_Priority:
 	.string "PRIORITY‥$"
 
 	.global gUnknown_083D0381
@@ -4470,18 +6233,22 @@ gUnknown_083D03F8: @ 83D03F8
 
 	.global gUnknown_083D03FD
 gUnknown_083D03FD: @ 83D03FD
+OtherText_SE:
 	.string "SE$"
 
 	.global gUnknown_083D0400
 gUnknown_083D0400: @ 83D0400
+OtherText_Pan:
 	.string "PAN$"
 
 	.global gUnknown_083D0404
 gUnknown_083D0404: @ 83D0404
+OtherText_LR:
 	.string "  LR$"
 
 	.global gUnknown_083D0409
 gUnknown_083D0409: @ 83D0409
+OtherText_RL:
 	.string "  RL$"
 
 @ 83D040E
@@ -4497,11 +6264,15 @@ gUnknown_083D1374: @ 83D1374
 
 	.global gUnknown_083D13D4
 gUnknown_083D13D4: @ 83D13D4
-	.incbin "baserom.gba", 0x003d13d4, 0x10
+	.4byte SecretBaseText_DelRegist
+	.4byte 0x080bca85
+	.4byte UnknownText_Exit
+	.4byte 0x080bcbf9
 
 	.global gUnknown_083D13E4
 gUnknown_083D13E4: @ 83D13E4
-	.incbin "baserom.gba", 0x003d13e4, 0x8
+	.4byte 0x080bcb91
+	.4byte 0x080bcbc1
 
 	.global gUnknown_083D13EC
 gUnknown_083D13EC: @ 83D13EC
@@ -4525,59 +6296,157 @@ gUnknown_083D1454: @ 83D1454
 
 	.global gUnknown_083D1464
 gUnknown_083D1464: @ 83D1464
-	.incbin "baserom.gba", 0x003d1464, 0xc
+	.4byte 0x020231cc
+	.4byte 0x020232cc
+	.4byte 0x020233cc
 
 	.global gUnknown_083D1470
 gUnknown_083D1470: @ 83D1470
-	.incbin "baserom.gba", 0x003d1470, 0x20
+	.4byte 0x081a8ec9
+	.4byte 0x081a9048
+	.4byte 0x081a9067
+	.4byte 0x081a9088
+	.4byte 0x081a90b4
+	.4byte 0x081a911f
+	.4byte 0x081a9152
+	.4byte 0x081a91c6
 
 	.global gUnknown_083D1490
 gUnknown_083D1490: @ 83D1490
-	.incbin "baserom.gba", 0x003d1490, 0x18
+	.4byte 0x081a9581
+	.4byte 0x081a9694
+	.4byte 0x081a971b
+	.4byte 0x081a974b
+	.4byte 0x081a979f
+	.4byte 0x081a97d0
 
 	.global gUnknown_083D14A8
 gUnknown_083D14A8: @ 83D14A8
-	.incbin "baserom.gba", 0x003d14a8, 0x14
+	.4byte 0x081a8917
+	.4byte 0x081a8ae5
+	.4byte 0x081a8b9d
+	.4byte 0x081a8c77
+	.4byte 0x081a8d45
 
 	.global gUnknown_083D14BC
 gUnknown_083D14BC: @ 83D14BC
-	.incbin "baserom.gba", 0x003d14bc, 0x4
+	.4byte 0x081a986f
 
 	.global gUnknown_083D14C0
 gUnknown_083D14C0: @ 83D14C0
-	.incbin "baserom.gba", 0x003d14c0, 0x30
+	.4byte 0x081aad23
+	.4byte 0x081aadd5
+	.4byte 0x081aae31
+	.4byte 0x081aae9d
+	.4byte 0x081aaf03
+	.4byte 0x081aaf8a
+	.4byte 0x081ab040
+	.4byte 0x081ab0c8
+	.4byte 0x081ab13d
+	.4byte 0x081ab1c6
+	.4byte 0x081ab266
+	.4byte 0x081ab2db
 
 	.global gUnknown_083D14F0
 gUnknown_083D14F0: @ 83D14F0
-	.incbin "baserom.gba", 0x003d14f0, 0x34
+	.4byte 0x081ab381
+	.4byte 0x081ab435
+	.4byte 0x081ab507
+	.4byte 0x081ab5b8
+	.4byte 0x081ab61f
+	.4byte 0x081ab6b0
+	.4byte 0x081ab78d
+	.4byte 0x081ab7fe
+	.4byte 0x081ab835
+	.4byte 0x081ab873
+	.4byte 0x081ab92e
+	.4byte 0x081ab95e
+	.4byte 0x081abb75
 
 	.global gUnknown_083D1524
 gUnknown_083D1524: @ 83D1524
-	.incbin "baserom.gba", 0x003d1524, 0x24
+	.4byte 0x081a72de
+	.4byte 0x081a736b
+	.4byte 0x081a73ca
+	.4byte 0x081a744d
+	.4byte 0x081a7508
+	.4byte 0x081a75ce
+	.4byte 0x081a768d
+	.4byte 0x081a76c5
+	.4byte 0x081a774f
 
 	.global gUnknown_083D1548
 gUnknown_083D1548: @ 83D1548
-	.incbin "baserom.gba", 0x003d1548, 0x3c
+	.4byte 0x081a7b93
+	.4byte 0x081a7c26
+	.4byte 0x081a7c7d
+	.4byte 0x081a7d4a
+	.4byte 0x081a7e0c
+	.4byte 0x081a7f0e
+	.4byte 0x081a8004
+	.4byte 0x081a8119
+	.4byte 0x081a811e
+	.4byte 0x081a8123
+	.4byte 0x081a8128
+	.4byte 0x081a812d
+	.4byte 0x081a8133
+	.4byte 0x081a81bc
+	.4byte 0x081a8267
 
 	.global gUnknown_083D1584
 gUnknown_083D1584: @ 83D1584
-	.incbin "baserom.gba", 0x003d1584, 0x4c
+	.4byte 0x081a99d9
+	.4byte 0x081a9af0
+	.4byte 0x081a9b69
+	.4byte 0x081a9bef
+	.4byte 0x081a9c6a
+	.4byte 0x081a9cf8
+	.4byte 0x081a9d74
+	.4byte 0x081a9df3
+	.4byte 0x081a9e75
+	.4byte 0x081a9f06
+	.4byte 0x081a9f9f
+	.4byte 0x081aa01e
+	.4byte 0x081aa09d
+	.4byte 0x081aa0d7
+	.4byte 0x081aa138
+	.4byte 0x081aa166
+	.4byte 0x081aa1c0
+	.4byte 0x081aa1ea
+	.4byte 0x081aa28a
 
 	.global gUnknown_083D15D0
 gUnknown_083D15D0: @ 83D15D0
-	.incbin "baserom.gba", 0x003d15d0, 0x1c
+	.4byte 0x081aa814
+	.4byte 0x081aa8c6
+	.4byte 0x081aa9b2
+	.4byte 0x081aaa5c
+	.4byte 0x081aab11
+	.4byte 0x081aabb4
+	.4byte 0x081aac47
 
 	.global gUnknown_083D15EC
 gUnknown_083D15EC: @ 83D15EC
-	.incbin "baserom.gba", 0x003d15ec, 0x8
+	.4byte 0x081aa344
+	.4byte 0x081aa5f3
 
 	.global gUnknown_083D15F4
 gUnknown_083D15F4: @ 83D15F4
-	.incbin "baserom.gba", 0x003d15f4, 0xc
+	.4byte 0x081abc51
+	.4byte 0x081abd94
+	.4byte 0x081abdf2
 
 	.global gUnknown_083D1600
 gUnknown_083D1600: @ 83D1600
-	.incbin "baserom.gba", 0x003d1600, 0x24
+	.4byte 0x081ac90d
+	.4byte 0x081aca02
+	.4byte 0x081acaaa
+	.4byte 0x081acc07
+	.4byte 0x081acd13
+	.4byte 0x081acdfa
+	.4byte 0x081acee7
+	.4byte 0x081acf49
+	.4byte 0x081ad00a
 
 	.global gUnknown_083D1624
 gUnknown_083D1624: @ 83D1624
@@ -4777,15 +6646,23 @@ gUnknown_083D611C: @ 83D611C
 
 	.global gUnknown_083D613C
 gUnknown_083D613C: @ 83D613C
-	.incbin "baserom.gba", 0x003d613c, 0xa0
+Unknown_83D613C:
+	.incbin "baserom.gba", 0x003d613c, 0x60
+Unknown_83D619C:
+	.incbin "baserom.gba", 0x003d619c, 0x20
+Unknown_83D61BC:
+	.incbin "baserom.gba", 0x003d61bc, 0x20
 
 	.global gUnknown_083D61DC
 gUnknown_083D61DC: @ 83D61DC
-	.incbin "baserom.gba", 0x003d61dc, 0x8
+	.4byte Unknown_83D619C
+	.4byte Unknown_83D61BC
 
 	.global gUnknown_083D61E4
 gUnknown_083D61E4: @ 83D61E4
-	.incbin "baserom.gba", 0x003d61e4, 0xc
+	.4byte 0x0808b021
+	.4byte 0x080545e5
+	.4byte 0x0810b96d
 
 	.global gUnknown_083D61F0
 gUnknown_083D61F0: @ 83D61F0
@@ -5013,23 +6890,55 @@ gUnknown_083DB568: @ 83DB568
 
 	.global gUnknown_083DB56C
 gUnknown_083DB56C: @ 83DB56C
-	.incbin "baserom.gba", 0x003db56c, 0x28
+	.4byte 0x080e448d
+	.4byte 0x080e448d
+	.4byte 0x080e46cd
+	.4byte 0x080e46cd
+	.4byte 0x080e46cd
+	.4byte 0x080e448d
+	.4byte 0x080e448d
+	.4byte 0x080e448d
+	.4byte 0x080e49c1
+	.4byte 0x080e49c1
 
 	.global gUnknown_083DB594
 gUnknown_083DB594: @ 83DB594
-	.incbin "baserom.gba", 0x003db594, 0x10
+	.4byte 0x080e5169
+	.4byte 0x080e517d
+	.4byte 0x080e51c5
+	.4byte 0x080e5271
 
 	.global gUnknown_083DB5A4
 gUnknown_083DB5A4: @ 83DB5A4
-	.incbin "baserom.gba", 0x003db5a4, 0xc
+	.4byte 0x080593ad
+	.4byte 0x080593c5
+	.4byte 0x080593f5
 
 	.global gUnknown_083DB5B0
 gUnknown_083DB5B0: @ 83DB5B0
-	.incbin "baserom.gba", 0x003db5b0, 0x34
+	.4byte 0x080e56f9
+	.4byte 0x080e5709
+	.4byte 0x080e5745
+	.4byte 0x080e57bd
+	.4byte 0x080e57f9
+	.4byte 0x080e5835
+	.4byte 0x080e5871
+	.4byte 0x080e58ad
+	.4byte 0x080e5921
+	.4byte 0x080e5991
+	.4byte 0x080e59a1
+	.4byte 0x080e5a31
+	.4byte 0x080e5ac1
 
 	.global gUnknown_083DB5E4
 gUnknown_083DB5E4: @ 83DB5E4
-	.incbin "baserom.gba", 0x003db5e4, 0x1c
+	.4byte 0x080e5341
+	.4byte 0x080e53dd
+	.4byte 0x080e5455
+	.4byte 0x080e54f5
+	.4byte 0x080e559d
+	.4byte 0x080e5679
+	.4byte 0x080e56d5
 
 	.global gUnknown_083DB600
 gUnknown_083DB600: @ 83DB600
@@ -5053,7 +6962,7 @@ gUnknown_083DB682: @ 83DB682
 
 	.global gUnknown_083DB694
 gUnknown_083DB694: @ 83DB694
-	.incbin "baserom.gba", 0x003db694, 0x4
+	.4byte 0x02001000
 
 	.global gUnknown_083DB698
 gUnknown_083DB698: @ 83DB698
@@ -5077,7 +6986,10 @@ gUnknown_083DB7C0: @ 83DB7C0
 
 	.global gUnknown_083DB7DC
 gUnknown_083DB7DC: @ 83DB7DC
-	.incbin "baserom.gba", 0x003db7dc, 0x10
+	.4byte 0x0200ac80
+	.4byte 0x0200acc9
+	.4byte 0x0200ad12
+	.4byte 0x0200ad5b
 
 	.global gUnknown_083DB7EC
 gUnknown_083DB7EC: @ 83DB7EC
@@ -5097,15 +7009,38 @@ gUnknown_083DBBDC: @ 83DBBDC
 
 	.global gUnknown_083DBBFC
 gUnknown_083DBBFC: @ 83DBBFC
-	.incbin "baserom.gba", 0x003dbbfc, 0x90
+Unknown_83DBBFC:
+	.incbin "baserom.gba", 0x003dbbfc, 0x40
+Unknown_83DBC3C:
+	.incbin "baserom.gba", 0x003dbc3c, 0x8
+Unknown_83DBC44:
+	.incbin "baserom.gba", 0x003dbc44, 0x8
+Unknown_83DBC4C:
+	.incbin "baserom.gba", 0x003dbc4c, 0x8
+Unknown_83DBC54:
+	.incbin "baserom.gba", 0x003dbc54, 0x8
+Unknown_83DBC5C:
+	.incbin "baserom.gba", 0x003dbc5c, 0x8
+Unknown_83DBC64:
+	.incbin "baserom.gba", 0x003dbc64, 0x8
+Unknown_83DBC6C:
+	.incbin "baserom.gba", 0x003dbc6c, 0x8
+Unknown_83DBC74:
+	.incbin "baserom.gba", 0x003dbc74, 0x18
 
 	.global gUnknown_083DBC8C
 gUnknown_083DBC8C: @ 83DBC8C
-	.incbin "baserom.gba", 0x003dbc8c, 0x10
+	.4byte Unknown_83DBC3C
+	.4byte Unknown_83DBC44
+	.4byte Unknown_83DBC4C
+	.4byte Unknown_83DBC54
 
 	.global gUnknown_083DBC9C
 gUnknown_083DBC9C: @ 83DBC9C
-	.incbin "baserom.gba", 0x003dbc9c, 0x10
+	.4byte Unknown_83DBC5C
+	.4byte Unknown_83DBC64
+	.4byte Unknown_83DBC6C
+	.4byte Unknown_83DBC74
 
 	.global gUnknown_083DBCAC
 gUnknown_083DBCAC: @ 83DBCAC
@@ -5113,11 +7048,17 @@ gUnknown_083DBCAC: @ 83DBCAC
 
 	.global gUnknown_083DBCC4
 gUnknown_083DBCC4: @ 83DBCC4
-	.incbin "baserom.gba", 0x003dbcc4, 0x4c
+Unknown_83DBCC4:
+	.incbin "baserom.gba", 0x003dbcc4, 0x3c
+Unknown_83DBD00:
+	.incbin "baserom.gba", 0x003dbd00, 0x8
+Unknown_83DBD08:
+	.incbin "baserom.gba", 0x003dbd08, 0x8
 
 	.global gUnknown_083DBD10
 gUnknown_083DBD10: @ 83DBD10
-	.incbin "baserom.gba", 0x003dbd10, 0x8
+	.4byte Unknown_83DBD00
+	.4byte Unknown_83DBD08
 
 	.global gUnknown_083DBD18
 gUnknown_083DBD18: @ 83DBD18
@@ -5188,7 +7129,7 @@ gUnknown_083DFEC4: @ 83DFEC4
 
 	.global gUnknown_083DFEC8
 gUnknown_083DFEC8: @ 83DFEC8
-	.incbin "baserom.gba", 0x003dfec8, 0x4
+	.4byte 0x02039360
 
 	.global gUnknown_083DFECC
 gUnknown_083DFECC: @ 83DFECC
@@ -5297,19 +7238,100 @@ gUnknown_083E0804: @ 83E0804
 
 	.global gUnknown_083E309C
 gUnknown_083E309C: @ 83E309C
-	.incbin "baserom.gba", 0x003e309c, 0x114
+	.4byte 0x083e178c
+	.4byte 0x083e17ed
+	.4byte 0x083e1846
+	.4byte 0x083e18a3
+	.4byte 0x083e1912
+	.4byte 0x083e1972
+	.4byte 0x083e19cd
+	.4byte 0x083e1a21
+	.4byte 0x083e1a76
+	.4byte 0x083e1ac6
+	.4byte 0x083e1b1d
+	.4byte 0x083e1b7c
+	.4byte 0x083e1bdd
+	.4byte 0x083e1c37
+	.4byte 0x083e1c87
+	.4byte 0x083e1ce1
+	.4byte 0x083e1d40
+	.4byte 0x083e1d9a
+	.4byte 0x083e1e00
+	.4byte 0x083e1e5c
+	.4byte 0x083e1eb6
+	.4byte 0x083e1f13
+	.4byte 0x083e1f6f
+	.4byte 0x083e1fd6
+	.4byte 0x083e202e
+	.4byte 0x083e208f
+	.4byte 0x083e20ee
+	.4byte 0x083e214f
+	.4byte 0x083e21ae
+	.4byte 0x083e2203
+	.4byte 0x083e2260
+	.4byte 0x083e22bf
+	.4byte 0x083e231d
+	.4byte 0x083e237b
+	.4byte 0x083e23da
+	.4byte 0x083e2425
+	.4byte 0x083e247f
+	.4byte 0x083e24e3
+	.4byte 0x083e2547
+	.4byte 0x083e25ab
+	.4byte 0x083e260b
+	.4byte 0x083e2664
+	.4byte 0x083e26bb
+	.4byte 0x083e2707
+	.4byte 0x083e2759
+	.4byte 0x083e27b2
+	.4byte 0x083e2810
+	.4byte 0x083e2870
+	.4byte 0x083e28c9
+	.4byte 0x083e2925
+	.4byte 0x083e2983
+	.4byte 0x083e29d7
+	.4byte 0x083e2a3b
+	.4byte 0x083e2a9d
+	.4byte 0x083e2af3
+	.4byte 0x083e2b46
+	.4byte 0x083e2ba4
+	.4byte 0x083e2c0b
+	.4byte 0x083e2c64
+	.4byte 0x083e2cc5
+	.4byte 0x083e2d20
+	.4byte 0x083e2d87
+	.4byte 0x083e2de0
+	.4byte 0x083e2e47
+	.4byte 0x083e2eab
+	.4byte 0x083e2f05
+	.4byte 0x083e2f62
+	.4byte 0x083e2fca
+	.4byte 0x083e3031
 
 	.global gUnknown_083E31B0
 gUnknown_083E31B0: @ 83E31B0
-	.incbin "baserom.gba", 0x003e31b0, 0x1c
+	.4byte PCText_CheckMap
+	.4byte PCText_CheckPoke
+	.4byte PCText_CheckTrainer
+	.4byte PCText_CheckRibbons
+	.4byte PCText_PutAwayNav
+	.4byte PCText_NoRibbonWin
+	.4byte PCText_NoTrainers
 
 	.global gUnknown_083E31CC
 gUnknown_083E31CC: @ 83E31CC
-	.incbin "baserom.gba", 0x003e31cc, 0xc
+	.4byte PCText_CheckParty
+	.4byte PCText_CheckPokeAll
+	.4byte PCText_ReturnToNav
 
 	.global gUnknown_083E31D8
 gUnknown_083E31D8: @ 83E31D8
-	.incbin "baserom.gba", 0x003e31d8, 0x18
+	.4byte PCText_FindCool
+	.4byte PCText_FindBeauty
+	.4byte PCText_FindCute
+	.4byte PCText_FindSmart
+	.4byte PCText_FindTough
+	.4byte PCText_ReturnToCondition
 
 	.global gUnknown_083E31F0
 gUnknown_083E31F0: @ 83E31F0
@@ -5333,11 +7355,14 @@ gUnknown_083E3D00: @ 83E3D00
 
 	.global gUnknown_083E42F8
 gUnknown_083E42F8: @ 83E42F8
-	.incbin "baserom.gba", 0x003e42f8, 0x158
+Unknown_83E42F8:
+	.incbin "baserom.gba", 0x003e42f8, 0x148
+Unknown_83E4440:
+	.incbin "baserom.gba", 0x003e4440, 0x10
 
 	.global gUnknown_083E4450
 gUnknown_083E4450: @ 83E4450
-	.incbin "baserom.gba", 0x003e4450, 0x4
+	.4byte Unknown_83E4440
 
 	.global gUnknown_083E4454
 gUnknown_083E4454: @ 83E4454
@@ -5493,11 +7518,26 @@ gUnknown_083E521C: @ 83E521C
 
 	.global gUnknown_083E5274
 gUnknown_083E5274: @ 83E5274
-	.incbin "baserom.gba", 0x003e5274, 0x38
+Unknown_83E5274:
+	.4byte 0x083e5224
+	.4byte 0x083e522c
+	.4byte 0x083e5234
+	.4byte 0x083e523c
+	.4byte 0x083e5244
+	.4byte 0x083e524c
+	.4byte 0x083e5254
+	.4byte 0x083e525c
+	.4byte 0x083e5264
+	.4byte 0x083e526c
+Unknown_83E529C:
+	.incbin "baserom.gba", 0x003e529c, 0x8
+Unknown_83E52A4:
+	.incbin "baserom.gba", 0x003e52a4, 0x8
 
 	.global gUnknown_083E52AC
 gUnknown_083E52AC: @ 83E52AC
-	.incbin "baserom.gba", 0x003e52ac, 0x8
+	.4byte Unknown_83E529C
+	.4byte Unknown_83E52A4
 
 	.global gUnknown_083E52B4
 gUnknown_083E52B4: @ 83E52B4
@@ -5505,7 +7545,22 @@ gUnknown_083E52B4: @ 83E52B4
 
 	.global gUnknown_083E533C
 gUnknown_083E533C: @ 83E533C
-	.incbin "baserom.gba", 0x003e533c, 0x40
+	.4byte 0x083e52bc
+	.4byte 0x083e52c4
+	.4byte 0x083e52cc
+	.4byte 0x083e52d4
+	.4byte 0x083e52dc
+	.4byte 0x083e52e4
+	.4byte 0x083e52ec
+	.4byte 0x083e52f4
+	.4byte 0x083e52fc
+	.4byte 0x083e5304
+	.4byte 0x083e530c
+	.4byte 0x083e5314
+	.4byte 0x083e531c
+	.4byte 0x083e5324
+	.4byte 0x083e532c
+	.4byte 0x083e5334
 
 	.global gUnknown_083E537C
 gUnknown_083E537C: @ 83E537C
@@ -5513,11 +7568,25 @@ gUnknown_083E537C: @ 83E537C
 
 	.global gUnknown_083E5388
 gUnknown_083E5388: @ 83E5388
-	.incbin "baserom.gba", 0x003e5388, 0x20
+	.4byte OtherText_SoPretty
+	.4byte OtherText_SoDarling
+	.4byte OtherText_SoRelaxed
+	.4byte OtherText_SoSunny
+	.4byte OtherText_SoDesirable
+	.4byte OtherText_SoExciting
+	.4byte OtherText_SoAmusing
+	.4byte OtherText_SoMagical
 
 	.global gUnknown_083E53A8
 gUnknown_083E53A8: @ 83E53A8
-	.incbin "baserom.gba", 0x003e53a8, 0x20
+	.4byte OtherText_WantVacationNicePlace
+	.4byte OtherText_BoughtCrayonsIsNice
+	.4byte OtherText_IfWeCouldFloat
+	.4byte OtherText_SandWashesAwayMakeSad
+	.4byte OtherText_WhatsBottomSeaLike
+	.4byte OtherText_SeeSettingSun
+	.4byte OtherText_LyingInGreenGrass
+	.4byte OtherText_SecretBasesWonderful
 
 	.global gUnknown_083E53C8
 gUnknown_083E53C8: @ 83E53C8
@@ -5636,11 +7705,14 @@ gUnknown_083E76F0: @ 83E76F0
 
 	.global gUnknown_083E7708
 gUnknown_083E7708: @ 83E7708
-	.incbin "baserom.gba", 0x003e7708, 0x10
+Unknown_83E7708:
+	.incbin "baserom.gba", 0x003e7708, 0x8
+Unknown_83E7710:
+	.incbin "baserom.gba", 0x003e7710, 0x8
 
 	.global gUnknown_083E7718
 gUnknown_083E7718: @ 83E7718
-	.incbin "baserom.gba", 0x003e7718, 0x4
+	.4byte Unknown_83E7710
 
 	.global gUnknown_083E771C
 gUnknown_083E771C: @ 83E771C
@@ -5696,19 +7768,43 @@ gUnknown_083EB6E0: @ 83EB6E0
 
 	.global gUnknown_083EC5E4
 gUnknown_083EC5E4: @ 83EC5E4
-	.incbin "baserom.gba", 0x003ec5e4, 0x20
+	.4byte SecretBaseText_Desk
+	.4byte SecretBaseText_Chair
+	.4byte SecretBaseText_Plant
+	.4byte SecretBaseText_Ornament
+	.4byte SecretBaseText_Mat
+	.4byte SecretBaseText_Poster
+	.4byte SecretBaseText_Doll
+	.4byte SecretBaseText_Cushion
 
 	.global gUnknown_083EC604
 gUnknown_083EC604: @ 83EC604
-	.incbin "baserom.gba", 0x003ec604, 0x20
+	.4byte SecretBaseText_Decorate
+	.4byte 0x080ff161
+	.4byte SecretBaseText_PutAway
+	.4byte 0x08100a0d
+	.4byte SecretBaseText_Toss
+	.4byte 0x08101701
+	.4byte UnknownText_Exit
+	.4byte 0x080fe3c5
 
 	.global gUnknown_083EC624
 gUnknown_083EC624: @ 83EC624
-	.incbin "baserom.gba", 0x003ec624, 0x10
+	.4byte SecretBaseText_PutOutDecor
+	.4byte SecretBaseText_StoreChosenDecor
+	.4byte SecretBaseText_ThrowAwayDecor
+	.4byte MenuText_GoBackToPrev
 
 	.global gUnknown_083EC634
 gUnknown_083EC634: @ 83EC634
-	.incbin "baserom.gba", 0x003ec634, 0x20
+	.4byte 0x080ff5bd
+	.4byte 0x080ff059
+	.4byte 0x081017a1
+	.4byte 0x080ff059
+	.4byte 0x081017a1
+	.4byte 0x080ff059
+	.4byte 0x08109d05
+	.4byte 0x080ff059
 
 	.global gUnknown_083EC654
 gUnknown_083EC654: @ 83EC654
@@ -5736,15 +7832,20 @@ gUnknown_083EC954: @ 83EC954
 
 	.global gUnknown_083EC95C
 gUnknown_083EC95C: @ 83EC95C
-	.incbin "baserom.gba", 0x003ec95c, 0x8
+	.4byte 0x081000c5
+	.4byte 0x0810065d
 
 	.global gUnknown_083EC964
 gUnknown_083EC964: @ 83EC964
-	.incbin "baserom.gba", 0x003ec964, 0x8
+	.4byte 0x0810026d
+	.4byte 0x0810065d
 
 	.global gUnknown_083EC96C
 gUnknown_083EC96C: @ 83EC96C
-	.incbin "baserom.gba", 0x003ec96c, 0x10
+	.4byte 0x080ffab1
+	.4byte 0x080ffb09
+	.4byte 0x08100f89
+	.4byte 0x08100fb5
 
 	.global gUnknown_083EC97C
 gUnknown_083EC97C: @ 83EC97C
@@ -5756,7 +7857,8 @@ gUnknown_083EC984: @ 83EC984
 
 	.global gUnknown_083EC9CC
 gUnknown_083EC9CC: @ 83EC9CC
-	.incbin "baserom.gba", 0x003ec9cc, 0x8
+	.4byte 0x0810153d
+	.4byte 0x08100eed
 
 	.global gUnknown_083EC9D4
 gUnknown_083EC9D4: @ 83EC9D4
@@ -5780,23 +7882,61 @@ gUnknown_083ECAA0: @ 83ECAA0
 
 	.global gUnknown_083ECAAC
 gUnknown_083ECAAC: @ 83ECAAC
-	.incbin "baserom.gba", 0x003ecaac, 0x74
+	.4byte 0x08101d5d
+	.4byte 0x08101d8d
+	.4byte 0x08101db1
+	.4byte 0x08101df5
+	.4byte 0x08101e11
+	.4byte 0x08101e3d
+	.4byte 0x08101f45
+	.4byte 0x08101f61
+	.4byte 0x08101f89
+	.4byte 0x08101fa5
+	.4byte 0x08102009
+	.4byte 0x08102035
+	.4byte 0x08102059
+	.4byte 0x08102091
+	.4byte 0x081020c9
+	.4byte 0x081021e1
+	.4byte 0x081021fd
+	.4byte 0x08102265
+	.4byte 0x081022a1
+	.4byte 0x081022cd
+	.4byte 0x081022f1
+	.4byte 0x08102319
+	.4byte 0x08102345
+	.4byte 0x0810239d
+	.4byte 0x081023b9
+	.4byte 0x081023e1
+	.4byte 0x081023fd
+	.4byte 0x08102425
+	.4byte 0x08102461
 
 	.global gUnknown_083ECB20
 gUnknown_083ECB20: @ 83ECB20
-	.incbin "baserom.gba", 0x003ecb20, 0xc
+	.4byte 0x08102a9d
+	.4byte 0x08102ad1
+	.4byte 0x08102b81
 
 	.global gUnknown_083ECB2C
 gUnknown_083ECB2C: @ 83ECB2C
-	.incbin "baserom.gba", 0x003ecb2c, 0x14
+	.4byte 0x08102ea1
+	.4byte 0x08102ea5
+	.4byte 0x08102ec1
+	.4byte 0x08102f4d
+	.4byte 0x08103009
 
 	.global gUnknown_083ECB40
 gUnknown_083ECB40: @ 83ECB40
-	.incbin "baserom.gba", 0x003ecb40, 0xc
+	.4byte 0x0810305d
+	.4byte 0x081032c1
+	.4byte 0x081033dd
 
 	.global gUnknown_083ECB4C
 gUnknown_083ECB4C: @ 83ECB4C
-	.incbin "baserom.gba", 0x003ecb4c, 0xc
+	.4byte 0x081034f5
+	.4byte 0x08103541
+	.4byte 0x0810380d
 
 	.global gUnknown_083ECB58
 gUnknown_083ECB58: @ 83ECB58
@@ -5804,27 +7944,39 @@ gUnknown_083ECB58: @ 83ECB58
 
 	.global gUnknown_083ECB64
 gUnknown_083ECB64: @ 83ECB64
-	.incbin "baserom.gba", 0x003ecb64, 0xc
+	.4byte 0x08103155
+	.4byte 0x081031b5
+	.4byte 0x081031b5
 
 	.global gUnknown_083ECB70
 gUnknown_083ECB70: @ 83ECB70
-	.incbin "baserom.gba", 0x003ecb70, 0xc
+	.4byte 0x081032e9
+	.4byte 0x081032e9
+	.4byte 0x0810333d
 
 	.global gUnknown_083ECB7C
 gUnknown_083ECB7C: @ 83ECB7C
-	.incbin "baserom.gba", 0x003ecb7c, 0xc
+	.4byte 0x0810341d
+	.4byte 0x0810341d
+	.4byte 0x0810347d
 
 	.global gUnknown_083ECB88
 gUnknown_083ECB88: @ 83ECB88
-	.incbin "baserom.gba", 0x003ecb88, 0xc
+	.4byte 0x08103565
+	.4byte 0x081035ed
+	.4byte 0x08103669
 
 	.global gUnknown_083ECB94
 gUnknown_083ECB94: @ 83ECB94
-	.incbin "baserom.gba", 0x003ecb94, 0xc
+	.4byte 0x08103831
+	.4byte 0x08103911
+	.4byte 0x08103a79
 
 	.global gUnknown_083ECBA0
 gUnknown_083ECBA0: @ 83ECBA0
-	.incbin "baserom.gba", 0x003ecba0, 0xc
+	.4byte 0x08103c79
+	.4byte 0x08103cad
+	.4byte 0x08103cc9
 
 	.global gUnknown_083ECBAC
 gUnknown_083ECBAC: @ 83ECBAC
@@ -5832,7 +7984,10 @@ gUnknown_083ECBAC: @ 83ECBAC
 
 	.global gUnknown_083ECBB4
 gUnknown_083ECBB4: @ 83ECBB4
-	.incbin "baserom.gba", 0x003ecbb4, 0x10
+	.4byte 0x08104119
+	.4byte 0x0810411d
+	.4byte 0x08104145
+	.4byte 0x081041ad
 
 	.global gUnknown_083ECBC4
 gUnknown_083ECBC4: @ 83ECBC4
@@ -5844,11 +7999,29 @@ gUnknown_083ECBC6: @ 83ECBC6
 
 	.global gUnknown_083ECBD0
 gUnknown_083ECBD0: @ 83ECBD0
-	.incbin "baserom.gba", 0x003ecbd0, 0x4c
+	.4byte 0x0810437d
+	.4byte 0x081043ed
+	.4byte 0x08104469
+	.4byte 0x08104499
+	.4byte 0x08104549
+	.4byte 0x08104599
+	.4byte 0x081045cd
+	.4byte 0x0810463d
+	.4byte 0x081046c1
+	.4byte 0x08104765
+	.4byte 0x08104795
+	.4byte 0x081047ed
+	.4byte 0x08104861
+	.4byte 0x081048a9
+	.4byte 0x081048cd
+	.4byte 0x08104941
+	.4byte 0x081049c9
+	.4byte 0x08104795
+	.4byte 0x081049f9
 
 	.global gUnknown_083ECC1C
 gUnknown_083ECC1C: @ 83ECC1C
-	.incbin "baserom.gba", 0x003ecc1c, 0x4
+	.4byte 0x02020101
 
 	.global gUnknown_083ECC20
 gUnknown_083ECC20: @ 83ECC20
@@ -5860,11 +8033,19 @@ gUnknown_083ECC28: @ 83ECC28
 
 	.global gUnknown_083ECC30
 gUnknown_083ECC30: @ 83ECC30
-	.incbin "baserom.gba", 0x003ecc30, 0x24
+	.4byte 0x08104b3d
+	.4byte 0x08104b61
+	.4byte 0x08104b81
+	.4byte 0x08104b61
+	.4byte 0x08104bc9
+	.4byte 0x08104b61
+	.4byte 0x08104bfd
+	.4byte 0x08104b61
+	.4byte 0x08104c45
 
 	.global gUnknown_083ECC54
 gUnknown_083ECC54: @ 83ECC54
-	.incbin "baserom.gba", 0x003ecc54, 0x4
+	.4byte 0x08104ea5
 
 	.global gUnknown_083ECC58
 gUnknown_083ECC58: @ 83ECC58
@@ -5976,7 +8157,13 @@ gUnknown_083ECF0C: @ 83ECF0C
 
 	.global gUnknown_083ED048
 gUnknown_083ED048: @ 83ED048
-	.incbin "baserom.gba", 0x003ed048, 0x1c
+	.4byte 0x083ecf98
+	.4byte 0x083ecfa8
+	.4byte 0x083ecfc4
+	.4byte 0x083ecfd0
+	.4byte 0x083ecfe8
+	.4byte 0x083ed020
+	.4byte 0x083ecff8
 
 	.global gUnknown_083ED064
 gUnknown_083ED064: @ 83ED064
@@ -6072,7 +8259,32 @@ gUnknown_083ED7D4: @ 83ED7D4
 
 	.global gUnknown_083EDB5C
 gUnknown_083EDB5C: @ 83EDB5C
-	.incbin "baserom.gba", 0x003edb5c, 0x68
+	.4byte 0x083ed57c
+	.4byte 0x083ed594
+	.4byte 0x083ed5ac
+	.4byte 0x083ed5dc
+	.4byte 0x083ed5f4
+	.4byte 0x083ed654
+	.4byte 0x083ed66c
+	.4byte 0x083ed684
+	.4byte 0x083ed69c
+	.4byte 0x083ed6b4
+	.4byte 0x083ed5c4
+	.4byte 0x083ed5c4
+	.4byte 0x083ed5c4
+	.4byte 0x083ed5c4
+	.4byte 0x083ed60c
+	.4byte 0x083ed60c
+	.4byte 0x083ed60c
+	.4byte 0x083ed60c
+	.4byte 0x083ed60c
+	.4byte 0x083ed624
+	.4byte 0x083ed624
+	.4byte 0x083ed624
+	.4byte 0x083ed63c
+	.4byte 0x083ed63c
+	.4byte 0x083ed63c
+	.4byte 0x081e2914
 
 	.global gUnknown_083EDBC4
 gUnknown_083EDBC4: @ 83EDBC4
@@ -6092,11 +8304,19 @@ gUnknown_083EDCE4: @ 83EDCE4
 
 	.global gUnknown_083EDD08
 gUnknown_083EDD08: @ 83EDD08
-	.incbin "baserom.gba", 0x003edd08, 0x14
+	.4byte 0x083edcfc
+	.4byte 0x083edcfe
+	.4byte 0x083edd00
+	.4byte 0x083edd02
+	.4byte 0x083edd04
 
 	.global gUnknown_083EDD1C
 gUnknown_083EDD1C: @ 83EDD1C
-	.incbin "baserom.gba", 0x003edd1c, 0x14
+	.4byte 0x08e95aac
+	.4byte 0x08e95aae
+	.4byte 0x08e95ab0
+	.4byte 0x08e95ab2
+	.4byte 0x08e95ab4
 
 	.global gUnknown_083EDD30
 gUnknown_083EDD30: @ 83EDD30
@@ -6108,23 +8328,42 @@ gUnknown_083EDD35: @ 83EDD35
 
 	.global gUnknown_083EDD3B
 gUnknown_083EDD3B: @ 83EDD3B
-	.incbin "baserom.gba", 0x003edd3b, 0x65
+Unknown_83EDD3B:
+	.incbin "baserom.gba", 0x003edd3b, 0x3
+Unknown_83EDD3E:
+	.incbin "baserom.gba", 0x003edd3e, 0x20
+Unknown_83EDD5E:
+	.incbin "baserom.gba", 0x003edd5e, 0x20
+Unknown_83EDD7E:
+	.incbin "baserom.gba", 0x003edd7e, 0x22
 
 	.global gUnknown_083EDDA0
 gUnknown_083EDDA0: @ 83EDDA0
-	.incbin "baserom.gba", 0x003edda0, 0xc
+	.4byte Unknown_83EDD3E
+	.4byte Unknown_83EDD5E
+	.4byte Unknown_83EDD7E
 
 	.global gUnknown_083EDDAC
 gUnknown_083EDDAC: @ 83EDDAC
-	.incbin "baserom.gba", 0x003eddac, 0x64
+Unknown_83EDDAC:
+	.4byte 0x08e95a38
+Unknown_83EDDB0:
+	.incbin "baserom.gba", 0x003eddb0, 0x20
+Unknown_83EDDD0:
+	.incbin "baserom.gba", 0x003eddd0, 0x20
+Unknown_83EDDF0:
+	.incbin "baserom.gba", 0x003eddf0, 0x20
 
 	.global gUnknown_083EDE10
 gUnknown_083EDE10: @ 83EDE10
-	.incbin "baserom.gba", 0x003ede10, 0x10
+	.4byte Unknown_83EDDB0
+	.4byte Unknown_83EDDD0
+	.4byte Unknown_83EDDF0
+	.4byte 0x08e97788
 
 	.global gUnknown_083EDE20
 gUnknown_083EDE20: @ 83EDE20
-	.incbin "baserom.gba", 0x003ede20, 0x4
+	.4byte 0x08e97788
 
 	.global gUnknown_083EDE24
 gUnknown_083EDE24: @ 83EDE24
@@ -6196,11 +8435,44 @@ gUnknown_083F5B9C: @ 83F5B9C
 
 	.global gUnknown_083F60AC
 gUnknown_083F60AC: @ 83F60AC
-	.incbin "baserom.gba", 0x003f60ac, 0x14
+	.4byte OtherText_Cool
+	.4byte OtherText_Beauty2
+	.4byte OtherText_Cute
+	.4byte OtherText_Smart
+	.4byte OtherText_Tough
 
 	.global gUnknown_083F60C0
 gUnknown_083F60C0: @ 83F60C0
-	.incbin "baserom.gba", 0x003f60c0, 0x78
+	.4byte OtherText_NonstopSuperCool
+	.4byte OtherText_Terminator6
+	.4byte OtherText_GoodLookingPoke
+	.4byte OtherText_Terminator7
+	.4byte OtherText_MarvelousGreat
+	.4byte OtherText_Terminator8
+	.4byte OtherText_CenturyLastVenus
+	.4byte OtherText_Terminator9
+	.4byte OtherText_Terminator10
+	.4byte OtherText_DazzlingSlime
+	.4byte OtherText_PokeCenterIdol
+	.4byte OtherText_Terminator11
+	.4byte OtherText_LovelyAndSweet
+	.4byte OtherText_Terminator12
+	.4byte OtherText_ThePretty
+	.4byte OtherText_WinningPortrait
+	.4byte OtherText_GiveUsWink
+	.4byte OtherText_Terminator13
+	.4byte OtherText_SmartnessMaestro
+	.4byte OtherText_Terminator15
+	.4byte OtherText_ChosenPokeAmong
+	.4byte OtherText_Terminator15
+	.4byte OtherText_TheExcellent
+	.4byte OtherText_ItsMomentOfElegance
+	.4byte OtherText_PowerfullyMuscular
+	.4byte OtherText_Terminator16
+	.4byte OtherText_StrongErEst
+	.4byte OtherText_Terminator17
+	.4byte OtherText_MightyTough
+	.4byte OtherText_Exclamation
 
 	.global gUnknown_083F6138
 gUnknown_083F6138: @ 83F6138
@@ -6212,7 +8484,100 @@ gUnknown_083F6140: @ 83F6140
 
 	.global gUnknown_083F6144
 gUnknown_083F6144: @ 83F6144
-	.incbin "baserom.gba", 0x003f6144, 0x178
+	.4byte 0x0810752d
+	.4byte 0x0810756d
+	.4byte 0x081075ad
+	.4byte 0x081075ed
+	.4byte 0x0810762d
+	.4byte 0x08107669
+	.4byte 0x081076d1
+	.4byte 0x08107739
+	.4byte 0x081077a1
+	.4byte 0x08107809
+	.4byte 0x0810787d
+	.4byte 0x081078f1
+	.4byte 0x08107965
+	.4byte 0x081079d9
+	.4byte 0x08107a49
+	.4byte 0x08107ab9
+	.4byte 0x08107b35
+	.4byte 0x08107bb1
+	.4byte 0x08107be9
+	.4byte 0x08107c21
+	.4byte 0x08107c59
+	.4byte 0x08107c91
+	.4byte 0x08107ce1
+	.4byte 0x08107d31
+	.4byte 0x08107d81
+	.4byte 0x08107dd1
+	.4byte 0x08107e11
+	.4byte 0x08107e51
+	.4byte 0x08107eb5
+	.4byte 0x08107f1d
+	.4byte 0x08107f85
+	.4byte 0x08107ff1
+	.4byte 0x08108061
+	.4byte 0x081080d1
+	.4byte 0x081080f1
+	.4byte 0x081081cd
+	.4byte 0x081081f5
+	.4byte 0x081083d5
+	.4byte 0x08108425
+	.4byte 0x0810845d
+	.4byte 0x08108495
+	.4byte 0x081084e1
+	.4byte 0x0810852d
+	.4byte 0x08108531
+	.4byte 0x08108535
+	.4byte 0x08108631
+	.4byte 0x08108649
+	.4byte 0x08108671
+	.4byte 0x081087a1
+	.4byte 0x0810888d
+	.4byte 0x0810895d
+	.4byte 0x08108961
+	.4byte 0x08108965
+	.4byte 0x08108a29
+	.4byte 0x08108aed
+	.4byte 0x08108b49
+	.4byte 0x08108b91
+	.4byte 0x08108bd9
+	.4byte 0x08108c41
+	.4byte 0x08108ca9
+	.4byte 0x08108d11
+	.4byte 0x08108d79
+	.4byte 0x08108e65
+	.4byte 0x08108f3d
+	.4byte 0x08109011
+	.4byte 0x081090e5
+	.4byte 0x081091d5
+	.4byte 0x081092a9
+	.4byte 0x08109331
+	.4byte 0x081093b9
+	.4byte 0x081093c9
+	.4byte 0x0810942d
+	.4byte 0x0810943d
+	.4byte 0x081094b9
+	.4byte 0x0810950d
+	.4byte 0x08109555
+	.4byte 0x0810959d
+	.4byte 0x081095c1
+	.4byte 0x08109605
+	.4byte 0x0810962d
+	.4byte 0x08109655
+	.4byte 0x0810967d
+	.4byte 0x081096c5
+	.4byte 0x081096c9
+	.4byte 0x081096cd
+	.4byte 0x081096d1
+	.4byte 0x081096d5
+	.4byte 0x081096d9
+	.4byte 0x081096dd
+	.4byte 0x0810970d
+	.4byte 0x0810972d
+	.4byte 0x0810974d
+	.4byte 0x08109825
+	.4byte 0x08109875
 
 	.global gUnknown_083F62BC
 gUnknown_083F62BC: @ 83F62BC
@@ -6220,7 +8585,10 @@ gUnknown_083F62BC: @ 83F62BC
 
 	.global gUnknown_083F62D8
 gUnknown_083F62D8: @ 83F62D8
-	.incbin "baserom.gba", 0x003f62d8, 0x10
+	.4byte SecretBaseText_Tristan
+	.4byte SecretBaseText_Philip
+	.4byte SecretBaseText_Dennis
+	.4byte SecretBaseText_Roberto
 
 	.global gUnknown_083F62E8
 gUnknown_083F62E8: @ 83F62E8
@@ -6260,11 +8628,17 @@ gUnknown_083F76C4: @ 83F76C4
 
 	.global gUnknown_083F76E4
 gUnknown_083F76E4: @ 83F76E4
-	.incbin "baserom.gba", 0x003f76e4, 0xa8
+Unknown_83F76E4:
+	.incbin "baserom.gba", 0x003f76e4, 0x78
+Unknown_83F775C:
+	.incbin "baserom.gba", 0x003f775c, 0x18
+Unknown_83F7774:
+	.incbin "baserom.gba", 0x003f7774, 0x18
 
 	.global gUnknown_083F778C
 gUnknown_083F778C: @ 83F778C
-	.incbin "baserom.gba", 0x003f778c, 0x8
+	.4byte Unknown_83F775C
+	.4byte Unknown_83F7774
 
 	.global gUnknown_083F7794
 gUnknown_083F7794: @ 83F7794
@@ -6324,7 +8698,10 @@ gUnknown_083F7E28: @ 83F7E28
 
 	.global gUnknown_083F7EA8
 gUnknown_083F7EA8: @ 83F7EA8
-	.incbin "baserom.gba", 0x003f7ea8, 0x10
+	.4byte 0x080a5b41
+	.4byte 0x080545e5
+	.4byte 0x0802e425
+	.4byte 0x080545e5
 
 	.global gUnknown_083F7EB8
 gUnknown_083F7EB8: @ 83F7EB8
@@ -6332,7 +8709,16 @@ gUnknown_083F7EB8: @ 83F7EB8
 
 	.global gUnknown_083F7EF4
 gUnknown_083F7EF4: @ 83F7EF4
-	.incbin "baserom.gba", 0x003f7ef4, 0x28
+	.4byte OtherText_Use
+	.4byte 0x0810c509
+	.4byte OtherText_Toss
+	.4byte 0x0810c5c1
+	.4byte OtherText_Cancel2
+	.4byte 0x0810c749
+	.4byte OtherText_Use
+	.4byte 0x0810c789
+	.4byte OtherText_Use
+	.4byte 0x0810c855
 
 	.global gUnknown_083F7F1C
 gUnknown_083F7F1C: @ 83F7F1C
@@ -6348,11 +8734,14 @@ gUnknown_083F7F21: @ 83F7F21
 
 	.global gUnknown_083F7F24
 gUnknown_083F7F24: @ 83F7F24
-	.incbin "baserom.gba", 0x003f7f24, 0x4c
+Unknown_83F7F24:
+	.incbin "baserom.gba", 0x003f7f24, 0x24
+Unknown_83F7F48:
+	.incbin "baserom.gba", 0x003f7f48, 0x28
 
 	.global gUnknown_083F7F70
 gUnknown_083F7F70: @ 83F7F70
-	.incbin "baserom.gba", 0x003f7f70, 0x4
+	.4byte Unknown_83F7F48
 
 	.global gUnknown_083F7F74
 gUnknown_083F7F74: @ 83F7F74
@@ -6424,11 +8813,33 @@ gUnknown_083F8376: @ 83F8376
 
 	.global gUnknown_083F8380
 gUnknown_083F8380: @ 83F8380
-	.incbin "baserom.gba", 0x003f8380, 0x40
+	.4byte OtherText_1F
+	.4byte OtherText_2F
+	.4byte OtherText_3F
+	.4byte OtherText_4F
+	.4byte OtherText_5F
+	.4byte OtherText_6F
+	.4byte OtherText_7F
+	.4byte OtherText_8F
+	.4byte OtherText_9F
+	.4byte OtherText_10F
+	.4byte OtherText_11F
+	.4byte OtherText_B1F
+	.4byte OtherText_B2F
+	.4byte OtherText_B3F
+	.4byte OtherText_B4F
+	.4byte OtherText_Rooftop
 
 	.global gUnknown_083F83C0
 gUnknown_083F83C0: @ 83F83C0
-	.incbin "baserom.gba", 0x003f83c0, 0x20
+	.4byte OtherText_BlueFlute
+	.4byte OtherText_YellowFlute
+	.4byte OtherText_RedFlute
+	.4byte OtherText_WhiteFlute
+	.4byte OtherText_BlackFlute
+	.4byte OtherText_PrettyChair
+	.4byte OtherText_PrettyDesk
+	.4byte OtherText_Cancel2
 
 	.global gUnknown_083F83E0
 gUnknown_083F83E0: @ 83F83E0
@@ -6548,11 +8959,13 @@ gUnknown_083F8E9C: @ 83F8E9C
 
 	.global gUnknown_083F8EB4
 gUnknown_083F8EB4: @ 83F8EB4
-	.incbin "baserom.gba", 0x003f8eb4, 0x8
+	.4byte 0x0811755d
+	.4byte 0x081175c1
 
 	.global gUnknown_083F8EBC
 gUnknown_083F8EBC: @ 83F8EBC
-	.incbin "baserom.gba", 0x003f8ebc, 0x8
+	.4byte 0x0811577d
+	.4byte 0x081157ad
 
 	.global gUnknown_083F8EC4
 gUnknown_083F8EC4: @ 83F8EC4
@@ -6768,39 +9181,85 @@ gUnknown_083FD528: @ 83FD528
 
 	.global gUnknown_083FD708
 gUnknown_083FD708: @ 83FD708
-	.incbin "baserom.gba", 0x003fd708, 0x4
+	.4byte 0x0200c000
 
 	.global gUnknown_083FD70C
 gUnknown_083FD70C: @ 83FD70C
-	.incbin "baserom.gba", 0x003fd70c, 0x44
+	.4byte 0x0811ac65
+	.4byte 0x0811ac65
+	.4byte 0x0811ac65
+	.4byte 0x0811ac65
+	.4byte 0x0811ac65
+	.4byte 0x0811ac65
+	.4byte 0x0811ac65
+	.4byte 0x0811ac65
+	.4byte 0x0811ac65
+	.4byte 0x0811ac65
+	.4byte 0x0811ac65
+	.4byte 0x0811ac65
+	.4byte 0x0811ac65
+	.4byte 0x0811ac65
+	.4byte 0x0811ac65
+	.4byte 0x0811ac65
+	.4byte 0x0811ac65
 
 	.global gUnknown_083FD750
 gUnknown_083FD750: @ 83FD750
-	.incbin "baserom.gba", 0x003fd750, 0x44
+	.4byte 0x0811acb5
+	.4byte 0x0811adad
+	.4byte 0x0811af45
+	.4byte 0x0811b0f1
+	.4byte 0x0811b579
+	.4byte 0x0811b7e9
+	.4byte 0x0811bcbd
+	.4byte 0x0811bea1
+	.4byte 0x0811ca5d
+	.4byte 0x0811ccdd
+	.4byte 0x0811d0b9
+	.4byte 0x0811d1c9
+	.4byte 0x0811c08d
+	.4byte 0x0811c0ad
+	.4byte 0x0811c0cd
+	.4byte 0x0811c0ed
+	.4byte 0x0811c10d
 
 	.global gUnknown_083FD794
 gUnknown_083FD794: @ 83FD794
-	.incbin "baserom.gba", 0x003fd794, 0x10
+	.4byte 0x0811ab89
+	.4byte 0x0811abd9
+	.4byte 0x0811ac0d
+	.4byte 0x0811ac35
 
 	.global gUnknown_083FD7A4
 gUnknown_083FD7A4: @ 83FD7A4
-	.incbin "baserom.gba", 0x003fd7a4, 0xc
+	.4byte 0x0811aced
+	.4byte 0x0811ad1d
+	.4byte 0x0811ad81
 
 	.global gUnknown_083FD7B0
 gUnknown_083FD7B0: @ 83FD7B0
-	.incbin "baserom.gba", 0x003fd7b0, 0x8
+	.4byte 0x0811ade5
+	.4byte 0x0811ae71
 
 	.global gUnknown_083FD7B8
 gUnknown_083FD7B8: @ 83FD7B8
-	.incbin "baserom.gba", 0x003fd7b8, 0x8
+	.4byte 0x0811af7d
+	.4byte 0x0811b001
 
 	.global gUnknown_083FD7C0
 gUnknown_083FD7C0: @ 83FD7C0
-	.incbin "baserom.gba", 0x003fd7c0, 0x18
+	.4byte 0x0811b129
+	.4byte 0x0811b1d9
+	.4byte 0x0811b269
+	.4byte 0x0811b2f5
+	.4byte 0x0811b381
+	.4byte 0x0811b3ed
 
 	.global gUnknown_083FD7D8
 gUnknown_083FD7D8: @ 83FD7D8
-	.incbin "baserom.gba", 0x003fd7d8, 0xc
+	.4byte 0x0811b5b1
+	.4byte 0x0811b5fd
+	.4byte 0x0811b689
 
 	.global gUnknown_083FD7E4
 gUnknown_083FD7E4: @ 83FD7E4
@@ -6816,19 +9275,37 @@ gUnknown_083FD7F2: @ 83FD7F2
 
 	.global gUnknown_083FD7F8
 gUnknown_083FD7F8: @ 83FD7F8
-	.incbin "baserom.gba", 0x003fd7f8, 0x1c
+	.4byte 0x0811b821
+	.4byte 0x0811b885
+	.4byte 0x0811b90d
+	.4byte 0x0811b9f1
+	.4byte 0x0811ba71
+	.4byte 0x0811bb61
+	.4byte 0x0811bbed
 
 	.global gUnknown_083FD814
 gUnknown_083FD814: @ 83FD814
-	.incbin "baserom.gba", 0x003fd814, 0x8
+	.4byte 0x0811bcf5
+	.4byte 0x0811bd61
 
 	.global gUnknown_083FD81C
 gUnknown_083FD81C: @ 83FD81C
-	.incbin "baserom.gba", 0x003fd81c, 0xc
+	.4byte 0x0811bed9
+	.4byte 0x0811bf2d
+	.4byte 0x0811bfc5
 
 	.global gUnknown_083FD828
 gUnknown_083FD828: @ 83FD828
-	.incbin "baserom.gba", 0x003fd828, 0x28
+	.4byte 0x0811c165
+	.4byte 0x0811c1cd
+	.4byte 0x0811c2a5
+	.4byte 0x0811c38d
+	.4byte 0x0811c401
+	.4byte 0x0811c43d
+	.4byte 0x0811c4f1
+	.4byte 0x0811c5b5
+	.4byte 0x0811c5e9
+	.4byte 0x0811c631
 
 	.global gUnknown_083FD850
 gUnknown_083FD850: @ 83FD850
@@ -6844,7 +9321,13 @@ gUnknown_083FD86A: @ 83FD86A
 
 	.global gUnknown_083FD880
 gUnknown_083FD880: @ 83FD880
-	.incbin "baserom.gba", 0x003fd880, 0x1c
+	.4byte 0x0811c935
+	.4byte 0x0811c939
+	.4byte 0x0811c985
+	.4byte 0x0811c9b9
+	.4byte 0x0811c935
+	.4byte 0x0811c9e5
+	.4byte 0x0811c935
 
 	.global gUnknown_083FD89C
 gUnknown_083FD89C: @ 83FD89C
@@ -6856,11 +9339,17 @@ gUnknown_083FD8A0: @ 83FD8A0
 
 	.global gUnknown_083FD8A4
 gUnknown_083FD8A4: @ 83FD8A4
-	.incbin "baserom.gba", 0x003fd8a4, 0xc
+	.4byte 0x0811ca95
+	.4byte 0x0811cb21
+	.4byte 0x0811cbe9
 
 	.global gUnknown_083FD8B0
 gUnknown_083FD8B0: @ 83FD8B0
-	.incbin "baserom.gba", 0x003fd8b0, 0x14
+	.4byte 0x0811cd15
+	.4byte 0x0811cda1
+	.4byte 0x0811ce15
+	.4byte 0x0811ce4d
+	.4byte 0x0811ceb1
 
 	.global gUnknown_083FD8C4
 gUnknown_083FD8C4: @ 83FD8C4
@@ -6868,11 +9357,17 @@ gUnknown_083FD8C4: @ 83FD8C4
 
 	.global gUnknown_083FD8D4
 gUnknown_083FD8D4: @ 83FD8D4
-	.incbin "baserom.gba", 0x003fd8d4, 0xc
+	.4byte 0x0811d0f1
+	.4byte 0x0811d145
+	.4byte 0x0811d19d
 
 	.global gUnknown_083FD8E0
 gUnknown_083FD8E0: @ 83FD8E0
-	.incbin "baserom.gba", 0x003fd8e0, 0x14
+	.4byte 0x0811d201
+	.4byte 0x0811d261
+	.4byte 0x0811d2d9
+	.4byte 0x0811d3b1
+	.4byte 0x0811d41d
 
 	.global gUnknown_083FD8F4
 gUnknown_083FD8F4: @ 83FD8F4
@@ -6904,7 +9399,11 @@ gFieldEffectObjectPaletteInfo10: @ 83FDA18
 
 	.global gUnknown_083FDB00
 gUnknown_083FDB00: @ 83FDB00
-	.incbin "baserom.gba", 0x003fdb00, 0x14
+	.4byte 0x083fda20
+	.4byte 0x083fda40
+	.4byte 0x083fda60
+	.4byte 0x083fda80
+	.4byte 0x083fdaa0
 
 	.global gUnknown_083FDB14
 gUnknown_083FDB14: @ 83FDB14
@@ -6918,807 +9417,7 @@ gUnknown_083FDB44: @ 83FDB44
 gUnknown_083FDFF4: @ 83FDFF4
 	.incbin "baserom.gba", 0x003fdff4, 0x500
 
-	.global gUnknown_083FE4F4
-gUnknown_083FE4F4: @ 83FE4F4
-	.incbin "baserom.gba", 0x003fe4f4, 0xe7
-	.string "{STRING 0} gained{STRING 1}\n{STRING 42} EXP. Points!\p$"
-	.string "$"
-	.string " a boosted$"
-	.string "{STRING 0} grew to\nLV. {STRING 1}!{UNKNOWN_A}\p$"
-	.string "{STRING 0} learned\n{STRING 1}!{UNKNOWN_A}\p$"
-	.string "{STRING 0} is trying to\nlearn {STRING 1}.\p$"
-	.string "But, {STRING 0} can’t learn\nmore than four moves.\p$"
-	.string "Delete a move to make\nroom for {STRING 1}?$"
-	.string "{STRING 0} forgot\n{STRING 1}.\p$"
-	.string "{PAUSE 32}Stop learning\n{STRING 1}?$"
-	.string "{STRING 0} did not learn\n{STRING 1}.\p$"
-	.string "Use next POKéMON?$"
-	.string "{ATTACKING_MON}’s\nattack missed!$"
-	.string "{DEFENDING_MON}\nprotected itself!$"
-	.string "{DEFENDING_MON} avoided\ndamage with {STRING 22}!$"
-	.string "{DEFENDING_MON} makes GROUND\nmoves miss with {STRING 22}!$"
-	.string "{DEFENDING_MON} avoided\nthe attack!$"
-	.string "It doesn’t affect\n{DEFENDING_MON}...$"
-	.string "{ATTACKING_MON}\nfainted!\p$"
-	.string "{DEFENDING_MON}\nfainted!\p$"
-	.string "{STRING 32} got ¥{STRING 0}\nfor winning!\p$"
-	.string "{STRING 32} is out of\nuseable POKéMON!\p$"
-	.string "{STRING 32} whited out!{PAUSE_UNTIL_PRESS}$"
-	.string "{STRING 16} prevents\nescape with {STRING 23}!\p$"
-	.string "Can’t escape!\p$"
-	.string "{ATTACKING_MON}\ncan’t escape!$"
-	.string "Hit {STRING 0} time(s)!$"
-	.string "{STRING 14}\nfell asleep!$"
-	.string "{STRING 16}’s {STRING 23}\nmade {STRING 14} sleep!$"
-	.string "{DEFENDING_MON} is\nalready asleep!$"
-	.string "{ATTACKING_MON} is\nalready asleep!$"
-	.string "{DEFENDING_MON}\nwasn’t affected!$"
-	.string "{STRING 14}\nwas poisoned!$"
-	.string "{STRING 16}’s {STRING 23}\npoisoned {STRING 14}!$"
-	.string "{ATTACKING_MON} is hurt\nby poison!$"
-	.string "{DEFENDING_MON} is already\npoisoned.$"
-	.string "{STRING 14} is badly\npoisoned!$"
-	.string "{DEFENDING_MON} had its\nenergy drained!$"
-	.string "{STRING 14} was burned!$"
-	.string "{STRING 16}’s {STRING 23}\nburned {STRING 14}!$"
-	.string "{ATTACKING_MON} is hurt\nby its burn!$"
-	.string "{DEFENDING_MON} already\nhas a burn.$"
-	.string "{STRING 14} was\nfrozen solid!$"
-	.string "{STRING 16}’s {STRING 23}\nfroze {STRING 14} solid!$"
-	.string "{ATTACKING_MON} is\nfrozen solid!$"
-	.string "{DEFENDING_MON} was\ndefrosted!$"
-	.string "{ATTACKING_MON} was\ndefrosted!$"
-	.string "{ATTACKING_MON} was\ndefrosted by {STRING 17}!$"
-	.string "{STRING 14} is paralyzed!\nIt may be unable to move!$"
-	.string "{STRING 16}’s {STRING 23}\nparalyzed {STRING 14}!\lIt may be unable to move!$"
-	.string "{ATTACKING_MON} is paralyzed!\nIt can’t move!$"
-	.string "{DEFENDING_MON} is\nalready paralyzed!$"
-	.string "{DEFENDING_MON} was\nhealed of paralysis!$"
-	.string "{DEFENDING_MON}’s\ndream was eaten!$"
-	.string "{ATTACKING_MON}’s {STRING 0}\nwon’t go higher!$"
-	.string "{DEFENDING_MON}’s {STRING 0}\nwon’t go lower!$"
-	.string "Your team’s {STRING 0}\nstopped working!$"
-	.string "The foe’s {STRING 0}\nstopped working!$"
-	.string "{ATTACKING_MON} is\nconfused!$"
-	.string "{ATTACKING_MON} snapped\nout of confusion!$"
-	.string "{STRING 14} became\nconfused!$"
-	.string "{DEFENDING_MON} is\nalready confused!$"
-	.string "{DEFENDING_MON}\nfell in love!$"
-	.string "{ATTACKING_MON} is in love\nwith {STRING 16}!$"
-	.string "{ATTACKING_MON} is\nimmobilized by love!$"
-	.string "{DEFENDING_MON} was\nblown away!$"
-	.string "{ATTACKING_MON} transformed\ninto the {STRING 0} type!$"
-	.string "{ATTACKING_MON} flinched!$"
-	.string "{DEFENDING_MON} regained\nhealth!$"
-	.string "{DEFENDING_MON}’s\nHP is full!$"
-	.string "{STRING 38}’s {STRING 17}\nraised SP. DEF!$"
-	.string "{STRING 38}’s {STRING 17}\nraised SP. DEF a little!$"
-	.string "{STRING 38}’s {STRING 17}\nraised DEFENSE!$"
-	.string "{STRING 38}’s {STRING 17}\nraised DEFENSE a little!$"
-	.string "{STRING 38} is covered\nby a veil!$"
-	.string "{DEFENDING_MON} is protected\nby SAFEGUARD!$"
-	.string "{STRING 40}’s SAFEGUARD\nfaded!$"
-	.string "{ATTACKING_MON} went\nto sleep!$"
-	.string "{ATTACKING_MON} slept and\nbecame healthy!$"
-	.string "{ATTACKING_MON} whipped\nup a whirlwind!$"
-	.string "{ATTACKING_MON} took\nin sunlight!$"
-	.string "{ATTACKING_MON} lowered\nits head!$"
-	.string "{ATTACKING_MON} is glowing!$"
-	.string "{ATTACKING_MON} flew\nup high!$"
-	.string "{ATTACKING_MON} dug a hole!$"
-	.string "{ATTACKING_MON} hid\nunderwater!$"
-	.string "{ATTACKING_MON} sprang up!$"
-	.string "{DEFENDING_MON} was squeezed by\n{ATTACKING_MON}’s BIND!$"
-	.string "{DEFENDING_MON} was trapped\nin the vortex!$"
-	.string "{DEFENDING_MON} was trapped\nby SAND TOMB!$"
-	.string "{DEFENDING_MON} was WRAPPED by\n{ATTACKING_MON}!$"
-	.string "{ATTACKING_MON} CLAMPED\n{DEFENDING_MON}!$"
-	.string "{ATTACKING_MON} is hurt\nby {STRING 0}!$"
-	.string "{ATTACKING_MON} was freed\nfrom {STRING 0}!$"
-	.string "{ATTACKING_MON} kept going\nand crashed!$"
-
-	.global gUnknown_083FEE5D
-gUnknown_083FEE5D: @ 83FEE5D
-	.string "{STRING 38} became\nshrouded in MIST!$"
-	.string "{STRING 16} is protected\nby MIST!$"
-
-	.global gUnknown_083FEE92
-gUnknown_083FEE92: @ 83FEE92
-	.string "{ATTACKING_MON} is getting\npumped!$"
-	.string "{ATTACKING_MON} is hit\nwith recoil!$"
-	.string "{ATTACKING_MON} protected\nitself!$"
-	.string "{ATTACKING_MON} is buffeted\nby the sandstorm!$"
-	.string "{ATTACKING_MON} is stricken\nby HAIL!$"
-	.string "{STRING 36}’s {STRING 0}\nwore off!$"
-	.string "{DEFENDING_MON} was seeded!$"
-	.string "{DEFENDING_MON} evaded\nthe attack!$"
-	.string "{ATTACKING_MON}’s health is\nsapped by LEECH SEED!$"
-	.string "{ATTACKING_MON} is fast\nasleep.$"
-	.string "{ATTACKING_MON} woke up!$"
-	.string "But {STRING 16}’s UPROAR\nkept it awake!$"
-	.string "{ATTACKING_MON} woke up\nin the UPROAR!$"
-	.string "{ATTACKING_MON} caused\nan UPROAR!$"
-	.string "{ATTACKING_MON} is making\nan UPROAR!$"
-	.string "{ATTACKING_MON} calmed down.$"
-	.string "But {DEFENDING_MON} can’t\nsleep in an UPROAR!$"
-	.string "{ATTACKING_MON} STOCKPILED\n{STRING 0}!$"
-	.string "{ATTACKING_MON} can’t\nSTOCKPILE any more!$"
-	.string "But {DEFENDING_MON} can’t\nsleep in an UPROAR!$"
-	.string "But the UPROAR kept\n{DEFENDING_MON} awake!$"
-	.string "{DEFENDING_MON} stayed awake\nusing its {STRING 22}!$"
-	.string "{ATTACKING_MON} is storing\nenergy!$"
-	.string "{ATTACKING_MON} unleashed\nenergy!$"
-	.string "{ATTACKING_MON} became\nconfused out of fatigue!$"
-	.string "{STRING 32} picked up\n¥{STRING 0}!\p$"
-	.string "{DEFENDING_MON} is\nunaffected!$"
-	.string "{ATTACKING_MON} transformed\ninto {STRING 0}!$"
-	.string "{ATTACKING_MON} made\na SUBSTITUTE!$"
-	.string "{ATTACKING_MON} already\nhas a SUBSTITUTE!$"
-	.string "The SUBSTITUTE took damage\nfor {DEFENDING_MON}!\p$"
-	.string "{DEFENDING_MON}’s\nSUBSTITUTE faded!\p$"
-	.string "{ATTACKING_MON} must\nrecharge!$"
-	.string "{DEFENDING_MON}’s RAGE\nis building!$"
-	.string "{DEFENDING_MON}’s {STRING 0}\nwas disabled!$"
-	.string "{ATTACKING_MON} is disabled\nno more!$"
-	.string "{DEFENDING_MON} got\nan ENCORE!$"
-	.string "{ATTACKING_MON}’s ENCORE\nended!$"
-	.string "{ATTACKING_MON} took aim\nat {DEFENDING_MON}!$"
-	.string "{ATTACKING_MON} SKETCHED\n{STRING 0}!$"
-	.string "{ATTACKING_MON} is trying\nto take its foe with it!$"
-	.string "{DEFENDING_MON} took\n{ATTACKING_MON} with it!$"
-	.string "Reduced {DEFENDING_MON}’s\n{STRING 0} by {STRING 1}!$"
-	.string "{ATTACKING_MON} stole\n{DEFENDING_MON}’s {STRING 19}!$"
-	.string "{DEFENDING_MON} can’t\nescape now!$"
-	.string "{DEFENDING_MON} fell into\na NIGHTMARE!$"
-	.string "{ATTACKING_MON} is locked\nin a NIGHTMARE!$"
-	.string "{ATTACKING_MON} cut its own HP\nand laid a CURSE on\l{DEFENDING_MON}!$"
-	.string "{ATTACKING_MON} is afflicted\nby the CURSE!$"
-	.string "{STRING 37} POKéMON team had SPIKES\nscattered around it!$"
-	.string "{STRING 16} is hurt\nby SPIKES!$"
-	.string "{ATTACKING_MON} identified\n{DEFENDING_MON}!$"
-	.string "{ATTACKING_MON}’s PERISH count\nfell to {STRING 0}!$"
-	.string "{ATTACKING_MON} braced\nitself!$"
-	.string "{DEFENDING_MON} ENDURED\nthe hit!$"
-	.string "MAGNITUDE {STRING 0}!$"
-	.string "{ATTACKING_MON} cut its own HP\nand maximized ATTACK!$"
-	.string "{ATTACKING_MON} copied\n{DEFENDING_MON}’s stat changes!$"
-	.string "{ATTACKING_MON} got free of\n{DEFENDING_MON}’s {STRING 0}!$"
-	.string "{ATTACKING_MON} shed\nLEECH SEED!$"
-	.string "{ATTACKING_MON} blew away\nSPIKES!$"
-	.string "{ATTACKING_MON} fled from\nbattle!$"
-	.string "{ATTACKING_MON} foresaw\nan attack!$"
-	.string "{DEFENDING_MON} took\n{STRING 0}’s attack!$"
-	.string "{ATTACKING_MON} chose\n{STRING 17} as its destiny!$"
-	.string "{STRING 0}’s attack!$"
-	.string "{ATTACKING_MON} became the\ncenter of attention!$"
-	.string "{ATTACKING_MON} began\ncharging power!$"
-	.string "NATURE POWER turned into\n{STRING 17}!$"
-	.string "{ATTACKING_MON}’s status\nreturned to normal!$"
-	.string "{DEFENDING_MON} was subjected\nto TORMENT!$"
-	.string "{ATTACKING_MON} is tightening\nits focus!$"
-	.string "{DEFENDING_MON} fell for\nthe TAUNT!$"
-	.string "{ATTACKING_MON} is ready to\nhelp {DEFENDING_MON}!$"
-	.string "{ATTACKING_MON} switched\nitems with its opponent!$"
-	.string "{ATTACKING_MON} obtained\n{STRING 0}.$"
-	.string "{DEFENDING_MON} obtained\n{STRING 1}.$"
-	.string "{ATTACKING_MON} obtained\n{STRING 0}.\p{DEFENDING_MON} obtained\n{STRING 1}.$"
-	.string "{ATTACKING_MON} copied\n{DEFENDING_MON}’s {STRING 22}!$"
-	.string "{ATTACKING_MON} made a WISH!$"
-	.string "{STRING 0}’s WISH\ncame true!$"
-	.string "{ATTACKING_MON} planted its roots!$"
-	.string "{ATTACKING_MON} absorbed\nnutrients with its roots!$"
-	.string "{DEFENDING_MON} anchored\nitself with its roots!$"
-	.string "{ATTACKING_MON} made\n{DEFENDING_MON} drowsy!$"
-	.string "{ATTACKING_MON} knocked off\n{DEFENDING_MON}’s {STRING 19}!$"
-	.string "{ATTACKING_MON} swapped abilities\nwith its opponent!$"
-	.string "{ATTACKING_MON} sealed the\nopponent’s move(s)!$"
-	.string "{ATTACKING_MON} wants the\nopponent to bear a GRUDGE!$"
-	.string "{ATTACKING_MON}’s {STRING 0}\nlost all its PP due to\lthe GRUDGE!$"
-	.string "{ATTACKING_MON} shrouded\nitself in {STRING 17}!$"
-	.string "{ATTACKING_MON}’s {STRING 17}\nwas bounced back by MAGIC COAT!$"
-	.string "{ATTACKING_MON} awaits its foe\nto make a move!$"
-	.string "{DEFENDING_MON} SNATCHED\n{STRING 16}’s move!$"
-	.string "Electricity’s power was\nweakened!$"
-	.string "Fire’s power was\nweakened!$"
-	.string "{ATTACKING_MON} found\none {STRING 19}!$"
-	.string "A soothing aroma wafted\nthrough the area!$"
-	.string "Items can’t be used now.{PAUSE 64}$"
-	.string "For {STRING 16},\n{STRING 19} {STRING 0}$"
-	.string "{STRING 16} used\n{STRING 19} to hustle!$"
-	.string "{ATTACKING_MON} lost its\nfocus and couldn’t move!$"
-	.string "{DEFENDING_MON} was\ndragged out!\p$"
-	.string "The wall shattered!$"
-	.string "But it had no effect!$"
-	.string "{STRING 15} has no\nmoves left!\p$"
-	.string "{STRING 15}’s {STRING 17}\nis disabled!\p$"
-	.string "{STRING 15} can’t use the same\nmove twice in a row due to the TORMENT!\p$"
-	.string "{STRING 15} can’t use\n{STRING 17} after the TAUNT!\p$"
-	.string "{STRING 15} can’t use the\nsealed {STRING 17}!\p$"
-	.string "{STRING 16}’s {STRING 23}\nmade it rain!$"
-	.string "{STRING 16}’s {STRING 23}\nraised its SPEED!$"
-	.string "{DEFENDING_MON} was protected\nby {STRING 22}!$"
-	.string "{DEFENDING_MON}’s {STRING 22}\nprevents {ATTACKING_MON}\lfrom using {STRING 17}!$"
-	.string "{DEFENDING_MON} restored HP\nusing its {STRING 22}!$"
-	.string "{DEFENDING_MON}’s {STRING 22}\nmade {STRING 17} useless!$"
-	.string "{DEFENDING_MON}’s {STRING 22}\nmade it the {STRING 0} type!$"
-	.string "{STRING 14}’s {STRING 22}\nprevents paralysis!$"
-	.string "{DEFENDING_MON}’s {STRING 22}\nprevents romance!$"
-	.string "{STRING 14}’s {STRING 22}\nprevents poisoning!$"
-	.string "{DEFENDING_MON}’s {STRING 22}\nprevents confusion!$"
-	.string "{DEFENDING_MON}’s {STRING 22}\nraised its FIRE power!$"
-	.string "{DEFENDING_MON} anchors\nitself with {STRING 22}!$"
-	.string "{STRING 16}’s {STRING 23}\ncuts {DEFENDING_MON}’s ATTACK!$"
-	.string "{STRING 16}’s {STRING 23}\nprevents stat loss!$"
-	.string "{DEFENDING_MON}’s {STRING 22}\nhurt {ATTACKING_MON}!$"
-	.string "{STRING 16} TRACED\n{STRING 0}’s {STRING 1}!$"
-	.string "{STRING 14}’s {STRING 24}\nprevents burns!$"
-	.string "{DEFENDING_MON}’s {STRING 22}\nblocks {STRING 17}!$"
-	.string "{STRING 16}’s {STRING 23}\nblocks {STRING 17}!$"
-	.string "{ATTACKING_MON}’s {STRING 21}\nrestored some HP!$"
-	.string "{STRING 16}’s {STRING 23}\nwhipped up a sandstorm!$"
-	.string "{STRING 16}’s {STRING 23}\nintensified the sun’s rays!$"
-	.string "{STRING 16}’s {STRING 23}\nprevents {STRING 0} loss!$"
-	.string "{DEFENDING_MON}’s {STRING 22}\ninfatuated {ATTACKING_MON}!$"
-	.string "{DEFENDING_MON}’s {STRING 22}\nmade {STRING 17} ineffective!$"
-	.string "{STRING 16}’s {STRING 23}\ncured its {STRING 0} problem!$"
-	.string "It sucked up the\nLIQUID OOZE!$"
-	.string "{STRING 16} transformed!$"
-	.string "{DEFENDING_MON}’s {STRING 22}\ntook the attack!$"
-
-	.global gUnknown_083FFCCA
-gUnknown_083FFCCA: @ 83FFCCA
-	.string "{STRING 0}’s {STRING 20}\nprevents switching!\p$"
-	.string "{DEFENDING_MON}’s {STRING 22}\nprevented {STRING 16}’s\l{STRING 0} from working!$"
-	.string "{STRING 16}’s {STRING 23}\nmade it ineffective!$"
-	.string "{STRING 14}’s {STRING 24}\nprevents flinching!$"
-	.string "{ATTACKING_MON}’s {STRING 21}\nprevents {DEFENDING_MON}’s\l{STRING 22} from working!$"
-	.string "{STRING 16}’s {STRING 23}\ncured its {STRING 0} problem!$"
-	.string "{STRING 16}’s {STRING 23}\nhad no effect on {STRING 14}!$"
-	.string "sharply $"
-
-	.global gUnknown_083FFDB3
-gUnknown_083FFDB3: @ 83FFDB3
-	.string "rose!$"
-	.string "harshly $"
-	.string "fell!$"
-	.string "{ATTACKING_MON}’s {STRING 0}\n{STRING 1}$"
-
-	.global gUnknown_083FFDD3
-gUnknown_083FFDD3: @ 83FFDD3
-	.string "{DEFENDING_MON}’s {STRING 0}\n{STRING 1}$"
-	.string "Using {STRING 19}, the {STRING 0}\nof {STRING 16} {STRING 1}$"
-	.string "{ATTACKING_MON}’s {STRING 0}\n{STRING 1}$"
-	.string "{DEFENDING_MON}’s {STRING 0}\n{STRING 1}$"
-	.string "{ATTACKING_MON}’s stats won’t\ngo any higher!$"
-	.string "{DEFENDING_MON}’s stats won’t\ngo any lower!$"
-	.string "A critical hit!$"
-	.string "It’s a one-hit KO!$"
-	.string "{PAUSE 32}1, {PAUSE 15}2 and...{PAUSE 15} ...{PAUSE 15} ...{PAUSE 15}\n{PAUSE 15}{PLAY_SE SE_KON}Poof!\p$"
-	.string "And...\p$"
-	.string "HM moves can’t be\nforgotten now.\p$"
-	.string "It’s not very effective...$"
-	.string "It’s super effective!$"
-
-	.global gUnknown_083FFEFC
-gUnknown_083FFEFC: @ 83FFEFC
-	.string "{PLAY_SE SE_NIGERU}Got away safely!\p$"
-	.string "{PLAY_SE SE_NIGERU}{ATTACKING_MON} fled\nusing its {STRING 19}!\p$"
-	.string "{PLAY_SE SE_NIGERU}{ATTACKING_MON} fled\nusing {STRING 21}!\p$"
-	.string "{PLAY_SE SE_NIGERU}Wild {STRING 0} fled!$"
-
-	.global gUnknown_083FFF56
-gUnknown_083FFF56: @ 83FFF56
-	.string "Player defeated\n{STRING 29}!$"
-
-	.global gUnknown_083FFF6A
-gUnknown_083FFF6A: @ 83FFF6A
-	.string "Player beat {STRING 30}\nand {STRING 29}!$"
-
-	.global gUnknown_083FFF81
-gUnknown_083FFF81: @ 83FFF81
-	.string "Player lost against\n{STRING 29}!$"
-
-	.global gUnknown_083FFF99
-gUnknown_083FFF99: @ 83FFF99
-	.string "Player lost to {STRING 30}\nand {STRING 29}!$"
-
-	.global gUnknown_083FFFB3
-gUnknown_083FFFB3: @ 83FFFB3
-	.string "Player tied against\n{STRING 29}!$"
-
-	.global gUnknown_083FFFCB
-gUnknown_083FFFCB: @ 83FFFCB
-	.string "Player tied against {STRING 30}\nand {STRING 29}!$"
-
-	.global gUnknown_083FFFEA
-gUnknown_083FFFEA: @ 83FFFEA
-	.string "{PLAY_SE SE_NIGERU}{STRING 29} fled!$"
-
-	.global gUnknown_083FFFF7
-gUnknown_083FFFF7: @ 83FFFF7
-	.string "{PLAY_SE SE_NIGERU}{STRING 29} and\n{STRING 30} fled!$"
-	.string "No! There’s no running\nfrom a TRAINER battle!\p$"
-	.string "Can’t escape!\p$"
-	.string "PROF. BIRCH: D-don’t leave\nme here like this!\p$"
-	.string "But nothing happened!$"
-	.string "But it failed!$"
-	.string "It hurt itself in its\nconfusion!$"
-	.string "The MIRROR MOVE failed!$"
-	.string "It started to rain!$"
-	.string "A downpour started!$"
-	.string "Rain continues to fall.$"
-	.string "The downpour continues.$"
-	.string "The rain stopped.$"
-	.string "A sandstorm brewed!$"
-	.string "The sandstorm rages.$"
-	.string "The sandstorm subsided.$"
-	.string "The sunlight got bright!$"
-	.string "The sunlight is strong.$"
-	.string "The sunlight faded.$"
-	.string "It started to hail!$"
-	.string "Hail continues to fall.$"
-	.string "The hail  stopped.$"
-	.string "But it failed to SPIT UP\na thing!$"
-	.string "But it failed to SWALLOW\na thing!$"
-	.string "The wind turned into a\nHEAT WAVE!$"
-	.string "All stat changes were\neliminated!$"
-	.string "Coins scattered everywhere!$"
-	.string "It was too weak to make\na SUBSTITUTE!$"
-	.string "The battlers shared\ntheir pain!$"
-	.string "A bell chimed!$"
-	.string "All affected POKéMON will\nfaint in 3 turns!$"
-	.string "There’s no PP left for\nthis move!\p$"
-	.string "But there was no PP left\nfor the move!$"
-	.string "{ATTACKING_MON} ignored\norders while asleep!$"
-	.string "{ATTACKING_MON} ignored\norders!$"
-	.string "{ATTACKING_MON} began to nap!$"
-	.string "{ATTACKING_MON} is\nloafing around!$"
-	.string "{ATTACKING_MON} won’t\nobey!$"
-	.string "{ATTACKING_MON} turned away!$"
-	.string "{ATTACKING_MON} pretended\nto not notice!$"
-	.string "{STRING 25} {STRING 26} is\nabout to use {STRING 1}.\pWill {STRING 32} change\nPOKéMON?$"
-	.string "{ATTACKING_MON} learned\n{STRING 0}!$"
-	.string "Player defeated\n{STRING 25} {STRING 26}!\p$"
-	.string "{STRING 32} crept closer to\n{STRING 3}!$"
-	.string "{STRING 32} can’t get any closer!$"
-	.string "{STRING 3} is watching\ncarefully!$"
-	.string "{STRING 3} is curious about\nthe {STRING 0}!$"
-	.string "{STRING 3} is enthralled by\nthe {STRING 0}!$"
-	.string "{STRING 3} completely ignored\nthe {STRING 0}!$"
-	.string "{STRING 32} threw a {POKEBLOCK}\nat the {STRING 3}!$"
-	.string "{PLAY_SE SE_PINPON}ANNOUNCER: You’re out of\nSAFARI BALLS! Game over!\p$"
-
-	.global gUnknown_08400555
-gUnknown_08400555: @ 8400555
-	.string "Wild {STRING 3} appeared!\p$"
-
-	.global gUnknown_08400568
-gUnknown_08400568: @ 8400568
-	.string "Wild {STRING 3} appeared!\p$"
-
-	.global gUnknown_0840057B
-gUnknown_0840057B: @ 840057B
-	.string "Wild {STRING 3} appeared!{PAUSE 127}$"
-
-	.global gUnknown_08400590
-gUnknown_08400590: @ 8400590
-	.string "Wild {STRING 5} and\n{STRING 3} appeared!\p$"
-
-	.global gUnknown_084005AA
-gUnknown_084005AA: @ 84005AA
-	.string "{STRING 25} {STRING 26}\nwould like to battle!\p$"
-
-	.global gUnknown_084005C7
-gUnknown_084005C7: @ 84005C7
-	.string "{STRING 29}\nwants to battle!$"
-
-	.global gUnknown_084005DB
-gUnknown_084005DB: @ 84005DB
-	.string "{STRING 29} and {STRING 30}\nwant to battle!$"
-
-	.global gUnknown_084005F5
-gUnknown_084005F5: @ 84005F5
-	.string "{STRING 25} {STRING 26} sent\nout {STRING 3}!$"
-
-	.global gUnknown_08400608
-gUnknown_08400608: @ 8400608
-	.string "{STRING 25} {STRING 26} sent\nout {STRING 3} and {STRING 5}!$"
-
-	.global gUnknown_08400622
-gUnknown_08400622: @ 8400622
-	.string "{STRING 25} {STRING 26} sent\nout {STRING 0}!$"
-
-	.global gUnknown_08400635
-gUnknown_08400635: @ 8400635
-	.string "{STRING 29} sent\nout {STRING 3}!$"
-
-	.global gUnknown_08400645
-gUnknown_08400645: @ 8400645
-	.string "{STRING 29} sent out\n{STRING 3} and {STRING 5}!$"
-
-	.global gUnknown_0840065C
-gUnknown_0840065C: @ 840065C
-	.string "{STRING 29} sent out\n{STRING 7}!\p{STRING 30} sent out\n{STRING 9}!$"
-
-	.global gUnknown_0840067C
-gUnknown_0840067C: @ 840067C
-	.string "{STRING 29} sent out\n{STRING 0}!$"
-
-	.global gUnknown_0840068C
-gUnknown_0840068C: @ 840068C
-	.string "{STRING 31} sent out\n{STRING 0}!$"
-
-	.global gUnknown_0840069C
-gUnknown_0840069C: @ 840069C
-	.string "Go! {STRING 2}!$"
-
-	.global gUnknown_084006A4
-gUnknown_084006A4: @ 84006A4
-	.string "Go! {STRING 2} and\n{STRING 4}!$"
-
-	.global gUnknown_084006B3
-gUnknown_084006B3: @ 84006B3
-	.string "Go! {STRING 0}!$"
-
-	.global gUnknown_084006BB
-gUnknown_084006BB: @ 84006BB
-	.string "Do it! {STRING 0}!$"
-
-	.global gUnknown_084006C6
-gUnknown_084006C6: @ 84006C6
-	.string "Go for it, {STRING 0}!$"
-
-	.global gUnknown_084006D5
-gUnknown_084006D5: @ 84006D5
-	.string "Your foe’s weak!\nGet’m, {STRING 0}!$"
-
-	.global gUnknown_084006F1
-gUnknown_084006F1: @ 84006F1
-	.string "{STRING 28} sent out\n{STRING 8}!\pGo! {STRING 6}!$"
-
-	.global gUnknown_08400709
-gUnknown_08400709: @ 8400709
-	.string "{STRING 0}, that’s enough!\nCome back!$"
-
-	.global gUnknown_08400727
-gUnknown_08400727: @ 8400727
-	.string "{STRING 0}, come back!$"
-
-	.global gUnknown_08400736
-gUnknown_08400736: @ 8400736
-	.string "{STRING 0}, OK!\nCome back!$"
-
-	.global gUnknown_08400749
-gUnknown_08400749: @ 8400749
-	.string "{STRING 0}, good!\nCome back!$"
-
-	.global gUnknown_0840075E
-gUnknown_0840075E: @ 840075E
-	.string "{STRING 25} {STRING 26}\nwithdrew {STRING 0}!$"
-
-	.global gUnknown_08400771
-gUnknown_08400771: @ 8400771
-	.string "{STRING 29} withdrew\n{STRING 0}!$"
-
-	.global gUnknown_08400781
-gUnknown_08400781: @ 8400781
-	.string "{STRING 31} withdrew\n{STRING 0}!$"
-
-	.global gUnknown_08400791
-gUnknown_08400791: @ 8400791
-	.string "Wild $"
-
-	.global gUnknown_08400797
-gUnknown_08400797: @ 8400797
-	.string "Foe $"
-
-	.global gUnknown_0840079C
-gUnknown_0840079C: @ 840079C
-	.string "Foe $"
-
-	.global gUnknown_084007A1
-gUnknown_084007A1: @ 84007A1
-	.string "Ally $"
-
-	.global gUnknown_084007A7
-gUnknown_084007A7: @ 84007A7
-	.string "Foe $"
-
-	.global gUnknown_084007AC
-gUnknown_084007AC: @ 84007AC
-	.string "Ally $"
-
-	.global gUnknown_084007B2
-gUnknown_084007B2: @ 84007B2
-	.string "Foe $"
-
-	.global gUnknown_084007B7
-gUnknown_084007B7: @ 84007B7
-	.string "Ally $"
-
-	.global gUnknown_084007BD
-gUnknown_084007BD: @ 84007BD
-	.string "{ATTACKING_MON} used\n{STRING 1}$"
-
-	.global gUnknown_084007C8
-gUnknown_084007C8: @ 84007C8
-	.string "!$"
-
-	.global gUnknown_084007CA
-gUnknown_084007CA: @ 84007CA
-	.string "!$"
-
-	.global gUnknown_084007CC
-gUnknown_084007CC: @ 84007CC
-	.string "!$"
-
-	.global gUnknown_084007CE
-gUnknown_084007CE: @ 84007CE
-	.string "!$"
-
-	.global gUnknown_084007D0
-gUnknown_084007D0: @ 84007D0
-	.string "!$"
-	.string "HP$"
-	.string "ATTACK$"
-	.string "DEFENSE$"
-	.string "SPEED$"
-	.string "SP. ATK$"
-	.string "SP. DEF$"
-	.string "accuracy$"
-	.string "evasiveness$"
-	.string "was too spicy!$"
-	.string "was too dry!$"
-	.string "was too sweet!$"
-	.string "was too bitter!$"
-	.string "was too sour!$"
-	.string "{STRING 32} used\n{STRING 19}!$"
-	.string "WALLY used\n{STRING 19}!$"
-	.string "{STRING 25} {STRING 26}\nused {STRING 19}!$"
-	.string "The TRAINER blocked the BALL!$"
-	.string "Don’t be a thief!$"
-	.string "It dodged the thrown BALL!\nThis POKéMON can’t be caught!$"
-	.string "You missed the POKéMON!$"
-	.string "Oh, no!\nThe POKéMON broke free!$"
-	.string "Aww!\nIt appeared to be caught!$"
-	.string "Aargh!\nAlmost had it!$"
-	.string "Shoot!\nIt was so close, too!$"
-	.string "Gotcha!\n{STRING 3} was caught!{UNKNOWN_A}{PLAY_BGM BGM_KACHI22}\p$"
-	.string "Gotcha!\n{STRING 3} was caught!{UNKNOWN_A}{PLAY_BGM BGM_KACHI22}{PAUSE 127}$"
-	.string "Give a nickname to the\ncaptured {STRING 3}?$"
-	.string "{STRING 3} was sent to\n{STRING 35} PC.$"
-
-	.global gUnknown_084009ED
-gUnknown_084009ED: @ 84009ED
-	.string "someone’s$"
-
-	.global gUnknown_084009F7
-gUnknown_084009F7: @ 84009F7
-	.string "LANETTE’s$"
-	.string "{STRING 3}’s data was\nadded to the POKéDEX.\p$"
-	.string "It is raining.$"
-	.string "A sandstorm is raging.$"
-	.string "The BOX is full!\nYou can’t catch any more!\p$"
-
-	.global gUnknown_08400A78
-gUnknown_08400A78: @ 8400A78
-	.string "ENIGMA BERRY$"
-
-	.global gUnknown_08400A85
-gUnknown_08400A85: @ 8400A85
-	.string " BERRY$"
-	.string "{STRING 16}’s {STRING 19}\ncured paralysis!$"
-	.string "{STRING 16}’s {STRING 19}\ncured poison!$"
-	.string "{STRING 16}’s {STRING 19}\nhealed its burn!$"
-	.string "{STRING 16}’s {STRING 19}\ndefrosted it!$"
-	.string "{STRING 16}’s {STRING 19}\nwoke it from its sleep!$"
-	.string "{STRING 16}’s {STRING 19}\nsnapped it out of confusion!$"
-	.string "{STRING 16}’s {STRING 19}\ncured its {STRING 0} problem!$"
-	.string "{STRING 16}’s {STRING 19}\nnormalized its status!$"
-	.string "{STRING 16}’s {STRING 19}\nrestored health!$"
-	.string "{STRING 16}’s {STRING 19}\nrestored {STRING 0}’s PP!$"
-	.string "{STRING 16}’s {STRING 19}\nrestored its status!$"
-	.string "{STRING 16}’s {STRING 19}\nrestored its HP a little!$"
-	.string "{STRING 19} allows the\nuse of only {STRING 17}!\p$"
-	.string "{DEFENDING_MON} hung on\nusing its {STRING 19}!$"
-	.string "$"
-	.string "You throw a BALL now, right?\nI... I’ll do my best!$"
-
-	.global gUnknown_08400C4A
-gUnknown_08400C4A: @ 8400C4A
-	.string "What?\n{STRING 2} is evolving!$"
-
-	.global gUnknown_08400C60
-gUnknown_08400C60: @ 8400C60
-	.string "Congratulations! Your {STRING 2}\nevolved into {STRING 3}!{UNKNOWN_A}\p$"
-
-	.global gUnknown_08400C8D
-gUnknown_08400C8D: @ 8400C8D
-	.string "Huh? {STRING 2}\nstopped evolving!\p$"
-
-	.global gUnknown_08400CA8
-gUnknown_08400CA8: @ 8400CA8
-	.string "What should\n{STRING 15} do?$"
-
-	.global gUnknown_08400CBB
-gUnknown_08400CBB: @ 8400CBB
-	.string "What will\n{STRING 32} do?$"
-
-	.global gUnknown_08400CCC
-gUnknown_08400CCC: @ 8400CCC
-	.string "What will\nWALLY do?$"
-
-	.global gUnknown_08400CE0
-gUnknown_08400CE0: @ 8400CE0
-	.string "{PAUSE 16}Link standby...$"
-
-	.global gUnknown_08400CF3
-gUnknown_08400CF3: @ 8400CF3
-	.string "{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW SKY_BLUE LIGHT_BLUE WHITE2}FIGHT{CLEAR_TO 0x2E}BAG\nPOKéMON{CLEAR_TO 0x2E}RUN$"
-
-	.global gUnknown_08400D15
-gUnknown_08400D15: @ 8400D15
-	.string "{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW SKY_BLUE LIGHT_BLUE WHITE2}BALL{CLEAR_TO 0x2E}{POKEBLOCK}\nGO NEAR{CLEAR_TO 0x2E}RUN$"
-
-	.global gUnknown_08400D38
-gUnknown_08400D38: @ 8400D38
-	.string "{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW SKY_BLUE LIGHT_BLUE WHITE2}PP\nTYPE/$"
-
-	.global gUnknown_08400D49
-gUnknown_08400D49: @ 8400D49
-	.string "{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW SKY_BLUE LIGHT_BLUE WHITE2}$"
-
-	.global gUnknown_08400D52
-gUnknown_08400D52: @ 8400D52
-	.string "{COLOR_HIGHLIGHT_SHADOW SKY_BLUE LIGHT_BLUE WHITE2}{PALETTE 5}Which move should\nbe forgotten?$"
-
-	.global gUnknown_08400D7A
-gUnknown_08400D7A: @ 8400D7A
-	.string "{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW SKY_BLUE LIGHT_BLUE WHITE2}Yes\nNo$"
-
-	.global gUnknown_08400D89
-gUnknown_08400D89: @ 8400D89
-	.string "{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW SKY_BLUE LIGHT_BLUE WHITE2}Switch\nwhich?$"
-
-	.global gUnknown_08400D9F
-gUnknown_08400D9F: @ 8400D9F
-	.string "{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW SKY_BLUE LIGHT_BLUE WHITE2}$"
-	.string "{RIGHT_ARROW}$"
-
-	.global gUnknown_08400DAA
-gUnknown_08400DAA: @ 8400DAA
-	.string "+$"
-
-	.global gUnknown_08400DAC
-gUnknown_08400DAC: @ 8400DAC
-	.string "-$"
-	.string "HP     $"
-	.string "ATTACK $"
-	.string "DEFENSE$"
-	.string "SP. ATK$"
-	.string "SP. DEF$"
-
-	.global gUnknown_08400DD6
-gUnknown_08400DD6: @ 8400DD6
-	.string "{HIGHLIGHT RED}SAFARI BALLS$"
-
-	.global gUnknown_08400DE6
-gUnknown_08400DE6: @ 8400DE6
-	.string "{HIGHLIGHT RED}Left: $"
-
-	.global gUnknown_08400DF0
-gUnknown_08400DF0: @ 8400DF0
-	.string "{HIGHLIGHT RED}$"
-	.string "sleep$"
-	.string "poison$"
-	.string "burn$"
-	.string "paralysis$"
-	.string "ice$"
-	.string "confusion$"
-	.string "love$"
-
-	.global gUnknown_08400E23
-gUnknown_08400E23: @ 8400E23
-	.string " and $"
-
-	.global gUnknown_08400E29
-gUnknown_08400E29: @ 8400E29
-	.string ", $"
-
-	.global gUnknown_08400E2C
-gUnknown_08400E2C: @ 8400E2C
-	.string " $"
-
-	.global gUnknown_08400E2E
-gUnknown_08400E2E: @ 8400E2E
-	.string "\l$"
-
-	.global gUnknown_08400E30
-gUnknown_08400E30: @ 8400E30
-	.string "\n$"
-
-	.global gUnknown_08400E32
-gUnknown_08400E32: @ 8400E32
-	.string "are$"
-
-	.global gUnknown_08400E36
-gUnknown_08400E36: @ 8400E36
-	.string "are$"
-
-	.global gUnknown_08400E3A
-gUnknown_08400E3A: @ 8400E3A
-	.string "Bad EGG$"
-
-	.global gUnknown_08400E42
-gUnknown_08400E42: @ 8400E42
-	.string "WALLY$"
-
-	.global gUnknown_08400E48
-gUnknown_08400E48: @ 8400E48
-	.string "{HIGHLIGHT TRANSPARENT}Win$"
-
-	.global gUnknown_08400E4F
-gUnknown_08400E4F: @ 8400E4F
-	.string "{HIGHLIGHT TRANSPARENT}Loss$"
-
-	.global gUnknown_08400E57
-gUnknown_08400E57: @ 8400E57
-	.string "{HIGHLIGHT TRANSPARENT}Tie$"
-
-	.global gUnknown_08400E5E
-gUnknown_08400E5E: @ 8400E5E
-	.string " is$"
-
-	.global gUnknown_08400E62
-gUnknown_08400E62: @ 8400E62
-	.string "’s$"
-	.string "a NORMAL move$"
-	.string "a FIGHTING move$"
-	.string "a FLYING move$"
-	.string "a POISON move$"
-	.string "a GROUND move$"
-	.string "a ROCK move$"
-	.string "a BUG move$"
-	.string "a GHOST move$"
-	.string "a STEEL move$"
-	.string "a ??? move$"
-	.string "a FIRE move$"
-	.string "a WATER move$"
-	.string "a GRASS move$"
-	.string "an ELECTRIC move$"
-	.string "a PSYCHIC move$"
-	.string "an ICE move$"
-	.string "a DRAGON move$"
-	.string "a DARK move$"
-	.string "   "
-
-	.global gUnknown_08400F58
-gUnknown_08400F58: @ 8400F58
-	.incbin "baserom.gba", 0x00400f58, 0x20
-
-	.global gUnknown_08400F78
-gUnknown_08400F78: @ 8400F78
-	.incbin "baserom.gba", 0x00400f78, 0x14
-
-	.global gUnknown_08400F8C
-gUnknown_08400F8C: @ 8400F8C
-	.incbin "baserom.gba", 0x00400f8c, 0x57c
-
-	.global gUnknown_08401508
-gUnknown_08401508: @ 8401508
-	.incbin "baserom.gba", 0x00401508, 0x144
-
-	.global gUnknown_0840164C
-gUnknown_0840164C: @ 840164C
-	.incbin "baserom.gba", 0x0040164c, 0x10
-
-	.global gUnknown_0840165C
-gUnknown_0840165C: @ 840165C
-	.incbin "baserom.gba", 0x0040165c, 0x18
-
-	.global gUnknown_08401674
-gUnknown_08401674: @ 8401674
-	.incbin "baserom.gba", 0x00401674, 0x48
+	.include "data/text/battle_strings.s"
 
 	.global gUnknown_084016BC
 gUnknown_084016BC: @ 84016BC
@@ -7730,7 +9429,16 @@ gUnknown_084017A8: @ 84017A8
 
 	.global gUnknown_084017B0
 gUnknown_084017B0: @ 84017B0
-	.incbin "baserom.gba", 0x004017b0, 0x28
+	.4byte OtherText_Summary
+	.4byte 0x0812265d
+	.4byte OtherText_Enter2
+	.4byte 0x08122695
+	.4byte OtherText_NoEntry
+	.4byte 0x08122771
+	.4byte UnknownText_Exit
+	.4byte 0x08122839
+	.4byte 0x02030001
+	.4byte 0x03000300
 
 	.global gUnknown_084017D8
 gUnknown_084017D8: @ 84017D8
@@ -7806,7 +9514,8 @@ gUnknown_08401D96: @ 8401D96
 
 	.global gUnknown_08401D9C
 gUnknown_08401D9C: @ 8401D9C
-	.incbin "baserom.gba", 0x00401d9c, 0x8
+	.4byte 0x08123eb9
+	.4byte 0x08123f45
 
 	.global gUnknown_08401DA4
 gUnknown_08401DA4: @ 8401DA4
@@ -7838,11 +9547,14 @@ gUnknown_08401E36: @ 8401E36
 
 	.global gUnknown_08401E40
 gUnknown_08401E40: @ 8401E40
-	.incbin "baserom.gba", 0x00401e40, 0x8
+	.4byte 0x081275a1
+	.4byte 0x081275c5
 
 	.global gUnknown_08401E48
 gUnknown_08401E48: @ 8401E48
-	.incbin "baserom.gba", 0x00401e48, 0xc
+	.4byte 0x08127da1
+	.4byte 0x08127dd1
+	.4byte 0x08127e31
 
 	.global gUnknown_08401E54
 gUnknown_08401E54: @ 8401E54
@@ -7854,7 +9566,142 @@ gUnknown_08401E5A: @ 8401E5A
 
 	.global gUnknown_08401E60
 gUnknown_08401E60: @ 8401E60
-	.incbin "baserom.gba", 0x00401e60, 0x220
+	.4byte 0x08128aa9
+	.4byte 0x08128af1
+	.4byte 0x08128b0d
+	.4byte 0x08128b4d
+	.4byte 0x08128b8d
+	.4byte 0x08128bcd
+	.4byte 0x08128c0d
+	.4byte 0x08128c2d
+	.4byte 0x08128c6d
+	.4byte 0x08128cad
+	.4byte 0x08128ced
+	.4byte 0x08128d2d
+	.4byte 0x08128d51
+	.4byte 0x08128d91
+	.4byte 0x08128dd1
+	.4byte 0x08128e11
+	.4byte 0x08128e51
+	.4byte 0x08128e91
+	.4byte 0x08128ed1
+	.4byte 0x08128f11
+	.4byte 0x08128f51
+	.4byte 0x08128f91
+	.4byte 0x08128fbd
+	.4byte 0x08129009
+	.4byte 0x08129055
+	.4byte 0x081290a1
+	.4byte 0x081290ed
+	.4byte 0x08129115
+	.4byte 0x08129161
+	.4byte 0x081291ad
+	.4byte 0x081291f9
+	.4byte 0x08129245
+	.4byte 0x08129265
+	.4byte 0x081292a5
+	.4byte 0x081292e5
+	.4byte 0x08129325
+	.4byte 0x08129369
+	.4byte 0x081293ad
+	.4byte 0x081293f1
+	.4byte 0x08129435
+	.4byte 0x08129471
+	.4byte 0x081294b1
+	.4byte 0x081294f1
+	.4byte 0x08129539
+	.4byte 0x08129579
+	.4byte 0x081295b9
+	.4byte 0x08129639
+	.4byte 0x0812967d
+	.4byte 0x081296fd
+	.4byte 0x08129741
+	.4byte 0x08129799
+	.4byte 0x081297d9
+	.4byte 0x08129819
+	.4byte 0x08129859
+	.4byte 0x08129899
+	.4byte 0x081298f1
+	.4byte 0x08129931
+	.4byte 0x08129971
+	.4byte 0x081299b1
+	.4byte 0x081299f1
+	.4byte 0x08129a45
+	.4byte 0x08129a85
+	.4byte 0x08129ac5
+	.4byte 0x08129b05
+	.4byte 0x08129b45
+	.4byte 0x08129bb9
+	.4byte 0x08129bfd
+	.4byte 0x08129c41
+	.4byte 0x08129cb5
+	.4byte 0x08129cf9
+	.4byte 0x08129d3d
+	.4byte 0x08129d99
+	.4byte 0x08129ddd
+	.4byte 0x08129e21
+	.4byte 0x08129e65
+	.4byte 0x08129ea5
+	.4byte 0x08129ee5
+	.4byte 0x08129f25
+	.4byte 0x08129f65
+	.4byte 0x08129fbd
+	.4byte 0x08129ffd
+	.4byte 0x0812a03d
+	.4byte 0x0812a07d
+	.4byte 0x0812a0bd
+	.4byte 0x0812a101
+	.4byte 0x0812a145
+	.4byte 0x0812a189
+	.4byte 0x0812a1c5
+	.4byte 0x0812a209
+	.4byte 0x0812a24d
+	.4byte 0x0812a295
+	.4byte 0x0812a2d9
+	.4byte 0x0812a31d
+	.4byte 0x0812a361
+	.4byte 0x0812a3a5
+	.4byte 0x0812a3e5
+	.4byte 0x0812a429
+	.4byte 0x0812a46d
+	.4byte 0x0812a4b1
+	.4byte 0x0812a4f5
+	.4byte 0x0812a539
+	.4byte 0x0812a579
+	.4byte 0x0812a5b9
+	.4byte 0x0812a5f9
+	.4byte 0x0812a639
+	.4byte 0x0812a675
+	.4byte 0x0812a6b5
+	.4byte 0x0812a6f5
+	.4byte 0x0812a735
+	.4byte 0x0812a775
+	.4byte 0x0812a7c5
+	.4byte 0x0812a805
+	.4byte 0x0812a845
+	.4byte 0x0812a86d
+	.4byte 0x0812a899
+	.4byte 0x0812a8cd
+	.4byte 0x0812a8fd
+	.4byte 0x0812a92d
+	.4byte 0x0812a979
+	.4byte 0x0812a9c5
+	.4byte 0x0812aa11
+	.4byte 0x0812aa5d
+	.4byte 0x0812aaad
+	.4byte 0x0812aafd
+	.4byte 0x0812ab4d
+	.4byte 0x0812ab9d
+	.4byte 0x0812abe9
+	.4byte 0x0812ac35
+	.4byte 0x0812ac55
+	.4byte 0x0812ac85
+	.4byte 0x0812acfd
+	.4byte 0x0812ad51
+	.4byte 0x0812ad95
+	.4byte 0x0812add9
+	.4byte 0x0812ae45
+	.4byte 0x0812ae89
 
 	.global gUnknown_08402080
 gUnknown_08402080: @ 8402080
@@ -8038,7 +9885,11 @@ gUnknown_0840612C: @ 840612C
 
 	.global gUnknown_08406134
 gUnknown_08406134: @ 8406134
-	.incbin "baserom.gba", 0x00406134, 0x14
+	.4byte OtherText_Coolness
+	.4byte OtherText_Toughness
+	.4byte OtherText_Smartness
+	.4byte OtherText_Cuteness
+	.4byte OtherText_Beauty
 
 	.global gUnknown_08406148
 gUnknown_08406148: @ 8406148
@@ -8058,15 +9909,81 @@ gUnknown_0840618C: @ 840618C
 
 	.global gUnknown_084061A4
 gUnknown_084061A4: @ 84061A4
-	.incbin "baserom.gba", 0x004061a4, 0xe4
+	.4byte 0x08137a11
+	.4byte 0x08138231
+	.4byte 0x0813823d
+	.4byte 0x08138c91
+	.4byte 0x08138c9d
+	.4byte 0x08138ca9
+	.4byte 0x08138cb5
+	.4byte 0x08138d39
+	.4byte 0x08138e05
+	.4byte 0x08138ed1
+	.4byte 0x08138edd
+	.4byte 0x08138ee9
+	.4byte 0x08138ef5
+	.4byte 0x08138f45
+	.4byte 0x08138fa1
+	.4byte 0x08138fad
+	.4byte 0x08139209
+	.4byte 0x08139275
+	.4byte 0x08139299
+	.4byte 0x08139379
+	.4byte 0x08139385
+	.4byte 0x081393ed
+	.4byte 0x0813942d
+	.4byte 0x08139439
+	.4byte 0x08139445
+	.4byte 0x08139545
+	.4byte 0x08139551
+	.4byte 0x0813955d
+	.4byte 0x08139569
+	.4byte 0x08139575
+	.4byte 0x08139581
+	.4byte 0x0813958d
+	.4byte 0x08139599
+	.4byte 0x081395a5
+	.4byte 0x081395b1
+	.4byte 0x081395bd
+	.4byte 0x081395c9
+	.4byte 0x081395d5
+	.4byte 0x081395e1
+	.4byte 0x081395ed
+	.4byte 0x081395f9
+	.4byte 0x08139605
+	.4byte 0x08139675
+	.4byte 0x08139681
+	.4byte 0x081396b1
+	.4byte 0x081396e1
+	.4byte 0x0813971d
+	.4byte 0x08139751
+	.4byte 0x08139aa1
+	.4byte 0x08139b21
+	.4byte 0x08139b2d
+	.4byte 0x08139b39
+	.4byte 0x08139b45
+	.4byte 0x08139ba1
+	.4byte 0x08139bad
+	.4byte 0x08139bb9
+	.4byte 0x08139c15
 
 	.global gUnknown_08406288
 gUnknown_08406288: @ 8406288
-	.incbin "baserom.gba", 0x00406288, 0x10
+	.4byte PCText_TakeOutItems
+	.4byte PCText_StoreItems
+	.4byte PCText_ThrowAwayItems
+	.4byte MenuText_GoBackToPrev
 
 	.global gUnknown_08406298
 gUnknown_08406298: @ 8406298
-	.incbin "baserom.gba", 0x00406298, 0x20
+	.4byte SecretBaseText_ItemStorage
+	.4byte 0x08139e41
+	.4byte PCText_Mailbox
+	.4byte 0x08139e6d
+	.4byte SecretBaseText_Decoration
+	.4byte 0x08139ed9
+	.4byte SecretBaseText_TurnOff
+	.4byte 0x08139ef9
 
 	.global gUnknown_084062B8
 gUnknown_084062B8: @ 84062B8
@@ -8078,15 +9995,24 @@ gUnknown_084062BC: @ 84062BC
 
 	.global gUnknown_084062C0
 gUnknown_084062C0: @ 84062C0
-	.incbin "baserom.gba", 0x004062c0, 0x20
+	.4byte PCText_WithdrawItem
+	.4byte 0x0813a119
+	.4byte PCText_DepositItem
+	.4byte 0x0813a0a1
+	.4byte PCText_TossItem
+	.4byte 0x0813a199
+	.4byte UnknownText_Exit
+	.4byte 0x0813a21d
 
 	.global gUnknown_084062E0
 gUnknown_084062E0: @ 84062E0
-	.incbin "baserom.gba", 0x004062e0, 0x8
+	.4byte 0x0813a83d
+	.4byte 0x0813a879
 
 	.global gUnknown_084062E8
 gUnknown_084062E8: @ 84062E8
-	.incbin "baserom.gba", 0x004062e8, 0x8
+	.4byte 0x0813b579
+	.4byte 0x0813b611
 
 	.global gUnknown_084062F0
 gUnknown_084062F0: @ 84062F0
@@ -8094,7 +10020,14 @@ gUnknown_084062F0: @ 84062F0
 
 	.global gUnknown_084062F8
 gUnknown_084062F8: @ 84062F8
-	.incbin "baserom.gba", 0x004062f8, 0x20
+	.4byte OtherText_Read
+	.4byte 0x0813b429
+	.4byte OtherText_MoveToBag
+	.4byte 0x0813b511
+	.4byte OtherText_Give
+	.4byte 0x0813b631
+	.4byte OtherText_Cancel2
+	.4byte 0x0813b735
 
 	.global gUnknown_08406318
 gUnknown_08406318: @ 8406318
@@ -8298,7 +10231,18 @@ gUnknown_0840B378: @ 840B378
 
 	.global gUnknown_0840B384
 gUnknown_0840B384: @ 840B384
-	.incbin "baserom.gba", 0x0040b384, 0x30
+	.4byte 0x08140931
+	.4byte 0x08140dc5
+	.4byte 0x08140c15
+	.4byte 0x08140ce9
+	.4byte 0x08141059
+	.4byte 0x08140c15
+	.4byte 0x08140b3d
+	.4byte 0x08140ce9
+	.4byte 0x08140f25
+	.4byte 0x08140a65
+	.4byte 0x08140dc5
+	.4byte 0x08141165
 
 	.global gUnknown_0840B3B4
 gUnknown_0840B3B4: @ 840B3B4
@@ -8338,11 +10282,32 @@ gUnknown_0840B57C: @ 840B57C
 
 	.global gUnknown_0840B5A0
 gUnknown_0840B5A0: @ 840B5A0
-	.incbin "baserom.gba", 0x0040b5a0, 0xfc
+Unknown_840B5A0:
+	.incbin "baserom.gba", 0x0040b5a0, 0x1C
+Unknown_840B5BC:
+	.incbin "baserom.gba", 0x0040b5bc, 0x20
+Unknown_840B5DC:
+	.incbin "baserom.gba", 0x0040b5dc, 0x20
+Unknown_840B5FC:
+	.incbin "baserom.gba", 0x0040b5fc, 0x20
+Unknown_840B61C:
+	.incbin "baserom.gba", 0x0040b61c, 0x20
+Unknown_840B63C:
+	.incbin "baserom.gba", 0x0040b63c, 0x20
+Unknown_840B65C:
+	.incbin "baserom.gba", 0x0040b65c, 0x20
+Unknown_840B67C:
+	.incbin "baserom.gba", 0x0040b67c, 0x20
 
 	.global gUnknown_0840B69C
 gUnknown_0840B69C: @ 840B69C
-	.incbin "baserom.gba", 0x0040b69c, 0x1c
+	.4byte Unknown_840B5BC
+	.4byte Unknown_840B5DC
+	.4byte Unknown_840B5FC
+	.4byte Unknown_840B61C
+	.4byte Unknown_840B63C
+	.4byte Unknown_840B65C
+	.4byte Unknown_840B67C
 
 	.global gUnknown_0840B6B8
 gUnknown_0840B6B8: @ 840B6B8
@@ -8376,7 +10341,7 @@ gUnknown_0840B85A: @ 840B85A
 gUnknown_0840B869: @ 840B869
 	.incbin "baserom.gba", 0x0040b869, 0xf
 
-		.global gUnknown_0840B878
+	.global gUnknown_0840B878
 gUnknown_0840B878:
 	.incbin "baserom.gba", 0x0040B878, 0xF @ unknown
 
@@ -8388,15 +10353,36 @@ gUnknown_0840C5F0: @ 840C5F0
 
 	.global gUnknown_0840CA00
 gUnknown_0840CA00: @ 840CA00
-	.incbin "baserom.gba", 0x0040ca00, 0x54
+Unknown_840CA00:
+	.incbin "baserom.gba", 0x0040ca00, 0x8
+Unknown_840CA08:
+	.incbin "baserom.gba", 0x0040ca08, 0x14
+Unknown_840CA1C:
+	.incbin "baserom.gba", 0x0040ca1c, 0x14
+Unknown_840CA30:
+	.incbin "baserom.gba", 0x0040ca30, 0x10
+Unknown_840CA40:
+	.incbin "baserom.gba", 0x0040ca40, 0x14
 
 	.global gUnknown_0840CA54
 gUnknown_0840CA54: @ 840CA54
-	.incbin "baserom.gba", 0x0040ca54, 0x40
+Unknown_840CA54:
+	.4byte Unknown_840CA08
+	.4byte Unknown_840CA1C
+	.4byte Unknown_840CA30
+	.4byte Unknown_840CA40
+Unknown_840CA64:
+	.incbin "baserom.gba", 0x0040ca64, 0x14
+Unknown_840CA78:
+	.incbin "baserom.gba", 0x0040ca78, 0x14
+Unknown_840CA8C:
+	.incbin "baserom.gba", 0x0040ca8c, 0x8
 
 	.global gUnknown_0840CA94
 gUnknown_0840CA94: @ 840CA94
-	.incbin "baserom.gba", 0x0040ca94, 0xc
+	.4byte Unknown_840CA64
+	.4byte Unknown_840CA78
+	.4byte Unknown_840CA8C
 
 	.global gUnknown_0840CAA0
 gUnknown_0840CAA0: @ 840CAA0
@@ -8480,82 +10466,114 @@ gExpandedPlaceholder_May: @ 840DCC0
 
 	.global gUnknown_0840DCC4
 gUnknown_0840DCC4: @ 840DCC4
+SystemText_Egg:
 	.string "EGG$"
 
 	.global gUnknown_0840DCC8
 gUnknown_0840DCC8: @ 840DCC8
+SystemText_Pokemon2:
 	.string "POKéMON$"
 
 	.global gUnknown_0840DCD0
 gUnknown_0840DCD0: @ 840DCD0
+SystemText_NewGame:
 	.string "NEW GAME$"
 
 	.global gUnknown_0840DCD9
 gUnknown_0840DCD9: @ 840DCD9
+SystemText_Continue:
 	.string "CONTINUE$"
 
 	.global gUnknown_0840DCE2
 gUnknown_0840DCE2: @ 840DCE2
+SystemText_Option2:
 	.string "OPTION$"
 
 	.global gUnknown_0840DCE9
 gUnknown_0840DCE9: @ 840DCE9
+SystemText_MysteryEvents:
 	.string "MYSTERY EVENTS$"
+SystemText_UpdatingSaveExternal:
 	.string "Updating save file using external\ndata. Please wait.$"
+SystemText_SaveUpdated:
 	.string "The save file has been updated.$"
+SystemText_SaveUpdatedExchangeBackup:
 	.string "The save file has been updated.\pFurther game data cannot be saved\nto the backup memory.\pPlease exchange the backup memory.\pFor details, please contact the\nNintendo Service Center.$"
+SystemText_SaveNotUpdated:
 	.string "The save file could not be updated.\pPlease exchange the backup\nmemory.\pFor details, please contact the\nNintendo Service Center.$"
 
 	.global gUnknown_0840DE81
 gUnknown_0840DE81: @ 840DE81
+SystemText_SaveCorrupt:
 	.string "The save file is corrupt. The\nprevious save file will be loaded.$"
 
 	.global gUnknown_0840DEC2
 gUnknown_0840DEC2: @ 840DEC2
+SystemText_SaveDeleted:
 	.string " The save file has been deleted...$" @ there's a blank spot at the beginning of this string. No idea why.
 
 	.global gUnknown_0840DEE5
 gUnknown_0840DEE5: @ 840DEE5
+SystemText_1MSubCircuitNotInstalled:
 	.string "The 1M sub-circuit board is\nnot installed.$"
 
 	.global gUnknown_0840DF10
 gUnknown_0840DF10: @ 840DF10
+SystemText_InternalBatteryIsDry:
 	.string "The internal battery has run dry.\nThe game can be played.\pHowever, clock-based events will\nno longer occur.$"
 
 	.global gUnknown_0840DF7C
 gUnknown_0840DF7C: @ 840DF7C
+SystemText_Player2:
 	.string "PLAYER$"
 
 	.global gUnknown_0840DF83
 gUnknown_0840DF83: @ 840DF83
+SystemText_Pokedex2:
 	.string "POKéDEX$"
 
 	.global gUnknown_0840DF8B
 gUnknown_0840DF8B: @ 840DF8B
+SystemText_Time:
 	.string "TIME$"
 
 	.global gUnknown_0840DF90
 gUnknown_0840DF90: @ 840DF90
+SystemText_Badges:
 	.string "BADGES$"
+SystemText_IntroBoy:
 	.string "BOY$"
+SystemText_IntroGirl:
 	.string "GIRL$"
+SystemText_IntroNewName:
 	.string "NEW NAME$"
+SystemText_IntroBoyNameLandon:
 	.string "LANDON$"
+SystemText_IntroBoyNameTerry:
 	.string "TERRY$"
+SystemText_IntroBoyNameSeth:
 	.string "SETH$"
+SystemText_IntroBoyNameTom:
 	.string "TOM$"
+SystemText_IntroGirlNameTerra:
 	.string "TERRA$"
+SystemText_IntroGirlNameKimmy:
 	.string "KIMMY$"
+SystemText_IntroGirlNameNicola:
 	.string "NICOLA$"
+SystemText_IntroGirlNameSara:
 	.string "SARA$"
+SystemText_IntroWeCall:
 	.string "This is what we call\na POKéMON.$"
 
 	.global gUnknown_0840DFF7
 gUnknown_0840DFF7: @ 840DFF7
+SystemText_NewPara:
 	.string "\p$"
 
 	.global gUnknown_0840DFF9
 gUnknown_0840DFF9: @ 840DFF9
+DexText_UnknownPoke:
 	.string "            ????? POKéMON$" @ why 12 spaces?
 
 	.global gUnknown_0840E013
@@ -8564,7 +10582,9 @@ gUnknown_0840E013: @ 840E013
 
 	.global gUnknown_0840E01D
 gUnknown_0840E01D: @ 840E01D
+DexText_UnknownWeight:
 	.string "????.? lbs.$"
+DexText_Terminator4:
 	.string "$"
 
 	.global gUnknown_0840E02A
@@ -8573,1669 +10593,2464 @@ gUnknown_0840E02A: @ 840E02A
 
 	.global gUnknown_0840E035
 gUnknown_0840E035: @ 840E035
+DexText_SizeComparedTo:
 	.string "SIZE COMPARED TO $"
 
 	.global gUnknown_0840E047
 gUnknown_0840E047: @ 840E047
+DexText_RegisterComplete:
 	.string "POKéDEX registration completed.$"
 
 	.global gUnknown_0840E067
 gUnknown_0840E067: @ 840E067
+DexText_Searching:
 	.string "Searching...\nPlease wait.$"
 
 	.global gUnknown_0840E081
 gUnknown_0840E081: @ 840E081
+DexText_SearchComplete:
 	.string "Search completed.$"
 
 	.global gUnknown_0840E093
 gUnknown_0840E093: @ 840E093
+DexText_NoMatching:
 	.string "No matching POKéMON were found.$"
+DexText_SearchForPoke:
 	.string "Search for POKéMON based on\nselected parameters.$"
+DexText_SwitchDex:
 	.string "Switch POKéDEX listings.$"
+DexText_ReturnToDex:
 	.string "Return to the POKéDEX.$"
+DexText_SelectDexMode:
 	.string "Select the POKéDEX mode.$"
+DexText_SelectDexList:
 	.string "Select the POKéDEX listing mode.$"
+DexText_ListByABC:
 	.string "List by the first letter in the name.\n/Spotted POKéMON only.$"
+DexText_ListByColor:
 	.string "List by body color.\n/Spotted POKéMON only.$"
+DexText_ListByType:
 	.string "List by type.\n/Owned POKéMON only.$"
+DexText_ExecuteSearchSwitch:
 	.string "Execute search/switch.$"
+DexText_HoennDex:
 	.string "HOENN DEX$"
+DexText_NationalDex:
 	.string "NATIONAL DEX$"
+DexText_NumericalMode:
 	.string "NUMERICAL MODE$"
+DexText_ABCMode:
 	.string "A TO Z MODE$"
+DexText_HeaviestMode:
 	.string "HEAVIEST MODE$"
+DexText_LightestMode:
 	.string "LIGHTEST MODE$"
+DexText_TallestMode:
 	.string "TALLEST MODE$"
+DexText_SmallestMode:
 	.string "SMALLEST MODE$"
+DexText_ABC:
 	.string "ABC$"
+DexText_DEF:
 	.string "DEF$"
+DexText_GHI:
 	.string "GHI$"
+DexText_JKL:
 	.string "JKL$"
+DexText_MNO:
 	.string "MNO$"
+DexText_PQR:
 	.string "PQR$"
+DexText_STU:
 	.string "STU$"
+DexText_VWX:
 	.string "VWX$"
+DexText_YZ:
 	.string "YZ$"
+DexText_Red:
 	.string "RED$"
+DexText_Blue:
 	.string "BLUE$"
+DexText_Yellow:
 	.string "YELLOW$"
+DexText_Green:
 	.string "GREEN$"
+DexText_Black:
 	.string "BLACK$"
+DexText_Brown:
 	.string "BROWN$"
+DexText_Purple:
 	.string "PURPLE$"
+DexText_Gray:
 	.string "GRAY$"
+DexText_White:
 	.string "WHITE$"
+DexText_Pink:
 	.string "PINK$"
+DexText_HoennDex2:
 	.string "HOENN region’s POKéDEX$"
+DexText_NationalDex2:
 	.string "National edition POKéDEX$"
+DexText_ListByNumber:
 	.string "POKéMON are listed according to their\nnumber.$"
+DexText_ListByABC2:
 	.string "Spotted and owned POKéMON are listed\nalphabetically.$"
+DexText_ListByHeavyToLightest:
 	.string "Owned POKéMON are listed from the\nheaviest to the lightest.$"
+DexText_ListByLightToHeaviest:
 	.string "Owned POKéMON are listed from the\nlightest to the heaviest.$"
+DexText_ListByTallToSmallest:
 	.string "Owned POKéMON are listed from the\ntallest to the smallest.$"
+DexText_ListBySmallToTallest:
 	.string "Owned POKéMON are listed from the\nsmallest to the tallest.$"
+DexText_Terminator5:
 	.string "$"
+DexText_DontSpecify:
 	.string "DON’T SPECIFY.$"
+DexText_None:
 	.string "NONE$"
+DexText_RightPointingTriangle:
 	.string "▶$" @ right-pointing triangle
+DexText_Terminator6:
 	.string " $"
 
 	.global gUnknown_0840E44F
 gUnknown_0840E44F: @ 840E44F
+MenuText_WelcomeToHOF:
 	.string "Welcome to the HALL OF FAME!$"
+MenuText_HOFDexRate:
 	.string "Spotted POKéMON: {STR_VAR_1}!\nOwned POKéMON: {STR_VAR_2}!\pPROF. BIRCH’s POKéDEX rating!\pPROF. BIRCH: Let’s see...\p$"
 
 	.global gUnknown_0840E4CD
 gUnknown_0840E4CD: @ 840E4CD
+MenuText_HOFSaving:
 	.string "SAVING...\nDON’T TURN OFF THE POWER.$"
 
 	.global gUnknown_0840E4F1
 gUnknown_0840E4F1: @ 840E4F1
+MenuText_HOFCorrupt:
 	.string "The HALL OF FAME data is corrupt.$"
 
 	.global gUnknown_0840E513
 gUnknown_0840E513: @ 840E513
+MenuText_HOFNumber:
 	.string "HALL OF FAME No. $"
 
 	.global gUnknown_0840E525
 gUnknown_0840E525: @ 840E525
+MenuText_HOFCongratulations:
 	.string "LEAGUE CHAMPION!\nCONGRATULATIONS!$"
 
 	.global gUnknown_0840E547
 gUnknown_0840E547: @ 840E547
+OtherText_Number2:
 	.string "No. $"
 
 	.global gUnknown_0840E54C
 gUnknown_0840E54C: @ 840E54C
+OtherText_Level3:
 	.string "Lv. $"
 
 	.global gUnknown_0840E551
 gUnknown_0840E551: @ 840E551
+OtherText_IDNumber:
 	.string "IDNo. /$"
 
 	.global gUnknown_0840E559
 gUnknown_0840E559: @ 840E559
+OtherText_Name:
 	.string "NAME /$"
 
 	.global gUnknown_0840E560
 gUnknown_0840E560: @ 840E560
+OtherText_IDNumber2:
 	.string "IDNo. /$" @ identical string for no reason?
 
 	.global gUnknown_0840E568
 gUnknown_0840E568: @ 840E568
+OtherText_BirchInTrouble:
 	.string "{HIGHLIGHT WHITE2}{COLOR DARK_GREY}PROF. BIRCH is in trouble!\nRelease a POKéMON and rescue him!$"
 
 	.global gUnknown_0840E5AB
 gUnknown_0840E5AB: @ 840E5AB
+OtherText_DoYouChoosePoke:
 	.string "{HIGHLIGHT WHITE2}{COLOR DARK_GREY}Do you choose this POKéMON?$"
 
 	.global gUnknown_0840E5CD
 gUnknown_0840E5CD: @ 840E5CD
+OtherText_Poke:
 	.string "POKéMON$"
 
 	.global gUnknown_0840E5D5
 gUnknown_0840E5D5: @ 840E5D5
+SystemText_SaveErrorExchangeBackup:
 	.string "Save error.\pPlease exchange the\nbackup memory.$"
 
 	.global gUnknown_0840E604
 gUnknown_0840E604: @ 840E604
+OtherText_FlyToWhere:
 	.string "FLY to where?$"
+OtherText_Use:
 	.string "USE$"
+OtherText_Toss:
 	.string "TOSS$"
+OtherText_Register:
 	.string "REGISTER$"
+OtherText_Give2:
 	.string "GIVE$"
+OtherText_CheckTag:
 	.string "CHECK TAG$"
+OtherText_Confirm:
 	.string "CONFIRM$"
 
 	.global gUnknown_0840E63B
 gUnknown_0840E63B: @ 840E63B
+OtherText_Walk:
 	.string "WALK$"
 
 	.global gUnknown_0840E640
 gUnknown_0840E640: @ 840E640
+UnknownText_Exit:
 	.string "EXIT$"
 
 	.global gUnknown_0840E645
 gUnknown_0840E645: @ 840E645
+OtherText_Cancel2:
 	.string "CANCEL$"
 
 	.global gUnknown_0840E64C
 gUnknown_0840E64C: @ 840E64C
+OtherText_Terminator19:
 	.string "$"
+OtherText_Cancel3:
 	.string "CANCEL$"
+OtherText_Item:
 	.string "ITEM$"
+OtherText_Mail:
 	.string "MAIL$"
+OtherText_Take2:
 	.string "TAKE$"
+OtherText_Store:
 	.string "STORE$"
 
 	.global gUnknown_0840E669
 gUnknown_0840E669: @ 840E669
+OtherText_Check:
 	.string "CHECK$"
 
 	.global gUnknown_0840E66F
 gUnknown_0840E66F: @ 840E66F
+OtherText_None:
 	.string "NONE$"
 
 	.global gUnknown_0840E674
 gUnknown_0840E674: @ 840E674
+OtherText_ThreeQuestions2:
 	.string "???$"
 
 	.global gUnknown_0840E678
 gUnknown_0840E678: @ 840E678
+OtherText_FiveQuestions:
 	.string "?????$"
+OtherText_Backslash:
 	.string "/$"
 
 	.global gUnknown_0840E680
 gUnknown_0840E680: @ 840E680
+OtherText_OneDash:
 	.string "-$"
 
 	.global gUnknown_0840E682
 gUnknown_0840E682: @ 840E682
+OtherText_TwoDashes:
 	.string "--$"
 
 	.global gUnknown_0840E685
 gUnknown_0840E685: @ 840E685
+OtherText_ThreeDashes2:
 	.string "---$"
 
 	.global gUnknown_0840E689
 gUnknown_0840E689: @ 840E689
+OtherText_MaleSymbol2:
 	.string "♂$"
 
 	.global gUnknown_0840E68B
 gUnknown_0840E68B: @ 840E68B
+OtherText_FemaleSymbol2:
 	.string "♀$"
+OtherText_Level2:
 	.string "Lv.$"
 
 	.global gUnknown_0840E691
 gUnknown_0840E691: @ 840E691
+OtherText_TallPlus:
 	.string "{TALL_PLUS}$"
+OtherText_RightArrow:
 	.string "{RIGHT_ARROW}$"
 
 	.global gUnknown_0840E697
 gUnknown_0840E697: @ 840E697
+MenuText_GoBackToPrev:
 	.string "Go back to the\nprevious menu.$"
 
 	.global gUnknown_0840E6B5
 gUnknown_0840E6B5: @ 840E6B5
+OtherText_WhatWillYouDo:
 	.string "What would you like to do?$"
 
 	.global gUnknown_0840E6D0
 gUnknown_0840E6D0: @ 840E6D0
+OtherText_xString1:
 	.string "×{STR_VAR_1}$"
 
 	.global gUnknown_0840E6D4
 gUnknown_0840E6D4: @ 840E6D4
+OtherText_Berry2:
 	.string " BERRY$"
 
 	.global gUnknown_0840E6DB
 gUnknown_0840E6DB: @ 840E6DB
+OtherText_Coins2:
 	.string "{STR_VAR_1} COINS$"
 
 	.global gUnknown_0840E6E4
 gUnknown_0840E6E4: @ 840E6E4
+OtherText_CloseBag:
 	.string "CLOSE BAG$"
+OtherText_TheField3:
 	.string "the field.$"
+OtherText_TheBattle:
 	.string "the battle.$"
+OtherText_ThePokeList:
 	.string "the POKéMON LIST.$"
+OtherText_TheShop:
 	.string "the shop.$"
+OtherText_TheField:
 	.string "the field.$"
+OtherText_TheField2:
 	.string "the field.$"
+OtherText_ThePC:
 	.string "the PC.$"
-	.string " "
 
+	.align 1
 	.global gUnknown_0840E740
 gUnknown_0840E740: @ 840E740
-	.incbin "baserom.gba", 0x0040e740, 0x1c @ not text, probably pointers?
-
+	.4byte OtherText_TheField3
+	.4byte OtherText_TheBattle
+	.4byte OtherText_ThePokeList
+	.4byte OtherText_TheShop
+	.4byte OtherText_TheField
+	.4byte OtherText_TheField2
+	.4byte OtherText_ThePC
+	
 	.global gUnknown_0840E75C
 gUnknown_0840E75C: @ 840E75C
+OtherText_ReturnTo:
 	.string "Return to$"
 
 	.global gUnknown_0840E766
 gUnknown_0840E766: @ 840E766
+OtherText_WhatWillYouDo2:
 	.string "What would you\nlike to do?$"
 
 	.global gUnknown_0840E781
 gUnknown_0840E781: @ 840E781
+OtherText_CantWriteMail:
 	.string "You can’t write\nMAIL here.$"
 
 	.global gUnknown_0840E79C
 gUnknown_0840E79C: @ 840E79C
+OtherText_NoPokemon:
 	.string "There is no\nPOKéMON.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840E7B3
 gUnknown_0840E7B3: @ 840E7B3
+OtherText_SwitchWhichItem:
 	.string "Switch with which\nitem?$"
 
 	.global gUnknown_0840E7CB
 gUnknown_0840E7CB: @ 840E7CB
+OtherText_CantBeHeld:
 	.string "{STR_VAR_1} can’t be held.$"
 
 	.global gUnknown_0840E7DD
 gUnknown_0840E7DD: @ 840E7DD
+OtherText_CantBeHeldHere:
 	.string "{STR_VAR_1} can’t be held here.$"
 
 	.global gUnknown_0840E7F4
 gUnknown_0840E7F4: @ 840E7F4
+OtherText_HowManyToDeposit:
 	.string "How many do you\nwant to deposit?$"
 
 	.global gUnknown_0840E815
 gUnknown_0840E815: @ 840E815
+OtherText_DepositedItems:
 	.string "Deposited {STR_VAR_2}\n{STR_VAR_1}(s).$"
 
 	.global gUnknown_0840E829
 gUnknown_0840E829: @ 840E829
+OtherText_NoRoomForItems:
 	.string "There’s no room to\nstore items.$"
 
 	.global gUnknown_0840E849
 gUnknown_0840E849: @ 840E849
+OtherText_CantStoreSomeoneItem:
 	.string "You can’t store\nsomeone else’s item\nin the PC.$"
 
 	.global gUnknown_0840E878
 gUnknown_0840E878: @ 840E878
+OtherText_TooImportant:
 	.string "That’s much too\nimportant to toss\nout!$"
 
 	.global gUnknown_0840E89F
 gUnknown_0840E89F: @ 840E89F
+OtherText_HowManyToToss:
 	.string "Toss out how many?$"
 
 	.global gUnknown_0840E8B2
 gUnknown_0840E8B2: @ 840E8B2
+OtherText_ThrewAwayItem:
 	.string "Threw away {STR_VAR_2}\n{STR_VAR_1}(s).$"
 
 	.global gUnknown_0840E8C7
 gUnknown_0840E8C7: @ 840E8C7
+OtherText_OkayToThrowAwayPrompt:
 	.string "Is it okay to\nthrow away {STR_VAR_2}\n{STR_VAR_1}(s)?$"
 
 	.global gUnknown_0840E8EA
 gUnknown_0840E8EA: @ 840E8EA
+OtherText_DadsAdvice:
 	.string "DAD’s advice...\n{PLAYER}, there’s a time and place for\leverything!{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840E929
 gUnknown_0840E929: @ 840E929
+OtherText_CantGetOffBike:
 	.string "You can’t dismount your BIKE here.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840E94E
 gUnknown_0840E94E: @ 840E94E
+OtherText_ItemfinderResponding:
 	.string "Oh!\nThe machine’s responding!\pThere’s an item buried around here!{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840E992
 gUnknown_0840E992: @ 840E992
+OtherText_ItemfinderFoundItem:
 	.string "The machine’s indicating something\nright underfoot!{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840E9C8
 gUnknown_0840E9C8: @ 840E9C8
+OtherText_NoResponse:
 	.string "... ... ... ... Nope!\nThere’s no response.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840E9F5
 gUnknown_0840E9F5: @ 840E9F5
+OtherText_Coins3:
 	.string "Your COINS:\n{STR_VAR_1}{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840EA06
 gUnknown_0840EA06: @ 840EA06
+OtherText_BootedTM:
 	.string "Booted up a TM.$"
 
 	.global gUnknown_0840EA16
 gUnknown_0840EA16: @ 840EA16
+OtherText_BootedHM:
 	.string "Booted up an HM.$"
 
 	.global gUnknown_0840EA27
 gUnknown_0840EA27: @ 840EA27
+OtherText_ContainsMove:
 	.string "It contained\n{STR_VAR_1}.\pTeach {STR_VAR_1}\nto a POKéMON?$"
 
 	.global gUnknown_0840EA4F
 gUnknown_0840EA4F: @ 840EA4F
+OtherText_UsedItem:
 	.string "{PLAYER} used the\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840EA61
 gUnknown_0840EA61: @ 840EA61
+OtherText_RepelLingers:
 	.string "But the effects of a REPEL lingered\nfrom earlier.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840EA95
 gUnknown_0840EA95: @ 840EA95
+OtherText_UsedFlute:
 	.string "{PLAYER} used the\n{STR_VAR_2}.\pWild POKéMON will be lured.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840EAC3
 gUnknown_0840EAC3: @ 840EAC3
+OtherText_UsedRepel:
 	.string "{PLAYER} used the\n{STR_VAR_2}.\pWild POKéMON will be repelled.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840EAF4
 gUnknown_0840EAF4: @ 840EAF4
+OtherText_BoxIsFull:
 	.string "The BOX is full.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840EB07
 gUnknown_0840EB07: @ 840EB07
+OtherText_Size:
 	.string "SIZE /$"
 
 	.global gUnknown_0840EB0E
 gUnknown_0840EB0E: @ 840EB0E
+OtherText_Firm:
 	.string "FIRM /$"
 
 	.global gUnknown_0840EB15
 gUnknown_0840EB15: @ 840EB15
+ContestStatsText_Unknown1:
 	.string "{STR_VAR_1}.{STR_VAR_2}”$"
+ContestStatsText_VerySoft:
 	.string "Very soft$"
+ContestStatsText_Soft:
 	.string "Soft$"
+ContestStatsText_Hard:
 	.string "Hard$"
+ContestStatsText_VeryHard:
 	.string "Very hard$"
+ContestStatsText_SuperHard:
 	.string "Super hard$"
+ContestStatsText_RedPokeBlock:
 	.string "RED {POKEBLOCK}$"
+ContestStatsText_BluePokeBlock:
 	.string "BLUE {POKEBLOCK}$"
+ContestStatsText_PinkPokeBlock:
 	.string "PINK {POKEBLOCK}$"
+ContestStatsText_GreenPokeBlock:
 	.string "GREEN {POKEBLOCK}$"
+ContestStatsText_YellowPokeBlock:
 	.string "YELLOW {POKEBLOCK}$"
+ContestStatsText_PurplePokeBlock:
 	.string "PURPLE {POKEBLOCK}$"
+ContestStatsText_IndigoPokeBlock:
 	.string "INDIGO {POKEBLOCK}$"
+ContestStatsText_BrownPokeBlock:
 	.string "BROWN {POKEBLOCK}$"
+ContestStatsText_LiteBluePokeBlock:
 	.string "LITEBLUE {POKEBLOCK}$"
+ContestStatsText_OlivePokeBlock:
 	.string "OLIVE {POKEBLOCK}$"
+ContestStatsText_GrayPokeBlock:
 	.string "GRAY {POKEBLOCK}$"
+ContestStatsText_BlackPokeBlock:
 	.string "BLACK {POKEBLOCK}$"
+ContestStatsText_WhitePokeBlock:
 	.string "WHITE {POKEBLOCK}$"
+ContestStatsText_GoldPokeBlock:
 	.string "GOLD {POKEBLOCK}$"
 
 	.global gUnknown_0840EBED
 gUnknown_0840EBED: @ 840EBED
+ContestStatsText_Spicy:
 	.string "SPICY$"
 
 	.global gUnknown_0840EBF3
 gUnknown_0840EBF3: @ 840EBF3
+ContestStatsText_Dry:
 	.string "DRY$"
 
 	.global gUnknown_0840EBF7
 gUnknown_0840EBF7: @ 840EBF7
+ContestStatsText_Sweet:
 	.string "SWEET$"
 
 	.global gUnknown_0840EBFD
 gUnknown_0840EBFD: @ 840EBFD
+ContestStatsText_Bitter:
 	.string "BITTER$"
 
 	.global gUnknown_0840EC04
 gUnknown_0840EC04: @ 840EC04
+ContestStatsText_Sour:
 	.string "SOUR$"
+ContestStatsText_Tasty:
 	.string "TASTY$"
+ContestStatsText_Feel:
 	.string "FEEL$"
 
 	.global gUnknown_0840EC14
 gUnknown_0840EC14: @ 840EC14
+ContestStatsText_StowCase:
 	.string "Stow CASE.$"
 
 	.global gUnknown_0840EC1F
 gUnknown_0840EC1F: @ 840EC1F
+ContestStatsText_ThrowAwayPrompt:
 	.string "Throw away this\n{STR_VAR_1}?$"
 
 	.global gUnknown_0840EC33
 gUnknown_0840EC33: @ 840EC33
+ContestStatsText_WasThrownAway:
 	.string "The {STR_VAR_1}\nwas thrown away.$"
 
 	.global gUnknown_0840EC4B
 gUnknown_0840EC4B: @ 840EC4B
+ContestStatsText_NormallyAte:
 	.string "{STR_VAR_1} ate the\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840EC5C
 gUnknown_0840EC5C: @ 840EC5C
+ContestStatsText_HappilyAte:
 	.string "{STR_VAR_1} happily ate the\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840EC75
 gUnknown_0840EC75: @ 840EC75
+ContestStatsText_DisdainfullyAte:
 	.string "{STR_VAR_1} disdainfully ate the\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}$"
+ContestStatsText_Buy: @ i have a feeling contest things still call these
 	.string "BUY$"
+ContestStatsText_Sell:
 	.string "SELL$"
+ContestStatsText_Quit2:
 	.string "QUIT$"
 
 	.global gUnknown_0840ECA1
 gUnknown_0840ECA1: @ 840ECA1
+OtherText_QuitShopping:
 	.string "Quit shopping.$"
 
 	.global gUnknown_0840ECB0
 gUnknown_0840ECB0: @ 840ECB0
+OtherText_HowManyYouWant:
 	.string "{STR_VAR_1}? Certainly.\nHow many would you like?$"
 
 	.global gUnknown_0840ECD8
 gUnknown_0840ECD8: @ 840ECD8
+OtherText_ThatWillBe:
 	.string "{STR_VAR_1}? And you wanted {STR_VAR_2}?\nThat will be ¥{STR_VAR_3}.$"
 
 	.global gUnknown_0840ED01
 gUnknown_0840ED01: @ 840ED01
+OtherText_ThatWillBe2:
 	.string "{STR_VAR_1}, is it?\nThat’ll be ¥{STR_VAR_2}. Do you want it?$"
 
 	.global gUnknown_0840ED2C
 gUnknown_0840ED2C: @ 840ED2C
+OtherText_ThatWillBe3:
 	.string "You wanted {STR_VAR_1}?\nThat’ll be ¥{STR_VAR_2}. Will that be okay?$"
 
 	.global gUnknown_0840ED5E
 gUnknown_0840ED5E: @ 840ED5E
+OtherText_HereYouGo:
 	.string "Here you go!\nThank you very much.$"
 
 	.global gUnknown_0840ED80
 gUnknown_0840ED80: @ 840ED80
+OtherText_HereYouGo2:
 	.string "Thank you!\nI’ll send it to your home PC.$"
 
 	.global gUnknown_0840EDA9
 gUnknown_0840EDA9: @ 840EDA9
+OtherText_HereYouGo3:
 	.string "Thanks!\nI’ll send it to your PC at home.$"
 
 	.global gUnknown_0840EDD2
 gUnknown_0840EDD2: @ 840EDD2
+OtherText_NotEnoughMoney:
 	.string "You don’t have enough money.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840EDF1
 gUnknown_0840EDF1: @ 840EDF1
+OtherText_NoRoomFor:
 	.string "You have no more room for items.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840EE14
 gUnknown_0840EE14: @ 840EE14
+OtherText_SpaceForIsFull:
 	.string "The space for {STR_VAR_1} is full.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840EE30
 gUnknown_0840EE30: @ 840EE30
+OtherText_AnythingElse:
 	.string "Is there anything else I can help\nyou with?$"
 
 	.global gUnknown_0840EE5C
 gUnknown_0840EE5C: @ 840EE5C
+OtherText_CanIHelpYou:
 	.string "Can I help you with anything else?$"
 
 	.global gUnknown_0840EE7F
 gUnknown_0840EE7F: @ 840EE7F
+OtherText_FreePremierBall:
 	.string "I’ll throw in a PREMIER BALL, too.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840EEA4
 gUnknown_0840EEA4: @ 840EEA4
+OtherText_CantBuyThat:
 	.string "{STR_VAR_2}? Oh, no.\nI can’t buy that.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840EEC4
 gUnknown_0840EEC4: @ 840EEC4
+OtherText_HowManyToSell:
 	.string "{STR_VAR_2}?\nHow many would you like to sell?$"
 
 	.global gUnknown_0840EEE9
 gUnknown_0840EEE9: @ 840EEE9
+OtherText_CanPay:
 	.string "I can pay ¥{STR_VAR_1}.\nWould that be okay?$"
 
 	.global gUnknown_0840EF0C
 gUnknown_0840EF0C: @ 840EF0C
+OtherText_SoldItem:
 	.string "Turned over the {STR_VAR_2}\nand received ¥{STR_VAR_1}.$"
+OtherText_Money:
 	.string "¥{STR_VAR_1}$"
+OtherText_Shift:
 	.string "SHIFT$"
+OtherText_SendOut:
 	.string "SEND OUT$"
+OtherText_Switch2:
 	.string "SWITCH$"
+OtherText_Summary:
 	.string "SUMMARY$"
+OtherText_Moves:
 	.string "MOVES$"
+OtherText_Enter2:
 	.string "ENTER$"
+OtherText_NoEntry:
 	.string "NO ENTRY$"
+OtherText_Take:
 	.string "TAKE$"
+OtherText_Read2:
 	.string "READ$"
 
 	.global gUnknown_0840EF72
 gUnknown_0840EF72: @ 840EF72
+OtherText_Hp2:
 	.string "HP$"
 
 	.global gUnknown_0840EF75
 gUnknown_0840EF75: @ 840EF75
+OtherText_SpAtk2:
 	.string "SP. ATK$"
 
 	.global gUnknown_0840EF7D
 gUnknown_0840EF7D: @ 840EF7D
+OtherText_SpDef2:
 	.string "SP. DEF$"
 
 	.global gUnknown_0840EF85
 gUnknown_0840EF85: @ 840EF85
+OtherText_WontHaveAnyEffect:
 	.string "It won’t have any effect.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840EFA1
 gUnknown_0840EFA1: @ 840EFA1
+OtherText_CantUseItemOnPoke:
 	.string "This item can’t be used on\nthat POKéMON.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840EFCC
 gUnknown_0840EFCC: @ 840EFCC
+OtherText_CantBeSwitched:
 	.string "{STR_VAR_1} can’t be switched\nout!{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840EFE8
 gUnknown_0840EFE8: @ 840EFE8
+OtherText_AlreadyBattle:
 	.string "{STR_VAR_1} is already\nin battle!{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F003
 gUnknown_0840F003: @ 840F003
+OtherText_AlreadySelected:
 	.string "{STR_VAR_1} has already been\nselected.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F023
 gUnknown_0840F023: @ 840F023
+OtherText_NoEnergyLeft:
 	.string "{STR_VAR_1} has no energy\nleft to battle!{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F046
 gUnknown_0840F046: @ 840F046
+OtherText_CantSwitchPokeWithYours:
 	.string "You can’t switch {STR_VAR_1}’s\nPOKéMON with one of yours!{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F079
 gUnknown_0840F079: @ 840F079
+OtherText_EGGCantBattle:
 	.string "An EGG can’t battle!{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F090
 gUnknown_0840F090: @ 840F090
+OtherText_CantBeUsedBadge:
 	.string "This can’t be used until a new\nBADGE is obtained.$"
 
 	.global gUnknown_0840F0C2
 gUnknown_0840F0C2: @ 840F0C2
+OtherText_NoMoreThreePoke:
 	.string "No more than three POKéMON\nmay enter.$"
 
 	.global gUnknown_0840F0E8
 gUnknown_0840F0E8: @ 840F0E8
+OtherText_SendRemovedMailPrompt:
 	.string "Send the removed MAIL to\nyour PC?$"
 
 	.global gUnknown_0840F10A
 gUnknown_0840F10A: @ 840F10A
+OtherText_MailWasSent:
 	.string "The MAIL was sent to your PC.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F12A
 gUnknown_0840F12A: @ 840F12A
+OtherText_MailboxIsFull:
 	.string "Your PC’s MAILBOX is full.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F147
 gUnknown_0840F147: @ 840F147
+OtherText_MailRemovedMessageLost:
 	.string "If the MAIL is removed, the\nmessage will be lost. Okay?$"
 
 	.global gUnknown_0840F17F
 gUnknown_0840F17F: @ 840F17F
+OtherText_MailMustBeRemoved:
 	.string "MAIL must be removed before\nholding an item.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F1AE
 gUnknown_0840F1AE: @ 840F1AE
+OtherText_WasGivenToHold:
 	.string "{STR_VAR_1} was given the\n{STR_VAR_2} to hold.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F1CD
 gUnknown_0840F1CD: @ 840F1CD
+OtherText_AlreadyHolding:
 	.string "{STR_VAR_1} is already holding\none {STR_VAR_2}.\pWould you like to switch the\ntwo items?$"
 
 	.global gUnknown_0840F213
 gUnknown_0840F213: @ 840F213
+OtherText_NotHoldingAnything:
 	.string "{STR_VAR_1} isn’t\nholding anything.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F230
 gUnknown_0840F230: @ 840F230
+OtherText_ReceivedTheThingFrom:
 	.string "Received the {STR_VAR_2}\nfrom {STR_VAR_1}.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F24B
 gUnknown_0840F24B: @ 840F24B
+OtherText_MailTaken:
 	.string "MAIL was taken from the\nPOKéMON.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F26E
 gUnknown_0840F26E: @ 840F26E
+OtherText_TakenAndReplaced:
 	.string "The {STR_VAR_2} was taken and\nreplaced with the {STR_VAR_1}.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F29B
 gUnknown_0840F29B: @ 840F29B
+OtherText_PokeHoldingItemCantMail:
 	.string "This POKéMON is holding an item.\nIt cannot hold MAIL.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F2D3
 gUnknown_0840F2D3: @ 840F2D3
+OtherText_MailTransferredMailbox:
 	.string "MAIL was transferred from\nthe MAILBOX.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F2FC
 gUnknown_0840F2FC: @ 840F2FC
+OtherText_BagFullCannotRemoveItem:
 	.string "The BAG is full. The POKéMON’s\nitem could not be removed.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F338
 gUnknown_0840F338: @ 840F338
+OtherText_LearnedMove:
 	.string "{STR_VAR_1} learned\n{STR_VAR_2}!$"
 
 	.global gUnknown_0840F347
 gUnknown_0840F347: @ 840F347
+OtherText_NotCompatible:
 	.string "{STR_VAR_1} and {STR_VAR_2}\nare not compatible.\p{STR_VAR_2} can’t be learned.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F37C
 gUnknown_0840F37C: @ 840F37C
+OtherText_WantsToLearn:
 	.string "{STR_VAR_1} wants to learn the\nmove {STR_VAR_2}.\pHowever, {STR_VAR_1} already\nknows four moves.\pShould a move be deleted and\nreplaced with {STR_VAR_2}?$"
 
 	.global gUnknown_0840F3F0
 gUnknown_0840F3F0: @ 840F3F0
+OtherText_StopTryingTo:
 	.string "Stop trying to teach\n{STR_VAR_2}?$"
 
 	.global gUnknown_0840F409
 gUnknown_0840F409: @ 840F409
+OtherText_DidNotLearnMove2:
 	.string "{STR_VAR_1} did not learn the\nmove {STR_VAR_2}.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F429
 gUnknown_0840F429: @ 840F429
+OtherText_WhichMoveToForget2:
 	.string "Which move should be forgotten?{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F44B
 gUnknown_0840F44B: @ 840F44B
+OtherText_ForgetMove123_2: @ it might look like its a dupe but one's used in a menu while one's for battle
 	.string "{PAUSE 32}1, {PAUSE 15}2, and{PAUSE 15}... {PAUSE 15}... {PAUSE 15}... {PAUSE 15}{PLAY_SE SE_KON}Poof!\p{STR_VAR_1} forgot how to\nuse {STR_VAR_2}.\pAnd...{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F49E
 gUnknown_0840F49E: @ 840F49E
+OtherText_AlreadyKnows:
 	.string "{STR_VAR_1} already knows\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F4B5
 gUnknown_0840F4B5: @ 840F4B5
+OtherText_HPRestoredBy:
 	.string "{STR_VAR_1}’s HP was restored by\n{STR_VAR_2} points.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F4DA
 gUnknown_0840F4DA: @ 840F4DA
+OtherText_CuredPoisoning:
 	.string "{STR_VAR_1} was cured of its\npoisoning.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F4FB
 gUnknown_0840F4FB: @ 840F4FB
+OtherText_CuredParalysis:
 	.string "{STR_VAR_1} was cured of\nparalysis.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F518
 gUnknown_0840F518: @ 840F518
+OtherText_WokeUp:
 	.string "{STR_VAR_1} woke up.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F526
 gUnknown_0840F526: @ 840F526
+OtherText_BurnHealed:
 	.string "{STR_VAR_1}’s burn was healed.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F53E
 gUnknown_0840F53E: @ 840F53E
+OtherText_ThawedOut:
 	.string "{STR_VAR_1} was thawed out.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F553
 gUnknown_0840F553: @ 840F553
+OtherText_PPRestored:
 	.string "PP was restored.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F566
 gUnknown_0840F566: @ 840F566
+OtherText_RegainedHealth:
 	.string "{STR_VAR_1} regained health.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F57C
 gUnknown_0840F57C: @ 840F57C
+OtherText_BecameHealthy:
 	.string "{STR_VAR_1} became healthy.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F591
 gUnknown_0840F591: @ 840F591
+OtherText_PPIncreased:
 	.string "{STR_VAR_1}’s PP increased.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F5A6
 gUnknown_0840F5A6: @ 840F5A6
+OtherText_ElevatedTo:
 	.string "{STR_VAR_1} was elevated to\nLv. {STR_VAR_2}.$"
 
 	.global gUnknown_0840F5C1
 gUnknown_0840F5C1: @ 840F5C1
+OtherText_WasRaised:
 	.string "{STR_VAR_1}’s {STR_VAR_2} was\nraised.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F5D7
 gUnknown_0840F5D7: @ 840F5D7
+OtherText_SnapConfusion:
 	.string "{STR_VAR_1} snapped out of its\nconfusion.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F5FA
 gUnknown_0840F5FA: @ 840F5FA
+OtherText_GotOverLove:
 	.string "{STR_VAR_1} got over its\ninfatuation.{PAUSE_UNTIL_PRESS}$"
+OtherText_ChoosePoke:
 	.string "Choose a POKéMON.$"
+OtherText_MovePokeTo:
 	.string "Move to where?$"
+OtherText_TeachWhat:
 	.string "Teach which POKéMON?$"
+OtherText_UseWhat:
 	.string "Use on which POKéMON?$"
+OtherText_GiveWhat:
 	.string "Give to which POKéMON?$"
+OtherText_DoWhat:
 	.string "Do what with {STR_VAR_1}?$"
+OtherText_NothingToCut:
 	.string "There’s nothing to CUT.$"
+OtherText_CantSurf:
 	.string "You can’t SURF here.$"
+OtherText_AlreadySurfing:
 	.string "You’re already SURFING.$"
+OtherText_CantUseThatHere:
 	.string "Can’t use that here.$"
+OtherText_RestoreWhatMove:
 	.string "Restore which move?$"
+OtherText_BoostPP:
 	.string "Boost PP of which move?$"
+OtherText_DoWhatWithItem:
 	.string "Do what with an item?$"
+OtherText_NoPokeForBattle:
 	.string "No POKéMON for battle!$"
+OtherText_ChoosePoke2:
 	.string "Choose a POKéMON.$"
+OtherText_NotEnoughHP:
 	.string "Not enough HP...$"
+OtherText_ThreePokeNeeded:
 	.string "Three POKéMON are needed.$"
+OtherText_PokeCantBeSame:
 	.string "POKéMON can’t be the same.$"
+OtherText_NoIdenticalHoldItems:
 	.string "No identical hold items.$"
+OtherText_TeachWhichPoke:
 	.string "Teach which POKéMON?$"
 
 	.global gUnknown_0840F7C6
 gUnknown_0840F7C6: @ 840F7C6
+OtherText_Attack:
 	.string "ATTACK$"
 
 	.global gUnknown_0840F7CD
 gUnknown_0840F7CD: @ 840F7CD
+OtherText_Defense:
 	.string "DEFENSE$"
 
 	.global gUnknown_0840F7D5
 gUnknown_0840F7D5: @ 840F7D5
+OtherText_SpAtk:
 	.string "SP. ATK$"
 
 	.global gUnknown_0840F7DD
 gUnknown_0840F7DD: @ 840F7DD
+OtherText_SpDef:
 	.string "SP. DEF$"
 
 	.global gUnknown_0840F7E5
 gUnknown_0840F7E5: @ 840F7E5
+OtherText_Speed:
 	.string "SPEED$"
 
 	.global gUnknown_0840F7EB
 gUnknown_0840F7EB: @ 840F7EB
+OtherText_HP:
 	.string "HP$"
 
 	.global gUnknown_0840F7EE
 gUnknown_0840F7EE: @ 840F7EE
+OtherText_Terminator18:
 	.string "$"
 
 	.global gUnknown_0840F7EF
 gUnknown_0840F7EF: @ 840F7EF
+OtherText_OriginalTrainer:
 	.string "OT/$"
 
 	.global gUnknown_0840F7F3
 gUnknown_0840F7F3: @ 840F7F3
+OtherText_Type2:
 	.string "TYPE/$"
 
 	.global gUnknown_0840F7F9
 gUnknown_0840F7F9: @ 840F7F9
+OtherText_Power2:
 	.string "POWER$"
 
 	.global gUnknown_0840F7FF
 gUnknown_0840F7FF: @ 840F7FF
+OtherText_Accuracy2:
 	.string "ACCURACY$"
 
 	.global gUnknown_0840F808
 gUnknown_0840F808: @ 840F808
+OtherText_Appeal2:
 	.string "APPEAL$"
 
 	.global gUnknown_0840F80F
 gUnknown_0840F80F: @ 840F80F
+OtherText_Jam2:
 	.string "JAM$"
 
 	.global gUnknown_0840F813
 gUnknown_0840F813: @ 840F813
+OtherText_Status:
 	.string "STATUS$"
 
 	.global gUnknown_0840F81A
 gUnknown_0840F81A: @ 840F81A
+OtherText_ExpPoints:
 	.string "EXP. POINTS$"
 
 	.global gUnknown_0840F826
 gUnknown_0840F826: @ 840F826
+OtherText_NextLv:
 	.string "NEXT LV.$"
 
 	.global gUnknown_0840F82F
 gUnknown_0840F82F: @ 840F82F
+OtherText_Ribbons00:
 	.string "RIBBONS: 00$"
+OtherText_Event:
 	.string "EVENT$"
+OtherText_Switch:
 	.string "SWITCH$"
+OtherText_PokeInfo:
 	.string "POKéMON INFO$"
+OtherText_PokeSkills:
 	.string "POKéMON SKILLS$"
+OtherText_BattleMoves:
 	.string "BATTLE MOVES$"
+OtherText_ContestMoves:
 	.string "C0NTEST MOVES$" @why the l33t 0, that's stupid
+OtherText_Info:
 	.string "INFO$"
 
 	.global gUnknown_0840F884
 gUnknown_0840F884: @ 840F884
+OtherText_EggLong:
 	.string "It looks like this EGG will\ntake a long time to hatch.$"
 
 	.global gUnknown_0840F8BB
 gUnknown_0840F8BB: @ 840F8BB
+OtherText_EggSome:
 	.string "What will hatch from this?\nIt will take some time.$"
 
 	.global gUnknown_0840F8EE
 gUnknown_0840F8EE: @ 840F8EE
+OtherText_EggSoon:
 	.string "It moves occasionally.\nIt should hatch soon.$"
 
 	.global gUnknown_0840F91B
 gUnknown_0840F91B: @ 840F91B
+OtherText_EggAbout:
 	.string "It’s making sounds.\nIt’s about to hatch!$"
 
 	.global gUnknown_0840F944
 gUnknown_0840F944: @ 840F944
+OtherText_CantForgetHMs:
 	.string "HM moves can’t be\nforgotten now.$"
 
 	.global gUnknown_0840F965
 gUnknown_0840F965: @ 840F965
+OtherText_PlayersBase:
 	.string "’s BASE$"
 
 	.global gUnknown_0840F96D
 gUnknown_0840F96D: @ 840F96D
+OtherText_OkayToDeleteFromRegistry:
 	.string "Is it okay to delete {STR_VAR_1}\nfrom the REGISTRY?$"
 
 	.global gUnknown_0840F998
 gUnknown_0840F998: @ 840F998
+OtherText_RegisteredDataDeleted:
 	.string "The registered data was deleted.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840F9BB
 gUnknown_0840F9BB: @ 840F9BB
+SecretBaseText_NoRegistry:
 	.string "There is no REGISTRY.{PAUSE_UNTIL_PRESS}$"
+SecretBaseText_DelRegist:
 	.string "DEL REGIST.$"
+SecretBaseText_Decorate:
 	.string "DECORATE$"
+SecretBaseText_PutAway:
 	.string "PUT AWAY$"
+SecretBaseText_Toss:
 	.string "TOSS$"
+SecretBaseText_PutOutDecor:
 	.string "Put out the selected decoration item.$"
+SecretBaseText_StoreChosenDecor:
 	.string "Store the chosen decoration in the PC.$"
+SecretBaseText_ThrowAwayDecor:
 	.string "Throw away unwanted decorations.$"
 
 	.global gUnknown_0840FA64
 gUnknown_0840FA64: @ 840FA64
+SecretBaseText_NoDecors:
 	.string "There are no decorations.{PAUSE_UNTIL_PRESS}$"
+SecretBaseText_Desk:
 	.string "DESK$"
+SecretBaseText_Chair:
 	.string "CHAIR$"
+SecretBaseText_Plant:
 	.string "PLANT$"
+SecretBaseText_Ornament:
 	.string "ORNAMENT$"
+SecretBaseText_Mat:
 	.string "MAT$"
+SecretBaseText_Poster:
 	.string "POSTER$"
+SecretBaseText_Doll:
 	.string "DOLL$"
+SecretBaseText_Cushion:
 	.string "CUSHION$"
 
 	.global gUnknown_0840FAB2
 gUnknown_0840FAB2: @ 840FAB2
+SecretBaseText_GoldRank:
 	.string "GOLD$"
 
 	.global gUnknown_0840FAB7
 gUnknown_0840FAB7: @ 840FAB7
+SecretBaseText_SilverRank:
 	.string "SILVER$"
 
 	.global gUnknown_0840FABE
 gUnknown_0840FABE: @ 840FABE
+SecretBaseText_PlaceItHere:
 	.string "Place it here?$"
 
 	.global gUnknown_0840FACD
 gUnknown_0840FACD: @ 840FACD
+SecretBaseText_CantBePlacedHere:
 	.string "It can’t be placed here.$"
 
 	.global gUnknown_0840FAE6
 gUnknown_0840FAE6: @ 840FAE6
+SecretBaseText_CancelDecorating:
 	.string "Cancel decorating?$"
 
 	.global gUnknown_0840FAF9
 gUnknown_0840FAF9: @ 840FAF9
+SecretBaseText_InUseAlready:
 	.string "This is in use already.$"
 
 	.global gUnknown_0840FB11
 gUnknown_0840FB11: @ 840FB11
+SecretBaseText_NoMoreDecor:
 	.string "No more decorations can be placed.\nThe most that can be placed is {STR_VAR_1}.$"
 
 	.global gUnknown_0840FB57
 gUnknown_0840FB57: @ 840FB57
+SecretBaseText_NoMoreDecor2:
 	.string "No more decorations can be placed.\nThe most that can be placed is {STR_VAR_1}.$"
+SecretBaseText_CantBePlacedHere2:
 	.string "This can’t be placed here.\nIt must be on a DESK, etc.$"
 
 	.global gUnknown_0840FBD3
 gUnknown_0840FBD3: @ 840FBD3
+SecretBaseText_DecorCantPlace:
 	.string "This decoration can’t be placed in\nyour own room.$"
 
 	.global gUnknown_0840FC05
 gUnknown_0840FC05: @ 840FC05
+SecretBaseText_DecorInUse:
 	.string "This decoration is in use.\nIt can’t be thrown away.$"
 
 	.global gUnknown_0840FC39
 gUnknown_0840FC39: @ 840FC39
+SecretBaseText_WillBeDiscarded:
 	.string "This {STR_VAR_1} will be discarded.\nIs that okay?$"
 
 	.global gUnknown_0840FC62
 gUnknown_0840FC62: @ 840FC62
+SecretBaseText_DecorThrownAway:
 	.string "The decoration item was thrown away.$"
 
 	.global gUnknown_0840FC87
 gUnknown_0840FC87: @ 840FC87
+SecretBaseText_StopPuttingAwayDecor:
 	.string "Stop putting away decorations?$"
 
 	.global gUnknown_0840FCA6
 gUnknown_0840FCA6: @ 840FCA6
+SecretBaseText_NoDecor:
 	.string "There is no decoration item here.$"
 
 	.global gUnknown_0840FCC8
 gUnknown_0840FCC8: @ 840FCC8
+SecretBaseText_ReturnDecor:
 	.string "Return this decoration to the PC?$"
 
 	.global gUnknown_0840FCEA
 gUnknown_0840FCEA: @ 840FCEA
+SecretBaseText_DecorReturned:
 	.string "The decoration was returned to the PC.$"
 
 	.global gUnknown_0840FD11
 gUnknown_0840FD11: @ 840FD11
+SecretBaseText_NoDecorInUse:
 	.string "There are no decorations in use.{PAUSE_UNTIL_PRESS}$"
+SecretBaseText_Tristan:
 	.string "TRISTAN$"
+SecretBaseText_Philip:
 	.string "PHILIP$"
+SecretBaseText_Dennis:
 	.string "DENNIS$"
+SecretBaseText_Roberto:
 	.string "ROBERTO$"
+SecretBaseText_TurnOff:
 	.string "TURN OFF$"
+SecretBaseText_Decoration:
 	.string "DECORATION$"
+SecretBaseText_ItemStorage:
 	.string "ITEM STORAGE$"
 
 	.global gUnknown_0840FD73
 gUnknown_0840FD73: @ 840FD73
+PCText_Mailbox:
 	.string "MAILBOX$"
+PCText_DepositItem:
 	.string "DEPOSIT ITEM$"
+PCText_WithdrawItem:
 	.string "WITHDRAW ITEM$"
+PCText_TossItem:
 	.string "TOSS ITEM$"
+PCText_StoreItems:
 	.string "Store items in the PC.$"
+PCText_TakeOutItems:
 	.string "Take out items from the PC.$"
+PCText_ThrowAwayItems:
 	.string "Throw away items stored in the PC.$"
 
 	.global gUnknown_0840FDF6
 gUnknown_0840FDF6: @ 840FDF6
+OtherText_NoItems:
 	.string "There are no items.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840FE0C
 gUnknown_0840FE0C: @ 840FE0C
+OtherText_NoMoreRoom:
 	.string "There is no more\nroom in the BAG.$"
 
 	.global gUnknown_0840FE2E
 gUnknown_0840FE2E: @ 840FE2E
+OtherText_HowManyToWithdraw:
 	.string "How many do you\nwant to withdraw?$"
 
 	.global gUnknown_0840FE50
 gUnknown_0840FE50: @ 840FE50
+OtherText_WithdrewThing:
 	.string "Withdrew {STR_VAR_2}\n{STR_VAR_1}(s).$"
+OtherText_Read:
 	.string "READ$"
 
 	.global gUnknown_0840FE68
 gUnknown_0840FE68: @ 840FE68
+OtherText_MoveToBag:
 	.string "MOVE TO BAG$"
+OtherText_Give:
 	.string "GIVE$"
 
 	.global gUnknown_0840FE79
 gUnknown_0840FE79: @ 840FE79
+OtherText_NoMailHere:
 	.string "There’s no MAIL here.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840FE91
 gUnknown_0840FE91: @ 840FE91
+OtherText_WhatWillYouDoMail:
 	.string "What would you like to do with\n{STR_VAR_1}’s MAIL?$"
 
 	.global gUnknown_0840FEBB
 gUnknown_0840FEBB: @ 840FEBB
+OtherText_MessageWillBeLost:
 	.string "The message will be lost.\nIs that okay?$"
 
 	.global gUnknown_0840FEE3
 gUnknown_0840FEE3: @ 840FEE3
+OtherText_BagIsFull:
 	.string "The BAG is full.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840FEF6
 gUnknown_0840FEF6: @ 840FEF6
+OtherText_MailWasReturned:
 	.string "The MAIL was returned to the BAG\nwith its message erased.{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0840FF32
 gUnknown_0840FF32: @ 840FF32
+OtherText_Dad:
 	.string "DAD$"
 
 	.global gUnknown_0840FF36
 gUnknown_0840FF36: @ 840FF36
+OtherText_Mom:
 	.string "MOM$"
 
 	.global gUnknown_0840FF3A
 gUnknown_0840FF3A: @ 840FF3A
+OtherText_Wallace:
 	.string "WALLACE$"
 
 	.global gUnknown_0840FF42
 gUnknown_0840FF42: @ 840FF42
+OtherText_Steven:
 	.string "STEVEN$"
 
 	.global gUnknown_0840FF49
 gUnknown_0840FF49: @ 840FF49
+OtherText_Brawly:
 	.string "BRAWLY$"
 
 	.global gUnknown_0840FF50
 gUnknown_0840FF50: @ 840FF50
+OtherText_Winona:
 	.string "WINONA$"
 
 	.global gUnknown_0840FF57
 gUnknown_0840FF57: @ 840FF57
+OtherText_Phoebe:
 	.string "PHOEBE$"
 
 	.global gUnknown_0840FF5E
 gUnknown_0840FF5E: @ 840FF5E
+OtherText_Glacia:
 	.string "GLACIA$"
 
 	.global gUnknown_0840FF65
 gUnknown_0840FF65: @ 840FF65
+ContestText_ContestWinner:
 	.string "CONTEST WINNER\n$"
 
 	.global gUnknown_0840FF75
 gUnknown_0840FF75: @ 840FF75
+@ come back to this one and clean up
+OtherText_Unknown1:
 	.string "’s $"
+OtherText_Cool:
 	.string "COOL $"
+OtherText_Beauty2:
 	.string "BEAUTY $"
+OtherText_Cute:
 	.string "CUTE $"
+OtherText_Smart:
 	.string "SMART $"
+OtherText_Tough:
 	.string "TOUGH $"
+OtherText_NonstopSuperCool:
 	.string "Nonstop super-cool -\nthe inestimable $"
+OtherText_Terminator6:
 	.string "$"
+OtherText_GoodLookingPoke:
 	.string "Hey, there!\nThe good-looking POKéMON $"
+OtherText_Terminator7:
 	.string "$"
+OtherText_MarvelousGreat:
 	.string "The marvelous, wonderful, and\nvery great $"
+OtherText_Terminator8:
 	.string "$"
+OtherText_CenturyLastVenus:
 	.string "This century’s last Venus -\nthe beautiful $"
+OtherText_Terminator9:
 	.string "$"
+OtherText_Terminator10:
 	.string "$"
+OtherText_DazzlingSlime:
 	.string "’s dazzling,\nglittering smile$"
+OtherText_PokeCenterIdol:
 	.string "POKéMON CENTER’s super idol -\nthe incomparable $"
+OtherText_Terminator11:
 	.string "$"
+OtherText_LovelyAndSweet:
 	.string "The lovely and sweet $"
+OtherText_Terminator12:
 	.string "$"
+OtherText_ThePretty:
 	.string "The pretty $"
+OtherText_WinningPortrait:
 	.string "’s\nwinning portrait$"
+OtherText_GiveUsWink:
 	.string "Give us a wink!\nThe cutie POKéMON $"
+OtherText_Terminator13:
 	.string "$"
+OtherText_SmartnessMaestro:
 	.string "The smartness maestro -\nThe wise POKéMON $"
+OtherText_Terminator14:
 	.string "$"
+OtherText_ChosenPokeAmong:
 	.string "The chosen POKéMON -\nThe one among POKéMON $"
+OtherText_Terminator15:
 	.string "$"
+OtherText_TheExcellent:
 	.string "The excellent $"
+OtherText_ItsMomentOfElegance:
 	.string "’s\nmoment of elegance$"
+OtherText_PowerfullyMuscular:
 	.string "The powerfully muscular\nspeedster $"
+OtherText_Terminator16:
 	.string "$"
+OtherText_StrongErEst:
 	.string "The strong, stronger, and\nstrongest $"
+OtherText_Terminator17:
 	.string "$"
+OtherText_MightyTough:
 	.string "The mighty tough\nhyper POKéMON $"
+OtherText_Exclamation:
 	.string "!$"
+OtherText_Petalburg:
 	.string "PETALBURG$"
+OtherText_Slateport:
 	.string "SLATEPORT$"
+OtherText_Littleroot:
 	.string "LITTLEROOT$"
+OtherText_Lilycove:
 	.string "LILYCOVE$"
+OtherText_Dewford:
 	.string "DEWFORD$"
+OtherText_Enter:
 	.string "ENTER$"
+OtherText_Info3:
 	.string "INFO$"
+OtherText_WhatsAContest:
 	.string "What’s a CONTEST?$"
+OtherText_TypesOfContest:
 	.string "Types of CONTESTS$"
+OtherText_Ranks:
 	.string "Ranks$"
+OtherText_Judging:
 	.string "Judging$"
+OtherText_CoolContest:
 	.string "COOL CONTEST$"
+OtherText_BeautyContest:
 	.string "BEAUTY CONTEST$"
+OtherText_CuteContest:
 	.string "CUTE CONTEST$"
+OtherText_SmartContest:
 	.string "SMART CONTEST$"
+OtherText_ToughContest:
 	.string "TOUGH CONTEST$"
+OtherText_Decoration:
 	.string "DECORATION$"
+OtherText_PackUp:
 	.string "PACK UP$"
+OtherText_Count:
 	.string "COUNT$"
+OtherText_Registry:
 	.string "REGISTRY$"
+OtherText_Information:
 	.string "INFORMATION$"
+OtherText_Mach:
 	.string "MACH$"
+OtherText_Acro:
 	.string "ACRO$"
+OtherText_Poison:
 	.string "PSN$"
+OtherText_Paralysis:
 	.string "PAR$"
+OtherText_Sleep:
 	.string "SLP$"
+OtherText_Burn:
 	.string "BRN$"
+OtherText_Frozen:
 	.string "FRZ$"
+OtherText_Quit:
 	.string "QUIT$"
+OtherText_SawIt:
 	.string "Saw it$"
+OtherText_NotYet:
 	.string "Not yet$"
+OtherText_Yes:
 	.string "YES$"
+OtherText_No:
 	.string "NO$"
+OtherText_Info2:
 	.string "INFO$"
+OtherText_SingleBattle:
 	.string "SINGLE BATTLE$"
+OtherText_DoubleBattle:
 	.string "DOUBLE BATTLE$"
+OtherText_MultiBattle:
 	.string "MULTI BATTLE$"
+OtherText_MrBriney:
 	.string "MR. BRINEY$"
+OtherText_MakeAChallenge:
 	.string "Make a challenge.$"
+OtherText_ObtainInformation:
 	.string "Obtain information.$"
+OtherText_Lv50_2:
 	.string "LV. 50$"
+OtherText_Lv100_2:
 	.string "LV. 100$"
+OtherText_Zigzagoon:
 	.string "ZIGZAGOON$"
+OtherText_Nincada:
 	.string "NINCADA$"
+OtherText_Poochyena:
 	.string "POOCHYENA$"
+OtherText_Nincada2:
 	.string "NINCADA$"
+OtherText_Lotad:
 	.string "LOTAD$"
+OtherText_Roselia:
 	.string "ROSELIA$"
+OtherText_Shroomish:
 	.string "SHROOMISH$"
+OtherText_Nincada3:
 	.string "NINCADA$"
+OtherText_Surskit:
 	.string "SURSKIT$"
+OtherText_Treecko:
 	.string "TREECKO$"
+OtherText_Torchic:
 	.string "TORCHIC$"
+OtherText_Mudkip:
 	.string "MUDKIP$"
+OtherText_Seedot:
 	.string "SEEDOT$"
+OtherText_Shroomish2:
 	.string "SHROOMISH$"
+OtherText_Spinda:
 	.string "SPINDA$"
+OtherText_Shroomish3:
 	.string "SHROOMISH$"
+OtherText_Zigzagoon2:
 	.string "ZIGZAGOON$"
+OtherText_Wurmple:
 	.string "WURMPLE$"
+OtherText_PokeBall:
 	.string "POKé BALL$"
+OtherText_SuperPotion:
 	.string "SUPER POTION$"
+OtherText_SamePrice:
 	.string "Same price$"
+OtherText_Yen135:
 	.string "¥135$"
+OtherText_Yen155:
 	.string "¥155$"
+OtherText_Yen175:
 	.string "¥175$"
+OtherText_CostMore:
 	.string "They will cost more.$"
+OtherText_CostLess:
 	.string "They will cost less.$"
+OtherText_SamePrice2:
 	.string "Same price$"
+OtherText_MaleSymbol:
 	.string "♂$"
+OtherText_FemaleSymbol:
 	.string "♀$"
+OtherText_Neither:
 	.string "Neither$"
+OtherText_Males:
 	.string "Males$"
+OtherText_Females:
 	.string "Females$"
+OtherText_SameNumber:
 	.string "Same number$"
+OtherText_Male:
 	.string "Male$"
+OtherText_Female:
 	.string "Female$"
+OtherText_ItDepends:
 	.string "It depends$"
+OtherText_Six2:
 	.string "6$"
+OtherText_Eight2:
 	.string "8$"
+OtherText_Ten:
 	.string "10$"
+OtherText_One:
 	.string "1$"
+OtherText_Two:
 	.string "2$"
+OtherText_Three:
 	.string "3$"
+OtherText_Six:
 	.string "6$"
+OtherText_Seven:
 	.string "7$"
+OtherText_Eight:
 	.string "8$"
+OtherText_FreshWater:
 	.string "FRESH WATER{CLEAR_TO 0x48}¥200$"
+OtherText_SodaPop:
 	.string "SODA POP{CLEAR_TO 0x48}¥300$"
+OtherText_Lemonade:
 	.string "LEMONADE{CLEAR_TO 0x48}¥350$"
+OtherText_HowToRide:
 	.string "HOW TO RIDE$"
+OtherText_HowToTurn:
 	.string "HOW TO TURN$"
+OtherText_SandySlopes:
 	.string "SANDY SLOPES$"
+OtherText_Wheelies:
 	.string "WHEELIES$"
+OtherText_BunnyHops:
 	.string "BUNNY-HOPS$"
+OtherText_Jumping:
 	.string "JUMPING$"
+OtherText_Satisfied:
 	.string "Satisfied$"
+OtherText_Dissatisfied:
 	.string "Dissatisfied$"
+OtherText_Deepseatooth:
 	.string "DEEPSEATOOTH$"
+OtherText_Deepseascale:
 	.string "DEEPSEASCALE$"
+OtherText_BlueFlute2:
 	.string "BLUE FLUTE$"
+OtherText_YellowFlute2:
 	.string "YELLOW FLUTE$"
+OtherText_RedFlute2:
 	.string "RED FLUTE$"
+OtherText_WhiteFlute2:
 	.string "WHITE FLUTE$"
+OtherText_BlackFlute2:
 	.string "BLACK FLUTE$"
+OtherText_GlassChair:
 	.string "GLASS CHAIR$"
+OtherText_GlassDesk:
 	.string "GLASS DESK$"
+OtherText_TreeckoDoll:
 	.string "TREECKO DOLL 1,000 COINS$"
+OtherText_TorchicDoll:
 	.string "TORCHIC DOLL 1,000 COINS$"
+OtherText_MudkipDoll:
 	.string "MUDKIP DOLL   1,000 COINS$"
+OtherText_50Coins:
 	.string "  50 COINS    ¥1,000$"
+OtherText_500Coins:
 	.string "500 COINS  ¥10,000$"
+OtherText_Excellent:
 	.string "Excellent!$"
+OtherText_NotSoHot:
 	.string "Not so hot$"
+OtherText_RedShard:
 	.string "RED SHARD$"
+OtherText_YellowShard:
 	.string "YELLOW SHARD$"
+OtherText_BlueShard:
 	.string "BLUE SHARD$"
+OtherText_GreenShard:
 	.string "GREEN SHARD$"
+OtherText_BattleTower:
 	.string "BATTLE TOWER$"
+OtherText_Right:
 	.string "Right$"
+OtherText_Left:
 	.string "Left$"
+OtherText_TM32:
 	.string "TM32  1,500 COINS$"
+OtherText_TM29:
 	.string "TM29  3,500 COINS$"
+OtherText_TM35:
 	.string "TM35  4,000 COINS$"
+OtherText_TM24:
 	.string "TM24  4,000 COINS$"
+OtherText_TM13:
 	.string "TM13  4,000 COINS$"
+OtherText_1F_2:
 	.string "1F$"
+OtherText_2F_2:
 	.string "2F$"
+OtherText_3F_2:
 	.string "3F$"
+OtherText_4F_2:
 	.string "4F$"
+OtherText_5F_2:
 	.string "5F$"
+OtherText_Cool2:
 	.string "COOL$"
+OtherText_Beauty3:
 	.string "BEAUTY$"
+OtherText_Cute2:
 	.string "CUTE$"
+OtherText_Smart2:
 	.string "SMART$"
+OtherText_Tough2:
 	.string "TOUGH$"
+OtherText_Normal:
 	.string "NORMAL$"
+OtherText_Super:
 	.string "SUPER$"
+OtherText_Hyper:
 	.string "HYPER$"
+OtherText_Master:
 	.string "MASTER$"
+OtherText_Cool3:
 	.string "COOL$"
+OtherText_Beauty4:
 	.string "BEAUTY$"
+OtherText_Cute3:
 	.string "CUTE$"
+OtherText_Smart3:
 	.string "SMART$"
+OtherText_Tough3:
 	.string "TOUGH$"
+OtherText_Items:
 	.string "ITEMS$"
+OtherText_KeyItems:
 	.string "KEY ITEMS$"
+OtherText_Balls:
 	.string "BALLS$"
+OtherText_TMsHMs:
 	.string "TMs & HMs$"
+OtherText_Berries:
 	.string "BERRIES$"
 
 	.global gUnknown_08410753
 gUnknown_08410753: @ 8410753
+PCText_SomeonesPC:
 	.string "SOMEONE’S PC$"
 
 	.global gUnknown_08410760
 gUnknown_08410760: @ 8410760
+PCText_LanettesPC:
 	.string "LANETTE’S PC$"
 
 	.global gUnknown_0841076D
 gUnknown_0841076D: @ 841076D
+PCText_PlayersPC:
 	.string "{PLAYER}’s PC$"
 
 	.global gUnknown_08410775
 gUnknown_08410775: @ 8410775
+PCText_HallOfFame:
 	.string "HALL OF FAME$"
 
 	.global gUnknown_08410782
 gUnknown_08410782: @ 8410782
+PCText_LogOff:
 	.string "LOG OFF$"
 
 	.global gUnknown_0841078A
 gUnknown_0841078A: @ 841078A
+OtherText_99Times:
 	.string "99 times +$"
 
 	.global gUnknown_08410795
 gUnknown_08410795: @ 8410795
+OtherText_1Minute:
 	.string "1 minute +$"
 
 	.global gUnknown_084107A0
 gUnknown_084107A0: @ 84107A0
+OtherText_Seconds:
 	.string " seconds$"
 
 	.global gUnknown_084107A9
 gUnknown_084107A9: @ 84107A9
+OtherText_Times:
 	.string " times$"
+OtherText_Period2:
 	.string ".$"
 
 	.global gUnknown_084107B2
 gUnknown_084107B2: @ 84107B2
+OtherText_BigGuy:
 	.string "Big guy$"
 
 	.global gUnknown_084107BA
 gUnknown_084107BA: @ 84107BA
+OtherText_BigGirl:
 	.string "Big girl$"
 
 	.global gUnknown_084107C3
 gUnknown_084107C3: @ 84107C3
+OtherText_Son:
 	.string "son$"
 
 	.global gUnknown_084107C7
 gUnknown_084107C7: @ 84107C7
+OtherText_Daughter:
 	.string "daughter$"
+OtherText_BlueFlute:
 	.string "BLUE FLUTE$"
+OtherText_YellowFlute:
 	.string "YELLOW FLUTE$"
+OtherText_RedFlute:
 	.string "RED FLUTE$"
+OtherText_WhiteFlute:
 	.string "WHITE FLUTE$"
+OtherText_BlackFlute:
 	.string "BLACK FLUTE$"
+OtherText_PrettyChair:
 	.string "PRETTY CHAIR$"
+OtherText_PrettyDesk:
 	.string "PRETTY DESK$"
+OtherText_1F:
 	.string "1F$"
+OtherText_2F:
 	.string "2F$"
+OtherText_3F:
 	.string "3F$"
+OtherText_4F:
 	.string "4F$"
+OtherText_5F:
 	.string "5F$"
+OtherText_6F:
 	.string "6F$"
+OtherText_7F:
 	.string "7F$"
+OtherText_8F:
 	.string "8F$"
+OtherText_9F:
 	.string "9F$"
+OtherText_10F:
 	.string "10F$"
+OtherText_11F:
 	.string "11F$"
+OtherText_B1F:
 	.string "B1F$"
+OtherText_B2F:
 	.string "B2F$"
+OtherText_B3F:
 	.string "B3F$"
+OtherText_B4F:
 	.string "B4F$"
+OtherText_Rooftop:
 	.string "ROOFTOP$"
 
 	.global gUnknown_0841085E
 gUnknown_0841085E: @ 841085E
+OtherText_NowOn:
 	.string "Now on:$"
 
 	.global gUnknown_08410866
 gUnknown_08410866: @ 8410866
+PCText_Cancel:
 	.string "CANCEL$"
+PCText_ExitBox:
 	.string "Exit from the BOX.$"
+PCText_WhatYouDo:
 	.string "What would you like to do?$"
+PCText_PickATheme:
 	.string "Please pick a theme.$"
+PCText_PickAWallpaper:
 	.string "Please pick out wallpaper.$"
+PCText_IsSelected:
 	.string " is selected.$"
+PCText_JumpToBox:
 	.string "Jump to which BOX?$"
+PCText_DepositToWhichBox:
 	.string "Deposit in which BOX?$"
+PCText_DepoxitToBox:
 	.string " was deposited.$"
+PCText_BoxIsFull:
 	.string "The BOX is full.$"
+PCText_ReleasePoke:
 	.string "Release this POKéMON?$"
+PCText_WasReleased:
 	.string " was released.$"
+PCText_ByeBye:
 	.string "Bye-bye, !$"
+PCText_MarkPoke:
 	.string "Mark your POKéMON.$"
+PCText_LastPoke:
 	.string "That’s your last POKéMON!$"
+PCText_PartyFull:
 	.string "Your party’s full!$"
+PCText_HoldingPoke:
 	.string "You’re holding a POKéMON!$"
+PCText_WhichOneWillTake:
 	.string "Which one will you take?$"
+PCText_CantReleaseEgg:
 	.string "You can’t release an EGG.$"
+PCText_ContinueBox:
 	.string "Continue BOX operations?$"
+PCText_CameBack:
 	.string " came back!$"
+PCText_Worried:
 	.string "Was it worried about you?$"
+PCText_Surprise:
 	.string "... ... ... ... ...!$"
+PCText_PleaseRemoveMail:
 	.string "Please remove the MAIL.$"
+PCText_Cancel2:
 	.string "CANCEL$"
+PCText_Deposit:
 	.string "DEPOSIT$"
+PCText_Withdraw:
 	.string "WITHDRAW$"
+PCText_Switch:
 	.string "SWITCH$"
+PCText_Move:
 	.string "MOVE$"
+PCText_Place:
 	.string "PLACE$"
+PCText_Summary:
 	.string "SUMMARY$"
+PCText_Release:
 	.string "RELEASE$"
+PCText_Mark:
 	.string "MARK$"
+PCText_Name:
 	.string "NAME$"
+PCText_Jump:
 	.string "JUMP$"
+PCText_Wallpaper:
 	.string "WALLPAPER$"
+PCText_Scenery1:
 	.string "SCENERY 1$"
+PCText_Scenery2:
 	.string "SCENERY 2$"
+PCText_Scenery3:
 	.string "SCENERY 3$"
+PCText_Etc:
 	.string "ETCETERA$"
+PCText_Forest:
 	.string "FOREST$"
+PCText_City:
 	.string "CITY$"
+PCText_Desert:
 	.string "DESERT$"
+PCText_Savanna:
 	.string "SAVANNA$"
+PCText_Crag:
 	.string "CRAG$"
+PCText_Volcano:
 	.string "VOLCANO$"
+PCText_Snow:
 	.string "SNOW$"
+PCText_Cave:
 	.string "CAVE$"
+PCText_Beach:
 	.string "BEACH$"
+PCText_Seafloor:
 	.string "SEAFLOOR$"
+PCText_River:
 	.string "RIVER$"
+PCText_Sky:
 	.string "SKY$"
+PCText_Polka:
 	.string "POLKA-DOT$"
+PCText_PokeCenter:
 	.string "POKéCENTER$"
+PCText_Machine:
 	.string "MACHINE$"
+PCText_Plain:
 	.string "PLAIN$"
+PCText_WhatDoYouWant:
 	.string "What do you want?$"
+PCText_WithdrawPoke:
 	.string "WITHDRAW POKéMON$"
+PCText_DepositPoke:
 	.string "DEPOSIT POKéMON$"
+PCText_MovePoke:
 	.string "MOVE POKéMON$"
+PCText_SeeYa:
 	.string "SEE YA!$"
+PCText_MovePokeToBox:
 	.string "Move POKéMON stored in BOXES to\nyour party.$"
+PCText_StorePokeToBox:
 	.string "Store POKéMON in your party in BOXES.$"
+PCText_OrganizePokeBox:
 	.string "Organize the POKéMON in BOXES and\nin your party.$"
+PCText_ReturnToMenu:
 	.string "Return to the previous menu.$"
 
 	.global gUnknown_08410C1C
 gUnknown_08410C1C: @ 8410C1C
+PCText_OnlyOne:
 	.string "There is just one POKéMON with you.$"
 
 	.global gUnknown_08410C40
 gUnknown_08410C40: @ 8410C40
+PCText_PartyFull2:
 	.string "Your party is full!$"
 
 	.global gUnknown_08410C54
 gUnknown_08410C54: @ 8410C54
+PCText_BOX:
 	.string "BOX$"
+PCText_CheckMap:
 	.string "{CLEAR 0}Check the map of the HOENN region.$"
+PCText_CheckPoke:
 	.string "{CLEAR 0}Check POKéMON in detail.$"
+PCText_CheckTrainer:
 	.string "{CLEAR 0}Check TRAINER information.$"
+PCText_CheckRibbons:
 	.string "{CLEAR 0}Check obtained RIBBONS.$"
+PCText_PutAwayNav:
 	.string "{CLEAR 0}Put away the POKéNAV.$"
+PCText_NoRibbonWin:
 	.string "{CLEAR 0}There are no RIBBON winners.$"
+PCText_NoTrainers:
 	.string "{CLEAR 0}No TRAINERS are registered.$"
+PCText_CheckParty:
 	.string "{CLEAR 0}Check party POKéMON in detail.$"
+PCText_CheckPokeAll:
 	.string "{CLEAR 0}Check all POKéMON in detail.$"
+PCText_ReturnToNav:
 	.string "{CLEAR 0}Return to the POKéNAV menu.$"
+PCText_FindCool:
 	.string "{CLEAR 0}Find cool POKéMON.$"
+PCText_FindBeauty:
 	.string "{CLEAR 0}Find beautiful POKéMON.$"
+PCText_FindCute:
 	.string "{CLEAR 0}Find cute POKéMON.$"
+PCText_FindSmart:
 	.string "{CLEAR 0}Find smart POKéMON.$"
+PCText_FindTough:
 	.string "{CLEAR 0}Find tough POKéMON.$"
+PCText_ReturnToCondition:
 	.string "{CLEAR 0}Return to the CONDITION menu.$"
 
 	.global gUnknown_08410E22
 gUnknown_08410E22: @ 8410E22
+OtherText_NumberRegistered:
 	.string "No. registered$"
 
 	.global gUnknown_08410E31
 gUnknown_08410E31: @ 8410E31
+OtherText_NumberBattles:
 	.string "No. of battles$"
 
 	.global gUnknown_08410E40
 gUnknown_08410E40: @ 8410E40
-	.string "{PALETTE 5}"
-	.string "STRATEGY$"
+OtherText_Strategy:
+	.string "{PALETTE 5}STRATEGY$"
 
 	.global gUnknown_08410E4C
 gUnknown_08410E4C: @ 8410E4C
-	.string "{PALETTE 5}"
-	.string "TRAINER’S POKéMON$"
+OtherText_TrainersPokemon:
+	.string "{PALETTE 5}TRAINER’S POKéMON$"
 
 	.global gUnknown_08410E61
 gUnknown_08410E61: @ 8410E61
-	.string "{PALETTE 5}"
-	.string "SELF-INTRODUCTION$"
+OtherText_SelfIntroduction:
+	.string "{PALETTE 5}SELF-INTRODUCTION$"
 
 	.global gUnknown_08410E76
 gUnknown_08410E76: @ 8410E76
+OtherText_Nature2:
 	.string "NATURE/$"
 
 	.global gUnknown_08410E7E
 gUnknown_08410E7E: @ 8410E7E
+OtherText_InParty:
 	.string "IN PARTY$"
 
 	.global gUnknown_08410E87
 gUnknown_08410E87: @ 8410E87
+OtherText_Number:
 	.string "No. $"
 
 	.global gUnknown_08410E8C
 gUnknown_08410E8C: @ 8410E8C
+OtherText_Ribbons:
 	.string "RIBBONS$"
+OtherText_MakeProfilePage1:
 	.string "Make your profile by combining$"
+OtherText_MakeProfilePage2:
 	.string "four words or phrases.$"
+OtherText_MakeMessagePage1:
 	.string "Make a message with 6 phrases.$"
+OtherText_MakeMessagePage2:
 	.string "Max. two 12-letter phrases/line.$"
+OtherText_DescribeFeelingsPage1:
 	.string "Find words that describe your$"
+OtherText_DescribeFeelingsPage2:
 	.string "feelings right now.$"
+OtherText_WithFourPhrases:
 	.string "With four phrases,$"
+OtherText_CombineNinePhrasesPage1:
 	.string "Combine nine phrases and$"
+OtherText_CombineNinePhrasesPage2:
 	.string "make a message.$"
+OtherText_ImproveBardSongPage1:
 	.string "Change just one word or phrase$"
+OtherText_ImproveBardSongPage2:
 	.string "and improve the BARD’s song.$"
+OtherText_YourProfile:
 	.string "Your profile $"
+OtherText_YourFeelingBattle:
 	.string "Your feeling at the battle’s start$"
+OtherText_SetWinMessage:
 	.string "What you say if you win a battle$"
+OtherText_SetLossMessage:
 	.string "What you say if you lose a battle$"
+OtherText_TheAnswer:
 	.string "The answer$"
+OtherText_MailMessage:
 	.string "The MAIL message$"
+OtherText_MailSalutation:
 	.string "The MAIL salutation$"
+OtherText_NewSong:
 	.string "The new song$"
+OtherText_CombineTwoPhrasesPage1:
 	.string "Combine two phrases and$"
+OtherText_CombineTwoPhrasesPage2:
 	.string "make a trendy saying.$"
+OtherText_ConfirmTrendyPage1:
 	.string "The trendy saying$"
+OtherText_ConfirmTrendyPage2:
 	.string "is as shown. Okay?$"
+OtherText_HipsterPage1:
 	.string "I’ll combine two phrases and$"
+OtherText_HipsterPage2:
 	.string "teach you a good saying.$"
 
 	.global gUnknown_084110EE
 gUnknown_084110EE: @ 84110EE
+OtherText_TextDeletedConfirmPage1:
 	.string "All the text being edited will$"
 
 	.global gUnknown_0841110D
 gUnknown_0841110D: @ 841110D
+OtherText_TextDeletedConfirmPage2:
 	.string "be deleted. Is that okay?$"
 
 	.global gUnknown_08411127
 gUnknown_08411127: @ 8411127
+OtherText_QuitEditing:
 	.string "Quit editing?$"
 
 	.global gUnknown_08411135
 gUnknown_08411135: @ 8411135
+OtherText_EditedTextNoSavePage1:
 	.string "The edited text will not be saved.$"
 
 	.global gUnknown_08411158
 gUnknown_08411158: @ 8411158
+OtherText_EditedTextNoSavePage2:
 	.string "Is that okay?$"
 
 	.global gUnknown_08411166
 gUnknown_08411166: @ 8411166
+OtherText_EnterAPhraseOrWord:
 	.string "Please enter a phrase or word.$"
 
 	.global gUnknown_08411185
 gUnknown_08411185: @ 8411185
+OtherText_TextNoDelete:
 	.string "The entire text can’t be deleted.$"
 
 	.global gUnknown_084111A7
 gUnknown_084111A7: @ 84111A7
+OtherText_OnlyOnePhrase:
 	.string "Only one phrase may be changed.$"
 
 	.global gUnknown_084111C7
 gUnknown_084111C7: @ 84111C7
+OtherText_OriginalSongRestored:
 	.string "The original song will be restored.$"
 
 	.global gUnknown_084111EB
 gUnknown_084111EB: @ 84111EB
+OtherText_TrendyAlready:
 	.string "That’s trendy already!$"
 
 	.global gUnknown_08411202
 gUnknown_08411202: @ 8411202
+OtherText_CombineTwoPhrases:
 	.string "Combine two words or phrases.$"
 
 	.global gUnknown_08411220
 gUnknown_08411220: @ 8411220
+OtherText_QuitGivingInfo:
 	.string "Quit giving information?$"
 
 	.global gUnknown_08411239
 gUnknown_08411239: @ 8411239
+OtherText_StopGivingMail:
 	.string "Stop giving the POKéMON MAIL?$"
 
 	.global gUnknown_08411257
 gUnknown_08411257: @ 8411257
+OtherText_Profile:
 	.string "PROFILE$"
 
 	.global gUnknown_0841125F
 gUnknown_0841125F: @ 841125F
+OtherText_AtBattleStart:
 	.string "At the battle’s start.$"
 
 	.global gUnknown_08411276
 gUnknown_08411276: @ 8411276
+OtherText_UponWinningBattle:
 	.string "Upon winning a battle.$"
 
 	.global gUnknown_0841128D
 gUnknown_0841128D: @ 841128D
+OtherText_UponLosingBattle:
 	.string "Upon losing a battle.$"
 
 	.global gUnknown_084112A3
 gUnknown_084112A3: @ 84112A3
+OtherText_TheBardsSong:
 	.string "The BARD’s Song$"
 
 	.global gUnknown_084112B3
 gUnknown_084112B3: @ 84112B3
+OtherText_WhatsHipHappening:
 	.string "What’s hip and happening?$"
 
 	.global gUnknown_084112CD
 gUnknown_084112CD: @ 84112CD
+OtherText_Interview:
 	.string "Interview$"
 
 	.global gUnknown_084112D7
 gUnknown_084112D7: @ 84112D7
+OtherText_GoodSaying:
 	.string "Good saying$"
+OtherText_SoPretty:
 	.string " so pretty!$"
+OtherText_SoDarling:
 	.string " so darling!$"
+OtherText_SoRelaxed:
 	.string " so relaxed!$"
+OtherText_SoSunny:
 	.string " so sunny!$"
+OtherText_SoDesirable:
 	.string " so desirable!$"
+OtherText_SoExciting:
 	.string " so exciting!$"
+OtherText_SoAmusing:
 	.string " so amusing!$"
+OtherText_SoMagical:
 	.string " so magical!$"
 
 	.global gUnknown_0841134B
 gUnknown_0841134B: @ 841134B
+OtherText_Is:
 	.string " is$"
 
 	.global gUnknown_0841134F
 gUnknown_0841134F: @ 841134F
+OtherText_DontYouAgree:
 	.string "\nDon’t you agree?$"
+OtherText_WantVacationNicePlace:
 	.string "I so want to go on a vacation.\nWould you happen to know a nice place?$"
+OtherText_BoughtCrayonsIsNice:
 	.string "I bought crayons with 120 colors!\nDon’t you think that’s nice?$"
+OtherText_IfWeCouldFloat:
 	.string "Wouldn’t it be nice if we could float\naway on a cloud of bubbles?$"
+OtherText_SandWashesAwayMakeSad:
 	.string "When you write on a sandy beach,\nthey wash away. It makes me sad.$"
+OtherText_WhatsBottomSeaLike:
 	.string "What’s the bottom of the sea like?\nJust once I would so love to go!$"
+OtherText_SeeSettingSun:
 	.string "When you see the setting sun, does it\nmake you want to go home?$"
+OtherText_LyingInGreenGrass:
 	.string "Lying back in the green grass...\nOh, it’s so, so nice!$"
+OtherText_SecretBasesWonderful:
 	.string "SECRET BASES are so wonderful!\nCan’t you feel the excitement?$"
+OtherText_PokeLeague:
 	.string "POKéMON LEAGUE$"
+OtherText_PokeCenter:
 	.string "POKéMON CENTER$"
 
 	.global gUnknown_08411581
 gUnknown_08411581: @ 8411581
+OtherText_GetAPokeBlock:
 	.string " gets a {POKEBLOCK}?$"
+OtherText_Coolness:
 	.string "Coolness $"
+OtherText_Beauty:
 	.string "Beauty $"
+OtherText_Cuteness:
 	.string "Cuteness $"
+OtherText_Smartness:
 	.string "Smartness $"
+OtherText_Toughness:
 	.string "Toughness $"
 
 	.global gUnknown_084115C2
 gUnknown_084115C2: @ 84115C2
+SystemText_WasEnhanced:
 	.string "was enhanced!$"
 
 	.global gUnknown_084115D0
 gUnknown_084115D0: @ 84115D0
+SystemText_NothingChanged:
 	.string "Nothing changed!$"
 
 	.global gUnknown_084115E1
 gUnknown_084115E1: @ 84115E1
+OtherText_WontEat:
 	.string "It won’t eat anymore...$"
 
 	.global gUnknown_084115F9
 gUnknown_084115F9: @ 84115F9
+SystemText_SaveFailedBackupCheck:
 	.string "Save failed.\nChecking the backup memory...\nPlease wait.\n{COLOR RED}“Time required: 1 minute”$"
 
 	.global gUnknown_0841164E
 gUnknown_0841164E: @ 841164E
+SystemText_BackupDamagedGameContinue:
 	.string "The backup memory is damaged or\nthe internal battery has run dry.\nThe game can be played. However,\nprogress cannot be saved.$"
 
 	.global gUnknown_084116CB
 gUnknown_084116CB: @ 84116CB
+SystemText_GameplayEnded:
 	.string "{COLOR RED}“Gameplay cannot be continued.\nReturning to the title screen...”$"
 
 	.global gUnknown_0841170F
 gUnknown_0841170F: @ 841170F
+SystemText_CheckCompleteSaveAttempt:
 	.string "Check completed.\nAttempting to save again.\nPlease wait.$"
 
 	.global gUnknown_08411747
 gUnknown_08411747: @ 8411747
+SystemText_SaveCompletedGameEnd:
 	.string "Save completed.\n{COLOR RED}“Gameplay cannot be continued.\nReturning to the title screen.”$"
 
 	.global gUnknown_08411799
 gUnknown_08411799: @ 8411799
+SystemText_SaveCompletedPressA:
 	.string "Save completed.\n{COLOR RED}“Please press the A Button.”$"
 
 	.global gUnknown_084117C9
 gUnknown_084117C9: @ 84117C9
+OtherText_Ferry:
 	.string "FERRY$"
 
 	.global gUnknown_084117CF
 gUnknown_084117CF: @ 84117CF
+OtherText_SecretBase:
 	.string "SECRET BASE$"
 
 	.global gUnknown_084117DB
 gUnknown_084117DB: @ 84117DB
+OtherText_Hideout:
 	.string "HIDEOUT$"
 
 	.global gUnknown_084117E3
 gUnknown_084117E3: @ 84117E3
+SystemText_ResetRTCPrompt:
 	.string "Reset RTC?\nA: Confirm, B: Cancel$"
 
 	.global gUnknown_08411804
 gUnknown_08411804: @ 8411804
+SystemText_PresentTime:
 	.string "Present time in game$"
 
 	.global gUnknown_08411819
 gUnknown_08411819: @ 8411819
+SystemText_PreviousTime:
 	.string "Previous time in game$"
 
 	.global gUnknown_0841182F
 gUnknown_0841182F: @ 841182F
+SystemText_PleaseResetTime:
 	.string "Please reset the time.$"
 
 	.global gUnknown_08411846
 gUnknown_08411846: @ 8411846
+SystemText_ClockResetDataSave:
 	.string "The clock has been reset.\nData will be saved. Please wait.$"
 
 	.global gUnknown_08411881
 gUnknown_08411881: @ 8411881
+SystemText_SaveCompleted:
 	.string "Save completed.$"
 
 	.global gUnknown_08411891
 gUnknown_08411891: @ 8411891
+SystemText_SaveFailed:
 	.string "Save failed...$"
 
 	.global gUnknown_084118A0
 gUnknown_084118A0: @ 84118A0
+SystemText_NoSaveFileNoTime:
 	.string "There is no save file, so the time\ncan’t be set.$"
 
 	.global gUnknown_084118D1
 gUnknown_084118D1: @ 84118D1
+SystemText_ClockAdjustmentUsable:
 	.string "The in-game clock adjustment system\nis now useable.$"
 
 	.global gUnknown_08411905
-	gUnknown_08411905: @ 8411905
+gUnknown_08411905: @ 8411905
+SystemText_Saving:
     .string "SAVING...\nDON’T TURN OFF THE POWER.$"
 
     .align 2
     .global gUnknown_0841192C
 gUnknown_0841192C: @ 841192C
-
-	.incbin "baserom.gba", 0x0041192c, 0x14
+	.4byte ContestStatsText_VerySoft
+	.4byte ContestStatsText_Soft
+	.4byte ContestStatsText_Hard
+	.4byte ContestStatsText_VeryHard
+	.4byte ContestStatsText_SuperHard
 
 	.global gUnknown_08411940
 gUnknown_08411940: @ 8411940
@@ -10259,27 +13074,93 @@ gUnknown_08411A10: @ 8411A10
 
 	.global gUnknown_08411A42
 gUnknown_08411A42: @ 8411A42
-	.incbin "baserom.gba", 0x00411a42, 0x60e
+Unknown_8411A42:
+	.incbin "baserom.gba", 0x00411A42, 0x44e
+Unknown_8411E90:
+	.incbin "baserom.gba", 0x00411E90, 0x10
+Unknown_8411EA0:
+	.incbin "baserom.gba", 0x00411EA0, 0x20
+Unknown_8411EC0:
+	.incbin "baserom.gba", 0x00411EC0, 0x28
+Unknown_8411EE8:
+	.incbin "baserom.gba", 0x00411EE8, 0x20
+Unknown_8411F08:
+	.incbin "baserom.gba", 0x00411F08, 0x28
+Unknown_8411F30:
+	.incbin "baserom.gba", 0x00411F30, 0x20
+Unknown_8411F50:
+	.incbin "baserom.gba", 0x00411F50, 0x28
+Unknown_8411F78:
+	.incbin "baserom.gba", 0x00411F78, 0x20
+Unknown_8411F98:
+	.incbin "baserom.gba", 0x00411F98, 0x28
+Unknown_8411FC0:
+	.incbin "baserom.gba", 0x00411FC0, 0x20
+Unknown_8411FE0:
+	.incbin "baserom.gba", 0x00411FE0, 0x28
+Unknown_8412008:
+	.incbin "baserom.gba", 0x00412008, 0x20
+Unknown_8412028:
+	.incbin "baserom.gba", 0x00412028, 0x28
 
 	.global gUnknown_08412050
 gUnknown_08412050: @ 8412050
-	.incbin "baserom.gba", 0x00412050, 0x54
+	.4byte Unknown_8411E90
+	.4byte Unknown_8411EA0
+	.4byte Unknown_8411EE8
+	.4byte Unknown_8411F30
+	.4byte Unknown_8411F78
+	.4byte Unknown_8411FC0
+	.4byte Unknown_8412008
+	.4byte Unknown_8411E90
+	.4byte Unknown_8411E90
+	.4byte Unknown_8411E90
+	.4byte Unknown_8411E90
+	.4byte Unknown_8411EC0
+	.4byte Unknown_8411F08
+	.4byte Unknown_8411F50
+	.4byte Unknown_8411F98
+	.4byte Unknown_8411FE0
+	.4byte Unknown_8412028
+	.4byte Unknown_8411E90
+	.4byte Unknown_8411E90
+	.4byte Unknown_8411E90
+	.4byte Unknown_8411E90
 
 	.global gUnknown_084120A4
 gUnknown_084120A4: @ 84120A4
-	.incbin "baserom.gba", 0x004120a4, 0x48
+Unknown_84120A4:
+	.4byte 0x08e781e4
+	.4byte 0x08e781f8
+	.4byte 0x08e7820c
+	.4byte 0x08e78220
+	.4byte 0x08e78234
+	.4byte 0x08e78248
+	.4byte 0x08e7825c
+	.4byte 0x08e78270
+	.4byte 0x08e78284
+	.4byte 0x08e78298
+	.4byte 0x08e782ac
+	.4byte 0x08e782c0
+	.4byte 0x08e782d4
+	.4byte 0x08e782e8
+Unknown_84120DC:
+	.incbin "baserom.gba", 0x004120dc, 0x10
 
 	.global gUnknown_084120EC
 gUnknown_084120EC: @ 84120EC
-	.incbin "baserom.gba", 0x004120ec, 0xb4
+Unknown_8412EC:
+	.4byte Unknown_84120DC
+Unknown_84120F0:
+	.incbin "baserom.gba", 0x004120f0, 0xb0
 
 	.global gUnknown_084121A0
 gUnknown_084121A0: @ 84121A0
-	.incbin "baserom.gba", 0x004121a0, 0x4
+	.4byte Unknown_84120DC
 
 	.global gUnknown_084121A4
 gUnknown_084121A4: @ 84121A4
-	.incbin "baserom.gba", 0x004121a4, 0x4
+	.4byte Unknown_84120F0
 
 	.global gUnknown_084121A8
 gUnknown_084121A8: @ 84121A8
@@ -10383,11 +13264,23 @@ gUnknown_08416B3C: @ 8416B3C
 
 	.global gUnknown_08416B54
 gUnknown_08416B54: @ 8416B54
-	.incbin "baserom.gba", 0x00416b54, 0x30
+Unknown_8416B54:
+	.incbin "baserom.gba", 0x00416b54, 0x10
+Unknown_8416B64:
+	.incbin "baserom.gba", 0x00416b64, 0x8
+Unknown_8416B6C:
+	.incbin "baserom.gba", 0x00416b6c, 0x8
+Unknown_8416B74:
+	.incbin "baserom.gba", 0x00416b74, 0x8
+Unknown_8416B7C:
+	.incbin "baserom.gba", 0x00416b7c, 0x8
 
 	.global gUnknown_08416B84
 gUnknown_08416B84: @ 8416B84
-	.incbin "baserom.gba", 0x00416b84, 0x10
+	.4byte Unknown_8416B64
+	.4byte Unknown_8416B6C
+	.4byte Unknown_8416B74
+	.4byte Unknown_8416B7C
 
 	.global gUnknown_08416B94
 gUnknown_08416B94: @ 8416B94
@@ -10395,11 +13288,20 @@ gUnknown_08416B94: @ 8416B94
 
 	.global gUnknown_08416BDC
 gUnknown_08416BDC: @ 8416BDC
-	.incbin "baserom.gba", 0x00416bdc, 0x28
+Unknown_8416BDC:
+	.incbin "baserom.gba", 0x00416bdc, 0x10
+Unknown_8416BEC:
+	.incbin "baserom.gba", 0x00416bec, 0x8
+Unknown_8416BF4:
+	.incbin "baserom.gba", 0x00416bf4, 0x8
+Unknown_8416BFC:
+	.incbin "baserom.gba", 0x00416bfc, 0x8
 
 	.global gUnknown_08416C04
 gUnknown_08416C04: @ 8416C04
-	.incbin "baserom.gba", 0x00416c04, 0xc
+	.4byte Unknown_8416BEC
+	.4byte Unknown_8416BF4
+	.4byte Unknown_8416BFC
 
 	.global gUnknown_08416C10
 gUnknown_08416C10: @ 8416C10
@@ -10407,11 +13309,14 @@ gUnknown_08416C10: @ 8416C10
 
 	.global gUnknown_08416C70
 gUnknown_08416C70: @ 8416C70
-	.incbin "baserom.gba", 0x00416c70, 0x18
+Unknown_8416C70:
+	.incbin "baserom.gba", 0x00416c70, 0x10
+Unknown_8416C80:
+	.incbin "baserom.gba", 0x00416c80, 0x8
 
 	.global gUnknown_08416C88
 gUnknown_08416C88: @ 8416C88
-	.incbin "baserom.gba", 0x00416c88, 0x4
+	.4byte Unknown_8416C80
 
 	.global gUnknown_08416C8C
 gUnknown_08416C8C: @ 8416C8C
@@ -10483,11 +13388,116 @@ gUnknown_08416EB8: @ 8416EB8
 
 	.global gUnknown_08416ED0
 gUnknown_08416ED0: @ 8416ED0
-	.incbin "baserom.gba", 0x00416ed0, 0x198
+Unknown_8416ED0:
+	.incbin "baserom.gba", 0x00416ed0, 0x38
+Unknown_8416F08:
+	.incbin "baserom.gba", 0x00416f08, 0x4
+Unknown_8416F0C:
+	.incbin "baserom.gba", 0x00416f0c, 0x4
+Unknown_8416F10:
+	.incbin "baserom.gba", 0x00416f10, 0x4
+Unknown_8416F14:
+	.incbin "baserom.gba", 0x00416f14, 0x4
+Unknown_8416F18:
+	.incbin "baserom.gba", 0x00416f18, 0x4
+Unknown_8416F1C:
+	.incbin "baserom.gba", 0x00416f1c, 0x6
+Unknown_8416F22:
+	.incbin "baserom.gba", 0x00416f22, 0x6
+Unknown_8416F28:
+	.incbin "baserom.gba", 0x00416f28, 0x6
+Unknown_8416F2E:
+	.incbin "baserom.gba", 0x00416f2e, 0x6
+Unknown_8416F34:
+	.incbin "baserom.gba", 0x00416f34, 0x6
+Unknown_8416F3A:
+	.incbin "baserom.gba", 0x00416f3a, 0x8
+Unknown_8416F42:
+	.incbin "baserom.gba", 0x00416f42, 0x8
+Unknown_8416F4A:
+	.incbin "baserom.gba", 0x00416f4a, 0x8
+Unknown_8416F52:
+	.incbin "baserom.gba", 0x00416f52, 0x8
+Unknown_8416F5A:
+	.incbin "baserom.gba", 0x00416f5a, 0x8
+Unknown_8416F62:
+	.incbin "baserom.gba", 0x00416f62, 0xA
+Unknown_8416F6C:
+	.incbin "baserom.gba", 0x00416f6c, 0xA
+Unknown_8416F76:
+	.incbin "baserom.gba", 0x00416f76, 0xA
+Unknown_8416F80:
+	.incbin "baserom.gba", 0x00416f80, 0xA
+Unknown_8416F8A:
+	.incbin "baserom.gba", 0x00416f8a, 0xA
+Unknown_8416F94:
+	.incbin "baserom.gba", 0x00416f94, 0xC
+Unknown_8416FA0:
+	.incbin "baserom.gba", 0x00416fa0, 0xC
+Unknown_8416FAC:
+	.incbin "baserom.gba", 0x00416fac, 0xC
+Unknown_8416FB8:
+	.incbin "baserom.gba", 0x00416fb8, 0xC
+Unknown_8416FC4:
+	.incbin "baserom.gba", 0x00416fc4, 0xC
+Unknown_8416FD0:
+	.incbin "baserom.gba", 0x00416fd0, 0xE
+Unknown_8416FDE:
+	.incbin "baserom.gba", 0x00416fde, 0xE
+Unknown_8416FEC:
+	.incbin "baserom.gba", 0x00416fec, 0xE
+Unknown_8416FFA:
+	.incbin "baserom.gba", 0x00416ffa, 0xE
+Unknown_8417008:
+	.incbin "baserom.gba", 0x00417008, 0xE
+Unknown_8417016:
+	.incbin "baserom.gba", 0x00417016, 0x10
+Unknown_8417026:
+	.incbin "baserom.gba", 0x00417026, 0x10
+Unknown_8417036:
+	.incbin "baserom.gba", 0x00417036, 0x10
+Unknown_8417046:
+	.incbin "baserom.gba", 0x00417046, 0x10
+Unknown_8417056:
+	.incbin "baserom.gba", 0x00417056, 0x12
 
 	.global gUnknown_08417068
 gUnknown_08417068: @ 8417068
-	.incbin "baserom.gba", 0x00417068, 0x8c
+	.4byte Unknown_8416F08
+	.4byte Unknown_8416F0C
+	.4byte Unknown_8416F10
+	.4byte Unknown_8416F14
+	.4byte Unknown_8416F18
+	.4byte Unknown_8416F1C
+	.4byte Unknown_8416F22
+	.4byte Unknown_8416F28
+	.4byte Unknown_8416F2E
+	.4byte Unknown_8416F34
+	.4byte Unknown_8416F3A
+	.4byte Unknown_8416F42
+	.4byte Unknown_8416F4A
+	.4byte Unknown_8416F52
+	.4byte Unknown_8416F5A
+	.4byte Unknown_8416F62
+	.4byte Unknown_8416F6C
+	.4byte Unknown_8416F76
+	.4byte Unknown_8416F80
+	.4byte Unknown_8416F8A
+	.4byte Unknown_8416F94
+	.4byte Unknown_8416FA0
+	.4byte Unknown_8416FAC
+	.4byte Unknown_8416FB8
+	.4byte Unknown_8416FC4
+	.4byte Unknown_8416FD0
+	.4byte Unknown_8416FDE
+	.4byte Unknown_8416FEC
+	.4byte Unknown_8416FFA
+	.4byte Unknown_8417008
+	.4byte Unknown_8417016
+	.4byte Unknown_8417026
+	.4byte Unknown_8417036
+	.4byte Unknown_8417046
+	.4byte Unknown_8417056
 
 	.global gUnknown_084170F4
 gUnknown_084170F4: @ 84170F4
@@ -10618,221 +13628,297 @@ gUnknown_0842C29C: @ 842C29C
 	.4byte __unknown_string_6thRound, sub_814A4B8
 	.4byte __unknown_string_7thRound, sub_814A4B8
 	.4byte __unknown_string_8thRound, sub_814A4B8
-
+OtherText_TopSpeed:
 	.string "TOP SPEED$"
 
 	.global gUnknown_0842C2E6
 gUnknown_0842C2E6: @ 842C2E6
+MultiText_BerryBlenderMaxSpeedRecord:
 	.string "BERRY BLENDER\nMAXIMUM SPEED RECORD!$"
 
 	.global gUnknown_0842C30A
 gUnknown_0842C30A: @ 842C30A
+MultiText_2P3P4P:
 	.string "2 PLAYERS\n3 PLAYERS\n4 PLAYERS$"
 
 	.global gUnknown_0842C328
 gUnknown_0842C328: @ 842C328
+MultiText_Saving:
 	.string "SAVING...\nDON’T TURN OFF THE POWER.$"
 
 	.global gUnknown_0842C34C
 gUnknown_0842C34C: @ 842C34C
+MultiText_LinkError:
 	.string "{HIGHLIGHT TRANSPARENT}{COLOR WHITE2}Link error...\nCheck your Game Link cable connection,\nand turn the power off and on.$"
 
 	.global gUnknown_0842C3A6
 gUnknown_0842C3A6: @ 842C3A6
+SystemText_OptionMenu:
 	.string "{PALETTE 9}OPTION$"
 
 	.global gUnknown_0842C3B0
 gUnknown_0842C3B0: @ 842C3B0
+SystemText_TextSpeed:
 	.string "{PALETTE 9}TEXT SPEED$"
 
 	.global gUnknown_0842C3BE
 gUnknown_0842C3BE: @ 842C3BE
+SystemText_BattleScene:
 	.string "{PALETTE 9}BATTLE SCENE$"
 
 	.global gUnknown_0842C3CE
 gUnknown_0842C3CE: @ 842C3CE
+SystemText_BattleStyle:
 	.string "{PALETTE 9}BATTLE STYLE$"
 
 	.global gUnknown_0842C3DE
 gUnknown_0842C3DE: @ 842C3DE
+SystemText_Sound:
 	.string "{PALETTE 9}SOUND$"
 
 	.global gUnknown_0842C3E7
 gUnknown_0842C3E7: @ 842C3E7
+SystemText_Frame:
 	.string "{PALETTE 9}FRAME$"
 
 	.global gUnknown_0842C3F0
 gUnknown_0842C3F0: @ 842C3F0
+SystemText_Cancel:
 	.string "{PALETTE 9}CANCEL$"
 
 	.global gUnknown_0842C3FA
 gUnknown_0842C3FA: @ 842C3FA
+SystemText_ButtonMode:
 	.string "{PALETTE 9}BUTTON MODE$"
 
 	.global gUnknown_0842C409
 gUnknown_0842C409: @ 842C409
+SystemText_TextSpeedSlow:
 	.string "{PALETTE 15}SLOW$"
 
 	.global gUnknown_0842C411
 gUnknown_0842C411: @ 842C411
+SystemText_Mid:
 	.string "{PALETTE 15}MID$"
 
 	.global gUnknown_0842C418
 gUnknown_0842C418: @ 842C418
+SystemText_Fast:
 	.string "{PALETTE 15}FAST$"
 
 	.global gUnknown_0842C420
 gUnknown_0842C420: @ 842C420
+SystemText_On:
 	.string "{PALETTE 15}ON$"
 
 	.global gUnknown_0842C426
 gUnknown_0842C426: @ 842C426
+SystemText_Off:
 	.string "{PALETTE 15}OFF$"
 
 	.global gUnknown_0842C42D
 gUnknown_0842C42D: @ 842C42D
+SystemText_Shift:
 	.string "{PALETTE 15}SHIFT$"
 
 	.global gUnknown_0842C436
 gUnknown_0842C436: @ 842C436
+SystemText_Set:
 	.string "{PALETTE 15}SET$"
 
 	.global gUnknown_0842C43D
 gUnknown_0842C43D: @ 842C43D
+SystemText_Mono:
 	.string "{PALETTE 15}MONO$"
 
 	.global gUnknown_0842C445
 gUnknown_0842C445: @ 842C445
+SystemText_Stereo:
 	.string "{PALETTE 15}STEREO$"
 
 	.global gUnknown_0842C44F
 gUnknown_0842C44F: @ 842C44F
+SystemText_Type:
 	.string "{PALETTE 15}TYPE$"
 
 	.global gUnknown_0842C457
 gUnknown_0842C457: @ 842C457
+SystemText_Terminator:
 	.string "{PALETTE 8}$"
 
 	.global gUnknown_0842C45B
 gUnknown_0842C45B: @ 842C45B
+SystemText_Normal:
 	.string "{PALETTE 15}NORMAL$"
 
 	.global gUnknown_0842C465
 gUnknown_0842C465: @ 842C465
+SystemText_LR:
 	.string "{PALETTE 15}LR$"
 
 	.global gUnknown_0842C46B
 gUnknown_0842C46B: @ 842C46B
+SystemText_LA:
 	.string "{PALETTE 15}L=A$"
+SystemText_Pokedex:
 	.string "POKéDEX$"
+SystemText_Pokemon:
 	.string "POKéMON$"
+SystemText_BAG:
 	.string "BAG$"
+SystemText_Pokenav:
 	.string "POKéNAV$"
+SystemText_Player:
 	.string "{PLAYER}$"
+SystemText_Save:
 	.string "SAVE$"
+SystemText_Option:
 	.string "OPTION$"
+SystemText_Exit:
 	.string "EXIT$"
+SystemText_Retire: @ safari zone?
 	.string "RETIRE$"
 
 	.global gUnknown_0842C4A9
 gUnknown_0842C4A9: @ 842C4A9
+OtherText_SafariStock:
 	.string "SAFARI BALLS\nStock: {STR_VAR_1}$"
 
 	.global gUnknown_0842C4C0
 gUnknown_0842C4C0: @ 842C4C0
+SystemText_LinkStandby:
 	.string "Link standby...\n... ... B Button: Cancel$"
 
 	.global gUnknown_0842C4E9
 gUnknown_0842C4E9: @ 842C4E9
+SystemText_LoadEventPressA:
 	.string "Press the A Button to load event.\n... ... B Button: Cancel$"
 
 	.global gUnknown_0842C524
 gUnknown_0842C524: @ 842C524
+SystemText_LoadingEvent:
 	.string "Loading event...$"
 
 	.global gUnknown_0842C535
 gUnknown_0842C535: @ 842C535
+SystemText_DontCutLink:
 	.string "Don’t remove the Game Link cable.\nDon’t turn off the power.$"
 
 	.global gUnknown_0842C571
 gUnknown_0842C571: @ 842C571
+SystemText_EventLoadSuccess:
 	.string "The event was safely loaded.$"
+SystemText_Terminator2:
 	.string "$"
 
 	.global gUnknown_0842C58F
 gUnknown_0842C58F: @ 842C58F
+SystemText_LoadingError:
 	.string "Loading error.\nEnding session.$"
+SystemText_Terminator3:
 	.string "$$$$$$$"
 
 	.global gUnknown_0842C5B5
 gUnknown_0842C5B5: @ 842C5B5
+OtherText_Hoenn:
 	.string "HOENN$"
 
 	.global gUnknown_0842C5BB
 gUnknown_0842C5BB: @ 842C5BB
+OtherText_OhABite:
 	.string "Oh! A bite!$"
 
 	.global gUnknown_0842C5C7
 gUnknown_0842C5C7: @ 842C5C7
+OtherText_PokeOnHook:
 	.string "A POKéMON’s on the hook!{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0842C5E2
 gUnknown_0842C5E2: @ 842C5E2
+OtherText_NotANibble:
 	.string "Not even a nibble...{PAUSE_UNTIL_PRESS}$"
 
 	.global gUnknown_0842C5F9
 gUnknown_0842C5F9: @ 842C5F9
+OtherText_ItGotAway:
 	.string "It got away...{PAUSE_UNTIL_PRESS}$"
+OtherText_Terminator:
 	.string "$"
 
 	.global gUnknown_0842C60B
 gUnknown_0842C60B: @ 842C60B
+TradeText_WillBeSent:
 	.string "{STR_VAR_2} will be sent to {STR_VAR_1}.$"
 
 	.global gUnknown_0842C622
 gUnknown_0842C622: @ 842C622
+TradeText_ByeBye:
 	.string "Bye-bye, {STR_VAR_2}!$"
 
 	.global gUnknown_0842C62F
 gUnknown_0842C62F: @ 842C62F
+TradeText_SentOverPoke:
 	.string "{STR_VAR_1} sent over {STR_VAR_3}.$"
 
 	.global gUnknown_0842C640
 gUnknown_0842C640: @ 842C640
+TradeText_TakeGoodCare:
 	.string "Take good care of {STR_VAR_3}!$"
+TradeText_Cancel:
 	.string "CANCEL$"
+TradeText_ChoosePoke:
 	.string "Choose a POKéMON.$"
+TradeText_Summary1:
 	.string "SUMMARY$"
+TradeText_Trade1:
 	.string "TRADE$"
+TradeText_CancelTradePrompt:
 	.string "Cancel trade?$"
+TradeText_PressBToExit:
 	.string "Press the B Button to exit.$"
+TradeText_Summary2:
 	.string "SUMMARY$"
+TradeText_Trade2:
 	.string "TRADE$"
+TradeText_LinkStandby:
 	.string "{COLOR DARK_GREY}{HIGHLIGHT WHITE2}{SHADOW LIGHT_GREY}Link standby...\nPlease wait.$"
+TradeText_TradeCancelled:
 	.string "{COLOR DARK_GREY}{HIGHLIGHT WHITE2}{SHADOW LIGHT_GREY}The trade has\nbeen canceled.$"
+TradeText_OnlyPoke:
 	.string "{COLOR DARK_GREY}{HIGHLIGHT WHITE2}{SHADOW LIGHT_GREY}That’s your only\nPOKéMON for battle.$"
+TradeText_NonTradablePoke:
 	.string "{COLOR DARK_GREY}{HIGHLIGHT WHITE2}{SHADOW LIGHT_GREY}Your friend can’t\ntrade that one.$"
+TradeText_WaitingForFriend:
 	.string "{COLOR DARK_GREY}{HIGHLIGHT WHITE2}{SHADOW LIGHT_GREY}Waiting for your\nfriend to finish...$"
+TradeText_WantToTrade:
 	.string "{COLOR DARK_GREY}{HIGHLIGHT WHITE2}{SHADOW LIGHT_GREY}Your friend wants\nto trade POKéMON.$"
+TradeText_Terminator:
 	.string "$"
 
 	.global gUnknown_0842C7B6 @ trade functions? could be in-game as well
 gUnknown_0842C7B6:
+TradeText_TradeOkayPrompt:
 	.string "Is this trade okay?$"
 
 	.global gUnknown_0842C7CA
 gUnknown_0842C7CA:
+OtherText_Terminator2:
 	.string "$"
 
 	.global gUnknown_0842C7CB @ this is probably related to battle
 gUnknown_0842C7CB:
+OtherText_NewLine:
 	.string "\n$"
+OtherText_Escape:
 	.string "/$"
+OtherText_Level:
 	.string "Lv$"
+OtherText_ThreeDashes:
 	.string "---$"
 
 	.global gUnknown_0842C7D6
 gUnknown_0842C7D6:
+OtherText_FourQuestions:
 	.string "????$"
 
 @ 842C7DB
@@ -10840,474 +13926,637 @@ gUnknown_0842C7D6:
 
 	.global gUnknown_0842C890
 gUnknown_0842C890: @ 842C890
+OtherText_ThreeQuestions:
 	.string "???$"
 
 	.global gUnknown_0842C894
 gUnknown_0842C894: @ 842C894
+OtherText_From:
 	.string "From $"
 
 	.global gUnknown_0842C89A
 gUnknown_0842C89A: @ 842C89A
+OtherText_MixingRecordsWithFriend:
 	.string "Mixing records...$"
 
 	.global gUnknown_0842C8AC
 gUnknown_0842C8AC: @ 842C8AC
+OtherText_MixingComplete:
 	.string "Record mixing completed.\nThank you for waiting.$"
 
 	.global gUnknown_0842C8DC
 gUnknown_0842C8DC: @ 842C8DC
+OtherText_TrainersTrainerCard: @ redundant but couldnt think of a better desc
 	.string "’s TRAINER CARD$"
 
 	.global gUnknown_0842C8EC
 gUnknown_0842C8EC: @ 842C8EC
+OtherText_FirstHOF:
 	.string "FIRST HALL OF FAME$"
 
 	.global gUnknown_0842C8FF
 gUnknown_0842C8FF: @ 842C8FF
+OtherText_LinkCableBattles:
 	.string "LINK CABLE BATTLES  W/            L/$"
 
 	.global gUnknown_0842C924
 gUnknown_0842C924: @ 842C924
+OtherText_BattleTowerWinRecord:
 	.string "BATTLE TOWER W/{CLEAR_TO 0x72}&{CLEAR_TO 0x98}STRAIGHT$"
 
 	.global gUnknown_0842C943
 gUnknown_0842C943: @ 842C943
+OtherText_ContestRecord:
 	.string "CONTESTS W/FRIENDS W/$"
 
 	.global gUnknown_0842C959
 gUnknown_0842C959: @ 842C959
+OtherText_MixingRecord:
 	.string "{POKEBLOCK}S W/FRIENDS$"
 
 	.global gUnknown_0842C96A
 gUnknown_0842C96A: @ 842C96A
+OtherText_TradeRecord:
 	.string "POKéMON TRADES$"
 
 	.global gUnknown_0842C979
 gUnknown_0842C979: @ 842C979
+OtherText_Boy:
 	.string "BOY$"
 
 	.global gUnknown_0842C97D
 gUnknown_0842C97D: @ 842C97D
+OtherText_Girl:
 	.string "GIRL$"
+OtherText_Terminator3:
 	.string "$"
 
 	.global gUnknown_0842C983
 gUnknown_0842C983: @ 842C983
+OtherText_Player:
 	.string "PLAYER$"
 
 	.global gUnknown_0842C98A
 gUnknown_0842C98A: @ 842C98A
+OtherText_Badges:
 	.string "BADGES$"
 	.string "$"
 
 	.global gUnknown_0842C992
 gUnknown_0842C992: @ 842C992
+OtherText_Pokedex:
 	.string "POKéDEX$"
 
 	.global gUnknown_0842C99A
 gUnknown_0842C99A: @ 842C99A
+OtherText_PlayTime:
 	.string "PLAY TIME$"
 
 	.global gUnknown_0842C9A4
 gUnknown_0842C9A4: @ 842C9A4
+OtherText_SentToPc:
 	.string "{STR_VAR_1} was sent to\nthe PC.{PAUSE_UNTIL_PRESS}$"
+OtherText_YourName:
 	.string "YOUR NAME?$"
+OtherText_BoxName:
 	.string "BOX NAME?$"
+OtherText_PokeName:
 	.string "{STR_VAR_1}’s nickname?$"
 
 	.global gUnknown_0842C9E1
 gUnknown_0842C9E1: @ 842C9E1
-	.string "MARCO$"
+OtherText_Marco:
+	.string "MARCO$" @ polo
 
 	.global gUnknown_0842C9E7
 gUnknown_0842C9E7: @ 842C9E7
+OtherText_Coins:
 	.string "{STR_VAR_1} COINS$"
 
 	.global gUnknown_0842C9F0
 gUnknown_0842C9F0: @ 842C9F0
+OtherText_BattleResults:
 	.string "{PLAYER}’s BATTLE RESULTS$"
 
 	.global gUnknown_0842CA04
 gUnknown_0842CA04: @ 842CA04
+OtherText_WinRecord:
 	.string "TOTAL RECORD W/{STR_VAR_1} L/{STR_VAR_2} D/{STR_VAR_3}$"
 
 	.global gUnknown_0842CA20
 gUnknown_0842CA20: @ 842CA20
+OtherText_WinLoseDraw:
 	.string "WIN        LOSE        DRAW$"
 
 	.global gUnknown_0842CA3C
 gUnknown_0842CA3C: @ 842CA3C
+OtherText_SevenDashes:
 	.string "-------$"
 
 	.global gUnknown_0842CA44
 gUnknown_0842CA44: @ 842CA44
+OtherText_FourDashes:
 	.string "----$"
 
 	.global gUnknown_0842CA49
 gUnknown_0842CA49: @ 842CA49
+OtherText_BattleTowerResults:
 	.string "{PLAYER}’s BATTLE TOWER RESULTS$"
 
 	.global gUnknown_0842CA63
 gUnknown_0842CA63: @ 842CA63
+OtherText_Lv50:
 	.string "LV 50$"
 
 	.global gUnknown_0842CA69
 gUnknown_0842CA69: @ 842CA69
+OtherText_Lv100:
 	.string "LV 100$"
 
 	.global gUnknown_0842CA70
 gUnknown_0842CA70: @ 842CA70
+OtherText_WinStreak:
 	.string "{STR_VAR_1}W STREAK$"
 
 	.global gUnknown_0842CA7B
 gUnknown_0842CA7B: @ 842CA7B
+OtherText_Current:
 	.string "CURRENT$"
 
 	.global gUnknown_0842CA83
 gUnknown_0842CA83: @ 842CA83
+OtherText_Record:
 	.string "RECORD$"
 
 	.global gUnknown_0842CA8A
 gUnknown_0842CA8A: @ 842CA8A
+OtherText_Prev:
 	.string "PREV.$"
 
 	.global gUnknown_0842CA90
 gUnknown_0842CA90: @ 842CA90
+OtherText_QuitGamePrompt:
 	.string "Quit the game?$"
 
 	.global gUnknown_0842CA9F
 gUnknown_0842CA9F: @ 842CA9F
+OtherText_MaxCoins:
 	.string "You’ve got 9,999 COINS.$"
 
 	.global gUnknown_0842CAB7
 gUnknown_0842CAB7: @ 842CAB7
+OtherText_OutOfCoins:
 	.string "You’ve run out of COINS.\nGame over!$"
 
 	.global gUnknown_0842CADB
 gUnknown_0842CADB: @ 842CADB
+OtherText_DontHaveThreeCoins:
 	.string "You don’t have three COINS.$"
 
 	.global gUnknown_0842CAF7
 gUnknown_0842CAF7: @ 842CAF7
+OtherText_ReelTime:
 	.string "REEL TIME\nHere’s your chance to take\naim and nail marks!\nThe Reel Time continues for\nas often as the drawn number.\nIt all ends on a Big Bonus.$"
+DaycareText_GetAlongVeryWell:
 	.string "The two seem to get along very well.$"
+DaycareText_GetAlong:
 	.string "The two seem to get along.$"
+DaycareText_DontLikeOther:
 	.string "The two don’t seem to like each other.$"
+DaycareText_PlayOther:
 	.string "The two prefer to play with other\nPOKéMON than each other.$"
 
 	.global gUnknown_0842CC28
 gUnknown_0842CC28: @ 842CC28
+OtherText_NewLine2:
 	.string "\n$"
 
 	.global gUnknown_0842CC2A
 gUnknown_0842CC2A: @ 842CC2A
+OtherText_Cancel:
 	.string "CANCEL$"
+OtherText_Lv:
 	.string "LV$"
 
 	.global gUnknown_0842CC34
 gUnknown_0842CC34: @ 842CC34
+OtherText_Egg:
 	.string "EGG$"
 
 	.global gUnknown_0842CC38
 gUnknown_0842CC38: @ 842CC38
+OtherText_HatchedFromEgg:
 	.string "{COLOR WHITE2}{HIGHLIGHT TRANSPARENT}{SHADOW DARK_GREY}{STR_VAR_1} hatched from the EGG!$"
 
 	.global gUnknown_0842CC5A
 gUnknown_0842CC5A: @ 842CC5A
+OtherText_NickHatchPrompt:
 	.string "{COLOR WHITE2}{HIGHLIGHT TRANSPARENT}{SHADOW DARK_GREY}Would you like to nickname the newly\nhatched {STR_VAR_1}?$"
+OtherText_Battle:
 	.string "BATTLE$"
+OtherText_Contest:
 	.string "CONTEST$"
+OtherText_Type:
 	.string "TYPE/$"
+OtherText_PP:
 	.string "PP/$"
+OtherText_Power:
 	.string "POWER$"
+OtherText_Accuracy:
 	.string "ACCURACY$"
+OtherText_Appeal:
 	.string "APPEAL$"
+OtherText_Jam:
 	.string "JAM$"
 
 	.global gUnknown_0842CCC7
 gUnknown_0842CCC7: @ 842CCC7
+OtherText_TeachWhichMove:
 	.string "Teach which move to {STR_VAR_1}?$"
 
 	.global gUnknown_0842CCDF
 gUnknown_0842CCDF: @ 842CCDF
+OtherText_TeachSpecificMove:
 	.string "Teach {STR_VAR_2}?$"
 
 	.global gUnknown_0842CCE9
 gUnknown_0842CCE9: @ 842CCE9
+OtherText_PokeLearnedMove:
 	.string "{STR_VAR_1} learned {STR_VAR_2}.$"
 
 	.global gUnknown_0842CCF8
 gUnknown_0842CCF8: @ 842CCF8
+OtherText_DeleteOlderMove:
 	.string "{STR_VAR_1} is trying to learn\n{STR_VAR_2}.\pBut {STR_VAR_1} can’t learn more\nthan four moves.\pDelete an older move to make\nroom for {STR_VAR_2}?$"
 
 	.global gUnknown_0842CD65
 gUnknown_0842CD65: @ 842CD65
+OtherText_StopLearningMove:
 	.string "Stop learning {STR_VAR_2}?$"
 
 	.global gUnknown_0842CD77
 gUnknown_0842CD77: @ 842CD77
+OtherText_ForgotMove123:
 	.string "{PAUSE 32}1, {PAUSE 15}2 {PAUSE 15}...{PAUSE 15}...{PAUSE 15}...{PAUSE 15} {PLAY_SE 0x0038}Poof!\p$"
 
 	.global gUnknown_0842CDA3
 gUnknown_0842CDA3: @ 842CDA3
+OtherText_ForgotMove:
 	.string "{STR_VAR_1} forgot {STR_VAR_3}.\pAnd...\p{STR_VAR_1} learned {STR_VAR_2}.$"
+OtherText_DidNotLearnMove:
 	.string "{STR_VAR_1} did not learn\n{STR_VAR_2}.$"
 
 	.global gUnknown_0842CDDC
 gUnknown_0842CDDC: @ 842CDDC
+OtherText_GiveUpTeachingMove:
 	.string "Give up trying to teach a new move\nto {STR_VAR_1}?$"
 
 	.global gUnknown_0842CE06
 gUnknown_0842CE06: @ 842CE06
+OtherText_WhichMoveToForget:
 	.string "Which move should be forgotten?\p$"
 
 	.global gUnknown_0842CE27
 gUnknown_0842CE27: @ 842CE27
+OtherText_ClearAllSaveDataPrompt:
 	.string "Clear all save data areas?$"
 
 	.global gUnknown_0842CE42
 gUnknown_0842CE42: @ 842CE42
+OtherText_ClearingData:
 	.string "Clearing data...\nPlease wait.$"
 
 	.global gUnknown_0842CE60
 gUnknown_0842CE60: @ 842CE60
+ContestText_AnnounceResults:
 	.string "Announcing the results!$"
 
 	.global gUnknown_0842CE78
 gUnknown_0842CE78: @ 842CE78
+ContestText_PreliminaryResults:
 	.string "The preliminary results!$"
 
 	.global gUnknown_0842CE91
 gUnknown_0842CE91: @ 842CE91
+ContestText_Round2Results:
 	.string "Round 2 results!$"
 
 	.global gUnknown_0842CEA2
 gUnknown_0842CEA2: @ 842CEA2
+ContestText_PokeWon:
 	.string "{STR_VAR_1}’s {STR_VAR_2} won!$"
 
 	.global gUnknown_0842CEAF
 gUnknown_0842CEAF: @ 842CEAF
+OtherText_LinkStandby:
 	.string "Link standby...$"
+OtherText_FlowerShop:
 	.string "FLOWER SHOP$"
+OtherText_PetalburgWoods:
 	.string "PETALBURG WOODS$"
+OtherText_BrineysCottage:
 	.string "MR. BRINEY’S COTTAGE$"
+OtherText_AbandonedShip:
 	.string "ABANDONED SHIP$"
+OtherText_SeashoreHouse:
 	.string "SEASHORE HOUSE$"
+OtherText_SlateportBeach:
 	.string "SLATEPORT BEACH$"
+OtherText_CyclingRoad:
 	.string "CYCLING ROAD$"
+OtherText_NewMauville:
 	.string "NEW MAUVILLE$"
+OtherText_TrickHouse:
 	.string "TRICK HOUSE$"
+OtherText_OldLadyRestShop:
 	.string "OLD LADY’S REST STOP$"
+OtherText_Desert:
 	.string "DESERT$"
+OtherText_WinstrateFamily:
 	.string "THE WINSTRATE FAMILY$"
+OtherText_CableCar:
 	.string "CABLE CAR$"
+OtherText_GlassWorkshop:
 	.string "GLASS WORKSHOP$"
+OtherText_WeatherInstitute:
 	.string "WEATHER INSTITUTE$"
+OtherText_MeteorFalls:
 	.string "METEOR FALLS$"
+OtherText_TunnelersRestHouse:
 	.string "TUNNELER’S REST HOUSE$"
+OtherText_RusturfTunnel:
 	.string "RUSTURF TUNNEL$"
+OtherText_PokemonDayCare:
 	.string "POKéMON DAY CARE$"
+OtherText_SafariZoneEntrance:
 	.string "SAFARI ZONE ENTRANCE$"
+OtherText_MtPyre:
 	.string "MT. PYRE$"
+OtherText_ShoalCave:
 	.string "SHOAL CAVE$"
+OtherText_SeafloorCavern:
 	.string "SEAFLOOR CAVERN$"
+OtherText_GraniteCave:
 	.string "GRANITE CAVE$"
+OtherText_OceanCurrent:
 	.string "OCEAN CURRENT$"
+OtherText_LanetteHouse:
 	.string "LANETTE’S HOUSE$"
+OtherText_FieryPath:
 	.string "FIERY PATH$"
+OtherText_JaggedPass:
 	.string "JAGGED PASS$"
+OtherText_SkyPillar:
 	.string "SKY PILLAR$"
+OtherText_BerryMasterHouse:
 	.string "BERRY MASTER’S HOUSE$"
+OtherText_IslandCave:
 	.string "ISLAND CAVE$"
+OtherText_DesertRuins:
 	.string "DESERT RUINS$"
+OtherText_ScorchedSlab:
 	.string "SCORCHED SLAB$"
+OtherText_AncientTomb:
 	.string "ANCIENT TOMB$"
+OtherText_SealedChamber:
 	.string "SEALED CHAMBER$"
+OtherText_FossilManiacsHouse:
 	.string "FOSSIL MANIAC’S HOUSE$"
+OtherText_HuntersHouse:
 	.string "HUNTER’S HOUSE$"
 
 	.global gUnknown_0842D0E6
 gUnknown_0842D0E6: @ 842D0E6
+OtherText_Terminator4:
 	.string "$"
 
 	.global gUnknown_0842D0E7
 gUnknown_0842D0E7: @ 842D0E7
+OtherText_Nature:
 	.string " nature, $"
 
 	.global gUnknown_0842D0F1
 gUnknown_0842D0F1: @ 842D0F1
+OtherText_Comma:
 	.string ",$"
 
 	.global gUnknown_0842D0F3
 gUnknown_0842D0F3: @ 842D0F3
+OtherText_Met:
 	.string " (met).$"
 
 	.global gUnknown_0842D0FB
 gUnknown_0842D0FB: @ 842D0FB
+OtherText_Egg2:
 	.string " (EGG).$"
 
 	.global gUnknown_0842D103
 gUnknown_0842D103: @ 842D103
+OtherText_ObtainedInTrade:
 	.string "obtained in a trade.$"
 
 	.global gUnknown_0842D118
 gUnknown_0842D118: @ 842D118
+OtherText_FatefulEncounter:
 	.string "fateful encounter.$"
 
 	.global gUnknown_0842D12B
 gUnknown_0842D12B: @ 842D12B
+OtherText_Met2:
 	.string " (met).$"
 
 	.global gUnknown_0842D133
 gUnknown_0842D133: @ 842D133
+OtherText_EggDayCare:
 	.string "An odd POKéMON EGG found\nby the DAY CARE couple.$"
 
 	.global gUnknown_0842D164
 gUnknown_0842D164: @ 842D164
+OtherText_EggNicePlace:
 	.string "A peculiar POKéMON EGG\nobtained at the nice place.$"
 
 	.global gUnknown_0842D197
 gUnknown_0842D197: @ 842D197
+OtherText_EggObtainedInTrade:
 	.string "A peculiar POKéMON EGG\nobtained in a trade.$"
 
 	.global gUnknown_0842D1C3
 gUnknown_0842D1C3: @ 842D1C3
+OtherText_EggHotSprings:
 	.string "A POKéMON EGG obtained\nat the hot springs.$"
 
 	.global gUnknown_0842D1EE
 gUnknown_0842D1EE: @ 842D1EE
+OtherText_LinkStandby2:
 	.string "Link standby...$"
 
 	.global gUnknown_0842D1FE
 gUnknown_0842D1FE: @ 842D1FE
+OtherText_YesNo:
 	.string "{COLOR DARK_GREY}{HIGHLIGHT WHITE2}{SHADOW LIGHT_GREY}YES\nNO$"
+OtherText_Player2:
 	.string "{HIGHLIGHT TRANSPARENT}PLAYER$"
+OtherText_Terminator5:
 	.string "{HIGHLIGHT TRANSPARENT}$"
 
 	.global gUnknown_0842D21C
 gUnknown_0842D21C: @ 842D21C
+OtherText_HoennDex:
 	.string "HOENN$"
 
 	.global gUnknown_0842D222
 gUnknown_0842D222: @ 842D222
+OtherText_NationalDex:
 	.string "NATIONAL$"
 
 	.global gUnknown_0842D22B
 gUnknown_0842D22B: @ 842D22B
+OtherText_DiplomaCertification:
 	.string "{HIGHLIGHT TRANSPARENT}Player: {CLEAR 0x10}{COLOR RED}{PLAYER}\n\n{COLOR DARK_GREY}{STR_VAR_1} POKéDEX\nThis document certifies\nthat you have successfully\ncompleted your POKéDEX.\n\n{CLEAR_TO 0x42}{COLOR RED}GAME FREAK$"
+OtherText_DiplomaGameFreak:
 	.string "{COLOR RED}{HIGHLIGHT TRANSPARENT}GAME FREAK$"
 
 	.global gUnknown_0842D2BC
 gUnknown_0842D2BC: @ 842D2BC
+OtherText_PLink:
 	.string "{STR_VAR_1}P LINK$"
 
 	.global gUnknown_0842D2C5
 gUnknown_0842D2C5: @ 842D2C5
+OtherText_YesNo2:
 	.string "YES\nNO$"
+OtherText_Terminating:
 	.string "Terminating.$"
 
 	.global gUnknown_0842D2D9
 gUnknown_0842D2D9: @ 842D2D9
+OtherText_LinkNotFound:
 	.string "Link partner(s) not found.\nPlease try again.\p$"
 
 	.global gUnknown_0842D307
 gUnknown_0842D307: @ 842D307
+OtherText_BerryBlenderChoose:
 	.string "Starting up the BERRY BLENDER.\pPlease select a BERRY from your BAG\nto put in the BERRY BLENDER.\p$"
 
 	.global gUnknown_0842D368
 gUnknown_0842D368: @ 842D368
+OtherText_PokeBlockMade:
 	.string " was made!$"
 
 	.global gUnknown_0842D373
 gUnknown_0842D373: @ 842D373
+OtherText_PressAToStart:
 	.string "Press the A Button to start.$"
 
 	.global gUnknown_0842D390
 gUnknown_0842D390: @ 842D390
+OtherText_PleaseWait:
 	.string "Please wait a while.$"
 
 	.global gUnknown_0842D3A5
 gUnknown_0842D3A5: @ 842D3A5
+OtherText_LinkStandby3:
 	.string "Link standby...$"
 
 	.global gUnknown_0842D3B5
 gUnknown_0842D3B5: @ 842D3B5
+OtherText_BlendAnotherBerryPrompt:
 	.string "Would you like to blend another BERRY?$"
 
 	.global gUnknown_0842D3DC
 gUnknown_0842D3DC: @ 842D3DC
+OtherText_OutOfBerries:
 	.string "You’ve run out of BERRIES for\nblending in the BERRY BLENDER.\p$"
 
 	.global gUnknown_0842D41A
 gUnknown_0842D41A: @ 842D41A
+OtherText_CaseIsFull:
 	.string "Your {POKEBLOCK} CASE is full.\p$"
 
 	.global gUnknown_0842D434
 gUnknown_0842D434: @ 842D434
+OtherText_NoBerriesForBlend:
 	.string " has no BERRIES to put in\nthe BERRY BLENDER.$"
 
 	.global gUnknown_0842D461
 gUnknown_0842D461: @ 842D461
+OtherText_OtherCaseIsFull:
 	.string "’s {POKEBLOCK} CASE is full.\p$"
 
 	.global gUnknown_0842D479
 gUnknown_0842D479: @ 842D479
+OtherText_ResultOfBlending:
 	.string "RESULTS OF BLENDING$"
+OtherText_BerryUsed:
 	.string "BERRY USED$"
 
 	.global gUnknown_0842D498
 gUnknown_0842D498: @ 842D498
-	.string " "
-	.string "BERRY$"
+OtherText_Berry:
+	.string " BERRY$"
 
 	.global gUnknown_0842D49F
 gUnknown_0842D49F: @ 842D49F
+OtherText_RequiredTime:
 	.string "REQUIRED TIME$"
 
 	.global gUnknown_0842D4AD
 gUnknown_0842D4AD: @ 842D4AD
+OtherText_Min:
 	.string "MIN.$"
 
 	.global gUnknown_0842D4B2
 gUnknown_0842D4B2: @ 842D4B2
+OtherText_Sec:
 	.string "SEC.$"
 
 	.global gUnknown_0842D4B7
 gUnknown_0842D4B7: @ 842D4B7
+OtherText_MaxSpeed:
 	.string "MAXIMUM SPEED$"
 
 	.global gUnknown_0842D4C5
 gUnknown_0842D4C5: @ 842D4C5
+OtherText_RPM:
 	.string "RPM$"
+OtherText_RPMPeriod:
 	.string ".$"
 
 	.global gUnknown_0842D4CB
 gUnknown_0842D4CB: @ 842D4CB
+OtherText_Ranking:
 	.string "RANKING$"
 
 	.global gUnknown_0842D4D3
 gUnknown_0842D4D3: @ 842D4D3
+OtherText_BlockLevelIs:
 	.string "The level is $"
 
 	.global gUnknown_0842D4E1
 gUnknown_0842D4E1: @ 842D4E1
+OtherText_BlockFeelIs:
 	.string ", and the feel is $"
 
 	.global gUnknown_0842D4F4
 gUnknown_0842D4F4: @ 842D4F4
+OtherText_Period:
 	.string ".$"
 
 	.global gUnknown_0842D4F6
 gUnknown_0842D4F6: @ 842D4F6
+OtherText_Day:
 	.string "DAY$"
+OtherText_DayColon:
 	.string ":$"
 
 	.global gUnknown_0842D4FC
 gUnknown_0842D4FC: @ 842D4FC
+OtherText_OK:
 	.string "OK$"
 
 	.global gUnknown_0842D4FF
 gUnknown_0842D4FF: @ 842D4FF
+OtherText_CorrectTimePrompt:
 	.string "Is this the correct time?$"
 
 	.align 2
@@ -11413,11 +14662,14 @@ gUnknown_0842F250: @ 842F250
 
 	.global gUnknown_0842F298
 gUnknown_0842F298: @ 842F298
-	.incbin "baserom.gba", 0x0042f298, 0x324
+Unknown_842F298:
+	.incbin "baserom.gba", 0x0042f298, 0x2C0
+Unknown_842F558:
+	.incbin "baserom.gba", 0x0042f558, 0x64
 
 	.global gUnknown_0842F5BC
 gUnknown_0842F5BC: @ 842F5BC
-	.incbin "baserom.gba", 0x0042f5bc, 0x4
+	.4byte Unknown_842F558
 
 	.global gUnknown_0842F5C0
 gUnknown_0842F5C0: @ 842F5C0
@@ -11445,41 +14697,52 @@ gUnknown_0842F790: @ 842F790
 
 	.global gUnknown_0842F798
 gUnknown_0842F798: @ 842F798
+OtherText_BerryObtainedDadHasIt:
 	.string "Obtained a {STR_VAR_2} BERRY!\nDad has it at PETALBURG GYM.$"
 
 	.global gUnknown_0842F7CA
 gUnknown_0842F7CA: @ 842F7CA
+OtherText_BerryTransformed:
 	.string "The {STR_VAR_1} BERRY transformed into\none {STR_VAR_2} BERRY.$"
 
 	.global gUnknown_0842F7F6
 gUnknown_0842F7F6: @ 842F7F6
+OtherText_BerryAlreadyObtained:
 	.string "The {STR_VAR_1} BERRY has already been\nobtained.$"
 
 	.global gUnknown_0842F81E
 gUnknown_0842F81E: @ 842F81E
+OtherText_SpecialRibbonReceived:
 	.string "A special RIBBON was awarded to your\nparty POKéMON.$"
 
 	.global gUnknown_0842F852
 gUnknown_0842F852: @ 842F852
+OtherText_DexUpgraded:
 	.string "The POKéDEX has been upgraded with\nthe NATIONAL MODE.$"
 
 	.global gUnknown_0842F888
 gUnknown_0842F888: @ 842F888
+OtherText_RareWordAdded:
 	.string "A rare word has been added.$"
 
 	.global gUnknown_0842F8A4
 gUnknown_0842F8A4: @ 842F8A4
+OtherText_PokeWasSentOver:
 	.string "{STR_VAR_1} was sent over!$"
 
 	.global gUnknown_0842F8B6
 gUnknown_0842F8B6: @ 842F8B6
+OtherText_PartyIsFull:
 	.string "Your party is full.\n{STR_VAR_1} could not be sent over.$"
 
 	.global gUnknown_0842F8E5
 gUnknown_0842F8E5: @ 842F8E5
+OtherText_NewTrainerInHoenn:
 	.string "A new TRAINER has arrived in HOENN.$"
+OtherText_BattleTowerNewAdversary:
 	.string "A new adversary has arrived in the\nBATTLE TOWER.$"
 
 	.global gUnknown_0842F93A
 gUnknown_0842F93A: @ 842F93A
+OtherText_DataCannotUseVersion:
 	.string "This data cannot be used in\nthis version.$"

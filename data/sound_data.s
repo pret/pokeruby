@@ -42,4 +42,5 @@ gMPlayTable: @ 845545C
 
 	.global gSongTable
 gSongTable: @ 845548C
-	.incbin "baserom.gba", 0x0045548c, 0x25B29C
+	.incbin "baserom.gba", 0x0045548c, 0xEA0 @ pointer tables
+	.incbin "baserom.gba", 0x0045632C, 0x25A3FC
