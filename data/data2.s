@@ -1233,7 +1233,9 @@ gUnknown_08209AC4: @ 8209AC4
 gUnknown_08209AD4: @ 8209AD4
 	.string "タマゴ$"
 
-	.incbin "baserom.gba", 0x00209ad8, 0x8d8
+	.incbin "graphics/pokemon/egg/palette.gbapal"
+	.incbin "graphics/pokemon/egg/hatch.4bpp"
+	.incbin "baserom.gba", 0x0020A378, 0x38
 
 	.global gUnknown_0820A3B0
 gUnknown_0820A3B0: @ 820A3B0
