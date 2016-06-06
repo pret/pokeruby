@@ -186,7 +186,7 @@ int StringParser::ParseString(long srcPos, unsigned char* dest, int& destLength)
         for (const char& c : sequence)
         {
             if (destLength == kMaxStringLength)
-                RaiseError("mapped string longer than %d bytes", destLength);
+                RaiseError("mapped string longer than %d bytes", kMaxStringLength);
 
             dest[destLength++] = c;
         }

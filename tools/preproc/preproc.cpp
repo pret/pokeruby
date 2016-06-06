@@ -27,6 +27,22 @@
 
 Charmap* g_charmap;
 
+void PrintAsmBytes(unsigned char *s, int length)
+{
+    if (length > 0)
+    {
+        printf("\t.byte ");
+        for (int i = 0; i < length; i++)
+        {
+            printf("0x%02X", s[i]);
+
+            if (i < length - 1)
+                printf(", ");
+        }
+        putchar('\n');
+    }
+}
+
 void PreprocAsmFile(std::string filename)
 {
     std::stack<AsmFile> stack;
@@ -57,19 +73,14 @@ void PreprocAsmFile(std::string filename)
         {
             unsigned char s[kMaxStringLength];
             int length = stack.top().ReadString(s);
-
-            if (length > 0)
-            {
-                printf("\t.byte ");
-                for (int i = 0; i < length; i++)
-                {
-                    printf("0x%02X", s[i]);
-
-                    if (i < length - 1)
-                        printf(", ");
-                }
-                putchar('\n');
-            }
+            PrintAsmBytes(s, length);
+            break;
+        }
+        case Directive::Braille:
+        {
+            unsigned char s[kMaxStringLength];
+            int length = stack.top().ReadBraille(s);
+            PrintAsmBytes(s, length);
             break;
         }
         case Directive::Unknown:

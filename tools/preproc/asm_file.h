@@ -30,6 +30,7 @@ enum class Directive
 {
     Include,
     String,
+    Braille,
     Unknown
 };
 
@@ -43,6 +44,7 @@ public:
     Directive GetDirective();
     std::string ReadPath();
     int ReadString(unsigned char* s);
+    int ReadBraille(unsigned char* s);
     bool IsAtEnd();
     void OutputLine();
     void OutputLocation();
