@@ -1234,7 +1234,8 @@ gUnknown_08209AD4: @ 8209AD4
 	.string "タマゴ$"
 
 	.incbin "graphics/pokemon/egg/palette.gbapal"
-	.incbin "graphics/pokemon/egg/hatch.4bpp"
+	.incbin "graphics/pokemon/egg/egg_hatch.4bpp"
+	.incbin "graphics/pokemon/egg/egg_crumble.4bpp"
 	
 	.space 2
 	.incbin "baserom.gba", 0x0020A37A, 0x36
@@ -1581,14 +1582,14 @@ gUnknown_0820C3D1: @ 820C3D1
 gUnknown_0820C9F8: @ 820C9F8
 	.incbin "baserom.gba", 0x0020c9f8, 0x20
 	.incbin "graphics/interface/gba.gbapal"
-	.incbin "baserom.gba", 0x0020ca38, 0x20
+	.incbin "graphics/interface/trade_shadow.gbapal"
 	.incbin "baserom.gba", 0x0020ca58, 0x20
 	.incbin "baserom.gba", 0x0020ca78, 0x20
 
 	.global gUnknown_0820CA98
 gUnknown_0820CA98: @ 820CA98
 	.incbin "graphics/interface/gba.4bpp"
-	.incbin "baserom.gba", 0x0020da98, 0x300
+	.incbin "graphics/interface/trade_shadow.4bpp"
 
 	.global gUnknown_0820DD98
 gUnknown_0820DD98: @ 820DD98
