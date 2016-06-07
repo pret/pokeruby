@@ -4,11 +4,11 @@
 
 	.global gUnknown_08D00000
 gUnknown_08D00000: @ 8D00000
-	.incbin "baserom.gba", 0x00d00000, 0x4e0
+	.incbin "graphics/interface/menu.lz" @ menu window and arrows
 
 	.global gUnknown_08D004E0
 gUnknown_08D004E0: @ 8D004E0
-	.incbin "baserom.gba", 0x00d004e0, 0x44
+	.incbin "graphics/interface/menupal.lz"
 
 	.global gUnknown_08D00524
 gUnknown_08D00524: @ 8D00524
@@ -18,7 +18,7 @@ gUnknown_08D00524: @ 8D00524
 	.include "data/graphics/pokemon/circled_question_mark_graphics.s"
 
 @ 8D019E4
-	.incbin "baserom.gba", 0xd019e4, 0x16EC
+	.incbin "baserom.gba", 0xd019e4, 0x16EC @ japanese table
 
 	.global gUnknown_08D030D0
 gUnknown_08D030D0: @ 8D030D0
