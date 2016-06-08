@@ -1417,12 +1417,35 @@ gUnknown_0820A904: @ 820A904
 	.incbin "baserom.gba", 0x0020a904, 0x28
 
 	.global gUnknown_0820A92C
-gUnknown_0820A92C: @ 820A92C
-	.incbin "baserom.gba", 0x0020a92c, 0x60
+gUnknown_0820A92C: @ 820A92C @ graphics
+	obj_tiles gInterfaceGfx_PokeBall, 384, 0xd6d8 @ poke
+	obj_tiles gInterfaceGfx_GreatBall, 384, 0xd6d9 @ great
+	obj_tiles gInterfaceGfx_SafariBall, 384, 0xd6da @ safari
+	obj_tiles gInterfaceGfx_UltraBall, 384, 0xd6db @ ultra
+	obj_tiles gInterfaceGfx_MasterBall, 384, 0xd6dc @ master
+	obj_tiles gInterfaceGfx_NetBall, 384, 0xd6dd @ net
+	obj_tiles gInterfaceGfx_DiveBall, 384, 0xd6de @ dive
+	obj_tiles gInterfaceGfx_NestBall, 384, 0xd6df @ nest
+	obj_tiles gInterfaceGfx_RepeatBall, 384, 0xd6e0 @ repeat
+	obj_tiles gInterfaceGfx_TimerBall, 384, 0xd6e1 @ timer
+	obj_tiles gInterfaceGfx_LuxuryBall, 384, 0xd6e2 @ luxury
+	obj_tiles gInterfaceGfx_PremierBall, 384, 0xd6e3 @ premier
 
-	.global gUnknown_0820A98C
+	.global gUnknown_0820A98C @ palettes
 gUnknown_0820A98C: @ 820A98C
-	.incbin "baserom.gba", 0x0020a98c, 0x128
+	obj_pal gInterfacePal_PokeBall, 0xD6D8 @ poke
+	obj_pal gInterfacePal_GreatBall, 0xD6D9 @ great
+	obj_pal gInterfacePal_SafariBall, 0xD6DA @ safari
+	obj_pal gInterfacePal_UltraBall, 0xD6DB @ ultra
+	obj_pal gInterfacePal_MasterBall, 0xD6DC @ master
+	obj_pal gInterfacePal_NetBall, 0xD6DD @ net
+	obj_pal gInterfacePal_DiveBall, 0xD6DE @ dive
+	obj_pal gInterfacePal_NestBall, 0xD6DF @ nest
+	obj_pal gInterfacePal_RepeatBall, 0xD6E0 @ repeat
+	obj_pal gInterfacePal_TimerBall, 0xD6E1 @ timer
+	obj_pal gInterfacePal_LuxuryBall, 0xD6E2 @ luxury
+	obj_pal gInterfacePal_PremierBall, 0xD6E3 @ premier
+	.incbin "baserom.gba", 0x0020A9EC, 0xC8
 
 	.global gUnknown_0820AAB4
 gUnknown_0820AAB4: @ 820AAB4
@@ -1577,7 +1600,7 @@ gUnknown_0820C3B0: @ 820C3B0
 	.global gUnknown_0820C3D1
 gUnknown_0820C3D1: @ 820C3D1
 	.incbin "baserom.gba", 0x0020c3d1, 0x7
-	.incbin "graphics/interface/openball.gbapal"
+	.incbin "graphics/interface/ball_open.gbapal"
 	.incbin "baserom.gba", 0x0020c3f8, 0x600
 
 	.global gUnknown_0820C9F8

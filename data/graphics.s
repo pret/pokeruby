@@ -19,11 +19,107 @@ gUnknown_08D00524: @ 8D00524
 
 @ 8D019E4
 	.incbin "graphics/unused/old.4bpp.lz" @ japanese table and bunch of stuff
-	.incbin "baserom.gba", 0x00D021BC, 0xF14
+	.incbin "baserom.gba", 0x00D021BC, 0x34C
+	
+	.global gInterfaceGfx_PokeBall
+gInterfaceGfx_PokeBall:
+	.incbin "graphics/interface/ball/poke.4bpp.lz" @ 0xBC
+	
+	.global gInterfacePal_PokeBall
+gInterfacePal_PokeBall:
+	.incbin "graphics/interface/ball/poke.gbapal.lz"
+	
+	.global gInterfaceGfx_GreatBall
+gInterfaceGfx_GreatBall:
+	.incbin "graphics/interface/ball/great.4bpp.lz" @ 0xBC
+	
+	.global gInterfacePal_GreatBall
+gInterfacePal_GreatBall:
+	.incbin "graphics/interface/ball/great.gbapal.lz"
+	
+	.global gInterfaceGfx_SafariBall
+gInterfaceGfx_SafariBall:
+	.incbin "graphics/interface/ball/safari.4bpp.lz" @ 0xBC
+	
+	.global gInterfacePal_SafariBall
+gInterfacePal_SafariBall:
+	.incbin "graphics/interface/ball/safari.gbapal.lz"
+	
+	.global gInterfaceGfx_UltraBall
+gInterfaceGfx_UltraBall:
+	.incbin "graphics/interface/ball/ultra.4bpp.lz" @ 0xBC
+	
+	.global gInterfacePal_UltraBall
+gInterfacePal_UltraBall:
+	.incbin "graphics/interface/ball/ultra.gbapal.lz"
+	
+	.global gInterfaceGfx_MasterBall
+gInterfaceGfx_MasterBall:
+	.incbin "graphics/interface/ball/master.4bpp.lz" @ 0xBC
+	
+	.global gInterfacePal_MasterBall
+gInterfacePal_MasterBall:
+	.incbin "graphics/interface/ball/master.gbapal.lz"
+	
+	.global gInterfaceGfx_NetBall
+gInterfaceGfx_NetBall:
+	.incbin "graphics/interface/ball/net.4bpp.lz" @ 0xBC
+	
+	.global gInterfacePal_NetBall
+gInterfacePal_NetBall:
+	.incbin "graphics/interface/ball/net.gbapal.lz"
+	
+	.global gInterfaceGfx_DiveBall
+gInterfaceGfx_DiveBall:
+	.incbin "graphics/interface/ball/dive.4bpp.lz" @ 0xBC
+	
+	.global gInterfacePal_DiveBall
+gInterfacePal_DiveBall:
+	.incbin "graphics/interface/ball/dive.gbapal.lz"
+	
+	.global gInterfaceGfx_NestBall
+gInterfaceGfx_NestBall:
+	.incbin "graphics/interface/ball/nest.4bpp.lz" @ 0xBC
+	
+	.global gInterfacePal_NestBall
+gInterfacePal_NestBall:
+	.incbin "graphics/interface/ball/nest.gbapal.lz"
+	
+	.global gInterfaceGfx_RepeatBall
+gInterfaceGfx_RepeatBall:
+	.incbin "graphics/interface/ball/repeat.4bpp.lz" @ 0xBC
+	
+	.global gInterfacePal_RepeatBall
+gInterfacePal_RepeatBall:
+	.incbin "graphics/interface/ball/repeat.gbapal.lz"
+	
+	.global gInterfaceGfx_TimerBall
+gInterfaceGfx_TimerBall:
+	.incbin "graphics/interface/ball/timer.4bpp.lz" @ 0xBC
+	
+	.global gInterfacePal_TimerBall
+gInterfacePal_TimerBall:
+	.incbin "graphics/interface/ball/timer.gbapal.lz"
+	
+	.global gInterfaceGfx_LuxuryBall
+gInterfaceGfx_LuxuryBall:
+	.incbin "graphics/interface/ball/luxury.4bpp.lz" @ 0xBC
+	
+	.global gInterfacePal_LuxuryBall
+gInterfacePal_LuxuryBall:
+	.incbin "graphics/interface/ball/luxury.gbapal.lz"
+	
+	.global gInterfaceGfx_PremierBall
+gInterfaceGfx_PremierBall:
+	.incbin "graphics/interface/ball/premier.4bpp.lz" @ 0xBC
+	
+	.global gInterfacePal_PremierBall
+gInterfacePal_PremierBall:
+	.incbin "graphics/interface/ball/premier.gbapal.lz"
 
 	.global gUnknown_08D030D0
 gUnknown_08D030D0: @ 8D030D0
-	.incbin "graphics/interface/openball.4bpp.lz"
+	.incbin "graphics/interface/ball_open.4bpp.lz"
 	.incbin "baserom.gba", 0x00d0314c, 0x6AFC
 
 	.global gUnknown_08D09C48
