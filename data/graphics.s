@@ -23,7 +23,8 @@ gUnknown_08D00524: @ 8D00524
 
 	.global gUnknown_08D030D0
 gUnknown_08D030D0: @ 8D030D0
-	.incbin "baserom.gba", 0x00d030d0, 0x6b78
+	.incbin "graphics/interface/openball.4bpp.lz"
+	.incbin "baserom.gba", 0x00d0314c, 0x6AFC
 
 	.global gUnknown_08D09C48
 gUnknown_08D09C48: @ 8D09C48

@@ -1576,7 +1576,9 @@ gUnknown_0820C3B0: @ 820C3B0
 
 	.global gUnknown_0820C3D1
 gUnknown_0820C3D1: @ 820C3D1
-	.incbin "baserom.gba", 0x0020c3d1, 0x627
+	.incbin "baserom.gba", 0x0020c3d1, 0x7
+	.incbin "graphics/interface/openball.gbapal"
+	.incbin "baserom.gba", 0x0020c3f8, 0x600
 
 	.global gUnknown_0820C9F8
 gUnknown_0820C9F8: @ 820C9F8
