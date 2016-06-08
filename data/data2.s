@@ -1583,7 +1583,7 @@ gUnknown_0820C9F8: @ 820C9F8
 	.incbin "baserom.gba", 0x0020c9f8, 0x20
 	.incbin "graphics/interface/gba.gbapal"
 	.incbin "graphics/interface/trade_shadow.gbapal"
-	.incbin "baserom.gba", 0x0020ca58, 0x20
+	.incbin "baserom.gba", 0x0020ca58, 0x20 @ blank
 	.incbin "baserom.gba", 0x0020ca78, 0x20
 
 	.global gUnknown_0820CA98
@@ -1593,15 +1593,15 @@ gUnknown_0820CA98: @ 820CA98
 
 	.global gUnknown_0820DD98
 gUnknown_0820DD98: @ 820DD98
-	.incbin "baserom.gba", 0x0020dd98, 0x1a00
+	.incbin "baserom.gba", 0x0020dd98, 0x1a00 @ unused?
 
 	.global gUnknown_0820F798
 gUnknown_0820F798: @ 820F798
-	.incbin "baserom.gba", 0x0020f798, 0x1000
+	.incbin "baserom.gba", 0x0020f798, 0x1000 
 
 	.global gUnknown_08210798
 gUnknown_08210798: @ 8210798
-	.incbin "baserom.gba", 0x00210798, 0x1000
+	.incbin "baserom.gba", 0x00210798, 0x1000 @ debug?
 
 	.global gUnknown_08211798
 gUnknown_08211798: @ 8211798
@@ -1613,7 +1613,7 @@ gUnknown_08211F98: @ 8211F98
 
 	.global gUnknown_08213738
 gUnknown_08213738: @ 8213738
-	.incbin "baserom.gba", 0x00213738, 0x2040
+	.incbin "baserom.gba", 0x00213738, 0x2040 @ copy of gba
 
 	.global gUnknown_08215778
 gUnknown_08215778: @ 8215778
