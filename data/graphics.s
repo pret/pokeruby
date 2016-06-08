@@ -19,7 +19,10 @@ gUnknown_08D00524: @ 8D00524
 
 @ 8D019E4
 	.incbin "graphics/unused/old.4bpp.lz" @ japanese table and bunch of stuff
-	.incbin "baserom.gba", 0x00D021BC, 0x34C
+	.incbin "graphics/unused/unknown_D021BC.bin"
+	.incbin "graphics/unused/unknown_D023E8.bin"
+	.incbin "graphics/unused/unknown_D02410.4bpp.lz"
+	.incbin "graphics/unused/unknown_D024F0.bin"
 	
 	.global gInterfaceGfx_PokeBall
 gInterfaceGfx_PokeBall:
