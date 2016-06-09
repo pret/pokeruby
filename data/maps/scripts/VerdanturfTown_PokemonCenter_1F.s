@@ -1,0 +1,28 @@
+VerdanturfTown_PokemonCenter_1F_MapScripts:: @ 8153F09
+	map_script 3, VerdanturfTown_PokemonCenter_1F_MapScript1_153F0F
+	.byte 0
+
+VerdanturfTown_PokemonCenter_1F_MapScript1_153F0F:: @ 8153F0F
+	sethealplace 18
+	call VerdanturfTown_PokemonCenter_1F_EventScript_19FD1B
+	end
+
+PacifidlogTown_PokemonCenter_1F_EventScript_153F18:: @ 8153F18
+VerdanturfTown_PokemonCenter_1F_EventScript_153F18:: @ 8153F18
+	setvar 0x800b, 1
+	call VerdanturfTown_PokemonCenter_1F_EventScript_19FD5B
+	waittext
+	waitbutton
+	release
+	end
+
+VerdanturfTown_PokemonCenter_1F_EventScript_153F26:: @ 8153F26
+	loadptr 0, VerdanturfTown_PokemonCenter_1F_Text_17831D
+	callstd 2
+	end
+
+VerdanturfTown_PokemonCenter_1F_EventScript_153F2F:: @ 8153F2F
+	loadptr 0, VerdanturfTown_PokemonCenter_1F_Text_178389
+	callstd 2
+	end
+
