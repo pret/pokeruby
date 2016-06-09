@@ -1,4 +1,6 @@
+	.include "asm/macros/asm.s"
 	.include "asm/macros/function.s"
+	.include "asm/macros/movement.s"
 	.include "asm/macros/event.s"
 	.include "asm/macros/pokemon_data.s"
 	.include "asm/macros/ec.s"
