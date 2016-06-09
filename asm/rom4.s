@@ -1386,8 +1386,8 @@ _08053788: .4byte 0x020297f8
 _0805378C: .4byte 0x02025734
 	thumb_func_end sub_8053778
 
-	thumb_func_start sub_8053790
-sub_8053790: @ 8053790
+	thumb_func_start unref_sub_8053790
+unref_sub_8053790: @ 8053790
 	push {r4-r6,lr}
 	sub sp, 0x8
 	adds r4, r0, 0
@@ -1417,7 +1417,7 @@ sub_8053790: @ 8053790
 	bx r0
 	.align 2, 0
 _080537C8: .4byte 0x02025740
-	thumb_func_end sub_8053790
+	thumb_func_end unref_sub_8053790
 
 	thumb_func_start sub_80537CC
 sub_80537CC: @ 80537CC
@@ -2856,8 +2856,8 @@ _0805425A:
 	bx r1
 	thumb_func_end is_light_level_8_or_9
 
-	thumb_func_start sub_8054260
-sub_8054260: @ 8054260
+	thumb_func_start unref_sub_8054260
+unref_sub_8054260: @ 8054260
 	push {lr}
 	ldr r1, _08054280
 	movs r0, 0x14
@@ -2875,7 +2875,7 @@ sub_8054260: @ 8054260
 	bx r1
 	.align 2, 0
 _08054280: .4byte 0x02025734
-	thumb_func_end sub_8054260
+	thumb_func_end unref_sub_8054260
 
 	thumb_func_start sav1_map_get_name
 sav1_map_get_name: @ 8054284
@@ -3455,8 +3455,8 @@ _08054726:
 _08054730: .4byte 0x0202e828
 	thumb_func_end sub_805470C
 
-	thumb_func_start c2_8056854
-c2_8056854: @ 8054734
+	thumb_func_start CB2_ContinueSavedGame
+CB2_ContinueSavedGame: @ 8054734
 	push {lr}
 	bl sub_80547A8
 	bl sub_8074D08
@@ -3495,7 +3495,7 @@ _08054798:
 _0805479C: .4byte 0x0300485c
 _080547A0: .4byte sub_805470C
 _080547A4: .4byte c1_overworld
-	thumb_func_end c2_8056854
+	thumb_func_end CB2_ContinueSavedGame
 
 	thumb_func_start sub_80547A8
 sub_80547A8: @ 80547A8
@@ -5236,14 +5236,14 @@ _08055562:
 	bx r1
 	thumb_func_end sub_80554F8
 
-	thumb_func_start sub_8055568
-sub_8055568: @ 8055568
+	thumb_func_start unref_sub_8055568
+unref_sub_8055568: @ 8055568
 	push {lr}
 	movs r0, 0x83
 	bl sub_8054FC0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8055568
+	thumb_func_end unref_sub_8055568
 
 	thumb_func_start sub_8055574
 sub_8055574: @ 8055574
@@ -5931,8 +5931,8 @@ sub_8055A2C: @ 8055A2C
 	bx r0
 	thumb_func_end sub_8055A2C
 
-	thumb_func_start sub_8055A6C
-sub_8055A6C: @ 8055A6C
+	thumb_func_start unref_sub_8055A6C
+unref_sub_8055A6C: @ 8055A6C
 	push {lr}
 	lsls r0, 24
 	lsls r1, 24
@@ -5956,10 +5956,10 @@ _08055A8E:
 	.align 2, 0
 _08055A94: .4byte 0x02029818
 _08055A98: .4byte 0x030048a0
-	thumb_func_end sub_8055A6C
+	thumb_func_end unref_sub_8055A6C
 
-	thumb_func_start sub_8055A9C
-sub_8055A9C: @ 8055A9C
+	thumb_func_start unref_sub_8055A9C
+unref_sub_8055A9C: @ 8055A9C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 22
@@ -5995,7 +5995,7 @@ _08055AC8:
 _08055ADC: .4byte 0x02029818
 _08055AE0: .4byte 0x030048a0
 _08055AE4: .4byte 0x02020004
-	thumb_func_end sub_8055A9C
+	thumb_func_end unref_sub_8055A9C
 
 	thumb_func_start sub_8055AE8
 sub_8055AE8: @ 8055AE8
@@ -6078,8 +6078,8 @@ _08055B6C: .4byte 0x02029818
 _08055B70: .4byte 0x030048a0
 	thumb_func_end sub_8055B50
 
-	thumb_func_start sub_8055B74
-sub_8055B74: @ 8055B74
+	thumb_func_start unref_sub_8055B74
+unref_sub_8055B74: @ 8055B74
 	lsls r0, 24
 	ldr r1, _08055B94
 	lsrs r0, 22
@@ -6099,7 +6099,7 @@ sub_8055B74: @ 8055B74
 	.align 2, 0
 _08055B94: .4byte 0x02029818
 _08055B98: .4byte 0x030048a0
-	thumb_func_end sub_8055B74
+	thumb_func_end unref_sub_8055B74
 
 	thumb_func_start sub_8055B9C
 sub_8055B9C: @ 8055B9C
@@ -8453,15 +8453,15 @@ sav1_camera_get_focus_coords: @ 8056C68
 _08056C78: .4byte 0x02025734
 	thumb_func_end sav1_camera_get_focus_coords
 
-	thumb_func_start sub_8056C7C
-sub_8056C7C: @ 8056C7C
+	thumb_func_start unref_sub_8056C7C
+unref_sub_8056C7C: @ 8056C7C
 	ldr r2, _08056C84
 	strh r0, [r2]
 	strh r1, [r2, 0x2]
 	bx lr
 	.align 2, 0
 _08056C84: .4byte 0x02025734
-	thumb_func_end sub_8056C7C
+	thumb_func_end unref_sub_8056C7C
 
 	thumb_func_start GetCameraCoords
 GetCameraCoords: @ 8056C88
@@ -8514,7 +8514,7 @@ sub_8056CBC: @ 8056CBC
 	lsls r1, r5, 16
 	lsrs r1, 16
 	movs r2, 0x2
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r0, [r4, 0x8]
 	adds r0, 0x2
 	adds r1, r5, 0x1
@@ -8533,7 +8533,7 @@ _08056CEE:
 	lsls r2, r6, 16
 _08056CFC:
 	lsrs r2, 16
-	bl gpu_pal_apply
+	bl LoadPalette
 	b _08056D1E
 _08056D04:
 	ldr r0, [r4, 0x8]
@@ -8546,7 +8546,7 @@ _08056D04:
 	lsls r2, r6, 16
 	lsrs r2, 16
 	adds r0, r4, 0
-	bl gpu_pal_apply
+	bl LoadPalette
 _08056D1E:
 	add sp, 0x4
 	pop {r4-r6}
@@ -8873,8 +8873,8 @@ _08056EDA:
 	bx r1
 	thumb_func_end MetatileBehavior_IsEscalator
 
-	thumb_func_start sub_8056EE0
-sub_8056EE0: @ 8056EE0
+	thumb_func_start unref_sub_8056EE0
+unref_sub_8056EE0: @ 8056EE0
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -8887,7 +8887,7 @@ _08056EEE:
 _08056EF0:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8056EE0
+	thumb_func_end unref_sub_8056EE0
 
 	thumb_func_start MetatileBehavior_IsLadder
 MetatileBehavior_IsLadder: @ 8056EF4
@@ -9037,8 +9037,8 @@ _08056FB4:
 	bx r1
 	thumb_func_end MetatileBehavior_IsSouthArrowWarp
 
-	thumb_func_start sub_8056FB8
-sub_8056FB8: @ 8056FB8
+	thumb_func_start unref_sub_8056FB8
+unref_sub_8056FB8: @ 8056FB8
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -9070,7 +9070,7 @@ _08056FF2:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8056FB8
+	thumb_func_end unref_sub_8056FB8
 
 	thumb_func_start sub_8056FFC
 sub_8056FFC: @ 8056FFC
@@ -9539,8 +9539,8 @@ _0805725C:
 	bx r1
 	thumb_func_end sub_805724C
 
-	thumb_func_start sub_8057260
-sub_8057260: @ 8057260
+	thumb_func_start unref_sub_8057260
+unref_sub_8057260: @ 8057260
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -9553,7 +9553,7 @@ _0805726E:
 _08057270:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8057260
+	thumb_func_end unref_sub_8057260
 
 	thumb_func_start sub_8057274
 sub_8057274: @ 8057274
@@ -9618,8 +9618,8 @@ _080572C0:
 	bx r1
 	thumb_func_end sub_80572B0
 
-	thumb_func_start sub_80572C4
-sub_80572C4: @ 80572C4
+	thumb_func_start unref_sub_80572C4
+unref_sub_80572C4: @ 80572C4
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -9632,7 +9632,7 @@ _080572D2:
 _080572D4:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80572C4
+	thumb_func_end unref_sub_80572C4
 
 	thumb_func_start sub_80572D8
 sub_80572D8: @ 80572D8
@@ -10147,8 +10147,8 @@ _08057580:
 	bx r1
 	thumb_func_end sub_8057568
 
-	thumb_func_start sub_8057584
-sub_8057584: @ 8057584
+	thumb_func_start unref_sub_8057584
+unref_sub_8057584: @ 8057584
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -10164,7 +10164,7 @@ _08057596:
 _08057598:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8057584
+	thumb_func_end unref_sub_8057584
 
 	thumb_func_start sub_805759C
 sub_805759C: @ 805759C
@@ -12733,8 +12733,8 @@ _08058694:
 	bx r1
 	thumb_func_end cur_mapdata_get_door_x2_at
 
-	thumb_func_start sub_805869C
-sub_805869C: @ 805869C
+	thumb_func_start unref_sub_805869C
+unref_sub_805869C: @ 805869C
 	push {lr}
 	adds r3, r0, 0
 	adds r2, r1, 0
@@ -12745,7 +12745,7 @@ sub_805869C: @ 805869C
 	bx r0
 	.align 2, 0
 _080586B0: .4byte gUnknown_0830F9B4
-	thumb_func_end sub_805869C
+	thumb_func_end unref_sub_805869C
 
 	thumb_func_start sub_80586B4
 sub_80586B4: @ 80586B4
@@ -15072,8 +15072,8 @@ _08059788: .4byte 0x030048a0
 _0805978C: .4byte 0x0202e858
 	thumb_func_end PlayerGetZCoord
 
-	thumb_func_start sub_8059790
-sub_8059790: @ 8059790
+	thumb_func_start unref_sub_8059790
+unref_sub_8059790: @ 8059790
 	push {lr}
 	adds r3, r0, 0
 	adds r2, r1, 0
@@ -15095,7 +15095,7 @@ sub_8059790: @ 8059790
 	.align 2, 0
 _080597B8: .4byte 0x0202e858
 _080597BC: .4byte 0x030048a0
-	thumb_func_end sub_8059790
+	thumb_func_end unref_sub_8059790
 
 	thumb_func_start TestPlayerAvatarFlags
 TestPlayerAvatarFlags: @ 80597C0
@@ -15214,8 +15214,8 @@ GetPlayerAvatarGraphicsIdByStateId: @ 805986C
 _08059884: .4byte 0x0202e858
 	thumb_func_end GetPlayerAvatarGraphicsIdByStateId
 
-	thumb_func_start sub_8059888
-sub_8059888: @ 8059888
+	thumb_func_start unref_sub_8059888
+unref_sub_8059888: @ 8059888
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -15242,7 +15242,7 @@ _080598AE:
 _080598B0:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8059888
+	thumb_func_end unref_sub_8059888
 
 	thumb_func_start GetPlayerAvatarGenderByGraphicsId
 GetPlayerAvatarGenderByGraphicsId: @ 80598B4
@@ -19674,8 +19674,8 @@ _0805BA72:
 _0805BA7C: .4byte 0x02020004
 	thumb_func_end sub_805B980
 
-	thumb_func_start sub_805BA80
-sub_805BA80: @ 805BA80
+	thumb_func_start unref_sub_805BA80
+unref_sub_805BA80: @ 805BA80
 	push {r4,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -19707,7 +19707,7 @@ _0805BAB4:
 	bx r0
 	.align 2, 0
 _0805BABC: .4byte 0x030048a0
-	thumb_func_end sub_805BA80
+	thumb_func_end unref_sub_805BA80
 
 	thumb_func_start FieldObjectTurn
 FieldObjectTurn: @ 805BAC0
@@ -19785,8 +19785,8 @@ _0805BB44:
 _0805BB4C: .4byte 0x030048a0
 	thumb_func_end FieldObjectTurnByLocalIdAndMap
 
-	thumb_func_start sub_805BB50
-sub_805BB50: @ 805BB50
+	thumb_func_start unref_sub_805BB50
+unref_sub_805BB50: @ 805BB50
 	push {lr}
 	lsls r1, 24
 	lsrs r1, 24
@@ -19801,7 +19801,7 @@ sub_805BB50: @ 805BB50
 	bx r0
 	.align 2, 0
 _0805BB6C: .4byte 0x030048a0
-	thumb_func_end sub_805BB50
+	thumb_func_end unref_sub_805BB50
 
 	thumb_func_start get_berry_tree_graphics
 get_berry_tree_graphics: @ 805BB70
@@ -20179,8 +20179,8 @@ _0805BE1C: .4byte 0x000011ff
 _0805BE20: .4byte gUnknown_0837377C
 	thumb_func_end sub_805BDF8
 
-	thumb_func_start sub_805BE24
-sub_805BE24: @ 805BE24
+	thumb_func_start unref_sub_805BE24
+unref_sub_805BE24: @ 805BE24
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	movs r4, 0
@@ -20208,7 +20208,7 @@ _0805BE4E:
 	bx r0
 	.align 2, 0
 _0805BE54: .4byte 0x000011ff
-	thumb_func_end sub_805BE24
+	thumb_func_end unref_sub_805BE24
 
 	thumb_func_start sub_805BE58
 sub_805BE58: @ 805BE58
@@ -20254,7 +20254,7 @@ pal_patch_for_npc: @ 805BE80
 	lsrs r4, 16
 	adds r1, r4, 0
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -20445,8 +20445,8 @@ _0805C00C:
 	bx r0
 	thumb_func_end npc_load_two_palettes__and_record
 
-	thumb_func_start sub_805C014
-sub_805C014: @ 805C014
+	thumb_func_start unref_sub_805C014
+unref_sub_805C014: @ 805C014
 	push {r4,lr}
 	ldrh r3, [r0, 0x10]
 	strh r3, [r0, 0x14]
@@ -20463,7 +20463,7 @@ sub_805C014: @ 805C014
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_805C014
+	thumb_func_end unref_sub_805C014
 
 	thumb_func_start npc_coords_shift
 npc_coords_shift: @ 805C034
@@ -21038,8 +21038,8 @@ CameraObjectReset2: @ 805C42C
 	bx r0
 	thumb_func_end CameraObjectReset2
 
-	thumb_func_start sub_805C43C
-sub_805C43C: @ 805C43C
+	thumb_func_start unref_sub_805C43C
+unref_sub_805C43C: @ 805C43C
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -21090,7 +21090,7 @@ _0805C492:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805C43C
+	thumb_func_end unref_sub_805C43C
 
 	thumb_func_start obj_unfreeze
 obj_unfreeze: @ 805C4A0
@@ -21263,8 +21263,8 @@ GetFieldObjectFlagIdByFieldObjectId: @ 805C5A8
 _0805C5CC: .4byte 0x030048a0
 	thumb_func_end GetFieldObjectFlagIdByFieldObjectId
 
-	thumb_func_start sub_805C5D0
-sub_805C5D0: @ 805C5D0
+	thumb_func_start unref_sub_805C5D0
+unref_sub_805C5D0: @ 805C5D0
 	push {lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -21295,10 +21295,10 @@ _0805C606:
 	add sp, 0x4
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805C5D0
+	thumb_func_end unref_sub_805C5D0
 
-	thumb_func_start sub_805C60C
-sub_805C60C: @ 805C60C
+	thumb_func_start unref_sub_805C60C
+unref_sub_805C60C: @ 805C60C
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _0805C620
@@ -21310,10 +21310,10 @@ sub_805C60C: @ 805C60C
 	bx lr
 	.align 2, 0
 _0805C620: .4byte 0x030048a0
-	thumb_func_end sub_805C60C
+	thumb_func_end unref_sub_805C60C
 
-	thumb_func_start sub_805C624
-sub_805C624: @ 805C624
+	thumb_func_start unref_sub_805C624
+unref_sub_805C624: @ 805C624
 	push {lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -21344,7 +21344,7 @@ _0805C65A:
 	add sp, 0x4
 	pop {r1}
 	bx r1
-	thumb_func_end sub_805C624
+	thumb_func_end unref_sub_805C624
 
 	thumb_func_start FieldObjectGetBerryTreeId
 FieldObjectGetBerryTreeId: @ 805C660
@@ -29044,8 +29044,8 @@ sub_805FD98: @ 805FD98
 _0805FDA4: .4byte gUnknown_0837562A
 	thumb_func_end sub_805FD98
 
-	thumb_func_start sub_805FDA8
-sub_805FDA8: @ 805FDA8
+	thumb_func_start unref_sub_805FDA8
+unref_sub_805FDA8: @ 805FDA8
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _0805FDB4
@@ -29054,7 +29054,7 @@ sub_805FDA8: @ 805FDA8
 	bx lr
 	.align 2, 0
 _0805FDB4: .4byte gUnknown_08375633
-	thumb_func_end sub_805FDA8
+	thumb_func_end unref_sub_805FDA8
 
 	thumb_func_start sub_805FDB8
 sub_805FDB8: @ 805FDB8
@@ -29815,8 +29815,8 @@ MoveCoords: @ 80602D4
 _080602F4: .4byte gUnknown_083756A4
 	thumb_func_end MoveCoords
 
-	thumb_func_start sub_80602F8
-sub_80602F8: @ 80602F8
+	thumb_func_start unref_sub_80602F8
+unref_sub_80602F8: @ 80602F8
 	push {r4,lr}
 	lsls r0, 24
 	ldr r3, _0806031C
@@ -29837,7 +29837,7 @@ sub_80602F8: @ 80602F8
 	bx r0
 	.align 2, 0
 _0806031C: .4byte gUnknown_083756A4
-	thumb_func_end sub_80602F8
+	thumb_func_end unref_sub_80602F8
 
 	thumb_func_start sub_8060320
 sub_8060320: @ 8060320
@@ -40139,8 +40139,8 @@ _08064BB2:
 	bx r1
 	thumb_func_end box_related_two__3
 
-	thumb_func_start sub_8064BB8
-sub_8064BB8: @ 8064BB8
+	thumb_func_start unref_sub_8064BB8
+unref_sub_8064BB8: @ 8064BB8
 	push {lr}
 	ldr r2, _08064BCC
 	movs r1, 0x3
@@ -40151,10 +40151,10 @@ sub_8064BB8: @ 8064BB8
 	bx r1
 	.align 2, 0
 _08064BCC: .4byte 0x030005a8
-	thumb_func_end sub_8064BB8
+	thumb_func_end unref_sub_8064BB8
 
-	thumb_func_start sub_8064BD0
-sub_8064BD0: @ 8064BD0
+	thumb_func_start unref_sub_8064BD0
+unref_sub_8064BD0: @ 8064BD0
 	push {lr}
 	ldr r1, _08064BE8
 	ldrb r0, [r1]
@@ -40172,7 +40172,7 @@ _08064BEC:
 _08064BEE:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8064BD0
+	thumb_func_end unref_sub_8064BD0
 
 	thumb_func_start textbox_fdecode_auto_and_task_add
 textbox_fdecode_auto_and_task_add: @ 8064BF4
@@ -40266,8 +40266,8 @@ _08064C9A:
 	bx r1
 	thumb_func_end sub_8064C84
 
-	thumb_func_start sub_8064CA0
-sub_8064CA0: @ 8064CA0
+	thumb_func_start unref_sub_8064CA0
+unref_sub_8064CA0: @ 8064CA0
 	push {lr}
 	bl task_del_textbox
 	ldr r0, _08064CB8
@@ -40280,7 +40280,7 @@ sub_8064CA0: @ 8064CA0
 	.align 2, 0
 _08064CB8: .4byte 0x0202e87c
 _08064CBC: .4byte 0x030005a8
-	thumb_func_end sub_8064CA0
+	thumb_func_end unref_sub_8064CA0
 
 	thumb_func_start walkrun_is_standing_still
 walkrun_is_standing_still: @ 8064CC0
@@ -40498,8 +40498,8 @@ sub_8064E2C: @ 8064E2C
 _08064E58: .4byte 0x030048a0
 	thumb_func_end sub_8064E2C
 
-	thumb_func_start sub_8064E5C
-sub_8064E5C: @ 8064E5C
+	thumb_func_start unref_sub_8064E5C
+unref_sub_8064E5C: @ 8064E5C
 	push {r4,lr}
 	ldr r4, _08064EA4
 	ldr r0, _08064EA8
@@ -40535,7 +40535,7 @@ _08064E7A:
 	.align 2, 0
 _08064EA4: .4byte 0x030048a0
 _08064EA8: .4byte 0x03004ae0
-	thumb_func_end sub_8064E5C
+	thumb_func_end unref_sub_8064E5C
 
 	thumb_func_start sub_8064EAC
 sub_8064EAC: @ 8064EAC
@@ -40748,7 +40748,7 @@ sub_8065014: @ 8065014
 	lsls r4, 4
 	adds r1, r4, 0
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -40983,8 +40983,8 @@ sub_80651C8: @ 80651C8
 _080651D8: .4byte 0x030005ae
 	thumb_func_end sub_80651C8
 
-	thumb_func_start sub_80651DC
-sub_80651DC: @ 80651DC
+	thumb_func_start unref_sub_80651DC
+unref_sub_80651DC: @ 80651DC
 	push {lr}
 	sub sp, 0x4
 	ldr r2, _080651FC
@@ -41001,7 +41001,7 @@ sub_80651DC: @ 80651DC
 	bx r0
 	.align 2, 0
 _080651FC: .4byte 0x030005ae
-	thumb_func_end sub_80651DC
+	thumb_func_end unref_sub_80651DC
 
 	thumb_func_start copy_textbox_border_tile_patterns_to_vram
 copy_textbox_border_tile_patterns_to_vram: @ 8065200
@@ -48397,8 +48397,8 @@ _080688EE:
 _080688F4: .4byte gUnknown_0815FD0D
 	thumb_func_end sub_8068894
 
-	thumb_func_start sub_80688F8
-sub_80688F8: @ 80688F8
+	thumb_func_start unref_sub_80688F8
+unref_sub_80688F8: @ 80688F8
 	push {lr}
 	ldr r0, _08068908
 	movs r1, 0
@@ -48407,7 +48407,7 @@ sub_80688F8: @ 80688F8
 	bx r0
 	.align 2, 0
 _08068908: .4byte 0x0000402a
-	thumb_func_end sub_80688F8
+	thumb_func_end unref_sub_80688F8
 
 	thumb_func_start happiness_algorithm_step
 happiness_algorithm_step: @ 806890C
@@ -49517,8 +49517,8 @@ _08069166:
 	bx r1
 	thumb_func_end sub_806912C
 
-	thumb_func_start sub_806916C
-sub_806916C: @ 806916C
+	thumb_func_start unref_sub_806916C
+unref_sub_806916C: @ 806916C
 	push {lr}
 	ldr r0, _08069178
 	bl FlagReset
@@ -49526,10 +49526,10 @@ sub_806916C: @ 806916C
 	bx r0
 	.align 2, 0
 _08069178: .4byte 0x0000084c
-	thumb_func_end sub_806916C
+	thumb_func_end unref_sub_806916C
 
-	thumb_func_start sub_806917C
-sub_806917C: @ 806917C
+	thumb_func_start unref_sub_806917C
+unref_sub_806917C: @ 806917C
 	push {lr}
 	ldr r0, _08069188
 	bl FlagSet
@@ -49537,7 +49537,7 @@ sub_806917C: @ 806917C
 	bx r0
 	.align 2, 0
 _08069188: .4byte 0x0000084c
-	thumb_func_end sub_806917C
+	thumb_func_end unref_sub_806917C
 
 	thumb_func_start sub_806918C
 sub_806918C: @ 806918C
@@ -55149,8 +55149,8 @@ _0806BCB0: .4byte gUnknown_08376918
 _0806BCB4: .4byte gUnknown_08E9A300
 	thumb_func_end sub_806BC3C
 
-	thumb_func_start sub_806BCB8
-sub_806BCB8: @ 806BCB8
+	thumb_func_start unref_sub_806BCB8
+unref_sub_806BCB8: @ 806BCB8
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -55176,7 +55176,7 @@ _0806BCDE:
 	bx r0
 	.align 2, 0
 _0806BCE4: .4byte 0x03004350
-	thumb_func_end sub_806BCB8
+	thumb_func_end unref_sub_806BCB8
 
 	thumb_func_start sub_806BCE8
 sub_806BCE8: @ 806BCE8
@@ -58607,7 +58607,7 @@ _0806D74E:
 	movs r2, 0xB0
 	lsls r2, 1
 	movs r1, 0
-	bl decompress_palette
+	bl LoadCompressedPalette
 _0806D75A:
 	cmp r4, 0x4
 	beq _0806D762
@@ -58617,11 +58617,11 @@ _0806D762:
 	mov r0, sp
 	movs r1, 0
 	movs r2, 0x2
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r0, _0806D7D8
 	movs r1, 0xF0
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 _0806D776:
 	cmp r4, 0x5
 	beq _0806D77E
@@ -58658,7 +58658,7 @@ _0806D7AE:
 	ldr r0, _0806D7F4
 	movs r1, 0xB0
 	movs r2, 0x20
-	bl decompress_palette
+	bl LoadCompressedPalette
 	movs r5, 0x1
 _0806D7BA:
 	adds r0, r5, 0
@@ -58866,8 +58866,8 @@ _0806D95A:
 	bx r0
 	thumb_func_end sub_806D90C
 
-	thumb_func_start sub_806D964
-sub_806D964: @ 806D964
+	thumb_func_start unref_sub_806D964
+unref_sub_806D964: @ 806D964
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -58896,7 +58896,7 @@ _0806D986:
 	.align 2, 0
 _0806D994: .4byte 0x03004360
 _0806D998: .4byte 0x03004350
-	thumb_func_end sub_806D964
+	thumb_func_end unref_sub_806D964
 
 	thumb_func_start sub_806D99C
 sub_806D99C: @ 806D99C
@@ -60444,15 +60444,15 @@ _0806E544:
 _0806E560: .4byte 0x03004360
 	thumb_func_end sub_806E53C
 
-	thumb_func_start nullsub_52
-nullsub_52: @ 806E564
+	thumb_func_start unref_sub_806E564
+unref_sub_806E564: @ 806E564
 	bx lr
-	thumb_func_end nullsub_52
+	thumb_func_end unref_sub_806E564
 
-	thumb_func_start nullsub_87
-nullsub_87: @ 806E568
+	thumb_func_start unref_sub_806E568
+unref_sub_806E568: @ 806E568
 	bx lr
-	thumb_func_end nullsub_87
+	thumb_func_end unref_sub_806E568
 
 	thumb_func_start nullsub_12
 nullsub_12: @ 806E56C
@@ -65573,8 +65573,8 @@ _08070F8A:
 	bx r1
 	thumb_func_end sub_8070E48
 
-	thumb_func_start sub_8070F90
-sub_8070F90: @ 8070F90
+	thumb_func_start unref_sub_8070F90
+unref_sub_8070F90: @ 8070F90
 	push {lr}
 	ldr r0, _08070FAC
 	bl FlagSet
@@ -65588,7 +65588,7 @@ sub_8070F90: @ 8070F90
 	.align 2, 0
 _08070FAC: .4byte 0x00000801
 _08070FB0: .4byte 0x00000802
-	thumb_func_end sub_8070F90
+	thumb_func_end unref_sub_8070F90
 
 	thumb_func_start sub_8070FB4
 sub_8070FB4: @ 8070FB4
@@ -66311,7 +66311,7 @@ _08071542:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08071548: .4byte sub_808B63C
+_08071548: .4byte CB2_InitOptionMenu
 _0807154C: .4byte 0x03001770
 _08071550: .4byte sub_805469C
 	thumb_func_end sub_8071518
@@ -67419,8 +67419,8 @@ _08071D9C: .4byte 0x0202e9d2
 _08071DA0: .4byte 0x0202e9d4
 	thumb_func_end sub_8071D48
 
-	thumb_func_start sub_8071DA4
-sub_8071DA4: @ 8071DA4
+	thumb_func_start unref_sub_8071DA4
+unref_sub_8071DA4: @ 8071DA4
 	push {r4,r5,lr}
 	adds r2, r0, 0
 	lsls r4, r1, 16
@@ -67457,7 +67457,7 @@ _08071DF0: .4byte 0x0202e9d0
 _08071DF4: .4byte 0x0202e9d2
 _08071DF8: .4byte 0x0202e9ce
 _08071DFC: .4byte 0x0202e9d4
-	thumb_func_end sub_8071DA4
+	thumb_func_end unref_sub_8071DA4
 
 	thumb_func_start sub_8071E00
 sub_8071E00: @ 8071E00
@@ -67681,8 +67681,8 @@ _08071F90: .4byte 0x0202e9c8
 _08071F94: .4byte 0x0202e9ce
 	thumb_func_end sub_8071F60
 
-	thumb_func_start sub_8071F98
-sub_8071F98: @ 8071F98
+	thumb_func_start unref_sub_8071F98
+unref_sub_8071F98: @ 8071F98
 	push {lr}
 	adds r3, r0, 0
 	adds r2, r1, 0
@@ -67700,10 +67700,10 @@ sub_8071F98: @ 8071F98
 	bx r1
 	.align 2, 0
 _08071FB8: .4byte 0x0202e9c8
-	thumb_func_end sub_8071F98
+	thumb_func_end unref_sub_8071F98
 
-	thumb_func_start sub_8071FBC
-sub_8071FBC: @ 8071FBC
+	thumb_func_start unref_sub_8071FBC
+unref_sub_8071FBC: @ 8071FBC
 	push {r4-r6,lr}
 	sub sp, 0x8
 	adds r4, r0, 0
@@ -67734,7 +67734,7 @@ sub_8071FBC: @ 8071FBC
 	bx r0
 	.align 2, 0
 _08071FF8: .4byte 0x0202e9c8
-	thumb_func_end sub_8071FBC
+	thumb_func_end unref_sub_8071FBC
 
 	thumb_func_start sub_8071FFC
 sub_8071FFC: @ 8071FFC
@@ -67823,8 +67823,8 @@ sub_8072080: @ 8072080
 _08072094: .4byte 0x0202e9c8
 	thumb_func_end sub_8072080
 
-	thumb_func_start sub_8072098
-sub_8072098: @ 8072098
+	thumb_func_start unref_sub_8072098
+unref_sub_8072098: @ 8072098
 	push {lr}
 	ldr r0, _080720AC
 	ldr r0, [r0]
@@ -67835,7 +67835,7 @@ sub_8072098: @ 8072098
 	bx r1
 	.align 2, 0
 _080720AC: .4byte 0x0202e9c8
-	thumb_func_end sub_8072098
+	thumb_func_end unref_sub_8072098
 
 	thumb_func_start sub_80720B0
 sub_80720B0: @ 80720B0
@@ -69146,8 +69146,8 @@ _08072A54: .4byte 0x0202e9c8
 _08072A58: .4byte 0x0202e9ce
 	thumb_func_end sub_8072A18
 
-	thumb_func_start sub_8072A5C
-sub_8072A5C: @ 8072A5C
+	thumb_func_start unref_sub_8072A5C
+unref_sub_8072A5C: @ 8072A5C
 	push {r4-r6,lr}
 	mov r6, r9
 	mov r5, r8
@@ -69187,7 +69187,7 @@ sub_8072A5C: @ 8072A5C
 	.align 2, 0
 _08072AA8: .4byte 0x0202e9c8
 _08072AAC: .4byte 0x0202e9ce
-	thumb_func_end sub_8072A5C
+	thumb_func_end unref_sub_8072A5C
 
 	thumb_func_start sub_8072AB0
 sub_8072AB0: @ 8072AB0
@@ -69510,14 +69510,14 @@ sub_8072CF4: @ 8072CF4
 _08072D08: .4byte 0x0202e9c8
 	thumb_func_end sub_8072CF4
 
-	thumb_func_start sub_8072D0C
-sub_8072D0C: @ 8072D0C
+	thumb_func_start unref_sub_8072D0C
+unref_sub_8072D0C: @ 8072D0C
 	ldr r0, _08072D14
 	ldr r0, [r0]
 	bx lr
 	.align 2, 0
 _08072D14: .4byte 0x0202e9c8
-	thumb_func_end sub_8072D0C
+	thumb_func_end unref_sub_8072D0C
 
 	thumb_func_start sub_8072D18
 sub_8072D18: @ 8072D18
@@ -69612,13 +69612,13 @@ RedrawMenuCursor: @ 8072DA8
 	bx r0
 	thumb_func_end RedrawMenuCursor
 
-	thumb_func_start sub_8072DC0
-sub_8072DC0: @ 8072DC0
+	thumb_func_start unref_sub_8072DC0
+unref_sub_8072DC0: @ 8072DC0
 	push {lr}
 	bl sub_814A904
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8072DC0
+	thumb_func_end unref_sub_8072DC0
 
 	thumb_func_start sub_8072DCC
 sub_8072DCC: @ 8072DCC
@@ -71265,8 +71265,8 @@ _08073A0C: .4byte gUnknown_0837DEDC
 _08073A10: .4byte 0x06007e00
 	thumb_func_end sub_80739EC
 
-	thumb_func_start decompress_palette
-decompress_palette: @ 8073A14
+	thumb_func_start LoadCompressedPalette
+LoadCompressedPalette: @ 8073A14
 	push {r4-r6,lr}
 	adds r4, r1, 0
 	adds r5, r2, 0
@@ -71296,10 +71296,10 @@ decompress_palette: @ 8073A14
 _08073A4C: .4byte 0x0202f39c
 _08073A50: .4byte 0x0202eac8
 _08073A54: .4byte 0x0202eec8
-	thumb_func_end decompress_palette
+	thumb_func_end LoadCompressedPalette
 
-	thumb_func_start gpu_pal_apply
-gpu_pal_apply: @ 8073A58
+	thumb_func_start LoadPalette
+LoadPalette: @ 8073A58
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	adds r4, r1, 0
@@ -71324,10 +71324,10 @@ gpu_pal_apply: @ 8073A58
 	.align 2, 0
 _08073A88: .4byte 0x0202eac8
 _08073A8C: .4byte 0x0202eec8
-	thumb_func_end gpu_pal_apply
+	thumb_func_end LoadPalette
 
-	thumb_func_start rboxid_80040B8
-rboxid_80040B8: @ 8073A90
+	thumb_func_start FillPalette
+FillPalette: @ 8073A90
 	push {r4-r6,lr}
 	sub sp, 0x4
 	adds r6, r0, 0
@@ -71364,7 +71364,7 @@ rboxid_80040B8: @ 8073A90
 	.align 2, 0
 _08073AD8: .4byte 0x0202eac8
 _08073ADC: .4byte 0x0202eec8
-	thumb_func_end rboxid_80040B8
+	thumb_func_end FillPalette
 
 	thumb_func_start copy_pal_bg_faded_to_pal_ram
 copy_pal_bg_faded_to_pal_ram: @ 8073AE0
@@ -71674,8 +71674,8 @@ _08073D34: .4byte 0x04000100
 _08073D38: .4byte 0x0202f398
 	thumb_func_end pal_fade_maybe
 
-	thumb_func_start sub_8073D3C
-sub_8073D3C: @ 8073D3C
+	thumb_func_start unref_sub_8073D3C
+unref_sub_8073D3C: @ 8073D3C
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -71710,10 +71710,10 @@ sub_8073D3C: @ 8073D3C
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8073D3C
+	thumb_func_end unref_sub_8073D3C
 
-	thumb_func_start sub_8073D84
-sub_8073D84: @ 8073D84
+	thumb_func_start unref_sub_8073D84
+unref_sub_8073D84: @ 8073D84
 	push {r4-r7,lr}
 	adds r6, r1, 0
 	lsls r0, 24
@@ -71775,7 +71775,7 @@ _08073DEC:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8073D84
+	thumb_func_end unref_sub_8073D84
 
 	thumb_func_start sub_8073DFC
 sub_8073DFC: @ 8073DFC
@@ -72231,8 +72231,8 @@ _08074160: .4byte 0xffff8000
 _08074164: .4byte 0xfffe0fff
 	thumb_func_end pal_fade_control_reset_maybe
 
-	thumb_func_start sub_8074168
-sub_8074168: @ 8074168
+	thumb_func_start unref_sub_8074168
+unref_sub_8074168: @ 8074168
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -72255,10 +72255,10 @@ _0807418C:
 	bx r0
 	.align 2, 0
 _08074190: .4byte 0x0202f2c8
-	thumb_func_end sub_8074168
+	thumb_func_end unref_sub_8074168
 
-	thumb_func_start sub_8074194
-sub_8074194: @ 8074194
+	thumb_func_start unref_sub_8074194
+unref_sub_8074194: @ 8074194
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -72282,7 +72282,7 @@ _080741BA:
 	bx r0
 	.align 2, 0
 _080741C0: .4byte 0x0202f2c8
-	thumb_func_end sub_8074194
+	thumb_func_end unref_sub_8074194
 
 	thumb_func_start sub_80741C4
 sub_80741C4: @ 80741C4
@@ -73918,8 +73918,8 @@ _08074DD0: .4byte 0x030006d8
 _08074DD4: .4byte 0x030006d9
 	thumb_func_end sub_8074D94
 
-	thumb_func_start sub_8074DD8
-sub_8074DD8: @ 8074DD8
+	thumb_func_start unref_sub_8074DD8
+unref_sub_8074DD8: @ 8074DD8
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 16
@@ -73946,7 +73946,7 @@ _08074E04: .4byte 0x030006d4
 _08074E08: .4byte 0x030006d6
 _08074E0C: .4byte 0x030006d8
 _08074E10: .4byte 0x030006d9
-	thumb_func_end sub_8074DD8
+	thumb_func_end unref_sub_8074DD8
 
 	thumb_func_start sub_8074E14
 sub_8074E14: @ 8074E14
@@ -74028,8 +74028,8 @@ _08074EA0:
 	bx r1
 	thumb_func_end ducking_tick
 
-	thumb_func_start sub_8074EA4
-sub_8074EA4: @ 8074EA4
+	thumb_func_start unref_sub_8074EA4
+unref_sub_8074EA4: @ 8074EA4
 	push {lr}
 	lsls r0, 24
 	ldr r1, _08074EB8
@@ -74041,7 +74041,7 @@ sub_8074EA4: @ 8074EA4
 	bx r0
 	.align 2, 0
 _08074EB8: .4byte gUnknown_0837DEF4
-	thumb_func_end sub_8074EA4
+	thumb_func_end unref_sub_8074EA4
 
 	thumb_func_start fanfare_play
 fanfare_play: @ 8074EBC
@@ -76478,7 +76478,7 @@ _0807611C:
 	lsls r1, 4
 	adds r0, r4, 0
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	mov r3, sp
 	ldrb r0, [r3, 0x18]
 	lsls r0, 5
@@ -76668,7 +76668,7 @@ _08076244:
 	adds r0, r4, 0
 	movs r1, 0x90
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r0, _08076378
 	str r4, [r5]
 	str r0, [r5, 0x4]
@@ -78148,7 +78148,7 @@ _08076E22:
 	lsrs r1, 20
 	adds r0, r4, 0
 	movs r2, 0x20
-	bl decompress_palette
+	bl LoadCompressedPalette
 	b _08076E9E
 	.align 2, 0
 _08076E54: .4byte gUnknown_0837F374
@@ -78178,7 +78178,7 @@ _08076E70:
 	ldr r0, [r4]
 	movs r1, 0x20
 	movs r2, 0x20
-	bl decompress_palette
+	bl LoadCompressedPalette
 _08076E9E:
 	pop {r4-r7}
 	pop {r0}
@@ -80719,8 +80719,8 @@ _080781EA:
 	bx r0
 	thumb_func_end sub_8078174
 
-	thumb_func_start sub_80781F0
-sub_80781F0: @ 80781F0
+	thumb_func_start unref_sub_80781F0
+unref_sub_80781F0: @ 80781F0
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r1, 0x34
@@ -80793,7 +80793,7 @@ _08078272:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80781F0
+	thumb_func_end unref_sub_80781F0
 
 	thumb_func_start sub_8078278
 sub_8078278: @ 8078278
@@ -81027,8 +81027,8 @@ _08078406:
 	bx r0
 	thumb_func_end sub_80783D0
 
-	thumb_func_start sub_8078414
-sub_8078414: @ 8078414
+	thumb_func_start unref_sub_8078414
+unref_sub_8078414: @ 8078414
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	ldrh r0, [r4, 0x24]
@@ -81060,7 +81060,7 @@ sub_8078414: @ 8078414
 	.align 2, 0
 _08078450: .4byte 0x0202f7c9
 _08078454: .4byte sub_80782F8
-	thumb_func_end sub_8078414
+	thumb_func_end unref_sub_8078414
 
 	thumb_func_start sub_8078458
 sub_8078458: @ 8078458
@@ -81228,8 +81228,8 @@ move_anim_8074EE0: @ 8078574
 	bx r0
 	thumb_func_end move_anim_8074EE0
 
-	thumb_func_start sub_8078588
-sub_8078588: @ 8078588
+	thumb_func_start unref_sub_8078588
+unref_sub_8078588: @ 8078588
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	ldrh r0, [r4, 0x24]
@@ -81261,10 +81261,10 @@ sub_8078588: @ 8078588
 	.align 2, 0
 _080785C4: .4byte 0x0202f7c8
 _080785C8: .4byte sub_80782F8
-	thumb_func_end sub_8078588
+	thumb_func_end unref_sub_8078588
 
-	thumb_func_start sub_80785CC
-sub_80785CC: @ 80785CC
+	thumb_func_start unref_sub_80785CC
+unref_sub_80785CC: @ 80785CC
 	push {r4,lr}
 	adds r4, r0, 0
 	ldrh r0, [r4, 0x38]
@@ -81274,7 +81274,7 @@ sub_80785CC: @ 80785CC
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80785CC
+	thumb_func_end unref_sub_80785CC
 
 	thumb_func_start sub_80785E4
 sub_80785E4: @ 80785E4
@@ -83164,8 +83164,8 @@ sub_80793A8: @ 80793A8
 	bx lr
 	thumb_func_end sub_80793A8
 
-	thumb_func_start sub_80793B0
-sub_80793B0: @ 80793B0
+	thumb_func_start unref_sub_80793B0
+unref_sub_80793B0: @ 80793B0
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -83174,7 +83174,7 @@ sub_80793B0: @ 80793B0
 	lsrs r0, 24
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80793B0
+	thumb_func_end unref_sub_80793B0
 
 	thumb_func_start sub_80793C4
 sub_80793C4: @ 80793C4
@@ -84427,8 +84427,8 @@ _08079D18: .4byte 0x0202f7be
 _08079D1C: .4byte 0x03004b00
 	thumb_func_end sub_8079CEC
 
-	thumb_func_start sub_8079D20
-sub_8079D20: @ 8079D20
+	thumb_func_start unref_sub_8079D20
+unref_sub_8079D20: @ 8079D20
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -84555,7 +84555,7 @@ _08079E14: .4byte 0x0202f7c9
 _08079E18: .4byte 0x02020004
 _08079E1C: .4byte 0x02024be0
 _08079E20: .4byte 0x0202f7c8
-	thumb_func_end sub_8079D20
+	thumb_func_end unref_sub_8079D20
 
 	thumb_func_start sub_8079E24
 sub_8079E24: @ 8079E24
@@ -84774,7 +84774,7 @@ sub_8079F44: @ 8079F44
 	adds r1, r2
 	lsrs r1, 16
 	movs r2, 0x20
-	bl decompress_palette
+	bl LoadCompressedPalette
 	lsls r0, r6, 3
 	ldr r1, _08079FE8
 	adds r0, r1
@@ -84809,7 +84809,7 @@ _08079FF0:
 	adds r1, r2
 	lsrs r1, 16
 	movs r2, 0x20
-	bl decompress_palette
+	bl LoadCompressedPalette
 	lsls r0, r6, 3
 	ldr r1, _0807A068
 	adds r0, r1
