@@ -1,0 +1,48 @@
+Route107_MapScripts:: @ 814F3BB
+	.byte 0
+
+Route107_EventScript_14F3BC:: @ 814F3BC
+	trainerbattle 0, 154, 0, Route107_Text_1B926B, Route107_Text_1B92B7
+	loadptr 0, Route107_Text_1B92E7
+	callstd 6
+	end
+
+Route107_EventScript_14F3D3:: @ 814F3D3
+	trainerbattle 0, 155, 0, Route107_Text_1B933A, Route107_Text_1B9365
+	specialval RESULT, 57
+	compare RESULT, 1
+	jumpeq Route107_EventScript_14F3FA
+	loadptr 0, Route107_Text_1B938E
+	callstd 6
+	end
+
+Route107_EventScript_14F3FA:: @ 814F3FA
+	trainerbattle 5, 155, 0, Route107_Text_1B93EB, Route107_Text_1B9429
+	loadptr 0, Route107_Text_1B9477
+	callstd 6
+	end
+
+Route107_EventScript_14F411:: @ 814F411
+	trainerbattle 0, 444, 0, Route107_Text_1B94C8, Route107_Text_1B94F2
+	loadptr 0, Route107_Text_1B94FF
+	callstd 6
+	end
+
+Route107_EventScript_14F428:: @ 814F428
+	trainerbattle 0, 445, 0, Route107_Text_1B9538, Route107_Text_1B956B
+	loadptr 0, Route107_Text_1B9589
+	callstd 6
+	end
+
+Route107_EventScript_14F43F:: @ 814F43F
+	trainerbattle 4, 692, 0, Route107_Text_1B95CB, Route107_Text_1B95FB, Route107_Text_1B9672
+	loadptr 0, Route107_Text_1B9630
+	callstd 6
+	end
+
+Route107_EventScript_14F45A:: @ 814F45A
+	trainerbattle 4, 692, 0, Route107_Text_1B96AB, Route107_Text_1B9707, Route107_Text_1B9788
+	loadptr 0, Route107_Text_1B9735
+	callstd 6
+	end
+

@@ -1,0 +1,49 @@
+Route131_MapScripts:: @ 815243E
+	map_script 3, Route131_MapScript1_152444
+	.byte 0
+
+Route131_MapScript1_152444:: @ 8152444
+	checkflag 2052
+	callif 1, Route131_EventScript_15244E
+	end
+
+Route131_EventScript_15244E:: @ 815244E
+	setmapfooter 320
+	return
+
+Route131_EventScript_152452:: @ 8152452
+	trainerbattle 0, 166, 0, Route131_Text_1C25B3, Route131_Text_1C25F8
+	loadptr 0, Route131_Text_1C262A
+	callstd 6
+	end
+
+Route131_EventScript_152469:: @ 8152469
+	trainerbattle 0, 167, 0, Route131_Text_1C26B9, Route131_Text_1C271F
+	loadptr 0, Route131_Text_1C2726
+	callstd 6
+	end
+
+Route131_EventScript_152480:: @ 8152480
+	trainerbattle 0, 456, 0, Route131_Text_1C2774, Route131_Text_1C27A4
+	loadptr 0, Route131_Text_1C27CF
+	callstd 6
+	end
+
+Route131_EventScript_152497:: @ 8152497
+	trainerbattle 0, 457, 0, Route131_Text_1C284A, Route131_Text_1C2883
+	loadptr 0, Route131_Text_1C2898
+	callstd 6
+	end
+
+Route131_EventScript_1524AE:: @ 81524AE
+	trainerbattle 4, 686, 0, Route131_Text_1C28E2, Route131_Text_1C2918, Route131_Text_1C29B2
+	loadptr 0, Route131_Text_1C2950
+	callstd 6
+	end
+
+Route131_EventScript_1524C9:: @ 81524C9
+	trainerbattle 4, 686, 0, Route131_Text_1C29F3, Route131_Text_1C2A20, Route131_Text_1C2ACA
+	loadptr 0, Route131_Text_1C2A5D
+	callstd 6
+	end
+

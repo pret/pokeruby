@@ -1,0 +1,51 @@
+SootopolisCity_Gym_B1F_MapScripts:: @ 815B0D7
+	.byte 0
+
+SootopolisCity_Gym_B1F_EventScript_15B0D8:: @ 815B0D8
+	trainerbattle 0, 613, 0, SootopolisCity_Gym_B1F_Text_18EA87, SootopolisCity_Gym_B1F_Text_18EACF
+	loadptr 0, SootopolisCity_Gym_B1F_Text_18EAED
+	callstd 6
+	end
+
+SootopolisCity_Gym_B1F_EventScript_15B0EF:: @ 815B0EF
+	trainerbattle 0, 614, 0, SootopolisCity_Gym_B1F_Text_18EB22, SootopolisCity_Gym_B1F_Text_18EB81
+	loadptr 0, SootopolisCity_Gym_B1F_Text_18EBB1
+	callstd 6
+	end
+
+SootopolisCity_Gym_B1F_EventScript_15B106:: @ 815B106
+	trainerbattle 0, 118, 0, SootopolisCity_Gym_B1F_Text_18EBFA, SootopolisCity_Gym_B1F_Text_18EC5E
+	loadptr 0, SootopolisCity_Gym_B1F_Text_18EC92
+	callstd 6
+	end
+
+SootopolisCity_Gym_B1F_EventScript_15B11D:: @ 815B11D
+	trainerbattle 0, 128, 0, SootopolisCity_Gym_B1F_Text_18ECEB, SootopolisCity_Gym_B1F_Text_18ED18
+	loadptr 0, SootopolisCity_Gym_B1F_Text_18ED2B
+	callstd 6
+	end
+
+SootopolisCity_Gym_B1F_EventScript_15B134:: @ 815B134
+	trainerbattle 0, 129, 0, SootopolisCity_Gym_B1F_Text_18ED91, SootopolisCity_Gym_B1F_Text_18EDE8
+	loadptr 0, SootopolisCity_Gym_B1F_Text_18EE03
+	callstd 6
+	end
+
+SootopolisCity_Gym_B1F_EventScript_15B14B:: @ 815B14B
+	trainerbattle 0, 130, 0, SootopolisCity_Gym_B1F_Text_18EE96, SootopolisCity_Gym_B1F_Text_18EEDC
+	loadptr 0, SootopolisCity_Gym_B1F_Text_18EEF7
+	callstd 6
+	end
+
+SootopolisCity_Gym_B1F_EventScript_15B162:: @ 815B162
+	trainerbattle 0, 131, 0, SootopolisCity_Gym_B1F_Text_18EF39, SootopolisCity_Gym_B1F_Text_18EFB8
+	loadptr 0, SootopolisCity_Gym_B1F_Text_18EFCA
+	callstd 6
+	end
+
+SootopolisCity_Gym_B1F_EventScript_15B179:: @ 815B179
+	trainerbattle 0, 301, 0, SootopolisCity_Gym_B1F_Text_18F037, SootopolisCity_Gym_B1F_Text_18F07F
+	loadptr 0, SootopolisCity_Gym_B1F_Text_18F085
+	callstd 6
+	end
+

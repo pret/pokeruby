@@ -1,0 +1,9 @@
+MtPyre_5F_MapScripts:: @ 815D42F
+	.byte 0
+
+MtPyre_5F_EventScript_15D430:: @ 815D430
+	trainerbattle 0, 109, 0, MtPyre_5F_Text_196939, MtPyre_5F_Text_196997
+	loadptr 0, MtPyre_5F_Text_1969AC
+	callstd 6
+	end
+
