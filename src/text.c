@@ -117,7 +117,7 @@ struct ShiftAmount
     u32 right;
 };
 
-extern void gpu_pal_apply(const u16 *, u16, u32);
+extern void LoadPalette(const u16 *, u16, u32);
 extern void sub_8075474(u16);
 extern void audio_play(u16);
 extern u8 mplay_has_finished_maybe(void);
@@ -1800,7 +1800,7 @@ static void ClearBGMem(struct WindowConfig *winConfig)
 
 void LoadFontDefaultPalette(struct WindowConfig *winConfig)
 {
-    gpu_pal_apply(gFontDefaultPalette, 16 * winConfig->paletteNum, 32);
+    LoadPalette(gFontDefaultPalette, 16 * winConfig->paletteNum, 32);
 }
 
 void SetUpWindowConfig(struct WindowConfig *winConfig)

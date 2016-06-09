@@ -84,8 +84,21 @@ void PreprocAsmFile(std::string filename)
             break;
         }
         case Directive::Unknown:
-            stack.top().OutputLine();
+        {
+            std::string globalLabel = stack.top().GetGlobalLabel();
+
+            if (globalLabel.length() != 0)
+            {
+                printf("\t.global %s\n", globalLabel.c_str());
+                printf("%s:\n", globalLabel.c_str());
+            }
+            else
+            {
+                stack.top().OutputLine();
+            }
+
             break;
+        }
         }
     }
 }

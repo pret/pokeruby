@@ -197,6 +197,31 @@ Directive AsmFile::GetDirective()
         return Directive::Unknown;
 }
 
+// Checks if we're at label that ends with '::'.
+// Returns the name if so and an empty string if not.
+std::string AsmFile::GetGlobalLabel()
+{
+    long start = m_pos;
+    long pos = m_pos;
+
+    if (IsIdentifierStartingChar(m_buffer[pos]))
+    {
+        pos++;
+
+        while (IsIdentifierChar(m_buffer[pos]))
+            pos++;
+    }
+
+    if (m_buffer[pos] == ':' && m_buffer[pos + 1] == ':')
+    {
+        m_pos = pos + 2;
+        ExpectEmptyRestOfLine();
+        return std::string(&m_buffer[start], pos - start);
+    }
+
+    return std::string();
+}
+
 // Skips tabs and spaces.
 void AsmFile::SkipWhitespace()
 {

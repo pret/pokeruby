@@ -25,7 +25,7 @@ struct LinkTestBGInfo
     u32 dummy_C;
 };
 
-extern void gpu_pal_apply(const u16 *, u16, u32);
+extern void LoadPalette(const u16 *, u16, u32);
 extern void sub_8071C4C(const struct WindowConfig *);
 extern u16 Random(void);
 extern void SeedRng(u16);
@@ -201,7 +201,7 @@ void Task_DestroySelf(u8 taskId)
 
 static void InitLinkTestBG(u8 paletteNum, u8 bgNum, u8 screenBaseBlock, u8 charBaseBlock)
 {
-    gpu_pal_apply(sLinkTestDigitPalette, 16 * paletteNum, 32);
+    LoadPalette(sLinkTestDigitPalette, 16 * paletteNum, 32);
     DmaCopy16(3, sLinkTestDigitTiles, BG_CHAR_ADDR(charBaseBlock), 0x220);
 
     gLinkTestBGInfo.screenBaseBlock = screenBaseBlock;
@@ -223,7 +223,7 @@ static void InitLinkTestBG(u8 paletteNum, u8 bgNum, u8 screenBaseBlock, u8 charB
 
 static void InitLinkTestBG_Unused(u8 paletteNum, u8 bgNum, u8 screenBaseBlock, u8 charBaseBlock)
 {
-    gpu_pal_apply(sLinkTestDigitPalette, 16 * paletteNum, 32);
+    LoadPalette(sLinkTestDigitPalette, 16 * paletteNum, 32);
     DmaCopy16(3, sLinkTestDigitTiles, BG_CHAR_ADDR(charBaseBlock), 0x220);
 
     gLinkTestBGInfo.screenBaseBlock = screenBaseBlock;
@@ -1223,7 +1223,7 @@ void CB2_LinkError(void)
     ResetSpriteData();
     FreeAllSpritePalettes();
     pal_fade_control_reset_maybe();
-    rboxid_80040B8(0, 0, 2);
+    FillPalette(0, 0, 2);
     ResetTasks();
     SetVBlankCallback(VBlankCB_LinkTest);
     SetUpWindowConfig(&gWindowConfig_81E7198);
