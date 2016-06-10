@@ -42,6 +42,7 @@ public:
     AsmFile(const AsmFile&) = delete;
     ~AsmFile();
     Directive GetDirective();
+    std::string GetGlobalLabel();
     std::string ReadPath();
     int ReadString(unsigned char* s);
     int ReadBraille(unsigned char* s);

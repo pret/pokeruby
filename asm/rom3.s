@@ -4,8 +4,8 @@
 
 	.text
 
-	thumb_func_start sub_80096C4
-sub_80096C4: @ 80096C4
+	thumb_func_start CB2_MainMenu
+CB2_MainMenu: @ 80096C4
 	push {lr}
 	bl RunTasks
 	bl AnimateSprites
@@ -13,38 +13,38 @@ sub_80096C4: @ 80096C4
 	bl fade_and_return_progress_probably
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80096C4
+	thumb_func_end CB2_MainMenu
 
-	thumb_func_start sub_80096DC
-sub_80096DC: @ 80096DC
+	thumb_func_start VBlankCB_MainMenu
+VBlankCB_MainMenu: @ 80096DC
 	push {lr}
 	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl copy_pal_bg_faded_to_pal_ram
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80096DC
+	thumb_func_end VBlankCB_MainMenu
 
-	thumb_func_start sub_80096F0
-sub_80096F0: @ 80096F0
+	thumb_func_start CB2_InitMainMenu
+CB2_InitMainMenu: @ 80096F0
 	push {lr}
 	movs r0, 0
-	bl sub_8009708
+	bl InitMainMenu
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80096F0
+	thumb_func_end CB2_InitMainMenu
 
 	thumb_func_start sub_80096FC
 sub_80096FC: @ 80096FC
 	push {lr}
 	movs r0, 0x1
-	bl sub_8009708
+	bl InitMainMenu
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80096FC
 
-	thumb_func_start sub_8009708
-sub_8009708: @ 8009708
+	thumb_func_start InitMainMenu
+InitMainMenu: @ 8009708
 	push {r4,r5,lr}
 	sub sp, 0xC
 	adds r4, r0, 0
@@ -106,7 +106,7 @@ sub_8009708: @ 8009708
 	ldr r0, _080097D0
 	movs r1, 0
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	bl remove_some_task
 	bl ResetTasks
 	bl ResetSpriteData
@@ -199,14 +199,14 @@ _08009858: .4byte 0x0000ffff
 _0800985C: .4byte 0x04000040
 _08009860: .4byte 0x04000208
 _08009864: .4byte 0x04000200
-_08009868: .4byte sub_80096DC
-_0800986C: .4byte sub_80096C4
-_08009870: .4byte sub_8009878
+_08009868: .4byte VBlankCB_MainMenu
+_0800986C: .4byte CB2_MainMenu
+_08009870: .4byte Task_CheckSave
 _08009874: .4byte 0x03004b20
-	thumb_func_end sub_8009708
+	thumb_func_end InitMainMenu
 
-	thumb_func_start sub_8009878
-sub_8009878: @ 8009878
+	thumb_func_start Task_CheckSave
+Task_CheckSave: @ 8009878
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -299,7 +299,7 @@ _0800992A:
 	b _080099FA
 	.align 2, 0
 _08009934: .4byte 0x03004b20
-_08009938: .4byte sub_8009A64
+_08009938: .4byte Task_CheckRtc
 _0800993C:
 	movs r0, 0x2
 	movs r1, 0xE
@@ -347,7 +347,7 @@ _08009994: .4byte gUnknown_0840DE81
 _08009998: .4byte 0x000011df
 _0800999C: .4byte 0x0000719f
 _080099A0: .4byte 0x03004b20
-_080099A4: .4byte sub_8009A1C
+_080099A4: .4byte Task_WaitForSaveErrorAck
 _080099A8:
 	strh r5, [r4, 0x8]
 	b _080099FC
@@ -363,7 +363,7 @@ _080099AC:
 	b _080099FA
 	.align 2, 0
 _080099C0: .4byte 0x03004b20
-_080099C4: .4byte sub_8009A64
+_080099C4: .4byte Task_CheckRtc
 _080099C8:
 	movs r0, 0x2
 	movs r1, 0xE
@@ -402,11 +402,11 @@ _08009A08: .4byte gUnknown_0840DEE5
 _08009A0C: .4byte 0x000011df
 _08009A10: .4byte 0x0000719f
 _08009A14: .4byte 0x03004b20
-_08009A18: .4byte sub_8009A1C
-	thumb_func_end sub_8009878
+_08009A18: .4byte Task_WaitForSaveErrorAck
+	thumb_func_end Task_CheckSave
 
-	thumb_func_start sub_8009A1C
-sub_8009A1C: @ 8009A1C
+	thumb_func_start Task_WaitForSaveErrorAck
+Task_WaitForSaveErrorAck: @ 8009A1C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -439,11 +439,11 @@ _08009A52:
 	.align 2, 0
 _08009A58: .4byte 0x03001770
 _08009A5C: .4byte 0x03004b20
-_08009A60: .4byte sub_8009A64
-	thumb_func_end sub_8009A1C
+_08009A60: .4byte Task_CheckRtc
+	thumb_func_end Task_WaitForSaveErrorAck
 
-	thumb_func_start sub_8009A64
-sub_8009A64: @ 8009A64
+	thumb_func_start Task_CheckRtc
+Task_CheckRtc: @ 8009A64
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -497,7 +497,7 @@ _08009ACC: .4byte 0x04000048
 _08009AD0: .4byte 0x00001111
 _08009AD4: .4byte 0x04000052
 _08009AD8: .4byte 0x03004b20
-_08009ADC: .4byte sub_8009B74
+_08009ADC: .4byte Task_DrawMainMenu
 _08009AE0:
 	movs r0, 0x2
 	movs r1, 0xE
@@ -530,11 +530,11 @@ _08009B18: .4byte gUnknown_0840DF10
 _08009B1C: .4byte 0x000011df
 _08009B20: .4byte 0x0000719f
 _08009B24: .4byte 0x03004b20
-_08009B28: .4byte sub_8009B2C
-	thumb_func_end sub_8009A64
+_08009B28: .4byte Task_WaitForRtcErrorAck
+	thumb_func_end Task_CheckRtc
 
-	thumb_func_start sub_8009B2C
-sub_8009B2C: @ 8009B2C
+	thumb_func_start Task_WaitForRtcErrorAck
+Task_WaitForRtcErrorAck: @ 8009B2C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -567,11 +567,11 @@ _08009B62:
 	.align 2, 0
 _08009B68: .4byte 0x03001770
 _08009B6C: .4byte 0x03004b20
-_08009B70: .4byte sub_8009B74
-	thumb_func_end sub_8009B2C
+_08009B70: .4byte Task_DrawMainMenu
+	thumb_func_end Task_WaitForRtcErrorAck
 
-	thumb_func_start sub_8009B74
-sub_8009B74: @ 8009B74
+	thumb_func_start Task_DrawMainMenu
+Task_DrawMainMenu: @ 8009B74
 	push {r4,r5,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -609,7 +609,7 @@ _08009B8E:
 	strh r2, [r0]
 	movs r1, 0xFE
 	movs r2, 0x2
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r0, _08009BF0
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0
@@ -621,7 +621,7 @@ _08009B8E:
 	mov r0, sp
 	movs r1, 0xF1
 	movs r2, 0x2
-	bl gpu_pal_apply
+	bl LoadPalette
 	b _08009C0A
 	.align 2, 0
 _08009BDC: .4byte 0x0202f388
@@ -639,7 +639,7 @@ _08009BF8:
 	mov r0, sp
 	movs r1, 0xF1
 	movs r2, 0x2
-	bl gpu_pal_apply
+	bl LoadPalette
 _08009C0A:
 	ldr r2, _08009C58
 	lsls r1, r4, 2
@@ -664,7 +664,7 @@ _08009C26:
 	ldr r0, _08009C5C
 	movs r1, 0x2
 	movs r2, 0x1
-	bl sub_800A0BC
+	bl PrintMainMenuItem
 	movs r0, 0x1
 	movs r1, 0x4
 	movs r2, 0x1C
@@ -673,7 +673,7 @@ _08009C26:
 	ldr r0, _08009C60
 	movs r1, 0x2
 	movs r2, 0x5
-	bl sub_800A0BC
+	bl PrintMainMenuItem
 	b _08009D14
 	.align 2, 0
 _08009C54: .4byte 0x0000547f
@@ -689,7 +689,7 @@ _08009C64:
 	ldr r0, _08009CAC
 	movs r1, 0x2
 	movs r2, 0x1
-	bl sub_800A0BC
+	bl PrintMainMenuItem
 	movs r0, 0x1
 	movs r1, 0x8
 	movs r2, 0x1C
@@ -698,7 +698,7 @@ _08009C64:
 	ldr r0, _08009CB0
 	movs r1, 0x2
 	movs r2, 0x9
-	bl sub_800A0BC
+	bl PrintMainMenuItem
 	movs r0, 0x1
 	movs r1, 0xC
 	movs r2, 0x1C
@@ -707,8 +707,8 @@ _08009C64:
 	ldr r0, _08009CB4
 	movs r1, 0x2
 	movs r2, 0xD
-	bl sub_800A0BC
-	bl sub_800A108
+	bl PrintMainMenuItem
+	bl PrintSaveFileInfo
 	b _08009D14
 	.align 2, 0
 _08009CAC: .4byte gUnknown_0840DCD9
@@ -723,7 +723,7 @@ _08009CB8:
 	ldr r0, _08009D28
 	movs r1, 0x2
 	movs r2, 0x1
-	bl sub_800A0BC
+	bl PrintMainMenuItem
 	movs r0, 0x1
 	movs r1, 0x8
 	movs r2, 0x1C
@@ -732,7 +732,7 @@ _08009CB8:
 	ldr r0, _08009D2C
 	movs r1, 0x2
 	movs r2, 0x9
-	bl sub_800A0BC
+	bl PrintMainMenuItem
 	movs r0, 0x1
 	movs r1, 0xC
 	movs r2, 0x1C
@@ -741,7 +741,7 @@ _08009CB8:
 	ldr r0, _08009D30
 	movs r1, 0x2
 	movs r2, 0xD
-	bl sub_800A0BC
+	bl PrintMainMenuItem
 	movs r0, 0x1
 	movs r1, 0x10
 	movs r2, 0x1C
@@ -750,8 +750,8 @@ _08009CB8:
 	ldr r0, _08009D34
 	movs r1, 0x2
 	movs r2, 0x11
-	bl sub_800A0BC
-	bl sub_800A108
+	bl PrintMainMenuItem
+	bl PrintSaveFileInfo
 _08009D14:
 	ldr r0, _08009D38
 	adds r1, r5, r4
@@ -770,11 +770,11 @@ _08009D2C: .4byte gUnknown_0840DCD0
 _08009D30: .4byte gUnknown_0840DCE9
 _08009D34: .4byte gUnknown_0840DCE2
 _08009D38: .4byte 0x03004b20
-_08009D3C: .4byte sub_8009D40
-	thumb_func_end sub_8009B74
+_08009D3C: .4byte Task_HighlightCurrentMenuItem
+	thumb_func_end Task_DrawMainMenu
 
-	thumb_func_start sub_8009D40
-sub_8009D40: @ 8009D40
+	thumb_func_start Task_HighlightCurrentMenuItem
+Task_HighlightCurrentMenuItem: @ 8009D40
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -785,7 +785,7 @@ sub_8009D40: @ 8009D40
 	adds r4, r1
 	ldrb r0, [r4, 0x8]
 	ldrb r1, [r4, 0xA]
-	bl sub_8009FDC
+	bl HighlightCurrentMenuItem
 	ldr r0, _08009D68
 	str r0, [r4]
 	pop {r4}
@@ -793,11 +793,11 @@ sub_8009D40: @ 8009D40
 	bx r0
 	.align 2, 0
 _08009D64: .4byte 0x03004b20
-_08009D68: .4byte task_main_menu_process_key_input
-	thumb_func_end sub_8009D40
+_08009D68: .4byte Task_MainMenuProcessKeyInput
+	thumb_func_end Task_HighlightCurrentMenuItem
 
-	thumb_func_start main_menu_process_key_input
-main_menu_process_key_input: @ 8009D6C
+	thumb_func_start MainMenuProcessKeyInput
+MainMenuProcessKeyInput: @ 8009D6C
 	push {r4-r7,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -829,7 +829,7 @@ main_menu_process_key_input: @ 8009D6C
 	.align 2, 0
 _08009DA8: .4byte 0x03001770
 _08009DAC: .4byte 0x03004b20
-_08009DB0: .4byte main_menu_handle_a_pressed
+_08009DB0: .4byte MainMenuPressedA
 _08009DB4:
 	movs r0, 0x2
 	ands r0, r2
@@ -863,7 +863,7 @@ _08009DB4:
 _08009DF0: .4byte 0x0000ffff
 _08009DF4: .4byte 0x04000040
 _08009DF8: .4byte 0x03004b20
-_08009DFC: .4byte main_menu_handle_b_pressed
+_08009DFC: .4byte MainMenuPressedB
 _08009E00:
 	ldr r0, _08009E20
 	lsls r2, r4, 2
@@ -935,15 +935,15 @@ _08009E76:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end main_menu_process_key_input
+	thumb_func_end MainMenuProcessKeyInput
 
-	thumb_func_start task_main_menu_process_key_input
-task_main_menu_process_key_input: @ 8009E80
+	thumb_func_start Task_MainMenuProcessKeyInput
+Task_MainMenuProcessKeyInput: @ 8009E80
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl main_menu_process_key_input
+	bl MainMenuProcessKeyInput
 	lsls r0, 24
 	cmp r0, 0
 	beq _08009EA0
@@ -960,11 +960,11 @@ _08009EA0:
 	bx r0
 	.align 2, 0
 _08009EA8: .4byte 0x03004b20
-_08009EAC: .4byte sub_8009D40
-	thumb_func_end task_main_menu_process_key_input
+_08009EAC: .4byte Task_HighlightCurrentMenuItem
+	thumb_func_end Task_MainMenuProcessKeyInput
 
-	thumb_func_start main_menu_handle_a_pressed
-main_menu_handle_a_pressed: @ 8009EB0
+	thumb_func_start MainMenuPressedA
+MainMenuPressedA: @ 8009EB0
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -1055,7 +1055,7 @@ _08009F38:
 	.align 2, 0
 _08009F50: .4byte 0x0202eac8
 _08009F54: .4byte 0x0202eec8
-_08009F58: .4byte task_new_game_prof_birch_speech_1
+_08009F58: .4byte Task_Birch1
 _08009F5C:
 	ldr r0, _08009F6C
 	movs r1, 0
@@ -1067,7 +1067,7 @@ _08009F5C:
 	.align 2, 0
 _08009F6C: .4byte 0x0202eac8
 _08009F70: .4byte 0x0202eec8
-_08009F74: .4byte c2_8056854
+_08009F74: .4byte CB2_ContinueSavedGame
 _08009F78:
 	ldr r0, _08009F8C
 	ldr r1, _08009F90
@@ -1081,7 +1081,7 @@ _08009F80:
 	.align 2, 0
 _08009F8C: .4byte 0x03001770
 _08009F90: .4byte sub_80096FC
-_08009F94: .4byte sub_808B63C
+_08009F94: .4byte CB2_InitOptionMenu
 _08009F98:
 	ldr r0, _08009FAC
 	bl SetMainCallback2
@@ -1092,11 +1092,11 @@ _08009FA4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08009FAC: .4byte sub_8146930
-	thumb_func_end main_menu_handle_a_pressed
+_08009FAC: .4byte CB2_InitMysteryEventMenu
+	thumb_func_end MainMenuPressedA
 
-	thumb_func_start main_menu_handle_b_pressed
-main_menu_handle_b_pressed: @ 8009FB0
+	thumb_func_start MainMenuPressedB
+MainMenuPressedB: @ 8009FB0
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -1116,11 +1116,11 @@ _08009FCE:
 	bx r0
 	.align 2, 0
 _08009FD4: .4byte 0x0202f388
-_08009FD8: .4byte c2_title_screen_1
-	thumb_func_end main_menu_handle_b_pressed
+_08009FD8: .4byte CB2_InitTitleScreen
+	thumb_func_end MainMenuPressedB
 
-	thumb_func_start sub_8009FDC
-sub_8009FDC: @ 8009FDC
+	thumb_func_start HighlightCurrentMenuItem
+HighlightCurrentMenuItem: @ 8009FDC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
@@ -1232,10 +1232,10 @@ _0800A0AA:
 	.align 2, 0
 _0800A0B4: .4byte 0x04000044
 _0800A0B8: .4byte 0x0000819f
-	thumb_func_end sub_8009FDC
+	thumb_func_end HighlightCurrentMenuItem
 
-	thumb_func_start sub_800A0BC
-sub_800A0BC: @ 800A0BC
+	thumb_func_start PrintMainMenuItem
+PrintMainMenuItem: @ 800A0BC
 	push {r4-r6,lr}
 	sub sp, 0x20
 	adds r4, r0, 0
@@ -1273,21 +1273,21 @@ _0800A0DA:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_800A0BC
+	thumb_func_end PrintMainMenuItem
 
-	thumb_func_start sub_800A108
-sub_800A108: @ 800A108
+	thumb_func_start PrintSaveFileInfo
+PrintSaveFileInfo: @ 800A108
 	push {lr}
-	bl sub_800A120
-	bl sub_800A188
-	bl sub_800A144
-	bl sub_800A1C0
+	bl PrintPlayerName
+	bl PrintPokedexCount
+	bl PrintPlayTime
+	bl PrintBadgeCount
 	pop {r0}
 	bx r0
-	thumb_func_end sub_800A108
+	thumb_func_end PrintSaveFileInfo
 
-	thumb_func_start sub_800A120
-sub_800A120: @ 800A120
+	thumb_func_start PrintPlayerName
+PrintPlayerName: @ 800A120
 	push {lr}
 	ldr r0, _0800A13C
 	movs r1, 0x2
@@ -1302,10 +1302,10 @@ sub_800A120: @ 800A120
 	.align 2, 0
 _0800A13C: .4byte gUnknown_0840DF7C
 _0800A140: .4byte 0x02024ea4
-	thumb_func_end sub_800A120
+	thumb_func_end PrintPlayerName
 
-	thumb_func_start sub_800A144
-sub_800A144: @ 800A144
+	thumb_func_start PrintPlayTime
+PrintPlayTime: @ 800A144
 	push {r4,lr}
 	sub sp, 0x30
 	ldr r0, _0800A180
@@ -1317,7 +1317,7 @@ sub_800A144: @ 800A144
 	ldrb r2, [r0, 0x10]
 	mov r0, sp
 	movs r3, 0x1
-	bl sub_80948E4
+	bl FormatPlayTime
 	add r4, sp, 0x10
 	adds r0, r4, 0
 	mov r1, sp
@@ -1335,17 +1335,17 @@ sub_800A144: @ 800A144
 	.align 2, 0
 _0800A180: .4byte gUnknown_0840DF8B
 _0800A184: .4byte 0x02024ea4
-	thumb_func_end sub_800A144
+	thumb_func_end PrintPlayTime
 
-	thumb_func_start sub_800A188
-sub_800A188: @ 800A188
+	thumb_func_start PrintPokedexCount
+PrintPokedexCount: @ 800A188
 	push {lr}
 	sub sp, 0x10
 	ldr r0, _0800A1BC
 	movs r1, 0x2
 	movs r2, 0x5
 	bl Print
-	bl sub_80948C4
+	bl GetPokedexSeenCount
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
@@ -1362,17 +1362,17 @@ sub_800A188: @ 800A188
 	bx r0
 	.align 2, 0
 _0800A1BC: .4byte gUnknown_0840DF83
-	thumb_func_end sub_800A188
+	thumb_func_end PrintPokedexCount
 
-	thumb_func_start sub_800A1C0
-sub_800A1C0: @ 800A1C0
+	thumb_func_start PrintBadgeCount
+PrintBadgeCount: @ 800A1C0
 	push {lr}
 	sub sp, 0x10
 	ldr r0, _0800A1F0
 	movs r1, 0x10
 	movs r2, 0x5
 	bl Print
-	bl sub_8094890
+	bl GetBadgeCount
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -1388,10 +1388,10 @@ sub_800A1C0: @ 800A1C0
 	bx r0
 	.align 2, 0
 _0800A1F0: .4byte gUnknown_0840DF90
-	thumb_func_end sub_800A1C0
+	thumb_func_end PrintBadgeCount
 
-	thumb_func_start task_new_game_prof_birch_speech_1
-task_new_game_prof_birch_speech_1: @ 800A1F4
+	thumb_func_start Task_Birch1
+Task_Birch1: @ 800A1F4
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -1426,11 +1426,11 @@ task_new_game_prof_birch_speech_1: @ 800A1F4
 	ldr r0, _0800A2C8
 	movs r1, 0
 	movs r2, 0x40
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r0, _0800A2CC
 	movs r1, 0x1
 	movs r2, 0x10
-	bl gpu_pal_apply
+	bl LoadPalette
 	bl remove_some_task
 	bl ResetSpriteData
 	bl FreeAllSpritePalettes
@@ -1486,7 +1486,7 @@ _0800A2D0: .4byte 0x0400000a
 _0800A2D4: .4byte 0x00000703
 _0800A2D8: .4byte 0x03004b20
 _0800A2DC: .4byte task_new_game_prof_birch_speech_2
-	thumb_func_end task_new_game_prof_birch_speech_1
+	thumb_func_end Task_Birch1
 
 	thumb_func_start task_new_game_prof_birch_speech_2
 task_new_game_prof_birch_speech_2: @ 800A2E0
@@ -2120,7 +2120,7 @@ task_new_game_prof_birch_speech_15: @ 800A79C
 	beq _0800A7C4
 	movs r0, 0x2
 	movs r1, 0x4
-	bl BirchSpeechCreateGenderMenu
+	bl CreateGenderMenu
 	ldr r0, _0800A7CC
 	lsls r1, r4, 2
 	adds r1, r4
@@ -2142,7 +2142,7 @@ task_new_game_prof_birch_speech_16: @ 800A7D4
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	bl BirchSpeechProcessGenderMenuInput
+	bl GenderMenuProcessInput
 	lsls r0, 24
 	asrs r4, r0, 24
 	cmp r4, 0
@@ -2380,11 +2380,11 @@ sub_800A974: @ 800A974
 	.align 2, 0
 _0800A9A8: .4byte gUnknown_081C6FFA
 _0800A9AC: .4byte 0x03004b20
-_0800A9B0: .4byte sub_800A9B4
+_0800A9B0: .4byte Task_800A9B4
 	thumb_func_end sub_800A974
 
-	thumb_func_start sub_800A9B4
-sub_800A9B4: @ 800A9B4
+	thumb_func_start Task_800A9B4
+Task_800A9B4: @ 800A9B4
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -2395,7 +2395,7 @@ sub_800A9B4: @ 800A9B4
 	beq _0800A9DC
 	movs r0, 0x2
 	movs r1, 0x1
-	bl BirchSpeechCreateNameMenu
+	bl CreateNameMenu
 	ldr r0, _0800A9E4
 	lsls r1, r4, 2
 	adds r1, r4
@@ -2410,7 +2410,7 @@ _0800A9DC:
 	.align 2, 0
 _0800A9E4: .4byte 0x03004b20
 _0800A9E8: .4byte sub_800A9EC
-	thumb_func_end sub_800A9B4
+	thumb_func_end Task_800A9B4
 
 	thumb_func_start sub_800A9EC
 sub_800A9EC: @ 800A9EC
@@ -2418,7 +2418,7 @@ sub_800A9EC: @ 800A9EC
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r5, r0, 24
-	bl BirchSpeechProcessNameMenuInput
+	bl NameMenuProcessInput
 	lsls r6, r0, 24
 	asrs r4, r6, 24
 	cmp r4, 0
@@ -2453,7 +2453,7 @@ _0800AA0E:
 	b _0800AA9C
 	.align 2, 0
 _0800AA40: .4byte 0x03004b20
-_0800AA44: .4byte sub_800AAEC
+_0800AA44: .4byte task_new_game_prof_birch_speech_part2_1
 _0800AA48:
 	movs r0, 0x5
 	bl audio_play
@@ -2534,8 +2534,8 @@ _0800AAE4: .4byte 0x02024ea4
 _0800AAE8: .4byte new_game_prof_birch_speech_part2_start
 	thumb_func_end sub_800AAAC
 
-	thumb_func_start sub_800AAEC
-sub_800AAEC: @ 800AAEC
+	thumb_func_start task_new_game_prof_birch_speech_part2_1
+task_new_game_prof_birch_speech_part2_1: @ 800AAEC
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -2568,7 +2568,7 @@ _0800AB28: .4byte 0x020234cc
 _0800AB2C: .4byte gUnknown_081C7017
 _0800AB30: .4byte 0x03004b20
 _0800AB34: .4byte sub_800AB38
-	thumb_func_end sub_800AAEC
+	thumb_func_end task_new_game_prof_birch_speech_part2_1
 
 	thumb_func_start sub_800AB38
 sub_800AB38: @ 800AB38
@@ -3292,7 +3292,7 @@ new_game_prof_birch_speech_part2_start: @ 800B060
 	ldr r0, _0800B158
 	movs r1, 0
 	movs r2, 0x40
-	bl gpu_pal_apply
+	bl LoadPalette
 	bl ResetTasks
 	ldr r0, _0800B15C
 	movs r1, 0
@@ -3332,7 +3332,7 @@ _0800B14C: .4byte gUnknown_081E768C
 _0800B150: .4byte gUnknown_081E7834
 _0800B154: .4byte 0x06003800
 _0800B158: .4byte gUnknown_081E764C
-_0800B15C: .4byte sub_800AAEC
+_0800B15C: .4byte task_new_game_prof_birch_speech_part2_1
 _0800B160: .4byte 0x03004b20
 _0800B164: .4byte 0x0000ffc4
 _0800B168: .4byte gWindowConfig_81E6C3C
@@ -3422,8 +3422,8 @@ _0800B21C: .4byte 0x0000ffc4
 _0800B220: .4byte 0x04000040
 _0800B224: .4byte 0x04000208
 _0800B228: .4byte 0x04000200
-_0800B22C: .4byte sub_80096DC
-_0800B230: .4byte sub_80096C4
+_0800B22C: .4byte VBlankCB_MainMenu
+_0800B230: .4byte CB2_MainMenu
 _0800B234: .4byte 0x0400000a
 _0800B238: .4byte 0x00000703
 	thumb_func_end new_game_prof_birch_speech_part2_start
@@ -3924,7 +3924,7 @@ _0800B5EE:
 	adds r0, r1
 	movs r1, 0x1
 	movs r2, 0x10
-	bl gpu_pal_apply
+	bl LoadPalette
 _0800B608:
 	pop {r4}
 	pop {r0}
@@ -4017,7 +4017,7 @@ _0800B69A:
 	adds r0, r1
 	movs r1, 0x1
 	movs r2, 0x10
-	bl gpu_pal_apply
+	bl LoadPalette
 _0800B6B4:
 	pop {r4}
 	pop {r0}
@@ -4059,8 +4059,8 @@ _0800B6F8: .4byte sub_800B654
 _0800B6FC: .4byte 0x03004b20
 	thumb_func_end sub_800B6C0
 
-	thumb_func_start BirchSpeechCreateGenderMenu
-BirchSpeechCreateGenderMenu: @ 800B700
+	thumb_func_start CreateGenderMenu
+CreateGenderMenu: @ 800B700
 	push {r4,r5,lr}
 	sub sp, 0x8
 	adds r2, r0, 0
@@ -4106,20 +4106,20 @@ BirchSpeechCreateGenderMenu: @ 800B700
 	bx r0
 	.align 2, 0
 _0800B75C: .4byte gUnknown_081E79B0
-	thumb_func_end BirchSpeechCreateGenderMenu
+	thumb_func_end CreateGenderMenu
 
-	thumb_func_start BirchSpeechProcessGenderMenuInput
-BirchSpeechProcessGenderMenuInput: @ 800B760
+	thumb_func_start GenderMenuProcessInput
+GenderMenuProcessInput: @ 800B760
 	push {lr}
 	bl ProcessMenuInputNoWrap
 	lsls r0, 24
 	asrs r0, 24
 	pop {r1}
 	bx r1
-	thumb_func_end BirchSpeechProcessGenderMenuInput
+	thumb_func_end GenderMenuProcessInput
 
-	thumb_func_start BirchSpeechCreateNameMenu
-BirchSpeechCreateNameMenu: @ 800B770
+	thumb_func_start CreateNameMenu
+CreateNameMenu: @ 800B770
 	push {r4,r5,lr}
 	sub sp, 0x8
 	adds r2, r0, 0
@@ -4184,17 +4184,17 @@ _0800B7D4:
 	bx r0
 	.align 2, 0
 _0800B7F4: .4byte gUnknown_081E79E8
-	thumb_func_end BirchSpeechCreateNameMenu
+	thumb_func_end CreateNameMenu
 
-	thumb_func_start BirchSpeechProcessNameMenuInput
-BirchSpeechProcessNameMenuInput: @ 800B7F8
+	thumb_func_start NameMenuProcessInput
+NameMenuProcessInput: @ 800B7F8
 	push {lr}
 	bl ProcessMenuInput
 	lsls r0, 24
 	asrs r0, 24
 	pop {r1}
 	bx r1
-	thumb_func_end BirchSpeechProcessNameMenuInput
+	thumb_func_end NameMenuProcessInput
 
 	thumb_func_start set_default_player_name
 set_default_player_name: @ 800B808
@@ -6036,8 +6036,8 @@ _0800C692:
 _0800C6A0: .4byte 0x03004040
 	thumb_func_end dp01_build_cmdbuf_x02_a_b_varargs
 
-	thumb_func_start sub_800C6A4
-sub_800C6A4: @ 800C6A4
+	thumb_func_start unref_sub_800C6A4
+unref_sub_800C6A4: @ 800C6A4
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -6071,7 +6071,7 @@ _0800C6D0:
 	bx r0
 	.align 2, 0
 _0800C6E0: .4byte 0x03004040
-	thumb_func_end sub_800C6A4
+	thumb_func_end unref_sub_800C6A4
 
 	thumb_func_start dp01_build_cmdbuf_x04_4_4_4
 dp01_build_cmdbuf_x04_4_4_4: @ 800C6E4
@@ -6262,8 +6262,8 @@ dp01_build_cmdbuf_x0D_a: @ 800C808
 _0800C824: .4byte 0x03004040
 	thumb_func_end dp01_build_cmdbuf_x0D_a
 
-	thumb_func_start sub_800C828
-sub_800C828: @ 800C828
+	thumb_func_start unref_sub_800C828
+unref_sub_800C828: @ 800C828
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -6300,7 +6300,7 @@ _0800C856:
 	bx r0
 	.align 2, 0
 _0800C86C: .4byte 0x03004040
-	thumb_func_end sub_800C828
+	thumb_func_end unref_sub_800C828
 
 	thumb_func_start dp01_build_cmdbuf_x0F_aa_b_cc_dddd_e_mlc_weather_00_x1Cbytes
 dp01_build_cmdbuf_x0F_aa_b_cc_dddd_e_mlc_weather_00_x1Cbytes: @ 800C870
@@ -6679,8 +6679,8 @@ dp01_build_cmdbuf_x12_a_bb: @ 800CB58
 _0800CB80: .4byte 0x03004040
 	thumb_func_end dp01_build_cmdbuf_x12_a_bb
 
-	thumb_func_start sub_800CB84
-sub_800CB84: @ 800CB84
+	thumb_func_start unref_sub_800CB84
+unref_sub_800CB84: @ 800CB84
 	push {lr}
 	adds r3, r1, 0
 	lsls r0, 24
@@ -6695,7 +6695,7 @@ sub_800CB84: @ 800CB84
 	bx r0
 	.align 2, 0
 _0800CBA0: .4byte 0x03004040
-	thumb_func_end sub_800CB84
+	thumb_func_end unref_sub_800CB84
 
 	thumb_func_start sub_800CBA4
 sub_800CBA4: @ 800CBA4
@@ -7006,8 +7006,8 @@ _0800CDBC:
 _0800CDD0: .4byte 0x03004040
 	thumb_func_end dp01_build_cmdbuf_x1D_1D_numargs_varargs
 
-	thumb_func_start sub_800CDD4
-sub_800CDD4: @ 800CDD4
+	thumb_func_start unref_sub_800CDD4
+unref_sub_800CDD4: @ 800CDD4
 	push {r4-r6,lr}
 	adds r4, r3, 0
 	lsls r0, 24
@@ -7060,10 +7060,10 @@ _0800CE24:
 	bx r0
 	.align 2, 0
 _0800CE38: .4byte 0x03004040
-	thumb_func_end sub_800CDD4
+	thumb_func_end unref_sub_800CDD4
 
-	thumb_func_start sub_800CE3C
-sub_800CE3C: @ 800CE3C
+	thumb_func_start unref_sub_800CE3C
+unref_sub_800CE3C: @ 800CE3C
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -7100,10 +7100,10 @@ _0800CE6A:
 	bx r0
 	.align 2, 0
 _0800CE80: .4byte 0x03004040
-	thumb_func_end sub_800CE3C
+	thumb_func_end unref_sub_800CE3C
 
-	thumb_func_start sub_800CE84
-sub_800CE84: @ 800CE84
+	thumb_func_start unref_sub_800CE84
+unref_sub_800CE84: @ 800CE84
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -7140,7 +7140,7 @@ _0800CEB2:
 	bx r0
 	.align 2, 0
 _0800CEC8: .4byte 0x03004040
-	thumb_func_end sub_800CE84
+	thumb_func_end unref_sub_800CE84
 
 	thumb_func_start dp01_build_cmdbuf_x21_a_bb
 dp01_build_cmdbuf_x21_a_bb: @ 800CECC
@@ -7920,8 +7920,8 @@ Unused_LZDecompressWramIndirect: @ 800D420
 	bx r0
 	thumb_func_end Unused_LZDecompressWramIndirect
 
-	thumb_func_start sub_800D42C
-sub_800D42C: @ 800D42C
+	thumb_func_start unref_sub_800D42C
+unref_sub_800D42C: @ 800D42C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -8259,10 +8259,10 @@ _0800D674:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_800D42C
+	thumb_func_end unref_sub_800D42C
 
-	thumb_func_start sub_800D684
-sub_800D684: @ 800D684
+	thumb_func_start unref_sub_800D684
+unref_sub_800D684: @ 800D684
 	push {lr}
 	bl ResetSpriteData
 	ldr r0, _0800D6B8
@@ -8290,7 +8290,7 @@ sub_800D684: @ 800D684
 _0800D6B8: .4byte gUnknown_081F96D0
 _0800D6BC: .4byte 0x02020004
 _0800D6C0: .4byte sub_800D6C4
-	thumb_func_end sub_800D684
+	thumb_func_end unref_sub_800D684
 
 	thumb_func_start sub_800D6C4
 sub_800D6C4: @ 800D6C4
@@ -8677,7 +8677,7 @@ _0800DA54:
 _0800DA66:
 	movs r1, 0x20
 	movs r2, 0x60
-	bl decompress_palette
+	bl LoadCompressedPalette
 	b _0800DA9E
 	.align 2, 0
 _0800DA70: .4byte gUnknown_08E62DAC
@@ -8695,7 +8695,7 @@ _0800DA84:
 	ldr r0, _0800DAB4
 	movs r1, 0x20
 	movs r2, 0x60
-	bl decompress_palette
+	bl LoadCompressedPalette
 _0800DA9E:
 	pop {r4,r5}
 	pop {r0}
@@ -8723,7 +8723,7 @@ sub_800DAB8: @ 800DAB8
 	ldr r0, _0800DAF4
 	movs r1, 0
 	movs r2, 0x40
-	bl decompress_palette
+	bl LoadCompressedPalette
 	bl sub_800D74C
 	bl sub_800D7B8
 	pop {r0}
@@ -9650,7 +9650,7 @@ sub_800E23C: @ 800E23C
 	ldr r0, _0800E2BC
 	movs r1, 0x60
 	movs r2, 0x20
-	bl decompress_palette
+	bl LoadCompressedPalette
 	ldr r1, _0800E2C0
 	ldr r2, _0800E2C4
 	adds r0, r2, 0
@@ -9868,7 +9868,7 @@ _0800E474:
 	ldr r0, _0800E480
 	movs r1, 0
 	movs r2, 0x40
-	bl decompress_palette
+	bl LoadCompressedPalette
 	b _0800E7BC
 	.align 2, 0
 _0800E480: .4byte gUnknown_08D004E0
@@ -10271,7 +10271,7 @@ _0800E7A4:
 _0800E7A6:
 	movs r1, 0x20
 	movs r2, 0x60
-	bl decompress_palette
+	bl LoadCompressedPalette
 	b _0800E7BC
 	.align 2, 0
 _0800E7B0: .4byte gUnknown_08E62AC0
@@ -13401,7 +13401,7 @@ _08010084:
 	ldr r0, _08010198
 	movs r1, 0
 	movs r2, 0x40
-	bl decompress_palette
+	bl LoadCompressedPalette
 	bl sub_800D74C
 	bl ResetSpriteData
 	bl ResetTasks
@@ -13651,8 +13651,8 @@ nullsub_37: @ 8010308
 	bx lr
 	thumb_func_end nullsub_37
 
-	thumb_func_start sub_801030C
-sub_801030C: @ 801030C
+	thumb_func_start unref_sub_801030C
+unref_sub_801030C: @ 801030C
 	movs r1, 0x6
 	strh r1, [r0, 0x34]
 	movs r1, 0x1
@@ -13662,7 +13662,7 @@ sub_801030C: @ 801030C
 	bx lr
 	.align 2, 0
 _0801031C: .4byte sub_8010320
-	thumb_func_end sub_801030C
+	thumb_func_end unref_sub_801030C
 
 	thumb_func_start sub_8010320
 sub_8010320: @ 8010320
@@ -16463,8 +16463,8 @@ _08011948: .4byte 0x030042d4
 _0801194C: .4byte sub_8011970
 	thumb_func_end bc_801362C
 
-	thumb_func_start sub_8011950
-sub_8011950: @ 8011950
+	thumb_func_start unref_sub_8011950
+unref_sub_8011950: @ 8011950
 	push {lr}
 	ldr r0, _08011964
 	ldr r0, [r0]
@@ -16480,7 +16480,7 @@ _08011960:
 _08011964: .4byte 0x02024a64
 _08011968: .4byte 0x030042d4
 _0801196C: .4byte sub_8011970
-	thumb_func_end sub_8011950
+	thumb_func_end unref_sub_8011950
 
 	thumb_func_start sub_8011970
 sub_8011970: @ 8011970
@@ -16599,8 +16599,8 @@ _08011A60: .4byte 0x030042d4
 _08011A64: .4byte sub_8011B00
 	thumb_func_end sub_80119B4
 
-	thumb_func_start sub_8011A68
-sub_8011A68: @ 8011A68
+	thumb_func_start unref_sub_8011A68
+unref_sub_8011A68: @ 8011A68
 	push {r4,r5,lr}
 	ldr r0, _08011AD8
 	ldr r1, [r0]
@@ -16669,7 +16669,7 @@ _08011AF0: .4byte 0x000160f9
 _08011AF4: .4byte 0x000160e6
 _08011AF8: .4byte 0x030042d4
 _08011AFC: .4byte sub_8011B00
-	thumb_func_end sub_8011A68
+	thumb_func_end unref_sub_8011A68
 
 	thumb_func_start sub_8011B00
 sub_8011B00: @ 8011B00
@@ -23667,8 +23667,8 @@ _080154DC: .4byte gUnknown_0820872C
 _080154E0: .4byte 0x02024a60
 	thumb_func_end sub_80153D0
 
-	thumb_func_start sub_80154E4
-sub_80154E4: @ 80154E4
+	thumb_func_start unref_sub_80154E4
+unref_sub_80154E4: @ 80154E4
 	push {r4,r5,lr}
 	ldr r0, _08015514
 	ldrh r1, [r0]
@@ -23724,7 +23724,7 @@ _08015542:
 _08015548: .4byte 0x02024a68
 _0801554C: .4byte 0x02024a64
 _08015550: .4byte gUnknown_0820872C
-	thumb_func_end sub_80154E4
+	thumb_func_end unref_sub_80154E4
 
 	thumb_func_start dp01_battle_side_mark_buffer_for_execution
 dp01_battle_side_mark_buffer_for_execution: @ 8015554
@@ -35152,8 +35152,8 @@ _0801B404: .4byte 0x02024c10
 _0801B408: .4byte gUnknown_081D9AA7
 	thumb_func_end sub_801A02C
 
-	thumb_func_start sub_801B40C
-sub_801B40C: @ 801B40C
+	thumb_func_start unref_sub_801B40C
+unref_sub_801B40C: @ 801B40C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -35345,7 +35345,7 @@ _0801B584: .4byte 0x02024c60
 _0801B588: .4byte 0x02024c80
 _0801B58C: .4byte 0x02024c7a
 _0801B590: .4byte 0x0000ffff
-	thumb_func_end sub_801B40C
+	thumb_func_end unref_sub_801B40C
 
 	thumb_func_start sub_801B594
 sub_801B594: @ 801B594
@@ -39277,8 +39277,8 @@ _0801D56C: .4byte 0x02024a80
 _0801D570: .4byte gBattleMoves
 	thumb_func_end ai_rate_move
 
-	thumb_func_start sub_801D574
-sub_801D574: @ 801D574
+	thumb_func_start unref_sub_801D574
+unref_sub_801D574: @ 801D574
 	push {r4,lr}
 	bl Random
 	lsls r0, 16
@@ -39308,7 +39308,7 @@ _0801D5A6:
 	bx r0
 	.align 2, 0
 _0801D5AC: .4byte 0x02024bec
-	thumb_func_end sub_801D574
+	thumb_func_end unref_sub_801D574
 
 	thumb_func_start atk07_cmd7
 atk07_cmd7: @ 801D5B0
@@ -67936,7 +67936,7 @@ _0802BB10:
 	ldr r0, _0802BB9C
 	movs r1, 0x20
 	movs r2, 0x60
-	bl decompress_palette
+	bl LoadCompressedPalette
 	ldr r1, _0802BBA0
 	ldr r2, _0802BBA4
 	adds r0, r2, 0
@@ -68869,8 +68869,8 @@ _0802C2AC:
 	bx r0
 	thumb_func_end sub_802C098
 
-	thumb_func_start sub_802C2B8
-sub_802C2B8: @ 802C2B8
+	thumb_func_start unref_sub_802C2B8
+unref_sub_802C2B8: @ 802C2B8
 	push {r4,lr}
 	ldr r4, _0802C2E0
 	ldrb r0, [r4]
@@ -68892,7 +68892,7 @@ sub_802C2B8: @ 802C2B8
 _0802C2E0: .4byte 0x02024a60
 _0802C2E4: .4byte 0x03004330
 _0802C2E8: .4byte sub_802C2EC
-	thumb_func_end sub_802C2B8
+	thumb_func_end unref_sub_802C2B8
 
 	thumb_func_start sub_802C2EC
 sub_802C2EC: @ 802C2EC
@@ -77940,7 +77940,7 @@ sub_8030CC0: @ 8030CC0
 	lsls r2, 1
 	adds r1, r4, r2
 	movs r2, 0x20
-	bl decompress_palette
+	bl LoadCompressedPalette
 	ldrb r0, [r7]
 	adds r0, r6
 	ldrb r0, [r0]
@@ -78671,8 +78671,8 @@ _0803135C: .4byte sub_80105DC
 _08031360: .4byte SpriteCallbackDummy
 	thumb_func_end sub_80312F0
 
-	thumb_func_start sub_8031364
-sub_8031364: @ 8031364
+	thumb_func_start unref_sub_8031364
+unref_sub_8031364: @ 8031364
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r1, 24
@@ -78702,7 +78702,7 @@ _08031394:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8031364
+	thumb_func_end unref_sub_8031364
 
 	thumb_func_start sub_80313A0
 sub_80313A0: @ 80313A0
@@ -79320,12 +79320,12 @@ _08031856:
 	mov r0, r8
 	adds r1, r7, 0
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	adds r1, r4, 0
 	adds r1, 0x80
 	mov r0, r8
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r0, _080318E4
 	cmp r6, r0
 	bne _080318A2
@@ -79344,7 +79344,7 @@ _08031856:
 	adds r0, r4
 	adds r1, r7, 0
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 _080318A2:
 	movs r0, 0xBC
 	lsls r0, 9
@@ -79484,12 +79484,12 @@ _080319BE:
 	mov r0, r8
 	adds r1, r7, 0
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	adds r1, r4, 0
 	adds r1, 0x80
 	mov r0, r8
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r0, _08031A4C
 	cmp r6, r0
 	bne _08031A0A
@@ -79508,7 +79508,7 @@ _080319BE:
 	adds r0, r4
 	adds r1, r7, 0
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 _08031A0A:
 	movs r0, 0xBC
 	lsls r0, 9
@@ -79549,10 +79549,10 @@ _08031A5C: .4byte 0x0202eac8
 _08031A60: .4byte 0x04000008
 	thumb_func_end sub_80318FC
 
-	thumb_func_start nullsub_44
-nullsub_44: @ 8031A64
+	thumb_func_start unref_sub_8031A64
+unref_sub_8031A64: @ 8031A64
 	bx lr
-	thumb_func_end nullsub_44
+	thumb_func_end unref_sub_8031A64
 
 	thumb_func_start nullsub_9
 nullsub_9: @ 8031A68
@@ -79668,7 +79668,7 @@ sub_8031AF4: @ 8031AF4
 	lsrs r5, 16
 	adds r1, r5, 0
 	movs r2, 0x20
-	bl decompress_palette
+	bl LoadCompressedPalette
 	add sp, 0x8
 	pop {r3}
 	mov r8, r3
@@ -79709,8 +79709,8 @@ _08031B98: .4byte gTrainerFrontPicPaletteTable
 _08031B9C: .4byte gTrainerFrontPicTable
 	thumb_func_end sub_8031B74
 
-	thumb_func_start sub_8031BA0
-sub_8031BA0: @ 8031BA0
+	thumb_func_start unref_sub_8031BA0
+unref_sub_8031BA0: @ 8031BA0
 	push {r4-r7,lr}
 	ldr r4, _08031BCC
 	adds r0, r4, 0
@@ -79772,7 +79772,7 @@ _08031C20: .4byte gUnknown_0820A48C
 _08031C24: .4byte gUnknown_0820A49C
 _08031C28: .4byte 0x02024a72
 _08031C2C: .4byte gUnknown_0820A4B4
-	thumb_func_end sub_8031BA0
+	thumb_func_end unref_sub_8031BA0
 
 	thumb_func_start sub_8031C30
 sub_8031C30: @ 8031C30
@@ -80279,7 +80279,7 @@ sub_8031FC4: @ 8031FC4
 	adds r0, r1
 	adds r1, r5, 0
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r0, _08032074
 	add r0, r8
 	ldrh r1, [r4]
@@ -80544,7 +80544,7 @@ _08032202:
 	mov r0, r9
 	adds r1, r5, 0
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r0, _08032338
 	cmp r7, r0
 	bne _08032288
@@ -80562,7 +80562,7 @@ _08032202:
 	adds r0, r4
 	adds r1, r5, 0
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 _08032288:
 	ldr r3, _08032340
 	adds r0, r5, 0
@@ -80726,7 +80726,7 @@ _080323D4:
 	adds r1, r7, r0
 	mov r0, r12
 	movs r2, 0x20
-	bl decompress_palette
+	bl LoadCompressedPalette
 	b _08032456
 	.align 2, 0
 _080323F4: .4byte gUnknown_08D2D4CC
@@ -80994,8 +80994,8 @@ _080325F2:
 _08032600: .4byte 0x02017800
 	thumb_func_end sub_80325B8
 
-	thumb_func_start sub_8032604
-sub_8032604: @ 8032604
+	thumb_func_start unref_sub_8032604
+unref_sub_8032604: @ 8032604
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	movs r1, 0x39
@@ -81018,7 +81018,7 @@ sub_8032604: @ 8032604
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8032604
+	thumb_func_end unref_sub_8032604
 
 	thumb_func_start sub_8032638
 sub_8032638: @ 8032638
@@ -97391,8 +97391,8 @@ _0803AAFC:
 	bx r0
 	thumb_func_end pokemon_make_with_nature
 
-	thumb_func_start sub_803AB44
-sub_803AB44: @ 803AB44
+	thumb_func_start unref_sub_803AB44
+unref_sub_803AB44: @ 803AB44
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -97513,7 +97513,7 @@ _0803AC1A:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_803AB44
+	thumb_func_end unref_sub_803AB44
 
 	thumb_func_start sub_803AC44
 sub_803AC44: @ 803AC44
@@ -97597,8 +97597,8 @@ sub_803ACAC: @ 803ACAC
 	bx r0
 	thumb_func_end sub_803ACAC
 
-	thumb_func_start sub_803ACEC
-sub_803ACEC: @ 803ACEC
+	thumb_func_start unref_sub_803ACEC
+unref_sub_803ACEC: @ 803ACEC
 	push {r4,r5,lr}
 	sub sp, 0x10
 	adds r5, r0, 0
@@ -97648,7 +97648,7 @@ sub_803ACEC: @ 803ACEC
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_803ACEC
+	thumb_func_end unref_sub_803ACEC
 
 	thumb_func_start pokemon_make_ev_something
 pokemon_make_ev_something: @ 803AD60
@@ -98859,13 +98859,13 @@ sub_803B6E4: @ 803B6E4
 _0803B710: .4byte gBattleMoves
 	thumb_func_end sub_803B6E4
 
-	thumb_func_start sub_803B714
-sub_803B714: @ 803B714
+	thumb_func_start unref_sub_803B714
+unref_sub_803B714: @ 803B714
 	push {lr}
 	bl sub_803B720
 	pop {r0}
 	bx r0
-	thumb_func_end sub_803B714
+	thumb_func_end unref_sub_803B714
 
 	thumb_func_start sub_803B720
 sub_803B720: @ 803B720
@@ -107468,8 +107468,8 @@ _0803F932:
 	bx r1
 	thumb_func_end speciesid_conv
 
-	thumb_func_start sub_803F938
-sub_803F938: @ 803F938
+	thumb_func_start unref_sub_803F938
+unref_sub_803F938: @ 803F938
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -107618,7 +107618,7 @@ _0803FA42:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_803F938
+	thumb_func_end unref_sub_803F938
 
 	thumb_func_start DrawSpindaSpots
 DrawSpindaSpots: @ 803FA54
@@ -110196,8 +110196,8 @@ _08040DA2:
 	bx r1
 	thumb_func_end sub_8040D8C
 
-	thumb_func_start sub_8040DAC
-sub_8040DAC: @ 8040DAC
+	thumb_func_start unref_sub_8040DAC
+unref_sub_8040DAC: @ 8040DAC
 	push {r4-r6,lr}
 	sub sp, 0xC
 	adds r6, r0, 0
@@ -110226,7 +110226,7 @@ sub_8040DAC: @ 8040DAC
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8040DAC
+	thumb_func_end unref_sub_8040DAC
 
 	thumb_func_start sine
 sine: @ 8040DEC
@@ -110777,8 +110777,8 @@ _080411C0:
 	bx r1
 	thumb_func_end sub_8041174
 
-	thumb_func_start sub_80411CC
-sub_80411CC: @ 80411CC
+	thumb_func_start unref_sub_80411CC
+unref_sub_80411CC: @ 80411CC
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	adds r4, r1, 0
@@ -110813,7 +110813,7 @@ _080411FA:
 	.align 2, 0
 _08041208: .4byte 0x00001121
 _0804120C: .4byte gUnknown_082087DC
-	thumb_func_end sub_80411CC
+	thumb_func_end unref_sub_80411CC
 
 	thumb_func_start pal_fade_1
 pal_fade_1: @ 8041210
@@ -111606,8 +111606,8 @@ _08041812:
 	bx r0
 	thumb_func_end sub_80417F4
 
-	thumb_func_start sub_8041824
-sub_8041824: @ 8041824
+	thumb_func_start unref_sub_8041824
+unref_sub_8041824: @ 8041824
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	movs r5, 0
@@ -111645,7 +111645,7 @@ _0804182A:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8041824
+	thumb_func_end unref_sub_8041824
 
 	thumb_func_start sub_8041870
 sub_8041870: @ 8041870
@@ -114419,7 +114419,7 @@ _08042DC4:
 	ldr r0, _08042E14
 	movs r1, 0
 	movs r2, 0x20
-	bl decompress_palette
+	bl LoadCompressedPalette
 	ldr r1, _08042E18
 	ldr r2, _08042E1C
 	adds r1, r2
@@ -114502,7 +114502,7 @@ _08042EB0:
 	ldr r0, _08042F1C
 	movs r1, 0x10
 	movs r2, 0xA0
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r3, _08042F20
 	ldr r4, _08042F24
 	movs r5, 0x98
@@ -115799,8 +115799,8 @@ _080438CE:
 	bx r0
 	thumb_func_end sub_8043740
 
-	thumb_func_start sub_80438E0
-sub_80438E0: @ 80438E0
+	thumb_func_start unref_sub_80438E0
+unref_sub_80438E0: @ 80438E0
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r0, r1, 0
@@ -115824,7 +115824,7 @@ sub_80438E0: @ 80438E0
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80438E0
+	thumb_func_end unref_sub_80438E0
 
 	thumb_func_start battle_make_oam_normal_battle
 battle_make_oam_normal_battle: @ 8043914
@@ -116504,8 +116504,8 @@ sub_8043E50: @ 8043E50
 _08043E6C: .4byte 0x02020004
 	thumb_func_end sub_8043E50
 
-	thumb_func_start sub_8043E70
-sub_8043E70: @ 8043E70
+	thumb_func_start unref_sub_8043E70
+unref_sub_8043E70: @ 8043E70
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -116534,7 +116534,7 @@ sub_8043E70: @ 8043E70
 	bx r0
 	.align 2, 0
 _08043EAC: .4byte 0x02020004
-	thumb_func_end sub_8043E70
+	thumb_func_end unref_sub_8043E70
 
 	thumb_func_start nullsub_11
 nullsub_11: @ 8043EB0
@@ -119636,7 +119636,7 @@ _080456FC:
 	lsls r3, 1
 	adds r1, r4, r3
 	movs r2, 0x2
-	bl rboxid_80040B8
+	bl FillPalette
 	lsls r4, 1
 	ldr r0, _080457D0
 	adds r0, r4, r0
@@ -130910,7 +130910,7 @@ _0804B098:
 	lsls r1, 4
 	adds r1, 0x4
 	movs r2, 0x2
-	bl gpu_pal_apply
+	bl LoadPalette
 _0804B0B2:
 	pop {r0}
 	bx r0
@@ -131464,7 +131464,7 @@ _0804B47C:
 	ldr r0, _0804B5A8
 	movs r1, 0
 	movs r2, 0x20
-	bl decompress_palette
+	bl LoadCompressedPalette
 	ldr r1, [r6]
 	adds r0, r1, 0
 	adds r0, 0xB6
@@ -132276,7 +132276,7 @@ _0804BC24:
 	ldr r0, _0804BCA0
 	movs r1, 0x10
 	movs r2, 0xA0
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r3, _0804BCA4
 	ldr r4, _0804BCA8
 	movs r5, 0x98
@@ -132630,11 +132630,11 @@ _0804BEF8:
 	ldr r0, _0804BF90
 	movs r1, 0x70
 	movs r2, 0x20
-	bl decompress_palette
+	bl LoadCompressedPalette
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0x2
-	bl rboxid_80040B8
+	bl FillPalette
 	movs r0, 0xE0
 	lsls r0, 7
 	adds r2, r0, 0
@@ -132780,7 +132780,7 @@ _0804C060:
 	ldr r0, _0804C0DC
 	movs r1, 0x10
 	movs r2, 0xA0
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r3, _0804C0E0
 	ldr r4, _0804C0E4
 	movs r5, 0x98
@@ -136616,7 +136616,7 @@ sub_804E22C: @ 804E22C
 	ldr r0, _0804E284
 	movs r1, 0
 	movs r2, 0x20
-	bl decompress_palette
+	bl LoadCompressedPalette
 	ldr r1, _0804E288
 	ldr r2, _0804E28C
 	adds r0, r2, 0
@@ -136732,7 +136732,7 @@ _0804E34C:
 	movs r2, 0x80
 	lsls r2, 1
 	movs r1, 0
-	bl gpu_pal_apply
+	bl LoadPalette
 	b _0804E49E
 	.align 2, 0
 _0804E36C: .4byte gUnknown_08215C2C
@@ -136852,7 +136852,7 @@ _0804E444:
 	adds r0, r7, 0
 	movs r1, 0x80
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	b _0804E49E
 	.align 2, 0
 _0804E474: .4byte 0x02013000
@@ -140849,15 +140849,15 @@ sub_80504F0: @ 80504F0
 _080504F8: .4byte 0x0300052c
 	thumb_func_end sub_80504F0
 
-	thumb_func_start sub_80504FC
-sub_80504FC: @ 80504FC
+	thumb_func_start unref_sub_80504FC
+unref_sub_80504FC: @ 80504FC
 	ldr r0, _08050504
 	movs r1, 0
 	ldrsh r0, [r0, r1]
 	bx lr
 	.align 2, 0
 _08050504: .4byte 0x0300052c
-	thumb_func_end sub_80504FC
+	thumb_func_end unref_sub_80504FC
 
 	thumb_func_start sub_8050508
 sub_8050508: @ 8050508
@@ -140868,15 +140868,15 @@ sub_8050508: @ 8050508
 _08050510: .4byte 0x0300052e
 	thumb_func_end sub_8050508
 
-	thumb_func_start sub_8050514
-sub_8050514: @ 8050514
+	thumb_func_start unref_sub_8050514
+unref_sub_8050514: @ 8050514
 	ldr r0, _0805051C
 	movs r1, 0
 	ldrsh r0, [r0, r1]
 	bx lr
 	.align 2, 0
 _0805051C: .4byte 0x0300052e
-	thumb_func_end sub_8050514
+	thumb_func_end unref_sub_8050514
 
 	thumb_func_start sub_8050520
 sub_8050520: @ 8050520
@@ -143138,8 +143138,8 @@ sub_80516C4: @ 80516C4
 _080516F4: .4byte 0x03004854
 	thumb_func_end sub_80516C4
 
-	thumb_func_start sub_80516F8
-sub_80516F8: @ 80516F8
+	thumb_func_start unref_sub_80516F8
+unref_sub_80516F8: @ 80516F8
 	push {r4-r6,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -143277,7 +143277,7 @@ _0805180C:
 	.align 2, 0
 _08051814: .4byte gUnknown_0842D390
 _08051818: .4byte 0x03002a68
-	thumb_func_end sub_80516F8
+	thumb_func_end unref_sub_80516F8
 
 	thumb_func_start sub_805181C
 sub_805181C: @ 805181C
@@ -144896,8 +144896,8 @@ _080524B0:
 	bx r1
 	thumb_func_end sub_8052228
 
-	thumb_func_start sub_80524BC
-sub_80524BC: @ 80524BC
+	thumb_func_start unref_sub_80524BC
+unref_sub_80524BC: @ 80524BC
 	push {r4,lr}
 	bl ResetSpriteData
 	bl FreeAllSpritePalettes
@@ -144940,7 +144940,7 @@ _08052520: .4byte gWindowConfig_81E6CE4
 _08052524: .4byte 0x03001770
 _08052528: .4byte 0x03000560
 _0805252C: .4byte sub_8052AF8
-	thumb_func_end sub_80524BC
+	thumb_func_end unref_sub_80524BC
 
 	thumb_func_start sub_8052530
 sub_8052530: @ 8052530

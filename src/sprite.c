@@ -51,7 +51,7 @@ struct OamDimensions
     s8 height;
 };
 
-void gpu_pal_apply(u16 *, u16, u32);
+void LoadPalette(u16 *, u16, u32);
 void sub_814A590(void);
 
 static void UpdateOamCoords(void);
@@ -1668,7 +1668,7 @@ void LoadSpritePalettes(struct SpritePalette *palettes)
 
 static void DoLoadSpritePalette(u16 *src, u16 paletteOffset)
 {
-    gpu_pal_apply(src, paletteOffset + 0x100, 32);
+    LoadPalette(src, paletteOffset + 0x100, 32);
 }
 
 u8 AllocSpritePalette(u16 tag)

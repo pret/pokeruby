@@ -24,16 +24,20 @@
 #define REG_OFFSET_BG2PB       0x22
 #define REG_OFFSET_BG2PC       0x24
 #define REG_OFFSET_BG2PD       0x26
+#define REG_OFFSET_BG2X        0x28
 #define REG_OFFSET_BG2X_L      0x28
 #define REG_OFFSET_BG2X_H      0x2a
+#define REG_OFFSET_BG2Y        0x2c
 #define REG_OFFSET_BG2Y_L      0x2c
 #define REG_OFFSET_BG2Y_H      0x2e
 #define REG_OFFSET_BG3PA       0x30
 #define REG_OFFSET_BG3PB       0x32
 #define REG_OFFSET_BG3PC       0x34
 #define REG_OFFSET_BG3PD       0x36
+#define REG_OFFSET_BG3X        0x38
 #define REG_OFFSET_BG3X_L      0x38
 #define REG_OFFSET_BG3X_H      0x3a
+#define REG_OFFSET_BG3Y        0x3c
 #define REG_OFFSET_BG3Y_L      0x3c
 #define REG_OFFSET_BG3Y_H      0x3e
 #define REG_OFFSET_WIN0H       0x40
@@ -197,16 +201,20 @@
 #define REG_ADDR_BG2PB       (REG_BASE + REG_OFFSET_BG2PB)
 #define REG_ADDR_BG2PC       (REG_BASE + REG_OFFSET_BG2PC)
 #define REG_ADDR_BG2PD       (REG_BASE + REG_OFFSET_BG2PD)
+#define REG_ADDR_BG2X        (REG_BASE + REG_OFFSET_BG2X)
 #define REG_ADDR_BG2X_L      (REG_BASE + REG_OFFSET_BG2X_L)
 #define REG_ADDR_BG2X_H      (REG_BASE + REG_OFFSET_BG2X_H)
+#define REG_ADDR_BG2Y        (REG_BASE + REG_OFFSET_BG2Y)
 #define REG_ADDR_BG2Y_L      (REG_BASE + REG_OFFSET_BG2Y_L)
 #define REG_ADDR_BG2Y_H      (REG_BASE + REG_OFFSET_BG2Y_H)
 #define REG_ADDR_BG3PA       (REG_BASE + REG_OFFSET_BG3PA)
 #define REG_ADDR_BG3PB       (REG_BASE + REG_OFFSET_BG3PB)
 #define REG_ADDR_BG3PC       (REG_BASE + REG_OFFSET_BG3PC)
 #define REG_ADDR_BG3PD       (REG_BASE + REG_OFFSET_BG3PD)
+#define REG_ADDR_BG3X        (REG_BASE + REG_OFFSET_BG3X)
 #define REG_ADDR_BG3X_L      (REG_BASE + REG_OFFSET_BG3X_L)
 #define REG_ADDR_BG3X_H      (REG_BASE + REG_OFFSET_BG3X_H)
+#define REG_ADDR_BG3Y        (REG_BASE + REG_OFFSET_BG3Y)
 #define REG_ADDR_BG3Y_L      (REG_BASE + REG_OFFSET_BG3Y_L)
 #define REG_ADDR_BG3Y_H      (REG_BASE + REG_OFFSET_BG3Y_H)
 #define REG_ADDR_WIN0H       (REG_BASE + REG_OFFSET_WIN0H)
@@ -350,7 +358,36 @@
 #define REG_BG2VOFS     (*(vu16 *)REG_ADDR_BG2VOFS)
 #define REG_BG3HOFS     (*(vu16 *)REG_ADDR_BG3HOFS)
 #define REG_BG3VOFS     (*(vu16 *)REG_ADDR_BG3VOFS)
+#define REG_BG2PA       (*(vu16 *)REG_ADDR_BG2PA)
+#define REG_BG2PB       (*(vu16 *)REG_ADDR_BG2PB)
+#define REG_BG2PC       (*(vu16 *)REG_ADDR_BG2PC)
+#define REG_BG2PD       (*(vu16 *)REG_ADDR_BG2PD)
+#define REG_BG2X        (*(vu32 *)REG_ADDR_BG2X)
+#define REG_BG2X_L      (*(vu16 *)REG_ADDR_BG2X_L)
+#define REG_BG2X_H      (*(vu16 *)REG_ADDR_BG2X_H)
+#define REG_BG2Y        (*(vu32 *)REG_ADDR_BG2Y)
+#define REG_BG2Y_L      (*(vu16 *)REG_ADDR_BG2Y_L)
+#define REG_BG2Y_H      (*(vu16 *)REG_ADDR_BG2Y_H)
+#define REG_BG3PA       (*(vu16 *)REG_ADDR_BG3PA)
+#define REG_BG3PB       (*(vu16 *)REG_ADDR_BG3PB)
+#define REG_BG3PC       (*(vu16 *)REG_ADDR_BG3PC)
+#define REG_BG3PD       (*(vu16 *)REG_ADDR_BG3PD)
+#define REG_BG3X        (*(vu32 *)REG_ADDR_BG3X)
+#define REG_BG3X_L      (*(vu16 *)REG_ADDR_BG3X_L)
+#define REG_BG3X_H      (*(vu16 *)REG_ADDR_BG3X_H)
+#define REG_BG3Y        (*(vu32 *)REG_ADDR_BG3Y)
+#define REG_BG3Y_L      (*(vu16 *)REG_ADDR_BG3Y_L)
+#define REG_BG3Y_H      (*(vu16 *)REG_ADDR_BG3Y_H)
+#define REG_WIN0H       (*(vu16 *)REG_ADDR_WIN0H)
+#define REG_WIN1H       (*(vu16 *)REG_ADDR_WIN1H)
+#define REG_WIN0V       (*(vu16 *)REG_ADDR_WIN0V)
+#define REG_WIN1V       (*(vu16 *)REG_ADDR_WIN1V)
+#define REG_WININ       (*(vu16 *)REG_ADDR_WININ)
+#define REG_WINOUT      (*(vu16 *)REG_ADDR_WINOUT)
+#define REG_MOSAIC      (*(vu16 *)REG_ADDR_MOSAIC)
+#define REG_BLDCNT      (*(vu16 *)REG_ADDR_BLDCNT)
 #define REG_BLDALPHA    (*(vu16 *)REG_ADDR_BLDALPHA)
+#define REG_BLDY        (*(vu16 *)REG_ADDR_BLDY)
 
 #define REG_SOUND1CNT_L (*(vu16 *)REG_ADDR_SOUND1CNT_L)
 #define REG_NR10        (*(vu8  *)REG_ADDR_NR10)
