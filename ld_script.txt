@@ -68,6 +68,8 @@ SECTIONS {
         asm/rom3.o(.text);
         src/play_time.o(.text);
         asm/rom4.o(.text);
+        src/palette.o(.text);
+        asm/rom_8074BAC.o(.text);
         src/task.o(.text);
         asm/rom5.o(.text);
     } =0

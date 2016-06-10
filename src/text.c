@@ -3,6 +3,7 @@
 #include "main.h"
 #include "string_util.h"
 #include "songs.h"
+#include "palette.h"
 
 enum
 {
@@ -117,7 +118,6 @@ struct ShiftAmount
     u32 right;
 };
 
-extern void LoadPalette(const u16 *, u16, u32);
 extern void sub_8075474(u16);
 extern void audio_play(u16);
 extern u8 mplay_has_finished_maybe(void);

@@ -10,7 +10,7 @@ CB2_MainMenu: @ 80096C4
 	bl RunTasks
 	bl AnimateSprites
 	bl BuildOamBuffer
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	pop {r0}
 	bx r0
 	thumb_func_end CB2_MainMenu
@@ -20,7 +20,7 @@ VBlankCB_MainMenu: @ 80096DC
 	push {lr}
 	bl LoadOam
 	bl ProcessSpriteCopyRequests
-	bl copy_pal_bg_faded_to_pal_ram
+	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
 	thumb_func_end VBlankCB_MainMenu
@@ -102,7 +102,7 @@ InitMainMenu: @ 8009708
 	ldr r0, _080097CC
 	str r0, [r1, 0x8]
 	ldr r0, [r1, 0x8]
-	bl sub_8073B94
+	bl ResetPaletteFade
 	ldr r0, _080097D0
 	movs r1, 0
 	movs r2, 0x20
@@ -123,7 +123,7 @@ InitMainMenu: @ 8009708
 	movs r1, 0
 	movs r2, 0x10
 	movs r3, 0
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	b _080097EE
 	.align 2, 0
 _080097BC: .4byte 0x040000d4
@@ -142,7 +142,7 @@ _080097DC:
 	movs r1, 0
 	movs r2, 0x10
 	movs r3, 0
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 _080097EE:
 	ldr r0, _0800985C
 	movs r1, 0
@@ -817,7 +817,7 @@ MainMenuProcessKeyInput: @ 8009D6C
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r1, _08009DAC
 	lsls r0, r4, 2
 	adds r0, r4
@@ -844,7 +844,7 @@ _08009DB4:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r1, _08009DF4
 	movs r0, 0xF0
 	strh r0, [r1]
@@ -1443,7 +1443,7 @@ Task_Birch1: @ 800A1F4
 	movs r1, 0
 	movs r2, 0x10
 	movs r3, 0
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r1, _0800A2D0
 	ldr r2, _0800A2D4
 	adds r0, r2, 0
@@ -2463,7 +2463,7 @@ _0800AA48:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r1, _0800AA70
 	lsls r0, r5, 2
 	adds r0, r5
@@ -3094,7 +3094,7 @@ task_new_game_prof_birch_speech_part2_9: @ 800AED4
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	movs r0, 0x4
 	bl play_sound_effect
 	ldr r0, _0800AF80
@@ -3183,7 +3183,7 @@ sub_800AFC0: @ 800AFC0
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r0, _0800B030
 	str r0, [r4]
 _0800B010:
@@ -3282,7 +3282,7 @@ new_game_prof_birch_speech_part2_start: @ 800B060
 	ldr r0, _0800B148
 	str r0, [r1, 0x8]
 	ldr r0, [r1, 0x8]
-	bl sub_8073B94
+	bl ResetPaletteFade
 	ldr r0, _0800B14C
 	adds r1, r4, 0
 	bl LZ77UnCompVram
@@ -3373,7 +3373,7 @@ _0800B178:
 	movs r1, 0
 	movs r2, 0x10
 	movs r3, 0
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r0, _0800B220
 	strh r4, [r0]
 	adds r0, 0x4
@@ -10384,7 +10384,7 @@ _0800E868:
 	ldr r4, _0800E92C
 	adds r0, r4, 0
 	bl SetUpWindowConfig
-	bl sub_8073B94
+	bl ResetPaletteFade
 	ldr r0, _0800E930
 	movs r1, 0
 	strh r1, [r0]
@@ -12263,7 +12263,7 @@ sub_800F808: @ 800F808
 	bl BuildOamBuffer
 	ldr r0, _0800F824
 	bl sub_800374C
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	bl RunTasks
 	pop {r0}
 	bx r0
@@ -12966,7 +12966,7 @@ sub_800FCFC: @ 800FCFC
 	strh r0, [r1]
 	bl LoadOam
 	bl ProcessSpriteCopyRequests
-	bl copy_pal_bg_faded_to_pal_ram
+	bl TransferPlttBuffer
 	bl sub_8089668
 	pop {r0}
 	bx r0
@@ -13370,7 +13370,7 @@ _08010084:
 	ble _08010084
 	adds r0, r5, 0
 	bl SetUpWindowConfig
-	bl sub_8073B94
+	bl ResetPaletteFade
 	ldr r0, _08010164
 	movs r4, 0
 	strh r4, [r0]
@@ -13479,7 +13479,7 @@ sub_80101B8: @ 80101B8
 	bl c2_081284E0
 	bl AnimateSprites
 	bl BuildOamBuffer
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	bl RunTasks
 	pop {r0}
 	bx r0
@@ -13522,7 +13522,7 @@ _080101FC:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 _0801021A:
 	ldrb r0, [r4]
 	adds r0, 0x1
@@ -13563,7 +13563,7 @@ oac_poke_opponent: @ 8010248
 	movs r1, 0
 	movs r2, 0xA
 	movs r3, 0xA
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	add sp, 0x4
 	pop {r0}
 	bx r0
@@ -13634,7 +13634,7 @@ sub_80102AC: @ 80102AC
 	movs r1, 0
 	movs r2, 0xA
 	movs r3, 0
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 _080102F4:
 	add sp, 0x4
 	pop {r4}
@@ -20813,7 +20813,7 @@ _08013D48:
 	bl sub_80BDEC8
 _08013D4C:
 	movs r0, 0x3
-	bl sub_80744B0
+	bl BeginFastPaletteFade
 	movs r0, 0x5
 	bl sub_8074D28
 	ldr r1, _08013D6C
@@ -51939,7 +51939,7 @@ _08023BC0:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r1, _08023C04
 	ldr r2, _08023C08
 	adds r1, r2
@@ -67952,7 +67952,7 @@ _0802BB10:
 	movs r2, 0x10
 	movs r3, 0
 _0802BB6E:
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 _0802BB72:
 	ldrb r0, [r7]
 	adds r0, 0x1
@@ -68195,7 +68195,7 @@ _0802BD36:
 	adds r0, 0x1
 	strb r0, [r1]
 	movs r0, 0x3
-	bl sub_80744B0
+	bl BeginFastPaletteFade
 	b _0802BEDA
 	.align 2, 0
 _0802BD60: .4byte 0x03001770
@@ -76205,7 +76205,7 @@ sub_802FF60: @ 802FF60
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	bl dp01_tbl1_exec_completed
 	add sp, 0x4
 	pop {r0}
@@ -76909,7 +76909,7 @@ sub_8030530: @ 8030530
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r1, _0803057C
 	ldr r2, _08030580
 	ldrb r0, [r2]
@@ -77021,7 +77021,7 @@ _08030600:
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r1, _08030668
 	ldr r2, _0803064C
 	ldrb r0, [r2]
@@ -77063,7 +77063,7 @@ sub_8030674: @ 8030674
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	bl dp01_tbl1_exec_completed
 	add sp, 0x4
 	pop {r0}
@@ -78587,7 +78587,7 @@ sub_80312A0: @ 80312A0
 	movs r0, 0x5
 	bl sub_8074D28
 	movs r0, 0x3
-	bl sub_80744B0
+	bl BeginFastPaletteFade
 	bl dp01_tbl1_exec_completed
 	ldr r1, _080312E4
 	ldrb r0, [r4]
@@ -79358,7 +79358,7 @@ _080318A2:
 	adds r0, r7, 0
 	movs r1, 0x10
 	movs r2, 0x6
-	bl pal_fade_1
+	bl BlendPalette
 	lsls r1, r7, 1
 	ldr r0, _080318F0
 	adds r0, r1, r0
@@ -79522,7 +79522,7 @@ _08031A0A:
 	adds r0, r7, 0
 	movs r1, 0x10
 	movs r2, 0x6
-	bl pal_fade_1
+	bl BlendPalette
 	lsls r1, r7, 1
 	ldr r0, _08031A58
 	adds r0, r1, r0
@@ -80295,7 +80295,7 @@ sub_8031FC4: @ 8031FC4
 	adds r0, r5, 0
 	movs r1, 0x10
 	movs r2, 0x6
-	bl pal_fade_1
+	bl BlendPalette
 	lsls r1, r5, 1
 	ldr r0, _0803207C
 	adds r0, r1, r0
@@ -80568,7 +80568,7 @@ _08032288:
 	adds r0, r5, 0
 	movs r1, 0x10
 	movs r2, 0x6
-	bl pal_fade_1
+	bl BlendPalette
 	lsls r1, r5, 1
 	ldr r0, _08032344
 	adds r0, r1, r0
@@ -96819,7 +96819,7 @@ _0803A688:
 	movs r0, 0x5
 	bl sub_8074D28
 	movs r0, 0x3
-	bl sub_80744B0
+	bl BeginFastPaletteFade
 	bl dp01_tbl4_exec_completed
 	ldr r1, _0803A6B0
 	ldr r0, _0803A6B4
@@ -110815,8 +110815,8 @@ _08041208: .4byte 0x00001121
 _0804120C: .4byte gUnknown_082087DC
 	thumb_func_end unref_sub_80411CC
 
-	thumb_func_start pal_fade_1
-pal_fade_1: @ 8041210
+	thumb_func_start BlendPalette
+BlendPalette: @ 8041210
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -110897,7 +110897,7 @@ _08041296:
 	.align 2, 0
 _080412A8: .4byte 0x0202eac8
 _080412AC: .4byte 0x0202eec8
-	thumb_func_end pal_fade_1
+	thumb_func_end BlendPalette
 
 	thumb_func_start pokemon_get_nick
 pokemon_get_nick: @ 80412B0
@@ -114254,7 +114254,7 @@ sub_8042C6C: @ 8042C6C
 	push {lr}
 	bl LoadOam
 	bl ProcessSpriteCopyRequests
-	bl copy_pal_bg_faded_to_pal_ram
+	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8042C6C
@@ -114273,7 +114273,7 @@ sub_8042C80: @ 8042C80
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	add sp, 0x4
 	pop {r0}
 	bx r0
@@ -114705,7 +114705,7 @@ _08043068:
 	str r1, [sp]
 	movs r2, 0x10
 	movs r3, 0
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	movs r1, 0x80
 	lsls r1, 19
 	movs r2, 0xBA
@@ -114955,7 +114955,7 @@ _08043288:
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 _08043298:
 	ldr r0, _080432A4
 	ldr r1, [r0]
@@ -114979,7 +114979,7 @@ _080432BA:
 	bl RunTasks
 	bl AnimateSprites
 	bl BuildOamBuffer
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	add sp, 0x8
 	pop {r3-r5}
 	mov r8, r3
@@ -115220,7 +115220,7 @@ sub_8043484: @ 8043484
 	adds r0, r1, 0
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 _080434A4:
 	ldrh r0, [r5, 0x2E]
 	cmp r0, 0x3
@@ -115313,7 +115313,7 @@ _08043540:
 	adds r0, r1, 0
 	movs r2, 0x10
 	movs r3, 0
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 _0804355A:
 	movs r1, 0x2E
 	ldrsh r0, [r5, r1]
@@ -125355,7 +125355,7 @@ _08048448:
 	str r1, [sp]
 	movs r2, 0x10
 	movs r3, 0
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	b _08048492
 _0804845A:
 	movs r1, 0x80
@@ -125414,7 +125414,7 @@ _080484C6:
 	bl RunTasks
 	bl AnimateSprites
 	bl BuildOamBuffer
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	add sp, 0x14
 	pop {r3}
 	mov r8, r3
@@ -125918,7 +125918,7 @@ _08048950:
 	str r1, [sp]
 	movs r2, 0x10
 	movs r3, 0
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r1, _08048968
 	ldr r5, _0804896C
 	adds r1, r5
@@ -125975,7 +125975,7 @@ _080489CA:
 	bl RunTasks
 	bl AnimateSprites
 	bl BuildOamBuffer
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	add sp, 0x8
 	pop {r3}
 	mov r8, r3
@@ -125997,7 +125997,7 @@ sub_80489F4: @ 80489F4
 	bl sub_804A940
 	bl LoadOam
 	bl ProcessSpriteCopyRequests
-	bl copy_pal_bg_faded_to_pal_ram
+	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -126024,7 +126024,7 @@ sub_8048A14: @ 8048A14
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r0, [r4]
 	adds r0, 0x7B
 	movs r1, 0xA
@@ -126122,7 +126122,7 @@ sub_8048AB4: @ 8048AB4
 	bl RunTasks
 	bl AnimateSprites
 	bl BuildOamBuffer
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -127018,7 +127018,7 @@ _08049234:
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	movs r0, 0x4
 	bl sub_804AA0C
 	ldr r0, _08049254
@@ -127059,7 +127059,7 @@ _08049288:
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r0, _080492A4
 	ldr r0, [r0]
 	adds r0, 0x7B
@@ -127245,7 +127245,7 @@ _080493DC:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r0, [r6]
 	adds r1, r0, 0
 	adds r1, 0x85
@@ -127675,7 +127675,7 @@ _0804975C:
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r0, [r4]
 	adds r0, 0x7B
 	movs r1, 0x2
@@ -127842,7 +127842,7 @@ _0804989C:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r0, _080498D8
 	ldr r0, [r0]
 	adds r0, 0x7B
@@ -131107,7 +131107,7 @@ sub_804B210: @ 804B210
 	bl sub_804B1BC
 	bl LoadOam
 	bl ProcessSpriteCopyRequests
-	bl copy_pal_bg_faded_to_pal_ram
+	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
 	thumb_func_end sub_804B210
@@ -131710,7 +131710,7 @@ _0804B726:
 	str r1, [sp]
 	movs r2, 0x10
 	movs r3, 0
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 _0804B746:
 	ldr r1, _0804B758
 	ldr r2, _0804B754
@@ -131736,7 +131736,7 @@ _0804B76E:
 	bl RunTasks
 	bl AnimateSprites
 	bl BuildOamBuffer
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	add sp, 0x4
 	pop {r4-r6}
 	pop {r0}
@@ -131981,7 +131981,7 @@ _0804B9AA:
 	str r1, [sp]
 	movs r2, 0x10
 	movs r3, 0
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 _0804B9CA:
 	ldr r1, _0804B9DC
 	ldr r2, _0804B9D8
@@ -132007,7 +132007,7 @@ _0804B9F2:
 	bl RunTasks
 	bl AnimateSprites
 	bl BuildOamBuffer
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	add sp, 0x10
 	pop {r3}
 	mov r8, r3
@@ -132241,7 +132241,7 @@ sub_804BBCC: @ 804BBCC
 	bl RunTasks
 	bl AnimateSprites
 	bl BuildOamBuffer
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	pop {r0}
 	bx r0
 	thumb_func_end sub_804BBCC
@@ -133511,7 +133511,7 @@ _0804C824:
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r0, _0804C844
 	ldr r0, [r0]
 	adds r0, 0xC4
@@ -133819,7 +133819,7 @@ _0804CAB4:
 	adds r0, r1, 0
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r0, _0804CAD4
 	ldr r0, [r0]
 	adds r0, 0xC4
@@ -133869,7 +133869,7 @@ _0804CB24:
 	adds r0, r1, 0
 	movs r2, 0x10
 	movs r3, 0
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r5, _0804CB68
 	adds r0, r5, 0
 	movs r1, 0x6F
@@ -133989,7 +133989,7 @@ _0804CC2C:
 	ldr r2, _0804CC3C
 	movs r0, 0x1
 	movs r1, 0x10
-	bl sub_8074B3C
+	bl BlendPalettes
 	bl _0804D538
 	.align 2, 0
 _0804CC3C: .4byte 0x0000ffff
@@ -133997,7 +133997,7 @@ _0804CC40:
 	ldr r2, _0804CC50
 	movs r0, 0x1
 	movs r1, 0
-	bl sub_8074B3C
+	bl BlendPalettes
 	bl _0804D538
 	.align 2, 0
 _0804CC50: .4byte 0x0000ffff
@@ -134005,7 +134005,7 @@ _0804CC54:
 	ldr r2, _0804CC64
 	movs r0, 0x1
 	movs r1, 0x10
-	bl sub_8074B3C
+	bl BlendPalettes
 	bl _0804D538
 	.align 2, 0
 _0804CC64: .4byte 0x0000ffff
@@ -134248,7 +134248,7 @@ _0804CDFA:
 	ldr r2, _0804CE60
 	movs r0, 0x1
 	movs r1, 0
-	bl sub_8074B3C
+	bl BlendPalettes
 	b _0804D570
 	.align 2, 0
 _0804CE5C: .4byte 0x02020004
@@ -134295,7 +134295,7 @@ _0804CEA6:
 	adds r0, r1, 0
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r1, [r6]
 	adds r2, r1, 0
 	adds r2, 0xC4
@@ -134654,7 +134654,7 @@ _0804D182:
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r0, _0804D1A0
 	ldr r0, [r0]
 	adds r0, 0xC4
@@ -134769,7 +134769,7 @@ _0804D1F4:
 	lsls r0, r1
 	ldr r2, _0804D2A4
 	movs r1, 0x10
-	bl sub_8074B3C
+	bl BlendPalettes
 	ldr r1, [r6]
 	adds r2, r1, 0
 	adds r2, 0xC4
@@ -134807,7 +134807,7 @@ _0804D2A8:
 	movs r1, 0x1
 	movs r2, 0x10
 	movs r3, 0
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r1, [r6]
 	b _0804D53C
 	.align 2, 0
@@ -135098,7 +135098,7 @@ _0804D528:
 	movs r2, 0
 	movs r3, 0x10
 _0804D534:
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 _0804D538:
 	ldr r0, _0804D548
 	ldr r1, [r0]
@@ -135218,7 +135218,7 @@ _0804D614:
 _0804D622:
 	bl AnimateSprites
 	bl BuildOamBuffer
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	pop {r3}
 	mov r8, r3
 	pop {r4-r7}
@@ -135404,7 +135404,7 @@ _0804D760:
 	str r2, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 _0804D796:
 	add sp, 0x4
 	pop {r4}
@@ -135939,7 +135939,7 @@ _0804DBE6:
 	bl RunTasks
 	bl AnimateSprites
 	bl BuildOamBuffer
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -135991,7 +135991,7 @@ _0804DC64:
 	bl RunTasks
 	bl AnimateSprites
 	bl BuildOamBuffer
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -136414,7 +136414,7 @@ _0804E0A0:
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	b _0804E0F4
 _0804E0BC:
 	ldr r0, _0804E0D8
@@ -136468,7 +136468,7 @@ _0804E11A:
 _0804E128:
 	bl AnimateSprites
 	bl BuildOamBuffer
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r0}
@@ -136493,7 +136493,7 @@ _0804E158:
 	bl RunTasks
 	bl AnimateSprites
 	bl BuildOamBuffer
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -136515,7 +136515,7 @@ sub_804E174: @ 804E174
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	add sp, 0x4
 	pop {r0}
 	bx r0
@@ -136665,7 +136665,7 @@ sub_804E2BC: @ 804E2BC
 	bl sub_80514F0
 	bl LoadOam
 	bl ProcessSpriteCopyRequests
-	bl copy_pal_bg_faded_to_pal_ram
+	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
 	thumb_func_end sub_804E2BC
@@ -136675,7 +136675,7 @@ sub_804E2D8: @ 804E2D8
 	push {lr}
 	bl LoadOam
 	bl ProcessSpriteCopyRequests
-	bl copy_pal_bg_faded_to_pal_ram
+	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
 	thumb_func_end sub_804E2D8
@@ -137095,7 +137095,7 @@ _0804E67C:
 	str r1, [sp]
 	movs r2, 0x10
 	movs r3, 0
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	bl sub_8051474
 	b _0804E6BE
 _0804E692:
@@ -137145,7 +137145,7 @@ _0804E6D4:
 	str r2, [sp]
 	movs r1, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	b _0804E71A
 	.align 2, 0
 _0804E6FC: .4byte 0x03004854
@@ -137165,7 +137165,7 @@ _0804E700:
 _0804E71A:
 	bl AnimateSprites
 	bl BuildOamBuffer
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	add sp, 0x4
 	pop {r4-r6}
 	pop {r0}
@@ -137802,7 +137802,7 @@ _0804ECE8:
 	str r1, [sp]
 	movs r2, 0x10
 	movs r3, 0
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	b _0804F0AA
 _0804ECFA:
 	bl sub_804E4FC
@@ -138288,7 +138288,7 @@ _0804F0CE:
 	bl RunTasks
 	bl AnimateSprites
 	bl BuildOamBuffer
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	add sp, 0x4
 	pop {r3}
 	mov r8, r3
@@ -138801,7 +138801,7 @@ _0804F4EC:
 	movs r1, 0
 	movs r2, 0x10
 	movs r3, 0
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r2, _0804F514
 	ldr r1, [r2]
 	ldrb r0, [r1]
@@ -139179,7 +139179,7 @@ _0804F7E6:
 	bl RunTasks
 	bl AnimateSprites
 	bl BuildOamBuffer
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	add sp, 0x4
 	pop {r3}
 	mov r8, r3
@@ -140491,7 +140491,7 @@ _0805027E:
 	bl RunTasks
 	bl AnimateSprites
 	bl BuildOamBuffer
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -141861,7 +141861,7 @@ _08050CB6:
 	bl RunTasks
 	bl AnimateSprites
 	bl BuildOamBuffer
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -142280,7 +142280,7 @@ _08051030:
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r0, _08051050
 	ldr r1, [r0]
 	b _080510AC
@@ -142346,7 +142346,7 @@ _080510C4:
 	bl RunTasks
 	bl AnimateSprites
 	bl BuildOamBuffer
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r0}
@@ -142469,7 +142469,7 @@ _080511BC:
 _080511D4: .4byte 0x03004854
 _080511D8:
 	movs r0, 0x3
-	bl sub_80744B0
+	bl BeginFastPaletteFade
 	ldr r0, _080511EC
 	ldr r1, [r0]
 	adds r1, 0x6F
@@ -142505,7 +142505,7 @@ _0805121E:
 	bl RunTasks
 	bl AnimateSprites
 	bl BuildOamBuffer
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -144921,7 +144921,7 @@ unref_sub_80524BC: @ 80524BC
 	bl RunTasks
 	bl AnimateSprites
 	bl BuildOamBuffer
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	ldr r1, _08052528
 	movs r0, 0xFA
 	lsls r0, 5
@@ -145659,7 +145659,7 @@ sub_8052AF8: @ 8052AF8
 	bl RunTasks
 	bl AnimateSprites
 	bl BuildOamBuffer
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8052AF8
