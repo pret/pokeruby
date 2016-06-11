@@ -1792,10 +1792,10 @@ static void UpdateBGRegs(struct WindowConfig *winConfig)
 
 static void ClearBGMem(struct WindowConfig *winConfig)
 {
-    CpuFastFill(winConfig->tileData, 0, 32);
+    CpuFastFill(0, winConfig->tileData, 32);
 
     if (winConfig->tilemap)
-        CpuFastFill(winConfig->tilemap, 0, 0x800);
+        CpuFastFill(0, winConfig->tilemap, 0x800);
 }
 
 void LoadFontDefaultPalette(struct WindowConfig *winConfig)
@@ -1854,7 +1854,7 @@ static u16 InitVariableWidthFontTileData(struct Window *win, u16 startOffset)
     win->tileDataStartOffset = startOffset;
     win->tileDataOffset = 2;
     buffer =  win->tileData + 32 * win->tileDataStartOffset;
-    CpuFastFill(buffer, 0, 32);
+    CpuFastFill(0, buffer, 32);
     ApplyColors_UnshadowedFont(sBlankTile, (u32 *)(buffer + 32), win->config->foregroundColor, win->config->backgroundColor);
     return win->tileDataStartOffset + win->tileDataOffset + win->width * win->height;
 }
@@ -3037,8 +3037,8 @@ static void DoScroll_TextMode0(struct Window *win, u16 lineLength)
     fill = (win->paletteNum << 12) | GetBlankTileNum(win);
     CpuCopy16(buffer + 64, buffer, lineLength * 2);
     CpuCopy16(buffer + 96, buffer + 32, lineLength * 2);
-    CpuFill16(buffer + 64, fill, lineLength * 2);
-    CpuFill16(buffer + 96, fill, lineLength * 2);
+    CpuFill16(fill, buffer + 64, lineLength * 2);
+    CpuFill16(fill, buffer + 96, lineLength * 2);
 }
 
 static void ScrollWindowTextLines_TextMode1(struct Window *win)
@@ -3063,8 +3063,8 @@ static void DoScroll_TextMode1(struct Window *win, u16 lineLength)
     u16 fill = (win->paletteNum << 12) | GetBlankTileNum(win);
     CpuCopy16(buffer + 32, dest, lineLength * 2);
     CpuCopy16(buffer + 64, buffer, lineLength * 2);
-    CpuFill16(buffer + 32, fill, lineLength * 2);
-    CpuFill16(buffer + 64, fill, lineLength * 2);
+    CpuFill16(fill, buffer + 32, lineLength * 2);
+    CpuFill16(fill, buffer + 64, lineLength * 2);
 }
 
 static void ScrollWindowTextLines_TextMode2(struct Window *win)
@@ -3092,10 +3092,10 @@ static void DoScroll_TextMode2(struct Window *win, u8 lineLength)
     u16 a[4];
 
     CpuFastCopy(buf2, buf1, 32 * lineLength);
-    CpuFastFill(buf2, sGlyphBuffer.background, 32 * lineLength);
+    CpuFastFill(sGlyphBuffer.background, buf2, 32 * lineLength);
     buf4 = buf2 + 32 * win->width;
     CpuFastCopy(buf4, buf1 + 32 * win->width, 32 * lineLength);
-    CpuFastFill(buf4, sGlyphBuffer.background, 32 * lineLength);
+    CpuFastFill(sGlyphBuffer.background, buf4, 32 * lineLength);
 
     buf3 = GetCursorTilemapPointer(win) - 64;
 
@@ -3165,13 +3165,13 @@ static void ClearWindowTextLines_TextMode2(struct Window *win, u8 lineLength)
     win->win_field_C = 0;
 
     buffer = win->tileData + 32 * GetCursorTileNum(win, 0, 0);
-    CpuFastFill(buffer, sGlyphBuffer.background, 32 * lineLength);
+    CpuFastFill(sGlyphBuffer.background, buffer, 32 * lineLength);
     buffer += 32 * win->width;
-    CpuFastFill(buffer, sGlyphBuffer.background, 32 * lineLength);
+    CpuFastFill(sGlyphBuffer.background, buffer, 32 * lineLength);
     buffer += 32 * win->width;
-    CpuFastFill(buffer, sGlyphBuffer.background, 32 * lineLength);
+    CpuFastFill(sGlyphBuffer.background, buffer, 32 * lineLength);
     buffer += 32 * win->width;
-    CpuFastFill(buffer, sGlyphBuffer.background, 32 * lineLength);
+    CpuFastFill(sGlyphBuffer.background, buffer, 32 * lineLength);
 }
 
 static void DrawDownArrow(struct Window *win)

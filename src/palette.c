@@ -70,8 +70,8 @@ void LoadPalette(const void *src, u16 offset, u16 size)
 
 void FillPalette(u16 value, u16 offset, u16 size)
 {
-    CpuFill16(gPlttBufferUnfaded + offset, value, size);
-    CpuFill16(gPlttBufferFaded + offset, value, size);
+    CpuFill16(value, gPlttBufferUnfaded + offset, size);
+    CpuFill16(value, gPlttBufferFaded + offset, size);
 }
 
 void TransferPlttBuffer(void)
@@ -91,7 +91,7 @@ u8 UpdatePaletteFade(void)
 {
     u8 result;
     u8 dummy = 0;
- 
+
     if (gPlttBufferTransferPending)
         return -1;
 
@@ -253,7 +253,7 @@ static void unused_sub_8073DFC(struct PaletteStruct *a1, u32 *a2)
             a1->ps_field_9--;
         a1->srcIndex = 0;
     }
- 
+
     *a2 |= 1 << (a1->baseDestOffset >> 4);
 }
 
@@ -441,7 +441,7 @@ static u8 UpdateNormalPaletteFade()
             else
             {
                 s8 val;
-                
+
                 if (!gPaletteFade.yDec)
                 {
                     val = gPaletteFade.y;
@@ -468,7 +468,7 @@ static u8 UpdateNormalPaletteFade()
 void InvertPlttBuffer(u32 selectedPalettes)
 {
     u16 paletteOffset = 0;
-    
+
     while (selectedPalettes)
     {
         if (selectedPalettes & 1)
@@ -485,7 +485,7 @@ void InvertPlttBuffer(u32 selectedPalettes)
 void TintPlttBuffer(u32 selectedPalettes, s8 r, s8 g, s8 b)
 {
     u16 paletteOffset = 0;
-    
+
     while (selectedPalettes)
     {
         if (selectedPalettes & 1)
@@ -507,7 +507,7 @@ void TintPlttBuffer(u32 selectedPalettes, s8 r, s8 g, s8 b)
 void UnfadePlttBuffer(u32 selectedPalettes)
 {
     u16 paletteOffset = 0;
-    
+
     while (selectedPalettes)
     {
         if (selectedPalettes & 1)
@@ -535,10 +535,10 @@ static void BeginFastPaletteFadeInternal(u8 submode)
     gPaletteFade.mode = FAST_FADE;
 
     if (submode == FAST_FADE_IN_FROM_BLACK)
-        CpuFill16(gPlttBufferFaded, RGB_BLACK, PLTT_SIZE);
+        CpuFill16(RGB_BLACK, gPlttBufferFaded, PLTT_SIZE);
 
     if (submode == FAST_FADE_IN_FROM_WHITE)
-        CpuFill16(gPlttBufferFaded, RGB_WHITE, PLTT_SIZE);
+        CpuFill16(RGB_WHITE, gPlttBufferFaded, PLTT_SIZE);
 
     UpdatePaletteFade();
 }
@@ -682,10 +682,10 @@ static u8 UpdateFastPaletteFade(void)
             CpuCopy32(gPlttBufferUnfaded, gPlttBufferFaded, PLTT_SIZE);
             break;
         case FAST_FADE_OUT_TO_WHTIE:
-            CpuFill32(gPlttBufferFaded, 0xFFFFFFFF, PLTT_SIZE);
+            CpuFill32(0xFFFFFFFF, gPlttBufferFaded, PLTT_SIZE);
             break;
         case FAST_FADE_OUT_TO_BLACK:
-            CpuFill32(gPlttBufferFaded, 0, PLTT_SIZE);
+            CpuFill32(0x00000000, gPlttBufferFaded, PLTT_SIZE);
             break;
         }
 

@@ -362,5 +362,5 @@ void DoSoftReset(void)
 
 void ClearPokemonCrySongs(void)
 {
-    CpuFill16(gPokemonCrySongs, 0, MAX_POKEMON_CRIES * sizeof(struct PokemonCrySong));
+    CpuFill16(0, gPokemonCrySongs, MAX_POKEMON_CRIES * sizeof(struct PokemonCrySong));
 }

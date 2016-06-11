@@ -1,7 +1,7 @@
 #ifndef GUARD_GBA_MACRO_H
 #define GUARD_GBA_MACRO_H
 
-#define CPU_FILL(dest, value, size, bit)                                          \
+#define CPU_FILL(value, dest, size, bit)                                          \
 {                                                                                 \
     vu##bit tmp = (vu##bit)(value);                                               \
     CpuSet((void *)&tmp,                                                          \
@@ -9,15 +9,15 @@
            CPU_SET_##bit##BIT | CPU_SET_SRC_FIXED | ((size)/(bit/8) & 0x1FFFFF)); \
 }
 
-#define CpuFill16(dest, value, size) CPU_FILL(dest, value, size, 16)
-#define CpuFill32(dest, value, size) CPU_FILL(dest, value, size, 32)
+#define CpuFill16(value, dest, size) CPU_FILL(value, dest, size, 16)
+#define CpuFill32(value, dest, size) CPU_FILL(value, dest, size, 32)
 
 #define CPU_COPY(src, dest, size, bit) CpuSet(src, dest, CPU_SET_##bit##BIT | ((size)/(bit/8) & 0x1FFFFF))
 
 #define CpuCopy16(src, dest, size) CPU_COPY(src, dest, size, 16)
 #define CpuCopy32(src, dest, size) CPU_COPY(src, dest, size, 32)
 
-#define CpuFastFill(dest, value, size)                               \
+#define CpuFastFill(value, dest, size)                               \
 {                                                                    \
     vu32 tmp = (vu32)(value);                                        \
     CpuFastSet((void *)&tmp,                                         \
@@ -36,7 +36,7 @@
     dmaRegs[2];                                   \
 }
 
-#define DMA_FILL(dmaNum, dest, value, size, bit)                                              \
+#define DMA_FILL(dmaNum, value, dest, size, bit)                                              \
 {                                                                                             \
     vu##bit tmp = (vu##bit)(value);                                                           \
     DmaSet(dmaNum,                                                                            \
@@ -46,8 +46,8 @@
          | ((size)/(bit/8)));                                                                 \
 }
 
-#define DmaFill16(dmaNum, dest, value, size) DMA_FILL(dmaNum, dest, value, size, 16)
-#define DmaFill32(dmaNum, dest, value, size) DMA_FILL(dmaNum, dest, value, size, 32)
+#define DmaFill16(dmaNum, value, dest, size) DMA_FILL(dmaNum, value, dest, size, 16)
+#define DmaFill32(dmaNum, value, dest, size) DMA_FILL(dmaNum, value, dest, size, 32)
 
 #define DMA_COPY(dmaNum, src, dest, size, bit)                                              \
     DmaSet(dmaNum,                                                                          \
