@@ -554,8 +554,6 @@ static u8 UpdateFastPaletteFade(void)
     s8 r;
     s8 g;
     s8 b;
-    s8 val1;
-    s8 val2;
 
     if (!gPaletteFade.active)
         return 0;
