@@ -26,67 +26,12 @@ enum
     WIN_STATE_WAIT_SOUND,
 };
 
-struct WindowConfig
-{
-    u8 bgNum;
-    u8 charBaseBlock;
-    u8 screenBaseBlock;
-    u8 priority;
-    u8 paletteNum;
-    u8 foregroundColor;
-    u8 backgroundColor;
-    u8 shadowColor;
-    u8 fontNum;
-    u8 textMode;
-    u8 spacing;
-    u8 tilemapLeft;
-    u8 tilemapTop;
-    u8 width;
-    u8 height;
-    u8 *tileData;
-    u16 *tilemap;
-    u32 maybeUnused;
-};
-
 struct Font
 {
     u32 type;
     u8 *glyphs;
     u16 glyphSize;
     u16 lowerTileOffset;
-};
-
-struct Window
-{
-    u8 textMode;
-    u8 fontNum;
-    u8 charset;
-    u8 foregroundColor;
-    u8 backgroundColor;
-    u8 shadowColor;
-    u8 paletteNum;
-    u8 tilemapLeft;
-    u8 tilemapTop;
-    u8 width;
-    u8 height;
-    u8 win_field_B;
-    u8 win_field_C;
-    u8 delayCounter;
-    u8 spacing;
-    u8 win_field_F;
-    u8 cursorX;
-    u8 cursorY;
-    u8 left;
-    u16 top;
-    u16 state;
-    u16 downArrowCounter;
-    u16 tileDataStartOffset;
-    u16 tileDataOffset;
-    u16 textIndex;
-    u8 *text;
-    u8 *tileData;
-    u16 *tilemap;
-    struct WindowConfig *config;
 };
 
 struct GlyphBuffer
@@ -1782,7 +1727,7 @@ const struct WindowConfig gWindowConfig_81E7294 =
     NULL, // tilemap
 };
 
-static void UpdateBGRegs(struct WindowConfig *winConfig)
+static void UpdateBGRegs(const struct WindowConfig *winConfig)
 {
     u8 bgNum = winConfig->bgNum;
     *gBGHOffsetRegs[bgNum] = 0;
@@ -1790,7 +1735,7 @@ static void UpdateBGRegs(struct WindowConfig *winConfig)
     *gBGControlRegs[bgNum] = winConfig->priority | (winConfig->screenBaseBlock << 8) | (winConfig->charBaseBlock << 2);
 }
 
-static void ClearBGMem(struct WindowConfig *winConfig)
+static void ClearBGMem(const struct WindowConfig *winConfig)
 {
     CpuFastFill(0, winConfig->tileData, 32);
 
@@ -1798,12 +1743,12 @@ static void ClearBGMem(struct WindowConfig *winConfig)
         CpuFastFill(0, winConfig->tilemap, 0x800);
 }
 
-void LoadFontDefaultPalette(struct WindowConfig *winConfig)
+void LoadFontDefaultPalette(const struct WindowConfig *winConfig)
 {
     LoadPalette(gFontDefaultPalette, 16 * winConfig->paletteNum, 32);
 }
 
-void SetUpWindowConfig(struct WindowConfig *winConfig)
+void SetUpWindowConfig(const struct WindowConfig *winConfig)
 {
     UpdateBGRegs(winConfig);
     ClearBGMem(winConfig);
@@ -1907,9 +1852,9 @@ static u16 LoadFixedWidthFont_Braille(struct Window *win, u16 startOffset)
     return i;
 }
 
-u16 MultistepInitWindowTileData(struct Window *win, u16 startOffset)
+u32 MultistepInitWindowTileData(struct Window *win, u16 startOffset)
 {
-    u16 retVal;
+    u32 retVal;
     sMultistepLoadFont_Window = win;
     sMultistepLoadFont_Index = 0;
     sMultistepLoadFont_StartOffset = startOffset;
@@ -1932,9 +1877,9 @@ u16 MultistepInitWindowTileData(struct Window *win, u16 startOffset)
     return retVal;
 }
 
-u16 MultistepLoadFont()
+bool32 MultistepLoadFont(void)
 {
-    u16 retVal = 1;
+    bool32 retVal = TRUE;
 
     if (sMultistepLoadFont_Window->config->textMode == 1)
     {
@@ -1946,7 +1891,7 @@ u16 MultistepLoadFont()
         sMultistepLoadFont_Index += 16;
 
         if (sMultistepLoadFont_Index < 256)
-            retVal = 0;
+            retVal = FALSE;
     }
 
     return retVal;
