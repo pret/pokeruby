@@ -26,6 +26,14 @@ typedef u8  bool8;
 typedef u16 bool16;
 typedef u32 bool32;
 
+struct PlttData
+{
+    u16 r:5; // red
+    u16 g:5; // green
+    u16 b:5; // blue
+    u16 unused_15:1;
+};
+
 struct OamData
 {
     u32 y:8;

@@ -5,6 +5,7 @@
 #include "sprite.h"
 #include "songs.h"
 #include "link.h"
+#include "palette.h"
 
 #define SIO_MULTI_CNT ((struct SioMultiCnt *)REG_ADDR_SIOCNT)
 
@@ -25,12 +26,9 @@ struct LinkTestBGInfo
     u32 dummy_C;
 };
 
-extern void LoadPalette(const u16 *, u16, u32);
 extern void sub_8071C4C(const struct WindowConfig *);
 extern u16 Random(void);
 extern void SeedRng(u16);
-extern s32 fade_and_return_progress_probably(void);
-extern void copy_pal_bg_faded_to_pal_ram(void);
 extern void sub_80516C4(u8, u16);
 
 extern u8 unk_2000000[];
@@ -263,7 +261,7 @@ static void LinkTestScreen(void)
     RunTasks();
     AnimateSprites();
     BuildOamBuffer();
-    fade_and_return_progress_probably();
+    UpdatePaletteFade();
     sDummy3 = 0;
     InitLocalLinkPlayer();
     CreateTask(Task_PrintTestData, 0);
@@ -298,7 +296,7 @@ static void VBlankCB_LinkTest(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
-    copy_pal_bg_faded_to_pal_ram();
+    TransferPlttBuffer();
 }
 
 static void InitLink(void)
@@ -406,7 +404,7 @@ static void LinkTestProcessKeyInput(void)
     if (gMain.heldKeys & B_BUTTON)
         InitBlockSend(unk_2004000, 0x2004);
     if (gMain.newKeys & L_BUTTON)
-        pal_fade_maybe(-1, 0, 0x10, 0, 2);
+        BeginNormalPaletteFade(-1, 0, 0x10, 0, 2);
     if (gMain.newKeys & START_BUTTON)
         SetSuppressLinkErrorMessage(TRUE);
     if (gMain.newKeys & R_BUTTON)
@@ -430,7 +428,7 @@ static void CB2_LinkTest(void)
     RunTasks();
     AnimateSprites();
     BuildOamBuffer();
-    fade_and_return_progress_probably();
+    UpdatePaletteFade();
 }
 
 u16 LinkMain2(u16 *heldKeys)
@@ -1222,7 +1220,7 @@ void CB2_LinkError(void)
 {
     ResetSpriteData();
     FreeAllSpritePalettes();
-    pal_fade_control_reset_maybe();
+    ResetPaletteFadeControl();
     FillPalette(0, 0, 2);
     ResetTasks();
     SetVBlankCallback(VBlankCB_LinkTest);
@@ -1239,7 +1237,7 @@ void CB2_LinkError(void)
     RunTasks();
     AnimateSprites();
     BuildOamBuffer();
-    fade_and_return_progress_probably();
+    UpdatePaletteFade();
     SetMainCallback2(CB2_PrintErrorMessage);
 }
 

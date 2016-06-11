@@ -4119,8 +4119,8 @@ gUnknown_0837DEDC: @ 837DEDC
 	.4byte Unknown_837DD7C
 	.4byte Unknown_837DD9C
 
-	.global gUnknown_0837DEE4
-gUnknown_0837DEE4: @ 837DEE4
+	.global gDummyPaletteStructTemplate
+gDummyPaletteStructTemplate: @ 837DEE4
 	.incbin "baserom.gba", 0x0037dee4, 0x10
 
 	.global gUnknown_0837DEF4
