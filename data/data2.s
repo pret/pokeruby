@@ -1233,7 +1233,12 @@ gUnknown_08209AC4: @ 8209AC4
 gUnknown_08209AD4: @ 8209AD4
 	.string "タマゴ$"
 
-	.incbin "baserom.gba", 0x00209ad8, 0x8d8
+	.incbin "graphics/pokemon/egg/palette.gbapal"
+	.incbin "graphics/pokemon/egg/egg_hatch.4bpp"
+	.incbin "graphics/pokemon/egg/egg_crumble.4bpp"
+	
+	.space 2
+	.incbin "baserom.gba", 0x0020A37A, 0x36
 
 	.global gUnknown_0820A3B0
 gUnknown_0820A3B0: @ 820A3B0
@@ -1412,12 +1417,35 @@ gUnknown_0820A904: @ 820A904
 	.incbin "baserom.gba", 0x0020a904, 0x28
 
 	.global gUnknown_0820A92C
-gUnknown_0820A92C: @ 820A92C
-	.incbin "baserom.gba", 0x0020a92c, 0x60
+gUnknown_0820A92C: @ 820A92C @ graphics
+	obj_tiles gInterfaceGfx_PokeBall, 384, 0xd6d8 @ poke
+	obj_tiles gInterfaceGfx_GreatBall, 384, 0xd6d9 @ great
+	obj_tiles gInterfaceGfx_SafariBall, 384, 0xd6da @ safari
+	obj_tiles gInterfaceGfx_UltraBall, 384, 0xd6db @ ultra
+	obj_tiles gInterfaceGfx_MasterBall, 384, 0xd6dc @ master
+	obj_tiles gInterfaceGfx_NetBall, 384, 0xd6dd @ net
+	obj_tiles gInterfaceGfx_DiveBall, 384, 0xd6de @ dive
+	obj_tiles gInterfaceGfx_NestBall, 384, 0xd6df @ nest
+	obj_tiles gInterfaceGfx_RepeatBall, 384, 0xd6e0 @ repeat
+	obj_tiles gInterfaceGfx_TimerBall, 384, 0xd6e1 @ timer
+	obj_tiles gInterfaceGfx_LuxuryBall, 384, 0xd6e2 @ luxury
+	obj_tiles gInterfaceGfx_PremierBall, 384, 0xd6e3 @ premier
 
-	.global gUnknown_0820A98C
+	.global gUnknown_0820A98C @ palettes
 gUnknown_0820A98C: @ 820A98C
-	.incbin "baserom.gba", 0x0020a98c, 0x128
+	obj_pal gInterfacePal_PokeBall, 0xD6D8 @ poke
+	obj_pal gInterfacePal_GreatBall, 0xD6D9 @ great
+	obj_pal gInterfacePal_SafariBall, 0xD6DA @ safari
+	obj_pal gInterfacePal_UltraBall, 0xD6DB @ ultra
+	obj_pal gInterfacePal_MasterBall, 0xD6DC @ master
+	obj_pal gInterfacePal_NetBall, 0xD6DD @ net
+	obj_pal gInterfacePal_DiveBall, 0xD6DE @ dive
+	obj_pal gInterfacePal_NestBall, 0xD6DF @ nest
+	obj_pal gInterfacePal_RepeatBall, 0xD6E0 @ repeat
+	obj_pal gInterfacePal_TimerBall, 0xD6E1 @ timer
+	obj_pal gInterfacePal_LuxuryBall, 0xD6E2 @ luxury
+	obj_pal gInterfacePal_PremierBall, 0xD6E3 @ premier
+	.incbin "baserom.gba", 0x0020A9EC, 0xC8
 
 	.global gUnknown_0820AAB4
 gUnknown_0820AAB4: @ 820AAB4
@@ -1571,27 +1599,34 @@ gUnknown_0820C3B0: @ 820C3B0
 
 	.global gUnknown_0820C3D1
 gUnknown_0820C3D1: @ 820C3D1
-	.incbin "baserom.gba", 0x0020c3d1, 0x627
+	.incbin "baserom.gba", 0x0020c3d1, 0x7
+	.incbin "graphics/interface/ball_open.gbapal"
+	.incbin "baserom.gba", 0x0020c3f8, 0x600
 
 	.global gUnknown_0820C9F8
 gUnknown_0820C9F8: @ 820C9F8
-	.incbin "baserom.gba", 0x0020c9f8, 0xa0
+	.incbin "baserom.gba", 0x0020c9f8, 0x20
+	.incbin "graphics/interface/gba.gbapal"
+	.incbin "graphics/interface/trade_shadow.gbapal"
+	.incbin "baserom.gba", 0x0020ca58, 0x20 @ blank
+	.incbin "baserom.gba", 0x0020ca78, 0x20
 
 	.global gUnknown_0820CA98
 gUnknown_0820CA98: @ 820CA98
-	.incbin "baserom.gba", 0x0020ca98, 0x1300
+	.incbin "graphics/interface/gba.4bpp"
+	.incbin "graphics/interface/trade_shadow.4bpp"
 
 	.global gUnknown_0820DD98
 gUnknown_0820DD98: @ 820DD98
-	.incbin "baserom.gba", 0x0020dd98, 0x1a00
+	.incbin "baserom.gba", 0x0020dd98, 0x1a00 @ unused?
 
 	.global gUnknown_0820F798
 gUnknown_0820F798: @ 820F798
-	.incbin "baserom.gba", 0x0020f798, 0x1000
+	.incbin "baserom.gba", 0x0020f798, 0x1000 
 
 	.global gUnknown_08210798
 gUnknown_08210798: @ 8210798
-	.incbin "baserom.gba", 0x00210798, 0x1000
+	.incbin "baserom.gba", 0x00210798, 0x1000 @ debug?
 
 	.global gUnknown_08211798
 gUnknown_08211798: @ 8211798
@@ -1603,7 +1638,7 @@ gUnknown_08211F98: @ 8211F98
 
 	.global gUnknown_08213738
 gUnknown_08213738: @ 8213738
-	.incbin "baserom.gba", 0x00213738, 0x2040
+	.incbin "baserom.gba", 0x00213738, 0x2040 @ copy of gba
 
 	.global gUnknown_08215778
 gUnknown_08215778: @ 8215778
@@ -4094,7 +4129,295 @@ gUnknown_0837DEF4: @ 837DEF4
 
 	.global gBattleAnimPicTable
 gBattleAnimPicTable: @ 837E164
-	.incbin "baserom.gba", 0x0037e164, 0x908
+	obj_tiles 0x08d03308, 512, 0x2710
+	obj_tiles 0x08d1ca44, 768, 0x2711
+	obj_tiles 0x08d20b30, 512, 0x2712
+	obj_tiles 0x08d033b8, 256, 0x2713
+	obj_tiles 0x08d0342c, 512, 0x2714
+	obj_tiles 0x08d034dc, 1024, 0x2715
+	obj_tiles 0x08d035b0, 384, 0x2716
+	obj_tiles 0x08d0379c, 2048, 0x2717
+	obj_tiles 0x08d03938, 32, 0x2718
+	obj_tiles 0x08d03d74, 1024, 0x2719
+	obj_tiles 0x08d03994, 4608, 0x271a
+	obj_tiles 0x08d0407c, 384, 0x271b
+	obj_tiles 0x08d0411c, 128, 0x271c
+	obj_tiles 0x08d04208, 128, 0x271d
+	obj_tiles 0x08d1ff80, 640, 0x271e
+	obj_tiles 0x08d04254, 128, 0x271f
+	obj_tiles 0x08d042e8, 256, 0x2720
+	obj_tiles 0x08d04368, 32, 0x2721
+	obj_tiles 0x08d25128, 128, 0x2722
+	obj_tiles 0x08d043c8, 1024, 0x2723
+	obj_tiles 0x08d04488, 512, 0x2724
+	obj_tiles 0x08d047f8, 2560, 0x2725
+	obj_tiles 0x08d047f8, 2560, 0x2726
+	obj_tiles 0x08d045a4, 896, 0x2727
+	obj_tiles 0x08d04c70, 768, 0x2728
+	obj_tiles 0x08d04b80, 2560, 0x2729
+	obj_tiles 0x08d05264, 2560, 0x272a
+	obj_tiles 0x08d055ec, 2560, 0x272b
+	obj_tiles 0x08d05910, 2560, 0x272c
+	obj_tiles 0x08d05c60, 2560, 0x272d
+	obj_tiles 0x08d05f40, 2560, 0x272e
+	obj_tiles 0x08d04d50, 3584, 0x272f
+	obj_tiles 0x08d05178, 896, 0x2730
+	obj_tiles 0x08d0634c, 4096, 0x2731
+	obj_tiles 0x08d06cbc, 2048, 0x2732
+	obj_tiles 0x08d07088, 2560, 0x2733
+	obj_tiles 0x08d07448, 2048, 0x2734
+	obj_tiles 0x08d0781c, 2560, 0x2735
+	obj_tiles 0x08d08734, 2560, 0x2736
+	obj_tiles 0x08d08958, 2560, 0x2737
+	obj_tiles 0x08d08c54, 2560, 0x2738
+	obj_tiles 0x08d08e60, 2560, 0x2739
+	obj_tiles 0x08d09000, 2560, 0x273a
+	obj_tiles 0x08d092f8, 2560, 0x273b
+	obj_tiles 0x08d09748, 2560, 0x273c
+	obj_tiles 0x08d099dc, 2560, 0x273d
+	obj_tiles 0x08d09e5c, 4096, 0x273e
+	obj_tiles 0x08d09e5c, 4096, 0x273f
+	obj_tiles 0x08d0a280, 4096, 0x2740
+	obj_tiles 0x08d0a280, 4096, 0x2741
+	obj_tiles 0x08d0a58c, 512, 0x2742
+	obj_tiles 0x08d0a62c, 512, 0x2743
+	obj_tiles 0x08d0a6d8, 512, 0x2744
+	obj_tiles 0x08d2ebdc, 2048, 0x2745
+	obj_tiles 0x08d0a938, 128, 0x2746
+	obj_tiles 0x08d0ae4c, 512, 0x2747
+	obj_tiles 0x08d0a97c, 4096, 0x2748
+	obj_tiles 0x08d0af10, 384, 0x2749
+	obj_tiles 0x08d0afbc, 3072, 0x274a
+	obj_tiles 0x08d0b44c, 256, 0x274b
+	obj_tiles 0x08d0b4c8, 64, 0x274c
+	obj_tiles 0x08d0b50c, 384, 0x274d
+	obj_tiles 0x08d0b5dc, 2048, 0x274e
+	obj_tiles 0x08d0b9d4, 1152, 0x274f
+	obj_tiles 0x08d234b0, 512, 0x2750
+	obj_tiles 0x08d0bc4c, 512, 0x2751
+	obj_tiles 0x08d0bd80, 256, 0x2752
+	obj_tiles 0x08d0bc4c, 512, 0x2753
+	obj_tiles 0x08d0bc4c, 512, 0x2754
+	obj_tiles 0x08d0bc4c, 512, 0x2755
+	obj_tiles 0x08d0bdf4, 512, 0x2756
+	obj_tiles 0x08d0be9c, 2560, 0x2757
+	obj_tiles 0x08d0c0c8, 768, 0x2758
+	obj_tiles 0x08d0c1b0, 384, 0x2759
+	obj_tiles 0x08d1b600, 160, 0x275a
+	obj_tiles 0x08d0c2ec, 1792, 0x275b
+	obj_tiles 0x08d14e90, 1024, 0x275c
+	obj_tiles 0x08d150f4, 512, 0x275d
+	obj_tiles 0x08d0c58c, 768, 0x275e
+	obj_tiles 0x08d0c74c, 3072, 0x275f
+	obj_tiles 0x08d0cb7c, 2560, 0x2760
+	obj_tiles 0x08d0cf04, 128, 0x2761
+	obj_tiles 0x08d0d120, 64, 0x2762
+	obj_tiles 0x08d0d3a8, 3584, 0x2763
+	obj_tiles 0x08d0d84c, 3584, 0x2764
+	obj_tiles 0x08d0dc10, 640, 0x2765
+	obj_tiles 0x08d0dcc8, 512, 0x2766
+	obj_tiles 0x08d250a8, 128, 0x2767
+	obj_tiles 0x08d0de38, 192, 0x2768
+	obj_tiles 0x08d0de88, 2560, 0x2769
+	obj_tiles 0x08d0e0fc, 512, 0x276a
+	obj_tiles 0x08d0e18c, 384, 0x276b
+	obj_tiles 0x08d0e2c0, 128, 0x276c
+	obj_tiles 0x08d0e33c, 4096, 0x276d
+	obj_tiles 0x08d0ea0c, 2560, 0x276e
+	obj_tiles 0x08d0ebb0, 384, 0x276f
+	obj_tiles 0x08d0ec60, 896, 0x2770
+	obj_tiles 0x08d0edd0, 3072, 0x2771
+	obj_tiles 0x08d0efb0, 512, 0x2772
+	obj_tiles 0x08d28098, 512, 0x2773
+	obj_tiles 0x08d0f0e8, 512, 0x2774
+	obj_tiles 0x08d0f1e8, 512, 0x2775
+	obj_tiles 0x08d0f318, 1024, 0x2776
+	obj_tiles 0x08d0f4b0, 128, 0x2777
+	obj_tiles 0x08d0f51c, 1024, 0x2778
+	obj_tiles 0x08d0f704, 3072, 0x2779
+	obj_tiles 0x08d0fcb0, 512, 0x277a
+	obj_tiles 0x08d0fda0, 4096, 0x277b
+	obj_tiles 0x08d10174, 2560, 0x277c
+	obj_tiles 0x08d104f8, 32, 0x277d
+	obj_tiles 0x08d10548, 3584, 0x277e
+	obj_tiles 0x08d1092c, 128, 0x277f
+	obj_tiles 0x08d10994, 2560, 0x2780
+	obj_tiles 0x08d10ce4, 1024, 0x2781
+	obj_tiles 0x08d10f78, 512, 0x2782
+	obj_tiles 0x08d11b74, 1792, 0x2783
+	obj_tiles 0x08d1302c, 2048, 0x2784
+	obj_tiles 0x08d13300, 2560, 0x2785
+	obj_tiles 0x08d13558, 1536, 0x2786
+	obj_tiles 0x08d1370c, 2048, 0x2787
+	obj_tiles 0x08d139c4, 512, 0x2788
+	obj_tiles 0x08d13ae0, 64, 0x2789
+	obj_tiles 0x08d13b30, 384, 0x278a
+	obj_tiles 0x08d13c48, 1536, 0x278b
+	obj_tiles 0x08d13d84, 1536, 0x278c
+	obj_tiles 0x08d14044, 512, 0x278d
+	obj_tiles 0x08d14158, 128, 0x278e
+	obj_tiles 0x08d141e0, 512, 0x278f
+	obj_tiles 0x08d143a4, 2048, 0x2790
+	obj_tiles 0x08d14630, 128, 0x2791
+	obj_tiles 0x08d14694, 2560, 0x2792
+	obj_tiles 0x08d14a8c, 640, 0x2793
+	obj_tiles 0x08d14bfc, 640, 0x2794
+	obj_tiles 0x08d14d1c, 256, 0x2795
+	obj_tiles 0x08d14dc0, 512, 0x2796
+	obj_tiles 0x08d1a704, 512, 0x2797
+	obj_tiles 0x08d1a8a4, 32, 0x2798
+	obj_tiles 0x08d1a8f0, 2560, 0x2799
+	obj_tiles 0x08d1aea4, 2048, 0x279a
+	obj_tiles 0x08d1aaf4, 2048, 0x279b
+	obj_tiles 0x08d1aff0, 192, 0x279c
+	obj_tiles 0x08d1b090, 448, 0x279d
+	obj_tiles 0x08d1b1b8, 256, 0x279e
+	obj_tiles 0x08d2cf58, 2048, 0x279f
+	obj_tiles 0x08d1bfc8, 512, 0x27a0
+	obj_tiles 0x08d1ad04, 2048, 0x27a1
+	obj_tiles 0x08d03248, 384, 0x27a2
+	obj_tiles 0x08d1b2d0, 384, 0x27a3
+	obj_tiles 0x08d1b4dc, 512, 0x27a4
+	obj_tiles 0x08d1b40c, 512, 0x27a5
+	obj_tiles 0x08d1b68c, 384, 0x27a6
+	obj_tiles 0x08d1b77c, 1024, 0x27a7
+	obj_tiles 0x08d0419c, 128, 0x27a8
+	obj_tiles 0x08d1b874, 256, 0x27a9
+	obj_tiles 0x08d1b8f8, 256, 0x27aa
+	obj_tiles 0x08d1b9c4, 320, 0x27ab
+	obj_tiles 0x08d1baac, 2048, 0x27ac
+	obj_tiles 0x08d1bcec, 512, 0x27ad
+	obj_tiles 0x08d1bd68, 256, 0x27ae
+	obj_tiles 0x08d1be54, 160, 0x27af
+	obj_tiles 0x08d1bef8, 256, 0x27b0
+	obj_tiles 0x08d0374c, 128, 0x27b1
+	obj_tiles 0x08d1c1a4, 768, 0x27b2
+	obj_tiles 0x08d1c248, 256, 0x27b3
+	obj_tiles 0x08d1c248, 256, 0x27b4
+	obj_tiles 0x08d1c248, 256, 0x27b5
+	obj_tiles 0x08d1c308, 2048, 0x27b6
+	obj_tiles 0x08d1c308, 2048, 0x27b7
+	obj_tiles 0x08d1c308, 2048, 0x27b8
+	obj_tiles 0x08d1c308, 2048, 0x27b9
+	obj_tiles 0x08d1c308, 2048, 0x27ba
+	obj_tiles 0x08d1c6b4, 128, 0x27bb
+	obj_tiles 0x08d1bfc8, 512, 0x27bc
+	obj_tiles 0x08d1cb20, 512, 0x27bd
+	obj_tiles 0x08d1d960, 512, 0x27be
+	obj_tiles 0x08d1da28, 128, 0x27bf
+	obj_tiles 0x08d1dab4, 512, 0x27c0
+	obj_tiles 0x08d1dc34, 1280, 0x27c1
+	obj_tiles 0x08d1dd10, 2048, 0x27c2
+	obj_tiles 0x08d1dec8, 1024, 0x27c3
+	obj_tiles 0x08d1dfa4, 32, 0x27c4
+	obj_tiles 0x08d1dfbc, 2048, 0x27c5
+	obj_tiles 0x08d1e34c, 256, 0x27c6
+	obj_tiles 0x08d1e418, 2048, 0x27c7
+	obj_tiles 0x08d1e6b8, 1024, 0x27c8
+	obj_tiles 0x08d1e834, 2560, 0x27c9
+	obj_tiles 0x08d1f13c, 4096, 0x27ca
+	obj_tiles 0x08d1ef2c, 2048, 0x27cb
+	obj_tiles 0x08e71228, 1024, 0x27cc
+	obj_tiles 0x08d20544, 512, 0x27cd
+	obj_tiles 0x08d20030, 2048, 0x27ce
+	obj_tiles 0x08d202b0, 2048, 0x27cf
+	obj_tiles 0x08d205e8, 2048, 0x27d0
+	obj_tiles 0x08d20890, 512, 0x27d1
+	obj_tiles 0x08d20ff8, 2048, 0x27d2
+	obj_tiles 0x08d21358, 512, 0x27d3
+	obj_tiles 0x08d20c3c, 2048, 0x27d4
+	obj_tiles 0x08d21430, 512, 0x27d5
+	obj_tiles 0x08d215c8, 2048, 0x27d6
+	obj_tiles 0x08d219e0, 1024, 0x27d7
+	obj_tiles 0x08d21ac4, 512, 0x27d8
+	obj_tiles 0x08d21c20, 2688, 0x27d9
+	obj_tiles 0x08d22454, 1536, 0x27da
+	obj_tiles 0x08d225e0, 2048, 0x27db
+	obj_tiles 0x08d222b8, 512, 0x27dc
+	obj_tiles 0x08d22a50, 1536, 0x27dd
+	obj_tiles 0x08d227b0, 2048, 0x27de
+	obj_tiles 0x08d22ca8, 384, 0x27df
+	obj_tiles 0x08d22d98, 2048, 0x27e0
+	obj_tiles 0x08d23188, 2048, 0x27e1
+	obj_tiles 0x08d235c4, 128, 0x27e2
+	obj_tiles 0x08d2465c, 128, 0x27e3
+	obj_tiles 0x08d24428, 2048, 0x27e4
+	obj_tiles 0x08d246ac, 2048, 0x27e5
+	obj_tiles 0x08d2493c, 1536, 0x27e6
+	obj_tiles 0x08d24bcc, 1536, 0x27e7
+	obj_tiles 0x08d235c4, 128, 0x27e8
+	obj_tiles 0x08d243a0, 128, 0x27e9
+	obj_tiles 0x08d24ffc, 384, 0x27ea
+	obj_tiles 0x08d235c4, 128, 0x27eb
+	obj_tiles 0x08d251a8, 512, 0x27ec
+	obj_tiles 0x08d252f4, 1024, 0x27ed
+	obj_tiles 0x08d25558, 2560, 0x27ee
+	obj_tiles 0x08d2588c, 2048, 0x27ef
+	obj_tiles 0x08d25b40, 512, 0x27f0
+	obj_tiles 0x08d27b10, 1024, 0x27f1
+	obj_tiles 0x08d27e04, 128, 0x27f2
+	obj_tiles 0x08d27cbc, 2048, 0x27f3
+	obj_tiles 0x08d25ec8, 512, 0x27f4
+	obj_tiles 0x08d27eb4, 768, 0x27f5
+	obj_tiles 0x08d25c64, 2048, 0x27f6
+	obj_tiles 0x08d28740, 896, 0x27f7
+	obj_tiles 0x08d281e0, 2048, 0x27f8
+	obj_tiles 0x08d28910, 192, 0x27f9
+	obj_tiles 0x08d289bc, 2048, 0x27fa
+	obj_tiles 0x08d28c2c, 96, 0x27fb
+	obj_tiles 0x08d28c2c, 96, 0x27fc
+	obj_tiles 0x08d28c2c, 96, 0x27fd
+	obj_tiles 0x08d28ba0, 128, 0x27fe
+	obj_tiles 0x08d2ce4c, 384, 0x27ff
+	obj_tiles 0x08d2d1a0, 384, 0x2800
+	obj_tiles 0x08d2d6f4, 512, 0x2801
+	obj_tiles 0x08d2d91c, 512, 0x2802
+	obj_tiles 0x08d2da7c, 32, 0x2803
+	obj_tiles 0x08d2e900, 1024, 0x2804
+	obj_tiles 0x08d2e2b4, 1536, 0x2805
+	obj_tiles 0x08d2e458, 4096, 0x2806
+	obj_tiles 0x08d2e9f8, 1024, 0x2807
+	obj_tiles 0x08d2ef50, 32, 0x2808
+	obj_tiles 0x08d2ef80, 128, 0x2809
+	obj_tiles 0x08d2eff0, 2048, 0x280a
+	obj_tiles 0x08d2f1e4, 128, 0x280b
+	obj_tiles 0x08d2f260, 512, 0x280c
+	obj_tiles 0x08d2f39c, 1024, 0x280d
+	obj_tiles 0x08d2f5a0, 512, 0x280e
+	obj_tiles 0x08d2f700, 512, 0x280f
+	obj_tiles 0x08d2f89c, 2048, 0x2810
+	obj_tiles 0x08d2fc50, 640, 0x2811
+	obj_tiles 0x08d2f78c, 512, 0x2812
+	obj_tiles 0x08d1b40c, 512, 0x2813
+	obj_tiles 0x08e685a8, 1024, 0x2814
+	obj_tiles 0x08e67d6c, 512, 0x2815
+	obj_tiles 0x08e69308, 512, 0x2816
+	obj_tiles 0x08e6e6ac, 128, 0x2817
+	obj_tiles 0x08e695b8, 32, 0x2818
+	obj_tiles 0x08e695b8, 32, 0x2819
+	obj_tiles 0x08e6e704, 128, 0x281a
+	obj_tiles 0x08d24428, 2048, 0x281b
+	obj_tiles 0x08e695b8, 32, 0x281c
+	obj_tiles 0x08e69a94, 128, 0x281d
+	obj_tiles 0x08e7e9fc, 1024, 0x281e
+	obj_tiles 0x08e7eb3c, 128, 0x281f
+	obj_tiles 0x08e6982c, 2048, 0x2820
+	obj_tiles 0x08e69a6c, 32, 0x2821
+	obj_tiles 0x08e69b00, 2048, 0x2822
+	obj_tiles 0x08e69c80, 2048, 0x2823
+	obj_tiles 0x08e69dec, 2048, 0x2824
+	obj_tiles 0x08e6da54, 4096, 0x2825
+	obj_tiles 0x08e6e78c, 2048, 0x2826
+	obj_tiles 0x08e6e9b4, 160, 0x2827
+	obj_tiles 0x08e6a2e8, 2048, 0x2828
+	obj_tiles 0x08e6ea1c, 512, 0x2829
+	obj_tiles 0x08e7e7f8, 1536, 0x282a
+	obj_tiles 0x08e6dfdc, 512, 0x282b
+	obj_tiles 0x08e6f1c0, 2048, 0x282c
+	obj_tiles 0x08e6f558, 512, 0x282d
+	obj_tiles 0x08d1e418, 2048, 0x282e
+	obj_tiles 0x08d0a97c, 4096, 0x282f
+	obj_tiles 0x08d1c248, 256, 0x2830
 
 	.global gBattleAnimPaletteTable
 gBattleAnimPaletteTable: @ 837EA6C
