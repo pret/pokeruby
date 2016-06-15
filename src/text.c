@@ -26,67 +26,12 @@ enum
     WIN_STATE_WAIT_SOUND,
 };
 
-struct WindowConfig
-{
-    u8 bgNum;
-    u8 charBaseBlock;
-    u8 screenBaseBlock;
-    u8 priority;
-    u8 paletteNum;
-    u8 foregroundColor;
-    u8 backgroundColor;
-    u8 shadowColor;
-    u8 fontNum;
-    u8 textMode;
-    u8 spacing;
-    u8 tilemapLeft;
-    u8 tilemapTop;
-    u8 width;
-    u8 height;
-    u8 *tileData;
-    u16 *tilemap;
-    u32 maybeUnused;
-};
-
 struct Font
 {
     u32 type;
     u8 *glyphs;
     u16 glyphSize;
     u16 lowerTileOffset;
-};
-
-struct Window
-{
-    u8 textMode;
-    u8 fontNum;
-    u8 charset;
-    u8 foregroundColor;
-    u8 backgroundColor;
-    u8 shadowColor;
-    u8 paletteNum;
-    u8 tilemapLeft;
-    u8 tilemapTop;
-    u8 width;
-    u8 height;
-    u8 win_field_B;
-    u8 win_field_C;
-    u8 delayCounter;
-    u8 spacing;
-    u8 win_field_F;
-    u8 cursorX;
-    u8 cursorY;
-    u8 left;
-    u16 top;
-    u16 state;
-    u16 downArrowCounter;
-    u16 tileDataStartOffset;
-    u16 tileDataOffset;
-    u16 textIndex;
-    u8 *text;
-    u8 *tileData;
-    u16 *tilemap;
-    struct WindowConfig *config;
 };
 
 struct GlyphBuffer
@@ -1782,7 +1727,7 @@ const struct WindowConfig gWindowConfig_81E7294 =
     NULL, // tilemap
 };
 
-static void UpdateBGRegs(struct WindowConfig *winConfig)
+static void UpdateBGRegs(const struct WindowConfig *winConfig)
 {
     u8 bgNum = winConfig->bgNum;
     *gBGHOffsetRegs[bgNum] = 0;
@@ -1790,20 +1735,20 @@ static void UpdateBGRegs(struct WindowConfig *winConfig)
     *gBGControlRegs[bgNum] = winConfig->priority | (winConfig->screenBaseBlock << 8) | (winConfig->charBaseBlock << 2);
 }
 
-static void ClearBGMem(struct WindowConfig *winConfig)
+static void ClearBGMem(const struct WindowConfig *winConfig)
 {
-    CpuFastFill(winConfig->tileData, 0, 32);
+    CpuFastFill(0, winConfig->tileData, 32);
 
     if (winConfig->tilemap)
-        CpuFastFill(winConfig->tilemap, 0, 0x800);
+        CpuFastFill(0, winConfig->tilemap, 0x800);
 }
 
-void LoadFontDefaultPalette(struct WindowConfig *winConfig)
+void LoadFontDefaultPalette(const struct WindowConfig *winConfig)
 {
     LoadPalette(gFontDefaultPalette, 16 * winConfig->paletteNum, 32);
 }
 
-void SetUpWindowConfig(struct WindowConfig *winConfig)
+void SetUpWindowConfig(const struct WindowConfig *winConfig)
 {
     UpdateBGRegs(winConfig);
     ClearBGMem(winConfig);
@@ -1854,7 +1799,7 @@ static u16 InitVariableWidthFontTileData(struct Window *win, u16 startOffset)
     win->tileDataStartOffset = startOffset;
     win->tileDataOffset = 2;
     buffer =  win->tileData + 32 * win->tileDataStartOffset;
-    CpuFastFill(buffer, 0, 32);
+    CpuFastFill(0, buffer, 32);
     ApplyColors_UnshadowedFont(sBlankTile, (u32 *)(buffer + 32), win->config->foregroundColor, win->config->backgroundColor);
     return win->tileDataStartOffset + win->tileDataOffset + win->width * win->height;
 }
@@ -1907,9 +1852,9 @@ static u16 LoadFixedWidthFont_Braille(struct Window *win, u16 startOffset)
     return i;
 }
 
-u16 MultistepInitWindowTileData(struct Window *win, u16 startOffset)
+u32 MultistepInitWindowTileData(struct Window *win, u16 startOffset)
 {
-    u16 retVal;
+    u32 retVal;
     sMultistepLoadFont_Window = win;
     sMultistepLoadFont_Index = 0;
     sMultistepLoadFont_StartOffset = startOffset;
@@ -1932,9 +1877,9 @@ u16 MultistepInitWindowTileData(struct Window *win, u16 startOffset)
     return retVal;
 }
 
-u16 MultistepLoadFont()
+bool32 MultistepLoadFont(void)
 {
-    u16 retVal = 1;
+    bool32 retVal = TRUE;
 
     if (sMultistepLoadFont_Window->config->textMode == 1)
     {
@@ -1946,7 +1891,7 @@ u16 MultistepLoadFont()
         sMultistepLoadFont_Index += 16;
 
         if (sMultistepLoadFont_Index < 256)
-            retVal = 0;
+            retVal = FALSE;
     }
 
     return retVal;
@@ -3037,8 +2982,8 @@ static void DoScroll_TextMode0(struct Window *win, u16 lineLength)
     fill = (win->paletteNum << 12) | GetBlankTileNum(win);
     CpuCopy16(buffer + 64, buffer, lineLength * 2);
     CpuCopy16(buffer + 96, buffer + 32, lineLength * 2);
-    CpuFill16(buffer + 64, fill, lineLength * 2);
-    CpuFill16(buffer + 96, fill, lineLength * 2);
+    CpuFill16(fill, buffer + 64, lineLength * 2);
+    CpuFill16(fill, buffer + 96, lineLength * 2);
 }
 
 static void ScrollWindowTextLines_TextMode1(struct Window *win)
@@ -3063,8 +3008,8 @@ static void DoScroll_TextMode1(struct Window *win, u16 lineLength)
     u16 fill = (win->paletteNum << 12) | GetBlankTileNum(win);
     CpuCopy16(buffer + 32, dest, lineLength * 2);
     CpuCopy16(buffer + 64, buffer, lineLength * 2);
-    CpuFill16(buffer + 32, fill, lineLength * 2);
-    CpuFill16(buffer + 64, fill, lineLength * 2);
+    CpuFill16(fill, buffer + 32, lineLength * 2);
+    CpuFill16(fill, buffer + 64, lineLength * 2);
 }
 
 static void ScrollWindowTextLines_TextMode2(struct Window *win)
@@ -3092,10 +3037,10 @@ static void DoScroll_TextMode2(struct Window *win, u8 lineLength)
     u16 a[4];
 
     CpuFastCopy(buf2, buf1, 32 * lineLength);
-    CpuFastFill(buf2, sGlyphBuffer.background, 32 * lineLength);
+    CpuFastFill(sGlyphBuffer.background, buf2, 32 * lineLength);
     buf4 = buf2 + 32 * win->width;
     CpuFastCopy(buf4, buf1 + 32 * win->width, 32 * lineLength);
-    CpuFastFill(buf4, sGlyphBuffer.background, 32 * lineLength);
+    CpuFastFill(sGlyphBuffer.background, buf4, 32 * lineLength);
 
     buf3 = GetCursorTilemapPointer(win) - 64;
 
@@ -3165,13 +3110,13 @@ static void ClearWindowTextLines_TextMode2(struct Window *win, u8 lineLength)
     win->win_field_C = 0;
 
     buffer = win->tileData + 32 * GetCursorTileNum(win, 0, 0);
-    CpuFastFill(buffer, sGlyphBuffer.background, 32 * lineLength);
+    CpuFastFill(sGlyphBuffer.background, buffer, 32 * lineLength);
     buffer += 32 * win->width;
-    CpuFastFill(buffer, sGlyphBuffer.background, 32 * lineLength);
+    CpuFastFill(sGlyphBuffer.background, buffer, 32 * lineLength);
     buffer += 32 * win->width;
-    CpuFastFill(buffer, sGlyphBuffer.background, 32 * lineLength);
+    CpuFastFill(sGlyphBuffer.background, buffer, 32 * lineLength);
     buffer += 32 * win->width;
-    CpuFastFill(buffer, sGlyphBuffer.background, 32 * lineLength);
+    CpuFastFill(sGlyphBuffer.background, buffer, 32 * lineLength);
 }
 
 static void DrawDownArrow(struct Window *win)

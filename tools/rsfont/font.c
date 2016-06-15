@@ -42,7 +42,7 @@ void ConvertFromTiles1Bpp(unsigned char *src, unsigned char *dest, int numGlyphs
         {
             for (int i = 0; i < 8; i++)
             {
-                unsigned char srcRow = src[(glyph * 8) + i];
+                uint8_t srcRow = src[(glyph * 8) + i];
 
                 for (int j = 0; j < 8; j++)
                 {
@@ -61,7 +61,7 @@ void ConvertFromTiles1Bpp(unsigned char *src, unsigned char *dest, int numGlyphs
 
             for (int i = 0; i < 8; i++)
             {
-                unsigned char srcRow = src[tile1Offset + i];
+                uint8_t srcRow = src[tile1Offset + i];
 
                 for (int j = 0; j < 8; j++)
                 {
@@ -73,7 +73,7 @@ void ConvertFromTiles1Bpp(unsigned char *src, unsigned char *dest, int numGlyphs
 
             for (int i = 0; i < 8; i++)
             {
-                unsigned char srcRow = src[tile2Offset + i];
+                uint8_t srcRow = src[tile2Offset + i];
 
                 for (int j = 0; j < 8; j++)
                 {
@@ -94,7 +94,7 @@ void ConvertToTiles1Bpp(unsigned char *src, unsigned char *dest, int numGlyphs, 
         {
             for (int i = 0; i < 8; i++)
             {
-                unsigned char destRow = 0;
+                uint8_t destRow = 0;
 
                 for (int j = 0; j < 8; j++)
                 {
@@ -121,7 +121,7 @@ void ConvertToTiles1Bpp(unsigned char *src, unsigned char *dest, int numGlyphs, 
 
             for (int i = 0; i < 8; i++)
             {
-                unsigned char destRow = 0;
+                uint8_t destRow = 0;
 
                 for (int j = 0; j < 8; j++)
                 {
@@ -141,7 +141,7 @@ void ConvertToTiles1Bpp(unsigned char *src, unsigned char *dest, int numGlyphs, 
 
             for (int i = 0; i < 8; i++)
             {
-                unsigned char destRow = 0;
+                uint8_t destRow = 0;
 
                 for (int j = 0; j < 8; j++)
                 {
@@ -177,7 +177,7 @@ void ConvertFromTiles4Bpp(unsigned char *src, unsigned char *dest, int numGlyphs
 
             for (int i = 0; i < 8; i++)
             {
-                unsigned long srcRow = (src[offset + 3] << 24)
+                uint32_t srcRow = (src[offset + 3] << 24)
                     | (src[offset + 2] << 16)
                     | (src[offset + 1] << 8)
                     | src[offset];
@@ -211,7 +211,7 @@ void ConvertFromTiles4Bpp(unsigned char *src, unsigned char *dest, int numGlyphs
 
             for (int i = 0; i < 8; i++)
             {
-                unsigned long srcRow = (src[tile1Offset + 3] << 24)
+                uint32_t srcRow = (src[tile1Offset + 3] << 24)
                     | (src[tile1Offset + 2] << 16)
                     | (src[tile1Offset + 1] << 8)
                     | src[tile1Offset];
@@ -229,7 +229,7 @@ void ConvertFromTiles4Bpp(unsigned char *src, unsigned char *dest, int numGlyphs
 
             for (int i = 0; i < 8; i++)
             {
-                unsigned long srcRow = (src[tile2Offset + 3] << 24)
+                uint32_t srcRow = (src[tile2Offset + 3] << 24)
                     | (src[tile2Offset + 2] << 16)
                     | (src[tile2Offset + 1] << 8)
                     | src[tile2Offset];
@@ -263,7 +263,7 @@ void ConvertToTiles4Bpp(unsigned char *src, unsigned char *dest, int numGlyphs, 
 
             for (int i = 0; i < 8; i++)
             {
-                unsigned long destRow = 0;
+                uint32_t destRow = 0;
 
                 for (int j = 0; j < 8; j++)
                 {
@@ -304,7 +304,7 @@ void ConvertToTiles4Bpp(unsigned char *src, unsigned char *dest, int numGlyphs, 
 
             for (int i = 0; i < 8; i++)
             {
-                unsigned long destRow = 0;
+                uint32_t destRow = 0;
 
                 for (int j = 0; j < 8; j++)
                 {
@@ -329,7 +329,7 @@ void ConvertToTiles4Bpp(unsigned char *src, unsigned char *dest, int numGlyphs, 
 
             for (int i = 0; i < 8; i++)
             {
-                unsigned long destRow = 0;
+                uint32_t destRow = 0;
 
                 for (int j = 0; j < 8; j++)
                 {
@@ -398,8 +398,6 @@ void ReadFont(char *path, struct Image *image, int numGlyphs, int bpp, int layou
 {
     int fileSize;
     unsigned char *buffer = ReadWholeFile(path, &fileSize);
-
-    int tilesPerGlyph = layout > 0 ? 2 : 1;
 
     int expectedFileSize = CalcFileSize(numGlyphs, bpp, layout);
 

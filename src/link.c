@@ -1304,7 +1304,7 @@ static void DisableSerial(void)
     REG_TM3CNT_H = 0;
     REG_IF = INTR_FLAG_TIMER3 | INTR_FLAG_SERIAL;
 
-    CpuFill32(&gLink, 0, sizeof(gLink));
+    CpuFill32(0, &gLink, sizeof(gLink));
 }
 
 static void EnableSerial(void)
@@ -1326,7 +1326,7 @@ static void EnableSerial(void)
 
     REG_SIOMLT_SEND = 0;
 
-    CpuFill32(&gLink, 0, sizeof(gLink));
+    CpuFill32(0, &gLink, sizeof(gLink));
 
     sNumVBlanksWithoutSerialIntr = 0;
     sSendNonzeroCheck = 0;

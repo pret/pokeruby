@@ -291,7 +291,7 @@ void MPlayExtender(struct CgbChannel *cgbChans)
     soundInfo->MidiKeyToCgbFreq = MidiKeyToCgbFreq;
     soundInfo->maxLines = MAX_LINES;
 
-    CpuFill32(cgbChans, 0, sizeof(struct CgbChannel) * 4);
+    CpuFill32(0, cgbChans, sizeof(struct CgbChannel) * 4);
 
     cgbChans[0].ty = 1;
     cgbChans[0].panMask = 0x11;
@@ -350,7 +350,7 @@ void SoundInit(struct SoundInfo *soundInfo)
     REG_DMA2DAD = (s32)&REG_FIFO_B;
 
     SOUND_INFO_PTR = soundInfo;
-    CpuFill32(soundInfo, 0, sizeof(struct SoundInfo));
+    CpuFill32(0, soundInfo, sizeof(struct SoundInfo));
 
     soundInfo->maxChans = 8;
     soundInfo->masterVolume = 15;
@@ -515,7 +515,7 @@ void m4aSoundVSyncOff(void)
         REG_DMA1CNT_H = DMA_32BIT;
         REG_DMA2CNT_H = DMA_32BIT;
 
-        CpuFill32(soundInfo->pcmBuffer, 0, sizeof(soundInfo->pcmBuffer));
+        CpuFill32(0, soundInfo->pcmBuffer, sizeof(soundInfo->pcmBuffer));
     }
 }
 
