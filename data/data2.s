@@ -24,7 +24,7 @@ gUnknown_081E795C: @ 81E795C
 	.global gUnknown_081E796C
 gUnknown_081E796C: @ 81E796C
 @ replacing .incbin "baserom.gba", 0x001e796c, 0x10
-.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000
+	.space 0x00000010
 
 	.global gUnknown_081E797C
 gUnknown_081E797C: @ 81E797C
@@ -39,14 +39,11 @@ gUnknown_081E79AC: @ 81E79AC
 
 	.global gUnknown_081E79B0
 gUnknown_081E79B0: @ 81E79B0
-@ replacing .incbin "baserom.gba", 0x001e79b0, 0x10
-.4byte 0x0840df97, 0x00000000, 0x0840df9b, 0x00000000
+	.incbin "baserom.gba", 0x001e79b0, 0x10
 
 	.global gUnknown_081E79C0
 gUnknown_081E79C0: @ 81E79C0
-@ replacing .incbin "baserom.gba", 0x001e79c0, 0x28
-.4byte 0x0840dfa0, 0x00000000, 0x0840dfa9, 0x00000000, 0x0840dfb0, 0x00000000, 0x0840dfb6, 0x00000000
-.4byte 0x0840dfbb, 0x00000000
+	.incbin "baserom.gba", 0x001e79c0, 0x28
 
 	.global gUnknown_081E79E8
 gUnknown_081E79E8: @ 81E79E8
@@ -92,9 +89,7 @@ gUnknown_081E7BEC: @ 81E7BEC
 	.global gUnknown_081E7C18
 gUnknown_081E7C18: @ 81E7C18
 Unknown_81E7C18:
-@ replacing .incbin "baserom.gba", 0x001e7c18, 0x2c
-.4byte 0x081e7ab0, 0x081e7ac0, 0x081e7ad8, 0x081e7af0, 0x081e7b10, 0x081e7b20, 0x081e7b94, 0x081e7ba4
-.4byte 0x081e7bbc, 0x081e7b30, 0x081e7bdc
+	.incbin "baserom.gba", 0x001e7c18, 0x2c
 Unknown_81E7C44:
 	.incbin "baserom.gba", 0x001e7c44, 0x8
 Unknown_81E7C4C:
@@ -135,254 +130,171 @@ gUnknown_081E9114: @ 81E9114
 Unknown_81EC134:
 	.incbin "baserom.gba", 0x001EC134, 0x18
 Unknown_81EC14C:
-@ replacing .incbin "baserom.gba", 0x001ec14c, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC14C, 0x4
 Unknown_81EC150:
-@ replacing .incbin "baserom.gba", 0x001ec150, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC150, 0x4
 Unknown_81EC154:
-@ replacing .incbin "baserom.gba", 0x001ec154, 0x8
-.4byte 0x081e7a90, 0x081ec134
+	.incbin "baserom.gba", 0x001EC154, 0x8
 Unknown_81EC15C:
-@ replacing .incbin "baserom.gba", 0x001ec15c, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC15C, 0x4
 Unknown_81EC160:
-@ replacing .incbin "baserom.gba", 0x001ec160, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC160, 0x4
 Unknown_81EC164:
-@ replacing .incbin "baserom.gba", 0x001ec164, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC164, 0x4
 Unknown_81EC168:
-@ replacing .incbin "baserom.gba", 0x001ec168, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC168, 0x4
 Unknown_81EC16C:
-@ replacing .incbin "baserom.gba", 0x001ec16c, 0x8
-.4byte 0x081e7a90, 0x081ec13c
+	.incbin "baserom.gba", 0x001EC16C, 0x8
 Unknown_81EC174:
-@ replacing .incbin "baserom.gba", 0x001ec174, 0x8
-.4byte 0x081e7a90, 0x081ec144
+	.incbin "baserom.gba", 0x001EC174, 0x8
 Unknown_81EC17C:
-@ replacing .incbin "baserom.gba", 0x001ec17c, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC17C, 0x4
 Unknown_81EC180:
-@ replacing .incbin "baserom.gba", 0x001ec180, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC180, 0x4
 Unknown_81EC184:
-@ replacing .incbin "baserom.gba", 0x001ec184, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC184, 0x4
 Unknown_81EC188:
-@ replacing .incbin "baserom.gba", 0x001ec188, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC188, 0x4
 Unknown_81EC18C:
-@ replacing .incbin "baserom.gba", 0x001ec18c, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC18C, 0x4
 Unknown_81EC190:
-@ replacing .incbin "baserom.gba", 0x001ec190, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC190, 0x4
 Unknown_81EC194:
-@ replacing .incbin "baserom.gba", 0x001ec194, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC194, 0x4
 Unknown_81EC198:
-@ replacing .incbin "baserom.gba", 0x001ec198, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC198, 0x4
 Unknown_81EC19C:
-@ replacing .incbin "baserom.gba", 0x001ec19c, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC19C, 0x4
 Unknown_81EC1A0:
-@ replacing .incbin "baserom.gba", 0x001ec1a0, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC1A0, 0x4
 Unknown_81EC1A4:
-@ replacing .incbin "baserom.gba", 0x001ec1a4, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC1A4, 0x4
 Unknown_81EC1A8:
-@ replacing .incbin "baserom.gba", 0x001ec1a8, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC1A8, 0x4
 Unknown_81EC1AC:
-@ replacing .incbin "baserom.gba", 0x001ec1ac, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC1AC, 0x4
 Unknown_81EC1B0:
-@ replacing .incbin "baserom.gba", 0x001ec1b0, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC1B0, 0x4
 Unknown_81EC1B4:
-@ replacing .incbin "baserom.gba", 0x001ec1b4, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC1B4, 0x4
 Unknown_81EC1B8:
-@ replacing .incbin "baserom.gba", 0x001ec1b8, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC1B8, 0x4
 Unknown_81EC1BC:
-@ replacing .incbin "baserom.gba", 0x001ec1bc, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC1BC, 0x4
 Unknown_81EC1C0:
-@ replacing .incbin "baserom.gba", 0x001ec1c0, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC1C0, 0x4
 Unknown_81EC1C4:
-@ replacing .incbin "baserom.gba", 0x001ec1c4, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC1C4, 0x4
 Unknown_81EC1C8:
-@ replacing .incbin "baserom.gba", 0x001ec1c8, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC1C8, 0x4
 Unknown_81EC1CC:
-@ replacing .incbin "baserom.gba", 0x001ec1cc, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC1CC, 0x4
 Unknown_81EC1D0:
-@ replacing .incbin "baserom.gba", 0x001ec1d0, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC1D0, 0x4
 Unknown_81EC1D4:
-@ replacing .incbin "baserom.gba", 0x001ec1d4, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC1D4, 0x4
 Unknown_81EC1D8:
-@ replacing .incbin "baserom.gba", 0x001ec1d8, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC1D8, 0x4
 Unknown_81EC1DC:
-@ replacing .incbin "baserom.gba", 0x001ec1dc, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC1DC, 0x4
 Unknown_81EC1E0:
-@ replacing .incbin "baserom.gba", 0x001ec1e0, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC1E0, 0x4
 Unknown_81EC1E4:
-@ replacing .incbin "baserom.gba", 0x001ec1e4, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC1E4, 0x4
 Unknown_81EC1E8:
-@ replacing .incbin "baserom.gba", 0x001ec1e8, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC1E8, 0x4
 Unknown_81EC1EC:
-@ replacing .incbin "baserom.gba", 0x001ec1ec, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC1EC, 0x4
 Unknown_81EC1F0:
-@ replacing .incbin "baserom.gba", 0x001ec1f0, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC1F0, 0x4
 Unknown_81EC1F4:
-@ replacing .incbin "baserom.gba", 0x001ec1f4, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC1F4, 0x4
 Unknown_81EC1F8:
-@ replacing .incbin "baserom.gba", 0x001ec1f8, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC1F8, 0x4
 Unknown_81EC1FC:
-@ replacing .incbin "baserom.gba", 0x001ec1fc, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC1FC, 0x4
 Unknown_81EC200:
-@ replacing .incbin "baserom.gba", 0x001ec200, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC200, 0x4
 Unknown_81EC204:
-@ replacing .incbin "baserom.gba", 0x001ec204, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC204, 0x4
 Unknown_81EC208:
-@ replacing .incbin "baserom.gba", 0x001ec208, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC208, 0x4
 Unknown_81EC20C:
-@ replacing .incbin "baserom.gba", 0x001ec20c, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC20C, 0x4
 Unknown_81EC210:
-@ replacing .incbin "baserom.gba", 0x001ec210, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC210, 0x4
 Unknown_81EC214:
-@ replacing .incbin "baserom.gba", 0x001ec214, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC214, 0x4
 Unknown_81EC218:
-@ replacing .incbin "baserom.gba", 0x001ec218, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC218, 0x4
 Unknown_81EC21C:
-@ replacing .incbin "baserom.gba", 0x001ec21c, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC21C, 0x4
 Unknown_81EC220:
-@ replacing .incbin "baserom.gba", 0x001ec220, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC220, 0x4
 Unknown_81EC224:
-@ replacing .incbin "baserom.gba", 0x001ec224, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC224, 0x4
 Unknown_81EC228:
-@ replacing .incbin "baserom.gba", 0x001ec228, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC228, 0x4
 Unknown_81EC22C:
-@ replacing .incbin "baserom.gba", 0x001ec22c, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC22C, 0x4
 Unknown_81EC230:
-@ replacing .incbin "baserom.gba", 0x001ec230, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC230, 0x4
 Unknown_81EC234:
-@ replacing .incbin "baserom.gba", 0x001ec234, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC234, 0x4
 Unknown_81EC238:
-@ replacing .incbin "baserom.gba", 0x001ec238, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC238, 0x4
 Unknown_81EC23C:
-@ replacing .incbin "baserom.gba", 0x001ec23c, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC23C, 0x4
 Unknown_81EC240:
-@ replacing .incbin "baserom.gba", 0x001ec240, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC240, 0x4
 Unknown_81EC244:
-@ replacing .incbin "baserom.gba", 0x001ec244, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC244, 0x4
 Unknown_81EC248:
-@ replacing .incbin "baserom.gba", 0x001ec248, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC248, 0x4
 Unknown_81EC24C:
-@ replacing .incbin "baserom.gba", 0x001ec24c, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC24C, 0x4
 Unknown_81EC250:
-@ replacing .incbin "baserom.gba", 0x001ec250, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC250, 0x4
 Unknown_81EC254:
-@ replacing .incbin "baserom.gba", 0x001ec254, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC254, 0x4
 Unknown_81EC258:
-@ replacing .incbin "baserom.gba", 0x001ec258, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC258, 0x4
 Unknown_81EC25C:
-@ replacing .incbin "baserom.gba", 0x001ec25c, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC25C, 0x4
 Unknown_81EC260:
-@ replacing .incbin "baserom.gba", 0x001ec260, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC260, 0x4
 Unknown_81EC264:
-@ replacing .incbin "baserom.gba", 0x001ec264, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC264, 0x4
 Unknown_81EC268:
-@ replacing .incbin "baserom.gba", 0x001ec268, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC268, 0x4
 Unknown_81EC26C:
-@ replacing .incbin "baserom.gba", 0x001ec26c, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC26C, 0x4
 Unknown_81EC270:
-@ replacing .incbin "baserom.gba", 0x001ec270, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC270, 0x4
 Unknown_81EC274:
-@ replacing .incbin "baserom.gba", 0x001ec274, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC274, 0x4
 Unknown_81EC278:
-@ replacing .incbin "baserom.gba", 0x001ec278, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC278, 0x4
 Unknown_81EC27C:
-@ replacing .incbin "baserom.gba", 0x001ec27c, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC27C, 0x4
 Unknown_81EC280:
-@ replacing .incbin "baserom.gba", 0x001ec280, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC280, 0x4
 Unknown_81EC284:
-@ replacing .incbin "baserom.gba", 0x001ec284, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC284, 0x4
 Unknown_81EC288:
-@ replacing .incbin "baserom.gba", 0x001ec288, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC288, 0x4
 Unknown_81EC28C:
-@ replacing .incbin "baserom.gba", 0x001ec28c, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC28C, 0x4
 Unknown_81EC290:
-@ replacing .incbin "baserom.gba", 0x001ec290, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC290, 0x4
 Unknown_81EC294:
-@ replacing .incbin "baserom.gba", 0x001ec294, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC294, 0x4
 Unknown_81EC298:
-@ replacing .incbin "baserom.gba", 0x001ec298, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC298, 0x4
 Unknown_81EC29C:
-@ replacing .incbin "baserom.gba", 0x001ec29c, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC29C, 0x4
 Unknown_81EC2A0:
-@ replacing .incbin "baserom.gba", 0x001ec2a0, 0x4
-.4byte 0x081e7a90
+	.incbin "baserom.gba", 0x001EC2A0, 0x4
 
 	.global gUnknown_081EC2A4
 gUnknown_081EC2A4: @ 81EC2A4
@@ -484,14 +396,11 @@ gUnknown_081EC3F0: @ 81EC3F0
 Unknown_81ECA6C:
 	.incbin "baserom.gba", 0x1ECA6C, 0x48
 Unknown_81ECAB4:
-@ replacing .incbin "baserom.gba", 0x001ecab4, 0x8
-.4byte 0x081e7a98, 0x081eca6c
+	.incbin "baserom.gba", 0x1ECAB4, 0x8
 Unknown_81ECABC:
-@ replacing .incbin "baserom.gba", 0x001ecabc, 0x8
-.4byte 0x081e7a98, 0x081eca84
+	.incbin "baserom.gba", 0x1ECABC, 0x8
 Unknown_81ECAC4:
-@ replacing .incbin "baserom.gba", 0x001ecac4, 0x8
-.4byte 0x081e7a98, 0x081eca9c
+	.incbin "baserom.gba", 0x1ECAC4, 0x8
 
 	.global gUnknown_081ECACC
 gUnknown_081ECACC: @ 81ECACC
@@ -1300,8 +1209,7 @@ gUnknown_0820872C: @ 820872C
 
 	.global gUnknown_082087AC
 gUnknown_082087AC: @ 82087AC
-@ replacing .incbin "baserom.gba", 0x002087ac, 0x18
-.4byte 0x00000000, 0x081e28f8, 0x081e2904, 0x00000000, 0x081e2910, 0x08001211
+	.incbin "baserom.gba", 0x002087ac, 0x18
 
 	.global gUnknown_082087C4
 gUnknown_082087C4: @ 82087C4
@@ -1582,8 +1490,7 @@ gUnknown_0820C12C: @ 820C12C
 
 	.global gUnknown_0820C134
 gUnknown_0820C134: @ 820C134
-@ replacing .incbin "baserom.gba", 0x0020c134, 0x18
-.4byte 0x0929012c, 0x0820c104, 0x0820c11c, 0x00000000, 0x081e2910, 0x08001211
+	.incbin "baserom.gba", 0x0020c134, 0x18
 
 	.global gUnknown_0820C14C
 gUnknown_0820C14C: @ 820C14C
@@ -2060,7 +1967,7 @@ gUnknown_08308588: @ 8308588
 	.global gUnknown_08308E28
 gUnknown_08308E28: @ 8308E28
 @ replacing .incbin "baserom.gba", 0x00308e28, 0x4
-.4byte 0x00000000
+	.space 0x00000004
 
 	.global gUnknown_08308E2C
 gUnknown_08308E2C: @ 8308E2C
@@ -3322,384 +3229,257 @@ gUnknown_08375A34: @ 8375A34
 gUnknown_08375A3A: @ 8375A3A
 	.incbin "baserom.gba", 0x375A3A, 0x6
 Unknown_8375A40:
-@ replacing .incbin "baserom.gba", 0x00375a40, 0xc
-.4byte 0x080613a9, 0x080613d5, 0x08063475
+	.incbin "baserom.gba", 0x375A40, 0xC
 Unknown_8375A4C:
-@ replacing .incbin "baserom.gba", 0x00375a4c, 0xc
-.4byte 0x08061401, 0x0806142d, 0x08063475
+	.incbin "baserom.gba", 0x375A4C, 0xC
 Unknown_8375A58:
-@ replacing .incbin "baserom.gba", 0x00375a58, 0xc
-.4byte 0x08061459, 0x08061485, 0x08063475
+	.incbin "baserom.gba", 0x375A58, 0xC
 Unknown_8375A64:
-@ replacing .incbin "baserom.gba", 0x00375a64, 0xc
-.4byte 0x080614b1, 0x080614dd, 0x08063475
+	.incbin "baserom.gba", 0x375A64, 0xC
 Unknown_8375A70:
-@ replacing .incbin "baserom.gba", 0x00375a70, 0xc
-.4byte 0x0806152d, 0x08061511, 0x08063471
+	.incbin "baserom.gba", 0x375A70, 0xC
 Unknown_8375A7C:
-@ replacing .incbin "baserom.gba", 0x00375a7c, 0xc
-.4byte 0x0806154d, 0x08061511, 0x08063471
+	.incbin "baserom.gba", 0x375A7C, 0xC
 Unknown_8375A88:
-@ replacing .incbin "baserom.gba", 0x00375a88, 0xc
-.4byte 0x0806156d, 0x08061511, 0x08063471
+	.incbin "baserom.gba", 0x375A88, 0xC
 Unknown_8375A94:
-@ replacing .incbin "baserom.gba", 0x00375a94, 0xc
-.4byte 0x0806158d, 0x08061511, 0x08063471
+	.incbin "baserom.gba", 0x375A94, 0xC
 Unknown_8375AA0:
-@ replacing .incbin "baserom.gba", 0x00375aa0, 0xc
-.4byte 0x080615ad, 0x08061511, 0x08063471
+	.incbin "baserom.gba", 0x375AA0, 0xC
 Unknown_8375AAC:
-@ replacing .incbin "baserom.gba", 0x00375aac, 0xc
-.4byte 0x080615cd, 0x080615ed, 0x08063475
+	.incbin "baserom.gba", 0x375AAC, 0xC
 Unknown_8375AB8:
-@ replacing .incbin "baserom.gba", 0x00375ab8, 0xc
-.4byte 0x0806160d, 0x0806162d, 0x08063475
+	.incbin "baserom.gba", 0x375AB8, 0xC
 Unknown_8375AC4:
-@ replacing .incbin "baserom.gba", 0x00375ac4, 0xc
-.4byte 0x0806164d, 0x0806166d, 0x08063475
+	.incbin "baserom.gba", 0x375AC4, 0xC
 Unknown_8375AD0:
-@ replacing .incbin "baserom.gba", 0x00375ad0, 0xc
-.4byte 0x0806168d, 0x080616ad, 0x08063475
+	.incbin "baserom.gba", 0x375AD0, 0xC
 Unknown_8375ADC:
-@ replacing .incbin "baserom.gba", 0x00375adc, 0xc
-.4byte 0x08061779, 0x0806173d, 0x08063475
+	.incbin "baserom.gba", 0x375ADC, 0xC
 Unknown_8375AE8:
-@ replacing .incbin "baserom.gba", 0x00375ae8, 0xc
-.4byte 0x080617b1, 0x0806173d, 0x08063475
+	.incbin "baserom.gba", 0x375AE8, 0xC
 Unknown_8375AF4:
-@ replacing .incbin "baserom.gba", 0x00375af4, 0xc
-.4byte 0x080617e9, 0x0806173d, 0x08063475
+	.incbin "baserom.gba", 0x375AF4, 0xC
 Unknown_8375B00:
-@ replacing .incbin "baserom.gba", 0x00375b00, 0xc
-.4byte 0x08061821, 0x0806173d, 0x08063475
+	.incbin "baserom.gba", 0x375B00, 0xC
 Unknown_8375B0C:
-@ replacing .incbin "baserom.gba", 0x00375b0c, 0xc
-.4byte 0x08061859, 0x08061715, 0x08063475
+	.incbin "baserom.gba", 0x375B0C, 0xC
 Unknown_8375B18:
-@ replacing .incbin "baserom.gba", 0x00375b18, 0xc
-.4byte 0x08061891, 0x08061715, 0x08063475
+	.incbin "baserom.gba", 0x375B18, 0xC
 Unknown_8375B24:
-@ replacing .incbin "baserom.gba", 0x00375b24, 0xc
-.4byte 0x080618c9, 0x08061715, 0x08063475
+	.incbin "baserom.gba", 0x375B24, 0xC
 Unknown_8375B30:
-@ replacing .incbin "baserom.gba", 0x00375b30, 0xc
-.4byte 0x08061901, 0x08061715, 0x08063475
+	.incbin "baserom.gba", 0x375B30, 0xC
 Unknown_8375B3C:
-@ replacing .incbin "baserom.gba", 0x00375b3c, 0xc
-.4byte 0x08061939, 0x08061715, 0x08063475
+	.incbin "baserom.gba", 0x375B3C, 0xC
 Unknown_8375B48:
-@ replacing .incbin "baserom.gba", 0x00375b48, 0xc
-.4byte 0x08061971, 0x08061715, 0x08063475
+	.incbin "baserom.gba", 0x375B48, 0xC
 Unknown_8375B54:
-@ replacing .incbin "baserom.gba", 0x00375b54, 0xc
-.4byte 0x080619a9, 0x08061715, 0x08063475
+	.incbin "baserom.gba", 0x375B54, 0xC
 Unknown_8375B60:
-@ replacing .incbin "baserom.gba", 0x00375b60, 0xc
-.4byte 0x080619e1, 0x08061715, 0x08063475
+	.incbin "baserom.gba", 0x375B60, 0xC
 Unknown_8375B6C:
-@ replacing .incbin "baserom.gba", 0x00375b6c, 0xc
-.4byte 0x08061a19, 0x08061715, 0x08063475
+	.incbin "baserom.gba", 0x375B6C, 0xC
 Unknown_8375B78:
-@ replacing .incbin "baserom.gba", 0x00375b78, 0xc
-.4byte 0x08061a51, 0x08061715, 0x08063475
+	.incbin "baserom.gba", 0x375B78, 0xC
 Unknown_8375B84:
-@ replacing .incbin "baserom.gba", 0x00375b84, 0xc
-.4byte 0x08061a89, 0x08061715, 0x08063475
+	.incbin "baserom.gba", 0x375B84, 0xC
 Unknown_8375B90:
-@ replacing .incbin "baserom.gba", 0x00375b90, 0xc
-.4byte 0x08061ac1, 0x08061715, 0x08063475
+	.incbin "baserom.gba", 0x375B90, 0xC
 Unknown_8375B9C:
-@ replacing .incbin "baserom.gba", 0x00375b9c, 0xc
-.4byte 0x08061af9, 0x08061b19, 0x08063475
+	.incbin "baserom.gba", 0x375B9C, 0xC
 Unknown_8375BA8:
-@ replacing .incbin "baserom.gba", 0x00375ba8, 0xc
-.4byte 0x08061b39, 0x08061b59, 0x08063475
+	.incbin "baserom.gba", 0x375BA8, 0xC
 Unknown_8375BB4:
-@ replacing .incbin "baserom.gba", 0x00375bb4, 0xc
-.4byte 0x08061b79, 0x08061b99, 0x08063475
+	.incbin "baserom.gba", 0x375BB4, 0xC
 Unknown_8375BC0:
-@ replacing .incbin "baserom.gba", 0x00375bc0, 0xc
-.4byte 0x08061bb9, 0x08061bd9, 0x08063475
+	.incbin "baserom.gba", 0x375BC0, 0xC
 Unknown_8375BCC:
-@ replacing .incbin "baserom.gba", 0x00375bcc, 0xc
-.4byte 0x08061bf9, 0x08061c19, 0x08063475
+	.incbin "baserom.gba", 0x375BCC, 0xC
 Unknown_8375BD8:
-@ replacing .incbin "baserom.gba", 0x00375bd8, 0xc
-.4byte 0x08061c39, 0x08061c59, 0x08063475
+	.incbin "baserom.gba", 0x375BD8, 0xC
 Unknown_8375BE4:
-@ replacing .incbin "baserom.gba", 0x00375be4, 0xc
-.4byte 0x08061c79, 0x08061c99, 0x08063475
+	.incbin "baserom.gba", 0x375BE4, 0xC
 Unknown_8375BF0:
-@ replacing .incbin "baserom.gba", 0x00375bf0, 0xc
-.4byte 0x08061cb9, 0x08061cd9, 0x08063475
+	.incbin "baserom.gba", 0x375BF0, 0xC
 Unknown_8375BFC:
-@ replacing .incbin "baserom.gba", 0x00375bfc, 0xc
-.4byte 0x08061cf9, 0x08061d19, 0x08063475
+	.incbin "baserom.gba", 0x375BFC, 0xC
 Unknown_8375C08:
-@ replacing .incbin "baserom.gba", 0x00375c08, 0xc
-.4byte 0x08061d39, 0x08061d59, 0x08063475
+	.incbin "baserom.gba", 0x375C08, 0xC
 Unknown_8375C14:
-@ replacing .incbin "baserom.gba", 0x00375c14, 0xc
-.4byte 0x08061d79, 0x08061d99, 0x08063475
+	.incbin "baserom.gba", 0x375C14, 0xC
 Unknown_8375C20:
-@ replacing .incbin "baserom.gba", 0x00375c20, 0xc
-.4byte 0x08061db9, 0x08061dd9, 0x08063475
+	.incbin "baserom.gba", 0x375C20, 0xC
 Unknown_8375C2C:
-@ replacing .incbin "baserom.gba", 0x00375c2c, 0xc
-.4byte 0x08061df9, 0x08061e19, 0x08063475
+	.incbin "baserom.gba", 0x375C2C, 0xC
 Unknown_8375C38:
-@ replacing .incbin "baserom.gba", 0x00375c38, 0xc
-.4byte 0x08061e39, 0x08061e59, 0x08063475
+	.incbin "baserom.gba", 0x375C38, 0xC
 Unknown_8375C44:
-@ replacing .incbin "baserom.gba", 0x00375c44, 0xc
-.4byte 0x08061e79, 0x08061e99, 0x08063475
+	.incbin "baserom.gba", 0x375C44, 0xC
 Unknown_8375C50:
-@ replacing .incbin "baserom.gba", 0x00375c50, 0xc
-.4byte 0x08061eb9, 0x08061ed9, 0x08063475
+	.incbin "baserom.gba", 0x375C50, 0xC
 Unknown_8375C5C:
-@ replacing .incbin "baserom.gba", 0x00375c5c, 0xc
-.4byte 0x08061f25, 0x08061f3d, 0x08063475
+	.incbin "baserom.gba", 0x375C5C, 0xC
 Unknown_8375C68:
-@ replacing .incbin "baserom.gba", 0x00375c68, 0xc
-.4byte 0x08061f91, 0x08061fb1, 0x08063475
+	.incbin "baserom.gba", 0x375C68, 0xC
 Unknown_8375C74:
-@ replacing .incbin "baserom.gba", 0x00375c74, 0xc
-.4byte 0x08061fd9, 0x08061ff9, 0x08063475
+	.incbin "baserom.gba", 0x375C74, 0xC
 Unknown_8375C80:
-@ replacing .incbin "baserom.gba", 0x00375c80, 0xc
-.4byte 0x08062021, 0x08062041, 0x08063475
+	.incbin "baserom.gba", 0x375C80, 0xC
 Unknown_8375C8C:
-@ replacing .incbin "baserom.gba", 0x00375c8c, 0xc
-.4byte 0x08062069, 0x08062089, 0x08063475
+	.incbin "baserom.gba", 0x375C8C, 0xC
 Unknown_8375C98:
-@ replacing .incbin "baserom.gba", 0x00375c98, 0x8
-.4byte 0x080620b1, 0x08063475
+	.incbin "baserom.gba", 0x375C98, 0x8
 Unknown_8375CA0:
-@ replacing .incbin "baserom.gba", 0x00375ca0, 0x8
-.4byte 0x0806210d, 0x08063475
+	.incbin "baserom.gba", 0x375CA0, 0x8
 Unknown_8375CA8:
-@ replacing .incbin "baserom.gba", 0x00375ca8, 0x8
-.4byte 0x08062171, 0x08063475
+	.incbin "baserom.gba", 0x375CA8, 0x8
 Unknown_8375CB0:
-@ replacing .incbin "baserom.gba", 0x00375cb0, 0x8
-.4byte 0x08062181, 0x08063475
+	.incbin "baserom.gba", 0x375CB0, 0x8
 Unknown_8375CB8:
-@ replacing .incbin "baserom.gba", 0x00375cb8, 0xc
-.4byte 0x08062191, 0x080621bd, 0x08063475
+	.incbin "baserom.gba", 0x375CB8, 0xC
 Unknown_8375CC4:
-@ replacing .incbin "baserom.gba", 0x00375cc4, 0xc
-.4byte 0x080621e9, 0x08062215, 0x08063475
+	.incbin "baserom.gba", 0x375CC4, 0xC
 Unknown_8375CD0:
-@ replacing .incbin "baserom.gba", 0x00375cd0, 0xc
-.4byte 0x08062241, 0x0806226d, 0x08063475
+	.incbin "baserom.gba", 0x375CD0, 0xC
 Unknown_8375CDC:
-@ replacing .incbin "baserom.gba", 0x00375cdc, 0xc
-.4byte 0x08062299, 0x080622c5, 0x08063475
+	.incbin "baserom.gba", 0x375CDC, 0xC
 Unknown_8375CE8:
-@ replacing .incbin "baserom.gba", 0x00375ce8, 0xc
-.4byte 0x080622f1, 0x0806231d, 0x08063475
+	.incbin "baserom.gba", 0x375CE8, 0xC
 Unknown_8375CF4:
-@ replacing .incbin "baserom.gba", 0x00375cf4, 0xc
-.4byte 0x08062349, 0x08062375, 0x08063475
+	.incbin "baserom.gba", 0x375CF4, 0xC
 Unknown_8375D00:
-@ replacing .incbin "baserom.gba", 0x00375d00, 0xc
-.4byte 0x080623a1, 0x080623cd, 0x08063475
+	.incbin "baserom.gba", 0x375D00, 0xC
 Unknown_8375D0C:
-@ replacing .incbin "baserom.gba", 0x00375d0c, 0xc
-.4byte 0x080623f9, 0x08062425, 0x08063475
+	.incbin "baserom.gba", 0x375D0C, 0xC
 Unknown_8375D18:
-@ replacing .incbin "baserom.gba", 0x00375d18, 0xc
-.4byte 0x08062451, 0x0806247d, 0x08063475
+	.incbin "baserom.gba", 0x375D18, 0xC
 Unknown_8375D24:
-@ replacing .incbin "baserom.gba", 0x00375d24, 0xc
-.4byte 0x080624a9, 0x080624d5, 0x08063475
+	.incbin "baserom.gba", 0x375D24, 0xC
 Unknown_8375D30:
-@ replacing .incbin "baserom.gba", 0x00375d30, 0xc
-.4byte 0x08062501, 0x0806252d, 0x08063475
+	.incbin "baserom.gba", 0x375D30, 0xC
 Unknown_8375D3C:
-@ replacing .incbin "baserom.gba", 0x00375d3c, 0xc
-.4byte 0x08062559, 0x08062585, 0x08063475
+	.incbin "baserom.gba", 0x375D3C, 0xC
 Unknown_8375D48:
-@ replacing .incbin "baserom.gba", 0x00375d48, 0x8
-.4byte 0x080625b1, 0x08063475
+	.incbin "baserom.gba", 0x375D48, 0x8
 Unknown_8375D50:
-@ replacing .incbin "baserom.gba", 0x00375d50, 0xc
-.4byte 0x080625c9, 0x08061f3d, 0x08063475
+	.incbin "baserom.gba", 0x375D50, 0xC
 Unknown_8375D5C:
-@ replacing .incbin "baserom.gba", 0x00375d5c, 0x8
-.4byte 0x080625d9, 0x08063471
+	.incbin "baserom.gba", 0x375D5C, 0x8
 Unknown_8375D64:
-@ replacing .incbin "baserom.gba", 0x00375d64, 0x8
-.4byte 0x080625e9, 0x08063471
+	.incbin "baserom.gba", 0x375D64, 0x8
 Unknown_8375D6C:
-@ replacing .incbin "baserom.gba", 0x00375d6c, 0x8
-.4byte 0x080625f9, 0x08063471
+	.incbin "baserom.gba", 0x375D6C, 0x8
 Unknown_8375D74:
-@ replacing .incbin "baserom.gba", 0x00375d74, 0x8
-.4byte 0x08062609, 0x08063471
+	.incbin "baserom.gba", 0x375D74, 0x8
 Unknown_8375D7C:
-@ replacing .incbin "baserom.gba", 0x00375d7c, 0x8
-.4byte 0x08062635, 0x08063471
+	.incbin "baserom.gba", 0x375D7C, 0x8
 Unknown_8375D84:
-@ replacing .incbin "baserom.gba", 0x00375d84, 0x8
-.4byte 0x08062645, 0x08063471
+	.incbin "baserom.gba", 0x375D84, 0x8
 Unknown_8375D8C:
-@ replacing .incbin "baserom.gba", 0x00375d8c, 0x8
-.4byte 0x08062655, 0x08063471
+	.incbin "baserom.gba", 0x375D8C, 0x8
 Unknown_8375D94:
-@ replacing .incbin "baserom.gba", 0x00375d94, 0x8
-.4byte 0x08062679, 0x08063471
+	.incbin "baserom.gba", 0x375D94, 0x8
 Unknown_8375D9C:
-@ replacing .incbin "baserom.gba", 0x00375d9c, 0x8
-.4byte 0x0806269d, 0x08063471
+	.incbin "baserom.gba", 0x375D9C, 0x8
 Unknown_8375DA4:
-@ replacing .incbin "baserom.gba", 0x00375da4, 0xc
-.4byte 0x080626c1, 0x08062705, 0x08063471
+	.incbin "baserom.gba", 0x375DA4, 0xC
 Unknown_8375DB0:
-@ replacing .incbin "baserom.gba", 0x00375db0, 0x10
-.4byte 0x08062725, 0x08062741, 0x08062765, 0x08063471
+	.incbin "baserom.gba", 0x375DB0, 0x10
 Unknown_8375DC0:
-@ replacing .incbin "baserom.gba", 0x00375dc0, 0x10
-.4byte 0x080627a1, 0x080627bd, 0x080627e1, 0x08063471
+	.incbin "baserom.gba", 0x375DC0, 0x10
 Unknown_8375DD0:
-@ replacing .incbin "baserom.gba", 0x00375dd0, 0x8
-.4byte 0x0806281d, 0x08063471
+	.incbin "baserom.gba", 0x375DD0, 0x8
 Unknown_8375DD8:
-@ replacing .incbin "baserom.gba", 0x00375dd8, 0x8
-.4byte 0x0806282d, 0x08063471
+	.incbin "baserom.gba", 0x375DD8, 0x8
 Unknown_8375DE0:
-@ replacing .incbin "baserom.gba", 0x00375de0, 0x8
-.4byte 0x0806283d, 0x08063471
+	.incbin "baserom.gba", 0x375DE0, 0x8
 Unknown_8375DE8:
-@ replacing .incbin "baserom.gba", 0x00375de8, 0x8
-.4byte 0x0806286d, 0x08063471
+	.incbin "baserom.gba", 0x375DE8, 0x8
 Unknown_8375DF0:
-@ replacing .incbin "baserom.gba", 0x00375df0, 0xc
-.4byte 0x0806289d, 0x080628d1, 0x08063475
+	.incbin "baserom.gba", 0x375DF0, 0xC
 Unknown_8375DFC:
-@ replacing .incbin "baserom.gba", 0x00375dfc, 0xc
-.4byte 0x080628fd, 0x08062931, 0x08063475
+	.incbin "baserom.gba", 0x375DFC, 0xC
 Unknown_8375E08:
-@ replacing .incbin "baserom.gba", 0x00375e08, 0x8
-.4byte 0x0806299d, 0x08063475
+	.incbin "baserom.gba", 0x375E08, 0x8
 Unknown_8375E10:
-@ replacing .incbin "baserom.gba", 0x00375e10, 0x8
-.4byte 0x080629ad, 0x08063475
+	.incbin "baserom.gba", 0x375E10, 0x8
 Unknown_8375E18:
-@ replacing .incbin "baserom.gba", 0x00375e18, 0x8
-.4byte 0x080629bd, 0x08063475
+	.incbin "baserom.gba", 0x375E18, 0x8
 Unknown_8375E20:
-@ replacing .incbin "baserom.gba", 0x00375e20, 0x8
-.4byte 0x080629cd, 0x08063475
+	.incbin "baserom.gba", 0x375E20, 0x8
 Unknown_8375E28:
-@ replacing .incbin "baserom.gba", 0x00375e28, 0xc
-.4byte 0x080629dd, 0x08061f3d, 0x08063475
+	.incbin "baserom.gba", 0x375E28, 0xC
 Unknown_8375E34:
-@ replacing .incbin "baserom.gba", 0x00375e34, 0xc
-.4byte 0x08062a01, 0x08061f3d, 0x08063475
+	.incbin "baserom.gba", 0x375E34, 0xC
 Unknown_8375E40:
-@ replacing .incbin "baserom.gba", 0x00375e40, 0xc
-.4byte 0x08062a25, 0x08061f3d, 0x08063475
+	.incbin "baserom.gba", 0x375E40, 0xC
 Unknown_8375E4C:
-@ replacing .incbin "baserom.gba", 0x00375e4c, 0xc
-.4byte 0x08062a49, 0x08061f3d, 0x08063475
+	.incbin "baserom.gba", 0x375E4C, 0xC
 Unknown_8375E58:
-@ replacing .incbin "baserom.gba", 0x00375e58, 0xc
-.4byte 0x08062a6d, 0x08061f3d, 0x08063475
+	.incbin "baserom.gba", 0x375E58, 0xC
 Unknown_8375E64:
-@ replacing .incbin "baserom.gba", 0x00375e64, 0xc
-.4byte 0x08062a91, 0x08061f3d, 0x08063475
+	.incbin "baserom.gba", 0x375E64, 0xC
 Unknown_8375E70:
-@ replacing .incbin "baserom.gba", 0x00375e70, 0xc
-.4byte 0x08062ab5, 0x08061f3d, 0x08063475
+	.incbin "baserom.gba", 0x375E70, 0xC
 Unknown_8375E7C:
-@ replacing .incbin "baserom.gba", 0x00375e7c, 0x3c
-.4byte 0x08062ad9, 0x08061f3d, 0x08063475, 0x08062afd, 0x08061f3d, 0x08063475, 0x08062b21, 0x08061f3d
-.4byte 0x08063475, 0x08062b45, 0x08061f3d, 0x08063475, 0x08062b69, 0x08061f3d, 0x08063475
+	.incbin "baserom.gba", 0x375E7C, 0x3C
 Unknown_8375EB8:
-@ replacing .incbin "baserom.gba", 0x00375eb8, 0xc
-.4byte 0x08062bd1, 0x08062bfd, 0x08063475
+	.incbin "baserom.gba", 0x375EB8, 0xC
 Unknown_8375EC4:
-@ replacing .incbin "baserom.gba", 0x00375ec4, 0xc
-.4byte 0x08062c29, 0x08062c55, 0x08063475
+	.incbin "baserom.gba", 0x375EC4, 0xC
 Unknown_8375ED0:
-@ replacing .incbin "baserom.gba", 0x00375ed0, 0xc
-.4byte 0x08062c81, 0x08062cad, 0x08063475
+	.incbin "baserom.gba", 0x375ED0, 0xC
 Unknown_8375EDC:
-@ replacing .incbin "baserom.gba", 0x00375edc, 0xc
-.4byte 0x08062cd9, 0x08062d05, 0x08063475
+	.incbin "baserom.gba", 0x375EDC, 0xC
 Unknown_8375EE8:
-@ replacing .incbin "baserom.gba", 0x00375ee8, 0xc
-.4byte 0x08062d31, 0x08062d5d, 0x08063475
+	.incbin "baserom.gba", 0x375EE8, 0xC
 Unknown_8375EF4:
-@ replacing .incbin "baserom.gba", 0x00375ef4, 0xc
-.4byte 0x08062d89, 0x08062db5, 0x08063475
+	.incbin "baserom.gba", 0x375EF4, 0xC
 Unknown_8375F00:
-@ replacing .incbin "baserom.gba", 0x00375f00, 0xc
-.4byte 0x08062de1, 0x08062e0d, 0x08063475
+	.incbin "baserom.gba", 0x375F00, 0xC
 Unknown_8375F0C:
-@ replacing .incbin "baserom.gba", 0x00375f0c, 0xc
-.4byte 0x08062e39, 0x08062e65, 0x08063475
+	.incbin "baserom.gba", 0x375F0C, 0xC
 Unknown_8375F18:
-@ replacing .incbin "baserom.gba", 0x00375f18, 0xc
-.4byte 0x08062e91, 0x08062ebd, 0x08063475
+	.incbin "baserom.gba", 0x375F18, 0xC
 Unknown_8375F24:
-@ replacing .incbin "baserom.gba", 0x00375f24, 0xc
-.4byte 0x08062ee9, 0x08062f15, 0x08063475
+	.incbin "baserom.gba", 0x375F24, 0xC
 Unknown_8375F30:
-@ replacing .incbin "baserom.gba", 0x00375f30, 0xc
-.4byte 0x08062f41, 0x08062f6d, 0x08063475
+	.incbin "baserom.gba", 0x375F30, 0xC
 Unknown_8375F3C:
-@ replacing .incbin "baserom.gba", 0x00375f3c, 0xc
-.4byte 0x08062f99, 0x08062fc5, 0x08063475
+	.incbin "baserom.gba", 0x375F3C, 0xC
 Unknown_8375F48:
-@ replacing .incbin "baserom.gba", 0x00375f48, 0xc
-.4byte 0x08062ff1, 0x08061715, 0x08063475
+	.incbin "baserom.gba", 0x375F48, 0xC
 Unknown_8375F54:
-@ replacing .incbin "baserom.gba", 0x00375f54, 0xc
-.4byte 0x08063029, 0x08061715, 0x08063475
+	.incbin "baserom.gba", 0x375F54, 0xC
 Unknown_8375F60:
-@ replacing .incbin "baserom.gba", 0x00375f60, 0xc
-.4byte 0x08063061, 0x08061715, 0x08063475
+	.incbin "baserom.gba", 0x375F60, 0xC
 Unknown_8375F6C:
-@ replacing .incbin "baserom.gba", 0x00375f6c, 0xc
-.4byte 0x08063099, 0x08061715, 0x08063475
+	.incbin "baserom.gba", 0x375F6C, 0xC
 Unknown_8375F78:
-@ replacing .incbin "baserom.gba", 0x00375f78, 0xc
-.4byte 0x08063109, 0x08063129, 0x08063475
+	.incbin "baserom.gba", 0x375F78, 0xC
 Unknown_8375F84:
-@ replacing .incbin "baserom.gba", 0x00375f84, 0xc
-.4byte 0x08063149, 0x08063169, 0x08063475
+	.incbin "baserom.gba", 0x375F84, 0xC
 Unknown_8375F90:
-@ replacing .incbin "baserom.gba", 0x00375f90, 0xc
-.4byte 0x08063189, 0x080631a9, 0x08063475
+	.incbin "baserom.gba", 0x375F90, 0xC
 Unknown_8375F9C:
-@ replacing .incbin "baserom.gba", 0x00375f9c, 0xc
-.4byte 0x080631c9, 0x080631e9, 0x08063475
+	.incbin "baserom.gba", 0x375F9C, 0xC
 Unknown_8375FA8:
-@ replacing .incbin "baserom.gba", 0x00375fa8, 0xc
-.4byte 0x08063239, 0x08063259, 0x08063475
+	.incbin "baserom.gba", 0x375FA8, 0xC
 Unknown_8375FB4:
-@ replacing .incbin "baserom.gba", 0x00375fb4, 0xc
-.4byte 0x08063279, 0x08063299, 0x08063475
+	.incbin "baserom.gba", 0x375FB4, 0xC
 Unknown_8375FC0:
-@ replacing .incbin "baserom.gba", 0x00375fc0, 0xc
-.4byte 0x080632b9, 0x080632d9, 0x08063475
+	.incbin "baserom.gba", 0x375FC0, 0xC
 Unknown_8375FCC:
-@ replacing .incbin "baserom.gba", 0x00375fcc, 0xc
-.4byte 0x080632f9, 0x08063319, 0x08063475
+	.incbin "baserom.gba", 0x375FCC, 0xC
 Unknown_8375FD8:
-@ replacing .incbin "baserom.gba", 0x00375fd8, 0xc
-.4byte 0x08063371, 0x08063391, 0x08063475
+	.incbin "baserom.gba", 0x375FD8, 0xC
 Unknown_8375FE4:
-@ replacing .incbin "baserom.gba", 0x00375fe4, 0xc
-.4byte 0x080633b1, 0x080633d1, 0x08063475
+	.incbin "baserom.gba", 0x375FE4, 0xC
 Unknown_8375FF0:
-@ replacing .incbin "baserom.gba", 0x00375ff0, 0xc
-.4byte 0x080633f1, 0x08063411, 0x08063475
+	.incbin "baserom.gba", 0x375FF0, 0xC
 Unknown_8375FFC:
-@ replacing .incbin "baserom.gba", 0x00375ffc, 0xc
-.4byte 0x08063431, 0x08063451, 0x08063475
+	.incbin "baserom.gba", 0x375FFC, 0xC
 
 	.global gUnknown_08376008
 gUnknown_08376008: @ 8376008
@@ -3914,7 +3694,7 @@ gUnknown_08376290: @ 8376290
 	.global gUnknown_083762D8
 gUnknown_083762D8: @ 83762D8
 @ replacing .incbin "baserom.gba", 0x003762d8, 0x4
-.4byte 0x00000000
+	.space 0x00000004
 
 	.global gUnknown_083762DC
 gUnknown_083762DC: @ 83762DC
@@ -3960,7 +3740,7 @@ gUnknown_083763E4: @ 83763E4
 	.global gUnknown_08376414
 gUnknown_08376414: @ 8376414
 @ replacing .incbin "baserom.gba", 0x00376414, 0x4
-.4byte 0x00000000
+	.space 0x00000004
 
 	.global gUnknown_08376418
 gUnknown_08376418: @ 8376418
@@ -4156,8 +3936,7 @@ gUnknown_0837ABA4: @ 837ABA4
 
 	.global gUnknown_0837ADB4
 gUnknown_0837ADB4: @ 837ADB4
-@ replacing .incbin "baserom.gba", 0x0037adb4, 0x10
-.4byte 0x0837abb4, 0x0837ac34, 0x0837acb4, 0x0837ad34
+	.incbin "baserom.gba", 0x37ADB4, 0x10
 Unknown_837ADC4:
 	.incbin "baserom.gba", 0x37ADC4, 0x100
 Unknown_837AEC4:
@@ -4277,8 +4056,7 @@ gUnknown_0837C93C: @ 837C93C
 
 	.global gUnknown_0837C95C
 gUnknown_0837C95C: @ 837C95C
-@ replacing .incbin "baserom.gba", 0x0037c95c, 0x20
-.4byte 0x0837c51c, 0x0837c59c, 0x0837c61c, 0x0837c69c, 0x0837c71c, 0x0837c79c, 0x0837c81c, 0x0837c89c
+	.incbin "baserom.gba", 0x37C95C, 0x20
 Unknown_837C97C:
 	.incbin "baserom.gba", 0x37C97C, 0x80
 Unknown_837C9FC:
@@ -4324,8 +4102,7 @@ gUnknown_0837D83C: @ 837D83C
 
 	.global gUnknown_0837D84C
 gUnknown_0837D84C: @ 837D84C
-@ replacing .incbin "baserom.gba", 0x0037d84c, 0x8
-.4byte 0x0837d69c, 0x0837d71c
+	.incbin "baserom.gba", 0x37D84C, 0x8
 Unknown_837D854:
 	.incbin "baserom.gba", 0x37D854, 0x200
 Unknown_837DA54:
@@ -5088,7 +4865,7 @@ gUnknown_0837F5A8: @ 837F5A8
 	.global gUnknown_0837F5AC
 gUnknown_0837F5AC: @ 837F5AC
 @ replacing .incbin "baserom.gba", 0x0037f5ac, 0x4
-.4byte 0x00000000
+	.space 0x00000004
 
 	.global gUnknown_0837F5B0
 gUnknown_0837F5B0: @ 837F5B0
@@ -5164,8 +4941,7 @@ gUnknown_08393FD8: @ 8393FD8
 
 	.global gUnknown_08396FA8
 gUnknown_08396FA8: @ 8396FA8
-@ replacing .incbin "baserom.gba", 0x00396fa8, 0x1c
-.4byte 0x08393fe8, 0x0839480c, 0x08395004, 0x083957a0, 0x08395fbc, 0x08396784, 0x02000000
+	.incbin "baserom.gba", 0x00396fa8, 0x1c
 
 	.global gUnknown_08396FC4
 gUnknown_08396FC4: @ 8396FC4
@@ -5626,7 +5402,7 @@ gUnknown_0839F2C4: @ 839F2C4
 	.global gUnknown_0839F2C8
 gUnknown_0839F2C8: @ 839F2C8
 @ replacing .incbin "baserom.gba", 0x0039f2c8, 0x4
-.4byte 0x00000000
+	.space 0x00000004
 
 	.global gUnknown_0839F2CC
 gUnknown_0839F2CC: @ 839F2CC
@@ -5948,7 +5724,7 @@ gUnknown_083A05F8: @ 83A05F8
 	.global gUnknown_083B4EC4
 gUnknown_083B4EC4: @ 83B4EC4
 @ replacing .incbin "baserom.gba", 0x003b4ec4, 0x20
-.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000
+	.space 0x00000020
 
 @ 83B4EE4
 	.include "data/graphics/pokemon/footprint_table.s"
@@ -6014,37 +5790,23 @@ gUnknown_083B58A4: @ 83B58A4
 
 	.global gUnknown_083B58C0
 gUnknown_083B58C0: @ 83B58C0
-@ replacing .incbin "baserom.gba", 0x003b58c0, 0x18
-.4byte 0x0840e2b5, 0x0840e1f0, 0x0840e2cc, 0x0840e1fa, 0x00000000, 0x00000000
+	.incbin "baserom.gba", 0x003b58c0, 0x18
 
 	.global gUnknown_083B58D8
 gUnknown_083B58D8: @ 83B58D8
-@ replacing .incbin "baserom.gba", 0x003b58d8, 0x38
-.4byte 0x0840e2e5, 0x0840e207, 0x0840e313, 0x0840e216, 0x0840e348, 0x0840e222, 0x0840e384, 0x0840e230
-.4byte 0x0840e3c0, 0x0840e23e, 0x0840e3fb, 0x0840e24b, 0x00000000, 0x00000000
+	.incbin "baserom.gba", 0x003b58d8, 0x38
 
 	.global gUnknown_083B5910
 gUnknown_083B5910: @ 83B5910
-@ replacing .incbin "baserom.gba", 0x003b5910, 0x58
-.4byte 0x0840e436, 0x0840e437, 0x0840e436, 0x0840e259, 0x0840e436, 0x0840e25d, 0x0840e436, 0x0840e261
-.4byte 0x0840e436, 0x0840e265, 0x0840e436, 0x0840e269, 0x0840e436, 0x0840e26d, 0x0840e436, 0x0840e271
-.4byte 0x0840e436, 0x0840e275, 0x0840e436, 0x0840e279, 0x00000000, 0x00000000
+	.incbin "baserom.gba", 0x003b5910, 0x58
 
 	.global gUnknown_083B5968
 gUnknown_083B5968: @ 83B5968
-@ replacing .incbin "baserom.gba", 0x003b5968, 0x60
-.4byte 0x0840e436, 0x0840e437, 0x0840e436, 0x0840e27c, 0x0840e436, 0x0840e280, 0x0840e436, 0x0840e285
-.4byte 0x0840e436, 0x0840e28c, 0x0840e436, 0x0840e292, 0x0840e436, 0x0840e298, 0x0840e436, 0x0840e29e
-.4byte 0x0840e436, 0x0840e2a5, 0x0840e436, 0x0840e2aa, 0x0840e436, 0x0840e2b0, 0x00000000, 0x00000000
+	.incbin "baserom.gba", 0x003b5968, 0x60
 
 	.global gUnknown_083B59C8
 gUnknown_083B59C8: @ 83B59C8
-@ replacing .incbin "baserom.gba", 0x003b59c8, 0x98
-.4byte 0x0840e436, 0x0840e446, 0x0840e436, 0x081f9870, 0x0840e436, 0x081f9877, 0x0840e436, 0x081f987e
-.4byte 0x0840e436, 0x081f9885, 0x0840e436, 0x081f988c, 0x0840e436, 0x081f9893, 0x0840e436, 0x081f989a
-.4byte 0x0840e436, 0x081f98a1, 0x0840e436, 0x081f98a8, 0x0840e436, 0x081f98b6, 0x0840e436, 0x081f98bd
-.4byte 0x0840e436, 0x081f98c4, 0x0840e436, 0x081f98cb, 0x0840e436, 0x081f98d2, 0x0840e436, 0x081f98d9
-.4byte 0x0840e436, 0x081f98e0, 0x0840e436, 0x081f98e7, 0x00000000, 0x00000000
+	.incbin "baserom.gba", 0x003b59c8, 0x98
 
 	.global gUnknown_083B5A60
 gUnknown_083B5A60: @ 83B5A60
@@ -6179,8 +5941,7 @@ gUnknown_083B6D94: @ 83B6D94
 
 	.global gUnknown_083B6DB4
 gUnknown_083B6DB4: @ 83B6DB4
-@ replacing .incbin "baserom.gba", 0x003b6db4, 0x4
-.4byte 0x02000000
+	.incbin "baserom.gba", 0x003b6db4, 0x4
 
 	.global gUnknown_083B6DB8
 gUnknown_083B6DB8: @ 83B6DB8
@@ -6468,10 +6229,7 @@ gUnknown_083C1618: @ 83C1618
 
 	.global gUnknown_083C1640
 gUnknown_083C1640: @ 83C1640
-@ replacing .incbin "baserom.gba", 0x003c1640, 0x50
-.4byte 0x0840e612, 0x080a5b79, 0x0840e616, 0x080a5f15, 0x0840e645, 0x080a5f81, 0x0840e61b, 0x080a5fad
-.4byte 0x0840e612, 0x080a70f5, 0x0840e645, 0x080a7125, 0x0840e624, 0x080a60c9, 0x0840e629, 0x080a6179
-.4byte 0x0840e64c, 0x00000000, 0x0840e633, 0x080a69e1
+	.incbin "baserom.gba", 0x003c1640, 0x50
 
 	.global gUnknown_083C1690
 gUnknown_083C1690: @ 83C1690
@@ -6716,8 +6474,7 @@ gUnknown_083C933B: @ 83C933B
 
 	.global gUnknown_083C9364
 gUnknown_083C9364: @ 83C9364
-@ replacing .incbin "baserom.gba", 0x003c9364, 0x18
-.4byte 0x083c9342, 0x083c9348, 0x083c934d, 0x083c9353, 0x083c9358, 0x083c935e
+	.incbin "baserom.gba", 0x3C9364, 0x18
 Unknown_83C937C:
 	.incbin "baserom.gba", 0x3C937C, 0xB
 Unknown_83C9387:
@@ -6788,7 +6545,8 @@ gUnknown_083CA33C: @ 83CA33C
 
 	.global gUnknown_083CA340
 gUnknown_083CA340: @ 83CA340
-	.incbin "baserom.gba", 0x003ca340, 0x1
+@ replacing .incbin "baserom.gba", 0x003ca340, 0x1
+	.space 0x00000001
 
 	.global gUnknown_083CA341
 gUnknown_083CA341: @ 83CA341
@@ -6986,59 +6744,7 @@ gUnknown_083CC738: @ 83CC738
 
 	.global gUnknown_083CD780
 gUnknown_083CD780: @ 83CD780
-@ replacing .incbin "baserom.gba", 0x003cd780, 0x680
-.4byte 0x00000000, 0x00000000, 0x084101d4, 0x00000000, 0x084101de, 0x00000000, 0x0840e645, 0x00000000
-.4byte 0x08410204, 0x00000000, 0x0841020a, 0x00000000, 0x0840e645, 0x00000000, 0x0841020f, 0x00000000
-.4byte 0x08410221, 0x00000000, 0x08410233, 0x00000000, 0x0840e645, 0x00000000, 0x08410241, 0x00000000
-.4byte 0x0841024e, 0x00000000, 0x0841025d, 0x00000000, 0x0841026a, 0x00000000, 0x08410278, 0x00000000
-.4byte 0x0840e645, 0x00000000, 0x08410286, 0x00000000, 0x08410291, 0x00000000, 0x0841029f, 0x00000000
-.4byte 0x0840e645, 0x00000000, 0x08410286, 0x00000000, 0x08410291, 0x00000000, 0x0840e645, 0x00000000
-.4byte 0x0840e61b, 0x00000000, 0x0841029f, 0x00000000, 0x084102a8, 0x00000000, 0x0840e645, 0x00000000
-.4byte 0x084102b4, 0x00000000, 0x084102b9, 0x00000000, 0x084102be, 0x00000000, 0x084102c2, 0x00000000
-.4byte 0x084102c6, 0x00000000, 0x084102ca, 0x00000000, 0x084102ce, 0x00000000, 0x0840e645, 0x00000000
-.4byte 0x084101fc, 0x00000000, 0x0840e645, 0x00000000, 0x084102d7, 0x00000000, 0x084102de, 0x00000000
-.4byte 0x084102e6, 0x00000000, 0x084102ea, 0x00000000, 0x0841020a, 0x00000000, 0x084102f2, 0x00000000
-.4byte 0x08410300, 0x00000000, 0x0841030e, 0x00000000, 0x0840e645, 0x00000000, 0x084101e8, 0x00000000
-.4byte 0x084101de, 0x00000000, 0x084101f3, 0x00000000, 0x084102e6, 0x00000000, 0x084102ea, 0x00000000
-.4byte 0x0841020a, 0x00000000, 0x08410326, 0x00000000, 0x08410338, 0x00000000, 0x0840e645, 0x00000000
-.4byte 0x0841034c, 0x00000000, 0x08410353, 0x00000000, 0x0840e645, 0x00000000, 0x0841035b, 0x00000000
-.4byte 0x08410365, 0x00000000, 0x0841036d, 0x00000000, 0x08410377, 0x00000000, 0x0841037f, 0x00000000
-.4byte 0x08410385, 0x00000000, 0x0841038d, 0x00000000, 0x08410397, 0x00000000, 0x0841039f, 0x00000000
-.4byte 0x084103a7, 0x00000000, 0x084103af, 0x00000000, 0x084103b7, 0x00000000, 0x084103be, 0x00000000
-.4byte 0x084103c5, 0x00000000, 0x084103cf, 0x00000000, 0x084103d6, 0x00000000, 0x084103e0, 0x00000000
-.4byte 0x084103ea, 0x00000000, 0x084103f2, 0x00000000, 0x084103fc, 0x00000000, 0x08410409, 0x00000000
-.4byte 0x08410414, 0x00000000, 0x08410419, 0x00000000, 0x0841041e, 0x00000000, 0x08410423, 0x00000000
-.4byte 0x08410438, 0x00000000, 0x0841044d, 0x00000000, 0x08410458, 0x00000000, 0x0841045a, 0x00000000
-.4byte 0x0841045c, 0x00000000, 0x08410464, 0x00000000, 0x0841046a, 0x00000000, 0x08410472, 0x00000000
-.4byte 0x0841047e, 0x00000000, 0x08410483, 0x00000000, 0x0841048a, 0x00000000, 0x08410495, 0x00000000
-.4byte 0x08410497, 0x00000000, 0x08410499, 0x00000000, 0x0841049c, 0x00000000, 0x0841049e, 0x00000000
-.4byte 0x084104a0, 0x00000000, 0x084104a2, 0x00000000, 0x084104a4, 0x00000000, 0x084104a6, 0x00000000
-.4byte 0x084104a8, 0x00000000, 0x084104bb, 0x00000000, 0x084104cb, 0x00000000, 0x0840e645, 0x00000000
-.4byte 0x084104db, 0x00000000, 0x084104e7, 0x00000000, 0x084104f3, 0x00000000, 0x0840e645, 0x00000000
-.4byte 0x08410500, 0x00000000, 0x08410509, 0x00000000, 0x08410514, 0x00000000, 0x0840e645, 0x00000000
-.4byte 0x0841051c, 0x00000000, 0x08410526, 0x00000000, 0x08410533, 0x00000000, 0x08410540, 0x00000000
-.4byte 0x0840e645, 0x00000000, 0x0841054d, 0x00000000, 0x08410558, 0x00000000, 0x08410565, 0x00000000
-.4byte 0x0841056f, 0x00000000, 0x0841057b, 0x00000000, 0x08410587, 0x00000000, 0x08410593, 0x00000000
-.4byte 0x0840e645, 0x00000000, 0x0841059e, 0x00000000, 0x084105b7, 0x00000000, 0x084105d0, 0x00000000
-.4byte 0x0840e645, 0x00000000, 0x0841066e, 0x00000000, 0x08410680, 0x00000000, 0x08410692, 0x00000000
-.4byte 0x084106a4, 0x00000000, 0x084106b6, 0x00000000, 0x0840e645, 0x00000000, 0x084105ea, 0x00000000
-.4byte 0x084105ff, 0x00000000, 0x0840e645, 0x00000000, 0x08410612, 0x00000000, 0x0841061d, 0x00000000
-.4byte 0x084101f3, 0x00000000, 0x08410656, 0x00000000, 0x0840e645, 0x00000000, 0x084101de, 0x00000000
-.4byte 0x084101f3, 0x00000000, 0x0840e645, 0x00000000, 0x08410663, 0x00000000, 0x08410669, 0x00000000
-.4byte 0x084101de, 0x00000000, 0x08410656, 0x00000000, 0x0840e645, 0x00000000, 0x084106c8, 0x00000000
-.4byte 0x084106cb, 0x00000000, 0x084106ce, 0x00000000, 0x084106d1, 0x00000000, 0x084106d4, 0x00000000
-.4byte 0x08410628, 0x00000000, 0x0840e645, 0x00000000, 0x08410632, 0x00000000, 0x0840e645, 0x00000000
-.4byte 0x08410628, 0x00000000, 0x08410632, 0x00000000, 0x0840e645, 0x00000000, 0x0841063f, 0x00000000
-.4byte 0x0840e645, 0x00000000, 0x08410628, 0x00000000, 0x0841063f, 0x00000000, 0x0840e645, 0x00000000
-.4byte 0x08410632, 0x00000000, 0x0841063f, 0x00000000, 0x0840e645, 0x00000000, 0x08410628, 0x00000000
-.4byte 0x08410632, 0x00000000, 0x0841063f, 0x00000000, 0x0840e645, 0x00000000, 0x0841064a, 0x00000000
-.4byte 0x0840e645, 0x00000000, 0x08410628, 0x00000000, 0x0841064a, 0x00000000, 0x0840e645, 0x00000000
-.4byte 0x08410632, 0x00000000, 0x0841064a, 0x00000000, 0x0840e645, 0x00000000, 0x08410628, 0x00000000
-.4byte 0x08410632, 0x00000000, 0x0841064a, 0x00000000, 0x0840e645, 0x00000000, 0x0841063f, 0x00000000
-.4byte 0x0841064a, 0x00000000, 0x0840e645, 0x00000000, 0x08410628, 0x00000000, 0x0841063f, 0x00000000
-.4byte 0x0841064a, 0x00000000, 0x0840e645, 0x00000000, 0x08410632, 0x00000000, 0x0841063f, 0x00000000
-.4byte 0x0841064a, 0x00000000, 0x0840e645, 0x00000000, 0x08410628, 0x00000000, 0x08410632, 0x00000000
-.4byte 0x0841063f, 0x00000000, 0x0841064a, 0x00000000, 0x0840e645, 0x00000000, 0x0840e645, 0x00000000
+	.incbin "baserom.gba", 0x003cd780, 0x680
 
 	.global gUnknown_083CDE00
 gUnknown_083CDE00: @ 83CDE00
@@ -7546,18 +7252,15 @@ gUnknown_083D13F8: @ 83D13F8
 
 	.global gUnknown_083D1434
 gUnknown_083D1434: @ 83D1434
-@ replacing .incbin "baserom.gba", 0x003d1434, 0x10
-.4byte 0x00000000, 0x081ad135, 0x081ad5b0, 0x081ad8b4
+	.incbin "baserom.gba", 0x003d1434, 0x10
 
 	.global gUnknown_083D1444
 gUnknown_083D1444: @ 83D1444
-@ replacing .incbin "baserom.gba", 0x003d1444, 0x10
-.4byte 0x00000000, 0x081ad2e0, 0x081ad6ae, 0x081ad9d3
+	.incbin "baserom.gba", 0x003d1444, 0x10
 
 	.global gUnknown_083D1454
 gUnknown_083D1454: @ 83D1454
-@ replacing .incbin "baserom.gba", 0x003d1454, 0x10
-.4byte 0x00000000, 0x081ad434, 0x081ad7a7, 0x081adb01
+	.incbin "baserom.gba", 0x003d1454, 0x10
 
 	.global gUnknown_083D1464
 gUnknown_083D1464: @ 83D1464
@@ -7779,13 +7482,11 @@ gUnknown_083D1898: @ 83D1898
 
 	.global gUnknown_083D18A0
 gUnknown_083D18A0: @ 83D18A0
-@ replacing .incbin "baserom.gba", 0x003d18a0, 0x8
-.4byte 0x083d18ec, 0x00000000
+	.incbin "baserom.gba", 0x003d18a0, 0x8
 
 	.global gUnknown_083D18A8
 gUnknown_083D18A8: @ 83D18A8
-@ replacing .incbin "baserom.gba", 0x003d18a8, 0x18
-.4byte 0x00000000, 0x083d18d8, 0x083d18e8, 0x00000000, 0x081e2910, 0x080c60cd
+	.incbin "baserom.gba", 0x003d18a8, 0x18
 
 	.global gUnknown_083D18C0
 gUnknown_083D18C0: @ 83D18C0
@@ -8392,8 +8093,7 @@ gUnknown_083DBEAC: @ 83DBEAC
 
 	.global gUnknown_083DFEC4
 gUnknown_083DFEC4: @ 83DFEC4
-@ replacing .incbin "baserom.gba", 0x003dfec4, 0x4
-.4byte 0x02000000
+	.incbin "baserom.gba", 0x003dfec4, 0x4
 
 	.global gUnknown_083DFEC8
 gUnknown_083DFEC8: @ 83DFEC8
@@ -8531,11 +8231,7 @@ gUnknown_083E31D8: @ 83E31D8
 
 	.global gUnknown_083E31F0
 gUnknown_083E31F0: @ 83E31F0
-@ replacing .incbin "baserom.gba", 0x003e31f0, 0x80
-.4byte 0x083e0d5c, 0x00000000, 0x083e0c88, 0x00000000, 0x083e0d8c, 0x00000000, 0x083e096c, 0x00000000
-.4byte 0x083e09b0, 0x00000000, 0x083e0e90, 0x00000000, 0x083e0b9c, 0x00000000, 0x083e0f6c, 0x00000000
-.4byte 0x083e0a48, 0x083e0aa8, 0x083e0c34, 0x083e0bdc, 0x083e0af4, 0x083e0b48, 0x083e09f8, 0x00000000
-.4byte 0x083e0d04, 0x083e0cb8, 0x083e0f10, 0x083e0ec8, 0x083e0dc4, 0x00000000, 0x083e0e04, 0x083e0e4c
+	.incbin "baserom.gba", 0x003e31f0, 0x80
 
 	.global gUnknown_083E3270
 gUnknown_083E3270: @ 83E3270
@@ -8566,8 +8262,7 @@ gUnknown_083E4450: @ 83E4450
 
 	.global gUnknown_083E4454
 gUnknown_083E4454: @ 83E4454
-@ replacing .incbin "baserom.gba", 0x003e4454, 0x18
-.4byte 0x00000000, 0x083e4318, 0x083e43e0, 0x00000000, 0x081e2910, 0x08001211
+	.incbin "baserom.gba", 0x003e4454, 0x18
 
 	.global gUnknown_083E446C
 gUnknown_083E446C: @ 83E446C
@@ -8716,7 +8411,7 @@ gUnknown_083E5214: @ 83E5214
 	.global gUnknown_083E521C
 gUnknown_083E521C: @ 83E521C
 @ replacing .incbin "baserom.gba", 0x003e521c, 0x8
-.4byte 0x00000000, 0x00000000
+	.space 0x00000008
 Unknown_83E5224:
 	.incbin "baserom.gba", 0x3E5224, 0x8
 Unknown_83E522C:
@@ -8951,13 +8646,11 @@ gUnknown_083E7684: @ 83E7684
 
 	.global gUnknown_083E76E8
 gUnknown_083E76E8: @ 83E76E8
-@ replacing .incbin "baserom.gba", 0x003e76e8, 0x8
-.4byte 0x083e5ad0, 0x00000000
+	.incbin "baserom.gba", 0x003e76e8, 0x8
 
 	.global gUnknown_083E76F0
 gUnknown_083E76F0: @ 83E76F0
-@ replacing .incbin "baserom.gba", 0x003e76f0, 0x18
-.4byte 0x00000000, 0x083e76b8, 0x083e76e0, 0x00000000, 0x081e2910, 0x080fbaf1
+	.incbin "baserom.gba", 0x003e76f0, 0x18
 
 	.global gUnknown_083E7708
 gUnknown_083E7708: @ 83E7708
@@ -8992,8 +8685,7 @@ gUnknown_083E7920: @ 83E7920
 
 	.global gUnknown_083E79C0
 gUnknown_083E79C0: @ 83E79C0
-@ replacing .incbin "baserom.gba", 0x003e79c0, 0xc
-.4byte 0x083e79b8, 0x0854000f, 0x02000000
+	.incbin "baserom.gba", 0x003e79c0, 0xc
 
 	.global gUnknown_083E79CC
 gUnknown_083E79CC: @ 83E79CC
@@ -9013,7 +8705,8 @@ gUnknown_083E7A50: @ 83E7A50
 
 	.global gUnknown_083EB6C4
 gUnknown_083EB6C4: @ 83EB6C4
-	.incbin "baserom.gba", 0x003eb6c4, 0x1
+@ replacing .incbin "baserom.gba", 0x003eb6c4, 0x1
+	.space 0x00000001
 
 	.global gUnknown_083EB6C5
 gUnknown_083EB6C5: @ 83EB6C5
@@ -9135,8 +8828,7 @@ gUnknown_083ECA88: @ 83ECA88
 
 	.global gUnknown_083ECAA0
 gUnknown_083ECAA0: @ 83ECAA0
-@ replacing .incbin "baserom.gba", 0x003ecaa0, 0xc
-.4byte 0x08101849, 0x080fed3d, 0x02000000
+	.incbin "baserom.gba", 0x003ecaa0, 0xc
 
 	.global gUnknown_083ECAAC
 gUnknown_083ECAAC: @ 83ECAAC
@@ -9411,12 +9103,7 @@ gUnknown_083ECE7E: @ 83ECE7E
 
 	.global gUnknown_083ECF0C
 gUnknown_083ECF0C: @ 83ECF0C
-@ replacing .incbin "baserom.gba", 0x003ecf0c, 0x8c
-.4byte 0x08105c65, 0x08105f55, 0x08105f55, 0x08105f55, 0x08105f55, 0x08105f9d, 0x08105eb5, 0x08105c65
-.4byte 0x08105c65, 0x08105c6d, 0x08105cf1, 0x08105d09, 0x08105d21, 0x08105d3d, 0x08105da5, 0x08105e09
-.4byte 0x08105c65, 0x08106059, 0x081060fd, 0x081060fd, 0x081060fd, 0x081060fd, 0x081060fd, 0x081060fd
-.4byte 0x081060fd, 0x081060fd, 0x081061c9, 0x081061c9, 0x081061c9, 0x081061c9, 0x081061c9, 0x081061c9
-.4byte 0x081061c9, 0x081061c9, 0x08106231
+	.incbin "baserom.gba", 0x3ECF0C, 0x8C
 Unknown_83ECF98:
 	.incbin "baserom.gba", 0x3ECF98, 0x10
 Unknown_83ECFA8:
@@ -9448,8 +9135,7 @@ gUnknown_083ED064: @ 83ED064
 
 	.global gUnknown_083ED414
 gUnknown_083ED414: @ 83ED414
-@ replacing .incbin "baserom.gba", 0x003ed414, 0x18
-.4byte 0x00000000, 0x083ed0a0, 0x083ed32c, 0x00000000, 0x081e2910, 0x08104f19
+	.incbin "baserom.gba", 0x003ed414, 0x18
 
 	.global gUnknown_083ED42C
 gUnknown_083ED42C: @ 83ED42C
@@ -9594,11 +9280,7 @@ gUnknown_083EDB5C: @ 83EDB5C
 
 	.global gUnknown_083EDBC4
 gUnknown_083EDBC4: @ 83EDBC4
-@ replacing .incbin "baserom.gba", 0x003edbc4, 0x68
-.4byte 0x083ed804, 0x083ed82c, 0x083ed854, 0x083ed8b4, 0x00000000, 0x00000000, 0x083ed8cc, 0x00000000
-.4byte 0x083ed93c, 0x083ed95c, 0x083ed974, 0x083ed98c, 0x083ed9a4, 0x083ed9bc, 0x083ed9d4, 0x083ed9ec
-.4byte 0x083eda04, 0x083eda1c, 0x083eda34, 0x083eda6c, 0x083eda8c, 0x083edac4, 0x083edafc, 0x083edb1c
-.4byte 0x083edb54, 0x00000000
+	.incbin "baserom.gba", 0x003edbc4, 0x68
 
 	.global gUnknown_083EDC2C
 gUnknown_083EDC2C: @ 83EDC2C
@@ -9801,7 +9483,7 @@ gUnknown_083F6138: @ 83F6138
 	.global gUnknown_083F6140
 gUnknown_083F6140: @ 83F6140
 @ replacing .incbin "baserom.gba", 0x003f6140, 0x4
-.4byte 0x00000000
+	.space 0x00000004
 
 	.global gUnknown_083F6144
 gUnknown_083F6144: @ 83F6144
@@ -10026,9 +9708,7 @@ gUnknown_083F7EA8: @ 83F7EA8
 
 	.global gUnknown_083F7EB8
 gUnknown_083F7EB8: @ 83F7EB8
-@ replacing .incbin "baserom.gba", 0x003f7eb8, 0x3c
-.4byte 0x00000000, 0x0840eb45, 0x0840eb4f, 0x0840eb5a, 0x0840eb65, 0x0840eb71, 0x0840eb7e, 0x0840eb8b
-.4byte 0x0840eb98, 0x0840eba4, 0x0840ebb3, 0x0840ebbf, 0x0840ebca, 0x0840ebd6, 0x0840ebe2
+	.incbin "baserom.gba", 0x003f7eb8, 0x3c
 
 	.global gUnknown_083F7EF4
 gUnknown_083F7EF4: @ 83F7EF4
@@ -10093,7 +9773,7 @@ gUnknown_083F804C: @ 83F804C
 	.global gUnknown_083F806C
 gUnknown_083F806C: @ 83F806C
 @ replacing .incbin "baserom.gba", 0x003f806c, 0x20
-.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000
+	.space 0x00000020
 
 	.global gUnknown_083F808C
 gUnknown_083F808C: @ 83F808C
@@ -11230,8 +10910,7 @@ gUnknown_08406148: @ 8406148
 
 	.global gUnknown_08406150
 gUnknown_08406150: @ 8406150
-@ replacing .incbin "baserom.gba", 0x00406150, 0x8
-.4byte 0x08405ef8, 0x00000000
+	.incbin "baserom.gba", 0x00406150, 0x8
 
 	.global gUnknown_08406158
 gUnknown_08406158: @ 8406158
@@ -11239,8 +10918,7 @@ gUnknown_08406158: @ 8406158
 
 	.global gUnknown_0840618C
 gUnknown_0840618C: @ 840618C
-@ replacing .incbin "baserom.gba", 0x0040618c, 0x18
-.4byte 0x00000000, 0x0840616c, 0x08406184, 0x00000000, 0x081e2910, 0x08001211
+	.incbin "baserom.gba", 0x0040618c, 0x18
 
 	.global gUnknown_084061A4
 gUnknown_084061A4: @ 84061A4
@@ -11618,8 +11296,7 @@ gUnknown_0840B57C: @ 840B57C
 	.global gUnknown_0840B5A0
 gUnknown_0840B5A0: @ 840B5A0
 Unknown_840B5A0:
-@ replacing .incbin "baserom.gba", 0x0040b5a0, 0x1c
-.4byte 0x02008000, 0x0200a000, 0x0200c000, 0x0200e000, 0x02010000, 0x02014000, 0x02018000
+	.incbin "baserom.gba", 0x0040b5a0, 0x1C
 Unknown_840B5BC:
 	.incbin "baserom.gba", 0x0040b5bc, 0x20
 Unknown_840B5DC:
