@@ -1487,3 +1487,18 @@
 	jumpeq \dest
 	.endm
 
+	.macro msgbox text, type=4
+	loadptr 0, \text
+	callstd \type
+	.endm
+
+	.macro giveitem item, amount=1, function=0
+	setorcopyvar 0x8000, \item
+	setorcopyvar 0x8001, \amount
+	callstd \function
+	.endm
+
+	.macro givedecoration decoration
+	setorcopyvar 0x8000, \decoration
+	callstd 7
+	.endm
