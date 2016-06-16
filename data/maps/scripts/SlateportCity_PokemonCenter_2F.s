@@ -1,0 +1,18 @@
+SlateportCity_PokemonCenter_2F_MapScripts:: @ 81563EE
+	map_script 2, SlateportCity_PokemonCenter_2F_MapScript2_1A3D88
+	map_script 4, SlateportCity_PokemonCenter_2F_MapScript2_1A3D03
+	map_script 1, SlateportCity_PokemonCenter_2F_MapScript1_1A3D32
+	.byte 0
+
+SlateportCity_PokemonCenter_2F_EventScript_1563FE:: @ 81563FE
+	call SlateportCity_PokemonCenter_2F_EventScript_1A3EA6
+	end
+
+SlateportCity_PokemonCenter_2F_EventScript_156404:: @ 8156404
+	call SlateportCity_PokemonCenter_2F_EventScript_1A40CC
+	end
+
+SlateportCity_PokemonCenter_2F_EventScript_15640A:: @ 815640A
+	call SlateportCity_PokemonCenter_2F_EventScript_1A41FB
+	end
+
