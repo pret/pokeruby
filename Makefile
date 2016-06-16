@@ -85,7 +85,7 @@ src/m4a_4.o: CC1 := tools/agbcc/bin/old_agbcc
 $(C_OBJS): %.o : %.c
 	@$(CPP) $(CPPFLAGS) $< -o $*.i
 	@$(PREPROC) $*.i charmap.txt | $(CC1) $(CFLAGS) -o $*.s
-	@echo -e ".text\n\t.align\t2, 0\n" >> $*.s
+	@bash -c 'echo -e ".text\n\t.align\t2, 0\n"' >> $*.s
 	$(AS) $(ASFLAGS) -o $@ $*.s
 
 %.o : dep = $(shell $(SCANINC) $*.s)
