@@ -42,21 +42,30 @@ DATA_ASM_OBJS := data/data1.o data/data2.o data/graphics.o data/sound_data.o
 
 OBJS := $(C_OBJS) $(ASM_OBJS) $(DATA_ASM_OBJS)
 
-ROM := pokeruby.gba
-ELF := $(ROM:.gba=.elf)
-
-all:
+ruby:
 	$(MAKE) generated
-	$(MAKE) rom
+	$(MAKE) ruby_rom
 
-rom: $(ROM)
+ruby_rom: ROM := pokeruby.gba
+ruby_rom: ELF := pokeruby.elf
+ruby_rom: pokeruby.gba
+
+sapphire:
+	$(MAKE) generated
+	$(MAKE) sapphire_rom
+
+sapphire_rom: ROM := pokesapphire.gba
+sapphire_rom: ELF := pokesapphire.elf
+sapphire_rom: ASFLAGS += --defsym SAPPHIRE=1
+sapphire_rom: CPPFLAGS += -DSAPPHIRE
+sapphire_rom: pokesapphire.gba
 
 # For contributors to make sure a change didn't affect the contents of the ROM.
-compare: all
+compare: ruby
 	@$(SHA1) rom.sha1
 
 clean:
-	rm -f $(ROM) $(ELF) $(OBJS) $(C_SRCS:%.c=%.i)
+	rm -f pokeruby.gba pokesapphire.gba $(ELF) $(OBJS) $(C_SRCS:%.c=%.i)
 	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' \) -exec rm {} +
 
 include castform.mk
@@ -97,6 +106,6 @@ $(DATA_ASM_OBJS): %.o: %.s $$(dep)
 	$(PREPROC) $< charmap.txt | $(AS) $(ASFLAGS) -o $@
 
 # Link objects to produce the ROM.
-$(ROM): $(OBJS)
+pokeruby.gba pokesapphire.gba: $(OBJS)
 	$(LD) $(LDFLAGS) -o $(ELF) $(OBJS) $(LIBGCC)
 	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0x9000000 $(ELF) $(ROM)
