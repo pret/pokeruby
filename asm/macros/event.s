@@ -212,18 +212,18 @@
 	.4byte \b
 	.endm
 
-	@ Compares the value of a to a fixed word value (b).
-	.macro compare a, b
+	@ Compares the value of `var` to a fixed word value (b).
+	.macro compare var, value
 	.byte 0x21
-	.2byte \a
-	.2byte \b
+	.2byte \var
+	.2byte \value
 	.endm
 
-	@ Compares the value of a to the value of b.
-	.macro comparevars a, b
+	@ Compares the value of `var` to the value of `var2`.
+	.macro comparevars var1, var2
 	.byte 0x22
-	.2byte \a
-	.2byte \b
+	.2byte \var1
+	.2byte \var2
 	.endm
 
 	@ Calls the ASM routine stored at code. Script execution is blocked until the ASM returns (bx lr, mov pc, lr, etc.). Remember to add 1 to the offset when calling THUMB code.
@@ -238,7 +238,7 @@
 	.4byte \asm_pointer
 	.endm
 
-	@ Calls a special function@ that is, a piece of ASM code designed for use by scripts and listed in a table of pointers.
+	@ Calls a special function; that is, a piece of ASM code designed for use by scripts and listed in a table of pointers.
 	.macro special function
 	.byte 0x25
 	.2byte \function
@@ -354,60 +354,81 @@
 	.endm
 
 	@ Sends the player to Warp warp on Map bank.map. If the specified warp is 0xFF, then the player will instead be sent to (X, Y) on the map.
-	.macro warp bank, map, warp, X, Y
+	.macro warp map, warp, X, Y
 	.byte 0x39
-	.byte \bank
-	.byte \map
+	map \map
 	.byte \warp
 	.2byte \X
 	.2byte \Y
 	.endm
 
 	@ Clone of warp that does not play a sound effect.
-	.macro warpmuted
+	.macro warpmuted map, warp, X, Y
 	.byte 0x3a
+	map \map
+	.byte \warp
+	.2byte \X
+	.2byte \Y
 	.endm
 
 	@ Clone of warp that uses "a walking effect".
-	.macro warpwalk
+	.macro warpwalk map, warp, X, Y
 	.byte 0x3b
+	map \map
+	.byte \warp
+	.2byte \X
+	.2byte \Y
 	.endm
 
 	@ Warps the player to another map using a hole animation.
-	.macro warphole bank, map
+	.macro warphole map
 	.byte 0x3c
-	.byte \bank
-	.byte \map
+	map \map
 	.endm
 
 	@ Clone of warp that uses a teleport effect. It is apparently only used in R/S/E.[source]
-	.macro warpteleport
+	.macro warpteleport map, warp, X, Y
 	.byte 0x3d
+	map \map
+	.byte \warp
+	.2byte \X
+	.2byte \Y
 	.endm
 
 	@ Clone of warp. Used by an (unused?) Safari Zone script to return the player to the gatehouse and end the Safari Game.
-	.macro warp3
+	.macro warp3 map, warp, X, Y
 	.byte 0x3e
+	map \map
+	.byte \warp
+	.2byte \X
+	.2byte \Y
 	.endm
 
 	@ Sets a default warp place. If a warp tries to send the player to Warp 127 on Map 127.127, they will instead be sent here. Useful when a map has warps that need to go to script-controlled locations (i.e. elevators).
-	.macro warpplace bank, map, warp, X, Y
+	.macro warpplace map, warp, X, Y
 	.byte 0x3f
-	.byte \bank
-	.byte \map
+	map \map
 	.byte \warp
 	.2byte \X
 	.2byte \Y
 	.endm
 
 	@ Clone of warp3, except that this writes data to different offsets...
-	.macro warp4
+	.macro warp4 map, warp, X, Y
 	.byte 0x40
+	map \map
+	.byte \warp
+	.2byte \X
+	.2byte \Y
 	.endm
 
 	@ Clone of warp3, except that this writes data to different offsets...
-	.macro warp5
+	.macro warp5 map, warp, X, Y
 	.byte 0x41
+	map \map
+	.byte \warp
+	.2byte \X
+	.2byte \Y
 	.endm
 
 	@ Retrieves the player's zero-indexed X- and Y-coordinates in the map, and stores them in the specified variables.
@@ -422,7 +443,7 @@
 	.byte 0x43
 	.endm
 
-	@ Attempts to add quantity of item index to the player's Bag. If the player has enough room, the item will be added and variable 0x800D (LASTRESULT) will be set to 0x0001@ otherwise, LASTRESULT is set to 0x0000.
+	@ Attempts to add quantity of item index to the player's Bag. If the player has enough room, the item will be added and variable 0x800D (LASTRESULT) will be set to 0x0001; otherwise, LASTRESULT is set to 0x0000.
 	.macro additem index, quantity
 	.byte 0x44
 	.2byte \index
@@ -503,10 +524,12 @@
 
 	@ Apparent clone of applymovement. Oddly, it doesn't seem to work at all if applied to any Person other than the player (0xFF), and the X and Y arguments don't seem to do anything.
 	@ This command in fact uses variables to access the Person event ID. So, for example, if you setvar 0x8000 to 0x3, and then use applymovementpos 0x8000 @move1, Person event 3 will have the movements at @move1 applied to them. Thank you Shiny Quagsire for bringing this to my attention.
-	.macro movecoords variable, movements
+	.macro movecoords variable, movements, x, y
 	.byte 0x50
 	.2byte \variable
 	.4byte \movements
+	.byte \x
+	.byte \y
 	.endm
 
 	@ Blocks script execution until the movements being applied to the specified (index) Person event finish. If the specified Person event is 0x0000, then the command will block script execution until all Person events affected by applymovement finish their movements. If the specified Person event is not currently being manipulated with applymovement, then this command does nothing.
@@ -582,16 +605,48 @@
 	.endm
 
 	@ If the Trainer flag for Trainer index is not set, this command does absolutely nothing.
-	.macro trainerbattle byte, word1, word2, pointer1, pointer2, pointer3, pointer4
+	.macro trainerbattle type, trainer, word, pointer1, pointer2, pointer3, pointer4
 	.byte 0x5c
-	.byte \byte
-	.2byte \word1
-	.2byte \word2
-	.4byte \pointer1
-	.4byte \pointer2
-	.4byte \pointer3
-	.4byte \pointer4
+	.byte \type
+	.2byte \trainer
+	.2byte \word
+	.if \type == 0
+		.4byte \pointer1 @ text
+		.4byte \pointer2 @ text
+	.elseif \type == 1
+		.4byte \pointer1 @ text
+		.4byte \pointer2 @ text
+		.4byte \pointer3 @ event script
+	.elseif \type == 2
+		.4byte \pointer1 @ text
+		.4byte \pointer2 @ text
+		.4byte \pointer3 @ event script
+	.elseif \type == 3
+		.4byte \pointer1 @ text
+	.elseif \type == 4
+		.4byte \pointer1 @ text
+		.4byte \pointer2 @ text
+		.4byte \pointer3 @ text
+	.elseif \type == 5
+		.4byte \pointer1 @ text
+		.4byte \pointer2 @ text
+	.elseif \type == 6
+		.4byte \pointer1 @ text
+		.4byte \pointer2 @ text
+		.4byte \pointer3 @ text
+		.4byte \pointer4 @ event script
+	.elseif \type == 7
+		.4byte \pointer1 @ text
+		.4byte \pointer2 @ text
+		.4byte \pointer3 @ text
+	.elseif \type == 8
+		.4byte \pointer1 @ text
+		.4byte \pointer2 @ text
+		.4byte \pointer3 @ text
+		.4byte \pointer4 @ event script
+	.endif
 	.endm
+
 
 	@ Starts a trainer battle using the battle information stored in RAM (usually by trainerbattle, which actually calls this command behind-the-scenes), and blocks script execution until the battle finishes.
 	.macro reptrainerbattle
@@ -683,7 +738,7 @@
 	.byte 0x6d
 	.endm
 
-	@ Displays a YES/NO multichoice box at the specified coordinates, and blocks script execution until the user makes a selection. Their selection is stored in variable 0x800D (LASTRESULT)@ 0x0000 for "NO" or if the user pressed B, and 0x0001 for "YES".
+	@ Displays a YES/NO multichoice box at the specified coordinates, and blocks script execution until the user makes a selection. Their selection is stored in variable 0x800D (LASTRESULT); 0x0000 for "NO" or if the user pressed B, and 0x0001 for "YES".
 	.macro yesnobox X, Y
 	.byte 0x6e
 	.byte \X
@@ -699,7 +754,7 @@
 	.byte \B
 	.endm
 
-	@ Displays a multichoice box from which the user can choose a selection, and blocks script execution until a selection is made. Lists of options are predefined and the one to be used is specified with list. The default argument determines the initial position of the cursor when the box is first opened@ it is zero-indexed, and if it is too large, it is treated as 0x00. If B is set to a non-zero value, then the user will not be allowed to back out of the multichoice with the B button.
+	@ Displays a multichoice box from which the user can choose a selection, and blocks script execution until a selection is made. Lists of options are predefined and the one to be used is specified with list. The default argument determines the initial position of the cursor when the box is first opened; it is zero-indexed, and if it is too large, it is treated as 0x00. If B is set to a non-zero value, then the user will not be allowed to back out of the multichoice with the B button.
 	.macro multichoicedef X, Y, list, default, B
 	.byte 0x70
 	.byte \X
@@ -763,7 +818,7 @@
 	.endm
 
 	@ Displays the string at pointer as braille text in a standard message box. The string must be formatted to use braille characters.
-	.macro braille text
+	.macro braillemsg text
 	.byte 0x78
 	.4byte \text
 	.endm
@@ -927,7 +982,7 @@
 	.byte \check
 	.endm
 
-	@ If check is 0x00, this command will check if the player has value or more money@ script variable 0x800D (LASTRESULT) is set to 0x0001 if the player has enough money, or 0x0000 if the do not.
+	@ If check is 0x00, this command will check if the player has value or more money; script variable 0x800D (LASTRESULT) is set to 0x0001 if the player has enough money, or 0x0000 if the do not.
 	.macro checkmoney value, check
 	.byte 0x92
 	.4byte \value
@@ -956,8 +1011,9 @@
 	.endm
 
 	@ In FireRed, this command is a nop.
-	.macro event_96
+	.macro event_96 word
 	.byte 0x96
+	.2byte \word
 	.endm
 
 	@ Fades the screen to black or back, using the specified effect. Effect 0x00 fades in, and effect 0x01 fades out. I don't know if other effects exist.
@@ -1234,11 +1290,215 @@
 	.endm
 
 	@ Clone of warp... Except that it doesn't appear to have any effect when used in some of FireRed's default level scripts. (If it did, Berry Forest would be impossible to enter...)
-	.macro warp6
+	.macro warp6 map, warp, X, Y
 	.byte 0xc4
+	map \map
+	.byte \warp
+	.2byte \X
+	.2byte \Y
 	.endm
 
 	@ Blocks script execution until cry finishes.
 	.macro waitpokecry
 	.byte 0xc5
+	.endm
+
+	@ Writes the name of the specified (box) PC box to the specified buffer.
+	.macro bufferboxname out, box
+	.byte 0xc6
+	.byte \out
+	.2byte \box
+	.endm
+
+	@ Sets the color of the text in standard message boxes. 0x00 produces blue (male) text, 0x01 produces red (female) text, 0xFF resets the color to the default for the current OW's gender, and all other values produce black text.
+	.macro textcolor color
+	.byte 0xc7
+	.byte \color
+	.endm
+
+	@ The exact purpose of this command is unknown, but it is related to the blue help-text box that appears on the bottom of the screen when the Main Menu is opened.
+	.macro loadhelp pointer
+	.byte 0xc8
+	.4byte \pointer
+	.endm
+
+	@ The exact purpose of this command is unknown, but it is related to the blue help-text box that appears on the bottom of the screen when the Main Menu is opened.
+	.macro unloadhelp
+	.byte 0xc9
+	.endm
+
+	@ After using this command, all standard message boxes will use the signpost frame.
+	.macro signmsg
+	.byte 0xca
+	.endm
+
+	@ Ends the effects of signmsg, returning message box frames to normal.
+	.macro normalmsg
+	.byte 0xcb
+	.endm
+
+	@ Compares the value of a hidden variable to a dword.
+	.macro comparehiddenvar a, value
+	.byte 0xcc
+	.byte \a
+	.4byte \value
+	.endm
+
+	@ Makes the Pokmon in the specified slot of the player's party obedient. It will not randomly disobey orders in battle.
+	.macro setobedience slot
+	.byte 0xcd
+	.2byte \slot
+	.endm
+
+	@ Checks if the Pokmon in the specified slot of the player's party is obedient. If the Pokmon is disobedient, 0x0001 is written to script variable 0x800D (LASTRESULT). If the Pokmon is obedient (or if the specified slot is empty or invalid), 0x0000 is written.
+	.macro checkobedience slot
+	.byte 0xce
+	.2byte \slot
+	.endm
+
+	@ Depending on factors I haven't managed to understand yet, this command may cause script execution to jump to the offset specified by the pointer at 0x020370A4.
+	.macro execram
+	.byte 0xcf
+	.endm
+
+	@ Sets worldmapflag to 1. This allows the player to Fly to the corresponding map, if that map has a flightspot.
+	.macro setworldflag worldmapflag
+	.byte 0xd0
+	.2byte \worldmapflag
+	.endm
+
+	@ Clone of warpteleport? It is apparently only used in FR/LG, and only with specials.[source]
+	.macro warpteleport2 map, warp, X, Y
+	.byte 0xd1
+	map \map
+	.byte \warp
+	.2byte \X
+	.2byte \Y
+	.endm
+
+	@ Changes the location where the player caught the Pokmon in the specified slot of their party. A list of valid catch locations can be found on PokeCommunity.
+	.macro setcatchlocale slot, location
+	.byte 0xd2
+	.2byte \slot
+	.byte \location
+	.endm
+
+	.macro event_d3 unknown
+	.byte 0xd3
+	.2byte \unknown
+	.endm
+
+	.macro event_d4
+	.byte 0xd4
+	.endm
+
+	@ In FireRed, this command is a nop.
+	.macro event_d5 var
+	.byte 0xd5
+	.2byte \var
+	.endm
+
+	.macro event_d6
+	.byte 0xd6
+	.endm
+
+	.macro warp7 map, byte, word1, word2
+	.byte 0xd7
+	map \map
+	.byte \byte
+	.2byte \word1
+	.2byte \word2
+	.endm
+
+	.macro event_d8
+	.byte 0xd8
+	.endm
+
+	.macro event_d9
+	.byte 0xd9
+	.endm
+
+	.macro hidebox2
+	.byte 0xda
+	.endm
+
+	.macro message3 pointer
+	.byte 0xdb
+	.4byte \pointer
+	.endm
+
+	.macro fadescreen3 byte
+	.byte 0xdc
+	.byte \byte
+	.endm
+
+	.macro buffertrainerclass byte, word
+	.byte 0xdd
+	.byte \byte
+	.2byte \word
+	.endm
+
+	.macro buffertrainername byte, word
+	.byte 0xde
+	.byte \byte
+	.2byte \word
+	.endm
+
+	.macro pokenavcall pointer
+	.byte 0xdf
+	.4byte \pointer
+	.endm
+
+	.macro warp8 map, byte, word1, word2
+	.byte 0xe0
+	map \map
+	.byte \byte
+	.2byte \word1
+	.2byte \word2
+	.endm
+
+	.macro buffercontesttype byte, word
+	.byte 0xe1
+	.byte \byte
+	.2byte \word
+	.endm
+
+	@ Writes the name of the specified (item) item to the specified buffer. If the specified item is a Berry (0x85 - 0xAE) or Poke Ball (0x4) and if the quantity is 2 or more, the buffered string will be pluralized ("IES" or "S" appended). If the specified item is the Enigma Berry, I have no idea what this command does (but testing showed no pluralization). If the specified index is larger than the number of items in the game (0x176), the name of item 0 ("????????") is buffered instead.
+	.macro storeitems out, item, quantity
+	.byte 0xe2
+	.byte \out
+	.2byte \item
+	.2byte \quantity
+	.endm
+
+
+@ Supplementary
+
+	.macro jumpeq dest
+	jumpif 1, \dest
+	.endm
+
+	.macro switch var
+	copyvar 0x8000, \var
+	.endm
+
+	.macro case condition, dest
+	compare 0x8000, \condition
+	jumpeq \dest
+	.endm
+
+	.macro msgbox text, type=4
+	loadptr 0, \text
+	callstd \type
+	.endm
+
+	.macro giveitem item, amount=1, function=0
+	setorcopyvar 0x8000, \item
+	setorcopyvar 0x8001, \amount
+	callstd \function
+	.endm
+
+	.macro givedecoration decoration
+	setorcopyvar 0x8000, \decoration
+	callstd 7
 	.endm

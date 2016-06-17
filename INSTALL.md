@@ -1,3 +1,5 @@
+First, you must put a Pokémon Ruby 1.0 (US) ROM in the root directory of the repository and name it `baserom.gba`. It should have a SHA1 checksum of `f28b6ffc97847e94a6c21a63cacf633ee5c8df1e`. Then, follow the OS-specific instructions below.
+
 # Linux
 
 Install [**devkitARM**](http://devkitpro.org/wiki/Getting_Started/devkitARM).
