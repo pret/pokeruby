@@ -2198,9 +2198,17 @@ sub_8053D9C: @ 8053D9C
 	lsrs r0, 16
 	cmp r0, 0x1
 	bne _08053DB2
+	.ifdef SAPPHIRE
+	ldr r0, _sub_8053D9C_LegendaryMusic
+	.else
 	movs r0, 0xDE
 	lsls r0, 1
+	.endif
 	b _08053DDC
+	.ifdef SAPPHIRE
+	.align 2, 0
+_sub_8053D9C_LegendaryMusic: .4byte 443 @ OOAME (Kyogre's Heavy Rain theme)
+	.endif
 _08053DB2:
 	adds r0, r4, 0
 	bl sub_8053D6C
@@ -2327,8 +2335,12 @@ sub_8053E90: @ 8053E90
 	bl sav1_map_get_music
 	lsls r0, 16
 	lsrs r4, r0, 16
+	.ifdef SAPPHIRE
+	ldr r0, _sub_8053E90_LegendaryMusic
+	.else
 	movs r0, 0xDE
 	lsls r0, 1
+	.endif
 	cmp r4, r0
 	beq _08053ED6
 	ldr r1, _08053EB0
@@ -2338,6 +2350,9 @@ sub_8053E90: @ 8053E90
 	adds r4, r0, 0
 	b _08053ED6
 	.align 2, 0
+	.ifdef SAPPHIRE
+_sub_8053E90_LegendaryMusic: .4byte 443 @ OOAME (Kyogre's Heavy Rain theme)
+	.endif
 _08053EB0: .4byte 0x02025734
 _08053EB4:
 	bl sav1_map_get_light_level
@@ -2406,8 +2421,12 @@ sub_8053F0C: @ 8053F0C
 	bl current_map_music_get
 	lsls r0, 16
 	lsrs r4, r0, 16
+	.ifdef SAPPHIRE
+	ldr r0, _sub_8053F0C_LegendaryMusic
+	.else
 	movs r0, 0xDE
 	lsls r0, 1
+	.endif
 	cmp r5, r0
 	beq _08053F4E
 	subs r0, 0x21
@@ -2437,6 +2456,9 @@ _08053F4E:
 	b _08053F7C
 	.align 2, 0
 _08053F6C: .4byte 0x00004001
+	.ifdef SAPPHIRE
+_sub_8053F0C_LegendaryMusic: .4byte 443 @ OOAME (Kyogre's Heavy Rain theme)
+	.endif
 _08053F70: .4byte 0x0000016d
 _08053F74:
 	adds r0, r5, 0
@@ -2481,8 +2503,12 @@ sub_8053FB0: @ 8053FB0
 	lsrs r1, r0, 16
 	cmp r1, r4
 	beq _08053FD2
+	.ifdef SAPPHIRE
+	ldr r0, _sub_8053FB0_LegendaryMusic
+	.else
 	movs r0, 0xDE
 	lsls r0, 1
+	.endif
 	cmp r1, r0
 	beq _08053FD2
 	adds r0, r4, 0
@@ -2492,6 +2518,10 @@ _08053FD2:
 	pop {r4}
 	pop {r0}
 	bx r0
+	.ifdef SAPPHIRE
+	.align 2, 0
+_sub_8053FB0_LegendaryMusic: .4byte 443 @ OOAME (Kyogre's Heavy Rain theme)
+	.endif
 	thumb_func_end sub_8053FB0
 
 	thumb_func_start is_warp1_light_level_8_or_9
