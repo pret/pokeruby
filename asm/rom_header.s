@@ -21,11 +21,17 @@ RomHeaderNintendoLogo:
 	.byte 0xd6,0x25,0xe4,0x8b,0x38,0x0a,0xac,0x72
 	.byte 0x21,0xd4,0xf8,0x07
 
+.ifdef SAPPHIRE
+RomHeaderGameTitle:
+	.ascii "POKEMON SAPP"
+RomHeaderGameCode:
+	.ascii "AXPE"
+.else
 RomHeaderGameTitle:
 	.ascii "POKEMON RUBY"
-
 RomHeaderGameCode:
 	.ascii "AXVE"
+.endif
 
 RomHeaderMakerCode:
 	.ascii "01"
@@ -45,8 +51,13 @@ RomHeaderReserved1:
 RomHeaderSoftwareVersion:
 	.byte 0
 
+.ifdef SAPPHIRE
+RomHeaderChecksum:
+	.byte 0x55
+.else
 RomHeaderChecksum:
 	.byte 0x41
+.endif
 
 RomHeaderReserved2:
 	.space 2
