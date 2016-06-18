@@ -1071,9 +1071,9 @@ gUnknown_08E9D8CC: @ 8E9D8CC
 	.global gUnknown_08E9F624
 gUnknown_08E9F624: @ 8E9F624
 	.ifdef SAPPHIRE
-	.incbin "graphics/title_screen/pokemon_saph.gbapal" @ for some reason, the sapphire palette is different even though the visible colors for the logo and version are not, weird
+	.incbin "graphics/title_screen/logo_sapphire.gbapal" @ for some reason, the sapphire palette is different even though the visible colors for the logo and version are not, weird
 	.else
-	.incbin "graphics/title_screen/pokemon.gbapal"
+	.incbin "graphics/title_screen/logo_ruby.gbapal"
 	.endif
 
 	.global gUnknown_08E9F7E4
