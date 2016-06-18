@@ -7001,11 +7001,21 @@ gUnknown_08393250: @ 8393250
 
 	.global gUnknown_083939EC
 gUnknown_083939EC: @ 83939EC
-	.incbin "baserom.gba", 0x003939ec, 0x20c
+	.ifdef SAPPHIRE
+	.incbin "graphics/title_screen/kyogre_map.bin.lz"
+	.else
+	.incbin "graphics/title_screen/groudon_map.bin.lz"
+	.endif
 
 	.global gUnknown_08393BF8
 gUnknown_08393BF8: @ 8393BF8
-	.incbin "baserom.gba", 0x00393bf8, 0x26c
+	.ifdef SAPPHIRE
+	.incbin "graphics/title_screen/water_map.bin.lz"
+	.else
+	.incbin "graphics/title_screen/lava_map.bin.lz"
+	.endif
+
+	.incbin "graphics/title_screen/logo_shine.4bpp.lz"
 
 	.global gUnknown_08393E64
 gUnknown_08393E64: @ 8393E64
@@ -11404,25 +11414,23 @@ gUnknown_083EDCDC: @ 83EDCDC
 
 	.global gUnknown_083EDCE4
 gUnknown_083EDCE4: @ 83EDCE4
-	.incbin "baserom.gba", 0x3EDCE4, 0x18
-Unknown_83EDCFC:
-	.incbin "baserom.gba", 0x3EDCFC, 0x2
-Unknown_83EDCFE:
-	.incbin "baserom.gba", 0x3EDCFE, 0x2
-Unknown_83EDD00:
-	.incbin "baserom.gba", 0x3EDD00, 0x2
-Unknown_83EDD02:
-	.incbin "baserom.gba", 0x3EDD02, 0x2
-Unknown_83EDD04:
-	.incbin "baserom.gba", 0x3EDD04, 0x4
+	.4byte 0x08E997E8
 
+UnknownPalette_83EDCE8:
+	.ifdef SAPPHIRE
+	.incbin "graphics/unknown/sapphire_83EDD40.gbapal"
+	.else
+	.incbin "graphics/unknown/ruby_83EDCE8.gbapal"
+	.endif
+
+	.align 2
 	.global gUnknown_083EDD08
 gUnknown_083EDD08: @ 83EDD08
-	.4byte Unknown_83EDCFC
-	.4byte Unknown_83EDCFE
-	.4byte Unknown_83EDD00
-	.4byte Unknown_83EDD02
-	.4byte Unknown_83EDD04
+	.4byte UnknownPalette_83EDCE8 + 10 * 2
+	.4byte UnknownPalette_83EDCE8 + 11 * 2
+	.4byte UnknownPalette_83EDCE8 + 12 * 2
+	.4byte UnknownPalette_83EDCE8 + 13 * 2
+	.4byte UnknownPalette_83EDCE8 + 14 * 2
 
 	.global gUnknown_083EDD1C
 gUnknown_083EDD1C: @ 83EDD1C
@@ -13681,22 +13689,33 @@ SystemText_IntroGirl:
 	.string "GIRL$"
 SystemText_IntroNewName:
 	.string "NEW NAME$"
-SystemText_IntroBoyNameLandon:
+
+gDefaultBoyName1::
+	.ifdef SAPPHIRE
+	.string "SEAN$"
+	.else
 	.string "LANDON$"
-SystemText_IntroBoyNameTerry:
+	.endif
+gDefaultBoyName2::
 	.string "TERRY$"
-SystemText_IntroBoyNameSeth:
+gDefaultBoyName3::
 	.string "SETH$"
-SystemText_IntroBoyNameTom:
+gDefaultBoyName4::
 	.string "TOM$"
-SystemText_IntroGirlNameTerra:
+
+gDefaultGirlName1::
+	.ifdef SAPPHIRE
+	.string "MARINA$"
+	.else
 	.string "TERRA$"
-SystemText_IntroGirlNameKimmy:
+	.endif
+gDefaultGirlName2::
 	.string "KIMMY$"
-SystemText_IntroGirlNameNicola:
+gDefaultGirlName3::
 	.string "NICOLA$"
-SystemText_IntroGirlNameSara:
+gDefaultGirlName4::
 	.string "SARA$"
+
 SystemText_IntroWeCall:
 	.string "This is what we call\na POKéMON.$"
 
@@ -14067,7 +14086,7 @@ OtherText_TheField2:
 OtherText_ThePC:
 	.string "the PC.$"
 
-	.align 1
+	.align 2
 	.global gUnknown_0840E740
 gUnknown_0840E740: @ 840E740
 	.4byte OtherText_TheField3

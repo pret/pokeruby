@@ -2938,11 +2938,169 @@ OldaleTown_PokemonCenter_1F_Movement_19FDF4:: @ 819FDF4
 	step_12
 	step_end
 
-	.incbin "baserom.gba", 0x19fdf7, 0x184
+Std_ObtainItem: @ 819FDF7
+	additem 0x8000, 0x8001
+	copyvar 0x8007, RESULT
+	call Std_ObtainItem_
+	return
 
-	.global gUnknown_0819FF7B
-gUnknown_0819FF7B: @ 819FF7B
-	.incbin "baserom.gba", 0x0019ff7b, 0x8e
+Std_ObtainItem_: @ 819FE07
+	bufferitem 1, 0x8000
+	checkitemtype 0x8000
+	call GetItem_HandlePocket
+	compare 0x8007, 0x1
+	callif 1, Std_ObtainItem_Success
+	compare 0x8007, 0x0
+	callif 1, Std_ObtainItem_Fail
+	return
+
+GetItem_HandlePocket:
+	switch RESULT
+	case POCKET_ITEMS,      GetItem_HandlePocket_Items
+	case POCKET_KEY_ITEMS,  GetItem_HandlePocket_KeyItems
+	case POCKET_POKE_BALLS, GetItem_HandlePocket_PokeBalls
+	case POCKET_TM_HM,      GetItem_HandlePocket_TMsHMs
+	case POCKET_BERRIES,    GetItem_HandlePocket_Berries
+	end
+
+GetItem_HandlePocket_Items:
+	bufferstd 2, 0xE
+	compare 0x8007, 1
+	callif 1, PlayGetItemFanfare
+	return
+
+GetItem_HandlePocket_KeyItems:
+	bufferstd 2, 0xF
+	compare 0x8007, 1
+	callif 1, PlayGetItemFanfare
+	return
+
+GetItem_HandlePocket_PokeBalls:
+	bufferstd 2, 0x10
+	compare 0x8007, 1
+	callif 1, PlayGetItemFanfare
+	return
+
+GetItem_HandlePocket_TMsHMs:
+	bufferstd 2, 0x11
+	compare 0x8007, 1
+	callif 1, PlayGetTMHMFanfare
+	return
+
+GetItem_HandlePocket_Berries:
+	bufferstd 2, 0x12
+	compare 0x8007, 1
+	callif 1, PlayGetItemFanfare
+	return
+
+Std_ObtainItem_Success: @ 819FEB7
+	message Message_ObtainedItem
+	waitfanfare
+	waittext
+	msgbox Message_PutAwayItem
+	setvar RESULT, 1
+	return
+
+Std_ObtainItem_Fail: @ 819FECC
+	setvar RESULT, 0
+	return
+
+PlayGetItemFanfare:
+	fanfare 0x172
+	return
+
+PlayGetTMHMFanfare:
+	fanfare 0x174
+	return
+
+Std_ObtainDecoration: @ 819FEDA
+	adddecor 0x8000
+	copyvar 0x8007, RESULT
+	call Std_ObtainDecoration_
+	return
+
+Std_ObtainDecoration_: @ 819FEE8
+	bufferdecor 1, 0x8000
+	compare 0x8007, 1
+	callif 1, Std_ObtainDecoration_Success
+	compare 0x8007, 0
+	callif 1, Std_ObtainDecoration_Fail
+	return
+
+Std_ObtainDecoration_Success: @ 819FF03
+	fanfare 0x172
+	message Message_ObtainedDecoration
+	waitfanfare
+	waittext
+	msgbox Message_TransferredToPC
+	setvar RESULT, 1
+	return
+
+Std_ObtainDecoration_Fail: @ 819FF1B
+	setvar RESULT, 0
+	return
+
+Std_FindItem: @ 819FF21
+	lock
+	faceplayer
+	checksound
+	additem 0x8000, 0x8001
+	copyvar 0x8007, RESULT
+	bufferitem 1, 0x8000
+	checkitemtype 0x8000
+	call GetItem_HandlePocket
+	compare 0x8007, 1
+	callif 1, Std_FindItem_Success
+	compare 0x8007, 0
+	callif 1, Std_FindItem_Fail
+	release
+	return
+
+Std_FindItem_Success: @ 819FF52
+	disappear LAST_TALKED
+	message Message_FoundOneItem
+	waitfanfare
+	waittext
+	msgbox Message_PutAwayItem
+	return
+
+Std_FindItem_Fail: @ 819FF65
+	msgbox Message_ObtainedItem
+	msgbox Message_BagFull
+	setvar RESULT, 0
+	return
+
+HiddenItemScript:: @ 819FF7B
+	lockall
+	checksound
+	additem 0x8005, 1
+	copyvar 0x8007, RESULT
+	bufferitem 0x1, 0x8005
+	checkitemtype 0x8005
+	call GetItem_HandlePocket
+	compare 0x8007, 1
+	jumpeq HiddenItemScript_Success
+	compare 0x8007, 0
+	jumpeq HiddenItemScript_Fail
+	end
+
+HiddenItemScript_Success:
+	message Message_FoundOneItem
+	waitfanfare
+	waittext
+	msgbox Message_PutAwayItem
+	special 0x96
+	releaseall
+	end
+
+HiddenItemScript_Fail:
+	msgbox Message_FoundOneItem
+	msgbox Message_BagFull
+	setvar RESULT, 0
+	releaseall
+	end
+
+	.incbin "baserom.gba", 0x19FFD5, 0x34
 
 	.global gUnknown_081A0009
 gUnknown_081A0009: @ 81A0009
@@ -4060,33 +4218,53 @@ Route110_TrickHouseEntrance_Movement_1A0856:: @ 81A0856
 
 	.incbin "baserom.gba", 0x1a0858, 0x3
 
-	.global gUnknown_081A085B
-gUnknown_081A085B: @ 81A085B
-	.incbin "baserom.gba", 0x001a085b, 0x9
+PictureBookShelfScript:: @ 81A085B
+	msgbox PictureBookShelfText, 3
+	end
 
-	.global gUnknown_081A0864
-gUnknown_081A0864: @ 81A0864
-	.incbin "baserom.gba", 0x001a0864, 0x9
+BookshelfScript:: @ 81A0864
+	msgbox BookshelfText, 3
+	end
 
-	.global gUnknown_081A086D
-gUnknown_081A086D: @ 81A086D
-	.incbin "baserom.gba", 0x001a086d, 0x9
+PokemonCenterBookshelfScript:: @ 81A086D
+	msgbox PokemonCenterBookshelfText, 3
+	end
 
-	.global gUnknown_081A0876
-gUnknown_081A0876: @ 81A0876
-	.incbin "baserom.gba", 0x001a0876, 0x9
+VaseScript:: @ 81A0876
+	msgbox VaseText, 3
+	end
 
-	.global gUnknown_081A087F
-gUnknown_081A087F: @ 81A087F
-	.incbin "baserom.gba", 0x001a087f, 0x9
+TrashCanScript:: @ 81A087F
+	msgbox TrashCanText, 3
+	end
 
-	.global gUnknown_081A0888
-gUnknown_081A0888: @ 81A0888
-	.incbin "baserom.gba", 0x001a0888, 0x9
+ShopShelfScript:: @ 81A0888
+	msgbox ShopShelfText, 3
+	end
 
-	.global gUnknown_081A0891
-gUnknown_081A0891: @ 81A0891
-	.incbin "baserom.gba", 0x001a0891, 0x170
+BlueprintScript:: @ 81A0891
+	msgbox BlueprintText, 3
+	end
+
+SampleMessage1:: @ 81A089A
+	.string "This is sample message 1.\p"
+	.string "Welcome to the world of\n"
+	.string "POKéMON AGB!\l"
+	.string "We hope you enjoy this!$"
+
+SampleMessage2:: @ 81A08F1
+	.string "This is sample message 2.\p"
+	.string "Welcome to the world of\n"
+	.string "POKéMON AGB!\l"
+	.string "We hope you enjoy this!$"
+
+SampleMessage3:: @ 81A0948
+	.string "This is sample message 3.\p"
+	.string "Welcome to the world of\n"
+	.string "POKéMON AGB!\l"
+	.string "We hope you enjoy this!$"
+
+	.incbin "baserom.gba", 0x001a099f, 0x62
 
 	.global gUnknown_081A0A01
 gUnknown_081A0A01: @ 81A0A01
@@ -4161,26 +4339,31 @@ Route104_PrettyPetalFlowerShop_Text_1A0C42:: @ 81A0C42
 	.string "{PLAYER}{KUN}, welcome!\p"
 	.string "What can I do for you?$"
 
-	.incbin "baserom.gba", 0x1a0c68, 0x11
+Message_ObtainedItem: @ 81A0C68
+	.string "Obtained the {STR_VAR_2}.$"
 
 LilycoveCity_DepartmentStoreRooftop_Text_1A0C79:: @ 81A0C79
 	.string "The BAG is full...$"
 
 LilycoveCity_DepartmentStoreRooftop_Text_1A0C8C:: @ 81A0C8C
+Message_PutAwayItem:
 	.string "{PLAYER} put away the {STR_VAR_2}\n"
 	.string "in the {STR_VAR_3} POCKET.$"
 
-	.incbin "baserom.gba", 0x1a0cb1, 0x11
+Message_FoundOneItem:
+	.string "{PLAYER} found one {STR_VAR_2}!$"
 
 MauvilleCity_GameCorner_Text_1A0CC2:: @ 81A0CC2
 MauvilleCity_Text_1A0CC2:: @ 81A0CC2
 MtChimney_Text_1A0CC2:: @ 81A0CC2
 OldaleTown_Text_1A0CC2:: @ 81A0CC2
 Route109_SeashoreHouse_Text_1A0CC2:: @ 81A0CC2
+Message_BagFull:
 	.string "Too bad!\n"
 	.string "The BAG is full...$"
 
-	.incbin "baserom.gba", 0x1a0cde, 0x11
+Message_ObtainedDecoration: @ 81A0CDE
+	.string "Obtained the {STR_VAR_2}.$"
 
 BattleTower_Lobby_Text_1A0CEF:: @ 81A0CEF
 MauvilleCity_GameCorner_Text_1A0CEF:: @ 81A0CEF
@@ -4189,7 +4372,9 @@ SootopolisCity_House6_Text_1A0CEF:: @ 81A0CEF
 	.string "Too bad! There’s no room left for\n"
 	.string "another {STR_VAR_2}...$"
 
-	.incbin "baserom.gba", 0x1a0d1f, 0x22
+Message_TransferredToPC: @ 81A0D1F
+	.string "The {STR_VAR_2} was transferred\n"
+	.string "to the PC.$"
 
 PetalburgCity_Text_1A0D41:: @ 81A0D41
 	.string "“Selected items for your convenience!”\n"
@@ -15325,7 +15510,33 @@ ShoalCave_LowTideEntranceRoom_Text_1C69F5:: @ 81C69F5
 	.string "You should make room and come back\n"
 	.string "for a SHELL BELL.$"
 
-	.incbin "baserom.gba", 0x1c6a69, 0x14c
+PictureBookShelfText: @ 81C6A69
+	.string "There’s a set of POKéMON picture books.$"
+
+BookshelfText: @ 81C6A91
+	.string "It’s filled with all sorts of books.$"
+
+PokemonCenterBookshelfText: @ 81C6AB6
+	.string "POKéMON magazines!\n"
+	.string "POKéMON PAL...\p"
+	.string "POKéMON HANDBOOK...\n"
+	.string "ADORABLE POKéMON...$"
+
+VaseText: @ 81C6B00
+	.string "This vase looks expensive...\n"
+	.string "Peered inside...\p"
+	.string "But, it was empty.$"
+
+TrashCanText: @ 81C6B41
+	.string "It’s empty.$"
+
+ShopShelfText: @ 81C6B4D
+	.string "The shelves brim with all sorts of\n"
+	.string "POKéMON merchandise.$"
+
+BlueprintText: @ 81C6B85
+	.string "A blueprint of some sort?\n"
+	.string "It’s too complicated!$"
 
 GraniteCave_B1F_MapScript2_1C6BB5:: @ 81C6BB5
 MtPyre_2F_MapScript2_1C6BB5:: @ 81C6BB5
