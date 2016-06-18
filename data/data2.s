@@ -6983,11 +6983,21 @@ gUnknown_083931F8: @ 83931F8
 
 	.global gUnknown_08393210
 gUnknown_08393210: @ 8393210
-	.incbin "baserom.gba", 0x00393210, 0x40
+	.ifdef SAPPHIRE
+	.incbin "graphics/title_screen/kyogre_dark.gbapal"
+	.incbin "graphics/title_screen/kyogre_glow.gbapal"
+	.else
+	.incbin "graphics/title_screen/groudon_dark.gbapal"
+	.incbin "graphics/title_screen/groudon_glow.gbapal"
+	.endif
 
 	.global gUnknown_08393250
 gUnknown_08393250: @ 8393250
-	.incbin "baserom.gba", 0x00393250, 0x79c
+	.ifdef SAPPHIRE
+	.incbin "graphics/title_screen/kyogre.4bpp.lz"
+	.else
+	.incbin "graphics/title_screen/groudon.4bpp.lz"
+	.endif
 
 	.global gUnknown_083939EC
 gUnknown_083939EC: @ 83939EC
