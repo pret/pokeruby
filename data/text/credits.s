@@ -271,7 +271,11 @@ Text_RNZFotB:
 Text_CreditsTerminator:
 	.string "$"
 Text_Version:
+	.ifdef SAPPHIRE
+	.string "{PALETTE 9}POKéMON SAPPHIRE VERSION$"
+	.else
 	.string "{PALETTE 9}POKéMON RUBY VERSION$"
+	.endif
 
 @ pointer table
 

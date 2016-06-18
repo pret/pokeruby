@@ -945,7 +945,11 @@ gUnknown_08E95774: @ 8E95774
 
 	.global gUnknown_08E95A18
 gUnknown_08E95A18: @ 8E95A18
-	.incbin "baserom.gba", 0x00e95a18, 0xa0
+	.ifdef SAPPHIRE
+	.incbin "graphics/slot_machine/sapphire.gbapal"
+	.else
+	.incbin "graphics/slot_machine/ruby.gbapal"
+	.endif
 
 	.global gUnknown_08E95AB8
 gUnknown_08E95AB8: @ 8E95AB8
@@ -1055,7 +1059,9 @@ gUnknown_08E9CA24: @ 8E9CA24
 
 	.global gUnknown_08E9CA44
 gUnknown_08E9CA44: @ 8E9CA44
-	.incbin "baserom.gba", 0x00e9ca44, 0xe88
+	.incbin "baserom.gba", 0x00e9ca44, 0xe68
+
+	.incbin "graphics/title_screen/logo_shine.gbapal"
 
 	.global gUnknown_08E9D8CC
 gUnknown_08E9D8CC: @ 8E9D8CC
