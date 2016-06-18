@@ -4246,7 +4246,25 @@ BlueprintScript:: @ 81A0891
 	msgbox BlueprintText, 3
 	end
 
-	.incbin "baserom.gba", 0x001a089A, 0x167
+SampleMessage1:: @ 81A089A
+	.string "This is sample message 1.\p"
+	.string "Welcome to the world of\n"
+	.string "POKéMON AGB!\l"
+	.string "We hope you enjoy this!$"
+
+SampleMessage2:: @ 81A08F1
+	.string "This is sample message 2.\p"
+	.string "Welcome to the world of\n"
+	.string "POKéMON AGB!\l"
+	.string "We hope you enjoy this!$"
+
+SampleMessage3:: @ 81A0948
+	.string "This is sample message 3.\p"
+	.string "Welcome to the world of\n"
+	.string "POKéMON AGB!\l"
+	.string "We hope you enjoy this!$"
+
+	.incbin "baserom.gba", 0x001a099f, 0x62
 
 	.global gUnknown_081A0A01
 gUnknown_081A0A01: @ 81A0A01
