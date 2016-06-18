@@ -13,7 +13,7 @@
 // "0100\r\n" (version; seems to always be "0100")
 // "<NUMBER_OF_COLORS>\r\n" (number of colors in decimal)
 //
-// 16 or 256 times (depending on above line):
+// <NUMBER_OF_COLORS> times:
 // "<RED> <GREEN> <BLUE>\r\n" (color entry)
 //
 // Each color component is a decimal number from 0 to 255.
@@ -82,8 +82,8 @@ void ReadJascPalette(char *path, struct Palette *palette)
 	if (!ParseNumber(line, NULL, 10, &palette->numColors))
 		FATAL_ERROR("Failed to parse number of colors.\n");
 
-	if (palette->numColors != 16 && palette->numColors != 256)
-		FATAL_ERROR("%d is an invalid number of colors. The number of colors must be 16 or 256.\n", palette->numColors);
+	if (palette->numColors < 1 || palette->numColors > 256)
+		FATAL_ERROR("%d is an invalid number of colors. The number of colors must be in the range [1, 256].\n", palette->numColors);
 
 	for (int i = 0; i < palette->numColors; i++) {
 		ReadJascPaletteLine(fp, line);
