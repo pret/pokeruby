@@ -3100,11 +3100,29 @@ HiddenItemScript_Fail:
 	releaseall
 	end
 
-	.incbin "baserom.gba", 0x19FFD5, 0x34
+UnusedMixRecordsScript: @ 819FFD5
+	lock
+	faceplayer
+	msgbox UnusedMixRecordsPromptText, 5
+	compare RESULT, 1
+	jumpeq UnusedMixRecordsScript_Yes
+	compare RESULT, 0
+	jumpeq UnusedMixRecordsScript_Done
+	jump UnusedMixRecordsScript_Done
+UnusedMixRecordsScript_Yes: @ 819FFFA
+	special 0x1B
+	waitstate
+	lock
+	faceplayer
+UnusedMixRecordsScript_Done: @ 81A0000
+	message UnusedMixRecordsSeeYouAgainText
+	waittext
+	waitbutton
+	release
+	end
 
 	.global gUnknown_081A0009
 gUnknown_081A0009: @ 81A0009
-
 	.incbin "baserom.gba", 0x1a0009, 0xd8
 
 FallarborTown_EventScript_1A00E1:: @ 81A00E1
@@ -4264,7 +4282,14 @@ SampleMessage3:: @ 81A0948
 	.string "POKéMON AGB!\l"
 	.string "We hope you enjoy this!$"
 
-	.incbin "baserom.gba", 0x001a099f, 0x62
+UnusedMixRecordsPromptText: @ 81A099F
+	.string "Would you like to mix records with other\n"
+	.string "TRAINERS?$"
+
+UnusedMixRecordsSeeYouAgainText: @ 81A09D2
+	.string "We hope to see you again!$"
+
+	.incbin "baserom.gba", 0x001a09ec, 0x15
 
 	.global gUnknown_081A0A01
 gUnknown_081A0A01: @ 81A0A01
