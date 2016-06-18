@@ -123,7 +123,8 @@ gInterfacePal_PremierBall:
 	.global gUnknown_08D030D0
 gUnknown_08D030D0: @ 8D030D0
 	.incbin "graphics/interface/ball_open.4bpp.lz"
-	.incbin "baserom.gba", 0x00d0314c, 0x6AFC
+	.incbin "graphics/interface/blank.4bpp.lz"
+	.incbin "baserom.gba", 0x00d03248, 0x6A00
 
 	.global gUnknown_08D09C48
 gUnknown_08D09C48: @ 8D09C48
@@ -1060,11 +1061,20 @@ gUnknown_08E9CA44: @ 8E9CA44
 
 	.global gUnknown_08E9D8CC
 gUnknown_08E9D8CC: @ 8E9D8CC
-	.incbin "baserom.gba", 0x00e9d8cc, 0x1d58
+	.incbin "graphics/title_screen/pokemon.8bpp.lz"
+	.ifdef SAPPHIRE
+	.incbin "graphics/title_screen/sapphireversion.8bpp.lz"
+	.else
+	.incbin "graphics/title_screen/rubyversion.8bpp.lz"
+	.endif
 
 	.global gUnknown_08E9F624
 gUnknown_08E9F624: @ 8E9F624
-	.incbin "baserom.gba", 0x00e9f624, 0x1c0
+	.ifdef SAPPHIRE
+	.incbin "graphics/title_screen/pokemon_saph.gbapal", 0, 0x1C0 @ for some reason, the sapphire palette is different even though the visible colors for the logo and version are not, weird
+	.else
+	.incbin "graphics/title_screen/pokemon.gbapal", 0, 0x1C0
+	.endif
 
 	.global gUnknown_08E9F7E4
 gUnknown_08E9F7E4: @ 8E9F7E4
