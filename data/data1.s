@@ -3070,8 +3070,6 @@ Std_FindItem_Fail: @ 819FF65
 	setvar RESULT, 0
 	return
 
-	.global gUnknown_0819FF7B
-gUnknown_0819FF7B: @ 819FF7B
 HiddenItemScript:: @ 819FF7B
 	lockall
 	checksound
@@ -4220,33 +4218,35 @@ Route110_TrickHouseEntrance_Movement_1A0856:: @ 81A0856
 
 	.incbin "baserom.gba", 0x1a0858, 0x3
 
-	.global gUnknown_081A085B
-gUnknown_081A085B: @ 81A085B
-	.incbin "baserom.gba", 0x001a085b, 0x9
+PictureBookShelfScript:: @ 81A085B
+	msgbox PictureBookShelfText, 3
+	end
 
-	.global gUnknown_081A0864
-gUnknown_081A0864: @ 81A0864
-	.incbin "baserom.gba", 0x001a0864, 0x9
+BookshelfScript:: @ 81A0864
+	msgbox BookshelfText, 3
+	end
 
-	.global gUnknown_081A086D
-gUnknown_081A086D: @ 81A086D
-	.incbin "baserom.gba", 0x001a086d, 0x9
+PokemonCenterBookshelfScript:: @ 81A086D
+	msgbox PokemonCenterBookshelfText, 3
+	end
 
-	.global gUnknown_081A0876
-gUnknown_081A0876: @ 81A0876
-	.incbin "baserom.gba", 0x001a0876, 0x9
+VaseScript:: @ 81A0876
+	msgbox VaseText, 3
+	end
 
-	.global gUnknown_081A087F
-gUnknown_081A087F: @ 81A087F
-	.incbin "baserom.gba", 0x001a087f, 0x9
+TrashCanScript:: @ 81A087F
+	msgbox TrashCanText, 3
+	end
 
-	.global gUnknown_081A0888
-gUnknown_081A0888: @ 81A0888
-	.incbin "baserom.gba", 0x001a0888, 0x9
+ShopShelfScript:: @ 81A0888
+	msgbox ShopShelfText, 3
+	end
 
-	.global gUnknown_081A0891
-gUnknown_081A0891: @ 81A0891
-	.incbin "baserom.gba", 0x001a0891, 0x170
+BlueprintScript:: @ 81A0891
+	msgbox BlueprintText, 3
+	end
+
+	.incbin "baserom.gba", 0x001a089A, 0x167
 
 	.global gUnknown_081A0A01
 gUnknown_081A0A01: @ 81A0A01
@@ -15492,7 +15492,33 @@ ShoalCave_LowTideEntranceRoom_Text_1C69F5:: @ 81C69F5
 	.string "You should make room and come back\n"
 	.string "for a SHELL BELL.$"
 
-	.incbin "baserom.gba", 0x1c6a69, 0x14c
+PictureBookShelfText: @ 81C6A69
+	.string "There’s a set of POKéMON picture books.$"
+
+BookshelfText: @ 81C6A91
+	.string "It’s filled with all sorts of books.$"
+
+PokemonCenterBookshelfText: @ 81C6AB6
+	.string "POKéMON magazines!\n"
+	.string "POKéMON PAL...\p"
+	.string "POKéMON HANDBOOK...\n"
+	.string "ADORABLE POKéMON...$"
+
+VaseText: @ 81C6B00
+	.string "This vase looks expensive...\n"
+	.string "Peered inside...\p"
+	.string "But, it was empty.$"
+
+TrashCanText: @ 81C6B41
+	.string "It’s empty.$"
+
+ShopShelfText: @ 81C6B4D
+	.string "The shelves brim with all sorts of\n"
+	.string "POKéMON merchandise.$"
+
+BlueprintText: @ 81C6B85
+	.string "A blueprint of some sort?\n"
+	.string "It’s too complicated!$"
 
 GraniteCave_B1F_MapScript2_1C6BB5:: @ 81C6BB5
 MtPyre_2F_MapScript2_1C6BB5:: @ 81C6BB5

@@ -47900,7 +47900,7 @@ _080684AA:
 	.align 2, 0
 _080684CC: .4byte 0x0202e8cc
 _080684D0: .4byte 0x0202e8ce
-_080684D4: .4byte gUnknown_0819FF7B
+_080684D4: .4byte HiddenItemScript
 _080684D8:
 	cmp r5, 0x2
 	bne _08068494
@@ -48029,7 +48029,7 @@ _080685CC:
 	ldr r0, _080685E0
 	b _080686EE
 	.align 2, 0
-_080685E0: .4byte gUnknown_081A085B
+_080685E0: .4byte PictureBookShelfScript
 _080685E4:
 	adds r0, r5, 0
 	bl sub_8057944
@@ -48040,7 +48040,7 @@ _080685E4:
 	ldr r0, _080685F8
 	b _080686EE
 	.align 2, 0
-_080685F8: .4byte gUnknown_081A0864
+_080685F8: .4byte BookshelfScript
 _080685FC:
 	adds r0, r5, 0
 	bl sub_8057958
@@ -48051,7 +48051,7 @@ _080685FC:
 	ldr r0, _08068610
 	b _080686EE
 	.align 2, 0
-_08068610: .4byte gUnknown_081A086D
+_08068610: .4byte PokemonCenterBookshelfScript
 _08068614:
 	adds r0, r5, 0
 	bl sub_805796C
@@ -48062,7 +48062,7 @@ _08068614:
 	ldr r0, _08068628
 	b _080686EE
 	.align 2, 0
-_08068628: .4byte gUnknown_081A0876
+_08068628: .4byte VaseScript
 _0806862C:
 	adds r0, r5, 0
 	bl sub_8057980
@@ -48073,7 +48073,7 @@ _0806862C:
 	ldr r0, _08068640
 	b _080686EE
 	.align 2, 0
-_08068640: .4byte gUnknown_081A087F
+_08068640: .4byte TrashCanScript
 _08068644:
 	adds r0, r5, 0
 	bl sub_8057994
@@ -48084,7 +48084,7 @@ _08068644:
 	ldr r0, _08068658
 	b _080686EE
 	.align 2, 0
-_08068658: .4byte gUnknown_081A0888
+_08068658: .4byte ShopShelfScript
 _0806865C:
 	adds r0, r5, 0
 	bl sub_80579A8
@@ -48095,7 +48095,7 @@ _0806865C:
 	ldr r0, _08068670
 	b _080686EE
 	.align 2, 0
-_08068670: .4byte gUnknown_081A0891
+_08068670: .4byte BlueprintScript
 _08068674:
 	movs r4, 0x4
 	ldrsb r4, [r6, r4]
