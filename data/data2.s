@@ -23,8 +23,7 @@ gUnknown_081E795C: @ 81E795C
 
 	.global gUnknown_081E796C
 gUnknown_081E796C: @ 81E796C
-@ replacing .incbin "baserom.gba", 0x001e796c, 0x10
-	.space 0x00000010
+	.space 16
 
 	.global gUnknown_081E797C
 gUnknown_081E797C: @ 81E797C
@@ -450,7 +449,7 @@ gUnknown_081F958C: @ 81F958C
 
 	.global gUnknown_081F95A4
 gUnknown_081F95A4: @ 81F95A4
-	.incbin "baserom.gba", 0x001f95a4, 0x8
+	obj_tiles 0x08e5dc2c, 4096, 0x2710
 
 	.global gUnknown_081F95AC
 gUnknown_081F95AC: @ 81F95AC
@@ -511,7 +510,7 @@ gUnknown_081F9674: @ 81F9674
 
 	.global gUnknown_081F9680
 gUnknown_081F9680: @ 81F9680
-	.incbin "baserom.gba", 0x001f9680, 0x8
+	obj_tiles 0x030041d0, 32, 0x1013
 
 	.global gUnknown_081F9688
 gUnknown_081F9688: @ 81F9688
@@ -1015,7 +1014,7 @@ gUnknown_081FAE91: @ 81FAE91
 
 	.global gUnknown_081FAEA4
 gUnknown_081FAEA4: @ 81FAEA4
-	.incbin "baserom.gba", 0x001faea4, 0x8
+	obj_tiles 0x08d02410, 384, 0xd6eb
 
 	.global gUnknown_081FAEAC
 gUnknown_081FAEAC: @ 81FAEAC
@@ -1243,15 +1242,15 @@ gUnknown_08209AD4: @ 8209AD4
 
 	.global gUnknown_0820A3B0
 gUnknown_0820A3B0: @ 820A3B0
-	.incbin "baserom.gba", 0x0020a3b0, 0x8
+	obj_tiles 0x08209af8, 2048, 0x3039
 
 	.global gUnknown_0820A3B8
 gUnknown_0820A3B8: @ 820A3B8
-	.incbin "baserom.gba", 0x0020a3b8, 0x8
+	obj_tiles 0x0820a2f8, 128, 0x5ba0
 
 	.global gUnknown_0820A3C0
 gUnknown_0820A3C0: @ 820A3C0
-	.incbin "baserom.gba", 0x0020a3c0, 0x8
+	obj_pal 0x08209ad8, 0xd431
 
 	.global gUnknown_0820A3C8
 gUnknown_0820A3C8: @ 820A3C8
@@ -1267,35 +1266,38 @@ gUnknown_0820A430: @ 820A430
 
 	.global gUnknown_0820A47C
 gUnknown_0820A47C: @ 820A47C
-	.incbin "baserom.gba", 0x0020a47c, 0x8
+	obj_tiles 0x08d1f52c, 4096, 0xd6ff
 
 	.global gUnknown_0820A484
 gUnknown_0820A484: @ 820A484
-	.incbin "baserom.gba", 0x0020a484, 0x8
+	obj_tiles 0x08d1f7e0, 4096, 0xd701
 
 	.global gUnknown_0820A48C
 gUnknown_0820A48C: @ 820A48C
-	.incbin "baserom.gba", 0x0020a48c, 0x8
+	obj_tiles 0x08d1f96c, 2048, 0xd6ff
 
 	.global gUnknown_0820A494
 gUnknown_0820A494: @ 820A494
-	.incbin "baserom.gba", 0x0020a494, 0x8
+	obj_tiles 0x08d1f96c, 2048, 0xd700
 
 	.global gUnknown_0820A49C
 gUnknown_0820A49C: @ 820A49C
-	.incbin "baserom.gba", 0x0020a49c, 0x8
+	obj_tiles 0x08d1fb04, 2048, 0xd701
 
 	.global gUnknown_0820A4A4
 gUnknown_0820A4A4: @ 820A4A4
-	.incbin "baserom.gba", 0x0020a4a4, 0x8
+	obj_tiles 0x08d1fb04, 2048, 0xd702
 
 	.global gUnknown_0820A4AC
 gUnknown_0820A4AC: @ 820A4AC
-	.incbin "baserom.gba", 0x0020a4ac, 0x8
+	obj_tiles 0x08d1fc94, 4096, 0xd70b
 
 	.global gUnknown_0820A4B4
 gUnknown_0820A4B4: @ 820A4B4
-	.incbin "baserom.gba", 0x0020a4b4, 0x20
+	obj_tiles 0x08d0314c, 256, 0xd704
+	obj_tiles 0x08d0314c, 288, 0xd705
+	obj_tiles 0x08d0314c, 256, 0xd706
+	obj_tiles 0x08d0314c, 288, 0xd707
 
 	.global gUnknown_0820A4D4
 gUnknown_0820A4D4: @ 820A4D4
@@ -1331,15 +1333,18 @@ gUnknown_0820A6EC: @ 820A6EC
 
 	.global gUnknown_0820A754
 gUnknown_0820A754: @ 820A754
-	.incbin "baserom.gba", 0x0020a754, 0x10
+	obj_tiles 0x08e6a758, 512, 0xd70c
+	obj_tiles 0x08e6a758, 512, 0xd70d
 
 	.global gUnknown_0820A764
 gUnknown_0820A764: @ 820A764
-	.incbin "baserom.gba", 0x0020a764, 0x10
+	obj_pal 0x08d1212c, 0xd710
+	obj_pal 0x08d1212c, 0xd711
 
 	.global gUnknown_0820A774
 gUnknown_0820A774: @ 820A774
-	.incbin "baserom.gba", 0x0020a774, 0x10
+	obj_pal 0x08d1214c, 0xd712
+	obj_pal 0x08d1214c, 0xd713
 
 	.global gUnknown_0820A784
 gUnknown_0820A784: @ 820A784
@@ -1470,11 +1475,23 @@ gUnknown_0820B7EC: @ 820B7EC
 
 	.global gUnknown_0820C07C
 gUnknown_0820C07C: @ 820C07C
-	.incbin "baserom.gba", 0x0020c07c, 0x68
+	obj_tiles 0x0201d000, 256, 0x00c8
+	obj_tiles 0x0201d100, 256, 0x00c9
+	obj_tiles 0x0201d200, 256, 0x00ca
+	obj_tiles 0x0201d300, 256, 0x00cb
+	obj_tiles 0x0201d400, 256, 0x00cc
+	obj_tiles 0x0201d500, 256, 0x00cd
+	obj_tiles 0x0201d600, 256, 0x00ce
+	obj_tiles 0x0201d700, 256, 0x00cf
+	obj_tiles 0x0201d800, 256, 0x00d0
+	obj_tiles 0x0201d900, 256, 0x00d1
+	obj_tiles 0x0201da00, 256, 0x00d2
+	obj_tiles 0x0201db00, 256, 0x00d3
+	obj_tiles 0x0201dc00, 256, 0x00d4
 
 	.global gUnknown_0820C0E4
 gUnknown_0820C0E4: @ 820C0E4
-	.incbin "baserom.gba", 0x0020c0e4, 0x8
+	obj_pal 0x0820c03c, 0x133d
 
 	.global gUnknown_0820C0EC
 gUnknown_0820C0EC: @ 820C0EC
@@ -1482,11 +1499,11 @@ gUnknown_0820C0EC: @ 820C0EC
 
 	.global gUnknown_0820C124
 gUnknown_0820C124: @ 820C124
-	.incbin "baserom.gba", 0x0020c124, 0x8
+	obj_tiles 0x08ea1dec, 2048, 0x012c
 
 	.global gUnknown_0820C12C
 gUnknown_0820C12C: @ 820C12C
-	.incbin "baserom.gba", 0x0020c12c, 0x8
+	obj_pal 0x08ea0328, 0x0929
 
 	.global gUnknown_0820C134
 gUnknown_0820C134: @ 820C134
@@ -1647,11 +1664,11 @@ gUnknown_08215778: @ 8215778
 
 	.global gUnknown_0821594C
 gUnknown_0821594C: @ 821594C
-	.incbin "baserom.gba", 0x0021594c, 0x8
+	obj_tiles 0x0820c3f8, 1536, 0x15b5
 
 	.global gUnknown_08215954
 gUnknown_08215954: @ 8215954
-	.incbin "baserom.gba", 0x00215954, 0x8
+	obj_pal 0x0820c3d8, 0x15b6
 
 	.global gUnknown_0821595C
 gUnknown_0821595C: @ 821595C
@@ -1659,15 +1676,15 @@ gUnknown_0821595C: @ 821595C
 
 	.global gUnknown_082159A4
 gUnknown_082159A4: @ 82159A4
-	.incbin "baserom.gba", 0x002159a4, 0x8
+	obj_tiles 0x08212138, 512, 0x15ae
 
 	.global gUnknown_082159AC
 gUnknown_082159AC: @ 82159AC
-	.incbin "baserom.gba", 0x002159ac, 0x8
+	obj_pal 0x08212118, 0x15af
 
 	.global gUnknown_082159B4
 gUnknown_082159B4: @ 82159B4
-	.incbin "baserom.gba", 0x002159b4, 0x8
+	obj_pal 0x082120b8, 0x15b3
 
 	.global gUnknown_082159BC
 gUnknown_082159BC: @ 82159BC
@@ -1675,7 +1692,7 @@ gUnknown_082159BC: @ 82159BC
 
 	.global gUnknown_082159F4
 gUnknown_082159F4: @ 82159F4
-	.incbin "baserom.gba", 0x002159f4, 0x8
+	obj_tiles 0x08212338, 768, 0x15b0
 
 	.global gUnknown_082159FC
 gUnknown_082159FC: @ 82159FC
@@ -1683,7 +1700,7 @@ gUnknown_082159FC: @ 82159FC
 
 	.global gUnknown_08215A28
 gUnknown_08215A28: @ 8215A28
-	.incbin "baserom.gba", 0x00215a28, 0x8
+	obj_tiles 0x08212538, 256, 0x15b2
 
 	.global gUnknown_08215A30
 gUnknown_08215A30: @ 8215A30
@@ -1691,7 +1708,7 @@ gUnknown_08215A30: @ 8215A30
 
 	.global gUnknown_08215A78
 gUnknown_08215A78: @ 8215A78
-	.incbin "baserom.gba", 0x00215a78, 0x8
+	obj_tiles 0x08212738, 4096, 0x15b4
 
 	.global gUnknown_08215A80
 gUnknown_08215A80: @ 8215A80
@@ -1817,15 +1834,15 @@ gUnknown_08216308: @ 8216308
 
 	.global gUnknown_082163DC
 gUnknown_082163DC: @ 82163DC
-	.incbin "baserom.gba", 0x002163dc, 0x8
+	obj_tiles 0x08e91618, 2048, 0xb5d1
 
 	.global gUnknown_082163E4
 gUnknown_082163E4: @ 82163E4
-	.incbin "baserom.gba", 0x002163e4, 0x8
+	obj_pal 0x08e920d8, 0xb5d2
 
 	.global gUnknown_082163EC
 gUnknown_082163EC: @ 82163EC
-	.incbin "baserom.gba", 0x002163ec, 0x8
+	obj_pal 0x08e920f8, 0x3018
 
 	.global gUnknown_082163F4
 gUnknown_082163F4: @ 82163F4
@@ -1833,7 +1850,7 @@ gUnknown_082163F4: @ 82163F4
 
 	.global gUnknown_08216454
 gUnknown_08216454: @ 8216454
-	.incbin "baserom.gba", 0x00216454, 0x8
+	obj_tiles 0x08e90618, 512, 0xbef8
 
 	.global gUnknown_0821645C
 gUnknown_0821645C: @ 821645C
@@ -1841,7 +1858,7 @@ gUnknown_0821645C: @ 821645C
 
 	.global gUnknown_082164F4
 gUnknown_082164F4: @ 82164F4
-	.incbin "baserom.gba", 0x002164f4, 0x8
+	obj_tiles 0x08e90818, 224, 0x5ba0
 
 	.global gUnknown_082164FC
 gUnknown_082164FC: @ 82164FC
@@ -1849,7 +1866,7 @@ gUnknown_082164FC: @ 82164FC
 
 	.global gUnknown_08216540
 gUnknown_08216540: @ 8216540
-	.incbin "baserom.gba", 0x00216540, 0x8
+	obj_tiles 0x08e90a18, 1536, 0x3039
 
 	.global gUnknown_08216548
 gUnknown_08216548: @ 8216548
@@ -1857,7 +1874,7 @@ gUnknown_08216548: @ 8216548
 
 	.global gUnknown_08216574
 gUnknown_08216574: @ 8216574
-	.incbin "baserom.gba", 0x00216574, 0x8
+	obj_tiles 0x08e91018, 1024, 0x303a
 
 	.global gUnknown_0821657C
 gUnknown_0821657C: @ 821657C
@@ -3635,10 +3652,10 @@ gMapGroups:: @ 8308588
 	.include "data/maps/SafariZone_Northeast/connections.s"
 	.include "data/maps/SafariZone_Southwest/connections.s"
 	.include "data/maps/SafariZone_Southeast/connections.s"
+
 	.global gUnknown_08308E28
 gUnknown_08308E28: @ 8308E28
-@ replacing .incbin "baserom.gba", 0x00308e28, 0x4
-	.space 0x00000004
+	.space 4
 
 	.global gUnknown_08308E2C
 gUnknown_08308E2C: @ 8308E2C
@@ -5364,8 +5381,7 @@ gUnknown_08376290: @ 8376290
 
 	.global gUnknown_083762D8
 gUnknown_083762D8: @ 83762D8
-@ replacing .incbin "baserom.gba", 0x003762d8, 0x4
-	.space 0x00000004
+	.space 4
 
 	.global gUnknown_083762DC
 gUnknown_083762DC: @ 83762DC
@@ -5410,8 +5426,7 @@ gUnknown_083763E4: @ 83763E4
 
 	.global gUnknown_08376414
 gUnknown_08376414: @ 8376414
-@ replacing .incbin "baserom.gba", 0x00376414, 0x4
-	.space 0x00000004
+	.space 4
 
 	.global gUnknown_08376418
 gUnknown_08376418: @ 8376418
@@ -5435,7 +5450,7 @@ gUnknown_08376504: @ 8376504
 
 	.global gUnknown_083765DC
 gUnknown_083765DC: @ 83765DC
-	.incbin "baserom.gba", 0x003765dc, 0x8
+	obj_tiles 0x0837657c, 64, 0xd750
 
 	.global gUnknown_083765E4
 gUnknown_083765E4: @ 83765E4
@@ -6535,8 +6550,7 @@ gUnknown_0837F5A8: @ 837F5A8
 
 	.global gUnknown_0837F5AC
 gUnknown_0837F5AC: @ 837F5AC
-@ replacing .incbin "baserom.gba", 0x0037f5ac, 0x4
-	.space 0x00000004
+	.space 4
 
 	.global gUnknown_0837F5B0
 gUnknown_0837F5B0: @ 837F5B0
@@ -6544,8 +6558,8 @@ gUnknown_0837F5B0: @ 837F5B0
 
 	.global gUnknown_0837F5E0
 gUnknown_0837F5E0: @ 837F5E0
-
-	.incbin "baserom.gba", 0x37f5e0, 0x10
+	obj_tiles 0x082089dc, 2048, 0xd755
+	obj_tiles 0x082089dc, 2048, 0xd756
 
 	.include "data/maps/events/PetalburgCity.s"
 	.include "data/maps/events/SlateportCity.s"
@@ -6969,11 +6983,21 @@ gUnknown_083931F8: @ 83931F8
 
 	.global gUnknown_08393210
 gUnknown_08393210: @ 8393210
-	.incbin "baserom.gba", 0x00393210, 0x40
+	.ifdef SAPPHIRE
+	.incbin "graphics/title_screen/kyogre_dark.gbapal"
+	.incbin "graphics/title_screen/kyogre_glow.gbapal"
+	.else
+	.incbin "graphics/title_screen/groudon_dark.gbapal"
+	.incbin "graphics/title_screen/groudon_glow.gbapal"
+	.endif
 
 	.global gUnknown_08393250
 gUnknown_08393250: @ 8393250
-	.incbin "baserom.gba", 0x00393250, 0x79c
+	.ifdef SAPPHIRE
+	.incbin "graphics/title_screen/kyogre.4bpp.lz"
+	.else
+	.incbin "graphics/title_screen/groudon.4bpp.lz"
+	.endif
 
 	.global gUnknown_083939EC
 gUnknown_083939EC: @ 83939EC
@@ -7159,7 +7183,7 @@ gUnknown_0839AB90: @ 839AB90
 
 	.global gUnknown_0839ABA8
 gUnknown_0839ABA8: @ 839ABA8
-	.incbin "baserom.gba", 0x0039aba8, 0x8
+	obj_tiles 0x08397948, 2048, 0x1201
 
 	.global gUnknown_0839ABB0
 gUnknown_0839ABB0: @ 839ABB0
@@ -7183,7 +7207,7 @@ gUnknown_0839AC3C: @ 839AC3C
 
 	.global gUnknown_0839AC54
 gUnknown_0839AC54: @ 839AC54
-	.incbin "baserom.gba", 0x0039ac54, 0x8
+	obj_tiles 0x08399fc8, 2560, 0x1204
 
 	.global gUnknown_0839AC5C
 gUnknown_0839AC5C: @ 839AC5C
@@ -7195,7 +7219,7 @@ gUnknown_0839AC68: @ 839AC68
 
 	.global gUnknown_0839AC70
 gUnknown_0839AC70: @ 839AC70
-	.incbin "baserom.gba", 0x0039ac70, 0x8
+	obj_tiles 0x08398988, 64, 0x1205
 
 	.global gUnknown_0839AC78
 gUnknown_0839AC78: @ 839AC78
@@ -7481,8 +7505,7 @@ gUnknown_0839F2C4: @ 839F2C4
 
 	.global gUnknown_0839F2C8
 gUnknown_0839F2C8: @ 839F2C8
-@ replacing .incbin "baserom.gba", 0x0039f2c8, 0x4
-	.space 0x00000004
+	.space 4
 
 	.global gUnknown_0839F2CC
 gUnknown_0839F2CC: @ 839F2CC
@@ -7803,8 +7826,7 @@ gUnknown_083A05F8: @ 83A05F8
 
 	.global gUnknown_083B4EC4
 gUnknown_083B4EC4: @ 83B4EC4
-@ replacing .incbin "baserom.gba", 0x003b4ec4, 0x20
-	.space 0x00000020
+	.space 32
 
 @ 83B4EE4
 	.include "data/graphics/pokemon/footprint_table.s"
@@ -8029,19 +8051,19 @@ gUnknown_083B6DB8: @ 83B6DB8
 
 	.global gUnknown_083B6DBC
 gUnknown_083B6DBC: @ 83B6DBC
-	.incbin "baserom.gba", 0x003b6dbc, 0x8
+	obj_pal 0x083b6b94, 0xdacd
 
 	.global gUnknown_083B6DC4
 gUnknown_083B6DC4: @ 83B6DC4
-	.incbin "baserom.gba", 0x003b6dc4, 0x8
+	obj_tiles 0x083b6bb4, 448, 0x0005
 
 	.global gUnknown_083B6DCC
 gUnknown_083B6DCC: @ 83B6DCC
-	.incbin "baserom.gba", 0x003b6dcc, 0x8
+	obj_tiles 0x02002784, 2048, 0x0002
 
 	.global gUnknown_083B6DD4
 gUnknown_083B6DD4: @ 83B6DD4
-	.incbin "baserom.gba", 0x003b6dd4, 0x8
+	obj_pal 0x02002704, 0xdac7
 
 	.global gUnknown_083B6DDC
 gUnknown_083B6DDC: @ 83B6DDC
@@ -8073,7 +8095,7 @@ gUnknown_083BB0E8: @ 83BB0E8
 
 	.global gUnknown_083BB288
 gUnknown_083BB288: @ 83BB288
-	.incbin "baserom.gba", 0x003bb288, 0x8
+	obj_tiles 0x083bb208, 128, 0x0006
 
 	.global gUnknown_083BB290
 gUnknown_083BB290: @ 83BB290
@@ -8205,7 +8227,7 @@ gUnknown_083C1068: @ 83C1068
 
 	.global gUnknown_083C11B8
 gUnknown_083C11B8: @ 83C11B8
-	.incbin "baserom.gba", 0x003c11b8, 0x8
+	obj_tiles 0x08e71d10, 5888, 0x7532
 
 	.global gUnknown_083C11C0
 gUnknown_083C11C0: @ 83C11C0
@@ -8217,11 +8239,11 @@ gUnknown_083C11D8: @ 83C11D8
 
 	.global gUnknown_083C1270
 gUnknown_083C1270: @ 83C1270
-	.incbin "baserom.gba", 0x003c1270, 0x8
+	obj_tiles 0x08e7274c, 1024, 0x7530
 
 	.global gUnknown_083C1278
 gUnknown_083C1278: @ 83C1278
-	.incbin "baserom.gba", 0x003c1278, 0x8
+	obj_pal 0x08e72848, 0x7530
 
 	.global gUnknown_083C1280
 gUnknown_083C1280: @ 83C1280
@@ -8229,11 +8251,11 @@ gUnknown_083C1280: @ 83C1280
 
 	.global gUnknown_083C12F4
 gUnknown_083C12F4: @ 83C12F4
-	.incbin "baserom.gba", 0x003c12f4, 0x8
+	obj_tiles 0x08e72860, 896, 0x7531
 
 	.global gUnknown_083C12FC
 gUnknown_083C12FC: @ 83C12FC
-	.incbin "baserom.gba", 0x003c12fc, 0x8
+	obj_pal 0x08e72a50, 0x7531
 
 	.global gUnknown_083C1304
 gUnknown_083C1304: @ 83C1304
@@ -8371,15 +8393,15 @@ gUnknown_083C1CC4: @ 83C1CC4
 
 	.global gUnknown_083C1CC8
 gUnknown_083C1CC8: @ 83C1CC8
-	.incbin "baserom.gba", 0x003c1cc8, 0x8
+	obj_tiles 0x08e75024, 12288, 0x7530
 
 	.global gUnknown_083C1CD0
 gUnknown_083C1CD0: @ 83C1CD0
-	.incbin "baserom.gba", 0x003c1cd0, 0x8
+	obj_tiles 0x08e75ba0, 12288, 0x7530
 
 	.global gUnknown_083C1CD8
 gUnknown_083C1CD8: @ 83C1CD8
-	.incbin "baserom.gba", 0x003c1cd8, 0x8
+	obj_pal 0x08e76700, 0x7530
 
 	.global gUnknown_083C1CE0
 gUnknown_083C1CE0: @ 83C1CE0
@@ -8398,7 +8420,7 @@ gUnknown_083C1D24: @ 83C1D24
 
 	.global gUnknown_083C1D30
 gUnknown_083C1D30: @ 83C1D30
-	.incbin "baserom.gba", 0x003c1d30, 0x8
+	obj_pal 0x083c170c, 0x0008
 
 	.global gUnknown_083C1D38
 gUnknown_083C1D38: @ 83C1D38
@@ -8417,7 +8439,7 @@ gUnknown_083C1E04: @ 83C1E04
 
 	.global gUnknown_083C1F74
 gUnknown_083C1F74: @ 83C1F74
-	.incbin "baserom.gba", 0x003c1f74, 0x8
+	obj_tiles 0x08e78bb4, 2048, 0x2710
 
 	.global gUnknown_083C1F7C
 gUnknown_083C1F7C: @ 83C1F7C
@@ -8509,7 +8531,7 @@ gUnknown_083C92A8: @ 83C92A8
 
 	.global gUnknown_083C92B4
 gUnknown_083C92B4: @ 83C92B4
-	.incbin "baserom.gba", 0x003c92b4, 0x8
+	obj_tiles 0x083c922d, 32, 0x04b0
 
 	.global gUnknown_083C92BC
 gUnknown_083C92BC: @ 83C92BC
@@ -8625,8 +8647,7 @@ gUnknown_083CA33C: @ 83CA33C
 
 	.global gUnknown_083CA340
 gUnknown_083CA340: @ 83CA340
-@ replacing .incbin "baserom.gba", 0x003ca340, 0x1
-	.space 0x00000001
+	.space 1
 
 	.global gUnknown_083CA341
 gUnknown_083CA341: @ 83CA341
@@ -8642,7 +8663,10 @@ gUnknown_083CA3AC: @ 83CA3AC
 
 	.global gUnknown_083CA3C4
 gUnknown_083CA3C4: @ 83CA3C4
-	.incbin "baserom.gba", 0x003ca3c4, 0x20
+	obj_tiles 0x08e69404, 256, 0x4e26
+	obj_tiles 0x08e69404, 256, 0x4e27
+	obj_tiles 0x08e69404, 256, 0x4e28
+	obj_tiles 0x08e69404, 256, 0x4e29
 
 	.global gUnknown_083CA3E4
 gUnknown_083CA3E4: @ 83CA3E4
@@ -8658,7 +8682,7 @@ gUnknown_083CA464: @ 83CA464
 
 	.global gUnknown_083CA46C
 gUnknown_083CA46C: @ 83CA46C
-	.incbin "baserom.gba", 0x003ca46c, 0x8
+	obj_tiles 0x08e69648, 1024, 0xabe2
 
 	.global gUnknown_083CA474
 gUnknown_083CA474: @ 83CA474
@@ -8674,15 +8698,15 @@ gUnknown_083CA4A4: @ 83CA4A4
 
 	.global gUnknown_083CA4BC
 gUnknown_083CA4BC: @ 83CA4BC
-	.incbin "baserom.gba", 0x003ca4bc, 0x8
+	obj_tiles 0x08d1c748, 2048, 0x4e25
 
 	.global gUnknown_083CA4C4
 gUnknown_083CA4C4: @ 83CA4C4
-	.incbin "baserom.gba", 0x003ca4c4, 0x8
+	obj_tiles 0x08d19590, 896, 0xabe0
 
 	.global gUnknown_083CA4CC
 gUnknown_083CA4CC: @ 83CA4CC
-	.incbin "baserom.gba", 0x003ca4cc, 0x8
+	obj_pal 0x08d19734, 0xabe0
 
 	.include "data/text/contest_strings.s"
 
@@ -8720,7 +8744,7 @@ UnknownText_UnknownFormatting3:
 	.align 2
 	.global gUnknown_083CC3AC
 gUnknown_083CC3AC: @ 83CC3AC
-	.incbin "baserom.gba", 0x003cc3ac, 0x8
+	obj_tiles 0x08d16024, 512, 0x4e20
 
 	.global gUnknown_083CC3B4
 gUnknown_083CC3B4: @ 83CC3B4
@@ -8732,7 +8756,10 @@ gUnknown_083CC454: @ 83CC454
 
 	.global gUnknown_083CC4B4
 gUnknown_083CC4B4: @ 83CC4B4
-	.incbin "baserom.gba", 0x003cc4b4, 0x20
+	obj_tiles 0x08d0314c, 4096, 0x80e8
+	obj_tiles 0x08d0314c, 4096, 0x80e9
+	obj_tiles 0x08d0314c, 4096, 0x80ea
+	obj_tiles 0x08d0314c, 4096, 0x80eb
 
 	.global gUnknown_083CC4D4
 gUnknown_083CC4D4: @ 83CC4D4
@@ -9089,11 +9116,11 @@ gUnknown_083CF56C: @ 83CF56C
 
 	.global gUnknown_083CF584
 gUnknown_083CF584: @ 83CF584
-	.incbin "baserom.gba", 0x003cf584, 0x8
+	obj_tiles 0x08e77a5c, 256, 0x2722
 
 	.global gUnknown_083CF58C
 gUnknown_083CF58C: @ 83CF58C
-	.incbin "baserom.gba", 0x003cf58c, 0x8
+	obj_pal 0x08e77900, 0x2722
 
 @ 83CF594
 	.include "data/contest_moves.s"
@@ -9514,7 +9541,14 @@ gUnknown_083D174C: @ 83D174C
 
 	.global gUnknown_083D1764
 gUnknown_083D1764: @ 83D1764
-	.incbin "baserom.gba", 0x003d1764, 0x40
+	obj_tiles 0x082089dc, 1024, 0x0bc1
+	obj_tiles 0x082089dc, 1024, 0x0bc2
+	obj_tiles 0x082089dc, 1024, 0x0bc3
+	obj_tiles 0x082089dc, 1024, 0x0bc4
+	obj_tiles 0x082089dc, 1024, 0x0bc5
+	obj_tiles 0x082089dc, 1024, 0x0bc6
+	obj_tiles 0x082089dc, 1024, 0x0bc7
+	obj_tiles 0x082089dc, 1024, 0x0bc8
 
 	.global gUnknown_083D17A4
 gUnknown_083D17A4: @ 83D17A4
@@ -9526,11 +9560,11 @@ gUnknown_083D17B4: @ 83D17B4
 
 	.global gUnknown_083D17CC
 gUnknown_083D17CC: @ 83D17CC
-	.incbin "baserom.gba", 0x003d17cc, 0x8
+	obj_tiles 0x08d2d7d4, 544, 0x0bc9
 
 	.global gUnknown_083D17D4
 gUnknown_083D17D4: @ 83D17D4
-	.incbin "baserom.gba", 0x003d17d4, 0x8
+	obj_pal 0x08d2d8f4, 0x0bc9
 
 	.global gUnknown_083D17DC
 gUnknown_083D17DC: @ 83D17DC
@@ -9558,11 +9592,11 @@ gUnknown_083D188E: @ 83D188E
 
 	.global gUnknown_083D1898
 gUnknown_083D1898: @ 83D1898
-	.incbin "baserom.gba", 0x003d1898, 0x8
+	obj_pal 0x083d190c, 0x0080
 
 	.global gUnknown_083D18A0
 gUnknown_083D18A0: @ 83D18A0
-	.incbin "baserom.gba", 0x003d18a0, 0x8
+	obj_pal 0x083d18ec, 0x0000
 
 	.global gUnknown_083D18A8
 gUnknown_083D18A8: @ 83D18A8
@@ -10114,7 +10148,7 @@ gUnknown_083DBD18: @ 83DBD18
 
 	.global gUnknown_083DBD30
 gUnknown_083DBD30: @ 83DBD30
-	.incbin "baserom.gba", 0x003dbd30, 0x8
+	obj_tiles 0x083dba60, 2048, 0x0006
 
 	.global gUnknown_083DBD38
 gUnknown_083DBD38: @ 83DBD38
@@ -10126,7 +10160,7 @@ gUnknown_083DBD48: @ 83DBD48
 
 	.global gUnknown_083DBD60
 gUnknown_083DBD60: @ 83DBD60
-	.incbin "baserom.gba", 0x003dbd60, 0x8
+	obj_tiles 0x08e8ea98, 4096, 0x0007
 
 	.global gUnknown_083DBD68
 gUnknown_083DBD68: @ 83DBD68
@@ -10346,7 +10380,7 @@ gUnknown_083E4454: @ 83E4454
 
 	.global gUnknown_083E446C
 gUnknown_083E446C: @ 83E446C
-	.incbin "baserom.gba", 0x003e446c, 0x8
+	obj_tiles 0x083e41d8, 256, 0x0019
 
 	.global gUnknown_083E4474
 gUnknown_083E4474: @ 83E4474
@@ -10430,11 +10464,11 @@ gUnknown_083E476C: @ 83E476C
 
 	.global gUnknown_083E4784
 gUnknown_083E4784: @ 83E4784
-	.incbin "baserom.gba", 0x003e4784, 0x8
+	obj_tiles 0x083e37c0, 896, 0x0017
 
 	.global gUnknown_083E478C
 gUnknown_083E478C: @ 83E478C
-	.incbin "baserom.gba", 0x003e478c, 0x8
+	obj_pal 0x083e37a0, 0x000f
 
 	.global gUnknown_083E4794
 gUnknown_083E4794: @ 83E4794
@@ -10490,8 +10524,7 @@ gUnknown_083E5214: @ 83E5214
 
 	.global gUnknown_083E521C
 gUnknown_083E521C: @ 83E521C
-@ replacing .incbin "baserom.gba", 0x003e521c, 0x8
-	.space 0x00000008
+	.space 8
 Unknown_83E5224:
 	.incbin "baserom.gba", 0x3E5224, 0x8
 Unknown_83E522C:
@@ -10726,7 +10759,7 @@ gUnknown_083E7684: @ 83E7684
 
 	.global gUnknown_083E76E8
 gUnknown_083E76E8: @ 83E76E8
-	.incbin "baserom.gba", 0x003e76e8, 0x8
+	obj_pal 0x083e5ad0, 0x0000
 
 	.global gUnknown_083E76F0
 gUnknown_083E76F0: @ 83E76F0
@@ -10769,7 +10802,7 @@ gUnknown_083E79C0: @ 83E79C0
 
 	.global gUnknown_083E79CC
 gUnknown_083E79CC: @ 83E79CC
-	.incbin "baserom.gba", 0x003e79cc, 0x8
+	obj_pal 0x083e782c, 0x0002
 
 	.global gUnknown_083E79D4
 gUnknown_083E79D4: @ 83E79D4
@@ -10785,8 +10818,7 @@ gUnknown_083E7A50: @ 83E7A50
 
 	.global gUnknown_083EB6C4
 gUnknown_083EB6C4: @ 83EB6C4
-@ replacing .incbin "baserom.gba", 0x003eb6c4, 0x1
-	.space 0x00000001
+	.space 1
 
 	.global gUnknown_083EB6C5
 gUnknown_083EB6C5: @ 83EB6C5
@@ -10858,7 +10890,7 @@ gUnknown_083EC93C: @ 83EC93C
 
 	.global gUnknown_083EC954
 gUnknown_083EC954: @ 83EC954
-	.incbin "baserom.gba", 0x003ec954, 0x8
+	obj_pal 0x02039184, 0x0bb8
 
 	.global gUnknown_083EC95C
 gUnknown_083EC95C: @ 83EC95C
@@ -10896,7 +10928,7 @@ gUnknown_083EC9D4: @ 83EC9D4
 
 	.global gUnknown_083ECA5C
 gUnknown_083ECA5C: @ 83ECA5C
-	.incbin "baserom.gba", 0x003eca5c, 0x8
+	obj_pal 0x083ec98c, 0x0008
 
 	.global gUnknown_083ECA64
 gUnknown_083ECA64: @ 83ECA64
@@ -11155,7 +11187,7 @@ gUnknown_083ECE30: @ 83ECE30
 
 	.global gUnknown_083ECE3A
 gUnknown_083ECE3A: @ 83ECE3A
-	.incbin "baserom.gba", 0x003ece3a, 0x8
+	obj_pal 0x02030406, 0x0005
 
 	.global gUnknown_083ECE42
 gUnknown_083ECE42: @ 83ECE42
@@ -11368,7 +11400,7 @@ gUnknown_083EDC2C: @ 83EDC2C
 
 	.global gUnknown_083EDCDC
 gUnknown_083EDCDC: @ 83EDCDC
-	.incbin "baserom.gba", 0x003edcdc, 0x8
+	obj_tiles 0x02010000, 2048, 0x0011
 
 	.global gUnknown_083EDCE4
 gUnknown_083EDCE4: @ 83EDCE4
@@ -11562,8 +11594,7 @@ gUnknown_083F6138: @ 83F6138
 
 	.global gUnknown_083F6140
 gUnknown_083F6140: @ 83F6140
-@ replacing .incbin "baserom.gba", 0x003f6140, 0x4
-	.space 0x00000004
+	.space 4
 
 	.global gUnknown_083F6144
 gUnknown_083F6144: @ 83F6144
@@ -11828,11 +11859,11 @@ gUnknown_083F7F70: @ 83F7F70
 
 	.global gUnknown_083F7F74
 gUnknown_083F7F74: @ 83F7F74
-	.incbin "baserom.gba", 0x003f7f74, 0x8
+	obj_tiles 0x08e77d90, 2048, 0x39d0
 
 	.global gUnknown_083F7F7C
 gUnknown_083F7F7C: @ 83F7F7C
-	.incbin "baserom.gba", 0x003f7f7c, 0x8
+	obj_pal 0x08e78050, 0x39d0
 
 	.global gUnknown_083F7F84
 gUnknown_083F7F84: @ 83F7F84
@@ -11852,8 +11883,7 @@ gUnknown_083F804C: @ 83F804C
 
 	.global gUnknown_083F806C
 gUnknown_083F806C: @ 83F806C
-@ replacing .incbin "baserom.gba", 0x003f806c, 0x20
-	.space 0x00000020
+	.space 32
 
 	.global gUnknown_083F808C
 gUnknown_083F808C: @ 83F808C
@@ -11971,7 +12001,7 @@ gUnknown_083F857A: @ 83F857A
 
 	.global gUnknown_083F858C
 gUnknown_083F858C: @ 83F858C
-	.incbin "baserom.gba", 0x003f858c, 0x8
+	obj_tiles 0x083f85dc, 128, 0x0002
 
 	.global gUnknown_083F8594
 gUnknown_083F8594: @ 83F8594
@@ -11983,7 +12013,7 @@ gUnknown_083F85A4: @ 83F85A4
 
 	.global gUnknown_083F865C
 gUnknown_083F865C: @ 83F865C
-	.incbin "baserom.gba", 0x003f865c, 0x8
+	obj_pal 0x08e87d90, 0x0003
 
 	.global gUnknown_083F8664
 gUnknown_083F8664: @ 83F8664
@@ -12097,7 +12127,7 @@ gUnknown_083F9EE8: @ 83F9EE8
 
 	.global gUnknown_083F9F54
 gUnknown_083F9F54: @ 83F9F54
-	.incbin "baserom.gba", 0x003f9f54, 0x8
+	obj_tiles 0x08e824bc, 5632, 0x0004
 
 	.global gUnknown_083F9F5C
 gUnknown_083F9F5C: @ 83F9F5C
@@ -12149,7 +12179,7 @@ gUnknown_083FA40C: @ 83FA40C
 
 	.global gUnknown_083FA42C
 gUnknown_083FA42C: @ 83FA42C
-	.incbin "baserom.gba", 0x003fa42c, 0x8
+	obj_tiles 0x08e82140, 2048, 0x0006
 
 	.global gUnknown_083FA434
 gUnknown_083FA434: @ 83FA434
@@ -12890,11 +12920,11 @@ gUnknown_08402D08: @ 8402D08
 
 	.global gUnknown_08402D80
 gUnknown_08402D80: @ 8402D80
-	.incbin "baserom.gba", 0x00402d80, 0x8
+	obj_tiles 0x08402b78, 384, 0x1595
 
 	.global gUnknown_08402D88
 gUnknown_08402D88: @ 8402D88
-	.incbin "baserom.gba", 0x00402d88, 0x8
+	obj_pal 0x08402b58, 0x1596
 
 	.global gUnknown_08402D90
 gUnknown_08402D90: @ 8402D90
@@ -12974,7 +13004,7 @@ gUnknown_08406118: @ 8406118
 
 	.global gUnknown_0840612C
 gUnknown_0840612C: @ 840612C
-	.incbin "baserom.gba", 0x0040612c, 0x8
+	obj_pal 0x02030400, 0x0001
 
 	.global gUnknown_08406134
 gUnknown_08406134: @ 8406134
@@ -12986,11 +13016,11 @@ gUnknown_08406134: @ 8406134
 
 	.global gUnknown_08406148
 gUnknown_08406148: @ 8406148
-	.incbin "baserom.gba", 0x00406148, 0x8
+	obj_pal 0x08405f18, 0x0200
 
 	.global gUnknown_08406150
 gUnknown_08406150: @ 8406150
-	.incbin "baserom.gba", 0x00406150, 0x8
+	obj_pal 0x08405ef8, 0x0000
 
 	.global gUnknown_08406158
 gUnknown_08406158: @ 8406158
@@ -13312,7 +13342,18 @@ gUnknown_0840B23C: @ 840B23C
 
 	.global gUnknown_0840B258
 gUnknown_0840B258: @ 840B258
-	.incbin "baserom.gba", 0x0040b258, 0x60
+	obj_tiles 0x08d1a7f4, 256, 0xd6ec
+	obj_tiles 0x08d1a7f4, 256, 0xd6ed
+	obj_tiles 0x08d1a7f4, 256, 0xd6ee
+	obj_tiles 0x08d1a7f4, 256, 0xd6ef
+	obj_tiles 0x08d1a7f4, 256, 0xd6f0
+	obj_tiles 0x08d1a7f4, 256, 0xd6f1
+	obj_tiles 0x08d1a7f4, 256, 0xd6f2
+	obj_tiles 0x08d1a7f4, 256, 0xd6f3
+	obj_tiles 0x08d1a7f4, 256, 0xd6f4
+	obj_tiles 0x08d1a7f4, 256, 0xd6f5
+	obj_tiles 0x08d1a7f4, 256, 0xd6f6
+	obj_tiles 0x08d1a7f4, 256, 0xd6f7
 
 	.global gUnknown_0840B2B8
 gUnknown_0840B2B8: @ 840B2B8
@@ -16261,7 +16302,7 @@ gUnknown_084121A8: @ 84121A8
 
 	.global gUnknown_084121DC
 gUnknown_084121DC: @ 84121DC
-	.incbin "baserom.gba", 0x004121dc, 0x8
+	obj_tiles 0x08e781c8, 32, 0x39e2
 
 	.global gUnknown_084121E4
 gUnknown_084121E4: @ 84121E4
@@ -16508,9 +16549,9 @@ Unknown_8416F3A:
 Unknown_8416F42:
 	.incbin "baserom.gba", 0x00416f42, 0x8
 Unknown_8416F4A:
-	.incbin "baserom.gba", 0x00416f4a, 0x8
+	obj_tiles 0x08000900, 1536, 0x1800
 Unknown_8416F52:
-	.incbin "baserom.gba", 0x00416f52, 0x8
+	obj_tiles 0x02000100, 1024, 0x1800
 Unknown_8416F5A:
 	.incbin "baserom.gba", 0x00416f5a, 0x8
 Unknown_8416F62:
@@ -17743,11 +17784,11 @@ gUnknown_0842F1C0: @ 842F1C0
 
 	.global gUnknown_0842F240
 gUnknown_0842F240: @ 842F240
-	.incbin "baserom.gba", 0x0042f240, 0x8
+	obj_pal 0x0203a360, 0xfff0
 
 	.global gUnknown_0842F248
 gUnknown_0842F248: @ 842F248
-	.incbin "baserom.gba", 0x0042f248, 0x8
+	obj_pal 0x0203a360, 0xfff1
 
 	.global gUnknown_0842F250
 gUnknown_0842F250: @ 842F250
