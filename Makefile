@@ -8,7 +8,8 @@ CPP      := $(DEVKITARM)/bin/arm-none-eabi-cpp
 CPPFLAGS := -I tools/agbcc/include -iquote include -nostdinc -undef
 
 LD      := $(DEVKITARM)/bin/arm-none-eabi-ld
-LDFLAGS := -T ld_script.txt -T iwram_syms.txt -T ewram_syms.txt
+pokeruby_LDFLAGS := -T ld_script_ruby.txt -T iwram_syms.txt -T ewram_syms.txt
+pokesapphire_LDFLAGS := -T ld_script_sapphire.txt -T iwram_syms.txt -T ewram_syms.txt
 
 OBJCOPY := $(DEVKITARM)/bin/arm-none-eabi-objcopy
 
@@ -30,7 +31,7 @@ PREPROC := tools/preproc/preproc
 
 .PRECIOUS: %.1bpp %.4bpp %.8bpp %.gbapal %.lz
 
-.PHONY: all rom clean compare generated
+.PHONY: all clean compare ruby sapphire
 
 C_SRCS := $(wildcard src/*.c)
 C_OBJS := $(C_SRCS:%.c=%.o)
@@ -41,31 +42,27 @@ ASM_OBJS := asm/crt0.o asm/rom3.o asm/rom4.o asm/rom_8074BAC.o asm/rom5.o \
 DATA_ASM_OBJS := data/data1.o data/data2.o data/graphics.o data/sound_data.o
 
 OBJS := $(C_OBJS) $(ASM_OBJS) $(DATA_ASM_OBJS)
+pokeruby_OBJS := $(OBJS:.o=_ruby.o)
+pokesapphire_OBJS := $(OBJS:.o=_sapphire.o)
 
-ruby:
-	$(MAKE) generated
-	$(MAKE) ruby_rom
+ROM := pokeruby.gba pokesapphire.gba
+ELF := $(ROM:.gba=.elf)
 
-ruby_rom: ROM := pokeruby.gba
-ruby_rom: ELF := pokeruby.elf
-ruby_rom: pokeruby.gba
-
-sapphire:
-	$(MAKE) generated
-	$(MAKE) sapphire_rom
-
-sapphire_rom: ROM := pokesapphire.gba
-sapphire_rom: ELF := pokesapphire.elf
-sapphire_rom: ASFLAGS += --defsym SAPPHIRE=1
-sapphire_rom: CPPFLAGS += -DSAPPHIRE
-sapphire_rom: pokesapphire.gba
+all: ruby
+	@:
+both: ruby sapphire
+	@:
+ruby: pokeruby.gba
+	@:
+sapphire: pokesapphire.gba
+	@:
 
 # For contributors to make sure a change didn't affect the contents of the ROM.
-compare: ruby
+compare: both
 	@$(SHA1) rom.sha1
 
 clean:
-	rm -f pokeruby.gba pokesapphire.gba $(ELF) $(OBJS) $(C_SRCS:%.c=%.i)
+	rm -f $(ROM) $(ELF) $(OBJS) $(pokeruby_OBJS) $(pokesapphire_OBJS) $(C_SRCS:%.c=%.i)
 	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' \) -exec rm {} +
 
 include castform.mk
@@ -82,30 +79,45 @@ include menu.mk
 %.gbapal: %.pal ; $(GFX) $< $@
 %.lz: % ; $(GFX) $< $@
 
-src/siirtc.o: CFLAGS := -mthumb-interwork
+src/siirtc_ruby.o src/siirtc_sapphire.o: CFLAGS := -mthumb-interwork
 
-src/agb_flash.o: CFLAGS := -O -mthumb-interwork
-src/agb_flash_1m.o: CFLAGS := -O -mthumb-interwork
-src/agb_flash_mx.o: CFLAGS := -O -mthumb-interwork
+src/agb_flash_ruby.o src/agb_flash_sapphire.o: CFLAGS := -O -mthumb-interwork
+src/agb_flash_1m_ruby.o src/agb_flash_1m_sapphire.o: CFLAGS := -O -mthumb-interwork
+src/agb_flash_mx_ruby.o src/agb_flash_mx_sapphire.o: CFLAGS := -O -mthumb-interwork
 
-src/m4a_2.o: CC1 := tools/agbcc/bin/old_agbcc
-src/m4a_4.o: CC1 := tools/agbcc/bin/old_agbcc
+src/m4a_2_ruby.o src/m4a_2_sapphire.o: CC1 := tools/agbcc/bin/old_agbcc
+src/m4a_4_ruby.o src/m4a_2_sapphire.o: CC1 := tools/agbcc/bin/old_agbcc
 
-$(C_OBJS): %.o : %.c
-	@$(CPP) $(CPPFLAGS) $< -o $*.i
+src/%_ruby.o: VERSION := -D RUBY
+src/%_sapphire.o: VERSION := -D SAPPHIRE
+src/text_ruby.o src/text_sapphire.o: src/text.c $(GEN_FONT_HEADERS)
+src/link_ruby.o src/link_sapphire.o: src/link.c $(GEN_LINK_HEADERS)
+src/%_ruby.o src/%_sapphire.o src/%.o: src/%.c
+	@$(CPP) $(CPPFLAGS) $(VERSION) $< -o $*.i
 	@$(PREPROC) $*.i charmap.txt | $(CC1) $(CFLAGS) -o $*.s
-	@bash -c 'echo -e ".text\n\t.align\t2, 0\n"' >> $*.s
+	@echo -e ".text\n\t.align\t2, 0\n" >> $*.s
 	$(AS) $(ASFLAGS) -o $@ $*.s
 
-%.o : dep = $(shell $(SCANINC) $*.s)
+asm/%_ruby.o data/%_ruby.o: VERSION := --defsym RUBY=1
+asm/%_sapphire.o data/%_sapphire.o: VERSION := --defsym SAPPHIRE=1
 
-$(ASM_OBJS): %.o: %.s $$(dep)
-	$(AS) $(ASFLAGS) -o $@ $<
+asm/%.o: dep = $(shell $(SCANINC) asm/$*.s)
+asm/%_ruby.o asm/%_sapphire.o asm/%.o: asm/%.s $$(dep)
+	$(AS) $(ASFLAGS) $(VERSION) -o $@ $<
 
-$(DATA_ASM_OBJS): %.o: %.s $$(dep)
-	$(PREPROC) $< charmap.txt | $(AS) $(ASFLAGS) -o $@
+data/%.o: dep = $(shell $(SCANINC) data/$*.s)
+data/%_ruby.o data/%_sapphire.o data/%.o: data/%.s $$(dep)
+	$(PREPROC) $< charmap.txt | $(AS) $(ASFLAGS) $(VERSION) -o $@
 
-# Link objects to produce the ROM.
-pokeruby.gba pokesapphire.gba: $(OBJS)
-	$(LD) $(LDFLAGS) -o $(ELF) $(OBJS) $(LIBGCC)
-	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0x9000000 $(ELF) $(ROM)
+ld_script_ruby.txt: ld_script.txt
+	@sed "s/\(\(src\|asm\|data\)\/.*\)\.o/\1_ruby.o/g" $< > $@
+ld_script_sapphire.txt: ld_script.txt
+	@sed "s/\(\(src\|asm\|data\)\/.*\)\.o/\1_sapphire.o/g" $< > $@
+
+pokeruby.elf: ld_script_ruby.txt $(pokeruby_OBJS)
+	$(LD) $(pokeruby_LDFLAGS) -o $@ $(pokeruby_OBJS) $(LIBGCC)
+pokesapphire.elf: ld_script_sapphire.txt $(pokesapphire_OBJS)
+	$(LD) $(pokesapphire_LDFLAGS) -o $@ $(pokesapphire_OBJS) $(LIBGCC)
+
+%.gba: %.elf
+	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0x9000000 $< $@
