@@ -1572,7 +1572,9 @@ DewfordTown_Text_16BD37:: @ 816BD37
 	.string "“{STR_VAR_1}” is the\n"
 	.string "definition of “in” right now.$"
 
-	.incbin "baserom.gba", 0x16bd79, 0x2b
+UnknownString_816BD79: @ 816BD79
+	.string "“{STR_VAR_2}” is at\n"
+	.string "the pinnacle of cool right now.$"
 
 	.include "data/maps/text/LavaridgeTown.s"
 	.include "data/maps/text/FallarborTown.s"
@@ -1863,7 +1865,19 @@ LittlerootTown_BrendansHouse_1F_Text_172841:: @ 8172841
 	.string "INTERVIEWER: ...We brought you this\n"
 	.string "report from in front of PETALBURG GYM.$"
 
-	.incbin "baserom.gba", 0x17288c, 0xff
+UnknownString_817288C: @ 817288C
+	.string "There is a movie on TV.\p"
+	.string "Two men are dancing on a big piano\n"
+	.string "keyboard.\p"
+	.string "Better get going!$"
+
+UnknownString_81728E3: @ 81728E3
+	.string "It’s the instruction booklet for the\n"
+	.string "RUNNING SHOES.\p"
+	.string "“Press the B Button to run while\n"
+	.string "wearing your RUNNING SHOES.\p"
+	.string "“Lace up your RUNNING SHOES and hit\n"
+	.string "the road running!”$"
 
 LittlerootTown_BrendansHouse_1F_Text_17298B:: @ 817298B
 	.string "DAD: Hm?\p"
@@ -1896,7 +1910,16 @@ LittlerootTown_BrendansHouse_1F_Text_172BBC:: @ 8172BBC
 	.string "while, but all he talks about is POKéMON.\p"
 	.string "He should relax and stay a little longer.$"
 
-	.incbin "baserom.gba", 0x172c50, 0x1c8
+UnknownString_8172C50: @ 8172C50
+	.string "We bring you a special news bulletin.\p"
+	.string "We’ve received reports of a blue FLYING\n"
+	.string "POKéMON in various HOENN locales.\p"
+	.string "The identity of this POKéMON has not\n"
+	.string "yet been determined.\p"
+	.string "We now return you to your regular\n"
+	.string "movie presentation.$"
+
+	.incbin "baserom.gba", 0x172D30, 0xE8
 
 	.include "data/maps/text/LittlerootTown_BrendansHouse_2F.s"
 LittlerootTown_BrendansHouse_1F_Text_1730C2:: @ 81730C2
@@ -2018,7 +2041,10 @@ LittlerootTown_BrendansHouse_2F_Text_1739CC:: @ 81739CC
 	.string "catching POKéMON, I can pitch you a\l"
 	.string "battle if you’d like.$"
 
-	.incbin "baserom.gba", 0x173a76, 0xb3
+UnknownString_8173A76: @ 8173A76
+	.string "It’s lined with POKéMON picture books.$"
+
+	.incbin "baserom.gba", 0x173A9D, 0x8C
 
 	.include "data/maps/text/LittlerootTown_ProfessorBirchsLab.s"
 	.include "data/maps/text/OldaleTown_House1.s"
@@ -2707,7 +2733,12 @@ Route110_TrickHousePuzzle1_Text_19CCAA:: @ 819CCAA
 	.string "You’re strong!\n"
 	.string "Just who are you?$"
 
-	.incbin "baserom.gba", 0x19cccb, 0x7b
+UnknownString_819CCCB: @ 819CCCB
+	.string "{PLAYER} wrote down the secret code\n"
+	.string "on the door.\p"
+	.string "“TRICK MASTER is smart.”\n"
+	.string "... ... ... ... ... ... ... ...\p"
+	.string "The lock clicked open!$"
 
 	.include "data/maps/text/Route110_TrickHousePuzzle2.s"
 	.include "data/maps/text/Route110_TrickHousePuzzle3.s"
@@ -4301,12 +4332,25 @@ UnusedMixRecordsPromptText: @ 81A099F
 UnusedMixRecordsSeeYouAgainText: @ 81A09D2
 	.string "We hope to see you again!$"
 
-	.incbin "baserom.gba", 0x001a09ec, 0x15
+UnknownString_81A09EC: @ 81A09EC
+	.string "{PLAYER} booted up the PC.$"
 
 	.global gUnknown_081A0A01
 gUnknown_081A0A01: @ 81A0A01
 
-	.incbin "baserom.gba", 0x1a0a01, 0x7c
+	.incbin "baserom.gba", 0x1A0A01, 0x1D
+
+UnknownString_81A0A1E: @ 81A0A1E
+	.string "Accessed someone’s PC.$"
+
+UnknownString_81A0A35: @ 81A0A35
+	.string "POKéMON Storage System opened.$"
+
+UnknownString_81A0A54: @ 81A0A54
+	.string "Accessed {PLAYER}’s PC.$"
+
+UnknownString_81A0A66: @ 81A0A66
+	.string "Accessed LANETTE’s PC.$"
 
 OldaleTown_PokemonCenter_1F_Text_1A0A7D:: @ 81A0A7D
 	.string "Hello, and welcome to the POKéMON\n"
@@ -4421,14 +4465,23 @@ PetalburgCity_Text_1A0D75:: @ 81A0D75
 	.string "“Rejuvenate your tired partners!”\n"
 	.string "POKéMON CENTER$"
 
-	.incbin "baserom.gba", 0x1a0da6, 0x150
+	.incbin "baserom.gba", 0x1A0DA6, 0xC2
+
+UnknownString_81A0E68: @ 81A0E68
+	.string "{STR_VAR_1} might like this program.\n"
+	.string "... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ...\p"
+	.string "Better get going!$"
+
+	.incbin "baserom.gba", 0x1A0ED6, 0x20
 
 	.include "data/maps/text/LilycoveCity_DepartmentStoreElevator.s"
 Route111_Text_1A0F93:: @ 81A0F93
 	.string "The sandstorm is vicious.\n"
 	.string "It’s impossible to keep going.$"
 
-	.incbin "baserom.gba", 0x1a0fcc, 0x40
+UnknownString_81A0FCC: @ 81A0FCC
+	.string "An item in the BAG can be registered\n"
+	.string "on SELECT for convenience.$"
 
 LittlerootTown_BrendansHouse_2F_Text_1A100C:: @ 81A100C
 	.include "data/maps/text/LittlerootTown_MaysHouse_2F.s"
@@ -4771,7 +4824,33 @@ Route102_Text_1A1925:: @ 81A1925
 Route102_Text_1A1946:: @ 81A1946
 	.string "!$"
 
-	.incbin "baserom.gba", 0x1a1948, 0x1a2
+UnknownString_81A1948: @ 81A1948
+	.string "If some vines drop down, this tree can\n"
+	.string "be climbed.$"
+
+UnknownString_81A197B: @ 81A197B
+	.string "If some vines drop down, this tree can\n"
+	.string "be climbed.\p"
+	.string "Use the SECRET POWER?$"
+
+UnknownString_81A19C4: @ 81A19C4
+	.string "A thick vine dropped down!$"
+
+	.incbin "baserom.gba", 0x1A19DF, 0x24
+
+UnknownString_81A1A03: @ 81A1A03
+	.string "If this clump of grass can be moved,\n"
+	.string "it might be possible to go inside.$"
+
+UnknownString_81A1A4B: @ 81A1A4B
+	.string "If this clump of grass can be moved,\n"
+	.string "it might be possible to go inside.\p"
+	.string "Use the SECRET POWER?$"
+
+UnknownString_81A1AA9: @ 81A1AA9
+	.string "Discovered a small entrance!$"
+
+	.incbin "baserom.gba", 0x1A1AC6, 0x24
 
 SecretBase_RedCave1_Text_1A1AEA:: @ 81A1AEA
 	.string "Have you made a SECRET BASE already?\p"
@@ -5668,7 +5747,56 @@ Route111_Movement_1A38EF:: @ 81A38EF
 	step_down
 	step_end
 
-	.incbin "baserom.gba", 0x1a38fb, 0x408
+UnknownString_81A38FB: @ 81A38FB
+	.string "All decorations and furniture in your\n"
+	.string "SECRET BASE will be returned to your PC.\p"
+	.string "Is that okay?$"
+
+UnknownString_81A3958: @ 81A3958
+	.string "Do you want to register\n"
+	.string "{STR_VAR_1}’s SECRET BASE?$"
+
+UnknownString_81A3982: @ 81A3982
+	.string "This data is already registered.\n"
+	.string "Would you like to delete it?$"
+
+UnknownString_81A39C0: @ 81A39C0
+	.string "Up to 10 locations can be registered.\p"
+	.string "Delete a location if you want to\n"
+	.string "register another location.$"
+
+UnknownString_81A3A22: @ 81A3A22
+	.string "Registration completed.$"
+
+UnknownString_81A3A3A: @ 81A3A3A
+	.string "Data has been unregistered.$"
+
+	.incbin "baserom.gba", 0x1A3A56, 0x105
+
+UnknownString_81A3B5B: @ 81A3B5B
+	.string "A shield of {STR_VAR_2} that marks winning\n"
+	.string "{STR_VAR_1} times in a row at the BATTLE TOWER.$"
+
+UnknownString_81A3BA4: @ 81A3BA4
+	.string "A realistic toy TV. It could be easily\n"
+	.string "mistaken for the real thing.$"
+
+UnknownString_81A3BE8: @ 81A3BE8
+	.string "A toy TV shaped like a SEEDOT.\n"
+	.string "It looks ready to roll away on its own...$"
+
+UnknownString_81A3C31: @ 81A3C31
+	.string "A toy TV shaped like a SKITTY.\n"
+	.string "It looks ready to stroll away...$"
+
+UnknownString_81A3C71: @ 81A3C71
+	.string "You may only make one SECRET BASE.\p"
+	.string "Would you like to move from the SECRET\n"
+	.string "BASE near {STR_VAR_1}?$"
+
+UnknownString_81A3CC9: @ 81A3CC9
+	.string "Moving completed.\p"
+	.string "Would you like to use the SECRET POWER?$"
 
 DewfordTown_PokemonCenter_2F_MapScript2_1A3D03:: @ 81A3D03
 EverGrandeCity_PokemonCenter_2F_MapScript2_1A3D03:: @ 81A3D03
@@ -6605,7 +6733,11 @@ OldaleTown_PokemonCenter_2F_Text_1A4C38:: @ 81A4C38
 	.string "Please confirm the number of players\n"
 	.string "and start again.$"
 
-	.incbin "baserom.gba", 0x1a4c6e, 0x110
+UnknownString_81A4C6E: @ 81A4C6E
+	.string "The link will be terminated if you\n"
+	.string "leave the room. Is that okay?$"
+
+	.incbin "baserom.gba", 0x1A4CAF, 0xCF
 
 	.include "data/maps/text/SingleBattleColosseum.s"
 	.include "data/maps/text/TradeCenter.s"
@@ -9947,12 +10079,38 @@ gUnknown_081B1220: @ 81B1220
 
 	.global gUnknown_081B1269
 gUnknown_081B1269: @ 81B1269
-	.incbin "baserom.gba", 0x001b1269, 0x1a3
+	.incbin "baserom.gba", 0x1B1269, 0x57
+
+UnknownString_81B12C0: @ 81B12C0
+	.string "The sea is deep here. A POKéMON may be\n"
+	.string "able to go underwater here.$"
+
+UnknownString_81B1303: @ 81B1303
+	.string "The sea is deep here.\n"
+	.string "Would you like to use DIVE?$"
+
+UnknownString_81B1335: @ 81B1335
+	.string "{STR_VAR_1} used DIVE.$"
+
+UnknownString_81B1343: @ 81B1343
+	.string "Light is filtering down from above.\n"
+	.string "A POKéMON may be able to surface here.$"
+
+UnknownString_81B138E: @ 81B138E
+	.string "Light is filtering down from above.\n"
+	.string "Would you like to use DIVE?$"
+
+UnknownString_81B13CE: @ 81B13CE
+	.string "There is something in the way above.\n"
+	.string "DIVE can’t be used here.$"
 
 	.global gUnknown_081B140C
 gUnknown_081B140C: @ 81B140C
 
-	.incbin "baserom.gba", 0x1b140c, 0x2d
+	.incbin "baserom.gba", 0x1B140C, 0x9
+
+UnknownString_81B1415: @ 81B1415
+	.string "There appears to be nothing here...$"
 
 Route102_EventScript_1B1439:: @ 81B1439
 	giveitem ITEM_POTION, 1, 1
@@ -11191,7 +11349,8 @@ MtChimney_Text_1B3D9A:: @ 81B3D9A
 	.string "That annoying TEAM AQUA...\n"
 	.string "They always mess with our plans!$"
 
-	.incbin "baserom.gba", 0x1b3dd6, 0x1f
+UnknownString_81B3DD6: @ 81B3DD6
+	.string "METEORITES pack amazing power!$"
 
 MtChimney_Text_1B3DF5:: @ 81B3DF5
 	.string "Go! Stomp TEAM AQUA!\n"
@@ -14819,7 +14978,10 @@ Route128_Text_1C210D:: @ 81C210D
 	.include "data/maps/text/Route134.s"
 	.global gUnknown_081C33E6
 gUnknown_081C33E6: @ 81C33E6
-	.incbin "baserom.gba", 0x001c33e6, 0x24
+	.incbin "baserom.gba", 0x1C33E6, 0x9
+
+UnknownString_81C33EF: @ 81C33EF
+	.string "REPEL’s effect wore off...$"
 
 	.global gUnknown_081C340A
 gUnknown_081C340A: @ 81C340A
@@ -14840,7 +15002,19 @@ gUnknown_081C3459: @ 81C3459
 	.global gUnknown_081C346A
 gUnknown_081C346A: @ 81C346A
 
-	.incbin "baserom.gba", 0x1c346a, 0x166
+	.incbin "baserom.gba", 0x1C346A, 0x48
+
+UnknownString_81C34B2: @ 81C34B2
+	.string "Would you like to exit the SAFARI ZONE\n"
+	.string "right now?$"
+
+	.incbin "baserom.gba", 0x1C34E4, 0x6A
+
+UnknownString_81C354E: @ 81C354E
+	.string "Would you like to place a {POKEBLOCK}\n"
+	.string "on the {POKEBLOCK} FEEDER?$"
+
+	.incbin "baserom.gba", 0x1C3583, 0x4D
 
 	.include "data/maps/text/Route121_SafariZoneEntrance.s"
 	.include "data/maps/text/SafariZone_Southeast.s"

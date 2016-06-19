@@ -12,7 +12,12 @@ LittlerootTown_BrendansHouse_2F_Text_172E4C:: @ 8172E4C
 	.string "Oh, you should make sure that\n"
 	.string "everything’s all there on your desk.$"
 
-	.incbin "baserom.gba", 0x172f31, 0x69
+UnknownString_8172F31: @ 8172F31
+	.string "The bookshelf is lined entirely with\n"
+	.string "books on POKéMON.\p"
+	.string "It’s {PLAYER}’s prized collection.$"
+
+	.incbin "baserom.gba", 0x172F85, 0x15
 
 LittlerootTown_BrendansHouse_2F_Text_172F9A:: @ 8172F9A
 	.string "{PLAYER} flipped open the notebook.\p"
@@ -22,7 +27,9 @@ LittlerootTown_BrendansHouse_2F_Text_172F9A:: @ 8172F9A
 	.string "Record your progress with SAVE.\p"
 	.string "The remaining pages are blank...$"
 
-	.incbin "baserom.gba", 0x17303d, 0x2f
+UnknownString_817303D: @ 817303D
+	.string "{PLAYER} took a closer look at the\n"
+	.string "HOENN region map.$"
 
 LittlerootTown_BrendansHouse_2F_Text_17306C:: @ 817306C
 	.string "It’s a Nintendo GameCube.\p"

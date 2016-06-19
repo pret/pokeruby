@@ -34,5 +34,10 @@ Route110_TrickHousePuzzle7_Text_19E0B2:: @ 819E0B2
 	.string "You’re solving all the puzzles in the\n"
 	.string "TRICK HOUSE. That’s the feeling I get.$"
 
-	.incbin "baserom.gba", 0x19e0ff, 0x79
+UnknownString_819E0FF: @ 819E0FF
+	.string "{PLAYER} wrote down the secret code\n"
+	.string "on the door.\p"
+	.string "“TRICK MASTER I love.”\n"
+	.string "... ... ... ... ... ... ... ...\p"
+	.string "The lock clicked open!$"
 

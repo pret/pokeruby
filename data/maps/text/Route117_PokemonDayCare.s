@@ -70,5 +70,8 @@ Route117_PokemonDayCare_Text_1B2C17:: @ 81B2C17
 	.string "what will you battle with?\p"
 	.string "Come back another time.$"
 
-	.incbin "baserom.gba", 0x1b2c68, 0x2d
+UnknownString_81B2C68: @ 81B2C68
+	.string "Huh?$"
+
+	.incbin "baserom.gba", 0x1B2C6D, 0x28
 

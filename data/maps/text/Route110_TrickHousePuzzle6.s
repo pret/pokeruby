@@ -34,5 +34,10 @@ Route110_TrickHousePuzzle6_Text_19DE44:: @ 819DE44
 	.string "You don’t seem to be affected at all.\n"
 	.string "Or do you have your poker face on?$"
 
-	.incbin "baserom.gba", 0x19de8d, 0x7e
+UnknownString_819DE8D: @ 819DE8D
+	.string "{PLAYER} wrote down the secret code\n"
+	.string "on the door.\p"
+	.string "“TRICK MASTER is huggable.”\n"
+	.string "... ... ... ... ... ... ... ...\p"
+	.string "The lock clicked open!$"
 

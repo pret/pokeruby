@@ -123,5 +123,12 @@ Route110_TrickHousePuzzle5_Text_19DB97:: @ 819DB97
 	.string "How many signs are there in\n"
 	.string "LILYCOVE CITY?$"
 
-	.incbin "baserom.gba", 0x19dbd4, 0xb3
+	.incbin "baserom.gba", 0x19DBD4, 0x36
+
+UnknownString_819DC0A: @ 819DC0A
+	.string "{PLAYER} wrote down the secret code\n"
+	.string "on the door.\p"
+	.string "“TRICK MASTER is my life.”\n"
+	.string "... ... ... ... ... ... ... ...\p"
+	.string "The lock clicked open!$"
 

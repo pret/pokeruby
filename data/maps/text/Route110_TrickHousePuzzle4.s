@@ -32,5 +32,10 @@ Route110_TrickHousePuzzle4_Text_19D380:: @ 819D380
 Route110_TrickHousePuzzle4_Text_19D386:: @ 819D386
 	.string "Has anyone made it to the end?$"
 
-	.incbin "baserom.gba", 0x19d3a5, 0x7e
+UnknownString_819D3A5: @ 819D3A5
+	.string "{PLAYER} wrote down the secret code\n"
+	.string "on the door.\p"
+	.string "“TRICK MASTER is a genius.”\n"
+	.string "... ... ... ... ... ... ... ...\p"
+	.string "The lock clicked open!$"
 
