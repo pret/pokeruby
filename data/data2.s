@@ -13231,7 +13231,7 @@ gUnknown_08407764: @ 8407764
 
 	.global gUnknown_084098D4
 gUnknown_084098D4: @ 84098D4
-	.incbin "baserom.gba", 0x004098d4, 0x200
+	.incbin "graphics/intro/intro3_pokeball.gbapal"
 
 	.global gUnknown_08409AD4
 gUnknown_08409AD4: @ 8409AD4
@@ -13239,7 +13239,7 @@ gUnknown_08409AD4: @ 8409AD4
 
 	.global gUnknown_08409C04
 gUnknown_08409C04: @ 8409C04
-	.incbin "baserom.gba", 0x00409c04, 0xb54
+	.incbin "graphics/intro/intro3_pokeball.8bpp.lz"
 
 	.global gUnknown_0840A758
 gUnknown_0840A758: @ 840A758
