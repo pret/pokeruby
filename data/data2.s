@@ -13186,7 +13186,8 @@ gUnknown_08406334: @ 8406334
 
 	.global gUnknown_0840633A
 gUnknown_0840633A: @ 840633A
-	.incbin "baserom.gba", 0x0040633a, 0x63a
+	.incbin "baserom.gba", 0x0040633a, 0x46
+	.incbin "graphics/intro/intro.4bpp.lz"
 
 	.global gUnknown_08406974
 gUnknown_08406974: @ 8406974
