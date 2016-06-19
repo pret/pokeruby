@@ -44,7 +44,8 @@ Route117_PokemonDayCare_Text_1B2AEF:: @ 81B2AEF
 	.string "Your POKéMON team is full.\n"
 	.string "Make room, then come see me.$"
 
-	.incbin "baserom.gba", 0x1b2b27, 0x22
+UnknownString_81B2B27: @ 81B2B27
+	.string "Which POKéMON will you take back?$"
 
 Route117_PokemonDayCare_Text_1B2B49:: @ 81B2B49
 	.string "If you want your {STR_VAR_1} back,\n"
@@ -70,5 +71,8 @@ Route117_PokemonDayCare_Text_1B2C17:: @ 81B2C17
 	.string "what will you battle with?\p"
 	.string "Come back another time.$"
 
-	.incbin "baserom.gba", 0x1b2c68, 0x2d
+UnknownString_81B2C68: @ 81B2C68
+	.string "Huh?$"
+
+	.incbin "baserom.gba", 0x1B2C6D, 0x28
 

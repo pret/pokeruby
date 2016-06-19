@@ -16,7 +16,8 @@ SlateportCity_OceanicMuseum_1F_Text_17E22D:: @ 817E22D
 	.string "You’re the only one who’s late.\n"
 	.string "You’d better go catch up to them!$"
 
-	.incbin "baserom.gba", 0x17e2a0, 0x1b
+UnknownString_817E2A0: @ 817E2A0
+	.string "Please visit another time!$"
 
 SlateportCity_OceanicMuseum_1F_Text_17E2BB:: @ 817E2BB
 	.string "We, TEAM {EVIL_TEAM}, exist for the good\n"

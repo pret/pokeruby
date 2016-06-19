@@ -58,7 +58,8 @@ LilycoveCity_LilycoveMuseum_2F_Text_188041:: @ 8188041
 LilycoveCity_LilycoveMuseum_2F_Text_188120:: @ 8188120
 	.string "This is merely a token of my gratitude.$"
 
-	.incbin "baserom.gba", 0x188148, 0x1e
+UnknownString_8188148: @ 8188148
+	.string "{PLAYER} received a GLASS ORNAMENT.$"
 
 LilycoveCity_LilycoveMuseum_2F_Text_188166:: @ 8188166
 	.string "I will keep this for you until we\n"

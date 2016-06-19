@@ -46,7 +46,24 @@ SlateportCity_OceanicMuseum_2F_Text_17EF62:: @ 817EF62
 	.string "long to snatch some parts, and you\l"
 	.string "simps are held up by a mere child?$"
 
-	.incbin "baserom.gba", 0x17efc9, 0x1b5
+UnknownString_817EFC9: @ 817EFC9
+	.string "I am TEAM AQUA’s ARCHIE.\p"
+	.string "Tell me, why do you meddle in the\n"
+	.string "noble affairs of TEAM AQUA?\p"
+	.string "POKéMON, people, all life depends on\n"
+	.string "the sea.\p"
+	.string "So, TEAM AQUA is dedicated to the\n"
+	.string "expansion of the sea.\p"
+	.string "Don’t you agree? What we are doing\n"
+	.string "is a magnificent undertaking.\p"
+	.string "Ah, fine...\n"
+	.string "You’re still too young.\p"
+	.string "It can’t be helped that you do not\n"
+	.string "understand our ideals.\p"
+	.string "But, if you ever oppose us again,\n"
+	.string "there will be consequences!\p"
+	.string "Heed my warning!\n"
+	.string "Farewell!$"
 
 SlateportCity_OceanicMuseum_2F_Text_17F17E:: @ 817F17E
 	.string "I am TEAM MAGMA’s MAXIE.\p"
@@ -74,7 +91,9 @@ SlateportCity_OceanicMuseum_2F_Text_17F352:: @ 817F352
 	.string "Oh, yes, I almost forgot that you\n"
 	.string "even brought the parts from DEVON!$"
 
-	.incbin "baserom.gba", 0x17f404, 0x2f
+UnknownString_817F404: @ 817F404
+	.string "{PLAYER} handed over the DEVON GOODS\n"
+	.string "to CAPT. STERN.$"
 
 SlateportCity_OceanicMuseum_2F_Text_17F433:: @ 817F433
 	.string "CAPT. STERN: Whoops!\n"

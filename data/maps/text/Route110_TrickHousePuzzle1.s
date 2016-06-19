@@ -8,5 +8,8 @@ Route110_TrickHousePuzzle1_Text_19C1CB:: @ 819C1CB
 Route110_TrickHousePuzzle1_Text_19C1FF:: @ 819C1FF
 	.string "A secret code is written on it.$"
 
-	.incbin "baserom.gba", 0x19c21f, 0x62
+UnknownString_819C21F: @ 819C21F
+	.string "The door is locked.\p"
+	.string "...On closer inspection, this is written\n"
+	.string "on it: “Write the secret code here.”$"
 

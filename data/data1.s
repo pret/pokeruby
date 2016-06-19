@@ -1572,7 +1572,9 @@ DewfordTown_Text_16BD37:: @ 816BD37
 	.string "“{STR_VAR_1}” is the\n"
 	.string "definition of “in” right now.$"
 
-	.incbin "baserom.gba", 0x16bd79, 0x2b
+UnknownString_816BD79: @ 816BD79
+	.string "“{STR_VAR_2}” is at\n"
+	.string "the pinnacle of cool right now.$"
 
 	.include "data/maps/text/LavaridgeTown.s"
 	.include "data/maps/text/FallarborTown.s"
@@ -1863,7 +1865,19 @@ LittlerootTown_BrendansHouse_1F_Text_172841:: @ 8172841
 	.string "INTERVIEWER: ...We brought you this\n"
 	.string "report from in front of PETALBURG GYM.$"
 
-	.incbin "baserom.gba", 0x17288c, 0xff
+UnknownString_817288C: @ 817288C
+	.string "There is a movie on TV.\p"
+	.string "Two men are dancing on a big piano\n"
+	.string "keyboard.\p"
+	.string "Better get going!$"
+
+UnknownString_81728E3: @ 81728E3
+	.string "It’s the instruction booklet for the\n"
+	.string "RUNNING SHOES.\p"
+	.string "“Press the B Button to run while\n"
+	.string "wearing your RUNNING SHOES.\p"
+	.string "“Lace up your RUNNING SHOES and hit\n"
+	.string "the road running!”$"
 
 LittlerootTown_BrendansHouse_1F_Text_17298B:: @ 817298B
 	.string "DAD: Hm?\p"
@@ -1896,7 +1910,26 @@ LittlerootTown_BrendansHouse_1F_Text_172BBC:: @ 8172BBC
 	.string "while, but all he talks about is POKéMON.\p"
 	.string "He should relax and stay a little longer.$"
 
-	.incbin "baserom.gba", 0x172c50, 0x1c8
+UnknownString_8172C50: @ 8172C50
+	.string "We bring you a special news bulletin.\p"
+	.string "We’ve received reports of a blue FLYING\n"
+	.string "POKéMON in various HOENN locales.\p"
+	.string "The identity of this POKéMON has not\n"
+	.string "yet been determined.\p"
+	.string "We now return you to your regular\n"
+	.string "movie presentation.$"
+
+UnknownString_8172D30: @ 8172D30
+	.string "We bring you a special news bulletin.\p"
+	.string "We’ve received reports of a red FLYING\n"
+	.string "POKéMON in various HOENN locales.\p"
+	.string "The identity of this POKéMON has not\n"
+	.string "yet been determined.\p"
+	.string "We now return you to your regular\n"
+	.string "movie presentation.$"
+
+UnknownString_8172EOF: @ 8172EOF
+	.string "Gau gau!$"
 
 	.include "data/maps/text/LittlerootTown_BrendansHouse_2F.s"
 LittlerootTown_BrendansHouse_1F_Text_1730C2:: @ 81730C2
@@ -2018,7 +2051,15 @@ LittlerootTown_BrendansHouse_2F_Text_1739CC:: @ 81739CC
 	.string "catching POKéMON, I can pitch you a\l"
 	.string "battle if you’d like.$"
 
-	.incbin "baserom.gba", 0x173a76, 0xb3
+UnknownString_8173A76: @ 8173A76
+	.string "It’s lined with POKéMON picture books.$"
+
+UnknownString_8173A9D: @ 8173A9D
+	.string "POKéMON SPECIES & HABITATS...\n"
+	.string "HUMAN & POKéMON COEXISTENCE...\l"
+	.string "POKéMONOLOGY FOR BEGINNERS...\p"
+	.string "It’s brimming with books written by\n"
+	.string "PROF. BIRCH.$"
 
 	.include "data/maps/text/LittlerootTown_ProfessorBirchsLab.s"
 	.include "data/maps/text/OldaleTown_House1.s"
@@ -2129,7 +2170,9 @@ LilycoveCity_ContestLobby_Text_1885A7:: @ 81885A7
 	.string "After that, the usual CONTEST rules\n"
 	.string "apply.$"
 
-	.incbin "baserom.gba", 0x1886a8, 0x34
+UnknownString_81886A8: @ 81886A8
+	.string "Once you have linked up, please choose\n"
+	.string "the CONTEST.$"
 
 LilycoveCity_ContestLobby_Text_1886DC:: @ 81886DC
 	.string "Which CONTEST would you like to enter?$"
@@ -2168,12 +2211,16 @@ LilycoveCity_ContestLobby_Text_188845:: @ 8188845
 	.string "the CONTEST.\p"
 	.string "Your POKéMON is Entry No. {STR_VAR_2}.$"
 
-	.incbin "baserom.gba", 0x188890, 0x36
+UnknownString_8188890: @ 8188890
+	.string "Entry No. {STR_VAR_2} is assigned this color\n"
+	.string "for this CONTEST.$"
 
 LilycoveCity_ContestLobby_Text_1888C6:: @ 81888C6
 	.string "The CONTEST will begin shortly.$"
 
-	.incbin "baserom.gba", 0x1888e6, 0x29
+UnknownString_81888E6: @ 81888E6
+	.string "Please come through this way.\n"
+	.string "Good luck!$"
 
 LilycoveCity_ContestLobby_Text_18890F:: @ 818890F
 	.string "Congratulations!\p"
@@ -2184,7 +2231,9 @@ LilycoveCity_ContestLobby_Text_18890F:: @ 818890F
 	.string "painting better than I usually do.\l"
 	.string "Look, see?$"
 
-	.incbin "baserom.gba", 0x1889d0, 0x2d
+UnknownString_81889D0: @ 81889D0
+	.string "The screen switches to display the\n"
+	.string "painting.$"
 
 LilycoveCity_ContestLobby_Text_1889FD:: @ 81889FD
 	.string "What do you think? I’m confident in\n"
@@ -2311,14 +2360,16 @@ MossdeepCity_GameCorner_1F_Text_18E7B1:: @ 818E7B1
 	.string "It was a brilliant match in which\n"
 	.string "neither side conceded a step!$"
 
-	.incbin "baserom.gba", 0x18e80b, 0x3
+UnknownString_818E80B: @ 818E80B
+	.string "{STR_VAR_1}$"
 
 MossdeepCity_GameCorner_1F_Text_18E80E:: @ 818E80E
 	.string "That was superlative!\p"
 	.string "Why, it was like seeing myself in my\n"
 	.string "youth again!$"
 
-	.incbin "baserom.gba", 0x18e856, 0x3
+UnknownString_818E856: @ 818E856
+	.string "{STR_VAR_1}$"
 
 MossdeepCity_GameCorner_1F_Text_18E859:: @ 818E859
 	.string "Ah, too bad for you!\p"
@@ -2707,7 +2758,12 @@ Route110_TrickHousePuzzle1_Text_19CCAA:: @ 819CCAA
 	.string "You’re strong!\n"
 	.string "Just who are you?$"
 
-	.incbin "baserom.gba", 0x19cccb, 0x7b
+UnknownString_819CCCB: @ 819CCCB
+	.string "{PLAYER} wrote down the secret code\n"
+	.string "on the door.\p"
+	.string "“TRICK MASTER is smart.”\n"
+	.string "... ... ... ... ... ... ... ...\p"
+	.string "The lock clicked open!$"
 
 	.include "data/maps/text/Route110_TrickHousePuzzle2.s"
 	.include "data/maps/text/Route110_TrickHousePuzzle3.s"
@@ -2729,7 +2785,10 @@ Route110_SeasideCyclingRoadNorthEntrance_Text_19E406:: @ 819E406
 	.string "It feels great to go that fast, but try\n"
 	.string "not to crash into anyone!$"
 
-	.incbin "baserom.gba", 0x19e48d, 0x59
+UnknownString_819E48D: @ 819E48D
+	.string "Sorry, you can’t walk on CYCLING\n"
+	.string "ROAD. It’s too dangerous.\p"
+	.string "Please come back with a BIKE.$"
 
 	.include "data/maps/text/Route113_GlassWorkshop.s"
 	.include "data/maps/text/Route119_WeatherInstitute_1F.s"
@@ -4301,12 +4360,26 @@ UnusedMixRecordsPromptText: @ 81A099F
 UnusedMixRecordsSeeYouAgainText: @ 81A09D2
 	.string "We hope to see you again!$"
 
-	.incbin "baserom.gba", 0x001a09ec, 0x15
+UnknownString_81A09EC: @ 81A09EC
+	.string "{PLAYER} booted up the PC.$"
 
 	.global gUnknown_081A0A01
 gUnknown_081A0A01: @ 81A0A01
 
-	.incbin "baserom.gba", 0x1a0a01, 0x7c
+UnknownString_81A0A01: @ 81A0A01
+	.string "Which PC should be accessed?$"
+
+UnknownString_81A0A1E: @ 81A0A1E
+	.string "Accessed someone’s PC.$"
+
+UnknownString_81A0A35: @ 81A0A35
+	.string "POKéMON Storage System opened.$"
+
+UnknownString_81A0A54: @ 81A0A54
+	.string "Accessed {PLAYER}’s PC.$"
+
+UnknownString_81A0A66: @ 81A0A66
+	.string "Accessed LANETTE’s PC.$"
 
 OldaleTown_PokemonCenter_1F_Text_1A0A7D:: @ 81A0A7D
 	.string "Hello, and welcome to the POKéMON\n"
@@ -4323,7 +4396,17 @@ OldaleTown_PokemonCenter_1F_Text_1A0B14:: @ 81A0B14
 	.string "We’ve restored your POKéMON to\n"
 	.string "full health.$"
 
-	.incbin "baserom.gba", 0x1a0b57, 0x8d
+UnknownString_81A0B57: @ 81A0B57
+	.string "Welcome to the POKéMON CABLE CLUB\n"
+	.string "TRADE CENTER.$"
+
+UnknownString_81A0B87: @ 81A0B87
+	.string "Welcome to the POKéMON CABLE CLUB\n"
+	.string "COLOSSEUM.$"
+
+UnknownString_81A0BB4: @ 81A0BB4
+	.string "Welcome to the POKéMON CABLE CLUB\n"
+	.string "TIME CAPSULE.$"
 
 EverGrandeCity_PokemonLeague_Text_1A0BE4:: @ 81A0BE4
 FallarborTown_Mart_Text_1A0BE4:: @ 81A0BE4
@@ -4370,7 +4453,9 @@ SootopolisCity_Mart_Text_1A0C02:: @ 81A0C02
 VerdanturfTown_Mart_Text_1A0C02:: @ 81A0C02
 	.string "Please come again!$"
 
-	.incbin "baserom.gba", 0x1a0c15, 0x2d
+UnknownString_81A0C15: @ 81A0C15
+	.string "Welcome!\p"
+	.string "We’re having a discount sale today!$"
 
 Route104_PrettyPetalFlowerShop_Text_1A0C42:: @ 81A0C42
 	.string "{PLAYER}{KUN}, welcome!\p"
@@ -4421,14 +4506,51 @@ PetalburgCity_Text_1A0D75:: @ 81A0D75
 	.string "“Rejuvenate your tired partners!”\n"
 	.string "POKéMON CENTER$"
 
-	.incbin "baserom.gba", 0x1a0da6, 0x150
+UnknownString_81A0DA6: @ 81A0DA6
+	.string "Fufufu...$"
+
+UnknownString_81A0DB0: @ 81A0DB0
+	.string "Mumble, mumble...$"
+
+UnknownString_81A0DC2: @ 81A0DC2
+	.string "Oh!$"
+
+UnknownString_81A0DC6: @ 81A0DC6
+	.string "Closed today!$"
+
+UnknownString_81A0DD4: @ 81A0DD4
+	.string "You like the {STR_VAR_3}-type POKéMON\n"
+	.string "{STR_VAR_1}?$"
+
+UnknownString_81A0DF5: @ 81A0DF5
+	.string "It contains a POKéMON!$"
+
+UnknownString_81A0E0C: @ 81A0E0C
+	.string "We’re making preparations.$"
+
+UnknownString_81A0E27: @ 81A0E27
+	.string "I’m a pseudo-GYM LEADER for\n"
+	.string "interviews.$"
+
+UnknownString_81A0E4F: @ 81A0E4F
+	.string "Ready for a test battle.$"
+
+UnknownString_81A0E68: @ 81A0E68
+	.string "{STR_VAR_1} might like this program.\n"
+	.string "... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ...\p"
+	.string "Better get going!$"
+
+UnknownString_81A0ED6: @ 81A0ED6
+	.string "What should I do for fun today?$"
 
 	.include "data/maps/text/LilycoveCity_DepartmentStoreElevator.s"
 Route111_Text_1A0F93:: @ 81A0F93
 	.string "The sandstorm is vicious.\n"
 	.string "It’s impossible to keep going.$"
 
-	.incbin "baserom.gba", 0x1a0fcc, 0x40
+UnknownString_81A0FCC: @ 81A0FCC
+	.string "An item in the BAG can be registered\n"
+	.string "on SELECT for convenience.$"
 
 LittlerootTown_BrendansHouse_2F_Text_1A100C:: @ 81A100C
 	.include "data/maps/text/LittlerootTown_MaysHouse_2F.s"
@@ -4447,7 +4569,12 @@ RustboroCity_DevonCorp_2F_Text_1A1102:: @ 81A1102
 	.global gUnknown_081A1132
 gUnknown_081A1132: @ 81A1132
 
-	.incbin "baserom.gba", 0x1a1132, 0x3c
+UnknownString_81A1132: @ 81A1132
+	.string "{STR_VAR_1} fainted...\p$"
+
+UnknownString_81A1141: @ 81A1141
+	.string "{PLAYER} is out of useable POKéMON!\p"
+	.string "{PLAYER} whited out!$"
 
 SlateportCity_Text_1A116E:: @ 81A116E
 	.string "Do you know the TM SECRET POWER?\p"
@@ -4771,7 +4898,35 @@ Route102_Text_1A1925:: @ 81A1925
 Route102_Text_1A1946:: @ 81A1946
 	.string "!$"
 
-	.incbin "baserom.gba", 0x1a1948, 0x1a2
+UnknownString_81A1948: @ 81A1948
+	.string "If some vines drop down, this tree can\n"
+	.string "be climbed.$"
+
+UnknownString_81A197B: @ 81A197B
+	.string "If some vines drop down, this tree can\n"
+	.string "be climbed.\p"
+	.string "Use the SECRET POWER?$"
+
+UnknownString_81A19C4: @ 81A19C4
+	.string "A thick vine dropped down!$"
+
+UnknownString_81A19DF: @ 81A19DF
+	.string "Want to make your SECRET BASE here?$"
+
+UnknownString_81A1A03: @ 81A1A03
+	.string "If this clump of grass can be moved,\n"
+	.string "it might be possible to go inside.$"
+
+UnknownString_81A1A4B: @ 81A1A4B
+	.string "If this clump of grass can be moved,\n"
+	.string "it might be possible to go inside.\p"
+	.string "Use the SECRET POWER?$"
+
+UnknownString_81A1AA9: @ 81A1AA9
+	.string "Discovered a small entrance!$"
+
+UnknownString_81A1AC6: @ 81A1AC6
+	.string "Want to make your SECRET BASE here?$"
 
 SecretBase_RedCave1_Text_1A1AEA:: @ 81A1AEA
 	.string "Have you made a SECRET BASE already?\p"
@@ -4791,7 +4946,9 @@ SecretBase_RedCave1_Text_1A1B97:: @ 81A1B97
 	.global gUnknown_081A1BB2
 gUnknown_081A1BB2: @ 81A1BB2
 
-	.incbin "baserom.gba", 0x1a1bb2, 0x46
+UnknownString_81A1BB2: @ 81A1BB2
+	.string "Waaargh! You’re too strong!\n"
+	.string "About me losing... Please keep it secret!$"
 
 SecretBase_RedCave1_Text_1A1BF8:: @ 81A1BF8
 	.string "What do you think of my SECRET BASE?\n"
@@ -4820,7 +4977,10 @@ SecretBase_RedCave1_Text_1A1D59:: @ 81A1D59
 	.global gUnknown_081A1D74
 gUnknown_081A1D74: @ 81A1D74
 
-	.incbin "baserom.gba", 0x1a1d74, 0x4c
+UnknownString_81A1D74: @ 81A1D74
+	.string "Hmmm... It’s our loss...\n"
+	.string "But don’t tell anyone!\l"
+	.string "It’s a confidential secret!$"
 
 SecretBase_RedCave1_Text_1A1DC0:: @ 81A1DC0
 	.string "If you’re in this area again, I hope\n"
@@ -4851,7 +5011,9 @@ SecretBase_RedCave1_Text_1A1F2E:: @ 81A1F2E
 	.global gUnknown_081A1F67
 gUnknown_081A1F67: @ 81A1F67
 
-	.incbin "baserom.gba", 0x1a1f67, 0x21
+UnknownString_81A1F67: @ 81A1F67
+	.string "I can’t keep going!\n"
+	.string "I surrender!$"
 
 SecretBase_RedCave1_Text_1A1F88:: @ 81A1F88
 	.string "Okay, when I move one day, this place\n"
@@ -4879,7 +5041,9 @@ SecretBase_RedCave1_Text_1A20AE:: @ 81A20AE
 	.global gUnknown_081A20C9
 gUnknown_081A20C9: @ 81A20C9
 
-	.incbin "baserom.gba", 0x1a20c9, 0x40
+UnknownString_81A20C9: @ 81A20C9
+	.string "Hmm... I’ve still got lots to learn.\n"
+	.string "I have to study some more.$"
 
 SecretBase_RedCave1_Text_1A2109:: @ 81A2109
 	.string "Thanks for battling with me.\n"
@@ -4906,7 +5070,9 @@ SecretBase_RedCave1_Text_1A2230:: @ 81A2230
 	.global gUnknown_081A2254
 gUnknown_081A2254: @ 81A2254
 
-	.incbin "baserom.gba", 0x1a2254, 0x2c
+UnknownString_81A2254: @ 81A2254
+	.string "Aww! Done in!\n"
+	.string "But it’s still fun to battle!$"
 
 SecretBase_RedCave1_Text_1A2280:: @ 81A2280
 	.string "Well, anyway, I should go buy some\n"
@@ -4939,7 +5105,8 @@ SecretBase_RedCave1_Text_1A2420:: @ 81A2420
 	.global gUnknown_081A2439
 gUnknown_081A2439: @ 81A2439
 
-	.incbin "baserom.gba", 0x1a2439, 0xd
+UnknownString_81A2439: @ 81A2439
+	.string "I concede...$"
 
 SecretBase_RedCave1_Text_1A2446:: @ 81A2446
 	.string "That was all in good fun!\n"
@@ -4968,7 +5135,8 @@ SecretBase_RedCave1_Text_1A258A:: @ 81A258A
 	.global gUnknown_081A25C3
 gUnknown_081A25C3: @ 81A25C3
 
-	.incbin "baserom.gba", 0x1a25c3, 0xf
+UnknownString_81A25C3: @ 81A25C3
+	.string "I went down...$"
 
 SecretBase_RedCave1_Text_1A25D2:: @ 81A25D2
 	.string "Where’s your SECRET BASE?\n"
@@ -4996,7 +5164,9 @@ SecretBase_RedCave1_Text_1A2736:: @ 81A2736
 	.global gUnknown_081A2754
 gUnknown_081A2754: @ 81A2754
 
-	.incbin "baserom.gba", 0x1a2754, 0x16
+UnknownString_81A2754: @ 81A2754
+	.string "Huh?\n"
+	.string "Did I just lose?$"
 
 SecretBase_RedCave1_Text_1A276A:: @ 81A276A
 	.string "I won’t lose at collecting decorations.\n"
@@ -5026,7 +5196,8 @@ SecretBase_RedCave1_Text_1A28F4:: @ 81A28F4
 	.global gUnknown_081A2925
 gUnknown_081A2925: @ 81A2925
 
-	.incbin "baserom.gba", 0x1a2925, 0x28
+UnknownString_81A2925: @ 81A2925
+	.string "I know exactly what you’re made of now.$"
 
 SecretBase_RedCave1_Text_1A294D:: @ 81A294D
 	.string "We can both become stronger.\n"
@@ -5058,7 +5229,9 @@ SecretBase_RedCave1_Text_1A2AFB:: @ 81A2AFB
 	.global gUnknown_081A2B2A
 gUnknown_081A2B2A: @ 81A2B2A
 
-	.incbin "baserom.gba", 0x1a2b2a, 0x3f
+UnknownString_81A2B2A: @ 81A2B2A
+	.string "You’re supremely talented!\n"
+	.string "Your power seems to be limitless...$"
 
 SecretBase_RedCave1_Text_1A2B69:: @ 81A2B69
 	.string "What did you think of my style?\n"
@@ -5668,7 +5841,65 @@ Route111_Movement_1A38EF:: @ 81A38EF
 	step_down
 	step_end
 
-	.incbin "baserom.gba", 0x1a38fb, 0x408
+UnknownString_81A38FB: @ 81A38FB
+	.string "All decorations and furniture in your\n"
+	.string "SECRET BASE will be returned to your PC.\p"
+	.string "Is that okay?$"
+
+UnknownString_81A3958: @ 81A3958
+	.string "Do you want to register\n"
+	.string "{STR_VAR_1}’s SECRET BASE?$"
+
+UnknownString_81A3982: @ 81A3982
+	.string "This data is already registered.\n"
+	.string "Would you like to delete it?$"
+
+UnknownString_81A39C0: @ 81A39C0
+	.string "Up to 10 locations can be registered.\p"
+	.string "Delete a location if you want to\n"
+	.string "register another location.$"
+
+UnknownString_81A3A22: @ 81A3A22
+	.string "Registration completed.$"
+
+UnknownString_81A3A3A: @ 81A3A3A
+	.string "Data has been unregistered.$"
+
+UnknownString_81A3A56: @ 81A3A56
+	.string "There are no decorations...$"
+
+UnknownString_81A3A72: @ 81A3A72
+	.string "{PLAYER} booted up the PC.$"
+
+UnknownString_81A3A87: @ 81A3A87
+	.string "What would you like to do?$"
+
+	.incbin "baserom.gba", 0x1A3AA2, 0xB9
+
+UnknownString_81A3B5B: @ 81A3B5B
+	.string "A shield of {STR_VAR_2} that marks winning\n"
+	.string "{STR_VAR_1} times in a row at the BATTLE TOWER.$"
+
+UnknownString_81A3BA4: @ 81A3BA4
+	.string "A realistic toy TV. It could be easily\n"
+	.string "mistaken for the real thing.$"
+
+UnknownString_81A3BE8: @ 81A3BE8
+	.string "A toy TV shaped like a SEEDOT.\n"
+	.string "It looks ready to roll away on its own...$"
+
+UnknownString_81A3C31: @ 81A3C31
+	.string "A toy TV shaped like a SKITTY.\n"
+	.string "It looks ready to stroll away...$"
+
+UnknownString_81A3C71: @ 81A3C71
+	.string "You may only make one SECRET BASE.\p"
+	.string "Would you like to move from the SECRET\n"
+	.string "BASE near {STR_VAR_1}?$"
+
+UnknownString_81A3CC9: @ 81A3CC9
+	.string "Moving completed.\p"
+	.string "Would you like to use the SECRET POWER?$"
 
 DewfordTown_PokemonCenter_2F_MapScript2_1A3D03:: @ 81A3D03
 EverGrandeCity_PokemonCenter_2F_MapScript2_1A3D03:: @ 81A3D03
@@ -6547,16 +6778,26 @@ OldaleTown_PokemonCenter_2F_Text_1A490C:: @ 81A490C
 
 	.global gUnknown_081A4932
 gUnknown_081A4932: @ 81A4932
-	.incbin "baserom.gba", 0x001a4932, 0x43
+UnknownString_81A4932: @ 81A4932
+	.string "When all players are ready...\n"
+	.string "A Button: Confirm   B Button: Cancel$"
 
 	.global gUnknown_081A4975
 gUnknown_081A4975: @ 81A4975
-	.incbin "baserom.gba", 0x001a4975, 0x41
+UnknownString_81A4975: @ 81A4975
+	.string "Start link with {STR_VAR_1} players.\n"
+	.string "A Button: Confirm   B Button: Cancel$"
 
 	.global gUnknown_081A49B6
 gUnknown_081A49B6: @ 81A49B6
 
-	.incbin "baserom.gba", 0x1a49b6, 0x6c
+UnknownString_81A49B6: @ 81A49B6
+	.string "Awaiting linkup...\n"
+	.string "... ... B Button: Cancel$"
+
+UnknownString_81A49E2: @ 81A49E2
+	.string "Your progress must be saved before\n"
+	.string "linking. Is it okay to save?$"
 
 OldaleTown_PokemonCenter_2F_Text_1A4A22:: @ 81A4A22
 	.string "Please enter.$"
@@ -6605,7 +6846,24 @@ OldaleTown_PokemonCenter_2F_Text_1A4C38:: @ 81A4C38
 	.string "Please confirm the number of players\n"
 	.string "and start again.$"
 
-	.incbin "baserom.gba", 0x1a4c6e, 0x110
+UnknownString_81A4C6E: @ 81A4C6E
+	.string "The link will be terminated if you\n"
+	.string "leave the room. Is that okay?$"
+
+UnknownString_81A4CAF: @ 81A4CAF
+	.string "Terminating link... You will be\n"
+	.string "escorted out of the room. Please wait.$"
+
+UnknownString_81A4CF6: @ 81A4CF6
+	.string "This TRAINER is too busy to notice...$"
+
+UnknownString_81A4D1C: @ 81A4D1C
+	.string "Score! Got to look at {STR_VAR_1}’s\n"
+	.string "TRAINER CARD!$"
+
+UnknownString_81A4D45: @ 81A4D45
+	.string "Score! Got to look at {STR_VAR_1}’s\n"
+	.string "TRAINER CARD! It’s a {STR_VAR_2} card!$"
 
 	.include "data/maps/text/SingleBattleColosseum.s"
 	.include "data/maps/text/TradeCenter.s"
@@ -8158,7 +8416,70 @@ FallarborTown_ContestLobby_Text_1A72A8:: @ 81A72A8
 	.string "I’ll be looking forward to your next\n"
 	.string "POKéMON CONTEST.$"
 
-	.incbin "baserom.gba", 0x1a72de, 0x48f
+UnknownString_81A72DE: @ 81A72DE
+	.string "Yeah!\n"
+	.string "It’s BRAVO TRAINER time!\p"
+	.string "Today, we’re going to profile a POKéMON\n"
+	.string "belonging to {STR_VAR_1}.\p"
+	.string "Now, this POKéMON boasts a {STR_VAR_2}\n"
+	.string "rating in the {STR_VAR_3} Rank.$"
+
+UnknownString_81A736B: @ 81A736B
+	.string "Introducing {STR_VAR_2} the\n"
+	.string "{STR_VAR_1}!\p"
+	.string "The nickname {STR_VAR_2}...\p"
+	.string "Even the nickname exudes an air that\n"
+	.string "proclaims “{STR_VAR_3}”!$"
+
+UnknownString_81A73CA: @ 81A73CA
+	.string "Anyway, when the TRAINER {STR_VAR_1}\n"
+	.string "entered the POKéMON in a CONTEST,\l"
+	.string "we managed to get a few impassioned\l"
+	.string "quotes about the trusty partner.$"
+
+UnknownString_81A744D: @ 81A744D
+	.string "Asked about the CONTEST afterwards,\n"
+	.string "{STR_VAR_1} happily replied with a huge\l"
+	.string "grin, “{STR_VAR_2}!”\p"
+	.string "Well, sure, {STR_VAR_1}’s POKéMON came in\n"
+	.string "number {STR_VAR_3} in the CONTEST.\p"
+	.string "That line perfectly suits {STR_VAR_1}\n"
+	.string "right now, I’d say!$"
+
+UnknownString_81A7508: @ 81A7508
+	.string "Asked about the CONTEST afterwards,\n"
+	.string "{STR_VAR_1} replied with a tinge of\l"
+	.string "bitterness, “{STR_VAR_2}.”\p"
+	.string "Well, sure, {STR_VAR_1}’s POKéMON came in\n"
+	.string "number {STR_VAR_3} in the CONTEST.\p"
+	.string "{STR_VAR_1}’s disappointment comes across\n"
+	.string "loud and clear, I’d say!$"
+
+UnknownString_81A75CE: @ 81A75CE
+	.string "Wouldn’t you also like to know what\n"
+	.string "{STR_VAR_1} imagines {STR_VAR_2} to be?\p"
+	.string "You bet we did!\n"
+	.string "So we asked, of course!\p"
+	.string "The answer is all perfectly condensed:\n"
+	.string "“{STR_VAR_3}!”\p"
+	.string "That’s what the concept of {STR_VAR_2}\n"
+	.string "represents to {STR_VAR_1}!$"
+
+UnknownString_81A768D: @ 81A768D
+	.string "The last move {STR_VAR_2} used by\n"
+	.string "the {STR_VAR_1} is entirely about\l"
+	.string "“{STR_VAR_3}”!$"
+
+UnknownString_81A76C5: @ 81A76C5
+	.string "Bravo, {STR_VAR_1}!\n"
+	.string "Bravo, {STR_VAR_2}!\p"
+	.string "I hope we can count on seeing\n"
+	.string "{STR_VAR_1} scale even greater heights!\p"
+	.string "That’s all the time we have!\n"
+	.string "Until next time, see you!$"
+
+UnknownString_81A774F: @ 81A774F
+	.string "Introducing the TRAINER’s {STR_VAR_1}!$"
 
 BattleTower_Lobby_Text_1A776D:: @ 81A776D
 	.string "Hello! You’re the TRAINER who just had\n"
@@ -8218,7 +8539,108 @@ BattleTower_Lobby_Text_1A7B66:: @ 81A7B66
 	.string "I’ll be looking forward to your next\n"
 	.string "battle!$"
 
-	.incbin "baserom.gba", 0x1a7b93, 0x75e
+UnknownString_81A7B93: @ 81A7B93
+	.string "Yeah!\n"
+	.string "It’s BRAVO TRAINER time!\p"
+	.string "Today, we’re going to profile {STR_VAR_1},\n"
+	.string "who took the BATTLE TOWER challenge!\p"
+	.string "For the challenge, {STR_VAR_1} entered one\n"
+	.string "wicked {STR_VAR_2}.$"
+
+UnknownString_81A7C26: @ 81A7C26
+	.string "The pair set a new record of {STR_VAR_2} wins\n"
+	.string "in a row in Level {STR_VAR_1} competition!\l"
+	.string "Bravo, TRAINER!$"
+
+UnknownString_81A7C7D: @ 81A7C7D
+	.string "The twosome finally succumbed to\n"
+	.string "{STR_VAR_1} in match number {STR_VAR_2}.\l"
+	.string "Nice try, TRAINER!\p"
+	.string "But, hey, it’s just bad luck to run into\n"
+	.string "{STR_VAR_1} so early in the challenge.\p"
+	.string "We asked the TRAINER for impressions\n"
+	.string "on the match with {STR_VAR_1}.$"
+
+UnknownString_81A7D4A: @ 81A7D4A
+	.string "The twosome won it all by defeating\n"
+	.string "{STR_VAR_1}’s {STR_VAR_2} thoroughly.\l"
+	.string "Bravo, TRAINER!\p"
+	.string "Knocking off even {STR_VAR_1}...\n"
+	.string "It defies belief! Simply astounding!\p"
+	.string "We asked the TRAINER for impressions\n"
+	.string "on the moment of glory.$"
+
+UnknownString_81A7E0C: @ 81A7E0C
+	.string "After a string of wins, the pair finally\n"
+	.string "succumbed to {STR_VAR_1}’s {STR_VAR_2},\l"
+	.string "their final hurdle.\p"
+	.string "Nice try, TRAINER!\p"
+	.string "Still, you have to give credit.\n"
+	.string "You don’t see many famous combinations\l"
+	.string "like {STR_VAR_1} and {STR_VAR_2}.\p"
+	.string "We asked the TRAINER for impressions\n"
+	.string "on battling the celebrity pair.$"
+
+UnknownString_81A7F0E: @ 81A7F0E
+	.string "This is what the TRAINER had to say:\n"
+	.string "“I’m satisfied!”\p"
+	.string "Now isn’t that a refreshing reply?\n"
+	.string "Bravo, TRAINER!\p"
+	.string "Isn’t it out-and-out awesome to be able\n"
+	.string "to battle to full satisfaction?\p"
+	.string "I found out exactly how satisfied\n"
+	.string "when I heard the TRAINER say this:$"
+
+UnknownString_81A8004: @ 81A8004
+	.string "This is what the TRAINER had to say:\n"
+	.string "“I’m not satisfied...”\p"
+	.string "Our TRAINER was obviously a little down\n"
+	.string "when that was uttered.\p"
+	.string "Still, it’s not easy to be able to battle\n"
+	.string "with complete satisfaction, am I right?\p"
+	.string "Anyway, I found out how dissatisfied\n"
+	.string "our TRAINER was when I heard this:$"
+
+UnknownString_81A8119: @ 81A8119
+	.string "None$"
+
+UnknownString_81A811E: @ 81A811E
+	.string "None$"
+
+UnknownString_81A8123: @ 81A8123
+	.string "None$"
+
+UnknownString_81A8128: @ 81A8128
+	.string "None$"
+
+UnknownString_81A812D: @ 81A812D
+	.string "“{STR_VAR_1}.”$"
+
+UnknownString_81A8133: @ 81A8133
+	.string "“{STR_VAR_1}.”\n"
+	.string "Now isn’t that great?\p"
+	.string "It really expresses {STR_VAR_2}’s joy,\n"
+	.string "I’d say.\p"
+	.string "That battle with {STR_VAR_3} at the\n"
+	.string "end... It really was what you’d call\l"
+	.string "“{STR_VAR_1}”!$"
+
+UnknownString_81A81BC: @ 81A81BC
+	.string "“{STR_VAR_1}.”\n"
+	.string "Now isn’t that fitting?\p"
+	.string "That battle with {STR_VAR_3} at the\n"
+	.string "end... You can’t describe it as anything\l"
+	.string "else but “{STR_VAR_1}”!\p"
+	.string "{STR_VAR_2}’s disappointment comes across\n"
+	.string "loud and clear, I’d say!$"
+
+UnknownString_81A8267: @ 81A8267
+	.string "Bravo, {STR_VAR_1}!\n"
+	.string "Bravo, {STR_VAR_2}!\p"
+	.string "I hope we can count on seeing\n"
+	.string "{STR_VAR_1} scale even greater heights!\p"
+	.string "That’s all the time we have!\n"
+	.string "Until next time, see you!$"
 
 SlateportCity_PokemonFanClub_Text_1A82F1:: @ 81A82F1
 	.string "Wow!\p"
@@ -8310,7 +8732,126 @@ SlateportCity_PokemonFanClub_Text_1A8818:: @ 81A8818
 	.string "Okay, that’s all.\n"
 	.string "Bye-bye!$"
 
-	.incbin "baserom.gba", 0x1a8917, 0x968
+UnknownString_81A8917: @ 81A8917
+	.string "WE ARE THE POKéMON FAN CLUB!\p"
+	.string "We’re on the air!\p"
+	.string "On this program, we get your opinions,\n"
+	.string "and I shout them out on your behalf!\l"
+	.string "Isn’t it a fantastic program concept?\p"
+	.string "Today, we bring you this report from\n"
+	.string "our reporter, who we sent out to the\l"
+	.string "POKéMON FAN CLUB.\p"
+	.string "So, just who is today’s featured\n"
+	.string "POKéMON fan?\p"
+	.string "... ... ... ... ... ... ... ...\p"
+	.string "{STR_VAR_1}!\p"
+	.string "So, let’s hear what {STR_VAR_1} has to\n"
+	.string "say about {STR_VAR_3} the {STR_VAR_2}.\p"
+	.string "And, I will shout those words of love\n"
+	.string "out loud on TV!\p"
+	.string "Hoo-hah!\p"
+	.string "Let’s shout!$"
+
+UnknownString_81A8AE5: @ 81A8AE5
+	.string "We asked {STR_VAR_1}, “When you first\n"
+	.string "laid eyes on your {STR_VAR_2}, what was\l"
+	.string "your initial thought?“\p"
+	.string "“{STR_VAR_3}!“\p"
+	.string "Yeahah! That’s a mighty fine shout!\p"
+	.string "Doesn’t it bring back memories of those\n"
+	.string "days long gone by?$"
+
+UnknownString_81A8B9D: @ 81A8B9D
+	.string "We asked {STR_VAR_1}, “If you were to\n"
+	.string "liken your {STR_VAR_2} to something,\l"
+	.string "it would be...”\p"
+	.string "... ... ... ... ... ... ... ...\p"
+	.string "“{STR_VAR_3}!”\p"
+	.string "Whoah-oh, now that’s an original idea!\p"
+	.string "You sure can sense the intensity of\n"
+	.string "feeling the TRAINER has for\l"
+	.string "{STR_VAR_2}.$"
+
+UnknownString_81A8C77: @ 81A8C77
+	.string "And let’s see...\n"
+	.string "What was it about that {STR_VAR_2}\l"
+	.string "that so attracted {STR_VAR_1}?\p"
+	.string "... ... ... ... ... ... ... ...\p"
+	.string "“{STR_VAR_3}!”\p"
+	.string "Whoa! Such a spectacular declaration!\p"
+	.string "The love of this TRAINER for the\n"
+	.string "{STR_VAR_2} comes across loud and clear!$"
+
+UnknownString_81A8D45: @ 81A8D45
+	.string "Hm? Oh, there’s still more.\n"
+	.string "Let’s check it out!\p"
+	.string "Let me see, now...\p"
+	.string "We asked {STR_VAR_1}, “What do POKéMON\n"
+	.string "mean to you?”\p"
+	.string "... ... ... ... ... ...\p"
+	.string "“{STR_VAR_3}!”\p"
+	.string "Bravo!\p"
+	.string "That’s the best shout I’ve had all day!\p"
+	.string "“{STR_VAR_3}!”\p"
+	.string "It makes you want to shout it out loud\n"
+	.string "again and again!\p"
+	.string "Now that we’ve had a great shout, it’s\n"
+	.string "time to say good-bye until next time!\p"
+	.string "So, let’s all have one last shout!\n"
+	.string "All together now...\p"
+	.string "“{STR_VAR_3}!”$"
+
+UnknownString_81A8EC9: @ 81A8EC9
+	.string "WE ARE THE POKéMON FAN CLUB!\p"
+	.string "We’re on the air!\p"
+	.string "Today, we’ll get rolling with the POKéMON\n"
+	.string "SURVEY CORNER.\p"
+	.string "Out of all the tales woven by POKéMON\n"
+	.string "and TRAINERS, what startling new drama\l"
+	.string "will grab our attention today?\p"
+	.string "Let me see...\p"
+	.string "This one!\p"
+	.string "We’ll start with this letter!\p"
+	.string "It’s a letter from {STR_VAR_1} about a\n"
+	.string "beloved {STR_VAR_2}.\p"
+	.string "Let’s see how passionately our writer\n"
+	.string "can express love for the {STR_VAR_2}!\l"
+	.string "Hmhm...$"
+
+UnknownString_81A9048: @ 81A9048
+	.string "Whoah!\n"
+	.string "What an amazing letter!$"
+
+UnknownString_81A9067: @ 81A9067
+	.string "I loved it, so here it is again!$"
+
+UnknownString_81A9088: @ 81A9088
+	.string "A great letter bears reading over\n"
+	.string "and over!$"
+
+UnknownString_81A90B4: @ 81A90B4
+	.string "The bit “{STR_VAR_3},” that really\n"
+	.string "accentuates emotional impact!\p"
+	.string "It’s a great letter that has real\n"
+	.string "heartfelt depth!$"
+
+UnknownString_81A911F: @ 81A911F
+	.string "Especially that “{STR_VAR_3}” bit!\p"
+	.string "I love how “{STR_VAR_3}” is used!$"
+
+UnknownString_81A9152: @ 81A9152
+	.string "By the way, and it’s not important,\n"
+	.string "but “{STR_VAR_3}” is a great saying.\p"
+	.string "I’ve been using “{STR_VAR_3}” a lot\n"
+	.string "in conversations lately.$"
+
+UnknownString_81A91C6: @ 81A91C6
+	.string "If I had to score this letter,\n"
+	.string "I’d give it {STR_VAR_3} points.\p"
+	.string "Next time, I’ll be expecting an even\n"
+	.string "better letter, {STR_VAR_1}!\p"
+	.string "A-whoops, will you look at the time?\n"
+	.string "Time to say good-bye until next time!$"
 
 SlateportCity_OceanicMuseum_1F_Text_1A927F:: @ 81A927F
 	.string "Oh?\n"
@@ -8351,7 +8892,521 @@ SlateportCity_OceanicMuseum_1F_Text_1A952E:: @ 81A952E
 	.string "I’ve got a good story for a TV program.\p"
 	.string "I’d better write it up in a hurry!$"
 
-	.incbin "baserom.gba", 0x1a9581, 0x2957
+UnknownString_81A9581: @ 81A9581
+	.string "Hello, it’s time for RECENT HAPPENINGS.\p"
+	.string "For POKéMON TRAINERS, every day is\n"
+	.string "a storybook tale.\p"
+	.string "What we want to do is to introduce you\n"
+	.string "to some of these POKéMON tales.\p"
+	.string "Today, we bring you the story of the\n"
+	.string "TRAINER {STR_VAR_1}.\p"
+	.string "What did {STR_VAR_1} experience recently?\n"
+	.string "Let’s find out.\p"
+	.string "Let’s see...$"
+
+UnknownString_81A9694: @ 81A9694
+	.string "Wasn’t that enlightening?\p"
+	.string "The story gives you a clear idea of what\n"
+	.string "{STR_VAR_1} has experienced recently.\l"
+	.string "It’s as if we were there as witnesses!$"
+
+UnknownString_81A971B: @ 81A971B
+	.string "“{STR_VAR_3}.” That\n"
+	.string "accents the tale and gives it depth.$"
+
+UnknownString_81A974B: @ 81A974B
+	.string "“{STR_VAR_3}.”\n"
+	.string "That gives the tale a sense of place.\l"
+	.string "It lets us envision the tale’s setting.$"
+
+UnknownString_81A979F: @ 81A979F
+	.string "The “{STR_VAR_3}”\n"
+	.string "section of the tale is very expressive.$"
+
+UnknownString_81A97D0: @ 81A97D0
+	.string "{STR_VAR_1} has recounted a wonderful\n"
+	.string "tale involving POKéMON.\p"
+	.string "And now {STR_VAR_1}’s tale is indelibly\n"
+	.string "etched into your soul, too.\p"
+	.string "That’s it for today.\n"
+	.string "Please tune in next time.$"
+
+UnknownString_81A986F: @ 81A986F
+	.string "Greetings!\n"
+	.string "It’s time for POKéMON NEWS.\p"
+	.string "We’ve just received word of a very\n"
+	.string "rare occurrence.\p"
+	.string "There have been reports of a mass\n"
+	.string "outbreak of {STR_VAR_2} in the vicinity\l"
+	.string "of {STR_VAR_1}.\p"
+	.string "{STR_VAR_2}, as you’re probably aware,\n"
+	.string "is known as a POKéMON that’s rare\l"
+	.string "and hard to find.\p"
+	.string "It sounds like a rare opportunity to\n"
+	.string "see the mystifying outbreak of\l"
+	.string "{STR_VAR_2} in the wild.\p"
+	.string "That’s the news on POKéMON NEWS.$"
+
+UnknownString_81A99D9: @ 81A99D9
+	.string "And now, it’s time for...\n"
+	.string "THE NAME RATER SHOW.\p"
+	.string "I tell your POKéMON’s fortune from\n"
+	.string "the nickname you’ve bestowed.\p"
+	.string "Advice is what I have to give, and it is\n"
+	.string "helpful advice that I offer.\p"
+	.string "Today, I shall prophesize the nickname\n"
+	.string "{STR_VAR_3} of {STR_VAR_1}’s POKéMON\l"
+	.string "{STR_VAR_2}.\p"
+	.string "Hmhm...\p"
+	.string "Hmm...\n"
+	.string "This nickname is...$"
+
+UnknownString_81A9AF0: @ 81A9AF0
+	.string "A nickname that hints at talent in many\n"
+	.string "different ways.\p"
+	.string "I urge this TRAINER to take courage\n"
+	.string "and take on many challenges.$"
+
+UnknownString_81A9B69: @ 81A9B69
+	.string "A nickname that perfectly complements\n"
+	.string "{STR_VAR_1}, the TRAINER’s name.\p"
+	.string "It suggests that you will forge a fine\n"
+	.string "partnership with precise timing.$"
+
+UnknownString_81A9BEF: @ 81A9BEF
+	.string "A nickname fit for a unique individual\n"
+	.string "of a POKéMON!\p"
+	.string "If raised properly, this POKéMON’s\n"
+	.string "uniqueness will bloom excessively!$"
+
+UnknownString_81A9C6A: @ 81A9C6A
+	.string "A nickname that will nurture the caring\n"
+	.string "and compassionate side of POKéMON.\p"
+	.string "If raised properly, this POKéMON will\n"
+	.string "come to exhibit real warmth!$"
+
+UnknownString_81A9CF8: @ 81A9CF8
+	.string "A very fine nickname that hints at\n"
+	.string "greatness to come.\p"
+	.string "I am intrigued about what the future\n"
+	.string "holds in store for this POKéMON.$"
+
+UnknownString_81A9D74: @ 81A9D74
+	.string "A good nickname that should make the\n"
+	.string "POKéMON hale and hearty!\p"
+	.string "That POKéMON should remain fit and\n"
+	.string "robust for a long, long time.$"
+
+UnknownString_81A9DF3: @ 81A9DF3
+	.string "A good nickname that should make the\n"
+	.string "POKéMON very active!\p"
+	.string "I should think that this POKéMON will be\n"
+	.string "a strong performer in battles.$"
+
+UnknownString_81A9E75: @ 81A9E75
+	.string "An appealing nickname that should make\n"
+	.string "the POKéMON very charming!\p"
+	.string "I don’t doubt that this POKéMON will be\n"
+	.string "quite the charmer in POKéMON CONTESTS.$"
+
+UnknownString_81A9F06: @ 81A9F06
+	.string "The nickname {STR_VAR_1} is rooted by\n"
+	.string "the letter “{STR_VAR_3}.”\p"
+	.string "That letter is supported by the first\n"
+	.string "letter “{STR_VAR_2},” which gives it a solid sense\l"
+	.string "of presence as a nickname.$"
+
+UnknownString_81A9F9F: @ 81A9F9F
+	.string "The nickname {STR_VAR_1} is very\n"
+	.string "shapely in a pleasing manner.\p"
+	.string "The presence of the letters “{STR_VAR_2}” and\n"
+	.string "“{STR_VAR_3}” - now that is remarkably good!$"
+
+UnknownString_81AA01E: @ 81AA01E
+	.string "The nickname {STR_VAR_1} - it has a\n"
+	.string "sublime, flowing feel to it.\p"
+	.string "The flow from the initial letter “{STR_VAR_2}” to\n"
+	.string "“{STR_VAR_3}” is especially wonderful.$"
+
+UnknownString_81AA09D: @ 81AA09D
+	.string "Let’s examine other examples of fine\n"
+	.string "nicknames, shall we?$"
+
+UnknownString_81AA0D7: @ 81AA0D7
+	.string "Try this example. Take a part of the\n"
+	.string "TRAINER name of {STR_VAR_1}, and end\l"
+	.string "up with the fine nickname {STR_VAR_2}{STR_VAR_3}.$"
+
+UnknownString_81AA138: @ 81AA138
+	.string "The nickname {STR_VAR_2}{STR_VAR_3} would also work\n"
+	.string "quite well.$"
+
+UnknownString_81AA166: @ 81AA166
+	.string "The POKéMON’s species name of\n"
+	.string "{STR_VAR_2} could be used as the basis\l"
+	.string "for making the nickname {STR_VAR_1}{STR_VAR_3}.$"
+
+UnknownString_81AA1C0: @ 81AA1C0
+	.string "{STR_VAR_1}{STR_VAR_3} would also be an effective\n"
+	.string "nickname.$"
+
+UnknownString_81AA1EA: @ 81AA1EA
+	.string "What should always be avoided is using\n"
+	.string "another POKéMON species name.\p"
+	.string "For instance, avoid taking the name of\n"
+	.string "{STR_VAR_2} to make the nickname {STR_VAR_1}{STR_VAR_3}.\l"
+	.string "That is unacceptable.$"
+
+UnknownString_81AA28A: @ 81AA28A
+	.string "But I must say, {STR_VAR_2} has a most\n"
+	.string "remarkable flair for devising nicknames.\p"
+	.string "It is my hope that the TRAINER will\n"
+	.string "continue to treat {STR_VAR_1} with love.\p"
+	.string "That’s it for today’s show.\n"
+	.string "May we meet again.$"
+
+UnknownString_81AA344: @ 81AA344
+	.string "{STR_VAR_2} ANGLER\p"
+	.string "ANNOUNCER: Hello! Today, we’ll get tips\n"
+	.string "on fishing for {STR_VAR_2}.\p"
+	.string "GURU, what advice can you give for\n"
+	.string "catching {STR_VAR_2}?\p"
+	.string "GURU: Hm? Catching {STR_VAR_2}?\n"
+	.string "Well, let me tell you, be patient and wait.\l"
+	.string "That’s the bottom line.\p"
+	.string "Do you see {STR_VAR_1} over there?\n"
+	.string "That TRAINER makes a good example.\p"
+	.string "That TRAINER’s already had {STR_VAR_3}\n"
+	.string "POKéMON get away.\p"
+	.string "But there {STR_VAR_1} waits. No giving up.\n"
+	.string "That’s the law for catching {STR_VAR_2}.\p"
+	.string "ANNOUNCER: I see...\p"
+	.string "Oh! {STR_VAR_1} has finally landed an\n"
+	.string "elusive {STR_VAR_2}!\p"
+	.string "The TRAINER appears close to tears\n"
+	.string "out of sheer joy!\p"
+	.string "Seeing that elated look, I’m getting\n"
+	.string "the itch to go fishing, too!\p"
+	.string "Viewers, why not take this as a cue to\n"
+	.string "try some {STR_VAR_2} fishing?\p"
+	.string "Until our next broadcast, farewell and\n"
+	.string "good fishing to you all!$"
+
+UnknownString_81AA5F3: @ 81AA5F3
+	.string "{STR_VAR_2} ANGLER\p"
+	.string "ANNOUNCER: Hello! Today, we’ll get tips\n"
+	.string "on fishing for {STR_VAR_2}.\p"
+	.string "GURU, what advice can you give for\n"
+	.string "catching {STR_VAR_2}?\p"
+	.string "GURU: Hm? Catching {STR_VAR_2}?\n"
+	.string "Well, let me tell you, use your fishing\l"
+	.string "ROD with vigor!\p"
+	.string "Do you see {STR_VAR_1} over there?\n"
+	.string "See how the ROD is handled?\p"
+	.string "That TRAINER’s already caught\n"
+	.string "{STR_VAR_3} in a row.\p"
+	.string "ANNOUNCER: It’s incredible!\n"
+	.string "It looks like a storm...\p"
+	.string "Seeing technique of that caliber, I’m\n"
+	.string "getting the itch to go fishing, too.\p"
+	.string "Viewers, why not take this as a cue to\n"
+	.string "try some {STR_VAR_2} fishing?\p"
+	.string "Until our next broadcast, farewell and\n"
+	.string "good fishing to you all!$"
+
+UnknownString_81AA814: @ 81AA814
+	.string "Hello!\p"
+	.string "It’s time for POKéMON TODAY!\p"
+	.string "BIG SIS: Hi! Is everyone peachy and\n"
+	.string "perky today?\p"
+	.string "Today, we’re going to look at {STR_VAR_1}’s\n"
+	.string "POKéMON {STR_VAR_2}!\p"
+	.string "BIG BRO: Yeah! That’s what we’re going\n"
+	.string "to do!$"
+
+UnknownString_81AA8C6: @ 81AA8C6
+	.string "Oh!\n"
+	.string "Speaking of {STR_VAR_1}...\p"
+	.string "BIG SIS, I saw the TRAINER with my very\n"
+	.string "own eyes!\p"
+	.string "BIG SIS: Oh, what did you see?\p"
+	.string "BIG BRO: Well, I had to go on a trip to\n"
+	.string "{STR_VAR_2}.\p"
+	.string "That’s when I happened to come across\n"
+	.string "{STR_VAR_1}, who was trying to catch the\l"
+	.string "POKéMON {STR_VAR_3}, but...$"
+
+UnknownString_81AA9B2: @ 81AA9B2
+	.string "The POKéMON managed to get away!\p"
+	.string "It ended up wasting this many\n"
+	.string "POKé BALLS: {STR_VAR_2}!\p"
+	.string "You should have seen the expression\n"
+	.string "of frustration on {STR_VAR_1}’s face when\l"
+	.string "the POKéMON took off!$"
+
+UnknownString_81AAA5C: @ 81AAA5C
+	.string "But {STR_VAR_1} goofed and made the\n"
+	.string "POKéMON faint!\p"
+	.string "It ended up wasting this many\n"
+	.string "POKé BALLS: {STR_VAR_2}!\p"
+	.string "You should have seen the expression\n"
+	.string "of stunned dismay on {STR_VAR_1}’s face\l"
+	.string "when the POKéMON fainted!$"
+
+UnknownString_81AAB11: @ 81AAB11
+	.string "BIG SIS: Hey, there!\n"
+	.string "That’s not nice!\p"
+	.string "You shouldn’t be laughing at other\n"
+	.string "people’s misfortune!\p"
+	.string "Oh, poor {STR_VAR_1}.\n"
+	.string "What a shame!\p"
+	.string "BIG BRO: That’s true!\n"
+	.string "Sorry for laughing.$"
+
+UnknownString_81AABB4: @ 81AABB4
+	.string "BIG SIS: Bufufu...\p"
+	.string "BIG BRO: Hey!\n"
+	.string "You just laughed, too!\p"
+	.string "BIG SIS: Huh?!\p"
+	.string "I didn’t laugh!\n"
+	.string "Honestly, I didn’t!\p"
+	.string "Oh, poor {STR_VAR_1}.\n"
+	.string "What a shame!\p"
+	.string "BIG BRO: ...$"
+
+UnknownString_81AAC47: @ 81AAC47
+	.string "BIG SIS: That’s enough silliness!\n"
+	.string "Let’s look at today’s POKéMON...\p"
+	.string "Huh?\n"
+	.string "We’re out of time already?\p"
+	.string "Aww!\n"
+	.string "We couldn’t profile a POKéMON today!\p"
+	.string "BIG BRO: See you again next time!\p"
+	.string "BIG SIS: Hey, don’t end the show\n"
+	.string "without me!$"
+
+UnknownString_81AAD23: @ 81AAD23
+	.string "Hello!\p"
+	.string "It’s time for POKéMON TODAY!\p"
+	.string "BIG SIS: Hi! Is everyone peachy and\n"
+	.string "perky today?\p"
+	.string "Today, we’re going to look at {STR_VAR_1}’s\n"
+	.string "POKéMON {STR_VAR_2}!\p"
+	.string "BIG BRO: Yeah! That’s what we’re going\n"
+	.string "to do!$"
+
+UnknownString_81AADD5: @ 81AADD5
+	.string "BIG SIS: {STR_VAR_1} gave the nickname\n"
+	.string "{STR_VAR_3} to the {STR_VAR_2}!\p"
+	.string "It sounds like {STR_VAR_3} is getting\n"
+	.string "good, loving care!$"
+
+UnknownString_81AAE31: @ 81AAE31
+	.string "BIG BRO: The TRAINER had to throw this\n"
+	.string "many BALLS to catch it: {STR_VAR_3}!\p"
+	.string "It finally took a single {STR_VAR_2}\n"
+	.string "to catch it!$"
+
+UnknownString_81AAE9D: @ 81AAE9D
+	.string "BIG SIS: If it was that easy to catch,\n"
+	.string "it must have been destiny that brought\l"
+	.string "{STR_VAR_1} and the {STR_VAR_2} together!$"
+
+UnknownString_81AAF03: @ 81AAF03
+	.string "BIG SIS: Wow! That’s so neat!\p"
+	.string "But you know what they say, a POKéMON\n"
+	.string "that takes a lot of effort to catch\l"
+	.string "earns the love of its TRAINER!$"
+
+UnknownString_81AAF8A: @ 81AAF8A
+	.string "BIG SIS: {STR_VAR_1}’s {STR_VAR_2} is a\n"
+	.string "memorable POKéMON because it took an\l"
+	.string "invaluable MASTER BALL to catch!\p"
+	.string "BIG BRO: Wow! That’s mega-awesome!\p"
+	.string "BIG SIS: {STR_VAR_1} must have really\n"
+	.string "wanted that {STR_VAR_2}, for sure!$"
+
+UnknownString_81AB040: @ 81AB040
+	.string "BIG BRO: Then to give the nickname\n"
+	.string "{STR_VAR_3} to that {STR_VAR_2}...\p"
+	.string "You really get a good idea about\n"
+	.string "{STR_VAR_1}’s TRAINER sense.\p"
+	.string "BIG SIS: I second that notion!$"
+
+UnknownString_81AB0C8: @ 81AB0C8
+	.string "If it were me, I’d give that\n"
+	.string "nickname to something like {STR_VAR_3}!\p"
+	.string "BIG BRO: Whoa! That could be the start\n"
+	.string "of something new!$"
+
+UnknownString_81AB13D: @ 81AB13D
+	.string "{STR_VAR_2} the {STR_VAR_1}?\n"
+	.string "Doesn’t that sound perfect?\p"
+	.string "The letters and everything - they sound\n"
+	.string "just right for the POKéMON {STR_VAR_1}!\p"
+	.string "BIG BRO: Yeah, true, that!$"
+
+UnknownString_81AB1C6: @ 81AB1C6
+	.string "As far as I know, no TRAINER has ever\n"
+	.string "given the nickname {STR_VAR_2} to their\l"
+	.string "{STR_VAR_1}!\p"
+	.string "BIG BRO: That just goes to show what\n"
+	.string "great taste the TRAINER has in picking\l"
+	.string "nicknames!$"
+
+UnknownString_81AB266: @ 81AB266
+	.string "The next time I catch a POKéMON,\n"
+	.string "I should give it the name {STR_VAR_2}.\p"
+	.string "BIG BRO: Huh? Me, too!\n"
+	.string "I’ll use the nickname {STR_VAR_2}, too!$"
+
+UnknownString_81AB2DB: @ 81AB2DB
+	.string "BIG SIS: Oh, no!\n"
+	.string "Look at the time!\p"
+	.string "Well, gang, this is it for today.\n"
+	.string "See you again next time!\p"
+	.string "BIG BRO: Remember, it could be your\n"
+	.string "POKéMON in the spotlight next time!$"
+
+UnknownString_81AB381: @ 81AB381
+	.string "Hello!\p"
+	.string "It’s time for TODAY’S SMART SHOPPER.\p"
+	.string "INTERVIEWER: How are you, viewers?\p"
+	.string "Today we’re visiting the POKéMON MART\n"
+	.string "in {STR_VAR_2}.\p"
+	.string "Let’s check on what the hot sellers\n"
+	.string "have been recently.$"
+
+UnknownString_81AB435: @ 81AB435
+	.string "Let’s interview the clerk to get the\n"
+	.string "lowdown.\p"
+	.string "Hi, how’s your business?\p"
+	.string "CLERK: Oh, we’re doing excellent.\p"
+	.string "Recently, {STR_VAR_2} has been selling\n"
+	.string "especially strongly.\p"
+	.string "Why, just the other day a TRAINER\n"
+	.string "named {STR_VAR_1} bought {STR_VAR_3}.$"
+
+UnknownString_81AB507: @ 81AB507
+	.string "INTERVIEWER: The TRAINER bought\n"
+	.string "{STR_VAR_3} {STR_VAR_2}S? That’s a haul!\p"
+	.string "If I may say so, {STR_VAR_1} must have\n"
+	.string "been stocking up for a long journey\l"
+	.string "to far-off places.\p"
+	.string "For traveling, {STR_VAR_2}S are so\n"
+	.string "important!$"
+
+UnknownString_81AB5B8: @ 81AB5B8
+	.string "INTERVIEWER: Speaking of the item\n"
+	.string "{STR_VAR_2}, I just bought {STR_VAR_3} of\l"
+	.string "them recently.\p"
+	.string "After all, {STR_VAR_2}’s a great item!$"
+
+UnknownString_81AB61F: @ 81AB61F
+	.string "INTERVIEWER: {STR_VAR_2}?!\n"
+	.string "But {STR_VAR_3} of them?!\p"
+	.string "I didn’t think there would be anyone\n"
+	.string "buying that many.\p"
+	.string "My goodness, I can only afford one or\n"
+	.string "two at a time...$"
+
+UnknownString_81AB6B0: @ 81AB6B0
+	.string "INTERVIEWER: One time, I bought\n"
+	.string "a whole lot of the item {STR_VAR_2}.\p"
+	.string "But it turned out to be too many.\n"
+	.string "I ended up regretting it...\p"
+	.string "Since then, I only buy strictly what\n"
+	.string "I absolutely need...\p"
+	.string "Oops!\p"
+	.string "There’s no point talking about me!$"
+
+UnknownString_81AB78D: @ 81AB78D
+	.string "CLERK: {STR_VAR_1} also bought the item\n"
+	.string "{STR_VAR_2} in bulk, taking {STR_VAR_3}.\p"
+	.string "INTERVIEWER: Oh, that’s smart.\n"
+	.string "{STR_VAR_2}’s a very good item, too.$"
+
+UnknownString_81AB7FE: @ 81AB7FE
+	.string "CLERK: And, the TRAINER also bought\n"
+	.string "{STR_VAR_3} of the item {STR_VAR_2}.$"
+
+UnknownString_81AB835: @ 81AB835
+	.string "CLERK: Plus, it was during a big sale.\n"
+	.string "That’s smart shopping.$"
+
+UnknownString_81AB873: @ 81AB873
+	.string "INTERVIEWER: Hmm... {STR_VAR_1} sounds like\n"
+	.string "quite the shrewd bargain hunter!\p"
+	.string "In total, {STR_VAR_1}’s purchases came to...\p"
+	.string "¥{STR_VAR_2}?!\n"
+	.string "What an amazing sum!\p"
+	.string "Oops! We’re out of time!\n"
+	.string "See you on our next broadcast!$"
+
+UnknownString_81AB92E: @ 81AB92E
+	.string "CLERK: {STR_VAR_1} is a VIP customer,\n"
+	.string "no doubt about it.$"
+
+UnknownString_81AB95E: @ 81AB95E
+	.string "Let’s interview the clerk to get the\n"
+	.string "lowdown.\p"
+	.string "Hi, how’s your business?\p"
+	.string "CLERK: Oh, we’re doing unbelievable\n"
+	.string "business. It’s almost overwhelming.\p"
+	.string "Recently, a TRAINER named {STR_VAR_1}\n"
+	.string "bought the item {STR_VAR_2}in bulk.\p"
+	.string "The TRAINER almost cleared out our\n"
+	.string "entire stock of {STR_VAR_2}S.\p"
+	.string "I never dreamt that any customer\n"
+	.string "would ever need so many {STR_VAR_2}S.\l"
+	.string "It’s just unheard of!\p"
+	.string "INTERVIEWER: So that would be like 100\n"
+	.string "or 200 sold?\p"
+	.string "CLERK: Oh, no, much more than that!\p"
+	.string "INTERVIEWER: Oh, my goodness!\n"
+	.string "{STR_VAR_1} must be a special shopper!\p"
+	.string "CLERK: {STR_VAR_1} is a VIP customer,\n"
+	.string "no doubt about it.$"
+
+UnknownString_81ABB75: @ 81ABB75
+	.string "INTERVIEWER: Hmm...\n"
+	.string "That is amazing.\p"
+	.string "But why would the TRAINER need to buy\n"
+	.string "so many?\p"
+	.string "... ...\p"
+	.string "The mystery deepens, but this is all\n"
+	.string "the time we have today.\l"
+	.string "See you on our next broadcast!\p"
+	.string "Still, {STR_VAR_1} is certainly an enigma...$"
+
+UnknownString_81ABC51: @ 81ABC51
+	.string "THE WORLD OF MASTERS\p"
+	.string "Hello, viewers.\p"
+	.string "Perhaps you are aware of a TRAINER\n"
+	.string "named {STR_VAR_1}.\p"
+	.string "{STR_VAR_1} is famous as a master at\n"
+	.string "catching POKéMON.\p"
+	.string "{STR_VAR_1}’s quest for POKéMON depends\n"
+	.string "entirely on a careful search on foot.\p"
+	.string "On one memorable day, the TRAINER\n"
+	.string "walked some {STR_VAR_2} steps.\p"
+	.string "The total number of POKéMON caught\n"
+	.string "that day reached an impressive {STR_VAR_3}!$"
+
+UnknownString_81ABD94: @ 81ABD94
+	.string "That remarkable feat must have been\n"
+	.string "possible because of the trust between\l"
+	.string "the TRAINER and {STR_VAR_1}.$"
+
+UnknownString_81ABDF2: @ 81ABDF2
+	.string "The master caught the day’s last\n"
+	.string "{STR_VAR_3} near {STR_VAR_2}.\p"
+	.string "That POKéMON apparently enjoys\n"
+	.string "a special status as a record holder.\p"
+	.string "Skilled TRAINERS should be encouraged\n"
+	.string "to challenge this fine record.\p"
+	.string "That’s all for today.\n"
+	.string "Please tune in next time.$"
 
 Route111_Text_1ABED8:: @ 81ABED8
 	.string "GABBY: Oh! We’ve just spotted a tough-\n"
@@ -8505,7 +9560,244 @@ Route120_Text_1AC8D7:: @ 81AC8D7
 	.string "TY: Yep, I got it all.\n"
 	.string "That whole battle’s on camera.$"
 
-	.incbin "baserom.gba", 0x1ac90d, 0x1539
+UnknownString_81AC90D: @ 81AC90D
+	.string "IN SEARCH OF TRAINERS...\p"
+	.string "GABBY: Hi! Today I’m visiting an area\n"
+	.string "near {STR_VAR_1}.\p"
+	.string "We’re trying to spot some up-and-coming\n"
+	.string "new talent in the field.\p"
+	.string "Today, we turned our lens on the\n"
+	.string "TRAINER {PLAYER}.\p"
+	.string "There’s something about this TRAINER\n"
+	.string "that piqued our interest.$"
+
+UnknownString_81ACA02: @ 81ACA02
+	.string "We’ve battled {PLAYER} before, but we\n"
+	.string "can attest that the TRAINER has most\l"
+	.string "definitely improved from before.\p"
+	.string "I knew we were onto someone special\n"
+	.string "when we spotted this TRAINER!$"
+
+UnknownString_81ACAAA: @ 81ACAAA
+	.string "The best way to determine how strong\n"
+	.string "a TRAINER is...\p"
+	.string "Well, the fastest way is to battle.\n"
+	.string "And so we began our investigation!\p"
+	.string "... ...\p"
+	.string "That’s how we ended up in battle\n"
+	.string "with {PLAYER}.\p"
+	.string "In a dominating performance, we were\n"
+	.string "flattened, rolled up, and tossed aside!\p"
+	.string "{PLAYER} is ruthlessly strong...\p"
+	.string "We asked the TRAINER for a succinct\n"
+	.string "summation of the battle we shared.$"
+
+UnknownString_81ACC07: @ 81ACC07
+	.string "The combination of {STR_VAR_1} and\n"
+	.string "{STR_VAR_3} was divine!\p"
+	.string "The sight of them - {STR_VAR_1} and\n"
+	.string "{STR_VAR_3} - selflessly supporting\l"
+	.string "each other in the thick of battle...\p"
+	.string "It was a marvelous sight to behold!\p"
+	.string "{STR_VAR_2} was the move the TRAINER\n"
+	.string "used last in our battle.\p"
+	.string "The move {STR_VAR_2} is {STR_VAR_1}\n"
+	.string "and {STR_VAR_3}’s sign of friendship!$"
+
+UnknownString_81ACD13: @ 81ACD13
+	.string "...I lost confidence in myself as\n"
+	.string "a result of our encounter.\p"
+	.string "We were beaten before we could launch\n"
+	.string "a single attack.\l"
+	.string "Ohhh... Snivel...\p"
+	.string "In spite of that, {PLAYER}’s battles\n"
+	.string "are worth seeing.\p"
+	.string "I recommend confident TRAINERS to\n"
+	.string "challenge {PLAYER}.$"
+
+UnknownString_81ACDFA: @ 81ACDFA
+	.string "There’s only one thing to be said.\n"
+	.string "Don’t you dare throw a POKé BALL during\l"
+	.string "a TRAINER battle!\p"
+	.string "{PLAYER} is certainly strong, but has\n"
+	.string "no clue about the basic rules.\p"
+	.string "To our TV audience, I have a request.\p"
+	.string "If you see {PLAYER}, please caution\n"
+	.string "the TRAINER!$"
+
+UnknownString_81ACEE7: @ 81ACEE7
+	.string "{PLAYER} is adept at reading the\n"
+	.string "opponent’s actions.\p"
+	.string "The timing of item usage was remarkably\n"
+	.string "effective!$"
+
+UnknownString_81ACF49: @ 81ACF49
+	.string "Honestly speaking, I thought that\n"
+	.string "I might even be pretty good.\p"
+	.string "While we did end up losing, we did have\n"
+	.string "a hotly contested battle.\p"
+	.string "But if you’re struggling against me,\n"
+	.string "you have a ways to go, {PLAYER}!$"
+
+UnknownString_81AD00A: @ 81AD00A
+	.string "After our battle, we asked {PLAYER} for\n"
+	.string "a succinct summary.\p"
+	.string "The TRAINER replied, “{STR_VAR_1}.”\p"
+	.string "{PLAYER}’s POKéMON {STR_VAR_2} and\n"
+	.string "{STR_VAR_3}...\l"
+	.string "And “{STR_VAR_1}”...\p"
+	.string "Mmm! That’s deep! There’s deep\n"
+	.string "significance behind that quote!\p"
+	.string "It’s no surprise - a good TRAINER has\n"
+	.string "good things to say.\p"
+	.string "That’s all for today!\n"
+	.string "See you again on our next broadcast!$"
+
+UnknownString_81AD135: @ 81AD135
+	.string "Greetings!\n"
+	.string "It’s time for POKéMON NEWS.\p"
+	.string "SLATEPORT’s most popular kind of guy,\n"
+	.string "the ENERGY GURU, is in the news again!\p"
+	.string "He promises to, “Stupendously go for\n"
+	.string "it in just this many days: {STR_VAR_1}!”\p"
+	.string "While he refused to elaborate on what\n"
+	.string "he will stupendously go for, the\l"
+	.string "ENERGY GURU advised, “Save up your\l"
+	.string "money. That’ll be good...”\p"
+	.string "It sounds like a trip to SLATEPORT\n"
+	.string "would be well worth your while that day.\p"
+	.string "That’s the news on POKéMON NEWS.$"
+
+UnknownString_81AD2E0: @ 81AD2E0
+	.string "Greetings!\n"
+	.string "It’s time for POKéMON NEWS.\p"
+	.string "This is the news you’ve all been\n"
+	.string "waiting for!\p"
+	.string "SLATEPORT’S ENERGY GURU is going\n"
+	.string "for it stupendously in the MARKET!\p"
+	.string "He promises unbeatable bargain\n"
+	.string "prices on CALCIUM and PROTEIN!\p"
+	.string "A trip to SLATEPORT CITY sounds\n"
+	.string "worthwhile. Why not visit and shop\l"
+	.string "to your heart’s content?\p"
+	.string "That’s the news on POKéMON NEWS.$"
+
+UnknownString_81AD434: @ 81AD434
+	.string "Greetings!\n"
+	.string "It’s time for POKéMON NEWS.\p"
+	.string "This is the news you’ve all been\n"
+	.string "waiting for!\p"
+	.string "SLATEPORT’S ENERGY GURU is going\n"
+	.string "for it stupendously in the MARKET!\p"
+	.string "He promises unbeatable bargain\n"
+	.string "prices on CALCIUM and PROTEIN!\p"
+	.string "According to the ENERGY GURU, he\n"
+	.string "still has ample merchandise left.\p"
+	.string "Why not visit SLATEPORT CITY for\n"
+	.string "a most enjoyable shopping trip?\p"
+	.string "That’s the news on POKéMON NEWS.$"
+
+UnknownString_81AD5B0: @ 81AD5B0
+	.string "Greetings!\n"
+	.string "It’s time for POKéMON NEWS.\p"
+	.string "It’s approaching!\n"
+	.string "It’s finally coming!\p"
+	.string "The GAME CORNER’s service day will be\n"
+	.string "here in just this many days: {STR_VAR_1}!\p"
+	.string "Even those who are usually unlucky\n"
+	.string "may be lucky on this particular day!\p"
+	.string "That’s the news on POKéMON NEWS.$"
+
+UnknownString_81AD6AE: @ 81AD6AE
+	.string "Greetings!\n"
+	.string "It’s time for POKéMON NEWS.\p"
+	.string "It’s here!\n"
+	.string "It’s finally arrived!\p"
+	.string "GAME CORNER’s service day has finally\n"
+	.string "arrived!\p"
+	.string "Could you be lucky at the SLOTS \n"
+	.string "and ROULETTE?\p"
+	.string "The location is MAUVILLE CITY.\n"
+	.string "This is the place!\p"
+	.string "That’s the news on POKéMON NEWS.$"
+
+UnknownString_81AD7A7: @ 81AD7A7
+	.string "Greetings!\n"
+	.string "It’s time for POKéMON NEWS.\p"
+	.string "It’s here!\n"
+	.string "It’s finally arrived!\p"
+	.string "GAME CORNER’s service day has finally\n"
+	.string "arrived!\p"
+	.string "Could you be lucky at the SLOTS\n"
+	.string "and ROULETTE?\p"
+	.string "Time is limited and has almost run out.\n"
+	.string "The location is MAUVILLE CITY.\p"
+	.string "That’s the news on POKéMON NEWS.$"
+
+UnknownString_81AD8B4: @ 81AD8B4
+	.string "Greetings!\n"
+	.string "It’s time for POKéMON NEWS.\p"
+	.string "We’ve just received wonderful news\n"
+	.string "from LILYCOVE DEPARTMENT STORE.\p"
+	.string "The DEPARTMENT STORE’s clear-out sale\n"
+	.string "will be in just this many days: {STR_VAR_1}!\p"
+	.string "That thingamajig or that doodad that\n"
+	.string "you’ve always wanted could be yours!\p"
+	.string "That’s the news on POKéMON NEWS.$"
+
+UnknownString_81AD9D3: @ 81AD9D3
+	.string "Greetings!\n"
+	.string "It’s time for POKéMON NEWS.\p"
+	.string "This is the news you’ve all been\n"
+	.string "waiting for!\p"
+	.string "LILYCOVE DEPARTMENT STORE’s clear-out\n"
+	.string "sale has finally arrived!\p"
+	.string "All the thingamajigs and doodads that\n"
+	.string "you’ve always dreamt about...\p"
+	.string "You may be in for fateful encounters\n"
+	.string "with them all!\p"
+	.string "That’s the news on POKéMON NEWS.$"
+
+UnknownString_81ADB01: @ 81ADB01
+	.string "Greetings!\n"
+	.string "It’s time for POKéMON NEWS.\p"
+	.string "This is the news you’ve all been\n"
+	.string "waiting for!\p"
+	.string "LILYCOVE DEPARTMENT STORE’s clear-out\n"
+	.string "sale has finally arrived!\p"
+	.string "All the thingamajigs and doodads that\n"
+	.string "you’ve always dreamt about...\p"
+	.string "You may be in for fateful encounters\n"
+	.string "with them all!\p"
+	.string "That’s the news on POKéMON NEWS.$"
+
+UnknownString_81ADC2F: @ 81ADC2F
+	.string "This program has been brought to you\n"
+	.string "by the DEVON CORPORATION.$"
+
+UnknownString_81ADC6E: @ 81ADC6E
+	.string "What’s important is love for POKéMON.\p"
+	.string "What you need is a little courage.\p"
+	.string "Let your cherished POKéMON take\n"
+	.string "center stage! POKéMON CONTESTS!$"
+
+UnknownString_81ADCF7: @ 81ADCF7
+	.string "We raise your beloved POKéMON with\n"
+	.string "all of our love!\p"
+	.string "For all your POKéMON-training needs,\n"
+	.string "visit our DAY CARE on ROUTE 117.$"
+
+UnknownString_81ADD71: @ 81ADD71
+	.string "The cauldron of good times and laughs!\n"
+	.string "LAVARIDGE SPA.$"
+
+UnknownString_81ADDA7: @ 81ADDA7
+	.string "Overflowing with great merchandise\n"
+	.string "and excitement!\p"
+	.string "A great place to find that something\n"
+	.string "you need!\p"
+	.string "Visit LILYCOVE DEPARTMENT STORE for\n"
+	.string "all your shopping needs!$"
 
 BattleTower_Lobby_EventScript_1ADE46:: @ 81ADE46
 FallarborTown_ContestLobby_EventScript_1ADE46:: @ 81ADE46
@@ -9498,7 +10790,507 @@ MauvilleCity_PokemonCenter_1F_Text_1AEFA5:: @ 81AEFA5
 	.string "in hearing my epic tales of legendary\l"
 	.string "TRAINERS.$"
 
-	.incbin "baserom.gba", 0x1aeffc, 0x181a
+UnknownString_81AEFFC: @ 81AEFFC
+	.string "The Save-Happy TRAINER$"
+
+UnknownString_81AF013: @ 81AF013
+	.string "Saved the game$"
+
+UnknownString_81AF022: @ 81AF022
+	.string "This is a tale of a TRAINER\n"
+	.string "named {STR_VAR_3}.\p"
+	.string "This TRAINER saved the game\n"
+	.string "{STR_VAR_1} times!\p"
+	.string "A more cautious TRAINER than\n"
+	.string "{STR_VAR_3} one will never find!$"
+
+UnknownString_81AF0A3: @ 81AF0A3
+	.string "The Trendsetter TRAINER$"
+
+UnknownString_81AF0BB: @ 81AF0BB
+	.string "Started trends$"
+
+UnknownString_81AF0CA: @ 81AF0CA
+	.string "This is a tale of a TRAINER\n"
+	.string "named {STR_VAR_3}.\p"
+	.string "This TRAINER started new trends\n"
+	.string "{STR_VAR_1} times!\p"
+	.string "{STR_VAR_3} is setting trends for all\n"
+	.string "the HOENN region!$"
+
+UnknownString_81AF149: @ 81AF149
+	.string "The BERRY-Planting TRAINER$"
+
+UnknownString_81AF164: @ 81AF164
+	.string "Planted BERRIES$"
+
+UnknownString_81AF174: @ 81AF174
+	.string "This is a tale of a TRAINER\n"
+	.string "named {STR_VAR_3}.\p"
+	.string "This TRAINER planted BERRIES\n"
+	.string "{STR_VAR_1} times!\p"
+	.string "{STR_VAR_3} is a legendary lover of\n"
+	.string "BERRIES!$"
+
+UnknownString_81AF1E5: @ 81AF1E5
+	.string "The BIKE-Loving TRAINER$"
+
+UnknownString_81AF1FD: @ 81AF1FD
+	.string "Traded BIKES$"
+
+UnknownString_81AF20A: @ 81AF20A
+	.string "This is a tale of a TRAINER\n"
+	.string "named {STR_VAR_3}.\p"
+	.string "This TRAINER swapped BIKES\n"
+	.string "{STR_VAR_1} times!\p"
+	.string "{STR_VAR_3} must love BIKES deeply\n"
+	.string "and passionately!$"
+
+UnknownString_81AF281: @ 81AF281
+	.string "The Interviewed TRAINER$"
+
+UnknownString_81AF299: @ 81AF299
+	.string "Got interviewed$"
+
+UnknownString_81AF2A9: @ 81AF2A9
+	.string "This is a tale of a TRAINER\n"
+	.string "named {STR_VAR_3}.\p"
+	.string "This TRAINER got interviewed\n"
+	.string "{STR_VAR_1} times!\p"
+	.string "{STR_VAR_3} must be a TRAINER who’s\n"
+	.string "attracting much attention!$"
+
+UnknownString_81AF32C: @ 81AF32C
+	.string "The Battle-Happy TRAINER$"
+
+UnknownString_81AF345: @ 81AF345
+	.string "Battled$"
+
+UnknownString_81AF34D: @ 81AF34D
+	.string "This is a tale of a TRAINER\n"
+	.string "named {STR_VAR_3}.\p"
+	.string "This TRAINER battled {STR_VAR_1} times!\p"
+	.string "{STR_VAR_3} must be a TRAINER who can\n"
+	.string "never refuse a chance to battle!$"
+
+UnknownString_81AF3D0: @ 81AF3D0
+	.string "The POKéMON-Catching TRAINER$"
+
+UnknownString_81AF3ED: @ 81AF3ED
+	.string "Caught POKéMON$"
+
+UnknownString_81AF3FC: @ 81AF3FC
+	.string "This is a tale of a TRAINER\n"
+	.string "named {STR_VAR_3}.\p"
+	.string "This TRAINER caught\n"
+	.string "{STR_VAR_1} POKéMON!\p"
+	.string "{STR_VAR_3} is a legendary catcher of\n"
+	.string "wild POKéMON!$"
+
+UnknownString_81AF46D: @ 81AF46D
+	.string "The Fishing TRAINER$"
+
+UnknownString_81AF481: @ 81AF481
+	.string "Caught POKéMON with a ROD$"
+
+UnknownString_81AF49B: @ 81AF49B
+	.string "This is a tale of a TRAINER\n"
+	.string "named {STR_VAR_3}.\p"
+	.string "This TRAINER caught\n"
+	.string "{STR_VAR_1} POKéMON while fishing!\p"
+	.string "{STR_VAR_3} is a legendary fishing\n"
+	.string "expert!$"
+
+UnknownString_81AF511: @ 81AF511
+	.string "The EGG-Warming TRAINER$"
+
+UnknownString_81AF529: @ 81AF529
+	.string "Hatched EGGS$"
+
+UnknownString_81AF536: @ 81AF536
+	.string "This is a tale of a TRAINER\n"
+	.string "named {STR_VAR_3}.\p"
+	.string "This TRAINER hatched {STR_VAR_1} POKéMON\n"
+	.string "from EGGS!\p"
+	.string "{STR_VAR_3} is a legendary warmer\n"
+	.string "of EGGS!$"
+
+UnknownString_81AF5A9: @ 81AF5A9
+	.string "The Evolver TRAINER$"
+
+UnknownString_81AF5BD: @ 81AF5BD
+	.string "Evolved POKéMON$"
+
+UnknownString_81AF5CD: @ 81AF5CD
+	.string "This is a tale of a TRAINER\n"
+	.string "named {STR_VAR_3}.\p"
+	.string "This TRAINER made {STR_VAR_1} POKéMON\n"
+	.string "evolve!\p"
+	.string "{STR_VAR_3} is the ultimate evolver\n"
+	.string "of POKéMON!$"
+
+UnknownString_81AF63F: @ 81AF63F
+	.string "The POKéMON CENTER-Loving TRAINER$"
+
+UnknownString_81AF661: @ 81AF661
+	.string "Used POKéMON CENTERS$"
+
+UnknownString_81AF676: @ 81AF676
+	.string "This is a tale of a TRAINER\n"
+	.string "named {STR_VAR_3}.\p"
+	.string "This TRAINER healed POKéMON\n"
+	.string "{STR_VAR_1} times at POKéMON CENTERS!\p"
+	.string "There could be no greater lover of\n"
+	.string "POKéMON CENTERS than {STR_VAR_3}!$"
+
+UnknownString_81AF711: @ 81AF711
+	.string "The Homebody TRAINER$"
+
+UnknownString_81AF726: @ 81AF726
+	.string "Rested POKéMON at home$"
+
+UnknownString_81AF73D: @ 81AF73D
+	.string "This is a tale of a TRAINER\n"
+	.string "named {STR_VAR_3}.\p"
+	.string "This TRAINER healed POKéMON\n"
+	.string "{STR_VAR_1} times at home!\p"
+	.string "There could be no more of a homebody\n"
+	.string "than {STR_VAR_3}!$"
+
+UnknownString_81AF7BF: @ 81AF7BF
+	.string "The SAFARI-Loving TRAINER$"
+
+UnknownString_81AF7D9: @ 81AF7D9
+	.string "Entered the SAFARI ZONE$"
+
+UnknownString_81AF7F1: @ 81AF7F1
+	.string "This is a tale of a TRAINER\n"
+	.string "named {STR_VAR_3}.\p"
+	.string "This TRAINER went into the SAFARI ZONE\n"
+	.string "{STR_VAR_1} times!\p"
+	.string "{STR_VAR_3} is a TRAINER whose wild side\n"
+	.string "must come out in the SAFARI ZONE!$"
+
+UnknownString_81AF88A: @ 81AF88A
+	.string "The CUT-Frenzy TRAINER$"
+
+UnknownString_81AF8A1: @ 81AF8A1
+	.string "Used CUT$"
+
+UnknownString_81AF8AA: @ 81AF8AA
+	.string "This is a tale of a TRAINER\n"
+	.string "named {STR_VAR_3}.\p"
+	.string "This TRAINER used CUT\n"
+	.string "{STR_VAR_1} times!\p"
+	.string "{STR_VAR_3} is a TRAINER who just must\n"
+	.string "love to CUT!$"
+
+UnknownString_81AF91B: @ 81AF91B
+	.string "The ROCK-SMASHING TRAINER$"
+
+UnknownString_81AF935: @ 81AF935
+	.string "Smashed rocks$"
+
+UnknownString_81AF943: @ 81AF943
+	.string "This is a tale of a TRAINER\n"
+	.string "named {STR_VAR_3}.\p"
+	.string "This TRAINER used ROCK SMASH\n"
+	.string "{STR_VAR_1} times!\p"
+	.string "{STR_VAR_3} must be a TRAINER who\n"
+	.string "can’t leave a stone unsmashed!$"
+
+UnknownString_81AF9C8: @ 81AF9C8
+	.string "The Move-Loving TRAINER$"
+
+UnknownString_81AF9E0: @ 81AF9E0
+	.string "Moved the SECRET BASE$"
+
+UnknownString_81AF9F6: @ 81AF9F6
+	.string "This is a tale of a TRAINER\n"
+	.string "named {STR_VAR_3}.\p"
+	.string "This TRAINER moved the SECRET BASE\n"
+	.string "{STR_VAR_1} times!\p"
+	.string "{STR_VAR_3} is a TRAINER who loves\n"
+	.string "to move houses often!$"
+
+UnknownString_81AFA79: @ 81AFA79
+	.string "The SPLASH-Happy TRAINER$"
+
+UnknownString_81AFA92: @ 81AFA92
+	.string "Used SPLASH$"
+
+UnknownString_81AFA9E: @ 81AFA9E
+	.string "This is a tale of a TRAINER\n"
+	.string "named {STR_VAR_3}.\p"
+	.string "This TRAINER used SPLASH\n"
+	.string "{STR_VAR_1} times!\p"
+	.string "{STR_VAR_3} is a TRAINER who must love\n"
+	.string "SPLASHING around!$"
+
+UnknownString_81AFB17: @ 81AFB17
+	.string "The Tenacious TRAINER$"
+
+UnknownString_81AFB2D: @ 81AFB2D
+	.string "Resorted to using STRUGGLE$"
+
+UnknownString_81AFB48: @ 81AFB48
+	.string "This is a tale of a TRAINER\n"
+	.string "named {STR_VAR_3}.\p"
+	.string "This TRAINER had to rely on STRUGGLE\n"
+	.string "{STR_VAR_1} times!\p"
+	.string "{STR_VAR_3} is a tenacious TRAINER\n"
+	.string "who never gives in to adversity!$"
+
+UnknownString_81AFBD8: @ 81AFBD8
+	.string "The SLOT Champ$"
+
+UnknownString_81AFBE7: @ 81AFBE7
+	.string "Won the jackpot on the SLOTS$"
+
+UnknownString_81AFC04: @ 81AFC04
+	.string "This is a tale of a TRAINER\n"
+	.string "named {STR_VAR_3}.\p"
+	.string "This TRAINER won the jackpot on\n"
+	.string "the SLOTS {STR_VAR_1} times.\p"
+	.string "{STR_VAR_3} is a TRAINER who was lucky\n"
+	.string "on the SLOTS!$"
+
+UnknownString_81AFC8A: @ 81AFC8A
+	.string "The ROULETTE Champ$"
+
+UnknownString_81AFC9D: @ 81AFC9D
+	.string "Had consecutive ROULETTE wins of$"
+
+UnknownString_81AFCBE: @ 81AFCBE
+	.string "This is a tale of a TRAINER\n"
+	.string "named {STR_VAR_3}.\p"
+	.string "This TRAINER won in ROULETTE\n"
+	.string "{STR_VAR_1} times in a row.\p"
+	.string "{STR_VAR_3} was lucky when the ball\n"
+	.string "bounced in ROULETTE!$"
+
+UnknownString_81AFD44: @ 81AFD44
+	.string "The BATTLE TOWER Challenger$"
+
+UnknownString_81AFD60: @ 81AFD60
+	.string "Took the BATTLE TOWER challenge$"
+
+UnknownString_81AFD80: @ 81AFD80
+	.string "This is a tale of a TRAINER\n"
+	.string "named {STR_VAR_3}.\p"
+	.string "This TRAINER took the BATTLE TOWER\n"
+	.string "challenge {STR_VAR_1} times!\p"
+	.string "{STR_VAR_3} is a TRAINER who aspires\n"
+	.string "for excellence in the BATTLE TOWER!$"
+
+UnknownString_81AFE1D: @ 81AFE1D
+	.string "The Blend-Loving TRAINER$"
+
+UnknownString_81AFE36: @ 81AFE36
+	.string "Made {POKEBLOCK}S$"
+
+UnknownString_81AFE42: @ 81AFE42
+	.string "This is a tale of a TRAINER\n"
+	.string "named {STR_VAR_3}.\p"
+	.string "This TRAINER made {POKEBLOCK}S\n"
+	.string "{STR_VAR_1} times!\p"
+	.string "There is none better at using a BERRY\n"
+	.string "BLENDER than {STR_VAR_3}!$"
+
+UnknownString_81AFEC2: @ 81AFEC2
+	.string "The CONTEST-Loving TRAINER$"
+
+UnknownString_81AFEDD: @ 81AFEDD
+	.string "Entered CONTESTS$"
+
+UnknownString_81AFEEE: @ 81AFEEE
+	.string "This is a tale of a TRAINER\n"
+	.string "named {STR_VAR_3}.\p"
+	.string "This TRAINER entered CONTESTS\n"
+	.string "{STR_VAR_1} times!\p"
+	.string "{STR_VAR_3} must love showing off\n"
+	.string "POKéMON to others!$"
+
+UnknownString_81AFF68: @ 81AFF68
+	.string "The CONTEST Master$"
+
+UnknownString_81AFF7B: @ 81AFF7B
+	.string "Won CONTESTS$"
+
+UnknownString_81AFF88: @ 81AFF88
+	.string "This is a tale of a TRAINER\n"
+	.string "named {STR_VAR_3}.\p"
+	.string "This TRAINER won CONTESTS\n"
+	.string "{STR_VAR_1} times!\p"
+	.string "{STR_VAR_3} must be an incredible\n"
+	.string "CONTEST master!$"
+
+UnknownString_81AFFFB: @ 81AFFFB
+	.string "The Happy Shopper$"
+
+UnknownString_81B000D: @ 81B000D
+	.string "Shopped$"
+
+UnknownString_81B0015: @ 81B0015
+	.string "This is a tale of a TRAINER\n"
+	.string "named {STR_VAR_3}.\p"
+	.string "This TRAINER bought items in shops\n"
+	.string "{STR_VAR_1} times!\p"
+	.string "{STR_VAR_3} must be one of those\n"
+	.string "people who are born to shop.$"
+
+UnknownString_81B009D: @ 81B009D
+	.string "The Item-Finding TRAINER$"
+
+UnknownString_81B00B6: @ 81B00B6
+	.string "Used an ITEMFINDER$"
+
+UnknownString_81B00C9: @ 81B00C9
+	.string "This is a tale of a TRAINER\n"
+	.string "named {STR_VAR_3}.\p"
+	.string "This TRAINER used an ITEMFINDER\n"
+	.string "{STR_VAR_1} times!\p"
+	.string "{STR_VAR_3} must enjoy scouring the\n"
+	.string "ground for hidden items!$"
+
+UnknownString_81B014D: @ 81B014D
+	.string "The Rain-Soaked TRAINER$"
+
+UnknownString_81B0165: @ 81B0165
+	.string "Got rained on$"
+
+UnknownString_81B0173: @ 81B0173
+	.string "This is a tale of a TRAINER\n"
+	.string "named {STR_VAR_3}.\p"
+	.string "This TRAINER got soaked by rain\n"
+	.string "{STR_VAR_1} times!\p"
+	.string "{STR_VAR_3}’s charisma must even\n"
+	.string "attract rain!$"
+
+UnknownString_81B01E9: @ 81B01E9
+	.string "The Avid POKéDEX Reader$"
+
+UnknownString_81B0201: @ 81B0201
+	.string "Checked a POKéDEX$"
+
+UnknownString_81B0213: @ 81B0213
+	.string "This is a tale of a TRAINER\n"
+	.string "named {STR_VAR_3}.\p"
+	.string "This TRAINER checked a POKéDEX\n"
+	.string "{STR_VAR_1} times!\p"
+	.string "{STR_VAR_3} must love inspecting\n"
+	.string "POKéMON in a POKéDEX!$"
+
+UnknownString_81B0290: @ 81B0290
+	.string "The RIBBON Collector$"
+
+UnknownString_81B02A5: @ 81B02A5
+	.string "Received RIBBONS$"
+
+UnknownString_81B02B6: @ 81B02B6
+	.string "This is a tale of a TRAINER\n"
+	.string "named {STR_VAR_3}.\p"
+	.string "This TRAINER received RIBBONS\n"
+	.string "{STR_VAR_1} times!\p"
+	.string "{STR_VAR_3} must be a TRAINER who\n"
+	.string "loves to collect RIBBONS!$"
+
+UnknownString_81B0337: @ 81B0337
+	.string "The Ledge-Jumping TRAINER$"
+
+UnknownString_81B0351: @ 81B0351
+	.string "Jumped down ledges$"
+
+UnknownString_81B0364: @ 81B0364
+	.string "This is a tale of a TRAINER\n"
+	.string "named {STR_VAR_3}.\p"
+	.string "This TRAINER jumped down ledges\n"
+	.string "{STR_VAR_1} times!\p"
+	.string "If there’s a ledge to be jumped,\n"
+	.string "{STR_VAR_3} can’t ignore it!$"
+
+UnknownString_81B03E9: @ 81B03E9
+	.string "The Legendary TV Viewer$"
+
+UnknownString_81B0401: @ 81B0401
+	.string "Watched TV$"
+
+UnknownString_81B040C: @ 81B040C
+	.string "This is a tale of a TRAINER\n"
+	.string "named {STR_VAR_3}.\p"
+	.string "This TRAINER watched TV\n"
+	.string "{STR_VAR_1} times!\p"
+	.string "{STR_VAR_3} must love watching TV!$"
+
+UnknownString_81B046E: @ 81B046E
+	.string "The Time-Conscious TRAINER$"
+
+UnknownString_81B0489: @ 81B0489
+	.string "Checked the time$"
+
+UnknownString_81B049A: @ 81B049A
+	.string "This is a tale of a TRAINER\n"
+	.string "named {STR_VAR_3}.\p"
+	.string "This TRAINER checked the time\n"
+	.string "{STR_VAR_1} times!\p"
+	.string "{STR_VAR_3} must be a punctual TRAINER\n"
+	.string "who’s conscious of the time.$"
+
+UnknownString_81B0523: @ 81B0523
+	.string "The POKéMON LOTTERY Wizard$"
+
+UnknownString_81B053E: @ 81B053E
+	.string "Won POKéMON LOTTERIES$"
+
+UnknownString_81B0554: @ 81B0554
+	.string "This is a tale of a TRAINER\n"
+	.string "named {STR_VAR_3}.\p"
+	.string "This TRAINER won POKéMON LOTTERIES\n"
+	.string "{STR_VAR_1} times!\p"
+	.string "{STR_VAR_3} must have many friends\n"
+	.string "to trade POKéMON with!$"
+
+UnknownString_81B05D8: @ 81B05D8
+	.string "The DAY CARE-Using Trainer$"
+
+UnknownString_81B05F3: @ 81B05F3
+	.string "Left POKéMON at the DAY CARE$"
+
+UnknownString_81B0610: @ 81B0610
+	.string "This is a tale of a TRAINER\n"
+	.string "named {STR_VAR_3}.\p"
+	.string "This TRAINER left POKéMON with the\n"
+	.string "DAY CARE {STR_VAR_1} times!\p"
+	.string "{STR_VAR_3} must be a real go-getter\n"
+	.string "who raises POKéMON aggressively!$"
+
+UnknownString_81B06A9: @ 81B06A9
+	.string "The CABLE CAR-Loving TRAINER$"
+
+UnknownString_81B06C6: @ 81B06C6
+	.string "Rode the CABLE CAR$"
+
+UnknownString_81B06D9: @ 81B06D9
+	.string "This is a tale of a TRAINER\n"
+	.string "named {STR_VAR_3}.\p"
+	.string "This TRAINER rode the CABLE CAR\n"
+	.string "{STR_VAR_1} times!\p"
+	.string "{STR_VAR_3} must be a busy TRAINER\n"
+	.string "who’s up and down all the time!$"
+
+UnknownString_81B0763: @ 81B0763
+	.string "The Hot Spring-Loving TRAINER$"
+
+UnknownString_81B0781: @ 81B0781
+	.string "Bathed in hot springs$"
+
+UnknownString_81B0797: @ 81B0797
+	.string "This is a tale of a TRAINER\n"
+	.string "named {STR_VAR_3}.\p"
+	.string "This TRAINER bathed in hot springs\n"
+	.string "{STR_VAR_1} times!\p"
+	.string "{STR_VAR_3} must be a TRAINER with\n"
+	.string "baby-smooth skin!$"
 
 MauvilleCity_PokemonCenter_1F_EventScript_1B0816:: @ 81B0816
 	setvar 0x8008, 0
@@ -9652,7 +11444,8 @@ MauvilleCity_PokemonCenter_1F_EventScript_1B0A79:: @ 81B0A79
 	release
 	end
 
-	.incbin "baserom.gba", 0x1b0a83, 0xe
+UnknownString_81B0A83: @ 81B0A83
+	.string "BARD testing!$"
 
 MauvilleCity_PokemonCenter_1F_Text_1B0A91:: @ 81B0A91
 	.string "Hi, I’m the BARD.\n"
@@ -9947,12 +11740,38 @@ gUnknown_081B1220: @ 81B1220
 
 	.global gUnknown_081B1269
 gUnknown_081B1269: @ 81B1269
-	.incbin "baserom.gba", 0x001b1269, 0x1a3
+	.incbin "baserom.gba", 0x1B1269, 0x57
+
+UnknownString_81B12C0: @ 81B12C0
+	.string "The sea is deep here. A POKéMON may be\n"
+	.string "able to go underwater here.$"
+
+UnknownString_81B1303: @ 81B1303
+	.string "The sea is deep here.\n"
+	.string "Would you like to use DIVE?$"
+
+UnknownString_81B1335: @ 81B1335
+	.string "{STR_VAR_1} used DIVE.$"
+
+UnknownString_81B1343: @ 81B1343
+	.string "Light is filtering down from above.\n"
+	.string "A POKéMON may be able to surface here.$"
+
+UnknownString_81B138E: @ 81B138E
+	.string "Light is filtering down from above.\n"
+	.string "Would you like to use DIVE?$"
+
+UnknownString_81B13CE: @ 81B13CE
+	.string "There is something in the way above.\n"
+	.string "DIVE can’t be used here.$"
 
 	.global gUnknown_081B140C
 gUnknown_081B140C: @ 81B140C
 
-	.incbin "baserom.gba", 0x1b140c, 0x2d
+	.incbin "baserom.gba", 0x1B140C, 0x9
+
+UnknownString_81B1415: @ 81B1415
+	.string "There appears to be nothing here...$"
 
 Route102_EventScript_1B1439:: @ 81B1439
 	giveitem ITEM_POTION, 1, 1
@@ -10632,7 +12451,8 @@ PetalburgCity_PokemonCenter_1F_Text_1B1D3A:: @ 81B1D3A
 	.string "Repeat for the remaining text choices,\n"
 	.string "and you’ll have your very own profile.$"
 
-	.incbin "baserom.gba", 0x1b1f7a, 0x1
+UnknownString_81B1F7A: @ 81B1F7A
+	.string "$"
 
 PetalburgCity_PokemonCenter_1F_Text_1B1F7B:: @ 81B1F7B
 	.string "Yes! Thank you!\n"
@@ -10998,7 +12818,9 @@ Route117_Text_1B27E3:: @ 81B27E3
 	.string "I may even have seen it receiving\n"
 	.string "a piece of MAIL.$"
 
-	.incbin "baserom.gba", 0x1b2858, 0x3f
+UnknownString_81B2858: @ 81B2858
+	.string "If you want to pick up your POKéMON,\n"
+	.string "have a word with my wife.$"
 
 Route117_Text_1B2897:: @ 81B2897
 	.string "Ah, it’s you! Your {STR_VAR_1} and\n"
@@ -11109,7 +12931,148 @@ MtPyre_Summit_EventScript_1B2DD7:: @ 81B2DD7
 	msgbox MtPyre_Summit_Text_1B5E84, 6
 	end
 
-	.incbin "baserom.gba", 0x1b2dee, 0x9cd
+UnknownString_81B2DEE: @ 81B2DEE
+	.string "The power contained in the\n"
+	.string "METEORITE...\p"
+	.string "By amplifying its power with this\n"
+	.string "machine, MT. CHIMNEY’s volcanic activity\l"
+	.string "will stop.\p"
+	.string "Fufufu... Eventually, the cooled-down\n"
+	.string "crater will fill with rainwater, giving\l"
+	.string "WATER POKéMON a place to live.$"
+
+UnknownString_81B2ED9: @ 81B2ED9
+	.string "ARCHIE: You again...\p"
+	.string "Now listen.\n"
+	.string "All life depends on the sea.\p"
+	.string "The sea is everything!\n"
+	.string "Its importance is paramount!\p"
+	.string "That is why we of TEAM AQUA are\n"
+	.string "committed to expanding the sea.\p"
+	.string "Doing so will result in the emergence\n"
+	.string "of new POKéMON species.\p"
+	.string "We will return the world back to\n"
+	.string "nature for the good of POKéMON.\p"
+	.string "That is TEAM AQUA’s vision!\p"
+	.string "I can’t allow an ignorant child like\n"
+	.string "you to get in our way.\p"
+	.string "I, ARCHIE, will show you the\n"
+	.string "consequences of meddling!$"
+
+UnknownString_81B3099: @ 81B3099
+	.string "What?!\p"
+	.string "I, ARCHIE, was caught off guard?!$"
+
+UnknownString_81B30C2: @ 81B30C2
+	.string "ARCHIE: Ah, whatever.\n"
+	.string "I will give up our plans for MT.\l"
+	.string "CHIMNEY for the time being...\p"
+	.string "But no one can ever stop us!\n"
+	.string "TEAM AQUA will prevail!\p"
+	.string "Don’t you ever forget that!$"
+
+UnknownString_81B3168: @ 81B3168
+	.string "Hehehe!\p"
+	.string "So you’ve come all the way here!\p"
+	.string "But you’re too late!\n"
+	.string "I’ve already delivered the METEORITE\l"
+	.string "from METEOR FALLS to the BOSS!$"
+
+UnknownString_81B31EA: @ 81B31EA
+	.string "Hehehe...\n"
+	.string "So I lost...\p"
+	.string "I’m sure glad I never took you on back\n"
+	.string "at METEOR FALLS.$"
+
+UnknownString_81B3239: @ 81B3239
+	.string "Hehehe!\p"
+	.string "You might have beaten me, but you don’t\n"
+	.string "stand a chance against the BOSS!\p"
+	.string "If you get lost now, you won’t have to\n"
+	.string "face a sound whipping!$"
+
+UnknownString_81B32C8: @ 81B32C8
+	.string "We of TEAM AQUA are working hard for\n"
+	.string "everyone’s sake.\p"
+	.string "Like, if there’s more water around,\n"
+	.string "WATER POKéMON will be happy, and it’ll\l"
+	.string "give people more fun places to swim!$"
+
+UnknownString_81B336E: @ 81B336E
+	.string "Hunh?\n"
+	.string "What do you mean I lost?$"
+
+UnknownString_81B338D: @ 81B338D
+	.string "Our BOSS says, “It will make everyone\n"
+	.string "happy.”\p"
+	.string "But why does everyone keep getting\n"
+	.string "in our way?$"
+
+UnknownString_81B33EA: @ 81B33EA
+	.string "That annoying TEAM MAGMA...\n"
+	.string "They always mess with our plans!$"
+
+UnknownString_81B3427: @ 81B3427
+	.string "METEORITES pack amazing power!$"
+
+UnknownString_81B3446: @ 81B3446
+	.string "Go! Stomp TEAM MAGMA!\n"
+	.string "And expand the sea!$"
+
+UnknownString_81B3470: @ 81B3470
+	.string "Stay out of our way, okay?\p"
+	.string "We’re trying to enlarge the sea for\n"
+	.string "the good of everybody!$"
+
+UnknownString_81B34C6: @ 81B34C6
+	.string "Yeah!\n"
+	.string "Hose them down!$"
+
+UnknownString_81B34DC: @ 81B34DC
+	.string "We’re going to keep expanding the sea!$"
+
+UnknownString_81B3503: @ 81B3503
+	.string "Bushaa!$"
+
+UnknownString_81B350B: @ 81B350B
+	.string "MAXIE: Oh, {PLAYER}{KUN}!\p"
+	.string "Please, you must stop TEAM AQUA\n"
+	.string "for me!\p"
+	.string "They’re trying to make this volcano\n"
+	.string "inactive by using the stolen\l"
+	.string "METEORITE’s power!$"
+
+UnknownString_81B3598: @ 81B3598
+	.string "MAXIE: {PLAYER}{KUN}!\p"
+	.string "Please, you’ve got to stop TEAM AQUA\n"
+	.string "for me!\p"
+	.string "Dealing with these three thugs is\n"
+	.string "a lot, even for me!$"
+
+UnknownString_81B3608: @ 81B3608
+	.string "MAXIE: {PLAYER}{KUN}! Thank you!\p"
+	.string "With your help, we thwarted TEAM\n"
+	.string "AQUA’s destructive plan!\p"
+	.string "But... This victory doesn’t mean the\n"
+	.string "end of their evil plans.\p"
+	.string "We will remain vigilant and keep up\n"
+	.string "our pursuit of TEAM AQUA.\p"
+	.string "{PLAYER}{KUN}, we shall meet again!$"
+
+UnknownString_81B36F1: @ 81B36F1
+	.string "Darn... TEAM AQUA outnumbers us!\n"
+	.string "We can’t keep up with them!$"
+
+UnknownString_81B372E: @ 81B372E
+	.string "If they expand the sea, there’ll be less\n"
+	.string "habitats for POKéMON and people!$"
+
+UnknownString_81B3778: @ 81B3778
+	.string "TEAM AQUA wants to expand the sea...\n"
+	.string "How’s that for insane?$"
+
+UnknownString_81B37B4: @ 81B37B4
+	.string "Bufoh!$"
 
 MtChimney_Text_1B37BB:: @ 81B37BB
 	.string "The power contained in the METEORITE...\p"
@@ -11191,7 +13154,8 @@ MtChimney_Text_1B3D9A:: @ 81B3D9A
 	.string "That annoying TEAM AQUA...\n"
 	.string "They always mess with our plans!$"
 
-	.incbin "baserom.gba", 0x1b3dd6, 0x1f
+UnknownString_81B3DD6: @ 81B3DD6
+	.string "METEORITES pack amazing power!$"
 
 MtChimney_Text_1B3DF5:: @ 81B3DF5
 	.string "Go! Stomp TEAM AQUA!\n"
@@ -11206,7 +13170,8 @@ MtChimney_Text_1B3E7A:: @ 81B3E7A
 	.string "Yeah!\n"
 	.string "Douse them in fire!$"
 
-	.incbin "baserom.gba", 0x1b3e94, 0x26
+UnknownString_81B3E94: @ 81B3E94
+	.string "We’re going to keep making more land!$"
 
 MtChimney_Text_1B3EBA:: @ 81B3EBA
 	.string "Bufoh!$"
@@ -11253,7 +13218,102 @@ MtChimney_Text_1B416E:: @ 81B416E
 MtChimney_Text_1B41B0:: @ 81B41B0
 	.string "Bushaa!$"
 
-	.incbin "baserom.gba", 0x1b41b8, 0x698
+UnknownString_81B41B8: @ 81B41B8
+	.string "ARCHIE: Hold it right there.$"
+
+UnknownString_81B41D5: @ 81B41D5
+	.string "ARCHIE: Fufufu...\n"
+	.string "So it was you, after all.$"
+
+UnknownString_81B4201: @ 81B4201
+	.string "ARCHIE: Behold!\p"
+	.string "See how beautiful it is, the sleeping\n"
+	.string "form of the ancient POKéMON KYOGRE!\p"
+	.string "I have waited so long for this day to\n"
+	.string "come...$"
+
+UnknownString_81B4289: @ 81B4289
+	.string "ARCHIE: It surprises me, how you’ve\n"
+	.string "managed to chase me here.\p"
+	.string "But that’s all over now.\p"
+	.string "For the realization of my dream,\n"
+	.string "you must disappear now!$"
+
+UnknownString_81B4319: @ 81B4319
+	.string "I...\n"
+	.string "I lost again?$"
+
+UnknownString_81B432C: @ 81B432C
+	.string "ARCHIE: Fufufu...\p"
+	.string "I commend you. I must recognize that\n"
+	.string "you are truly gifted.\p"
+	.string "But!\n"
+	.string "I have this in my possession!\p"
+	.string "With this RED ORB, I can make KYOGRE...$"
+
+UnknownString_81B43C4: @ 81B43C4
+	.string "The RED ORB suddenly began shining\n"
+	.string "by itself!$"
+
+UnknownString_81B43F2: @ 81B43F2
+	.string "ARCHIE: What?!\p"
+	.string "I didn’t do anything.\n"
+	.string "Why did the RED ORB...\p"
+	.string "Where did KYOGRE go?$"
+
+UnknownString_81B4443: @ 81B4443
+	.string "ARCHIE: Hm? It’s a message from our\n"
+	.string "members outside...$"
+
+UnknownString_81B447A: @ 81B447A
+	.string "ARCHIE: Yes, what is it?\p"
+	.string "Hm...\n"
+	.string "It’s raining heavily?\p"
+	.string "Good... That should have happened.\n"
+	.string "That is why we awakened KYOGRE,\l"
+	.string "to realize TEAM AQUA’s vision of\l"
+	.string "expanding the sea.\p"
+	.string "What?!\p"
+	.string "It’s raining far harder than we\n"
+	.string "envisioned? You’re in danger?\p"
+	.string "That can’t be...\n"
+	.string "That’s just not possible...\p"
+	.string "Hold your position and monitor the\n"
+	.string "situation!$"
+
+UnknownString_81B45C6: @ 81B45C6
+	.string "ARCHIE: There’s something wrong...\p"
+	.string "The RED ORB is supposed to awaken\n"
+	.string "and control KYOGRE...\p"
+	.string "But... Why?\n"
+	.string "Why did KYOGRE disappear?\p"
+	.string "Why?!$"
+
+UnknownString_81B464D: @ 81B464D
+	.string "MAXIE: What have you wrought?\p"
+	.string "ARCHIE... You’ve finally awoken KYOGRE,\n"
+	.string "haven’t you?\p"
+	.string "What will happen to the world if this\n"
+	.string "downpour continues for all eternity?\p"
+	.string "The world’s landmass will drown in\n"
+	.string "the deepening sea...$"
+
+UnknownString_81B4723: @ 81B4723
+	.string "ARCHIE: What are you saying?\p"
+	.string "The RED ORB should let me control\n"
+	.string "KYOGRE...\l"
+	.string "That can’t be possible...$"
+
+UnknownString_81B4786: @ 81B4786
+	.string "MAXIE: We don’t have the time to\n"
+	.string "argue about it here!\p"
+	.string "Get outside and see for yourself!\p"
+	.string "See if what you’ve wrought is the\n"
+	.string "world that you desired!$"
+
+UnknownString_81B4818: @ 81B4818
+	.string "MAXIE: {PLAYER}{KUN}, come on, you have\n"
+	.string "to get out of here, too!$"
 
 	.include "data/maps/text/SeafloorCavern_Room9.s"
 	.include "data/maps/text/CaveOfOrigin_B4F.s"
@@ -11868,7 +13928,8 @@ FallarborTown_ContestLobby_Text_1B735A:: @ 81B735A
 	.string "{STR_VAR_1}, {STR_VAR_2}, and\n"
 	.string "{STR_VAR_3} arrived.$"
 
-	.incbin "baserom.gba", 0x1b7372, 0xf
+UnknownString_81B7372: @ 81B7372
+	.string "Nobody came...$"
 
 FallarborTown_ContestLobby_Text_1B7381:: @ 81B7381
 	.string "You have no BERRIES.\n"
@@ -13577,7 +15638,17 @@ Route115_Text_1BCDEF:: @ 81BCDEF
 	.string "enjoyment out of it.\l"
 	.string "It must be that I love POKéMON.$"
 
-	.incbin "baserom.gba", 0x1bce47, 0x99
+UnknownString_81BCE47: @ 81BCE47
+	.string "I have a rare POKéMON!\n"
+	.string "Would you like me to show you?$"
+
+UnknownString_81BCE7D: @ 81BCE7D
+	.string "You...\n"
+	.string "You want my POKéMON, don’t you?$"
+
+UnknownString_81BCEA4: @ 81BCEA4
+	.string "I have this rare POKéMON.\n"
+	.string "It’s enough to keep me satisfied.$"
 
 Route115_Text_1BCEE0:: @ 81BCEE0
 	.string "I have a rare POKéMON!\n"
@@ -14819,7 +16890,10 @@ Route128_Text_1C210D:: @ 81C210D
 	.include "data/maps/text/Route134.s"
 	.global gUnknown_081C33E6
 gUnknown_081C33E6: @ 81C33E6
-	.incbin "baserom.gba", 0x001c33e6, 0x24
+	.incbin "baserom.gba", 0x1C33E6, 0x9
+
+UnknownString_81C33EF: @ 81C33EF
+	.string "REPEL’s effect wore off...$"
 
 	.global gUnknown_081C340A
 gUnknown_081C340A: @ 81C340A
@@ -14840,7 +16914,31 @@ gUnknown_081C3459: @ 81C3459
 	.global gUnknown_081C346A
 gUnknown_081C346A: @ 81C346A
 
-	.incbin "baserom.gba", 0x1c346a, 0x166
+	.incbin "baserom.gba", 0x1C346A, 0x48
+
+UnknownString_81C34B2: @ 81C34B2
+	.string "Would you like to exit the SAFARI ZONE\n"
+	.string "right now?$"
+
+UnknownString_81C34E4: @ 81C34E4
+	.string "Ding-dong! Time’s up!\n"
+	.string "Your SAFARI Game is over.$"
+
+UnknownString_81C3514: @ 81C3514
+	.string "You’ve run out of SAFARI BALLS.\n"
+	.string "Your SAFARI Game is over.$"
+
+UnknownString_81C354E: @ 81C354E
+	.string "Would you like to place a {POKEBLOCK}\n"
+	.string "on the {POKEBLOCK} FEEDER?$"
+
+UnknownString_81C3583: @ 81C3583
+	.string "The {STR_VAR_1} you left\n"
+	.string "before is still here.$"
+
+UnknownString_81C35A9: @ 81C35A9
+	.string "The {STR_VAR_1} was placed\n"
+	.string "on the {POKEBLOCK} FEEDER.$"
 
 	.include "data/maps/text/Route121_SafariZoneEntrance.s"
 	.include "data/maps/text/SafariZone_Southeast.s"
@@ -14894,15 +16992,19 @@ MauvilleCity_GameCorner_EventScript_1C40DA:: @ 81C40DA
 
 	.global gUnknown_081C40DF
 gUnknown_081C40DF: @ 81C40DF
-	.incbin "baserom.gba", 0x001c40df, 0x3d
+UnknownString_81C40DF: @ 81C40DF
+	.string "The minimum wager at this table is {STR_VAR_1}. \n"
+	.string "Do you want to play?$"
 
 	.global gUnknown_081C411C
 gUnknown_081C411C: @ 81C411C
-	.incbin "baserom.gba", 0x001c411c, 0x1d
+UnknownString_81C411C: @ 81C411C
+	.string "You don’t have enough COINS.$"
 
 	.global gUnknown_081C4139
 gUnknown_081C4139: @ 81C4139
-	.incbin "baserom.gba", 0x001c4139, 0x1e
+UnknownString_81C4139: @ 81C4139
+	.string "Special rate table right now!$"
 
 	.global gUnknown_081C4157
 gUnknown_081C4157: @ 81C4157
@@ -14910,36 +17012,85 @@ gUnknown_081C4157: @ 81C4157
 
 	.global gUnknown_081C4199
 gUnknown_081C4199: @ 81C4199
-	.incbin "baserom.gba", 0x001c4199, 0xc
+UnknownString_81C4199: @ 81C4199
+	.string "It’s a hit!$"
 
 	.global gUnknown_081C41A5
 gUnknown_081C41A5: @ 81C41A5
-	.incbin "baserom.gba", 0x001c41a5, 0x9
+UnknownString_81C41A5: @ 81C41A5
+	.string "Jackpot!$"
 
 	.global gUnknown_081C41AE
 gUnknown_081C41AE: @ 81C41AE
-	.incbin "baserom.gba", 0x001c41ae, 0xf
+UnknownString_81C41AE: @ 81C41AE
+	.string "Nothing doing!$"
 
 	.global gUnknown_081C41BD
 gUnknown_081C41BD: @ 81C41BD
-	.incbin "baserom.gba", 0x001c41bd, 0x15
+UnknownString_81C41BD: @ 81C41BD
+	.string "You’ve won {STR_VAR_1} COINS!$"
 
 	.global gUnknown_081C41D2
 gUnknown_081C41D2: @ 81C41D2
-	.incbin "baserom.gba", 0x001c41d2, 0x11
+UnknownString_81C41D2: @ 81C41D2
+	.string "No COINS left...$"
 
 	.global gUnknown_081C41E3
 gUnknown_081C41E3: @ 81C41E3
-	.incbin "baserom.gba", 0x001c41e3, 0xe
+UnknownString_81C41E3: @ 81C41E3
+	.string "Keep playing?$"
 
 	.global gUnknown_081C41F1
 gUnknown_081C41F1: @ 81C41F1
-	.incbin "baserom.gba", 0x001c41f1, 0x40
+UnknownString_81C41F1: @ 81C41F1
+	.string "The ROULETTE board will be cleared.$"
+
+UnknownString_81C4215: @ 81C4215
+	.string "You don’t have a COIN CASE.$"
 
 	.global gUnknown_081C4231
 gUnknown_081C4231: @ 81C4231
 
-	.incbin "baserom.gba", 0x1c4231, 0x218
+UnknownString_81C4231: @ 81C4231
+	.string "Your COIN CASE is full!\n"
+	.string "Coins can be exchanged for prizes.$"
+
+UnknownString_81C426C: @ 81C426C
+	.string "I’m very interested in big {STR_VAR_1}.\n"
+	.string "The bigger the better.\p"
+	.string "Huh? Do you have a {STR_VAR_1}?\n"
+	.string "P-p-please, show me!$"
+
+UnknownString_81C42CE: @ 81C42CE
+	.string "Oh, my gosh, this is a big one!\n"
+	.string "This is a grand {STR_VAR_1}!\p"
+	.string "Thanks for showing me.\n"
+	.string "This is my thanks!$"
+
+UnknownString_81C432C: @ 81C432C
+	.string "{PLAYER} received one {STR_VAR_2}.$"
+
+UnknownString_81C4340: @ 81C4340
+	.string "Hunh?\n"
+	.string "Your BAG is crammed full.$"
+
+UnknownString_81C4360: @ 81C4360
+	.string "Hmm... I’ve seen a bigger {STR_VAR_1}\n"
+	.string "than this one.$"
+
+UnknownString_81C438C: @ 81C438C
+	.string "Oh, now this is quite something...\n"
+	.string "But it’s not a {STR_VAR_1}!$"
+
+UnknownString_81C43C2: @ 81C43C2
+	.string "You don’t have a big {STR_VAR_1}?\n"
+	.string "That’s too bad...\p"
+	.string "If you get a big {STR_VAR_1},\n"
+	.string "please come show me.$"
+
+UnknownString_81C4417: @ 81C4417
+	.string "The biggest {STR_VAR_1} in history!\n"
+	.string "{STR_VAR_2}’s {STR_VAR_3}-inch colossus!$"
 
 Route101_Text_1C4449:: @ 81C4449
 	.string "PROF. BIRCH: Ah, {PLAYER}{KUN}!\p"
@@ -14957,88 +17108,133 @@ Route101_Text_1C44DC:: @ 81C44DC
 
 	.global gUnknown_081C4520
 gUnknown_081C4520: @ 81C4520
-	.incbin "baserom.gba", 0x001c4520, 0x4a
+UnknownString_81C4520: @ 81C4520
+	.string "You should go into grassy areas more\n"
+	.string "and look for POKéMON more carefully.$"
 
 	.global gUnknown_081C456A
 gUnknown_081C456A: @ 81C456A
-	.incbin "baserom.gba", 0x001c456a, 0x46
+UnknownString_81C456A: @ 81C456A
+	.string "I guess you’re getting the hang of it.\n"
+	.string "But, it gets harder from here.$"
 
 	.global gUnknown_081C45B0
 gUnknown_081C45B0: @ 81C45B0
-	.incbin "baserom.gba", 0x001c45b0, 0x49
+UnknownString_81C45B0: @ 81C45B0
+	.string "Some POKéMON only appear in certain\n"
+	.string "areas. You’ll need to be persistent.$"
 
 	.global gUnknown_081C45F9
 gUnknown_081C45F9: @ 81C45F9
-	.incbin "baserom.gba", 0x001c45f9, 0x4f
+UnknownString_81C45F9: @ 81C45F9
+	.string "Well, it could use more quantity, but\n"
+	.string "this is looking more like a POKéDEX now.$"
 
 	.global gUnknown_081C4648
 gUnknown_081C4648: @ 81C4648
-	.incbin "baserom.gba", 0x001c4648, 0x36
+UnknownString_81C4648: @ 81C4648
+	.string "This is coming along pretty good.\n"
+	.string "Keep up the effort.$"
 
 	.global gUnknown_081C467E
 gUnknown_081C467E: @ 81C467E
-	.incbin "baserom.gba", 0x001c467e, 0x3b
+UnknownString_81C467E: @ 81C467E
+	.string "Are you using any RODS?\n"
+	.string "There are many POKéMON in the sea.$"
 
 	.global gUnknown_081C46B9
 gUnknown_081C46B9: @ 81C46B9
-	.incbin "baserom.gba", 0x001c46b9, 0x45
+UnknownString_81C46B9: @ 81C46B9
+	.string "Instead of just catching POKéMON,\n"
+	.string "how about making them evolve, too?$"
 
 	.global gUnknown_081C46FE
 gUnknown_081C46FE: @ 81C46FE
-	.incbin "baserom.gba", 0x001c46fe, 0x49
+UnknownString_81C46FE: @ 81C46FE
+	.string "This is going to be a fantastic POKéDEX.\n"
+	.string "That’s the feeling I’m getting.$"
 
 	.global gUnknown_081C4747
 gUnknown_081C4747: @ 81C4747
-	.incbin "baserom.gba", 0x001c4747, 0x39
+UnknownString_81C4747: @ 81C4747
+	.string "You’ve collected this many...\n"
+	.string "Your talent is remarkable!$"
 
 	.global gUnknown_081C4780
 gUnknown_081C4780: @ 81C4780
-	.incbin "baserom.gba", 0x001c4780, 0x5f
+UnknownString_81C4780: @ 81C4780
+	.string "Have you visited the SAFARI ZONE?\p"
+	.string "I hear there are some POKéMON that\n"
+	.string "can only be caught there.$"
 
 	.global gUnknown_081C47DF
 gUnknown_081C47DF: @ 81C47DF
-	.incbin "baserom.gba", 0x001c47df, 0x49
+UnknownString_81C47DF: @ 81C47DF
+	.string "You’ve finally reached the 100-kind\n"
+	.string "mark. This is an impressive POKéDEX!$"
 
 	.global gUnknown_081C4828
 gUnknown_081C4828: @ 81C4828
-	.incbin "baserom.gba", 0x001c4828, 0x3b
+UnknownString_81C4828: @ 81C4828
+	.string "There might be POKéMON that can be\n"
+	.string "found using ROCK SMASH.$"
 
 	.global gUnknown_081C4863
 gUnknown_081C4863: @ 81C4863
-	.incbin "baserom.gba", 0x001c4863, 0x39
+UnknownString_81C4863: @ 81C4863
+	.string "You should get some more POKéMON by\n"
+	.string "trading with others.$"
 
 	.global gUnknown_081C489C
 gUnknown_081C489C: @ 81C489C
-	.incbin "baserom.gba", 0x001c489c, 0x4f
+UnknownString_81C489C: @ 81C489C
+	.string "I’ve heard of POKéMON that evolve when\n"
+	.string "they come to fully love their TRAINERS.$"
 
 	.global gUnknown_081C48EB
 gUnknown_081C48EB: @ 81C48EB
-	.incbin "baserom.gba", 0x001c48eb, 0x4b
+UnknownString_81C48EB: @ 81C48EB
+	.string "I had no idea that there were so many\n"
+	.string "POKéMON species in the HOENN region.$"
 
 	.global gUnknown_081C4936
 gUnknown_081C4936: @ 81C4936
-	.incbin "baserom.gba", 0x001c4936, 0x6c
+UnknownString_81C4936: @ 81C4936
+	.string "On occasion, some POKéMON appear in\n"
+	.string "large numbers like wild outbreaks.\l"
+	.string "Don’t miss opportunities like those.$"
 
 	.global gUnknown_081C49A2
 gUnknown_081C49A2: @ 81C49A2
-	.incbin "baserom.gba", 0x001c49a2, 0x64
+UnknownString_81C49A2: @ 81C49A2
+	.string "One can get a very good idea about the\n"
+	.string "POKéMON of the HOENN region by looking\l"
+	.string "through your POKéDEX.$"
 
 	.global gUnknown_081C4A06
 gUnknown_081C4A06: @ 81C4A06
-	.incbin "baserom.gba", 0x001c4a06, 0x49
+UnknownString_81C4A06: @ 81C4A06
+	.string "I’d say you already qualify as a POKéMON\n"
+	.string "PROFESSOR, and a good one, too!$"
 
 	.global gUnknown_081C4A4F
 gUnknown_081C4A4F: @ 81C4A4F
-	.incbin "baserom.gba", 0x001c4a4f, 0x42
+UnknownString_81C4A4F: @ 81C4A4F
+	.string "With a POKéDEX this complete, you’re\n"
+	.string "a real professional at this!$"
 
 	.global gUnknown_081C4A91
 gUnknown_081C4A91: @ 81C4A91
-	.incbin "baserom.gba", 0x001c4a91, 0x49
+UnknownString_81C4A91: @ 81C4A91
+	.string "You’re very close to completing this\n"
+	.string "POKéDEX. I can feel it in my bones!$"
 
 	.global gUnknown_081C4ADA
 gUnknown_081C4ADA: @ 81C4ADA
 
-	.incbin "baserom.gba", 0x1c4ada, 0x2b
+UnknownString_81C4ADA: @ 81C4ADA
+	.string "Congratulations!\n"
+	.string "Your POKéDEX is complete!$"
 
 Route101_Text_1C4B05:: @ 81C4B05
 	.string "Hmhm...\n"
@@ -15063,7 +17259,9 @@ LilycoveCity_DepartmentStore_1F_Text_1C4C6A:: @ 81C4C6A
 LilycoveCity_DepartmentStore_1F_Text_1C4C85:: @ 81C4C85
 	.string "Please do visit us again.$"
 
-	.incbin "baserom.gba", 0x1c4c9f, 0x27
+UnknownString_81C4C9F: @ 81C4C9F
+	.string "Please pick a LOTO TICKET.\n"
+	.string "... ... ...$"
 
 LilycoveCity_DepartmentStore_1F_Text_1C4CC6:: @ 81C4CC6
 	.string "Please pick a LOTO TICKET.\n"
@@ -15126,7 +17324,15 @@ LilycoveCity_DepartmentStore_1F_Text_1C4FCC:: @ 81C4FCC
 LilycoveCity_DepartmentStore_1F_Text_1C501C:: @ 81C501C
 	.string "Please do visit again.$"
 
-	.incbin "baserom.gba", 0x1c5033, 0xbf
+UnknownString_81C5033: @ 81C5033
+	.string "DAD: {PLAYER}! Good to see you!\n"
+	.string "There’s a letter here for you, {PLAYER}.$"
+
+UnknownString_81C5070: @ 81C5070
+	.string "DAD: I guess this is a PASS for a ship.\n"
+	.string "But I’ve never seen this ship before.\p"
+	.string "You should find out what this is about\n"
+	.string "in LILYCOVE.$"
 
 LilycoveCity_Harbor_Text_1C50F2:: @ 81C50F2
 	.string "The ferry to SLATEPORT is...\p"
@@ -15647,15 +17853,39 @@ GraniteCave_B1F_Movement_1C6BF7:: @ 81C6BF7
 
 	.global gUnknown_081C6C02
 gUnknown_081C6C02: @ 81C6C02
-	.incbin "baserom.gba", 0x001c6c02, 0x83
+	.incbin "baserom.gba", 0x001c6c02, 0x29
+
+@ 81C6C2B
+	@ This is a test message!
+	@ Welcome to the world of Pokémon!
+	.string "テストよう　メッセージです！\n"
+	.string "ポケモンの　せかいへ　ようこそ！$"
+
+@ 81C6C4B
+	@ This is a test message!
+	@ This is a sign.
+	.string "テストよう　メッセージです！\n"
+	.string "かんばん　です$"
+
+@ 81C6C62
+	@ This is a test message!
+	@ This is a coordinate-check event.
+	.string "テストよう　メッセージです！\n"
+	.string "ざひょう　チェックの　イベントです$"
+
+@ 81C6C83
+	.string " $"
 
 	.global gUnknown_081C6C85
 gUnknown_081C6C85: @ 81C6C85
-	.incbin "baserom.gba", 0x001c6c85, 0x21
+UnknownString_81C6C85: @ 81C6C85
+	.string "Would you like to save the game?$"
 
 	.global gUnknown_081C6CA6
 gUnknown_081C6CA6: @ 81C6CA6
-	.incbin "baserom.gba", 0x001c6ca6, 0x3b
+UnknownString_81C6CA6: @ 81C6CA6
+	.string "There is already a saved file.\n"
+	.string "Is it okay to overwrite it?$"
 
 	.global gUnknown_081C6CE1
 gUnknown_081C6CE1: @ 81C6CE1
@@ -15670,47 +17900,91 @@ gUnknown_081C6D05: @ 81C6D05
 BattleTower_BattleRoom_Text_1C6D05:: @ 81C6D05
 	.string "{PLAYER} saved the game.$"
 
-	.incbin "baserom.gba", 0x1c6d18, 0xe
+UnknownString_81C6D18: @ 81C6D18
+	.string "Save error...$"
 
 	.global gUnknown_081C6D26
 gUnknown_081C6D26: @ 81C6D26
-	.incbin "baserom.gba", 0x001c6d26, 0x52
+UnknownString_81C6D26: @ 81C6D26
+	.string "There is a different game file that is\n"
+	.string "already saved.\p"
+	.string "Is it okay to overwrite it?$"
 
 	.global gUnknown_081C6D78
 gUnknown_081C6D78: @ 81C6D78
-	.incbin "baserom.gba", 0x001c6d78, 0x80
+UnknownString_81C6D78: @ 81C6D78
+	.string "Hi! Sorry to keep you waiting!\p"
+	.string "Welcome to the world of POKéMON!\p"
+	.string "My name is BIRCH.\p"
+	.string "But everyone calls me the POKéMON\n"
+	.string "PROFESSOR.\p$"
 
 	.global gUnknown_081C6DF8
 gUnknown_081C6DF8: @ 81C6DF8
-	.incbin "baserom.gba", 0x001c6df8, 0x22
+UnknownString_81C6DF8: @ 81C6DF8
+	.string "This is what we call a “POKéMON.”$"
 
 	.global gUnknown_081C6E1A
 gUnknown_081C6E1A: @ 81C6E1A
-	.incbin "baserom.gba", 0x001c6e1a, 0x1b1
+UnknownString_81C6E1A: @ 81C6E1A
+	.string "This world is widely inhabited by\n"
+	.string "creatures known as POKéMON.\p"
+	.string "We humans live alongside POKéMON,\n"
+	.string "at times as friendly playmates, and\l"
+	.string "at times as cooperative workmates.\p"
+	.string "And sometimes, we band together\n"
+	.string "and battle others like us.\p"
+	.string "But despite our closeness, we don’t\n"
+	.string "know everything about POKéMON.\p"
+	.string "In fact, there are many, many\n"
+	.string "secrets surrounding POKéMON.\p"
+	.string "To unravel POKéMON mysteries,\n"
+	.string "I’ve been undertaking research.\l"
+	.string "That’s what I do.\p$"
 
 	.global gUnknown_081C6FCB
 gUnknown_081C6FCB: @ 81C6FCB
-	.incbin "baserom.gba", 0x001c6fcb, 0xd
+UnknownString_81C6FCB: @ 81C6FCB
+	.string "And you are?$"
 
 	.global gUnknown_081C6FD8
 gUnknown_081C6FD8: @ 81C6FD8
-	.incbin "baserom.gba", 0x001c6fd8, 0x22
+UnknownString_81C6FD8: @ 81C6FD8
+	.string "Are you a boy?\n"
+	.string "Or are you a girl?$"
 
 	.global gUnknown_081C6FFA
 gUnknown_081C6FFA: @ 81C6FFA
-	.incbin "baserom.gba", 0x001c6ffa, 0x1d
+UnknownString_81C6FFA: @ 81C6FFA
+	.string "All right.\n"
+	.string "What’s your name?$"
 
 	.global gUnknown_081C7017
 gUnknown_081C7017: @ 81C7017
-	.incbin "baserom.gba", 0x001c7017, 0xe
+UnknownString_81C7017: @ 81C7017
+	.string "So it’s {PLAYER}{KUN}?$"
 
 	.global gUnknown_081C7025
 gUnknown_081C7025: @ 81C7025
-	.incbin "baserom.gba", 0x001c7025, 0x4f
+UnknownString_81C7025: @ 81C7025
+	.string "Ah, okay!\p"
+	.string "You’re {PLAYER}{KUN} who’s moving to my\n"
+	.string "hometown of LITTLEROOT.\l"
+	.string "I get it now!$"
 
 	.global gUnknown_081C7074
 gUnknown_081C7074: @ 81C7074
-	.incbin "baserom.gba", 0x001c7074, 0xec
+UnknownString_81C7074: @ 81C7074
+	.string "All right, are you ready?\p"
+	.string "Your very own adventure is about\n"
+	.string "to unfold.\p"
+	.string "Take courage, and leap into the\n"
+	.string "world of POKéMON where dreams,\l"
+	.string "adventure, and friendships await!\p"
+	.string "Well, I’ll be expecting you later.\n"
+	.string "Come see me in my POKéMON LAB.\p$"
+
+	.incbin "baserom.gba", 0x1C715E, 0x2
 
 	.global gUnknown_081C7160
 gUnknown_081C7160: @ 81C7160

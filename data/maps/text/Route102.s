@@ -5,7 +5,14 @@ Route102_Text_16D431:: @ 816D431
 	.string "Fwafwafwafwafwa...\p"
 	.string "Fwatchoo!$"
 
-	.incbin "baserom.gba", 0x16d4a5, 0x75
+UnknownString_816D4A5: @ 816D4A5
+	.string "Fufufufu...\n"
+	.string "Watch me.$"
+
+UnknownString_816D4BB: @ 816D4BB
+	.string "Ta-daaaah! Awesome, huh?\p"
+	.string "There are some ledges that you can’t\n"
+	.string "climb up, but you can jump down.$"
 
 Route102_Text_16D51A:: @ 816D51A
 	.string "I’m going to catch a whole bunch of\n"

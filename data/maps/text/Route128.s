@@ -37,7 +37,15 @@ Route128_Text_172181:: @ 8172181
 	.string "STEVEN: {PLAYER}{KUN}!\n"
 	.string "What is happening?$"
 
-	.incbin "baserom.gba", 0x1721a2, 0xff
+UnknownString_81721A2: @ 81721A2
+	.string "This is terrible...\p"
+	.string "If this doesn’t stop, all HOENN...\n"
+	.string "No, the whole world will drown.\p"
+	.string "This huge rain cloud is spreading\n"
+	.string "from above SOOTOPOLIS?\p"
+	.string "What in the world is taking place there?\p"
+	.string "There’s no point arguing here...\n"
+	.string "SOOTOPOLIS should provide answers...$"
 
 Route128_Text_1722A1:: @ 81722A1
 	.string "This is terrible...\p"

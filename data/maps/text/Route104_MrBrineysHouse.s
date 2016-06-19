@@ -57,7 +57,11 @@ Route104_MrBrineysHouse_Text_191EDB:: @ 8191EDB
 	.string "You just go on and tell me whenever\n"
 	.string "you want to set sail!$"
 
-	.incbin "baserom.gba", 0x191f4f, 0x6a
+UnknownString_8191F4F: @ 8191F4F
+	.string "MR. BRINEY: Ahoy!\n"
+	.string "We’ve made land in PETALBURG!\p"
+	.string "You just go on and tell me whenever\n"
+	.string "you want to set sail!$"
 
 Route104_MrBrineysHouse_Text_191FB9:: @ 8191FB9
 	.string "PEEKO: Pii pihyoroo!$"

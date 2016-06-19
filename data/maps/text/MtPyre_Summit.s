@@ -90,7 +90,9 @@ MtPyre_Summit_Text_1B62E7:: @ 81B62E7
 	.string "You will return the RED ORB to its\n"
 	.string "rightful place, yes?$"
 
-	.incbin "baserom.gba", 0x1b6374, 0x28
+UnknownString_81B6374: @ 81B6374
+	.string "{PLAYER} handed the RED ORB to the\n"
+	.string "old woman.$"
 
 MtPyre_Summit_Text_1B639C:: @ 81B639C
 	.string "Yes...\n"

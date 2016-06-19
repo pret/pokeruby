@@ -31,5 +31,10 @@ Route110_TrickHousePuzzle2_Text_19CEB8:: @ 819CEB8
 	.string "You’re strong, aren’t you?\n"
 	.string "Maybe even enough to be a GYM LEADER!$"
 
-	.incbin "baserom.gba", 0x19cef9, 0x7d
+UnknownString_819CEF9: @ 819CEF9
+	.string "{PLAYER} wrote down the secret code\n"
+	.string "on the door.\p"
+	.string "“TRICK MASTER is coveted.”\n"
+	.string "... ... ... ... ... ... ... ...\p"
+	.string "The lock clicked open!$"
 

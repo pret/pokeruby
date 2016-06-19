@@ -314,6 +314,9 @@ TALL_PLUS   = FC 0C FB
 
 @ Japanese punctuation
 '　' = 00
+'！' = AB
+'？' = AC
+'。' = AD
 'ー' = AE
 '·' = AF
 '‥' = B0

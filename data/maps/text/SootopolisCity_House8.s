@@ -18,7 +18,8 @@ SootopolisCity_House8_Text_19021D:: @ 819021D
 	.string "Thanks for showing me.\n"
 	.string "This is my thanks!$"
 
-	.incbin "baserom.gba", 0x1902ae, 0x16
+UnknownString_81902AE: @ 81902AE
+	.string "{PLAYER} received a POTION.$"
 
 SootopolisCity_House8_Text_1902C4:: @ 81902C4
 	.string "Hunh?\n"
