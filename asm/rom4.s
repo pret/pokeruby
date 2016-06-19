@@ -48184,7 +48184,7 @@ TryGetFieldMoveScript: @ 80686F4
 	b _0806876A
 	.align 2, 0
 _08068724: .4byte 0x0000080b
-_08068728: .4byte gUnknown_081A0117
+_08068728: .4byte UseSurfScript
 _0806872C:
 	adds r0, r4, 0
 	bl MetatileBehavior_IsWaterfall
@@ -48207,12 +48207,12 @@ _0806872C:
 	b _0806876A
 	.align 2, 0
 _08068758: .4byte 0x0000080e
-_0806875C: .4byte gUnknown_081B115A
+_0806875C: .4byte UseWaterfallScript
 _08068760:
 	ldr r0, _08068764
 	b _0806876A
 	.align 2, 0
-_08068764: .4byte gUnknown_081B1194
+_08068764: .4byte WaterfallScript
 _08068768:
 	movs r0, 0
 _0806876A:
