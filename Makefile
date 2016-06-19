@@ -89,21 +89,21 @@ src/agb_flash_1m_ruby.o src/agb_flash_1m_sapphire.o: CFLAGS := -O -mthumb-interw
 src/agb_flash_mx_ruby.o src/agb_flash_mx_sapphire.o: CFLAGS := -O -mthumb-interwork
 
 src/m4a_2_ruby.o src/m4a_2_sapphire.o: CC1 := tools/agbcc/bin/old_agbcc
-src/m4a_4_ruby.o src/m4a_2_sapphire.o: CC1 := tools/agbcc/bin/old_agbcc
+src/m4a_4_ruby.o src/m4a_4_sapphire.o: CC1 := tools/agbcc/bin/old_agbcc
 
 src/text_ruby.o src/text_sapphire.o: src/text.c $(GEN_FONT_HEADERS)
 src/link_ruby.o src/link_sapphire.o: src/link.c $(GEN_LINK_HEADERS)
 
 src/%_ruby.o: src/%.c
-	@$(CPP) $(CPPFLAGS) -D RUBY $< -o $*.i
-	@$(PREPROC) $*.i charmap.txt | $(CC1) $(CFLAGS) -o $*.s
-	@printf ".text\n\t.align\t2, 0\n" >> $*.s
-	$(AS) $(ASFLAGS) -o $@ $*.s
+	@$(CPP) $(CPPFLAGS) -D RUBY $< -o src/$*_ruby.i
+	@$(PREPROC) src/$*_ruby.i charmap.txt | $(CC1) $(CFLAGS) -o src/$*_ruby.s
+	@printf ".text\n\t.align\t2, 0\n" >> src/$*_ruby.s
+	$(AS) $(ASFLAGS) -o $@ src/$*_ruby.s
 src/%_sapphire.o: src/%.c
-	@$(CPP) $(CPPFLAGS) -D SAPPHIRE $< -o $*.i
-	@$(PREPROC) $*.i charmap.txt | $(CC1) $(CFLAGS) -o $*.s
-	@printf ".text\n\t.align\t2, 0\n" >> $*.s
-	$(AS) $(ASFLAGS) -o $@ $*.s
+	@$(CPP) $(CPPFLAGS) -D SAPPHIRE $< -o src/$*_sapphire.i
+	@$(PREPROC) src/$*_sapphire.i charmap.txt | $(CC1) $(CFLAGS) -o src/$*_sapphire.s
+	@printf ".text\n\t.align\t2, 0\n" >> src/$*_sapphire.s
+	$(AS) $(ASFLAGS) -o $@ src/$*_sapphire.s
 
 asm/%_ruby.o: dep = $(shell $(SCANINC) asm/$*.s)
 asm/%_sapphire.o: dep = $(shell $(SCANINC) asm/$*.s)
@@ -120,9 +120,9 @@ data/%_sapphire.o: data/%.s $$(dep)
 	$(PREPROC) $< charmap.txt | $(AS) $(ASFLAGS) --defsym SAPPHIRE=1 -o $@
 
 ld_script_ruby.txt: ld_script.txt
-	@sed "s/\(\(src\|asm\|data\)\/.*\)\.o/\1_ruby.o/g" $< > $@
+	@sed 's#\(\(src\|asm\|data\)/.*\)\.o#\1_ruby.o#g' $< > $@
 ld_script_sapphire.txt: ld_script.txt
-	@sed "s/\(\(src\|asm\|data\)\/.*\)\.o/\1_sapphire.o/g" $< > $@
+	@sed 's#\(\(src\|asm\|data\)/.*\)\.o#\1_sapphire.o#g' $< > $@
 
 pokeruby.elf: ld_script_ruby.txt $(pokeruby_OBJS)
 	$(LD) $(pokeruby_LDFLAGS) -o $@ $(pokeruby_OBJS) $(LIBGCC)
