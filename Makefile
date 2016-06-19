@@ -89,7 +89,7 @@ src/agb_flash_1m_ruby.o src/agb_flash_1m_sapphire.o: CFLAGS := -O -mthumb-interw
 src/agb_flash_mx_ruby.o src/agb_flash_mx_sapphire.o: CFLAGS := -O -mthumb-interwork
 
 src/m4a_2_ruby.o src/m4a_2_sapphire.o: CC1 := tools/agbcc/bin/old_agbcc
-src/m4a_4_ruby.o src/m4a_2_sapphire.o: CC1 := tools/agbcc/bin/old_agbcc
+src/m4a_4_ruby.o src/m4a_4_sapphire.o: CC1 := tools/agbcc/bin/old_agbcc
 
 src/text_ruby.o src/text_sapphire.o: src/text.c $(GEN_FONT_HEADERS)
 src/link_ruby.o src/link_sapphire.o: src/link.c $(GEN_LINK_HEADERS)
