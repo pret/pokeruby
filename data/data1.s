@@ -5874,7 +5874,12 @@ UnknownString_81A3A72: @ 81A3A72
 UnknownString_81A3A87: @ 81A3A87
 	.string "What would you like to do?$"
 
-	.incbin "baserom.gba", 0x1A3AA2, 0xB9
+UnknownString_81A3AA2: @ 81A3AA2
+	.string "The registered SECRET BASE will remain\n"
+	.string "unless the owner moves away.\p"
+	.string "If it is removed from the registry,\n"
+	.string "another SECRET BASE may take its place.\p"
+	.string "Up to ten locations can be registered.{PAUSE_UNTIL_PRESS}$"
 
 UnknownString_81A3B5B: @ 81A3B5B
 	.string "A shield of {STR_VAR_2} that marks winning\n"
@@ -11521,8 +11526,8 @@ Route123_EventScript_1B0DCC:: @ 81B0DCC
 	checkattack 15
 	compare RESULT, 6
 	jumpeq Route103_EventScript_1B0E32
-	setanimation 0, 32781
-	bufferpartypoke 0, 32781
+	setanimation 0, RESULT
+	bufferpartypoke 0, RESULT
 	bufferattack 1, 15
 	msgbox Route103_Text_1B0E3F, 5
 	compare RESULT, 0
@@ -11588,8 +11593,8 @@ VictoryRoad_B1F_EventScript_1B0EB7:: @ 81B0EB7
 	checkattack 249
 	compare RESULT, 6
 	jumpeq Route111_EventScript_1B0F3E
-	setanimation 0, 32781
-	bufferpartypoke 0, 32781
+	setanimation 0, RESULT
+	bufferpartypoke 0, RESULT
 	bufferattack 1, 249
 	msgbox Route111_Text_1B0F4B, 5
 	compare RESULT, 0
@@ -11663,7 +11668,7 @@ VictoryRoad_B1F_EventScript_1B0FCB:: @ 81B0FCB
 	checkattack 70
 	compare RESULT, 6
 	jumpeq FieryPath_EventScript_1B1026
-	setanimation 0, 32781
+	setanimation 0, RESULT
 	msgbox FieryPath_Text_1B103D, 5
 	compare RESULT, 0
 	jumpeq FieryPath_EventScript_1B103A
