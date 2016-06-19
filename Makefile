@@ -109,9 +109,9 @@ data/%_ruby.o data/%_sapphire.o data/%.o: data/%.s $$(dep)
 	$(PREPROC) $< charmap.txt | $(AS) $(ASFLAGS) $(VERSION) -o $@
 
 ld_script_ruby.txt: ld_script.txt
-	sed "s/\(\(src|asm|data\)\/.*\)\.o/\1_ruby.o/g" ld_script.txt > ld_script_ruby.txt
+	@sed "s/\(\(src\|asm\|data\)\/.*\)\.o/\1_ruby.o/g" $< > $@
 ld_script_sapphire.txt: ld_script.txt
-	sed "s/\(\(src|asm|data\)\/.*\)\.o/\1_sapphire.o/g" ld_script.txt > ld_script_sapphire.txt
+	@sed "s/\(\(src\|asm\|data\)\/.*\)\.o/\1_sapphire.o/g" $< > $@
 
 pokeruby.elf: ld_script_ruby.txt $(pokeruby_OBJS)
 	$(LD) $(pokeruby_LDFLAGS) -o $@ $(pokeruby_OBJS) $(LIBGCC)
