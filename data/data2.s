@@ -16346,7 +16346,7 @@ gUnknown_084121E4: @ 84121E4
 
 	.global gUnknown_084121FC
 gUnknown_084121FC: @ 84121FC
-	.incbin "baserom.gba", 0x004121fc, 0x20
+	.incbin "graphics/intro/intro2_grass.gbapal"
 
 	.global gUnknown_0841221C
 gUnknown_0841221C: @ 841221C
@@ -16358,7 +16358,7 @@ gUnknown_0841223C: @ 841223C
 
 	.global gUnknown_0841225C
 gUnknown_0841225C: @ 841225C
-	.incbin "baserom.gba", 0x0041225c, 0x480
+	.incbin "graphics/intro/intro2_grass.4bpp.lz"
 
 	.global gUnknown_084126DC
 gUnknown_084126DC: @ 84126DC
@@ -16374,7 +16374,7 @@ gUnknown_08412878: @ 8412878
 
 	.global gUnknown_084128D8
 gUnknown_084128D8: @ 84128D8
-	.incbin "baserom.gba", 0x004128d8, 0x5dc
+	.incbin "graphics/intro/intro2_bgclouds.4bpp.lz"
 
 	.global gUnknown_08412EB4
 gUnknown_08412EB4: @ 8412EB4
@@ -16382,7 +16382,7 @@ gUnknown_08412EB4: @ 8412EB4
 
 	.global gUnknown_08413184
 gUnknown_08413184: @ 8413184
-	.incbin "baserom.gba", 0x00413184, 0x20
+	.incbin "graphics/intro/intro2_bgclouds.gbapal"
 
 	.global gUnknown_084131A4
 gUnknown_084131A4: @ 84131A4
@@ -16402,7 +16402,7 @@ gUnknown_08413320: @ 8413320
 
 	.global gUnknown_08413340
 gUnknown_08413340: @ 8413340
-	.incbin "baserom.gba", 0x00413340, 0x688
+	.incbin "graphics/intro/intro2_bgtrees.4bpp.lz"
 
 	.global gUnknown_084139C8
 gUnknown_084139C8: @ 84139C8
@@ -16410,7 +16410,8 @@ gUnknown_084139C8: @ 84139C8
 
 	.global gUnknown_08413CCC
 gUnknown_08413CCC: @ 8413CCC
-	.incbin "baserom.gba", 0x00413ccc, 0x16c
+	.incbin "graphics/intro/intro2_bgtrees.gbapal"
+	.incbin "baserom.gba", 0x00413cec, 0x14c
 
 	.global gUnknown_08413E38
 gUnknown_08413E38: @ 8413E38
