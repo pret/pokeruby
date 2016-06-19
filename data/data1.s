@@ -3193,10 +3193,22 @@ Route109_EventScript_1A010C:: @ 81A010C
 	setvar 0x4096, 0
 	return
 
-	.global gUnknown_081A0117
-gUnknown_081A0117: @ 81A0117
-
-	.incbin "baserom.gba", 0x1a0117, 0x37
+UseSurfScript:: @ 81A0117
+	checkattack MOVE_SURF
+	compare RESULT, 6
+	jumpeq UseSurfScript_NoMon
+	bufferpartypoke 0, RESULT
+	setanimation 0, RESULT
+	lockall
+	msgbox UseSurfPromptText, 5
+	compare RESULT, 0
+	jumpeq UseSurfScript_No
+	msgbox UsedSurfText, 4
+	doanimation 0x9
+UseSurfScript_No: @ 81A014C
+	releaseall
+UseSurfScript_NoMon: @ 81A014D
+	end
 
 EverGrandeCity_ChampionsRoom_EventScript_1A014E:: @ 81A014E
 LavaridgeTown_EventScript_1A014E:: @ 81A014E
@@ -4459,7 +4471,12 @@ OldaleTown_PokemonCenter_1F_Text_1A1275:: @ 81A1275
 	.string "While infected, POKéMON are said to\n"
 	.string "grow exceptionally well.$"
 
-	.incbin "baserom.gba", 0x1a1344, 0x47
+UseSurfPromptText: @ 81A1344
+	.string "The water is dyed a deep blue...\n"
+	.string "Would you like to SURF?$"
+
+UsedSurfText: @ 81A137D
+	.string "{STR_VAR_1} used SURF!$"
 
 	.include "data/maps/text/SealedChamber_InnerRoom.s"
 	.include "data/maps/text/AncientTomb.s"
@@ -9890,13 +9907,39 @@ FieryPath_EventScript_1B103A:: @ 81B103A
 	end
 
 	.include "data/maps/text/FieryPath.s"
-	.global gUnknown_081B115A
-gUnknown_081B115A: @ 81B115A
-	.incbin "baserom.gba", 0x001b115a, 0x3a
 
-	.global gUnknown_081B1194
-gUnknown_081B1194: @ 81B1194
-	.incbin "baserom.gba", 0x001b1194, 0x8c
+UseWaterfallScript:: @ 81B115A
+	lockall
+	checkattack MOVE_WATERFALL
+	compare RESULT, 6
+	jumpeq UseWaterfallScript_NoMon
+	bufferpartypoke 0, RESULT
+	setanimation 0, RESULT
+	msgbox UseWaterfallPromptText, 5
+	compare RESULT, 0
+	jumpeq WaterfallScript_Done
+	msgbox UsedWaterfallText, 4
+	doanimation 0x2B
+	jump WaterfallScript_Done
+
+WaterfallScript:: @ 81B1194
+	lockall
+UseWaterfallScript_NoMon: @ 81B1195
+	msgbox WaterfallText, 4
+WaterfallScript_Done:  @ 81B119D
+	releaseall
+	end
+
+WaterfallText: @ 81B119F
+	.string "A wall of water is crashing down with\n"
+	.string "a mighty roar.$"
+
+UseWaterfallPromptText: @ 81B11D4
+	.string "It’s a large waterfall.\n"
+	.string "Would you like to use WATERFALL?$"
+
+UsedWaterfallText: @ 81B120D
+	.string "{STR_VAR_1} used WATERFALL.$"
 
 	.global gUnknown_081B1220
 gUnknown_081B1220: @ 81B1220
