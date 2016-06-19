@@ -5874,7 +5874,12 @@ UnknownString_81A3A72: @ 81A3A72
 UnknownString_81A3A87: @ 81A3A87
 	.string "What would you like to do?$"
 
-	.incbin "baserom.gba", 0x1A3AA2, 0xB9
+UnknownString_81A3AA2: @ 81A3AA2
+	.string "The registered SECRET BASE will remain\n"
+	.string "unless the owner moves away.\p"
+	.string "If it is removed from the registry,\n"
+	.string "another SECRET BASE may take its place.\p"
+	.string "Up to ten locations can be registered.{PAUSE_UNTIL_PRESS}$"
 
 UnknownString_81A3B5B: @ 81A3B5B
 	.string "A shield of {STR_VAR_2} that marks winning\n"
