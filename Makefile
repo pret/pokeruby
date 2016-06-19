@@ -91,26 +91,33 @@ src/agb_flash_mx_ruby.o src/agb_flash_mx_sapphire.o: CFLAGS := -O -mthumb-interw
 src/m4a_2_ruby.o src/m4a_2_sapphire.o: CC1 := tools/agbcc/bin/old_agbcc
 src/m4a_4_ruby.o src/m4a_2_sapphire.o: CC1 := tools/agbcc/bin/old_agbcc
 
-src/%_ruby.o: VERSION := -D RUBY
-src/%_sapphire.o: VERSION := -D SAPPHIRE
 src/text_ruby.o src/text_sapphire.o: src/text.c $(GEN_FONT_HEADERS)
 src/link_ruby.o src/link_sapphire.o: src/link.c $(GEN_LINK_HEADERS)
-src/%_ruby.o src/%_sapphire.o src/%.o: src/%.c
-	@$(CPP) $(CPPFLAGS) $(VERSION) $< -o $*.i
+
+src/%_ruby.o: src/%.c
+	@$(CPP) $(CPPFLAGS) -D RUBY $< -o $*.i
 	@$(PREPROC) $*.i charmap.txt | $(CC1) $(CFLAGS) -o $*.s
-	@echo -e ".text\n\t.align\t2, 0\n" >> $*.s
+	@printf ".text\n\t.align\t2, 0\n" >> $*.s
+	$(AS) $(ASFLAGS) -o $@ $*.s
+src/%_sapphire.o: src/%.c
+	@$(CPP) $(CPPFLAGS) -D SAPPHIRE $< -o $*.i
+	@$(PREPROC) $*.i charmap.txt | $(CC1) $(CFLAGS) -o $*.s
+	@printf ".text\n\t.align\t2, 0\n" >> $*.s
 	$(AS) $(ASFLAGS) -o $@ $*.s
 
-asm/%_ruby.o data/%_ruby.o: VERSION := --defsym RUBY=1
-asm/%_sapphire.o data/%_sapphire.o: VERSION := --defsym SAPPHIRE=1
+asm/%_ruby.o: dep = $(shell $(SCANINC) asm/$*.s)
+asm/%_sapphire.o: dep = $(shell $(SCANINC) asm/$*.s)
+asm/%_ruby.o: asm/%.s $$(dep)
+	$(AS) $(ASFLAGS) --defsym RUBY=1 -o $@ $<
+asm/%_sapphire.o: asm/%.s $$(dep)
+	$(AS) $(ASFLAGS) --defsym SAPPHIRE=1 -o $@ $<
 
-asm/%.o: dep = $(shell $(SCANINC) asm/$*.s)
-asm/%_ruby.o asm/%_sapphire.o asm/%.o: asm/%.s $$(dep)
-	$(AS) $(ASFLAGS) $(VERSION) -o $@ $<
-
-data/%.o: dep = $(shell $(SCANINC) data/$*.s)
-data/%_ruby.o data/%_sapphire.o data/%.o: data/%.s $$(dep)
-	$(PREPROC) $< charmap.txt | $(AS) $(ASFLAGS) $(VERSION) -o $@
+data/%_ruby.o: dep = $(shell $(SCANINC) data/$*.s)
+data/%_sapphire.o: dep = $(shell $(SCANINC) data/$*.s)
+data/%_ruby.o: data/%.s $$(dep)
+	$(PREPROC) $< charmap.txt | $(AS) $(ASFLAGS) --defsym RUBY=1 -o $@
+data/%_sapphire.o: data/%.s $$(dep)
+	$(PREPROC) $< charmap.txt | $(AS) $(ASFLAGS) --defsym SAPPHIRE=1 -o $@
 
 ld_script_ruby.txt: ld_script.txt
 	@sed "s/\(\(src\|asm\|data\)\/.*\)\.o/\1_ruby.o/g" $< > $@
