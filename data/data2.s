@@ -16390,7 +16390,7 @@ gUnknown_084131A4: @ 84131A4
 
 	.global gUnknown_084131C4
 gUnknown_084131C4: @ 84131C4
-	.incbin "baserom.gba", 0x004131c4, 0x13c
+	.incbin "graphics/intro/intro2_bgclouds2.4bpp.lz"
 
 	.global gUnknown_08413300
 gUnknown_08413300: @ 8413300
@@ -16411,19 +16411,19 @@ gUnknown_084139C8: @ 84139C8
 	.global gUnknown_08413CCC
 gUnknown_08413CCC: @ 8413CCC
 	.incbin "graphics/intro/intro2_bgtrees.gbapal"
-	.incbin "baserom.gba", 0x00413cec, 0x14c
+	.incbin "graphics/intro/intro2_bgtreessmall.4bpp.lz"
 
 	.global gUnknown_08413E38
 gUnknown_08413E38: @ 8413E38
-	.incbin "baserom.gba", 0x00413e38, 0x40
+	.incbin "baserom.gba", 0x00413e38, 0x40 @ two palettes?
 
 	.global gUnknown_08413E78
 gUnknown_08413E78: @ 8413E78
-	.incbin "baserom.gba", 0x00413e78, 0x1ec
+	.incbin "graphics/intro/intro2_bgnight.4bpp.lz" @ only used in credits, coupled with intro because bicycle sequence
 
 	.global gUnknown_08414064
 gUnknown_08414064: @ 8414064
-	.incbin "baserom.gba", 0x00414064, 0x20
+	.incbin "graphics/intro/intro2_bgnight.gbapal"
 
 	.global gUnknown_08414084
 gUnknown_08414084: @ 8414084
