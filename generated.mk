@@ -10,9 +10,9 @@ include/fonts/down_arrow_tiles.h \
 include/fonts/unknown_palette_81E6692.h \
 include/fonts/default_palette.h
 
-LINK_HEADERS := include/link/digit_tiles.h include/link/digit_palette.h
+GEN_LINK_HEADERS := include/link/digit_tiles.h include/link/digit_palette.h
 
-GENFONTS := $(GEN_FONT_HEADERS) $(LINK_HEADERS)
+GEN_FONTS := $(GEN_FONT_HEADERS) $(GEN_LINK_HEADERS)
 
 include/fonts/font0_lat_glyphs.h: graphics/fonts/font0_lat.1bpp
 	$(BIN2C) $< sFont0LatinGlyphs >$@ -static -col 8 -pad 4

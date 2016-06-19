@@ -90,7 +90,8 @@ src/m4a_4_ruby.o src/m4a_2_sapphire.o: CC1 := tools/agbcc/bin/old_agbcc
 
 src/%_ruby.o: VERSION := -D RUBY
 src/%_sapphire.o: VERSION := -D SAPPHIRE
-src/text_ruby.o src/text_sapphire.o: $(GENFONTS) src/text.c
+src/text_ruby.o src/text_sapphire.o: src/text.c $(GEN_FONTS)
+src/link_ruby.o src/link_sapphire.o: src/link.c $(GEN_LINK_HEADERS)
 src/%_ruby.o src/%_sapphire.o src/%.o: src/%.c
 	@$(CPP) $(CPPFLAGS) $(VERSION) $< -o $*.i
 	@$(PREPROC) $*.i charmap.txt | $(CC1) $(CFLAGS) -o $*.s
