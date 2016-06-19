@@ -2198,9 +2198,17 @@ sub_8053D9C: @ 8053D9C
 	lsrs r0, 16
 	cmp r0, 0x1
 	bne _08053DB2
+	.ifdef SAPPHIRE
+	ldr r0, _sub_8053D9C_LegendaryMusic
+	.else
 	movs r0, 0xDE
 	lsls r0, 1
+	.endif
 	b _08053DDC
+	.ifdef SAPPHIRE
+	.align 2, 0
+_sub_8053D9C_LegendaryMusic: .4byte 443 @ OOAME (Kyogre's Heavy Rain theme)
+	.endif
 _08053DB2:
 	adds r0, r4, 0
 	bl sub_8053D6C
@@ -2327,8 +2335,12 @@ sub_8053E90: @ 8053E90
 	bl sav1_map_get_music
 	lsls r0, 16
 	lsrs r4, r0, 16
+	.ifdef SAPPHIRE
+	ldr r0, _sub_8053E90_LegendaryMusic
+	.else
 	movs r0, 0xDE
 	lsls r0, 1
+	.endif
 	cmp r4, r0
 	beq _08053ED6
 	ldr r1, _08053EB0
@@ -2338,6 +2350,9 @@ sub_8053E90: @ 8053E90
 	adds r4, r0, 0
 	b _08053ED6
 	.align 2, 0
+	.ifdef SAPPHIRE
+_sub_8053E90_LegendaryMusic: .4byte 443 @ OOAME (Kyogre's Heavy Rain theme)
+	.endif
 _08053EB0: .4byte 0x02025734
 _08053EB4:
 	bl sav1_map_get_light_level
@@ -2406,8 +2421,12 @@ sub_8053F0C: @ 8053F0C
 	bl current_map_music_get
 	lsls r0, 16
 	lsrs r4, r0, 16
+	.ifdef SAPPHIRE
+	ldr r0, _sub_8053F0C_LegendaryMusic
+	.else
 	movs r0, 0xDE
 	lsls r0, 1
+	.endif
 	cmp r5, r0
 	beq _08053F4E
 	subs r0, 0x21
@@ -2437,6 +2456,9 @@ _08053F4E:
 	b _08053F7C
 	.align 2, 0
 _08053F6C: .4byte 0x00004001
+	.ifdef SAPPHIRE
+_sub_8053F0C_LegendaryMusic: .4byte 443 @ OOAME (Kyogre's Heavy Rain theme)
+	.endif
 _08053F70: .4byte 0x0000016d
 _08053F74:
 	adds r0, r5, 0
@@ -2481,8 +2503,12 @@ sub_8053FB0: @ 8053FB0
 	lsrs r1, r0, 16
 	cmp r1, r4
 	beq _08053FD2
+	.ifdef SAPPHIRE
+	ldr r0, _sub_8053FB0_LegendaryMusic
+	.else
 	movs r0, 0xDE
 	lsls r0, 1
+	.endif
 	cmp r1, r0
 	beq _08053FD2
 	adds r0, r4, 0
@@ -2492,6 +2518,10 @@ _08053FD2:
 	pop {r4}
 	pop {r0}
 	bx r0
+	.ifdef SAPPHIRE
+	.align 2, 0
+_sub_8053FB0_LegendaryMusic: .4byte 443 @ OOAME (Kyogre's Heavy Rain theme)
+	.endif
 	thumb_func_end sub_8053FB0
 
 	thumb_func_start is_warp1_light_level_8_or_9
@@ -47870,7 +47900,7 @@ _080684AA:
 	.align 2, 0
 _080684CC: .4byte 0x0202e8cc
 _080684D0: .4byte 0x0202e8ce
-_080684D4: .4byte gUnknown_0819FF7B
+_080684D4: .4byte HiddenItemScript
 _080684D8:
 	cmp r5, 0x2
 	bne _08068494
@@ -47999,7 +48029,7 @@ _080685CC:
 	ldr r0, _080685E0
 	b _080686EE
 	.align 2, 0
-_080685E0: .4byte gUnknown_081A085B
+_080685E0: .4byte PictureBookShelfScript
 _080685E4:
 	adds r0, r5, 0
 	bl sub_8057944
@@ -48010,7 +48040,7 @@ _080685E4:
 	ldr r0, _080685F8
 	b _080686EE
 	.align 2, 0
-_080685F8: .4byte gUnknown_081A0864
+_080685F8: .4byte BookshelfScript
 _080685FC:
 	adds r0, r5, 0
 	bl sub_8057958
@@ -48021,7 +48051,7 @@ _080685FC:
 	ldr r0, _08068610
 	b _080686EE
 	.align 2, 0
-_08068610: .4byte gUnknown_081A086D
+_08068610: .4byte PokemonCenterBookshelfScript
 _08068614:
 	adds r0, r5, 0
 	bl sub_805796C
@@ -48032,7 +48062,7 @@ _08068614:
 	ldr r0, _08068628
 	b _080686EE
 	.align 2, 0
-_08068628: .4byte gUnknown_081A0876
+_08068628: .4byte VaseScript
 _0806862C:
 	adds r0, r5, 0
 	bl sub_8057980
@@ -48043,7 +48073,7 @@ _0806862C:
 	ldr r0, _08068640
 	b _080686EE
 	.align 2, 0
-_08068640: .4byte gUnknown_081A087F
+_08068640: .4byte TrashCanScript
 _08068644:
 	adds r0, r5, 0
 	bl sub_8057994
@@ -48054,7 +48084,7 @@ _08068644:
 	ldr r0, _08068658
 	b _080686EE
 	.align 2, 0
-_08068658: .4byte gUnknown_081A0888
+_08068658: .4byte ShopShelfScript
 _0806865C:
 	adds r0, r5, 0
 	bl sub_80579A8
@@ -48065,7 +48095,7 @@ _0806865C:
 	ldr r0, _08068670
 	b _080686EE
 	.align 2, 0
-_08068670: .4byte gUnknown_081A0891
+_08068670: .4byte BlueprintScript
 _08068674:
 	movs r4, 0x4
 	ldrsb r4, [r6, r4]

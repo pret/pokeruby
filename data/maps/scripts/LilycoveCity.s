@@ -14,6 +14,7 @@ LilycoveCity_MapScript1_14CA20:: @ 814CA20
 	end
 
 LilycoveCity_MapScript1_14CA3F:: @ 814CA3F
+	.ifndef SAPPHIRE
 	setmaptile 69, 4, 169, 1
 	setmaptile 70, 4, 680, 1
 	setmaptile 71, 4, 681, 1
@@ -26,6 +27,7 @@ LilycoveCity_MapScript1_14CA3F:: @ 814CA3F
 	setmaptile 70, 6, 447, 0
 	setmaptile 71, 6, 368, 0
 	setmaptile 72, 6, 445, 0
+	.endif
 	checkflag 112
 	callif 0, LilycoveCity_EventScript_14CABE
 	checkflag 2061

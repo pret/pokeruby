@@ -16,8 +16,10 @@ Route128_MapScript2_152135:: @ 8152135
 Route128_EventScript_15213F:: @ 815213F
 	lockall
 	pause 20
+	.ifndef SAPPHIRE
 	special 317
 	waitstate
+	.endif
 	move 4, Route128_Movement_152271
 	waitmove 0
 	msgbox Route128_Text_171EE0, 4
