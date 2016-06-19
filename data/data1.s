@@ -15647,7 +15647,28 @@ GraniteCave_B1F_Movement_1C6BF7:: @ 81C6BF7
 
 	.global gUnknown_081C6C02
 gUnknown_081C6C02: @ 81C6C02
-	.incbin "baserom.gba", 0x001c6c02, 0x83
+	.incbin "baserom.gba", 0x001c6c02, 0x29
+
+@ 81C6C2B
+	@ This is a test message!
+	@ Welcome to the world of Pokémon!
+	.string "テストよう　メッセージです！\n"
+	.string "ポケモンの　せかいへ　ようこそ！$"
+
+@ 81C6C4B
+	@ This is a test message!
+	@ This is a sign.
+	.string "テストよう　メッセージです！\n"
+	.string "かんばん　です$"
+
+@ 81C6C62
+	@ This is a test message!
+	@ This is a coordinate-check event.
+	.string "テストよう　メッセージです！\n"
+	.string "ざひょう　チェックの　イベントです$"
+
+@ 81C6C83
+	.string " $"
 
 	.global gUnknown_081C6C85
 gUnknown_081C6C85: @ 81C6C85
