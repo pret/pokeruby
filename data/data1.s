@@ -11526,8 +11526,8 @@ Route123_EventScript_1B0DCC:: @ 81B0DCC
 	checkattack 15
 	compare RESULT, 6
 	jumpeq Route103_EventScript_1B0E32
-	setanimation 0, 32781
-	bufferpartypoke 0, 32781
+	setanimation 0, RESULT
+	bufferpartypoke 0, RESULT
 	bufferattack 1, 15
 	msgbox Route103_Text_1B0E3F, 5
 	compare RESULT, 0
@@ -11593,8 +11593,8 @@ VictoryRoad_B1F_EventScript_1B0EB7:: @ 81B0EB7
 	checkattack 249
 	compare RESULT, 6
 	jumpeq Route111_EventScript_1B0F3E
-	setanimation 0, 32781
-	bufferpartypoke 0, 32781
+	setanimation 0, RESULT
+	bufferpartypoke 0, RESULT
 	bufferattack 1, 249
 	msgbox Route111_Text_1B0F4B, 5
 	compare RESULT, 0
@@ -11668,7 +11668,7 @@ VictoryRoad_B1F_EventScript_1B0FCB:: @ 81B0FCB
 	checkattack 70
 	compare RESULT, 6
 	jumpeq FieryPath_EventScript_1B1026
-	setanimation 0, 32781
+	setanimation 0, RESULT
 	msgbox FieryPath_Text_1B103D, 5
 	compare RESULT, 0
 	jumpeq FieryPath_EventScript_1B103A
