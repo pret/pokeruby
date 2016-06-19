@@ -16427,7 +16427,18 @@ gUnknown_08414064: @ 8414064
 
 	.global gUnknown_08414084
 gUnknown_08414084: @ 8414084
-	.incbin "baserom.gba", 0x00414084, 0x2ab8
+	.incbin "baserom.gba", 0x00414084, 0x2AC
+	.incbin "graphics/intro/intro2_bgnight2.4bpp.lz"
+	.incbin "graphics/intro/intro2_brendan.gbapal"
+	.incbin "graphics/intro/intro2_brendan.4bpp.lz"
+	.incbin "graphics/intro/intro2_may.gbapal"
+	.incbin "baserom.gba", 0x00414F90, 0x1E0
+	.incbin "graphics/intro/intro2_may.4bpp.lz"
+	.incbin "graphics/intro/intro2_bicycle.4bpp.lz"
+	.incbin "graphics/intro/intro2_latios.gbapal"
+	.incbin "graphics/intro/intro2_latios.4bpp.lz"
+	.incbin "graphics/intro/intro2_latias.gbapal"
+	.incbin "graphics/intro/intro2_latias.4bpp.lz"
 
 	.global gUnknown_08416B3C
 gUnknown_08416B3C: @ 8416B3C
