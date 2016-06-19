@@ -95,15 +95,15 @@ src/text_ruby.o src/text_sapphire.o: src/text.c $(GEN_FONT_HEADERS)
 src/link_ruby.o src/link_sapphire.o: src/link.c $(GEN_LINK_HEADERS)
 
 src/%_ruby.o: src/%.c
-	@$(CPP) $(CPPFLAGS) -D RUBY $< -o $*.i
-	@$(PREPROC) $*.i charmap.txt | $(CC1) $(CFLAGS) -o $*.s
-	@printf ".text\n\t.align\t2, 0\n" >> $*.s
-	$(AS) $(ASFLAGS) -o $@ $*.s
+	@$(CPP) $(CPPFLAGS) -D RUBY $< -o src/$*_ruby.i
+	@$(PREPROC) src/$*_ruby.i charmap.txt | $(CC1) $(CFLAGS) -o src/$*_ruby.s
+	@printf ".text\n\t.align\t2, 0\n" >> src/$*_ruby.s
+	$(AS) $(ASFLAGS) -o $@ src/$*_ruby.s
 src/%_sapphire.o: src/%.c
-	@$(CPP) $(CPPFLAGS) -D SAPPHIRE $< -o $*.i
-	@$(PREPROC) $*.i charmap.txt | $(CC1) $(CFLAGS) -o $*.s
-	@printf ".text\n\t.align\t2, 0\n" >> $*.s
-	$(AS) $(ASFLAGS) -o $@ $*.s
+	@$(CPP) $(CPPFLAGS) -D SAPPHIRE $< -o src/$*_sapphire.i
+	@$(PREPROC) src/$*_sapphire.i charmap.txt | $(CC1) $(CFLAGS) -o src/$*_sapphire.s
+	@printf ".text\n\t.align\t2, 0\n" >> src/$*_sapphire.s
+	$(AS) $(ASFLAGS) -o $@ src/$*_sapphire.s
 
 asm/%_ruby.o: dep = $(shell $(SCANINC) asm/$*.s)
 asm/%_sapphire.o: dep = $(shell $(SCANINC) asm/$*.s)
