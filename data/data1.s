@@ -1928,7 +1928,7 @@ UnknownString_8172D30: @ 8172D30
 	.string "We now return you to your regular\n"
 	.string "movie presentation.$"
 
-UnknownString_8172EOF: @ 8172EOF
+UnknownString_8172E0F: @ 8172E0F
 	.string "Gau gau!$"
 
 	.include "data/maps/text/LittlerootTown_BrendansHouse_2F.s"
