@@ -13191,7 +13191,22 @@ gUnknown_0840633A: @ 840633A
 
 	.global gUnknown_08406974
 gUnknown_08406974: @ 8406974
-	.incbin "baserom.gba", 0x00406974, 0x200
+	.incbin "graphics/intro/intro1_bgpal1.gbapal"
+	.incbin "graphics/intro/intro1_bgpal2.gbapal"
+	.incbin "graphics/intro/intro1_bgpal3.gbapal"
+	.incbin "graphics/intro/intro1_bgpal4.gbapal"
+	.incbin "graphics/intro/intro1_bgpal5.gbapal"
+	.incbin "graphics/intro/intro1_bgpal6.gbapal"
+	.incbin "graphics/intro/intro1_bgpal7.gbapal"
+	.incbin "graphics/intro/intro1_bgpal8.gbapal"
+	.incbin "graphics/intro/intro1_bgpal9.gbapal"
+	.incbin "graphics/intro/intro1_bgpal10.gbapal"
+	.incbin "graphics/intro/intro1_bgpal11.gbapal"
+	.incbin "graphics/intro/intro1_bgpal12.gbapal"
+	.incbin "graphics/intro/intro1_bgpal13.gbapal"
+	.incbin "graphics/intro/intro1_bgpal14.gbapal"
+	.incbin "graphics/intro/intro1_bgpal15.gbapal"
+	.incbin "graphics/intro/intro1_bgpal16.gbapal"
 
 	.global gUnknown_08406B74
 gUnknown_08406B74: @ 8406B74
@@ -13211,7 +13226,8 @@ gUnknown_0840754C: @ 840754C
 
 	.global gUnknown_08407764
 gUnknown_08407764: @ 8407764
-	.incbin "baserom.gba", 0x00407764, 0x2170
+@ replacing .incbin "baserom.gba", 0x00407764, 0x2170
+	.incbin "graphics/intro/introgfx.4bpp.lz"
 
 	.global gUnknown_084098D4
 gUnknown_084098D4: @ 84098D4
