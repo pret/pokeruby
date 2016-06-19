@@ -25,7 +25,20 @@ MeteorFalls_1F_1R_Text_193320:: @ 8193320
 	.string "Hehehe! Be seeing you, you TEAM\n"
 	.string "{GOOD_TEAM} dingbats!$"
 
-	.incbin "baserom.gba", 0x1933ec, 0x198
+UnknownString_81933EC: @ 81933EC
+	.string "And you are?\p"
+	.string "... ... ... ... ... ... ... ...\n"
+	.string "... ... ... ... ... ... ... ...\p"
+	.string "Fine, so you are {PLAYER}{KUN}.\p"
+	.string "I am MAXIE. As the head of TEAM MAGMA,\n"
+	.string "I have dedicated myself to thwarting\l"
+	.string "the dangerous plans of TEAM AQUA.\p"
+	.string "Why? Because TEAM AQUA is a grave\n"
+	.string "threat to us all.\p"
+	.string "They have committed many destructive\n"
+	.string "acts in their bid to enlarge the sea.\p"
+	.string "We, TEAM MAGMA, love dry land above\n"
+	.string "all! TEAM AQUA is our sworn enemy!$"
 
 MeteorFalls_1F_1R_Text_193584:: @ 8193584
 	.string "Who might you be?\p"

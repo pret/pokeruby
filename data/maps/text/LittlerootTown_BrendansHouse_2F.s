@@ -17,7 +17,8 @@ UnknownString_8172F31: @ 8172F31
 	.string "books on POKéMON.\p"
 	.string "It’s {PLAYER}’s prized collection.$"
 
-	.incbin "baserom.gba", 0x172F85, 0x15
+UnknownString_8172F85: @ 8172F85
+	.string "{PLAYER} booted up the PC.$"
 
 LittlerootTown_BrendansHouse_2F_Text_172F9A:: @ 8172F9A
 	.string "{PLAYER} flipped open the notebook.\p"

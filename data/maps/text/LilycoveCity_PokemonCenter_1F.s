@@ -14,5 +14,14 @@ LilycoveCity_PokemonCenter_1F_Text_18A0A1:: @ 818A0A1
 	.string "POKéMON and rip off METEORITES...\p"
 	.string "I haven’t seen them around recently.$"
 
-	.incbin "baserom.gba", 0x18a10a, 0xcc
+UnknownString_818A10A: @ 818A10A
+	.string "I’m going to get X ATTACK to raise\n"
+	.string "ATTACK during battle.\p"
+	.string "That way, I’ll be guaranteed to win!$"
+
+UnknownString_818A168: @ 818A168
+	.string "FULL HEAL is a little expensive,\n"
+	.string "but it is convenient.\p"
+	.string "Just one of these can cure any\n"
+	.string "POKéMON status problem.$"
 

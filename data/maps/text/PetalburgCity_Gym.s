@@ -367,7 +367,9 @@ PetalburgCity_Gym_Text_17B870:: @ 817B870
 	.string "“SPEED ROOM,” the sign says.\p"
 	.string "Do you want to go through?$"
 
-	.incbin "baserom.gba", 0x17b8a8, 0x2c
+UnknownString_817B8A8: @ 817B8A8
+	.string "This door appears to be locked\n"
+	.string "right now...$"
 
 PetalburgCity_Gym_Text_17B8D4:: @ 817B8D4
 	.string "“ACCURACY ROOM,” the sign says.\p"

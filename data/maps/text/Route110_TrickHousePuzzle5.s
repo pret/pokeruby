@@ -56,7 +56,9 @@ Route110_TrickHousePuzzle5_Text_19D745:: @ 819D745
 	.string "The DEVON RESEARCHER was looking for\n"
 	.string "what POKéMON in PETALBURG WOODS?$"
 
-	.incbin "baserom.gba", 0x19d79d, 0x36
+UnknownString_819D79D: @ 819D79D
+	.string "CONGRATULATIONS. CORRECT YOU ARE.\n"
+	.string "GO THROUGH. PLEASE.$"
 
 Route110_TrickHousePuzzle5_Text_19D7D3:: @ 819D7D3
 	.string "CLICKETY-CLACK...\n"
@@ -78,7 +80,9 @@ Route110_TrickHousePuzzle5_Text_19D8BA:: @ 819D8BA
 	.string "Do one FULL HEAL and GREAT BALL\n"
 	.string "cost more than one REVIVE?$"
 
-	.incbin "baserom.gba", 0x19d907, 0x36
+UnknownString_819D907: @ 819D907
+	.string "CONGRATULATIONS. CORRECT YOU ARE.\n"
+	.string "GO THROUGH. PLEASE.$"
 
 Route110_TrickHousePuzzle5_Text_19D93D:: @ 819D93D
 	.string "CLICKETY-CLACK...\n"
@@ -100,7 +104,9 @@ Route110_TrickHousePuzzle5_Text_19DA1D:: @ 819DA1D
 	.string "The first TRAINER in DEWFORD GYM was\n"
 	.string "male or female?$"
 
-	.incbin "baserom.gba", 0x19da64, 0x36
+UnknownString_819DA64: @ 819DA64
+	.string "CONGRATULATIONS. CORRECT YOU ARE.\n"
+	.string "GO THROUGH. PLEASE.$"
 
 Route110_TrickHousePuzzle5_Text_19DA9A:: @ 819DA9A
 	.string "CLICKETY-CLACK...\n"
@@ -123,7 +129,9 @@ Route110_TrickHousePuzzle5_Text_19DB97:: @ 819DB97
 	.string "How many signs are there in\n"
 	.string "LILYCOVE CITY?$"
 
-	.incbin "baserom.gba", 0x19DBD4, 0x36
+UnknownString_819DBD4: @ 819DBD4
+	.string "CONGRATULATIONS. CORRECT YOU ARE.\n"
+	.string "GO THROUGH. PLEASE.$"
 
 UnknownString_819DC0A: @ 819DC0A
 	.string "{PLAYER} wrote down the secret code\n"

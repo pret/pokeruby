@@ -31,5 +31,6 @@ MossdeepCity_GameCorner_1F_Text_18E741:: @ 818E741
 MossdeepCity_GameCorner_1F_Text_18E777:: @ 818E777
 	.string "I hope to see a good match!$"
 
-	.incbin "baserom.gba", 0x18e793, 0x3
+UnknownString_818E793: @ 818E793
+	.string "{STR_VAR_1}$"
 

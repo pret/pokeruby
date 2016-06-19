@@ -185,7 +185,9 @@ LilycoveCity_ContestHall_Text_189E5F:: @ 8189E5F
 	.string "they make we want to get my own!\p"
 	.string "I’m going to go catch some!$"
 
-	.incbin "baserom.gba", 0x189ec0, 0x33
+UnknownString_8189EC0: @ 8189EC0
+	.string "COOLNESS CONTEST STAGE\n"
+	.string "BE CHILLED BY COOL POKéMON!$"
 
 LilycoveCity_ContestHall_Text_189EF3:: @ 8189EF3
 	.string "BEAUTY CONTEST STAGE\n"
@@ -199,5 +201,7 @@ LilycoveCity_ContestHall_Text_189F5C:: @ 8189F5C
 	.string "SMARTNESS CONTEST STAGE\n"
 	.string "BE IMPRESSED BY SMART POKéMON!$"
 
-	.incbin "baserom.gba", 0x189f93, 0x36
+UnknownString_8189F93: @ 8189F93
+	.string "TOUGHNESS CONTEST STAGE\n"
+	.string "BE THRILLED BY TOUGH POKéMON!$"
 
