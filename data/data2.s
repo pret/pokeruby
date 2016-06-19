@@ -10746,11 +10746,12 @@ gUnknown_083E5CE0: @ 83E5CE0
 
 	.global gUnknown_083E5D60
 gUnknown_083E5D60: @ 83E5D60
-	.incbin "baserom.gba", 0x003e5d60, 0x40
+	.incbin "graphics/interface/map.gbapal", 0xE0, 0x40
 
 	.global gUnknown_083E5DA0
 gUnknown_083E5DA0: @ 83E5DA0
-	.incbin "baserom.gba", 0x003e5da0, 0xd64
+@ replacing .incbin "baserom.gba", 0x003e5da0, 0xd64
+	.incbin "graphics/interface/map.8bpp.lz"
 
 	.global gUnknown_083E6B04
 gUnknown_083E6B04: @ 83E6B04

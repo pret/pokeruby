@@ -12,3 +12,6 @@ $(INTROGFXDIR)/intro.4bpp: $(INTROGFXDIR)/intro1_waterdrops.4bpp $(INTROGFXDIR)/
 $(INTROGFXDIR)/introgfx.4bpp: $(INTROGFXDIR)/intro1_bg.4bpp $(INTROGFXDIR)/intro1_leaves.4bpp
 
 	@cat $(INTROGFXDIR)/intro1_bg.4bpp $(INTROGFXDIR)/intro1_leaves.4bpp >$@
+	
+$(MENUGFXDIR)/map.8bpp: $(MENUGFXDIR)/map.png
+	$(GFX) $< $@ -num_tiles 233
