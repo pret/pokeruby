@@ -69,7 +69,7 @@ include castform.mk
 include tilesets.mk
 include fonts.mk
 include generated.mk
-include menu.mk
+include misc.mk
 
 %.png: ;
 %.pal: ;

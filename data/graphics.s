@@ -122,7 +122,9 @@ gInterfacePal_PremierBall:
 
 	.global gUnknown_08D030D0
 gUnknown_08D030D0: @ 8D030D0
-	.incbin "baserom.gba", 0xD030D0, 0x6B78
+	.incbin "graphics/interface/ball_open.4bpp.lz"
+	.incbin "graphics/interface/blank.4bpp.lz"
+	.incbin "baserom.gba", 0x00d03248, 0x6A00
 
 	.global gUnknown_08D09C48
 gUnknown_08D09C48: @ 8D09C48
