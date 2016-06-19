@@ -120,9 +120,9 @@ data/%_sapphire.o: data/%.s $$(dep)
 	$(PREPROC) $< charmap.txt | $(AS) $(ASFLAGS) --defsym SAPPHIRE=1 -o $@
 
 ld_script_ruby.txt: ld_script.txt
-	@sed "s/\(\(src\|asm\|data\)\/.*\)\.o/\1_ruby.o/g" $< > $@
+	@perl -pe 's#((src|asm|data)/[A-Za-z0-9_]+)\.o#$$1_ruby.o#g' < $< > $@
 ld_script_sapphire.txt: ld_script.txt
-	@sed "s/\(\(src\|asm\|data\)\/.*\)\.o/\1_sapphire.o/g" $< > $@
+	@perl -pe 's#((src|asm|data)/[A-Za-z0-9_]+)\.o#$$1_sapphire.o#g' < $< > $@
 
 pokeruby.elf: ld_script_ruby.txt $(pokeruby_OBJS)
 	$(LD) $(pokeruby_LDFLAGS) -o $@ $(pokeruby_OBJS) $(LIBGCC)
