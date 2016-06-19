@@ -13,7 +13,11 @@ SouthernIsland_Interior_EventScript_160B68:: @ 8160B68
 	return
 
 SouthernIsland_Interior_MapScript1_160B6C:: @ 8160B6C
+	.ifdef SAPPHIRE
+	setvar 0x4011, 188
+	.else
 	setvar 0x4011, 187
+	.endif
 	call SouthernIsland_Interior_EventScript_160B77
 	end
 
@@ -50,7 +54,7 @@ SouthernIsland_Interior_EventScript_160BA7:: @ 8160BA7
 	waitmove 0
 	pause 50
 	checksound
-	pokecry SPECIES_LATIAS, 0
+	pokecry SPECIES_LATIAS_OR_LATIOS, 0
 	pause 30
 	waitpokecry
 	reappear 2
@@ -60,7 +64,7 @@ SouthernIsland_Interior_EventScript_160BA7:: @ 8160BA7
 	waitmove 0
 	pause 50
 	special 276
-	setwildbattle SPECIES_LATIAS, 50, ITEM_SOUL_DEW
+	setwildbattle SPECIES_LATIAS_OR_LATIOS, 50, ITEM_SOUL_DEW
 	setflag 911
 	setflag 2145
 	special 323

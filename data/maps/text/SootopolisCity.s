@@ -32,7 +32,62 @@ SootopolisCity_Text_1698A0:: @ 81698A0
 	.string "But that’s what makes the sky above\n"
 	.string "SOOTOPOLIS the most beautiful.$"
 
-	.incbin "baserom.gba", 0x169988, 0x487
+SootopolisCity_Text_169988:: @ 8169988
+	.string "STEVEN: {PLAYER}{KUN}, you came, too?\n"
+	.string "In this terrible rainstorm, yet...\p"
+	.string "Oh, yes, can you hear out what my\n"
+	.string "friend has to say?$"
+
+SootopolisCity_Text_1699FD:: @ 81699FD
+	.string "My name is WALLACE.\n"
+	.string "I’m this town’s GYM LEADER.\p"
+	.string "I’ve also been entrusted with the\n"
+	.string "protection of the CAVE OF ORIGIN.\p"
+	.string "This downpour is caused by a power\n"
+	.string "emanating from the CAVE OF ORIGIN.$"
+
+SootopolisCity_Text_169AB7:: @ 8169AB7
+	.string "That... That is the BLUE ORB.\p"
+	.string "I see.\n"
+	.string "Follow me.$"
+
+SootopolisCity_Text_169AE7:: @ 8169AE7
+	.string "STEVEN: This rain...\p"
+	.string "People and POKéMON need water to live...\p"
+	.string "But why does this rain fill us with\n"
+	.string "so much dread?\p"
+	.string "The rain clouds over SOOTOPOLIS will\n"
+	.string "keep building and soon extend all\l"
+	.string "over HOENN...\p"
+	.string "If that were to happen...$"
+
+SootopolisCity_Text_169BC7:: @ 8169BC7
+	.string "WALLACE: The CAVE OF ORIGIN is ahead.\p"
+	.string "No one from SOOTOPOLIS is permitted\n"
+	.string "to enter the CAVE OF ORIGIN.\p"
+	.string "But you must go.\n"
+	.string "Together with your BLUE ORB.\p"
+	.string "You must go regardless of what awaits\n"
+	.string "you inside the CAVE...$"
+
+SootopolisCity_Text_169C99:: @ 8169C99
+	.string "STEVEN: {PLAYER}{KUN}, I never expected you\n"
+	.string "to be holding the BLUE ORB.\p"
+	.string "You’ll be okay. With your POKéMON,\n"
+	.string "you’ll get things done no matter what.\p"
+	.string "I’m convinced of it!$"
+
+SootopolisCity_Text_169D37:: @ 8169D37
+	.string "WALLACE: You must go together with\n"
+	.string "your BLUE ORB.\p"
+	.string "You must go regardless of what awaits\n"
+	.string "you inside the CAVE...$"
+
+SootopolisCity_Text_169DA6:: @ 8169DA6
+	.string "STEVEN: You’ll be okay. With your\n"
+	.string "POKéMON, you’ll get things done\l"
+	.string "whatever happens.\p"
+	.string "I’m convinced of it!$"
 
 SootopolisCity_Text_169E0F:: @ 8169E0F
 	.string "STEVEN: {PLAYER}{KUN}, you came, too?\n"

@@ -48,18 +48,30 @@ SootopolisCity_EventScript_14D308:: @ 814D308
 	waitmove 0
 	move 10, SootopolisCity_Movement_14D413
 	waitmove 0
+	.ifdef SAPPHIRE
+	msgbox SootopolisCity_Text_169988, 4
+	.else
 	msgbox SootopolisCity_Text_169E0F, 4
+	.endif
 	closebutton
 	move 10, SootopolisCity_Movement_14D417
 	move 255, SootopolisCity_Movement_14D440
 	waitmove 10
+	.ifdef SAPPHIRE
+	msgbox SootopolisCity_Text_1699FD, 4
+	.else
 	msgbox SootopolisCity_Text_169E82, 4
+	.endif
 	playsfx 21
 	move 5, SootopolisCity_Movement_1A0833
 	waitmove 0
 	move 5, SootopolisCity_Movement_1A0835
 	waitmove 0
+	.ifdef SAPPHIRE
+	msgbox SootopolisCity_Text_169AB7, 4
+	.else
 	msgbox SootopolisCity_Text_169F3C, 4
+	.endif
 	closebutton
 	pause 30
 	move 5, SootopolisCity_Movement_14D46A
@@ -72,7 +84,11 @@ SootopolisCity_EventScript_14D308:: @ 814D308
 	pause 30
 	move 10, SootopolisCity_Movement_1A0845
 	waitmove 0
+	.ifdef SAPPHIRE
+	msgbox SootopolisCity_Text_169AE7, 4
+	.else
 	msgbox SootopolisCity_Text_169F6B, 4
+	.endif
 	closebutton
 	pause 30
 	move 5, SootopolisCity_Movement_14D47C
@@ -81,10 +97,18 @@ SootopolisCity_EventScript_14D308:: @ 814D308
 	waitmove 0
 	move 5, SootopolisCity_Movement_1A083F
 	waitmove 0
+	.ifdef SAPPHIRE
+	msgbox SootopolisCity_Text_169BC7, 4
+	.else
 	msgbox SootopolisCity_Text_16A06C, 4
+	.endif
 	move 255, SootopolisCity_Movement_1A083F
 	waitmove 0
+	.ifdef SAPPHIRE
+	msgbox SootopolisCity_Text_169C99, 4
+	.else
 	msgbox SootopolisCity_Text_16A13E, 4
+	.endif
 	moveoffscreen 5
 	spritebehave 5, 9
 	moveoffscreen 10
@@ -236,7 +260,11 @@ SootopolisCity_Movement_14D47C:: @ 814D47C
 	step_end
 
 SootopolisCity_EventScript_14D48F:: @ 814D48F
+	.ifdef SAPPHIRE
+	msgbox SootopolisCity_Text_169D37, 2
+	.else
 	msgbox SootopolisCity_Text_16A1DB, 2
+	.endif
 	end
 
 SootopolisCity_EventScript_14D498:: @ 814D498
@@ -244,7 +272,11 @@ SootopolisCity_EventScript_14D498:: @ 814D498
 	faceplayer
 	checkflag 113
 	jumpeq SootopolisCity_EventScript_14D4AD
+	.ifdef SAPPHIRE
+	msgbox SootopolisCity_Text_169DA6, 2
+	.else
 	msgbox SootopolisCity_Text_16A249, 4
+	.endif
 	release
 	end
 
@@ -1146,7 +1178,11 @@ Route110_TrickHouseEntrance_EventScript_161518:: @ 8161518
 	move 1, Route110_TrickHouseEntrance_Movement_1A0839
 	waitmove 0
 	msgbox Route110_TrickHouseEntrance_Text_19C128, 4
+	.ifdef SAPPHIRE
+	givedecoration 32
+	.else
 	givedecoration 31
+	.endif
 	compare RESULT, 1
 	jumpeq Route110_TrickHouseEntrance_EventScript_161551
 	compare RESULT, 0
