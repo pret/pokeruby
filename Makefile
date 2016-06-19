@@ -81,7 +81,7 @@ include menu.mk
 
 src/siirtc_ruby.o src/siirtc_sapphire.o: CFLAGS := -mthumb-interwork
 
-src/agb_flash_ruby.o src/agb_flag_sapphire.o: CFLAGS := -O -mthumb-interwork
+src/agb_flash_ruby.o src/agb_flash_sapphire.o: CFLAGS := -O -mthumb-interwork
 src/agb_flash_1m_ruby.o src/agb_flash_1m_sapphire.o: CFLAGS := -O -mthumb-interwork
 src/agb_flash_mx_ruby.o src/agb_flash_mx_sapphire.o: CFLAGS := -O -mthumb-interwork
 
