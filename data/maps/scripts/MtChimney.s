@@ -116,12 +116,12 @@ MtChimney_EventScript_15D107:: @ 815D107
 	end
 
 MtChimney_EventScript_15D110:: @ 815D110
-	trainerbattle 0, 597, 0, MtChimney_Text_1B3B36, MtChimney_Text_1B3BB8
+	trainerbattle 0, TRAINER_MT_CHIMNEY_GRUNT_1, 0, MtChimney_Text_1B3B36, MtChimney_Text_1B3BB8
 	msgbox MtChimney_Text_1B3C07, 6
 	end
 
 MtChimney_EventScript_15D127:: @ 815D127
-	trainerbattle 0, 579, 0, MtChimney_Text_1B3C96, MtChimney_Text_1B3D1E
+	trainerbattle 0, TRAINER_MT_CHIMNEY_GRUNT_2, 0, MtChimney_Text_1B3C96, MtChimney_Text_1B3D1E
 	msgbox MtChimney_Text_1B3D3D, 6
 	end
 

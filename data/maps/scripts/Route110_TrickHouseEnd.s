@@ -166,7 +166,11 @@ Route110_TrickHouseEnd_EventScript_161BAF:: @ 8161BAF
 	pause 30
 	msgbox Route110_TrickHouseEnd_Text_19C691, 4
 	setvar 0x40c1, 0
+	.ifdef SAPPHIRE
+	givedecoration 32
+	.else
 	givedecoration 31
+	.endc
 	compare RESULT, 0
 	callif 1, Route110_TrickHouseEnd_EventScript_161C61
 	msgbox Route110_TrickHouseEnd_Text_19C85C, 4

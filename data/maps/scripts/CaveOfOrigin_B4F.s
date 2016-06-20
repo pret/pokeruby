@@ -13,7 +13,11 @@ CaveOfOrigin_B4F_EventScript_15DDC1:: @ 815DDC1
 	return
 
 CaveOfOrigin_B4F_MapScript1_15DDC5:: @ 815DDC5
+	.ifdef SAPPHIRE
+	setmapfooter 163
+	.else
 	setmapfooter 313
+	.endif
 	call CaveOfOrigin_B4F_EventScript_1A01B5
 	checkflag 113
 	callif 1, CaveOfOrigin_B4F_EventScript_1A04E3
@@ -35,7 +39,11 @@ CaveOfOrigin_B4F_EventScript_15DDD7:: @ 815DDD7
 	setanimation 2, 0
 	doanimation 54
 	checkanimation 54
+	.ifdef SAPPHIRE
+	setvar RESULT, 3
+	.else
 	setvar RESULT, 2
+	.endif
 	playsfx 107
 	special 281
 	waitstate
@@ -44,9 +52,9 @@ CaveOfOrigin_B4F_EventScript_15DDD7:: @ 815DDD7
 	move 1, CaveOfOrigin_B4F_Movement_15DE7D
 	waitmove 0
 	pause 60
-	setwildbattle SPECIES_GROUDON, 45, ITEM_NONE
+	setwildbattle SPECIES_GROUDON_OR_KYOGRE, 45, ITEM_NONE
 	checksound
-	pokecry SPECIES_GROUDON, 2
+	pokecry SPECIES_GROUDON_OR_KYOGRE, 2
 	pause 40
 	waitpokecry
 	setflag 2145

@@ -55,7 +55,7 @@ MtPyre_Summit_EventScript_15D4E1:: @ 815D4E1
 	compare 0x8008, 2
 	callif 1, MtPyre_Summit_EventScript_15D5CA
 	msgbox MtPyre_Summit_Text_1B5FE6, 4
-	giveitem ITEM_RED_ORB
+	giveitem ITEM_RED_OR_BLUE_ORB
 	setflag 212
 	releaseall
 	end
@@ -168,7 +168,7 @@ MtPyre_Summit_EventScript_15D64A:: @ 815D64A
 	end
 
 MtPyre_Summit_EventScript_15D669:: @ 815D669
-	setvar 0x8004, 276
+	setvar 0x8004, ITEM_RED_OR_BLUE_ORB
 	call MtPyre_Summit_EventScript_1A067F
 	closebutton
 	move LAST_TALKED, MtPyre_Summit_Movement_1A0841

@@ -16,7 +16,7 @@ SlateportCity_Harbor_EventScript_155F85:: @ 8155F85
 	return
 
 SlateportCity_Harbor_EventScript_155F89:: @ 8155F89
-	playmusicbattle 441
+	playmusicbattle BGM_EVIL_TEAM
 	movespriteperm 4, 12, 13
 	spritebehave 4, 9
 	setflag 905
