@@ -579,7 +579,11 @@ Route110_TrickHouseEntrance_EventScript_161518:: @ 8161518
 	move 1, Route110_TrickHouseEntrance_Movement_1A0839
 	waitmove 0
 	msgbox Route110_TrickHouseEntrance_Text_19C128, 4
+	.ifdef SAPPHIRE
+	givedecoration 32
+	.else
 	givedecoration 31
+	.endif
 	compare RESULT, 1
 	jumpeq Route110_TrickHouseEntrance_EventScript_161551
 	compare RESULT, 0

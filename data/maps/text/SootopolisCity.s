@@ -35,13 +35,13 @@ SootopolisCity_Text_1698A0:: @ 81698A0
 	.string "But that’s what makes the sky above\n"
 	.string "SOOTOPOLIS the most beautiful.$"
 
-UnknownString_8169988: @ 8169988
+SootopolisCity_Text_169988:: @ 8169988
 	.string "STEVEN: {PLAYER}{KUN}, you came, too?\n"
 	.string "In this terrible rainstorm, yet...\p"
 	.string "Oh, yes, can you hear out what my\n"
 	.string "friend has to say?$"
 
-UnknownString_81699FD: @ 81699FD
+SootopolisCity_Text_1699FD:: @ 81699FD
 	.string "My name is WALLACE.\n"
 	.string "I’m this town’s GYM LEADER.\p"
 	.string "I’ve also been entrusted with the\n"
@@ -49,12 +49,12 @@ UnknownString_81699FD: @ 81699FD
 	.string "This downpour is caused by a power\n"
 	.string "emanating from the CAVE OF ORIGIN.$"
 
-UnknownString_8169AB7: @ 8169AB7
+SootopolisCity_Text_169AB7:: @ 8169AB7
 	.string "That... That is the BLUE ORB.\p"
 	.string "I see.\n"
 	.string "Follow me.$"
 
-UnknownString_8169AE7: @ 8169AE7
+SootopolisCity_Text_169AE7:: @ 8169AE7
 	.string "STEVEN: This rain...\p"
 	.string "People and POKéMON need water to live...\p"
 	.string "But why does this rain fill us with\n"
@@ -64,7 +64,7 @@ UnknownString_8169AE7: @ 8169AE7
 	.string "over HOENN...\p"
 	.string "If that were to happen...$"
 
-UnknownString_8169BC7: @ 8169BC7
+SootopolisCity_Text_169BC7:: @ 8169BC7
 	.string "WALLACE: The CAVE OF ORIGIN is ahead.\p"
 	.string "No one from SOOTOPOLIS is permitted\n"
 	.string "to enter the CAVE OF ORIGIN.\p"
@@ -73,20 +73,20 @@ UnknownString_8169BC7: @ 8169BC7
 	.string "You must go regardless of what awaits\n"
 	.string "you inside the CAVE...$"
 
-UnknownString_8169C99: @ 8169C99
+SootopolisCity_Text_169C99:: @ 8169C99
 	.string "STEVEN: {PLAYER}{KUN}, I never expected you\n"
 	.string "to be holding the BLUE ORB.\p"
 	.string "You’ll be okay. With your POKéMON,\n"
 	.string "you’ll get things done no matter what.\p"
 	.string "I’m convinced of it!$"
 
-UnknownString_8169D37: @ 8169D37
+SootopolisCity_Text_169D37:: @ 8169D37
 	.string "WALLACE: You must go together with\n"
 	.string "your BLUE ORB.\p"
 	.string "You must go regardless of what awaits\n"
 	.string "you inside the CAVE...$"
 
-UnknownString_8169DA6: @ 8169DA6
+SootopolisCity_Text_169DA6:: @ 8169DA6
 	.string "STEVEN: You’ll be okay. With your\n"
 	.string "POKéMON, you’ll get things done\l"
 	.string "whatever happens.\p"

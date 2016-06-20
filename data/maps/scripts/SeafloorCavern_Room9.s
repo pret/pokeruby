@@ -5,7 +5,11 @@ SeafloorCavern_Room9_MapScripts:: @ 815DAE6
 SeafloorCavern_Room9_MapScript1_15DAEC:: @ 815DAEC
 	call SeafloorCavern_Room9_EventScript_1A0196
 	call SeafloorCavern_Room9_EventScript_1A01B5
+	.ifdef SAPPHIRE
+	setmapfooter 157
+	.else
 	setmapfooter 327
+	.endif
 	end
 
 SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
@@ -32,7 +36,7 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	move 0x8004, SeafloorCavern_Room9_Movement_1A0839
 	waitmove 0
 	msgbox SeafloorCavern_Room9_Text_1B491F, 4
-	trainerbattle 3, 601, 0, SeafloorCavern_Room9_Text_1B49AE
+	trainerbattle 3, TRAINER_SEAFLOOR_CAVERN_GRUNT_5, 0, SeafloorCavern_Room9_Text_1B49AE
 	msgbox SeafloorCavern_Room9_Text_1B49C1, 4
 	setweather 0
 	doweather
@@ -41,14 +45,22 @@ SeafloorCavern_Room9_EventScript_15DAFA:: @ 815DAFA
 	msgbox SeafloorCavern_Room9_Text_1B4A5A, 4
 	special 284
 	waitstate
+	.ifdef SAPPHIRE
+	setvar RESULT, 1
+	.else
 	setvar RESULT, 0
+	.endif
 	playsfx 209
 	setanimation 0, 16
 	setanimation 1, 42
 	setanimation 2, 0
 	doanimation 54
 	checkanimation 54
+	.ifdef SAPPHIRE
+	setvar RESULT, 0
+	.else
 	setvar RESULT, 1
+	.endif
 	fanfare 388
 	playsfx 107
 	special 281
