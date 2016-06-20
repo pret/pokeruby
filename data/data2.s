@@ -7,11 +7,12 @@
 
 	.global gUnknown_081E764C
 gUnknown_081E764C: @ 81E764C
-	.incbin "baserom.gba", 0x001e764c, 0x40
+	.incbin "graphics/birch_speech/shadow.gbapal"
+	.incbin "baserom.gba", 0x001e766c, 0x20
 
 	.global gUnknown_081E768C
 gUnknown_081E768C: @ 81E768C
-	.incbin "baserom.gba", 0x001e768c, 0x1a8
+	.incbin "graphics/birch_speech/shadow.4bpp.lz"
 
 	.global gUnknown_081E7834
 gUnknown_081E7834: @ 81E7834
@@ -8093,7 +8094,73 @@ gUnknown_083B6F14: @ 83B6F14
 
 	.global gUnknown_083B6F5C
 gUnknown_083B6F5C: @ 83B6F5C
-	.incbin "baserom.gba", 0x003b6f5c, 0x414c
+	.4byte 0x083B6F34
+	.4byte 0x083B6F44
+	.incbin "baserom.gba", 0x003B6F64, 0x20 @ unknown palette, hand?
+	.incbin "graphics/pokemon_storage/forest_frame.gbapal"
+	.incbin "graphics/pokemon_storage/forest_bg.gbapal"
+	.incbin "graphics/pokemon_storage/forest.4bpp.lz" @ forest
+	.incbin "baserom.gba", 0x003B7394, 0xFC
+	.incbin "graphics/pokemon_storage/city_frame.gbapal"
+	.incbin "graphics/pokemon_storage/city_bg.gbapal"
+	.incbin "graphics/pokemon_storage/city.4bpp.lz" @ city
+	.incbin "baserom.gba", 0x003B76D8, 0xD0
+	.incbin "graphics/pokemon_storage/desert_frame.gbapal"
+	.incbin "graphics/pokemon_storage/desert_bg.gbapal"
+	.incbin "graphics/pokemon_storage/desert.4bpp.lz" @ desert
+	.incbin "baserom.gba", 0x003B7AD4, 0x104
+	.incbin "graphics/pokemon_storage/savanna_frame.gbapal"
+	.incbin "graphics/pokemon_storage/savanna_bg.gbapal"
+	.incbin "graphics/pokemon_storage/savanna.4bpp.lz" @ savanna
+	.incbin "baserom.gba", 0x003B7E38, 0xEC
+	.incbin "graphics/pokemon_storage/crag_frame.gbapal"
+	.incbin "graphics/pokemon_storage/crag_bg.gbapal"
+	.incbin "graphics/pokemon_storage/crag.4bpp.lz" @ crag
+	.incbin "baserom.gba", 0x003B82B4, 0xF8
+	.incbin "graphics/pokemon_storage/volcano_frame.gbapal"
+	.incbin "graphics/pokemon_storage/volcano_bg.gbapal"
+	.incbin "graphics/pokemon_storage/volcano.4bpp.lz" @ volcano
+	.incbin "baserom.gba", 0x003B871C, 0xFC
+	.incbin "graphics/pokemon_storage/snow_frame.gbapal"
+	.incbin "graphics/pokemon_storage/snow_bg.gbapal"
+	.incbin "graphics/pokemon_storage/snow.4bpp.lz" @ snow
+	.incbin "baserom.gba", 0x003B8B10, 0xEC
+	.incbin "graphics/pokemon_storage/cave_frame.gbapal"
+	.incbin "graphics/pokemon_storage/cave_bg.gbapal"
+	.incbin "graphics/pokemon_storage/cave.4bpp.lz" @ cave
+	.incbin "baserom.gba", 0x003B8F80, 0xFC
+	.incbin "graphics/pokemon_storage/beach_frame.gbapal"
+	.incbin "graphics/pokemon_storage/beach_bg.gbapal"
+	.incbin "graphics/pokemon_storage/beach.4bpp.lz" @ beach
+	.incbin "baserom.gba", 0x003B9440, 0x108
+	.incbin "graphics/pokemon_storage/seafloor_frame.gbapal"
+	.incbin "graphics/pokemon_storage/seafloor_bg.gbapal"
+	.incbin "graphics/pokemon_storage/seafloor.4bpp.lz" @ seafloor
+	.incbin "baserom.gba", 0x003B983C, 0xFC
+	.incbin "graphics/pokemon_storage/river_frame.gbapal"
+	.incbin "graphics/pokemon_storage/river_bg.gbapal"
+	.incbin "graphics/pokemon_storage/river.4bpp.lz" @ river
+	.incbin "baserom.gba", 0x003B9C0C, 0x10C
+	.incbin "graphics/pokemon_storage/sky_frame.gbapal"
+	.incbin "graphics/pokemon_storage/sky_bg.gbapal"
+	.incbin "graphics/pokemon_storage/sky.4bpp.lz" @ sky
+	.incbin "baserom.gba", 0x003B9FF0, 0x100
+	.incbin "graphics/pokemon_storage/polkadot_frame.gbapal"
+	.incbin "graphics/pokemon_storage/polkadot_bg.gbapal"
+	.incbin "graphics/pokemon_storage/polkadot.4bpp.lz" @ polkadot
+	.incbin "baserom.gba", 0x003BA32C, 0xD8
+	.incbin "graphics/pokemon_storage/pokecenter_frame.gbapal"
+	.incbin "graphics/pokemon_storage/pokecenter_bg.gbapal"
+	.incbin "graphics/pokemon_storage/pokecenter.4bpp.lz" @ pokecenter
+	.incbin "baserom.gba", 0x003BA7E8, 0x134
+	.incbin "graphics/pokemon_storage/machine_frame.gbapal"
+	.incbin "graphics/pokemon_storage/machine_bg.gbapal"
+	.incbin "graphics/pokemon_storage/machine.4bpp.lz" @ machine
+	.incbin "baserom.gba", 0x003BAC4C, 0xEC
+	.incbin "graphics/pokemon_storage/plain_frame.gbapal"
+	.incbin "graphics/pokemon_storage/plain_bg.gbapal"
+	.incbin "graphics/pokemon_storage/plain.4bpp.lz" @ plain
+	.incbin "baserom.gba", 0x003BAE74, 0x234
 
 	.global gUnknown_083BB0A8
 gUnknown_083BB0A8: @ 83BB0A8
@@ -8101,7 +8168,56 @@ gUnknown_083BB0A8: @ 83BB0A8
 
 	.global gUnknown_083BB0E8
 gUnknown_083BB0E8: @ 83BB0E8
-	.incbin "baserom.gba", 0x003bb0e8, 0x1a0
+	obj_pal 0x083B6FC4, 0x03D0
+	.4byte 0x083B7394
+	.4byte 0x083B6F64
+	obj_pal 0x083B74D0, 0x0208
+	.4byte 0x083B76D8
+	.4byte 0x083B7470
+	obj_pal 0x083B77E8, 0x02EC
+	.4byte 0x083B7AD4
+	.4byte 0x083B7788
+	obj_pal 0x083B7C18, 0x0220
+	.4byte 0x083B7E38
+	.4byte 0x083B7BB8
+	obj_pal 0x083B7F64, 0x0350
+	.4byte 0x083B82B4
+	.4byte 0x083B7F04
+	obj_pal 0x083B83EC, 0x0334
+	.4byte 0x083B8720
+	.4byte 0x083B838C
+	obj_pal 0x083B8858, 0x02B8
+	.4byte 0x083B8B10
+	.4byte 0x083B87F8
+	obj_pal 0x083B8C3C, 0x0344
+	.4byte 0x083B8F80
+	.4byte 0x083B8BDC
+	obj_pal 0x083B90BC, 0x0384
+	.4byte 0x083B9440
+	.4byte 0x083B905C
+	obj_pal 0x083B9588, 0x02B4
+	.4byte 0x083B983C
+	.4byte 0x083B9528
+	obj_pal 0x083B9978, 0x0294
+	.4byte 0x083B9C0C
+	.4byte 0x083B9918
+	obj_pal 0x083B9D58, 0x0298
+	.4byte 0x083B9FF0
+	.4byte 0x083B9CF8
+	obj_pal 0x083BA130, 0x01FC
+	.4byte 0x083BA32C
+	.4byte 0x083BA0D0
+	obj_pal 0x083BA444, 0x03A4
+	.4byte 0x083BA7E8
+	.4byte 0x083BA3E4
+	obj_pal 0x083BA95C, 0x02F0
+	.4byte 0x083BAC4C
+	.4byte 0x083BA8FC
+	obj_pal 0x083BAD78, 0x00FC
+	.4byte 0x083BAE74
+	.4byte 0x083BAD18
+	.incbin "graphics/pokemon_storage/arrow.gbapal"
+	.incbin "graphics/pokemon_storage/arrow.4bpp"
 
 	.global gUnknown_083BB288
 gUnknown_083BB288: @ 83BB288
