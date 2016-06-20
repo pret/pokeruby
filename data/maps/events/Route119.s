@@ -1,7 +1,7 @@
 Route119_MapObjects:: @ 8383914
-	object_event 1, MAP_OBJ_GFX_BERRY_TREE, 0, 24, 0, 5, 0, 3, 12, 0, 0, 0, 0, 34, 0, Route119_EventScript_1A14DD, 0, 0, 0
-	object_event 2, MAP_OBJ_GFX_BERRY_TREE, 0, 25, 0, 5, 0, 3, 12, 0, 0, 0, 0, 35, 0, Route119_EventScript_1A14DD, 0, 0, 0
-	object_event 3, MAP_OBJ_GFX_BERRY_TREE, 0, 26, 0, 5, 0, 3, 12, 0, 0, 0, 0, 36, 0, Route119_EventScript_1A14DD, 0, 0, 0
+	object_event 1, MAP_OBJ_GFX_BERRY_TREE, 0, 24, 0, 5, 0, 3, 12, 0, 0, 0, 0, 34, 0, BerryTreeScript, 0, 0, 0
+	object_event 2, MAP_OBJ_GFX_BERRY_TREE, 0, 25, 0, 5, 0, 3, 12, 0, 0, 0, 0, 35, 0, BerryTreeScript, 0, 0, 0
+	object_event 3, MAP_OBJ_GFX_BERRY_TREE, 0, 26, 0, 5, 0, 3, 12, 0, 0, 0, 0, 36, 0, BerryTreeScript, 0, 0, 0
 	object_event 4, MAP_OBJ_GFX_BUG_CATCHER, 0, 12, 0, 123, 0, 3, 59, 0, 0, 1, 0, 1, 0, Route119_EventScript_151491, 0, 0, 0
 	object_event 5, MAP_OBJ_GFX_MANIAC, 0, 26, 0, 123, 0, 3, 60, 0, 0, 1, 0, 1, 0, Route119_EventScript_151463, 0, 0, 0
 	object_event 6, MAP_OBJ_GFX_MANIAC, 0, 5, 0, 125, 0, 3, 62, 0, 0, 1, 0, 1, 0, Route119_EventScript_15144C, 0, 0, 0
@@ -25,10 +25,10 @@ Route119_MapObjects:: @ 8383914
 	object_event 24, 241, 0, 13, 0, 34, 0, 4, 10, 0, 0, 0, 0, 0, 0, Route119_EventScript_1515DC, 890, 0, 0
 	object_event 25, 243, 0, 17, 0, 33, 0, 4, 7, 0, 0, 0, 0, 0, 0, 0x0, 923, 0, 0
 	object_event 26, MAP_OBJ_GFX_BOY_3, 0, 31, 0, 109, 0, 3, 8, 17, 0, 0, 0, 0, 0, Route119_EventScript_1515F3, 0, 0, 0
-	object_event 27, MAP_OBJ_GFX_BERRY_TREE, 0, 8, 0, 23, 0, 3, 12, 0, 0, 0, 0, 83, 0, Route119_EventScript_1A14DD, 0, 0, 0
-	object_event 28, MAP_OBJ_GFX_BERRY_TREE, 0, 9, 0, 23, 0, 3, 12, 0, 0, 0, 0, 84, 0, Route119_EventScript_1A14DD, 0, 0, 0
-	object_event 29, MAP_OBJ_GFX_BERRY_TREE, 0, 29, 0, 90, 0, 3, 12, 0, 0, 0, 0, 85, 0, Route119_EventScript_1A14DD, 0, 0, 0
-	object_event 30, MAP_OBJ_GFX_BERRY_TREE, 0, 30, 0, 90, 0, 3, 12, 0, 0, 0, 0, 86, 0, Route119_EventScript_1A14DD, 0, 0, 0
+	object_event 27, MAP_OBJ_GFX_BERRY_TREE, 0, 8, 0, 23, 0, 3, 12, 0, 0, 0, 0, 83, 0, BerryTreeScript, 0, 0, 0
+	object_event 28, MAP_OBJ_GFX_BERRY_TREE, 0, 9, 0, 23, 0, 3, 12, 0, 0, 0, 0, 84, 0, BerryTreeScript, 0, 0, 0
+	object_event 29, MAP_OBJ_GFX_BERRY_TREE, 0, 29, 0, 90, 0, 3, 12, 0, 0, 0, 0, 85, 0, BerryTreeScript, 0, 0, 0
+	object_event 30, MAP_OBJ_GFX_BERRY_TREE, 0, 30, 0, 90, 0, 3, 12, 0, 0, 0, 0, 86, 0, BerryTreeScript, 0, 0, 0
 	object_event 31, MAP_OBJ_GFX_CYCLING_TRIATHLETE_M, 0, 19, 0, 133, 0, 3, 5, 18, 0, 0, 0, 0, 0, Route119_EventScript_15141A, 0, 0, 0
 	object_event 32, MAP_OBJ_GFX_ITEM_BALL, 0, 3, 0, 56, 0, 3, 1, 17, 0, 0, 0, 0, 0, Route119_EventScript_1B160D, 1106, 0, 0
 	object_event 33, MAP_OBJ_GFX_BOY_2, 0, 35, 0, 93, 0, 4, 2, 17, 0, 0, 0, 0, 0, Route119_EventScript_1515FC, 0, 0, 0
