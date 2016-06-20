@@ -9,17 +9,17 @@ Route114_MapObjects:: @ 8382C48
 	object_event 8, MAP_OBJ_GFX_BERRY_TREE, 0, 31, 0, 45, 0, 3, 12, 0, 0, 0, 0, 68, 0, Route114_EventScript_1A14DD, 0, 0, 0
 	object_event 9, MAP_OBJ_GFX_ITEM_BALL, 0, 7, 0, 6, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route114_EventScript_1B1516, 1014, 0, 0
 	object_event 10, MAP_OBJ_GFX_ITEM_BALL, 0, 11, 0, 37, 0, 4, 1, 0, 0, 0, 0, 0, 0, Route114_EventScript_1B1523, 1015, 0, 0
-	object_event 11, MAP_OBJ_GFX_BREAKABLE_ROCK, 0, 12, 0, 43, 0, 4, 1, 0, 0, 0, 0, 0, 0, Route114_EventScript_1B0EB7, 17, 0, 0
+	object_event 11, MAP_OBJ_GFX_BREAKABLE_ROCK, 0, 12, 0, 43, 0, 4, 1, 0, 0, 0, 0, 0, 0, BreakableRockScript, 17, 0, 0
 	object_event 12, MAP_OBJ_GFX_GENTLEMAN, 0, 19, 0, 11, 0, 3, 10, 0, 0, 0, 0, 0, 0, Route114_EventScript_150782, 0, 0, 0
 	object_event 13, MAP_OBJ_GFX_POOCHYENA, 0, 19, 0, 12, 0, 3, 10, 0, 0, 0, 0, 0, 0, Route114_EventScript_1507C3, 0, 0, 0
 	object_event 14, MAP_OBJ_GFX_MAN_5, 0, 27, 0, 42, 0, 3, 3, 16, 0, 0, 0, 0, 0, Route114_EventScript_150733, 0, 0, 0
 	object_event 15, MAP_OBJ_GFX_FISHERMAN, 0, 23, 0, 20, 0, 3, 8, 0, 0, 1, 0, 0, 0, Route114_EventScript_1508E0, 0, 0, 0
 	object_event 16, MAP_OBJ_GFX_FISHERMAN, 0, 19, 0, 26, 0, 3, 9, 0, 0, 1, 0, 0, 0, Route114_EventScript_1508C9, 0, 0, 0
 	object_event 17, MAP_OBJ_GFX_MAN_6, 0, 30, 0, 58, 0, 5, 23, 0, 0, 1, 0, 3, 0, Route114_EventScript_15088B, 0, 0, 0
-	object_event 18, MAP_OBJ_GFX_BREAKABLE_ROCK, 0, 29, 0, 53, 0, 5, 1, 17, 0, 0, 0, 0, 0, Route114_EventScript_1B0EB7, 18, 0, 0
-	object_event 19, MAP_OBJ_GFX_BREAKABLE_ROCK, 0, 30, 0, 54, 0, 5, 1, 17, 0, 0, 0, 0, 0, Route114_EventScript_1B0EB7, 19, 0, 0
-	object_event 20, MAP_OBJ_GFX_BREAKABLE_ROCK, 0, 22, 0, 69, 0, 7, 1, 17, 0, 0, 0, 0, 0, Route114_EventScript_1B0EB7, 20, 0, 0
-	object_event 21, MAP_OBJ_GFX_BREAKABLE_ROCK, 0, 11, 0, 64, 0, 5, 1, 17, 0, 0, 0, 0, 0, Route114_EventScript_1B0EB7, 21, 0, 0
+	object_event 18, MAP_OBJ_GFX_BREAKABLE_ROCK, 0, 29, 0, 53, 0, 5, 1, 17, 0, 0, 0, 0, 0, BreakableRockScript, 18, 0, 0
+	object_event 19, MAP_OBJ_GFX_BREAKABLE_ROCK, 0, 30, 0, 54, 0, 5, 1, 17, 0, 0, 0, 0, 0, BreakableRockScript, 19, 0, 0
+	object_event 20, MAP_OBJ_GFX_BREAKABLE_ROCK, 0, 22, 0, 69, 0, 7, 1, 17, 0, 0, 0, 0, 0, BreakableRockScript, 20, 0, 0
+	object_event 21, MAP_OBJ_GFX_BREAKABLE_ROCK, 0, 11, 0, 64, 0, 5, 1, 17, 0, 0, 0, 0, 0, BreakableRockScript, 21, 0, 0
 	object_event 22, MAP_OBJ_GFX_LASS, 0, 24, 0, 44, 0, 3, 8, 17, 0, 1, 0, 0, 0, Route114_EventScript_150912, 0, 0, 0
 	object_event 23, MAP_OBJ_GFX_LASS, 0, 23, 0, 44, 0, 3, 8, 17, 0, 1, 0, 0, 0, Route114_EventScript_1508F7, 0, 0, 0
 

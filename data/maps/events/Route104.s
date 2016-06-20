@@ -28,7 +28,7 @@ Route104_MapObjects:: @ 8381488
 	object_event 27, MAP_OBJ_GFX_ITEM_BALL, 0, 29, 0, 53, 0, 3, 1, 17, 0, 0, 0, 0, 0, Route104_EventScript_1B1460, 1057, 0, 0
 	object_event 28, MAP_OBJ_GFX_YOUNGSTER, 0, 18, 0, 67, 0, 3, 46, 101, 0, 1, 0, 2, 0, Route104_EventScript_14F189, 0, 0, 0
 	object_event 29, MAP_OBJ_GFX_ITEM_BALL, 0, 37, 0, 22, 0, 3, 1, 17, 0, 0, 0, 0, 0, Route104_EventScript_1B146D, 1115, 0, 0
-	object_event 30, MAP_OBJ_GFX_CUTTABLE_TREE, 0, 35, 0, 22, 0, 3, 1, 17, 0, 0, 0, 0, 0, Route104_EventScript_1B0DCC, 17, 0, 0
+	object_event 30, MAP_OBJ_GFX_CUTTABLE_TREE, 0, 35, 0, 22, 0, 3, 1, 17, 0, 0, 0, 0, 0, CuttableTreeScript, 17, 0, 0
 	object_event 31, MAP_OBJ_GFX_ITEM_BALL, 0, 5, 0, 8, 0, 3, 1, 17, 0, 0, 0, 0, 0, Route104_EventScript_1B147A, 1135, 0, 0
 	object_event 32, MAP_OBJ_GFX_BOY_2, 0, 5, 0, 26, 0, 3, 1, 17, 0, 0, 0, 0, 0, Route104_EventScript_14EF93, 0, 0, 0
 

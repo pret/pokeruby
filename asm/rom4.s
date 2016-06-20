@@ -47963,7 +47963,7 @@ _0806853C:
 	ldr r0, _08068550
 	b _080686EE
 	.align 2, 0
-_08068550: .4byte gUnknown_0814D2FF
+_08068550: .4byte ClosedSootopolisGymDoorScript
 _08068554:
 	adds r0, r5, 0
 	bl is_tile_x84
@@ -48212,7 +48212,7 @@ _08068760:
 	ldr r0, _08068764
 	b _0806876A
 	.align 2, 0
-_08068764: .4byte WaterfallScript
+_08068764: .4byte CannotUseWaterfallScript
 _08068768:
 	movs r0, 0
 _0806876A:
@@ -48240,7 +48240,7 @@ sub_8068770: @ 8068770
 	b _0806879E
 	.align 2, 0
 _08068794: .4byte 0x0000080d
-_08068798: .4byte gUnknown_081B1220
+_08068798: .4byte UseDiveScript
 _0806879C:
 	movs r0, 0
 _0806879E:
@@ -48272,7 +48272,7 @@ sub_80687A4: @ 80687A4
 	.align 2, 0
 _080687D0: .4byte 0x0000080d
 _080687D4: .4byte 0x0202e828
-_080687D8: .4byte gUnknown_081B1269
+_080687D8: .4byte UnderwaterUseDiveScript
 _080687DC:
 	movs r0, 0
 _080687DE:
