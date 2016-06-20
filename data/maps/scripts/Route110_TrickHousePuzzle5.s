@@ -675,3 +675,51 @@ Route110_TrickHousePuzzle5_Movement_16309B:: @ 816309B
 	step_right
 	step_end
 
+Route110_TrickHouseEntrance_Movement_16309F:: @ 816309F
+Route110_TrickHousePuzzle5_Movement_16309F:: @ 816309F
+	step_02
+	step_11
+	step_03
+	step_11
+	step_02
+	step_11
+	step_03
+	step_11
+	step_02
+	step_11
+	step_03
+	step_11
+	step_02
+	step_11
+	step_03
+	step_11
+	step_02
+	step_11
+	step_03
+	step_11
+	step_02
+	step_11
+	step_03
+	step_11
+	step_02
+	step_11
+	step_03
+	step_11
+	step_02
+	step_11
+	step_03
+	step_11
+	step_02
+	step_11
+	step_03
+	step_11
+	step_02
+	step_11
+	step_03
+	step_11
+	step_02
+	step_11
+	step_03
+	step_11
+	step_00
+	step_end

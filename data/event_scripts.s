@@ -359,6 +359,7 @@ gUnknown_0814B70C: @ 814B70C
 	.include "data/maps/scripts/SecretBase_YellowCave2.s"
 	.include "data/maps/scripts/SecretBase_YellowCave3.s"
 	.include "data/maps/scripts/SecretBase_YellowCave4.s"
+
 	.global gUnknown_0815F36C
 gUnknown_0815F36C: @ 815F36C
 	.incbin "baserom.gba", 0x0015f36c, 0x2d
@@ -381,7 +382,6 @@ gUnknown_0815F523: @ 815F523
 
 	.global gUnknown_0815F528
 gUnknown_0815F528: @ 815F528
-
 	.incbin "baserom.gba", 0x15f528, 0x54
 
 	.include "data/maps/scripts/SingleBattleColosseum.s"
@@ -414,386 +414,12 @@ gUnknown_0815F528: @ 815F528
 	.include "data/maps/scripts/BattleTower_Corridor.s"
 	.include "data/maps/scripts/BattleTower_BattleRoom.s"
 	.include "data/maps/scripts/SouthernIsland_Exterior.s"
-BattleTower_Outside_Movement_160B45:: @ 8160B45
-	step_down
-	step_end
-
-BattleTower_Outside_Movement_160B47:: @ 8160B47
-	step_left
-	step_25
-	step_end
-
-SouthernIsland_Exterior_EventScript_160B4A:: @ 8160B4A
-	msgbox SouthernIsland_Exterior_Text_1C52FB, 3
-	end
-
 	.include "data/maps/scripts/SouthernIsland_Interior.s"
 	.include "data/maps/scripts/SafariZone_RestHouse.s"
 	.include "data/maps/scripts/Route104_Prototype.s"
 	.include "data/maps/scripts/Route104_PrototypePrettyPetalFlowerShop.s"
 	.include "data/maps/scripts/Route109_SeashoreHouse.s"
 	.include "data/maps/scripts/Route110_TrickHouseEntrance.s"
-Route110_TrickHouseEnd_Movement_161315:: @ 8161315
-Route110_TrickHouseEntrance_Movement_161315:: @ 8161315
-	step_01
-	step_12
-	step_02
-	step_12
-	step_00
-	step_12
-	step_03
-	step_12
-	step_end
-
-Route110_TrickHouseEnd_Movement_16131E:: @ 816131E
-Route110_TrickHouseEntrance_Movement_16131E:: @ 816131E
-	step_01
-	step_52
-	step_32
-	step_32
-	step_32
-	step_32
-	step_32
-	step_32
-	step_end
-
-Route110_TrickHouseEntrance_EventScript_161327:: @ 8161327
-	msgbox Route110_TrickHouseEntrance_Text_19BCFD, 4
-	return
-
-Route110_TrickHouseEntrance_EventScript_161330:: @ 8161330
-	msgbox Route110_TrickHouseEntrance_Text_19BF19, 4
-	closebutton
-	move 1, Route110_TrickHouseEntrance_Movement_1A0839
-	waitmove 0
-	playsfx 21
-	move 1, Route110_TrickHouseEntrance_Movement_1A0833
-	waitmove 0
-	move 1, Route110_TrickHouseEntrance_Movement_1A0835
-	waitmove 0
-	msgbox Route110_TrickHouseEntrance_Text_19BFAB, 4
-	move 1, Route110_TrickHouseEntrance_Movement_1A0841
-	waitmove 0
-	releaseall
-	end
-
-Route110_TrickHouseEntrance_EventScript_16136E:: @ 816136E
-	move 1, Route110_TrickHouseEntrance_Movement_1A0839
-	waitmove 0
-	msgbox Route110_TrickHouseEntrance_Text_19C07E, 4
-	compare 0x4044, 1
-	jumpeq Route110_TrickHouseEntrance_EventScript_1613CE
-	compare 0x4044, 2
-	jumpeq Route110_TrickHouseEntrance_EventScript_1613FA
-	compare 0x4044, 3
-	jumpeq Route110_TrickHouseEntrance_EventScript_161426
-	compare 0x4044, 4
-	jumpeq Route110_TrickHouseEntrance_EventScript_161452
-	compare 0x4044, 5
-	jumpeq Route110_TrickHouseEntrance_EventScript_16147E
-	compare 0x4044, 6
-	jumpeq Route110_TrickHouseEntrance_EventScript_1614AA
-	compare 0x4044, 7
-	jumpeq Route110_TrickHouseEntrance_EventScript_1614D6
-	end
-
-Route110_TrickHouseEntrance_EventScript_1613CE:: @ 81613CE
-	giveitem ITEM_RARE_CANDY
-	compare RESULT, 1
-	jumpeq Route110_TrickHouseEntrance_EventScript_161502
-	compare RESULT, 0
-	callif 1, Route110_TrickHouseEntrance_EventScript_1A02A5
-	msgbox Route110_TrickHouseEntrance_Text_19C0FC, 4
-	releaseall
-	end
-
-Route110_TrickHouseEntrance_EventScript_1613FA:: @ 81613FA
-	giveitem ITEM_TIMER_BALL
-	compare RESULT, 1
-	jumpeq Route110_TrickHouseEntrance_EventScript_161502
-	compare RESULT, 0
-	callif 1, Route110_TrickHouseEntrance_EventScript_1A02A5
-	msgbox Route110_TrickHouseEntrance_Text_19C0FC, 4
-	releaseall
-	end
-
-Route110_TrickHouseEntrance_EventScript_161426:: @ 8161426
-	giveitem ITEM_HARD_STONE
-	compare RESULT, 1
-	jumpeq Route110_TrickHouseEntrance_EventScript_161502
-	compare RESULT, 0
-	callif 1, Route110_TrickHouseEntrance_EventScript_1A02A5
-	msgbox Route110_TrickHouseEntrance_Text_19C0FC, 4
-	releaseall
-	end
-
-Route110_TrickHouseEntrance_EventScript_161452:: @ 8161452
-	giveitem ITEM_SMOKE_BALL
-	compare RESULT, 1
-	jumpeq Route110_TrickHouseEntrance_EventScript_161502
-	compare RESULT, 0
-	callif 1, Route110_TrickHouseEntrance_EventScript_1A02A5
-	msgbox Route110_TrickHouseEntrance_Text_19C0FC, 4
-	releaseall
-	end
-
-Route110_TrickHouseEntrance_EventScript_16147E:: @ 816147E
-	giveitem ITEM_TM12
-	compare RESULT, 1
-	jumpeq Route110_TrickHouseEntrance_EventScript_161502
-	compare RESULT, 0
-	callif 1, Route110_TrickHouseEntrance_EventScript_1A02A5
-	msgbox Route110_TrickHouseEntrance_Text_19C0FC, 4
-	releaseall
-	end
-
-Route110_TrickHouseEntrance_EventScript_1614AA:: @ 81614AA
-	giveitem ITEM_MAGNET
-	compare RESULT, 1
-	jumpeq Route110_TrickHouseEntrance_EventScript_161502
-	compare RESULT, 0
-	callif 1, Route110_TrickHouseEntrance_EventScript_1A02A5
-	msgbox Route110_TrickHouseEntrance_Text_19C0FC, 4
-	releaseall
-	end
-
-Route110_TrickHouseEntrance_EventScript_1614D6:: @ 81614D6
-	giveitem ITEM_PP_MAX
-	compare RESULT, 1
-	jumpeq Route110_TrickHouseEntrance_EventScript_161502
-	compare RESULT, 0
-	callif 1, Route110_TrickHouseEntrance_EventScript_1A02A5
-	msgbox Route110_TrickHouseEntrance_Text_19C0FC, 4
-	releaseall
-	end
-
-Route110_TrickHouseEntrance_EventScript_161502:: @ 8161502
-	setvar 0x40c1, 0
-	setvar 0x40a7, 3
-	move 1, Route110_TrickHouseEntrance_Movement_1A0841
-	waitmove 0
-	releaseall
-	end
-
-Route110_TrickHouseEntrance_EventScript_161518:: @ 8161518
-	move 1, Route110_TrickHouseEntrance_Movement_1A0839
-	waitmove 0
-	msgbox Route110_TrickHouseEntrance_Text_19C128, 4
-	.ifdef SAPPHIRE
-	givedecoration 32
-	.else
-	givedecoration 31
-	.endif
-	compare RESULT, 1
-	jumpeq Route110_TrickHouseEntrance_EventScript_161551
-	compare RESULT, 0
-	callif 1, Route110_TrickHouseEntrance_EventScript_1A02B8
-	msgbox Route110_TrickHouseEntrance_Text_19C18D, 4
-	releaseall
-	end
-
-Route110_TrickHouseEntrance_EventScript_161551:: @ 8161551
-	msgbox Route110_TrickHouseEntrance_Text_19C17E, 4
-	closebutton
-	move 1, Route110_TrickHouseEntrance_Movement_16309F
-	waitmove 0
-	move 1, Route110_TrickHouseEntrance_Movement_161315
-	waitmove 0
-	playsfx 178
-	move 1, Route110_TrickHouseEntrance_Movement_16131E
-	waitmove 0
-	disappear 1
-	setvar 0x40c1, 0
-	setvar 0x40a7, 5
-	releaseall
-	end
-
-Route110_TrickHouseEntrance_EventScript_16158A:: @ 816158A
-	lockall
-	switch 0x40a7
-	case 0, Route110_TrickHouseEntrance_EventScript_1615BD
-	case 1, Route110_TrickHouseEntrance_EventScript_1615C7
-	case 4, Route110_TrickHouseEntrance_EventScript_1616B8
-	case 5, Route110_TrickHouseEntrance_EventScript_1616C2
-	end
-
-Route110_TrickHouseEntrance_EventScript_1615BD:: @ 81615BD
-	msgbox Route110_TrickHouseEntrance_Text_19BE6E, 4
-	releaseall
-	end
-
-Route110_TrickHouseEntrance_EventScript_1615C7:: @ 81615C7
-	msgbox Route110_TrickHouseEntrance_Text_19BE7D, 5
-	closebutton
-	compare RESULT, 1
-	jumpeq Route110_TrickHouseEntrance_EventScript_1615DD
-	releaseall
-	end
-
-Route110_TrickHouseEntrance_EventScript_1615DD:: @ 81615DD
-	setmaptile 5, 1, 537, 0
-	special 142
-	pause 20
-	move 255, Route110_TrickHouseEntrance_Movement_1A0856
-	waitmove 0
-	move 255, Route110_TrickHouseEntrance_Movement_16165E
-	waitmove 0
-	switch 0x4044
-	case 0, Route110_TrickHouseEntrance_EventScript_161660
-	case 1, Route110_TrickHouseEntrance_EventScript_16166B
-	case 2, Route110_TrickHouseEntrance_EventScript_161676
-	case 3, Route110_TrickHouseEntrance_EventScript_161681
-	case 4, Route110_TrickHouseEntrance_EventScript_16168C
-	case 5, Route110_TrickHouseEntrance_EventScript_161697
-	case 6, Route110_TrickHouseEntrance_EventScript_1616A2
-	case 7, Route110_TrickHouseEntrance_EventScript_1616AD
-	end
-
-Route110_TrickHouseEntrance_Movement_16165E:: @ 816165E
-	step_54
-	step_end
-
-Route110_TrickHouseEntrance_EventScript_161660:: @ 8161660
-	warp Route110_TrickHousePuzzle1, 255, 0, 21
-	waitstate
-	releaseall
-	end
-
-Route110_TrickHouseEntrance_EventScript_16166B:: @ 816166B
-	warp Route110_TrickHousePuzzle2, 255, 0, 21
-	waitstate
-	releaseall
-	end
-
-Route110_TrickHouseEntrance_EventScript_161676:: @ 8161676
-	warp Route110_TrickHousePuzzle3, 255, 0, 21
-	waitstate
-	releaseall
-	end
-
-Route110_TrickHouseEntrance_EventScript_161681:: @ 8161681
-	warp Route110_TrickHousePuzzle4, 255, 0, 21
-	waitstate
-	releaseall
-	end
-
-Route110_TrickHouseEntrance_EventScript_16168C:: @ 816168C
-	warp Route110_TrickHousePuzzle5, 255, 0, 21
-	waitstate
-	releaseall
-	end
-
-Route110_TrickHouseEntrance_EventScript_161697:: @ 8161697
-	warp Route110_TrickHousePuzzle6, 255, 0, 21
-	waitstate
-	releaseall
-	end
-
-Route110_TrickHouseEntrance_EventScript_1616A2:: @ 81616A2
-	warp Route110_TrickHousePuzzle7, 255, 0, 21
-	waitstate
-	releaseall
-	end
-
-Route110_TrickHouseEntrance_EventScript_1616AD:: @ 81616AD
-	warp Route110_TrickHousePuzzle8, 255, 0, 21
-	waitstate
-	releaseall
-	end
-
-Route110_TrickHouseEntrance_EventScript_1616B8:: @ 81616B8
-	msgbox Route110_TrickHouseEntrance_Text_19BEB3, 4
-	releaseall
-	end
-
-Route110_TrickHouseEntrance_EventScript_1616C2:: @ 81616C2
-	compare 0x4044, 8
-	jumpeq Route110_TrickHouseEntrance_EventScript_1616D7
-	msgbox Route110_TrickHouseEntrance_Text_19BE6E, 4
-	releaseall
-	end
-
-Route110_TrickHouseEntrance_EventScript_1616D7:: @ 81616D7
-	msgbox Route110_TrickHouseEntrance_Text_19BEB3, 4
-	releaseall
-	end
-
-	.global gUnknown_081616E1
-gUnknown_081616E1: @ 81616E1
-
-	.incbin "baserom.gba", 0x1616e1, 0x1b1
-
-Route110_TrickHousePuzzle1_EventScript_161892:: @ 8161892
-Route110_TrickHousePuzzle2_EventScript_161892:: @ 8161892
-Route110_TrickHousePuzzle3_EventScript_161892:: @ 8161892
-Route110_TrickHousePuzzle4_EventScript_161892:: @ 8161892
-Route110_TrickHousePuzzle5_EventScript_161892:: @ 8161892
-Route110_TrickHousePuzzle6_EventScript_161892:: @ 8161892
-Route110_TrickHousePuzzle7_EventScript_161892:: @ 8161892
-Route110_TrickHousePuzzle8_EventScript_161892:: @ 8161892
-	msgbox Route110_TrickHousePuzzle1_Text_19C1FF, 4
-	releaseall
-	end
-
-Route110_TrickHousePuzzle1_EventScript_16189C:: @ 816189C
-Route110_TrickHousePuzzle2_EventScript_16189C:: @ 816189C
-Route110_TrickHousePuzzle3_EventScript_16189C:: @ 816189C
-Route110_TrickHousePuzzle4_EventScript_16189C:: @ 816189C
-Route110_TrickHousePuzzle5_EventScript_16189C:: @ 816189C
-Route110_TrickHousePuzzle6_EventScript_16189C:: @ 816189C
-Route110_TrickHousePuzzle7_EventScript_16189C:: @ 816189C
-Route110_TrickHousePuzzle8_EventScript_16189C:: @ 816189C
-	fanfare 370
-	message Route110_TrickHousePuzzle1_Text_19C1B8
-	waitfanfare
-	waittext
-	msgbox Route110_TrickHousePuzzle1_Text_19C1CB, 4
-	releaseall
-	end
-
-Route110_TrickHouseEntrance_EventScript_1618B0:: @ 81618B0
-	lockall
-	msgbox Route110_TrickHouseEntrance_Text_19BA56, 4
-	releaseall
-	compare 0x4044, 0
-	callif 1, Route110_TrickHouseEntrance_EventScript_1618E1
-	compare 0x4044, 1
-	callif 1, Route110_TrickHouseEntrance_EventScript_1618F6
-	compare 0x4044, 2
-	callif 1, Route110_TrickHouseEntrance_EventScript_16190B
-	setvar 0x40a5, 1
-	end
-
-Route110_TrickHouseEntrance_EventScript_1618E1:: @ 81618E1
-	setvar 0x8004, 6
-	setvar 0x8005, 3
-	setvar 0x8006, 0
-	call Route110_TrickHouseEntrance_EventScript_161920
-	return
-
-Route110_TrickHouseEntrance_EventScript_1618F6:: @ 81618F6
-	setvar 0x8004, 11
-	setvar 0x8005, 5
-	setvar 0x8006, 0
-	call Route110_TrickHouseEntrance_EventScript_161920
-	return
-
-Route110_TrickHouseEntrance_EventScript_16190B:: @ 816190B
-	setvar 0x8004, 9
-	setvar 0x8005, 2
-	setvar 0x8006, 0
-	call Route110_TrickHouseEntrance_EventScript_161920
-	return
-
-Route110_TrickHouseEntrance_EventScript_161920:: @ 8161920
-	setanimation 0, 32772
-	setanimation 1, 32773
-	setanimation 2, 32774
-	doanimation 54
-	checkanimation 54
-	pause 10
-	return
-
 	.include "data/maps/scripts/Route110_TrickHouseEnd.s"
 	.include "data/maps/scripts/Route110_TrickHouseCorridor.s"
 	.include "data/maps/scripts/Route110_TrickHousePuzzle1.s"
@@ -801,55 +427,6 @@ Route110_TrickHouseEntrance_EventScript_161920:: @ 8161920
 	.include "data/maps/scripts/Route110_TrickHousePuzzle3.s"
 	.include "data/maps/scripts/Route110_TrickHousePuzzle4.s"
 	.include "data/maps/scripts/Route110_TrickHousePuzzle5.s"
-Route110_TrickHouseEntrance_Movement_16309F:: @ 816309F
-Route110_TrickHousePuzzle5_Movement_16309F:: @ 816309F
-	step_02
-	step_11
-	step_03
-	step_11
-	step_02
-	step_11
-	step_03
-	step_11
-	step_02
-	step_11
-	step_03
-	step_11
-	step_02
-	step_11
-	step_03
-	step_11
-	step_02
-	step_11
-	step_03
-	step_11
-	step_02
-	step_11
-	step_03
-	step_11
-	step_02
-	step_11
-	step_03
-	step_11
-	step_02
-	step_11
-	step_03
-	step_11
-	step_02
-	step_11
-	step_03
-	step_11
-	step_02
-	step_11
-	step_03
-	step_11
-	step_02
-	step_11
-	step_03
-	step_11
-	step_00
-	step_end
-
 	.include "data/maps/scripts/Route110_TrickHousePuzzle6.s"
 	.include "data/maps/scripts/Route110_TrickHousePuzzle7.s"
 	.include "data/maps/scripts/Route110_TrickHousePuzzle8.s"
@@ -861,6 +438,7 @@ Route110_TrickHousePuzzle5_Movement_16309F:: @ 816309F
 	.include "data/maps/scripts/Route119_WeatherInstitute_2F.s"
 	.include "data/maps/scripts/Route119_House.s"
 	.include "data/maps/scripts/Route124_DivingTreasureHuntersHouse.s"
+
 	.include "data/maps/text/PetalburgCity.s"
 	.include "data/maps/text/SlateportCity.s"
 	.include "data/maps/text/MauvilleCity.s"
@@ -873,339 +451,19 @@ Route110_TrickHousePuzzle5_Movement_16309F:: @ 816309F
 	.include "data/maps/text/LittlerootTown.s"
 	.include "data/maps/text/OldaleTown.s"
 	.include "data/maps/text/DewfordTown.s"
-	.include "data/maps/text/Route104.s"
-DewfordTown_Text_16B3BC:: @ 816B3BC
-	.string "MR. BRINEY: Have you delivered your\n"
-	.string "LETTER?\p"
-	.string "Or were you meaning to sail back to\n"
-	.string "PETALBURG?$"
-
-DewfordTown_Text_16B417:: @ 816B417
-	.string "MR. BRINEY: PETALBURG it is, then!\p"
-	.string "Anchors aweigh!\n"
-	.string "PEEKO, we’re setting sail, my darling!$"
-
-DewfordTown_Text_16B471:: @ 816B471
-	.string "MR. BRINEY: Then you go on and deliver\n"
-	.string "the LETTER. I’ll be waiting.$"
-
-Route104_Text_16B4B5:: @ 816B4B5
-	.include "data/maps/text/Route109.s"
-DewfordTown_Text_16B522:: @ 816B522
-	.string "MR. BRINEY: Ahoy!\n"
-	.string "For you, I’ll go out to sea anytime!\p"
-	.string "Now, my friend, where are we bound?$"
-
-DewfordTown_Text_16B57D:: @ 816B57D
-	.string "MR. BRINEY: PETALBURG, is it?\p"
-	.string "Anchors aweigh!\n"
-	.string "PEEKO, we’re setting sail, my darling!$"
-
-DewfordTown_Text_16B5D2:: @ 816B5D2
-	.string "MR. BRINEY: SLATEPORT, is it?\p"
-	.string "Anchors aweigh!\n"
-	.string "PEEKO, we’re setting sail, my darling!$"
-
-DewfordTown_Text_16B627:: @ 816B627
-	.string "MR. BRINEY: Just tell me whenever you\n"
-	.string "want to set sail again.$"
-
-DewfordTown_Text_16B665:: @ 816B665
-	.string "This is a renowned fishing spot.\n"
-	.string "Are you getting the itch to fish?$"
-
-DewfordTown_Text_16B6A8:: @ 816B6A8
-	.string "I hear you, and I like what\n"
-	.string "you’re saying!\p"
-	.string "I’ll give you one of my fishing RODS.$"
-
-DewfordTown_Text_16B6F9:: @ 816B6F9
-	.string "And, as an added bonus, I’ll even throw\n"
-	.string "in a little fishing advice!\p"
-	.string "First, you want to face the water,\n"
-	.string "then use the ROD.\p"
-	.string "Focus your mind...\n"
-	.string "If you get a bite, pull on the ROD.\p"
-	.string "Sometimes you can snag something\n"
-	.string "immediately, but with bigger catches,\l"
-	.string "you need to time the pulls on your ROD\l"
-	.string "to haul them in.$"
-
-DewfordTown_Text_16B828:: @ 816B828
-	.string "Oh, is that so?\n"
-	.string "That’s too bad, then.$"
-
-DewfordTown_Text_16B84E:: @ 816B84E
-	.string "Yo!\n"
-	.string "How’s your fishing?$"
-
-DewfordTown_Text_16B866:: @ 816B866
-	.string "Is that right! That’s great!\n"
-	.string "Haul in some big ones!$"
-
-DewfordTown_Text_16B89A:: @ 816B89A
-	.string "Oh, hey, don’t get down on yourself!\n"
-	.string "I’ll give you a little fishing advice.\p"
-	.string "First, you want to face the water,\n"
-	.string "then use the ROD.\p"
-	.string "Focus your mind...\n"
-	.string "If you get a bite, pull the ROD.\p"
-	.string "Sometimes you can snag something\n"
-	.string "immediately, but with bigger catches,\l"
-	.string "you need to time the pulls on your ROD\l"
-	.string "to haul them in.$"
-
-DewfordTown_Text_16B9CE:: @ 816B9CE
-	.string "I like what’s hip, happening, and trendy.\n"
-	.string "I’m always checking it out.\p"
-	.string "Listen, have you heard about this new\n"
-	.string "“{STR_VAR_1}”?\p"
-	.string "That’s right!\n"
-	.string "Of course you know!\p"
-	.string "I mean, sheesh,\n"
-	.string "“{STR_VAR_1}”...\l"
-	.string "It’s the hottest thing in cool!\p"
-	.string "Wherever you’re from,\n"
-	.string "“{STR_VAR_1}”\l"
-	.string "is the biggest happening thing, right?$"
-
-DewfordTown_Text_16BADC:: @ 816BADC
-	.string "Hunh?\n"
-	.string "It’s not the hip and happening thing?\p"
-	.string "Well, hey, you have to tell me,\n"
-	.string "what’s new and what’s “in”?$"
-
-DewfordTown_Text_16BB44:: @ 816BB44
-	.string "Hunh?\n"
-	.string "“{STR_VAR_2}”?\p"
-	.string "... ...\p"
-	.string "...Uh... Yeah! That’s right!\n"
-	.string "Yeah, I knew that! Knew it all along!\p"
-	.string "Of course I know about that!\n"
-	.string "“{STR_VAR_2},” right?\p"
-	.string "Yeah, that’s it, it’s there!\n"
-	.string "Isn’t “{STR_VAR_2}”\l"
-	.string "the coolest, or what?\p"
-	.string "It’s the hippest thing in hip.\n"
-	.string "You think I’d not know about it?\p"
-	.string "“{STR_VAR_1}”...\n"
-	.string "It’s, like, so five minutes ago.\p"
-	.string "Now, “{STR_VAR_2}” is\n"
-	.string "what’s vital and in tune with the times!$"
-
-DewfordTown_Text_16BCA2:: @ 816BCA2
-	.string "Hmm...\n"
-	.string "“{STR_VAR_2},” huh?\p"
-	.string "But personally, I think\n"
-	.string "“{STR_VAR_1}”\l"
-	.string "is what’s real in cool.$"
-
-DewfordTown_Text_16BCE9:: @ 816BCE9
-	.string "Well, if you hear of any happening new\n"
-	.string "trends, come share them with me, okay?$"
-
-DewfordTown_Text_16BD37:: @ 816BD37
-	.string "Yeah, absolutely right!\p"
-	.string "“{STR_VAR_1}” is the\n"
-	.string "definition of “in” right now.$"
-
-UnknownString_816BD79: @ 816BD79
-	.string "“{STR_VAR_2}” is at\n"
-	.string "the pinnacle of cool right now.$"
-
 	.include "data/maps/text/LavaridgeTown.s"
 	.include "data/maps/text/FallarborTown.s"
 	.include "data/maps/text/VerdanturfTown.s"
 	.include "data/maps/text/PacifidlogTown.s"
 	.include "data/maps/text/Route101.s"
-PetalburgCity_Text_16D361:: @ 816D361
-	.string "WALLY: {PLAYER}...\n"
-	.string "POKéMON hide in tall grass like this,\l"
-	.string "don’t they?\p"
-	.string "Please watch me and see if I can\n"
-	.string "catch one properly.\p"
-	.string "...Whoa!$"
-
-PetalburgCity_Text_16D3DE:: @ 816D3DE
-	.string "WALLY: I did it... It’s my...\n"
-	.string "My POKéMON!$"
-
-PetalburgCity_Text_16D408:: @ 816D408
-	.string "{PLAYER}, thank you!\n"
-	.string "Let’s go back to the GYM!$"
-
 	.include "data/maps/text/Route102.s"
 	.include "data/maps/text/Route103.s"
-Route104_Text_16DA13:: @ 816DA13
-	.string "That seaside cottage is where\n"
-	.string "MR. BRINEY lives.\p"
-	.string "He was once a mighty sailor who never\n"
-	.string "feared the sea, however stormy.$"
-
-Route104_Text_16DA89:: @ 816DA89
-	.string "The sea, huh?\p"
-	.string "I wonder what it’s like at the bottom\n"
-	.string "of the sea?$"
-
-Route104_Text_16DAC9:: @ 816DAC9
-	.string "If you’re going to throw a POKé BALL,\n"
-	.string "weaken the wild POKéMON first.\p"
-	.string "It will be easier to catch if it’s been\n"
-	.string "poisoned, burned, or lulled to sleep.$"
-
-Route104_Text_16DB5C:: @ 816DB5C
-	.string "You’re a thief if you try to steal\n"
-	.string "someone else’s POKéMON.\p"
-	.string "You should throw POKé BALLS only at\n"
-	.string "wild POKéMON.$"
-
-Route104_Text_16DBC9:: @ 816DBC9
-	.string "Oh, no, I’m not a TRAINER.\p"
-	.string "But that’s right, if TRAINERS lock eyes,\n"
-	.string "it’s a challenge to battle.\p"
-	.string "If you don’t want to battle, stay out\n"
-	.string "of their sight.$"
-
-Route104_Text_16DC5F:: @ 816DC5F
-	.string "I like filling my mouth with seeds,\n"
-	.string "then spitting them out fast!\p"
-	.string "You can have this, so you try it out!\p"
-	.string "Use it on a POKéMON, and it will learn\n"
-	.string "a move for firing seeds rapidly.$"
-
-Route104_Text_16DD0E:: @ 816DD0E
-	.string "A word of advice!\p"
-	.string "A TM, TECHNICAL MACHINE, is good only\n"
-	.string "for one-time use.\p"
-	.string "Once you use it, it’s gone.\n"
-	.string "Think twice before using it!$"
-
-Route104_Text_16DD91:: @ 816DD91
-	.string "This FLOWER SHOP started selling\n"
-	.string "saplings recently.\p"
-	.string "It made me so happy, I went overboard\n"
-	.string "shopping. I don’t need this WHITE HERB\l"
-	.string "anymore. Would you take it, please?$"
-
-Route104_Text_16DE36:: @ 816DE36
-	.string "This FLOWER SHOP started selling\n"
-	.string "saplings recently.\p"
-	.string "It made me so happy, I went overboard\n"
-	.string "shopping. Where should I put them?$"
-
-Route104_Text_16DEB3:: @ 816DEB3
-	.string "MR. BRINEY’S COTTAGE$"
-
-Route104_Text_16DEC8:: @ 816DEC8
-	.string "ROUTE 1O4\n"
-	.string "{0x7C} PETALBURG CITY$"
-
-Route104_Text_16DEE3:: @ 816DEE3
-	.string "ROUTE 1O4\n"
-	.string "{0x79} RUSTBORO CITY$"
-
-Route104_Text_16DEFD:: @ 816DEFD
-	.string "PRETTY PETAL FLOWER SHOP$"
-
-Route104_Text_16DF16:: @ 816DF16
-	.string "TRAINER TIPS\p"
-	.string "In the HOENN region there are pairs\n"
-	.string "of TRAINERS who challenge others\l"
-	.string "for 2-on-2 POKéMON battles called\l"
-	.string "DOUBLE BATTLES.\p"
-	.string "In a DOUBLE BATTLE, the TRAINER must\n"
-	.string "send out two POKéMON, the one at the\l"
-	.string "left of the list and the top one.\l"
-	.string "Watch how POKéMON are lined up.$"
-
+	.include "data/maps/text/Route104.s"
+	.include "data/maps/text/Route105.s"
 	.include "data/maps/text/Route106.s"
-DewfordTown_Text_16E080:: @ 816E080
-	.string "MR. BRINEY: Ahoy!\n"
-	.string "We’ve made land in SLATEPORT!\p"
-	.string "I suppose you’re going to visit CAPT.\n"
-	.string "STERN and deliver the DEVON GOODS?$"
-
-Route109_Text_16E0F9:: @ 816E0F9
-	.string "MR. BRINEY: Aren’t you delivering the\n"
-	.string "DEVON GOODS?\p"
-	.string "Or were you meaning to sail back to\n"
-	.string "DEWFORD?$"
-
-Route109_Text_16E159:: @ 816E159
-	.string "MR. BRINEY: DEWFORD it is, then!\p"
-	.string "Anchors aweigh!\n"
-	.string "PEEKO, we’re setting sail, my darling!$"
-
-Route109_Text_16E1B1:: @ 816E1B1
-	.string "MR. BRINEY: Then you go on and deliver\n"
-	.string "the DEVON GOODS. I’ll be waiting.$"
-
-DewfordTown_Text_16E1FA:: @ 816E1FA
-	.string "MR. BRINEY: Ahoy! We’ve made land in\n"
-	.string "SLATEPORT!\p"
-	.string "You just go on and tell me whenever\n"
-	.string "you want to set sail again!$"
-
-Route109_Text_16E26A:: @ 816E26A
-	.string "MR. BRINEY: Ahoy!\n"
-	.string "For you, I’ll go out to sea anytime!\p"
-	.string "Now, my friend, where are we bound?$"
-
-Route109_Text_16E2C5:: @ 816E2C5
-	.string "MR. BRINEY: You just tell me whenever\n"
-	.string "you need to set sail again!$"
-
-Route109_Text_16E307:: @ 816E307
-	.string "Yo, TRAINERS!\n"
-	.string "Whether you’re hot to trot,\l"
-	.string "or cool cat not,\l"
-	.string "chill at my papa’s spot!$"
-
-Route109_Text_16E35B:: @ 816E35B
-	.string "Little kids can dart around so quickly...\p"
-	.string "You don’t dare take your eyes off them\n"
-	.string "for an instant. It’s very taxing.\p"
-	.string "Mine’s with my POKéMON, so they should\n"
-	.string "be okay, but...$"
-
-Route109_Text_16E405:: @ 816E405
-	.string "Our sand castle’s taking a long time\n"
-	.string "to make.$"
-
-Route109_Text_16E433:: @ 816E433
-	.string "You can have this!$"
-
-Route109_Text_16E446:: @ 816E446
-	.string "We’re going to get all the sand from\n"
-	.string "the beach and make a big castle!\p"
-	.string "And then we’re going to be a king and\n"
-	.string "queen.\p"
-	.string "We’ll let you be a servant.$"
-
-Route109_Text_16E4D5:: @ 816E4D5
-	.string "The water around these parts is clean.\p"
-	.string "But, I get my ZIGZAGOON to pick up\n"
-	.string "litter from the shoreline at times.\p"
-	.string "Dirty water becomes rain and joins our\n"
-	.string "rivers, which we drink from...\p"
-	.string "If we pollute the sea, it all comes\n"
-	.string "back to haunt us eventually.$"
-
-Route109_Text_16E5CA:: @ 816E5CA
-	.string "ZIGZAGOON: Guguu?$"
-
-Route109_Text_16E5DC:: @ 816E5DC
-	.string "SEASHORE HOUSE\p"
-	.string "“May hot battles rage on hot sands!\n"
-	.string "The place for hot TRAINERS!”$"
-
-Route109_Text_16E62C:: @ 816E62C
-	.string "TRAINER TIPS\p"
-	.string "POKéMON at the same level may not\n"
-	.string "always have identical stats.\p"
-	.string "POKéMON raised by TRAINERS are said\n"
-	.string "to grow stronger than wild POKéMON.$"
-
+	.include "data/maps/text/Route107.s"
+	.include "data/maps/text/Route108.s"
+	.include "data/maps/text/Route109.s"
 	.include "data/maps/text/Route110.s"
 	.include "data/maps/text/Route111.s"
 	.include "data/maps/text/Route112.s"
@@ -1217,287 +475,14 @@ Route109_Text_16E62C:: @ 816E62C
 	.include "data/maps/text/Route118.s"
 	.include "data/maps/text/Route119.s"
 	.include "data/maps/text/Route120.s"
-Route119_Text_171B93:: @ 8171B93
-Route120_Text_171B93:: @ 8171B93
-	.string "Something unseeable is in the way.$"
-
-Route119_Text_171BB6:: @ 8171BB6
-	.string "Something unseeable is in the way.\p"
-	.string "Want to use the DEVON SCOPE?$"
-
-Route119_Text_171BF6:: @ 8171BF6
-	.string "{PLAYER} used the DEVON SCOPE.\p"
-	.string "An invisible POKéMON became completely\n"
-	.string "visible!\p"
-	.string "The startled POKéMON attacked!$"
-
-Route120_Text_171C5E:: @ 8171C5E
-	.string "ROUTE 120\n"
-	.string "{0x7B} FORTREE CITY$"
-
-Route120_Text_171C77:: @ 8171C77
-	.string "{0x7C} ROUTE 121\n"
-	.string "{0x7B} ROUTE 120$"
-
 	.include "data/maps/text/Route121.s"
 	.include "data/maps/text/Route123.s"
 	.include "data/maps/text/Route124.s"
 	.include "data/maps/text/Route128.s"
 	.include "data/maps/text/LittlerootTown_BrendansHouse_1F.s"
-	.include "data/maps/text/LittlerootTown_MaysHouse_1F.s"
-LittlerootTown_BrendansHouse_1F_Text_1725A3:: @ 81725A3
-	.string "MOM: Oh! {PLAYER}, {PLAYER}!\n"
-	.string "Quick! Come quickly!$"
-
-LittlerootTown_BrendansHouse_1F_Text_1725C9:: @ 81725C9
-LittlerootTown_MaysHouse_1F_Text_1725C9:: @ 81725C9
-	.string "MOM: Look! It’s PETALBURG GYM!\n"
-	.string "Maybe DAD will be on!$"
-
-LittlerootTown_BrendansHouse_1F_Text_1725FE:: @ 81725FE
-LittlerootTown_MaysHouse_1F_Text_1725FE:: @ 81725FE
-	.string "MOM: Oh... It’s over.\p"
-	.string "I think DAD was on, but we missed him.\n"
-	.string "Too bad.$"
-
-LittlerootTown_BrendansHouse_1F_Text_172644:: @ 8172644
-LittlerootTown_MaysHouse_1F_Text_172644:: @ 8172644
-	.string "Oh, yes.\n"
-	.string "One of DAD’s friends lives in town.\p"
-	.string "PROF. BIRCH is his name.\p"
-	.string "He lives right next door, so you should\n"
-	.string "go over and introduce yourself.$"
-
-LittlerootTown_BrendansHouse_1F_Text_1726D2:: @ 81726D2
-	.string "MOM: See you, honey!$"
-
-LittlerootTown_BrendansHouse_1F_Text_1726E7:: @ 81726E7
-	.string "MOM: Did you introduce yourself to\n"
-	.string "PROF. BIRCH?$"
-
-LittlerootTown_BrendansHouse_1F_Text_172717:: @ 8172717
-	.string "MOM: How are you doing, {PLAYER}?\n"
-	.string "You look a little tired.\p"
-	.string "I think you should rest a bit.$"
-
-LittlerootTown_BrendansHouse_1F_Text_17276B:: @ 817276B
-	.string "MOM: Take care, honey!$"
-
-LittlerootTown_BrendansHouse_1F_Text_172782:: @ 8172782
-	.string "MOM: Oh? Did DAD give you that BADGE?\p"
-	.string "Then here’s something from your MOM!$"
-
-LittlerootTown_BrendansHouse_1F_Text_1727CD:: @ 81727CD
-	.string "Don’t push yourself too hard, dear.\n"
-	.string "You can always come home.\p"
-	.string "Go for it, honey!$"
-
-LittlerootTown_BrendansHouse_1F_Text_17281D:: @ 817281D
-	.string "Gyao, gyao gyaoh...$"
-
-LittlerootTown_BrendansHouse_1F_Text_172831:: @ 8172831
-	.string "Gwagwah gwah...$"
-
-LittlerootTown_BrendansHouse_1F_Text_172841:: @ 8172841
-	.string "INTERVIEWER: ...We brought you this\n"
-	.string "report from in front of PETALBURG GYM.$"
-
-UnknownString_817288C: @ 817288C
-	.string "There is a movie on TV.\p"
-	.string "Two men are dancing on a big piano\n"
-	.string "keyboard.\p"
-	.string "Better get going!$"
-
-UnknownString_81728E3: @ 81728E3
-	.string "It’s the instruction booklet for the\n"
-	.string "RUNNING SHOES.\p"
-	.string "“Press the B Button to run while\n"
-	.string "wearing your RUNNING SHOES.\p"
-	.string "“Lace up your RUNNING SHOES and hit\n"
-	.string "the road running!”$"
-
-LittlerootTown_BrendansHouse_1F_Text_17298B:: @ 817298B
-	.string "DAD: Hm?\p"
-	.string "Hey, it’s {PLAYER}!\p"
-	.string "It’s been a while since I saw you,\n"
-	.string "but you look...stronger, somehow.\p"
-	.string "That’s the impression I get.\n"
-	.string "But your old man hasn’t given up yet!\p"
-	.string "Oh, yes, I have something for you.\n"
-	.string "This came to you from someone named\l"
-	.string "MR. BRINEY.$"
-
-LittlerootTown_BrendansHouse_1F_Text_172A7D:: @ 8172A7D
-	.string "DAD: Hm, a TICKET for a ferry?\p"
-	.string "If I recall, there are ferry ports in\n"
-	.string "SLATEPORT and LILYCOVE.\p"
-	.string "{PLAYER}, if you have ambition as a\n"
-	.string "TRAINER, go to the BATTLE TOWER.\p"
-	.string "It should teach you that there is\n"
-	.string "no end to a TRAINER’s chosen path.$"
-
-LittlerootTown_BrendansHouse_1F_Text_172B5E:: @ 8172B5E
-	.string "I’d better get back to PETALBURG GYM.\p"
-	.string "MOM, thanks for looking after the house\n"
-	.string "while I’m away.$"
-
-LittlerootTown_BrendansHouse_1F_Text_172BBC:: @ 8172BBC
-	.string "MOM: That DAD of yours...\p"
-	.string "He comes home for the first time in a\n"
-	.string "while, but all he talks about is POKéMON.\p"
-	.string "He should relax and stay a little longer.$"
-
-UnknownString_8172C50: @ 8172C50
-	.string "We bring you a special news bulletin.\p"
-	.string "We’ve received reports of a blue FLYING\n"
-	.string "POKéMON in various HOENN locales.\p"
-	.string "The identity of this POKéMON has not\n"
-	.string "yet been determined.\p"
-	.string "We now return you to your regular\n"
-	.string "movie presentation.$"
-
-UnknownString_8172D30: @ 8172D30
-	.string "We bring you a special news bulletin.\p"
-	.string "We’ve received reports of a red FLYING\n"
-	.string "POKéMON in various HOENN locales.\p"
-	.string "The identity of this POKéMON has not\n"
-	.string "yet been determined.\p"
-	.string "We now return you to your regular\n"
-	.string "movie presentation.$"
-
-UnknownString_8172E0F: @ 8172E0F
-	.string "Gau gau!$"
-
 	.include "data/maps/text/LittlerootTown_BrendansHouse_2F.s"
-LittlerootTown_BrendansHouse_1F_Text_1730C2:: @ 81730C2
-LittlerootTown_MaysHouse_1F_Text_1730C2:: @ 81730C2
-	.string "Oh, hello. And you are?\p"
-	.string "... ... ... ... ... ... ... ... ...\n"
-	.string "... ... ... ... ... ... ... ... ...\p"
-	.string "Oh, you’re {PLAYER}{KUN}, our new next-door\n"
-	.string "neighbor! Hi!\p"
-	.string "We have a {STR_VAR_1} about the same\n"
-	.string "age as you.\p"
-	.string "Our {STR_VAR_1} was excited about making\n"
-	.string "a new friend.\p"
-	.string "Our {STR_VAR_1} is upstairs, I think.$"
-
-LittlerootTown_BrendansHouse_1F_Text_1731C6:: @ 81731C6
-	.string "Our {STR_VAR_1} is upstairs, I think.$"
-
-LittlerootTown_BrendansHouse_1F_Text_1731E3:: @ 81731E3
-	.string "Where has my husband gone?\n"
-	.string "Just when {PLAYER}{KUN} is visiting, too...\p"
-	.string "That man can never sit still for long...\n"
-	.string "He might be at his LAB.$"
-
-LittlerootTown_BrendansHouse_1F_Text_173262:: @ 8173262
-	.string "Oh, {RIVAL} has gone out somewhere.\p"
-	.string "Like father, like child.\n"
-	.string "{RIVAL} can’t stay quietly at home.$"
-
-LittlerootTown_BrendansHouse_1F_Text_1732B9:: @ 81732B9
-	.string "I think it’s wonderful for people to\n"
-	.string "travel with POKéMON.\p"
-	.string "But you should go home every so often\n"
-	.string "to let your mother know you’re okay.\p"
-	.string "She might not say it, but I’m sure she\n"
-	.string "worries about you, {PLAYER}{KUN}.$"
-
-LittlerootTown_BrendansHouse_2F_Text_17337E:: @ 817337E
-	.string "POKéMON fully restored!\n"
-	.string "Items ready, and... Huh?$"
-
-LittlerootTown_BrendansHouse_2F_Text_1733AF:: @ 81733AF
-	.string "Huh?\n"
-	.string "Who... Who are you?\p"
-	.string "... ... ... ... ... ... ... ...\n"
-	.string "... ... ... ... ... ... ... ...\p"
-	.string "Oh, you’re {PLAYER}{KUN}.\n"
-	.string "So your move was today.\p"
-	.string "Um... I’m MAY.\n"
-	.string "Glad to meet you!\p"
-	.string "I...\n"
-	.string "I have this dream of becoming friends\l"
-	.string "with POKéMON all over the world.\p"
-	.string "I... I heard about you, {PLAYER}{KUN}, from\n"
-	.string "my dad, PROF. BIRCH.\p"
-	.string "I was hoping that you would be nice,\n"
-	.string "{PLAYER}{KUN}, and that we could be friends.\p"
-	.string "Oh, this is silly, isn’t it?\n"
-	.string "I... I’ve just met you, {PLAYER}{KUN}.\p"
-	.string "Eheheh...\p"
-	.string "Oh, no! I forgot!\p"
-	.string "I was supposed to go help Dad catch\n"
-	.string "some wild POKéMON!\p"
-	.string "{PLAYER}{KUN}, I’ll catch you later!$"
-
-LittlerootTown_BrendansHouse_2F_Text_1735C9:: @ 81735C9
-	.string "POKéMON fully restored...\n"
-	.string "Items all packed, and...$"
-
-LittlerootTown_BrendansHouse_2F_Text_1735FC:: @ 81735FC
-	.string "Hey!\n"
-	.string "You...\p"
-	.string "Who are you?\p"
-	.string "Oh, you’re {PLAYER}, aren’t you?\n"
-	.string "Moved in next door, right?\p"
-	.string "I didn’t know that you’re a girl.\p"
-	.string "Dad, PROF. BIRCH, said that our new\n"
-	.string "next-door neighbor is a GYM LEADER’s\l"
-	.string "kid, so I assumed you’d be a guy.\p"
-	.string "My name’s BRENDAN.\n"
-	.string "So, hi, neighbor!\p"
-	.string "Huh? Hey, {PLAYER}, don’t you have\n"
-	.string "a POKéMON?\p"
-	.string "Do you want me to go catch you one?\p"
-	.string "Aw, darn, I forgot...\p"
-	.string "I’m supposed to go help my dad catch\n"
-	.string "some wild POKéMON.\p"
-	.string "Some other time, okay?$"
-
-LittlerootTown_BrendansHouse_2F_Text_1737AE:: @ 81737AE
-	.string "MAY: {PLAYER}{KUN}!\p"
-	.string "I was just checking my POKéDEX.\p"
-	.string "There’s still a lot of POKéMON that\n"
-	.string "I’ve seen but haven’t caught.\p"
-	.string "And there are many others that\n"
-	.string "I think will evolve.\p"
-	.string "I wonder where I should go catch\n"
-	.string "some POKéMON next?$"
-
-LittlerootTown_BrendansHouse_2F_Text_173883:: @ 8173883
-	.string "MAY: I wonder where I should go catch\n"
-	.string "some POKéMON next?\p"
-	.string "Wouldn’t it be funny if we ran into each\n"
-	.string "other, {PLAYER}{KUN}?$"
-
-LittlerootTown_BrendansHouse_2F_Text_1738F2:: @ 81738F2
-	.string "BRENDAN: Hey, it’s {PLAYER}.\p"
-	.string "I was just checking out my POKéDEX.\p"
-	.string "There are still many POKéMON that\n"
-	.string "I need to catch, I know, but this\l"
-	.string "is looking pretty good.\p"
-	.string "Checking this POKéDEX out gives me\n"
-	.string "the urge to hit the road again.$"
-
-LittlerootTown_BrendansHouse_2F_Text_1739CC:: @ 81739CC
-	.string "BRENDAN: I’m having a hard time deciding\n"
-	.string "where I should catch POKéMON next.\p"
-	.string "Hey, {PLAYER}, if I see you while I’m out\n"
-	.string "catching POKéMON, I can pitch you a\l"
-	.string "battle if you’d like.$"
-
-UnknownString_8173A76: @ 8173A76
-	.string "It’s lined with POKéMON picture books.$"
-
-UnknownString_8173A9D: @ 8173A9D
-	.string "POKéMON SPECIES & HABITATS...\n"
-	.string "HUMAN & POKéMON COEXISTENCE...\l"
-	.string "POKéMONOLOGY FOR BEGINNERS...\p"
-	.string "It’s brimming with books written by\n"
-	.string "PROF. BIRCH.$"
-
+	.include "data/maps/text/LittlerootTown_MaysHouse_1F.s"
+	.include "data/maps/text/LittlerootTown_MaysHouse_2F.s"
 	.include "data/maps/text/LittlerootTown_ProfessorBirchsLab.s"
 	.include "data/maps/text/OldaleTown_House1.s"
 	.include "data/maps/text/OldaleTown_House2.s"
@@ -1588,182 +573,6 @@ UnknownString_8173A9D: @ 8173A9D
 	.include "data/maps/text/LilycoveCity_LilycoveMuseum_1F.s"
 	.include "data/maps/text/LilycoveCity_LilycoveMuseum_2F.s"
 	.include "data/maps/text/LilycoveCity_ContestLobby.s"
-FallarborTown_ContestLobby_Text_188559:: @ 8188559
-LilycoveCity_ContestLobby_Text_188559:: @ 8188559
-	.string "We hope you will participate another\n"
-	.string "time.$"
-
-LilycoveCity_ContestLobby_Text_188584:: @ 8188584
-	.string "Would you like to enter a CONTEST?$"
-
-LilycoveCity_ContestLobby_Text_1885A7:: @ 81885A7
-	.string "When four players are ready, connect\n"
-	.string "over a Game Link cable, and register\l"
-	.string "with me, please.\p"
-	.string "Please choose the same CONTEST\n"
-	.string "as your fellow contestants.\p"
-	.string "The CONTEST begins as soon as all\n"
-	.string "players register their entry.\p"
-	.string "After that, the usual CONTEST rules\n"
-	.string "apply.$"
-
-UnknownString_81886A8: @ 81886A8
-	.string "Once you have linked up, please choose\n"
-	.string "the CONTEST.$"
-
-LilycoveCity_ContestLobby_Text_1886DC:: @ 81886DC
-	.string "Which CONTEST would you like to enter?$"
-
-LilycoveCity_ContestLobby_Text_188703:: @ 8188703
-	.string "Which POKéMON would you like to enter?$"
-
-LilycoveCity_ContestLobby_Text_18872A:: @ 818872A
-	.string "Transmitting...$"
-
-LilycoveCity_ContestLobby_Text_18873A:: @ 818873A
-	.string "Transmission error...$"
-
-LilycoveCity_ContestLobby_Text_188750:: @ 8188750
-	.string "You may have chosen a different\n"
-	.string "CONTEST than another player.$"
-
-LilycoveCity_ContestLobby_Text_18878D:: @ 818878D
-	.string "You may have made a different\n"
-	.string "choice than another player.$"
-
-LilycoveCity_ContestLobby_Text_1887C7:: @ 81887C7
-	.string "Please wait.\n"
-	.string "Press the B Button to cancel...$"
-
-LilycoveCity_ContestLobby_Text_1887F4:: @ 81887F4
-	.string "We hope you will participate\n"
-	.string "another time.$"
-
-LilycoveCity_ContestLobby_Text_18881F:: @ 818881F
-	.string "Transmission error.\n"
-	.string "Please try again.$"
-
-LilycoveCity_ContestLobby_Text_188845:: @ 8188845
-	.string "Your POKéMON will be entered in\n"
-	.string "the CONTEST.\p"
-	.string "Your POKéMON is Entry No. {STR_VAR_2}.$"
-
-UnknownString_8188890: @ 8188890
-	.string "Entry No. {STR_VAR_2} is assigned this color\n"
-	.string "for this CONTEST.$"
-
-LilycoveCity_ContestLobby_Text_1888C6:: @ 81888C6
-	.string "The CONTEST will begin shortly.$"
-
-UnknownString_81888E6: @ 81888E6
-	.string "Please come through this way.\n"
-	.string "Good luck!$"
-
-LilycoveCity_ContestLobby_Text_18890F:: @ 818890F
-	.string "Congratulations!\p"
-	.string "I did a painting of your POKéMON to\n"
-	.string "commemorate its victory...\p"
-	.string "Well, your POKéMON’s appeals were\n"
-	.string "so fantastic, it spurred me into\l"
-	.string "painting better than I usually do.\l"
-	.string "Look, see?$"
-
-UnknownString_81889D0: @ 81889D0
-	.string "The screen switches to display the\n"
-	.string "painting.$"
-
-LilycoveCity_ContestLobby_Text_1889FD:: @ 81889FD
-	.string "What do you think? I’m confident in\n"
-	.string "what I’ve done, but do you like it?\p"
-	.string "A work of this caliber, it wouldn’t look\n"
-	.string "out of place in an art museum.\p"
-	.string "Huh? An art museum really is looking\n"
-	.string "for paintings?\p"
-	.string "Do you think I should take this there?$"
-
-LilycoveCity_ContestLobby_Text_188AE8:: @ 8188AE8
-	.string "What, really? Then, sure, I will take\n"
-	.string "this painting there right now.\p"
-	.string "I’ll give it a proper title, too.\p"
-	.string "I hope they’ll like it and consider\n"
-	.string "exhibiting this.\p"
-	.string "Please check if they did accept this.\n"
-	.string "Thank you!$"
-
-LilycoveCity_ContestLobby_Text_188BB5:: @ 8188BB5
-	.string "Oh, that’s right!\p"
-	.string "As a memento of me painting your\n"
-	.string "POKéMON, please take this.$"
-
-LilycoveCity_ContestLobby_Text_188C03:: @ 8188C03
-	.string "{PLAYER} received a RIBBON.$"
-
-LilycoveCity_ContestLobby_Text_188C19:: @ 8188C19
-	.string "{PLAYER} put the RIBBON on\n"
-	.string "{STR_VAR_1}.$"
-
-LilycoveCity_ContestLobby_Text_188C32:: @ 8188C32
-	.string "Okay, see you!$"
-
-LilycoveCity_ContestLobby_Text_188C41:: @ 8188C41
-	.string "Oh... Then, I guess I’ll just take\n"
-	.string "this home with me...\p"
-	.string "But, you know, I would like to take\n"
-	.string "this to the art museum... Okay?$"
-
-LilycoveCity_ContestLobby_Text_188CBD:: @ 8188CBD
-	.string "Oh, fine, that’s the way it is.\n"
-	.string "I will hang this in my own house.\p"
-	.string "I’ll just have to try harder next time.\n"
-	.string "Well, be seeing you.$"
-
-LilycoveCity_ContestLobby_Text_188D3C:: @ 8188D3C
-	.string "Hoo, boy... Master Rank CONTESTS,\n"
-	.string "here I come.\p"
-	.string "The world will know that my dearest\n"
-	.string "POKéMON is the cutest being in all\l"
-	.string "existence. The time has come!\l"
-	.string "Uheheheh.$"
-
-LilycoveCity_ContestLobby_Text_188DDA:: @ 8188DDA
-	.string "You can see a whole variety of\n"
-	.string "POKéMON here.\p"
-	.string "That’s why I make this place a regular\n"
-	.string "part of my daily stroll.$"
-
-LilycoveCity_ContestLobby_Text_188E47:: @ 8188E47
-	.string "Oh, dear! They still haven’t given\n"
-	.string "you a CONTEST PASS?\p"
-	.string "You should go get one in VERDANTURF\n"
-	.string "TOWN right away.\p"
-	.string "It’s such a thrill having others see\n"
-	.string "POKéMON that you’ve raised with care\l"
-	.string "and love.$"
-
-LilycoveCity_ContestLobby_Text_188F07:: @ 8188F07
-	.string "When you get up to the Master Rank\n"
-	.string "CONTESTS, you get your eyes opened\l"
-	.string "to striking POKéMON that just scream\l"
-	.string "to be painted.$"
-
-LilycoveCity_ContestLobby_Text_188F81:: @ 8188F81
-	.string "The TOUGHNESS CONTEST is like\n"
-	.string "extreme, man!\p"
-	.string "Those muscular appeals...\n"
-	.string "Cascading sweat... I swoon!$"
-
-LilycoveCity_ContestLobby_Text_188FE3:: @ 8188FE3
-	.string "Day in and day out, I lavished my care\n"
-	.string "on this POKéMON.\p"
-	.string "Its condition is peaking.\n"
-	.string "Today, victory is mine!$"
-
-LilycoveCity_ContestLobby_Text_18904D:: @ 818904D
-	.string "I made {POKEBLOCK}S with Mom, Dad and\n"
-	.string "Big Sister. They turned out great!\p"
-	.string "I bet you can make smoother, better\n"
-	.string "{POKEBLOCK}S if you have more people.$"
-
 	.include "data/maps/text/LilycoveCity_ContestHall.s"
 	.include "data/maps/text/LilycoveCity_PokemonCenter_1F.s"
 	.include "data/maps/text/LilycoveCity_PokemonTrainerFanClub.s"
@@ -1792,99 +601,8 @@ LilycoveCity_ContestLobby_Text_18904D:: @ 818904D
 	.include "data/maps/text/MossdeepCity_SpaceCenter_2F.s"
 	.include "data/maps/text/MossdeepCity_GameCorner_1F.s"
 	.include "data/maps/text/MossdeepCity_GameCorner_B1F.s"
-MossdeepCity_GameCorner_1F_Text_18E7B1:: @ 818E7B1
-	.string "So, it became a standoff.\p"
-	.string "It was a brilliant match in which\n"
-	.string "neither side conceded a step!$"
-
-UnknownString_818E80B: @ 818E80B
-	.string "{STR_VAR_1}$"
-
-MossdeepCity_GameCorner_1F_Text_18E80E:: @ 818E80E
-	.string "That was superlative!\p"
-	.string "Why, it was like seeing myself in my\n"
-	.string "youth again!$"
-
-UnknownString_818E856: @ 818E856
-	.string "{STR_VAR_1}$"
-
-MossdeepCity_GameCorner_1F_Text_18E859:: @ 818E859
-	.string "Ah, too bad for you!\p"
-	.string "But it was a good match.\n"
-	.string "I hope you can win next time.$"
-
 	.include "data/maps/text/SootopolisCity_Gym_1F.s"
 	.include "data/maps/text/SootopolisCity_Gym_B1F.s"
-SootopolisCity_Gym_1F_Text_18F0CA:: @ 818F0CA
-	.string "Allow me to formally introduce\n"
-	.string "myself.\p"
-	.string "I am WALLACE.\n"
-	.string "The GYM LEADER of SOOTOPOLIS.\p"
-	.string "There’s something about you...\n"
-	.string "A difference in your demeanor.\p"
-	.string "I think I sense that in you.\p"
-	.string "What happened inside the CAVE OF\n"
-	.string "ORIGIN, and what you did, I will likely\l"
-	.string "learn through our upcoming battle.\p"
-	.string "Now, show me. Show me the power you\n"
-	.string "wield with your POKéMON.\p"
-	.string "And I, in turn, shall present you with\n"
-	.string "a performance of illusions in water\l"
-	.string "by me and my POKéMON!$"
-
-SootopolisCity_Gym_1F_Text_18F282:: @ 818F282
-	.string "Bravo.\p"
-	.string "I realize now your authenticity and\n"
-	.string "magnificence as a POKéMON TRAINER.\p"
-	.string "I find much joy in having met you and\n"
-	.string "your POKéMON.\p"
-	.string "You have proven yourself worthy of\n"
-	.string "the RAIN BADGE. Accept it.$"
-
-SootopolisCity_Gym_1F_Text_18F342:: @ 818F342
-	.string "{PLAYER} received the RAIN BADGE\n"
-	.string "from WALLACE.$"
-
-SootopolisCity_Gym_1F_Text_18F36B:: @ 818F36B
-	.string "Having that BADGE assures you the\n"
-	.string "full obedience of all your POKéMON to\l"
-	.string "every command you make.\p"
-	.string "The BADGE also allows the use of the\n"
-	.string "HM move WATERFALL to scale walls\l"
-	.string "of cascading water.\p"
-	.string "And, so that you never forget the\n"
-	.string "battle we shared, take this...$"
-
-SootopolisCity_Gym_1F_Text_18F466:: @ 818F466
-	.string "The TM I handed you contains\n"
-	.string "WATER PULSE.\p"
-	.string "In use, it will occasionally confuse\n"
-	.string "the target with ultrasonic waves.$"
-
-SootopolisCity_Gym_1F_Text_18F4D7:: @ 818F4D7
-	.string "TRAINERS who have gathered all the\n"
-	.string "GYM BADGES of HOENN should make way\l"
-	.string "for the ultimate destination.\p"
-	.string "The POKéMON LEAGUE.\p"
-	.string "Travel to the easternmost reaches\n"
-	.string "of HOENN, to the island EVER GRANDE.\l"
-	.string "The POKéMON LEAGUE is there.$"
-
-SootopolisCity_Gym_1F_Text_18F5B4:: @ 818F5B4
-	.string "There remains but one BADGE to\n"
-	.string "obtain in HOENN.\p"
-	.string "If you wish to challenge the POKéMON\n"
-	.string "LEAGUE, you must obtain the last\l"
-	.string "BADGE from the GYM in FORTREE.$"
-
-SootopolisCity_Gym_1F_Text_18F649:: @ 818F649
-	.string "SOOTOPOLIS CITY POKéMON GYM$"
-
-SootopolisCity_Gym_1F_Text_18F665:: @ 818F665
-	.string "SOOTOPOLIS CITY POKéMON GYM\p"
-	.string "WALLACE’S CERTIFIED TRAINERS:\n"
-	.string "{PLAYER}$"
-
 	.include "data/maps/text/SootopolisCity_PokemonCenter_1F.s"
 	.include "data/maps/text/SootopolisCity_Mart.s"
 	.include "data/maps/text/SootopolisCity_House1.s"
@@ -1908,12 +626,6 @@ SootopolisCity_Gym_1F_Text_18F665:: @ 818F665
 	.include "data/maps/text/Route111_OldLadysRestStop.s"
 	.include "data/maps/text/Route112_CableCarStation.s"
 	.include "data/maps/text/MtChimney_CableCarStation.s"
-Route112_CableCarStation_Text_1925A9:: @ 81925A9
-	.string "Please step this way.$"
-
-MtChimney_CableCarStation_Text_1925BF:: @ 81925BF
-	.string "Please ride with us another time.$"
-
 	.include "data/maps/text/Route114_FossilManiacsHouse.s"
 	.include "data/maps/text/Route114_FossilManiacsTunnel.s"
 	.include "data/maps/text/Route114_LanettesHouse.s"
@@ -1953,207 +665,12 @@ MtChimney_CableCarStation_Text_1925BF:: @ 81925BF
 	.include "data/maps/text/AbandonedShip_Rooms2_B1F.s"
 	.include "data/maps/text/AbandonedShip_Rooms2_1F.s"
 	.include "data/maps/text/AbandonedShip_CaptainsOffice.s"
-AbandonedShip_HiddenFloorCorridors_Text_198DC0:: @ 8198DC0
-	.string "The door is locked.\p"
-	.string "“RM. 1” is painted on the door.$"
-
-AbandonedShip_HiddenFloorCorridors_Text_198DF4:: @ 8198DF4
-	.string "The door is locked.\p"
-	.string "“RM. 2” is painted on the door.$"
-
-AbandonedShip_HiddenFloorCorridors_Text_198E28:: @ 8198E28
-	.string "The door is locked.\p"
-	.string "“RM. 4” is painted on the door.$"
-
-AbandonedShip_HiddenFloorCorridors_Text_198E5C:: @ 8198E5C
-	.string "The door is locked.\p"
-	.string "“RM. 6” is painted on the door.$"
-
-AbandonedShip_HiddenFloorCorridors_Text_198E90:: @ 8198E90
-	.string "{PLAYER} inserted and turned the\n"
-	.string "KEY.\p"
-	.string "The inserted KEY stuck fast, but the\n"
-	.string "door opened.$"
-
 	.include "data/maps/text/AbandonedShip_HiddenFloorRooms.s"
 	.include "data/maps/text/SecretBase_RedCave1.s"
 	.include "data/maps/text/InsideOfTruck.s"
 	.include "data/maps/text/SSTidalCorridor.s"
-	.include "data/maps/text/SSTidalRooms.s"
-SSTidalCorridor_Text_199088:: @ 8199088
-	.string "We hope you enjoy your voyage on\n"
-	.string "our ferry.$"
-
-SSTidalCorridor_Text_1990B4:: @ 81990B4
-SSTidalRooms_Text_1990B4:: @ 81990B4
-	.string "We have made land in SLATEPORT CITY.\n"
-	.string "Thank you for sailing with us.$"
-
-SSTidalRooms_Text_1990F8:: @ 81990F8
-	.string "We have made land in LILYCOVE CITY.\n"
-	.string "Thank you for sailing with us.$"
-
-SSTidalCorridor_Text_19913B:: @ 819913B
-	.string "It’ll be some time before we make land,\n"
-	.string "I reckon.\p"
-	.string "You can rest up in your cabin if you’d\n"
-	.string "like. Your cabin’s No. 2.\p"
-	.string "The bed in there is soft and plushy.\n"
-	.string "I can attest to how comfy it is!$"
-
-SSTidalCorridor_Text_1991F4:: @ 81991F4
-	.string "We’ve arrived!$"
-
-SSTidalCorridor_Text_199203:: @ 8199203
-	.string "Go visit other cabins.\n"
-	.string "TRAINERS bored of the boat trip will\l"
-	.string "be itching to battle.$"
-
-SSTidalCorridor_Text_199255:: @ 8199255
-	.string "Enjoy your cruise!$"
-
-SSTidalCorridor_Text_199268:: @ 8199268
-	.string "The horizon spreads beyond the\n"
-	.string "porthole.$"
-
-SSTidalCorridor_Text_199291:: @ 8199291
-	.string "MR. BRINEY: Welcome aboard, {PLAYER}{KUN}!\p"
-	.string "They made me honorary captain of the\n"
-	.string "S.S. TIDAL!\p"
-	.string "You can call me CAPTAIN BRINEY now!\p"
-	.string "You know, I retired once before, but\n"
-	.string "when I saw this majestic ship...\p"
-	.string "Let me just say, it stirred my sleeping\n"
-	.string "soul as a sailor!$"
-
-SSTidalCorridor_Text_199388:: @ 8199388
-	.string "PEEKO: Pihyo pihyohyo...$"
-
-SSTidalCorridor_Text_1993A1:: @ 81993A1
-	.string "Cabin 1$"
-
-SSTidalCorridor_Text_1993A9:: @ 81993A9
-	.string "Cabin 2$"
-
-SSTidalCorridor_Text_1993B1:: @ 81993B1
-	.string "Cabin 3$"
-
-SSTidalCorridor_Text_1993B9:: @ 81993B9
-	.string "Cabin 4$"
-
 	.include "data/maps/text/SSTidalLowerDeck.s"
-SSTidalRooms_Text_19956B:: @ 819956B
-	.string "It’s a bed.\n"
-	.string "Let’s take a rest.$"
-
-SSTidalRooms_Text_19958A:: @ 819958A
-	.string "Go back and forth between LILYCOVE\n"
-	.string "and SLATEPORT, that’s what I do.\p"
-	.string "It’s my hobby - going from port to port\n"
-	.string "to take in POKéMON CONTESTS.$"
-
-SSTidalRooms_Text_199613:: @ 8199613
-	.string "That was an enjoyable match!$"
-
-SSTidalRooms_Text_199630:: @ 8199630
-	.string "I get so excited imagining what kinds\n"
-	.string "of POKéMON I’ll get to see in the next\l"
-	.string "CONTEST. The anticipation of it thrills!$"
-
-SSTidalRooms_Text_1996A6:: @ 81996A6
-	.string "Are your friends strong?$"
-
-SSTidalRooms_Text_1996BF:: @ 81996BF
-	.string "Your friends are, indeed, strong.$"
-
-SSTidalRooms_Text_1996E1:: @ 81996E1
-	.string "Friends need not be human.\n"
-	.string "For me, POKéMON are treasured friends!$"
-
-SSTidalRooms_Text_199723:: @ 8199723
-	.string "Child...\n"
-	.string "Did you knock on the door?$"
-
-SSTidalRooms_Text_199747:: @ 8199747
-	.string "A loss is to be accepted without haste\n"
-	.string "or panic.$"
-
-SSTidalRooms_Text_199778:: @ 8199778
-	.string "To be never ruffled in any situation is\n"
-	.string "the GENTLEMAN’s code of conduct.$"
-
-SSTidalRooms_Text_1997C1:: @ 81997C1
-	.string "JED: I feel a little shy about this, but...\n"
-	.string "We’ll show you our lovey-dovey power!$"
-
-SSTidalRooms_Text_199813:: @ 8199813
-	.string "JED: Sigh...$"
-
-SSTidalRooms_Text_199820:: @ 8199820
-	.string "JED: It’s the first time that our lovey-\n"
-	.string "dovey power couldn’t prevail!\l"
-	.string "You must be an awesome TRAINER!$"
-
-SSTidalRooms_Text_199887:: @ 8199887
-	.string "JED: You only have one POKéMON?\n"
-	.string "Isn’t that just too lonesome?$"
-
-SSTidalRooms_Text_1998C5:: @ 81998C5
-	.string "LEA: I feel a little silly, but...\n"
-	.string "We’ll show you our lovey-dovey power!$"
-
-SSTidalRooms_Text_19990E:: @ 819990E
-	.string "LEA: Oh, boo!$"
-
-SSTidalRooms_Text_19991C:: @ 819991C
-	.string "LEA: I can’t believe it!\n"
-	.string "Our lovey-dovey power failed...\l"
-	.string "You must be an awesome TRAINER!$"
-
-SSTidalRooms_Text_199975:: @ 8199975
-	.string "LEA: I wanted to battle...\n"
-	.string "But you don’t even have two POKéMON...$"
-
-SSTidalRooms_Text_1999B7:: @ 81999B7
-	.string "Ah, you’ve come just in time.\p"
-	.string "I’m bored, you see.\n"
-	.string "You may entertain me.$"
-
-SSTidalRooms_Text_1999FF:: @ 81999FF
-	.string "...That will do.$"
-
-SSTidalRooms_Text_199A10:: @ 8199A10
-	.string "Perhaps I shall get Father to acquire\n"
-	.string "a yacht for me.\l"
-	.string "A yacht for me and POKéMON!$"
-
-SSTidalRooms_Text_199A62:: @ 8199A62
-	.string "Oh, you’re such an adorable TRAINER.\n"
-	.string "Would you like to have tea?\l"
-	.string "Or would you rather battle?$"
-
-SSTidalRooms_Text_199ABF:: @ 8199ABF
-	.string "I see.\n"
-	.string "You’re the active sort.$"
-
-SSTidalRooms_Text_199ADE:: @ 8199ADE
-	.string "A world cruise on a luxury liner has its\n"
-	.string "charms, I must say...\p"
-	.string "But, I will admit there is an appealing\n"
-	.string "side to touring HOENN by ferry.$"
-
-SSTidalRooms_Text_199B65:: @ 8199B65
-	.string "Uh... Hi! I... I’m not acting suspicious!\n"
-	.string "Uh... You can have this! For free!\p"
-	.string "It... Honestly, I didn’t SNATCH it from\n"
-	.string "someone! I’d never do such a thing!\l"
-	.string "It’s clean! You can use it!$"
-
-SSTidalRooms_Text_199C1A:: @ 8199C1A
-	.string "SNATCH steals the foe’s move in\n"
-	.string "advance, and then uses the snatched\l"
-	.string "move on the foe.$"
-
+	.include "data/maps/text/SSTidalRooms.s"
 	.include "data/maps/text/BattleTower_Outside.s"
 	.include "data/maps/text/BattleTower_Lobby.s"
 	.include "data/maps/text/BattleTower_BattleRoom.s"
@@ -2161,47 +678,24 @@ SSTidalRooms_Text_199C1A:: @ 8199C1A
 	.include "data/maps/text/Route104_PrototypePrettyPetalFlowerShop.s"
 	.include "data/maps/text/Route109_SeashoreHouse.s"
 	.include "data/maps/text/Route110_TrickHouseEntrance.s"
-	.include "data/maps/text/Route110_TrickHousePuzzle1.s"
+
+Route110_TrickHousePuzzle1_Text_19C1B8:: @ 819C1B8
+	.string "{PLAYER} found a scroll.$"
+
+Route110_TrickHousePuzzle1_Text_19C1CB:: @ 819C1CB
+	.string "{PLAYER} memorized the secret code\n"
+	.string "written on the scroll.$"
+
+Route110_TrickHousePuzzle1_Text_19C1FF:: @ 819C1FF
+	.string "A secret code is written on it.$"
+
+UnknownString_819C21F: @ 819C21F
+	.string "The door is locked.\p"
+	.string "...On closer inspection, this is written\n"
+	.string "on it: “Write the secret code here.”$"
+
 	.include "data/maps/text/Route110_TrickHouseEnd.s"
-Route110_TrickHousePuzzle1_Text_19CB4F:: @ 819CB4F
-	.string "I’ll hack and slash my way to victory\n"
-	.string "with the CUT we just learned!$"
-
-Route110_TrickHousePuzzle1_Text_19CB93:: @ 819CB93
-	.string "Why are you so serious?$"
-
-Route110_TrickHousePuzzle1_Text_19CBAB:: @ 819CBAB
-	.string "I never get tired of hacking\n"
-	.string "and slashing!$"
-
-Route110_TrickHousePuzzle1_Text_19CBD6:: @ 819CBD6
-	.string "I wandered into this weird house\n"
-	.string "by accident...$"
-
-Route110_TrickHousePuzzle1_Text_19CC06:: @ 819CC06
-	.string "And now I’ve lost...$"
-
-Route110_TrickHousePuzzle1_Text_19CC1B:: @ 819CC1B
-	.string "I lost my way, I lost a battle, and I’m\n"
-	.string "even more lost... I can’t get out...$"
-
-Route110_TrickHousePuzzle1_Text_19CC68:: @ 819CC68
-	.string "Just who is the TRICK MASTER?$"
-
-Route110_TrickHousePuzzle1_Text_19CC86:: @ 819CC86
-	.string "I lost while I was lost in thought!$"
-
-Route110_TrickHousePuzzle1_Text_19CCAA:: @ 819CCAA
-	.string "You’re strong!\n"
-	.string "Just who are you?$"
-
-UnknownString_819CCCB: @ 819CCCB
-	.string "{PLAYER} wrote down the secret code\n"
-	.string "on the door.\p"
-	.string "“TRICK MASTER is smart.”\n"
-	.string "... ... ... ... ... ... ... ...\p"
-	.string "The lock clicked open!$"
-
+	.include "data/maps/text/Route110_TrickHousePuzzle1.s"
 	.include "data/maps/text/Route110_TrickHousePuzzle2.s"
 	.include "data/maps/text/Route110_TrickHousePuzzle3.s"
 	.include "data/maps/text/Route110_TrickHousePuzzle4.s"
@@ -2211,27 +705,12 @@ UnknownString_819CCCB: @ 819CCCB
 	.include "data/maps/text/Route110_TrickHousePuzzle8.s"
 	.include "data/maps/text/Route110_SeasideCyclingRoadSouthEntrance.s"
 	.include "data/maps/text/Route110_SeasideCyclingRoadNorthEntrance.s"
-Route110_SeasideCyclingRoadSouthEntrance_Text_19E3AD:: @ 819E3AD
-	.string "Sorry, you can’t walk on CYCLING\n"
-	.string "ROAD. It’s too dangerous.\p"
-	.string "Please come back with a BIKE.$"
-
-Route110_SeasideCyclingRoadNorthEntrance_Text_19E406:: @ 819E406
-	.string "On CYCLING ROAD, you can go all out\n"
-	.string "and cycle as fast as you’d like.\p"
-	.string "It feels great to go that fast, but try\n"
-	.string "not to crash into anyone!$"
-
-UnknownString_819E48D: @ 819E48D
-	.string "Sorry, you can’t walk on CYCLING\n"
-	.string "ROAD. It’s too dangerous.\p"
-	.string "Please come back with a BIKE.$"
-
 	.include "data/maps/text/Route113_GlassWorkshop.s"
 	.include "data/maps/text/Route119_WeatherInstitute_1F.s"
 	.include "data/maps/text/Route119_WeatherInstitute_2F.s"
 	.include "data/maps/text/Route119_House.s"
 	.include "data/maps/text/Route124_DivingTreasureHuntersHouse.s"
+
 	.incbin "baserom.gba", 0x19f7de, 0x28
 
 BattleTower_Lobby_EventScript_19F806:: @ 819F806
@@ -3990,7 +2469,15 @@ UnknownString_81A0FCC: @ 81A0FCC
 	.string "on SELECT for convenience.$"
 
 LittlerootTown_BrendansHouse_2F_Text_1A100C:: @ 81A100C
-	.include "data/maps/text/LittlerootTown_MaysHouse_2F.s"
+LittlerootTown_MaysHouse_2F_Text_1A100C:: @ 81A100C
+	.string "There’s an e-mail from POKéMON TRAINER\n"
+	.string "SCHOOL.\p"
+	.string "... ... ... ... ... ...\p"
+	.string "A POKéMON may learn up to four moves.\p"
+	.string "A TRAINER’s expertise is tested on the\n"
+	.string "move sets chosen for POKéMON.\p"
+	.string "... ... ... ... ... ...$"
+
 LittlerootTown_BrendansHouse_2F_Text_1A10D6:: @ 81A10D6
 LittlerootTown_MaysHouse_2F_Text_1A10D6:: @ 81A10D6
 	.string "{PLAYER} booted up the PC.$"
@@ -11940,9 +10427,9 @@ UnknownString_81B4818: @ 81B4818
 	.include "data/maps/text/SeafloorCavern_Room9.s"
 	.include "data/maps/text/CaveOfOrigin_B4F.s"
 	.include "data/maps/text/MtPyre_Summit.s"
+
 	.global gUnknown_081B694A
 gUnknown_081B694A: @ 81B694A
-
 	.incbin "baserom.gba", 0x1b694a, 0x6
 
 LittlerootTown_BrendansHouse_2F_EventScript_1B6950:: @ 81B6950
@@ -12931,6 +11418,7 @@ FallarborTown_ContestLobby_EventScript_1B799A:: @ 81B799A
 	case 4, FallarborTown_ContestLobby_EventScript_1B790F
 	end
 
+
 Route102_Text_1B79C3:: @ 81B79C3
 	.string "If you have POKéMON with you, then\n"
 	.string "you’re an official POKéMON TRAINER!\l"
@@ -13247,7 +11735,71 @@ Route104_Text_1B8B02:: @ 81B8B02
 	.string "“Hello” is the beginning of “good-bye.”\n"
 	.string "I hope we meet again.$"
 
-	.include "data/maps/text/Route105.s"
+Route105_Text_1B8B40:: @ 81B8B40
+	.string "There’s supposed to be a mystical\n"
+	.string "rock around here.\l"
+	.string "Do you know anything about it?$"
+
+Route105_Text_1B8B93:: @ 81B8B93
+	.string "I was thinking too much about that\n"
+	.string "rock, while my POKéMON remained weak...$"
+
+Route105_Text_1B8BDE:: @ 81B8BDE
+	.string "I can spend hours and hours staring\n"
+	.string "at a nice rock without growing bored.$"
+
+Route105_Text_1B8C28:: @ 81B8C28
+	.string "Whew! I was worried that a kid was\n"
+	.string "drowning when I saw you.\p"
+	.string "You seem to be okay, so what do you\n"
+	.string "say to a battle?$"
+
+Route105_Text_1B8C99:: @ 81B8C99
+	.string "Glub... Glub...$"
+
+Route105_Text_1B8CA9:: @ 81B8CA9
+	.string "If you are drowning, the signal is to\n"
+	.string "wave one arm toward the beach.$"
+
+Route105_Text_1B8CEE:: @ 81B8CEE
+	.string "Swimming the deep blue sea...\n"
+	.string "It feels the greatest!$"
+
+Route105_Text_1B8D23:: @ 81B8D23
+	.string "I lost...\n"
+	.string "Now I’m feeling blue...$"
+
+Route105_Text_1B8D45:: @ 81B8D45
+	.string "Why is the sea blue?\p"
+	.string "I learned about that at the MUSEUM in\n"
+	.string "SLATEPORT, but I forgot.$"
+
+Route105_Text_1B8D99:: @ 81B8D99
+	.string "My body feels lighter in the water.\n"
+	.string "It’s as if I’ve gotten slimmer!$"
+
+Route105_Text_1B8DDD:: @ 81B8DDD
+	.string "I’m floating...$"
+
+Route105_Text_1B8DED:: @ 81B8DED
+	.string "Your body weight is reduced to just\n"
+	.string "one tenth in the water.\p"
+	.string "That would make me...\n"
+	.string "Whoops! I’m not telling you my weight!$"
+
+Route105_Text_1B8E66:: @ 81B8E66
+	.string "The blue, blue sky...\n"
+	.string "The vast sea...\l"
+	.string "It’s so peaceful...$"
+
+Route105_Text_1B8EA0:: @ 81B8EA0
+	.string "I lost while I was lounging!$"
+
+Route105_Text_1B8EBD:: @ 81B8EBD
+	.string "I want to be told I’m relaxing to be\n"
+	.string "with. Giggle.$"
+
+
 Route106_Text_1B8EF0:: @ 81B8EF0
 	.string "Which do you prefer, fishing in the\n"
 	.string "sea or a stream?$"
@@ -13308,8 +11860,153 @@ Route106_Text_1B9222:: @ 81B9222
 	.string "Drifting along with the waves...\n"
 	.string "I love it! Why don’t you give it a try?$"
 
-	.include "data/maps/text/Route107.s"
-	.include "data/maps/text/Route108.s"
+Route107_Text_1B926B:: @ 81B926B
+	.string "Yawn...\p"
+	.string "I must have drifted off to sleep while\n"
+	.string "I was drifting in the waves.$"
+
+Route107_Text_1B92B7:: @ 81B92B7
+	.string "Ahaha, I lost...\n"
+	.string "I’ll take a snooze, I think...$"
+
+Route107_Text_1B92E7:: @ 81B92E7
+	.string "Floating and being rocked by the\n"
+	.string "waves - it’s like sleeping in a plush,\l"
+	.string "comfy bed.$"
+
+Route107_Text_1B933A:: @ 81B933A
+	.string "The sea is like my backyard.\n"
+	.string "Let’s battle!$"
+
+Route107_Text_1B9365:: @ 81B9365
+	.string "I lost on my home field...\n"
+	.string "I’m in shock!$"
+
+Route107_Text_1B938E:: @ 81B938E
+	.string "I swim the seas with a heart full of\n"
+	.string "dreams...\p"
+	.string "It’s a song!\n"
+	.string "Anyways, I’m swimming some more.$"
+
+Route107_Text_1B93EB:: @ 81B93EB
+	.string "Swimming in the big, wide sea, my\n"
+	.string "POKéMON has grown stronger!$"
+
+Route107_Text_1B9429:: @ 81B9429
+	.string "What a shock!\p"
+	.string "My POKéMON has gotten stronger, but\n"
+	.string "I stayed weak as a TRAINER!$"
+
+Route107_Text_1B9477:: @ 81B9477
+	.string "What you learn in battle makes you a\n"
+	.string "stronger TRAINER.\l"
+	.string "The waves taught me that.$"
+
+Route107_Text_1B94C8:: @ 81B94C8
+	.string "Do you know a little town called\n"
+	.string "DEWFORD?$"
+
+Route107_Text_1B94F2:: @ 81B94F2
+	.string "I hate this!$"
+
+Route107_Text_1B94FF:: @ 81B94FF
+	.string "A weird saying is getting really\n"
+	.string "trendy at DEWFORD HALL.$"
+
+Route107_Text_1B9538:: @ 81B9538
+	.string "Did you want to battle me?\n"
+	.string "Sure, I’ll go with you!$"
+
+Route107_Text_1B956B:: @ 81B956B
+	.string "I wasn’t good enough for you.$"
+
+Route107_Text_1B9589:: @ 81B9589
+	.string "I think you’re going to keep getting\n"
+	.string "better. I’ll go for it, too!$"
+
+Route107_Text_1B95CB:: @ 81B95CB
+	.string "LISA: We challenge you as a sister\n"
+	.string "and brother!$"
+
+Route107_Text_1B95FB:: @ 81B95FB
+	.string "LISA: Awesome.\n"
+	.string "You’re in a different class of tough.$"
+
+Route107_Text_1B9630:: @ 81B9630
+	.string "LISA: Do you have any friends who\n"
+	.string "would go to the beach with you?$"
+
+Route107_Text_1B9672:: @ 81B9672
+	.string "LISA: If you want to battle with us,\n"
+	.string "bring more POKéMON.$"
+
+Route107_Text_1B96AB:: @ 81B96AB
+	.string "RAY: We always battle POKéMON, me\n"
+	.string "and my sister.\p"
+	.string "I always lose, but we can beat you\n"
+	.string "2-on-2!$"
+
+Route107_Text_1B9707:: @ 81B9707
+	.string "RAY: Wowee, you’re at a higher level\n"
+	.string "than us!$"
+
+Route107_Text_1B9735:: @ 81B9735
+	.string "RAY: My sister gave me my POKéMON.\n"
+	.string "I raised it, and now it’s my important\l"
+	.string "partner!$"
+
+Route107_Text_1B9788:: @ 81B9788
+	.string "RAY: If you want to battle us, go\n"
+	.string "bring some more POKéMON!$"
+
+Route108_Text_1B97C3:: @ 81B97C3
+	.string "My dream is to swim the world’s seven\n"
+	.string "seas!$"
+
+Route108_Text_1B97EF:: @ 81B97EF
+	.string "I won’t be able to swim the seven seas\n"
+	.string "like this...$"
+
+Route108_Text_1B9823:: @ 81B9823
+	.string "Playing with marine POKéMON is one of\n"
+	.string "the pleasures of swimming!$"
+
+Route108_Text_1B9864:: @ 81B9864
+	.string "Ahoy, there! Are you going out to the\n"
+	.string "ABANDONED SHIP, too?$"
+
+Route108_Text_1B989F:: @ 81B989F
+	.string "I’m sinking!\n"
+	.string "Glub... Glub...$"
+
+Route108_Text_1B98BC:: @ 81B98BC
+	.string "Some people even go inside that\n"
+	.string "ABANDONED SHIP.$"
+
+Route108_Text_1B98EC:: @ 81B98EC
+	.string "My liar of a boyfriend told me that\n"
+	.string "I look great in a bikini...$"
+
+Route108_Text_1B992C:: @ 81B992C
+	.string "Oh, boo!$"
+
+Route108_Text_1B9935:: @ 81B9935
+	.string "Even if it’s a lie, I love being told\n"
+	.string "I look great...\l"
+	.string "We girls are so complex...$"
+
+Route108_Text_1B9986:: @ 81B9986
+	.string "I love the sea!\n"
+	.string "I forget all my worries when I swim!$"
+
+Route108_Text_1B99BB:: @ 81B99BB
+	.string "When I lose a battle, I get all\n"
+	.string "stressed out!$"
+
+Route108_Text_1B99E9:: @ 81B99E9
+	.string "Work off your stress by swimming!\n"
+	.string "It’s so healthy!$"
+
 Route109_Text_1B9A1C:: @ 81B9A1C
 	.string "Hiyah! Look at my chiseled abs!\n"
 	.string "This is what you call “cut”!$"
@@ -15416,9 +14113,242 @@ Route124_Text_1C0F90:: @ 81C0F90
 	.string "SAM: Did you want to battle us?\n"
 	.string "Bring some more POKéMON, then.$"
 
-	.include "data/maps/text/Route125.s"
-	.include "data/maps/text/Route126.s"
-	.include "data/maps/text/Route127.s"
+Route125_Text_1C0FCF:: @ 81C0FCF
+	.string "I heard you approaching, so I hung\n"
+	.string "around for you!$"
+
+Route125_Text_1C1002:: @ 81C1002
+	.string "I beg for peace!$"
+
+Route125_Text_1C1013:: @ 81C1013
+	.string "Sound travels faster in water than\n"
+	.string "it does through air.$"
+
+Route125_Text_1C104B:: @ 81C104B
+	.string "Hey, there!\n"
+	.string "Check out my sweet POKéMON!$"
+
+Route125_Text_1C1073:: @ 81C1073
+	.string "I floundered...$"
+
+Route125_Text_1C1083:: @ 81C1083
+	.string "I was blown away by HORSEA’s charm,\n"
+	.string "so I started swimming, too.$"
+
+Route125_Text_1C10C3:: @ 81C10C3
+	.string "I’m tired of swimming.\n"
+	.string "Are you up for a battle with me?$"
+
+Route125_Text_1C10FB:: @ 81C10FB
+	.string "You’re too much!$"
+
+Route125_Text_1C110C:: @ 81C110C
+	.string "Whew...\n"
+	.string "Which way is it to MOSSDEEP CITY?$"
+
+Route125_Text_1C1136:: @ 81C1136
+	.string "How would you like to take on the\n"
+	.string "WATER-type POKéMON I raised?$"
+
+Route125_Text_1C1175:: @ 81C1175
+	.string "I lost...$"
+
+Route125_Text_1C117F:: @ 81C117F
+	.string "Your power... You’re the real deal.\n"
+	.string "I’m amazed!$"
+
+Route125_Text_1C11AF:: @ 81C11AF
+	.string "Ahoy! I’m a buff, tough SAILOR!\n"
+	.string "I’ve braved the world’s seas!$"
+
+Route125_Text_1C11ED:: @ 81C11ED
+	.string "Gwrroooar!\n"
+	.string "I couldn’t win!$"
+
+Route125_Text_1C1208:: @ 81C1208
+	.string "The tide ebbs and flows inside the\n"
+	.string "SHOAL CAVE.\p"
+	.string "By the way, it’s about six hours from\n"
+	.string "high tide to low tide. Did you know?$"
+
+Route125_Text_1C1282:: @ 81C1282
+	.string "It’s high time I get my payback\n"
+	.string "from you! Come on, we’re battling!$"
+
+Route125_Text_1C12C5:: @ 81C12C5
+	.string "I couldn’t win!\n"
+	.string "I flat out couldn’t win!$"
+
+Route125_Text_1C12EE:: @ 81C12EE
+	.string "The SHOAL CAVE...\p"
+	.string "There are places you can and can’t\n"
+	.string "get to depending on the rise and fall\l"
+	.string "of the tide.\p"
+	.string "By the way, it’s about six hours from\n"
+	.string "high tide to low tide. Don’t forget!$"
+
+Route125_Text_1C13A1:: @ 81C13A1
+	.string "KIM: A funny old man lives in the\n"
+	.string "SHOAL CAVE. Someone told me.\l"
+	.string "Are you going to see him, too?$"
+
+Route125_Text_1C13FF:: @ 81C13FF
+	.string "KIM: I thought we would win.$"
+
+Route125_Text_1C141C:: @ 81C141C
+	.string "KIM: A funny old man lives in the\n"
+	.string "SHOAL CAVE, doesn’t he?\p"
+	.string "Let’s go see him, IRIS!$"
+
+Route125_Text_1C146E:: @ 81C146E
+	.string "KIM: No, no, no! You need two POKéMON,\n"
+	.string "or it’s just no good!$"
+
+Route125_Text_1C14AB:: @ 81C14AB
+	.string "IRIS: KIM, can you tell me what we’re\n"
+	.string "looking for out here?$"
+
+Route125_Text_1C14E7:: @ 81C14E7
+	.string "IRIS: Oh, we came sort of close.$"
+
+Route125_Text_1C1508:: @ 81C1508
+	.string "IRIS: KIM, are we really going into\n"
+	.string "the SHOAL CAVE?\l"
+	.string "We’ll get all wet.$"
+
+Route125_Text_1C154F:: @ 81C154F
+	.string "IRIS: Oh, we could never, ever do\n"
+	.string "anything like a 2-on-1 battle.$"
+
+Route126_Text_1C1590:: @ 81C1590
+	.string "Swimming is a full-body workout!\n"
+	.string "You will get fit!$"
+
+Route126_Text_1C15C3:: @ 81C15C3
+	.string "I admit it! You win!$"
+
+Route126_Text_1C15D8:: @ 81C15D8
+	.string "Thanks to my daily swimming routine...\n"
+	.string "Look! Feast your eyes on this physique!$"
+
+Route126_Text_1C1627:: @ 81C1627
+	.string "This towering white mountain of rock\n"
+	.string "is SOOTOPOLIS CITY.$"
+
+Route126_Text_1C1660:: @ 81C1660
+	.string "I was done in?$"
+
+Route126_Text_1C166F:: @ 81C166F
+	.string "I can’t find the entrance to\n"
+	.string "SOOTOPOLIS. Where could it be?$"
+
+Route126_Text_1C16AB:: @ 81C16AB
+	.string "Ufufufufu!\n"
+	.string "I’m a mermaid!$"
+
+Route126_Text_1C16C5:: @ 81C16C5
+	.string "My fantasy burst as if it were a bubble!\n"
+	.string "Blub, blub, blub...$"
+
+Route126_Text_1C1702:: @ 81C1702
+	.string "You thrashed me... I want to\n"
+	.string "disappear in a wave of despair...$"
+
+Route126_Text_1C1741:: @ 81C1741
+	.string "Hello, kiddo!\n"
+	.string "Want a battle with me?$"
+
+Route126_Text_1C1766:: @ 81C1766
+	.string "Oh, noooooh!$"
+
+Route126_Text_1C1773:: @ 81C1773
+	.string "I love frolicking with POKéMON in\n"
+	.string "the sea like this!$"
+
+Route127_Text_1C17A8:: @ 81C17A8
+	.string "I can see it in your face. You want\n"
+	.string "to challenge me.$"
+
+Route127_Text_1C17DD:: @ 81C17DD
+	.string "Awawawawawa...$"
+
+Route127_Text_1C17EC:: @ 81C17EC
+	.string "A well-played match leaves me feeling\n"
+	.string "refreshed and serene.$"
+
+Route127_Text_1C1828:: @ 81C1828
+	.string "Do you have a rival whom you just\n"
+	.string "hate to lose against?$"
+
+Route127_Text_1C1860:: @ 81C1860
+	.string "Arrrgh! I hate losing!$"
+
+Route127_Text_1C1877:: @ 81C1877
+	.string "If you have a rival, don’t you get the\n"
+	.string "feeling that you have to keep getting\l"
+	.string "better?$"
+
+Route127_Text_1C18CC:: @ 81C18CC
+	.string "Through fishing, I have attained a\n"
+	.string "state of becalmed serenity...\l"
+	.string "Please, allow me to demonstrate...$"
+
+Route127_Text_1C1930:: @ 81C1930
+	.string "Though I have lost, my heart remains\n"
+	.string "calm...$"
+
+Route127_Text_1C195D:: @ 81C195D
+	.string "It matters not that I catch nothing.\n"
+	.string "The line remains in the water...$"
+
+Route127_Text_1C19A3:: @ 81C19A3
+	.string "Whoops! Don’t tell me I snagged\n"
+	.string "a SURFING POKéMON?$"
+
+Route127_Text_1C19D6:: @ 81C19D6
+	.string "I can’t keep up!$"
+
+Route127_Text_1C19E7:: @ 81C19E7
+	.string "Your POKéMON look pretty strong.\n"
+	.string "They’d be a handful if I hooked them!$"
+
+Route127_Text_1C1A2E:: @ 81C1A2E
+	.string "Well, hey! This is a match between a\n"
+	.string "POKéMON fan and a fishing buff!$"
+
+Route127_Text_1C1A73:: @ 81C1A73
+	.string "No! My line’s all tangled!\n"
+	.string "The party’s over!$"
+
+Route127_Text_1C1AA0:: @ 81C1AA0
+	.string "My fishing line’s doing a dance!\n"
+	.string "The tangle tango! Hahaha, snarl!$"
+
+Route127_Text_1C1AE2:: @ 81C1AE2
+	.string "What I learned at DEWFORD’s POKéMON\n"
+	.string "GYM, I will put into practice here.$"
+
+Route127_Text_1C1B2A:: @ 81C1B2A
+	.string "I was swamped!$"
+
+Route127_Text_1C1B39:: @ 81C1B39
+	.string "BRAWLY, DEWFORD’s GYM LEADER, used\n"
+	.string "to train with a guy named BRUNO in\l"
+	.string "KANTO, I’ve heard.$"
+
+Route127_Text_1C1B92:: @ 81C1B92
+	.string "BIRD POKéMON have excellent vision.\n"
+	.string "They spot prey from great heights.$"
+
+Route127_Text_1C1BD9:: @ 81C1BD9
+	.string "Whew... I give up.$"
+
+Route127_Text_1C1BEC:: @ 81C1BEC
+	.string "There’re lots of diving spots in the\n"
+	.string "sea around here.\p"
+	.string "You can spot them easily from the sky\n"
+	.string "because of their darker color.$"
+
 Route128_Text_1C1C67:: @ 81C1C67
 	.string "EVER GRANDE CITY is still a long ways\n"
 	.string "away...$"
@@ -15504,12 +14434,344 @@ Route128_Text_1C210D:: @ 81C210D
 	.string "My POKéMON know WATERFALL, but\n"
 	.string "I don’t have the SOOTOPOLIS GYM BADGE!$"
 
-	.include "data/maps/text/Route129.s"
-	.include "data/maps/text/Route130.s"
-	.include "data/maps/text/Route131.s"
-	.include "data/maps/text/Route132.s"
-	.include "data/maps/text/Route133.s"
-	.include "data/maps/text/Route134.s"
+Route129_Text_1C2161:: @ 81C2161
+	.string "This is my first triathlon.\n"
+	.string "I’m all tense and nervous!$"
+
+Route129_Text_1C2198:: @ 81C2198
+	.string "Wroooaaar!\n"
+	.string "I failed to win!$"
+
+Route129_Text_1C21B4:: @ 81C21B4
+	.string "If I’m all tensed up, I won’t be able to\n"
+	.string "give it my all.$"
+
+Route129_Text_1C21ED:: @ 81C21ED
+	.string "I’m in the middle of a triathlon, but,\n"
+	.string "sure, why don’t we battle?$"
+
+Route129_Text_1C222F:: @ 81C222F
+	.string "I was sure I’d win!$"
+
+Route129_Text_1C2243:: @ 81C2243
+	.string "Do you know what’s the greatest thing\n"
+	.string "about triathlons?\p"
+	.string "Testing the limits of your own\n"
+	.string "strength and endurance against\l"
+	.string "Mother Nature!$"
+
+Route129_Text_1C22C8:: @ 81C22C8
+	.string "Say hey, hey!\n"
+	.string "Let’s get on with it!$"
+
+Route129_Text_1C22EC:: @ 81C22EC
+	.string "Beat, I’m beaten.\n"
+	.string "That’s it, done!$"
+
+Route129_Text_1C230F:: @ 81C230F
+	.string "There’s nothing for a loser.\n"
+	.string "Time for me to beat it home.$"
+
+Route129_Text_1C2349:: @ 81C2349
+	.string "What’s the hurry?\n"
+	.string "Let’s take it slow and easy.$"
+
+Route129_Text_1C2378:: @ 81C2378
+	.string "Oh, my.\n"
+	.string "I wanted to relax a little more...$"
+
+Route129_Text_1C23A3:: @ 81C23A3
+	.string "Don’t you hate making mistakes when\n"
+	.string "you’re in a rush?\p"
+	.string "That’s why I try to take things\n"
+	.string "slowly.$"
+
+Route130_Text_1C2401:: @ 81C2401
+	.string "What a surprise! I didn’t expect to\n"
+	.string "see a TRAINER out in the sea.\p"
+	.string "I think we should battle!$"
+
+Route130_Text_1C245D:: @ 81C245D
+	.string "This kid’s awfully tough...$"
+
+Route130_Text_1C2479:: @ 81C2479
+	.string "Your eyes have that look of someone\n"
+	.string "who’s experienced harsh challenges\l"
+	.string "and won. It suits you well!$"
+
+Route130_Text_1C24DC:: @ 81C24DC
+	.string "In the deep blue sea,\n"
+	.string "my shattered blue heart finds\l"
+	.string "comfort among waves.$"
+
+Route130_Text_1C2525:: @ 81C2525
+	.string "Like the vast blue sea,\n"
+	.string "the world of POKéMON spans\l"
+	.string "depths beyond belief.$"
+
+Route130_Text_1C256E:: @ 81C256E
+	.string "The world’s children dream\n"
+	.string "of one day becoming the\l"
+	.string "POKéMON CHAMPION.$"
+
+Route131_Text_1C25B3:: @ 81C25B3
+	.string "The sea is teeming with POKéMON.\n"
+	.string "It’s not easy swimming, I tell you.$"
+
+Route131_Text_1C25F8:: @ 81C25F8
+	.string "POKéMON raised by TRAINERS are\n"
+	.string "seriously tough...$"
+
+Route131_Text_1C262A:: @ 81C262A
+	.string "Gasp... Gasp... I’m wiped out...\p"
+	.string "The going’s easy. It’s the leaving\n"
+	.string "that’s the hard part.\p"
+	.string "Will I have any energy left to make\n"
+	.string "the return trip?$"
+
+Route131_Text_1C26B9:: @ 81C26B9
+	.string "The sea... The sea... The sea...\n"
+	.string "The sea as far as these eyes can see!\l"
+	.string "I’m sick and tired of the sea!$"
+
+Route131_Text_1C271F:: @ 81C271F
+	.string "Bleah!$"
+
+Route131_Text_1C2726:: @ 81C2726
+	.string "Bored I am by the sea, but swim I must.\p"
+	.string "I’m a born swimmer!\n"
+	.string "That’s what I am.$"
+
+Route131_Text_1C2774:: @ 81C2774
+	.string "Hi, sweetie, wait!\n"
+	.string "We should battle, you and I!$"
+
+Route131_Text_1C27A4:: @ 81C27A4
+	.string "You’re tough in spite of the way\n"
+	.string "you look!$"
+
+Route131_Text_1C27CF:: @ 81C27CF
+	.string "Did you see a guy over there who whines\n"
+	.string "that he’s bored of the sea?\p"
+	.string "That’s all talk.\n"
+	.string "He’s hopelessly in love with the sea!$"
+
+Route131_Text_1C284A:: @ 81C284A
+	.string "Why do men love bathing suits so much?\p"
+	.string "They all ogle me!$"
+
+Route131_Text_1C2883:: @ 81C2883
+	.string "I’m out of my depth!$"
+
+Route131_Text_1C2898:: @ 81C2898
+	.string "Maybe it’s not my bathing suit that\n"
+	.string "makes men look. It must be my beauty!$"
+
+Route131_Text_1C28E2:: @ 81C28E2
+	.string "RELI: We’ll work together as siblings\n"
+	.string "to take you on!$"
+
+Route131_Text_1C2918:: @ 81C2918
+	.string "RELI: We couldn’t win even though we\n"
+	.string "worked together...$"
+
+Route131_Text_1C2950:: @ 81C2950
+	.string "RELI: The people of PACIFIDLOG are\n"
+	.string "together with the sea and POKéMON from\l"
+	.string "the time they are born.$"
+
+Route131_Text_1C29B2:: @ 81C29B2
+	.string "RELI: You don’t have two POKéMON?\n"
+	.string "We can’t enjoy a battle, then.$"
+
+Route131_Text_1C29F3:: @ 81C29F3
+	.string "IAN: I’m doing my best together with\n"
+	.string "my sis!$"
+
+Route131_Text_1C2A20:: @ 81C2A20
+	.string "IAN: I did my best with my sis, but\n"
+	.string "we still couldn’t win...$"
+
+Route131_Text_1C2A5D:: @ 81C2A5D
+	.string "IAN: You know how PACIFIDLOG is\n"
+	.string "a floating town?\p"
+	.string "So, wherever there is the sea, that’s\n"
+	.string "a part of PACIFIDLOG!$"
+
+Route131_Text_1C2ACA:: @ 81C2ACA
+	.string "IAN: If you have two POKéMON, we’ll\n"
+	.string "take you on!$"
+
+Route132_Text_1C2AFB:: @ 81C2AFB
+	.string "I used to catch colds all the time as\n"
+	.string "a kid, but I became totally fit after\l"
+	.string "I started swimming.$"
+
+Route132_Text_1C2B5B:: @ 81C2B5B
+	.string "I crave more power...$"
+
+Route132_Text_1C2B71:: @ 81C2B71
+	.string "TRAINERS travel the fields and\n"
+	.string "mountains, so they must be fit, too.$"
+
+Route132_Text_1C2BB5:: @ 81C2BB5
+	.string "I try not to swim where the currents\n"
+	.string "are too strong.$"
+
+Route132_Text_1C2BEA:: @ 81C2BEA
+	.string "Oh, please, no!$"
+
+Route132_Text_1C2BFA:: @ 81C2BFA
+	.string "If I get swept away, I’ll lose all my\n"
+	.string "sense of place...$"
+
+Route132_Text_1C2C32:: @ 81C2C32
+	.string "Win or lose, you’ll never know until\n"
+	.string "you try!$"
+
+Route132_Text_1C2C60:: @ 81C2C60
+	.string "Waah!\n"
+	.string "I sank in defeat!$"
+
+Route132_Text_1C2C78:: @ 81C2C78
+	.string "I never battle when I know I’ll win.\n"
+	.string "I like to battle at the razor’s edge of\l"
+	.string "victory and defeat!$"
+
+Route132_Text_1C2CD9:: @ 81C2CD9
+	.string "I contemplate POKéMON 24 hours a day.\n"
+	.string "How could you possibly beat me?$"
+
+Route132_Text_1C2D1F:: @ 81C2D1F
+	.string "I lose.\n"
+	.string "I will concede defeat.$"
+
+Route132_Text_1C2D3E:: @ 81C2D3E
+	.string "Urggh...\n"
+	.string "You’re a POKéMON fanatic, aren’t you?\p"
+	.string "You must contemplate POKéMON 24 hours\n"
+	.string "a day, don’t you?$"
+
+Route133_Text_1C2DA5:: @ 81C2DA5
+	.string "Did the currents carry you here, too?\n"
+	.string "This must have been fated. Let’s battle!$"
+
+Route133_Text_1C2DF4:: @ 81C2DF4
+	.string "Strong!\n"
+	.string "Too much so!$"
+
+Route133_Text_1C2E09:: @ 81C2E09
+	.string "It’s just my luck that a tough TRAINER\n"
+	.string "like you would drift here...\l"
+	.string "I must be cursed...$"
+
+Route133_Text_1C2E61:: @ 81C2E61
+	.string "I’ve led a life of woe and misery...\n"
+	.string "I’ve been cast away, and this is where\l"
+	.string "I’ve drifted...$"
+
+Route133_Text_1C2EBD:: @ 81C2EBD
+	.string "Another loss...$"
+
+Route133_Text_1C2ECD:: @ 81C2ECD
+	.string "A life adrift...\n"
+	.string "I don’t want it anymore!$"
+
+Route133_Text_1C2EF7:: @ 81C2EF7
+	.string "Welcome!\n"
+	.string "I’ve been expecting you!$"
+
+Route133_Text_1C2F19:: @ 81C2F19
+	.string "No! Please!$"
+
+Route133_Text_1C2F25:: @ 81C2F25
+	.string "A strong child TRAINER...\n"
+	.string "That’s so annoying!$"
+
+Route133_Text_1C2F53:: @ 81C2F53
+	.string "I want to win like everyone else, but I\n"
+	.string "won’t raise POKéMON like everyone else.$"
+
+Route133_Text_1C2FA3:: @ 81C2FA3
+	.string "Darn it!\n"
+	.string "My way is still too slack!$"
+
+Route133_Text_1C2FC7:: @ 81C2FC7
+	.string "It’s way more fun to do things the way\n"
+	.string "I want than to be like everybody else.\l"
+	.string "I mean, that’s obvious!$"
+
+Route133_Text_1C302D:: @ 81C302D
+	.string "I came all the way out here with my\n"
+	.string "BIRD POKéMON.$"
+
+Route133_Text_1C305F:: @ 81C305F
+	.string "You...\n"
+	.string "You’re stunningly cool!$"
+
+Route133_Text_1C307E:: @ 81C307E
+	.string "I’d like to go back to FORTREE, but I’ve\n"
+	.string "grown to like this place, too.$"
+
+Route134_Text_1C30C6:: @ 81C30C6
+	.string "Even those POKéMON that can swim are\n"
+	.string "carried along by the rapid currents.$"
+
+Route134_Text_1C3110:: @ 81C3110
+	.string "Aiyeeeeh!$"
+
+Route134_Text_1C311A:: @ 81C311A
+	.string "I think POKéMON enjoy the fast-running\n"
+	.string "currents around these parts.$"
+
+Route134_Text_1C315E:: @ 81C315E
+	.string "My LUVDISC are looking for a fun\n"
+	.string "match. Will you join us?$"
+
+Route134_Text_1C3198:: @ 81C3198
+	.string "Oopsie!$"
+
+Route134_Text_1C31A0:: @ 81C31A0
+	.string "There’s a collector who’s after the\n"
+	.string "SCALES of LUVDISC.$"
+
+Route134_Text_1C31D7:: @ 81C31D7
+	.string "Okeydokey! That’s enough rest, gang!\n"
+	.string "It’s time for a match!$"
+
+Route134_Text_1C3213:: @ 81C3213
+	.string "Tuckered out again...$"
+
+Route134_Text_1C3229:: @ 81C3229
+	.string "My BIRD POKéMON get tired quickly after\n"
+	.string "a long flight...$"
+
+Route134_Text_1C3262:: @ 81C3262
+	.string "You’re a POKéMON TRAINER.\n"
+	.string "No need for words. We battle now.$"
+
+Route134_Text_1C329E:: @ 81C329E
+	.string "... ... ... ... ... ... ...\n"
+	.string "... ... ... ... ... ... ...$"
+
+Route134_Text_1C32D6:: @ 81C32D6
+	.string "It was I who challenged you, and yet\n"
+	.string "I lost. I am deeply shamed...$"
+
+Route134_Text_1C3319:: @ 81C3319
+	.string "The savage tide in this area serves to\n"
+	.string "make us stronger than ever.$"
+
+Route134_Text_1C335C:: @ 81C335C
+	.string "I concede defeat.$"
+
+Route134_Text_1C336E:: @ 81C336E
+	.string "We will return for more training at\n"
+	.string "METEOR FALLS.\p"
+	.string "If you’d like, you should go, too.\n"
+	.string "It will definitely toughen you up!$"
+
+
 	.global gUnknown_081C33E6
 gUnknown_081C33E6: @ 81C33E6
 	.incbin "baserom.gba", 0x1C33E6, 0x9

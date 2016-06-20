@@ -1,3 +1,13 @@
+UnknownString_8173A76: @ 8173A76
+	.string "It’s lined with POKéMON picture books.$"
+
+UnknownString_8173A9D: @ 8173A9D
+	.string "POKéMON SPECIES & HABITATS...\n"
+	.string "HUMAN & POKéMON COEXISTENCE...\l"
+	.string "POKéMONOLOGY FOR BEGINNERS...\p"
+	.string "It’s brimming with books written by\n"
+	.string "PROF. BIRCH.$"
+
 LittlerootTown_ProfessorBirchsLab_Text_173B29:: @ 8173B29
 	.string "Hunh? PROF. BIRCH?\p"
 	.string "The PROF’s away on fieldwork.\n"
