@@ -1,12 +1,12 @@
 Route114_MapObjects:: @ 8382C48
-	object_event 1, MAP_OBJ_GFX_BERRY_TREE, 0, 31, 0, 43, 0, 3, 12, 0, 0, 0, 0, 77, 0, Route114_EventScript_1A14DD, 0, 0, 0
-	object_event 2, MAP_OBJ_GFX_BERRY_TREE, 0, 31, 0, 44, 0, 3, 12, 0, 0, 0, 0, 78, 0, Route114_EventScript_1A14DD, 0, 0, 0
+	object_event 1, MAP_OBJ_GFX_BERRY_TREE, 0, 31, 0, 43, 0, 3, 12, 0, 0, 0, 0, 77, 0, BerryTreeScript, 0, 0, 0
+	object_event 2, MAP_OBJ_GFX_BERRY_TREE, 0, 31, 0, 44, 0, 3, 12, 0, 0, 0, 0, 78, 0, BerryTreeScript, 0, 0, 0
 	object_event 3, MAP_OBJ_GFX_HIKER, 0, 15, 0, 65, 0, 7, 10, 0, 0, 1, 0, 6, 0, Route114_EventScript_1507F1, 0, 0, 0
 	object_event 4, MAP_OBJ_GFX_HIKER, 0, 30, 0, 72, 0, 5, 15, 0, 0, 1, 0, 4, 0, Route114_EventScript_150808, 0, 0, 0
 	object_event 5, MAP_OBJ_GFX_CAMPER, 0, 22, 0, 50, 0, 3, 10, 0, 0, 1, 0, 3, 0, Route114_EventScript_15081F, 0, 0, 0
 	object_event 6, MAP_OBJ_GFX_PICNICKER, 0, 19, 0, 35, 0, 3, 1, 0, 0, 1, 0, 3, 0, Route114_EventScript_150836, 0, 0, 0
 	object_event 7, MAP_OBJ_GFX_MANIAC, 0, 20, 0, 56, 0, 3, 7, 0, 0, 1, 0, 3, 0, Route114_EventScript_15084D, 0, 0, 0
-	object_event 8, MAP_OBJ_GFX_BERRY_TREE, 0, 31, 0, 45, 0, 3, 12, 0, 0, 0, 0, 68, 0, Route114_EventScript_1A14DD, 0, 0, 0
+	object_event 8, MAP_OBJ_GFX_BERRY_TREE, 0, 31, 0, 45, 0, 3, 12, 0, 0, 0, 0, 68, 0, BerryTreeScript, 0, 0, 0
 	object_event 9, MAP_OBJ_GFX_ITEM_BALL, 0, 7, 0, 6, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route114_EventScript_1B1516, 1014, 0, 0
 	object_event 10, MAP_OBJ_GFX_ITEM_BALL, 0, 11, 0, 37, 0, 4, 1, 0, 0, 0, 0, 0, 0, Route114_EventScript_1B1523, 1015, 0, 0
 	object_event 11, MAP_OBJ_GFX_BREAKABLE_ROCK, 0, 12, 0, 43, 0, 4, 1, 0, 0, 0, 0, 0, 0, BreakableRockScript, 17, 0, 0

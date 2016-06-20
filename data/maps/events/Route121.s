@@ -1,13 +1,13 @@
 Route121_MapObjects:: @ 8384504
 	object_event 1, MAP_OBJ_GFX_WOMAN_4, 0, 29, 0, 14, 0, 3, 10, 17, 0, 0, 0, 0, 0, Route121_EventScript_151B0A, 0, 0, 0
-	object_event 2, MAP_OBJ_GFX_BERRY_TREE, 0, 14, 0, 2, 0, 3, 12, 0, 0, 0, 0, 47, 0, Route121_EventScript_1A14DD, 0, 0, 0
-	object_event 3, MAP_OBJ_GFX_BERRY_TREE, 0, 15, 0, 2, 0, 3, 12, 0, 0, 0, 0, 48, 0, Route121_EventScript_1A14DD, 0, 0, 0
-	object_event 4, MAP_OBJ_GFX_BERRY_TREE, 0, 16, 0, 2, 0, 3, 12, 0, 0, 0, 0, 49, 0, Route121_EventScript_1A14DD, 0, 0, 0
-	object_event 5, MAP_OBJ_GFX_BERRY_TREE, 0, 17, 0, 2, 0, 3, 12, 0, 0, 0, 0, 50, 0, Route121_EventScript_1A14DD, 0, 0, 0
-	object_event 6, MAP_OBJ_GFX_BERRY_TREE, 0, 64, 0, 14, 0, 3, 12, 0, 0, 0, 0, 51, 0, Route121_EventScript_1A14DD, 0, 0, 0
-	object_event 7, MAP_OBJ_GFX_BERRY_TREE, 0, 65, 0, 14, 0, 3, 12, 0, 0, 0, 0, 52, 0, Route121_EventScript_1A14DD, 0, 0, 0
-	object_event 8, MAP_OBJ_GFX_BERRY_TREE, 0, 66, 0, 14, 0, 3, 12, 0, 0, 0, 0, 53, 0, Route121_EventScript_1A14DD, 0, 0, 0
-	object_event 9, MAP_OBJ_GFX_BERRY_TREE, 0, 67, 0, 14, 0, 3, 12, 0, 0, 0, 0, 54, 0, Route121_EventScript_1A14DD, 0, 0, 0
+	object_event 2, MAP_OBJ_GFX_BERRY_TREE, 0, 14, 0, 2, 0, 3, 12, 0, 0, 0, 0, 47, 0, BerryTreeScript, 0, 0, 0
+	object_event 3, MAP_OBJ_GFX_BERRY_TREE, 0, 15, 0, 2, 0, 3, 12, 0, 0, 0, 0, 48, 0, BerryTreeScript, 0, 0, 0
+	object_event 4, MAP_OBJ_GFX_BERRY_TREE, 0, 16, 0, 2, 0, 3, 12, 0, 0, 0, 0, 49, 0, BerryTreeScript, 0, 0, 0
+	object_event 5, MAP_OBJ_GFX_BERRY_TREE, 0, 17, 0, 2, 0, 3, 12, 0, 0, 0, 0, 50, 0, BerryTreeScript, 0, 0, 0
+	object_event 6, MAP_OBJ_GFX_BERRY_TREE, 0, 64, 0, 14, 0, 3, 12, 0, 0, 0, 0, 51, 0, BerryTreeScript, 0, 0, 0
+	object_event 7, MAP_OBJ_GFX_BERRY_TREE, 0, 65, 0, 14, 0, 3, 12, 0, 0, 0, 0, 52, 0, BerryTreeScript, 0, 0, 0
+	object_event 8, MAP_OBJ_GFX_BERRY_TREE, 0, 66, 0, 14, 0, 3, 12, 0, 0, 0, 0, 53, 0, BerryTreeScript, 0, 0, 0
+	object_event 9, MAP_OBJ_GFX_BERRY_TREE, 0, 67, 0, 14, 0, 3, 12, 0, 0, 0, 0, 54, 0, BerryTreeScript, 0, 0, 0
 	object_event 10, MAP_OBJ_GFX_LASS, 0, 39, 0, 9, 0, 3, 8, 0, 0, 1, 0, 0, 0, Route121_EventScript_151BDE, 0, 0, 0
 	object_event 11, MAP_OBJ_GFX_LASS, 0, 40, 0, 9, 0, 3, 8, 0, 0, 1, 0, 0, 0, Route121_EventScript_151BF9, 0, 0, 0
 	object_event 12, 241, 0, 30, 0, 8, 0, 3, 7, 0, 0, 0, 0, 0, 0, 0x0, 914, 0, 0

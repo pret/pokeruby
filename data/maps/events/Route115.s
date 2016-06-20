@@ -2,17 +2,17 @@ Route115_MapObjects:: @ 8382F2C
 	object_event 1, MAP_OBJ_GFX_WOMAN_3, 0, 18, 0, 68, 0, 3, 2, 17, 0, 0, 0, 0, 0, Route115_EventScript_15092E, 0, 0, 0
 	object_event 2, MAP_OBJ_GFX_OLD_MAN_1, 0, 5, 0, 15, 0, 3, 10, 0, 0, 1, 0, 6, 0, Route115_EventScript_150949, 0, 0, 0
 	object_event 3, MAP_OBJ_GFX_BLACK_BELT, 0, 27, 0, 53, 0, 3, 15, 17, 0, 1, 0, 4, 0, Route115_EventScript_15099E, 0, 0, 0
-	object_event 4, MAP_OBJ_GFX_BERRY_TREE, 0, 11, 0, 5, 0, 3, 12, 0, 0, 0, 0, 69, 0, Route115_EventScript_1A14DD, 0, 0, 0
-	object_event 5, MAP_OBJ_GFX_BERRY_TREE, 0, 12, 0, 5, 0, 3, 12, 0, 0, 0, 0, 70, 0, Route115_EventScript_1A14DD, 0, 0, 0
-	object_event 6, MAP_OBJ_GFX_BERRY_TREE, 0, 13, 0, 5, 0, 3, 12, 0, 0, 0, 0, 71, 0, Route115_EventScript_1A14DD, 0, 0, 0
+	object_event 4, MAP_OBJ_GFX_BERRY_TREE, 0, 11, 0, 5, 0, 3, 12, 0, 0, 0, 0, 69, 0, BerryTreeScript, 0, 0, 0
+	object_event 5, MAP_OBJ_GFX_BERRY_TREE, 0, 12, 0, 5, 0, 3, 12, 0, 0, 0, 0, 70, 0, BerryTreeScript, 0, 0, 0
+	object_event 6, MAP_OBJ_GFX_BERRY_TREE, 0, 13, 0, 5, 0, 3, 12, 0, 0, 0, 0, 71, 0, BerryTreeScript, 0, 0, 0
 	object_event 7, MAP_OBJ_GFX_GIRL_3, 0, 15, 0, 50, 0, 3, 64, 0, 0, 1, 0, 3, 0, Route115_EventScript_1509DC, 0, 0, 0
 	object_event 8, MAP_OBJ_GFX_BLACK_BELT, 0, 17, 0, 17, 0, 3, 50, 51, 0, 1, 0, 2, 0, Route115_EventScript_150987, 0, 0, 0
 	object_event 9, MAP_OBJ_GFX_MANIAC, 0, 25, 0, 61, 0, 3, 14, 0, 0, 1, 0, 3, 0, Route115_EventScript_150A1A, 0, 0, 0
 	object_event 10, MAP_OBJ_GFX_ITEM_BALL, 0, 20, 0, 60, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route115_EventScript_1B1530, 1016, 0, 0
 	object_event 11, MAP_OBJ_GFX_ITEM_BALL, 0, 19, 0, 5, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route115_EventScript_1B153D, 1017, 0, 0
 	object_event 12, MAP_OBJ_GFX_ITEM_BALL, 0, 23, 0, 29, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route115_EventScript_1B154A, 1018, 0, 0
-	object_event 13, MAP_OBJ_GFX_BERRY_TREE, 0, 31, 0, 64, 0, 3, 12, 0, 0, 0, 0, 55, 0, Route115_EventScript_1A14DD, 0, 0, 0
-	object_event 14, MAP_OBJ_GFX_BERRY_TREE, 0, 31, 0, 65, 0, 3, 12, 0, 0, 0, 0, 56, 0, Route115_EventScript_1A14DD, 0, 0, 0
+	object_event 13, MAP_OBJ_GFX_BERRY_TREE, 0, 31, 0, 64, 0, 3, 12, 0, 0, 0, 0, 55, 0, BerryTreeScript, 0, 0, 0
+	object_event 14, MAP_OBJ_GFX_BERRY_TREE, 0, 31, 0, 65, 0, 3, 12, 0, 0, 0, 0, 56, 0, BerryTreeScript, 0, 0, 0
 	object_event 15, MAP_OBJ_GFX_BREAKABLE_ROCK, 0, 29, 0, 50, 0, 3, 1, 17, 0, 0, 0, 0, 0, BreakableRockScript, 17, 0, 0
 	object_event 16, MAP_OBJ_GFX_ITEM_BALL, 0, 31, 0, 56, 0, 3, 1, 17, 0, 0, 0, 0, 0, Route115_EventScript_1B1557, 1118, 0, 0
 

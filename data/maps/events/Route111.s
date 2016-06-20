@@ -4,8 +4,8 @@ Route111_MapObjects:: @ 83821A0
 	object_event 3, MAP_OBJ_GFX_LASS, 0, 13, 0, 113, 0, 0, 8, 1, 0, 0, 0, 0, 0, 0x0, 770, 0, 0
 	object_event 4, MAP_OBJ_GFX_OLD_WOMAN_1, 0, 13, 0, 113, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0x0, 771, 0, 0
 	object_event 5, MAP_OBJ_GFX_PICNICKER, 0, 28, 0, 51, 0, 3, 17, 0, 0, 1, 0, 3, 0, Route111_EventScript_1503BE, 0, 0, 0
-	object_event 6, MAP_OBJ_GFX_BERRY_TREE, 0, 22, 0, 5, 0, 3, 12, 0, 0, 0, 0, 19, 0, Route111_EventScript_1A14DD, 0, 0, 0
-	object_event 7, MAP_OBJ_GFX_BERRY_TREE, 0, 23, 0, 5, 0, 3, 12, 0, 0, 0, 0, 20, 0, Route111_EventScript_1A14DD, 0, 0, 0
+	object_event 6, MAP_OBJ_GFX_BERRY_TREE, 0, 22, 0, 5, 0, 3, 12, 0, 0, 0, 0, 19, 0, BerryTreeScript, 0, 0, 0
+	object_event 7, MAP_OBJ_GFX_BERRY_TREE, 0, 23, 0, 5, 0, 3, 12, 0, 0, 0, 0, 20, 0, BerryTreeScript, 0, 0, 0
 	object_event 8, MAP_OBJ_GFX_MAN_4, 0, 8, 0, 91, 0, 3, 2, 17, 0, 0, 0, 0, 0, Route111_EventScript_150395, 0, 0, 0
 	object_event 9, MAP_OBJ_GFX_CAMPER, 0, 24, 0, 60, 0, 3, 21, 0, 0, 1, 0, 3, 0, Route111_EventScript_1503A7, 0, 0, 0
 	object_event 10, MAP_OBJ_GFX_HIKER, 0, 27, 0, 69, 0, 3, 50, 34, 0, 1, 0, 2, 0, Route111_EventScript_150403, 0, 0, 0
@@ -17,8 +17,8 @@ Route111_MapObjects:: @ 83821A0
 	object_event 16, MAP_OBJ_GFX_BREAKABLE_ROCK, 0, 19, 0, 100, 0, 3, 1, 0, 0, 0, 0, 0, 0, BreakableRockScript, 18, 0, 0
 	object_event 17, MAP_OBJ_GFX_GIRL_1, 0, 23, 0, 8, 0, 3, 5, 1, 0, 0, 0, 0, 0, Route111_EventScript_1500C5, 0, 0, 0
 	object_event 18, MAP_OBJ_GFX_ITEM_BALL, 0, 32, 0, 105, 0, 3, 1, 0, 0, 0, 0, 0, 0, Route111_EventScript_1B14C8, 1008, 0, 0
-	object_event 19, MAP_OBJ_GFX_BERRY_TREE, 0, 18, 0, 5, 0, 3, 12, 0, 0, 0, 0, 80, 0, Route111_EventScript_1A14DD, 0, 0, 0
-	object_event 20, MAP_OBJ_GFX_BERRY_TREE, 0, 19, 0, 5, 0, 3, 12, 0, 0, 0, 0, 81, 0, Route111_EventScript_1A14DD, 0, 0, 0
+	object_event 19, MAP_OBJ_GFX_BERRY_TREE, 0, 18, 0, 5, 0, 3, 12, 0, 0, 0, 0, 80, 0, BerryTreeScript, 0, 0, 0
+	object_event 20, MAP_OBJ_GFX_BERRY_TREE, 0, 19, 0, 5, 0, 3, 12, 0, 0, 0, 0, 81, 0, BerryTreeScript, 0, 0, 0
 	object_event 21, MAP_OBJ_GFX_REPORTER_F, 0, 13, 0, 86, 0, 3, 8, 0, 0, 0, 0, 0, 0, Route111_EventScript_1AE4E2, 799, 0, 0
 	object_event 22, MAP_OBJ_GFX_CAMERAMAN, 0, 14, 0, 86, 0, 3, 8, 0, 0, 0, 0, 0, 0, Route111_EventScript_1AE502, 799, 0, 0
 	object_event 23, MAP_OBJ_GFX_REPORTER_F, 0, 13, 0, 86, 0, 3, 8, 0, 0, 0, 0, 0, 0, Route111_EventScript_1AE562, 903, 0, 0

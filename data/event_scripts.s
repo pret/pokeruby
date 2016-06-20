@@ -4062,25 +4062,7 @@ PacifidlogTown_House2_EventScript_1A14DC:: @ 81A14DC
 Route101_EventScript_1A14DC:: @ 81A14DC
 	return
 
-	.global gUnknown_081A14DD
-gUnknown_081A14DD: @ 81A14DD
-
-Route102_EventScript_1A14DD:: @ 81A14DD
-Route103_EventScript_1A14DD:: @ 81A14DD
-Route104_EventScript_1A14DD:: @ 81A14DD
-Route110_EventScript_1A14DD:: @ 81A14DD
-Route111_EventScript_1A14DD:: @ 81A14DD
-Route112_EventScript_1A14DD:: @ 81A14DD
-Route114_EventScript_1A14DD:: @ 81A14DD
-Route115_EventScript_1A14DD:: @ 81A14DD
-Route116_EventScript_1A14DD:: @ 81A14DD
-Route117_EventScript_1A14DD:: @ 81A14DD
-Route118_EventScript_1A14DD:: @ 81A14DD
-Route119_EventScript_1A14DD:: @ 81A14DD
-Route120_EventScript_1A14DD:: @ 81A14DD
-Route121_EventScript_1A14DD:: @ 81A14DD
-Route123_EventScript_1A14DD:: @ 81A14DD
-Route130_EventScript_1A14DD:: @ 81A14DD
+BerryTreeScript:: @ 81A14DD
 	special 43
 	switch 0x8004
 	case 255, Route102_EventScript_1A1533
