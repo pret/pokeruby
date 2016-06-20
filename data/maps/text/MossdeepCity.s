@@ -82,6 +82,3 @@ MossdeepCity_Text_16962F:: @ 816962F
 MossdeepCity_Text_16965C:: @ 816965C
 	.string "MOSSDEEP SPACE CENTER\n"
 	.string "“The closest place to space.”$"
-
-	.incbin "baserom.gba", 0x169690, 0x14
-

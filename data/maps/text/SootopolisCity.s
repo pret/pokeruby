@@ -1,3 +1,6 @@
+ClosedSootopolisGymDoorText: @ 8169690
+	.string "The door is closed.$"
+
 SootopolisCity_Text_1696A4:: @ 81696A4
 	.string "Who might you be?\p"
 	.string "This is the CAVE OF ORIGIN.\p"

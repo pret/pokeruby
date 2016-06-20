@@ -36,5 +36,11 @@ FortreeCity_House2_Text_186565:: @ 8186565
 	.string "No, too bad.\n"
 	.string "You guessed wrong.$"
 
-	.incbin "baserom.gba", 0x186585, 0x9f
+UnknownString_8186585: @ 8186585
+	.string "The area around FORTREE CITY is like\n"
+	.string "a jungle.\p"
+	.string "It gets awfully tiring walking around\n"
+	.string "this city.\p"
+	.string "That’s why I use FLY to instantly go to\n"
+	.string "any city I’ve visited.$"
 

@@ -159,7 +159,10 @@ RustboroCity_Text_167439:: @ 8167439
 	.string "LEADER: ROXANNE\p"
 	.string "“The ROCK-loving honors student!”$"
 
-	.incbin "baserom.gba", 0x167485, 0x58
+UnknownString_8167485: @ 8167485
+	.string "DEVON CORP. BRANCH OFFICE\p"
+	.string "“Access limited to DEVON employees\n"
+	.string "and authorized personnel.”$"
 
 RustboroCity_Text_1674DD:: @ 81674DD
 	.string "RUSTBORO CITY\p"

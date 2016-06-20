@@ -28,7 +28,9 @@ MauvilleCity_GameCorner_Text_181D73:: @ 8181D73
 	.string "Oh... You don’t need COINS, then?\n"
 	.string "Good luck on your adventure!$"
 
-	.incbin "baserom.gba", 0x181db2, 0x2f
+UnknownString_8181DB2: @ 8181DB2
+	.string "It’s ¥1,000 for 50 COINS.\n"
+	.string "Would you like some?$"
 
 MauvilleCity_GameCorner_Text_181DE1:: @ 8181DE1
 	.string "Welcome.\p"
@@ -48,7 +50,9 @@ MauvilleCity_GameCorner_Text_181E49:: @ 8181E49
 MauvilleCity_GameCorner_Text_181E76:: @ 8181E76
 	.string "You don’t have enough COINS.$"
 
-	.incbin "baserom.gba", 0x181e93, 0x2f
+UnknownString_8181E93: @ 8181E93
+	.string "There isn’t any room available for\n"
+	.string "placing {STR_VAR_1}.$"
 
 MauvilleCity_GameCorner_Text_181EC2:: @ 8181EC2
 	.string "Oh, is that so? \n"
@@ -58,7 +62,8 @@ MauvilleCity_GameCorner_Text_181EC2:: @ 8181EC2
 MauvilleCity_GameCorner_Text_181F08:: @ 8181F08
 	.string "Here you go!$"
 
-	.incbin "baserom.gba", 0x181f15, 0x28
+UnknownString_8181F15: @ 8181F15
+	.string "Oh, you can’t carry any more than that.$"
 
 MauvilleCity_GameCorner_Text_181F3D:: @ 8181F3D
 	.string "I made a mistake and got two of the\n"

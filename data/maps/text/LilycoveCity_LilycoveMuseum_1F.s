@@ -77,7 +77,9 @@ LilycoveCity_LilycoveMuseum_1F_Text_187810:: @ 8187810
 	.string "small characters of an ancient,\l"
 	.string "unreadable language.$"
 
-	.incbin "baserom.gba", 0x18788b, 0x2c
+UnknownString_818788B: @ 818788B
+	.string "Hmmm...\n"
+	.string "What works of great magnificence...$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_1878B7:: @ 81878B7
 	.string "Battling with POKéMON is fun,\n"

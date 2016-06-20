@@ -102,5 +102,10 @@ Route110_TrickHouseEnd_Text_19CA8B:: @ 819CA8B
 	.string "Now, now! You’re ignoring me now?\n"
 	.string "Now that, I consider heartbreaking!$"
 
-	.incbin "baserom.gba", 0x19cad1, 0x7e
+UnknownString_819CAD1: @ 819CAD1
+	.string "{PLAYER} wrote down the secret code\n"
+	.string "on the door.\p"
+	.string "“TRICK MASTER is fabulous.”\n"
+	.string "... ... ... ... ... ... ... ...\p"
+	.string "The lock clicked open!$"
 

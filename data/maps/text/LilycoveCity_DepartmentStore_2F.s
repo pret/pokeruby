@@ -10,5 +10,7 @@ LilycoveCity_DepartmentStore_2F_Text_18C1D9:: @ 818C1D9
 	.string "I’m leaving on a long journey soon.\n"
 	.string "I need to stock up on items.$"
 
-	.incbin "baserom.gba", 0x18c21a, 0x31
+UnknownString_818C21A: @ 818C21A
+	.string "FOR YOUR TRAVELING COMPANIONS\n"
+	.string "2F: TRAINER’S ZONE$"
 

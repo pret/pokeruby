@@ -207,3 +207,264 @@ SootopolisCity_EventScript_14D2F6:: @ 814D2F6
 	msgbox SootopolisCity_Text_16A711, 3
 	end
 
+ClosedSootopolisGymDoorScript:: @ 814D2FF
+	msgbox ClosedSootopolisGymDoorText, 3
+	end
+
+SootopolisCity_EventScript_14D308:: @ 814D308
+	lockall
+	move 10, SootopolisCity_Movement_1A083F
+	move 255, SootopolisCity_Movement_1A0843
+	waitmove 0
+	playsfx 21
+	move 10, SootopolisCity_Movement_1A0833
+	waitmove 0
+	move 10, SootopolisCity_Movement_1A0835
+	waitmove 0
+	move 10, SootopolisCity_Movement_14D413
+	waitmove 0
+	.ifdef SAPPHIRE
+	msgbox SootopolisCity_Text_169988, 4
+	.else
+	msgbox SootopolisCity_Text_169E0F, 4
+	.endif
+	closebutton
+	move 10, SootopolisCity_Movement_14D417
+	move 255, SootopolisCity_Movement_14D440
+	waitmove 10
+	.ifdef SAPPHIRE
+	msgbox SootopolisCity_Text_1699FD, 4
+	.else
+	msgbox SootopolisCity_Text_169E82, 4
+	.endif
+	playsfx 21
+	move 5, SootopolisCity_Movement_1A0833
+	waitmove 0
+	move 5, SootopolisCity_Movement_1A0835
+	waitmove 0
+	.ifdef SAPPHIRE
+	msgbox SootopolisCity_Text_169AB7, 4
+	.else
+	msgbox SootopolisCity_Text_169F3C, 4
+	.endif
+	closebutton
+	pause 30
+	move 5, SootopolisCity_Movement_14D46A
+	move 10, SootopolisCity_Movement_14D41D
+	move 255, SootopolisCity_Movement_14D445
+	waitmove 0
+	move 5, SootopolisCity_Movement_1A0843
+	move 255, SootopolisCity_Movement_1A0843
+	waitmove 0
+	pause 30
+	move 10, SootopolisCity_Movement_1A0845
+	waitmove 0
+	.ifdef SAPPHIRE
+	msgbox SootopolisCity_Text_169AE7, 4
+	.else
+	msgbox SootopolisCity_Text_169F6B, 4
+	.endif
+	closebutton
+	pause 30
+	move 5, SootopolisCity_Movement_14D47C
+	move 255, SootopolisCity_Movement_14D457
+	move 10, SootopolisCity_Movement_14D42D
+	waitmove 0
+	move 5, SootopolisCity_Movement_1A083F
+	waitmove 0
+	.ifdef SAPPHIRE
+	msgbox SootopolisCity_Text_169BC7, 4
+	.else
+	msgbox SootopolisCity_Text_16A06C, 4
+	.endif
+	move 255, SootopolisCity_Movement_1A083F
+	waitmove 0
+	.ifdef SAPPHIRE
+	msgbox SootopolisCity_Text_169C99, 4
+	.else
+	msgbox SootopolisCity_Text_16A13E, 4
+	.endif
+	moveoffscreen 5
+	spritebehave 5, 9
+	moveoffscreen 10
+	spritebehave 10, 10
+	setvar 0x405e, 2
+	releaseall
+	end
+
+SootopolisCity_Movement_14D413:: @ 814D413
+	step_left
+	step_left
+	step_left
+	step_end
+
+SootopolisCity_Movement_14D417:: @ 814D417
+	step_right
+	step_right
+	step_right
+	step_up
+	step_25
+	step_end
+
+SootopolisCity_Movement_14D41D:: @ 814D41D
+	step_down
+	step_right
+	step_down
+	step_down
+	step_down
+	step_right
+	step_right
+	step_right
+	step_right
+	step_down
+	step_down
+	step_down
+	step_down
+	step_left
+	step_left
+	step_end
+
+SootopolisCity_Movement_14D42D:: @ 814D42D
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_down
+	step_down
+	step_down
+	step_down
+	step_down
+	step_down
+	step_down
+	step_down
+	step_right
+	step_right
+	step_right
+	step_right
+	step_end
+
+SootopolisCity_Movement_14D440:: @ 814D440
+	step_right
+	step_right
+	step_right
+	step_right
+	step_end
+
+SootopolisCity_Movement_14D445:: @ 814D445
+	step_right
+	step_down
+	step_down
+	step_down
+	step_right
+	step_right
+	step_right
+	step_right
+	step_down
+	step_down
+	step_down
+	step_down
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_end
+
+SootopolisCity_Movement_14D457:: @ 814D457
+	step_14
+	step_14
+	step_left
+	step_left
+	step_left
+	step_down
+	step_down
+	step_down
+	step_down
+	step_down
+	step_down
+	step_down
+	step_down
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_end
+
+SootopolisCity_Movement_14D46A:: @ 814D46A
+	step_down
+	step_down
+	step_down
+	step_right
+	step_right
+	step_right
+	step_right
+	step_down
+	step_down
+	step_down
+	step_down
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_end
+
+SootopolisCity_Movement_14D47C:: @ 814D47C
+	step_14
+	step_14
+	step_left
+	step_left
+	step_down
+	step_down
+	step_down
+	step_down
+	step_down
+	step_down
+	step_down
+	step_down
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_right
+	step_end
+
+SootopolisCity_EventScript_14D48F:: @ 814D48F
+	.ifdef SAPPHIRE
+	msgbox SootopolisCity_Text_169D37, 2
+	.else
+	msgbox SootopolisCity_Text_16A1DB, 2
+	.endif
+	end
+
+SootopolisCity_EventScript_14D498:: @ 814D498
+	lock
+	faceplayer
+	checkflag 113
+	jumpeq SootopolisCity_EventScript_14D4AD
+	.ifdef SAPPHIRE
+	msgbox SootopolisCity_Text_169DA6, 2
+	.else
+	msgbox SootopolisCity_Text_16A249, 4
+	.endif
+	release
+	end
+
+SootopolisCity_EventScript_14D4AD:: @ 814D4AD
+	msgbox SootopolisCity_Text_16A33E, 4
+	closebutton
+	move LAST_TALKED, SootopolisCity_Movement_1A0845
+	waitmove 0
+	pause 50
+	setanimation 0, 1
+	doanimation 30
+	pause 15
+	disappear LAST_TALKED
+	checkanimation 30
+	release
+	end

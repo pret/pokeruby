@@ -33,5 +33,10 @@ Route110_TrickHousePuzzle3_Text_19D110:: @ 819D110
 	.string "How many traps are in this house?\p"
 	.string "You may be the one to solve that.$"
 
-	.incbin "baserom.gba", 0x19d164, 0x7a
+UnknownString_819D164: @ 819D164
+	.string "{PLAYER} wrote down the secret code\n"
+	.string "on the door.\p"
+	.string "“TRICK MASTER is cool.”\n"
+	.string "... ... ... ... ... ... ... ...\p"
+	.string "The lock clicked open!$"
 

@@ -72,7 +72,7 @@ PacifidlogTown_House2_EventScript_154225:: @ 8154225
 
 PacifidlogTown_House2_EventScript_154254:: @ 8154254
 	specialval RESULT, 334
-	buffernum 0, 32781
+	buffernum 0, RESULT
 	msgbox PacifidlogTown_House2_Text_1792F2, 4
 	release
 	end

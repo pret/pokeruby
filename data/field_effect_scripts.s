@@ -52,7 +52,7 @@ gFieldEffectScriptPointers: @ 81D9B34
 	.4byte gFieldEffectScript_Unknown48
 	.4byte gFieldEffectScript_PopOutOfAsh
 	.4byte gFieldEffectScript_Unknown50
-	.4byte gFieldEffectScript_Unknown51
+	.4byte gFieldEffectScript_SweetScent
 	.4byte gFieldEffectScript_Unknown52
 	.4byte gFieldEffectScript_Bubbles
 	.4byte gFieldEffectScript_Unknown54
@@ -272,7 +272,7 @@ gFieldEffectScript_Unknown50: @ 81D9DCA
 	field_eff_loadfadedpal_callnative gFieldEffectObjectPaletteInfo2, sub_80875D4
 	field_eff_end
 
-gFieldEffectScript_Unknown51: @ 81D9DD4
+gFieldEffectScript_SweetScent: @ 81D9DD4
 	field_eff_callnative sub_812BFF0
 	field_eff_end
 

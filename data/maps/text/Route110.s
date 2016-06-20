@@ -216,5 +216,22 @@ Route110_Text_16F57C:: @ 816F57C
 	.string "No one seems to have taken the\n"
 	.string "challenge. There is no record...$"
 
-	.incbin "baserom.gba", 0x16f5d7, 0x12e
+UnknownString_816F5D7: @ 816F5D7
+	.string "I watered the plants every day.\n"
+	.string "They grew lots of flowers.\p"
+	.string "And they gave me lots of BERRIES, too.\p"
+	.string "Here you go!\n"
+	.string "You can have it!$"
+
+UnknownString_816F657: @ 816F657
+	.string "I’m trying to make RED {POKEBLOCK}S!\n"
+	.string "I hope you do, too!$"
+
+UnknownString_816F68A: @ 816F68A
+	.string "Your BAG’s BERRIES POCKET is full.\p"
+	.string "I’ll give it to you another time.$"
+
+UnknownString_816F6CF: @ 816F6CF
+	.string "I’m going to look for red BERRIES to\n"
+	.string "make RED {POKEBLOCK}S.$"
 
