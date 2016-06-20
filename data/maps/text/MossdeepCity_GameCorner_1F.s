@@ -34,3 +34,26 @@ MossdeepCity_GameCorner_1F_Text_18E777:: @ 818E777
 UnknownString_818E793: @ 818E793
 	.string "{STR_VAR_1}$"
 
+MossdeepCity_GameCorner_B1F_Text_18E796:: @ 818E796
+	.string "The match ended up a draw.$"
+
+MossdeepCity_GameCorner_1F_Text_18E7B1:: @ 818E7B1
+	.string "So, it became a standoff.\p"
+	.string "It was a brilliant match in which\n"
+	.string "neither side conceded a step!$"
+
+UnknownString_818E80B: @ 818E80B
+	.string "{STR_VAR_1}$"
+
+MossdeepCity_GameCorner_1F_Text_18E80E:: @ 818E80E
+	.string "That was superlative!\p"
+	.string "Why, it was like seeing myself in my\n"
+	.string "youth again!$"
+
+UnknownString_818E856: @ 818E856
+	.string "{STR_VAR_1}$"
+
+MossdeepCity_GameCorner_1F_Text_18E859:: @ 818E859
+	.string "Ah, too bad for you!\p"
+	.string "But it was a good match.\n"
+	.string "I hope you can win next time.$"

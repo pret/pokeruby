@@ -46,3 +46,24 @@ Route120_Text_171B0E:: @ 8171B0E
 	.string "I think you’re doing great.\p"
 	.string "Well, let’s meet again somewhere.$"
 
+Route119_Text_171B93:: @ 8171B93
+Route120_Text_171B93:: @ 8171B93
+	.string "Something unseeable is in the way.$"
+
+Route119_Text_171BB6:: @ 8171BB6
+	.string "Something unseeable is in the way.\p"
+	.string "Want to use the DEVON SCOPE?$"
+
+Route119_Text_171BF6:: @ 8171BF6
+	.string "{PLAYER} used the DEVON SCOPE.\p"
+	.string "An invisible POKéMON became completely\n"
+	.string "visible!\p"
+	.string "The startled POKéMON attacked!$"
+
+Route120_Text_171C5E:: @ 8171C5E
+	.string "ROUTE 120\n"
+	.string "{0x7B} FORTREE CITY$"
+
+Route120_Text_171C77:: @ 8171C77
+	.string "{0x7C} ROUTE 121\n"
+	.string "{0x7B} ROUTE 120$"
