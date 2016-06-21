@@ -12199,7 +12199,8 @@ gUnknown_083F77E4: @ 83F77E4
 
 	.global gUnknown_083F77FC
 gUnknown_083F77FC: @ 83F77FC
-	.incbin "baserom.gba", 0x003f77fc, 0x294
+	.incbin "baserom.gba", 0x003f77fc, 0x18
+	.incbin "graphics/misc/clock_misc.4bpp.lz"
 
 	.global gUnknown_083F7A90
 gUnknown_083F7A90: @ 83F7A90

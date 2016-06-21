@@ -880,11 +880,11 @@ gUnknown_08E8F1B8: @ 8E8F1B8
 
 	.global gUnknown_08E8F804
 gUnknown_08E8F804: @ 8E8F804
-	.incbin "baserom.gba", 0x00e8f804, 0x20
+	.incbin "graphics/misc/clock1.gbapal"
 
 	.global gUnknown_08E8F824
 gUnknown_08E8F824: @ 8E8F824
-	.incbin "baserom.gba", 0x00e8f824, 0x20
+	.incbin "graphics/misc/clock2.gbapal"
 
 	.global gUnknown_08E8F844
 gUnknown_08E8F844: @ 8E8F844
