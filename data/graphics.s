@@ -775,7 +775,7 @@ gUnknown_08E8A1C2: @ 8E8A1C2
 	.global gUnknown_08E8A1E0
 gUnknown_08E8A1E0: @ 8E8A1E0
 	.incbin "baserom.gba", 0x00e8a1e0, 0x3b8 
-	.incbin "graphics/misc/pokenav_contest_pokeball.gbapal"
+	.incbin "graphics/pokenav/contest_pokeball.gbapal"
 	.incbin "baserom.gba", 0x00E8A5B8, 0x20
 
 	.global gUnknown_08E8A5D8
@@ -1087,7 +1087,7 @@ gUnknown_08E9F624: @ 8E9F624
 	.global gUnknown_08E9F7E4
 gUnknown_08E9F7E4: @ 8E9F7E4
 	.incbin "baserom.gba", 0x00e9f7e4, 0x184
-	.incbin "graphics/misc/pokenav_contest_arrows.gbapal"
+	.incbin "graphics/pokenav/contest_arrows.gbapal"
 
 	.global gUnknown_08E9F988
 gUnknown_08E9F988: @ 8E9F988

@@ -10661,11 +10661,11 @@ gUnknown_083E040C: @ 83E040C
 
 	.global gUnknown_083E05D4
 gUnknown_083E05D4: @ 83E05D4
-	.incbin "graphics/misc/pokenav_navglyph.gbapal"
+	.incbin "graphics/pokenav/glyph.gbapal"
 
 	.global gUnknown_083E05F4
 gUnknown_083E05F4: @ 83E05F4
-	.incbin "graphics/misc/pokenav_navglyph.4bpp.lz"
+	.incbin "graphics/pokenav/glyph.4bpp.lz"
 
 	.global gUnknown_083E0804
 gUnknown_083E0804: @ 83E0804
@@ -10717,16 +10717,16 @@ gUnknown_083E3270: @ 83E3270
 	.4byte 0x080F0A25
 	.4byte 0x080F0A25
 	.4byte 0x080F0A75
-	.incbin "graphics/misc/pokenav_icon.gbapal"
+	.incbin "graphics/pokenav/icon.gbapal"
 
 	.global gUnknown_083E329C
 gUnknown_083E329C: @ 83E329C
-	.incbin "graphics/misc/pokenav_icon.4bpp.lz"
-	.incbin "graphics/misc/pokenav_contest_pokeball.4bpp"
+	.incbin "graphics/pokenav/icon.4bpp.lz"
+	.incbin "graphics/pokenav/contest_pokeball.4bpp"
 	.incbin "baserom.gba", 0x003E3780, 0x20
-	.incbin "graphics/misc/pokenav_contest_sparkle.gbapal"
-	.incbin "graphics/misc/pokenav_contest_sparkle.4bpp"
-	.incbin "graphics/misc/pokenav_contest_arrows.4bpp"
+	.incbin "graphics/pokenav/contest_sparkle.gbapal"
+	.incbin "graphics/pokenav/contest_sparkle.4bpp"
+	.incbin "graphics/pokenav/contest_arrows.4bpp"
 	.incbin "baserom.gba", 0x003E3BC0, 0x20
 	.incbin "graphics/unknown/unknown_3E3BE0.4bpp"
 
