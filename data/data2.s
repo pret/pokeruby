@@ -11095,15 +11095,16 @@ gUnknown_083E5A1C: @ 83E5A1C
 
 	.global gUnknown_083E5A20
 gUnknown_083E5A20: @ 83E5A20
-	.incbin "baserom.gba", 0x003e5a20, 0xd0
+	.incbin "baserom.gba", 0x003E5A20, 0xB0
+	.incbin "graphics/pokenav/cursor.gbapal"
 
 	.global gUnknown_083E5AF0
 gUnknown_083E5AF0: @ 83E5AF0
-	.incbin "baserom.gba", 0x003e5af0, 0x44
+	.incbin "graphics/pokenav/cursor_small.4bpp.lz"
 
 	.global gUnknown_083E5B34
 gUnknown_083E5B34: @ 83E5B34
-	.incbin "baserom.gba", 0x003e5b34, 0xec
+	.incbin "graphics/pokenav/cursor_large.4bpp.lz"
 
 	.global gUnknown_083E5C20
 gUnknown_083E5C20: @ 83E5C20
@@ -11166,19 +11167,20 @@ gUnknown_083E7718: @ 83E7718
 
 	.global gUnknown_083E771C
 gUnknown_083E771C: @ 83E771C
-	.incbin "baserom.gba", 0x003e771c, 0x20
+	.incbin "graphics/pokenav/map_frame.gbapal"
 
 	.global gUnknown_083E773C
 gUnknown_083E773C: @ 83E773C
-	.incbin "baserom.gba", 0x003e773c, 0x38
+	.incbin "graphics/pokenav/map_frame.4bpp.lz"
 
 	.global gUnknown_083E7774
 gUnknown_083E7774: @ 83E7774
-	.incbin "baserom.gba", 0x003e7774, 0xd8
+	.incbin "baserom.gba", 0x003e7774, 0xb8
+	.incbin "graphics/pokenav/map_misc.gbapal"
 
 	.global gUnknown_083E784C
 gUnknown_083E784C: @ 83E784C
-	.incbin "baserom.gba", 0x003e784c, 0xd4
+	.incbin "graphics/pokenav/map_misc.4bpp.lz"
 
 	.global gUnknown_083E7920
 gUnknown_083E7920: @ 83E7920

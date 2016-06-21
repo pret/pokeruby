@@ -1007,7 +1007,25 @@ gUnknown_08E96D2C: @ 8E96D2C
 
 	.global gUnknown_08E96EC8
 gUnknown_08E96EC8: @ 8E96EC8
-	.incbin "baserom.gba", 0x00e96ec8, 0x2980
+	.incbin "baserom.gba", 0x00e96ec8, 0x800
+	.incbin "graphics/slot_machine/slot_machine1.gbapal" @ palettes
+	.incbin "graphics/slot_machine/slot_machine2.gbapal"
+	.incbin "graphics/slot_machine/slot_machine3.gbapal"
+	.incbin "graphics/slot_machine/slot_machine4.gbapal"
+	.incbin "graphics/slot_machine/slot_machine5.gbapal"
+	.incbin "graphics/slot_machine/slot_machine6.gbapal"
+	.incbin "graphics/slot_machine/slot_machine7.gbapal"
+	.incbin "graphics/slot_machine/reel_symbols.4bpp"
+	.incbin "graphics/slot_machine/numbers.4bpp"
+	.incbin "graphics/slot_machine/bolt.4bpp"
+	.incbin "graphics/slot_machine/duck.4bpp"
+	.incbin "graphics/slot_machine/smoke.4bpp"
+	.incbin "graphics/slot_machine/reel_numbers.4bpp"
+	.incbin "graphics/slot_machine/bolt_large.4bpp"
+	.incbin "graphics/slot_machine/reel_explosion.4bpp"
+	.incbin "graphics/slot_machine/shadow.4bpp"
+	.incbin "graphics/slot_machine/reel_shock.4bpp"
+	.incbin "baserom.gba", 0x00E997E8, 0x60
 
 	.global gUnknown_08E99848
 gUnknown_08E99848: @ 8E99848
