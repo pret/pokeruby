@@ -4,6 +4,7 @@ PSSGFXDIR := graphics/pokemon_storage
 MISCGFXDIR := graphics/misc
 PKNAVGFXDIR := graphics/pokenav
 UNKNOWNGFXDIR := graphics/unknown
+REELGFXDIR := graphics/slot_machine
 
 $(MENUGFXDIR)/menu.gbapal: $(MENUGFXDIR)/menu_0.gbapal $(MENUGFXDIR)/menu_1.gbapal
 
@@ -118,3 +119,9 @@ $(PSSGFXDIR)/plain.4bpp: $(PSSGFXDIR)/plain_frame.4bpp $(PSSGFXDIR)/plain_bg.4bp
 
 $(PKNAVGFXDIR)/glyph.4bpp: $(PKNAVGFXDIR)/glyph.png
 	$(GFX) $< $@ -num_tiles 43
+	
+$(REELGFXDIR)/reel_time.4bpp: $(REELGFXDIR)/reel_pikachu.4bpp $(REELGFXDIR)/reel_machine.4bpp
+	@cat $(REELGFXDIR)/reel_pikachu.4bpp $(REELGFXDIR)/reel_machine.4bpp >$@
+	
+$(MISCGFXDIR)/birch_help.4bpp: $(MISCGFXDIR)/birch_bag.4bpp $(MISCGFXDIR)/birch_grass.4bpp
+	@cat $(MISCGFXDIR)/birch_bag.4bpp $(MISCGFXDIR)/birch_grass.4bpp >$@

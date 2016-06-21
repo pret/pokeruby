@@ -11907,7 +11907,7 @@ gUnknown_083EDE44: @ 83EDE44
 
 	.global gUnknown_083EDE8C
 gUnknown_083EDE8C: @ 83EDE8C
-	.incbin "baserom.gba", 0x003ede8c, 0x1154
+	.incbin "graphics/slot_machine/reel_time.4bpp.lz"
 
 	.global gUnknown_083EEFE0
 gUnknown_083EEFE0: @ 83EEFE0
@@ -12132,11 +12132,10 @@ gUnknown_083F62E8: @ 83F62E8
 
 	.global gUnknown_083F62EC
 gUnknown_083F62EC: @ 83F62EC
-	.incbin "baserom.gba", 0x003f62ec, 0x2
-
-	.global gUnknown_083F62EE
-gUnknown_083F62EE: @ 83F62EE
-	.incbin "baserom.gba", 0x003f62ee, 0x7e
+	.incbin "graphics/misc/birch_bag.gbapal"
+	.incbin "graphics/misc/birch_grass.gbapal"
+	.incbin "graphics/misc/birch_ballarrow.gbapal"
+	.incbin "graphics/misc/birch_circle.gbapal"
 
 	.global gUnknown_083F636C
 gUnknown_083F636C: @ 83F636C
@@ -12148,7 +12147,9 @@ gUnknown_083F64F8: @ 83F64F8
 
 	.global gUnknown_083F66F0
 gUnknown_083F66F0: @ 83F66F0
-	.incbin "baserom.gba", 0x003f66f0, 0xfc8
+	.incbin "graphics/misc/birch_help.4bpp.lz"
+	.incbin "graphics/misc/birch_ballarrow.4bpp.lz"
+	.incbin "graphics/misc/birch_circle.4bpp.lz"
 
 	.global gUnknown_083F76B8
 gUnknown_083F76B8: @ 83F76B8
