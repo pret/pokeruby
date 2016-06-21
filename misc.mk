@@ -1,6 +1,8 @@
 MENUGFXDIR := graphics/interface
 INTROGFXDIR := graphics/intro
 PSSGFXDIR := graphics/pokemon_storage
+MISCGFXDIR := graphics/misc
+UNKNOWNGFXDIR := graphics/unknown
 
 $(MENUGFXDIR)/menu.gbapal: $(MENUGFXDIR)/menu_0.gbapal $(MENUGFXDIR)/menu_1.gbapal
 
@@ -112,3 +114,6 @@ $(PSSGFXDIR)/plain_frame.4bpp: $(PSSGFXDIR)/plain_frame.png
 
 $(PSSGFXDIR)/plain.4bpp: $(PSSGFXDIR)/plain_frame.4bpp $(PSSGFXDIR)/plain_bg.4bpp
 	@cat $(PSSGFXDIR)/plain_frame.4bpp $(PSSGFXDIR)/plain_bg.4bpp >$@
+
+$(MISCGFXDIR)/pokenav_navglyph.4bpp: $(MISCGFXDIR)/pokenav_navglyph.png
+	$(GFX) $< $@ -num_tiles 43

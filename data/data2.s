@@ -10439,15 +10439,15 @@ gUnknown_083E03A8: @ 83E03A8
 
 	.global gUnknown_083E040C
 gUnknown_083E040C: @ 83E040C
-	.incbin "baserom.gba", 0x003e040c, 0x1c8
+	.incbin "graphics/misc/ribbons_half.4bpp.lz"
 
 	.global gUnknown_083E05D4
 gUnknown_083E05D4: @ 83E05D4
-	.incbin "baserom.gba", 0x003e05d4, 0x20
+	.incbin "graphics/misc/pokenav_navglyph.gbapal"
 
 	.global gUnknown_083E05F4
 gUnknown_083E05F4: @ 83E05F4
-	.incbin "baserom.gba", 0x003e05f4, 0x210
+	.incbin "graphics/misc/pokenav_navglyph.4bpp.lz"
 
 	.global gUnknown_083E0804
 gUnknown_083E0804: @ 83E0804
@@ -10493,19 +10493,37 @@ gUnknown_083E31F0: @ 83E31F0
 
 	.global gUnknown_083E3270
 gUnknown_083E3270: @ 83E3270
-	.incbin "baserom.gba", 0x003e3270, 0x2c
+	.4byte 0x080F0A25
+	.4byte 0x080F0A25
+	.4byte 0x080F0A75
+	.incbin "graphics/misc/pokenav_icon.gbapal"
 
 	.global gUnknown_083E329C
 gUnknown_083E329C: @ 83E329C
-	.incbin "baserom.gba", 0x003e329c, 0x9c4
+	.incbin "graphics/misc/pokenav_icon.4bpp.lz"
+	.incbin "graphics/misc/pokenav_contest_pokeball.4bpp"
+	.incbin "baserom.gba", 0x003E3780, 0x20
+	.incbin "graphics/misc/pokenav_contest_sparkle.gbapal"
+	.incbin "graphics/misc/pokenav_contest_sparkle.4bpp"
+	.incbin "graphics/misc/pokenav_contest_arrows.4bpp"
+	.incbin "baserom.gba", 0x003E3BC0, 0x20
+	.incbin "graphics/unknown/unknown_3E3BE0.4bpp"
 
 	.global gUnknown_083E3C60
 gUnknown_083E3C60: @ 83E3C60
-	.incbin "baserom.gba", 0x003e3c60, 0xa0
+@ replacing .incbin "baserom.gba", 0x003e3c60, 0xa0
+	.incbin "graphics/misc/ribbons_cool.gbapal"
+	.incbin "graphics/misc/ribbons_beauty.gbapal"
+	.incbin "graphics/misc/ribbons_cute.gbapal"
+	.incbin "graphics/misc/ribbons_smart.gbapal"
+	.incbin "graphics/misc/ribbons_tough.gbapal"
 
 	.global gUnknown_083E3D00
 gUnknown_083E3D00: @ 83E3D00
-	.incbin "baserom.gba", 0x003e3d00, 0x5f8
+	.incbin "graphics/misc/ribbons_full.4bpp.lz"
+	.incbin "graphics/unknown/unknown_3E41D8.gbapal"
+	.incbin "graphics/unknown/unknown_3E41D8.4bpp"
+	.incbin "baserom.gba", 0x003e42D8, 0x20
 
 	.global gUnknown_083E42F8
 gUnknown_083E42F8: @ 83E42F8
