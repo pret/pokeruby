@@ -42045,7 +42045,7 @@ sub_8065898: @ 8065898
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080658B4: .4byte gUnknown_0814B194
+_080658B4: .4byte gSpecials
 	thumb_func_end sub_8065898
 
 	thumb_func_start sub_80658B8
@@ -42071,7 +42071,7 @@ sub_80658B8: @ 80658B8
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080658E8: .4byte gUnknown_0814B194
+_080658E8: .4byte gSpecials
 	thumb_func_end sub_80658B8
 
 	thumb_func_start sub_80658EC
@@ -42341,8 +42341,8 @@ _08065AC8:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08065AD0: .4byte gUnknown_0814B6EC
-_08065AD4: .4byte gUnknown_0814B70C
+_08065AD0: .4byte gStdScripts
+_08065AD4: .4byte gStdScripts_End
 	thumb_func_end s08_jumpstd
 
 	thumb_func_start s09_callstd
@@ -42367,8 +42367,8 @@ _08065AF8:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08065B00: .4byte gUnknown_0814B6EC
-_08065B04: .4byte gUnknown_0814B70C
+_08065B00: .4byte gStdScripts
+_08065B04: .4byte gStdScripts_End
 	thumb_func_end s09_callstd
 
 	thumb_func_start s0A_jumpstd_if
@@ -42407,8 +42407,8 @@ _08065B40:
 	bx r1
 	.align 2, 0
 _08065B48: .4byte gUnknown_083762DC
-_08065B4C: .4byte gUnknown_0814B6EC
-_08065B50: .4byte gUnknown_0814B70C
+_08065B4C: .4byte gStdScripts
+_08065B50: .4byte gStdScripts_End
 	thumb_func_end s0A_jumpstd_if
 
 	thumb_func_start s0B_callstd_if
@@ -42447,8 +42447,8 @@ _08065B8C:
 	bx r1
 	.align 2, 0
 _08065B94: .4byte gUnknown_083762DC
-_08065B98: .4byte gUnknown_0814B6EC
-_08065B9C: .4byte gUnknown_0814B70C
+_08065B98: .4byte gStdScripts
+_08065B9C: .4byte gStdScripts_End
 	thumb_func_end s0B_callstd_if
 
 	thumb_func_start s0C_restore_execution_after_sCF
