@@ -7919,7 +7919,7 @@ gUnknown_0839F988: @ 839F988
 
 	.global gUnknown_0839FA7C
 gUnknown_0839FA7C: @ 839FA7C
-	.incbin "baserom.gba", 0x0039fa7c, 0x48
+	.incbin "graphics/pokedex/noball.4bpp.lz"
 
 	.global gUnknown_0839FAC4
 gUnknown_0839FAC4: @ 839FAC4
@@ -10439,7 +10439,9 @@ gUnknown_083DB7EC: @ 83DB7EC
 	.global gUnknown_083DB7F4
 gUnknown_083DB7F4: @ 83DB7F4
 	.incbin "baserom.gba", 0x003db7f4, 0x24C
-	.incbin "baserom.gba", 0x003dba40, 0x174
+	.incbin "graphics/misc/interview_frame.gbapal"
+	.incbin "graphics/misc/interview_frame.4bpp.lz"
+	.incbin "baserom.gba", 0x003dbb94, 0x20
 
 	.global gUnknown_083DBBB4
 gUnknown_083DBBB4: @ 83DBBB4
@@ -10637,11 +10639,11 @@ gUnknown_083E0314: @ 83E0314
 
 	.global gUnknown_083E0334
 gUnknown_083E0334: @ 83E0334
-	.incbin "baserom.gba", 0x003e0334, 0x20
+	.incbin "graphics/pokenav/trainereyes_misc_pal.bin" @ the original bytes have an "FF FF" instance which is incompatible with gbagfx to produce the bytes needed to match the original ROM, so I am forced to include it as a .bin until the lowest bit is properly handled or a better workaround is produced
 
 	.global gUnknown_083E0354
 gUnknown_083E0354: @ 83E0354
-	.incbin "baserom.gba", 0x003e0354, 0x48
+	.incbin "graphics/pokenav/trainereyes_misc.4bpp.lz"
 
 	.global gUnknown_083E039C
 gUnknown_083E039C: @ 83E039C
@@ -12685,11 +12687,11 @@ gUnknown_083FAE7C: @ 83FAE7C
 
 	.global gUnknown_083FAF1C
 gUnknown_083FAF1C: @ 83FAF1C
-	.incbin "baserom.gba", 0x003faf1c, 0x20
+	.incbin "graphics/pokedex/cry_meter.gbapal"
 
 	.global gUnknown_083FAF3C
 gUnknown_083FAF3C: @ 83FAF3C
-	.incbin "baserom.gba", 0x003faf3c, 0x338
+	.incbin "graphics/pokedex/cry_meter.4bpp.lz"
 
 	.global gUnknown_083FB274
 gUnknown_083FB274: @ 83FB274
@@ -13725,7 +13727,13 @@ gUnknown_0840A778: @ 840A778
 
 	.global gUnknown_0840A7E4
 gUnknown_0840A7E4: @ 840A7E4
-	.incbin "baserom.gba", 0x0040a7e4, 0x63c
+	.incbin "baserom.gba", 0x0040a7e4, 0x13c
+	.incbin "graphics/intro/intro3_misc1.gbapal"
+	.incbin "graphics/intro/intro3_misc2.gbapal"
+	.incbin "graphics/intro/intro3_misc.4bpp.lz"
+	.incbin "graphics/intro/intro1_eon.gbapal"
+	.incbin "graphics/intro/intro1_eon.4bpp.lz"
+	.incbin "baserom.gba", 0x0040ADE8, 0x38
 
 	.global gUnknown_0840AE20
 gUnknown_0840AE20: @ 840AE20
@@ -14039,7 +14047,8 @@ gUnknown_0840CB04: @ 840CB04
 
 	.global gUnknown_0840CB0C
 gUnknown_0840CB0C: @ 840CB0C
-	.incbin "baserom.gba", 0x0040cb0c, 0x40
+	.incbin "graphics/misc/diploma.gbapal"
+	.incbin "baserom.gba", 0x0040cb2c, 0x20
 
 	.global gUnknown_0840CB4C
 gUnknown_0840CB4C: @ 840CB4C
@@ -14047,7 +14056,7 @@ gUnknown_0840CB4C: @ 840CB4C
 
 	.global gUnknown_0840D288
 gUnknown_0840D288: @ 840D288
-	.incbin "baserom.gba", 0x0040d288, 0x9f8
+	.incbin "graphics/misc/diploma.4bpp.lz"
 
 	.global gExpandedPlaceholder_Empty
 gExpandedPlaceholder_Empty: @ 840DC80
@@ -16710,11 +16719,11 @@ gUnknown_08411948: @ 8411948
 
 	.global gUnknown_08411960
 gUnknown_08411960: @ 8411960
-	.incbin "baserom.gba", 0x00411960, 0x20
+	.incbin "graphics/misc/clock_small.gbapal"
 
 	.global gUnknown_08411980
 gUnknown_08411980: @ 8411980
-	.incbin "baserom.gba", 0x00411980, 0x90
+	.incbin "graphics/misc/clock_small.4bpp.lz"
 
 	.global gUnknown_08411A10
 gUnknown_08411A10: @ 8411A10
