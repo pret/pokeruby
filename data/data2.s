@@ -17048,7 +17048,9 @@ gUnknown_08416E24: @ 8416E24
 
 	.global gUnknown_08416E34
 gUnknown_08416E34: @ 8416E34
-	.incbin "baserom.gba", 0x00416e34, 0x50
+	.incbin "baserom.gba", 0x00416e34, 0x10
+	.incbin "graphics/misc/evo_sparkle.gbapal"
+	.incbin "graphics/misc/evo_sparkle.4bpp.lz"
 
 	.global gUnknown_08416E84
 gUnknown_08416E84: @ 8416E84
