@@ -746,7 +746,7 @@ gUnknown_08E89628: @ 8E89628
 
 	.global gUnknown_08E89648
 gUnknown_08E89648: @ 8E89648
-	.incbin "baserom.gba", 0x00e89648, 0x20
+	.incbin "graphics/pokenav/map_squares.gbapal"
 
 	.global gUnknown_08E89668
 gUnknown_08E89668: @ 8E89668

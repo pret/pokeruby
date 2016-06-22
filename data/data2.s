@@ -12325,7 +12325,7 @@ gUnknown_083F80AC: @ 83F80AC
 
 	.global gUnknown_083F828C
 gUnknown_083F828C: @ 83F828C
-	.incbin "baserom.gba", 0x003f828c, 0xb4
+	.incbin "graphics/pokenav/map_squares.4bpp.lz"
 
 	.global gUnknown_083F8340
 gUnknown_083F8340: @ 83F8340
@@ -12409,11 +12409,11 @@ gUnknown_083F8410: @ 83F8410
 
 	.global gUnknown_083F8418
 gUnknown_083F8418: @ 83F8418
-	.incbin "baserom.gba", 0x003f8418, 0x20
+	.incbin "graphics/pokedex/area_glow.gbapal"
 
 	.global gUnknown_083F8438
 gUnknown_083F8438: @ 83F8438
-	.incbin "baserom.gba", 0x003f8438, 0x134
+	.incbin "graphics/pokedex/area_glow.4bpp.lz"
 
 	.global gUnknown_083F856C
 gUnknown_083F856C: @ 83F856C
@@ -12533,19 +12533,39 @@ gUnknown_083F8EE8: @ 83F8EE8
 
 	.global gUnknown_083F8EF4
 gUnknown_083F8EF4: @ 83F8EF4
-	.incbin "baserom.gba", 0x003f8ef4, 0x208
+	.incbin "baserom.gba", 0x003f8ef4, 0x8
+	.incbin "graphics/roulette/shadow.gbapal"
+	.incbin "graphics/roulette/ball.gbapal"
+	.incbin "graphics/roulette/ball_counter.gbapal"
+	.incbin "graphics/roulette/cursor.gbapal"
+	.incbin "baserom.gba", 0x003F8F7C, 0x20
+	.incbin "graphics/roulette/shroomish.gbapal"
+	.incbin "graphics/roulette/tailow.gbapal"
+	.incbin "graphics/roulette/poke_icons.gbapal"
+	.incbin "graphics/roulette/wynaut.gbapal"
+	.incbin "graphics/roulette/azurill.gbapal"
+	.incbin "graphics/roulette/skitty.gbapal"
+	.incbin "graphics/roulette/makuhita.gbapal"
+	.incbin "baserom.gba", 0x003F907C, 0x20
+	.incbin "baserom.gba", 0x003F909C, 0x20
+	.incbin "baserom.gba", 0x003F90BC, 0x20
+	.incbin "baserom.gba", 0x003F90DC, 0x20
 
 	.global gUnknown_083F90FC
 gUnknown_083F90FC: @ 83F90FC
-	.incbin "baserom.gba", 0x003f90fc, 0x1ac
+	.incbin "graphics/roulette/ball.4bpp.lz"
+	.incbin "graphics/roulette/ball_counter.4bpp.lz"
 
 	.global gUnknown_083F92A8
 gUnknown_083F92A8: @ 83F92A8
-	.incbin "baserom.gba", 0x003f92a8, 0xa94
+	.incbin "graphics/roulette/roulette_tilt.4bpp.lz"
+	.incbin "graphics/roulette/poke_icons.4bpp.lz"
+	.incbin "graphics/roulette/poke_icons2.4bpp.lz"
 
 	.global gUnknown_083F9D3C
 gUnknown_083F9D3C: @ 83F9D3C
-	.incbin "baserom.gba", 0x003f9d3c, 0xf4
+	.incbin "graphics/roulette/shadow.4bpp.lz"
+	.incbin "graphics/roulette/cursor.4bpp.lz"
 
 	.global gUnknown_083F9E30
 gUnknown_083F9E30: @ 83F9E30
