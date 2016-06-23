@@ -1634,7 +1634,7 @@ gUnknown_0820C3B0: @ 820C3B0
 gUnknown_0820C3D1: @ 820C3D1
 	.incbin "baserom.gba", 0x0020c3d1, 0x7
 	.incbin "graphics/interface/ball_open.gbapal"
-	.incbin "baserom.gba", 0x0020c3f8, 0x600
+	.incbin "graphics/interface/rolling_ball.4bpp"
 
 	.global gUnknown_0820C9F8
 gUnknown_0820C9F8: @ 820C9F8
@@ -1642,7 +1642,7 @@ gUnknown_0820C9F8: @ 820C9F8
 	.incbin "graphics/interface/gba.gbapal"
 	.incbin "graphics/interface/trade_shadow.gbapal"
 	.incbin "baserom.gba", 0x0020ca58, 0x20 @ blank
-	.incbin "baserom.gba", 0x0020ca78, 0x20
+	.incbin "graphics/interface/trade_misc.gbapal"
 
 	.global gUnknown_0820CA98
 gUnknown_0820CA98: @ 820CA98
@@ -1651,7 +1651,7 @@ gUnknown_0820CA98: @ 820CA98
 
 	.global gUnknown_0820DD98
 gUnknown_0820DD98: @ 820DD98
-	.incbin "baserom.gba", 0x0020dd98, 0x1a00 @ unused?
+	.incbin "graphics/unknown/unknown_20DD98.8bpp" @ unused?
 
 	.global gUnknown_0820F798
 gUnknown_0820F798: @ 820F798
@@ -1667,11 +1667,22 @@ gUnknown_08211798: @ 8211798
 
 	.global gUnknown_08211F98
 gUnknown_08211F98: @ 8211F98
-	.incbin "baserom.gba", 0x00211f98, 0x17a0
+	.incbin "baserom.gba", 0x00211f98, 0x20 @ bunch of palettes?
+	.incbin "baserom.gba", 0x00211fb8, 0x20
+	.incbin "baserom.gba", 0x00211fd8, 0x20
+	.incbin "baserom.gba", 0x00211FF8, 0x20
+	.incbin "baserom.gba", 0x00212018, 0x20
+	.incbin "baserom.gba", 0x00212038, 0x20
+	.incbin "baserom.gba", 0x00212058, 0x20
+	.incbin "graphics/interface/gba2.gbapal"
+	.incbin "graphics/interface/trade_glow.4bpp"
+	.incbin "graphics/interface/trade_glow2.4bpp"
+	.incbin "graphics/interface/trade_cableend.4bpp"
+	.incbin "graphics/interface/trade_gbascreen.4bpp"
 
 	.global gUnknown_08213738
 gUnknown_08213738: @ 8213738
-	.incbin "baserom.gba", 0x00213738, 0x2040 @ copy of gba
+	.incbin "graphics/interface/gba2.8bpp"
 
 	.global gUnknown_08215778
 gUnknown_08215778: @ 8215778
@@ -7509,7 +7520,10 @@ gUnknown_0839DBFC: @ 839DBFC
 
 	.global gUnknown_0839DC00
 gUnknown_0839DC00: @ 839DC00
-	.incbin "baserom.gba", 0x0039dc00, 0x854
+	.incbin "baserom.gba", 0x0039dc00, 0x14
+	.incbin "graphics/birch_speech/birch.4bpp"
+	.incbin "graphics/birch_speech/birch.gbapal"
+	.incbin "baserom.gba", 0x0039e434, 0x20 @ another palette, unknown?
 
 	.align 2
 gFieldEffectObjectPalette4: @ 839E454
