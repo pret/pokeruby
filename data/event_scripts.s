@@ -655,6 +655,9 @@ gUnknown_0815F528: @ 815F528
 	.include "data/maps/text/VictoryRoad_1F.s"
 	.include "data/maps/text/VictoryRoad_B1F.s"
 	.include "data/maps/text/VictoryRoad_B2F.s"
+	.include "data/maps/text/ShoalCave_LowTideEntranceRoom.s"
+	.include "data/maps/text/ShoalCave_LowTideInnerRoom.s"
+	.include "data/maps/text/ShoalCave_LowTideStairsRoom.s"
 	.include "data/maps/text/ShoalCave_LowTideLowerRoom.s"
 	.include "data/maps/text/NewMauville_Entrance.s"
 	.include "data/maps/text/NewMauville_Inside.s"
@@ -675,6 +678,9 @@ gUnknown_0815F528: @ 815F528
 	.include "data/maps/text/BattleTower_Outside.s"
 	.include "data/maps/text/BattleTower_Lobby.s"
 	.include "data/maps/text/BattleTower_BattleRoom.s"
+	.include "data/maps/text/SouthernIsland_Exterior.s"
+	.include "data/maps/text/SouthernIsland_Interior.s"
+	.include "data/maps/text/SafariZone_RestHouse.s"
 	.include "data/maps/text/Route104_Prototype.s"
 	.include "data/maps/text/Route104_PrototypePrettyPetalFlowerShop.s"
 	.include "data/maps/text/Route109_SeashoreHouse.s"
@@ -707,6 +713,7 @@ UnknownString_819C21F: @ 819C21F
 	.include "data/maps/text/Route110_SeasideCyclingRoadSouthEntrance.s"
 	.include "data/maps/text/Route110_SeasideCyclingRoadNorthEntrance.s"
 	.include "data/maps/text/Route113_GlassWorkshop.s"
+	.include "data/maps/text/Route123_BerryMastersHouse.s"
 	.include "data/maps/text/Route119_WeatherInstitute_1F.s"
 	.include "data/maps/text/Route119_WeatherInstitute_2F.s"
 	.include "data/maps/text/Route119_House.s"
@@ -776,7 +783,6 @@ gUnknown_0819F887: @ 819F887
 
 	.global gUnknown_0819F8AE
 gUnknown_0819F8AE: @ 819F8AE
-
 	.incbin "baserom.gba", 0x19f8ae, 0x89
 
 Std_6::
@@ -790,7 +796,6 @@ Std_6::
 
 	.global gUnknown_0819FA81
 gUnknown_0819FA81: @ 819FA81
-
 	.incbin "baserom.gba", 0x19fa81, 0x192
 
 EverGrandeCity_HallOfFame_EventScript_19FC13:: @ 819FC13
@@ -838,7 +843,6 @@ gUnknown_0819FC74: @ 819FC74
 
 	.global gUnknown_0819FC9F
 gUnknown_0819FC9F: @ 819FC9F
-
 	.incbin "baserom.gba", 0x19fc9f, 0x6a
 
 EverGrandeCity_HallOfFame_EventScript_19FD09:: @ 819FD09
@@ -6318,9 +6322,9 @@ FallarborTown_ContestLobby_Text_1A68C6:: @ 81A68C6
 	.string "later on.$"
 
 	.include "data/maps/text/LinkContestRoom1.s"
+
 	.global gUnknown_081A6E72
 gUnknown_081A6E72: @ 81A6E72
-
 	.incbin "baserom.gba", 0x1a6e72, 0x10a
 
 FallarborTown_ContestLobby_Text_1A6F7C:: @ 81A6F7C
@@ -11461,33 +11465,87 @@ FallarborTown_ContestLobby_EventScript_1B799A:: @ 81B799A
 
 	.include "data/text/trainers.s"
 
-	.global gUnknown_081C33E6
-gUnknown_081C33E6: @ 81C33E6
-	.incbin "baserom.gba", 0x1C33E6, 0x9
+Event_RepelWoreOff:: @ 81C33E6
+	msgbox Text_RepelWoreOff, 3
+	end
 
-UnknownString_81C33EF: @ 81C33EF
+Text_RepelWoreOff: @ 81C33EF
 	.string "REPEL’s effect wore off...$"
 
-	.global gUnknown_081C340A
-gUnknown_081C340A: @ 81C340A
-	.incbin "baserom.gba", 0x001c340a, 0x23
+gUnknown_081C340A:: @ 81C340A
+	setvar 0x40a4, 1
+	special 206
+	warp3 Route121_SafariZoneEntrance, 255, 2, 5
+	end
 
-	.global gUnknown_081C342D
-gUnknown_081C342D: @ 81C342D
-	.incbin "baserom.gba", 0x001c342d, 0x1b
+EventScript_1C341B: @ 81C341B
+	setvar 0x40a4, 1
+	special 206
+	warp Route121_SafariZoneEntrance, 255, 2, 5
+	waitstate
+	end
 
-	.global gUnknown_081C3448
-gUnknown_081C3448: @ 81C3448
-	.incbin "baserom.gba", 0x001c3448, 0x11
+gUnknown_081C342D:: @ 81C342D
+	lockall
+	msgbox UnknownString_81C34B2, 5
+	compare RESULT, 1
+	jumpeq EventScript_1C3443
+	releaseall
+	end
 
-	.global gUnknown_081C3459
-gUnknown_081C3459: @ 81C3459
-	.incbin "baserom.gba", 0x001c3459, 0x11
+EventScript_1C3443:
+	jump EventScript_1C341B
 
-	.global gUnknown_081C346A
-gUnknown_081C346A: @ 81C346A
+gUnknown_081C3448:: @ 81C3448
+	lockall
+	playsfx 73
+	message UnknownString_81C34E4
+	waittext
+	waitbutton
+	releaseall
+	jump EventScript_1C341B
 
-	.incbin "baserom.gba", 0x1C346A, 0x48
+gUnknown_081C3459:: @ 81C3459
+	lockall
+	playsfx 73
+	message UnknownString_81C3514
+	waittext
+	waitbutton
+	releaseall
+	jump EventScript_1C341B
+
+gUnknown_081C346A:: @ 81C346A
+	lockall
+	special 207
+	compare RESULT, -1
+	jumpif 5, EventScript_1C34A9
+	msgbox UnknownString_81C354E, 5
+	compare RESULT, 1
+	jumpeq EventScript_1C348E
+	releaseall
+	end
+
+EventScript_1C348E::
+	fadescreen 1
+	special 208
+	waitstate
+	compare RESULT, -1
+	jumpif 5, EventScript_1C34A0
+	end
+
+EventScript_1C34A0::
+	message UnknownString_81C35A9
+	waittext
+	waitbutton
+	releaseall
+	end
+
+EventScript_1C34A9::
+	message UnknownString_81C3583
+	waittext
+	waitbutton
+	releaseall
+	end
 
 UnknownString_81C34B2: @ 81C34B2
 	.string "Would you like to exit the SAFARI ZONE\n"
@@ -11533,7 +11591,25 @@ SafariZone_Southwest_Text_1C3EA3:: @ 81C3EA3
 	.string "“Relieve your tired feet.”\n"
 	.string "REST HOUSE$"
 
-	.include "data/maps/text/SafariZone_RestHouse.s"
+SafariZone_RestHouse_Text_1C3EC9:: @ 81C3EC9
+	.string "I don’t have any {POKEBLOCK}S, but I caught\n"
+	.string "a good number of POKéMON.\p"
+	.string "You can improve your chances of making\n"
+	.string "a catch by getting closer to them\l"
+	.string "before throwing a SAFARI BALL.$"
+
+SafariZone_RestHouse_Text_1C3F71:: @ 81C3F71
+	.string "If you use {POKEBLOCK}S, wild POKéMON won’t\n"
+	.string "be so quick to run away.\p"
+	.string "It’s not much use to give {POKEBLOCK}S to\n"
+	.string "POKéMON that don’t flee easily.$"
+
+SafariZone_RestHouse_Text_1C3FF4:: @ 81C3FF4
+	.string "If you put a {POKEBLOCK} on the FEEDER,\n"
+	.string "POKéMON are attracted to it.\p"
+	.string "I think POKéMON with the same sort of\n"
+	.string "nature are drawn by a certain {POKEBLOCK}.$"
+
 MauvilleCity_GameCorner_EventScript_1C407E:: @ 81C407E
 	checkitem ITEM_COIN_CASE, 1
 	compare RESULT, 0
@@ -11581,7 +11657,8 @@ UnknownString_81C4139: @ 81C4139
 
 	.global gUnknown_081C4157
 gUnknown_081C4157: @ 81C4157
-	.incbin "baserom.gba", 0x001c4157, 0x42
+	.string "Place your wager with the + Control Pad,\n"
+	.string "then press the A Button.$"
 
 	.global gUnknown_081C4199
 gUnknown_081C4199: @ 81C4199
@@ -11922,8 +11999,22 @@ LilycoveCity_Harbor_Text_1C5120:: @ 81C5120
 	.string "That shivers my timbers!\p"
 	.string "All aboard!$"
 
-	.include "data/maps/text/SouthernIsland_Exterior.s"
-	.include "data/maps/text/SouthernIsland_Interior.s"
+SouthernIsland_Exterior_Text_1C5215:: @ 81C5215
+	.string "Aye, mate, there’s nothing here to\n"
+	.string "see or do on this forgettable island.\p"
+	.string "What say we sail back to LILYCOVE?$"
+
+SouthernIsland_Exterior_Text_1C5281:: @ 81C5281
+	.string "Aye, right, then!\n"
+	.string "Sail home we will!$"
+
+SouthernIsland_Exterior_Text_1C52A6:: @ 81C52A6
+	.string "Aye, right, as you like, then.$"
+
+SouthernIsland_Interior_Text_1C52C5:: @ 81C52C5
+	.string "“All dreams are but another reality.\n"
+	.string "Never forget...”$"
+
 SouthernIsland_Exterior_Text_1C52FB:: @ 81C52FB
 	.string "“Those whose memories fade seek to\n"
 	.string "carve them in their hearts...”$"
@@ -12022,7 +12113,52 @@ LilycoveCity_Text_1C5B5D:: @ 81C5B5D
 	.string "The way dignified simplicity suits me,\n"
 	.string "{POKEBLOCK}S perfectly suit POKéMON.$"
 
-	.include "data/maps/text/Route123_BerryMastersHouse.s"
+Route123_BerryMastersHouse_Text_1C5BC4:: @ 81C5BC4
+	.string "You may call me the BERRY MASTER.\p"
+	.string "I dream of filling the world with\n"
+	.string "beautiful flowers, so I raise BERRIES\l"
+	.string "and hand them out to everyone.\p"
+	.string "You’re deserving of one!$"
+
+Route123_BerryMastersHouse_Text_1C5C66:: @ 81C5C66
+	.string "Why be stingy?\n"
+	.string "Take another!$"
+
+Route123_BerryMastersHouse_Text_1C5C83:: @ 81C5C83
+	.string "Be sure to visit the PRETTY PETAL\n"
+	.string "flower shop near RUSTBORO.\p"
+	.string "Let flowers fill the world!$"
+
+Route123_BerryMastersHouse_Text_1C5CDC:: @ 81C5CDC
+	.string "I’m done for today.\n"
+	.string "Come again another day.\p"
+	.string "Let flowers fill the world!$"
+
+Route123_BerryMastersHouse_Text_1C5D24:: @ 81C5D24
+	.string "The way my husband grows BERRIES,\n"
+	.string "oh, he’s the best in the world.\p"
+	.string "He makes me proud, that he does.\p"
+	.string "Incidentally, child, have you heard\n"
+	.string "a good saying lately?$"
+
+Route123_BerryMastersHouse_Text_1C5DC1:: @ 81C5DC1
+	.string "Ah! What a remarkable saying!\n"
+	.string "Inspirational, it is!\p"
+	.string "I want you to have this.$"
+
+Route123_BerryMastersHouse_Text_1C5E0E:: @ 81C5E0E
+	.string "Oh! A good saying it is.\n"
+	.string "You’re quite remarkable.\p"
+	.string "I want you to have this.$"
+
+Route123_BerryMastersHouse_Text_1C5E59:: @ 81C5E59
+	.string "Our four grandchildren should become\n"
+	.string "more accomplished than my husband.\p"
+	.string "Joy never goes out of my life!$"
+
+Route123_BerryMastersHouse_Text_1C5EC0:: @ 81C5EC0
+	.string "Ah...$"
+
 Route104_PrettyPetalFlowerShop_Text_1C5EC6:: @ 81C5EC6
 	.string "Hello!\p"
 	.string "This is the PRETTY PETAL flower shop.\n"
@@ -12121,10 +12257,52 @@ SootopolisCity_Text_1C6626:: @ 81C6626
 	.string "It doesn’t matter...\p"
 	.string "There’s so much that I want to know...$"
 
-	.include "data/maps/text/ShoalCave_LowTideEntranceRoom.s"
-	.include "data/maps/text/ShoalCave_LowTideInnerRoom.s"
+ShoalCave_LowTideEntranceRoom_Text_1C6668:: @ 81C6668
+	.string "Are you planning on going deep in\n"
+	.string "there?\p"
+	.string "How about bringing me back some\n"
+	.string "SHOAL SALT and SHOAL SHELLS?\p"
+	.string "I can make you something good if\n"
+	.string "you bring me the ingredients.$"
+
+ShoalCave_LowTideEntranceRoom_Text_1C670D:: @ 81C670D
+	.string "If you bring me four each of the\n"
+	.string "SHOAL SALT and SHOAL SHELLS,\l"
+	.string "I can make you a SHELL BELL...\p"
+	.string "You can get those ingredients\n"
+	.string "every day.$"
+
+ShoalCave_LowTideEntranceRoom_Text_1C6793:: @ 81C6793
+	.string "Oh, hey! SHOAL SALT and SHOAL\n"
+	.string "SHELLS! And enough of them, too!\p"
+	.string "Would you like me to make you a\n"
+	.string "SHELL BELL with them?$"
+
+ShoalCave_LowTideEntranceRoom_Text_1C6808:: @ 81C6808
+	.string "All righty, then! I’ll make you a\n"
+	.string "SHELL BELL right away.\p"
+	.string "... ... ... ... ... ... ... ...\n"
+	.string "... ... ... ... ... ... ... ...\p"
+	.string "There! Done!$"
+
+ShoalCave_LowTideEntranceRoom_Text_1C688E:: @ 81C688E
+	.string "Have a POKéMON hold on to that.\n"
+	.string "It’ll love it, that’s for certain.\p"
+	.string "Why, the SHELL BELL’s chime...\n"
+	.string "It’s simply sublime!\p"
+	.string "You can get its ingredients every\n"
+	.string "day, so I can make you more.$"
+
+ShoalCave_LowTideEntranceRoom_Text_1C6944:: @ 81C6944
+	.string "Oh... Is that so...\n"
+	.string "I wanted to make a SHELL BELL...$"
+
+ShoalCave_LowTideInnerRoom_Text_1C6979:: @ 81C6979
 ShoalCave_LowTideLowerRoom_Text_1C6979:: @ 81C6979
-	.include "data/maps/text/ShoalCave_LowTideStairsRoom.s"
+ShoalCave_LowTideStairsRoom_Text_1C6979:: @ 81C6979
+	.string "There was some SHOAL SALT here.\n"
+	.string "But, there’s nothing here now.$"
+
 ShoalCave_LowTideInnerRoom_Text_1C69B8:: @ 81C69B8
 	.string "There was a SHOAL SHELL here.\n"
 	.string "But, there’s nothing here now.$"
@@ -12177,9 +12355,6 @@ SkyPillar_4F_MapScript1_1C6BBF:: @ 81C6BBF
 	copyvar 0x4022, 0x1
 	end
 
-	.global gUnknown_081C6BC5
-gUnknown_081C6BC5: @ 81C6BC5
-
 GraniteCave_B1F_EventScript_1C6BC5:: @ 81C6BC5
 	lockall
 	pause 20
@@ -12191,34 +12366,63 @@ GraniteCave_B1F_EventScript_1C6BC5:: @ 81C6BC5
 	waitstate
 	end
 
-	.global gUnknown_081C6BDE
-gUnknown_081C6BDE: @ 81C6BDE
-
-	.incbin "baserom.gba", 0x1c6bde, 0x19
+gUnknown_081C6BDE:: @ 81C6BDE
+	lockall
+	pause 20
+	move 255, GraniteCave_B1F_Movement_1C6BF7
+	waitmove 0
+	playsfx 43
+	pause 60
+	special 319
+	waitstate
+	end
 
 GraniteCave_B1F_Movement_1C6BF7:: @ 81C6BF7
 	step_54
 	step_end
 
-	.incbin "baserom.gba", 0x1c6bf9, 0x9
+@ 81C6BF9
+	msgbox Text_1C6C2B, 2
+	end
 
-	.global gUnknown_081C6C02
-gUnknown_081C6C02: @ 81C6C02
-	.incbin "baserom.gba", 0x001c6c02, 0x29
+gUnknown_081C6C02:: @ 81C6C02
+	msgbox Text_1C6C4B, 3
+	end
 
-@ 81C6C2B
+@ 81C6C0B
+	end
+
+@ 81C6C0C
+	msgbox Text_1C6C62, 3
+	end
+
+@ 81C6C15
+	lockall
+	call LittlerootTown_BrendansHouse_2F_EventScript_1B6A9B
+	releaseall
+	end
+
+@ 81C6C1D
+	lockall
+	braillemsg Underwater_SealedChamber_Braille_1C533D
+	waitbutton
+	hidebox 0, 0, 29, 19
+	releaseall
+	end
+
+Text_1C6C2B: @ 81C6C2B
 	@ This is a test message!
 	@ Welcome to the world of Pokémon!
 	.string "テストよう　メッセージです！\n"
 	.string "ポケモンの　せかいへ　ようこそ！$"
 
-@ 81C6C4B
+Text_1C6C4B: @ 81C6C4B
 	@ This is a test message!
 	@ This is a sign.
 	.string "テストよう　メッセージです！\n"
 	.string "かんばん　です$"
 
-@ 81C6C62
+Text_1C6C62: @ 81C6C62
 	@ This is a test message!
 	@ This is a coordinate-check event.
 	.string "テストよう　メッセージです！\n"
@@ -12240,14 +12444,12 @@ UnknownString_81C6CA6: @ 81C6CA6
 
 	.global gUnknown_081C6CE1
 gUnknown_081C6CE1: @ 81C6CE1
-
 BattleTower_BattleRoom_Text_1C6CE1:: @ 81C6CE1
 	.string "SAVING...\n"
 	.string "DON’T TURN OFF THE POWER.$"
 
 	.global gUnknown_081C6D05
 gUnknown_081C6D05: @ 81C6D05
-
 BattleTower_BattleRoom_Text_1C6D05:: @ 81C6D05
 	.string "{PLAYER} saved the game.$"
 

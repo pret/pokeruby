@@ -48374,7 +48374,7 @@ _0806888C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08068890: .4byte gUnknown_081C6BC5
+_08068890: .4byte GraniteCave_B1F_EventScript_1C6BC5
 	thumb_func_end sub_8068870
 
 	thumb_func_start sub_8068894
