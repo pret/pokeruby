@@ -7529,7 +7529,9 @@ gUnknown_0839DC00: @ 839DC00
 gFieldEffectObjectPalette4: @ 839E454
 	.incbin "graphics/field_effect_objects/palettes/04.gbapal"
 
-	.incbin "baserom.gba", 0x39e474, 0x480
+	.incbin "graphics/misc/center_monitor.4bpp"
+	.incbin "baserom.gba", 0x39e5F4, 0x200
+	.incbin "baserom.gba", 0x39e7F4, 0x100
 
 	.align 2
 gFieldEffectObjectPalette5: @ 839E8F4
