@@ -938,8 +938,9 @@
 	.endm
 
 	@ In FireRed, this command is a nop.
-	.macro event_8a
+	.macro event_8a byte1, byte2, byte3
 	.byte 0x8a
+	.byte \byte1, \byte2, \byte3
 	.endm
 
 	@ In FireRed, this command sets the byte at 0x03000EA8 to 0x01. I do not know what that means.
