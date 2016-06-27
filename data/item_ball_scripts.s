@@ -533,3 +533,7 @@ VictoryRoad_B1F_EventScript_1B1AED:: @ 81B1AED
 VictoryRoad_B2F_EventScript_1B1AFA:: @ 81B1AFA
 	giveitem ITEM_FULL_HEAL, 1, 1
 	end
+
+@ 81B1B07
+	giveitem ITEM_HM08, 1, 1
+	end

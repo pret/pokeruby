@@ -7,7 +7,24 @@
 	.include "data/script_cmd_table.s"
 
 gUnknown_0814B14C::
-	.incbin "baserom.gba", 0x0014b14c, 0x48
+	.4byte 0x202e8c4
+	.4byte 0x202e8c6
+	.4byte 0x202e8c8
+	.4byte 0x202e8ca
+	.4byte 0x202e8cc
+	.4byte 0x202e8ce
+	.4byte 0x202e8d0
+	.4byte 0x202e8d2
+	.4byte 0x202e8d4
+	.4byte 0x202e8d6
+	.4byte 0x202e8d8
+	.4byte 0x202e8da
+	.4byte 0x202e8e0
+	.4byte 0x202e8dc
+	.4byte 0x203855e
+	.4byte 0x202e8de
+	.4byte 0x203869e
+	.4byte 0x203869c
 
 	.include "data/specials.s"
 
@@ -361,29 +378,173 @@ gStdScripts_End::
 	.include "data/maps/scripts/SecretBase_YellowCave3.s"
 	.include "data/maps/scripts/SecretBase_YellowCave4.s"
 
-	.global gUnknown_0815F36C
-gUnknown_0815F36C: @ 815F36C
-	.incbin "baserom.gba", 0x0015f36c, 0x2d
+gUnknown_0815F36C:: @ 815F36C
+	lockall
+	playsfx 2
+	message UnknownString_81A3A72
+	doanimation 61
+	waitstate
+	waittext
+	waitbutton
+	playsfx 5
+	jump EventScript_15F384
+	end
 
-	.global gUnknown_0815F399
-gUnknown_0815F399: @ 815F399
-	.incbin "baserom.gba", 0x0015f399, 0xa1
+EventScript_15F384:
+	message UnknownString_81A3A87
+	waittext
+	checkflag 268
+	jumpeq EventScript_15F3A0
+	jump EventScript_15F3E2
+	end
 
-	.global gUnknown_0815F43A
-gUnknown_0815F43A: @ 815F43A
-	.incbin "baserom.gba", 0x0015f43a, 0x60
+gUnknown_0815F399:: @ 815F399
+	lockall
+	jump EventScript_15F384
+	end
 
-	.global gUnknown_0815F49A
-gUnknown_0815F49A: @ 815F49A
-	.incbin "baserom.gba", 0x0015f49a, 0x89
+EventScript_15F3A0:
+	multichoice 0, 0, 6, 0
+	switch RESULT
+	case 0, EventScript_15F432
+	case 1, EventScript_15F419
+	case 2, EventScript_15F436
+	case 3, EventScript_15F51D
+	case 127, EventScript_15F51D
+	end
 
-	.global gUnknown_0815F523
-gUnknown_0815F523: @ 815F523
-	.incbin "baserom.gba", 0x0015f523, 0x5
+EventScript_15F3E2:
+	multichoice 0, 0, 5, 0
+	switch RESULT
+	case 0, EventScript_15F432
+	case 1, EventScript_15F419
+	case 2, EventScript_15F51D
+	case 127, EventScript_15F51D
+	end
 
-	.global gUnknown_0815F528
-gUnknown_0815F528: @ 815F528
-	.incbin "baserom.gba", 0x15f528, 0x54
+EventScript_15F419:
+	msgbox UnknownString_81A38FB, 5
+	compare RESULT, 0
+	jumpeq EventScript_15F384
+	closebutton
+	special 10
+	releaseall
+	end
+
+EventScript_15F432:
+	special 14
+	end
+
+EventScript_15F436:
+	special 15
+	end
+
+gUnknown_0815F43A:: @ 815F43A
+	lockall
+	message UnknownString_81A3A72
+	playsfx 2
+	doanimation 61
+	waitstate
+	waittext
+	waitbutton
+	playsfx 5
+	jump EventScript_15F452
+	end
+
+EventScript_15F452:
+	message UnknownString_81A3A87
+	waittext
+	multichoice 0, 0, 7, 0
+	switch RESULT
+	case 0, EventScript_15F4A1
+	case 1, EventScript_15F436
+	case 2, EventScript_15F511
+	case 3, EventScript_15F51D
+	case 127, EventScript_15F51D
+	end
+
+gUnknown_0815F49A:: @ 815F49A
+	lockall
+	jump EventScript_15F452
+	end
+
+EventScript_15F4A1:
+	special 12
+	compare RESULT, 1
+	jumpeq EventScript_15F4E0
+	compare RESULT, 2
+	jumpeq EventScript_15F503
+	special 303
+	msgbox UnknownString_81A3958, 5
+	compare RESULT, 0
+	jumpeq EventScript_15F452
+	msgbox UnknownString_81A3A22, 3
+	special 13
+	special 26
+	releaseall
+	end
+
+EventScript_15F4E0:
+	msgbox UnknownString_81A3982, 5
+	compare RESULT, 0
+	jumpeq EventScript_15F452
+	msgbox UnknownString_81A3A3A, 3
+	special 13
+	special 26
+	releaseall
+	end
+
+EventScript_15F503:
+	msgbox UnknownString_81A39C0, 3
+	special 26
+	closebutton
+	releaseall
+	end
+
+EventScript_15F511:
+	message UnknownString_81A3AA2
+	waittext
+	jump EventScript_15F452
+	end
+
+EventScript_15F51D:
+	special 26
+	closebutton
+	releaseall
+	end
+
+gUnknown_0815F523:: @ 815F523
+	doanimation 52
+	waitstate
+	end
+
+gUnknown_0815F528:: @ 815F528
+	special 307
+	compare RESULT, 0
+	jumpeq EventScript_15F558
+	compare RESULT, 1
+	jumpeq EventScript_15F561
+	compare RESULT, 2
+	jumpeq EventScript_15F56A
+	compare RESULT, 3
+	jumpeq EventScript_15F573
+	end
+
+EventScript_15F558:
+	msgbox UnknownString_81A3B5B, 3
+	end
+
+EventScript_15F561:
+	msgbox UnknownString_81A3BA4, 3
+	end
+
+EventScript_15F56A:
+	msgbox UnknownString_81A3BE8, 3
+	end
+
+EventScript_15F573:
+	msgbox UnknownString_81A3C31, 3
+	end
 
 	.include "data/maps/scripts/SingleBattleColosseum.s"
 	.include "data/maps/scripts/TradeCenter.s"
@@ -761,29 +922,136 @@ SecretBase_RedCave1_EventScript_19F806:: @ 819F806
 	waitstate
 	return
 
-	.global gUnknown_0819F80B
-gUnknown_0819F80B: @ 819F80B
-	.incbin "baserom.gba", 0x0019f80b, 0xd
+gUnknown_0819F80B:: @ 819F80B
+	lock
+	special 56
+	special 55
+	waitstate
+	jump EventScript_19F8F2
 
-	.global gUnknown_0819F818
-gUnknown_0819F818: @ 819F818
-	.incbin "baserom.gba", 0x0019f818, 0x28
+gUnknown_0819F818:: @ 819F818
+	lock
+	faceplayer
+	move LAST_TALKED, Movement_19F8F0
+	waitmove 0
+	specialval RESULT, 54
+	compare RESULT, 0
+	jumpif 5, EventScript_19F83F
+	special 56
+	special 314
+	jump EventScript_19F8F2
 
-	.global gUnknown_0819F840
-gUnknown_0819F840: @ 819F840
-	.incbin "baserom.gba", 0x0019f840, 0x38
+EventScript_19F83F:
+	endtrainerbattle
 
-	.global gUnknown_0819F878
-gUnknown_0819F878: @ 819F878
-	.incbin "baserom.gba", 0x0019f878, 0xf
+gUnknown_0819F840:: @ 819F840
+	lock
+	faceplayer
+	call EventScript_19F8E5
+	specialval RESULT, 54
+	compare RESULT, 0
+	jumpif 5, EventScript_19F877
+	special 61
+	compare RESULT, 0
+	jumpif 5, EventScript_19F870
+	special 56
+	special 314
+	jump EventScript_19F8F2
 
-	.global gUnknown_0819F887
-gUnknown_0819F887: @ 819F887
-	.incbin "baserom.gba", 0x0019f887, 0x27
+EventScript_19F870:
+	special 53
+	waittext
+	waitbutton
+	release
+	end
 
-	.global gUnknown_0819F8AE
-gUnknown_0819F8AE: @ 819F8AE
-	.incbin "baserom.gba", 0x19f8ae, 0x89
+EventScript_19F877:
+	endtrainerbattle
+
+gUnknown_0819F878:: @ 819F878
+	move LAST_TALKED, Movement_19F8F0
+	waitmove 0
+	special 56
+	reptrainerbattle
+	endtrainerbattle
+
+gUnknown_0819F887:: @ 819F887
+	call EventScript_19F8E5
+	specialval RESULT, 58
+	compare RESULT, 0
+	jumpeq EventScript_19F8AD
+	special 56
+	special 314
+	special 52
+	waittext
+	waitbutton
+	special 59
+	waitstate
+	releaseall
+	end
+
+EventScript_19F8AD:
+	endtrainerbattle
+
+gUnknown_0819F8AE:: @ 819F8AE
+	specialval RESULT, 58
+	compare RESULT, 0
+	jumpeq EventScript_19F8DD
+	special 61
+	compare RESULT, 0
+	jumpif 5, EventScript_19F8DE
+	special 56
+	special 314
+	special 52
+	waittext
+	waitbutton
+	special 59
+	waitstate
+	releaseall
+	end
+
+EventScript_19F8DD:
+	endtrainerbattle
+
+EventScript_19F8DE:
+	special 53
+	waittext
+	waitbutton
+	release
+	end
+
+EventScript_19F8E5:
+	move LAST_TALKED, Movement_19F8F0
+	waitmove 0
+	return
+
+Movement_19F8F0::
+	step_59
+	step_end
+
+EventScript_19F8F2:
+	special 52
+	waittext
+	waitbutton
+	reptrainerbattle
+	specialval RESULT, 51
+	compare RESULT, 0
+	jumpeq EventScript_19F934
+	compare RESULT, 2
+	jumpeq EventScript_19F936
+	compare RESULT, 1
+	jumpeq EventScript_19F936
+	compare RESULT, 6
+	jumpeq EventScript_19F936
+	compare RESULT, 8
+	jumpeq EventScript_19F936
+
+EventScript_19F934:
+	releaseall
+	end
+
+EventScript_19F936:
+	endtrainerbattle2
 
 Std_6::
 	message 0x0
@@ -792,11 +1060,224 @@ Std_6::
 	release
 	return
 
-	.incbin "baserom.gba", 0x19f940, 0x141
+Event_ResetBerryTrees: @ 19F940
+	event_8a 2, 7, 5
+	event_8a 1, 3, 5
+	event_8a 11, 7, 5
+	event_8a 13, 3, 5
+	event_8a 4, 7, 5
+	event_8a 76, 1, 5
+	event_8a 8, 1, 5
+	event_8a 10, 6, 5
+	event_8a 25, 20, 5
+	event_8a 26, 2, 5
+	event_8a 66, 2, 5
+	event_8a 67, 20, 5
+	event_8a 69, 22, 5
+	event_8a 70, 22, 5
+	event_8a 71, 22, 5
+	event_8a 55, 17, 5
+	event_8a 56, 17, 5
+	event_8a 5, 1, 5
+	event_8a 6, 6, 5
+	event_8a 7, 1, 5
+	event_8a 16, 18, 5
+	event_8a 17, 18, 5
+	event_8a 18, 18, 5
+	event_8a 29, 19, 5
+	event_8a 28, 19, 5
+	event_8a 27, 19, 5
+	event_8a 24, 4, 5
+	event_8a 23, 3, 5
+	event_8a 22, 3, 5
+	event_8a 21, 4, 5
+	event_8a 19, 16, 5
+	event_8a 20, 16, 5
+	event_8a 80, 7, 5
+	event_8a 81, 7, 5
+	event_8a 77, 8, 5
+	event_8a 78, 8, 5
+	event_8a 68, 8, 5
+	event_8a 31, 10, 5
+	event_8a 33, 10, 5
+	event_8a 34, 21, 5
+	event_8a 35, 21, 5
+	event_8a 36, 21, 5
+	event_8a 83, 24, 5
+	event_8a 84, 24, 5
+	event_8a 85, 10, 5
+	event_8a 86, 6, 5
+	event_8a 37, 5, 5
+	event_8a 38, 5, 5
+	event_8a 39, 5, 5
+	event_8a 40, 3, 5
+	event_8a 41, 3, 5
+	event_8a 42, 3, 5
+	event_8a 46, 19, 5
+	event_8a 45, 20, 5
+	event_8a 44, 18, 5
+	event_8a 43, 16, 5
+	event_8a 47, 8, 5
+	event_8a 48, 5, 5
+	event_8a 49, 4, 5
+	event_8a 50, 2, 5
+	event_8a 52, 18, 5
+	event_8a 53, 18, 5
+	event_8a 62, 6, 5
+	event_8a 64, 6, 5
+	event_8a 58, 21, 5
+	event_8a 59, 21, 5
+	event_8a 60, 25, 5
+	event_8a 61, 25, 5
+	event_8a 79, 23, 5
+	event_8a 14, 23, 5
+	event_8a 15, 21, 5
+	event_8a 30, 21, 5
+	event_8a 65, 25, 5
+	event_8a 72, 25, 5
+	event_8a 73, 23, 5
+	event_8a 74, 23, 5
+	event_8a 87, 3, 5
+	event_8a 88, 10, 5
+	event_8a 89, 4, 5
+	event_8a 82, 36, 5
+	return
 
-	.global gUnknown_0819FA81
-gUnknown_0819FA81: @ 819FA81
-	.incbin "baserom.gba", 0x19fa81, 0x192
+gUnknown_0819FA81:: @ 819FA81
+	setflag 86
+	setflag 769
+	setflag 770
+	setflag 771
+	setflag 721
+	setflag 889
+	setflag 726
+	setflag 867
+	setflag 731
+	setflag 732
+	setflag 814
+	setflag 868
+	setflag 739
+	setflag 881
+	setflag 738
+	setflag 740
+	setflag 741
+	setflag 743
+	setflag 744
+	setflag 906
+	setflag 737
+	setflag 747
+	setflag 748
+	setflag 749
+	setflag 756
+	setflag 774
+	setflag 895
+	setflag 776
+	setflag 777
+	setflag 778
+	setflag 779
+	setflag 780
+	setflag 781
+	setflag 782
+	setflag 783
+	setflag 734
+	setflag 849
+	setflag 789
+	setflag 790
+	setflag 791
+	setflag 792
+	setflag 797
+	setflag 798
+	setflag 799
+	setflag 901
+	setflag 902
+	setflag 903
+	setflag 904
+	setflag 800
+	setflag 801
+	setflag 803
+	setflag 802
+	setflag 806
+	setflag 808
+	setflag 809
+	setflag 984
+	setflag 811
+	setflag 812
+	setflag 866
+	setflag 815
+	setflag 816
+	setflag 869
+	setflag 823
+	setflag 828
+	setflag 829
+	setflag 831
+	setflag 859
+	setflag 841
+	setflag 843
+	setflag 844
+	setflag 847
+	setflag 845
+	setflag 846
+	setflag 860
+	setflag 861
+	setflag 835
+	setflag 840
+	setflag 848
+	setflag 851
+	setflag 855
+	setflag 856
+	setflag 973
+	setflag 870
+	setflag 872
+	setflag 877
+	setflag 879
+	setflag 891
+	setflag 880
+	setflag 878
+	setflag 807
+	setflag 983
+	setflag 886
+	setflag 884
+	setflag 885
+	setflag 961
+	setflag 888
+	setflag 941
+	setflag 752
+	setflag 757
+	setflag 892
+	setflag 896
+	setflag 897
+	setflag 898
+	setflag 909
+	setflag 910
+	setflag 911
+	setflag 915
+	setflag 912
+	setflag 920
+	setflag 921
+	setflag 922
+	setflag 923
+	setflag 925
+	setflag 929
+	setflag 930
+	setflag 934
+	setflag 939
+	setflag 940
+	setflag 928
+	setflag 834
+	setflag 944
+	setflag 945
+	setflag 947
+	setflag 948
+	setflag 858
+	setflag 950
+	setflag 968
+	setflag 1133
+	setflag 727
+	setflag 979
+	setflag 751
+	setflag 991
+	call Event_ResetBerryTrees
+	end
 
 EverGrandeCity_HallOfFame_EventScript_19FC13:: @ 819FC13
 	clearflag 925
@@ -837,13 +1318,61 @@ EverGrandeCity_HallOfFame_EventScript_19FC70:: @ 819FC70
 	setflag 2141
 	return
 
-	.global gUnknown_0819FC74
-gUnknown_0819FC74: @ 819FC74
-	.incbin "baserom.gba", 0x0019fc74, 0x2b
+gUnknown_0819FC74:: @ 819FC74
+	call EverGrandeCity_HallOfFame_EventScript_19FD09
+	call EventScript_19FC84
+	jump gUnknown_0819FC9F
+	end
 
-	.global gUnknown_0819FC9F
-gUnknown_0819FC9F: @ 819FC9F
-	.incbin "baserom.gba", 0x19fc9f, 0x6a
+EventScript_19FC84:
+	checkflag 221
+	jumpeq Route101_EventScript_1A14DC
+	checkflag 1213
+	jumpif 0, Route101_EventScript_1A14DC
+	clearflag 929
+	setvar 0x4053, 2
+	return
+
+gUnknown_0819FC9F:: @ 819FC9F
+	compare 0x4096, 1
+	jumpeq EventScript_19FCC1
+	compare 0x4096, 2
+	jumpeq EventScript_19FCD7
+	compare 0x4096, 3
+	jumpeq EventScript_19FCF0
+	end
+
+EventScript_19FCC1:
+	setflag 740
+	setflag 743
+	setflag 741
+	setflag 744
+	clearflag 742
+	clearflag 739
+	clearflag 881
+	end
+
+EventScript_19FCD7:
+	setflag 741
+	setflag 744
+	setflag 738
+	setflag 742
+	setflag 739
+	setflag 881
+	clearflag 740
+	clearflag 743
+	end
+
+EventScript_19FCF0:
+	setflag 738
+	setflag 742
+	setflag 739
+	setflag 881
+	setflag 740
+	setflag 743
+	clearflag 741
+	clearflag 744
+	end
 
 EverGrandeCity_HallOfFame_EventScript_19FD09:: @ 819FD09
 	clearflag 1245
@@ -1141,9 +1670,75 @@ UnusedMixRecordsScript_Done: @ 81A0000
 	release
 	end
 
-	.global gUnknown_081A0009
-gUnknown_081A0009: @ 81A0009
-	.incbin "baserom.gba", 0x1a0009, 0xd8
+gUnknown_081A0009:: @ 81A0009
+	lockall
+	setvar 0x8004, 0
+	special 214
+	playsfx 4
+	msgbox UnknownString_81A09EC, 4
+	jump EventScript_1A0023
+	end
+
+EventScript_1A0023:
+	message UnknownString_81A0A01
+	waittext
+	special 262
+	waitstate
+	jump EventScript_1A0033
+	end
+
+EventScript_1A0033:
+	switch RESULT
+	case 0, EventScript_1A0085
+	case 1, EventScript_1A0070
+	case 2, EventScript_1A00CB
+	case 3, EventScript_1A00BE
+	case 127, EventScript_1A00BE
+	end
+
+EventScript_1A0070:
+	playsfx 2
+	msgbox UnknownString_81A0A54, 4
+	special 250
+	waitstate
+	jump EventScript_1A0023
+	end
+
+EventScript_1A0085:
+	playsfx 2
+	checkflag 2123
+	callif 0, EventScript_1A00AC
+	checkflag 2123
+	callif 1, EventScript_1A00B5
+	msgbox UnknownString_81A0A35, 4
+	special 60
+	waitstate
+	jump EventScript_1A0023
+	end
+
+EventScript_1A00AC:
+	msgbox UnknownString_81A0A1E, 4
+	return
+
+EventScript_1A00B5:
+	msgbox UnknownString_81A0A66, 4
+	return
+
+EventScript_1A00BE:
+	setvar 0x8004, 0
+	playsfx 3
+	special 215
+	releaseall
+	end
+
+EventScript_1A00CB:
+	checkflag 2052
+	jumpif 0, EventScript_1A00BE
+	playsfx 2
+	special 263
+	waitstate
+	jump EventScript_1A0033
+	end
 
 FallarborTown_EventScript_1A00E1:: @ 81A00E1
 FortreeCity_EventScript_1A00E1:: @ 81A00E1
@@ -1496,10 +2091,14 @@ SSTidalRooms_EventScript_1A02CA:: @ 81A02CA
 	fadescreen 0
 	return
 
-	.global gUnknown_081A02D6
-gUnknown_081A02D6: @ 81A02D6
-
-	.incbin "baserom.gba", 0x1a02d6, 0x11
+Event_WorldMap:: @ 81A02D6
+	lockall
+	msgbox UnknownString_817303D, 4
+	fadescreen 1
+	special 251
+	waitstate
+	releaseall
+	end
 
 DewfordTown_EventScript_1A02E7:: @ 81A02E7
 Route104_EventScript_1A02E7:: @ 81A02E7
@@ -1590,8 +2189,8 @@ Route101_EventScript_1A03B0:: @ 81A03B0
 	copyvar 0x8008, 0x8005
 	copyvar 0x8009, 0x8006
 	copyvar 0x800a, RESULT
-	buffernum 0, 32776
-	buffernum 1, 32777
+	buffernum 0, 0x8008
+	buffernum 1, 0x8009
 	msgbox Route101_Text_1C44DC, 4
 	call Route101_EventScript_1A03A5
 	compare 0x800a, 0
@@ -1600,8 +2199,8 @@ Route101_EventScript_1A03B0:: @ 81A03B0
 	specialval RESULT, 212
 	copyvar 0x8008, 0x8005
 	copyvar 0x8009, 0x8006
-	buffernum 0, 32776
-	buffernum 1, 32777
+	buffernum 0, 0x8008
+	buffernum 1, 0x8009
 	msgbox Route101_Text_1C4B05, 4
 	return
 
@@ -1644,7 +2243,20 @@ RusturfTunnel_EventScript_1A0442:: @ 81A0442
 	setflag 199
 	return
 
-	.incbin "baserom.gba", 0x1a0457, 0x25
+EventScript_1A0457: @ unreferenced?
+	pause 30
+	move 255, SlateportCity_OceanicMuseum_2F_Movement_1A0841
+	waitmove 0
+	spritevisible 255, 0, 0
+	pause 30
+	move 255, Movement_1A047A
+	waitmove 0
+	pause 30
+	return
+
+Movement_1A047A:
+	step_up
+	step_end
 
 BattleTower_Outside_EventScript_1A047C:: @ 81A047C
 SouthernIsland_Exterior_EventScript_1A047C:: @ 81A047C
@@ -1682,7 +2294,11 @@ CaveOfOrigin_B3F_EventScript_1A04BB:: @ 81A04BB
 	jump CaveOfOrigin_B2F_EventScript_1A04D3
 	end
 
-	.incbin "baserom.gba", 0x1a04c7, 0xc
+@ 81A04C7
+	lockall
+	setvar 0x4003, 1
+	jump CaveOfOrigin_B2F_EventScript_1A04D3
+	end
 
 CaveOfOrigin_1F_EventScript_1A04D3:: @ 81A04D3
 CaveOfOrigin_B2F_EventScript_1A04D3:: @ 81A04D3
@@ -2509,7 +3125,7 @@ Route111_Text_1A0F93:: @ 81A0F93
 	.string "The sandstorm is vicious.\n"
 	.string "It’s impossible to keep going.$"
 
-UnknownString_81A0FCC: @ 81A0FCC
+Text_NoRegisteredItem: @ 81A0FCC
 	.string "An item in the BAG can be registered\n"
 	.string "on SELECT for convenience.$"
 
@@ -2535,10 +3151,7 @@ RustboroCity_DevonCorp_2F_Text_1A1102:: @ 81A1102
 	.string "Want to give a nickname to the\n"
 	.string "{STR_VAR_2} you received?$"
 
-	.global gUnknown_081A1132
-gUnknown_081A1132: @ 81A1132
-
-UnknownString_81A1132: @ 81A1132
+UnknownString_81A1132:: @ 81A1132
 	.string "{STR_VAR_1} fainted...\p$"
 
 UnknownString_81A1141: @ 81A1141
@@ -2584,14 +3197,29 @@ FallarborTown_House1_Text_1A1498:: @ 81A1498
 	.string "{PLAYER} handed over the\n"
 	.string "{STR_VAR_1}.$"
 
-	.global gUnknown_081A14AF
-gUnknown_081A14AF: @ 81A14AF
-	.incbin "baserom.gba", 0x001a14af, 0x9
+Event_NoRegisteredItem:: @ 81A14AF
+	msgbox Text_NoRegisteredItem, 3
+	end
 
-	.global gUnknown_081A14B8
-gUnknown_081A14B8: @ 81A14B8
+gUnknown_081A14B8:: @ 81A14B8
+	lockall
+	special 199
+	waitstate
+	compare RESULT, 1
+	jumpeq EventScript_1A14CA
+	releaseall
+	end
 
-	.incbin "baserom.gba", 0x1a14b8, 0x24
+EventScript_1A14CA::
+	message UnknownString_81A1141
+	waittext
+	waitbutton
+	special 332
+	waitstate
+	fadescreen 1
+	special 200
+	waitstate
+	end
 
 OldaleTown_PokemonCenter_1F_EventScript_1A14DC:: @ 81A14DC
 PacifidlogTown_House2_EventScript_1A14DC:: @ 81A14DC
@@ -2698,7 +3326,7 @@ Route102_EventScript_1A15F2:: @ 81A15F2
 	return
 
 Route102_EventScript_1A15F9:: @ 81A15F9
-	buffernum 1, 32774
+	buffernum 1, 0x8006
 	lock
 	faceplayer
 	msgbox Route102_Text_1A17C0, 5
@@ -2737,10 +3365,12 @@ Route102_EventScript_1A164B:: @ 81A164B
 	release
 	end
 
-	.global gUnknown_081A1654
-gUnknown_081A1654: @ 81A1654
-
-	.incbin "baserom.gba", 0x1a1654, 0xb
+gUnknown_081A1654:: @ 81A1654
+	lockall
+	special 43
+	call Route102_EventScript_1A16A9
+	releaseall
+	end
 
 Route102_EventScript_1A165F:: @ 81A165F
 	checkitem ITEM_WAILMER_PAIL, 1
@@ -2756,10 +3386,9 @@ Route102_EventScript_1A168D:: @ 81A168D
 	releaseall
 	end
 
-	.global gUnknown_081A168F
-gUnknown_081A168F: @ 81A168F
-
-	.incbin "baserom.gba", 0x1a168f, 0x4
+gUnknown_081A168F:: @ 81A168F
+	special 43
+	lockall
 
 Route102_EventScript_1A1693:: @ 81A1693
 	message Route102_Text_1A1912
@@ -2894,10 +3523,7 @@ SecretBase_RedCave1_Text_1A1B97:: @ 81A1B97
 	.string "Hunh?\n"
 	.string "Oh, you can’t now...$"
 
-	.global gUnknown_081A1BB2
-gUnknown_081A1BB2: @ 81A1BB2
-
-UnknownString_81A1BB2: @ 81A1BB2
+UnknownString_81A1BB2:: @ 81A1BB2
 	.string "Waaargh! You’re too strong!\n"
 	.string "About me losing... Please keep it secret!$"
 
@@ -2925,10 +3551,7 @@ SecretBase_RedCave1_Text_1A1D59:: @ 81A1D59
 	.string "Oh...\n"
 	.string "You can’t now, okay.$"
 
-	.global gUnknown_081A1D74
-gUnknown_081A1D74: @ 81A1D74
-
-UnknownString_81A1D74: @ 81A1D74
+UnknownString_81A1D74:: @ 81A1D74
 	.string "Hmmm... It’s our loss...\n"
 	.string "But don’t tell anyone!\l"
 	.string "It’s a confidential secret!$"
@@ -2959,10 +3582,7 @@ SecretBase_RedCave1_Text_1A1F2E:: @ 81A1F2E
 	.string "Hunh? Is that right?\n"
 	.string "You’re not interested in this spot?$"
 
-	.global gUnknown_081A1F67
-gUnknown_081A1F67: @ 81A1F67
-
-UnknownString_81A1F67: @ 81A1F67
+UnknownString_81A1F67:: @ 81A1F67
 	.string "I can’t keep going!\n"
 	.string "I surrender!$"
 
@@ -2989,10 +3609,7 @@ SecretBase_RedCave1_Text_1A20AE:: @ 81A20AE
 	.string "Oh.\n"
 	.string "Some other time, then!$"
 
-	.global gUnknown_081A20C9
-gUnknown_081A20C9: @ 81A20C9
-
-UnknownString_81A20C9: @ 81A20C9
+UnknownString_81A20C9:: @ 81A20C9
 	.string "Hmm... I’ve still got lots to learn.\n"
 	.string "I have to study some more.$"
 
@@ -3018,10 +3635,7 @@ SecretBase_RedCave1_Text_1A2220:: @ 81A2220
 SecretBase_RedCave1_Text_1A2230:: @ 81A2230
 	.string "When you’re ready, give me a shout!$"
 
-	.global gUnknown_081A2254
-gUnknown_081A2254: @ 81A2254
-
-UnknownString_81A2254: @ 81A2254
+UnknownString_81A2254:: @ 81A2254
 	.string "Aww! Done in!\n"
 	.string "But it’s still fun to battle!$"
 
@@ -3053,10 +3667,7 @@ SecretBase_RedCave1_Text_1A2420:: @ 81A2420
 	.string "Oh.\n"
 	.string "How disappointing...$"
 
-	.global gUnknown_081A2439
-gUnknown_081A2439: @ 81A2439
-
-UnknownString_81A2439: @ 81A2439
+UnknownString_81A2439:: @ 81A2439
 	.string "I concede...$"
 
 SecretBase_RedCave1_Text_1A2446:: @ 81A2446
@@ -3083,10 +3694,7 @@ SecretBase_RedCave1_Text_1A258A:: @ 81A258A
 	.string "Oh... Are you maybe tired from searching\n"
 	.string "for this place?$"
 
-	.global gUnknown_081A25C3
-gUnknown_081A25C3: @ 81A25C3
-
-UnknownString_81A25C3: @ 81A25C3
+UnknownString_81A25C3:: @ 81A25C3
 	.string "I went down...$"
 
 SecretBase_RedCave1_Text_1A25D2:: @ 81A25D2
@@ -3112,10 +3720,7 @@ SecretBase_RedCave1_Text_1A2710:: @ 81A2710
 SecretBase_RedCave1_Text_1A2736:: @ 81A2736
 	.string "I’ll battle with you anytime.$"
 
-	.global gUnknown_081A2754
-gUnknown_081A2754: @ 81A2754
-
-UnknownString_81A2754: @ 81A2754
+UnknownString_81A2754:: @ 81A2754
 	.string "Huh?\n"
 	.string "Did I just lose?$"
 
@@ -3144,10 +3749,7 @@ SecretBase_RedCave1_Text_1A28F4:: @ 81A28F4
 	.string "I guess there are times when you’re not\n"
 	.string "into it.$"
 
-	.global gUnknown_081A2925
-gUnknown_081A2925: @ 81A2925
-
-UnknownString_81A2925: @ 81A2925
+UnknownString_81A2925:: @ 81A2925
 	.string "I know exactly what you’re made of now.$"
 
 SecretBase_RedCave1_Text_1A294D:: @ 81A294D
@@ -3177,10 +3779,7 @@ SecretBase_RedCave1_Text_1A2AFB:: @ 81A2AFB
 	.string "I’ll be happy to demonstrate my style\n"
 	.string "anytime.$"
 
-	.global gUnknown_081A2B2A
-gUnknown_081A2B2A: @ 81A2B2A
-
-UnknownString_81A2B2A: @ 81A2B2A
+UnknownString_81A2B2A:: @ 81A2B2A
 	.string "You’re supremely talented!\n"
 	.string "Your power seems to be limitless...$"
 
@@ -3196,22 +3795,134 @@ SecretBase_RedCave1_Text_1A2BA4:: @ 81A2BA4
 	.string "What do you think of my taste?\n"
 	.string "Are you speechless?$"
 
-	.global gUnknown_081A2C51
-gUnknown_081A2C51: @ 81A2C51
-	.incbin "baserom.gba", 0x001a2c51, 0x95
+gUnknown_081A2C51:: @ 81A2C51
+	special 21
+	special 7
+	compare RESULT, 1
+	jumpeq EventScript_1A2E45
+	checkattack MOVE_SECRET_POWER
+	setanimation 0, RESULT
+	bufferattack 1, MOVE_SECRET_POWER
+	compare 0x8007, 1
+	jumpeq EventScript_1A2CB0
+	compare 0x8007, 2
+	jumpeq EventScript_1A2CB0
+	compare 0x8007, 3
+	jumpeq EventScript_1A2CB0
+	compare 0x8007, 4
+	jumpeq EventScript_1A2CB0
+	compare 0x8007, 5
+	jumpeq EventScript_1A2D08
+	compare 0x8007, 6
+	jumpeq EventScript_1A2D60
+	end
 
-	.global gUnknown_081A2CE6
-gUnknown_081A2CE6: @ 81A2CE6
-	.incbin "baserom.gba", 0x001a2ce6, 0x58
+EventScript_1A2CB0:
+	lockall
+	compare RESULT, 6
+	jumpeq EventScript_1A2CF1
+	bufferpartypoke 0, RESULT
+	msgbox UnknownString_8198F34, 5
+	compare RESULT, 0
+	jumpeq EventScript_1A2F3A
+	msgbox UsedCutRockSmashText, 4
+	closebutton
+	doanimation 11
+	waitstate
+	jump EventScript_1A2CFA
+	end
 
-	.global gUnknown_081A2D3E
-gUnknown_081A2D3E: @ 81A2D3E
-	.incbin "baserom.gba", 0x001a2d3e, 0x58
+gUnknown_081A2CE6:: @ 81A2CE6
+	lockall
+	doanimation 11
+	waitstate
+	jump EventScript_1A2CFA
+	end
 
-	.global gUnknown_081A2D96
-gUnknown_081A2D96: @ 81A2D96
+EventScript_1A2CF1:
+	msgbox UnknownString_8198F10, 3
+	end
 
-	.incbin "baserom.gba", 0x1a2d96, 0x48
+EventScript_1A2CFA:
+	msgbox UnknownString_8198F6E, 4
+	jump EventScript_1A2DB8
+	end
+
+EventScript_1A2D08:
+	lockall
+	compare RESULT, 6
+	jumpeq EventScript_1A2D49
+	bufferpartypoke 0, RESULT
+	msgbox UnknownString_81A197B, 5
+	compare RESULT, 0
+	jumpeq EventScript_1A2F3A
+	msgbox UsedCutRockSmashText, 4
+	closebutton
+	doanimation 26
+	waitstate
+	jump EventScript_1A2D52
+	end
+
+gUnknown_081A2D3E:: @ 81A2D3E
+	lockall
+	doanimation 26
+	waitstate
+	jump EventScript_1A2D52
+	end
+
+EventScript_1A2D49:
+	msgbox UnknownString_81A1948, 3
+	end
+
+EventScript_1A2D52:
+	msgbox UnknownString_81A19C4, 4
+	jump EventScript_1A2DB8
+	end
+
+EventScript_1A2D60:
+	lockall
+	compare RESULT, 6
+	jumpeq EventScript_1A2DA1
+	bufferpartypoke 0, RESULT
+	msgbox UnknownString_81A1A4B, 5
+	compare RESULT, 0
+	jumpeq EventScript_1A2F3A
+	msgbox UsedCutRockSmashText, 4
+	closebutton
+	doanimation 27
+	waitstate
+	jump EventScript_1A2DAA
+	end
+
+gUnknown_081A2D96:: @ 81A2D96
+	lockall
+	doanimation 27
+	waitstate
+	jump EventScript_1A2DAA
+	end
+
+EventScript_1A2DA1:
+	msgbox UnknownString_81A1A03, 3
+	end
+
+EventScript_1A2DAA:
+	msgbox UnknownString_81A1AA9, 4
+	jump EventScript_1A2DB8
+	end
+
+EventScript_1A2DB8:
+	closebutton
+	playsfx 9
+	setvar 0x4097, 0
+	setflag 173
+	special 6
+	special 8
+	setvar 0x8004, 0
+	setvar 0x8005, 0
+	special 18
+	setvar 0x4089, 1
+	waitstate
+	end
 
 SecretBase_RedCave1_EventScript_1A2DDE:: @ 81A2DDE
 	move 255, SecretBase_RedCave1_Movement_1A2E11
@@ -3237,10 +3948,86 @@ SecretBase_RedCave1_Movement_1A2E11:: @ 81A2E11
 	step_up
 	step_end
 
-	.global gUnknown_081A2E14
-gUnknown_081A2E14: @ 81A2E14
+gUnknown_081A2E14:: @ 81A2E14
+	lockall
+	setvar 0x4097, 1
+	playsfx 9
+	special 11
+	compare RESULT, 0
+	jumpeq EventScript_1A2E38
+	clearflag 173
+	special 8
+	setvar 0x4089, 0
+	waitstate
+	end
 
-	.incbin "baserom.gba", 0x1a2e14, 0x129
+EventScript_1A2E38:
+	setflag 173
+	special 8
+	setvar 0x4089, 0
+	waitstate
+	end
+
+EventScript_1A2E45:
+	checkattack MOVE_SECRET_POWER
+	compare RESULT, 6
+	jumpeq EventScript_1A2EF7
+	setanimation 0, RESULT
+	setorcopyvar 0x8004, RESULT
+	lockall
+	special 278
+	msgbox UnknownString_81A3C71, 5
+	compare RESULT, 0
+	jumpeq EventScript_1A2F3A
+	msgbox UnknownString_81A38FB, 5
+	compare RESULT, 0
+	jumpeq EventScript_1A2F3A
+	fadescreen 1
+	special 330
+	closebutton
+	fadescreen 0
+	msgbox UnknownString_81A3CC9, 5
+	compare RESULT, 0
+	jumpeq EventScript_1A2F3A
+	bufferpartypoke 0, 0x8004
+	bufferattack 1, MOVE_SECRET_POWER
+	msgbox UsedCutRockSmashText, 4
+	closebutton
+	closebutton
+	compare 0x8007, 1
+	jumpeq gUnknown_081A2CE6
+	compare 0x8007, 2
+	jumpeq gUnknown_081A2CE6
+	compare 0x8007, 3
+	jumpeq gUnknown_081A2CE6
+	compare 0x8007, 4
+	jumpeq gUnknown_081A2CE6
+	compare 0x8007, 5
+	jumpeq gUnknown_081A2D3E
+	compare 0x8007, 6
+	jumpeq gUnknown_081A2D96
+	releaseall
+	end
+
+EventScript_1A2EF7::
+	compare 0x8007, 1
+	jumpeq EventScript_1A2CF1
+	compare 0x8007, 2
+	jumpeq EventScript_1A2CF1
+	compare 0x8007, 3
+	jumpeq EventScript_1A2CF1
+	compare 0x8007, 4
+	jumpeq EventScript_1A2CF1
+	compare 0x8007, 5
+	jumpeq EventScript_1A2D49
+	compare 0x8007, 6
+	jumpeq EventScript_1A2DA1
+	end
+
+EventScript_1A2F3A::
+	closebutton
+	releaseall
+	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_1A2F3D:: @ 81A2F3D
 LittlerootTown_MaysHouse_2F_EventScript_1A2F3D:: @ 81A2F3D
@@ -3270,14 +4057,34 @@ SecretBase_RedCave1_EventScript_1A2F68:: @ 81A2F68
 	setvar 0x4089, 1
 	end
 
-	.global gUnknown_081A2F7B
-gUnknown_081A2F7B: @ 81A2F7B
-	.incbin "baserom.gba", 0x001a2f7b, 0xf
+gUnknown_081A2F7B:: @ 81A2F7B
+	setvar 0x8005, 0
+	jump EventScript_1A2F86
+	end
 
-	.global gUnknown_081A2F8A
-gUnknown_081A2F8A: @ 81A2F8A
+EventScript_1A2F86:
+	special 19
+	end
 
-	.incbin "baserom.gba", 0x1a2f8a, 0x36
+gUnknown_081A2F8A:: @ 81A2F8A
+	setvar 0x8004, 0
+	jump EventScript_1A2F95
+	end
+
+EventScript_1A2F95:
+	special 23
+	compare RESULT, 1
+	jumpeq EventScript_1A2FBF
+	addvar 0x8004, 1
+	compare 0x8005, 0
+	jumpeq EventScript_1A2F95
+	disappear 0x8006
+	setflag 0x8005
+	jump EventScript_1A2F95
+	end
+
+EventScript_1A2FBF:
+	end
 
 SecretBase_BlueCave1_EventScript_1A2FC0:: @ 81A2FC0
 SecretBase_BlueCave2_EventScript_1A2FC0:: @ 81A2FC0
@@ -4454,9 +5261,13 @@ OldaleTown_PokemonCenter_2F_Movement_1A4361:: @ 81A4361
 	step_02
 	step_end
 
-	.global gUnknown_081A4363
-gUnknown_081A4363: @ 81A4363
-	.incbin "baserom.gba", 0x001a4363, 0xc
+gUnknown_081A4363:: @ 81A4363
+	lockall
+	special 196
+	waitbutton
+	hidebox 0, 0, 29, 19
+	releaseall
+	end
 
 	.global gUnknown_081A436F
 gUnknown_081A436F: @ 81A436F
@@ -4553,7 +5364,17 @@ TradeCenter_EventScript_1A43FA:: @ 81A43FA
 	waitstate
 	end
 
-	.incbin "baserom.gba", 0x1a4404, 0x14
+@ 81A4404
+	setvar 0x8005, 2
+	special 33
+	waitstate
+	end
+
+@ 81A440E
+	setvar 0x8005, 3
+	special 33
+	waitstate
+	end
 
 	.global gUnknown_081A4418
 gUnknown_081A4418: @ 81A4418
@@ -4607,18 +5428,30 @@ RecordCorner_EventScript_1A446C:: @ 81A446C
 	releaseall
 	end
 
-	.global gUnknown_081A4479
-gUnknown_081A4479: @ 81A4479
-	.incbin "baserom.gba", 0x001a4479, 0xe
+gUnknown_081A4479:: @ 81A4479
+	message UnknownString_81A4D1C
+	waittext
+	waitbutton
+	fadescreen 1
+	special 42
+	waitstate
+	end
 
-	.global gUnknown_081A4487
-gUnknown_081A4487: @ 81A4487
-	.incbin "baserom.gba", 0x001a4487, 0xe
+gUnknown_081A4487:: @ 81A4487
+	message UnknownString_81A4D45
+	waittext
+	waitbutton
+	fadescreen 1
+	special 42
+	waitstate
+	end
 
-	.global gUnknown_081A4495
-gUnknown_081A4495: @ 81A4495
-
-	.incbin "baserom.gba", 0x1a4495, 0x9
+gUnknown_081A4495:: @ 81A4495
+	message UnknownString_81A4CF6
+	waittext
+	waitbutton
+	closebutton
+	end
 
 SingleBattleColosseum_EventScript_1A449E:: @ 81A449E
 	special 295
@@ -4658,18 +5491,24 @@ RecordCorner_EventScript_1A44D6:: @ 81A44D6
 	closebutton
 	end
 
-	.global gUnknown_081A44E5
-gUnknown_081A44E5: @ 81A44E5
-	.incbin "baserom.gba", 0x001a44e5, 0x19
+gUnknown_081A44E5:: @ 81A44E5
+	msgbox UnknownString_81A4C6E, 5
+	compare RESULT, 1
+	jumpeq gUnknown_081A44FE
+	hidebox 0, 0, 29, 19
+	end
 
-	.global gUnknown_081A44FE
-gUnknown_081A44FE: @ 81A44FE
-	.incbin "baserom.gba", 0x001a44fe, 0xa
+gUnknown_081A44FE:: @ 81A44FE
+	message2 UnknownString_81A4CAF
+	waittext
+	special 5
+	end
 
-	.global gUnknown_081A4508
-gUnknown_081A4508: @ 81A4508
-
-	.incbin "baserom.gba", 0x1a4508, 0x8
+gUnknown_081A4508:: @ 81A4508
+	special 4
+	special 3
+	waitstate
+	end
 
 OldaleTown_PokemonCenter_2F_Text_1A4510:: @ 81A4510
 	.string "Welcome to the POKéMON CABLE CLUB\n"
@@ -4844,7 +5683,7 @@ VerdanturfTown_ContestLobby_EventScript_1A4E92:: @ 81A4E92
 	jumpif 5, FallarborTown_ContestLobby_EventScript_1A4F4E
 	checkflag 1
 	jumpeq FallarborTown_ContestLobby_EventScript_1A4F8F
-	bufferstd 0, 32779
+	bufferstd 0, 0x800b
 	msgbox FallarborTown_ContestLobby_Text_1A5DFC, 4
 	checkitem ITEM_CONTEST_PASS, 1
 	compare RESULT, 0
@@ -5093,8 +5932,8 @@ LinkContestRoom1_EventScript_1A523F:: @ 81A523F
 	return
 
 LinkContestRoom1_EventScript_1A5245:: @ 81A5245
-	bufferstd 1, 32776
-	bufferstd 2, 32777
+	bufferstd 1, 0x8008
+	bufferstd 2, 0x8009
 	call LinkContestRoom1_EventScript_1A525F
 	lockall
 	move 1, LinkContestRoom1_Movement_1A5D87
@@ -5172,7 +6011,7 @@ LinkContestRoom1_EventScript_1A5311:: @ 81A5311
 LinkContestRoom1_EventScript_1A5323:: @ 81A5323
 	special 81
 	addvar 0x8006, 1
-	buffernum 1, 32774
+	buffernum 1, 0x8006
 	lockall
 	move 0x800b, LinkContestRoom1_Movement_1A5D9C
 	waitmove 0
@@ -5183,7 +6022,7 @@ LinkContestRoom1_EventScript_1A5323:: @ 81A5323
 	move 0x800b, LinkContestRoom1_Movement_1A5D9C
 	waitmove 0
 	releaseall
-	addvar 0x8006, 65535
+	addvar 0x8006, -1
 	playsfx 15
 	special 320
 	call LinkContestRoom1_EventScript_1A535E
@@ -5718,8 +6557,8 @@ LinkContestRoom1_EventScript_1A5A49:: @ 81A5A49
 	special 79
 	special 80
 	addvar 0x8005, 1
-	buffernum 1, 32773
-	addvar 0x8005, 65535
+	buffernum 1, 0x8005
+	addvar 0x8005, -1
 	call LinkContestRoom1_EventScript_1A5A75
 	move 0x4003, LinkContestRoom1_Movement_1A5D99
 	waitmove 0
@@ -6323,9 +7162,97 @@ FallarborTown_ContestLobby_Text_1A68C6:: @ 81A68C6
 
 	.include "data/maps/text/LinkContestRoom1.s"
 
-	.global gUnknown_081A6E72
-gUnknown_081A6E72: @ 81A6E72
-	.incbin "baserom.gba", 0x1a6e72, 0x10a
+Event_TV:: @ 81A6E72
+	lockall
+	inccounter 44
+	special 75
+	specialval RESULT, 73
+	compare RESULT, 2
+	jumpeq EventScript_1A6F01
+	compare RESULT, 1
+	jumpeq EventScript_1A6F0B
+	checkflag 2098
+	jumpif 0, EventScript_1A6EF1
+	checkflag 2097
+	jumpeq EventScript_1A6EF1
+	specialval RESULT, 176
+	compare RESULT, 1
+	jumpeq EventScript_1A6F66
+	jump EventScript_1A6F50
+	end
+
+EventScript_1A6EBB:
+	specialval 0x8004, 65
+	compare 0x8004, 255
+	jumpeq EventScript_1A6F3F
+	specialval RESULT, 71
+	compare RESULT, 255
+	jumpeq EventScript_1A6F3F
+	copyvar 0x8004, RESULT
+	specialval RESULT, 66
+	compare RESULT, 0
+	jumpif 5, EventScript_1A6F21
+	end
+
+EventScript_1A6EF1:
+	special 74
+	msgbox UnknownString_81A0E68, 4
+	special 62
+	releaseall
+	end
+
+EventScript_1A6F01:
+	msgbox UnknownString_817288C, 4
+	releaseall
+	end
+
+EventScript_1A6F0B:
+	msgbox UnknownString_8172C50, 4
+	special 297
+	clearflag 2141
+	setflag 255
+	special 62
+	releaseall
+	end
+
+EventScript_1A6F21:
+	special 63
+	waittext
+	waitbutton
+	compare RESULT, 1
+	jumpif 5, EventScript_1A6F21
+	jump EventScript_1A6F37
+	end
+
+EventScript_1A6F37:
+	special 62
+	setflag 2097
+	releaseall
+	end
+
+EventScript_1A6F3F:
+	special 74
+	msgbox UnknownString_81A0E68, 4
+	jump EventScript_1A6F37
+	end
+
+EventScript_1A6F50:
+	special 64
+	compare RESULT, 0
+	jumpeq EventScript_1A6EBB
+	waittext
+	waitbutton
+	jump EventScript_1A6F37
+	end
+
+EventScript_1A6F66:
+	special 175
+	waittext
+	waitbutton
+	compare RESULT, 0
+	jumpeq EventScript_1A6F66
+	jump EventScript_1A6F37
+	end
 
 FallarborTown_ContestLobby_Text_1A6F7C:: @ 81A6F7C
 	.string "Oh, hello! You were in a POKéMON CONTEST,\n"
@@ -9463,8 +10390,6 @@ MauvilleCity_PokemonCenter_1F_Text_1B0D75:: @ 81B0D75
 	.include "data/field_move_scripts.s"
 	.include "data/item_ball_scripts.s"
 
-	.incbin "baserom.gba", 0x1b1b07, 0xd
-
 PetalburgCity_PokemonCenter_1F_EventScript_1B1B14:: @ 81B1B14
 	lock
 	faceplayer
@@ -9923,12 +10848,25 @@ Route117_PokemonDayCare_EventScript_1B2558:: @ 81B2558
 	release
 	end
 
-	.incbin "baserom.gba", 0x1b2591, 0x2b
+@ 81B2591
+	special 189
+	waitstate
+	compare RESULT, 2
+	jumpeq Route117_PokemonDayCare_EventScript_1B23D0
+	copyvar 0x8004, RESULT
+	specialval RESULT, 192
+	msgbox Route117_PokemonDayCare_Text_1B2B75, 4
+	msgbox Route117_PokemonDayCare_Text_1B2A76, 4
+	release
+	end
 
-	.global gUnknown_081B25BC
-gUnknown_081B25BC: @ 81B25BC
-
-	.incbin "baserom.gba", 0x1b25bc, 0xf
+Event_EggHatch:: @ 81B25BC
+	lockall
+	msgbox UnknownString_81B2C68, 4
+	special 194
+	waitstate
+	releaseall
+	end
 
 Route117_Text_1B25CB:: @ 81B25CB
 	.string "I’m the DAY-CARE MAN.\p"
@@ -10473,9 +11411,10 @@ UnknownString_81B4818: @ 81B4818
 	.include "data/maps/text/CaveOfOrigin_B4F.s"
 	.include "data/maps/text/MtPyre_Summit.s"
 
-	.global gUnknown_081B694A
-gUnknown_081B694A: @ 81B694A
-	.incbin "baserom.gba", 0x1b694a, 0x6
+gUnknown_081B694A:: @ 81B694A
+	lighten 1
+	darken 1
+	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_1B6950:: @ 81B6950
 LittlerootTown_MaysHouse_2F_EventScript_1B6950:: @ 81B6950
@@ -10994,10 +11933,9 @@ LittlerootTown_BrendansHouse_1F_Movement_1B6E54:: @ 81B6E54
 	step_28
 	step_end
 
-	.global gUnknown_081B6E5A
-gUnknown_081B6E5A: @ 81B6E5A
-
-	.incbin "baserom.gba", 0x1b6e5a, 0x9
+Event_RunningShoesManual:: @ 81B6E5A
+	msgbox UnknownString_81728E3, 3
+	end
 
 FallarborTown_ContestLobby_Text_1B6E63:: @ 81B6E63
 	.string "Oh? Did you want to make some {POKEBLOCK}S\n"
@@ -11525,7 +12463,7 @@ gUnknown_081C346A:: @ 81C346A
 	releaseall
 	end
 
-EventScript_1C348E::
+EventScript_1C348E:
 	fadescreen 1
 	special 208
 	waitstate
@@ -11533,14 +12471,14 @@ EventScript_1C348E::
 	jumpif 5, EventScript_1C34A0
 	end
 
-EventScript_1C34A0::
+EventScript_1C34A0:
 	message UnknownString_81C35A9
 	waittext
 	waitbutton
 	releaseall
 	end
 
-EventScript_1C34A9::
+EventScript_1C34A9:
 	message UnknownString_81C3583
 	waittext
 	waitbutton

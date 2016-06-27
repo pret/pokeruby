@@ -47941,7 +47941,7 @@ sub_8068500: @ 8068500
 	ldr r0, _08068520
 	b _080686EE
 	.align 2, 0
-_08068520: .4byte gUnknown_081A6E72
+_08068520: .4byte Event_TV
 _08068524:
 	adds r0, r5, 0
 	bl MetatileBehavior_IsPC
@@ -48007,7 +48007,7 @@ _0806859C:
 	ldr r0, _080685B0
 	b _080686EE
 	.align 2, 0
-_080685B0: .4byte gUnknown_081A02D6
+_080685B0: .4byte Event_WorldMap
 _080685B4:
 	adds r0, r5, 0
 	bl sub_805791C
@@ -48018,7 +48018,7 @@ _080685B4:
 	ldr r0, _080685C8
 	b _080686EE
 	.align 2, 0
-_080685C8: .4byte gUnknown_081B6E5A
+_080685C8: .4byte Event_RunningShoesManual
 _080685CC:
 	adds r0, r5, 0
 	bl sub_8057930
@@ -48401,7 +48401,7 @@ _080688B4:
 	ldr r0, _080688C8
 	b _080688E8
 	.align 2, 0
-_080688C8: .4byte gUnknown_081B25BC
+_080688C8: .4byte Event_EggHatch
 _080688CC:
 	bl safari_step
 	lsls r0, 24
