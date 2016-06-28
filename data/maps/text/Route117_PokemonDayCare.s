@@ -74,5 +74,5 @@ Route117_PokemonDayCare_Text_1B2C17:: @ 81B2C17
 UnknownString_81B2C68: @ 81B2C68
 	.string "Huh?$"
 
+@ XXX JP
 	.incbin "baserom.gba", 0x1B2C6D, 0x28
-
