@@ -746,7 +746,7 @@ gUnknown_08E89628: @ 8E89628
 
 	.global gUnknown_08E89648
 gUnknown_08E89648: @ 8E89648
-	.incbin "baserom.gba", 0x00e89648, 0x20
+	.incbin "graphics/pokenav/map_squares.gbapal"
 
 	.global gUnknown_08E89668
 gUnknown_08E89668: @ 8E89668
@@ -774,7 +774,9 @@ gUnknown_08E8A1C2: @ 8E8A1C2
 
 	.global gUnknown_08E8A1E0
 gUnknown_08E8A1E0: @ 8E8A1E0
-	.incbin "baserom.gba", 0x00e8a1e0, 0x3f8
+	.incbin "baserom.gba", 0x00e8a1e0, 0x3b8 
+	.incbin "graphics/pokenav/contest_pokeball.gbapal"
+	.incbin "baserom.gba", 0x00E8A5B8, 0x20
 
 	.global gUnknown_08E8A5D8
 gUnknown_08E8A5D8: @ 8E8A5D8
@@ -878,11 +880,11 @@ gUnknown_08E8F1B8: @ 8E8F1B8
 
 	.global gUnknown_08E8F804
 gUnknown_08E8F804: @ 8E8F804
-	.incbin "baserom.gba", 0x00e8f804, 0x20
+	.incbin "graphics/misc/clock1.gbapal"
 
 	.global gUnknown_08E8F824
 gUnknown_08E8F824: @ 8E8F824
-	.incbin "baserom.gba", 0x00e8f824, 0x20
+	.incbin "graphics/misc/clock2.gbapal"
 
 	.global gUnknown_08E8F844
 gUnknown_08E8F844: @ 8E8F844
@@ -1005,7 +1007,25 @@ gUnknown_08E96D2C: @ 8E96D2C
 
 	.global gUnknown_08E96EC8
 gUnknown_08E96EC8: @ 8E96EC8
-	.incbin "baserom.gba", 0x00e96ec8, 0x2980
+	.incbin "baserom.gba", 0x00e96ec8, 0x800
+	.incbin "graphics/slot_machine/slot_machine1.gbapal" @ palettes
+	.incbin "graphics/slot_machine/slot_machine2.gbapal"
+	.incbin "graphics/slot_machine/slot_machine3.gbapal"
+	.incbin "graphics/slot_machine/slot_machine4.gbapal"
+	.incbin "graphics/slot_machine/slot_machine5.gbapal"
+	.incbin "graphics/slot_machine/slot_machine6.gbapal"
+	.incbin "graphics/slot_machine/slot_machine7.gbapal"
+	.incbin "graphics/slot_machine/reel_symbols.4bpp"
+	.incbin "graphics/slot_machine/numbers.4bpp"
+	.incbin "graphics/slot_machine/bolt.4bpp"
+	.incbin "graphics/slot_machine/duck.4bpp"
+	.incbin "graphics/slot_machine/smoke.4bpp"
+	.incbin "graphics/slot_machine/reel_numbers.4bpp"
+	.incbin "graphics/slot_machine/bolt_large.4bpp"
+	.incbin "graphics/slot_machine/reel_explosion.4bpp"
+	.incbin "graphics/slot_machine/shadow.4bpp"
+	.incbin "graphics/slot_machine/reel_shock.4bpp"
+	.incbin "baserom.gba", 0x00E997E8, 0x60
 
 	.global gUnknown_08E99848
 gUnknown_08E99848: @ 8E99848
@@ -1084,7 +1104,8 @@ gUnknown_08E9F624: @ 8E9F624
 
 	.global gUnknown_08E9F7E4
 gUnknown_08E9F7E4: @ 8E9F7E4
-	.incbin "baserom.gba", 0x00e9f7e4, 0x1a4
+	.incbin "baserom.gba", 0x00e9f7e4, 0x184
+	.incbin "graphics/pokenav/contest_arrows.gbapal"
 
 	.global gUnknown_08E9F988
 gUnknown_08E9F988: @ 8E9F988
