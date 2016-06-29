@@ -1,5 +1,5 @@
 SlateportCity_House2:: @ 83060DC
-	.4byte SlateportCity_House2_MapAttributes
+	.4byte House2_MapAttributes
 	.4byte SlateportCity_House2_MapEvents
 	.4byte SlateportCity_House2_MapScripts
 	.4byte 0x0
