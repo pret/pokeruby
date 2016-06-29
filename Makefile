@@ -75,6 +75,7 @@ include fonts.mk
 include generated.mk
 include misc.mk
 
+%.bin: ;
 %.png: ;
 %.pal: ;
 %.1bpp: %.png  ; $(GFX) $< $@
