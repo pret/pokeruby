@@ -1,5 +1,5 @@
 VerdanturfTown_House:: @ 8305E3C
-	.4byte VerdanturfTown_House_MapAttributes
+	.4byte House1_MapAttributes
 	.4byte VerdanturfTown_House_MapEvents
 	.4byte VerdanturfTown_House_MapScripts
 	.4byte 0x0
