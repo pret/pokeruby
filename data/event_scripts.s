@@ -95,6 +95,8 @@ gStdScripts_End::
 	.include "data/scripts/maps/Underwater4.s"
 	.include "data/scripts/maps/LittlerootTown_BrendansHouse_1F.s"
 	.include "data/scripts/maps/LittlerootTown_BrendansHouse_2F.s"
+	.include "data/scripts/maps/LittlerootTown_MaysHouse_1F.s"
+	.include "data/scripts/maps/LittlerootTown_MaysHouse_2F.s"
 	.include "data/scripts/maps/LittlerootTown_ProfessorBirchsLab.s"
 	.include "data/scripts/maps/OldaleTown_House1.s"
 	.include "data/scripts/maps/OldaleTown_House2.s"

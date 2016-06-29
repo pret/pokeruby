@@ -53,7 +53,6 @@ LittlerootTown_BrendansHouse_2F_EventScript_152837:: @ 8152837
 
 	.global gUnknown_08152850
 gUnknown_08152850: @ 8152850
-
 	.incbin "baserom.gba", 0x152850, 0xd
 
 LittlerootTown_BrendansHouse_2F_EventScript_15285D:: @ 815285D
@@ -70,85 +69,3 @@ LittlerootTown_BrendansHouse_2F_EventScript_152870:: @ 8152870
 LittlerootTown_MaysHouse_2F_EventScript_152870:: @ 8152870
 	msgbox LittlerootTown_BrendansHouse_2F_Text_17306C, 3
 	end
-
-	.include "data/maps/scripts/LittlerootTown_MaysHouse_1F.s"
-	.include "data/maps/scripts/LittlerootTown_MaysHouse_2F.s"
-LittlerootTown_BrendansHouse_2F_Movement_152C11:: @ 8152C11
-	step_down
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_up
-	step_up
-	step_13
-	step_end
-
-LittlerootTown_BrendansHouse_2F_Movement_152C1C:: @ 8152C1C
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_left
-	step_up
-	step_13
-	step_end
-
-LittlerootTown_BrendansHouse_2F_Movement_152C25:: @ 8152C25
-	step_down
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_up
-	step_up
-	step_13
-	step_end
-
-LittlerootTown_BrendansHouse_2F_Movement_152C30:: @ 8152C30
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_right
-	step_up
-	step_13
-	step_end
-
-	.global gUnknown_08152C39
-gUnknown_08152C39: @ 8152C39
-
-LittlerootTown_MaysHouse_2F_EventScript_152C39:: @ 8152C39
-	lockall
-	checkgender
-	compare RESULT, 0
-	jumpeq LittlerootTown_MaysHouse_2F_EventScript_152C52
-	compare RESULT, 1
-	jumpeq LittlerootTown_MaysHouse_2F_EventScript_152C5C
-	end
-
-LittlerootTown_MaysHouse_2F_EventScript_152C52:: @ 8152C52
-	msgbox LittlerootTown_MaysHouse_2F_Text_1A100C, 4
-	releaseall
-	end
-
-LittlerootTown_MaysHouse_2F_EventScript_152C5C:: @ 8152C5C
-	setvar 0x8004, 2
-	special 214
-	playsfx 4
-	msgbox LittlerootTown_MaysHouse_2F_Text_1A10D6, 4
-	special 249
-	waitstate
-	releaseall
-	end
-
-	.global gUnknown_08152C75
-gUnknown_08152C75: @ 8152C75
-
-	.incbin "baserom.gba", 0x152c75, 0xd
