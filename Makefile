@@ -106,18 +106,20 @@ src/%_sapphire.o: src/%.c
 	@printf ".text\n\t.align\t2, 0\n" >> src/$*_sapphire.s
 	$(AS) $(ASFLAGS) -o $@ src/$*_sapphire.s
 
-asm/%_ruby.o: $*_dep = $(shell $(SCANINC) asm/$*.s)
-asm/%_sapphire.o: $*_dep = $(shell $(SCANINC) asm/$*.s)
-asm/%_ruby.o: asm/%.s $$(%_dep)
+asm/%_ruby.o: dep = $(shell $(SCANINC) asm/$*.s)
+asm/%_sapphire.o: dep = $(shell $(SCANINC) asm/$*.s)
+
+asm/%_ruby.o: asm/%.s $$(dep)
 	$(AS) $(ASFLAGS) --defsym RUBY=1 -o $@ $<
-asm/%_sapphire.o: asm/%.s $$(%_dep)
+asm/%_sapphire.o: asm/%.s $$(dep)
 	$(AS) $(ASFLAGS) --defsym SAPPHIRE=1 -o $@ $<
 
-data/%_ruby.o: $*_dep = $(shell $(SCANINC) data/$*.s)
-data/%_sapphire.o: $*_dep = $(shell $(SCANINC) data/$*.s)
-data/%_ruby.o: data/%.s $$(%_dep)
+data/%_ruby.o: dep = $(shell $(SCANINC) data/$*.s)
+data/%_sapphire.o: dep = $(shell $(SCANINC) data/$*.s)
+
+data/%_ruby.o: data/%.s $$(dep)
 	$(PREPROC) $< charmap.txt | $(AS) $(ASFLAGS) --defsym RUBY=1 -o $@
-data/%_sapphire.o: data/%.s $$(%_dep)
+data/%_sapphire.o: data/%.s $$(dep)
 	$(PREPROC) $< charmap.txt | $(AS) $(ASFLAGS) --defsym SAPPHIRE=1 -o $@
 
 ld_script_ruby.txt: ld_script.txt
