@@ -5349,89 +5349,34 @@ gBattleAnimPaletteTable:: @ 837EA6C
 	obj_pal gBattleAnimSpritePalette_288, 10288
 
 	.align 2
-	.global gUnknown_0837F374
-gUnknown_0837F374: @ 837F374
-	.4byte 0x08d1cba8
-	.4byte 0x08d1d1a0
-	.4byte 0x08d1d1c0
-	.4byte 0x08d1cba8
-	.4byte 0x08d1d1a0
-	.4byte 0x08d1d1c0
-	.4byte 0x08e6abdc
-	.4byte 0x08e6b8a4
-	.4byte 0x08e6b8c0
-	.4byte 0x08d1ec70
-	.4byte 0x08d1ee40
-	.4byte 0x08d1ee64
-	.4byte 0x08d25f98
-	.4byte 0x08d25f70
-	.4byte 0x08d26d04
-	.4byte 0x08d25f98
-	.4byte 0x08d25f70
-	.4byte 0x08d27200
-	.4byte 0x08d25f98
-	.4byte 0x08d25f70
-	.4byte 0x08d276d0
-	.4byte 0x08d28cd0
-	.4byte 0x08d28e78
-	.4byte 0x08d28ec8
-	.4byte 0x08d28cd0
-	.4byte 0x08d28e78
-	.4byte 0x08d29058
-	.4byte 0x08d2a168
-	.4byte 0x08d2a128
-	.4byte 0x08d29e30
-	.4byte 0x08d2a168
-	.4byte 0x08d2a128
-	.4byte 0x08d2a6e8
-	.4byte 0x08d2c190
-	.4byte 0x08d2cb2c
-	.4byte 0x08d2cb54
-	.4byte 0x08d2b408
-	.4byte 0x08d2c170
-	.4byte 0x08d2abb4
-	.4byte 0x08d2b408
-	.4byte 0x08d2c170
-	.4byte 0x08d2ae7c
-	.4byte 0x08d2b408
-	.4byte 0x08d2c170
-	.4byte 0x08d2b178
-	.4byte 0x08e6877c
-	.4byte 0x08e690ec
-	.4byte 0x08e69110
-	.4byte 0x08e6d690
-	.4byte 0x08e6d668
-	.4byte 0x08e6d8f0
-	.4byte 0x08e69f7c
-	.4byte 0x08e6a0d8
-	.4byte 0x08e6a100
-	.4byte 0x08d28cd0
-	.4byte 0x08d28ea0
-	.4byte 0x08d28ec8
-	.4byte 0x08d28cd0
-	.4byte 0x08d28ea0
-	.4byte 0x08d29058
-	.4byte 0x08d291e4
-	.4byte 0x08d29c0c
-	.4byte 0x08d29c2c
-	.4byte 0x08e6ebc4
-	.4byte 0x08e6eeb8
-	.4byte 0x08e6eed4
-	.4byte 0x08d2a168
-	.4byte 0x08d2a148
-	.4byte 0x08d29e30
-	.4byte 0x08d2a168
-	.4byte 0x08d2a148
-	.4byte 0x08d2a6e8
-	.4byte 0x08d25f98
-	.4byte 0x08e6bbdc
-	.4byte 0x08d26d04
-	.4byte 0x08d25f98
-	.4byte 0x08e6bbdc
-	.4byte 0x08d27200
-	.4byte 0x08d25f98
-	.4byte 0x08e6bbdc
-	.4byte 0x08d276d0
+gBattleAnimBackgroundTable:: @ 837F374
+	.4byte gBattleAnimBackgroundImage_00, gBattleAnimBackgroundPalette_00, gBattleAnimBackgroundTilemap_00
+	.4byte gBattleAnimBackgroundImage_00, gBattleAnimBackgroundPalette_00, gBattleAnimBackgroundTilemap_00
+	.4byte gBattleAnimBackgroundImage_02, gBattleAnimBackgroundPalette_02, gBattleAnimBackgroundTilemap_02
+	.4byte gBattleAnimBackgroundImage_03, gBattleAnimBackgroundPalette_03, gBattleAnimBackgroundTilemap_03
+	.4byte gBattleAnimBackgroundImage_04, gBattleAnimBackgroundPalette_04, gBattleAnimBackgroundTilemap_04
+	.4byte gBattleAnimBackgroundImage_04, gBattleAnimBackgroundPalette_04, gBattleAnimBackgroundTilemap_05
+	.4byte gBattleAnimBackgroundImage_04, gBattleAnimBackgroundPalette_04, gBattleAnimBackgroundTilemap_06
+	.4byte gBattleAnimBackgroundImage_07, gBattleAnimBackgroundPalette_07, gBattleAnimBackgroundTilemap_07
+	.4byte gBattleAnimBackgroundImage_07, gBattleAnimBackgroundPalette_07, gBattleAnimBackgroundTilemap_08
+	.4byte gBattleAnimBackgroundImage_09, gBattleAnimBackgroundPalette_09, gBattleAnimBackgroundTilemap_09
+	.4byte gBattleAnimBackgroundImage_09, gBattleAnimBackgroundPalette_09, gBattleAnimBackgroundTilemap_10
+	.4byte gBattleAnimBackgroundImage_11, gBattleAnimBackgroundPalette_11, gBattleAnimBackgroundTilemap_11
+	.4byte gBattleAnimBackgroundImage_12, gBattleAnimBackgroundPalette_12, gBattleAnimBackgroundTilemap_12
+	.4byte gBattleAnimBackgroundImage_12, gBattleAnimBackgroundPalette_12, gBattleAnimBackgroundTilemap_13
+	.4byte gBattleAnimBackgroundImage_12, gBattleAnimBackgroundPalette_12, gBattleAnimBackgroundTilemap_14
+	.4byte gBattleAnimBackgroundImage_15, gBattleAnimBackgroundPalette_15, gBattleAnimBackgroundTilemap_15
+	.4byte gBattleAnimBackgroundImage_16, gBattleAnimBackgroundPalette_16, gBattleAnimBackgroundTilemap_16
+	.4byte gBattleAnimBackgroundImage_17, gBattleAnimBackgroundPalette_17, gBattleAnimBackgroundTilemap_17
+	.4byte gBattleAnimBackgroundImage_07, gBattleAnimBackgroundPalette_18, gBattleAnimBackgroundTilemap_07
+	.4byte gBattleAnimBackgroundImage_07, gBattleAnimBackgroundPalette_18, gBattleAnimBackgroundTilemap_08
+	.4byte gBattleAnimBackgroundImage_20, gBattleAnimBackgroundPalette_20, gBattleAnimBackgroundTilemap_20
+	.4byte gBattleAnimBackgroundImage_21, gBattleAnimBackgroundPalette_21, gBattleAnimBackgroundTilemap_21
+	.4byte gBattleAnimBackgroundImage_09, gBattleAnimBackgroundPalette_22, gBattleAnimBackgroundTilemap_09
+	.4byte gBattleAnimBackgroundImage_09, gBattleAnimBackgroundPalette_22, gBattleAnimBackgroundTilemap_10
+	.4byte gBattleAnimBackgroundImage_04, gBattleAnimBackgroundPalette_24, gBattleAnimBackgroundTilemap_04
+	.4byte gBattleAnimBackgroundImage_04, gBattleAnimBackgroundPalette_24, gBattleAnimBackgroundTilemap_05
+	.4byte gBattleAnimBackgroundImage_04, gBattleAnimBackgroundPalette_24, gBattleAnimBackgroundTilemap_06
 
 	.align 2
 	.global gUnknown_0837F4B8
