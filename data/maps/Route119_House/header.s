@@ -1,5 +1,5 @@
 Route119_House:: @ 8307F28
-	.4byte Route119_House_MapAttributes
+	.4byte House1_MapAttributes
 	.4byte Route119_House_MapEvents
 	.4byte Route119_House_MapScripts
 	.4byte 0x0

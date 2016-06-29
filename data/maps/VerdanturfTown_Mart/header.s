@@ -1,5 +1,5 @@
 VerdanturfTown_Mart:: @ 8305DB0
-	.4byte VerdanturfTown_Mart_MapAttributes
+	.4byte PokeMart_MapAttributes
 	.4byte VerdanturfTown_Mart_MapEvents
 	.4byte VerdanturfTown_Mart_MapScripts
 	.4byte 0x0

@@ -2002,1194 +2002,12 @@ gUnknown_082166D8: @ 82166D8
 	.include "data/tilesets/metatiles.s"
 
 @ 8286CF4
-AbandonedShip_CaptainsOffice_Tileset:: @ 8286CF4
-AbandonedShip_Corridors_1F_Tileset:: @ 8286CF4
-AbandonedShip_Corridors_B1F_Tileset:: @ 8286CF4
-AbandonedShip_Deck_Tileset:: @ 8286CF4
-AbandonedShip_HiddenFloorCorridors_Tileset:: @ 8286CF4
-AbandonedShip_HiddenFloorRooms_Tileset:: @ 8286CF4
-AbandonedShip_Room_B1F_Tileset:: @ 8286CF4
-AbandonedShip_Rooms2_1F_Tileset:: @ 8286CF4
-AbandonedShip_Rooms2_B1F_Tileset:: @ 8286CF4
-AbandonedShip_Rooms_1F_Tileset:: @ 8286CF4
-AbandonedShip_Rooms_B1F_Tileset:: @ 8286CF4
-AbandonedShip_Underwater1_Tileset:: @ 8286CF4
-AbandonedShip_Underwater2_Tileset:: @ 8286CF4
-AncientTomb_Tileset:: @ 8286CF4
-AquaHideout_1F_Tileset:: @ 8286CF4
-AquaHideout_B1F_Tileset:: @ 8286CF4
-AquaHideout_B2F_Tileset:: @ 8286CF4
-BattleTower_Outside_Tileset:: @ 8286CF4
-CaveOfOrigin_1F_Tileset:: @ 8286CF4
-CaveOfOrigin_B1F_Tileset:: @ 8286CF4
-CaveOfOrigin_B2F_Tileset:: @ 8286CF4
-CaveOfOrigin_B3F_Tileset:: @ 8286CF4
-CaveOfOrigin_B4F_Tileset:: @ 8286CF4
-CaveOfOrigin_Entrance_Tileset:: @ 8286CF4
-DesertRuins_Tileset:: @ 8286CF4
-DewfordTown_Tileset:: @ 8286CF4
-EverGrandeCity_Tileset:: @ 8286CF4
-FallarborTown_Tileset:: @ 8286CF4
-FieryPath_Tileset:: @ 8286CF4
-FortreeCity_Tileset:: @ 8286CF4
-GraniteCave_1F_Tileset:: @ 8286CF4
-GraniteCave_B1F_Tileset:: @ 8286CF4
-GraniteCave_B2F_Tileset:: @ 8286CF4
-GraniteCave_StevensRoom_Tileset:: @ 8286CF4
-InsideOfTruck_Tileset:: @ 8286CF4
-IslandCave_Tileset:: @ 8286CF4
-JaggedPass_Tileset:: @ 8286CF4
-LavaridgeTown_Tileset:: @ 8286CF4
-LilycoveCity_EmptyMap_Tileset:: @ 8286CF4
-LilycoveCity_Tileset:: @ 8286CF4
-LinkContestRoom1_Tileset:: @ 8286CF4
-LinkContestRoom2_Tileset:: @ 8286CF4
-LinkContestRoom3_Tileset:: @ 8286CF4
-LinkContestRoom4_Tileset:: @ 8286CF4
-LinkContestRoom5_Tileset:: @ 8286CF4
-LinkContestRoom6_Tileset:: @ 8286CF4
-LittlerootTown_Tileset:: @ 8286CF4
-MagmaHideout_1F_Tileset:: @ 8286CF4
-MagmaHideout_B1F_Tileset:: @ 8286CF4
-MagmaHideout_B2F_Tileset:: @ 8286CF4
-MauvilleCity_BikeShop_Tileset:: @ 8286CF4
-MauvilleCity_Tileset:: @ 8286CF4
-MeteorFalls_1F_1R_Tileset:: @ 8286CF4
-MeteorFalls_1F_2R_Tileset:: @ 8286CF4
-MeteorFalls_B1F_1R_Tileset:: @ 8286CF4
-MeteorFalls_B1F_2R_Tileset:: @ 8286CF4
-MossdeepCity_SpaceCenter_1F_Tileset:: @ 8286CF4
-MossdeepCity_SpaceCenter_2F_Tileset:: @ 8286CF4
-MossdeepCity_Tileset:: @ 8286CF4
-MtChimney_Tileset:: @ 8286CF4
-MtPyre_1F_Tileset:: @ 8286CF4
-MtPyre_2F_Tileset:: @ 8286CF4
-MtPyre_3F_Tileset:: @ 8286CF4
-MtPyre_4F_Tileset:: @ 8286CF4
-MtPyre_5F_Tileset:: @ 8286CF4
-MtPyre_6F_Tileset:: @ 8286CF4
-MtPyre_Exterior_Tileset:: @ 8286CF4
-MtPyre_Summit_Tileset:: @ 8286CF4
-NewMauville_Entrance_Tileset:: @ 8286CF4
-NewMauville_Inside_Tileset:: @ 8286CF4
-OldaleTown_Tileset:: @ 8286CF4
-PacifidlogTown_Tileset:: @ 8286CF4
-PetalburgCity_Tileset:: @ 8286CF4
-PetalburgWoods_Tileset:: @ 8286CF4
-Route101_Tileset:: @ 8286CF4
-Route102_Tileset:: @ 8286CF4
-Route103_Tileset:: @ 8286CF4
-Route104_Prototype_Tileset:: @ 8286CF4
-Route104_Tileset:: @ 8286CF4
-Route105_Tileset:: @ 8286CF4
-Route106_Tileset:: @ 8286CF4
-Route107_Tileset:: @ 8286CF4
-Route108_Tileset:: @ 8286CF4
-Route109_Tileset:: @ 8286CF4
-Route110_Tileset:: @ 8286CF4
-Route111_Tileset:: @ 8286CF4
-Route112_CableCarStation_Tileset:: @ 8286CF4
-Route112_Tileset:: @ 8286CF4
-Route113_Tileset:: @ 8286CF4
-Route114_FossilManiacsTunnel_Tileset:: @ 8286CF4
-Route114_Tileset:: @ 8286CF4
-Route115_Tileset:: @ 8286CF4
-Route116_Tileset:: @ 8286CF4
-Route117_Tileset:: @ 8286CF4
-Route118_Tileset:: @ 8286CF4
-Route119_Tileset:: @ 8286CF4
-Route120_Tileset:: @ 8286CF4
-Route121_Tileset:: @ 8286CF4
-Route122_Tileset:: @ 8286CF4
-Route123_Tileset:: @ 8286CF4
-Route124_Tileset:: @ 8286CF4
-Route125_Tileset:: @ 8286CF4
-Route126_Tileset:: @ 8286CF4
-Route127_Tileset:: @ 8286CF4
-Route128_Tileset:: @ 8286CF4
-Route129_Tileset:: @ 8286CF4
-Route130_Tileset:: @ 8286CF4
-Route131_Tileset:: @ 8286CF4
-Route132_Tileset:: @ 8286CF4
-Route133_Tileset:: @ 8286CF4
-Route134_Tileset:: @ 8286CF4
-RustboroCity_DevonCorp_1F_Tileset:: @ 8286CF4
-RustboroCity_DevonCorp_2F_Tileset:: @ 8286CF4
-RustboroCity_DevonCorp_3F_Tileset:: @ 8286CF4
-RustboroCity_Tileset:: @ 8286CF4
-RusturfTunnel_Tileset:: @ 8286CF4
-SSTidalCorridor_Tileset:: @ 8286CF4
-SSTidalLowerDeck_Tileset:: @ 8286CF4
-SSTidalRooms_Tileset:: @ 8286CF4
-SafariZone_Northeast_Tileset:: @ 8286CF4
-SafariZone_Northwest_Tileset:: @ 8286CF4
-SafariZone_Southeast_Tileset:: @ 8286CF4
-SafariZone_Southwest_Tileset:: @ 8286CF4
-ScorchedSlab_Tileset:: @ 8286CF4
-SeafloorCavern_Entrance_Tileset:: @ 8286CF4
-SeafloorCavern_Room1_Tileset:: @ 8286CF4
-SeafloorCavern_Room2_Tileset:: @ 8286CF4
-SeafloorCavern_Room3_Tileset:: @ 8286CF4
-SeafloorCavern_Room4_Tileset:: @ 8286CF4
-SeafloorCavern_Room5_Tileset:: @ 8286CF4
-SeafloorCavern_Room6_Tileset:: @ 8286CF4
-SeafloorCavern_Room7_Tileset:: @ 8286CF4
-SeafloorCavern_Room8_Tileset:: @ 8286CF4
-SeafloorCavern_Room9_Tileset:: @ 8286CF4
-SealedChamber_InnerRoom_Tileset:: @ 8286CF4
-SealedChamber_OuterRoom_Tileset:: @ 8286CF4
-ShoalCave_HighTideEntranceRoom_Tileset:: @ 8286CF4
-ShoalCave_HighTideInnerRoom_Tileset:: @ 8286CF4
-ShoalCave_LowTideEntranceRoom_Tileset:: @ 8286CF4
-ShoalCave_LowTideIceRoom_Tileset:: @ 8286CF4
-ShoalCave_LowTideInnerRoom_Tileset:: @ 8286CF4
-ShoalCave_LowTideLowerRoom_Tileset:: @ 8286CF4
-ShoalCave_LowTideStairsRoom_Tileset:: @ 8286CF4
-SkyPillar_1F_Tileset:: @ 8286CF4
-SkyPillar_2F_Tileset:: @ 8286CF4
-SkyPillar_3F_Tileset:: @ 8286CF4
-SkyPillar_4F_Tileset:: @ 8286CF4
-SkyPillar_5F_Tileset:: @ 8286CF4
-SkyPillar_Entrance_Tileset:: @ 8286CF4
-SkyPillar_Outside_Tileset:: @ 8286CF4
-SkyPillar_Top_Tileset:: @ 8286CF4
-SlateportCity_Harbor_Tileset:: @ 8286CF4
-SlateportCity_SternsShipyard_1F_Tileset:: @ 8286CF4
-SlateportCity_SternsShipyard_2F_Tileset:: @ 8286CF4
-SlateportCity_Tileset:: @ 8286CF4
-SootopolisCity_Tileset:: @ 8286CF4
-SouthernIsland_Exterior_Tileset:: @ 8286CF4
-SouthernIsland_Interior_Tileset:: @ 8286CF4
-Underwater1_Tileset:: @ 8286CF4
-Underwater2_Tileset:: @ 8286CF4
-Underwater3_Tileset:: @ 8286CF4
-Underwater4_Tileset:: @ 8286CF4
-Underwater_Route134_Tileset:: @ 8286CF4
-Underwater_SeafloorCavern_Tileset:: @ 8286CF4
-Underwater_SealedChamber_Tileset:: @ 8286CF4
-Underwater_SootopolisCity_Tileset:: @ 8286CF4
-VerdanturfTown_Tileset:: @ 8286CF4
-VictoryRoad_1F_Tileset:: @ 8286CF4
-VictoryRoad_B1F_Tileset:: @ 8286CF4
-VictoryRoad_B2F_Tileset:: @ 8286CF4
-	.byte 1
-	.byte 0
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_General
-	.4byte gTilesetPalettes_General
-	.4byte gMetatiles_General
-	.4byte gMetatileAttributes_General
-	.4byte TilesetCB_General
-
-LittlerootTown_Tileset2:: @ 8286D0C
-OldaleTown_Tileset2:: @ 8286D0C
-PetalburgCity_Tileset2:: @ 8286D0C
-Route101_Tileset2:: @ 8286D0C
-Route102_Tileset2:: @ 8286D0C
-Route103_Tileset2:: @ 8286D0C
-	.byte 1
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_Petalburg
-	.4byte gTilesetPalettes_Petalburg
-	.4byte gMetatiles_Petalburg
-	.4byte gMetatileAttributes_Petalburg
-	.4byte TilesetCB_Petalburg
-
-PetalburgWoods_Tileset2:: @ 8286D24
-Route104_Prototype_Tileset2:: @ 8286D24
-Route104_Tileset2:: @ 8286D24
-Route116_Tileset2:: @ 8286D24
-RustboroCity_Tileset2:: @ 8286D24
-SouthernIsland_Exterior_Tileset2:: @ 8286D24
-SouthernIsland_Interior_Tileset2:: @ 8286D24
-	.byte 1
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_Rustboro
-	.4byte gTilesetPalettes_Rustboro
-	.4byte gMetatiles_Rustboro
-	.4byte gMetatileAttributes_Rustboro
-	.4byte TilesetCB_Rustboro
-
-BattleTower_Outside_Tileset2:: @ 8286D3C
-DewfordTown_Tileset2:: @ 8286D3C
-Route105_Tileset2:: @ 8286D3C
-Route106_Tileset2:: @ 8286D3C
-Route107_Tileset2:: @ 8286D3C
-	.byte 1
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_Dewford
-	.4byte gTilesetPalettes_Dewford
-	.4byte gMetatiles_Dewford
-	.4byte gMetatileAttributes_Dewford
-	.4byte TilesetCB_Dewford
-
-Route108_Tileset2:: @ 8286D54
-Route109_Tileset2:: @ 8286D54
-SlateportCity_Tileset2:: @ 8286D54
-	.byte 1
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_Slateport
-	.4byte gTilesetPalettes_Slateport
-	.4byte gMetatiles_Slateport
-	.4byte gMetatileAttributes_Slateport
-	.4byte TilesetCB_Slateport
-
-MauvilleCity_Tileset2:: @ 8286D6C
-Route110_Tileset2:: @ 8286D6C
-Route111_Tileset2:: @ 8286D6C
-Route117_Tileset2:: @ 8286D6C
-Route118_Tileset2:: @ 8286D6C
-VerdanturfTown_Tileset2:: @ 8286D6C
-	.byte 1
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_Mauville
-	.4byte gTilesetPalettes_Mauville
-	.4byte gMetatiles_Mauville
-	.4byte gMetatileAttributes_Mauville
-	.4byte TilesetCB_Mauville
-
-FieryPath_Tileset2:: @ 8286D84
-JaggedPass_Tileset2:: @ 8286D84
-LavaridgeTown_Tileset2:: @ 8286D84
-MtChimney_Tileset2:: @ 8286D84
-Route112_Tileset2:: @ 8286D84
-	.byte 1
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_Lavaridge
-	.4byte gTilesetPalettes_Lavaridge
-	.4byte gMetatiles_Lavaridge
-	.4byte gMetatileAttributes_Lavaridge
-	.4byte TilesetCB_Lavaridge
-
-FallarborTown_Tileset2:: @ 8286D9C
-Route113_Tileset2:: @ 8286D9C
-Route114_FossilManiacsTunnel_Tileset2:: @ 8286D9C
-Route114_Tileset2:: @ 8286D9C
-Route115_Tileset2:: @ 8286D9C
-	.byte 1
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_Fallarbor
-	.4byte gTilesetPalettes_Fallarbor
-	.4byte gMetatiles_Fallarbor
-	.4byte gMetatileAttributes_Fallarbor
-	.4byte TilesetCB_Fallarbor
-
-FortreeCity_Tileset2:: @ 8286DB4
-Route119_Tileset2:: @ 8286DB4
-Route120_Tileset2:: @ 8286DB4
-	.byte 1
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_Fortree
-	.4byte gTilesetPalettes_Fortree
-	.4byte gMetatiles_Fortree
-	.4byte gMetatileAttributes_Fortree
-	.4byte TilesetCB_Fortree
-
-LilycoveCity_Tileset2:: @ 8286DCC
-Route121_Tileset2:: @ 8286DCC
-Route122_Tileset2:: @ 8286DCC
-Route123_Tileset2:: @ 8286DCC
-SafariZone_Northeast_Tileset2:: @ 8286DCC
-SafariZone_Northwest_Tileset2:: @ 8286DCC
-SafariZone_Southeast_Tileset2:: @ 8286DCC
-SafariZone_Southwest_Tileset2:: @ 8286DCC
-	.byte 1
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_Lilycove
-	.4byte gTilesetPalettes_Lilycove
-	.4byte gMetatiles_Lilycove
-	.4byte gMetatileAttributes_Lilycove
-	.4byte TilesetCB_Lilycove
-
-MossdeepCity_Tileset2:: @ 8286DE4
-Route124_Tileset2:: @ 8286DE4
-Route125_Tileset2:: @ 8286DE4
-Route126_Tileset2:: @ 8286DE4
-Route127_Tileset2:: @ 8286DE4
-Route128_Tileset2:: @ 8286DE4
-Route129_Tileset2:: @ 8286DE4
-	.byte 1
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_Mossdeep
-	.4byte gTilesetPalettes_Mossdeep
-	.4byte gMetatiles_Mossdeep
-	.4byte gMetatileAttributes_Mossdeep
-	.4byte TilesetCB_Mossdeep
-
-EverGrandeCity_Tileset2:: @ 8286DFC
-	.byte 1
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_EverGrande
-	.4byte gTilesetPalettes_EverGrande
-	.4byte gMetatiles_EverGrande
-	.4byte gMetatileAttributes_EverGrande
-	.4byte TilesetCB_EverGrande
-
-PacifidlogTown_Tileset2:: @ 8286E14
-Route131_Tileset2:: @ 8286E14
-Route132_Tileset2:: @ 8286E14
-Route133_Tileset2:: @ 8286E14
-Route134_Tileset2:: @ 8286E14
-SeafloorCavern_Room6_Tileset2:: @ 8286E14
-SeafloorCavern_Room7_Tileset2:: @ 8286E14
-SkyPillar_1F_Tileset2:: @ 8286E14
-SkyPillar_2F_Tileset2:: @ 8286E14
-SkyPillar_3F_Tileset2:: @ 8286E14
-SkyPillar_4F_Tileset2:: @ 8286E14
-SkyPillar_5F_Tileset2:: @ 8286E14
-SkyPillar_Outside_Tileset2:: @ 8286E14
-SkyPillar_Top_Tileset2:: @ 8286E14
-	.byte 1
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_Pacifidlog
-	.4byte gTilesetPalettes_Pacifidlog
-	.4byte gMetatiles_Pacifidlog
-	.4byte gMetatileAttributes_Pacifidlog
-	.4byte TilesetCB_Pacifidlog
-
-SootopolisCity_Tileset2:: @ 8286E2C
-	.byte 1
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_Sootopolis
-	.4byte gTilesetPalettes_Sootopolis
-	.4byte gMetatiles_Sootopolis
-	.4byte gMetatileAttributes_Sootopolis
-	.4byte TilesetCB_Sootopolis
-
-BattleTower_BattleRoom_Tileset:: @ 8286E44
-BattleTower_Corridor_Tileset:: @ 8286E44
-BattleTower_Elevator_Tileset:: @ 8286E44
-BattleTower_Lobby_Tileset:: @ 8286E44
-DewfordTown_Gym_Tileset:: @ 8286E44
-DewfordTown_Hall_Tileset:: @ 8286E44
-DewfordTown_House1_Tileset:: @ 8286E44
-DewfordTown_House2_Tileset:: @ 8286E44
-DoubleBattleColosseum_Tileset:: @ 8286E44
-EverGrandeCity_ChampionsRoom_Tileset:: @ 8286E44
-EverGrandeCity_Corridor1_Tileset:: @ 8286E44
-EverGrandeCity_Corridor4_Tileset:: @ 8286E44
-EverGrandeCity_DrakesRoom_Tileset:: @ 8286E44
-EverGrandeCity_GlaciasRoom_Tileset:: @ 8286E44
-EverGrandeCity_HallOfFame_Tileset:: @ 8286E44
-EverGrandeCity_PhoebesRoom_Tileset:: @ 8286E44
-EverGrandeCity_PokemonLeague_Tileset:: @ 8286E44
-EverGrandeCity_SidneysRoom_Tileset:: @ 8286E44
-FallarborTown_ContestHall_Tileset:: @ 8286E44
-FallarborTown_ContestLobby_Tileset:: @ 8286E44
-FortreeCity_DecorationShop_Tileset:: @ 8286E44
-FortreeCity_Gym_Tileset:: @ 8286E44
-FortreeCity_House1_Tileset:: @ 8286E44
-FortreeCity_House2_Tileset:: @ 8286E44
-LavaridgeTown_Gym_1F_Tileset:: @ 8286E44
-LavaridgeTown_Gym_B1F_Tileset:: @ 8286E44
-LavaridgeTown_HerbShop_Tileset:: @ 8286E44
-LavaridgeTown_PokemonCenter_1F_Tileset:: @ 8286E44
-LilycoveCity_ContestHall_Tileset:: @ 8286E44
-LilycoveCity_ContestLobby_Tileset:: @ 8286E44
-LilycoveCity_CoveLilyMotel_1F_Tileset:: @ 8286E44
-LilycoveCity_CoveLilyMotel_2F_Tileset:: @ 8286E44
-LilycoveCity_DepartmentStoreElevator_Tileset:: @ 8286E44
-LilycoveCity_DepartmentStoreRooftop_Tileset:: @ 8286E44
-LilycoveCity_DepartmentStore_1F_Tileset:: @ 8286E44
-LilycoveCity_DepartmentStore_2F_Tileset:: @ 8286E44
-LilycoveCity_DepartmentStore_3F_Tileset:: @ 8286E44
-LilycoveCity_DepartmentStore_4F_Tileset:: @ 8286E44
-LilycoveCity_DepartmentStore_5F_Tileset:: @ 8286E44
-LilycoveCity_House2_Tileset:: @ 8286E44
-LilycoveCity_LilycoveMuseum_1F_Tileset:: @ 8286E44
-LilycoveCity_LilycoveMuseum_2F_Tileset:: @ 8286E44
-LilycoveCity_PokemonTrainerFanClub_Tileset:: @ 8286E44
-LittlerootTown_BrendansHouse_1F_Tileset:: @ 8286E44
-LittlerootTown_BrendansHouse_2F_Tileset:: @ 8286E44
-LittlerootTown_MaysHouse_1F_Tileset:: @ 8286E44
-LittlerootTown_MaysHouse_2F_Tileset:: @ 8286E44
-LittlerootTown_ProfessorBirchsLab_Tileset:: @ 8286E44
-MauvilleCity_GameCorner_Tileset:: @ 8286E44
-MauvilleCity_Gym_Tileset:: @ 8286E44
-MossdeepCity_GameCorner_1F_Tileset:: @ 8286E44
-MossdeepCity_GameCorner_B1F_Tileset:: @ 8286E44
-MossdeepCity_Gym_Tileset:: @ 8286E44
-MossdeepCity_StevensHouse_Tileset:: @ 8286E44
-OldaleTown_House1_Tileset:: @ 8286E44
-OldaleTown_House2_Tileset:: @ 8286E44
-OldaleTown_Mart_Tileset:: @ 8286E44
-OldaleTown_PokemonCenter_1F_Tileset:: @ 8286E44
-OldaleTown_PokemonCenter_2F_Tileset:: @ 8286E44
-PacifidlogTown_House1_Tileset:: @ 8286E44
-PacifidlogTown_House2_Tileset:: @ 8286E44
-PetalburgCity_Gym_Tileset:: @ 8286E44
-PetalburgCity_House2_Tileset:: @ 8286E44
-RecordCorner_Tileset:: @ 8286E44
-Route104_MrBrineysHouse_Tileset:: @ 8286E44
-Route104_PrettyPetalFlowerShop_Tileset:: @ 8286E44
-Route109_SeashoreHouse_Tileset:: @ 8286E44
-Route110_SeasideCyclingRoadSouthEntrance_Tileset:: @ 8286E44
-Route110_TrickHouseCorridor_Tileset:: @ 8286E44
-Route110_TrickHouseEnd_Tileset:: @ 8286E44
-Route110_TrickHouseEntrance_Tileset:: @ 8286E44
-Route110_TrickHousePuzzle1_Tileset:: @ 8286E44
-Route110_TrickHousePuzzle2_Tileset:: @ 8286E44
-Route110_TrickHousePuzzle3_Tileset:: @ 8286E44
-Route110_TrickHousePuzzle4_Tileset:: @ 8286E44
-Route110_TrickHousePuzzle5_Tileset:: @ 8286E44
-Route110_TrickHousePuzzle6_Tileset:: @ 8286E44
-Route110_TrickHousePuzzle7_Tileset:: @ 8286E44
-Route110_TrickHousePuzzle8_Tileset:: @ 8286E44
-Route114_FossilManiacsHouse_Tileset:: @ 8286E44
-Route114_LanettesHouse_Tileset:: @ 8286E44
-Route116_TunnelersRestHouse_Tileset:: @ 8286E44
-Route117_PokemonDayCare_Tileset:: @ 8286E44
-Route119_WeatherInstitute_1F_Tileset:: @ 8286E44
-Route119_WeatherInstitute_2F_Tileset:: @ 8286E44
-Route121_SafariZoneEntrance_Tileset:: @ 8286E44
-Route124_DivingTreasureHuntersHouse_Tileset:: @ 8286E44
-RustboroCity_CuttersHouse_Tileset:: @ 8286E44
-RustboroCity_Flat1_1F_Tileset:: @ 8286E44
-RustboroCity_Flat1_2F_Tileset:: @ 8286E44
-RustboroCity_Flat2_1F_Tileset:: @ 8286E44
-RustboroCity_Flat2_2F_Tileset:: @ 8286E44
-RustboroCity_Flat2_3F_Tileset:: @ 8286E44
-RustboroCity_Gym_Tileset:: @ 8286E44
-RustboroCity_House1_Tileset:: @ 8286E44
-RustboroCity_House2_Tileset:: @ 8286E44
-RustboroCity_PokemonSchool_Tileset:: @ 8286E44
-SafariZone_RestHouse_Tileset:: @ 8286E44
-SingleBattleColosseum_Tileset:: @ 8286E44
-SlateportCity_OceanicMuseum_1F_Tileset:: @ 8286E44
-SlateportCity_OceanicMuseum_2F_Tileset:: @ 8286E44
-SlateportCity_PokemonFanClub_Tileset:: @ 8286E44
-SootopolisCity_Gym_1F_Tileset:: @ 8286E44
-SootopolisCity_Gym_B1F_Tileset:: @ 8286E44
-SootopolisCity_House1_Tileset:: @ 8286E44
-SootopolisCity_House2_Tileset:: @ 8286E44
-SootopolisCity_House3_Tileset:: @ 8286E44
-SootopolisCity_House8_Tileset:: @ 8286E44
-TradeCenter_Tileset:: @ 8286E44
-UnknownMap_25_29_Tileset:: @ 8286E44
-UnknownMap_25_30_Tileset:: @ 8286E44
-UnknownMap_25_31_Tileset:: @ 8286E44
-UnknownMap_25_32_Tileset:: @ 8286E44
-UnknownMap_25_33_Tileset:: @ 8286E44
-UnknownMap_25_34_Tileset:: @ 8286E44
-VerdanturfTown_WandasHouse_Tileset:: @ 8286E44
-	.byte 1
-	.byte 0
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_Building
-	.4byte gTilesetPalettes_Building
-	.4byte gMetatiles_Building
-	.4byte gMetatileAttributes_Building
-	.4byte TilesetCB_Building
-
-LavaridgeTown_HerbShop_Tileset2:: @ 8286E5C
-LilycoveCity_DepartmentStoreRooftop_Tileset2:: @ 8286E5C
-LilycoveCity_DepartmentStore_1F_Tileset2:: @ 8286E5C
-LilycoveCity_DepartmentStore_2F_Tileset2:: @ 8286E5C
-LilycoveCity_DepartmentStore_3F_Tileset2:: @ 8286E5C
-LilycoveCity_DepartmentStore_4F_Tileset2:: @ 8286E5C
-LilycoveCity_DepartmentStore_5F_Tileset2:: @ 8286E5C
-OldaleTown_Mart_Tileset2:: @ 8286E5C
-Route110_SeasideCyclingRoadSouthEntrance_Tileset2:: @ 8286E5C
-Route121_SafariZoneEntrance_Tileset2:: @ 8286E5C
-	.byte 1
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_Shop
-	.4byte gTilesetPalettes_Shop
-	.4byte gMetatiles_Shop
-	.4byte gMetatileAttributes_Shop
-	.4byte 0x0
-
-EverGrandeCity_PokemonLeague_Tileset2:: @ 8286E74
-LavaridgeTown_PokemonCenter_1F_Tileset2:: @ 8286E74
-OldaleTown_PokemonCenter_1F_Tileset2:: @ 8286E74
-OldaleTown_PokemonCenter_2F_Tileset2:: @ 8286E74
-	.byte 1
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_PokemonCenter
-	.4byte gTilesetPalettes_PokemonCenter
-	.4byte gMetatiles_PokemonCenter
-	.4byte gMetatileAttributes_PokemonCenter
-	.4byte 0x0
-
-AncientTomb_Tileset2:: @ 8286E8C
-CaveOfOrigin_1F_Tileset2:: @ 8286E8C
-CaveOfOrigin_B1F_Tileset2:: @ 8286E8C
-CaveOfOrigin_B2F_Tileset2:: @ 8286E8C
-CaveOfOrigin_B3F_Tileset2:: @ 8286E8C
-CaveOfOrigin_B4F_Tileset2:: @ 8286E8C
-CaveOfOrigin_Entrance_Tileset2:: @ 8286E8C
-DesertRuins_Tileset2:: @ 8286E8C
-GraniteCave_1F_Tileset2:: @ 8286E8C
-GraniteCave_B1F_Tileset2:: @ 8286E8C
-GraniteCave_B2F_Tileset2:: @ 8286E8C
-GraniteCave_StevensRoom_Tileset2:: @ 8286E8C
-IslandCave_Tileset2:: @ 8286E8C
-Route130_Tileset2:: @ 8286E8C
-ScorchedSlab_Tileset2:: @ 8286E8C
-SeafloorCavern_Entrance_Tileset2:: @ 8286E8C
-SeafloorCavern_Room1_Tileset2:: @ 8286E8C
-SeafloorCavern_Room2_Tileset2:: @ 8286E8C
-SeafloorCavern_Room3_Tileset2:: @ 8286E8C
-SeafloorCavern_Room4_Tileset2:: @ 8286E8C
-SeafloorCavern_Room5_Tileset2:: @ 8286E8C
-SeafloorCavern_Room8_Tileset2:: @ 8286E8C
-SeafloorCavern_Room9_Tileset2:: @ 8286E8C
-SealedChamber_InnerRoom_Tileset2:: @ 8286E8C
-SealedChamber_OuterRoom_Tileset2:: @ 8286E8C
-ShoalCave_HighTideEntranceRoom_Tileset2:: @ 8286E8C
-ShoalCave_HighTideInnerRoom_Tileset2:: @ 8286E8C
-ShoalCave_LowTideEntranceRoom_Tileset2:: @ 8286E8C
-ShoalCave_LowTideIceRoom_Tileset2:: @ 8286E8C
-ShoalCave_LowTideInnerRoom_Tileset2:: @ 8286E8C
-ShoalCave_LowTideLowerRoom_Tileset2:: @ 8286E8C
-ShoalCave_LowTideStairsRoom_Tileset2:: @ 8286E8C
-SkyPillar_Entrance_Tileset2:: @ 8286E8C
-VictoryRoad_1F_Tileset2:: @ 8286E8C
-VictoryRoad_B1F_Tileset2:: @ 8286E8C
-VictoryRoad_B2F_Tileset2:: @ 8286E8C
-	.byte 1
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_Cave
-	.4byte gTilesetPalettes_Cave
-	.4byte gMetatiles_Cave
-	.4byte gMetatileAttributes_Cave
-	.4byte TilesetCB_Cave
-
-RustboroCity_PokemonSchool_Tileset2:: @ 8286EA4
-	.byte 1
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_PokemonSchool
-	.4byte gTilesetPalettes_PokemonSchool
-	.4byte gMetatiles_PokemonSchool
-	.4byte gMetatileAttributes_PokemonSchool
-	.4byte 0x0
-
-SlateportCity_PokemonFanClub_Tileset2:: @ 8286EBC
-	.byte 1
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_PokemonFanClub
-	.4byte gTilesetPalettes_PokemonFanClub
-	.4byte gMetatiles_PokemonFanClub
-	.4byte gMetatileAttributes_PokemonFanClub
-	.4byte 0x0
-
-	.incbin "baserom.gba", 0x286ed4, 0x18
-
-MeteorFalls_1F_1R_Tileset2:: @ 8286EEC
-MeteorFalls_1F_2R_Tileset2:: @ 8286EEC
-MeteorFalls_B1F_1R_Tileset2:: @ 8286EEC
-MeteorFalls_B1F_2R_Tileset2:: @ 8286EEC
-	.byte 1
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_MeteorFalls
-	.4byte gTilesetPalettes_MeteorFalls
-	.4byte gMetatiles_MeteorFalls
-	.4byte gMetatileAttributes_MeteorFalls
-	.4byte 0x0
-
-SlateportCity_OceanicMuseum_1F_Tileset2:: @ 8286F04
-SlateportCity_OceanicMuseum_2F_Tileset2:: @ 8286F04
-	.byte 1
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_OceanicMuseum
-	.4byte gTilesetPalettes_OceanicMuseum
-	.4byte gMetatiles_OceanicMuseum
-	.4byte gMetatileAttributes_OceanicMuseum
-	.4byte 0x0
-
-DoubleBattleColosseum_Tileset2:: @ 8286F1C
-EverGrandeCity_HallOfFame_Tileset2:: @ 8286F1C
-RecordCorner_Tileset2:: @ 8286F1C
-SingleBattleColosseum_Tileset2:: @ 8286F1C
-TradeCenter_Tileset2:: @ 8286F1C
-	.byte 0
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_CableClub
-	.4byte gTilesetPalettes_CableClub
-	.4byte gMetatiles_CableClub
-	.4byte gMetatileAttributes_CableClub
-	.4byte 0x0
-
-Route109_SeashoreHouse_Tileset2:: @ 8286F34
-	.byte 1
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_SeashoreHouse
-	.4byte gTilesetPalettes_SeashoreHouse
-	.4byte gMetatiles_SeashoreHouse
-	.4byte gMetatileAttributes_SeashoreHouse
-	.4byte 0x0
-
-Route104_PrettyPetalFlowerShop_Tileset2:: @ 8286F4C
-	.byte 1
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_PrettyPetalFlowerShop
-	.4byte gTilesetPalettes_PrettyPetalFlowerShop
-	.4byte gMetatiles_PrettyPetalFlowerShop
-	.4byte gMetatileAttributes_PrettyPetalFlowerShop
-	.4byte 0x0
-
-Route117_PokemonDayCare_Tileset2:: @ 8286F64
-	.byte 1
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_PokemonDayCare
-	.4byte gTilesetPalettes_PokemonDayCare
-	.4byte gMetatiles_PokemonDayCare
-	.4byte gMetatileAttributes_PokemonDayCare
-	.4byte 0x0
-
-AbandonedShip_CaptainsOffice_Tileset2:: @ 8286F7C
-AbandonedShip_Deck_Tileset2:: @ 8286F7C
-AquaHideout_1F_Tileset2:: @ 8286F7C
-AquaHideout_B1F_Tileset2:: @ 8286F7C
-AquaHideout_B2F_Tileset2:: @ 8286F7C
-LilycoveCity_EmptyMap_Tileset2:: @ 8286F7C
-MagmaHideout_1F_Tileset2:: @ 8286F7C
-MagmaHideout_B1F_Tileset2:: @ 8286F7C
-MagmaHideout_B2F_Tileset2:: @ 8286F7C
-MossdeepCity_SpaceCenter_1F_Tileset2:: @ 8286F7C
-MossdeepCity_SpaceCenter_2F_Tileset2:: @ 8286F7C
-MtPyre_1F_Tileset2:: @ 8286F7C
-MtPyre_2F_Tileset2:: @ 8286F7C
-MtPyre_3F_Tileset2:: @ 8286F7C
-MtPyre_4F_Tileset2:: @ 8286F7C
-MtPyre_5F_Tileset2:: @ 8286F7C
-MtPyre_6F_Tileset2:: @ 8286F7C
-MtPyre_Exterior_Tileset2:: @ 8286F7C
-MtPyre_Summit_Tileset2:: @ 8286F7C
-NewMauville_Entrance_Tileset2:: @ 8286F7C
-Route112_CableCarStation_Tileset2:: @ 8286F7C
-RustboroCity_DevonCorp_1F_Tileset2:: @ 8286F7C
-RustboroCity_DevonCorp_2F_Tileset2:: @ 8286F7C
-RustboroCity_DevonCorp_3F_Tileset2:: @ 8286F7C
-SlateportCity_Harbor_Tileset2:: @ 8286F7C
-SlateportCity_SternsShipyard_1F_Tileset2:: @ 8286F7C
-SlateportCity_SternsShipyard_2F_Tileset2:: @ 8286F7C
-	.byte 1
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_Facility
-	.4byte gTilesetPalettes_Facility
-	.4byte gMetatiles_Facility
-	.4byte gMetatileAttributes_Facility
-	.4byte 0x0
-
-MauvilleCity_BikeShop_Tileset2:: @ 8286F94
-NewMauville_Inside_Tileset2:: @ 8286F94
-	.byte 1
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_BikeShop
-	.4byte gTilesetPalettes_BikeShop
-	.4byte gMetatiles_BikeShop
-	.4byte gMetatileAttributes_BikeShop
-	.4byte TilesetCB_BikeShop
-
-RusturfTunnel_Tileset2:: @ 8286FAC
-	.byte 1
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_RusturfTunnel
-	.4byte gTilesetPalettes_RusturfTunnel
-	.4byte gMetatiles_RusturfTunnel
-	.4byte gMetatileAttributes_RusturfTunnel
-	.4byte 0x0
-
-SecretBase_BrownCave1_Tileset2:: @ 8286FC4
-SecretBase_BrownCave2_Tileset2:: @ 8286FC4
-SecretBase_BrownCave3_Tileset2:: @ 8286FC4
-SecretBase_BrownCave4_Tileset2:: @ 8286FC4
-	.byte 0
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_SecretBaseBrownCave
-	.4byte gTilesetPalettes_SecretBaseBrownCave
-	.4byte gMetatiles_SecretBaseSecondary
-	.4byte gMetatileAttributes_SecretBaseSecondary
-	.4byte 0x0
-
-SecretBase_Tree1_Tileset2:: @ 8286FDC
-SecretBase_Tree2_Tileset2:: @ 8286FDC
-SecretBase_Tree3_Tileset2:: @ 8286FDC
-SecretBase_Tree4_Tileset2:: @ 8286FDC
-	.byte 0
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_SecretBaseTree
-	.4byte gTilesetPalettes_SecretBaseTree
-	.4byte gMetatiles_SecretBaseSecondary
-	.4byte gMetatileAttributes_SecretBaseSecondary
-	.4byte 0x0
-
-SecretBase_Shrub1_Tileset2:: @ 8286FF4
-SecretBase_Shrub2_Tileset2:: @ 8286FF4
-SecretBase_Shrub3_Tileset2:: @ 8286FF4
-SecretBase_Shrub4_Tileset2:: @ 8286FF4
-	.byte 0
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_SecretBaseShrub
-	.4byte gTilesetPalettes_SecretBaseShrub
-	.4byte gMetatiles_SecretBaseSecondary
-	.4byte gMetatileAttributes_SecretBaseSecondary
-	.4byte 0x0
-
-SecretBase_BlueCave1_Tileset2:: @ 828700C
-SecretBase_BlueCave2_Tileset2:: @ 828700C
-SecretBase_BlueCave3_Tileset2:: @ 828700C
-SecretBase_BlueCave4_Tileset2:: @ 828700C
-	.byte 0
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_SecretBaseBlueCave
-	.4byte gTilesetPalettes_SecretBaseBlueCave
-	.4byte gMetatiles_SecretBaseSecondary
-	.4byte gMetatileAttributes_SecretBaseSecondary
-	.4byte 0x0
-
-SecretBase_YellowCave1_Tileset2:: @ 8287024
-SecretBase_YellowCave2_Tileset2:: @ 8287024
-SecretBase_YellowCave3_Tileset2:: @ 8287024
-SecretBase_YellowCave4_Tileset2:: @ 8287024
-	.byte 0
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_SecretBaseYellowCave
-	.4byte gTilesetPalettes_SecretBaseYellowCave
-	.4byte gMetatiles_SecretBaseSecondary
-	.4byte gMetatileAttributes_SecretBaseSecondary
-	.4byte 0x0
-
-SecretBase_RedCave1_Tileset2:: @ 828703C
-SecretBase_RedCave2_Tileset2:: @ 828703C
-SecretBase_RedCave3_Tileset2:: @ 828703C
-SecretBase_RedCave4_Tileset2:: @ 828703C
-	.byte 0
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_SecretBaseRedCave
-	.4byte gTilesetPalettes_SecretBaseRedCave
-	.4byte gMetatiles_SecretBaseSecondary
-	.4byte gMetatileAttributes_SecretBaseSecondary
-	.4byte 0x0
-
-InsideOfTruck_Tileset2:: @ 8287054
-	.byte 1
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_InsideOfTruck
-	.4byte gTilesetPalettes_InsideOfTruck
-	.4byte gMetatiles_InsideOfTruck
-	.4byte gMetatileAttributes_InsideOfTruck
-	.4byte 0x0
-
-	.incbin "baserom.gba", 0x28706c, 0x18
-
-FallarborTown_ContestHall_Tileset2:: @ 8287084
-FallarborTown_ContestLobby_Tileset2:: @ 8287084
-LilycoveCity_ContestHall_Tileset2:: @ 8287084
-LilycoveCity_ContestLobby_Tileset2:: @ 8287084
-LinkContestRoom1_Tileset2:: @ 8287084
-LinkContestRoom2_Tileset2:: @ 8287084
-LinkContestRoom3_Tileset2:: @ 8287084
-LinkContestRoom4_Tileset2:: @ 8287084
-LinkContestRoom5_Tileset2:: @ 8287084
-LinkContestRoom6_Tileset2:: @ 8287084
-UnknownMap_25_29_Tileset2:: @ 8287084
-UnknownMap_25_30_Tileset2:: @ 8287084
-UnknownMap_25_31_Tileset2:: @ 8287084
-UnknownMap_25_32_Tileset2:: @ 8287084
-UnknownMap_25_33_Tileset2:: @ 8287084
-UnknownMap_25_34_Tileset2:: @ 8287084
-	.byte 1
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_Contest
-	.4byte gTilesetPalettes_Contest
-	.4byte gMetatiles_Contest
-	.4byte gMetatileAttributes_Contest
-	.4byte 0x0
-
-LilycoveCity_LilycoveMuseum_1F_Tileset2:: @ 828709C
-LilycoveCity_LilycoveMuseum_2F_Tileset2:: @ 828709C
-	.byte 1
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_LilycoveMuseum
-	.4byte gTilesetPalettes_LilycoveMuseum
-	.4byte gMetatiles_LilycoveMuseum
-	.4byte gMetatileAttributes_LilycoveMuseum
-	.4byte 0x0
-
-LittlerootTown_BrendansHouse_1F_Tileset2:: @ 82870B4
-LittlerootTown_BrendansHouse_2F_Tileset2:: @ 82870B4
-LittlerootTown_MaysHouse_1F_Tileset2:: @ 82870B4
-LittlerootTown_MaysHouse_2F_Tileset2:: @ 82870B4
-	.byte 1
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_BrendansMaysHouse
-	.4byte gTilesetPalettes_BrendansMaysHouse
-	.4byte gMetatiles_BrendansMaysHouse
-	.4byte gMetatileAttributes_BrendansMaysHouse
-	.4byte 0x0
-
-LittlerootTown_ProfessorBirchsLab_Tileset2:: @ 82870CC
-Route114_LanettesHouse_Tileset2:: @ 82870CC
-Route119_WeatherInstitute_1F_Tileset2:: @ 82870CC
-Route119_WeatherInstitute_2F_Tileset2:: @ 82870CC
-	.byte 1
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_Lab
-	.4byte gTilesetPalettes_Lab
-	.4byte gMetatiles_Lab
-	.4byte gMetatileAttributes_Lab
-	.4byte 0x0
-
-Underwater1_Tileset2:: @ 82870E4
-Underwater2_Tileset2:: @ 82870E4
-Underwater3_Tileset2:: @ 82870E4
-Underwater4_Tileset2:: @ 82870E4
-Underwater_Route134_Tileset2:: @ 82870E4
-Underwater_SeafloorCavern_Tileset2:: @ 82870E4
-Underwater_SealedChamber_Tileset2:: @ 82870E4
-Underwater_SootopolisCity_Tileset2:: @ 82870E4
-	.byte 1
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_Underwater
-	.4byte gTilesetPalettes_Underwater
-	.4byte gMetatiles_Underwater
-	.4byte gMetatileAttributes_Underwater
-	.4byte TilesetCB_Underwater
-
-PetalburgCity_Gym_Tileset2:: @ 82870FC
-	.byte 1
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_PetalburgGym
-	.4byte gTilesetPalettes_PetalburgGym
-	.4byte gMetatiles_PetalburgGym
-	.4byte gMetatileAttributes_PetalburgGym
-	.4byte 0x0
-
-SootopolisCity_Gym_1F_Tileset2:: @ 8287114
-SootopolisCity_Gym_B1F_Tileset2:: @ 8287114
-	.byte 1
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_SootopolisGym
-	.4byte gTilesetPalettes_SootopolisGym
-	.4byte gMetatiles_SootopolisGym
-	.4byte gMetatileAttributes_SootopolisGym
-	.4byte TilesetCB_SootopolisGym
-
-DewfordTown_Hall_Tileset2:: @ 828712C
-DewfordTown_House1_Tileset2:: @ 828712C
-DewfordTown_House2_Tileset2:: @ 828712C
-FortreeCity_DecorationShop_Tileset2:: @ 828712C
-FortreeCity_House1_Tileset2:: @ 828712C
-FortreeCity_House2_Tileset2:: @ 828712C
-LilycoveCity_CoveLilyMotel_1F_Tileset2:: @ 828712C
-LilycoveCity_CoveLilyMotel_2F_Tileset2:: @ 828712C
-LilycoveCity_House2_Tileset2:: @ 828712C
-LilycoveCity_PokemonTrainerFanClub_Tileset2:: @ 828712C
-MossdeepCity_GameCorner_1F_Tileset2:: @ 828712C
-MossdeepCity_GameCorner_B1F_Tileset2:: @ 828712C
-MossdeepCity_StevensHouse_Tileset2:: @ 828712C
-OldaleTown_House1_Tileset2:: @ 828712C
-OldaleTown_House2_Tileset2:: @ 828712C
-PacifidlogTown_House1_Tileset2:: @ 828712C
-PacifidlogTown_House2_Tileset2:: @ 828712C
-PetalburgCity_House2_Tileset2:: @ 828712C
-Route104_MrBrineysHouse_Tileset2:: @ 828712C
-Route110_TrickHouseCorridor_Tileset2:: @ 828712C
-Route110_TrickHouseEnd_Tileset2:: @ 828712C
-Route110_TrickHouseEntrance_Tileset2:: @ 828712C
-Route114_FossilManiacsHouse_Tileset2:: @ 828712C
-Route116_TunnelersRestHouse_Tileset2:: @ 828712C
-Route124_DivingTreasureHuntersHouse_Tileset2:: @ 828712C
-RustboroCity_CuttersHouse_Tileset2:: @ 828712C
-RustboroCity_Flat1_1F_Tileset2:: @ 828712C
-RustboroCity_Flat1_2F_Tileset2:: @ 828712C
-RustboroCity_Flat2_1F_Tileset2:: @ 828712C
-RustboroCity_Flat2_2F_Tileset2:: @ 828712C
-RustboroCity_Flat2_3F_Tileset2:: @ 828712C
-RustboroCity_House1_Tileset2:: @ 828712C
-RustboroCity_House2_Tileset2:: @ 828712C
-SafariZone_RestHouse_Tileset2:: @ 828712C
-SootopolisCity_House1_Tileset2:: @ 828712C
-SootopolisCity_House2_Tileset2:: @ 828712C
-SootopolisCity_House3_Tileset2:: @ 828712C
-SootopolisCity_House8_Tileset2:: @ 828712C
-VerdanturfTown_WandasHouse_Tileset2:: @ 828712C
-	.byte 1
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_GenericBuilding
-	.4byte gTilesetPalettes_GenericBuilding
-	.4byte gMetatiles_GenericBuilding
-	.4byte gMetatileAttributes_GenericBuilding
-	.4byte 0x0
-
-MauvilleCity_GameCorner_Tileset2:: @ 8287144
-	.byte 1
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_MauvilleGameCorner
-	.4byte gTilesetPalettes_MauvilleGameCorner
-	.4byte gMetatiles_MauvilleGameCorner
-	.4byte gMetatileAttributes_MauvilleGameCorner
-	.4byte 0x0
-
-RustboroCity_Gym_Tileset2:: @ 828715C
-	.byte 1
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_RustboroGym
-	.4byte gTilesetPalettes_RustboroGym
-	.4byte gMetatiles_RustboroGym
-	.4byte gMetatileAttributes_RustboroGym
-	.4byte 0x0
-
-DewfordTown_Gym_Tileset2:: @ 8287174
-	.byte 1
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_DewfordGym
-	.4byte gTilesetPalettes_DewfordGym
-	.4byte gMetatiles_DewfordGym
-	.4byte gMetatileAttributes_DewfordGym
-	.4byte 0x0
-
-MauvilleCity_Gym_Tileset2:: @ 828718C
-	.byte 1
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_MauvilleGym
-	.4byte gTilesetPalettes_MauvilleGym
-	.4byte gMetatiles_MauvilleGym
-	.4byte gMetatileAttributes_MauvilleGym
-	.4byte TilesetCB_MauvilleGym
-
-LavaridgeTown_Gym_1F_Tileset2:: @ 82871A4
-LavaridgeTown_Gym_B1F_Tileset2:: @ 82871A4
-	.byte 1
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_LavaridgeGym
-	.4byte gTilesetPalettes_LavaridgeGym
-	.4byte gMetatiles_LavaridgeGym
-	.4byte gMetatileAttributes_LavaridgeGym
-	.4byte 0x0
-
-Route110_TrickHousePuzzle1_Tileset2:: @ 82871BC
-Route110_TrickHousePuzzle2_Tileset2:: @ 82871BC
-Route110_TrickHousePuzzle3_Tileset2:: @ 82871BC
-Route110_TrickHousePuzzle4_Tileset2:: @ 82871BC
-Route110_TrickHousePuzzle5_Tileset2:: @ 82871BC
-Route110_TrickHousePuzzle6_Tileset2:: @ 82871BC
-Route110_TrickHousePuzzle7_Tileset2:: @ 82871BC
-Route110_TrickHousePuzzle8_Tileset2:: @ 82871BC
-	.byte 1
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_TrickHousePuzzle
-	.4byte gTilesetPalettes_TrickHousePuzzle
-	.4byte gMetatiles_TrickHousePuzzle
-	.4byte gMetatileAttributes_TrickHousePuzzle
-	.4byte 0x0
-
-FortreeCity_Gym_Tileset2:: @ 82871D4
-	.byte 1
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_FortreeGym
-	.4byte gTilesetPalettes_FortreeGym
-	.4byte gMetatiles_FortreeGym
-	.4byte gMetatileAttributes_FortreeGym
-	.4byte 0x0
-
-MossdeepCity_Gym_Tileset2:: @ 82871EC
-	.byte 1
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_MossdeepGym
-	.4byte gTilesetPalettes_MossdeepGym
-	.4byte gMetatiles_MossdeepGym
-	.4byte gMetatileAttributes_MossdeepGym
-	.4byte 0x0
-
-AbandonedShip_Corridors_1F_Tileset2:: @ 8287204
-AbandonedShip_Corridors_B1F_Tileset2:: @ 8287204
-AbandonedShip_HiddenFloorCorridors_Tileset2:: @ 8287204
-AbandonedShip_HiddenFloorRooms_Tileset2:: @ 8287204
-AbandonedShip_Room_B1F_Tileset2:: @ 8287204
-AbandonedShip_Rooms2_1F_Tileset2:: @ 8287204
-AbandonedShip_Rooms2_B1F_Tileset2:: @ 8287204
-AbandonedShip_Rooms_1F_Tileset2:: @ 8287204
-AbandonedShip_Rooms_B1F_Tileset2:: @ 8287204
-AbandonedShip_Underwater1_Tileset2:: @ 8287204
-AbandonedShip_Underwater2_Tileset2:: @ 8287204
-SSTidalCorridor_Tileset2:: @ 8287204
-SSTidalLowerDeck_Tileset2:: @ 8287204
-SSTidalRooms_Tileset2:: @ 8287204
-	.byte 1
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_Ship
-	.4byte gTilesetPalettes_Ship
-	.4byte gMetatiles_Ship
-	.4byte gMetatileAttributes_Ship
-	.4byte 0x0
-
-SecretBase_BlueCave1_Tileset:: @ 828721C
-SecretBase_BlueCave2_Tileset:: @ 828721C
-SecretBase_BlueCave3_Tileset:: @ 828721C
-SecretBase_BlueCave4_Tileset:: @ 828721C
-SecretBase_BrownCave1_Tileset:: @ 828721C
-SecretBase_BrownCave2_Tileset:: @ 828721C
-SecretBase_BrownCave3_Tileset:: @ 828721C
-SecretBase_BrownCave4_Tileset:: @ 828721C
-SecretBase_RedCave1_Tileset:: @ 828721C
-SecretBase_RedCave2_Tileset:: @ 828721C
-SecretBase_RedCave3_Tileset:: @ 828721C
-SecretBase_RedCave4_Tileset:: @ 828721C
-SecretBase_Shrub1_Tileset:: @ 828721C
-SecretBase_Shrub2_Tileset:: @ 828721C
-SecretBase_Shrub3_Tileset:: @ 828721C
-SecretBase_Shrub4_Tileset:: @ 828721C
-SecretBase_Tree1_Tileset:: @ 828721C
-SecretBase_Tree2_Tileset:: @ 828721C
-SecretBase_Tree3_Tileset:: @ 828721C
-SecretBase_Tree4_Tileset:: @ 828721C
-SecretBase_YellowCave1_Tileset:: @ 828721C
-SecretBase_YellowCave2_Tileset:: @ 828721C
-SecretBase_YellowCave3_Tileset:: @ 828721C
-SecretBase_YellowCave4_Tileset:: @ 828721C
-	.byte 0
-	.byte 0
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_SecretBase
-	.4byte gTilesetPalettes_SecretBase
-	.4byte gMetatiles_SecretBasePrimary
-	.4byte gMetatileAttributes_SecretBasePrimary
-	.4byte 0x0
-
-EverGrandeCity_ChampionsRoom_Tileset2:: @ 8287234
-EverGrandeCity_Corridor1_Tileset2:: @ 8287234
-EverGrandeCity_Corridor4_Tileset2:: @ 8287234
-EverGrandeCity_DrakesRoom_Tileset2:: @ 8287234
-EverGrandeCity_GlaciasRoom_Tileset2:: @ 8287234
-EverGrandeCity_PhoebesRoom_Tileset2:: @ 8287234
-EverGrandeCity_SidneysRoom_Tileset2:: @ 8287234
-	.byte 1
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_EliteFour
-	.4byte gTilesetPalettes_EliteFour
-	.4byte gMetatiles_EliteFour
-	.4byte gMetatileAttributes_EliteFour
-	.4byte TilesetCB_EliteFour
-
-BattleTower_BattleRoom_Tileset2:: @ 828724C
-BattleTower_Corridor_Tileset2:: @ 828724C
-BattleTower_Elevator_Tileset2:: @ 828724C
-BattleTower_Lobby_Tileset2:: @ 828724C
-LilycoveCity_DepartmentStoreElevator_Tileset2:: @ 828724C
-	.byte 1
-	.byte 1
-	.byte 0
-	.byte 0
-	.4byte gTilesetTiles_BattleTower
-	.4byte gTilesetPalettes_BattleTower
-	.4byte gMetatiles_BattleTower
-	.4byte gMetatileAttributes_BattleTower
-	.4byte 0x0
+	.include "data/tilesets/headers.s"
 
 	.include "data/maps/_assets.s"
+
 	.global gUnknown_08304F18
 gUnknown_08304F18: @ 8304F18
-
 	.incbin "baserom.gba", 0x304f18, 0x530
 
 	.include "data/maps/PetalburgCity/header.s"
@@ -3587,10 +2405,10 @@ gUnknown_08304F18: @ 8304F18
 	.include "data/maps/Route119_House/header.s"
 	.include "data/maps/Route124_DivingTreasureHuntersHouse/header.s"
 	.include "data/maps/_groups.s"
-	.global gUnknown_08308588
-gUnknown_08308588: @ 8308588
 
 	.align 2
+	.global gUnknown_08308588
+gUnknown_08308588: @ 8308588
 gMapGroups:: @ 8308588
 	.4byte gMapGroup0
 	.4byte gMapGroup1
@@ -5946,674 +4764,619 @@ gDummyPaletteStructTemplate: @ 837DEE4
 gUnknown_0837DEF4: @ 837DEF4
 	.incbin "baserom.gba", 0x0037def4, 0x270
 
-	.global gBattleAnimPicTable
-gBattleAnimPicTable: @ 837E164
-	obj_tiles 0x08d03308, 512, 0x2710
-	obj_tiles 0x08d1ca44, 768, 0x2711
-	obj_tiles 0x08d20b30, 512, 0x2712
-	obj_tiles 0x08d033b8, 256, 0x2713
-	obj_tiles 0x08d0342c, 512, 0x2714
-	obj_tiles 0x08d034dc, 1024, 0x2715
-	obj_tiles 0x08d035b0, 384, 0x2716
-	obj_tiles 0x08d0379c, 2048, 0x2717
-	obj_tiles 0x08d03938, 32, 0x2718
-	obj_tiles 0x08d03d74, 1024, 0x2719
-	obj_tiles 0x08d03994, 4608, 0x271a
-	obj_tiles 0x08d0407c, 384, 0x271b
-	obj_tiles 0x08d0411c, 128, 0x271c
-	obj_tiles 0x08d04208, 128, 0x271d
-	obj_tiles 0x08d1ff80, 640, 0x271e
-	obj_tiles 0x08d04254, 128, 0x271f
-	obj_tiles 0x08d042e8, 256, 0x2720
-	obj_tiles 0x08d04368, 32, 0x2721
-	obj_tiles 0x08d25128, 128, 0x2722
-	obj_tiles 0x08d043c8, 1024, 0x2723
-	obj_tiles 0x08d04488, 512, 0x2724
-	obj_tiles 0x08d047f8, 2560, 0x2725
-	obj_tiles 0x08d047f8, 2560, 0x2726
-	obj_tiles 0x08d045a4, 896, 0x2727
-	obj_tiles 0x08d04c70, 768, 0x2728
-	obj_tiles 0x08d04b80, 2560, 0x2729
-	obj_tiles 0x08d05264, 2560, 0x272a
-	obj_tiles 0x08d055ec, 2560, 0x272b
-	obj_tiles 0x08d05910, 2560, 0x272c
-	obj_tiles 0x08d05c60, 2560, 0x272d
-	obj_tiles 0x08d05f40, 2560, 0x272e
-	obj_tiles 0x08d04d50, 3584, 0x272f
-	obj_tiles 0x08d05178, 896, 0x2730
-	obj_tiles 0x08d0634c, 4096, 0x2731
-	obj_tiles 0x08d06cbc, 2048, 0x2732
-	obj_tiles 0x08d07088, 2560, 0x2733
-	obj_tiles 0x08d07448, 2048, 0x2734
-	obj_tiles 0x08d0781c, 2560, 0x2735
-	obj_tiles 0x08d08734, 2560, 0x2736
-	obj_tiles 0x08d08958, 2560, 0x2737
-	obj_tiles 0x08d08c54, 2560, 0x2738
-	obj_tiles 0x08d08e60, 2560, 0x2739
-	obj_tiles 0x08d09000, 2560, 0x273a
-	obj_tiles 0x08d092f8, 2560, 0x273b
-	obj_tiles 0x08d09748, 2560, 0x273c
-	obj_tiles 0x08d099dc, 2560, 0x273d
-	obj_tiles 0x08d09e5c, 4096, 0x273e
-	obj_tiles 0x08d09e5c, 4096, 0x273f
-	obj_tiles 0x08d0a280, 4096, 0x2740
-	obj_tiles 0x08d0a280, 4096, 0x2741
-	obj_tiles 0x08d0a58c, 512, 0x2742
-	obj_tiles 0x08d0a62c, 512, 0x2743
-	obj_tiles 0x08d0a6d8, 512, 0x2744
-	obj_tiles 0x08d2ebdc, 2048, 0x2745
-	obj_tiles 0x08d0a938, 128, 0x2746
-	obj_tiles 0x08d0ae4c, 512, 0x2747
-	obj_tiles 0x08d0a97c, 4096, 0x2748
-	obj_tiles 0x08d0af10, 384, 0x2749
-	obj_tiles 0x08d0afbc, 3072, 0x274a
-	obj_tiles 0x08d0b44c, 256, 0x274b
-	obj_tiles 0x08d0b4c8, 64, 0x274c
-	obj_tiles 0x08d0b50c, 384, 0x274d
-	obj_tiles 0x08d0b5dc, 2048, 0x274e
-	obj_tiles 0x08d0b9d4, 1152, 0x274f
-	obj_tiles 0x08d234b0, 512, 0x2750
-	obj_tiles 0x08d0bc4c, 512, 0x2751
-	obj_tiles 0x08d0bd80, 256, 0x2752
-	obj_tiles 0x08d0bc4c, 512, 0x2753
-	obj_tiles 0x08d0bc4c, 512, 0x2754
-	obj_tiles 0x08d0bc4c, 512, 0x2755
-	obj_tiles 0x08d0bdf4, 512, 0x2756
-	obj_tiles 0x08d0be9c, 2560, 0x2757
-	obj_tiles 0x08d0c0c8, 768, 0x2758
-	obj_tiles 0x08d0c1b0, 384, 0x2759
-	obj_tiles 0x08d1b600, 160, 0x275a
-	obj_tiles 0x08d0c2ec, 1792, 0x275b
-	obj_tiles 0x08d14e90, 1024, 0x275c
-	obj_tiles 0x08d150f4, 512, 0x275d
-	obj_tiles 0x08d0c58c, 768, 0x275e
-	obj_tiles 0x08d0c74c, 3072, 0x275f
-	obj_tiles 0x08d0cb7c, 2560, 0x2760
-	obj_tiles 0x08d0cf04, 128, 0x2761
-	obj_tiles 0x08d0d120, 64, 0x2762
-	obj_tiles 0x08d0d3a8, 3584, 0x2763
-	obj_tiles 0x08d0d84c, 3584, 0x2764
-	obj_tiles 0x08d0dc10, 640, 0x2765
-	obj_tiles 0x08d0dcc8, 512, 0x2766
-	obj_tiles 0x08d250a8, 128, 0x2767
-	obj_tiles 0x08d0de38, 192, 0x2768
-	obj_tiles 0x08d0de88, 2560, 0x2769
-	obj_tiles 0x08d0e0fc, 512, 0x276a
-	obj_tiles 0x08d0e18c, 384, 0x276b
-	obj_tiles 0x08d0e2c0, 128, 0x276c
-	obj_tiles 0x08d0e33c, 4096, 0x276d
-	obj_tiles 0x08d0ea0c, 2560, 0x276e
-	obj_tiles 0x08d0ebb0, 384, 0x276f
-	obj_tiles 0x08d0ec60, 896, 0x2770
-	obj_tiles 0x08d0edd0, 3072, 0x2771
-	obj_tiles 0x08d0efb0, 512, 0x2772
-	obj_tiles 0x08d28098, 512, 0x2773
-	obj_tiles 0x08d0f0e8, 512, 0x2774
-	obj_tiles 0x08d0f1e8, 512, 0x2775
-	obj_tiles 0x08d0f318, 1024, 0x2776
-	obj_tiles 0x08d0f4b0, 128, 0x2777
-	obj_tiles 0x08d0f51c, 1024, 0x2778
-	obj_tiles 0x08d0f704, 3072, 0x2779
-	obj_tiles 0x08d0fcb0, 512, 0x277a
-	obj_tiles 0x08d0fda0, 4096, 0x277b
-	obj_tiles 0x08d10174, 2560, 0x277c
-	obj_tiles 0x08d104f8, 32, 0x277d
-	obj_tiles 0x08d10548, 3584, 0x277e
-	obj_tiles 0x08d1092c, 128, 0x277f
-	obj_tiles 0x08d10994, 2560, 0x2780
-	obj_tiles 0x08d10ce4, 1024, 0x2781
-	obj_tiles 0x08d10f78, 512, 0x2782
-	obj_tiles 0x08d11b74, 1792, 0x2783
-	obj_tiles 0x08d1302c, 2048, 0x2784
-	obj_tiles 0x08d13300, 2560, 0x2785
-	obj_tiles 0x08d13558, 1536, 0x2786
-	obj_tiles 0x08d1370c, 2048, 0x2787
-	obj_tiles 0x08d139c4, 512, 0x2788
-	obj_tiles 0x08d13ae0, 64, 0x2789
-	obj_tiles 0x08d13b30, 384, 0x278a
-	obj_tiles 0x08d13c48, 1536, 0x278b
-	obj_tiles 0x08d13d84, 1536, 0x278c
-	obj_tiles 0x08d14044, 512, 0x278d
-	obj_tiles 0x08d14158, 128, 0x278e
-	obj_tiles 0x08d141e0, 512, 0x278f
-	obj_tiles 0x08d143a4, 2048, 0x2790
-	obj_tiles 0x08d14630, 128, 0x2791
-	obj_tiles 0x08d14694, 2560, 0x2792
-	obj_tiles 0x08d14a8c, 640, 0x2793
-	obj_tiles 0x08d14bfc, 640, 0x2794
-	obj_tiles 0x08d14d1c, 256, 0x2795
-	obj_tiles 0x08d14dc0, 512, 0x2796
-	obj_tiles 0x08d1a704, 512, 0x2797
-	obj_tiles 0x08d1a8a4, 32, 0x2798
-	obj_tiles 0x08d1a8f0, 2560, 0x2799
-	obj_tiles 0x08d1aea4, 2048, 0x279a
-	obj_tiles 0x08d1aaf4, 2048, 0x279b
-	obj_tiles 0x08d1aff0, 192, 0x279c
-	obj_tiles 0x08d1b090, 448, 0x279d
-	obj_tiles 0x08d1b1b8, 256, 0x279e
-	obj_tiles 0x08d2cf58, 2048, 0x279f
-	obj_tiles 0x08d1bfc8, 512, 0x27a0
-	obj_tiles 0x08d1ad04, 2048, 0x27a1
-	obj_tiles 0x08d03248, 384, 0x27a2
-	obj_tiles 0x08d1b2d0, 384, 0x27a3
-	obj_tiles 0x08d1b4dc, 512, 0x27a4
-	obj_tiles 0x08d1b40c, 512, 0x27a5
-	obj_tiles 0x08d1b68c, 384, 0x27a6
-	obj_tiles 0x08d1b77c, 1024, 0x27a7
-	obj_tiles 0x08d0419c, 128, 0x27a8
-	obj_tiles 0x08d1b874, 256, 0x27a9
-	obj_tiles 0x08d1b8f8, 256, 0x27aa
-	obj_tiles 0x08d1b9c4, 320, 0x27ab
-	obj_tiles 0x08d1baac, 2048, 0x27ac
-	obj_tiles 0x08d1bcec, 512, 0x27ad
-	obj_tiles 0x08d1bd68, 256, 0x27ae
-	obj_tiles 0x08d1be54, 160, 0x27af
-	obj_tiles 0x08d1bef8, 256, 0x27b0
-	obj_tiles 0x08d0374c, 128, 0x27b1
-	obj_tiles 0x08d1c1a4, 768, 0x27b2
-	obj_tiles 0x08d1c248, 256, 0x27b3
-	obj_tiles 0x08d1c248, 256, 0x27b4
-	obj_tiles 0x08d1c248, 256, 0x27b5
-	obj_tiles 0x08d1c308, 2048, 0x27b6
-	obj_tiles 0x08d1c308, 2048, 0x27b7
-	obj_tiles 0x08d1c308, 2048, 0x27b8
-	obj_tiles 0x08d1c308, 2048, 0x27b9
-	obj_tiles 0x08d1c308, 2048, 0x27ba
-	obj_tiles 0x08d1c6b4, 128, 0x27bb
-	obj_tiles 0x08d1bfc8, 512, 0x27bc
-	obj_tiles 0x08d1cb20, 512, 0x27bd
-	obj_tiles 0x08d1d960, 512, 0x27be
-	obj_tiles 0x08d1da28, 128, 0x27bf
-	obj_tiles 0x08d1dab4, 512, 0x27c0
-	obj_tiles 0x08d1dc34, 1280, 0x27c1
-	obj_tiles 0x08d1dd10, 2048, 0x27c2
-	obj_tiles 0x08d1dec8, 1024, 0x27c3
-	obj_tiles 0x08d1dfa4, 32, 0x27c4
-	obj_tiles 0x08d1dfbc, 2048, 0x27c5
-	obj_tiles 0x08d1e34c, 256, 0x27c6
-	obj_tiles 0x08d1e418, 2048, 0x27c7
-	obj_tiles 0x08d1e6b8, 1024, 0x27c8
-	obj_tiles 0x08d1e834, 2560, 0x27c9
-	obj_tiles 0x08d1f13c, 4096, 0x27ca
-	obj_tiles 0x08d1ef2c, 2048, 0x27cb
-	obj_tiles 0x08e71228, 1024, 0x27cc
-	obj_tiles 0x08d20544, 512, 0x27cd
-	obj_tiles 0x08d20030, 2048, 0x27ce
-	obj_tiles 0x08d202b0, 2048, 0x27cf
-	obj_tiles 0x08d205e8, 2048, 0x27d0
-	obj_tiles 0x08d20890, 512, 0x27d1
-	obj_tiles 0x08d20ff8, 2048, 0x27d2
-	obj_tiles 0x08d21358, 512, 0x27d3
-	obj_tiles 0x08d20c3c, 2048, 0x27d4
-	obj_tiles 0x08d21430, 512, 0x27d5
-	obj_tiles 0x08d215c8, 2048, 0x27d6
-	obj_tiles 0x08d219e0, 1024, 0x27d7
-	obj_tiles 0x08d21ac4, 512, 0x27d8
-	obj_tiles 0x08d21c20, 2688, 0x27d9
-	obj_tiles 0x08d22454, 1536, 0x27da
-	obj_tiles 0x08d225e0, 2048, 0x27db
-	obj_tiles 0x08d222b8, 512, 0x27dc
-	obj_tiles 0x08d22a50, 1536, 0x27dd
-	obj_tiles 0x08d227b0, 2048, 0x27de
-	obj_tiles 0x08d22ca8, 384, 0x27df
-	obj_tiles 0x08d22d98, 2048, 0x27e0
-	obj_tiles 0x08d23188, 2048, 0x27e1
-	obj_tiles 0x08d235c4, 128, 0x27e2
-	obj_tiles 0x08d2465c, 128, 0x27e3
-	obj_tiles 0x08d24428, 2048, 0x27e4
-	obj_tiles 0x08d246ac, 2048, 0x27e5
-	obj_tiles 0x08d2493c, 1536, 0x27e6
-	obj_tiles 0x08d24bcc, 1536, 0x27e7
-	obj_tiles 0x08d235c4, 128, 0x27e8
-	obj_tiles 0x08d243a0, 128, 0x27e9
-	obj_tiles 0x08d24ffc, 384, 0x27ea
-	obj_tiles 0x08d235c4, 128, 0x27eb
-	obj_tiles 0x08d251a8, 512, 0x27ec
-	obj_tiles 0x08d252f4, 1024, 0x27ed
-	obj_tiles 0x08d25558, 2560, 0x27ee
-	obj_tiles 0x08d2588c, 2048, 0x27ef
-	obj_tiles 0x08d25b40, 512, 0x27f0
-	obj_tiles 0x08d27b10, 1024, 0x27f1
-	obj_tiles 0x08d27e04, 128, 0x27f2
-	obj_tiles 0x08d27cbc, 2048, 0x27f3
-	obj_tiles 0x08d25ec8, 512, 0x27f4
-	obj_tiles 0x08d27eb4, 768, 0x27f5
-	obj_tiles 0x08d25c64, 2048, 0x27f6
-	obj_tiles 0x08d28740, 896, 0x27f7
-	obj_tiles 0x08d281e0, 2048, 0x27f8
-	obj_tiles 0x08d28910, 192, 0x27f9
-	obj_tiles 0x08d289bc, 2048, 0x27fa
-	obj_tiles 0x08d28c2c, 96, 0x27fb
-	obj_tiles 0x08d28c2c, 96, 0x27fc
-	obj_tiles 0x08d28c2c, 96, 0x27fd
-	obj_tiles 0x08d28ba0, 128, 0x27fe
-	obj_tiles 0x08d2ce4c, 384, 0x27ff
-	obj_tiles 0x08d2d1a0, 384, 0x2800
-	obj_tiles 0x08d2d6f4, 512, 0x2801
-	obj_tiles 0x08d2d91c, 512, 0x2802
-	obj_tiles 0x08d2da7c, 32, 0x2803
-	obj_tiles 0x08d2e900, 1024, 0x2804
-	obj_tiles 0x08d2e2b4, 1536, 0x2805
-	obj_tiles 0x08d2e458, 4096, 0x2806
-	obj_tiles 0x08d2e9f8, 1024, 0x2807
-	obj_tiles 0x08d2ef50, 32, 0x2808
-	obj_tiles 0x08d2ef80, 128, 0x2809
-	obj_tiles 0x08d2eff0, 2048, 0x280a
-	obj_tiles 0x08d2f1e4, 128, 0x280b
-	obj_tiles 0x08d2f260, 512, 0x280c
-	obj_tiles 0x08d2f39c, 1024, 0x280d
-	obj_tiles 0x08d2f5a0, 512, 0x280e
-	obj_tiles 0x08d2f700, 512, 0x280f
-	obj_tiles 0x08d2f89c, 2048, 0x2810
-	obj_tiles 0x08d2fc50, 640, 0x2811
-	obj_tiles 0x08d2f78c, 512, 0x2812
-	obj_tiles 0x08d1b40c, 512, 0x2813
-	obj_tiles 0x08e685a8, 1024, 0x2814
-	obj_tiles 0x08e67d6c, 512, 0x2815
-	obj_tiles 0x08e69308, 512, 0x2816
-	obj_tiles 0x08e6e6ac, 128, 0x2817
-	obj_tiles 0x08e695b8, 32, 0x2818
-	obj_tiles 0x08e695b8, 32, 0x2819
-	obj_tiles 0x08e6e704, 128, 0x281a
-	obj_tiles 0x08d24428, 2048, 0x281b
-	obj_tiles 0x08e695b8, 32, 0x281c
-	obj_tiles 0x08e69a94, 128, 0x281d
-	obj_tiles 0x08e7e9fc, 1024, 0x281e
-	obj_tiles 0x08e7eb3c, 128, 0x281f
-	obj_tiles 0x08e6982c, 2048, 0x2820
-	obj_tiles 0x08e69a6c, 32, 0x2821
-	obj_tiles 0x08e69b00, 2048, 0x2822
-	obj_tiles 0x08e69c80, 2048, 0x2823
-	obj_tiles 0x08e69dec, 2048, 0x2824
-	obj_tiles 0x08e6da54, 4096, 0x2825
-	obj_tiles 0x08e6e78c, 2048, 0x2826
-	obj_tiles 0x08e6e9b4, 160, 0x2827
-	obj_tiles 0x08e6a2e8, 2048, 0x2828
-	obj_tiles 0x08e6ea1c, 512, 0x2829
-	obj_tiles 0x08e7e7f8, 1536, 0x282a
-	obj_tiles 0x08e6dfdc, 512, 0x282b
-	obj_tiles 0x08e6f1c0, 2048, 0x282c
-	obj_tiles 0x08e6f558, 512, 0x282d
-	obj_tiles 0x08d1e418, 2048, 0x282e
-	obj_tiles 0x08d0a97c, 4096, 0x282f
-	obj_tiles 0x08d1c248, 256, 0x2830
-
-	.global gBattleAnimPaletteTable
-gBattleAnimPaletteTable: @ 837EA6C
-	obj_pal 0x08d0369c, 0x2710
-	obj_pal 0x08d1caf8, 0x2711
-	obj_pal 0x08d20c14, 0x2712
-	obj_pal 0x08d036c0, 0x2713
-	obj_pal 0x08d036e8, 0x2714
-	obj_pal 0x08d036fc, 0x2715
-	obj_pal 0x08d03724, 0x2716
-	obj_pal 0x08d03918, 0x2717
-	obj_pal 0x08d03958, 0x2718
-	obj_pal 0x08d0405c, 0x2719
-	obj_pal 0x08d03974, 0x271a
-	obj_pal 0x08d040f4, 0x271b
-	obj_pal 0x08d04184, 0x271c
-	obj_pal 0x08d0423c, 0x271d
-	obj_pal 0x08d20014, 0x271e
-	obj_pal 0x08d042c0, 0x271f
-	obj_pal 0x08d04358, 0x2720
-	obj_pal 0x08d04358, 0x2721
-	obj_pal 0x08d25164, 0x2722
-	obj_pal 0x08d043ac, 0x2723
-	obj_pal 0x08d04554, 0x2724
-	obj_pal 0x08d047d0, 0x2725
-	obj_pal 0x08d04b30, 0x2726
-	obj_pal 0x08d0457c, 0x2727
-	obj_pal 0x08d04d3c, 0x2728
-	obj_pal 0x08d04b58, 0x2729
-	obj_pal 0x08d0559c, 0x272a
-	obj_pal 0x08d055c4, 0x272b
-	obj_pal 0x08d058e8, 0x272c
-	obj_pal 0x08d05f18, 0x272d
-	obj_pal 0x08d06300, 0x272e
-	obj_pal 0x08d05130, 0x272f
-	obj_pal 0x08d05150, 0x2730
-	obj_pal 0x08d06324, 0x2731
-	obj_pal 0x08d06324, 0x2732
-	obj_pal 0x08d06324, 0x2733
-	obj_pal 0x08d07420, 0x2734
-	obj_pal 0x08d07420, 0x2735
-	obj_pal 0x08d086e4, 0x2736
-	obj_pal 0x08d0870c, 0x2737
-	obj_pal 0x08d086e4, 0x2738
-	obj_pal 0x08d086e4, 0x2739
-	obj_pal 0x08d092d0, 0x273a
-	obj_pal 0x08d096f8, 0x273b
-	obj_pal 0x08d09720, 0x273c
-	obj_pal 0x08d099b4, 0x273d
-	obj_pal 0x08d0a23c, 0x273e
-	obj_pal 0x08d0a25c, 0x273e
-	obj_pal 0x08d0a518, 0x2740
-	obj_pal 0x08d0a540, 0x2741
-	obj_pal 0x08d0a568, 0x2742
-	obj_pal 0x08d0a568, 0x2743
-	obj_pal 0x08d0a568, 0x2744
-	obj_pal 0x08d0559c, 0x2745
-	obj_pal 0x08d0a964, 0x2746
-	obj_pal 0x08d0a568, 0x2747
-	obj_pal 0x08d0ae24, 0x2748
-	obj_pal 0x08d0af98, 0x2749
-	obj_pal 0x08d0b424, 0x274a
-	obj_pal 0x08d0b4ac, 0x274b
-	obj_pal 0x08d0b4f0, 0x274c
-	obj_pal 0x08d0b5bc, 0x274d
-	obj_pal 0x08d0b9ac, 0x274e
-	obj_pal 0x08d0bb90, 0x274f
-	obj_pal 0x08d235a0, 0x2750
-	obj_pal 0x08d0bd60, 0x2751
-	obj_pal 0x08d0bdcc, 0x2752
-	obj_pal 0x08e69608, 0x2753
-	obj_pal 0x08e69628, 0x2754
-	obj_pal 0x08d0bd60, 0x2755
-	obj_pal 0x08d0be74, 0x2756
-	obj_pal 0x08d0be74, 0x2757
-	obj_pal 0x08d0c198, 0x2758
-	obj_pal 0x08d0c2cc, 0x2759
-	obj_pal 0x08d1b668, 0x275a
-	obj_pal 0x08d0c568, 0x275b
-	obj_pal 0x08d150cc, 0x275c
-	obj_pal 0x08d150cc, 0x275d
-	obj_pal 0x08d0c724, 0x275e
-	obj_pal 0x08d0c724, 0x275f
-	obj_pal 0x08d0cee0, 0x2760
-	obj_pal 0x08d0cf88, 0x2761
-	obj_pal 0x08d0d144, 0x2762
-	obj_pal 0x08d0d158, 0x2763
-	obj_pal 0x08d0d180, 0x2764
-	obj_pal 0x08d0d1a8, 0x2765
-	obj_pal 0x08d0d1c0, 0x2766
-	obj_pal 0x08d25100, 0x2767
-	obj_pal 0x08d0d1e8, 0x2768
-	obj_pal 0x08d0d204, 0x2769
-	obj_pal 0x08d0d22c, 0x276a
-	obj_pal 0x08d0bc28, 0x276b
-	obj_pal 0x08d0d250, 0x276c
-	obj_pal 0x08d0d26c, 0x276d
-	obj_pal 0x08d0d294, 0x276e
-	obj_pal 0x08d0d2d4, 0x276f
-	obj_pal 0x08d0d2fc, 0x2770
-	obj_pal 0x08d0d318, 0x2771
-	obj_pal 0x08d0d294, 0x2772
-	obj_pal 0x08d281b8, 0x2773
-	obj_pal 0x08d0d340, 0x2774
-	obj_pal 0x08d0d35c, 0x2775
-	obj_pal 0x08d0d35c, 0x2776
-	obj_pal 0x08d0d384, 0x2777
-	obj_pal 0x08d0f6dc, 0x2778
-	obj_pal 0x08d0fc88, 0x2779
-	obj_pal 0x08d0fc88, 0x277a
-	obj_pal 0x08d1014c, 0x277b
-	obj_pal 0x08d1014c, 0x277c
-	obj_pal 0x08d10520, 0x277d
-	obj_pal 0x08d10520, 0x277e
-	obj_pal 0x08d10970, 0x277f
-	obj_pal 0x08d10cbc, 0x2780
-	obj_pal 0x08d10f50, 0x2781
-	obj_pal 0x08d1106c, 0x2782
-	obj_pal 0x08d0367c, 0x2783
-	obj_pal 0x08d132d8, 0x2784
-	obj_pal 0x08d1353c, 0x2785
-	obj_pal 0x08d136f0, 0x2786
-	obj_pal 0x08d1399c, 0x2787
-	obj_pal 0x08d13ab8, 0x2788
-	obj_pal 0x08d13b0c, 0x2789
-	obj_pal 0x08d13c2c, 0x278a
-	obj_pal 0x08d13c2c, 0x278b
-	obj_pal 0x08d1401c, 0x278c
-	obj_pal 0x08d14130, 0x278d
-	obj_pal 0x08d141c0, 0x278e
-	obj_pal 0x08d14380, 0x278f
-	obj_pal 0x08d14610, 0x2790
-	obj_pal 0x08d14610, 0x2791
-	obj_pal 0x08d14a64, 0x2792
-	obj_pal 0x08d14a64, 0x2793
-	obj_pal 0x08d14cfc, 0x2794
-	obj_pal 0x08d14d98, 0x2795
-	obj_pal 0x08d14d98, 0x2796
-	obj_pal 0x08d1a7dc, 0x2797
-	obj_pal 0x08d1a8c8, 0x2798
-	obj_pal 0x08d1a7dc, 0x2799
-	obj_pal 0x08d1a7dc, 0x279a
-	obj_pal 0x08d1ace4, 0x279b
-	obj_pal 0x08d1b070, 0x279c
-	obj_pal 0x08d1b198, 0x279d
-	obj_pal 0x08d1b198, 0x279e
-	obj_pal 0x08d2d188, 0x279f
-	obj_pal 0x08d1c040, 0x27a0
-	obj_pal 0x08d1ace4, 0x27a1
-	obj_pal 0x08d0367c, 0x27a2
-	obj_pal 0x08d1b3e4, 0x27a3
-	obj_pal 0x08d1b5c0, 0x27a4
-	obj_pal 0x08d1b5c0, 0x27a5
-	obj_pal 0x08d1b760, 0x27a6
-	obj_pal 0x08d1b760, 0x27a7
-	obj_pal 0x08d041e4, 0x27a8
-	obj_pal 0x08d1b8e0, 0x27a9
-	obj_pal 0x08d1b9a4, 0x27aa
-	obj_pal 0x08d1ba8c, 0x27ab
-	obj_pal 0x08d1bcc4, 0x27ac
-	obj_pal 0x08d1bd50, 0x27ad
-	obj_pal 0x08d1be30, 0x27ae
-	obj_pal 0x08d1bed0, 0x27af
-	obj_pal 0x08d1bfa0, 0x27b0
-	obj_pal 0x08d03774, 0x27b1
-	obj_pal 0x08d1c228, 0x27b2
-	obj_pal 0x08d1c2a8, 0x27b3
-	obj_pal 0x08d1c2d8, 0x27b4
-	obj_pal 0x08d1c2f0, 0x27b5
-	obj_pal 0x08d1c614, 0x27b6
-	obj_pal 0x08d1c634, 0x27b7
-	obj_pal 0x08d1c654, 0x27b8
-	obj_pal 0x08d1c674, 0x27b9
-	obj_pal 0x08d1c694, 0x27ba
-	obj_pal 0x08d1c700, 0x27bb
-	obj_pal 0x08d1c728, 0x27bc
-	obj_pal 0x08d1caf8, 0x27bd
-	obj_pal 0x08d1da00, 0x27be
-	obj_pal 0x08d1da8c, 0x27bf
-	obj_pal 0x08d1dc0c, 0x27c0
-	obj_pal 0x08d1dcf8, 0x27c1
-	obj_pal 0x08d1de78, 0x27c2
-	obj_pal 0x08d1dea0, 0x27c3
-	obj_pal 0x08d1dea0, 0x27c4
-	obj_pal 0x08d1dea0, 0x27c5
-	obj_pal 0x08d1e3f0, 0x27c6
-	obj_pal 0x08d1e690, 0x27c7
-	obj_pal 0x08d1e80c, 0x27c8
-	obj_pal 0x08d1ec48, 0x27c9
-	obj_pal 0x08d1f508, 0x27ca
-	obj_pal 0x08d1f11c, 0x27cb
-	obj_pal 0x08e7133c, 0x27cc
-	obj_pal 0x08d205c8, 0x27cd
-	obj_pal 0x08d2028c, 0x27ce
-	obj_pal 0x08d2051c, 0x27cf
-	obj_pal 0x08d20868, 0x27d0
-	obj_pal 0x08d209ec, 0x27d1
-	obj_pal 0x08d21330, 0x27d2
-	obj_pal 0x08d21410, 0x27d3
-	obj_pal 0x08d20fe0, 0x27d4
-	obj_pal 0x08d215a0, 0x27d5
-	obj_pal 0x08d219b8, 0x27d6
-	obj_pal 0x08d21aa8, 0x27d7
-	obj_pal 0x08d21c04, 0x27d8
-	obj_pal 0x08d22290, 0x27d9
-	obj_pal 0x08d225bc, 0x27da
-	obj_pal 0x08d2278c, 0x27db
-	obj_pal 0x08d2242c, 0x27dc
-	obj_pal 0x08d22c84, 0x27dd
-	obj_pal 0x08d229bc, 0x27de
-	obj_pal 0x08d22d74, 0x27df
-	obj_pal 0x08d1c634, 0x27e0
-	obj_pal 0x08d23490, 0x27e1
-	obj_pal 0x08d2364c, 0x27e2
-	obj_pal 0x08d24918, 0x27e3
-	obj_pal 0x08d24918, 0x27e4
-	obj_pal 0x08d24918, 0x27e5
-	obj_pal 0x08d235a0, 0x27e6
-	obj_pal 0x08d24d58, 0x27e7
-	obj_pal 0x08d2366c, 0x27e8
-	obj_pal 0x08d24408, 0x27e9
-	obj_pal 0x08d24fd4, 0x27ea
-	obj_pal 0x08d2362c, 0x27eb
-	obj_pal 0x08d25180, 0x27ec
-	obj_pal 0x08d252d4, 0x27ed
-	obj_pal 0x08d25844, 0x27ee
-	obj_pal 0x08d2586c, 0x27ef
-	obj_pal 0x08d25b20, 0x27f0
-	obj_pal 0x08d27c94, 0x27f1
-	obj_pal 0x08d27e90, 0x27f2
-	obj_pal 0x08d27e90, 0x27f3
-	obj_pal 0x08d25ea8, 0x27f4
-	obj_pal 0x08d28070, 0x27f5
-	obj_pal 0x08d25c3c, 0x27f6
-	obj_pal 0x08d28718, 0x27f7
-	obj_pal 0x08d28718, 0x27f8
-	obj_pal 0x08d28994, 0x27f9
-	obj_pal 0x08d28b7c, 0x27fa
-	obj_pal 0x08d28c7c, 0x27fb
-	obj_pal 0x08d28c98, 0x27fc
-	obj_pal 0x08d28cb4, 0x27fd
-	obj_pal 0x08d28c08, 0x27fe
-	obj_pal 0x08d2cf30, 0x27ff
-	obj_pal 0x08d2d240, 0x2800
-	obj_pal 0x08d2d7b8, 0x2801
-	obj_pal 0x08d2da58, 0x2802
-	obj_pal 0x08d2daa4, 0x2803
-	obj_pal 0x08d2e9dc, 0x2804
-	obj_pal 0x08d2e28c, 0x2805
-	obj_pal 0x08d2e28c, 0x2806
-	obj_pal 0x08d235a0, 0x2807
-	obj_pal 0x08d2ef68, 0x2808
-	obj_pal 0x08d2efd0, 0x2809
-	obj_pal 0x08d2efd0, 0x280a
-	obj_pal 0x08d2f248, 0x280b
-	obj_pal 0x08d2f378, 0x280c
-	obj_pal 0x08d2f578, 0x280d
-	obj_pal 0x08d2f6d8, 0x280e
-	obj_pal 0x08d2f778, 0x280f
-	obj_pal 0x08d2fc28, 0x2810
-	obj_pal 0x08d2fd6c, 0x2811
-	obj_pal 0x08d2f874, 0x2812
-	obj_pal 0x08d1b5e0, 0x2813
-	obj_pal 0x08e68764, 0x2814
-	obj_pal 0x08e68580, 0x2815
-	obj_pal 0x08e693dc, 0x2816
-	obj_pal 0x08e6e6ec, 0x2817
-	obj_pal 0x08e695d8, 0x2818
-	obj_pal 0x08e695f0, 0x2819
-	obj_pal 0x08e6e744, 0x281a
-	obj_pal 0x08e6e75c, 0x281b
-	obj_pal 0x08e6e774, 0x281c
-	obj_pal 0x08e69ae8, 0x281d
-	obj_pal 0x08e7e9e0, 0x281e
-	obj_pal 0x08e7eb24, 0x281f
-	obj_pal 0x08e69a48, 0x2820
-	obj_pal 0x08e69a48, 0x2821
-	obj_pal 0x08e69f54, 0x2822
-	obj_pal 0x08e69f54, 0x2823
-	obj_pal 0x08e69f54, 0x2824
-	obj_pal 0x08e6da2c, 0x2825
-	obj_pal 0x08e6e998, 0x2826
-	obj_pal 0x08e6ea00, 0x2827
-	obj_pal 0x08e6a6e4, 0x2828
-	obj_pal 0x08e6eba4, 0x2829
-	obj_pal 0x08e7e7d0, 0x282a
-	obj_pal 0x08e6dfc0, 0x282b
-	obj_pal 0x08e6f53c, 0x282c
-	obj_pal 0x08e6f5f8, 0x282d
-	obj_pal 0x08e71200, 0x282e
-	obj_pal 0x08e6bbb4, 0x282f
-	obj_pal 0x08d1c2c0, 0x2830
+	.align 2
+gBattleAnimPicTable:: @ 837E164
+	obj_tiles gBattleAnimSpriteSheet_000,  0x200, 10000
+	obj_tiles gBattleAnimSpriteSheet_001,  0x300, 10001
+	obj_tiles gBattleAnimSpriteSheet_002,  0x200, 10002
+	obj_tiles gBattleAnimSpriteSheet_003,  0x100, 10003
+	obj_tiles gBattleAnimSpriteSheet_004,  0x200, 10004
+	obj_tiles gBattleAnimSpriteSheet_005,  0x400, 10005
+	obj_tiles gBattleAnimSpriteSheet_006,  0x180, 10006
+	obj_tiles gBattleAnimSpriteSheet_007,  0x800, 10007
+	obj_tiles gBattleAnimSpriteSheet_008,   0x20, 10008
+	obj_tiles gBattleAnimSpriteSheet_009,  0x400, 10009
+	obj_tiles gBattleAnimSpriteSheet_010, 0x1200, 10010
+	obj_tiles gBattleAnimSpriteSheet_011,  0x180, 10011
+	obj_tiles gBattleAnimSpriteSheet_012,   0x80, 10012
+	obj_tiles gBattleAnimSpriteSheet_013,   0x80, 10013
+	obj_tiles gBattleAnimSpriteSheet_014,  0x280, 10014
+	obj_tiles gBattleAnimSpriteSheet_015,   0x80, 10015
+	obj_tiles gBattleAnimSpriteSheet_016,  0x100, 10016
+	obj_tiles gBattleAnimSpriteSheet_017,   0x20, 10017
+	obj_tiles gBattleAnimSpriteSheet_018,   0x80, 10018
+	obj_tiles gBattleAnimSpriteSheet_019,  0x400, 10019
+	obj_tiles gBattleAnimSpriteSheet_020,  0x200, 10020
+	obj_tiles gBattleAnimSpriteSheet_021,  0xA00, 10021
+	obj_tiles gBattleAnimSpriteSheet_021,  0xA00, 10022
+	obj_tiles gBattleAnimSpriteSheet_023,  0x380, 10023
+	obj_tiles gBattleAnimSpriteSheet_024,  0x300, 10024
+	obj_tiles gBattleAnimSpriteSheet_025,  0xA00, 10025
+	obj_tiles gBattleAnimSpriteSheet_026,  0xA00, 10026
+	obj_tiles gBattleAnimSpriteSheet_027,  0xA00, 10027
+	obj_tiles gBattleAnimSpriteSheet_028,  0xA00, 10028
+	obj_tiles gBattleAnimSpriteSheet_029,  0xA00, 10029
+	obj_tiles gBattleAnimSpriteSheet_030,  0xA00, 10030
+	obj_tiles gBattleAnimSpriteSheet_031,  0xE00, 10031
+	obj_tiles gBattleAnimSpriteSheet_032,  0x380, 10032
+	obj_tiles gBattleAnimSpriteSheet_033, 0x1000, 10033
+	obj_tiles gBattleAnimSpriteSheet_034,  0x800, 10034
+	obj_tiles gBattleAnimSpriteSheet_035,  0xA00, 10035
+	obj_tiles gBattleAnimSpriteSheet_036,  0x800, 10036
+	obj_tiles gBattleAnimSpriteSheet_037,  0xA00, 10037
+	obj_tiles gBattleAnimSpriteSheet_038,  0xA00, 10038
+	obj_tiles gBattleAnimSpriteSheet_039,  0xA00, 10039
+	obj_tiles gBattleAnimSpriteSheet_040,  0xA00, 10040
+	obj_tiles gBattleAnimSpriteSheet_041,  0xA00, 10041
+	obj_tiles gBattleAnimSpriteSheet_042,  0xA00, 10042
+	obj_tiles gBattleAnimSpriteSheet_043,  0xA00, 10043
+	obj_tiles gBattleAnimSpriteSheet_044,  0xA00, 10044
+	obj_tiles gBattleAnimSpriteSheet_045,  0xA00, 10045
+	obj_tiles gBattleAnimSpriteSheet_046, 0x1000, 10046
+	obj_tiles gBattleAnimSpriteSheet_046, 0x1000, 10047
+	obj_tiles gBattleAnimSpriteSheet_048, 0x1000, 10048
+	obj_tiles gBattleAnimSpriteSheet_048, 0x1000, 10049
+	obj_tiles gBattleAnimSpriteSheet_050,  0x200, 10050
+	obj_tiles gBattleAnimSpriteSheet_051,  0x200, 10051
+	obj_tiles gBattleAnimSpriteSheet_052,  0x200, 10052
+	obj_tiles gBattleAnimSpriteSheet_053,  0x800, 10053
+	obj_tiles gBattleAnimSpriteSheet_054,   0x80, 10054
+	obj_tiles gBattleAnimSpriteSheet_055,  0x200, 10055
+	obj_tiles gBattleAnimSpriteSheet_056, 0x1000, 10056
+	obj_tiles gBattleAnimSpriteSheet_057,  0x180, 10057
+	obj_tiles gBattleAnimSpriteSheet_058,  0xC00, 10058
+	obj_tiles gBattleAnimSpriteSheet_059,  0x100, 10059
+	obj_tiles gBattleAnimSpriteSheet_060,   0x40, 10060
+	obj_tiles gBattleAnimSpriteSheet_061,  0x180, 10061
+	obj_tiles gBattleAnimSpriteSheet_062,  0x800, 10062
+	obj_tiles gBattleAnimSpriteSheet_063,  0x480, 10063
+	obj_tiles gBattleAnimSpriteSheet_064,  0x200, 10064
+	obj_tiles gBattleAnimSpriteSheet_065,  0x200, 10065
+	obj_tiles gBattleAnimSpriteSheet_066,  0x100, 10066
+	obj_tiles gBattleAnimSpriteSheet_065,  0x200, 10067
+	obj_tiles gBattleAnimSpriteSheet_065,  0x200, 10068
+	obj_tiles gBattleAnimSpriteSheet_065,  0x200, 10069
+	obj_tiles gBattleAnimSpriteSheet_070,  0x200, 10070
+	obj_tiles gBattleAnimSpriteSheet_071,  0xA00, 10071
+	obj_tiles gBattleAnimSpriteSheet_072,  0x300, 10072
+	obj_tiles gBattleAnimSpriteSheet_073,  0x180, 10073
+	obj_tiles gBattleAnimSpriteSheet_074,   0xA0, 10074
+	obj_tiles gBattleAnimSpriteSheet_075,  0x700, 10075
+	obj_tiles gBattleAnimSpriteSheet_076,  0x400, 10076
+	obj_tiles gBattleAnimSpriteSheet_077,  0x200, 10077
+	obj_tiles gBattleAnimSpriteSheet_078,  0x300, 10078
+	obj_tiles gBattleAnimSpriteSheet_079,  0xC00, 10079
+	obj_tiles gBattleAnimSpriteSheet_080,  0xA00, 10080
+	obj_tiles gBattleAnimSpriteSheet_081,   0x80, 10081
+	obj_tiles gBattleAnimSpriteSheet_082,   0x40, 10082
+	obj_tiles gBattleAnimSpriteSheet_083,  0xE00, 10083
+	obj_tiles gBattleAnimSpriteSheet_084,  0xE00, 10084
+	obj_tiles gBattleAnimSpriteSheet_085,  0x280, 10085
+	obj_tiles gBattleAnimSpriteSheet_086,  0x200, 10086
+	obj_tiles gBattleAnimSpriteSheet_087,   0x80, 10087
+	obj_tiles gBattleAnimSpriteSheet_088,   0xC0, 10088
+	obj_tiles gBattleAnimSpriteSheet_089,  0xA00, 10089
+	obj_tiles gBattleAnimSpriteSheet_090,  0x200, 10090
+	obj_tiles gBattleAnimSpriteSheet_091,  0x180, 10091
+	obj_tiles gBattleAnimSpriteSheet_092,   0x80, 10092
+	obj_tiles gBattleAnimSpriteSheet_093, 0x1000, 10093
+	obj_tiles gBattleAnimSpriteSheet_094,  0xA00, 10094
+	obj_tiles gBattleAnimSpriteSheet_095,  0x180, 10095
+	obj_tiles gBattleAnimSpriteSheet_096,  0x380, 10096
+	obj_tiles gBattleAnimSpriteSheet_097,  0xC00, 10097
+	obj_tiles gBattleAnimSpriteSheet_098,  0x200, 10098
+	obj_tiles gBattleAnimSpriteSheet_099,  0x200, 10099
+	obj_tiles gBattleAnimSpriteSheet_100,  0x200, 10100
+	obj_tiles gBattleAnimSpriteSheet_101,  0x200, 10101
+	obj_tiles gBattleAnimSpriteSheet_102,  0x400, 10102
+	obj_tiles gBattleAnimSpriteSheet_103,   0x80, 10103
+	obj_tiles gBattleAnimSpriteSheet_104,  0x400, 10104
+	obj_tiles gBattleAnimSpriteSheet_105,  0xC00, 10105
+	obj_tiles gBattleAnimSpriteSheet_106,  0x200, 10106
+	obj_tiles gBattleAnimSpriteSheet_107, 0x1000, 10107
+	obj_tiles gBattleAnimSpriteSheet_108,  0xA00, 10108
+	obj_tiles gBattleAnimSpriteSheet_109,   0x20, 10109
+	obj_tiles gBattleAnimSpriteSheet_110,  0xE00, 10110
+	obj_tiles gBattleAnimSpriteSheet_111,   0x80, 10111
+	obj_tiles gBattleAnimSpriteSheet_112,  0xA00, 10112
+	obj_tiles gBattleAnimSpriteSheet_113,  0x400, 10113
+	obj_tiles gBattleAnimSpriteSheet_114,  0x200, 10114
+	obj_tiles gBattleAnimSpriteSheet_115,  0x700, 10115
+	obj_tiles gBattleAnimSpriteSheet_116,  0x800, 10116
+	obj_tiles gBattleAnimSpriteSheet_117,  0xA00, 10117
+	obj_tiles gBattleAnimSpriteSheet_118,  0x600, 10118
+	obj_tiles gBattleAnimSpriteSheet_119,  0x800, 10119
+	obj_tiles gBattleAnimSpriteSheet_120,  0x200, 10120
+	obj_tiles gBattleAnimSpriteSheet_121,   0x40, 10121
+	obj_tiles gBattleAnimSpriteSheet_122,  0x180, 10122
+	obj_tiles gBattleAnimSpriteSheet_123,  0x600, 10123
+	obj_tiles gBattleAnimSpriteSheet_124,  0x600, 10124
+	obj_tiles gBattleAnimSpriteSheet_125,  0x200, 10125
+	obj_tiles gBattleAnimSpriteSheet_126,   0x80, 10126
+	obj_tiles gBattleAnimSpriteSheet_127,  0x200, 10127
+	obj_tiles gBattleAnimSpriteSheet_128,  0x800, 10128
+	obj_tiles gBattleAnimSpriteSheet_129,   0x80, 10129
+	obj_tiles gBattleAnimSpriteSheet_130,  0xA00, 10130
+	obj_tiles gBattleAnimSpriteSheet_131,  0x280, 10131
+	obj_tiles gBattleAnimSpriteSheet_132,  0x280, 10132
+	obj_tiles gBattleAnimSpriteSheet_133,  0x100, 10133
+	obj_tiles gBattleAnimSpriteSheet_134,  0x200, 10134
+	obj_tiles gBattleAnimSpriteSheet_135,  0x200, 10135
+	obj_tiles gBattleAnimSpriteSheet_136,   0x20, 10136
+	obj_tiles gBattleAnimSpriteSheet_137,  0xA00, 10137
+	obj_tiles gBattleAnimSpriteSheet_138,  0x800, 10138
+	obj_tiles gBattleAnimSpriteSheet_139,  0x800, 10139
+	obj_tiles gBattleAnimSpriteSheet_140,   0xC0, 10140
+	obj_tiles gBattleAnimSpriteSheet_141,  0x1C0, 10141
+	obj_tiles gBattleAnimSpriteSheet_142,  0x100, 10142
+	obj_tiles gBattleAnimSpriteSheet_143,  0x800, 10143
+	obj_tiles gBattleAnimSpriteSheet_144,  0x200, 10144
+	obj_tiles gBattleAnimSpriteSheet_145,  0x800, 10145
+	obj_tiles gBattleAnimSpriteSheet_146,  0x180, 10146
+	obj_tiles gBattleAnimSpriteSheet_147,  0x180, 10147
+	obj_tiles gBattleAnimSpriteSheet_148,  0x200, 10148
+	obj_tiles gBattleAnimSpriteSheet_149,  0x200, 10149
+	obj_tiles gBattleAnimSpriteSheet_150,  0x180, 10150
+	obj_tiles gBattleAnimSpriteSheet_151,  0x400, 10151
+	obj_tiles gBattleAnimSpriteSheet_152,   0x80, 10152
+	obj_tiles gBattleAnimSpriteSheet_153,  0x100, 10153
+	obj_tiles gBattleAnimSpriteSheet_154,  0x100, 10154
+	obj_tiles gBattleAnimSpriteSheet_155,  0x140, 10155
+	obj_tiles gBattleAnimSpriteSheet_156,  0x800, 10156
+	obj_tiles gBattleAnimSpriteSheet_157,  0x200, 10157
+	obj_tiles gBattleAnimSpriteSheet_158,  0x100, 10158
+	obj_tiles gBattleAnimSpriteSheet_159,   0xA0, 10159
+	obj_tiles gBattleAnimSpriteSheet_160,  0x100, 10160
+	obj_tiles gBattleAnimSpriteSheet_161,   0x80, 10161
+	obj_tiles gBattleAnimSpriteSheet_162,  0x300, 10162
+	obj_tiles gBattleAnimSpriteSheet_163,  0x100, 10163
+	obj_tiles gBattleAnimSpriteSheet_163,  0x100, 10164
+	obj_tiles gBattleAnimSpriteSheet_163,  0x100, 10165
+	obj_tiles gBattleAnimSpriteSheet_166,  0x800, 10166
+	obj_tiles gBattleAnimSpriteSheet_166,  0x800, 10167
+	obj_tiles gBattleAnimSpriteSheet_166,  0x800, 10168
+	obj_tiles gBattleAnimSpriteSheet_166,  0x800, 10169
+	obj_tiles gBattleAnimSpriteSheet_166,  0x800, 10170
+	obj_tiles gBattleAnimSpriteSheet_171,   0x80, 10171
+	obj_tiles gBattleAnimSpriteSheet_144,  0x200, 10172
+	obj_tiles gBattleAnimSpriteSheet_173,  0x200, 10173
+	obj_tiles gBattleAnimSpriteSheet_174,  0x200, 10174
+	obj_tiles gBattleAnimSpriteSheet_175,   0x80, 10175
+	obj_tiles gBattleAnimSpriteSheet_176,  0x200, 10176
+	obj_tiles gBattleAnimSpriteSheet_177,  0x500, 10177
+	obj_tiles gBattleAnimSpriteSheet_178,  0x800, 10178
+	obj_tiles gBattleAnimSpriteSheet_179,  0x400, 10179
+	obj_tiles gBattleAnimSpriteSheet_180,   0x20, 10180
+	obj_tiles gBattleAnimSpriteSheet_181,  0x800, 10181
+	obj_tiles gBattleAnimSpriteSheet_182,  0x100, 10182
+	obj_tiles gBattleAnimSpriteSheet_183,  0x800, 10183
+	obj_tiles gBattleAnimSpriteSheet_184,  0x400, 10184
+	obj_tiles gBattleAnimSpriteSheet_185,  0xA00, 10185
+	obj_tiles gBattleAnimSpriteSheet_186, 0x1000, 10186
+	obj_tiles gBattleAnimSpriteSheet_187,  0x800, 10187
+	obj_tiles gBattleAnimSpriteSheet_188,  0x400, 10188
+	obj_tiles gBattleAnimSpriteSheet_189,  0x200, 10189
+	obj_tiles gBattleAnimSpriteSheet_190,  0x800, 10190
+	obj_tiles gBattleAnimSpriteSheet_191,  0x800, 10191
+	obj_tiles gBattleAnimSpriteSheet_192,  0x800, 10192
+	obj_tiles gBattleAnimSpriteSheet_193,  0x200, 10193
+	obj_tiles gBattleAnimSpriteSheet_194,  0x800, 10194
+	obj_tiles gBattleAnimSpriteSheet_195,  0x200, 10195
+	obj_tiles gBattleAnimSpriteSheet_196,  0x800, 10196
+	obj_tiles gBattleAnimSpriteSheet_197,  0x200, 10197
+	obj_tiles gBattleAnimSpriteSheet_198,  0x800, 10198
+	obj_tiles gBattleAnimSpriteSheet_199,  0x400, 10199
+	obj_tiles gBattleAnimSpriteSheet_200,  0x200, 10200
+	obj_tiles gBattleAnimSpriteSheet_201,  0xA80, 10201
+	obj_tiles gBattleAnimSpriteSheet_202,  0x600, 10202
+	obj_tiles gBattleAnimSpriteSheet_203,  0x800, 10203
+	obj_tiles gBattleAnimSpriteSheet_204,  0x200, 10204
+	obj_tiles gBattleAnimSpriteSheet_205,  0x600, 10205
+	obj_tiles gBattleAnimSpriteSheet_206,  0x800, 10206
+	obj_tiles gBattleAnimSpriteSheet_207,  0x180, 10207
+	obj_tiles gBattleAnimSpriteSheet_208,  0x800, 10208
+	obj_tiles gBattleAnimSpriteSheet_209,  0x800, 10209
+	obj_tiles gBattleAnimSpriteSheet_210,   0x80, 10210
+	obj_tiles gBattleAnimSpriteSheet_211,   0x80, 10211
+	obj_tiles gBattleAnimSpriteSheet_212,  0x800, 10212
+	obj_tiles gBattleAnimSpriteSheet_213,  0x800, 10213
+	obj_tiles gBattleAnimSpriteSheet_214,  0x600, 10214
+	obj_tiles gBattleAnimSpriteSheet_215,  0x600, 10215
+	obj_tiles gBattleAnimSpriteSheet_210,   0x80, 10216
+	obj_tiles gBattleAnimSpriteSheet_217,   0x80, 10217
+	obj_tiles gBattleAnimSpriteSheet_218,  0x180, 10218
+	obj_tiles gBattleAnimSpriteSheet_210,   0x80, 10219
+	obj_tiles gBattleAnimSpriteSheet_220,  0x200, 10220
+	obj_tiles gBattleAnimSpriteSheet_221,  0x400, 10221
+	obj_tiles gBattleAnimSpriteSheet_222,  0xA00, 10222
+	obj_tiles gBattleAnimSpriteSheet_223,  0x800, 10223
+	obj_tiles gBattleAnimSpriteSheet_224,  0x200, 10224
+	obj_tiles gBattleAnimSpriteSheet_225,  0x400, 10225
+	obj_tiles gBattleAnimSpriteSheet_226,   0x80, 10226
+	obj_tiles gBattleAnimSpriteSheet_227,  0x800, 10227
+	obj_tiles gBattleAnimSpriteSheet_228,  0x200, 10228
+	obj_tiles gBattleAnimSpriteSheet_229,  0x300, 10229
+	obj_tiles gBattleAnimSpriteSheet_230,  0x800, 10230
+	obj_tiles gBattleAnimSpriteSheet_231,  0x380, 10231
+	obj_tiles gBattleAnimSpriteSheet_232,  0x800, 10232
+	obj_tiles gBattleAnimSpriteSheet_233,   0xC0, 10233
+	obj_tiles gBattleAnimSpriteSheet_234,  0x800, 10234
+	obj_tiles gBattleAnimSpriteSheet_235,   0x60, 10235
+	obj_tiles gBattleAnimSpriteSheet_235,   0x60, 10236
+	obj_tiles gBattleAnimSpriteSheet_235,   0x60, 10237
+	obj_tiles gBattleAnimSpriteSheet_238,   0x80, 10238
+	obj_tiles gBattleAnimSpriteSheet_239,  0x180, 10239
+	obj_tiles gBattleAnimSpriteSheet_240,  0x180, 10240
+	obj_tiles gBattleAnimSpriteSheet_241,  0x200, 10241
+	obj_tiles gBattleAnimSpriteSheet_242,  0x200, 10242
+	obj_tiles gBattleAnimSpriteSheet_243,   0x20, 10243
+	obj_tiles gBattleAnimSpriteSheet_244,  0x400, 10244
+	obj_tiles gBattleAnimSpriteSheet_245,  0x600, 10245
+	obj_tiles gBattleAnimSpriteSheet_246, 0x1000, 10246
+	obj_tiles gBattleAnimSpriteSheet_247,  0x400, 10247
+	obj_tiles gBattleAnimSpriteSheet_248,   0x20, 10248
+	obj_tiles gBattleAnimSpriteSheet_249,   0x80, 10249
+	obj_tiles gBattleAnimSpriteSheet_250,  0x800, 10250
+	obj_tiles gBattleAnimSpriteSheet_251,   0x80, 10251
+	obj_tiles gBattleAnimSpriteSheet_252,  0x200, 10252
+	obj_tiles gBattleAnimSpriteSheet_253,  0x400, 10253
+	obj_tiles gBattleAnimSpriteSheet_254,  0x200, 10254
+	obj_tiles gBattleAnimSpriteSheet_255,  0x200, 10255
+	obj_tiles gBattleAnimSpriteSheet_256,  0x800, 10256
+	obj_tiles gBattleAnimSpriteSheet_257,  0x280, 10257
+	obj_tiles gBattleAnimSpriteSheet_258,  0x200, 10258
+	obj_tiles gBattleAnimSpriteSheet_149,  0x200, 10259
+	obj_tiles gBattleAnimSpriteSheet_260,  0x400, 10260
+	obj_tiles gBattleAnimSpriteSheet_261,  0x200, 10261
+	obj_tiles gBattleAnimSpriteSheet_262,  0x200, 10262
+	obj_tiles gBattleAnimSpriteSheet_263,   0x80, 10263
+	obj_tiles gBattleAnimSpriteSheet_264,   0x20, 10264
+	obj_tiles gBattleAnimSpriteSheet_264,   0x20, 10265
+	obj_tiles gBattleAnimSpriteSheet_266,   0x80, 10266
+	obj_tiles gBattleAnimSpriteSheet_212,  0x800, 10267
+	obj_tiles gBattleAnimSpriteSheet_264,   0x20, 10268
+	obj_tiles gBattleAnimSpriteSheet_269,   0x80, 10269
+	obj_tiles gBattleAnimSpriteSheet_270,  0x400, 10270
+	obj_tiles gBattleAnimSpriteSheet_271,   0x80, 10271
+	obj_tiles gBattleAnimSpriteSheet_272,  0x800, 10272
+	obj_tiles gBattleAnimSpriteSheet_273,   0x20, 10273
+	obj_tiles gBattleAnimSpriteSheet_274,  0x800, 10274
+	obj_tiles gBattleAnimSpriteSheet_275,  0x800, 10275
+	obj_tiles gBattleAnimSpriteSheet_276,  0x800, 10276
+	obj_tiles gBattleAnimSpriteSheet_277, 0x1000, 10277
+	obj_tiles gBattleAnimSpriteSheet_278,  0x800, 10278
+	obj_tiles gBattleAnimSpriteSheet_279,   0xA0, 10279
+	obj_tiles gBattleAnimSpriteSheet_280,  0x800, 10280
+	obj_tiles gBattleAnimSpriteSheet_281,  0x200, 10281
+	obj_tiles gBattleAnimSpriteSheet_282,  0x600, 10282
+	obj_tiles gBattleAnimSpriteSheet_283,  0x200, 10283
+	obj_tiles gBattleAnimSpriteSheet_284,  0x800, 10284
+	obj_tiles gBattleAnimSpriteSheet_285,  0x200, 10285
+	obj_tiles gBattleAnimSpriteSheet_183,  0x800, 10286
+	obj_tiles gBattleAnimSpriteSheet_056, 0x1000, 10287
+	obj_tiles gBattleAnimSpriteSheet_163,  0x100, 10288
 
 	.align 2
-	.global gUnknown_0837F374
-gUnknown_0837F374: @ 837F374
-	.4byte 0x08d1cba8
-	.4byte 0x08d1d1a0
-	.4byte 0x08d1d1c0
-	.4byte 0x08d1cba8
-	.4byte 0x08d1d1a0
-	.4byte 0x08d1d1c0
-	.4byte 0x08e6abdc
-	.4byte 0x08e6b8a4
-	.4byte 0x08e6b8c0
-	.4byte 0x08d1ec70
-	.4byte 0x08d1ee40
-	.4byte 0x08d1ee64
-	.4byte 0x08d25f98
-	.4byte 0x08d25f70
-	.4byte 0x08d26d04
-	.4byte 0x08d25f98
-	.4byte 0x08d25f70
-	.4byte 0x08d27200
-	.4byte 0x08d25f98
-	.4byte 0x08d25f70
-	.4byte 0x08d276d0
-	.4byte 0x08d28cd0
-	.4byte 0x08d28e78
-	.4byte 0x08d28ec8
-	.4byte 0x08d28cd0
-	.4byte 0x08d28e78
-	.4byte 0x08d29058
-	.4byte 0x08d2a168
-	.4byte 0x08d2a128
-	.4byte 0x08d29e30
-	.4byte 0x08d2a168
-	.4byte 0x08d2a128
-	.4byte 0x08d2a6e8
-	.4byte 0x08d2c190
-	.4byte 0x08d2cb2c
-	.4byte 0x08d2cb54
-	.4byte 0x08d2b408
-	.4byte 0x08d2c170
-	.4byte 0x08d2abb4
-	.4byte 0x08d2b408
-	.4byte 0x08d2c170
-	.4byte 0x08d2ae7c
-	.4byte 0x08d2b408
-	.4byte 0x08d2c170
-	.4byte 0x08d2b178
-	.4byte 0x08e6877c
-	.4byte 0x08e690ec
-	.4byte 0x08e69110
-	.4byte 0x08e6d690
-	.4byte 0x08e6d668
-	.4byte 0x08e6d8f0
-	.4byte 0x08e69f7c
-	.4byte 0x08e6a0d8
-	.4byte 0x08e6a100
-	.4byte 0x08d28cd0
-	.4byte 0x08d28ea0
-	.4byte 0x08d28ec8
-	.4byte 0x08d28cd0
-	.4byte 0x08d28ea0
-	.4byte 0x08d29058
-	.4byte 0x08d291e4
-	.4byte 0x08d29c0c
-	.4byte 0x08d29c2c
-	.4byte 0x08e6ebc4
-	.4byte 0x08e6eeb8
-	.4byte 0x08e6eed4
-	.4byte 0x08d2a168
-	.4byte 0x08d2a148
-	.4byte 0x08d29e30
-	.4byte 0x08d2a168
-	.4byte 0x08d2a148
-	.4byte 0x08d2a6e8
-	.4byte 0x08d25f98
-	.4byte 0x08e6bbdc
-	.4byte 0x08d26d04
-	.4byte 0x08d25f98
-	.4byte 0x08e6bbdc
-	.4byte 0x08d27200
-	.4byte 0x08d25f98
-	.4byte 0x08e6bbdc
-	.4byte 0x08d276d0
+gBattleAnimPaletteTable:: @ 837EA6C
+	obj_pal gBattleAnimSpritePalette_000, 10000
+	obj_pal gBattleAnimSpritePalette_001, 10001
+	obj_pal gBattleAnimSpritePalette_002, 10002
+	obj_pal gBattleAnimSpritePalette_003, 10003
+	obj_pal gBattleAnimSpritePalette_004, 10004
+	obj_pal gBattleAnimSpritePalette_005, 10005
+	obj_pal gBattleAnimSpritePalette_006, 10006
+	obj_pal gBattleAnimSpritePalette_007, 10007
+	obj_pal gBattleAnimSpritePalette_008, 10008
+	obj_pal gBattleAnimSpritePalette_009, 10009
+	obj_pal gBattleAnimSpritePalette_010, 10010
+	obj_pal gBattleAnimSpritePalette_011, 10011
+	obj_pal gBattleAnimSpritePalette_012, 10012
+	obj_pal gBattleAnimSpritePalette_013, 10013
+	obj_pal gBattleAnimSpritePalette_014, 10014
+	obj_pal gBattleAnimSpritePalette_015, 10015
+	obj_pal gBattleAnimSpritePalette_016, 10016
+	obj_pal gBattleAnimSpritePalette_016, 10017
+	obj_pal gBattleAnimSpritePalette_018, 10018
+	obj_pal gBattleAnimSpritePalette_019, 10019
+	obj_pal gBattleAnimSpritePalette_020, 10020
+	obj_pal gBattleAnimSpritePalette_021, 10021
+	obj_pal gBattleAnimSpritePalette_022, 10022
+	obj_pal gBattleAnimSpritePalette_023, 10023
+	obj_pal gBattleAnimSpritePalette_024, 10024
+	obj_pal gBattleAnimSpritePalette_025, 10025
+	obj_pal gBattleAnimSpritePalette_026, 10026
+	obj_pal gBattleAnimSpritePalette_027, 10027
+	obj_pal gBattleAnimSpritePalette_028, 10028
+	obj_pal gBattleAnimSpritePalette_029, 10029
+	obj_pal gBattleAnimSpritePalette_030, 10030
+	obj_pal gBattleAnimSpritePalette_031, 10031
+	obj_pal gBattleAnimSpritePalette_032, 10032
+	obj_pal gBattleAnimSpritePalette_033, 10033
+	obj_pal gBattleAnimSpritePalette_033, 10034
+	obj_pal gBattleAnimSpritePalette_033, 10035
+	obj_pal gBattleAnimSpritePalette_036, 10036
+	obj_pal gBattleAnimSpritePalette_036, 10037
+	obj_pal gBattleAnimSpritePalette_038, 10038
+	obj_pal gBattleAnimSpritePalette_039, 10039
+	obj_pal gBattleAnimSpritePalette_038, 10040
+	obj_pal gBattleAnimSpritePalette_038, 10041
+	obj_pal gBattleAnimSpritePalette_042, 10042
+	obj_pal gBattleAnimSpritePalette_043, 10043
+	obj_pal gBattleAnimSpritePalette_044, 10044
+	obj_pal gBattleAnimSpritePalette_045, 10045
+	obj_pal gBattleAnimSpritePalette_046, 10046
+	obj_pal gBattleAnimSpritePalette_047, 10046
+	obj_pal gBattleAnimSpritePalette_048, 10048
+	obj_pal gBattleAnimSpritePalette_049, 10049
+	obj_pal gBattleAnimSpritePalette_050, 10050
+	obj_pal gBattleAnimSpritePalette_050, 10051
+	obj_pal gBattleAnimSpritePalette_050, 10052
+	obj_pal gBattleAnimSpritePalette_026, 10053
+	obj_pal gBattleAnimSpritePalette_054, 10054
+	obj_pal gBattleAnimSpritePalette_050, 10055
+	obj_pal gBattleAnimSpritePalette_056, 10056
+	obj_pal gBattleAnimSpritePalette_057, 10057
+	obj_pal gBattleAnimSpritePalette_058, 10058
+	obj_pal gBattleAnimSpritePalette_059, 10059
+	obj_pal gBattleAnimSpritePalette_060, 10060
+	obj_pal gBattleAnimSpritePalette_061, 10061
+	obj_pal gBattleAnimSpritePalette_062, 10062
+	obj_pal gBattleAnimSpritePalette_063, 10063
+	obj_pal gBattleAnimSpritePalette_064, 10064
+	obj_pal gBattleAnimSpritePalette_065, 10065
+	obj_pal gBattleAnimSpritePalette_066, 10066
+	obj_pal gBattleAnimSpritePalette_067, 10067
+	obj_pal gBattleAnimSpritePalette_068, 10068
+	obj_pal gBattleAnimSpritePalette_065, 10069
+	obj_pal gBattleAnimSpritePalette_070, 10070
+	obj_pal gBattleAnimSpritePalette_070, 10071
+	obj_pal gBattleAnimSpritePalette_072, 10072
+	obj_pal gBattleAnimSpritePalette_073, 10073
+	obj_pal gBattleAnimSpritePalette_074, 10074
+	obj_pal gBattleAnimSpritePalette_075, 10075
+	obj_pal gBattleAnimSpritePalette_076, 10076
+	obj_pal gBattleAnimSpritePalette_076, 10077
+	obj_pal gBattleAnimSpritePalette_078, 10078
+	obj_pal gBattleAnimSpritePalette_078, 10079
+	obj_pal gBattleAnimSpritePalette_080, 10080
+	obj_pal gBattleAnimSpritePalette_081, 10081
+	obj_pal gBattleAnimSpritePalette_082, 10082
+	obj_pal gBattleAnimSpritePalette_083, 10083
+	obj_pal gBattleAnimSpritePalette_084, 10084
+	obj_pal gBattleAnimSpritePalette_085, 10085
+	obj_pal gBattleAnimSpritePalette_086, 10086
+	obj_pal gBattleAnimSpritePalette_087, 10087
+	obj_pal gBattleAnimSpritePalette_088, 10088
+	obj_pal gBattleAnimSpritePalette_089, 10089
+	obj_pal gBattleAnimSpritePalette_090, 10090
+	obj_pal gBattleAnimSpritePalette_091, 10091
+	obj_pal gBattleAnimSpritePalette_092, 10092
+	obj_pal gBattleAnimSpritePalette_093, 10093
+	obj_pal gBattleAnimSpritePalette_094, 10094
+	obj_pal gBattleAnimSpritePalette_095, 10095
+	obj_pal gBattleAnimSpritePalette_096, 10096
+	obj_pal gBattleAnimSpritePalette_097, 10097
+	obj_pal gBattleAnimSpritePalette_094, 10098
+	obj_pal gBattleAnimSpritePalette_099, 10099
+	obj_pal gBattleAnimSpritePalette_100, 10100
+	obj_pal gBattleAnimSpritePalette_101, 10101
+	obj_pal gBattleAnimSpritePalette_101, 10102
+	obj_pal gBattleAnimSpritePalette_103, 10103
+	obj_pal gBattleAnimSpritePalette_104, 10104
+	obj_pal gBattleAnimSpritePalette_105, 10105
+	obj_pal gBattleAnimSpritePalette_105, 10106
+	obj_pal gBattleAnimSpritePalette_107, 10107
+	obj_pal gBattleAnimSpritePalette_107, 10108
+	obj_pal gBattleAnimSpritePalette_109, 10109
+	obj_pal gBattleAnimSpritePalette_109, 10110
+	obj_pal gBattleAnimSpritePalette_111, 10111
+	obj_pal gBattleAnimSpritePalette_112, 10112
+	obj_pal gBattleAnimSpritePalette_113, 10113
+	obj_pal gBattleAnimSpritePalette_114, 10114
+	obj_pal gBattleAnimSpritePalette_115, 10115
+	obj_pal gBattleAnimSpritePalette_116, 10116
+	obj_pal gBattleAnimSpritePalette_117, 10117
+	obj_pal gBattleAnimSpritePalette_118, 10118
+	obj_pal gBattleAnimSpritePalette_119, 10119
+	obj_pal gBattleAnimSpritePalette_120, 10120
+	obj_pal gBattleAnimSpritePalette_121, 10121
+	obj_pal gBattleAnimSpritePalette_122, 10122
+	obj_pal gBattleAnimSpritePalette_122, 10123
+	obj_pal gBattleAnimSpritePalette_124, 10124
+	obj_pal gBattleAnimSpritePalette_125, 10125
+	obj_pal gBattleAnimSpritePalette_126, 10126
+	obj_pal gBattleAnimSpritePalette_127, 10127
+	obj_pal gBattleAnimSpritePalette_128, 10128
+	obj_pal gBattleAnimSpritePalette_128, 10129
+	obj_pal gBattleAnimSpritePalette_130, 10130
+	obj_pal gBattleAnimSpritePalette_130, 10131
+	obj_pal gBattleAnimSpritePalette_132, 10132
+	obj_pal gBattleAnimSpritePalette_133, 10133
+	obj_pal gBattleAnimSpritePalette_133, 10134
+	obj_pal gBattleAnimSpritePalette_135, 10135
+	obj_pal gBattleAnimSpritePalette_136, 10136
+	obj_pal gBattleAnimSpritePalette_135, 10137
+	obj_pal gBattleAnimSpritePalette_135, 10138
+	obj_pal gBattleAnimSpritePalette_139, 10139
+	obj_pal gBattleAnimSpritePalette_140, 10140
+	obj_pal gBattleAnimSpritePalette_141, 10141
+	obj_pal gBattleAnimSpritePalette_141, 10142
+	obj_pal gBattleAnimSpritePalette_143, 10143
+	obj_pal gBattleAnimSpritePalette_144, 10144
+	obj_pal gBattleAnimSpritePalette_139, 10145
+	obj_pal gBattleAnimSpritePalette_115, 10146
+	obj_pal gBattleAnimSpritePalette_147, 10147
+	obj_pal gBattleAnimSpritePalette_148, 10148
+	obj_pal gBattleAnimSpritePalette_148, 10149
+	obj_pal gBattleAnimSpritePalette_150, 10150
+	obj_pal gBattleAnimSpritePalette_150, 10151
+	obj_pal gBattleAnimSpritePalette_152, 10152
+	obj_pal gBattleAnimSpritePalette_153, 10153
+	obj_pal gBattleAnimSpritePalette_154, 10154
+	obj_pal gBattleAnimSpritePalette_155, 10155
+	obj_pal gBattleAnimSpritePalette_156, 10156
+	obj_pal gBattleAnimSpritePalette_157, 10157
+	obj_pal gBattleAnimSpritePalette_158, 10158
+	obj_pal gBattleAnimSpritePalette_159, 10159
+	obj_pal gBattleAnimSpritePalette_160, 10160
+	obj_pal gBattleAnimSpritePalette_161, 10161
+	obj_pal gBattleAnimSpritePalette_162, 10162
+	obj_pal gBattleAnimSpritePalette_163, 10163
+	obj_pal gBattleAnimSpritePalette_164, 10164
+	obj_pal gBattleAnimSpritePalette_165, 10165
+	obj_pal gBattleAnimSpritePalette_166, 10166
+	obj_pal gBattleAnimSpritePalette_167, 10167
+	obj_pal gBattleAnimSpritePalette_168, 10168
+	obj_pal gBattleAnimSpritePalette_169, 10169
+	obj_pal gBattleAnimSpritePalette_170, 10170
+	obj_pal gBattleAnimSpritePalette_171, 10171
+	obj_pal gBattleAnimSpritePalette_172, 10172
+	obj_pal gBattleAnimSpritePalette_001, 10173
+	obj_pal gBattleAnimSpritePalette_174, 10174
+	obj_pal gBattleAnimSpritePalette_175, 10175
+	obj_pal gBattleAnimSpritePalette_176, 10176
+	obj_pal gBattleAnimSpritePalette_177, 10177
+	obj_pal gBattleAnimSpritePalette_178, 10178
+	obj_pal gBattleAnimSpritePalette_179, 10179
+	obj_pal gBattleAnimSpritePalette_179, 10180
+	obj_pal gBattleAnimSpritePalette_179, 10181
+	obj_pal gBattleAnimSpritePalette_182, 10182
+	obj_pal gBattleAnimSpritePalette_183, 10183
+	obj_pal gBattleAnimSpritePalette_184, 10184
+	obj_pal gBattleAnimSpritePalette_185, 10185
+	obj_pal gBattleAnimSpritePalette_186, 10186
+	obj_pal gBattleAnimSpritePalette_187, 10187
+	obj_pal gBattleAnimSpritePalette_188, 10188
+	obj_pal gBattleAnimSpritePalette_189, 10189
+	obj_pal gBattleAnimSpritePalette_190, 10190
+	obj_pal gBattleAnimSpritePalette_191, 10191
+	obj_pal gBattleAnimSpritePalette_192, 10192
+	obj_pal gBattleAnimSpritePalette_193, 10193
+	obj_pal gBattleAnimSpritePalette_194, 10194
+	obj_pal gBattleAnimSpritePalette_195, 10195
+	obj_pal gBattleAnimSpritePalette_196, 10196
+	obj_pal gBattleAnimSpritePalette_197, 10197
+	obj_pal gBattleAnimSpritePalette_198, 10198
+	obj_pal gBattleAnimSpritePalette_199, 10199
+	obj_pal gBattleAnimSpritePalette_200, 10200
+	obj_pal gBattleAnimSpritePalette_201, 10201
+	obj_pal gBattleAnimSpritePalette_202, 10202
+	obj_pal gBattleAnimSpritePalette_203, 10203
+	obj_pal gBattleAnimSpritePalette_204, 10204
+	obj_pal gBattleAnimSpritePalette_205, 10205
+	obj_pal gBattleAnimSpritePalette_206, 10206
+	obj_pal gBattleAnimSpritePalette_207, 10207
+	obj_pal gBattleAnimSpritePalette_167, 10208
+	obj_pal gBattleAnimSpritePalette_209, 10209
+	obj_pal gBattleAnimSpritePalette_210, 10210
+	obj_pal gBattleAnimSpritePalette_211, 10211
+	obj_pal gBattleAnimSpritePalette_211, 10212
+	obj_pal gBattleAnimSpritePalette_211, 10213
+	obj_pal gBattleAnimSpritePalette_064, 10214
+	obj_pal gBattleAnimSpritePalette_215, 10215
+	obj_pal gBattleAnimSpritePalette_216, 10216
+	obj_pal gBattleAnimSpritePalette_217, 10217
+	obj_pal gBattleAnimSpritePalette_218, 10218
+	obj_pal gBattleAnimSpritePalette_219, 10219
+	obj_pal gBattleAnimSpritePalette_220, 10220
+	obj_pal gBattleAnimSpritePalette_221, 10221
+	obj_pal gBattleAnimSpritePalette_222, 10222
+	obj_pal gBattleAnimSpritePalette_223, 10223
+	obj_pal gBattleAnimSpritePalette_224, 10224
+	obj_pal gBattleAnimSpritePalette_225, 10225
+	obj_pal gBattleAnimSpritePalette_226, 10226
+	obj_pal gBattleAnimSpritePalette_226, 10227
+	obj_pal gBattleAnimSpritePalette_228, 10228
+	obj_pal gBattleAnimSpritePalette_229, 10229
+	obj_pal gBattleAnimSpritePalette_230, 10230
+	obj_pal gBattleAnimSpritePalette_231, 10231
+	obj_pal gBattleAnimSpritePalette_231, 10232
+	obj_pal gBattleAnimSpritePalette_233, 10233
+	obj_pal gBattleAnimSpritePalette_234, 10234
+	obj_pal gBattleAnimSpritePalette_235, 10235
+	obj_pal gBattleAnimSpritePalette_236, 10236
+	obj_pal gBattleAnimSpritePalette_237, 10237
+	obj_pal gBattleAnimSpritePalette_238, 10238
+	obj_pal gBattleAnimSpritePalette_239, 10239
+	obj_pal gBattleAnimSpritePalette_240, 10240
+	obj_pal gBattleAnimSpritePalette_241, 10241
+	obj_pal gBattleAnimSpritePalette_242, 10242
+	obj_pal gBattleAnimSpritePalette_243, 10243
+	obj_pal gBattleAnimSpritePalette_244, 10244
+	obj_pal gBattleAnimSpritePalette_245, 10245
+	obj_pal gBattleAnimSpritePalette_245, 10246
+	obj_pal gBattleAnimSpritePalette_064, 10247
+	obj_pal gBattleAnimSpritePalette_248, 10248
+	obj_pal gBattleAnimSpritePalette_249, 10249
+	obj_pal gBattleAnimSpritePalette_249, 10250
+	obj_pal gBattleAnimSpritePalette_251, 10251
+	obj_pal gBattleAnimSpritePalette_252, 10252
+	obj_pal gBattleAnimSpritePalette_253, 10253
+	obj_pal gBattleAnimSpritePalette_254, 10254
+	obj_pal gBattleAnimSpritePalette_255, 10255
+	obj_pal gBattleAnimSpritePalette_256, 10256
+	obj_pal gBattleAnimSpritePalette_257, 10257
+	obj_pal gBattleAnimSpritePalette_258, 10258
+	obj_pal gBattleAnimSpritePalette_259, 10259
+	obj_pal gBattleAnimSpritePalette_260, 10260
+	obj_pal gBattleAnimSpritePalette_261, 10261
+	obj_pal gBattleAnimSpritePalette_262, 10262
+	obj_pal gBattleAnimSpritePalette_263, 10263
+	obj_pal gBattleAnimSpritePalette_264, 10264
+	obj_pal gBattleAnimSpritePalette_265, 10265
+	obj_pal gBattleAnimSpritePalette_266, 10266
+	obj_pal gBattleAnimSpritePalette_267, 10267
+	obj_pal gBattleAnimSpritePalette_268, 10268
+	obj_pal gBattleAnimSpritePalette_269, 10269
+	obj_pal gBattleAnimSpritePalette_270, 10270
+	obj_pal gBattleAnimSpritePalette_271, 10271
+	obj_pal gBattleAnimSpritePalette_272, 10272
+	obj_pal gBattleAnimSpritePalette_272, 10273
+	obj_pal gBattleAnimSpritePalette_274, 10274
+	obj_pal gBattleAnimSpritePalette_274, 10275
+	obj_pal gBattleAnimSpritePalette_274, 10276
+	obj_pal gBattleAnimSpritePalette_277, 10277
+	obj_pal gBattleAnimSpritePalette_278, 10278
+	obj_pal gBattleAnimSpritePalette_279, 10279
+	obj_pal gBattleAnimSpritePalette_280, 10280
+	obj_pal gBattleAnimSpritePalette_281, 10281
+	obj_pal gBattleAnimSpritePalette_282, 10282
+	obj_pal gBattleAnimSpritePalette_283, 10283
+	obj_pal gBattleAnimSpritePalette_284, 10284
+	obj_pal gBattleAnimSpritePalette_285, 10285
+	obj_pal gBattleAnimSpritePalette_286, 10286
+	obj_pal gBattleAnimSpritePalette_287, 10287
+	obj_pal gBattleAnimSpritePalette_288, 10288
+
+	.align 2
+gBattleAnimBackgroundTable:: @ 837F374
+	.4byte gBattleAnimBackgroundImage_00, gBattleAnimBackgroundPalette_00, gBattleAnimBackgroundTilemap_00
+	.4byte gBattleAnimBackgroundImage_00, gBattleAnimBackgroundPalette_00, gBattleAnimBackgroundTilemap_00
+	.4byte gBattleAnimBackgroundImage_02, gBattleAnimBackgroundPalette_02, gBattleAnimBackgroundTilemap_02
+	.4byte gBattleAnimBackgroundImage_03, gBattleAnimBackgroundPalette_03, gBattleAnimBackgroundTilemap_03
+	.4byte gBattleAnimBackgroundImage_04, gBattleAnimBackgroundPalette_04, gBattleAnimBackgroundTilemap_04
+	.4byte gBattleAnimBackgroundImage_04, gBattleAnimBackgroundPalette_04, gBattleAnimBackgroundTilemap_05
+	.4byte gBattleAnimBackgroundImage_04, gBattleAnimBackgroundPalette_04, gBattleAnimBackgroundTilemap_06
+	.4byte gBattleAnimBackgroundImage_07, gBattleAnimBackgroundPalette_07, gBattleAnimBackgroundTilemap_07
+	.4byte gBattleAnimBackgroundImage_07, gBattleAnimBackgroundPalette_07, gBattleAnimBackgroundTilemap_08
+	.4byte gBattleAnimBackgroundImage_09, gBattleAnimBackgroundPalette_09, gBattleAnimBackgroundTilemap_09
+	.4byte gBattleAnimBackgroundImage_09, gBattleAnimBackgroundPalette_09, gBattleAnimBackgroundTilemap_10
+	.4byte gBattleAnimBackgroundImage_11, gBattleAnimBackgroundPalette_11, gBattleAnimBackgroundTilemap_11
+	.4byte gBattleAnimBackgroundImage_12, gBattleAnimBackgroundPalette_12, gBattleAnimBackgroundTilemap_12
+	.4byte gBattleAnimBackgroundImage_12, gBattleAnimBackgroundPalette_12, gBattleAnimBackgroundTilemap_13
+	.4byte gBattleAnimBackgroundImage_12, gBattleAnimBackgroundPalette_12, gBattleAnimBackgroundTilemap_14
+	.4byte gBattleAnimBackgroundImage_15, gBattleAnimBackgroundPalette_15, gBattleAnimBackgroundTilemap_15
+	.4byte gBattleAnimBackgroundImage_16, gBattleAnimBackgroundPalette_16, gBattleAnimBackgroundTilemap_16
+	.4byte gBattleAnimBackgroundImage_17, gBattleAnimBackgroundPalette_17, gBattleAnimBackgroundTilemap_17
+	.4byte gBattleAnimBackgroundImage_07, gBattleAnimBackgroundPalette_18, gBattleAnimBackgroundTilemap_07
+	.4byte gBattleAnimBackgroundImage_07, gBattleAnimBackgroundPalette_18, gBattleAnimBackgroundTilemap_08
+	.4byte gBattleAnimBackgroundImage_20, gBattleAnimBackgroundPalette_20, gBattleAnimBackgroundTilemap_20
+	.4byte gBattleAnimBackgroundImage_21, gBattleAnimBackgroundPalette_21, gBattleAnimBackgroundTilemap_21
+	.4byte gBattleAnimBackgroundImage_09, gBattleAnimBackgroundPalette_22, gBattleAnimBackgroundTilemap_09
+	.4byte gBattleAnimBackgroundImage_09, gBattleAnimBackgroundPalette_22, gBattleAnimBackgroundTilemap_10
+	.4byte gBattleAnimBackgroundImage_04, gBattleAnimBackgroundPalette_24, gBattleAnimBackgroundTilemap_04
+	.4byte gBattleAnimBackgroundImage_04, gBattleAnimBackgroundPalette_24, gBattleAnimBackgroundTilemap_05
+	.4byte gBattleAnimBackgroundImage_04, gBattleAnimBackgroundPalette_24, gBattleAnimBackgroundTilemap_06
 
 	.align 2
 	.global gUnknown_0837F4B8

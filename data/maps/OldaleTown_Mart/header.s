@@ -1,5 +1,5 @@
 OldaleTown_Mart:: @ 8305B2C
-	.4byte OldaleTown_Mart_MapAttributes
+	.4byte PokeMart_MapAttributes
 	.4byte OldaleTown_Mart_MapEvents
 	.4byte OldaleTown_Mart_MapScripts
 	.4byte 0x0

@@ -4509,7 +4509,7 @@ _08076E22:
 	bl LoadCompressedPalette
 	b _08076E9E
 	.align 2, 0
-_08076E54: .4byte gUnknown_0837F374
+_08076E54: .4byte gBattleAnimBackgroundTable
 _08076E58: .4byte 0x02018000
 _08076E5C: .4byte 0xffffc800
 _08076E60: .4byte 0x0600d000
@@ -4542,7 +4542,7 @@ _08076E9E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08076EA4: .4byte gUnknown_0837F374
+_08076EA4: .4byte gBattleAnimBackgroundTable
 _08076EA8: .4byte 0x0600d000
 _08076EAC: .4byte 0x06008000
 	thumb_func_end sub_8076DB8
