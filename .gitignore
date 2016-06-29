@@ -18,3 +18,4 @@ src/*.s
 tools/agbcc
 ld_script_ruby.txt
 ld_script_sapphire.txt
+*.map
