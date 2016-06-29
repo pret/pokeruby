@@ -8,8 +8,8 @@ CPP      := $(DEVKITARM)/bin/arm-none-eabi-cpp
 CPPFLAGS := -I tools/agbcc/include -iquote include -nostdinc -undef
 
 LD      := $(DEVKITARM)/bin/arm-none-eabi-ld
-pokeruby_LDFLAGS := -T ld_script_ruby.txt -T iwram_syms.txt -T ewram_syms.txt
-pokesapphire_LDFLAGS := -T ld_script_sapphire.txt -T iwram_syms.txt -T ewram_syms.txt
+pokeruby_LDFLAGS := -T ld_script_ruby.txt -T iwram_syms.txt -T ewram_syms.txt -Map pokeruby.map
+pokesapphire_LDFLAGS := -T ld_script_sapphire.txt -T iwram_syms.txt -T ewram_syms.txt -Map pokesapphire.map
 
 OBJCOPY := $(DEVKITARM)/bin/arm-none-eabi-objcopy
 
@@ -63,11 +63,11 @@ compare: both
 	@$(SHA1) rom.sha1
 
 clean:
-	rm -f $(ROM) $(ELF) $(OBJS) $(pokeruby_OBJS) $(pokesapphire_OBJS) $(C_SRCS:%.c=%.i)
+	rm -f $(ROM) $(ELF) $(OBJS) $(pokeruby_OBJS) $(pokesapphire_OBJS) $(C_SRCS:%.c=%.i) pokeruby.map pokesapphire.map
 	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' \) -exec rm {} +
 
 tidy:
-	rm -f $(ROM) $(ELF) $(OBJS) $(pokeruby_OBJS) $(pokesapphire_OBJS) $(C_SRCS:%.c=%.i)
+	rm -f $(ROM) $(ELF) $(OBJS) $(pokeruby_OBJS) $(pokesapphire_OBJS) $(C_SRCS:%.c=%.i) pokeruby.map pokesapphire.map
 
 include castform.mk
 include tilesets.mk
