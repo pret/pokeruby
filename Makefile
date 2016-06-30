@@ -75,6 +75,7 @@ include fonts.mk
 include generated.mk
 include misc.mk
 
+%.s: ;
 %.bin: ;
 %.png: ;
 %.pal: ;
