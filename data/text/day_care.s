@@ -127,3 +127,10 @@ Route117_PokemonDayCare_Text_1B2C17:: @ 81B2C17
 
 UnknownString_81B2C68: @ 81B2C68
 	.string "Huh?$"
+
+@ XXX JP
+	.string "\p"
+	.string "たまごの　ようすが‥\p"
+	.string "‥‥‥‥\p"
+	.string "おめでとう！\n"
+	.string "たまごから　{STR_VAR_1}が　うまれた！$"

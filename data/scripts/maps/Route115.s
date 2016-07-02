@@ -58,7 +58,12 @@ Route115_EventScript_150A03:: @ 8150A03
 	end
 
 Route115_EventScript_150A1A:: @ 8150A1A
+.ifdef SAPPHIRE
+	trainerbattle 0, TRAINER_514, 0, UnknownString_81BCE47, UnknownString_81BCE7D
+	msgbox UnknownString_81BCEA4, 6
+.else
 	trainerbattle 0, TRAINER_514, 0, Route115_Text_1BCEE0, Route115_Text_1BCF16
 	msgbox Route115_Text_1BCF3D, 6
+.endc
 	end
 
