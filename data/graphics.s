@@ -3262,8 +3262,13 @@ gUnknown_08E96EC8: @ 8E96EC8
 	.incbin "baserom.gba", 0x00e96ec8, 0x800
 	.incbin "graphics/slot_machine/slot_machine1.gbapal" @ palettes
 	.incbin "graphics/slot_machine/slot_machine2.gbapal"
+	.ifdef SAPPHIRE
+	.incbin "graphics/slot_machine/slot_machine3_sapphire.gbapal"
+	.incbin "graphics/slot_machine/slot_machine4_sapphire.gbapal"
+	.else
 	.incbin "graphics/slot_machine/slot_machine3.gbapal"
 	.incbin "graphics/slot_machine/slot_machine4.gbapal"
+	.endif
 	.incbin "graphics/slot_machine/slot_machine5.gbapal"
 	.incbin "graphics/slot_machine/slot_machine6.gbapal"
 	.incbin "graphics/slot_machine/slot_machine7.gbapal"
