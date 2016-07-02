@@ -2429,7 +2429,11 @@ sub_8053F0C: @ 8053F0C
 	.endif
 	cmp r5, r0
 	beq _08053F4E
+	.ifdef SAPPHIRE
+	subs r0, 0x20
+	.else
 	subs r0, 0x21
+	.endif
 	cmp r4, r0
 	beq _08053F7C
 	ldr r6, _08053F70
