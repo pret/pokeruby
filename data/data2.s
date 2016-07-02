@@ -15700,36 +15700,47 @@ gUnknown_08414064: @ 8414064
 gUnknown_08414084: @ 8414084
 	.incbin "baserom.gba", 0x00414084, 0x2AC
 
+	.align 2
 gIntro2NightBGTiles:: @ 8414330
 	.incbin "graphics/intro/intro2_bgnight2.4bpp.lz"
 
+	.align 1
 gIntro2BrendanPalette:: @ 84143B4
 	.incbin "graphics/intro/intro2_brendan.gbapal"
 
+	.align 2
 gIntro2BrendanTiles:: @ 84143D4
 	.incbin "graphics/intro/intro2_brendan.4bpp.lz"
 
+	.align 1
 gIntro2MayPalette:: @ 8414F70
 	.incbin "graphics/intro/intro2_may.gbapal"
 
+	.align 2
 gUnknown_08414F90:: @ 8414F90
 	.space 0x1E0
 
+	.align 2
 gIntro2MayTiles:: @ 8415170
 	.incbin "graphics/intro/intro2_may.4bpp.lz"
 
+	.align 2
 gIntro2BicycleTiles:: @ 8415E08
 	.incbin "graphics/intro/intro2_bicycle.4bpp.lz"
 
+	.align 1
 gIntro2LatiosPalette:: @ 8416234
 	.incbin "graphics/intro/intro2_latios.gbapal"
 
+	.align 2
 gIntro2LatiosTiles:: @ 8416254
 	.incbin "graphics/intro/intro2_latios.4bpp.lz"
 
+	.align 1
 gIntro2LatiasPalette:: @ 84166F8
 	.incbin "graphics/intro/intro2_latias.gbapal"
 
+	.align 2
 gIntro2LatiasTiles:: @ 8416718
 	.incbin "graphics/intro/intro2_latias.4bpp.lz"
 
