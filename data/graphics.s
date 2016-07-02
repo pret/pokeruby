@@ -3339,10 +3339,11 @@ gUnknown_08E9CA44: @ 8E9CA44
 
 	.global gUnknown_08E9D8CC
 gUnknown_08E9D8CC: @ 8E9D8CC
-	.incbin "graphics/title_screen/pokemon.8bpp.lz"
 	.ifdef SAPPHIRE
+	.incbin "graphics/title_screen/pokemon_sapphire.8bpp.lz"
 	.incbin "graphics/title_screen/sapphireversion.8bpp.lz"
 	.else
+	.incbin "graphics/title_screen/pokemon_ruby.8bpp.lz"
 	.incbin "graphics/title_screen/rubyversion.8bpp.lz"
 	.endif
 
