@@ -3262,8 +3262,13 @@ gUnknown_08E96EC8: @ 8E96EC8
 	.incbin "baserom.gba", 0x00e96ec8, 0x800
 	.incbin "graphics/slot_machine/slot_machine1.gbapal" @ palettes
 	.incbin "graphics/slot_machine/slot_machine2.gbapal"
+	.ifdef SAPPHIRE
+	.incbin "graphics/slot_machine/slot_machine3_sapphire.gbapal"
+	.incbin "graphics/slot_machine/slot_machine4_sapphire.gbapal"
+	.else
 	.incbin "graphics/slot_machine/slot_machine3.gbapal"
 	.incbin "graphics/slot_machine/slot_machine4.gbapal"
+	.endif
 	.incbin "graphics/slot_machine/slot_machine5.gbapal"
 	.incbin "graphics/slot_machine/slot_machine6.gbapal"
 	.incbin "graphics/slot_machine/slot_machine7.gbapal"
@@ -3339,10 +3344,11 @@ gUnknown_08E9CA44: @ 8E9CA44
 
 	.global gUnknown_08E9D8CC
 gUnknown_08E9D8CC: @ 8E9D8CC
-	.incbin "graphics/title_screen/pokemon.8bpp.lz"
 	.ifdef SAPPHIRE
+	.incbin "graphics/title_screen/pokemon_sapphire.8bpp.lz"
 	.incbin "graphics/title_screen/sapphireversion.8bpp.lz"
 	.else
+	.incbin "graphics/title_screen/pokemon_ruby.8bpp.lz"
 	.incbin "graphics/title_screen/rubyversion.8bpp.lz"
 	.endif
 

@@ -36,7 +36,11 @@ MtPyre_Summit_EventScript_15D4E1:: @ 815D4E1
 	callif 1, MtPyre_Summit_EventScript_15D59E
 	compare 0x8008, 2
 	callif 1, MtPyre_Summit_EventScript_15D59F
+	.ifdef SAPPHIRE
+	msgbox UnknownString_81B52B0, 4
+	.else
 	msgbox MtPyre_Summit_Text_1B5EEC, 4
+	.endif
 	closebutton
 	fadescreen 1
 	disappear 2
@@ -54,7 +58,11 @@ MtPyre_Summit_EventScript_15D4E1:: @ 815D4E1
 	callif 1, MtPyre_Summit_EventScript_15D5BF
 	compare 0x8008, 2
 	callif 1, MtPyre_Summit_EventScript_15D5CA
+	.ifdef SAPPHIRE
+	msgbox UnknownString_81B53AB, 4
+	.else
 	msgbox MtPyre_Summit_Text_1B5FE6, 4
+	.endif
 	giveitem ITEM_RED_OR_BLUE_ORB
 	setflag 212
 	releaseall
@@ -130,7 +138,11 @@ MtPyre_Summit_Movement_15D5EC:: @ 815D5EC
 MtPyre_Summit_EventScript_15D5EF:: @ 815D5EF
 	lock
 	faceplayer
+	.ifdef SAPPHIRE
+	msgbox UnknownString_81B586F, 5
+	.else
 	msgbox MtPyre_Summit_Text_1B64B3, 5
+	.endif
 	compare RESULT, 1
 	callif 1, MtPyre_Summit_EventScript_15D611
 	compare RESULT, 0
@@ -139,11 +151,19 @@ MtPyre_Summit_EventScript_15D5EF:: @ 815D5EF
 	end
 
 MtPyre_Summit_EventScript_15D611:: @ 815D611
+	.ifdef SAPPHIRE
+	msgbox UnknownString_81B5992, 4
+	.else
 	msgbox MtPyre_Summit_Text_1B65D6, 4
+	.endif
 	return
 
 MtPyre_Summit_EventScript_15D61A:: @ 815D61A
+	.ifdef SAPPHIRE
+	msgbox UnknownString_81B5BD7, 4
+	.else
 	msgbox MtPyre_Summit_Text_1B6823, 4
+	.endif
 	return
 
 MtPyre_Summit_EventScript_15D623:: @ 815D623
@@ -155,12 +175,20 @@ MtPyre_Summit_EventScript_15D623:: @ 815D623
 	jumpeq MtPyre_Summit_EventScript_15D64A
 	checkflag 129
 	jumpeq MtPyre_Summit_EventScript_15D6BA
+	.ifdef SAPPHIRE
+	msgbox UnknownString_81B54BE, 4
+	.else
 	msgbox MtPyre_Summit_Text_1B60F9, 4
+	.endif
 	release
 	end
 
 MtPyre_Summit_EventScript_15D64A:: @ 815D64A
+	.ifdef SAPPHIRE
+	msgbox UnknownString_81B5647, 5
+	.else
 	msgbox MtPyre_Summit_Text_1B6283, 5
+	.endif
 	compare RESULT, 1
 	jumpeq MtPyre_Summit_EventScript_15D669
 	compare RESULT, 0
@@ -177,13 +205,21 @@ MtPyre_Summit_EventScript_15D669:: @ 815D669
 	move LAST_TALKED, MtPyre_Summit_Movement_1A0839
 	waitmove 0
 	pause 10
+	.ifdef SAPPHIRE
+	msgbox UnknownString_81B5762, 4
+	.else
 	msgbox MtPyre_Summit_Text_1B639C, 4
+	.endif
 	setflag 259
 	release
 	end
 
 MtPyre_Summit_EventScript_15D69B:: @ 815D69B
+	.ifdef SAPPHIRE
+	msgbox UnknownString_81B56AB, 5
+	.else
 	msgbox MtPyre_Summit_Text_1B62E7, 5
+	.endif
 	compare RESULT, 1
 	jumpeq MtPyre_Summit_EventScript_15D669
 	compare RESULT, 0
@@ -191,12 +227,20 @@ MtPyre_Summit_EventScript_15D69B:: @ 815D69B
 	end
 
 MtPyre_Summit_EventScript_15D6BA:: @ 815D6BA
+	.ifdef SAPPHIRE
+	msgbox UnknownString_81B5540, 4
+	.else
 	msgbox MtPyre_Summit_Text_1B617B, 4
+	.endif
 	release
 	end
 
 MtPyre_Summit_EventScript_15D6C4:: @ 815D6C4
+	.ifdef SAPPHIRE
+	msgbox UnknownString_81B57BE, 4
+	.else
 	msgbox MtPyre_Summit_Text_1B63F8, 4
+	.endif
 	release
 	end
 
@@ -230,7 +274,11 @@ MtPyre_Summit_EventScript_15D6F2:: @ 815D6F2
 	callif 1, MtPyre_Summit_EventScript_15D769
 	compare 0x8008, 2
 	callif 1, MtPyre_Summit_EventScript_15D774
+	.ifdef SAPPHIRE
+	msgbox UnknownString_81B5BFC, 4
+	.else
 	msgbox MtPyre_Summit_Text_1B6848, 4
+	.endif
 	closebutton
 	compare 0x8008, 0
 	callif 1, MtPyre_Summit_EventScript_15D77F
