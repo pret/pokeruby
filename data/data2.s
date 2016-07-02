@@ -15699,16 +15699,38 @@ gUnknown_08414064: @ 8414064
 	.global gUnknown_08414084
 gUnknown_08414084: @ 8414084
 	.incbin "baserom.gba", 0x00414084, 0x2AC
+
+gIntro2NightBGTiles:: @ 8414330
 	.incbin "graphics/intro/intro2_bgnight2.4bpp.lz"
+
+gIntro2BrendanPalette:: @ 84143B4
 	.incbin "graphics/intro/intro2_brendan.gbapal"
+
+gIntro2BrendanTiles:: @ 84143D4
 	.incbin "graphics/intro/intro2_brendan.4bpp.lz"
+
+gIntro2MayPalette:: @ 8414F70
 	.incbin "graphics/intro/intro2_may.gbapal"
-	.incbin "baserom.gba", 0x00414F90, 0x1E0
+
+gUnknown_08414F90:: @ 8414F90
+	.space 0x1E0
+
+gIntro2MayTiles:: @ 8415170
 	.incbin "graphics/intro/intro2_may.4bpp.lz"
+
+gIntro2BicycleTiles:: @ 8415E08
 	.incbin "graphics/intro/intro2_bicycle.4bpp.lz"
+
+gIntro2LatiosPalette:: @ 8416234
 	.incbin "graphics/intro/intro2_latios.gbapal"
+
+gIntro2LatiosTiles:: @ 8416254
 	.incbin "graphics/intro/intro2_latios.4bpp.lz"
+
+gIntro2LatiasPalette:: @ 84166F8
 	.incbin "graphics/intro/intro2_latias.gbapal"
+
+gIntro2LatiasTiles:: @ 8416718
 	.incbin "graphics/intro/intro2_latias.4bpp.lz"
 
 	.global gUnknown_08416B3C
@@ -15801,25 +15823,32 @@ gUnknown_08416D7C: @ 8416D7C
 gUnknown_08416D94: @ 8416D94
 	.incbin "baserom.gba", 0x00416d94, 0x18
 
-	.global gUnknown_08416DAC
-gUnknown_08416DAC: @ 8416DAC
-	.incbin "baserom.gba", 0x00416dac, 0x10
+gIntro2BrendanSpriteSheet:: @ 8416DAC
+	obj_tiles gIntro2BrendanTiles, 0x3800, 1002
+	.space 8
 
-	.global gUnknown_08416DBC
-gUnknown_08416DBC: @ 8416DBC
-	.incbin "baserom.gba", 0x00416dbc, 0x10
+gIntro2MaySpriteSheet:: @ 8416DBC
+	obj_tiles gIntro2MayTiles, 0x3800, 1003
+	.space 8
 
-	.global gUnknown_08416DCC
-gUnknown_08416DCC: @ 8416DCC
-	.incbin "baserom.gba", 0x00416dcc, 0x10
+gIntro2BicycleSpriteSheet:: @ 8416DCC
+	obj_tiles gIntro2BicycleTiles, 0x1000, 1001
+	.space 8
 
-	.global gUnknown_08416DDC
-gUnknown_08416DDC: @ 8416DDC
-	.incbin "baserom.gba", 0x00416ddc, 0x20
+gIntro2LatiosSpriteSheet:: @ 8416DDC
+	obj_tiles gIntro2LatiosTiles, 0x1000, 1004
+	.space 8
 
-	.global gUnknown_08416DFC
-gUnknown_08416DFC: @ 8416DFC
-	.incbin "baserom.gba", 0x00416dfc, 0x28
+gIntro2LatiasSpriteSheet:: @ 8416DEC
+	obj_tiles gIntro2LatiasTiles, 0x1000, 1005
+	.space 8
+
+gIntro2SpritePalettes:: @ 8416DFC
+	obj_pal gIntro2BrendanPalette, 1002
+	obj_pal gIntro2MayPalette,     1003
+	obj_pal gIntro2LatiosPalette,  1004
+	obj_pal gIntro2LatiasPalette,  1005
+	.space 8
 
 	.global gUnknown_08416E24
 gUnknown_08416E24: @ 8416E24
