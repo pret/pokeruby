@@ -1891,18 +1891,32 @@ SeafloorCavern_Room3_EventScript_1A0196:: @ 81A0196
 SeafloorCavern_Room4_EventScript_1A0196:: @ 81A0196
 SeafloorCavern_Room9_EventScript_1A0196:: @ 81A0196
 SlateportCity_OceanicMuseum_2F_EventScript_1A0196:: @ 81A0196
+	.ifdef SAPPHIRE
+	setvar 0x4011, 117
+	setvar 0x4012, 118
+	setvar 0x4014, 119
+	setvar 0x4015, 120
+	setvar 0x4016, 195
+	setvar 0x4017, 196
+	.else
 	setvar 0x4011, 119
 	setvar 0x4012, 120
 	setvar 0x4014, 117
 	setvar 0x4015, 118
 	setvar 0x4016, 196
 	setvar 0x4017, 195
+	.endif
 	return
 
 CaveOfOrigin_B4F_EventScript_1A01B5:: @ 81A01B5
 SeafloorCavern_Room9_EventScript_1A01B5:: @ 81A01B5
+	.ifdef SAPPHIRE
+	setvar 0x4018, 197
+	setvar 0x4019, 205
+	.else
 	setvar 0x4018, 198
 	setvar 0x4019, 206
+	.endif
 	return
 
 DewfordTown_Gym_EventScript_1A01C0:: @ 81A01C0
@@ -2065,7 +2079,11 @@ Route126_EventScript_1A02C1:: @ 81A02C1
 Route127_EventScript_1A02C1:: @ 81A02C1
 Route128_EventScript_1A02C1:: @ 81A02C1
 SootopolisCity_EventScript_1A02C1:: @ 81A02C1
+	.ifdef SAPPHIRE
+	setweather 13
+	.else
 	setweather 12
+	.endif
 	return
 
 DewfordTown_Gym_EventScript_1A02C5:: @ 81A02C5
@@ -2273,7 +2291,7 @@ SouthernIsland_Exterior_EventScript_1A047C:: @ 81A047C
 CaveOfOrigin_B4F_EventScript_1A04A0:: @ 81A04A0
 	lockall
 	checksound
-	pokecry SPECIES_GROUDON, 2
+	pokecry SPECIES_GROUDON_OR_KYOGRE, 2
 	waitpokecry
 	setvar 0x4005, 1
 	releaseall
@@ -4736,9 +4754,6 @@ BattleTower_Lobby_EventScript_1AE30F:: @ 81AE30F
 
 	.include "data/scripts/day_care.s"
 	.include "data/text/day_care.s"
-
-@ XXX JP
-	.incbin "baserom.gba", 0x1B2C6D, 0x28
 
 	.include "data/scripts/magma_chimney.s"
 	.include "data/scripts/magma_summit.s"

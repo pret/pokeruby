@@ -3,12 +3,12 @@ SlateportCity_OceanicMuseum_1F_MapScripts:: @ 8155ACA
 	.byte 0
 
 SlateportCity_OceanicMuseum_1F_MapScript1_155AD0:: @ 8155AD0
-	.ifndef SAPPHIRE
-	setvar 0x4010, 120
-	setvar 0x4011, 119
-	.else
+	.ifdef SAPPHIRE
 	setvar 0x4010, 118
 	setvar 0x4011, 117
+	.else
+	setvar 0x4010, 120
+	setvar 0x4011, 119
 	.endif
 	end
 

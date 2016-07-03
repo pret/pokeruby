@@ -27,7 +27,11 @@ CaveOfOrigin_B4F_EventScript_15DDD7:: @ 815DDD7
 	lockall
 	move 255, CaveOfOrigin_B4F_Movement_1A0841
 	waitmove 0
+	.ifdef SAPPHIRE
+	msgbox UnknownString_81B4F03, 4
+	.else
 	msgbox CaveOfOrigin_B4F_Text_1B4FE4, 4
+	.endif
 	closebutton
 	setweather 0
 	doweather
@@ -78,7 +82,11 @@ CaveOfOrigin_B4F_EventScript_15DDD7:: @ 815DDD7
 	end
 
 CaveOfOrigin_B4F_EventScript_15DE73:: @ 815DE73
+	.ifdef SAPPHIRE
+	msgbox UnknownString_81B4F29, 4
+	.else
 	msgbox CaveOfOrigin_B4F_Text_1B5009, 4
+	.endif
 	closebutton
 	return
 
