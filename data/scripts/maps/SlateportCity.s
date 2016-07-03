@@ -3,8 +3,13 @@ SlateportCity_MapScripts:: @ 814BA36
 	.byte 0
 
 SlateportCity_MapScript1_14BA3C:: @ 814BA3C
+	.ifdef SAPPHIRE
+	setvar 0x4010, 118
+	setvar 0x4011, 117
+	.else
 	setvar 0x4010, 120
 	setvar 0x4011, 119
+	.endif
 	setvar 0x40aa, 0
 	call SlateportCity_EventScript_14BA5C
 	compare 0x4058, 1
