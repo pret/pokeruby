@@ -6,14 +6,13 @@ LavaridgeTown_Mart_EventScript_1538CB:: @ 81538CB
 	faceplayer
 	message LavaridgeTown_Mart_Text_1A0BE4
 	waittext
-	pokemart LavaridgeTown_Mart_Pokemart_1538E4
+	pokemart LavaridgeTown_Mart_Items
 	msgbox LavaridgeTown_Mart_Text_1A0C02, 4
 	release
 	end
 
-	.incbin "baserom.gba", 0x1538e2, 0x2
-
-LavaridgeTown_Mart_Pokemart_1538E4:: @ 81538E4
+	.align 2
+LavaridgeTown_Mart_Items:: @ 81538E4
 	.2byte ITEM_GREAT_BALL
 	.2byte ITEM_SUPER_POTION
 	.2byte ITEM_ANTIDOTE

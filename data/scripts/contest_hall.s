@@ -149,8 +149,8 @@ FallarborTown_ContestLobby_EventScript_1A5097:: @ 81A5097
 FallarborTown_ContestLobby_EventScript_1A50C8:: @ 81A50C8
 	msgbox FallarborTown_ContestLobby_Text_1A664A, 4
 	jump FallarborTown_ContestLobby_EventScript_1A5048
-
-	.incbin "baserom.gba", 0x1a50d5, 0x2
+	release
+	end
 
 FallarborTown_ContestLobby_EventScript_1A50D7:: @ 81A50D7
 	msgbox FallarborTown_ContestLobby_Text_1A67A3, 5
@@ -169,14 +169,14 @@ FallarborTown_ContestLobby_EventScript_1A50FB:: @ 81A50FB
 FallarborTown_ContestLobby_EventScript_1A511F:: @ 81A511F
 	msgbox FallarborTown_ContestLobby_Text_1A669F, 4
 	jump FallarborTown_ContestLobby_EventScript_1A5048
-
-	.incbin "baserom.gba", 0x1a512c, 0x2
+	release
+	end
 
 FallarborTown_ContestLobby_EventScript_1A512E:: @ 81A512E
 	msgbox FallarborTown_ContestLobby_Text_1A66DC, 4
 	jump FallarborTown_ContestLobby_EventScript_1A5048
-
-	.incbin "baserom.gba", 0x1a513b, 0x2
+	release
+	end
 
 FallarborTown_ContestLobby_EventScript_1A513D:: @ 81A513D
 	msgbox FallarborTown_ContestLobby_Text_1A67C1, 4

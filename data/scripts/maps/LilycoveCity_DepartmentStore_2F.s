@@ -18,14 +18,13 @@ LilycoveCity_DepartmentStore_2F_EventScript_159F2A:: @ 8159F2A
 	faceplayer
 	message LilycoveCity_DepartmentStore_2F_Text_1A0BE4
 	waittext
-	pokemart LilycoveCity_DepartmentStore_2F_Pokemart_159F44
+	pokemart LilycoveCity_DepartmentStore_2F_Items1
 	msgbox LilycoveCity_DepartmentStore_2F_Text_1A0C02, 4
 	release
 	end
 
-	.incbin "baserom.gba", 0x159f41, 0x3
-
-LilycoveCity_DepartmentStore_2F_Pokemart_159F44:: @ 8159F44
+	.align 2
+LilycoveCity_DepartmentStore_2F_Items1:: @ 8159F44
 	.2byte ITEM_POKE_BALL
 	.2byte ITEM_GREAT_BALL
 	.2byte ITEM_ULTRA_BALL
@@ -46,14 +45,13 @@ LilycoveCity_DepartmentStore_2F_EventScript_159F5E:: @ 8159F5E
 	faceplayer
 	message LilycoveCity_DepartmentStore_2F_Text_1A0BE4
 	waittext
-	pokemart LilycoveCity_DepartmentStore_2F_Pokemart_159F78
+	pokemart LilycoveCity_DepartmentStore_2F_Items2
 	msgbox LilycoveCity_DepartmentStore_2F_Text_1A0C02, 4
 	release
 	end
 
-	.incbin "baserom.gba", 0x159f75, 0x3
-
-LilycoveCity_DepartmentStore_2F_Pokemart_159F78:: @ 8159F78
+	.align 2
+LilycoveCity_DepartmentStore_2F_Items2:: @ 8159F78
 	.2byte ITEM_POTION
 	.2byte ITEM_SUPER_POTION
 	.2byte ITEM_HYPER_POTION

@@ -6,14 +6,13 @@ MauvilleCity_Mart_EventScript_1573BE:: @ 81573BE
 	faceplayer
 	message MauvilleCity_Mart_Text_1A0BE4
 	waittext
-	pokemart MauvilleCity_Mart_Pokemart_1573D8
+	pokemart MauvilleCity_Mart_Items
 	msgbox MauvilleCity_Mart_Text_1A0C02, 4
 	release
 	end
 
-	.incbin "baserom.gba", 0x1573d5, 0x3
-
-MauvilleCity_Mart_Pokemart_1573D8:: @ 81573D8
+	.align 2
+MauvilleCity_Mart_Items:: @ 81573D8
 	.2byte ITEM_POKE_BALL
 	.2byte ITEM_GREAT_BALL
 	.2byte ITEM_SUPER_POTION

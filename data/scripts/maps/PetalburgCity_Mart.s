@@ -8,12 +8,13 @@ PetalburgCity_Mart_EventScript_1552B0:: @ 81552B0
 	waittext
 	checkflag 296
 	jumpeq PetalburgCity_Mart_EventScript_1552EA
-	pokemart PetalburgCity_Mart_Pokemart_1552D0
+	pokemart PetalburgCity_Mart_Items1
 	msgbox PetalburgCity_Mart_Text_1A0C02, 4
 	release
 	end
 
-PetalburgCity_Mart_Pokemart_1552D0:: @ 81552D0
+	.align 2
+PetalburgCity_Mart_Items1:: @ 81552D0
 	.2byte ITEM_POKE_BALL
 	.2byte ITEM_POTION
 	.2byte ITEM_ANTIDOTE
@@ -30,14 +31,13 @@ PetalburgCity_Mart_Pokemart_1552D0:: @ 81552D0
 	end
 
 PetalburgCity_Mart_EventScript_1552EA:: @ 81552EA
-	pokemart PetalburgCity_Mart_Pokemart_1552FC
+	pokemart PetalburgCity_Mart_Items2
 	msgbox PetalburgCity_Mart_Text_1A0C02, 4
 	release
 	end
 
-	.incbin "baserom.gba", 0x1552f9, 0x3
-
-PetalburgCity_Mart_Pokemart_1552FC:: @ 81552FC
+	.align 2
+PetalburgCity_Mart_Items2:: @ 81552FC
 	.2byte ITEM_POKE_BALL
 	.2byte ITEM_GREAT_BALL
 	.2byte ITEM_POTION

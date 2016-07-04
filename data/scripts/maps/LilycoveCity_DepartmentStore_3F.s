@@ -6,12 +6,13 @@ LilycoveCity_DepartmentStore_3F_EventScript_159F91:: @ 8159F91
 	faceplayer
 	message LilycoveCity_DepartmentStore_3F_Text_1A0BE4
 	waittext
-	pokemart LilycoveCity_DepartmentStore_3F_Pokemart_159FA8
+	pokemart LilycoveCity_DepartmentStore_3F_Items1
 	msgbox LilycoveCity_DepartmentStore_3F_Text_1A0C02, 4
 	release
 	end
 
-LilycoveCity_DepartmentStore_3F_Pokemart_159FA8:: @ 8159FA8
+	.align 2
+LilycoveCity_DepartmentStore_3F_Items1:: @ 8159FA8
 	.2byte ITEM_PROTEIN
 	.2byte ITEM_CALCIUM
 	.2byte ITEM_IRON
@@ -27,14 +28,14 @@ LilycoveCity_DepartmentStore_3F_EventScript_159FB8:: @ 8159FB8
 	faceplayer
 	message LilycoveCity_DepartmentStore_3F_Text_1A0BE4
 	waittext
-	pokemart LilycoveCity_DepartmentStore_3F_Pokemart_159FD0
+	pokemart LilycoveCity_DepartmentStore_3F_Items2
 	msgbox LilycoveCity_DepartmentStore_3F_Text_1A0C02, 4
 	release
 	end
 
-	.incbin "baserom.gba", 0x159fcf, 0x1
 
-LilycoveCity_DepartmentStore_3F_Pokemart_159FD0:: @ 8159FD0
+	.align 2
+LilycoveCity_DepartmentStore_3F_Items2:: @ 8159FD0
 	.2byte ITEM_X_SPEED
 	.2byte ITEM_X_SPECIAL
 	.2byte ITEM_X_ATTACK

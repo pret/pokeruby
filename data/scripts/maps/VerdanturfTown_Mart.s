@@ -6,14 +6,13 @@ VerdanturfTown_Mart_EventScript_153EBC:: @ 8153EBC
 	faceplayer
 	message VerdanturfTown_Mart_Text_1A0BE4
 	waittext
-	pokemart VerdanturfTown_Mart_Pokemart_153ED4
+	pokemart VerdanturfTown_Mart_Items
 	msgbox VerdanturfTown_Mart_Text_1A0C02, 4
 	release
 	end
 
-	.incbin "baserom.gba", 0x153ed3, 0x1
-
-VerdanturfTown_Mart_Pokemart_153ED4:: @ 8153ED4
+	.align 2
+VerdanturfTown_Mart_Items:: @ 8153ED4
 	.2byte ITEM_GREAT_BALL
 	.2byte ITEM_NEST_BALL
 	.2byte ITEM_SUPER_POTION

@@ -27,14 +27,13 @@ EverGrandeCity_PokemonLeague_EventScript_15BAA8:: @ 815BAA8
 	faceplayer
 	message EverGrandeCity_PokemonLeague_Text_1A0BE4
 	waittext
-	pokemart EverGrandeCity_PokemonLeague_Pokemart_15BAC0
+	pokemart EverGrandeCity_PokemonLeague_Items
 	msgbox EverGrandeCity_PokemonLeague_Text_1A0C02, 4
 	release
 	end
 
-	.incbin "baserom.gba", 0x15babf, 0x1
-
-EverGrandeCity_PokemonLeague_Pokemart_15BAC0:: @ 815BAC0
+	.align 2
+EverGrandeCity_PokemonLeague_Items:: @ 815BAC0
 	.2byte ITEM_ULTRA_BALL
 	.2byte ITEM_HYPER_POTION
 	.2byte ITEM_MAX_POTION

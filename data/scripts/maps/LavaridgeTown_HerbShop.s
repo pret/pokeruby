@@ -6,12 +6,13 @@ LavaridgeTown_HerbShop_EventScript_153629:: @ 8153629
 	faceplayer
 	message LavaridgeTown_HerbShop_Text_17615C
 	waittext
-	pokemart LavaridgeTown_HerbShop_Pokemart_153640
+	pokemart LavaridgeTown_HerbShop_Items
 	msgbox LavaridgeTown_HerbShop_Text_1A0C02, 4
 	release
 	end
 
-LavaridgeTown_HerbShop_Pokemart_153640:: @ 8153640
+	.align 2
+LavaridgeTown_HerbShop_Items:: @ 8153640
 	.2byte ITEM_ENERGY_POWDER
 	.2byte ITEM_ENERGY_ROOT
 	.2byte ITEM_HEAL_POWDER

@@ -8,14 +8,13 @@ OldaleTown_Mart_EventScript_152F79:: @ 8152F79
 	waittext
 	checkflag 116
 	jumpeq OldaleTown_Mart_EventScript_152FA8
-	pokemart OldaleTown_Mart_Pokemart_152F9C
+	pokemart OldaleTown_Mart_Items1
 	msgbox OldaleTown_Mart_Text_1A0C02, 4
 	release
 	end
 
-	.incbin "baserom.gba", 0x152f99, 0x3
-
-OldaleTown_Mart_Pokemart_152F9C:: @ 8152F9C
+	.align 2
+OldaleTown_Mart_Items1:: @ 8152F9C
 	.2byte ITEM_POTION
 	.2byte ITEM_ANTIDOTE
 	.2byte ITEM_PARALYZE_HEAL
@@ -25,14 +24,13 @@ OldaleTown_Mart_Pokemart_152F9C:: @ 8152F9C
 	end
 
 OldaleTown_Mart_EventScript_152FA8:: @ 8152FA8
-	pokemart OldaleTown_Mart_Pokemart_152FB8
+	pokemart OldaleTown_Mart_Items2
 	msgbox OldaleTown_Mart_Text_1A0C02, 4
 	release
 	end
 
-	.incbin "baserom.gba", 0x152fb7, 0x1
-
-OldaleTown_Mart_Pokemart_152FB8:: @ 8152FB8
+	.align 2
+OldaleTown_Mart_Items2:: @ 8152FB8
 	.2byte ITEM_POKE_BALL
 	.2byte ITEM_POTION
 	.2byte ITEM_ANTIDOTE

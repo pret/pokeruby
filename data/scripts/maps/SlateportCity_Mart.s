@@ -6,12 +6,13 @@ SlateportCity_Mart_EventScript_156411:: @ 8156411
 	faceplayer
 	message SlateportCity_Mart_Text_1A0BE4
 	waittext
-	pokemart SlateportCity_Mart_Pokemart_156428
+	pokemart SlateportCity_Mart_Items
 	msgbox SlateportCity_Mart_Text_1A0C02, 4
 	release
 	end
 
-SlateportCity_Mart_Pokemart_156428:: @ 8156428
+	.align 2
+SlateportCity_Mart_Items:: @ 8156428
 	.2byte ITEM_POKE_BALL
 	.2byte ITEM_GREAT_BALL
 	.2byte ITEM_POTION
