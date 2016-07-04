@@ -25,15 +25,15 @@ DewfordTown_EventScript_14E04B:: @ 814E04B
 	msgbox DewfordTown_Text_16B57D, 4
 	closebutton
 	jump DewfordTown_EventScript_14E151
-
-	.incbin "baserom.gba", 0x14e059, 0x2
+	release
+	end
 
 DewfordTown_EventScript_14E05B:: @ 814E05B
 	msgbox DewfordTown_Text_16B5D2, 4
 	closebutton
 	jump DewfordTown_EventScript_14E1D8
-
-	.incbin "baserom.gba", 0x14e069, 0x2
+	release
+	end
 
 DewfordTown_EventScript_14E06B:: @ 814E06B
 	msgbox DewfordTown_Text_16B627, 4

@@ -480,7 +480,16 @@ PetalburgCity_Gym_EventScript_154B09:: @ 8154B09
 	waitmove 0
 	return
 
-	.incbin "baserom.gba", 0x154b14, 0x9
+@ 8154B14
+	step_26
+	step_14
+	step_14
+	step_14
+	step_14
+	step_14
+	step_13
+	step_25
+	step_end
 
 PetalburgCity_Gym_Movement_154B1D:: @ 8154B1D
 	step_14

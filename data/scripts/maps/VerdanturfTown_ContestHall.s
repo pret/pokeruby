@@ -1,7 +1,7 @@
 VerdanturfTown_ContestHall_MapScripts:: @ 8153E95
 	.byte 0
 
-	.incbin "baserom.gba", 0x153e96, 0x1
+	.byte 0 @ XXX
 
 VerdanturfTown_ContestHall_EventScript_153E97:: @ 8153E97
 	msgbox VerdanturfTown_ContestHall_Text_177FB4, 2

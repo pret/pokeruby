@@ -229,7 +229,9 @@ Route110_TrickHouseEntrance_EventScript_1611D7:: @ 81611D7
 	releaseall
 	end
 
-	.incbin "baserom.gba", 0x161218, 0x2
+@ 8161218
+	releaseall
+	end
 
 Route110_TrickHouseEntrance_EventScript_16121A:: @ 816121A
 	lockall

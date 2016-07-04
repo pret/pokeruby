@@ -152,7 +152,9 @@ LilycoveCity_Harbor_Movement_159A89:: @ 8159A89
 	step_up
 	step_end
 
-	.incbin "baserom.gba", 0x159a8b, 0x2
+@ 8159A8B
+	step_up
+	step_end
 
 LilycoveCity_Harbor_EventScript_159A8D:: @ 8159A8D
 	lock

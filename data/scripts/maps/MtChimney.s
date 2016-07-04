@@ -129,7 +129,9 @@ MtChimney_EventScript_15D13E:: @ 815D13E
 	msgbox MtChimney_Text_1B3D9A, 3
 	end
 
-	.incbin "baserom.gba", 0x15d147, 0x9
+@ 815D147
+	msgbox MtChimney_Text_1B3DD6, 3
+	end
 
 MtChimney_EventScript_15D150:: @ 815D150
 	msgbox MtChimney_Text_1B3DF5, 3

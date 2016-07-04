@@ -82,8 +82,8 @@ Route123_BerryMastersHouse_EventScript_163AF0:: @ 8163AF0
 	compare RESULT, 0
 	jumpeq Route123_BerryMastersHouse_EventScript_1A029B
 	jump Route123_BerryMastersHouse_EventScript_163C1D
-
-	.incbin "baserom.gba", 0x163b1c, 0x2
+	release
+	end
 
 Route123_BerryMastersHouse_EventScript_163B1E:: @ 8163B1E
 	checkflag 248

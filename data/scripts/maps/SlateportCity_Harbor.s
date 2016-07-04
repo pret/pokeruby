@@ -108,7 +108,12 @@ SlateportCity_Harbor_Movement_15609B:: @ 815609B
 	step_54
 	step_end
 
-	.incbin "baserom.gba", 0x1560a0, 0x5
+@ 81560A0
+	step_14
+	step_14
+	step_43
+	step_54
+	step_end
 
 SlateportCity_Harbor_Movement_1560A5:: @ 81560A5
 	step_14

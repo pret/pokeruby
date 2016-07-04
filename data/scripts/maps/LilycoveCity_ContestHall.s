@@ -1,7 +1,7 @@
 LilycoveCity_ContestHall_MapScripts:: @ 8159099
 	.byte 0
 
-	.incbin "baserom.gba", 0x15909a, 0x1
+	.byte 0 @ XXX
 
 LilycoveCity_ContestHall_EventScript_15909B:: @ 815909B
 	msgbox LilycoveCity_ContestHall_Text_1890D4, 2

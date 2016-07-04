@@ -322,7 +322,14 @@ BattleTower_Lobby_Movement_16069A:: @ 816069A
 	step_54
 	step_end
 
-	.incbin "baserom.gba", 0x16069e, 0x7
+@ 816069E
+	step_16
+	step_16
+	step_16
+	step_16
+	step_16
+	step_54
+	step_end
 
 BattleTower_Lobby_EventScript_1606A5:: @ 81606A5
 	lock

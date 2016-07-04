@@ -393,8 +393,7 @@ SlateportCity_EventScript_14BDF2:: @ 814BDF2
 	release
 	end
 
-	.incbin "baserom.gba", 0x14be09, 0x3
-
+	.align 2
 SlateportCity_PokemartDecor_14BE0C:: @ 814BE0C
 	.2byte 95
 	.2byte 78
@@ -568,7 +567,10 @@ SlateportCity_Movement_14BFEA:: @ 814BFEA
 	step_left
 	step_end
 
-	.incbin "baserom.gba", 0x14bff8, 0x3
+@ 814BFF8
+	step_down
+	step_26
+	step_end
 
 SlateportCity_Movement_14BFFB:: @ 814BFFB
 	step_right

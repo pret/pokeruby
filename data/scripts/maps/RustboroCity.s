@@ -81,7 +81,9 @@ RustboroCity_EventScript_14C41C:: @ 814C41C
 	msgbox RustboroCity_Text_167439, 3
 	end
 
-	.incbin "baserom.gba", 0x14c425, 0x9
+@ 814C425
+	msgbox RustboroCity_Text_167485, 3
+	end
 
 RustboroCity_EventScript_14C42E:: @ 814C42E
 	msgbox RustboroCity_Text_1674DD, 3
