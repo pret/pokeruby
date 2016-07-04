@@ -2459,6 +2459,7 @@ gMapGroups:: @ 8308588
 	.include "data/maps/FortreeCity/connections.s"
 	.include "data/maps/LilycoveCity/connections.s"
 	.include "data/maps/MossdeepCity/connections.s"
+	.include "data/maps/SootopolisCity/connections.s"
 	.include "data/maps/EverGrandeCity/connections.s"
 	.include "data/maps/Route101/connections.s"
 	.include "data/maps/Route102/connections.s"
