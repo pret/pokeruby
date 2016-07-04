@@ -2459,6 +2459,7 @@ gMapGroups:: @ 8308588
 	.include "data/maps/FortreeCity/connections.s"
 	.include "data/maps/LilycoveCity/connections.s"
 	.include "data/maps/MossdeepCity/connections.s"
+	.include "data/maps/SootopolisCity/connections.s"
 	.include "data/maps/EverGrandeCity/connections.s"
 	.include "data/maps/Route101/connections.s"
 	.include "data/maps/Route102/connections.s"
@@ -7743,18 +7744,50 @@ gUnknown_083C15AE: @ 83C15AE
 gUnknown_083C15B4: @ 83C15B4
 	.incbin "baserom.gba", 0x003c15b4, 0x8
 
-	.global gUnknown_083C15BC
-gUnknown_083C15BC: @ 83C15BC
-	.incbin "baserom.gba", 0x003c15bc, 0x3C
+	.align 2
+gUnknown_083C15BC:: @ 83C15BC
+	.byte  9,  1, 0,  2
+	.byte 10,  3, 0,  4
+	.byte  8,  5, 0,  6
+	.byte 11,  7, 0,  8
+	.byte 14,  9, 0, 10
+	.byte 12, 11, 0, 12
+	.byte 13, 13, 0, 14
+	.byte -1, 15, 0, 10
+
+	.align 2
+gOamData_CutGrass:: @ 83C15DC
+	.2byte 0
+	.2byte 0
+	.2byte 0x1401
+
+	.align 2
+gSpriteAnim_CutGrass:: @ 83C15E4
+	obj_image_anim_frame 0, 30
+	obj_image_anim_jump 0
+
+	.align 2
+gSpriteAnimTable_CutGrass:: @ 83C15EC
+	.4byte gSpriteAnim_CutGrass
+
+	.align 2
+gSpriteImageTable_CutGrass:: @ 83C15F0
+	obj_frame_tiles gFieldEffectObjectPic_CutGrass, 0x20
 
 	.align 2
 	.global gFieldEffectObjectPaletteInfo6
 gFieldEffectObjectPaletteInfo6: @ 83C15F8
 	obj_pal gFieldEffectObjectPalette6, 0x1000
 
-	.global gUnknown_083C1600
-gUnknown_083C1600: @ 83C1600
-	.incbin "baserom.gba", 0x003c1600, 0x18
+	.align 2
+gSpriteTemplate_CutGrass:: @ 83C1600
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1000 @ palette tag
+	.4byte gOamData_CutGrass
+	.4byte gSpriteAnimTable_CutGrass
+	.4byte gSpriteImageTable_CutGrass
+	.4byte gDummySpriteAffineAnimTable
+	.4byte sub_80A2A48
 
 	.global gUnknown_083C1618
 gUnknown_083C1618: @ 83C1618
