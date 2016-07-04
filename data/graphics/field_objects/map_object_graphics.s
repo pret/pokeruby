@@ -93,7 +93,7 @@ gMapObjectPic_BrendanNormal_17: @ 8310E48
 gMapObjectPalette8: @ 8310F48
 	.incbin "graphics/map_objects/palettes/08.gbapal"
 
-	.incbin "baserom.gba", 0x310f68, 0x1e0
+	.space 0x1e0
 
 	.align 2
 
@@ -585,7 +585,7 @@ gMapObjectPalette17: @ 831B7A8
 gMapObjectPalette18: @ 831B7C8
 	.incbin "graphics/map_objects/palettes/18.gbapal"
 
-	.incbin "baserom.gba", 0x31b7e8, 0x1c0
+	.space 0x1c0
 
 	.align 2
 
