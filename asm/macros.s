@@ -1,7 +1,6 @@
 	.include "asm/macros/asm.s"
 	.include "asm/macros/function.s"
 	.include "asm/macros/movement.s"
-	.include "asm/macros/event.s"
 	.include "asm/macros/pokemon_data.s"
 	.include "asm/macros/ec.s"
 	.include "asm/macros/map.s"
@@ -95,9 +94,10 @@
 	.4byte 0 @ padding
 	.endm
 
-	.macro obj_rot_scal_anim_end
+	.macro obj_rot_scal_anim_end unknown=0
 	.2byte 0x7fff
-	.fill 6 @ padding
+	.2byte \unknown
+	.fill 4 @ padding
 	.endm
 	
 	.macro credits_entry number, text

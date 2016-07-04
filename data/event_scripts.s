@@ -1,4 +1,5 @@
 	.include "asm/macros.s"
+	.include "asm/macros/event.s"
 	.include "constants/constants.s"
 
 	.section event_script_data, "aw", %progbits
