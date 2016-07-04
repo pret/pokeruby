@@ -18,7 +18,14 @@ gFieldEffectObjectPic_ShadowLarge: @ 8368588
 gFieldEffectObjectPic_ShadowExtraLarge: @ 8368608
 	.incbin "graphics/field_effect_objects/pics/shadow_extra_large.4bpp"
 
-	.incbin "baserom.gba", 0x368a08, 0x160
+	.align 2
+	.space 0x120
+
+	.align 2
+
+gFieldEffectObjectPic_CutGrass: @ 8368B28
+	.incbin "graphics/field_effect_objects/pics/cut_grass.4bpp"
+	.incbin "graphics/field_effect_objects/pics/cut_grass.4bpp" @ included twice
 
 	.align 2
 
@@ -140,7 +147,7 @@ gFieldEffectObjectPic_Dust_1: @ 8369508
 gFieldEffectObjectPic_Dust_2: @ 8369548
 	.incbin "graphics/field_effect_objects/pics/dust/2.4bpp"
 
-	.incbin "baserom.gba", 0x369588, 0xc0
+	.incbin "graphics/field_effect_objects/unknown.bin"
 
 	.align 2
 
@@ -162,7 +169,10 @@ gFieldEffectObjectPic_JumpTallGrass_2: @ 83696C8
 gFieldEffectObjectPic_JumpTallGrass_3: @ 8369708
 	.incbin "graphics/field_effect_objects/pics/jump_tall_grass/3.4bpp"
 
-	.incbin "baserom.gba", 0x369748, 0x200
+	.incbin "graphics/field_effect_objects/pics/unused_grass/0.4bpp"
+	.incbin "graphics/field_effect_objects/pics/unused_grass/1.4bpp"
+	.incbin "graphics/field_effect_objects/pics/unused_grass/2.4bpp"
+	.incbin "graphics/field_effect_objects/pics/unused_grass/3.4bpp"
 
 	.align 2
 
@@ -189,7 +199,7 @@ gFieldEffectObjectPic_JumpLongGrass_3: @ 8369AC8
 gFieldEffectObjectPic_JumpLongGrass_4: @ 8369B48
 	.incbin "graphics/field_effect_objects/pics/jump_long_grass/4.4bpp"
 
-	.incbin "baserom.gba", 0x369bc8, 0x80
+	.incbin "graphics/field_effect_objects/pics/jump_long_grass/unused.4bpp"
 
 	.align 2
 
