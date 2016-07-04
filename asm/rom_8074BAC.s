@@ -1522,7 +1522,7 @@ _08075724: .4byte 0x0202f7c8
 _08075728: .4byte 0x02024c07
 _0807572C: .4byte 0x0202f7c9
 _08075730: .4byte 0x02024c08
-_08075734: .4byte gUnknown_081C7168
+_08075734: .4byte gBattleAnims_Moves
 	thumb_func_end move_anim_start_t1
 
 	thumb_func_start move_something

@@ -3,26 +3,6 @@
 
 	.section script_data, "aw", %progbits
 
-	.global gUnknown_081C7160
-gUnknown_081C7160: @ 81C7160
-	.incbin "baserom.gba", 0x001c7160, 0x8
-
-	.global gUnknown_081C7168
-gUnknown_081C7168: @ 81C7168
-	.incbin "baserom.gba", 0x001c7168, 0x590
-
-	.global gUnknown_081C76F8
-gUnknown_081C76F8: @ 81C76F8
-	.incbin "baserom.gba", 0x001c76f8, 0x24
-
-	.global gUnknown_081C771C
-gUnknown_081C771C: @ 81C771C
-	.incbin "baserom.gba", 0x001c771c, 0x5c
-
-	.global gUnknown_081C7778
-gUnknown_081C7778: @ 81C7778
-	.incbin "baserom.gba", 0x001c7778, 0xf444
-
 	.global gUnknown_081D6BBC
 gUnknown_081D6BBC: @ 81D6BBC
 	.incbin "baserom.gba", 0x001d6bbc, 0x388
