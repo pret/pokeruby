@@ -2,7 +2,7 @@
 	.include "asm/macros/event.s"
 	.include "constants/constants.s"
 
-	.section event_script_data, "aw", %progbits
+	.section script_data, "aw", %progbits
 
 @ 814AE30
 	.include "data/script_cmd_table.s"

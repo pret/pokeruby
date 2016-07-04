@@ -74,15 +74,11 @@ SECTIONS {
         asm/rom5.o(.text);
     } =0
 
-    event_script_data :
-    ALIGN(4)
-    {
-        data/event_scripts.o(event_script_data);
-    } =0
-
     script_data :
     ALIGN(4)
     {
+        data/event_scripts.o(script_data);
+        data/battle_anim_scripts.o(script_data);
         data/data1.o(script_data);
     } =0
 

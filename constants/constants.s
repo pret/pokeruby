@@ -17,5 +17,5 @@
 	.include "constants/battle_tower_constants.s"
 	.include "constants/opponent_constants.s"
 	.include "constants/variables.s"
-	.include "constants/bgm.s"
+	.include "constants/songs.s"
 	.include "constants/version.s"

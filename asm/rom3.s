@@ -78993,7 +78993,7 @@ _080315C2:
 _080315D0: .4byte 0x0202f7c8
 _080315D4: .4byte 0x0202f7c9
 _080315D8: .4byte 0x02017840
-_080315DC: .4byte gUnknown_081C771C
+_080315DC: .4byte gBattleAnims_Unknown1
 _080315E0: .4byte sub_80315E8
 _080315E4: .4byte 0x03004b20
 	thumb_func_end move_anim_start_t3
@@ -79109,7 +79109,7 @@ move_anim_start_t4: @ 8031660
 	.align 2, 0
 _080316B4: .4byte 0x0202f7c8
 _080316B8: .4byte 0x0202f7c9
-_080316BC: .4byte gUnknown_081C7778
+_080316BC: .4byte gBattleAnims_Unknown2
 _080316C0: .4byte sub_80316CC
 _080316C4: .4byte 0x03004b20
 _080316C8: .4byte 0x02017810
