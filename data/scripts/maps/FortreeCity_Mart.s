@@ -6,14 +6,13 @@ FortreeCity_Mart_EventScript_158067:: @ 8158067
 	faceplayer
 	message FortreeCity_Mart_Text_1A0BE4
 	waittext
-	pokemart FortreeCity_Mart_Pokemart_158080
+	pokemart FortreeCity_Mart_Items
 	msgbox FortreeCity_Mart_Text_1A0C02, 4
 	release
 	end
 
-	.incbin "baserom.gba", 0x15807e, 0x2
-
-FortreeCity_Mart_Pokemart_158080:: @ 8158080
+	.align 2
+FortreeCity_Mart_Items:: @ 8158080
 	.2byte ITEM_GREAT_BALL
 	.2byte ITEM_ULTRA_BALL
 	.2byte ITEM_SUPER_POTION

@@ -13,14 +13,13 @@ RustboroCity_Mart_EventScript_157BD4:: @ 8157BD4
 	end
 
 RustboroCity_Mart_EventScript_157BEF:: @ 8157BEF
-	pokemart RustboroCity_Mart_Pokemart_157C00
+	pokemart RustboroCity_Mart_Items1
 	msgbox RustboroCity_Mart_Text_1A0C02, 4
 	release
 	end
 
-	.incbin "baserom.gba", 0x157bfe, 0x2
-
-RustboroCity_Mart_Pokemart_157C00:: @ 8157C00
+	.align 2
+RustboroCity_Mart_Items1:: @ 8157C00
 	.2byte ITEM_POKE_BALL
 	.2byte ITEM_POTION
 	.2byte ITEM_SUPER_POTION
@@ -36,14 +35,13 @@ RustboroCity_Mart_Pokemart_157C00:: @ 8157C00
 	end
 
 RustboroCity_Mart_EventScript_157C18:: @ 8157C18
-	pokemart RustboroCity_Mart_Pokemart_157C28
+	pokemart RustboroCity_Mart_Items2
 	msgbox RustboroCity_Mart_Text_1A0C02, 4
 	release
 	end
 
-	.incbin "baserom.gba", 0x157c27, 0x1
-
-RustboroCity_Mart_Pokemart_157C28:: @ 8157C28
+	.align 2
+RustboroCity_Mart_Items2:: @ 8157C28
 	.2byte ITEM_POKE_BALL
 	.2byte ITEM_TIMER_BALL
 	.2byte ITEM_REPEAT_BALL

@@ -52,14 +52,13 @@ Route104_PrettyPetalFlowerShop_EventScript_15BE73:: @ 815BE73
 Route104_PrettyPetalFlowerShop_EventScript_15BE7C:: @ 815BE7C
 	message Route104_PrettyPetalFlowerShop_Text_1A0C42
 	waittext
-	pokemartbp Route104_PrettyPetalFlowerShop_Pokemart_15BE94
+	pokemartbp Route104_PrettyPetalFlowerShop_Items
 	msgbox Route104_PrettyPetalFlowerShop_Text_1A0C02, 4
 	release
 	end
 
-	.incbin "baserom.gba", 0x15be91, 0x3
-
-Route104_PrettyPetalFlowerShop_Pokemart_15BE94:: @ 815BE94
+	.align 2
+Route104_PrettyPetalFlowerShop_Items:: @ 815BE94
 	.2byte ITEM_FULL_RESTORE
 	.2byte ITEM_MAX_POTION
 	.2byte ITEM_HYPER_POTION

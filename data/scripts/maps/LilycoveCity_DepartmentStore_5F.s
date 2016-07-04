@@ -6,12 +6,13 @@ LilycoveCity_DepartmentStore_5F_EventScript_15A061:: @ 815A061
 	faceplayer
 	message LilycoveCity_DepartmentStore_5F_Text_1A0BE4
 	waittext
-	pokemartbp LilycoveCity_DepartmentStore_5F_Pokemart_15A078
+	pokemartbp LilycoveCity_DepartmentStore_5F_Items1
 	msgbox LilycoveCity_DepartmentStore_5F_Text_1A0C02, 4
 	release
 	end
 
-LilycoveCity_DepartmentStore_5F_Pokemart_15A078:: @ 815A078
+	.align 2
+LilycoveCity_DepartmentStore_5F_Items1:: @ 815A078
 	.2byte ITEM_X_DEFEND
 	.2byte ITEM_X_SPEED
 	.2byte ITEM_X_ACCURACY
@@ -33,14 +34,13 @@ LilycoveCity_DepartmentStore_5F_EventScript_15A094:: @ 815A094
 	faceplayer
 	message LilycoveCity_DepartmentStore_5F_Text_1A0BE4
 	waittext
-	pokemartbp LilycoveCity_DepartmentStore_5F_Pokemart_15A0AC
+	pokemartbp LilycoveCity_DepartmentStore_5F_Items2
 	msgbox LilycoveCity_DepartmentStore_5F_Text_1A0C02, 4
 	release
 	end
 
-	.incbin "baserom.gba", 0x15a0ab, 0x1
-
-LilycoveCity_DepartmentStore_5F_Pokemart_15A0AC:: @ 815A0AC
+	.align 2
+LilycoveCity_DepartmentStore_5F_Items2:: @ 815A0AC
 	.2byte 101
 	.2byte 102
 	.2byte ITEM_BIG_MUSHROOM
@@ -59,14 +59,13 @@ LilycoveCity_DepartmentStore_5F_EventScript_15A0C2:: @ 815A0C2
 	faceplayer
 	message LilycoveCity_DepartmentStore_5F_Text_1A0BE4
 	waittext
-	pokemartbp LilycoveCity_DepartmentStore_5F_Pokemart_15A0DC
+	pokemartbp LilycoveCity_DepartmentStore_5F_Items3
 	msgbox LilycoveCity_DepartmentStore_5F_Text_1A0C02, 4
 	release
 	end
 
-	.incbin "baserom.gba", 0x15a0d9, 0x3
-
-LilycoveCity_DepartmentStore_5F_Pokemart_15A0DC:: @ 815A0DC
+	.align 2
+LilycoveCity_DepartmentStore_5F_Items3:: @ 815A0DC
 	.2byte ITEM_CARBOS
 	.2byte ITEM_CALCIUM
 	.2byte ITEM_RARE_CANDY
@@ -85,14 +84,13 @@ LilycoveCity_DepartmentStore_5F_EventScript_15A0F2:: @ 815A0F2
 	faceplayer
 	message LilycoveCity_DepartmentStore_5F_Text_1A0BE4
 	waittext
-	pokemartbp LilycoveCity_DepartmentStore_5F_Pokemart_15A10C
+	pokemartbp LilycoveCity_DepartmentStore_5F_Items4
 	msgbox LilycoveCity_DepartmentStore_5F_Text_1A0C02, 4
 	release
 	end
 
-	.incbin "baserom.gba", 0x15a109, 0x3
-
-LilycoveCity_DepartmentStore_5F_Pokemart_15A10C:: @ 815A10C
+	.align 2
+LilycoveCity_DepartmentStore_5F_Items4:: @ 815A10C
 	.2byte 59
 	.2byte 60
 	.2byte 61

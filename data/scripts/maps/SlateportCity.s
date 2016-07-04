@@ -44,14 +44,13 @@ SlateportCity_EventScript_14BAB6:: @ 814BAB6
 	faceplayer
 	message SlateportCity_Text_164642
 	waittext
-	pokemart SlateportCity_Pokemart_14BAD0
+	pokemart SlateportCity_Items1
 	msgbox SlateportCity_Text_1A0C02, 4
 	release
 	end
 
-	.incbin "baserom.gba", 0x14bacd, 0x3
-
-SlateportCity_Pokemart_14BAD0:: @ 814BAD0
+	.align 2
+SlateportCity_Items1:: @ 814BAD0
 	.2byte ITEM_PROTEIN
 	.2byte ITEM_IRON
 	.2byte ITEM_CARBOS
@@ -421,6 +420,7 @@ SlateportCity_EventScript_14BE20:: @ 814BE20
 	release
 	end
 
+	.align 2
 SlateportCity_PokemartDecor_14BE40:: @ 814BE40
 	.2byte 25
 	.2byte 27
@@ -447,14 +447,13 @@ SlateportCity_EventScript_14BE9A:: @ 814BE9A
 	faceplayer
 	message SlateportCity_Text_1A0BE4
 	waittext
-	pokemart SlateportCity_Pokemart_14BEB4
+	pokemart SlateportCity_Items2
 	msgbox SlateportCity_Text_1A0C02, 4
 	release
 	end
 
-	.incbin "baserom.gba", 0x14beb1, 0x3
-
-SlateportCity_Pokemart_14BEB4:: @ 814BEB4
+	.align 2
+SlateportCity_Items2:: @ 814BEB4
 	.2byte ITEM_TM10
 	.2byte ITEM_TM43
 	.2byte ITEM_NONE

@@ -6,14 +6,13 @@ FallarborTown_Mart_EventScript_153967:: @ 8153967
 	faceplayer
 	message FallarborTown_Mart_Text_1A0BE4
 	waittext
-	pokemart FallarborTown_Mart_Pokemart_153980
+	pokemart FallarborTown_Mart_Items
 	msgbox FallarborTown_Mart_Text_1A0C02, 4
 	release
 	end
 
-	.incbin "baserom.gba", 0x15397e, 0x2
-
-FallarborTown_Mart_Pokemart_153980:: @ 8153980
+	.align 2
+FallarborTown_Mart_Items:: @ 8153980
 	.2byte ITEM_GREAT_BALL
 	.2byte ITEM_SUPER_POTION
 	.2byte ITEM_ANTIDOTE

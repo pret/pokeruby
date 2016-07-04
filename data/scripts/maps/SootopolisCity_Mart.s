@@ -6,14 +6,13 @@ SootopolisCity_Mart_EventScript_15B21B:: @ 815B21B
 	faceplayer
 	message SootopolisCity_Mart_Text_1A0BE4
 	waittext
-	pokemart SootopolisCity_Mart_Pokemart_15B234
+	pokemart SootopolisCity_Mart_Items
 	msgbox SootopolisCity_Mart_Text_1A0C02, 4
 	release
 	end
 
-	.incbin "baserom.gba", 0x15b232, 0x2
-
-SootopolisCity_Mart_Pokemart_15B234:: @ 815B234
+	.align 2
+SootopolisCity_Mart_Items:: @ 815B234
 	.2byte ITEM_ULTRA_BALL
 	.2byte ITEM_HYPER_POTION
 	.2byte ITEM_MAX_POTION

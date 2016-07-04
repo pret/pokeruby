@@ -18,12 +18,13 @@ LilycoveCity_DepartmentStore_4F_EventScript_15A019:: @ 815A019
 	faceplayer
 	message LilycoveCity_DepartmentStore_4F_Text_1A0BE4
 	waittext
-	pokemart LilycoveCity_DepartmentStore_4F_Pokemart_15A030
+	pokemart LilycoveCity_DepartmentStore_4F_Items1
 	msgbox LilycoveCity_DepartmentStore_4F_Text_1A0C02, 4
 	release
 	end
 
-LilycoveCity_DepartmentStore_4F_Pokemart_15A030:: @ 815A030
+	.align 2
+LilycoveCity_DepartmentStore_4F_Items1:: @ 815A030
 	.2byte ITEM_TM38
 	.2byte ITEM_TM25
 	.2byte ITEM_TM14
@@ -37,14 +38,13 @@ LilycoveCity_DepartmentStore_4F_EventScript_15A03C:: @ 815A03C
 	faceplayer
 	message LilycoveCity_DepartmentStore_4F_Text_1A0BE4
 	waittext
-	pokemart LilycoveCity_DepartmentStore_4F_Pokemart_15A054
+	pokemart LilycoveCity_DepartmentStore_4F_Items2
 	msgbox LilycoveCity_DepartmentStore_4F_Text_1A0C02, 4
 	release
 	end
 
-	.incbin "baserom.gba", 0x15a053, 0x1
-
-LilycoveCity_DepartmentStore_4F_Pokemart_15A054:: @ 815A054
+	.align 2
+LilycoveCity_DepartmentStore_4F_Items2:: @ 815A054
 	.2byte ITEM_TM17
 	.2byte ITEM_TM20
 	.2byte ITEM_TM33
