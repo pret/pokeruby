@@ -20,4 +20,3 @@ SecretBase_Tree2_MapWarps:: @ 838FF14
 
 SecretBase_Tree2_MapEvents:: @ 838FF1C
 	map_events SecretBase_Tree2_MapObjects, SecretBase_Tree2_MapWarps, 0x0, 0x0
-

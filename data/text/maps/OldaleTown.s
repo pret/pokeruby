@@ -53,4 +53,3 @@ OldaleTown_Text_16B1BE:: @ 816B1BE
 OldaleTown_Text_16B20E:: @ 816B20E
 	.string "OLDALE TOWN\n"
 	.string "“Where things start off scarce.”$"
-

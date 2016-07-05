@@ -22,4 +22,3 @@ SlateportCity_PokemonCenter_1F_EventScript_1563DC:: @ 81563DC
 SlateportCity_PokemonCenter_1F_EventScript_1563E5:: @ 81563E5
 	msgbox SlateportCity_PokemonCenter_1F_Text_1806CB, 2
 	end
-

@@ -289,4 +289,3 @@ SeafloorCavern_Room9_Movement_15DD68:: @ 815DD68
 	step_14
 	step_14
 	step_end
-

@@ -11,4 +11,3 @@ RustboroCity_Flat2_2F_Text_1854C4:: @ 81854C4
 	.string "My daddy’s working at the CORPORATION.\p"
 	.string "When I grow up, I’m going to work for\n"
 	.string "DEVON, too.$"
-

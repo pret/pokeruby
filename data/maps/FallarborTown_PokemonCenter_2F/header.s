@@ -12,4 +12,3 @@ FallarborTown_PokemonCenter_2F:: @ 8305D24
 	.2byte 0
 	.byte 0
 	.byte 0
-

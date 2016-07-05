@@ -15,4 +15,3 @@ RecordCorner_MapCoordEvents:: @ 83913D4
 
 RecordCorner_MapEvents:: @ 8391414
 	map_events RecordCorner_MapObjects, RecordCorner_MapWarps, RecordCorner_MapCoordEvents, 0x0
-

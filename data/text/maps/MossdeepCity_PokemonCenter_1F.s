@@ -8,4 +8,3 @@ MossdeepCity_PokemonCenter_1F_Text_18D69A:: @ 818D69A
 	.string "Depending on the special abilities of\n"
 	.string "POKéMON, some moves might change\l"
 	.string "or not work at all.$"
-

@@ -12,4 +12,3 @@ SecretBase_Shrub2:: @ 830780C
 	.2byte 0
 	.byte 1
 	.byte 8
-

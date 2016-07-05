@@ -14,4 +14,3 @@ PetalburgCity_House1_Text_17BB4A:: @ 817BB4A
 	.string "And, sometimes, even get a little\n"
 	.string "homesick...\p"
 	.string "It must be fabulous to travel!$"
-

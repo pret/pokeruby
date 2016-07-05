@@ -12,4 +12,3 @@ MauvilleCity_BikeShop:: @ 8306168
 	.2byte 0
 	.byte 0
 	.byte 0
-

@@ -40,4 +40,3 @@ UnknownString_819E0FF: @ 819E0FF
 	.string "“TRICK MASTER I love.”\n"
 	.string "... ... ... ... ... ... ... ...\p"
 	.string "The lock clicked open!$"
-

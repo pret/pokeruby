@@ -26,4 +26,3 @@ DewfordTown_House2_Text_1760C8:: @ 81760C8
 	.string "heard about BRAWLY?\p"
 	.string "He’s so cool...\n"
 	.string "Everyone idolizes him.$"
-

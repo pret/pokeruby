@@ -12,4 +12,3 @@ LittlerootTown_MaysHouse_2F:: @ 8305A84
 	.2byte 0
 	.byte 0
 	.byte 0
-

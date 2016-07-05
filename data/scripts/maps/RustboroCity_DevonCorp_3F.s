@@ -195,4 +195,3 @@ RustboroCity_DevonCorp_3F_EventScript_1578C5:: @ 81578C5
 RustboroCity_DevonCorp_3F_EventScript_1578CF:: @ 81578CF
 	msgbox RustboroCity_DevonCorp_3F_Text_183A04, 3
 	end
-

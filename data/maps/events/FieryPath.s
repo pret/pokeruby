@@ -14,4 +14,3 @@ FieryPath_MapWarps:: @ 838C7D8
 
 FieryPath_MapEvents:: @ 838C7E8
 	map_events FieryPath_MapObjects, FieryPath_MapWarps, 0x0, 0x0
-

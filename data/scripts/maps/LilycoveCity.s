@@ -425,4 +425,3 @@ LilycoveCity_EventScript_14CF6B:: @ 814CF6B
 	setflag 292
 	release
 	end
-

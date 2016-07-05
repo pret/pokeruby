@@ -12,4 +12,3 @@ VerdanturfTown_PokemonCenter_2F:: @ 8305DE8
 	.2byte 0
 	.byte 0
 	.byte 0
-

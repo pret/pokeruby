@@ -163,4 +163,3 @@ BattleTower_BattleRoom_Movement_160AD0:: @ 8160AD0
 	step_left
 	step_03
 	step_end
-

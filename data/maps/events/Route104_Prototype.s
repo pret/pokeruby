@@ -21,4 +21,3 @@ Route104_Prototype_MapBGEvents:: @ 8392054
 
 Route104_Prototype_MapEvents:: @ 839206C
 	map_events Route104_Prototype_MapObjects, Route104_Prototype_MapWarps, 0x0, Route104_Prototype_MapBGEvents
-

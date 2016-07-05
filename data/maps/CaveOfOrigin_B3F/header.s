@@ -12,4 +12,3 @@ CaveOfOrigin_B3F:: @ 83071EC
 	.2byte 0
 	.byte 1
 	.byte 0
-

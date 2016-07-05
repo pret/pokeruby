@@ -8,4 +8,3 @@ LilycoveCity_House4_MapWarps:: @ 838A1F4
 
 LilycoveCity_House4_MapEvents:: @ 838A204
 	map_events LilycoveCity_House4_MapObjects, LilycoveCity_House4_MapWarps, 0x0, 0x0
-

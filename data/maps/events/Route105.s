@@ -14,4 +14,3 @@ Route105_MapBGEvents:: @ 83818EC
 
 Route105_MapEvents:: @ 83818F8
 	map_events Route105_MapObjects, Route105_MapWarps, 0x0, Route105_MapBGEvents
-

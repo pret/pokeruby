@@ -355,4 +355,3 @@ Route120_EventScript_151AE7:: @ 8151AE7
 	trainerbattle 0, 653, 0, Route120_Text_1BF8C5, Route120_Text_1BF920
 	msgbox Route120_Text_1BF946, 6
 	end
-

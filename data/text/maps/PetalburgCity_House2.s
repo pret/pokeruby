@@ -10,4 +10,3 @@ PetalburgCity_House2_Text_17BCB1:: @ 817BCB1
 	.string "How would I put it?\p"
 	.string "I just got the feeling that he\n"
 	.string "lives for POKéMON.$"
-

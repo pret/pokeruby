@@ -12,4 +12,3 @@ LinkContestRoom1:: @ 83079E8
 	.2byte 0
 	.byte 0
 	.byte 0
-

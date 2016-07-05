@@ -12,4 +12,3 @@ RustboroCity_House3_Text_1855FA:: @ 81855FA
 
 RustboroCity_House3_Text_18567D:: @ 818567D
 	.string "PEKACHU: Peka!$"
-

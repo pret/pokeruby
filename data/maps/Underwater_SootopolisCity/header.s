@@ -12,4 +12,3 @@ Underwater_SootopolisCity:: @ 8306DFC
 	.2byte 0
 	.byte 1
 	.byte 0
-

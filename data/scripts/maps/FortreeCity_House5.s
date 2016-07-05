@@ -18,4 +18,3 @@ FortreeCity_House5_EventScript_158244:: @ 8158244
 	waitpokecry
 	release
 	end
-

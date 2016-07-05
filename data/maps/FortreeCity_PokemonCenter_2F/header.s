@@ -12,4 +12,3 @@ FortreeCity_PokemonCenter_2F:: @ 830645C
 	.2byte 0
 	.byte 0
 	.byte 0
-

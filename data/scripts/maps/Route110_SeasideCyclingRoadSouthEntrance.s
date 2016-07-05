@@ -36,4 +36,3 @@ Route110_SeasideCyclingRoadSouthEntrance_EventScript_1634BD:: @ 81634BD
 	setvar 0x4001, 0
 	releaseall
 	end
-

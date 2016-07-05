@@ -769,4 +769,3 @@ SlateportCity_ContestLobby_EventScript_15908D:: @ 815908D
 	hidebox 0, 0, 29, 19
 	releaseall
 	end
-

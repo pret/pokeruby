@@ -65,4 +65,3 @@ FortreeCity_House4_EventScript_15821E:: @ 815821E
 	waitpokecry
 	release
 	end
-

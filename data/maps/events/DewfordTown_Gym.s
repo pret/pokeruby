@@ -17,4 +17,3 @@ DewfordTown_Gym_MapBGEvents:: @ 8386044
 
 DewfordTown_Gym_MapEvents:: @ 8386074
 	map_events DewfordTown_Gym_MapObjects, DewfordTown_Gym_MapWarps, 0x0, DewfordTown_Gym_MapBGEvents
-

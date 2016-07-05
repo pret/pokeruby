@@ -12,4 +12,3 @@ Route104_PrettyPetalFlowerShop:: @ 8306C3C
 	.2byte 0
 	.byte 0
 	.byte 0
-

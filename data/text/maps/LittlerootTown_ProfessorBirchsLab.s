@@ -161,4 +161,3 @@ LittlerootTown_ProfessorBirchsLab_Text_174724:: @ 8174724
 
 LittlerootTown_ProfessorBirchsLab_Text_174748:: @ 8174748
 	.string "It’s a book that’s too hard to read.$"
-

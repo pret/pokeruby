@@ -8,4 +8,3 @@ SafariZone_Northeast_EventScript_160011:: @ 8160011
 SafariZone_Northeast_EventScript_16001A:: @ 816001A
 	msgbox SafariZone_Northeast_Text_1C3D80, 2
 	end
-

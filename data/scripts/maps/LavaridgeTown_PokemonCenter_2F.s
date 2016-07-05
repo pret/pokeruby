@@ -15,4 +15,3 @@ LavaridgeTown_PokemonCenter_2F_EventScript_15395A:: @ 815395A
 LavaridgeTown_PokemonCenter_2F_EventScript_153960:: @ 8153960
 	call LavaridgeTown_PokemonCenter_2F_EventScript_1A41FB
 	end
-

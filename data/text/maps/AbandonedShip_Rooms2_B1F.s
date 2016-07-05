@@ -3,4 +3,3 @@ AbandonedShip_Rooms2_B1F_Text_198759:: @ 8198759
 	.string "It’s exciting here!\p"
 	.string "I bet there’re amazing treasures on\n"
 	.string "board.$"
-

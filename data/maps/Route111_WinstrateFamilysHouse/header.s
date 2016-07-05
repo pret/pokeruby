@@ -12,4 +12,3 @@ Route111_WinstrateFamilysHouse:: @ 8306C58
 	.2byte 0
 	.byte 0
 	.byte 0
-

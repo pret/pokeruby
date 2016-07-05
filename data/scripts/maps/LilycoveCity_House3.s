@@ -97,4 +97,3 @@ LilycoveCity_House3_EventScript_159D37:: @ 8159D37
 	msgbox LilycoveCity_House3_Text_18BE8E, 4
 	release
 	end
-

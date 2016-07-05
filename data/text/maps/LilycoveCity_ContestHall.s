@@ -204,4 +204,3 @@ LilycoveCity_ContestHall_Text_189F5C:: @ 8189F5C
 UnknownString_8189F93: @ 8189F93
 	.string "TOUGHNESS CONTEST STAGE\n"
 	.string "BE THRILLED BY TOUGH POKéMON!$"
-

@@ -145,4 +145,3 @@ MauvilleCity_GameCorner_Text_1822F4:: @ 81822F4
 MauvilleCity_GameCorner_Text_182420:: @ 8182420
 	.string "You can’t play if you don’t have a\n"
 	.string "COIN CASE.$"
-

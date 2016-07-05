@@ -12,4 +12,3 @@ SafariZone_Southeast:: @ 8307BFC
 	.2byte 0
 	.byte 1
 	.byte 0
-

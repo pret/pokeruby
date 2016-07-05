@@ -23,4 +23,3 @@ Route123_Text_171E8E:: @ 8171E8E
 
 Route123_Text_171EBC:: @ 8171EBC
 	.string "BERRY MASTER’S HOUSE$"
-

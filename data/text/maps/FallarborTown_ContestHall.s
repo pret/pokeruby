@@ -19,4 +19,3 @@ FallarborTown_ContestHall_Text_177437:: @ 8177437
 FallarborTown_ContestHall_Text_1774B1:: @ 81774B1
 	.string "POKéMON CONTESTS\n"
 	.string "SUPER RANK STAGE!$"
-

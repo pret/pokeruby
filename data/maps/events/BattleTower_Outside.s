@@ -13,4 +13,3 @@ BattleTower_Outside_MapBGEvents:: @ 8391C6C
 
 BattleTower_Outside_MapEvents:: @ 8391C78
 	map_events BattleTower_Outside_MapObjects, BattleTower_Outside_MapWarps, 0x0, BattleTower_Outside_MapBGEvents
-

@@ -12,4 +12,3 @@ VerdanturfTown_ContestLobby:: @ 8305D78
 	.2byte 0
 	.byte 0
 	.byte 0
-

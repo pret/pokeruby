@@ -21,4 +21,3 @@ ShoalCave_LowTideInnerRoom_MapBGEvents:: @ 838DD98
 
 ShoalCave_LowTideInnerRoom_MapEvents:: @ 838DDE0
 	map_events ShoalCave_LowTideInnerRoom_MapObjects, ShoalCave_LowTideInnerRoom_MapWarps, 0x0, ShoalCave_LowTideInnerRoom_MapBGEvents
-

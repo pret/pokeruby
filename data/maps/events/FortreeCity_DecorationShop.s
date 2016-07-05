@@ -10,4 +10,3 @@ FortreeCity_DecorationShop_MapWarps:: @ 8389440
 
 FortreeCity_DecorationShop_MapEvents:: @ 8389450
 	map_events FortreeCity_DecorationShop_MapObjects, FortreeCity_DecorationShop_MapWarps, 0x0, 0x0
-

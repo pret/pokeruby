@@ -7,4 +7,3 @@ AbandonedShip_Deck_MapWarps:: @ 838E0E4
 
 AbandonedShip_Deck_MapEvents:: @ 838E10C
 	map_events 0x0, AbandonedShip_Deck_MapWarps, 0x0, 0x0
-

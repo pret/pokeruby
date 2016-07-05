@@ -182,4 +182,3 @@ MauvilleCity_BikeShop_EventScript_1569EE:: @ 81569EE
 MauvilleCity_BikeShop_EventScript_1569FA:: @ 81569FA
 	release
 	end
-

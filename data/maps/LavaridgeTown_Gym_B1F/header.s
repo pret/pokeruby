@@ -12,4 +12,3 @@ LavaridgeTown_Gym_B1F:: @ 8305C28
 	.2byte 0
 	.byte 0
 	.byte 1
-

@@ -5,4 +5,3 @@ Route115_MapConnectionsList:: @ 8308A18
 Route115_MapConnections:: @ 8308A30
 	.4byte 0x2
 	.4byte Route115_MapConnectionsList
-

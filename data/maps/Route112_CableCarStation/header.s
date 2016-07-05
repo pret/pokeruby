@@ -12,4 +12,3 @@ Route112_CableCarStation:: @ 8306C90
 	.2byte 0
 	.byte 0
 	.byte 0
-

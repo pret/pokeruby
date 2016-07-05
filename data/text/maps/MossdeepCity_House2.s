@@ -12,4 +12,3 @@ MossdeepCity_House2_Text_18D596:: @ 818D596
 
 MossdeepCity_House2_Text_18D61E:: @ 818D61E
 	.string "WINGULL: Pihyoh!$"
-

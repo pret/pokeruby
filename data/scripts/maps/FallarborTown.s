@@ -54,4 +54,3 @@ MeteorFalls_1F_2R_EventScript_14E842:: @ 814E842
 FallarborTown_EventScript_14E84B:: @ 814E84B
 	msgbox FallarborTown_Text_16CAB9, 3
 	end
-

@@ -6,4 +6,3 @@ RustboroCity_Flat1_2F_MapWarps:: @ 8388D2C
 
 RustboroCity_Flat1_2F_MapEvents:: @ 8388D34
 	map_events RustboroCity_Flat1_2F_MapObjects, RustboroCity_Flat1_2F_MapWarps, 0x0, 0x0
-

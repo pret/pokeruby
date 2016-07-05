@@ -7,4 +7,3 @@ NewMauville_Entrance_Text_1982D4:: @ 81982D4
 NewMauville_Entrance_Text_1982EA:: @ 81982EA
 	.string "{PLAYER} used the BASEMENT KEY.\p"
 	.string "The door opened!$"
-

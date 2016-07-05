@@ -47,4 +47,3 @@ JaggedPass_EventScript_15D301:: @ 815D301
 	trainerbattle 5, 216, 0, JaggedPass_Text_1960AA, JaggedPass_Text_1960E2
 	msgbox JaggedPass_Text_196118, 6
 	end
-

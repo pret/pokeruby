@@ -12,4 +12,3 @@ MossdeepCity_SpaceCenter_1F:: @ 83068BC
 	.2byte 0
 	.byte 0
 	.byte 0
-

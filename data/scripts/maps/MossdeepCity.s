@@ -90,4 +90,3 @@ MossdeepCity_EventScript_14D073:: @ 814D073
 	msgbox MossdeepCity_Text_1691A7, 4
 	release
 	end
-

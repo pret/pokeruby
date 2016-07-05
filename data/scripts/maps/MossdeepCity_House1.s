@@ -21,4 +21,3 @@ MossdeepCity_House1_EventScript_15A855:: @ 815A855
 MossdeepCity_House1_EventScript_15A85F:: @ 815A85F
 	msgbox MossdeepCity_House1_Text_18D4F1, 2
 	end
-

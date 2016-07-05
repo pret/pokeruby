@@ -22,4 +22,3 @@ RustboroCity_Flat2_2F_EventScript_157DCF:: @ 8157DCF
 	msgbox RustboroCity_Flat2_2F_Text_1854C4, 4
 	release
 	end
-

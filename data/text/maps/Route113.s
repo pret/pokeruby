@@ -28,4 +28,3 @@ Route113_Text_170096:: @ 8170096
 Route113_Text_17011D:: @ 817011D
 	.string "GLASS WORKSHOP\n"
 	.string "“Turning Volcanic Ash into Glass Items”$"
-

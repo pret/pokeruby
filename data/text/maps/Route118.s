@@ -53,4 +53,3 @@ Route118_Text_17108B:: @ 817108B
 Route118_Text_1710A5:: @ 81710A5
 	.string "ROUTE 118\n"
 	.string "{0x79} ROUTE 119$"
-

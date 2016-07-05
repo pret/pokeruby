@@ -10,4 +10,3 @@ PetalburgCity_Mart_MapWarps:: @ 8387674
 
 PetalburgCity_Mart_MapEvents:: @ 8387684
 	map_events PetalburgCity_Mart_MapObjects, PetalburgCity_Mart_MapWarps, 0x0, 0x0
-

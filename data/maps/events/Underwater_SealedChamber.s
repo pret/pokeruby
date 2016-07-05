@@ -6,4 +6,3 @@ Underwater_SealedChamber_MapBGEvents:: @ 838E768
 
 Underwater_SealedChamber_MapEvents:: @ 838E774
 	map_events 0x0, Underwater_SealedChamber_MapWarps, 0x0, Underwater_SealedChamber_MapBGEvents
-

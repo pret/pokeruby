@@ -6,4 +6,3 @@ Route104_MapConnectionsList:: @ 830887C
 Route104_MapConnections:: @ 83088A0
 	.4byte 0x3
 	.4byte Route104_MapConnectionsList
-

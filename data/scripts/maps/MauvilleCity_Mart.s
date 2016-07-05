@@ -36,4 +36,3 @@ MauvilleCity_Mart_EventScript_1573F4:: @ 81573F4
 MauvilleCity_Mart_EventScript_1573FD:: @ 81573FD
 	msgbox MauvilleCity_Mart_Text_18287F, 2
 	end
-

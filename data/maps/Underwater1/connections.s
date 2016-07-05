@@ -5,4 +5,3 @@ Underwater1_MapConnectionsList:: @ 8308D10
 Underwater1_MapConnections:: @ 8308D28
 	.4byte 0x2
 	.4byte Underwater1_MapConnectionsList
-

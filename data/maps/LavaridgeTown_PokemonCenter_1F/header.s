@@ -12,4 +12,3 @@ LavaridgeTown_PokemonCenter_1F:: @ 8305C7C
 	.2byte 0
 	.byte 0
 	.byte 0
-

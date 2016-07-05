@@ -155,4 +155,3 @@ ShoalCave_LowTideInnerRoom_EventScript_15E365:: @ 815E365
 	setflag 953
 	releaseall
 	end
-

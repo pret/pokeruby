@@ -10,4 +10,3 @@ SafariZone_Southwest_MapBGEvents:: @ 8391B50
 
 SafariZone_Southwest_MapEvents:: @ 8391B5C
 	map_events SafariZone_Southwest_MapObjects, SafariZone_Southwest_MapWarps, 0x0, SafariZone_Southwest_MapBGEvents
-

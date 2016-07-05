@@ -12,4 +12,3 @@ OldaleTown_House1:: @ 8305ABC
 	.2byte 0
 	.byte 0
 	.byte 0
-

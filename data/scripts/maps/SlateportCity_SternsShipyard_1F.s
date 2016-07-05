@@ -65,4 +65,3 @@ SlateportCity_SternsShipyard_1F_EventScript_1553EC:: @ 81553EC
 SlateportCity_SternsShipyard_1F_EventScript_1553F5:: @ 81553F5
 	msgbox SlateportCity_SternsShipyard_1F_Text_17C53D, 2
 	end
-

@@ -10,4 +10,3 @@ MossdeepCity_PokemonCenter_1F_MapWarps:: @ 838A8BC
 
 MossdeepCity_PokemonCenter_1F_MapEvents:: @ 838A8D4
 	map_events MossdeepCity_PokemonCenter_1F_MapObjects, MossdeepCity_PokemonCenter_1F_MapWarps, 0x0, 0x0
-

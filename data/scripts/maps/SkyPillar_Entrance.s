@@ -5,4 +5,3 @@ SkyPillar_Entrance_MapScripts:: @ 815F2BD
 SkyPillar_Entrance_MapScript1_15F2C3:: @ 815F2C3
 	setflag 2142
 	end
-

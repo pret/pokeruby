@@ -43,4 +43,3 @@ FortreeCity_House2_EventScript_158161:: @ 8158161
 	msgbox FortreeCity_House2_Text_186565, 4
 	release
 	end
-

@@ -174,4 +174,3 @@ SlateportCity_OceanicMuseum_2F_Text_17F9C7:: @ 817F9C7
 	.string "“S.S. ANNE\p"
 	.string "“A replica of the luxury liner that\n"
 	.string "circles the globe.”$"
-

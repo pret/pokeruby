@@ -99,4 +99,3 @@ MagmaHideout_B2F_EventScript_15D987:: @ 815D987
 	trainerbattle 0, TRAINER_HIDEOUT_B2F_GRUNT_3, 0, AquaHideout_B2F_Text_1972EF, AquaHideout_B2F_Text_197390
 	msgbox AquaHideout_B2F_Text_1973C0, 6
 	end
-

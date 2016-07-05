@@ -12,4 +12,3 @@ SecretBase_BlueCave3:: @ 8307860
 	.2byte 0
 	.byte 1
 	.byte 8
-

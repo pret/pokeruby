@@ -427,4 +427,3 @@ FallarborTown_ContestLobby_EventScript_15FBF3:: @ 815FBF3
 FallarborTown_ContestLobby_EventScript_15FBF9:: @ 815FBF9
 	setvar 0x4013, 105
 	return
-

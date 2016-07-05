@@ -19,4 +19,3 @@ MtPyre_6F_Text_196AB1:: @ 8196AB1
 MtPyre_6F_Text_196AC9:: @ 8196AC9
 	.string "The POKéMON at rest here...\n"
 	.string "Sometimes, they play...$"
-

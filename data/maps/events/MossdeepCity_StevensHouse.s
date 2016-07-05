@@ -16,4 +16,3 @@ MossdeepCity_StevensHouse_MapBGEvents:: @ 838AAB4
 
 MossdeepCity_StevensHouse_MapEvents:: @ 838AAE4
 	map_events MossdeepCity_StevensHouse_MapObjects, MossdeepCity_StevensHouse_MapWarps, 0x0, MossdeepCity_StevensHouse_MapBGEvents
-

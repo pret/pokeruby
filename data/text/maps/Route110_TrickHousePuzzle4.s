@@ -38,4 +38,3 @@ UnknownString_819D3A5: @ 819D3A5
 	.string "“TRICK MASTER is a genius.”\n"
 	.string "... ... ... ... ... ... ... ...\p"
 	.string "The lock clicked open!$"
-

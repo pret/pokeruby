@@ -44,4 +44,3 @@ MauvilleCity_GameCorner_MapBGEvents:: @ 83884F0
 
 MauvilleCity_GameCorner_MapEvents:: @ 8388610
 	map_events MauvilleCity_GameCorner_MapObjects, MauvilleCity_GameCorner_MapWarps, 0x0, MauvilleCity_GameCorner_MapBGEvents
-

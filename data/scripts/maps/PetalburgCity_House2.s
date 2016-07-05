@@ -8,4 +8,3 @@ PetalburgCity_House2_EventScript_1551F2:: @ 81551F2
 PetalburgCity_House2_EventScript_1551FB:: @ 81551FB
 	msgbox PetalburgCity_House2_Text_17BCB1, 2
 	end
-

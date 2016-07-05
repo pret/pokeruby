@@ -39,4 +39,3 @@ MeteorFalls_1F_2R_EventScript_15C728:: @ 815C728
 	trainerbattle 7, 681, 0, MeteorFalls_1F_2R_Text_193FCA, MeteorFalls_1F_2R_Text_19403A, MeteorFalls_1F_2R_Text_1940DF
 	msgbox MeteorFalls_1F_2R_Text_194066, 6
 	end
-

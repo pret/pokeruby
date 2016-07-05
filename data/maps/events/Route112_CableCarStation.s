@@ -8,4 +8,3 @@ Route112_CableCarStation_MapWarps:: @ 838B804
 
 Route112_CableCarStation_MapEvents:: @ 838B814
 	map_events Route112_CableCarStation_MapObjects, Route112_CableCarStation_MapWarps, 0x0, 0x0
-

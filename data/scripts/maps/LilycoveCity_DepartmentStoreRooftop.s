@@ -200,4 +200,3 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A396:: @ 815A396
 	hidemoney 0, 0
 	releaseall
 	end
-

@@ -15,4 +15,3 @@ Route128_MapBGEvents:: @ 8385190
 
 Route128_MapEvents:: @ 83851B4
 	map_events Route128_MapObjects, 0x0, 0x0, Route128_MapBGEvents
-

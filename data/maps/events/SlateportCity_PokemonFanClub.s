@@ -14,4 +14,3 @@ SlateportCity_PokemonFanClub_MapWarps:: @ 8387B14
 
 SlateportCity_PokemonFanClub_MapEvents:: @ 8387B24
 	map_events SlateportCity_PokemonFanClub_MapObjects, SlateportCity_PokemonFanClub_MapWarps, 0x0, 0x0
-

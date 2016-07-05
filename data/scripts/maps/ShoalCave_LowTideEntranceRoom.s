@@ -100,4 +100,3 @@ ShoalCave_LowTideEntranceRoom_EventScript_15E176:: @ 815E176
 	clearflag 959
 	clearflag 2143
 	return
-

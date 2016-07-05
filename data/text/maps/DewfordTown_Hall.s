@@ -181,4 +181,3 @@ DewfordTown_Hall_Text_175EBE:: @ 8175EBE
 	.string "But POKéMON with the\n"
 	.string "“{STR_VAR_1}”\l"
 	.string "move are in, too.$"
-

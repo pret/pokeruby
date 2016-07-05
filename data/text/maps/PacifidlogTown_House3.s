@@ -25,4 +25,3 @@ PacifidlogTown_House3_Text_179541:: @ 8179541
 	.string "Did you get to meet a lot of different\n"
 	.string "POKéMON?\p"
 	.string "I wish I was like you.$"
-

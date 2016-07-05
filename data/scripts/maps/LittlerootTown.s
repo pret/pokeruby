@@ -878,4 +878,3 @@ LittlerootTown_EventScript_14DD38:: @ 814DD38
 	closebutton
 	pause 30
 	return
-

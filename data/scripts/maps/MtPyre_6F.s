@@ -13,4 +13,3 @@ MtPyre_6F_EventScript_15D46F:: @ 815D46F
 	trainerbattle 5, 108, 0, MtPyre_6F_Text_196A95, MtPyre_6F_Text_196AB1
 	msgbox MtPyre_6F_Text_196AC9, 6
 	end
-

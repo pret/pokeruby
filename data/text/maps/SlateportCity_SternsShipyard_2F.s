@@ -16,4 +16,3 @@ UnknownString_817C882: @ 817C882
 	.string "through there.\p"
 	.string "You’d need substantial propulsion\n"
 	.string "to plow through those waters...$"
-

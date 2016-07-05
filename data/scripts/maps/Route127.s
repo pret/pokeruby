@@ -41,4 +41,3 @@ Route127_EventScript_152104:: @ 8152104
 	trainerbattle 0, 674, 0, Route127_Text_1C1B92, Route127_Text_1C1BD9
 	msgbox Route127_Text_1C1BEC, 6
 	end
-

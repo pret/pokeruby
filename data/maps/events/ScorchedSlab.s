@@ -6,4 +6,3 @@ ScorchedSlab_MapWarps:: @ 838E9A0
 
 ScorchedSlab_MapEvents:: @ 838E9A8
 	map_events ScorchedSlab_MapObjects, ScorchedSlab_MapWarps, 0x0, 0x0
-

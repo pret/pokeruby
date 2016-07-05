@@ -444,4 +444,3 @@ Route109_EventScript_14F8E5:: @ 814F8E5
 	trainerbattle 4, 680, 0, Route109_Text_1BA114, Route109_Text_1BA15F, Route109_Text_1BA1D0
 	msgbox Route109_Text_1BA193, 6
 	end
-

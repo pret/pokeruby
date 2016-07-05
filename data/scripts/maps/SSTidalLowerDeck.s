@@ -10,4 +10,3 @@ SSTidalLowerDeck_EventScript_15FEEE:: @ 815FEEE
 	trainerbattle 0, 495, 0, SSTidalLowerDeck_Text_199491, SSTidalLowerDeck_Text_1994F7
 	msgbox SSTidalLowerDeck_Text_199508, 6
 	end
-

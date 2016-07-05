@@ -11,4 +11,3 @@ SouthernIsland_Interior_MapBGEvents:: @ 8391EA0
 
 SouthernIsland_Interior_MapEvents:: @ 8391EAC
 	map_events SouthernIsland_Interior_MapObjects, SouthernIsland_Interior_MapWarps, 0x0, SouthernIsland_Interior_MapBGEvents
-

@@ -12,4 +12,3 @@ InsideOfTruck:: @ 8307B38
 	.2byte 0
 	.byte 0
 	.byte 0
-

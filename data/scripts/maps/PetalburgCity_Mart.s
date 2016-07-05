@@ -66,4 +66,3 @@ PetalburgCity_Mart_EventScript_155323:: @ 8155323
 PetalburgCity_Mart_EventScript_15532C:: @ 815532C
 	msgbox PetalburgCity_Mart_Text_17C0BC, 2
 	end
-

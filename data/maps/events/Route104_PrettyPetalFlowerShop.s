@@ -9,4 +9,3 @@ Route104_PrettyPetalFlowerShop_MapWarps:: @ 838B6F0
 
 Route104_PrettyPetalFlowerShop_MapEvents:: @ 838B700
 	map_events Route104_PrettyPetalFlowerShop_MapObjects, Route104_PrettyPetalFlowerShop_MapWarps, 0x0, 0x0
-

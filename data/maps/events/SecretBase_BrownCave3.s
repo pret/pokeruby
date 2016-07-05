@@ -20,4 +20,3 @@ SecretBase_BrownCave3_MapWarps:: @ 83903A0
 
 SecretBase_BrownCave3_MapEvents:: @ 83903A8
 	map_events SecretBase_BrownCave3_MapObjects, SecretBase_BrownCave3_MapWarps, 0x0, 0x0
-

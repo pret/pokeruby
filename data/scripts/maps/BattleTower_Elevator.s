@@ -55,4 +55,3 @@ BattleTower_Elevator_Movement_160841:: @ 8160841
 	step_down
 	step_down
 	step_end
-

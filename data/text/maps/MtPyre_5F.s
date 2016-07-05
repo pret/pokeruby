@@ -12,4 +12,3 @@ MtPyre_5F_Text_1969AC:: @ 81969AC
 	.string "I can’t leave...\p"
 	.string "Stay...\n"
 	.string "Won’t you stay with me?$"
-

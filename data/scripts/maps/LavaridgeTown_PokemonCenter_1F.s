@@ -26,4 +26,3 @@ LavaridgeTown_PokemonCenter_1F_EventScript_153932:: @ 8153932
 LavaridgeTown_PokemonCenter_1F_EventScript_15393B:: @ 815393B
 	msgbox LavaridgeTown_PokemonCenter_1F_Text_176F7A, 2
 	end
-

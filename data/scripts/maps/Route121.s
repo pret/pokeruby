@@ -111,4 +111,3 @@ Route121_EventScript_151C3B:: @ 8151C3B
 	trainerbattle 5, 127, 0, Route121_Text_1BFEDE, Route121_Text_1BFF0A
 	msgbox Route121_Text_1BFF3A, 6
 	end
-

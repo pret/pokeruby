@@ -68,4 +68,3 @@ AbandonedShip_Rooms2_1F_Text_198BEA:: @ 8198BEA
 AbandonedShip_Rooms2_1F_Text_198C40:: @ 8198C40
 	.string "LOIS: Don’t you have two POKéMON?\n"
 	.string "We’ll have to battle another time!$"
-

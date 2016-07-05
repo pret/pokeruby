@@ -37,4 +37,3 @@ PetalburgCity_PokemonCenter_1F_Text_17BF73:: @ 817BF73
 	.string "It’s strong against the FIRE type.\p"
 	.string "But, it’s weak against GRASS-type\n"
 	.string "and ELECTRIC-type POKéMON.$"
-

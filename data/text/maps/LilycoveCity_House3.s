@@ -66,4 +66,3 @@ LilycoveCity_House3_Text_18BE8E:: @ 818BE8E
 	.string "I want to brag about how tough my\n"
 	.string "POKéMON is, so we’re going to enter a\l"
 	.string "CONTEST together.$"
-

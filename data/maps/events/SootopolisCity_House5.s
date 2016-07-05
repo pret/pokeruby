@@ -8,4 +8,3 @@ SootopolisCity_House5_MapWarps:: @ 838B124
 
 SootopolisCity_House5_MapEvents:: @ 838B134
 	map_events SootopolisCity_House5_MapObjects, SootopolisCity_House5_MapWarps, 0x0, 0x0
-

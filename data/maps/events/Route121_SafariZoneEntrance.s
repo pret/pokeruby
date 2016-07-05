@@ -17,4 +17,3 @@ Route121_SafariZoneEntrance_MapBGEvents:: @ 838BAAC
 
 Route121_SafariZoneEntrance_MapEvents:: @ 838BAB8
 	map_events Route121_SafariZoneEntrance_MapObjects, Route121_SafariZoneEntrance_MapWarps, Route121_SafariZoneEntrance_MapCoordEvents, Route121_SafariZoneEntrance_MapBGEvents
-

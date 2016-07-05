@@ -20,4 +20,3 @@ FortreeCity_PokemonCenter_1F_Text_186138:: @ 8186138
 	.string "rematch with you.\p"
 	.string "Isn’t it great?\n"
 	.string "You have to hand it to DEVON!$"
-

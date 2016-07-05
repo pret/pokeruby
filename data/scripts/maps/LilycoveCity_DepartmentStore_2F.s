@@ -65,4 +65,3 @@ LilycoveCity_DepartmentStore_2F_Items2:: @ 8159F78
 	.2byte ITEM_NONE
 	release
 	end
-

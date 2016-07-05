@@ -16,4 +16,3 @@ FallarborTown_ContestHall_EventScript_153AE1:: @ 8153AE1
 FallarborTown_ContestHall_EventScript_153AEA:: @ 8153AEA
 	msgbox FallarborTown_ContestHall_Text_1774B1, 3
 	end
-

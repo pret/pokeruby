@@ -128,4 +128,3 @@ MossdeepCity_StevensHouse_EventScript_15AB20:: @ 815AB20
 	giveitem ITEM_HM08, 1, 1
 	setflag 123
 	end
-

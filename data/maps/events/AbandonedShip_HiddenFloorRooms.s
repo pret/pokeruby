@@ -29,4 +29,3 @@ AbandonedShip_HiddenFloorRooms_MapBGEvents:: @ 838E5E8
 
 AbandonedShip_HiddenFloorRooms_MapEvents:: @ 838E660
 	map_events AbandonedShip_HiddenFloorRooms_MapObjects, AbandonedShip_HiddenFloorRooms_MapWarps, 0x0, AbandonedShip_HiddenFloorRooms_MapBGEvents
-

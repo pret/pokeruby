@@ -7,4 +7,3 @@ VerdanturfTown_PokemonCenter_1F_Text_178389:: @ 8178389
 	.string "Let me hazard a guess why you’re in\n"
 	.string "VERDANTURF. The reason: CONTESTS.\p"
 	.string "All CONTEST challenges originate here.$"
-

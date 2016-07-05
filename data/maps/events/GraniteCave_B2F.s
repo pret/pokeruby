@@ -22,4 +22,3 @@ GraniteCave_B2F_MapBGEvents:: @ 838C0EC
 
 GraniteCave_B2F_MapEvents:: @ 838C104
 	map_events GraniteCave_B2F_MapObjects, GraniteCave_B2F_MapWarps, 0x0, GraniteCave_B2F_MapBGEvents
-

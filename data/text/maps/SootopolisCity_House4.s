@@ -15,4 +15,3 @@ SootopolisCity_House4_Text_18FD41:: @ 818FD41
 
 SootopolisCity_House4_Text_18FDD8:: @ 818FDD8
 	.string "AZUMARILL: Marurii.$"
-

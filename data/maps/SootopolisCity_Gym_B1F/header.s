@@ -12,4 +12,3 @@ SootopolisCity_Gym_B1F:: @ 8306948
 	.2byte 0
 	.byte 0
 	.byte 1
-

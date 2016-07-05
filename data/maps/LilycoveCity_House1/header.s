@@ -12,4 +12,3 @@ LilycoveCity_House1:: @ 830668C
 	.2byte 0
 	.byte 0
 	.byte 0
-

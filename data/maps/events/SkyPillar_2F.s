@@ -4,4 +4,3 @@ SkyPillar_2F_MapWarps:: @ 838ED64
 
 SkyPillar_2F_MapEvents:: @ 838ED74
 	map_events 0x0, SkyPillar_2F_MapWarps, 0x0, 0x0
-

@@ -7,4 +7,3 @@ LilycoveCity_DepartmentStoreElevator_MapWarps:: @ 838A63C
 
 LilycoveCity_DepartmentStoreElevator_MapEvents:: @ 838A64C
 	map_events LilycoveCity_DepartmentStoreElevator_MapObjects, LilycoveCity_DepartmentStoreElevator_MapWarps, 0x0, 0x0
-

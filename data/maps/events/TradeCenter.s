@@ -11,4 +11,3 @@ TradeCenter_MapCoordEvents:: @ 8391368
 
 TradeCenter_MapEvents:: @ 8391388
 	map_events TradeCenter_MapObjects, TradeCenter_MapWarps, TradeCenter_MapCoordEvents, 0x0
-

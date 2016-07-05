@@ -37,4 +37,3 @@ Route101_Text_16D2CB:: @ 816D2CB
 Route101_Text_16D349:: @ 816D349
 	.string "ROUTE 101\n"
 	.string "{0x79} OLDALE TOWN$"
-

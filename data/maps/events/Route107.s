@@ -8,4 +8,3 @@ Route107_MapObjects:: @ 83819D0
 
 Route107_MapEvents:: @ 8381A60
 	map_events Route107_MapObjects, 0x0, 0x0, 0x0
-

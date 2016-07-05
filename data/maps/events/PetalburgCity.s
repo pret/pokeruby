@@ -35,4 +35,3 @@ PetalburgCity_MapBGEvents:: @ 837F738
 
 PetalburgCity_MapEvents:: @ 837F798
 	map_events PetalburgCity_MapObjects, PetalburgCity_MapWarps, PetalburgCity_MapCoordEvents, PetalburgCity_MapBGEvents
-

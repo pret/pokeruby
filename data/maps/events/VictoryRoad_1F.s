@@ -24,4 +24,3 @@ VictoryRoad_1F_MapBGEvents:: @ 838D9E4
 
 VictoryRoad_1F_MapEvents:: @ 838D9F0
 	map_events VictoryRoad_1F_MapObjects, VictoryRoad_1F_MapWarps, VictoryRoad_1F_MapCoordEvents, VictoryRoad_1F_MapBGEvents
-

@@ -9,4 +9,3 @@ Route116_TunnelersRestHouse_MapWarps:: @ 838B9D4
 
 Route116_TunnelersRestHouse_MapEvents:: @ 838B9E4
 	map_events Route116_TunnelersRestHouse_MapObjects, Route116_TunnelersRestHouse_MapWarps, 0x0, 0x0
-

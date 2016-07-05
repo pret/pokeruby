@@ -7,4 +7,3 @@ SootopolisCity_House6_MapWarps:: @ 838B160
 
 SootopolisCity_House6_MapEvents:: @ 838B170
 	map_events SootopolisCity_House6_MapObjects, SootopolisCity_House6_MapWarps, 0x0, 0x0
-

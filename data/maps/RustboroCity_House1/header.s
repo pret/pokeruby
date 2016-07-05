@@ -12,4 +12,3 @@ RustboroCity_House1:: @ 8306344
 	.2byte 0
 	.byte 0
 	.byte 0
-

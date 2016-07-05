@@ -273,4 +273,3 @@ Route116_EventScript_150D23:: @ 8150D23
 	trainerbattle 5, 280, 0, Route116_Text_1BD405, Route116_Text_1BD44A
 	msgbox Route116_Text_1BD466, 6
 	end
-

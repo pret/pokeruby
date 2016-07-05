@@ -25,4 +25,3 @@ MtPyre_Exterior_EventScript_15D4AC:: @ 815D4AC
 	setweather 2
 	doweather
 	end
-

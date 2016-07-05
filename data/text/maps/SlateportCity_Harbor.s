@@ -146,4 +146,3 @@ SlateportCity_Harbor_Text_18046B:: @ 818046B
 SlateportCity_Harbor_Text_180491:: @ 8180491
 	.string "CAPT. STERN: Thanks, {PLAYER}{KUN}!\n"
 	.string "This will help our research a lot!$"
-

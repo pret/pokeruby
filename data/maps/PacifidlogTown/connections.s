@@ -5,4 +5,3 @@ PacifidlogTown_MapConnectionsList:: @ 83086C4
 PacifidlogTown_MapConnections:: @ 83086DC
 	.4byte 0x2
 	.4byte PacifidlogTown_MapConnectionsList
-

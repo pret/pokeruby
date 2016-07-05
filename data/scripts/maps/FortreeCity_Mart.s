@@ -38,4 +38,3 @@ FortreeCity_Mart_EventScript_1580A1:: @ 81580A1
 FortreeCity_Mart_EventScript_1580AA:: @ 81580AA
 	msgbox FortreeCity_Mart_Text_1862CA, 2
 	end
-

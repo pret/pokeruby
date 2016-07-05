@@ -11,4 +11,3 @@ Route131_MapWarps:: @ 8385328
 
 Route131_MapEvents:: @ 8385330
 	map_events Route131_MapObjects, Route131_MapWarps, 0x0, 0x0
-

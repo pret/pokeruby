@@ -150,4 +150,3 @@ Route123_BerryMastersHouse_EventScript_163C1D:: @ 8163C1D
 	msgbox Route123_BerryMastersHouse_Text_1C5E59, 4
 	release
 	end
-

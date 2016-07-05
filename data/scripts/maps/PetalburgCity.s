@@ -426,4 +426,3 @@ PetalburgCity_Movement_14BA22:: @ 814BA22
 PetalburgCity_EventScript_14BA2D:: @ 814BA2D
 	msgbox PetalburgCity_Text_16438A, 2
 	end
-

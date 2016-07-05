@@ -37,4 +37,3 @@ LavaridgeTown_Gym_1F_MapBGEvents:: @ 83863B4
 
 LavaridgeTown_Gym_1F_MapEvents:: @ 83863CC
 	map_events LavaridgeTown_Gym_1F_MapObjects, LavaridgeTown_Gym_1F_MapWarps, 0x0, LavaridgeTown_Gym_1F_MapBGEvents
-

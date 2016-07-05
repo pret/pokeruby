@@ -13,4 +13,3 @@ Route119_House_MapWarps:: @ 8392FE8
 
 Route119_House_MapEvents:: @ 8392FF8
 	map_events Route119_House_MapObjects, Route119_House_MapWarps, 0x0, 0x0
-

@@ -52,4 +52,3 @@ Route119_WeatherInstitute_1F_Text_19EE25:: @ 819EE25
 Route119_WeatherInstitute_1F_Text_19EE8B:: @ 819EE8B
 	.string "There’s a bed...\n"
 	.string "Let’s take a rest.$"
-

@@ -120,4 +120,3 @@ Route117_EventScript_150F0D:: @ 8150F0D
 	trainerbattle 7, 287, 0, Route117_Text_1BDEE3, Route117_Text_1BDF26, Route117_Text_1BDF90
 	msgbox Route117_Text_1BDF37, 6
 	end
-

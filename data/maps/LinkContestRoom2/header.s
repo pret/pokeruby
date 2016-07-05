@@ -12,4 +12,3 @@ LinkContestRoom2:: @ 8307AAC
 	.2byte 0
 	.byte 0
 	.byte 0
-

@@ -25,4 +25,3 @@ LilycoveCity_DepartmentStore_1F_Text_18C0D9:: @ 818C0D9
 	.string "4F: TM CORNER\p"
 	.string "5F: POKé DOLL FLOOR\p"
 	.string "ROOFTOP: ROOFTOP PLAZA$"
-

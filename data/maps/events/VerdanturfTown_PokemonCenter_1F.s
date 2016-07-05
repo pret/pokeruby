@@ -10,4 +10,3 @@ VerdanturfTown_PokemonCenter_1F_MapWarps:: @ 8386C3C
 
 VerdanturfTown_PokemonCenter_1F_MapEvents:: @ 8386C54
 	map_events VerdanturfTown_PokemonCenter_1F_MapObjects, VerdanturfTown_PokemonCenter_1F_MapWarps, 0x0, 0x0
-

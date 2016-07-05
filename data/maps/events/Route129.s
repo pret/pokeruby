@@ -6,4 +6,3 @@ Route129_MapObjects:: @ 83851C8
 
 Route129_MapEvents:: @ 8385228
 	map_events Route129_MapObjects, 0x0, 0x0, 0x0
-

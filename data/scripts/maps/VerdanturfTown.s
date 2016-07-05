@@ -63,4 +63,3 @@ VerdanturfTown_EventScript_14E8DC:: @ 814E8DC
 VerdanturfTown_EventScript_14E8E5:: @ 814E8E5
 	msgbox VerdanturfTown_Text_16CF6D, 3
 	end
-

@@ -15,4 +15,3 @@ MeteorFalls_1F_2R_MapBGEvents:: @ 838BC88
 
 MeteorFalls_1F_2R_MapEvents:: @ 838BCA0
 	map_events MeteorFalls_1F_2R_MapObjects, MeteorFalls_1F_2R_MapWarps, 0x0, MeteorFalls_1F_2R_MapBGEvents
-

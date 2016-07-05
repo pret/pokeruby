@@ -443,4 +443,3 @@ Route111_EventScript_1504EB:: @ 81504EB
 	trainerbattle 5, 94, 0, Route111_Text_1BB529, Route111_Text_1BB5A2
 	msgbox Route111_Text_1BB5C1, 6
 	end
-

@@ -23,4 +23,3 @@ Route117_Text_170D1E:: @ 8170D1E
 Route117_Text_170D38:: @ 8170D38
 	.string "POKéMON DAY CARE\n"
 	.string "“Let us raise your POKéMON.”$"
-

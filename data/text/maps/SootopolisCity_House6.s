@@ -17,4 +17,3 @@ SootopolisCity_House6_Text_18FF6D:: @ 818FF6D
 
 SootopolisCity_House6_Text_18FF95:: @ 818FF95
 	.string "I love plush DOLLS!$"
-

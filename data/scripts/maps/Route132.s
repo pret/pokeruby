@@ -20,4 +20,3 @@ Route132_EventScript_15252A:: @ 815252A
 	trainerbattle 0, 181, 0, Route132_Text_1C2CD9, Route132_Text_1C2D1F
 	msgbox Route132_Text_1C2D3E, 6
 	end
-

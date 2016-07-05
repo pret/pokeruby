@@ -7,4 +7,3 @@ NewMauville_Entrance_MapCoordEvents:: @ 838DEE4
 
 NewMauville_Entrance_MapEvents:: @ 838DEF4
 	map_events 0x0, NewMauville_Entrance_MapWarps, NewMauville_Entrance_MapCoordEvents, 0x0
-

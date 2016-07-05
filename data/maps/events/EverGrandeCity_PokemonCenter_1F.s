@@ -10,4 +10,3 @@ EverGrandeCity_PokemonCenter_1F_MapWarps:: @ 838B5A4
 
 EverGrandeCity_PokemonCenter_1F_MapEvents:: @ 838B5BC
 	map_events EverGrandeCity_PokemonCenter_1F_MapObjects, EverGrandeCity_PokemonCenter_1F_MapWarps, 0x0, 0x0
-

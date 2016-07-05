@@ -85,4 +85,3 @@ MtChimney_CableCarStation_Movement_15C1B4:: @ 815C1B4
 	step_down
 	step_14
 	step_end
-

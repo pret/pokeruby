@@ -10,4 +10,3 @@ Route111_WinstrateFamilysHouse_MapWarps:: @ 838B774
 
 Route111_WinstrateFamilysHouse_MapEvents:: @ 838B784
 	map_events Route111_WinstrateFamilysHouse_MapObjects, Route111_WinstrateFamilysHouse_MapWarps, 0x0, 0x0
-

@@ -12,4 +12,3 @@ EverGrandeCity_PokemonLeague:: @ 8306BB0
 	.2byte 0
 	.byte 0
 	.byte 0
-

@@ -81,4 +81,3 @@ MossdeepCity_StevensHouse_Text_18DF1A:: @ 818DF1A
 MossdeepCity_StevensHouse_Text_18E0A3:: @ 818E0A3
 	.string "It’s a collection of rare rocks and\n"
 	.string "stones assembled by STEVEN.$"
-

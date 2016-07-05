@@ -17,4 +17,3 @@ MossdeepCity_House4_Text_18E1A7:: @ 818E1A7
 
 MossdeepCity_House4_Text_18E1E1:: @ 818E1E1
 	.string "DELCATTY: Miyaan?$"
-

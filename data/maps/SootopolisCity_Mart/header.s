@@ -12,4 +12,3 @@ SootopolisCity_Mart:: @ 830699C
 	.2byte 0
 	.byte 0
 	.byte 0
-

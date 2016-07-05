@@ -79,4 +79,3 @@ FallarborTown_PokemonCenter_1F_Movement_153B81:: @ 8153B81
 	step_down
 	step_13
 	step_end
-

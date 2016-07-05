@@ -60,4 +60,3 @@ GraniteCave_StevensRoom_Movement_15CC93:: @ 815CC93
 	step_up
 	step_13
 	step_end
-

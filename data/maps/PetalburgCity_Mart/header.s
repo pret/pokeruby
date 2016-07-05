@@ -12,4 +12,3 @@ PetalburgCity_Mart:: @ 8305FC4
 	.2byte 0
 	.byte 0
 	.byte 0
-

@@ -38,4 +38,3 @@ Route118_MapBGEvents:: @ 8383894
 
 Route118_MapEvents:: @ 8383900
 	map_events Route118_MapObjects, 0x0, Route118_MapCoordEvents, Route118_MapBGEvents
-

@@ -14,4 +14,3 @@ Route114_FossilManiacsHouse_MapBGEvents:: @ 838B8AC
 
 Route114_FossilManiacsHouse_MapEvents:: @ 838B8DC
 	map_events Route114_FossilManiacsHouse_MapObjects, Route114_FossilManiacsHouse_MapWarps, 0x0, Route114_FossilManiacsHouse_MapBGEvents
-

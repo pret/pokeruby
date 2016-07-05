@@ -19,4 +19,3 @@ PacifidlogTown_House5_EventScript_1543B0:: @ 81543B0
 PacifidlogTown_House5_EventScript_1543BA:: @ 81543BA
 	msgbox PacifidlogTown_House5_Text_179765, 2
 	end
-

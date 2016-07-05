@@ -12,4 +12,3 @@ MossdeepCity_SpaceCenter_1F_MapWarps:: @ 838ABDC
 
 MossdeepCity_SpaceCenter_1F_MapEvents:: @ 838ABF4
 	map_events MossdeepCity_SpaceCenter_1F_MapObjects, MossdeepCity_SpaceCenter_1F_MapWarps, 0x0, 0x0
-

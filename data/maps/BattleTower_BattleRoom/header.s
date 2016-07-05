@@ -12,4 +12,3 @@ BattleTower_BattleRoom:: @ 8307C88
 	.2byte 0
 	.byte 0
 	.byte 8
-

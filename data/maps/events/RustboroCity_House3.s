@@ -9,4 +9,3 @@ RustboroCity_House3_MapWarps:: @ 8388F88
 
 RustboroCity_House3_MapEvents:: @ 8388F98
 	map_events RustboroCity_House3_MapObjects, RustboroCity_House3_MapWarps, 0x0, 0x0
-

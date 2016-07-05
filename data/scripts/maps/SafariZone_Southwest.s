@@ -8,4 +8,3 @@ SafariZone_Southwest_EventScript_160024:: @ 8160024
 SafariZone_Southwest_EventScript_16002D:: @ 816002D
 	msgbox SafariZone_Southwest_Text_1C3EA3, 3
 	end
-

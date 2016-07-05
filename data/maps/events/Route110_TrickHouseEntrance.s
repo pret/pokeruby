@@ -17,4 +17,3 @@ Route110_TrickHouseEntrance_MapBGEvents:: @ 83921B0
 
 Route110_TrickHouseEntrance_MapEvents:: @ 83921BC
 	map_events Route110_TrickHouseEntrance_MapObjects, Route110_TrickHouseEntrance_MapWarps, Route110_TrickHouseEntrance_MapCoordEvents, Route110_TrickHouseEntrance_MapBGEvents
-

@@ -6,4 +6,3 @@ Route121_MapConnectionsList:: @ 8308AE4
 Route121_MapConnections:: @ 8308B08
 	.4byte 0x3
 	.4byte Route121_MapConnectionsList
-

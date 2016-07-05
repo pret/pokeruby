@@ -82,4 +82,3 @@ LilycoveCity_DepartmentStoreElevator_EventScript_15A4B8:: @ 815A4B8
 LilycoveCity_DepartmentStoreElevator_EventScript_15A4CF:: @ 815A4CF
 	special 216
 	return
-

@@ -12,4 +12,3 @@ SSTidalLowerDeck:: @ 8307B70
 	.2byte 0
 	.byte 0
 	.byte 0
-

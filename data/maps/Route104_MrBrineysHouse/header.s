@@ -12,4 +12,3 @@ Route104_MrBrineysHouse:: @ 8306C20
 	.2byte 0
 	.byte 0
 	.byte 0
-

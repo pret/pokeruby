@@ -4,4 +4,3 @@ SkyPillar_Outside_MapWarps:: @ 838ED14
 
 SkyPillar_Outside_MapEvents:: @ 838ED24
 	map_events 0x0, SkyPillar_Outside_MapWarps, 0x0, 0x0
-

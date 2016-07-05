@@ -12,4 +12,3 @@ AbandonedShip_HiddenFloorCorridors:: @ 830748C
 	.2byte 0
 	.byte 1
 	.byte 0
-

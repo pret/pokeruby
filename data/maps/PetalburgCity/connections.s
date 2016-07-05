@@ -5,4 +5,3 @@ PetalburgCity_MapConnectionsList:: @ 83086E4
 PetalburgCity_MapConnections:: @ 83086FC
 	.4byte 0x2
 	.4byte PetalburgCity_MapConnectionsList
-

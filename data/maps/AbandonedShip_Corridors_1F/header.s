@@ -12,4 +12,3 @@ AbandonedShip_Corridors_1F:: @ 8307374
 	.2byte 0
 	.byte 1
 	.byte 0
-

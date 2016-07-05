@@ -8,4 +8,3 @@ VerdanturfTown_House_MapWarps:: @ 8386E0C
 
 VerdanturfTown_House_MapEvents:: @ 8386E1C
 	map_events VerdanturfTown_House_MapObjects, VerdanturfTown_House_MapWarps, 0x0, 0x0
-

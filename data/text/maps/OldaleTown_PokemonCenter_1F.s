@@ -20,4 +20,3 @@ OldaleTown_PokemonCenter_1F_Text_174A2E:: @ 8174A2E
 	.string "The POKéMON CABLE CLUB on the second\n"
 	.string "floor was built recently.\p"
 	.string "I traded POKéMON right away.$"
-

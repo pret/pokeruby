@@ -20,4 +20,3 @@ SecretBase_YellowCave1_MapWarps:: @ 838F478
 
 SecretBase_YellowCave1_MapEvents:: @ 838F480
 	map_events SecretBase_YellowCave1_MapObjects, SecretBase_YellowCave1_MapWarps, 0x0, 0x0
-

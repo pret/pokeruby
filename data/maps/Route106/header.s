@@ -12,4 +12,3 @@ Route106:: @ 8305694
 	.2byte 0
 	.byte 1
 	.byte 0
-

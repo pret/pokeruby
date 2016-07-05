@@ -5,4 +5,3 @@ Route131_MapConnectionsList:: @ 8308C90
 Route131_MapConnections:: @ 8308CA8
 	.4byte 0x2
 	.4byte Route131_MapConnectionsList
-

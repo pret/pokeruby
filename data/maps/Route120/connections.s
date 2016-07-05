@@ -5,4 +5,3 @@ Route120_MapConnectionsList:: @ 8308AC4
 Route120_MapConnections:: @ 8308ADC
 	.4byte 0x2
 	.4byte Route120_MapConnectionsList
-

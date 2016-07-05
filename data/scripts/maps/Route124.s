@@ -69,4 +69,3 @@ Route124_EventScript_151F03:: @ 8151F03
 	trainerbattle 7, 687, 0, Route124_Text_1C0EA2, Route124_Text_1C0EE5, Route124_Text_1C0F90
 	msgbox Route124_Text_1C0F19, 6
 	end
-

@@ -13,4 +13,3 @@ DesertRuins_MapBGEvents:: @ 838BEEC
 
 DesertRuins_MapEvents:: @ 838BF10
 	map_events DesertRuins_MapObjects, DesertRuins_MapWarps, 0x0, DesertRuins_MapBGEvents
-

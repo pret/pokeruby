@@ -6,4 +6,3 @@ Route111_MapConnectionsList:: @ 8308974
 Route111_MapConnections:: @ 8308998
 	.4byte 0x3
 	.4byte Route111_MapConnectionsList
-

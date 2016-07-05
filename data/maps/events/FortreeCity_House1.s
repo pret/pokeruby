@@ -9,4 +9,3 @@ FortreeCity_House1_MapWarps:: @ 8388FF4
 
 FortreeCity_House1_MapEvents:: @ 8389004
 	map_events FortreeCity_House1_MapObjects, FortreeCity_House1_MapWarps, 0x0, 0x0
-

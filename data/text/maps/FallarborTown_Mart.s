@@ -14,4 +14,3 @@ FallarborTown_Mart_Text_1770E2:: @ 81770E2
 	.string "This NUGGET I found here...\n"
 	.string "I suppose I’ll have to sell it, seeing\l"
 	.string "as how it has no other use.$"
-

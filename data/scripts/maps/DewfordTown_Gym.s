@@ -198,4 +198,3 @@ DewfordTown_Gym_EventScript_153288:: @ 8153288
 	msgbox DewfordTown_Gym_Text_175477, 4
 	releaseall
 	end
-

@@ -8,4 +8,3 @@ Route104_MrBrineysHouse_MapWarps:: @ 838B684
 
 Route104_MrBrineysHouse_MapEvents:: @ 838B694
 	map_events Route104_MrBrineysHouse_MapObjects, Route104_MrBrineysHouse_MapWarps, 0x0, 0x0
-

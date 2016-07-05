@@ -27,4 +27,3 @@ Route116_TunnelersRestHouse_EventScript_15C30F:: @ 815C30F
 	msgbox Route116_TunnelersRestHouse_Text_1931C1, 4
 	release
 	end
-

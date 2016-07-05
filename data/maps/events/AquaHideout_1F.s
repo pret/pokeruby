@@ -10,4 +10,3 @@ AquaHideout_1F_MapWarps:: @ 838CD54
 
 AquaHideout_1F_MapEvents:: @ 838CD6C
 	map_events AquaHideout_1F_MapObjects, AquaHideout_1F_MapWarps, 0x0, 0x0
-

@@ -15,4 +15,3 @@ Route102_MapBGEvents:: @ 83812D4
 
 Route102_MapEvents:: @ 83812EC
 	map_events Route102_MapObjects, 0x0, 0x0, Route102_MapBGEvents
-

@@ -12,4 +12,3 @@ Route124_DivingTreasureHuntersHouse:: @ 8307F44
 	.2byte 0
 	.byte 0
 	.byte 0
-

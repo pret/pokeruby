@@ -8,4 +8,3 @@ MeteorFalls_B1F_1R_MapWarps:: @ 838BCB4
 
 MeteorFalls_B1F_1R_MapEvents:: @ 838BCE4
 	map_events 0x0, MeteorFalls_B1F_1R_MapWarps, 0x0, 0x0
-

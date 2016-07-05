@@ -9,4 +9,3 @@ Underwater1_MapBGEvents:: @ 8385518
 
 Underwater1_MapEvents:: @ 838556C
 	map_events 0x0, 0x0, 0x0, Underwater1_MapBGEvents
-

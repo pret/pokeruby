@@ -17,4 +17,3 @@ LilycoveCity_DepartmentStore_1F_MapBGEvents:: @ 838A2C8
 
 LilycoveCity_DepartmentStore_1F_MapEvents:: @ 838A2D4
 	map_events LilycoveCity_DepartmentStore_1F_MapObjects, LilycoveCity_DepartmentStore_1F_MapWarps, 0x0, LilycoveCity_DepartmentStore_1F_MapBGEvents
-

@@ -52,4 +52,3 @@ LilycoveCity_DepartmentStore_4F_Items2:: @ 815A054
 	.2byte ITEM_NONE
 	release
 	end
-

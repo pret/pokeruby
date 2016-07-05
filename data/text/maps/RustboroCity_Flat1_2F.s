@@ -6,4 +6,3 @@ RustboroCity_Flat1_2F_Text_184E0D:: @ 8184E0D
 	.string "make for meals every day.\p"
 	.string "It really isn’t easy coming up with\n"
 	.string "meals every day.$"
-

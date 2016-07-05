@@ -270,4 +270,3 @@ SlateportCity_OceanicMuseum_2F_EventScript_155F46:: @ 8155F46
 	waitmove 0
 	release
 	end
-

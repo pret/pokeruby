@@ -62,4 +62,3 @@ EverGrandeCity_DrakesRoom_EventScript_15B795:: @ 815B795
 	msgbox EverGrandeCity_DrakesRoom_Text_190E5D, 4
 	release
 	end
-

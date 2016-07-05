@@ -12,4 +12,3 @@ LilycoveCity_Harbor:: @ 8306638
 	.2byte 0
 	.byte 0
 	.byte 0
-

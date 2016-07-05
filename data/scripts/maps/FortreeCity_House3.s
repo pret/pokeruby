@@ -8,4 +8,3 @@ FortreeCity_House3_EventScript_15816C:: @ 815816C
 FortreeCity_House3_EventScript_158175:: @ 8158175
 	msgbox FortreeCity_House3_Text_186745, 2
 	end
-

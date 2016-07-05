@@ -10,4 +10,3 @@ SSTidalLowerDeck_MapBGEvents:: @ 839187C
 
 SSTidalLowerDeck_MapEvents:: @ 8391888
 	map_events SSTidalLowerDeck_MapObjects, SSTidalLowerDeck_MapWarps, 0x0, SSTidalLowerDeck_MapBGEvents
-

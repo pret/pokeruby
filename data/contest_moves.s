@@ -2485,4 +2485,3 @@ gContestMoves:
 	.byte 0 @ combo starter ID
 	.byte COMBO_STARTER_CALM_MIND, 0, 0, 0 @ combo moves
 	.byte 0 @ padding
-

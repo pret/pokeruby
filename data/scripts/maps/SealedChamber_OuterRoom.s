@@ -129,4 +129,3 @@ SealedChamber_OuterRoom_EventScript_15F1D9:: @ 815F1D9
 	hidebox 0, 0, 29, 19
 	releaseall
 	end
-

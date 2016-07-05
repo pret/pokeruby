@@ -12,4 +12,3 @@ LilycoveCity_CoveLilyMotel_2F:: @ 830653C
 	.2byte 0
 	.byte 0
 	.byte 0
-

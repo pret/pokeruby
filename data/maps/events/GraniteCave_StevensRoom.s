@@ -6,4 +6,3 @@ GraniteCave_StevensRoom_MapWarps:: @ 838C130
 
 GraniteCave_StevensRoom_MapEvents:: @ 838C138
 	map_events GraniteCave_StevensRoom_MapObjects, GraniteCave_StevensRoom_MapWarps, 0x0, 0x0
-

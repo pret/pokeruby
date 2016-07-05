@@ -13,4 +13,3 @@ MauvilleCity_PokemonCenter_2F_MapWarps:: @ 8388764
 
 MauvilleCity_PokemonCenter_2F_MapEvents:: @ 838878C
 	map_events MauvilleCity_PokemonCenter_2F_MapObjects, MauvilleCity_PokemonCenter_2F_MapWarps, 0x0, 0x0
-

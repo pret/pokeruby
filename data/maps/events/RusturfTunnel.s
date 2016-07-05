@@ -24,4 +24,3 @@ RusturfTunnel_MapCoordEvents:: @ 838BE34
 
 RusturfTunnel_MapEvents:: @ 838BE84
 	map_events RusturfTunnel_MapObjects, RusturfTunnel_MapWarps, RusturfTunnel_MapCoordEvents, 0x0
-

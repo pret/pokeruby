@@ -26,4 +26,3 @@ AbandonedShip_Rooms2_1F_EventScript_15EAD9:: @ 815EAD9
 	trainerbattle 7, 642, 0, AbandonedShip_Rooms2_1F_Text_198B3B, AbandonedShip_Rooms2_1F_Text_198BCF, AbandonedShip_Rooms2_1F_Text_198C40
 	msgbox AbandonedShip_Rooms2_1F_Text_198BEA, 6
 	end
-

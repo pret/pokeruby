@@ -7,4 +7,3 @@ SlateportCity_House1_MapWarps:: @ 8387A30
 
 SlateportCity_House1_MapEvents:: @ 8387A40
 	map_events SlateportCity_House1_MapObjects, SlateportCity_House1_MapWarps, 0x0, 0x0
-

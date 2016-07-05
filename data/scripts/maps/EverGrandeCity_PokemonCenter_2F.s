@@ -15,4 +15,3 @@ EverGrandeCity_PokemonCenter_2F_EventScript_15BCA6:: @ 815BCA6
 EverGrandeCity_PokemonCenter_2F_EventScript_15BCAC:: @ 815BCAC
 	call EverGrandeCity_PokemonCenter_2F_EventScript_1A41FB
 	end
-

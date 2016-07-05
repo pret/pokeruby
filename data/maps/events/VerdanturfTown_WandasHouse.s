@@ -11,4 +11,3 @@ VerdanturfTown_WandasHouse_MapWarps:: @ 8386D64
 
 VerdanturfTown_WandasHouse_MapEvents:: @ 8386D74
 	map_events VerdanturfTown_WandasHouse_MapObjects, VerdanturfTown_WandasHouse_MapWarps, 0x0, 0x0
-

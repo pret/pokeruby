@@ -111,4 +111,3 @@ SouthernIsland_Interior_Movement_160C22:: @ 8160C22
 	step_down
 	step_down
 	step_end
-

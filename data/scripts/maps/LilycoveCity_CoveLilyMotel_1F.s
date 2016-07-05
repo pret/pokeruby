@@ -74,4 +74,3 @@ LilycoveCity_CoveLilyMotel_1F_Movement_15839C:: @ 815839C
 	step_down
 	step_01
 	step_end
-

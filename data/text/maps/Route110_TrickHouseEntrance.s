@@ -109,4 +109,3 @@ Route110_TrickHouseEntrance_Text_19C17E:: @ 819C17E
 Route110_TrickHouseEntrance_Text_19C18D:: @ 819C18D
 	.string "YOUR PC STATUS: FULL AGAIN.\n"
 	.string "MEAN, YOU ARE.$"
-

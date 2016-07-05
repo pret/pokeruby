@@ -45,4 +45,3 @@ SlateportCity_House1_Text_17D6CC:: @ 817D6CC
 SlateportCity_House1_Text_17D752:: @ 817D752
 	.string "Now, now.\n"
 	.string "That is merely an EGG!$"
-

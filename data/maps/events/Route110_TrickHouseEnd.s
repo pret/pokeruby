@@ -13,4 +13,3 @@ Route110_TrickHouseEnd_MapBGEvents:: @ 8392208
 
 Route110_TrickHouseEnd_MapEvents:: @ 8392214
 	map_events Route110_TrickHouseEnd_MapObjects, Route110_TrickHouseEnd_MapWarps, Route110_TrickHouseEnd_MapCoordEvents, Route110_TrickHouseEnd_MapBGEvents
-

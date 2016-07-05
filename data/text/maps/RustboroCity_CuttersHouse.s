@@ -25,4 +25,3 @@ RustboroCity_CuttersHouse_Text_1852B3:: @ 81852B3
 	.string "RUSTBORO, my dad helped out.\p"
 	.string "He made his POKéMON use CUT to clear\n"
 	.string "the land of trees.$"
-

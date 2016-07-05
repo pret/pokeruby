@@ -21,4 +21,3 @@ Route114_Text_17022E:: @ 817022E
 
 Route114_Text_170263:: @ 8170263
 	.string "LANETTE’S HOUSE$"
-

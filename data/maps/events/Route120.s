@@ -84,4 +84,3 @@ Route120_MapBGEvents:: @ 8384448
 
 Route120_MapEvents:: @ 83844F0
 	map_events Route120_MapObjects, Route120_MapWarps, Route120_MapCoordEvents, Route120_MapBGEvents
-

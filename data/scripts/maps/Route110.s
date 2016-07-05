@@ -537,4 +537,3 @@ Route110_Movement_14FF89:: @ 814FF89
 	step_16
 	step_16
 	step_end
-

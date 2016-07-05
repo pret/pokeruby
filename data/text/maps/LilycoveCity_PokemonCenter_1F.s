@@ -24,4 +24,3 @@ UnknownString_818A168: @ 818A168
 	.string "but it is convenient.\p"
 	.string "Just one of these can cure any\n"
 	.string "POKéMON status problem.$"
-

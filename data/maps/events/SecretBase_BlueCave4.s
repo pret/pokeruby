@@ -20,4 +20,3 @@ SecretBase_BlueCave4_MapWarps:: @ 8390E3C
 
 SecretBase_BlueCave4_MapEvents:: @ 8390E44
 	map_events SecretBase_BlueCave4_MapObjects, SecretBase_BlueCave4_MapWarps, 0x0, 0x0
-

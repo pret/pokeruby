@@ -20,4 +20,3 @@ SecretBase_Shrub4_MapWarps:: @ 83912C8
 
 SecretBase_Shrub4_MapEvents:: @ 83912D0
 	map_events SecretBase_Shrub4_MapObjects, SecretBase_Shrub4_MapWarps, 0x0, 0x0
-

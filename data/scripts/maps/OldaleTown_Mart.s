@@ -57,4 +57,3 @@ OldaleTown_Mart_EventScript_152FDB:: @ 8152FDB
 OldaleTown_Mart_EventScript_152FE5:: @ 8152FE5
 	msgbox OldaleTown_Mart_Text_174B10, 2
 	end
-

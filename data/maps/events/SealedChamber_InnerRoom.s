@@ -14,4 +14,3 @@ SealedChamber_InnerRoom_MapBGEvents:: @ 838E908
 
 SealedChamber_InnerRoom_MapEvents:: @ 838E974
 	map_events 0x0, SealedChamber_InnerRoom_MapWarps, 0x0, SealedChamber_InnerRoom_MapBGEvents
-

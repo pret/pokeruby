@@ -10,4 +10,3 @@ FortreeCity_DecorationShop_Text_186AD6:: @ 8186AD6
 	.string "If I don’t, when I decorate my\n"
 	.string "SECRET BASE, my DOLLS will get\l"
 	.string "dirty or poked with splinters.$"
-

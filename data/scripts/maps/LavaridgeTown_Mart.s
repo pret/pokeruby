@@ -33,4 +33,3 @@ LavaridgeTown_Mart_EventScript_1538FA:: @ 81538FA
 LavaridgeTown_Mart_EventScript_153903:: @ 8153903
 	msgbox LavaridgeTown_Mart_Text_176E1A, 2
 	end
-

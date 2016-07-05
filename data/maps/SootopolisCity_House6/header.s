@@ -12,4 +12,3 @@ SootopolisCity_House6:: @ 8306A44
 	.2byte 0
 	.byte 0
 	.byte 0
-

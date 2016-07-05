@@ -11,4 +11,3 @@ SootopolisCity_House2_Text_18FAAE:: @ 818FAAE
 SootopolisCity_House2_Text_18FB04:: @ 818FB04
 	.string "Is that so?\n"
 	.string "Perhaps you ought to visit and see...$"
-

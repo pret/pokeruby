@@ -11,4 +11,3 @@ FortreeCity_House5_Text_1869D6:: @ 81869D6
 
 FortreeCity_House5_Text_186A4F:: @ 8186A4F
 	.string "ZIGZAGOON: Bufuu!$"
-

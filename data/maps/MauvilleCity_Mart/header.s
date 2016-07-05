@@ -12,4 +12,3 @@ MauvilleCity_Mart:: @ 8306210
 	.2byte 0
 	.byte 0
 	.byte 0
-

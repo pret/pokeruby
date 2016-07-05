@@ -216,4 +216,3 @@ SlateportCity_OceanicMuseum_1F_Movement_155CD3:: @ 8155CD3
 	step_15
 	step_13
 	step_end
-

@@ -39,4 +39,3 @@ VerdanturfTown_Mart_EventScript_153EF7:: @ 8153EF7
 VerdanturfTown_Mart_EventScript_153F00:: @ 8153F00
 	msgbox VerdanturfTown_Mart_Text_1782C0, 2
 	end
-

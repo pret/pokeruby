@@ -18,4 +18,3 @@ RustboroCity_House3_EventScript_157DFF:: @ 8157DFF
 	waitpokecry
 	release
 	end
-

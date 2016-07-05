@@ -63,4 +63,3 @@ SSTidalRooms_EventScript_15FFEF:: @ 815FFEF
 	trainerbattle 0, 119, 0, SSTidalRooms_Text_199A62, SSTidalRooms_Text_199ABF
 	msgbox SSTidalRooms_Text_199ADE, 6
 	end
-

@@ -67,4 +67,3 @@ Route110_MapBGEvents:: @ 83820C0
 
 Route110_MapEvents:: @ 838218C
 	map_events Route110_MapObjects, Route110_MapWarps, Route110_MapCoordEvents, Route110_MapBGEvents
-

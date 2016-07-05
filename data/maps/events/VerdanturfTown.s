@@ -25,4 +25,3 @@ VerdanturfTown_MapBGEvents:: @ 8380F98
 
 VerdanturfTown_MapEvents:: @ 8380FF8
 	map_events VerdanturfTown_MapObjects, VerdanturfTown_MapWarps, 0x0, VerdanturfTown_MapBGEvents
-

@@ -37,4 +37,3 @@ MossdeepCity_Mart_EventScript_15A95F:: @ 815A95F
 MossdeepCity_Mart_EventScript_15A968:: @ 815A968
 	msgbox MossdeepCity_Mart_Text_18D841, 2
 	end
-

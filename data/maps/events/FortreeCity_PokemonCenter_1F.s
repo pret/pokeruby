@@ -11,4 +11,3 @@ FortreeCity_PokemonCenter_1F_MapWarps:: @ 8389144
 
 FortreeCity_PokemonCenter_1F_MapEvents:: @ 838915C
 	map_events FortreeCity_PokemonCenter_1F_MapObjects, FortreeCity_PokemonCenter_1F_MapWarps, 0x0, 0x0
-

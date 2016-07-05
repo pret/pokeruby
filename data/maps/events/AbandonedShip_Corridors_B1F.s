@@ -17,4 +17,3 @@ AbandonedShip_Corridors_B1F_MapBGEvents:: @ 838E2A8
 
 AbandonedShip_Corridors_B1F_MapEvents:: @ 838E2B4
 	map_events AbandonedShip_Corridors_B1F_MapObjects, AbandonedShip_Corridors_B1F_MapWarps, 0x0, AbandonedShip_Corridors_B1F_MapBGEvents
-

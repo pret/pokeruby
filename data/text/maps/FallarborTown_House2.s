@@ -36,4 +36,3 @@ FallarborTown_House2_Text_177CEF:: @ 8177CEF
 FallarborTown_House2_Text_177D33:: @ 8177D33
 	.string "Hunh? There isn’t a single move that\n"
 	.string "I can teach an EGG.$"
-

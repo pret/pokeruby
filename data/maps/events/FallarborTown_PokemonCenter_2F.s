@@ -12,4 +12,3 @@ FallarborTown_PokemonCenter_2F_MapWarps:: @ 8386934
 
 FallarborTown_PokemonCenter_2F_MapEvents:: @ 838695C
 	map_events FallarborTown_PokemonCenter_2F_MapObjects, FallarborTown_PokemonCenter_2F_MapWarps, 0x0, 0x0
-

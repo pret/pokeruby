@@ -23,4 +23,3 @@ MagmaHideout_B2F_MapCoordEvents:: @ 838EC9C
 
 MagmaHideout_B2F_MapEvents:: @ 838ECDC
 	map_events MagmaHideout_B2F_MapObjects, MagmaHideout_B2F_MapWarps, MagmaHideout_B2F_MapCoordEvents, 0x0
-

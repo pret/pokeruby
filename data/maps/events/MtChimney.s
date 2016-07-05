@@ -40,4 +40,3 @@ MtChimney_MapBGEvents:: @ 838C5F0
 
 MtChimney_MapEvents:: @ 838C608
 	map_events MtChimney_MapObjects, MtChimney_MapWarps, 0x0, MtChimney_MapBGEvents
-

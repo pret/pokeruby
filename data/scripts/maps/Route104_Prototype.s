@@ -110,4 +110,3 @@ Route104_Prototype_EventScript_160DA9:: @ 8160DA9
 	trainerbattle 0, 633, 0, Route104_Prototype_Text_19B066, Route104_Prototype_Text_19B0D7
 	msgbox Route104_Prototype_Text_19B0EF, 6
 	end
-

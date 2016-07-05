@@ -9,4 +9,3 @@ Underwater_SeafloorCavern_MapWarps:: @ 838D078
 
 Underwater_SeafloorCavern_MapEvents:: @ 838D080
 	map_events Underwater_SeafloorCavern_MapObjects, Underwater_SeafloorCavern_MapWarps, 0x0, 0x0
-

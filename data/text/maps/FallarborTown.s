@@ -39,4 +39,3 @@ FallarborTown_Text_16CA83:: @ 816CA83
 FallarborTown_Text_16CAB9:: @ 816CAB9
 	.string "MOVE TUTOR’S HOUSE\n"
 	.string "“New moves taught to POKéMON.”$"
-

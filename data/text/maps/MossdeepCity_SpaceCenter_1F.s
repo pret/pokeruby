@@ -31,4 +31,3 @@ MossdeepCity_SpaceCenter_1F_Text_18E427:: @ 818E427
 	.string "A giant chunk of metal bursts through\n"
 	.string "the skies and flies into space...\p"
 	.string "It boggles my mind!$"
-

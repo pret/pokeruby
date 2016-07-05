@@ -13,4 +13,3 @@ Route110_SeasideCyclingRoadNorthEntrance_MapCoordEvents:: @ 8392CE4
 
 Route110_SeasideCyclingRoadNorthEntrance_MapEvents:: @ 8392D04
 	map_events Route110_SeasideCyclingRoadNorthEntrance_MapObjects, Route110_SeasideCyclingRoadNorthEntrance_MapWarps, Route110_SeasideCyclingRoadNorthEntrance_MapCoordEvents, 0x0
-

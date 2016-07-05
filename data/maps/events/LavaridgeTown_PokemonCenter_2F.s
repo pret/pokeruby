@@ -12,4 +12,3 @@ LavaridgeTown_PokemonCenter_2F_MapWarps:: @ 8386630
 
 LavaridgeTown_PokemonCenter_2F_MapEvents:: @ 8386658
 	map_events LavaridgeTown_PokemonCenter_2F_MapObjects, LavaridgeTown_PokemonCenter_2F_MapWarps, 0x0, 0x0
-

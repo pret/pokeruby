@@ -322,4 +322,3 @@ OldaleTown_Movement_14DFF5:: @ 814DFF5
 	step_down
 	step_left
 	step_end
-

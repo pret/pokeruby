@@ -44,4 +44,3 @@ Route121_MapBGEvents:: @ 838475C
 
 Route121_MapEvents:: @ 83847C8
 	map_events Route121_MapObjects, Route121_MapWarps, Route121_MapCoordEvents, Route121_MapBGEvents
-

@@ -646,4 +646,3 @@ SlateportCity_EventScript_14C020:: @ 814C020
 SlateportCity_EventScript_14C029:: @ 814C029
 	msgbox SlateportCity_Text_1647A7, 2
 	end
-

@@ -12,4 +12,3 @@ DewfordTown_House1_Text_174C0D:: @ 8174C0D
 
 DewfordTown_House1_Text_174CC8:: @ 8174CC8
 	.string "ZIGZAGOON: Guguuh!$"
-

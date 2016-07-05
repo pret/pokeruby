@@ -3,4 +3,3 @@ Route122_MapWarps:: @ 83847DC
 
 Route122_MapEvents:: @ 83847E4
 	map_events 0x0, Route122_MapWarps, 0x0, 0x0
-

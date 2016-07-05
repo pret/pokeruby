@@ -21,4 +21,3 @@ MauvilleCity_Gym_MapBGEvents:: @ 83882EC
 
 MauvilleCity_Gym_MapEvents:: @ 8388304
 	map_events MauvilleCity_Gym_MapObjects, MauvilleCity_Gym_MapWarps, MauvilleCity_Gym_MapCoordEvents, MauvilleCity_Gym_MapBGEvents
-

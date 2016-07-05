@@ -113,4 +113,3 @@ Route104_Prototype_Text_19B3DE:: @ 819B3DE
 Route104_Prototype_Text_19B3FF:: @ 819B3FF
 	.string "May all POKéMON battles be bright,\n"
 	.string "fun, and ferocious!$"
-

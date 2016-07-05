@@ -25,4 +25,3 @@ OldaleTown_MapBGEvents:: @ 8380B38
 
 OldaleTown_MapEvents:: @ 8380B74
 	map_events OldaleTown_MapObjects, OldaleTown_MapWarps, OldaleTown_MapCoordEvents, OldaleTown_MapBGEvents
-

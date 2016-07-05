@@ -51,4 +51,3 @@ LilycoveCity_CoveLilyMotel_1F_Text_186F09:: @ 8186F09
 	.string "guess they must make games.\p"
 	.string "Uh-oh, I’d better get working on\n"
 	.string "their dinner!$"
-

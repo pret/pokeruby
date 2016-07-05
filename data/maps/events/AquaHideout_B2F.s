@@ -23,4 +23,3 @@ AquaHideout_B2F_MapCoordEvents:: @ 838CFE4
 
 AquaHideout_B2F_MapEvents:: @ 838D004
 	map_events AquaHideout_B2F_MapObjects, AquaHideout_B2F_MapWarps, AquaHideout_B2F_MapCoordEvents, 0x0
-

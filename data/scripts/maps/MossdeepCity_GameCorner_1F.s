@@ -184,4 +184,3 @@ MossdeepCity_GameCorner_1F_Movement_15AE49:: @ 815AE49
 MossdeepCity_GameCorner_1F_EventScript_15AE4C:: @ 815AE4C
 	msgbox MossdeepCity_GameCorner_1F_Text_18E631, 3
 	end
-

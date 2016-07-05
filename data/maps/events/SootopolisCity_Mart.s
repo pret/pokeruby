@@ -9,4 +9,3 @@ SootopolisCity_Mart_MapWarps:: @ 838AF80
 
 SootopolisCity_Mart_MapEvents:: @ 838AF90
 	map_events SootopolisCity_Mart_MapObjects, SootopolisCity_Mart_MapWarps, 0x0, 0x0
-

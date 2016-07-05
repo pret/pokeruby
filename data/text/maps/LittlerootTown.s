@@ -92,4 +92,3 @@ LittlerootTown_Text_16AEA1:: @ 816AEA1
 
 LittlerootTown_Text_16AEAC:: @ 816AEAC
 	.string "PROF. BIRCH’S HOUSE$"
-

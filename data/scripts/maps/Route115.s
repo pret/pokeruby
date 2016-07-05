@@ -66,4 +66,3 @@ Route115_EventScript_150A1A:: @ 8150A1A
 	msgbox Route115_Text_1BCF3D, 6
 .endc
 	end
-

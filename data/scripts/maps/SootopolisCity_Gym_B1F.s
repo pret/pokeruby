@@ -40,4 +40,3 @@ SootopolisCity_Gym_B1F_EventScript_15B179:: @ 815B179
 	trainerbattle 0, 301, 0, SootopolisCity_Gym_B1F_Text_18F037, SootopolisCity_Gym_B1F_Text_18F07F
 	msgbox SootopolisCity_Gym_B1F_Text_18F085, 6
 	end
-

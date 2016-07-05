@@ -12,4 +12,3 @@ RustboroCity_DevonCorp_3F:: @ 8306264
 	.2byte 0
 	.byte 0
 	.byte 0
-

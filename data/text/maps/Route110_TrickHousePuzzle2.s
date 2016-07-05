@@ -37,4 +37,3 @@ UnknownString_819CEF9: @ 819CEF9
 	.string "“TRICK MASTER is coveted.”\n"
 	.string "... ... ... ... ... ... ... ...\p"
 	.string "The lock clicked open!$"
-

@@ -6,4 +6,3 @@ EverGrandeCity_Corridor3_MapWarps:: @ 838B408
 
 EverGrandeCity_Corridor3_MapEvents:: @ 838B428
 	map_events 0x0, EverGrandeCity_Corridor3_MapWarps, 0x0, 0x0
-

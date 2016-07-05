@@ -8,4 +8,3 @@ Route113_GlassWorkshop_MapWarps:: @ 8392D48
 
 Route113_GlassWorkshop_MapEvents:: @ 8392D58
 	map_events Route113_GlassWorkshop_MapObjects, Route113_GlassWorkshop_MapWarps, 0x0, 0x0
-

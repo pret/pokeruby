@@ -214,4 +214,3 @@ Route103_EventScript_14EE75:: @ 814EE75
 	trainerbattle 5, 293, 0, Route103_Text_1B8349, Route103_Text_1B838C
 	msgbox Route103_Text_1B83A4, 6
 	end
-

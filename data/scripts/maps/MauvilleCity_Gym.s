@@ -225,4 +225,3 @@ MauvilleCity_Gym_EventScript_15678B:: @ 815678B
 	msgbox MauvilleCity_Gym_Text_180F4A, 4
 	releaseall
 	end
-

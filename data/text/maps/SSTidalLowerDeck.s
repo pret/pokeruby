@@ -23,4 +23,3 @@ SSTidalLowerDeck_Text_199508:: @ 8199508
 	.string "We’re the CLEANUP BROTHERS!\p"
 	.string "The old one dumps the detergent,\n"
 	.string "and the young one does the scrubbing!$"
-

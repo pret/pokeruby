@@ -9,4 +9,3 @@ EverGrandeCity_Text_16A787:: @ 816A787
 	.string "EVER GRANDE CITY\p"
 	.string "“The paradise of flowers, the sea,\n"
 	.string "and POKéMON.”$"
-

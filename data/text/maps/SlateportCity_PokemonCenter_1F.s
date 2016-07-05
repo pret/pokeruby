@@ -11,4 +11,3 @@ SlateportCity_PokemonCenter_1F_Text_1806CB:: @ 81806CB
 	.string "I trade POKéMON with my friends.\p"
 	.string "If a traded POKéMON is holding an\n"
 	.string "item, it makes me twice as happy!$"
-

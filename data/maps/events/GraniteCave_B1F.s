@@ -12,4 +12,3 @@ GraniteCave_B1F_MapWarps:: @ 838BFA0
 
 GraniteCave_B1F_MapEvents:: @ 838BFD8
 	map_events GraniteCave_B1F_MapObjects, GraniteCave_B1F_MapWarps, 0x0, 0x0
-

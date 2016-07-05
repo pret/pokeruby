@@ -23,4 +23,3 @@ SlateportCity_ContestHall_MapBGEvents:: @ 83879EC
 
 SlateportCity_ContestHall_MapEvents:: @ 8387A04
 	map_events SlateportCity_ContestHall_MapObjects, SlateportCity_ContestHall_MapWarps, 0x0, SlateportCity_ContestHall_MapBGEvents
-

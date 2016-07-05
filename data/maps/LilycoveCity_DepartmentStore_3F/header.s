@@ -12,4 +12,3 @@ LilycoveCity_DepartmentStore_3F:: @ 8306734
 	.2byte 0
 	.byte 0
 	.byte 0
-

@@ -8,4 +8,3 @@ LavaridgeTown_Mart_Text_176E1A:: @ 8176E1A
 	.string "On MT. CHIMNEY’s peak, there’s a local\n"
 	.string "specialty that you can buy only there.\p"
 	.string "Give it to a POKéMON - it will be elated.$"
-

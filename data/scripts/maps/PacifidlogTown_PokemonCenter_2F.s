@@ -15,4 +15,3 @@ PacifidlogTown_PokemonCenter_2F_MapScripts:: @ 8154132
 PacifidlogTown_PokemonCenter_2F_EventScript_15414E:: @ 815414E
 	call PacifidlogTown_PokemonCenter_2F_EventScript_1A41FB
 	end
-

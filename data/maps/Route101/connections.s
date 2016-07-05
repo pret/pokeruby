@@ -5,4 +5,3 @@ Route101_MapConnectionsList:: @ 830881C
 Route101_MapConnections:: @ 8308834
 	.4byte 0x2
 	.4byte Route101_MapConnectionsList
-

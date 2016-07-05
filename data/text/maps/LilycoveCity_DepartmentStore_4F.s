@@ -18,4 +18,3 @@ LilycoveCity_DepartmentStore_4F_Text_18C481:: @ 818C481
 UnknownString_818C4CE: @ 818C4CE
 	.string "A SHORTCUT TO POKéMON LEAGUE\n"
 	.string "4F: TM CORNER$"
-

@@ -7,4 +7,3 @@ Route128_MapConnectionsList:: @ 8308C18
 Route128_MapConnections:: @ 8308C48
 	.4byte 0x4
 	.4byte Route128_MapConnectionsList
-

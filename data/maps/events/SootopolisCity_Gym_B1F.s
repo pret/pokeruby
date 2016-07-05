@@ -13,4 +13,3 @@ SootopolisCity_Gym_B1F_MapWarps:: @ 838AE24
 
 SootopolisCity_Gym_B1F_MapEvents:: @ 838AE2C
 	map_events SootopolisCity_Gym_B1F_MapObjects, SootopolisCity_Gym_B1F_MapWarps, 0x0, 0x0
-

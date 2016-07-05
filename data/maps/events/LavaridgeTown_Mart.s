@@ -9,4 +9,3 @@ LavaridgeTown_Mart_MapWarps:: @ 8386530
 
 LavaridgeTown_Mart_MapEvents:: @ 8386540
 	map_events LavaridgeTown_Mart_MapObjects, LavaridgeTown_Mart_MapWarps, 0x0, 0x0
-

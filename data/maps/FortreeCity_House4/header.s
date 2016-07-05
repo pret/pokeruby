@@ -12,4 +12,3 @@ FortreeCity_House4:: @ 83064CC
 	.2byte 0
 	.byte 0
 	.byte 0
-

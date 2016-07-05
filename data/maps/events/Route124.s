@@ -18,4 +18,3 @@ Route124_MapBGEvents:: @ 8384E08
 
 Route124_MapEvents:: @ 8384E14
 	map_events Route124_MapObjects, Route124_MapWarps, 0x0, Route124_MapBGEvents
-

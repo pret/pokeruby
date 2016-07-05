@@ -70,4 +70,3 @@ SlateportCity_House1_EventScript_15575A:: @ 815575A
 	msgbox SlateportCity_House1_Text_17D5B0, 4
 	release
 	end
-

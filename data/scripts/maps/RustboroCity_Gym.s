@@ -81,4 +81,3 @@ RustboroCity_Gym_EventScript_1579D7:: @ 81579D7
 	msgbox RustboroCity_Gym_Text_1842CC, 4
 	releaseall
 	end
-

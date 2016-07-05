@@ -306,4 +306,3 @@ Route113_GlassWorkshop_EventScript_1639B1:: @ 81639B1
 Route113_GlassWorkshop_EventScript_1639D6:: @ 81639D6
 	msgbox Route113_GlassWorkshop_Text_19EB3B, 2
 	end
-

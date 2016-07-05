@@ -23,4 +23,3 @@ FallarborTown_MapBGEvents:: @ 8380E8C
 
 FallarborTown_MapEvents:: @ 8380EEC
 	map_events FallarborTown_MapObjects, FallarborTown_MapWarps, 0x0, FallarborTown_MapBGEvents
-

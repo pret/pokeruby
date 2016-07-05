@@ -7,4 +7,3 @@ RustboroCity_House2_Text_185388:: @ 8185388
 	.string "ROXANNE, the GYM LEADER, really knows\n"
 	.string "a lot about POKéMON.\p"
 	.string "She’s really strong, too!$"
-

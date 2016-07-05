@@ -57,4 +57,3 @@ RustboroCity_MapBGEvents:: @ 837FF94
 
 RustboroCity_MapEvents:: @ 838000C
 	map_events RustboroCity_MapObjects, RustboroCity_MapWarps, RustboroCity_MapCoordEvents, RustboroCity_MapBGEvents
-

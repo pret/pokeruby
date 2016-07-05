@@ -7,4 +7,3 @@ MossdeepCity_House3_MapWarps:: @ 838AA20
 
 MossdeepCity_House3_MapEvents:: @ 838AA30
 	map_events MossdeepCity_House3_MapObjects, MossdeepCity_House3_MapWarps, 0x0, 0x0
-

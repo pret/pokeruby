@@ -14,4 +14,3 @@ LilycoveCity_House1_EventScript_159B8F:: @ 8159B8F
 	waitpokecry
 	release
 	end
-

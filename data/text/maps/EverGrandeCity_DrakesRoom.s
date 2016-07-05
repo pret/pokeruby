@@ -26,4 +26,3 @@ EverGrandeCity_DrakesRoom_Text_190E5D:: @ 8190E5D
 	.string "TRAINERS and grow strong.\p"
 	.string "Go! Go onwards!\n"
 	.string "The CHAMPION is waiting!$"
-

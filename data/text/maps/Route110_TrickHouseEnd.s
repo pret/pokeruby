@@ -108,4 +108,3 @@ UnknownString_819CAD1: @ 819CAD1
 	.string "“TRICK MASTER is fabulous.”\n"
 	.string "... ... ... ... ... ... ... ...\p"
 	.string "The lock clicked open!$"
-

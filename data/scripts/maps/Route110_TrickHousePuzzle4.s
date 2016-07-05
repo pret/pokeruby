@@ -27,4 +27,3 @@ Route110_TrickHousePuzzle4_EventScript_162799:: @ 8162799
 	trainerbattle 0, 429, 0, Route110_TrickHousePuzzle4_Text_19D351, Route110_TrickHousePuzzle4_Text_19D380
 	msgbox Route110_TrickHousePuzzle4_Text_19D386, 6
 	end
-

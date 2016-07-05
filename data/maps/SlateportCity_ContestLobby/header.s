@@ -12,4 +12,3 @@ SlateportCity_ContestLobby:: @ 8306018
 	.2byte 0
 	.byte 0
 	.byte 0
-

@@ -12,4 +12,3 @@ OldaleTown_PokemonCenter_2F_MapWarps:: @ 8385DB0
 
 OldaleTown_PokemonCenter_2F_MapEvents:: @ 8385DD8
 	map_events OldaleTown_PokemonCenter_2F_MapObjects, OldaleTown_PokemonCenter_2F_MapWarps, 0x0, 0x0
-

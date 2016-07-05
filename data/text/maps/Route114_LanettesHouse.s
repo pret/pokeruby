@@ -54,4 +54,3 @@ Route114_LanettesHouse_Text_192DC1:: @ 8192DC1
 	.string "research in Storage Systems.\p"
 	.string "“From BILL\n"
 	.string "... ... ... ... ... ... ... ...”$"
-

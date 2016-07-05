@@ -36,4 +36,3 @@ LittlerootTown_BrendansHouse_2F_Text_17306C:: @ 817306C
 	.string "It’s a Nintendo GameCube.\p"
 	.string "A Game Boy Advance is connected to\n"
 	.string "serve as the Controller.$"
-

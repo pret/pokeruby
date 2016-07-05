@@ -43,4 +43,3 @@ LilycoveCity_CoveLilyMotel_2F_Text_1872D4:: @ 81872D4
 	.string "people will challenge you.\p"
 	.string "That’s why I never leave home without\n"
 	.string "my GAME BOY ADVANCE.$"
-

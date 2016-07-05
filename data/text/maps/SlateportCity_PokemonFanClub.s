@@ -129,4 +129,3 @@ SlateportCity_PokemonFanClub_Text_17E164:: @ 817E164
 
 SlateportCity_PokemonFanClub_Text_17E178:: @ 817E178
 	.string "AZUMARILL: Marimari?$"
-

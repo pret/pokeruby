@@ -38,4 +38,3 @@ SootopolisCity_MapBGEvents:: @ 8380780
 
 SootopolisCity_MapEvents:: @ 83807C8
 	map_events SootopolisCity_MapObjects, SootopolisCity_MapWarps, SootopolisCity_MapCoordEvents, SootopolisCity_MapBGEvents
-

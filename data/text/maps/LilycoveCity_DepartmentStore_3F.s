@@ -17,4 +17,3 @@ LilycoveCity_DepartmentStore_3F_Text_18C32E:: @ 818C32E
 UnknownString_818C363: @ 818C363
 	.string "ESSENTIALS FOR UNBEATABLE TRAINERS\n"
 	.string "3F: BATTLE COLLECTION$"
-

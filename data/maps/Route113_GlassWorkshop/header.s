@@ -12,4 +12,3 @@ Route113_GlassWorkshop:: @ 8307EB8
 	.2byte 0
 	.byte 0
 	.byte 0
-

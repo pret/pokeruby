@@ -7,4 +7,3 @@ ShoalCave_LowTideIceRoom_MapWarps:: @ 838EE10
 
 ShoalCave_LowTideIceRoom_MapEvents:: @ 838EE18
 	map_events ShoalCave_LowTideIceRoom_MapObjects, ShoalCave_LowTideIceRoom_MapWarps, 0x0, 0x0
-

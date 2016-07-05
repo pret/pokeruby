@@ -5,4 +5,3 @@ Route119_MapConnectionsList:: @ 8308AA4
 Route119_MapConnections:: @ 8308ABC
 	.4byte 0x2
 	.4byte Route119_MapConnectionsList
-

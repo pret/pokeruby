@@ -77,4 +77,3 @@ SlateportCity_SternsShipyard_1F_Text_17C6BB:: @ 817C6BB
 SlateportCity_SternsShipyard_1F_Text_17C764:: @ 817C764
 	.string "I get seasick real easily.\n"
 	.string "So I get to help out here instead.$"
-

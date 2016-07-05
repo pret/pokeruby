@@ -15,4 +15,3 @@ FortreeCity_PokemonCenter_2F_EventScript_15805A:: @ 815805A
 FortreeCity_PokemonCenter_2F_EventScript_158060:: @ 8158060
 	call FortreeCity_PokemonCenter_2F_EventScript_1A41FB
 	end
-

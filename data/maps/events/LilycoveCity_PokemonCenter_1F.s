@@ -10,4 +10,3 @@ LilycoveCity_PokemonCenter_1F_MapWarps:: @ 8389DDC
 
 LilycoveCity_PokemonCenter_1F_MapEvents:: @ 8389DF4
 	map_events LilycoveCity_PokemonCenter_1F_MapObjects, LilycoveCity_PokemonCenter_1F_MapWarps, 0x0, 0x0
-

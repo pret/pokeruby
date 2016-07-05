@@ -12,4 +12,3 @@ Route114_FossilManiacsHouse:: @ 8306CC8
 	.2byte 0
 	.byte 0
 	.byte 0
-

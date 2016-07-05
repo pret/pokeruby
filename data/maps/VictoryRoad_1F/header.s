@@ -12,4 +12,3 @@ VictoryRoad_1F:: @ 8307224
 	.2byte 0
 	.byte 1
 	.byte 0
-

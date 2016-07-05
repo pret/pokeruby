@@ -6,4 +6,3 @@ Route126_MapConnectionsList:: @ 8308BB4
 Route126_MapConnections:: @ 8308BD8
 	.4byte 0x3
 	.4byte Route126_MapConnectionsList
-

@@ -12,4 +12,3 @@ MauvilleCity_House1:: @ 8306184
 	.2byte 0
 	.byte 0
 	.byte 0
-

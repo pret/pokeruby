@@ -12,4 +12,3 @@ LilycoveCity_EmptyMap:: @ 8306654
 	.2byte 0
 	.byte 0
 	.byte 0
-

@@ -61,4 +61,3 @@ MossdeepCity_SpaceCenter_1F_EventScript_15AC1F:: @ 815AC1F
 	waitmove 0
 	release
 	end
-

@@ -60,4 +60,3 @@ SlateportCity_MapBGEvents:: @ 837FAEC
 
 SlateportCity_MapEvents:: @ 837FB7C
 	map_events SlateportCity_MapObjects, SlateportCity_MapWarps, 0x0, SlateportCity_MapBGEvents
-

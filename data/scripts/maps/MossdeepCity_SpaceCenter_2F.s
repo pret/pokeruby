@@ -12,4 +12,3 @@ MossdeepCity_SpaceCenter_2F_EventScript_15AC40:: @ 815AC40
 MossdeepCity_SpaceCenter_2F_EventScript_15AC49:: @ 815AC49
 	msgbox MossdeepCity_SpaceCenter_2F_Text_18E564, 2
 	end
-

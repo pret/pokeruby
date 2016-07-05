@@ -3,4 +3,3 @@ BattleTower_Elevator_MapObjects:: @ 8391D54
 
 BattleTower_Elevator_MapEvents:: @ 8391D6C
 	map_events BattleTower_Elevator_MapObjects, 0x0, 0x0, 0x0
-

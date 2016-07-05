@@ -9,4 +9,3 @@ SafariZone_Southeast_MapWarps:: @ 8391BD0
 
 SafariZone_Southeast_MapEvents:: @ 8391BD8
 	map_events SafariZone_Southeast_MapObjects, SafariZone_Southeast_MapWarps, 0x0, 0x0
-

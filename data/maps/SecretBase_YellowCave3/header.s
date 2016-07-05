@@ -12,4 +12,3 @@ SecretBase_YellowCave3:: @ 830787C
 	.2byte 0
 	.byte 1
 	.byte 8
-

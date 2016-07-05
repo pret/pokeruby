@@ -15,4 +15,3 @@ LilycoveCity_DepartmentStore_5F_Text_18C59F:: @ 818C59F
 UnknownString_818C5FA: @ 818C5FA
 	.string "ADORABLE FRIENDS\n"
 	.string "5F: POKé DOLL FLOOR$"
-

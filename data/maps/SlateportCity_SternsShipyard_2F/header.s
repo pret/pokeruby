@@ -12,4 +12,3 @@ SlateportCity_SternsShipyard_2F:: @ 8305FFC
 	.2byte 0
 	.byte 0
 	.byte 0
-

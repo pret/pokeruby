@@ -5,4 +5,3 @@ VerdanturfTown_MapConnectionsList:: @ 83086A4
 VerdanturfTown_MapConnections:: @ 83086BC
 	.4byte 0x2
 	.4byte VerdanturfTown_MapConnectionsList
-

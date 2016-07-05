@@ -22,4 +22,3 @@ SootopolisCity_PokemonCenter_1F_Text_18F7EA:: @ 818F7EA
 SootopolisCity_PokemonCenter_1F_Text_18F860:: @ 818F860
 	.string "I don’t know why...\n"
 	.string "But... I’m really scared...$"
-

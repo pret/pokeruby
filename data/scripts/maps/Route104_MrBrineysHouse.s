@@ -97,4 +97,3 @@ Route104_MrBrineysHouse_EventScript_15BDD1:: @ 815BDD1
 	waitpokecry
 	release
 	end
-

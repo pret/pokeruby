@@ -8,4 +8,3 @@ FallarborTown_House1_MapWarps:: @ 83869A0
 
 FallarborTown_House1_MapEvents:: @ 83869B0
 	map_events FallarborTown_House1_MapObjects, FallarborTown_House1_MapWarps, 0x0, 0x0
-

@@ -15,4 +15,3 @@ LilycoveCity_PokemonCenter_2F_EventScript_15937D:: @ 815937D
 LilycoveCity_PokemonCenter_2F_EventScript_159383:: @ 8159383
 	call LilycoveCity_PokemonCenter_2F_EventScript_1A41FB
 	end
-

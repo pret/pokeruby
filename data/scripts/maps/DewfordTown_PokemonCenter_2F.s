@@ -15,4 +15,3 @@ DewfordTown_PokemonCenter_2F_EventScript_153059:: @ 8153059
 DewfordTown_PokemonCenter_2F_EventScript_15305F:: @ 815305F
 	call DewfordTown_PokemonCenter_2F_EventScript_1A41FB
 	end
-

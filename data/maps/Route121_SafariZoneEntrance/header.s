@@ -12,4 +12,3 @@ Route121_SafariZoneEntrance:: @ 8306D54
 	.2byte 0
 	.byte 0
 	.byte 0
-

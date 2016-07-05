@@ -281,4 +281,3 @@ PetalburgWoods_EventScript_15CF65:: @ 815CF65
 	trainerbattle 5, 621, 0, PetalburgWoods_Text_195306, PetalburgWoods_Text_195338
 	msgbox PetalburgWoods_Text_195356, 6
 	end
-

@@ -15,4 +15,3 @@ SeafloorCavern_Room9_MapCoordEvents:: @ 838D6D0
 
 SeafloorCavern_Room9_MapEvents:: @ 838D6E0
 	map_events SeafloorCavern_Room9_MapObjects, SeafloorCavern_Room9_MapWarps, SeafloorCavern_Room9_MapCoordEvents, 0x0
-

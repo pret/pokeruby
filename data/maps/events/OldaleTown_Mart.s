@@ -9,4 +9,3 @@ OldaleTown_Mart_MapWarps:: @ 8385E34
 
 OldaleTown_Mart_MapEvents:: @ 8385E44
 	map_events OldaleTown_Mart_MapObjects, OldaleTown_Mart_MapWarps, 0x0, 0x0
-

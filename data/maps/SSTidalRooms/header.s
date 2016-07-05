@@ -12,4 +12,3 @@ SSTidalRooms:: @ 8307B8C
 	.2byte 0
 	.byte 0
 	.byte 0
-

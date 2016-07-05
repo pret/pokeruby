@@ -65,4 +65,3 @@ UnknownString_8191F4F: @ 8191F4F
 
 Route104_MrBrineysHouse_Text_191FB9:: @ 8191FB9
 	.string "PEEKO: Pii pihyoroo!$"
-

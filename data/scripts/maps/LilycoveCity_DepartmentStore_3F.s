@@ -58,4 +58,3 @@ LilycoveCity_DepartmentStore_3F_EventScript_159FEB:: @ 8159FEB
 LilycoveCity_DepartmentStore_3F_EventScript_159FF4:: @ 8159FF4
 	msgbox LilycoveCity_DepartmentStore_3F_Text_18C32E, 2
 	end
-

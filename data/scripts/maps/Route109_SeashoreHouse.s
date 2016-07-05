@@ -107,4 +107,3 @@ Route109_SeashoreHouse_EventScript_160F09:: @ 8160F09
 Route109_SeashoreHouse_EventScript_160F29:: @ 8160F29
 	release
 	end
-

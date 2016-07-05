@@ -63,4 +63,3 @@ Route128_Text_1723BE:: @ 81723BE
 	.string "but don’t do anything reckless.\p"
 	.string "Okay.\n"
 	.string "I’m going to SOOTOPOLIS.$"
-

@@ -8,4 +8,3 @@ LavaridgeTown_House_MapWarps:: @ 83864C4
 
 LavaridgeTown_House_MapEvents:: @ 83864D4
 	map_events LavaridgeTown_House_MapObjects, LavaridgeTown_House_MapWarps, 0x0, 0x0
-

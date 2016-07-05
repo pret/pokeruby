@@ -15,4 +15,3 @@ RustboroCity_Mart_Text_184D43:: @ 8184D43
 	.string "case I get lost in a cave.\p"
 	.string "I just need to use it to get back to the\n"
 	.string "entrance.$"
-

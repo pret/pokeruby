@@ -26,4 +26,3 @@ RustboroCity_PokemonCenter_1F_EventScript_157B9F:: @ 8157B9F
 RustboroCity_PokemonCenter_1F_EventScript_157BA8:: @ 8157BA8
 	msgbox RustboroCity_PokemonCenter_1F_Text_184C19, 2
 	end
-

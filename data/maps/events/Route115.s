@@ -37,4 +37,3 @@ Route115_MapBGEvents:: @ 83830B4
 
 Route115_MapEvents:: @ 838315C
 	map_events Route115_MapObjects, Route115_MapWarps, 0x0, Route115_MapBGEvents
-

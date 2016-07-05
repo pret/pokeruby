@@ -11,4 +11,3 @@ VerdanturfTown_House_Text_178D8E:: @ 8178D8E
 	.string "If you lose to any of them, you have\n"
 	.string "to begin your challenge again from the\l"
 	.string "first one.$"
-

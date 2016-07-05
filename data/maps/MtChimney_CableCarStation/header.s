@@ -12,4 +12,3 @@ MtChimney_CableCarStation:: @ 8306CAC
 	.2byte 0
 	.byte 0
 	.byte 0
-

@@ -12,4 +12,3 @@ AquaHideout_1F:: @ 8306FF4
 	.2byte 0
 	.byte 1
 	.byte 3
-

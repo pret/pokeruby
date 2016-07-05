@@ -117,4 +117,3 @@ Route111_Text_16FD55:: @ 816FD55
 	.string "“SPECIAL ATTACK.”\p"
 	.string "Likewise, SP. DEF stands for “SPECIAL\n"
 	.string "DEFENSE.”$"
-

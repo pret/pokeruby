@@ -7,4 +7,3 @@ LilycoveCity_House2_Text_18B883:: @ 818B883
 	.string "Yawn...\p"
 	.string "Sleep is essential for good health...\n"
 	.string "Sleep and regain health...$"
-

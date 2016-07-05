@@ -12,4 +12,3 @@ MossdeepCity_GameCorner_1F:: @ 83068F4
 	.2byte 0
 	.byte 0
 	.byte 0
-

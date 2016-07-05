@@ -12,4 +12,3 @@ Route110_TrickHousePuzzle6:: @ 8307E2C
 	.2byte 0
 	.byte 0
 	.byte 0
-

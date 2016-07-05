@@ -31,4 +31,3 @@ Route114_FossilManiacsHouse_EventScript_15C1FC:: @ 815C1FC
 Route114_FossilManiacsHouse_EventScript_15C205:: @ 815C205
 	msgbox Route114_FossilManiacsHouse_Text_192729, 3
 	end
-

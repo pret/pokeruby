@@ -26,4 +26,3 @@ EverGrandeCity_MapBGEvents:: @ 83808AC
 
 EverGrandeCity_MapEvents:: @ 83808E8
 	map_events 0x0, EverGrandeCity_MapWarps, EverGrandeCity_MapCoordEvents, EverGrandeCity_MapBGEvents
-

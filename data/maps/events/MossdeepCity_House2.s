@@ -9,4 +9,3 @@ MossdeepCity_House2_MapWarps:: @ 838A850
 
 MossdeepCity_House2_MapEvents:: @ 838A860
 	map_events MossdeepCity_House2_MapObjects, MossdeepCity_House2_MapWarps, 0x0, 0x0
-

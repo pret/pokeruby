@@ -30,4 +30,3 @@ LilycoveCity_ContestLobby_MapBGEvents:: @ 83899BC
 
 LilycoveCity_ContestLobby_MapEvents:: @ 8389A04
 	map_events LilycoveCity_ContestLobby_MapObjects, LilycoveCity_ContestLobby_MapWarps, 0x0, LilycoveCity_ContestLobby_MapBGEvents
-

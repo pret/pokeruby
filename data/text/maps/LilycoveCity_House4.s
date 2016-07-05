@@ -7,4 +7,3 @@ LilycoveCity_House4_Text_18BF4E:: @ 818BF4E
 	.string "There’s a deep underwater trench\n"
 	.string "between MOSSDEEP and SOOTOPOLIS.\p"
 	.string "That’s what someone told me, anyway.$"
-

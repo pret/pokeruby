@@ -10,4 +10,3 @@ MtPyre_3F_EventScript_15D400:: @ 815D400
 	trainerbattle 0, 247, 0, MtPyre_3F_Text_1967EF, MtPyre_3F_Text_19682B
 	msgbox MtPyre_3F_Text_196842, 6
 	end
-

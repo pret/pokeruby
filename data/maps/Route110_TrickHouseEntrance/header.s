@@ -12,4 +12,3 @@ Route110_TrickHouseEntrance:: @ 8307D4C
 	.2byte 0
 	.byte 0
 	.byte 0
-

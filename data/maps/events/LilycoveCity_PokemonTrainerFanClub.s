@@ -14,4 +14,3 @@ LilycoveCity_PokemonTrainerFanClub_MapWarps:: @ 8389F70
 
 LilycoveCity_PokemonTrainerFanClub_MapEvents:: @ 8389F80
 	map_events LilycoveCity_PokemonTrainerFanClub_MapObjects, LilycoveCity_PokemonTrainerFanClub_MapWarps, 0x0, 0x0
-

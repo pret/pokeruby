@@ -26,4 +26,3 @@ Route126_EventScript_152053:: @ 8152053
 	trainerbattle 0, 454, 0, Route126_Text_1C1741, Route126_Text_1C1766
 	msgbox Route126_Text_1C1773, 6
 	end
-

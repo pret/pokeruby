@@ -75,4 +75,3 @@ FallarborTown_House1_EventScript_153C86:: @ 8153C86
 	msgbox FallarborTown_House1_Text_177ABB, 4
 	release
 	end
-

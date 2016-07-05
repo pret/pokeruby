@@ -91,4 +91,3 @@ MeteorFalls_1F_1R_Text_19396A:: @ 819396A
 	.string "PROF. COZMO: That TEAM {EVIL_TEAM}...\p"
 	.string "What are they going to do with that\n"
 	.string "METEORITE at MT. CHIMNEY?$"
-

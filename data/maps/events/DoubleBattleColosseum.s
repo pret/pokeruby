@@ -12,4 +12,3 @@ DoubleBattleColosseum_MapCoordEvents:: @ 8391448
 
 DoubleBattleColosseum_MapEvents:: @ 8391488
 	map_events 0x0, DoubleBattleColosseum_MapWarps, DoubleBattleColosseum_MapCoordEvents, 0x0
-

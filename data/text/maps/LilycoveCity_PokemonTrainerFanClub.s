@@ -249,4 +249,3 @@ LilycoveCity_PokemonTrainerFanClub_Text_18B24F:: @ 818B24F
 	.string "True strength is...!\n"
 	.string "... ...\p"
 	.string "Actually, I have no idea, either.$"
-

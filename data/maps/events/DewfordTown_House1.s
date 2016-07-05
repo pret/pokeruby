@@ -9,4 +9,3 @@ DewfordTown_House1_MapWarps:: @ 8385EA0
 
 DewfordTown_House1_MapEvents:: @ 8385EB0
 	map_events DewfordTown_House1_MapObjects, DewfordTown_House1_MapWarps, 0x0, 0x0
-

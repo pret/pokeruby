@@ -12,4 +12,3 @@ EverGrandeCity_Corridor5:: @ 8306B94
 	.2byte 0
 	.byte 0
 	.byte 0
-

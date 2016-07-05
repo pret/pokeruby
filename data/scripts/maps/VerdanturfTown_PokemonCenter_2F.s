@@ -17,4 +17,3 @@ VerdanturfTown_PokemonCenter_2F_EventScript_153F4E:: @ 8153F4E
 VerdanturfTown_PokemonCenter_2F_EventScript_153F54:: @ 8153F54
 	call VerdanturfTown_PokemonCenter_2F_EventScript_1A41FB
 	end
-

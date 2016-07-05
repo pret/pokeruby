@@ -122,4 +122,3 @@ EverGrandeCity_PokemonLeague_Movement_15BB81:: @ 815BB81
 	step_right
 	step_25
 	step_end
-

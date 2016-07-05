@@ -12,4 +12,3 @@ EverGrandeCity_GlaciasRoom:: @ 8306AD0
 	.2byte 0
 	.byte 0
 	.byte 6
-

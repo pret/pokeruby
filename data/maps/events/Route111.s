@@ -98,4 +98,3 @@ Route111_MapBGEvents:: @ 8382738
 
 Route111_MapEvents:: @ 8382804
 	map_events Route111_MapObjects, Route111_MapWarps, Route111_MapCoordEvents, Route111_MapBGEvents
-

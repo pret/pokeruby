@@ -37,4 +37,3 @@ AquaHideout_B1F_Text_197040:: @ 8197040
 AquaHideout_B1F_Text_197056:: @ 8197056
 	.string "If you scurry too much, other TEAM\n"
 	.string "{EVIL_TEAM} members might get you.$"
-

@@ -97,4 +97,3 @@ CaveOfOrigin_B4F_Movement_15DE7D:: @ 815DE7D
 	step_14
 	step_61
 	step_end
-

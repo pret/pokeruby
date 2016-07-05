@@ -35,4 +35,3 @@ LilycoveCity_LilycoveMuseum_1F_MapBGEvents:: @ 838966C
 
 LilycoveCity_LilycoveMuseum_1F_MapEvents:: @ 838972C
 	map_events LilycoveCity_LilycoveMuseum_1F_MapObjects, LilycoveCity_LilycoveMuseum_1F_MapWarps, 0x0, LilycoveCity_LilycoveMuseum_1F_MapBGEvents
-

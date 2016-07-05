@@ -12,4 +12,3 @@ RustboroCity_House3:: @ 83063EC
 	.2byte 0
 	.byte 0
 	.byte 0
-

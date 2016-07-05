@@ -12,4 +12,3 @@ SingleBattleColosseum:: @ 8307978
 	.2byte 0
 	.byte 0
 	.byte 8
-

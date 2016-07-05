@@ -12,4 +12,3 @@ RustboroCity_PokemonCenter_1F:: @ 83062B8
 	.2byte 0
 	.byte 0
 	.byte 0
-

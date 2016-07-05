@@ -6,4 +6,3 @@ MossdeepCity_GameCorner_B1F_MapWarps:: @ 838ACD4
 
 MossdeepCity_GameCorner_B1F_MapEvents:: @ 838ACDC
 	map_events MossdeepCity_GameCorner_B1F_MapObjects, MossdeepCity_GameCorner_B1F_MapWarps, 0x0, 0x0
-

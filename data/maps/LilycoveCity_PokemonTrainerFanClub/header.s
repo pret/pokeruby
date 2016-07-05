@@ -12,4 +12,3 @@ LilycoveCity_PokemonTrainerFanClub:: @ 830661C
 	.2byte 0
 	.byte 0
 	.byte 0
-

@@ -20,4 +20,3 @@ VictoryRoad_B2F_EventScript_15E040:: @ 815E040
 	trainerbattle 0, 100, 0, VictoryRoad_B2F_Text_198121, VictoryRoad_B2F_Text_1981A3
 	msgbox VictoryRoad_B2F_Text_1981BA, 6
 	end
-

@@ -54,4 +54,3 @@ PetalburgCity_PokemonCenter_1F_EventScript_15527B:: @ 815527B
 PetalburgCity_PokemonCenter_1F_EventScript_155284:: @ 8155284
 	msgbox PetalburgCity_PokemonCenter_1F_Text_17BF73, 4
 	return
-

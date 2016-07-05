@@ -249,4 +249,3 @@ MossdeepCity_Gym_EventScript_15A824:: @ 815A824
 	msgbox MossdeepCity_Gym_Text_18D40A, 4
 	releaseall
 	end
-

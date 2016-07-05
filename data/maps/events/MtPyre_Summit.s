@@ -25,4 +25,3 @@ MtPyre_Summit_MapBGEvents:: @ 838CCE0
 
 MtPyre_Summit_MapEvents:: @ 838CCF8
 	map_events MtPyre_Summit_MapObjects, MtPyre_Summit_MapWarps, MtPyre_Summit_MapCoordEvents, MtPyre_Summit_MapBGEvents
-

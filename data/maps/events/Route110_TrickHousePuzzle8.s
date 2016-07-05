@@ -14,4 +14,3 @@ Route110_TrickHousePuzzle8_MapBGEvents:: @ 8392C20
 
 Route110_TrickHousePuzzle8_MapEvents:: @ 8392C2C
 	map_events Route110_TrickHousePuzzle8_MapObjects, Route110_TrickHousePuzzle8_MapWarps, 0x0, Route110_TrickHousePuzzle8_MapBGEvents
-

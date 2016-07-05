@@ -12,4 +12,3 @@ MagmaHideout_B1F:: @ 83075A4
 	.2byte 0
 	.byte 1
 	.byte 2
-

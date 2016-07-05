@@ -14,4 +14,3 @@ LavaridgeTown_House_EventScript_1538B7:: @ 81538B7
 	waitpokecry
 	release
 	end
-

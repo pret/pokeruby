@@ -16,4 +16,3 @@ Route106_MapBGEvents:: @ 838198C
 
 Route106_MapEvents:: @ 83819BC
 	map_events Route106_MapObjects, Route106_MapWarps, 0x0, Route106_MapBGEvents
-

@@ -12,4 +12,3 @@ GraniteCave_StevensRoom:: @ 8306E88
 	.2byte 0
 	.byte 1
 	.byte 0
-

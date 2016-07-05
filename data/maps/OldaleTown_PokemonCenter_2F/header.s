@@ -12,4 +12,3 @@ OldaleTown_PokemonCenter_2F:: @ 8305B10
 	.2byte 0
 	.byte 0
 	.byte 0
-

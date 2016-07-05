@@ -107,4 +107,3 @@ Route104_PrettyPetalFlowerShop_EventScript_15BF1A:: @ 815BF1A
 	msgbox Route104_PrettyPetalFlowerShop_Text_1C6335, 4
 	release
 	end
-

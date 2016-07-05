@@ -15,4 +15,3 @@ FallarborTown_PokemonCenter_2F_EventScript_153BA2:: @ 8153BA2
 FallarborTown_PokemonCenter_2F_EventScript_153BA8:: @ 8153BA8
 	call FallarborTown_PokemonCenter_2F_EventScript_1A41FB
 	end
-

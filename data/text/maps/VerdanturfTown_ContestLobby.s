@@ -26,4 +26,3 @@ VerdanturfTown_ContestLobby_Text_177ECD:: @ 8177ECD
 	.string "theme, and make sure it has the\l"
 	.string "right set of moves to match.\p"
 	.string "That’s fundamental!$"
-

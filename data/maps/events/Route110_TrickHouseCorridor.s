@@ -6,4 +6,3 @@ Route110_TrickHouseCorridor_MapWarps:: @ 8392228
 
 Route110_TrickHouseCorridor_MapEvents:: @ 8392248
 	map_events 0x0, Route110_TrickHouseCorridor_MapWarps, 0x0, 0x0
-

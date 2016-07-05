@@ -12,4 +12,3 @@ DewfordTown_Gym:: @ 8305B9C
 	.2byte 0
 	.byte 0
 	.byte 1
-

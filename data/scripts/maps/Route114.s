@@ -130,4 +130,3 @@ Route114_EventScript_150912:: @ 8150912
 	trainerbattle 4, 679, 0, Route114_Text_1BC8D8, Route114_Text_1BC8FB, Route114_Text_1BC96A
 	msgbox Route114_Text_1BC91E, 6
 	end
-

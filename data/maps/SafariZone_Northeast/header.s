@@ -12,4 +12,3 @@ SafariZone_Northeast:: @ 8307BC4
 	.2byte 0
 	.byte 1
 	.byte 0
-

@@ -60,4 +60,3 @@ EverGrandeCity_PhoebesRoom_EventScript_15B661:: @ 815B661
 	msgbox EverGrandeCity_PhoebesRoom_Text_190A2A, 4
 	release
 	end
-

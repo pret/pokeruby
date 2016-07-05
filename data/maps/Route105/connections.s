@@ -5,4 +5,3 @@ Route105_MapConnectionsList:: @ 83088A8
 Route105_MapConnections:: @ 83088C0
 	.4byte 0x2
 	.4byte Route105_MapConnectionsList
-

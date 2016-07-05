@@ -47,4 +47,3 @@ VictoryRoad_B2F_Text_1981A3:: @ 81981A3
 VictoryRoad_B2F_Text_1981BA:: @ 81981BA
 	.string "Gaze on your collected BADGES and\n"
 	.string "remember the TRAINERS you’ve faced.$"
-

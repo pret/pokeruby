@@ -12,4 +12,3 @@ SecretBase_RedCave1:: @ 83076D8
 	.2byte 0
 	.byte 1
 	.byte 8
-

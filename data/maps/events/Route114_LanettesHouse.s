@@ -12,4 +12,3 @@ Route114_LanettesHouse_MapBGEvents:: @ 838B954
 
 Route114_LanettesHouse_MapEvents:: @ 838B978
 	map_events Route114_LanettesHouse_MapObjects, Route114_LanettesHouse_MapWarps, 0x0, Route114_LanettesHouse_MapBGEvents
-

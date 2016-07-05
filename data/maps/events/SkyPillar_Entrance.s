@@ -4,4 +4,3 @@ SkyPillar_Entrance_MapWarps:: @ 838ECF0
 
 SkyPillar_Entrance_MapEvents:: @ 838ED00
 	map_events 0x0, SkyPillar_Entrance_MapWarps, 0x0, 0x0
-

@@ -288,4 +288,3 @@ gContestEffects:
 	.byte 30 @ appeal
 	.byte 0 @ jam
 	.byte 0 @ padding
-
