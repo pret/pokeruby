@@ -591,14 +591,14 @@ Route110_TrickHouseEntrance_EventScript_1616D7:: @ 81616D7
 gUnknown_081616E1:: @ 81616E1
 	lockall
 	switch 0x4044
-	case 0, 0x8161740
-	case 1, 0x8161769
-	case 2, 0x8161792
-	case 3, 0x81617BB
-	case 4, 0x81617E4
-	case 5, 0x816180D
-	case 6, 0x8161836
-	case 7, 0x816185F
+	case 0, Route110_TrickHouseEntrance_EventScript_161740
+	case 1, Route110_TrickHouseEntrance_EventScript_161769
+	case 2, Route110_TrickHouseEntrance_EventScript_161792
+	case 3, Route110_TrickHouseEntrance_EventScript_1617BB
+	case 4, Route110_TrickHouseEntrance_EventScript_1617E4
+	case 5, Route110_TrickHouseEntrance_EventScript_16180D
+	case 6, Route110_TrickHouseEntrance_EventScript_161836
+	case 7, Route110_TrickHouseEntrance_EventScript_16185F
 	end
 
 Route110_TrickHouseEntrance_EventScript_161740:: @ 8161740
