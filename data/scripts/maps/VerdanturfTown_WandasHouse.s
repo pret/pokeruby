@@ -89,4 +89,3 @@ VerdanturfTown_WandasHouse_EventScript_154025:: @ 8154025
 	msgbox VerdanturfTown_WandasHouse_Text_178A47, 4
 	release
 	end
-

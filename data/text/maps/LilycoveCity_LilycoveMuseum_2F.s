@@ -112,4 +112,3 @@ LilycoveCity_LilycoveMuseum_2F_Text_188423:: @ 8188423
 	.string "These paintings are of your POKéMON.\p"
 	.string "Isn’t that just the ultimate joy for\n"
 	.string "a TRAINER?$"
-

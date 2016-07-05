@@ -3358,8 +3358,7 @@ DexDescription_Deoxys_2:
 @ so the category names have to be on separate lines.
 
 	.align 2
-	.global gPokedexEntries
-gPokedexEntries: @ 83B1858
+gPokedexEntries:: @ 83B1858
 	.string "UNKNOWN$", 12
 	pokedex_entry      Dummy,   0,    0, 256,   0,  256,  0
 	.string "SEED$", 12

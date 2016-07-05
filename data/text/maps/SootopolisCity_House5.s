@@ -6,4 +6,3 @@ SootopolisCity_House5_Text_18FDEC:: @ 818FDEC
 
 SootopolisCity_House5_Text_18FE7B:: @ 818FE7B
 	.string "My big brother used to study the sea.$"
-

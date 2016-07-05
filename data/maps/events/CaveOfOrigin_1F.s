@@ -9,4 +9,3 @@ CaveOfOrigin_1F_MapCoordEvents:: @ 838D728
 
 CaveOfOrigin_1F_MapEvents:: @ 838D758
 	map_events 0x0, CaveOfOrigin_1F_MapWarps, CaveOfOrigin_1F_MapCoordEvents, 0x0
-

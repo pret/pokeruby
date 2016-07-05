@@ -1,6 +1,5 @@
 	.align 2
-	.global gMapObjectGraphicsInfoPointers
-gMapObjectGraphicsInfoPointers: @ 836DC58
+gMapObjectGraphicsInfoPointers:: @ 836DC58
 	.4byte gMapObjectGraphicsInfo_BrendanNormal
 	.4byte gMapObjectGraphicsInfo_BrendanMachBike
 	.4byte gMapObjectGraphicsInfo_BrendanSurfing

@@ -19,4 +19,3 @@ SootopolisCity_House2_EventScript_15B307:: @ 815B307
 SootopolisCity_House2_EventScript_15B310:: @ 815B310
 	msgbox SootopolisCity_House2_Text_18FB04, 4
 	return
-

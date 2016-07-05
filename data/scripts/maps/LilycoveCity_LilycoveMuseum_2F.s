@@ -229,4 +229,3 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_158858:: @ 8158858
 	showcontestwinner 13
 	releaseall
 	end
-

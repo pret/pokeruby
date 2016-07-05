@@ -11,4 +11,3 @@ SouthernIsland_Exterior_MapBGEvents:: @ 8391E40
 
 SouthernIsland_Exterior_MapEvents:: @ 8391E4C
 	map_events SouthernIsland_Exterior_MapObjects, SouthernIsland_Exterior_MapWarps, 0x0, SouthernIsland_Exterior_MapBGEvents
-

@@ -6,4 +6,3 @@ LavaridgeTown_House_Text_176D07:: @ 8176D07
 
 LavaridgeTown_House_Text_176D94:: @ 8176D94
 	.string "ZIGZAGOON: Pshoo!$"
-

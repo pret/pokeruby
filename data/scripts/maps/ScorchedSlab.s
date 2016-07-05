@@ -5,4 +5,3 @@ ScorchedSlab_MapScripts:: @ 815F29D
 ScorchedSlab_MapScript1_15F2A3:: @ 815F2A3
 	setflag 2136
 	end
-

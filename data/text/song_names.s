@@ -236,8 +236,7 @@ BGMName_BATTLE30:
 	.string "BATTLE30$"
 
 	.align 2
-	.global gBGMNames
-gBGMNames: @ 83D07AC
+gBGMNames:: @ 83D07AC
 	.word BGMName_STOP
 	.word BGMName_TETSUJI
 	.word BGMName_FIELD13
@@ -855,8 +854,7 @@ SEName_W063B:
 	.string "W063B$"
 
 	.align 2
-	.global gSENames
-gSENames: @ 83D0F78
+gSENames:: @ 83D0F78
 	.word SEName_STOP
 	.word SEName_KAIFUKU
 	.word SEName_PC_LOGON

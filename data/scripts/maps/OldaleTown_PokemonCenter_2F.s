@@ -15,4 +15,3 @@ OldaleTown_PokemonCenter_2F_EventScript_152F6C:: @ 8152F6C
 OldaleTown_PokemonCenter_2F_EventScript_152F72:: @ 8152F72
 	call OldaleTown_PokemonCenter_2F_EventScript_1A41FB
 	end
-

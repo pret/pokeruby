@@ -8,4 +8,3 @@ BattleTower_BattleRoom_MapWarps:: @ 8391DDC
 
 BattleTower_BattleRoom_MapEvents:: @ 8391DEC
 	map_events BattleTower_BattleRoom_MapObjects, BattleTower_BattleRoom_MapWarps, 0x0, 0x0
-

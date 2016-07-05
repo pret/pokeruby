@@ -142,4 +142,3 @@ MauvilleCity_BikeShop_Text_181A3D:: @ 8181A3D
 	.string "Press it backwards to make the BIKE\n"
 	.string "change directions while jumping.\p"
 	.string "Want to read a different page?$"
-

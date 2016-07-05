@@ -139,4 +139,3 @@ UnknownString_819DC0A: @ 819DC0A
 	.string "“TRICK MASTER is my life.”\n"
 	.string "... ... ... ... ... ... ... ...\p"
 	.string "The lock clicked open!$"
-

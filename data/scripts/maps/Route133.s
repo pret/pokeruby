@@ -25,4 +25,3 @@ Route133_EventScript_15259E:: @ 815259E
 	trainerbattle 0, 414, 0, Route133_Text_1C302D, Route133_Text_1C305F
 	msgbox Route133_Text_1C307E, 6
 	end
-

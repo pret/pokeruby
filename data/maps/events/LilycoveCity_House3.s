@@ -12,4 +12,3 @@ LilycoveCity_House3_MapWarps:: @ 838A1A0
 
 LilycoveCity_House3_MapEvents:: @ 838A1B0
 	map_events LilycoveCity_House3_MapObjects, LilycoveCity_House3_MapWarps, 0x0, 0x0
-

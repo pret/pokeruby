@@ -12,4 +12,3 @@ FortreeCity_Gym:: @ 8306424
 	.2byte 0
 	.byte 0
 	.byte 1
-

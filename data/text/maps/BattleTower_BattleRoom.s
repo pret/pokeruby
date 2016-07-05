@@ -13,4 +13,3 @@ BattleTower_BattleRoom_Text_19AD3C:: @ 819AD3C
 BattleTower_BattleRoom_Text_19AD66:: @ 819AD66
 	.string "Would you like to cancel your BATTLE\n"
 	.string "ROOM challenge?$"
-

@@ -20,4 +20,3 @@ Route108_EventScript_14F4BB:: @ 814F4BB
 	trainerbattle 0, 447, 0, Route108_Text_1B9986, Route108_Text_1B99BB
 	msgbox Route108_Text_1B99E9, 6
 	end
-

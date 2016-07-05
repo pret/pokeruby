@@ -8,4 +8,3 @@ PetalburgCity_House1_MapWarps:: @ 8387474
 
 PetalburgCity_House1_MapEvents:: @ 8387484
 	map_events PetalburgCity_House1_MapObjects, PetalburgCity_House1_MapWarps, 0x0, 0x0
-

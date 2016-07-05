@@ -12,4 +12,3 @@ SlateportCity_PokemonCenter_2F_MapWarps:: @ 8388174
 
 SlateportCity_PokemonCenter_2F_MapEvents:: @ 838819C
 	map_events SlateportCity_PokemonCenter_2F_MapObjects, SlateportCity_PokemonCenter_2F_MapWarps, 0x0, 0x0
-

@@ -32,4 +32,3 @@ Route110_TrickHousePuzzle8_Text_19E2C1:: @ 819E2C1
 Route110_TrickHousePuzzle8_Text_19E2EE:: @ 819E2EE
 	.string "Seeing someone like you should please\n"
 	.string "the TRICK MASTER.$"
-

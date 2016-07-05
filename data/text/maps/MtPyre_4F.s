@@ -9,4 +9,3 @@ MtPyre_4F_Text_1968D0:: @ 81968D0
 MtPyre_4F_Text_1968EE:: @ 81968EE
 	.string "Until I improve, my teacher, who rests\n"
 	.string "here, will never find true peace...$"
-

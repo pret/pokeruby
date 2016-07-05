@@ -18,4 +18,3 @@ DewfordTown_House1_EventScript_153001:: @ 8153001
 	waitpokecry
 	release
 	end
-

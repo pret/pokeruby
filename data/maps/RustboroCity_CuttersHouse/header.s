@@ -12,4 +12,3 @@ RustboroCity_CuttersHouse:: @ 8306360
 	.2byte 0
 	.byte 0
 	.byte 0
-

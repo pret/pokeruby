@@ -56,4 +56,3 @@ BattleTower_Corridor_Movement_1608D5:: @ 81608D5
 	step_up
 	step_54
 	step_end
-

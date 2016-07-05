@@ -6,4 +6,3 @@ Route118_MapConnectionsList:: @ 8308A78
 Route118_MapConnections:: @ 8308A9C
 	.4byte 0x3
 	.4byte Route118_MapConnectionsList
-

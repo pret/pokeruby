@@ -35,4 +35,3 @@ PetalburgWoods_MapBGEvents:: @ 838C2D4
 
 PetalburgWoods_MapEvents:: @ 838C31C
 	map_events PetalburgWoods_MapObjects, PetalburgWoods_MapWarps, PetalburgWoods_MapCoordEvents, PetalburgWoods_MapBGEvents
-

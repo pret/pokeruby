@@ -12,4 +12,3 @@ FortreeCity_DecorationShop:: @ 8306504
 	.2byte 0
 	.byte 0
 	.byte 0
-

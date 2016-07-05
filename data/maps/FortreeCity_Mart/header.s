@@ -12,4 +12,3 @@ FortreeCity_Mart:: @ 8306478
 	.2byte 0
 	.byte 0
 	.byte 0
-

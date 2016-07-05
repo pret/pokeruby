@@ -6,4 +6,3 @@ Route113_MapConnectionsList:: @ 83089CC
 Route113_MapConnections:: @ 83089F0
 	.4byte 0x3
 	.4byte Route113_MapConnectionsList
-

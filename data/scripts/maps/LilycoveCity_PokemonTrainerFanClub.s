@@ -434,4 +434,3 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_159889:: @ 8159889
 	msgbox LilycoveCity_PokemonTrainerFanClub_Text_18B24F, 4
 	release
 	end
-

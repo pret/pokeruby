@@ -40,4 +40,3 @@ UnknownString_819DE8D: @ 819DE8D
 	.string "“TRICK MASTER is huggable.”\n"
 	.string "... ... ... ... ... ... ... ...\p"
 	.string "The lock clicked open!$"
-

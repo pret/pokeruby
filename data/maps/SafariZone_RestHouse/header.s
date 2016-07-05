@@ -12,4 +12,3 @@ SafariZone_RestHouse:: @ 8307CDC
 	.2byte 0
 	.byte 0
 	.byte 0
-

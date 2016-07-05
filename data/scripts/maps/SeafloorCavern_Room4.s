@@ -10,4 +10,3 @@ SeafloorCavern_Room4_EventScript_15DACB:: @ 815DACB
 	trainerbattle 0, TRAINER_SEAFLOOR_CAVERN_GRUNT_4, 0, SeafloorCavern_Room4_Text_1977B9, SeafloorCavern_Room4_Text_1977E2
 	msgbox SeafloorCavern_Room4_Text_1977ED, 6
 	end
-

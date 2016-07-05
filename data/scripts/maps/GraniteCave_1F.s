@@ -17,4 +17,3 @@ GraniteCave_1F_EventScript_15CBD3:: @ 815CBD3
 	msgbox GraniteCave_1F_Text_194A3E, 4
 	release
 	end
-

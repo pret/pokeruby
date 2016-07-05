@@ -60,4 +60,3 @@ VerdanturfTown_Text_16CF6D:: @ 816CF6D
 	.string "“Linking RUSTBORO and VERDANTURF\p"
 	.string "“The tunnel project has been\n"
 	.string "canceled.”$"
-

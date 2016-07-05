@@ -220,4 +220,3 @@ Route128_EventScript_15234E:: @ 815234E
 	trainerbattle 0, 673, 0, Route128_Text_1C2090, Route128_Text_1C20FC
 	msgbox Route128_Text_1C210D, 6
 	end
-

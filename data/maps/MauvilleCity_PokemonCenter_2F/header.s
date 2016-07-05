@@ -12,4 +12,3 @@ MauvilleCity_PokemonCenter_2F:: @ 83061F4
 	.2byte 0
 	.byte 0
 	.byte 0
-

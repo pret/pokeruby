@@ -61,4 +61,3 @@ JaggedPass_Text_1960E2:: @ 81960E2
 JaggedPass_Text_196118:: @ 8196118
 	.string "I should get an ACRO BIKE from RYDEL\n"
 	.string "in MAUVILLE CITY...$"
-

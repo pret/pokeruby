@@ -49,4 +49,3 @@ Route125_EventScript_151FE3:: @ 8151FE3
 	trainerbattle 4, 678, 0, Route125_Text_1C14AB, Route125_Text_1C14E7, Route125_Text_1C154F
 	msgbox Route125_Text_1C1508, 6
 	end
-

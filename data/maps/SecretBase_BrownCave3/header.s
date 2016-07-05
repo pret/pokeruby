@@ -12,4 +12,3 @@ SecretBase_BrownCave3:: @ 8307844
 	.2byte 0
 	.byte 1
 	.byte 8
-

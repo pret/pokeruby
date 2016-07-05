@@ -12,4 +12,3 @@ Route114_FossilManiacsTunnel:: @ 8306CE4
 	.2byte 0
 	.byte 0
 	.byte 0
-

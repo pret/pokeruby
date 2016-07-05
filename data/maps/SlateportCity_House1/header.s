@@ -12,4 +12,3 @@ SlateportCity_House1:: @ 8306050
 	.2byte 0
 	.byte 0
 	.byte 0
-

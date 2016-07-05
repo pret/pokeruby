@@ -13,4 +13,3 @@ IslandCave_MapBGEvents:: @ 838E6A4
 
 IslandCave_MapEvents:: @ 838E6C8
 	map_events IslandCave_MapObjects, IslandCave_MapWarps, 0x0, IslandCave_MapBGEvents
-

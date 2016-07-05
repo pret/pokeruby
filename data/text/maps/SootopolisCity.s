@@ -213,4 +213,3 @@ SootopolisCity_Text_16A711:: @ 816A711
 	.string "SOOTOPOLIS CITY\p"
 	.string "“The mystical city where history\n"
 	.string "slumbers.”$"
-

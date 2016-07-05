@@ -12,4 +12,3 @@ MauvilleCity_BikeShop_MapBGEvents:: @ 8388358
 
 MauvilleCity_BikeShop_MapEvents:: @ 8388370
 	map_events MauvilleCity_BikeShop_MapObjects, MauvilleCity_BikeShop_MapWarps, 0x0, MauvilleCity_BikeShop_MapBGEvents
-

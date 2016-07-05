@@ -13,4 +13,3 @@ SootopolisCity_Gym_1F_MapBGEvents:: @ 838AD38
 
 SootopolisCity_Gym_1F_MapEvents:: @ 838AD50
 	map_events SootopolisCity_Gym_1F_MapObjects, SootopolisCity_Gym_1F_MapWarps, 0x0, SootopolisCity_Gym_1F_MapBGEvents
-

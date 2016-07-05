@@ -18,4 +18,3 @@ AbandonedShip_Corridors_1F_MapWarps:: @ 838E150
 
 AbandonedShip_Corridors_1F_MapEvents:: @ 838E1B0
 	map_events AbandonedShip_Corridors_1F_MapObjects, AbandonedShip_Corridors_1F_MapWarps, 0x0, 0x0
-

@@ -11,4 +11,3 @@ Route119_WeatherInstitute_2F_MapWarps:: @ 8392F24
 
 Route119_WeatherInstitute_2F_MapEvents:: @ 8392F2C
 	map_events Route119_WeatherInstitute_2F_MapObjects, Route119_WeatherInstitute_2F_MapWarps, 0x0, 0x0
-

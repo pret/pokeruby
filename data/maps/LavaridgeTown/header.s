@@ -12,4 +12,3 @@ LavaridgeTown:: @ 8305598
 	.2byte 0
 	.byte 1
 	.byte 0
-

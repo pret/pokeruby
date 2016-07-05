@@ -15,4 +15,3 @@ LittlerootTown_MaysHouse_1F_MapCoordEvents:: @ 8385954
 
 LittlerootTown_MaysHouse_1F_MapEvents:: @ 8385964
 	map_events LittlerootTown_MaysHouse_1F_MapObjects, LittlerootTown_MaysHouse_1F_MapWarps, LittlerootTown_MaysHouse_1F_MapCoordEvents, 0x0
-

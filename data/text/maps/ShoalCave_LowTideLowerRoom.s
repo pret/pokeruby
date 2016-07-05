@@ -7,4 +7,3 @@ ShoalCave_LowTideLowerRoom_Text_198200:: @ 8198200
 
 ShoalCave_LowTideLowerRoom_Text_1982A2:: @ 81982A2
 	.string "Everything starts with focus!$"
-

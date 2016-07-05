@@ -12,4 +12,3 @@ Route110_TrickHousePuzzle8:: @ 8307E64
 	.2byte 0
 	.byte 0
 	.byte 0
-

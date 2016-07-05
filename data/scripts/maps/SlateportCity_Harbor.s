@@ -373,4 +373,3 @@ SlateportCity_Harbor_EventScript_156380:: @ 8156380
 	msgbox SlateportCity_Harbor_Text_180491, 4
 	release
 	end
-

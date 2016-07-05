@@ -12,4 +12,3 @@ MtPyre_Summit:: @ 8306FD8
 	.2byte 0
 	.byte 1
 	.byte 0
-

@@ -4,4 +4,3 @@ LavaridgeTown_MapConnectionsList:: @ 8308670
 LavaridgeTown_MapConnections:: @ 830867C
 	.4byte 0x1
 	.4byte LavaridgeTown_MapConnectionsList
-

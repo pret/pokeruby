@@ -12,4 +12,3 @@ PetalburgCity_PokemonCenter_1F_MapWarps:: @ 8387564
 
 PetalburgCity_PokemonCenter_1F_MapEvents:: @ 838757C
 	map_events PetalburgCity_PokemonCenter_1F_MapObjects, PetalburgCity_PokemonCenter_1F_MapWarps, 0x0, 0x0
-

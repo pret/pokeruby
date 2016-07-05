@@ -1,5 +1,4 @@
-	.global gUnknown_083CA4D4
-gUnknown_083CA4D4: @ 83CA4D4
+gUnknown_083CA4D4:: @ 83CA4D4
 	.incbin "baserom.gba", 0x003ca4d4, 0x18
 ContestString_DescHighlyAppealing:
 	.string "A highly appealing move.$"
@@ -99,8 +98,7 @@ ContestString_DescStopExcitement:
 	.string "Temporarily stops the\ncrowd from growing excited.$"
 	.align 1
 
-	.global gUnknown_083CADD4
-gUnknown_083CADD4: @ 83CADD4
+gUnknown_083CADD4:: @ 83CADD4
 	.4byte ContestString_DescHighlyAppealing
 	.4byte ContestString_DescStartled1
 	.4byte ContestString_DescGreatLock
@@ -202,33 +200,27 @@ ContestString_Tough:
 	.string "TOUGH$"
 	
 	.align 2
-	.global gUnknown_083CAF70
-gUnknown_083CAF70: @ 83CAF70
+gUnknown_083CAF70:: @ 83CAF70
 	.4byte ContestString_Cool
 	.4byte ContestString_Beauty
 	.4byte ContestString_Cute
 	.4byte ContestString_Smart
 	.4byte ContestString_Tough
 
-	.global gUnknown_083CAF84
-gUnknown_083CAF84: @ 83CAF84
+gUnknown_083CAF84:: @ 83CAF84
 	.string "Appeal no. {NAME_END}!\nWhich move will be played?$"
 
-	.global gUnknown_083CAFAE
-gUnknown_083CAFAE: @ 83CAFAE
+gUnknown_083CAFAE:: @ 83CAFAE
 	.string "Appeal no. {NAME_END}!\nBut it can’t participate!$"
 
-	.global gUnknown_083CAFD7
-gUnknown_083CAFD7: @ 83CAFD7
+gUnknown_083CAFD7:: @ 83CAFD7
 	.string "{STR_VAR_1} appealed with\n{STR_VAR_2}!$"
 	.string "The other POKéMON\nmade moves.{PAUSE 60}$"
 
-	.global gUnknown_083CB00D
-gUnknown_083CB00D: @ 83CB00D
+gUnknown_083CB00D:: @ 83CB00D
 	.string "{STR_VAR_1} was watching\nthe others.{PAUSE 60}$"
 
-	.global gUnknown_083CB02C
-gUnknown_083CB02C: @ 83CB02C
+gUnknown_083CB02C:: @ 83CB02C
 	.string "We’re all out of\nAppeal Time!{PAUSE 60}$"
 	.string "{STR_VAR_1}’s {STR_VAR_3}\nmove {STR_VAR_2}!{PAUSE 60}$"
 	.string "TRICK$"
@@ -285,8 +277,7 @@ ContestString_StandOutDidnt:
 	.string "{STR_VAR_1} hasn’t made\nits appeal.{PAUSE_UNTIL_PRESS}$"
 	
 	.align 2
-	.global gUnknown_083CB2F0
-gUnknown_083CB2F0: @ 83CB2F0
+gUnknown_083CB2F0:: @ 83CB2F0
 	.4byte ContestString_StandOutNone
 	.4byte ContestString_StandOutNotMuch
 	.4byte ContestString_StandOutLittle
@@ -453,23 +444,19 @@ ContestString_MoveBackLine:
 ContestString_ScrambleOrder:
 	.string "It scrambled up the\norder for the next turn.{PAUSE 60}$"
 
-	.global gUnknown_083CBD52
-gUnknown_083CBD52: @ 83CBD52
+gUnknown_083CBD52:: @ 83CBD52
 ContestString_JudgeExpectantly2:
 	.string "The JUDGE looked at\n{STR_VAR_1} expectantly.{PAUSE 60}$"
 
-	.global gUnknown_083CBD79
-gUnknown_083CBD79: @ 83CBD79
+gUnknown_083CBD79:: @ 83CBD79
 ContestString_WentOverWell:
 	.string "The appeal combo went\nover well.{PAUSE 60}$"
 
-	.global gUnknown_083CBD9D
-gUnknown_083CBD9D: @ 83CBD9D
+gUnknown_083CBD9D:: @ 83CBD9D
 ContestString_WentOverVeryWell:
 	.string "The appeal combo went\nover very well.{PAUSE 60}$"
 
-	.global gUnknown_083CBDC6
-gUnknown_083CBDC6: @ 83CBDC6
+gUnknown_083CBDC6:: @ 83CBDC6
 ContestString_AppealComboExcellently:
 	.string "The appeal combo went\nover excellently.{PAUSE 60}$"
 ContestString_AvertGaze:
@@ -493,8 +480,7 @@ ContestString_LeaptUp:
 ContestString_TrippedOver:
 	.string "{STR_VAR_1} tripped over\nout of distraction.{PAUSE 60}$"
 
-	.global gUnknown_083CBF60
-gUnknown_083CBF60: @ 83CBF60
+gUnknown_083CBF60:: @ 83CBF60
 ContestString_TooNervous:
 	.string "{STR_VAR_1} was too\nnervous to move.{PAUSE 60}$"
 ContestString_MessedUp2:
@@ -512,46 +498,38 @@ ContestString_BadConditionWeakAppeal:
 ContestString_Unaffected:
 	.string "{STR_VAR_1} was\nunaffected.{PAUSE 60}$"
 
-	.global gUnknown_083CC075
-gUnknown_083CC075: @ 83CC075
+gUnknown_083CC075:: @ 83CC075
 ContestString_DissapointedRepeat:
 	.string "{STR_VAR_1} disappointed\nby repeating an appeal.{PAUSE 60}$"
 
-	.global gUnknown_083CC0A0
-gUnknown_083CC0A0: @ 83CC0A0
+gUnknown_083CC0A0:: @ 83CC0A0
 ContestString_WentOverGreat:
 	.string "{STR_VAR_1}’s {STR_VAR_3}\nwent over great.{PAUSE 60}$"
 
-	.global gUnknown_083CC0BC
-gUnknown_083CC0BC: @ 83CC0BC
+gUnknown_083CC0BC:: @ 83CC0BC
 ContestString_DidntGoWell:
 	.string "{STR_VAR_1}’s {STR_VAR_3}\ndidn’t go over well here...{PAUSE 60}$"
 
-	.global gUnknown_083CC0E3
-gUnknown_083CC0E3: @ 83CC0E3
+gUnknown_083CC0E3:: @ 83CC0E3
 ContestString_GotCrowdGoing:
 	.string "{STR_VAR_1}’s {STR_VAR_3}\ngot the crowd going.{PAUSE 60}$"
 
-	.global gUnknown_083CC103
-gUnknown_083CC103: @ 83CC103
+gUnknown_083CC103:: @ 83CC103
 ContestString_CantAppealNextTurn:
 	.string "{STR_VAR_1} can’t appeal\nnext turn...{PAUSE 60}$"
 ContestString_AttractedAttention:
 	.string "It attracted the crowd’s\nattention.{PAUSE 60}$"
 
-	.global gUnknown_083CC14A
-gUnknown_083CC14A: @ 83CC14A
+gUnknown_083CC14A:: @ 83CC14A
 ContestString_CrowdWatches:
 	.string "The crowd continues to\nwatch {STR_VAR_3}.{PAUSE 60}$"
 
-	.global gUnknown_083CC16E
-gUnknown_083CC16E: @ 83CC16E
+gUnknown_083CC16E:: @ 83CC16E
 ContestString_Ignored2:
 	.string "{STR_VAR_1}’s\n{STR_VAR_2} is ignored.{PAUSE 60}$"
 
 	.align 2
-	.global gUnknown_083CC188
-gUnknown_083CC188: @ 83CC188
+gUnknown_083CC188:: @ 83CC188
 	.4byte ContestString_MoreConscious
 	.4byte ContestString_NoAppeal
 	.4byte ContestString_SettleDown
@@ -615,24 +593,19 @@ gUnknown_083CC188: @ 83CC188
 	.4byte ContestString_Unaffected
 	.4byte ContestString_AttractedAttention
 
-	.global gUnknown_083CC280
-gUnknown_083CC280: @ 83CC280
+gUnknown_083CC280:: @ 83CC280
 	.string "shyness$"
 
-	.global gUnknown_083CC288
-gUnknown_083CC288: @ 83CC288
+gUnknown_083CC288:: @ 83CC288
 	.string "anxiety$"
 
-	.global gUnknown_083CC290
-gUnknown_083CC290: @ 83CC290
+gUnknown_083CC290:: @ 83CC290
 	.string "laziness$"
 
-	.global gUnknown_083CC299
-gUnknown_083CC299: @ 83CC299
+gUnknown_083CC299:: @ 83CC299
 	.string "hesitancy$"
 
-	.global gUnknown_083CC2A3
-gUnknown_083CC2A3: @ 83CC2A3
+gUnknown_083CC2A3:: @ 83CC2A3
 ContestString_Fear: @unused
 	.string "fear$"
 ContestString_Coolness:
@@ -647,16 +620,14 @@ ContestString_Toughness:
 	.string "toughness$"
 	
 	.align 2
-	.global gUnknown_083CC2D8
-gUnknown_083CC2D8: @ 83CC2D8
+gUnknown_083CC2D8:: @ 83CC2D8
 	.4byte ContestString_Coolness
 	.4byte ContestString_Beauty2
 	.4byte ContestString_Cuteness
 	.4byte ContestString_Smartness
 	.4byte ContestString_Toughness
 
-	.global gUnknown_083CC2EC
-gUnknown_083CC2EC: @ 83CC2EC
+gUnknown_083CC2EC:: @ 83CC2EC
 	.string "TENSION:$"
 	.string "COOL Move$"
 	.string "BEAUTY Move$"

@@ -25,4 +25,3 @@ FortreeCity_PokemonCenter_1F_EventScript_158032:: @ 8158032
 FortreeCity_PokemonCenter_1F_EventScript_15803B:: @ 815803B
 	msgbox FortreeCity_PokemonCenter_1F_Text_186138, 2
 	end
-

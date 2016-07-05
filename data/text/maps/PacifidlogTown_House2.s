@@ -52,4 +52,3 @@ PacifidlogTown_House2_Text_1793CC:: @ 81793CC
 PacifidlogTown_House2_Text_1793DD:: @ 81793DD
 	.string "It doesn’t appear to like the TRAINER\n"
 	.string "very much.$"
-

@@ -205,4 +205,3 @@ NewMauville_Inside_EventScript_15E93C:: @ 815E93C
 	clearflag 2145
 	release
 	end
-

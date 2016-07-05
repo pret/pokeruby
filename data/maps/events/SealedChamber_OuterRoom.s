@@ -34,4 +34,3 @@ SealedChamber_OuterRoom_MapBGEvents:: @ 838E790
 
 SealedChamber_OuterRoom_MapEvents:: @ 838E8EC
 	map_events 0x0, SealedChamber_OuterRoom_MapWarps, 0x0, SealedChamber_OuterRoom_MapBGEvents
-

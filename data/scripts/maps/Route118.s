@@ -204,4 +204,3 @@ Route118_EventScript_151150:: @ 8151150
 	trainerbattle 0, 408, 0, Route118_Text_1BE1D7, Route118_Text_1BE1F5
 	msgbox Route118_Text_1BE20D, 6
 	end
-

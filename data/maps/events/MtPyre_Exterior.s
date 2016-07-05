@@ -20,4 +20,3 @@ MtPyre_Exterior_MapBGEvents:: @ 838CBAC
 
 MtPyre_Exterior_MapEvents:: @ 838CBC4
 	map_events MtPyre_Exterior_MapObjects, MtPyre_Exterior_MapWarps, MtPyre_Exterior_MapCoordEvents, MtPyre_Exterior_MapBGEvents
-

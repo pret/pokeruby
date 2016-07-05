@@ -7,4 +7,3 @@ MauvilleCity_MapConnectionsList:: @ 8308730
 MauvilleCity_MapConnections:: @ 8308760
 	.4byte 0x4
 	.4byte MauvilleCity_MapConnectionsList
-

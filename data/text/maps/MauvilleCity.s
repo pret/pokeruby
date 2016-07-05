@@ -172,4 +172,3 @@ MauvilleCity_Text_16674A:: @ 816674A
 
 MauvilleCity_Text_166879:: @ 8166879
 	.string "Hi, have you been checking out TVs?$"
-

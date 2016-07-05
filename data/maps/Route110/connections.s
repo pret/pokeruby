@@ -6,4 +6,3 @@ Route110_MapConnectionsList:: @ 8308948
 Route110_MapConnections:: @ 830896C
 	.4byte 0x3
 	.4byte Route110_MapConnectionsList
-

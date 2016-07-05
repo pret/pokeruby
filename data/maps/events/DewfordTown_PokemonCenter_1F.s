@@ -10,4 +10,3 @@ DewfordTown_PokemonCenter_1F_MapWarps:: @ 8385F0C
 
 DewfordTown_PokemonCenter_1F_MapEvents:: @ 8385F24
 	map_events DewfordTown_PokemonCenter_1F_MapObjects, DewfordTown_PokemonCenter_1F_MapWarps, 0x0, 0x0
-

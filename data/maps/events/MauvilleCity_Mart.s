@@ -9,4 +9,3 @@ MauvilleCity_Mart_MapWarps:: @ 83887E8
 
 MauvilleCity_Mart_MapEvents:: @ 83887F8
 	map_events MauvilleCity_Mart_MapObjects, MauvilleCity_Mart_MapWarps, 0x0, 0x0
-

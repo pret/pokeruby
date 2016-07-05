@@ -12,4 +12,3 @@ MtPyre_3F:: @ 8306F4C
 	.2byte 0
 	.byte 1
 	.byte 0
-

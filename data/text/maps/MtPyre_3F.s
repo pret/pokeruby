@@ -25,4 +25,3 @@ MtPyre_3F_Text_196842:: @ 8196842
 	.string "I’ve got to keep working toward the\n"
 	.string "summit...\p"
 	.string "Go, me!$"
-

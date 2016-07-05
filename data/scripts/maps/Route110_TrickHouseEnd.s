@@ -249,4 +249,3 @@ Route110_TrickHouseEnd_Movement_161CE8:: @ 8161CE8
 Route110_TrickHouseEnd_Movement_161CEA:: @ 8161CEA
 	step_48
 	step_end
-

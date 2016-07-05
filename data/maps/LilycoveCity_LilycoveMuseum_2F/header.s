@@ -12,4 +12,3 @@ LilycoveCity_LilycoveMuseum_2F:: @ 8306574
 	.2byte 0
 	.byte 0
 	.byte 0
-

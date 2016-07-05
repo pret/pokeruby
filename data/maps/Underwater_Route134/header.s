@@ -12,4 +12,3 @@ Underwater_Route134:: @ 83074FC
 	.2byte 0
 	.byte 1
 	.byte 0
-

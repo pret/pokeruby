@@ -12,4 +12,3 @@ SlateportCity_Harbor:: @ 83060C0
 	.2byte 0
 	.byte 0
 	.byte 0
-

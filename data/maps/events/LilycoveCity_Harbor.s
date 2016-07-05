@@ -12,4 +12,3 @@ LilycoveCity_Harbor_MapWarps:: @ 8389FF4
 
 LilycoveCity_Harbor_MapEvents:: @ 838A014
 	map_events LilycoveCity_Harbor_MapObjects, LilycoveCity_Harbor_MapWarps, 0x0, 0x0
-

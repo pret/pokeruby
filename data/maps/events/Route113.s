@@ -46,4 +46,3 @@ Route113_MapBGEvents:: @ 8382BE0
 
 Route113_MapEvents:: @ 8382C34
 	map_events Route113_MapObjects, Route113_MapWarps, Route113_MapCoordEvents, Route113_MapBGEvents
-

@@ -14,4 +14,3 @@ RustboroCity_PokemonCenter_1F_Text_184C19:: @ 8184C19
 	.string "The man next door gave me an HM!\p"
 	.string "I used it to teach my POKéMON how to\n"
 	.string "CUT down skinny trees.$"
-

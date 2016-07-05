@@ -12,4 +12,3 @@ DewfordTown_PokemonCenter_1F:: @ 8305B64
 	.2byte 0
 	.byte 0
 	.byte 0
-

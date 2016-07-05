@@ -234,4 +234,3 @@ UnknownString_816F68A: @ 816F68A
 UnknownString_816F6CF: @ 816F6CF
 	.string "I’m going to look for red BERRIES to\n"
 	.string "make RED {POKEBLOCK}S.$"
-

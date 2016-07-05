@@ -15,4 +15,3 @@ SeafloorCavern_Room1_EventScript_15DA84:: @ 815DA84
 	trainerbattle 0, TRAINER_SEAFLOOR_CAVERN_GRUNT_2, 0, SeafloorCavern_Room1_Text_19753C, SeafloorCavern_Room1_Text_197573
 	msgbox SeafloorCavern_Room1_Text_197589, 6
 	end
-

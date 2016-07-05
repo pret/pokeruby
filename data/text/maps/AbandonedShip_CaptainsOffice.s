@@ -14,4 +14,3 @@ AbandonedShip_CaptainsOffice_Text_198D00:: @ 8198D00
 AbandonedShip_CaptainsOffice_Text_198D7B:: @ 8198D7B
 	.string "This ship is called S.S. CACTUS.\n"
 	.string "It seems to be from an earlier era.$"
-

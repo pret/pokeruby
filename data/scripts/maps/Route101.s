@@ -244,4 +244,3 @@ Route101_EventScript_14EA7F:: @ 814EA7F
 Route101_Movement_14EAD7:: @ 814EAD7
 	step_right
 	step_end
-

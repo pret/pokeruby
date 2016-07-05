@@ -33,4 +33,3 @@ SlateportCity_Mart_EventScript_15643E:: @ 815643E
 SlateportCity_Mart_EventScript_156447:: @ 8156447
 	msgbox SlateportCity_Mart_Text_18079D, 2
 	end
-

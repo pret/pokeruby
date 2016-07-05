@@ -3,4 +3,3 @@ BattleTower_Corridor_MapObjects:: @ 8391D80
 
 BattleTower_Corridor_MapEvents:: @ 8391D98
 	map_events BattleTower_Corridor_MapObjects, 0x0, 0x0, 0x0
-

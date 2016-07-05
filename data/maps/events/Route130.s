@@ -5,4 +5,3 @@ Route130_MapObjects:: @ 838523C
 
 Route130_MapEvents:: @ 8385284
 	map_events Route130_MapObjects, 0x0, 0x0, 0x0
-

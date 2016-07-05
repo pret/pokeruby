@@ -19,4 +19,3 @@ RustboroCity_PokemonSchool_MapBGEvents:: @ 8388AD4
 
 RustboroCity_PokemonSchool_MapEvents:: @ 8388B10
 	map_events RustboroCity_PokemonSchool_MapObjects, RustboroCity_PokemonSchool_MapWarps, 0x0, RustboroCity_PokemonSchool_MapBGEvents
-

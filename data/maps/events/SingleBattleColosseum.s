@@ -11,4 +11,3 @@ SingleBattleColosseum_MapCoordEvents:: @ 839130C
 
 SingleBattleColosseum_MapEvents:: @ 839132C
 	map_events SingleBattleColosseum_MapObjects, SingleBattleColosseum_MapWarps, SingleBattleColosseum_MapCoordEvents, 0x0
-

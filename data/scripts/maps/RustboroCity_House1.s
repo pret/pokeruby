@@ -52,4 +52,3 @@ RustboroCity_House1_EventScript_157D13:: @ 8157D13
 RustboroCity_House1_EventScript_157D1D:: @ 8157D1D
 	msgbox RustboroCity_House1_Text_185020, 2
 	end
-

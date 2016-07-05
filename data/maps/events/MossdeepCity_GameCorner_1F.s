@@ -11,4 +11,3 @@ MossdeepCity_GameCorner_1F_MapBGEvents:: @ 838AC9C
 
 MossdeepCity_GameCorner_1F_MapEvents:: @ 838ACA8
 	map_events MossdeepCity_GameCorner_1F_MapObjects, MossdeepCity_GameCorner_1F_MapWarps, 0x0, MossdeepCity_GameCorner_1F_MapBGEvents
-

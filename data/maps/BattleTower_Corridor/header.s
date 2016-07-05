@@ -12,4 +12,3 @@ BattleTower_Corridor:: @ 8307C6C
 	.2byte 0
 	.byte 0
 	.byte 0
-

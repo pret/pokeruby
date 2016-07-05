@@ -12,4 +12,3 @@ Route119_WeatherInstitute_1F:: @ 8307EF0
 	.2byte 0
 	.byte 0
 	.byte 0
-

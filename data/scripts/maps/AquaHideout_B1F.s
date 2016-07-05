@@ -43,4 +43,3 @@ MagmaHideout_B1F_EventScript_15D89A:: @ 815D89A
 	trainerbattle 0, TRAINER_HIDEOUT_B1F_GRUNT_3, 0, AquaHideout_B1F_Text_196FFD, AquaHideout_B1F_Text_197040
 	msgbox AquaHideout_B1F_Text_197056, 6
 	end
-

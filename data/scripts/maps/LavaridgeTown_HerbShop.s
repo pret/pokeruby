@@ -42,4 +42,3 @@ LavaridgeTown_HerbShop_EventScript_153684:: @ 8153684
 	msgbox LavaridgeTown_HerbShop_Text_176209, 4
 	release
 	end
-

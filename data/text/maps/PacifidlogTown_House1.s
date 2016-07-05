@@ -11,4 +11,3 @@ PacifidlogTown_House1_Text_17906A:: @ 817906A
 	.string "“Six dots open three doors.”\p"
 	.string "Grandpa used to say that, but I don’t\n"
 	.string "know what he meant.$"
-

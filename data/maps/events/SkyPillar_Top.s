@@ -6,4 +6,3 @@ SkyPillar_Top_MapWarps:: @ 838EE68
 
 SkyPillar_Top_MapEvents:: @ 838EE70
 	map_events SkyPillar_Top_MapObjects, SkyPillar_Top_MapWarps, 0x0, 0x0
-

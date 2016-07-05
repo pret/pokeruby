@@ -75,4 +75,3 @@ MossdeepCity_GameCorner_B1F_Movement_15AEFF:: @ 815AEFF
 	step_up
 	step_13
 	step_end
-

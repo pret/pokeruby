@@ -12,4 +12,3 @@ MossdeepCity_House4:: @ 83068A0
 	.2byte 0
 	.byte 0
 	.byte 0
-

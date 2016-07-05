@@ -586,8 +586,7 @@ gItemEffect_SitrusBerry: @ 81FCDDA
 	.byte 30
 
 	.align 2
-	.global gItemEffectTable
-gItemEffectTable: @ 81FCDE4
+gItemEffectTable:: @ 81FCDE4
 	.4byte gItemEffect_Potion
 	.4byte gItemEffect_Antidote
 	.4byte gItemEffect_BurnHeal

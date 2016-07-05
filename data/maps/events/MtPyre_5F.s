@@ -11,4 +11,3 @@ MtPyre_5F_MapWarps:: @ 838CA84
 
 MtPyre_5F_MapEvents:: @ 838CAAC
 	map_events MtPyre_5F_MapObjects, MtPyre_5F_MapWarps, 0x0, 0x0
-

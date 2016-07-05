@@ -20,4 +20,3 @@ SeafloorCavern_Room1_Text_197589:: @ 8197589
 	.string "That submarine we jacked, man, it’s\n"
 	.string "brutal as a ride.\l"
 	.string "It’s way too tight in there!$"
-

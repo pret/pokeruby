@@ -69,4 +69,3 @@ Route119_WeatherInstitute_2F_Text_19F2FE:: @ 819F2FE
 	.string "I’ve been researching rain for many\n"
 	.string "years, but it’s ridiculous to think that\l"
 	.string "humans can freely change the weather.$"
-

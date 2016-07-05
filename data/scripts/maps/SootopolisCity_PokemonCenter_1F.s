@@ -45,4 +45,3 @@ SootopolisCity_PokemonCenter_1F_EventScript_15B1EE:: @ 815B1EE
 	msgbox SootopolisCity_PokemonCenter_1F_Text_18F7EA, 4
 	release
 	end
-

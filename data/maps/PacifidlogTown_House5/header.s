@@ -12,4 +12,3 @@ PacifidlogTown_House5:: @ 8305F00
 	.2byte 0
 	.byte 0
 	.byte 0
-

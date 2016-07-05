@@ -21,4 +21,3 @@ RustboroCity_CuttersHouse_EventScript_157D53:: @ 8157D53
 RustboroCity_CuttersHouse_EventScript_157D5D:: @ 8157D5D
 	msgbox RustboroCity_CuttersHouse_Text_1852B3, 2
 	end
-

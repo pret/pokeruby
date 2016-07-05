@@ -9,4 +9,3 @@ EverGrandeCity_ChampionsRoom_MapWarps:: @ 838B37C
 
 EverGrandeCity_ChampionsRoom_MapEvents:: @ 838B38C
 	map_events EverGrandeCity_ChampionsRoom_MapObjects, EverGrandeCity_ChampionsRoom_MapWarps, 0x0, 0x0
-

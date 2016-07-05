@@ -12,4 +12,3 @@ MossdeepCity_PokemonCenter_1F:: @ 8306814
 	.2byte 0
 	.byte 0
 	.byte 0
-

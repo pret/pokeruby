@@ -12,4 +12,3 @@ LilycoveCity_MoveDeletersHouse:: @ 8306670
 	.2byte 0
 	.byte 0
 	.byte 0
-

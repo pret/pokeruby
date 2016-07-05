@@ -12,4 +12,3 @@ MossdeepCity_Gym:: @ 83067C0
 	.2byte 0
 	.byte 0
 	.byte 1
-

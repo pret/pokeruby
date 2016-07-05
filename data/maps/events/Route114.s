@@ -44,4 +44,3 @@ Route114_MapBGEvents:: @ 8382E88
 
 Route114_MapEvents:: @ 8382F18
 	map_events Route114_MapObjects, Route114_MapWarps, 0x0, Route114_MapBGEvents
-

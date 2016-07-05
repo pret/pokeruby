@@ -105,4 +105,3 @@ MtChimney_Text_195D5C:: @ 8195D5C
 	.string "I’ll have to take another dip in the\n"
 	.string "hot springs. Want to join me?\p"
 	.string "Just joking!$"
-

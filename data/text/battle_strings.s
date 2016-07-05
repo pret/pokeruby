@@ -1,5 +1,4 @@
-	.global gUnknown_083FE4F4
-gUnknown_083FE4F4: @ 83FE4F4
+gUnknown_083FE4F4:: @ 83FE4F4
 	.4byte dp01t_00_3_getattr
 	.4byte sub_811EC04
 	.4byte sub_811EC10
@@ -251,15 +250,13 @@ BattleText_FreedFrom:
 BattleText_KeptGoingCrash:
 	.string "{ATTACKING_MON} kept going\nand crashed!$"
 
-	.global gUnknown_083FEE5D
-gUnknown_083FEE5D: @ 83FEE5D
+gUnknown_083FEE5D:: @ 83FEE5D
 BattleText_MistShroud:
 	.string "{STRING 38} became\nshrouded in MIST!$"
 BattleText_MistProtect:
 	.string "{STRING 16} is protected\nby MIST!$"
 
-	.global gUnknown_083FEE92
-gUnknown_083FEE92: @ 83FEE92
+gUnknown_083FEE92:: @ 83FEE92
 BattleText_GetPumped:
 	.string "{ATTACKING_MON} is getting\npumped!$"
 BattleText_HitRecoil:
@@ -541,8 +538,7 @@ BattleText_Transformed2:
 BattleText_TookAttack2:
 	.string "{DEFENDING_MON}’s {STRING 22}\ntook the attack!$"
 
-	.global gUnknown_083FFCCA
-gUnknown_083FFCCA: @ 83FFCCA
+gUnknown_083FFCCA:: @ 83FFCCA
 BattleText_PreventedSwitch:
 	.string "{STRING 0}’s {STRING 20}\nprevents switching!\p$"
 BattleText_PreventedOther:
@@ -560,8 +556,7 @@ BattleText_NoEffectOn:
 BattleText_Sharply:
 	.string "sharply $"
 
-	.global gUnknown_083FFDB3
-gUnknown_083FFDB3: @ 83FFDB3
+gUnknown_083FFDB3:: @ 83FFDB3
 BattleText_Rose:
 	.string "rose!$"
 BattleText_Harshly:
@@ -571,8 +566,7 @@ BattleText_Fell:
 BattleText_UnknownString7:
 	.string "{ATTACKING_MON}’s {STRING 0}\n{STRING 1}$"
 
-	.global gUnknown_083FFDD3
-gUnknown_083FFDD3: @ 83FFDD3
+gUnknown_083FFDD3:: @ 83FFDD3
 BattleText_UnknownString3:
 	.string "{DEFENDING_MON}’s {STRING 0}\n{STRING 1}$"
 BattleText_UnknownString4:
@@ -600,8 +594,7 @@ BattleText_NotEffective:
 BattleText_SuperEffective:
 	.string "It’s super effective!$"
 
-	.global gUnknown_083FFEFC
-gUnknown_083FFEFC: @ 83FFEFC
+gUnknown_083FFEFC:: @ 83FFEFC
 BattleText_GotAwaySafely:
 	.string "{PLAY_SE SE_NIGERU}Got away safely!\p$"
 BattleText_FledUsingItem:
@@ -611,43 +604,35 @@ BattleText_FledUsingOther:
 BattleText_FledWild:
 	.string "{PLAY_SE SE_NIGERU}Wild {STRING 0} fled!$"
 
-	.global gUnknown_083FFF56
-gUnknown_083FFF56: @ 83FFF56
+gUnknown_083FFF56:: @ 83FFF56
 BattleText_PlayerDefeatedTrainer:
 	.string "Player defeated\n{STRING 29}!$"
 
-	.global gUnknown_083FFF6A
-gUnknown_083FFF6A: @ 83FFF6A
+gUnknown_083FFF6A:: @ 83FFF6A
 BattleText_PlayerDefeatedTrainers:
 	.string "Player beat {STRING 30}\nand {STRING 29}!$"
 
-	.global gUnknown_083FFF81
-gUnknown_083FFF81: @ 83FFF81
+gUnknown_083FFF81:: @ 83FFF81
 BattleText_PlayerLostTrainer:
 	.string "Player lost against\n{STRING 29}!$"
 
-	.global gUnknown_083FFF99
-gUnknown_083FFF99: @ 83FFF99
+gUnknown_083FFF99:: @ 83FFF99
 BattleText_PlayerLostTrainers:
 	.string "Player lost to {STRING 30}\nand {STRING 29}!$"
 
-	.global gUnknown_083FFFB3
-gUnknown_083FFFB3: @ 83FFFB3
+gUnknown_083FFFB3:: @ 83FFFB3
 BattleText_PlayerTiedTrainer:
 	.string "Player tied against\n{STRING 29}!$"
 
-	.global gUnknown_083FFFCB
-gUnknown_083FFFCB: @ 83FFFCB
+gUnknown_083FFFCB:: @ 83FFFCB
 BattleText_PlayerTiedTrainers:
 	.string "Player tied against {STRING 30}\nand {STRING 29}!$"
 
-	.global gUnknown_083FFFEA
-gUnknown_083FFFEA: @ 83FFFEA
+gUnknown_083FFFEA:: @ 83FFFEA
 BattleText_FledSingle:
 	.string "{PLAY_SE SE_NIGERU}{STRING 29} fled!$"
 
-	.global gUnknown_083FFFF7
-gUnknown_083FFFF7: @ 83FFFF7
+gUnknown_083FFFF7:: @ 83FFFF7
 BattleText_FledDouble:
 	.string "{PLAY_SE SE_NIGERU}{STRING 29} and\n{STRING 30} fled!$"
 BattleText_NoRunning:
@@ -751,218 +736,175 @@ BattleText_ThrewBlock:
 BattleText_SafariOver:
 	.string "{PLAY_SE SE_PINPON}ANNOUNCER: You’re out of\nSAFARI BALLS! Game over!\p$"
 
-	.global gUnknown_08400555
-gUnknown_08400555: @ 8400555
+gUnknown_08400555:: @ 8400555
 BattleText_WildAppeared1:
 	.string "Wild {STRING 3} appeared!\p$"
 
-	.global gUnknown_08400568
-gUnknown_08400568: @ 8400568
+gUnknown_08400568:: @ 8400568
 BattleText_WildAppeared2:
 	.string "Wild {STRING 3} appeared!\p$"
 
-	.global gUnknown_0840057B
-gUnknown_0840057B: @ 840057B
+gUnknown_0840057B:: @ 840057B
 BattleText_WildAppeared3:
 	.string "Wild {STRING 3} appeared!{PAUSE 127}$"
 
-	.global gUnknown_08400590
-gUnknown_08400590: @ 8400590
+gUnknown_08400590:: @ 8400590
 BattleText_WildDoubleAppeared:
 	.string "Wild {STRING 5} and\n{STRING 3} appeared!\p$"
 
-	.global gUnknown_084005AA
-gUnknown_084005AA: @ 84005AA
+gUnknown_084005AA:: @ 84005AA
 BattleText_SingleWantToBattle1:
 	.string "{STRING 25} {STRING 26}\nwould like to battle!\p$"
 
-	.global gUnknown_084005C7
-gUnknown_084005C7: @ 84005C7
+gUnknown_084005C7:: @ 84005C7
 BattleText_SingleWantToBattle2:
 	.string "{STRING 29}\nwants to battle!$"
 
-	.global gUnknown_084005DB
-gUnknown_084005DB: @ 84005DB
+gUnknown_084005DB:: @ 84005DB
 BattleText_DoubleWantToBattle:
 	.string "{STRING 29} and {STRING 30}\nwant to battle!$"
 
-	.global gUnknown_084005F5
-gUnknown_084005F5: @ 84005F5
+gUnknown_084005F5:: @ 84005F5
 BattleText_SentOutSingle1:
 	.string "{STRING 25} {STRING 26} sent\nout {STRING 3}!$"
 
-	.global gUnknown_08400608
-gUnknown_08400608: @ 8400608
+gUnknown_08400608:: @ 8400608
 BattleText_SentOutDouble1:
 	.string "{STRING 25} {STRING 26} sent\nout {STRING 3} and {STRING 5}!$"
 
-	.global gUnknown_08400622
-gUnknown_08400622: @ 8400622
+gUnknown_08400622:: @ 8400622
 BattleText_SentOutSingle2:
 	.string "{STRING 25} {STRING 26} sent\nout {STRING 0}!$"
 
-	.global gUnknown_08400635
-gUnknown_08400635: @ 8400635
+gUnknown_08400635:: @ 8400635
 BattleText_SentOutSingle3:
 	.string "{STRING 29} sent\nout {STRING 3}!$"
 
-	.global gUnknown_08400645
-gUnknown_08400645: @ 8400645
+gUnknown_08400645:: @ 8400645
 BattleText_SentOutDouble2:
 	.string "{STRING 29} sent out\n{STRING 3} and {STRING 5}!$"
 
-	.global gUnknown_0840065C
-gUnknown_0840065C: @ 840065C
+gUnknown_0840065C:: @ 840065C
 BattleText_SentOutDouble3:
 	.string "{STRING 29} sent out\n{STRING 7}!\p{STRING 30} sent out\n{STRING 9}!$"
 
-	.global gUnknown_0840067C
-gUnknown_0840067C: @ 840067C
+gUnknown_0840067C:: @ 840067C
 BattleText_SentOutSingle4:
 	.string "{STRING 29} sent out\n{STRING 0}!$"
 
-	.global gUnknown_0840068C
-gUnknown_0840068C: @ 840068C
+gUnknown_0840068C:: @ 840068C
 BattleText_SentOutSingle5:
 	.string "{STRING 31} sent out\n{STRING 0}!$"
 
-	.global gUnknown_0840069C
-gUnknown_0840069C: @ 840069C
+gUnknown_0840069C:: @ 840069C
 BattleText_SentOutSingle6:
 	.string "Go! {STRING 2}!$"
 
-	.global gUnknown_084006A4
-gUnknown_084006A4: @ 84006A4
+gUnknown_084006A4:: @ 84006A4
 BattleText_SentOutDouble4:
 	.string "Go! {STRING 2} and\n{STRING 4}!$"
 
-	.global gUnknown_084006B3
-gUnknown_084006B3: @ 84006B3
+gUnknown_084006B3:: @ 84006B3
 BattleText_SentOutSingle7:
 	.string "Go! {STRING 0}!$"
 
-	.global gUnknown_084006BB
-gUnknown_084006BB: @ 84006BB
+gUnknown_084006BB:: @ 84006BB
 BattleText_SentOutSingle8:
 	.string "Do it! {STRING 0}!$"
 
-	.global gUnknown_084006C6
-gUnknown_084006C6: @ 84006C6
+gUnknown_084006C6:: @ 84006C6
 BattleText_SentOutSingle9:
 	.string "Go for it, {STRING 0}!$"
 
-	.global gUnknown_084006D5
-gUnknown_084006D5: @ 84006D5
+gUnknown_084006D5:: @ 84006D5
 BattleText_SentOutSingle10:
 	.string "Your foe’s weak!\nGet’m, {STRING 0}!$"
 
-	.global gUnknown_084006F1
-gUnknown_084006F1: @ 84006F1
+gUnknown_084006F1:: @ 84006F1
 BattleText_SentOutSingle11:
 	.string "{STRING 28} sent out\n{STRING 8}!\pGo! {STRING 6}!$"
 
-	.global gUnknown_08400709
-gUnknown_08400709: @ 8400709
+gUnknown_08400709:: @ 8400709
 BattleText_ComeBackSingle1:
 	.string "{STRING 0}, that’s enough!\nCome back!$"
 
-	.global gUnknown_08400727
-gUnknown_08400727: @ 8400727
+gUnknown_08400727:: @ 8400727
 BattleText_ComeBackSingle2:
 	.string "{STRING 0}, come back!$"
 
-	.global gUnknown_08400736
-gUnknown_08400736: @ 8400736
+gUnknown_08400736:: @ 8400736
 BattleText_ComeBackSingle3:
 	.string "{STRING 0}, OK!\nCome back!$"
 
-	.global gUnknown_08400749
-gUnknown_08400749: @ 8400749
+gUnknown_08400749:: @ 8400749
 BattleText_ComeBackSingle4:
 	.string "{STRING 0}, good!\nCome back!$"
 
-	.global gUnknown_0840075E
-gUnknown_0840075E: @ 840075E
+gUnknown_0840075E:: @ 840075E
 BattleText_WithdrewPoke1:
 	.string "{STRING 25} {STRING 26}\nwithdrew {STRING 0}!$"
 
-	.global gUnknown_08400771
-gUnknown_08400771: @ 8400771
+gUnknown_08400771:: @ 8400771
 BattleText_WithdrewPoke2:
 	.string "{STRING 29} withdrew\n{STRING 0}!$"
 
-	.global gUnknown_08400781
-gUnknown_08400781: @ 8400781
+gUnknown_08400781:: @ 8400781
 BattleText_WithdrewPoke3:
 	.string "{STRING 31} withdrew\n{STRING 0}!$"
 
-	.global gUnknown_08400791
-gUnknown_08400791: @ 8400791
+gUnknown_08400791:: @ 8400791
 BattleText_Wild:
 	.string "Wild $"
 
-	.global gUnknown_08400797
-gUnknown_08400797: @ 8400797
+gUnknown_08400797:: @ 8400797
 BattleText_Foe:
 	.string "Foe $"
 
-	.global gUnknown_0840079C
-gUnknown_0840079C: @ 840079C
+gUnknown_0840079C:: @ 840079C
 BattleText_Foe2:
 	.string "Foe $"
 
-	.global gUnknown_084007A1
-gUnknown_084007A1: @ 84007A1
+gUnknown_084007A1:: @ 84007A1
 BattleText_Ally:
 	.string "Ally $"
 
-	.global gUnknown_084007A7
-gUnknown_084007A7: @ 84007A7
+gUnknown_084007A7:: @ 84007A7
 BattleText_Foe3:
 	.string "Foe $"
 
-	.global gUnknown_084007AC
-gUnknown_084007AC: @ 84007AC
+gUnknown_084007AC:: @ 84007AC
 BattleText_Ally2:
 	.string "Ally $"
 
-	.global gUnknown_084007B2
-gUnknown_084007B2: @ 84007B2
+gUnknown_084007B2:: @ 84007B2
 BattleText_Foe4:
 	.string "Foe $"
 
-	.global gUnknown_084007B7
-gUnknown_084007B7: @ 84007B7
+gUnknown_084007B7:: @ 84007B7
 BattleText_Ally3:
 	.string "Ally $"
 
-	.global gUnknown_084007BD
-gUnknown_084007BD: @ 84007BD
+gUnknown_084007BD:: @ 84007BD
 BattleText_OpponentUsedMove:
 	.string "{ATTACKING_MON} used\n{STRING 1}$"
 
-	.global gUnknown_084007C8
-gUnknown_084007C8: @ 84007C8
+gUnknown_084007C8:: @ 84007C8
 BattleText_Exclamation2: @ out of order but whatever
 	.string "!$"
 
-	.global gUnknown_084007CA
-gUnknown_084007CA: @ 84007CA
+gUnknown_084007CA:: @ 84007CA
 BattleText_Exclamation3:
 	.string "!$"
 
-	.global gUnknown_084007CC
-gUnknown_084007CC: @ 84007CC
+gUnknown_084007CC:: @ 84007CC
 BattleText_Exclamation4:
 	.string "!$"
 
-	.global gUnknown_084007CE
-gUnknown_084007CE: @ 84007CE
+gUnknown_084007CE:: @ 84007CE
 BattleText_Exclamation5:
 	.string "!$"
 
-	.global gUnknown_084007D0
-gUnknown_084007D0: @ 84007D0
+gUnknown_084007D0:: @ 84007D0
 BattleText_Exclamation:
 	.string "!$"
 BattleStatText_HP:
@@ -1022,13 +964,11 @@ BattleText_GiveNickname:
 BattleText_SentToPC:
 	.string "{STRING 3} was sent to\n{STRING 35} PC.$"
 
-	.global gUnknown_084009ED
-gUnknown_084009ED: @ 84009ED
+gUnknown_084009ED:: @ 84009ED
 BattleText_Someone:
 	.string "someone’s$"
 
-	.global gUnknown_084009F7
-gUnknown_084009F7: @ 84009F7
+gUnknown_084009F7:: @ 84009F7
 BattleText_Lanette:
 	.string "LANETTE’s$"
 BattleText_AddedToDex:
@@ -1040,13 +980,11 @@ BattleText_Sandstorm:
 BattleText_BoxFull:
 	.string "The BOX is full!\nYou can’t catch any more!\p$"
 
-	.global gUnknown_08400A78
-gUnknown_08400A78: @ 8400A78
+gUnknown_08400A78:: @ 8400A78
 BattleText_EnigmaBerry:
 	.string "ENIGMA BERRY$"
 
-	.global gUnknown_08400A85
-gUnknown_08400A85: @ 8400A85
+gUnknown_08400A85:: @ 8400A85
 BattleText_Berry:
 	.string " BERRY$"
 BattleText_CuredParalysis:
@@ -1082,90 +1020,73 @@ BattleText_Terminator2:
 BattleText_WallyBall:
 	.string "You throw a BALL now, right?\nI... I’ll do my best!$"
 
-	.global gUnknown_08400C4A
-gUnknown_08400C4A: @ 8400C4A
+gUnknown_08400C4A:: @ 8400C4A
 BattleText_StartEvo:
 	.string "What?\n{STRING 2} is evolving!$"
 
-	.global gUnknown_08400C60
-gUnknown_08400C60: @ 8400C60
+gUnknown_08400C60:: @ 8400C60
 BattleText_FinishEvo:
 	.string "Congratulations! Your {STRING 2}\nevolved into {STRING 3}!{UNKNOWN_A}\p$"
 
-	.global gUnknown_08400C8D
-gUnknown_08400C8D: @ 8400C8D
+gUnknown_08400C8D:: @ 8400C8D
 BattleText_StopEvo:
 	.string "Huh? {STRING 2}\nstopped evolving!\p$"
 
-	.global gUnknown_08400CA8
-gUnknown_08400CA8: @ 8400CA8
+gUnknown_08400CA8:: @ 8400CA8
 BattleText_OtherMenu:
 	.string "What should\n{STRING 15} do?$"
 
-	.global gUnknown_08400CBB
-gUnknown_08400CBB: @ 8400CBB
+gUnknown_08400CBB:: @ 8400CBB
 BattleText_PlayerMenu:
 	.string "What will\n{STRING 32} do?$"
 
-	.global gUnknown_08400CCC
-gUnknown_08400CCC: @ 8400CCC
+gUnknown_08400CCC:: @ 8400CCC
 BattleText_WallyMenu:
 	.string "What will\nWALLY do?$"
 
-	.global gUnknown_08400CE0
-gUnknown_08400CE0: @ 8400CE0
+gUnknown_08400CE0:: @ 8400CE0
 BattleText_LinkStandby:
 	.string "{PAUSE 16}Link standby...$"
 
-	.global gUnknown_08400CF3
-gUnknown_08400CF3: @ 8400CF3
+gUnknown_08400CF3:: @ 8400CF3
 BattleText_MenuOptions:
 	.string "{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW SKY_BLUE LIGHT_BLUE WHITE2}FIGHT{CLEAR_TO 0x2E}BAG\nPOKéMON{CLEAR_TO 0x2E}RUN$"
 
-	.global gUnknown_08400D15
-gUnknown_08400D15: @ 8400D15
+gUnknown_08400D15:: @ 8400D15
 BattleText_MenuOptionsSafari:
 	.string "{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW SKY_BLUE LIGHT_BLUE WHITE2}BALL{CLEAR_TO 0x2E}{POKEBLOCK}\nGO NEAR{CLEAR_TO 0x2E}RUN$"
 
-	.global gUnknown_08400D38
-gUnknown_08400D38: @ 8400D38
+gUnknown_08400D38:: @ 8400D38
 BattleText_PP:
 	.string "{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW SKY_BLUE LIGHT_BLUE WHITE2}PP\nTYPE/$"
 
-	.global gUnknown_08400D49
-gUnknown_08400D49: @ 8400D49
+gUnknown_08400D49:: @ 8400D49
 BattleText_Format: @ cant think of a better name
 	.string "{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW SKY_BLUE LIGHT_BLUE WHITE2}$"
 
-	.global gUnknown_08400D52
-gUnknown_08400D52: @ 8400D52
+gUnknown_08400D52:: @ 8400D52
 BattleText_ForgetMove:
 	.string "{COLOR_HIGHLIGHT_SHADOW SKY_BLUE LIGHT_BLUE WHITE2}{PALETTE 5}Which move should\nbe forgotten?$"
 
-	.global gUnknown_08400D7A
-gUnknown_08400D7A: @ 8400D7A
+gUnknown_08400D7A:: @ 8400D7A
 BattleText_YesNo:
 	.string "{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW SKY_BLUE LIGHT_BLUE WHITE2}Yes\nNo$"
 
-	.global gUnknown_08400D89
-gUnknown_08400D89: @ 8400D89
+gUnknown_08400D89:: @ 8400D89
 BattleText_SwitchWhich:
 	.string "{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW SKY_BLUE LIGHT_BLUE WHITE2}Switch\nwhich?$"
 
-	.global gUnknown_08400D9F
-gUnknown_08400D9F: @ 8400D9F
+gUnknown_08400D9F:: @ 8400D9F
 BattleText_Format2:
 	.string "{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW SKY_BLUE LIGHT_BLUE WHITE2}$"
 BattleText_RightArrow:
 	.string "{RIGHT_ARROW}$"
 
-	.global gUnknown_08400DAA
-gUnknown_08400DAA: @ 8400DAA
+gUnknown_08400DAA:: @ 8400DAA
 BattleText_Plus:
 	.string "+$"
 
-	.global gUnknown_08400DAC
-gUnknown_08400DAC: @ 8400DAC
+gUnknown_08400DAC:: @ 8400DAC
 @ someone improve the formatting of this please
 BattleText_Dash:
 	.string "-$"
@@ -1180,18 +1101,15 @@ BattleText_SpAtk:
 BattleText_SpDef:
 	.string "SP. DEF$"
 
-	.global gUnknown_08400DD6
-gUnknown_08400DD6: @ 8400DD6
+gUnknown_08400DD6:: @ 8400DD6
 BattleText_SafariBalls:
 	.string "{HIGHLIGHT RED}SAFARI BALLS$"
 
-	.global gUnknown_08400DE6
-gUnknown_08400DE6: @ 8400DE6
+gUnknown_08400DE6:: @ 8400DE6
 BattleText_SafariBallsLeft:
 	.string "{HIGHLIGHT RED}Left: $"
 
-	.global gUnknown_08400DF0
-gUnknown_08400DF0: @ 8400DF0
+gUnknown_08400DF0:: @ 8400DF0
 BattleText_HighlightRed:
 	.string "{HIGHLIGHT RED}$"
 BattleText_Sleep:
@@ -1209,73 +1127,59 @@ BattleText_Confusion:
 BattleText_Love:
 	.string "love$"
 
-	.global gUnknown_08400E23
-gUnknown_08400E23: @ 8400E23
+gUnknown_08400E23:: @ 8400E23
 BattleText_Format3:
 	.string " and $"
 
-	.global gUnknown_08400E29
-gUnknown_08400E29: @ 8400E29
+gUnknown_08400E29:: @ 8400E29
 BattleText_Format4:
 	.string ", $"
 
-	.global gUnknown_08400E2C
-gUnknown_08400E2C: @ 8400E2C
+gUnknown_08400E2C:: @ 8400E2C
 BattleText_Format5:
 	.string " $"
 
-	.global gUnknown_08400E2E
-gUnknown_08400E2E: @ 8400E2E
+gUnknown_08400E2E:: @ 8400E2E
 BattleText_Format6:
 	.string "\l$"
 
-	.global gUnknown_08400E30
-gUnknown_08400E30: @ 8400E30
+gUnknown_08400E30:: @ 8400E30
 BattleText_Format7:
 	.string "\n$"
 
-	.global gUnknown_08400E32
-gUnknown_08400E32: @ 8400E32
+gUnknown_08400E32:: @ 8400E32
 BattleText_Format8:
 	.string "are$"
 
-	.global gUnknown_08400E36
-gUnknown_08400E36: @ 8400E36
+gUnknown_08400E36:: @ 8400E36
 BattleText_Format9:
 	.string "are$"
 
-	.global gUnknown_08400E3A
-gUnknown_08400E3A: @ 8400E3A
+gUnknown_08400E3A:: @ 8400E3A
 BattleText_BadEGG:
 	.string "Bad EGG$"
 
-	.global gUnknown_08400E42
-gUnknown_08400E42: @ 8400E42
+gUnknown_08400E42:: @ 8400E42
 BattleText_Wally:
 	.string "WALLY$"
 
-	.global gUnknown_08400E48
-gUnknown_08400E48: @ 8400E48
+gUnknown_08400E48:: @ 8400E48
 BattleText_Win:
 	.string "{HIGHLIGHT TRANSPARENT}Win$"
 
-	.global gUnknown_08400E4F
-gUnknown_08400E4F: @ 8400E4F
+gUnknown_08400E4F:: @ 8400E4F
 BattleText_Loss:
 	.string "{HIGHLIGHT TRANSPARENT}Loss$"
 
-	.global gUnknown_08400E57
-gUnknown_08400E57: @ 8400E57
+gUnknown_08400E57:: @ 8400E57
 BattleText_Tie:
 	.string "{HIGHLIGHT TRANSPARENT}Tie$"
 
-	.global gUnknown_08400E5E
-gUnknown_08400E5E: @ 8400E5E
+gUnknown_08400E5E:: @ 8400E5E
 BattleText_Format10:
 	.string " is$"
 
-	.global gUnknown_08400E62
-gUnknown_08400E62: @ 8400E62
+gUnknown_08400E62:: @ 8400E62
 BattleText_Format11:
 	.string "’s$"
 BattleText_Normal:
@@ -1316,8 +1220,7 @@ BattleText_Dark:
 	.string "a DARK move$"
 
 	.align 2
-	.global gUnknown_08400F58
-gUnknown_08400F58: @ 8400F58
+gUnknown_08400F58:: @ 8400F58
 	.4byte BattleStatText_HP
 	.4byte BattleStatText_Attack
 	.4byte BattleStatText_Defense
@@ -1327,16 +1230,14 @@ gUnknown_08400F58: @ 8400F58
 	.4byte BattleStatText_Accuracy
 	.4byte BattleStatText_Evasion
 
-	.global gUnknown_08400F78
-gUnknown_08400F78: @ 8400F78
+gUnknown_08400F78:: @ 8400F78
 	.4byte ContestStatText_TooSpicy
 	.4byte ContestStatText_TooDry
 	.4byte ContestStatText_TooSweet
 	.4byte ContestStatText_TooBitter
 	.4byte ContestStatText_TooSour
 
-	.global gUnknown_08400F8C
-gUnknown_08400F8C: @ 8400F8C
+gUnknown_08400F8C:: @ 8400F8C
 	.4byte BattleText_UnknownString
 	.4byte BattleText_GainExpPoints
 	.4byte BattleText_GrewLevel
@@ -1689,16 +1590,13 @@ gUnknown_08400F8C: @ 8400F8C
 	.4byte BattleText_NoEffect
 	.4byte BattleText_NoEffectOn
 
-	.global gUnknown_08401508
-gUnknown_08401508: @ 8401508
+gUnknown_08401508:: @ 8401508
 	.incbin "baserom.gba", 0x00401508, 0x144
 
-	.global gUnknown_0840164C
-gUnknown_0840164C: @ 840164C
+gUnknown_0840164C:: @ 840164C
 	.incbin "baserom.gba", 0x0040164c, 0x10
 
-	.global gUnknown_0840165C
-gUnknown_0840165C: @ 840165C
+gUnknown_0840165C:: @ 840165C
 	.4byte BattleText_HP
 	.4byte BattleText_SpAtk
 	.4byte BattleText_Attack
@@ -1706,8 +1604,7 @@ gUnknown_0840165C: @ 840165C
 	.4byte BattleText_Defense
 	.4byte BattleStatText_Speed
 
-	.global gUnknown_08401674
-gUnknown_08401674: @ 8401674
+gUnknown_08401674:: @ 8401674
 	.4byte BattleText_Normal
 	.4byte BattleText_Fighting
 	.4byte BattleText_Flying

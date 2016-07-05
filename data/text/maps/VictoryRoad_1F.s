@@ -70,4 +70,3 @@ VictoryRoad_1F_Text_197C8D:: @ 8197C8D
 VictoryRoad_1F_Text_197CAF:: @ 8197CAF
 	.string "You seem to have the potential for\n"
 	.string "becoming the CHAMPION.$"
-

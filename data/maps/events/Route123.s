@@ -74,4 +74,3 @@ Route123_MapBGEvents:: @ 8384C90
 
 Route123_MapEvents:: @ 8384CFC
 	map_events Route123_MapObjects, Route123_MapWarps, Route123_MapCoordEvents, Route123_MapBGEvents
-

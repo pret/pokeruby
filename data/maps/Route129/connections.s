@@ -5,4 +5,3 @@ Route129_MapConnectionsList:: @ 8308C50
 Route129_MapConnections:: @ 8308C68
 	.4byte 0x2
 	.4byte Route129_MapConnectionsList
-

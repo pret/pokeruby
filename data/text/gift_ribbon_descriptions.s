@@ -140,8 +140,7 @@ gGiftRibbonDescriptionPart2_LoveForPokemon:
 	.string "love for POKéMON.$"
 
 	.align 2
-	.global gGiftRibbonDescriptions
-gGiftRibbonDescriptions: @ 83E158C
+gGiftRibbonDescriptions:: @ 83E158C
 	.4byte gGiftRibbonDescriptionPart1_2003RegionalTourney,   gGiftRibbonDescriptionPart2_Champion
 	.4byte gGiftRibbonDescriptionPart1_2003NationalTourney,   gGiftRibbonDescriptionPart2_Champion
 	.4byte gGiftRibbonDescriptionPart1_2003GlobalCup,         gGiftRibbonDescriptionPart2_Champion

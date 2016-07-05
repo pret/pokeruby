@@ -224,4 +224,3 @@ EverGrandeCity_ChampionsRoom_Movement_15BA03:: @ 815BA03
 	step_up
 	step_27
 	step_end
-

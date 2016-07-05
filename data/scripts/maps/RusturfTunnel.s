@@ -419,4 +419,3 @@ RusturfTunnel_EventScript_15CACD:: @ 815CACD
 	trainerbattle 0, 635, 0, RusturfTunnel_Text_194814, RusturfTunnel_Text_1948A2
 	msgbox RusturfTunnel_Text_1948C4, 6
 	end
-

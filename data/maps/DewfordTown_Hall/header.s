@@ -12,4 +12,3 @@ DewfordTown_Hall:: @ 8305BB8
 	.2byte 0
 	.byte 0
 	.byte 0
-

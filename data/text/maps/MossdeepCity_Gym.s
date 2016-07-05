@@ -166,4 +166,3 @@ MossdeepCity_Gym_Text_18D424:: @ 818D424
 	.string "MOSSDEEP CITY POKéMON GYM\p"
 	.string "LIZA AND TATE’S CERTIFIED TRAINERS:\n"
 	.string "{PLAYER}$"
-

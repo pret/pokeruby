@@ -31,4 +31,3 @@ MauvilleCity_PokemonCenter_1F_EventScript_157380:: @ 8157380
 MauvilleCity_PokemonCenter_1F_EventScript_157389:: @ 8157389
 	msgbox MauvilleCity_PokemonCenter_1F_Text_1826A6, 2
 	end
-

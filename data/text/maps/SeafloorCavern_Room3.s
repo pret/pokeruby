@@ -22,4 +22,3 @@ SeafloorCavern_Room3_Text_197704:: @ 8197704
 	.string "You could have enjoyed the fabulous\n"
 	.string "world our BOSS has promised to one\l"
 	.string "of our own...$"
-

@@ -33,4 +33,3 @@ SootopolisCity_House6_EventScript_15B3D7:: @ 815B3D7
 	msgbox SootopolisCity_House6_Text_18FF28, 4
 	release
 	end
-

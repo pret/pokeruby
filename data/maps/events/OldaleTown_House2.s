@@ -8,4 +8,3 @@ OldaleTown_House2_MapWarps:: @ 8385CB8
 
 OldaleTown_House2_MapEvents:: @ 8385CC8
 	map_events OldaleTown_House2_MapObjects, OldaleTown_House2_MapWarps, 0x0, 0x0
-

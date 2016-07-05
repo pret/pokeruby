@@ -88,4 +88,3 @@ SootopolisCity_House8_Text_1906BE:: @ 81906BE
 	.string "{STR_VAR_2}’s {STR_VAR_3}-inch colossus!\p"
 	.string "A BARBOACH bigger than a SHROOMISH\n"
 	.string "always wanted!$"
-

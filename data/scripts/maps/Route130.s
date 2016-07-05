@@ -38,4 +38,3 @@ Route130_EventScript_152427:: @ 8152427
 	trainerbattle 0, 455, 0, Route130_Text_1C24DC, Route130_Text_1C2525
 	msgbox Route130_Text_1C256E, 6
 	end
-

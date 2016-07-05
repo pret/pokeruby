@@ -19,4 +19,3 @@ LilycoveCity_House2_EventScript_159BDA:: @ 8159BDA
 	msgbox LilycoveCity_House2_Text_18B883, 4
 	release
 	end
-

@@ -5,4 +5,3 @@ LilycoveCity_MapConnectionsList:: @ 83087B4
 LilycoveCity_MapConnections:: @ 83087CC
 	.4byte 0x2
 	.4byte LilycoveCity_MapConnectionsList
-

@@ -32,4 +32,3 @@ LavaridgeTown_MapBGEvents:: @ 8380D90
 
 LavaridgeTown_MapEvents:: @ 8380DF0
 	map_events LavaridgeTown_MapObjects, LavaridgeTown_MapWarps, LavaridgeTown_MapCoordEvents, LavaridgeTown_MapBGEvents
-

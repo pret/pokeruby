@@ -169,4 +169,3 @@ LavaridgeTown_Gym_1F_EventScript_1538A2:: @ 81538A2
 	msgbox LavaridgeTown_Gym_1F_Text_176CAF, 4
 	releaseall
 	end
-

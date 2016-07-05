@@ -18,4 +18,3 @@ SootopolisCity_House3_Text_18FC1A:: @ 818FC1A
 	.string "KANTO and JOHTO.\p"
 	.string "It was really wild when I went to the\n"
 	.string "TRAINER FAN CLUB in LILYCOVE.$"
-

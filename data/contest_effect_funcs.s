@@ -1,6 +1,5 @@
 	.align 2
-	.global gContestEffectFuncs
-gContestEffectFuncs:
+gContestEffectFuncs::
 	.4byte ContestEffect_00
 	.4byte ContestEffect_01
 	.4byte ContestEffect_02

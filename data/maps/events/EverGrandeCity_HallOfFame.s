@@ -6,4 +6,3 @@ EverGrandeCity_HallOfFame_MapWarps:: @ 838B540
 
 EverGrandeCity_HallOfFame_MapEvents:: @ 838B548
 	map_events EverGrandeCity_HallOfFame_MapObjects, EverGrandeCity_HallOfFame_MapWarps, 0x0, 0x0
-

@@ -81,4 +81,3 @@ VerdanturfTown_WandasHouse_Text_178A47:: @ 8178A47
 	.string "WALLY was in EVER GRANDE?\p"
 	.string "His parents in PETALBURG would be\n"
 	.string "astonished to hear that!$"
-

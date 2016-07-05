@@ -46,4 +46,3 @@ AquaHideout_1F_EventScript_15D827:: @ 815D827
 	msgbox AquaHideout_1F_Text_196E3D, 4
 	release
 	end
-

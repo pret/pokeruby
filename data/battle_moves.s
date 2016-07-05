@@ -1,6 +1,5 @@
 	.align 2
-	.global gBattleMoves
-gBattleMoves: @ 81FB12C
+gBattleMoves:: @ 81FB12C
 @ -
 	.byte 0x00 @ effect
 	.byte 0 @ power

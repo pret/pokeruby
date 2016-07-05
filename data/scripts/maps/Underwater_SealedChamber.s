@@ -25,4 +25,3 @@ Underwater_SealedChamber_EventScript_15F0B8:: @ 815F0B8
 	hidebox 0, 0, 29, 19
 	releaseall
 	end
-

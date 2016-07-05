@@ -15,4 +15,3 @@ PetalburgCity_Mart_Text_17C0BC:: @ 817C0BC
 	.string "If you walk around with a poisoned\n"
 	.string "POKéMON, it will lose HP until it faints.\l"
 	.string "Take some ANTIDOTES with you.$"
-

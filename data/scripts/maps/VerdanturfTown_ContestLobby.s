@@ -127,4 +127,3 @@ VerdanturfTown_ContestLobby_EventScript_153E89:: @ 8153E89
 	hidebox 0, 0, 29, 19
 	releaseall
 	end
-

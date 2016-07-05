@@ -43,4 +43,3 @@ UnknownString_8186585: @ 8186585
 	.string "this city.\p"
 	.string "That’s why I use FLY to instantly go to\n"
 	.string "any city I’ve visited.$"
-

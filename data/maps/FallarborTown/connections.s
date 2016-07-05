@@ -5,4 +5,3 @@ FallarborTown_MapConnectionsList:: @ 8308684
 FallarborTown_MapConnections:: @ 830869C
 	.4byte 0x2
 	.4byte FallarborTown_MapConnectionsList
-

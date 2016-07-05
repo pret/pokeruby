@@ -52,4 +52,3 @@ MossdeepCity_House2_Movement_15A8CB:: @ 815A8CB
 	step_15
 	step_13
 	step_end
-

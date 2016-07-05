@@ -12,4 +12,3 @@ SootopolisCity_House8_MapBGEvents:: @ 838B218
 
 SootopolisCity_House8_MapEvents:: @ 838B230
 	map_events SootopolisCity_House8_MapObjects, SootopolisCity_House8_MapWarps, 0x0, SootopolisCity_House8_MapBGEvents
-

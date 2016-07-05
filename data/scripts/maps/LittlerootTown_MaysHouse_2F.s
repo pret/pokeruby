@@ -189,8 +189,7 @@ LittlerootTown_BrendansHouse_2F_Movement_152C30:: @ 8152C30
 	step_13
 	step_end
 
-	.global gUnknown_08152C39
-gUnknown_08152C39: @ 8152C39
+gUnknown_08152C39:: @ 8152C39
 
 LittlerootTown_MaysHouse_2F_EventScript_152C39:: @ 8152C39
 	lockall

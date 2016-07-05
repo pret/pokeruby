@@ -10,4 +10,3 @@ ShoalCave_LowTideEntranceRoom_MapWarps:: @ 838DD0C
 
 ShoalCave_LowTideEntranceRoom_MapEvents:: @ 838DD2C
 	map_events ShoalCave_LowTideEntranceRoom_MapObjects, ShoalCave_LowTideEntranceRoom_MapWarps, 0x0, 0x0
-

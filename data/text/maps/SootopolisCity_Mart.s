@@ -15,4 +15,3 @@ SootopolisCity_Mart_Text_18F8F2:: @ 818F8F2
 SootopolisCity_Mart_Text_18F96B:: @ 818F96B
 	.string "This weather...\n"
 	.string "Did something awaken?$"
-

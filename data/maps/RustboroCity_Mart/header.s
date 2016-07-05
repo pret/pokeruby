@@ -12,4 +12,3 @@ RustboroCity_Mart:: @ 83062F0
 	.2byte 0
 	.byte 0
 	.byte 0
-

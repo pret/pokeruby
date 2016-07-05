@@ -62,4 +62,3 @@ Route103_Text_16D996:: @ 816D996
 Route103_Text_16D9FB:: @ 816D9FB
 	.string "ROUTE 103\n"
 	.string "{0x7A} OLDALE TOWN$"
-

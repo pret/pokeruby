@@ -46,4 +46,3 @@ FallarborTown_Mart_EventScript_1539AE:: @ 81539AE
 	waitpokecry
 	release
 	end
-

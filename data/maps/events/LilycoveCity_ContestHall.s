@@ -48,4 +48,3 @@ LilycoveCity_ContestHall_MapBGEvents:: @ 8389D38
 
 LilycoveCity_ContestHall_MapEvents:: @ 8389D80
 	map_events LilycoveCity_ContestHall_MapObjects, LilycoveCity_ContestHall_MapWarps, 0x0, LilycoveCity_ContestHall_MapBGEvents
-

@@ -12,4 +12,3 @@ PacifidlogTown_House5_Text_179765:: @ 8179765
 	.string "that make mirages appear.\p"
 	.string "Or is it really appearing and\n"
 	.string "disappearing?$"
-

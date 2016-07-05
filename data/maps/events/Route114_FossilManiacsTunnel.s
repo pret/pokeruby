@@ -7,4 +7,3 @@ Route114_FossilManiacsTunnel_MapWarps:: @ 838B908
 
 Route114_FossilManiacsTunnel_MapEvents:: @ 838B918
 	map_events Route114_FossilManiacsTunnel_MapObjects, Route114_FossilManiacsTunnel_MapWarps, 0x0, 0x0
-

@@ -20,4 +20,3 @@ Route129_EventScript_1523AB:: @ 81523AB
 	trainerbattle 0, 676, 0, Route129_Text_1C2349, Route129_Text_1C2378
 	msgbox Route129_Text_1C23A3, 6
 	end
-

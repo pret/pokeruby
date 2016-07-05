@@ -49,4 +49,3 @@ FallarborTown_House1_Text_177A7C:: @ 8177A7C
 FallarborTown_House1_Text_177ABB:: @ 8177ABB
 	.string "Look at PROF. COZMO...\n"
 	.string "He’s so happy! I think it’s cute.$"
-

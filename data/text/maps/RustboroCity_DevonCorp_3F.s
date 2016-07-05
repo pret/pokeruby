@@ -96,4 +96,3 @@ RustboroCity_DevonCorp_3F_Text_1839A3:: @ 81839A3
 RustboroCity_DevonCorp_3F_Text_183A04:: @ 8183A04
 	.string "It’s a collection of rare rocks and\n"
 	.string "stones assembled by the PRESIDENT.$"
-

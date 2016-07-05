@@ -13,4 +13,3 @@ FallarborTown_ContestHall_MapBGEvents:: @ 8386834
 
 FallarborTown_ContestHall_MapEvents:: @ 838684C
 	map_events FallarborTown_ContestHall_MapObjects, FallarborTown_ContestHall_MapWarps, 0x0, FallarborTown_ContestHall_MapBGEvents
-

@@ -53,4 +53,3 @@ LilycoveCity_CoveLilyMotel_2F_EventScript_158409:: @ 8158409
 LilycoveCity_CoveLilyMotel_2F_EventScript_158412:: @ 8158412
 	msgbox LilycoveCity_CoveLilyMotel_2F_Text_1872D4, 2
 	end
-

@@ -7,4 +7,3 @@ EverGrandeCity_SidneysRoom_MapWarps:: @ 838B25C
 
 EverGrandeCity_SidneysRoom_MapEvents:: @ 838B26C
 	map_events EverGrandeCity_SidneysRoom_MapObjects, EverGrandeCity_SidneysRoom_MapWarps, 0x0, 0x0
-

@@ -14,4 +14,3 @@ AbandonedShip_HiddenFloorCorridors_MapBGEvents:: @ 838E4FC
 
 AbandonedShip_HiddenFloorCorridors_MapEvents:: @ 838E52C
 	map_events 0x0, AbandonedShip_HiddenFloorCorridors_MapWarps, 0x0, AbandonedShip_HiddenFloorCorridors_MapBGEvents
-

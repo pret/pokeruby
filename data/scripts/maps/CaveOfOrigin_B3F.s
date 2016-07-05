@@ -6,4 +6,3 @@ CaveOfOrigin_B3F_MapScript1_15DDA2:: @ 815DDA2
 	checkflag 113
 	callif 1, CaveOfOrigin_B3F_EventScript_1A04E3
 	end
-

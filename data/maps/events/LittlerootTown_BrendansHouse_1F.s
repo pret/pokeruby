@@ -15,4 +15,3 @@ LittlerootTown_BrendansHouse_1F_MapCoordEvents:: @ 8385704
 
 LittlerootTown_BrendansHouse_1F_MapEvents:: @ 8385714
 	map_events LittlerootTown_BrendansHouse_1F_MapObjects, LittlerootTown_BrendansHouse_1F_MapWarps, LittlerootTown_BrendansHouse_1F_MapCoordEvents, 0x0
-

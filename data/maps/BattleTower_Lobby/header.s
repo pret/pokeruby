@@ -12,4 +12,3 @@ BattleTower_Lobby:: @ 8307C34
 	.2byte 0
 	.byte 0
 	.byte 0
-

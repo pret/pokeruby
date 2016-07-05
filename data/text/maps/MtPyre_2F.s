@@ -61,4 +61,3 @@ MtPyre_2F_Text_1966BE:: @ 81966BE
 MtPyre_2F_Text_1966E7:: @ 81966E7
 	.string "People don’t come here often, so\n"
 	.string "I thought there’d be rare POKéMON.$"
-

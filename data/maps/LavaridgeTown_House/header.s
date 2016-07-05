@@ -12,4 +12,3 @@ LavaridgeTown_House:: @ 8305C44
 	.2byte 0
 	.byte 0
 	.byte 0
-

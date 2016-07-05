@@ -12,4 +12,3 @@ SafariZone_RestHouse_EventScript_160C38:: @ 8160C38
 SafariZone_RestHouse_EventScript_160C41:: @ 8160C41
 	msgbox SafariZone_RestHouse_Text_1C3FF4, 2
 	end
-

@@ -12,4 +12,3 @@ SlateportCity_Mart:: @ 8306130
 	.2byte 0
 	.byte 0
 	.byte 0
-

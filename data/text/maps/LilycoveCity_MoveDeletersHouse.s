@@ -30,4 +30,3 @@ LilycoveCity_MoveDeletersHouse_Text_18B757:: @ 818B757
 LilycoveCity_MoveDeletersHouse_Text_18B78C:: @ 818B78C
 	.string "What?\n"
 	.string "No EGG should know any moves.$"
-

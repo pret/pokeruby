@@ -22,4 +22,3 @@ Route101_MapBGEvents:: @ 83811DC
 
 Route101_MapEvents:: @ 83811E8
 	map_events Route101_MapObjects, 0x0, Route101_MapCoordEvents, Route101_MapBGEvents
-

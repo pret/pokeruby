@@ -7,4 +7,3 @@ EverGrandeCity_DrakesRoom_MapWarps:: @ 838B310
 
 EverGrandeCity_DrakesRoom_MapEvents:: @ 838B320
 	map_events EverGrandeCity_DrakesRoom_MapObjects, EverGrandeCity_DrakesRoom_MapWarps, 0x0, 0x0
-

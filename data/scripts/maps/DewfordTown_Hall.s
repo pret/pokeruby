@@ -266,4 +266,3 @@ DewfordTown_Hall_EventScript_1535D1:: @ 81535D1
 	msgbox DewfordTown_Hall_Text_175EBE, 4
 	release
 	end
-

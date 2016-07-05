@@ -316,4 +316,3 @@ MauvilleCity_EventScript_14C368:: @ 814C368
 	msgbox MauvilleCity_Text_166488, 4
 	release
 	end
-

@@ -261,4 +261,3 @@ SlateportCity_PokemonFanClub_EventScript_155AB7:: @ 8155AB7
 	waitpokecry
 	release
 	end
-

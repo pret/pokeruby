@@ -13,4 +13,3 @@ VerdanturfTown_ContestHall_MapBGEvents:: @ 8386B44
 
 VerdanturfTown_ContestHall_MapEvents:: @ 8386B5C
 	map_events VerdanturfTown_ContestHall_MapObjects, VerdanturfTown_ContestHall_MapWarps, 0x0, VerdanturfTown_ContestHall_MapBGEvents
-

@@ -7,4 +7,3 @@ EverGrandeCity_PhoebesRoom_MapWarps:: @ 838B298
 
 EverGrandeCity_PhoebesRoom_MapEvents:: @ 838B2A8
 	map_events EverGrandeCity_PhoebesRoom_MapObjects, EverGrandeCity_PhoebesRoom_MapWarps, 0x0, 0x0
-

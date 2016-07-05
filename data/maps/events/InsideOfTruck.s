@@ -22,4 +22,3 @@ InsideOfTruck_MapBGEvents:: @ 83916A8
 
 InsideOfTruck_MapEvents:: @ 83916E4
 	map_events InsideOfTruck_MapObjects, InsideOfTruck_MapWarps, InsideOfTruck_MapCoordEvents, InsideOfTruck_MapBGEvents
-

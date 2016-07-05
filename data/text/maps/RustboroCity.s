@@ -176,4 +176,3 @@ RustboroCity_Text_167525:: @ 8167525
 
 RustboroCity_Text_167568:: @ 8167568
 	.string "CUTTER’S HOUSE$"
-

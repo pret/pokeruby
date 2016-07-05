@@ -12,4 +12,3 @@ Route108_MapBGEvents:: @ 8381ADC
 
 Route108_MapEvents:: @ 8381AE8
 	map_events Route108_MapObjects, Route108_MapWarps, 0x0, Route108_MapBGEvents
-

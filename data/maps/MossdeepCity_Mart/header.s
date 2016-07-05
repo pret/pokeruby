@@ -12,4 +12,3 @@ MossdeepCity_Mart:: @ 830684C
 	.2byte 0
 	.byte 0
 	.byte 0
-

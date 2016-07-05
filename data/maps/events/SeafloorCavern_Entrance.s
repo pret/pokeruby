@@ -4,4 +4,3 @@ SeafloorCavern_Entrance_MapWarps:: @ 838D094
 
 SeafloorCavern_Entrance_MapEvents:: @ 838D0A4
 	map_events 0x0, SeafloorCavern_Entrance_MapWarps, 0x0, 0x0
-

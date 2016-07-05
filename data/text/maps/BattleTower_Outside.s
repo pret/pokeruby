@@ -46,4 +46,3 @@ BattleTower_Outside_Text_199ED4:: @ 8199ED4
 	.string "Gee, there’re a lot of tough-looking\n"
 	.string "TRAINERS here.\l"
 	.string "I’m not good enough to enter yet...$"
-

@@ -14,4 +14,3 @@ RustboroCity_Flat2_1F_EventScript_157D83:: @ 8157D83
 	waitpokecry
 	release
 	end
-

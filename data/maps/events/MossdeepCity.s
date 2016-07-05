@@ -39,4 +39,3 @@ MossdeepCity_MapBGEvents:: @ 8380594
 
 MossdeepCity_MapEvents:: @ 83805F4
 	map_events MossdeepCity_MapObjects, MossdeepCity_MapWarps, MossdeepCity_MapCoordEvents, MossdeepCity_MapBGEvents
-

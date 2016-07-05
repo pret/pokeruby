@@ -6,4 +6,3 @@ RustboroCity_MapConnectionsList:: @ 8308768
 RustboroCity_MapConnections:: @ 830878C
 	.4byte 0x3
 	.4byte RustboroCity_MapConnectionsList
-

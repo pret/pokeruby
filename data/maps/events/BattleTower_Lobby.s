@@ -16,4 +16,3 @@ BattleTower_Lobby_MapBGEvents:: @ 8391D34
 
 BattleTower_Lobby_MapEvents:: @ 8391D40
 	map_events BattleTower_Lobby_MapObjects, BattleTower_Lobby_MapWarps, 0x0, BattleTower_Lobby_MapBGEvents
-

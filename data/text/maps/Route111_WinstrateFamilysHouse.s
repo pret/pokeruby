@@ -41,4 +41,3 @@ Route111_WinstrateFamilysHouse_Text_192334:: @ 8192334
 	.string "POKéMON LEAGUE CHAMPION by now.\p"
 	.string "Knowing my grandson, he could be the\n"
 	.string "CHAMPION already!$"
-

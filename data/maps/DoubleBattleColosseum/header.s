@@ -12,4 +12,3 @@ DoubleBattleColosseum:: @ 83079CC
 	.2byte 0
 	.byte 0
 	.byte 8
-

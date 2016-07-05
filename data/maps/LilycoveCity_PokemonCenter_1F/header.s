@@ -12,4 +12,3 @@ LilycoveCity_PokemonCenter_1F:: @ 83065C8
 	.2byte 0
 	.byte 0
 	.byte 0
-

@@ -12,4 +12,3 @@ SeafloorCavern_Room2:: @ 830709C
 	.2byte 0
 	.byte 1
 	.byte 0
-

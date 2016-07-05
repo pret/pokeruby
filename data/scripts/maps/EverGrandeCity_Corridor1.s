@@ -9,4 +9,3 @@ EverGrandeCity_Corridor1_MapScript2_15BA12:: @ 815BA12
 EverGrandeCity_Corridor1_EventScript_15BA1C:: @ 815BA1C
 	spriteface 255, 2
 	end
-

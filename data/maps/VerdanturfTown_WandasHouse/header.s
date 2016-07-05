@@ -12,4 +12,3 @@ VerdanturfTown_WandasHouse:: @ 8305E04
 	.2byte 0
 	.byte 0
 	.byte 0
-

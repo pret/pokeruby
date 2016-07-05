@@ -56,4 +56,3 @@ AquaHideout_B2F_Text_1973C0:: @ 81973C0
 	.string "where I put the MASTER BALL.\p"
 	.string "If I fail to guard it, our BOSS will\n"
 	.string "chew me out...$"
-

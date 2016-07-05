@@ -8,4 +8,3 @@ MtPyre_6F_MapWarps:: @ 838CAF0
 
 MtPyre_6F_MapEvents:: @ 838CB00
 	map_events MtPyre_6F_MapObjects, MtPyre_6F_MapWarps, 0x0, 0x0
-

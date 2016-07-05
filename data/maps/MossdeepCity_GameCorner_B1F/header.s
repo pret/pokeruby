@@ -12,4 +12,3 @@ MossdeepCity_GameCorner_B1F:: @ 8306910
 	.2byte 0
 	.byte 0
 	.byte 0
-

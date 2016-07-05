@@ -100,4 +100,3 @@ Route119_Text_171774:: @ 8171774
 	.string "Pick your favorite items and create\n"
 	.string "your very own SECRET BASE exactly the\l"
 	.string "way you want.$"
-

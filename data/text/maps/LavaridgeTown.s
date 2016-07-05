@@ -127,4 +127,3 @@ LavaridgeTown_Text_16C77C:: @ 816C77C
 LavaridgeTown_Text_16C7CF:: @ 816C7CF
 	.string "POKéMON HERB SHOP\n"
 	.string "“Bitter taste - better cure!”$"
-

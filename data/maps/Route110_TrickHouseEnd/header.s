@@ -12,4 +12,3 @@ Route110_TrickHouseEnd:: @ 8307D68
 	.2byte 0
 	.byte 0
 	.byte 0
-

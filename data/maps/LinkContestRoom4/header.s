@@ -12,4 +12,3 @@ LinkContestRoom4:: @ 8307AE4
 	.2byte 0
 	.byte 0
 	.byte 0
-

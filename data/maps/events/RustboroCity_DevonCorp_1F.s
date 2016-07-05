@@ -10,4 +10,3 @@ RustboroCity_DevonCorp_1F_MapWarps:: @ 8388854
 
 RustboroCity_DevonCorp_1F_MapEvents:: @ 838886C
 	map_events RustboroCity_DevonCorp_1F_MapObjects, RustboroCity_DevonCorp_1F_MapWarps, 0x0, 0x0
-

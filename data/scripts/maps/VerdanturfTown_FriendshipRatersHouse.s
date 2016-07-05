@@ -61,4 +61,3 @@ VerdanturfTown_FriendshipRatersHouse_EventScript_1540D9:: @ 81540D9
 	waitpokecry
 	release
 	end
-

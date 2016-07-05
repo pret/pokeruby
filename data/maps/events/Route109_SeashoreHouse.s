@@ -10,4 +10,3 @@ Route109_SeashoreHouse_MapWarps:: @ 839211C
 
 Route109_SeashoreHouse_MapEvents:: @ 839212C
 	map_events Route109_SeashoreHouse_MapObjects, Route109_SeashoreHouse_MapWarps, 0x0, 0x0
-

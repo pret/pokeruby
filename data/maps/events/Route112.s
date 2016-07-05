@@ -27,4 +27,3 @@ Route112_MapBGEvents:: @ 8382968
 
 Route112_MapEvents:: @ 838298C
 	map_events Route112_MapObjects, Route112_MapWarps, 0x0, Route112_MapBGEvents
-

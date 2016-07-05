@@ -1,6 +1,5 @@
 	.align 2
-	.global gBattleTowerTrainers
-gBattleTowerTrainers: @ 8402F00
+gBattleTowerTrainers:: @ 8402F00
 @ 0
 	.byte TRAINER_CLASS_YOUNGSTER
 	.string "ALVIN$", 8

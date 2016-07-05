@@ -655,4 +655,3 @@ MauvilleCity_GameCorner_EventScript_1572B5:: @ 81572B5
 	msgbox MauvilleCity_GameCorner_Text_182420, 4
 	releaseall
 	end
-

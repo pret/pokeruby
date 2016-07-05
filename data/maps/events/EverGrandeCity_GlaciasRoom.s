@@ -7,4 +7,3 @@ EverGrandeCity_GlaciasRoom_MapWarps:: @ 838B2D4
 
 EverGrandeCity_GlaciasRoom_MapEvents:: @ 838B2E4
 	map_events EverGrandeCity_GlaciasRoom_MapObjects, EverGrandeCity_GlaciasRoom_MapWarps, 0x0, 0x0
-

@@ -91,4 +91,3 @@ Route119_WeatherInstitute_2F_EventScript_163DCC:: @ 8163DCC
 	jumpeq Route119_WeatherInstitute_2F_EventScript_163DBE
 	jump Route119_WeatherInstitute_2F_EventScript_163D7A
 	end
-

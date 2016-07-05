@@ -4,4 +4,3 @@ RustboroCity_Flat1_1F_Text_184DB4:: @ 8184DB4
 
 RustboroCity_Flat1_1F_Text_184DE9:: @ 8184DE9
 	.string "POKéMON are such strange creatures.$"
-

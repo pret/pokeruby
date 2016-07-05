@@ -12,4 +12,3 @@ LilycoveCity_UnusedMart:: @ 8306600
 	.2byte 0
 	.byte 0
 	.byte 0
-

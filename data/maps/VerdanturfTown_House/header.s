@@ -12,4 +12,3 @@ VerdanturfTown_House:: @ 8305E3C
 	.2byte 0
 	.byte 0
 	.byte 0
-

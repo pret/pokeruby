@@ -18,4 +18,3 @@ Route127_MapBGEvents:: @ 8385080
 
 Route127_MapEvents:: @ 83850BC
 	map_events Route127_MapObjects, 0x0, 0x0, Route127_MapBGEvents
-

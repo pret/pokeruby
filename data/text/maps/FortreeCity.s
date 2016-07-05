@@ -60,4 +60,3 @@ FortreeCity_Text_167969:: @ 8167969
 	.string "LEADER: WINONA\p"
 	.string "“The bird user taking flight into\n"
 	.string "the world.”$"
-

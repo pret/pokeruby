@@ -12,4 +12,3 @@ LittlerootTown_ProfessorBirchsLab:: @ 8305AA0
 	.2byte 0
 	.byte 0
 	.byte 0
-

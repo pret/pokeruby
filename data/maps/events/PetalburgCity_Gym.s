@@ -68,4 +68,3 @@ PetalburgCity_Gym_MapBGEvents:: @ 8387388
 
 PetalburgCity_Gym_MapEvents:: @ 8387430
 	map_events PetalburgCity_Gym_MapObjects, PetalburgCity_Gym_MapWarps, 0x0, PetalburgCity_Gym_MapBGEvents
-

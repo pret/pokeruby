@@ -8,4 +8,3 @@ RustboroCity_CuttersHouse_MapWarps:: @ 8388DCC
 
 RustboroCity_CuttersHouse_MapEvents:: @ 8388DDC
 	map_events RustboroCity_CuttersHouse_MapObjects, RustboroCity_CuttersHouse_MapWarps, 0x0, 0x0
-

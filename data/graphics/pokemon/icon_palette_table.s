@@ -1,6 +1,5 @@
 	.align 2
-	.global gMonIconPaletteTable
-gMonIconPaletteTable: @ 83BC5B8
+gMonIconPaletteTable:: @ 83BC5B8
 	obj_pal gMonIconPalettes + 0 * 32, 56000
 	obj_pal gMonIconPalettes + 1 * 32, 56001
 	obj_pal gMonIconPalettes + 2 * 32, 56002

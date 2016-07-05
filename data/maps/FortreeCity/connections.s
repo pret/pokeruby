@@ -5,4 +5,3 @@ FortreeCity_MapConnectionsList:: @ 8308794
 FortreeCity_MapConnections:: @ 83087AC
 	.4byte 0x2
 	.4byte FortreeCity_MapConnectionsList
-

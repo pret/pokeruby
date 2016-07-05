@@ -32,4 +32,3 @@ Route117_MapBGEvents:: @ 8383640
 
 Route117_MapEvents:: @ 8383670
 	map_events Route117_MapObjects, Route117_MapWarps, 0x0, Route117_MapBGEvents
-

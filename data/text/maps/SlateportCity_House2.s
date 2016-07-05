@@ -14,4 +14,3 @@ SlateportCity_House2_Text_180567:: @ 8180567
 SlateportCity_House2_Text_1805CD:: @ 81805CD
 	.string "Oh, a CONTEST PASS!\n"
 	.string "You’re going to be a contestant?$"
-

@@ -92,4 +92,3 @@ Route119_MapBGEvents:: @ 8383E2C
 
 Route119_MapEvents:: @ 8383F1C
 	map_events Route119_MapObjects, Route119_MapWarps, Route119_MapCoordEvents, Route119_MapBGEvents
-

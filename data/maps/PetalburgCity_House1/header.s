@@ -12,4 +12,3 @@ PetalburgCity_House1:: @ 8305F54
 	.2byte 0
 	.byte 0
 	.byte 0
-

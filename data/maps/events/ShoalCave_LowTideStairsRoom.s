@@ -10,4 +10,3 @@ ShoalCave_LowTideStairsRoom_MapBGEvents:: @ 838DE1C
 
 ShoalCave_LowTideStairsRoom_MapEvents:: @ 838DE28
 	map_events ShoalCave_LowTideStairsRoom_MapObjects, ShoalCave_LowTideStairsRoom_MapWarps, 0x0, ShoalCave_LowTideStairsRoom_MapBGEvents
-

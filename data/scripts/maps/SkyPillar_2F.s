@@ -8,4 +8,3 @@ SkyPillar_2F_MapScript1_15F2D9:: @ 815F2D9
 	tileeffect 7
 	warp5 SkyPillar_1F, 255, 0, 0
 	end
-

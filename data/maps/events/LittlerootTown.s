@@ -30,4 +30,3 @@ LittlerootTown_MapBGEvents:: @ 8380A34
 
 LittlerootTown_MapEvents:: @ 8380A64
 	map_events LittlerootTown_MapObjects, LittlerootTown_MapWarps, LittlerootTown_MapCoordEvents, LittlerootTown_MapBGEvents
-

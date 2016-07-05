@@ -43,4 +43,3 @@ MauvilleCity_House2_EventScript_157347:: @ 8157347
 	msgbox MauvilleCity_House2_Text_182578, 4
 	release
 	end
-

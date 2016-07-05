@@ -175,4 +175,3 @@ RustboroCity_DevonCorp_2F_EventScript_157707:: @ 8157707
 	msgbox RustboroCity_DevonCorp_2F_Text_1831C8, 4
 	release
 	end
-

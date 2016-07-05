@@ -31,4 +31,3 @@ Route111_OldLadysRestStop_EventScript_15C029:: @ 815C029
 	msgbox Route111_OldLadysRestStop_Text_1924C6, 4
 	release
 	end
-

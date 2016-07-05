@@ -23,4 +23,3 @@ VerdanturfTown_PokemonCenter_1F_EventScript_153F26:: @ 8153F26
 VerdanturfTown_PokemonCenter_1F_EventScript_153F2F:: @ 8153F2F
 	msgbox VerdanturfTown_PokemonCenter_1F_Text_178389, 2
 	end
-

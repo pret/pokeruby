@@ -319,4 +319,3 @@ SlateportCity_Text_165B02:: @ 8165B02
 SlateportCity_Text_165B48:: @ 8165B48
 	.string "NAME RATER’S HOUSE\n"
 	.string "“POKéMON nicknames rated.”$"
-

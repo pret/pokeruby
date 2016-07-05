@@ -8,4 +8,3 @@ Route123_BerryMastersHouse_MapWarps:: @ 8392D9C
 
 Route123_BerryMastersHouse_MapEvents:: @ 8392DAC
 	map_events Route123_BerryMastersHouse_MapObjects, Route123_BerryMastersHouse_MapWarps, 0x0, 0x0
-

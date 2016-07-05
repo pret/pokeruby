@@ -136,4 +136,3 @@ Route121_SafariZoneEntrance_Movement_15C47E:: @ 815C47E
 Route121_SafariZoneEntrance_EventScript_15C487:: @ 815C487
 	msgbox Route121_SafariZoneEntrance_Text_1C3E4B, 3
 	end
-

@@ -8,4 +8,3 @@ PacifidlogTown_House3_MapWarps:: @ 8387030
 
 PacifidlogTown_House3_MapEvents:: @ 8387040
 	map_events PacifidlogTown_House3_MapObjects, PacifidlogTown_House3_MapWarps, 0x0, 0x0
-

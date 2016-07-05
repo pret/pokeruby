@@ -163,4 +163,3 @@ RustboroCity_PokemonSchool_Movement_157B60:: @ 8157B60
 	step_left
 	step_left
 	step_end
-

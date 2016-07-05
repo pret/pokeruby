@@ -8,4 +8,3 @@ OldaleTown_House2_EventScript_152EF6:: @ 8152EF6
 OldaleTown_House2_EventScript_152EFF:: @ 8152EFF
 	msgbox OldaleTown_House2_Text_17487B, 2
 	end
-

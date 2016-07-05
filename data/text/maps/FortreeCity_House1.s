@@ -33,4 +33,3 @@ FortreeCity_House1_Text_18582A:: @ 818582A
 
 FortreeCity_House1_Text_185888:: @ 8185888
 	.string "ZIGZAGOON: Gumomoh?$"
-

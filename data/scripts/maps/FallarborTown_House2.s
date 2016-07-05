@@ -61,4 +61,3 @@ FallarborTown_House2_EventScript_153D60:: @ 8153D60
 	msgbox FallarborTown_House2_Text_177CEF, 4
 	releaseall
 	end
-

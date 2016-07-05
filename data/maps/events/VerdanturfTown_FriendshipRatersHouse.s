@@ -8,4 +8,3 @@ VerdanturfTown_FriendshipRatersHouse_MapWarps:: @ 8386DB8
 
 VerdanturfTown_FriendshipRatersHouse_MapEvents:: @ 8386DC8
 	map_events VerdanturfTown_FriendshipRatersHouse_MapObjects, VerdanturfTown_FriendshipRatersHouse_MapWarps, 0x0, 0x0
-

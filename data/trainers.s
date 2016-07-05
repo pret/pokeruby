@@ -1,6 +1,5 @@
 	.align 2
-	.global gTrainers
-gTrainers: @ 81F04FC
+gTrainers:: @ 81F04FC
 @ NONE
 	.byte 0 @ party type flags
 	.byte TRAINER_CLASS_NAME_POKEMON_TRAINER_1
@@ -709,7 +708,7 @@ gTrainers: @ 81F04FC
 	.4byte 1 @ party size
 	.4byte gTrainerParty_Carmen
 
-@ GWEN 
+@ GWEN
 	.byte 0 @ party type flags
 	.byte TRAINER_CLASS_NAME_TUBER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
@@ -719,7 +718,7 @@ gTrainers: @ 81F04FC
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
 	.4byte 1 @ party size
-	.4byte gTrainerParty_Gwen 
+	.4byte gTrainerParty_Gwen
 
 @ LOLA_2
 	.byte 0 @ party type flags

@@ -24,4 +24,3 @@ VerdanturfTown_ContestHall_Text_178120:: @ 8178120
 VerdanturfTown_ContestHall_Text_1781A5:: @ 81781A5
 	.string "POKéMON CONTESTS\n"
 	.string "NORMAL RANK STAGE!$"
-

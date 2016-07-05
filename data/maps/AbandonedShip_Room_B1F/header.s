@@ -12,4 +12,3 @@ AbandonedShip_Room_B1F:: @ 830741C
 	.2byte 0
 	.byte 1
 	.byte 0
-

@@ -31,4 +31,3 @@ GraniteCave_StevensRoom_Text_194C8D:: @ 8194C8D
 GraniteCave_StevensRoom_Text_194D43:: @ 8194D43
 	.string "Oh, your BAG is full...\n"
 	.string "That’s too bad, then.$"
-

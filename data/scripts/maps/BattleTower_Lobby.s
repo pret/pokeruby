@@ -426,4 +426,3 @@ BattleTower_Lobby_EventScript_1607C5:: @ 81607C5
 	msgbox BattleTower_Lobby_Text_19AC55, 4
 	release
 	end
-

@@ -15,4 +15,3 @@ RustboroCity_PokemonCenter_2F_EventScript_157BC7:: @ 8157BC7
 RustboroCity_PokemonCenter_2F_EventScript_157BCD:: @ 8157BCD
 	call RustboroCity_PokemonCenter_2F_EventScript_1A41FB
 	end
-

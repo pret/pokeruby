@@ -459,4 +459,3 @@ Route104_EventScript_14F279:: @ 814F279
 	msgbox Route104_Text_1B853B, 4
 	release
 	end
-

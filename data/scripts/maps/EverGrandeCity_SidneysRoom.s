@@ -61,4 +61,3 @@ EverGrandeCity_SidneysRoom_EventScript_15B5C7:: @ 815B5C7
 	msgbox EverGrandeCity_SidneysRoom_Text_19086D, 4
 	release
 	end
-

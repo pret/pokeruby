@@ -12,4 +12,3 @@ SlateportCity_PokemonCenter_1F:: @ 83060F8
 	.2byte 0
 	.byte 0
 	.byte 0
-

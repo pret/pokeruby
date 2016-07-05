@@ -37,4 +37,3 @@ VerdanturfTown_FriendshipRatersHouse_Text_178C90:: @ 8178C90
 
 VerdanturfTown_FriendshipRatersHouse_Text_178CFD:: @ 8178CFD
 	.string "PIKACHU: Pika pika!$"
-

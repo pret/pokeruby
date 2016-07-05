@@ -18,4 +18,3 @@ Route119_WeatherInstitute_1F_MapBGEvents:: @ 8392E50
 
 Route119_WeatherInstitute_1F_MapEvents:: @ 8392E80
 	map_events Route119_WeatherInstitute_1F_MapObjects, Route119_WeatherInstitute_1F_MapWarps, 0x0, Route119_WeatherInstitute_1F_MapBGEvents
-

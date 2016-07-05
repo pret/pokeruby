@@ -14,4 +14,3 @@ Route119_House_EventScript_163DE7:: @ 8163DE7
 	waitpokecry
 	release
 	end
-

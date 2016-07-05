@@ -17,4 +17,3 @@ MossdeepCity_Mart_Text_18D841:: @ 818D841
 	.string "BUG-type and WATER-type POKéMON.\p"
 	.string "A DIVE BALL works best on POKéMON at\n"
 	.string "the bottom of the sea.$"
-

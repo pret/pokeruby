@@ -116,4 +116,3 @@ LilycoveCity_DepartmentStore_5F_EventScript_15A12D:: @ 815A12D
 LilycoveCity_DepartmentStore_5F_EventScript_15A136:: @ 815A136
 	msgbox LilycoveCity_DepartmentStore_5F_Text_18C556, 2
 	end
-

@@ -55,4 +55,3 @@ Route110_SeasideCyclingRoadNorthEntrance_EventScript_16353A:: @ 816353A
 	setvar 0x4001, 0
 	releaseall
 	end
-

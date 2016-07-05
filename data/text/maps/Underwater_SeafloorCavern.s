@@ -5,4 +5,3 @@ Underwater_SeafloorCavern_Text_197435:: @ 8197435
 	.string "stole in SLATEPORT!\p"
 	.string "TEAM {EVIL_TEAM} must have gone\n"
 	.string "ashore here.$"
-

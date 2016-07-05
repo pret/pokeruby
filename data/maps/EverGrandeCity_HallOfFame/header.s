@@ -12,4 +12,3 @@ EverGrandeCity_HallOfFame:: @ 8306BCC
 	.2byte 0
 	.byte 0
 	.byte 0
-

@@ -381,4 +381,3 @@ Route119_EventScript_1515FC:: @ 81515FC
 Route119_EventScript_151605:: @ 8151605
 	msgbox Route119_Text_171774, 3
 	end
-

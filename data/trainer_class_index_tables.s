@@ -1,5 +1,4 @@
-	.global gTrainerClassToPicIndex
-gTrainerClassToPicIndex: @ 81FDDD0
+gTrainerClassToPicIndex:: @ 81FDDD0
 	.byte TRAINER_PIC_ARCHIE                @ AQUA_LEADER
 	.byte TRAINER_PIC_AQUA_GRUNT_M          @ TEAM_AQUA_M
 	.byte TRAINER_PIC_AQUA_GRUNT_F          @ TEAM_AQUA_F
@@ -78,8 +77,7 @@ gTrainerClassToPicIndex: @ 81FDDD0
 	.byte TRAINER_PIC_OLD_COUPLE            @ OLD_COUPLE
 	.byte TRAINER_PIC_SIS_AND_BRO           @ SIS_AND_BRO
 
-	.global gTrainerClassToNameIndex
-gTrainerClassToNameIndex: @ 81FDE1D
+gTrainerClassToNameIndex:: @ 81FDE1D
 	.byte TRAINER_CLASS_NAME_AQUA_LEADER       @ AQUA_LEADER
 	.byte TRAINER_CLASS_NAME_TEAM_AQUA         @ TEAM_AQUA_M
 	.byte TRAINER_CLASS_NAME_TEAM_AQUA         @ TEAM_AQUA_F

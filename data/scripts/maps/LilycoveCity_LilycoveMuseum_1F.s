@@ -160,4 +160,3 @@ LilycoveCity_LilycoveMuseum_1F_EventScript_15858E:: @ 815858E
 LilycoveCity_LilycoveMuseum_1F_EventScript_1585A3:: @ 81585A3
 	msgbox LilycoveCity_LilycoveMuseum_1F_Text_187B7F, 2
 	end
-

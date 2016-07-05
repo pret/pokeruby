@@ -20,4 +20,3 @@ EverGrandeCity_GlaciasRoom_Text_190C8F:: @ 8190C8F
 	.string "Advance to the next room.\p"
 	.string "And there, confirm the truly fearsome\n"
 	.string "side of the POKéMON LEAGUE.$"
-

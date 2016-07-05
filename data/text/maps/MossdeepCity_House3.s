@@ -21,4 +21,3 @@ MossdeepCity_House3_Text_18DA26:: @ 818DA26
 MossdeepCity_House3_Text_18DA44:: @ 818DA44
 	.string "Go after the seafloor POKéMON with\n"
 	.string "your SUPER ROD.$"
-

@@ -8,4 +8,3 @@ PacifidlogTown_House1_EventScript_154155:: @ 8154155
 PacifidlogTown_House1_EventScript_15415E:: @ 815415E
 	msgbox PacifidlogTown_House1_Text_17906A, 2
 	end
-

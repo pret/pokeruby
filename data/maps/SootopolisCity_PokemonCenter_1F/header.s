@@ -12,4 +12,3 @@ SootopolisCity_PokemonCenter_1F:: @ 8306964
 	.2byte 0
 	.byte 0
 	.byte 0
-

@@ -35,4 +35,3 @@ SlateportCity_OceanicMuseum_2F_MapBGEvents:: @ 8387E20
 
 SlateportCity_OceanicMuseum_2F_MapEvents:: @ 8387F1C
 	map_events SlateportCity_OceanicMuseum_2F_MapObjects, SlateportCity_OceanicMuseum_2F_MapWarps, 0x0, SlateportCity_OceanicMuseum_2F_MapBGEvents
-

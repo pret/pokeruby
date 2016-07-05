@@ -12,4 +12,3 @@ FallarborTown_House2:: @ 8305D5C
 	.2byte 0
 	.byte 0
 	.byte 0
-

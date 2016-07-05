@@ -6,4 +6,3 @@ OldaleTown_MapConnectionsList:: @ 8308624
 OldaleTown_MapConnections:: @ 8308648
 	.4byte 0x3
 	.4byte OldaleTown_MapConnectionsList
-

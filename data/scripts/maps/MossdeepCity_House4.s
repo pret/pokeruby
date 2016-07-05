@@ -40,4 +40,3 @@ MossdeepCity_House4_EventScript_15AB77:: @ 815AB77
 	waitpokecry
 	release
 	end
-

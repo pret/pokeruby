@@ -44,4 +44,3 @@ Route102_EventScript_14EB6A:: @ 814EB6A
 	trainerbattle 0, 333, 0, Route102_Text_1B7B68, Route102_Text_1B7B9D
 	msgbox Route102_Text_1B7BD0, 6
 	end
-

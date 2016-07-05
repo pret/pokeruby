@@ -10,4 +10,3 @@ SootopolisCity_PokemonCenter_1F_MapWarps:: @ 838AE88
 
 SootopolisCity_PokemonCenter_1F_MapEvents:: @ 838AEA0
 	map_events SootopolisCity_PokemonCenter_1F_MapObjects, SootopolisCity_PokemonCenter_1F_MapWarps, 0x0, 0x0
-

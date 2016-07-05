@@ -1,6 +1,5 @@
 	.align 2
-	.global gTrainerFrontPicPaletteTable
-gTrainerFrontPicPaletteTable: @ 81EC7D4
+gTrainerFrontPicPaletteTable:: @ 81EC7D4
 	obj_pal gTrainerPalette_Brendan, 0
 	obj_pal gTrainerPalette_May, 1
 	obj_pal gTrainerPalette_Lass, 2

@@ -1,6 +1,5 @@
 	.align 1
-	.global gSpeciesIdToCryId
-gSpeciesIdToCryId: @ 81FDE6A
+gSpeciesIdToCryId:: @ 81FDE6A
 	.2byte 273 @ TREECKO
 	.2byte 274 @ GROVYLE
 	.2byte 275 @ SCEPTILE

@@ -14,4 +14,3 @@ MauvilleCity_House1_Text_181B64:: @ 8181B64
 MauvilleCity_House1_Text_181BF6:: @ 8181BF6
 	.string "Oh, yes, if you smash a rock, a POKéMON\n"
 	.string "could come flying out.$"
-

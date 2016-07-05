@@ -6,4 +6,3 @@ Route112_MapConnectionsList:: @ 83089A0
 Route112_MapConnections:: @ 83089C4
 	.4byte 0x3
 	.4byte Route112_MapConnectionsList
-

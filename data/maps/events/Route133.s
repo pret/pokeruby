@@ -9,4 +9,3 @@ Route133_MapObjects:: @ 83853D0
 
 Route133_MapEvents:: @ 8385478
 	map_events Route133_MapObjects, 0x0, 0x0, 0x0
-

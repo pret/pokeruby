@@ -86,4 +86,3 @@ SealedChamber_InnerRoom_EventScript_15F28F:: @ 815F28F
 	hidebox 0, 0, 29, 19
 	releaseall
 	end
-

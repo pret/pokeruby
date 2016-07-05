@@ -19,4 +19,3 @@ DewfordTown_Hall_MapBGEvents:: @ 8386170
 
 DewfordTown_Hall_MapEvents:: @ 8386188
 	map_events DewfordTown_Hall_MapObjects, DewfordTown_Hall_MapWarps, 0x0, DewfordTown_Hall_MapBGEvents
-

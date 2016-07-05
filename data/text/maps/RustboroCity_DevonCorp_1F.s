@@ -36,4 +36,3 @@ RustboroCity_DevonCorp_1F_Text_182B2D:: @ 8182B2D
 RustboroCity_DevonCorp_1F_Text_182B5A:: @ 8182B5A
 	.string "Hi, there!\n"
 	.string "You’re always welcome here!$"
-

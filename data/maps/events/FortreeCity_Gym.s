@@ -16,4 +16,3 @@ FortreeCity_Gym_MapBGEvents:: @ 83890B8
 
 FortreeCity_Gym_MapEvents:: @ 83890D0
 	map_events FortreeCity_Gym_MapObjects, FortreeCity_Gym_MapWarps, 0x0, FortreeCity_Gym_MapBGEvents
-

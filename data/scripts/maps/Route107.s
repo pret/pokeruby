@@ -38,4 +38,3 @@ Route107_EventScript_14F45A:: @ 814F45A
 	trainerbattle 4, 692, 0, Route107_Text_1B96AB, Route107_Text_1B9707, Route107_Text_1B9788
 	msgbox Route107_Text_1B9735, 6
 	end
-

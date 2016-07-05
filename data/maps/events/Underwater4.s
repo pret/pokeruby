@@ -7,4 +7,3 @@ Underwater4_MapBGEvents:: @ 8385648
 
 Underwater4_MapEvents:: @ 8385660
 	map_events 0x0, Underwater4_MapWarps, 0x0, Underwater4_MapBGEvents
-

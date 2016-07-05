@@ -4703,4 +4703,3 @@ SkyPillar_Top_MapAttributes:: @ 8304F00
 	.4byte SkyPillar_Top_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Pacifidlog
-

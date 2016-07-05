@@ -12,4 +12,3 @@ RustboroCity_Flat2_2F:: @ 83063B4
 	.2byte 0
 	.byte 0
 	.byte 0
-

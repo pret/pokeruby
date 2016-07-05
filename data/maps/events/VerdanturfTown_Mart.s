@@ -10,4 +10,3 @@ VerdanturfTown_Mart_MapWarps:: @ 8386BD0
 
 VerdanturfTown_Mart_MapEvents:: @ 8386BE0
 	map_events VerdanturfTown_Mart_MapObjects, VerdanturfTown_Mart_MapWarps, 0x0, 0x0
-

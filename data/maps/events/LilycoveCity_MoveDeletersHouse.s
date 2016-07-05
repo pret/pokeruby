@@ -7,4 +7,3 @@ LilycoveCity_MoveDeletersHouse_MapWarps:: @ 838A05C
 
 LilycoveCity_MoveDeletersHouse_MapEvents:: @ 838A06C
 	map_events LilycoveCity_MoveDeletersHouse_MapObjects, LilycoveCity_MoveDeletersHouse_MapWarps, 0x0, 0x0
-

@@ -11,4 +11,3 @@ RustboroCity_PokemonCenter_1F_MapWarps:: @ 8388B84
 
 RustboroCity_PokemonCenter_1F_MapEvents:: @ 8388B9C
 	map_events RustboroCity_PokemonCenter_1F_MapObjects, RustboroCity_PokemonCenter_1F_MapWarps, 0x0, 0x0
-

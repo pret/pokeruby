@@ -35,4 +35,3 @@ NewMauville_Inside_MapBGEvents:: @ 838E070
 
 NewMauville_Inside_MapEvents:: @ 838E0D0
 	map_events NewMauville_Inside_MapObjects, NewMauville_Inside_MapWarps, NewMauville_Inside_MapCoordEvents, NewMauville_Inside_MapBGEvents
-

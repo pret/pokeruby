@@ -5,4 +5,3 @@ Route117_MapConnectionsList:: @ 8308A58
 Route117_MapConnections:: @ 8308A70
 	.4byte 0x2
 	.4byte Route117_MapConnectionsList
-

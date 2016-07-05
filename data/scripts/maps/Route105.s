@@ -36,4 +36,3 @@ Route105_EventScript_14F317:: @ 814F317
 	trainerbattle 0, 442, 0, Route105_Text_1B8E66, Route105_Text_1B8EA0
 	msgbox Route105_Text_1B8EBD, 6
 	end
-

@@ -8,4 +8,3 @@ SlateportCity_SternsShipyard_2F_MapWarps:: @ 838776C
 
 SlateportCity_SternsShipyard_2F_MapEvents:: @ 8387774
 	map_events SlateportCity_SternsShipyard_2F_MapObjects, SlateportCity_SternsShipyard_2F_MapWarps, 0x0, 0x0
-

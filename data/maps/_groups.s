@@ -459,4 +459,3 @@ gMapGroup32:: @ 8308578
 
 gMapGroup33:: @ 8308584
 	.4byte Route124_DivingTreasureHuntersHouse
-

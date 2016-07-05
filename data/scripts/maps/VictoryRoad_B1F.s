@@ -15,4 +15,3 @@ VictoryRoad_B1F_EventScript_15DFE3:: @ 815DFE3
 	trainerbattle 0, 98, 0, VictoryRoad_B1F_Text_197E5D, VictoryRoad_B1F_Text_197EA6
 	msgbox VictoryRoad_B1F_Text_197EB6, 6
 	end
-

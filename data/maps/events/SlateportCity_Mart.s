@@ -9,4 +9,3 @@ SlateportCity_Mart_MapWarps:: @ 83881F8
 
 SlateportCity_Mart_MapEvents:: @ 8388208
 	map_events SlateportCity_Mart_MapObjects, SlateportCity_Mart_MapWarps, 0x0, 0x0
-

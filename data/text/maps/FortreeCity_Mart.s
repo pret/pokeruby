@@ -13,4 +13,3 @@ FortreeCity_Mart_Text_186251:: @ 8186251
 FortreeCity_Mart_Text_1862CA:: @ 81862CA
 	.string "A RARE CANDY makes a POKéMON grow\n"
 	.string "immediately by one level.$"
-

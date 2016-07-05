@@ -53,4 +53,3 @@ Route119_WeatherInstitute_1F_EventScript_163CAB:: @ 8163CAB
 	trainerbattle 0, TRAINER_WEATHER_INSTITUTE_GRUNT_2, 0, Route119_WeatherInstitute_1F_Text_19EC6B, Route119_WeatherInstitute_1F_Text_19EC89
 	msgbox Route119_WeatherInstitute_1F_Text_19EC97, 6
 	end
-

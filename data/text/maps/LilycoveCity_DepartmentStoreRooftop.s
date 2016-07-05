@@ -31,4 +31,3 @@ LilycoveCity_DepartmentStoreRooftop_Text_18C7AF:: @ 818C7AF
 
 LilycoveCity_DepartmentStoreRooftop_Text_18C7C3:: @ 818C7C3
 	.string "Decided against buying a drink.$"
-

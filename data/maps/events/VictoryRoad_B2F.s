@@ -17,4 +17,3 @@ VictoryRoad_B2F_MapBGEvents:: @ 838DCB0
 
 VictoryRoad_B2F_MapEvents:: @ 838DCC8
 	map_events VictoryRoad_B2F_MapObjects, VictoryRoad_B2F_MapWarps, 0x0, VictoryRoad_B2F_MapBGEvents
-

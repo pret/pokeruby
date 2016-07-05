@@ -99,4 +99,3 @@ RustboroCity_PokemonSchool_Text_184A17:: @ 8184A17
 	.string "A TRAINER’s mission is to defeat the\n"
 	.string "strong TRAINERS who await challengers\l"
 	.string "in POKéMON GYMS.$"
-

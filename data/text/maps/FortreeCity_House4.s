@@ -28,4 +28,3 @@ FortreeCity_House4_Text_186924:: @ 8186924
 
 FortreeCity_House4_Text_18695C:: @ 818695C
 	.string "WINGULL: Pihyoh!$"
-

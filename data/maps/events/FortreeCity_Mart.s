@@ -10,4 +10,3 @@ FortreeCity_Mart_MapWarps:: @ 8389254
 
 FortreeCity_Mart_MapEvents:: @ 8389264
 	map_events FortreeCity_Mart_MapObjects, FortreeCity_Mart_MapWarps, 0x0, 0x0
-

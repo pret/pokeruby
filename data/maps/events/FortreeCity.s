@@ -28,4 +28,3 @@ FortreeCity_MapBGEvents:: @ 8380110
 
 FortreeCity_MapEvents:: @ 8380158
 	map_events FortreeCity_MapObjects, FortreeCity_MapWarps, 0x0, FortreeCity_MapBGEvents
-

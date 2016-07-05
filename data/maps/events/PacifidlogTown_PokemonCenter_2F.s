@@ -12,4 +12,3 @@ PacifidlogTown_PokemonCenter_2F_MapWarps:: @ 8386F04
 
 PacifidlogTown_PokemonCenter_2F_MapEvents:: @ 8386F2C
 	map_events PacifidlogTown_PokemonCenter_2F_MapObjects, PacifidlogTown_PokemonCenter_2F_MapWarps, 0x0, 0x0
-

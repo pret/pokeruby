@@ -8,4 +8,3 @@ Route124_MapConnectionsList:: @ 8308B50
 Route124_MapConnections:: @ 8308B8C
 	.4byte 0x5
 	.4byte Route124_MapConnectionsList
-

@@ -40,4 +40,3 @@ Route131_EventScript_1524C9:: @ 81524C9
 	trainerbattle 4, 686, 0, Route131_Text_1C29F3, Route131_Text_1C2A20, Route131_Text_1C2ACA
 	msgbox Route131_Text_1C2A5D, 6
 	end
-

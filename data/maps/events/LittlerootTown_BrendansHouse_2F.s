@@ -25,4 +25,3 @@ LittlerootTown_BrendansHouse_2F_MapBGEvents:: @ 8385880
 
 LittlerootTown_BrendansHouse_2F_MapEvents:: @ 83858B0
 	map_events LittlerootTown_BrendansHouse_2F_MapObjects, LittlerootTown_BrendansHouse_2F_MapWarps, 0x0, LittlerootTown_BrendansHouse_2F_MapBGEvents
-

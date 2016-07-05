@@ -12,4 +12,3 @@ EverGrandeCity_ChampionsRoom:: @ 8306B08
 	.2byte 0
 	.byte 0
 	.byte 0
-

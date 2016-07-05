@@ -15,4 +15,3 @@ PetalburgCity_PokemonCenter_2F_EventScript_1552A3:: @ 81552A3
 PetalburgCity_PokemonCenter_2F_EventScript_1552A9:: @ 81552A9
 	call PetalburgCity_PokemonCenter_2F_EventScript_1A41FB
 	end
-

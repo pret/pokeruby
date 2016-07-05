@@ -10,4 +10,3 @@ RustboroCity_Mart_MapWarps:: @ 8388C94
 
 RustboroCity_Mart_MapEvents:: @ 8388CA4
 	map_events RustboroCity_Mart_MapObjects, RustboroCity_Mart_MapWarps, 0x0, 0x0
-

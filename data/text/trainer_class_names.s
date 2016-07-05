@@ -1,5 +1,4 @@
-	.global gTrainerClassNames
-gTrainerClassNames: @ 81F0208
+gTrainerClassNames:: @ 81F0208
 	.string "{PKMN} TRAINER$", 13
 	.string "{PKMN} TRAINER$", 13
 	.string "AQUA LEADER$", 13

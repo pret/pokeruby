@@ -58,4 +58,3 @@ Route111_WinstrateFamilysHouse_EventScript_15BFC4:: @ 815BFC4
 	waitmove 0
 	release
 	end
-

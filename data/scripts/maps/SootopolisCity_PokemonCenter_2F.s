@@ -15,4 +15,3 @@ SootopolisCity_PokemonCenter_2F_EventScript_15B20E:: @ 815B20E
 SootopolisCity_PokemonCenter_2F_EventScript_15B214:: @ 815B214
 	call SootopolisCity_PokemonCenter_2F_EventScript_1A41FB
 	end
-

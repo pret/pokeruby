@@ -7,4 +7,3 @@ Route111_OldLadysRestStop_MapWarps:: @ 838B7B0
 
 Route111_OldLadysRestStop_MapEvents:: @ 838B7C0
 	map_events Route111_OldLadysRestStop_MapObjects, Route111_OldLadysRestStop_MapWarps, 0x0, 0x0
-

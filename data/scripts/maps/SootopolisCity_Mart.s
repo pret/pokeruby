@@ -57,4 +57,3 @@ SootopolisCity_Mart_EventScript_15B290:: @ 815B290
 	msgbox SootopolisCity_Mart_Text_18F8F2, 4
 	release
 	end
-

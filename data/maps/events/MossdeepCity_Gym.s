@@ -26,4 +26,3 @@ MossdeepCity_Gym_MapBGEvents:: @ 838A758
 
 MossdeepCity_Gym_MapEvents:: @ 838A7A0
 	map_events MossdeepCity_Gym_MapObjects, MossdeepCity_Gym_MapWarps, MossdeepCity_Gym_MapCoordEvents, MossdeepCity_Gym_MapBGEvents
-

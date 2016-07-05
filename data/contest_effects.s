@@ -1,6 +1,5 @@
 	.align 2
-	.global gContestEffects
-gContestEffects:
+gContestEffects::
 @ 0
 	.byte 0 @ effect type
 	.byte 40 @ appeal
@@ -288,4 +287,3 @@ gContestEffects:
 	.byte 30 @ appeal
 	.byte 0 @ jam
 	.byte 0 @ padding
-

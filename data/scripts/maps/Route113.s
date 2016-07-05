@@ -98,4 +98,3 @@ Route113_EventScript_150717:: @ 8150717
 	trainerbattle 4, 677, 0, Route113_Text_1BBF62, Route113_Text_1BBF9D, Route113_Text_1BC021
 	msgbox Route113_Text_1BBFE2, 6
 	end
-

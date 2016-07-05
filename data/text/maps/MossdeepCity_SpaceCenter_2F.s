@@ -13,4 +13,3 @@ MossdeepCity_SpaceCenter_2F_Text_18E4EE:: @ 818E4EE
 MossdeepCity_SpaceCenter_2F_Text_18E564:: @ 818E564
 	.string "I wish ordinary people could go into\n"
 	.string "space one day...$"
-

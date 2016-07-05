@@ -15,4 +15,3 @@ SlateportCity_PokemonCenter_2F_EventScript_156404:: @ 8156404
 SlateportCity_PokemonCenter_2F_EventScript_15640A:: @ 815640A
 	call SlateportCity_PokemonCenter_2F_EventScript_1A41FB
 	end
-

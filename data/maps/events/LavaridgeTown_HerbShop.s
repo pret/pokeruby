@@ -9,4 +9,3 @@ LavaridgeTown_HerbShop_MapWarps:: @ 8386238
 
 LavaridgeTown_HerbShop_MapEvents:: @ 8386248
 	map_events LavaridgeTown_HerbShop_MapObjects, LavaridgeTown_HerbShop_MapWarps, 0x0, 0x0
-

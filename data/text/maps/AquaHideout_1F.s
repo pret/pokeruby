@@ -49,4 +49,3 @@ AquaHideout_1F_Text_196E28:: @ 8196E28
 AquaHideout_1F_Text_196E3D:: @ 8196E3D
 	.string "I took the loss for the TEAM, but\n"
 	.string "I did my job...$"
-

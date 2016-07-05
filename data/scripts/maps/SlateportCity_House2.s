@@ -19,4 +19,3 @@ SlateportCity_House2_EventScript_1563B5:: @ 81563B5
 	msgbox SlateportCity_House2_Text_1805CD, 4
 	release
 	end
-

@@ -255,4 +255,3 @@ gBerryDescriptionPart1_Enigma: @ 83CD288
 
 gBerryDescriptionPart2_Enigma: @ 83CD2A6
 	.string "Appears to have the power of stars.$"
-

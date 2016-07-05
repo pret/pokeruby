@@ -74,8 +74,7 @@ gNatureName_Quirky: @ 83C0FFB
 	.string "QUIRKY$"
 
 	.align 2
-	.global gNatureNames
-gNatureNames: @ 83C1004
+gNatureNames:: @ 83C1004
 	.4byte gNatureName_Hardy
 	.4byte gNatureName_Lonely
 	.4byte gNatureName_Brave

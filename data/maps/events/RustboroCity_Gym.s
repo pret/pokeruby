@@ -14,4 +14,3 @@ RustboroCity_Gym_MapBGEvents:: @ 8388A08
 
 RustboroCity_Gym_MapEvents:: @ 8388A20
 	map_events RustboroCity_Gym_MapObjects, RustboroCity_Gym_MapWarps, 0x0, RustboroCity_Gym_MapBGEvents
-

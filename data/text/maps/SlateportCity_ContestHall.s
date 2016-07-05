@@ -103,4 +103,3 @@ SlateportCity_ContestHall_Text_17D3F0:: @ 817D3F0
 SlateportCity_ContestHall_Text_17D447:: @ 817D447
 	.string "POKéMON CONTESTS\n"
 	.string "HYPER RANK STAGE!$"
-

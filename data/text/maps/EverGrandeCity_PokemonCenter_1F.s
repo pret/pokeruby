@@ -10,4 +10,3 @@ EverGrandeCity_PokemonCenter_1F_Text_1919EF:: @ 81919EF
 	.string "traveled in life...\p"
 	.string "Believe in your POKéMON and give it\n"
 	.string "your very best!$"
-

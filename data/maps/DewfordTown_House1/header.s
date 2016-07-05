@@ -12,4 +12,3 @@ DewfordTown_House1:: @ 8305B48
 	.2byte 0
 	.byte 0
 	.byte 0
-

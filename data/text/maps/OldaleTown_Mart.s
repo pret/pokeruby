@@ -11,4 +11,3 @@ OldaleTown_Mart_Text_174B10:: @ 8174B10
 	.string "and faints, it won’t be able to battle.\p"
 	.string "To prevent your POKéMON from fainting,\n"
 	.string "restore its HP with a POTION.$"
-

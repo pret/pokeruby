@@ -10,4 +10,3 @@ SootopolisCity_House1_Text_18FA03:: @ 818FA03
 
 SootopolisCity_House1_Text_18FA50:: @ 818FA50
 	.string "KECLEON: Puu puhyaah.$"
-

@@ -1,6 +1,5 @@
 	.align 2
-	.global gItems
-gItems: @ 83C5564
+gItems:: @ 83C5564
 	.string "????????$", 14
 	.2byte ITEM_NONE
 	.2byte 0 @ price

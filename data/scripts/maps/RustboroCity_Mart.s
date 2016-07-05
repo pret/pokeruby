@@ -69,4 +69,3 @@ RustboroCity_Mart_EventScript_157C4D:: @ 8157C4D
 RustboroCity_Mart_EventScript_157C56:: @ 8157C56
 	msgbox RustboroCity_Mart_Text_184D43, 2
 	end
-

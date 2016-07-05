@@ -12,4 +12,3 @@ Route110_TrickHouseCorridor:: @ 8307D84
 	.2byte 0
 	.byte 0
 	.byte 0
-

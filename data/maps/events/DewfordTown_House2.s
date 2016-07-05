@@ -8,4 +8,3 @@ DewfordTown_House2_MapWarps:: @ 83861CC
 
 DewfordTown_House2_MapEvents:: @ 83861DC
 	map_events DewfordTown_House2_MapObjects, DewfordTown_House2_MapWarps, 0x0, 0x0
-

@@ -12,4 +12,3 @@ SootopolisCity_House7_Text_19005B:: @ 819005B
 	.string "It seems as if the cave was made to\n"
 	.string "keep something from getting out.\p"
 	.string "Or am I just imagining things?$"
-

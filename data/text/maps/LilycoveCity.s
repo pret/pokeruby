@@ -299,4 +299,3 @@ LilycoveCity_Text_168FF3:: @ 8168FF3
 LilycoveCity_Text_169072:: @ 8169072
 	.string "MOVE DELETER’S HOUSE\p"
 	.string "“Unwanted POKéMON moves deleted.”$"
-

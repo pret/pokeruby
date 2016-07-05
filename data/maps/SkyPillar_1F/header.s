@@ -12,4 +12,3 @@ SkyPillar_1F:: @ 8307614
 	.2byte 0
 	.byte 1
 	.byte 0
-

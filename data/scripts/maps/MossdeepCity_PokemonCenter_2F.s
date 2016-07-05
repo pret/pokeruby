@@ -19,4 +19,3 @@ MossdeepCity_PokemonCenter_2F_EventScript_15A919:: @ 815A919
 MossdeepCity_PokemonCenter_2F_EventScript_15A91F:: @ 815A91F
 	call MossdeepCity_PokemonCenter_2F_EventScript_1A41FB
 	end
-

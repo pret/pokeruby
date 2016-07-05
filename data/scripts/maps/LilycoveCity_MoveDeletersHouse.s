@@ -61,4 +61,3 @@ LilycoveCity_MoveDeletersHouse_EventScript_159B7B:: @ 8159B7B
 	msgbox LilycoveCity_MoveDeletersHouse_Text_18B757, 4
 	releaseall
 	end
-

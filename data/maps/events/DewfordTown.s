@@ -21,4 +21,3 @@ DewfordTown_MapBGEvents:: @ 8380C28
 
 DewfordTown_MapEvents:: @ 8380C64
 	map_events DewfordTown_MapObjects, DewfordTown_MapWarps, 0x0, DewfordTown_MapBGEvents
-

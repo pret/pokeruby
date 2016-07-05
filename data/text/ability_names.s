@@ -1,5 +1,4 @@
-	.global gAbilityNames
-gAbilityNames: @ 81FA248
+gAbilityNames:: @ 81FA248
 	.string "-------$", 13
 	.string "STENCH$", 13
 	.string "DRIZZLE$", 13

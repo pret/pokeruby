@@ -12,4 +12,3 @@ EverGrandeCity:: @ 8305528
 	.2byte 0
 	.byte 1
 	.byte 0
-

@@ -26,4 +26,3 @@ LittlerootTown_ProfessorBirchsLab_MapBGEvents:: @ 8385B84
 
 LittlerootTown_ProfessorBirchsLab_MapEvents:: @ 8385C38
 	map_events LittlerootTown_ProfessorBirchsLab_MapObjects, LittlerootTown_ProfessorBirchsLab_MapWarps, 0x0, LittlerootTown_ProfessorBirchsLab_MapBGEvents
-

@@ -12,4 +12,3 @@ FallarborTown_Mart:: @ 8305CB4
 	.2byte 0
 	.byte 0
 	.byte 0
-

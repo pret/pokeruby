@@ -226,4 +226,3 @@ MeteorFalls_1F_1R_EventScript_15C66E:: @ 815C66E
 	msgbox MeteorFalls_1F_1R_Text_19396A, 4
 	release
 	end
-

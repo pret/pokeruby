@@ -158,4 +158,3 @@ SootopolisCity_Gym_1F_EventScript_15B0CD:: @ 815B0CD
 	msgbox SootopolisCity_Gym_1F_Text_18F649, 4
 	releaseall
 	end
-

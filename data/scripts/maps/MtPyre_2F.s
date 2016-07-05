@@ -31,4 +31,3 @@ MtPyre_2F_EventScript_15D3CD:: @ 815D3CD
 	trainerbattle 4, 640, 0, MtPyre_2F_Text_196449, MtPyre_2F_Text_1964EB, MtPyre_2F_Text_196539
 	msgbox MtPyre_2F_Text_196504, 6
 	end
-

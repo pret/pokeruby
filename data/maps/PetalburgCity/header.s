@@ -12,4 +12,3 @@ PetalburgCity:: @ 8305448
 	.2byte 0
 	.byte 1
 	.byte 0
-

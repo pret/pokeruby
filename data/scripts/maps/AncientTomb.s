@@ -69,4 +69,3 @@ AncientTomb_EventScript_15F050:: @ 815F050
 	clearflag 2145
 	release
 	end
-

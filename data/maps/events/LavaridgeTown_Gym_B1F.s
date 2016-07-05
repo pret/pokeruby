@@ -22,4 +22,3 @@ LavaridgeTown_Gym_B1F_MapWarps:: @ 83863E0
 
 LavaridgeTown_Gym_B1F_MapEvents:: @ 8386480
 	map_events 0x0, LavaridgeTown_Gym_B1F_MapWarps, 0x0, 0x0
-

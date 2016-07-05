@@ -12,4 +12,3 @@ PacifidlogTown_PokemonCenter_1F:: @ 8305E58
 	.2byte 0
 	.byte 0
 	.byte 0
-

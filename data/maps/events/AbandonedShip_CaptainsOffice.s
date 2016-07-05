@@ -8,4 +8,3 @@ AbandonedShip_CaptainsOffice_MapWarps:: @ 838E48C
 
 AbandonedShip_CaptainsOffice_MapEvents:: @ 838E49C
 	map_events AbandonedShip_CaptainsOffice_MapObjects, AbandonedShip_CaptainsOffice_MapWarps, 0x0, 0x0
-

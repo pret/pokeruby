@@ -66,4 +66,3 @@ PetalburgCity_WallysHouse_EventScript_15446D:: @ 815446D
 	msgbox PetalburgCity_WallysHouse_Text_179D12, 4
 	release
 	end
-

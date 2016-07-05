@@ -21,4 +21,3 @@ FallarborTown_ContestLobby_Text_1772D8:: @ 81772D8
 	.string "Hello! Congratulations!\p"
 	.string "I’ve put up a sketch of your POKéMON\n"
 	.string "right here for everyone to see!$"
-

@@ -31,4 +31,3 @@ LilycoveCity_PokemonCenter_1F_EventScript_15935D:: @ 815935D
 	msgbox LilycoveCity_PokemonCenter_1F_Text_18A0A1, 4
 	release
 	end
-

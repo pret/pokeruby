@@ -101,4 +101,3 @@ FortreeCity_Gym_EventScript_158007:: @ 8158007
 	msgbox FortreeCity_Gym_Text_185FD5, 4
 	releaseall
 	end
-

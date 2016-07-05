@@ -7,4 +7,3 @@ Route126_MapObjects:: @ 8384F1C
 
 Route126_MapEvents:: @ 8384F94
 	map_events Route126_MapObjects, 0x0, 0x0, 0x0
-

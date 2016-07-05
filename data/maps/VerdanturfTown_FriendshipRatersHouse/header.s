@@ -12,4 +12,3 @@ VerdanturfTown_FriendshipRatersHouse:: @ 8305E20
 	.2byte 0
 	.byte 0
 	.byte 0
-

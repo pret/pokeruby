@@ -11,4 +11,3 @@ RustboroCity_DevonCorp_2F_MapWarps:: @ 83888F8
 
 RustboroCity_DevonCorp_2F_MapEvents:: @ 8388908
 	map_events RustboroCity_DevonCorp_2F_MapObjects, RustboroCity_DevonCorp_2F_MapWarps, 0x0, 0x0
-

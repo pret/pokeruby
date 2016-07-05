@@ -12,4 +12,3 @@ RecordCorner:: @ 83079B0
 	.2byte 0
 	.byte 0
 	.byte 0
-

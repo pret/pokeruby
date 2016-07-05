@@ -366,4 +366,3 @@ MtPyre_Summit_Movement_15D7B9:: @ 815D7B9
 	step_down
 	step_down
 	step_end
-

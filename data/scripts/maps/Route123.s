@@ -100,4 +100,3 @@ Route123_EventScript_151DC8:: @ 8151DC8
 	trainerbattle 0, 106, 0, Route123_Text_1C0554, Route123_Text_1C059F
 	msgbox Route123_Text_1C05BC, 6
 	end
-

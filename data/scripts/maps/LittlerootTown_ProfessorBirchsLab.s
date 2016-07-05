@@ -214,4 +214,3 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152ED9:: @ 8152ED9
 LittlerootTown_ProfessorBirchsLab_EventScript_152EE2:: @ 8152EE2
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_174748, 3
 	end
-

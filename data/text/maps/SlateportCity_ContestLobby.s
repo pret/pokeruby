@@ -25,4 +25,3 @@ SlateportCity_ContestLobby_Text_17CAEC:: @ 817CAEC
 	.string "poster of your POKéMON on the wall.\p"
 	.string "It will have a portrait of your\n"
 	.string "POKéMON and both your names.$"
-

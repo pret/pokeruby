@@ -25,4 +25,3 @@ PacifidlogTown_PokemonCenter_1F_EventScript_154120:: @ 8154120
 PacifidlogTown_PokemonCenter_1F_EventScript_154129:: @ 8154129
 	msgbox PacifidlogTown_PokemonCenter_1F_Text_178ED9, 2
 	end
-

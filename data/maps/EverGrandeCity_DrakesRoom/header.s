@@ -12,4 +12,3 @@ EverGrandeCity_DrakesRoom:: @ 8306AEC
 	.2byte 0
 	.byte 0
 	.byte 7
-

@@ -15,4 +15,3 @@ VerdanturfTown_Mart_Text_1782C0:: @ 81782C0
 	.string "weakened POKéMON.\p"
 	.string "VERDANTURF is the only place you can\n"
 	.string "buy it.$"
-

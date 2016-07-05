@@ -169,4 +169,3 @@ LittlerootTown_MaysHouse_1F_EventScript_152A35:: @ 8152A35
 	waitmove 0
 	jump LittlerootTown_MaysHouse_1F_EventScript_1B69B7
 	end
-

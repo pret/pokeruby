@@ -18,4 +18,3 @@ PacifidlogTown_MapBGEvents:: @ 8381084
 
 PacifidlogTown_MapEvents:: @ 83810A8
 	map_events PacifidlogTown_MapObjects, PacifidlogTown_MapWarps, 0x0, PacifidlogTown_MapBGEvents
-

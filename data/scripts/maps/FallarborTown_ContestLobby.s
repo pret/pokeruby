@@ -119,4 +119,3 @@ FallarborTown_ContestLobby_EventScript_153AC2:: @ 8153AC2
 	hidebox 0, 0, 29, 19
 	releaseall
 	end
-

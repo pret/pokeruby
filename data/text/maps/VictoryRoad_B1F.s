@@ -33,4 +33,3 @@ VictoryRoad_B1F_Text_197EA6:: @ 8197EA6
 VictoryRoad_B1F_Text_197EB6:: @ 8197EB6
 	.string "You’ll do fine, for sure!\n"
 	.string "Your POKéMON are all eager to go!$"
-

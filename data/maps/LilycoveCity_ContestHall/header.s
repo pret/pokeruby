@@ -12,4 +12,3 @@ LilycoveCity_ContestHall:: @ 83065AC
 	.2byte 0
 	.byte 0
 	.byte 0
-

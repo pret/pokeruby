@@ -98,4 +98,3 @@ PacifidlogTown_House2_EventScript_154282:: @ 8154282
 	msgbox PacifidlogTown_House2_Text_1793DD, 4
 	release
 	end
-

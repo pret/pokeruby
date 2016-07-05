@@ -23,4 +23,3 @@ JaggedPass_MapBGEvents:: @ 838C6EC
 
 JaggedPass_MapEvents:: @ 838C704
 	map_events JaggedPass_MapObjects, JaggedPass_MapWarps, JaggedPass_MapCoordEvents, JaggedPass_MapBGEvents
-

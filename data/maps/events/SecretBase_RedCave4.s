@@ -20,4 +20,3 @@ SecretBase_RedCave4_MapWarps:: @ 8390B34
 
 SecretBase_RedCave4_MapEvents:: @ 8390B3C
 	map_events SecretBase_RedCave4_MapObjects, SecretBase_RedCave4_MapWarps, 0x0, 0x0
-

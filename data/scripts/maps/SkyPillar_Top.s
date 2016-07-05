@@ -26,4 +26,3 @@ SkyPillar_Top_EventScript_15F316:: @ 815F316
 	clearflag 2145
 	release
 	end
-

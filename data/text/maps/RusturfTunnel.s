@@ -103,4 +103,3 @@ RusturfTunnel_Text_1948C4:: @ 81948C4
 	.string "They halted development here to\n"
 	.string "protect POKéMON, right?\l"
 	.string "There’s a feel-good story!$"
-

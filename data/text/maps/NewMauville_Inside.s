@@ -14,4 +14,3 @@ NewMauville_Inside_Text_1983B1:: @ 81983B1
 	.string "... ... ... ... ... ... ... ...\p"
 	.string "The generator appears to have\n"
 	.string "stopped...$"
-

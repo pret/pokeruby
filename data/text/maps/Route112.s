@@ -25,4 +25,3 @@ Route112_Text_16FF19:: @ 816FF19
 Route112_Text_16FF64:: @ 816FF64
 	.string "ROUTE 112\n"
 	.string "{0x7B} LAVARIDGE TOWN$"
-

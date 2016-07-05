@@ -18,4 +18,3 @@ SeafloorCavern_Room8_MapWarps:: @ 838D5FC
 
 SeafloorCavern_Room8_MapEvents:: @ 838D60C
 	map_events SeafloorCavern_Room8_MapObjects, SeafloorCavern_Room8_MapWarps, 0x0, 0x0
-

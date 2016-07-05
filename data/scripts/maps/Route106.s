@@ -32,4 +32,3 @@ Route106_EventScript_14F3A4:: @ 814F3A4
 	trainerbattle 0, 340, 0, Route106_Text_1B9052, Route106_Text_1B90D3
 	msgbox Route106_Text_1B910A, 6
 	end
-

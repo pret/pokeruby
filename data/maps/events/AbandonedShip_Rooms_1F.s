@@ -12,4 +12,3 @@ AbandonedShip_Rooms_1F_MapWarps:: @ 838E1F4
 
 AbandonedShip_Rooms_1F_MapEvents:: @ 838E224
 	map_events AbandonedShip_Rooms_1F_MapObjects, AbandonedShip_Rooms_1F_MapWarps, 0x0, 0x0
-

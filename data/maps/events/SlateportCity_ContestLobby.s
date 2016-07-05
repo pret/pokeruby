@@ -21,4 +21,3 @@ SlateportCity_ContestLobby_MapBGEvents:: @ 8387860
 
 SlateportCity_ContestLobby_MapEvents:: @ 8387890
 	map_events SlateportCity_ContestLobby_MapObjects, SlateportCity_ContestLobby_MapWarps, 0x0, SlateportCity_ContestLobby_MapBGEvents
-

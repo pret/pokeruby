@@ -12,4 +12,3 @@ EverGrandeCity_PokemonLeague_MapWarps:: @ 838B4F4
 
 EverGrandeCity_PokemonLeague_MapEvents:: @ 838B514
 	map_events EverGrandeCity_PokemonLeague_MapObjects, EverGrandeCity_PokemonLeague_MapWarps, 0x0, 0x0
-

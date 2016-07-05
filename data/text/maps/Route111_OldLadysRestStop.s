@@ -17,4 +17,3 @@ Route111_OldLadysRestStop_Text_19244D:: @ 819244D
 Route111_OldLadysRestStop_Text_1924C6:: @ 81924C6
 	.string "Is that so?\n"
 	.string "You don’t need to be shy about it.$"
-

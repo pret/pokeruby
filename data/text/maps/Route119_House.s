@@ -7,4 +7,3 @@ Route119_House_Text_19F371:: @ 819F371
 
 Route119_House_Text_19F406:: @ 819F406
 	.string "WINGULL: Pihyo?$"
-

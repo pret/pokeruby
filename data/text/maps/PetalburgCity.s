@@ -42,4 +42,3 @@ PetalburgCity_Text_164602:: @ 8164602
 
 PetalburgCity_Text_164634:: @ 8164634
 	.string "WALLY’S HOUSE$"
-

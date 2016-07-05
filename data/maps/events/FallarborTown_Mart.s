@@ -10,4 +10,3 @@ FallarborTown_Mart_MapWarps:: @ 83866CC
 
 FallarborTown_Mart_MapEvents:: @ 83866DC
 	map_events FallarborTown_Mart_MapObjects, FallarborTown_Mart_MapWarps, 0x0, 0x0
-

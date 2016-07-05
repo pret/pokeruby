@@ -12,4 +12,3 @@ Route104_Prototype:: @ 8307CF8
 	.2byte 0
 	.byte 1
 	.byte 0
-

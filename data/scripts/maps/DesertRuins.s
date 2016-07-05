@@ -69,4 +69,3 @@ DesertRuins_EventScript_15CB85:: @ 815CB85
 	clearflag 2145
 	release
 	end
-

@@ -18,4 +18,3 @@ Route125_MapBGEvents:: @ 8384ED8
 
 Route125_MapEvents:: @ 8384F08
 	map_events Route125_MapObjects, Route125_MapWarps, 0x0, Route125_MapBGEvents
-

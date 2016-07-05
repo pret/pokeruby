@@ -70,4 +70,3 @@ PetalburgCity_WallysHouse_Text_179D12:: @ 8179D12
 	.string "he’s surprisingly strong-willed.\p"
 	.string "I’m sure that he’ll come back safe\n"
 	.string "and sound one day!$"
-

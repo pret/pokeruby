@@ -1055,4 +1055,3 @@ PetalburgCity_Gym_EventScript_1551D4:: @ 81551D4
 	msgbox PetalburgCity_Gym_Text_17BAA5, 4
 	releaseall
 	end
-

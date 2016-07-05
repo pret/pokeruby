@@ -50,4 +50,3 @@ ShoalCave_LowTideLowerRoom_EventScript_15E47E:: @ 815E47E
 	msgbox ShoalCave_LowTideLowerRoom_Text_1982A2, 4
 	release
 	end
-

@@ -1,5 +1,4 @@
-	.global gNatureStatTable
-gNatureStatTable: @ 81FD070
+gNatureStatTable:: @ 81FD070
 	@    Atk Def Spd Sp.Atk Sp.Def
 	.byte  0,  0,  0,     0,     0 @ Hardy
 	.byte  1, -1,  0,     0,     0 @ Lonely

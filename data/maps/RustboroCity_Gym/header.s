@@ -12,4 +12,3 @@ RustboroCity_Gym:: @ 8306280
 	.2byte 0
 	.byte 0
 	.byte 1
-

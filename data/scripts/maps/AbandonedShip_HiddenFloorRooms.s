@@ -141,4 +141,3 @@ AbandonedShip_HiddenFloorRooms_EventScript_15EEAB:: @ 815EEAB
 	msgbox AbandonedShip_HiddenFloorRooms_Text_198EE2, 4
 	releaseall
 	end
-

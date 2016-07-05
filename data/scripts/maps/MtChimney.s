@@ -465,4 +465,3 @@ MtChimney_EventScript_15D24F:: @ 815D24F
 	trainerbattle 0, 126, 0, MtChimney_Text_195CD8, MtChimney_Text_195D2F
 	msgbox MtChimney_Text_195D5C, 6
 	end
-

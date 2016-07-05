@@ -27,4 +27,3 @@ SootopolisCity_House1_EventScript_15B2D1:: @ 815B2D1
 	waitpokecry
 	release
 	end
-

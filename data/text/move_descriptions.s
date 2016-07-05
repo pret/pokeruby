@@ -1415,8 +1415,7 @@ gMoveDescription_PsychoBoost: @ 83C099D
 	.string "but sharply lowers SP. ATK.$"
 
 	.align 2
-	.global gMoveDescriptions
-gMoveDescriptions: @ 83C09D8
+gMoveDescriptions:: @ 83C09D8
 	.4byte gMoveDescription_Pound
 	.4byte gMoveDescription_KarateChop
 	.4byte gMoveDescription_DoubleSlap

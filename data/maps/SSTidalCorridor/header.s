@@ -12,4 +12,3 @@ SSTidalCorridor:: @ 8307B54
 	.2byte 0
 	.byte 0
 	.byte 0
-

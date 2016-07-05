@@ -7,4 +7,3 @@ Route134_MapObjects:: @ 838548C
 
 Route134_MapEvents:: @ 8385504
 	map_events Route134_MapObjects, 0x0, 0x0, 0x0
-

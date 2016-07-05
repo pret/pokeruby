@@ -12,4 +12,3 @@ Route114_LanettesHouse:: @ 8306D00
 	.2byte 0
 	.byte 0
 	.byte 0
-

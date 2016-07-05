@@ -56,4 +56,3 @@ AbandonedShip_Corridors_B1F_EventScript_15EA1E:: @ 815EA1E
 	trainerbattle 0, 496, 0, AbandonedShip_Corridors_B1F_Text_19856F, AbandonedShip_Corridors_B1F_Text_1985C5
 	msgbox AbandonedShip_Corridors_B1F_Text_1985D7, 6
 	end
-

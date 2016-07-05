@@ -22,4 +22,3 @@ SlateportCity_Harbor_MapCoordEvents:: @ 8388010
 
 SlateportCity_Harbor_MapEvents:: @ 8388050
 	map_events SlateportCity_Harbor_MapObjects, SlateportCity_Harbor_MapWarps, SlateportCity_Harbor_MapCoordEvents, 0x0
-

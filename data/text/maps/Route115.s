@@ -11,4 +11,3 @@ Route115_Text_1702E7:: @ 81702E7
 Route115_Text_170301:: @ 8170301
 	.string "METEOR FALLS\n"
 	.string "FALLARBOR TOWN THROUGH HERE$"
-

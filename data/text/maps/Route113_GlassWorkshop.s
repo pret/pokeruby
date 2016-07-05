@@ -84,4 +84,3 @@ Route113_GlassWorkshop_Text_19EB3B:: @ 819EB3B
 	.string "It’s fun to blow a glass flute while my\n"
 	.string "boss is talking.\p"
 	.string "Huff-huff! Puff-puff!$"
-

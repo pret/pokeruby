@@ -1,6 +1,5 @@
 	.align 2
-	.global gMonIconPaletteIndices
-gMonIconPaletteIndices: @ 83BC400
+gMonIconPaletteIndices:: @ 83BC400
 	.byte 0 @ ??????????
 	.byte 1 @ Bulbasaur
 	.byte 1 @ Ivysaur

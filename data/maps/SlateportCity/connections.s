@@ -6,4 +6,3 @@ SlateportCity_MapConnectionsList:: @ 8308704
 SlateportCity_MapConnections:: @ 8308728
 	.4byte 0x3
 	.4byte SlateportCity_MapConnectionsList
-

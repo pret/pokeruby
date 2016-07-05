@@ -31,4 +31,3 @@ SSTidalCorridor_MapBGEvents:: @ 83917A0
 
 SSTidalCorridor_MapEvents:: @ 8391830
 	map_events SSTidalCorridor_MapObjects, SSTidalCorridor_MapWarps, 0x0, SSTidalCorridor_MapBGEvents
-

@@ -12,4 +12,3 @@ Route123_BerryMastersHouse:: @ 8307ED4
 	.2byte 0
 	.byte 0
 	.byte 0
-

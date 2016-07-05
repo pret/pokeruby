@@ -60,4 +60,3 @@ EverGrandeCity_GlaciasRoom_EventScript_15B6FB:: @ 815B6FB
 	msgbox EverGrandeCity_GlaciasRoom_Text_190C8F, 4
 	release
 	end
-

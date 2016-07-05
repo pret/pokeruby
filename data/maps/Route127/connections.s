@@ -7,4 +7,3 @@ Route127_MapConnectionsList:: @ 8308BE0
 Route127_MapConnections:: @ 8308C10
 	.4byte 0x4
 	.4byte Route127_MapConnectionsList
-

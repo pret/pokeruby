@@ -26,4 +26,3 @@ PacifidlogTown_EventScript_14E912:: @ 814E912
 PacifidlogTown_EventScript_14E91B:: @ 814E91B
 	msgbox PacifidlogTown_Text_16D0CE, 3
 	end
-

@@ -13,4 +13,3 @@ Underwater2_MapBGEvents:: @ 8385588
 
 Underwater2_MapEvents:: @ 83855E8
 	map_events 0x0, Underwater2_MapWarps, 0x0, Underwater2_MapBGEvents
-

@@ -86,4 +86,3 @@ RustboroCity_DevonCorp_2F_Text_18319E:: @ 818319E
 RustboroCity_DevonCorp_2F_Text_1831C8:: @ 81831C8
 	.string "Uh-oh, you’ve got too many POKéMON.\n"
 	.string "You have no room for this one.$"
-

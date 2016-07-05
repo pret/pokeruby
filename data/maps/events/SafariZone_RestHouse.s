@@ -9,4 +9,3 @@ SafariZone_RestHouse_MapWarps:: @ 8391F08
 
 SafariZone_RestHouse_MapEvents:: @ 8391F18
 	map_events SafariZone_RestHouse_MapObjects, SafariZone_RestHouse_MapWarps, 0x0, 0x0
-

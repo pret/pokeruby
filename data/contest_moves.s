@@ -1,6 +1,5 @@
 	.align 2
-	.global gContestMoves
-gContestMoves:
+gContestMoves::
 @ NONE
 	.byte 0 @ effect ID
 	.byte CONTEST_COOL
@@ -2485,4 +2484,3 @@ gContestMoves:
 	.byte 0 @ combo starter ID
 	.byte COMBO_STARTER_CALM_MIND, 0, 0, 0 @ combo moves
 	.byte 0 @ padding
-

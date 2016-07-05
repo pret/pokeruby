@@ -41,4 +41,3 @@ MagmaHideout_B1F_MapWarps:: @ 838EAE8
 
 MagmaHideout_B1F_MapEvents:: @ 838EBD0
 	map_events MagmaHideout_B1F_MapObjects, MagmaHideout_B1F_MapWarps, 0x0, 0x0
-

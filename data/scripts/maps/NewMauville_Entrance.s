@@ -48,4 +48,3 @@ NewMauville_Entrance_EventScript_15E4DC:: @ 815E4DC
 NewMauville_Entrance_EventScript_15E55D:: @ 815E55D
 	releaseall
 	end
-

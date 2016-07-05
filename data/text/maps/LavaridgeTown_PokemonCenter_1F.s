@@ -15,4 +15,3 @@ LavaridgeTown_PokemonCenter_1F_Text_176F7A:: @ 8176F7A
 	.string "the hot springs from here.\p"
 	.string "If POKéMON are getting rest, so too\n"
 	.string "should their TRAINERS.$"
-

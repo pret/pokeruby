@@ -51,4 +51,3 @@ LilycoveCity_MapBGEvents:: @ 838037C
 
 LilycoveCity_MapEvents:: @ 8380418
 	map_events LilycoveCity_MapObjects, LilycoveCity_MapWarps, 0x0, LilycoveCity_MapBGEvents
-

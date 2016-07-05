@@ -111,4 +111,3 @@ SlateportCity_ContestHall_EventScript_15565C:: @ 815565C
 SlateportCity_ContestHall_EventScript_155671:: @ 8155671
 	msgbox SlateportCity_ContestHall_Text_17D447, 3
 	end
-

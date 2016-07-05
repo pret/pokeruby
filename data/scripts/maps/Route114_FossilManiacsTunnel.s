@@ -25,4 +25,3 @@ Route114_FossilManiacsTunnel_EventScript_15C24E:: @ 815C24E
 	msgbox Route114_FossilManiacsTunnel_Text_1929DC, 4
 	release
 	end
-

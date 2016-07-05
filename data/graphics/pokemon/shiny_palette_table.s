@@ -1,6 +1,5 @@
 	.align 2
-	.global gMonShinyPaletteTable
-gMonShinyPaletteTable: @ 81EB374
+gMonShinyPaletteTable:: @ 81EB374
 	obj_pal gMonShinyPalette_CircledQuestionMark, 500
 	obj_pal gMonShinyPalette_Bulbasaur, 501
 	obj_pal gMonShinyPalette_Ivysaur, 502

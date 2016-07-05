@@ -190,4 +190,3 @@ BattleTower_Lobby_Text_19AC55:: @ 819AC55
 	.string "seeing your magnificent performance.\p"
 	.string "It makes the building of the BATTLE\n"
 	.string "TOWER all worthwhile!$"
-

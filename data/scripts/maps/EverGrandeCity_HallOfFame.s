@@ -82,4 +82,3 @@ EverGrandeCity_HallOfFame_Movement_15BC60:: @ 815BC60
 	step_up
 	step_up
 	step_end
-

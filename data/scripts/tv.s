@@ -43,7 +43,11 @@ EventScript_1A6F01:
 	end
 
 EventScript_1A6F0B:
+	.ifdef SAPPHIRE
+	msgbox UnknownString_8172D30, 4
+	.else
 	msgbox UnknownString_8172C50, 4
+	.endif
 	special 297
 	clearflag 2141
 	setflag 255

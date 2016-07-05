@@ -8,4 +8,3 @@ PetalburgCity_WallysHouse_MapWarps:: @ 8387144
 
 PetalburgCity_WallysHouse_MapEvents:: @ 8387154
 	map_events PetalburgCity_WallysHouse_MapObjects, PetalburgCity_WallysHouse_MapWarps, 0x0, 0x0
-

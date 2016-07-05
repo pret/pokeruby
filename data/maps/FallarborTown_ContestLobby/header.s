@@ -12,4 +12,3 @@ FallarborTown_ContestLobby:: @ 8305CD0
 	.2byte 0
 	.byte 0
 	.byte 0
-

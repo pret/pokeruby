@@ -12,4 +12,3 @@ Route110_SeasideCyclingRoadNorthEntrance:: @ 8307E9C
 	.2byte 0
 	.byte 0
 	.byte 0
-

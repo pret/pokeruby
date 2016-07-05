@@ -12,4 +12,3 @@ Route110:: @ 8305704
 	.2byte 0
 	.byte 1
 	.byte 0
-

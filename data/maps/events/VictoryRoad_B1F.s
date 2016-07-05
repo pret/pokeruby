@@ -30,4 +30,3 @@ VictoryRoad_B1F_MapWarps:: @ 838DBCC
 
 VictoryRoad_B1F_MapEvents:: @ 838DC04
 	map_events VictoryRoad_B1F_MapObjects, VictoryRoad_B1F_MapWarps, 0x0, 0x0
-

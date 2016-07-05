@@ -253,4 +253,3 @@ LilycoveCity_ContestHall_EventScript_159315:: @ 8159315
 LilycoveCity_ContestHall_EventScript_15931E:: @ 815931E
 	msgbox LilycoveCity_ContestHall_Text_189F5C, 3
 	end
-

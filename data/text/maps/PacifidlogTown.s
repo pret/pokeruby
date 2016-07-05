@@ -17,4 +17,3 @@ PacifidlogTown_Text_16D0CE:: @ 816D0CE
 	.string "PACIFIDLOG TOWN\p"
 	.string "“Where the morning sun smiles upon\n"
 	.string "the waters.”$"
-

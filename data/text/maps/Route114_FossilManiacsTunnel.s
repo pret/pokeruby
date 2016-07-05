@@ -24,4 +24,3 @@ Route114_FossilManiacsTunnel_Text_1928DE:: @ 81928DE
 Route114_FossilManiacsTunnel_Text_1929DC:: @ 81929DC
 	.string "FOSSILS are so... Wonderful...\n"
 	.string "It’s so dreamy...$"
-

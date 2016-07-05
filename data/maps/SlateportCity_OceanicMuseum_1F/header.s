@@ -12,4 +12,3 @@ SlateportCity_OceanicMuseum_1F:: @ 8306088
 	.2byte 0
 	.byte 0
 	.byte 0
-

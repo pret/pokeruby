@@ -12,4 +12,3 @@ Route111_OldLadysRestStop:: @ 8306C74
 	.2byte 0
 	.byte 0
 	.byte 0
-

@@ -4,4 +4,3 @@ LilycoveCity_UnusedMart_MapWarps:: @ 8389E8C
 
 LilycoveCity_UnusedMart_MapEvents:: @ 8389E9C
 	map_events 0x0, LilycoveCity_UnusedMart_MapWarps, 0x0, 0x0
-

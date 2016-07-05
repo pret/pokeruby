@@ -112,4 +112,3 @@ SootopolisCity_House8_EventScript_15B531:: @ 815B531
 	msgbox SootopolisCity_House8_Text_1906BE, 4
 	releaseall
 	end
-

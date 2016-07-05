@@ -7,4 +7,3 @@ MauvilleCity_House1_MapWarps:: @ 838839C
 
 MauvilleCity_House1_MapEvents:: @ 83883AC
 	map_events MauvilleCity_House1_MapObjects, MauvilleCity_House1_MapWarps, 0x0, 0x0
-

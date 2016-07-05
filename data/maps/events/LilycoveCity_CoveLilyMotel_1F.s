@@ -11,4 +11,3 @@ LilycoveCity_CoveLilyMotel_1F_MapCoordEvents:: @ 8389494
 
 LilycoveCity_CoveLilyMotel_1F_MapEvents:: @ 83894A4
 	map_events LilycoveCity_CoveLilyMotel_1F_MapObjects, LilycoveCity_CoveLilyMotel_1F_MapWarps, LilycoveCity_CoveLilyMotel_1F_MapCoordEvents, 0x0
-

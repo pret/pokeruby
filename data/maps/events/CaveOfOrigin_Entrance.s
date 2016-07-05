@@ -4,4 +4,3 @@ CaveOfOrigin_Entrance_MapWarps:: @ 838D6F4
 
 CaveOfOrigin_Entrance_MapEvents:: @ 838D704
 	map_events 0x0, CaveOfOrigin_Entrance_MapWarps, 0x0, 0x0
-

@@ -12,4 +12,3 @@ MtPyre_4F_MapWarps:: @ 838CA10
 
 MtPyre_4F_MapEvents:: @ 838CA40
 	map_events MtPyre_4F_MapObjects, MtPyre_4F_MapWarps, 0x0, 0x0
-

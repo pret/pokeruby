@@ -30,4 +30,3 @@ Route110_TrickHousePuzzle3_MapBGEvents:: @ 83926DC
 
 Route110_TrickHousePuzzle3_MapEvents:: @ 83926E8
 	map_events Route110_TrickHousePuzzle3_MapObjects, Route110_TrickHousePuzzle3_MapWarps, Route110_TrickHousePuzzle3_MapCoordEvents, Route110_TrickHousePuzzle3_MapBGEvents
-

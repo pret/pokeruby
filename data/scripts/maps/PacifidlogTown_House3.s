@@ -53,4 +53,3 @@ PacifidlogTown_House3_EventScript_154338:: @ 8154338
 PacifidlogTown_House3_EventScript_154342:: @ 8154342
 	msgbox PacifidlogTown_House3_Text_179541, 2
 	end
-

@@ -22,4 +22,3 @@ Route110_TrickHousePuzzle7_MapBGEvents:: @ 8392B4C
 
 Route110_TrickHousePuzzle7_MapEvents:: @ 8392B94
 	map_events Route110_TrickHousePuzzle7_MapObjects, Route110_TrickHousePuzzle7_MapWarps, Route110_TrickHousePuzzle7_MapCoordEvents, Route110_TrickHousePuzzle7_MapBGEvents
-

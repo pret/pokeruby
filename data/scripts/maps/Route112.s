@@ -58,4 +58,3 @@ Route112_EventScript_1505B5:: @ 81505B5
 	trainerbattle 0, 471, 0, Route112_Text_1BB8F0, Route112_Text_1BB942
 	msgbox Route112_Text_1BB958, 6
 	end
-

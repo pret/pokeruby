@@ -45,4 +45,3 @@ Route116_MapBGEvents:: @ 83833A8
 
 Route116_MapEvents:: @ 838342C
 	map_events Route116_MapObjects, Route116_MapWarps, Route116_MapCoordEvents, Route116_MapBGEvents
-

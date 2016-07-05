@@ -7,4 +7,3 @@ UnknownString_8192532: @ 8192532
 
 Route112_CableCarStation_Text_192548:: @ 8192548
 	.string "Please ride with us another time.$"
-

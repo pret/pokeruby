@@ -23,4 +23,3 @@ EverGrandeCity_EventScript_14D500:: @ 814D500
 	setflag 2078
 	setvar 0x4001, 1
 	end
-

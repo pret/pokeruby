@@ -24,4 +24,3 @@ AbandonedShip_CaptainsOffice_EventScript_15EB2D:: @ 815EB2D
 	msgbox AbandonedShip_CaptainsOffice_Text_198D7B, 4
 	release
 	end
-

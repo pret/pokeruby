@@ -30,4 +30,3 @@ MauvilleCity_MapBGEvents:: @ 837FCA0
 
 MauvilleCity_MapEvents:: @ 837FD00
 	map_events MauvilleCity_MapObjects, MauvilleCity_MapWarps, 0x0, MauvilleCity_MapBGEvents
-

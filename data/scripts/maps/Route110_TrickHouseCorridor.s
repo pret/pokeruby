@@ -5,4 +5,3 @@ Route110_TrickHouseCorridor_MapScripts:: @ 8161CEC
 Route110_TrickHouseCorridor_MapScript1_161CF2:: @ 8161CF2
 	setvar 0x40b5, 1
 	end
-

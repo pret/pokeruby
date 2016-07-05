@@ -35,4 +35,3 @@ Route109_MapBGEvents:: @ 8381CE4
 
 Route109_MapEvents:: @ 8381D44
 	map_events Route109_MapObjects, Route109_MapWarps, 0x0, Route109_MapBGEvents
-

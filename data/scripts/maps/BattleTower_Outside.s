@@ -92,4 +92,3 @@ BattleTower_Outside_EventScript_16026C:: @ 816026C
 BattleTower_Outside_EventScript_160275:: @ 8160275
 	msgbox BattleTower_Outside_Text_199ED4, 2
 	end
-

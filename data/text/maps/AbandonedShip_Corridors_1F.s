@@ -12,4 +12,3 @@ AbandonedShip_Corridors_1F_Text_198493:: @ 8198493
 AbandonedShip_Corridors_1F_Text_1984D8:: @ 81984D8
 	.string "Isn’t it fun here?\n"
 	.string "I get excited just being here!$"
-

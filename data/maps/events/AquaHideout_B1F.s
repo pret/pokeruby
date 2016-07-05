@@ -37,4 +37,3 @@ AquaHideout_B1F_MapWarps:: @ 838CE40
 
 AquaHideout_B1F_MapEvents:: @ 838CF08
 	map_events AquaHideout_B1F_MapObjects, AquaHideout_B1F_MapWarps, 0x0, 0x0
-

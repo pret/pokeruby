@@ -20,4 +20,3 @@ Route103_MapBGEvents:: @ 8381468
 
 Route103_MapEvents:: @ 8381474
 	map_events Route103_MapObjects, 0x0, 0x0, Route103_MapBGEvents
-

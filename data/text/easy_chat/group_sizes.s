@@ -1,5 +1,4 @@
-	.global gEasyChatGroupSizes
-gEasyChatGroupSizes: @ 83DEFFA
+gEasyChatGroupSizes:: @ 83DEFFA
 	.byte 202 @ POKEMON
 	.byte  19 @ TRAINER
 	.byte 109 @ STATUS

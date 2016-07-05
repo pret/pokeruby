@@ -7,4 +7,3 @@ Route117_PokemonDayCare_MapWarps:: @ 838BA10
 
 Route117_PokemonDayCare_MapEvents:: @ 838BA20
 	map_events Route117_PokemonDayCare_MapObjects, Route117_PokemonDayCare_MapWarps, 0x0, 0x0
-

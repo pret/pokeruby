@@ -15,4 +15,3 @@ Route121_Text_171D0C:: @ 8171D0C
 Route121_Text_171D5B:: @ 8171D5B
 	.string "“Filled with rare POKéMON!”\n"
 	.string "SAFARI ZONE$"
-

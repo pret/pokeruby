@@ -56,4 +56,3 @@ FortreeCity_DecorationShop_PokemartDecor_1582B0:: @ 81582B0
 	.2byte 0
 	release
 	end
-

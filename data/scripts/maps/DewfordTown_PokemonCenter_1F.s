@@ -22,4 +22,3 @@ DewfordTown_PokemonCenter_1F_EventScript_153031:: @ 8153031
 DewfordTown_PokemonCenter_1F_EventScript_15303A:: @ 815303A
 	msgbox DewfordTown_PokemonCenter_1F_Text_174D32, 2
 	end
-

@@ -169,4 +169,3 @@ LilycoveCity_Harbor_EventScript_159AA2:: @ 8159AA2
 	msgbox LilycoveCity_Harbor_Text_18B58E, 4
 	release
 	end
-

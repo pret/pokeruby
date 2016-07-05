@@ -12,4 +12,3 @@ LilycoveCity_DepartmentStore_3F_MapWarps:: @ 838A404
 
 LilycoveCity_DepartmentStore_3F_MapEvents:: @ 838A41C
 	map_events LilycoveCity_DepartmentStore_3F_MapObjects, LilycoveCity_DepartmentStore_3F_MapWarps, 0x0, 0x0
-

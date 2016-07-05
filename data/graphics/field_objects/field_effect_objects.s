@@ -1,13 +1,11 @@
 	.align 2
 
-	.global gFieldEffectObjectPaletteInfo0
-gFieldEffectObjectPaletteInfo0: @ 8374524
+gFieldEffectObjectPaletteInfo0:: @ 8374524
 	obj_pal gFieldEffectObjectPalette0, 0x1004
 
 	.align 2
 
-	.global gFieldEffectObjectPaletteInfo1
-gFieldEffectObjectPaletteInfo1: @ 837452C
+gFieldEffectObjectPaletteInfo1:: @ 837452C
 	obj_pal gFieldEffectObjectPalette1, 0x1005
 
 	.align 2
@@ -1233,8 +1231,7 @@ gFieldEffectObjectTemplate_PopOutOfAsh: @ 83750CC
 
 	.align 2
 
-	.global gFieldEffectObjectPaletteInfo2
-gFieldEffectObjectPaletteInfo2: @ 83750E4
+gFieldEffectObjectPaletteInfo2:: @ 83750E4
 	obj_pal gFieldEffectObjectPalette2, 0x100D
 
 	.align 2
@@ -1345,6 +1342,5 @@ gFieldEffectObjectTemplate_Unknown35: @ 83751EC
 
 	.align 2
 
-	.global gFieldEffectObjectPaletteInfo3
-gFieldEffectObjectPaletteInfo3: @ 8375204
+gFieldEffectObjectPaletteInfo3:: @ 8375204
 	obj_pal gFieldEffectObjectPalette3, 0x100F

@@ -5,4 +5,3 @@ Route117_PokemonDayCare_MapScripts:: @ 815C319
 Route117_PokemonDayCare_MapScript1_15C31F:: @ 815C31F
 	setflag 2118
 	end
-

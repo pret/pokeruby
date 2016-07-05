@@ -21,4 +21,3 @@ EverGrandeCity_PhoebesRoom_Text_190A2A:: @ 8190A2A
 	.string "Yup, I’d like to see how far your bond\n"
 	.string "will carry you.\p"
 	.string "Go ahead, move on to the next room.$"
-

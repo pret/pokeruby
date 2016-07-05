@@ -143,4 +143,3 @@ PetalburgWoods_Text_1956A6:: @ 81956A6
 	.string "make moves during battle.\p"
 	.string "If a POKéMON runs out of PP, it must be\n"
 	.string "taken to a POKéMON CENTER.$"
-

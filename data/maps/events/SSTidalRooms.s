@@ -28,4 +28,3 @@ SSTidalRooms_MapBGEvents:: @ 83919BC
 
 SSTidalRooms_MapEvents:: @ 83919D4
 	map_events SSTidalRooms_MapObjects, SSTidalRooms_MapWarps, 0x0, SSTidalRooms_MapBGEvents
-

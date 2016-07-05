@@ -116,4 +116,3 @@ SafariZone_Southeast_Movement_160153:: @ 8160153
 	step_down
 	step_26
 	step_end
-

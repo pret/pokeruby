@@ -11,4 +11,3 @@ SafariZone_Northeast_MapObjects:: @ 8391A2C
 
 SafariZone_Northeast_MapEvents:: @ 8391B04
 	map_events SafariZone_Northeast_MapObjects, 0x0, 0x0, 0x0
-

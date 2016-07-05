@@ -12,4 +12,3 @@ GraniteCave_1F:: @ 8306E34
 	.2byte 0
 	.byte 1
 	.byte 0
-

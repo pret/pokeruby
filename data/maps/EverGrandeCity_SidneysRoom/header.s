@@ -12,4 +12,3 @@ EverGrandeCity_SidneysRoom:: @ 8306A98
 	.2byte 0
 	.byte 0
 	.byte 4
-

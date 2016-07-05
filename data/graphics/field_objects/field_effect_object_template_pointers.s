@@ -1,6 +1,5 @@
 	.align 2
-	.global gFieldEffectObjectTemplatePointers
-gFieldEffectObjectTemplatePointers: @ 836DFC0
+gFieldEffectObjectTemplatePointers:: @ 836DFC0
 	.4byte gFieldEffectObjectTemplate_ShadowSmall
 	.4byte gFieldEffectObjectTemplate_ShadowMedium
 	.4byte gFieldEffectObjectTemplate_ShadowLarge

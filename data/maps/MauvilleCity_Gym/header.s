@@ -12,4 +12,3 @@ MauvilleCity_Gym:: @ 830614C
 	.2byte 0
 	.byte 0
 	.byte 1
-

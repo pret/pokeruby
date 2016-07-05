@@ -25,4 +25,3 @@ RustboroCity_House1_Text_185020:: @ 8185020
 	.string "sorts of POKéMON and people.\p"
 	.string "I find that fascinating, so I go to all\n"
 	.string "sorts of places.$"
-

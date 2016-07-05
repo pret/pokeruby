@@ -293,4 +293,3 @@ Route124_DivingTreasureHuntersHouse_EventScript_164333:: @ 8164333
 Route124_DivingTreasureHuntersHouse_EventScript_164335:: @ 8164335
 	msgbox Route124_DivingTreasureHuntersHouse_Text_19F6C5, 3
 	end
-

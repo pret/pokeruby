@@ -117,4 +117,3 @@ Route116_Text_170B7D:: @ 8170B7D
 	.string "placed in the appropriate POCKETS.\p"
 	.string "No TRAINER can afford to be without\n"
 	.string "a BAG of their own.$"
-

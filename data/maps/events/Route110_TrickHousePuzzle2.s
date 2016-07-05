@@ -21,4 +21,3 @@ Route110_TrickHousePuzzle2_MapBGEvents:: @ 839252C
 
 Route110_TrickHousePuzzle2_MapEvents:: @ 8392538
 	map_events Route110_TrickHousePuzzle2_MapObjects, Route110_TrickHousePuzzle2_MapWarps, Route110_TrickHousePuzzle2_MapCoordEvents, Route110_TrickHousePuzzle2_MapBGEvents
-

@@ -20,4 +20,3 @@ LavaridgeTown_HerbShop_Text_1762A3:: @ 81762A3
 	.string "Herbal medicine works impressively well.\n"
 	.string "But your POKéMON will dislike you for it.\l"
 	.string "It must be horribly bitter!$"
-

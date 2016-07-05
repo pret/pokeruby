@@ -26,4 +26,3 @@ MtPyre_1F_EventScript_15D35C:: @ 815D35C
 MtPyre_1F_EventScript_15D365:: @ 815D365
 	msgbox MtPyre_1F_Text_196283, 2
 	end
-

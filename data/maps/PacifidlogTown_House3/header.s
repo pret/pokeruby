@@ -12,4 +12,3 @@ PacifidlogTown_House3:: @ 8305EC8
 	.2byte 0
 	.byte 0
 	.byte 0
-

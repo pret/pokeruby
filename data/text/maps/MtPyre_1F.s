@@ -17,4 +17,3 @@ MtPyre_1F_Text_196218:: @ 8196218
 MtPyre_1F_Text_196283:: @ 8196283
 	.string "This is the final resting place of my\n"
 	.string "ZIGZAGOON. I cherished it...$"
-

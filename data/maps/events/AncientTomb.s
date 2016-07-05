@@ -13,4 +13,3 @@ AncientTomb_MapBGEvents:: @ 838E70C
 
 AncientTomb_MapEvents:: @ 838E730
 	map_events AncientTomb_MapObjects, AncientTomb_MapWarps, 0x0, AncientTomb_MapBGEvents
-

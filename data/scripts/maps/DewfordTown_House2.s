@@ -27,4 +27,3 @@ DewfordTown_House2_EventScript_153615:: @ 8153615
 DewfordTown_House2_EventScript_15361F:: @ 815361F
 	msgbox DewfordTown_House2_Text_1760C8, 2
 	end
-

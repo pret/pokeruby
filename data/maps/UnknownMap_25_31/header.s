@@ -12,4 +12,3 @@ UnknownMap_25_31:: @ 8307A3C
 	.2byte 0
 	.byte 0
 	.byte 0
-

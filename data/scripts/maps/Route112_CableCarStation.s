@@ -86,4 +86,3 @@ Route112_CableCarStation_Movement_15C0F5:: @ 815C0F5
 	step_down
 	step_14
 	step_end
-

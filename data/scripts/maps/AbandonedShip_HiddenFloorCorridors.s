@@ -146,4 +146,3 @@ AbandonedShip_HiddenFloorCorridors_EventScript_15ECF7:: @ 815ECF7
 	msgbox AbandonedShip_HiddenFloorCorridors_Text_1986EC, 4
 	releaseall
 	end
-

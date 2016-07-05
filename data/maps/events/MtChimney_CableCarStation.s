@@ -8,4 +8,3 @@ MtChimney_CableCarStation_MapWarps:: @ 838B858
 
 MtChimney_CableCarStation_MapEvents:: @ 838B868
 	map_events MtChimney_CableCarStation_MapObjects, MtChimney_CableCarStation_MapWarps, 0x0, 0x0
-

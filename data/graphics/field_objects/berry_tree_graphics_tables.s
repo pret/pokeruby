@@ -544,8 +544,7 @@ gBerryTreePaletteSlotTable_Tamato: @ 8374304
 	.byte MAP_OBJ_GFX_BERRY_TREE_EARLY_STAGES
 	.byte MAP_OBJ_GFX_BERRY_TREE_EARLY_STAGES
 
-	.global gBerryTreeGraphicsIdTable
-gBerryTreeGraphicsIdTable: @ 837430E
+gBerryTreeGraphicsIdTable:: @ 837430E
 	.byte MAP_OBJ_GFX_BERRY_TREE_EARLY_STAGES
 	.byte MAP_OBJ_GFX_BERRY_TREE_EARLY_STAGES
 	.byte MAP_OBJ_GFX_BERRY_TREE_LATE_STAGES
@@ -553,8 +552,7 @@ gBerryTreeGraphicsIdTable: @ 837430E
 	.byte MAP_OBJ_GFX_BERRY_TREE_LATE_STAGES
 
 	.align 2
-	.global gBerryTreePicTablePointers
-gBerryTreePicTablePointers: @ 8374314
+gBerryTreePicTablePointers:: @ 8374314
 	.4byte gMapObjectPicTable_CheriBerryTree @ Cheri
 	.4byte gMapObjectPicTable_ChestoBerryTree @ Chesto
 	.4byte gMapObjectPicTable_PechaBerryTree @ Pecha
@@ -600,8 +598,7 @@ gBerryTreePicTablePointers: @ 8374314
 	.4byte gMapObjectPicTable_DurinBerryTree @ Enigma
 
 	.align 2
-	.global gBerryTreePaletteSlotTablePointers
-gBerryTreePaletteSlotTablePointers: @ 83743C0
+gBerryTreePaletteSlotTablePointers:: @ 83743C0
 	.4byte gBerryTreePaletteSlotTable_Cheri @ Cheri
 	.4byte gBerryTreePaletteSlotTable_Chesto @ Chesto
 	.4byte gBerryTreePaletteSlotTable_Pecha @ Pecha
@@ -647,8 +644,7 @@ gBerryTreePaletteSlotTablePointers: @ 83743C0
 	.4byte gBerryTreePaletteSlotTable_Durin @ Enigma
 
 	.align 2
-	.global gBerryTreeGraphicsIdTablePointers
-gBerryTreeGraphicsIdTablePointers: @ 837446C
+gBerryTreeGraphicsIdTablePointers:: @ 837446C
 	.4byte gBerryTreeGraphicsIdTable @ Cheri
 	.4byte gBerryTreeGraphicsIdTable @ Chesto
 	.4byte gBerryTreeGraphicsIdTable @ Pecha

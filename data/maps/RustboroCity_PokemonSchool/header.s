@@ -12,4 +12,3 @@ RustboroCity_PokemonSchool:: @ 830629C
 	.2byte 0
 	.byte 0
 	.byte 0
-

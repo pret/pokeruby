@@ -26,4 +26,3 @@ LittlerootTown_MaysHouse_2F_MapBGEvents:: @ 8385AE8
 
 LittlerootTown_MaysHouse_2F_MapEvents:: @ 8385B18
 	map_events LittlerootTown_MaysHouse_2F_MapObjects, LittlerootTown_MaysHouse_2F_MapWarps, 0x0, LittlerootTown_MaysHouse_2F_MapBGEvents
-

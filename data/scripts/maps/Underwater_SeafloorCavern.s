@@ -43,4 +43,3 @@ Underwater_SeafloorCavern_EventScript_15DA3F:: @ 815DA3F
 	msgbox Underwater_SeafloorCavern_Text_197435, 4
 	releaseall
 	end
-

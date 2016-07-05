@@ -587,4 +587,3 @@ RustboroCity_EventScript_14C939:: @ 814C939
 	msgbox RustboroCity_Text_1672B8, 4
 	release
 	end
-

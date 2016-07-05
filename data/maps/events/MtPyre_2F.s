@@ -15,4 +15,3 @@ MtPyre_2F_MapWarps:: @ 838C918
 
 MtPyre_2F_MapEvents:: @ 838C940
 	map_events MtPyre_2F_MapObjects, MtPyre_2F_MapWarps, 0x0, 0x0
-

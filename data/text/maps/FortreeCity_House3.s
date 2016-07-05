@@ -15,4 +15,3 @@ FortreeCity_House3_Text_186745:: @ 8186745
 	.string "... ... ... ... ... ...\p"
 	.string "Oh, it’s called a POKéDEX?\n"
 	.string "It’s really awesome!$"
-

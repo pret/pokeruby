@@ -13,4 +13,3 @@ MtPyre_3F_MapWarps:: @ 838C99C
 
 MtPyre_3F_MapEvents:: @ 838C9CC
 	map_events MtPyre_3F_MapObjects, MtPyre_3F_MapWarps, 0x0, 0x0
-

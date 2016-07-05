@@ -30,4 +30,3 @@ Route134_EventScript_152620:: @ 8152620
 	trainerbattle 0, 180, 0, Route134_Text_1C3262, Route134_Text_1C329E
 	msgbox Route134_Text_1C32D6, 6
 	end
-

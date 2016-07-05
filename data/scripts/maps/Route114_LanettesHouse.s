@@ -52,4 +52,3 @@ Route114_LanettesHouse_EventScript_15C2CC:: @ 815C2CC
 Route114_LanettesHouse_EventScript_15C2D5:: @ 815C2D5
 	msgbox Route114_LanettesHouse_Text_192DC1, 3
 	end
-

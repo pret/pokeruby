@@ -12,4 +12,3 @@ LittlerootTown_BrendansHouse_2F:: @ 8305A4C
 	.2byte 0
 	.byte 0
 	.byte 0
-

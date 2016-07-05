@@ -10,4 +10,3 @@ MossdeepCity_Mart_MapWarps:: @ 838A9E4
 
 MossdeepCity_Mart_MapEvents:: @ 838A9F4
 	map_events MossdeepCity_Mart_MapObjects, MossdeepCity_Mart_MapWarps, 0x0, 0x0
-

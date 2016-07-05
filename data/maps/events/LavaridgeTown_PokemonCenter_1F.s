@@ -12,4 +12,3 @@ LavaridgeTown_PokemonCenter_1F_MapWarps:: @ 83865B4
 
 LavaridgeTown_PokemonCenter_1F_MapEvents:: @ 83865D4
 	map_events LavaridgeTown_PokemonCenter_1F_MapObjects, LavaridgeTown_PokemonCenter_1F_MapWarps, 0x0, 0x0
-

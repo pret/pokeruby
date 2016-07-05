@@ -12,4 +12,3 @@ CaveOfOrigin_1F:: @ 8307198
 	.2byte 0
 	.byte 1
 	.byte 0
-
