@@ -448,7 +448,7 @@ SootopolisCity_EventScript_14D498:: @ 814D498
 	checkflag 113
 	jumpeq SootopolisCity_EventScript_14D4AD
 	.ifdef SAPPHIRE
-	msgbox SootopolisCity_Text_169DA6, 2
+	msgbox SootopolisCity_Text_169DA6, 4
 	.else
 	msgbox SootopolisCity_Text_16A249, 4
 	.endif

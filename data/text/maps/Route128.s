@@ -37,7 +37,7 @@ Route128_Text_172181:: @ 8172181
 	.string "STEVEN: {PLAYER}{KUN}!\n"
 	.string "What is happening?$"
 
-UnknownString_81721A2: @ 81721A2
+Route128_Text_1721A2:: @ 81721A2
 	.string "This is terrible...\p"
 	.string "If this doesn’t stop, all HOENN...\n"
 	.string "No, the whole world will drown.\p"

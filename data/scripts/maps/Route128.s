@@ -65,7 +65,11 @@ Route128_EventScript_15213F:: @ 815213F
 	move 3, Route128_Movement_15226D
 	move 255, Route128_Movement_1A0841
 	waitmove 0
+	.ifdef SAPPHIRE
+	msgbox Route128_Text_1721A2, 4
+	.else
 	msgbox Route128_Text_1722A1, 4
+	.endif
 	move 3, Route128_Movement_1A0845
 	waitmove 0
 	msgbox Route128_Text_1723BE, 4

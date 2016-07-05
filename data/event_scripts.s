@@ -2752,6 +2752,7 @@ VerdanturfTown_Movement_1A083D:: @ 81A083D
 	step_4e
 	step_end
 
+Movement_1A083F:: @ 81A083F
 DewfordTown_Hall_Movement_1A083F:: @ 81A083F
 EverGrandeCity_ChampionsRoom_Movement_1A083F:: @ 81A083F
 EverGrandeCity_HallOfFame_Movement_1A083F:: @ 81A083F

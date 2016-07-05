@@ -25,7 +25,7 @@ MeteorFalls_1F_1R_Text_193320:: @ 8193320
 	.string "Hehehe! Be seeing you, you TEAM\n"
 	.string "{GOOD_TEAM} dingbats!$"
 
-UnknownString_81933EC: @ 81933EC
+MeteorFalls_1F_1R_Text_1933EC:: @ 81933EC
 	.string "And you are?\p"
 	.string "... ... ... ... ... ... ... ...\n"
 	.string "... ... ... ... ... ... ... ...\p"
