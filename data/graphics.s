@@ -23,73 +23,73 @@ gUnknown_08D00524:: @ 8D00524
 
 gInterfaceGfx_PokeBall::
 	.incbin "graphics/interface/ball/poke.4bpp.lz" @ 0xBC
-	
+
 gInterfacePal_PokeBall::
 	.incbin "graphics/interface/ball/poke.gbapal.lz"
-	
+
 gInterfaceGfx_GreatBall::
 	.incbin "graphics/interface/ball/great.4bpp.lz" @ 0xBC
-	
+
 gInterfacePal_GreatBall::
 	.incbin "graphics/interface/ball/great.gbapal.lz"
-	
+
 gInterfaceGfx_SafariBall::
 	.incbin "graphics/interface/ball/safari.4bpp.lz" @ 0xBC
-	
+
 gInterfacePal_SafariBall::
 	.incbin "graphics/interface/ball/safari.gbapal.lz"
-	
+
 gInterfaceGfx_UltraBall::
 	.incbin "graphics/interface/ball/ultra.4bpp.lz" @ 0xBC
-	
+
 gInterfacePal_UltraBall::
 	.incbin "graphics/interface/ball/ultra.gbapal.lz"
-	
+
 gInterfaceGfx_MasterBall::
 	.incbin "graphics/interface/ball/master.4bpp.lz" @ 0xBC
-	
+
 gInterfacePal_MasterBall::
 	.incbin "graphics/interface/ball/master.gbapal.lz"
-	
+
 gInterfaceGfx_NetBall::
 	.incbin "graphics/interface/ball/net.4bpp.lz" @ 0xBC
-	
+
 gInterfacePal_NetBall::
 	.incbin "graphics/interface/ball/net.gbapal.lz"
-	
+
 gInterfaceGfx_DiveBall::
 	.incbin "graphics/interface/ball/dive.4bpp.lz" @ 0xBC
-	
+
 gInterfacePal_DiveBall::
 	.incbin "graphics/interface/ball/dive.gbapal.lz"
-	
+
 gInterfaceGfx_NestBall::
 	.incbin "graphics/interface/ball/nest.4bpp.lz" @ 0xBC
-	
+
 gInterfacePal_NestBall::
 	.incbin "graphics/interface/ball/nest.gbapal.lz"
-	
+
 gInterfaceGfx_RepeatBall::
 	.incbin "graphics/interface/ball/repeat.4bpp.lz" @ 0xBC
-	
+
 gInterfacePal_RepeatBall::
 	.incbin "graphics/interface/ball/repeat.gbapal.lz"
-	
+
 gInterfaceGfx_TimerBall::
 	.incbin "graphics/interface/ball/timer.4bpp.lz" @ 0xBC
-	
+
 gInterfacePal_TimerBall::
 	.incbin "graphics/interface/ball/timer.gbapal.lz"
-	
+
 gInterfaceGfx_LuxuryBall::
 	.incbin "graphics/interface/ball/luxury.4bpp.lz" @ 0xBC
-	
+
 gInterfacePal_LuxuryBall::
 	.incbin "graphics/interface/ball/luxury.gbapal.lz"
-	
+
 gInterfaceGfx_PremierBall::
 	.incbin "graphics/interface/ball/premier.4bpp.lz" @ 0xBC
-	
+
 gInterfacePal_PremierBall::
 	.incbin "graphics/interface/ball/premier.gbapal.lz"
 
@@ -2842,7 +2842,7 @@ gUnknown_08E8A1C2:: @ 8E8A1C2
 	.incbin "baserom.gba", 0x00e8a1c2, 0x1e
 
 gUnknown_08E8A1E0:: @ 8E8A1E0
-	.incbin "baserom.gba", 0x00e8a1e0, 0x3b8 
+	.incbin "baserom.gba", 0x00e8a1e0, 0x3b8
 	.incbin "graphics/pokenav/contest_pokeball.gbapal"
 	.incbin "baserom.gba", 0x00E8A5B8, 0x20
 

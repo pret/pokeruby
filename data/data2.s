@@ -1155,7 +1155,7 @@ gUnknown_08209AD4:: @ 8209AD4
 	.incbin "graphics/pokemon/egg/palette.gbapal"
 	.incbin "graphics/pokemon/egg/egg_hatch.4bpp"
 	.incbin "graphics/pokemon/egg/egg_crumble.4bpp"
-	
+
 	.space 2
 	.incbin "baserom.gba", 0x0020A37A, 0x36
 
@@ -1454,8 +1454,8 @@ gUnknown_0820C341:: @ 820C341
 	.string "システムメッセージADD$", 13
 	.string "はいけいセット$", 13
 
- @ Shedinja's Japanese name
- @ sub_8048D44 compares a pokemon name with this string
+@ Shedinja's Japanese name
+@ sub_8048D44 compares a pokemon name with this string
 gUnknown_0820C3B0:: @ 820C3B0
 	.string "ヌケニン$"
 
@@ -1482,7 +1482,7 @@ gUnknown_0820DD98:: @ 820DD98
 	.incbin "graphics/unknown/unknown_20DD98.8bpp" @ unused?
 
 gUnknown_0820F798:: @ 820F798
-	.incbin "baserom.gba", 0x0020f798, 0x1000 
+	.incbin "baserom.gba", 0x0020f798, 0x1000
 
 gUnknown_08210798:: @ 8210798
 	.incbin "baserom.gba", 0x00210798, 0x1000 @ debug?
@@ -6860,7 +6860,7 @@ gUnknown_083BBCA0:: @ 83BBCA0
 	.4byte PCText_PokeCenter
 	.4byte PCText_Machine
 	.4byte PCText_Plain
-	
+
 @ 83BBD20
 	.include "data/graphics/pokemon/icon_table.s"
 
@@ -18301,7 +18301,7 @@ gUnknown_0840E740:: @ 840E740
 	.4byte OtherText_TheField
 	.4byte OtherText_TheField2
 	.4byte OtherText_ThePC
-	
+
 gUnknown_0840E75C:: @ 840E75C
 OtherText_ReturnTo:
 	.string "Return to$"
@@ -20151,7 +20151,7 @@ SystemText_ClockAdjustmentUsable:
 
 gUnknown_08411905:: @ 8411905
 SystemText_Saving:
-    .string "SAVING...\nDON’T TURN OFF THE POWER.$"
+	.string "SAVING...\nDON’T TURN OFF THE POWER.$"
 
 	.align 2
 gUnknown_0841192C:: @ 841192C
