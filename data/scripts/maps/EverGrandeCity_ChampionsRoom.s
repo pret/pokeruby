@@ -29,8 +29,8 @@ EverGrandeCity_ChampionsRoom_EventScript_15B7DE:: @ 815B7DE
 	waitmove 0
 	setvar 0x4001, 1
 	jump EverGrandeCity_ChampionsRoom_EventScript_15B805
-
-	.incbin "baserom.gba", 0x15b800, 0x2
+	releaseall
+	end
 
 EverGrandeCity_ChampionsRoom_Movement_15B802:: @ 815B802
 	step_up

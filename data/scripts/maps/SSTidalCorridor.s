@@ -192,8 +192,7 @@ SSTidalCorridor_EventScript_15FE84:: @ 815FE84
 	jumpif 0, SSTidalCorridor_EventScript_15FED5
 	setflag 247
 	jump SSTidalCorridor_EventScript_15FE7A
-
-	.incbin "baserom.gba", 0x15fed4, 0x1
+	return
 
 SSTidalCorridor_EventScript_15FED5:: @ 815FED5
 	return

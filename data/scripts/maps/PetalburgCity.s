@@ -267,7 +267,11 @@ PetalburgCity_EventScript_14B99B:: @ 814B99B
 	waitmove 0
 	return
 
-	.incbin "baserom.gba", 0x14b9ad, 0x4
+@ 814B9AD
+	step_14
+	step_14
+	step_14
+	step_end
 
 PetalburgCity_Movement_14B9B1:: @ 814B9B1
 	step_right

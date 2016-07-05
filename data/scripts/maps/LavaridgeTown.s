@@ -313,9 +313,10 @@ LavaridgeTown_EventScript_14E7C5:: @ 814E7C5
 	msgbox LavaridgeTown_Text_16C77C, 3
 	end
 
-	.incbin "baserom.gba", 0x14e7ce, 0x9
+@ 814E7CE
+	msgbox LavaridgeTown_Text_16C7CF, 3
+	end
 
 LavaridgeTown_EventScript_14E7D7:: @ 814E7D7
 	msgbox LavaridgeTown_Text_16C7CF, 3
 	end
-

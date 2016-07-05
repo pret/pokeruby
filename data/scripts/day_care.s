@@ -254,7 +254,8 @@ Route117_PokemonDayCare_Movement_1B2543:: @ 81B2543
 	slow_step_down
 	step_end
 
-	.incbin "baserom.gba", 0x1b2557, 0x1
+@ 81B2557
+	end
 
 Route117_PokemonDayCare_EventScript_1B2558:: @ 81B2558
 	msgbox Route117_PokemonDayCare_Text_1B2A88, 4

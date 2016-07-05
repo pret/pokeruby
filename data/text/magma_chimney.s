@@ -78,7 +78,7 @@ MtChimney_Text_1B3D9A:: @ 81B3D9A
 	.string "That annoying TEAM AQUA...\n"
 	.string "They always mess with our plans!$"
 
-UnknownString_81B3DD6: @ 81B3DD6
+MtChimney_Text_1B3DD6: @ 81B3DD6
 	.string "METEORITES pack amazing power!$"
 
 MtChimney_Text_1B3DF5:: @ 81B3DF5

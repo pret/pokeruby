@@ -159,7 +159,7 @@ RustboroCity_Text_167439:: @ 8167439
 	.string "LEADER: ROXANNE\p"
 	.string "“The ROCK-loving honors student!”$"
 
-UnknownString_8167485: @ 8167485
+RustboroCity_Text_167485: @ 8167485
 	.string "DEVON CORP. BRANCH OFFICE\p"
 	.string "“Access limited to DEVON employees\n"
 	.string "and authorized personnel.”$"

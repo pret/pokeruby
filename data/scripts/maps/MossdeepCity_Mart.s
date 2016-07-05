@@ -6,14 +6,13 @@ MossdeepCity_Mart_EventScript_15A926:: @ 815A926
 	faceplayer
 	message MossdeepCity_Mart_Text_1A0BE4
 	waittext
-	pokemart MossdeepCity_Mart_Pokemart_15A940
+	pokemart MossdeepCity_Mart_Items
 	msgbox MossdeepCity_Mart_Text_1A0C02, 4
 	release
 	end
 
-	.incbin "baserom.gba", 0x15a93d, 0x3
-
-MossdeepCity_Mart_Pokemart_15A940:: @ 815A940
+	.align 2
+MossdeepCity_Mart_Items:: @ 815A940
 	.2byte ITEM_ULTRA_BALL
 	.2byte ITEM_NET_BALL
 	.2byte ITEM_DIVE_BALL

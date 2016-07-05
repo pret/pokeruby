@@ -179,7 +179,9 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_1587E9:: @ 81587E9
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_1882E6, 3
 	end
 
-	.incbin "baserom.gba", 0x1587fc, 0x9
+@ 81587FC
+	msgbox LilycoveCity_LilycoveMuseum_2F_Text_18831A, 3
+	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_158805:: @ 8158805
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_188336, 2
