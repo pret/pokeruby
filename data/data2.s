@@ -20153,9 +20153,8 @@ gUnknown_08411905:: @ 8411905
 SystemText_Saving:
     .string "SAVING...\nDON’T TURN OFF THE POWER.$"
 
-    .align 2
-    .global gUnknown_0841192C
-gUnknown_0841192C: @ 841192C
+	.align 2
+gUnknown_0841192C:: @ 841192C
 	.4byte ContestStatsText_VerySoft
 	.4byte ContestStatsText_Soft
 	.4byte ContestStatsText_Hard
