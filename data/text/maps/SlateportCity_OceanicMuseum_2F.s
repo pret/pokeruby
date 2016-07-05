@@ -46,7 +46,7 @@ SlateportCity_OceanicMuseum_2F_Text_17EF62:: @ 817EF62
 	.string "long to snatch some parts, and you\l"
 	.string "simps are held up by a mere child?$"
 
-UnknownString_817EFC9: @ 817EFC9
+SlateportCity_OceanicMuseum_2F_Text_17EFC9:: @ 817EFC9
 	.string "I am TEAM AQUA’s ARCHIE.\p"
 	.string "Tell me, why do you meddle in the\n"
 	.string "noble affairs of TEAM AQUA?\p"

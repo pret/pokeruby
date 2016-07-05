@@ -508,7 +508,7 @@ SlateportCity_EventScript_14BEBC:: @ 814BEBC
 	move 11, SlateportCity_Movement_1A0841
 	waitmove 0
 	msgbox SlateportCity_Text_1655E7, 4
-	playmusic 441, 0
+	playmusic BGM_EVIL_TEAM, 0
 	msgbox SlateportCity_Text_1656BC, 4
 	move 6, SlateportCity_Movement_1A083F
 	move 1, SlateportCity_Movement_1A083F
