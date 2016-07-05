@@ -114,7 +114,22 @@ LittlerootTown_MaysHouse_1F_Movement_1529C0:: @ 81529C0
 	step_left
 	step_end
 
-	.incbin "baserom.gba", 0x1529c7, 0x24
+@ 81529C7
+	lockall
+	checkgender
+	compare RESULT, 0
+	callif 1, LittlerootTown_MaysHouse_1F_EventScript_1529E1
+	compare RESULT, 1
+	callif 1, LittlerootTown_MaysHouse_1F_EventScript_1529E2
+	releaseall
+	end
+
+LittlerootTown_MaysHouse_1F_EventScript_1529E1:: @ 81529E1
+	return
+
+LittlerootTown_MaysHouse_1F_EventScript_1529E2:: @ 81529E2
+	msgbox LittlerootTown_BrendansHouse_1F_Text_172841, 4
+	return
 
 LittlerootTown_BrendansHouse_1F_EventScript_1529EB:: @ 81529EB
 LittlerootTown_MaysHouse_1F_EventScript_1529EB:: @ 81529EB

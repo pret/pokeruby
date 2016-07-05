@@ -27,10 +27,26 @@ LittlerootTown_BrendansHouse_2F_EventScript_1527E4:: @ 81527E4
 	jumpeq LittlerootTown_BrendansHouse_2F_EventScript_1A2F68
 	end
 
-	.incbin "baserom.gba", 0x1527f1, 0x2d
+@ 81527F1
+	lockall
+	checkgender
+	compare RESULT, 0
+	jumpeq LittlerootTown_BrendansHouse_2F_EventScript_15280A
+	compare RESULT, 1
+	jumpeq LittlerootTown_BrendansHouse_2F_EventScript_152814
+	end
 
-	.global gUnknown_0815281E
-gUnknown_0815281E: @ 815281E
+LittlerootTown_BrendansHouse_2F_EventScript_15280A:: @ 815280A
+	msgbox UnknownString_8172F31, 4
+	releaseall
+	end
+
+LittlerootTown_BrendansHouse_2F_EventScript_152814:: @ 8152814
+	msgbox UnknownString_8173A76, 4
+	releaseall
+	end
+
+gUnknown_0815281E:: @ 815281E
 
 LittlerootTown_BrendansHouse_2F_EventScript_15281E:: @ 815281E
 	lockall
@@ -44,16 +60,19 @@ LittlerootTown_BrendansHouse_2F_EventScript_15281E:: @ 815281E
 LittlerootTown_BrendansHouse_2F_EventScript_152837:: @ 8152837
 	setvar 0x8004, 1
 	special 214
-	playsfx 4
+	playsfx SE_PC_ON
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1A10D6, 4
 	special 249
 	waitstate
 	releaseall
 	end
 
-	.global gUnknown_08152850
-gUnknown_08152850: @ 8152850
-	.incbin "baserom.gba", 0x152850, 0xd
+gUnknown_08152850:: @ 8152850
+	setvar 0x8004, 1
+	playsfx SE_PC_OFF
+	special 215
+	releaseall
+	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_15285D:: @ 815285D
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1A100C, 4
