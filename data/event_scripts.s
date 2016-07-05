@@ -912,7 +912,8 @@ Std_5:
 	yesnobox 20, 8
 	return
 
-	.incbin "baserom.gba", 0x19f805, 0x1
+@ 819F805
+	return
 
 BattleTower_Lobby_EventScript_19F806:: @ 819F806
 FallarborTown_ContestLobby_EventScript_19F806:: @ 819F806
@@ -2715,7 +2716,9 @@ SlateportCity_SternsShipyard_1F_Movement_1A0839:: @ 81A0839
 	step_3e
 	step_end
 
-	.incbin "baserom.gba", 0x1a083b, 0x2
+@ 81A083B
+	step_3f
+	step_end
 
 EverGrandeCity_PokemonLeague_Movement_1A083D:: @ 81A083D
 LilycoveCity_ContestHall_Movement_1A083D:: @ 81A083D
@@ -2902,7 +2905,10 @@ Route110_TrickHouseEntrance_Movement_1A0856:: @ 81A0856
 	step_up
 	step_end
 
-	.incbin "baserom.gba", 0x1a0858, 0x3
+@ 81A0858
+	step_up
+	step_up
+	step_end
 
 PictureBookShelfScript:: @ 81A085B
 	msgbox PictureBookShelfText, 3

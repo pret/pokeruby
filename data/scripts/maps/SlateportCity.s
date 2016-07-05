@@ -439,7 +439,34 @@ SlateportCity_PokemartDecor_14BE40:: @ 814BE40
 	release
 	end
 
-	.incbin "baserom.gba", 0x14be60, 0x3a
+@ 814BE60
+	lock
+	faceplayer
+	checkflag 96
+	jumpif 0, SlateportCity_EventScript_14BE16
+	message SlateportCity_Text_1A0BE4
+	waittext
+	pokemartdecor SlateportCity_PokemartDecor_14BE80
+	msgbox SlateportCity_Text_1A0C02, 4
+	release
+	end
+
+	.align 2
+SlateportCity_PokemartDecor_14BE80:: @ 814BE80
+	.2byte 39
+	.2byte 34
+	.2byte 35
+	.2byte 36
+	.2byte 37
+	.2byte 40
+	.2byte 33
+	.2byte 38
+	.2byte 45
+	.2byte 46
+	.2byte 47
+	.2byte 0
+	release
+	end
 
 SlateportCity_EventScript_14BE9A:: @ 814BE9A
 	lock

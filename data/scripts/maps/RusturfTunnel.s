@@ -183,7 +183,24 @@ RusturfTunnel_Movement_15C951:: @ 815C951
 	step_down
 	step_end
 
-	.incbin "baserom.gba", 0x15c95d, 0xd
+@ 815C95D
+	step_left
+	step_28
+	step_end
+
+@ 815C960
+	step_down
+	step_26
+	step_13
+	step_28
+	step_end
+
+@ 815C965
+	step_up
+	step_25
+	step_13
+	step_28
+	step_end
 
 RusturfTunnel_Movement_15C96A:: @ 815C96A
 	step_left

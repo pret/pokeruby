@@ -588,10 +588,111 @@ Route110_TrickHouseEntrance_EventScript_1616D7:: @ 81616D7
 	releaseall
 	end
 
-	.global gUnknown_081616E1
-gUnknown_081616E1: @ 81616E1
+gUnknown_081616E1:: @ 81616E1
+	lockall
+	switch 0x4044
+	case 0, 0x8161740
+	case 1, 0x8161769
+	case 2, 0x8161792
+	case 3, 0x81617BB
+	case 4, 0x81617E4
+	case 5, 0x816180D
+	case 6, 0x8161836
+	case 7, 0x816185F
+	end
 
-	.incbin "baserom.gba", 0x1616e1, 0x1b1
+Route110_TrickHouseEntrance_EventScript_161740:: @ 8161740
+	compare 0x40AB, 0
+	jumpeq Route110_TrickHouseEntrance_EventScript_161888
+	msgbox UnknownString_819CAD1, 4
+	playsfx SE_PIN
+	setvar 0x40AB, 2
+	setmaptile 13, 1, 523, 0
+	special 142
+	releaseall
+	end
+
+Route110_TrickHouseEntrance_EventScript_161769:: @ 8161769
+	compare 0x40AC, 0
+	jumpeq Route110_TrickHouseEntrance_EventScript_161888
+	msgbox UnknownString_819CCCB, 4
+	playsfx SE_PIN
+	setvar 0x40AC, 2
+	setmaptile 13, 1, 523, 0
+	special 142
+	releaseall
+	end
+
+Route110_TrickHouseEntrance_EventScript_161792:: @ 8161792
+	compare 0x40AD, 0
+	jumpeq Route110_TrickHouseEntrance_EventScript_161888
+	msgbox UnknownString_819CEF9, 4
+	playsfx SE_PIN
+	setvar 0x40AD, 2
+	setmaptile 13, 1, 523, 0
+	special 142
+	releaseall
+	end
+
+Route110_TrickHouseEntrance_EventScript_1617BB:: @ 81617BB
+	compare 0x40AE, 0
+	jumpeq Route110_TrickHouseEntrance_EventScript_161888
+	msgbox UnknownString_819D164, 4
+	playsfx SE_PIN
+	setvar 0x40AE, 2
+	setmaptile 13, 1, 523, 0
+	special 142
+	releaseall
+	end
+
+Route110_TrickHouseEntrance_EventScript_1617E4:: @ 81617E4
+	compare 0x40AF, 0
+	jumpeq Route110_TrickHouseEntrance_EventScript_161888
+	msgbox UnknownString_819D3A5, 4
+	playsfx SE_PIN
+	setvar 0x40AF, 2
+	setmaptile 13, 1, 523, 0
+	special 142
+	releaseall
+	end
+
+Route110_TrickHouseEntrance_EventScript_16180D:: @ 816180D
+	compare 0x40B0, 0
+	jumpeq Route110_TrickHouseEntrance_EventScript_161888
+	msgbox UnknownString_819DC0A, 4
+	playsfx SE_PIN
+	setvar 0x40B0, 2
+	setmaptile 13, 1, 523, 0
+	special 142
+	releaseall
+	end
+
+Route110_TrickHouseEntrance_EventScript_161836:: @ 8161836
+	compare 0x40B1, 0
+	jumpeq Route110_TrickHouseEntrance_EventScript_161888
+	msgbox UnknownString_819DE8D, 4
+	playsfx SE_PIN
+	setvar 0x40B1, 2
+	setmaptile 13, 1, 523, 0
+	special 142
+	releaseall
+	end
+
+Route110_TrickHouseEntrance_EventScript_16185F:: @ 816185F
+	compare 0x40B2, 0
+	jumpeq Route110_TrickHouseEntrance_EventScript_161888
+	msgbox UnknownString_819E0FF, 4
+	playsfx SE_PIN
+	setvar 0x40B2, 2
+	setmaptile 13, 1, 523, 0
+	special 142
+	releaseall
+	end
+
+Route110_TrickHouseEntrance_EventScript_161888:: @ 8161888
+	msgbox UnknownString_819C21F, 4
+	releaseall
+	end
 
 Route110_TrickHousePuzzle1_EventScript_161892:: @ 8161892
 Route110_TrickHousePuzzle2_EventScript_161892:: @ 8161892

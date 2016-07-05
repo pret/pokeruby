@@ -82,7 +82,24 @@ Route128_EventScript_15213F:: @ 815213F
 	releaseall
 	end
 
-	.incbin "baserom.gba", 0x15225e, 0xf
+@ 815225E
+	step_17
+	step_end
+
+@ 8152260
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_up
+	step_up
+	step_up
+	step_up
+	step_up
+	step_up
+	step_end
 
 Route128_Movement_15226D:: @ 815226D
 	step_up

@@ -40,10 +40,12 @@ SSTidalRooms_EventScript_15FCF9:: @ 815FCF9
 	msgbox SSTidalRooms_Text_1990F8, 4
 	return
 
-	.global gUnknown_0815FD0D
-gUnknown_0815FD0D: @ 815FD0D
-
-	.incbin "baserom.gba", 0x15fd0d, 0x17
+gUnknown_0815FD0D:: @ 815FD0D
+	compare 0x40B4, 2
+	jumpeq SSTidalCorridor_EventScript_15FD24
+	compare 0x40B4, 7
+	jumpeq SSTidalCorridor_EventScript_15FD3A
+	end
 
 SSTidalCorridor_EventScript_15FD24:: @ 815FD24
 	special 204

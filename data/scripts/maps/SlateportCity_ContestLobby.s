@@ -126,5 +126,10 @@ SlateportCity_ContestLobby_EventScript_155536:: @ 8155536
 	msgbox SlateportCity_ContestLobby_Text_1B7225, 2
 	end
 
-	.incbin "baserom.gba", 0x15553f, 0xc
-
+@ 815553F
+	lockall
+	special 259
+	waitbutton
+	hidebox 0, 0, 29, 19
+	releaseall
+	end

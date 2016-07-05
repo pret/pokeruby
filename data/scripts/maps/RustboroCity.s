@@ -191,7 +191,60 @@ RustboroCity_EventScript_14C4F4:: @ 814C4F4
 	releaseall
 	end
 
-	.incbin "baserom.gba", 0x14c55d, 0x65
+@ 814C55D
+	msgbox RustboroCity_Text_166F6B, 4
+	return
+
+@ 814C566
+	msgbox RustboroCity_Text_166FB4, 4
+	return
+
+@ 814C56F
+	move 9, RustboroCity_Movement_14C5E3
+	waitmove 0
+	return
+
+@ 814C57A
+	move 9, RustboroCity_Movement_14C5E7
+	waitmove 0
+	return
+
+@ 814C585
+	move 9, RustboroCity_Movement_14C5EC
+	waitmove 0
+	return
+
+@ 814C590
+	move 9, RustboroCity_Movement_14C5F1
+	waitmove 0
+	return
+
+@ 814C59B
+	move 9, RustboroCity_Movement_14C5F7
+	waitmove 0
+	move 255, RustboroCity_Movement_1A0841
+	waitmove 0
+	return
+
+@ 814C5B0
+	step_30
+	step_30
+	step_18
+	step_18
+	step_18
+	step_18
+	step_16
+	step_16
+	step_16
+	step_16
+	step_16
+	step_16
+	step_16
+	step_16
+	step_16
+	step_16
+	step_16
+	step_end
 
 RustboroCity_Movement_14C5C2:: @ 814C5C2
 	step_30
@@ -232,7 +285,43 @@ RustboroCity_Movement_14C5DB:: @ 814C5DB
 	step_up
 	step_end
 
-	.incbin "baserom.gba", 0x14c5e3, 0x1c
+RustboroCity_Movement_14C5E3:: @ 814C5E3
+	step_down
+	step_right
+	step_right
+	step_end
+
+RustboroCity_Movement_14C5E7:: @ 814C5E7
+	step_down
+	step_down
+	step_right
+	step_right
+	step_end
+
+RustboroCity_Movement_14C5EC:: @ 814C5EC
+	step_down
+	step_down
+	step_right
+	step_right
+	step_end
+
+RustboroCity_Movement_14C5F1:: @ 814C5F1
+	step_down
+	step_down
+	step_down
+	step_right
+	step_right
+	step_end
+
+RustboroCity_Movement_14C5F7:: @ 814C5F7
+	step_down
+	step_down
+	step_down
+	step_right
+	step_right
+	step_right
+	step_25
+	step_end
 
 RustboroCity_EventScript_14C5FF:: @ 814C5FF
 	lock

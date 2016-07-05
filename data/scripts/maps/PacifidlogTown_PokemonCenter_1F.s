@@ -6,7 +6,13 @@ PacifidlogTown_PokemonCenter_1F_MapScript1_154105:: @ 8154105
 	sethealplace 19
 	end
 
-	.incbin "baserom.gba", 0x154109, 0xe
+@ 8154109
+	setvar 0x800b, 1
+	call VerdanturfTown_PokemonCenter_1F_EventScript_19FD5B
+	waittext
+	waitbutton
+	release
+	end
 
 PacifidlogTown_PokemonCenter_1F_EventScript_154117:: @ 8154117
 	msgbox PacifidlogTown_PokemonCenter_1F_Text_178E47, 2
