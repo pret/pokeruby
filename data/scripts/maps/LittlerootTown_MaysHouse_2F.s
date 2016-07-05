@@ -209,13 +209,16 @@ LittlerootTown_MaysHouse_2F_EventScript_152C52:: @ 8152C52
 LittlerootTown_MaysHouse_2F_EventScript_152C5C:: @ 8152C5C
 	setvar 0x8004, 2
 	special 214
-	playsfx 4
+	playsfx SE_PC_ON
 	msgbox LittlerootTown_MaysHouse_2F_Text_1A10D6, 4
 	special 249
 	waitstate
 	releaseall
 	end
 
-	.global gUnknown_08152C75
-gUnknown_08152C75: @ 8152C75
-	.incbin "baserom.gba", 0x152c75, 0xd
+gUnknown_08152C75:: @ 8152C75
+	setvar 0x8004, 2
+	playsfx SE_PC_OFF
+	special 215
+	releaseall
+	end

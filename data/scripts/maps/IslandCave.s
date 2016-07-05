@@ -33,8 +33,16 @@ IslandCave_MapScript1_15EF15:: @ 815EF15
 
 	.global gUnknown_0815EF19
 gUnknown_0815EF19: @ 815EF19
-
-	.incbin "baserom.gba", 0x15ef19, 0x40
+	setmaptile 7, 19, 554, 1
+	setmaptile 8, 19, 555, 1
+	setmaptile 9, 19, 556, 1
+	setmaptile 7, 20, 562, 1
+	setmaptile 8, 20, 563, 0
+	setmaptile 9, 20, 564, 1
+	special 142
+	playsfx SE_BAN
+	setflag 2129
+	end
 
 IslandCave_EventScript_15EF59:: @ 815EF59
 	lockall

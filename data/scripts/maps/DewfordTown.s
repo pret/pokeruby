@@ -640,5 +640,7 @@ DewfordTown_EventScript_14E48F:: @ 814E48F
 	release
 	end
 
-	.incbin "baserom.gba", 0x14e499, 0xa
-
+@ 814E499
+	msgbox DewfordTown_Text_16BD79, 4
+	release
+	end

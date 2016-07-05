@@ -101,7 +101,208 @@ MtChimney_Movement_15D03E:: @ 815D03E
 	step_down
 	step_end
 
-	.incbin "baserom.gba", 0x15d048, 0xad
+@ 815D048
+	step_down
+	step_down
+	step_down
+	step_down
+	step_down
+	step_left
+	step_left
+	step_down
+	step_down
+	step_down
+	step_down
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_down
+	step_end
+
+@ 815D05A
+	step_down
+	step_down
+	step_down
+	step_down
+	step_left
+	step_left
+	step_left
+	step_down
+	step_end
+
+@ 815D063
+	step_right
+	step_down
+	step_down
+	step_down
+	step_down
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_down
+	step_down
+	step_down
+	step_down
+	step_end
+
+@ 815D072
+	step_15
+	step_15
+	step_15
+	step_15
+	step_15
+	step_15
+	step_15
+	step_15
+	step_15
+	step_left
+	step_left
+	step_down
+	step_down
+	step_down
+	step_left
+	step_left
+	step_down
+	step_down
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_down
+	step_end
+
+@ 815D08B
+	step_14
+	step_14
+	step_14
+	step_down
+	step_down
+	step_down
+	step_left
+	step_left
+	step_left
+	step_down
+	step_end
+
+@ 815D096
+	step_14
+	step_left
+	step_down
+	step_down
+	step_down
+	step_down
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_down
+	step_down
+	step_down
+	step_down
+	step_end
+
+@ 815D0A6
+	step_14
+	step_left
+	step_left
+	step_down
+	step_down
+	step_down
+	step_left
+	step_left
+	step_down
+	step_down
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_down
+	step_end
+
+@ 815D0B7
+	step_14
+	step_down
+	step_left
+	step_left
+	step_left
+	step_left
+	step_25
+	step_end
+
+@ 815D0BF
+	step_down
+	step_down
+	step_down
+	step_down
+	step_left
+	step_left
+	step_left
+	step_left
+	step_left
+	step_down
+	step_down
+	step_down
+	step_down
+	step_end
+
+@ 815D0CD
+	step_down
+	step_end
+
+@ 815D0CF
+	step_down
+	step_down
+	step_down
+	step_down
+	step_down
+	step_down
+	step_down
+	step_end
+
+@ 815D0D7
+	step_14
+	step_14
+	step_27
+	step_14
+	step_down
+	step_down
+	step_down
+	step_down
+	step_down
+	step_end
+
+@ 815D0E1
+	step_14
+	step_14
+	step_14
+	step_14
+	step_14
+	step_14
+	step_27
+	step_14
+	step_down
+	step_down
+	step_end
+
+@ 815D0EC
+	step_40
+	step_17
+	step_41
+	step_03
+	step_end
+
+@ 815D0F1
+	step_left
+	step_28
+	step_14
+	step_end
 
 MtChimney_EventScript_15D0F5:: @ 815D0F5
 	msgbox MtChimney_Text_1B40EA, 3

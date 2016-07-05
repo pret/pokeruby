@@ -162,6 +162,6 @@ DewfordTown_Text_16BD37:: @ 816BD37
 	.string "“{STR_VAR_1}” is the\n"
 	.string "definition of “in” right now.$"
 
-UnknownString_816BD79: @ 816BD79
+DewfordTown_Text_16BD79: @ 816BD79
 	.string "“{STR_VAR_2}” is at\n"
 	.string "the pinnacle of cool right now.$"

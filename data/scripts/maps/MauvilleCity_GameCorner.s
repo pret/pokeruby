@@ -23,7 +23,13 @@ MauvilleCity_GameCorner_EventScript_156A60:: @ 8156A60
 	jump MauvilleCity_GameCorner_EventScript_156B4C
 	end
 
-	.incbin "baserom.gba", 0x156a87, 0x27
+@ 8156A87
+	multichoicedef 15, 0, 49, 1, 0
+	switch RESULT
+	case 0, MauvilleCity_GameCorner_EventScript_156AAE
+	case 1, MauvilleCity_GameCorner_EventScript_156AF0
+	jump MauvilleCity_GameCorner_EventScript_156B4C
+	end
 
 MauvilleCity_GameCorner_EventScript_156AAE:: @ 8156AAE
 	checkcoins 16385

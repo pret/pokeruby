@@ -4,7 +4,13 @@ EverGrandeCity_DrakesRoom_MapScripts:: @ 815B70D
 	map_script 4, EverGrandeCity_DrakesRoom_MapScript2_15B570
 	.byte 0
 
-	.incbin "baserom.gba", 0x15b71d, 0xf
+@ 815B71D
+	map_script_2 0x4001, 0, EverGrandeCity_DrakesRoom_EventScript_15B727
+	.2byte 0
+
+EverGrandeCity_DrakesRoom_EventScript_15B727:: @ 815B727
+	spriteface 255, 2
+	end
 
 EverGrandeCity_DrakesRoom_MapScript2_15B72C:: @ 815B72C
 	map_script_2 0x409c, 3, EverGrandeCity_DrakesRoom_EventScript_15B736
