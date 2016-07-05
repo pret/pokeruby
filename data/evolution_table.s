@@ -1,6 +1,5 @@
 	.align 2
-	.global gEvolutionTable
-gEvolutionTable: @ 8203B68
+gEvolutionTable:: @ 8203B68
 @ ??????????
 	empty_evo_entries 5
 

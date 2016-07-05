@@ -1,6 +1,5 @@
 	.align 2
-	.global gFieldEffectScriptPointers
-gFieldEffectScriptPointers: @ 81D9B34
+gFieldEffectScriptPointers:: @ 81D9B34
 	.4byte gFieldEffectScript_ExclamationMarkIcon1
 	.4byte gFieldEffectScript_UseCutOnTallGrass
 	.4byte gFieldEffectScript_UseCutOnTree

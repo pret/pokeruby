@@ -1,6 +1,5 @@
 	.align 2
-	.global gBattleTowerLevel100Mons
-gBattleTowerLevel100Mons: @ 8404BA0
+gBattleTowerLevel100Mons:: @ 8404BA0
 @ 0
 	.2byte SPECIES_LINOONE
 	.byte BATTLE_TOWER_ITEM_RAWST_BERRY

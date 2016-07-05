@@ -1,6 +1,5 @@
 	.align 2
-	.global gBerries
-gBerries: @ 83CD2CC
+gBerries:: @ 83CD2CC
 	.string "CHERI$", 7
 	.byte BERRY_FIRMNESS_SOFT
 	.2byte 20 @ size (in millimeters)

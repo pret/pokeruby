@@ -1,6 +1,5 @@
 	.align 2
-	.global gContestEffects
-gContestEffects:
+gContestEffects::
 @ 0
 	.byte 0 @ effect type
 	.byte 40 @ appeal

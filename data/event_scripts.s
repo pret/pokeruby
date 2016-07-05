@@ -2967,8 +2967,7 @@ UnusedMixRecordsSeeYouAgainText: @ 81A09D2
 UnknownString_81A09EC: @ 81A09EC
 	.string "{PLAYER} booted up the PC.$"
 
-	.global gUnknown_081A0A01
-gUnknown_081A0A01: @ 81A0A01
+gUnknown_081A0A01:: @ 81A0A01
 UnknownString_81A0A01: @ 81A0A01
 	.string "Which PC should be accessed?$"
 

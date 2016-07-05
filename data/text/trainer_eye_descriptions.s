@@ -345,8 +345,7 @@ TrainerEyeDescription_68:
 	.string "I’m still the strongest!$"
 
 	.align 2
-	.global gTrainerEyeDescriptions
-gTrainerEyeDescriptions: @ 83E309C
+gTrainerEyeDescriptions:: @ 83E309C
 	.4byte TrainerEyeDescription_0
 	.4byte TrainerEyeDescription_1
 	.4byte TrainerEyeDescription_2

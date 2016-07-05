@@ -236,8 +236,7 @@ gMapName_None: @ 83E73C2
 	.string "$"
 
 	.align 2
-	.global gRegionMapLocations
-gRegionMapLocations: @ 83E73C4
+gRegionMapLocations:: @ 83E73C4
 	region_map_location  4, 11, 1, 1, LittlerootTown
 	region_map_location  4,  9, 1, 1, OldaleTown
 	region_map_location  2, 14, 1, 1, DewfordTown

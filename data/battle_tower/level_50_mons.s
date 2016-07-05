@@ -1,6 +1,5 @@
 	.align 2
-	.global gBattleTowerLevel50Mons
-gBattleTowerLevel50Mons: @ 84038E0
+gBattleTowerLevel50Mons:: @ 84038E0
 @ 0
 	.2byte SPECIES_PIKACHU
 	.byte BATTLE_TOWER_ITEM_ORAN_BERRY

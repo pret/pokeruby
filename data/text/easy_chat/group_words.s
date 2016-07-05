@@ -22,8 +22,7 @@
 	.include "data/text/easy_chat/groups/pokemon_2/words.s"
 
 	.align 2
-	.global gEasyChatGroupWords
-gEasyChatGroupWords: @ 83DE0E0
+gEasyChatGroupWords:: @ 83DE0E0
 	.4byte gEasyChatGroupWords_Pokemon
 	.4byte gEasyChatGroupWords_Trainer
 	.4byte gEasyChatGroupWords_Status

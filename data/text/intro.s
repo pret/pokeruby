@@ -1,5 +1,4 @@
-	.global gUnknown_081C6D78
-gUnknown_081C6D78: @ 81C6D78
+gUnknown_081C6D78:: @ 81C6D78
 UnknownString_81C6D78: @ 81C6D78
 	.string "Hi! Sorry to keep you waiting!\p"
 	.string "Welcome to the world of POKéMON!\p"
@@ -7,13 +6,11 @@ UnknownString_81C6D78: @ 81C6D78
 	.string "But everyone calls me the POKéMON\n"
 	.string "PROFESSOR.\p$"
 
-	.global gUnknown_081C6DF8
-gUnknown_081C6DF8: @ 81C6DF8
+gUnknown_081C6DF8:: @ 81C6DF8
 UnknownString_81C6DF8: @ 81C6DF8
 	.string "This is what we call a “POKéMON.”$"
 
-	.global gUnknown_081C6E1A
-gUnknown_081C6E1A: @ 81C6E1A
+gUnknown_081C6E1A:: @ 81C6E1A
 UnknownString_81C6E1A: @ 81C6E1A
 	.string "This world is widely inhabited by\n"
 	.string "creatures known as POKéMON.\p"
@@ -30,38 +27,32 @@ UnknownString_81C6E1A: @ 81C6E1A
 	.string "I’ve been undertaking research.\l"
 	.string "That’s what I do.\p$"
 
-	.global gUnknown_081C6FCB
-gUnknown_081C6FCB: @ 81C6FCB
+gUnknown_081C6FCB:: @ 81C6FCB
 UnknownString_81C6FCB: @ 81C6FCB
 	.string "And you are?$"
 
-	.global gUnknown_081C6FD8
-gUnknown_081C6FD8: @ 81C6FD8
+gUnknown_081C6FD8:: @ 81C6FD8
 UnknownString_81C6FD8: @ 81C6FD8
 	.string "Are you a boy?\n"
 	.string "Or are you a girl?$"
 
-	.global gUnknown_081C6FFA
-gUnknown_081C6FFA: @ 81C6FFA
+gUnknown_081C6FFA:: @ 81C6FFA
 UnknownString_81C6FFA: @ 81C6FFA
 	.string "All right.\n"
 	.string "What’s your name?$"
 
-	.global gUnknown_081C7017
-gUnknown_081C7017: @ 81C7017
+gUnknown_081C7017:: @ 81C7017
 UnknownString_81C7017: @ 81C7017
 	.string "So it’s {PLAYER}{KUN}?$"
 
-	.global gUnknown_081C7025
-gUnknown_081C7025: @ 81C7025
+gUnknown_081C7025:: @ 81C7025
 UnknownString_81C7025: @ 81C7025
 	.string "Ah, okay!\p"
 	.string "You’re {PLAYER}{KUN} who’s moving to my\n"
 	.string "hometown of LITTLEROOT.\l"
 	.string "I get it now!$"
 
-	.global gUnknown_081C7074
-gUnknown_081C7074: @ 81C7074
+gUnknown_081C7074:: @ 81C7074
 UnknownString_81C7074: @ 81C7074
 	.string "All right, are you ready?\p"
 	.string "Your very own adventure is about\n"

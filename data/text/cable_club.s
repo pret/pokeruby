@@ -52,26 +52,22 @@ OldaleTown_PokemonCenter_2F_Text_1A48DD:: @ 81A48DD
 	.string "Your {STR_VAR_1} BERRY-holding POKéMON\n"
 	.string "can’t be traded.$"
 
-	.global gUnknown_081A490C
-gUnknown_081A490C: @ 81A490C
+gUnknown_081A490C:: @ 81A490C
 OldaleTown_PokemonCenter_2F_Text_1A490C:: @ 81A490C
 	.string "Please wait.\n"
 	.string "... ... B Button: Cancel$"
 
-	.global gUnknown_081A4932
-gUnknown_081A4932: @ 81A4932
+gUnknown_081A4932:: @ 81A4932
 UnknownString_81A4932: @ 81A4932
 	.string "When all players are ready...\n"
 	.string "A Button: Confirm   B Button: Cancel$"
 
-	.global gUnknown_081A4975
-gUnknown_081A4975: @ 81A4975
+gUnknown_081A4975:: @ 81A4975
 UnknownString_81A4975: @ 81A4975
 	.string "Start link with {STR_VAR_1} players.\n"
 	.string "A Button: Confirm   B Button: Cancel$"
 
-	.global gUnknown_081A49B6
-gUnknown_081A49B6: @ 81A49B6
+gUnknown_081A49B6:: @ 81A49B6
 UnknownString_81A49B6: @ 81A49B6
 	.string "Awaiting linkup...\n"
 	.string "... ... B Button: Cancel$"

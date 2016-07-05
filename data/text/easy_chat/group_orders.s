@@ -26,8 +26,7 @@
 @ Japanese order so that their meaning is preserved when they are transferred
 @ between different language editions of the games.
 	.align 2
-	.global gEasyChatGroupOrders
-gEasyChatGroupOrders: @ 83DFE14
+gEasyChatGroupOrders:: @ 83DFE14
 	.4byte gEasyChatGroupOrder_Pokemon
 	.4byte gEasyChatGroupOrder_Trainer
 	.4byte gEasyChatGroupOrder_Status

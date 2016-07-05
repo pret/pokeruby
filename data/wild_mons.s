@@ -3101,8 +3101,7 @@ Underwater2_WaterMonsInfo:
 	.4byte Underwater2_WaterMons
 
 	.align 2
-	.global gWildMonHeaders
-gWildMonHeaders:
+gWildMonHeaders::
 	map PetalburgCity
 	.2byte 0 @ padding
 	.4byte NULL

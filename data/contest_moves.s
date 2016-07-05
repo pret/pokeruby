@@ -1,6 +1,5 @@
 	.align 2
-	.global gContestMoves
-gContestMoves:
+gContestMoves::
 @ NONE
 	.byte 0 @ effect ID
 	.byte CONTEST_COOL

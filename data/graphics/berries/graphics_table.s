@@ -1,6 +1,5 @@
 	.align 2
-	.global gBerryGraphicsTable
-gBerryGraphicsTable: @ 83C1E1C
+gBerryGraphicsTable:: @ 83C1E1C
 	.4byte gBerryPic_Cheri,  gBerryPalette_Cheri
 	.4byte gBerryPic_Chesto, gBerryPalette_Chesto
 	.4byte gBerryPic_Pecha,  gBerryPalette_Pecha

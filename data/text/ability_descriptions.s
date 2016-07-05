@@ -233,8 +233,7 @@ gAbilityDescription_AirLock: @ 81FA0F6
 	.string "Negates weather effects.$"
 
 	.align 2
-	.global gAbilityDescriptions
-gAbilityDescriptions: @ 81FA110
+gAbilityDescriptions:: @ 81FA110
 	.4byte gAbilityDescription_None
 	.4byte gAbilityDescription_Stench
 	.4byte gAbilityDescription_Drizzle

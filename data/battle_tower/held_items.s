@@ -1,6 +1,5 @@
 	.align 1
-	.global gBattleTowerHeldItems
-gBattleTowerHeldItems: @ 8403860
+gBattleTowerHeldItems:: @ 8403860
 	.2byte ITEM_NONE
 	.2byte ITEM_KINGS_ROCK
 	.2byte ITEM_SITRUS_BERRY

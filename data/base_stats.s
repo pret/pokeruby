@@ -1,6 +1,5 @@
 	.align 2
-	.global gBaseStats
-gBaseStats: @ 81FEC18
+gBaseStats:: @ 81FEC18
 @ ??????????
 	.fill 28, 1, 0
 

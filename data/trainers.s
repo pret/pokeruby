@@ -1,6 +1,5 @@
 	.align 2
-	.global gTrainers
-gTrainers: @ 81F04FC
+gTrainers:: @ 81F04FC
 @ NONE
 	.byte 0 @ party type flags
 	.byte TRAINER_CLASS_NAME_POKEMON_TRAINER_1

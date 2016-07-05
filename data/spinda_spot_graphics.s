@@ -1,6 +1,5 @@
 	.align 2
-	.global gSpindaSpotGraphics
-gSpindaSpotGraphics: @ 81FCB84
+gSpindaSpotGraphics:: @ 81FCB84
 	.byte 16 @ X
 	.byte 14 @ Y
 	.2byte 0b0000000001110000
