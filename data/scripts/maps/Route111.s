@@ -138,7 +138,11 @@ Route111_EventScript_150100:: @ 8150100
 	release
 	end
 
-	.incbin "baserom.gba", 0x15010a, 0xc
+@ 815010A
+	lockall
+	setvar 0x8004, 0
+	jump Route111_EventScript_15013A
+	end
 
 Route111_EventScript_150116:: @ 8150116
 	lockall
@@ -152,7 +156,11 @@ Route111_EventScript_150122:: @ 8150122
 	jump Route111_EventScript_15013A
 	end
 
-	.incbin "baserom.gba", 0x15012e, 0xc
+@ 815012E
+	lockall
+	setvar 0x8004, 3
+	jump Route111_EventScript_15013A
+	end
 
 Route111_EventScript_15013A:: @ 815013A
 	checkitem ITEM_GO_GOGGLES, 1

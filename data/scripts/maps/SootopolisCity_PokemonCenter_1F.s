@@ -6,7 +6,13 @@ SootopolisCity_PokemonCenter_1F_MapScript1_15B196:: @ 815B196
 	sethealplace 10
 	end
 
-	.incbin "baserom.gba", 0x15b19a, 0xe
+@ 815B19A
+	setvar 0x800B, 1
+	call VerdanturfTown_PokemonCenter_1F_EventScript_19FD5B
+	waittext
+	waitbutton
+	release
+	end
 
 SootopolisCity_PokemonCenter_1F_EventScript_15B1A8:: @ 815B1A8
 	lock
