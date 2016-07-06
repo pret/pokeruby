@@ -1618,19 +1618,34 @@ gUnknown_082162B8:: @ 82162B8
 	.4byte UnknownText_Lassie
 
 gUnknown_082162C4:: @ 82162C4
-	.incbin "baserom.gba", 0x002162c4, 0x4
+	.string "{COLOR RED}$"
 
 gUnknown_082162C8:: @ 82162C8
-	.incbin "baserom.gba", 0x002162c8, 0x4
+	.string "\n$"
+
+	.string " $"
 
 gUnknown_082162CC:: @ 82162CC
-	.incbin "baserom.gba", 0x002162cc, 0x8
+	.byte -1, -1
+	.byte  1, -1
+	.byte -1,  1
+	.byte  1,  1
 
 gUnknown_082162D4:: @ 82162D4
-	.incbin "baserom.gba", 0x002162d4, 0x10
+	.byte  2,  6
+	.byte 23,  6
+	.byte  2, 12
+	.byte 23, 12
+	.byte  1,  6
+	.byte 22,  6
+	.byte  1, 12
+	.byte 22, 12
 
 gUnknown_082162E4:: @ 82162E4
-	.incbin "baserom.gba", 0x002162e4, 0x8
+	.byte  72,  32
+	.byte 168,  32
+	.byte  72, 128
+	.byte 168, 128
 
 gUnknown_082162EC:: @ 82162EC
 	.incbin "baserom.gba", 0x002162ec, 0xc
