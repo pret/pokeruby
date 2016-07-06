@@ -4339,27 +4339,27 @@ gMapObjectPalette21: @ 835B848
 	.incbin "graphics/map_objects/palettes/21.gbapal"
 
 	.align 2
-gFieldEffectObjectPic_BerryTreeGrowthSparkle_0: @ 835B868
+gFieldEffectPic_BerryTreeGrowthSparkle_0: @ 835B868
 	.incbin "graphics/field_effect_objects/pics/berry_tree_growth_sparkle/0.4bpp"
 
 	.align 2
-gFieldEffectObjectPic_BerryTreeGrowthSparkle_1: @ 835B8E8
+gFieldEffectPic_BerryTreeGrowthSparkle_1: @ 835B8E8
 	.incbin "graphics/field_effect_objects/pics/berry_tree_growth_sparkle/1.4bpp"
 
 	.align 2
-gFieldEffectObjectPic_BerryTreeGrowthSparkle_2: @ 835B968
+gFieldEffectPic_BerryTreeGrowthSparkle_2: @ 835B968
 	.incbin "graphics/field_effect_objects/pics/berry_tree_growth_sparkle/2.4bpp"
 
 	.align 2
-gFieldEffectObjectPic_BerryTreeGrowthSparkle_3: @ 835B9E8
+gFieldEffectPic_BerryTreeGrowthSparkle_3: @ 835B9E8
 	.incbin "graphics/field_effect_objects/pics/berry_tree_growth_sparkle/3.4bpp"
 
 	.align 2
-gFieldEffectObjectPic_BerryTreeGrowthSparkle_4: @ 835BA68
+gFieldEffectPic_BerryTreeGrowthSparkle_4: @ 835BA68
 	.incbin "graphics/field_effect_objects/pics/berry_tree_growth_sparkle/4.4bpp"
 
 	.align 2
-gFieldEffectObjectPic_BerryTreeGrowthSparkle_5: @ 835BAE8
+gFieldEffectPic_BerryTreeGrowthSparkle_5: @ 835BAE8
 	.incbin "graphics/field_effect_objects/pics/berry_tree_growth_sparkle/5.4bpp"
 
 	.align 2
@@ -5095,15 +5095,15 @@ gMapObjectPic_TamatoBerryTree_5: @ 8366FE8
 	.incbin "graphics/map_objects/pics/berry_trees/tamato/5.4bpp"
 
 	.align 2
-gFieldEffectObjectPic_SurfBlob_0: @ 83670E8
+gFieldEffectPic_SurfBlob_0: @ 83670E8
 	.incbin "graphics/field_effect_objects/pics/surf_blob/0.4bpp"
 
 	.align 2
-gFieldEffectObjectPic_SurfBlob_1: @ 83672E8
+gFieldEffectPic_SurfBlob_1: @ 83672E8
 	.incbin "graphics/field_effect_objects/pics/surf_blob/1.4bpp"
 
 	.align 2
-gFieldEffectObjectPic_SurfBlob_2: @ 83674E8
+gFieldEffectPic_SurfBlob_2: @ 83674E8
 	.incbin "graphics/field_effect_objects/pics/surf_blob/2.4bpp"
 
 	.align 2
