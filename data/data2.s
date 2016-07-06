@@ -950,14 +950,15 @@ gUnknown_081FAE7C:: @ 81FAE7C
 	.incbin "baserom.gba", 0x001fae7c, 0x4
 
 gUnknown_081FAE80:: @ 81FAE80
-	.incbin "baserom.gba", 0x001fae80, 0x9
+	.string "{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW WHITE LIGHT_BLUE WHITE2}$"
 
 gUnknown_081FAE89:: @ 81FAE89
 	.incbin "baserom.gba", 0x001fae89, 0x8
 
 gUnknown_081FAE91:: @ 81FAE91
-	.incbin "baserom.gba", 0x001fae91, 0x13
+	.incbin "baserom.gba", 0x001fae91, 0x10
 
+	.align 2
 gUnknown_081FAEA4:: @ 81FAEA4
 	obj_tiles 0x08d02410, 384, 0xd6eb
 
@@ -1152,21 +1153,28 @@ gUnknown_08209AC4:: @ 8209AC4
 gUnknown_08209AD4:: @ 8209AD4
 	.string "タマゴ$"
 
+EggPalette:: @ 8209AD8
 	.incbin "graphics/pokemon/egg/palette.gbapal"
-	.incbin "graphics/pokemon/egg/egg_hatch.4bpp"
-	.incbin "graphics/pokemon/egg/egg_crumble.4bpp"
 
-	.space 2
-	.incbin "baserom.gba", 0x0020A37A, 0x36
+EggHatchTiles: @ 8209AF8
+	.incbin "graphics/misc/egg_hatch.4bpp"
 
+EggShardTiles:: @ 820A2F8
+	.incbin "graphics/misc/egg_shard.4bpp"
+
+	.incbin "baserom.gba", 0x0020A378, 0x38
+
+	.align 2
 gUnknown_0820A3B0:: @ 820A3B0
-	obj_tiles 0x08209af8, 2048, 0x3039
+	obj_tiles EggHatchTiles, 2048, 12345
 
+	.align 2
 gUnknown_0820A3B8:: @ 820A3B8
-	obj_tiles 0x0820a2f8, 128, 0x5ba0
+	obj_tiles EggShardTiles, 128, 23456
 
+	.align 2
 gUnknown_0820A3C0:: @ 820A3C0
-	obj_pal 0x08209ad8, 0xd431
+	obj_pal EggPalette, 54321
 
 gUnknown_0820A3C8:: @ 820A3C8
 	.incbin "baserom.gba", 0x0020a3c8, 0x50
