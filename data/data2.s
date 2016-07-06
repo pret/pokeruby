@@ -7014,7 +7014,7 @@ gSpriteAnimTable_CutGrass:: @ 83C15EC
 
 	.align 2
 gSpriteImageTable_CutGrass:: @ 83C15F0
-	obj_frame_tiles gFieldEffectObjectPic_CutGrass, 0x20
+	obj_frame_tiles gFieldEffectPic_CutGrass, 0x20
 
 	.align 2
 gFieldEffectObjectPaletteInfo6:: @ 83C15F8
