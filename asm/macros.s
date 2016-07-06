@@ -110,3 +110,8 @@
 	.4byte \number
 	.4byte \text
 	.endm
+
+@ This is a temporary macro to clean up incbins. The same strategy is used in other disassemblies.
+	.macro dr binstart, binend
+	.incbin "baserom.gba", \binstart, \binend - \binstart
+	.endm
