@@ -32,19 +32,19 @@ gFieldEffectPicTable_ShadowExtraLarge: @ 8374558
 	obj_frame_tiles gFieldEffectPic_ShadowExtraLarge, 0x400
 
 	.align 2
-gFieldEffectObjectTemplate_ShadowSmall: @ 8374560
+gFieldEffectSpriteTemplate_ShadowSmall: @ 8374560
 	spr_template 0xFFFF, 0xFFFF, gFieldOamData_8x8, gFieldEffectAnimTable_Shadow, gFieldEffectPicTable_ShadowSmall, gDummySpriteAffineAnimTable, oamc_shadow
 
 	.align 2
-gFieldEffectObjectTemplate_ShadowMedium: @ 8374578
+gFieldEffectSpriteTemplate_ShadowMedium: @ 8374578
 	spr_template 0xFFFF, 0xFFFF, gFieldOamData_16x8, gFieldEffectAnimTable_Shadow, gFieldEffectPicTable_ShadowMedium, gDummySpriteAffineAnimTable, oamc_shadow
 
 	.align 2
-gFieldEffectObjectTemplate_ShadowLarge: @ 8374590
+gFieldEffectSpriteTemplate_ShadowLarge: @ 8374590
 	spr_template 0xFFFF, 0xFFFF, gFieldOamData_32x8, gFieldEffectAnimTable_Shadow, gFieldEffectPicTable_ShadowLarge, gDummySpriteAffineAnimTable, oamc_shadow
 
 	.align 2
-gFieldEffectObjectTemplate_ShadowExtraLarge: @ 83745A8
+gFieldEffectSpriteTemplate_ShadowExtraLarge: @ 83745A8
 	spr_template 0xFFFF, 0xFFFF, gFieldOamData_64x32, gFieldEffectAnimTable_Shadow, gFieldEffectPicTable_ShadowExtraLarge, gDummySpriteAffineAnimTable, oamc_shadow
 
 	.align 2
@@ -69,7 +69,7 @@ gFieldEffectAnimTable_TallGrass: @ 8374600
 	.4byte gFieldEffectObjectImageAnim_83745E8
 
 	.align 2
-gFieldEffectObjectTemplate_TallGrass: @ 8374604
+gFieldEffectSpriteTemplate_TallGrass: @ 8374604
 	spr_template 0xFFFF, 0x1005, gFieldOamData_16x16, gFieldEffectAnimTable_TallGrass, gFieldEffectPicTable_TallGrass, gDummySpriteAffineAnimTable, unc_grass_normal
 
 	.align 2
@@ -97,7 +97,7 @@ gFieldEffectAnimTable_Ripple: @ 8374668
 	.4byte gFieldEffectObjectImageAnim_8374644
 
 	.align 2
-gFieldEffectObjectTemplate_Ripple: @ 837466C
+gFieldEffectSpriteTemplate_Ripple: @ 837466C
 	spr_template 0xFFFF, 0x1005, gFieldOamData_16x16, gFieldEffectAnimTable_Ripple, gFieldEffectPicTable_Ripple, gDummySpriteAffineAnimTable, sub_8128800
 
 	.align 2
@@ -122,7 +122,7 @@ gFieldEffectAnimTable_Ash: @ 83746C4
 	.4byte gFieldEffectObjectImageAnim_83746AC
 
 	.align 2
-gFieldEffectObjectTemplate_Ash: @ 83746C8
+gFieldEffectSpriteTemplate_Ash: @ 83746C8
 	spr_template 0xFFFF, 0x1005, gFieldOamData_16x16, gFieldEffectAnimTable_Ash, gFieldEffectPicTable_Ash, gDummySpriteAffineAnimTable, sub_8127D84
 
 	.align 2
@@ -159,7 +159,7 @@ gFieldEffectAnimTable_SurfBlob: @ 8374718
 	.4byte gFieldEffectObjectImageAnim_8374710
 
 	.align 2
-gFieldEffectObjectTemplate_SurfBlob: @ 8374728
+gFieldEffectSpriteTemplate_SurfBlob: @ 8374728
 	spr_template 0xFFFF, 0xFFFF, gFieldOamData_32x32, gFieldEffectAnimTable_SurfBlob, gFieldEffectPicTable_SurfBlob, gDummySpriteAffineAnimTable, sub_8127F7C
 
 	.align 2
@@ -205,7 +205,7 @@ gFieldEffectAnimTable_Arrow: @ 83747B0
 	.4byte gFieldEffectObjectImageAnim_83747A4
 
 	.align 2
-gFieldEffectObjectTemplate_Arrow: @ 83747C0
+gFieldEffectSpriteTemplate_Arrow: @ 83747C0
 	spr_template 0xFFFF, 0xFFFF, gFieldOamData_16x16, gFieldEffectAnimTable_Arrow, gFieldEffectPicTable_Arrow, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 	.align 2
@@ -226,7 +226,7 @@ gFieldEffectAnimTable_Dust: @ 8374800
 	.4byte gFieldEffectObjectImageAnim_83747F0
 
 	.align 2
-gFieldEffectObjectTemplate_Dust: @ 8374804
+gFieldEffectSpriteTemplate_Dust: @ 8374804
 	spr_template 0xFFFF, 0x1004, gFieldOamData_16x8, gFieldEffectAnimTable_Dust, gFieldEffectPicTable_Dust, gDummySpriteAffineAnimTable, sub_81287C4
 
 	.align 2
@@ -249,7 +249,7 @@ gFieldEffectAnimTable_JumpTallGrass: @ 8374850
 	.4byte gFieldEffectObjectImageAnim_837483C
 
 	.align 2
-gFieldEffectObjectTemplate_JumpTallGrass: @ 8374854
+gFieldEffectSpriteTemplate_JumpTallGrass: @ 8374854
 	spr_template 0xFFFF, 0x1005, gFieldOamData_16x8, gFieldEffectAnimTable_JumpTallGrass, gFieldEffectPicTable_JumpTallGrass, gDummySpriteAffineAnimTable, sub_81287C4
 
 	.align 2
@@ -286,7 +286,7 @@ gFieldEffectAnimTable_SandFootprints: @ 837489C
 	.4byte gFieldEffectObjectImageAnim_8374894
 
 	.align 2
-gFieldEffectObjectTemplate_SandFootprints: @ 83748B0
+gFieldEffectSpriteTemplate_SandFootprints: @ 83748B0
 	spr_template 0xFFFF, 0x1004, gFieldOamData_16x16, gFieldEffectAnimTable_SandFootprints, gFieldEffectPicTable_SandFootprints, gDummySpriteAffineAnimTable, sub_8127584
 
 	.align 2
@@ -323,7 +323,7 @@ gFieldEffectAnimTable_DeepSandFootprints: @ 83748F8
 	.4byte gFieldEffectObjectImageAnim_83748F0
 
 	.align 2
-gFieldEffectObjectTemplate_DeepSandFootprints: @ 837490C
+gFieldEffectSpriteTemplate_DeepSandFootprints: @ 837490C
 	spr_template 0xFFFF, 0x1004, gFieldOamData_16x16, gFieldEffectAnimTable_DeepSandFootprints, gFieldEffectPicTable_DeepSandFootprints, gDummySpriteAffineAnimTable, sub_8127584
 
 	.align 2
@@ -386,7 +386,7 @@ gFieldEffectAnimTable_BikeTireTracks: @ 8374984
 	.4byte gFieldEffectObjectImageAnim_837497C
 
 	.align 2
-gFieldEffectObjectTemplate_BikeTireTracks: @ 83749A8
+gFieldEffectSpriteTemplate_BikeTireTracks: @ 83749A8
 	spr_template 0xFFFF, 0x1004, gFieldOamData_16x16, gFieldEffectAnimTable_BikeTireTracks, gFieldEffectPicTable_BikeTireTracks, gDummySpriteAffineAnimTable, sub_8127584
 
 	.align 2
@@ -409,7 +409,7 @@ gFieldEffectAnimTable_JumpBigSplash: @ 83749F4
 	.4byte gFieldEffectObjectImageAnim_83749E0
 
 	.align 2
-gFieldEffectObjectTemplate_JumpBigSplash: @ 83749F8
+gFieldEffectSpriteTemplate_JumpBigSplash: @ 83749F8
 	spr_template 0xFFFF, 0x1004, gFieldOamData_16x16, gFieldEffectAnimTable_JumpBigSplash, gFieldEffectPicTable_JumpBigSplash, gDummySpriteAffineAnimTable, sub_81287C4
 
 	.align 2
@@ -441,7 +441,7 @@ gFieldEffectAnimTable_Splash: @ 8374A50
 	.4byte gFieldEffectObjectImageAnim_8374A2C
 
 	.align 2
-gFieldEffectObjectTemplate_Splash: @ 8374A58
+gFieldEffectSpriteTemplate_Splash: @ 8374A58
 	spr_template 0xFFFF, 0x1004, gFieldOamData_16x8, gFieldEffectAnimTable_Splash, gFieldEffectPicTable_Splash, gDummySpriteAffineAnimTable, sub_81276B4
 
 	.align 2
@@ -462,7 +462,7 @@ gFieldEffectAnimTable_JumpSmallSplash: @ 8374A98
 	.4byte gFieldEffectObjectImageAnim_8374A88
 
 	.align 2
-gFieldEffectObjectTemplate_JumpSmallSplash: @ 8374A9C
+gFieldEffectSpriteTemplate_JumpSmallSplash: @ 8374A9C
 	spr_template 0xFFFF, 0x1004, gFieldOamData_16x8, gFieldEffectAnimTable_JumpSmallSplash, gFieldEffectPicTable_JumpSmallSplash, gDummySpriteAffineAnimTable, sub_81287C4
 
 	.align 2
@@ -488,7 +488,7 @@ gFieldEffectAnimTable_LongGrass: @ 8374AF4
 	.4byte gFieldEffectObjectImageAnim_8374AD4
 
 	.align 2
-gFieldEffectObjectTemplate_LongGrass: @ 8374AF8
+gFieldEffectSpriteTemplate_LongGrass: @ 8374AF8
 	spr_template 0xFFFF, 0x1005, gFieldOamData_16x16, gFieldEffectAnimTable_LongGrass, gFieldEffectPicTable_LongGrass, gDummySpriteAffineAnimTable, unc_grass_tall
 
 	.align 2
@@ -515,7 +515,7 @@ gFieldEffectAnimTable_JumpLongGrass: @ 8374B5C
 	.4byte gFieldEffectObjectImageAnim_8374B40
 
 	.align 2
-gFieldEffectObjectTemplate_JumpLongGrass: @ 8374B60
+gFieldEffectSpriteTemplate_JumpLongGrass: @ 8374B60
 	spr_template 0xFFFF, 0x1005, gFieldOamData_16x16, gFieldEffectAnimTable_JumpLongGrass, gFieldEffectPicTable_JumpLongGrass, gDummySpriteAffineAnimTable, sub_81287C4
 
 	.align 2
@@ -548,7 +548,7 @@ gFieldEffectAnimTable_Unknown17: @ 8374BE8
 	.4byte gFieldEffectObjectImageAnim_8374BC0
 
 	.align 2
-gFieldEffectObjectTemplate_Unknown17: @ 8374BEC
+gFieldEffectSpriteTemplate_Unknown17: @ 8374BEC
 	spr_template 0xFFFF, 0x1005, gFieldOamData_16x16, gFieldEffectAnimTable_Unknown17, gFieldEffectPicTable_Unknown17, gDummySpriteAffineAnimTable, sub_8128800
 
 	.align 2
@@ -573,7 +573,7 @@ gFieldEffectAnimTable_Unknown18: @ 8374C40
 	.4byte gFieldEffectObjectImageAnim_8374C24
 
 	.align 2
-gFieldEffectObjectTemplate_Unknown18: @ 8374C44
+gFieldEffectSpriteTemplate_Unknown18: @ 8374C44
 	spr_template 0xFFFF, 0x1005, gFieldOamData_16x16, gFieldEffectAnimTable_Unknown18, gFieldEffectPicTable_Unknown18, gDummySpriteAffineAnimTable, sub_8128800
 
 	.align 2
@@ -596,7 +596,7 @@ gFieldEffectAnimTable_Unknown19: @ 8374C90
 	.4byte gFieldEffectObjectImageAnim_8374C7C
 
 	.align 2
-gFieldEffectObjectTemplate_Unknown19: @ 8374C94
+gFieldEffectSpriteTemplate_Unknown19: @ 8374C94
 	spr_template 0xFFFF, 0x1004, gFieldOamData_16x16, gFieldEffectAnimTable_Unknown19, gFieldEffectPicTable_Unknown19, gDummySpriteAffineAnimTable, sub_8128800
 
 	.align 2
@@ -617,7 +617,7 @@ gFieldEffectAnimTable_Unknown29: @ 8374CD4
 	.4byte gFieldEffectObjectImageAnim_8374CC4
 
 	.align 2
-gFieldEffectObjectTemplate_Unknown29: @ 8374CD8
+gFieldEffectSpriteTemplate_Unknown29: @ 8374CD8
 	spr_template 0xFFFF, 0x1004, gFieldOamData_16x8, gFieldEffectAnimTable_Unknown29, gFieldEffectPicTable_Unknown29, gDummySpriteAffineAnimTable, sub_81282E0
 
 	.align 2
@@ -642,7 +642,7 @@ gFieldEffectAnimTable_Unknown20: @ 8374D2C
 	.4byte gFieldEffectObjectImageAnim_8374D10
 
 	.align 2
-gFieldEffectObjectTemplate_Unknown20: @ 8374D30
+gFieldEffectSpriteTemplate_Unknown20: @ 8374D30
 	spr_template 0xFFFF, 0x1004, gFieldOamData_16x16, gFieldEffectAnimTable_Unknown20, gFieldEffectPicTable_Unknown20, gDummySpriteAffineAnimTable, sub_8128800
 
 	.align 2
@@ -677,7 +677,7 @@ gFieldEffectAffineAnimTable_Unknown21: @ 8374DE8
 	.4byte gFieldEffectAffineAnim_8374D98
 
 	.align 2
-gFieldEffectObjectTemplate_Unknown21: @ 8374DF0
+gFieldEffectSpriteTemplate_Unknown21: @ 8374DF0
 	spr_template 0x0, 0xFFFF, gDummyOamData, gDummySpriteAnimTable, NULL, gFieldEffectAffineAnimTable_Unknown21, SpriteCallbackDummy
 
 	.align 2
@@ -718,7 +718,7 @@ gFieldEffectAnimTable_BerryTreeGrowthSparkle: @ 8374E8C
 	.4byte gFieldEffectObjectImageAnim_8374E38
 
 	.align 2
-gFieldEffectObjectTemplate_BerryTreeGrowthSparkle: @ 8374E90
+gFieldEffectSpriteTemplate_BerryTreeGrowthSparkle: @ 8374E90
 	spr_template 0xFFFF, 0xFFFF, gFieldOamData_16x16, gFieldEffectAnimTable_BerryTreeGrowthSparkle, gFieldEffectPicTable_BerryTreeGrowthSparkle, gDummySpriteAffineAnimTable, sub_8128800
 
 	.align 2
@@ -753,7 +753,7 @@ gFieldEffectAnimTable_TreeDisguise: @ 8374F08
 	.4byte gFieldEffectObjectImageAnim_8374EE8
 
 	.align 2
-gFieldEffectObjectTemplate_TreeDisguise: @ 8374F10
+gFieldEffectSpriteTemplate_TreeDisguise: @ 8374F10
 	spr_template 0xFFFF, 0xFFFF, gFieldOamData_16x32, gFieldEffectAnimTable_TreeDisguise, gFieldEffectPicTable_TreeDisguise, gDummySpriteAffineAnimTable, sub_81285AC
 
 	.align 2
@@ -788,7 +788,7 @@ gFieldEffectAnimTable_MountainDisguise: @ 8374F88
 	.4byte gFieldEffectObjectImageAnim_8374F68
 
 	.align 2
-gFieldEffectObjectTemplate_MountainDisguise: @ 8374F90
+gFieldEffectSpriteTemplate_MountainDisguise: @ 8374F90
 	spr_template 0xFFFF, 0xFFFF, gFieldOamData_16x32, gFieldEffectAnimTable_MountainDisguise, gFieldEffectPicTable_MountainDisguise, gDummySpriteAffineAnimTable, sub_81285AC
 
 	.align 2
@@ -802,7 +802,7 @@ gFieldEffectPicTable_SandDisguise: @ 8374FA8
 	obj_frame_tiles gFieldEffectPic_SandDisguise_6, 0x100
 
 	.align 2
-gFieldEffectObjectTemplate_SandDisguise: @ 8374FE0
+gFieldEffectSpriteTemplate_SandDisguise: @ 8374FE0
 	spr_template 0xFFFF, 0xFFFF, gFieldOamData_16x32, gFieldEffectAnimTable_TreeDisguise, gFieldEffectPicTable_SandDisguise, gDummySpriteAffineAnimTable, sub_81285AC
 
 	.align 2
@@ -819,7 +819,7 @@ gFieldEffectAnimTable_Bird: @ 8375008
 	.4byte gFieldEffectObjectImageAnim_8375000
 
 	.align 2
-gFieldEffectObjectTemplate_Bird: @ 837500C
+gFieldEffectSpriteTemplate_Bird: @ 837500C
 	spr_template 0xFFFF, 0xFFFF, gFieldOamData_32x32, gFieldEffectAnimTable_Bird, gFieldEffectPicTable_Bird, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 	.align 2
@@ -838,7 +838,7 @@ gFieldEffectAnimTable_ShortGrass: @ 8375040
 	.4byte gFieldEffectObjectImageAnim_8375034
 
 	.align 2
-gFieldEffectObjectTemplate_ShortGrass: @ 8375044
+gFieldEffectSpriteTemplate_ShortGrass: @ 8375044
 	spr_template 0xFFFF, 0x1005, gFieldOamData_16x16, gFieldEffectAnimTable_ShortGrass, gFieldEffectPicTable_ShortGrass, gDummySpriteAffineAnimTable, sub_8127334
 
 	.align 2
@@ -855,7 +855,7 @@ gFieldEffectAnimTable_HotSpringsWater: @ 837506C
 	.4byte gFieldEffectObjectImageAnim_8375064
 
 	.align 2
-gFieldEffectObjectTemplate_HotSpringsWater: @ 8375070
+gFieldEffectSpriteTemplate_HotSpringsWater: @ 8375070
 	spr_template 0xFFFF, 0x1005, gFieldOamData_16x16, gFieldEffectAnimTable_HotSpringsWater, gFieldEffectPicTable_HotSpringsWater, gDummySpriteAffineAnimTable, sub_8127A7C
 
 	.align 2
@@ -880,7 +880,7 @@ gFieldEffectAnimTable_PopOutOfAsh: @ 83750C8
 	.4byte gFieldEffectObjectImageAnim_83750B0
 
 	.align 2
-gFieldEffectObjectTemplate_PopOutOfAsh: @ 83750CC
+gFieldEffectSpriteTemplate_PopOutOfAsh: @ 83750CC
 	spr_template 0xFFFF, 0x100D, gFieldOamData_16x16, gFieldEffectAnimTable_PopOutOfAsh, gFieldEffectPicTable_PopOutOfAsh, gDummySpriteAffineAnimTable, sub_808788C
 
 	.align 2
@@ -909,7 +909,7 @@ gFieldEffectAnimTable_Unknown33: @ 837512C
 	.4byte gFieldEffectObjectImageAnim_8375114
 
 	.align 2
-gFieldEffectObjectTemplate_Unknown33: @ 8375130
+gFieldEffectSpriteTemplate_Unknown33: @ 8375130
 	spr_template 0xFFFF, 0x100D, gFieldOamData_16x16, gFieldEffectAnimTable_Unknown33, gFieldEffectPicTable_Unknown33, gDummySpriteAffineAnimTable, sub_8087638
 
 	.align 2
@@ -940,7 +940,7 @@ gFieldEffectAnimTable_Bubbles: @ 83751AC
 	.4byte gFieldEffectObjectImageAnim_8375188
 
 	.align 2
-gFieldEffectObjectTemplate_Bubbles: @ 83751B0
+gFieldEffectSpriteTemplate_Bubbles: @ 83751B0
 	spr_template 0xFFFF, 0x1004, gFieldOamData_16x32, gFieldEffectAnimTable_Bubbles, gFieldEffectPicTable_Bubbles, gDummySpriteAffineAnimTable, sub_8128410
 
 	.align 2
@@ -960,7 +960,7 @@ gFieldEffectAnimTable_Unknown35: @ 83751E8
 	.4byte gFieldEffectObjectImageAnim_83751D8
 
 	.align 2
-gFieldEffectObjectTemplate_Unknown35: @ 83751EC
+gFieldEffectSpriteTemplate_Unknown35: @ 83751EC
 	spr_template 0xFFFF, 0x100F, gFieldOamData_16x16, gFieldEffectAnimTable_Unknown35, gFieldEffectPicTable_Unknown35, gDummySpriteAffineAnimTable, sub_8128774
 
 	.align 2
