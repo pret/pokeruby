@@ -950,14 +950,15 @@ gUnknown_081FAE7C:: @ 81FAE7C
 	.incbin "baserom.gba", 0x001fae7c, 0x4
 
 gUnknown_081FAE80:: @ 81FAE80
-	.incbin "baserom.gba", 0x001fae80, 0x9
+	.string "{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW WHITE LIGHT_BLUE WHITE2}$"
 
 gUnknown_081FAE89:: @ 81FAE89
 	.incbin "baserom.gba", 0x001fae89, 0x8
 
 gUnknown_081FAE91:: @ 81FAE91
-	.incbin "baserom.gba", 0x001fae91, 0x13
+	.incbin "baserom.gba", 0x001fae91, 0x10
 
+	.align 2
 gUnknown_081FAEA4:: @ 81FAEA4
 	obj_tiles 0x08d02410, 384, 0xd6eb
 
@@ -1152,21 +1153,28 @@ gUnknown_08209AC4:: @ 8209AC4
 gUnknown_08209AD4:: @ 8209AD4
 	.string "タマゴ$"
 
+EggPalette:: @ 8209AD8
 	.incbin "graphics/pokemon/egg/palette.gbapal"
-	.incbin "graphics/pokemon/egg/egg_hatch.4bpp"
-	.incbin "graphics/pokemon/egg/egg_crumble.4bpp"
 
-	.space 2
-	.incbin "baserom.gba", 0x0020A37A, 0x36
+EggHatchTiles: @ 8209AF8
+	.incbin "graphics/misc/egg_hatch.4bpp"
 
+EggShardTiles:: @ 820A2F8
+	.incbin "graphics/misc/egg_shard.4bpp"
+
+	.incbin "baserom.gba", 0x0020A378, 0x38
+
+	.align 2
 gUnknown_0820A3B0:: @ 820A3B0
-	obj_tiles 0x08209af8, 2048, 0x3039
+	obj_tiles EggHatchTiles, 2048, 12345
 
+	.align 2
 gUnknown_0820A3B8:: @ 820A3B8
-	obj_tiles 0x0820a2f8, 128, 0x5ba0
+	obj_tiles EggShardTiles, 128, 23456
 
+	.align 2
 gUnknown_0820A3C0:: @ 820A3C0
-	obj_pal 0x08209ad8, 0xd431
+	obj_pal EggPalette, 54321
 
 gUnknown_0820A3C8:: @ 820A3C8
 	.incbin "baserom.gba", 0x0020a3c8, 0x50
@@ -1576,41 +1584,40 @@ gUnknown_0821602C:: @ 821602C
 	.incbin "baserom.gba", 0x0021602c, 0x21d
 
 gUnknown_08216249:: @ 8216249
-	.byte 0xFB
-	.string "$"
-	.incbin "baserom.gba", 0x0021624b, 0x28
+	.string "\p$"
+
+@ unreferenced
+@ These appear to be the first names of four people who worked on the game.
+	.string "てつじ$", 10 @ Tetsuji (Ohta)
+	.string "あきと$", 10 @ Akito (Mori)
+	.string "シゲル$", 10 @ Shigeru (Ohmori)
+	.string "ヨシノリ$", 10 @ Yoshinori (Matsuda)
+
 UnknownText_2Pok:
 	.string "2Pok$"
 UnknownText_3Pok:
 	.string "3Pok$"
 UnknownText_4Pok:
 	.string "4Pok$"
-	.align 2
 
 	.align 2
-gUnknown_08216284:: @ 8216284 berry blender helpers?
+gUnknown_08216284:: @ 8216284
 	.4byte UnknownText_2Pok
 	.4byte UnknownText_3Pok
 	.4byte UnknownText_4Pok
-OtherText_1P:
-	.string "1P$"
-	.align 2
-OtherText_2P:
-	.string "2P$"
-	.align 2
-OtherText_3P:
-	.string "3P$"
-	.align 2
-OtherText_4P:
-	.string "4P$"
-	.align 2
+
+@ unreferenced
+	.string "1P$", 4
+	.string "2P$", 4
+	.string "3P$", 4
+	.string "4P$", 4
+
 UnknownText_Mister:
 	.string "MISTER$"
 UnknownText_Laddie:
 	.string "LADDIE$"
 UnknownText_Lassie:
 	.string "LASSIE$"
-	.align 2
 
 	.align 2
 gUnknown_082162B8:: @ 82162B8
@@ -1619,19 +1626,34 @@ gUnknown_082162B8:: @ 82162B8
 	.4byte UnknownText_Lassie
 
 gUnknown_082162C4:: @ 82162C4
-	.incbin "baserom.gba", 0x002162c4, 0x4
+	.string "{COLOR RED}$"
 
 gUnknown_082162C8:: @ 82162C8
-	.incbin "baserom.gba", 0x002162c8, 0x4
+	.string "\n$"
+
+	.string " $"
 
 gUnknown_082162CC:: @ 82162CC
-	.incbin "baserom.gba", 0x002162cc, 0x8
+	.byte -1, -1
+	.byte  1, -1
+	.byte -1,  1
+	.byte  1,  1
 
 gUnknown_082162D4:: @ 82162D4
-	.incbin "baserom.gba", 0x002162d4, 0x10
+	.byte  2,  6
+	.byte 23,  6
+	.byte  2, 12
+	.byte 23, 12
+	.byte  1,  6
+	.byte 22,  6
+	.byte  1, 12
+	.byte 22, 12
 
 gUnknown_082162E4:: @ 82162E4
-	.incbin "baserom.gba", 0x002162e4, 0x8
+	.byte  72,  32
+	.byte 168,  32
+	.byte  72, 128
+	.byte 168, 128
 
 gUnknown_082162EC:: @ 82162EC
 	.incbin "baserom.gba", 0x002162ec, 0xc
