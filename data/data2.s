@@ -1578,11 +1578,12 @@ gUnknown_0821602C:: @ 821602C
 gUnknown_08216249:: @ 8216249
 	.string "\p$"
 
-@ unreferenced names
-	.string "てつじ$", 10
-	.string "あきと$", 10
-	.string "シゲル$", 10
-	.string "ヨシノリ$", 10
+@ unreferenced
+@ These appear to be the first names of four people who worked on the game.
+	.string "てつじ$", 10 @ Tetsuji (Ohta)
+	.string "あきと$", 10 @ Akito (Mori)
+	.string "シゲル$", 10 @ Shigeru (Ohmori)
+	.string "ヨシノリ$", 10 @ Yoshinori (Matsuda)
 
 UnknownText_2Pok:
 	.string "2Pok$"
