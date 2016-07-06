@@ -1576,41 +1576,39 @@ gUnknown_0821602C:: @ 821602C
 	.incbin "baserom.gba", 0x0021602c, 0x21d
 
 gUnknown_08216249:: @ 8216249
-	.byte 0xFB
-	.string "$"
-	.incbin "baserom.gba", 0x0021624b, 0x28
+	.string "\p$"
+
+@ unreferenced names
+	.string "てつじ$", 10
+	.string "あきと$", 10
+	.string "シゲル$", 10
+	.string "ヨシノリ$", 10
+
 UnknownText_2Pok:
 	.string "2Pok$"
 UnknownText_3Pok:
 	.string "3Pok$"
 UnknownText_4Pok:
 	.string "4Pok$"
-	.align 2
 
 	.align 2
-gUnknown_08216284:: @ 8216284 berry blender helpers?
+gUnknown_08216284:: @ 8216284
 	.4byte UnknownText_2Pok
 	.4byte UnknownText_3Pok
 	.4byte UnknownText_4Pok
-OtherText_1P:
-	.string "1P$"
-	.align 2
-OtherText_2P:
-	.string "2P$"
-	.align 2
-OtherText_3P:
-	.string "3P$"
-	.align 2
-OtherText_4P:
-	.string "4P$"
-	.align 2
+
+@ unreferenced
+	.string "1P$", 4
+	.string "2P$", 4
+	.string "3P$", 4
+	.string "4P$", 4
+
 UnknownText_Mister:
 	.string "MISTER$"
 UnknownText_Laddie:
 	.string "LADDIE$"
 UnknownText_Lassie:
 	.string "LASSIE$"
-	.align 2
 
 	.align 2
 gUnknown_082162B8:: @ 82162B8
