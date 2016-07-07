@@ -27,13 +27,16 @@ Unknown_081E797C:
 Unknown_081E799C:
 	.incbin "baserom.gba", 0x001e799c, 0x10
 
+	.align 2
 gUnknown_081E79AC:: @ 81E79AC
 	.4byte Unknown_081E799C
 
+	.align 2
 gUnknown_081E79B0:: @ 81E79B0
 	.4byte gBirchText_Boy, 0
 	.4byte gBirchText_Girl, 0
 
+	.align 2
 gUnknown_081E79C0:: @ 81E79C0
 	.4byte gBirchText_NewName, 0
 	.4byte gDefaultBoyName1, 0
@@ -41,6 +44,7 @@ gUnknown_081E79C0:: @ 81E79C0
 	.4byte gDefaultBoyName3, 0
 	.4byte gDefaultBoyName4, 0
 
+	.align 2
 gUnknown_081E79E8:: @ 81E79E8
 	.4byte gBirchText_NewName, 0
 	.4byte gDefaultGirlName1, 0
