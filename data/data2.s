@@ -27,18 +27,32 @@ Unknown_081E797C:
 Unknown_081E799C:
 	.incbin "baserom.gba", 0x001e799c, 0x10
 
+	.align 2
 gUnknown_081E79AC:: @ 81E79AC
 	.4byte Unknown_081E799C
 
+	.align 2
 gUnknown_081E79B0:: @ 81E79B0
-	.incbin "baserom.gba", 0x001e79b0, 0x10
+	.4byte gBirchText_Boy, 0
+	.4byte gBirchText_Girl, 0
 
+	.align 2
 gUnknown_081E79C0:: @ 81E79C0
-	.incbin "baserom.gba", 0x001e79c0, 0x28
+	.4byte gBirchText_NewName, 0
+	.4byte gDefaultBoyName1, 0
+	.4byte gDefaultBoyName2, 0
+	.4byte gDefaultBoyName3, 0
+	.4byte gDefaultBoyName4, 0
 
+	.align 2
 gUnknown_081E79E8:: @ 81E79E8
-Unknown_81E79E8:
-	.incbin "baserom.gba", 0x001e79e8, 0xB8
+	.4byte gBirchText_NewName, 0
+	.4byte gDefaultGirlName1, 0
+	.4byte gDefaultGirlName2, 0
+	.4byte gDefaultGirlName3, 0
+	.4byte gDefaultGirlName4, 0
+
+	.incbin "baserom.gba", 0x001e7a10, 0x90
 Unknown_81E7AA0:
 	.incbin "baserom.gba", 0x001e7aa0, 0x20
 Unknown_81E7AC0:
@@ -15976,11 +15990,12 @@ SystemText_Time:
 gUnknown_0840DF90:: @ 840DF90
 SystemText_Badges:
 	.string "BADGES$"
-SystemText_IntroBoy:
+
+gBirchText_Boy::
 	.string "BOY$"
-SystemText_IntroGirl:
+gBirchText_Girl:
 	.string "GIRL$"
-SystemText_IntroNewName:
+gBirchText_NewName::
 	.string "NEW NAME$"
 
 gDefaultBoyName1::
