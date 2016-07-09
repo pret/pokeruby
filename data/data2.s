@@ -8329,141 +8329,334 @@ gUnknown_083B6F5C:: @ 83B6F5C
 	.4byte Unknown_83B6F34
 	.4byte Unknown_83B6F44
 
-	.incbin "graphics/pokemon_storage/box_bg1.gbapal" @ unknown palette, hand?
+	.align 2
+gWallpaperPalettes_Forest: @ 83B6F64
+	.incbin "graphics/pokemon_storage/box_bg1.gbapal"
 	.incbin "graphics/pokemon_storage/forest_frame.gbapal"
 	.incbin "graphics/pokemon_storage/forest_bg.gbapal"
-	.incbin "graphics/pokemon_storage/forest.4bpp.lz" @ forest
+
+	.align 2
+gWallpaperTiles_Forest: @ 83B6FC4
+	.incbin "graphics/pokemon_storage/forest.4bpp.lz"
+
+	.align 2
+gWallpaperTilemap_Forest: @ 83B7394
 	.incbin "graphics/pokemon_storage/forest.bin.lz"
+
+	.align 2
+gWallpaperPalettes_City: @ 83B7470
 	.incbin "graphics/pokemon_storage/box_bg1.gbapal"
 	.incbin "graphics/pokemon_storage/city_frame.gbapal"
 	.incbin "graphics/pokemon_storage/city_bg.gbapal"
-	.incbin "graphics/pokemon_storage/city.4bpp.lz" @ city
+
+	.align 2
+gWallpaperTiles_City: @ 83B74D0
+	.incbin "graphics/pokemon_storage/city.4bpp.lz"
+
+	.align 2
+gWallpaperTilemap_City: @ 83B76D8
 	.incbin "graphics/pokemon_storage/city.bin.lz"
+
+	.align 2
+gWallpaperPalettes_Desert: @ 83B7788
 	.incbin "graphics/pokemon_storage/box_bg1.gbapal"
 	.incbin "graphics/pokemon_storage/desert_frame.gbapal"
 	.incbin "graphics/pokemon_storage/desert_bg.gbapal"
-	.incbin "graphics/pokemon_storage/desert.4bpp.lz" @ desert
+
+	.align 2
+gWallpaperTiles_Desert: @ 83B77E8
+	.incbin "graphics/pokemon_storage/desert.4bpp.lz"
+
+	.align 2
+gWallpaperTilemap_Desert: @ 83B7AD4
 	.incbin "graphics/pokemon_storage/desert.bin.lz"
+
+	.align 2
+gWallpaperPalettes_Savanna: @ 83B7BB8
 	.incbin "graphics/pokemon_storage/box_bg1.gbapal"
 	.incbin "graphics/pokemon_storage/savanna_frame.gbapal"
 	.incbin "graphics/pokemon_storage/savanna_bg.gbapal"
-	.incbin "graphics/pokemon_storage/savanna.4bpp.lz" @ savanna
+
+	.align 2
+gWallpaperTiles_Savanna: @ 83B7C18
+	.incbin "graphics/pokemon_storage/savanna.4bpp.lz"
+
+	.align 2
+gWallpaperTilemap_Savanna: @ 83B7E38
 	.incbin "graphics/pokemon_storage/savanna.bin.lz"
+
+	.align 2
+gWallpaperPalettes_Crag: @ 83B7F04
 	.incbin "graphics/pokemon_storage/box_bg1.gbapal"
 	.incbin "graphics/pokemon_storage/crag_frame.gbapal"
 	.incbin "graphics/pokemon_storage/crag_bg.gbapal"
-	.incbin "graphics/pokemon_storage/crag.4bpp.lz" @ crag
+
+	.align 2
+gWallpaperTiles_Crag: @ 83B7F64
+	.incbin "graphics/pokemon_storage/crag.4bpp.lz"
+
+	.align 2
+gWallpaperTilemap_Crag: @ 83B82B4
 	.incbin "graphics/pokemon_storage/crag.bin.lz"
+
+	.align 2
+gWallpaperPalettes_Volcano: @ 83B838C
 	.incbin "graphics/pokemon_storage/box_bg1.gbapal"
 	.incbin "graphics/pokemon_storage/volcano_frame.gbapal"
 	.incbin "graphics/pokemon_storage/volcano_bg.gbapal"
-	.incbin "graphics/pokemon_storage/volcano.4bpp.lz" @ volcano
+
+	.align 2
+gWallpaperTiles_Volcano: @ 83B83EC
+	.incbin "graphics/pokemon_storage/volcano.4bpp.lz"
+
 	.space 4
+
+	.align 2
+gWallpaperTilemap_Volcano: @ 83B8720
 	.incbin "graphics/pokemon_storage/volcano.bin.lz"
+
+	.align 2
+gWallpaperPalettes_Snow: @ 83B87F8
 	.incbin "graphics/pokemon_storage/box_bg1.gbapal"
 	.incbin "graphics/pokemon_storage/snow_frame.gbapal"
 	.incbin "graphics/pokemon_storage/snow_bg.gbapal"
-	.incbin "graphics/pokemon_storage/snow.4bpp.lz" @ snow
+
+	.align 2
+gWallpaperTiles_Snow: @ 83B8858
+	.incbin "graphics/pokemon_storage/snow.4bpp.lz"
+
+	.align 2
+gWallpaperTilemap_Snow: @ 83B8B10
 	.incbin "graphics/pokemon_storage/snow.bin.lz"
+
+	.align 2
+gWallpaperPalettes_Cave: @ 83B8BDC
 	.incbin "graphics/pokemon_storage/box_bg1.gbapal"
 	.incbin "graphics/pokemon_storage/cave_frame.gbapal"
 	.incbin "graphics/pokemon_storage/cave_bg.gbapal"
-	.incbin "graphics/pokemon_storage/cave.4bpp.lz" @ cave
+
+	.align 2
+gWallpaperTiles_Cave: @ 83B8C3C
+	.incbin "graphics/pokemon_storage/cave.4bpp.lz"
+
+	.align 2
+gWallpaperTilemap_Cave: @ 83B8F80
 	.incbin "graphics/pokemon_storage/cave.bin.lz"
+
+	.align 2
+gWallpaperPalettes_Beach: @ 83B905C
 	.incbin "graphics/pokemon_storage/box_bg1.gbapal"
 	.incbin "graphics/pokemon_storage/beach_frame.gbapal"
 	.incbin "graphics/pokemon_storage/beach_bg.gbapal"
-	.incbin "graphics/pokemon_storage/beach.4bpp.lz" @ beach
+
+	.align 2
+gWallpaperTiles_Beach: @ 83B90BC
+	.incbin "graphics/pokemon_storage/beach.4bpp.lz"
+
+	.align 2
+gWallpaperTilemap_Beach: @ 83B9440
 	.incbin "graphics/pokemon_storage/beach.bin.lz"
+
+	.align 2
+gWallpaperPalettes_Seafloor: @ 83B9528
 	.incbin "graphics/pokemon_storage/box_bg1.gbapal"
 	.incbin "graphics/pokemon_storage/seafloor_frame.gbapal"
 	.incbin "graphics/pokemon_storage/seafloor_bg.gbapal"
-	.incbin "graphics/pokemon_storage/seafloor.4bpp.lz" @ seafloor
+
+	.align 2
+gWallpaperTiles_Seafloor: @ 83B9588
+	.incbin "graphics/pokemon_storage/seafloor.4bpp.lz"
+
+	.align 2
+gWallpaperTilemap_Seafloor: @ 83B983C
 	.incbin "graphics/pokemon_storage/seafloor.bin.lz"
+
+	.align 2
+gWallpaperPalettes_River: @ 83B9918
 	.incbin "graphics/pokemon_storage/box_bg1.gbapal"
 	.incbin "graphics/pokemon_storage/river_frame.gbapal"
 	.incbin "graphics/pokemon_storage/river_bg.gbapal"
-	.incbin "graphics/pokemon_storage/river.4bpp.lz" @ river
+
+	.align 2
+gWallpaperTiles_River: @ 83B9978
+	.incbin "graphics/pokemon_storage/river.4bpp.lz"
+
+	.align 2
+gWallpaperTilemap_River: @ 83B9C0C
 	.incbin "graphics/pokemon_storage/river.bin.lz"
+
+	.align 2
+gWallpaperPalettes_Sky: @ 83B9CF8
 	.incbin "graphics/pokemon_storage/box_bg1.gbapal"
 	.incbin "graphics/pokemon_storage/sky_frame.gbapal"
 	.incbin "graphics/pokemon_storage/sky_bg.gbapal"
-	.incbin "graphics/pokemon_storage/sky.4bpp.lz" @ sky
+
+	.align 2
+gWallpaperTiles_Sky: @ 83B9D58
+	.incbin "graphics/pokemon_storage/sky.4bpp.lz"
+
+	.align 2
+gWallpaperTilemap_Sky: @ 83B9FF0
 	.incbin "graphics/pokemon_storage/sky.bin.lz"
+
+	.align 2
+gWallpaperPalettes_Polkadot: @ 83BA0D0
 	.incbin "graphics/pokemon_storage/box_bg2.gbapal"
 	.incbin "graphics/pokemon_storage/polkadot_frame.gbapal"
 	.incbin "graphics/pokemon_storage/polkadot_bg.gbapal"
-	.incbin "graphics/pokemon_storage/polkadot.4bpp.lz" @ polkadot
+
+	.align 2
+gWallpaperTiles_Polkadot: @ 83BA130
+	.incbin "graphics/pokemon_storage/polkadot.4bpp.lz"
+
+	.align 2
+gWallpaperTilemap_Polkadot: @ 83BA32C
 	.incbin "graphics/pokemon_storage/polkadot.bin.lz"
+
+	.align 2
+gWallpaperPalettes_Pokecenter: @ 83BA3E4
 	.incbin "graphics/pokemon_storage/box_bg2.gbapal"
 	.incbin "graphics/pokemon_storage/pokecenter_frame.gbapal"
 	.incbin "graphics/pokemon_storage/pokecenter_bg.gbapal"
-	.incbin "graphics/pokemon_storage/pokecenter.4bpp.lz" @ pokecenter
+
+	.align 2
+gWallpaperTiles_Pokecenter: @ 83BA444
+	.incbin "graphics/pokemon_storage/pokecenter.4bpp.lz"
+
+	.align 2
+gWallpaperTilemap_Pokecenter: @ 83BA7E8
 	.incbin "graphics/pokemon_storage/pokecenter.bin.lz"
+
+	.align 2
+gWallpaperPalettes_Machine: @ 83BA8FC
 	.incbin "graphics/pokemon_storage/box_bg3.gbapal"
 	.incbin "graphics/pokemon_storage/machine_frame.gbapal"
 	.incbin "graphics/pokemon_storage/machine_bg.gbapal"
-	.incbin "graphics/pokemon_storage/machine.4bpp.lz" @ machine
+
+	.align 2
+gWallpaperTiles_Machine: @ 83BA95C
+	.incbin "graphics/pokemon_storage/machine.4bpp.lz"
+
+	.align 2
+gWallpaperTilemap_Machine: @ 83BAC4C
 	.incbin "graphics/pokemon_storage/machine.bin.lz"
+
+	.align 2
+gWallpaperPalettes_Plain: @ 83BAD18
 	.incbin "graphics/pokemon_storage/box_bg4.gbapal"
 	.incbin "graphics/pokemon_storage/plain_frame.gbapal"
 	.incbin "graphics/pokemon_storage/plain_bg.gbapal"
-	.incbin "graphics/pokemon_storage/plain.4bpp.lz" @ plain
+
+	.align 2
+gWallpaperTiles_Plain: @ 83BAD78
+	.incbin "graphics/pokemon_storage/plain.4bpp.lz"
+
+	.align 2
+gWallpaperTilemap_Plain: @ 83BAE74
 	.incbin "graphics/pokemon_storage/plain.bin.lz"
+
 	.incbin "baserom.gba", 0x003BAEF8, 0x1B0
 
 gUnknown_083BB0A8:: @ 83BB0A8
 	.incbin "baserom.gba", 0x003bb0a8, 0x40
 
-gUnknown_083BB0E8:: @ 83BB0E8
-	obj_pal 0x083B6FC4, 0x03D0
-	.4byte 0x083B7394
-	.4byte 0x083B6F64
-	obj_pal 0x083B74D0, 0x0208
-	.4byte 0x083B76D8
-	.4byte 0x083B7470
-	obj_pal 0x083B77E8, 0x02EC
-	.4byte 0x083B7AD4
-	.4byte 0x083B7788
-	obj_pal 0x083B7C18, 0x0220
-	.4byte 0x083B7E38
-	.4byte 0x083B7BB8
-	obj_pal 0x083B7F64, 0x0350
-	.4byte 0x083B82B4
-	.4byte 0x083B7F04
-	obj_pal 0x083B83EC, 0x0334
-	.4byte 0x083B8720
-	.4byte 0x083B838C
-	obj_pal 0x083B8858, 0x02B8
-	.4byte 0x083B8B10
-	.4byte 0x083B87F8
-	obj_pal 0x083B8C3C, 0x0344
-	.4byte 0x083B8F80
-	.4byte 0x083B8BDC
-	obj_pal 0x083B90BC, 0x0384
-	.4byte 0x083B9440
-	.4byte 0x083B905C
-	obj_pal 0x083B9588, 0x02B4
-	.4byte 0x083B983C
-	.4byte 0x083B9528
-	obj_pal 0x083B9978, 0x0294
-	.4byte 0x083B9C0C
-	.4byte 0x083B9918
-	obj_pal 0x083B9D58, 0x0298
-	.4byte 0x083B9FF0
-	.4byte 0x083B9CF8
-	obj_pal 0x083BA130, 0x01FC
-	.4byte 0x083BA32C
-	.4byte 0x083BA0D0
-	obj_pal 0x083BA444, 0x03A4
-	.4byte 0x083BA7E8
-	.4byte 0x083BA3E4
-	obj_pal 0x083BA95C, 0x02F0
-	.4byte 0x083BAC4C
-	.4byte 0x083BA8FC
-	obj_pal 0x083BAD78, 0x00FC
-	.4byte 0x083BAE74
-	.4byte 0x083BAD18
+	.align 2
+gWallpaperTable:: @ 83BB0E8
+	@ Forest
+	.4byte gWallpaperTiles_Forest
+	.4byte 0x3D0
+	.4byte gWallpaperTilemap_Forest
+	.4byte gWallpaperPalettes_Forest
+
+	@ City
+	.4byte gWallpaperTiles_City
+	.4byte 0x208
+	.4byte gWallpaperTilemap_City
+	.4byte gWallpaperPalettes_City
+
+	@ Desert
+	.4byte gWallpaperTiles_Desert
+	.4byte 0x2EC
+	.4byte gWallpaperTilemap_Desert
+	.4byte gWallpaperPalettes_Desert
+
+	@ Savanna
+	.4byte gWallpaperTiles_Savanna
+	.4byte 0x220
+	.4byte gWallpaperTilemap_Savanna
+	.4byte gWallpaperPalettes_Savanna
+
+	@ Crag
+	.4byte gWallpaperTiles_Crag
+	.4byte 0x350
+	.4byte gWallpaperTilemap_Crag
+	.4byte gWallpaperPalettes_Crag
+
+	@ Volcano
+	.4byte gWallpaperTiles_Volcano
+	.4byte 0x334
+	.4byte gWallpaperTilemap_Volcano
+	.4byte gWallpaperPalettes_Volcano
+
+	@ Snow
+	.4byte gWallpaperTiles_Snow
+	.4byte 0x2B8
+	.4byte gWallpaperTilemap_Snow
+	.4byte gWallpaperPalettes_Snow
+
+	@ Cave
+	.4byte gWallpaperTiles_Cave
+	.4byte 0x344
+	.4byte gWallpaperTilemap_Cave
+	.4byte gWallpaperPalettes_Cave
+
+	@ Beach
+	.4byte gWallpaperTiles_Beach
+	.4byte 0x384
+	.4byte gWallpaperTilemap_Beach
+	.4byte gWallpaperPalettes_Beach
+
+	@ Seafloor
+	.4byte gWallpaperTiles_Seafloor
+	.4byte 0x2B4
+	.4byte gWallpaperTilemap_Seafloor
+	.4byte gWallpaperPalettes_Seafloor
+
+	@ River
+	.4byte gWallpaperTiles_River
+	.4byte 0x294
+	.4byte gWallpaperTilemap_River
+	.4byte gWallpaperPalettes_River
+
+	@ Sky
+	.4byte gWallpaperTiles_Sky
+	.4byte 0x298
+	.4byte gWallpaperTilemap_Sky
+	.4byte gWallpaperPalettes_Sky
+
+	@ Polkadot
+	.4byte gWallpaperTiles_Polkadot
+	.4byte 0x1FC
+	.4byte gWallpaperTilemap_Polkadot
+	.4byte gWallpaperPalettes_Polkadot
+
+	@ Pokecenter
+	.4byte gWallpaperTiles_Pokecenter
+	.4byte 0x3A4
+	.4byte gWallpaperTilemap_Pokecenter
+	.4byte gWallpaperPalettes_Pokecenter
+
+	@ Machine
+	.4byte gWallpaperTiles_Machine
+	.4byte 0x2F0
+	.4byte gWallpaperTilemap_Machine
+	.4byte gWallpaperPalettes_Machine
+
+	@ Plain
+	.4byte gWallpaperTiles_Plain
+	.4byte 0xFC
+	.4byte gWallpaperTilemap_Plain
+	.4byte gWallpaperPalettes_Plain
 
 	.incbin "graphics/pokemon_storage/arrow.gbapal"
 	.incbin "graphics/pokemon_storage/arrow.4bpp"
@@ -17914,7 +18107,7 @@ gUnknown_083EDE20:: @ 83EDE20
 gUnknown_083EDE24:: @ 83EDE24
 	.incbin "baserom.gba", 0x003ede24, 0x20
 
-gUnknown_083EDE44:: @ 83EDE44
+gSlotMachineSpritePalettes:: @ 83EDE44
 	obj_pal gSlotMachineSpritePalette0, 0
 	obj_pal gSlotMachineSpritePalette1, 1
 	obj_pal gSlotMachineSpritePalette2, 2
