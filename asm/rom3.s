@@ -8287,7 +8287,7 @@ unref_sub_800D684: @ 800D684
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800D6B8: .4byte gUnknown_081F96D0
+_0800D6B8: .4byte gSpriteTemplate_81F96D0
 _0800D6BC: .4byte 0x02020004
 _0800D6C0: .4byte sub_800D6C4
 	thumb_func_end unref_sub_800D684
@@ -9374,10 +9374,10 @@ _0800E014: .4byte 0x0202eac8
 _0800E018: .4byte 0x0000021e
 _0800E01C: .4byte 0x0202eec8
 _0800E020: .4byte 0x00007fff
-_0800E024: .4byte gUnknown_081F9574
+_0800E024: .4byte gSpriteTemplate_81F9574
 _0800E028: .4byte 0x02000000
 _0800E02C: .4byte 0x0001608a
-_0800E030: .4byte gUnknown_081F958C
+_0800E030: .4byte gSpriteTemplate_81F958C
 _0800E034: .4byte 0x0001608b
 _0800E038: .4byte 0x02020004
 _0800E03C:
@@ -81311,7 +81311,7 @@ _0803288A:
 	bx r0
 	.align 2, 0
 _08032894: .4byte gUnknown_081FAF24
-_08032898: .4byte gUnknown_081FAF34
+_08032898: .4byte gSpriteTemplate_81FAF34
 _0803289C: .4byte 0x02017810
 _080328A0: .4byte 0x02020004
 	thumb_func_end sub_80327CC
@@ -110373,7 +110373,7 @@ object_new_hidden_with_callback: @ 8040EB4
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08040EE8: .4byte gUnknown_082087AC
+_08040EE8: .4byte gSpriteTemplate_82087AC
 _08040EEC: .4byte 0x02020004
 	thumb_func_end object_new_hidden_with_callback
 
@@ -114463,7 +114463,7 @@ _08042E40:
 	adds r1, r2
 	b _08042F0A
 	.align 2, 0
-_08042E64: .4byte gUnknown_0820A3C8
+_08042E64: .4byte gSpriteTemplate_820A3C8
 _08042E68: .4byte 0x0300481c
 _08042E6C: .4byte 0x03001770
 _08042E70: .4byte 0x0000043c
@@ -115507,7 +115507,7 @@ sub_8043654: @ 8043654
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080436CC: .4byte gUnknown_0820A418
+_080436CC: .4byte gSpriteTemplate_820A418
 _080436D0: .4byte 0x02020004
 	thumb_func_end sub_8043654
 
@@ -115893,7 +115893,7 @@ battle_make_oam_normal_battle: @ 8043914
 	strh r0, [r2, 0x4]
 	b _080439F2
 	.align 2, 0
-_0804399C: .4byte gUnknown_0820A4EC
+_0804399C: .4byte gSpriteTemplate_820A4EC
 _080439A0: .4byte 0x02020004
 _080439A4: .4byte 0x000003ff
 _080439A8: .4byte 0xfffffc00
@@ -115949,7 +115949,7 @@ _080439F2:
 	str r1, [r0]
 	b _08043B50
 	.align 2, 0
-_08043A14: .4byte gUnknown_0820A51C
+_08043A14: .4byte gSpriteTemplate_820A51C
 _08043A18: .4byte 0x02020004
 _08043A1C: .4byte 0x000003ff
 _08043A20: .4byte 0xfffffc00
@@ -116023,7 +116023,7 @@ _08043A28:
 	movs r0, 0x1
 	b _08043B4E
 	.align 2, 0
-_08043AB8: .4byte gUnknown_0820A4EC
+_08043AB8: .4byte gSpriteTemplate_820A4EC
 _08043ABC: .4byte 0x02020004
 _08043AC0: .4byte 0x000003ff
 _08043AC4: .4byte 0xfffffc00
@@ -116187,13 +116187,13 @@ _08043B50:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08043C14: .4byte gUnknown_0820A51C
+_08043C14: .4byte gSpriteTemplate_820A51C
 _08043C18: .4byte 0x02020004
 _08043C1C: .4byte 0x000003ff
 _08043C20: .4byte 0xfffffc00
 _08043C24: .4byte sub_8043D5C
 _08043C28: .4byte 0x02024a72
-_08043C2C: .4byte gUnknown_0820A56C
+_08043C2C: .4byte gSpriteTemplate_820A56C
 _08043C30: .4byte gUnknown_0820A684
 _08043C34: .4byte 0x06010000
 _08043C38: .4byte 0x04000010
@@ -116269,7 +116269,7 @@ battle_make_oam_safari_battle: @ 8043C3C
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08043CC8: .4byte gUnknown_0820A54C
+_08043CC8: .4byte gSpriteTemplate_820A54C
 _08043CCC: .4byte 0x02020004
 _08043CD0: .4byte 0x000003ff
 _08043CD4: .4byte 0xfffffc00
@@ -117856,7 +117856,7 @@ _08044938: .4byte 0x0000ffff
 _0804493C: .4byte gUnknown_0820A784
 _08044940: .4byte gUnknown_0820A764
 _08044944: .4byte gUnknown_0820A774
-_08044948: .4byte gUnknown_0820A7A4
+_08044948: .4byte gSpriteTemplate_820A7A4
 _0804494C: .4byte 0x02020004
 _08044950: .4byte gUnknown_0820A6E4
 _08044954:
@@ -117952,7 +117952,7 @@ _080449BE:
 	b _08044A56
 	.align 2, 0
 _08044A04: .4byte 0x02020004
-_08044A08: .4byte gUnknown_0820A7D4
+_08044A08: .4byte gSpriteTemplate_820A7D4
 _08044A0C: .4byte 0xfffc0000
 _08044A10: .4byte 0x02020020
 _08044A14: .4byte sub_8045180
@@ -121210,7 +121210,7 @@ _08046370: .4byte 0xffff0000
 _08046374: .4byte gUnknown_081FAEAC
 _08046378: .4byte sub_8046388
 _0804637C: .4byte 0x02020004
-_08046380: .4byte gUnknown_081FAF0C
+_08046380: .4byte gSpriteTemplate_81FAF0C
 _08046384: .4byte 0xfff00000
 	thumb_func_end sub_8046234
 
@@ -121439,7 +121439,7 @@ _080464D6:
 	.align 2, 0
 _08046544: .4byte 0x02024a6a
 _08046548: .4byte 0x03004360
-_0804654C: .4byte gUnknown_0820AAB4
+_0804654C: .4byte gSpriteTemplate_820AAB4
 _08046550: .4byte 0x02020004
 _08046554: .4byte 0x02024c08
 _08046558: .4byte sub_8047074
@@ -123261,7 +123261,7 @@ AddTextPrinterForMessage: @ 80472F0
 	.align 2, 0
 _080473BC: .4byte gUnknown_0820A92C
 _080473C0: .4byte gUnknown_0820A98C
-_080473C4: .4byte gUnknown_0820AAB4
+_080473C4: .4byte gSpriteTemplate_820AAB4
 _080473C8: .4byte 0x02020004
 _080473CC: .4byte sub_80473D0
 	thumb_func_end AddTextPrinterForMessage
@@ -123574,7 +123574,7 @@ sub_8047580: @ 8047580
 	.align 2, 0
 _08047624: .4byte gUnknown_0820A92C
 _08047628: .4byte gUnknown_0820A98C
-_0804762C: .4byte gUnknown_0820AAB4
+_0804762C: .4byte gSpriteTemplate_820AAB4
 _08047630: .4byte 0x02020004
 _08047634: .4byte sub_8047638
 	thumb_func_end sub_8047580
@@ -124662,7 +124662,7 @@ _08047DEE:
 	.align 2, 0
 _08047E30: .4byte 0x02024ea4
 _08047E34: .4byte gUnknown_0820C2E6
-_08047E38: .4byte gUnknown_0820C0EC
+_08047E38: .4byte gSpriteTemplate_820C0EC
 _08047E3C: .4byte 0x03002978
 _08047E40: .4byte gUnknown_0820C2E9
 	thumb_func_end sub_8047D58
@@ -124729,7 +124729,7 @@ _08047E84:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08047EBC: .4byte gUnknown_0820C0EC
+_08047EBC: .4byte gSpriteTemplate_820C0EC
 	thumb_func_end sub_8047E44
 
 	thumb_func_start sub_8047EC0
@@ -125283,7 +125283,7 @@ _08048360:
 	bl nullsub_5
 	b _080484C6
 	.align 2, 0
-_080483A4: .4byte gUnknown_0820C134
+_080483A4: .4byte gSpriteTemplate_820C134
 _080483A8: .4byte gUnknown_0820C29C
 _080483AC: .4byte 0x03004824
 _080483B0: .4byte 0x03001770
@@ -125881,7 +125881,7 @@ _080488B8:
 	bl nullsub_5
 	b _080489CA
 	.align 2, 0
-_08048900: .4byte gUnknown_0820C134
+_08048900: .4byte gSpriteTemplate_820C134
 _08048904: .4byte gUnknown_0820C29C
 _08048908: .4byte 0x03004824
 _0804890C: .4byte 0x03001770
@@ -133501,7 +133501,7 @@ _0804C7D2:
 	.align 2, 0
 _0804C810: .4byte 0x02020004
 _0804C814: .4byte SpriteCallbackDummy
-_0804C818: .4byte gUnknown_0821595C
+_0804C818: .4byte gSpriteTemplate_821595C
 _0804C81C: .4byte 0x00000103
 _0804C820: .4byte sub_804D738
 _0804C824:
@@ -133627,7 +133627,7 @@ _0804C906:
 	ldr r1, [r6]
 	bl _0804D53C
 	.align 2, 0
-_0804C928: .4byte gUnknown_08215A80
+_0804C928: .4byte gSpriteTemplate_8215A80
 _0804C92C:
 	ldr r2, _0804C96C
 	ldr r0, [r6]
@@ -133701,7 +133701,7 @@ _0804C9AE:
 	strb r0, [r1]
 	bl _0804D570
 	.align 2, 0
-_0804C9C4: .4byte gUnknown_08215A30
+_0804C9C4: .4byte gSpriteTemplate_8215A30
 _0804C9C8:
 	ldr r0, _0804CA0C
 	movs r1, 0x80
@@ -133733,9 +133733,9 @@ _0804C9C8:
 	ldr r1, [r4]
 	bl _0804D53C
 	.align 2, 0
-_0804CA0C: .4byte gUnknown_082159BC
+_0804CA0C: .4byte gSpriteTemplate_82159BC
 _0804CA10: .4byte 0x03004828
-_0804CA14: .4byte gUnknown_082159FC
+_0804CA14: .4byte gSpriteTemplate_82159FC
 _0804CA18: .4byte 0x02020004
 _0804CA1C:
 	ldr r2, [r6]
@@ -133892,7 +133892,7 @@ _0804CB24:
 	ldr r1, [r4]
 	bl _0804D53C
 	.align 2, 0
-_0804CB68: .4byte gUnknown_082159FC
+_0804CB68: .4byte gSpriteTemplate_82159FC
 _0804CB6C: .4byte 0x03004828
 _0804CB70:
 	ldr r0, _0804CBC0
@@ -134373,8 +134373,8 @@ _0804CEFA:
 	b _0804D570
 	.align 2, 0
 _0804CF58: .4byte 0x0202f388
-_0804CF5C: .4byte gUnknown_082159BC
-_0804CF60: .4byte gUnknown_082159FC
+_0804CF5C: .4byte gSpriteTemplate_82159BC
+_0804CF60: .4byte gSpriteTemplate_82159FC
 _0804CF64: .4byte 0x02020004
 _0804CF68:
 	movs r1, 0x1
@@ -134557,7 +134557,7 @@ _0804D0B0:
 	str r1, [r0]
 	b _0804D570
 	.align 2, 0
-_0804D0C8: .4byte gUnknown_08215A30
+_0804D0C8: .4byte gSpriteTemplate_8215A30
 _0804D0CC: .4byte 0x02020004
 _0804D0D0: .4byte sub_804B0E0
 _0804D0D4:
@@ -134576,7 +134576,7 @@ _0804D0D4:
 	strh r1, [r0]
 	b _0804D570
 	.align 2, 0
-_0804D0F4: .4byte gUnknown_08215A80
+_0804D0F4: .4byte gSpriteTemplate_8215A80
 _0804D0F8: .4byte 0x03004828
 _0804D0FC:
 	ldr r2, _0804D138
@@ -134781,7 +134781,7 @@ _0804D1F4:
 	str r0, [r1]
 	b _0804D570
 	.align 2, 0
-_0804D290: .4byte gUnknown_0821595C
+_0804D290: .4byte gSpriteTemplate_821595C
 _0804D294: .4byte 0x03004828
 _0804D298: .4byte 0x00000103
 _0804D29C: .4byte 0x02020004
@@ -137085,7 +137085,7 @@ _0804E626:
 	.align 2, 0
 _0804E668: .4byte gUnknown_082162E4
 _0804E66C: .4byte 0x03004854
-_0804E670: .4byte gUnknown_082163F4
+_0804E670: .4byte gSpriteTemplate_82163F4
 _0804E674: .4byte 0x02020004
 _0804E678: .4byte sub_804E2BC
 _0804E67C:
@@ -137793,7 +137793,7 @@ _0804EC9A:
 	.align 2, 0
 _0804ECD8: .4byte gUnknown_082162E4
 _0804ECDC: .4byte 0x03004854
-_0804ECE0: .4byte gUnknown_082163F4
+_0804ECE0: .4byte gSpriteTemplate_82163F4
 _0804ECE4: .4byte 0x02020004
 _0804ECE8:
 	movs r0, 0x1
@@ -138198,7 +138198,7 @@ _0804F00C:
 	bl CreateSprite
 	b _0804F0AA
 	.align 2, 0
-_0804F01C: .4byte gUnknown_08216548
+_0804F01C: .4byte gSpriteTemplate_8216548
 _0804F020:
 	mov r0, r8
 	b _0804F0AC
@@ -138791,7 +138791,7 @@ _0804F49A:
 	.align 2, 0
 _0804F4DC: .4byte gUnknown_082162E4
 _0804F4E0: .4byte 0x03004854
-_0804F4E4: .4byte gUnknown_082163F4
+_0804F4E4: .4byte gSpriteTemplate_82163F4
 _0804F4E8: .4byte 0x02020004
 _0804F4EC:
 	movs r0, 0x1
@@ -139088,7 +139088,7 @@ _0804F720:
 	ldr r1, [r0]
 	b _0804F74C
 	.align 2, 0
-_0804F734: .4byte gUnknown_08216548
+_0804F734: .4byte gSpriteTemplate_8216548
 _0804F738: .4byte 0x03004854
 _0804F73C:
 	mov r5, r8
@@ -139785,7 +139785,7 @@ sub_804FC48: @ 804FC48
 	bl audio_play
 	b _0804FD18
 	.align 2, 0
-_0804FCBC: .4byte gUnknown_0821645C
+_0804FCBC: .4byte gSpriteTemplate_821645C
 _0804FCC0: .4byte gUnknown_082162E4
 _0804FCC4: .4byte gUnknown_082162CC
 _0804FCC8: .4byte 0x00004523
@@ -143040,7 +143040,7 @@ _08051628:
 _08051638: .4byte gUnknown_08208344
 _0805163C: .4byte 0x02020004
 _08051640: .4byte 0x03004854
-_08051644: .4byte gUnknown_082164FC
+_08051644: .4byte gSpriteTemplate_82164FC
 _08051648: .4byte 0x02020020
 _0805164C: .4byte sub_8051524
 	thumb_func_end sub_805156C
@@ -143352,7 +143352,7 @@ _08051872:
 	bl CreateSprite
 	b _080518BE
 	.align 2, 0
-_080518A8: .4byte gUnknown_0821657C
+_080518A8: .4byte gSpriteTemplate_821657C
 _080518AC:
 	movs r0, 0
 	strh r0, [r4, 0x2E]
@@ -144736,7 +144736,7 @@ _080522B6:
 	b _0805243C
 	.align 2, 0
 _0805236C: .4byte gUnknown_0842D4CB
-_08052370: .4byte gUnknown_0821645C
+_08052370: .4byte gSpriteTemplate_821645C
 _08052374: .4byte 0x03004854
 _08052378: .4byte 0x02020004
 _0805237C: .4byte SpriteCallbackDummy

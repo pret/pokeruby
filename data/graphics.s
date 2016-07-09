@@ -3024,29 +3024,111 @@ gUnknown_08E96D2C:: @ 8E96D2C
 
 gUnknown_08E96EC8:: @ 8E96EC8
 	.incbin "baserom.gba", 0x00e96ec8, 0x800
-	.incbin "graphics/slot_machine/slot_machine1.gbapal" @ palettes
-	.incbin "graphics/slot_machine/slot_machine2.gbapal"
+
+	.align 2
+gSlotMachineSpritePalette0:: @ 8E976C8
+	.incbin "graphics/slot_machine/spr0.gbapal"
+
+	.align 2
+gSlotMachineSpritePalette1:: @ 8E976E8
+	.incbin "graphics/slot_machine/spr1.gbapal"
+
+	.align 2
+gSlotMachineSpritePalette2:: @ 8E97708
 	.ifdef SAPPHIRE
-	.incbin "graphics/slot_machine/slot_machine3_sapphire.gbapal"
-	.incbin "graphics/slot_machine/slot_machine4_sapphire.gbapal"
+	.incbin "graphics/slot_machine/spr2_sapphire.gbapal"
 	.else
-	.incbin "graphics/slot_machine/slot_machine3.gbapal"
-	.incbin "graphics/slot_machine/slot_machine4.gbapal"
+	.incbin "graphics/slot_machine/spr2_ruby.gbapal"
 	.endif
-	.incbin "graphics/slot_machine/slot_machine5.gbapal"
-	.incbin "graphics/slot_machine/slot_machine6.gbapal"
-	.incbin "graphics/slot_machine/slot_machine7.gbapal"
+
+	.align 2
+gSlotMachineSpritePalette3:: @ 8E97728
+	.ifdef SAPPHIRE
+	.incbin "graphics/slot_machine/spr3_sapphire.gbapal"
+	.else
+	.incbin "graphics/slot_machine/spr3_ruby.gbapal"
+	.endif
+
+	.align 2
+gSlotMachineSpritePalette4:: @ 8E97748
+	.incbin "graphics/slot_machine/spr4.gbapal"
+
+	.align 2
+gSlotMachineSpritePalette5:: @ 8E97768
+	.incbin "graphics/slot_machine/spr5.gbapal"
+
+	.align 2
+gSlotMachineSpritePalette6:: @ 8E97788
+	.incbin "graphics/slot_machine/spr6.gbapal"
+
 	.incbin "graphics/slot_machine/reel_symbols.4bpp"
 	.incbin "graphics/slot_machine/numbers.4bpp"
+
+	.align 2
+gSpriteImage_8E98828:: @ 8E98828
 	.incbin "graphics/slot_machine/bolt.4bpp"
+
+	.align 2
+gSpriteImage_8E98848:: @ 8E98848
 	.incbin "graphics/slot_machine/duck.4bpp"
+
+	.align 2
+gSpriteImage_8E98868:: @ 8E98868
 	.incbin "graphics/slot_machine/smoke.4bpp"
-	.incbin "graphics/slot_machine/reel_numbers.4bpp"
-	.incbin "graphics/slot_machine/bolt_large.4bpp"
-	.incbin "graphics/slot_machine/reel_explosion.4bpp"
+
+	.align 2
+gSpriteImage_8E988E8:: @ 8E988E8
+	.incbin "graphics/slot_machine/reel_time_numbers/0.4bpp"
+
+	.align 2
+gSpriteImage_8E98968:: @ 8E98968
+	.incbin "graphics/slot_machine/reel_time_numbers/1.4bpp"
+
+	.align 2
+gSpriteImage_8E989E8:: @ 8E989E8
+	.incbin "graphics/slot_machine/reel_time_numbers/2.4bpp"
+
+	.align 2
+gSpriteImage_8E98A68:: @ 8E98A68
+	.incbin "graphics/slot_machine/reel_time_numbers/3.4bpp"
+
+	.align 2
+gSpriteImage_8E98AE8:: @ 8E98AE8
+	.incbin "graphics/slot_machine/reel_time_numbers/4.4bpp"
+
+	.align 2
+gSpriteImage_8E98B68:: @ 8E98B68
+	.incbin "graphics/slot_machine/reel_time_numbers/5.4bpp"
+
+	.align 2
+gSpriteImage_8E98BE8:: @ 8E98BE8
+	.incbin "graphics/slot_machine/large_bolt/0.4bpp"
+
+	.align 2
+gSpriteImage_8E98CE8:: @ 8E98CE8
+	.incbin "graphics/slot_machine/large_bolt/1.4bpp"
+
+	.align 2
+gSpriteImage_8E98DE8:: @ 8E98DE8
+	.incbin "graphics/slot_machine/reel_time_explosion/0.4bpp"
+
+	.align 2
+gSpriteImage_8E98FE8:: @ 8E98FE8
+	.incbin "graphics/slot_machine/reel_time_explosion/1.4bpp"
+
+	.align 2
+gSpriteImage_8E991E8:: @ 8E991E8
 	.incbin "graphics/slot_machine/shadow.4bpp"
-	.incbin "graphics/slot_machine/reel_shock.4bpp"
-	.incbin "baserom.gba", 0x00E997E8, 0x60
+
+	.align 2
+gSpriteImage_8E993E8:: @ 8E993E8
+	.incbin "graphics/slot_machine/pika_aura.4bpp"
+
+	.incbin "baserom.gba", 0x00E997E8, 0x20
+
+	.align 2
+gSpriteImage_8E99808:: @ 8E99808
+	.incbin "graphics/unknown_sprites/8E99808.4bpp"
 
 gUnknown_08E99848:: @ 8E99848
 	.incbin "baserom.gba", 0x00e99848, 0x768

@@ -11153,7 +11153,7 @@ sub_8079F44: @ 8079F44
 	b _0807A02E
 	.align 2, 0
 _08079FE0: .4byte gUnknown_0837F5E0
-_08079FE4: .4byte gUnknown_0837F5B0
+_08079FE4: .4byte gSpriteTemplate_837F5B0
 _08079FE8: .4byte gMonFrontPicTable
 _08079FEC: .4byte gUnknown_081E7C74
 _08079FF0:
@@ -11221,7 +11221,7 @@ _0807A06C: .4byte gUnknown_081E9114
 _0807A070: .4byte 0x06010000
 _0807A074: .4byte 0x040000d4
 _0807A078: .4byte 0x84000200
-_0807A07C: .4byte gUnknown_0837F5B0
+_0807A07C: .4byte gSpriteTemplate_837F5B0
 _0807A080: .4byte gUnknown_081E7C74
 _0807A084:
 	lsls r0, r7, 1
@@ -11271,7 +11271,7 @@ _0807A0D0:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0807A0E4: .4byte gUnknown_0837F5B0
+_0807A0E4: .4byte gSpriteTemplate_837F5B0
 _0807A0E8: .4byte gUnknown_081E9114
 _0807A0EC: .4byte 0x02020004
 _0807A0F0: .4byte gUnknown_081E7C18

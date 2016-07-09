@@ -96,8 +96,8 @@ ContestString_DescScaleWithExcitement:
 	.string "The appeal works best the\nmore the crowd is excited.$"
 ContestString_DescStopExcitement:
 	.string "Temporarily stops the\ncrowd from growing excited.$"
-	.align 1
 
+	.align 2
 gUnknown_083CADD4:: @ 83CADD4
 	.4byte ContestString_DescHighlyAppealing
 	.4byte ContestString_DescStartled1
@@ -147,6 +147,7 @@ gUnknown_083CADD4:: @ 83CADD4
 	.4byte ContestString_DescStartled22
 	.4byte ContestString_DescScaleWithExcitement
 	.4byte ContestString_DescStopExcitement
+
 ContestString_MoveRainDance:
 	.string "RAIN DANCE$"
 ContestString_MoveRage:
@@ -173,6 +174,7 @@ ContestString_MoveDefenseCurl:
 	.string "DEFENSE CURL$"
 ContestString_MoveLockOn:
 	.string "LOCK-ON$"
+
 	.align 2
 	.4byte ContestString_MoveRainDance
 	.4byte ContestString_MoveRainDance
@@ -188,6 +190,7 @@ ContestString_MoveLockOn:
 	.4byte ContestString_MoveVicegrip
 	.4byte ContestString_MoveDefenseCurl
 	.4byte ContestString_MoveLockOn
+
 ContestString_Cool:
 	.string "COOL$"
 ContestString_Beauty:
@@ -198,7 +201,7 @@ ContestString_Smart:
 	.string "SMART$"
 ContestString_Tough:
 	.string "TOUGH$"
-	
+
 	.align 2
 gUnknown_083CAF70:: @ 83CAF70
 	.4byte ContestString_Cool
@@ -249,6 +252,7 @@ ContestString_WorkRatherWell:
 	.string "It worked rather well.$"
 ContestString_WorkBetter:
 	.string "It worked a little better\nthan usual.$"
+
 	.align 2
 	.4byte ContestString_AppealJammed
 	.4byte ContestString_FollowLead
@@ -263,6 +267,7 @@ ContestString_WorkBetter:
 	.4byte ContestString_JudgeExpectantly
 	.4byte ContestString_WorkRatherWell
 	.4byte ContestString_WorkBetter
+
 ContestString_StandOutNone:
 	.string "{STR_VAR_1} failed to\nstand out at all...{PAUSE_UNTIL_PRESS}$"
 ContestString_StandOutNotMuch:
@@ -275,7 +280,7 @@ ContestString_StandOutTotal:
 	.string "{STR_VAR_1} commanded\ntotal attention.{PAUSE_UNTIL_PRESS}$"
 ContestString_StandOutDidnt:
 	.string "{STR_VAR_1} hasn’t made\nits appeal.{PAUSE_UNTIL_PRESS}$"
-	
+
 	.align 2
 gUnknown_083CB2F0:: @ 83CB2F0
 	.4byte ContestString_StandOutNone
@@ -284,6 +289,7 @@ gUnknown_083CB2F0:: @ 83CB2F0
 	.4byte ContestString_StandOutLot
 	.4byte ContestString_StandOutTotal
 	.4byte ContestString_StandOutDidnt
+
 ContestString_AppealAnticipation3:
 	.string "Anticipation swelled for\n{STR_VAR_1}’s appeal next.$"
 ContestString_JudgeSatisfied:
@@ -336,6 +342,7 @@ ContestString_AppealSame:
 	.string "Everyone’s appeals were\nmade the same.$"
 ContestString_AppealFullWorse:
 	.string "Its {STR_VAR_1} is full.\nIt worsened its appeal.$"
+
 	.align 2
 	.4byte ContestString_JudgeHeldFirm
 	.4byte ContestString_ChangedPerceptions
@@ -606,8 +613,8 @@ gUnknown_083CC299:: @ 83CC299
 	.string "hesitancy$"
 
 gUnknown_083CC2A3:: @ 83CC2A3
-ContestString_Fear: @unused
 	.string "fear$"
+
 ContestString_Coolness:
 	.string "coolness$"
 ContestString_Beauty2:
@@ -618,7 +625,7 @@ ContestString_Smartness:
 	.string "smartness$"
 ContestString_Toughness:
 	.string "toughness$"
-	
+
 	.align 2
 gUnknown_083CC2D8:: @ 83CC2D8
 	.4byte ContestString_Coolness
@@ -629,10 +636,36 @@ gUnknown_083CC2D8:: @ 83CC2D8
 
 gUnknown_083CC2EC:: @ 83CC2EC
 	.string "TENSION:$"
+
+ContestString_CoolMove:
 	.string "COOL Move$"
+
+ContestString_BeautyMove:
 	.string "BEAUTY Move$"
+
+ContestString_CuteMove:
 	.string "CUTE Move$"
+
+ContestString_SmartMove:
 	.string "SMART Move$"
+
+ContestString_ToughMove:
 	.string "TOUGH Move$"
+
+ContestString_UnknownMoveType:
 	.string "???$"
+
 	.align 2
+gUnknown_083CC330:: @ 83CC330
+	.4byte ContestString_CoolMove
+	.4byte ContestString_BeautyMove
+	.4byte ContestString_CuteMove
+	.4byte ContestString_SmartMove
+	.4byte ContestString_ToughMove
+	.4byte ContestString_UnknownMoveType
+
+@ unused?
+ContestString_Rank:
+	.string "RANK$"
+
+	.string "{HIGHLIGHT TRANSPARENT}{COLOR MAGENTA} $"
