@@ -536,6 +536,7 @@ gUnknown_081F95AC:: @ 81F95AC
 gUnknown_081F9674:: @ 81F9674
 	.incbin "baserom.gba", 0x001f9674, 0xc
 
+	.align 2
 gUnknown_081F9680:: @ 81F9680
 	obj_tiles 0x030041d0, 32, 0x1013
 
@@ -1352,27 +1353,35 @@ gSpriteTemplate_820A418:: @ 820A418
 gUnknown_0820A430:: @ 820A430
 	.incbin "baserom.gba", 0x0020a430, 0x4c
 
+	.align 2
 gUnknown_0820A47C:: @ 820A47C
 	obj_tiles 0x08d1f52c, 4096, 0xd6ff
 
+	.align 2
 gUnknown_0820A484:: @ 820A484
 	obj_tiles 0x08d1f7e0, 4096, 0xd701
 
+	.align 2
 gUnknown_0820A48C:: @ 820A48C
 	obj_tiles 0x08d1f96c, 2048, 0xd6ff
 
+	.align 2
 gUnknown_0820A494:: @ 820A494
 	obj_tiles 0x08d1f96c, 2048, 0xd700
 
+	.align 2
 gUnknown_0820A49C:: @ 820A49C
 	obj_tiles 0x08d1fb04, 2048, 0xd701
 
+	.align 2
 gUnknown_0820A4A4:: @ 820A4A4
 	obj_tiles 0x08d1fb04, 2048, 0xd702
 
+	.align 2
 gUnknown_0820A4AC:: @ 820A4AC
 	obj_tiles 0x08d1fc94, 4096, 0xd70b
 
+	.align 2
 gUnknown_0820A4B4:: @ 820A4B4
 	obj_tiles 0x08d0314c, 256, 0xd704
 	obj_tiles 0x08d0314c, 288, 0xd705
@@ -1442,14 +1451,17 @@ gUnknown_0820A6E4:: @ 820A6E4
 gUnknown_0820A6EC:: @ 820A6EC
 	.incbin "baserom.gba", 0x0020a6ec, 0x68
 
+	.align 2
 gUnknown_0820A754:: @ 820A754
 	obj_tiles 0x08e6a758, 512, 0xd70c
 	obj_tiles 0x08e6a758, 512, 0xd70d
 
+	.align 2
 gUnknown_0820A764:: @ 820A764
 	obj_pal 0x08d1212c, 0xd710
 	obj_pal 0x08d1212c, 0xd711
 
+	.align 2
 gUnknown_0820A774:: @ 820A774
 	obj_pal 0x08d1214c, 0xd712
 	obj_pal 0x08d1214c, 0xd713
@@ -1527,6 +1539,7 @@ gUnknown_0820A8DC:: @ 820A8DC
 gUnknown_0820A904:: @ 820A904
 	.incbin "baserom.gba", 0x0020a904, 0x28
 
+	.align 2
 gUnknown_0820A92C:: @ 820A92C @ graphics
 	obj_tiles gInterfaceGfx_PokeBall, 384, 0xd6d8 @ poke
 	obj_tiles gInterfaceGfx_GreatBall, 384, 0xd6d9 @ great
@@ -1541,6 +1554,7 @@ gUnknown_0820A92C:: @ 820A92C @ graphics
 	obj_tiles gInterfaceGfx_LuxuryBall, 384, 0xd6e2 @ luxury
 	obj_tiles gInterfaceGfx_PremierBall, 384, 0xd6e3 @ premier
 
+	.align 2
 gUnknown_0820A98C:: @ 820A98C
 	obj_pal gInterfacePal_PokeBall, 0xD6D8 @ poke
 	obj_pal gInterfacePal_GreatBall, 0xD6D9 @ great
@@ -1734,6 +1748,7 @@ gSpriteAnimTable_820C024:: @ 820C024
 	.align 2
 	.incbin "baserom.gba", 0x20c03c, 0x40
 
+	.align 2
 gUnknown_0820C07C:: @ 820C07C
 	obj_tiles 0x0201d000, 256, 0x00c8
 	obj_tiles 0x0201d100, 256, 0x00c9
@@ -1749,6 +1764,7 @@ gUnknown_0820C07C:: @ 820C07C
 	obj_tiles 0x0201db00, 256, 0x00d3
 	obj_tiles 0x0201dc00, 256, 0x00d4
 
+	.align 2
 gUnknown_0820C0E4:: @ 820C0E4
 	obj_pal 0x0820c03c, 0x133d
 
@@ -1777,9 +1793,11 @@ gSpriteAnimTable_820C11C:: @ 820C11C
 	.4byte gSpriteAnim_820C10C
 	.4byte gSpriteAnim_820C114
 
+	.align 2
 gUnknown_0820C124:: @ 820C124
 	obj_tiles 0x08ea1dec, 2048, 0x012c
 
+	.align 2
 gUnknown_0820C12C:: @ 820C12C
 	obj_pal 0x08ea0328, 0x0929
 
@@ -2033,12 +2051,15 @@ gSpriteAffineAnim_8215988:: @ 8215988
 gSpriteAffineAnimTable_82159A0:: @ 82159A0
 	.4byte gSpriteAffineAnim_8215988
 
+	.align 2
 gUnknown_082159A4:: @ 82159A4
 	obj_tiles 0x08212138, 512, 0x15ae
 
+	.align 2
 gUnknown_082159AC:: @ 82159AC
 	obj_pal 0x08212118, 0x15af
 
+	.align 2
 gUnknown_082159B4:: @ 82159B4
 	obj_pal 0x082120b8, 0x15b3
 
@@ -2067,6 +2088,7 @@ gSpriteAnimTable_82159EC:: @ 82159EC
 	.4byte gSpriteAnim_82159DC
 	.4byte gSpriteAnim_82159E4
 
+	.align 2
 gUnknown_082159F4:: @ 82159F4
 	obj_tiles 0x08212338, 768, 0x15b0
 
@@ -2089,6 +2111,7 @@ gSpriteAnim_8215A1C:: @ 8215A1C
 gSpriteAnimTable_8215A24:: @ 8215A24
 	.4byte gSpriteAnim_8215A1C
 
+	.align 2
 gUnknown_08215A28:: @ 8215A28
 	obj_tiles 0x08212538, 256, 0x15b2
 
@@ -2118,6 +2141,7 @@ gSpriteAnim_8215A50:: @ 8215A50
 gSpriteAnimTable_8215A74:: @ 8215A74
 	.4byte gSpriteAnim_8215A50
 
+	.align 2
 gUnknown_08215A78:: @ 8215A78
 	obj_tiles 0x08212738, 4096, 0x15b4
 
@@ -2331,12 +2355,15 @@ gSpriteAnimTable_82163AC:: @ 82163AC
 	.4byte gSpriteAnim_821639C
 	.4byte gSpriteAnim_82163A4
 
+	.align 2
 gUnknown_082163DC:: @ 82163DC
 	obj_tiles 0x08e91618, 2048, 0xb5d1
 
+	.align 2
 gUnknown_082163E4:: @ 82163E4
 	obj_pal 0x08e920d8, 0xb5d2
 
+	.align 2
 gUnknown_082163EC:: @ 82163EC
 	obj_pal 0x08e920f8, 0x3018
 
@@ -2381,6 +2408,7 @@ gSpriteAnimTable_8216444:: @ 8216444
 	.4byte gSpriteAnim_8216424
 	.4byte gSpriteAnim_821643C
 
+	.align 2
 gUnknown_08216454:: @ 8216454
 	obj_tiles 0x08e90618, 512, 0xbef8
 
@@ -2442,6 +2470,7 @@ gSpriteAnimTable_82164E0:: @ 82164E0
 	.4byte gSpriteAnim_82164D0
 	.4byte gSpriteAnim_82164D8
 
+	.align 2
 gUnknown_082164F4:: @ 82164F4
 	obj_tiles 0x08e90818, 224, 0x5ba0
 
@@ -2476,6 +2505,7 @@ gSpriteAnimTable_8216534:: @ 8216534
 	.4byte gSpriteAnim_8216524
 	.4byte gSpriteAnim_821652C
 
+	.align 2
 gUnknown_08216540:: @ 8216540
 	obj_tiles 0x08e90a18, 1536, 0x3039
 
@@ -2498,6 +2528,7 @@ gSpriteAnim_8216568:: @ 8216568
 gSpriteAnimTable_8216570:: @ 8216570
 	.4byte gSpriteAnim_8216568
 
+	.align 2
 gUnknown_08216574:: @ 8216574
 	obj_tiles 0x08e91018, 1024, 0x303a
 
@@ -4793,6 +4824,7 @@ gUnknown_08376500:: @ 8376500
 gUnknown_08376504:: @ 8376504
 	.incbin "baserom.gba", 0x00376504, 0xd8
 
+	.align 2
 gUnknown_083765DC:: @ 83765DC
 	obj_tiles 0x0837657c, 64, 0xd750
 
@@ -6131,6 +6163,7 @@ gSpriteTemplate_837F5B0:: @ 837F5B0
 gSpriteTemplate_837F5C8:: @ 837F5C8
 	spr_template 55126, 55126, gOamData_837DF9C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
+	.align 2
 gUnknown_0837F5E0:: @ 837F5E0
 	obj_tiles 0x082089dc, 2048, 0xd755
 	obj_tiles 0x082089dc, 2048, 0xd756
@@ -7092,6 +7125,7 @@ gSpriteAffineAnimTable_839AB8C:: @ 839AB8C
 gSpriteTemplate_839AB90:: @ 839AB90
 	spr_template 4609, 4608, gOamData_839AB2C, gSpriteAnimTable_839AB64, NULL, gSpriteAffineAnimTable_839AB8C, sub_807F688
 
+	.align 2
 gUnknown_0839ABA8:: @ 839ABA8
 	obj_tiles 0x08397948, 2048, 0x1201
 
@@ -7165,6 +7199,7 @@ gSpriteAnimTable_839AC34:: @ 839AC34
 gSpriteTemplate_839AC3C:: @ 839AC3C
 	spr_template 4612, 4609, gOamData_839AC1C, gSpriteAnimTable_839AC34, NULL, gDummySpriteAffineAnimTable, sub_8080338
 
+	.align 2
 gUnknown_0839AC54:: @ 839AC54
 	obj_tiles 0x08399fc8, 2560, 0x1204
 
@@ -7174,6 +7209,7 @@ gUnknown_0839AC5C:: @ 839AC5C
 gUnknown_0839AC68:: @ 839AC68
 	.incbin "baserom.gba", 0x0039ac68, 0x8
 
+	.align 2
 gUnknown_0839AC70:: @ 839AC70
 	obj_tiles 0x08398988, 64, 0x1205
 
@@ -8240,15 +8276,19 @@ gUnknown_083B6DB4:: @ 83B6DB4
 gUnknown_083B6DB8:: @ 83B6DB8
 	.4byte 0x02039360
 
+	.align 2
 gUnknown_083B6DBC:: @ 83B6DBC
 	obj_pal 0x083b6b94, 0xdacd
 
+	.align 2
 gUnknown_083B6DC4:: @ 83B6DC4
 	obj_tiles 0x083b6bb4, 448, 0x0005
 
+	.align 2
 gUnknown_083B6DCC:: @ 83B6DCC
 	obj_tiles 0x02002784, 2048, 0x0002
 
+	.align 2
 gUnknown_083B6DD4:: @ 83B6DD4
 	obj_pal 0x02002704, 0xdac7
 
@@ -8661,6 +8701,7 @@ gWallpaperTable:: @ 83BB0E8
 	.incbin "graphics/pokemon_storage/arrow.gbapal"
 	.incbin "graphics/pokemon_storage/arrow.4bpp"
 
+	.align 2
 gUnknown_083BB288:: @ 83BB288
 	obj_tiles 0x083bb208, 128, 0x0006
 
@@ -9017,6 +9058,7 @@ gSpriteAnimTable_83C115C:: @ 83C115C
 	.4byte gSpriteAnim_83C114C
 	.4byte gSpriteAnim_83C1154
 
+	.align 2
 gUnknown_083C11B8:: @ 83C11B8
 	obj_tiles 0x08e71d10, 5888, 0x7532
 
@@ -9096,9 +9138,11 @@ gSpriteAnimTable_83C1248:: @ 83C1248
 	.4byte gSpriteAnim_83C1238
 	.4byte gSpriteAnim_83C1240
 
+	.align 2
 gUnknown_083C1270:: @ 83C1270
 	obj_tiles 0x08e7274c, 1024, 0x7530
 
+	.align 2
 gUnknown_083C1278:: @ 83C1278
 	obj_pal 0x08e72848, 0x7530
 
@@ -9157,9 +9201,11 @@ gSpriteAnimTable_83C12D8:: @ 83C12D8
 	.4byte gSpriteAnim_83C12C8
 	.4byte gSpriteAnim_83C12D0
 
+	.align 2
 gUnknown_083C12F4:: @ 83C12F4
 	obj_tiles 0x08e72860, 896, 0x7531
 
+	.align 2
 gUnknown_083C12FC:: @ 83C12FC
 	obj_pal 0x08e72a50, 0x7531
 
@@ -9362,12 +9408,15 @@ gSpriteAffineAnim_83C1C9C:: @ 83C1C9C
 gSpriteAffineAnimTable_83C1CC4:: @ 83C1CC4
 	.4byte gSpriteAffineAnim_83C1C9C
 
+	.align 2
 gUnknown_083C1CC8:: @ 83C1CC8
 	obj_tiles 0x08e75024, 12288, 0x7530
 
+	.align 2
 gUnknown_083C1CD0:: @ 83C1CD0
 	obj_tiles 0x08e75ba0, 12288, 0x7530
 
+	.align 2
 gUnknown_083C1CD8:: @ 83C1CD8
 	obj_pal 0x08e76700, 0x7530
 
@@ -9400,6 +9449,7 @@ gSpriteAffineAnimTable_83C1D20:: @ 83C1D20
 gSpriteImageTable_83C1D28:: @ 83C1D28
 	obj_frame_tiles gSpriteImage_83C172C, 0x80
 
+	.align 2
 gUnknown_083C1D30:: @ 83C1D30
 	obj_pal 0x083c170c, 0x0008
 
@@ -9467,6 +9517,7 @@ gSpriteTemplate_83C1E04:: @ 83C1E04
 @ 83C1E1C
 	.include "data/graphics/berries/graphics_table.s"
 
+	.align 2
 gUnknown_083C1F74:: @ 83C1F74
 	obj_tiles 0x08e78bb4, 2048, 0x2710
 
@@ -9584,6 +9635,7 @@ gUnknown_083C9296:: @ 83C9296
 gUnknown_083C92A8:: @ 83C92A8
 	.incbin "baserom.gba", 0x003c92a8, 0xc
 
+	.align 2
 gUnknown_083C92B4:: @ 83C92B4
 	obj_tiles 0x083c922d, 32, 0x04b0
 
@@ -9734,6 +9786,7 @@ gSpriteAffineAnimTable_83CA3A0:: @ 83CA3A0
 gSpriteTemplate_83CA3AC:: @ 83CA3AC
 	spr_template 20004, 44000, gOamData_83CA358, gDummySpriteAnimTable, NULL, gSpriteAffineAnimTable_83CA3A0, SpriteCallbackDummy
 
+	.align 2
 gUnknown_083CA3C4:: @ 83CA3C4
 	obj_tiles 0x08e69404, 256, 0x4e26
 	obj_tiles 0x08e69404, 256, 0x4e27
@@ -9771,6 +9824,7 @@ gSpriteTemplate_83CA43C:: @ 83CA43C
 gUnknown_083CA464:: @ 83CA464
 	.incbin "baserom.gba", 0x003ca464, 0x8
 
+	.align 2
 gUnknown_083CA46C:: @ 83CA46C
 	obj_tiles 0x08e69648, 1024, 0xabe2
 
@@ -9797,12 +9851,15 @@ gOamData_83CA49C:: @ 83CA49C
 gSpriteTemplate_83CA4A4:: @ 83CA4A4
 	spr_template 20005, 20005, gOamData_83CA49C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
+	.align 2
 gUnknown_083CA4BC:: @ 83CA4BC
 	obj_tiles 0x08d1c748, 2048, 0x4e25
 
+	.align 2
 gUnknown_083CA4C4:: @ 83CA4C4
 	obj_tiles 0x08d19590, 896, 0xabe0
 
+	.align 2
 gUnknown_083CA4CC:: @ 83CA4CC
 	obj_pal 0x08d19734, 0xabe0
 
@@ -9910,6 +9967,7 @@ gSpriteTemplate_83CC484:: @ 83CC484
 gSpriteTemplate_83CC49C:: @ 83CC49C
 	spr_template 20000, 20003, gOamData_83CC44C, gSpriteAnimTable_83CC3F4, NULL, gSpriteAffineAnimTable_83CC43C, SpriteCallbackDummy
 
+	.align 2
 gUnknown_083CC4B4:: @ 83CC4B4
 	obj_tiles 0x08d0314c, 4096, 0x80e8
 	obj_tiles 0x08d0314c, 4096, 0x80e9
@@ -10342,9 +10400,11 @@ gSpriteAnimTable_83CF568:: @ 83CF568
 gSpriteTemplate_83CF56C:: @ 83CF56C
 	spr_template 10018, 10018, gOamData_83CF558, gSpriteAnimTable_83CF568, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
+	.align 2
 gUnknown_083CF584:: @ 83CF584
 	obj_tiles 0x08e77a5c, 256, 0x2722
 
+	.align 2
 gUnknown_083CF58C:: @ 83CF58C
 	obj_pal 0x08e77900, 0x2722
 
@@ -10725,6 +10785,7 @@ gOamData_83D1744:: @ 83D1744
 gSpriteTemplate_83D174C:: @ 83D174C
 	spr_template 3009, 3009, gOamData_83D1744, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
+	.align 2
 gUnknown_083D1764:: @ 83D1764
 	obj_tiles 0x082089dc, 1024, 0x0bc1
 	obj_tiles 0x082089dc, 1024, 0x0bc2
@@ -10748,9 +10809,11 @@ gOamData_83D17AC:: @ 83D17AC
 gSpriteTemplate_83D17B4:: @ 83D17B4
 	spr_template 3017, 3017, gOamData_83D17AC, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80C3DF0
 
+	.align 2
 gUnknown_083D17CC:: @ 83D17CC
 	obj_tiles 0x08d2d7d4, 544, 0x0bc9
 
+	.align 2
 gUnknown_083D17D4:: @ 83D17D4
 	obj_pal 0x08d2d8f4, 0x0bc9
 
@@ -10772,9 +10835,11 @@ gUnknown_083D188C:: @ 83D188C
 gUnknown_083D188E:: @ 83D188E
 	.incbin "baserom.gba", 0x003d188e, 0xa
 
+	.align 2
 gUnknown_083D1898:: @ 83D1898
 	obj_pal 0x083d190c, 0x0080
 
+	.align 2
 gUnknown_083D18A0:: @ 83D18A0
 	obj_pal 0x083d18ec, 0x0000
 
@@ -15985,6 +16050,7 @@ gUnknown_083DBD10:: @ 83DBD10
 gSpriteTemplate_83DBD18:: @ 83DBD18
 	spr_template 2, 0, gOamData_83DBCE0, gSpriteAnimTable_83DBCF8, NULL, gDummySpriteAffineAnimTable, sub_80E8B78
 
+	.align 2
 gUnknown_083DBD30:: @ 83DBD30
 	obj_tiles 0x083dba60, 2048, 0x0006
 
@@ -16001,6 +16067,7 @@ gOamData_83DBD40:: @ 83DBD40
 gSpriteTemplate_83DBD48:: @ 83DBD48
 	spr_template 6, 4, gOamData_83DBD40, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
+	.align 2
 gUnknown_083DBD60:: @ 83DBD60
 	obj_tiles 0x08e8ea98, 4096, 0x0007
 
@@ -16405,6 +16472,7 @@ gUnknown_083E4450:: @ 83E4450
 gSpriteTemplate_83E4454:: @ 83E4454
 	spr_template 0, 0, gOamData_83E4318, gSpriteAnimTable_83E43E0, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
+	.align 2
 gUnknown_083E446C:: @ 83E446C
 	obj_tiles 0x083e41d8, 256, 0x0019
 
@@ -16616,9 +16684,11 @@ gSpriteAffineAnimTable_83E4760:: @ 83E4760
 gSpriteTemplate_83E476C:: @ 83E476C
 	spr_template 11, 10, gOamData_83E4718, gDummySpriteAnimTable, NULL, gSpriteAffineAnimTable_83E4760, SpriteCallbackDummy
 
+	.align 2
 gUnknown_083E4784:: @ 83E4784
 	obj_tiles 0x083e37c0, 896, 0x0017
 
+	.align 2
 gUnknown_083E478C:: @ 83E478C
 	obj_pal 0x083e37a0, 0x000f
 
@@ -17031,6 +17101,7 @@ gSpriteAnimTable_83E76E0:: @ 83E76E0
 	.4byte gSpriteAnim_83E76C0
 	.4byte gSpriteAnim_83E76CC
 
+	.align 2
 gUnknown_083E76E8:: @ 83E76E8
 	obj_pal 0x083e5ad0, 0x0000
 
@@ -17066,6 +17137,7 @@ gUnknown_083E7920:: @ 83E7920
 gUnknown_083E79C0:: @ 83E79C0
 	.incbin "baserom.gba", 0x003e79c0, 0xc
 
+	.align 2
 gUnknown_083E79CC:: @ 83E79CC
 	obj_pal 0x083e782c, 0x0002
 
@@ -17194,6 +17266,7 @@ gUnknown_083EC900:: @ 83EC900
 gUnknown_083EC93C:: @ 83EC93C
 	.incbin "baserom.gba", 0x003ec93c, 0x18
 
+	.align 2
 gUnknown_083EC954:: @ 83EC954
 	obj_pal 0x02039184, 0x0bb8
 
@@ -17232,6 +17305,7 @@ gUnknown_083EC9D4:: @ 83EC9D4
 gSpriteImage_83EC9DC:: @ 83EC9DC
 	.incbin "graphics/unknown_sprites/83EC9DC.4bpp"
 
+	.align 2
 gUnknown_083ECA5C:: @ 83ECA5C
 	obj_pal 0x083ec98c, 0x0008
 
@@ -17482,7 +17556,7 @@ gUnknown_083ECE30:: @ 83ECE30
 	.incbin "baserom.gba", 0x003ece30, 0xa
 
 gUnknown_083ECE3A:: @ 83ECE3A
-	obj_pal 0x02030406, 0x0005
+	.incbin "baserom.gba", 0x003ece3a, 0x8
 
 gUnknown_083ECE42:: @ 83ECE42
 	.incbin "baserom.gba", 0x003ece42, 0x6
@@ -18031,6 +18105,7 @@ gUnknown_083EDBC4:: @ 83EDBC4
 gUnknown_083EDC2C:: @ 83EDC2C
 	.incbin "baserom.gba", 0x003edc2c, 0xb0
 
+	.align 2
 gUnknown_083EDCDC:: @ 83EDCDC
 	obj_tiles 0x02010000, 2048, 0x0011
 
@@ -18107,6 +18182,7 @@ gUnknown_083EDE20:: @ 83EDE20
 gUnknown_083EDE24:: @ 83EDE24
 	.incbin "baserom.gba", 0x003ede24, 0x20
 
+	.align 2
 gSlotMachineSpritePalettes:: @ 83EDE44
 	obj_pal gSlotMachineSpritePalette0, 0
 	obj_pal gSlotMachineSpritePalette1, 1
@@ -18590,9 +18666,11 @@ Unknown_83F7F48:
 gUnknown_083F7F70:: @ 83F7F70
 	.4byte Unknown_83F7F48
 
+	.align 2
 gUnknown_083F7F74:: @ 83F7F74
 	obj_tiles 0x08e77d90, 2048, 0x39d0
 
+	.align 2
 gUnknown_083F7F7C:: @ 83F7F7C
 	obj_pal 0x08e78050, 0x39d0
 
@@ -18705,6 +18783,7 @@ gUnknown_083F856E:: @ 83F856E
 gUnknown_083F857A:: @ 83F857A
 	.incbin "baserom.gba", 0x003f857a, 0x12
 
+	.align 2
 gUnknown_083F858C:: @ 83F858C
 	obj_tiles 0x083f85dc, 128, 0x0002
 
@@ -18724,6 +18803,7 @@ gSpriteTemplate_83F85A4:: @ 83F85A4
 	.align 2
 	.incbin "baserom.gba", 0x3f85bc, 0xa0
 
+	.align 2
 gUnknown_083F865C:: @ 83F865C
 	obj_pal 0x08e87d90, 0x0003
 
@@ -18933,6 +19013,7 @@ gSpriteAnimTable_83F9F4C:: @ 83F9F4C
 gSpriteAnimTable_83F9F50:: @ 83F9F50
 	.4byte gSpriteAnim_83F9EF0 + 0x2C
 
+	.align 2
 gUnknown_083F9F54:: @ 83F9F54
 	obj_tiles 0x08e824bc, 5632, 0x0004
 
@@ -20702,9 +20783,11 @@ gSpriteAnimTable_8402D78:: @ 8402D78
 	.4byte gSpriteAnim_8402D68
 	.4byte gSpriteAnim_8402D70
 
+	.align 2
 gUnknown_08402D80:: @ 8402D80
 	obj_tiles 0x08402b78, 384, 0x1595
 
+	.align 2
 gUnknown_08402D88:: @ 8402D88
 	obj_pal 0x08402b58, 0x1596
 
@@ -20816,6 +20899,7 @@ gUnknown_08405EE6:: @ 8405EE6
 gUnknown_08406118:: @ 8406118
 	.incbin "baserom.gba", 0x00406118, 0x14
 
+	.align 2
 gUnknown_0840612C:: @ 840612C
 	obj_pal 0x02030400, 0x0001
 
@@ -20827,9 +20911,11 @@ gUnknown_08406134:: @ 8406134
 	.4byte OtherText_Cuteness
 	.4byte OtherText_Beauty
 
+	.align 2
 gUnknown_08406148:: @ 8406148
 	obj_pal 0x08405f18, 0x0200
 
+	.align 2
 gUnknown_08406150:: @ 8406150
 	obj_pal 0x08405ef8, 0x0000
 
@@ -21426,6 +21512,7 @@ gUnknown_0840B22C:: @ 840B22C
 gUnknown_0840B23C:: @ 840B23C
 	.incbin "baserom.gba", 0x0040b23c, 0x1c
 
+	.align 2
 gUnknown_0840B258:: @ 840B258
 	obj_tiles 0x08d1a7f4, 256, 0xd6ec
 	obj_tiles 0x08d1a7f4, 256, 0xd6ed
@@ -24299,6 +24386,7 @@ gSpriteAffineAnim_84121C0:: @ 84121C0
 gSpriteAffineAnimTable_84121D8:: @ 84121D8
 	.4byte gSpriteAffineAnim_84121C0
 
+	.align 2
 gUnknown_084121DC:: @ 84121DC
 	obj_tiles 0x08e781c8, 32, 0x39e2
 
@@ -24552,26 +24640,32 @@ gSpriteTemplate_8416D7C:: @ 8416D7C
 gSpriteTemplate_8416D94:: @ 8416D94
 	spr_template 1005, 1005, gOamData_8416D5C, gSpriteAnimTable_8416D74, NULL, gDummySpriteAffineAnimTable, nullsub_83
 
+	.align 2
 gIntro2BrendanSpriteSheet:: @ 8416DAC
 	obj_tiles gIntro2BrendanTiles, 0x3800, 1002
 	.space 8
 
+	.align 2
 gIntro2MaySpriteSheet:: @ 8416DBC
 	obj_tiles gIntro2MayTiles, 0x3800, 1003
 	.space 8
 
+	.align 2
 gIntro2BicycleSpriteSheet:: @ 8416DCC
 	obj_tiles gIntro2BicycleTiles, 0x1000, 1001
 	.space 8
 
+	.align 2
 gIntro2LatiosSpriteSheet:: @ 8416DDC
 	obj_tiles gIntro2LatiosTiles, 0x1000, 1004
 	.space 8
 
+	.align 2
 gIntro2LatiasSpriteSheet:: @ 8416DEC
 	obj_tiles gIntro2LatiasTiles, 0x1000, 1005
 	.space 8
 
+	.align 2
 gIntro2SpritePalettes:: @ 8416DFC
 	obj_pal gIntro2BrendanPalette, 1002
 	obj_pal gIntro2MayPalette,     1003
@@ -24640,9 +24734,9 @@ Unknown_8416F3A:
 Unknown_8416F42:
 	.incbin "baserom.gba", 0x00416f42, 0x8
 Unknown_8416F4A:
-	obj_tiles 0x08000900, 1536, 0x1800
+	.incbin "baserom.gba", 0x00416f4a, 0x8
 Unknown_8416F52:
-	obj_tiles 0x02000100, 1024, 0x1800
+	.incbin "baserom.gba", 0x00416f52, 0x8
 Unknown_8416F5A:
 	.incbin "baserom.gba", 0x00416f5a, 0x8
 Unknown_8416F62:
@@ -25726,6 +25820,7 @@ gSpriteAnim_842F134:: @ 842F134
 gSpriteAnimTable_842F13C:: @ 842F13C
 	.4byte gSpriteAnim_842F134
 
+	.align 2
 gUnknown_0842F140:: @ 842F140
 	obj_tiles OutlineCursorTiles_00, 0x1C0, 0xFFF0
 	obj_tiles OutlineCursorTiles_01, 0x1C0, 0xFFF0
@@ -25747,9 +25842,11 @@ gUnknown_0842F140:: @ 842F140
 gUnknown_0842F1C0:: @ 842F1C0
 	.incbin "baserom.gba", 0x0042f1c0, 0x80
 
+	.align 2
 gUnknown_0842F240:: @ 842F240
 	obj_pal 0x0203a360, 0xfff0
 
+	.align 2
 gUnknown_0842F248:: @ 842F248
 	obj_pal 0x0203a360, 0xfff1
 
