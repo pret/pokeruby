@@ -23,7 +23,11 @@
 	.macro obj_pal address, tag
 	.4byte \address
 	.2byte \tag
-	.2byte 0@ padding
+	.2byte 0 @ padding
+	.endm
+
+	.macro null_obj_pal
+	obj_pal 0, 0
 	.endm
 
 @ For object animation frames.

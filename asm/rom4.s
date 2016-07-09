@@ -20853,7 +20853,7 @@ AddCameraObject: @ 805C284
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805C2C0: .4byte gUnknown_0830FD24
+_0805C2C0: .4byte gSpriteTemplate_830FD24
 _0805C2C4: .4byte 0x02020004
 	thumb_func_end AddCameraObject
 
@@ -52469,7 +52469,7 @@ sub_806A69C: @ 806A69C
 	bx r0
 	.align 2, 0
 _0806A70C: .4byte gUnknown_083764BC
-_0806A710: .4byte gUnknown_083764E8
+_0806A710: .4byte gSpriteTemplate_83764E8
 _0806A714: .4byte 0x02020004
 _0806A718: .4byte sub_806A480
 _0806A71C: .4byte 0x0000ffff
@@ -59191,7 +59191,7 @@ sub_806DB0C: @ 806DB0C
 	bx r0
 	.align 2, 0
 _0806DB84: .4byte 0x02020004
-_0806DB88: .4byte gUnknown_0837660C
+_0806DB88: .4byte gSpriteTemplate_837660C
 _0806DB8C: .4byte sub_806DAB4
 	thumb_func_end sub_806DB0C
 
@@ -59357,7 +59357,7 @@ _0806DCB0:
 	.align 2, 0
 _0806DCC8: .4byte 0x02020004
 _0806DCCC: .4byte 0x03004360
-_0806DCD0: .4byte gUnknown_0837660C
+_0806DCD0: .4byte gSpriteTemplate_837660C
 	thumb_func_end sub_806DC34
 
 	thumb_func_start sub_806DCD4
@@ -59405,7 +59405,7 @@ sub_806DCD4: @ 806DCD4
 	strb r1, [r0]
 	b _0806DD5C
 	.align 2, 0
-_0806DD2C: .4byte gUnknown_0837660C
+_0806DD2C: .4byte gSpriteTemplate_837660C
 _0806DD30: .4byte 0x02020004
 _0806DD34:
 	adds r0, r7, 0
