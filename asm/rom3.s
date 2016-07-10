@@ -3107,7 +3107,7 @@ _0800AF64:
 	.align 2, 0
 _0800AF6C: .4byte 0x03004b20
 _0800AF70: .4byte 0x02020004
-_0800AF74: .4byte gUnknown_081E79AC
+_0800AF74: .4byte gSpriteAffineAnimTable_81E79AC
 _0800AF78: .4byte sub_800B240
 _0800AF7C: .4byte 0x0000ffff
 _0800AF80: .4byte task_new_game_prof_birch_speech_part2_10
@@ -100731,7 +100731,7 @@ gpu_pal_obj_decompress_and_apply: @ 803C56C
 	bx r0
 	.align 2, 0
 _0803C594: .4byte 0x02024e8c
-_0803C598: .4byte gUnknown_08208288
+_0803C598: .4byte gSpriteTemplate_8208288
 _0803C59C: .4byte gUnknown_081E7C64
 	thumb_func_end gpu_pal_obj_decompress_and_apply
 
@@ -100763,7 +100763,7 @@ _0803C5CA:
 	b _0803C5DE
 	.align 2, 0
 _0803C5D0: .4byte 0x02024e8c
-_0803C5D4: .4byte gUnknown_08208288
+_0803C5D4: .4byte gSpriteTemplate_8208288
 _0803C5D8: .4byte gUnknown_081ECACC
 _0803C5DC:
 	ldr r0, _0803C5EC
