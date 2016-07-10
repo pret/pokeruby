@@ -12853,10 +12853,12 @@ gUnknown_083D61E4:: @ 83D61E4
 	.4byte sub_810B96C
 
 gUnknown_083D61F0:: @ 83D61F0
-	.incbin "baserom.gba", 0x003d61f0, 0x4
+	.byte DIR_NORTH, DIR_EAST, DIR_SOUTH, DIR_WEST
 
+	.align 2
 gUnknown_083D61F4:: @ 83D61F4
-	.incbin "baserom.gba", 0x003d61f4, 0x8
+	.4byte sub_80C9FC0
+	.4byte sub_80A5C48
 
 	.align 2
 gSpriteAnim_83D61FC:: @ 83D61FC
@@ -18850,8 +18852,10 @@ gUnknown_083EC9CC:: @ 83EC9CC
 	.4byte sub_810153C
 	.4byte sub_8100EEC
 
+	.align 2
 gUnknown_083EC9D4:: @ 83EC9D4
-	.incbin "baserom.gba", 0x003ec9d4, 0x8
+	.4byte sub_8101590
+	.4byte sub_8100EEC
 
 	.align 2
 gSpriteImage_83EC9DC:: @ 83EC9DC
@@ -18887,8 +18891,12 @@ gSpriteImageTable_83ECA80:: @ 83ECA80
 gSpriteTemplate_83ECA88:: @ 83ECA88
 	spr_template 0xFFFF, 8, gOamData_83ECA6C, gSpriteAnimTable_83ECA7C, gSpriteImageTable_83ECA80, gDummySpriteAffineAnimTable, sub_8101698
 
+	.align 2
 gUnknown_083ECAA0:: @ 83ECAA0
-	.incbin "baserom.gba", 0x003ecaa0, 0xc
+	.4byte sub_8101848
+	.4byte sub_80FED3C
+
+	.incbin "baserom.gba", 0x003ecaa8, 0x4
 
 	.align 2
 gUnknown_083ECAAC:: @ 83ECAAC
@@ -20194,8 +20202,12 @@ gUnknown_083F7F1F:: @ 83F7F1F
 gUnknown_083F7F21:: @ 83F7F21
 	.incbin "baserom.gba", 0x003f7f21, 0x3
 
+	.align 2
 gUnknown_083F7F24:: @ 83F7F24
-	.incbin "baserom.gba", 0x003f7f24, 0x10
+	.4byte sub_810C610
+	.4byte sub_810C668
+
+	.incbin "baserom.gba", 0x003f7f2c, 0x8
 
 	.align 2
 gOamData_83F7F34:: @ 83F7F34
