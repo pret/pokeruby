@@ -120,3 +120,16 @@
 	.4byte \number
 	.4byte \text
 	.endm
+
+	.macro door_anim_frame unknown, offset
+	.byte \unknown
+	.byte 0 @ padding
+	.2byte \offset
+	.endm
+
+	.macro door_anim_gfx metatile_num, unknown, tile_addr, palette_addr
+	.2byte \metatile_num
+	.2byte \unknown
+	.4byte \tile_addr
+	.4byte \palette_addr
+	.endm
