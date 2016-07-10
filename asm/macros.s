@@ -30,6 +30,12 @@
 	obj_pal 0, 0
 	.endm
 
+	.macro paired_pals tag, address
+	.2byte \tag
+	.2byte 0 @ padding
+	.4byte \address
+	.endm
+
 @ For object animation frames.
 	.macro obj_frame_tiles address, uncompressed_size
 	.4byte \address
@@ -113,4 +119,17 @@
 	.macro credits_entry number, text
 	.4byte \number
 	.4byte \text
+	.endm
+
+	.macro door_anim_frame unknown, offset
+	.byte \unknown
+	.byte 0 @ padding
+	.2byte \offset
+	.endm
+
+	.macro door_anim_gfx metatile_num, unknown, tile_addr, palette_addr
+	.2byte \metatile_num
+	.2byte \unknown
+	.4byte \tile_addr
+	.4byte \palette_addr
 	.endm

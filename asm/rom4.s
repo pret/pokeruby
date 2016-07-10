@@ -12778,7 +12778,7 @@ unref_sub_805869C: @ 805869C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080586B0: .4byte gUnknown_0830F9B4
+_080586B0: .4byte gDoorAnimGraphicsTable
 	thumb_func_end unref_sub_805869C
 
 	thumb_func_start sub_80586B4
@@ -12802,7 +12802,7 @@ _080586D6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080586DC: .4byte gUnknown_0830F9B4
+_080586DC: .4byte gDoorAnimGraphicsTable
 	thumb_func_end sub_80586B4
 
 	thumb_func_start sub_80586E0
@@ -12826,7 +12826,7 @@ _08058702:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08058708: .4byte gUnknown_0830F9B4
+_08058708: .4byte gDoorAnimGraphicsTable
 	thumb_func_end sub_80586E0
 
 	thumb_func_start sub_805870C
@@ -12849,7 +12849,7 @@ sub_805870C: @ 805870C
 	asrs r0, 24
 	b _0805873C
 	.align 2, 0
-_08058734: .4byte gUnknown_0830F9B4
+_08058734: .4byte gDoorAnimGraphicsTable
 _08058738:
 	movs r0, 0x1
 	negs r0, r0
@@ -12879,7 +12879,7 @@ task_overworld_door_add_if_role_69_for_opening_door_at: @ 8058744
 	asrs r0, 24
 	b _08058774
 	.align 2, 0
-_0805876C: .4byte gUnknown_0830F9B4
+_0805876C: .4byte gDoorAnimGraphicsTable
 _08058770:
 	movs r0, 0x1
 	negs r0, r0
@@ -12916,7 +12916,7 @@ sub_8058790: @ 8058790
 	movs r0, 0x12
 	b _080587AE
 	.align 2, 0
-_080587A8: .4byte gUnknown_0830F9B4
+_080587A8: .4byte gDoorAnimGraphicsTable
 _080587AC:
 	movs r0, 0x8
 _080587AE:
