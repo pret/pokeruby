@@ -481,57 +481,76 @@ gUnknown_081F95A4:: @ 81F95A4
 	obj_tiles 0x08e5dc2c, 4096, 0x2710
 
 	.align 2
-gUnknown_081F95AC:: @ 81F95AC
-	.4byte 0x08e5de3c
-	.4byte 0x08e5e424
-	.4byte 0x08e639e4
-	.4byte 0x08e63f6c
-	.4byte 0x08e5e3ec
-	.4byte 0x08e5e6d4
-	.4byte 0x08e5ed8c
-	.4byte 0x08e64128
-	.4byte 0x08e64838
-	.4byte 0x08e5ed4c
-	.4byte 0x08e5f03c
-	.4byte 0x08e5f67c
-	.4byte 0x08e64a70
-	.4byte 0x08e64fb4
-	.4byte 0x08e5f634
-	.4byte 0x08e5f92c
-	.4byte 0x08e5ff2c
-	.4byte 0x08e6515c
-	.4byte 0x08e65628
-	.4byte 0x08e5fee4
-	.4byte 0x08e601dc
-	.4byte 0x08e607f4
-	.4byte 0x08e657b8
-	.4byte 0x08e65dc4
-	.4byte 0x08e607b0
-	.4byte 0x08e60aa4
-	.4byte 0x08e6108c
-	.4byte 0x08e65f68
-	.4byte 0x08e664b4
-	.4byte 0x08e6104c
-	.4byte 0x08e6133c
-	.4byte 0x08e61938
-	.4byte 0x08e66600
-	.4byte 0x08e66be0
-	.4byte 0x08e618fc
-	.4byte 0x08e61be8
-	.4byte 0x08e62228
-	.4byte 0x08e66d74
-	.4byte 0x08e67590
-	.4byte 0x08e621e0
-	.4byte 0x08e62514
-	.4byte 0x08e62afc
-	.4byte 0x08e67838
-	.4byte 0x08e67c48
-	.4byte 0x08e63664
-	.4byte 0x08e62514
-	.4byte 0x08e62afc
-	.4byte 0x08e67838
-	.4byte 0x08e67c48
-	.4byte 0x08e624d8
+gBattleTerrainTable:: @ 81F95AC
+	@ tall_grass
+	.4byte gBattleTerrainTiles_TallGrass
+	.4byte gBattleTerrainTilemap_TallGrass
+	.4byte gBattleTerrainAnimTiles_TallGrass
+	.4byte gBattleTerrainAnimTilemap_TallGrass
+	.4byte gBattleTerrainPalette_TallGrass
+
+	@ long_grass
+	.4byte gBattleTerrainTiles_LongGrass
+	.4byte gBattleTerrainTilemap_LongGrass
+	.4byte gBattleTerrainAnimTiles_LongGrass
+	.4byte gBattleTerrainAnimTilemap_LongGrass
+	.4byte gBattleTerrainPalette_LongGrass
+
+	@ sand
+	.4byte gBattleTerrainTiles_Sand
+	.4byte gBattleTerrainTilemap_Sand
+	.4byte gBattleTerrainAnimTiles_Sand
+	.4byte gBattleTerrainAnimTilemap_Sand
+	.4byte gBattleTerrainPalette_Sand
+
+	@ underwater
+	.4byte gBattleTerrainTiles_Underwater
+	.4byte gBattleTerrainTilemap_Underwater
+	.4byte gBattleTerrainAnimTiles_Underwater
+	.4byte gBattleTerrainAnimTilemap_Underwater
+	.4byte gBattleTerrainPalette_Underwater
+
+	@ water
+	.4byte gBattleTerrainTiles_Water
+	.4byte gBattleTerrainTilemap_Water
+	.4byte gBattleTerrainAnimTiles_Water
+	.4byte gBattleTerrainAnimTilemap_Water
+	.4byte gBattleTerrainPalette_Water
+
+	@ pond_water
+	.4byte gBattleTerrainTiles_PondWater
+	.4byte gBattleTerrainTilemap_PondWater
+	.4byte gBattleTerrainAnimTiles_PondWater
+	.4byte gBattleTerrainAnimTilemap_PondWater
+	.4byte gBattleTerrainPalette_PondWater
+
+	@ rock
+	.4byte gBattleTerrainTiles_Rock
+	.4byte gBattleTerrainTilemap_Rock
+	.4byte gBattleTerrainAnimTiles_Rock
+	.4byte gBattleTerrainAnimTilemap_Rock
+	.4byte gBattleTerrainPalette_Rock
+
+	@ cave
+	.4byte gBattleTerrainTiles_Cave
+	.4byte gBattleTerrainTilemap_Cave
+	.4byte gBattleTerrainAnimTiles_Cave
+	.4byte gBattleTerrainAnimTilemap_Cave
+	.4byte gBattleTerrainPalette_Cave
+
+	@ building
+	.4byte gBattleTerrainTiles_Building
+	.4byte gBattleTerrainTilemap_Building
+	.4byte gBattleTerrainAnimTiles_Building
+	.4byte gBattleTerrainAnimTilemap_Building
+	.4byte gBattleTerrainPalette_Building
+
+	@ plain
+	.4byte gBattleTerrainTiles_Building
+	.4byte gBattleTerrainTilemap_Building
+	.4byte gBattleTerrainAnimTiles_Building
+	.4byte gBattleTerrainAnimTilemap_Building
+	.4byte gBattleTerrainPalette_Plain
 
 gUnknown_081F9674:: @ 81F9674
 	.incbin "baserom.gba", 0x001f9674, 0xc

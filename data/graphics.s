@@ -2248,35 +2248,130 @@ gUnknown_08E5DC04:: @ 8E5DC04
 	.incbin "baserom.gba", 0x00e5dc04, 0x28
 
 gUnknown_08E5DC2C:: @ 8E5DC2C
-	.incbin "baserom.gba", 0x00e5dc2c, 0x25b0
+	.incbin "baserom.gba", 0x00e5dc2c, 0x210
 
-gUnknown_08E601DC:: @ 8E601DC
-	.incbin "baserom.gba", 0x00e601dc, 0x618
+	.align 2
+gBattleTerrainTiles_TallGrass:: @ 8E5DE3C
+	.incbin "graphics/battle_terrain/tall_grass/tiles.4bpp.lz"
 
-gUnknown_08E607F4:: @ 8E607F4
-	.incbin "baserom.gba", 0x00e607f4, 0x13f4
+	.align 2
+gBattleTerrainPalette_TallGrass:: @ 8E5E3EC
+	.incbin "graphics/battle_terrain/tall_grass/palette.gbapal.lz"
 
-gUnknown_08E61BE8:: @ 8E61BE8
-	.incbin "baserom.gba", 0x00e61be8, 0x640
+	.align 2
+gBattleTerrainTilemap_TallGrass:: @ 8E5E424
+	.incbin "graphics/battle_terrain/tall_grass/map.bin.lz"
 
-gUnknown_08E62228:: @ 8E62228
-	.incbin "baserom.gba", 0x00e62228, 0x2ec
+	.align 2
+gBattleTerrainTiles_LongGrass:: @ 8E5E6D4
+	.incbin "graphics/battle_terrain/long_grass/tiles.4bpp.lz"
 
-gUnknown_08E62514:: @ 8E62514
-	.incbin "baserom.gba", 0x00e62514, 0x5ac
+	.align 2
+gBattleTerrainPalette_LongGrass:: @ 8E5ED4C
+	.incbin "graphics/battle_terrain/long_grass/palette.gbapal.lz"
+
+	.align 2
+gBattleTerrainTilemap_LongGrass:: @ 8E5ED8C
+	.incbin "graphics/battle_terrain/long_grass/map.bin.lz"
+
+	.align 2
+gBattleTerrainTiles_Sand:: @ 8E5F03C
+	.incbin "graphics/battle_terrain/sand/tiles.4bpp.lz"
+
+	.align 2
+gBattleTerrainPalette_Sand:: @ 8E5F634
+	.incbin "graphics/battle_terrain/sand/palette.gbapal.lz"
+
+	.align 2
+gBattleTerrainTilemap_Sand:: @ 8E5F67C
+	.incbin "graphics/battle_terrain/sand/map.bin.lz"
+
+	.align 2
+gBattleTerrainTiles_Underwater:: @ 8E5F92C
+	.incbin "graphics/battle_terrain/underwater/tiles.4bpp.lz"
+
+	.align 2
+gBattleTerrainPalette_Underwater:: @ 8E5FEE4
+	.incbin "graphics/battle_terrain/underwater/palette.gbapal.lz"
+
+	.align 2
+gBattleTerrainTilemap_Underwater:: @ 8E5FF2C
+	.incbin "graphics/battle_terrain/underwater/map.bin.lz"
+
+	.align 2
+gBattleTerrainTiles_Water:: @ 8E601DC
+	.incbin "graphics/battle_terrain/water/tiles.4bpp.lz"
+
+	.align 2
+gBattleTerrainPalette_Water:: @ 8E607B0
+	.incbin "graphics/battle_terrain/water/palette.gbapal.lz"
+
+	.align 2
+gBattleTerrainTilemap_Water:: @ 8E607F4
+	.incbin "graphics/battle_terrain/water/map.bin.lz"
+
+	.align 2
+gBattleTerrainTiles_PondWater:: @ 8E60AA4
+	.incbin "graphics/battle_terrain/pond_water/tiles.4bpp.lz"
+
+	.align 2
+gBattleTerrainPalette_PondWater:: @ 8E6104C
+	.incbin "graphics/battle_terrain/pond_water/palette.gbapal.lz"
+
+	.align 2
+gBattleTerrainTilemap_PondWater:: @ 8E6108C
+	.incbin "graphics/battle_terrain/pond_water/map.bin.lz"
+
+	.align 2
+gBattleTerrainTiles_Rock:: @ 8E6133C
+	.incbin "graphics/battle_terrain/rock/tiles.4bpp.lz"
+
+	.align 2
+gBattleTerrainPalette_Rock:: @ 8E618FC
+	.incbin "graphics/battle_terrain/rock/palette.gbapal.lz"
+
+	.align 2
+gBattleTerrainTilemap_Rock:: @ 8E61938
+	.incbin "graphics/battle_terrain/rock/map.bin.lz"
+
+	.align 2
+gBattleTerrainTiles_Cave:: @ 8E61BE8
+	.incbin "graphics/battle_terrain/cave/tiles.4bpp.lz"
+
+	.align 2
+gBattleTerrainPalette_Cave:: @ 8E621E0
+	.incbin "graphics/battle_terrain/cave/palette.gbapal.lz"
+
+	.align 2
+gBattleTerrainTilemap_Cave:: @ 8E62228
+	.incbin "graphics/battle_terrain/cave/map.bin.lz"
+
+	.align 2
+gBattleTerrainPalette_Plain:: @ 8E624D8
+	.incbin "graphics/battle_terrain/plain/palette.gbapal.lz"
+
+	.align 2
+gBattleTerrainTiles_Building:: @ 8E62514
+	.incbin "graphics/battle_terrain/building/tiles.4bpp.lz"
 
 gUnknown_08E62AC0:: @ 8E62AC0
 	.incbin "baserom.gba", 0x00e62ac0, 0x3c
 
-gUnknown_08E62AFC:: @ 8E62AFC
-	.incbin "baserom.gba", 0x00e62afc, 0x2b0
+	.align 2
+gBattleTerrainTilemap_Building:: @ 8E62AFC
+	.incbin "graphics/battle_terrain/building/map.bin.lz"
 
 gUnknown_08E62DAC:: @ 8E62DAC
 	.incbin "baserom.gba", 0x00e62dac, 0x608
 
 gUnknown_08E633B4:: @ 8E633B4
-	.incbin "baserom.gba", 0x00e633b4, 0x2f0
+	.incbin "baserom.gba", 0x00e633b4, 0x2b0
 
+	.align 2
+gBattleTerrainPalette_Building:: @ 8E63664
+	.incbin "graphics/battle_terrain/building/palette.gbapal.lz"
+
+	.align 2
 gUnknown_08E636A4:: @ 8E636A4
 	.incbin "baserom.gba", 0x00e636a4, 0x3c
 
@@ -2308,25 +2403,79 @@ gUnknown_08E63958:: @ 8E63958
 	.incbin "baserom.gba", 0x00e63958, 0x50
 
 gUnknown_08E639A8:: @ 8E639A8
-	.incbin "baserom.gba", 0x00e639a8, 0x17b4
+	.incbin "baserom.gba", 0x00e639a8, 0x3C
 
-gUnknown_08E6515C:: @ 8E6515C
-	.incbin "baserom.gba", 0x00e6515c, 0x4cc
+	.align 2
+gBattleTerrainAnimTiles_TallGrass:: @ 8E639E4
+	.incbin "graphics/battle_terrain/tall_grass/anim_tiles.4bpp.lz"
 
-gUnknown_08E65628:: @ 8E65628
-	.incbin "baserom.gba", 0x00e65628, 0x174c
+	.align 2
+gBattleTerrainAnimTilemap_TallGrass:: @ 8E63F6C
+	.incbin "graphics/battle_terrain/tall_grass/anim_map.bin.lz"
 
-gUnknown_08E66D74:: @ 8E66D74
-	.incbin "baserom.gba", 0x00e66d74, 0x81c
+	.align 2
+gBattleTerrainAnimTiles_LongGrass:: @ 8E64128
+	.incbin "graphics/battle_terrain/long_grass/anim_tiles.4bpp.lz"
 
-gUnknown_08E67590:: @ 8E67590
-	.incbin "baserom.gba", 0x00e67590, 0x2a8
+	.align 2
+gBattleTerrainAnimTilemap_LongGrass:: @ 8E64838
+	.incbin "graphics/battle_terrain/long_grass/anim_map.bin.lz"
 
-gUnknown_08E67838:: @ 8E67838
-	.incbin "baserom.gba", 0x00e67838, 0x410
+	.align 2
+gBattleTerrainAnimTiles_Sand:: @ 8E64A70
+	.incbin "graphics/battle_terrain/sand/anim_tiles.4bpp.lz"
 
-gUnknown_08E67C48:: @ 8E67C48
-	.incbin "baserom.gba", 0x00e67c48, 0x124
+	.align 2
+gBattleTerrainAnimTilemap_Sand:: @ 8E64FB4
+	.incbin "graphics/battle_terrain/sand/anim_map.bin.lz"
+
+	.align 2
+gBattleTerrainAnimTiles_Underwater:: @ 8E6515C
+	.incbin "graphics/battle_terrain/underwater/anim_tiles.4bpp.lz"
+
+	.align 2
+gBattleTerrainAnimTilemap_Underwater:: @ 8E65628
+	.incbin "graphics/battle_terrain/underwater/anim_map.bin.lz"
+
+	.align 2
+gBattleTerrainAnimTiles_Water:: @ 8E657B8
+	.incbin "graphics/battle_terrain/water/anim_tiles.4bpp.lz"
+
+	.align 2
+gBattleTerrainAnimTilemap_Water:: @ 8E65DC4
+	.incbin "graphics/battle_terrain/water/anim_map.bin.lz"
+
+	.align 2
+gBattleTerrainAnimTiles_PondWater:: @ 8E65F68
+	.incbin "graphics/battle_terrain/pond_water/anim_tiles.4bpp.lz"
+
+	.align 2
+gBattleTerrainAnimTilemap_PondWater:: @ 8E664B4
+	.incbin "graphics/battle_terrain/pond_water/anim_map.bin.lz"
+
+	.align 2
+gBattleTerrainAnimTiles_Rock:: @ 8E66600
+	.incbin "graphics/battle_terrain/rock/anim_tiles.4bpp.lz"
+
+	.align 2
+gBattleTerrainAnimTilemap_Rock:: @ 8E66BE0
+	.incbin "graphics/battle_terrain/rock/anim_map.bin.lz"
+
+	.align 2
+gBattleTerrainAnimTiles_Cave:: @ 8E66D74
+	.incbin "graphics/battle_terrain/cave/anim_tiles.4bpp.lz"
+
+	.align 2
+gBattleTerrainAnimTilemap_Cave:: @ 8E67590
+	.incbin "graphics/battle_terrain/cave/anim_map.bin.lz"
+
+	.align 2
+gBattleTerrainAnimTiles_Building:: @ 8E67838
+	.incbin "graphics/battle_terrain/building/anim_tiles.4bpp.lz"
+
+	.align 2
+gBattleTerrainAnimTilemap_Building:: @ 8E67C48
+	.incbin "graphics/battle_terrain/building/anim_map.bin.lz"
 
 	.align 2
 gBattleAnimSpriteSheet_261:: @ 8E67D6C
