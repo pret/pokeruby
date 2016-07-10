@@ -3132,12 +3132,14 @@ gMapGroups:: @ 8308588
 	.include "data/maps/SafariZone_Southwest/connections.s"
 	.include "data/maps/SafariZone_Southeast/connections.s"
 
+	.align 2
 gUnknown_08308E28:: @ 8308E28
-	.space 4
+	.4byte 0
 
 gUnknown_08308E2C:: @ 8308E2C
 	.incbin "baserom.gba", 0x00308e2c, 0x6a50
 
+@ struct related to door graphics?
 gUnknown_0830F87C:: @ 830F87C
 	.incbin "baserom.gba", 0x0030f87c, 0x14
 
@@ -3205,7 +3207,7 @@ gUnknown_0830FBF8:: @ 830FBF8
 	.4byte MetatileBehavior_IsHorizontalRail
 
 gUnknown_0830FC0C:: @ 830FC0C
-	.incbin "baserom.gba", 0x0030fc0c, 0x8
+	.byte 0x9, 0xA, 0xB, 0xC, 0xD
 
 	.align 2
 gUnknown_0830FC14:: @ 830FC14
@@ -3226,13 +3228,38 @@ gUnknown_0830FC34:: @ 830FC34
 	.4byte MetatileBehavior_IsEastArrowWarp
 
 gUnknown_0830FC44:: @ 830FC44
-	.incbin "baserom.gba", 0x0030fc44, 0x10
+	.byte MAP_OBJ_GFX_RIVAL_BRENDAN_NORMAL,     MAP_OBJ_GFX_RIVAL_MAY_NORMAL
+	.byte MAP_OBJ_GFX_RIVAL_BRENDAN_MACH_BIKE,  MAP_OBJ_GFX_RIVAL_MAY_MACH_BIKE
+	.byte MAP_OBJ_GFX_RIVAL_BRENDAN_ACRO_BIKE,  MAP_OBJ_GFX_RIVAL_MAY_ACRO_BIKE
+	.byte MAP_OBJ_GFX_RIVAL_BRENDAN_SURFING,    MAP_OBJ_GFX_RIVAL_MAY_SURFING
+	.byte MAP_OBJ_GFX_BRENDAN_UNDERWATER,       MAP_OBJ_GFX_MAY_UNDERWATER
+	.byte MAP_OBJ_GFX_RIVAL_BRENDAN_FIELD_MOVE, MAP_OBJ_GFX_RIVAL_MAY_FIELD_MOVE
+	.byte MAP_OBJ_GFX_BRENDAN_FISHING,          MAP_OBJ_GFX_MAY_FISHING
+	.byte MAP_OBJ_GFX_BRENDAN_WATERING,         MAP_OBJ_GFX_MAY_WATERING
 
 gUnknown_0830FC54:: @ 830FC54
-	.incbin "baserom.gba", 0x0030fc54, 0x10
+	.byte MAP_OBJ_GFX_BRENDAN_NORMAL,     MAP_OBJ_GFX_MAY_NORMAL
+	.byte MAP_OBJ_GFX_BRENDAN_MACH_BIKE,  MAP_OBJ_GFX_MAY_MACH_BIKE
+	.byte MAP_OBJ_GFX_BRENDAN_ACRO_BIKE,  MAP_OBJ_GFX_MAY_ACRO_BIKE
+	.byte MAP_OBJ_GFX_BRENDAN_SURFING,    MAP_OBJ_GFX_MAY_SURFING
+	.byte MAP_OBJ_GFX_BRENDAN_UNDERWATER, MAP_OBJ_GFX_MAY_UNDERWATER
+	.byte MAP_OBJ_GFX_BRENDAN_FIELD_MOVE, MAP_OBJ_GFX_MAY_FIELD_MOVE
+	.byte MAP_OBJ_GFX_BRENDAN_FISHING,    MAP_OBJ_GFX_MAY_FISHING
+	.byte MAP_OBJ_GFX_BRENDAN_WATERING,   MAP_OBJ_GFX_MAY_WATERING
 
 gUnknown_0830FC64:: @ 830FC64
-	.incbin "baserom.gba", 0x0030fc64, 0x14
+	@ male
+	.byte MAP_OBJ_GFX_BRENDAN_NORMAL,      1
+	.byte MAP_OBJ_GFX_BRENDAN_MACH_BIKE,   2
+	.byte MAP_OBJ_GFX_BRENDAN_ACRO_BIKE,   4
+	.byte MAP_OBJ_GFX_BRENDAN_SURFING,     8
+	.byte MAP_OBJ_GFX_BRENDAN_UNDERWATER, 16
+	@ female
+	.byte MAP_OBJ_GFX_MAY_NORMAL,          1
+	.byte MAP_OBJ_GFX_MAY_MACH_BIKE,       2
+	.byte MAP_OBJ_GFX_MAY_ACRO_BIKE,       4
+	.byte MAP_OBJ_GFX_MAY_SURFING,         8
+	.byte MAP_OBJ_GFX_MAY_UNDERWATER,     16
 
 	.align 2
 gUnknown_0830FC78:: @ 830FC78
@@ -3247,6 +3274,7 @@ gUnknown_0830FC88:: @ 830FC88
 	.4byte sub_8059EA4
 	.4byte sub_8059F40
 
+	.align 2
 gUnknown_0830FC94:: @ 830FC94
 	.4byte sub_805A000
 
@@ -3258,10 +3286,10 @@ gUnknown_0830FC98:: @ 830FC98
 	.4byte sub_805A1B8
 
 gUnknown_0830FCA8:: @ 830FCA8
-	.incbin "baserom.gba", 0x0030fca8, 0x4
+	.byte DIR_WEST, DIR_EAST, DIR_NORTH, DIR_SOUTH
 
 gUnknown_0830FCAC:: @ 830FCAC
-	.incbin "baserom.gba", 0x0030fcac, 0x8
+	.byte 0x10, 0x10, 0x11, 0x12, 0x13
 
 	.align 2
 gUnknown_0830FCB4:: @ 830FCB4
@@ -3282,23 +3310,27 @@ gUnknown_0830FCB4:: @ 830FCB4
 	.4byte sub_805A874
 	.4byte fishF
 
+	.align 1
 gUnknown_0830FCF4:: @ 830FCF4
-	.incbin "baserom.gba", 0x0030fcf4, 0x6
+	.2byte 1, 1, 1
 
+	.align 1
 gUnknown_0830FCFA:: @ 830FCFA
-	.incbin "baserom.gba", 0x0030fcfa, 0x6
+	.2byte 1, 3, 6
 
 gUnknown_0830FD00:: @ 830FD00
-	.incbin "baserom.gba", 0x0030fd00, 0x2
+	.string "·$"
 
+	.align 1
 gUnknown_0830FD02:: @ 830FD02
-	.incbin "baserom.gba", 0x0030fd02, 0x6
+	.2byte 36, 33, 30
 
+	.align 1
 gUnknown_0830FD08:: @ 830FD08
-	.incbin "baserom.gba", 0x0030fd08, 0xc
+	.2byte 0, 0, 40, 10, 70, 30
 
 gUnknown_0830FD14:: @ 830FD14
-	.incbin "baserom.gba", 0x0030fd14, 0x10
+	.byte 1, 1, 6, 7, 8, 9, 6, 7, 8, 9, 11, 11, 0, 0, 0, 0
 
 	.align 2
 gSpriteTemplate_830FD24:: @ 830FD24
@@ -3397,10 +3429,162 @@ gUnknown_0836DA88:: @ 836DA88
 	.4byte sub_805FC70
 
 gUnknown_0836DBBC:: @ 836DBBC
-	.incbin "baserom.gba", 0x0036dbbc, 0x4d
+	.byte 0
+	.byte 0
+	.byte 1
+	.byte 1
+	.byte 1
+	.byte 1
+	.byte 1
+	.byte 0
+	.byte 0
+	.byte 0
+	.byte 0
+	.byte 0
+	.byte 0
+	.byte 0
+	.byte 0
+	.byte 0
+	.byte 0
+	.byte 0
+	.byte 0
+	.byte 0
+	.byte 0
+	.byte 0
+	.byte 0
+	.byte 0
+	.byte 0
+	.byte 1
+	.byte 1
+	.byte 1
+	.byte 1
+	.byte 1
+	.byte 1
+	.byte 1
+	.byte 1
+	.byte 1
+	.byte 1
+	.byte 1
+	.byte 1
+	.byte 1
+	.byte 1
+	.byte 1
+	.byte 1
+	.byte 1
+	.byte 1
+	.byte 1
+	.byte 1
+	.byte 1
+	.byte 1
+	.byte 1
+	.byte 1
+	.byte 1
+	.byte 1
+	.byte 1
+	.byte 1
+	.byte 1
+	.byte 1
+	.byte 1
+	.byte 1
+	.byte 0
+	.byte 0
+	.byte 1
+	.byte 1
+	.byte 1
+	.byte 1
+	.byte 0
+	.byte 0
+	.byte 0
+	.byte 0
+	.byte 0
+	.byte 0
+	.byte 0
+	.byte 0
+	.byte 0
+	.byte 0
+	.byte 0
+	.byte 0
+	.byte 0
+	.byte 0
 
 gUnknown_0836DC09:: @ 836DC09
-	.incbin "baserom.gba", 0x0036dc09, 0x4f
+	.byte DIR_SOUTH
+	.byte DIR_SOUTH
+	.byte DIR_SOUTH
+	.byte DIR_NORTH
+	.byte DIR_SOUTH
+	.byte DIR_WEST
+	.byte DIR_EAST
+	.byte DIR_NORTH
+	.byte DIR_SOUTH
+	.byte DIR_WEST
+	.byte DIR_EAST
+	.byte DIR_SOUTH
+	.byte DIR_SOUTH
+	.byte DIR_SOUTH
+	.byte DIR_WEST
+	.byte DIR_NORTH
+	.byte DIR_NORTH
+	.byte DIR_SOUTH
+	.byte DIR_SOUTH
+	.byte DIR_SOUTH
+	.byte DIR_SOUTH
+	.byte DIR_NORTH
+	.byte DIR_SOUTH
+	.byte DIR_SOUTH
+	.byte DIR_SOUTH
+	.byte DIR_NORTH
+	.byte DIR_SOUTH
+	.byte DIR_WEST
+	.byte DIR_EAST
+	.byte DIR_NORTH
+	.byte DIR_EAST
+	.byte DIR_SOUTH
+	.byte DIR_WEST
+	.byte DIR_NORTH
+	.byte DIR_WEST
+	.byte DIR_SOUTH
+	.byte DIR_EAST
+	.byte DIR_WEST
+	.byte DIR_NORTH
+	.byte DIR_EAST
+	.byte DIR_SOUTH
+	.byte DIR_EAST
+	.byte DIR_NORTH
+	.byte DIR_WEST
+	.byte DIR_SOUTH
+	.byte DIR_NORTH
+	.byte DIR_SOUTH
+	.byte DIR_WEST
+	.byte DIR_EAST
+	.byte DIR_NORTH
+	.byte DIR_SOUTH
+	.byte DIR_WEST
+	.byte DIR_EAST
+	.byte DIR_NORTH
+	.byte DIR_SOUTH
+	.byte DIR_WEST
+	.byte DIR_EAST
+	.byte DIR_SOUTH
+	.byte DIR_SOUTH
+	.byte DIR_NORTH
+	.byte DIR_SOUTH
+	.byte DIR_WEST
+	.byte DIR_EAST
+	.byte DIR_SOUTH
+	.byte DIR_SOUTH
+	.byte DIR_NORTH
+	.byte DIR_WEST
+	.byte DIR_EAST
+	.byte DIR_SOUTH
+	.byte DIR_NORTH
+	.byte DIR_WEST
+	.byte DIR_EAST
+	.byte DIR_SOUTH
+	.byte DIR_NORTH
+	.byte DIR_WEST
+	.byte DIR_EAST
+	.byte DIR_SOUTH
 
 @ 836DC58
 	.include "data/graphics/field_objects/map_object_graphics_info_pointers.s"
@@ -3423,23 +3607,201 @@ gUnknown_0836DC09:: @ 836DC09
 @ 83718D4
 	.include "data/graphics/field_objects/map_object_graphics_info.s"
 
+	.align 2
 gUnknown_0837377C:: @ 837377C
-	.incbin "baserom.gba", 0x0037377c, 0xf8
+	obj_pal  gMapObjectPalette0, 0x1103
+	obj_pal  gMapObjectPalette1, 0x1104
+	obj_pal  gMapObjectPalette2, 0x1105
+	obj_pal  gMapObjectPalette3, 0x1106
+	obj_pal  gMapObjectPalette4, 0x1107
+	obj_pal  gMapObjectPalette5, 0x1108
+	obj_pal  gMapObjectPalette6, 0x1109
+	obj_pal  gMapObjectPalette7, 0x110A
+	obj_pal  gMapObjectPalette8, 0x1100
+	obj_pal  gMapObjectPalette9, 0x1101
+	obj_pal gMapObjectPalette10, 0x1102
+	obj_pal gMapObjectPalette11, 0x1115
+	obj_pal gMapObjectPalette12, 0x110B
+	obj_pal gMapObjectPalette13, 0x110C
+	obj_pal gMapObjectPalette14, 0x110D
+	obj_pal gMapObjectPalette15, 0x110E
+	obj_pal gMapObjectPalette16, 0x110F
+	obj_pal gMapObjectPalette17, 0x1110
+	obj_pal gMapObjectPalette18, 0x1111
+	obj_pal gMapObjectPalette19, 0x1112
+	obj_pal gMapObjectPalette20, 0x1113
+	obj_pal gMapObjectPalette21, 0x1114
+	obj_pal gMapObjectPalette22, 0x1116
+	obj_pal gMapObjectPalette23, 0x1117
+	obj_pal gMapObjectPalette24, 0x1118
+	obj_pal gMapObjectPalette25, 0x1119
+	obj_pal gMapObjectPalette26, 0x111A
+	null_obj_pal
 
+	.align 1
+Palettes_837385C:
+	.2byte 0x1101
+	.2byte 0x1101
+	.2byte 0x1101
+	.2byte 0x1101
+
+	@ unused?
+	.2byte 0x1111
+	.2byte 0x1111
+	.2byte 0x1111
+	.2byte 0x1111
+
+	.align 1
+Palettes_837386C:
+	.2byte 0x1115
+	.2byte 0x1115
+	.2byte 0x1115
+	.2byte 0x1115
+
+	.align 2
 gUnknown_08373874:: @ 8373874
-	.incbin "baserom.gba", 0x00373874, 0x70
+	paired_pals 0x1100, Palettes_837385C
+	paired_pals 0x1110, Palettes_837385C
+	paired_pals 0x1115, Palettes_837386C
+	paired_pals 0x11FF, NULL
 
+	.align 1
+Palettes_8373894:
+	.2byte 0x110C
+	.2byte 0x110C
+	.2byte 0x110C
+	.2byte 0x110C
+
+	.align 1
+Palettes_837389C:
+	.2byte 0x110D
+	.2byte 0x110D
+	.2byte 0x110D
+	.2byte 0x110D
+
+	.align 1
+Palettes_83738A4:
+	.2byte 0x110E
+	.2byte 0x110E
+	.2byte 0x110E
+	.2byte 0x110E
+
+	.align 1
+Palettes_83738AC:
+	.2byte 0x1112
+	.2byte 0x1112
+	.2byte 0x1112
+	.2byte 0x1112
+
+	.align 1
+Palettes_83738B4:
+	.2byte 0x1113
+	.2byte 0x1113
+	.2byte 0x1113
+	.2byte 0x1113
+
+	.align 1
+Palettes_83738BC:
+	.2byte 0x1114
+	.2byte 0x1114
+	.2byte 0x1114
+	.2byte 0x1114
+
+	.align 1
+Palettes_83738C4:
+	.2byte 0x111A
+	.2byte 0x111A
+	.2byte 0x111A
+	.2byte 0x111A
+
+	.align 1
+Palettes_83738CC:
+	.2byte 0x1117
+	.2byte 0x1117
+	.2byte 0x1117
+	.2byte 0x1117
+
+	.align 1
+Palettes_83738D4:
+	.2byte 0x1119
+	.2byte 0x1119
+	.2byte 0x1119
+	.2byte 0x1119
+
+	.align 1
+Palettes_83738DC:
+	.2byte 0x1109
+	.2byte 0x1109
+	.2byte 0x1109
+	.2byte 0x1109
+
+	.align 2
 gUnknown_083738E4:: @ 83738E4
-Unknown_83738E4:
-	.incbin "baserom.gba", 0x003738e4, 0x68
+	paired_pals 0x1100, Palettes_837385C
+	paired_pals 0x1110, Palettes_837385C
+	paired_pals 0x110B, Palettes_8373894
+	paired_pals 0x110D, Palettes_837389C
+	paired_pals 0x110E, Palettes_83738A4
+	paired_pals 0x1112, Palettes_83738AC
+	paired_pals 0x1113, Palettes_83738B4
+	paired_pals 0x1114, Palettes_83738BC
+	paired_pals 0x1116, Palettes_83738CC
+	paired_pals 0x1118, Palettes_83738D4
+	paired_pals 0x1105, Palettes_83738DC
+	paired_pals 0x111A, Palettes_83738C4
+	paired_pals 0x11FF, NULL
+
+	.align 1
 Unknown_837394C:
-	.incbin "baserom.gba", 0x0037394C, 0x14
+	.2byte 0x1100
+	.2byte 0x1101
+	.2byte 0x1103
+	.2byte 0x1104
+	.2byte 0x1105
+	.2byte 0x1106
+	.2byte 0x1107
+	.2byte 0x1108
+	.2byte 0x1109
+	.2byte 0x110A
+
+	.align 1
 Unknown_8373960:
-	.incbin "baserom.gba", 0x00373960, 0x14
+	.2byte 0x1100
+	.2byte 0x1101
+	.2byte 0x1103
+	.2byte 0x1104
+	.2byte 0x1105
+	.2byte 0x1106
+	.2byte 0x1107
+	.2byte 0x1108
+	.2byte 0x1109
+	.2byte 0x110A
+
+	.align 1
 Unknown_8373974:
-	.incbin "baserom.gba", 0x00373974, 0x14
+	.2byte 0x1100
+	.2byte 0x1101
+	.2byte 0x1103
+	.2byte 0x1104
+	.2byte 0x1105
+	.2byte 0x1106
+	.2byte 0x1107
+	.2byte 0x1108
+	.2byte 0x1109
+	.2byte 0x110A
+
+	.align 1
 Unknown_8373988:
-	.incbin "baserom.gba", 0x00373988, 0x14
+	.2byte 0x1100
+	.2byte 0x1101
+	.2byte 0x1103
+	.2byte 0x1104
+	.2byte 0x1105
+	.2byte 0x1106
+	.2byte 0x1107
+	.2byte 0x1108
+	.2byte 0x1109
+	.2byte 0x110A
 
 	.align 2
 gUnknown_0837399C:: @ 837399C
@@ -3454,11 +3816,13 @@ gUnknown_0837399C:: @ 837399C
 @ 8374524
 	.include "data/graphics/field_objects/field_effect_objects.s"
 
+	.align 1
 gUnknown_0837520C:: @ 837520C
-	.incbin "baserom.gba", 0x0037520c, 0x10
+	.2byte 0x20, 0x40, 0x60, 0x80, 0x20, 0x40, 0x80, 0xC0
 
+	.align 1
 gUnknown_0837521C:: @ 837521C
-	.incbin "baserom.gba", 0x0037521c, 0x8
+	.2byte 0x20, 0x30, 0x40, 0x50
 
 	.align 2
 gUnknown_08375224:: @ 8375224
@@ -3471,7 +3835,7 @@ gUnknown_08375224:: @ 8375224
 	.4byte sub_805CA08
 
 gUnknown_08375240:: @ 8375240
-	.incbin "baserom.gba", 0x00375240, 0x4
+	.byte DIR_SOUTH, DIR_NORTH, DIR_WEST, DIR_EAST
 
 	.align 2
 gUnknown_08375244:: @ 8375244
@@ -3506,7 +3870,7 @@ gUnknown_08375284:: @ 8375284
 	.4byte sub_805D084
 
 gUnknown_083752A0:: @ 83752A0
-	.incbin "baserom.gba", 0x003752a0, 0x4
+	.byte DIR_SOUTH, DIR_NORTH
 
 	.align 2
 gUnknown_083752A4:: @ 83752A4
@@ -3519,7 +3883,7 @@ gUnknown_083752A4:: @ 83752A4
 	.4byte sub_805D208
 
 gUnknown_083752C0:: @ 83752C0
-	.incbin "baserom.gba", 0x003752c0, 0x4
+	.byte DIR_WEST, DIR_EAST
 
 	.align 2
 gUnknown_083752C4:: @ 83752C4
@@ -3560,7 +3924,7 @@ gUnknown_0837530C:: @ 837530C
 	.4byte sub_805D86C
 
 gUnknown_08375320:: @ 8375320
-	.incbin "baserom.gba", 0x00375320, 0x4
+	.byte DIR_NORTH, DIR_WEST
 
 	.align 2
 gUnknown_08375324:: @ 8375324
@@ -3571,7 +3935,7 @@ gUnknown_08375324:: @ 8375324
 	.4byte sub_805D9AC
 
 gUnknown_08375338:: @ 8375338
-	.incbin "baserom.gba", 0x00375338, 0x4
+	.byte DIR_NORTH, DIR_EAST
 
 	.align 2
 gUnknown_0837533C:: @ 837533C
@@ -3582,7 +3946,7 @@ gUnknown_0837533C:: @ 837533C
 	.4byte sub_805DAEC
 
 gUnknown_08375350:: @ 8375350
-	.incbin "baserom.gba", 0x00375350, 0x4
+	.byte DIR_SOUTH, DIR_WEST
 
 	.align 2
 gUnknown_08375354:: @ 8375354
@@ -3593,7 +3957,7 @@ gUnknown_08375354:: @ 8375354
 	.4byte sub_805DC2C
 
 gUnknown_08375368:: @ 8375368
-	.incbin "baserom.gba", 0x00375368, 0x4
+	.byte DIR_SOUTH, DIR_EAST
 
 	.align 2
 gUnknown_0837536C:: @ 837536C
@@ -3604,7 +3968,7 @@ gUnknown_0837536C:: @ 837536C
 	.4byte sub_805DD6C
 
 gUnknown_08375380:: @ 8375380
-	.incbin "baserom.gba", 0x00375380, 0x4
+	.byte DIR_NORTH, DIR_SOUTH, DIR_WEST, DIR_SOUTH
 
 	.align 2
 gUnknown_08375384:: @ 8375384
@@ -3615,7 +3979,7 @@ gUnknown_08375384:: @ 8375384
 	.4byte sub_805DEAC
 
 gUnknown_08375398:: @ 8375398
-	.incbin "baserom.gba", 0x00375398, 0x4
+	.byte DIR_SOUTH, DIR_NORTH, DIR_EAST, DIR_SOUTH
 
 	.align 2
 gUnknown_0837539C:: @ 837539C
@@ -3626,7 +3990,7 @@ gUnknown_0837539C:: @ 837539C
 	.4byte sub_805DFEC
 
 gUnknown_083753B0:: @ 83753B0
-	.incbin "baserom.gba", 0x003753b0, 0x4
+	.byte DIR_NORTH, DIR_WEST, DIR_EAST, DIR_NORTH
 
 	.align 2
 gUnknown_083753B4:: @ 83753B4
@@ -3637,7 +4001,7 @@ gUnknown_083753B4:: @ 83753B4
 	.4byte sub_805E12C
 
 gUnknown_083753C8:: @ 83753C8
-	.incbin "baserom.gba", 0x003753c8, 0x4
+	.byte DIR_WEST, DIR_EAST, DIR_SOUTH, DIR_SOUTH
 
 	.align 2
 gUnknown_083753CC:: @ 83753CC
@@ -3647,7 +4011,7 @@ gUnknown_083753CC:: @ 83753CC
 	.4byte sub_805E234
 
 gUnknown_083753DC:: @ 83753DC
-	.incbin "baserom.gba", 0x003753dc, 0x8
+	.byte DIR_SOUTH, DIR_EAST, DIR_WEST, DIR_SOUTH, DIR_NORTH
 
 	.align 2
 gUnknown_083753E4:: @ 83753E4
@@ -3657,7 +4021,7 @@ gUnknown_083753E4:: @ 83753E4
 	.4byte sub_805E338
 
 gUnknown_083753F4:: @ 83753F4
-	.incbin "baserom.gba", 0x003753f4, 0x8
+	.byte DIR_SOUTH, DIR_WEST, DIR_EAST, DIR_NORTH, DIR_SOUTH
 
 	.align 2
 gUnknown_083753FC:: @ 83753FC
@@ -3673,7 +4037,7 @@ gUnknown_0837540C:: @ 837540C
 	.4byte sub_805E5B4
 
 gUnknown_08375418:: @ 8375418
-	.incbin "baserom.gba", 0x00375418, 0x4
+	.byte DIR_NORTH, DIR_EAST, DIR_WEST, DIR_SOUTH
 
 	.align 2
 gUnknown_0837541C:: @ 837541C
@@ -3683,7 +4047,7 @@ gUnknown_0837541C:: @ 837541C
 
 	.align 2
 gUnknown_08375428:: @ 8375428
-	.4byte 0x02010304
+	.byte DIR_EAST, DIR_WEST, DIR_SOUTH, DIR_NORTH
 
 gUnknown_0837542C:: @ 837542C
 	.4byte sub_805E4EC
@@ -3691,7 +4055,7 @@ gUnknown_0837542C:: @ 837542C
 	.4byte sub_805E5B4
 
 gUnknown_08375438:: @ 8375438
-	.incbin "baserom.gba", 0x00375438, 0x4
+	.byte DIR_SOUTH, DIR_NORTH, DIR_EAST, DIR_WEST
 
 	.align 2
 gUnknown_0837543C:: @ 837543C
@@ -3700,7 +4064,7 @@ gUnknown_0837543C:: @ 837543C
 	.4byte sub_805E5B4
 
 gUnknown_08375448:: @ 8375448
-	.incbin "baserom.gba", 0x00375448, 0x4
+	.byte DIR_WEST, DIR_SOUTH, DIR_NORTH, DIR_EAST
 
 	.align 2
 gUnknown_0837544C:: @ 837544C
@@ -3709,7 +4073,7 @@ gUnknown_0837544C:: @ 837544C
 	.4byte sub_805E5B4
 
 gUnknown_08375458:: @ 8375458
-	.incbin "baserom.gba", 0x00375458, 0x4
+	.byte DIR_NORTH, DIR_WEST, DIR_EAST, DIR_SOUTH
 
 	.align 2
 gUnknown_0837545C:: @ 837545C
@@ -3718,7 +4082,7 @@ gUnknown_0837545C:: @ 837545C
 	.4byte sub_805E5B4
 
 gUnknown_08375468:: @ 8375468
-	.4byte 0x02010403
+	.byte DIR_WEST, DIR_EAST, DIR_SOUTH, DIR_NORTH
 
 	.align 2
 gUnknown_0837546C:: @ 837546C
@@ -3733,7 +4097,7 @@ gUnknown_08375478:: @ 8375478
 	.4byte sub_805E5B4
 
 gUnknown_08375484:: @ 8375484
-	.incbin "baserom.gba", 0x00375484, 0x4
+	.byte DIR_EAST, DIR_SOUTH, DIR_NORTH, DIR_WEST
 
 	.align 2
 gUnknown_08375488:: @ 8375488
@@ -3742,7 +4106,7 @@ gUnknown_08375488:: @ 8375488
 	.4byte sub_805E5B4
 
 gUnknown_08375494:: @ 8375494
-	.incbin "baserom.gba", 0x00375494, 0x4
+	.byte DIR_WEST, DIR_NORTH, DIR_SOUTH, DIR_EAST
 
 	.align 2
 gUnknown_08375498:: @ 8375498
@@ -3751,7 +4115,7 @@ gUnknown_08375498:: @ 8375498
 	.4byte sub_805E5B4
 
 gUnknown_083754A4:: @ 83754A4
-	.incbin "baserom.gba", 0x003754a4, 0x4
+	.byte DIR_NORTH, DIR_SOUTH, DIR_EAST, DIR_WEST
 
 	.align 2
 gUnknown_083754A8:: @ 83754A8
@@ -3760,7 +4124,7 @@ gUnknown_083754A8:: @ 83754A8
 	.4byte sub_805E5B4
 
 gUnknown_083754B4:: @ 83754B4
-	.incbin "baserom.gba", 0x003754b4, 0x4
+	.byte DIR_EAST, DIR_WEST, DIR_NORTH, DIR_SOUTH
 
 	.align 2
 gUnknown_083754B8:: @ 83754B8
@@ -3769,7 +4133,7 @@ gUnknown_083754B8:: @ 83754B8
 	.4byte sub_805E5B4
 
 gUnknown_083754C4:: @ 83754C4
-	.4byte 0x02030401
+	.byte DIR_SOUTH, DIR_EAST, DIR_WEST, DIR_NORTH
 
 	.align 2
 gUnknown_083754C8:: @ 83754C8
@@ -3778,7 +4142,7 @@ gUnknown_083754C8:: @ 83754C8
 	.4byte sub_805E5B4
 
 gUnknown_083754D4:: @ 83754D4
-	.incbin "baserom.gba", 0x003754d4, 0x4
+	.byte DIR_EAST, DIR_NORTH, DIR_SOUTH, DIR_WEST
 
 	.align 2
 gUnknown_083754D8:: @ 83754D8
@@ -3787,7 +4151,7 @@ gUnknown_083754D8:: @ 83754D8
 	.4byte sub_805E5B4
 
 gUnknown_083754E4:: @ 83754E4
-	.incbin "baserom.gba", 0x003754e4, 0x4
+	.byte DIR_NORTH, DIR_SOUTH, DIR_WEST, DIR_EAST
 
 	.align 2
 gUnknown_083754E8:: @ 83754E8
@@ -3796,7 +4160,7 @@ gUnknown_083754E8:: @ 83754E8
 	.4byte sub_805E5B4
 
 gUnknown_083754F4:: @ 83754F4
-	.incbin "baserom.gba", 0x003754f4, 0x4
+	.byte DIR_WEST, DIR_EAST, DIR_NORTH, DIR_SOUTH
 
 	.align 2
 gUnknown_083754F8:: @ 83754F8
@@ -3805,7 +4169,7 @@ gUnknown_083754F8:: @ 83754F8
 	.4byte sub_805E5B4
 
 gUnknown_08375504:: @ 8375504
-	.incbin "baserom.gba", 0x00375504, 0x4
+	.byte DIR_SOUTH, DIR_WEST, DIR_EAST, DIR_NORTH
 
 	.align 2
 gUnknown_08375508:: @ 8375508
@@ -3814,7 +4178,7 @@ gUnknown_08375508:: @ 8375508
 	.4byte sub_805E5B4
 
 gUnknown_08375514:: @ 8375514
-	.incbin "baserom.gba", 0x00375514, 0x4
+	.byte DIR_NORTH, DIR_WEST, DIR_SOUTH, DIR_EAST
 
 	.align 2
 gUnknown_08375518:: @ 8375518
@@ -3823,7 +4187,7 @@ gUnknown_08375518:: @ 8375518
 	.4byte sub_805E5B4
 
 gUnknown_08375524:: @ 8375524
-	.incbin "baserom.gba", 0x00375524, 0x4
+	.byte DIR_SOUTH, DIR_EAST, DIR_NORTH, DIR_WEST
 
 	.align 2
 gUnknown_08375528:: @ 8375528
@@ -3832,7 +4196,7 @@ gUnknown_08375528:: @ 8375528
 	.4byte sub_805E5B4
 
 gUnknown_08375534:: @ 8375534
-	.incbin "baserom.gba", 0x00375534, 0x4
+	.byte DIR_WEST, DIR_SOUTH, DIR_EAST, DIR_NORTH
 
 	.align 2
 gUnknown_08375538:: @ 8375538
@@ -3841,7 +4205,7 @@ gUnknown_08375538:: @ 8375538
 	.4byte sub_805E5B4
 
 gUnknown_08375544:: @ 8375544
-	.incbin "baserom.gba", 0x00375544, 0x4
+	.byte DIR_EAST, DIR_NORTH, DIR_WEST, DIR_SOUTH
 
 	.align 2
 gUnknown_08375548:: @ 8375548
@@ -3850,7 +4214,7 @@ gUnknown_08375548:: @ 8375548
 	.4byte sub_805E5B4
 
 gUnknown_08375554:: @ 8375554
-	.incbin "baserom.gba", 0x00375554, 0x4
+	.byte DIR_NORTH, DIR_EAST, DIR_SOUTH, DIR_WEST
 
 	.align 2
 gUnknown_08375558:: @ 8375558
@@ -3859,7 +4223,7 @@ gUnknown_08375558:: @ 8375558
 	.4byte sub_805E5B4
 
 gUnknown_08375564:: @ 8375564
-	.incbin "baserom.gba", 0x00375564, 0x4
+	.byte DIR_SOUTH, DIR_WEST, DIR_NORTH, DIR_EAST
 
 	.align 2
 gUnknown_08375568:: @ 8375568
@@ -3868,7 +4232,7 @@ gUnknown_08375568:: @ 8375568
 	.4byte sub_805E5B4
 
 gUnknown_08375574:: @ 8375574
-	.incbin "baserom.gba", 0x00375574, 0x4
+	.byte DIR_WEST, DIR_NORTH, DIR_EAST, DIR_SOUTH
 
 	.align 2
 gUnknown_08375578:: @ 8375578
@@ -3878,7 +4242,7 @@ gUnknown_08375578:: @ 8375578
 
 	.align 2
 gUnknown_08375584:: @ 8375584
-	.4byte 0x02030104
+	.byte DIR_EAST, DIR_SOUTH, DIR_WEST, DIR_NORTH
 
 	.align 2
 gUnknown_08375588:: @ 8375588
@@ -3932,52 +4296,52 @@ gUnknown_083755E8:: @ 83755E8
 	.4byte sub_805FD08
 
 gUnknown_083755F4:: @ 83755F4
-	.incbin "baserom.gba", 0x003755f4, 0x9
+	.byte 0x00, 0x00, 0x01, 0x02, 0x03, 0x00, 0x00, 0x01, 0x01
 
 gUnknown_083755FD:: @ 83755FD
-	.incbin "baserom.gba", 0x003755fd, 0x9
+	.byte 0x04, 0x04, 0x05, 0x06, 0x07, 0x04, 0x04, 0x05, 0x05
 
 gUnknown_08375606:: @ 8375606
-	.incbin "baserom.gba", 0x00375606, 0x9
+	.byte 0x08, 0x08, 0x09, 0x0A, 0x0B, 0x08, 0x08, 0x09, 0x09
 
 gUnknown_0837560F:: @ 837560F
-	.incbin "baserom.gba", 0x0037560f, 0x9
+	.byte 0x0C, 0x0C, 0x0D, 0x0E, 0x0F, 0x0C, 0x0C, 0x0D, 0x0D
 
 gUnknown_08375618:: @ 8375618
-	.incbin "baserom.gba", 0x00375618, 0x9
+	.byte 0x10, 0x10, 0x11, 0x12, 0x13, 0x10, 0x10, 0x11, 0x11
 
 gUnknown_08375621:: @ 8375621
-	.incbin "baserom.gba", 0x00375621, 0x9
+	.byte 0x14, 0x14, 0x15, 0x16, 0x17, 0x14, 0x14, 0x15, 0x15
 
 gUnknown_0837562A:: @ 837562A
-	.incbin "baserom.gba", 0x0037562a, 0x9
+	.byte 0x14, 0x14, 0x15, 0x16, 0x17, 0x14, 0x14, 0x15, 0x15
 
 gUnknown_08375633:: @ 8375633
-	.incbin "baserom.gba", 0x00375633, 0x9
+	.byte 0x18, 0x18, 0x19, 0x1A, 0x1B, 0x18, 0x18, 0x19, 0x19
 
 gUnknown_0837563C:: @ 837563C
-	.incbin "baserom.gba", 0x0037563c, 0x9
+	.byte 0x1C, 0x1C, 0x1D, 0x1E, 0x1F, 0x1C, 0x1C, 0x1D, 0x1D
 
 gUnknown_08375645:: @ 8375645
-	.incbin "baserom.gba", 0x00375645, 0x9
+	.byte 0x20, 0x20, 0x21, 0x22, 0x23, 0x20, 0x20, 0x21, 0x21
 
 gUnknown_0837564E:: @ 837564E
-	.incbin "baserom.gba", 0x0037564e, 0x9
+	.byte 0x24, 0x24, 0x25, 0x26, 0x27, 0x24, 0x24, 0x25, 0x25
 
 gUnknown_08375657:: @ 8375657
-	.incbin "baserom.gba", 0x00375657, 0x9
+	.byte 0x00, 0x00, 0x01, 0x02, 0x03, 0x00, 0x00, 0x01, 0x01
 
 gUnknown_08375660:: @ 8375660
-	.incbin "baserom.gba", 0x00375660, 0x9
+	.byte 0x04, 0x04, 0x05, 0x06, 0x07, 0x04, 0x04, 0x05, 0x05
 
 gUnknown_08375669:: @ 8375669
-	.incbin "baserom.gba", 0x00375669, 0x9
+	.byte 0x08, 0x08, 0x09, 0x0A, 0x0B, 0x08, 0x08, 0x09, 0x09
 
 gUnknown_08375672:: @ 8375672
-	.incbin "baserom.gba", 0x00375672, 0x9
+	.byte 0x14, 0x14, 0x15, 0x16, 0x17, 0x14, 0x14, 0x15, 0x15
 
 gUnknown_0837567B:: @ 837567B
-	.incbin "baserom.gba", 0x0037567b, 0x9
+	.byte 0x08, 0x08, 0x07, 0x09, 0x0A, 0x08, 0x08, 0x07, 0x07
 
 	.align 2
 gUnknown_08375684:: @ 8375684
@@ -3993,98 +4357,107 @@ gUnknown_08375694:: @ 8375694
 	.4byte MetatileBehavior_IsEastBlocked
 	.4byte MetatileBehavior_IsWestBlocked
 
+	.align 1
 gUnknown_083756A4:: @ 83756A4
-	.incbin "baserom.gba", 0x003756a4, 0x24
+	.2byte  0,  0
+	.2byte  0,  1
+	.2byte  0, -1
+	.2byte -1,  0
+	.2byte  1,  0
+	.2byte -1,  1
+	.2byte  1,  1
+	.2byte -1, -1
+	.2byte  1, -1
 
 gUnknown_083756C8:: @ 83756C8
-	.incbin "baserom.gba", 0x003756c8, 0x5
+	.byte 0x00, 0x00, 0x01, 0x02, 0x03
 
 gUnknown_083756CD:: @ 83756CD
-	.incbin "baserom.gba", 0x003756cd, 0x5
+	.byte 0x04, 0x04, 0x05, 0x06, 0x07
 
 gUnknown_083756D2:: @ 83756D2
-	.incbin "baserom.gba", 0x003756d2, 0x5
+	.byte 0x08, 0x08, 0x09, 0x0A, 0x0B
 
 gUnknown_083756D7:: @ 83756D7
-	.incbin "baserom.gba", 0x003756d7, 0x5
+	.byte 0x15, 0x15, 0x16, 0x17, 0x18
 
 gUnknown_083756DC:: @ 83756DC
-	.incbin "baserom.gba", 0x003756dc, 0x5
+	.byte 0x29, 0x29, 0x2A, 0x2B, 0x2C
 
 gUnknown_083756E1:: @ 83756E1
-	.incbin "baserom.gba", 0x003756e1, 0x5
+	.byte 0x2D, 0x2D, 0x2E, 0x2F, 0x30
 
 gUnknown_083756E6:: @ 83756E6
-	.incbin "baserom.gba", 0x003756e6, 0x5
+	.byte 0x31, 0x31, 0x32, 0x33, 0x34
 
 gUnknown_083756EB:: @ 83756EB
-	.incbin "baserom.gba", 0x003756eb, 0x5
+	.byte 0x35, 0x35, 0x36, 0x37, 0x38
 
 gUnknown_083756F0:: @ 83756F0
-	.incbin "baserom.gba", 0x003756f0, 0x5
+	.byte 0x0C, 0x0C, 0x0D, 0x0E, 0x0F
 
 gUnknown_083756F5:: @ 83756F5
-	.incbin "baserom.gba", 0x003756f5, 0x5
+	.byte 0x46, 0x46, 0x47, 0x48, 0x49
 
 gUnknown_083756FA:: @ 83756FA
-	.incbin "baserom.gba", 0x003756fa, 0x5
+	.byte 0x4B, 0x4B, 0x4A, 0x4D, 0x4C
 
 gUnknown_083756FF:: @ 83756FF
-	.incbin "baserom.gba", 0x003756ff, 0x5
+	.byte 0x42, 0x42, 0x43, 0x44, 0x45
 
 gUnknown_08375704:: @ 8375704
-	.incbin "baserom.gba", 0x00375704, 0x5
+	.byte 0x3A, 0x3A, 0x3B, 0x3C, 0x3D
 
 gUnknown_08375709:: @ 8375709
-	.incbin "baserom.gba", 0x00375709, 0x5
+	.byte 0x19, 0x19, 0x1A, 0x1B, 0x1C
 
 gUnknown_0837570E:: @ 837570E
-	.incbin "baserom.gba", 0x0037570e, 0x5
+	.byte 0x1D, 0x1D, 0x1E, 0x1F, 0x20
 
 gUnknown_08375713:: @ 8375713
-	.incbin "baserom.gba", 0x00375713, 0x5
+	.byte 0x21, 0x21, 0x22, 0x23, 0x24
 
 gUnknown_08375718:: @ 8375718
-	.incbin "baserom.gba", 0x00375718, 0x5
+	.byte 0x25, 0x25, 0x26, 0x27, 0x28
 
 gUnknown_0837571D:: @ 837571D
-	.incbin "baserom.gba", 0x0037571d, 0x5
+	.byte 0x62, 0x62, 0x63, 0x64, 0x65
 
 gUnknown_08375722:: @ 8375722
-	.incbin "baserom.gba", 0x00375722, 0x5
+	.byte 0x66, 0x66, 0x67, 0x68, 0x69
 
 gUnknown_08375727:: @ 8375727
-	.incbin "baserom.gba", 0x00375727, 0x5
+	.byte 0x6A, 0x6A, 0x6B, 0x6C, 0x6D
 
 gUnknown_0837572C:: @ 837572C
-	.incbin "baserom.gba", 0x0037572c, 0x5
+	.byte 0x6E, 0x6E, 0x6F, 0x70, 0x71
 
 gUnknown_08375731:: @ 8375731
-	.incbin "baserom.gba", 0x00375731, 0x5
+	.byte 0x72, 0x72, 0x73, 0x74, 0x75
 
 gUnknown_08375736:: @ 8375736
-	.incbin "baserom.gba", 0x00375736, 0x5
+	.byte 0x76, 0x76, 0x77, 0x78, 0x79
 
 gUnknown_0837573B:: @ 837573B
-	.incbin "baserom.gba", 0x0037573b, 0x5
+	.byte 0x7A, 0x7A, 0x7B, 0x7C, 0x7D
 
 gUnknown_08375740:: @ 8375740
-	.incbin "baserom.gba", 0x00375740, 0x5
+	.byte 0x7E, 0x7E, 0x7F, 0x80, 0x81
 
 gUnknown_08375745:: @ 8375745
-	.incbin "baserom.gba", 0x00375745, 0x5
+	.byte 0x82, 0x82, 0x83, 0x84, 0x85
 
 gUnknown_0837574A:: @ 837574A
-	.incbin "baserom.gba", 0x0037574a, 0x5
+	.byte 0x86, 0x86, 0x87, 0x88, 0x89
 
 gUnknown_0837574F:: @ 837574F
-	.incbin "baserom.gba", 0x0037574f, 0x8
+	.byte 2, 1, 4, 3, 8, 7, 6, 5
 
 gUnknown_08375757:: @ 8375757
-	.incbin "baserom.gba", 0x00375757, 0x10
+	.byte 2, 1, 4, 3, 1, 2, 3, 4, 3, 4, 2, 1, 4, 3, 1, 2
 
 gUnknown_08375767:: @ 8375767
-	.incbin "baserom.gba", 0x00375767, 0x11
+	.byte 2, 1, 4, 3, 1, 2, 3, 4, 4, 3, 1, 2, 3, 4, 2, 1
 
 	.align 2
 gUnknown_08375778:: @ 8375778
