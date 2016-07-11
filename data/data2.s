@@ -20594,8 +20594,23 @@ gUnknown_083F7EA8:: @ 83F7EA8
 	.4byte sub_802E424
 	.4byte c2_exit_to_overworld_2_switch
 
+	.align 2
 gUnknown_083F7EB8:: @ 83F7EB8
-	.incbin "baserom.gba", 0x003f7eb8, 0x3c
+	.4byte NULL
+	.4byte ContestStatsText_RedPokeBlock
+	.4byte ContestStatsText_BluePokeBlock
+	.4byte ContestStatsText_PinkPokeBlock
+	.4byte ContestStatsText_GreenPokeBlock
+	.4byte ContestStatsText_YellowPokeBlock
+	.4byte ContestStatsText_PurplePokeBlock
+	.4byte ContestStatsText_IndigoPokeBlock
+	.4byte ContestStatsText_BrownPokeBlock
+	.4byte ContestStatsText_LiteBluePokeBlock
+	.4byte ContestStatsText_OlivePokeBlock
+	.4byte ContestStatsText_GrayPokeBlock
+	.4byte ContestStatsText_BlackPokeBlock
+	.4byte ContestStatsText_WhitePokeBlock
+	.4byte ContestStatsText_GoldPokeBlock
 
 	.align 2
 gUnknown_083F7EF4:: @ 83F7EF4
@@ -24513,6 +24528,7 @@ ContestStatsText_VeryHard:
 	.string "Very hard$"
 ContestStatsText_SuperHard:
 	.string "Super hard$"
+
 ContestStatsText_RedPokeBlock:
 	.string "RED {POKEBLOCK}$"
 ContestStatsText_BluePokeBlock:
