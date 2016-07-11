@@ -3495,7 +3495,7 @@ sub_800B25C: @ 800B25C
 	bx r1
 	.align 2, 0
 _0800B2B8: .4byte gMonFrontPicTable + 0xAF0
-_0800B2BC: .4byte gUnknown_081E7C74
+_0800B2BC: .4byte gMonFrontPicCoords
 _0800B2C0: .4byte gUnknown_081FAF4C
 _0800B2C4: .4byte gMonPaletteTable + 0xAF0
 _0800B2C8: .4byte 0x02024e8c
@@ -13803,7 +13803,7 @@ _08010426:
 	lsls r0, 2
 	b _08010468
 	.align 2, 0
-_0801042C: .4byte gUnknown_081E7C74
+_0801042C: .4byte gMonFrontPicCoords
 _08010430:
 	ldr r0, _08010448
 	cmp r4, r0
@@ -13828,7 +13828,7 @@ _08010454:
 	ldr r0, _08010460
 	b _0801046A
 	.align 2, 0
-_08010460: .4byte gUnknown_081E7C74
+_08010460: .4byte gMonFrontPicCoords
 _08010464:
 	ldr r1, _0801048C
 	lsls r0, r4, 2
@@ -13853,7 +13853,7 @@ _0801046C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0801048C: .4byte gUnknown_081E7C74
+_0801048C: .4byte gMonFrontPicCoords
 _08010490: .4byte sub_8010494
 	thumb_func_end sub_8010384
 
@@ -38272,7 +38272,7 @@ _0801CDBC:
 	adds r2, r1, 0
 	b _0801CE38
 	.align 2, 0
-_0801CDC8: .4byte gUnknown_081F9720
+_0801CDC8: .4byte gTypeEffectiveness
 _0801CDCC:
 	adds r3, 0x3
 	b _0801CE34
@@ -38438,7 +38438,7 @@ _0801CEF4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0801CF08: .4byte gUnknown_081F9720
+_0801CF08: .4byte gTypeEffectiveness
 _0801CF0C: .4byte 0x02024a80
 _0801CF10: .4byte 0x02024c08
 _0801CF14: .4byte 0x02024c07
@@ -38535,7 +38535,7 @@ _0801CFD8:
 	adds r4, r1, 0
 	b _0801D12A
 	.align 2, 0
-_0801CFE4: .4byte gUnknown_081F9720
+_0801CFE4: .4byte gTypeEffectiveness
 _0801CFE8:
 	adds r0, r5, r4
 	ldrb r0, [r0]
@@ -38987,7 +38987,7 @@ _0801D328:
 	adds r0, r1, 0
 	b _0801D3CA
 	.align 2, 0
-_0801D344: .4byte gUnknown_081F9720
+_0801D344: .4byte gTypeEffectiveness
 _0801D348:
 	adds r7, 0x3
 	b _0801D3B6
@@ -39125,7 +39125,7 @@ _0801D43A:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0801D44C: .4byte gUnknown_081F9720
+_0801D44C: .4byte gTypeEffectiveness
 _0801D450: .4byte 0x02024a80
 _0801D454: .4byte 0x02024c08
 _0801D458: .4byte gBattleMoves
@@ -39271,7 +39271,7 @@ _0801D554:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0801D564: .4byte gUnknown_081F9720
+_0801D564: .4byte gTypeEffectiveness
 _0801D568: .4byte 0x02024c08
 _0801D56C: .4byte 0x02024a80
 _0801D570: .4byte gBattleMoves
@@ -48965,7 +48965,7 @@ _08022370:
 	adds r6, r1, 0
 	b _08022432
 	.align 2, 0
-_0802237C: .4byte gUnknown_081F9720
+_0802237C: .4byte gTypeEffectiveness
 _08022380:
 	adds r0, r5, r6
 	ldrb r0, [r0]
@@ -60590,7 +60590,7 @@ _08028110:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08028120: .4byte gUnknown_081F9720
+_08028120: .4byte gTypeEffectiveness
 _08028124: .4byte 0x02024c44
 _08028128: .4byte 0x02024c07
 _0802812C: .4byte 0x02024a80
@@ -65833,7 +65833,7 @@ _0802AA36:
 	strh r1, [r0]
 	b _0802AA6A
 	.align 2, 0
-_0802AA50: .4byte gUnknown_081FAD46
+_0802AA50: .4byte gWeightDamage
 _0802AA54: .4byte 0x0000ffff
 _0802AA58: .4byte 0x02024a80
 _0802AA5C: .4byte 0x02024c08
@@ -66510,7 +66510,7 @@ _0802AF7A:
 	b _0802AFCA
 	.align 2, 0
 _0802AFB4: .4byte gBaseStats
-_0802AFB8: .4byte gUnknown_081FAD5E
+_0802AFB8: .4byte gPickupItems
 _0802AFBC: .4byte 0x03004360
 _0802AFC0:
 	lsls r0, r5, 3
@@ -75884,7 +75884,7 @@ _0802FBEA:
 _0802FCB8: .4byte 0x02024ea4
 _0802FCBC: .4byte 0x02024a60
 _0802FCC0: .4byte 0x02024e8c
-_0802FCC4: .4byte gUnknown_081ECAD8
+_0802FCC4: .4byte gTrainerBackPicCoords
 _0802FCC8: .4byte 0x02024be0
 _0802FCCC: .4byte 0x02020004
 _0802FCD0: .4byte 0x0000fffe
@@ -75984,7 +75984,7 @@ sub_802FCE0: @ 802FCE0
 _0802FD94: .4byte 0x02024ea4
 _0802FD98: .4byte 0x02024a60
 _0802FD9C: .4byte 0x02024e8c
-_0802FDA0: .4byte gUnknown_081ECAD8
+_0802FDA0: .4byte gTrainerBackPicCoords
 _0802FDA4: .4byte 0x02024be0
 _0802FDA8: .4byte 0x02020004
 _0802FDAC: .4byte 0x0000ffa0
@@ -79303,7 +79303,7 @@ _080317DC:
 	.align 2, 0
 _08031838: .4byte 0x02024e70
 _0803183C: .4byte gMonFrontPicTable
-_08031840: .4byte gUnknown_081E7C74
+_08031840: .4byte gMonFrontPicCoords
 _08031844: .4byte gUnknown_081FAF4C
 _08031848: .4byte 0x02017800
 _0803184C:
@@ -79467,7 +79467,7 @@ _08031944:
 	.align 2, 0
 _080319A0: .4byte 0x02024e70
 _080319A4: .4byte gMonBackPicTable
-_080319A8: .4byte gUnknown_081E9114
+_080319A8: .4byte gMonBackPicCoords
 _080319AC: .4byte gUnknown_081FAF4C
 _080319B0: .4byte 0x02017800
 _080319B4:
@@ -79615,7 +79615,7 @@ sub_8031A6C: @ 8031A6C
 	bx r0
 	.align 2, 0
 _08031ADC: .4byte gTrainerFrontPicTable
-_08031AE0: .4byte gUnknown_081EC3F0
+_08031AE0: .4byte gTrainerFrontPicCoords
 _08031AE4: .4byte gUnknown_081FAF4C
 _08031AE8: .4byte 0xffff0000
 _08031AEC: .4byte 0x0000ffff
@@ -79677,7 +79677,7 @@ sub_8031AF4: @ 8031AF4
 	bx r0
 	.align 2, 0
 _08031B60: .4byte gTrainerBackPicTable
-_08031B64: .4byte gUnknown_081ECAD8
+_08031B64: .4byte gTrainerBackPicCoords
 _08031B68: .4byte gUnknown_081FAF4C
 _08031B6C: .4byte gTrainerBackPicPaletteTable
 	thumb_func_end sub_8031AF4
@@ -80356,7 +80356,7 @@ _08032088:
 	.align 2, 0
 _080320C0: .4byte 0x02019348
 _080320C4: .4byte gMonBackPicTable
-_080320C8: .4byte gUnknown_081E9114
+_080320C8: .4byte gMonBackPicCoords
 _080320CC: .4byte gUnknown_081FAF4C
 _080320D0:
 	mov r0, r8
@@ -80452,7 +80452,7 @@ _08032184:
 _0803218C: .4byte 0x02024a6a
 _08032190: .4byte 0x03004360
 _08032194: .4byte gMonBackPicTable
-_08032198: .4byte gUnknown_081E9114
+_08032198: .4byte gMonBackPicCoords
 _0803219C: .4byte gUnknown_081FAF4C
 _080321A0: .4byte 0x02024e70
 _080321A4:
@@ -80628,7 +80628,7 @@ _080322F6:
 _08032308: .4byte 0x02024a6a
 _0803230C: .4byte 0x030045c0
 _08032310: .4byte gMonFrontPicTable
-_08032314: .4byte gUnknown_081E7C74
+_08032314: .4byte gMonFrontPicCoords
 _08032318: .4byte gUnknown_081FAF4C
 _0803231C: .4byte 0x02024e70
 _08032320: .4byte 0x02024be0
@@ -85802,7 +85802,7 @@ _08034C56:
 _08034D88: .4byte gTrainers
 _08034D8C: .4byte 0x02024a60
 _08034D90: .4byte 0x02024e8c
-_08034D94: .4byte gUnknown_081EC3F0
+_08034D94: .4byte gTrainerFrontPicCoords
 _08034D98: .4byte 0x02024be0
 _08034D9C: .4byte 0x02020004
 _08034DA0: .4byte 0x0000ff10
@@ -86014,7 +86014,7 @@ _08034E1A:
 _08034F4C: .4byte gTrainers
 _08034F50: .4byte 0x02024a60
 _08034F54: .4byte 0x02024e8c
-_08034F58: .4byte gUnknown_081EC3F0
+_08034F58: .4byte gTrainerFrontPicCoords
 _08034F5C: .4byte 0x02024be0
 _08034F60: .4byte 0x02020004
 _08034F64: .4byte 0x0000fffe
@@ -89711,7 +89711,7 @@ _08036CBE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08036CD0: .4byte gUnknown_081F9720
+_08036CD0: .4byte gTypeEffectiveness
 	thumb_func_end sub_8036C4C
 
 	thumb_func_start sub_8036CD4
@@ -95023,7 +95023,7 @@ _08039724:
 _0803986C: .4byte 0x03002970
 _08039870: .4byte 0x02024a60
 _08039874: .4byte 0x02024e8c
-_08039878: .4byte gUnknown_081EC3F0
+_08039878: .4byte gTrainerFrontPicCoords
 _0803987C: .4byte 0x02024be0
 _08039880: .4byte 0x02020004
 _08039884: .4byte 0x0000ff10
@@ -114203,7 +114203,7 @@ _08042BB4:
 	b _08042C50
 	.align 2, 0
 _08042C04: .4byte gMonFrontPicTable
-_08042C08: .4byte gUnknown_081E7C74
+_08042C08: .4byte gMonFrontPicCoords
 _08042C0C: .4byte 0x02000000
 _08042C10: .4byte gUnknown_081FAF4C
 _08042C14:
@@ -115146,7 +115146,7 @@ _08043404: .4byte sub_8043460
 _08043408: .4byte 0x0300481c
 _0804340C: .4byte 0x03004360
 _08043410: .4byte 0x02020004
-_08043414: .4byte gUnknown_081E7C74
+_08043414: .4byte gMonFrontPicCoords
 _08043418:
 	ldrh r0, [r4, 0x30]
 	adds r0, 0x14
@@ -131304,7 +131304,7 @@ _0804B330:
 	b _0804B3FA
 	.align 2, 0
 _0804B390: .4byte gMonFrontPicTable
-_0804B394: .4byte gUnknown_081E7C74
+_0804B394: .4byte gMonFrontPicCoords
 _0804B398: .4byte 0x02000000
 _0804B39C: .4byte gUnknown_081FAF4C
 _0804B3A0: .4byte 0x03004828
@@ -133303,7 +133303,7 @@ _0804C5EC:
 	.align 2, 0
 _0804C65C: .4byte 0x02020004
 _0804C660: .4byte 0x0000ff4c
-_0804C664: .4byte gUnknown_081E7C74
+_0804C664: .4byte gMonFrontPicCoords
 _0804C668: .4byte 0x00000179
 _0804C66C:
 	ldr r4, [r6]
@@ -134917,7 +134917,7 @@ _0804D314:
 	b _0804D53C
 	.align 2, 0
 _0804D3B4: .4byte 0x02020004
-_0804D3B8: .4byte gUnknown_081E7C74
+_0804D3B8: .4byte gMonFrontPicCoords
 _0804D3BC: .4byte 0x000fffff
 _0804D3C0: .4byte 0x00000103
 _0804D3C4:

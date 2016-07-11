@@ -244,14 +244,14 @@ gSpriteAnimTable_81E7C64:: @ 81E7C64
 	.4byte gSpriteAnim_81E7C54
 	.4byte gSpriteAnim_81E7C5C
 
-gUnknown_081E7C74:: @ 81E7C74
-	.incbin "baserom.gba", 0x001e7c74, 0x6e0
+@ 81E7C74
+	.include "data/graphics/pokemon/front_pic_coords.s"
 
 @ 81E8354
 	.include "data/graphics/pokemon/front_pic_table.s"
 
-gUnknown_081E9114:: @ 81E9114
-	.incbin "baserom.gba", 0x001e9114, 0x6e0
+@ 81E9114
+	.include "data/graphics/pokemon/back_pic_coords.s"
 
 @ 81E97F4
 	.include "data/graphics/pokemon/back_pic_table.s"
@@ -698,8 +698,8 @@ gUnknown_081EC2A4:: @ 81EC2A4
 	.4byte gSpriteAnimTable_81EC29C
 	.4byte gSpriteAnimTable_81EC2A0
 
-gUnknown_081EC3F0:: @ 81EC3F0
-	.incbin "baserom.gba", 0x001ec3f0, 0x14c
+@ 81EC3F0
+	.include "data/graphics/trainers/front_pic_coords.s"
 
 @ 81EC53C
 	.include "data/graphics/trainers/front_pic_table.s"
@@ -755,8 +755,8 @@ gUnknown_081ECACC:: @ 81ECACC
 	.4byte gSpriteAnimTable_81ECABC
 	.4byte gSpriteAnimTable_81ECAC4
 
-gUnknown_081ECAD8:: @ 81ECAD8
-	.incbin "baserom.gba", 0x001ecad8, 0xc
+@ 81ECAD8
+	.include "data/graphics/trainers/back_pic_coords.s"
 
 @ 81ECAE4
 	.include "data/graphics/trainers/back_pic_table.s"
@@ -910,7 +910,7 @@ gUnknown_081F9688:: @ 81F9688
 	.incbin "baserom.gba", 0x001f9688, 0x40
 
 gUnknown_081F96C8:: @ 81F96C8
-	.incbin "baserom.gba", 0x001f96c8, 0x8
+	.string "ヌケニン$" @ "Nukenin" (Shedinja)
 
 	.align 2
 gSpriteTemplate_81F96D0:: @ 81F96D0
@@ -931,8 +931,8 @@ gOamData_81F96F0:: @ 81F96F0
 	.align 2
 	.incbin "baserom.gba", 0x1f96f8, 0x28
 
-gUnknown_081F9720:: @ 81F9720
-	.incbin "baserom.gba", 0x001f9720, 0x150
+@ 81F9720
+	.include "data/type_effectiveness.s"
 
 @ 81F9870
 	.include "data/text/type_names.s"
@@ -1304,11 +1304,30 @@ gUnknown_081FAD26:: @ 81FAD26
 gUnknown_081FAD32:: @ 81FAD32
 	.incbin "baserom.gba", 0x001fad32, 0x14
 
-gUnknown_081FAD46:: @ 81FAD46
-	.incbin "baserom.gba", 0x001fad46, 0x18
+@ weight-based damage table for Low Kick
+@ format: min. weight (hectograms), base power
 
-gUnknown_081FAD5E:: @ 81FAD5E
-	.incbin "baserom.gba", 0x001fad5e, 0x28
+	.align 1
+gWeightDamage:: @ 81FAD46
+	.2byte  100,  20
+	.2byte  250,  40
+	.2byte  500,  60
+	.2byte 1000,  80
+	.2byte 2000, 100
+	.2byte   -1,  -1
+
+	.align 1
+gPickupItems:: @ 81FAD5E
+	.2byte ITEM_SUPER_POTION, 30
+	.2byte ITEM_FULL_HEAL, 40
+	.2byte ITEM_ULTRA_BALL, 50
+	.2byte ITEM_RARE_CANDY, 60
+	.2byte ITEM_FULL_RESTORE, 70
+	.2byte ITEM_REVIVE, 80
+	.2byte ITEM_NUGGET, 90
+	.2byte ITEM_PROTEIN, 95
+	.2byte ITEM_PP_UP, 99
+	.2byte ITEM_KINGS_ROCK, 1
 
 gUnknown_081FAD86:: @ 81FAD86
 	.incbin "baserom.gba", 0x001fad86, 0xa
