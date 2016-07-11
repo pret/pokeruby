@@ -6378,7 +6378,7 @@ _08077CC2:
 	lsls r0, 2
 	b _08077DC8
 	.align 2, 0
-_08077CC8: .4byte gUnknown_081E9114
+_08077CC8: .4byte gMonBackPicCoords
 _08077CCC:
 	ldr r0, _08077CE0
 	cmp r5, r0
@@ -6402,12 +6402,12 @@ _08077CEC:
 	ldr r0, _08077CF8
 	b _08077DCA
 	.align 2, 0
-_08077CF8: .4byte gUnknown_081E9114
+_08077CF8: .4byte gMonBackPicCoords
 _08077CFC:
 	ldr r1, _08077D00
 	b _08077DC6
 	.align 2, 0
-_08077D00: .4byte gUnknown_081E9114
+_08077D00: .4byte gMonBackPicCoords
 _08077D04:
 	cmp r5, 0xC9
 	bne _08077D90
@@ -6476,7 +6476,7 @@ _08077D86:
 	lsls r0, 2
 	b _08077DC8
 	.align 2, 0
-_08077D8C: .4byte gUnknown_081E7C74
+_08077D8C: .4byte gMonFrontPicCoords
 _08077D90:
 	ldr r0, _08077DA8
 	cmp r5, r0
@@ -6501,7 +6501,7 @@ _08077DB4:
 	ldr r0, _08077DC0
 	b _08077DCA
 	.align 2, 0
-_08077DC0: .4byte gUnknown_081E7C74
+_08077DC0: .4byte gMonFrontPicCoords
 _08077DC4:
 	ldr r1, _08077DD4
 _08077DC6:
@@ -6515,7 +6515,7 @@ _08077DCC:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08077DD4: .4byte gUnknown_081E7C74
+_08077DD4: .4byte gMonFrontPicCoords
 	thumb_func_end sub_8077BFC
 
 	thumb_func_start sub_8077DD8
@@ -10532,7 +10532,7 @@ _08079B2C:
 	.align 2, 0
 _08079B44: .4byte 0x02020004
 _08079B48: .4byte 0x02024be0
-_08079B4C: .4byte gUnknown_081E9114
+_08079B4C: .4byte gMonBackPicCoords
 _08079B50: .4byte 0x02019348
 _08079B54:
 	lsls r0, r4, 24
@@ -10602,7 +10602,7 @@ _08079BD2:
 	ldrb r0, [r1, 0x1]
 	b _08079BEC
 	.align 2, 0
-_08079BDC: .4byte gUnknown_081E7C74
+_08079BDC: .4byte gMonFrontPicCoords
 _08079BE0:
 	adds r0, r4, 0x1
 	lsls r0, 16
@@ -11155,7 +11155,7 @@ sub_8079F44: @ 8079F44
 _08079FE0: .4byte gUnknown_0837F5E0
 _08079FE4: .4byte gSpriteTemplate_837F5B0
 _08079FE8: .4byte gMonFrontPicTable
-_08079FEC: .4byte gUnknown_081E7C74
+_08079FEC: .4byte gMonFrontPicCoords
 _08079FF0:
 	adds r0, r6, 0
 	ldr r1, [sp, 0x44]
@@ -11217,12 +11217,12 @@ _0807A02E:
 	b _0807A09E
 	.align 2, 0
 _0807A068: .4byte gMonBackPicTable
-_0807A06C: .4byte gUnknown_081E9114
+_0807A06C: .4byte gMonBackPicCoords
 _0807A070: .4byte 0x06010000
 _0807A074: .4byte 0x040000d4
 _0807A078: .4byte 0x84000200
 _0807A07C: .4byte gSpriteTemplate_837F5B0
-_0807A080: .4byte gUnknown_081E7C74
+_0807A080: .4byte gMonFrontPicCoords
 _0807A084:
 	lsls r0, r7, 1
 	adds r0, r7
@@ -11272,7 +11272,7 @@ _0807A0D0:
 	bx r1
 	.align 2, 0
 _0807A0E4: .4byte gSpriteTemplate_837F5B0
-_0807A0E8: .4byte gUnknown_081E9114
+_0807A0E8: .4byte gMonBackPicCoords
 _0807A0EC: .4byte 0x02020004
 _0807A0F0: .4byte gSpriteAffineAnimTable_81E7C18
 	thumb_func_end sub_8079F44
@@ -11354,7 +11354,7 @@ _0807A17A:
 	ldr r0, _0807A180
 	b _0807A33C
 	.align 2, 0
-_0807A180: .4byte gUnknown_081E9114
+_0807A180: .4byte gMonBackPicCoords
 _0807A184:
 	ldr r0, _0807A19C
 	cmp r7, r0
@@ -11370,7 +11370,7 @@ _0807A18C:
 	b _0807A33C
 	.align 2, 0
 _0807A19C: .4byte 0x00000181
-_0807A1A0: .4byte gUnknown_081E9114
+_0807A1A0: .4byte gMonBackPicCoords
 _0807A1A4:
 	mov r0, r8
 	bl battle_side_get_owner
@@ -11454,7 +11454,7 @@ _0807A246:
 	ldr r0, _0807A24C
 	b _0807A33C
 	.align 2, 0
-_0807A24C: .4byte gUnknown_081E9114
+_0807A24C: .4byte gMonBackPicCoords
 _0807A250:
 	movs r0, 0xCE
 	lsls r0, 1
@@ -11464,13 +11464,13 @@ _0807A258:
 	ldr r4, _0807A25C
 	b _0807A33E
 	.align 2, 0
-_0807A25C: .4byte gUnknown_081E9114
+_0807A25C: .4byte gMonBackPicCoords
 _0807A260:
 	lsls r1, r7, 2
 	ldr r0, _0807A268
 	b _0807A33C
 	.align 2, 0
-_0807A268: .4byte gUnknown_081E9114
+_0807A268: .4byte gMonBackPicCoords
 _0807A26C:
 	mov r0, r8
 	lsls r2, r0, 2
@@ -11571,7 +11571,7 @@ _0807A328:
 	ldr r4, _0807A334
 	b _0807A33E
 	.align 2, 0
-_0807A334: .4byte gUnknown_081E7C74
+_0807A334: .4byte gMonFrontPicCoords
 _0807A338:
 	lsls r1, r7, 2
 _0807A33A:
@@ -11588,7 +11588,7 @@ _0807A33E:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0807A350: .4byte gUnknown_081E7C74
+_0807A350: .4byte gMonFrontPicCoords
 _0807A354: .4byte _0807A358
 	.align 2, 0
 _0807A358:

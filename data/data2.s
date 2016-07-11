@@ -244,14 +244,14 @@ gSpriteAnimTable_81E7C64:: @ 81E7C64
 	.4byte gSpriteAnim_81E7C54
 	.4byte gSpriteAnim_81E7C5C
 
-gUnknown_081E7C74:: @ 81E7C74
-	.incbin "baserom.gba", 0x001e7c74, 0x6e0
+@ 81E7C74
+	.include "data/graphics/pokemon/front_pic_coords.s"
 
 @ 81E8354
 	.include "data/graphics/pokemon/front_pic_table.s"
 
-gUnknown_081E9114:: @ 81E9114
-	.incbin "baserom.gba", 0x001e9114, 0x6e0
+@ 81E9114
+	.include "data/graphics/pokemon/back_pic_coords.s"
 
 @ 81E97F4
 	.include "data/graphics/pokemon/back_pic_table.s"
@@ -698,8 +698,8 @@ gUnknown_081EC2A4:: @ 81EC2A4
 	.4byte gSpriteAnimTable_81EC29C
 	.4byte gSpriteAnimTable_81EC2A0
 
-gUnknown_081EC3F0:: @ 81EC3F0
-	.incbin "baserom.gba", 0x001ec3f0, 0x14c
+@ 81EC3F0
+	.include "data/graphics/trainers/front_pic_coords.s"
 
 @ 81EC53C
 	.include "data/graphics/trainers/front_pic_table.s"
@@ -755,8 +755,8 @@ gUnknown_081ECACC:: @ 81ECACC
 	.4byte gSpriteAnimTable_81ECABC
 	.4byte gSpriteAnimTable_81ECAC4
 
-gUnknown_081ECAD8:: @ 81ECAD8
-	.incbin "baserom.gba", 0x001ecad8, 0xc
+@ 81ECAD8
+	.include "data/graphics/trainers/back_pic_coords.s"
 
 @ 81ECAE4
 	.include "data/graphics/trainers/back_pic_table.s"
