@@ -20803,10 +20803,11 @@ AreaMarkerTiles:
 
 	.align 2
 gUnknown_083F865C:: @ 83F865C
-	obj_pal 0x08e87d90, 0x0003
+	obj_pal gAreaUnknownPalette, 3
 
+	.align 2
 gUnknown_083F8664:: @ 83F8664
-	.incbin "baserom.gba", 0x003f8664, 0x8
+	obj_tiles 0x02000FB4, 0x600, 3
 
 	.align 2
 gOamData_83F866C:: @ 83F866C

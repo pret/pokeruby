@@ -2936,8 +2936,13 @@ gUnknown_08E87AF6:: @ 8E87AF6
 gUnknown_08E87B56:: @ 8E87B56
 	.incbin "baserom.gba", 0x00e87b56, 0x5e
 
-gUnknown_08E87BB4:: @ 8E87BB4
-	.incbin "baserom.gba", 0x00e87bb4, 0x1fc
+	.align 2
+gAreaUnknownTiles:: @ 8E87BB4
+	.incbin "graphics/pokedex/area_unknown.4bpp.lz"
+
+	.align 2
+gAreaUnknownPalette:: @ 8E87D90
+	.incbin "graphics/pokedex/area_unknown.gbapal"
 
 gUnknown_08E87DB0:: @ 8E87DB0
 	.incbin "baserom.gba", 0x00e87db0, 0x52a
