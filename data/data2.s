@@ -20777,10 +20777,11 @@ gUnknown_083F857A:: @ 83F857A
 
 	.align 2
 gUnknown_083F858C:: @ 83F858C
-	obj_tiles 0x083f85dc, 128, 0x0002
+	obj_tiles AreaMarkerTiles, 0x80, 2
 
+	.align 2
 gUnknown_083F8594:: @ 83F8594
-	.incbin "baserom.gba", 0x003f8594, 0x8
+	obj_pal AreaMarkerPalette, 2
 
 	.align 2
 gOamData_83F859C:: @ 83F859C
@@ -20793,7 +20794,12 @@ gSpriteTemplate_83F85A4:: @ 83F85A4
 	spr_template 2, 2, gOamData_83F859C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 	.align 2
-	.incbin "baserom.gba", 0x3f85bc, 0xa0
+AreaMarkerPalette:
+	.incbin "graphics/pokedex/area_marker.gbapal"
+
+	.align 2
+AreaMarkerTiles:
+	.incbin "graphics/pokedex/area_marker.4bpp"
 
 	.align 2
 gUnknown_083F865C:: @ 83F865C
