@@ -1295,14 +1295,49 @@ gUnknown_081FACEF:: @ 81FACEF
 gUnknown_081FACF6:: @ 81FACF6
 	.incbin "baserom.gba", 0x001facf6, 0x8
 
+	.align 1
 gUnknown_081FACFE:: @ 81FACFE
-	.incbin "baserom.gba", 0x001facfe, 0x28
+	.2byte MOVE_METRONOME
+	.2byte MOVE_STRUGGLE
+	.2byte MOVE_SKETCH
+	.2byte MOVE_MIMIC
+	.2byte 0xFFFE
+	.2byte MOVE_COUNTER
+	.2byte MOVE_MIRROR_COAT
+	.2byte MOVE_PROTECT
+	.2byte MOVE_DETECT
+	.2byte MOVE_ENDURE
+	.2byte MOVE_DESTINY_BOND
+	.2byte MOVE_SLEEP_TALK
+	.2byte MOVE_THIEF
+	.2byte MOVE_FOLLOW_ME
+	.2byte MOVE_SNATCH
+	.2byte MOVE_HELPING_HAND
+	.2byte MOVE_COVET
+	.2byte MOVE_TRICK
+	.2byte MOVE_FOCUS_PUNCH
+	.2byte 0xFFFF
 
 gUnknown_081FAD26:: @ 81FAD26
-	.incbin "baserom.gba", 0x001fad26, 0xc
+	.byte  1, 200
+	.byte  4, 150
+	.byte  9, 100
+	.byte 16,  80
+	.byte 32,  40
+	.byte 48,  20
 
-gUnknown_081FAD32:: @ 81FAD32
-	.incbin "baserom.gba", 0x001fad32, 0x14
+	.align 1
+gNaturePowerMoves:: @ 81FAD32
+	.2byte MOVE_STUN_SPORE
+	.2byte MOVE_RAZOR_LEAF
+	.2byte MOVE_EARTHQUAKE
+	.2byte MOVE_HYDRO_PUMP
+	.2byte MOVE_SURF
+	.2byte MOVE_BUBBLE_BEAM
+	.2byte MOVE_ROCK_SLIDE
+	.2byte MOVE_SHADOW_BALL
+	.2byte MOVE_SWIFT
+	.2byte MOVE_SWIFT
 
 @ weight-based damage table for Low Kick
 @ format: min. weight (hectograms), base power
