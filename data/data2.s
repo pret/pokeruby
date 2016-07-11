@@ -1307,8 +1307,18 @@ gUnknown_081FAD32:: @ 81FAD32
 gUnknown_081FAD46:: @ 81FAD46
 	.incbin "baserom.gba", 0x001fad46, 0x18
 
-gUnknown_081FAD5E:: @ 81FAD5E
-	.incbin "baserom.gba", 0x001fad5e, 0x28
+	.align 1
+gPickupItems:: @ 81FAD5E
+	.2byte ITEM_SUPER_POTION, 30
+	.2byte ITEM_FULL_HEAL, 40
+	.2byte ITEM_ULTRA_BALL, 50
+	.2byte ITEM_RARE_CANDY, 60
+	.2byte ITEM_FULL_RESTORE, 70
+	.2byte ITEM_REVIVE, 80
+	.2byte ITEM_NUGGET, 90
+	.2byte ITEM_PROTEIN, 95
+	.2byte ITEM_PP_UP, 99
+	.2byte ITEM_KINGS_ROCK, 1
 
 gUnknown_081FAD86:: @ 81FAD86
 	.incbin "baserom.gba", 0x001fad86, 0xa

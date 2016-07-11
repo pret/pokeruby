@@ -66510,7 +66510,7 @@ _0802AF7A:
 	b _0802AFCA
 	.align 2, 0
 _0802AFB4: .4byte gBaseStats
-_0802AFB8: .4byte gUnknown_081FAD5E
+_0802AFB8: .4byte gPickupItems
 _0802AFBC: .4byte 0x03004360
 _0802AFC0:
 	lsls r0, r5, 3
