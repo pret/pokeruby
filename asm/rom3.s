@@ -64455,7 +64455,7 @@ atkCC_callterrainattack: @ 8029F50
 _08029FA0: .4byte 0x02024c6c
 _08029FA4: .4byte 0xfffffbff
 _08029FA8: .4byte 0x02024be6
-_08029FAC: .4byte gUnknown_081FAD32
+_08029FAC: .4byte gNaturePowerMoves
 _08029FB0: .4byte 0x0300428c
 _08029FB4: .4byte 0x02024c08
 _08029FB8: .4byte gUnknown_081D6BBC
