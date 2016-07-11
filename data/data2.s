@@ -20594,37 +20594,48 @@ gUnknown_083F7EA8:: @ 83F7EA8
 	.4byte sub_802E424
 	.4byte c2_exit_to_overworld_2_switch
 
+	.align 2
 gUnknown_083F7EB8:: @ 83F7EB8
-	.incbin "baserom.gba", 0x003f7eb8, 0x3c
+	.4byte NULL
+	.4byte ContestStatsText_RedPokeBlock
+	.4byte ContestStatsText_BluePokeBlock
+	.4byte ContestStatsText_PinkPokeBlock
+	.4byte ContestStatsText_GreenPokeBlock
+	.4byte ContestStatsText_YellowPokeBlock
+	.4byte ContestStatsText_PurplePokeBlock
+	.4byte ContestStatsText_IndigoPokeBlock
+	.4byte ContestStatsText_BrownPokeBlock
+	.4byte ContestStatsText_LiteBluePokeBlock
+	.4byte ContestStatsText_OlivePokeBlock
+	.4byte ContestStatsText_GrayPokeBlock
+	.4byte ContestStatsText_BlackPokeBlock
+	.4byte ContestStatsText_WhitePokeBlock
+	.4byte ContestStatsText_GoldPokeBlock
 
 	.align 2
 gUnknown_083F7EF4:: @ 83F7EF4
-	.4byte OtherText_Use
-	.4byte sub_810C508
-	.4byte OtherText_Toss
-	.4byte sub_810C5C0
-	.4byte OtherText_Cancel2
-	.4byte sub_810C748
-	.4byte OtherText_Use
-	.4byte sub_810C788
-	.4byte OtherText_Use
-	.4byte sub_810C854
+	.4byte OtherText_Use,     sub_810C508
+	.4byte OtherText_Toss,    sub_810C5C0
+	.4byte OtherText_Cancel2, sub_810C748
+	.4byte OtherText_Use,     sub_810C788
+	.4byte OtherText_Use,     sub_810C854
 
 gUnknown_083F7F1C:: @ 83F7F1C
-	.incbin "baserom.gba", 0x003f7f1c, 0x3
+	.byte 0, 1, 2
 
 gUnknown_083F7F1F:: @ 83F7F1F
-	.incbin "baserom.gba", 0x003f7f1f, 0x2
+	.byte 3, 2
 
 gUnknown_083F7F21:: @ 83F7F21
-	.incbin "baserom.gba", 0x003f7f21, 0x3
+	.byte 4, 2
 
 	.align 2
 gUnknown_083F7F24:: @ 83F7F24
 	.4byte sub_810C610
 	.4byte sub_810C668
 
-	.incbin "baserom.gba", 0x003f7f2c, 0x8
+@ unreferenced
+	.byte 0x16, 0x17, 0x18, 0x21, 0x2F
 
 	.align 2
 gOamData_83F7F34:: @ 83F7F34
@@ -20766,10 +20777,11 @@ gUnknown_083F857A:: @ 83F857A
 
 	.align 2
 gUnknown_083F858C:: @ 83F858C
-	obj_tiles 0x083f85dc, 128, 0x0002
+	obj_tiles AreaMarkerTiles, 0x80, 2
 
+	.align 2
 gUnknown_083F8594:: @ 83F8594
-	.incbin "baserom.gba", 0x003f8594, 0x8
+	obj_pal AreaMarkerPalette, 2
 
 	.align 2
 gOamData_83F859C:: @ 83F859C
@@ -20782,14 +20794,20 @@ gSpriteTemplate_83F85A4:: @ 83F85A4
 	spr_template 2, 2, gOamData_83F859C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 	.align 2
-	.incbin "baserom.gba", 0x3f85bc, 0xa0
+AreaMarkerPalette:
+	.incbin "graphics/pokedex/area_marker.gbapal"
+
+	.align 2
+AreaMarkerTiles:
+	.incbin "graphics/pokedex/area_marker.4bpp"
 
 	.align 2
 gUnknown_083F865C:: @ 83F865C
-	obj_pal 0x08e87d90, 0x0003
+	obj_pal gAreaUnknownPalette, 3
 
+	.align 2
 gUnknown_083F8664:: @ 83F8664
-	.incbin "baserom.gba", 0x003f8664, 0x8
+	obj_tiles 0x02000FB4, 0x600, 3
 
 	.align 2
 gOamData_83F866C:: @ 83F866C
@@ -24513,6 +24531,7 @@ ContestStatsText_VeryHard:
 	.string "Very hard$"
 ContestStatsText_SuperHard:
 	.string "Super hard$"
+
 ContestStatsText_RedPokeBlock:
 	.string "RED {POKEBLOCK}$"
 ContestStatsText_BluePokeBlock:
