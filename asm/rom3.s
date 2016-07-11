@@ -100732,7 +100732,7 @@ gpu_pal_obj_decompress_and_apply: @ 803C56C
 	.align 2, 0
 _0803C594: .4byte 0x02024e8c
 _0803C598: .4byte gSpriteTemplate_8208288
-_0803C59C: .4byte gUnknown_081E7C64
+_0803C59C: .4byte gSpriteAnimTable_81E7C64
 	thumb_func_end gpu_pal_obj_decompress_and_apply
 
 	thumb_func_start sub_803C5A0

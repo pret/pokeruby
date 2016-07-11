@@ -11274,7 +11274,7 @@ _0807A0D0:
 _0807A0E4: .4byte gSpriteTemplate_837F5B0
 _0807A0E8: .4byte gUnknown_081E9114
 _0807A0EC: .4byte 0x02020004
-_0807A0F0: .4byte gUnknown_081E7C18
+_0807A0F0: .4byte gSpriteAffineAnimTable_81E7C18
 	thumb_func_end sub_8079F44
 
 	thumb_func_start sub_807A0F4
