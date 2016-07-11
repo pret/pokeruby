@@ -20,6 +20,10 @@
 	.2byte \tag
 	.endm
 
+	.macro null_obj_tiles
+	obj_tiles 0, 0, 0
+	.endm
+
 	.macro obj_pal address, tag
 	.4byte \address
 	.2byte \tag

@@ -2916,7 +2916,25 @@ gUnknown_08E8096C:: @ 8E8096C
 	.incbin "baserom.gba", 0x00e8096c, 0x72c
 
 gUnknown_08E81098:: @ 8E81098
-	.incbin "baserom.gba", 0x00e81098, 0x4900
+	.incbin "baserom.gba", 0x00e81098, 0x1424
+
+	.align 2
+gRouletteHeadersTiles:: @ 8E824BC
+	.incbin "graphics/roulette/headers.4bpp.lz"
+
+	.align 2
+gRouletteCreditTiles:: @ 8E82AE0
+	.incbin "graphics/roulette/credit.4bpp.lz"
+
+	.align 2
+gRouletteNumbersTiles:: @ 8E82C30
+	.incbin "graphics/roulette/numbers.4bpp.lz"
+
+	.align 2
+gRouletteMultiplierTiles:: @ 8E82D14
+	.incbin "graphics/roulette/multiplier.4bpp.lz"
+
+	.incbin "baserom.gba", 0x00e82e9c, 0x2afc
 
 gUnknown_08E85998:: @ 8E85998
 	.incbin "baserom.gba", 0x00e85998, 0x800
