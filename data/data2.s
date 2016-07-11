@@ -910,7 +910,7 @@ gUnknown_081F9688:: @ 81F9688
 	.incbin "baserom.gba", 0x001f9688, 0x40
 
 gUnknown_081F96C8:: @ 81F96C8
-	.incbin "baserom.gba", 0x001f96c8, 0x8
+	.string "ヌケニン$" @ "Nukenin" (Shedinja)
 
 	.align 2
 gSpriteTemplate_81F96D0:: @ 81F96D0
