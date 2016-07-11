@@ -38272,7 +38272,7 @@ _0801CDBC:
 	adds r2, r1, 0
 	b _0801CE38
 	.align 2, 0
-_0801CDC8: .4byte gUnknown_081F9720
+_0801CDC8: .4byte gTypeEffectiveness
 _0801CDCC:
 	adds r3, 0x3
 	b _0801CE34
@@ -38438,7 +38438,7 @@ _0801CEF4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0801CF08: .4byte gUnknown_081F9720
+_0801CF08: .4byte gTypeEffectiveness
 _0801CF0C: .4byte 0x02024a80
 _0801CF10: .4byte 0x02024c08
 _0801CF14: .4byte 0x02024c07
@@ -38535,7 +38535,7 @@ _0801CFD8:
 	adds r4, r1, 0
 	b _0801D12A
 	.align 2, 0
-_0801CFE4: .4byte gUnknown_081F9720
+_0801CFE4: .4byte gTypeEffectiveness
 _0801CFE8:
 	adds r0, r5, r4
 	ldrb r0, [r0]
@@ -38987,7 +38987,7 @@ _0801D328:
 	adds r0, r1, 0
 	b _0801D3CA
 	.align 2, 0
-_0801D344: .4byte gUnknown_081F9720
+_0801D344: .4byte gTypeEffectiveness
 _0801D348:
 	adds r7, 0x3
 	b _0801D3B6
@@ -39125,7 +39125,7 @@ _0801D43A:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0801D44C: .4byte gUnknown_081F9720
+_0801D44C: .4byte gTypeEffectiveness
 _0801D450: .4byte 0x02024a80
 _0801D454: .4byte 0x02024c08
 _0801D458: .4byte gBattleMoves
@@ -39271,7 +39271,7 @@ _0801D554:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0801D564: .4byte gUnknown_081F9720
+_0801D564: .4byte gTypeEffectiveness
 _0801D568: .4byte 0x02024c08
 _0801D56C: .4byte 0x02024a80
 _0801D570: .4byte gBattleMoves
@@ -48965,7 +48965,7 @@ _08022370:
 	adds r6, r1, 0
 	b _08022432
 	.align 2, 0
-_0802237C: .4byte gUnknown_081F9720
+_0802237C: .4byte gTypeEffectiveness
 _08022380:
 	adds r0, r5, r6
 	ldrb r0, [r0]
@@ -60590,7 +60590,7 @@ _08028110:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08028120: .4byte gUnknown_081F9720
+_08028120: .4byte gTypeEffectiveness
 _08028124: .4byte 0x02024c44
 _08028128: .4byte 0x02024c07
 _0802812C: .4byte 0x02024a80
@@ -89711,7 +89711,7 @@ _08036CBE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08036CD0: .4byte gUnknown_081F9720
+_08036CD0: .4byte gTypeEffectiveness
 	thumb_func_end sub_8036C4C
 
 	thumb_func_start sub_8036CD4

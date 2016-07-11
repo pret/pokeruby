@@ -931,8 +931,8 @@ gOamData_81F96F0:: @ 81F96F0
 	.align 2
 	.incbin "baserom.gba", 0x1f96f8, 0x28
 
-gUnknown_081F9720:: @ 81F9720
-	.incbin "baserom.gba", 0x001f9720, 0x150
+@ 81F9720
+	.include "data/type_effectiveness.s"
 
 @ 81F9870
 	.include "data/text/type_names.s"
