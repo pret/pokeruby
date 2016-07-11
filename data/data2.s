@@ -20614,32 +20614,28 @@ gUnknown_083F7EB8:: @ 83F7EB8
 
 	.align 2
 gUnknown_083F7EF4:: @ 83F7EF4
-	.4byte OtherText_Use
-	.4byte sub_810C508
-	.4byte OtherText_Toss
-	.4byte sub_810C5C0
-	.4byte OtherText_Cancel2
-	.4byte sub_810C748
-	.4byte OtherText_Use
-	.4byte sub_810C788
-	.4byte OtherText_Use
-	.4byte sub_810C854
+	.4byte OtherText_Use,     sub_810C508
+	.4byte OtherText_Toss,    sub_810C5C0
+	.4byte OtherText_Cancel2, sub_810C748
+	.4byte OtherText_Use,     sub_810C788
+	.4byte OtherText_Use,     sub_810C854
 
 gUnknown_083F7F1C:: @ 83F7F1C
-	.incbin "baserom.gba", 0x003f7f1c, 0x3
+	.byte 0, 1, 2
 
 gUnknown_083F7F1F:: @ 83F7F1F
-	.incbin "baserom.gba", 0x003f7f1f, 0x2
+	.byte 3, 2
 
 gUnknown_083F7F21:: @ 83F7F21
-	.incbin "baserom.gba", 0x003f7f21, 0x3
+	.byte 4, 2
 
 	.align 2
 gUnknown_083F7F24:: @ 83F7F24
 	.4byte sub_810C610
 	.4byte sub_810C668
 
-	.incbin "baserom.gba", 0x003f7f2c, 0x8
+@ unreferenced
+	.byte 0x16, 0x17, 0x18, 0x21, 0x2F
 
 	.align 2
 gOamData_83F7F34:: @ 83F7F34
