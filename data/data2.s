@@ -1304,8 +1304,17 @@ gUnknown_081FAD26:: @ 81FAD26
 gUnknown_081FAD32:: @ 81FAD32
 	.incbin "baserom.gba", 0x001fad32, 0x14
 
-gUnknown_081FAD46:: @ 81FAD46
-	.incbin "baserom.gba", 0x001fad46, 0x18
+@ weight-based damage table for Low Kick
+@ format: min. weight (hectograms), base power
+
+	.align 1
+gWeightDamage:: @ 81FAD46
+	.2byte  100,  20
+	.2byte  250,  40
+	.2byte  500,  60
+	.2byte 1000,  80
+	.2byte 2000, 100
+	.2byte   -1,  -1
 
 	.align 1
 gPickupItems:: @ 81FAD5E

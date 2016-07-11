@@ -65833,7 +65833,7 @@ _0802AA36:
 	strh r1, [r0]
 	b _0802AA6A
 	.align 2, 0
-_0802AA50: .4byte gUnknown_081FAD46
+_0802AA50: .4byte gWeightDamage
 _0802AA54: .4byte 0x0000ffff
 _0802AA58: .4byte 0x02024a80
 _0802AA5C: .4byte 0x02024c08
