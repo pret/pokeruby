@@ -18335,53 +18335,22 @@ gUnknown_083E31D8:: @ 83E31D8
 
 	.align 2
 gPokenavCityMaps:: @ 83E31F0
-	.4byte gPokenavCityMap_Littleroot_0
-	.4byte NULL
-
-	.4byte gPokenavCityMap_Oldale_0
-	.4byte NULL
-
-	.4byte gPokenavCityMap_Dewford_0
-	.4byte NULL
-
-	.4byte gPokenavCityMap_Lavaridge_0
-	.4byte NULL
-
-	.4byte gPokenavCityMap_Fallarbor_0
-	.4byte NULL
-
-	.4byte gPokenavCityMap_Verdanturf_0
-	.4byte NULL
-
-	.4byte gPokenavCityMap_Pacifidlog_0
-	.4byte NULL
-
-	.4byte gPokenavCityMap_Petalburg_0
-	.4byte NULL
-
-	.4byte gPokenavCityMap_Slateport_0
-	.4byte gPokenavCityMap_Slateport_1
-
-	.4byte gPokenavCityMap_Mauville_0
-	.4byte gPokenavCityMap_Mauville_1
-
-	.4byte gPokenavCityMap_Rustboro_0
-	.4byte gPokenavCityMap_Rustboro_1
-
-	.4byte gPokenavCityMap_Fortree_0
-	.4byte NULL
-
-	.4byte gPokenavCityMap_Lilycove_0
-	.4byte gPokenavCityMap_Lilycove_1
-
-	.4byte gPokenavCityMap_Mossdeep_0
-	.4byte gPokenavCityMap_Mossdeep_1
-
-	.4byte gPokenavCityMap_Sootopolis_0
-	.4byte NULL
-
-	.4byte gPokenavCityMap_EverGrande_0
-	.4byte gPokenavCityMap_EverGrande_1
+	.4byte gPokenavCityMap_Littleroot_0, NULL
+	.4byte gPokenavCityMap_Oldale_0, NULL
+	.4byte gPokenavCityMap_Dewford_0, NULL
+	.4byte gPokenavCityMap_Lavaridge_0, NULL
+	.4byte gPokenavCityMap_Fallarbor_0, NULL
+	.4byte gPokenavCityMap_Verdanturf_0, NULL
+	.4byte gPokenavCityMap_Pacifidlog_0, NULL
+	.4byte gPokenavCityMap_Petalburg_0, NULL
+	.4byte gPokenavCityMap_Slateport_0, gPokenavCityMap_Slateport_1
+	.4byte gPokenavCityMap_Mauville_0, gPokenavCityMap_Mauville_1
+	.4byte gPokenavCityMap_Rustboro_0, gPokenavCityMap_Rustboro_1
+	.4byte gPokenavCityMap_Fortree_0, NULL
+	.4byte gPokenavCityMap_Lilycove_0, gPokenavCityMap_Lilycove_1
+	.4byte gPokenavCityMap_Mossdeep_0, gPokenavCityMap_Mossdeep_1
+	.4byte gPokenavCityMap_Sootopolis_0, NULL
+	.4byte gPokenavCityMap_EverGrande_0, gPokenavCityMap_EverGrande_1
 
 	.align 2
 gUnknown_083E3270:: @ 83E3270
