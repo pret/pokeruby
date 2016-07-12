@@ -18901,8 +18901,105 @@ gUnknown_083E5620:: @ 83E5620
 gUnknown_083E562C:: @ 83E562C
 	.incbin "baserom.gba", 0x003e562c, 0x8
 
-gUnknown_083E5634:: @ 83E5634
-	.incbin "baserom.gba", 0x003e5634, 0xfc
+	.align 2
+gMailGraphicsTable:: @ 83E5634
+	.4byte gMailPalette_Orange
+	.4byte gMailTiles_Orange
+	.4byte gMailTilemap_Orange
+	.2byte 0x2C0
+	.2byte 0
+	.2byte 0x294A
+	.2byte 0x6739
+
+	.4byte gMailPalette_Harbor
+	.4byte gMailTiles_Harbor
+	.4byte gMailTilemap_Harbor
+	.2byte 0x2E0
+	.2byte 0
+	.2byte 0x7FFF
+	.2byte 0x4631
+
+	.4byte gMailPalette_Glitter
+	.4byte gMailTiles_Glitter
+	.4byte gMailTilemap_Glitter
+	.2byte 0x400
+	.2byte 0
+	.2byte 0x294A
+	.2byte 0x6739
+
+	.4byte gMailPalette_Mech
+	.4byte gMailTiles_Mech
+	.4byte gMailTilemap_Mech
+	.2byte 0x1E0
+	.2byte 0
+	.2byte 0x7FFF
+	.2byte 0x4631
+
+	.4byte gMailPalette_Wood
+	.4byte gMailTiles_Wood
+	.4byte gMailTilemap_Wood
+	.2byte 0x2E0
+	.2byte 0
+	.2byte 0x7FFF
+	.2byte 0x4631
+
+	.4byte gMailPalette_Wave
+	.4byte gMailTiles_Wave
+	.4byte gMailTilemap_Wave
+	.2byte 0x300
+	.2byte 0
+	.2byte 0x294A
+	.2byte 0x6739
+
+	.4byte gMailPalette_Bead
+	.4byte gMailTiles_Bead
+	.4byte gMailTilemap_Bead
+	.2byte 0x140
+	.2byte 0
+	.2byte 0x7FFF
+	.2byte 0x4631
+
+	.4byte gMailPalette_Shadow
+	.4byte gMailTiles_Shadow
+	.4byte gMailTilemap_Shadow
+	.2byte 0x300
+	.2byte 0
+	.2byte 0x7FFF
+	.2byte 0x4631
+
+	.4byte gMailPalette_Tropic
+	.4byte gMailTiles_Tropic
+	.4byte gMailTilemap_Tropic
+	.2byte 0x220
+	.2byte 0
+	.2byte 0x294A
+	.2byte 0x6739
+
+	.4byte gMailPalette_Dream
+	.4byte gMailTiles_Dream
+	.4byte gMailTilemap_Dream
+	.2byte 0x340
+	.2byte 0
+	.2byte 0x294A
+	.2byte 0x6739
+
+	.4byte gMailPalette_Fab
+	.4byte gMailTiles_Fab
+	.4byte gMailTilemap_Fab
+	.2byte 0x2A0
+	.2byte 0
+	.2byte 0x294A
+	.2byte 0x6739
+
+	.4byte gMailPalette_Retro
+	.4byte gMailTiles_Retro
+	.4byte gMailTilemap_Retro
+	.2byte 0x520
+	.2byte 0
+	.2byte 0x294A
+	.2byte 0x6739
+
+	.incbin "baserom.gba", 0x003e5724, 0xC
 
 gUnknown_083E5730:: @ 83E5730
 	.incbin "baserom.gba", 0x003e5730, 0x74
