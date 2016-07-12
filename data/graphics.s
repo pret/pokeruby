@@ -2916,7 +2916,169 @@ gUnknown_08E8096C:: @ 8E8096C
 	.incbin "baserom.gba", 0x00e8096c, 0x72c
 
 gUnknown_08E81098:: @ 8E81098
-	.incbin "baserom.gba", 0x00e81098, 0x4900
+	.incbin "baserom.gba", 0x00e81098, 0x1424
+
+	.align 2
+gRouletteHeadersTiles:: @ 8E824BC
+	.incbin "graphics/roulette/headers.4bpp.lz"
+
+	.align 2
+gRouletteCreditTiles:: @ 8E82AE0
+	.incbin "graphics/roulette/credit.4bpp.lz"
+
+	.align 2
+gRouletteNumbersTiles:: @ 8E82C30
+	.incbin "graphics/roulette/numbers.4bpp.lz"
+
+	.align 2
+gRouletteMultiplierTiles:: @ 8E82D14
+	.incbin "graphics/roulette/multiplier.4bpp.lz"
+
+	.align 2
+gMailPalette_Orange:: @ 8E82E9C
+	.incbin "graphics/mail/orange/palette.gbapal"
+
+	.align 2
+gMailPalette_Harbor:: @ 8E82EBC
+	.incbin "graphics/mail/harbor/palette.gbapal"
+
+	.align 2
+gMailPalette_Glitter:: @ 8E82EDC
+	.incbin "graphics/mail/glitter/palette.gbapal"
+
+	.align 2
+gMailPalette_Mech:: @ 8E82EFC
+	.incbin "graphics/mail/mech/palette.gbapal"
+
+	.align 2
+gMailPalette_Wood:: @ 8E82F1C
+	.incbin "graphics/mail/wood/palette.gbapal"
+
+	.align 2
+gMailPalette_Wave:: @ 8E82F3C
+	.incbin "graphics/mail/wave/palette.gbapal"
+
+	.align 2
+gMailPalette_Bead:: @ 8E82F5C
+	.incbin "graphics/mail/bead/palette.gbapal"
+
+	.align 2
+gMailPalette_Shadow:: @ 8E82F7C
+	.incbin "graphics/mail/shadow/palette.gbapal"
+
+	.align 2
+gMailPalette_Tropic:: @ 8E82F9C
+	.incbin "graphics/mail/tropic/palette.gbapal"
+
+	.align 2
+gMailPalette_Dream:: @ 8E82FBC
+	.incbin "graphics/mail/dream/palette.gbapal"
+
+	.align 2
+gMailPalette_Fab:: @ 8E82FDC
+	.incbin "graphics/mail/fab/palette.gbapal"
+
+	.align 2
+gMailPalette_Retro:: @ 8E82FFC
+	.incbin "graphics/mail/retro/palette.gbapal"
+
+	.align 2
+gMailTiles_Orange:: @ 8E8301C
+	.incbin "graphics/mail/orange/tiles.4bpp.lz"
+
+	.align 2
+gMailTiles_Harbor:: @ 8E831BC
+	.incbin "graphics/mail/harbor/tiles.4bpp.lz"
+
+	.align 2
+gMailTiles_Glitter:: @ 8E832F8
+	.incbin "graphics/mail/glitter/tiles.4bpp.lz"
+
+	.align 2
+gMailTiles_Mech:: @ 8E83508
+	.incbin "graphics/mail/mech/tiles.4bpp.lz"
+
+	.align 2
+gMailTiles_Wood:: @ 8E835E0
+	.incbin "graphics/mail/wood/tiles.4bpp.lz"
+
+	.align 2
+gMailTiles_Wave:: @ 8E837D8
+	.incbin "graphics/mail/wave/tiles.4bpp.lz"
+
+	.align 2
+gMailTiles_Bead:: @ 8E83958
+	.incbin "graphics/mail/bead/tiles.4bpp.lz"
+
+	.align 2
+gMailTiles_Shadow:: @ 8E83A00
+	.incbin "graphics/mail/shadow/tiles.4bpp.lz"
+
+	.align 2
+gMailTiles_Tropic:: @ 8E83B90
+	.incbin "graphics/mail/tropic/tiles.4bpp.lz"
+
+	.align 2
+gMailTiles_Dream:: @ 8E83CD0
+	.incbin "graphics/mail/dream/tiles.4bpp.lz"
+
+	.align 2
+gMailTiles_Fab:: @ 8E83E38
+	.incbin "graphics/mail/fab/tiles.4bpp.lz"
+
+	.align 2
+gMailTiles_Retro:: @ 8E83F88
+	.incbin "graphics/mail/retro/tiles.4bpp.lz"
+
+	.align 2
+gMailTilemap_Orange:: @ 8E84228
+	.incbin "graphics/mail/orange/map.bin.lz"
+
+	.align 2
+gMailTilemap_Harbor:: @ 8E84300
+	.incbin "graphics/mail/harbor/map.bin.lz"
+
+	.align 2
+gMailTilemap_Glitter:: @ 8E843E0
+	.incbin "graphics/mail/glitter/map.bin.lz"
+
+	.align 2
+gMailTilemap_Mech:: @ 8E844EC
+	.incbin "graphics/mail/mech/map.bin.lz"
+
+	.align 2
+gMailTilemap_Wood:: @ 8E845C8
+	.incbin "graphics/mail/wood/map.bin.lz"
+
+	.align 2
+gMailTilemap_Wave:: @ 8E846B8
+	.incbin "graphics/mail/wave/map.bin.lz"
+
+	.align 2
+gMailTilemap_Bead:: @ 8E84798
+	.incbin "graphics/mail/bead/map.bin.lz"
+
+	.align 2
+gMailTilemap_Shadow:: @ 8E84878
+	.incbin "graphics/mail/shadow/map.bin.lz"
+
+	.align 2
+gMailTilemap_Tropic:: @ 8E84984
+	.incbin "graphics/mail/tropic/map.bin.lz"
+
+	.align 2
+gMailTilemap_Dream:: @ 8E84A74
+	.incbin "graphics/mail/dream/map.bin.lz"
+
+	.align 2
+gMailTilemap_Fab:: @ 8E84B6C
+	.incbin "graphics/mail/fab/map.bin.lz"
+
+	.align 2
+gMailTilemap_Retro:: @ 8E84C84
+	.incbin "graphics/mail/retro/map.bin.lz"
+
+	.incbin "baserom.gba", 0x00e84d98, 0xc00
 
 gUnknown_08E85998:: @ 8E85998
 	.incbin "baserom.gba", 0x00e85998, 0x800

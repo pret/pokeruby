@@ -18901,8 +18901,105 @@ gUnknown_083E5620:: @ 83E5620
 gUnknown_083E562C:: @ 83E562C
 	.incbin "baserom.gba", 0x003e562c, 0x8
 
-gUnknown_083E5634:: @ 83E5634
-	.incbin "baserom.gba", 0x003e5634, 0xfc
+	.align 2
+gMailGraphicsTable:: @ 83E5634
+	.4byte gMailPalette_Orange
+	.4byte gMailTiles_Orange
+	.4byte gMailTilemap_Orange
+	.2byte 0x2C0
+	.2byte 0
+	.2byte 0x294A
+	.2byte 0x6739
+
+	.4byte gMailPalette_Harbor
+	.4byte gMailTiles_Harbor
+	.4byte gMailTilemap_Harbor
+	.2byte 0x2E0
+	.2byte 0
+	.2byte 0x7FFF
+	.2byte 0x4631
+
+	.4byte gMailPalette_Glitter
+	.4byte gMailTiles_Glitter
+	.4byte gMailTilemap_Glitter
+	.2byte 0x400
+	.2byte 0
+	.2byte 0x294A
+	.2byte 0x6739
+
+	.4byte gMailPalette_Mech
+	.4byte gMailTiles_Mech
+	.4byte gMailTilemap_Mech
+	.2byte 0x1E0
+	.2byte 0
+	.2byte 0x7FFF
+	.2byte 0x4631
+
+	.4byte gMailPalette_Wood
+	.4byte gMailTiles_Wood
+	.4byte gMailTilemap_Wood
+	.2byte 0x2E0
+	.2byte 0
+	.2byte 0x7FFF
+	.2byte 0x4631
+
+	.4byte gMailPalette_Wave
+	.4byte gMailTiles_Wave
+	.4byte gMailTilemap_Wave
+	.2byte 0x300
+	.2byte 0
+	.2byte 0x294A
+	.2byte 0x6739
+
+	.4byte gMailPalette_Bead
+	.4byte gMailTiles_Bead
+	.4byte gMailTilemap_Bead
+	.2byte 0x140
+	.2byte 0
+	.2byte 0x7FFF
+	.2byte 0x4631
+
+	.4byte gMailPalette_Shadow
+	.4byte gMailTiles_Shadow
+	.4byte gMailTilemap_Shadow
+	.2byte 0x300
+	.2byte 0
+	.2byte 0x7FFF
+	.2byte 0x4631
+
+	.4byte gMailPalette_Tropic
+	.4byte gMailTiles_Tropic
+	.4byte gMailTilemap_Tropic
+	.2byte 0x220
+	.2byte 0
+	.2byte 0x294A
+	.2byte 0x6739
+
+	.4byte gMailPalette_Dream
+	.4byte gMailTiles_Dream
+	.4byte gMailTilemap_Dream
+	.2byte 0x340
+	.2byte 0
+	.2byte 0x294A
+	.2byte 0x6739
+
+	.4byte gMailPalette_Fab
+	.4byte gMailTiles_Fab
+	.4byte gMailTilemap_Fab
+	.2byte 0x2A0
+	.2byte 0
+	.2byte 0x294A
+	.2byte 0x6739
+
+	.4byte gMailPalette_Retro
+	.4byte gMailTiles_Retro
+	.4byte gMailTilemap_Retro
+	.2byte 0x520
+	.2byte 0
+	.2byte 0x294A
+	.2byte 0x6739
+
+	.incbin "baserom.gba", 0x003e5724, 0xC
 
 gUnknown_083E5730:: @ 83E5730
 	.incbin "baserom.gba", 0x003e5730, 0x74
@@ -20881,39 +20978,119 @@ gUnknown_083F8EE8:: @ 83F8EE8
 	.incbin "baserom.gba", 0x003f8ee8, 0xc
 
 gUnknown_083F8EF4:: @ 83F8EF4
-	.incbin "baserom.gba", 0x003f8ef4, 0x8
+	.byte 0, 3, 4, 6, 12
+
+	.align 2
+RouletteSpritePalette_01:
 	.incbin "graphics/roulette/shadow.gbapal"
+
+	.align 2
+RouletteSpritePalette_02:
 	.incbin "graphics/roulette/ball.gbapal"
+
+	.align 2
+RouletteSpritePalette_03:
 	.incbin "graphics/roulette/ball_counter.gbapal"
+
+	.align 2
+RouletteSpritePalette_04:
 	.incbin "graphics/roulette/cursor.gbapal"
-	.incbin "baserom.gba", 0x003F8F7C, 0x20
+
+	.align 2
+RouletteSpritePalette_05:
+	.incbin "graphics/roulette/credit.gbapal"
+
+	.align 2
+RouletteSpritePalette_06:
 	.incbin "graphics/roulette/shroomish.gbapal"
+
+	.align 2
+RouletteSpritePalette_07:
 	.incbin "graphics/roulette/tailow.gbapal"
+
+	.align 2
+RouletteSpritePalette_08:
 	.incbin "graphics/roulette/poke_icons.gbapal"
+
+	.align 2
+RouletteSpritePalette_09:
 	.incbin "graphics/roulette/wynaut.gbapal"
+
+	.align 2
+RouletteSpritePalette_10:
 	.incbin "graphics/roulette/azurill.gbapal"
+
+	.align 2
+RouletteSpritePalette_11:
 	.incbin "graphics/roulette/skitty.gbapal"
+
+	.align 2
+RouletteSpritePalette_12:
 	.incbin "graphics/roulette/makuhita.gbapal"
+
+	.align 2
+RouletteSpritePalette_13:
 	.incbin "baserom.gba", 0x003F907C, 0x20
+
+	.align 2
+RouletteSpritePalette_14:
 	.incbin "baserom.gba", 0x003F909C, 0x20
+
+	.align 2
+RouletteSpritePalette_15:
 	.incbin "baserom.gba", 0x003F90BC, 0x20
+
+	.align 2
+RouletteSpritePalette_16:
 	.incbin "baserom.gba", 0x003F90DC, 0x20
 
+	.align 2
 gUnknown_083F90FC:: @ 83F90FC
 	.incbin "graphics/roulette/ball.4bpp.lz"
+
+	.align 2
+RouletteBallCounterTiles: @ 83F9244
 	.incbin "graphics/roulette/ball_counter.4bpp.lz"
 
+	.align 2
 gUnknown_083F92A8:: @ 83F92A8
 	.incbin "graphics/roulette/roulette_tilt.4bpp.lz"
+
+	.align 2
+RoulettePokeIconsTiles: @ 83F9698
 	.incbin "graphics/roulette/poke_icons.4bpp.lz"
+
+	.align 2
+RoulettePokeIcons2Tiles: @ 83F983C
 	.incbin "graphics/roulette/poke_icons2.4bpp.lz"
 
+	.align 2
 gUnknown_083F9D3C:: @ 83F9D3C
 	.incbin "graphics/roulette/shadow.4bpp.lz"
+
+	.align 2
+RouletteCursorTiles: @ 83F9DD4
 	.incbin "graphics/roulette/cursor.4bpp.lz"
 
+	.align 2
 gUnknown_083F9E30:: @ 83F9E30
-	.incbin "baserom.gba", 0x003f9e30, 0x88
+	obj_pal RouletteSpritePalette_01, 1
+	obj_pal RouletteSpritePalette_02, 2
+	obj_pal RouletteSpritePalette_03, 3
+	obj_pal RouletteSpritePalette_04, 4
+	obj_pal RouletteSpritePalette_05, 5
+	obj_pal RouletteSpritePalette_06, 6
+	obj_pal RouletteSpritePalette_07, 7
+	obj_pal RouletteSpritePalette_08, 8
+	obj_pal RouletteSpritePalette_09, 9
+	obj_pal RouletteSpritePalette_10, 10
+	obj_pal RouletteSpritePalette_11, 11
+	obj_pal RouletteSpritePalette_12, 12
+	obj_pal RouletteSpritePalette_13, 13
+	obj_pal RouletteSpritePalette_14, 14
+	obj_pal RouletteSpritePalette_15, 15
+	obj_pal RouletteSpritePalette_16, 16
+	null_obj_pal
 
 	.align 2
 gOamData_83F9EB8:: @ 83F9EB8
@@ -20943,10 +21120,16 @@ gSpriteAnimTable_83F9ED8:: @ 83F9ED8
 	.4byte gSpriteAnim_83F9ED0
 
 	.align 2
-	.incbin "baserom.gba", 0x3f9edc, 0xc
+gSpriteAffineAnim_83F9EDC:: @ 83F9EDC
+	obj_rot_scal_anim_end
 
+	.align 2
+gSpriteAffineAnimTable_83F9EE4:: @ 83F9EE4
+	.4byte gSpriteAffineAnim_83F9EDC
+
+	.align 2
 gUnknown_083F9EE8:: @ 83F9EE8
-	.incbin "baserom.gba", 0x003f9ee8, 0x8
+	obj_tiles RoulettePokeIcons2Tiles, 0xC00, 0
 
 	.align 2
 gSpriteAnim_83F9EF0:: @ 83F9EF0
@@ -21014,10 +21197,11 @@ gSpriteAnimTable_83F9F50:: @ 83F9F50
 
 	.align 2
 gUnknown_083F9F54:: @ 83F9F54
-	obj_tiles 0x08e824bc, 5632, 0x0004
+	obj_tiles gRouletteHeadersTiles, 0x1600, 4
 
+	.align 2
 gUnknown_083F9F5C:: @ 83F9F5C
-	.incbin "baserom.gba", 0x003f9f5c, 0x8
+	obj_tiles RoulettePokeIconsTiles, 0x400, 5
 
 	.align 2
 gSpriteAnim_83F9F64:: @ 83F9F64
@@ -21035,7 +21219,12 @@ gSpriteAnim_83F9F64:: @ 83F9F64
 	obj_image_anim_end
 
 	.align 2
-	.incbin "baserom.gba", 0x3f9f94, 0x14
+gSpriteAnim_83F9F94:: @ 83F9F94
+	obj_image_anim_frame 0, 0
+	obj_image_anim_frame 4, 0
+	obj_image_anim_frame 8, 0
+	obj_image_anim_frame 12, 0
+	obj_image_anim_end
 
 	.align 2
 gSpriteAnimTable_83F9FA8:: @ 83F9FA8
@@ -21067,19 +21256,19 @@ gSpriteAnimTable_83F9FC0:: @ 83F9FC0
 
 	.align 2
 gSpriteAnimTable_83F9FC4:: @ 83F9FC4
-	.4byte gSpriteAnim_83F9F64 + 0x30
+	.4byte gSpriteAnim_83F9F94
 
 	.align 2
 gSpriteAnimTable_83F9FC8:: @ 83F9FC8
-	.4byte gSpriteAnim_83F9F64 + 0x34
+	.4byte gSpriteAnim_83F9F94 + 0x4
 
 	.align 2
 gSpriteAnimTable_83F9FCC:: @ 83F9FCC
-	.4byte gSpriteAnim_83F9F64 + 0x38
+	.4byte gSpriteAnim_83F9F94 + 0x8
 
 	.align 2
 gSpriteAnimTable_83F9FD0:: @ 83F9FD0
-	.4byte gSpriteAnim_83F9F64 + 0x3C
+	.4byte gSpriteAnim_83F9F94 + 0xC
 
 	.align 2
 gSpriteTemplate_83F9FD4:: @ 83F9FD4
@@ -21199,7 +21388,12 @@ gOamData_83FA214:: @ 83FA214
 
 	.align 2
 gUnknown_083FA21C:: @ 83FA21C
-	.incbin "baserom.gba", 0x003fa21c, 0x30
+	obj_tiles gRouletteCreditTiles, 0x400, 7
+	obj_tiles gRouletteNumbersTiles, 0x280, 8
+	obj_tiles gRouletteMultiplierTiles, 0x500, 9
+	obj_tiles RouletteBallCounterTiles, 0x140, 10
+	obj_tiles RouletteCursorTiles, 0x200, 11
+	null_obj_tiles
 
 	.align 2
 gSpriteAnim_83FA24C:: @ 83FA24C
