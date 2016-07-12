@@ -18209,7 +18209,95 @@ gUnknown_083E05F4:: @ 83E05F4
 	.incbin "graphics/pokenav/glyph.4bpp.lz"
 
 gUnknown_083E0804:: @ 83E0804
-	.incbin "baserom.gba", 0x003e0804, 0x7C4
+	.incbin "baserom.gba", 0x003e0804, 0x168
+
+	.align 2
+gPokenavCityMap_Lavaridge_0:: @ 83E096C
+	.incbin "graphics/pokenav/city_maps/lavaridge_0.bin.lz"
+
+	.align 2
+gPokenavCityMap_Fallarbor_0:: @ 83E09B0
+	.incbin "graphics/pokenav/city_maps/fallarbor_0.bin.lz"
+
+	.align 2
+gPokenavCityMap_Fortree_0:: @ 83E09F8
+	.incbin "graphics/pokenav/city_maps/fortree_0.bin.lz"
+
+	.align 2
+gPokenavCityMap_Slateport_0:: @ 83E0A48
+	.incbin "graphics/pokenav/city_maps/slateport_0.bin.lz"
+
+	.align 2
+gPokenavCityMap_Slateport_1:: @ 83E0AA8
+	.incbin "graphics/pokenav/city_maps/slateport_1.bin.lz"
+
+	.align 2
+gPokenavCityMap_Rustboro_0:: @ 83E0AF4
+	.incbin "graphics/pokenav/city_maps/rustboro_0.bin.lz"
+
+	.align 2
+gPokenavCityMap_Rustboro_1:: @ 83E0B48
+	.incbin "graphics/pokenav/city_maps/rustboro_1.bin.lz"
+
+	.align 2
+gPokenavCityMap_Pacifidlog_0:: @ 83E0B9C
+	.incbin "graphics/pokenav/city_maps/pacifidlog_0.bin.lz"
+
+	.align 2
+gPokenavCityMap_Mauville_1:: @ 83E0BDC
+	.incbin "graphics/pokenav/city_maps/mauville_1.bin.lz"
+
+	.align 2
+gPokenavCityMap_Mauville_0:: @ 83E0C34
+	.incbin "graphics/pokenav/city_maps/mauville_0.bin.lz"
+
+	.align 2
+gPokenavCityMap_Oldale_0:: @ 83E0C88
+	.incbin "graphics/pokenav/city_maps/oldale_0.bin.lz"
+
+	.align 2
+gPokenavCityMap_Lilycove_1:: @ 83E0CB8
+	.incbin "graphics/pokenav/city_maps/lilycove_1.bin.lz"
+
+	.align 2
+gPokenavCityMap_Lilycove_0:: @ 83E0D04
+	.incbin "graphics/pokenav/city_maps/lilycove_0.bin.lz"
+
+	.align 2
+gPokenavCityMap_Littleroot_0:: @ 83E0D5C
+	.incbin "graphics/pokenav/city_maps/littleroot_0.bin.lz"
+
+	.align 2
+gPokenavCityMap_Dewford_0:: @ 83E0D8C
+	.incbin "graphics/pokenav/city_maps/dewford_0.bin.lz"
+
+	.align 2
+gPokenavCityMap_Sootopolis_0:: @ 83E0DC4
+	.incbin "graphics/pokenav/city_maps/sootopolis_0.bin.lz"
+
+	.align 2
+gPokenavCityMap_EverGrande_0:: @ 83E0E04
+	.incbin "graphics/pokenav/city_maps/ever_grande_0.bin.lz"
+
+	.align 2
+gPokenavCityMap_EverGrande_1:: @ 83E0E4C
+	.incbin "graphics/pokenav/city_maps/ever_grande_1.bin.lz"
+
+	.align 2
+gPokenavCityMap_Verdanturf_0:: @ 83E0E90
+	.incbin "graphics/pokenav/city_maps/verdanturf_0.bin.lz"
+
+	.align 2
+gPokenavCityMap_Mossdeep_1:: @ 83E0EC8
+	.incbin "graphics/pokenav/city_maps/mossdeep_1.bin.lz"
+
+	.align 2
+gPokenavCityMap_Mossdeep_0:: @ 83E0F10
+	.incbin "graphics/pokenav/city_maps/mossdeep_0.bin.lz"
+
+	.align 2
+gPokenavCityMap_Petalburg_0:: @ 83E0F6C
+	.incbin "graphics/pokenav/city_maps/petalburg_0.bin.lz"
 
 @ 83E0FC8
 	.include "data/text/ribbon_descriptions.s"
@@ -18245,13 +18333,62 @@ gUnknown_083E31D8:: @ 83E31D8
 	.4byte PCText_FindTough
 	.4byte PCText_ReturnToCondition
 
-gUnknown_083E31F0:: @ 83E31F0
-	.incbin "baserom.gba", 0x003e31f0, 0x80
+	.align 2
+gPokenavCityMaps:: @ 83E31F0
+	.4byte gPokenavCityMap_Littleroot_0
+	.4byte NULL
 
+	.4byte gPokenavCityMap_Oldale_0
+	.4byte NULL
+
+	.4byte gPokenavCityMap_Dewford_0
+	.4byte NULL
+
+	.4byte gPokenavCityMap_Lavaridge_0
+	.4byte NULL
+
+	.4byte gPokenavCityMap_Fallarbor_0
+	.4byte NULL
+
+	.4byte gPokenavCityMap_Verdanturf_0
+	.4byte NULL
+
+	.4byte gPokenavCityMap_Pacifidlog_0
+	.4byte NULL
+
+	.4byte gPokenavCityMap_Petalburg_0
+	.4byte NULL
+
+	.4byte gPokenavCityMap_Slateport_0
+	.4byte gPokenavCityMap_Slateport_1
+
+	.4byte gPokenavCityMap_Mauville_0
+	.4byte gPokenavCityMap_Mauville_1
+
+	.4byte gPokenavCityMap_Rustboro_0
+	.4byte gPokenavCityMap_Rustboro_1
+
+	.4byte gPokenavCityMap_Fortree_0
+	.4byte NULL
+
+	.4byte gPokenavCityMap_Lilycove_0
+	.4byte gPokenavCityMap_Lilycove_1
+
+	.4byte gPokenavCityMap_Mossdeep_0
+	.4byte gPokenavCityMap_Mossdeep_1
+
+	.4byte gPokenavCityMap_Sootopolis_0
+	.4byte NULL
+
+	.4byte gPokenavCityMap_EverGrande_0
+	.4byte gPokenavCityMap_EverGrande_1
+
+	.align 2
 gUnknown_083E3270:: @ 83E3270
-	.4byte 0x080F0A25
-	.4byte 0x080F0A25
-	.4byte 0x080F0A75
+	.4byte sub_80F0A24
+	.4byte sub_80F0A24
+	.4byte sub_80F0A74
+
 	.incbin "graphics/pokenav/icon.gbapal"
 
 gUnknown_083E329C:: @ 83E329C
