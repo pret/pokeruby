@@ -18209,7 +18209,95 @@ gUnknown_083E05F4:: @ 83E05F4
 	.incbin "graphics/pokenav/glyph.4bpp.lz"
 
 gUnknown_083E0804:: @ 83E0804
-	.incbin "baserom.gba", 0x003e0804, 0x7C4
+	.incbin "baserom.gba", 0x003e0804, 0x168
+
+	.align 2
+gPokenavCityMap_Lavaridge_0:: @ 83E096C
+	.incbin "graphics/pokenav/city_maps/lavaridge_0.bin.lz"
+
+	.align 2
+gPokenavCityMap_Fallarbor_0:: @ 83E09B0
+	.incbin "graphics/pokenav/city_maps/fallarbor_0.bin.lz"
+
+	.align 2
+gPokenavCityMap_Fortree_0:: @ 83E09F8
+	.incbin "graphics/pokenav/city_maps/fortree_0.bin.lz"
+
+	.align 2
+gPokenavCityMap_Slateport_0:: @ 83E0A48
+	.incbin "graphics/pokenav/city_maps/slateport_0.bin.lz"
+
+	.align 2
+gPokenavCityMap_Slateport_1:: @ 83E0AA8
+	.incbin "graphics/pokenav/city_maps/slateport_1.bin.lz"
+
+	.align 2
+gPokenavCityMap_Rustboro_0:: @ 83E0AF4
+	.incbin "graphics/pokenav/city_maps/rustboro_0.bin.lz"
+
+	.align 2
+gPokenavCityMap_Rustboro_1:: @ 83E0B48
+	.incbin "graphics/pokenav/city_maps/rustboro_1.bin.lz"
+
+	.align 2
+gPokenavCityMap_Pacifidlog_0:: @ 83E0B9C
+	.incbin "graphics/pokenav/city_maps/pacifidlog_0.bin.lz"
+
+	.align 2
+gPokenavCityMap_Mauville_1:: @ 83E0BDC
+	.incbin "graphics/pokenav/city_maps/mauville_1.bin.lz"
+
+	.align 2
+gPokenavCityMap_Mauville_0:: @ 83E0C34
+	.incbin "graphics/pokenav/city_maps/mauville_0.bin.lz"
+
+	.align 2
+gPokenavCityMap_Oldale_0:: @ 83E0C88
+	.incbin "graphics/pokenav/city_maps/oldale_0.bin.lz"
+
+	.align 2
+gPokenavCityMap_Lilycove_1:: @ 83E0CB8
+	.incbin "graphics/pokenav/city_maps/lilycove_1.bin.lz"
+
+	.align 2
+gPokenavCityMap_Lilycove_0:: @ 83E0D04
+	.incbin "graphics/pokenav/city_maps/lilycove_0.bin.lz"
+
+	.align 2
+gPokenavCityMap_Littleroot_0:: @ 83E0D5C
+	.incbin "graphics/pokenav/city_maps/littleroot_0.bin.lz"
+
+	.align 2
+gPokenavCityMap_Dewford_0:: @ 83E0D8C
+	.incbin "graphics/pokenav/city_maps/dewford_0.bin.lz"
+
+	.align 2
+gPokenavCityMap_Sootopolis_0:: @ 83E0DC4
+	.incbin "graphics/pokenav/city_maps/sootopolis_0.bin.lz"
+
+	.align 2
+gPokenavCityMap_EverGrande_0:: @ 83E0E04
+	.incbin "graphics/pokenav/city_maps/ever_grande_0.bin.lz"
+
+	.align 2
+gPokenavCityMap_EverGrande_1:: @ 83E0E4C
+	.incbin "graphics/pokenav/city_maps/ever_grande_1.bin.lz"
+
+	.align 2
+gPokenavCityMap_Verdanturf_0:: @ 83E0E90
+	.incbin "graphics/pokenav/city_maps/verdanturf_0.bin.lz"
+
+	.align 2
+gPokenavCityMap_Mossdeep_1:: @ 83E0EC8
+	.incbin "graphics/pokenav/city_maps/mossdeep_1.bin.lz"
+
+	.align 2
+gPokenavCityMap_Mossdeep_0:: @ 83E0F10
+	.incbin "graphics/pokenav/city_maps/mossdeep_0.bin.lz"
+
+	.align 2
+gPokenavCityMap_Petalburg_0:: @ 83E0F6C
+	.incbin "graphics/pokenav/city_maps/petalburg_0.bin.lz"
 
 @ 83E0FC8
 	.include "data/text/ribbon_descriptions.s"
@@ -18245,13 +18333,62 @@ gUnknown_083E31D8:: @ 83E31D8
 	.4byte PCText_FindTough
 	.4byte PCText_ReturnToCondition
 
-gUnknown_083E31F0:: @ 83E31F0
-	.incbin "baserom.gba", 0x003e31f0, 0x80
+	.align 2
+gPokenavCityMaps:: @ 83E31F0
+	.4byte gPokenavCityMap_Littleroot_0
+	.4byte NULL
 
+	.4byte gPokenavCityMap_Oldale_0
+	.4byte NULL
+
+	.4byte gPokenavCityMap_Dewford_0
+	.4byte NULL
+
+	.4byte gPokenavCityMap_Lavaridge_0
+	.4byte NULL
+
+	.4byte gPokenavCityMap_Fallarbor_0
+	.4byte NULL
+
+	.4byte gPokenavCityMap_Verdanturf_0
+	.4byte NULL
+
+	.4byte gPokenavCityMap_Pacifidlog_0
+	.4byte NULL
+
+	.4byte gPokenavCityMap_Petalburg_0
+	.4byte NULL
+
+	.4byte gPokenavCityMap_Slateport_0
+	.4byte gPokenavCityMap_Slateport_1
+
+	.4byte gPokenavCityMap_Mauville_0
+	.4byte gPokenavCityMap_Mauville_1
+
+	.4byte gPokenavCityMap_Rustboro_0
+	.4byte gPokenavCityMap_Rustboro_1
+
+	.4byte gPokenavCityMap_Fortree_0
+	.4byte NULL
+
+	.4byte gPokenavCityMap_Lilycove_0
+	.4byte gPokenavCityMap_Lilycove_1
+
+	.4byte gPokenavCityMap_Mossdeep_0
+	.4byte gPokenavCityMap_Mossdeep_1
+
+	.4byte gPokenavCityMap_Sootopolis_0
+	.4byte NULL
+
+	.4byte gPokenavCityMap_EverGrande_0
+	.4byte gPokenavCityMap_EverGrande_1
+
+	.align 2
 gUnknown_083E3270:: @ 83E3270
-	.4byte 0x080F0A25
-	.4byte 0x080F0A25
-	.4byte 0x080F0A75
+	.4byte sub_80F0A24
+	.4byte sub_80F0A24
+	.4byte sub_80F0A74
+
 	.incbin "graphics/pokenav/icon.gbapal"
 
 gUnknown_083E329C:: @ 83E329C
@@ -18753,113 +18890,199 @@ gUnknown_083E499C:: @ 83E499C
 gUnknown_083E49C0:: @ 83E49C0
 	.incbin "baserom.gba", 0x003e49c0, 0x34
 
+	.align 2
 gUnknown_083E49F4:: @ 83E49F4
-	.incbin "baserom.gba", 0x003e49f4, 0x20
+	.incbin "graphics/misc/mon_markings.gbapal"
 
+	.align 2
 gUnknown_083E4A14:: @ 83E4A14
-	.incbin "baserom.gba", 0x003e4a14, 0x800
+	.incbin "graphics/misc/mon_markings.4bpp"
 
 gUnknown_083E5214:: @ 83E5214
 	.incbin "baserom.gba", 0x003e5214, 0x8
 
 gUnknown_083E521C:: @ 83E521C
 	.space 8
-Unknown_83E5224:
-	.incbin "baserom.gba", 0x3E5224, 0x8
-Unknown_83E522C:
-	.incbin "baserom.gba", 0x3E522C, 0x8
-Unknown_83E5234:
-	.incbin "baserom.gba", 0x3E5234, 0x8
-Unknown_83E523C:
-	.incbin "baserom.gba", 0x3E523C, 0x8
-Unknown_83E5244:
-	.incbin "baserom.gba", 0x3E5244, 0x8
-Unknown_83E524C:
-	.incbin "baserom.gba", 0x3E524C, 0x8
-Unknown_83E5254:
-	.incbin "baserom.gba", 0x3E5254, 0x8
-Unknown_83E525C:
-	.incbin "baserom.gba", 0x3E525C, 0x8
-Unknown_83E5264:
-	.incbin "baserom.gba", 0x3E5264, 0x8
-Unknown_83E526C:
-	.incbin "baserom.gba", 0x3E526C, 0x8
 
 	.align 2
-gUnknown_083E5274:: @ 83E5274
-Unknown_83E5274:
-	.4byte Unknown_83E5224
-	.4byte Unknown_83E522C
-	.4byte Unknown_83E5234
-	.4byte Unknown_83E523C
-	.4byte Unknown_83E5244
-	.4byte Unknown_83E524C
-	.4byte Unknown_83E5254
-	.4byte Unknown_83E525C
-	.4byte Unknown_83E5264
-	.4byte Unknown_83E526C
-Unknown_83E529C:
-	.incbin "baserom.gba", 0x003e529c, 0x8
-Unknown_83E52A4:
-	.incbin "baserom.gba", 0x003e52a4, 0x8
+gSpriteAnim_83E5224:: @ 83E5224
+	obj_image_anim_frame 0, 5
+	obj_image_anim_end
 
-gUnknown_083E52AC:: @ 83E52AC
-	.4byte Unknown_83E529C
-	.4byte Unknown_83E52A4
+	.align 2
+gSpriteAnim_83E522C:: @ 83E522C
+	obj_image_anim_frame 1, 5
+	obj_image_anim_end
+
+	.align 2
+gSpriteAnim_83E5234:: @ 83E5234
+	obj_image_anim_frame 2, 5
+	obj_image_anim_end
+
+	.align 2
+gSpriteAnim_83E523C:: @ 83E523C
+	obj_image_anim_frame 3, 5
+	obj_image_anim_end
+
+	.align 2
+gSpriteAnim_83E5244:: @ 83E5244
+	obj_image_anim_frame 4, 5
+	obj_image_anim_end
+
+	.align 2
+gSpriteAnim_83E524C:: @ 83E524C
+	obj_image_anim_frame 5, 5
+	obj_image_anim_end
+
+	.align 2
+gSpriteAnim_83E5254:: @ 83E5254
+	obj_image_anim_frame 6, 5
+	obj_image_anim_end
+
+	.align 2
+gSpriteAnim_83E525C:: @ 83E525C
+	obj_image_anim_frame 7, 5
+	obj_image_anim_end
+
+	.align 2
+gSpriteAnim_83E5264:: @ 83E5264
+	obj_image_anim_frame 8, 5
+	obj_image_anim_end
+
+	.align 2
+gSpriteAnim_83E526C:: @ 83E526C
+	obj_image_anim_frame 9, 5
+	obj_image_anim_end
+
+	.align 2
+gSpriteAnimTable_83E5274:: @ 83E5274
+	.4byte gSpriteAnim_83E5224
+	.4byte gSpriteAnim_83E522C
+	.4byte gSpriteAnim_83E5234
+	.4byte gSpriteAnim_83E523C
+	.4byte gSpriteAnim_83E5244
+	.4byte gSpriteAnim_83E524C
+	.4byte gSpriteAnim_83E5254
+	.4byte gSpriteAnim_83E525C
+	.4byte gSpriteAnim_83E5264
+	.4byte gSpriteAnim_83E526C
+
+	.align 2
+gSpriteAnim_83E529C:: @ 83E529C
+	obj_image_anim_frame 0, 5
+	obj_image_anim_end
+
+	.align 2
+gSpriteAnim_83E52A4:: @ 83E52A4
+	obj_image_anim_frame 64, 5
+	obj_image_anim_end
+
+	.align 2
+gSpriteAnimTable_83E52AC:: @ 83E52AC
+	.4byte gSpriteAnim_83E529C
+	.4byte gSpriteAnim_83E52A4
 
 gUnknown_083E52B4:: @ 83E52B4
 	.incbin "baserom.gba", 0x3E52B4, 0x8
-Unknown_83E52BC:
-	.incbin "baserom.gba", 0x3E52BC, 0x8
-Unknown_83E52C4:
-	.incbin "baserom.gba", 0x3E52C4, 0x8
-Unknown_83E52CC:
-	.incbin "baserom.gba", 0x3E52CC, 0x8
-Unknown_83E52D4:
-	.incbin "baserom.gba", 0x3E52D4, 0x8
-Unknown_83E52DC:
-	.incbin "baserom.gba", 0x3E52DC, 0x8
-Unknown_83E52E4:
-	.incbin "baserom.gba", 0x3E52E4, 0x8
-Unknown_83E52EC:
-	.incbin "baserom.gba", 0x3E52EC, 0x8
-Unknown_83E52F4:
-	.incbin "baserom.gba", 0x3E52F4, 0x8
-Unknown_83E52FC:
-	.incbin "baserom.gba", 0x3E52FC, 0x8
-Unknown_83E5304:
-	.incbin "baserom.gba", 0x3E5304, 0x8
-Unknown_83E530C:
-	.incbin "baserom.gba", 0x3E530C, 0x8
-Unknown_83E5314:
-	.incbin "baserom.gba", 0x3E5314, 0x8
-Unknown_83E531C:
-	.incbin "baserom.gba", 0x3E531C, 0x8
-Unknown_83E5324:
-	.incbin "baserom.gba", 0x3E5324, 0x8
-Unknown_83E532C:
-	.incbin "baserom.gba", 0x3E532C, 0x8
-Unknown_83E5334:
-	.incbin "baserom.gba", 0x3E5334, 0x8
 
 	.align 2
-gUnknown_083E533C:: @ 83E533C
-	.4byte Unknown_83E52BC
-	.4byte Unknown_83E52C4
-	.4byte Unknown_83E52CC
-	.4byte Unknown_83E52D4
-	.4byte Unknown_83E52DC
-	.4byte Unknown_83E52E4
-	.4byte Unknown_83E52EC
-	.4byte Unknown_83E52F4
-	.4byte Unknown_83E52FC
-	.4byte Unknown_83E5304
-	.4byte Unknown_83E530C
-	.4byte Unknown_83E5314
-	.4byte Unknown_83E531C
-	.4byte Unknown_83E5324
-	.4byte Unknown_83E532C
-	.4byte Unknown_83E5334
+gSpriteAnim_83E52BC:: @ 83E52BC
+	obj_image_anim_frame 0, 5
+	obj_image_anim_end
+
+	.align 2
+gSpriteAnim_83E52C4:: @ 83E52C4
+	obj_image_anim_frame 4, 5
+	obj_image_anim_end
+
+	.align 2
+gSpriteAnim_83E52CC:: @ 83E52CC
+	obj_image_anim_frame 8, 5
+	obj_image_anim_end
+
+	.align 2
+gSpriteAnim_83E52D4:: @ 83E52D4
+	obj_image_anim_frame 12, 5
+	obj_image_anim_end
+
+	.align 2
+gSpriteAnim_83E52DC:: @ 83E52DC
+	obj_image_anim_frame 16, 5
+	obj_image_anim_end
+
+	.align 2
+gSpriteAnim_83E52E4:: @ 83E52E4
+	obj_image_anim_frame 20, 5
+	obj_image_anim_end
+
+	.align 2
+gSpriteAnim_83E52EC:: @ 83E52EC
+	obj_image_anim_frame 24, 5
+	obj_image_anim_end
+
+	.align 2
+gSpriteAnim_83E52F4:: @ 83E52F4
+	obj_image_anim_frame 28, 5
+	obj_image_anim_end
+
+	.align 2
+gSpriteAnim_83E52FC:: @ 83E52FC
+	obj_image_anim_frame 32, 5
+	obj_image_anim_end
+
+	.align 2
+gSpriteAnim_83E5304:: @ 83E5304
+	obj_image_anim_frame 36, 5
+	obj_image_anim_end
+
+	.align 2
+gSpriteAnim_83E530C:: @ 83E530C
+	obj_image_anim_frame 40, 5
+	obj_image_anim_end
+
+	.align 2
+gSpriteAnim_83E5314:: @ 83E5314
+	obj_image_anim_frame 44, 5
+	obj_image_anim_end
+
+	.align 2
+gSpriteAnim_83E531C:: @ 83E531C
+	obj_image_anim_frame 48, 5
+	obj_image_anim_end
+
+	.align 2
+gSpriteAnim_83E5324:: @ 83E5324
+	obj_image_anim_frame 52, 5
+	obj_image_anim_end
+
+	.align 2
+gSpriteAnim_83E532C:: @ 83E532C
+	obj_image_anim_frame 56, 5
+	obj_image_anim_end
+
+	.align 2
+gSpriteAnim_83E5334:: @ 83E5334
+	obj_image_anim_frame 60, 5
+	obj_image_anim_end
+
+	.align 2
+gSpriteAnimTable_83E533C:: @ 83E533C
+	.4byte gSpriteAnim_83E52BC
+	.4byte gSpriteAnim_83E52C4
+	.4byte gSpriteAnim_83E52CC
+	.4byte gSpriteAnim_83E52D4
+	.4byte gSpriteAnim_83E52DC
+	.4byte gSpriteAnim_83E52E4
+	.4byte gSpriteAnim_83E52EC
+	.4byte gSpriteAnim_83E52F4
+	.4byte gSpriteAnim_83E52FC
+	.4byte gSpriteAnim_83E5304
+	.4byte gSpriteAnim_83E530C
+	.4byte gSpriteAnim_83E5314
+	.4byte gSpriteAnim_83E531C
+	.4byte gSpriteAnim_83E5324
+	.4byte gSpriteAnim_83E532C
+	.4byte gSpriteAnim_83E5334
 
 gUnknown_083E537C:: @ 83E537C
 	.incbin "baserom.gba", 0x003e537c, 0xc
