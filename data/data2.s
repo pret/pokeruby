@@ -18753,11 +18753,13 @@ gUnknown_083E499C:: @ 83E499C
 gUnknown_083E49C0:: @ 83E49C0
 	.incbin "baserom.gba", 0x003e49c0, 0x34
 
+	.align 2
 gUnknown_083E49F4:: @ 83E49F4
-	.incbin "baserom.gba", 0x003e49f4, 0x20
+	.incbin "graphics/misc/mon_markings.gbapal"
 
+	.align 2
 gUnknown_083E4A14:: @ 83E4A14
-	.incbin "baserom.gba", 0x003e4a14, 0x800
+	.incbin "graphics/misc/mon_markings.4bpp"
 
 gUnknown_083E5214:: @ 83E5214
 	.incbin "baserom.gba", 0x003e5214, 0x8
