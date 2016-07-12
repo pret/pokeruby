@@ -18202,14 +18202,17 @@ gUnknown_083E03A8:: @ 83E03A8
 gUnknown_083E040C:: @ 83E040C
 	.incbin "graphics/misc/ribbons_half.4bpp.lz"
 
-gUnknown_083E05D4:: @ 83E05D4
-	.incbin "graphics/pokenav/glyph.gbapal"
+	.align 2
+gPokenavOutlinePalette:: @ 83E05D4
+	.incbin "graphics/pokenav/outline.gbapal"
 
-gUnknown_083E05F4:: @ 83E05F4
-	.incbin "graphics/pokenav/glyph.4bpp.lz"
+	.align 2
+gPokenavOutlineTiles:: @ 83E05F4
+	.incbin "graphics/pokenav/outline.4bpp.lz"
 
-gUnknown_083E0804:: @ 83E0804
-	.incbin "baserom.gba", 0x003e0804, 0x168
+	.align 2
+gPokenavOutlineTilemap:: @ 83E0804
+	.incbin "graphics/pokenav/outline_map.bin.lz"
 
 	.align 2
 gPokenavCityMap_Lavaridge_0:: @ 83E096C
