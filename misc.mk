@@ -119,7 +119,7 @@ $(PSSGFXDIR)/plain_frame.4bpp: $(PSSGFXDIR)/plain_frame.png
 $(PSSGFXDIR)/plain.4bpp: $(PSSGFXDIR)/plain_frame.4bpp $(PSSGFXDIR)/plain_bg.4bpp
 	@cat $(PSSGFXDIR)/plain_frame.4bpp $(PSSGFXDIR)/plain_bg.4bpp >$@
 
-$(PKNAVGFXDIR)/glyph.4bpp: $(PKNAVGFXDIR)/glyph.png
+$(PKNAVGFXDIR)/outline.4bpp: $(PKNAVGFXDIR)/outline.png
 	$(GFX) $< $@ -num_tiles 43
 
 $(REELGFXDIR)/reel_time.4bpp: $(REELGFXDIR)/reel_pikachu.4bpp $(REELGFXDIR)/reel_machine.4bpp
