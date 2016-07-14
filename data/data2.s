@@ -19463,16 +19463,10 @@ gSpriteTemplate_83E7A38:: @ 83E7A38
 	spr_template 2, 2, gOamData_83E79DC, gSpriteAnimTable_83E7A1C, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 gUnknown_083E7A50:: @ 83E7A50
-	.incbin "baserom.gba", 0x003e7a50, 0x3c74
+	.incbin "baserom.gba", 0x003e7a50, 0x2580
 
-gUnknown_083EB6C4:: @ 83EB6C4
-	.space 1
-
-gUnknown_083EB6C5:: @ 83EB6C5
-	.incbin "baserom.gba", 0x003eb6c5, 0x1b
-
-gUnknown_083EB6E0:: @ 83EB6E0
-	.incbin "baserom.gba", 0x003eb6e0, 0xf04
+@ 83E9FD0
+	.include "data/decorations.s"
 
 	.align 2
 gUnknown_083EC5E4:: @ 83EC5E4

@@ -45774,7 +45774,7 @@ sub_8067488: @ 8067488
 	bx r1
 	.align 2, 0
 _080674BC: .4byte gUnknown_083762F0
-_080674C0: .4byte gUnknown_083EB6C5
+_080674C0: .4byte gDecorations + 0x1
 	thumb_func_end sub_8067488
 
 	thumb_func_start s82_load_item_name
