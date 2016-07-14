@@ -388,17 +388,17 @@ SlateportCity_EventScript_14BDF2:: @ 814BDF2
 	faceplayer
 	message SlateportCity_Text_1A0BE4
 	waittext
-	pokemartdecor SlateportCity_PokemartDecor_14BE0C
+	pokemartdecor SlateportCity_Decorations1
 	msgbox SlateportCity_Text_1A0C02, 4
 	release
 	end
 
 	.align 2
-SlateportCity_PokemartDecor_14BE0C:: @ 814BE0C
-	.2byte 95
-	.2byte 78
-	.2byte 96
-	.2byte 0
+SlateportCity_Decorations1:: @ 814BE0C
+	.2byte DECOR_AZURILL_DOLL
+	.2byte DECOR_MARILL_DOLL
+	.2byte DECOR_SKITTY_DOLL
+	.2byte DECOR_NONE
 	release
 	end
 
@@ -414,28 +414,28 @@ SlateportCity_EventScript_14BE20:: @ 814BE20
 	jumpif 0, SlateportCity_EventScript_14BE16
 	message SlateportCity_Text_1A0BE4
 	waittext
-	pokemartdecor SlateportCity_PokemartDecor_14BE40
+	pokemartdecor SlateportCity_Decorations2
 	msgbox SlateportCity_Text_1A0C02, 4
 	release
 	end
 
 	.align 2
-SlateportCity_PokemartDecor_14BE40:: @ 814BE40
-	.2byte 25
-	.2byte 27
-	.2byte 26
-	.2byte 28
-	.2byte 29
-	.2byte 30
-	.2byte 51
-	.2byte 52
-	.2byte 53
-	.2byte 54
-	.2byte 55
-	.2byte 56
-	.2byte 57
-	.2byte 58
-	.2byte 0
+SlateportCity_Decorations2:: @ 814BE40
+	.2byte DECOR_RED_BRICK
+	.2byte DECOR_BLUE_BRICK
+	.2byte DECOR_YELLOW_BRICK
+	.2byte DECOR_RED_BALLOON
+	.2byte DECOR_BLUE_BALLOON
+	.2byte DECOR_YELLOW_BALLOON
+	.2byte DECOR_C_LOW_NOTE_MAT
+	.2byte DECOR_D_NOTE_MAT
+	.2byte DECOR_E_NOTE_MAT
+	.2byte DECOR_F_NOTE_MAT
+	.2byte DECOR_G_NOTE_MAT
+	.2byte DECOR_A_NOTE_MAT
+	.2byte DECOR_B_NOTE_MAT
+	.2byte DECOR_C_HIGH_NOTE_MAT
+	.2byte DECOR_NONE
 	release
 	end
 
@@ -446,25 +446,25 @@ SlateportCity_PokemartDecor_14BE40:: @ 814BE40
 	jumpif 0, SlateportCity_EventScript_14BE16
 	message SlateportCity_Text_1A0BE4
 	waittext
-	pokemartdecor SlateportCity_PokemartDecor_14BE80
+	pokemartdecor SlateportCity_Decorations3
 	msgbox SlateportCity_Text_1A0C02, 4
 	release
 	end
 
 	.align 2
-SlateportCity_PokemartDecor_14BE80:: @ 814BE80
-	.2byte 39
-	.2byte 34
-	.2byte 35
-	.2byte 36
-	.2byte 37
-	.2byte 40
-	.2byte 33
-	.2byte 38
-	.2byte 45
-	.2byte 46
-	.2byte 47
-	.2byte 0
+SlateportCity_Decorations3:: @ 814BE80
+	.2byte DECOR_MUD_BALL
+	.2byte DECOR_SLIDE
+	.2byte DECOR_FENCE_LENGTH
+	.2byte DECOR_FENCE_WIDTH
+	.2byte DECOR_TIRE
+	.2byte DECOR_BREAKABLE_DOOR
+	.2byte DECOR_SOLID_BOARD
+	.2byte DECOR_STAND
+	.2byte DECOR_TV
+	.2byte DECOR_ROUND_TV
+	.2byte DECOR_CUTE_TV
+	.2byte DECOR_NONE
 	release
 	end
 

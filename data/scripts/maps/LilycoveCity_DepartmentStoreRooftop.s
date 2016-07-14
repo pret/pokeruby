@@ -23,28 +23,28 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A167:: @ 815A167
 	faceplayer
 	message LilycoveCity_DepartmentStoreRooftop_Text_1A0BE4
 	waittext
-	pokemartdecor LilycoveCity_DepartmentStoreRooftop_PokemartDecor_15A180
+	pokemartdecor LilycoveCity_DepartmentStoreRooftop_Decorations
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_1A0C02, 4
 	release
 	end
 
 	.align 2
-LilycoveCity_DepartmentStoreRooftop_PokemartDecor_15A180:: @ 815A180
-	.2byte 39
-	.2byte 35
-	.2byte 36
-	.2byte 37
-	.2byte 40
-	.2byte 33
-	.2byte 41
-	.2byte 38
-	.2byte 34
-	.2byte 45
-	.2byte 46
-	.2byte 47
-	.2byte 117
-	.2byte 112
-	.2byte 0
+LilycoveCity_DepartmentStoreRooftop_Decorations:: @ 815A180
+	.2byte DECOR_MUD_BALL
+	.2byte DECOR_FENCE_LENGTH
+	.2byte DECOR_FENCE_WIDTH
+	.2byte DECOR_TIRE
+	.2byte DECOR_BREAKABLE_DOOR
+	.2byte DECOR_SOLID_BOARD
+	.2byte DECOR_SAND_ORNAMENT
+	.2byte DECOR_STAND
+	.2byte DECOR_SLIDE
+	.2byte DECOR_TV
+	.2byte DECOR_ROUND_TV
+	.2byte DECOR_CUTE_TV
+	.2byte DECOR_WAILMER_DOLL
+	.2byte DECOR_RHYDON_DOLL
+	.2byte DECOR_NONE
 	release
 	end
 

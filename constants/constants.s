@@ -16,6 +16,7 @@
 	.include "constants/map_object_constants.s"
 	.include "constants/battle_tower_constants.s"
 	.include "constants/opponent_constants.s"
+	.include "constants/decorations.s"
 	.include "constants/variables.s"
 	.include "constants/songs.s"
 	.include "constants/version.s"
