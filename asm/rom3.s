@@ -138387,7 +138387,7 @@ task_tutorial_oak_boy_girl: @ 804F16C
 	b _0804F1B6
 	.align 2, 0
 _0804F1A8: .4byte 0x03004854
-_0804F1AC: .4byte gUnknown_08216300 + 0x3
+_0804F1AC: .4byte gUnknown_08216303
 _0804F1B0:
 	movs r0, 0x1
 	b _0804F1B6
@@ -139506,7 +139506,7 @@ sub_804F9F4: @ 804F9F4
 	.align 2, 0
 _0804FA78: .4byte 0x03004854
 _0804FA7C: .4byte 0x0000ffff
-_0804FA80: .4byte gUnknown_08216300 + 0x3
+_0804FA80: .4byte gUnknown_08216303
 _0804FA84: .4byte 0x03004b20
 _0804FA88: .4byte 0x0000014b
 _0804FA8C: .4byte 0x0000028f
@@ -139649,7 +139649,7 @@ sub_804FB1C: @ 804FB1C
 	.align 2, 0
 _0804FB9C: .4byte 0x03004854
 _0804FBA0: .4byte 0x0000ffff
-_0804FBA4: .4byte gUnknown_08216300 + 0x3
+_0804FBA4: .4byte gUnknown_08216303
 _0804FBA8: .4byte 0x03004b20
 _0804FBAC: .4byte 0x0000014b
 _0804FBB0: .4byte 0x0000028f

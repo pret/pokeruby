@@ -2690,7 +2690,16 @@ gUnknown_082162F8:: @ 82162F8
 	.incbin "baserom.gba", 0x002162f8, 0x8
 
 gUnknown_08216300:: @ 8216300
-	.incbin "baserom.gba", 0x00216300, 0x8
+	.byte 1
+	.byte 1
+	.byte 0
+
+gUnknown_08216303:: @ 8216303	
+	.byte 32
+	.byte 224
+	.byte 96
+	.byte 160
+	.byte 0
 
 gUnknown_08216308:: @ 8216308
 	.incbin "baserom.gba", 0x00216308, 0xc
