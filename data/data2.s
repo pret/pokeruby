@@ -1825,7 +1825,8 @@ gUnknown_0820A4B4:: @ 820A4B4
 	obj_tiles 0x08d0314c, 288, 0xd707
 
 gUnknown_0820A4D4:: @ 820A4D4
-	.incbin "baserom.gba", 0x0020a4d4, 0x10
+	obj_pal 0x08D1212C, 0xD6FF
+	obj_pal 0x08D1214C, 0xD704
 
 	.align 2
 gOamData_820A4E4:: @ 820A4E4
@@ -3060,7 +3061,338 @@ gUnknown_082166D8:: @ 82166D8
 	.include "data/maps/_assets.s"
 
 gUnknown_08304F18:: @ 8304F18
-	.incbin "baserom.gba", 0x304f18, 0x530
+	.4byte 0x08287974
+	.4byte 0x08288c54
+	.4byte 0x082892b4
+	.4byte 0x0828a594
+	.4byte 0x0828abf4
+	.4byte 0x0828c514
+	.4byte 0x0828de34
+	.4byte 0x0828fa74
+	.4byte 0x08291394
+	.4byte 0x082916d4
+	.4byte 0x08291a14
+	.4byte 0x08291d54
+	.4byte 0x08292094
+	.4byte 0x082923d4
+	.4byte 0x08292714
+	.4byte 0x08292d74
+	.4byte 0x082930b4
+	.4byte 0x082938a4
+	.4byte 0x08294544
+	.4byte 0x08295e64
+	.4byte 0x08297784
+	.4byte 0x08298424
+	.4byte 0x08298da4
+	.4byte 0x08299724
+	.4byte 0x0829aa04
+	.4byte 0x0829c964
+	.4byte 0x0829f544
+	.4byte 0x082a0824
+	.4byte 0x082a17e4
+	.4byte 0x082a3104
+	.4byte 0x082a4a24
+	.4byte 0x082a59e4
+	.4byte 0x082a6364
+	.4byte 0x082a7004
+	.4byte 0x082a9be4
+	.4byte 0x082abb44
+	.4byte 0x082ac7e4
+	.4byte 0x082ad484
+	.4byte 0x082aea84
+	.4byte 0x082b1ca4
+	.4byte 0x082b35c4
+	.4byte 0x082b67e4
+	.4byte 0x082b9a04
+	.4byte 0x082bbfa4
+	.4byte 0x082bd8c4
+	.4byte 0x082bf1e4
+	.4byte 0x082c04c4
+	.4byte 0x082c1de4
+	.4byte 0x082c3704
+	.4byte 0x082c5024
+	.4byte 0x082c8244
+	.4byte 0x082cb464
+	.4byte 0x082cda04
+	.4byte 0x082cdaec
+	.4byte 0x082cdb9c
+	.4byte 0x082cdc84
+	.4byte 0x082cdd34
+	.4byte 0x082cdea8
+	.4byte 0x082cdf7c
+	.4byte 0x082ce04c
+	.4byte 0x082ce168
+	.4byte 0x082ce284
+	.4byte 0x082ce354
+	.4byte 0x082ce414
+	.4byte 0x082ce824
+	.4byte 0x082ce978
+	.4byte 0x082cea4c
+	.4byte 0x082ceb1c
+	.4byte 0x082ced4c
+	.4byte 0x082cef7c
+	.4byte 0x082cf098
+	.4byte 0x082cf18c
+	.4byte 0x082cf4a0
+	.4byte 0x082cf540
+	.4byte 0x082cf564
+	.4byte 0x082cf694
+	.4byte 0x082cf768
+	.4byte 0x082cf83c
+	.4byte 0x082d003c
+	.4byte 0x082d00fc
+	.4byte 0x082d0394
+	.4byte 0x082d05b4
+	.4byte 0x082d05d8
+	.4byte 0x082d05fc
+	.4byte 0x082d0750
+	.4byte 0x082d08d8
+	.4byte 0x082d0a60
+	.4byte 0x082d0d50
+	.4byte 0x082d0f14
+	.4byte 0x082d100c
+	.4byte 0x082d1210
+	.4byte 0x082d1388
+	.4byte 0x082d1500
+	.4byte 0x082d16c4
+	.4byte 0x082d17ec
+	.4byte 0x082d18e4
+	.4byte 0x082d19d4
+	.4byte 0x082d1abc
+	.4byte 0x082d1b3c
+	.4byte 0x082d1f44
+	.4byte 0x082d1fc4
+	.4byte 0x082d20bc
+	.4byte 0x082d2328
+	.4byte 0x082d2584
+	.4byte 0x082d27cc
+	.4byte 0x082d3514
+	.4byte 0x082d3684
+	.4byte 0x082d36a8
+	.4byte 0x082d3b78
+	.4byte 0x082d3f0c
+	.4byte 0x082d42a0
+	.4byte 0x082d442c
+	.4byte 0x082d45b8
+	.4byte 0x082d4744
+	.4byte 0x082d48d0
+	.4byte 0x082d4a44
+	.4byte 0x082d4b84
+	.4byte 0x082d4cb4
+	.4byte 0x082d4e0c
+	.4byte 0x082d4ecc
+	.4byte 0x082d5190
+	.4byte 0x082d5260
+	.4byte 0x082d5334
+	.4byte 0x082d542c
+	.4byte 0x082d5644
+	.4byte 0x082d603c
+	.4byte 0x082d67dc
+	.4byte 0x082d7098
+	.4byte 0x082d7244
+	.4byte 0x082d7924
+	.4byte 0x082d7ad4
+	.4byte 0x082d7f58
+	.4byte 0x082d8464
+	.4byte 0x082d8b04
+	.4byte 0x082d91a4
+	.4byte 0x082da244
+	.4byte 0x082db114
+	.4byte 0x082db478
+	.4byte 0x082db5ec
+	.4byte 0x082db760
+	.4byte 0x082db8d4
+	.4byte 0x082dba48
+	.4byte 0x082dbbbc
+	.4byte 0x082dc26c
+	.4byte 0x082dcc1c
+	.4byte 0x082dd29c
+	.4byte 0x082dd3b8
+	.4byte 0x082dd6f8
+	.4byte 0x082dda60
+	.4byte 0x082ddd74
+	.4byte 0x082ddfb4
+	.4byte 0x082de280
+	.4byte 0x082de5c0
+	.4byte 0x082dea30
+	.4byte 0x082deed0
+	.4byte 0x082df024
+	.4byte 0x082df9f8
+	.4byte 0x082dfdf4
+	.4byte 0x082e0238
+	.4byte 0x082e067c
+	.4byte 0x082e0a10
+	.4byte 0x082e0d50
+	.4byte 0x082e1044
+	.4byte 0x082e2090
+	.4byte 0x082e2a44
+	.4byte 0x082e380c
+	.4byte 0x082e3aa4
+	.4byte 0x082e3e28
+	.4byte 0x082e47dc
+	.4byte 0x082e55a4
+	.4byte 0x082e55c8
+	.4byte 0x082e55ec
+	.4byte 0x082e5610
+	.4byte 0x082e5634
+	.4byte 0x082e5658
+	.4byte 0x082e567c
+	.4byte 0x082e56a0
+	.4byte 0x082e56c4
+	.4byte 0x082e56e8
+	.4byte 0x082e570c
+	.4byte 0x082e5730
+	.4byte 0x082e5754
+	.4byte 0x082e5778
+	.4byte 0x082e579c
+	.4byte 0x082e5860
+	.4byte 0x082e65a4
+	.4byte 0x082e698c
+	.4byte 0x082e6b5c
+	.4byte 0x082e6de0
+	.4byte 0x082e6f04
+	.4byte 0x082e70d4
+	.4byte 0x082e7214
+	.4byte 0x082e72b4
+	.4byte 0x082e7364
+	.4byte 0x082e74b8
+	.4byte 0x082e7558
+	.4byte 0x082e76a0
+	.4byte 0x082e7788
+	.4byte 0x082e7870
+	.4byte 0x082e7958
+	.4byte 0x082e7a40
+	.4byte 0x082e7b28
+	.4byte 0x082e7c10
+	.4byte 0x082e7d10
+	.4byte 0x082e7e2c
+	.4byte 0x082e7f20
+	.4byte 0x082e803c
+	.4byte 0x082e813c
+	.4byte 0x082e8230
+	.4byte 0x082e8340
+	.4byte 0x082e84ac
+	.4byte 0x082e8620
+	.4byte 0x082e8748
+	.4byte 0x082e8878
+	.4byte 0x082e89b8
+	.4byte 0x082e8ae8
+	.4byte 0x082e8c58
+	.4byte 0x082e8dac
+	.4byte 0x082e8f38
+	.4byte 0x082e90e0
+	.4byte 0x082e9234
+	.4byte 0x082e9350
+	.4byte 0x082e9448
+	.4byte 0x082e95f8
+	.4byte 0x082e9714
+	.4byte 0x082e9880
+	.4byte 0x082e98a4
+	.4byte 0x082e98c8
+	.4byte 0x082e98ec
+	.4byte 0x082e9910
+	.4byte 0x082e9934
+	.4byte 0x082e9958
+	.4byte 0x082e9ac4
+	.4byte 0x082e9c30
+	.4byte 0x082e9d9c
+	.4byte 0x082e9f08
+	.4byte 0x082ea074
+	.4byte 0x082ea0c8
+	.4byte 0x082ead68
+	.4byte 0x082eba08
+	.4byte 0x082ec6a8
+	.4byte 0x082ed348
+	.4byte 0x082edf30
+	.4byte 0x082ee07c
+	.4byte 0x082ee15c
+	.4byte 0x082ee23c
+	.4byte 0x082ee52c
+	.4byte 0x082ee7e0
+	.4byte 0x082eea94
+	.4byte 0x082eed48
+	.4byte 0x082eeffc
+	.4byte 0x082ef2b0
+	.4byte 0x082ef564
+	.4byte 0x082ef818
+	.4byte 0x082efacc
+	.4byte 0x082efb4c
+	.4byte 0x082efc20
+	.4byte 0x082efd60
+	.4byte 0x082efea0
+	.4byte 0x082effe0
+	.4byte 0x082f0120
+	.4byte 0x082f0260
+	.4byte 0x082f0430
+	.4byte 0x082f1d50
+	.4byte 0x082f1e6c
+	.4byte 0x082f2558
+	.4byte 0x082f25b0
+	.4byte 0x082f267c
+	.4byte 0x082f2750
+	.4byte 0x082f28c8
+	.4byte 0x082f2ab0
+	.4byte 0x082f2cd8
+	.4byte 0x082f2eb0
+	.4byte 0x082f2f00
+	.4byte 0x082f6120
+	.4byte 0x082f6280
+	.4byte 0x082f63e0
+	.4byte 0x082f65d4
+	.4byte 0x082f67b0
+	.4byte 0x082f6ce0
+	.4byte 0x082f7164
+	.4byte 0x082f75e8
+	.4byte 0x082f7770
+	.4byte 0x082f7fd0
+	.4byte 0x082f83b8
+	.4byte 0x082f8efc
+	.4byte 0x082f9a40
+	.4byte 0x082f9a64
+	.4byte 0x082f9c28
+	.4byte 0x082f9d68
+	.4byte 0x082fa544
+	.4byte 0x082faa74
+	.4byte 0x082fb55c
+	.4byte 0x082fbfe0
+	.4byte 0x082fc0fc
+	.4byte 0x082fc218
+	.4byte 0x082fc334
+	.4byte 0x082fc3c4
+	.4byte 0x082fc5e4
+	.4byte 0x082fc6dc
+	.4byte 0x082fc7d4
+	.4byte 0x082fc8a8
+	.4byte 0x082fd7ec
+	.4byte 0x082fe680
+	.4byte 0x082fea68
+	.4byte 0x082feb38
+	.4byte 0x082fec30
+	.4byte 0x082fecc0
+	.4byte 0x082fed50
+	.4byte 0x082fede0
+	.4byte 0x082ff328
+	.4byte 0x082ff5a0
+	.4byte 0x082ff894
+	.4byte 0x082ff994
+	.4byte 0x082ffa94
+	.4byte 0x082ffda0
+	.4byte 0x08300450
+	.4byte 0x08301010
+	.4byte 0x08301690
+	.4byte 0x08302970
+	.4byte 0x08302c18
+	.4byte 0x08303140
+	.4byte 0x083032e8
+	.4byte 0x08303490
+	.4byte 0x08303638
+	.4byte 0x083037e0
+	.4byte 0x083041b4
+	.4byte 0x08304284
+	.4byte 0x08304754
+	.4byte 0x08304828
+	.4byte 0x083049d0
+	.4byte 0x08304f00
 
 	.include "data/maps/PetalburgCity/header.s"
 	.include "data/maps/SlateportCity/header.s"
@@ -4673,16 +5005,16 @@ gUnknown_0836DC09:: @ 836DC09
 
 	.align 2
 gUnknown_0837377C:: @ 837377C
-	obj_pal  gMapObjectPalette0, 0x1103
-	obj_pal  gMapObjectPalette1, 0x1104
-	obj_pal  gMapObjectPalette2, 0x1105
-	obj_pal  gMapObjectPalette3, 0x1106
-	obj_pal  gMapObjectPalette4, 0x1107
-	obj_pal  gMapObjectPalette5, 0x1108
-	obj_pal  gMapObjectPalette6, 0x1109
-	obj_pal  gMapObjectPalette7, 0x110A
-	obj_pal  gMapObjectPalette8, 0x1100
-	obj_pal  gMapObjectPalette9, 0x1101
+	obj_pal gMapObjectPalette0, 0x1103
+	obj_pal gMapObjectPalette1, 0x1104
+	obj_pal gMapObjectPalette2, 0x1105
+	obj_pal gMapObjectPalette3, 0x1106
+	obj_pal gMapObjectPalette4, 0x1107
+	obj_pal gMapObjectPalette5, 0x1108
+	obj_pal gMapObjectPalette6, 0x1109
+	obj_pal gMapObjectPalette7, 0x110A
+	obj_pal gMapObjectPalette8, 0x1100
+	obj_pal gMapObjectPalette9, 0x1101
 	obj_pal gMapObjectPalette10, 0x1102
 	obj_pal gMapObjectPalette11, 0x1115
 	obj_pal gMapObjectPalette12, 0x110B
@@ -7060,13 +7392,37 @@ gUnknown_0837C0E4:: @ 837C0E4
 	.incbin "baserom.gba", 0x0037c0e4, 0x428
 
 gUnknown_0837C50C:: @ 837C50C
-	.incbin "baserom.gba", 0x0037c50c, 0x430
+	.incbin "baserom.gba", 0x0037c50c, 0x10
+Unknown_837C51C:
+	.incbin "baserom.gba", 0x0037c51c, 0x80
+Unknown_837C59C:
+	.incbin "baserom.gba", 0x0037c59c, 0x80
+Unknown_837C61C:
+	.incbin "baserom.gba", 0x0037c61c, 0x80
+Unknown_837C69C:
+	.incbin "baserom.gba", 0x0037c69c, 0x80
+Unknown_837C71C:
+	.incbin "baserom.gba", 0x0037c71c, 0x80
+Unknown_837C79C:
+	.incbin "baserom.gba", 0x0037c79c, 0x80
+Unknown_837C81C:
+	.incbin "baserom.gba", 0x0037c81c, 0x80
+Unknown_837C89C:
+	.incbin "baserom.gba", 0x0037c89c, 0x80
+	.incbin "baserom.gba", 0x0037c91c, 0x20
 
 gUnknown_0837C93C:: @ 837C93C
 	.incbin "baserom.gba", 0x0037c93c, 0x20
 
 gUnknown_0837C95C:: @ 837C95C
-	.incbin "baserom.gba", 0x37C95C, 0x20
+	.4byte Unknown_837C51C
+	.4byte Unknown_837C59C
+	.4byte Unknown_837C61C
+	.4byte Unknown_837C69C
+	.4byte Unknown_837C71C
+	.4byte Unknown_837C79C
+	.4byte Unknown_837C81C
+	.4byte Unknown_837C89C
 Unknown_837C97C:
 	.incbin "baserom.gba", 0x37C97C, 0x80
 Unknown_837C9FC:
