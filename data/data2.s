@@ -27221,40 +27221,40 @@ gUnknown_0842C1F4:: @ 842C1F4
 	.4byte Unknown_8428CB4
 	.4byte Unknown_84292E4
 
-Unknown_string_1stRound:
+UnknownString_1stRound:
 	.string "1st round$"
 
-Unknown_string_2ndRound:
+UnknownString_2ndRound:
 	.string "2nd round$"
 
-Unknown_string_3rdRound:
+UnknownString_3rdRound:
 	.string "3rd round$"
 
-Unknown_string_4thRound:
+UnknownString_4thRound:
 	.string "4th round$"
 
-Unknown_string_5thRound:
+UnknownString_5thRound:
 	.string "5th round$"
 
-Unknown_string_6thRound:
+UnknownString_6thRound:
 	.string "6th round$"
 
-Unknown_string_7thRound:
+UnknownString_7thRound:
 	.string "7th round$"
 
-Unknown_string_8thRound:
+UnknownString_8thRound:
 	.string "8th round$"
 
 	.align 2
 gUnknown_0842C29C:: @ 842C29C
-	.4byte Unknown_string_1stRound, sub_814A4B8
-	.4byte Unknown_string_2ndRound, sub_814A4B8
-	.4byte Unknown_string_3rdRound, sub_814A4B8
-	.4byte Unknown_string_4thRound, sub_814A4B8
-	.4byte Unknown_string_5thRound, sub_814A4B8
-	.4byte Unknown_string_6thRound, sub_814A4B8
-	.4byte Unknown_string_7thRound, sub_814A4B8
-	.4byte Unknown_string_8thRound, sub_814A4B8
+	.4byte UnknownString_1stRound, sub_814A4B8
+	.4byte UnknownString_2ndRound, sub_814A4B8
+	.4byte UnknownString_3rdRound, sub_814A4B8
+	.4byte UnknownString_4thRound, sub_814A4B8
+	.4byte UnknownString_5thRound, sub_814A4B8
+	.4byte UnknownString_6thRound, sub_814A4B8
+	.4byte UnknownString_7thRound, sub_814A4B8
+	.4byte UnknownString_8thRound, sub_814A4B8
 OtherText_TopSpeed:
 	.string "TOP SPEED$"
 
