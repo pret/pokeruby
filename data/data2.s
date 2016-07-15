@@ -999,20 +999,13 @@ gStatusConditionString_LoveJpn:: @ 81FA6CC
 
 	.align 2
 gUnknown_081FA6D4:: @ 81FA6D4
-	.4byte gStatusConditionString_PoisonJpn
-	.4byte BattleText_PoisonStatus
-	.4byte gStatusConditionString_SleepJpn
-	.4byte BattleText_Sleep
-	.4byte gStatusConditionString_ParalysisJpn
-	.4byte BattleText_Paralysis
-	.4byte gStatusConditionString_BurnJpn
-	.4byte BattleText_Burn
-	.4byte gStatusConditionString_IceJpn
-	.4byte BattleText_IceStatus
-	.4byte gStatusConditionString_ConfusionJpn
-	.4byte BattleText_Confusion
-	.4byte gStatusConditionString_LoveJpn
-	.4byte BattleText_Love
+	.4byte gStatusConditionString_PoisonJpn, BattleText_PoisonStatus
+	.4byte gStatusConditionString_SleepJpn, BattleText_Sleep
+	.4byte gStatusConditionString_ParalysisJpn, BattleText_Paralysis
+	.4byte gStatusConditionString_BurnJpn, BattleText_Burn
+	.4byte gStatusConditionString_IceJpn, BattleText_IceStatus
+	.4byte gStatusConditionString_ConfusionJpn, BattleText_Confusion
+	.4byte gStatusConditionString_LoveJpn, BattleText_Love
 
 gUnknown_081FA70C:: @ 81FA70C
 	.incbin "baserom.gba", 0x001fa70c, 0xf
@@ -1287,7 +1280,46 @@ gUnknown_081FAB5C:: @ 81FAB5C
 	.incbin "baserom.gba", 0x001fab5c, 0xf0
 
 gUnknown_081FAC4C:: @ 81FAC4C
-	.incbin "baserom.gba", 0x001fac4c, 0xa3
+	.4byte 0x081d963e
+	.4byte 0x081d963e
+	.4byte 0x081d965a
+	.4byte 0x081d9669
+	.4byte 0x081d9678
+	.4byte 0x081d9687
+	.4byte 0x081d969d
+	.4byte 0x081d96ba
+	.4byte 0x081d963e
+	.4byte 0x081d963e
+	.4byte 0x081d9696
+	.4byte 0x081d96aa
+	.4byte 0x081d963e
+	.4byte 0x081d96b1
+	.4byte 0x081d96c8
+	.4byte 0x081d963e
+	.4byte 0x081d963e
+	.4byte 0x081d963e
+	.4byte 0x081d963e
+	.4byte 0x081d963e
+	.4byte 0x081d963e
+	.4byte 0x081d963e
+	.4byte 0x081d963e
+	.4byte 0x081d963e
+	.4byte 0x081d963e
+	.4byte 0x081d963e
+	.4byte 0x081d963e
+	.4byte 0x081d963e
+	.4byte 0x081d963e
+	.4byte 0x081d963e
+	.4byte 0x081d963e
+	.4byte 0x081d963e
+	.4byte 0x081d963e
+	.4byte 0x081d963e
+	.4byte 0x081d963e
+	.4byte 0x081d963e
+	.4byte 0x081d963e
+	.4byte 0x081d963e
+	.4byte 0x081d96c8
+	.incbin "baserom.gba", 0x001face8, 0x7
 
 gUnknown_081FACEF:: @ 81FACEF
 	.incbin "baserom.gba", 0x001facef, 0x7
@@ -1319,12 +1351,12 @@ gUnknown_081FACFE:: @ 81FACFE
 	.2byte 0xFFFF
 
 gUnknown_081FAD26:: @ 81FAD26
-	.byte  1, 200
-	.byte  4, 150
-	.byte  9, 100
-	.byte 16,  80
-	.byte 32,  40
-	.byte 48,  20
+	.byte 1, 200
+	.byte 4, 150
+	.byte 9, 100
+	.byte 16, 80
+	.byte 32, 40
+	.byte 48, 20
 
 	.align 1
 gNaturePowerMoves:: @ 81FAD32
@@ -1344,12 +1376,12 @@ gNaturePowerMoves:: @ 81FAD32
 
 	.align 1
 gWeightDamage:: @ 81FAD46
-	.2byte  100,  20
-	.2byte  250,  40
-	.2byte  500,  60
-	.2byte 1000,  80
+	.2byte 100, 20
+	.2byte 250, 40
+	.2byte 500, 60
+	.2byte 1000, 80
 	.2byte 2000, 100
-	.2byte   -1,  -1
+	.2byte -1, -1
 
 	.align 1
 gPickupItems:: @ 81FAD5E
@@ -1495,7 +1527,7 @@ gSpriteTemplate_81FAF0C:: @ 81FAF0C
 	spr_template 55019, 55019, gOamData_81FAEB4, gSpriteAnimTable_81FAEFC, NULL, gDummySpriteAffineAnimTable, sub_80463CC
 
 gUnknown_081FAF24:: @ 81FAF24
-	.incbin "baserom.gba", 0x001faf24, 0x8
+	obj_tiles 0x08E6A728, 128, 0xD759
 
 	.align 2
 gOamData_81FAF2C:: @ 81FAF2C
