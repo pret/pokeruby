@@ -19671,7 +19671,6 @@ gUnknown_083E5D60:: @ 83E5D60
 	.incbin "graphics/interface/map.gbapal", 0xE0, 0x40
 
 gUnknown_083E5DA0:: @ 83E5DA0
-@ replacing .incbin "baserom.gba", 0x003e5da0, 0xd64
 	.incbin "graphics/interface/map.8bpp.lz"
 
 gUnknown_083E6B04:: @ 83E6B04
@@ -23827,7 +23826,6 @@ gUnknown_0840754C:: @ 840754C
 	.incbin "baserom.gba", 0x0040754c, 0x218
 
 gUnknown_08407764:: @ 8407764
-@ replacing .incbin "baserom.gba", 0x00407764, 0x2170
 	.incbin "graphics/intro/introgfx.4bpp.lz"
 
 gUnknown_084098D4:: @ 84098D4
@@ -24554,7 +24552,7 @@ gUnknown_0840B869:: @ 840B869
 	.incbin "baserom.gba", 0x0040b869, 0xf
 
 gUnknown_0840B878::
-	.incbin "baserom.gba", 0x0040B878, 0xF @ unknown
+	.incbin "baserom.gba", 0x0040B878, 0xf
 
 	.include "data/text/credits.s"
 
@@ -27536,70 +27534,48 @@ gUnknown_08417068:: @ 8417068
 
 gUnknown_084170F4:: @ 84170F4
 	.incbin "baserom.gba", 0x004170f4, 0xD0
-
 Unknown_84171C4:
 	.incbin "baserom.gba", 0x4171C4, 0x25E0
-
 Unknown_84197A4:
 	.incbin "baserom.gba", 0x4197A4, 0x390
-
 Unknown_8419B34:
 	.incbin "baserom.gba", 0x419B34, 0x1470
-
 Unknown_841AFA4:
 	.incbin "baserom.gba", 0x41AFA4, 0xBD0
-
 Unknown_841BB74:
 	.incbin "baserom.gba", 0x41BB74, 0x7E0
-
 Unknown_841C354:
 	.incbin "baserom.gba", 0x41C354, 0xE10
-
 Unknown_841D164:
 	.incbin "baserom.gba", 0x41D164, 0xBD0
-
 Unknown_841DD34:
 	.incbin "baserom.gba", 0x41DD34, 0xB40
-
 Unknown_841E874:
 	.incbin "baserom.gba", 0x41E874, 0xCF0
-
 Unknown_841F564:
 	.incbin "baserom.gba", 0x41F564, 0xCF0
-
 Unknown_8420254:
 	.incbin "baserom.gba", 0x420254, 0xCF0
-
 Unknown_8420F44:
 	.incbin "baserom.gba", 0x420F44, 0xEA0
-
 Unknown_8421DE4:
 	.incbin "baserom.gba", 0x421DE4, 0x870
-
 Unknown_8422654:
 	.incbin "baserom.gba", 0x422654, 0xA20
-
 Unknown_8423074:
 	.incbin "baserom.gba", 0x423074, 0x870
-
 Unknown_84238E4:
 	.incbin "baserom.gba", 0x4238E4, 0x7E0
-
 Unknown_84240C4:
 	.incbin "baserom.gba", 0x4240C4, 0x6C0
-
 Unknown_8424784:
 	.incbin "baserom.gba", 0x424784, 0x420
-
 Unknown_8424BA4:
 	.incbin "baserom.gba", 0x424BA4, 0x1CB0
-
 Unknown_8426854:
 	.incbin "baserom.gba", 0x426854, 0x2460
-
 Unknown_8428CB4:
 	.incbin "baserom.gba", 0x428CB4, 0x630
-
 Unknown_84292E4:
 	.incbin "baserom.gba", 0x4292E4, 0x2F10
 
