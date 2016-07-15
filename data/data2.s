@@ -23839,7 +23839,18 @@ gUnknown_0840B258:: @ 840B258
 	obj_tiles 0x08d1a7f4, 256, 0xd6f7
 
 gUnknown_0840B2B8:: @ 840B2B8
-	.incbin "baserom.gba", 0x0040b2b8, 0x60
+	obj_pal 0x08d1a8c8, 55020
+	obj_pal 0x08d1a8c8, 55021
+	obj_pal 0x08d1a8c8, 55022
+	obj_pal 0x08d1a8c8, 55023
+	obj_pal 0x08d1a8c8, 55024
+	obj_pal 0x08d1a8c8, 55025
+	obj_pal 0x08d1a8c8, 55026
+	obj_pal 0x08d1a8c8, 55027
+	obj_pal 0x08d1a8c8, 55028
+	obj_pal 0x08d1a8c8, 55029
+	obj_pal 0x08d1a8c8, 55030
+	obj_pal 0x08d1a8c8, 55031
 
 	.align 2
 gSpriteAnim_840B318:: @ 840B318
@@ -24309,7 +24320,7 @@ SystemText_SaveCorrupt:
 
 gUnknown_0840DEC2:: @ 840DEC2
 SystemText_SaveDeleted:
-	.string " The save file has been deleted...$" @ there's a blank spot at the beginning of this string. No idea why.
+	.string " The save file has been deleted...$"
 
 gUnknown_0840DEE5:: @ 840DEE5
 SystemText_1MSubCircuitNotInstalled:
@@ -24380,7 +24391,7 @@ DexText_UnknownPoke:
 	.string "            ????? POKéMON$" @ why 12 spaces?
 
 gUnknown_0840E013:: @ 840E013
-	.incbin "baserom.gba", 0x0040e013, 0xa @ unknown size of dummy pokemon
+	.incbin "baserom.gba", 0x0040e013, 0xa
 
 gUnknown_0840E01D:: @ 840E01D
 DexText_UnknownWeight:
@@ -24389,7 +24400,7 @@ DexText_Terminator4:
 	.string "$"
 
 gUnknown_0840E02A:: @ 840E02A
-	.incbin "baserom.gba", 0x0040e02a, 0xb @ unknown cry of dummy pokemon
+	.incbin "baserom.gba", 0x0040e02a, 0xb
 
 gUnknown_0840E035:: @ 840E035
 DexText_SizeComparedTo:
@@ -24840,7 +24851,6 @@ ContestStatsText_VeryHard:
 	.string "Very hard$"
 ContestStatsText_SuperHard:
 	.string "Super hard$"
-
 ContestStatsText_RedPokeBlock:
 	.string "RED {POKEBLOCK}$"
 ContestStatsText_BluePokeBlock:
