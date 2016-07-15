@@ -2690,10 +2690,7 @@ gUnknown_082162F8:: @ 82162F8
 	.incbin "baserom.gba", 0x002162f8, 0x8
 
 gUnknown_08216300:: @ 8216300
-	.incbin "baserom.gba", 0x00216300, 0x3
-
-gUnknown_08216303:: @ 8216303
-	.incbin "baserom.gba", 0x00216303, 0x5
+	.incbin "baserom.gba", 0x00216300, 0x8
 
 gUnknown_08216308:: @ 8216308
 	.incbin "baserom.gba", 0x00216308, 0xc
@@ -6914,26 +6911,16 @@ gUnknown_08376D1C:: @ 8376D1C
 
 	.align 2
 gUnknown_08376D24:: @ 8376D24
-	.4byte SystemText_Pokedex
-	.4byte StartMenu_Pokedex
-	.4byte SystemText_Pokemon
-	.4byte sub_807144C
-	.4byte SystemText_BAG
-	.4byte sub_8071478
-	.4byte SystemText_Pokenav
-	.4byte sub_80714A4
-	.4byte SystemText_Player
-	.4byte sub_80714D0
-	.4byte SystemText_Save
-	.4byte sub_80714FC
-	.4byte SystemText_Option
-	.4byte sub_8071518
-	.4byte SystemText_Exit
-	.4byte sub_8071554
-	.4byte SystemText_Retire
-	.4byte sub_8071560
-	.4byte SystemText_Player @ duplicate?
-	.4byte sub_8071570
+	.4byte SystemText_Pokedex, StartMenu_Pokedex
+	.4byte SystemText_Pokemon, sub_807144C
+	.4byte SystemText_BAG, sub_8071478
+	.4byte SystemText_Pokenav, sub_80714A4
+	.4byte SystemText_Player, sub_80714D0
+	.4byte SystemText_Save, sub_80714FC
+	.4byte SystemText_Option, sub_8071518
+	.4byte SystemText_Exit, sub_8071554
+	.4byte SystemText_Retire, sub_8071560
+	.4byte SystemText_Player, sub_8071570
 
 gUnknown_08376D74:: @ 8376D74
 	.incbin "baserom.gba", 0x00376d74, 0x1b0
@@ -6989,7 +6976,6 @@ Unknown_837B5C4:
 	.4byte Unknown_837B2C4
 	.4byte Unknown_837B3C4
 	.4byte Unknown_837B4C4
-Unknown_837B5E4:
 Unknown_837B5E4:
 	.incbin "baserom.gba", 0x37B5E4, 0x80
 Unknown_837B664:
@@ -9747,54 +9733,30 @@ gUnknown_0839F470:: @ 839F470
 
 	.align 2
 gUnknown_0839F494:: @ 839F494
-	.4byte OtherText_Summary
-	.4byte sub_8089FCC
-	.4byte OtherText_Switch2
-	.4byte sub_808A02C
-	.4byte OtherText_Item
-	.4byte sub_808A140
-	.4byte OtherText_Cancel2
-	.4byte sub_808A918
-	.4byte OtherText_Give2
-	.4byte sub_808A630
-	.4byte OtherText_Take2
-	.4byte sub_808A688
-	.4byte OtherText_Take
-	.4byte sub_808A6B8
-	.4byte OtherText_Mail
-	.4byte sub_808A6E8
-	.4byte OtherText_Read2
-	.4byte sub_808A810
-	.4byte OtherText_Cancel2
-	.4byte sub_808A938
-	.4byte gMoveNames + 13 * MOVE_CUT
-	.4byte sub_808A984
-	.4byte gMoveNames + 13 * MOVE_FLASH
-	.4byte sub_808A984
-	.4byte gMoveNames + 13 * MOVE_ROCK_SMASH
-	.4byte sub_808A984
-	.4byte gMoveNames + 13 * MOVE_STRENGTH
-	.4byte sub_808A984
-	.4byte gMoveNames + 13 * MOVE_SURF
-	.4byte sub_808A984
-	.4byte gMoveNames + 13 * MOVE_FLY
-	.4byte sub_808A984
-	.4byte gMoveNames + 13 * MOVE_DIVE
-	.4byte sub_808A984
-	.4byte gMoveNames + 13 * MOVE_WATERFALL
-	.4byte sub_808A984
-	.4byte gMoveNames + 13 * MOVE_TELEPORT
-	.4byte sub_808A984
-	.4byte gMoveNames + 13 * MOVE_DIG
-	.4byte sub_808A984
-	.4byte gMoveNames + 13 * MOVE_SECRET_POWER
-	.4byte sub_808A984
-	.4byte gMoveNames + 13 * MOVE_MILK_DRINK
-	.4byte sub_808A984
-	.4byte gMoveNames + 13 * MOVE_SOFT_BOILED
-	.4byte sub_808A984
-	.4byte gMoveNames + 13 * MOVE_SWEET_SCENT
-	.4byte sub_808A984
+	.4byte OtherText_Summary, sub_8089FCC
+	.4byte OtherText_Switch2, sub_808A02C
+	.4byte OtherText_Item, sub_808A140
+	.4byte OtherText_Cancel2, sub_808A918
+	.4byte OtherText_Give2, sub_808A630
+	.4byte OtherText_Take2, sub_808A688
+	.4byte OtherText_Take, sub_808A6B8
+	.4byte OtherText_Mail, sub_808A6E8
+	.4byte OtherText_Read2, sub_808A810
+	.4byte OtherText_Cancel2, sub_808A938
+	.4byte gMoveNames + 13 * MOVE_CUT, sub_808A984
+	.4byte gMoveNames + 13 * MOVE_FLASH, sub_808A984
+	.4byte gMoveNames + 13 * MOVE_ROCK_SMASH, sub_808A984
+	.4byte gMoveNames + 13 * MOVE_STRENGTH, sub_808A984
+	.4byte gMoveNames + 13 * MOVE_SURF, sub_808A984
+	.4byte gMoveNames + 13 * MOVE_FLY, sub_808A984
+	.4byte gMoveNames + 13 * MOVE_DIVE, sub_808A984
+	.4byte gMoveNames + 13 * MOVE_WATERFALL, sub_808A984
+	.4byte gMoveNames + 13 * MOVE_TELEPORT, sub_808A984
+	.4byte gMoveNames + 13 * MOVE_DIG, sub_808A984
+	.4byte gMoveNames + 13 * MOVE_SECRET_POWER, sub_808A984
+	.4byte gMoveNames + 13 * MOVE_MILK_DRINK, sub_808A984
+	.4byte gMoveNames + 13 * MOVE_SOFT_BOILED, sub_808A984
+	.4byte gMoveNames + 13 * MOVE_SWEET_SCENT, sub_808A984
 
 gUnknown_0839F554:: @ 839F554
 	.incbin "baserom.gba", 0x0039f554, 0x24
@@ -11568,20 +11530,13 @@ Unknown_83C91D6:
 
 	.align 2
 gUnknown_083C91F0:: @ 83C91F0
-	.4byte Unknown_83C9166
-	.4byte sub_80A9C1C
-	.4byte Unknown_83C916E
-	.4byte sub_80A9BBC
-	.4byte Unknown_83C9190
-	.4byte sub_80A9C34
-	.4byte Unknown_83C91A0
-	.4byte sub_80A9C40
-	.4byte Unknown_83C91B0
-	.4byte sub_80AAFDC
-	.4byte Unknown_83C91C2
-	.4byte sub_80AAFEC
-	.4byte Unknown_83C91D6
-	.4byte sub_80AB02C
+	.4byte Unknown_83C9166, sub_80A9C1C
+	.4byte Unknown_83C916E, sub_80A9BBC
+	.4byte Unknown_83C9190, sub_80A9C34
+	.4byte Unknown_83C91A0, sub_80A9C40
+	.4byte Unknown_83C91B0, sub_80AAFDC
+	.4byte Unknown_83C91C2, sub_80AAFEC
+	.4byte Unknown_83C91D6, sub_80AB02C
 
 gUnknown_083C9228:: @ 83C9228
 	.incbin "baserom.gba", 0x003c9228, 0x46
@@ -12003,12 +11958,9 @@ gUnknown_083CC5D0:: @ 83CC5D0
 
 	.align 2
 gUnknown_083CC6D0:: @ 83CC6D0
-	.4byte ContestStatsText_Buy
-	.4byte sub_80B2EFC
-	.4byte ContestStatsText_Sell
-	.4byte sub_80B2F30
-	.4byte ContestStatsText_Quit2
-	.4byte HandleShopMenuQuit
+	.4byte ContestStatsText_Buy, sub_80B2EFC
+	.4byte ContestStatsText_Sell, sub_80B2F30
+	.4byte ContestStatsText_Quit2, HandleShopMenuQuit
 
 gUnknown_083CC6E8:: @ 83CC6E8
 	.incbin "baserom.gba", 0x003cc6e8, 0x3
@@ -12556,10 +12508,8 @@ gUnknown_083D1374:: @ 83D1374
 
 	.align 2
 gUnknown_083D13D4:: @ 83D13D4
-	.4byte SecretBaseText_DelRegist
-	.4byte sub_80BCA84
-	.4byte UnknownText_Exit
-	.4byte sub_80BCBF8
+	.4byte SecretBaseText_DelRegist, sub_80BCA84
+	.4byte UnknownText_Exit, sub_80BCBF8
 
 	.align 2
 gUnknown_083D13E4:: @ 83D13E4
@@ -19481,14 +19431,10 @@ gUnknown_083EC5E4:: @ 83EC5E4
 
 	.align 2
 gUnknown_083EC604:: @ 83EC604
-	.4byte SecretBaseText_Decorate
-	.4byte sub_80FF160
-	.4byte SecretBaseText_PutAway
-	.4byte sub_8100A0C
-	.4byte SecretBaseText_Toss
-	.4byte sub_8101700
-	.4byte UnknownText_Exit
-	.4byte gpu_pal_decompress_alloc_tag_and_upload
+	.4byte SecretBaseText_Decorate, sub_80FF160
+	.4byte SecretBaseText_PutAway, sub_8100A0C
+	.4byte SecretBaseText_Toss, sub_8101700
+	.4byte UnknownText_Exit, gpu_pal_decompress_alloc_tag_and_upload
 
 	.align 2
 gUnknown_083EC624:: @ 83EC624
@@ -22255,16 +22201,11 @@ gUnknown_084017A8:: @ 84017A8
 
 	.align 2
 gUnknown_084017B0:: @ 84017B0
-	.4byte OtherText_Summary
-	.4byte sub_812265C
-	.4byte OtherText_Enter2
-	.4byte sub_8122694
-	.4byte OtherText_NoEntry
-	.4byte sub_8122770
-	.4byte UnknownText_Exit
-	.4byte sub_8122838
-	.4byte 0x02030001
-	.4byte 0x03000300
+	.4byte OtherText_Summary, sub_812265C
+	.4byte OtherText_Enter2, sub_8122694
+	.4byte OtherText_NoEntry, sub_8122770
+	.4byte UnknownText_Exit, sub_8122838
+	.4byte 0x02030001, 0x03000300
 
 gUnknown_084017D8:: @ 84017D8
 	.incbin "baserom.gba", 0x004017d8, 0x18
@@ -23398,14 +23339,10 @@ gUnknown_08406288:: @ 8406288
 
 	.align 2
 gUnknown_08406298:: @ 8406298
-	.4byte SecretBaseText_ItemStorage
-	.4byte sub_8139E40
-	.4byte PCText_Mailbox
-	.4byte sub_8139E6C
-	.4byte SecretBaseText_Decoration
-	.4byte sub_8139ED8
-	.4byte SecretBaseText_TurnOff
-	.4byte sub_8139EF8
+	.4byte SecretBaseText_ItemStorage, sub_8139E40
+	.4byte PCText_Mailbox, sub_8139E6C
+	.4byte SecretBaseText_Decoration, sub_8139ED8
+	.4byte SecretBaseText_TurnOff, sub_8139EF8
 
 gUnknown_084062B8:: @ 84062B8
 	.incbin "baserom.gba", 0x004062b8, 0x4
@@ -23415,14 +23352,10 @@ gUnknown_084062BC:: @ 84062BC
 
 	.align 2
 gUnknown_084062C0:: @ 84062C0
-	.4byte PCText_WithdrawItem
-	.4byte sub_813A118
-	.4byte PCText_DepositItem
-	.4byte sub_813A0A0
-	.4byte PCText_TossItem
-	.4byte sub_813A198
-	.4byte UnknownText_Exit
-	.4byte sub_813A21C
+	.4byte PCText_WithdrawItem, sub_813A118
+	.4byte PCText_DepositItem, sub_813A0A0
+	.4byte PCText_TossItem, sub_813A198
+	.4byte UnknownText_Exit, sub_813A21C
 
 	.align 2
 gUnknown_084062E0:: @ 84062E0
@@ -23439,14 +23372,10 @@ gUnknown_084062F0:: @ 84062F0
 
 	.align 2
 gUnknown_084062F8:: @ 84062F8
-	.4byte OtherText_Read
-	.4byte sub_813B428
-	.4byte OtherText_MoveToBag
-	.4byte sub_813B510
-	.4byte OtherText_Give
-	.4byte sub_813B630
-	.4byte OtherText_Cancel2
-	.4byte sub_813B734
+	.4byte OtherText_Read, sub_813B428
+	.4byte OtherText_MoveToBag, sub_813B510
+	.4byte OtherText_Give, sub_813B630
+	.4byte OtherText_Cancel2, sub_813B734
 
 gUnknown_08406318:: @ 8406318
 	.incbin "baserom.gba", 0x00406318, 0x6
@@ -24220,9 +24149,6 @@ gUnknown_0840B878::
 	.incbin "baserom.gba", 0x0040B878, 0xF @ unknown
 
 	.include "data/text/credits.s"
-
-gUnknown_0840C5F0:: @ 840C5F0
-	.incbin "baserom.gba", 0x0040c5f0, 0x410 @ pointer table to something
 
 gUnknown_0840CA00:: @ 840CA00
 Unknown_840CA00:
