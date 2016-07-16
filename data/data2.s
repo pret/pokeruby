@@ -12523,18 +12523,18 @@ gUnknown_083CE310:: @ 83CE310
 
 	.align 2
 gUnknown_083CE328:: @ 83CE328
-	.4byte 0x081e6edc
-	.4byte 0x081e6ef8
-	.4byte 0x081e6ea4
-	.4byte 0x081e6ec0
-	.4byte 0x081e6ea4
-	.4byte 0x081e6ec0
-	.4byte 0x081e6f14
-	.4byte 0x081e6f30
-	.4byte 0x081e6f14
-	.4byte 0x081e6f30
-	.4byte 0x081e6edc
-	.4byte 0x081e6ef8
+	.4byte gWindowConfig_81E6EDC
+	.4byte gWindowConfig_81E6EF8
+	.4byte gWindowConfig_81E6EA4
+	.4byte gWindowConfig_81E6EC0
+	.4byte gWindowConfig_81E6EA4
+	.4byte gWindowConfig_81E6EC0
+	.4byte gWindowConfig_81E6F14
+	.4byte gWindowConfig_81E6F30
+	.4byte gWindowConfig_81E6F14
+	.4byte gWindowConfig_81E6F30
+	.4byte gWindowConfig_81E6EDC
+	.4byte gWindowConfig_81E6EF8
 
 	.align 2
 gUnknown_083CE358:: @ 83CE358
