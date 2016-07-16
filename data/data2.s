@@ -7019,46 +7019,46 @@ gUnknown_083761EC:: @ 83761EC
 
 	.align 2
 gUnknown_083761F0:: @ 83761F0
-	.4byte 0x08e9addc
-	.4byte 0x08e9aefc
-	.4byte 0x08e9af1c
-	.4byte 0x08e9b03c
-	.4byte 0x08e9b05c
-	.4byte 0x08e9b17c
-	.4byte 0x08e9b19c
-	.4byte 0x08e9b2bc
-	.4byte 0x08e9b2dc
-	.4byte 0x08e9b3fc
-	.4byte 0x08e9b41c
-	.4byte 0x08e9b53c
-	.4byte 0x08e9b55c
-	.4byte 0x08e9b67c
-	.4byte 0x08e9b69c
-	.4byte 0x08e9b7bc
-	.4byte 0x08e9b7dc
-	.4byte 0x08e9b8fc
-	.4byte 0x08e9b91c
-	.4byte 0x08e9ba3c
-	.4byte 0x08e9ba5c
-	.4byte 0x08e9bb7c
-	.4byte 0x08e9bb9c
-	.4byte 0x08e9bcbc
-	.4byte 0x08e9bcdc
-	.4byte 0x08e9bdfc
-	.4byte 0x08e9be1c
-	.4byte 0x08e9bf3c
-	.4byte 0x08e9bf5c
-	.4byte 0x08e9c07c
-	.4byte 0x08e9c09c
-	.4byte 0x08e9c1bc
-	.4byte 0x08e9c1dc
-	.4byte 0x08e9c2fc
-	.4byte 0x08e9c31c
-	.4byte 0x08e9c43c
-	.4byte 0x08e9c45c
-	.4byte 0x08e9c57c
-	.4byte 0x08e9c59c
-	.4byte 0x08e9c6bc
+	.4byte gUnknown_08E9ADDC
+	.4byte gUnknown_08E9AEFC
+	.4byte gUnknown_08E9AF1C
+	.4byte gUnknown_08E9B03C
+	.4byte gUnknown_08E9B05C
+	.4byte gUnknown_08E9B17C
+	.4byte gUnknown_08E9B19C
+	.4byte gUnknown_08E9B2BC
+	.4byte gUnknown_08E9B2DC
+	.4byte gUnknown_08E9B3FC
+	.4byte gUnknown_08E9B41C
+	.4byte gUnknown_08E9B53C
+	.4byte gUnknown_08E9B55C
+	.4byte gUnknown_08E9B67C
+	.4byte gUnknown_08E9B69C
+	.4byte gUnknown_08E9B7BC
+	.4byte gUnknown_08E9B7DC
+	.4byte gUnknown_08E9B8FC
+	.4byte gUnknown_08E9B91C
+	.4byte gUnknown_08E9BA3C
+	.4byte gUnknown_08E9BA5C
+	.4byte gUnknown_08E9BB7C
+	.4byte gUnknown_08E9BB9C
+	.4byte gUnknown_08E9BCBC
+	.4byte gUnknown_08E9BCDC
+	.4byte gUnknown_08E9BDFC
+	.4byte gUnknown_08E9BE1C
+	.4byte gUnknown_08E9BF3C
+	.4byte gUnknown_08E9BF5C
+	.4byte gUnknown_08E9C07C
+	.4byte gUnknown_08E9C09C
+	.4byte gUnknown_08E9C1BC
+	.4byte gUnknown_08E9C1DC
+	.4byte gUnknown_08E9C2FC
+	.4byte gUnknown_08E9C31C
+	.4byte gUnknown_08E9C43C
+	.4byte gUnknown_08E9C45C
+	.4byte gUnknown_08E9C57C
+	.4byte gUnknown_08E9C59C
+	.4byte gUnknown_08E9C6BC
 
 gUnknown_08376290:: @ 8376290
 	.incbin "baserom.gba", 0x00376290, 0x48
@@ -10531,19 +10531,19 @@ gUnknown_083B5ED8:: @ 83B5ED8
 
 	.align 2
 gUnknown_083B5EEC:: @ 83B5EEC
-	.4byte 0x08e8cac0
-	.4byte 0x08e8d4c0
+	.4byte gUnknown_08E8CAC0
+	.4byte gUnknown_08E8D4C0
 
 gUnknown_083B5EF4:: @ 83B5EF4
 	.incbin "baserom.gba", 0x003b5ef4, 0x4
 
 	.align 2
 gUnknown_083B5EF8:: @ 83B5EF8
-	.4byte 0x08e8c8e0
-	.4byte 0x08e8c940
-	.4byte 0x08e8c9a0
-	.4byte 0x08e8ca00
-	.4byte 0x08e8ca60
+	.4byte gUnknown_08E8C8E0
+	.4byte gUnknown_08E8C940
+	.4byte gUnknown_08E8C9A0
+	.4byte gUnknown_08E8CA00
+	.4byte gUnknown_08E8CA60
 
 gUnknown_083B5F0C:: @ 83B5F0C
 	.incbin "baserom.gba", 0x003b5f0c, 0x20
@@ -20714,7 +20714,7 @@ gUnknown_083EDCDC:: @ 83EDCDC
 	obj_tiles 0x02010000, 2048, 0x0011
 
 gUnknown_083EDCE4:: @ 83EDCE4
-	.4byte 0x08E997E8
+	.4byte gUnknownPalette_08E997E8
 
 UnknownPalette_83EDCE8:
 	.ifdef SAPPHIRE
@@ -20733,11 +20733,11 @@ gUnknown_083EDD08:: @ 83EDD08
 
 	.align 2
 gUnknown_083EDD1C:: @ 83EDD1C
-	.4byte 0x08e95aac
-	.4byte 0x08e95aae
-	.4byte 0x08e95ab0
-	.4byte 0x08e95ab2
-	.4byte 0x08e95ab4
+	.4byte gUnknown_08E95A18 + 148
+	.4byte gUnknown_08E95A18 + 150
+	.4byte gUnknown_08E95A18 + 152
+	.4byte gUnknown_08E95A18 + 154
+	.4byte gUnknown_08E95A18 + 156
 
 gUnknown_083EDD30:: @ 83EDD30
 	.incbin "baserom.gba", 0x003edd30, 0x5
@@ -20764,7 +20764,7 @@ gUnknown_083EDDA0:: @ 83EDDA0
 	.align 2
 gUnknown_083EDDAC:: @ 83EDDAC
 Unknown_83EDDAC:
-	.4byte 0x08e95a38
+	.4byte gUnknown_08E95A18 + 32
 Unknown_83EDDB0:
 	.incbin "baserom.gba", 0x003eddb0, 0x20
 Unknown_83EDDD0:
@@ -20777,11 +20777,11 @@ gUnknown_083EDE10:: @ 83EDE10
 	.4byte Unknown_83EDDB0
 	.4byte Unknown_83EDDD0
 	.4byte Unknown_83EDDF0
-	.4byte 0x08e97788
+	.4byte gSlotMachineSpritePalette6
 
 	.align 2
 gUnknown_083EDE20:: @ 83EDE20
-	.4byte 0x08e97788
+	.4byte gSlotMachineSpritePalette6
 
 gUnknown_083EDE24:: @ 83EDE24
 	.incbin "baserom.gba", 0x003ede24, 0x20
@@ -27039,20 +27039,20 @@ gUnknown_08412050:: @ 8412050
 	.align 2
 gUnknown_084120A4:: @ 84120A4
 Unknown_84120A4:
-	.4byte 0x08e781e4
-	.4byte 0x08e781f8
-	.4byte 0x08e7820c
-	.4byte 0x08e78220
-	.4byte 0x08e78234
-	.4byte 0x08e78248
-	.4byte 0x08e7825c
-	.4byte 0x08e78270
-	.4byte 0x08e78284
-	.4byte 0x08e78298
-	.4byte 0x08e782ac
-	.4byte 0x08e782c0
-	.4byte 0x08e782d4
-	.4byte 0x08e782e8
+	.4byte gUnknown_08E781E4
+	.4byte gUnknown_08E781F8
+	.4byte gUnknown_08E7820C
+	.4byte gUnknown_08E78220
+	.4byte gUnknown_08E78234
+	.4byte gUnknown_08E78248
+	.4byte gUnknown_08E7825C
+	.4byte gUnknown_08E78270
+	.4byte gUnknown_08E78284
+	.4byte gUnknown_08E78298
+	.4byte gUnknown_08E782ac
+	.4byte gUnknown_08E782c0
+	.4byte gUnknown_08E782d4
+	.4byte gUnknown_08E782e8
 Unknown_84120DC:
 	.incbin "baserom.gba", 0x004120dc, 0x10
 
