@@ -692,7 +692,7 @@ CreditsRNZFotB::
 	
 @ pointer table to credits entries
 
-	.global gCreditsEntryPointerTable
+	.align 2
 gCreditsEntryPointerTable:: @ 840C5F0
 	.4byte CreditsTerminator
 	.4byte CreditsVersion
