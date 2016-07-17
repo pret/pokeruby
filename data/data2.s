@@ -27619,75 +27619,9 @@ gUnknown_08417068:: @ 8417068
 
 gUnknown_084170F4:: @ 84170F4
 	.incbin "baserom.gba", 0x004170f4, 0xD0
-Unknown_84171C4:
-	.incbin "baserom.gba", 0x004171C4, 0x25E0
-Unknown_84197A4:
-	.incbin "baserom.gba", 0x004197A4, 0x390
-Unknown_8419B34:
-	.incbin "baserom.gba", 0x00419B34, 0x1470
-Unknown_841AFA4:
-	.incbin "baserom.gba", 0x0041AFA4, 0xBD0
-Unknown_841BB74:
-	.incbin "baserom.gba", 0x0041BB74, 0x7E0
-Unknown_841C354:
-	.incbin "baserom.gba", 0x0041C354, 0xE10
-Unknown_841D164:
-	.incbin "baserom.gba", 0x0041D164, 0xBD0
-Unknown_841DD34:
-	.incbin "baserom.gba", 0x0041DD34, 0xB40
-Unknown_841E874:
-	.incbin "baserom.gba", 0x0041E874, 0xCF0
-Unknown_841F564:
-	.incbin "baserom.gba", 0x0041F564, 0xCF0
-Unknown_8420254:
-	.incbin "baserom.gba", 0x00420254, 0xCF0
-Unknown_8420F44:
-	.incbin "baserom.gba", 0x00420F44, 0xEA0
-Unknown_8421DE4:
-	.incbin "baserom.gba", 0x00421DE4, 0x870
-Unknown_8422654:
-	.incbin "baserom.gba", 0x00422654, 0xA20
-Unknown_8423074:
-	.incbin "baserom.gba", 0x00423074, 0x870
-Unknown_84238E4:
-	.incbin "baserom.gba", 0x004238E4, 0x7E0
-Unknown_84240C4:
-	.incbin "baserom.gba", 0x004240C4, 0x6C0
-Unknown_8424784:
-	.incbin "baserom.gba", 0x00424784, 0x420
-Unknown_8424BA4:
-	.incbin "baserom.gba", 0x00424BA4, 0x1CB0
-Unknown_8426854:
-	.incbin "baserom.gba", 0x00426854, 0x2460
-Unknown_8428CB4:
-	.incbin "baserom.gba", 0x00428CB4, 0x630
-Unknown_84292E4:
-	.incbin "baserom.gba", 0x004292E4, 0x2F10
 
-	.align 2
-gUnknown_0842C1F4:: @ 842C1F4
-	.4byte Unknown_84171C4
-	.4byte Unknown_84197A4
-	.4byte Unknown_8419B34
-	.4byte Unknown_841AFA4
-	.4byte Unknown_841BB74
-	.4byte Unknown_841C354
-	.4byte Unknown_841D164
-	.4byte Unknown_841DD34
-	.4byte Unknown_841E874
-	.4byte Unknown_841F564
-	.4byte Unknown_8420254
-	.4byte Unknown_8420F44
-	.4byte Unknown_8421DE4
-	.4byte Unknown_8422654
-	.4byte Unknown_8423074
-	.4byte Unknown_84238E4
-	.4byte Unknown_84240C4
-	.4byte Unknown_8424784
-	.4byte Unknown_8424BA4
-	.4byte Unknown_8426854
-	.4byte Unknown_8428CB4
-	.4byte Unknown_84292E4
+@ 84171C4
+	.include "data/bard_music.s"
 
 UnknownString_1stRound:
 	.string "1st round$"
