@@ -1279,6 +1279,7 @@ gUnknown_081FAB50:: @ 81FAB50
 gUnknown_081FAB5C:: @ 81FAB5C
 	.incbin "baserom.gba", 0x001fab5c, 0xf0
 
+	.align 2
 gUnknown_081FAC4C:: @ 81FAC4C
 	.4byte gUnknown_081D963E
 	.4byte gUnknown_081D963E
@@ -3094,6 +3095,7 @@ gUnknown_082166D8:: @ 82166D8
 
 	.include "data/maps/_assets.s"
 
+	.align 2
 gUnknown_08304F18:: @ 8304F18
 	.4byte PetalburgCity_MapAttributes
 	.4byte SlateportCity_MapAttributes
@@ -7448,6 +7450,7 @@ Unknown_837C89C:
 gUnknown_0837C93C:: @ 837C93C
 	.incbin "baserom.gba", 0x0037c93c, 0x20
 
+	.align 2
 gUnknown_0837C95C:: @ 837C95C
 	.4byte Unknown_837C51C
 	.4byte Unknown_837C59C
@@ -20712,6 +20715,7 @@ gUnknown_083EDC2C:: @ 83EDC2C
 gUnknown_083EDCDC:: @ 83EDCDC
 	obj_tiles 0x02010000, 2048, 0x0011
 
+	.align 2
 gUnknown_083EDCE4:: @ 83EDCE4
 	.4byte gUnknownPalette_08E997E8
 
@@ -27037,7 +27041,6 @@ gUnknown_08412050:: @ 8412050
 
 	.align 2
 gUnknown_084120A4:: @ 84120A4
-Unknown_84120A4:
 	.4byte gUnknown_08E781E4
 	.4byte gUnknown_08E781F8
 	.4byte gUnknown_08E7820C
@@ -28613,7 +28616,6 @@ Unknown_842F4F0:
 	.incbin "baserom.gba", 0x0042f4f0, 0x30
 Unknown_842F520:
 	.incbin "baserom.gba", 0x0042f520, 0x38
-
 Unknown_842F558:
 	.incbin "baserom.gba", 0x0042f558, 0x18
 	.4byte Unknown_842F2C8
