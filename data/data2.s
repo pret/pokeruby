@@ -9625,11 +9625,7 @@ gUnknown_0839AE70:: @ 839AE70
 
 	.align 2
 gUnknown_0839B1F0:: @ 839B1F0
-Unknown_839B1F0:
-	.4byte 0x08080807
-	.4byte 0x080a0809
-	.4byte 0x080c080b
-	.4byte 0x080e080d
+	.2byte 0x0807, 0x0808, 0x0809, 0x080a, 0x080b, 0x080c, 0x080d, 0x080e
 Unknown_839B200:
 	.incbin "baserom.gba", 0x0039b200, 0x7
 Unknown_839B207:
@@ -12935,151 +12931,151 @@ gUnknown_083D1464:: @ 83D1464
 
 	.align 2
 gUnknown_083D1470:: @ 83D1470
-	.4byte 0x081a8ec9
-	.4byte 0x081a9048
-	.4byte 0x081a9067
-	.4byte 0x081a9088
-	.4byte 0x081a90b4
-	.4byte 0x081a911f
-	.4byte 0x081a9152
-	.4byte 0x081a91c6
+	.4byte UnknownString_81A8EC9
+	.4byte UnknownString_81A9048
+	.4byte UnknownString_81A9067
+	.4byte UnknownString_81A9088
+	.4byte UnknownString_81A90B4
+	.4byte UnknownString_81A911F
+	.4byte UnknownString_81A9152
+	.4byte UnknownString_81A91C6
 
 	.align 2
 gUnknown_083D1490:: @ 83D1490
-	.4byte 0x081a9581
-	.4byte 0x081a9694
-	.4byte 0x081a971b
-	.4byte 0x081a974b
-	.4byte 0x081a979f
-	.4byte 0x081a97d0
+	.4byte UnknownString_81A9581
+	.4byte UnknownString_81A9694
+	.4byte UnknownString_81A971B
+	.4byte UnknownString_81A974B
+	.4byte UnknownString_81A979F
+	.4byte UnknownString_81A97D0
 
 	.align 2
 gUnknown_083D14A8:: @ 83D14A8
-	.4byte 0x081a8917
-	.4byte 0x081a8ae5
-	.4byte 0x081a8b9d
-	.4byte 0x081a8c77
-	.4byte 0x081a8d45
+	.4byte UnknownString_81A8917
+	.4byte UnknownString_81A8AE5
+	.4byte UnknownString_81A8B9D
+	.4byte UnknownString_81A8C77
+	.4byte UnknownString_81A8D45
 
 	.align 2
 gUnknown_083D14BC:: @ 83D14BC
-	.4byte 0x081a986f
+	.4byte UnknownString_81A986F
 
 	.align 2
 gUnknown_083D14C0:: @ 83D14C0
-	.4byte 0x081aad23
-	.4byte 0x081aadd5
-	.4byte 0x081aae31
-	.4byte 0x081aae9d
-	.4byte 0x081aaf03
-	.4byte 0x081aaf8a
-	.4byte 0x081ab040
-	.4byte 0x081ab0c8
-	.4byte 0x081ab13d
-	.4byte 0x081ab1c6
-	.4byte 0x081ab266
-	.4byte 0x081ab2db
+	.4byte UnknownString_81AAD23
+	.4byte UnknownString_81AADD5
+	.4byte UnknownString_81AAE31
+	.4byte UnknownString_81AAE9D
+	.4byte UnknownString_81AAF03
+	.4byte UnknownString_81AAF8A
+	.4byte UnknownString_81AB040
+	.4byte UnknownString_81AB0C8
+	.4byte UnknownString_81AB13D
+	.4byte UnknownString_81AB1C6
+	.4byte UnknownString_81AB266
+	.4byte UnknownString_81AB2DB
 
 	.align 2
 gUnknown_083D14F0:: @ 83D14F0
-	.4byte 0x081ab381
-	.4byte 0x081ab435
-	.4byte 0x081ab507
-	.4byte 0x081ab5b8
-	.4byte 0x081ab61f
-	.4byte 0x081ab6b0
-	.4byte 0x081ab78d
-	.4byte 0x081ab7fe
-	.4byte 0x081ab835
-	.4byte 0x081ab873
-	.4byte 0x081ab92e
-	.4byte 0x081ab95e
-	.4byte 0x081abb75
+	.4byte UnknownString_81AB381
+	.4byte UnknownString_81AB435
+	.4byte UnknownString_81AB507
+	.4byte UnknownString_81AB5B8
+	.4byte UnknownString_81AB61F
+	.4byte UnknownString_81AB6B0
+	.4byte UnknownString_81AB78D
+	.4byte UnknownString_81AB7FE
+	.4byte UnknownString_81AB835
+	.4byte UnknownString_81AB873
+	.4byte UnknownString_81AB92E
+	.4byte UnknownString_81AB95E
+	.4byte UnknownString_81ABB75
 
 	.align 2
 gUnknown_083D1524:: @ 83D1524
-	.4byte 0x081a72de
-	.4byte 0x081a736b
-	.4byte 0x081a73ca
-	.4byte 0x081a744d
-	.4byte 0x081a7508
-	.4byte 0x081a75ce
-	.4byte 0x081a768d
-	.4byte 0x081a76c5
-	.4byte 0x081a774f
+	.4byte UnknownString_81A72DE
+	.4byte UnknownString_81A736B
+	.4byte UnknownString_81A73CA
+	.4byte UnknownString_81A744D
+	.4byte UnknownString_81A7508
+	.4byte UnknownString_81A75CE
+	.4byte UnknownString_81A768D
+	.4byte UnknownString_81A76C5
+	.4byte UnknownString_81A774F
 
 	.align 2
 gUnknown_083D1548:: @ 83D1548
-	.4byte 0x081a7b93
-	.4byte 0x081a7c26
-	.4byte 0x081a7c7d
-	.4byte 0x081a7d4a
-	.4byte 0x081a7e0c
-	.4byte 0x081a7f0e
-	.4byte 0x081a8004
-	.4byte 0x081a8119
-	.4byte 0x081a811e
-	.4byte 0x081a8123
-	.4byte 0x081a8128
-	.4byte 0x081a812d
-	.4byte 0x081a8133
-	.4byte 0x081a81bc
-	.4byte 0x081a8267
+	.4byte UnknownString_81A7B93
+	.4byte UnknownString_81A7C26
+	.4byte UnknownString_81A7C7D
+	.4byte UnknownString_81A7D4A
+	.4byte UnknownString_81A7E0C
+	.4byte UnknownString_81A7F0E
+	.4byte UnknownString_81A8004
+	.4byte UnknownString_81A8119
+	.4byte UnknownString_81A811E
+	.4byte UnknownString_81A8123
+	.4byte UnknownString_81A8128
+	.4byte UnknownString_81A812D
+	.4byte UnknownString_81A8133
+	.4byte UnknownString_81A81BC
+	.4byte UnknownString_81A8267
 
 	.align 2
 gUnknown_083D1584:: @ 83D1584
-	.4byte 0x081a99d9
-	.4byte 0x081a9af0
-	.4byte 0x081a9b69
-	.4byte 0x081a9bef
-	.4byte 0x081a9c6a
-	.4byte 0x081a9cf8
-	.4byte 0x081a9d74
-	.4byte 0x081a9df3
-	.4byte 0x081a9e75
-	.4byte 0x081a9f06
-	.4byte 0x081a9f9f
-	.4byte 0x081aa01e
-	.4byte 0x081aa09d
-	.4byte 0x081aa0d7
-	.4byte 0x081aa138
-	.4byte 0x081aa166
-	.4byte 0x081aa1c0
-	.4byte 0x081aa1ea
-	.4byte 0x081aa28a
+	.4byte UnknownString_81A99D9
+	.4byte UnknownString_81A9AF0
+	.4byte UnknownString_81A9B69
+	.4byte UnknownString_81A9BEF
+	.4byte UnknownString_81A9C6A
+	.4byte UnknownString_81A9CF8
+	.4byte UnknownString_81A9D74
+	.4byte UnknownString_81A9DF3
+	.4byte UnknownString_81A9E75
+	.4byte UnknownString_81A9F06
+	.4byte UnknownString_81A9F9F
+	.4byte UnknownString_81AA01E
+	.4byte UnknownString_81AA09D
+	.4byte UnknownString_81AA0D7
+	.4byte UnknownString_81AA138
+	.4byte UnknownString_81AA166
+	.4byte UnknownString_81AA1C0
+	.4byte UnknownString_81AA1EA
+	.4byte UnknownString_81AA28A
 
 	.align 2
 gUnknown_083D15D0:: @ 83D15D0
-	.4byte 0x081aa814
-	.4byte 0x081aa8c6
-	.4byte 0x081aa9b2
-	.4byte 0x081aaa5c
-	.4byte 0x081aab11
-	.4byte 0x081aabb4
-	.4byte 0x081aac47
+	.4byte UnknownString_81AA814
+	.4byte UnknownString_81AA8C6
+	.4byte UnknownString_81AA9B2
+	.4byte UnknownString_81AAA5C
+	.4byte UnknownString_81AAB11
+	.4byte UnknownString_81AABB4
+	.4byte UnknownString_81AAC47
 
 	.align 2
 gUnknown_083D15EC:: @ 83D15EC
-	.4byte 0x081aa344
-	.4byte 0x081aa5f3
+	.4byte UnknownString_81AA344
+	.4byte UnknownString_81AA5F3
 
 	.align 2
 gUnknown_083D15F4:: @ 83D15F4
-	.4byte 0x081abc51
-	.4byte 0x081abd94
-	.4byte 0x081abdf2
+	.4byte UnknownString_81ABC51
+	.4byte UnknownString_81ABD94
+	.4byte UnknownString_81ABDF2
 
 	.align 2
 gUnknown_083D1600:: @ 83D1600
-	.4byte 0x081ac90d
-	.4byte 0x081aca02
-	.4byte 0x081acaaa
-	.4byte 0x081acc07
-	.4byte 0x081acd13
-	.4byte 0x081acdfa
-	.4byte 0x081acee7
-	.4byte 0x081acf49
-	.4byte 0x081ad00a
+	.4byte UnknownString_81AC90D
+	.4byte UnknownString_81ACA02
+	.4byte UnknownString_81ACAAA
+	.4byte UnknownString_81ACC07
+	.4byte UnknownString_81ACD13
+	.4byte UnknownString_81ACDFA
+	.4byte UnknownString_81ACEE7
+	.4byte UnknownString_81ACF49
+	.4byte UnknownString_81AD00A
 
 gUnknown_083D1624:: @ 83D1624
 	.incbin "baserom.gba", 0x003d1624, 0x20
