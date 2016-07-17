@@ -13483,7 +13483,39 @@ gUnknown_083D2964:: @ 83D2964
 	.incbin "baserom.gba", 0x003d2964, 0x38
 
 gUnknown_083D299C:: @ 83D299C
-	.incbin "baserom.gba", 0x003d299c, 0x3470
+	.incbin "baserom.gba", 0x003d299c, 0x70
+
+	.align 2
+RotatingGateTiles_1: @ 83D2A0C
+	.incbin "graphics/rotating_gates/1.4bpp"
+
+	.align 2
+RotatingGateTiles_2: @ 83D320C
+	.incbin "graphics/rotating_gates/2.4bpp"
+
+	.align 2
+RotatingGateTiles_3: @ 83D3A0C
+	.incbin "graphics/rotating_gates/3.4bpp"
+
+	.align 2
+RotatingGateTiles_5: @ 83D420C
+	.incbin "graphics/rotating_gates/5.4bpp"
+
+	.align 2
+RotatingGateTiles_6: @ 83D4A0C
+	.incbin "graphics/rotating_gates/6.4bpp"
+
+	.align 2
+RotatingGateTiles_7: @ 83D520C
+	.incbin "graphics/rotating_gates/7.4bpp"
+
+	.align 2
+RotatingGateTiles_0: @ 83D5A0C
+	.incbin "graphics/rotating_gates/0.4bpp"
+
+	.align 2
+RotatingGateTiles_4: @ 83D5C0C
+	.incbin "graphics/rotating_gates/4.4bpp"
 
 	.align 2
 gOamData_83D5E0C:: @ 83D5E0C
@@ -13498,8 +13530,16 @@ gOamData_83D5E14:: @ 83D5E14
 	.2byte 0x5800
 
 	.align 2
-gUnknown_083D5E1C:: @ 83D5E1C
-	.incbin "baserom.gba", 0x003d5e1c, 0x48
+gRotatingGatesGraphicsTable:: @ 83D5E1C
+	obj_tiles RotatingGateTiles_0, 0x200, 0x1300
+	obj_tiles RotatingGateTiles_1, 0x800, 0x1301
+	obj_tiles RotatingGateTiles_2, 0x800, 0x1302
+	obj_tiles RotatingGateTiles_3, 0x800, 0x1303
+	obj_tiles RotatingGateTiles_4, 0x200, 0x1304
+	obj_tiles RotatingGateTiles_5, 0x800, 0x1305
+	obj_tiles RotatingGateTiles_6, 0x800, 0x1306
+	obj_tiles RotatingGateTiles_7, 0x800, 0x1307
+	null_obj_tiles
 
 	.align 2
 gSpriteAnim_83D5E64:: @ 83D5E64
