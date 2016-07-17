@@ -9052,6 +9052,7 @@ gSpriteTemplate_83931E0:: @ 83931E0
 gSpriteTemplate_83931F8:: @ 83931F8
 	spr_template 10136, 10136, gOamData_837DF24, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_807B870
 
+	.align 2
 gUnknown_08393210:: @ 8393210
 	.ifdef SAPPHIRE
 	.incbin "graphics/title_screen/kyogre_dark.gbapal"
@@ -9061,6 +9062,7 @@ gUnknown_08393210:: @ 8393210
 	.incbin "graphics/title_screen/groudon_glow.gbapal"
 	.endif
 
+	.align 2
 gUnknown_08393250:: @ 8393250
 	.ifdef SAPPHIRE
 	.incbin "graphics/title_screen/kyogre.4bpp.lz"
@@ -9068,6 +9070,7 @@ gUnknown_08393250:: @ 8393250
 	.incbin "graphics/title_screen/groudon.4bpp.lz"
 	.endif
 
+	.align 2
 gUnknown_083939EC:: @ 83939EC
 	.ifdef SAPPHIRE
 	.incbin "graphics/title_screen/kyogre_map.bin.lz"
@@ -9075,6 +9078,7 @@ gUnknown_083939EC:: @ 83939EC
 	.incbin "graphics/title_screen/groudon_map.bin.lz"
 	.endif
 
+	.align 2
 gUnknown_08393BF8:: @ 8393BF8
 	.ifdef SAPPHIRE
 	.incbin "graphics/title_screen/water_map.bin.lz"
@@ -9082,6 +9086,8 @@ gUnknown_08393BF8:: @ 8393BF8
 	.incbin "graphics/title_screen/lava_map.bin.lz"
 	.endif
 
+	.align 2
+LogoShineTiles: @ 8393D14
 	.incbin "graphics/title_screen/logo_shine.4bpp.lz"
 
 gUnknown_08393E64:: @ 8393E64
@@ -9214,11 +9220,45 @@ gSpriteAnimTable_8393FBC:: @ 8393FBC
 gSpriteTemplate_8393FC0:: @ 8393FC0
 	spr_template 1002, 1001, gOamData_8393FAC, gSpriteAnimTable_8393FBC, NULL, gDummySpriteAffineAnimTable, sub_807BFE0
 
+	.align 2
 gUnknown_08393FD8:: @ 8393FD8
-	.incbin "baserom.gba", 0x00393fd8, 0x2fd0
+	obj_tiles LogoShineTiles, 0x800, 1002
+	null_obj_tiles
 
+	.align 2
+DroughtPaletteData_0: @ 8393FE8
+	.incbin "graphics/misc/drought0.bin.lz"
+
+	.align 2
+DroughtPaletteData_1: @ 839480C
+	.incbin "graphics/misc/drought1.bin.lz"
+
+	.align 2
+DroughtPaletteData_2: @ 8395004
+	.incbin "graphics/misc/drought2.bin.lz"
+
+	.align 2
+DroughtPaletteData_3: @ 83957A0
+	.incbin "graphics/misc/drought3.bin.lz"
+
+	.align 2
+DroughtPaletteData_4: @ 8395FBC
+	.incbin "graphics/misc/drought4.bin.lz"
+
+	.align 2
+DroughtPaletteData_5: @ 8396784
+	.incbin "graphics/misc/drought5.bin.lz"
+
+	.align 2
 gUnknown_08396FA8:: @ 8396FA8
-	.incbin "baserom.gba", 0x00396fa8, 0x1c
+	.4byte DroughtPaletteData_0
+	.4byte DroughtPaletteData_1
+	.4byte DroughtPaletteData_2
+	.4byte DroughtPaletteData_3
+	.4byte DroughtPaletteData_4
+	.4byte DroughtPaletteData_5
+
+	.incbin "baserom.gba", 0x00396fc0, 0x4
 
 	.align 2
 gUnknown_08396FC4:: @ 8396FC4
