@@ -999,20 +999,13 @@ gStatusConditionString_LoveJpn:: @ 81FA6CC
 
 	.align 2
 gUnknown_081FA6D4:: @ 81FA6D4
-	.4byte gStatusConditionString_PoisonJpn
-	.4byte BattleText_PoisonStatus
-	.4byte gStatusConditionString_SleepJpn
-	.4byte BattleText_Sleep
-	.4byte gStatusConditionString_ParalysisJpn
-	.4byte BattleText_Paralysis
-	.4byte gStatusConditionString_BurnJpn
-	.4byte BattleText_Burn
-	.4byte gStatusConditionString_IceJpn
-	.4byte BattleText_IceStatus
-	.4byte gStatusConditionString_ConfusionJpn
-	.4byte BattleText_Confusion
-	.4byte gStatusConditionString_LoveJpn
-	.4byte BattleText_Love
+	.4byte gStatusConditionString_PoisonJpn, BattleText_PoisonStatus
+	.4byte gStatusConditionString_SleepJpn, BattleText_Sleep
+	.4byte gStatusConditionString_ParalysisJpn, BattleText_Paralysis
+	.4byte gStatusConditionString_BurnJpn, BattleText_Burn
+	.4byte gStatusConditionString_IceJpn, BattleText_IceStatus
+	.4byte gStatusConditionString_ConfusionJpn, BattleText_Confusion
+	.4byte gStatusConditionString_LoveJpn, BattleText_Love
 
 gUnknown_081FA70C:: @ 81FA70C
 	.incbin "baserom.gba", 0x001fa70c, 0xf
@@ -1286,8 +1279,49 @@ gUnknown_081FAB50:: @ 81FAB50
 gUnknown_081FAB5C:: @ 81FAB5C
 	.incbin "baserom.gba", 0x001fab5c, 0xf0
 
+	.align 2
 gUnknown_081FAC4C:: @ 81FAC4C
-	.incbin "baserom.gba", 0x001fac4c, 0xa3
+	.4byte gUnknown_081D963E
+	.4byte gUnknown_081D963E
+	.4byte gUnknown_081D965A
+	.4byte gUnknown_081D9669
+	.4byte gUnknown_081D9678
+	.4byte gUnknown_081D9687
+	.4byte gUnknown_081D969D
+	.4byte gUnknown_081D96BA
+	.4byte gUnknown_081D963E
+	.4byte gUnknown_081D963E
+	.4byte gUnknown_081D9696
+	.4byte gUnknown_081D96AA
+	.4byte gUnknown_081D963E
+	.4byte gUnknown_081D96B1
+	.4byte gUnknown_081D96C8
+	.4byte gUnknown_081D963E
+	.4byte gUnknown_081D963E
+	.4byte gUnknown_081D963E
+	.4byte gUnknown_081D963E
+	.4byte gUnknown_081D963E
+	.4byte gUnknown_081D963E
+	.4byte gUnknown_081D963E
+	.4byte gUnknown_081D963E
+	.4byte gUnknown_081D963E
+	.4byte gUnknown_081D963E
+	.4byte gUnknown_081D963E
+	.4byte gUnknown_081D963E
+	.4byte gUnknown_081D963E
+	.4byte gUnknown_081D963E
+	.4byte gUnknown_081D963E
+	.4byte gUnknown_081D963E
+	.4byte gUnknown_081D963E
+	.4byte gUnknown_081D963E
+	.4byte gUnknown_081D963E
+	.4byte gUnknown_081D963E
+	.4byte gUnknown_081D963E
+	.4byte gUnknown_081D963E
+	.4byte gUnknown_081D963E
+	.4byte gUnknown_081D96C8
+
+	.incbin "baserom.gba", 0x001face8, 0x7
 
 gUnknown_081FACEF:: @ 81FACEF
 	.incbin "baserom.gba", 0x001facef, 0x7
@@ -1494,8 +1528,9 @@ gSpriteAnimTable_81FAEFC:: @ 81FAEFC
 gSpriteTemplate_81FAF0C:: @ 81FAF0C
 	spr_template 55019, 55019, gOamData_81FAEB4, gSpriteAnimTable_81FAEFC, NULL, gDummySpriteAffineAnimTable, sub_80463CC
 
+	.align 2
 gUnknown_081FAF24:: @ 81FAF24
-	.incbin "baserom.gba", 0x001faf24, 0x8
+	obj_tiles 0x08E6A728, 128, 0xD759
 
 	.align 2
 gOamData_81FAF2C:: @ 81FAF2C
@@ -1824,8 +1859,10 @@ gUnknown_0820A4B4:: @ 820A4B4
 	obj_tiles 0x08d0314c, 256, 0xd706
 	obj_tiles 0x08d0314c, 288, 0xd707
 
+	.align 2
 gUnknown_0820A4D4:: @ 820A4D4
-	.incbin "baserom.gba", 0x0020a4d4, 0x10
+	obj_pal 0x08D1212C, 0xD6FF
+	obj_pal 0x08D1214C, 0xD704
 
 	.align 2
 gOamData_820A4E4:: @ 820A4E4
@@ -2690,10 +2727,16 @@ gUnknown_082162F8:: @ 82162F8
 	.incbin "baserom.gba", 0x002162f8, 0x8
 
 gUnknown_08216300:: @ 8216300
-	.incbin "baserom.gba", 0x00216300, 0x3
+	.byte 1
+	.byte 1
+	.byte 0
 
 gUnknown_08216303:: @ 8216303
-	.incbin "baserom.gba", 0x00216303, 0x5
+	.byte 32
+	.byte 224
+	.byte 96
+	.byte 160
+	.byte 0
 
 gUnknown_08216308:: @ 8216308
 	.incbin "baserom.gba", 0x00216308, 0xc
@@ -3053,8 +3096,340 @@ gUnknown_082166D8:: @ 82166D8
 
 	.include "data/maps/_assets.s"
 
+	.align 2
 gUnknown_08304F18:: @ 8304F18
-	.incbin "baserom.gba", 0x304f18, 0x530
+	.4byte PetalburgCity_MapAttributes
+	.4byte SlateportCity_MapAttributes
+	.4byte MauvilleCity_MapAttributes
+	.4byte RustboroCity_MapAttributes
+	.4byte FortreeCity_MapAttributes
+	.4byte LilycoveCity_MapAttributes
+	.4byte MossdeepCity_MapAttributes
+	.4byte SootopolisCity_MapAttributes
+	.4byte EverGrandeCity_MapAttributes
+	.4byte LittlerootTown_MapAttributes
+	.4byte OldaleTown_MapAttributes
+	.4byte DewfordTown_MapAttributes
+	.4byte LavaridgeTown_MapAttributes
+	.4byte FallarborTown_MapAttributes
+	.4byte VerdanturfTown_MapAttributes
+	.4byte PacifidlogTown_MapAttributes
+	.4byte Route101_MapAttributes
+	.4byte Route102_MapAttributes
+	.4byte Route103_MapAttributes
+	.4byte Route104_MapAttributes
+	.4byte Route105_MapAttributes
+	.4byte Route106_MapAttributes
+	.4byte Route107_MapAttributes
+	.4byte Route108_MapAttributes
+	.4byte Route109_MapAttributes
+	.4byte Route110_MapAttributes
+	.4byte Route111_MapAttributes
+	.4byte Route112_MapAttributes
+	.4byte Route113_MapAttributes
+	.4byte Route114_MapAttributes
+	.4byte Route115_MapAttributes
+	.4byte Route116_MapAttributes
+	.4byte Route117_MapAttributes
+	.4byte Route118_MapAttributes
+	.4byte Route119_MapAttributes
+	.4byte Route120_MapAttributes
+	.4byte Route121_MapAttributes
+	.4byte Route122_MapAttributes
+	.4byte Route123_MapAttributes
+	.4byte Route124_MapAttributes
+	.4byte Route125_MapAttributes
+	.4byte Route126_MapAttributes
+	.4byte Route127_MapAttributes
+	.4byte Route128_MapAttributes
+	.4byte Route129_MapAttributes
+	.4byte UnreferencedMap_MapAttributes
+	.4byte Route131_MapAttributes
+	.4byte Route132_MapAttributes
+	.4byte Route133_MapAttributes
+	.4byte Route134_MapAttributes
+	.4byte Underwater2_MapAttributes
+	.4byte Underwater3_MapAttributes
+	.4byte Underwater4_MapAttributes
+	.4byte LittlerootTown_BrendansHouse_1F_MapAttributes
+	.4byte LittlerootTown_BrendansHouse_2F_MapAttributes
+	.4byte LittlerootTown_MaysHouse_1F_MapAttributes
+	.4byte LittlerootTown_MaysHouse_2F_MapAttributes
+	.4byte LittlerootTown_ProfessorBirchsLab_MapAttributes
+	.4byte House1_MapAttributes
+	.4byte House2_MapAttributes
+	.4byte PokemonCenter_1F_MapAttributes
+	.4byte PokemonCenter_2F_MapAttributes
+	.4byte PokeMart_MapAttributes
+	.4byte DewfordTown_House1_MapAttributes
+	.4byte DewfordTown_Gym_MapAttributes
+	.4byte DewfordTown_Hall_MapAttributes
+	.4byte DewfordTown_House2_MapAttributes
+	.4byte LavaridgeTown_HerbShop_MapAttributes
+	.4byte LavaridgeTown_Gym_1F_MapAttributes
+	.4byte LavaridgeTown_Gym_B1F_MapAttributes
+	.4byte LavaridgeTown_PokemonCenter_1F_MapAttributes
+	.4byte FallarborTown_ContestLobby_MapAttributes
+	.4byte FallarborTown_ContestHall_MapAttributes
+	.4byte LilycoveCity_House2_MapAttributes
+	.4byte 0x082cf564
+	.4byte VerdanturfTown_WandasHouse_MapAttributes
+	.4byte PacifidlogTown_House1_MapAttributes
+	.4byte PacifidlogTown_House2_MapAttributes
+	.4byte PetalburgCity_Gym_MapAttributes
+	.4byte MossdeepCity_House4_MapAttributes
+	.4byte SlateportCity_SternsShipyard_1F_MapAttributes
+	.4byte SlateportCity_SternsShipyard_2F_MapAttributes
+	.4byte 0x082d05d8
+	.4byte 0x082d05fc
+	.4byte SlateportCity_PokemonFanClub_MapAttributes
+	.4byte SlateportCity_OceanicMuseum_1F_MapAttributes
+	.4byte SlateportCity_OceanicMuseum_2F_MapAttributes
+	.4byte LilycoveCity_Harbor_MapAttributes
+	.4byte MauvilleCity_Gym_MapAttributes
+	.4byte MauvilleCity_BikeShop_MapAttributes
+	.4byte MauvilleCity_GameCorner_MapAttributes
+	.4byte RustboroCity_DevonCorp_1F_MapAttributes
+	.4byte RustboroCity_DevonCorp_2F_MapAttributes
+	.4byte RustboroCity_Gym_MapAttributes
+	.4byte RustboroCity_PokemonSchool_MapAttributes
+	.4byte RustboroCity_House2_MapAttributes
+	.4byte RustboroCity_House1_MapAttributes
+	.4byte RustboroCity_CuttersHouse_MapAttributes
+	.4byte FortreeCity_House1_MapAttributes
+	.4byte FortreeCity_Gym_MapAttributes
+	.4byte FortreeCity_House2_MapAttributes
+	.4byte Route104_MrBrineysHouse_MapAttributes
+	.4byte LilycoveCity_LilycoveMuseum_1F_MapAttributes
+	.4byte LilycoveCity_LilycoveMuseum_2F_MapAttributes
+	.4byte LilycoveCity_ContestLobby_MapAttributes
+	.4byte LilycoveCity_ContestHall_MapAttributes
+	.4byte LilycoveCity_PokemonTrainerFanClub_MapAttributes
+	.4byte LilycoveCity_EmptyMap_MapAttributes
+	.4byte MossdeepCity_Gym_MapAttributes
+	.4byte SootopolisCity_Gym_1F_MapAttributes
+	.4byte SootopolisCity_Gym_B1F_MapAttributes
+	.4byte EverGrandeCity_SidneysRoom_MapAttributes
+	.4byte EverGrandeCity_PhoebesRoom_MapAttributes
+	.4byte EverGrandeCity_GlaciasRoom_MapAttributes
+	.4byte EverGrandeCity_DrakesRoom_MapAttributes
+	.4byte EverGrandeCity_ChampionsRoom_MapAttributes
+	.4byte EverGrandeCity_Corridor1_MapAttributes
+	.4byte Route104_PrettyPetalFlowerShop_MapAttributes
+	.4byte Route112_CableCarStation_MapAttributes
+	.4byte Route114_FossilManiacsHouse_MapAttributes
+	.4byte Route114_FossilManiacsTunnel_MapAttributes
+	.4byte Route114_LanettesHouse_MapAttributes
+	.4byte Route116_TunnelersRestHouse_MapAttributes
+	.4byte Route117_PokemonDayCare_MapAttributes
+	.4byte Route121_SafariZoneEntrance_MapAttributes
+	.4byte MeteorFalls_1F_1R_MapAttributes
+	.4byte MeteorFalls_1F_2R_MapAttributes
+	.4byte MeteorFalls_B1F_1R_MapAttributes
+	.4byte MeteorFalls_B1F_2R_MapAttributes
+	.4byte RusturfTunnel_MapAttributes
+	.4byte Underwater_SootopolisCity_MapAttributes
+	.4byte DesertRuins_MapAttributes
+	.4byte GraniteCave_1F_MapAttributes
+	.4byte GraniteCave_B1F_MapAttributes
+	.4byte GraniteCave_B2F_MapAttributes
+	.4byte PetalburgWoods_MapAttributes
+	.4byte MtChimney_MapAttributes
+	.4byte MtPyre_1F_MapAttributes
+	.4byte MtPyre_2F_MapAttributes
+	.4byte MtPyre_3F_MapAttributes
+	.4byte MtPyre_4F_MapAttributes
+	.4byte MtPyre_5F_MapAttributes
+	.4byte MtPyre_6F_MapAttributes
+	.4byte AquaHideout_1F_MapAttributes
+	.4byte AquaHideout_B1F_MapAttributes
+	.4byte AquaHideout_B2F_MapAttributes
+	.4byte Underwater_SeafloorCavern_MapAttributes
+	.4byte SeafloorCavern_Entrance_MapAttributes
+	.4byte SeafloorCavern_Room1_MapAttributes
+	.4byte SeafloorCavern_Room2_MapAttributes
+	.4byte SeafloorCavern_Room3_MapAttributes
+	.4byte SeafloorCavern_Room4_MapAttributes
+	.4byte SeafloorCavern_Room5_MapAttributes
+	.4byte SeafloorCavern_Room6_MapAttributes
+	.4byte SeafloorCavern_Room7_MapAttributes
+	.4byte SeafloorCavern_Room8_MapAttributes
+	.4byte SeafloorCavern_Room9_MapAttributes
+	.4byte CaveOfOrigin_Entrance_MapAttributes
+	.4byte CaveOfOrigin_1F_MapAttributes
+	.4byte CaveOfOrigin_B1F_MapAttributes
+	.4byte CaveOfOrigin_B2F_MapAttributes
+	.4byte CaveOfOrigin_B3F_MapAttributes
+	.4byte CaveOfOrigin_B4F_MapAttributes
+	.4byte VictoryRoad_1F_MapAttributes
+	.4byte ShoalCave_LowTideEntranceRoom_MapAttributes
+	.4byte ShoalCave_LowTideInnerRoom_MapAttributes
+	.4byte ShoalCave_LowTideStairsRoom_MapAttributes
+	.4byte ShoalCave_LowTideLowerRoom_MapAttributes
+	.4byte ShoalCave_HighTideEntranceRoom_MapAttributes
+	.4byte ShoalCave_HighTideInnerRoom_MapAttributes
+	.4byte 0x082e55c8 @ unused maps
+	.4byte 0x082e55ec
+	.4byte 0x082e5610
+	.4byte 0x082e5634
+	.4byte 0x082e5658
+	.4byte 0x082e567c
+	.4byte 0x082e56a0
+	.4byte 0x082e56c4
+	.4byte 0x082e56e8
+	.4byte 0x082e570c
+	.4byte 0x082e5730
+	.4byte 0x082e5754
+	.4byte 0x082e5778
+	.4byte 0x082e579c
+	.4byte NewMauville_Entrance_MapAttributes
+	.4byte NewMauville_Inside_MapAttributes
+	.4byte AbandonedShip_Deck_MapAttributes
+	.4byte AbandonedShip_Corridors_1F_MapAttributes
+	.4byte AbandonedShip_Rooms_1F_MapAttributes
+	.4byte AbandonedShip_Corridors_B1F_MapAttributes
+	.4byte AbandonedShip_Rooms_B1F_MapAttributes
+	.4byte AbandonedShip_Rooms2_B1F_MapAttributes
+	.4byte AbandonedShip_Underwater1_MapAttributes
+	.4byte AbandonedShip_Room_B1F_MapAttributes
+	.4byte AbandonedShip_Rooms2_1F_MapAttributes
+	.4byte AbandonedShip_CaptainsOffice_MapAttributes
+	.4byte AbandonedShip_Underwater2_MapAttributes
+	.4byte SecretBase_RedCave1_MapAttributes
+	.4byte SecretBase_BrownCave1_MapAttributes
+	.4byte SecretBase_BlueCave1_MapAttributes
+	.4byte SecretBase_YellowCave1_MapAttributes
+	.4byte SecretBase_Tree1_MapAttributes
+	.4byte SecretBase_Shrub1_MapAttributes
+	.4byte SecretBase_RedCave2_MapAttributes
+	.4byte SecretBase_BrownCave2_MapAttributes
+	.4byte SecretBase_BlueCave2_MapAttributes
+	.4byte SecretBase_YellowCave2_MapAttributes
+	.4byte SecretBase_Tree2_MapAttributes
+	.4byte SecretBase_Shrub2_MapAttributes
+	.4byte SecretBase_RedCave3_MapAttributes
+	.4byte SecretBase_BrownCave3_MapAttributes
+	.4byte SecretBase_BlueCave3_MapAttributes
+	.4byte SecretBase_YellowCave3_MapAttributes
+	.4byte SecretBase_Tree3_MapAttributes
+	.4byte SecretBase_Shrub3_MapAttributes
+	.4byte SecretBase_RedCave4_MapAttributes
+	.4byte SecretBase_BrownCave4_MapAttributes
+	.4byte SecretBase_BlueCave4_MapAttributes
+	.4byte SecretBase_YellowCave4_MapAttributes
+	.4byte SecretBase_Tree4_MapAttributes
+	.4byte SecretBase_Shrub4_MapAttributes
+	.4byte SingleBattleColosseum_MapAttributes
+	.4byte TradeCenter_MapAttributes
+	.4byte RecordCorner_MapAttributes
+	.4byte DoubleBattleColosseum_MapAttributes
+	.4byte LinkContestRoom1_MapAttributes
+	.4byte UnknownMap_25_29_MapAttributes
+	.4byte UnknownMap_25_30_MapAttributes
+	.4byte UnknownMap_25_31_MapAttributes
+	.4byte UnknownMap_25_32_MapAttributes
+	.4byte UnknownMap_25_33_MapAttributes
+	.4byte UnknownMap_25_34_MapAttributes
+	.4byte LinkContestRoom2_MapAttributes
+	.4byte LinkContestRoom3_MapAttributes
+	.4byte LinkContestRoom4_MapAttributes
+	.4byte LinkContestRoom5_MapAttributes
+	.4byte LinkContestRoom6_MapAttributes
+	.4byte InsideOfTruck_MapAttributes
+	.4byte SafariZone_Northwest_MapAttributes
+	.4byte SafariZone_Northeast_MapAttributes
+	.4byte SafariZone_Southwest_MapAttributes
+	.4byte SafariZone_Southeast_MapAttributes
+	.4byte 0x082edf30
+	.4byte Route109_SeashoreHouse_MapAttributes
+	.4byte Route110_TrickHouseEntrance_MapAttributes
+	.4byte Route110_TrickHouseEnd_MapAttributes
+	.4byte Route110_TrickHouseCorridor_MapAttributes
+	.4byte Route110_TrickHousePuzzle1_MapAttributes
+	.4byte Route110_TrickHousePuzzle2_MapAttributes
+	.4byte Route110_TrickHousePuzzle3_MapAttributes
+	.4byte Route110_TrickHousePuzzle4_MapAttributes
+	.4byte Route110_TrickHousePuzzle5_MapAttributes
+	.4byte Route110_TrickHousePuzzle6_MapAttributes
+	.4byte Route110_TrickHousePuzzle7_MapAttributes
+	.4byte Route110_TrickHousePuzzle8_MapAttributes
+	.4byte FortreeCity_DecorationShop_MapAttributes
+	.4byte Route110_SeasideCyclingRoadNorthEntrance_MapAttributes
+	.4byte LilycoveCity_DepartmentStore_1F_MapAttributes
+	.4byte LilycoveCity_DepartmentStore_2F_MapAttributes
+	.4byte LilycoveCity_DepartmentStore_3F_MapAttributes
+	.4byte LilycoveCity_DepartmentStore_4F_MapAttributes
+	.4byte LilycoveCity_DepartmentStore_5F_MapAttributes
+	.4byte LilycoveCity_DepartmentStoreRooftop_MapAttributes
+	.4byte Route130_MapAttributes
+	.4byte BattleTower_Lobby_MapAttributes
+	.4byte BattleTower_Outside_MapAttributes
+	.4byte BattleTower_Elevator_MapAttributes
+	.4byte BattleTower_Corridor_MapAttributes
+	.4byte BattleTower_BattleRoom_MapAttributes
+	.4byte RustboroCity_DevonCorp_3F_MapAttributes
+	.4byte EverGrandeCity_PokemonLeague_MapAttributes
+	.4byte Route119_WeatherInstitute_1F_MapAttributes
+	.4byte Route119_WeatherInstitute_2F_MapAttributes
+	.4byte LilycoveCity_DepartmentStoreElevator_MapAttributes
+	.4byte Underwater1_MapAttributes
+	.4byte MossdeepCity_SpaceCenter_1F_MapAttributes
+	.4byte MossdeepCity_SpaceCenter_2F_MapAttributes
+	.4byte SSTidalCorridor_MapAttributes
+	.4byte SSTidalLowerDeck_MapAttributes
+	.4byte SSTidalRooms_MapAttributes
+	.4byte IslandCave_MapAttributes
+	.4byte AncientTomb_MapAttributes
+	.4byte Underwater_Route134_MapAttributes
+	.4byte Underwater_SealedChamber_MapAttributes
+	.4byte SealedChamber_OuterRoom_MapAttributes
+	.4byte VictoryRoad_B1F_MapAttributes
+	.4byte VictoryRoad_B2F_MapAttributes
+	.4byte Route104_Prototype_MapAttributes
+	.4byte GraniteCave_StevensRoom_MapAttributes
+	.4byte AbandonedShip_HiddenFloorCorridors_MapAttributes
+	.4byte SouthernIsland_Exterior_MapAttributes
+	.4byte SouthernIsland_Interior_MapAttributes
+	.4byte JaggedPass_MapAttributes
+	.4byte FieryPath_MapAttributes
+	.4byte RustboroCity_Flat2_1F_MapAttributes
+	.4byte RustboroCity_Flat2_2F_MapAttributes
+	.4byte RustboroCity_Flat2_3F_MapAttributes
+	.4byte SootopolisCity_House8_MapAttributes
+	.4byte EverGrandeCity_HallOfFame_MapAttributes
+	.4byte LilycoveCity_CoveLilyMotel_1F_MapAttributes
+	.4byte LilycoveCity_CoveLilyMotel_2F_MapAttributes
+	.4byte Route124_DivingTreasureHuntersHouse_MapAttributes
+	.4byte MtPyre_Exterior_MapAttributes
+	.4byte MtPyre_Summit_MapAttributes
+	.4byte SealedChamber_InnerRoom_MapAttributes
+	.4byte MossdeepCity_GameCorner_1F_MapAttributes
+	.4byte MossdeepCity_GameCorner_B1F_MapAttributes
+	.4byte SootopolisCity_House1_MapAttributes
+	.4byte SootopolisCity_House2_MapAttributes
+	.4byte SootopolisCity_House3_MapAttributes
+	.4byte AbandonedShip_HiddenFloorRooms_MapAttributes
+	.4byte ScorchedSlab_MapAttributes
+	.4byte 0x082ff894
+	.4byte RustboroCity_Flat1_1F_MapAttributes
+	.4byte RustboroCity_Flat1_2F_MapAttributes
+	.4byte EverGrandeCity_Corridor4_MapAttributes
+	.4byte MagmaHideout_1F_MapAttributes
+	.4byte MagmaHideout_B1F_MapAttributes
+	.4byte MagmaHideout_B2F_MapAttributes
+	.4byte 0x08302970
+	.4byte SkyPillar_Entrance_MapAttributes
+	.4byte SkyPillar_Outside_MapAttributes
+	.4byte SkyPillar_1F_MapAttributes
+	.4byte SkyPillar_2F_MapAttributes
+	.4byte SkyPillar_3F_MapAttributes
+	.4byte SkyPillar_4F_MapAttributes
+	.4byte 0x083041b4
+	.4byte MossdeepCity_StevensHouse_MapAttributes
+	.4byte ShoalCave_LowTideIceRoom_MapAttributes
+	.4byte SafariZone_RestHouse_MapAttributes
+	.4byte SkyPillar_5F_MapAttributes
+	.4byte SkyPillar_Top_MapAttributes
 
 	.include "data/maps/PetalburgCity/header.s"
 	.include "data/maps/SlateportCity/header.s"
@@ -4667,16 +5042,16 @@ gUnknown_0836DC09:: @ 836DC09
 
 	.align 2
 gUnknown_0837377C:: @ 837377C
-	obj_pal  gMapObjectPalette0, 0x1103
-	obj_pal  gMapObjectPalette1, 0x1104
-	obj_pal  gMapObjectPalette2, 0x1105
-	obj_pal  gMapObjectPalette3, 0x1106
-	obj_pal  gMapObjectPalette4, 0x1107
-	obj_pal  gMapObjectPalette5, 0x1108
-	obj_pal  gMapObjectPalette6, 0x1109
-	obj_pal  gMapObjectPalette7, 0x110A
-	obj_pal  gMapObjectPalette8, 0x1100
-	obj_pal  gMapObjectPalette9, 0x1101
+	obj_pal gMapObjectPalette0, 0x1103
+	obj_pal gMapObjectPalette1, 0x1104
+	obj_pal gMapObjectPalette2, 0x1105
+	obj_pal gMapObjectPalette3, 0x1106
+	obj_pal gMapObjectPalette4, 0x1107
+	obj_pal gMapObjectPalette5, 0x1108
+	obj_pal gMapObjectPalette6, 0x1109
+	obj_pal gMapObjectPalette7, 0x110A
+	obj_pal gMapObjectPalette8, 0x1100
+	obj_pal gMapObjectPalette9, 0x1101
 	obj_pal gMapObjectPalette10, 0x1102
 	obj_pal gMapObjectPalette11, 0x1115
 	obj_pal gMapObjectPalette12, 0x110B
@@ -6649,46 +7024,46 @@ gUnknown_083761EC:: @ 83761EC
 
 	.align 2
 gUnknown_083761F0:: @ 83761F0
-	.4byte 0x08e9addc
-	.4byte 0x08e9aefc
-	.4byte 0x08e9af1c
-	.4byte 0x08e9b03c
-	.4byte 0x08e9b05c
-	.4byte 0x08e9b17c
-	.4byte 0x08e9b19c
-	.4byte 0x08e9b2bc
-	.4byte 0x08e9b2dc
-	.4byte 0x08e9b3fc
-	.4byte 0x08e9b41c
-	.4byte 0x08e9b53c
-	.4byte 0x08e9b55c
-	.4byte 0x08e9b67c
-	.4byte 0x08e9b69c
-	.4byte 0x08e9b7bc
-	.4byte 0x08e9b7dc
-	.4byte 0x08e9b8fc
-	.4byte 0x08e9b91c
-	.4byte 0x08e9ba3c
-	.4byte 0x08e9ba5c
-	.4byte 0x08e9bb7c
-	.4byte 0x08e9bb9c
-	.4byte 0x08e9bcbc
-	.4byte 0x08e9bcdc
-	.4byte 0x08e9bdfc
-	.4byte 0x08e9be1c
-	.4byte 0x08e9bf3c
-	.4byte 0x08e9bf5c
-	.4byte 0x08e9c07c
-	.4byte 0x08e9c09c
-	.4byte 0x08e9c1bc
-	.4byte 0x08e9c1dc
-	.4byte 0x08e9c2fc
-	.4byte 0x08e9c31c
-	.4byte 0x08e9c43c
-	.4byte 0x08e9c45c
-	.4byte 0x08e9c57c
-	.4byte 0x08e9c59c
-	.4byte 0x08e9c6bc
+	.4byte gUnknown_08E9ADDC
+	.4byte gUnknown_08E9AEFC
+	.4byte gUnknown_08E9AF1C
+	.4byte gUnknown_08E9B03C
+	.4byte gUnknown_08E9B05C
+	.4byte gUnknown_08E9B17C
+	.4byte gUnknown_08E9B19C
+	.4byte gUnknown_08E9B2BC
+	.4byte gUnknown_08E9B2DC
+	.4byte gUnknown_08E9B3FC
+	.4byte gUnknown_08E9B41C
+	.4byte gUnknown_08E9B53C
+	.4byte gUnknown_08E9B55C
+	.4byte gUnknown_08E9B67C
+	.4byte gUnknown_08E9B69C
+	.4byte gUnknown_08E9B7BC
+	.4byte gUnknown_08E9B7DC
+	.4byte gUnknown_08E9B8FC
+	.4byte gUnknown_08E9B91C
+	.4byte gUnknown_08E9BA3C
+	.4byte gUnknown_08E9BA5C
+	.4byte gUnknown_08E9BB7C
+	.4byte gUnknown_08E9BB9C
+	.4byte gUnknown_08E9BCBC
+	.4byte gUnknown_08E9BCDC
+	.4byte gUnknown_08E9BDFC
+	.4byte gUnknown_08E9BE1C
+	.4byte gUnknown_08E9BF3C
+	.4byte gUnknown_08E9BF5C
+	.4byte gUnknown_08E9C07C
+	.4byte gUnknown_08E9C09C
+	.4byte gUnknown_08E9C1BC
+	.4byte gUnknown_08E9C1DC
+	.4byte gUnknown_08E9C2FC
+	.4byte gUnknown_08E9C31C
+	.4byte gUnknown_08E9C43C
+	.4byte gUnknown_08E9C45C
+	.4byte gUnknown_08E9C57C
+	.4byte gUnknown_08E9C59C
+	.4byte gUnknown_08E9C6BC
 
 gUnknown_08376290:: @ 8376290
 	.incbin "baserom.gba", 0x00376290, 0x48
@@ -6914,26 +7289,16 @@ gUnknown_08376D1C:: @ 8376D1C
 
 	.align 2
 gUnknown_08376D24:: @ 8376D24
-	.4byte SystemText_Pokedex
-	.4byte StartMenu_Pokedex
-	.4byte SystemText_Pokemon
-	.4byte sub_807144C
-	.4byte SystemText_BAG
-	.4byte sub_8071478
-	.4byte SystemText_Pokenav
-	.4byte sub_80714A4
-	.4byte SystemText_Player
-	.4byte sub_80714D0
-	.4byte SystemText_Save
-	.4byte sub_80714FC
-	.4byte SystemText_Option
-	.4byte sub_8071518
-	.4byte SystemText_Exit
-	.4byte sub_8071554
-	.4byte SystemText_Retire
-	.4byte sub_8071560
-	.4byte SystemText_Player @ duplicate?
-	.4byte sub_8071570
+	.4byte SystemText_Pokedex, StartMenu_Pokedex
+	.4byte SystemText_Pokemon, sub_807144C
+	.4byte SystemText_BAG, sub_8071478
+	.4byte SystemText_Pokenav, sub_80714A4
+	.4byte SystemText_Player, sub_80714D0
+	.4byte SystemText_Save, sub_80714FC
+	.4byte SystemText_Option, sub_8071518
+	.4byte SystemText_Exit, sub_8071554
+	.4byte SystemText_Retire, sub_8071560
+	.4byte SystemText_Player, sub_8071570
 
 gUnknown_08376D74:: @ 8376D74
 	.incbin "baserom.gba", 0x00376d74, 0x1b0
@@ -6989,7 +7354,6 @@ Unknown_837B5C4:
 	.4byte Unknown_837B2C4
 	.4byte Unknown_837B3C4
 	.4byte Unknown_837B4C4
-Unknown_837B5E4:
 Unknown_837B5E4:
 	.incbin "baserom.gba", 0x37B5E4, 0x80
 Unknown_837B664:
@@ -7065,13 +7429,38 @@ gUnknown_0837C0E4:: @ 837C0E4
 	.incbin "baserom.gba", 0x0037c0e4, 0x428
 
 gUnknown_0837C50C:: @ 837C50C
-	.incbin "baserom.gba", 0x0037c50c, 0x430
+	.incbin "baserom.gba", 0x0037c50c, 0x10
+Unknown_837C51C:
+	.incbin "baserom.gba", 0x0037c51c, 0x80
+Unknown_837C59C:
+	.incbin "baserom.gba", 0x0037c59c, 0x80
+Unknown_837C61C:
+	.incbin "baserom.gba", 0x0037c61c, 0x80
+Unknown_837C69C:
+	.incbin "baserom.gba", 0x0037c69c, 0x80
+Unknown_837C71C:
+	.incbin "baserom.gba", 0x0037c71c, 0x80
+Unknown_837C79C:
+	.incbin "baserom.gba", 0x0037c79c, 0x80
+Unknown_837C81C:
+	.incbin "baserom.gba", 0x0037c81c, 0x80
+Unknown_837C89C:
+	.incbin "baserom.gba", 0x0037c89c, 0x80
+	.incbin "baserom.gba", 0x0037c91c, 0x20
 
 gUnknown_0837C93C:: @ 837C93C
 	.incbin "baserom.gba", 0x0037c93c, 0x20
 
+	.align 2
 gUnknown_0837C95C:: @ 837C95C
-	.incbin "baserom.gba", 0x37C95C, 0x20
+	.4byte Unknown_837C51C
+	.4byte Unknown_837C59C
+	.4byte Unknown_837C61C
+	.4byte Unknown_837C69C
+	.4byte Unknown_837C71C
+	.4byte Unknown_837C79C
+	.4byte Unknown_837C81C
+	.4byte Unknown_837C89C
 Unknown_837C97C:
 	.incbin "baserom.gba", 0x37C97C, 0x80
 Unknown_837C9FC:
@@ -9242,11 +9631,7 @@ gUnknown_0839AE70:: @ 839AE70
 
 	.align 2
 gUnknown_0839B1F0:: @ 839B1F0
-Unknown_839B1F0:
-	.4byte 0x08080807
-	.4byte 0x080a0809
-	.4byte 0x080c080b
-	.4byte 0x080e080d
+	.2byte 0x0807, 0x0808, 0x0809, 0x080a, 0x080b, 0x080c, 0x080d, 0x080e
 Unknown_839B200:
 	.incbin "baserom.gba", 0x0039b200, 0x7
 Unknown_839B207:
@@ -9432,7 +9817,6 @@ gUnknown_0839F0D4:: @ 839F0D4
 
 	.align 2
 gOamData_839F0F4:: @ 839F0F4
-gUnknown_0839F0F4:: @ 839F0F4
 	.2byte 0x0000
 	.2byte 0xC000
 	.2byte 0x0000
@@ -9747,54 +10131,30 @@ gUnknown_0839F470:: @ 839F470
 
 	.align 2
 gUnknown_0839F494:: @ 839F494
-	.4byte OtherText_Summary
-	.4byte sub_8089FCC
-	.4byte OtherText_Switch2
-	.4byte sub_808A02C
-	.4byte OtherText_Item
-	.4byte sub_808A140
-	.4byte OtherText_Cancel2
-	.4byte sub_808A918
-	.4byte OtherText_Give2
-	.4byte sub_808A630
-	.4byte OtherText_Take2
-	.4byte sub_808A688
-	.4byte OtherText_Take
-	.4byte sub_808A6B8
-	.4byte OtherText_Mail
-	.4byte sub_808A6E8
-	.4byte OtherText_Read2
-	.4byte sub_808A810
-	.4byte OtherText_Cancel2
-	.4byte sub_808A938
-	.4byte gMoveNames + 13 * MOVE_CUT
-	.4byte sub_808A984
-	.4byte gMoveNames + 13 * MOVE_FLASH
-	.4byte sub_808A984
-	.4byte gMoveNames + 13 * MOVE_ROCK_SMASH
-	.4byte sub_808A984
-	.4byte gMoveNames + 13 * MOVE_STRENGTH
-	.4byte sub_808A984
-	.4byte gMoveNames + 13 * MOVE_SURF
-	.4byte sub_808A984
-	.4byte gMoveNames + 13 * MOVE_FLY
-	.4byte sub_808A984
-	.4byte gMoveNames + 13 * MOVE_DIVE
-	.4byte sub_808A984
-	.4byte gMoveNames + 13 * MOVE_WATERFALL
-	.4byte sub_808A984
-	.4byte gMoveNames + 13 * MOVE_TELEPORT
-	.4byte sub_808A984
-	.4byte gMoveNames + 13 * MOVE_DIG
-	.4byte sub_808A984
-	.4byte gMoveNames + 13 * MOVE_SECRET_POWER
-	.4byte sub_808A984
-	.4byte gMoveNames + 13 * MOVE_MILK_DRINK
-	.4byte sub_808A984
-	.4byte gMoveNames + 13 * MOVE_SOFT_BOILED
-	.4byte sub_808A984
-	.4byte gMoveNames + 13 * MOVE_SWEET_SCENT
-	.4byte sub_808A984
+	.4byte OtherText_Summary, sub_8089FCC
+	.4byte OtherText_Switch2, sub_808A02C
+	.4byte OtherText_Item, sub_808A140
+	.4byte OtherText_Cancel2, sub_808A918
+	.4byte OtherText_Give2, sub_808A630
+	.4byte OtherText_Take2, sub_808A688
+	.4byte OtherText_Take, sub_808A6B8
+	.4byte OtherText_Mail, sub_808A6E8
+	.4byte OtherText_Read2, sub_808A810
+	.4byte OtherText_Cancel2, sub_808A938
+	.4byte gMoveNames + 13 * MOVE_CUT, sub_808A984
+	.4byte gMoveNames + 13 * MOVE_FLASH, sub_808A984
+	.4byte gMoveNames + 13 * MOVE_ROCK_SMASH, sub_808A984
+	.4byte gMoveNames + 13 * MOVE_STRENGTH, sub_808A984
+	.4byte gMoveNames + 13 * MOVE_SURF, sub_808A984
+	.4byte gMoveNames + 13 * MOVE_FLY, sub_808A984
+	.4byte gMoveNames + 13 * MOVE_DIVE, sub_808A984
+	.4byte gMoveNames + 13 * MOVE_WATERFALL, sub_808A984
+	.4byte gMoveNames + 13 * MOVE_TELEPORT, sub_808A984
+	.4byte gMoveNames + 13 * MOVE_DIG, sub_808A984
+	.4byte gMoveNames + 13 * MOVE_SECRET_POWER, sub_808A984
+	.4byte gMoveNames + 13 * MOVE_MILK_DRINK, sub_808A984
+	.4byte gMoveNames + 13 * MOVE_SOFT_BOILED, sub_808A984
+	.4byte gMoveNames + 13 * MOVE_SWEET_SCENT, sub_808A984
 
 gUnknown_0839F554:: @ 839F554
 	.incbin "baserom.gba", 0x0039f554, 0x24
@@ -10173,19 +10533,19 @@ gUnknown_083B5ED8:: @ 83B5ED8
 
 	.align 2
 gUnknown_083B5EEC:: @ 83B5EEC
-	.4byte 0x08e8cac0
-	.4byte 0x08e8d4c0
+	.4byte gUnknown_08E8CAC0
+	.4byte gUnknown_08E8D4C0
 
 gUnknown_083B5EF4:: @ 83B5EF4
 	.incbin "baserom.gba", 0x003b5ef4, 0x4
 
 	.align 2
 gUnknown_083B5EF8:: @ 83B5EF8
-	.4byte 0x08e8c8e0
-	.4byte 0x08e8c940
-	.4byte 0x08e8c9a0
-	.4byte 0x08e8ca00
-	.4byte 0x08e8ca60
+	.4byte gUnknown_08E8C8E0
+	.4byte gUnknown_08E8C940
+	.4byte gUnknown_08E8C9A0
+	.4byte gUnknown_08E8CA00
+	.4byte gUnknown_08E8CA60
 
 gUnknown_083B5F0C:: @ 83B5F0C
 	.incbin "baserom.gba", 0x003b5f0c, 0x20
@@ -11568,20 +11928,13 @@ Unknown_83C91D6:
 
 	.align 2
 gUnknown_083C91F0:: @ 83C91F0
-	.4byte Unknown_83C9166
-	.4byte sub_80A9C1C
-	.4byte Unknown_83C916E
-	.4byte sub_80A9BBC
-	.4byte Unknown_83C9190
-	.4byte sub_80A9C34
-	.4byte Unknown_83C91A0
-	.4byte sub_80A9C40
-	.4byte Unknown_83C91B0
-	.4byte sub_80AAFDC
-	.4byte Unknown_83C91C2
-	.4byte sub_80AAFEC
-	.4byte Unknown_83C91D6
-	.4byte sub_80AB02C
+	.4byte Unknown_83C9166, sub_80A9C1C
+	.4byte Unknown_83C916E, sub_80A9BBC
+	.4byte Unknown_83C9190, sub_80A9C34
+	.4byte Unknown_83C91A0, sub_80A9C40
+	.4byte Unknown_83C91B0, sub_80AAFDC
+	.4byte Unknown_83C91C2, sub_80AAFEC
+	.4byte Unknown_83C91D6, sub_80AB02C
 
 gUnknown_083C9228:: @ 83C9228
 	.incbin "baserom.gba", 0x003c9228, 0x46
@@ -12003,12 +12356,9 @@ gUnknown_083CC5D0:: @ 83CC5D0
 
 	.align 2
 gUnknown_083CC6D0:: @ 83CC6D0
-	.4byte ContestStatsText_Buy
-	.4byte sub_80B2EFC
-	.4byte ContestStatsText_Sell
-	.4byte sub_80B2F30
-	.4byte ContestStatsText_Quit2
-	.4byte HandleShopMenuQuit
+	.4byte ContestStatsText_Buy, sub_80B2EFC
+	.4byte ContestStatsText_Sell, sub_80B2F30
+	.4byte ContestStatsText_Quit2, HandleShopMenuQuit
 
 gUnknown_083CC6E8:: @ 83CC6E8
 	.incbin "baserom.gba", 0x003cc6e8, 0x3
@@ -12175,18 +12525,18 @@ gUnknown_083CE310:: @ 83CE310
 
 	.align 2
 gUnknown_083CE328:: @ 83CE328
-	.4byte 0x081e6edc
-	.4byte 0x081e6ef8
-	.4byte 0x081e6ea4
-	.4byte 0x081e6ec0
-	.4byte 0x081e6ea4
-	.4byte 0x081e6ec0
-	.4byte 0x081e6f14
-	.4byte 0x081e6f30
-	.4byte 0x081e6f14
-	.4byte 0x081e6f30
-	.4byte 0x081e6edc
-	.4byte 0x081e6ef8
+	.4byte gWindowConfig_81E6EDC
+	.4byte gWindowConfig_81E6EF8
+	.4byte gWindowConfig_81E6EA4
+	.4byte gWindowConfig_81E6EC0
+	.4byte gWindowConfig_81E6EA4
+	.4byte gWindowConfig_81E6EC0
+	.4byte gWindowConfig_81E6F14
+	.4byte gWindowConfig_81E6F30
+	.4byte gWindowConfig_81E6F14
+	.4byte gWindowConfig_81E6F30
+	.4byte gWindowConfig_81E6EDC
+	.4byte gWindowConfig_81E6EF8
 
 	.align 2
 gUnknown_083CE358:: @ 83CE358
@@ -12556,10 +12906,8 @@ gUnknown_083D1374:: @ 83D1374
 
 	.align 2
 gUnknown_083D13D4:: @ 83D13D4
-	.4byte SecretBaseText_DelRegist
-	.4byte sub_80BCA84
-	.4byte UnknownText_Exit
-	.4byte sub_80BCBF8
+	.4byte SecretBaseText_DelRegist, sub_80BCA84
+	.4byte UnknownText_Exit, sub_80BCBF8
 
 	.align 2
 gUnknown_083D13E4:: @ 83D13E4
@@ -12589,151 +12937,151 @@ gUnknown_083D1464:: @ 83D1464
 
 	.align 2
 gUnknown_083D1470:: @ 83D1470
-	.4byte 0x081a8ec9
-	.4byte 0x081a9048
-	.4byte 0x081a9067
-	.4byte 0x081a9088
-	.4byte 0x081a90b4
-	.4byte 0x081a911f
-	.4byte 0x081a9152
-	.4byte 0x081a91c6
+	.4byte UnknownString_81A8EC9
+	.4byte UnknownString_81A9048
+	.4byte UnknownString_81A9067
+	.4byte UnknownString_81A9088
+	.4byte UnknownString_81A90B4
+	.4byte UnknownString_81A911F
+	.4byte UnknownString_81A9152
+	.4byte UnknownString_81A91C6
 
 	.align 2
 gUnknown_083D1490:: @ 83D1490
-	.4byte 0x081a9581
-	.4byte 0x081a9694
-	.4byte 0x081a971b
-	.4byte 0x081a974b
-	.4byte 0x081a979f
-	.4byte 0x081a97d0
+	.4byte UnknownString_81A9581
+	.4byte UnknownString_81A9694
+	.4byte UnknownString_81A971B
+	.4byte UnknownString_81A974B
+	.4byte UnknownString_81A979F
+	.4byte UnknownString_81A97D0
 
 	.align 2
 gUnknown_083D14A8:: @ 83D14A8
-	.4byte 0x081a8917
-	.4byte 0x081a8ae5
-	.4byte 0x081a8b9d
-	.4byte 0x081a8c77
-	.4byte 0x081a8d45
+	.4byte UnknownString_81A8917
+	.4byte UnknownString_81A8AE5
+	.4byte UnknownString_81A8B9D
+	.4byte UnknownString_81A8C77
+	.4byte UnknownString_81A8D45
 
 	.align 2
 gUnknown_083D14BC:: @ 83D14BC
-	.4byte 0x081a986f
+	.4byte UnknownString_81A986F
 
 	.align 2
 gUnknown_083D14C0:: @ 83D14C0
-	.4byte 0x081aad23
-	.4byte 0x081aadd5
-	.4byte 0x081aae31
-	.4byte 0x081aae9d
-	.4byte 0x081aaf03
-	.4byte 0x081aaf8a
-	.4byte 0x081ab040
-	.4byte 0x081ab0c8
-	.4byte 0x081ab13d
-	.4byte 0x081ab1c6
-	.4byte 0x081ab266
-	.4byte 0x081ab2db
+	.4byte UnknownString_81AAD23
+	.4byte UnknownString_81AADD5
+	.4byte UnknownString_81AAE31
+	.4byte UnknownString_81AAE9D
+	.4byte UnknownString_81AAF03
+	.4byte UnknownString_81AAF8A
+	.4byte UnknownString_81AB040
+	.4byte UnknownString_81AB0C8
+	.4byte UnknownString_81AB13D
+	.4byte UnknownString_81AB1C6
+	.4byte UnknownString_81AB266
+	.4byte UnknownString_81AB2DB
 
 	.align 2
 gUnknown_083D14F0:: @ 83D14F0
-	.4byte 0x081ab381
-	.4byte 0x081ab435
-	.4byte 0x081ab507
-	.4byte 0x081ab5b8
-	.4byte 0x081ab61f
-	.4byte 0x081ab6b0
-	.4byte 0x081ab78d
-	.4byte 0x081ab7fe
-	.4byte 0x081ab835
-	.4byte 0x081ab873
-	.4byte 0x081ab92e
-	.4byte 0x081ab95e
-	.4byte 0x081abb75
+	.4byte UnknownString_81AB381
+	.4byte UnknownString_81AB435
+	.4byte UnknownString_81AB507
+	.4byte UnknownString_81AB5B8
+	.4byte UnknownString_81AB61F
+	.4byte UnknownString_81AB6B0
+	.4byte UnknownString_81AB78D
+	.4byte UnknownString_81AB7FE
+	.4byte UnknownString_81AB835
+	.4byte UnknownString_81AB873
+	.4byte UnknownString_81AB92E
+	.4byte UnknownString_81AB95E
+	.4byte UnknownString_81ABB75
 
 	.align 2
 gUnknown_083D1524:: @ 83D1524
-	.4byte 0x081a72de
-	.4byte 0x081a736b
-	.4byte 0x081a73ca
-	.4byte 0x081a744d
-	.4byte 0x081a7508
-	.4byte 0x081a75ce
-	.4byte 0x081a768d
-	.4byte 0x081a76c5
-	.4byte 0x081a774f
+	.4byte UnknownString_81A72DE
+	.4byte UnknownString_81A736B
+	.4byte UnknownString_81A73CA
+	.4byte UnknownString_81A744D
+	.4byte UnknownString_81A7508
+	.4byte UnknownString_81A75CE
+	.4byte UnknownString_81A768D
+	.4byte UnknownString_81A76C5
+	.4byte UnknownString_81A774F
 
 	.align 2
 gUnknown_083D1548:: @ 83D1548
-	.4byte 0x081a7b93
-	.4byte 0x081a7c26
-	.4byte 0x081a7c7d
-	.4byte 0x081a7d4a
-	.4byte 0x081a7e0c
-	.4byte 0x081a7f0e
-	.4byte 0x081a8004
-	.4byte 0x081a8119
-	.4byte 0x081a811e
-	.4byte 0x081a8123
-	.4byte 0x081a8128
-	.4byte 0x081a812d
-	.4byte 0x081a8133
-	.4byte 0x081a81bc
-	.4byte 0x081a8267
+	.4byte UnknownString_81A7B93
+	.4byte UnknownString_81A7C26
+	.4byte UnknownString_81A7C7D
+	.4byte UnknownString_81A7D4A
+	.4byte UnknownString_81A7E0C
+	.4byte UnknownString_81A7F0E
+	.4byte UnknownString_81A8004
+	.4byte UnknownString_81A8119
+	.4byte UnknownString_81A811E
+	.4byte UnknownString_81A8123
+	.4byte UnknownString_81A8128
+	.4byte UnknownString_81A812D
+	.4byte UnknownString_81A8133
+	.4byte UnknownString_81A81BC
+	.4byte UnknownString_81A8267
 
 	.align 2
 gUnknown_083D1584:: @ 83D1584
-	.4byte 0x081a99d9
-	.4byte 0x081a9af0
-	.4byte 0x081a9b69
-	.4byte 0x081a9bef
-	.4byte 0x081a9c6a
-	.4byte 0x081a9cf8
-	.4byte 0x081a9d74
-	.4byte 0x081a9df3
-	.4byte 0x081a9e75
-	.4byte 0x081a9f06
-	.4byte 0x081a9f9f
-	.4byte 0x081aa01e
-	.4byte 0x081aa09d
-	.4byte 0x081aa0d7
-	.4byte 0x081aa138
-	.4byte 0x081aa166
-	.4byte 0x081aa1c0
-	.4byte 0x081aa1ea
-	.4byte 0x081aa28a
+	.4byte UnknownString_81A99D9
+	.4byte UnknownString_81A9AF0
+	.4byte UnknownString_81A9B69
+	.4byte UnknownString_81A9BEF
+	.4byte UnknownString_81A9C6A
+	.4byte UnknownString_81A9CF8
+	.4byte UnknownString_81A9D74
+	.4byte UnknownString_81A9DF3
+	.4byte UnknownString_81A9E75
+	.4byte UnknownString_81A9F06
+	.4byte UnknownString_81A9F9F
+	.4byte UnknownString_81AA01E
+	.4byte UnknownString_81AA09D
+	.4byte UnknownString_81AA0D7
+	.4byte UnknownString_81AA138
+	.4byte UnknownString_81AA166
+	.4byte UnknownString_81AA1C0
+	.4byte UnknownString_81AA1EA
+	.4byte UnknownString_81AA28A
 
 	.align 2
 gUnknown_083D15D0:: @ 83D15D0
-	.4byte 0x081aa814
-	.4byte 0x081aa8c6
-	.4byte 0x081aa9b2
-	.4byte 0x081aaa5c
-	.4byte 0x081aab11
-	.4byte 0x081aabb4
-	.4byte 0x081aac47
+	.4byte UnknownString_81AA814
+	.4byte UnknownString_81AA8C6
+	.4byte UnknownString_81AA9B2
+	.4byte UnknownString_81AAA5C
+	.4byte UnknownString_81AAB11
+	.4byte UnknownString_81AABB4
+	.4byte UnknownString_81AAC47
 
 	.align 2
 gUnknown_083D15EC:: @ 83D15EC
-	.4byte 0x081aa344
-	.4byte 0x081aa5f3
+	.4byte UnknownString_81AA344
+	.4byte UnknownString_81AA5F3
 
 	.align 2
 gUnknown_083D15F4:: @ 83D15F4
-	.4byte 0x081abc51
-	.4byte 0x081abd94
-	.4byte 0x081abdf2
+	.4byte UnknownString_81ABC51
+	.4byte UnknownString_81ABD94
+	.4byte UnknownString_81ABDF2
 
 	.align 2
 gUnknown_083D1600:: @ 83D1600
-	.4byte 0x081ac90d
-	.4byte 0x081aca02
-	.4byte 0x081acaaa
-	.4byte 0x081acc07
-	.4byte 0x081acd13
-	.4byte 0x081acdfa
-	.4byte 0x081acee7
-	.4byte 0x081acf49
-	.4byte 0x081ad00a
+	.4byte UnknownString_81AC90D
+	.4byte UnknownString_81ACA02
+	.4byte UnknownString_81ACAAA
+	.4byte UnknownString_81ACC07
+	.4byte UnknownString_81ACD13
+	.4byte UnknownString_81ACDFA
+	.4byte UnknownString_81ACEE7
+	.4byte UnknownString_81ACF49
+	.4byte UnknownString_81AD00A
 
 gUnknown_083D1624:: @ 83D1624
 	.incbin "baserom.gba", 0x003d1624, 0x20
@@ -19324,7 +19672,6 @@ gUnknown_083E5D60:: @ 83E5D60
 	.incbin "graphics/interface/map.gbapal", 0xE0, 0x40
 
 gUnknown_083E5DA0:: @ 83E5DA0
-@ replacing .incbin "baserom.gba", 0x003e5da0, 0xd64
 	.incbin "graphics/interface/map.8bpp.lz"
 
 gUnknown_083E6B04:: @ 83E6B04
@@ -19481,14 +19828,10 @@ gUnknown_083EC5E4:: @ 83EC5E4
 
 	.align 2
 gUnknown_083EC604:: @ 83EC604
-	.4byte SecretBaseText_Decorate
-	.4byte sub_80FF160
-	.4byte SecretBaseText_PutAway
-	.4byte sub_8100A0C
-	.4byte SecretBaseText_Toss
-	.4byte sub_8101700
-	.4byte UnknownText_Exit
-	.4byte gpu_pal_decompress_alloc_tag_and_upload
+	.4byte SecretBaseText_Decorate, sub_80FF160
+	.4byte SecretBaseText_PutAway, sub_8100A0C
+	.4byte SecretBaseText_Toss, sub_8101700
+	.4byte UnknownText_Exit, gpu_pal_decompress_alloc_tag_and_upload
 
 	.align 2
 gUnknown_083EC624:: @ 83EC624
@@ -20372,8 +20715,9 @@ gUnknown_083EDC2C:: @ 83EDC2C
 gUnknown_083EDCDC:: @ 83EDCDC
 	obj_tiles 0x02010000, 2048, 0x0011
 
+	.align 2
 gUnknown_083EDCE4:: @ 83EDCE4
-	.4byte 0x08E997E8
+	.4byte gUnknownPalette_08E997E8
 
 UnknownPalette_83EDCE8:
 	.ifdef SAPPHIRE
@@ -20392,11 +20736,11 @@ gUnknown_083EDD08:: @ 83EDD08
 
 	.align 2
 gUnknown_083EDD1C:: @ 83EDD1C
-	.4byte 0x08e95aac
-	.4byte 0x08e95aae
-	.4byte 0x08e95ab0
-	.4byte 0x08e95ab2
-	.4byte 0x08e95ab4
+	.4byte gUnknown_08E95A18 + 148
+	.4byte gUnknown_08E95A18 + 150
+	.4byte gUnknown_08E95A18 + 152
+	.4byte gUnknown_08E95A18 + 154
+	.4byte gUnknown_08E95A18 + 156
 
 gUnknown_083EDD30:: @ 83EDD30
 	.incbin "baserom.gba", 0x003edd30, 0x5
@@ -20423,7 +20767,7 @@ gUnknown_083EDDA0:: @ 83EDDA0
 	.align 2
 gUnknown_083EDDAC:: @ 83EDDAC
 Unknown_83EDDAC:
-	.4byte 0x08e95a38
+	.4byte gUnknown_08E95A18 + 32
 Unknown_83EDDB0:
 	.incbin "baserom.gba", 0x003eddb0, 0x20
 Unknown_83EDDD0:
@@ -20436,11 +20780,11 @@ gUnknown_083EDE10:: @ 83EDE10
 	.4byte Unknown_83EDDB0
 	.4byte Unknown_83EDDD0
 	.4byte Unknown_83EDDF0
-	.4byte 0x08e97788
+	.4byte gSlotMachineSpritePalette6
 
 	.align 2
 gUnknown_083EDE20:: @ 83EDE20
-	.4byte 0x08e97788
+	.4byte gSlotMachineSpritePalette6
 
 gUnknown_083EDE24:: @ 83EDE24
 	.incbin "baserom.gba", 0x003ede24, 0x20
@@ -22255,16 +22599,12 @@ gUnknown_084017A8:: @ 84017A8
 
 	.align 2
 gUnknown_084017B0:: @ 84017B0
-	.4byte OtherText_Summary
-	.4byte sub_812265C
-	.4byte OtherText_Enter2
-	.4byte sub_8122694
-	.4byte OtherText_NoEntry
-	.4byte sub_8122770
-	.4byte UnknownText_Exit
-	.4byte sub_8122838
-	.4byte 0x02030001
-	.4byte 0x03000300
+	.4byte OtherText_Summary, sub_812265C
+	.4byte OtherText_Enter2, sub_8122694
+	.4byte OtherText_NoEntry, sub_8122770
+	.4byte UnknownText_Exit, sub_8122838
+
+	.incbin "baserom.gba", 0x004017d0, 0x8
 
 gUnknown_084017D8:: @ 84017D8
 	.incbin "baserom.gba", 0x004017d8, 0x18
@@ -23398,14 +23738,10 @@ gUnknown_08406288:: @ 8406288
 
 	.align 2
 gUnknown_08406298:: @ 8406298
-	.4byte SecretBaseText_ItemStorage
-	.4byte sub_8139E40
-	.4byte PCText_Mailbox
-	.4byte sub_8139E6C
-	.4byte SecretBaseText_Decoration
-	.4byte sub_8139ED8
-	.4byte SecretBaseText_TurnOff
-	.4byte sub_8139EF8
+	.4byte SecretBaseText_ItemStorage, sub_8139E40
+	.4byte PCText_Mailbox, sub_8139E6C
+	.4byte SecretBaseText_Decoration, sub_8139ED8
+	.4byte SecretBaseText_TurnOff, sub_8139EF8
 
 gUnknown_084062B8:: @ 84062B8
 	.incbin "baserom.gba", 0x004062b8, 0x4
@@ -23415,14 +23751,10 @@ gUnknown_084062BC:: @ 84062BC
 
 	.align 2
 gUnknown_084062C0:: @ 84062C0
-	.4byte PCText_WithdrawItem
-	.4byte sub_813A118
-	.4byte PCText_DepositItem
-	.4byte sub_813A0A0
-	.4byte PCText_TossItem
-	.4byte sub_813A198
-	.4byte UnknownText_Exit
-	.4byte sub_813A21C
+	.4byte PCText_WithdrawItem, sub_813A118
+	.4byte PCText_DepositItem, sub_813A0A0
+	.4byte PCText_TossItem, sub_813A198
+	.4byte UnknownText_Exit, sub_813A21C
 
 	.align 2
 gUnknown_084062E0:: @ 84062E0
@@ -23439,14 +23771,10 @@ gUnknown_084062F0:: @ 84062F0
 
 	.align 2
 gUnknown_084062F8:: @ 84062F8
-	.4byte OtherText_Read
-	.4byte sub_813B428
-	.4byte OtherText_MoveToBag
-	.4byte sub_813B510
-	.4byte OtherText_Give
-	.4byte sub_813B630
-	.4byte OtherText_Cancel2
-	.4byte sub_813B734
+	.4byte OtherText_Read, sub_813B428
+	.4byte OtherText_MoveToBag, sub_813B510
+	.4byte OtherText_Give, sub_813B630
+	.4byte OtherText_Cancel2, sub_813B734
 
 gUnknown_08406318:: @ 8406318
 	.incbin "baserom.gba", 0x00406318, 0x6
@@ -23501,7 +23829,6 @@ gUnknown_0840754C:: @ 840754C
 	.incbin "baserom.gba", 0x0040754c, 0x218
 
 gUnknown_08407764:: @ 8407764
-@ replacing .incbin "baserom.gba", 0x00407764, 0x2170
 	.incbin "graphics/intro/introgfx.4bpp.lz"
 
 gUnknown_084098D4:: @ 84098D4
@@ -23909,8 +24236,20 @@ gUnknown_0840B258:: @ 840B258
 	obj_tiles 0x08d1a7f4, 256, 0xd6f6
 	obj_tiles 0x08d1a7f4, 256, 0xd6f7
 
+	.align 2
 gUnknown_0840B2B8:: @ 840B2B8
-	.incbin "baserom.gba", 0x0040b2b8, 0x60
+	obj_pal 0x08d1a8c8, 55020
+	obj_pal 0x08d1a8c8, 55021
+	obj_pal 0x08d1a8c8, 55022
+	obj_pal 0x08d1a8c8, 55023
+	obj_pal 0x08d1a8c8, 55024
+	obj_pal 0x08d1a8c8, 55025
+	obj_pal 0x08d1a8c8, 55026
+	obj_pal 0x08d1a8c8, 55027
+	obj_pal 0x08d1a8c8, 55028
+	obj_pal 0x08d1a8c8, 55029
+	obj_pal 0x08d1a8c8, 55030
+	obj_pal 0x08d1a8c8, 55031
 
 	.align 2
 gSpriteAnim_840B318:: @ 840B318
@@ -24217,12 +24556,9 @@ gUnknown_0840B869:: @ 840B869
 	.incbin "baserom.gba", 0x0040b869, 0xf
 
 gUnknown_0840B878::
-	.incbin "baserom.gba", 0x0040B878, 0xF @ unknown
+	.incbin "baserom.gba", 0x0040B878, 0xf
 
 	.include "data/text/credits.s"
-
-gUnknown_0840C5F0:: @ 840C5F0
-	.incbin "baserom.gba", 0x0040c5f0, 0x410 @ pointer table to something
 
 gUnknown_0840CA00:: @ 840CA00
 Unknown_840CA00:
@@ -24383,7 +24719,7 @@ SystemText_SaveCorrupt:
 
 gUnknown_0840DEC2:: @ 840DEC2
 SystemText_SaveDeleted:
-	.string " The save file has been deleted...$" @ there's a blank spot at the beginning of this string. No idea why.
+	.string " The save file has been deleted...$"
 
 gUnknown_0840DEE5:: @ 840DEE5
 SystemText_1MSubCircuitNotInstalled:
@@ -24454,7 +24790,7 @@ DexText_UnknownPoke:
 	.string "            ????? POKéMON$" @ why 12 spaces?
 
 gUnknown_0840E013:: @ 840E013
-	.incbin "baserom.gba", 0x0040e013, 0xa @ unknown size of dummy pokemon
+	.incbin "baserom.gba", 0x0040e013, 0xa
 
 gUnknown_0840E01D:: @ 840E01D
 DexText_UnknownWeight:
@@ -24463,7 +24799,7 @@ DexText_Terminator4:
 	.string "$"
 
 gUnknown_0840E02A:: @ 840E02A
-	.incbin "baserom.gba", 0x0040e02a, 0xb @ unknown cry of dummy pokemon
+	.incbin "baserom.gba", 0x0040e02a, 0xb
 
 gUnknown_0840E035:: @ 840E035
 DexText_SizeComparedTo:
@@ -24904,6 +25240,7 @@ OtherText_Firm:
 gUnknown_0840EB15:: @ 840EB15
 ContestStatsText_Unknown1:
 	.string "{STR_VAR_1}.{STR_VAR_2}”$"
+
 ContestStatsText_VerySoft:
 	.string "Very soft$"
 ContestStatsText_Soft:
@@ -26708,21 +27045,20 @@ gUnknown_08412050:: @ 8412050
 
 	.align 2
 gUnknown_084120A4:: @ 84120A4
-Unknown_84120A4:
-	.4byte 0x08e781e4
-	.4byte 0x08e781f8
-	.4byte 0x08e7820c
-	.4byte 0x08e78220
-	.4byte 0x08e78234
-	.4byte 0x08e78248
-	.4byte 0x08e7825c
-	.4byte 0x08e78270
-	.4byte 0x08e78284
-	.4byte 0x08e78298
-	.4byte 0x08e782ac
-	.4byte 0x08e782c0
-	.4byte 0x08e782d4
-	.4byte 0x08e782e8
+	.4byte gUnknown_08E781E4
+	.4byte gUnknown_08E781F8
+	.4byte gUnknown_08E7820C
+	.4byte gUnknown_08E78220
+	.4byte gUnknown_08E78234
+	.4byte gUnknown_08E78248
+	.4byte gUnknown_08E7825C
+	.4byte gUnknown_08E78270
+	.4byte gUnknown_08E78284
+	.4byte gUnknown_08E78298
+	.4byte gUnknown_08E782ac
+	.4byte gUnknown_08E782c0
+	.4byte gUnknown_08E782d4
+	.4byte gUnknown_08E782e8
 Unknown_84120DC:
 	.incbin "baserom.gba", 0x004120dc, 0x10
 
@@ -27203,132 +27539,110 @@ gUnknown_08417068:: @ 8417068
 
 gUnknown_084170F4:: @ 84170F4
 	.incbin "baserom.gba", 0x004170f4, 0xD0
-
-__unknown_84171C4:
-	.incbin "baserom.gba", 0x4171C4, 0x25E0
-
-__unknown_84197A4:
-	.incbin "baserom.gba", 0x4197A4, 0x390
-
-__unknown_8419B34:
-	.incbin "baserom.gba", 0x419B34, 0x1470
-
-__unknown_841AFA4:
-	.incbin "baserom.gba", 0x41AFA4, 0xBD0
-
-__unknown_841BB74:
-	.incbin "baserom.gba", 0x41BB74, 0x7E0
-
-__unknown_841C354:
-	.incbin "baserom.gba", 0x41C354, 0xE10
-
-__unknown_841D164:
-	.incbin "baserom.gba", 0x41D164, 0xBD0
-
-__unknown_841DD34:
-	.incbin "baserom.gba", 0x41DD34, 0xB40
-
-__unknown_841E874:
-	.incbin "baserom.gba", 0x41E874, 0xCF0
-
-__unknown_841F564:
-	.incbin "baserom.gba", 0x41F564, 0xCF0
-
-__unknown_8420254:
-	.incbin "baserom.gba", 0x420254, 0xCF0
-
-__unknown_8420F44:
-	.incbin "baserom.gba", 0x420F44, 0xEA0
-
-__unknown_8421DE4:
-	.incbin "baserom.gba", 0x421DE4, 0x870
-
-__unknown_8422654:
-	.incbin "baserom.gba", 0x422654, 0xA20
-
-__unknown_8423074:
-	.incbin "baserom.gba", 0x423074, 0x870
-
-__unknown_84238E4:
-	.incbin "baserom.gba", 0x4238E4, 0x7E0
-
-__unknown_84240C4:
-	.incbin "baserom.gba", 0x4240C4, 0x6C0
-
-__unknown_8424784:
-	.incbin "baserom.gba", 0x424784, 0x420
-
-__unknown_8424BA4:
-	.incbin "baserom.gba", 0x424BA4, 0x1CB0
-
-__unknown_8426854:
-	.incbin "baserom.gba", 0x426854, 0x2460
-
-__unknown_8428CB4:
-	.incbin "baserom.gba", 0x428CB4, 0x630
-
-__unknown_84292E4:
-	.incbin "baserom.gba", 0x4292E4, 0x2F10
+Unknown_84171C4:
+	.incbin "baserom.gba", 0x004171C4, 0x25E0
+Unknown_84197A4:
+	.incbin "baserom.gba", 0x004197A4, 0x390
+Unknown_8419B34:
+	.incbin "baserom.gba", 0x00419B34, 0x1470
+Unknown_841AFA4:
+	.incbin "baserom.gba", 0x0041AFA4, 0xBD0
+Unknown_841BB74:
+	.incbin "baserom.gba", 0x0041BB74, 0x7E0
+Unknown_841C354:
+	.incbin "baserom.gba", 0x0041C354, 0xE10
+Unknown_841D164:
+	.incbin "baserom.gba", 0x0041D164, 0xBD0
+Unknown_841DD34:
+	.incbin "baserom.gba", 0x0041DD34, 0xB40
+Unknown_841E874:
+	.incbin "baserom.gba", 0x0041E874, 0xCF0
+Unknown_841F564:
+	.incbin "baserom.gba", 0x0041F564, 0xCF0
+Unknown_8420254:
+	.incbin "baserom.gba", 0x00420254, 0xCF0
+Unknown_8420F44:
+	.incbin "baserom.gba", 0x00420F44, 0xEA0
+Unknown_8421DE4:
+	.incbin "baserom.gba", 0x00421DE4, 0x870
+Unknown_8422654:
+	.incbin "baserom.gba", 0x00422654, 0xA20
+Unknown_8423074:
+	.incbin "baserom.gba", 0x00423074, 0x870
+Unknown_84238E4:
+	.incbin "baserom.gba", 0x004238E4, 0x7E0
+Unknown_84240C4:
+	.incbin "baserom.gba", 0x004240C4, 0x6C0
+Unknown_8424784:
+	.incbin "baserom.gba", 0x00424784, 0x420
+Unknown_8424BA4:
+	.incbin "baserom.gba", 0x00424BA4, 0x1CB0
+Unknown_8426854:
+	.incbin "baserom.gba", 0x00426854, 0x2460
+Unknown_8428CB4:
+	.incbin "baserom.gba", 0x00428CB4, 0x630
+Unknown_84292E4:
+	.incbin "baserom.gba", 0x004292E4, 0x2F10
 
 	.align 2
 gUnknown_0842C1F4:: @ 842C1F4
-	.4byte __unknown_84171C4
-	.4byte __unknown_84197A4
-	.4byte __unknown_8419B34
-	.4byte __unknown_841AFA4
-	.4byte __unknown_841BB74
-	.4byte __unknown_841C354
-	.4byte __unknown_841D164
-	.4byte __unknown_841DD34
-	.4byte __unknown_841E874
-	.4byte __unknown_841F564
-	.4byte __unknown_8420254
-	.4byte __unknown_8420F44
-	.4byte __unknown_8421DE4
-	.4byte __unknown_8422654
-	.4byte __unknown_8423074
-	.4byte __unknown_84238E4
-	.4byte __unknown_84240C4
-	.4byte __unknown_8424784
-	.4byte __unknown_8424BA4
-	.4byte __unknown_8426854
-	.4byte __unknown_8428CB4
-	.4byte __unknown_84292E4
+	.4byte Unknown_84171C4
+	.4byte Unknown_84197A4
+	.4byte Unknown_8419B34
+	.4byte Unknown_841AFA4
+	.4byte Unknown_841BB74
+	.4byte Unknown_841C354
+	.4byte Unknown_841D164
+	.4byte Unknown_841DD34
+	.4byte Unknown_841E874
+	.4byte Unknown_841F564
+	.4byte Unknown_8420254
+	.4byte Unknown_8420F44
+	.4byte Unknown_8421DE4
+	.4byte Unknown_8422654
+	.4byte Unknown_8423074
+	.4byte Unknown_84238E4
+	.4byte Unknown_84240C4
+	.4byte Unknown_8424784
+	.4byte Unknown_8424BA4
+	.4byte Unknown_8426854
+	.4byte Unknown_8428CB4
+	.4byte Unknown_84292E4
 
-__unknown_string_1stRound:
+UnknownString_1stRound:
 	.string "1st round$"
 
-__unknown_string_2ndRound:
+UnknownString_2ndRound:
 	.string "2nd round$"
 
-__unknown_string_3rdRound:
+UnknownString_3rdRound:
 	.string "3rd round$"
 
-__unknown_string_4thRound:
+UnknownString_4thRound:
 	.string "4th round$"
 
-__unknown_string_5thRound:
+UnknownString_5thRound:
 	.string "5th round$"
 
-__unknown_string_6thRound:
+UnknownString_6thRound:
 	.string "6th round$"
 
-__unknown_string_7thRound:
+UnknownString_7thRound:
 	.string "7th round$"
 
-__unknown_string_8thRound:
+UnknownString_8thRound:
 	.string "8th round$"
 
 	.align 2
 gUnknown_0842C29C:: @ 842C29C
-	.4byte __unknown_string_1stRound, sub_814A4B8
-	.4byte __unknown_string_2ndRound, sub_814A4B8
-	.4byte __unknown_string_3rdRound, sub_814A4B8
-	.4byte __unknown_string_4thRound, sub_814A4B8
-	.4byte __unknown_string_5thRound, sub_814A4B8
-	.4byte __unknown_string_6thRound, sub_814A4B8
-	.4byte __unknown_string_7thRound, sub_814A4B8
-	.4byte __unknown_string_8thRound, sub_814A4B8
+	.4byte UnknownString_1stRound, sub_814A4B8
+	.4byte UnknownString_2ndRound, sub_814A4B8
+	.4byte UnknownString_3rdRound, sub_814A4B8
+	.4byte UnknownString_4thRound, sub_814A4B8
+	.4byte UnknownString_5thRound, sub_814A4B8
+	.4byte UnknownString_6thRound, sub_814A4B8
+	.4byte UnknownString_7thRound, sub_814A4B8
+	.4byte UnknownString_8thRound, sub_814A4B8
 OtherText_TopSpeed:
 	.string "TOP SPEED$"
 
@@ -28222,8 +28536,24 @@ gUnknown_0842F140:: @ 842F140
 	obj_tiles OutlineCursorTiles_14, 0x1C0, 0xFFF0
 	obj_tiles OutlineCursorTiles_15, 0x1C0, 0xFFF0
 
+	.align 2
 gUnknown_0842F1C0:: @ 842F1C0
-	.incbin "baserom.gba", 0x0042f1c0, 0x80
+	obj_tiles OutlineCursorTiles_00, 0x1C0, 0xFFF1
+	obj_tiles OutlineCursorTiles_01, 0x1C0, 0xFFF1
+	obj_tiles OutlineCursorTiles_02, 0x1C0, 0xFFF1
+	obj_tiles OutlineCursorTiles_03, 0x1C0, 0xFFF1
+	obj_tiles OutlineCursorTiles_04, 0x1C0, 0xFFF1
+	obj_tiles OutlineCursorTiles_05, 0x1C0, 0xFFF1
+	obj_tiles OutlineCursorTiles_06, 0x1C0, 0xFFF1
+	obj_tiles OutlineCursorTiles_07, 0x1C0, 0xFFF1
+	obj_tiles OutlineCursorTiles_08, 0x1C0, 0xFFF1
+	obj_tiles OutlineCursorTiles_09, 0x1C0, 0xFFF1
+	obj_tiles OutlineCursorTiles_10, 0x1C0, 0xFFF1
+	obj_tiles OutlineCursorTiles_11, 0x1C0, 0xFFF1
+	obj_tiles OutlineCursorTiles_12, 0x1C0, 0xFFF1
+	obj_tiles OutlineCursorTiles_13, 0x1C0, 0xFFF1
+	obj_tiles OutlineCursorTiles_14, 0x1C0, 0xFFF1
+	obj_tiles OutlineCursorTiles_15, 0x1C0, 0xFFF1
 
 	.align 2
 gUnknown_0842F240:: @ 842F240
@@ -28254,10 +28584,63 @@ gSpriteTemplate_842F2B0:: @ 842F2B0
 	spr_template 65521, 0xFFFF, gOamData_842F12C, gSpriteAnimTable_842F13C, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 	.align 2
-	.incbin "baserom.gba", 0x0042f2c8, 0x290
-
+Unknown_842F2C8:
+	.incbin "baserom.gba", 0x0042f2c8, 0x10
+Unknown_842F2D8:
+	.incbin "baserom.gba", 0x0042f2d8, 0x18
+Unknown_842F2F0:
+	.incbin "baserom.gba", 0x0042f2f0, 0x20
+Unknown_842F310:
+	.incbin "baserom.gba", 0x0042f310, 0x18
+Unknown_842F328:
+	.incbin "baserom.gba", 0x0042f328, 0x18
+Unknown_842F340:
+	.incbin "baserom.gba", 0x0042f340, 0x20
+Unknown_842F360:
+	.incbin "baserom.gba", 0x0042f360, 0x20
+Unknown_842F380:
+	.incbin "baserom.gba", 0x0042f380, 0x20
+Unknown_842F3A0:
+	.incbin "baserom.gba", 0x0042f3a0, 0x20
+Unknown_842F3C0:
+	.incbin "baserom.gba", 0x0042f3c0, 0x28
+Unknown_842F3E8:
+	.incbin "baserom.gba", 0x0042f3e8, 0x28
+Unknown_842F410:
+	.incbin "baserom.gba", 0x0042f410, 0x28
+Unknown_842F438:
+	.incbin "baserom.gba", 0x0042f438, 0x28
+Unknown_842F460:
+	.incbin "baserom.gba", 0x0042f460, 0x30
+Unknown_842F490:
+	.incbin "baserom.gba", 0x0042f490, 0x30
+Unknown_842F4C0:
+	.incbin "baserom.gba", 0x0042f4c0, 0x30
+Unknown_842F4F0:
+	.incbin "baserom.gba", 0x0042f4f0, 0x30
+Unknown_842F520:
+	.incbin "baserom.gba", 0x0042f520, 0x38
 Unknown_842F558:
-	.incbin "baserom.gba", 0x0042f558, 0x64
+	.incbin "baserom.gba", 0x0042f558, 0x18
+	.4byte Unknown_842F2C8
+	.4byte Unknown_842F2C8
+	.4byte Unknown_842F2D8
+	.4byte Unknown_842F2F0
+	.4byte Unknown_842F310
+	.4byte Unknown_842F328
+	.4byte Unknown_842F340
+	.4byte Unknown_842F360
+	.4byte Unknown_842F380
+	.4byte Unknown_842F3A0
+	.4byte Unknown_842F3C0
+	.4byte Unknown_842F3E8
+	.4byte Unknown_842F410
+	.4byte Unknown_842F438
+	.4byte Unknown_842F460
+	.4byte Unknown_842F490
+	.4byte Unknown_842F4C0
+	.4byte Unknown_842F4F0
+	.4byte Unknown_842F520
 
 gUnknown_0842F5BC:: @ 842F5BC
 	.4byte Unknown_842F558

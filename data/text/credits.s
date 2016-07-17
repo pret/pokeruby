@@ -279,140 +279,678 @@ Text_Version:
 
 @ pointer table
 
+CreditsTerminator::
 	credits_entry 0, Text_CreditsTerminator
+
+CreditsVersion::
 	credits_entry 8, Text_Version
+
+CreditsCredits::
 	credits_entry 11, Category_Credits
+
+CreditsExecutiveDirector::
 	credits_entry 8,  Category_ExecutiveDirector
+
+CreditsDirector::
 	credits_entry 12,  Category_Director
+
+CreditsArtDirector::
 	credits_entry 10,  Category_ArtDirector
+
+CreditsBattleDirector::
 	credits_entry 10,  Category_BattleDirector
+
+CreditsMainProgrammer::
 	credits_entry 10,  Category_MainProgrammer
+
+CreditsBattleSystemProgrammer::
 	credits_entry 8,  Category_BattleSystemProgrammer
+
+CreditsFieldSystemProgrammer::
 	credits_entry 7,  Category_FieldSystemProgrammer
+
+CreditsProgrammers::
 	credits_entry 12,  Category_Programmers
+
+CreditsMainGraphicDesigner::
 	credits_entry 7,  Category_MainGraphicDesigner
+
+CreditsPOKeMONGraphicDesigners::
 	credits_entry 6,  Category_POKeMONGraphicDesigners
+
+CreditsPOKeMONDesigners::
 	credits_entry 10,  Category_POKeMONDesigners
+
+CreditsMusicComposition::
 	credits_entry 13,  Category_MusicComposition
+
+CreditsSoundEffectsPOKeMONVoices::
 	credits_entry 4,  Category_SoundEffectsPOKeMONVoices
+
+CreditsGameDesigners::
 	credits_entry 11,  Category_GameDesigners
+
+CreditsPlotScenario::
 	credits_entry 11,  Category_PlotScenario
+
+CreditsGameScenario::
 	credits_entry 13,  Category_GameScenario
+
+CreditsScriptDesigners::
 	credits_entry 10,  Category_ScriptDesigners
+
+CreditsMapDesigners::
 	credits_entry 11,  Category_MapDesigners
+
+CreditsMapDataDesigners::
 	credits_entry 9,  Category_MapDataDesigners
+
+CreditsParametricDesigners::
 	credits_entry 9,  Category_ParametricDesigners
+
+CreditsPOKeDEXText::
 	credits_entry 11,  Category_POKeDEXText
+
+CreditsEnvironmentToolProgrammers::
 	credits_entry 6,  Category_EnvironmentToolProgrammers
+
+CreditsProductTesting::
 	credits_entry 11,  Category_ProductTesting
+
+CreditsSpecialThanks::
 	credits_entry 10,  Category_SpecialThanks
+
+CreditsCoordinators::
 	credits_entry 11,  Category_Coordinators
+
+CreditsProducers::
 	credits_entry 11,  Category_Producers
+
+CreditsExecutiveProducers::
 	credits_entry 7,  Category_ExecutiveProducers
+
+CreditsInformationSupervisors::
 	credits_entry 10,  Category_InformationSupervisors
+
+CreditsTaskManagers::
 	credits_entry 8,  Category_TaskManagers
+
+CreditsBrailleCodeCheck::
 	credits_entry 10,  Category_BrailleCodeCheck
+
+CreditsSatoshiTajiri::
 	credits_entry 11, Text_SatoshiTajiri
+
+CreditsMasuda::
 	credits_entry 11, Text_Masuda
+
+CreditsSugimori::
 	credits_entry 11,  Text_Sugimori
+
+CreditsMorimoto::
 	credits_entry 11,  Text_Morimoto
+
+CreditsTetsuyaWatanabe::
 	credits_entry 11,  Text_TetsuyaWatanabe
+
+CreditsSogabe::
 	credits_entry 11,  Text_Sogabe
+
+CreditsTamada::
 	credits_entry 11,  Text_Tamada
+
+CreditsMori::
 	credits_entry 11,  Text_Mori
+
+CreditsKagaya::
 	credits_entry 11,  Text_Kagaya
+
+CreditsMatsuda::
 	credits_entry 11,  Text_Matsuda
+
+CreditsHiroyukiNakamura::
 	credits_entry 11,  Text_HiroyukiNakamura
+
+CreditsTaya::
 	credits_entry 11,  Text_Taya
+
+CreditsNohara::
 	credits_entry 11,  Text_Nohara
+
+CreditsTomomichiOhta::
 	credits_entry 11,  Text_TomomichiOhta
+
+CreditsIwasawa::
 	credits_entry 11,  Text_Iwasawa
+
+CreditsTakenoriOhta::
 	credits_entry 11,  Text_TakenoriOhta
+
+CreditsYoshida::
 	credits_entry 11,  Text_Yoshida
+
+CreditsFujiwara::
 	credits_entry 11,  Text_Fujiwara
+
+CreditsSatoshiOhta::
 	credits_entry 11,  Text_SatoshiOhta
+
+CreditsIwashita::
 	credits_entry 11,  Text_Iwashita
+
+CreditsTomita::
 	credits_entry 11,  Text_Tomita
+
+CreditsUnno::
 	credits_entry 11,  Text_Unno
+
+CreditsEo::
 	credits_entry 11,  Text_Eo
+
+CreditsOkutani::
 	credits_entry 11,  Text_Okutani
+
+CreditsNishida::
 	credits_entry 11,  Text_Nishida
+
+CreditsSaito::
 	credits_entry 11,  Text_Saito
+
+CreditsYoshikawa::
 	credits_entry 11,  Text_Yoshikawa
+
+CreditsIchinose::
 	credits_entry 11,  Text_Ichinose
+
+CreditsAoki::
 	credits_entry 11,  Text_Aoki
+
+CreditsNishino::
 	credits_entry 11,  Text_Nishino
+
+CreditsMatsushima::
 	credits_entry 11,  Text_Matsushima
+
+CreditsTetsujiOhta::
 	credits_entry 11,  Text_TetsujiOhta
+
+CreditsSato::
 	credits_entry 11,  Text_Sato
+
+CreditsKawachimaru::
 	credits_entry 11,  Text_Kawachimaru
+
+CreditsShimoyamada::
 	credits_entry 11,  Text_Shimoyamada
+
+CreditsOhmori::
 	credits_entry 11,  Text_Ohmori
+
+CreditsTakahashi::
 	credits_entry 11,  Text_Takahashi
+
+CreditsToshinobuMatsumiya::
 	credits_entry 11,  Text_ToshinobuMatsumiya
+
+CreditsTomisawa::
 	credits_entry 11,  Text_Tomisawa
+
+CreditsEnomoto::
 	credits_entry 11,  Text_Enomoto
+
+CreditsTerada::
 	credits_entry 11,  Text_Terada
+
+CreditsSakurai::
 	credits_entry 11,  Text_Sakurai
+
+CreditsSagawa::
 	credits_entry 11,  Text_Sagawa
+
+CreditsTominaga::
 	credits_entry 11,  Text_Tominaga
+
+CreditsYoshiroTajiri::
 	credits_entry 11,  Text_YoshioTajiri
+
+CreditsSasaki::
 	credits_entry 11,  Text_Sasaki
+
+CreditsHamano::
 	credits_entry 11,  Text_Hamano
+
+CreditsChieMatsumiya::
 	credits_entry 11,  Text_ChieMatsumiya
+
+CreditsShinozaki::
 	credits_entry 11,  Text_Shinozaki
+
+CreditsFujii::
 	credits_entry 11,  Text_Fujii
+
+CreditsSuperMarioClub::
 	credits_entry 11,  Text_SuperMarioClub
+
+CreditsTada::
 	credits_entry 11,  Text_Tada
+
+CreditsOhnishi::
 	credits_entry 11,  Text_Ohnishi
+
+CreditsOkamura::
 	credits_entry 11,  Text_Okamura
+
+CreditsHiroNakamura::
 	credits_entry 11,  Text_HiroNakamura
+
+CreditsUesugi::
 	credits_entry 11,  Text_Uesugi
+
+CreditsMurakawa::
 	credits_entry 11,  Text_Murakawa
+
+CreditsKinashi::
 	credits_entry 11,  Text_Kinashi
+
+CreditsTakizawa::
 	credits_entry 11,  Text_Takizawa
+
+CreditsTakada::
 	credits_entry 11,  Text_Takada
+
+CreditsKondo::
 	credits_entry 11,  Text_Kondo
+
+CreditsMashima::
 	credits_entry 11,  Text_Mashima
+
+CreditsNomoto::
 	credits_entry 11,  Text_Nomoto
+
+CreditsIzushi::
 	credits_entry 11,  Text_Izushi
+
+CreditsYamagami::
 	credits_entry 11,  Text_Yamagami
+
+CreditsKyokoWatanabe::
 	credits_entry 11,  Text_KyokoWatanabe
+
+CreditsNakano::
 	credits_entry 11,  Text_Nakano
+
+CreditsJinnai::
 	credits_entry 11,  Text_Jinnai
+
+CreditsTsuru::
 	credits_entry 11,  Text_Tsuru
+
+CreditsIshihara::
 	credits_entry 11,  Text_Ishihara
+
+CreditsIwata::
 	credits_entry 11,  Text_Iwata
+
+CreditsSuyama::
 	credits_entry 11,  Text_Suyama
+
+CreditsMitsuhara::
 	credits_entry 11,  Text_Mitsuhara
+
+CreditsJapanBrailleLibrary::
 	credits_entry 9,  Text_JapanBrailleLibrary
+
+CreditsKomura::
 	credits_entry 11,  Text_Komura
+
+CreditsOhashi::
 	credits_entry 11,  Text_Ohashi
+
+CreditsEnglishVersionCoordinators::
 	credits_entry 0,  Category_EnglishVersionCoordinators
+
+CreditsTranslator::
 	credits_entry 0,  Category_Translator
+
+CreditsProductSupport::
 	credits_entry 0,  Category_ProductSupport
+
+CreditsArtwork::
 	credits_entry 0,  Category_Artwork
+
+CreditsTextEditor::
 	credits_entry 0,  Category_TextEditor
+
+CreditsNOAProductTesting::
 	credits_entry 0,  Category_NOAProductTesting
+
+CreditsGraphicDesigners::
 	credits_entry 0,  Category_GraphicDesigners
+
+CreditsMcMahill::
 	credits_entry 0,  Text_McMahill
+
+CreditsOgasawara::
 	credits_entry 0,  Text_Ogasawara
+
+CreditsYamamoto::
 	credits_entry 0,  Text_Yamamoto
+
+CreditsFunakoshi::
 	credits_entry 0,  Text_Funakoshi
+
+CreditsFujihara::
 	credits_entry 0,  Text_Fujihara
+
+CreditsNakamichi::
 	credits_entry 0,  Text_Nakamichi
+
+CreditsHara::
 	credits_entry 0,  Text_Hara
+
+CreditsOkada::
 	credits_entry 0,  Text_Okada
+
+CreditsLillygren::
 	credits_entry 0,  Text_Lillygren
+
+CreditsHertzog::
 	credits_entry 0,  Text_Hertzog
+
+CreditsRidgeway::
 	credits_entry 0,  Text_Ridgeway
+
+CreditsNFotB::
 	credits_entry 0,  Text_NFotB
+
+CreditsMaurer::
 	credits_entry 0,  Text_Maurer
+
+CreditsFord::
 	credits_entry 0,  Text_Ford
+
+CreditsBarlow::
 	credits_entry 0,  Text_Barlow
+
+CreditsUyama::
 	credits_entry 0,  Text_Uyama
+
+CreditsHowitt::
 	credits_entry 0,  Text_Howitt
+
+CreditsTilden::
 	credits_entry 0,  Text_Tilden
+
+CreditsEBU::
 	credits_entry 0,  Text_EBU
+
+CreditsABA::
 	credits_entry 0,  Text_ABA
+
+CreditsRNZFotB::
 	credits_entry 0,  Text_RNZFotB
+
+@ pointer table to credits entries
+
+	.align 2
+gCreditsEntryPointerTable:: @ 840C5F0
+	.4byte CreditsTerminator
+	.4byte CreditsVersion
+	.4byte CreditsCredits
+	.4byte CreditsTerminator
+	.4byte CreditsTerminator
+	.4byte CreditsTerminator
+	.4byte CreditsDirector
+	.4byte CreditsMasuda
+	.4byte CreditsTerminator
+	.4byte CreditsTerminator
+	.4byte CreditsTerminator
+	.4byte CreditsArtDirector
+	.4byte CreditsSugimori
+	.4byte CreditsTerminator
+	.4byte CreditsTerminator
+	.4byte CreditsTerminator
+	.4byte CreditsBattleDirector
+	.4byte CreditsMorimoto
+	.4byte CreditsTerminator
+	.4byte CreditsTerminator
+	.4byte CreditsTerminator
+	.4byte CreditsMainProgrammer
+	.4byte CreditsTetsuyaWatanabe
+	.4byte CreditsTerminator
+	.4byte CreditsTerminator
+	.4byte CreditsBattleSystemProgrammer
+	.4byte CreditsSogabe
+	.4byte CreditsFieldSystemProgrammer
+	.4byte CreditsTamada
+	.4byte CreditsTerminator
+	.4byte CreditsProgrammers
+	.4byte CreditsMori
+	.4byte CreditsKagaya
+	.4byte CreditsMatsuda
+	.4byte CreditsTerminator
+	.4byte CreditsProgrammers
+	.4byte CreditsHiroyukiNakamura
+	.4byte CreditsTaya
+	.4byte CreditsNohara
+	.4byte CreditsTerminator
+	.4byte CreditsProgrammers
+	.4byte CreditsTomomichiOhta
+	.4byte CreditsIwasawa
+	.4byte CreditsTakenoriOhta
+	.4byte CreditsTerminator
+	.4byte CreditsTerminator
+	.4byte CreditsMainGraphicDesigner
+	.4byte CreditsYoshida
+	.4byte CreditsTerminator
+	.4byte CreditsTerminator
+	.4byte CreditsPOKeMONGraphicDesigners
+	.4byte CreditsSugimori
+	.4byte CreditsYoshida
+	.4byte CreditsTerminator
+	.4byte CreditsTerminator
+	.4byte CreditsPOKeMONGraphicDesigners
+	.4byte CreditsFujiwara
+	.4byte CreditsSatoshiOhta
+	.4byte CreditsIwashita
+	.4byte CreditsTerminator
+	.4byte CreditsPOKeMONGraphicDesigners
+	.4byte CreditsTomita
+	.4byte CreditsUnno
+	.4byte CreditsEo
+	.4byte CreditsTerminator
+	.4byte CreditsPOKeMONDesigners
+	.4byte CreditsMorimoto
+	.4byte CreditsOkutani
+	.4byte CreditsNishida
+	.4byte CreditsTerminator
+	.4byte CreditsPOKeMONDesigners
+	.4byte CreditsSaito
+	.4byte CreditsYoshikawa
+	.4byte CreditsTerminator
+	.4byte CreditsTerminator
+	.4byte CreditsMusicComposition
+	.4byte CreditsIchinose
+	.4byte CreditsAoki
+	.4byte CreditsMasuda
+	.4byte CreditsTerminator
+	.4byte CreditsTerminator
+	.4byte CreditsSoundEffectsPOKeMONVoices
+	.4byte CreditsAoki
+	.4byte CreditsTerminator
+	.4byte CreditsTerminator
+	.4byte CreditsGameDesigners
+	.4byte CreditsMasuda
+	.4byte CreditsMorimoto
+	.4byte CreditsNishino
+	.4byte CreditsTerminator
+	.4byte CreditsGameDesigners
+	.4byte CreditsMatsushima
+	.4byte CreditsTetsujiOhta
+	.4byte CreditsSato
+	.4byte CreditsKawachimaru
+	.4byte CreditsGameDesigners
+	.4byte CreditsShimoyamada
+	.4byte CreditsOhmori
+	.4byte CreditsTakahashi
+	.4byte CreditsTerminator
+	.4byte CreditsPlotScenario
+	.4byte CreditsMasuda
+	.4byte CreditsTomisawa
+	.4byte CreditsNishino
+	.4byte CreditsTerminator
+	.4byte CreditsGameScenario
+	.4byte CreditsToshinobuMatsumiya
+	.4byte CreditsTomisawa
+	.4byte CreditsTerminator
+	.4byte CreditsTerminator
+	.4byte CreditsScriptDesigners
+	.4byte CreditsNohara
+	.4byte CreditsTetsujiOhta
+	.4byte CreditsTomomichiOhta
+	.4byte CreditsTerminator
+	.4byte CreditsMapDesigners
+	.4byte CreditsOhmori
+	.4byte CreditsTetsujiOhta
+	.4byte CreditsNishino
+	.4byte CreditsTerminator
+	.4byte CreditsMapDataDesigners
+	.4byte CreditsTetsujiOhta
+	.4byte CreditsTakahashi
+	.4byte CreditsTerminator
+	.4byte CreditsTerminator
+	.4byte CreditsParametricDesigners
+	.4byte CreditsNishino
+	.4byte CreditsMorimoto
+	.4byte CreditsTetsujiOhta
+	.4byte CreditsShimoyamada
+	.4byte CreditsTerminator
+	.4byte CreditsPOKeDEXText
+	.4byte CreditsMatsushima
+	.4byte CreditsTerminator
+	.4byte CreditsTerminator
+	.4byte CreditsEnvironmentToolProgrammers
+	.4byte CreditsSogabe
+	.4byte CreditsTamada
+	.4byte CreditsHiroyukiNakamura
+	.4byte CreditsMori
+	.4byte CreditsProductTesting
+	.4byte CreditsSuperMarioClub
+	.4byte CreditsTada
+	.4byte CreditsOhnishi
+	.4byte CreditsOkamura
+	.4byte CreditsSpecialThanks
+	.4byte CreditsTominaga
+	.4byte CreditsYoshiroTajiri
+	.4byte CreditsSasaki
+	.4byte CreditsTerminator
+	.4byte CreditsSpecialThanks
+	.4byte CreditsHamano
+	.4byte CreditsChieMatsumiya
+	.4byte CreditsShinozaki
+	.4byte CreditsFujii
+	.4byte CreditsSpecialThanks
+	.4byte CreditsSuyama
+	.4byte CreditsMitsuhara
+	.4byte CreditsKomura
+	.4byte CreditsOhashi
+	.4byte CreditsSpecialThanks
+	.4byte CreditsTakizawa
+	.4byte CreditsTakada
+	.4byte CreditsKondo
+	.4byte CreditsMashima
+	.4byte CreditsInformationSupervisors
+	.4byte CreditsEnomoto
+	.4byte CreditsTerada
+	.4byte CreditsSakurai
+	.4byte CreditsSagawa
+	.4byte CreditsCoordinators
+	.4byte CreditsKyokoWatanabe
+	.4byte CreditsNakano
+	.4byte CreditsTerminator
+	.4byte CreditsTerminator
+	.4byte CreditsTaskManagers
+	.4byte CreditsYamagami
+	.4byte CreditsNomoto
+	.4byte CreditsTerminator
+	.4byte CreditsTerminator
+	.4byte CreditsProducers
+	.4byte CreditsJinnai
+	.4byte CreditsIzushi
+	.4byte CreditsTsuru
+	.4byte CreditsTerminator
+	.4byte CreditsTerminator
+	.4byte CreditsExecutiveDirector
+	.4byte CreditsSatoshiTajiri
+	.4byte CreditsTerminator
+	.4byte CreditsTerminator
+	.4byte CreditsTerminator
+	.4byte CreditsExecutiveProducers
+	.4byte CreditsIwata
+	.4byte CreditsTerminator
+	.4byte CreditsTerminator
+	.4byte CreditsTerminator
+	.4byte CreditsExecutiveProducers
+	.4byte CreditsIshihara
+	.4byte CreditsTerminator
+	.4byte CreditsTerminator
+	.4byte CreditsEnglishVersionCoordinators
+	.4byte CreditsHiroNakamura
+	.4byte CreditsMcMahill
+	.4byte CreditsTerminator
+	.4byte CreditsTerminator
+	.4byte CreditsTerminator
+	.4byte CreditsTranslator
+	.4byte CreditsOgasawara
+	.4byte CreditsTerminator
+	.4byte CreditsTerminator
+	.4byte CreditsProgrammers
+	.4byte CreditsMurakawa
+	.4byte CreditsYamamoto
+	.4byte CreditsFunakoshi
+	.4byte CreditsKinashi
+	.4byte CreditsGraphicDesigners
+	.4byte CreditsYamamoto
+	.4byte CreditsKinashi
+	.4byte CreditsTerminator
+	.4byte CreditsTerminator
+	.4byte CreditsProductSupport
+	.4byte CreditsNakamichi
+	.4byte CreditsHara
+	.4byte CreditsTerminator
+	.4byte CreditsTerminator
+	.4byte CreditsTerminator
+	.4byte CreditsArtwork
+	.4byte CreditsOkada
+	.4byte CreditsTerminator
+	.4byte CreditsTerminator
+	.4byte CreditsTerminator
+	.4byte CreditsTextEditor
+	.4byte CreditsLillygren
+	.4byte CreditsTerminator
+	.4byte CreditsTerminator
+	.4byte CreditsNOAProductTesting
+	.4byte CreditsHertzog
+	.4byte CreditsRidgeway
+	.4byte CreditsTerminator
+	.4byte CreditsTerminator
+	.4byte CreditsBrailleCodeCheck
+	.4byte CreditsNFotB
+	.4byte CreditsMaurer
+	.4byte CreditsJapanBrailleLibrary
+	.4byte CreditsEBU
+	.4byte CreditsBrailleCodeCheck
+	.4byte CreditsABA
+	.4byte CreditsRNZFotB
+	.4byte CreditsTerminator
+	.4byte CreditsTerminator
+	.4byte CreditsSpecialThanks
+	.4byte CreditsFord
+	.4byte CreditsBarlow
+	.4byte CreditsUesugi
+	.4byte CreditsUyama
+	.4byte CreditsSpecialThanks
+	.4byte CreditsHowitt
+	.4byte CreditsTilden
+	.4byte CreditsFujihara
+	.4byte CreditsTerminator

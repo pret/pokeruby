@@ -150,7 +150,7 @@ Route120_Text_1AC8D7:: @ 81AC8D7
 	.string "TY: Yep, I got it all.\n"
 	.string "That whole battle’s on camera.$"
 
-UnknownString_81AC90D: @ 81AC90D
+UnknownString_81AC90D:: @ 81AC90D
 	.string "IN SEARCH OF TRAINERS...\p"
 	.string "GABBY: Hi! Today I’m visiting an area\n"
 	.string "near {STR_VAR_1}.\p"
@@ -161,14 +161,14 @@ UnknownString_81AC90D: @ 81AC90D
 	.string "There’s something about this TRAINER\n"
 	.string "that piqued our interest.$"
 
-UnknownString_81ACA02: @ 81ACA02
+UnknownString_81ACA02:: @ 81ACA02
 	.string "We’ve battled {PLAYER} before, but we\n"
 	.string "can attest that the TRAINER has most\l"
 	.string "definitely improved from before.\p"
 	.string "I knew we were onto someone special\n"
 	.string "when we spotted this TRAINER!$"
 
-UnknownString_81ACAAA: @ 81ACAAA
+UnknownString_81ACAAA:: @ 81ACAAA
 	.string "The best way to determine how strong\n"
 	.string "a TRAINER is...\p"
 	.string "Well, the fastest way is to battle.\n"
@@ -182,7 +182,7 @@ UnknownString_81ACAAA: @ 81ACAAA
 	.string "We asked the TRAINER for a succinct\n"
 	.string "summation of the battle we shared.$"
 
-UnknownString_81ACC07: @ 81ACC07
+UnknownString_81ACC07:: @ 81ACC07
 	.string "The combination of {STR_VAR_1} and\n"
 	.string "{STR_VAR_3} was divine!\p"
 	.string "The sight of them - {STR_VAR_1} and\n"
@@ -194,7 +194,7 @@ UnknownString_81ACC07: @ 81ACC07
 	.string "The move {STR_VAR_2} is {STR_VAR_1}\n"
 	.string "and {STR_VAR_3}’s sign of friendship!$"
 
-UnknownString_81ACD13: @ 81ACD13
+UnknownString_81ACD13:: @ 81ACD13
 	.string "...I lost confidence in myself as\n"
 	.string "a result of our encounter.\p"
 	.string "We were beaten before we could launch\n"
@@ -205,7 +205,7 @@ UnknownString_81ACD13: @ 81ACD13
 	.string "I recommend confident TRAINERS to\n"
 	.string "challenge {PLAYER}.$"
 
-UnknownString_81ACDFA: @ 81ACDFA
+UnknownString_81ACDFA:: @ 81ACDFA
 	.string "There’s only one thing to be said.\n"
 	.string "Don’t you dare throw a POKé BALL during\l"
 	.string "a TRAINER battle!\p"
@@ -215,13 +215,13 @@ UnknownString_81ACDFA: @ 81ACDFA
 	.string "If you see {PLAYER}, please caution\n"
 	.string "the TRAINER!$"
 
-UnknownString_81ACEE7: @ 81ACEE7
+UnknownString_81ACEE7:: @ 81ACEE7
 	.string "{PLAYER} is adept at reading the\n"
 	.string "opponent’s actions.\p"
 	.string "The timing of item usage was remarkably\n"
 	.string "effective!$"
 
-UnknownString_81ACF49: @ 81ACF49
+UnknownString_81ACF49:: @ 81ACF49
 	.string "Honestly speaking, I thought that\n"
 	.string "I might even be pretty good.\p"
 	.string "While we did end up losing, we did have\n"
@@ -229,7 +229,7 @@ UnknownString_81ACF49: @ 81ACF49
 	.string "But if you’re struggling against me,\n"
 	.string "you have a ways to go, {PLAYER}!$"
 
-UnknownString_81AD00A: @ 81AD00A
+UnknownString_81AD00A:: @ 81AD00A
 	.string "After our battle, we asked {PLAYER} for\n"
 	.string "a succinct summary.\p"
 	.string "The TRAINER replied, “{STR_VAR_1}.”\p"
