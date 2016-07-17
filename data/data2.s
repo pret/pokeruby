@@ -1526,6 +1526,7 @@ gSpriteAnimTable_81FAEFC:: @ 81FAEFC
 gSpriteTemplate_81FAF0C:: @ 81FAF0C
 	spr_template 55019, 55019, gOamData_81FAEB4, gSpriteAnimTable_81FAEFC, NULL, gDummySpriteAffineAnimTable, sub_80463CC
 
+	.align 2
 gUnknown_081FAF24:: @ 81FAF24
 	obj_tiles 0x08E6A728, 128, 0xD759
 
@@ -1856,6 +1857,7 @@ gUnknown_0820A4B4:: @ 820A4B4
 	obj_tiles 0x08d0314c, 256, 0xd706
 	obj_tiles 0x08d0314c, 288, 0xd707
 
+	.align 2
 gUnknown_0820A4D4:: @ 820A4D4
 	obj_pal 0x08D1212C, 0xD6FF
 	obj_pal 0x08D1214C, 0xD704
@@ -13413,6 +13415,7 @@ gSpriteTemplate_83D26A0:: @ 83D26A0
 	spr_template 0xFFFF, 4110, gOamData_83D266C, gSpriteAnimTable_83D2684, gSpriteImageTable_83D2688, gDummySpriteAffineAnimTable, door_restore_tilemap
 
 @ This uses one of the secret base palettes, so there is no "09.pal" file.
+
 	.align 2
 gFieldEffectObjectPaletteInfo9:: @ 83D26B8
 	obj_pal gTilesetPalettes_SecretBase + 5 * 0x20, 0x100E
@@ -22553,7 +22556,6 @@ gFieldEffectObjectPalette10:: @ 83FD9F8
 	.align 2
 gFieldEffectObjectPaletteInfo10:: @ 83FDA18
 	obj_pal gFieldEffectObjectPalette10, 0x1009
-
 Unknown_83FDA20:
 	.incbin "baserom.gba", 0x3FDA20, 0x20
 Unknown_83FDA40:
@@ -24228,6 +24230,7 @@ gUnknown_0840B258:: @ 840B258
 	obj_tiles 0x08d1a7f4, 256, 0xd6f6
 	obj_tiles 0x08d1a7f4, 256, 0xd6f7
 
+	.align 2
 gUnknown_0840B2B8:: @ 840B2B8
 	obj_pal 0x08d1a8c8, 55020
 	obj_pal 0x08d1a8c8, 55021
