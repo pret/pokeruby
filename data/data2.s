@@ -9227,27 +9227,27 @@ gUnknown_08393FD8:: @ 8393FD8
 
 	.align 2
 DroughtPaletteData_0: @ 8393FE8
-	.incbin "graphics/misc/drought0.bin.lz"
+	.incbin "graphics/weather/drought0.bin.lz"
 
 	.align 2
 DroughtPaletteData_1: @ 839480C
-	.incbin "graphics/misc/drought1.bin.lz"
+	.incbin "graphics/weather/drought1.bin.lz"
 
 	.align 2
 DroughtPaletteData_2: @ 8395004
-	.incbin "graphics/misc/drought2.bin.lz"
+	.incbin "graphics/weather/drought2.bin.lz"
 
 	.align 2
 DroughtPaletteData_3: @ 83957A0
-	.incbin "graphics/misc/drought3.bin.lz"
+	.incbin "graphics/weather/drought3.bin.lz"
 
 	.align 2
 DroughtPaletteData_4: @ 8395FBC
-	.incbin "graphics/misc/drought4.bin.lz"
+	.incbin "graphics/weather/drought4.bin.lz"
 
 	.align 2
 DroughtPaletteData_5: @ 8396784
-	.incbin "graphics/misc/drought5.bin.lz"
+	.incbin "graphics/weather/drought5.bin.lz"
 
 	.align 2
 gUnknown_08396FA8:: @ 8396FA8
@@ -9337,34 +9337,63 @@ gUnknown_083970B8:: @ 83970B8
 gUnknown_083970C8:: @ 83970C8
 	.incbin "baserom.gba", 0x003970c8, 0x20
 
+	.align 2
 gUnknown_083970E8:: @ 83970E8
-	.incbin "baserom.gba", 0x003970e8, 0x20
+	.incbin "graphics/weather/0.gbapal"
 
+	.align 2
 gUnknown_08397108:: @ 8397108
-	.incbin "baserom.gba", 0x00397108, 0x20
+	.incbin "graphics/weather/1.gbapal"
 
+	.align 2
 gUnknown_08397128:: @ 8397128
-	.incbin "baserom.gba", 0x00397128, 0x820
+	.incbin "graphics/weather/2.gbapal"
 
-gUnknown_08397948:: @ 8397948
-	.incbin "baserom.gba", 0x00397948, 0x1000
+	.align 2
+WeatherFog0Tiles: @ 8397148
+	.incbin "graphics/weather/fog0.4bpp"
+
+	.align 2
+gWeatherFog1Tiles:: @ 8397948
+	.incbin "graphics/weather/fog1.4bpp"
+
+	.align 2
+WeatherCloudTiles: @ 8398148
+	.incbin "graphics/weather/cloud.4bpp"
 
 	.align 2
 gSpriteImage_8398948:: @ 8398948
-	.incbin "graphics/unknown_sprites/839AADC/0.4bpp"
+	.incbin "graphics/weather/snow0.4bpp"
 
 	.align 2
 gSpriteImage_8398968:: @ 8398968
-	.incbin "graphics/unknown_sprites/839AADC/1.4bpp"
+	.incbin "graphics/weather/snow1.4bpp"
 
 	.align 2
-	.incbin "baserom.gba", 0x398988, 0x2040
+WeatherBubbleTiles: @ 8398988
+	.incbin "graphics/weather/bubble.4bpp"
 
+	.align 2
+WeatherAshTiles: @ 83989C8
+	.incbin "graphics/weather/ash.4bpp"
+
+	.align 2
+WeatherRainTiles: @ 83999C8
+	.incbin "graphics/weather/rain.4bpp"
+
+	.align 2
+WeatherSandstormTiles: @ 8399FC8
+	.incbin "graphics/weather/sandstorm.4bpp"
+
+	.align 1
 gUnknown_0839A9C8:: @ 839A9C8
-	.incbin "baserom.gba", 0x0039a9c8, 0xc
+	.2byte  0, 66
+	.2byte  5, 73
+	.2byte 10, 78
 
+	.align 2
 gUnknown_0839A9D4:: @ 839A9D4
-	.incbin "baserom.gba", 0x0039a9d4, 0x8
+	obj_tiles WeatherCloudTiles, 0x800, 0x1200
 
 	.align 2
 gOamData_839A9DC:: @ 839A9DC
@@ -9385,8 +9414,32 @@ gSpriteAnimTable_839A9EC:: @ 839A9EC
 gSpriteTemplate_839A9F0:: @ 839A9F0
 	spr_template 4608, 4609, gOamData_839A9DC, gSpriteAnimTable_839A9EC, NULL, gDummySpriteAffineAnimTable, sub_807E0F4
 
+	.align 1
 gUnknown_0839AA08:: @ 839AA08
-	.incbin "baserom.gba", 0x0039aa08, 0x60
+	.2byte   0,   0
+	.2byte   0, 160
+	.2byte   0,  64
+	.2byte 144, 224
+	.2byte 144, 128
+	.2byte  32,  32
+	.2byte  32, 192
+	.2byte  32,  96
+	.2byte  72, 128
+	.2byte  72,  32
+	.2byte  72, 192
+	.2byte 216,  96
+	.2byte 216,   0
+	.2byte 104, 160
+	.2byte 104,  64
+	.2byte 104, 224
+	.2byte 144,   0
+	.2byte 144, 160
+	.2byte 144,  64
+	.2byte  32, 224
+	.2byte  32, 128
+	.2byte  72,  32
+	.2byte  72, 192
+	.2byte  48,  96
 
 	.align 2
 gOamData_839AA68:: @ 839AA68
@@ -9429,8 +9482,9 @@ gUnknown_0839AABC:: @ 839AABC
 gUnknown_0839AAC4:: @ 839AAC4
 	.incbin "baserom.gba", 0x0039aac4, 0x8
 
+	.align 2
 gUnknown_0839AACC:: @ 839AACC
-	.incbin "baserom.gba", 0x0039aacc, 0x8
+	obj_tiles WeatherRainTiles, 0x600, 0x1206
 
 	.align 2
 gOamData_839AAD4:: @ 839AAD4
@@ -9525,10 +9579,11 @@ gSpriteTemplate_839AB90:: @ 839AB90
 
 	.align 2
 gUnknown_0839ABA8:: @ 839ABA8
-	obj_tiles 0x08397948, 2048, 0x1201
+	obj_tiles gWeatherFog1Tiles, 0x800, 0x1201
 
+	.align 2
 gUnknown_0839ABB0:: @ 839ABB0
-	.incbin "baserom.gba", 0x0039abb0, 0x8
+	obj_tiles WeatherAshTiles, 0x1000, 0x1202
 
 	.align 2
 gOamData_839ABB8:: @ 839ABB8
@@ -9550,8 +9605,9 @@ gSpriteAnimTable_839ABCC:: @ 839ABCC
 gSpriteTemplate_839ABD0:: @ 839ABD0
 	spr_template 4610, 4608, gOamData_839ABB8, gSpriteAnimTable_839ABCC, NULL, gDummySpriteAffineAnimTable, sub_807FAA8
 
+	.align 2
 gUnknown_0839ABE8:: @ 839ABE8
-	.incbin "baserom.gba", 0x0039abe8, 0x8
+	obj_tiles WeatherFog0Tiles, 0x800, 0x1203
 
 	.align 2
 gOamData_839ABF0:: @ 839ABF0
@@ -9599,7 +9655,7 @@ gSpriteTemplate_839AC3C:: @ 839AC3C
 
 	.align 2
 gUnknown_0839AC54:: @ 839AC54
-	obj_tiles 0x08399fc8, 2560, 0x1204
+	obj_tiles WeatherSandstormTiles, 0xA00, 0x1204
 
 gUnknown_0839AC5C:: @ 839AC5C
 	.incbin "baserom.gba", 0x0039ac5c, 0xc
@@ -9609,10 +9665,23 @@ gUnknown_0839AC68:: @ 839AC68
 
 	.align 2
 gUnknown_0839AC70:: @ 839AC70
-	obj_tiles 0x08398988, 64, 0x1205
+	obj_tiles WeatherBubbleTiles, 0x40, 0x1205
 
+	.align 1
 gUnknown_0839AC78:: @ 839AC78
-	.incbin "baserom.gba", 0x0039ac78, 0x34
+	.2byte 120, 160
+	.2byte 376, 160
+	.2byte  40, 140
+	.2byte 296, 140
+	.2byte 180, 130
+	.2byte 436, 130
+	.2byte  60, 160
+	.2byte 436, 160
+	.2byte 220, 180
+	.2byte 476, 180
+	.2byte  10,  90
+	.2byte 266,  90
+	.2byte 256, 160
 
 	.align 2
 gSpriteAnim_839ACAC:: @ 839ACAC
@@ -9628,13 +9697,11 @@ gSpriteAnimTable_839ACB8:: @ 839ACB8
 gSpriteTemplate_839ACBC:: @ 839ACBC
 	spr_template 4613, 4608, gOamData_837DF24, gSpriteAnimTable_839ACB8, NULL, gDummySpriteAffineAnimTable, unc_0807DAB4
 
-	.align 2
 gUnknown_0839ACD4:: @ 839ACD4
-	.incbin "baserom.gba", 0x0039acd4, 0x4
+	.byte 2, 3, 5, 3
 
-	.align 2
 gUnknown_0839ACD8:: @ 839ACD8
-	.4byte 0x02030202
+	.byte 2, 2, 3, 2
 
 gUnknown_0839ACDC:: @ 839ACDC
 	.incbin "baserom.gba", 0x0039acdc, 0xc
