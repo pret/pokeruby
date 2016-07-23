@@ -70034,7 +70034,7 @@ sub_8073070: @ 8073070
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08073090: .4byte gUnknown_08376F24
+_08073090: .4byte gTilesetAnimTable_General_0
 _08073094: .4byte 0x06003f80
 	thumb_func_end sub_8073070
 
@@ -70056,7 +70056,7 @@ sub_8073098: @ 8073098
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080730B8: .4byte gUnknown_08378D34
+_080730B8: .4byte gTilesetAnimTable_General_1
 _080730BC: .4byte 0x06003600
 	thumb_func_end sub_8073098
 
@@ -70078,7 +70078,7 @@ sub_80730C0: @ 80730C0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080730E0: .4byte gUnknown_08379614
+_080730E0: .4byte gTilesetAnimTable_General_2
 _080730E4: .4byte 0x06003a00
 	thumb_func_end sub_80730C0
 
@@ -70099,7 +70099,7 @@ sub_80730E8: @ 80730E8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08073108: .4byte gUnknown_08379934
+_08073108: .4byte gTilesetAnimTable_General_3
 _0807310C: .4byte 0x06003e00
 	thumb_func_end sub_80730E8
 
@@ -70783,7 +70783,7 @@ sub_807361C: @ 807361C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807363C: .4byte gUnknown_08379E44
+_0807363C: .4byte gTilesetAnimTable_General_4
 _08073640: .4byte 0x06003c00
 	thumb_func_end sub_807361C
 
@@ -70817,7 +70817,7 @@ sub_8073644: @ 8073644
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08073680: .4byte gUnknown_0837A054
+_08073680: .4byte gTilesetAnimTable_Lavaridge
 _08073684: .4byte 0x06006400
 _08073688: .4byte 0x06006480
 	thumb_func_end sub_8073644
@@ -70840,7 +70840,7 @@ sub_807368C: @ 807368C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080736AC: .4byte gUnknown_0837ABA4
+_080736AC: .4byte gTilesetAnimTable_Pacifidlog_0
 _080736B0: .4byte 0x06007a00
 	thumb_func_end sub_807368C
 
@@ -70861,7 +70861,7 @@ sub_80736B4: @ 80736B4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080736D4: .4byte gUnknown_0837ADB4
+_080736D4: .4byte gTilesetAnimTable_Underwater
 _080736D8: .4byte 0x06007e00
 	thumb_func_end sub_80736B4
 
@@ -70883,7 +70883,7 @@ sub_80736DC: @ 80736DC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080736FC: .4byte gUnknown_0837B5C4
+_080736FC: .4byte gTilesetAnimTable_Pacifidlog_1
 _08073700: .4byte 0x06007e00
 	thumb_func_end sub_80736DC
 
@@ -70924,9 +70924,9 @@ sub_8073704: @ 8073704
 	bl sub_8072E24
 	b _0807378C
 	.align 2, 0
-_08073750: .4byte gUnknown_0837BB24
+_08073750: .4byte gTilesetAnimTable_Mauville_0A
 _08073754: .4byte gUnknown_0837BAE4
-_08073758: .4byte gUnknown_0837BB54
+_08073758: .4byte gTilesetAnimTable_Mauville_1A
 _0807375C: .4byte gUnknown_0837BB04
 _08073760:
 	movs r0, 0x3
@@ -70954,9 +70954,9 @@ _0807378C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08073794: .4byte gUnknown_0837BB84
+_08073794: .4byte gTilesetAnimTable_Mauville_0B
 _08073798: .4byte gUnknown_0837BAE4
-_0807379C: .4byte gUnknown_0837BB94
+_0807379C: .4byte gTilesetAnimTable_Mauville_1B
 _080737A0: .4byte gUnknown_0837BB04
 	thumb_func_end sub_8073704
 
@@ -70989,7 +70989,7 @@ _080737D4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080737D8: .4byte gUnknown_0837BFC4
+_080737D8: .4byte gTilesetAnimTable_Rustboro_0
 _080737DC: .4byte gUnknown_0837BFA4
 	thumb_func_end sub_80737A4
 
@@ -71010,7 +71010,7 @@ sub_80737E0: @ 80737E0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08073800: .4byte gUnknown_0837C0E4
+_08073800: .4byte gTilesetAnimTable_Rustboro_1
 _08073804: .4byte 0x06007800
 	thumb_func_end sub_80737E0
 
@@ -71031,7 +71031,7 @@ sub_8073808: @ 8073808
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08073828: .4byte gUnknown_0837C50C
+_08073828: .4byte gTilesetAnimTable_Cave
 _0807382C: .4byte 0x06005400
 	thumb_func_end sub_8073808
 
@@ -71060,7 +71060,7 @@ sub_8073830: @ 8073830
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08073860: .4byte gUnknown_0837C95C
+_08073860: .4byte gTilesetAnimTable_EverGrande
 _08073864: .4byte gUnknown_0837C93C
 	thumb_func_end sub_8073830
 
@@ -71081,7 +71081,7 @@ sub_8073868: @ 8073868
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08073888: .4byte gUnknown_0837C50C
+_08073888: .4byte gTilesetAnimTable_Cave
 _0807388C: .4byte 0x06007400
 	thumb_func_end sub_8073868
 
@@ -71175,7 +71175,7 @@ sub_8073904: @ 8073904
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08073924: .4byte gUnknown_0837CA7C
+_08073924: .4byte gTilesetAnimTable_Building
 _08073928: .4byte 0x06003e00
 	thumb_func_end sub_8073904
 
@@ -71207,9 +71207,9 @@ sub_807392C: @ 807392C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08073964: .4byte gUnknown_0837D684
+_08073964: .4byte gTilesetAnimTable_SootopolisGym_0
 _08073968: .4byte 0x06007e00
-_0807396C: .4byte gUnknown_0837D690
+_0807396C: .4byte gTilesetAnimTable_SootopolisGym_1
 _08073970: .4byte 0x06007a00
 	thumb_func_end sub_807392C
 
@@ -71230,7 +71230,7 @@ sub_8073974: @ 8073974
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08073994: .4byte gUnknown_0837D83C
+_08073994: .4byte gTilesetAnimTable_EliteFour_0
 _08073998: .4byte 0x06007f00
 	thumb_func_end sub_8073974
 
@@ -71251,7 +71251,7 @@ sub_807399C: @ 807399C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080739BC: .4byte gUnknown_0837D84C
+_080739BC: .4byte gTilesetAnimTable_EliteFour_1
 _080739C0: .4byte 0x06007c00
 	thumb_func_end sub_807399C
 
@@ -71273,7 +71273,7 @@ sub_80739C4: @ 80739C4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080739E4: .4byte gUnknown_0837DC74
+_080739E4: .4byte gTilesetAnimTable_MauvilleGym
 _080739E8: .4byte 0x06005200
 	thumb_func_end sub_80739C4
 
@@ -71295,6 +71295,6 @@ sub_80739EC: @ 80739EC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08073A0C: .4byte gUnknown_0837DEDC
+_08073A0C: .4byte gTilesetAnimTable_BikeShop
 _08073A10: .4byte 0x06007e00
 	thumb_func_end sub_80739EC
