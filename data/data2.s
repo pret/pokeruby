@@ -16190,7 +16190,8 @@ gBattleAnimSpriteTemplate_83D7D74:: @ 83D7D74
 	spr_template 10244, 10244, gOamData_837E13C, gDummySpriteAnimTable, NULL, gSpriteAffineAnimTable_83D7D6C, sub_80D3014
 
 	.align 2
-	.incbin "baserom.gba", 0x3d7d8c, 0x1380
+	.incbin "graphics/unused/unknown_3D7D8C.4bpp"
+	.incbin "graphics/unused/unknown_3D810C.bin"
 
 	.align 2
 gSpriteAnim_83D910C:: @ 83D910C
