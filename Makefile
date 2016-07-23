@@ -37,7 +37,7 @@ C_SRCS := $(wildcard src/*.c)
 C_OBJS := $(C_SRCS:%.c=%.o)
 
 ASM_OBJS := asm/crt0.o asm/rom3.o asm/rom4.o asm/rom_8074BAC.o asm/rom5.o \
-	asm/libgcnmultiboot.o asm/m4a_1.o asm/m4a_3.o asm/libagbsyscall.o asm/libc.o
+	asm/libgcnmultiboot.o asm/m4a_1.o asm/m4a_3.o asm/libagbsyscall.o
 
 DATA_ASM_OBJS := data/data1.o data/data2.o data/graphics.o data/sound_data.o \
 data/event_scripts.o data/battle_anim_scripts.o
@@ -84,6 +84,9 @@ include misc.mk
 %.8bpp: %.png  ; $(GFX) $< $@
 %.gbapal: %.pal ; $(GFX) $< $@
 %.lz: % ; $(GFX) $< $@
+
+src/libc_ruby.o src/libc_sapphire.o: CC1 := tools/agbcc/bin/old_agbcc
+src/libc_ruby.o src/libc_sapphire.o: CFLAGS := -O2
 
 src/siirtc_ruby.o src/siirtc_sapphire.o: CFLAGS := -mthumb-interwork
 
