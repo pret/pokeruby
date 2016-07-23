@@ -7307,15 +7307,15 @@ gUnknown_08376D74:: @ 8376D74
 
 	.align 2
 TilesetAnimTiles_General_0_1: @ 8376D84
-	.incbin "data/tilesets/primary/general/anim/1.4bpp"
+	.incbin "data/tilesets/primary/general/anim/0/1.4bpp"
 
 	.align 2
 TilesetAnimTiles_General_0_0: @ 8376E04
-	.incbin "data/tilesets/primary/general/anim/0.4bpp"
+	.incbin "data/tilesets/primary/general/anim/0/0.4bpp"
 
 	.align 2
 TilesetAnimTiles_General_0_2: @ 8376E84
-	.incbin "data/tilesets/primary/general/anim/2.4bpp"
+	.incbin "data/tilesets/primary/general/anim/0/2.4bpp"
 
 	.space 32
 
