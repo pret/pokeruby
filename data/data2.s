@@ -21370,44 +21370,63 @@ gUnknown_083EDE8C:: @ 83EDE8C
 gUnknown_083EEFE0:: @ 83EEFE0
 	.incbin "baserom.gba", 0x003eefe0, 0x1b8
 
-gUnknown_083EF198:: @ 83EF198
-	.incbin "baserom.gba", 0x003ef198, 0x200
+	.align 2
+gPictureFramePalettes:: @ 83EF198
+	.incbin "graphics/picture_frame/bg0.gbapal"
+	.incbin "graphics/picture_frame/bg1.gbapal"
+	.incbin "graphics/picture_frame/bg2.gbapal"
+	.incbin "graphics/picture_frame/bg3.gbapal"
+	.incbin "graphics/picture_frame/bg4.gbapal"
+	.incbin "graphics/picture_frame/bg5.gbapal"
+	.space 10 * 32
 
-gUnknown_083EF398:: @ 83EF398
-	.incbin "baserom.gba", 0x003ef398, 0x1084
+	.align 2
+gPictureFrameTiles_0:: @ 83EF398
+	.incbin "graphics/picture_frame/frame0.4bpp.rl"
 
-gUnknown_083F041C:: @ 83F041C
-	.incbin "baserom.gba", 0x003f041c, 0xc30
+	.align 2
+gPictureFrameTiles_1:: @ 83F041C
+	.incbin "graphics/picture_frame/frame1.4bpp.rl"
 
-gUnknown_083F104C:: @ 83F104C
-	.incbin "baserom.gba", 0x003f104c, 0xb38
+	.align 2
+gPictureFrameTiles_2:: @ 83F104C
+	.incbin "graphics/picture_frame/frame2.4bpp.rl"
 
-gUnknown_083F1B84:: @ 83F1B84
-	.incbin "baserom.gba", 0x003f1b84, 0xfb8
+	.align 2
+gPictureFrameTiles_3:: @ 83F1B84
+	.incbin "graphics/picture_frame/frame3.4bpp.rl"
 
-gUnknown_083F2B3C:: @ 83F2B3C
-	.incbin "baserom.gba", 0x003f2b3c, 0x1130
+	.align 2
+gPictureFrameTiles_4:: @ 83F2B3C
+	.incbin "graphics/picture_frame/frame4.4bpp.rl"
 
-gUnknown_083F3C6C:: @ 83F3C6C
-	.incbin "baserom.gba", 0x003f3c6c, 0x5f4
+	.align 2
+gPictureFrameTiles_5:: @ 83F3C6C
+	.incbin "graphics/picture_frame/frame5.4bpp.rl"
 
-gUnknown_083F4260:: @ 83F4260
-	.incbin "baserom.gba", 0x003f4260, 0x50c
+	.align 2
+gPictureFrameTilemap_0:: @ 83F4260
+	.incbin "graphics/picture_frame/frame0_map.bin.rl"
 
-gUnknown_083F476C:: @ 83F476C
-	.incbin "baserom.gba", 0x003f476c, 0x50c
+	.align 2
+gPictureFrameTilemap_1:: @ 83F476C
+	.incbin "graphics/picture_frame/frame1_map.bin.rl"
 
-gUnknown_083F4C78:: @ 83F4C78
-	.incbin "baserom.gba", 0x003f4c78, 0x50c
+	.align 2
+gPictureFrameTilemap_2:: @ 83F4C78
+	.incbin "graphics/picture_frame/frame2_map.bin.rl"
 
-gUnknown_083F5184:: @ 83F5184
-	.incbin "baserom.gba", 0x003f5184, 0x50c
+	.align 2
+gPictureFrameTilemap_3:: @ 83F5184
+	.incbin "graphics/picture_frame/frame3_map.bin.rl"
 
-gUnknown_083F5690:: @ 83F5690
-	.incbin "baserom.gba", 0x003f5690, 0x50c
+	.align 2
+gPictureFrameTilemap_4:: @ 83F5690
+	.incbin "graphics/picture_frame/frame4_map.bin.rl"
 
-gUnknown_083F5B9C:: @ 83F5B9C
-	.incbin "baserom.gba", 0x003f5b9c, 0x510
+	.align 2
+gPictureFrameTilemap_5:: @ 83F5B9C
+	.incbin "graphics/picture_frame/frame5_map.bin.rl"
 
 	.align 2
 gUnknown_083F60AC:: @ 83F60AC
@@ -21450,9 +21469,13 @@ gUnknown_083F60C0:: @ 83F60C0
 	.4byte OtherText_MightyTough
 	.4byte OtherText_Exclamation
 
-gUnknown_083F6138:: @ 83F6138
-	.incbin "baserom.gba", 0x003f6138, 0x8
+	.align 2
+gOamData_83F6138:: @ 83F6138
+	.2byte 0x3000
+	.2byte 0xC000
+	.2byte 0x0000
 
+	.align 2
 gUnknown_083F6140:: @ 83F6140
 	.space 4
 

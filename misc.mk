@@ -7,6 +7,7 @@ UNKNOWNGFXDIR := graphics/unknown
 REELGFXDIR := graphics/slot_machine
 ROULGFXDIR := graphics/roulette
 BTLANMSPRGFXDIR := graphics/battle_anims/sprites
+PICFRAMEGFXDIR := graphics/picture_frame
 
 $(MENUGFXDIR)/menu.gbapal: $(MENUGFXDIR)/menu_0.gbapal $(MENUGFXDIR)/menu_1.gbapal
 
@@ -157,3 +158,6 @@ $(BTLANMSPRGFXDIR)/141.4bpp: $(BTLANMSPRGFXDIR)/141_0.4bpp $(BTLANMSPRGFXDIR)/14
 
 $(BTLANMSPRGFXDIR)/159.4bpp: $(BTLANMSPRGFXDIR)/159_0.4bpp $(BTLANMSPRGFXDIR)/159_1.4bpp
 	@cat $(BTLANMSPRGFXDIR)/159_0.4bpp $(BTLANMSPRGFXDIR)/159_1.4bpp >$@
+
+$(PICFRAMEGFXDIR)/frame5.4bpp: $(PICFRAMEGFXDIR)/frame5.png
+	$(GFX) $< $@ -num_tiles 86
