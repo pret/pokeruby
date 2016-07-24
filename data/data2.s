@@ -22832,7 +22832,15 @@ gUnknown_083FA64A:: @ 83FA64A
 	.incbin "baserom.gba", 0x003fa64a, 0x2
 
 gUnknown_083FA64C:: @ 83FA64C
-	.incbin "baserom.gba", 0x003fa64c, 0x830
+	.incbin "baserom.gba", 0x003fa64c, 0x10
+
+	.align 2
+CryMeterNeedlePalette: @ 83FA65C
+	.incbin "graphics/pokedex/cry_meter_needle.gbapal"
+
+	.align 2
+CryMeterNeedleTiles: @ 83FA67C
+	.incbin "graphics/pokedex/cry_meter_needle.4bpp"
 
 gUnknown_083FAE7C:: @ 83FAE7C
 	.incbin "baserom.gba", 0x003fae7c, 0xa0
@@ -22877,11 +22885,17 @@ gOamData_83FB76C:: @ 83FB76C
 gSpriteTemplate_83FB774:: @ 83FB774
 	spr_template 8192, 8192, gOamData_83FB76C, gSpriteAnimTable_83FB768, NULL, gDummySpriteAffineAnimTable, sub_811A534
 
-gUnknown_083FB78C:: @ 83FB78C
-	.incbin "baserom.gba", 0x003fb78c, 0x10
+	.align 2
+gCryMeterNeedleSpriteSheets:: @ 83FB78C
+	obj_tiles CryMeterNeedleTiles, 0x800, 8192
+	null_obj_tiles
 
-gUnknown_083FB79C:: @ 83FB79C
-	.incbin "baserom.gba", 0x003fb79c, 0x27c
+	.align 2
+gCryMeterNeedleSpritePalettes:: @ 83FB79C
+	obj_pal CryMeterNeedlePalette, 8192
+	null_obj_pal
+
+	.incbin "baserom.gba", 0x003fb7ac, 0x26c
 
 gUnknown_083FBA18:: @ 83FBA18
 	.incbin "baserom.gba", 0x003fba18, 0x170
