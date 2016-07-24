@@ -11610,7 +11610,20 @@ gSpriteTemplate_83BB2F0:: @ 83BB2F0
 	spr_template 6, 56015, gOamData_83BB2D0, gSpriteAnimTable_83BB2E8, NULL, gDummySpriteAffineAnimTable, sub_809A8C8
 
 	.align 2
-	.incbin "baserom.gba", 0x3bb308, 0x8c0
+HandCursorPalette: @ 83BB308
+	.incbin "graphics/pokemon_storage/hand_cursor.gbapal"
+
+	.align 2
+HandCursorAltPalette: @ 83BB328
+	.incbin "graphics/pokemon_storage/hand_cursor_alt.gbapal"
+
+	.align 2
+HandCursorTiles: @ 83BB348
+	.incbin "graphics/pokemon_storage/hand_cursor.4bpp"
+
+	.align 2
+HandCursorShadowTiles: @ 83BBB48
+	.incbin "graphics/pokemon_storage/hand_cursor_shadow.4bpp"
 
 	.align 2
 gUnknown_083BBBC8:: @ 83BBBC8
@@ -11618,14 +11631,25 @@ gUnknown_083BBBC8:: @ 83BBBC8
 	.4byte sub_809B1D8
 	.4byte sub_809B24C
 
+	.align 2
 gUnknown_083BBBD4:: @ 83BBBD4
-	.incbin "baserom.gba", 0x003bbbd4, 0x28
+	.4byte sub_809C464, 0
+	.4byte sub_809C664, 1
+	.4byte sub_809C85C, 2
+	.4byte sub_809C944, 3
+	.4byte NULL, 0
 
-gUnknown_083BBBFC:: @ 83BBBFC
-	.incbin "baserom.gba", 0x003bbbfc, 0x18
+	.align 2
+gHandCursorSpriteSheets:: @ 83BBBFC
+	obj_tiles HandCursorTiles, 0x800, 0
+	obj_tiles HandCursorShadowTiles, 0x80, 1
+	null_obj_tiles
 
-gUnknown_083BBC14:: @ 83BBC14
-	.incbin "baserom.gba", 0x003bbc14, 0x18
+	.align 2
+gHandCursorSpritePalettes:: @ 83BBC14
+	obj_pal HandCursorPalette, 56006
+	obj_pal HandCursorAltPalette, 56017
+	null_obj_pal
 
 	.align 2
 gOamData_83BBC2C:: @ 83BBC2C
