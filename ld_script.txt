@@ -66,8 +66,8 @@ SECTIONS {
         src/link.o(.text);
         src/rtc.o(.text);
         asm/rom3.o(.text);
-		src/rng.o(.text);
-		asm/rom3_8040EB4.o(.text);
+        src/rng.o(.text);
+        asm/rom_8040EB4.o(.text);
         src/play_time.o(.text);
         asm/rom4.o(.text);
         src/palette.o(.text);
