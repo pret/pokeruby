@@ -133013,7 +133013,7 @@ _0804C278:
 	bx r0
 	.align 2, 0
 _0804C280: .4byte 0x0202e8cc
-_0804C284: .4byte gUnknown_08215AC4
+_0804C284: .4byte gIngameTrades
 _0804C288: .4byte 0x020231cc
 _0804C28C: .4byte 0x020233cc
 _0804C290: .4byte 0x0202e8ce
@@ -135570,7 +135570,7 @@ sub_804D89C: @ 804D89C
 	bx r1
 	.align 2, 0
 _0804D8D0: .4byte 0x0202e8cc
-_0804D8D4: .4byte gUnknown_08215AC4
+_0804D8D4: .4byte gIngameTrades
 _0804D8D8: .4byte 0x020231cc
 _0804D8DC: .4byte gSpeciesNames
 _0804D8E0: .4byte 0x020232cc
@@ -135612,7 +135612,7 @@ sub_804D8E4: @ 804D8E4
 	bx r0
 	.align 2, 0
 _0804D92C: .4byte 0x0202e8cc
-_0804D930: .4byte gUnknown_08215AC4
+_0804D930: .4byte gIngameTrades
 _0804D934: .4byte 0x0202e8ce
 _0804D938: .4byte 0x03004360
 _0804D93C: .4byte 0x020231cc
@@ -135773,7 +135773,7 @@ sub_804D948: @ 804D948
 	bl pokemon_setattr
 	b _0804DAC0
 	.align 2, 0
-_0804DAA4: .4byte gUnknown_08215AC4
+_0804DAA4: .4byte gIngameTrades
 _0804DAA8: .4byte 0x03004360
 _0804DAAC: .4byte 0x030045c0
 _0804DAB0: .4byte 0x02029700
