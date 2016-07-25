@@ -80,3 +80,29 @@ gIngameTrades:: @ 8215AC4
 	.byte 10 @ sheen
 	.2byte SPECIES_BELLOSSOM @ player mon species
 	.space 2
+
+	.align 1
+gIngameTradeMail:: @ 8215B78
+	@ 0
+	ec_pokemon1 PIKACHU
+	ec_word THANK_YOU
+	ec_word EXCL
+	ec_word MY
+	ec_pokemon1 SKITTY
+	ec_word EATS
+	ec_word A_LOT
+	ec_word NOW
+	ec_word EXCL
+	.2byte 0
+
+	@ 1
+	ec_word I
+	ec_word WANT
+	ec_word TO
+	ec_word SEE
+	ec_word A
+	ec_move2 PETAL_DANCE
+	ec_word IT_S
+	ec_word SO
+	ec_word PRETTY
+	.2byte 0
