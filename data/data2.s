@@ -20809,7 +20809,7 @@ gUnknown_083ECC54:: @ 83ECC54
 	.4byte nullsub_69
 
 gUnknown_083ECC58:: @ 83ECC58
-	.byte 16
+	.2byte 16
 
 gUnknown_083ECC5A:: @ 83ECC5A
 	.incbin "baserom.gba", 0x003ecc5a, 0x8
