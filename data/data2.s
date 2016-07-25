@@ -11718,11 +11718,11 @@ gSpriteTemplate_83BB2F0:: @ 83BB2F0
 
 	.align 2
 HandCursorPalette: @ 83BB308
-	.incbin "graphics/pokemon_storage/hand_cursor.gbapal"
+	.incbin "graphics/pokemon_storage/hand_cursor_pal.bin"
 
 	.align 2
 HandCursorAltPalette: @ 83BB328
-	.incbin "graphics/pokemon_storage/hand_cursor_alt.gbapal"
+	.incbin "graphics/pokemon_storage/hand_cursor_alt_pal.bin"
 
 	.align 2
 HandCursorTiles: @ 83BB348
