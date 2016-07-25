@@ -5,12 +5,12 @@ typedef void (*TaskFunc)(u8 taskId);
 
 struct Task
 {
-    TaskFunc func;
-    bool8 isActive;
-    u8 prev;
-    u8 next;
-    u8 priority;
-    s16 data[16];
+    TaskFunc func;  //0x00
+    bool8 isActive; //0x04
+    u8 prev;        //0x05
+    u8 next;        //0x06
+    u8 priority;    //0x07
+    s16 data[16];   //0x08
 };
 
 extern struct Task gTasks[];

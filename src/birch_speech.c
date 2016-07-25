@@ -10,6 +10,9 @@ extern u32 gUnknown_081E764C;
 extern u32 gUnknown_081E796C;
 extern u32 gUnknown_081C6D78;
 extern u32 gUnknown_081C6DF8;
+extern u32 gUnknown_0840DFF7;
+extern u32 gUnknown_081C6E1A;
+extern u32 gUnknown_081C6FCB;
 
 extern struct Sprite gSprites[];
 
@@ -29,6 +32,9 @@ void task_new_game_prof_birch_speech_14(u8 taskId);
 void sub_800B534(u8 taskId, u8 a);
 void sub_800B6C0(u8 taskId, u8 a);
 u8 sub_8072CF4(u8 a);
+u8 sub_8075374(void);
+void sub_807206C(u32);
+void cry_related(u16, u8);
 
 void Task_Birch1(u8 a)
 {
@@ -147,17 +153,49 @@ void task_new_game_prof_birch_speech_6(u8 taskId)
 
 void task_new_game_prof_birch_speech_7(u8 taskId)
 {
-	
+	struct Task *tasks;
+    struct Task *task;
+    
+    if(sub_8075374())
+    {
+        struct Task *tasks = gTasks;
+        struct Task *task = &tasks[taskId]; //r5
+        if(task->data[7] > 0x5F)
+        {
+            sub_807206C((u32)&gUnknown_0840DFF7);
+            task->func = task_new_game_prof_birch_speech_8;
+        }
+    }
+    //_0800A4E4
+    tasks = gTasks;
+    task = &tasks[taskId]; //r2
+    if((s16)task->data[7] <= 0x00003fff)
+    {
+        task->data[7]++;
+        if(task->data[7] == 0x20)
+        {
+            cry_related(0xAF << 1, 0);
+        }
+    }
 }
 
 void task_new_game_prof_birch_speech_8(u8 taskId)
 {
-	
+	if(sub_8072CF4(0x18))
+    {
+        AddTextPrinterWithCallbackForMessage(&gUnknown_081C6E1A, 0x3, 0xE);
+        gTasks[taskId].func = task_new_game_prof_birch_speech_9;
+    }
 }
 
 void task_new_game_prof_birch_speech_9(u8 taskId)
 {
-	
+	if(sub_8072CF4(0x18))
+    {
+        DrawDefaultWindow(0x2, 0xD, 0x1B, 0x12);
+        AddTextPrinterWithCallbackForMessage(&gUnknown_081C6FCB, 0x3, 0xE);
+        gTasks[taskId].func = task_new_game_prof_birch_speech_10;
+    }
 }
 
 void task_new_game_prof_birch_speech_10(u8 taskId)
