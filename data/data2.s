@@ -2630,8 +2630,8 @@ Unknown_08215AB0:
 gUnknown_08215AC0:: @ 8215AC0
 	.4byte Unknown_08215AB0
 
-gUnknown_08215AC4:: @ 8215AC4
-	.incbin "baserom.gba", 0x00215ac4, 0xb4
+@ 8215AC4
+	.include "data/ingame_trades.s"
 
 gUnknown_08215B78:: @ 8215B78
 	.incbin "baserom.gba", 0x00215b78, 0x28
@@ -11032,8 +11032,12 @@ gUnknown_083B5AAC:: @ 83B5AAC
 gUnknown_083B5AB2:: @ 83B5AB2
 	.incbin "baserom.gba", 0x003b5ab2, 0x6
 
-gUnknown_083B5AB8:: @ 83B5AB8
-	.incbin "baserom.gba", 0x003b5ab8, 0x404
+	.align 2
+gBadgesTiles:: @ 83B5AB8
+	.incbin "graphics/trainer_card/badges.4bpp"
+
+	.align 2
+	.4byte 0x02000000 @ XXX
 
 	.align 2
 gUnknown_083B5EBC:: @ 83B5EBC
@@ -11059,7 +11063,7 @@ gUnknown_083B5EEC:: @ 83B5EEC
 	.4byte gUnknown_08E8D4C0
 
 gUnknown_083B5EF4:: @ 83B5EF4
-	.incbin "baserom.gba", 0x003b5ef4, 0x4
+	.string " : $"
 
 	.align 2
 gUnknown_083B5EF8:: @ 83B5EF8
@@ -11072,8 +11076,9 @@ gUnknown_083B5EF8:: @ 83B5EF8
 gUnknown_083B5F0C:: @ 83B5F0C
 	.incbin "baserom.gba", 0x003b5f0c, 0x20
 
-gUnknown_083B5F2C:: @ 83B5F2C
-	.incbin "baserom.gba", 0x003b5f2c, 0x20
+	.align 2
+gBadgesPalette:: @ 83B5F2C
+	.incbin "graphics/trainer_card/badges.gbapal"
 
 gUnknown_083B5F4C:: @ 83B5F4C
 	.incbin "baserom.gba", 0x003b5f4c, 0x20
@@ -11084,71 +11089,178 @@ gUnknown_083B5F6C:: @ 83B5F6C
 gUnknown_083B5F8C:: @ 83B5F8C
 	.incbin "baserom.gba", 0x003b5f8c, 0x40
 
+	.align 2
 gUnknown_083B5FCC:: @ 83B5FCC
-	.incbin "baserom.gba", 0x003b5fcc, 0x28
+	.4byte OtherText_Summary, sub_8095544
+	.4byte OtherText_Cancel2, sub_80958C4
+	.4byte OtherText_Shift, sub_8095584
+	.4byte OtherText_SendOut, sub_8095584
 
+Unknown_83B5FEC: @ 83B5FEC
+	.byte 2, 0, 1
+
+Unknown_83B5FEF: @ 83B5FEF
+	.byte 3, 0, 1
+
+Unknown_83B5FF2: @ 83B5FF2
+	.byte 0, 1
+
+	.align 2
 gUnknown_083B5FF4:: @ 83B5FF4
-	.incbin "baserom.gba", 0x003b5ff4, 0x18
+	.byte 3, 9
+	.space 2
+	.4byte Unknown_83B5FEC
 
+	.byte 3, 9
+	.space 2
+	.4byte Unknown_83B5FEF
+
+	.byte 2, 9
+	.space 2
+	.4byte Unknown_83B5FF2
+
+	.align 2
 gUnknown_083B600C:: @ 83B600C
-	.incbin "baserom.gba", 0x003b600c, 0x40
+	.4byte PCText_WithdrawPoke
+	.4byte PCText_MovePokeToParty
+	.4byte PCText_DepositPoke
+	.4byte PCText_StorePokeInBox
+	.4byte PCText_MovePoke
+	.4byte PCText_OrganizeBoxesParty
+	.4byte PCText_SeeYa
+	.4byte PCText_ReturnToPrevMenu
 
-gUnknown_083B604C:: @ 83B604C
-	.incbin "baserom.gba", 0x003b604c, 0x24
+	.align 2
+gSpriteAnim_83B602C:: @ 83B602C
+	obj_image_anim_frame 0, 5
+	obj_image_anim_end
 
-gUnknown_083B6070:: @ 83B6070
-	.incbin "baserom.gba", 0x003b6070, 0x20
+	.align 2
+gSpriteAnim_83B6034:: @ 83B6034
+	obj_image_anim_frame 4, 5
+	obj_image_anim_end
 
-gUnknown_083B6090:: @ 83B6090
-	.incbin "baserom.gba", 0x003b6090, 0x800
+	.align 2
+gSpriteAnim_83B603C:: @ 83B603C
+	obj_image_anim_frame 6, 5
+	obj_image_anim_end
 
-gUnknown_083B6890:: @ 83B6890
-	.incbin "baserom.gba", 0x003b6890, 0x180
+	.align 2
+gSpriteAnim_83B6044:: @ 83B6044
+	obj_image_anim_frame 10, 5
+	obj_image_anim_end
 
-gUnknown_083B6A10:: @ 83B6A10
-	.incbin "baserom.gba", 0x003b6a10, 0x20
+	.align 2
+gSpriteAnimTable_83B604C:: @ 83B604C
+	.4byte gSpriteAnim_83B602C
+	.4byte gSpriteAnim_83B6034
+	.4byte gSpriteAnim_83B603C
+	.4byte gSpriteAnim_83B6044
 
-gUnknown_083B6A30:: @ 83B6A30
-	.incbin "baserom.gba", 0x003b6a30, 0x20
+	.align 2
+gSpriteAffineAnim_83B605C:: @ 83B605C
+	obj_rot_scal_anim_frame 0xE0, 0xE0, 0, 0
+	obj_rot_scal_anim_end
 
-gUnknown_083B6A50:: @ 83B6A50
-	.incbin "baserom.gba", 0x003b6a50, 0x324
+	.align 2
+gSpriteAffineAnimTable_83B606C:: @ 83B606C
+	.4byte gSpriteAffineAnim_83B605C
 
+	.align 2
+gBoxSelectionPopupPalette:: @ 83B6070
+	.incbin "graphics/pokemon_storage/box_selection_popup.gbapal"
+
+	.align 2
+gBoxSelectionPopupCenterTiles:: @ 83B6090
+	.incbin "graphics/pokemon_storage/box_selection_popup_center.4bpp"
+
+	.align 2
+gBoxSelectionPopupSidesTiles:: @ 83B6890
+	.incbin "graphics/pokemon_storage/box_selection_popup_sides.4bpp"
+
+	.align 2
+gPokemonStorageScrollingBGPalette:: @ 83B6A10
+	.incbin "graphics/pokemon_storage/scrolling_bg.gbapal"
+
+	.align 2
+gPokemonStorageScrollingBGTile:: @ 83B6A30
+	.incbin "graphics/pokemon_storage/scrolling_bg.4bpp"
+
+	.align 2
+gPokemonStorageScrollingBGTilemap:: @ 83B6A50
+	.incbin "graphics/pokemon_storage/scrolling_bg_map.bin.lz"
+
+	.incbin "baserom.gba", 0x003b6b4c, 0x48
+
+	.align 2
+WaveformPalette: @ 83B6B94
+	.incbin "graphics/pokemon_storage/waveform.gbapal"
+
+	.align 2
+WaveformTiles: @ 83B6BB4
+	.incbin "graphics/pokemon_storage/waveform.4bpp"
+
+	.align 2
 gUnknown_083B6D74:: @ 83B6D74
 	.incbin "baserom.gba", 0x003b6d74, 0x20
 
+	.align 2
 gUnknown_083B6D94:: @ 83B6D94
 	.incbin "baserom.gba", 0x003b6d94, 0x20
 
+	.align 2
 gUnknown_083B6DB4:: @ 83B6DB4
-	.incbin "baserom.gba", 0x003b6db4, 0x4
+	.4byte 0x02000000
 
 	.align 2
 gUnknown_083B6DB8:: @ 83B6DB8
 	.4byte 0x02039360
 
 	.align 2
-gUnknown_083B6DBC:: @ 83B6DBC
-	obj_pal 0x083b6b94, 0xdacd
+gWaveformSpritePalette:: @ 83B6DBC
+	obj_pal WaveformPalette, 56013
 
 	.align 2
-gUnknown_083B6DC4:: @ 83B6DC4
-	obj_tiles 0x083b6bb4, 448, 0x0005
+gWaveformSpriteSheet:: @ 83B6DC4
+	obj_tiles WaveformTiles, 0x1C0, 5
 
 	.align 2
 gUnknown_083B6DCC:: @ 83B6DCC
-	obj_tiles 0x02002784, 2048, 0x0002
+	obj_tiles 0x02002784, 0x800, 2
 
 	.align 2
 gUnknown_083B6DD4:: @ 83B6DD4
-	obj_pal 0x02002704, 0xdac7
+	obj_pal 0x02002704, 56007
 
 	.align 2
 gSpriteTemplate_83B6DDC:: @ 83B6DDC
 	spr_template 2, 56007, gOamData_83B6EAC, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
+	.align 2
 gUnknown_083B6DF4:: @ 83B6DF4
-	.incbin "baserom.gba", 0x003b6df4, 0xb8
+	.4byte PCText_ExitBox, 0
+	.4byte PCText_WhatYouDo, 0
+	.4byte PCText_PickATheme, 0
+	.4byte PCText_PickAWallpaper, 0
+	.4byte PCText_IsSelected, 1
+	.4byte PCText_JumpToWhichBox, 0
+	.4byte PCText_DepositInWhichBox, 0
+	.4byte PCText_WasDeposited, 1
+	.4byte PCText_BoxIsFull, 0
+	.4byte PCText_ReleasePoke, 0
+	.4byte PCText_WasReleased, 4
+	.4byte PCText_ByeBye, 6
+	.4byte PCText_MarkPoke, 0
+	.4byte PCText_LastPoke, 0
+	.4byte PCText_PartyFull, 0
+	.4byte PCText_HoldingPoke, 0
+	.4byte PCText_WhichOneWillTake, 0
+	.4byte PCText_CantReleaseEgg, 0
+	.4byte PCText_ContinueBox, 0
+	.4byte PCText_CameBack, 1
+	.4byte PCText_Worried, 0
+	.4byte PCText_Surprise, 0
+	.4byte PCText_PleaseRemoveMail, 0
 
 	.align 2
 gOamData_83B6EAC:: @ 83B6EAC
@@ -11610,7 +11722,20 @@ gSpriteTemplate_83BB2F0:: @ 83BB2F0
 	spr_template 6, 56015, gOamData_83BB2D0, gSpriteAnimTable_83BB2E8, NULL, gDummySpriteAffineAnimTable, sub_809A8C8
 
 	.align 2
-	.incbin "baserom.gba", 0x3bb308, 0x8c0
+HandCursorPalette: @ 83BB308
+	.incbin "graphics/pokemon_storage/hand_cursor_pal.bin"
+
+	.align 2
+HandCursorAltPalette: @ 83BB328
+	.incbin "graphics/pokemon_storage/hand_cursor_alt_pal.bin"
+
+	.align 2
+HandCursorTiles: @ 83BB348
+	.incbin "graphics/pokemon_storage/hand_cursor.4bpp"
+
+	.align 2
+HandCursorShadowTiles: @ 83BBB48
+	.incbin "graphics/pokemon_storage/hand_cursor_shadow.4bpp"
 
 	.align 2
 gUnknown_083BBBC8:: @ 83BBBC8
@@ -11618,14 +11743,25 @@ gUnknown_083BBBC8:: @ 83BBBC8
 	.4byte sub_809B1D8
 	.4byte sub_809B24C
 
+	.align 2
 gUnknown_083BBBD4:: @ 83BBBD4
-	.incbin "baserom.gba", 0x003bbbd4, 0x28
+	.4byte sub_809C464, 0
+	.4byte sub_809C664, 1
+	.4byte sub_809C85C, 2
+	.4byte sub_809C944, 3
+	.4byte NULL, 0
 
-gUnknown_083BBBFC:: @ 83BBBFC
-	.incbin "baserom.gba", 0x003bbbfc, 0x18
+	.align 2
+gHandCursorSpriteSheets:: @ 83BBBFC
+	obj_tiles HandCursorTiles, 0x800, 0
+	obj_tiles HandCursorShadowTiles, 0x80, 1
+	null_obj_tiles
 
-gUnknown_083BBC14:: @ 83BBC14
-	.incbin "baserom.gba", 0x003bbc14, 0x18
+	.align 2
+gHandCursorSpritePalettes:: @ 83BBC14
+	obj_pal HandCursorPalette, 56006
+	obj_pal HandCursorAltPalette, 56017
+	null_obj_pal
 
 	.align 2
 gOamData_83BBC2C:: @ 83BBC2C
@@ -21370,44 +21506,63 @@ gUnknown_083EDE8C:: @ 83EDE8C
 gUnknown_083EEFE0:: @ 83EEFE0
 	.incbin "baserom.gba", 0x003eefe0, 0x1b8
 
-gUnknown_083EF198:: @ 83EF198
-	.incbin "baserom.gba", 0x003ef198, 0x200
+	.align 2
+gPictureFramePalettes:: @ 83EF198
+	.incbin "graphics/picture_frame/bg0.gbapal"
+	.incbin "graphics/picture_frame/bg1.gbapal"
+	.incbin "graphics/picture_frame/bg2.gbapal"
+	.incbin "graphics/picture_frame/bg3.gbapal"
+	.incbin "graphics/picture_frame/bg4.gbapal"
+	.incbin "graphics/picture_frame/bg5.gbapal"
+	.space 10 * 32
 
-gUnknown_083EF398:: @ 83EF398
-	.incbin "baserom.gba", 0x003ef398, 0x1084
+	.align 2
+gPictureFrameTiles_0:: @ 83EF398
+	.incbin "graphics/picture_frame/frame0.4bpp.rl"
 
-gUnknown_083F041C:: @ 83F041C
-	.incbin "baserom.gba", 0x003f041c, 0xc30
+	.align 2
+gPictureFrameTiles_1:: @ 83F041C
+	.incbin "graphics/picture_frame/frame1.4bpp.rl"
 
-gUnknown_083F104C:: @ 83F104C
-	.incbin "baserom.gba", 0x003f104c, 0xb38
+	.align 2
+gPictureFrameTiles_2:: @ 83F104C
+	.incbin "graphics/picture_frame/frame2.4bpp.rl"
 
-gUnknown_083F1B84:: @ 83F1B84
-	.incbin "baserom.gba", 0x003f1b84, 0xfb8
+	.align 2
+gPictureFrameTiles_3:: @ 83F1B84
+	.incbin "graphics/picture_frame/frame3.4bpp.rl"
 
-gUnknown_083F2B3C:: @ 83F2B3C
-	.incbin "baserom.gba", 0x003f2b3c, 0x1130
+	.align 2
+gPictureFrameTiles_4:: @ 83F2B3C
+	.incbin "graphics/picture_frame/frame4.4bpp.rl"
 
-gUnknown_083F3C6C:: @ 83F3C6C
-	.incbin "baserom.gba", 0x003f3c6c, 0x5f4
+	.align 2
+gPictureFrameTiles_5:: @ 83F3C6C
+	.incbin "graphics/picture_frame/frame5.4bpp.rl"
 
-gUnknown_083F4260:: @ 83F4260
-	.incbin "baserom.gba", 0x003f4260, 0x50c
+	.align 2
+gPictureFrameTilemap_0:: @ 83F4260
+	.incbin "graphics/picture_frame/frame0_map.bin.rl"
 
-gUnknown_083F476C:: @ 83F476C
-	.incbin "baserom.gba", 0x003f476c, 0x50c
+	.align 2
+gPictureFrameTilemap_1:: @ 83F476C
+	.incbin "graphics/picture_frame/frame1_map.bin.rl"
 
-gUnknown_083F4C78:: @ 83F4C78
-	.incbin "baserom.gba", 0x003f4c78, 0x50c
+	.align 2
+gPictureFrameTilemap_2:: @ 83F4C78
+	.incbin "graphics/picture_frame/frame2_map.bin.rl"
 
-gUnknown_083F5184:: @ 83F5184
-	.incbin "baserom.gba", 0x003f5184, 0x50c
+	.align 2
+gPictureFrameTilemap_3:: @ 83F5184
+	.incbin "graphics/picture_frame/frame3_map.bin.rl"
 
-gUnknown_083F5690:: @ 83F5690
-	.incbin "baserom.gba", 0x003f5690, 0x50c
+	.align 2
+gPictureFrameTilemap_4:: @ 83F5690
+	.incbin "graphics/picture_frame/frame4_map.bin.rl"
 
-gUnknown_083F5B9C:: @ 83F5B9C
-	.incbin "baserom.gba", 0x003f5b9c, 0x510
+	.align 2
+gPictureFrameTilemap_5:: @ 83F5B9C
+	.incbin "graphics/picture_frame/frame5_map.bin.rl"
 
 	.align 2
 gUnknown_083F60AC:: @ 83F60AC
@@ -21450,9 +21605,13 @@ gUnknown_083F60C0:: @ 83F60C0
 	.4byte OtherText_MightyTough
 	.4byte OtherText_Exclamation
 
-gUnknown_083F6138:: @ 83F6138
-	.incbin "baserom.gba", 0x003f6138, 0x8
+	.align 2
+gOamData_83F6138:: @ 83F6138
+	.2byte 0x3000
+	.2byte 0xC000
+	.2byte 0x0000
 
+	.align 2
 gUnknown_083F6140:: @ 83F6140
 	.space 4
 
@@ -22785,7 +22944,15 @@ gUnknown_083FA64A:: @ 83FA64A
 	.incbin "baserom.gba", 0x003fa64a, 0x2
 
 gUnknown_083FA64C:: @ 83FA64C
-	.incbin "baserom.gba", 0x003fa64c, 0x830
+	.incbin "baserom.gba", 0x003fa64c, 0x10
+
+	.align 2
+CryMeterNeedlePalette: @ 83FA65C
+	.incbin "graphics/pokedex/cry_meter_needle.gbapal"
+
+	.align 2
+CryMeterNeedleTiles: @ 83FA67C
+	.incbin "graphics/pokedex/cry_meter_needle.4bpp"
 
 gUnknown_083FAE7C:: @ 83FAE7C
 	.incbin "baserom.gba", 0x003fae7c, 0xa0
@@ -22830,11 +22997,17 @@ gOamData_83FB76C:: @ 83FB76C
 gSpriteTemplate_83FB774:: @ 83FB774
 	spr_template 8192, 8192, gOamData_83FB76C, gSpriteAnimTable_83FB768, NULL, gDummySpriteAffineAnimTable, sub_811A534
 
-gUnknown_083FB78C:: @ 83FB78C
-	.incbin "baserom.gba", 0x003fb78c, 0x10
+	.align 2
+gCryMeterNeedleSpriteSheets:: @ 83FB78C
+	obj_tiles CryMeterNeedleTiles, 0x800, 8192
+	null_obj_tiles
 
-gUnknown_083FB79C:: @ 83FB79C
-	.incbin "baserom.gba", 0x003fb79c, 0x27c
+	.align 2
+gCryMeterNeedleSpritePalettes:: @ 83FB79C
+	obj_pal CryMeterNeedlePalette, 8192
+	null_obj_pal
+
+	.incbin "baserom.gba", 0x003fb7ac, 0x26c
 
 gUnknown_083FBA18:: @ 83FBA18
 	.incbin "baserom.gba", 0x003fba18, 0x170
@@ -27050,11 +27223,11 @@ PCText_PickAWallpaper:
 	.string "Please pick out wallpaper.$"
 PCText_IsSelected:
 	.string " is selected.$"
-PCText_JumpToBox:
+PCText_JumpToWhichBox:
 	.string "Jump to which BOX?$"
-PCText_DepositToWhichBox:
+PCText_DepositInWhichBox:
 	.string "Deposit in which BOX?$"
-PCText_DepoxitToBox:
+PCText_WasDeposited:
 	.string " was deposited.$"
 PCText_BoxIsFull:
 	.string "The BOX is full.$"
@@ -27160,13 +27333,13 @@ PCText_MovePoke:
 	.string "MOVE POKéMON$"
 PCText_SeeYa:
 	.string "SEE YA!$"
-PCText_MovePokeToBox:
+PCText_MovePokeToParty:
 	.string "Move POKéMON stored in BOXES to\nyour party.$"
-PCText_StorePokeToBox:
+PCText_StorePokeInBox:
 	.string "Store POKéMON in your party in BOXES.$"
-PCText_OrganizePokeBox:
+PCText_OrganizeBoxesParty:
 	.string "Organize the POKéMON in BOXES and\nin your party.$"
-PCText_ReturnToMenu:
+PCText_ReturnToPrevMenu:
 	.string "Return to the previous menu.$"
 
 gUnknown_08410C1C:: @ 8410C1C

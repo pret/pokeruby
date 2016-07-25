@@ -9,6 +9,7 @@
 #include "convert_png.h"
 #include "jasc_pal.h"
 #include "lz.h"
+#include "rl.h"
 #include "font.h"
 
 struct CommandHandler
@@ -289,6 +290,36 @@ void HandleLZDecompressCommand(char *inputPath, char *outputPath, int argc UNUSE
 	free(uncompressedData);
 }
 
+void HandleRLCompressCommand(char *inputPath, char *outputPath, int argc UNUSED, char **argv UNUSED)
+{
+    int fileSize;
+    unsigned char *buffer = ReadWholeFile(inputPath, &fileSize);
+
+    int compressedSize;
+    unsigned char *compressedData = RLCompress(buffer, fileSize, &compressedSize);
+
+    free(buffer);
+
+    WriteWholeFile(outputPath, compressedData, compressedSize);
+
+    free(compressedData);
+}
+
+void HandleRLDecompressCommand(char *inputPath, char *outputPath, int argc UNUSED, char **argv UNUSED)
+{
+    int fileSize;
+    unsigned char *buffer = ReadWholeFile(inputPath, &fileSize);
+
+    int uncompressedSize;
+    unsigned char *uncompressedData = RLDecompress(buffer, fileSize, &uncompressedSize);
+
+    free(buffer);
+
+    WriteWholeFile(outputPath, uncompressedData, uncompressedSize);
+
+    free(uncompressedData);
+}
+
 int main(int argc, char **argv)
 {
 	if (argc < 3)
@@ -312,6 +343,8 @@ int main(int argc, char **argv)
 		{ "png", "fwjpnfont", HandlePngToFullwidthJapaneseFontCommand },
 		{ NULL, "lz", HandleLZCompressCommand },
 		{ "lz", NULL, HandleLZDecompressCommand },
+        { NULL, "rl", HandleRLCompressCommand },
+        { "rl", NULL, HandleRLDecompressCommand },
 		{ NULL, NULL, NULL }
 	};
 

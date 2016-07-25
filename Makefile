@@ -29,7 +29,7 @@ PREPROC := tools/preproc/preproc
 # Secondary expansion is required for dependency variables in object rules.
 .SECONDEXPANSION:
 
-.PRECIOUS: %.1bpp %.4bpp %.8bpp %.gbapal %.lz
+.PRECIOUS: %.1bpp %.4bpp %.8bpp %.gbapal %.lz %.rl
 
 .PHONY: all clean compare ruby sapphire
 
@@ -64,7 +64,7 @@ compare: both
 
 clean:
 	rm -f $(ROM) $(ELF) $(OBJS) $(pokeruby_OBJS) $(pokesapphire_OBJS) $(C_SRCS:%.c=%.i) pokeruby.map pokesapphire.map
-	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' \) -exec rm {} +
+	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.rl' \) -exec rm {} +
 
 tidy:
 	rm -f $(ROM) $(ELF) $(OBJS) $(pokeruby_OBJS) $(pokesapphire_OBJS) $(C_SRCS:%.c=%.i) pokeruby.map pokesapphire.map
@@ -84,6 +84,7 @@ include misc.mk
 %.8bpp: %.png  ; $(GFX) $< $@
 %.gbapal: %.pal ; $(GFX) $< $@
 %.lz: % ; $(GFX) $< $@
+%.rl: % ; $(GFX) $< $@
 
 src/libc_ruby.o src/libc_sapphire.o: CC1 := tools/agbcc/bin/old_agbcc
 src/libc_ruby.o src/libc_sapphire.o: CFLAGS := -O2
