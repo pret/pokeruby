@@ -6,6 +6,7 @@
 #include "songs.h"
 #include "link.h"
 #include "palette.h"
+#include "rng.h"
 
 #define SIO_MULTI_CNT ((struct SioMultiCnt *)REG_ADDR_SIOCNT)
 
@@ -27,8 +28,6 @@ struct LinkTestBGInfo
 };
 
 extern void sub_8071C4C(const struct WindowConfig *);
-extern u16 Random(void);
-extern void SeedRng(u16);
 extern void sub_80516C4(u8, u16);
 
 extern u8 unk_2000000[];

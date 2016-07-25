@@ -5,6 +5,7 @@
 #include "main.h"
 #include "rtc.h"
 #include "link.h"
+#include "rng.h"
 
 extern struct SoundInfo gSoundInfo;
 extern u32 gUnknown_3004820;
@@ -56,8 +57,6 @@ COMM_2(u8 gPcmDmaCounter)
 EWRAM_DATA void (*gFlashTimerIntrFunc)(void) = NULL;
 
 extern void sub_800C35C(void);
-extern u16 Random(void);
-extern void SeedRng(u16);
 extern void remove_some_task(void);
 extern void c2_copyright_1();
 extern u32 sub_80558AC(void);

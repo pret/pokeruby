@@ -1,6 +1,5 @@
 #include "global.h"
-
-extern u32 gRngValue;
+#include "rng.h"
 
 u16 Random(void)
 {
