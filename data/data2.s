@@ -10926,17 +10926,22 @@ gSpriteTemplate_83A05B4:: @ 83A05B4
 	spr_template 4096, 4096, gOamData_83A042C, gSpriteAnimTable_83A0520, NULL, gDummySpriteAffineAnimTable, sub_808F168
 
 gUnknown_083A05CC:: @ 83A05CC
-	.incbin "baserom.gba", 0x003a05cc, 0x10
-
+	.4byte gUnknown_08E874C8
+	.2byte 0x1F00, 0x1000
+	.space 8
+	
 gUnknown_083A05DC:: @ 83A05DC
-	.incbin "baserom.gba", 0x003a05dc, 0x10
-
+	.4byte gUnknown_08E87AF4
+	.2byte 0x1000, 0x0000
+	.space 8
+	
 gUnknown_083A05EC:: @ 83A05EC
-	.incbin "baserom.gba", 0x003a05ec, 0x5
+	.byte 2, 4, 8, 16, 32
 
 gUnknown_083A05F1:: @ 83A05F1
-	.incbin "baserom.gba", 0x003a05f1, 0x7
-
+	.byte 16, 8, 4, 2, 1
+	
+	.align 2
 gUnknown_083A05F8:: @ 83A05F8
 	.string "$"
 
