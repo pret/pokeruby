@@ -11059,7 +11059,7 @@ gUnknown_083B5EEC:: @ 83B5EEC
 	.4byte gUnknown_08E8D4C0
 
 gUnknown_083B5EF4:: @ 83B5EF4
-	.incbin "baserom.gba", 0x003b5ef4, 0x4
+	.string " : $"
 
 	.align 2
 gUnknown_083B5EF8:: @ 83B5EF8
@@ -11084,71 +11084,178 @@ gUnknown_083B5F6C:: @ 83B5F6C
 gUnknown_083B5F8C:: @ 83B5F8C
 	.incbin "baserom.gba", 0x003b5f8c, 0x40
 
+	.align 2
 gUnknown_083B5FCC:: @ 83B5FCC
-	.incbin "baserom.gba", 0x003b5fcc, 0x28
+	.4byte OtherText_Summary, sub_8095544
+	.4byte OtherText_Cancel2, sub_80958C4
+	.4byte OtherText_Shift, sub_8095584
+	.4byte OtherText_SendOut, sub_8095584
 
+Unknown_83B5FEC: @ 83B5FEC
+	.byte 2, 0, 1
+
+Unknown_83B5FEF: @ 83B5FEF
+	.byte 3, 0, 1
+
+Unknown_83B5FF2: @ 83B5FF2
+	.byte 0, 1
+
+	.align 2
 gUnknown_083B5FF4:: @ 83B5FF4
-	.incbin "baserom.gba", 0x003b5ff4, 0x18
+	.byte 3, 9
+	.space 2
+	.4byte Unknown_83B5FEC
 
+	.byte 3, 9
+	.space 2
+	.4byte Unknown_83B5FEF
+
+	.byte 2, 9
+	.space 2
+	.4byte Unknown_83B5FF2
+
+	.align 2
 gUnknown_083B600C:: @ 83B600C
-	.incbin "baserom.gba", 0x003b600c, 0x40
+	.4byte PCText_WithdrawPoke
+	.4byte PCText_MovePokeToParty
+	.4byte PCText_DepositPoke
+	.4byte PCText_StorePokeInBox
+	.4byte PCText_MovePoke
+	.4byte PCText_OrganizeBoxesParty
+	.4byte PCText_SeeYa
+	.4byte PCText_ReturnToPrevMenu
 
-gUnknown_083B604C:: @ 83B604C
-	.incbin "baserom.gba", 0x003b604c, 0x24
+	.align 2
+gSpriteAnim_83B602C:: @ 83B602C
+	obj_image_anim_frame 0, 5
+	obj_image_anim_end
 
-gUnknown_083B6070:: @ 83B6070
-	.incbin "baserom.gba", 0x003b6070, 0x20
+	.align 2
+gSpriteAnim_83B6034:: @ 83B6034
+	obj_image_anim_frame 4, 5
+	obj_image_anim_end
 
-gUnknown_083B6090:: @ 83B6090
-	.incbin "baserom.gba", 0x003b6090, 0x800
+	.align 2
+gSpriteAnim_83B603C:: @ 83B603C
+	obj_image_anim_frame 6, 5
+	obj_image_anim_end
 
-gUnknown_083B6890:: @ 83B6890
-	.incbin "baserom.gba", 0x003b6890, 0x180
+	.align 2
+gSpriteAnim_83B6044:: @ 83B6044
+	obj_image_anim_frame 10, 5
+	obj_image_anim_end
 
-gUnknown_083B6A10:: @ 83B6A10
-	.incbin "baserom.gba", 0x003b6a10, 0x20
+	.align 2
+gSpriteAnimTable_83B604C:: @ 83B604C
+	.4byte gSpriteAnim_83B602C
+	.4byte gSpriteAnim_83B6034
+	.4byte gSpriteAnim_83B603C
+	.4byte gSpriteAnim_83B6044
 
-gUnknown_083B6A30:: @ 83B6A30
-	.incbin "baserom.gba", 0x003b6a30, 0x20
+	.align 2
+gSpriteAffineAnim_83B605C:: @ 83B605C
+	obj_rot_scal_anim_frame 0xE0, 0xE0, 0, 0
+	obj_rot_scal_anim_end
 
-gUnknown_083B6A50:: @ 83B6A50
-	.incbin "baserom.gba", 0x003b6a50, 0x324
+	.align 2
+gSpriteAffineAnimTable_83B606C:: @ 83B606C
+	.4byte gSpriteAffineAnim_83B605C
 
+	.align 2
+gBoxSelectionPopupPalette:: @ 83B6070
+	.incbin "graphics/pokemon_storage/box_selection_popup.gbapal"
+
+	.align 2
+gBoxSelectionPopupCenterTiles:: @ 83B6090
+	.incbin "graphics/pokemon_storage/box_selection_popup_center.4bpp"
+
+	.align 2
+gBoxSelectionPopupSidesTiles:: @ 83B6890
+	.incbin "graphics/pokemon_storage/box_selection_popup_sides.4bpp"
+
+	.align 2
+gPokemonStorageScrollingBGPalette:: @ 83B6A10
+	.incbin "graphics/pokemon_storage/scrolling_bg.gbapal"
+
+	.align 2
+gPokemonStorageScrollingBGTile:: @ 83B6A30
+	.incbin "graphics/pokemon_storage/scrolling_bg.4bpp"
+
+	.align 2
+gPokemonStorageScrollingBGTilemap:: @ 83B6A50
+	.incbin "graphics/pokemon_storage/scrolling_bg_map.bin.lz"
+
+	.incbin "baserom.gba", 0x003b6b4c, 0x48
+
+	.align 2
+WaveformPalette: @ 83B6B94
+	.incbin "graphics/pokemon_storage/waveform.gbapal"
+
+	.align 2
+WaveformTiles: @ 83B6BB4
+	.incbin "graphics/pokemon_storage/waveform.4bpp"
+
+	.align 2
 gUnknown_083B6D74:: @ 83B6D74
 	.incbin "baserom.gba", 0x003b6d74, 0x20
 
+	.align 2
 gUnknown_083B6D94:: @ 83B6D94
 	.incbin "baserom.gba", 0x003b6d94, 0x20
 
+	.align 2
 gUnknown_083B6DB4:: @ 83B6DB4
-	.incbin "baserom.gba", 0x003b6db4, 0x4
+	.4byte 0x02000000
 
 	.align 2
 gUnknown_083B6DB8:: @ 83B6DB8
 	.4byte 0x02039360
 
 	.align 2
-gUnknown_083B6DBC:: @ 83B6DBC
-	obj_pal 0x083b6b94, 0xdacd
+gWaveformSpritePalette:: @ 83B6DBC
+	obj_pal WaveformPalette, 56013
 
 	.align 2
-gUnknown_083B6DC4:: @ 83B6DC4
-	obj_tiles 0x083b6bb4, 448, 0x0005
+gWaveformSpriteSheet:: @ 83B6DC4
+	obj_tiles WaveformTiles, 0x1C0, 5
 
 	.align 2
 gUnknown_083B6DCC:: @ 83B6DCC
-	obj_tiles 0x02002784, 2048, 0x0002
+	obj_tiles 0x02002784, 0x800, 2
 
 	.align 2
 gUnknown_083B6DD4:: @ 83B6DD4
-	obj_pal 0x02002704, 0xdac7
+	obj_pal 0x02002704, 56007
 
 	.align 2
 gSpriteTemplate_83B6DDC:: @ 83B6DDC
 	spr_template 2, 56007, gOamData_83B6EAC, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
+	.align 2
 gUnknown_083B6DF4:: @ 83B6DF4
-	.incbin "baserom.gba", 0x003b6df4, 0xb8
+	.4byte PCText_ExitBox, 0
+	.4byte PCText_WhatYouDo, 0
+	.4byte PCText_PickATheme, 0
+	.4byte PCText_PickAWallpaper, 0
+	.4byte PCText_IsSelected, 1
+	.4byte PCText_JumpToWhichBox, 0
+	.4byte PCText_DepositInWhichBox, 0
+	.4byte PCText_WasDeposited, 1
+	.4byte PCText_BoxIsFull, 0
+	.4byte PCText_ReleasePoke, 0
+	.4byte PCText_WasReleased, 4
+	.4byte PCText_ByeBye, 6
+	.4byte PCText_MarkPoke, 0
+	.4byte PCText_LastPoke, 0
+	.4byte PCText_PartyFull, 0
+	.4byte PCText_HoldingPoke, 0
+	.4byte PCText_WhichOneWillTake, 0
+	.4byte PCText_CantReleaseEgg, 0
+	.4byte PCText_ContinueBox, 0
+	.4byte PCText_CameBack, 1
+	.4byte PCText_Worried, 0
+	.4byte PCText_Surprise, 0
+	.4byte PCText_PleaseRemoveMail, 0
 
 	.align 2
 gOamData_83B6EAC:: @ 83B6EAC
@@ -27111,11 +27218,11 @@ PCText_PickAWallpaper:
 	.string "Please pick out wallpaper.$"
 PCText_IsSelected:
 	.string " is selected.$"
-PCText_JumpToBox:
+PCText_JumpToWhichBox:
 	.string "Jump to which BOX?$"
-PCText_DepositToWhichBox:
+PCText_DepositInWhichBox:
 	.string "Deposit in which BOX?$"
-PCText_DepoxitToBox:
+PCText_WasDeposited:
 	.string " was deposited.$"
 PCText_BoxIsFull:
 	.string "The BOX is full.$"
@@ -27221,13 +27328,13 @@ PCText_MovePoke:
 	.string "MOVE POKéMON$"
 PCText_SeeYa:
 	.string "SEE YA!$"
-PCText_MovePokeToBox:
+PCText_MovePokeToParty:
 	.string "Move POKéMON stored in BOXES to\nyour party.$"
-PCText_StorePokeToBox:
+PCText_StorePokeInBox:
 	.string "Store POKéMON in your party in BOXES.$"
-PCText_OrganizePokeBox:
+PCText_OrganizeBoxesParty:
 	.string "Organize the POKéMON in BOXES and\nin your party.$"
-PCText_ReturnToMenu:
+PCText_ReturnToPrevMenu:
 	.string "Return to the previous menu.$"
 
 gUnknown_08410C1C:: @ 8410C1C
