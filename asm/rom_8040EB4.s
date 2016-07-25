@@ -25497,7 +25497,7 @@ _0804DAEE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804DB28: .4byte gUnknown_08215B78
+_0804DB28: .4byte gIngameTradeMail
 	thumb_func_end sub_804DAD4
 
 	thumb_func_start sub_804DB2C
