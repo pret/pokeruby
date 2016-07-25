@@ -11032,8 +11032,12 @@ gUnknown_083B5AAC:: @ 83B5AAC
 gUnknown_083B5AB2:: @ 83B5AB2
 	.incbin "baserom.gba", 0x003b5ab2, 0x6
 
-gUnknown_083B5AB8:: @ 83B5AB8
-	.incbin "baserom.gba", 0x003b5ab8, 0x404
+	.align 2
+gBadgesTiles:: @ 83B5AB8
+	.incbin "graphics/trainer_card/badges.4bpp"
+
+	.align 2
+	.4byte 0x02000000 @ XXX
 
 	.align 2
 gUnknown_083B5EBC:: @ 83B5EBC
@@ -11072,8 +11076,9 @@ gUnknown_083B5EF8:: @ 83B5EF8
 gUnknown_083B5F0C:: @ 83B5F0C
 	.incbin "baserom.gba", 0x003b5f0c, 0x20
 
-gUnknown_083B5F2C:: @ 83B5F2C
-	.incbin "baserom.gba", 0x003b5f2c, 0x20
+	.align 2
+gBadgesPalette:: @ 83B5F2C
+	.incbin "graphics/trainer_card/badges.gbapal"
 
 gUnknown_083B5F4C:: @ 83B5F4C
 	.incbin "baserom.gba", 0x003b5f4c, 0x20
