@@ -2630,8 +2630,8 @@ Unknown_08215AB0:
 gUnknown_08215AC0:: @ 8215AC0
 	.4byte Unknown_08215AB0
 
-gUnknown_08215AC4:: @ 8215AC4
-	.incbin "baserom.gba", 0x00215ac4, 0xb4
+@ 8215AC4
+	.include "data/ingame_trades.s"
 
 gUnknown_08215B78:: @ 8215B78
 	.incbin "baserom.gba", 0x00215b78, 0x28
