@@ -13,12 +13,16 @@ extern const u8 gUnknown_081C6FCB[];
 extern const u8 gUnknown_081C6FD8[];
 extern const u8 gUnknown_081C6FFA[];
 extern u8 gUnknown_081C7017[];
+extern u8 gUnknown_081C7025[];
+extern u8 gUnknown_081C7074[];
 
 extern const u8 gUnknown_081E764C[];
 extern const u8 gUnknown_081E768C[];
 extern const u8 gUnknown_081E7834[];
 extern const u8 gUnknown_081E796C[];
 extern const u8 gUnknown_0840DFF7[];
+
+extern u8 gSpriteAffineAnimTable_81E79AC[];
 
 extern struct Sprite gSprites[];
 extern u8 gStringVar4[];
@@ -51,7 +55,14 @@ void sub_800AAAC(u8 taskId);
 void task_new_game_prof_birch_speech_part2_1(u8 taskId);
 void sub_800AB38(u8 taskId);
 void task_new_game_prof_birch_speech_part2_4(u8 taskId);
+void sub_800AC20(u8 taskId);
+void task_new_game_prof_birch_speech_part2_6(u8 taskId);
+void task_new_game_prof_birch_speech_part2_7(u8 taskId);
+void task_new_game_prof_birch_speech_part2_8(u8 taskId);
+void task_new_game_prof_birch_speech_part2_9(u8 taskId);
+void task_new_game_prof_birch_speech_part2_10(u8 taskId);
 void new_game_prof_birch_speech_part2_start(u8 taskId);
+void sub_800B240(struct Sprite *sprite);
 
 void sub_800B534(u8 taskId, u8 a);
 void sub_800B6C0(u8 taskId, u8 a);
@@ -67,6 +78,7 @@ void CreateNameMenu(u8 a, u8 b);
 void set_default_player_name(u8 a);
 void DoNamingScreen(u8 r0, struct SaveBlock2 *r1, u16 r2, u16 r3, u8 s0, TaskFunc s4);
 void sub_8072974(u8 r0, u8 r1, u32 r2);
+u8 FillWindowPixelBuffer(void);
 
 void Task_Birch1(u8 taskId)
 {
@@ -434,6 +446,7 @@ void sub_800A9EC(u8 taskId)
 {
     s8 n = NameMenuProcessInput();
     
+    //The ordering of these conditional blocks in the original ROM is very strange.
     if(n == 0)
     {
         //_0800AA48
@@ -477,7 +490,7 @@ void sub_800AAAC(u8 taskId)
 void task_new_game_prof_birch_speech_part2_1(u8 taskId)
 {
     DrawDefaultWindow(2, 13, 27, 18);
-    StringExpandPlaceholders(gUnknown_081C7017, gStringVar4);
+    StringExpandPlaceholders(gStringVar4, gUnknown_081C7017);
     AddTextPrinterWithCallbackForMessage(gUnknown_081C7017, 3, 14);
     gTasks[taskId].func = sub_800AB38;
 }
@@ -493,10 +506,161 @@ void sub_800AB38(u8 taskId)
 
 void task_new_game_prof_birch_speech_part2_4(u8 taskId)
 {
+    //Has a similar structure to sub_800A9EC
+    //Not sure how to decompile this
+}
+
+void sub_800AC20(u8 taskId)
+{
+    if(gTasks[taskId].data[4])
+    {
+        gTasks[taskId].data[4] += 2;
+        REG_BG1HOFS = gTasks[taskId].data[4];
+    }
+    else
+    {
+        gTasks[taskId].func = task_new_game_prof_birch_speech_part2_6;
+    }
+}
+
+void task_new_game_prof_birch_speech_part2_6(u8 taskId)
+{
+    if(gTasks[taskId].data[5])
+    {
+        s16 spriteId;
+        
+        spriteId = gTasks[taskId].data[10];
+        gSprites[spriteId].invisible = 1;
+        
+        spriteId = gTasks[taskId].data[11];
+        gSprites[spriteId].invisible = 1;
+        
+        spriteId = (u8)gTasks[taskId].data[8];
+        gSprites[spriteId].pos1.x = 0x88;
+        gSprites[spriteId].pos1.y = 0x40;
+        gSprites[spriteId].invisible = 0;
+        gSprites[spriteId].oam.objMode = 1;
+        
+        spriteId = (u8)gTasks[taskId].data[9];
+        gSprites[spriteId].pos1.x = 0x68;
+        gSprites[spriteId].pos1.y = 0x48;
+        gSprites[spriteId].invisible = 0;
+        gSprites[spriteId].oam.objMode = 1;
+        
+        sub_800B534(taskId, 2);
+        sub_800B6C0(taskId, 1);
+        DrawDefaultWindow(2, 13, 27, 18);
+        StringExpandPlaceholders(gStringVar4, gUnknown_081C7025);
+        AddTextPrinterWithCallbackForMessage(gStringVar4, 3, 14);
+        gTasks[taskId].func = task_new_game_prof_birch_speech_part2_7;
+    }
+}
+
+void task_new_game_prof_birch_speech_part2_7(u8 taskId)
+{
+    if(gTasks[taskId].data[5])
+    {
+        s16 spriteId;
+        
+        spriteId = gTasks[taskId].data[8];
+        gSprites[spriteId].oam.objMode = 0;
+        
+        spriteId = gTasks[taskId].data[9];
+        gSprites[spriteId].oam.objMode = 0;
+        
+        if(sub_8072CF4(0x18))
+        {
+            spriteId = gTasks[taskId].data[8];
+            gSprites[spriteId].oam.objMode = 1;
+            
+            spriteId = gTasks[taskId].data[9];
+            gSprites[spriteId].oam.objMode = 1;
+            
+            sub_800B458(taskId, 2);
+            sub_800B614(taskId, 1);
+            gTasks[taskId].data[7] = 0x40;
+            gTasks[taskId].func = task_new_game_prof_birch_speech_part2_8;
+        }
+    }
+}
+
+void task_new_game_prof_birch_speech_part2_8(u8 taskId)
+{
+    if(gTasks[taskId].data[5])
+    {
+        s16 spriteId;
+        
+        spriteId = gTasks[taskId].data[8];
+        gSprites[spriteId].invisible = 1;
+        
+        spriteId = gTasks[taskId].data[9];
+        gSprites[spriteId].invisible = 1;
+        
+        if(gTasks[taskId].data[7])
+        {
+            gTasks[taskId].data[7]--;
+        }
+        else
+        {
+            u8 spriteId;
+            
+            if(gSaveBlock2.playerGender)
+                spriteId = (u8)gTasks[taskId].data[11];
+            else
+                spriteId = (u8)gTasks[taskId].data[10];
+            
+            gSprites[spriteId].pos1.x = 0x78;
+            gSprites[spriteId].pos1.y = 0x3C;
+            gSprites[spriteId].invisible = 0;
+            gSprites[spriteId].oam.objMode = 1;
+            gTasks[taskId].data[2] = spriteId;
+            
+            sub_800B534(taskId, 2);
+            sub_800B6C0(taskId, 1);
+            DrawDefaultWindow(2, 13, 27, 18);
+            AddTextPrinterWithCallbackForMessage(gUnknown_081C7074, 3, 14);
+            gTasks[taskId].func = task_new_game_prof_birch_speech_part2_9;
+        }
+    }
+}
+
+void task_new_game_prof_birch_speech_part2_9(u8 taskId)
+{
+    if(gTasks[taskId].data[5])
+    {
+        s16 spriteId;
+        
+        spriteId = gTasks[taskId].data[2];
+        gSprites[spriteId].oam.objMode = 0;
+        
+        if(sub_8072CF4(0x18))
+        {
+            u8 spriteId;
+            
+            spriteId = gTasks[taskId].data[2];
+            gSprites[spriteId].oam.affineMode = 1;
+            gSprites[spriteId].affineAnims = gSpriteAffineAnimTable_81E79AC;
+            InitSpriteAffineAnim(&gSprites[spriteId]);
+            StartSpriteAffineAnim(&gSprites[spriteId], 0);
+            gSprites[spriteId].callback = sub_800B240;
+            BeginNormalPaletteFade(0x0000ffff, 0, 0, 0x10, 0);
+            play_sound_effect(4);
+            gTasks[taskId].func = task_new_game_prof_birch_speech_part2_10;
+        }
+    }
+}
+
+void task_new_game_prof_birch_speech_part2_10(u8 taskId)
+{
     
 }
 
 void new_game_prof_birch_speech_part2_start(u8 taskId)
+{
+    
+}
+
+void sub_800B240(struct Sprite *sprite)
 {
     
 }
