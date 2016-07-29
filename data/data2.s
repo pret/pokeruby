@@ -25370,13 +25370,16 @@ gSpriteTemplate_840CAEC:: @ 840CAEC
 gUnknown_0840CB04:: @ 840CB04
 	.incbin "baserom.gba", 0x0040cb04, 0x8
 
+	.align 2
 gUnknown_0840CB0C:: @ 840CB0C
-	.incbin "graphics/misc/diploma.gbapal"
-	.incbin "baserom.gba", 0x0040cb2c, 0x20
+	.incbin "graphics/misc/diploma_national.gbapal"
+	.incbin "graphics/misc/diploma_hoenn.gbapal"
 
+	.align 2
 gUnknown_0840CB4C:: @ 840CB4C
-	.incbin "baserom.gba", 0x0040cb4c, 0x73c
+	.incbin "graphics/misc/diploma_map.bin.lz"
 
+	.align 2
 gUnknown_0840D288:: @ 840D288
 	.incbin "graphics/misc/diploma.4bpp.lz"
 
