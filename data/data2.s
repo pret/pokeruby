@@ -2113,49 +2113,16 @@ gSpriteAffineAnimTable_820AAA0:: @ 820AAA0
 	.align 2
 gSpriteTemplate_820AAB4:: @ 820AAB4
 	spr_template 55000, 55000, gOamData_820A9EC, gSpriteAnimTable_820AA34, NULL, gSpriteAffineAnimTable_820AAA0, objc_0804ABD4
-
-	.align 2
-gSpriteTemplate_820AACC:: @ 820AACC
 	spr_template 55001, 55001, gOamData_820A9EC, gSpriteAnimTable_820AA34, NULL, gSpriteAffineAnimTable_820AAA0, objc_0804ABD4
-
-	.align 2
-gSpriteTemplate_820AAE4:: @ 820AAE4
 	spr_template 55002, 55002, gOamData_820A9EC, gSpriteAnimTable_820AA34, NULL, gSpriteAffineAnimTable_820AAA0, objc_0804ABD4
-
-	.align 2
-gSpriteTemplate_820AAFC:: @ 820AAFC
 	spr_template 55003, 55003, gOamData_820A9EC, gSpriteAnimTable_820AA34, NULL, gSpriteAffineAnimTable_820AAA0, objc_0804ABD4
-
-	.align 2
-gSpriteTemplate_820AB14:: @ 820AB14
 	spr_template 55004, 55004, gOamData_820A9EC, gSpriteAnimTable_820AA34, NULL, gSpriteAffineAnimTable_820AAA0, objc_0804ABD4
-
-	.align 2
-gSpriteTemplate_820AB2C:: @ 820AB2C
 	spr_template 55005, 55005, gOamData_820A9EC, gSpriteAnimTable_820AA34, NULL, gSpriteAffineAnimTable_820AAA0, objc_0804ABD4
-
-	.align 2
-gSpriteTemplate_820AB44:: @ 820AB44
 	spr_template 55006, 55006, gOamData_820A9EC, gSpriteAnimTable_820AA34, NULL, gSpriteAffineAnimTable_820AAA0, objc_0804ABD4
-
-	.align 2
-gSpriteTemplate_820AB5C:: @ 820AB5C
 	spr_template 55007, 55007, gOamData_820A9EC, gSpriteAnimTable_820AA34, NULL, gSpriteAffineAnimTable_820AAA0, objc_0804ABD4
-
-	.align 2
-gSpriteTemplate_820AB74:: @ 820AB74
 	spr_template 55008, 55008, gOamData_820A9EC, gSpriteAnimTable_820AA34, NULL, gSpriteAffineAnimTable_820AAA0, objc_0804ABD4
-
-	.align 2
-gSpriteTemplate_820AB8C:: @ 820AB8C
 	spr_template 55009, 55009, gOamData_820A9EC, gSpriteAnimTable_820AA34, NULL, gSpriteAffineAnimTable_820AAA0, objc_0804ABD4
-
-	.align 2
-gSpriteTemplate_820ABA4:: @ 820ABA4
 	spr_template 55010, 55010, gOamData_820A9EC, gSpriteAnimTable_820AA34, NULL, gSpriteAffineAnimTable_820AAA0, objc_0804ABD4
-
-	.align 2
-gSpriteTemplate_820ABBC:: @ 820ABBC
 	spr_template 55011, 55011, gOamData_820A9EC, gSpriteAnimTable_820AA34, NULL, gSpriteAffineAnimTable_820AAA0, objc_0804ABD4
 
 	.align 2
@@ -2351,7 +2318,6 @@ gUnknown_0820C341:: @ 820C341
 	.4byte gTileBuffer
 
 @ Unused debug strings?
-@ Not labeling these yet
 	.string "かいめの そうしん$", 13
 	.string "かいめの じゅしん$", 13
 	.string "ポケモンアイコンセット$", 13
@@ -2370,52 +2336,85 @@ gUnknown_0820C3B0:: @ 820C3B0
 	.string "だめだたらしいよ     $" @ it's no good (trade failed maybe?)
 
 gUnknown_0820C3D1:: @ 820C3D1
-	.incbin "baserom.gba", 0x0020c3d1, 0x7
-	.incbin "graphics/interface/ball_open.gbapal"
-	.incbin "graphics/interface/rolling_ball.4bpp"
+	.byte 4, 3
+	.byte 19, 3
 
+	.align 2
+gTradeBallPalette:: @ 820C3D8
+	.incbin "graphics/trade/ball.gbapal"
+
+	.align 2
+gTradeBallTiles:: @ 820C3F8
+	.incbin "graphics/trade/ball.4bpp"
+
+	.align 2
 gUnknown_0820C9F8:: @ 820C9F8
-	.incbin "baserom.gba", 0x0020c9f8, 0x20
-	.incbin "graphics/interface/gba.gbapal"
-	.incbin "graphics/interface/trade_shadow.gbapal"
-	.incbin "baserom.gba", 0x0020ca58, 0x20 @ blank
-	.incbin "graphics/interface/trade_misc.gbapal"
+	.incbin "graphics/trade/unknown.gbapal"
+	.incbin "graphics/trade/gba.gbapal"
+	.incbin "graphics/trade/shadow.gbapal"
+	.space 32
+	.incbin "graphics/trade/misc.gbapal"
 
+	.align 2
 gUnknown_0820CA98:: @ 820CA98
-	.incbin "graphics/interface/gba.4bpp"
-	.incbin "graphics/interface/trade_shadow.4bpp"
+	.incbin "graphics/trade/gba.4bpp"
+	.incbin "graphics/trade/shadow.4bpp"
 
+	.align 2
 gUnknown_0820DD98:: @ 820DD98
-	.incbin "graphics/unknown/unknown_20DD98.8bpp" @ unused?
+	.incbin "graphics/trade/pokeball_symbol.8bpp"
 
+	.align 2
 gUnknown_0820F798:: @ 820F798
-	.incbin "baserom.gba", 0x0020f798, 0x1000
+	.incbin "graphics/trade/shadow_map.bin"
 
+	.align 2
 gUnknown_08210798:: @ 8210798
-	.incbin "baserom.gba", 0x00210798, 0x1000 @ debug?
+	.incbin "graphics/trade/gba_map.bin"
 
+	.align 2
 gUnknown_08211798:: @ 8211798
-	.incbin "baserom.gba", 0x00211798, 0x800
+	.incbin "graphics/trade/cable_closeup_map.bin"
 
+	.align 2
 gUnknown_08211F98:: @ 8211F98
-	.incbin "baserom.gba", 0x00211f98, 0x20 @ bunch of palettes?
-	.incbin "baserom.gba", 0x00211fb8, 0x20
-	.incbin "baserom.gba", 0x00211fd8, 0x20
-	.incbin "baserom.gba", 0x00211FF8, 0x20
-	.incbin "baserom.gba", 0x00212018, 0x20
-	.incbin "baserom.gba", 0x00212038, 0x20
-	.incbin "baserom.gba", 0x00212058, 0x20
-	.incbin "graphics/interface/gba2.gbapal"
-	.incbin "graphics/interface/trade_glow.4bpp"
-	.incbin "graphics/interface/trade_glow2.4bpp"
-	.incbin "graphics/interface/trade_cableend.4bpp"
-	.incbin "graphics/interface/trade_gbascreen.4bpp"
+	.incbin "graphics/trade/pokeball_symbol_map.bin"
 
+	.incbin "baserom.gba", 0x00212098, 0x20
+
+	.align 2
+gTradeCableEndPalette:: @ 82120B8
+	.incbin "graphics/trade/cable_end.gbapal"
+
+	.incbin "baserom.gba", 0x002120D8, 0x40
+
+	.align 2
+gTradeGlowPalette:: @ 8212118
+	.incbin "graphics/trade/glow.gbapal"
+
+	.align 2
+gTradeGlow1Tiles:: @ 8212138
+	.incbin "graphics/trade/glow1.4bpp"
+
+	.align 2
+gTradeGlow2Tiles:: @ 8212338
+	.incbin "graphics/trade/glow2.4bpp"
+
+	.align 2
+gTradeCableEndTiles:: @ 8212538
+	.incbin "graphics/trade/cable_end.4bpp"
+
+	.align 2
+gTradeGBAScreenTiles:: @ 8212738
+	.incbin "graphics/trade/gba_screen.4bpp"
+
+	.align 2
 gUnknown_08213738:: @ 8213738
-	.incbin "graphics/interface/gba2.8bpp"
+	.incbin "graphics/trade/gba_affine.8bpp"
 
+	.align 2
 gUnknown_08215778:: @ 8215778
-	.incbin "baserom.gba", 0x00215778, 0x100
+	.incbin "graphics/trade/gba_affine_map.bin"
 
 	.align 2
 gOamData_8215878:: @ 8215878
@@ -2489,11 +2488,11 @@ gSpriteAffineAnimTable_8215940:: @ 8215940
 
 	.align 2
 gUnknown_0821594C:: @ 821594C
-	obj_tiles 0x0820c3f8, 1536, 0x15b5
+	obj_tiles gTradeBallTiles, 0x600, 5557
 
 	.align 2
 gUnknown_08215954:: @ 8215954
-	obj_pal 0x0820c3d8, 0x15b6
+	obj_pal gTradeBallPalette, 5558
 
 	.align 2
 gSpriteTemplate_821595C:: @ 821595C
@@ -2526,15 +2525,15 @@ gSpriteAffineAnimTable_82159A0:: @ 82159A0
 
 	.align 2
 gUnknown_082159A4:: @ 82159A4
-	obj_tiles 0x08212138, 512, 0x15ae
+	obj_tiles gTradeGlow1Tiles, 0x200, 5550
 
 	.align 2
 gUnknown_082159AC:: @ 82159AC
-	obj_pal 0x08212118, 0x15af
+	obj_pal gTradeGlowPalette, 5551
 
 	.align 2
 gUnknown_082159B4:: @ 82159B4
-	obj_pal 0x082120b8, 0x15b3
+	obj_pal gTradeCableEndPalette, 5555
 
 	.align 2
 gSpriteTemplate_82159BC:: @ 82159BC
@@ -2563,7 +2562,7 @@ gSpriteAnimTable_82159EC:: @ 82159EC
 
 	.align 2
 gUnknown_082159F4:: @ 82159F4
-	obj_tiles 0x08212338, 768, 0x15b0
+	obj_tiles gTradeGlow2Tiles, 0x300, 5552
 
 	.align 2
 gSpriteTemplate_82159FC:: @ 82159FC
@@ -2586,7 +2585,7 @@ gSpriteAnimTable_8215A24:: @ 8215A24
 
 	.align 2
 gUnknown_08215A28:: @ 8215A28
-	obj_tiles 0x08212538, 256, 0x15b2
+	obj_tiles gTradeCableEndTiles, 0x100, 5554
 
 	.align 2
 gSpriteTemplate_8215A30:: @ 8215A30
@@ -2616,7 +2615,7 @@ gSpriteAnimTable_8215A74:: @ 8215A74
 
 	.align 2
 gUnknown_08215A78:: @ 8215A78
-	obj_tiles 0x08212738, 4096, 0x15b4
+	obj_tiles gTradeGBAScreenTiles, 0x1000, 5556
 
 	.align 2
 gSpriteTemplate_8215A80:: @ 8215A80
@@ -2624,11 +2623,15 @@ gSpriteTemplate_8215A80:: @ 8215A80
 
 gUnknown_08215A98:: @ 8215A98
 	.incbin "baserom.gba", 0x00215a98, 0x18
-Unknown_08215AB0:
-	.incbin "baserom.gba", 0x00215ab0, 0x10
 
-gUnknown_08215AC0:: @ 8215AC0
-	.4byte Unknown_08215AB0
+	.align 2
+gSpriteAffineAnim_8215AB0:: @ 8215AB0
+	obj_rot_scal_anim_frame 0xFF00, 0x100, 0, 0
+	obj_rot_scal_anim_jump 0
+
+	.align 2
+gSpriteAffineAnimTable_8215AC0:: @ 8215AC0
+	.4byte gSpriteAffineAnim_8215AB0
 
 @ 8215AC4
 	.include "data/ingame_trades.s"
@@ -24956,33 +24959,33 @@ gUnknown_0840B23C:: @ 840B23C
 
 	.align 2
 gUnknown_0840B258:: @ 840B258
-	obj_tiles 0x08d1a7f4, 256, 0xd6ec
-	obj_tiles 0x08d1a7f4, 256, 0xd6ed
-	obj_tiles 0x08d1a7f4, 256, 0xd6ee
-	obj_tiles 0x08d1a7f4, 256, 0xd6ef
-	obj_tiles 0x08d1a7f4, 256, 0xd6f0
-	obj_tiles 0x08d1a7f4, 256, 0xd6f1
-	obj_tiles 0x08d1a7f4, 256, 0xd6f2
-	obj_tiles 0x08d1a7f4, 256, 0xd6f3
-	obj_tiles 0x08d1a7f4, 256, 0xd6f4
-	obj_tiles 0x08d1a7f4, 256, 0xd6f5
-	obj_tiles 0x08d1a7f4, 256, 0xd6f6
-	obj_tiles 0x08d1a7f4, 256, 0xd6f7
+	obj_tiles gBattleAnimSpriteSheet_Particles, 0x100, 55020
+	obj_tiles gBattleAnimSpriteSheet_Particles, 0x100, 55021
+	obj_tiles gBattleAnimSpriteSheet_Particles, 0x100, 55022
+	obj_tiles gBattleAnimSpriteSheet_Particles, 0x100, 55023
+	obj_tiles gBattleAnimSpriteSheet_Particles, 0x100, 55024
+	obj_tiles gBattleAnimSpriteSheet_Particles, 0x100, 55025
+	obj_tiles gBattleAnimSpriteSheet_Particles, 0x100, 55026
+	obj_tiles gBattleAnimSpriteSheet_Particles, 0x100, 55027
+	obj_tiles gBattleAnimSpriteSheet_Particles, 0x100, 55028
+	obj_tiles gBattleAnimSpriteSheet_Particles, 0x100, 55029
+	obj_tiles gBattleAnimSpriteSheet_Particles, 0x100, 55030
+	obj_tiles gBattleAnimSpriteSheet_Particles, 0x100, 55031
 
 	.align 2
 gUnknown_0840B2B8:: @ 840B2B8
-	obj_pal 0x08d1a8c8, 55020
-	obj_pal 0x08d1a8c8, 55021
-	obj_pal 0x08d1a8c8, 55022
-	obj_pal 0x08d1a8c8, 55023
-	obj_pal 0x08d1a8c8, 55024
-	obj_pal 0x08d1a8c8, 55025
-	obj_pal 0x08d1a8c8, 55026
-	obj_pal 0x08d1a8c8, 55027
-	obj_pal 0x08d1a8c8, 55028
-	obj_pal 0x08d1a8c8, 55029
-	obj_pal 0x08d1a8c8, 55030
-	obj_pal 0x08d1a8c8, 55031
+	obj_pal gBattleAnimSpritePalette_136, 55020
+	obj_pal gBattleAnimSpritePalette_136, 55021
+	obj_pal gBattleAnimSpritePalette_136, 55022
+	obj_pal gBattleAnimSpritePalette_136, 55023
+	obj_pal gBattleAnimSpritePalette_136, 55024
+	obj_pal gBattleAnimSpritePalette_136, 55025
+	obj_pal gBattleAnimSpritePalette_136, 55026
+	obj_pal gBattleAnimSpritePalette_136, 55027
+	obj_pal gBattleAnimSpritePalette_136, 55028
+	obj_pal gBattleAnimSpritePalette_136, 55029
+	obj_pal gBattleAnimSpritePalette_136, 55030
+	obj_pal gBattleAnimSpritePalette_136, 55031
 
 	.align 2
 gSpriteAnim_840B318:: @ 840B318

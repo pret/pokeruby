@@ -83,7 +83,7 @@ gIngameTrades:: @ 8215AC4
 
 	.align 1
 gIngameTradeMail:: @ 8215B78
-	@ 0
+@ 0
 	ec_pokemon1 PIKACHU
 	ec_word THANK_YOU
 	ec_word EXCL
@@ -95,7 +95,7 @@ gIngameTradeMail:: @ 8215B78
 	ec_word EXCL
 	.2byte 0
 
-	@ 1
+@ 1
 	ec_word I
 	ec_word WANT
 	ec_word TO

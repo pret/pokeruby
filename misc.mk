@@ -1,4 +1,5 @@
 MENUGFXDIR := graphics/interface
+TRADEGFXDIR := graphics/trade
 INTROGFXDIR := graphics/intro
 PSSGFXDIR := graphics/pokemon_storage
 MISCGFXDIR := graphics/misc
@@ -141,7 +142,7 @@ $(ROULGFXDIR)/poke_icons2.4bpp: $(ROULGFXDIR)/wynaut.4bpp $(ROULGFXDIR)/azurill.
 $(INTROGFXDIR)/intro3_misc.4bpp: $(INTROGFXDIR)/intro3_star.4bpp $(INTROGFXDIR)/intro3_attackgfx.4bpp $(INTROGFXDIR)/intro3_explosion.4bpp
 	@cat $(INTROGFXDIR)/intro3_star.4bpp $(INTROGFXDIR)/intro3_attackgfx.4bpp $(INTROGFXDIR)/intro3_explosion.4bpp >$@
 
-$(MENUGFXDIR)/gba2.8bpp: $(MENUGFXDIR)/gba2.png
+$(TRADEGFXDIR)/gba_affine.8bpp: $(TRADEGFXDIR)/gba_affine.png
 	$(GFX) $< $@ -num_tiles 129
 
 $(BTLANMSPRGFXDIR)/001.4bpp: $(BTLANMSPRGFXDIR)/001_0.4bpp $(BTLANMSPRGFXDIR)/001_1.4bpp

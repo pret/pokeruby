@@ -1072,7 +1072,9 @@ gBattleAnimSpriteSheet_135:: @ 8D1A704
 gBattleAnimSpritePalette_135:: @ 8D1A7DC
 	.incbin "graphics/battle_anims/sprites/135.gbapal.lz"
 
-	.incbin "baserom.gba", 0xd1a7f4, 0xb0
+	.align 2
+gBattleAnimSpriteSheet_Particles:: @ 8D1A7F4
+	.incbin "graphics/battle_anims/sprites/particles.4bpp.lz"
 
 	.align 2
 gBattleAnimSpriteSheet_136:: @ 8D1A8A4
