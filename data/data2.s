@@ -2134,11 +2134,13 @@ gUnknown_0820ABF0:: @ 820ABF0
 gUnknown_0820ADEE:: @ 820ADEE
 	.incbin "baserom.gba", 0x0020adee, 0x1fe
 
+	.align 2
 gUnknown_0820AFEC:: @ 820AFEC
-	.incbin "baserom.gba", 0x0020afec, 0x800
+	.incbin "graphics/trade/stripes_bg2_map.bin"
 
+	.align 2
 gUnknown_0820B7EC:: @ 820B7EC
-	.incbin "baserom.gba", 0x0020b7ec, 0x800
+	.incbin "graphics/trade/stripes_bg3_map.bin"
 
 	.align 2
 gOamData_820BFEC:: @ 820BFEC
@@ -2235,11 +2237,11 @@ gSpriteAnimTable_820C11C:: @ 820C11C
 
 	.align 2
 gUnknown_0820C124:: @ 820C124
-	obj_tiles 0x08ea1dec, 2048, 0x012c
+	obj_tiles gUnknown_08EA1DEC, 0x800, 300
 
 	.align 2
 gUnknown_0820C12C:: @ 820C12C
-	obj_pal 0x08ea0328, 0x0929
+	obj_pal gUnknown_08EA0328, 2345
 
 	.align 2
 gSpriteTemplate_820C134:: @ 820C134

@@ -145,6 +145,9 @@ $(INTROGFXDIR)/intro3_misc.4bpp: $(INTROGFXDIR)/intro3_star.4bpp $(INTROGFXDIR)/
 $(TRADEGFXDIR)/gba_affine.8bpp: $(TRADEGFXDIR)/gba_affine.png
 	$(GFX) $< $@ -num_tiles 129
 
+$(TRADEGFXDIR)/menu.4bpp: $(TRADEGFXDIR)/menu.png
+	$(GFX) $< $@ -num_tiles 148
+
 $(BTLANMSPRGFXDIR)/001.4bpp: $(BTLANMSPRGFXDIR)/001_0.4bpp $(BTLANMSPRGFXDIR)/001_1.4bpp
 	@cat $(BTLANMSPRGFXDIR)/001_0.4bpp $(BTLANMSPRGFXDIR)/001_1.4bpp >$@
 
