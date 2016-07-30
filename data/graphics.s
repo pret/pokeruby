@@ -3122,13 +3122,69 @@ gMailTilemap_Fab:: @ 8E84B6C
 gMailTilemap_Retro:: @ 8E84C84
 	.incbin "graphics/mail/retro/map.bin.lz"
 
-	.incbin "baserom.gba", 0x00e84d98, 0xc00
+	.align 2
+gNamingScreenBackButtonTiles:: @ 8E84D98
+	.incbin "graphics/naming_screen/back_button.4bpp"
+
+	.align 2
+gNamingScreenRightPointingTriangleTiles:: @ 8E84F78
+	.incbin "graphics/naming_screen/right_pointing_triangle.4bpp"
+
+	.align 2
+gNamingScreenOKButtonTiles:: @ 8E84F98
+	.incbin "graphics/naming_screen/ok_button.4bpp"
+
+	.align 2
+gNamingScreenUnderscoreTiles:: @ 8E85178
+	.incbin "graphics/naming_screen/underscore.4bpp"
+
+	.align 2
+gNamingScreenChangeKeyboardBoxTiles:: @ 8E85198
+	.incbin "graphics/naming_screen/change_keyboard_box.4bpp"
+
+	.align 2
+gNamingScreenChangeKeyboardButtonTiles:: @ 8E85418
+	.incbin "graphics/naming_screen/change_keyboard_button.4bpp"
+
+	.space 128
+
+	.align 2
+gNamingScreenOthersTextTiles:: @ 8E85598
+	.incbin "graphics/naming_screen/others_text.4bpp"
+
+	.align 2
+gNamingScreenCursorTiles:: @ 8E855F8
+	.incbin "graphics/naming_screen/cursor.4bpp"
+
+	.align 2
+gNamingScreenActiveCursorSmallTiles:: @ 8E85678
+	.incbin "graphics/naming_screen/active_cursor_small.4bpp"
+
+	.align 2
+gNamingScreenActiveCursorBigTiles:: @ 8E856F8
+	.incbin "graphics/naming_screen/active_cursor_big.4bpp"
+
+	.align 2
+gNamingScreenLowerTextTiles:: @ 8E85778
+	.incbin "graphics/naming_screen/lower_text.4bpp"
+
+	.align 2
+gNamingScreenUpperTextTiles:: @ 8E857D8
+	.incbin "graphics/naming_screen/upper_text.4bpp"
+
+	.incbin "baserom.gba", 0x00e85838, 0x160
 
 gUnknown_08E85998:: @ 8E85998
 	.incbin "baserom.gba", 0x00e85998, 0x800
 
-gUnknown_08E86198:: @ 8E86198
-	.incbin "baserom.gba", 0x00e86198, 0xc0
+	.align 2
+gNamingScreenPalettes:: @ 8E86198
+	.incbin "graphics/naming_screen/0.gbapal"
+	.incbin "graphics/naming_screen/1.gbapal"
+	.incbin "graphics/naming_screen/2.gbapal"
+	.incbin "graphics/naming_screen/3.gbapal"
+	.incbin "graphics/naming_screen/4.gbapal"
+	.incbin "graphics/naming_screen/5.gbapal"
 
 gUnknown_08E86258:: @ 8E86258
 	.incbin "baserom.gba", 0x00e86258, 0x500

@@ -13346,20 +13346,44 @@ gSpriteTemplate_83CE670:: @ 83CE670
 gSpriteTemplate_83CE688:: @ 83CE688
 	spr_template 0xFFFF, 0, gOamData_83CE498, gSpriteAnimTable_83CE5C4, gSpriteImageTable_83CE588, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
+	.align 2
 gUnknown_083CE6A0:: @ 83CE6A0
-	.incbin "baserom.gba", 0x003ce6a0, 0x68
+	obj_tiles gNamingScreenBackButtonTiles, 0x1E0, 0
+	obj_tiles gNamingScreenOKButtonTiles, 0x1E0, 1
+	obj_tiles gNamingScreenChangeKeyboardBoxTiles, 0x280, 2
+	obj_tiles gNamingScreenChangeKeyboardButtonTiles, 0x100, 3
+	obj_tiles gNamingScreenLowerTextTiles, 0x60, 4
+	obj_tiles gNamingScreenUpperTextTiles, 0x60, 5
+	obj_tiles gNamingScreenOthersTextTiles, 0x60, 6
+	obj_tiles gNamingScreenCursorTiles, 0x80, 7
+	obj_tiles gNamingScreenActiveCursorSmallTiles, 0x80, 8
+	obj_tiles gNamingScreenActiveCursorBigTiles, 0x80, 9
+	obj_tiles gNamingScreenRightPointingTriangleTiles, 0x20, 10
+	obj_tiles gNamingScreenUnderscoreTiles, 0x20, 11
+	null_obj_tiles
 
+	.align 2
 gUnknown_083CE708:: @ 83CE708
-	.incbin "baserom.gba", 0x003ce708, 0x40
+	obj_pal gNamingScreenPalettes + 0x20 * 0, 0
+	obj_pal gNamingScreenPalettes + 0x20 * 1, 1
+	obj_pal gNamingScreenPalettes + 0x20 * 2, 2
+	obj_pal gNamingScreenPalettes + 0x20 * 3, 3
+	obj_pal gNamingScreenPalettes + 0x20 * 4, 4
+	obj_pal gNamingScreenPalettes + 0x20 * 5, 5
+	obj_pal gNamingScreenPalettes + 0x20 * 4, 6
+	null_obj_pal
 
+	.align 2
 gUnknown_083CE748:: @ 83CE748
-	.incbin "baserom.gba", 0x003ce748, 0x4b0
+	.incbin "graphics/naming_screen/lower_keyboard_map.bin"
 
+	.align 2
 gUnknown_083CEBF8:: @ 83CEBF8
-	.incbin "baserom.gba", 0x003cebf8, 0x4b0
+	.incbin "graphics/naming_screen/upper_keyboard_map.bin"
 
+	.align 2
 gUnknown_083CF0A8:: @ 83CF0A8
-	.incbin "baserom.gba", 0x003cf0a8, 0x4b0
+	.incbin "graphics/naming_screen/others_keyboard_map.bin"
 
 	.align 2
 gOamData_83CF558:: @ 83CF558
