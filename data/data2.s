@@ -13061,11 +13061,12 @@ gUnknown_083CC738:: @ 83CC738
 @ 83CD2CC
 	.include "data/berries.s"
 
+	.align 2
 gUnknown_083CD780:: @ 83CD780
-	.incbin "baserom.gba", 0x003cd780, 0x680
+	.4byte 0, 0
 
-gUnknown_083CDE00:: @ 83CDE00
-	.incbin "baserom.gba", 0x003cde00, 0x248
+@ 83CD788
+	.include "data/multichoice.s"
 
 gUnknown_083CE048:: @ 83CE048
 	.incbin "baserom.gba", 0x003ce048, 0x4C
@@ -25721,17 +25722,18 @@ SystemText_SaveErrorExchangeBackup:
 gUnknown_0840E604:: @ 840E604
 OtherText_FlyToWhere:
 	.string "FLY to where?$"
-OtherText_Use:
+
+OtherText_Use::
 	.string "USE$"
-OtherText_Toss:
+OtherText_Toss::
 	.string "TOSS$"
-OtherText_Register:
+OtherText_Register::
 	.string "REGISTER$"
-OtherText_Give2:
+OtherText_Give2::
 	.string "GIVE$"
-OtherText_CheckTag:
+OtherText_CheckTag::
 	.string "CHECK TAG$"
-OtherText_Confirm:
+OtherText_Confirm::
 	.string "CONFIRM$"
 
 gUnknown_0840E63B:: @ 840E63B
@@ -26810,305 +26812,306 @@ OtherText_MightyTough:
 	.string "The mighty tough\nhyper POKéMON $"
 OtherText_Exclamation:
 	.string "!$"
-OtherText_Petalburg:
+
+OtherText_Petalburg::
 	.string "PETALBURG$"
-OtherText_Slateport:
+OtherText_Slateport::
 	.string "SLATEPORT$"
-OtherText_Littleroot:
+OtherText_Littleroot::
 	.string "LITTLEROOT$"
-OtherText_Lilycove:
+OtherText_Lilycove::
 	.string "LILYCOVE$"
-OtherText_Dewford:
+OtherText_Dewford::
 	.string "DEWFORD$"
-OtherText_Enter:
+OtherText_Enter::
 	.string "ENTER$"
-OtherText_Info3:
+OtherText_Info3::
 	.string "INFO$"
-OtherText_WhatsAContest:
+OtherText_WhatsAContest::
 	.string "What’s a CONTEST?$"
-OtherText_TypesOfContest:
+OtherText_TypesOfContest::
 	.string "Types of CONTESTS$"
-OtherText_Ranks:
+OtherText_Ranks::
 	.string "Ranks$"
-OtherText_Judging:
+OtherText_Judging::
 	.string "Judging$"
-OtherText_CoolContest:
+OtherText_CoolContest::
 	.string "COOL CONTEST$"
-OtherText_BeautyContest:
+OtherText_BeautyContest::
 	.string "BEAUTY CONTEST$"
-OtherText_CuteContest:
+OtherText_CuteContest::
 	.string "CUTE CONTEST$"
-OtherText_SmartContest:
+OtherText_SmartContest::
 	.string "SMART CONTEST$"
-OtherText_ToughContest:
+OtherText_ToughContest::
 	.string "TOUGH CONTEST$"
-OtherText_Decoration:
+OtherText_Decoration::
 	.string "DECORATION$"
-OtherText_PackUp:
+OtherText_PackUp::
 	.string "PACK UP$"
-OtherText_Count:
+OtherText_Count::
 	.string "COUNT$"
-OtherText_Registry:
+OtherText_Registry::
 	.string "REGISTRY$"
-OtherText_Information:
+OtherText_Information::
 	.string "INFORMATION$"
-OtherText_Mach:
+OtherText_Mach::
 	.string "MACH$"
-OtherText_Acro:
+OtherText_Acro::
 	.string "ACRO$"
-OtherText_Poison:
+OtherText_Poison::
 	.string "PSN$"
-OtherText_Paralysis:
+OtherText_Paralysis::
 	.string "PAR$"
-OtherText_Sleep:
+OtherText_Sleep::
 	.string "SLP$"
-OtherText_Burn:
+OtherText_Burn::
 	.string "BRN$"
-OtherText_Frozen:
+OtherText_Frozen::
 	.string "FRZ$"
-OtherText_Quit:
+OtherText_Quit::
 	.string "QUIT$"
-OtherText_SawIt:
+OtherText_SawIt::
 	.string "Saw it$"
-OtherText_NotYet:
+OtherText_NotYet::
 	.string "Not yet$"
-OtherText_Yes:
+OtherText_Yes::
 	.string "YES$"
-OtherText_No:
+OtherText_No::
 	.string "NO$"
-OtherText_Info2:
+OtherText_Info2::
 	.string "INFO$"
-OtherText_SingleBattle:
+OtherText_SingleBattle::
 	.string "SINGLE BATTLE$"
-OtherText_DoubleBattle:
+OtherText_DoubleBattle::
 	.string "DOUBLE BATTLE$"
-OtherText_MultiBattle:
+OtherText_MultiBattle::
 	.string "MULTI BATTLE$"
-OtherText_MrBriney:
+OtherText_MrBriney::
 	.string "MR. BRINEY$"
-OtherText_MakeAChallenge:
+OtherText_MakeAChallenge::
 	.string "Make a challenge.$"
-OtherText_ObtainInformation:
+OtherText_ObtainInformation::
 	.string "Obtain information.$"
-OtherText_Lv50_2:
+OtherText_Lv50_2::
 	.string "LV. 50$"
-OtherText_Lv100_2:
+OtherText_Lv100_2::
 	.string "LV. 100$"
-OtherText_Zigzagoon:
+OtherText_Zigzagoon::
 	.string "ZIGZAGOON$"
-OtherText_Nincada:
+OtherText_Nincada::
 	.string "NINCADA$"
-OtherText_Poochyena:
+OtherText_Poochyena::
 	.string "POOCHYENA$"
-OtherText_Nincada2:
+OtherText_Nincada2::
 	.string "NINCADA$"
-OtherText_Lotad:
+OtherText_Lotad::
 	.string "LOTAD$"
-OtherText_Roselia:
+OtherText_Roselia::
 	.string "ROSELIA$"
-OtherText_Shroomish:
+OtherText_Shroomish::
 	.string "SHROOMISH$"
-OtherText_Nincada3:
+OtherText_Nincada3::
 	.string "NINCADA$"
-OtherText_Surskit:
+OtherText_Surskit::
 	.string "SURSKIT$"
-OtherText_Treecko:
+OtherText_Treecko::
 	.string "TREECKO$"
-OtherText_Torchic:
+OtherText_Torchic::
 	.string "TORCHIC$"
-OtherText_Mudkip:
+OtherText_Mudkip::
 	.string "MUDKIP$"
-OtherText_Seedot:
+OtherText_Seedot::
 	.string "SEEDOT$"
-OtherText_Shroomish2:
+OtherText_Shroomish2::
 	.string "SHROOMISH$"
-OtherText_Spinda:
+OtherText_Spinda::
 	.string "SPINDA$"
-OtherText_Shroomish3:
+OtherText_Shroomish3::
 	.string "SHROOMISH$"
-OtherText_Zigzagoon2:
+OtherText_Zigzagoon2::
 	.string "ZIGZAGOON$"
-OtherText_Wurmple:
+OtherText_Wurmple::
 	.string "WURMPLE$"
-OtherText_PokeBall:
+OtherText_PokeBall::
 	.string "POKé BALL$"
-OtherText_SuperPotion:
+OtherText_SuperPotion::
 	.string "SUPER POTION$"
-OtherText_SamePrice:
+OtherText_SamePrice::
 	.string "Same price$"
-OtherText_Yen135:
+OtherText_Yen135::
 	.string "¥135$"
-OtherText_Yen155:
+OtherText_Yen155::
 	.string "¥155$"
-OtherText_Yen175:
+OtherText_Yen175::
 	.string "¥175$"
-OtherText_CostMore:
+OtherText_CostMore::
 	.string "They will cost more.$"
-OtherText_CostLess:
+OtherText_CostLess::
 	.string "They will cost less.$"
-OtherText_SamePrice2:
+OtherText_SamePrice2::
 	.string "Same price$"
-OtherText_MaleSymbol:
+OtherText_MaleSymbol::
 	.string "♂$"
-OtherText_FemaleSymbol:
+OtherText_FemaleSymbol::
 	.string "♀$"
-OtherText_Neither:
+OtherText_Neither::
 	.string "Neither$"
-OtherText_Males:
+OtherText_Males::
 	.string "Males$"
-OtherText_Females:
+OtherText_Females::
 	.string "Females$"
-OtherText_SameNumber:
+OtherText_SameNumber::
 	.string "Same number$"
-OtherText_Male:
+OtherText_Male::
 	.string "Male$"
-OtherText_Female:
+OtherText_Female::
 	.string "Female$"
-OtherText_ItDepends:
+OtherText_ItDepends::
 	.string "It depends$"
-OtherText_Six2:
+OtherText_Six2::
 	.string "6$"
-OtherText_Eight2:
+OtherText_Eight2::
 	.string "8$"
-OtherText_Ten:
+OtherText_Ten::
 	.string "10$"
-OtherText_One:
+OtherText_One::
 	.string "1$"
-OtherText_Two:
+OtherText_Two::
 	.string "2$"
-OtherText_Three:
+OtherText_Three::
 	.string "3$"
-OtherText_Six:
+OtherText_Six::
 	.string "6$"
-OtherText_Seven:
+OtherText_Seven::
 	.string "7$"
-OtherText_Eight:
+OtherText_Eight::
 	.string "8$"
-OtherText_FreshWater:
+OtherText_FreshWater::
 	.string "FRESH WATER{CLEAR_TO 0x48}¥200$"
-OtherText_SodaPop:
+OtherText_SodaPop::
 	.string "SODA POP{CLEAR_TO 0x48}¥300$"
-OtherText_Lemonade:
+OtherText_Lemonade::
 	.string "LEMONADE{CLEAR_TO 0x48}¥350$"
-OtherText_HowToRide:
+OtherText_HowToRide::
 	.string "HOW TO RIDE$"
-OtherText_HowToTurn:
+OtherText_HowToTurn::
 	.string "HOW TO TURN$"
-OtherText_SandySlopes:
+OtherText_SandySlopes::
 	.string "SANDY SLOPES$"
-OtherText_Wheelies:
+OtherText_Wheelies::
 	.string "WHEELIES$"
-OtherText_BunnyHops:
+OtherText_BunnyHops::
 	.string "BUNNY-HOPS$"
-OtherText_Jumping:
+OtherText_Jumping::
 	.string "JUMPING$"
-OtherText_Satisfied:
+OtherText_Satisfied::
 	.string "Satisfied$"
-OtherText_Dissatisfied:
+OtherText_Dissatisfied::
 	.string "Dissatisfied$"
-OtherText_Deepseatooth:
+OtherText_Deepseatooth::
 	.string "DEEPSEATOOTH$"
-OtherText_Deepseascale:
+OtherText_Deepseascale::
 	.string "DEEPSEASCALE$"
-OtherText_BlueFlute2:
+OtherText_BlueFlute2::
 	.string "BLUE FLUTE$"
-OtherText_YellowFlute2:
+OtherText_YellowFlute2::
 	.string "YELLOW FLUTE$"
-OtherText_RedFlute2:
+OtherText_RedFlute2::
 	.string "RED FLUTE$"
-OtherText_WhiteFlute2:
+OtherText_WhiteFlute2::
 	.string "WHITE FLUTE$"
-OtherText_BlackFlute2:
+OtherText_BlackFlute2::
 	.string "BLACK FLUTE$"
-OtherText_GlassChair:
+OtherText_GlassChair::
 	.string "GLASS CHAIR$"
-OtherText_GlassDesk:
+OtherText_GlassDesk::
 	.string "GLASS DESK$"
-OtherText_TreeckoDoll:
+OtherText_TreeckoDoll::
 	.string "TREECKO DOLL 1,000 COINS$"
-OtherText_TorchicDoll:
+OtherText_TorchicDoll::
 	.string "TORCHIC DOLL 1,000 COINS$"
-OtherText_MudkipDoll:
+OtherText_MudkipDoll::
 	.string "MUDKIP DOLL   1,000 COINS$"
-OtherText_50Coins:
+OtherText_50Coins::
 	.string "  50 COINS    ¥1,000$"
-OtherText_500Coins:
+OtherText_500Coins::
 	.string "500 COINS  ¥10,000$"
-OtherText_Excellent:
+OtherText_Excellent::
 	.string "Excellent!$"
-OtherText_NotSoHot:
+OtherText_NotSoHot::
 	.string "Not so hot$"
-OtherText_RedShard:
+OtherText_RedShard::
 	.string "RED SHARD$"
-OtherText_YellowShard:
+OtherText_YellowShard::
 	.string "YELLOW SHARD$"
-OtherText_BlueShard:
+OtherText_BlueShard::
 	.string "BLUE SHARD$"
-OtherText_GreenShard:
+OtherText_GreenShard::
 	.string "GREEN SHARD$"
-OtherText_BattleTower:
+OtherText_BattleTower::
 	.string "BATTLE TOWER$"
-OtherText_Right:
+OtherText_Right::
 	.string "Right$"
-OtherText_Left:
+OtherText_Left::
 	.string "Left$"
-OtherText_TM32:
+OtherText_TM32::
 	.string "TM32  1,500 COINS$"
-OtherText_TM29:
+OtherText_TM29::
 	.string "TM29  3,500 COINS$"
-OtherText_TM35:
+OtherText_TM35::
 	.string "TM35  4,000 COINS$"
-OtherText_TM24:
+OtherText_TM24::
 	.string "TM24  4,000 COINS$"
-OtherText_TM13:
+OtherText_TM13::
 	.string "TM13  4,000 COINS$"
-OtherText_1F_2:
+OtherText_1F_2::
 	.string "1F$"
-OtherText_2F_2:
+OtherText_2F_2::
 	.string "2F$"
-OtherText_3F_2:
+OtherText_3F_2::
 	.string "3F$"
-OtherText_4F_2:
+OtherText_4F_2::
 	.string "4F$"
-OtherText_5F_2:
+OtherText_5F_2::
 	.string "5F$"
-OtherText_Cool2:
+OtherText_Cool2::
 	.string "COOL$"
-OtherText_Beauty3:
+OtherText_Beauty3::
 	.string "BEAUTY$"
-OtherText_Cute2:
+OtherText_Cute2::
 	.string "CUTE$"
-OtherText_Smart2:
+OtherText_Smart2::
 	.string "SMART$"
-OtherText_Tough2:
+OtherText_Tough2::
 	.string "TOUGH$"
-OtherText_Normal:
+OtherText_Normal::
 	.string "NORMAL$"
-OtherText_Super:
+OtherText_Super::
 	.string "SUPER$"
-OtherText_Hyper:
+OtherText_Hyper::
 	.string "HYPER$"
-OtherText_Master:
+OtherText_Master::
 	.string "MASTER$"
-OtherText_Cool3:
+OtherText_Cool3::
 	.string "COOL$"
-OtherText_Beauty4:
+OtherText_Beauty4::
 	.string "BEAUTY$"
-OtherText_Cute3:
+OtherText_Cute3::
 	.string "CUTE$"
-OtherText_Smart3:
+OtherText_Smart3::
 	.string "SMART$"
-OtherText_Tough3:
+OtherText_Tough3::
 	.string "TOUGH$"
-OtherText_Items:
+OtherText_Items::
 	.string "ITEMS$"
-OtherText_KeyItems:
+OtherText_KeyItems::
 	.string "KEY ITEMS$"
-OtherText_Balls:
+OtherText_Balls::
 	.string "BALLS$"
-OtherText_TMsHMs:
+OtherText_TMsHMs::
 	.string "TMs & HMs$"
-OtherText_Berries:
+OtherText_Berries::
 	.string "BERRIES$"
 
 gUnknown_08410753:: @ 8410753
