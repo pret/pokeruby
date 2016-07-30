@@ -45,7 +45,7 @@ gFieldEffectScriptPointers:: @ 81D9B34
 	.4byte gFieldEffectScript_HotSpringsWater
 	.4byte gFieldEffectScript_Unknown43
 	.4byte gFieldEffectScript_Unknown44
-	.4byte gFieldEffectScript_Unknown45
+	.4byte gFieldEffectScript_Pokeball
 	.4byte gFieldEffectScript_HeartIcon
 	.4byte gFieldEffectScript_Unknown47
 	.4byte gFieldEffectScript_Unknown48
@@ -246,7 +246,7 @@ gFieldEffectScript_Unknown44: @ 81D9D99
 	field_eff_callnative sub_80870B0
 	field_eff_end
 
-gFieldEffectScript_Unknown45: @ 81D9D9F
+gFieldEffectScript_Pokeball: @ 81D9D9F
 	field_eff_loadpal gFieldEffectObjectPaletteInfo10
 	field_eff_callnative sub_811B6B4
 	field_eff_end

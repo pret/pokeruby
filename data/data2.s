@@ -12333,17 +12333,24 @@ gUnknown_083C1704:: @ 83C1704
 	.incbin "baserom.gba", 0x003c1704, 0x4
 
 gUnknown_083C1708:: @ 83C1708
-	.incbin "baserom.gba", 0x003c1708, 0x2
+	.byte 4, 5
 
 gUnknown_083C170A:: @ 83C170A
-	.incbin "baserom.gba", 0x003c170a, 0x22
+	.byte 5, 0
+
+	.align 2
+gPalette_83C170C:: @ 83C170C
+	.incbin "baserom.gba", 0x003c170c, 0x20
 
 	.align 2
 gSpriteImage_83C172C:: @ 83C172C
 	.incbin "graphics/unknown_sprites/83C172C.4bpp"
 
 	.align 2
-	.incbin "baserom.gba", 0x3c17ac, 0x4a0
+	.incbin "graphics/unused/cherry.4bpp"
+
+	.align 2
+	.incbin "graphics/unused/cherry.gbapal"
 
 	.align 2
 gOamData_83C1C4C:: @ 83C1C4C
@@ -12362,7 +12369,9 @@ gSpriteAnim_83C1C5C:: @ 83C1C5C
 	obj_image_anim_end
 
 	.align 2
-	.incbin "baserom.gba", 0x3c1c64, 0x8
+gSpriteAnim_83C1C64:: @ 83C1C64
+	obj_image_anim_frame 128, 4
+	obj_image_anim_end
 
 	.align 2
 gSpriteAnim_83C1C6C:: @ 83C1C6C
@@ -12404,15 +12413,15 @@ gSpriteAffineAnimTable_83C1CC4:: @ 83C1CC4
 
 	.align 2
 gUnknown_083C1CC8:: @ 83C1CC8
-	obj_tiles 0x08e75024, 12288, 0x7530
+	obj_tiles gBagMaleTiles, 0x3000, 30000
 
 	.align 2
 gUnknown_083C1CD0:: @ 83C1CD0
-	obj_tiles 0x08e75ba0, 12288, 0x7530
+	obj_tiles gBagFemaleTiles, 0x3000, 30000
 
 	.align 2
 gUnknown_083C1CD8:: @ 83C1CD8
-	obj_pal 0x08e76700, 0x7530
+	obj_pal gBagPalette, 30000
 
 	.align 2
 gSpriteTemplate_83C1CE0:: @ 83C1CE0
@@ -12445,7 +12454,7 @@ gSpriteImageTable_83C1D28:: @ 83C1D28
 
 	.align 2
 gUnknown_083C1D30:: @ 83C1D30
-	obj_pal 0x083c170c, 0x0008
+	obj_pal gPalette_83C170C, 8
 
 	.align 2
 gSpriteTemplate_83C1D38:: @ 83C1D38
@@ -13351,20 +13360,44 @@ gSpriteTemplate_83CE670:: @ 83CE670
 gSpriteTemplate_83CE688:: @ 83CE688
 	spr_template 0xFFFF, 0, gOamData_83CE498, gSpriteAnimTable_83CE5C4, gSpriteImageTable_83CE588, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
+	.align 2
 gUnknown_083CE6A0:: @ 83CE6A0
-	.incbin "baserom.gba", 0x003ce6a0, 0x68
+	obj_tiles gNamingScreenBackButtonTiles, 0x1E0, 0
+	obj_tiles gNamingScreenOKButtonTiles, 0x1E0, 1
+	obj_tiles gNamingScreenChangeKeyboardBoxTiles, 0x280, 2
+	obj_tiles gNamingScreenChangeKeyboardButtonTiles, 0x100, 3
+	obj_tiles gNamingScreenLowerTextTiles, 0x60, 4
+	obj_tiles gNamingScreenUpperTextTiles, 0x60, 5
+	obj_tiles gNamingScreenOthersTextTiles, 0x60, 6
+	obj_tiles gNamingScreenCursorTiles, 0x80, 7
+	obj_tiles gNamingScreenActiveCursorSmallTiles, 0x80, 8
+	obj_tiles gNamingScreenActiveCursorBigTiles, 0x80, 9
+	obj_tiles gNamingScreenRightPointingTriangleTiles, 0x20, 10
+	obj_tiles gNamingScreenUnderscoreTiles, 0x20, 11
+	null_obj_tiles
 
+	.align 2
 gUnknown_083CE708:: @ 83CE708
-	.incbin "baserom.gba", 0x003ce708, 0x40
+	obj_pal gNamingScreenPalettes + 0x20 * 0, 0
+	obj_pal gNamingScreenPalettes + 0x20 * 1, 1
+	obj_pal gNamingScreenPalettes + 0x20 * 2, 2
+	obj_pal gNamingScreenPalettes + 0x20 * 3, 3
+	obj_pal gNamingScreenPalettes + 0x20 * 4, 4
+	obj_pal gNamingScreenPalettes + 0x20 * 5, 5
+	obj_pal gNamingScreenPalettes + 0x20 * 4, 6
+	null_obj_pal
 
+	.align 2
 gUnknown_083CE748:: @ 83CE748
-	.incbin "baserom.gba", 0x003ce748, 0x4b0
+	.incbin "graphics/naming_screen/lower_keyboard_map.bin"
 
+	.align 2
 gUnknown_083CEBF8:: @ 83CEBF8
-	.incbin "baserom.gba", 0x003cebf8, 0x4b0
+	.incbin "graphics/naming_screen/upper_keyboard_map.bin"
 
+	.align 2
 gUnknown_083CF0A8:: @ 83CF0A8
-	.incbin "baserom.gba", 0x003cf0a8, 0x4b0
+	.incbin "graphics/naming_screen/others_keyboard_map.bin"
 
 	.align 2
 gOamData_83CF558:: @ 83CF558
@@ -23068,29 +23101,33 @@ gCryMeterNeedleSpritePalettes:: @ 83FB79C
 @ 83FB7AC
 	.include "data/landmarks.s"
 
+	.align 2
 gUnknown_083FBB88:: @ 83FBB88
-	.incbin "baserom.gba", 0x003fbb88, 0x580
+	.incbin "graphics/battle_transitions/big_pokeball.4bpp"
 
+	.align 2
 gUnknown_083FC108:: @ 83FC108
-	.incbin "baserom.gba", 0x003fc108, 0x40
+	.incbin "graphics/battle_transitions/pokeball_trail.4bpp"
 
 	.align 2
 gSpriteImage_83FC148:: @ 83FC148
-	.incbin "graphics/unknown_sprites/83FC148.4bpp"
+	.incbin "graphics/battle_transitions/pokeball.4bpp"
 
+	.align 2
 gUnknown_083FC348:: @ 83FC348
-	.incbin "baserom.gba", 0x003fc348, 0x1e0
+	.incbin "graphics/battle_transitions/elite_four_bg.4bpp"
 
 	.align 2
 gSpriteImage_83FC528:: @ 83FC528
-	.incbin "graphics/unknown_sprites/83FC528.4bpp"
+	.incbin "graphics/battle_transitions/unused_brendan.4bpp"
 
 	.align 2
 gSpriteImage_83FCD28:: @ 83FCD28
-	.incbin "graphics/unknown_sprites/83FCD28.4bpp"
+	.incbin "graphics/battle_transitions/unused_lass.4bpp"
 
+	.align 2
 gUnknown_083FD528:: @ 83FD528
-	.incbin "baserom.gba", 0x003fd528, 0x1e0
+	.incbin "graphics/battle_transitions/shrinking_box.4bpp"
 
 	.align 2
 gUnknown_083FD708:: @ 83FD708
@@ -23117,7 +23154,7 @@ gUnknown_083FD70C:: @ 83FD70C
 	.4byte sub_811AC64
 
 	.align 2
-gUnknown_083FD750:: @ 83FD750
+gBattleTransitionFuncs:: @ 83FD750
 	.4byte sub_811ACB4
 	.4byte sub_811ADAC
 	.4byte sub_811AF44
@@ -23174,14 +23211,23 @@ gUnknown_083FD7D8:: @ 83FD7D8
 	.4byte sub_811B5FC
 	.4byte sub_811B688
 
+	.align 1
 gUnknown_083FD7E4:: @ 83FD7E4
-	.incbin "baserom.gba", 0x003fd7e4, 0x4
+	.2byte -16
+	.2byte 256
 
+	.align 1
 gUnknown_083FD7E8:: @ 83FD7E8
-	.incbin "baserom.gba", 0x003fd7e8, 0xa
+	.2byte 0
+	.2byte 32
+	.2byte 64
+	.2byte 18
+	.2byte 48
 
+	.align 1
 gUnknown_083FD7F2:: @ 83FD7F2
-	.incbin "baserom.gba", 0x003fd7f2, 0x6
+	.2byte 8
+	.2byte -8
 
 	.align 2
 gUnknown_083FD7F8:: @ 83FD7F8
@@ -23279,8 +23325,10 @@ gUnknown_083FD8F4:: @ 83FD8F4
 gUnknown_083FD93A:: @ 83FD93A
 	.incbin "baserom.gba", 0x003fd93a, 0xe
 
+	.align 2
 gUnknown_083FD948:: @ 83FD948
-	.incbin "baserom.gba", 0x003fd948, 0x8
+	.4byte sub_811D584
+	.4byte sub_811D5E0
 
 	.align 2
 gSpriteImageTable_83FD950:: @ 83FD950
@@ -23353,16 +23401,33 @@ gFieldEffectObjectPalette10:: @ 83FD9F8
 gFieldEffectObjectPaletteInfo10:: @ 83FDA18
 	obj_pal gFieldEffectObjectPalette10, 0x1009
 
+	.align 2
 Unknown_83FDA20:
-	.incbin "baserom.gba", 0x3FDA20, 0x20
+	.incbin "graphics/battle_transitions/sidney_bg.gbapal"
+
+	.align 2
 Unknown_83FDA40:
-	.incbin "baserom.gba", 0x3FDA40, 0x20
+	.incbin "graphics/battle_transitions/phoebe_bg.gbapal"
+
+	.align 2
 Unknown_83FDA60:
-	.incbin "baserom.gba", 0x3FDA60, 0x20
+	.incbin "graphics/battle_transitions/glacia_bg.gbapal"
+
+	.align 2
 Unknown_83FDA80:
-	.incbin "baserom.gba", 0x3FDA80, 0x20
+	.incbin "graphics/battle_transitions/drake_bg.gbapal"
+
+	.align 2
 Unknown_83FDAA0:
-	.incbin "baserom.gba", 0x3FDAA0, 0x60
+	.incbin "graphics/battle_transitions/steven_bg.gbapal"
+
+	.align 2
+Unknown_83FDAC0:
+	.incbin "graphics/battle_transitions/brendan_bg.gbapal"
+
+	.align 2
+Unknown_83FDAE0:
+	.incbin "graphics/battle_transitions/may_bg.gbapal"
 
 	.align 2
 gUnknown_083FDB00:: @ 83FDB00
@@ -23372,14 +23437,26 @@ gUnknown_083FDB00:: @ 83FDB00
 	.4byte Unknown_83FDA80
 	.4byte Unknown_83FDAA0
 
+	.align 2
 gUnknown_083FDB14:: @ 83FDB14
-	.incbin "baserom.gba", 0x003fdb14, 0x30
+	.4byte Unknown_83FDAC0
+	.4byte Unknown_83FDAE0
 
+	.align 2
+UnusedTrainerPalette:
+	.incbin "graphics/battle_transitions/unused_trainer.gbapal"
+
+	.align 2
+gSpritePalette_UnusedTrainer:: @ 83FDB3C
+	obj_pal UnusedTrainerPalette, 0x100A
+
+	.align 2
 gUnknown_083FDB44:: @ 83FDB44
-	.incbin "baserom.gba", 0x003fdb44, 0x4b0
+	.incbin "graphics/battle_transitions/big_pokeball_map.bin"
 
+	.align 2
 gUnknown_083FDFF4:: @ 83FDFF4
-	.incbin "baserom.gba", 0x003fdff4, 0x500
+	.incbin "graphics/battle_transitions/elite_four_bg_map.bin"
 
 	.include "data/text/battle_strings.s"
 
