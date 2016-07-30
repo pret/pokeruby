@@ -23016,29 +23016,33 @@ gCryMeterNeedleSpritePalettes:: @ 83FB79C
 @ 83FB7AC
 	.include "data/landmarks.s"
 
+	.align 2
 gUnknown_083FBB88:: @ 83FBB88
-	.incbin "baserom.gba", 0x003fbb88, 0x580
+	.incbin "graphics/battle_transitions/big_pokeball.4bpp"
 
+	.align 2
 gUnknown_083FC108:: @ 83FC108
-	.incbin "baserom.gba", 0x003fc108, 0x40
+	.incbin "graphics/battle_transitions/pokeball_trail.4bpp"
 
 	.align 2
 gSpriteImage_83FC148:: @ 83FC148
-	.incbin "graphics/unknown_sprites/83FC148.4bpp"
+	.incbin "graphics/battle_transitions/pokeball.4bpp"
 
+	.align 2
 gUnknown_083FC348:: @ 83FC348
-	.incbin "baserom.gba", 0x003fc348, 0x1e0
+	.incbin "graphics/battle_transitions/elite_four_bg.4bpp"
 
 	.align 2
 gSpriteImage_83FC528:: @ 83FC528
-	.incbin "graphics/unknown_sprites/83FC528.4bpp"
+	.incbin "graphics/battle_transitions/unused_brendan.4bpp"
 
 	.align 2
 gSpriteImage_83FCD28:: @ 83FCD28
-	.incbin "graphics/unknown_sprites/83FCD28.4bpp"
+	.incbin "graphics/battle_transitions/unused_lass.4bpp"
 
+	.align 2
 gUnknown_083FD528:: @ 83FD528
-	.incbin "baserom.gba", 0x003fd528, 0x1e0
+	.incbin "graphics/battle_transitions/shrinking_box.4bpp"
 
 	.align 2
 gUnknown_083FD708:: @ 83FD708
@@ -23065,7 +23069,7 @@ gUnknown_083FD70C:: @ 83FD70C
 	.4byte sub_811AC64
 
 	.align 2
-gUnknown_083FD750:: @ 83FD750
+gBattleTransitionFuncs:: @ 83FD750
 	.4byte sub_811ACB4
 	.4byte sub_811ADAC
 	.4byte sub_811AF44
@@ -23122,14 +23126,23 @@ gUnknown_083FD7D8:: @ 83FD7D8
 	.4byte sub_811B5FC
 	.4byte sub_811B688
 
+	.align 1
 gUnknown_083FD7E4:: @ 83FD7E4
-	.incbin "baserom.gba", 0x003fd7e4, 0x4
+	.2byte -16
+	.2byte 256
 
+	.align 1
 gUnknown_083FD7E8:: @ 83FD7E8
-	.incbin "baserom.gba", 0x003fd7e8, 0xa
+	.2byte 0
+	.2byte 32
+	.2byte 64
+	.2byte 18
+	.2byte 48
 
+	.align 1
 gUnknown_083FD7F2:: @ 83FD7F2
-	.incbin "baserom.gba", 0x003fd7f2, 0x6
+	.2byte 8
+	.2byte -8
 
 	.align 2
 gUnknown_083FD7F8:: @ 83FD7F8
@@ -23227,8 +23240,10 @@ gUnknown_083FD8F4:: @ 83FD8F4
 gUnknown_083FD93A:: @ 83FD93A
 	.incbin "baserom.gba", 0x003fd93a, 0xe
 
+	.align 2
 gUnknown_083FD948:: @ 83FD948
-	.incbin "baserom.gba", 0x003fd948, 0x8
+	.4byte sub_811D584
+	.4byte sub_811D5E0
 
 	.align 2
 gSpriteImageTable_83FD950:: @ 83FD950
@@ -23301,16 +23316,33 @@ gFieldEffectObjectPalette10:: @ 83FD9F8
 gFieldEffectObjectPaletteInfo10:: @ 83FDA18
 	obj_pal gFieldEffectObjectPalette10, 0x1009
 
+	.align 2
 Unknown_83FDA20:
-	.incbin "baserom.gba", 0x3FDA20, 0x20
+	.incbin "graphics/battle_transitions/sidney_bg.gbapal"
+
+	.align 2
 Unknown_83FDA40:
-	.incbin "baserom.gba", 0x3FDA40, 0x20
+	.incbin "graphics/battle_transitions/phoebe_bg.gbapal"
+
+	.align 2
 Unknown_83FDA60:
-	.incbin "baserom.gba", 0x3FDA60, 0x20
+	.incbin "graphics/battle_transitions/glacia_bg.gbapal"
+
+	.align 2
 Unknown_83FDA80:
-	.incbin "baserom.gba", 0x3FDA80, 0x20
+	.incbin "graphics/battle_transitions/drake_bg.gbapal"
+
+	.align 2
 Unknown_83FDAA0:
-	.incbin "baserom.gba", 0x3FDAA0, 0x60
+	.incbin "graphics/battle_transitions/steven_bg.gbapal"
+
+	.align 2
+Unknown_83FDAC0:
+	.incbin "graphics/battle_transitions/brendan_bg.gbapal"
+
+	.align 2
+Unknown_83FDAE0:
+	.incbin "graphics/battle_transitions/may_bg.gbapal"
 
 	.align 2
 gUnknown_083FDB00:: @ 83FDB00
@@ -23320,14 +23352,26 @@ gUnknown_083FDB00:: @ 83FDB00
 	.4byte Unknown_83FDA80
 	.4byte Unknown_83FDAA0
 
+	.align 2
 gUnknown_083FDB14:: @ 83FDB14
-	.incbin "baserom.gba", 0x003fdb14, 0x30
+	.4byte Unknown_83FDAC0
+	.4byte Unknown_83FDAE0
 
+	.align 2
+UnusedTrainerPalette:
+	.incbin "graphics/battle_transitions/unused_trainer.gbapal"
+
+	.align 2
+gSpritePalette_UnusedTrainer:: @ 83FDB3C
+	obj_pal UnusedTrainerPalette, 0x100A
+
+	.align 2
 gUnknown_083FDB44:: @ 83FDB44
-	.incbin "baserom.gba", 0x003fdb44, 0x4b0
+	.incbin "graphics/battle_transitions/big_pokeball_map.bin"
 
+	.align 2
 gUnknown_083FDFF4:: @ 83FDFF4
-	.incbin "baserom.gba", 0x003fdff4, 0x500
+	.incbin "graphics/battle_transitions/elite_four_bg_map.bin"
 
 	.include "data/text/battle_strings.s"
 
