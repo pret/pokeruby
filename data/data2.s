@@ -20370,17 +20370,20 @@ gUnknown_083E5CC0:: @ 83E5CC0
 gUnknown_083E5CE0:: @ 83E5CE0
 	.incbin "baserom.gba", 0x003e5ce0, 0x80
 
+	.align 2
 gUnknown_083E5D60:: @ 83E5D60
-	.incbin "graphics/interface/map.gbapal", 0xE0, 0x40
+	.incbin "graphics/pokenav/region_map.gbapal", 0xE0, 0x40
 
+	.align 2
 gUnknown_083E5DA0:: @ 83E5DA0
-	.incbin "graphics/interface/map.8bpp.lz"
+	.incbin "graphics/pokenav/region_map.8bpp.lz"
 
+	.align 2
 gUnknown_083E6B04:: @ 83E6B04
-	.incbin "baserom.gba", 0x003e6b04, 0x34c
+	.incbin "graphics/pokenav/region_map_map.bin.lz"
 
-gUnknown_083E6E50:: @ 83E6E50
-	.incbin "baserom.gba", 0x003e6e50, 0x1A4
+@ 83E6E50
+	.include "data/region_map_sections.s"
 
 @ 83E6FF4
 	.include "data/region_map_locations.s"
@@ -23010,10 +23013,8 @@ gCryMeterNeedleSpritePalettes:: @ 83FB79C
 	obj_pal CryMeterNeedlePalette, 8192
 	null_obj_pal
 
-	.incbin "baserom.gba", 0x003fb7ac, 0x26c
-
-gUnknown_083FBA18:: @ 83FBA18
-	.incbin "baserom.gba", 0x003fba18, 0x170
+@ 83FB7AC
+	.include "data/landmarks.s"
 
 gUnknown_083FBB88:: @ 83FBB88
 	.incbin "baserom.gba", 0x003fbb88, 0x580
@@ -28839,80 +28840,9 @@ ContestText_PokeWon:
 gUnknown_0842CEAF:: @ 842CEAF
 OtherText_LinkStandby:
 	.string "Link standby...$"
-OtherText_FlowerShop:
-	.string "FLOWER SHOP$"
-OtherText_PetalburgWoods:
-	.string "PETALBURG WOODS$"
-OtherText_BrineysCottage:
-	.string "MR. BRINEY’S COTTAGE$"
-OtherText_AbandonedShip:
-	.string "ABANDONED SHIP$"
-OtherText_SeashoreHouse:
-	.string "SEASHORE HOUSE$"
-OtherText_SlateportBeach:
-	.string "SLATEPORT BEACH$"
-OtherText_CyclingRoad:
-	.string "CYCLING ROAD$"
-OtherText_NewMauville:
-	.string "NEW MAUVILLE$"
-OtherText_TrickHouse:
-	.string "TRICK HOUSE$"
-OtherText_OldLadyRestShop:
-	.string "OLD LADY’S REST STOP$"
-OtherText_Desert:
-	.string "DESERT$"
-OtherText_WinstrateFamily:
-	.string "THE WINSTRATE FAMILY$"
-OtherText_CableCar:
-	.string "CABLE CAR$"
-OtherText_GlassWorkshop:
-	.string "GLASS WORKSHOP$"
-OtherText_WeatherInstitute:
-	.string "WEATHER INSTITUTE$"
-OtherText_MeteorFalls:
-	.string "METEOR FALLS$"
-OtherText_TunnelersRestHouse:
-	.string "TUNNELER’S REST HOUSE$"
-OtherText_RusturfTunnel:
-	.string "RUSTURF TUNNEL$"
-OtherText_PokemonDayCare:
-	.string "POKéMON DAY CARE$"
-OtherText_SafariZoneEntrance:
-	.string "SAFARI ZONE ENTRANCE$"
-OtherText_MtPyre:
-	.string "MT. PYRE$"
-OtherText_ShoalCave:
-	.string "SHOAL CAVE$"
-OtherText_SeafloorCavern:
-	.string "SEAFLOOR CAVERN$"
-OtherText_GraniteCave:
-	.string "GRANITE CAVE$"
-OtherText_OceanCurrent:
-	.string "OCEAN CURRENT$"
-OtherText_LanetteHouse:
-	.string "LANETTE’S HOUSE$"
-OtherText_FieryPath:
-	.string "FIERY PATH$"
-OtherText_JaggedPass:
-	.string "JAGGED PASS$"
-OtherText_SkyPillar:
-	.string "SKY PILLAR$"
-OtherText_BerryMasterHouse:
-	.string "BERRY MASTER’S HOUSE$"
-OtherText_IslandCave:
-	.string "ISLAND CAVE$"
-OtherText_DesertRuins:
-	.string "DESERT RUINS$"
-OtherText_ScorchedSlab:
-	.string "SCORCHED SLAB$"
-OtherText_AncientTomb:
-	.string "ANCIENT TOMB$"
-OtherText_SealedChamber:
-	.string "SEALED CHAMBER$"
-OtherText_FossilManiacsHouse:
-	.string "FOSSIL MANIAC’S HOUSE$"
-OtherText_HuntersHouse:
-	.string "HUNTER’S HOUSE$"
+
+@ 842CEBF
+	.include "data/text/landmarks.s"
 
 gUnknown_0842D0E6:: @ 842D0E6
 OtherText_Terminator4:

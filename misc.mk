@@ -22,7 +22,7 @@ $(INTROGFXDIR)/introgfx.4bpp: $(INTROGFXDIR)/intro1_bg.4bpp $(INTROGFXDIR)/intro
 
 	@cat $(INTROGFXDIR)/intro1_bg.4bpp $(INTROGFXDIR)/intro1_leaves.4bpp >$@
 
-$(MENUGFXDIR)/map.8bpp: $(MENUGFXDIR)/map.png
+$(PKNAVGFXDIR)/region_map.8bpp: $(PKNAVGFXDIR)/region_map.png
 	$(GFX) $< $@ -num_tiles 233
 
 $(PSSGFXDIR)/forest_frame.4bpp: $(PSSGFXDIR)/forest_frame.png
