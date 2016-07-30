@@ -12408,15 +12408,15 @@ gSpriteAffineAnimTable_83C1CC4:: @ 83C1CC4
 
 	.align 2
 gUnknown_083C1CC8:: @ 83C1CC8
-	obj_tiles 0x08e75024, 0x3000, 30000
+	obj_tiles gBagMaleTiles, 0x3000, 30000
 
 	.align 2
 gUnknown_083C1CD0:: @ 83C1CD0
-	obj_tiles 0x08e75ba0, 0x3000, 30000
+	obj_tiles gBagFemaleTiles, 0x3000, 30000
 
 	.align 2
 gUnknown_083C1CD8:: @ 83C1CD8
-	obj_pal 0x08e76700, 30000
+	obj_pal gBagPalette, 30000
 
 	.align 2
 gSpriteTemplate_83C1CE0:: @ 83C1CE0

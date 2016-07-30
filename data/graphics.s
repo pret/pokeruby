@@ -2834,8 +2834,21 @@ gUnknown_08E74688:: @ 8E74688
 	.incbin "baserom.gba", 0x00e74688, 0x800
 
 gUnknown_08E74E88:: @ 8E74E88
-	.incbin "baserom.gba", 0x00e74e88, 0x18a0
+	.incbin "baserom.gba", 0x00e74e88, 0x19c
 
+	.align 2
+gBagMaleTiles:: @ 8E75024
+	.incbin "graphics/misc/bag_male.4bpp.lz"
+
+	.align 2
+gBagFemaleTiles:: @ 8E75BA0
+	.incbin "graphics/misc/bag_female.4bpp.lz"
+
+	.align 2
+gBagPalette:: @ 8E76700
+	.incbin "graphics/misc/bag.gbapal.lz"
+
+	.align 2
 gUnknown_08E76728:: @ 8E76728
 	.incbin "baserom.gba", 0x00e76728, 0x86c
 
