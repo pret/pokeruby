@@ -20,3 +20,4 @@
 	.include "constants/variables.s"
 	.include "constants/songs.s"
 	.include "constants/version.s"
+	.include "constants/region_map_sections.s"

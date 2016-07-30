@@ -23724,7 +23724,7 @@ _0804CC68:
 	.align 2, 0
 _0804CCD8: .4byte 0x03004828
 _0804CCDC: .4byte 0x02020004
-_0804CCE0: .4byte gUnknown_08215AC0
+_0804CCE0: .4byte gSpriteAffineAnimTable_8215AC0
 _0804CCE4:
 	ldr r0, [r5]
 	adds r0, 0xB8

@@ -11,6 +11,7 @@ SECTIONS {
     {
         src/main.o(ewram_data);
         src/sprite.o(ewram_data);
+        . = ALIGN(4);
         src/text.o(ewram_data);
         src/string_util.o(ewram_data);
         . += 0x2E8; /* big gap */

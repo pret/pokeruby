@@ -1072,7 +1072,9 @@ gBattleAnimSpriteSheet_135:: @ 8D1A704
 gBattleAnimSpritePalette_135:: @ 8D1A7DC
 	.incbin "graphics/battle_anims/sprites/135.gbapal.lz"
 
-	.incbin "baserom.gba", 0xd1a7f4, 0xb0
+	.align 2
+gBattleAnimSpriteSheet_Particles:: @ 8D1A7F4
+	.incbin "graphics/battle_anims/sprites/particles.4bpp.lz"
 
 	.align 2
 gBattleAnimSpriteSheet_136:: @ 8D1A8A4
@@ -3746,17 +3748,32 @@ gUnknown_08EA0028:: @ 8EA0028
 gUnknown_08EA0108:: @ 8EA0108
 	.incbin "baserom.gba", 0x00ea0108, 0x1c0
 
+	.align 2
 gUnknown_08EA02C8:: @ 8EA02C8
-	.incbin "baserom.gba", 0x00ea02c8, 0x80
+	.incbin "graphics/trade/menu.gbapal"
+	.incbin "graphics/trade/stripes.gbapal"
+	.incbin "graphics/trade/stripes.gbapal"
 
+	.align 2
+gUnknown_08EA0328:: @ 8EA0328
+	.incbin "graphics/trade/selected_mon.gbapal"
+
+	.align 2
 gUnknown_08EA0348:: @ 8EA0348
-	.incbin "baserom.gba", 0x00ea0348, 0x1280
+	.incbin "graphics/trade/menu.4bpp"
 
+	.align 2
 gUnknown_08EA15C8:: @ 8EA15C8
-	.incbin "baserom.gba", 0x00ea15c8, 0x800
+	.incbin "graphics/trade/menu_map.bin"
 
 gUnknown_08EA1DC8:: @ 8EA1DC8
-	.incbin "baserom.gba", 0x00ea1dc8, 0x844
+	.incbin "baserom.gba", 0x00ea1dc8, 0x24
+
+	.align 2
+gUnknown_08EA1DEC:: @ 8EA1DEC
+	.incbin "graphics/trade/selected_mon.4bpp"
+
+	.incbin "baserom.gba", 0x00ea25ec, 0x20
 
 gUnknown_08EA260C:: @ 8EA260C
 	.incbin "baserom.gba", 0x00ea260c, 0x438

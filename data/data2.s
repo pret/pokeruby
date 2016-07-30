@@ -2113,49 +2113,16 @@ gSpriteAffineAnimTable_820AAA0:: @ 820AAA0
 	.align 2
 gSpriteTemplate_820AAB4:: @ 820AAB4
 	spr_template 55000, 55000, gOamData_820A9EC, gSpriteAnimTable_820AA34, NULL, gSpriteAffineAnimTable_820AAA0, objc_0804ABD4
-
-	.align 2
-gSpriteTemplate_820AACC:: @ 820AACC
 	spr_template 55001, 55001, gOamData_820A9EC, gSpriteAnimTable_820AA34, NULL, gSpriteAffineAnimTable_820AAA0, objc_0804ABD4
-
-	.align 2
-gSpriteTemplate_820AAE4:: @ 820AAE4
 	spr_template 55002, 55002, gOamData_820A9EC, gSpriteAnimTable_820AA34, NULL, gSpriteAffineAnimTable_820AAA0, objc_0804ABD4
-
-	.align 2
-gSpriteTemplate_820AAFC:: @ 820AAFC
 	spr_template 55003, 55003, gOamData_820A9EC, gSpriteAnimTable_820AA34, NULL, gSpriteAffineAnimTable_820AAA0, objc_0804ABD4
-
-	.align 2
-gSpriteTemplate_820AB14:: @ 820AB14
 	spr_template 55004, 55004, gOamData_820A9EC, gSpriteAnimTable_820AA34, NULL, gSpriteAffineAnimTable_820AAA0, objc_0804ABD4
-
-	.align 2
-gSpriteTemplate_820AB2C:: @ 820AB2C
 	spr_template 55005, 55005, gOamData_820A9EC, gSpriteAnimTable_820AA34, NULL, gSpriteAffineAnimTable_820AAA0, objc_0804ABD4
-
-	.align 2
-gSpriteTemplate_820AB44:: @ 820AB44
 	spr_template 55006, 55006, gOamData_820A9EC, gSpriteAnimTable_820AA34, NULL, gSpriteAffineAnimTable_820AAA0, objc_0804ABD4
-
-	.align 2
-gSpriteTemplate_820AB5C:: @ 820AB5C
 	spr_template 55007, 55007, gOamData_820A9EC, gSpriteAnimTable_820AA34, NULL, gSpriteAffineAnimTable_820AAA0, objc_0804ABD4
-
-	.align 2
-gSpriteTemplate_820AB74:: @ 820AB74
 	spr_template 55008, 55008, gOamData_820A9EC, gSpriteAnimTable_820AA34, NULL, gSpriteAffineAnimTable_820AAA0, objc_0804ABD4
-
-	.align 2
-gSpriteTemplate_820AB8C:: @ 820AB8C
 	spr_template 55009, 55009, gOamData_820A9EC, gSpriteAnimTable_820AA34, NULL, gSpriteAffineAnimTable_820AAA0, objc_0804ABD4
-
-	.align 2
-gSpriteTemplate_820ABA4:: @ 820ABA4
 	spr_template 55010, 55010, gOamData_820A9EC, gSpriteAnimTable_820AA34, NULL, gSpriteAffineAnimTable_820AAA0, objc_0804ABD4
-
-	.align 2
-gSpriteTemplate_820ABBC:: @ 820ABBC
 	spr_template 55011, 55011, gOamData_820A9EC, gSpriteAnimTable_820AA34, NULL, gSpriteAffineAnimTable_820AAA0, objc_0804ABD4
 
 	.align 2
@@ -2167,11 +2134,13 @@ gUnknown_0820ABF0:: @ 820ABF0
 gUnknown_0820ADEE:: @ 820ADEE
 	.incbin "baserom.gba", 0x0020adee, 0x1fe
 
+	.align 2
 gUnknown_0820AFEC:: @ 820AFEC
-	.incbin "baserom.gba", 0x0020afec, 0x800
+	.incbin "graphics/trade/stripes_bg2_map.bin"
 
+	.align 2
 gUnknown_0820B7EC:: @ 820B7EC
-	.incbin "baserom.gba", 0x0020b7ec, 0x800
+	.incbin "graphics/trade/stripes_bg3_map.bin"
 
 	.align 2
 gOamData_820BFEC:: @ 820BFEC
@@ -2268,11 +2237,11 @@ gSpriteAnimTable_820C11C:: @ 820C11C
 
 	.align 2
 gUnknown_0820C124:: @ 820C124
-	obj_tiles 0x08ea1dec, 2048, 0x012c
+	obj_tiles gUnknown_08EA1DEC, 0x800, 300
 
 	.align 2
 gUnknown_0820C12C:: @ 820C12C
-	obj_pal 0x08ea0328, 0x0929
+	obj_pal gUnknown_08EA0328, 2345
 
 	.align 2
 gSpriteTemplate_820C134:: @ 820C134
@@ -2351,7 +2320,6 @@ gUnknown_0820C341:: @ 820C341
 	.4byte gTileBuffer
 
 @ Unused debug strings?
-@ Not labeling these yet
 	.string "かいめの そうしん$", 13
 	.string "かいめの じゅしん$", 13
 	.string "ポケモンアイコンセット$", 13
@@ -2370,52 +2338,85 @@ gUnknown_0820C3B0:: @ 820C3B0
 	.string "だめだたらしいよ     $" @ it's no good (trade failed maybe?)
 
 gUnknown_0820C3D1:: @ 820C3D1
-	.incbin "baserom.gba", 0x0020c3d1, 0x7
-	.incbin "graphics/interface/ball_open.gbapal"
-	.incbin "graphics/interface/rolling_ball.4bpp"
+	.byte 4, 3
+	.byte 19, 3
 
+	.align 2
+gTradeBallPalette:: @ 820C3D8
+	.incbin "graphics/trade/ball.gbapal"
+
+	.align 2
+gTradeBallTiles:: @ 820C3F8
+	.incbin "graphics/trade/ball.4bpp"
+
+	.align 2
 gUnknown_0820C9F8:: @ 820C9F8
-	.incbin "baserom.gba", 0x0020c9f8, 0x20
-	.incbin "graphics/interface/gba.gbapal"
-	.incbin "graphics/interface/trade_shadow.gbapal"
-	.incbin "baserom.gba", 0x0020ca58, 0x20 @ blank
-	.incbin "graphics/interface/trade_misc.gbapal"
+	.incbin "graphics/trade/unknown.gbapal"
+	.incbin "graphics/trade/gba.gbapal"
+	.incbin "graphics/trade/shadow.gbapal"
+	.space 32
+	.incbin "graphics/trade/misc.gbapal"
 
+	.align 2
 gUnknown_0820CA98:: @ 820CA98
-	.incbin "graphics/interface/gba.4bpp"
-	.incbin "graphics/interface/trade_shadow.4bpp"
+	.incbin "graphics/trade/gba.4bpp"
+	.incbin "graphics/trade/shadow.4bpp"
 
+	.align 2
 gUnknown_0820DD98:: @ 820DD98
-	.incbin "graphics/unknown/unknown_20DD98.8bpp" @ unused?
+	.incbin "graphics/trade/pokeball_symbol.8bpp"
 
+	.align 2
 gUnknown_0820F798:: @ 820F798
-	.incbin "baserom.gba", 0x0020f798, 0x1000
+	.incbin "graphics/trade/shadow_map.bin"
 
+	.align 2
 gUnknown_08210798:: @ 8210798
-	.incbin "baserom.gba", 0x00210798, 0x1000 @ debug?
+	.incbin "graphics/trade/gba_map.bin"
 
+	.align 2
 gUnknown_08211798:: @ 8211798
-	.incbin "baserom.gba", 0x00211798, 0x800
+	.incbin "graphics/trade/cable_closeup_map.bin"
 
+	.align 2
 gUnknown_08211F98:: @ 8211F98
-	.incbin "baserom.gba", 0x00211f98, 0x20 @ bunch of palettes?
-	.incbin "baserom.gba", 0x00211fb8, 0x20
-	.incbin "baserom.gba", 0x00211fd8, 0x20
-	.incbin "baserom.gba", 0x00211FF8, 0x20
-	.incbin "baserom.gba", 0x00212018, 0x20
-	.incbin "baserom.gba", 0x00212038, 0x20
-	.incbin "baserom.gba", 0x00212058, 0x20
-	.incbin "graphics/interface/gba2.gbapal"
-	.incbin "graphics/interface/trade_glow.4bpp"
-	.incbin "graphics/interface/trade_glow2.4bpp"
-	.incbin "graphics/interface/trade_cableend.4bpp"
-	.incbin "graphics/interface/trade_gbascreen.4bpp"
+	.incbin "graphics/trade/pokeball_symbol_map.bin"
 
+	.incbin "baserom.gba", 0x00212098, 0x20
+
+	.align 2
+gTradeCableEndPalette:: @ 82120B8
+	.incbin "graphics/trade/cable_end.gbapal"
+
+	.incbin "baserom.gba", 0x002120D8, 0x40
+
+	.align 2
+gTradeGlowPalette:: @ 8212118
+	.incbin "graphics/trade/glow.gbapal"
+
+	.align 2
+gTradeGlow1Tiles:: @ 8212138
+	.incbin "graphics/trade/glow1.4bpp"
+
+	.align 2
+gTradeGlow2Tiles:: @ 8212338
+	.incbin "graphics/trade/glow2.4bpp"
+
+	.align 2
+gTradeCableEndTiles:: @ 8212538
+	.incbin "graphics/trade/cable_end.4bpp"
+
+	.align 2
+gTradeGBAScreenTiles:: @ 8212738
+	.incbin "graphics/trade/gba_screen.4bpp"
+
+	.align 2
 gUnknown_08213738:: @ 8213738
-	.incbin "graphics/interface/gba2.8bpp"
+	.incbin "graphics/trade/gba_affine.8bpp"
 
+	.align 2
 gUnknown_08215778:: @ 8215778
-	.incbin "baserom.gba", 0x00215778, 0x100
+	.incbin "graphics/trade/gba_affine_map.bin"
 
 	.align 2
 gOamData_8215878:: @ 8215878
@@ -2489,11 +2490,11 @@ gSpriteAffineAnimTable_8215940:: @ 8215940
 
 	.align 2
 gUnknown_0821594C:: @ 821594C
-	obj_tiles 0x0820c3f8, 1536, 0x15b5
+	obj_tiles gTradeBallTiles, 0x600, 5557
 
 	.align 2
 gUnknown_08215954:: @ 8215954
-	obj_pal 0x0820c3d8, 0x15b6
+	obj_pal gTradeBallPalette, 5558
 
 	.align 2
 gSpriteTemplate_821595C:: @ 821595C
@@ -2526,15 +2527,15 @@ gSpriteAffineAnimTable_82159A0:: @ 82159A0
 
 	.align 2
 gUnknown_082159A4:: @ 82159A4
-	obj_tiles 0x08212138, 512, 0x15ae
+	obj_tiles gTradeGlow1Tiles, 0x200, 5550
 
 	.align 2
 gUnknown_082159AC:: @ 82159AC
-	obj_pal 0x08212118, 0x15af
+	obj_pal gTradeGlowPalette, 5551
 
 	.align 2
 gUnknown_082159B4:: @ 82159B4
-	obj_pal 0x082120b8, 0x15b3
+	obj_pal gTradeCableEndPalette, 5555
 
 	.align 2
 gSpriteTemplate_82159BC:: @ 82159BC
@@ -2563,7 +2564,7 @@ gSpriteAnimTable_82159EC:: @ 82159EC
 
 	.align 2
 gUnknown_082159F4:: @ 82159F4
-	obj_tiles 0x08212338, 768, 0x15b0
+	obj_tiles gTradeGlow2Tiles, 0x300, 5552
 
 	.align 2
 gSpriteTemplate_82159FC:: @ 82159FC
@@ -2586,7 +2587,7 @@ gSpriteAnimTable_8215A24:: @ 8215A24
 
 	.align 2
 gUnknown_08215A28:: @ 8215A28
-	obj_tiles 0x08212538, 256, 0x15b2
+	obj_tiles gTradeCableEndTiles, 0x100, 5554
 
 	.align 2
 gSpriteTemplate_8215A30:: @ 8215A30
@@ -2616,7 +2617,7 @@ gSpriteAnimTable_8215A74:: @ 8215A74
 
 	.align 2
 gUnknown_08215A78:: @ 8215A78
-	obj_tiles 0x08212738, 4096, 0x15b4
+	obj_tiles gTradeGBAScreenTiles, 0x1000, 5556
 
 	.align 2
 gSpriteTemplate_8215A80:: @ 8215A80
@@ -2624,11 +2625,15 @@ gSpriteTemplate_8215A80:: @ 8215A80
 
 gUnknown_08215A98:: @ 8215A98
 	.incbin "baserom.gba", 0x00215a98, 0x18
-Unknown_08215AB0:
-	.incbin "baserom.gba", 0x00215ab0, 0x10
 
-gUnknown_08215AC0:: @ 8215AC0
-	.4byte Unknown_08215AB0
+	.align 2
+gSpriteAffineAnim_8215AB0:: @ 8215AB0
+	obj_rot_scal_anim_frame 0xFF00, 0x100, 0, 0
+	obj_rot_scal_anim_jump 0
+
+	.align 2
+gSpriteAffineAnimTable_8215AC0:: @ 8215AC0
+	.4byte gSpriteAffineAnim_8215AB0
 
 @ 8215AC4
 	.include "data/ingame_trades.s"
@@ -13061,11 +13066,12 @@ gUnknown_083CC738:: @ 83CC738
 @ 83CD2CC
 	.include "data/berries.s"
 
+	.align 2
 gUnknown_083CD780:: @ 83CD780
-	.incbin "baserom.gba", 0x003cd780, 0x680
+	.4byte 0, 0
 
-gUnknown_083CDE00:: @ 83CDE00
-	.incbin "baserom.gba", 0x003cde00, 0x248
+@ 83CD788
+	.include "data/multichoice.s"
 
 gUnknown_083CE048:: @ 83CE048
 	.incbin "baserom.gba", 0x003ce048, 0x4C
@@ -20369,17 +20375,20 @@ gUnknown_083E5CC0:: @ 83E5CC0
 gUnknown_083E5CE0:: @ 83E5CE0
 	.incbin "baserom.gba", 0x003e5ce0, 0x80
 
+	.align 2
 gUnknown_083E5D60:: @ 83E5D60
-	.incbin "graphics/interface/map.gbapal", 0xE0, 0x40
+	.incbin "graphics/pokenav/region_map.gbapal", 0xE0, 0x40
 
+	.align 2
 gUnknown_083E5DA0:: @ 83E5DA0
-	.incbin "graphics/interface/map.8bpp.lz"
+	.incbin "graphics/pokenav/region_map.8bpp.lz"
 
+	.align 2
 gUnknown_083E6B04:: @ 83E6B04
-	.incbin "baserom.gba", 0x003e6b04, 0x34c
+	.incbin "graphics/pokenav/region_map_map.bin.lz"
 
-gUnknown_083E6E50:: @ 83E6E50
-	.incbin "baserom.gba", 0x003e6e50, 0x1A4
+@ 83E6E50
+	.include "data/region_map_sections.s"
 
 @ 83E6FF4
 	.include "data/region_map_locations.s"
@@ -23056,10 +23065,8 @@ gCryMeterNeedleSpritePalettes:: @ 83FB79C
 	obj_pal CryMeterNeedlePalette, 8192
 	null_obj_pal
 
-	.incbin "baserom.gba", 0x003fb7ac, 0x26c
-
-gUnknown_083FBA18:: @ 83FBA18
-	.incbin "baserom.gba", 0x003fba18, 0x170
+@ 83FB7AC
+	.include "data/landmarks.s"
 
 gUnknown_083FBB88:: @ 83FBB88
 	.incbin "baserom.gba", 0x003fbb88, 0x580
@@ -25008,33 +25015,33 @@ gUnknown_0840B23C:: @ 840B23C
 
 	.align 2
 gUnknown_0840B258:: @ 840B258
-	obj_tiles 0x08d1a7f4, 256, 0xd6ec
-	obj_tiles 0x08d1a7f4, 256, 0xd6ed
-	obj_tiles 0x08d1a7f4, 256, 0xd6ee
-	obj_tiles 0x08d1a7f4, 256, 0xd6ef
-	obj_tiles 0x08d1a7f4, 256, 0xd6f0
-	obj_tiles 0x08d1a7f4, 256, 0xd6f1
-	obj_tiles 0x08d1a7f4, 256, 0xd6f2
-	obj_tiles 0x08d1a7f4, 256, 0xd6f3
-	obj_tiles 0x08d1a7f4, 256, 0xd6f4
-	obj_tiles 0x08d1a7f4, 256, 0xd6f5
-	obj_tiles 0x08d1a7f4, 256, 0xd6f6
-	obj_tiles 0x08d1a7f4, 256, 0xd6f7
+	obj_tiles gBattleAnimSpriteSheet_Particles, 0x100, 55020
+	obj_tiles gBattleAnimSpriteSheet_Particles, 0x100, 55021
+	obj_tiles gBattleAnimSpriteSheet_Particles, 0x100, 55022
+	obj_tiles gBattleAnimSpriteSheet_Particles, 0x100, 55023
+	obj_tiles gBattleAnimSpriteSheet_Particles, 0x100, 55024
+	obj_tiles gBattleAnimSpriteSheet_Particles, 0x100, 55025
+	obj_tiles gBattleAnimSpriteSheet_Particles, 0x100, 55026
+	obj_tiles gBattleAnimSpriteSheet_Particles, 0x100, 55027
+	obj_tiles gBattleAnimSpriteSheet_Particles, 0x100, 55028
+	obj_tiles gBattleAnimSpriteSheet_Particles, 0x100, 55029
+	obj_tiles gBattleAnimSpriteSheet_Particles, 0x100, 55030
+	obj_tiles gBattleAnimSpriteSheet_Particles, 0x100, 55031
 
 	.align 2
 gUnknown_0840B2B8:: @ 840B2B8
-	obj_pal 0x08d1a8c8, 55020
-	obj_pal 0x08d1a8c8, 55021
-	obj_pal 0x08d1a8c8, 55022
-	obj_pal 0x08d1a8c8, 55023
-	obj_pal 0x08d1a8c8, 55024
-	obj_pal 0x08d1a8c8, 55025
-	obj_pal 0x08d1a8c8, 55026
-	obj_pal 0x08d1a8c8, 55027
-	obj_pal 0x08d1a8c8, 55028
-	obj_pal 0x08d1a8c8, 55029
-	obj_pal 0x08d1a8c8, 55030
-	obj_pal 0x08d1a8c8, 55031
+	obj_pal gBattleAnimSpritePalette_136, 55020
+	obj_pal gBattleAnimSpritePalette_136, 55021
+	obj_pal gBattleAnimSpritePalette_136, 55022
+	obj_pal gBattleAnimSpritePalette_136, 55023
+	obj_pal gBattleAnimSpritePalette_136, 55024
+	obj_pal gBattleAnimSpritePalette_136, 55025
+	obj_pal gBattleAnimSpritePalette_136, 55026
+	obj_pal gBattleAnimSpritePalette_136, 55027
+	obj_pal gBattleAnimSpritePalette_136, 55028
+	obj_pal gBattleAnimSpritePalette_136, 55029
+	obj_pal gBattleAnimSpritePalette_136, 55030
+	obj_pal gBattleAnimSpritePalette_136, 55031
 
 	.align 2
 gSpriteAnim_840B318:: @ 840B318
@@ -25417,13 +25424,16 @@ gSpriteTemplate_840CAEC:: @ 840CAEC
 gUnknown_0840CB04:: @ 840CB04
 	.incbin "baserom.gba", 0x0040cb04, 0x8
 
+	.align 2
 gUnknown_0840CB0C:: @ 840CB0C
-	.incbin "graphics/misc/diploma.gbapal"
-	.incbin "baserom.gba", 0x0040cb2c, 0x20
+	.incbin "graphics/misc/diploma_national.gbapal"
+	.incbin "graphics/misc/diploma_hoenn.gbapal"
 
+	.align 2
 gUnknown_0840CB4C:: @ 840CB4C
-	.incbin "baserom.gba", 0x0040cb4c, 0x73c
+	.incbin "graphics/misc/diploma_map.bin.lz"
 
+	.align 2
 gUnknown_0840D288:: @ 840D288
 	.incbin "graphics/misc/diploma.4bpp.lz"
 
@@ -25765,17 +25775,18 @@ SystemText_SaveErrorExchangeBackup:
 gUnknown_0840E604:: @ 840E604
 OtherText_FlyToWhere:
 	.string "FLY to where?$"
-OtherText_Use:
+
+OtherText_Use::
 	.string "USE$"
-OtherText_Toss:
+OtherText_Toss::
 	.string "TOSS$"
-OtherText_Register:
+OtherText_Register::
 	.string "REGISTER$"
-OtherText_Give2:
+OtherText_Give2::
 	.string "GIVE$"
-OtherText_CheckTag:
+OtherText_CheckTag::
 	.string "CHECK TAG$"
-OtherText_Confirm:
+OtherText_Confirm::
 	.string "CONFIRM$"
 
 gUnknown_0840E63B:: @ 840E63B
@@ -26854,305 +26865,306 @@ OtherText_MightyTough:
 	.string "The mighty tough\nhyper POKéMON $"
 OtherText_Exclamation:
 	.string "!$"
-OtherText_Petalburg:
+
+OtherText_Petalburg::
 	.string "PETALBURG$"
-OtherText_Slateport:
+OtherText_Slateport::
 	.string "SLATEPORT$"
-OtherText_Littleroot:
+OtherText_Littleroot::
 	.string "LITTLEROOT$"
-OtherText_Lilycove:
+OtherText_Lilycove::
 	.string "LILYCOVE$"
-OtherText_Dewford:
+OtherText_Dewford::
 	.string "DEWFORD$"
-OtherText_Enter:
+OtherText_Enter::
 	.string "ENTER$"
-OtherText_Info3:
+OtherText_Info3::
 	.string "INFO$"
-OtherText_WhatsAContest:
+OtherText_WhatsAContest::
 	.string "What’s a CONTEST?$"
-OtherText_TypesOfContest:
+OtherText_TypesOfContest::
 	.string "Types of CONTESTS$"
-OtherText_Ranks:
+OtherText_Ranks::
 	.string "Ranks$"
-OtherText_Judging:
+OtherText_Judging::
 	.string "Judging$"
-OtherText_CoolContest:
+OtherText_CoolContest::
 	.string "COOL CONTEST$"
-OtherText_BeautyContest:
+OtherText_BeautyContest::
 	.string "BEAUTY CONTEST$"
-OtherText_CuteContest:
+OtherText_CuteContest::
 	.string "CUTE CONTEST$"
-OtherText_SmartContest:
+OtherText_SmartContest::
 	.string "SMART CONTEST$"
-OtherText_ToughContest:
+OtherText_ToughContest::
 	.string "TOUGH CONTEST$"
-OtherText_Decoration:
+OtherText_Decoration::
 	.string "DECORATION$"
-OtherText_PackUp:
+OtherText_PackUp::
 	.string "PACK UP$"
-OtherText_Count:
+OtherText_Count::
 	.string "COUNT$"
-OtherText_Registry:
+OtherText_Registry::
 	.string "REGISTRY$"
-OtherText_Information:
+OtherText_Information::
 	.string "INFORMATION$"
-OtherText_Mach:
+OtherText_Mach::
 	.string "MACH$"
-OtherText_Acro:
+OtherText_Acro::
 	.string "ACRO$"
-OtherText_Poison:
+OtherText_Poison::
 	.string "PSN$"
-OtherText_Paralysis:
+OtherText_Paralysis::
 	.string "PAR$"
-OtherText_Sleep:
+OtherText_Sleep::
 	.string "SLP$"
-OtherText_Burn:
+OtherText_Burn::
 	.string "BRN$"
-OtherText_Frozen:
+OtherText_Frozen::
 	.string "FRZ$"
-OtherText_Quit:
+OtherText_Quit::
 	.string "QUIT$"
-OtherText_SawIt:
+OtherText_SawIt::
 	.string "Saw it$"
-OtherText_NotYet:
+OtherText_NotYet::
 	.string "Not yet$"
-OtherText_Yes:
+OtherText_Yes::
 	.string "YES$"
-OtherText_No:
+OtherText_No::
 	.string "NO$"
-OtherText_Info2:
+OtherText_Info2::
 	.string "INFO$"
-OtherText_SingleBattle:
+OtherText_SingleBattle::
 	.string "SINGLE BATTLE$"
-OtherText_DoubleBattle:
+OtherText_DoubleBattle::
 	.string "DOUBLE BATTLE$"
-OtherText_MultiBattle:
+OtherText_MultiBattle::
 	.string "MULTI BATTLE$"
-OtherText_MrBriney:
+OtherText_MrBriney::
 	.string "MR. BRINEY$"
-OtherText_MakeAChallenge:
+OtherText_MakeAChallenge::
 	.string "Make a challenge.$"
-OtherText_ObtainInformation:
+OtherText_ObtainInformation::
 	.string "Obtain information.$"
-OtherText_Lv50_2:
+OtherText_Lv50_2::
 	.string "LV. 50$"
-OtherText_Lv100_2:
+OtherText_Lv100_2::
 	.string "LV. 100$"
-OtherText_Zigzagoon:
+OtherText_Zigzagoon::
 	.string "ZIGZAGOON$"
-OtherText_Nincada:
+OtherText_Nincada::
 	.string "NINCADA$"
-OtherText_Poochyena:
+OtherText_Poochyena::
 	.string "POOCHYENA$"
-OtherText_Nincada2:
+OtherText_Nincada2::
 	.string "NINCADA$"
-OtherText_Lotad:
+OtherText_Lotad::
 	.string "LOTAD$"
-OtherText_Roselia:
+OtherText_Roselia::
 	.string "ROSELIA$"
-OtherText_Shroomish:
+OtherText_Shroomish::
 	.string "SHROOMISH$"
-OtherText_Nincada3:
+OtherText_Nincada3::
 	.string "NINCADA$"
-OtherText_Surskit:
+OtherText_Surskit::
 	.string "SURSKIT$"
-OtherText_Treecko:
+OtherText_Treecko::
 	.string "TREECKO$"
-OtherText_Torchic:
+OtherText_Torchic::
 	.string "TORCHIC$"
-OtherText_Mudkip:
+OtherText_Mudkip::
 	.string "MUDKIP$"
-OtherText_Seedot:
+OtherText_Seedot::
 	.string "SEEDOT$"
-OtherText_Shroomish2:
+OtherText_Shroomish2::
 	.string "SHROOMISH$"
-OtherText_Spinda:
+OtherText_Spinda::
 	.string "SPINDA$"
-OtherText_Shroomish3:
+OtherText_Shroomish3::
 	.string "SHROOMISH$"
-OtherText_Zigzagoon2:
+OtherText_Zigzagoon2::
 	.string "ZIGZAGOON$"
-OtherText_Wurmple:
+OtherText_Wurmple::
 	.string "WURMPLE$"
-OtherText_PokeBall:
+OtherText_PokeBall::
 	.string "POKé BALL$"
-OtherText_SuperPotion:
+OtherText_SuperPotion::
 	.string "SUPER POTION$"
-OtherText_SamePrice:
+OtherText_SamePrice::
 	.string "Same price$"
-OtherText_Yen135:
+OtherText_Yen135::
 	.string "¥135$"
-OtherText_Yen155:
+OtherText_Yen155::
 	.string "¥155$"
-OtherText_Yen175:
+OtherText_Yen175::
 	.string "¥175$"
-OtherText_CostMore:
+OtherText_CostMore::
 	.string "They will cost more.$"
-OtherText_CostLess:
+OtherText_CostLess::
 	.string "They will cost less.$"
-OtherText_SamePrice2:
+OtherText_SamePrice2::
 	.string "Same price$"
-OtherText_MaleSymbol:
+OtherText_MaleSymbol::
 	.string "♂$"
-OtherText_FemaleSymbol:
+OtherText_FemaleSymbol::
 	.string "♀$"
-OtherText_Neither:
+OtherText_Neither::
 	.string "Neither$"
-OtherText_Males:
+OtherText_Males::
 	.string "Males$"
-OtherText_Females:
+OtherText_Females::
 	.string "Females$"
-OtherText_SameNumber:
+OtherText_SameNumber::
 	.string "Same number$"
-OtherText_Male:
+OtherText_Male::
 	.string "Male$"
-OtherText_Female:
+OtherText_Female::
 	.string "Female$"
-OtherText_ItDepends:
+OtherText_ItDepends::
 	.string "It depends$"
-OtherText_Six2:
+OtherText_Six2::
 	.string "6$"
-OtherText_Eight2:
+OtherText_Eight2::
 	.string "8$"
-OtherText_Ten:
+OtherText_Ten::
 	.string "10$"
-OtherText_One:
+OtherText_One::
 	.string "1$"
-OtherText_Two:
+OtherText_Two::
 	.string "2$"
-OtherText_Three:
+OtherText_Three::
 	.string "3$"
-OtherText_Six:
+OtherText_Six::
 	.string "6$"
-OtherText_Seven:
+OtherText_Seven::
 	.string "7$"
-OtherText_Eight:
+OtherText_Eight::
 	.string "8$"
-OtherText_FreshWater:
+OtherText_FreshWater::
 	.string "FRESH WATER{CLEAR_TO 0x48}¥200$"
-OtherText_SodaPop:
+OtherText_SodaPop::
 	.string "SODA POP{CLEAR_TO 0x48}¥300$"
-OtherText_Lemonade:
+OtherText_Lemonade::
 	.string "LEMONADE{CLEAR_TO 0x48}¥350$"
-OtherText_HowToRide:
+OtherText_HowToRide::
 	.string "HOW TO RIDE$"
-OtherText_HowToTurn:
+OtherText_HowToTurn::
 	.string "HOW TO TURN$"
-OtherText_SandySlopes:
+OtherText_SandySlopes::
 	.string "SANDY SLOPES$"
-OtherText_Wheelies:
+OtherText_Wheelies::
 	.string "WHEELIES$"
-OtherText_BunnyHops:
+OtherText_BunnyHops::
 	.string "BUNNY-HOPS$"
-OtherText_Jumping:
+OtherText_Jumping::
 	.string "JUMPING$"
-OtherText_Satisfied:
+OtherText_Satisfied::
 	.string "Satisfied$"
-OtherText_Dissatisfied:
+OtherText_Dissatisfied::
 	.string "Dissatisfied$"
-OtherText_Deepseatooth:
+OtherText_Deepseatooth::
 	.string "DEEPSEATOOTH$"
-OtherText_Deepseascale:
+OtherText_Deepseascale::
 	.string "DEEPSEASCALE$"
-OtherText_BlueFlute2:
+OtherText_BlueFlute2::
 	.string "BLUE FLUTE$"
-OtherText_YellowFlute2:
+OtherText_YellowFlute2::
 	.string "YELLOW FLUTE$"
-OtherText_RedFlute2:
+OtherText_RedFlute2::
 	.string "RED FLUTE$"
-OtherText_WhiteFlute2:
+OtherText_WhiteFlute2::
 	.string "WHITE FLUTE$"
-OtherText_BlackFlute2:
+OtherText_BlackFlute2::
 	.string "BLACK FLUTE$"
-OtherText_GlassChair:
+OtherText_GlassChair::
 	.string "GLASS CHAIR$"
-OtherText_GlassDesk:
+OtherText_GlassDesk::
 	.string "GLASS DESK$"
-OtherText_TreeckoDoll:
+OtherText_TreeckoDoll::
 	.string "TREECKO DOLL 1,000 COINS$"
-OtherText_TorchicDoll:
+OtherText_TorchicDoll::
 	.string "TORCHIC DOLL 1,000 COINS$"
-OtherText_MudkipDoll:
+OtherText_MudkipDoll::
 	.string "MUDKIP DOLL   1,000 COINS$"
-OtherText_50Coins:
+OtherText_50Coins::
 	.string "  50 COINS    ¥1,000$"
-OtherText_500Coins:
+OtherText_500Coins::
 	.string "500 COINS  ¥10,000$"
-OtherText_Excellent:
+OtherText_Excellent::
 	.string "Excellent!$"
-OtherText_NotSoHot:
+OtherText_NotSoHot::
 	.string "Not so hot$"
-OtherText_RedShard:
+OtherText_RedShard::
 	.string "RED SHARD$"
-OtherText_YellowShard:
+OtherText_YellowShard::
 	.string "YELLOW SHARD$"
-OtherText_BlueShard:
+OtherText_BlueShard::
 	.string "BLUE SHARD$"
-OtherText_GreenShard:
+OtherText_GreenShard::
 	.string "GREEN SHARD$"
-OtherText_BattleTower:
+OtherText_BattleTower::
 	.string "BATTLE TOWER$"
-OtherText_Right:
+OtherText_Right::
 	.string "Right$"
-OtherText_Left:
+OtherText_Left::
 	.string "Left$"
-OtherText_TM32:
+OtherText_TM32::
 	.string "TM32  1,500 COINS$"
-OtherText_TM29:
+OtherText_TM29::
 	.string "TM29  3,500 COINS$"
-OtherText_TM35:
+OtherText_TM35::
 	.string "TM35  4,000 COINS$"
-OtherText_TM24:
+OtherText_TM24::
 	.string "TM24  4,000 COINS$"
-OtherText_TM13:
+OtherText_TM13::
 	.string "TM13  4,000 COINS$"
-OtherText_1F_2:
+OtherText_1F_2::
 	.string "1F$"
-OtherText_2F_2:
+OtherText_2F_2::
 	.string "2F$"
-OtherText_3F_2:
+OtherText_3F_2::
 	.string "3F$"
-OtherText_4F_2:
+OtherText_4F_2::
 	.string "4F$"
-OtherText_5F_2:
+OtherText_5F_2::
 	.string "5F$"
-OtherText_Cool2:
+OtherText_Cool2::
 	.string "COOL$"
-OtherText_Beauty3:
+OtherText_Beauty3::
 	.string "BEAUTY$"
-OtherText_Cute2:
+OtherText_Cute2::
 	.string "CUTE$"
-OtherText_Smart2:
+OtherText_Smart2::
 	.string "SMART$"
-OtherText_Tough2:
+OtherText_Tough2::
 	.string "TOUGH$"
-OtherText_Normal:
+OtherText_Normal::
 	.string "NORMAL$"
-OtherText_Super:
+OtherText_Super::
 	.string "SUPER$"
-OtherText_Hyper:
+OtherText_Hyper::
 	.string "HYPER$"
-OtherText_Master:
+OtherText_Master::
 	.string "MASTER$"
-OtherText_Cool3:
+OtherText_Cool3::
 	.string "COOL$"
-OtherText_Beauty4:
+OtherText_Beauty4::
 	.string "BEAUTY$"
-OtherText_Cute3:
+OtherText_Cute3::
 	.string "CUTE$"
-OtherText_Smart3:
+OtherText_Smart3::
 	.string "SMART$"
-OtherText_Tough3:
+OtherText_Tough3::
 	.string "TOUGH$"
-OtherText_Items:
+OtherText_Items::
 	.string "ITEMS$"
-OtherText_KeyItems:
+OtherText_KeyItems::
 	.string "KEY ITEMS$"
-OtherText_Balls:
+OtherText_Balls::
 	.string "BALLS$"
-OtherText_TMsHMs:
+OtherText_TMsHMs::
 	.string "TMs & HMs$"
-OtherText_Berries:
+OtherText_Berries::
 	.string "BERRIES$"
 
 gUnknown_08410753:: @ 8410753
@@ -28880,80 +28892,9 @@ ContestText_PokeWon:
 gUnknown_0842CEAF:: @ 842CEAF
 OtherText_LinkStandby:
 	.string "Link standby...$"
-OtherText_FlowerShop:
-	.string "FLOWER SHOP$"
-OtherText_PetalburgWoods:
-	.string "PETALBURG WOODS$"
-OtherText_BrineysCottage:
-	.string "MR. BRINEY’S COTTAGE$"
-OtherText_AbandonedShip:
-	.string "ABANDONED SHIP$"
-OtherText_SeashoreHouse:
-	.string "SEASHORE HOUSE$"
-OtherText_SlateportBeach:
-	.string "SLATEPORT BEACH$"
-OtherText_CyclingRoad:
-	.string "CYCLING ROAD$"
-OtherText_NewMauville:
-	.string "NEW MAUVILLE$"
-OtherText_TrickHouse:
-	.string "TRICK HOUSE$"
-OtherText_OldLadyRestShop:
-	.string "OLD LADY’S REST STOP$"
-OtherText_Desert:
-	.string "DESERT$"
-OtherText_WinstrateFamily:
-	.string "THE WINSTRATE FAMILY$"
-OtherText_CableCar:
-	.string "CABLE CAR$"
-OtherText_GlassWorkshop:
-	.string "GLASS WORKSHOP$"
-OtherText_WeatherInstitute:
-	.string "WEATHER INSTITUTE$"
-OtherText_MeteorFalls:
-	.string "METEOR FALLS$"
-OtherText_TunnelersRestHouse:
-	.string "TUNNELER’S REST HOUSE$"
-OtherText_RusturfTunnel:
-	.string "RUSTURF TUNNEL$"
-OtherText_PokemonDayCare:
-	.string "POKéMON DAY CARE$"
-OtherText_SafariZoneEntrance:
-	.string "SAFARI ZONE ENTRANCE$"
-OtherText_MtPyre:
-	.string "MT. PYRE$"
-OtherText_ShoalCave:
-	.string "SHOAL CAVE$"
-OtherText_SeafloorCavern:
-	.string "SEAFLOOR CAVERN$"
-OtherText_GraniteCave:
-	.string "GRANITE CAVE$"
-OtherText_OceanCurrent:
-	.string "OCEAN CURRENT$"
-OtherText_LanetteHouse:
-	.string "LANETTE’S HOUSE$"
-OtherText_FieryPath:
-	.string "FIERY PATH$"
-OtherText_JaggedPass:
-	.string "JAGGED PASS$"
-OtherText_SkyPillar:
-	.string "SKY PILLAR$"
-OtherText_BerryMasterHouse:
-	.string "BERRY MASTER’S HOUSE$"
-OtherText_IslandCave:
-	.string "ISLAND CAVE$"
-OtherText_DesertRuins:
-	.string "DESERT RUINS$"
-OtherText_ScorchedSlab:
-	.string "SCORCHED SLAB$"
-OtherText_AncientTomb:
-	.string "ANCIENT TOMB$"
-OtherText_SealedChamber:
-	.string "SEALED CHAMBER$"
-OtherText_FossilManiacsHouse:
-	.string "FOSSIL MANIAC’S HOUSE$"
-OtherText_HuntersHouse:
-	.string "HUNTER’S HOUSE$"
+
+@ 842CEBF
+	.include "data/text/landmarks.s"
 
 gUnknown_0842D0E6:: @ 842D0E6
 OtherText_Terminator4:
