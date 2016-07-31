@@ -2641,14 +2641,23 @@ gSpriteAffineAnimTable_8215AC0:: @ 8215AC0
 gUnknown_08215BA0:: @ 8215BA0
 	.incbin "baserom.gba", 0x00215ba0, 0x6c
 
+	.align 2
 gUnknown_08215C0C:: @ 8215C0C
-	.incbin "baserom.gba", 0x00215c0c, 0x20
+	.incbin "graphics/berry_blender/center.gbapal"
 
+	.align 2
 gUnknown_08215C2C:: @ 8215C2C
-	.incbin "baserom.gba", 0x00215c2c, 0x400
+	.incbin "graphics/berry_blender/center_map.bin"
 
+	.align 2
 gUnknown_0821602C:: @ 821602C
-	.incbin "baserom.gba", 0x0021602c, 0x21d
+	.incbin "graphics/berry_blender/outer.gbapal"
+
+	@ unused palette
+	.align 2
+	.incbin "baserom.gba", 0x0021604c, 0x20
+
+	.incbin "baserom.gba", 0x0021606c, 0x1dd
 
 gUnknown_08216249:: @ 8216249
 	.string "\p$"
@@ -2838,15 +2847,15 @@ gSpriteAnimTable_82163AC:: @ 82163AC
 
 	.align 2
 gUnknown_082163DC:: @ 82163DC
-	obj_tiles 0x08e91618, 2048, 0xb5d1
+	obj_tiles gBerryBlenderArrowTiles, 0x800, 46545
 
 	.align 2
 gUnknown_082163E4:: @ 82163E4
-	obj_pal 0x08e920d8, 0xb5d2
+	obj_pal gBerryBlenderMiscPalette, 46546
 
 	.align 2
 gUnknown_082163EC:: @ 82163EC
-	obj_pal 0x08e920f8, 0x3018
+	obj_pal gBerryBlenderArrowPalette, 12312
 
 	.align 2
 gSpriteTemplate_82163F4:: @ 82163F4
@@ -2891,7 +2900,7 @@ gSpriteAnimTable_8216444:: @ 8216444
 
 	.align 2
 gUnknown_08216454:: @ 8216454
-	obj_tiles 0x08e90618, 512, 0xbef8
+	obj_tiles gBerryBlenderMarubatsuTiles, 0x200, 48888
 
 	.align 2
 gSpriteTemplate_821645C:: @ 821645C
@@ -2953,7 +2962,7 @@ gSpriteAnimTable_82164E0:: @ 82164E0
 
 	.align 2
 gUnknown_082164F4:: @ 82164F4
-	obj_tiles 0x08e90818, 224, 0x5ba0
+	obj_tiles gBerryBlenderParticlesTiles, 0xE0, 23456
 
 	.align 2
 gSpriteTemplate_82164FC:: @ 82164FC
@@ -2988,7 +2997,7 @@ gSpriteAnimTable_8216534:: @ 8216534
 
 	.align 2
 gUnknown_08216540:: @ 8216540
-	obj_tiles 0x08e90a18, 1536, 0x3039
+	obj_tiles gBerryBlenderCountdownNumbersTiles, 0x600, 12345
 
 	.align 2
 gSpriteTemplate_8216548:: @ 8216548
@@ -3011,7 +3020,7 @@ gSpriteAnimTable_8216570:: @ 8216570
 
 	.align 2
 gUnknown_08216574:: @ 8216574
-	obj_tiles 0x08e91018, 1024, 0x303a
+	obj_tiles gBerryBlenderStartTiles, 0x400, 12346
 
 	.align 2
 gSpriteTemplate_821657C:: @ 821657C
@@ -27939,58 +27948,126 @@ gUnknown_08411A10:: @ 8411A10
 	.incbin "baserom.gba", 0x00411a10, 0x32
 
 gUnknown_08411A42:: @ 8411A42
-Unknown_8411A42:
-	.incbin "baserom.gba", 0x00411A42, 0x44e
-Unknown_8411E90:
-	.incbin "baserom.gba", 0x00411E90, 0x10
-Unknown_8411EA0:
-	.incbin "baserom.gba", 0x00411EA0, 0x20
-Unknown_8411EC0:
-	.incbin "baserom.gba", 0x00411EC0, 0x28
-Unknown_8411EE8:
-	.incbin "baserom.gba", 0x00411EE8, 0x20
-Unknown_8411F08:
-	.incbin "baserom.gba", 0x00411F08, 0x28
-Unknown_8411F30:
-	.incbin "baserom.gba", 0x00411F30, 0x20
-Unknown_8411F50:
-	.incbin "baserom.gba", 0x00411F50, 0x28
-Unknown_8411F78:
-	.incbin "baserom.gba", 0x00411F78, 0x20
-Unknown_8411F98:
-	.incbin "baserom.gba", 0x00411F98, 0x28
-Unknown_8411FC0:
-	.incbin "baserom.gba", 0x00411FC0, 0x20
-Unknown_8411FE0:
-	.incbin "baserom.gba", 0x00411FE0, 0x28
-Unknown_8412008:
-	.incbin "baserom.gba", 0x00412008, 0x20
-Unknown_8412028:
-	.incbin "baserom.gba", 0x00412028, 0x28
+	.incbin "baserom.gba", 0x00411A42, 0x44c
 
 	.align 2
-gUnknown_08412050:: @ 8412050
-	.4byte Unknown_8411E90
-	.4byte Unknown_8411EA0
-	.4byte Unknown_8411EE8
-	.4byte Unknown_8411F30
-	.4byte Unknown_8411F78
-	.4byte Unknown_8411FC0
-	.4byte Unknown_8412008
-	.4byte Unknown_8411E90
-	.4byte Unknown_8411E90
-	.4byte Unknown_8411E90
-	.4byte Unknown_8411E90
-	.4byte Unknown_8411EC0
-	.4byte Unknown_8411F08
-	.4byte Unknown_8411F50
-	.4byte Unknown_8411F98
-	.4byte Unknown_8411FE0
-	.4byte Unknown_8412028
-	.4byte Unknown_8411E90
-	.4byte Unknown_8411E90
-	.4byte Unknown_8411E90
-	.4byte Unknown_8411E90
+gSpriteAffineAnim_8411E90:: @ 8411E90
+	obj_rot_scal_anim_frame 0xFF00, 0x100, 0, 0
+	obj_rot_scal_anim_end
+
+	.align 2
+gSpriteAffineAnim_8411EA0:: @ 8411EA0
+	obj_rot_scal_anim_frame 0x0, 0x0, 12, 1
+	obj_rot_scal_anim_frame 0x0, 0x0, 0, 30
+	obj_rot_scal_anim_frame 0x0, 0x0, -12, 1
+	obj_rot_scal_anim_end
+
+	.align 2
+gSpriteAffineAnim_8411EC0:: @ 8411EC0
+	obj_rot_scal_anim_frame 0xFF00, 0x100, 0, 0
+	obj_rot_scal_anim_frame 0x0, 0x0, 12, 1
+	obj_rot_scal_anim_frame 0x0, 0x0, 0, 28
+	obj_rot_scal_anim_frame 0x0, 0x0, -4, 3
+	obj_rot_scal_anim_end
+
+	.align 2
+gSpriteAffineAnim_8411EE8:: @ 8411EE8
+	obj_rot_scal_anim_frame 0x0, 0x0, 1, 16
+	obj_rot_scal_anim_frame 0x0, 0x0, -1, 32
+	obj_rot_scal_anim_frame 0x0, 0x0, 1, 16
+	obj_rot_scal_anim_end
+
+	.align 2
+gSpriteAffineAnim_8411F08:: @ 8411F08
+	obj_rot_scal_anim_frame 0xFF00, 0x100, 0, 0
+	obj_rot_scal_anim_frame 0x0, 0x0, 1, 16
+	obj_rot_scal_anim_frame 0x0, 0x0, -1, 32
+	obj_rot_scal_anim_frame 0x0, 0x0, 1, 16
+	obj_rot_scal_anim_end
+
+	.align 2
+gSpriteAffineAnim_8411F30:: @ 8411F30
+	obj_rot_scal_anim_frame 0x0, 0x0, -1, 8
+	obj_rot_scal_anim_frame 0x0, 0x0, 0, 16
+	obj_rot_scal_anim_frame 0x0, 0x0, 1, 8
+	obj_rot_scal_anim_end
+
+	.align 2
+gSpriteAffineAnim_8411F50:: @ 8411F50
+	obj_rot_scal_anim_frame 0xFF00, 0x100, 0, 0
+	obj_rot_scal_anim_frame 0x0, 0x0, -1, 8
+	obj_rot_scal_anim_frame 0x0, 0x0, 0, 16
+	obj_rot_scal_anim_frame 0x0, 0x0, 1, 8
+	obj_rot_scal_anim_end
+
+	.align 2
+gSpriteAffineAnim_8411F78:: @ 8411F78
+	obj_rot_scal_anim_frame 0x0, 0x0, -1, 8
+	obj_rot_scal_anim_frame 0x0, 0x0, 0, 32
+	obj_rot_scal_anim_frame 0x0, 0x0, 1, 8
+	obj_rot_scal_anim_end
+
+	.align 2
+gSpriteAffineAnim_8411F98:: @ 8411F98
+	obj_rot_scal_anim_frame 0xFF00, 0x100, 0, 0
+	obj_rot_scal_anim_frame 0x0, 0x0, -1, 8
+	obj_rot_scal_anim_frame 0x0, 0x0, 0, 32
+	obj_rot_scal_anim_frame 0x0, 0x0, 1, 8
+	obj_rot_scal_anim_end
+
+	.align 2
+gSpriteAffineAnim_8411FC0:: @ 8411FC0
+	obj_rot_scal_anim_frame 0x0, 0x0, -1, 4
+	obj_rot_scal_anim_frame 0x0, 0x0, 0, 24
+	obj_rot_scal_anim_frame 0x0, 0x0, 1, 4
+	obj_rot_scal_anim_end
+
+	.align 2
+gSpriteAffineAnim_8411FE0:: @ 8411FE0
+	obj_rot_scal_anim_frame 0xFF00, 0x100, 0, 0
+	obj_rot_scal_anim_frame 0x0, 0x0, -1, 4
+	obj_rot_scal_anim_frame 0x0, 0x0, 0, 24
+	obj_rot_scal_anim_frame 0x0, 0x0, 1, 4
+	obj_rot_scal_anim_end
+
+	.align 2
+gSpriteAffineAnim_8412008:: @ 8412008
+	obj_rot_scal_anim_frame 0x0, 0x0, 1, 24
+	obj_rot_scal_anim_frame 0x0, 0x0, 0, 16
+	obj_rot_scal_anim_frame 0x0, 0x0, -12, 2
+	obj_rot_scal_anim_end
+
+	.align 2
+gSpriteAffineAnim_8412028:: @ 8412028
+	obj_rot_scal_anim_frame 0xFF00, 0x100, 0, 0
+	obj_rot_scal_anim_frame 0x0, 0x0, 1, 24
+	obj_rot_scal_anim_frame 0x0, 0x0, 0, 16
+	obj_rot_scal_anim_frame 0x0, 0x0, -12, 2
+	obj_rot_scal_anim_end
+
+	.align 2
+gSpriteAffineAnimTable_8412050:: @ 8412050
+	.4byte gSpriteAffineAnim_8411E90
+	.4byte gSpriteAffineAnim_8411EA0
+	.4byte gSpriteAffineAnim_8411EE8
+	.4byte gSpriteAffineAnim_8411F30
+	.4byte gSpriteAffineAnim_8411F78
+	.4byte gSpriteAffineAnim_8411FC0
+	.4byte gSpriteAffineAnim_8412008
+	.4byte gSpriteAffineAnim_8411E90
+	.4byte gSpriteAffineAnim_8411E90
+	.4byte gSpriteAffineAnim_8411E90
+	.4byte gSpriteAffineAnim_8411E90
+	.4byte gSpriteAffineAnim_8411EC0
+	.4byte gSpriteAffineAnim_8411F08
+	.4byte gSpriteAffineAnim_8411F50
+	.4byte gSpriteAffineAnim_8411F98
+	.4byte gSpriteAffineAnim_8411FE0
+	.4byte gSpriteAffineAnim_8412028
+	.4byte gSpriteAffineAnim_8411E90
+	.4byte gSpriteAffineAnim_8411E90
+	.4byte gSpriteAffineAnim_8411E90
+	.4byte gSpriteAffineAnim_8411E90
 
 	.align 2
 gUnknown_084120A4:: @ 84120A4
@@ -28008,26 +28085,55 @@ gUnknown_084120A4:: @ 84120A4
 	.4byte gUnknown_08E782c0
 	.4byte gUnknown_08E782d4
 	.4byte gUnknown_08E782e8
-Unknown_84120DC:
-	.incbin "baserom.gba", 0x004120dc, 0x10
 
 	.align 2
-gUnknown_084120EC:: @ 84120EC
-Unknown_8412EC:
-	.4byte Unknown_84120DC
-Unknown_84120F0:
-	.incbin "baserom.gba", 0x004120f0, 0xb0
+gSpriteAffineAnim_84120DC:: @ 84120DC
+	obj_rot_scal_anim_frame 0xFF00, 0x100, 0, 0
+	obj_rot_scal_anim_end
 
 	.align 2
-gUnknown_084121A0:: @ 84121A0
-	.4byte Unknown_84120DC
+gSpriteAffineAnimTable_84120EC:: @ 84120EC
+	.4byte gSpriteAffineAnim_84120DC
 
 	.align 2
-gUnknown_084121A4:: @ 84121A4
-	.4byte Unknown_84120F0
+gSpriteAffineAnim_84120F0:: @ 84120F0
+	obj_rot_scal_anim_frame 0xFF00, 0x100, 0, 0
+	obj_rot_scal_anim_frame 0x0, 0x0, -8, 1
+	obj_rot_scal_anim_frame 0x0, 0x0, -8, 1
+	obj_rot_scal_anim_frame 0x0, 0x0, -8, 1
+	obj_rot_scal_anim_frame 0x0, 0x0, -8, 1
+	obj_rot_scal_anim_frame 0x0, 0x0, 0, 8
+	obj_rot_scal_anim_frame 0x0, 0x0, 16, 1
+	obj_rot_scal_anim_frame 0x0, 0x0, 16, 1
+	obj_rot_scal_anim_frame 0x0, 0x0, 16, 1
+	obj_rot_scal_anim_frame 0xFF00, 0x100, 0, 0
+	obj_rot_scal_anim_end
 
-gUnknown_084121A8:: @ 84121A8
-	.incbin "baserom.gba", 0x004121a8, 0x4
+	.align 2
+gSpriteAffineAnim_8412148:: @ 8412148
+	obj_rot_scal_anim_frame 0xFF00, 0x100, 0, 0
+	obj_rot_scal_anim_frame 0x0, 0x0, 8, 1
+	obj_rot_scal_anim_frame 0x0, 0x0, 8, 1
+	obj_rot_scal_anim_frame 0x0, 0x0, 8, 1
+	obj_rot_scal_anim_frame 0x0, 0x0, 8, 1
+	obj_rot_scal_anim_frame 0x0, 0x0, 0, 8
+	obj_rot_scal_anim_frame 0x0, 0x0, -16, 1
+	obj_rot_scal_anim_frame 0x0, 0x0, -16, 1
+	obj_rot_scal_anim_frame 0x0, 0x0, -16, 1
+	obj_rot_scal_anim_frame 0xFF00, 0x100, 0, 0
+	obj_rot_scal_anim_end
+
+	.align 2
+gSpriteAffineAnimTable_84121A0:: @ 84121A0
+	.4byte gSpriteAffineAnim_84120DC
+
+	.align 2
+gSpriteAffineAnimTable_84121A4:: @ 84121A4
+	.4byte gSpriteAffineAnim_84120F0
+
+	.align 2
+gSpriteAffineAnimTable_84121A8:: @ 84121A8
+	.4byte gSpriteAffineAnim_8412148
 
 	.align 2
 gOamData_84121AC:: @ 84121AC

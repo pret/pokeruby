@@ -2639,14 +2639,17 @@ gBattleAnimBackgroundPalette_24:: @ 8E6BBDC
 
 	.incbin "baserom.gba", 0xe6bc04, 0x4FC
 
+	.align 2
 gUnknown_08E6C100:: @ 8E6C100
-	.incbin "baserom.gba", 0x00e6c100, 0x820
+	.incbin "graphics/berry_blender/center.8bpp.lz"
 
+	.align 2
 gUnknown_08E6C920:: @ 8E6C920
-	.incbin "baserom.gba", 0x00e6c920, 0xa34
+	.incbin "graphics/berry_blender/outer.4bpp.lz"
 
+	.align 2
 gUnknown_08E6D354:: @ 8E6D354
-	.incbin "baserom.gba", 0x00e6d354, 0x314
+	.incbin "graphics/berry_blender/outer_map.bin.lz"
 
 	.align 2
 gBattleAnimBackgroundPalette_16:: @ 8E6D668
@@ -3387,7 +3390,41 @@ gUnknown_08E8F844:: @ 8E8F844
 	.incbin "baserom.gba", 0x00e8f844, 0xbb4
 
 gUnknown_08E903F8:: @ 8E903F8
-	.incbin "baserom.gba", 0x00e903f8, 0x1D20
+	.incbin "baserom.gba", 0x00e903f8, 0x220
+
+	.align 2
+gBerryBlenderMarubatsuTiles:: @ 8E90618
+	.incbin "graphics/berry_blender/marubatsu.4bpp"
+
+	.align 2
+gBerryBlenderParticlesTiles:: @ 8E90818
+	.incbin "graphics/berry_blender/particles.4bpp"
+
+	.space 0x120
+
+	.align 2
+gBerryBlenderCountdownNumbersTiles:: @ 8E90A18
+	.incbin "graphics/berry_blender/countdown_numbers.4bpp"
+
+	.align 2
+gBerryBlenderStartTiles:: @ 8E91018
+	.incbin "graphics/berry_blender/start.4bpp"
+
+	.incbin "baserom.gba", 0x00e91418, 0x200
+
+	.align 2
+gBerryBlenderArrowTiles:: @ 8E91618
+	.incbin "graphics/berry_blender/arrow.4bpp"
+
+	.incbin "baserom.gba", 0x00e91e18, 0x2c0
+
+	.align 2
+gBerryBlenderMiscPalette:: @ 8E920D8
+	.incbin "graphics/berry_blender/misc.gbapal"
+
+	.align 2
+gBerryBlenderArrowPalette:: @ 8E920F8
+	.incbin "graphics/berry_blender/arrow.gbapal"
 
 	.align 2
 gTilesetTiles_General:: @ 8E92118
