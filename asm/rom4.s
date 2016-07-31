@@ -58711,9 +58711,9 @@ _0806D7DC: .4byte gUnknown_08E71894
 _0806D7E0: .4byte 0x06006000
 _0806D7E4: .4byte gUnknown_08E71934
 _0806D7E8: .4byte 0x06006180
-_0806D7EC: .4byte gStatsGfx_Icons
+_0806D7EC: .4byte gStatusGfx_Icons
 _0806D7F0: .4byte 0x06007180
-_0806D7F4: .4byte gStatsPal_Icons
+_0806D7F4: .4byte gStatusPal_Icons
 	thumb_func_end sub_806D718
 
 	thumb_func_start sub_806D7F8
