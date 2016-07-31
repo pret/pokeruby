@@ -2807,16 +2807,19 @@ gUnknown_08E71894:: @ 8E71894
 	.incbin "baserom.gba", 0x00e71894, 0xa0
 
 gUnknown_08E71934:: @ 8E71934
-	.incbin "baserom.gba", 0x00e71934, 0xdb0
+	.incbin "baserom.gba", 0x00e71934, 0x3dc
+
+gUnknown_08E71D10:: @ 8E71D10
+	.incbin "baserom.gba", 0x00e71d10, 0x9d4
 
 gUnknown_08E726E4:: @ 8E726E4
 	.incbin "baserom.gba", 0x00e726e4, 0x17c
 
-gUnknown_08E72860:: @ 8E72860
-	.incbin "baserom.gba", 0x00e72860, 0x1f0
+gStatsGfx_Icons:: @ 8E72860
+	.incbin "graphics/interface/status_icons.4bpp.lz"
 
-gUnknown_08E72A50:: @ 8E72A50
-	.incbin "baserom.gba", 0x00e72a50, 0x28
+gStatsPal_Icons:: @ 8E72A50
+	.incbin "graphics/interface/status_icons.gbapal.lz"
 
 gUnknown_08E72A78:: @ 8E72A78
 	.incbin "baserom.gba", 0x00e72a78, 0x9f0

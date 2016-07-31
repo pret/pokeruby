@@ -1711,7 +1711,9 @@ gUnknown_082087C4:: @ 82087C4
 	.incbin "baserom.gba", 0x002087c4, 0x18
 
 gUnknown_082087DC:: @ 82087DC
-	.incbin "baserom.gba", 0x002087dc, 0xa00
+	.incbin "baserom.gba", 0x002087dc, 0x200
+Unknown_082089DC::
+	.incbin "baserom.gba", 0x002089dc, 0x800
 
 @ 82091DC
 	.include "data/egg_moves.s"
@@ -9176,8 +9178,8 @@ gSpriteTemplate_837F5C8:: @ 837F5C8
 
 	.align 2
 gUnknown_0837F5E0:: @ 837F5E0
-	obj_tiles 0x082089dc, 2048, 0xd755
-	obj_tiles 0x082089dc, 2048, 0xd756
+	obj_tiles Unknown_082089DC, 2048, 0xd755
+	obj_tiles Unknown_082089DC, 2048, 0xd756
 
 	.include "data/maps/events/PetalburgCity.s"
 	.include "data/maps/events/SlateportCity.s"
@@ -9911,7 +9913,7 @@ gUnknown_08396FA8:: @ 8396FA8
 	.4byte DroughtPaletteData_4
 	.4byte DroughtPaletteData_5
 
-	.incbin "baserom.gba", 0x00396fc0, 0x4
+	.incbin "baserom.gba", 0x00396fc0, 0x4 @ pointer to unk_2000000?
 
 	.align 2
 gUnknown_08396FC4:: @ 8396FC4
@@ -10856,7 +10858,6 @@ gUnknown_0839F3E4:: @ 839F3E4
 
 	.align 2
 gUnknown_0839F3F8:: @ 839F3F8
-Unknown_839F3F8:
 	.4byte sub_8088CA0
 	.4byte sub_8088CF8
 	.4byte sub_8088D3C
@@ -11197,7 +11198,6 @@ gUnknown_083B5558:: @ 83B5558
 
 	.align 2
 gUnknown_083B5584:: @ 83B5584
-Unknown_83B5584:
 	.4byte 0x02008000
 	.4byte 0x0200c000
 	.4byte 0x02010000
@@ -11364,14 +11364,10 @@ gUnknown_083B5FF4:: @ 83B5FF4
 
 	.align 2
 gUnknown_083B600C:: @ 83B600C
-	.4byte PCText_WithdrawPoke
-	.4byte PCText_MovePokeToParty
-	.4byte PCText_DepositPoke
-	.4byte PCText_StorePokeInBox
-	.4byte PCText_MovePoke
-	.4byte PCText_OrganizeBoxesParty
-	.4byte PCText_SeeYa
-	.4byte PCText_ReturnToPrevMenu
+	.4byte PCText_WithdrawPoke, PCText_MovePokeToParty
+	.4byte PCText_DepositPoke, PCText_StorePokeInBox
+	.4byte PCText_MovePoke, PCText_OrganizeBoxesParty
+	.4byte PCText_SeeYa, PCText_ReturnToPrevMenu
 
 	.align 2
 gSpriteAnim_83B602C:: @ 83B602C
@@ -11457,7 +11453,7 @@ gUnknown_083B6DB4:: @ 83B6DB4
 
 	.align 2
 gUnknown_083B6DB8:: @ 83B6DB8
-	.4byte 0x02039360
+	.4byte gTileBuffer
 
 	.align 2
 gWaveformSpritePalette:: @ 83B6DBC
@@ -11904,15 +11900,18 @@ gWallpaperTable:: @ 83BB0E8
 	.4byte gWallpaperTilemap_Plain
 	.4byte gWallpaperPalettes_Plain
 
+PCPal_Arrow:
 	.incbin "graphics/pokemon_storage/arrow.gbapal"
+PCGfx_Arrow:
 	.incbin "graphics/pokemon_storage/arrow.4bpp"
 
 	.align 2
 gUnknown_083BB288:: @ 83BB288
-	obj_tiles 0x083bb208, 128, 0x0006
+	obj_tiles PCGfx_Arrow, 128, 0x0006
 
+	.align 2
 gUnknown_083BB290:: @ 83BB290
-	.incbin "baserom.gba", 0x003bb290, 0x8
+	obj_pal PCPal_Arrow, 0xDACF
 
 	.align 2
 gOamData_83BB298:: @ 83BB298
@@ -12113,7 +12112,6 @@ Unknown_83BC620:
 
 	.align 2
 gUnknown_083BC62C:: @ 83BC62C
-Unknown_83BC62C:
 	.4byte Unknown_83BC5F0
 	.4byte Unknown_83BC5FC
 	.4byte Unknown_83BC608
@@ -12290,7 +12288,7 @@ gSpriteAnimTable_83C115C:: @ 83C115C
 
 	.align 2
 gUnknown_083C11B8:: @ 83C11B8
-	obj_tiles 0x08e71d10, 5888, 0x7532
+	obj_tiles gUnknown_08E71D10, 5888, 0x7532
 
 	.align 2
 gSpriteTemplate_83C11C0:: @ 83C11C0
@@ -12433,11 +12431,11 @@ gSpriteAnimTable_83C12D8:: @ 83C12D8
 
 	.align 2
 gUnknown_083C12F4:: @ 83C12F4
-	obj_tiles 0x08e72860, 896, 0x7531
+	obj_tiles gStatsGfx_Icons, 896, 0x7531
 
 	.align 2
 gUnknown_083C12FC:: @ 83C12FC
-	obj_pal 0x08e72a50, 0x7531
+	obj_pal gStatsPal_Icons, 0x7531
 
 	.align 2
 gSpriteTemplate_83C1304:: @ 83C1304
