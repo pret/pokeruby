@@ -7178,7 +7178,6 @@ gUnknown_08376500:: @ 8376500
 	.incbin "baserom.gba", 0x00376500, 0x4
 
 gUnknown_08376504:: @ 8376504
-	@ this is called as a list of items, but it has a few items that are not indexed until FRLG/Emerald.
 	.2byte 0x0108
 	.2byte 0x0151
 	.2byte 0x0160
