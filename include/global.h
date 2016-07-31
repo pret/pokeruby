@@ -38,18 +38,18 @@ struct Time
 
 struct SaveBlock2
 {
-    u8 playerName[8];
-    u8 playerGender;
-    u8 sb2_field_9;
-    u8 playerTrainerId[4];
-    u16 playTimeHours;
-    u8 playTimeMinutes;
-    u8 playTimeSeconds;
-    u8 playTimeVBlanks;
-    u8 optionsButtonMode;
-    u8 optionsTextSpeed:3;
+    u8 playerName[8];               //0x00
+    u8 playerGender;                //0x08
+    u8 sb2_field_9;                 //0x09
+    u8 playerTrainerId[4];          //0x0A
+    u16 playTimeHours;              //0x0E
+    u8 playTimeMinutes;             //0x10
+    u8 playTimeSeconds;             //0x11
+    u8 playTimeVBlanks;             //0x12
+    u8 optionsButtonMode;           //0x13
+    u8 optionsTextSpeed:3;          //0x14
     u8 optionsUnk:5;
-    u8 filler[0x83];
+    u8 filler[0x83];                //0x15
     struct Time localTimeOffset;
 };
 

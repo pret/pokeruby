@@ -128,37 +128,37 @@ struct SpriteTemplate
 
 struct Sprite
 {
-    struct OamData oam;
-    union AnimCmd **anims;
-    struct SpriteFrameImage *images;
-    union AffineAnimCmd **affineAnims;
-    struct SpriteTemplate *template;
-    struct SubspriteTable *subspriteTables;
-    void (*callback)(struct Sprite *);
+    struct OamData oam;                         //0x00
+    union AnimCmd **anims;                      //0x08
+    struct SpriteFrameImage *images;            //0x0C
+    union AffineAnimCmd **affineAnims;          //0x10
+    struct SpriteTemplate *template;            //0x14
+    struct SubspriteTable *subspriteTables;     //0x18
+    void (*callback)(struct Sprite *);          //0x1C
 
-    struct Coords16 pos1;
-    struct Coords16 pos2;
-    s8 centerToCornerVecX;
-    s8 centerToCornerVecY;
+    struct Coords16 pos1;                       //0x20
+    struct Coords16 pos2;                       //0x24
+    s8 centerToCornerVecX;                      //0x28
+    s8 centerToCornerVecY;                      //0x29
 
-    u8 animNum;
-    u8 animCmdIndex;
-    u8 animDelayCounter:6;
+    u8 animNum;                                 //0x2A
+    u8 animCmdIndex;                            //0x2B
+    u8 animDelayCounter:6;                      //0x2C
     u8 animPaused:1;
     u8 affineAnimPaused:1;
-    u8 animLoopCounter;
+    u8 animLoopCounter;                         //0x2D
 
     // general purpose data fields
-    u16 data0;
-    u16 data1;
-    u16 data2;
-    u16 data3;
-    u16 data4;
-    u16 data5;
-    u16 data6;
-    u16 data7;
+    u16 data0;                                  //0x2E
+    u16 data1;                                  //0x30
+    u16 data2;                                  //0x32
+    u16 data3;                                  //0x34
+    u16 data4;                                  //0x36
+    u16 data5;                                  //0x38
+    u16 data6;                                  //0x3A
+    u16 data7;                                  //0x3C
 
-    u16 inUse:1;
+    u16 inUse:1;                                //0x3E
     u16 coordOffsetEnabled:1;
     u16 invisible:1;
     u16 flags_3:1;
@@ -166,7 +166,7 @@ struct Sprite
     u16 flags_5:1;
     u16 flags_6:1;
     u16 flags_7:1;
-    u16 hFlip:1;
+    u16 hFlip:1;                                //0x3F
     u16 vFlip:1;
     u16 animBeginning:1;
     u16 affineAnimBeginning:1;
@@ -175,12 +175,12 @@ struct Sprite
     u16 usingSheet:1;
     u16 flags_f:1;
 
-    u16 sheetTileStart;
+    u16 sheetTileStart;                         //0x40
 
-    u8 subspriteTableNum:6;
+    u8 subspriteTableNum:6;                     //0x42
     u8 subspriteMode:2;
 
-    u8 subpriority;
+    u8 subpriority;                             //0x43
 };
 
 void ResetSpriteData(void);
