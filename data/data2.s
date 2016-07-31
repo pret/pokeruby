@@ -12431,11 +12431,11 @@ gSpriteAnimTable_83C12D8:: @ 83C12D8
 
 	.align 2
 gUnknown_083C12F4:: @ 83C12F4
-	obj_tiles gStatsGfx_Icons, 896, 0x7531
+	obj_tiles gStatusGfx_Icons, 896, 0x7531
 
 	.align 2
 gUnknown_083C12FC:: @ 83C12FC
-	obj_pal gStatsPal_Icons, 0x7531
+	obj_pal gStatusPal_Icons, 0x7531
 
 	.align 2
 gSpriteTemplate_83C1304:: @ 83C1304
@@ -23253,8 +23253,10 @@ gSpriteTemplate_83FA5F0:: @ 83FA5F0
 gUnknown_083FA608:: @ 83FA608
 	.incbin "baserom.gba", 0x003fa608, 0x6
 
+	.align 1
 gUnknown_083FA60E:: @ 83FA60E
-	.2byte 0x74, 0x2C, 0x74, 0x70
+	.2byte 0x74, 0x2C
+	.2byte 0x74, 0x70
 
 gUnknown_083FA616:: @ 83FA616
 	.incbin "baserom.gba", 0x003fa616, 0x8

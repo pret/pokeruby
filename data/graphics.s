@@ -2815,10 +2815,10 @@ gUnknown_08E71D10:: @ 8E71D10
 gUnknown_08E726E4:: @ 8E726E4
 	.incbin "baserom.gba", 0x00e726e4, 0x17c
 
-gStatsGfx_Icons:: @ 8E72860
+gStatusGfx_Icons:: @ 8E72860
 	.incbin "graphics/interface/status_icons.4bpp.lz"
 
-gStatsPal_Icons:: @ 8E72A50
+gStatusPal_Icons:: @ 8E72A50
 	.incbin "graphics/interface/status_icons.gbapal.lz"
 
 gUnknown_08E72A78:: @ 8E72A78
