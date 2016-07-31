@@ -2641,14 +2641,23 @@ gSpriteAffineAnimTable_8215AC0:: @ 8215AC0
 gUnknown_08215BA0:: @ 8215BA0
 	.incbin "baserom.gba", 0x00215ba0, 0x6c
 
+	.align 2
 gUnknown_08215C0C:: @ 8215C0C
-	.incbin "baserom.gba", 0x00215c0c, 0x20
+	.incbin "graphics/berry_blender/center.gbapal"
 
+	.align 2
 gUnknown_08215C2C:: @ 8215C2C
-	.incbin "baserom.gba", 0x00215c2c, 0x400
+	.incbin "graphics/berry_blender/center_map.bin"
 
+	.align 2
 gUnknown_0821602C:: @ 821602C
-	.incbin "baserom.gba", 0x0021602c, 0x21d
+	.incbin "graphics/berry_blender/outer.gbapal"
+
+	@ unused palette
+	.align 2
+	.incbin "baserom.gba", 0x0021604c, 0x20
+
+	.incbin "baserom.gba", 0x0021606c, 0x1dd
 
 gUnknown_08216249:: @ 8216249
 	.string "\p$"
@@ -2838,15 +2847,15 @@ gSpriteAnimTable_82163AC:: @ 82163AC
 
 	.align 2
 gUnknown_082163DC:: @ 82163DC
-	obj_tiles 0x08e91618, 2048, 0xb5d1
+	obj_tiles gBerryBlenderArrowTiles, 0x800, 46545
 
 	.align 2
 gUnknown_082163E4:: @ 82163E4
-	obj_pal 0x08e920d8, 0xb5d2
+	obj_pal gBerryBlenderMiscPalette, 46546
 
 	.align 2
 gUnknown_082163EC:: @ 82163EC
-	obj_pal 0x08e920f8, 0x3018
+	obj_pal gBerryBlenderArrowPalette, 12312
 
 	.align 2
 gSpriteTemplate_82163F4:: @ 82163F4
@@ -2891,7 +2900,7 @@ gSpriteAnimTable_8216444:: @ 8216444
 
 	.align 2
 gUnknown_08216454:: @ 8216454
-	obj_tiles 0x08e90618, 512, 0xbef8
+	obj_tiles gBerryBlenderMarubatsuTiles, 0x200, 48888
 
 	.align 2
 gSpriteTemplate_821645C:: @ 821645C
@@ -2953,7 +2962,7 @@ gSpriteAnimTable_82164E0:: @ 82164E0
 
 	.align 2
 gUnknown_082164F4:: @ 82164F4
-	obj_tiles 0x08e90818, 224, 0x5ba0
+	obj_tiles gBerryBlenderParticlesTiles, 0xE0, 23456
 
 	.align 2
 gSpriteTemplate_82164FC:: @ 82164FC
@@ -2988,7 +2997,7 @@ gSpriteAnimTable_8216534:: @ 8216534
 
 	.align 2
 gUnknown_08216540:: @ 8216540
-	obj_tiles 0x08e90a18, 1536, 0x3039
+	obj_tiles gBerryBlenderCountdownNumbersTiles, 0x600, 12345
 
 	.align 2
 gSpriteTemplate_8216548:: @ 8216548
@@ -3011,7 +3020,7 @@ gSpriteAnimTable_8216570:: @ 8216570
 
 	.align 2
 gUnknown_08216574:: @ 8216574
-	obj_tiles 0x08e91018, 1024, 0x303a
+	obj_tiles gBerryBlenderStartTiles, 0x400, 12346
 
 	.align 2
 gSpriteTemplate_821657C:: @ 821657C
