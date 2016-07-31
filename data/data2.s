@@ -7176,6 +7176,7 @@ gUnknown_08376500:: @ 8376500
 	.incbin "baserom.gba", 0x00376500, 0x4
 
 gUnknown_08376504:: @ 8376504
+	@ this is called as a list of items, but it has a few items that are not indexed until FRLG/Emerald.
 	.2byte 0x0108
 	.2byte 0x0151
 	.2byte 0x0160
@@ -7298,7 +7299,7 @@ gUnknown_08376624:: @ 8376624
 	.4byte OtherText_TeachWhichPoke
 
 gUnknown_08376678:: @ 8376678
-	.incbin "baserom.gba", 0x00376678, 0xc0
+	.incbin "baserom.gba", 0x00376678, 0xc0 @ 4 byte array?
 
 gUnknown_08376738:: @ 8376738
 	.incbin "baserom.gba", 0x00376738, 0x120
@@ -7331,16 +7332,54 @@ gUnknown_08376A25:: @ 8376A25
 	.incbin "baserom.gba", 0x00376a25, 0x39
 
 gUnknown_08376A5E:: @ 8376A5E
-	.incbin "baserom.gba", 0x00376a5e, 0xf6
+	.incbin "baserom.gba", 0x00376a5e, 0xf3
 
+	.align 2
 gUnknown_08376B54:: @ 8376B54
-	.incbin "baserom.gba", 0x00376b54, 0x60
+	.4byte ether_effect_related_2
+	.4byte sub_80704F0
+Unknown_08376B5C:
+	.incbin "baserom.gba", 0x00376b5c, 0x2c
+Unknown_08376B88:
+	.incbin "baserom.gba", 0x00376b88, 0x2c
 
+	.align 2
 gUnknown_08376BB4:: @ 8376BB4
-	.incbin "baserom.gba", 0x00376bb4, 0xc0
+	.4byte 0x401, Unknown_08376B5C
+	.4byte 0x10C, Unknown_08376B88
+	.4byte 0x40C, Unknown_08376B88
+	.4byte 0x70C, Unknown_08376B88
+	.4byte 0xA0C, Unknown_08376B88
+	.4byte 0xD0C, Unknown_08376B88
+	.4byte 0x201, Unknown_08376B5C
+	.4byte 0x901, Unknown_08376B5C
+	.4byte 0x10C, Unknown_08376B88
+	.4byte 0x50C, Unknown_08376B88
+	.4byte 0x90C, Unknown_08376B88
+	.4byte 0xD0C, Unknown_08376B88
+	.4byte 0x201, Unknown_08376B5C
+	.4byte 0x901, Unknown_08376B5C
+	.4byte 0x20C, Unknown_08376B88
+	.4byte 0x50C, Unknown_08376B88
+	.4byte 0x90C, Unknown_08376B88
+	.4byte 0xC0C, Unknown_08376B88
+	.4byte 0x201, Unknown_08376B5C
+	.4byte 0x20C, Unknown_08376B88
+	.4byte 0x50C, Unknown_08376B88
+	.4byte 0x901, Unknown_08376B5C
+	.4byte 0x90C, Unknown_08376B88
+	.4byte 0xC0C, Unknown_08376B88
 
+	.align 2
 gUnknown_08376C74:: @ 8376C74
-	.incbin "baserom.gba", 0x00376c74, 0x60
+	.4byte sub_8089CD4, sub_806AFD0, 0
+	.4byte sub_8095118, sub_8094E58, 0
+	.4byte sub_80F9C6C, sub_80F9ACC, 0
+	.4byte sub_80F9C6C, sub_806AFD0, 0
+	.4byte sub_81222B0, sub_8121E78, 0
+	.4byte sub_8122A48, sub_8122854, 0xFF
+	.4byte sub_8122E0C, sub_806AFD0, 0x0F
+	.4byte sub_80F9E64, sub_80F9CE8, 0
 
 gUnknown_08376CD4:: @ 8376CD4
 	.incbin "baserom.gba", 0x00376cd4, 0x18
@@ -8043,7 +8082,16 @@ gOamData_837DF3C:: @ 837DF3C
 	.2byte 0x0800
 
 	.align 2
-	.incbin "baserom.gba", 0x37df44, 0x10
+gOamData_837DF44:: @ 837DF44
+	.2byte 0x4000
+	.2byte 0x0000
+	.2byte 0x0800
+
+	.align 2
+gOamData_837DF4C:: @ 837DF4C
+	.2byte 0x4000
+	.2byte 0x4000
+	.2byte 0x0800
 
 	.align 2
 gOamData_837DF54:: @ 837DF54
@@ -8064,7 +8112,10 @@ gOamData_837DF64:: @ 837DF64
 	.2byte 0x0800
 
 	.align 2
-	.incbin "baserom.gba", 0x37df6c, 0x8
+gOamData_837DF6C:: @ 837DF6C
+	.2byte 0x8000
+	.2byte 0x4000
+	.2byte 0x0800
 
 	.align 2
 gOamData_837DF74:: @ 837DF74
@@ -8103,7 +8154,22 @@ gOamData_837DF9C:: @ 837DF9C
 	.2byte 0x0800
 
 	.align 2
-	.incbin "baserom.gba", 0x37dfa4, 0x18
+gOamData_837DFA4:: @ 837DFA4
+	.2byte 0x4100
+	.2byte 0x0000
+	.2byte 0x0800
+
+	.align 2
+gOamData_837DFAC:: @ 837DFAC
+	.2byte 0x4100
+	.2byte 0x4000
+	.2byte 0x0800
+	
+	.align 2
+gOamData_837DFB4:: @ 837DFB4
+	.2byte 0x4100
+	.2byte 0x8000
+	.2byte 0x0800
 
 	.align 2
 gOamData_837DFBC:: @ 837DFBC
@@ -8112,7 +8178,22 @@ gOamData_837DFBC:: @ 837DFBC
 	.2byte 0x0800
 
 	.align 2
-	.incbin "baserom.gba", 0x37dfc4, 0x18
+gOamData_837DFC4:: @ 837DFC4
+	.2byte 0x8100
+	.2byte 0x0000
+	.2byte 0x0800
+
+	.align 2
+gOamData_837DFCC:: @ 837DFCC
+	.2byte 0x8100
+	.2byte 0x4000
+	.2byte 0x0800
+	
+	.align 2
+gOamData_837DFD4:: @ 837DFD4
+	.2byte 0x8100
+	.2byte 0x8000
+	.2byte 0x0800
 
 	.align 2
 gOamData_837DFDC:: @ 837DFDC
@@ -8145,7 +8226,16 @@ gOamData_837DFFC:: @ 837DFFC
 	.2byte 0x0800
 
 	.align 2
-	.incbin "baserom.gba", 0x37e004, 0x10
+gOamData_837D004:: @ 837D004
+	.2byte 0x4300
+	.2byte 0x0000
+	.2byte 0x0800
+	
+	.align 2
+gOamData_837D00C:: @ 837D00C
+	.2byte 0x4300
+	.2byte 0x4000
+	.2byte 0x0800
 
 	.align 2
 gOamData_837E014:: @ 837E014
@@ -8154,7 +8244,10 @@ gOamData_837E014:: @ 837E014
 	.2byte 0x0800
 
 	.align 2
-	.incbin "baserom.gba", 0x37e01c, 0x8
+gOamData_837E01C:: @ 837E01C
+	.2byte 0x4300
+	.2byte 0xC000
+	.2byte 0x0800
 
 	.align 2
 gOamData_837E024:: @ 837E024
@@ -8163,7 +8256,10 @@ gOamData_837E024:: @ 837E024
 	.2byte 0x0800
 
 	.align 2
-	.incbin "baserom.gba", 0x37e02c, 0x8
+gOamData_837E02C:: @ 837E02C
+	.2byte 0x8300
+	.2byte 0x4000
+	.2byte 0x0800
 
 	.align 2
 gOamData_837E034:: @ 837E034
@@ -8202,7 +8298,16 @@ gOamData_837E05C:: @ 837E05C
 	.2byte 0x0800
 
 	.align 2
-	.incbin "baserom.gba", 0x37e064, 0x10
+gOamData_837E064:: @ 837E064
+	.2byte 0x4400
+	.2byte 0x0000
+	.2byte 0x0800
+
+	.align 2
+gOamData_837E06C:: @ 837E06C
+	.2byte 0x4400
+	.2byte 0x4000
+	.2byte 0x0800
 
 	.align 2
 gOamData_837E074:: @ 837E074
@@ -8223,7 +8328,10 @@ gOamData_837E084:: @ 837E084
 	.2byte 0x0800
 
 	.align 2
-	.incbin "baserom.gba", 0x37e08c, 0x8
+gOamData_837E08C:: @ 837E08C
+	.2byte 0x8400
+	.2byte 0x4000
+	.2byte 0x0800
 
 	.align 2
 gOamData_837E094:: @ 837E094
@@ -8232,7 +8340,10 @@ gOamData_837E094:: @ 837E094
 	.2byte 0x0800
 
 	.align 2
-	.incbin "baserom.gba", 0x37e09c, 0x8
+gOamData_837E09C:: @ 837E09C
+	.2byte 0x8400
+	.2byte 0xC000
+	.2byte 0x0800
 
 	.align 2
 gOamData_837E0A4:: @ 837E0A4
@@ -8259,7 +8370,28 @@ gOamData_837E0BC:: @ 837E0BC
 	.2byte 0x0800
 
 	.align 2
-	.incbin "baserom.gba", 0x37e0c4, 0x20
+gOamData_837E0C4:: @ 837E0C4
+	.2byte 0x4500
+	.2byte 0x0000
+	.2byte 0x0800
+
+	.align 2
+gOamData_837E0CC:: @ 837E0CC
+	.2byte 0x4500
+	.2byte 0x4000
+	.2byte 0x0800
+
+	.align 2
+gOamData_837E0D4:: @ 837E0D4
+	.2byte 0x4500
+	.2byte 0x8000
+	.2byte 0x0800
+
+	.align 2
+gOamData_837E0DC:: @ 837E0DC
+	.2byte 0x4500
+	.2byte 0xC000
+	.2byte 0x0800
 
 	.align 2
 gOamData_837E0E4:: @ 837E0E4
@@ -8268,7 +8400,16 @@ gOamData_837E0E4:: @ 837E0E4
 	.2byte 0x0800
 
 	.align 2
-	.incbin "baserom.gba", 0x37e0ec, 0x10
+gOamData_837E0EC:: @ 837E0EC
+	.2byte 0x8500
+	.2byte 0x4000
+	.2byte 0x0800
+
+	.align 2
+gOamData_837E0F4:: @ 837E0F4
+	.2byte 0x8500
+	.2byte 0x8000
+	.2byte 0x0800
 
 	.align 2
 gOamData_837E0FC:: @ 837E0FC
@@ -8301,7 +8442,16 @@ gOamData_837E11C:: @ 837E11C
 	.2byte 0x0800
 
 	.align 2
-	.incbin "baserom.gba", 0x37e124, 0x10
+gOamData_837E124:: @ 837E124
+	.2byte 0x4700
+	.2byte 0x0000
+	.2byte 0x0800
+	
+	.align 2
+gOamData_837E12C:: @ 837E12C
+	.2byte 0x4700
+	.2byte 0x4000
+	.2byte 0x0800
 
 	.align 2
 gOamData_837E134:: @ 837E134
@@ -8322,7 +8472,22 @@ gOamData_837E144:: @ 837E144
 	.2byte 0x0800
 
 	.align 2
-	.incbin "baserom.gba", 0x37e14c, 0x18
+gOamData_837E14C:: @ 837E14C
+	.2byte 0x8700
+	.2byte 0x4000
+	.2byte 0x0800
+
+	.align 2
+gOamData_837E154:: @ 837E154
+	.2byte 0x8700
+	.2byte 0x8000
+	.2byte 0x0800
+
+	.align 2
+gOamData_837E15C:: @ 837E15C
+	.2byte 0x8700
+	.2byte 0xC000
+	.2byte 0x0800
 
 	.align 2
 gBattleAnimPicTable:: @ 837E164
