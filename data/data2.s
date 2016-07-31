@@ -1465,23 +1465,34 @@ gUnknown_081FAD98:: @ 81FAD98
 	.4byte nullsub_43
 
 gUnknown_081FAE7C:: @ 81FAE7C
-	.incbin "baserom.gba", 0x001fae7c, 0x4
+	.byte 0, 2, 3, 1
 
 gUnknown_081FAE80:: @ 81FAE80
 	.string "{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW WHITE LIGHT_BLUE WHITE2}$"
 
 gUnknown_081FAE89:: @ 81FAE89
-	.incbin "baserom.gba", 0x001fae89, 0x8
+	.byte  8, 120
+	.byte 88, 120
+	.byte  8, 136
+	.byte 88, 136
 
 gUnknown_081FAE91:: @ 81FAE91
-	.incbin "baserom.gba", 0x001fae91, 0x10
+	.byte 144, 120
+	.byte 190, 120
+	.byte 144, 136
+	.byte 190, 136
+	.byte  72,  72
+	.byte  32,  90
+	.byte  80,  80
+	.byte  80,  88
 
 	.align 2
 gUnknown_081FAEA4:: @ 81FAEA4
-	obj_tiles 0x08d02410, 384, 0xd6eb
+	obj_tiles gSmokescreenImpactTiles, 0x180, 55019
 
+	.align 2
 gUnknown_081FAEAC:: @ 81FAEAC
-	.incbin "baserom.gba", 0x001faeac, 0x8
+	obj_pal gSmokescreenImpactPalette, 55019
 
 	.align 2
 gOamData_81FAEB4:: @ 81FAEB4
@@ -2294,13 +2305,14 @@ gUnknown_0820C320:: @ 820C320
 	.4byte sub_804AA00
 
 gUnknown_0820C330:: @ 820C330
-	.incbin "baserom.gba", 0x0020c330, 0x4
+	.byte 0, 14
+	.byte 15, 29
 
 gUnknown_0820C334:: @ 820C334
-	.incbin "baserom.gba", 0x0020c334, 0x1
-
-gUnknown_0820C335:: @ 820C335
-	.incbin "baserom.gba", 0x0020c335, 0x7
+	.byte 3, 5
+	.byte 3, 7
+	.byte 18, 5
+	.byte 18, 7
 
 gUnknown_0820C33C::
 	.string "$"
@@ -10965,11 +10977,11 @@ gUnknown_083B5558:: @ 83B5558
 
 	.align 2
 gUnknown_083B5584:: @ 83B5584
-Unknown_83B5584:
 	.4byte 0x02008000
 	.4byte 0x0200c000
 	.4byte 0x02010000
 	.4byte 0x02014000
+
 Unknown_83B5594:
 	.incbin "baserom.gba", 0x003b5594, 0x80
 Unknown_83B5614:
@@ -28052,7 +28064,7 @@ gSpriteAffineAnimTable_84121D8:: @ 84121D8
 
 	.align 2
 gUnknown_084121DC:: @ 84121DC
-	obj_tiles 0x08e781c8, 32, 0x39e2
+	obj_tiles 0x08e781c8, 0x20, 14818
 
 	.align 2
 gSpriteTemplate_84121E4:: @ 84121E4
@@ -28106,16 +28118,22 @@ gUnknown_08413340:: @ 8413340
 gUnknown_084139C8:: @ 84139C8
 	.incbin "baserom.gba", 0x004139c8, 0x304
 
+	.align 2
 gUnknown_08413CCC:: @ 8413CCC
 	.incbin "graphics/intro/intro2_bgtrees.gbapal"
+
+	.align 2
+gIntro2TreeTiles:: @ 8413CEC
 	.incbin "graphics/intro/intro2_bgtreessmall.4bpp.lz"
 
 gUnknown_08413E38:: @ 8413E38
 	.incbin "baserom.gba", 0x00413e38, 0x40 @ two palettes?
 
+	.align 2
 gUnknown_08413E78:: @ 8413E78
 	.incbin "graphics/intro/intro2_bgnight.4bpp.lz" @ only used in credits, coupled with intro because bicycle sequence
 
+	.align 2
 gUnknown_08414064:: @ 8414064
 	.incbin "graphics/intro/intro2_bgnight.gbapal"
 
@@ -28170,55 +28188,83 @@ gIntro2LatiasTiles:: @ 8416718
 gSpriteTemplate_8416B3C:: @ 8416B3C
 	spr_template 2000, 0xFFFF, gDummyOamData, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_814910C
 
+	.align 2
 gUnknown_08416B54:: @ 8416B54
-Unknown_8416B54:
-	.incbin "baserom.gba", 0x00416b54, 0x10
-Unknown_8416B64:
-	.incbin "baserom.gba", 0x00416b64, 0x8
-Unknown_8416B6C:
-	.incbin "baserom.gba", 0x00416b6c, 0x8
-Unknown_8416B74:
-	.incbin "baserom.gba", 0x00416b74, 0x8
-Unknown_8416B7C:
-	.incbin "baserom.gba", 0x00416b7c, 0x8
+	obj_tiles gUnknown_084131C4, 0x400, 2000
+	null_obj_tiles
 
 	.align 2
-gUnknown_08416B84:: @ 8416B84
-	.4byte Unknown_8416B64
-	.4byte Unknown_8416B6C
-	.4byte Unknown_8416B74
-	.4byte Unknown_8416B7C
+gSpriteAnim_8416B64:: @ 8416B64
+	obj_image_anim_frame 0, 30
+	obj_image_anim_end
+
+	.align 2
+gSpriteAnim_8416B6C:: @ 8416B6C
+	obj_image_anim_frame 16, 30
+	obj_image_anim_end
+
+	.align 2
+gSpriteAnim_8416B74:: @ 8416B74
+	obj_image_anim_frame 20, 30
+	obj_image_anim_end
+
+	.align 2
+gSpriteAnim_8416B7C:: @ 8416B7C
+	obj_image_anim_frame 22, 30
+	obj_image_anim_end
+
+	.align 2
+gSpriteAnimTable_8416B84:: @ 8416B84
+	.4byte gSpriteAnim_8416B64
+	.4byte gSpriteAnim_8416B6C
+	.4byte gSpriteAnim_8416B74
+	.4byte gSpriteAnim_8416B7C
 
 gUnknown_08416B94:: @ 8416B94
 	.incbin "baserom.gba", 0x00416b94, 0x48
 
+	.align 2
 gUnknown_08416BDC:: @ 8416BDC
-Unknown_8416BDC:
-	.incbin "baserom.gba", 0x00416bdc, 0x10
-Unknown_8416BEC:
-	.incbin "baserom.gba", 0x00416bec, 0x8
-Unknown_8416BF4:
-	.incbin "baserom.gba", 0x00416bf4, 0x8
-Unknown_8416BFC:
-	.incbin "baserom.gba", 0x00416bfc, 0x8
+	obj_tiles gIntro2TreeTiles, 0x400, 2000
+	null_obj_tiles
 
 	.align 2
-gUnknown_08416C04:: @ 8416C04
-	.4byte Unknown_8416BEC
-	.4byte Unknown_8416BF4
-	.4byte Unknown_8416BFC
+gSpriteAnim_8416BEC:: @ 8416BEC
+	obj_image_anim_frame 0, 30
+	obj_image_anim_end
+
+	.align 2
+gSpriteAnim_8416BF4:: @ 8416BF4
+	obj_image_anim_frame 16, 30
+	obj_image_anim_end
+
+	.align 2
+gSpriteAnim_8416BFC:: @ 8416BFC
+	obj_image_anim_frame 24, 30
+	obj_image_anim_end
+
+	.align 2
+gSpriteAnimTable_8416C04:: @ 8416C04
+	.4byte gSpriteAnim_8416BEC
+	.4byte gSpriteAnim_8416BF4
+	.4byte gSpriteAnim_8416BFC
 
 gUnknown_08416C10:: @ 8416C10
 	.incbin "baserom.gba", 0x00416c10, 0x60
 
+	.align 2
 gUnknown_08416C70:: @ 8416C70
-Unknown_8416C70:
-	.incbin "baserom.gba", 0x00416c70, 0x10
-Unknown_8416C80:
-	.incbin "baserom.gba", 0x00416c80, 0x8
+	obj_tiles gIntro2NightBGTiles, 0x400, 2000
+	null_obj_tiles
 
-gUnknown_08416C88:: @ 8416C88
-	.4byte Unknown_8416C80
+	.align 2
+gSpriteAnim_8416C80:: @ 8416C80
+	obj_image_anim_frame 0, 30
+	obj_image_anim_end
+
+	.align 2
+gSpriteAnimTable_8416C88:: @ 8416C88
+	.4byte gSpriteAnim_8416C80
 
 gUnknown_08416C8C:: @ 8416C8C
 	.incbin "baserom.gba", 0x00416c8c, 0x30
@@ -28371,8 +28417,8 @@ gSpriteTemplate_8416EB8:: @ 8416EB8
 	spr_template 1001, 1001, gOamData_8416EA4, gSpriteAnimTable_8416EB4, NULL, gDummySpriteAffineAnimTable, nullsub_84
 
 gUnknown_08416ED0:: @ 8416ED0
-Unknown_8416ED0:
 	.incbin "baserom.gba", 0x00416ed0, 0x38
+
 Unknown_8416F08:
 	.incbin "baserom.gba", 0x00416f08, 0x4
 Unknown_8416F0C:
@@ -28522,6 +28568,7 @@ gUnknown_0842C29C:: @ 842C29C
 	.4byte UnknownString_6thRound, sub_814A4B8
 	.4byte UnknownString_7thRound, sub_814A4B8
 	.4byte UnknownString_8thRound, sub_814A4B8
+
 OtherText_TopSpeed:
 	.string "TOP SPEED$"
 
