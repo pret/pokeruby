@@ -18,8 +18,14 @@ gUnknown_08D00524:: @ 8D00524
 	.incbin "graphics/unused/old.4bpp.lz" @ japanese table and bunch of stuff
 	.incbin "graphics/unused/unknown_D021BC.bin"
 	.incbin "graphics/unused/unknown_D023E8.bin"
-	.incbin "graphics/unused/unknown_D02410.4bpp.lz"
-	.incbin "graphics/unused/unknown_D024F0.bin"
+
+	.align 2
+gSmokescreenImpactTiles:: @ 8D02410
+	.incbin "graphics/battle_anims/sprites/smokescreen_impact.4bpp.lz"
+
+	.align 2
+gSmokescreenImpactPalette:: @ 8D024F0
+	.incbin "graphics/battle_anims/sprites/smokescreen_impact.gbapal.lz"
 
 gInterfaceGfx_PokeBall::
 	.incbin "graphics/interface/ball/poke.4bpp.lz" @ 0xBC
