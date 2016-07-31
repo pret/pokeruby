@@ -24653,17 +24653,21 @@ gUnknown_08406974:: @ 8406974
 	.incbin "graphics/intro/intro1_bgpal15.gbapal"
 	.incbin "graphics/intro/intro1_bgpal16.gbapal"
 
+	.align 2
 gUnknown_08406B74:: @ 8406B74
-	.incbin "baserom.gba", 0x00406b74, 0x3b4
+	.incbin "graphics/intro/intro1_bg0_map.bin.lz"
 
+	.align 2
 gUnknown_08406F28:: @ 8406F28
-	.incbin "baserom.gba", 0x00406f28, 0x334
+	.incbin "graphics/intro/intro1_bg1_map.bin.lz"
 
+	.align 2
 gUnknown_0840725C:: @ 840725C
-	.incbin "baserom.gba", 0x0040725c, 0x2f0
+	.incbin "graphics/intro/intro1_bg2_map.bin.lz"
 
+	.align 2
 gUnknown_0840754C:: @ 840754C
-	.incbin "baserom.gba", 0x0040754c, 0x218
+	.incbin "graphics/intro/intro1_bg3_map.bin.lz"
 
 gUnknown_08407764:: @ 8407764
 	.incbin "graphics/intro/introgfx.4bpp.lz"
