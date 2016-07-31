@@ -6997,7 +6997,6 @@ gUnknown_08376180:: @ 8376180
 	.4byte Unknown_8376178
 
 gUnknown_08376194:: @ 8376194
-Unknown_8376194:
 	.incbin "baserom.gba", 0x00376194, 0xA
 Unknown_837619E:
 	.incbin "baserom.gba", 0x0037619e, 0x10
@@ -7168,14 +7167,77 @@ gUnknown_08376500:: @ 8376500
 	.incbin "baserom.gba", 0x00376500, 0x4
 
 gUnknown_08376504:: @ 8376504
-	.incbin "baserom.gba", 0x00376504, 0xd8
+	.2byte 0x0108
+	.2byte 0x0151
+	.2byte 0x0160
+	.2byte 0x015b
+	.2byte 0x002e
+	.2byte 0x005c
+	.2byte 0x0102
+	.2byte 0x0153
+	.2byte 0x014b
+	.2byte 0x00ed
+	.2byte 0x00f1
+	.2byte 0x010d
+	.2byte 0x003a
+	.2byte 0x003b
+	.2byte 0x003f
+	.2byte 0x0071
+	.2byte 0x00b6
+	.2byte 0x00f0
+	.2byte 0x00ca
+	.2byte 0x00db
+	.2byte 0x00da
+	.2byte 0x004c
+	.2byte 0x00e7
+	.2byte 0x0055
+	.2byte 0x0057
+	.2byte 0x0059
+	.2byte 0x00d8
+	.2byte 0x005b
+	.2byte 0x005e
+	.2byte 0x00f7
+	.2byte 0x0118
+	.2byte 0x0068
+	.2byte 0x0073
+	.2byte 0x015f
+	.2byte 0x0035
+	.2byte 0x00bc
+	.2byte 0x00c9
+	.2byte 0x007e
+	.2byte 0x013d
+	.2byte 0x014c
+	.2byte 0x0103
+	.2byte 0x0107
+	.2byte 0x0122
+	.2byte 0x009c
+	.2byte 0x00d5
+	.2byte 0x00a8
+	.2byte 0x00d3
+	.2byte 0x011d
+	.2byte 0x0121
+	.2byte 0x013b
+	.2byte 0x000f
+	.2byte 0x0013
+	.2byte 0x0039
+	.2byte 0x0046
+	.2byte 0x0094
+	.2byte 0x00f9
+	.2byte 0x007f
+	.2byte 0x0123
+	.4byte gTileBuffer
+	
+MenuGfx_HoldIcons:
+	.incbin "graphics/interface/hold_icons.4bpp"
+MenuPal_HoldIcons:
+	.incbin "graphics/interface/hold_icons.gbapal"
 
 	.align 2
 gUnknown_083765DC:: @ 83765DC
-	obj_tiles 0x0837657c, 64, 0xd750
+	obj_tiles MenuGfx_HoldIcons, 64, 0xd750
 
 gUnknown_083765E4:: @ 83765E4
-	.incbin "baserom.gba", 0x003765e4, 0x8
+	obj_pal MenuPal_HoldIcons, 0xd750
 
 	.align 2
 gOamData_83765EC:: @ 83765EC
