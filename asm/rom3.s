@@ -5752,7 +5752,7 @@ _0800C458:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800C468: .4byte gUnknown_0820872C
+_0800C468: .4byte gBitTable
 _0800C46C: .4byte 0x03002b84
 _0800C470: .4byte 0x03004b20
 _0800C474: .4byte 0x020238c5
@@ -5895,7 +5895,7 @@ _0800C50E:
 	b _0800C5E8
 	.align 2, 0
 _0800C588: .4byte 0x02024a64
-_0800C58C: .4byte gUnknown_0820872C
+_0800C58C: .4byte gBitTable
 _0800C590: .4byte 0x02023a60
 _0800C594: .4byte 0x00015008
 _0800C598: .4byte 0x020239f8
@@ -5952,7 +5952,7 @@ _0800C5FA:
 	.align 2, 0
 _0800C608: .4byte 0x00015008
 _0800C60C: .4byte 0x02024a64
-_0800C610: .4byte gUnknown_0820872C
+_0800C610: .4byte gBitTable
 _0800C614: .4byte 0x03004b20
 	thumb_func_end sub_800C47C
 
@@ -15203,7 +15203,7 @@ _08010E2C:
 _08010EFC: .4byte 0x02000000
 _08010F00: .4byte 0x02024a68
 _08010F04: .4byte 0x02024ad0
-_08010F08: .4byte gUnknown_0820872C
+_08010F08: .4byte gBitTable
 _08010F0C: .4byte 0x02024a60
 _08010F10: .4byte 0x00016020
 _08010F14: .4byte 0xffff1fff
@@ -15637,7 +15637,7 @@ _08011270: .4byte 0x02024a68
 _08011274: .4byte 0x02000000
 _08011278: .4byte 0x02024d28
 _0801127C: .4byte 0x02024a80
-_08011280: .4byte gUnknown_0820872C
+_08011280: .4byte gBitTable
 _08011284: .4byte 0x02024ca8
 _08011288: .4byte 0xfbffffff
 _0801128C: .4byte 0x00016020
@@ -17812,7 +17812,7 @@ _08012438: .4byte 0x02024a60
 _0801243C: .4byte 0x00016068
 _08012440: .4byte 0x020239f8
 _08012444: .4byte 0x000160a6
-_08012448: .4byte gUnknown_0820872C
+_08012448: .4byte gBitTable
 _0801244C: .4byte 0x02024d1e
 _08012450: .4byte 0x02024c18
 _08012454:
@@ -17916,7 +17916,7 @@ _08012514:
 	mov pc, r0
 	.align 2, 0
 _08012520: .4byte 0x02024a64
-_08012524: .4byte gUnknown_0820872C
+_08012524: .4byte gBitTable
 _08012528: .4byte 0x02024a60
 _0801252C: .4byte 0x02024c18
 _08012530: .4byte 0x02024260
@@ -18530,7 +18530,7 @@ _08012A62:
 	mov pc, r0
 	.align 2, 0
 _08012A6C: .4byte 0x02024a64
-_08012A70: .4byte gUnknown_0820872C
+_08012A70: .4byte gBitTable
 _08012A74: .4byte 0x02024a60
 _08012A78: .4byte 0x02024c18
 _08012A7C: .4byte _08012A80
@@ -18963,7 +18963,7 @@ _08012E06:
 	b _08012E30
 	.align 2, 0
 _08012E10: .4byte 0x02024a64
-_08012E14: .4byte gUnknown_0820872C
+_08012E14: .4byte gBitTable
 _08012E18: .4byte 0x02024a60
 _08012E1C: .4byte 0x020239f8
 _08012E20: .4byte 0x02000000
@@ -19017,7 +19017,7 @@ _08012E50:
 	b _08012F66
 	.align 2, 0
 _08012E84: .4byte 0x02024a64
-_08012E88: .4byte gUnknown_0820872C
+_08012E88: .4byte gBitTable
 _08012E8C: .4byte 0x02024a60
 _08012E90: .4byte 0x02024d1e
 _08012E94:
@@ -19091,7 +19091,7 @@ _08012F20: .4byte 0x02024c07
 _08012F24: .4byte 0x02024c10
 _08012F28: .4byte 0x02024c1c
 _08012F2C: .4byte 0x02024a64
-_08012F30: .4byte gUnknown_0820872C
+_08012F30: .4byte gBitTable
 _08012F34: .4byte gUnknown_081FA73C
 _08012F38:
 	ldr r3, _08012FA0
@@ -19152,7 +19152,7 @@ _08012F90:
 	bx r0
 	.align 2, 0
 _08012FA0: .4byte 0x02024a64
-_08012FA4: .4byte gUnknown_0820872C
+_08012FA4: .4byte gBitTable
 _08012FA8: .4byte 0x02024a60
 _08012FAC: .4byte 0x02024d1e
 _08012FB0: .4byte 0x02024a68
@@ -20939,7 +20939,7 @@ _08013E06:
 	b _08013E74
 	.align 2, 0
 _08013E4C: .4byte 0x03004324
-_08013E50: .4byte gUnknown_0820872C
+_08013E50: .4byte gBitTable
 _08013E54: .4byte 0x03004360
 _08013E58: .4byte 0x030042d4
 _08013E5C: .4byte sub_8013E88
@@ -21178,7 +21178,7 @@ _0801402C: .4byte 0x02024a7a
 _08014030: .4byte 0x02024a7e
 _08014034: .4byte 0x02000000
 _08014038: .4byte 0x000160a6
-_0801403C: .4byte gUnknown_0820872C
+_0801403C: .4byte gBitTable
 _08014040: .4byte 0x02024a7f
 _08014044:
 	ldr r1, _080140B8
@@ -21738,7 +21738,7 @@ _080144F0: .4byte 0x02000000
 _080144F4: .4byte 0x02024c07
 _080144F8: .4byte 0x00016010
 _080144FC: .4byte 0x02024c0c
-_08014500: .4byte gUnknown_0820872C
+_08014500: .4byte gBitTable
 _08014504:
 	ldrb r0, [r6]
 	bl battle_get_per_side_status
@@ -21866,7 +21866,7 @@ _080145D2:
 	.align 2, 0
 _0801460C: .4byte 0x02024c08
 _08014610: .4byte 0x02024c0c
-_08014614: .4byte gUnknown_0820872C
+_08014614: .4byte gBitTable
 _08014618: .4byte 0x02024c07
 _0801461C:
 	ldr r5, _08014660
@@ -21906,7 +21906,7 @@ _08014660: .4byte 0x02024c08
 _08014664: .4byte 0x02000000
 _08014668: .4byte 0x00016010
 _0801466C: .4byte 0x02024c0c
-_08014670: .4byte gUnknown_0820872C
+_08014670: .4byte gBitTable
 _08014674:
 	ldrb r0, [r3]
 	bl battle_get_per_side_status
@@ -23368,7 +23368,7 @@ _08015286:
 	bx r0
 	.align 2, 0
 _08015290: .4byte 0x02024ca8
-_08015294: .4byte gUnknown_0820872C
+_08015294: .4byte gBitTable
 _08015298: .4byte 0x02024a60
 	thumb_func_end sub_80151D4
 
@@ -23524,7 +23524,7 @@ _080153AC:
 _080153BC: .4byte 0x02024a68
 _080153C0: .4byte 0x02024a80
 _080153C4: .4byte 0x02024ca8
-_080153C8: .4byte gUnknown_0820872C
+_080153C8: .4byte gBitTable
 _080153CC: .4byte 0x02024a60
 	thumb_func_end sub_801529C
 
@@ -23663,7 +23663,7 @@ _080154CC: .4byte 0x02024a80
 _080154D0: .4byte 0x02024a8c
 _080154D4: .4byte 0x02024aa4
 _080154D8: .4byte 0x02024ca8
-_080154DC: .4byte gUnknown_0820872C
+_080154DC: .4byte gBitTable
 _080154E0: .4byte 0x02024a60
 	thumb_func_end sub_80153D0
 
@@ -23698,7 +23698,7 @@ _08015500:
 _08015514: .4byte 0x020239f8
 _08015518: .4byte 0x02024a68
 _0801551C: .4byte 0x02024a64
-_08015520: .4byte gUnknown_0820872C
+_08015520: .4byte gBitTable
 _08015524:
 	movs r2, 0
 	ldr r4, _08015548
@@ -23723,7 +23723,7 @@ _08015542:
 	.align 2, 0
 _08015548: .4byte 0x02024a68
 _0801554C: .4byte 0x02024a64
-_08015550: .4byte gUnknown_0820872C
+_08015550: .4byte gBitTable
 	thumb_func_end unref_sub_80154E4
 
 	thumb_func_start dp01_battle_side_mark_buffer_for_execution
@@ -23750,7 +23750,7 @@ dp01_battle_side_mark_buffer_for_execution: @ 8015554
 	.align 2, 0
 _0801557C: .4byte 0x020239f8
 _08015580: .4byte 0x02024a64
-_08015584: .4byte gUnknown_0820872C
+_08015584: .4byte gBitTable
 _08015588:
 	ldr r2, _0801559C
 	ldr r1, _080155A0
@@ -23765,7 +23765,7 @@ _08015598:
 	bx r0
 	.align 2, 0
 _0801559C: .4byte 0x02024a64
-_080155A0: .4byte gUnknown_0820872C
+_080155A0: .4byte gBitTable
 	thumb_func_end dp01_battle_side_mark_buffer_for_execution
 
 	thumb_func_start sub_80155A4
@@ -23781,7 +23781,7 @@ sub_80155A4: @ 80155A4
 	b _080155CE
 	.align 2, 0
 _080155B8: .4byte 0x02024a64
-_080155BC: .4byte gUnknown_0820872C
+_080155BC: .4byte gBitTable
 _080155C0:
 	lsls r0, r4, 2
 	ldr r1, [r6]
@@ -23981,7 +23981,7 @@ _0801572A:
 	.align 2, 0
 _08015730: .4byte 0x02024dea
 _08015734: .4byte 0x02024a68
-_08015738: .4byte gUnknown_0820872C
+_08015738: .4byte gBitTable
 _0801573C: .4byte 0x02024a6a
 	thumb_func_end sub_80156DC
 
@@ -24049,7 +24049,7 @@ _080157A4:
 _080157B0: .4byte 0x02024dea
 _080157B4: .4byte 0x02024a68
 _080157B8: .4byte 0x02024c0c
-_080157BC: .4byte gUnknown_0820872C
+_080157BC: .4byte gBitTable
 _080157C0: .4byte 0x02024a6a
 	thumb_func_end sub_8015740
 
@@ -24103,7 +24103,7 @@ _08015816:
 	.align 2, 0
 _0801581C: .4byte 0x02024a68
 _08015820: .4byte 0x02024dea
-_08015824: .4byte gUnknown_0820872C
+_08015824: .4byte gBitTable
 _08015828: .4byte 0x02024a6a
 	thumb_func_end sub_80157C4
 
@@ -24661,7 +24661,7 @@ _08015C70: .4byte 0x02024c0b
 _08015C74: .4byte 0x02024ca8
 _08015C78: .4byte 0x02024a80
 _08015C7C: .4byte 0x02024a8c
-_08015C80: .4byte gUnknown_0820872C
+_08015C80: .4byte gBitTable
 _08015C84: .4byte 0x02024c34
 _08015C88: .4byte gBattleMoves
 _08015C8C: .4byte 0x0000ffff
@@ -24943,7 +24943,7 @@ _08015EA4: .4byte 0x02024a68
 _08015EA8: .4byte 0x02024c08
 _08015EAC: .4byte 0x02000000
 _08015EB0: .4byte 0x02024c0c
-_08015EB4: .4byte gUnknown_0820872C
+_08015EB4: .4byte gBitTable
 _08015EB8: .4byte 0x0001600e
 _08015EBC: .4byte _08015EC0
 	.align 2, 0
@@ -25801,7 +25801,7 @@ _080165B4: .4byte 0x02024a60
 _080165B8: .4byte 0x02024c07
 _080165BC: .4byte 0x02024a7a
 _080165C0: .4byte 0x02024c0c
-_080165C4: .4byte gUnknown_0820872C
+_080165C4: .4byte gBitTable
 _080165C8:
 	movs r5, 0xB0
 	lsls r5, 9
@@ -27226,7 +27226,7 @@ _08017164: .4byte 0x02024a60
 _08017168: .4byte 0x02024dbc
 _0801716C: .4byte 0x030041c0
 _08017170: .4byte 0x02024c0c
-_08017174: .4byte gUnknown_0820872C
+_08017174: .4byte gBitTable
 _08017178:
 	adds r0, r3, 0x1
 	strb r0, [r5]
@@ -27382,7 +27382,7 @@ _080172B0: .4byte 0x02024ca8
 _080172B4: .4byte 0x02024c07
 _080172B8: .4byte 0x02024a7a
 _080172BC: .4byte 0x02024c0c
-_080172C0: .4byte gUnknown_0820872C
+_080172C0: .4byte gBitTable
 _080172C4:
 	ldrb r0, [r3]
 	adds r0, 0x1
@@ -27675,7 +27675,7 @@ _08017508: .4byte 0x0001605a
 _0801750C: .4byte 0x00016059
 _08017510: .4byte 0x02024a68
 _08017514: .4byte 0x02024c0c
-_08017518: .4byte gUnknown_0820872C
+_08017518: .4byte gBitTable
 _0801751C: .4byte 0x02000000
 _08017520: .4byte 0x02024c09
 _08017524: .4byte 0x02024c08
@@ -27771,7 +27771,7 @@ _080175E0: .4byte 0x02024c09
 _080175E4: .4byte 0x02024c08
 _080175E8: .4byte 0x02000000
 _080175EC: .4byte 0x02024a80
-_080175F0: .4byte gUnknown_0820872C
+_080175F0: .4byte gBitTable
 _080175F4: .4byte 0x02024c0c
 _080175F8: .4byte 0x02024a68
 _080175FC:
@@ -28855,7 +28855,7 @@ _08017F14: .4byte 0x02024be6
 _08017F18: .4byte 0x02024c08
 _08017F1C: .4byte 0x02024c74
 _08017F20: .4byte 0x02024c0c
-_08017F24: .4byte gUnknown_0820872C
+_08017F24: .4byte gBitTable
 _08017F28: .4byte 0x02024c10
 _08017F2C: .4byte gUnknown_081D90B2
 _08017F30: .4byte 0x02000000
@@ -31328,7 +31328,7 @@ _0801942C: .4byte 0x02024d28
 _08019430: .4byte gBattleMoves
 _08019434: .4byte 0x02024d68
 _08019438: .4byte 0x02024c08
-_0801943C: .4byte gUnknown_0820872C
+_0801943C: .4byte gBitTable
 _08019440: .4byte 0x02024c10
 _08019444: .4byte gUnknown_081D9943
 _08019448:
@@ -34458,7 +34458,7 @@ _0801ADEE:
 	.align 2, 0
 _0801AE00: .4byte 0x02024a80
 _0801AE04: .4byte 0x02024ca8
-_0801AE08: .4byte gUnknown_0820872C
+_0801AE08: .4byte gBitTable
 _0801AE0C:
 	movs r7, 0
 	ldr r0, _0801AE3C
@@ -35205,7 +35205,7 @@ _0801B45A:
 _0801B464: .4byte 0x020239f8
 _0801B468: .4byte gUnknown_081FC1D0
 _0801B46C: .4byte 0x02024c0c
-_0801B470: .4byte gUnknown_0820872C
+_0801B470: .4byte gBitTable
 _0801B474:
 	ldr r0, _0801B580
 	ldr r2, [sp]
@@ -35592,7 +35592,7 @@ _0801B7EC: .4byte 0x02024c80
 _0801B7F0: .4byte 0x02024a80
 _0801B7F4: .4byte 0x02024a68
 _0801B7F8: .4byte 0x02024c0c
-_0801B7FC: .4byte gUnknown_0820872C
+_0801B7FC: .4byte gBitTable
 _0801B800: .4byte gBattleMoves
 _0801B804: .4byte 0x02024d68
 _0801B808:
@@ -35697,7 +35697,7 @@ _0801B8B2:
 	b _0801B900
 	.align 2, 0
 _0801B8D4: .4byte 0x02024c0c
-_0801B8D8: .4byte gUnknown_0820872C
+_0801B8D8: .4byte gBitTable
 _0801B8DC:
 	ldr r0, _0801B8F8
 	ldrb r0, [r0]
@@ -35968,7 +35968,7 @@ _0801BA9E:
 	.align 2, 0
 _0801BB04: .4byte 0x02024a80
 _0801BB08: .4byte 0x02024c07
-_0801BB0C: .4byte gUnknown_0820872C
+_0801BB0C: .4byte gBitTable
 _0801BB10: .4byte 0x02024be4
 _0801BB14: .4byte 0x02024be5
 _0801BB18: .4byte 0x02024bea
@@ -37605,7 +37605,7 @@ _0801C84E:
 	bx r0
 	.align 2, 0
 _0801C860: .4byte 0x02024ca8
-_0801C864: .4byte gUnknown_0820872C
+_0801C864: .4byte gBitTable
 _0801C868: .4byte 0x02024a60
 _0801C86C: .4byte 0x02024c6c
 _0801C870: .4byte 0xfffff7ff
@@ -42829,7 +42829,7 @@ _0801F258: .4byte 0x020239f8
 _0801F25C: .4byte 0x00000902
 _0801F260: .4byte 0x0202ff5e
 _0801F264: .4byte 0x02024dbc
-_0801F268: .4byte gUnknown_0820872C
+_0801F268: .4byte gBitTable
 _0801F26C: .4byte 0x02024a6a
 _0801F270: .4byte 0x02024a80
 _0801F274: .4byte 0x02024c08
@@ -43220,7 +43220,7 @@ _0801F540:
 	.align 2, 0
 _0801F5B8: .4byte 0x02024c04
 _0801F5BC: .4byte 0x02024dbc
-_0801F5C0: .4byte gUnknown_0820872C
+_0801F5C0: .4byte gBitTable
 _0801F5C4: .4byte 0x02024a6a
 _0801F5C8: .4byte 0x02024c10
 _0801F5CC: .4byte gUnknown_081D944B
@@ -43515,7 +43515,7 @@ _0801F7E6:
 _0801F81C: .4byte 0x02024c10
 _0801F820: .4byte 0x02024a60
 _0801F824: .4byte 0x02024c6c
-_0801F828: .4byte gUnknown_0820872C
+_0801F828: .4byte gBitTable
 _0801F82C: .4byte 0x02024c7a
 _0801F830: .4byte 0x0000fdff
 _0801F834:
@@ -43667,7 +43667,7 @@ _0801F958: .4byte 0x02024c08
 _0801F95C: .4byte 0x02024c07
 _0801F960: .4byte gUnknown_081D8C65
 _0801F964: .4byte 0x02024c0c
-_0801F968: .4byte gUnknown_0820872C
+_0801F968: .4byte gBitTable
 _0801F96C: .4byte 0x02024a80
 _0801F970: .4byte 0x02000000
 _0801F974: .4byte 0x000160ac
@@ -44604,7 +44604,7 @@ _080200BC:
 _080200E8: .4byte 0x02000000
 _080200EC: .4byte 0x0001600f
 _080200F0: .4byte 0x00016113
-_080200F4: .4byte gUnknown_0820872C
+_080200F4: .4byte gBitTable
 _080200F8: .4byte 0x02024a6a
 _080200FC:
 	movs r5, 0
@@ -44650,7 +44650,7 @@ _08020138:
 	.align 2, 0
 _08020150: .4byte 0x02028dbc
 _08020154: .4byte 0x03004360
-_08020158: .4byte gUnknown_0820872C
+_08020158: .4byte gBitTable
 _0802015C:
 	bl itemid_get_x12
 	lsls r0, 24
@@ -45000,7 +45000,7 @@ _08020444: .4byte 0x020239f8
 _08020448: .4byte 0x02024a6a
 _0802044C: .4byte 0x02000000
 _08020450: .4byte 0x00016018
-_08020454: .4byte gUnknown_0820872C
+_08020454: .4byte gBitTable
 _08020458: .4byte 0x02024c0c
 _0802045C: .4byte 0x000160a2
 _08020460:
@@ -45527,7 +45527,7 @@ _080208CC: .4byte 0x03004360
 _080208D0: .4byte 0x030041c0
 _080208D4: .4byte 0x03004290
 _080208D8: .4byte 0x03004324
-_080208DC: .4byte gUnknown_0820872C
+_080208DC: .4byte gBitTable
 _080208E0: .4byte 0x02024c10
 _080208E4: .4byte gUnknown_081D8EF3
 _080208E8: .4byte 0x02024bec
@@ -48466,7 +48466,7 @@ _08021F44: .4byte 0x02024be8
 _08021F48: .4byte 0x02024c68
 _08021F4C: .4byte 0x02024c2c
 _08021F50: .4byte 0x02024c0c
-_08021F54: .4byte gUnknown_0820872C
+_08021F54: .4byte gBitTable
 _08021F58: .4byte 0x000160a6
 _08021F5C: .4byte 0x02024c34
 _08021F60: .4byte 0x02024c4c
@@ -48693,7 +48693,7 @@ _080220C0:
 	b _08022244
 	.align 2, 0
 _0802212C: .4byte 0x02024c0c
-_08022130: .4byte gUnknown_0820872C
+_08022130: .4byte gBitTable
 _08022134: .4byte 0x02024c07
 _08022138: .4byte 0x000160a6
 _0802213C: .4byte gBattleMoves
@@ -49215,7 +49215,7 @@ _0802255A:
 _08022568: .4byte 0x02024a60
 _0802256C: .4byte 0x02024c07
 _08022570: .4byte 0x02024c6c
-_08022574: .4byte gUnknown_0820872C
+_08022574: .4byte gBitTable
 _08022578: .4byte 0x02024c10
 	thumb_func_end atk4B_cmd4b
 
@@ -49269,7 +49269,7 @@ _080225DC: .4byte 0x02024a60
 _080225E0: .4byte 0x02024a6a
 _080225E4: .4byte 0x02000000
 _080225E8: .4byte 0x00016068
-_080225EC: .4byte gUnknown_0820872C
+_080225EC: .4byte gBitTable
 	thumb_func_end atk4C_switch1
 
 	thumb_func_start sub_80225F0
@@ -49457,7 +49457,7 @@ _08022758: .4byte 0x02024a80
 _0802275C: .4byte 0x02024260
 _08022760: .4byte gBaseStats
 _08022764: .4byte 0x02024dbc
-_08022768: .4byte gUnknown_0820872C
+_08022768: .4byte gBitTable
 _0802276C: .4byte 0x02024a6a
 _08022770: .4byte gBattleMoves
 _08022774: .4byte 0x02024be6
@@ -49540,7 +49540,7 @@ _08022818: .4byte 0x020239f8
 _0802281C: .4byte 0x00000902
 _08022820: .4byte 0x02024a80
 _08022824: .4byte 0x02024c0c
-_08022828: .4byte gUnknown_0820872C
+_08022828: .4byte gBitTable
 _0802282C: .4byte 0x02024a6a
 	thumb_func_end sub_8022784
 
@@ -49941,7 +49941,7 @@ _08022B48: .4byte 0x020239f8
 _08022B4C: .4byte 0x02024a60
 _08022B50: .4byte 0x02024a68
 _08022B54: .4byte 0x02024c6c
-_08022B58: .4byte gUnknown_0820872C
+_08022B58: .4byte gBitTable
 _08022B5C: .4byte 0x02024c0c
 _08022B60:
 	ldr r5, _08022B90
@@ -50035,7 +50035,7 @@ _08022BC4:
 	b _08022C7E
 	.align 2, 0
 _08022C1C: .4byte 0x02024c6c
-_08022C20: .4byte gUnknown_0820872C
+_08022C20: .4byte gBitTable
 _08022C24: .4byte 0x02024a60
 _08022C28: .4byte 0x02024c0c
 _08022C2C:
@@ -50119,7 +50119,7 @@ _08022C7E:
 	bl dp01_battle_side_mark_buffer_for_execution
 	b _08022D40
 	.align 2, 0
-_08022CD8: .4byte gUnknown_0820872C
+_08022CD8: .4byte gBitTable
 _08022CDC: .4byte 0x02024a60
 _08022CE0: .4byte 0x02024c0c
 _08022CE4: .4byte 0x02024c6c
@@ -50203,7 +50203,7 @@ _08022D40:
 	bl dp01_battle_side_mark_buffer_for_execution
 	b _08022DF6
 	.align 2, 0
-_08022D90: .4byte gUnknown_0820872C
+_08022D90: .4byte gBitTable
 _08022D94: .4byte 0x02024a60
 _08022D98: .4byte 0x02024c0c
 _08022D9C: .4byte 0x02024c6c
@@ -50290,7 +50290,7 @@ _08022DF6:
 	bl dp01_battle_side_mark_buffer_for_execution
 	b _08022EB8
 	.align 2, 0
-_08022E50: .4byte gUnknown_0820872C
+_08022E50: .4byte gBitTable
 _08022E54: .4byte 0x02024a60
 _08022E58: .4byte 0x02024c0c
 _08022E5C: .4byte 0x02024c6c
@@ -50363,7 +50363,7 @@ _08022EB8:
 	.align 2, 0
 _08022EE8: .4byte 0x02024d68
 _08022EEC: .4byte 0x02024c0c
-_08022EF0: .4byte gUnknown_0820872C
+_08022EF0: .4byte gBitTable
 _08022EF4: .4byte 0x02024a60
 _08022EF8:
 	ldr r0, _08022F3C
@@ -50403,7 +50403,7 @@ _08022F0C:
 _08022F3C: .4byte 0x02024a60
 _08022F40: .4byte 0x02024d68
 _08022F44: .4byte 0x02024c0c
-_08022F48: .4byte gUnknown_0820872C
+_08022F48: .4byte gBitTable
 _08022F4C:
 	ldr r1, _08022F6C
 	movs r0, 0x1
@@ -50490,7 +50490,7 @@ _08022F92:
 	.align 2, 0
 _08022FF0: .4byte 0x020239f8
 _08022FF4: .4byte 0x02024c6c
-_08022FF8: .4byte gUnknown_0820872C
+_08022FF8: .4byte gBitTable
 _08022FFC: .4byte 0x02024a60
 _08023000: .4byte 0x02024260
 _08023004: .4byte 0x02024c0c
@@ -50568,7 +50568,7 @@ _0802303A:
 _08023098: .4byte 0x02024d68
 _0802309C: .4byte 0x02000000
 _080230A0: .4byte 0x00016068
-_080230A4: .4byte gUnknown_0820872C
+_080230A4: .4byte gBitTable
 _080230A8: .4byte 0x02024a60
 _080230AC: .4byte 0x02024260
 _080230B0: .4byte 0x00000201
@@ -50660,7 +50660,7 @@ _08023156:
 	.align 2, 0
 _08023160: .4byte 0x02024c6c
 _08023164: .4byte 0x02024c09
-_08023168: .4byte gUnknown_0820872C
+_08023168: .4byte gBitTable
 _0802316C: .4byte 0x02024a68
 _08023170:
 	movs r0, 0x80
@@ -50724,7 +50724,7 @@ _080231A8:
 	.align 2, 0
 _080231E8: .4byte 0x02024a60
 _080231EC: .4byte 0x02024c0c
-_080231F0: .4byte gUnknown_0820872C
+_080231F0: .4byte gBitTable
 _080231F4: .4byte 0x02024c6c
 _080231F8:
 	ldr r4, _080232A0
@@ -50858,7 +50858,7 @@ _08023302:
 	.align 2, 0
 _08023310: .4byte 0x02024a60
 _08023314: .4byte 0x02024c0c
-_08023318: .4byte gUnknown_0820872C
+_08023318: .4byte gBitTable
 	thumb_func_end atk50_openpartyscreen
 
 	thumb_func_start sub_802331C
@@ -51249,7 +51249,7 @@ _08023614:
 _08023630: .4byte 0x02024c10
 _08023634: .4byte 0x02024a60
 _08023638: .4byte 0x02024c6c
-_0802363C: .4byte gUnknown_0820872C
+_0802363C: .4byte gBitTable
 _08023640: .4byte 0x02024d68
 _08023644: .4byte 0x02024c7a
 _08023648: .4byte 0x02024a80
@@ -51397,7 +51397,7 @@ _08023774: .4byte 0x020160bc
 _08023778: .4byte 0x02024c10
 _0802377C: .4byte 0x02024c6c
 _08023780: .4byte 0x02024c09
-_08023784: .4byte gUnknown_0820872C
+_08023784: .4byte gBitTable
 _08023788:
 	ldr r0, _080237C4
 	ldrb r3, [r1]
@@ -52197,7 +52197,7 @@ _08023E18: .4byte 0x02024e82
 _08023E1C: .4byte 0x02024a6a
 _08023E20: .4byte 0x02024a80
 _08023E24: .4byte 0x02024ca8
-_08023E28: .4byte gUnknown_0820872C
+_08023E28: .4byte gBitTable
 _08023E2C: .4byte 0x020239f8
 _08023E30: .4byte 0x02000000
 _08023E34: .4byte 0x00016018
@@ -54460,7 +54460,7 @@ _08025024:
 	b _08025112
 	.align 2, 0
 _08025044: .4byte 0x02024c6c
-_08025048: .4byte gUnknown_0820872C
+_08025048: .4byte gBitTable
 _0802504C: .4byte 0x02024a60
 _08025050: .4byte 0x02024d1e
 _08025054:
@@ -54836,7 +54836,7 @@ _0802533C: .4byte 0x02024c07
 _08025340: .4byte 0x02024bec
 _08025344: .4byte 0x00007fff
 _08025348: .4byte 0x02024c10
-_0802534C: .4byte gUnknown_0820872C
+_0802534C: .4byte gBitTable
 _08025350: .4byte 0x02024c0c
 _08025354:
 	ldr r1, _0802537C
@@ -54981,7 +54981,7 @@ _08025464: .4byte 0x020239f8
 _08025468: .4byte 0x02024c08
 _0802546C: .4byte 0x02024c07
 _08025470: .4byte 0x02024c0c
-_08025474: .4byte gUnknown_0820872C
+_08025474: .4byte gBitTable
 _08025478: .4byte 0x02024a68
 _0802547C:
 	str r4, [r7]
@@ -58497,7 +58497,7 @@ _0802703E:
 _08027050: .4byte 0x02024bec
 _08027054: .4byte 0x02024c07
 _08027058: .4byte 0x02024c0c
-_0802705C: .4byte gUnknown_0820872C
+_0802705C: .4byte gBitTable
 _08027060: .4byte 0x02024c10
 	thumb_func_end sub_8026EEC
 
@@ -58710,7 +58710,7 @@ _0802721C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0802722C: .4byte gUnknown_0820872C
+_0802722C: .4byte gBitTable
 _08027230: .4byte 0x02024c07
 _08027234: .4byte 0x02024c10
 	thumb_func_end sub_8027064
@@ -58834,7 +58834,7 @@ _08027324:
 _0802732C: .4byte 0x02024a60
 _08027330: .4byte 0x02024c07
 _08027334: .4byte 0x02024c0c
-_08027338: .4byte gUnknown_0820872C
+_08027338: .4byte gBitTable
 _0802733C: .4byte 0x02024a80
 _08027340: .4byte 0x020239f8
 _08027344: .4byte 0x02024c10
@@ -59500,7 +59500,7 @@ _08027828:
 	.align 2, 0
 _08027880: .4byte 0x030041c0
 _08027884: .4byte 0x02024ca8
-_08027888: .4byte gUnknown_0820872C
+_08027888: .4byte gBitTable
 _0802788C:
 	mov r0, r10
 	ldr r2, [r0]
@@ -61066,7 +61066,7 @@ _0802848C:
 	.align 2, 0
 _080284B0: .4byte 0x02024c07
 _080284B4: .4byte 0x02024a8c
-_080284B8: .4byte gUnknown_0820872C
+_080284B8: .4byte gBitTable
 _080284BC: .4byte 0x02024c10
 _080284C0:
 	movs r7, 0x3
@@ -61127,7 +61127,7 @@ _08028524:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08028534: .4byte gUnknown_0820872C
+_08028534: .4byte gBitTable
 _08028538: .4byte 0x02024bea
 _0802853C: .4byte 0x02024a80
 _08028540: .4byte 0x02024c07
@@ -61494,7 +61494,7 @@ _08028810: .4byte 0x030041c0
 _08028814: .4byte 0x03004290
 _08028818: .4byte 0x02024a60
 _0802881C: .4byte 0x02024ca8
-_08028820: .4byte gUnknown_0820872C
+_08028820: .4byte gBitTable
 _08028824: .4byte 0x02024c10
 _08028828:
 	ldr r3, _08028854
@@ -61636,7 +61636,7 @@ _0802893C: .4byte 0x02000000
 _08028940: .4byte 0x00016003
 _08028944: .4byte 0x020239f8
 _08028948: .4byte 0x02024c0c
-_0802894C: .4byte gUnknown_0820872C
+_0802894C: .4byte gBitTable
 _08028950: .4byte 0x02024a80
 _08028954:
 	ldrb r1, [r1]
@@ -61721,7 +61721,7 @@ _080289EC:
 _080289F4: .4byte 0x020239f8
 _080289F8: .4byte 0x02024a60
 _080289FC: .4byte 0x02024c0c
-_08028A00: .4byte gUnknown_0820872C
+_08028A00: .4byte gBitTable
 _08028A04:
 	adds r0, r5, 0
 	adds r1, r4, 0
@@ -61816,7 +61816,7 @@ _08028ABC: .4byte 0x02024c07
 _08028AC0: .4byte 0x02024a60
 _08028AC4: .4byte 0x020239f8
 _08028AC8: .4byte 0x02024c0c
-_08028ACC: .4byte gUnknown_0820872C
+_08028ACC: .4byte gBitTable
 _08028AD0: .4byte 0x02024c10
 	thumb_func_end sub_8028858
 
@@ -62789,7 +62789,7 @@ _08029258: .4byte 0x02024c08
 _0802925C: .4byte 0x02024a68
 _08029260: .4byte 0x02024c10
 _08029264: .4byte 0x02024c07
-_08029268: .4byte gUnknown_0820872C
+_08029268: .4byte gBitTable
 _0802926C: .4byte 0x02024c0c
 	thumb_func_end atkB9_magnitudedamagecalculation
 
@@ -63628,7 +63628,7 @@ _08029908: .4byte 0x02024c08
 _0802990C: .4byte 0x02024a68
 _08029910: .4byte 0x02024c10
 _08029914: .4byte 0x02024c07
-_08029918: .4byte gUnknown_0820872C
+_08029918: .4byte gBitTable
 _0802991C: .4byte 0x02024c0c
 	thumb_func_end atkC2_selectnexttarget
 
@@ -64743,7 +64743,7 @@ _0802A1D8: .4byte 0x02024c07
 _0802A1DC: .4byte 0x02024c08
 _0802A1E0: .4byte 0x020239f8
 _0802A1E4: .4byte 0x02024c0c
-_0802A1E8: .4byte gUnknown_0820872C
+_0802A1E8: .4byte gBitTable
 _0802A1EC: .4byte 0x02024d28
 _0802A1F0: .4byte 0x02024c10
 _0802A1F4:
@@ -64899,7 +64899,7 @@ _0802A310: .4byte 0x020239f8
 _0802A314: .4byte 0x00000902
 _0802A318: .4byte 0x0202ff5e
 _0802A31C: .4byte 0x02024dbc
-_0802A320: .4byte gUnknown_0820872C
+_0802A320: .4byte gBitTable
 _0802A324: .4byte 0x02024a6a
 _0802A328: .4byte 0x02024a80
 _0802A32C: .4byte 0x02024c08
@@ -66259,7 +66259,7 @@ _0802ADA8: .4byte 0x030041c0
 _0802ADAC: .4byte 0x02024a80
 _0802ADB0: .4byte 0x02024c08
 _0802ADB4: .4byte 0x02024a68
-_0802ADB8: .4byte gUnknown_0820872C
+_0802ADB8: .4byte gBitTable
 _0802ADBC: .4byte 0x02024c0c
 _0802ADC0: .4byte 0x02024c10
 _0802ADC4:
@@ -66332,7 +66332,7 @@ _0802AE34:
 _0802AE44: .4byte 0x02024c10
 _0802AE48: .4byte 0x02024a60
 _0802AE4C: .4byte 0x02024a80
-_0802AE50: .4byte gUnknown_0820872C
+_0802AE50: .4byte gBitTable
 _0802AE54: .4byte 0x02000000
 _0802AE58: .4byte 0x00016064
 	thumb_func_end sub_802ADD8
@@ -67103,7 +67103,7 @@ _0802B45C: .4byte 0x02024c07
 _0802B460: .4byte 0x02024a60
 _0802B464: .4byte 0x020239f8
 _0802B468: .4byte 0x02024c0c
-_0802B46C: .4byte gUnknown_0820872C
+_0802B46C: .4byte gBitTable
 _0802B470: .4byte 0x02024c18
 _0802B474: .4byte 0x02024c60
 _0802B478: .4byte 0x02024a76
@@ -68536,7 +68536,7 @@ _0802C002:
 	bx r0
 	.align 2, 0
 _0802C00C: .4byte 0x02024a64
-_0802C010: .4byte gUnknown_0820872C
+_0802C010: .4byte gBitTable
 	thumb_func_end dp01_tbl1_exec_completed
 
 	thumb_func_start sub_802C014
@@ -68568,7 +68568,7 @@ sub_802C014: @ 802C014
 	b _0802C060
 	.align 2, 0
 _0802C048: .4byte 0x02024a64
-_0802C04C: .4byte gUnknown_0820872C
+_0802C04C: .4byte gBitTable
 _0802C050: .4byte 0x02024a60
 _0802C054: .4byte 0x02023a60
 _0802C058: .4byte gUnknown_081FAD98
@@ -68854,7 +68854,7 @@ _0802C278:
 	.align 2, 0
 _0802C294: .4byte 0x020239f8
 _0802C298: .4byte 0x02024c0c
-_0802C29C: .4byte gUnknown_0820872C
+_0802C29C: .4byte gBitTable
 _0802C2A0:
 	movs r0, 0x8
 	ands r0, r1
@@ -69165,7 +69165,7 @@ _0802C528: .4byte 0x03004360
 _0802C52C: .4byte 0x02024e64
 _0802C530: .4byte gBattleMoves
 _0802C534: .4byte 0x02024c0c
-_0802C538: .4byte gUnknown_0820872C
+_0802C538: .4byte gBitTable
 _0802C53C: .4byte 0x03004344
 _0802C540:
 	movs r0, 0x90
@@ -69323,7 +69323,7 @@ _0802C668: .4byte 0x03004360
 _0802C66C: .4byte 0x02024e64
 _0802C670: .4byte gBattleMoves
 _0802C674: .4byte 0x02024c0c
-_0802C678: .4byte gUnknown_0820872C
+_0802C678: .4byte gBitTable
 _0802C67C: .4byte 0x03004344
 _0802C680: .4byte 0x02020004
 _0802C684: .4byte 0x02024be0
@@ -69531,7 +69531,7 @@ _0802C808:
 	b _0802C832
 	.align 2, 0
 _0802C828: .4byte 0x02024c0c
-_0802C82C: .4byte gUnknown_0820872C
+_0802C82C: .4byte gBitTable
 _0802C830:
 	movs r0, 0x1
 _0802C832:
@@ -70261,7 +70261,7 @@ _0802CDF4: .4byte 0x02024a60
 _0802CDF8: .4byte 0x03004344
 _0802CDFC: .4byte 0x02023a64
 _0802CE00: .4byte 0x02024ca8
-_0802CE04: .4byte gUnknown_0820872C
+_0802CE04: .4byte gBitTable
 _0802CE08: .4byte 0x02024a80
 _0802CE0C: .4byte 0x02024a6a
 _0802CE10: .4byte 0x03004360
@@ -81672,7 +81672,7 @@ sub_8032AFC: @ 8032AFC
 	b _08032B48
 	.align 2, 0
 _08032B30: .4byte 0x02024a64
-_08032B34: .4byte gUnknown_0820872C
+_08032B34: .4byte gBitTable
 _08032B38: .4byte 0x02024a60
 _08032B3C: .4byte 0x02023a60
 _08032B40: .4byte gUnknown_081FAF5C
@@ -82889,7 +82889,7 @@ _08033510: .4byte 0x03004330
 _08033514: .4byte 0x02024a60
 _08033518: .4byte sub_8032AFC
 _0803351C: .4byte 0x02024a64
-_08033520: .4byte gUnknown_0820872C
+_08033520: .4byte gBitTable
 	thumb_func_end sub_80334EC
 
 	thumb_func_start dp01t_00_7_getattr
@@ -86711,7 +86711,7 @@ _080354E0:
 _080354E8: .4byte gBattleMoves
 _080354EC: .4byte 0x02024c08
 _080354F0: .4byte 0x02024c0c
-_080354F4: .4byte gUnknown_0820872C
+_080354F4: .4byte gBitTable
 _080354F8:
 	movs r6, 0x3
 _080354FA:
@@ -88432,7 +88432,7 @@ _08036284: .4byte 0x0000ffff
 _08036288: .4byte gBattleMoves
 _0803628C: .4byte 0x020239f8
 _08036290: .4byte 0x02024c0c
-_08036294: .4byte gUnknown_0820872C
+_08036294: .4byte gBitTable
 _08036298:
 	ldrb r0, [r5]
 	bl battle_get_per_side_status
@@ -88824,7 +88824,7 @@ _0803659C:
 	b _0803663E
 	.align 2, 0
 _080365AC: .4byte 0x02024c0c
-_080365B0: .4byte gUnknown_0820872C
+_080365B0: .4byte gBitTable
 _080365B4: .4byte 0x02024a80
 _080365B8: .4byte 0x02024a60
 _080365BC: .4byte 0x020239f8
@@ -88902,7 +88902,7 @@ _08036640:
 	bx r1
 	.align 2, 0
 _0803664C: .4byte 0x02024c0c
-_08036650: .4byte gUnknown_0820872C
+_08036650: .4byte gBitTable
 _08036654: .4byte 0x02024a80
 _08036658: .4byte 0x02024a60
 	thumb_func_end ai_has_super_effective_move_on_field
@@ -89031,7 +89031,7 @@ _0803673C: .4byte 0x02024c5c
 _08036740: .4byte gBattleMoves
 _08036744: .4byte 0x020239f8
 _08036748: .4byte 0x02024c0c
-_0803674C: .4byte gUnknown_0820872C
+_0803674C: .4byte gBitTable
 _08036750:
 	ldrb r0, [r5]
 	bl battle_get_per_side_status
@@ -89358,7 +89358,7 @@ _080369E8: .4byte 0x0400e000
 _080369EC: .4byte 0x02024c98
 _080369F0: .4byte 0x020239f8
 _080369F4: .4byte 0x02024c0c
-_080369F8: .4byte gUnknown_0820872C
+_080369F8: .4byte gBitTable
 _080369FC:
 	ldrb r0, [r4]
 	bl battle_get_per_side_status
@@ -89754,7 +89754,7 @@ sub_8036CD4: @ 8036CD4
 _08036D1C: .4byte 0x020239f8
 _08036D20: .4byte 0x02024a60
 _08036D24: .4byte 0x02024c0c
-_08036D28: .4byte gUnknown_0820872C
+_08036D28: .4byte gBitTable
 _08036D2C:
 	ldrb r0, [r4]
 	bl battle_get_per_side_status
@@ -89789,7 +89789,7 @@ _08036D42:
 	b _08036D8C
 	.align 2, 0
 _08036D70: .4byte 0x02024c0c
-_08036D74: .4byte gUnknown_0820872C
+_08036D74: .4byte gBitTable
 _08036D78:
 	movs r0, 0
 	bl battle_get_side_with_given_state
@@ -89904,7 +89904,7 @@ _08036DA2:
 	b _08036E8A
 	.align 2, 0
 _08036E5C: .4byte 0x02024a60
-_08036E60: .4byte gUnknown_0820872C
+_08036E60: .4byte gBitTable
 _08036E64: .4byte 0x030045c0
 _08036E68: .4byte 0x02024a6a
 _08036E6C: .4byte 0x02000000
@@ -89973,7 +89973,7 @@ _08036ED6:
 	.align 2, 0
 _08036EEC: .4byte 0x030045c0
 _08036EF0: .4byte 0x02024a60
-_08036EF4: .4byte gUnknown_0820872C
+_08036EF4: .4byte gBitTable
 _08036EF8:
 	movs r0, 0x3F
 _08036EFA:
@@ -90816,7 +90816,7 @@ sub_803752C: @ 803752C
 	b _08037578
 	.align 2, 0
 _08037560: .4byte 0x02024a64
-_08037564: .4byte gUnknown_0820872C
+_08037564: .4byte gBitTable
 _08037568: .4byte 0x02024a60
 _0803756C: .4byte 0x02023a60
 _08037570: .4byte gUnknown_081FB048
@@ -92173,7 +92173,7 @@ _0803806A:
 	bx r0
 	.align 2, 0
 _08038074: .4byte 0x02024a64
-_08038078: .4byte gUnknown_0820872C
+_08038078: .4byte gBitTable
 	thumb_func_end dp01_tbl4_exec_completed
 
 	thumb_func_start dp01t_00_4_getattr
@@ -100460,7 +100460,7 @@ _0803C384:
 	.align 2, 0
 _0803C390: .4byte 0x02024a60
 _0803C394: .4byte 0x02024c0c
-_0803C398: .4byte gUnknown_0820872C
+_0803C398: .4byte gBitTable
 _0803C39C:
 	movs r5, 0
 _0803C39E:
@@ -100495,7 +100495,7 @@ _0803C3D0:
 	.align 2, 0
 _0803C3D8: .4byte 0x02024c07
 _0803C3DC: .4byte 0x02024c0c
-_0803C3E0: .4byte gUnknown_0820872C
+_0803C3E0: .4byte gBitTable
 _0803C3E4:
 	movs r5, 0
 _0803C3E6:
@@ -100534,7 +100534,7 @@ _0803C41E:
 	.align 2, 0
 _0803C428: .4byte 0x02024c08
 _0803C42C: .4byte 0x02024c0c
-_0803C430: .4byte gUnknown_0820872C
+_0803C430: .4byte gBitTable
 	thumb_func_end sub_803C348
 
 	thumb_func_start sub_803C434
@@ -100591,7 +100591,7 @@ _0803C484:
 	b _0803C4AA
 	.align 2, 0
 _0803C49C: .4byte 0x02024c0c
-_0803C4A0: .4byte gUnknown_0820872C
+_0803C4A0: .4byte gBitTable
 _0803C4A4:
 	movs r0, 0x2
 	eors r5, r0
@@ -102299,7 +102299,7 @@ _0803D0AC:
 	b _0803D1DC
 	.align 2, 0
 _0803D0B8: .4byte 0x00000163
-_0803D0BC: .4byte gUnknown_0820872C
+_0803D0BC: .4byte gBitTable
 _0803D0C0:
 	movs r4, 0
 	mov r1, r9
@@ -105459,7 +105459,7 @@ _0803E954:
 _0803E99C: .4byte 0x03001770
 _0803E9A0: .4byte 0x0000043d
 _0803E9A4: .4byte 0x02024c0c
-_0803E9A8: .4byte gUnknown_0820872C
+_0803E9A8: .4byte gBitTable
 _0803E9AC: .4byte 0x02024a6a
 _0803E9B0: .4byte 0x02024a60
 _0803E9B4:
@@ -105489,7 +105489,7 @@ _0803E9CC:
 	b _0803EA0A
 	.align 2, 0
 _0803E9E4: .4byte 0x02024c0c
-_0803E9E8: .4byte gUnknown_0820872C
+_0803E9E8: .4byte gBitTable
 _0803E9EC: .4byte 0x02024a60
 _0803E9F0: .4byte 0x030042e0
 _0803E9F4:
@@ -105830,7 +105830,7 @@ _0803ECA4: .4byte 0x03001770
 _0803ECA8: .4byte 0x0000043d
 _0803ECAC: .4byte 0x02024a80
 _0803ECB0: .4byte 0x02024ca8
-_0803ECB4: .4byte gUnknown_0820872C
+_0803ECB4: .4byte gBitTable
 _0803ECB8:
 	ldr r6, [sp, 0x10]
 	adds r6, 0x11
@@ -105976,7 +105976,7 @@ _0803EDE0: .4byte 0x03001770
 _0803EDE4: .4byte 0x0000043d
 _0803EDE8: .4byte 0x02024a80
 _0803EDEC: .4byte 0x02024ca8
-_0803EDF0: .4byte gUnknown_0820872C
+_0803EDF0: .4byte gBitTable
 _0803EDF4:
 	mov r0, r8
 	movs r1, 0x2
@@ -108533,7 +108533,7 @@ _08040104:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804010C: .4byte gUnknown_0820872C
+_0804010C: .4byte gBitTable
 	thumb_func_end sub_8040048
 
 	thumb_func_start sub_8040110

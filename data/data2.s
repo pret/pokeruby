@@ -1765,8 +1765,40 @@ gUnknown_08208337:: @ 8208337
 @ 82085C4
 	.include "data/sine_degree_table.s"
 
-gUnknown_0820872C:: @ 820872C
-	.incbin "baserom.gba", 0x0020872c, 0x80
+	.align 2
+gBitTable:: @ 820872C
+	.4byte 0x00000001
+	.4byte 0x00000002
+	.4byte 0x00000004
+	.4byte 0x00000008
+	.4byte 0x00000010
+	.4byte 0x00000020
+	.4byte 0x00000040
+	.4byte 0x00000080
+	.4byte 0x00000100
+	.4byte 0x00000200
+	.4byte 0x00000400
+	.4byte 0x00000800
+	.4byte 0x00001000
+	.4byte 0x00002000
+	.4byte 0x00004000
+	.4byte 0x00008000
+	.4byte 0x00010000
+	.4byte 0x00020000
+	.4byte 0x00040000
+	.4byte 0x00080000
+	.4byte 0x00100000
+	.4byte 0x00200000
+	.4byte 0x00400000
+	.4byte 0x00800000
+	.4byte 0x01000000
+	.4byte 0x02000000
+	.4byte 0x04000000
+	.4byte 0x08000000
+	.4byte 0x10000000
+	.4byte 0x20000000
+	.4byte 0x40000000
+	.4byte 0x80000000
 
 	.align 2
 gSpriteTemplate_82087AC:: @ 82087AC
