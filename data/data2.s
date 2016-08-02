@@ -20568,8 +20568,8 @@ gSpriteAnimTable_83E7A1C:: @ 83E7A1C
 gSpriteTemplate_83E7A38:: @ 83E7A38
 	spr_template 2, 2, gOamData_83E79DC, gSpriteAnimTable_83E7A1C, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
-gUnknown_083E7A50:: @ 83E7A50
-	.incbin "baserom.gba", 0x003e7a50, 0x2580
+@ 83E7A50
+	.include "data/cute_sketch.s"
 
 @ 83E9FD0
 	.include "data/decorations.s"
