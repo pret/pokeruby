@@ -1724,7 +1724,7 @@ gUnknown_082087C4:: @ 82087C4
 gUnknown_082087DC:: @ 82087DC
 	.incbin "baserom.gba", 0x002087dc, 0x200
 Unknown_082089DC::
-	.incbin "baserom.gba", 0x002089dc, 0x800
+	.incbin "graphics/interface/blank.4bpp" @ seems to be a placeholder gfx?
 
 @ 82091DC
 	.include "data/egg_moves.s"
