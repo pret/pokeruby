@@ -53,7 +53,6 @@ struct Time
 struct SaveBlock2
 {
     u8 playerName[8];
-
     u8 playerGender; // MALE, FEMALE
     u8 sb2_field_9;
     u8 playerTrainerId[4];
