@@ -1722,7 +1722,7 @@ gUnknown_082087C4:: @ 82087C4
 	.incbin "baserom.gba", 0x002087c4, 0x18
 
 gUnknown_082087DC:: @ 82087DC
-	.incbin "baserom.gba", 0x002087dc, 0x200
+	.include "data/crc16_table.s"
 Unknown_082089DC::
 	.incbin "graphics/interface/blank.4bpp" @ seems to be a placeholder gfx?
 
