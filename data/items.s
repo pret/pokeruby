@@ -2823,7 +2823,7 @@ gItems:: @ 83C5564
 	.string "SILVERPOWDER$", 14
 	.2byte ITEM_SILVER_POWDER
 	.2byte 100 @ price
-	.byte 31
+	.byte HOLD_EFFECT_BUG_POWER
 	.byte 10
 	.4byte gItemDescription_SilverPowder
 	.byte 0
@@ -2988,7 +2988,7 @@ gItems:: @ 83C5564
 	.string "METAL COAT$", 14
 	.2byte ITEM_METAL_COAT
 	.2byte 100 @ price
-	.byte 42
+	.byte HOLD_EFFECT_STEEL_POWER
 	.byte 10
 	.4byte gItemDescription_MetalCoat
 	.byte 0
@@ -3048,7 +3048,7 @@ gItems:: @ 83C5564
 	.string "SOFT SAND$", 14
 	.2byte ITEM_SOFT_SAND
 	.2byte 100 @ price
-	.byte 46
+	.byte HOLD_EFFECT_GROUND_POWER
 	.byte 10
 	.4byte gItemDescription_SoftSand
 	.byte 0
@@ -3063,7 +3063,7 @@ gItems:: @ 83C5564
 	.string "HARD STONE$", 14
 	.2byte ITEM_HARD_STONE
 	.2byte 100 @ price
-	.byte 47
+	.byte HOLD_EFFECT_ROCK_POWER
 	.byte 10
 	.4byte gItemDescription_HardStone
 	.byte 0
@@ -3078,7 +3078,7 @@ gItems:: @ 83C5564
 	.string "MIRACLE SEED$", 14
 	.2byte ITEM_MIRACLE_SEED
 	.2byte 100 @ price
-	.byte 48
+	.byte HOLD_EFFECT_GRASS_POWER
 	.byte 10
 	.4byte gItemDescription_MiracleSeed
 	.byte 0
@@ -3093,7 +3093,7 @@ gItems:: @ 83C5564
 	.string "BLACKGLASSES$", 14
 	.2byte ITEM_BLACK_GLASSES
 	.2byte 100 @ price
-	.byte 49
+	.byte HOLD_EFFECT_DARK_POWER
 	.byte 10
 	.4byte gItemDescription_BlackGlasses
 	.byte 0
@@ -3108,7 +3108,7 @@ gItems:: @ 83C5564
 	.string "BLACK BELT$", 14
 	.2byte ITEM_BLACK_BELT
 	.2byte 100 @ price
-	.byte 50
+	.byte HOLD_EFFECT_FIGHTING_POWER
 	.byte 10
 	.4byte gItemDescription_BlackBelt
 	.byte 0
@@ -3123,7 +3123,7 @@ gItems:: @ 83C5564
 	.string "MAGNET$", 14
 	.2byte ITEM_MAGNET
 	.2byte 100 @ price
-	.byte 51
+	.byte HOLD_EFFECT_ELECTRIC_POWER
 	.byte 10
 	.4byte gItemDescription_Magnet
 	.byte 0
@@ -3138,7 +3138,7 @@ gItems:: @ 83C5564
 	.string "MYSTIC WATER$", 14
 	.2byte ITEM_MYSTIC_WATER
 	.2byte 100 @ price
-	.byte 52
+	.byte HOLD_EFFECT_WATER_POWER
 	.byte 10
 	.4byte gItemDescription_MysticWater
 	.byte 0
@@ -3153,7 +3153,7 @@ gItems:: @ 83C5564
 	.string "SHARP BEAK$", 14
 	.2byte ITEM_SHARP_BEAK
 	.2byte 100 @ price
-	.byte 53
+	.byte HOLD_EFFECT_FLYING_POWER
 	.byte 10
 	.4byte gItemDescription_SharpBeak
 	.byte 0
@@ -3168,7 +3168,7 @@ gItems:: @ 83C5564
 	.string "POISON BARB$", 14
 	.2byte ITEM_POISON_BARB
 	.2byte 100 @ price
-	.byte 54
+	.byte HOLD_EFFECT_POISON_POWER
 	.byte 10
 	.4byte gItemDescription_PoisonBarb
 	.byte 0
@@ -3183,7 +3183,7 @@ gItems:: @ 83C5564
 	.string "NEVERMELTICE$", 14
 	.2byte ITEM_NEVER_MELT_ICE
 	.2byte 100 @ price
-	.byte 55
+	.byte HOLD_EFFECT_ICE_POWER
 	.byte 10
 	.4byte gItemDescription_NeverMeltIce
 	.byte 0
@@ -3198,7 +3198,7 @@ gItems:: @ 83C5564
 	.string "SPELL TAG$", 14
 	.2byte ITEM_SPELL_TAG
 	.2byte 100 @ price
-	.byte 56
+	.byte HOLD_EFFECT_GHOST_POWER
 	.byte 10
 	.4byte gItemDescription_SpellTag
 	.byte 0
@@ -3213,7 +3213,7 @@ gItems:: @ 83C5564
 	.string "TWISTEDSPOON$", 14
 	.2byte ITEM_TWISTED_SPOON
 	.2byte 100 @ price
-	.byte 57
+	.byte HOLD_EFFECT_PSYCHIC_POWER
 	.byte 10
 	.4byte gItemDescription_TwistedSpoon
 	.byte 0
@@ -3228,7 +3228,7 @@ gItems:: @ 83C5564
 	.string "CHARCOAL$", 14
 	.2byte ITEM_CHARCOAL
 	.2byte 9800 @ price
-	.byte 58
+	.byte HOLD_EFFECT_FIRE_POWER
 	.byte 10
 	.4byte gItemDescription_Charcoal
 	.byte 0
@@ -3243,7 +3243,7 @@ gItems:: @ 83C5564
 	.string "DRAGON FANG$", 14
 	.2byte ITEM_DRAGON_FANG
 	.2byte 100 @ price
-	.byte 59
+	.byte HOLD_EFFECT_DRAGON_POWER
 	.byte 10
 	.4byte gItemDescription_DragonFang
 	.byte 0
@@ -3258,7 +3258,7 @@ gItems:: @ 83C5564
 	.string "SILK SCARF$", 14
 	.2byte ITEM_SILK_SCARF
 	.2byte 100 @ price
-	.byte 60
+	.byte HOLD_EFFECT_NORMAL_POWER
 	.byte 10
 	.4byte gItemDescription_SilkScarf
 	.byte 0

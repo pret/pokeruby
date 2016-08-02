@@ -1666,19 +1666,51 @@ gUnknown_081FC1D0:: @ 81FC1D0
 	.include "data/level_up_learnset_pointers.s"
 
 gUnknown_08208238:: @ 8208238
-	.incbin "baserom.gba", 0x00208238, 0x4
+	.byte 0x03, 0x0C, 0x30, 0xC0
 
 gUnknown_0820823C:: @ 820823C
-	.incbin "baserom.gba", 0x0020823c, 0x4
+	.byte 0xFC, 0xF3, 0xCF, 0x3F
 
 gUnknown_08208240:: @ 8208240
-	.incbin "baserom.gba", 0x00208240, 0x4
+	.byte 0x01, 0x04, 0x10, 0x40
 
-gUnknown_08208244:: @ 8208244
-	.incbin "baserom.gba", 0x00208244, 0x1f
+gStatStageRatios:: @ 8208244
+	.byte 10, 40 @ -6
+	.byte 10, 35 @ -5
+	.byte 10, 30 @ -4
+	.byte 10, 25 @ -3
+	.byte 10, 20 @ -2
+	.byte 10, 15 @ -1
+	.byte 10, 10 @  0
+	.byte 15, 10 @ +1
+	.byte 20, 10 @ +2
+	.byte 25, 10 @ +3
+	.byte 30, 10 @ +4
+	.byte 35, 10 @ +5
+	.byte 40, 10 @ +6
 
-gUnknown_08208263:: @ 8208263
-	.incbin "baserom.gba", 0x00208263, 0x25
+@ abbreviation of Game Freak
+	.string "ゲーフリ$"
+
+gHoldEffectToType:: @ 8208263
+	.byte HOLD_EFFECT_BUG_POWER,      TYPE_BUG
+	.byte HOLD_EFFECT_STEEL_POWER,    TYPE_STEEL
+	.byte HOLD_EFFECT_GROUND_POWER,   TYPE_GROUND
+	.byte HOLD_EFFECT_ROCK_POWER,     TYPE_ROCK
+	.byte HOLD_EFFECT_GRASS_POWER,    TYPE_GRASS
+	.byte HOLD_EFFECT_DARK_POWER,     TYPE_DARK
+	.byte HOLD_EFFECT_FIGHTING_POWER, TYPE_FIGHTING
+	.byte HOLD_EFFECT_ELECTRIC_POWER, TYPE_ELECTRIC
+	.byte HOLD_EFFECT_WATER_POWER,    TYPE_WATER
+	.byte HOLD_EFFECT_FLYING_POWER,   TYPE_FLYING
+	.byte HOLD_EFFECT_POISON_POWER,   TYPE_POISON
+	.byte HOLD_EFFECT_ICE_POWER,      TYPE_ICE
+	.byte HOLD_EFFECT_GHOST_POWER,    TYPE_GHOST
+	.byte HOLD_EFFECT_PSYCHIC_POWER,  TYPE_PSYCHIC
+	.byte HOLD_EFFECT_FIRE_POWER,     TYPE_FIRE
+	.byte HOLD_EFFECT_DRAGON_POWER,   TYPE_DRAGON
+	.byte HOLD_EFFECT_NORMAL_POWER,   TYPE_NORMAL
+	.byte 0, 0
 
 	.align 2
 gSpriteTemplate_8208288:: @ 8208288
@@ -1688,31 +1720,85 @@ gSpriteTemplate_8208288:: @ 8208288
 	spr_template 0xFFFF, 0, gOamData_81F96E8, NULL, gSpriteImageTable_81E7A70, gSpriteAffineAnimTable_81E7BEC, oac_poke_opponent
 
 gUnknown_082082E8:: @ 82082E8
-	.incbin "baserom.gba", 0x002082e8, 0xa
+	.byte TRAINER_CLASS_YOUNGSTER, TRAINER_CLASS_BUG_CATCHER,  TRAINER_CLASS_RICH_BOY, TRAINER_CLASS_CAMPER,    TRAINER_CLASS_COOL_TRAINER_M
+	.byte TRAINER_CLASS_LASS,      TRAINER_CLASS_SCHOOL_KID_F, TRAINER_CLASS_LADY,     TRAINER_CLASS_PICNICKER, TRAINER_CLASS_COOL_TRAINER_F
 
 gUnknown_082082F2:: @ 82082F2
-	.incbin "baserom.gba", 0x002082f2, 0x6
+	.byte 0x1A, 0x1B, 0x1C, 0x1D, 0x1F, 0x1E
 
 gUnknown_082082F8:: @ 82082F8
-	.incbin "baserom.gba", 0x002082f8, 0x6
+	.byte 1, 1, 3, 2, 4, 6
 
 gUnknown_082082FE:: @ 82082FE
-	.incbin "baserom.gba", 0x002082fe, 0x1c
+	.byte  5,  3,   2
+	.byte  5,  3,   2
+	.byte  1,  1,   0
+	.byte  3,  2,   1
+	.byte  1,  1,   0
+	.byte  1,  1,   1
+	.byte -1, -1,  -1
+	.byte -5, -5, -10
+	.byte -5, -5, -10
 
+	.align 1
 gUnknown_0820831A:: @ 820831A
-	.incbin "baserom.gba", 0x0020831a, 0x1d
+	.2byte    0xF
+	.2byte   0x13
+	.2byte   0x39
+	.2byte   0x46
+	.2byte   0x94
+	.2byte   0xF9
+	.2byte   0x7F
+	.2byte  0x123
+	.2byte 0xFFFF
 
+@ "Nidoran♂" Japanese name
+	.string "ニドラン♂$", 11
+
+@ "Nidoran♀" Japanese name
 gUnknown_08208337:: @ 8208337
-	.incbin "baserom.gba", 0x00208337, 0xd
+	.string "ニドラン♀$", 13
 
-gUnknown_08208344:: @ 8208344
-	.incbin "baserom.gba", 0x00208344, 0x280
+@ 8208344
+	.include "data/sine_table.s"
 
-gUnknown_082085C4:: @ 82085C4
-	.incbin "baserom.gba", 0x002085c4, 0x168
+@ 82085C4
+	.include "data/sine_degree_table.s"
 
-gUnknown_0820872C:: @ 820872C
-	.incbin "baserom.gba", 0x0020872c, 0x80
+	.align 2
+gBitTable:: @ 820872C
+	.4byte 0x00000001
+	.4byte 0x00000002
+	.4byte 0x00000004
+	.4byte 0x00000008
+	.4byte 0x00000010
+	.4byte 0x00000020
+	.4byte 0x00000040
+	.4byte 0x00000080
+	.4byte 0x00000100
+	.4byte 0x00000200
+	.4byte 0x00000400
+	.4byte 0x00000800
+	.4byte 0x00001000
+	.4byte 0x00002000
+	.4byte 0x00004000
+	.4byte 0x00008000
+	.4byte 0x00010000
+	.4byte 0x00020000
+	.4byte 0x00040000
+	.4byte 0x00080000
+	.4byte 0x00100000
+	.4byte 0x00200000
+	.4byte 0x00400000
+	.4byte 0x00800000
+	.4byte 0x01000000
+	.4byte 0x02000000
+	.4byte 0x04000000
+	.4byte 0x08000000
+	.4byte 0x10000000
+	.4byte 0x20000000
+	.4byte 0x40000000
+	.4byte 0x80000000
 
 	.align 2
 gSpriteTemplate_82087AC:: @ 82087AC
@@ -1721,8 +1807,10 @@ gSpriteTemplate_82087AC:: @ 82087AC
 gUnknown_082087C4:: @ 82087C4
 	.incbin "baserom.gba", 0x002087c4, 0x18
 
-gUnknown_082087DC:: @ 82087DC
-	.incbin "baserom.gba", 0x002087dc, 0xa00
+@ 82087DC
+	.include "data/crc16_table.s"
+
+	.incbin "baserom.gba", 0x002089dc, 0x800
 
 @ 82091DC
 	.include "data/egg_moves.s"
@@ -20568,8 +20656,8 @@ gSpriteAnimTable_83E7A1C:: @ 83E7A1C
 gSpriteTemplate_83E7A38:: @ 83E7A38
 	spr_template 2, 2, gOamData_83E79DC, gSpriteAnimTable_83E7A1C, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
-gUnknown_083E7A50:: @ 83E7A50
-	.incbin "baserom.gba", 0x003e7a50, 0x2580
+@ 83E7A50
+	.include "data/cute_sketch.s"
 
 @ 83E9FD0
 	.include "data/decorations.s"
