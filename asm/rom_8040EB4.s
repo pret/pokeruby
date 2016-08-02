@@ -804,7 +804,7 @@ _0804144A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08041490: .4byte 0x02024ea4
+_08041490: .4byte gSaveBlock2
 _08041494: .4byte 0x02025734
 _08041498: .4byte 0x00002b4c
 	thumb_func_end sub_80413C8
@@ -3754,7 +3754,7 @@ _08042B08:
 	movs r0, 0x1
 	b _08042B42
 	.align 2, 0
-_08042B30: .4byte 0x02024ea4
+_08042B30: .4byte gSaveBlock2
 _08042B34: .4byte 0x020231cc
 _08042B38: .4byte 0x020232cc
 _08042B3C: .4byte 0x020233cc
@@ -13746,7 +13746,7 @@ sub_80479F8: @ 80479F8
 	ldrb r0, [r0, 0x9]
 	bx lr
 	.align 2, 0
-_08047A00: .4byte 0x02024ea4
+_08047A00: .4byte gSaveBlock2
 	thumb_func_end sub_80479F8
 
 	thumb_func_start sub_8047A04
@@ -13756,7 +13756,7 @@ sub_8047A04: @ 8047A04
 	strb r0, [r1, 0x9]
 	bx lr
 	.align 2, 0
-_08047A0C: .4byte 0x02024ea4
+_08047A0C: .4byte gSaveBlock2
 	thumb_func_end sub_8047A04
 
 	thumb_func_start sub_8047A10
@@ -13766,7 +13766,7 @@ sub_8047A10: @ 8047A10
 	strb r0, [r1, 0x9]
 	bx lr
 	.align 2, 0
-_08047A18: .4byte 0x02024ea4
+_08047A18: .4byte gSaveBlock2
 	thumb_func_end sub_8047A10
 
 	thumb_func_start sub_8047A1C
@@ -13780,7 +13780,7 @@ sub_8047A1C: @ 8047A1C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08047A30: .4byte 0x02024ea4
+_08047A30: .4byte gSaveBlock2
 	thumb_func_end sub_8047A1C
 
 	thumb_func_start sub_8047A34
@@ -13790,7 +13790,7 @@ sub_8047A34: @ 8047A34
 	strb r0, [r1, 0x9]
 	bx lr
 	.align 2, 0
-_08047A3C: .4byte 0x02024ea4
+_08047A3C: .4byte gSaveBlock2
 	thumb_func_end sub_8047A34
 
 	thumb_func_start sub_8047A40
@@ -14205,7 +14205,7 @@ sub_8047CE8: @ 8047CE8
 	.align 2, 0
 _08047D44: .4byte gWindowConfig_81E725C
 _08047D48: .4byte 0x020296cc
-_08047D4C: .4byte 0x02024ea4
+_08047D4C: .4byte gSaveBlock2
 _08047D50: .4byte 0x03002978
 _08047D54: .4byte gUnknown_0820C14C
 	thumb_func_end sub_8047CE8
@@ -14319,7 +14319,7 @@ _08047DEE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08047E30: .4byte 0x02024ea4
+_08047E30: .4byte gSaveBlock2
 _08047E34: .4byte gUnknown_0820C2E6
 _08047E38: .4byte gSpriteTemplate_820C0EC
 _08047E3C: .4byte 0x03002978
@@ -21553,7 +21553,7 @@ _0804B7F4:
 _0804B8E0: .4byte 0x020297d8
 _0804B8E4: .4byte 0x0202e8ce
 _0804B8E8: .4byte 0x03002978
-_0804B8EC: .4byte 0x02024ea4
+_0804B8EC: .4byte gSaveBlock2
 _0804B8F0: .4byte 0x030045c0
 _0804B8F4: .4byte 0x03004828
 _0804B8F8: .4byte 0x0201f000
@@ -27068,7 +27068,7 @@ _0804E8C4:
 _0804E8E4: .4byte 0x03004834
 _0804E8E8: .4byte 0x03004854
 _0804E8EC: .4byte 0x03002978
-_0804E8F0: .4byte 0x02024ea4
+_0804E8F0: .4byte gSaveBlock2
 _0804E8F4: .4byte gUnknown_082162B8
 _0804E8F8:
 	ldr r0, _0804E928
@@ -27097,7 +27097,7 @@ _0804E920:
 _0804E928: .4byte 0x03004834
 _0804E92C: .4byte 0x03004854
 _0804E930: .4byte 0x03002978
-_0804E934: .4byte 0x02024ea4
+_0804E934: .4byte gSaveBlock2
 _0804E938: .4byte gUnknown_082162B8
 _0804E93C:
 	ldr r0, _0804E97C
@@ -27132,7 +27132,7 @@ _0804E974:
 _0804E97C: .4byte 0x03004834
 _0804E980: .4byte 0x03004854
 _0804E984: .4byte 0x03002978
-_0804E988: .4byte 0x02024ea4
+_0804E988: .4byte gSaveBlock2
 _0804E98C: .4byte gUnknown_082162B8
 	thumb_func_end sub_804E884
 
@@ -29960,7 +29960,7 @@ sub_80500A8: @ 80500A8
 	b _0805010A
 	.align 2, 0
 _080500EC: .4byte 0x03004854
-_080500F0: .4byte 0x02024ea4
+_080500F0: .4byte gSaveBlock2
 _080500F4: .4byte 0x03001770
 _080500F8: .4byte 0x00000201
 _080500FC:

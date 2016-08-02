@@ -73,7 +73,7 @@ sub_8052D54: @ 8052D54
 	strb r0, [r2, 0x15]
 	bx lr
 	.align 2, 0
-_08052D74: .4byte 0x02024ea4
+_08052D74: .4byte gSaveBlock2
 	thumb_func_end sub_8052D54
 
 	thumb_func_start sub_8052D78
@@ -182,7 +182,7 @@ ClearSav2: @ 8052E24
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08052E44: .4byte 0x02024ea4
+_08052E44: .4byte gSaveBlock2
 _08052E48: .4byte 0x01000448
 	thumb_func_end ClearSav2
 
@@ -278,7 +278,7 @@ _08052E7E:
 _08052F3C: .4byte 0x03005eb8
 _08052F40: .4byte 0x020297ec
 _08052F44: .4byte 0x02025734
-_08052F48: .4byte 0x02024ea4
+_08052F48: .4byte gSaveBlock2
 _08052F4C: .4byte 0x00000bb8
 _08052F50: .4byte 0x03004350
 _08052F54: .4byte 0x00000496
@@ -4285,7 +4285,7 @@ mli4_mapscripts_and_other: @ 8054DB8
 	.align 2, 0
 _08054E14: .4byte 0x0300489c
 _08054E18: .4byte 0x03004898
-_08054E1C: .4byte 0x02024ea4
+_08054E1C: .4byte gSaveBlock2
 	thumb_func_end mli4_mapscripts_and_other
 
 	thumb_func_start sub_8054E20
@@ -40646,7 +40646,7 @@ sub_8064F08: @ 8064F08
 	bx r0
 	.align 2, 0
 _08064F30: .4byte 0x030005ac
-_08064F34: .4byte 0x02024ea4
+_08064F34: .4byte gSaveBlock2
 	thumb_func_end sub_8064F08
 
 	thumb_func_start sub_8064F38
@@ -40673,7 +40673,7 @@ sub_8064F38: @ 8064F38
 	bx r0
 	.align 2, 0
 _08064F64: .4byte 0x030005ac
-_08064F68: .4byte 0x02024ea4
+_08064F68: .4byte gSaveBlock2
 	thumb_func_end sub_8064F38
 
 	thumb_func_start sub_8064F6C
@@ -46728,7 +46728,7 @@ sub_8067BB0: @ 8067BB0
 	bx lr
 	.align 2, 0
 _08067BBC: .4byte 0x0202e8dc
-_08067BC0: .4byte 0x02024ea4
+_08067BC0: .4byte gSaveBlock2
 	thumb_func_end sub_8067BB0
 
 	thumb_func_start sA1_play_cry
@@ -49487,7 +49487,7 @@ sub_80690C8: @ 80690C8
 	bx r0
 	.align 2, 0
 _080690E4: .4byte 0x00004046
-_080690E8: .4byte 0x02024ea4
+_080690E8: .4byte gSaveBlock2
 _080690EC: .4byte 0x00000836
 	thumb_func_end sub_80690C8
 
@@ -49514,7 +49514,7 @@ sub_80690F0: @ 80690F0
 	bx r0
 	.align 2, 0
 _0806911C: .4byte 0x00004046
-_08069120: .4byte 0x02024ea4
+_08069120: .4byte gSaveBlock2
 _08069124: .4byte 0x00000302
 _08069128: .4byte 0x00000836
 	thumb_func_end sub_80690F0
@@ -49540,7 +49540,7 @@ sub_806912C: @ 806912C
 	movs r0, 0x1
 	b _08069166
 	.align 2, 0
-_08069154: .4byte 0x02024ea4
+_08069154: .4byte gSaveBlock2
 _08069158: .4byte 0x00004046
 _0806915C: .4byte 0x03020000
 _08069160: .4byte 0x00000836
@@ -51986,7 +51986,7 @@ sub_806A328: @ 806A328
 	bx r0
 	.align 2, 0
 _0806A350: .4byte 0x00000835
-_0806A354: .4byte 0x02024ea4
+_0806A354: .4byte gSaveBlock2
 _0806A358: .4byte 0x03004038
 _0806A35C: .4byte 0x00004040
 	thumb_func_end sub_806A328
@@ -53164,7 +53164,7 @@ _0806AC80:
 _0806AC98: .4byte gUnknown_08411804
 _0806AC9C: .4byte 0x03004038
 _0806ACA0: .4byte gUnknown_08411819
-_0806ACA4: .4byte 0x02024ea4
+_0806ACA4: .4byte gSaveBlock2
 _0806ACA8: .4byte gUnknown_084117E3
 _0806ACAC: .4byte 0x03001770
 _0806ACB0:
@@ -53303,7 +53303,7 @@ _0806AD96:
 _0806ADC4: .4byte 0x03004b20
 _0806ADC8: .4byte gUnknown_0841182F
 _0806ADCC: .4byte 0x03004038
-_0806ADD0: .4byte 0x02024ea4
+_0806ADD0: .4byte gSaveBlock2
 _0806ADD4: .4byte sub_806AA64
 _0806ADD8:
 	ldr r2, _0806AE04
@@ -53360,7 +53360,7 @@ _0806AE08:
 	b _0806AEC4
 	.align 2, 0
 _0806AE4C: .4byte 0x03004038
-_0806AE50: .4byte 0x02024ea4
+_0806AE50: .4byte gSaveBlock2
 _0806AE54: .4byte 0x00004040
 _0806AE58: .4byte gUnknown_08411846
 _0806AE5C:

@@ -1666,19 +1666,51 @@ gUnknown_081FC1D0:: @ 81FC1D0
 	.include "data/level_up_learnset_pointers.s"
 
 gUnknown_08208238:: @ 8208238
-	.incbin "baserom.gba", 0x00208238, 0x4
+	.byte 0x03, 0x0C, 0x30, 0xC0
 
 gUnknown_0820823C:: @ 820823C
-	.incbin "baserom.gba", 0x0020823c, 0x4
+	.byte 0xFC, 0xF3, 0xCF, 0x3F
 
 gUnknown_08208240:: @ 8208240
-	.incbin "baserom.gba", 0x00208240, 0x4
+	.byte 0x01, 0x04, 0x10, 0x40
 
-gUnknown_08208244:: @ 8208244
-	.incbin "baserom.gba", 0x00208244, 0x1f
+gStatStageRatios:: @ 8208244
+	.byte 10, 40 @ -6
+	.byte 10, 35 @ -5
+	.byte 10, 30 @ -4
+	.byte 10, 25 @ -3
+	.byte 10, 20 @ -2
+	.byte 10, 15 @ -1
+	.byte 10, 10 @  0
+	.byte 15, 10 @ +1
+	.byte 20, 10 @ +2
+	.byte 25, 10 @ +3
+	.byte 30, 10 @ +4
+	.byte 35, 10 @ +5
+	.byte 40, 10 @ +6
 
-gUnknown_08208263:: @ 8208263
-	.incbin "baserom.gba", 0x00208263, 0x25
+@ abbreviation of Game Freak
+	.string "ゲーフリ$"
+
+gHoldEffectToType:: @ 8208263
+	.byte HOLD_EFFECT_BUG_POWER,      TYPE_BUG
+	.byte HOLD_EFFECT_STEEL_POWER,    TYPE_STEEL
+	.byte HOLD_EFFECT_GROUND_POWER,   TYPE_GROUND
+	.byte HOLD_EFFECT_ROCK_POWER,     TYPE_ROCK
+	.byte HOLD_EFFECT_GRASS_POWER,    TYPE_GRASS
+	.byte HOLD_EFFECT_DARK_POWER,     TYPE_DARK
+	.byte HOLD_EFFECT_FIGHTING_POWER, TYPE_FIGHTING
+	.byte HOLD_EFFECT_ELECTRIC_POWER, TYPE_ELECTRIC
+	.byte HOLD_EFFECT_WATER_POWER,    TYPE_WATER
+	.byte HOLD_EFFECT_FLYING_POWER,   TYPE_FLYING
+	.byte HOLD_EFFECT_POISON_POWER,   TYPE_POISON
+	.byte HOLD_EFFECT_ICE_POWER,      TYPE_ICE
+	.byte HOLD_EFFECT_GHOST_POWER,    TYPE_GHOST
+	.byte HOLD_EFFECT_PSYCHIC_POWER,  TYPE_PSYCHIC
+	.byte HOLD_EFFECT_FIRE_POWER,     TYPE_FIRE
+	.byte HOLD_EFFECT_DRAGON_POWER,   TYPE_DRAGON
+	.byte HOLD_EFFECT_NORMAL_POWER,   TYPE_NORMAL
+	.byte 0, 0
 
 	.align 2
 gSpriteTemplate_8208288:: @ 8208288
