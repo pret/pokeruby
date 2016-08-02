@@ -1871,7 +1871,7 @@ gUnknown_0820A430:: @ 820A430
 
 	.align 2
 gUnknown_0820A47C:: @ 820A47C
-	obj_tiles 0x08d1f52c, 4096, 0xd6ff
+	obj_tiles gBattleWindowGfx, 4096, 0xd6ff
 
 	.align 2
 gUnknown_0820A484:: @ 820A484
@@ -1906,8 +1906,8 @@ gUnknown_0820A4B4:: @ 820A4B4
 
 	.align 2
 gUnknown_0820A4D4:: @ 820A4D4
-	obj_pal 0x08D1212C, 0xD6FF
-	obj_pal 0x08D1214C, 0xD704
+	obj_pal gUnknown_08D1212C, 0xD6FF
+	obj_pal gUnknown_08D1214C, 0xD704
 
 	.align 2
 gOamData_820A4E4:: @ 820A4E4

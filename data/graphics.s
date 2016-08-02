@@ -885,8 +885,12 @@ gBattleAnimSpritePalette_114:: @ 8D1106C
 gBattleAnimSpriteSheet_115:: @ 8D11B74
 	.incbin "graphics/battle_anims/sprites/115.4bpp.lz"
 
-	.incbin "baserom.gba", 0xd11ca4, 0x4C8
-
+	.incbin "baserom.gba", 0xd11ca4, 0x488
+	
+gUnknown_08D1212C::
+	.incbin "graphics/interface/battle_window.gbapal"
+gUnknown_08D1214C::
+	.incbin "baserom.gba", 0xd1214c, 0x20
 gUnknown_08D1216C:: @ 8D1216C
 	.incbin "baserom.gba", 0x00d1216c, 0xec0
 
@@ -1471,7 +1475,11 @@ gBattleAnimSpriteSheet_186:: @ 8D1F13C
 gBattleAnimSpritePalette_186:: @ 8D1F508
 	.incbin "graphics/battle_anims/sprites/186.gbapal.lz"
 
-	.incbin "baserom.gba", 0xd1f52c, 0xa54
+	.align 2
+gBattleWindowGfx::
+	.incbin "graphics/interface/battle_window.4bpp.lz"
+
+	.incbin "baserom.gba", 0xd1f7e0, 0x7a0
 
 	.align 2
 gBattleAnimSpriteSheet_014:: @ 8D1FF80
