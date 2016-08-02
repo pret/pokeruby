@@ -7100,9 +7100,9 @@ gUnknown_083762DC:: @ 83762DC
 
 	.align 2
 gUnknown_083762F0:: @ 83762F0
-	.4byte 0x020231cc
-	.4byte 0x020232cc
-	.4byte 0x020233cc
+	.4byte gStringVar1
+	.4byte gStringVar2
+	.4byte gStringVar3
 
 gUnknown_083762FC:: @ 83762FC
 	.incbin "baserom.gba", 0x003762fc, 0x68
@@ -13882,9 +13882,9 @@ gUnknown_083D1454:: @ 83D1454
 
 	.align 2
 gUnknown_083D1464:: @ 83D1464
-	.4byte 0x020231cc
-	.4byte 0x020232cc
-	.4byte 0x020233cc
+	.4byte gStringVar1
+	.4byte gStringVar2
+	.4byte gStringVar3
 
 	.align 2
 gUnknown_083D1470:: @ 83D1470
@@ -21205,13 +21205,13 @@ gUnknown_083ED048:: @ 83ED048
 	.4byte Unknown_83ECFF8
 
 gUnknown_083ED064:: @ 83ED064
-	.4byte 0x0810639d
-	.4byte 0x08106365
-	.4byte 0x08106371
-	.4byte 0x08106361
-	.4byte 0x08106361
-	.4byte 0x08106371
-	.4byte 0x08106371
+	.4byte sub_810639C
+	.4byte sub_8106364
+	.4byte sub_8106370
+	.4byte nullsub_70
+	.4byte nullsub_70
+	.4byte sub_8106370
+	.4byte sub_8106370
 
 	.align 2
 gOamData_83ED080:: @ 83ED080
@@ -21657,25 +21657,131 @@ gSpriteTemplate_83ED6CC:: @ 83ED6CC
 	spr_template 0xFFFF, 4, gOamData_83ED080, gSpriteAnimTable_83ED32C, gSpriteImageTable_83ED228, gSpriteAffineAnimTable_83ED410, sub_8105B70
 
 	.align 2
+Unknown_083ED6E4:
 	.incbin "baserom.gba", 0x003ed6e4, 0x20
 
 gUnknown_083ED704:: @ 83ED704
-	.incbin "baserom.gba", 0x003ed704, 0x38
+	.4byte 4, Unknown_083ED6E4
+Unknown_083ED70C:
+	.incbin "baserom.gba", 0x003ed70c, 0x30
 
 gUnknown_083ED73C:: @ 83ED73C
-	.incbin "baserom.gba", 0x003ed73c, 0x20
+	.4byte 6, Unknown_083ED70C
+Unknown_083ED744:
+	.incbin "baserom.gba", 0x003ed744, 0x18
 
 gUnknown_083ED75C:: @ 83ED75C
-	.incbin "baserom.gba", 0x003ed75c, 0x30
+	.4byte 3, Unknown_083ED744
+Unknown_083ED764:
+	.incbin "baserom.gba", 0x003ed764, 0x28
 
 gUnknown_083ED78C:: @ 83ED78C
-	.incbin "baserom.gba", 0x003ed78c, 0x28
+	.4byte 5, Unknown_083ED764
+Unknown_083ED794:
+	.incbin "baserom.gba", 0x003ed794, 0x20
 
 gUnknown_083ED7B4:: @ 83ED7B4
-	.incbin "baserom.gba", 0x003ed7b4, 0x20
+	.4byte 4, Unknown_083ED794
+Unknown_083ED7BC:
+	.incbin "baserom.gba", 0x003ed7bc, 0x18
 
 gUnknown_083ED7D4:: @ 83ED7D4
-	.incbin "baserom.gba", 0x003ed7d4, 0x388
+	.4byte 3, Unknown_083ED7BC
+Unknown_083ED7DC:
+	.incbin "baserom.gba", 0x003ed7dc, 0x28
+Unknown_083ED804:
+	.4byte 5, Unknown_083ED7DC
+Unknown_083ED80C:
+	.incbin "baserom.gba", 0x003ed80c, 0x20
+Unknown_083ED82C:
+	.4byte 4, Unknown_083ED80C
+Unknown_083ED834:
+	.incbin "baserom.gba", 0x003ed834, 0x20
+Unknown_083ED854:
+	.4byte 4, Unknown_083ED834
+Unknown_083ED85C:
+	.incbin "baserom.gba", 0x003ed85c, 0x20
+Unknown_083ED87C:
+	.4byte 4, Unknown_083ED85C
+Unknown_083ED884:
+	.incbin "baserom.gba", 0x003ed884, 0x30
+Unknown_083ED8B4:
+	.4byte 6, Unknown_083ED884
+Unknown_083ED8BC:
+	.incbin "baserom.gba", 0x003ed8bc, 0x8
+Unknown_083ED8C4:
+	.incbin "baserom.gba", 0x003ed8c4, 0x8
+Unknown_083ED8CC:
+	.4byte 1, Unknown_083ED8BC
+	.4byte 1, Unknown_083ED8C4
+Unknown_083ED8DC:
+	.incbin "baserom.gba", 0x003ed8dc, 0x60
+Unknown_083ED93C:
+	.4byte 12, Unknown_083ED8DC
+Unknown_083ED944:
+	.incbin "baserom.gba", 0x003ed944, 0x18
+Unknown_083ED95C:
+	.4byte 3, Unknown_083ED944
+Unknown_083ED964:
+	.incbin "baserom.gba", 0x003ed964, 0x10
+Unknown_083ED974:
+	.4byte 2, Unknown_083ED964
+Unknown_083ED97C:
+	.incbin "baserom.gba", 0x003ed97c, 0x10
+Unknown_083ED98C:
+	.4byte 2, Unknown_083ED97C
+Unknown_083ED994:
+	.incbin "baserom.gba", 0x003ed994, 0x10
+Unknown_083ED9A4:
+	.4byte 2, Unknown_083ED994
+Unknown_083ED9AC:
+	.incbin "baserom.gba", 0x003ed9ac, 0x10
+Unknown_083ED9BC:
+	.4byte 2, Unknown_083ED9AC
+Unknown_083ED9C4:
+	.incbin "baserom.gba", 0x003ed9c4, 0x10
+Unknown_083ED9D4:
+	.4byte 2, Unknown_083ED9C4
+Unknown_083ED9DC:
+	.incbin "baserom.gba", 0x003ed9dc, 0x10
+Unknown_083ED9EC:
+	.4byte 2, Unknown_083ED9DC
+Unknown_083ED9F4:
+	.incbin "baserom.gba", 0x003ed9f4, 0x10
+Unknown_083EDA04:
+	.4byte 2, Unknown_083ED9F4
+Unknown_083EDA0C:
+	.incbin "baserom.gba", 0x003eda0C, 0x10
+Unknown_083EDA1C:
+	.4byte 2, Unknown_083EDA0C
+Unknown_083EDA24:
+	.incbin "baserom.gba", 0x003eda24, 0x10
+Unknown_083EDA34:
+	.4byte 2, Unknown_083EDA24
+Unknown_083EDA3C:
+	.incbin "baserom.gba", 0x003eda3c, 0x30
+Unknown_083EDA6C:
+	.4byte 6, Unknown_083EDA3C
+Unknown_083EDA74:
+	.incbin "baserom.gba", 0x003eda74, 0x18
+Unknown_083EDA8C:
+	.4byte 3, Unknown_083EDA74
+Unknown_083EDA94:
+	.incbin "baserom.gba", 0x003eda94, 0x30
+Unknown_083EDAC4:
+	.4byte 6, Unknown_083EDA94
+Unknown_083EDACC:
+	.incbin "baserom.gba", 0x003edacc, 0x30
+Unknown_083EDAFC:
+	.4byte 6, Unknown_083EDACC
+Unknown_083EDB04:
+	.incbin "baserom.gba", 0x003edb04, 0x18
+Unknown_083EDB1C:
+	.4byte 3, Unknown_083EDB04
+Unknown_083EDB24:
+	.incbin "baserom.gba", 0x003edb24, 0x30
+Unknown_083EDB54:
+	.4byte 6, Unknown_083EDB24
 
 	.align 2
 gUnknown_083EDB5C:: @ 83EDB5C
@@ -21706,32 +21812,33 @@ gUnknown_083EDB5C:: @ 83EDB5C
 	.4byte gSpriteTemplate_83ED63C
 	.4byte gDummySpriteTemplate
 
+	.align 2
 gUnknown_083EDBC4:: @ 83EDBC4
-	.4byte 0x083ed804
-	.4byte 0x083ed82c
-	.4byte 0x083ed854
-	.4byte 0x083ed8b4
+	.4byte Unknown_083ED804
+	.4byte Unknown_083ED82C
+	.4byte Unknown_083ED854
+	.4byte Unknown_083ED8B4
 	.4byte 0 @ dummied out
 	.4byte 0 @ dummied out
-	.4byte 0x083ed8cc
+	.4byte Unknown_083ED8CC
 	.4byte 0 @ dummied out
-	.4byte 0x083ed93c
-	.4byte 0x083ed95c
-	.4byte 0x083ed974
-	.4byte 0x083ed98c
-	.4byte 0x083ed9a4
-	.4byte 0x083ed9bc
-	.4byte 0x083ed9d4
-	.4byte 0x083ed9ec
-	.4byte 0x083eda04
-	.4byte 0x083eda1c
-	.4byte 0x083eda34
-	.4byte 0x083eda6c
-	.4byte 0x083eda8c
-	.4byte 0x083edac4
-	.4byte 0x083edafc
-	.4byte 0x083edb1c
-	.4byte 0x083edb54
+	.4byte Unknown_083ED93C
+	.4byte Unknown_083ED95C
+	.4byte Unknown_083ED974
+	.4byte Unknown_083ED98C
+	.4byte Unknown_083ED9A4
+	.4byte Unknown_083ED9BC
+	.4byte Unknown_083ED9D4
+	.4byte Unknown_083ED9EC
+	.4byte Unknown_083EDA04
+	.4byte Unknown_083EDA1C
+	.4byte Unknown_083EDA34
+	.4byte Unknown_083EDA6C
+	.4byte Unknown_083EDA8C
+	.4byte Unknown_083EDAC4
+	.4byte Unknown_083EDAFC
+	.4byte Unknown_083EDB1C
+	.4byte Unknown_083EDB54
 	.4byte 0 @ dummied out
 
 gUnknown_083EDC2C:: @ 83EDC2C
