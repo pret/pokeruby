@@ -13119,7 +13119,7 @@ _08047530:
 	b _0804755A
 	.align 2, 0
 _08047544: .4byte 0x02020004
-_08047548: .4byte gUnknown_08208344
+_08047548: .4byte gSineTable
 _0804754C:
 	ldrh r0, [r4, 0x38]
 	strh r0, [r5, 0x20]
@@ -32696,7 +32696,7 @@ _08051628:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08051638: .4byte gUnknown_08208344
+_08051638: .4byte gSineTable
 _0805163C: .4byte 0x02020004
 _08051640: .4byte 0x03004854
 _08051644: .4byte gSpriteTemplate_82164FC
