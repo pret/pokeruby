@@ -21,3 +21,4 @@
 	.include "constants/songs.s"
 	.include "constants/version.s"
 	.include "constants/region_map_sections.s"
+	.include "constants/hold_effects.s"

@@ -99590,7 +99590,7 @@ _0803BCC0: .4byte 0x0202ff5e
 _0803BCC4: .4byte 0x00000807
 _0803BCC8: .4byte 0x0000080b
 _0803BCCC: .4byte 0x0000080d
-_0803BCD0: .4byte gUnknown_08208263
+_0803BCD0: .4byte gHoldEffectToType
 _0803BCD4:
 	adds r3, 0x2
 	adds r2, 0x1
