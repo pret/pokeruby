@@ -39,6 +39,9 @@ struct Time
 struct SaveBlock2
 {
     u8 playerName[8];
+
+    // 0 = Male
+    // 1 = Female
     u8 playerGender;
     u8 sb2_field_9;
     u8 playerTrainerId[4];
@@ -46,9 +49,19 @@ struct SaveBlock2
     u8 playTimeMinutes;
     u8 playTimeSeconds;
     u8 playTimeVBlanks;
+
+    // 0 = "NORMAL"
+    // 1 = "LR"
+    // 2 = "L=A"
     u8 optionsButtonMode;
+
+    // 0 = "SLOW"
+    // 1 = "MID"
+    // 2 = "FAST"
     u8 optionsTextSpeed:3;
-    u8 optionsUnk:5;
+
+    // Specifies one of the 20 decorative borders for text boxes
+    u8 optionsTextBoxFrameType:5;
     u8 filler[0x83];
     struct Time localTimeOffset;
 };
