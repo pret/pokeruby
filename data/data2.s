@@ -1893,31 +1893,31 @@ gUnknown_0820A430:: @ 820A430
 
 	.align 2
 gUnknown_0820A47C:: @ 820A47C
-	obj_tiles gBattleWindowGfx, 4096, 0xd6ff
+	obj_tiles gBattleWindowLargeGfx, 4096, 0xd6ff
 
 	.align 2
 gUnknown_0820A484:: @ 820A484
-	obj_tiles 0x08d1f7e0, 4096, 0xd701
+	obj_tiles gBattleWindowSmallGfx, 4096, 0xd701
 
 	.align 2
 gUnknown_0820A48C:: @ 820A48C
-	obj_tiles 0x08d1f96c, 2048, 0xd6ff
+	obj_tiles gBattleWindowSmall2Gfx, 2048, 0xd6ff
 
 	.align 2
 gUnknown_0820A494:: @ 820A494
-	obj_tiles 0x08d1f96c, 2048, 0xd700
+	obj_tiles gBattleWindowSmall2Gfx, 2048, 0xd700
 
 	.align 2
 gUnknown_0820A49C:: @ 820A49C
-	obj_tiles 0x08d1fb04, 2048, 0xd701
+	obj_tiles gBattleWindowSmall3Gfx, 2048, 0xd701
 
 	.align 2
 gUnknown_0820A4A4:: @ 820A4A4
-	obj_tiles 0x08d1fb04, 2048, 0xd702
+	obj_tiles gBattleWindowSmall3Gfx, 2048, 0xd702
 
 	.align 2
 gUnknown_0820A4AC:: @ 820A4AC
-	obj_tiles 0x08d1fc94, 4096, 0xd70b
+	obj_tiles gBattleWindowLarge2Gfx, 4096, 0xd70b
 
 	.align 2
 gUnknown_0820A4B4:: @ 820A4B4

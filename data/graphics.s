@@ -1476,10 +1476,26 @@ gBattleAnimSpritePalette_186:: @ 8D1F508
 	.incbin "graphics/battle_anims/sprites/186.gbapal.lz"
 
 	.align 2
-gBattleWindowGfx::
+gBattleWindowLargeGfx::
 	.incbin "graphics/interface/battle_window.4bpp.lz"
+	
+	.align 2
+gBattleWindowSmallGfx::
+	.incbin "graphics/interface/battle_window2.4bpp.lz"
+	
+	.align 2
+gBattleWindowSmall2Gfx::
+	.incbin "graphics/interface/battle_window3.4bpp.lz"
+	
+	.align 2
+gBattleWindowSmall3Gfx::
+	.incbin "graphics/interface/battle_window4.4bpp.lz"
+	
+	.align 2
+gBattleWindowLarge2Gfx:: @ 8d1fc94
+	.incbin "graphics/interface/battle_window5.4bpp.lz"
 
-	.incbin "baserom.gba", 0xd1f7e0, 0x7a0
+	.incbin "baserom.gba", 0xd1ff0C, 0x74
 
 	.align 2
 gBattleAnimSpriteSheet_014:: @ 8D1FF80
