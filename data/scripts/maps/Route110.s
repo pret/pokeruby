@@ -17,7 +17,7 @@ Route110_MapScript1_14F914:: @ 814F914
 	end
 
 Route110_EventScript_14F92F:: @ 814F92F
-	playmusicbattle 403
+	playmusicbattle 403 @ Bicycle music
 	return
 
 Route110_MapScript2_14F933:: @ 814F933

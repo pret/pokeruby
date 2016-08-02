@@ -119,7 +119,7 @@ gScriptCmdTable:: @ 814AE30
 	.4byte s6F_multichoice
 	.4byte sub_8067298
 	.4byte s76_close_picture_box
-	.4byte sub_80672E8
+	.4byte s77_showcontestwinner
 	.4byte sub_806730C
 	.4byte s79_give_pokemon
 	.4byte s7A_create_egg
