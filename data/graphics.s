@@ -2,14 +2,17 @@
 
 	.section gfx_data, "aw", %progbits
 
+	.align 2
 gUnknown_08D00000:: @ 8D00000
 	.incbin "graphics/interface/menu.4bpp.lz" @ menu window and arrows
 
+	.align 2
 gUnknown_08D004E0:: @ 8D004E0
 	.incbin "graphics/interface/menu.gbapal.lz"
 
+	.align 2
 gUnknown_08D00524:: @ 8D00524
-	.incbin "baserom.gba", 0x00d00524, 0x1000
+	.incbin "graphics/interface/menu_map.bin"
 
 @ 8D01524
 	.include "data/graphics/pokemon/circled_question_mark_graphics.s"
