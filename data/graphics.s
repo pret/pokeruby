@@ -2259,7 +2259,7 @@ gUnknown_08E5DC04:: @ 8E5DC04
 	.incbin "baserom.gba", 0x00e5dc04, 0x28
 
 gUnknown_08E5DC2C:: @ 8E5DC2C
-	.incbin "baserom.gba", 0x00e5dc2c, 0x210
+	.incbin "graphics/battle_transitions/vs.4bpp.lz"
 
 	.align 2
 gBattleTerrainTiles_TallGrass:: @ 8E5DE3C
@@ -2943,7 +2943,7 @@ gUnknown_08E783FC:: @ 8E783FC
 	.incbin "baserom.gba", 0x00e783fc, 0x440
 
 gUnknown_08E7883C:: @ 8E7883C
-	.incbin "baserom.gba", 0x00e7883c, 0xa8
+	.incbin "graphics/battle_transitions/vs.gbapal.lz"
 
 gUnknown_08E788E4:: @ 8E788E4
 	.incbin "baserom.gba", 0x00e788e4, 0x1a0

@@ -825,7 +825,7 @@ gSpriteTemplate_81F958C:: @ 81F958C
 
 	.align 2
 gUnknown_081F95A4:: @ 81F95A4
-	obj_tiles 0x08e5dc2c, 4096, 0x2710
+	obj_tiles gUnknown_08E5DC2C, 4096, 0x2710
 
 	.align 2
 gBattleTerrainTable:: @ 81F95AC
@@ -12777,7 +12777,7 @@ gUnknown_083C1F74:: @ 83C1F74
 	obj_tiles 0x08e78bb4, 2048, 0x2710
 
 gUnknown_083C1F7C:: @ 83C1F7C
-	obj_pal 0x08E7883C, 0x2710
+	obj_pal gUnknown_08E7883C, 0x2710
 
 	.align 2
 gOamData_83C1F84:: @ 83C1F84
