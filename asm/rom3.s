@@ -19331,7 +19331,7 @@ _080130BC:
 	b _08013120
 	.align 2, 0
 _08013100: .4byte 0x02024a80
-_08013104: .4byte gUnknown_08208244
+_08013104: .4byte gStatStageRatios
 _08013108: .4byte 0x02024df0
 _0801310C:
 	ldrh r0, [r4, 0x2E]
@@ -19441,7 +19441,7 @@ _080131DC: .4byte 0x020239f8
 _080131E0: .4byte 0x00000809
 _080131E4: .4byte 0x02024a80
 _080131E8: .4byte 0x02024d1c
-_080131EC: .4byte gUnknown_08208244
+_080131EC: .4byte gStatStageRatios
 _080131F0: .4byte 0x02024df0
 _080131F4:
 	ldrh r0, [r4, 0x2E]
@@ -99991,7 +99991,7 @@ _0803BFE8: .4byte 0x02024e80
 _0803BFEC: .4byte gBattleMoves
 _0803BFF0: .4byte 0x02024be6
 _0803BFF4: .4byte 0x02024c0d
-_0803BFF8: .4byte gUnknown_08208244
+_0803BFF8: .4byte gStatStageRatios
 _0803BFFC:
 	adds r5, r6, 0
 	b _0803C01E
@@ -100037,7 +100037,7 @@ _0803C01E:
 	ldrsb r0, [r3, r0]
 	b _0803C064
 	.align 2, 0
-_0803C050: .4byte gUnknown_08208244
+_0803C050: .4byte gStatStageRatios
 _0803C054: .4byte 0x02024e80
 _0803C058:
 	ldr r3, [sp, 0x14]
@@ -100106,7 +100106,7 @@ _0803C0A8:
 	lsls r5, r0, 1
 	b _0803C0EA
 	.align 2, 0
-_0803C0DC: .4byte gUnknown_08208244
+_0803C0DC: .4byte gStatStageRatios
 _0803C0E0: .4byte 0x020239f8
 _0803C0E4:
 	lsrs r0, r5, 31
@@ -100167,7 +100167,7 @@ _0803C132:
 _0803C148: .4byte 0x020239f8
 _0803C14C: .4byte gBattleMoves
 _0803C150: .4byte 0x02024c0d
-_0803C154: .4byte gUnknown_08208244
+_0803C154: .4byte gStatStageRatios
 _0803C158:
 	mov r5, r8
 	b _0803C17A
@@ -100210,7 +100210,7 @@ _0803C17A:
 	ldr r2, _0803C1A8
 	b _0803C1BC
 	.align 2, 0
-_0803C1A8: .4byte gUnknown_08208244
+_0803C1A8: .4byte gStatStageRatios
 _0803C1AC: .4byte 0x02024e80
 _0803C1B0:
 	ldr r3, [sp, 0x18]
@@ -100266,7 +100266,7 @@ _0803C1D6:
 	lsls r5, r0, 1
 	b _0803C22A
 	.align 2, 0
-_0803C21C: .4byte gUnknown_08208244
+_0803C21C: .4byte gStatStageRatios
 _0803C220: .4byte 0x020239f8
 _0803C224:
 	lsrs r0, r5, 31

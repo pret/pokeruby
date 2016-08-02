@@ -1666,16 +1666,31 @@ gUnknown_081FC1D0:: @ 81FC1D0
 	.include "data/level_up_learnset_pointers.s"
 
 gUnknown_08208238:: @ 8208238
-	.incbin "baserom.gba", 0x00208238, 0x4
+	.byte 0x03, 0x0C, 0x30, 0xC0
 
 gUnknown_0820823C:: @ 820823C
-	.incbin "baserom.gba", 0x0020823c, 0x4
+	.byte 0xFC, 0xF3, 0xCF, 0x3F
 
 gUnknown_08208240:: @ 8208240
-	.incbin "baserom.gba", 0x00208240, 0x4
+	.byte 0x01, 0x04, 0x10, 0x40
 
-gUnknown_08208244:: @ 8208244
-	.incbin "baserom.gba", 0x00208244, 0x1f
+gStatStageRatios:: @ 8208244
+	.byte 10, 40 @ -6
+	.byte 10, 35 @ -5
+	.byte 10, 30 @ -4
+	.byte 10, 25 @ -3
+	.byte 10, 20 @ -2
+	.byte 10, 15 @ -1
+	.byte 10, 10 @  0
+	.byte 15, 10 @ +1
+	.byte 20, 10 @ +2
+	.byte 25, 10 @ +3
+	.byte 30, 10 @ +4
+	.byte 35, 10 @ +5
+	.byte 40, 10 @ +6
+
+@ abbreviation of Game Freak
+	.string "ゲーフリ$"
 
 gUnknown_08208263:: @ 8208263
 	.incbin "baserom.gba", 0x00208263, 0x25
