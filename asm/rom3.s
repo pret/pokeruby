@@ -110243,7 +110243,7 @@ sine: @ 8040DEC
 	asrs r0, 16
 	bx lr
 	.align 2, 0
-_08040E04: .4byte gUnknown_08208344
+_08040E04: .4byte gSineTable
 	thumb_func_end sine
 
 	thumb_func_start cosine
@@ -110262,7 +110262,7 @@ cosine: @ 8040E08
 	asrs r0, 16
 	bx lr
 	.align 2, 0
-_08040E24: .4byte gUnknown_08208344
+_08040E24: .4byte gSineTable
 	thumb_func_end cosine
 
 	thumb_func_start sine2
@@ -110291,7 +110291,7 @@ sine2: @ 8040E28
 	lsls r0, r1, 16
 	b _08040E64
 	.align 2, 0
-_08040E5C: .4byte gUnknown_082085C4
+_08040E5C: .4byte gSineDegreeTable
 _08040E60:
 	lsls r0, r1, 16
 	negs r0, r0

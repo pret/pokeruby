@@ -1759,11 +1759,11 @@ gUnknown_0820831A:: @ 820831A
 gUnknown_08208337:: @ 8208337
 	.string "ニドラン♀$", 13
 
-gUnknown_08208344:: @ 8208344
-	.incbin "baserom.gba", 0x00208344, 0x280
+@ 8208344
+	.include "data/sine_table.s"
 
-gUnknown_082085C4:: @ 82085C4
-	.incbin "baserom.gba", 0x002085c4, 0x168
+@ 82085C4
+	.include "data/sine_degree_table.s"
 
 gUnknown_0820872C:: @ 820872C
 	.incbin "baserom.gba", 0x0020872c, 0x80
