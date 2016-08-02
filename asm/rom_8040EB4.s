@@ -471,7 +471,7 @@ _080411FA:
 	bx r1
 	.align 2, 0
 _08041208: .4byte 0x00001121
-_0804120C: .4byte gUnknown_082087DC
+_0804120C: .4byte gCrc16Table
 	thumb_func_end unref_sub_80411CC
 
 	thumb_func_start BlendPalette

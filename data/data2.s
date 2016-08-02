@@ -1721,8 +1721,10 @@ gSpriteTemplate_82087AC:: @ 82087AC
 gUnknown_082087C4:: @ 82087C4
 	.incbin "baserom.gba", 0x002087c4, 0x18
 
-gUnknown_082087DC:: @ 82087DC
-	.incbin "baserom.gba", 0x002087dc, 0xa00
+@ 82087DC
+	.include "data/crc16_table.s"
+
+	.incbin "baserom.gba", 0x002089dc, 0x800
 
 @ 82091DC
 	.include "data/egg_moves.s"
