@@ -22,6 +22,20 @@ enum
     FEMALE
 };
 
+enum
+{
+    OPTIONS_BUTTON_MODE_NORMAL,
+    OPTIONS_BUTTON_MODE_LR,
+    OPTIONS_BUTTON_MODE_L_EQUALS_A
+};
+
+enum
+{
+    OPTIONS_TEXT_SPEED_SLOW,
+    OPTIONS_TEXT_SPEED_MID,
+    OPTIONS_TEXT_SPEED_FAST
+};
+
 struct Coords16
 {
     s16 x;
@@ -40,28 +54,16 @@ struct SaveBlock2
 {
     u8 playerName[8];
 
-    // 0 = Male
-    // 1 = Female
-    u8 playerGender;
+    u8 playerGender; // MALE, FEMALE
     u8 sb2_field_9;
     u8 playerTrainerId[4];
     u16 playTimeHours;
     u8 playTimeMinutes;
     u8 playTimeSeconds;
     u8 playTimeVBlanks;
-
-    // 0 = "NORMAL"
-    // 1 = "LR"
-    // 2 = "L=A"
-    u8 optionsButtonMode;
-
-    // 0 = "SLOW"
-    // 1 = "MID"
-    // 2 = "FAST"
-    u8 optionsTextSpeed:3;
-
-    // Specifies one of the 20 decorative borders for text boxes
-    u8 optionsTextBoxFrameType:5;
+    u8 optionsButtonMode;  // OPTIONS_BUTTON_MODE_[NORMAL/LR/L_EQUALS_A]
+    u8 optionsTextSpeed:3; // OPTIONS_TEXT_SPEED_[SLOW/MID/FAST]
+    u8 optionsWindowFrameType:5; // Specifies one of the 20 decorative borders for text boxes
     u8 filler[0x83];
     struct Time localTimeOffset;
 };
