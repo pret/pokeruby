@@ -1921,10 +1921,10 @@ gUnknown_0820A4AC:: @ 820A4AC
 
 	.align 2
 gUnknown_0820A4B4:: @ 820A4B4
-	obj_tiles 0x08d0314c, 256, 0xd704
-	obj_tiles 0x08d0314c, 288, 0xd705
-	obj_tiles 0x08d0314c, 256, 0xd706
-	obj_tiles 0x08d0314c, 288, 0xd707
+	obj_tiles gBlankGfxCompressed, 256, 0xd704
+	obj_tiles gBlankGfxCompressed, 288, 0xd705
+	obj_tiles gBlankGfxCompressed, 256, 0xd706
+	obj_tiles gBlankGfxCompressed, 288, 0xd707
 
 	.align 2
 gUnknown_0820A4D4:: @ 820A4D4
@@ -1998,13 +1998,13 @@ gUnknown_0820A754:: @ 820A754
 
 	.align 2
 gUnknown_0820A764:: @ 820A764
-	obj_pal 0x08d1212c, 0xd710
-	obj_pal 0x08d1212c, 0xd711
+	obj_pal gUnknown_08D1212C, 0xd710
+	obj_pal gUnknown_08D1212C, 0xd711
 
 	.align 2
 gUnknown_0820A774:: @ 820A774
-	obj_pal 0x08d1214c, 0xd712
-	obj_pal 0x08d1214c, 0xd713
+	obj_pal gUnknown_08D1214C, 0xd712
+	obj_pal gUnknown_08D1214C, 0xd713
 
 gUnknown_0820A784:: @ 820A784
 	.incbin "baserom.gba", 0x0020a784, 0x18

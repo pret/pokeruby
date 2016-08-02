@@ -104,6 +104,7 @@ gInterfacePal_PremierBall::
 
 gUnknown_08D030D0:: @ 8D030D0
 	.incbin "graphics/interface/ball_open.4bpp.lz"
+gBlankGfxCompressed::
 	.incbin "graphics/interface/blank.4bpp.lz"
 
 	.align 2
