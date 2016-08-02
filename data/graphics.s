@@ -885,8 +885,12 @@ gBattleAnimSpritePalette_114:: @ 8D1106C
 gBattleAnimSpriteSheet_115:: @ 8D11B74
 	.incbin "graphics/battle_anims/sprites/115.4bpp.lz"
 
-	.incbin "baserom.gba", 0xd11ca4, 0x4C8
-
+	.incbin "baserom.gba", 0xd11ca4, 0x488
+	
+gUnknown_08D1212C::
+	.incbin "graphics/interface/battle_window.gbapal"
+gUnknown_08D1214C::
+	.incbin "baserom.gba", 0xd1214c, 0x20
 gUnknown_08D1216C:: @ 8D1216C
 	.incbin "baserom.gba", 0x00d1216c, 0xec0
 
@@ -1471,7 +1475,27 @@ gBattleAnimSpriteSheet_186:: @ 8D1F13C
 gBattleAnimSpritePalette_186:: @ 8D1F508
 	.incbin "graphics/battle_anims/sprites/186.gbapal.lz"
 
-	.incbin "baserom.gba", 0xd1f52c, 0xa54
+	.align 2
+gBattleWindowLargeGfx::
+	.incbin "graphics/interface/battle_window.4bpp.lz"
+	
+	.align 2
+gBattleWindowSmallGfx::
+	.incbin "graphics/interface/battle_window2.4bpp.lz"
+	
+	.align 2
+gBattleWindowSmall2Gfx::
+	.incbin "graphics/interface/battle_window3.4bpp.lz"
+	
+	.align 2
+gBattleWindowSmall3Gfx::
+	.incbin "graphics/interface/battle_window4.4bpp.lz"
+	
+	.align 2
+gBattleWindowLarge2Gfx:: @ 8d1fc94
+	.incbin "graphics/interface/battle_window5.4bpp.lz"
+
+	.incbin "baserom.gba", 0xd1ff0C, 0x74
 
 	.align 2
 gBattleAnimSpriteSheet_014:: @ 8D1FF80
@@ -2259,7 +2283,7 @@ gUnknown_08E5DC04:: @ 8E5DC04
 	.incbin "baserom.gba", 0x00e5dc04, 0x28
 
 gUnknown_08E5DC2C:: @ 8E5DC2C
-	.incbin "baserom.gba", 0x00e5dc2c, 0x210
+	.incbin "graphics/battle_transitions/vs.4bpp.lz"
 
 	.align 2
 gBattleTerrainTiles_TallGrass:: @ 8E5DE3C
@@ -2816,16 +2840,19 @@ gUnknown_08E71894:: @ 8E71894
 	.incbin "baserom.gba", 0x00e71894, 0xa0
 
 gUnknown_08E71934:: @ 8E71934
-	.incbin "baserom.gba", 0x00e71934, 0xdb0
+	.incbin "baserom.gba", 0x00e71934, 0x3dc
+
+gUnknown_08E71D10:: @ 8E71D10
+	.incbin "baserom.gba", 0x00e71d10, 0x9d4
 
 gUnknown_08E726E4:: @ 8E726E4
 	.incbin "baserom.gba", 0x00e726e4, 0x17c
 
-gUnknown_08E72860:: @ 8E72860
-	.incbin "baserom.gba", 0x00e72860, 0x1f0
+gStatusGfx_Icons:: @ 8E72860
+	.incbin "graphics/interface/status_icons.4bpp.lz"
 
-gUnknown_08E72A50:: @ 8E72A50
-	.incbin "baserom.gba", 0x00e72a50, 0x28
+gStatusPal_Icons:: @ 8E72A50
+	.incbin "graphics/interface/status_icons.gbapal.lz"
 
 gUnknown_08E72A78:: @ 8E72A78
 	.incbin "baserom.gba", 0x00e72a78, 0x9f0
@@ -2940,7 +2967,7 @@ gUnknown_08E783FC:: @ 8E783FC
 	.incbin "baserom.gba", 0x00e783fc, 0x440
 
 gUnknown_08E7883C:: @ 8E7883C
-	.incbin "baserom.gba", 0x00e7883c, 0xa8
+	.incbin "graphics/battle_transitions/vs.gbapal.lz"
 
 gUnknown_08E788E4:: @ 8E788E4
 	.incbin "baserom.gba", 0x00e788e4, 0x1a0
@@ -3215,7 +3242,13 @@ gUnknown_08E86258:: @ 8E86258
 	.incbin "baserom.gba", 0x00e86258, 0x500
 
 gUnknown_08E86758:: @ 8E86758
-	.incbin "baserom.gba", 0x00e86758, 0x139e
+	.incbin "baserom.gba", 0x00e86758, 0xd70
+
+gUnknown_08E874C8::
+	.incbin "baserom.gba", 0x00e874c8, 0x62c
+
+gUnknown_08E87AF4::
+	.incbin "baserom.gba", 0x00e87af4, 0x2
 
 gUnknown_08E87AF6:: @ 8E87AF6
 	.incbin "baserom.gba", 0x00e87af6, 0x60
