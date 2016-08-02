@@ -1720,22 +1720,44 @@ gSpriteTemplate_8208288:: @ 8208288
 	spr_template 0xFFFF, 0, gOamData_81F96E8, NULL, gSpriteImageTable_81E7A70, gSpriteAffineAnimTable_81E7BEC, oac_poke_opponent
 
 gUnknown_082082E8:: @ 82082E8
-	.incbin "baserom.gba", 0x002082e8, 0xa
+	.byte TRAINER_CLASS_YOUNGSTER, TRAINER_CLASS_BUG_CATCHER,  TRAINER_CLASS_RICH_BOY, TRAINER_CLASS_CAMPER,    TRAINER_CLASS_COOL_TRAINER_M
+	.byte TRAINER_CLASS_LASS,      TRAINER_CLASS_SCHOOL_KID_F, TRAINER_CLASS_LADY,     TRAINER_CLASS_PICNICKER, TRAINER_CLASS_COOL_TRAINER_F
 
 gUnknown_082082F2:: @ 82082F2
-	.incbin "baserom.gba", 0x002082f2, 0x6
+	.byte 0x1A, 0x1B, 0x1C, 0x1D, 0x1F, 0x1E
 
 gUnknown_082082F8:: @ 82082F8
-	.incbin "baserom.gba", 0x002082f8, 0x6
+	.byte 1, 1, 3, 2, 4, 6
 
 gUnknown_082082FE:: @ 82082FE
-	.incbin "baserom.gba", 0x002082fe, 0x1c
+	.byte  5,  3,   2
+	.byte  5,  3,   2
+	.byte  1,  1,   0
+	.byte  3,  2,   1
+	.byte  1,  1,   0
+	.byte  1,  1,   1
+	.byte -1, -1,  -1
+	.byte -5, -5, -10
+	.byte -5, -5, -10
 
+	.align 1
 gUnknown_0820831A:: @ 820831A
-	.incbin "baserom.gba", 0x0020831a, 0x1d
+	.2byte    0xF
+	.2byte   0x13
+	.2byte   0x39
+	.2byte   0x46
+	.2byte   0x94
+	.2byte   0xF9
+	.2byte   0x7F
+	.2byte  0x123
+	.2byte 0xFFFF
 
+@ "Nidoran♂" Japanese name
+	.string "ニドラン♂$", 11
+
+@ "Nidoran♀" Japanese name
 gUnknown_08208337:: @ 8208337
-	.incbin "baserom.gba", 0x00208337, 0xd
+	.string "ニドラン♀$", 13
 
 gUnknown_08208344:: @ 8208344
 	.incbin "baserom.gba", 0x00208344, 0x280
