@@ -6993,8 +6993,16 @@ gUnknown_08376010:: @ 8376010
 	.4byte MetatileBehavior_IsShallowFlowingWater
 	.4byte sub_8056D9C
 
+@ This table specifies the animation that happens when the player lands on the ground
+@ after jumping over a ledge.
+@ Not sure what the actual values represent.  Might be offsets for an animation table.
 gUnknown_08376028:: @ 8376028
-	.incbin "baserom.gba", 0x00376028, 0x18
+	.4byte 0x00001000  @ Landing in regular grass
+	.4byte 0x00002000  @ Landing in tall grass (?)
+	.4byte 0x00004000  @ Landing on firm surface
+	.4byte 0x00008000  @ Landing on water
+	.4byte 0x00004000  @ Landing on firm surface
+	.4byte 0x00010000  @ Landing on normal ground (dirt)
 
 	.align 2
 gUnknown_08376040:: @ 8376040
