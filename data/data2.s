@@ -6993,9 +6993,8 @@ gUnknown_08376010:: @ 8376010
 	.4byte MetatileBehavior_IsShallowFlowingWater
 	.4byte sub_8056D9C
 
-@ This table specifies the animation that happens when the player lands on the ground
-@ after jumping over a ledge.
-@ Not sure what the actual values represent.  Might be offsets for an animation table.
+@ This table contains bitmasks used for determining the animation that happens when the player lands on 
+@ the ground after jumping over a ledge.
 gUnknown_08376028:: @ 8376028
 	.4byte 0x00001000  @ Landing in regular grass
 	.4byte 0x00002000  @ Landing in tall grass (?)
