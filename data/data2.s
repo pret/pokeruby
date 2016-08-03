@@ -9038,10 +9038,17 @@ gUnknown_0837F4B8:: @ 837F4B8
 gUnknown_0837F578:: @ 837F578
 	.incbin "baserom.gba", 0x0037f578, 0x20
 
-gUnknown_0837F598:: @ 837F598
-	.incbin "baserom.gba", 0x0037f598, 0x10
+@ One entry for each of the four Castform forms.
+@ Coords are probably front pic coords or back pic coords, but this data does not seem to be
+@ used during battle, party summary, or pokedex screens.
+gUnknownCastformCoords_0837F598:: @ 837F598
+	.byte  68, 17, 0, 0
+	.byte 102,  9, 0, 0
+	.byte  70,  9, 0, 0
+	.byte 134,  8, 0, 0
 
-gUnknown_0837F5A8:: @ 837F5A8
+@ One entry for each of the four Castform forms. Probably a palette index.
+gUnknownCastformData_0837F5A8:: @ 837F5A8
 	.byte 0xD, 0xE, 0xD, 0xD
 
 gUnknown_0837F5AC:: @ 837F5AC
