@@ -12480,11 +12480,11 @@ gSpriteAnimTable_83C1248:: @ 83C1248
 
 	.align 2
 gUnknown_083C1270:: @ 83C1270
-	obj_tiles 0x08e7274c, 1024, 0x7530
+	obj_tiles gUnknown_08E7274C, 1024, 0x7530
 
 	.align 2
 gUnknown_083C1278:: @ 83C1278
-	obj_pal 0x08e72848, 0x7530
+	obj_pal gUnknown_08E72848, 0x7530
 
 	.align 2
 gSpriteTemplate_83C1280:: @ 83C1280
