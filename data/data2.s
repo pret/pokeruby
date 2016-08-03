@@ -1626,8 +1626,13 @@ gUnknown_081FB048:: @ 81FB048
 @ 81FB12C
 	.include "data/battle_moves.s"
 
+	.align 2
 gUnknown_081FC1D0:: @ 81FC1D0
-	.incbin "baserom.gba", 0x001fc1d0, 0x10
+	.2byte 0x34, 0x10, 0x101
+	.space 2
+
+	.2byte -1, -1, -1
+	.space 2
 
 @ 81FC1E0
 	.include "data/pokedex_order.s"
@@ -7105,14 +7110,15 @@ gUnknown_08376180:: @ 8376180
 	.4byte Unknown_8376168
 	.4byte Unknown_8376178
 
+	.align 1
 gUnknown_08376194:: @ 8376194
-	.incbin "baserom.gba", 0x00376194, 0xA
+	.2byte 16, 8, 6, 4, 2
 Unknown_837619E:
-	.incbin "baserom.gba", 0x0037619e, 0x10
+	.byte  -4,  -6,  -8, -10, -11, -12, -12, -12, -11, -10,  -9,  -8,  -6,  -4,   0,   0
 Unknown_83761AE:
-	.incbin "baserom.gba", 0x003761ae, 0x10
+	.byte   0,  -2,  -3,  -4,  -5,  -6,  -6,  -6,  -5,  -5,  -4,  -3,  -2,   0,   0,   0
 Unknown_83761BE:
-	.incbin "baserom.gba", 0x003761be, 0x12
+	.byte  -2,  -4,  -6,  -8,  -9, -10, -10, -10,  -9,  -8,  -6,  -5,  -3,  -2,   0,   0
 
 	.align 2
 gUnknown_083761D0:: @ 83761D0
@@ -7120,17 +7126,19 @@ gUnknown_083761D0:: @ 83761D0
 	.4byte Unknown_83761AE
 	.4byte Unknown_83761BE
 
+	.align 1
 gUnknown_083761DC:: @ 83761DC
-	.incbin "baserom.gba", 0x003761dc, 0x6
+	.2byte 0x10, 0x10, 0x20
 
 gUnknown_083761E2:: @ 83761E2
-	.incbin "baserom.gba", 0x003761e2, 0x4
+	.byte 0, 0, 1
 
+	.align 1
 gUnknown_083761E6:: @ 83761E6
-	.incbin "baserom.gba", 0x003761e6, 0x6
+	.2byte 0x20, 0x20, 0x40
 
 gUnknown_083761EC:: @ 83761EC
-	.incbin "baserom.gba", 0x003761ec, 0x4
+	.byte 1, 1, 2
 
 	.align 2
 gUnknown_083761F0:: @ 83761F0
@@ -9260,10 +9268,10 @@ gUnknown_0837F598:: @ 837F598
 	.incbin "baserom.gba", 0x0037f598, 0x10
 
 gUnknown_0837F5A8:: @ 837F5A8
-	.incbin "baserom.gba", 0x0037f5a8, 0x4
+	.byte 0xD, 0xE, 0xD, 0xD
 
 gUnknown_0837F5AC:: @ 837F5AC
-	.space 4
+	.byte 0, 0, 0, 0
 
 	.align 2
 gSpriteTemplate_837F5B0:: @ 837F5B0
