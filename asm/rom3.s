@@ -1,3 +1,4 @@
+	.include "constants/gba_constants.s"
 	.include "asm/macros.s"
 
 	.syntax unified
@@ -196,7 +197,7 @@ _080097EE:
 	bx r1
 	.align 2, 0
 _08009858: .4byte 0x0000ffff
-_0800985C: .4byte 0x04000040
+_0800985C: .4byte REG_WIN0H
 _08009860: .4byte 0x04000208
 _08009864: .4byte 0x04000200
 _08009868: .4byte VBlankCB_MainMenu
@@ -255,11 +256,11 @@ _08009894:
 	b _080099AC
 	.align 2, 0
 _080098D4: .4byte 0x0202f388
-_080098D8: .4byte 0x04000040
-_080098DC: .4byte 0x04000044
-_080098E0: .4byte 0x04000048
+_080098D8: .4byte REG_WIN0H
+_080098DC: .4byte REG_WIN0V
+_080098E0: .4byte REG_WININ
 _080098E4: .4byte 0x00001111
-_080098E8: .4byte 0x04000052
+_080098E8: .4byte REG_BLDALPHA
 _080098EC: .4byte 0x03005eb8
 _080098F0:
 	cmp r4, 0x4
@@ -491,11 +492,11 @@ Task_CheckRtc: @ 8009A64
 	b _08009B10
 	.align 2, 0
 _08009AC0: .4byte 0x0202f388
-_08009AC4: .4byte 0x04000040
-_08009AC8: .4byte 0x04000044
-_08009ACC: .4byte 0x04000048
+_08009AC4: .4byte REG_WIN0H
+_08009AC8: .4byte REG_WIN0V
+_08009ACC: .4byte REG_WININ
 _08009AD0: .4byte 0x00001111
-_08009AD4: .4byte 0x04000052
+_08009AD4: .4byte REG_BLDALPHA
 _08009AD8: .4byte 0x03004b20
 _08009ADC: .4byte Task_DrawMainMenu
 _08009AE0:
@@ -625,10 +626,10 @@ _08009B8E:
 	b _08009C0A
 	.align 2, 0
 _08009BDC: .4byte 0x0202f388
-_08009BE0: .4byte 0x04000040
-_08009BE4: .4byte 0x04000048
+_08009BE0: .4byte REG_WIN0H
+_08009BE4: .4byte REG_WININ
 _08009BE8: .4byte 0x00001111
-_08009BEC: .4byte 0x04000052
+_08009BEC: .4byte REG_BLDALPHA
 _08009BF0: .4byte gSaveBlock2
 _08009BF4: .4byte 0x00007e04
 _08009BF8:
@@ -861,7 +862,7 @@ _08009DB4:
 	b _08009E74
 	.align 2, 0
 _08009DF0: .4byte 0x0000ffff
-_08009DF4: .4byte 0x04000040
+_08009DF4: .4byte REG_WIN0H
 _08009DF8: .4byte 0x03004b20
 _08009DFC: .4byte MainMenuPressedB
 _08009E00:
@@ -1146,9 +1147,9 @@ _0800A002:
 	ldr r2, _0800A014
 	b _0800A0A8
 	.align 2, 0
-_0800A008: .4byte 0x04000040
+_0800A008: .4byte REG_WIN0H
 _0800A00C: .4byte 0x000009e7
-_0800A010: .4byte 0x04000044
+_0800A010: .4byte REG_WIN0V
 _0800A014: .4byte 0x0000011f
 _0800A018:
 	ldr r1, _0800A020
@@ -1156,7 +1157,7 @@ _0800A018:
 	adds r0, r4, 0
 	b _0800A0AA
 	.align 2, 0
-_0800A020: .4byte 0x04000044
+_0800A020: .4byte REG_WIN0V
 _0800A024: .4byte 0x0000213f
 _0800A028:
 	cmp r2, 0x1
@@ -1170,7 +1171,7 @@ _0800A034:
 	ldr r2, _0800A040
 	b _0800A0A8
 	.align 2, 0
-_0800A03C: .4byte 0x04000044
+_0800A03C: .4byte REG_WIN0V
 _0800A040: .4byte 0x0000013f
 _0800A044:
 	ldr r1, _0800A04C
@@ -1178,14 +1179,14 @@ _0800A044:
 	adds r0, r4, 0
 	b _0800A0AA
 	.align 2, 0
-_0800A04C: .4byte 0x04000044
+_0800A04C: .4byte REG_WIN0V
 _0800A050: .4byte 0x0000415f
 _0800A054:
 	ldr r1, _0800A05C
 	ldr r2, _0800A060
 	b _0800A0A8
 	.align 2, 0
-_0800A05C: .4byte 0x04000044
+_0800A05C: .4byte REG_WIN0V
 _0800A060: .4byte 0x0000617f
 _0800A064:
 	cmp r2, 0x1
@@ -1202,14 +1203,14 @@ _0800A074:
 	adds r0, r4, 0
 	b _0800A0AA
 	.align 2, 0
-_0800A07C: .4byte 0x04000044
+_0800A07C: .4byte REG_WIN0V
 _0800A080: .4byte 0x0000013f
 _0800A084:
 	ldr r1, _0800A08C
 	ldr r2, _0800A090
 	b _0800A0A8
 	.align 2, 0
-_0800A08C: .4byte 0x04000044
+_0800A08C: .4byte REG_WIN0V
 _0800A090: .4byte 0x0000415f
 _0800A094:
 	ldr r1, _0800A09C
@@ -1217,7 +1218,7 @@ _0800A094:
 	adds r0, r4, 0
 	b _0800A0AA
 	.align 2, 0
-_0800A09C: .4byte 0x04000044
+_0800A09C: .4byte REG_WIN0V
 _0800A0A0: .4byte 0x0000617f
 _0800A0A4:
 	ldr r1, _0800A0B4
@@ -1230,7 +1231,7 @@ _0800A0AA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800A0B4: .4byte 0x04000044
+_0800A0B4: .4byte REG_WIN0V
 _0800A0B8: .4byte 0x0000819f
 	thumb_func_end HighlightCurrentMenuItem
 
@@ -1476,13 +1477,13 @@ Task_Birch1: @ 800A1F4
 	.align 2, 0
 _0800A2B0: .4byte gWindowConfig_81E6C3C
 _0800A2B4: .4byte gWindowConfig_81E6CE4
-_0800A2B8: .4byte 0x04000040
+_0800A2B8: .4byte REG_WIN0H
 _0800A2BC: .4byte gUnknown_081E768C
 _0800A2C0: .4byte gUnknown_081E7834
 _0800A2C4: .4byte 0x06003800
 _0800A2C8: .4byte gUnknown_081E764C
 _0800A2CC: .4byte gUnknown_081E796C
-_0800A2D0: .4byte 0x0400000a
+_0800A2D0: .4byte REG_BG1CNT
 _0800A2D4: .4byte 0x00000703
 _0800A2D8: .4byte 0x03004b20
 _0800A2DC: .4byte task_new_game_prof_birch_speech_2
@@ -1936,7 +1937,7 @@ task_new_game_prof_birch_speech_11: @ 800A624
 	b _0800A65C
 	.align 2, 0
 _0800A64C: .4byte 0x03004b20
-_0800A650: .4byte 0x04000014
+_0800A650: .4byte REG_BG1HOFS
 _0800A654:
 	ldr r0, _0800A660
 	strh r0, [r2, 0x10]
@@ -2707,7 +2708,7 @@ sub_800AC20: @ 800AC20
 	b _0800AC50
 	.align 2, 0
 _0800AC44: .4byte 0x03004b20
-_0800AC48: .4byte 0x04000014
+_0800AC48: .4byte REG_BG1HOFS
 _0800AC4C:
 	ldr r0, _0800AC54
 	str r0, [r2]
@@ -3417,14 +3418,14 @@ _0800B178:
 	.align 2, 0
 _0800B210: .4byte 0x02020004
 _0800B214: .4byte 0x03004b20
-_0800B218: .4byte 0x04000014
+_0800B218: .4byte REG_BG1HOFS
 _0800B21C: .4byte 0x0000ffc4
-_0800B220: .4byte 0x04000040
+_0800B220: .4byte REG_WIN0H
 _0800B224: .4byte 0x04000208
 _0800B228: .4byte 0x04000200
 _0800B22C: .4byte VBlankCB_MainMenu
 _0800B230: .4byte CB2_MainMenu
-_0800B234: .4byte 0x0400000a
+_0800B234: .4byte REG_BG1CNT
 _0800B238: .4byte 0x00000703
 	thumb_func_end new_game_prof_birch_speech_part2_start
 
@@ -3698,7 +3699,7 @@ _0800B44E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800B454: .4byte 0x04000052
+_0800B454: .4byte REG_BLDALPHA
 	thumb_func_end sub_800B3EC
 
 	thumb_func_start sub_800B458
@@ -3752,7 +3753,7 @@ sub_800B458: @ 800B458
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800B4BC: .4byte 0x04000050
+_0800B4BC: .4byte REG_BLDCNT
 _0800B4C0: .4byte 0x03004b20
 _0800B4C4: .4byte sub_800B3EC
 	thumb_func_end sub_800B458
@@ -3813,7 +3814,7 @@ _0800B52A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800B530: .4byte 0x04000052
+_0800B530: .4byte REG_BLDALPHA
 	thumb_func_end sub_800B4C8
 
 	thumb_func_start sub_800B534
@@ -3869,7 +3870,7 @@ sub_800B534: @ 800B534
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800B59C: .4byte 0x04000050
+_0800B59C: .4byte REG_BLDCNT
 _0800B5A0: .4byte 0x03004b20
 _0800B5A4: .4byte sub_800B4C8
 	thumb_func_end sub_800B534
@@ -8350,11 +8351,11 @@ sub_800D6D4: @ 800D6D4
 	.align 2, 0
 _0800D72C: .4byte 0x04000208
 _0800D730: .4byte 0x04000200
-_0800D734: .4byte 0x04000004
+_0800D734: .4byte REG_DISPSTAT
 _0800D738: .4byte 0x00009c04
 _0800D73C: .4byte 0x00005e05
 _0800D740: .4byte 0x00005a0b
-_0800D744: .4byte 0x04000050
+_0800D744: .4byte REG_BLDCNT
 _0800D748: .4byte 0x0000bf40
 	thumb_func_end sub_800D6D4
 
@@ -9679,9 +9680,9 @@ _0800E2B0: .4byte 0x0600f000
 _0800E2B4: .4byte gUnknown_08E5DC2C
 _0800E2B8: .4byte 0x06010000
 _0800E2BC: .4byte gUnknown_08E5DC04
-_0800E2C0: .4byte 0x0400000a
+_0800E2C0: .4byte REG_BG1CNT
 _0800E2C4: .4byte 0x00005c04
-_0800E2C8: .4byte 0x04000048
+_0800E2C8: .4byte REG_WININ
 _0800E2CC: .4byte 0x030041b4
 _0800E2D0: .4byte 0x0000ff5c
 _0800E2D4: .4byte 0x03004280
@@ -10437,7 +10438,7 @@ _0800E868:
 	b _0800E97E
 	.align 2, 0
 _0800E90C: .4byte 0x05006000
-_0800E910: .4byte 0x0400004c
+_0800E910: .4byte REG_MOSAIC
 _0800E914: .4byte 0x00005051
 _0800E918: .4byte 0x030042c4
 _0800E91C: .4byte 0x03004240
@@ -12908,8 +12909,8 @@ _0800FCEE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800FCF4: .4byte 0x04000006
-_0800FCF8: .4byte 0x04000008
+_0800FCF4: .4byte REG_VCOUNT
+_0800FCF8: .4byte REG_BG0CNT
 	thumb_func_end sub_800FCD4
 
 	thumb_func_start sub_800FCFC
@@ -12971,7 +12972,7 @@ sub_800FCFC: @ 800FCFC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800FD78: .4byte 0x04000010
+_0800FD78: .4byte REG_BG0HOFS
 _0800FD7C: .4byte 0x030042a4
 _0800FD80: .4byte 0x030042a0
 _0800FD84: .4byte 0x030042c0
@@ -13443,7 +13444,7 @@ _08010084:
 	bx r0
 	.align 2, 0
 _08010144: .4byte 0x05006000
-_08010148: .4byte 0x0400004c
+_08010148: .4byte REG_MOSAIC
 _0801014C: .4byte 0x00005051
 _08010150: .4byte 0x030042c4
 _08010154: .4byte 0x03004240
@@ -13464,7 +13465,7 @@ _0801018C: .4byte gWindowConfig_81E71D0
 _08010190: .4byte 0x03004250
 _08010194: .4byte gWindowConfig_81E71EC
 _08010198: .4byte gUnknown_08D004E0
-_0801019C: .4byte 0x0400004a
+_0801019C: .4byte REG_WINOUT
 _080101A0: .4byte 0x030028f8
 _080101A4: .4byte sub_800FCFC
 _080101A8: .4byte sub_800DE30
@@ -67968,7 +67969,7 @@ _0802BB90: .4byte 0x06008000
 _0802BB94: .4byte gBattleTerrainTilemap_Building
 _0802BB98: .4byte 0x0600d000
 _0802BB9C: .4byte gUnknown_08E62AC0
-_0802BBA0: .4byte 0x0400000e
+_0802BBA0: .4byte REG_BG3CNT
 _0802BBA4: .4byte 0x00005a0b
 _0802BBA8: .4byte 0x030041b0
 _0802BBAC: .4byte 0x0000fffc
@@ -79382,7 +79383,7 @@ _080318E8: .4byte 0x02024e84
 _080318EC: .4byte 0x00007fff
 _080318F0: .4byte 0x0202eec8
 _080318F4: .4byte 0x0202eac8
-_080318F8: .4byte 0x04000008
+_080318F8: .4byte REG_BG0CNT
 	thumb_func_end sub_8031794
 
 	thumb_func_start sub_80318FC
@@ -79546,7 +79547,7 @@ _08031A50: .4byte 0x02024e84
 _08031A54: .4byte 0x00007fff
 _08031A58: .4byte 0x0202eec8
 _08031A5C: .4byte 0x0202eac8
-_08031A60: .4byte 0x04000008
+_08031A60: .4byte REG_BG0CNT
 	thumb_func_end sub_80318FC
 
 	thumb_func_start unref_sub_8031A64
@@ -80324,7 +80325,7 @@ _08032074: .4byte 0x02024e84
 _08032078: .4byte 0x00007fff
 _0803207C: .4byte 0x0202eec8
 _08032080: .4byte 0x0202eac8
-_08032084: .4byte 0x04000008
+_08032084: .4byte REG_BG0CNT
 _08032088:
 	bl sub_8076BE0
 	lsls r0, 24
@@ -80642,7 +80643,7 @@ _0803233C: .4byte 0x02024e84
 _08032340: .4byte 0x00007fff
 _08032344: .4byte 0x0202eec8
 _08032348: .4byte 0x0202eac8
-_0803234C: .4byte 0x04000008
+_0803234C: .4byte REG_BG0CNT
 	thumb_func_end sub_8031FC4
 
 	thumb_func_start sub_8032350
