@@ -38106,8 +38106,8 @@ _08063D06:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08063D0C: .4byte gUnknown_08376070
-_08063D10: .4byte gUnknown_08376060
+_08063D0C: .4byte gFieldObjectPriorities_08376070
+_08063D10: .4byte gFieldObjectPriorities_08376060
 	thumb_func_end FieldObjectUpdateZCoordAndPriority
 
 	thumb_func_start InitObjectPriorityByZCoord
@@ -38147,8 +38147,8 @@ InitObjectPriorityByZCoord: @ 8063D14
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08063D58: .4byte gUnknown_08376070
-_08063D5C: .4byte gUnknown_08376060
+_08063D58: .4byte gFieldObjectPriorities_08376070
+_08063D5C: .4byte gFieldObjectPriorities_08376060
 	thumb_func_end InitObjectPriorityByZCoord
 
 	thumb_func_start ZCoordToPriority
@@ -38160,7 +38160,7 @@ ZCoordToPriority: @ 8063D60
 	ldrb r0, [r0]
 	bx lr
 	.align 2, 0
-_08063D6C: .4byte gUnknown_08376060
+_08063D6C: .4byte gFieldObjectPriorities_08376060
 	thumb_func_end ZCoordToPriority
 
 	thumb_func_start FieldObjectUpdateZCoord

@@ -7015,14 +7015,17 @@ gUnknown_08376050:: @ 8376050
 	.incbin "baserom.gba", 0x00376050, 0x10
 
 	.align 2
-gUnknown_08376060:: @ 8376060
-	.4byte 0x02020202 @ are these even pointers?
-	.4byte 0x02010201
-	.4byte 0x02010201
-	.4byte 0x02000001
+@ Each byte corresponds to a sprite priority for a field object.
+@ This is directly the inverse of gFieldObjectPriorities_08376070.
+gFieldObjectPriorities_08376060:: @ 8376060
+	.byte 2, 2, 2, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 0, 0, 2
 
-gUnknown_08376070:: @ 8376070
-	.incbin "baserom.gba", 0x00376070, 0x10
+@ Each byte corresponds to a sprite priority for a field object.
+@ This is the inverse of gFieldObjectPriorities_08376060.
+@ 1 = Above player sprite
+@ 2 = Below player sprite
+gFieldObjectPriorities_08376070:: @ 8376070
+	.byte 1, 1, 1, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 0, 0, 1
 
 	.align 2
 gUnknown_08376080:: @ 8376080
