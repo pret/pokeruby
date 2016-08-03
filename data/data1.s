@@ -219,13 +219,23 @@ gUnknown_081D6BBC:: @ 81D6BBC
 	.4byte Unknown_081D8BDF
 	.4byte Unknown_081D8C43
 Unknown_081D6F14:
-	.incbin "baserom.gba", 0x001d6f14, 0x30
+	.incbin "baserom.gba", 0x001d6f14, 0x8
+	.4byte Unknown_081D6F3A
+	.incbin "baserom.gba", 0x001d6f20, 0x7
+	.4byte Unknown_081D6F3A
+	.incbin "baserom.gba", 0x001d6f2b, 0xF
+Unknown_081D6F3A:
+	.2byte 0x100
+	.4byte Unknown_081D6F72
+	.incbin "baserom.gba", 0x001d6f40, 0x4
 
 gUnknown_081D6F44:: @ 81D6F44
 	.incbin "baserom.gba", 0x001d6f44, 0x1e
 
 gUnknown_081D6F62:: @ 81D6F62
-	.incbin "baserom.gba", 0x001d6f62, 0x12
+	.incbin "baserom.gba", 0x001d6f62, 0x10
+Unknown_081D6F72:
+	.incbin "baserom.gba", 0x001d6f72, 0x2
 
 gUnknown_081D6F74:: @ 81D6F74
 	.incbin "baserom.gba", 0x001d6f74, 0xD
@@ -1136,7 +1146,6 @@ gUnknown_081D9B2D:: @ 81D9B2D
 	.include "data/field_effect_scripts.s"
 
 	.align 2
-
 gUnknown_081D9E48:: @ 81D9E48
 	.incbin "baserom.gba", 0x001d9e48, 0x34
 

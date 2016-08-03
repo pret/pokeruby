@@ -2849,11 +2849,11 @@ gUnknown_08E71D10:: @ 8E71D10
 gUnknown_08E726E4:: @ 8E726E4
 	.incbin "baserom.gba", 0x00e726e4, 0x68
 	
-gUnknown_08E7274C:: @ 8E7274C
-	.incbin "baserom.gba", 0x00e7274c, 0xFC
+gMenuSummaryGfx:: @ 8E7274C
+	.incbin "graphics/interface/summary_frames.4bpp.lz" @ the arrows appear to be unused.
 	
-gUnknown_08E72848:: @ 8E72848
-	.incbin "baserom.gba", 0x00e72848, 0x18
+gMenuSummaryPal:: @ 8E72848
+	.incbin "graphics/interface/summary_frames.gbapal.lz"
 
 gStatusGfx_Icons:: @ 8E72860
 	.incbin "graphics/interface/status_icons.4bpp.lz"
