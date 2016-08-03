@@ -1,3 +1,4 @@
+	.include "constants/gba_constants.s"
 	.include "asm/macros.s"
 
 	.syntax unified
@@ -4179,15 +4180,15 @@ sub_8054C54: @ 8054C54
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08054D08: .4byte 0x0400004c
-_08054D0C: .4byte 0x04000048
+_08054D08: .4byte REG_MOSAIC
+_08054D0C: .4byte REG_WININ
 _08054D10: .4byte 0x00001f1f
 _08054D14: .4byte 0x00000101
-_08054D18: .4byte 0x04000040
+_08054D18: .4byte REG_WIN0H
 _08054D1C: .4byte 0x0000ffff
-_08054D20: .4byte 0x04000050
+_08054D20: .4byte REG_BLDCNT
 _08054D24: .4byte gUnknown_081E29E0
-_08054D28: .4byte 0x04000052
+_08054D28: .4byte REG_BLDALPHA
 _08054D2C: .4byte 0x0000070d
 _08054D30: .4byte gBGHOffsetRegs
 _08054D34: .4byte gBGVOffsetRegs
@@ -54187,8 +54188,8 @@ _0806B50C: .4byte 0x00001e05
 _0806B510: .4byte 0x00000703
 _0806B514: .4byte 0x00000f08
 _0806B518: .4byte 0x00000602
-_0806B51C: .4byte 0x04000050
-_0806B520: .4byte 0x0400001e
+_0806B51C: .4byte REG_BLDCNT
+_0806B520: .4byte REG_BG3VOFS
 _0806B524: .4byte 0x0000ffff
 	thumb_func_end sub_806B4A8
 

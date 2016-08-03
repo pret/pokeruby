@@ -1,3 +1,4 @@
+	.include "constants/gba_constants.s"
 	.include "asm/macros.s"
 
 	.syntax unified
@@ -4206,7 +4207,7 @@ _08042F0A:
 	strb r0, [r1]
 	b _08042F6E
 	.align 2, 0
-_08042F14: .4byte 0x0400000c
+_08042F14: .4byte REG_BG2CNT
 _08042F18: .4byte 0x00004c06
 _08042F1C: .4byte gUnknown_0820C9F8
 _08042F20: .4byte gUnknown_0820CA98
@@ -4245,9 +4246,9 @@ _08042F6E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08042F74: .4byte 0x0400000a
+_08042F74: .4byte REG_BG1CNT
 _08042F78: .4byte 0x00000501
-_08042F7C: .4byte 0x04000010
+_08042F7C: .4byte REG_BG0HOFS
 _08042F80: .4byte sub_804300C
 _08042F84: .4byte 0x0300481c
 	thumb_func_end sub_8042CE8
@@ -5855,7 +5856,7 @@ _08043C28: .4byte 0x02024a72
 _08043C2C: .4byte gSpriteTemplate_820A56C
 _08043C30: .4byte gUnknown_0820A684
 _08043C34: .4byte 0x06010000
-_08043C38: .4byte 0x04000010
+_08043C38: .4byte REG_BG0HOFS
 	thumb_func_end battle_make_oam_normal_battle
 
 	thumb_func_start battle_make_oam_safari_battle
@@ -6487,7 +6488,7 @@ _080440BC:
 	.align 2, 0
 _080440E0: .4byte 0x02020004
 _080440E4: .4byte 0x02000020
-_080440E8: .4byte 0x04000008
+_080440E8: .4byte REG_BG0CNT
 	thumb_func_end sub_8043FC0
 
 	thumb_func_start sub_80440EC
@@ -6629,7 +6630,7 @@ _080441FC: .4byte gUnknown_0820A85C
 _08044200: .4byte gUnknown_0820A854
 _08044204: .4byte 0x02020004
 _08044208: .4byte 0x02000020
-_0804420C: .4byte 0x04000008
+_0804420C: .4byte REG_BG0CNT
 	thumb_func_end sub_80440EC
 
 	thumb_func_start sub_8044210
@@ -6767,7 +6768,7 @@ _08044312:
 	.align 2, 0
 _08044324: .4byte gUnknown_0820A894
 _08044328: .4byte 0x06010000
-_0804432C: .4byte 0x04000008
+_0804432C: .4byte REG_BG0CNT
 _08044330: .4byte 0x02020004
 _08044334: .4byte 0x02000020
 	thumb_func_end sub_8044210
@@ -6993,7 +6994,7 @@ _080444DA:
 	bl CpuSet
 	b _0804452A
 	.align 2, 0
-_080444F8: .4byte 0x04000008
+_080444F8: .4byte REG_BG0CNT
 _080444FC: .4byte 0x02020004
 _08044500: .4byte 0x06010000
 _08044504: .4byte 0x02000000
@@ -7026,7 +7027,7 @@ _0804452A:
 	bx r0
 	.align 2, 0
 _08044544: .4byte 0x060100c0
-_08044548: .4byte 0x04000008
+_08044548: .4byte REG_BG0CNT
 	thumb_func_end sub_8044338
 
 	thumb_func_start sub_804454C
@@ -7215,7 +7216,7 @@ _08044694:
 	.align 2, 0
 _080446D0: .4byte 0x03004360
 _080446D4: .4byte 0x06010680
-_080446D8: .4byte 0x04000008
+_080446D8: .4byte REG_BG0CNT
 _080446DC:
 	cmp r6, 0x1
 	bne _0804478C
@@ -8092,7 +8093,7 @@ _08044D5E:
 	.align 2, 0
 _08044DB4: .4byte 0x03004b20
 _08044DB8: .4byte 0x02020004
-_08044DBC: .4byte 0x04000050
+_08044DBC: .4byte REG_BLDCNT
 _08044DC0: .4byte sub_8045110
 _08044DC4:
 	ldrb r1, [r4]
@@ -8225,7 +8226,7 @@ _08044EBA:
 	bx r0
 	.align 2, 0
 _08044EC0: .4byte 0x03004b20
-_08044EC4: .4byte 0x04000052
+_08044EC4: .4byte REG_BLDALPHA
 _08044EC8: .4byte sub_8044ECC
 	thumb_func_end sub_8044E74
 
@@ -8310,7 +8311,7 @@ _08044F62:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08044F6C: .4byte 0x04000050
+_08044F6C: .4byte REG_BLDCNT
 	thumb_func_end sub_8044ECC
 
 	thumb_func_start sub_8044F70
@@ -8342,7 +8343,7 @@ sub_8044F70: @ 8044F70
 	b _08045022
 	.align 2, 0
 _08044FA4: .4byte 0x03004b20
-_08044FA8: .4byte 0x04000052
+_08044FA8: .4byte REG_BLDALPHA
 _08044FAC:
 	movs r0, 0x1
 	negs r0, r0
@@ -8408,7 +8409,7 @@ _08045022:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804502C: .4byte 0x04000050
+_0804502C: .4byte REG_BLDCNT
 	thumb_func_end sub_8044F70
 
 	thumb_func_start sub_8045030
@@ -8894,7 +8895,7 @@ _0804538E:
 	bne _0804538E
 	b _08045438
 	.align 2, 0
-_080453C8: .4byte 0x04000008
+_080453C8: .4byte REG_BG0CNT
 _080453CC: .4byte 0x02020004
 _080453D0: .4byte gUnknown_0820A8B4
 _080453D4:
@@ -8960,7 +8961,7 @@ _08045438:
 _08045448: .4byte 0x02020004
 _0804544C: .4byte gUnknown_0820A8DC
 _08045450: .4byte gUnknown_0820A904
-_08045454: .4byte 0x04000008
+_08045454: .4byte REG_BG0CNT
 	thumb_func_end sub_80451A0
 
 	thumb_func_start sub_8045458
@@ -9043,7 +9044,7 @@ _080454F8: .4byte 0x02020004
 _080454FC: .4byte 0x02024a6a
 _08045500: .4byte 0x030045c0
 _08045504: .4byte 0x06010000
-_08045508: .4byte 0x04000008
+_08045508: .4byte REG_BG0CNT
 _0804550C:
 	str r7, [sp]
 	lsls r0, r4, 4
@@ -9272,9 +9273,9 @@ _080456DC:
 	.align 2, 0
 _080456E8: .4byte 0x02020004
 _080456EC: .4byte 0x06010000
-_080456F0: .4byte 0x04000008
+_080456F0: .4byte REG_BG0CNT
 _080456F4: .4byte 0x02017800
-_080456F8: .4byte 0x04000010
+_080456F8: .4byte REG_BG0HOFS
 _080456FC:
 	mov r1, r9
 	lsls r5, r1, 4
@@ -9377,9 +9378,9 @@ _080457CC: .4byte gUnknown_08E903F8
 _080457D0: .4byte 0x0202ecc8
 _080457D4: .4byte 0x05000200
 _080457D8: .4byte 0x06010000
-_080457DC: .4byte 0x04000018
+_080457DC: .4byte REG_BG2HOFS
 _080457E0: .4byte 0x02017800
-_080457E4: .4byte 0x04000008
+_080457E4: .4byte REG_BG0CNT
 	thumb_func_end draw_status_ailment_maybe
 
 	thumb_func_start sub_80457E8
@@ -9589,7 +9590,7 @@ _08045974:
 _08045984: .4byte 0x02020004
 _08045988: .4byte 0x02000520
 _0804598C: .4byte gUnknown_08400DD6
-_08045990: .4byte 0x04000008
+_08045990: .4byte REG_BG0CNT
 _08045994: .4byte 0x06010000
 	thumb_func_end sub_80458B0
 
@@ -9679,7 +9680,7 @@ _08045A48: .4byte 0x02020004
 _08045A4C: .4byte 0x02000520
 _08045A50: .4byte 0x02000540
 _08045A54: .4byte 0x06010000
-_08045A58: .4byte 0x04000008
+_08045A58: .4byte REG_BG0CNT
 	thumb_func_end sub_8045998
 
 	thumb_func_start sub_8045A5C
@@ -10150,7 +10151,7 @@ _08045DB4:
 _08045E00: .4byte 0x02017850
 _08045E04: .4byte 0x02020004
 _08045E08: .4byte 0x06010000
-_08045E0C: .4byte 0x04000008
+_08045E0C: .4byte REG_BG0CNT
 _08045E10:
 	mov r0, r8
 	bl sub_8043CDC
@@ -10182,7 +10183,7 @@ _08045E3E:
 	b _08045F42
 	.align 2, 0
 _08045E4C: .4byte 0x06010040
-_08045E50: .4byte 0x04000008
+_08045E50: .4byte REG_BG0CNT
 _08045E54:
 	lsls r5, r6, 2
 	adds r3, r5, r6
@@ -10267,7 +10268,7 @@ _08045EF4: .4byte 0x02024a6a
 _08045EF8: .4byte 0x03004360
 _08045EFC: .4byte 0x02020004
 _08045F00: .4byte 0x06010000
-_08045F04: .4byte 0x04000008
+_08045F04: .4byte REG_BG0CNT
 _08045F08:
 	movs r0, 0xC
 	bl sub_8043CDC
@@ -10306,7 +10307,7 @@ _08045F42:
 	bx r0
 	.align 2, 0
 _08045F50: .4byte 0x06010b80
-_08045F54: .4byte 0x04000008
+_08045F54: .4byte REG_BG0CNT
 	thumb_func_end sub_8045D58
 
 	thumb_func_start sub_8045F58
@@ -15786,7 +15787,7 @@ sub_8048AB4: @ 8048AB4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08048B04: .4byte 0x04000018
+_08048B04: .4byte REG_BG2HOFS
 _08048B08: .4byte 0x03004824
 	thumb_func_end sub_8048AB4
 
@@ -15944,13 +15945,13 @@ _08048C44: .4byte 0x06003800
 _08048C48: .4byte 0x040000d4
 _08048C4C: .4byte 0x80000400
 _08048C50: .4byte 0x03004824
-_08048C54: .4byte 0x04000008
+_08048C54: .4byte REG_BG0CNT
 _08048C58: .4byte 0x0000fffc
-_08048C5C: .4byte 0x0400000a
+_08048C5C: .4byte REG_BG1CNT
 _08048C60: .4byte 0x00000501
 _08048C64: .4byte 0x00000602
 _08048C68: .4byte 0x00000703
-_08048C6C: .4byte 0x04000010
+_08048C6C: .4byte REG_BG0HOFS
 	thumb_func_end sub_8048B0C
 
 	thumb_func_start sub_8048C70
@@ -20712,7 +20713,7 @@ sub_804B128: @ 804B128
 	bx r0
 	.align 2, 0
 _0804B1B4: .4byte 0x03004828
-_0804B1B8: .4byte 0x04000020
+_0804B1B8: .4byte REG_BG2PA
 	thumb_func_end sub_804B128
 
 	thumb_func_start sub_804B1BC
@@ -20750,9 +20751,9 @@ sub_804B1BC: @ 804B1BC
 	strh r0, [r1]
 	b _0804B20C
 	.align 2, 0
-_0804B1FC: .4byte 0x04000016
+_0804B1FC: .4byte REG_BG1VOFS
 _0804B200: .4byte 0x03004828
-_0804B204: .4byte 0x0400001a
+_0804B204: .4byte REG_BG2VOFS
 _0804B208:
 	bl sub_804B128
 _0804B20C:
@@ -21347,7 +21348,7 @@ _0804B6E4:
 	.align 2, 0
 _0804B704: .4byte gUnknown_0821594C
 _0804B708: .4byte gUnknown_08215954
-_0804B70C: .4byte 0x0400000a
+_0804B70C: .4byte REG_BG1CNT
 _0804B710: .4byte 0x00000502
 _0804B714: .4byte 0x03001770
 _0804B718: .4byte 0x0000043c
@@ -21618,7 +21619,7 @@ _0804B968:
 	.align 2, 0
 _0804B988: .4byte gUnknown_0821594C
 _0804B98C: .4byte gUnknown_08215954
-_0804B990: .4byte 0x0400000a
+_0804B990: .4byte REG_BG1CNT
 _0804B994: .4byte 0x00000502
 _0804B998: .4byte 0x03001770
 _0804B99C: .4byte 0x0000043c
@@ -22066,8 +22067,8 @@ _0804BD10:
 	b _0804C0CA
 	.align 2, 0
 _0804BD3C: .4byte 0x03004828
-_0804BD40: .4byte 0x04000016
-_0804BD44: .4byte 0x0400000a
+_0804BD40: .4byte REG_BG1VOFS
+_0804BD44: .4byte REG_BG1CNT
 _0804BD48: .4byte 0x00008502
 _0804BD4C: .4byte gUnknown_08210798
 _0804BD50: .4byte 0x06002800
@@ -22323,7 +22324,7 @@ _0804BF4C:
 	b _0804C0CA
 	.align 2, 0
 _0804BF78: .4byte 0x03004828
-_0804BF7C: .4byte 0x0400000a
+_0804BF7C: .4byte REG_BG1CNT
 _0804BF80: .4byte 0x00000502
 _0804BF84: .4byte gUnknown_08D00000
 _0804BF88: .4byte gUnknown_08D00524
@@ -22481,7 +22482,7 @@ _0804C0CA:
 	bx r0
 	.align 2, 0
 _0804C0D0: .4byte 0x03004828
-_0804C0D4: .4byte 0x0400000c
+_0804C0D4: .4byte REG_BG2CNT
 _0804C0D8: .4byte 0x00005206
 _0804C0DC: .4byte gUnknown_0820C9F8
 _0804C0E0: .4byte gUnknown_0820CA98
@@ -23319,7 +23320,7 @@ _0804C94C:
 	bl _0804D53C
 	.align 2, 0
 _0804C96C: .4byte 0x02020004
-_0804C970: .4byte 0x04000050
+_0804C970: .4byte REG_BLDCNT
 _0804C974: .4byte 0x0000040c
 _0804C978:
 	ldr r2, [r6]
@@ -26291,7 +26292,7 @@ _0804E278: .4byte 0x06002800
 _0804E27C: .4byte 0x040000d4
 _0804E280: .4byte 0x80000280
 _0804E284: .4byte gUnknown_08D004E0
-_0804E288: .4byte 0x0400000a
+_0804E288: .4byte REG_BG1CNT
 _0804E28C: .4byte 0x00000502
 	thumb_func_end sub_804E22C
 
@@ -26598,7 +26599,7 @@ sub_804E4FC: @ 804E4FC
 	.align 2, 0
 _0804E52C: .4byte 0x00001341
 _0804E530: .4byte 0x00000c0d
-_0804E534: .4byte 0x04000010
+_0804E534: .4byte REG_BG0HOFS
 	thumb_func_end sub_804E4FC
 
 	thumb_func_start sub_804E538
@@ -27821,7 +27822,7 @@ _0804EFBC:
 	.align 2, 0
 _0804EFC8: .4byte gUnknown_082162F8
 _0804EFCC: .4byte gUnknown_08216300
-_0804EFD0: .4byte 0x0400000c
+_0804EFD0: .4byte REG_BG2CNT
 _0804EFD4: .4byte 0x00004882
 _0804EFD8:
 	bl sub_8051B8C
@@ -28713,7 +28714,7 @@ _0804F6D6:
 	.align 2, 0
 _0804F6E8: .4byte gUnknown_082162F8
 _0804F6EC: .4byte gUnknown_08216300
-_0804F6F0: .4byte 0x0400000c
+_0804F6F0: .4byte REG_BG2CNT
 _0804F6F4: .4byte 0x00004882
 _0804F6F8:
 	bl sub_8051B8C
@@ -32520,7 +32521,7 @@ sub_80514A4: @ 80514A4
 	str r0, [r1]
 	bx lr
 	.align 2, 0
-_080514E8: .4byte 0x04000020
+_080514E8: .4byte REG_BG2PA
 _080514EC: .4byte 0x03004854
 	thumb_func_end sub_80514A4
 
@@ -32548,7 +32549,7 @@ sub_80514F0: @ 80514F0
 	strh r0, [r1]
 	bx lr
 	.align 2, 0
-_0805151C: .4byte 0x04000014
+_0805151C: .4byte REG_BG1HOFS
 _08051520: .4byte 0x03004854
 	thumb_func_end sub_80514F0
 

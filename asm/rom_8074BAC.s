@@ -1,3 +1,4 @@
+	.include "constants/gba_constants.s"
 	.include "asm/macros.s"
 
 	.syntax unified
@@ -2859,13 +2860,13 @@ _0807611C:
 _08076194: .4byte 0x040000d4
 _08076198: .4byte 0x85000400
 _0807619C: .4byte 0x81000800
-_080761A0: .4byte 0x0400000a
+_080761A0: .4byte REG_BG1CNT
 _080761A4: .4byte 0x02024be0
 _080761A8: .4byte 0x030042c0
 _080761AC: .4byte 0x02020004
 _080761B0: .4byte 0x02019348
 _080761B4: .4byte 0x030041b4
-_080761B8: .4byte 0x04000014
+_080761B8: .4byte REG_BG1HOFS
 _080761BC: .4byte 0x0202ecc8
 _080761C0: .4byte 0x84000008
 _080761C4:
@@ -2911,7 +2912,7 @@ _08076210:
 	b _08076338
 	.align 2, 0
 _08076218: .4byte 0xfa0007ff
-_0807621C: .4byte 0x0400000a
+_0807621C: .4byte REG_BG1CNT
 _08076220:
 	ldr r3, _08076348
 	movs r5, 0x80
@@ -3067,11 +3068,11 @@ _08076350: .4byte 0x040000d4
 _08076354: .4byte 0x85000400
 _08076358: .4byte 0x0600f000
 _0807635C: .4byte 0x85000200
-_08076360: .4byte 0x0400000c
+_08076360: .4byte REG_BG2CNT
 _08076364: .4byte 0x02024be0
 _08076368: .4byte 0x03004288
 _0807636C: .4byte 0x03004280
-_08076370: .4byte 0x04000018
+_08076370: .4byte REG_BG2HOFS
 _08076374: .4byte 0x0202ecc8
 _08076378: .4byte 0x05000120
 _0807637C: .4byte 0x84000008
@@ -3986,8 +3987,8 @@ sub_8076A3C: @ 8076A3C
 	bx r0
 	.align 2, 0
 _08076A6C: .4byte 0x0202f7a4
-_08076A70: .4byte 0x04000050
-_08076A74: .4byte 0x04000052
+_08076A70: .4byte REG_BLDCNT
+_08076A74: .4byte REG_BLDALPHA
 	thumb_func_end sub_8076A3C
 
 	thumb_func_start sub_8076A78
@@ -4009,7 +4010,7 @@ sub_8076A78: @ 8076A78
 	bx lr
 	.align 2, 0
 _08076A98: .4byte 0x0202f7a4
-_08076A9C: .4byte 0x04000050
+_08076A9C: .4byte REG_BLDCNT
 	thumb_func_end sub_8076A78
 
 	thumb_func_start sub_8076AA0
@@ -4026,7 +4027,7 @@ sub_8076AA0: @ 8076AA0
 	bx lr
 	.align 2, 0
 _08076AB4: .4byte 0x0202f7a4
-_08076AB8: .4byte 0x04000050
+_08076AB8: .4byte REG_BLDCNT
 	thumb_func_end sub_8076AA0
 
 	thumb_func_start ma0E_call
@@ -5769,8 +5770,8 @@ _080777F4:
 	bx r0
 	.align 2, 0
 _080777FC: .4byte 0x0202f7c8
-_08077800: .4byte 0x0400000a
-_08077804: .4byte 0x0400000c
+_08077800: .4byte REG_BG1CNT
+_08077804: .4byte REG_BG2CNT
 	thumb_func_end sub_807779C
 
 	thumb_func_start sub_8077808
@@ -5804,8 +5805,8 @@ _0807783A:
 	bx r0
 	.align 2, 0
 _08077840: .4byte 0x0202f7a4
-_08077844: .4byte 0x0400000a
-_08077848: .4byte 0x0400000c
+_08077844: .4byte REG_BG1CNT
+_08077848: .4byte REG_BG2CNT
 	thumb_func_end sub_8077808
 
 	thumb_func_start sub_807784C
@@ -5870,8 +5871,8 @@ _080778C2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080778C8: .4byte 0x0400000a
-_080778CC: .4byte 0x0400000c
+_080778C8: .4byte REG_BG1CNT
+_080778CC: .4byte REG_BG2CNT
 	thumb_func_end sub_807784C
 
 	thumb_func_start ma2B_make_side_invisible
@@ -7680,7 +7681,7 @@ sub_807861C: @ 807861C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08078630: .4byte 0x04000050
+_08078630: .4byte REG_BLDCNT
 	thumb_func_end sub_807861C
 
 	thumb_func_start sub_8078634
@@ -7697,7 +7698,7 @@ sub_8078634: @ 8078634
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807864C: .4byte 0x04000050
+_0807864C: .4byte REG_BLDCNT
 	thumb_func_end sub_8078634
 
 	thumb_func_start sub_8078650
@@ -8201,7 +8202,7 @@ sub_80789D4: @ 80789D4
 	orrs r0, r1
 	b _08078A2A
 	.align 2, 0
-_080789F0: .4byte 0x0400000e
+_080789F0: .4byte REG_BG3CNT
 _080789F4:
 	bl sub_8076BE0
 	lsls r0, 24
@@ -8217,7 +8218,7 @@ _080789F4:
 	orrs r0, r1
 	b _08078A2A
 	.align 2, 0
-_08078A10: .4byte 0x0400000e
+_08078A10: .4byte REG_BG3CNT
 _08078A14:
 	ldr r2, _08078A30
 	ldrb r1, [r2, 0x1]
@@ -8235,7 +8236,7 @@ _08078A2A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08078A30: .4byte 0x0400000e
+_08078A30: .4byte REG_BG3CNT
 	thumb_func_end sub_80789D4
 
 	thumb_func_start sub_8078A34
@@ -9255,7 +9256,7 @@ _08079194:
 	.align 2, 0
 _0807919C: .4byte 0x0202eac8
 _080791A0: .4byte 0x0202eec8
-_080791A4: .4byte 0x04000008
+_080791A4: .4byte REG_BG0CNT
 	thumb_func_end sub_8079108
 
 	thumb_func_start sub_80791A8
@@ -9949,7 +9950,7 @@ _080796A4:
 _080796E4: .4byte 0x03004b00
 _080796E8: .4byte 0x0000ffff
 _080796EC: .4byte 0x03004b20
-_080796F0: .4byte 0x04000052
+_080796F0: .4byte REG_BLDALPHA
 _080796F4: .4byte sub_80796F8
 	thumb_func_end sub_8079670
 
@@ -10031,7 +10032,7 @@ _08079786:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807978C: .4byte 0x04000052
+_0807978C: .4byte REG_BLDALPHA
 	thumb_func_end sub_80796F8
 
 	thumb_func_start sub_8079790
@@ -11034,7 +11035,7 @@ _08079EF8:
 	ldr r0, _08079EFC
 	b _08079F02
 	.align 2, 0
-_08079EFC: .4byte 0x0400000c
+_08079EFC: .4byte REG_BG2CNT
 _08079F00:
 	ldr r0, _08079F10
 _08079F02:
@@ -11046,7 +11047,7 @@ _08079F08:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08079F10: .4byte 0x0400000a
+_08079F10: .4byte REG_BG1CNT
 	thumb_func_end sub_8079ED4
 
 	thumb_func_start battle_get_per_side_status_permutated
@@ -12113,7 +12114,7 @@ _0807A742:
 	.align 2, 0
 _0807A770: .4byte 0x0202eac8
 _0807A774: .4byte 0x0202eec8
-_0807A778: .4byte 0x04000008
+_0807A778: .4byte REG_BG0CNT
 _0807A77C: .4byte 0x03004b00
 _0807A780: .4byte sub_807A784
 	thumb_func_end sub_807A69C
