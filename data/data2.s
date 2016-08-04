@@ -1560,8 +1560,67 @@ gUnknown_081FAF4C:: @ 81FAF4C
 	.4byte 0x0200c000
 	.4byte 0x0200e000
 
+	.align 2
 gUnknown_081FAF5C:: @ 81FAF5C
-	.incbin "baserom.gba", 0x001faf5c, 0xec
+	.4byte dp01t_00_7_getattr
+	.4byte dp01t_01_2_read_pokmon_data_slice
+	.4byte dp01t_02_7_setattr
+	.4byte sub_8034744
+	.4byte sub_80347B8
+	.4byte sub_8034910
+	.4byte sub_8034AE0
+	.4byte c2_8123744
+	.4byte sub_8034DC0
+	.4byte sub_8034F84
+	.4byte sub_8035030
+	.4byte sub_80350D4
+	.4byte sub_80350E0
+	.4byte sub_80350EC
+	.4byte sub_80350F8
+	.4byte sub_8035104
+	.4byte sub_803539C
+	.4byte sub_8035400
+	.4byte sub_803540C
+	.4byte sub_803541C
+	.4byte sub_8035428
+	.4byte sub_8035590
+	.4byte sub_80355C0
+	.4byte sub_80356C0
+	.4byte sub_80356CC
+	.4byte sub_80357BC
+	.4byte sub_80357C8
+	.4byte sub_803583C
+	.4byte sub_80358A4
+	.4byte sub_80358B0
+	.4byte sub_80358BC
+	.4byte sub_80358C8
+	.4byte sub_80358D4
+	.4byte sub_80358E0
+	.4byte sub_80358EC
+	.4byte sub_80358F8
+	.4byte sub_8035904
+	.4byte sub_8035910
+	.4byte sub_803592C
+	.4byte sub_8035964
+	.4byte sub_803597C
+	.4byte dp01t_29_7_blink
+	.4byte sub_8035A14
+	.4byte sub_8035A20
+	.4byte sub_8035A64
+	.4byte sub_8035A94
+	.4byte dp01t_2E_7_battle_intro
+	.4byte sub_8035B04
+	.4byte dp01t_30_7_0803D67C
+	.4byte sub_8035E6C
+	.4byte sub_8035EB8
+	.4byte sub_8035EC4
+	.4byte dp01t_34_7_move_anim_start_t3
+	.4byte sub_8035F8C
+	.4byte sub_8035F98
+	.4byte sub_8035FA4
+	.4byte nullsub_46
+
+	.incbin "baserom.gba", 0x001fb040, 0x8
 
 	.align 2
 gUnknown_081FB048:: @ 81FB048

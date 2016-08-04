@@ -1,3 +1,4 @@
+	.align 2
 gUnknown_083FE4F4:: @ 83FE4F4
 	.4byte dp01t_00_3_getattr
 	.4byte sub_811EC04
@@ -1230,6 +1231,7 @@ gUnknown_08400F58:: @ 8400F58
 	.4byte BattleStatText_Accuracy
 	.4byte BattleStatText_Evasion
 
+	.align 2
 gUnknown_08400F78:: @ 8400F78
 	.4byte ContestStatText_TooSpicy
 	.4byte ContestStatText_TooDry
@@ -1237,6 +1239,7 @@ gUnknown_08400F78:: @ 8400F78
 	.4byte ContestStatText_TooBitter
 	.4byte ContestStatText_TooSour
 
+	.align 2
 gUnknown_08400F8C:: @ 8400F8C
 	.4byte BattleText_UnknownString
 	.4byte BattleText_GainExpPoints
@@ -1590,6 +1593,7 @@ gUnknown_08400F8C:: @ 8400F8C
 	.4byte BattleText_NoEffect
 	.4byte BattleText_NoEffectOn
 
+	.align 1
 gUnknown_08401508:: @ 8401508
 @ Each entry refers to a text pointer in gUnknown_08400F8C, but the values are offset
 @ by 0xc. For example, 0x0017 refers to BattleText_AttackMissed because it is the
@@ -1760,6 +1764,7 @@ gUnknown_08401508:: @ 8401508
 gUnknown_0840164C:: @ 840164C
 	.incbin "baserom.gba", 0x0040164c, 0x10
 
+	.align 2
 gUnknown_0840165C:: @ 840165C
 	.4byte BattleText_HP
 	.4byte BattleText_SpAtk
@@ -1768,6 +1773,7 @@ gUnknown_0840165C:: @ 840165C
 	.4byte BattleText_Defense
 	.4byte BattleStatText_Speed
 
+	.align 2
 gUnknown_08401674:: @ 8401674
 	.4byte BattleText_Normal
 	.4byte BattleText_Fighting
