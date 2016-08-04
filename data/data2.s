@@ -13087,43 +13087,65 @@ gUnknown_083C92E4:: @ 83C92E4
 	.4byte sub_80AAD44
 
 gUnknown_083C932C:: @ 83C932C
-	.incbin "baserom.gba", 0x003c932c, 0xb
+	.string "{COLOR CYAN}{HIGHLIGHT RED}$"
+
+	.string "かいし$" @ Start
 
 gUnknown_083C9337:: @ 83C9337
-	.incbin "baserom.gba", 0x003c9337, 0x4
+	.string "もどる$" @ Go Back
 
 gUnknown_083C933B:: @ 83C933B
-	.incbin "baserom.gba", 0x003c933b, 0x29
+	.string "{COLOR MAGENTA}BP.$"
 
+Unknown_83C9342:
+	.string "かっこよさ$" @ coolness
+Unknown_83C9348:
+	.string "かわいさ$" @ cuteness
+Unknown_83C934D:
+	.string "うつくしさ$" @ beauty
+Unknown_83C9353:
+	.string "かしこさ$" @ smartness
+Unknown_83C9358:
+	.string "たくましさ$" @ toughness
+Unknown_83C935E:
+	.string "けづや$" @ sheen
+
+	.align 2
 gUnknown_083C9364:: @ 83C9364
-	.incbin "baserom.gba", 0x003C9364, 0x18
+	.4byte Unknown_83C9342
+	.4byte Unknown_83C9348
+	.4byte Unknown_83C934D
+	.4byte Unknown_83C9353
+	.4byte Unknown_83C9358
+	.4byte Unknown_83C935E
+
 Unknown_83C937C:
-	.incbin "baserom.gba", 0x003C937C, 0xB
+	.string "かっこよさコンテスト$" @ Cool Contest
 Unknown_83C9387:
-	.incbin "baserom.gba", 0x003C9387, 0xB
+	.string "うつくしさコンテスト$" @ Beauty Contest
 Unknown_83C9392:
-	.incbin "baserom.gba", 0x003C9392, 0xB
+	.string "かわいさコンテスト　$" @ Cute Contest
 Unknown_83C939D:
-	.incbin "baserom.gba", 0x003C939D, 0xB
+	.string "かしこさコンテスト　$" @ Smart Contest
 Unknown_83C93A8:
-	.incbin "baserom.gba", 0x003C93A8, 0xC
+	.string "たくましさコンテスト$" @ Tough Contest
 
 	.align 2
 gUnknown_083C93B4:: @ 83C93B4
-Unknown_83C93B4:
 	.4byte Unknown_83C937C
 	.4byte Unknown_83C9387
 	.4byte Unknown_83C9392
 	.4byte Unknown_83C939D
 	.4byte Unknown_83C93A8
+
 Unknown_83C93C8:
-	.incbin "baserom.gba", 0x003c93c8, 0xA
+	.string "ハジツゲ/ノーマル$" @ Fallarbor / Normal
 Unknown_83C93D2:
-	.incbin "baserom.gba", 0x003c93d2, 0xA
+	.string "シダケ/スーパー　$" @ Verdanturf / Super
 Unknown_83C93DC:
-	.incbin "baserom.gba", 0x003c93dc, 0xA
+	.string "カイナ/ハイパー　$" @ Slateport / Hyper
 Unknown_83C93E6:
-	.incbin "baserom.gba", 0x003c93e6, 0xA
+	.string "ミナモ/マスター　$" @ Lilycove / Master
 
 	.align 2
 gUnknown_083C93F0:: @ 83C93F0
@@ -13135,36 +13157,56 @@ gUnknown_083C93F0:: @ 83C93F0
 gUnknown_083C9400:: @ 83C9400
 	.incbin "baserom.gba", 0x003c9400, 0x8
 
-gUnknown_083C9408:: @ 83C9408
-
+@ 83C9408
 	.include "data/contest_opponents.s"
 
 gUnknown_083CA308:: @ 83CA308
-	.incbin "baserom.gba", 0x003ca308, 0x8
+	.byte 19,  0
+	.byte 19,  5
+	.byte 19, 10
+	.byte 19, 15
 
 gUnknown_083CA310:: @ 83CA310
-	.incbin "baserom.gba", 0x003ca310, 0x8
+	.byte 25,  0
+	.byte 25,  5
+	.byte 25, 10
+	.byte 25, 15
 
 gUnknown_083CA318:: @ 83CA318
-	.incbin "baserom.gba", 0x003ca318, 0x18
+	.byte  20,   2
+	.byte  20,   7
+	.byte  20,  12
+	.byte  20,  17
+	.byte  24,   2
+	.byte  24,   7
+	.byte  24,  12
+	.byte  24,  17
+	.byte 220,  24
+	.byte 220,  64
+	.byte 220, 104
+	.byte 220, 144
 
 gUnknown_083CA330:: @ 83CA330
-	.incbin "baserom.gba", 0x003ca330, 0x8
+	.byte 224,  24
+	.byte 224,  64
+	.byte 224, 104
+	.byte 224, 144
 
 gUnknown_083CA338:: @ 83CA338
-	.incbin "baserom.gba", 0x003ca338, 0x4
+	.byte 36, 76, 116, 156
 
 gUnknown_083CA33C:: @ 83CA33C
-	.incbin "baserom.gba", 0x003ca33c, 0x4
+	.byte 36, 76, 116, 156
 
 gUnknown_083CA340:: @ 83CA340
-	.space 1
+	.byte 0, 31, 9, 39
+	.byte 0, 33, 9, 39
+	.byte 0, 35, 9, 39
+	.byte 0, 37, 9, 39
 
-gUnknown_083CA341:: @ 83CA341
-	.incbin "baserom.gba", 0x003ca341, 0xf
-
+	.align 2
 gUnknown_083CA350:: @ 83CA350
-	.incbin "baserom.gba", 0x003ca350, 0x8
+	obj_tiles gTiles_8D1975C, 0x20, 20004
 
 	.align 2
 gOamData_83CA358:: @ 83CA358

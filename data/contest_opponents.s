@@ -1,5 +1,5 @@
-@ contest opponents
-
+	.align 2
+gUnknown_083C9408:: @ 83C9408
 .2byte 286 @ SPECIES_ID
 .string "POOCHY$", 11 @ POKE_NICKNAME
 .string "JIMMY$", 8 @ TRAINER_NAME

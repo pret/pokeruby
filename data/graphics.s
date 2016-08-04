@@ -1082,7 +1082,9 @@ gContestJudgeSymbolsGfx:: @ 8D19590
 	.align 2
 gContest3Pal::
 	.incbin "graphics/misc/judge_symbols.gbapal.lz"
-	
+
+	.align 2
+gTiles_8D1975C:: @ 8D1975C
 	.incbin "baserom.gba", 0x00d1975c, 0x20
 
 gUnknown_08D1977C:: @ 8D1977C
