@@ -45548,7 +45548,7 @@ s77_showcontestwinner: @ 80672E8
 	ldrb r2, [r1]
 	adds r1, 0x1
 	str r1, [r0, 0x8]
-	cmp r2, 0 @ Last Master Rank Contest winner
+	cmp r2, 0
 	beq _080672FC
 	adds r0, r2, 0
 	bl sub_8106630
