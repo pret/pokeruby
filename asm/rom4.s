@@ -45541,14 +45541,14 @@ _080672E2:
 	bx r1
 	thumb_func_end s76_close_picture_box
 
-	thumb_func_start sub_80672E8
-sub_80672E8: @ 80672E8
+	thumb_func_start s77_showcontestwinner
+s77_showcontestwinner: @ 80672E8
 	push {lr}
 	ldr r1, [r0, 0x8]
 	ldrb r2, [r1]
 	adds r1, 0x1
 	str r1, [r0, 0x8]
-	cmp r2, 0
+	cmp r2, 0 @ Last Master Rank Contest winner
 	beq _080672FC
 	adds r0, r2, 0
 	bl sub_8106630
@@ -45558,7 +45558,7 @@ _080672FC:
 	movs r0, 0x1
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80672E8
+	thumb_func_end s77_showcontestwinner
 
 	thumb_func_start sub_806730C
 sub_806730C: @ 806730C
@@ -58712,9 +58712,9 @@ _0806D7DC: .4byte gUnknown_08E71894
 _0806D7E0: .4byte 0x06006000
 _0806D7E4: .4byte gUnknown_08E71934
 _0806D7E8: .4byte 0x06006180
-_0806D7EC: .4byte gUnknown_08E72860
+_0806D7EC: .4byte gStatusGfx_Icons
 _0806D7F0: .4byte 0x06007180
-_0806D7F4: .4byte gUnknown_08E72A50
+_0806D7F4: .4byte gStatusPal_Icons
 	thumb_func_end sub_806D718
 
 	thumb_func_start sub_806D7F8

@@ -674,10 +674,10 @@ Route129_MapAttributes:: @ 82BD8C4
 	.4byte gTileset_Mossdeep
 
 UnreferencedMap_MapBorder: @ 82BD8DC
-	.incbin "baserom.gba", 0x2bd8dc, 8
+	.incbin "data/maps/UnreferencedMap/border.bin"
 
 UnreferencedMap_MapBlockdata: @ 82BD8E4
-	.incbin "baserom.gba", 0x2bd8e4, 0x1900
+	.incbin "data/maps/UnreferencedMap/map.bin"
 
 	.align 2
 UnreferencedMap_MapAttributes:: @ 82BF1E4
@@ -1115,7 +1115,20 @@ LilycoveCity_House2_MapAttributes:: @ 82CF540
 	.4byte gTileset_Building
 	.4byte gTileset_GenericBuilding
 
-	.incbin "baserom.gba", 0x2cf558, 0x24
+UnknownMapBorder_082CF564:
+	.incbin "data/maps/UnknownMap_082CF564/border.bin"
+
+UnknownMapBlockdata_082CF564:
+	.incbin "data/maps/UnknownMap_082CF564/map.bin"
+
+	.align 2
+UnknownMapAttributes_082CF564::
+	.4byte 0x1
+	.4byte 0x1
+	.4byte UnknownMapBorder_082CF564
+	.4byte UnknownMapBlockdata_082CF564
+	.4byte gTileset_Building
+	.4byte gTileset_Contest
 
 VerdanturfTown_WandasHouse_MapBorder:: @ 82CF57C
 	.incbin "data/maps/VerdanturfTown_WandasHouse/border.bin"
@@ -1227,7 +1240,35 @@ SlateportCity_SternsShipyard_2F_MapAttributes:: @ 82D05B4
 	.4byte gTileset_General
 	.4byte gTileset_Facility
 
-	.incbin "baserom.gba", 0x2d05cc, 0x48
+UnknownMapBorder_082D05D8::
+	.incbin "data/maps/UnknownMap_082D05D8/border.bin"
+
+UnknownMapBlockdata_082D05D8::
+	.incbin "data/maps/UnknownMap_082D05D8/map.bin"
+	
+	.align 2
+UnknownMapAttributes_082D05D8::
+	.4byte 0x1
+	.4byte 0x1
+	.4byte UnknownMapBorder_082D05D8
+	.4byte UnknownMapBlockdata_082D05D8
+	.4byte gTileset_Building
+	.4byte gTileset_Contest
+	
+UnknownMapBorder_082D05FC::
+	.incbin "data/maps/UnknownMap_082D05FC/border.bin"
+
+UnknownMapBlockdata_082D05FC::
+	.incbin "data/maps/UnknownMap_082D05FC/map.bin"
+	
+	.align 2
+UnknownMapAttributes_082D05FC::
+	.4byte 0x1
+	.4byte 0x1
+	.4byte UnknownMapBorder_082D05FC
+	.4byte UnknownMapBlockdata_082D05FC
+	.4byte gTileset_Building
+	.4byte gTileset_Contest
 
 SlateportCity_PokemonFanClub_MapBorder:: @ 82D0614
 	.incbin "data/maps/SlateportCity_PokemonFanClub/border.bin"
@@ -2528,8 +2569,216 @@ ShoalCave_HighTideInnerRoom_MapAttributes:: @ 82E55A4
 	.4byte ShoalCave_HighTideInnerRoom_MapBlockdata
 	.4byte gTileset_General
 	.4byte gTileset_Cave
+	
+UnknownMapBorder_082E55C8:
+	.incbin "data/maps/UnknownMap_082E55C8/border.bin"
 
-	.incbin "baserom.gba", 0x2e55bc, 0x1f8
+UnknownMapBlockdata_082E55C8:
+	.incbin "data/maps/UnknownMap_082E55C8/map.bin"
+	
+	.align 2
+UnknownMapAttributes_082E55C8:
+	.4byte 0x1
+	.4byte 0x1
+	.4byte UnknownMapBorder_082E55C8
+	.4byte UnknownMapBlockdata_082E55C8
+	.4byte gTileset_General
+	.4byte gTileset_Cave
+	
+UnknownMapBorder_082E55EC:
+	.incbin "data/maps/UnknownMap_082E55EC/border.bin"
+
+UnknownMapBlockdata_082E55EC:
+	.incbin "data/maps/UnknownMap_082E55EC/map.bin"
+	
+	.align 2
+UnknownMapAttributes_082E55EC:
+	.4byte 0x1
+	.4byte 0x1
+	.4byte UnknownMapBorder_082E55EC
+	.4byte UnknownMapBlockdata_082E55EC
+	.4byte gTileset_General
+	.4byte gTileset_Cave
+	
+UnknownMapBorder_082E5610:
+	.incbin "data/maps/UnknownMap_082E5610/border.bin"
+
+UnknownMapBlockdata_082E5610:
+	.incbin "data/maps/UnknownMap_082E5610/map.bin"
+	
+	.align 2
+UnknownMapAttributes_082E5610:
+	.4byte 0x1
+	.4byte 0x1
+	.4byte UnknownMapBorder_082E5610
+	.4byte UnknownMapBlockdata_082E5610
+	.4byte gTileset_General
+	.4byte gTileset_Cave
+	
+UnknownMapBorder_082E5634:
+	.incbin "data/maps/UnknownMap_082E5634/border.bin"
+
+UnknownMapBlockdata_082E5634:
+	.incbin "data/maps/UnknownMap_082E5634/map.bin"
+	
+	.align 2
+UnknownMapAttributes_082E5634:
+	.4byte 0x1
+	.4byte 0x1
+	.4byte UnknownMapBorder_082E5634
+	.4byte UnknownMapBlockdata_082E5634
+	.4byte gTileset_General
+	.4byte gTileset_Cave
+
+UnknownMapBorder_082E5658:
+	.incbin "data/maps/UnknownMap_082E5658/border.bin"
+	
+UnknownMapBlockdata_082E5658:
+	.incbin "data/maps/UnknownMap_082E5658/map.bin"
+	
+	.align 2
+UnknownMapAttributes_082E5658:
+	.4byte 0x1
+	.4byte 0x1
+	.4byte UnknownMapBorder_082E5658
+	.4byte UnknownMapBlockdata_082E5658
+	.4byte gTileset_General
+	.4byte gTileset_Cave
+
+UnknownMapBorder_082E567C:
+	.incbin "data/maps/UnknownMap_082E567C/border.bin"
+	
+UnknownMapBlockdata_082E567C:
+	.incbin "data/maps/UnknownMap_082E567C/map.bin"
+	
+	.align 2
+UnknownMapAttributes_082E567C:
+	.4byte 0x1
+	.4byte 0x1
+	.4byte UnknownMapBorder_082E567C
+	.4byte UnknownMapBlockdata_082E567C
+	.4byte gTileset_General
+	.4byte gTileset_Cave
+
+UnknownMapBorder_082E56A0:
+	.incbin "data/maps/UnknownMap_082E56A0/border.bin"
+	
+UnknownMapBlockdata_082E56A0:
+	.incbin "data/maps/UnknownMap_082E56A0/map.bin"
+	
+	.align 2
+UnknownMapAttributes_082E56A0:
+	.4byte 0x1
+	.4byte 0x1
+	.4byte UnknownMapBorder_082E56A0
+	.4byte UnknownMapBlockdata_082E56A0
+	.4byte gTileset_General
+	.4byte gTileset_Cave
+	
+UnknownMapBorder_082E56C4:
+	.incbin "data/maps/UnknownMap_082E56C4/border.bin"
+
+UnknownMapBlockdata_082E56C4:
+	.incbin "data/maps/UnknownMap_082E56C4/map.bin"
+	
+	.align 2
+UnknownMapAttributes_082E56C4:
+	.4byte 0x1
+	.4byte 0x1
+	.4byte UnknownMapBorder_082E56C4
+	.4byte UnknownMapBlockdata_082E56C4
+	.4byte gTileset_General
+	.4byte gTileset_Cave
+	
+UnknownMapBorder_082E56E8:
+	.incbin "data/maps/UnknownMap_082E56E8/border.bin"
+
+UnknownMapBlockdata_082E56E8:
+	.incbin "data/maps/UnknownMap_082E56E8/map.bin"
+	
+	.align 2
+UnknownMapAttributes_082E56E8:
+	.4byte 0x1
+	.4byte 0x1
+	.4byte UnknownMapBorder_082E56E8
+	.4byte UnknownMapBlockdata_082E56E8
+	.4byte gTileset_General
+	.4byte gTileset_Cave
+
+UnknownMapBorder_082E570C:
+	.incbin "data/maps/UnknownMap_082E570C/border.bin"
+
+UnknownMapBlockdata_082E570C:
+	.incbin "data/maps/UnknownMap_082E570C/map.bin"
+	
+	.align 2
+UnknownMapAttributes_082E570C:
+	.4byte 0x1
+	.4byte 0x1
+	.4byte UnknownMapBorder_082E570C
+	.4byte UnknownMapBlockdata_082E570C
+	.4byte gTileset_General
+	.4byte gTileset_Cave
+
+UnknownMapBorder_082E5730:
+	.incbin "data/maps/UnknownMap_082E5730/border.bin"
+
+UnknownMapBlockdata_082E5730:
+	.incbin "data/maps/UnknownMap_082E5730/map.bin"
+	
+	.align 2
+UnknownMapAttributes_082E5730:
+	.4byte 0x1
+	.4byte 0x1
+	.4byte UnknownMapBorder_082E5730
+	.4byte UnknownMapBlockdata_082E5730
+	.4byte gTileset_General
+	.4byte gTileset_Cave
+
+UnknownMapBorder_082E5754:
+	.incbin "data/maps/UnknownMap_082E5754/border.bin"
+
+UnknownMapBlockdata_082E5754:
+	.incbin "data/maps/UnknownMap_082E5754/map.bin"
+	
+	.align 2
+UnknownMapAttributes_082E5754:
+	.4byte 0x1
+	.4byte 0x1
+	.4byte UnknownMapBorder_082E5754
+	.4byte UnknownMapBlockdata_082E5754
+	.4byte gTileset_General
+	.4byte gTileset_Cave
+
+UnknownMapBorder_082E5778:	
+	.incbin "data/maps/UnknownMap_082E5778/border.bin"
+
+UnknownMapBlockdata_082E5778:
+	.incbin "data/maps/UnknownMap_082E5778/map.bin"
+	
+	.align 2
+UnknownMapAttributes_082E5778:
+	.4byte 0x1
+	.4byte 0x1
+	.4byte UnknownMapBorder_082E5778
+	.4byte UnknownMapBlockdata_082E5778
+	.4byte gTileset_General
+	.4byte gTileset_Cave
+	
+UnknownMapBorder_082E579C:
+	.incbin "data/maps/UnknownMap_082E579C/border.bin"
+
+UnknownMapBlockdata_082E579C:	
+	.incbin "data/maps/UnknownMap_082E579C/map.bin"
+	
+	.align 2
+UnknownMapAttributes_082E579C:
+	.4byte 0x1
+	.4byte 0x1
+	.4byte UnknownMapBorder_082E579C
+	.4byte UnknownMapBlockdata_082E579C
+	.4byte gTileset_General
+	.4byte gTileset_Cave
 
 NewMauville_Entrance_MapBorder:: @ 82E57B4
 	.incbin "data/maps/NewMauville_Entrance/border.bin"
@@ -3401,7 +3650,20 @@ SafariZone_Southeast_MapAttributes:: @ 82ED348
 	.4byte gTileset_General
 	.4byte gTileset_Lilycove
 
-	.incbin "baserom.gba", 0x2ed360, 0xbe8
+UnknownMapBorder_082EDF30:
+	.incbin "data/maps/UnknownMap_082EDF30/border.bin"
+
+UnknownMapBlockdata_082EDF30:
+	.incbin "data/maps/UnknownMap_082EDF30/map.bin"
+
+	.align 2
+UnknownMapAttributes_082EDF30:
+	.4byte 0x3A
+	.4byte 0x1A
+	.4byte UnknownMapBorder_082EDF30
+	.4byte UnknownMapBlockdata_082EDF30
+	.4byte gTileset_General
+	.4byte 0
 
 Route109_SeashoreHouse_MapBorder:: @ 82EDF48
 	.incbin "data/maps/Route109_SeashoreHouse/border.bin"
@@ -4443,7 +4705,20 @@ ScorchedSlab_MapAttributes:: @ 82FF5A0
 	.4byte gTileset_General
 	.4byte gTileset_Cave
 
-	.incbin "baserom.gba", 0x2ff5b8, 0x2f4
+UnknownMapBorder_082FF894:
+	.incbin "data/maps/UnknownMap_082FF894/border.bin"
+
+UnknownMapBlockdata_082FF894:
+	.incbin "data/maps/UnknownMap_082FF894/map.bin"
+	
+	.align 2
+UnknownMapAttributes_082FF894:
+	.4byte 0x13
+	.4byte 0x13
+	.4byte UnknownMapBorder_082FF894
+	.4byte UnknownMapBlockdata_082FF894
+	.4byte gTileset_General
+	.4byte gTileset_Cave
 
 RustboroCity_Flat1_1F_MapBorder:: @ 82FF8AC
 	.incbin "data/maps/RustboroCity_Flat1_1F/border.bin"
@@ -4535,7 +4810,20 @@ MagmaHideout_B2F_MapAttributes:: @ 8301690
 	.4byte gTileset_General
 	.4byte gTileset_Facility
 
-	.incbin "baserom.gba", 0x3016a8, 0x12e0
+UnknownMapBorder_08302970:
+	.incbin "data/maps/UnknownMap_08302970/border.bin"
+
+UnknownMapBlockdata_08302970:
+	.incbin "data/maps/UnknownMap_08302970/map.bin"
+	
+	.align 2
+UnknownMapAttributes_08302970:
+	.4byte 0x3C
+	.4byte 0x28
+	.4byte UnknownMapBorder_08302970
+	.4byte UnknownMapBlockdata_08302970
+	.4byte gTileset_General
+	.4byte gTileset_Pacifidlog
 
 SkyPillar_Entrance_MapBorder:: @ 8302988
 	.incbin "data/maps/SkyPillar_Entrance/border.bin"
@@ -4627,7 +4915,20 @@ SkyPillar_4F_MapAttributes:: @ 83037E0
 	.4byte gTileset_General
 	.4byte gTileset_Pacifidlog
 
-	.incbin "baserom.gba", 0x3037f8, 0x9d4
+UnknownMapBorder_083041B4:
+	.incbin "data/maps/UnknownMap_083041B4/border.bin"
+	
+UnknownMapBlockdata_083041B4:
+	.incbin "data/maps/UnknownMap_083041B4/map.bin"
+	
+	.align 2
+UnknownMapAttributes_083041B4:
+	.4byte 0x1B
+	.4byte 0x2E
+	.4byte UnknownMapBorder_083041B4
+	.4byte UnknownMapBlockdata_083041B4
+	.4byte gTileset_General
+	.4byte gTileset_Cave
 
 MossdeepCity_StevensHouse_MapBorder:: @ 83041CC
 	.incbin "data/maps/MossdeepCity_StevensHouse/border.bin"

@@ -11,15 +11,12 @@ BTLANMSPRGFXDIR := graphics/battle_anims/sprites
 PICFRAMEGFXDIR := graphics/picture_frame
 
 $(MENUGFXDIR)/menu.gbapal: $(MENUGFXDIR)/menu_0.gbapal $(MENUGFXDIR)/menu_1.gbapal
-
 	@cat $(MENUGFXDIR)/menu_0.gbapal $(MENUGFXDIR)/menu_1.gbapal >$@
 
 $(INTROGFXDIR)/intro.4bpp: $(INTROGFXDIR)/intro1_waterdrops.4bpp $(INTROGFXDIR)/intro1_gamefreak.4bpp
-
 	@cat $(INTROGFXDIR)/intro1_waterdrops.4bpp $(INTROGFXDIR)/intro1_gamefreak.4bpp >$@
 
 $(INTROGFXDIR)/introgfx.4bpp: $(INTROGFXDIR)/intro1_bg.4bpp $(INTROGFXDIR)/intro1_leaves.4bpp
-
 	@cat $(INTROGFXDIR)/intro1_bg.4bpp $(INTROGFXDIR)/intro1_leaves.4bpp >$@
 
 $(PKNAVGFXDIR)/region_map.8bpp: $(PKNAVGFXDIR)/region_map.png
@@ -165,3 +162,6 @@ $(BTLANMSPRGFXDIR)/159.4bpp: $(BTLANMSPRGFXDIR)/159_0.4bpp $(BTLANMSPRGFXDIR)/15
 
 $(PICFRAMEGFXDIR)/frame5.4bpp: $(PICFRAMEGFXDIR)/frame5.png
 	$(GFX) $< $@ -num_tiles 86
+
+$(MISCGFXDIR)/nextturn.4bpp: $(MISCGFXDIR)/nextturn.png
+	$(GFX) $< $@ -num_tiles 8
