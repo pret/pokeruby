@@ -2749,9 +2749,6 @@ UnknownMapAttributes_082E5754:
 	.4byte UnknownMapBlockdata_082E5754
 	.4byte gTileset_General
 	.4byte gTileset_Cave
-	
-	@.4byte 0x082e5778
-	@.4byte 0x082e579c
 
 UnknownMapBorder_082E5778:	
 	.incbin "data/maps/UnknownMap_082E5778/border.bin"
