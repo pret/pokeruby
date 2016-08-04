@@ -11279,15 +11279,15 @@ gSpriteTemplate_83A059C:: @ 83A059C
 gSpriteTemplate_83A05B4:: @ 83A05B4
 	spr_template 4096, 4096, gOamData_83A042C, gSpriteAnimTable_83A0520, NULL, gDummySpriteAffineAnimTable, sub_808F168
 
+	.align 2
 gUnknown_083A05CC:: @ 83A05CC
-	.4byte gUnknown_08E874C8
-	.2byte 0x1F00, 0x1000
-	.space 8
+	obj_tiles gUnknown_08E874C8, 0x1F00, 0x1000
+	null_obj_tiles
 	
+	.align 2
 gUnknown_083A05DC:: @ 83A05DC
-	.4byte gUnknown_08E87AF4
-	.2byte 0x1000, 0x0000
-	.space 8
+	obj_pal gUnknown_08E87AF4, 0x1000
+	null_obj_pal
 	
 gUnknown_083A05EC:: @ 83A05EC
 	.byte 2, 4, 8, 16, 32
