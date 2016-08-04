@@ -3290,7 +3290,7 @@ gUnknown_08304F18:: @ 8304F18
 	.4byte FallarborTown_ContestLobby_MapAttributes
 	.4byte FallarborTown_ContestHall_MapAttributes
 	.4byte LilycoveCity_House2_MapAttributes
-	.4byte 0x082cf564
+	.4byte UnknownMapAttributes_082CF564
 	.4byte VerdanturfTown_WandasHouse_MapAttributes
 	.4byte PacifidlogTown_House1_MapAttributes
 	.4byte PacifidlogTown_House2_MapAttributes
@@ -3298,8 +3298,8 @@ gUnknown_08304F18:: @ 8304F18
 	.4byte MossdeepCity_House4_MapAttributes
 	.4byte SlateportCity_SternsShipyard_1F_MapAttributes
 	.4byte SlateportCity_SternsShipyard_2F_MapAttributes
-	.4byte 0x082d05d8
-	.4byte 0x082d05fc
+	.4byte UnknownMapAttributes_082D05D8
+	.4byte UnknownMapAttributes_082D05FC
 	.4byte SlateportCity_PokemonFanClub_MapAttributes
 	.4byte SlateportCity_OceanicMuseum_1F_MapAttributes
 	.4byte SlateportCity_OceanicMuseum_2F_MapAttributes
@@ -3386,20 +3386,20 @@ gUnknown_08304F18:: @ 8304F18
 	.4byte ShoalCave_LowTideLowerRoom_MapAttributes
 	.4byte ShoalCave_HighTideEntranceRoom_MapAttributes
 	.4byte ShoalCave_HighTideInnerRoom_MapAttributes
-	.4byte 0x082e55c8 @ unused maps
-	.4byte 0x082e55ec
-	.4byte 0x082e5610
-	.4byte 0x082e5634
-	.4byte 0x082e5658
-	.4byte 0x082e567c
-	.4byte 0x082e56a0
-	.4byte 0x082e56c4
-	.4byte 0x082e56e8
-	.4byte 0x082e570c
-	.4byte 0x082e5730
-	.4byte 0x082e5754
-	.4byte 0x082e5778
-	.4byte 0x082e579c
+	.4byte UnknownMapAttributes_082E55C8 @ unused maps
+	.4byte UnknownMapAttributes_082E55EC
+	.4byte UnknownMapAttributes_082E5610
+	.4byte UnknownMapAttributes_082E5634
+	.4byte UnknownMapAttributes_082E5658
+	.4byte UnknownMapAttributes_082E567C
+	.4byte UnknownMapAttributes_082E56A0
+	.4byte UnknownMapAttributes_082E56C4
+	.4byte UnknownMapAttributes_082E56E8
+	.4byte UnknownMapAttributes_082E570C
+	.4byte UnknownMapAttributes_082E5730
+	.4byte UnknownMapAttributes_082E5754
+	.4byte UnknownMapAttributes_082E5778
+	.4byte UnknownMapAttributes_082E579C
 	.4byte NewMauville_Entrance_MapAttributes
 	.4byte NewMauville_Inside_MapAttributes
 	.4byte AbandonedShip_Deck_MapAttributes
@@ -3458,7 +3458,7 @@ gUnknown_08304F18:: @ 8304F18
 	.4byte SafariZone_Northeast_MapAttributes
 	.4byte SafariZone_Southwest_MapAttributes
 	.4byte SafariZone_Southeast_MapAttributes
-	.4byte 0x082edf30
+	.4byte UnknownMapAttributes_082EDF30
 	.4byte Route109_SeashoreHouse_MapAttributes
 	.4byte Route110_TrickHouseEntrance_MapAttributes
 	.4byte Route110_TrickHouseEnd_MapAttributes
@@ -3528,21 +3528,21 @@ gUnknown_08304F18:: @ 8304F18
 	.4byte SootopolisCity_House3_MapAttributes
 	.4byte AbandonedShip_HiddenFloorRooms_MapAttributes
 	.4byte ScorchedSlab_MapAttributes
-	.4byte 0x082ff894
+	.4byte UnknownMapAttributes_082FF894
 	.4byte RustboroCity_Flat1_1F_MapAttributes
 	.4byte RustboroCity_Flat1_2F_MapAttributes
 	.4byte EverGrandeCity_Corridor4_MapAttributes
 	.4byte MagmaHideout_1F_MapAttributes
 	.4byte MagmaHideout_B1F_MapAttributes
 	.4byte MagmaHideout_B2F_MapAttributes
-	.4byte 0x08302970
+	.4byte UnknownMapAttributes_08302970
 	.4byte SkyPillar_Entrance_MapAttributes
 	.4byte SkyPillar_Outside_MapAttributes
 	.4byte SkyPillar_1F_MapAttributes
 	.4byte SkyPillar_2F_MapAttributes
 	.4byte SkyPillar_3F_MapAttributes
 	.4byte SkyPillar_4F_MapAttributes
-	.4byte 0x083041b4
+	.4byte UnknownMapAttributes_083041B4
 	.4byte MossdeepCity_StevensHouse_MapAttributes
 	.4byte ShoalCave_LowTideIceRoom_MapAttributes
 	.4byte SafariZone_RestHouse_MapAttributes
