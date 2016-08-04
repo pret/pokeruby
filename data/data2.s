@@ -21267,11 +21267,9 @@ gUnknown_083ECBB4:: @ 83ECBB4
 	.4byte sub_8104144
 	.4byte sub_81041AC
 
+	.align 1
 gUnknown_083ECBC4:: @ 83ECBC4
-	.2byte 0x9E
-
-gUnknown_083ECBC6:: @ 83ECBC6
-	.incbin "baserom.gba", 0x003ecbc6, 0xa
+	.2byte 0x9E, 0x6E, 0x9F, 0x6F, 0xAF, 0x7F
 
 	.align 2
 gUnknown_083ECBD0:: @ 83ECBD0
@@ -21321,10 +21319,11 @@ gUnknown_083ECC54:: @ 83ECC54
 	.4byte nullsub_69
 
 gUnknown_083ECC58:: @ 83ECC58
-	.2byte 16
+	.byte 16, 0
 
+	.align 1
 gUnknown_083ECC5A:: @ 83ECC5A
-	.incbin "baserom.gba", 0x003ecc5a, 0x8
+	.2byte 0x0, 0x40, 0x80, 0xC0
 
 gUnknown_083ECC62:: @ 83ECC62
 	.incbin "baserom.gba", 0x003ecc62, 0x8
