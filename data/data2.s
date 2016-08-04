@@ -1812,7 +1812,7 @@ gSpriteTemplate_82087AC:: @ 82087AC
 gUnknown_082087C4:: @ 82087C4
 	.incbin "baserom.gba", 0x002087c4, 0x18
 
-gUnknown_082087DC:: @ 82087DC
+gUnknown_082087DC::
 	.include "data/crc16_table.s"
 
 gMiscBlank_Gfx::
@@ -7285,6 +7285,7 @@ gSpriteTemplate_83764E8:: @ 83764E8
 gUnknown_08376500:: @ 8376500
 	.incbin "baserom.gba", 0x00376500, 0x4
 
+	.align 1
 gUnknown_08376504:: @ 8376504
 	.2byte MOVE_FOCUS_PUNCH
 	.2byte MOVE_DRAGON_CLAW
@@ -7355,6 +7356,7 @@ MenuPal_HoldIcons:
 gUnknown_083765DC:: @ 83765DC
 	obj_tiles MenuGfx_HoldIcons, 64, 0xd750
 
+	.align 2
 gUnknown_083765E4:: @ 83765E4
 	obj_pal MenuPal_HoldIcons, 0xd750
 
