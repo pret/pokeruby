@@ -1871,11 +1871,12 @@ gSpriteTemplate_82087AC:: @ 82087AC
 gUnknown_082087C4:: @ 82087C4
 	.incbin "baserom.gba", 0x002087c4, 0x18
 
-gUnknown_082087DC::
+@ 82087DC
 	.include "data/crc16_table.s"
 
-gMiscBlank_Gfx::
-	.incbin "graphics/interface/blank.4bpp" @ seems to be a placeholder gfx?
+	.align 2
+gMiscBlank_Gfx:: @ 82089DC
+	.incbin "graphics/interface/blank.4bpp"
 
 @ 82091DC
 	.include "data/egg_moves.s"
