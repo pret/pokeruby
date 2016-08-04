@@ -7404,7 +7404,7 @@ gUnknown_08376504:: @ 8376504
 	.2byte MOVE_ROCK_SMASH
 	.2byte MOVE_WATERFALL
 	.2byte MOVE_DIVE
-	
+
 	.4byte gTileBuffer @ unreferenced?
 MenuGfx_HoldIcons:
 	.incbin "graphics/interface/hold_icons.4bpp"
@@ -8334,7 +8334,7 @@ gOamData_837DFAC:: @ 837DFAC
 	.2byte 0x4100
 	.2byte 0x4000
 	.2byte 0x0800
-	
+
 	.align 2
 gOamData_837DFB4:: @ 837DFB4
 	.2byte 0x4100
@@ -8358,7 +8358,7 @@ gOamData_837DFCC:: @ 837DFCC
 	.2byte 0x8100
 	.2byte 0x4000
 	.2byte 0x0800
-	
+
 	.align 2
 gOamData_837DFD4:: @ 837DFD4
 	.2byte 0x8100
@@ -8400,7 +8400,7 @@ gOamData_837D004:: @ 837D004
 	.2byte 0x4300
 	.2byte 0x0000
 	.2byte 0x0800
-	
+
 	.align 2
 gOamData_837D00C:: @ 837D00C
 	.2byte 0x4300
@@ -8616,7 +8616,7 @@ gOamData_837E124:: @ 837E124
 	.2byte 0x4700
 	.2byte 0x0000
 	.2byte 0x0800
-	
+
 	.align 2
 gOamData_837E12C:: @ 837E12C
 	.2byte 0x4700
@@ -11342,18 +11342,18 @@ gSpriteTemplate_83A05B4:: @ 83A05B4
 gUnknown_083A05CC:: @ 83A05CC
 	obj_tiles gUnknown_08E874C8, 0x1F00, 0x1000
 	null_obj_tiles
-	
+
 	.align 2
 gUnknown_083A05DC:: @ 83A05DC
 	obj_pal gUnknown_08E87AF4, 0x1000
 	null_obj_pal
-	
+
 gUnknown_083A05EC:: @ 83A05EC
 	.byte 2, 4, 8, 16, 32
 
 gUnknown_083A05F1:: @ 83A05F1
 	.byte 16, 8, 4, 2, 1
-	
+
 	.align 2
 gUnknown_083A05F8:: @ 83A05F8
 	.string "$"
@@ -14256,7 +14256,7 @@ gUnknown_083D1644:: @ 83D1644
 
 gUnknown_083D16E4:: @ 83D16E4
 	.incbin "baserom.gba", 0x003d16e4, 0x40
-	
+
 	.align 2
 gMiscBlank_Pal::
 	.incbin "graphics/interface/blank.gbapal"
@@ -14356,11 +14356,11 @@ gSpriteAnimTable_83D18E8:: @ 83D18E8
 	.align 2
 gUnknownPal_083D18EC::
 	.incbin "baserom.gba", 0x003d18ec, 0x20
-	
+
 	.align 2
 gUnknownPal_083D190C::
 	.incbin "baserom.gba", 0x003d190c, 0x20
-	
+
 	.incbin "baserom.gba", 0x003d192c, 0x60
 
 	.align 2
@@ -19442,7 +19442,7 @@ gUnknown_083DB7F4:: @ 83DB7F4
 	.align 2
 gMenuInterviewFrame_Pal::
 	.incbin "graphics/misc/interview_frame.gbapal"
-	
+
 	.align 2
 gMenuInterviewFrame_Gfx::
 	.incbin "graphics/misc/interview_frame.4bpp.lz"
@@ -19942,7 +19942,7 @@ gUnknown_083E329C:: @ 83E329C
 	.incbin "graphics/pokenav/icon.4bpp.lz"
 	.incbin "graphics/pokenav/contest_pokeball.4bpp"
 	.incbin "baserom.gba", 0x003E3780, 0x20
-	
+
 	.align 2
 gContestSparkle_Pal::
 	.incbin "graphics/pokenav/contest_sparkle.gbapal"
@@ -20891,7 +20891,7 @@ gUnknown_083E5A1C:: @ 83E5A1C
 
 gUnknown_083E5A20:: @ 83E5A20
 	.incbin "baserom.gba", 0x003E5A20, 0xB0
-	
+
 	.align 2
 gPokenavCursor_Pal::
 	.incbin "graphics/pokenav/cursor.gbapal"
@@ -20985,7 +20985,7 @@ gUnknown_083E773C:: @ 83E773C
 
 gUnknown_083E7774:: @ 83E7774
 	.incbin "baserom.gba", 0x003e7774, 0xb8
-	
+
 	.align 2
 gPokenavMapMisc_Pal::
 	.incbin "graphics/pokenav/map_misc.gbapal"
@@ -21144,11 +21144,11 @@ gUnknown_083EC97C:: @ 83EC97C
 
 gUnknown_083EC984:: @ 83EC984
 	.incbin "baserom.gba", 0x003ec984, 0x8
-	
+
 	.align 2
 gUnknown_083EC98C::
 	.incbin "baserom.gba", 0x003ec98c, 0x20
-	
+
 	.incbin "baserom.gba", 0x003ec9ac, 0x20
 
 	.align 2
@@ -22423,11 +22423,11 @@ gUnknown_083F62E8:: @ 83F62E8
 gUnknown_083F62EC:: @ 83F62EC
 	.incbin "graphics/misc/birch_bag.gbapal"
 	.incbin "graphics/misc/birch_grass.gbapal"
-	
+
 	.align 2
 gBirchBallarrow_Pal::
 	.incbin "graphics/misc/birch_ballarrow.gbapal"
-	
+
 	.align 2
 gBirchCircle_Pal::
 	.incbin "graphics/misc/birch_circle.gbapal"
@@ -22440,7 +22440,7 @@ gUnknown_083F64F8:: @ 83F64F8
 
 gUnknown_083F66F0:: @ 83F66F0
 	.incbin "graphics/misc/birch_help.4bpp.lz"
-	
+
 	.align 2
 gBirchBallarrow_Gfx::
 	.incbin "graphics/misc/birch_ballarrow.4bpp.lz"
@@ -22890,11 +22890,11 @@ gUnknown_083F868C:: @ 83F868C
 
 gUnknown_083F86BC:: @ 83F86BC
 	.incbin "baserom.gba", 0x003f86bc, 0x40
-	
+
 	.align 2
 gRouletteCenter_Pal::
 	.incbin "graphics/roulette/center.gbapal"
-	
+
 	.incbin "baserom.gba", 0x003f871c, 0x1A0
 
 gUnknown_083F88BC:: @ 83F88BC
@@ -23503,7 +23503,7 @@ gSpriteAnimTable_83FA3E8:: @ 83FA3E8
 	.4byte Unknown_083FA3B8
 	.4byte Unknown_083FA3B8
 	.4byte Unknown_083FA3CC
-	
+
 	.align 2
 gSpriteTemplate_83FA40C:: @ 83FA40C
 	spr_template 0xFFFF, 2, gOamData_83FA328, gSpriteAnimTable_83FA3E8, 0x83FA330, gDummySpriteAffineAnimTable, SpriteCallbackDummy
@@ -24986,15 +24986,15 @@ gBattleAnimSpriteTemplate_8402B10:: @ 8402B10
 	.align 2
 gUnknown_08402B28:: @ 8402B28
 	.incbin "baserom.gba", 0x00402b28, 0x30
-	
+
 	.align 2
 gDexArrows_Pal::
 	.incbin "graphics/pokedex/arrows.gbapal"
-	
+
 	.align 2
 gDexArrows_Gfx::
 	.incbin "graphics/pokedex/arrows.4bpp"
-	
+
 	.incbin "baserom.gba", 0x00402c78, 0x80
 
 gUnknown_08402CF8:: @ 8402CF8
@@ -25148,15 +25148,15 @@ gUnknown_08405EDA:: @ 8405EDA
 
 gUnknown_08405EE6:: @ 8405EE6
 	.incbin "baserom.gba", 0x00405ee6, 0x12
-	
+
 	.align 2
 gUnknownPal_08405EF8::
 	.incbin "baserom.gba", 0x00405ef8, 0x20
-	
+
 	.align 2
 gUnknownPal_08405F18::
 	.incbin "baserom.gba", 0x00405f18, 0x20
-	
+
 	.incbin "baserom.gba", 0x00405f38, 0x1E0
 
 gUnknown_08406118:: @ 8406118

@@ -889,7 +889,7 @@ gBattleAnimSpriteSheet_115:: @ 8D11B74
 	.incbin "graphics/battle_anims/sprites/115.4bpp.lz"
 
 	.incbin "baserom.gba", 0xd11ca4, 0x488
-	
+
 gUnknown_08D1212C::
 	.incbin "graphics/interface/battle_window.gbapal"
 gUnknown_08D1214C::
@@ -1046,15 +1046,15 @@ gBattleAnimSpriteSheet_077:: @ 8D150F4
 	.incbin "graphics/battle_anims/sprites/077.4bpp.lz"
 
 	.incbin "baserom.gba", 0x00d151c8, 0xE5C
-	
+
 	.align 2
 gContestNumbers_UnusedGfx::
 	.incbin "graphics/unused/numbers.4bpp.lz"
-	
+
 	.align 2
 gContestNumbers_UnusedPal::
 	.incbin "graphics/unused/numbers.gbapal.lz"
-	
+
 	.incbin "baserom.gba", 0x00d16134, 0x1010
 
 gUnknown_08D17144:: @ 8D17144
@@ -1074,7 +1074,7 @@ gUnknown_08D17D6C:: @ 8D17D6C
 
 gUnknown_08D18818:: @ 8D18818
 	.incbin "baserom.gba", 0x00d18818, 0xd78
-	
+
 	.align 2
 gContestJudgeSymbolsGfx:: @ 8D19590
 	.incbin "graphics/misc/judge_symbols.4bpp.lz"
@@ -1506,19 +1506,19 @@ gBattleAnimSpritePalette_186:: @ 8D1F508
 	.align 2
 gBattleWindowLargeGfx::
 	.incbin "graphics/interface/battle_window.4bpp.lz"
-	
+
 	.align 2
 gBattleWindowSmallGfx::
 	.incbin "graphics/interface/battle_window2.4bpp.lz"
-	
+
 	.align 2
 gBattleWindowSmall2Gfx::
 	.incbin "graphics/interface/battle_window3.4bpp.lz"
-	
+
 	.align 2
 gBattleWindowSmall3Gfx::
 	.incbin "graphics/interface/battle_window4.4bpp.lz"
-	
+
 	.align 2
 gBattleWindowLarge2Gfx:: @ 8d1fc94
 	.incbin "graphics/interface/battle_window5.4bpp.lz"
@@ -2112,7 +2112,7 @@ gBattleAnimSpritePalette_241:: @ 8D2D7B8
 	.align 2
 gContestConfetti_Gfx::
 	.incbin "graphics/misc/confetti.4bpp.lz"
-	
+
 	.align 2
 gContestConfetti_Pal::
 	.incbin "graphics/misc/confetti.gbapal.lz"
@@ -2896,10 +2896,10 @@ gUnknown_08E71D10:: @ 8E71D10
 
 gUnknown_08E726E4:: @ 8E726E4
 	.incbin "baserom.gba", 0x00e726e4, 0x68
-	
+
 gMenuSummaryGfx:: @ 8E7274C
 	.incbin "graphics/interface/summary_frames.4bpp.lz" @ the arrows appear to be unused.
-	
+
 gMenuSummaryPal:: @ 8E72848
 	.incbin "graphics/interface/summary_frames.gbapal.lz"
 
@@ -2987,7 +2987,7 @@ gMenuPokeblockDevice_Pal:: @ 8E78050
 
 gUnknown_08E78078:: @ 8E78078
 	.incbin "baserom.gba", 0x00e78078, 0x150
-	
+
 	.align 2
 gPokeblock_Gfx::
 	.incbin "graphics/misc/pokeblock.4bpp.lz"
@@ -3091,7 +3091,7 @@ gUnknown_08E8096C:: @ 8E8096C
 
 gUnknown_08E81098:: @ 8E81098
 	.incbin "baserom.gba", 0x00e81098, 0x10A8
-	
+
 	.align 2
 gRouletteCenter_Gfx::
 	.incbin "graphics/roulette/center.4bpp.lz"
