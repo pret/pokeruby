@@ -12874,6 +12874,7 @@ gSpriteTemplate_83C1E04:: @ 83C1E04
 gUnknown_083C1F74:: @ 83C1F74
 	obj_tiles gUnknown_08E78BB4, 2048, 0x2710
 
+	.align 2
 gUnknown_083C1F7C:: @ 83C1F7C
 	obj_pal gUnknown_08E7883C, 0x2710
 
