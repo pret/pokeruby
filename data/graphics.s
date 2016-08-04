@@ -104,6 +104,8 @@ gInterfacePal_PremierBall::
 
 gUnknown_08D030D0:: @ 8D030D0
 	.incbin "graphics/interface/ball_open.4bpp.lz"
+
+	.align 2
 gBlankGfxCompressed::
 	.incbin "graphics/interface/blank.4bpp.lz"
 
@@ -2312,6 +2314,7 @@ gUnknown_08E5DAF8:: @ 8E5DAF8
 gUnknown_08E5DC04:: @ 8E5DC04
 	.incbin "baserom.gba", 0x00e5dc04, 0x28
 
+	.align 2
 gUnknown_08E5DC2C:: @ 8E5DC2C
 	.incbin "graphics/battle_transitions/vs.4bpp.lz"
 
@@ -2898,9 +2901,11 @@ gMenuSummaryGfx:: @ 8E7274C
 gMenuSummaryPal:: @ 8E72848
 	.incbin "graphics/interface/summary_frames.gbapal.lz"
 
+	.align 2
 gStatusGfx_Icons:: @ 8E72860
 	.incbin "graphics/interface/status_icons.4bpp.lz"
 
+	.align 2
 gStatusPal_Icons:: @ 8E72A50
 	.incbin "graphics/interface/status_icons.gbapal.lz"
 
@@ -3033,6 +3038,7 @@ gUnknown_08E782FC:: @ 8E782FC
 gUnknown_08E783FC:: @ 8E783FC
 	.incbin "baserom.gba", 0x00e783fc, 0x440
 
+	.align 2
 gUnknown_08E7883C:: @ 8E7883C
 	.incbin "graphics/battle_transitions/vs.gbapal.lz"
 
