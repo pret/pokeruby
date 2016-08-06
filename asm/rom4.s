@@ -38558,7 +38558,7 @@ DoTracksGroundEffect_Footprints: @ 8063FFC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08064044: .4byte gUnknown_0837608C
+_08064044: .4byte gSandFootprints_FieldEffectData
 _08064048: .4byte 0x0202ff84
 	thumb_func_end DoTracksGroundEffect_Footprints
 
@@ -38602,7 +38602,7 @@ _0806408E:
 	bx r0
 	.align 2, 0
 _08064094: .4byte 0x0202ff84
-_08064098: .4byte gUnknown_08376090
+_08064098: .4byte gBikeTireTracks_Transitions
 	thumb_func_end DoTracksGroundEffect_BikeTireTracks
 
 	thumb_func_start GroundEffect_Ripple

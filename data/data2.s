@@ -6982,7 +6982,8 @@ Unknown_8375FFC:
 	.4byte sub_8063474
 
 gUnknown_08376008:: @ 8376008
-	.incbin "baserom.gba", 0x00376008, 0x8
+	.4byte 0x00000020
+	.4byte 0x00000010
 
 	.align 2
 @ Functions used to determine which category of tile the player is landing
@@ -7013,7 +7014,7 @@ gUnknown_08376040:: @ 8376040
 	.4byte MetatileBehavior_IsJumpEast
 
 gUnknown_08376050:: @ 8376050
-	.incbin "baserom.gba", 0x00376050, 0x10
+	.byte 0x73, 0x73, 0x53, 0x73, 0x53, 0x73, 0x53, 0x73, 0x53, 0x73, 0x53, 0x73, 0x53, 0x00, 0x00, 0x73
 
 	.align 2
 @ Each byte corresponds to a sprite priority for a field object.
@@ -7034,11 +7035,22 @@ gUnknown_08376080:: @ 8376080
 	.4byte DoTracksGroundEffect_Footprints
 	.4byte DoTracksGroundEffect_BikeTireTracks
 
-gUnknown_0837608C:: @ 837608C
-	.incbin "baserom.gba", 0x0037608c, 0x4
+@ First byte is a Field Effect script id. (gFieldEffectScriptPointers)
+@ Last three bytes are unknown.
+gSandFootprints_FieldEffectData:: @ 837608C
+	.byte 0xD, 0x0, 0x18, 0x0
 
-gUnknown_08376090:: @ 8376090
-	.incbin "baserom.gba", 0x00376090, 0x10
+@ Specifies which bike track shape to show next.
+@ For example, when the bike turns from up to right, it will show
+@ a track that curves to the right.
+@ Each 4-byte row corresponds to the initial direction of the bike, and
+@ each byte in that row is for the next direction of the bike in the order
+@ of down, up, left, right.
+gBikeTireTracks_Transitions:: @ 8376090
+	.byte 1, 2, 7, 8
+	.byte 1, 2, 6, 5
+	.byte 5, 8, 3, 4
+	.byte 6, 7, 3, 4
 
 	.align 2
 gUnknown_083760A0:: @ 83760A0
