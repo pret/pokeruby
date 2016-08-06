@@ -37697,7 +37697,7 @@ GetGroundEffectFlags_JumpLanding: @ 80639E8
 	ldr r1, _08063A24
 	ands r0, r1
 	cmp r0, 0x20
-	bne _08063A3A
+	bne _08063A3A  @ Is player landing after jumping?
 	movs r5, 0
 	ldr r0, _08063A28
 	mov r8, r0
@@ -37705,7 +37705,7 @@ _08063A02:
 	lsls r4, r5, 2
 	mov r0, r8
 	adds r1, r4, r0
-	ldrb r0, [r7, 0x1E]
+	ldrb r0, [r7, 0x1E]  @ Load metatile behavior
 	ldr r1, [r1]
 	bl _call_via_r1
 	lsls r0, 24
@@ -37720,8 +37720,8 @@ _08063A02:
 	b _08063A3A
 	.align 2, 0
 _08063A24: .4byte 0x02000020
-_08063A28: .4byte gUnknown_08376010
-_08063A2C: .4byte gUnknown_08376028
+_08063A28: .4byte gJumpLanding_MetatileFunctionPointers
+_08063A2C: .4byte gJumpLanding_Bitmasks
 _08063A30:
 	adds r0, r5, 0x1
 	lsls r0, 24
