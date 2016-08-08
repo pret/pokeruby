@@ -10416,8 +10416,9 @@ gSpriteTemplate_839B528:: @ 839B528
 @ 839B540
 	.include "data/wild_mons.s"
 
-gUnknown_0839DBFC:: @ 839DBFC
-	.incbin "baserom.gba", 0x0039dbfc, 0x4
+gWildFeebasRoute119Data:: @ 839DBFC
+	.byte 20, 25  @ Min/Max level
+	.2byte SPECIES_FEEBAS
 
 gUnknown_0839DC00:: @ 839DC00
 	.incbin "baserom.gba", 0x0039dc00, 0x14
