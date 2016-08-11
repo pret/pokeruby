@@ -36163,7 +36163,7 @@ _0801BCA4: .4byte 0x02024a80
 _0801BCA8: .4byte 0x02024c07
 _0801BCAC: .4byte 0x02024c6c
 _0801BCB0: .4byte 0x02024c10
-_0801BCB4: .4byte gUnknown_081D6F62
+_0801BCB4: .4byte BattleScript_1D6F62
 _0801BCB8:
 	bl sub_8017718
 	lsls r0, 24
@@ -41425,7 +41425,7 @@ _0801E676:
 	.align 2, 0
 _0801E678: .4byte 0x02024c06
 _0801E67C: .4byte 0x02024c10
-_0801E680: .4byte gUnknown_081D98BD
+_0801E680: .4byte BattleScript_1D98BD
 _0801E684: .4byte 0x02024c6c
 _0801E688:
 	mov r1, r8
@@ -41537,7 +41537,7 @@ _0801E72E:
 	.align 2, 0
 _0801E74C: .4byte 0x02024c06
 _0801E750: .4byte 0x02024c10
-_0801E754: .4byte gUnknown_081D98A5
+_0801E754: .4byte BattleScript_1D98A5
 _0801E758:
 	mov r0, r8
 	ldrb r1, [r0]
@@ -41577,7 +41577,7 @@ _0801E78E:
 	.align 2, 0
 _0801E79C: .4byte 0x02024c6c
 _0801E7A0: .4byte 0x02024c10
-_0801E7A4: .4byte gUnknown_081D98A5
+_0801E7A4: .4byte BattleScript_1D98A5
 _0801E7A8:
 	mov r3, r8
 	ldrb r0, [r3]
@@ -41728,7 +41728,7 @@ _0801E8A6:
 	.align 2, 0
 _0801E8C4: .4byte 0x02024c06
 _0801E8C8: .4byte 0x02024c10
-_0801E8CC: .4byte gUnknown_081D98B1
+_0801E8CC: .4byte BattleScript_1D98B1
 _0801E8D0:
 	mov r0, r9
 	adds r0, 0x4C
@@ -41785,7 +41785,7 @@ _0801E928:
 	.align 2, 0
 _0801E938: .4byte 0x02024c06
 _0801E93C: .4byte 0x02024c10
-_0801E940: .4byte gUnknown_081D98BD
+_0801E940: .4byte BattleScript_1D98BD
 _0801E944: .4byte 0x02024c6c
 _0801E948: .4byte 0xffffdfff
 _0801E94C:
@@ -41837,7 +41837,7 @@ _0801E998:
 	.align 2, 0
 _0801E9A4: .4byte 0x02024c6c
 _0801E9A8: .4byte 0x02024c10
-_0801E9AC: .4byte gUnknown_081D98BD
+_0801E9AC: .4byte BattleScript_1D98BD
 _0801E9B0: .4byte 0x02024d1e
 _0801E9B4:
 	mov r3, r8
@@ -56388,7 +56388,7 @@ _08025F74:
 	.align 2, 0
 _08025F78: .4byte 0x02024be6
 _08025F7C: .4byte 0x02024c10
-_08025F80: .4byte gUnknown_081D83D6
+_08025F80: .4byte BattleScript_1D83D6
 _08025F84:
 	ldr r2, _08025FCC
 	ldr r1, _08025FD0
@@ -62114,7 +62114,7 @@ atkB3_rolloutdamagecalculation: @ 8028CE4
 _08028D08: .4byte 0x02024c68
 _08028D0C: .4byte 0x02024c07
 _08028D10: .4byte 0x02024c10
-_08028D14: .4byte gUnknown_081D6F74
+_08028D14: .4byte BattleScript_1D6F74
 _08028D18:
 	ldr r2, _08028E3C
 	ldr r1, _08028E40
@@ -62362,7 +62362,7 @@ _08028EF0: .4byte 0x02024c68
 _08028EF4: .4byte 0x02024ca8
 _08028EF8: .4byte 0x02024c07
 _08028EFC: .4byte 0x02024c10
-_08028F00: .4byte gUnknown_081D6F74
+_08028F00: .4byte BattleScript_1D6F74
 _08028F04:
 	ldr r5, _08028F64
 	ldr r4, _08028F68
@@ -62548,7 +62548,7 @@ _08029068: .4byte 0x02024bec
 _0802906C: .4byte 0x02024a80
 _08029070: .4byte 0x02024c08
 _08029074: .4byte 0x02024c10
-_08029078: .4byte gUnknown_081D6F44
+_08029078: .4byte BattleScript_1D6F44
 _0802907C:
 	ldr r2, _08029098
 	ldr r0, _0802909C
@@ -62567,7 +62567,7 @@ _0802907C:
 _08029098: .4byte 0x02024a80
 _0802909C: .4byte 0x02024c08
 _080290A0: .4byte 0x02024c10
-_080290A4: .4byte gUnknown_081D83B5
+_080290A4: .4byte BattleScript_1D83B5
 _080290A8:
 	ldr r1, _080290B4
 	ldr r0, _080290B8
@@ -62578,7 +62578,7 @@ _080290AC:
 	bx r0
 	.align 2, 0
 _080290B4: .4byte 0x02024c10
-_080290B8: .4byte gUnknown_081D839B
+_080290B8: .4byte BattleScript_1D839B
 	thumb_func_end atkB7_presentdamagecalculation
 
 	thumb_func_start sub_80290BC

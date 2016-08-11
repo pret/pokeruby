@@ -1598,171 +1598,238 @@ gUnknown_08401508:: @ 8401508
 @ Each entry refers to a text pointer in gUnknown_08400F8C, but the values are offset
 @ by 0xc. For example, 0x0017 refers to BattleText_AttackMissed because it is the
 @ 11th entry in the pointer table.
-	.2byte 0x0017
-	.2byte 0x0018
-	.2byte 0x0159
-	.2byte 0x001A
-	.2byte 0x014C
-	.2byte 0x00E2
-	.2byte 0x00E3
-	.2byte 0x0021
-	.2byte 0x0112
-	.2byte 0x0165
-	.2byte 0x00E8
-	.2byte 0x00E9
-	.2byte 0x00E5
-	.2byte 0x00ED
-	.2byte 0x00F0
-	.2byte 0x00F3
-	.2byte 0x00EE
-	.2byte 0x00F4
-	.2byte 0x0066
-	.2byte 0x0067
-	.2byte 0x00EF
-	.2byte 0x00F5
-	.2byte 0x00EA
-	.2byte 0x00EB
-	.2byte 0x00EC
-	.2byte 0x0065
-	.2byte 0x0098
-	.2byte 0x00E5
-	.2byte 0x00E5
-	.2byte 0x004E
-	.2byte 0x0160
-	.2byte 0x004D
-	.2byte 0x0161
-	.2byte 0x004F
-	.2byte 0x0068
-	.2byte 0x0069
-	.2byte 0x001B
-	.2byte 0x006A
-	.2byte 0x0139
-	.2byte 0x0052
-	.2byte 0x0053
-	.2byte 0x0070
-	.2byte 0x0071
-	.2byte 0x0073
-	.2byte 0x0074
-	.2byte 0x006C
-	.2byte 0x006E
-	.2byte 0x00F7
-	.2byte 0x004C
-	.2byte 0x0075
-	.2byte 0x0076
-	.2byte 0x0077
-	.2byte 0x00D5
-	.2byte 0x00D6
-	.2byte 0x003D
-	.2byte 0x0130
-	.2byte 0x0145
-	.2byte 0x0146
-	.2byte 0x00D7
-	.2byte 0x00D8
-	.2byte 0x003E
-	.2byte 0x0130
-	.2byte 0x0054
-	.2byte 0x0055
-	.2byte 0x0056
-	.2byte 0x0057
-	.2byte 0x0058
-	.2byte 0x0059
-	.2byte 0x013D
-	.2byte 0x013E
-	.2byte 0x005A
-	.2byte 0x005C
-	.2byte 0x005B
-	.2byte 0x005D
-	.2byte 0x005B
-	.2byte 0x0148
-	.2byte 0x0061
-	.2byte 0x00E5
-	.2byte 0x0063
-	.2byte 0x00E5
-	.2byte 0x007D
-	.2byte 0x00E5
-	.2byte 0x007E
-	.2byte 0x00FB
-	.2byte 0x0028
-	.2byte 0x0029
-	.2byte 0x0037
-	.2byte 0x0038
-	.2byte 0x0023
-	.2byte 0x0024
-	.2byte 0x002E
-	.2byte 0x002F
-	.2byte 0x0031
-	.2byte 0x0032
-	.2byte 0x0035
-	.2byte 0x0036
-	.2byte 0x0017
-	.2byte 0x007C
-	.2byte 0x0045
-	.2byte 0x0136
-	.2byte 0x002D
-	.2byte 0x0139
-	.2byte 0x013B
-	.2byte 0x013C
-	.2byte 0x00FD
-	.2byte 0x00FD
-	.2byte 0x00FD
-	.2byte 0x00FD
-	.2byte 0x0142
-	.2byte 0x00A1
-	.2byte 0x014F
-	.2byte 0x0107
-	.2byte 0x0108
-	.2byte 0x0109
-	.2byte 0x010A
-	.2byte 0x0110
-	.2byte 0x0110
-	.2byte 0x0110
-	.2byte 0x0110
-	.2byte 0x0110
-	.2byte 0x0110
-	.2byte 0x0110
-	.2byte 0x0110
-	.2byte 0x0111
-	.2byte 0x0110
-	.2byte 0x0110
-	.2byte 0x0110
-	.2byte 0x00F1
-	.2byte 0x0110
-	.2byte 0x0110
-	.2byte 0x0110
-	.2byte 0x0116
-	.2byte 0x0117
-	.2byte 0x0118
-	.2byte 0x0119
-	.2byte 0x011B
-	.2byte 0x011C
-	.2byte 0x011E
-	.2byte 0x011F
-	.2byte 0x0120
-	.2byte 0x0128
-	.2byte 0x0123
-	.2byte 0x0126
-	.2byte 0x0125
-	.2byte 0x0124
-	.2byte 0x0127
-	.2byte 0x0129
-	.2byte 0x0156
-	.2byte 0x0131
-	.2byte 0x0163
-	.2byte 0x016A
-	.2byte 0x00C7
-	.2byte 0x0163
-	.2byte 0x016A
-	.2byte 0x00C9
-	.2byte 0x0163
-	.2byte 0x016A
-	.2byte 0x0166
-	.2byte 0x0167
-	.2byte 0x0168
-	.2byte 0x00CB
-	.2byte 0x0137
+	.2byte BATTLE_TEXT_AttackMissed
+	.2byte BATTLE_TEXT_ProtectedItself
+	.2byte BATTLE_TEXT_AvoidedAttack
+	.2byte BATTLE_TEXT_AvoidedDamage
+	.2byte BATTLE_TEXT_GroundMoveNegate
+	.2byte BATTLE_TEXT_CantEscape2
+	.2byte BATTLE_TEXT_BirchDontLeaveMe
+	.2byte BATTLE_TEXT_PreventEscape
+	.2byte BATTLE_TEXT_CantEscape
+	.2byte BATTLE_TEXT_AttackingCantEscape
+
+BattleTextList_40151C:: @ 840151C
+	.2byte BATTLE_TEXT_RainStart
+	.2byte BATTLE_TEXT_PourStart
+	.2byte BATTLE_TEXT_Failed
+	.2byte BATTLE_TEXT_SandBrewed
+	.2byte BATTLE_TEXT_SunBright
+	.2byte BATTLE_TEXT_HailStart
+	.2byte BATTLE_TEXT_SandRages
+	.2byte BATTLE_TEXT_HailCont
+	.2byte BATTLE_TEXT_SandBuffeted
+	.2byte BATTLE_TEXT_HailStricken
+	.2byte BATTLE_TEXT_SandSubsided
+	.2byte BATTLE_TEXT_HailStop
+	.2byte BATTLE_TEXT_RainCont1
+	.2byte BATTLE_TEXT_PourCont
+	.2byte BATTLE_TEXT_RainStop
+
+BattleTextList_40153A:: @ 840153A
+	.2byte BATTLE_TEXT_ProtectedItself2
+	.2byte BATTLE_TEXT_BracedItself
+	.2byte BATTLE_TEXT_Failed
+
+BattleTextList_401540:: @ 8401540
+	.2byte BATTLE_TEXT_Failed
+	.2byte BATTLE_TEXT_RaisedDefense
+	.2byte BATTLE_TEXT_RaisedDefenseLittle
+	.2byte BATTLE_TEXT_RaisedSpDef
+	.2byte BATTLE_TEXT_RaisedSpDefLittle
+	.2byte BATTLE_TEXT_CoveredVeil
+
+BattleTextList_40154C:: @ 840154C
+	.2byte BATTLE_TEXT_WasSeeded
+	.2byte BATTLE_TEXT_EvadedAttack
+	.2byte BATTLE_TEXT_DoesntAffect
+	.2byte BATTLE_TEXT_HealthSapped
+	.2byte BATTLE_TEXT_OozeSuckup
+
+BattleTextList_401556:: @ 8401556
+	.2byte BATTLE_TEXT_WentToSleep
+	.2byte BATTLE_TEXT_SpeltHealthy
+	.2byte BATTLE_TEXT_UproarMaking
+	.2byte BATTLE_TEXT_CalmedDown
+
+BattleTextList_40155E:: @ 840155E
+	.2byte BATTLE_TEXT_Stockpiled
+	.2byte BATTLE_TEXT_StockpiledCant
+	.2byte BATTLE_TEXT_WokeUp
+	.2byte BATTLE_TEXT_UproarWoke
+
+BattleTextList_401566:: @ 8401566
+	.2byte BATTLE_TEXT_SwallowFail
+	.2byte BATTLE_TEXT_HPFull
+
+BattleTextList_40156A:: @ 840156A
+	.2byte BATTLE_TEXT_UproarCantSleep2
+	.2byte BATTLE_TEXT_UproarKeptAwake
+	.2byte BATTLE_TEXT_StayedAwake
+
+BattleTextList_401570:: @ 8401570
+	.2byte BATTLE_TEXT_UnknownString7
+	.2byte BATTLE_TEXT_UnknownString3
+	.2byte BATTLE_TEXT_AttackingStatNoHigher
+	.2byte BATTLE_TEXT_Terminator2
+	.2byte BATTLE_TEXT_UnknownString4
+	.2byte BATTLE_TEXT_HustleUse
+
+BattleTextList_40157C:: @ 840157C
+	.2byte BATTLE_TEXT_UnknownString5
+	.2byte BATTLE_TEXT_UnknownString6
+	.2byte BATTLE_TEXT_DefendingStatNoHigher
+	.2byte BATTLE_TEXT_Terminator2
+
+BattleTextList_401584:: @ 8401584
+	.2byte BATTLE_TEXT_WhipWhirlwind
+	.2byte BATTLE_TEXT_TookSunlight
+	.2byte BATTLE_TEXT_LoweredHead
+	.2byte BATTLE_TEXT_IsGlowing
+	.2byte BATTLE_TEXT_FlewHigh
+	.2byte BATTLE_TEXT_DugHole
+	.2byte BATTLE_TEXT_HidUnderwater
+	.2byte BATTLE_TEXT_SprangUp
+
+BattleTextList_401594:: @ 8401594
+	.2byte BATTLE_TEXT_SqueezedBind
+	.2byte BATTLE_TEXT_Wrapped
+	.2byte BATTLE_TEXT_TrappedVortex
+	.2byte BATTLE_TEXT_Clamped
+	.2byte BATTLE_TEXT_TrappedVortex
+	.2byte BATTLE_TEXT_SandTombTrapped
+
+BattleTextList_4015A0:: @ 84015A0
+	.2byte BATTLE_TEXT_MistShroud
+	.2byte BATTLE_TEXT_Failed
+
+BattleTextList_4015A4:: @ 84015A4
+	.2byte BATTLE_TEXT_GetPumped
+	.2byte BATTLE_TEXT_Failed
+
+BattleTextList_4015A8:: @ 84015A8
+	.2byte BATTLE_TEXT_Transformed
+	.2byte BATTLE_TEXT_Failed
+
+BattleTextList_4015AC:: @ 84015AC
+	.2byte BATTLE_TEXT_SubMade
+	.2byte BATTLE_TEXT_SubWeak
+
+BattleTextList_4015B0:: @ 84015B0
+	.2byte BATTLE_TEXT_Poisoned
+	.2byte BATTLE_TEXT_Poisoned2
+
+BattleTextList_4015B4:: @ 84015B4
+	.2byte BATTLE_TEXT_Paralyzed
+	.2byte BATTLE_TEXT_Paralyzed2
+
+BattleTextList_4015B8:: @ 84015B8
+	.2byte BATTLE_TEXT_FellAsleep
+	.2byte BATTLE_TEXT_MadeAsleep
+
+BattleTextList_4015BC:: @ 84015BC
+	.2byte BATTLE_TEXT_Burned
+	.2byte BATTLE_TEXT_Burned2
+
+BattleTextList_4015C0:: @ 84015C0
+	.2byte BATTLE_TEXT_Frozen
+	.2byte BATTLE_TEXT_Frozen2
+	.2byte BATTLE_TEXT_AttackingDefrosted
+	.2byte BATTLE_TEXT_Defrosted
+
+BattleTextList_4015C8:: @ 84015C8
+	.2byte BATTLE_TEXT_AttackMissed
+	.2byte BATTLE_TEXT_Unaffected
+	.2byte BATTLE_TEXT_FellLove
+	.2byte BATTLE_TEXT_InfatuatedPoke
+
+BattleTextList_4015D0:: @ 84015D0
+	.2byte BATTLE_TEXT_EnergyDrained
+	.2byte BATTLE_TEXT_OozeSuckup
+
+BattleTextList_4015D4:: @ 84015D4
+	.2byte BATTLE_TEXT_ElecWeakened
+	.2byte BATTLE_TEXT_FireWeakened
+
+BattleTextList_4015D8:: @ 84015D8
+	.2byte BATTLE_TEXT_BellChime
+	.2byte BATTLE_TEXT_BellChime
+	.2byte BATTLE_TEXT_BellChime
+	.2byte BATTLE_TEXT_BellChime
+	.2byte BATTLE_TEXT_SoothingAroma
+
+BattleTextList_4015E2:: @ 84015E2
+	.2byte BATTLE_TEXT_ForesawAttack
+	.2byte BATTLE_TEXT_ChoseDestiny
+	.2byte BATTLE_TEXT_BallBrokeOhNo
+	.2byte BATTLE_TEXT_BallBrokeAppeared
+	.2byte BATTLE_TEXT_BallBrokeAlmost
+	.2byte BATTLE_TEXT_BallBrokeSoClose
+	.2byte BATTLE_TEXT_Raining
+	.2byte BATTLE_TEXT_Raining
+	.2byte BATTLE_TEXT_Raining
+	.2byte BATTLE_TEXT_Raining
+	.2byte BATTLE_TEXT_Raining
+	.2byte BATTLE_TEXT_Raining
+	.2byte BATTLE_TEXT_Raining
+	.2byte BATTLE_TEXT_Raining
+	.2byte BATTLE_TEXT_Sandstorm
+	.2byte BATTLE_TEXT_Raining
+	.2byte BATTLE_TEXT_Raining
+	.2byte BATTLE_TEXT_Raining
+	.2byte BATTLE_TEXT_SunStrong
+	.2byte BATTLE_TEXT_Raining
+	.2byte BATTLE_TEXT_Raining
+	.2byte BATTLE_TEXT_Raining
+	.2byte BATTLE_TEXT_LoafingAround
+	.2byte BATTLE_TEXT_WontObey
+	.2byte BATTLE_TEXT_TurnedAway
+	.2byte BATTLE_TEXT_NotNotice
+	.2byte BATTLE_TEXT_CreptCloser
+	.2byte BATTLE_TEXT_CantGetCloser
+	.2byte BATTLE_TEXT_CuriousAbout
+	.2byte BATTLE_TEXT_EnthralledBy
+	.2byte BATTLE_TEXT_IgnoredThing
+	.2byte BATTLE_TEXT_CuredConfusion
+	.2byte BATTLE_TEXT_CuredParalysis
+	.2byte BATTLE_TEXT_CuredFreeze
+	.2byte BATTLE_TEXT_CuredBurn
+	.2byte BATTLE_TEXT_CuredPoison
+	.2byte BATTLE_TEXT_CuredSleep
+	.2byte BATTLE_TEXT_CuredStatus
+	.2byte BATTLE_TEXT_NormalizedStatus
+
+BattleTextList_401630:: @ 8401630
+	.2byte BATTLE_TEXT_PreventedBurn
+	.2byte BATTLE_TEXT_PreventedOther2
+	.2byte BATTLE_TEXT_NoEffectOn
+
+BattleTextList_401636:: @ 8401636
+	.2byte BATTLE_TEXT_PreventedPara
+	.2byte BATTLE_TEXT_PreventedOther2
+	.2byte BATTLE_TEXT_NoEffectOn
+
+BattleTextList_40163C:: @ 840163C
+	.2byte BATTLE_TEXT_PreventedPoison
+	.2byte BATTLE_TEXT_PreventedOther2
+	.2byte BATTLE_TEXT_NoEffectOn
+
+BattleTextList_401642:: @ 8401642
+	.2byte BATTLE_TEXT_Obtained1
+	.2byte BATTLE_TEXT_Obtained2
+	.2byte BATTLE_TEXT_Obtained3
+	.2byte BATTLE_TEXT_RaisedFirePower
+	.2byte BATTLE_TEXT_MadeIneffective
 
 gUnknown_0840164C:: @ 840164C
-	.incbin "baserom.gba", 0x0040164c, 0x10
+	.2byte BATTLE_TEXT_StopLearning
+	.2byte BATTLE_TEXT_FellAsleep
+	.2byte BATTLE_TEXT_SpeltHealthy
+	.2byte BATTLE_TEXT_SubTookDamage
+	.2byte BATTLE_TEXT_CoinScatter
+	.2byte BATTLE_TEXT_SandTombTrapped
+
+	.incbin "baserom.gba", 0x401658, 0x4
 
 	.align 2
 gUnknown_0840165C:: @ 840165C

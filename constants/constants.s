@@ -22,3 +22,5 @@
 	.include "constants/version.s"
 	.include "constants/region_map_sections.s"
 	.include "constants/hold_effects.s"
+	.include "constants/battle.s"
+	.include "constants/battle_text.s"
