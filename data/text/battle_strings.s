@@ -1603,6 +1603,8 @@ gUnknown_08401508:: @ 8401508
 	.2byte BATTLE_TEXT_AvoidedAttack
 	.2byte BATTLE_TEXT_AvoidedDamage
 	.2byte BATTLE_TEXT_GroundMoveNegate
+
+BattleTextList_401512:: @ 8401512
 	.2byte BATTLE_TEXT_CantEscape2
 	.2byte BATTLE_TEXT_BirchDontLeaveMe
 	.2byte BATTLE_TEXT_PreventEscape
@@ -1616,12 +1618,20 @@ BattleTextList_40151C:: @ 840151C
 	.2byte BATTLE_TEXT_SandBrewed
 	.2byte BATTLE_TEXT_SunBright
 	.2byte BATTLE_TEXT_HailStart
+
+BattleTextList_401528:: @ 8401528
 	.2byte BATTLE_TEXT_SandRages
 	.2byte BATTLE_TEXT_HailCont
+
+BattleTextList_40152C:: @ 840152C
 	.2byte BATTLE_TEXT_SandBuffeted
 	.2byte BATTLE_TEXT_HailStricken
+
+BattleTextList_401530:: @ 8401530
 	.2byte BATTLE_TEXT_SandSubsided
 	.2byte BATTLE_TEXT_HailStop
+
+BattleTextList_401534:: @ 8401534
 	.2byte BATTLE_TEXT_RainCont1
 	.2byte BATTLE_TEXT_PourCont
 	.2byte BATTLE_TEXT_RainStop
@@ -1649,12 +1659,16 @@ BattleTextList_40154C:: @ 840154C
 BattleTextList_401556:: @ 8401556
 	.2byte BATTLE_TEXT_WentToSleep
 	.2byte BATTLE_TEXT_SpeltHealthy
+
+BattleTextList_40155A:: @ 840155A
 	.2byte BATTLE_TEXT_UproarMaking
 	.2byte BATTLE_TEXT_CalmedDown
 
 BattleTextList_40155E:: @ 840155E
 	.2byte BATTLE_TEXT_Stockpiled
 	.2byte BATTLE_TEXT_StockpiledCant
+
+BattleTextList_401562:: @ 8401562
 	.2byte BATTLE_TEXT_WokeUp
 	.2byte BATTLE_TEXT_UproarWoke
 
@@ -1734,6 +1748,8 @@ BattleTextList_4015BC:: @ 84015BC
 BattleTextList_4015C0:: @ 84015C0
 	.2byte BATTLE_TEXT_Frozen
 	.2byte BATTLE_TEXT_Frozen2
+
+BattleTextList_4015C4:: @ 84015C4
 	.2byte BATTLE_TEXT_AttackingDefrosted
 	.2byte BATTLE_TEXT_Defrosted
 
@@ -1761,10 +1777,14 @@ BattleTextList_4015D8:: @ 84015D8
 BattleTextList_4015E2:: @ 84015E2
 	.2byte BATTLE_TEXT_ForesawAttack
 	.2byte BATTLE_TEXT_ChoseDestiny
+
+BattleTextList_4015E6:: @ 84015E6
 	.2byte BATTLE_TEXT_BallBrokeOhNo
 	.2byte BATTLE_TEXT_BallBrokeAppeared
 	.2byte BATTLE_TEXT_BallBrokeAlmost
 	.2byte BATTLE_TEXT_BallBrokeSoClose
+
+BattleTextList_4015EE:: @ 84015EE
 	.2byte BATTLE_TEXT_Raining
 	.2byte BATTLE_TEXT_Raining
 	.2byte BATTLE_TEXT_Raining
@@ -1781,21 +1801,31 @@ BattleTextList_4015E2:: @ 84015E2
 	.2byte BATTLE_TEXT_Raining
 	.2byte BATTLE_TEXT_Raining
 	.2byte BATTLE_TEXT_Raining
+
+BattleTextList_40160E:: @ 840160E
 	.2byte BATTLE_TEXT_LoafingAround
 	.2byte BATTLE_TEXT_WontObey
 	.2byte BATTLE_TEXT_TurnedAway
 	.2byte BATTLE_TEXT_NotNotice
+
+BattleTextList_401616:: @ 8401616
 	.2byte BATTLE_TEXT_CreptCloser
 	.2byte BATTLE_TEXT_CantGetCloser
+
+BattleTextList_40161A:: @ 840161A
 	.2byte BATTLE_TEXT_CuriousAbout
 	.2byte BATTLE_TEXT_EnthralledBy
 	.2byte BATTLE_TEXT_IgnoredThing
+
+BattleTextList_401620:: @ 8401620
 	.2byte BATTLE_TEXT_CuredConfusion
 	.2byte BATTLE_TEXT_CuredParalysis
 	.2byte BATTLE_TEXT_CuredFreeze
 	.2byte BATTLE_TEXT_CuredBurn
 	.2byte BATTLE_TEXT_CuredPoison
 	.2byte BATTLE_TEXT_CuredSleep
+
+BattleTextList_40162C:: @ 840162C
 	.2byte BATTLE_TEXT_CuredStatus
 	.2byte BATTLE_TEXT_NormalizedStatus
 
@@ -1818,6 +1848,8 @@ BattleTextList_401642:: @ 8401642
 	.2byte BATTLE_TEXT_Obtained1
 	.2byte BATTLE_TEXT_Obtained2
 	.2byte BATTLE_TEXT_Obtained3
+
+BattleTextList_401648:: @ 8401648
 	.2byte BATTLE_TEXT_RaisedFirePower
 	.2byte BATTLE_TEXT_MadeIneffective
 

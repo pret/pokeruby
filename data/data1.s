@@ -545,7 +545,10 @@ BattleScript_1D71E0: @ 81D71E0
 	jump BattleScript_1D6F62
 
 gUnknown_081D71E5:: @ 81D71E5
-	.incbin "baserom.gba", 0x1d71e5, 0x10
+	playanimation 2, 1, 0x20160a4
+	printfromtable BattleTextList_401570
+	waitmessage 64
+	return
 
 MoveEffect_AttackDown: @ 81D71F5
 	setbyte 0x201601e, 145
@@ -592,7 +595,10 @@ BattleScript_1D7271: @ 81D7271
 	jump BattleScript_1D6F62
 
 gUnknown_081D7276:: @ 81D7276
-	.incbin "baserom.gba", 0x1d7276, 0x10
+	playanimation 2, 1, 0x20160a4
+	printfromtable BattleTextList_40157C
+	waitmessage 64
+	return
 
 MoveEffect_Haze: @ 81D7286
 	attackcanceler
@@ -1163,7 +1169,9 @@ MoveEffect_Recharge: @ 81D7943
 	jump BattleScript_1D6F42
 
 gUnknown_081D7956:: @ 81D7956
-	.incbin "baserom.gba", 0x1d7956, 0xb
+	printstring BATTLE_TEXT_MustRecharge
+	waitmessage 64
+	jump BattleScript_1D6F62
 
 MoveEffect_Rage: @ 81D7961
 	attackcanceler
@@ -2924,85 +2932,372 @@ MoveEffect_Camouflage: @ 81D8C43
 	jump BattleScript_1D6F62
 
 gUnknown_081D8C58:: @ 81D8C58
-	.incbin "baserom.gba", 0x1d8c58, 0xd
+	atk56 1
+	pause 64
+	atk1a 1
+	atk1b 1
+	printstring BATTLE_TEXT_AttackingFainted
+	return
 
 gUnknown_081D8C65:: @ 81D8C65
-	.incbin "baserom.gba", 0x1d8c65, 0xd
+	atk56 0
+	pause 64
+	atk1a 0
+	atk1b 0
+	printstring BATTLE_TEXT_DefendingFainted
+	return
 
 gUnknown_081D8C72:: @ 81D8C72
-	.incbin "baserom.gba", 0x1d8c72, 0x9
+	setbyte 0x201600f, 0
+	atk23 0
+	end2
 
 gUnknown_081D8C7B:: @ 81D8C7B
-	.incbin "baserom.gba", 0x1d8c7b, 0x143
+	atk24 BattleScript_1D8D87
+	jumpifbyte 1, 0x2024d26, 0, BattleScript_1D8D86
+	jumpifhalfword 4, 0x20239f8, 8, BattleScript_1D8CC2
+	jumpifword 5, 0x2024c6c, 0x400000, BattleScript_1D8CC2
+	printstring BATTLE_TEXT_UseNext
+	setbyte 0x2024d1e, 0
+	atk67
+	jumpifbyte 0, 0x2024d1f, 0, BattleScript_1D8CC2
+	atk72 BattleScript_1D8D86
+	printstring BATTLE_TEXT_CantEscape
+
+BattleScript_1D8CC2: @ 81D8CC2
+	openpartyscreen 3, BattleScript_1D8D86
+	atk51 3, 2
+	jumpifhalfword 5, 0x20239f8, 8, BattleScript_1D8D66
+	jumpifhalfword 4, 0x20239f8, 2, BattleScript_1D8D66
+	jumpifhalfword 4, 0x20239f8, 256, BattleScript_1D8D66
+	jumpifhalfword 4, 0x20239f8, 1, BattleScript_1D8D66
+	jumpifword 4, 0x2024c6c, 0x400000, BattleScript_1D8D66
+	jumpifbyte 0, 0x2016084, 1, BattleScript_1D8D66
+	jumpifcannotswitch USER, BattleScript_1D8D66
+	printstring BATTLE_TEXT_WillSwitch
+	setbyte 0x2024d1e, 0
+	atk67
+	jumpifbyte 0, 0x2024d1f, 1, BattleScript_1D8D66
+	atk6e
+	openpartyscreen 129, BattleScript_1D8D66
+	atk51 USER, 2
+	jumpifbyte 0, 0x2024d1e, 6, BattleScript_1D8D66
+	atk6b
+	atk76 USER, 5
+	atk74 1
+	printstring 2
+	atke2 USER
+	waitstateatk
+	atk4b
+	waitstateatk
+	atk61 1
+	switch1 USER
+	switch2 USER
+	atk73 USER
+	printstring 3
+	atk62 1
+	switch3 USER, 0
+	waitstateatk
+	atk52 USER
+	atk6d
+
+BattleScript_1D8D66: @ 81D8D66
+	atk61 3
+	switch1 3
+	switch2 3
+	atk73 3
+	printstring 3
+	atk62 3
+	switch3 3, 0
+	waitstateatk
+	atk52 3
+	jumpifhalfword 4, 0x20239f8, 1, BattleScript_1D8D86
+	atk68
+
+BattleScript_1D8D86: @ 81D8D86
+	end2
+
+BattleScript_1D8D87: @ 81D8D87
+	openpartyscreen 5, BattleScript_1D8D8D
+
+BattleScript_1D8D8D: @ 81D8D8D
+	atk51 3, 0
+	openpartyscreen 6, BattleScript_1D8DBD
+	atk51 3, 0
+
+BattleScript_1D8D99: @ 81D8D99
+	atk51 3, 2
+	atk61 3
+	switch1 3
+	switch2 3
+	atk73 3
+	printstring 3
+	atk62 3
+	switch3 3, 0
+	waitstateatk
+	atk52 5
+	jumpifarraynotequal 0x2024c09, 0x2024a68, 1, BattleScript_1D8D99
+
+BattleScript_1D8DBD: @ 81D8DBD
+	end2
 
 gUnknown_081D8DBE:: @ 81D8DBE
-	.incbin "baserom.gba", 0x1d8dbe, 0x10
+	printstring BATTLE_TEXT_PlayerDefeatedTrainer2
+	atk53 1
+	waitstateatk
+	printstring BATTLE_TEXT_UnknownString
+	atk5d
+	printstring BATTLE_TEXT_WinningPrize
+	waitmessage 64
 
 gUnknown_081D8DCE:: @ 81D8DCE
-	.incbin "baserom.gba", 0x1d8dce, 0x3
+	givemoney
+	pickupitemcalculation
+	end2
 
 gUnknown_081D8DD1:: @ 81D8DD1
-	.incbin "baserom.gba", 0x1d8dd1, 0x31
+	jumpifhalfword 4, 0x20239f8, 256, BattleScript_1D8E01
+	jumpifhalfword 4, 0x20239f8, 2048, BattleScript_1D8E01
+	jumpifhalfword 0, 0x202ff5e, 1024, BattleScript_1D8E01
+	printstring BATTLE_TEXT_OutOfUsablePoke
+	waitmessage 64
+	printstring BATTLE_TEXT_WhitedOut
+	waitmessage 64
+
+BattleScript_1D8E01: @ 81D8E01
+	end2
 
 gUnknown_081D8E02:: @ 81D8E02
-	.incbin "baserom.gba", 0x1d8e02, 0xb
+	printstring 5
+	waitmessage 64
+	atk57
+	waitmessage 64
+	end2
 
 gUnknown_081D8E0D:: @ 81D8E0D
-	.incbin "baserom.gba", 0x1d8e0d, 0x7
+	printstring BATTLE_TEXT_PlayerDefeatedTrainer2
+	atk53 1
+	waitstateatk
+	end2
 
 gUnknown_081D8E14:: @ 81D8E14
-	.incbin "baserom.gba", 0x1d8e14, 0xe
+	playanimation USER, 8, 0x0
+	printstring BATTLE_TEXT_FledUsingItem
+	waitmessage 64
+	end2
 
 gUnknown_081D8E22:: @ 81D8E22
-	.incbin "baserom.gba", 0x1d8e22, 0x7
+	printstring BATTLE_TEXT_FledUsingOther
+	waitmessage 64
+	end2
 
 gUnknown_081D8E29:: @ 81D8E29
-	.incbin "baserom.gba", 0x1d8e29, 0x7
+	printstring BATTLE_TEXT_GotAwaySafely
+	waitmessage 64
+	end2
 
 gUnknown_081D8E30:: @ 81D8E30
-	.incbin "baserom.gba", 0x1d8e30, 0x7
+	printstring BATTLE_TEXT_FledWild
+	waitmessage 64
+	end2
 
 gUnknown_081D8E37:: @ 81D8E37
-	.incbin "baserom.gba", 0x1d8e37, 0x4
+	printstring BATTLE_TEXT_NoRunning
+	end2
 
 gUnknown_081D8E3B:: @ 81D8E3B
-	.incbin "baserom.gba", 0x1d8e3b, 0x9
+	printfromtable BattleTextList_401512
+	waitmessage 64
+	end2
 
 gUnknown_081D8E44:: @ 81D8E44
-	.incbin "baserom.gba", 0x1d8e44, 0x6
+	printfromtable2 BattleTextList_401512
+	atk44
 
 gUnknown_081D8E4A:: @ 81D8E4A
-	.incbin "baserom.gba", 0x1d8e4a, 0x4
+	printstring2 BATTLE_TEXT_BoxFull
+	atk44
 
 gUnknown_081D8E4E:: @ 81D8E4E
-	.incbin "baserom.gba", 0x1d8e4e, 0xa1
+	atk74 1
+	printstring 2
+	setbyte 0x201601f, 2
+	jumpifbyte 4, 0x20239f8, 1, BattleScript_1D8E6B
+	atk26 1
+	jump BattleScript_1D8E6D
+
+BattleScript_1D8E6B: @ 81D8E6B
+	atk26 2
+
+BattleScript_1D8E6D: @ 81D8E6D
+	atkba BattleScript_1D8E7A
+	atk5f
+	atkab
+	callatk BattleScript_1D8EAD
+	atk5f
+
+BattleScript_1D8E7A: @ 81D8E7A
+	atk27 BattleScript_1D8E6D
+	atke2 USER
+	waitstateatk
+	atk4b
+	waitstateatk
+	atk61 1
+	atk51 USER, 1
+	switch1 USER
+	switch2 USER
+	atk73 USER
+	printstring 3
+	atk62 1
+	switch3 USER, 0
+	waitstateatk
+	atk52 USER
+	setbyte 0x201600c, 4
+	atk49 1, 0
+	setbyte 0x201600c, 15
+	atk49 1, 0
+	end2
+
+BattleScript_1D8EAD: @ 81D8EAD
+	pause 32
+	attackstring
+	ppreduce
+	critcalc
+	atk5
+	atk6
+	atk7
+	attackanimation
+	waitanimation
+	missmessage
+	atk5c TARGET
+	waitstateatk
+	graphicalhpupdate TARGET
+	datahpupdate TARGET
+	critmessage
+	waitmessage 64
+	resultmessage
+	waitmessage 64
+	faintpokemon TARGET, 0, 0x0
+	setbyte 0x201600c, 3
+	atk49 2, 6
+	atk76 TARGET, 4
+	jumpifbyte 0, 0x2024d1e, 0, BattleScript_1D8EEE
+	setbyte 0x201600f, 0
+	atk23 0
+
+BattleScript_1D8EEE: @ 81D8EEE
+	return
 
 gUnknown_081D8EEF:: @ 81D8EEF
-	.incbin "baserom.gba", 0x1d8eef, 0x4
+	pause 32
+	return
 
 gUnknown_081D8EF3:: @ 81D8EF3
-	.incbin "baserom.gba", 0x1d8ef3, 0x6f
+	atk55 0xe10016f
+	attackcanceler
+	setbyte 0x201609c, 0
+	atk6c
+	checkiflearnmoveinbattle BattleScript_1D8F4F, BattleScript_1D8F61, 1
+	jump BattleScript_1D8F19
+
+BattleScript_1D8F0F: @ 81D8F0F
+	checkiflearnmoveinbattle BattleScript_1D8F4F, BattleScript_1D8F61, 0
+
+BattleScript_1D8F19: @ 81D8F19
+	atk71
+	printstring BATTLE_TEXT_TryingToLearnMove
+	printstring BATTLE_TEXT_CantLearnMore
+	printstring BATTLE_TEXT_DeleteMove
+	waitstateatk
+	setbyte 0x201601a, 0
+	atk5a BattleScript_1D8F46
+	printstring BATTLE_TEXT_StopLearning
+	waitstateatk
+	setbyte 0x201601a, 0
+	atk5b BattleScript_1D8F19
+	printstring BATTLE_TEXT_DidNotLearn
+	jump BattleScript_1D8F0F
+
+BattleScript_1D8F46: @ 81D8F46
+	printstring BATTLE_TEXT_MoveForget123
+	printstring BATTLE_TEXT_DeletedMove
+	printstring BATTLE_TEXT_MoveForgetAnd
+
+BattleScript_1D8F4F: @ 81D8F4F
+	atk71
+	atk55 0xf10016f
+	attackcanceler
+	waitmessage 64
+	atk76 USER, 6
+	jump BattleScript_1D8F0F
+
+BattleScript_1D8F61: @ 81D8F61
+	return
 
 gUnknown_081D8F62:: @ 81D8F62
-	.incbin "baserom.gba", 0x1d8f62, 0x1b
+	printfromtable BattleTextList_401534
+	waitmessage 64
+	jumpifbyte 0, 0x2024d23, 2, BattleScript_1D8F7C
+	playanimation USER, 10, 0x0
+
+BattleScript_1D8F7C: @ 81D8F7C
+	end2
 
 gUnknown_081D8F7D:: @ 81D8F7D
-	.incbin "baserom.gba", 0x1d8f7d, 0x82
+	printfromtable BattleTextList_401528
+	waitmessage 64
+	atk46 1, 0x20160a4, 0x0
+	setbyte 0x2024d1e, 0
+
+BattleScript_1D8F95: @ 81D8F95
+	atk32 0x2024c07, 0x2024a7a, 0x2024d1e, 1
+	weatherdamage
+	jumpifword 0, 0x2024bec, 0x0, BattleScript_1D8FD6
+	printfromtable BattleTextList_40152C
+	waitmessage 64
+	orword 0x2024c6c, 0x1100120
+	missmessage
+	atk5c USER
+	graphicalhpupdate USER
+	datahpupdate USER
+	faintpokemon USER, 0, 0x0
+	atk24 BattleScript_1D8FD6
+
+BattleScript_1D8FD6: @ 81D8FD6
+	jumpifbyte 1, 0x2024d26, 0, BattleScript_1D8FF5
+	addbyte 0x2024d1e, 1
+	jumpifarraynotequal 0x2024d1e, 0x2024a68, 1, BattleScript_1D8F95
+
+BattleScript_1D8FF5: @ 81D8FF5
+	bicword 0x2024c6c, 0x1100120
+	end2
 
 gUnknown_081D8FFF:: @ 81D8FFF
-	.incbin "baserom.gba", 0x1d8fff, 0x9
+	printfromtable BattleTextList_401530
+	waitmessage 64
+	end2
 
 gUnknown_081D9008:: @ 81D9008
-	.incbin "baserom.gba", 0x1d9008, 0xe
+	printstring BATTLE_TEXT_SunStrong
+	waitmessage 64
+	playanimation USER, 11, 0x0
+	end2
 
 gUnknown_081D9016:: @ 81D9016
-	.incbin "baserom.gba", 0x1d9016, 0x7
+	printstring BATTLE_TEXT_SunFaded
+	waitmessage 64
+	end2
 
 gUnknown_081D901D:: @ 81D901D
-	.incbin "baserom.gba", 0x1d901d, 0x13
+	printfromtable BattleTextList_4015EE
+	waitmessage 64
+	atk46 1, 0x20160a4, 0x0
+	end3
 
 gUnknown_081D9030:: @ 81D9030
-	.incbin "baserom.gba", 0x1d9030, 0x7
+	printstring BATTLE_TEXT_WoreOff
+	waitmessage 64
+	end2
 
 BattleScript_1D9037: @ 81D9037
 	pause 32
@@ -3011,100 +3306,352 @@ BattleScript_1D9037: @ 81D9037
 	end2
 
 gUnknown_081D9041:: @ 81D9041
-	.incbin "baserom.gba", 0x1d9041, 0xa
+	pause 32
+	printstring BATTLE_TEXT_SafeguardFaded
+	waitmessage 64
+	end2
 
 gUnknown_081D904B:: @ 81D904B
-	.incbin "baserom.gba", 0x1d904b, 0x5c
+	playanimation USER, 14, 0x20160a4
+	orword 0x2024c6c, 0x100100
+	graphicalhpupdate USER
+	datahpupdate USER
+	copyarray 0x2024bec, 0x2024bf0, 4
+	jumpifability USER, ABILITY_LIQUID_OOZE, BattleScript_1D907D
+	manipulatedamage 0
+	setbyte 0x2024d23, 3
+	jump BattleScript_1D9083
+
+BattleScript_1D907D: @ 81D907D
+	setbyte 0x2024d23, 4
+
+BattleScript_1D9083: @ 81D9083
+	orword 0x2024c6c, 0x100100
+	graphicalhpupdate TARGET
+	datahpupdate TARGET
+	printfromtable BattleTextList_40154C
+	waitmessage 64
+	faintpokemon USER, 0, 0x0
+	faintpokemon TARGET, 0, 0x0
+	end2
 
 gUnknown_081D90A7:: @ 81D90A7
-	.incbin "baserom.gba", 0x1d90a7, 0xb
+	printstring BATTLE_TEXT_StoringEnergy
+	waitmessage 64
+	jump BattleScript_1D6F62
 
 gUnknown_081D90B2:: @ 81D90B2
-	.incbin "baserom.gba", 0x1d90b2, 0x3f
+	printstring BATTLE_TEXT_UnleashedEnergy
+	waitmessage 64
+	accuracycheck BattleScript_1D6F77, 0
+	atk6
+	bicbyte 0x2024c68, 6
+	copyarray 0x2024bec, 0x2016090, 4
+	atk69
+	setbyte 0x2016002, 1
+	attackanimation
+	waitanimation
+	missmessage
+	atk5c TARGET
+	waitstateatk
+	graphicalhpupdate TARGET
+	datahpupdate TARGET
+	resultmessage
+	waitmessage 64
+	faintpokemon TARGET, 0, 0x0
+	jump BattleScript_1D6F62
 
 gUnknown_081D90F1:: @ 81D90F1
-	.incbin "baserom.gba", 0x1d90f1, 0xb
+	printstring BATTLE_TEXT_UnleashedEnergy
+	waitmessage 64
+	jump BattleScript_1D83D6
 
 gUnknown_081D90FC:: @ 81D90FC
-	.incbin "baserom.gba", 0x1d90fc, 0x2c
+	attackanimation
+	waitanimation
+	atke2 TARGET
+	atk58 TARGET
+	waitstateatk
+	jumpifhalfword 4, 0x20239f8, 8, BattleScript_1D9116
+	setbyte 0x2024d26, 5
+	atkf6
+
+BattleScript_1D9116: @ 81D9116
+	switch1 TARGET
+	switch2 TARGET
+	switch3 TARGET, 0
+	waitstateatk
+	printstring BATTLE_TEXT_DraggedOut
+	atk52 TARGET
+	jump BattleScript_1D6F62
 
 gUnknown_081D9128:: @ 81D9128
-	.incbin "baserom.gba", 0x1d9128, 0xa
+	pause 32
+	printstring BATTLE_TEXT_MistProtect
+	waitmessage 64
+	return
 
 gUnknown_081D9132:: @ 81D9132
-	.incbin "baserom.gba", 0x1d9132, 0x7
+	printstring BATTLE_TEXT_RageBuilding
+	waitmessage 64
+	return
 
 gUnknown_081D9139:: @ 81D9139
-	.incbin "baserom.gba", 0x1d9139, 0xb
+	printstring BATTLE_TEXT_MoveIsDisabled
+	waitmessage 64
+	jump BattleScript_1D6F62
 
 gUnknown_081D9144:: @ 81D9144
-	.incbin "baserom.gba", 0x1d9144, 0x4
+	printstring2 BATTLE_TEXT_MoveIsDisabled
+	atk44
 
 gUnknown_081D9148:: @ 81D9148
-	.incbin "baserom.gba", 0x1d9148, 0x7
+	printstring BATTLE_TEXT_DisabledNoMore
+	waitmessage 64
+	end2
 
 gUnknown_081D914F:: @ 81D914F
-	.incbin "baserom.gba", 0x1d914f, 0x7
+	printstring BATTLE_TEXT_EncoreEnded
+	waitmessage 64
+	end2
 
 gUnknown_081D9156:: @ 81D9156
-	.incbin "baserom.gba", 0x1d9156, 0x1b
+	printstring BATTLE_TEXT_DestinyBondTaken
+	waitmessage 64
+	orword 0x2024c6c, 0x100100
+	graphicalhpupdate USER
+	datahpupdate USER
+	faintpokemon USER, 0, 0x0
+	return
 
 gUnknown_081D9171:: @ 81D9171
-	.incbin "baserom.gba", 0x1d9171, 0x2e
+	orword 0x2024c6c, 0x100100
+	graphicalhpupdate USER
+	datahpupdate USER
+	callatk BattleScript_1D91FB
+	faintpokemon USER, 0, 0x0
+	faintpokemon USER, 1, BattleScript_1D9192
+	return
+
+BattleScript_1D9192: @ 81D9192
+	setbyte 0x201600f, 0
+	atk23 1
+	jump gUnknown_081D8C7B
 
 gUnknown_081D919F:: @ 81D919F
-	.incbin "baserom.gba", 0x1d919f, 0x2e
+	orword 0x2024c6c, 0x100100
+	graphicalhpupdate TARGET
+	datahpupdate TARGET
+	callatk BattleScript_1D91FB
+	faintpokemon TARGET, 0, 0x0
+	faintpokemon TARGET, 1, BattleScript_1D91C0
+	return
+
+BattleScript_1D91C0: @ 81D91C0
+	setbyte 0x201600f, 0
+	atk23 0
+	jump gUnknown_081D8C7B
 
 gUnknown_081D91CD:: @ 81D91CD
-	.incbin "baserom.gba", 0x1d91cd, 0x35
+	orword 0x2024c6c, 0x100100
+	graphicalhpupdate 3
+	datahpupdate 3
+	callatk BattleScript_1D91FB
+	faintpokemon 3, 0, 0x0
+	faintpokemon 3, 1, BattleScript_1D91EE
+	return
+
+BattleScript_1D91EE: @ 81D91EE
+	setbyte 0x201600f, 0
+	atk23 3
+	jump gUnknown_081D8C7B
+
+BattleScript_1D91FB: @ 81D91FB
+	printstring BATTLE_TEXT_SpikesHurt
+	waitmessage 64
+	return
 
 gUnknown_081D9202:: @ 81D9202
-	.incbin "baserom.gba", 0x1d9202, 0x1b
+	printstring BATTLE_TEXT_PerishSongFell
+	waitmessage 64
+	orword 0x2024c6c, 0x100100
+	graphicalhpupdate USER
+	datahpupdate USER
+	faintpokemon USER, 0, 0x0
+	end2
 
 gUnknown_081D921D:: @ 81D921D
-	.incbin "baserom.gba", 0x1d921d, 0x7
+	printstring BATTLE_TEXT_PerishSongFell
+	waitmessage 64
+	end2
 
 gUnknown_081D9224:: @ 81D9224
-	.incbin "baserom.gba", 0x1d9224, 0x9c
+	jumpifstat USER, 3, 1, 12, BattleScript_1D9251
+	jumpifstat USER, 3, 2, 12, BattleScript_1D9251
+	jumpifstat USER, 3, 3, 12, BattleScript_1D9251
+	jumpifstat USER, 3, 4, 12, BattleScript_1D9251
+	jumpifstat USER, 0, 5, 12, BattleScript_1D92BF
+
+BattleScript_1D9251: @ 81D9251
+	setbyte 0x20160dc, 0
+	playstatchangeanimation USER, 62, 0
+	setbyte 0x201601e, 17
+	statbuffchange 65, BattleScript_1D926F
+	printfromtable BattleTextList_401570
+	waitmessage 64
+
+BattleScript_1D926F: @ 81D926F
+	setbyte 0x201601e, 18
+	statbuffchange 65, BattleScript_1D9283
+	printfromtable BattleTextList_401570
+	waitmessage 64
+
+BattleScript_1D9283: @ 81D9283
+	setbyte 0x201601e, 19
+	statbuffchange 65, BattleScript_1D9297
+	printfromtable BattleTextList_401570
+	waitmessage 64
+
+BattleScript_1D9297: @ 81D9297
+	setbyte 0x201601e, 20
+	statbuffchange 65, BattleScript_1D92AB
+	printfromtable BattleTextList_401570
+	waitmessage 64
+
+BattleScript_1D92AB: @ 81D92AB
+	setbyte 0x201601e, 21
+	statbuffchange 65, BattleScript_1D92BF
+	printfromtable BattleTextList_401570
+	waitmessage 64
+
+BattleScript_1D92BF: @ 81D92BF
+	return
 
 gUnknown_081D92C0:: @ 81D92C0
-	.incbin "baserom.gba", 0x1d92c0, 0x2
+	breakfree
+	return
 
 gUnknown_081D92C2:: @ 81D92C2
-	.incbin "baserom.gba", 0x1d92c2, 0x7
+	printstring BATTLE_TEXT_GotFreeFrom
+	waitmessage 64
+	return
 
 gUnknown_081D92C9:: @ 81D92C9
-	.incbin "baserom.gba", 0x1d92c9, 0x7
+	printstring BATTLE_TEXT_LeechShed
+	waitmessage 64
+	return
 
 gUnknown_081D92D0:: @ 81D92D0
-	.incbin "baserom.gba", 0x1d92d0, 0x7
+	printstring BATTLE_TEXT_SpikesBlownAway
+	waitmessage 64
+	return
 
 gUnknown_081D92D7:: @ 81D92D7
-	.incbin "baserom.gba", 0x1d92d7, 0x8e
+	printstring BATTLE_TEXT_TookAttack
+	waitmessage 64
+	jumpifbyte 1, 0x2024d23, 0, BattleScript_1D92F4
+	accuracycheck BattleScript_1D934B, 248
+	jump BattleScript_1D92FB
+
+BattleScript_1D92F4: @ 81D92F4
+	accuracycheck BattleScript_1D934B, 353
+
+BattleScript_1D92FB: @ 81D92FB
+	atk8
+	jumpifbyte 1, 0x2024d23, 0, BattleScript_1D9313
+	playanimation USER, 18, 0x0
+	jump BattleScript_1D931A
+
+BattleScript_1D9313: @ 81D9313
+	playanimation USER, 19, 0x0
+
+BattleScript_1D931A: @ 81D931A
+	missmessage
+	atk5c TARGET
+	waitstateatk
+	graphicalhpupdate TARGET
+	datahpupdate TARGET
+	resultmessage
+	waitmessage 64
+	faintpokemon TARGET, 0, 0x0
+	atk24 BattleScript_1D9332
+
+BattleScript_1D9332: @ 81D9332
+	setbyte 0x201600c, 0
+	atk49 1, 0
+	setbyte 0x201600c, 8
+	atk49 2, 14
+	setbyte 0x2024c68, 0
+	end2
+
+BattleScript_1D934B: @ 81D934B
+	pause 32
+	setbyte 0x2024c68, 0
+	orbyte 0x2024c68, 32
+	resultmessage
+	waitmessage 64
+	setbyte 0x2024c68, 0
+	end2
 
 gUnknown_081D9365:: @ 81D9365
-	.incbin "baserom.gba", 0x1d9365, 0x4
+	printstring2 BATTLE_TEXT_NoMovesLeft
+	atk44
 
 gUnknown_081D9369:: @ 81D9369
-	.incbin "baserom.gba", 0x1d9369, 0x4
+	printstring2 BATTLE_TEXT_NoPP1
+	atk44
 
 gUnknown_081D936D:: @ 81D936D
-	.incbin "baserom.gba", 0x1d936d, 0xf
+	attackstring
+	pause 32
+	printstring BATTLE_TEXT_NoPP2
+	waitmessage 64
+	jump BattleScript_1D6F62
 
 gUnknown_081D937C:: @ 81D937C
-	.incbin "baserom.gba", 0x1d937c, 0xf
+	printstring2 BATTLE_TEXT_TormentNoUse
+	atk44
+	printstring BATTLE_TEXT_TormentNoUse
+	waitmessage 64
+	jump BattleScript_1D6F62
 
 gUnknown_081D938B:: @ 81D938B
-	.incbin "baserom.gba", 0x1d938b, 0x4
+	printstring2 BATTLE_TEXT_TauntNoUse
+	atk44
 
 gUnknown_081D938F:: @ 81D938F
-	.incbin "baserom.gba", 0x1d938f, 0xb
+	printstring BATTLE_TEXT_TauntNoUse
+	waitmessage 64
+	jump BattleScript_1D6F62
 
 gUnknown_081D939A:: @ 81D939A
-	.incbin "baserom.gba", 0x1d939a, 0x37
+	atkd4 1, BattleScript_1D93C1
+	playanimation TARGET, 22, 0x0
+	printstring BATTLE_TEXT_WishTrue
+	waitmessage 64
+	orword 0x2024c6c, 0x100
+	graphicalhpupdate TARGET
+	datahpupdate TARGET
+	printstring BATTLE_TEXT_RegainedHealth
+	waitmessage 64
+	end2
+
+BattleScript_1D93C1: @ 81D93C1
+	printstring BATTLE_TEXT_WishTrue
+	waitmessage 64
+	pause 32
+	printstring BATTLE_TEXT_HPFull
+	waitmessage 64
+	end2
 
 gUnknown_081D93D1:: @ 81D93D1
-	.incbin "baserom.gba", 0x1d93d1, 0x1b
+	playanimation USER, 21, 0x0
+	printstring BATTLE_TEXT_AbsorbNutrients
+	waitmessage 64
+	orword 0x2024c6c, 0x100
+	graphicalhpupdate USER
+	datahpupdate USER
+	end2
 
 BattleScript_1D93EC: @ 81D93EC
 	pause 32
@@ -3113,104 +3660,250 @@ BattleScript_1D93EC: @ 81D93EC
 	jump BattleScript_1D6F62
 
 gUnknown_081D93FA:: @ 81D93FA
-	.incbin "baserom.gba", 0x1d93fa, 0x51
+	setbyte 0x20160dc, 0
+	playstatchangeanimation USER, 6, 13
+	playstatchangeanimation USER, 2, 9
+	setbyte 0x201601e, 145
+	statbuffchange 193, BattleScript_1D9427
+	jumpifbyte 0, 0x2024d23, 2, BattleScript_1D9427
+	printfromtable BattleTextList_40157C
+	waitmessage 64
+
+BattleScript_1D9427: @ 81D9427
+	playstatchangeanimation USER, 4, 9
+	setbyte 0x201601e, 146
+	statbuffchange 193, BattleScript_1D944A
+	jumpifbyte 0, 0x2024d23, 2, BattleScript_1D944A
+	printfromtable BattleTextList_40157C
+	waitmessage 64
+
+BattleScript_1D944A: @ 81D944A
+	return
 
 gUnknown_081D944B:: @ 81D944B
-	.incbin "baserom.gba", 0x1d944b, 0xe
+	playanimation TARGET, 5, 0x0
+	printstring BATTLE_TEXT_KnockedOffItem
+	waitmessage 64
+	return
 
 gUnknown_081D9459:: @ 81D9459
-	.incbin "baserom.gba", 0x1d9459, 0xb
+	printstring BATTLE_TEXT_SealedNoUse
+	waitmessage 64
+	jump BattleScript_1D6F62
 
 gUnknown_081D9464:: @ 81D9464
-	.incbin "baserom.gba", 0x1d9464, 0x4
+	printstring2 BATTLE_TEXT_SealedNoUse
+	atk44
 
 gUnknown_081D9468:: @ 81D9468
-	.incbin "baserom.gba", 0x1d9468, 0x7
+	printstring BATTLE_TEXT_GrudgeLosePP
+	waitmessage 64
+	return
 
 gUnknown_081D946F:: @ 81D946F
-	.incbin "baserom.gba", 0x1d946f, 0x18
+	attackstring
+	ppreduce
+	pause 32
+	printstring BATTLE_TEXT_MagicCoatBounce
+	waitmessage 64
+	orword 0x2024c6c, 0x800c00
+	atk76 USER, 1
+	return
 
 gUnknown_081D9487:: @ 81D9487
-	.incbin "baserom.gba", 0x1d9487, 0x1b
+	attackstring
+	ppreduce
+	snatchmove
+	playanimation TARGET, 17, 0x0
+	printstring BATTLE_TEXT_SnatchedMove
+	waitmessage 64
+	orword 0x2024c6c, 0x800c00
+	atk5f
+	return
 
 gUnknown_081D94A2:: @ 81D94A2
-	.incbin "baserom.gba", 0x1d94a2, 0x7
+	printstring BATTLE_TEXT_EnduredHit
+	waitmessage 64
+	return
 
 gUnknown_081D94A9:: @ 81D94A9
-	.incbin "baserom.gba", 0x1d94a9, 0x7
+	printstring BATTLE_TEXT_GrandSlam
+	waitmessage 64
+	return
 
 gUnknown_081D94B0:: @ 81D94B0
-	.incbin "baserom.gba", 0x1d94b0, 0x2a
+	setbyte 0x20160dc, 0
+	playstatchangeanimation USER, 16, 11
+	setbyte 0x201601e, 164
+	statbuffchange 193, BattleScript_1D94D9
+	jumpifbyte 0, 0x2024d23, 2, BattleScript_1D94D9
+	printfromtable BattleTextList_40157C
+	waitmessage 64
+
+BattleScript_1D94D9: @ 81D94D9
+	return
 
 gUnknown_081D94DA:: @ 81D94DA
-	.incbin "baserom.gba", 0x1d94da, 0x14
+	printstring BATTLE_TEXT_Terminator2
+	waitmessage 1
+	playanimation USER, 20, 0x0
+	printstring BATTLE_TEXT_TightenFocus
+	waitmessage 64
+	end2
 
 gUnknown_081D94EE:: @ 81D94EE
-	.incbin "baserom.gba", 0x1d94ee, 0xd
+	printstring BATTLE_TEXT_FastAsleep
+	waitmessage 64
+	statusanimation USER
+	jump BattleScript_1D6F62
 
 gUnknown_081D94FB:: @ 81D94FB
-	.incbin "baserom.gba", 0x1d94fb, 0x14
+	bicword 0x2024c6c, 0x10
+	printfromtable BattleTextList_401562
+	waitmessage 64
+	atk98 1
+	return
 
 gUnknown_081D950F:: @ 81D950F
-	.incbin "baserom.gba", 0x1d950f, 0x9
+	printstring BATTLE_TEXT_UproarWoke
+	waitmessage 64
+	atk98 1
+	end2
 
 gUnknown_081D9518:: @ 81D9518
-	.incbin "baserom.gba", 0x1d9518, 0x22
+	printstring BATTLE_TEXT_PoisonHurt
+	waitmessage 64
+
+BattleScript_1D951E: @ 81D951E
+	statusanimation USER
+
+BattleScript_1D9520: @ 81D9520
+	orword 0x2024c6c, 0x100100
+	graphicalhpupdate USER
+	datahpupdate USER
+	faintpokemon USER, 0, 0x0
+	atk24 BattleScript_1D9539
+
+BattleScript_1D9539: @ 81D9539
+	end2
 
 gUnknown_081D953A:: @ 81D953A
-	.incbin "baserom.gba", 0x1d953a, 0xb
+	printstring BATTLE_TEXT_BurnHurt
+	waitmessage 64
+	jump BattleScript_1D951E
 
 gUnknown_081D9545:: @ 81D9545
-	.incbin "baserom.gba", 0x1d9545, 0xd
+	printstring BATTLE_TEXT_FrozenSolid
+	waitmessage 64
+	statusanimation USER
+	jump BattleScript_1D6F62
 
 gUnknown_081D9552:: @ 81D9552
-	.incbin "baserom.gba", 0x1d9552, 0xb
+	printfromtable BattleTextList_4015C4
+	waitmessage 64
+	atk98 1
+	return
 
 gUnknown_081D955D:: @ 81D955D
-	.incbin "baserom.gba", 0x1d955d, 0x9
+	printstring BATTLE_TEXT_DefendingDefrosted
+	waitmessage 64
+	atk98 0
+	return
 
 gUnknown_081D9566:: @ 81D9566
-	.incbin "baserom.gba", 0x1d9566, 0xd
+	printstring BATTLE_TEXT_Paralyzed3
+	waitmessage 64
+	statusanimation USER
+	jump BattleScript_1D6F62
 
 gUnknown_081D9573:: @ 81D9573
-	.incbin "baserom.gba", 0x1d9573, 0xb
+	printstring BATTLE_TEXT_Flinched
+	waitmessage 64
+	jump BattleScript_1D6F62
 
 gUnknown_081D957E:: @ 81D957E
-	.incbin "baserom.gba", 0x1d957e, 0x9
+	printfromtable BattleTextList_40155A
+	waitmessage 64
+	end2
 
 gUnknown_081D9587:: @ 81D9587
-	.incbin "baserom.gba", 0x1d9587, 0xe
+	atk66 1, 1, S_CONFUSED
+	printstring BATTLE_TEXT_FatigueConfuse
+	waitmessage 64
+	end2
 
 gUnknown_081D9595:: @ 81D9595
-	.incbin "baserom.gba", 0x1d9595, 0x3f
+	printstring BATTLE_TEXT_Confused
+	waitmessage 64
+	atk65 1, 0x7
+	jumpifbyte 0, 0x2024d23, 0, BattleScript_1D95D3
+
+BattleScript_1D95AC: @ 81D95AC
+	atk76 USER, 0
+	atk8
+	printstring BATTLE_TEXT_HurtItself
+	waitmessage 64
+	missmessage
+	atk5c USER
+	waitstateatk
+	orword 0x2024c6c, 0x100100
+	graphicalhpupdate USER
+	datahpupdate USER
+	faintpokemon USER, 0, 0x0
+	jump BattleScript_1D6F62
+
+BattleScript_1D95D3: @ 81D95D3
+	return
 
 gUnknown_081D95D4:: @ 81D95D4
-	.incbin "baserom.gba", 0x1d95d4, 0x7
+	printstring BATTLE_TEXT_ConfusionSnapOut
+	waitmessage 64
+	return
 
 gUnknown_081D95DB:: @ 81D95DB
-	.incbin "baserom.gba", 0x1d95db, 0x7
+	printstring BATTLE_TEXT_PickedUpYen
+	waitmessage 64
+	return
 
 gUnknown_081D95E2:: @ 81D95E2
-	.incbin "baserom.gba", 0x1d95e2, 0x12
+	playanimation USER, 6, 0x20160a4
+	printstring BATTLE_TEXT_HurtBy
+	waitmessage 64
+	jump BattleScript_1D9520
 
 gUnknown_081D95F4:: @ 81D95F4
-	.incbin "baserom.gba", 0x1d95f4, 0x7
+	printstring BATTLE_TEXT_FreedFrom
+	waitmessage 64
+	end2
 
 gUnknown_081D95FB:: @ 81D95FB
-	.incbin "baserom.gba", 0x1d95fb, 0xd
+	printstring BATTLE_TEXT_InLoveWith
+	waitmessage 64
+	atk65 1, 0xf0000
+	return
 
 gUnknown_081D9608:: @ 81D9608
-	.incbin "baserom.gba", 0x1d9608, 0xb
+	printstring BATTLE_TEXT_ImmobilizedBy
+	waitmessage 64
+	jump BattleScript_1D6F62
 
 gUnknown_081D9613:: @ 81D9613
-	.incbin "baserom.gba", 0x1d9613, 0x11
+	printstring BATTLE_TEXT_NightmareLock
+	waitmessage 64
+	atk65 1, Start
+	jump BattleScript_1D9520
 
 gUnknown_081D9624:: @ 81D9624
-	.incbin "baserom.gba", 0x1d9624, 0x11
+	printstring BATTLE_TEXT_CurseAfflict
+	waitmessage 64
+	atk65 1, 0x10000000
+	jump BattleScript_1D9520
 
 gUnknown_081D9635:: @ 81D9635
-
-	.incbin "baserom.gba", 0x1d9635, 0x9
+	printstring BATTLE_TEXT_ParalysisHealed
+	waitmessage 64
+	atk98 0
+	return
 
 BattleScript_1D963E:: @ 81D963E
 	statusanimation 2
@@ -3223,8 +3916,13 @@ BattleScript_1D9648: @ 81D9648
 	return
 
 gUnknown_081D964C:: @ 81D964C
-
-	.incbin "baserom.gba", 0x1d964c, 0xe
+	statusanimation 2
+	printstring BATTLE_TEXT_FellAsleep
+	waitmessage 64
+	atk98 2
+	waitstateatk
+	atk6f 2
+	end2
 
 BattleScript_1D965A:: @ 81D965A
 	statusanimation 2
@@ -3272,7 +3970,7 @@ BattleScript_1D96B1:: @ 81D96B1
 	return
 
 BattleScript_1D96BA:: @ 81D96BA
-	atk66 2, 1, 0x7
+	atk66 2, 1, S_CONFUSED
 	printstring BATTLE_TEXT_BecameConfused
 	waitmessage 64
 	return
@@ -3293,25 +3991,52 @@ BattleScript_1D96F5: @ 81D96F5
 	return
 
 gUnknown_081D96F6:: @ 81D96F6
-	.incbin "baserom.gba", 0x1d96f6, 0xe
+	playanimation TARGET, 16, 0x0
+	printstring BATTLE_TEXT_StoleSomething
+	waitmessage 64
+	return
 
 gUnknown_081D9704:: @ 81D9704
-	.incbin "baserom.gba", 0x1d9704, 0x14
+	pause 32
+	printstring BATTLE_TEXT_RainMade
+	waitstateatk
+	playanimation 7, 10, 0x0
+	callatk BattleScript_1D9761
+	end3
 
 gUnknown_081D9718:: @ 81D9718
-	.incbin "baserom.gba", 0x1d9718, 0xe
+	playanimation USER, 1, 0x20160a4
+	printstring BATTLE_TEXT_SpeedRisen
+	waitmessage 64
+	end3
 
 gUnknown_081D9726:: @ 81D9726
-	.incbin "baserom.gba", 0x1d9726, 0xa
+	pause 32
+	printstring BATTLE_TEXT_Traced
+	waitmessage 64
+	end3
 
 gUnknown_081D9730:: @ 81D9730
-	.incbin "baserom.gba", 0x1d9730, 0x14
+	printstring BATTLE_TEXT_RestoredHPByItem
+	waitmessage 64
+	orword 0x2024c6c, 0x100
+	graphicalhpupdate USER
+	datahpupdate USER
+	end3
 
 gUnknown_081D9744:: @ 81D9744
-	.incbin "baserom.gba", 0x1d9744, 0x14
+	pause 32
+	printstring BATTLE_TEXT_WhipSandstorm
+	waitstateatk
+	playanimation 7, 12, 0x0
+	callatk BattleScript_1D9761
+	end3
 
 gUnknown_081D9758:: @ 81D9758
-	.incbin "baserom.gba", 0x1d9758, 0x9
+	printstring BATTLE_TEXT_CuredProblem
+	waitmessage 64
+	atk98 1
+	end3
 
 BattleScript_1D9761: @ 81D9761
 	setbyte 0x2016003, 0
@@ -3322,45 +4047,116 @@ BattleScript_1D9767: @ 81D9767
 	jumpifarraynotequal 0x2016003, 0x2024a68, 1, BattleScript_1D9767
 	return
 
-gUnknown_081D977D:: @ 81D977d
 gUnknown_081D977D:: @ 81D977D
-	.incbin "baserom.gba", 0x1d977d, 0xf
+	callatk BattleScript_1D9783
+	end3
+
+BattleScript_1D9783: @ 81D9783
+	actualcastformswitch
+	waitstateatk
+	printstring BATTLE_TEXT_Transformed2
+	waitmessage 64
+	return
 
 gUnknown_081D978C:: @ 81D978C
-	.incbin "baserom.gba", 0x1d978c, 0x9
+	callatk BattleScript_1D9792
+	end3
+
+BattleScript_1D9792: @ 81D9792
+	pause 32
 
 gUnknown_081D9795:: @ 81D9795
-	.incbin "baserom.gba", 0x1d9795, 0x69
+	setbyte 0x2024c08, 0
+	setbyte 0x201601e, 145
+
+BattleScript_1D97A1: @ 81D97A1
+	atke1 BattleScript_1D97EF
+	jumpifsecondarytstatus TARGET, S_SUBSTITUTE, BattleScript_1D97E4
+	jumpifability TARGET, ABILITY_CLEAR_BODY, BattleScript_1D97F0
+	jumpifability TARGET, ABILITY_HYPER_CUTTER, BattleScript_1D97F0
+	jumpifability TARGET, ABILITY_WHITE_SMOKE, BattleScript_1D97F0
+	statbuffchange 33, BattleScript_1D97E4
+	jumpifbyte 2, 0x2024d23, 1, BattleScript_1D97E4
+	atk47
+	playanimation TARGET, 1, 0x20160a4
+	printstring BATTLE_TEXT_CutsAttack
+	waitmessage 64
+
+BattleScript_1D97E4: @ 81D97E4
+	addbyte 0x2024c08, 1
+	jump BattleScript_1D97A1
+
+BattleScript_1D97EF: @ 81D97EF
+	return
+
+BattleScript_1D97F0: @ 81D97F0
+	pause 32
+	printstring BATTLE_TEXT_PreventedOther
+	waitmessage 64
+	jump BattleScript_1D97E4
 
 gUnknown_081D97FE:: @ 81D97FE
-	.incbin "baserom.gba", 0x1d97fe, 0x14
+	pause 32
+	printstring BATTLE_TEXT_SunIntensified
+	waitstateatk
+	playanimation 7, 11, 0x0
+	callatk BattleScript_1D9761
+	end3
 
 gUnknown_081D9812:: @ 81D9812
-	.incbin "baserom.gba", 0x1d9812, 0x14
+	attackstring
+	pause 32
+	printstring BATTLE_TEXT_TookAttack2
+	waitmessage 64
+	orword 0x2024c6c, 0x400
+	return
 
 gUnknown_081D9826:: @ 81D9826
-	.incbin "baserom.gba", 0x1d9826, 0xe
+	pause 32
+	printstring BATTLE_TEXT_ProtectedBy
+	pause 64
+	jump BattleScript_1D6F62
 
 gUnknown_081D9834:: @ 81D9834
-	.incbin "baserom.gba", 0x1d9834, 0xe
+	pause 32
+	printstring BATTLE_TEXT_PreventedBy
+	pause 64
+	jump BattleScript_1D6F62
 
 gUnknown_081D9842:: @ 81D9842
-	.incbin "baserom.gba", 0x1d9842, 0x1
+	ppreduce
 
 gUnknown_081D9843:: @ 81D9843
-	.incbin "baserom.gba", 0x1d9843, 0x22
+	attackstring
+	pause 32
+	orword 0x2024c6c, 0x100
+	graphicalhpupdate TARGET
+	datahpupdate TARGET
+	printstring BATTLE_TEXT_HPRestoredUsing
+	waitmessage 64
+	orbyte 0x2024c68, 8
+	jump BattleScript_1D6F62
 
 gUnknown_081D9865:: @ 81D9865
-	.incbin "baserom.gba", 0x1d9865, 0x1
+	ppreduce
 
 gUnknown_081D9866:: @ 81D9866
-	.incbin "baserom.gba", 0x1d9866, 0x15
+	attackstring
+	pause 32
+	printstring BATTLE_TEXT_MadeUseless
+	waitmessage 64
+	orbyte 0x2024c68, 8
+	jump BattleScript_1D6F62
 
 gUnknown_081D987B:: @ 81D987B
-	.incbin "baserom.gba", 0x1d987b, 0x1
+	ppreduce
 
 gUnknown_081D987C:: @ 81D987C
-	.incbin "baserom.gba", 0x1d987c, 0x11
+	attackstring
+	pause 32
+	printfromtable BattleTextList_401648
+	waitmessage 64
+	jump BattleScript_1D6F62
 
 BattleScript_1D988D: @ 81D988D
 	pause 32
@@ -3369,7 +4165,10 @@ BattleScript_1D988D: @ 81D988D
 	jump BattleScript_1D6F62
 
 gUnknown_081D989B:: @ 81D989B
-	.incbin "baserom.gba", 0x1d989b, 0xa
+	pause 32
+	printstring BATTLE_TEXT_PreventedStatLoss
+	waitmessage 64
+	return
 
 BattleScript_1D98A5:: @ 81D98A5
 	pause 32
@@ -3390,10 +4189,16 @@ BattleScript_1D98BD:: @ 81D98BD
 	return
 
 gUnknown_081D98C9:: @ 81D98C9
-	.incbin "baserom.gba", 0x1d98c9, 0xe
+	pause 32
+	printstring BATTLE_TEXT_PreventedRomance
+	waitmessage 64
+	jump BattleScript_1D6F62
 
 gUnknown_081D98D7:: @ 81D98D7
-	.incbin "baserom.gba", 0x1d98d7, 0xe
+	pause 32
+	printstring BATTLE_TEXT_PreventedFlinching
+	waitmessage 64
+	jump BattleScript_1D6F62
 
 BattleScript_1D98E5: @ 81D98E5
 	pause 32
@@ -3401,162 +4206,465 @@ BattleScript_1D98E5: @ 81D98E5
 	waitmessage 64
 	jump BattleScript_1D6F62
 
-@ end of battle scripts?
-
-
 gUnknown_081D98F3:: @ 81D98F3
-	.incbin "baserom.gba", 0x001d98f3, 0x10
+	attackstring
+	ppreduce
+	pause 32
+	printstring BATTLE_TEXT_BlocksOther
+	waitmessage 64
+	jump BattleScript_1D6F62
 
 gUnknown_081D9903:: @ 81D9903
-	.incbin "baserom.gba", 0x001d9903, 0x10
+	pause 32
+	printstring BATTLE_TEXT_PreventedLoss
+	waitmessage 64
+	setbyte 0x2024d23, 3
+	return
 
 gUnknown_081D9913:: @ 81D9913
-	.incbin "baserom.gba", 0x001d9913, 0xe
+	pause 32
+	printstring BATTLE_TEXT_MadeIneffective
+	waitmessage 64
+	jump BattleScript_1D6F62
 
 gUnknown_081D9921:: @ 81D9921
-	.incbin "baserom.gba", 0x001d9921, 0x7
+	printstring BATTLE_TEXT_MadeType
+	waitmessage 64
+	return
 
 gUnknown_081D9928:: @ 81D9928
-	.incbin "baserom.gba", 0x001d9928, 0x1b
+	orword 0x2024c6c, 0x100100
+	graphicalhpupdate USER
+	datahpupdate USER
+	printstring BATTLE_TEXT_HurtOther
+	waitmessage 64
+	faintpokemon USER, 0, 0x0
+	return
 
 gUnknown_081D9943:: @ 81D9943
-	.incbin "baserom.gba", 0x001d9943, 0xd
+	atk65 1, 0xf0000
+	printstring BATTLE_TEXT_InfatuatedPoke
+	waitmessage 64
+	return
 
 gUnknown_081D9950:: @ 81D9950
-	.incbin "baserom.gba", 0x001d9950, 0x3
+	waitstateatk
+	seteffectuser
+	return
 
 gUnknown_081D9953:: @ 81D9953
-	.incbin "baserom.gba", 0x001d9953, 0x3
+	waitstateatk
+	seteffecttarget
+	return
 
 gUnknown_081D9956:: @ 81D9956
-	.incbin "baserom.gba", 0x001d9956, 0x9
+	printstring BATTLE_TEXT_CuredOfProblem
+	waitmessage 64
+	atk98 10
+	return
 
 gUnknown_081D995F:: @ 81D995F
-	.incbin "baserom.gba", 0x001d995f, 0x10
+	printstring BATTLE_TEXT_IgnoredOrdersSLP
+	waitmessage 64
+	setbyte 0x201600c, 0
+	atk49 2, 16
+	end
 
 gUnknown_081D996F:: @ 81D996F
-	.incbin "baserom.gba", 0x001d996f, 0x8
+	printstring BATTLE_TEXT_IgnoredOrders
+	waitmessage 64
+	jumptoattack TARGET
 
 gUnknown_081D9977:: @ 81D9977
-	.incbin "baserom.gba", 0x001d9977, 0x12
+	printfromtable BattleTextList_40160E
+	waitmessage 64
+	setbyte 0x201600c, 0
+	atk49 2, 16
+	end
 
 gUnknown_081D9989:: @ 81D9989
-	.incbin "baserom.gba", 0x001d9989, 0x17
+	printstring BATTLE_TEXT_BeganNap
+	waitmessage 64
+	setbyte 0x2024d21, 65
+	seteffecttarget
+	setbyte 0x201600c, 0
+	atk49 2, 16
+	end
 
 gUnknown_081D99A0:: @ 81D99A0
-	.incbin "baserom.gba", 0x001d99a0, 0xb
+	printstring BATTLE_TEXT_WontObey
+	waitmessage 64
+	jump BattleScript_1D95AC
 
 gUnknown_081D99AB:: @ 81D99AB
-	.incbin "baserom.gba", 0x001d99ab, 0xb
+	playanimation TARGET, 2, 0x0
+	printstring BATTLE_TEXT_SubFaded
+	return
 
 gUnknown_081D99B6:: @ 81D99B6
-	.incbin "baserom.gba", 0x001d99b6, 0x6
+	callatk gUnknown_081D99BC
+	end2
 
 gUnknown_081D99BC:: @ 81D99BC
-	.incbin "baserom.gba", 0x001d99bc, 0x12
+	playanimation 10, 7, 0x0
+	printstring BATTLE_TEXT_CuredParalysis
+	waitmessage 64
+	atk98 10
+	removeitem 10
+	return
 
 gUnknown_081D99CE:: @ 81D99CE
-	.incbin "baserom.gba", 0x001d99ce, 0x6
+	callatk gUnknown_081D99D4
+	end2
 
 gUnknown_081D99D4:: @ 81D99D4
-	.incbin "baserom.gba", 0x001d99d4, 0x12
+	playanimation 10, 7, 0x0
+	printstring BATTLE_TEXT_CuredPoison
+	waitmessage 64
+	atk98 10
+	removeitem 10
+	return
 
 gUnknown_081D99E6:: @ 81D99E6
-	.incbin "baserom.gba", 0x001d99e6, 0x6
+	callatk gUnknown_081D99EC
+	end2
 
 gUnknown_081D99EC:: @ 81D99EC
-	.incbin "baserom.gba", 0x001d99ec, 0x12
+	playanimation 10, 7, 0x0
+	printstring BATTLE_TEXT_CuredBurn
+	waitmessage 64
+	atk98 10
+	removeitem 10
+	return
 
 gUnknown_081D99FE:: @ 81D99FE
-	.incbin "baserom.gba", 0x001d99fe, 0x6
+	callatk gUnknown_081D9A04
+	end2
 
 gUnknown_081D9A04:: @ 81D9A04
-	.incbin "baserom.gba", 0x001d9a04, 0x12
+	playanimation 10, 7, 0x0
+	printstring BATTLE_TEXT_CuredFreeze
+	waitmessage 64
+	atk98 10
+	removeitem 10
+	return
 
 gUnknown_081D9A16:: @ 81D9A16
-	.incbin "baserom.gba", 0x001d9a16, 0x6
+	callatk gUnknown_081D9A1C
+	end2
 
 gUnknown_081D9A1C:: @ 81D9A1C
-	.incbin "baserom.gba", 0x001d9a1c, 0x12
+	playanimation 10, 7, 0x0
+	printstring BATTLE_TEXT_CuredSleep
+	waitmessage 64
+	atk98 10
+	removeitem 10
+	return
 
 gUnknown_081D9A2E:: @ 81D9A2E
-	.incbin "baserom.gba", 0x001d9a2e, 0x6
+	callatk gUnknown_081D9A34
+	end2
 
 gUnknown_081D9A34:: @ 81D9A34
-	.incbin "baserom.gba", 0x001d9a34, 0x10
+	playanimation 10, 7, 0x0
+	printstring BATTLE_TEXT_CuredConfusion
+	waitmessage 64
+	removeitem 10
+	return
 
 gUnknown_081D9A44:: @ 81D9A44
-	.incbin "baserom.gba", 0x001d9a44, 0x6
+	callatk gUnknown_081D9A4A
+	end2
 
 gUnknown_081D9A4A:: @ 81D9A4A
-	.incbin "baserom.gba", 0x001d9a4a, 0x14
+	playanimation 10, 7, 0x0
+	printfromtable BattleTextList_40162C
+	waitmessage 64
+	atk98 10
+	removeitem 10
+	return
 
 gUnknown_081D9A5E:: @ 81D9A5E
-	.incbin "baserom.gba", 0x001d9a5e, 0x6
+	callatk gUnknown_081D9A64
+	end2
 
 gUnknown_081D9A64:: @ 81D9A64
-	.incbin "baserom.gba", 0x001d9a64, 0x10
+	playanimation 10, 7, 0x0
+	printstring BATTLE_TEXT_RestoredStatus
+	waitmessage 64
+	removeitem 10
+	return
 
 gUnknown_081D9A74:: @ 81D9A74
-	.incbin "baserom.gba", 0x001d9a74, 0x1d
+	playanimation USER, 7, 0x0
+	printstring BATTLE_TEXT_RestoredHealth
+	waitmessage 64
+	orword 0x2024c6c, 0x100
+	graphicalhpupdate USER
+	datahpupdate USER
+	removeitem USER
+	end2
 
 gUnknown_081D9A91:: @ 81D9A91
-	.incbin "baserom.gba", 0x001d9a91, 0x10
+	playanimation USER, 7, 0x0
+	printstring BATTLE_TEXT_RestoredPP
+	waitmessage 64
+	removeitem USER
+	end2
 
 gUnknown_081D9AA1:: @ 81D9AA1
-	.incbin "baserom.gba", 0x001d9aa1, 0x6
+	callatk gUnknown_081D9AA7
+	end2
 
 gUnknown_081D9AA7:: @ 81D9AA7
-	.incbin "baserom.gba", 0x001d9aa7, 0x1b
+	playanimation USER, 7, 0x0
+	printstring BATTLE_TEXT_RestoredHPLittle
+	waitmessage 64
+	orword 0x2024c6c, 0x100
+	graphicalhpupdate USER
+	datahpupdate USER
+	return
 
 gUnknown_081D9AC2:: @ 81D9AC2
-	.incbin "baserom.gba", 0x001d9ac2, 0x4
+	printstring2 BATTLE_TEXT_ChoiceBand
+	atk44
 
 gUnknown_081D9AC6:: @ 81D9AC6
-	.incbin "baserom.gba", 0x001d9ac6, 0xe
+	playanimation TARGET, 9, 0x0
+	printstring BATTLE_TEXT_FocusSash
+	waitmessage 64
+	return
 
 gUnknown_081D9AD4:: @ 81D9AD4
-	.incbin "baserom.gba", 0x001d9ad4, 0x2a
+	playanimation USER, 7, 0x0
+	printstring BATTLE_TEXT_RestoredHealth
+	waitmessage 64
+	orword 0x2024c6c, 0x100
+	graphicalhpupdate USER
+	datahpupdate USER
+	printstring BATTLE_TEXT_UnknownString2
+	waitmessage 64
+	setbyte 0x2024d21, 71
+	seteffecttarget
+	removeitem USER
+	end2
 
 gUnknown_081D9AFE:: @ 81D9AFE
-	.incbin "baserom.gba", 0x001d9afe, 0x1b
+	playanimation USER, 7, 0x0
+	statbuffchange 65, BattleScript_1D9B0B
+
+BattleScript_1D9B0B: @ 81D9B0B
+	setbyte 0x2024d23, 4
+	callatk gUnknown_081D71E5
+	removeitem USER
+	end2
 
 gUnknown_081D9B19:: @ 81D9B19
-	.incbin "baserom.gba", 0x001d9b19, 0x10
+	playanimation USER, 7, 0x0
+	printstring BATTLE_TEXT_HustleUse
+	waitmessage 64
+	removeitem USER
+	end2
 
 gUnknown_081D9B29:: @ 81D9B29
-	.incbin "baserom.gba", 0x001d9b29, 0x4
+	printstring2 BATTLE_TEXT_CantUseItems
+	atk44
 
 gUnknown_081D9B2D:: @ 81D9B2D
-	.incbin "baserom.gba", 0x001d9b2d, 0x7
+	printstring BATTLE_TEXT_Terminator2
+	return
 
-@ 81D9B34
+@ 81D9B31
 	.include "data/field_effect_scripts.s"
 
 	.align 2
 gUnknown_081D9E48:: @ 81D9E48
-	.incbin "baserom.gba", 0x001d9e48, 0x34
+	.4byte BattleScript_1D9EA8
+	.4byte BattleScript_1D9EA8
+	.4byte BattleScript_1D9EA8
+	.4byte BattleScript_1D9EA8
+	.4byte BattleScript_1D9EA8
+	.4byte BattleScript_1D9EBC
+	.4byte BattleScript_1D9EA8
+	.4byte BattleScript_1D9EA8
+	.4byte BattleScript_1D9EA8
+	.4byte BattleScript_1D9EA8
+	.4byte BattleScript_1D9EA8
+	.4byte BattleScript_1D9EA8
+	.4byte BattleScript_1D9EA8
 
 gUnknown_081D9E7C:: @ 81D9E7C
-	.incbin "baserom.gba", 0x001d9e7c, 0x18
+	.4byte BattleScript_1D9F45
+	.4byte BattleScript_1D9F4F
+	.4byte BattleScript_1D9F4F
+	.4byte BattleScript_1D9F7B
+	.4byte BattleScript_1D9F9C
+	.4byte BattleScript_1D9FBB
 
 gUnknown_081D9E94:: @ 81D9E94
-	.incbin "baserom.gba", 0x001d9e94, 0x4
+	.4byte BattleScript_1D9FDA
 
 gUnknown_081D9E98:: @ 81D9E98
-	.incbin "baserom.gba", 0x001d9e98, 0x2a
+	.4byte BattleScript_1D9FE4
+	.4byte BattleScript_1D9FEB
+	.4byte BattleScript_1D9FF4
+	.4byte BattleScript_1DA00A
+
+BattleScript_1D9EA8: @ 81D9EA8
+	jumpifhalfword 4, 0x20239f8, 512, BattleScript_1D9EB8
+	printstring BATTLE_TEXT_Used1
+	pokemoncatchfunction
+
+BattleScript_1D9EB8: @ 81D9EB8
+	printstring BATTLE_TEXT_TutorialUsed
+	pokemoncatchfunction
+
+BattleScript_1D9EBC: @ 81D9EBC
+	printstring BATTLE_TEXT_Used1
+	atk98 1
+	pokemoncatchfunction
 
 gUnknown_081D9EC2:: @ 81D9EC2
-	.incbin "baserom.gba", 0x001d9ec2, 0x3e
+	jumpifhalfword 0, 0x2024c04, 5, BattleScript_1D9ED0
+	atk60 11
+
+BattleScript_1D9ED0: @ 81D9ED0
+	printstring BATTLE_TEXT_BallCaught1
+	capturesomethingf1 BattleScript_1D9EE3
+	printstring BATTLE_TEXT_AddedToDex
+	waitstateatk
+	setbyte 0x2024d1e, 0
+	capturesomethingf2
+
+BattleScript_1D9EE3: @ 81D9EE3
+	printstring BATTLE_TEXT_GiveNickname
+	waitstateatk
+	setbyte 0x2024d1e, 0
+	capturesomethingf3 BattleScript_1D9EF8
+	printstring BATTLE_TEXT_SentToPC
+	waitmessage 64
+
+BattleScript_1D9EF8: @ 81D9EF8
+	catchpoke
+	setbyte 0x2024d26, 7
+	activesidesomething
 
 gUnknown_081D9F00:: @ 81D9F00
-	.incbin "baserom.gba", 0x001d9f00, 0xa
+	printstring BATTLE_TEXT_BallCaught2
+	setbyte 0x2024d26, 7
+	activesidesomething
 
 gUnknown_081D9F0A:: @ 81D9F0A
-	.incbin "baserom.gba", 0x001d9f0a, 0x2b
+	printfromtable BattleTextList_4015E6
+	waitmessage 64
+	jumpifbyte 5, 0x20239f8, 128, BattleScript_1D9F34
+	jumpifbyte 1, 0x2038808, 0, BattleScript_1D9F34
+	printstring BATTLE_TEXT_SafariOver
+	waitmessage 64
+	setbyte 0x2024d26, 8
+
+BattleScript_1D9F34: @ 81D9F34
+	atkf6
 
 gUnknown_081D9F35:: @ 81D9F35
-	.incbin "baserom.gba", 0x001d9f35, 0xe7
+	waitmessage 64
+	printstring BATTLE_TEXT_BlockBall
+	waitmessage 64
+	printstring BATTLE_TEXT_DontBeAThief
+	waitmessage 64
+	atkf6
+
+BattleScript_1D9F45: @ 81D9F45
+	setbyte 0x201600c, 15
+	atk49 1, 0
+	end
+
+BattleScript_1D9F4F: @ 81D9F4F
+	pause 48
+	atk54 1
+	printstring BATTLE_TEXT_Used2
+	waitmessage 64
+	atk75
+	orword 0x2024c6c, 0x100
+	graphicalhpupdate USER
+	datahpupdate USER
+	printstring BATTLE_TEXT_RestoredHealth
+	waitmessage 64
+	atk98 1
+	setbyte 0x201600c, 15
+	atk49 1, 0
+	atkf6
+
+BattleScript_1D9F7B: @ 81D9F7B
+	pause 48
+	atk54 1
+	printstring BATTLE_TEXT_Used2
+	waitmessage 64
+	atk75
+	printfromtable BattleTextList_401620
+	waitmessage 64
+	atk98 1
+	setbyte 0x201600c, 15
+	atk49 1, 0
+	atkf6
+
+BattleScript_1D9F9C: @ 81D9F9C
+	pause 48
+	atk54 1
+	printstring BATTLE_TEXT_Used2
+	waitmessage 64
+	atk75
+	printfromtable BattleTextList_401570
+	waitmessage 64
+	setbyte 0x201600c, 15
+	atk49 1, 0
+	atkf6
+
+BattleScript_1D9FBB: @ 81D9FBB
+	pause 48
+	atk54 1
+	printstring BATTLE_TEXT_Used2
+	waitmessage 64
+	atk75
+	printfromtable BattleTextList_4015A0
+	waitmessage 64
+	setbyte 0x201600c, 15
+	atk49 1, 0
+	atkf6
+
+BattleScript_1D9FDA: @ 81D9FDA
+	atk54 17
+	setbyte 0x2024d26, 4
+	activesidesomething
+
+BattleScript_1D9FE4: @ 81D9FE4
+	printstring BATTLE_TEXT_WatchingCarefully
+	waitmessage 64
+	end2
+
+BattleScript_1D9FEB: @ 81D9FEB
+	printfromtable BattleTextList_401616
+	waitmessage 64
+	end2
+
+BattleScript_1D9FF4: @ 81D9FF4
+	printstring BATTLE_TEXT_ThrewBlock
+	waitmessage 64
+	playanimation USER, 4, 0x0
+	printfromtable BattleTextList_40161A
+	waitmessage 64
+	end2
+
+BattleScript_1DA00A: @ 81DA00A
+	printstring 2
+	waitmessage 64
+	atk4b
+	waitstateatk
+	atk53 0
+	waitstateatk
+	printstring BATTLE_TEXT_WallyBall
+	waitmessage 64
+	end2
 
 gUnknown_081DA01C:: @ 81DA01C
 	.incbin "baserom.gba", 0x001da01c, 0x20fc
