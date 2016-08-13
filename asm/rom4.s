@@ -37697,7 +37697,7 @@ GetGroundEffectFlags_JumpLanding: @ 80639E8
 	ldr r1, _08063A24
 	ands r0, r1
 	cmp r0, 0x20
-	bne _08063A3A
+	bne _08063A3A  @ Is player landing after jumping?
 	movs r5, 0
 	ldr r0, _08063A28
 	mov r8, r0
@@ -37705,7 +37705,7 @@ _08063A02:
 	lsls r4, r5, 2
 	mov r0, r8
 	adds r1, r4, r0
-	ldrb r0, [r7, 0x1E]
+	ldrb r0, [r7, 0x1E]  @ Load metatile behavior
 	ldr r1, [r1]
 	bl _call_via_r1
 	lsls r0, 24
@@ -37720,8 +37720,8 @@ _08063A02:
 	b _08063A3A
 	.align 2, 0
 _08063A24: .4byte 0x02000020
-_08063A28: .4byte gUnknown_08376010
-_08063A2C: .4byte gUnknown_08376028
+_08063A28: .4byte gJumpLanding_MetatileFunctionPointers
+_08063A2C: .4byte gJumpLanding_Bitmasks
 _08063A30:
 	adds r0, r5, 0x1
 	lsls r0, 24
@@ -38106,8 +38106,8 @@ _08063D06:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08063D0C: .4byte gUnknown_08376070
-_08063D10: .4byte gUnknown_08376060
+_08063D0C: .4byte gFieldObjectPriorities_08376070
+_08063D10: .4byte gFieldObjectPriorities_08376060
 	thumb_func_end FieldObjectUpdateZCoordAndPriority
 
 	thumb_func_start InitObjectPriorityByZCoord
@@ -38147,8 +38147,8 @@ InitObjectPriorityByZCoord: @ 8063D14
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08063D58: .4byte gUnknown_08376070
-_08063D5C: .4byte gUnknown_08376060
+_08063D58: .4byte gFieldObjectPriorities_08376070
+_08063D5C: .4byte gFieldObjectPriorities_08376060
 	thumb_func_end InitObjectPriorityByZCoord
 
 	thumb_func_start ZCoordToPriority
@@ -38160,7 +38160,7 @@ ZCoordToPriority: @ 8063D60
 	ldrb r0, [r0]
 	bx lr
 	.align 2, 0
-_08063D6C: .4byte gUnknown_08376060
+_08063D6C: .4byte gFieldObjectPriorities_08376060
 	thumb_func_end ZCoordToPriority
 
 	thumb_func_start FieldObjectUpdateZCoord
@@ -38558,7 +38558,7 @@ DoTracksGroundEffect_Footprints: @ 8063FFC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08064044: .4byte gUnknown_0837608C
+_08064044: .4byte gSandFootprints_FieldEffectData
 _08064048: .4byte 0x0202ff84
 	thumb_func_end DoTracksGroundEffect_Footprints
 
@@ -38602,7 +38602,7 @@ _0806408E:
 	bx r0
 	.align 2, 0
 _08064094: .4byte 0x0202ff84
-_08064098: .4byte gUnknown_08376090
+_08064098: .4byte gBikeTireTracks_Transitions
 	thumb_func_end DoTracksGroundEffect_BikeTireTracks
 
 	thumb_func_start GroundEffect_Ripple

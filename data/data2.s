@@ -7043,11 +7043,15 @@ Unknown_8375FFC:
 	.4byte sub_8063450
 	.4byte sub_8063474
 
-gUnknown_08376008:: @ 8376008
-	.incbin "baserom.gba", 0x00376008, 0x8
-
 	.align 2
-gUnknown_08376010:: @ 8376010
+gUnknown_08376008:: @ 8376008
+	.4byte 0x00000020
+	.4byte 0x00000010
+
+@ Functions used to determine which category of tile the player is landing
+@ on after jumping over a ledge.
+	.align 2
+gJumpLanding_MetatileFunctionPointers:: @ 8376010
 	.4byte MetatileBehavior_IsTallGrass
 	.4byte MetatileBehavior_IsLongGrass
 	.4byte MetatileBehavior_IsPuddle
@@ -7055,8 +7059,16 @@ gUnknown_08376010:: @ 8376010
 	.4byte MetatileBehavior_IsShallowFlowingWater
 	.4byte sub_8056D9C
 
-gUnknown_08376028:: @ 8376028
-	.incbin "baserom.gba", 0x00376028, 0x18
+@ This table contains bitmasks used for determining the animation that happens when the player lands on 
+@ the ground after jumping over a ledge. Each entry corresponds to the gJumpLanding_MetatileFunctionPointers table.
+	.align 2
+gJumpLanding_Bitmasks:: @ 8376028
+	.4byte 0x00001000  @ Landing in tall grass
+	.4byte 0x00002000  @ Landing in long grass
+	.4byte 0x00004000  @ Landing on puddle
+	.4byte 0x00008000  @ Landing on surfable water or underwater
+	.4byte 0x00004000  @ Landing on shallow flowing water
+	.4byte 0x00010000  @ Landing on any other type of ground
 
 	.align 2
 gUnknown_08376040:: @ 8376040
@@ -7066,17 +7078,19 @@ gUnknown_08376040:: @ 8376040
 	.4byte MetatileBehavior_IsJumpEast
 
 gUnknown_08376050:: @ 8376050
-	.incbin "baserom.gba", 0x00376050, 0x10
+	.byte 0x73, 0x73, 0x53, 0x73, 0x53, 0x73, 0x53, 0x73, 0x53, 0x73, 0x53, 0x73, 0x53, 0x00, 0x00, 0x73
 
-	.align 2
-gUnknown_08376060:: @ 8376060
-	.4byte 0x02020202 @ are these even pointers?
-	.4byte 0x02010201
-	.4byte 0x02010201
-	.4byte 0x02000001
+@ Each byte corresponds to a sprite priority for a field object.
+@ This is directly the inverse of gFieldObjectPriorities_08376070.
+gFieldObjectPriorities_08376060:: @ 8376060
+	.byte 2, 2, 2, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 0, 0, 2
 
-gUnknown_08376070:: @ 8376070
-	.incbin "baserom.gba", 0x00376070, 0x10
+@ Each byte corresponds to a sprite priority for a field object.
+@ This is the inverse of gFieldObjectPriorities_08376060.
+@ 1 = Above player sprite
+@ 2 = Below player sprite
+gFieldObjectPriorities_08376070:: @ 8376070
+	.byte 1, 1, 1, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 0, 0, 1
 
 	.align 2
 gUnknown_08376080:: @ 8376080
@@ -7084,11 +7098,22 @@ gUnknown_08376080:: @ 8376080
 	.4byte DoTracksGroundEffect_Footprints
 	.4byte DoTracksGroundEffect_BikeTireTracks
 
-gUnknown_0837608C:: @ 837608C
-	.incbin "baserom.gba", 0x0037608c, 0x4
+@ First byte is a Field Effect script id. (gFieldEffectScriptPointers)
+@ Last three bytes are unknown.
+gSandFootprints_FieldEffectData:: @ 837608C
+	.byte 0xD, 0x0, 0x18, 0x0
 
-gUnknown_08376090:: @ 8376090
-	.incbin "baserom.gba", 0x00376090, 0x10
+@ Specifies which bike track shape to show next.
+@ For example, when the bike turns from up to right, it will show
+@ a track that curves to the right.
+@ Each 4-byte row corresponds to the initial direction of the bike, and
+@ each byte in that row is for the next direction of the bike in the order
+@ of down, up, left, right.
+gBikeTireTracks_Transitions:: @ 8376090
+	.byte 1, 2, 7, 8
+	.byte 1, 2, 6, 5
+	.byte 5, 8, 3, 4
+	.byte 6, 7, 3, 4
 
 	.align 2
 gUnknown_083760A0:: @ 83760A0
@@ -9328,10 +9353,18 @@ gUnknown_0837F4B8:: @ 837F4B8
 gUnknown_0837F578:: @ 837F578
 	.incbin "baserom.gba", 0x0037f578, 0x20
 
-gUnknown_0837F598:: @ 837F598
-	.incbin "baserom.gba", 0x0037f598, 0x10
+@ One entry for each of the four Castform forms.
+@ Coords are probably front pic coords or back pic coords, but this data does not seem to be
+@ used during battle, party summary, or pokedex screens.
+	.align 2
+gUnknownCastformCoords_0837F598:: @ 837F598
+	.byte  68, 17, 0, 0
+	.byte 102,  9, 0, 0
+	.byte  70,  9, 0, 0
+	.byte 134,  8, 0, 0
 
-gUnknown_0837F5A8:: @ 837F5A8
+@ One entry for each of the four Castform forms. Probably a palette index.
+gUnknownCastformData_0837F5A8:: @ 837F5A8
 	.byte 0xD, 0xE, 0xD, 0xD
 
 gUnknown_0837F5AC:: @ 837F5AC
@@ -10681,8 +10714,10 @@ gSpriteTemplate_839B528:: @ 839B528
 @ 839B540
 	.include "data/wild_mons.s"
 
-gUnknown_0839DBFC:: @ 839DBFC
-	.incbin "baserom.gba", 0x0039dbfc, 0x4
+	.align 2
+gWildFeebasRoute119Data:: @ 839DBFC
+	.byte 20, 25  @ Min/Max level
+	.2byte SPECIES_FEEBAS
 
 gUnknown_0839DC00:: @ 839DC00
 	.incbin "baserom.gba", 0x0039dc00, 0x14
