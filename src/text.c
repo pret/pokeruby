@@ -3755,7 +3755,7 @@ s32 StringCompareWithoutExtCtrlCodes(u8 *str1, u8 *str2)
     return retVal;
 }
 
-u8 sub_8004FD0(struct Window *win, u8 *dest, u8 *src, u16 tileDataStartOffset, u8 left, u16 top, u8 a7, u32 a8)
+u8 sub_8004FD0(struct Window *win, u8 *dest, u8 *src, u16 tileDataStartOffset, u8 left, u16 top, u8 width, u32 a8)
 {
     u8 newlineCount = 0;
     u8 extCtrlCodeLength;
@@ -3787,7 +3787,7 @@ u8 sub_8004FD0(struct Window *win, u8 *dest, u8 *src, u16 tileDataStartOffset, u
         case 0xFE:
             dest[0] = 0xFC;
             dest[1] = 19;
-            dest[2] = a7;
+            dest[2] = width;
             dest[3] = 0xFE;
             dest += 4;
             src++;
@@ -3799,7 +3799,7 @@ u8 sub_8004FD0(struct Window *win, u8 *dest, u8 *src, u16 tileDataStartOffset, u
 
     dest[0] = 0xFC;
     dest[1] = 19;
-    dest[2] = a7;
+    dest[2] = width;
     dest[3] = 0xFF;
 
     if (endsWithoutNewline)

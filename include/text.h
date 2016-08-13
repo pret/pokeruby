@@ -176,6 +176,6 @@ u8 GetStringWidthGivenWindowConfig(struct WindowConfig *winConfig, u8 *s);
 void ConvertInternationalString(u8 *s, u8 language);
 void SkipExtCtrlCodes(u8 *str);
 s32 StringCompareWithoutExtCtrlCodes(u8 *str1, u8 *str2);
-u8 sub_8004FD0(struct Window *win, u8 *dest, u8 *src, u16 tileDataStartOffset, u8 left, u16 top, u8 a7, u32 a8);
+u8 sub_8004FD0(struct Window *win, u8 *dest, u8 *src, u16 tileDataStartOffset, u8 left, u16 top, u8 width, u32 a8);
 
 #endif // GUARD_TEXT_H
