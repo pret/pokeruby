@@ -1,3 +1,8 @@
+	.include "asm/macros.s"
+	.include "constants/constants.s"
+
+	.section script_data, "aw", %progbits
+
 	.align 2
 gFieldEffectScriptPointers:: @ 81D9B34
 	.4byte gFieldEffectScript_ExclamationMarkIcon1
