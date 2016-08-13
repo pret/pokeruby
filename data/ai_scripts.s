@@ -2,6 +2,44 @@
 	.include "constants/constants.s"
 
 	.section script_data, "aw", %progbits
+	
+@ 0	won't use moves that have no or a negative effect
+@ 1	will actually create some difference in viability scores based on basic calculations
+@ 2	starts understanding things like type effectiveness, damage and fainting
+@ 3	with a chance of about 3/10, some status moves will get priority on the first turn (list of move scripts at 081DBAA7)
+@ 4	with a chance of about 5/10, move effects in this list will get priority (below list):
+@ ----------------------------------------
+@ sleep
+@ selfdestruct
+@ mirror move
+@ 1-hit ko
+@ high critical hit ratio
+@ confuse
+@ metronome
+@ variable damage
+@ counter
+@ destiny bond
+@ swagger
+@ attract
+@ present
+@ may raise all stats
+@ belly drum
+@ mirror coat
+@ focus punch
+@ double damage if user was hurt in same turn
+@ confuse all
+@ -------------------------------------------
+@ 5	with a chance of about 4/10, non-damaging moves will get priority
+@ 6	if there are other pokes left on the ai's team, with a chance of a bit more than 6/10 it will give priority to non-damaging moves. chance raises to a bit more than 9/10 if the user (possibly also its ally) has baton pass
+@ 7	nop
+@ 8	ai will start looking at health percentages and decide using moves based on that
+@ 9	broken/unfinished, does nothing
+@ 10-28	nop
+@ 29	roamer; will attempt to flee on the first turn
+@ 30	safari
+@ 31	unused; will flee on 20% health and lower
+
+@ applies to the incbin directly below.
 
 	.align 2
 gUnknown_081DA01C:: @ 81DA01C
@@ -65,6 +103,8 @@ Unknown_081DC105::
 	.incbin "baserom.gba", 0x001dc105, 0x10
 Unknown_081DC115::
 	.incbin "baserom.gba", 0x001dc115, 0x3
+	
+@ unknown what the 2nd AI incbin is for. possibly contest AI.
 
 	.align 2
 gUnknown_081DC118:: @ 81DC118

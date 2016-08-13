@@ -5,6 +5,7 @@
 	.include "asm/macros/ec.s"
 	.include "asm/macros/map.s"
 	.include "asm/macros/field_effect_script.s"
+	.include "asm/macros/ai_script.s"
 
 	.macro region_map_location x, y, width, height, name
 	.byte \x
