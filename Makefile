@@ -40,9 +40,9 @@ ASM_OBJS := asm/crt0.o asm/rom3.o asm/rom_8040EB4.o asm/rom4.o asm/rom_8074BAC.o
 	asm/libgcnmultiboot.o asm/m4a_1.o asm/m4a_3.o asm/libagbsyscall.o
 
 DATA_ASM_OBJS := data/data2.o data/graphics.o data/sound_data.o \
-data/event_scripts.o data/battle_anim_scripts.o data/ai_scripts.o \
+data/event_scripts.o data/battle_anim_scripts.o \
 data/battle_scripts_1.o data/battle_scripts_2.o data/field_effect_scripts.o \
-data/script_funcs.o
+data/battle_ai_scripts.o data/contest_ai_scripts.o data/script_funcs.o
 
 OBJS := $(C_OBJS) $(ASM_OBJS) $(DATA_ASM_OBJS)
 pokeruby_OBJS := $(OBJS:.o=_ruby.o)
