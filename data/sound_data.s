@@ -31,6 +31,5 @@ gMPlayTable:: @ 845545C
 	.incbin "baserom.gba", 0x0045545c, 0x30
 
 gSongTable:: @ 845548C
-@ 845548C
-	.include "data/music/song_pointers.s"
-	.incbin "baserom.gba", 0x0045632C, 0x25A3FC
+	.include "data/music/music_pointers.s"
+	.include "data/music/music_headers.s"
