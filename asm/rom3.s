@@ -1,4 +1,5 @@
 	.include "constants/gba_constants.s"
+	.include "constants/species_constants.s"
 	.include "asm/macros.s"
 
 	.syntax unified
@@ -7832,7 +7833,7 @@ sub_800D378: @ 800D378
 	ldr r0, [sp, 0x20]
 	lsls r0, 24
 	lsrs r7, r0, 24
-	cmp r6, 0xC9
+	cmp r6, SPECIES_UNOWN
 	bne _0800D3EC
 	movs r0, 0xC0
 	lsls r0, 18
@@ -7857,7 +7858,7 @@ sub_800D378: @ 800D378
 	lsrs r1, r0, 16
 	cmp r1, 0
 	bne _0800D3C0
-	movs r1, 0xC9
+	movs r1, SPECIES_UNOWN
 	b _0800D3CA
 _0800D3C0:
 	movs r2, 0xCE
@@ -13755,7 +13756,7 @@ _080103AC:
 	adds r0, r7
 	movs r1, 0
 	bl PokemonGetField
-	cmp r4, 0xC9
+	cmp r4, SPECIES_UNOWN
 	bne _08010430
 	ldrh r0, [r5]
 	mov r1, r8
@@ -13788,7 +13789,7 @@ _080103AC:
 	lsrs r0, 16
 	cmp r0, 0
 	bne _0801041C
-	movs r0, 0xC9
+	movs r0, SPECIES_UNOWN
 	b _08010426
 	.align 2, 0
 _08010414: .4byte 0x02024a6a
@@ -13807,7 +13808,7 @@ _08010426:
 _0801042C: .4byte gMonFrontPicCoords
 _08010430:
 	ldr r0, _08010448
-	cmp r4, r0
+	cmp r4, r0  @ Check if pokemon species is Castform
 	bne _08010454
 	ldr r0, _0801044C
 	ldr r1, _08010450
@@ -13818,8 +13819,8 @@ _08010430:
 	ldrb r0, [r1, 0x1]
 	b _0801046C
 	.align 2, 0
-_08010448: .4byte 0x00000181
-_0801044C: .4byte gUnknown_0837F598
+_08010448: .4byte SPECIES_CASTFORM
+_0801044C: .4byte gUnknownCastformCoords_0837F598
 _08010450: .4byte 0x02024e84
 _08010454:
 	movs r0, 0xCE
@@ -29236,7 +29237,7 @@ _0801820A:
 	b _08018314
 	.align 2, 0
 _08018228: .4byte 0x02024a80
-_0801822C: .4byte 0x00000181
+_0801822C: .4byte SPECIES_CASTFORM
 _08018230:
 	movs r0, 0
 	str r0, [sp]
@@ -79378,7 +79379,7 @@ _080318CE:
 	bx r0
 	.align 2, 0
 _080318E0: .4byte 0x02000000
-_080318E4: .4byte 0x00000181
+_080318E4: .4byte SPECIES_CASTFORM
 _080318E8: .4byte 0x02024e84
 _080318EC: .4byte 0x00007fff
 _080318F0: .4byte 0x0202eec8
@@ -79542,7 +79543,7 @@ _08031A36:
 	bx r0
 	.align 2, 0
 _08031A48: .4byte 0x02000000
-_08031A4C: .4byte 0x00000181
+_08031A4C: .4byte SPECIES_CASTFORM
 _08031A50: .4byte 0x02024e84
 _08031A54: .4byte 0x00007fff
 _08031A58: .4byte 0x0202eec8
@@ -80638,7 +80639,7 @@ _08032328: .4byte 0x06010000
 _0803232C: .4byte 0x040000d4
 _08032330: .4byte 0x84000200
 _08032334: .4byte 0x02000000
-_08032338: .4byte 0x00000181
+_08032338: .4byte SPECIES_CASTFORM
 _0803233C: .4byte 0x02024e84
 _08032340: .4byte 0x00007fff
 _08032344: .4byte 0x0202eec8

@@ -1,4 +1,5 @@
 	.include "constants/gba_constants.s"
+	.include "constants/species_constants.s"
 	.include "asm/macros.s"
 
 	.syntax unified
@@ -6392,7 +6393,7 @@ _08077CCC:
 	ldrb r0, [r1]
 	b _08077DCC
 	.align 2, 0
-_08077CE0: .4byte 0x00000181
+_08077CE0: .4byte SPECIES_CASTFORM
 _08077CE4: .4byte gUnknown_0837F5AC
 _08077CE8: .4byte 0x02024e84
 _08077CEC:
@@ -6491,8 +6492,8 @@ _08077D90:
 	ldrb r0, [r1, 0x1]
 	b _08077DCC
 	.align 2, 0
-_08077DA8: .4byte 0x00000181
-_08077DAC: .4byte gUnknown_0837F598
+_08077DA8: .4byte SPECIES_CASTFORM
+_08077DAC: .4byte gUnknownCastformCoords_0837F598
 _08077DB0: .4byte 0x02024e84
 _08077DB4:
 	movs r0, 0xCE
@@ -6539,7 +6540,7 @@ sub_8077DD8: @ 8077DD8
 	cmp r0, 0
 	bne _08077E36
 	ldr r0, _08077E14
-	cmp r4, r0
+	cmp r4, r0  @ check if the given pokemon species is Castform
 	bne _08077E20
 	ldr r0, _08077E18
 	ldr r1, _08077E1C
@@ -6549,8 +6550,8 @@ sub_8077DD8: @ 8077DD8
 	ldrb r5, [r1]
 	b _08077E36
 	.align 2, 0
-_08077E14: .4byte 0x00000181
-_08077E18: .4byte gUnknown_0837F5A8
+_08077E14: .4byte SPECIES_CASTFORM
+_08077E18: .4byte gUnknownCastformData_0837F5A8
 _08077E1C: .4byte 0x02024e84
 _08077E20:
 	movs r0, 0xCE
@@ -11370,7 +11371,7 @@ _0807A18C:
 	ldr r0, _0807A1A0
 	b _0807A33C
 	.align 2, 0
-_0807A19C: .4byte 0x00000181
+_0807A19C: .4byte SPECIES_CASTFORM
 _0807A1A0: .4byte gMonBackPicCoords
 _0807A1A4:
 	mov r0, r8
@@ -11561,9 +11562,9 @@ _0807A30C:
 	adds r4, r0, r1
 	b _0807A33E
 	.align 2, 0
-_0807A31C: .4byte 0x00000181
+_0807A31C: .4byte SPECIES_CASTFORM
 _0807A320: .4byte 0x02024e84
-_0807A324: .4byte gUnknown_0837F598
+_0807A324: .4byte gUnknownCastformCoords_0837F598
 _0807A328:
 	movs r0, 0xCE
 	lsls r0, 1
