@@ -896,157 +896,157 @@
 	.4byte Music298_Header
 	.byte 2, 0, 2, 0
 
-	.4byte Music299_Header
+	.4byte BlankMusic_Header
 	.byte 0, 0, 0, 0
 
-	.4byte Music299_Header
+	.4byte BlankMusic_Header
 	.byte 0, 0, 0, 0
 
-	.4byte Music299_Header
+	.4byte BlankMusic_Header
 	.byte 0, 0, 0, 0
 
-	.4byte Music299_Header
+	.4byte BlankMusic_Header
 	.byte 0, 0, 0, 0
 
-	.4byte Music299_Header
+	.4byte BlankMusic_Header
 	.byte 0, 0, 0, 0
 
-	.4byte Music299_Header
+	.4byte BlankMusic_Header
 	.byte 0, 0, 0, 0
 
-	.4byte Music299_Header
+	.4byte BlankMusic_Header
 	.byte 0, 0, 0, 0
 
-	.4byte Music299_Header
+	.4byte BlankMusic_Header
 	.byte 0, 0, 0, 0
 
-	.4byte Music299_Header
+	.4byte BlankMusic_Header
 	.byte 0, 0, 0, 0
 
-	.4byte Music299_Header
+	.4byte BlankMusic_Header
 	.byte 0, 0, 0, 0
 
-	.4byte Music299_Header
+	.4byte BlankMusic_Header
 	.byte 0, 0, 0, 0
 
-	.4byte Music299_Header
+	.4byte BlankMusic_Header
 	.byte 0, 0, 0, 0
 
-	.4byte Music299_Header
+	.4byte BlankMusic_Header
 	.byte 0, 0, 0, 0
 
-	.4byte Music299_Header
+	.4byte BlankMusic_Header
 	.byte 0, 0, 0, 0
 
-	.4byte Music299_Header
+	.4byte BlankMusic_Header
 	.byte 0, 0, 0, 0
 
-	.4byte Music299_Header
+	.4byte BlankMusic_Header
 	.byte 0, 0, 0, 0
 
-	.4byte Music299_Header
+	.4byte BlankMusic_Header
 	.byte 0, 0, 0, 0
 
-	.4byte Music299_Header
+	.4byte BlankMusic_Header
 	.byte 0, 0, 0, 0
 
-	.4byte Music299_Header
+	.4byte BlankMusic_Header
 	.byte 0, 0, 0, 0
 
-	.4byte Music299_Header
+	.4byte BlankMusic_Header
 	.byte 0, 0, 0, 0
 
-	.4byte Music299_Header
+	.4byte BlankMusic_Header
 	.byte 0, 0, 0, 0
 
-	.4byte Music299_Header
+	.4byte BlankMusic_Header
 	.byte 0, 0, 0, 0
 
-	.4byte Music299_Header
+	.4byte BlankMusic_Header
 	.byte 0, 0, 0, 0
 
-	.4byte Music299_Header
+	.4byte BlankMusic_Header
 	.byte 0, 0, 0, 0
 
-	.4byte Music299_Header
+	.4byte BlankMusic_Header
 	.byte 0, 0, 0, 0
 
-	.4byte Music299_Header
+	.4byte BlankMusic_Header
 	.byte 0, 0, 0, 0
 
-	.4byte Music299_Header
+	.4byte BlankMusic_Header
 	.byte 0, 0, 0, 0
 
-	.4byte Music299_Header
+	.4byte BlankMusic_Header
 	.byte 0, 0, 0, 0
 
-	.4byte Music299_Header
+	.4byte BlankMusic_Header
 	.byte 0, 0, 0, 0
 
-	.4byte Music299_Header
+	.4byte BlankMusic_Header
 	.byte 0, 0, 0, 0
 
-	.4byte Music299_Header
+	.4byte BlankMusic_Header
 	.byte 0, 0, 0, 0
 
-	.4byte Music299_Header
+	.4byte BlankMusic_Header
 	.byte 0, 0, 0, 0
 
-	.4byte Music299_Header
+	.4byte BlankMusic_Header
 	.byte 0, 0, 0, 0
 
-	.4byte Music299_Header
+	.4byte BlankMusic_Header
 	.byte 0, 0, 0, 0
 
-	.4byte Music299_Header
+	.4byte BlankMusic_Header
 	.byte 0, 0, 0, 0
 
-	.4byte Music299_Header
+	.4byte BlankMusic_Header
 	.byte 0, 0, 0, 0
 
-	.4byte Music299_Header
+	.4byte BlankMusic_Header
 	.byte 0, 0, 0, 0
 
-	.4byte Music299_Header
+	.4byte BlankMusic_Header
 	.byte 0, 0, 0, 0
 
-	.4byte Music299_Header
+	.4byte BlankMusic_Header
 	.byte 0, 0, 0, 0
 
-	.4byte Music299_Header
+	.4byte BlankMusic_Header
 	.byte 0, 0, 0, 0
 
-	.4byte Music299_Header
+	.4byte BlankMusic_Header
 	.byte 0, 0, 0, 0
 
-	.4byte Music299_Header
+	.4byte BlankMusic_Header
 	.byte 0, 0, 0, 0
 
-	.4byte Music299_Header
+	.4byte BlankMusic_Header
 	.byte 0, 0, 0, 0
 
-	.4byte Music299_Header
+	.4byte BlankMusic_Header
 	.byte 0, 0, 0, 0
 
-	.4byte Music299_Header
+	.4byte BlankMusic_Header
 	.byte 0, 0, 0, 0
 
-	.4byte Music299_Header
+	.4byte BlankMusic_Header
 	.byte 0, 0, 0, 0
 
-	.4byte Music299_Header
+	.4byte BlankMusic_Header
 	.byte 0, 0, 0, 0
 
-	.4byte Music299_Header
+	.4byte BlankMusic_Header
 	.byte 0, 0, 0, 0
 
-	.4byte Music299_Header
+	.4byte BlankMusic_Header
 	.byte 0, 0, 0, 0
 
-	.4byte Music299_Header
+	.4byte BlankMusic_Header
 	.byte 0, 0, 0, 0
 
-	.4byte Music299_Header
+	.4byte BlankMusic_Header
 	.byte 0, 0, 0, 0
 
 	.4byte Music350_Header

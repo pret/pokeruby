@@ -1,10 +1,3 @@
-Music299_Header:: @ 845632C
-	.byte 0 @ number of tracks
-	.byte 0, 0, 0 @ unknown
-	.4byte 0x40000000 @ voice group pointer
-
-	.incbin "baserom.gba", 0x456334, 0x1FFCBC
-
 Music0_Header:: @ 8655FF0
 	.byte 0 @ number of tracks
 	.byte 0, 0, 168 @ unknown
