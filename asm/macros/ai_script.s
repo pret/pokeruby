@@ -244,6 +244,20 @@
 @ 42 jump_if_move_with_same_movescript_in_neither_0_2_history_nor_1_3_moveset
 @ 43 is_moveset_restricted
 @ 44 jump_if_or_if_not_current_move_in_encore
+
+	.macro f10_or_b1011
+	.byte 0x45
+	.endm
+
+	.macro jump_random_unknown addr
+	.byte 0x46
+	.4byte \addr
+	.endm
+
+	.macro f10_or_b1101
+	.byte 0x47
+	.endm
+
 @ 45 f10_or_b1011
 @ 46 jump_random_unknown
 @ 47 f10_or_b1101

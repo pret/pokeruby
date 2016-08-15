@@ -100,7 +100,7 @@ Unknown_081DBF17::
 Unknown_081DBF3E::
 	.incbin "baserom.gba", 0x001dbf3e, 0x25
 Unknown_081DBF63::
-	.incbin "baserom.gba", 0x001dbf63, 0x1
+	ai_ret
 Unknown_081DBF64::
 	.incbin "baserom.gba", 0x001dbf64, 0x155
 Unknown_081DC0B9::
@@ -108,8 +108,14 @@ Unknown_081DC0B9::
 Unknown_081DC0D0::
 	.incbin "baserom.gba", 0x001dc0d0, 0x2E
 Unknown_081DC0FE::
-	.incbin "baserom.gba", 0x001dc0fe, 0x7
+	jump_random_unknown 0x081DC104
+	f10_or_b1101
+	f10_or_b1011
 Unknown_081DC105::
-	.incbin "baserom.gba", 0x001dc105, 0x10
+	jump_if_health_percentage_eq 0x00 0x14 AI_bitmask_081DC105
+	jump_if_health_percentage_lt 0x00 0x14 AI_bitmask_081DC105
+	ai_ret
+AI_bitmask_081DC105:
+	f10_or_b1011
 Unknown_081DC115::
-	.incbin "baserom.gba", 0x001dc115, 0x3
+	ai_ret
