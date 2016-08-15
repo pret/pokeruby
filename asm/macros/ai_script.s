@@ -1,5 +1,7 @@
-	.macro random_goto__high_param_likely
+	.macro random_goto__high_param_likely param addr
 	.byte 0x00
+	.byte \param
+	.4byte \addr
 	.endm
 	
 	.macro random_goto__low_param_likely
@@ -160,8 +162,10 @@
 	.byte 0x20
 	.endm
 	
-	.macro get_battle_turn_counter__8
+	.macro get_battle_turn_counter param addr
 	.byte 0x21
+	.2byte \param
+	.4byte \addr
 	.endm
 	
 	.macro get_some_type
@@ -173,10 +177,10 @@
 	.byte \param
 	.endm
 	
-	.macro is_most_powerful_move move address
+	.macro is_most_powerful_move param addr
 	.byte 0x24
-	.2byte \move
-	.4byte \address
+	.2byte \param
+	.4byte \addr
 	.endm
 	
 	.macro get_move_to_execute_B
@@ -193,15 +197,32 @@
 	.2byte \move
 	.endm
 
-@ first 40 macros
-
 @ 28 jump_if_move_would_hit_first
 @ 29 jump_if_move_would_hit_second
 @ 2A ai_unk2A
 @ 2B ai_unk2B
 @ 2C count_alive_pokemon_on_team
+
+	.macro count_alive_pokemon_on_team param1 param2 addr
+	.byte 0x2C
+	.byte \param1
+	.2byte \param2
+	.4byte \addr
+	.endm
+
 @ 2D get_move_id__8
-@ E move_get_move_script_id
+@ 2E move_get_move_script_id
+	
+	.macro move_get_move_script_id param1 addr1 addr2  param2 param3 addr3
+	.byte 0x2E
+	.byte \param1
+	.4byte \addr1
+	.4byte \addr2
+	.byte \param2
+	.byte \param3
+	.4byte \addr3
+	.endm
+
 @ 2F get_ability
 @ 30 simulate_damage_muliplier_four_times
 @ 31 simulate_damage_bonus_jump_if_eq
@@ -241,6 +262,14 @@
 @ 3F jump_if_has_move
 @ 40 jump_if_hasnt_move
 @ 41 jump_if_move_with_same_movescript_in_either_0_2_history_or_1_3_moveset
+
+	.macro jump_if_move_with_same_movescript_in_either_0_2_history_or_1_3_moveset param1 param2 addr
+	.byte 0x41
+	.byte \param1
+	.byte \param2
+	.4byte \addr
+	.endm
+
 @ 42 jump_if_move_with_same_movescript_in_neither_0_2_history_nor_1_3_moveset
 @ 43 is_moveset_restricted
 @ 44 jump_if_or_if_not_current_move_in_encore
@@ -264,6 +293,14 @@
 @ 48 get_held_item_x12__8
 @ 49 pokemon_species_get_gender_info
 @ 4A enter_battle_countdown_get_state
+
+	.macro enter_battle_countdown_get_state param1 param2 addr
+	.byte 0x4A
+	.byte \param1
+	.2byte \param2
+	.4byte \addr
+	.endm
+
 @ 4B stockpile_get_num_uses
 @ 4C is_double_battle
 @ 4D get_dp08_item__8
