@@ -89,9 +89,10 @@
 	.byte \param
 	.endm
 	
-	.macro jump_if__8_eq param
+	.macro jump_if__8_eq param addr
 	.byte 0x13
 	.byte \param
+	.4byte \addr
 	.endm
 
 	.macro jump_if__8_ne param
@@ -172,8 +173,10 @@
 	.byte \param
 	.endm
 	
-	.macro is_most_powerful_move__8
+	.macro is_most_powerful_move move address
 	.byte 0x24
+	.2byte \move
+	.4byte \address
 	.endm
 	
 	.macro get_move_to_execute_B
@@ -207,12 +210,32 @@
 @ 34 jump_if_any_party_member_has_status_ailment_32
 @ 35 jump_if_no_party_member_has_status_ailment_32_BUGGED
 @ 36 get_weather__8
+
+	.macro jump_if_move_id_eq_8 byte address
+	.byte 0x37
+	.byte \byte
+	.4byte \address
+	.endm
+	
+	.macro jump_if_move_id_ne_8 byte address
+	.byte 0x38
+	.byte \byte
+	.4byte \address
+	.endm
+
 @ 37 jump_if_move_id_eq_8
 @ 38 jump_if_move_id_ne_8
 @ 39 jump_if_stat_buff_lt
 @ 3A jump_if_stat_buff_gt
 @ 3B jump_if_stat_buff_eq
 @ 3C jump_if_stat_buff_ne
+
+	.macro determine_move_damage_jump_if_fatal address byte
+	.byte 0x3D
+	.4byte \address
+	.byte \byte
+	.endm
+	
 @ 3D determine_move_damage_jump_if_fatal
 @ 3E determine_move_damage_jump_if_not_fatal
 @ 3F jump_if_has_move
@@ -242,7 +265,11 @@
 @ 57 ai_unk57
 @ 58 call
 @ 59 jump
-@ 5A return_and_eventually_f10_or_b0001
+
+	.macro ai_ret
+	.byte 0x5A
+	.endm
+	
 @ 5B compare_attacker_defender_levels
 @ 5C jump_if_taunt_turns_ne_0
 @ 5D jump_if_taunt_turns_eq_0

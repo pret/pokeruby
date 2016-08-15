@@ -80,7 +80,17 @@ Unknown_081DA09C::
 Unknown_081DA86D::
 	.incbin "baserom.gba", 0x001da86d, 0x162A
 Unknown_081DBE97::
-	.incbin "baserom.gba", 0x001dbe97, 0x1E
+	determine_move_damage_jump_if_fatal AI_jump1 0x24
+	jump_if__8_eq 0x01 0x081DA84C
+	ai_ret
+AI_jump1:
+	jump_if_move_id_eq_8 0x07 AI_ret
+	jump_if_move_id_ne_8 0x67 viableScore_04
+	viability_score 0x02
+viableScore_04:
+	viability_score 0x04
+AI_ret:
+	ai_ret
 Unknown_081DBEB5::
 	.incbin "baserom.gba", 0x001dbeb5, 0x52
 Unknown_081DBF07::
