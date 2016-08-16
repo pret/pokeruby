@@ -102,7 +102,13 @@
 @ 25 get_move_to_execute_B
 @ 26 jump_if__8_ne_2
 @ 27 jump_if__8_eq_2
-@ 28 jump_if_move_would_hit_first
+
+	.macro jump_if_move_would_hit_first param addr
+	.byte 0x28
+	.byte \param
+	.4byte \addr
+	.endm
+
 @ 29 jump_if_move_would_hit_second
 @ 2A ai_unk2A
 @ 2B ai_unk2B
@@ -132,7 +138,13 @@
 	.endm
 	
 @ 30 simulate_damage_muliplier_four_times
-@ 31 simulate_damage_bonus_jump_if_eq
+
+	.macro simulate_damage_bonus_jump_if_eq param addr
+	.byte 0x31
+	.byte \param
+	.4byte \addr
+	.endm
+
 @ 32 ai_unk32
 @ 33 ai_unk33
 @ 34 jump_if_any_party_member_has_status_ailment_32
@@ -153,7 +165,15 @@
 
 @ 37 jump_if_move_id_eq_8
 @ 38 jump_if_move_id_ne_8
-@ 39 jump_if_stat_buff_lt
+
+	.macro jump_if_stat_buff_lt param1 param2 param3 addr
+	.byte 0x39
+	.byte \param1
+	.byte \param2
+	.byte \param3
+	.4byte \addr
+	.endm
+
 @ 3A jump_if_stat_buff_gt
 @ 3B jump_if_stat_buff_eq
 @ 3C jump_if_stat_buff_ne

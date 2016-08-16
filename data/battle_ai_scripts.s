@@ -82,24 +82,34 @@ Unknown_081DA09C::
 Unknown_081DA84C::
 	viability_score 0xFF
 	ai_ret
+AI_viabilityFE_081DA84C:
 	viability_score 0xFE
 	ai_ret
+AI_viabilityFD_081DA84C:
 	viability_score 0xFD
 	ai_ret
+AI_viabilityFB_081DA84C:
 	viability_score 0xFB
 	ai_ret
+AI_viabilityF8_081DA84C:
 	viability_score 0xF8
 	ai_ret
+AI_viabilityF6_081DA84C:
 	viability_score 0xF6
 	ai_ret
+AI_viabilityF4_081DA84C:
 	viability_score 0xF4
 	ai_ret
+AI_viability01_081DA84C:
 	viability_score 0x01
 	ai_ret
+AI_viability02_081DA84C:
 	viability_score 0x02
 	ai_ret
+AI_viability03_081DA84C:
 	viability_score 0x03
 	ai_ret
+AI_viability05_081DA84C:
 	viability_score 0x05
 	ai_ret
 
@@ -227,13 +237,56 @@ Unknown_081DA86D::
 	jump_if_move_id_eq_8 212, AI_movejump212_081DBE74
 	ai_ret
 AI_movejump1_081DA86D:
-	.incbin "baserom.gba", 0x001dab44, 0x1C
+	jump_if_move_with_same_movescript_in_either_0_2_history_or_1_3_moveset 0x00 0x08 AI_highparam_move1
+	jump_if_move_with_same_movescript_in_either_0_2_history_or_1_3_moveset 0x00 0x6B AI_highparam_move1
+	ai_jump AI_ret_move1
+AI_highparam_move1:
+	random_goto__high_param_likely 0x80 AI_ret_move1
+	viability_score 0x01
+AI_ret_move1:
+	ai_ret
 AI_movejump3_081DAB60:
-	.incbin "baserom.gba", 0x001dab60, 0x1A
+	simulate_damage_bonus_jump_if_eq 0x14 AI_highparam_move3
+	simulate_damage_bonus_jump_if_eq 0x0A AI_highparam_move3
+	ai_jump AI_ret_move3
+AI_highparam_move3:
+	random_goto__high_param_likely 0x32 AI_ret_move3
+	viability_score 0xFD
+AI_ret_move3:
+	ai_ret
 AI_movejump7_081DAB7A:
-	.incbin "baserom.gba", 0x001dab7a, 0x5E
+	jump_if_stat_buff_lt 0x00 0x07 0x07 AI_healthcheck_move7
+	viability_score 0xFF
+	jump_if_stat_buff_lt 0x00 0x07 0x0A AI_healthcheck_move7
+	random_goto__high_param_likely 0x80 AI_healthcheck_move7
+	viability_score 0xFF
+AI_healthcheck_move7:
+	jump_if_health_percentage_lt 0x01 0x50 AI_healthcheck2_move7
+	jump_if_move_would_hit_first 0x01 AI_healthcheck2_move7
+	random_goto__high_param_likely 0x32 AI_ret_move7
+	ai_jump AI_viabilityFD_081DA84C
+AI_healthcheck2_move7:
+	jump_if_health_percentage_ge 0x01 0x32 AI_highparam_move7
+	random_goto__high_param_likely 0x80 AI_healthcheck3_move7
+	viability_score 0x01
+AI_healthcheck3_move7:
+	jump_if_health_percentage_ge 0x01 0x1E AI_ret_move7
+	random_goto__high_param_likely 0x32 AI_ret_move7
+	viability_score 0x01
+	ai_jump AI_ret_move7
+AI_highparam_move7:
+	random_goto__high_param_likely 0x32 AI_ret_move7
+	viability_score 0xFF
+AI_ret_move7:
+	ai_ret
 AI_movejump8_081DABD8:
-	.incbin "baserom.gba", 0x001dabd8, 0x14
+	simulate_damage_bonus_jump_if_eq 0x0A AI_viability_move8
+	simulate_damage_bonus_jump_if_eq 0x14 AI_viability_move8
+	ai_jump AI_ret_move8
+AI_viability_move8:
+	viability_score 0xFF
+AI_ret_move8:
+	ai_ret
 AI_movejump9_081DABEC:
 	.incbin "baserom.gba", 0x001dabec, 0x84
 AI_movejump10_081DAC70:
