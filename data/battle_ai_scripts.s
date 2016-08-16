@@ -104,129 +104,307 @@ Unknown_081DA84C::
 	ai_ret
 
 Unknown_081DA86D::
-	jump_if_move_id_eq_8 1, 0x081dab44
-	jump_if_move_id_eq_8 3, 0x081dab60
-	jump_if_move_id_eq_8 7, 0x081dab7a
-	jump_if_move_id_eq_8 8, 0x081dabd8
-	jump_if_move_id_eq_8 9, 0x081dabec
-	jump_if_move_id_eq_8 10, 0x081dac70
-	jump_if_move_id_eq_8 11, 0x081dacab
-	jump_if_move_id_eq_8 12, 0x081dad11
-	jump_if_move_id_eq_8 13, 0x081dad27
-	jump_if_move_id_eq_8 14, 0x081dad62
-	jump_if_move_id_eq_8 15, 0x081dadc8
-	jump_if_move_id_eq_8 16, 0x081dade2
-	jump_if_move_id_eq_8 17, 0x081dae7c
-	jump_if_move_id_eq_8 18, 0x081daeac
-	jump_if_move_id_eq_8 19, 0x081daefe
-	jump_if_move_id_eq_8 20, 0x081daf35
-	jump_if_move_id_eq_8 21, 0x081daf4b
-	jump_if_move_id_eq_8 22, 0x081daf9f
-	jump_if_move_id_eq_8 23, 0x081dafc0
-	jump_if_move_id_eq_8 24, 0x081db054
-	jump_if_move_id_eq_8 25, 0x081db075
-	jump_if_move_id_eq_8 26, 0x081db138
-	jump_if_move_id_eq_8 28, 0x081db142
-	jump_if_move_id_eq_8 30, 0x081db17a
-	jump_if_move_id_eq_8 32, 0x081db1ab
-	jump_if_move_id_eq_8 33, 0x081db204
-	jump_if_move_id_eq_8 35, 0x081db243
-	jump_if_move_id_eq_8 37, 0x081db272
-	jump_if_move_id_eq_8 38, 0x081db2d2
-	jump_if_move_id_eq_8 39, 0x081dba6d
-	jump_if_move_id_eq_8 40, 0x081db2d3
-	jump_if_move_id_eq_8 42, 0x081db2dd
-	jump_if_move_id_eq_8 43, 0x081db313
-	jump_if_move_id_eq_8 49, 0x081db342
-	jump_if_move_id_eq_8 50, 0x081dac70
-	jump_if_move_id_eq_8 51, 0x081dacab
-	jump_if_move_id_eq_8 52, 0x081dad11
-	jump_if_move_id_eq_8 53, 0x081dad27
-	jump_if_move_id_eq_8 54, 0x081dad62
-	jump_if_move_id_eq_8 55, 0x081dadc8
-	jump_if_move_id_eq_8 56, 0x081dade2
-	jump_if_move_id_eq_8 58, 0x081daeac
-	jump_if_move_id_eq_8 59, 0x081daefe
-	jump_if_move_id_eq_8 60, 0x081daf35
-	jump_if_move_id_eq_8 61, 0x081daf4b
-	jump_if_move_id_eq_8 62, 0x081daf9f
-	jump_if_move_id_eq_8 63, 0x081dafc0
-	jump_if_move_id_eq_8 64, 0x081db054
-	jump_if_move_id_eq_8 65, 0x081db364
-	jump_if_move_id_eq_8 66, 0x081db394
-	jump_if_move_id_eq_8 67, 0x081db3a5
-	jump_if_move_id_eq_8 70, 0x081daf1f
-	jump_if_move_id_eq_8 75, 0x081dba6d
-	jump_if_move_id_eq_8 78, 0x081db3c2
-	jump_if_move_id_eq_8 79, 0x081db3e5
-	jump_if_move_id_eq_8 80, 0x081db47b
-	jump_if_move_id_eq_8 84, 0x081db204
-	jump_if_move_id_eq_8 86, 0x081db4a3
-	jump_if_move_id_eq_8 89, 0x081db4c2
-	jump_if_move_id_eq_8 90, 0x081db563
-	jump_if_move_id_eq_8 91, 0x081db5cb
-	jump_if_move_id_eq_8 92, 0x081db5f7
-	jump_if_move_id_eq_8 94, 0x081db5fa
-	jump_if_move_id_eq_8 97, 0x081db603
-	jump_if_move_id_eq_8 98, 0x081db606
-	jump_if_move_id_eq_8 99, 0x081db63c
-	jump_if_move_id_eq_8 102, 0x081db681
-	jump_if_move_id_eq_8 105, 0x081db698
-	jump_if_move_id_eq_8 106, 0x081db2dd
-	jump_if_move_id_eq_8 108, 0x081dade2
-	jump_if_move_id_eq_8 109, 0x081db6bb
-	jump_if_move_id_eq_8 111, 0x081db70a
-	jump_if_move_id_eq_8 113, 0x081db7cb
-	jump_if_move_id_eq_8 116, 0x081db7f9
-	jump_if_move_id_eq_8 127, 0x081db817
-	jump_if_move_id_eq_8 128, 0x081db8b3
-	jump_if_move_id_eq_8 132, 0x081db191
-	jump_if_move_id_eq_8 133, 0x081db191
-	jump_if_move_id_eq_8 134, 0x081db191
-	jump_if_move_id_eq_8 136, 0x081db8e9
-	jump_if_move_id_eq_8 137, 0x081db928
-	jump_if_move_id_eq_8 142, 0x081db951
-	jump_if_move_id_eq_8 143, 0x081db960
-	jump_if_move_id_eq_8 144, 0x081db9cd
-	jump_if_move_id_eq_8 145, 0x081dba6d
-	jump_if_move_id_eq_8 151, 0x081dba6d
-	jump_if_move_id_eq_8 155, 0x081dba91
-	jump_if_move_id_eq_8 157, 0x081db1ab
-	jump_if_move_id_eq_8 158, 0x081dbb1b
-	jump_if_move_id_eq_8 161, 0x081dbb1e
-	jump_if_move_id_eq_8 162, 0x081db1ab
-	jump_if_move_id_eq_8 164, 0x081dbb2f
-	jump_if_move_id_eq_8 166, 0x081db33a
-	jump_if_move_id_eq_8 168, 0x081dab7a
-	jump_if_move_id_eq_8 169, 0x081dbb58
-	jump_if_move_id_eq_8 170, 0x081dbb65
-	jump_if_move_id_eq_8 171, 0x081dbbb4
-	jump_if_move_id_eq_8 177, 0x081dbbc6
-	jump_if_move_id_eq_8 178, 0x081dbc11
-	jump_if_move_id_eq_8 182, 0x081dbc48
-	jump_if_move_id_eq_8 183, 0x081dbc78
-	jump_if_move_id_eq_8 184, 0x081dbcab
-	jump_if_move_id_eq_8 185, 0x081dbcca
-	jump_if_move_id_eq_8 186, 0x081dbcf8
-	jump_if_move_id_eq_8 188, 0x081dbd0a
-	jump_if_move_id_eq_8 189, 0x081dbd22
-	jump_if_move_id_eq_8 190, 0x081dbd4e
-	jump_if_move_id_eq_8 191, 0x081dbc11
-	jump_if_move_id_eq_8 192, 0x081dbd76
-	jump_if_move_id_eq_8 193, 0x081dbd87
-	jump_if_move_id_eq_8 195, 0x081dbd96
-	jump_if_move_id_eq_8 200, 0x081db313
-	jump_if_move_id_eq_8 201, 0x081dbe00
-	jump_if_move_id_eq_8 204, 0x081dbe26
-	jump_if_move_id_eq_8 205, 0x081daefe
-	jump_if_move_id_eq_8 206, 0x081dad62
-	jump_if_move_id_eq_8 208, 0x081dacab
-	jump_if_move_id_eq_8 209, 0x081db313
-	jump_if_move_id_eq_8 210, 0x081dbe4e
-	jump_if_move_id_eq_8 211, 0x081dad62
-	jump_if_move_id_eq_8 212, 0x081dbe74
+	jump_if_move_id_eq_8 1, AI_movejump1_081DA86D
+	jump_if_move_id_eq_8 3, AI_movejump3_081DAB60
+	jump_if_move_id_eq_8 7, AI_movejump7_081DAB7A
+	jump_if_move_id_eq_8 8, AI_movejump8_081DABD8
+	jump_if_move_id_eq_8 9, AI_movejump9_081DABEC
+	jump_if_move_id_eq_8 10, AI_movejump10_081DAC70
+	jump_if_move_id_eq_8 11, AI_movejump11_081DACAB
+	jump_if_move_id_eq_8 12, AI_movejump12_081DAD11
+	jump_if_move_id_eq_8 13, AI_movejump13_081DAD27
+	jump_if_move_id_eq_8 14, AI_movejump14_081DAD62
+	jump_if_move_id_eq_8 15, AI_movejump15_081DADC8
+	jump_if_move_id_eq_8 16, AI_movejump16_081DADE2
+	jump_if_move_id_eq_8 17, AI_movejump17_081DAE7C
+	jump_if_move_id_eq_8 18, AI_movejump18_081DAEAC
+	jump_if_move_id_eq_8 19, AI_movejump19_081DAEFE
+	jump_if_move_id_eq_8 20, AI_movejump20_081DAF35
+	jump_if_move_id_eq_8 21, AI_movejump21_081DAF4B
+	jump_if_move_id_eq_8 22, AI_movejump22_081DAF9F
+	jump_if_move_id_eq_8 23, AI_movejump23_081DAFC0
+	jump_if_move_id_eq_8 24, AI_movejump24_081DB054
+	jump_if_move_id_eq_8 25, AI_movejump25_081DB075
+	jump_if_move_id_eq_8 26, AI_movejump26_081DB138
+	jump_if_move_id_eq_8 28, AI_movejump28_081DB142
+	jump_if_move_id_eq_8 30, AI_movejump30_081DB17A
+	jump_if_move_id_eq_8 32, AI_movejump32_081DB1AB
+	jump_if_move_id_eq_8 33, AI_movejump33_081DB204
+	jump_if_move_id_eq_8 35, AI_movejump35_081DB243
+	jump_if_move_id_eq_8 37, AI_movejump37_081DB272
+	jump_if_move_id_eq_8 38, AI_movejump38_081DB2D2
+	jump_if_move_id_eq_8 39, AI_movejump39_081DBA6D
+	jump_if_move_id_eq_8 40, AI_movejump40_081DB2D3
+	jump_if_move_id_eq_8 42, AI_movejump42_081DB2DD
+	jump_if_move_id_eq_8 43, AI_movejump43_081DB313
+	jump_if_move_id_eq_8 49, AI_movejump49_081DB342
+	jump_if_move_id_eq_8 50, AI_movejump10_081DAC70
+	jump_if_move_id_eq_8 51, AI_movejump11_081DACAB
+	jump_if_move_id_eq_8 52, AI_movejump12_081DAD11
+	jump_if_move_id_eq_8 53, AI_movejump13_081DAD27
+	jump_if_move_id_eq_8 54, AI_movejump14_081DAD62
+	jump_if_move_id_eq_8 55, AI_movejump15_081DADC8
+	jump_if_move_id_eq_8 56, AI_movejump16_081DADE2
+	jump_if_move_id_eq_8 58, AI_movejump18_081DAEAC
+	jump_if_move_id_eq_8 59, AI_movejump19_081DAEFE
+	jump_if_move_id_eq_8 60, AI_movejump20_081DAF35
+	jump_if_move_id_eq_8 61, AI_movejump21_081DAF4B
+	jump_if_move_id_eq_8 62, AI_movejump22_081DAF9F
+	jump_if_move_id_eq_8 63, AI_movejump23_081DAFC0
+	jump_if_move_id_eq_8 64, AI_movejump24_081DB054
+	jump_if_move_id_eq_8 65, AI_movejump65_081DB364
+	jump_if_move_id_eq_8 66, AI_movejump66_081DB394
+	jump_if_move_id_eq_8 67, AI_movejump67_081DB3A5
+	jump_if_move_id_eq_8 70, AI_movejump70_081DAF1F
+	jump_if_move_id_eq_8 75, AI_movejump39_081DBA6D
+	jump_if_move_id_eq_8 78, AI_movejump78_081DB3C2
+	jump_if_move_id_eq_8 79, AI_movejump79_081DB3E5
+	jump_if_move_id_eq_8 80, AI_movejump80_081DB47B
+	jump_if_move_id_eq_8 84, AI_movejump33_081DB204
+	jump_if_move_id_eq_8 86, AI_movejump86_081DB4A3
+	jump_if_move_id_eq_8 89, AI_movejump89_081DB4C2
+	jump_if_move_id_eq_8 90, AI_movejump90_081DB563
+	jump_if_move_id_eq_8 91, AI_movejump91_081DB5CB
+	jump_if_move_id_eq_8 92, AI_movejump92_081DB5F7
+	jump_if_move_id_eq_8 94, AI_movejump94_081DB5FA
+	jump_if_move_id_eq_8 97, AI_movejump97_081DB603
+	jump_if_move_id_eq_8 98, AI_movejump98_081DB606
+	jump_if_move_id_eq_8 99, AI_movejump99_081DB63C
+	jump_if_move_id_eq_8 102, AI_movejump102_081DB681
+	jump_if_move_id_eq_8 105, AI_movejump105_081DB698
+	jump_if_move_id_eq_8 106, AI_movejump42_081DB2DD
+	jump_if_move_id_eq_8 108, AI_movejump16_081DADE2
+	jump_if_move_id_eq_8 109, AI_movejump109_081DB6BB
+	jump_if_move_id_eq_8 111, AI_movejump111_081DB70A
+	jump_if_move_id_eq_8 113, AI_movejump113_081DB7CB
+	jump_if_move_id_eq_8 116, AI_movejump116_081DB7F9
+	jump_if_move_id_eq_8 127, AI_movejump127_081DB817
+	jump_if_move_id_eq_8 128, AI_movejump128_081DB8B3
+	jump_if_move_id_eq_8 132, AI_movejump132_081DB191
+	jump_if_move_id_eq_8 133, AI_movejump132_081DB191
+	jump_if_move_id_eq_8 134, AI_movejump132_081DB191
+	jump_if_move_id_eq_8 136, AI_movejump136_081DB8E9
+	jump_if_move_id_eq_8 137, AI_movejump137_081DB928
+	jump_if_move_id_eq_8 142, AI_movejump142_081DB951
+	jump_if_move_id_eq_8 143, AI_movejump143_081DB960
+	jump_if_move_id_eq_8 144, AI_movejump144_081DB9CD
+	jump_if_move_id_eq_8 145, AI_movejump39_081DBA6D
+	jump_if_move_id_eq_8 151, AI_movejump39_081DBA6D
+	jump_if_move_id_eq_8 155, AI_movejump155_081DBA91
+	jump_if_move_id_eq_8 157, AI_movejump32_081DB1AB
+	jump_if_move_id_eq_8 158, AI_movejump158_081DBB1B
+	jump_if_move_id_eq_8 161, AI_movejump161_081DBB1E
+	jump_if_move_id_eq_8 162, AI_movejump32_081DB1AB
+	jump_if_move_id_eq_8 164, AI_movejump164_081DBB2F
+	jump_if_move_id_eq_8 166, AI_movejump166_081DB33A
+	jump_if_move_id_eq_8 168, AI_movejump7_081DAB7A
+	jump_if_move_id_eq_8 169, AI_movejump169_081DBB58
+	jump_if_move_id_eq_8 170, AI_movejump170_081DBB65
+	jump_if_move_id_eq_8 171, AI_movejump171_081DBBB4
+	jump_if_move_id_eq_8 177, AI_movejump177_081DBBC6
+	jump_if_move_id_eq_8 178, AI_movejump178_081DBC11
+	jump_if_move_id_eq_8 182, AI_movejump182_081DBC48
+	jump_if_move_id_eq_8 183, AI_movejump183_081DBC78
+	jump_if_move_id_eq_8 184, AI_movejump184_081DBCAB
+	jump_if_move_id_eq_8 185, AI_movejump185_081DBCCA
+	jump_if_move_id_eq_8 186, AI_movejump186_081DBCF8
+	jump_if_move_id_eq_8 188, AI_movejump188_081DBD0A
+	jump_if_move_id_eq_8 189, AI_movejump189_081DBD22
+	jump_if_move_id_eq_8 190, AI_movejump190_081DBD4E
+	jump_if_move_id_eq_8 191, AI_movejump178_081DBC11
+	jump_if_move_id_eq_8 192, AI_movejump192_081DBD76
+	jump_if_move_id_eq_8 193, AI_movejump193_081DBD87
+	jump_if_move_id_eq_8 195, AI_movejump195_081DBD96
+	jump_if_move_id_eq_8 200, AI_movejump43_081DB313
+	jump_if_move_id_eq_8 201, AI_movejump201_081DBE00
+	jump_if_move_id_eq_8 204, AI_movejump204_081DBE26
+	jump_if_move_id_eq_8 205, AI_movejump19_081DAEFE
+	jump_if_move_id_eq_8 206, AI_movejump14_081DAD62
+	jump_if_move_id_eq_8 208, AI_movejump11_081DACAB
+	jump_if_move_id_eq_8 209, AI_movejump43_081DB313
+	jump_if_move_id_eq_8 210, AI_movejump210_081DBE4E
+	jump_if_move_id_eq_8 211, AI_movejump14_081DAD62
+	jump_if_move_id_eq_8 212, AI_movejump212_081DBE74
 	ai_ret
-	.incbin "baserom.gba", 0x001dab44, 0x1353
+AI_movejump1_081DA86D:
+	.incbin "baserom.gba", 0x001dab44, 0x1C
+AI_movejump3_081DAB60:
+	.incbin "baserom.gba", 0x001dab60, 0x1A
+AI_movejump7_081DAB7A:
+	.incbin "baserom.gba", 0x001dab7a, 0x5E
+AI_movejump8_081DABD8:
+	.incbin "baserom.gba", 0x001dabd8, 0x14
+AI_movejump9_081DABEC:
+	.incbin "baserom.gba", 0x001dabec, 0x84
+AI_movejump10_081DAC70:
+	.incbin "baserom.gba", 0x001dac70, 0x3B
+AI_movejump11_081DACAB:
+	.incbin "baserom.gba", 0x001dacab, 0x66
+AI_movejump12_081DAD11:
+	.incbin "baserom.gba", 0x001dad11, 0x16
+AI_movejump13_081DAD27:
+	.incbin "baserom.gba", 0x001dad27, 0x3B
+AI_movejump14_081DAD62:
+	.incbin "baserom.gba", 0x001dad62, 0x66
+AI_movejump15_081DADC8:
+	.incbin "baserom.gba", 0x001dadc8, 0x1A
+AI_movejump16_081DADE2:
+	.incbin "baserom.gba", 0x001dade2, 0x9A
+AI_movejump17_081DAE7C:
+	.incbin "baserom.gba", 0x001dae7c, 0x30
+AI_movejump18_081DAEAC:
+	.incbin "baserom.gba", 0x001daeac, 0x52
+AI_movejump19_081DAEFE:
+	.incbin "baserom.gba", 0x001daefe, 0x21
+AI_movejump70_081DAF1F:
+	.incbin "baserom.gba", 0x001daf1f, 0x16
+AI_movejump20_081DAF35:
+	.incbin "baserom.gba", 0x001daf35, 0x16
+AI_movejump21_081DAF4B:
+	.incbin "baserom.gba", 0x001daf4b, 0x54
+AI_movejump22_081DAF9F:
+	.incbin "baserom.gba", 0x001daf9f, 0x21
+AI_movejump23_081DAFC0:
+	.incbin "baserom.gba", 0x001dafc0, 0x94
+AI_movejump24_081DB054:
+	.incbin "baserom.gba", 0x001db054, 0x21
+AI_movejump25_081DB075:
+	.incbin "baserom.gba", 0x001db075, 0xC3
+AI_movejump26_081DB138:
+	.incbin "baserom.gba", 0x001db138, 0xA
+AI_movejump28_081DB142:
+	.incbin "baserom.gba", 0x001db142, 0x38
+AI_movejump30_081DB17A:
+	.incbin "baserom.gba", 0x001db17a, 0x17
+AI_movejump132_081DB191:
+	.incbin "baserom.gba", 0x001db191, 0x1A
+AI_movejump32_081DB1AB:
+	.incbin "baserom.gba", 0x001db1ab, 0x59
+AI_movejump33_081DB204:
+	.incbin "baserom.gba", 0x001db204, 0x3F
+AI_movejump35_081DB243:
+	.incbin "baserom.gba", 0x001db243, 0x2F
+AI_movejump37_081DB272:
+	.incbin "baserom.gba", 0x001db272, 0x60
+AI_movejump38_081DB2D2:
+	.incbin "baserom.gba", 0x001db2d2, 0x1
+AI_movejump40_081DB2D3:
+	.incbin "baserom.gba", 0x001db2d3, 0xA
+AI_movejump42_081DB2DD:
+	.incbin "baserom.gba", 0x001db2dd, 0x36
+AI_movejump43_081DB313:
+	.incbin "baserom.gba", 0x001db313, 0x27
+AI_movejump166_081DB33A:
+	.incbin "baserom.gba", 0x001db33a, 0x8
+AI_movejump49_081DB342:
+	.incbin "baserom.gba", 0x001db342, 0x22
+AI_movejump65_081DB364:
+	.incbin "baserom.gba", 0x001db364, 0x30
+AI_movejump66_081DB394:
+	.incbin "baserom.gba", 0x001db394, 0x11
+AI_movejump67_081DB3A5:
+	.incbin "baserom.gba", 0x001db3a5, 0x1D
+
+AI_movejump78_081DB3C2:
+	.incbin "baserom.gba", 0x001db3c2, 0x23
+AI_movejump79_081DB3E5:
+	.incbin "baserom.gba", 0x001db3e5, 0x96
+AI_movejump80_081DB47B:
+	.incbin "baserom.gba", 0x001db47b, 0x28
+AI_movejump86_081DB4A3:
+	.incbin "baserom.gba", 0x001db4a3, 0x1F
+AI_movejump89_081DB4C2:
+	.incbin "baserom.gba", 0x001db4c2, 0xA1
+AI_movejump90_081DB563:
+	.incbin "baserom.gba", 0x001db563, 0x68
+AI_movejump91_081DB5CB:
+	.incbin "baserom.gba", 0x001db5cb, 0x2C
+AI_movejump92_081DB5F7:
+	.incbin "baserom.gba", 0x001db5f7, 0x3
+AI_movejump94_081DB5FA:
+	.incbin "baserom.gba", 0x001db5fa, 0x9
+AI_movejump97_081DB603:
+	.incbin "baserom.gba", 0x001db603, 0x3
+AI_movejump98_081DB606:
+	.incbin "baserom.gba", 0x001db606, 0x36
+AI_movejump99_081DB63C:
+	.incbin "baserom.gba", 0x001db63c, 0x45
+AI_movejump102_081DB681:
+	.incbin "baserom.gba", 0x001db681, 0x17
+AI_movejump105_081DB698:
+	.incbin "baserom.gba", 0x001db698, 0x23
+AI_movejump109_081DB6BB:
+	.incbin "baserom.gba", 0x001db6bb, 0x4F
+AI_movejump111_081DB70A:
+	.incbin "baserom.gba", 0x001db70a, 0xC1
+AI_movejump113_081DB7CB:
+	.incbin "baserom.gba", 0x001db7cb, 0x2E
+AI_movejump116_081DB7F9:
+	.incbin "baserom.gba", 0x001db7f9, 0x1E
+AI_movejump127_081DB817:
+	.incbin "baserom.gba", 0x001db817, 0x9C
+AI_movejump128_081DB8B3:
+	.incbin "baserom.gba", 0x001db8b3, 0x36
+AI_movejump136_081DB8E9:
+	.incbin "baserom.gba", 0x001db8e9, 0x3F
+AI_movejump137_081DB928:
+	.incbin "baserom.gba", 0x001db928, 0x29
+AI_movejump142_081DB951:
+	.incbin "baserom.gba", 0x001db951, 0xF
+AI_movejump143_081DB960:
+	.incbin "baserom.gba", 0x001db960, 0x6D
+AI_movejump144_081DB9CD:
+	.incbin "baserom.gba", 0x001db9cd, 0xA0
+AI_movejump39_081DBA6D:
+	.incbin "baserom.gba", 0x001dba6d, 0x24
+AI_movejump155_081DBA91:
+	.incbin "baserom.gba", 0x001dba91, 0x8A
+AI_movejump158_081DBB1B:
+	.incbin "baserom.gba", 0x001dbb1b, 0x3
+AI_movejump161_081DBB1E:
+	.incbin "baserom.gba", 0x001dbb1e, 0x11
+AI_movejump164_081DBB2F:
+	.incbin "baserom.gba", 0x001dbb2f, 0x29
+AI_movejump169_081DBB58:
+	.incbin "baserom.gba", 0x001dbb58, 0xD
+AI_movejump170_081DBB65:
+	.incbin "baserom.gba", 0x001dbb65, 0x4F
+AI_movejump171_081DBBB4:
+	.incbin "baserom.gba", 0x001dbbb4, 0x12
+AI_movejump177_081DBBC6:
+	.incbin "baserom.gba", 0x001dbbc6, 0x4B
+AI_movejump178_081DBC11:
+	.incbin "baserom.gba", 0x001dbc11, 0x37
+AI_movejump182_081DBC48:
+	.incbin "baserom.gba", 0x001dbc48, 0x30
+AI_movejump183_081DBC78:
+	.incbin "baserom.gba", 0x001dbc78, 0x33
+AI_movejump184_081DBCAB:
+	.incbin "baserom.gba", 0x001dbcab, 0x1F
+AI_movejump185_081DBCCA:
+	.incbin "baserom.gba", 0x001dbcca, 0x2E
+AI_movejump186_081DBCF8:
+	.incbin "baserom.gba", 0x001dbcf8, 0x12
+AI_movejump188_081DBD0A:
+	.incbin "baserom.gba", 0x001dbd0a, 0x18
+AI_movejump189_081DBD22:
+	.incbin "baserom.gba", 0x001dbd22, 0x2C
+AI_movejump190_081DBD4E:
+	.incbin "baserom.gba", 0x001dbd4e, 0x28
+AI_movejump192_081DBD76:
+	.incbin "baserom.gba", 0x001dbd76, 0x11
+AI_movejump193_081DBD87:
+	.incbin "baserom.gba", 0x001dbd87, 0xF
+AI_movejump195_081DBD96:
+	.incbin "baserom.gba", 0x001dbd96, 0x6A
+AI_movejump201_081DBE00:
+	.incbin "baserom.gba", 0x001dbe00, 0x26
+AI_movejump204_081DBE26:
+	.incbin "baserom.gba", 0x001dbe26, 0x28
+AI_movejump210_081DBE4E:
+	.incbin "baserom.gba", 0x001dbe4e, 0x26
+AI_movejump212_081DBE74:
+	.incbin "baserom.gba", 0x001dbe74, 0x23
 
 Unknown_081DBE97::
 	determine_move_damage_jump_if_fatal AI_jump1_081DBE97, 0x24
