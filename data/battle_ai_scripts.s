@@ -304,7 +304,6 @@ AI_movejump66_081DB394:
 	.incbin "baserom.gba", 0x001db394, 0x11
 AI_movejump67_081DB3A5:
 	.incbin "baserom.gba", 0x001db3a5, 0x1D
-
 AI_movejump78_081DB3C2:
 	.incbin "baserom.gba", 0x001db3c2, 0x23
 AI_movejump79_081DB3E5:
