@@ -57,8 +57,11 @@
 	.byte 0x0A
 	.endm
 	
-	.macro jump_if_any_status2_bit
+	.macro jump_if_any_status2_bit param mask addr
 	.byte 0x0B
+	.byte \param
+	.4byte \mask
+	.4byte \addr
 	.endm
 	
 	.macro jump_if_no_status2_bit
@@ -201,7 +204,6 @@
 @ 29 jump_if_move_would_hit_second
 @ 2A ai_unk2A
 @ 2B ai_unk2B
-@ 2C count_alive_pokemon_on_team
 
 	.macro count_alive_pokemon_on_team param1 param2 addr
 	.byte 0x2C
@@ -211,7 +213,6 @@
 	.endm
 
 @ 2D get_move_id__8
-@ 2E move_get_move_script_id
 	
 	.macro move_get_move_script_id param1 addr1 addr2  param2 param3 addr3
 	.byte 0x2E
@@ -223,7 +224,11 @@
 	.4byte \addr3
 	.endm
 
-@ 2F get_ability
+	.macro get_ability ability
+	.byte 0x2F
+	.byte \ability
+	.endm
+	
 @ 30 simulate_damage_muliplier_four_times
 @ 31 simulate_damage_bonus_jump_if_eq
 @ 32 ai_unk32
@@ -261,7 +266,6 @@
 @ 3E determine_move_damage_jump_if_not_fatal
 @ 3F jump_if_has_move
 @ 40 jump_if_hasnt_move
-@ 41 jump_if_move_with_same_movescript_in_either_0_2_history_or_1_3_moveset
 
 	.macro jump_if_move_with_same_movescript_in_either_0_2_history_or_1_3_moveset param1 param2 addr
 	.byte 0x41
@@ -292,7 +296,6 @@
 @ 47 f10_or_b1101
 @ 48 get_held_item_x12__8
 @ 49 pokemon_species_get_gender_info
-@ 4A enter_battle_countdown_get_state
 
 	.macro enter_battle_countdown_get_state param1 param2 addr
 	.byte 0x4A
@@ -315,7 +318,11 @@
 @ 56 ai_unk56
 @ 57 ai_unk57
 @ 58 call
-@ 59 jump
+
+	.macro ai_jump addr
+	.byte 0x59
+	.4byte \addr
+	.endm
 
 	.macro ai_ret
 	.byte 0x5A
