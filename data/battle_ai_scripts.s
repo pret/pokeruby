@@ -80,7 +80,28 @@ Unknown_081DA09C::
 	.incbin "baserom.gba", 0x001da09c, 0x7B0
 
 Unknown_081DA84C::
-	.incbin "baserom.gba", 0x001da84c, 0x21
+	viability_score 0xFF
+	ai_ret
+	viability_score 0xFE
+	ai_ret
+	viability_score 0xFD
+	ai_ret
+	viability_score 0xFB
+	ai_ret
+	viability_score 0xF8
+	ai_ret
+	viability_score 0xF6
+	ai_ret
+	viability_score 0xF4
+	ai_ret
+	viability_score 0x01
+	ai_ret
+	viability_score 0x02
+	ai_ret
+	viability_score 0x03
+	ai_ret
+	viability_score 0x05
+	ai_ret
 
 Unknown_081DA86D::
 	.incbin "baserom.gba", 0x001da86d, 0x162A

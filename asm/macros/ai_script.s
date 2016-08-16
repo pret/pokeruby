@@ -4,18 +4,10 @@
 	.4byte \addr
 	.endm
 	
-	.macro random_goto__low_param_likely
-	.byte 0x01
-	.endm
-	
-	.macro random_goto__1_in_256_chance
-	.byte 0x02
-	.endm
-	
-	.macro random_goto__255_in_256_chance
-	.byte 0x03
-	.endm
-	
+@ 01 random_goto__low_param_likely
+@ 02 random_goto__1_in_256_chance
+@ 03 random_goto__255_in_256_chance
+
 	.macro viability_score score
 	.byte 0x04
 	.byte \score
@@ -42,20 +34,9 @@
 	.4byte \addr
 	.endm
 	
-	.macro jump_if_health_percentage_ne target percent addr
-	.byte 0x08
-	.byte \target
-	.byte \percent
-	.4byte \addr
-	.endm
-	
-	.macro jump_if_any_status1_bit
-	.byte 0x09
-	.endm
-	
-	.macro jump_if_no_status1_bit
-	.byte 0x0A
-	.endm
+@ 08 jump_if_health_percentage_ne
+@ 09 jump_if_any_status1_bit
+@ 0A jump_if_no_status1_bit
 	
 	.macro jump_if_any_status2_bit param mask addr
 	.byte 0x0B
@@ -64,35 +45,13 @@
 	.4byte \addr
 	.endm
 	
-	.macro jump_if_no_status2_bit
-	.byte 0x0C
-	.endm
-	
-	.macro jump_if_any_status3_bit
-	.byte 0x0D
-	.endm
-	
-	.macro jump_if_no_status3_bit
-	.byte 0x0E
-	.endm
-	
-	.macro jump_if_any_status4_bit
-	.byte 0x0F
-	.endm
-	
-	.macro jump_if_no_status4_bit
-	.byte 0x10
-	.endm
-	
-	.macro jump_if__8_lt_8 param
-	.byte 0x11
-	.byte \param
-	.endm
-	
-	.macro jump_if__8_gt param
-	.byte 0x12
-	.byte \param
-	.endm
+@ 0C jump_if_no_status2_bit
+@ 0D jump_if_any_status3_bit
+@ 0E jump_if_no_status3_bit
+@ 0F jump_if_any_status4_bit
+@ 10 jump_if_no_status4_bit
+@ 11 jump_if__8_lt_8
+@ 12 jump_if__8_gt_8
 	
 	.macro jump_if__8_eq param addr
 	.byte 0x13
@@ -100,30 +59,11 @@
 	.4byte \addr
 	.endm
 
-	.macro jump_if__8_ne param
-	.byte 0x14
-	.byte \param
-	.endm
-	
-	.macro jump_if__8_lt param
-	.byte 0x15
-	.4byte \param
-	.endm
-	
-	.macro jump_if__8_gt2 param
-	.byte 0x16
-	.4byte \param
-	.endm
-	
-	.macro jump_if__8_eq2 param
-	.byte 0x17
-	.4byte \param
-	.endm
-	
-	.macro jump_if__8_ne2 param
-	.byte 0x18
-	.4byte \param
-	.endm
+@ 14 jump_if__8_ne_8
+@ 15 jump_if__8_lt_32
+@ 16 jump_if__8_gt_32
+@ 17 jump_if__8_eq_32
+@ 18 jump_if__8_ne_32
 	
 	.macro jump_if_move_id_eq move param
 	.byte 0x19
@@ -137,33 +77,12 @@
 	.2byte \param
 	.endm
 	
-	.macro jump_if__8_in_list param
-	.byte 0x1B
-	.byte \param
-	.endm
-	
-	.macro jump_if__8_not_in_list param
-	.byte 0x1C
-	.byte \param
-	.endm
-	
-	.macro jump_if__8_in_list2 param
-	.byte 0x1D
-	.2byte \param
-	.endm
-	
-	.macro jump_if__8_not_in_list2 param
-	.byte 0x1E
-	.2byte \param
-	.endm
-	
-	.macro jump_if_attacker_has_any_damaging_moves
-	.byte 0x1F
-	.endm
-	
-	.macro jump_if_attacker_has_no_damaging_moves
-	.byte 0x20
-	.endm
+@ 1B jump_if__8_in_list_8
+@ 1C jump_if__8_not_in_list_8
+@ 1D jump_if__8_in_list_16
+@ 1E jump_if__8_not_in_list_16
+@ 1F jump_if_attacker_has_any_damaging_moves
+@ 20 jump_if_attacker_has_no_damaging_moves
 	
 	.macro get_battle_turn_counter param addr
 	.byte 0x21
@@ -171,14 +90,8 @@
 	.4byte \addr
 	.endm
 	
-	.macro get_some_type
-	.byte 0x22
-	.endm
-	
-	.macro move_get_power__2 param
-	.byte 0x23
-	.byte \param
-	.endm
+@ 22 get_some_type
+@ 23 move_get_power__2_8
 	
 	.macro is_most_powerful_move param addr
 	.byte 0x24
@@ -186,20 +99,9 @@
 	.4byte \addr
 	.endm
 	
-	.macro get_move_to_execute_B
-	.byte 0x25
-	.endm
-	
-	.macro jump_if__8_ne3 move
-	.byte 0x26
-	.2byte \move
-	.endm
-	
-	.macro jump_if__8_eq3 move
-	.byte 0x27
-	.2byte \move
-	.endm
-
+@ 25 get_move_to_execute_B
+@ 26 jump_if__8_ne_2
+@ 27 jump_if__8_eq_2
 @ 28 jump_if_move_would_hit_first
 @ 29 jump_if_move_would_hit_second
 @ 2A ai_unk2A
