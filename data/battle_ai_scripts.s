@@ -586,7 +586,8 @@ AI_ret_081DBE97:
 
 TryForStatusMove::
 	get_battle_turn_counter 0x14, AI_ret_081DBEB5
-	move_get_move_script_id 0x1C, AI_data_081DBEB5, AI_ret_081DBEB5
+	move_get_move_script_id
+	jump_if__8_not_in_list_8 AI_data_081DBEB5, AI_ret_081DBEB5
 	random_goto__high_param_likely 0x50, AI_ret_081DBEB5
 	viability_score 0x02
 AI_ret_081DBEB5:
@@ -605,7 +606,8 @@ AI_ret_081DBF07:
 	ai_ret
 
 TryForMoveEffect::
-	move_get_move_script_id 0x1C, AI_data_081DBF17, AI_ret_081DBF17
+	move_get_move_script_id
+	jump_if__8_not_in_list_8 AI_data_081DBF17, AI_ret_081DBF17
 	random_goto__high_param_likely 0x80, AI_ret_081DBF17
 	viability_score 0x02
 AI_ret_081DBF17:
@@ -632,13 +634,16 @@ AI_nop:: @ dummied out maybe?
 TryMovesWhenThreatened::
 	jump_if_health_percentage_ge 0x01 0x46 AI_moveget_081DBF64
 	jump_if_health_percentage_ge 0x01 0x1E AI_moveget2_081DBF64
-	move_get_move_script_id 0x1B AI_data3_081DBF64 AI_highparam_081DBF64
+	move_get_move_script_id
+	jump_if__8_in_list_8 AI_data3_081DBF64 AI_highparam_081DBF64
 	ai_jump AI_jumphealth_081DBF64
 AI_moveget_081DBF64:
-	move_get_move_script_id 0x1B AI_data1_081DBF64 AI_highparam_081DBF64
+	move_get_move_script_id
+	jump_if__8_in_list_8 AI_data1_081DBF64 AI_highparam_081DBF64
 	ai_jump AI_jumphealth_081DBF64
 AI_moveget2_081DBF64:
-	move_get_move_script_id 0x1B AI_data2_081DBF64 AI_highparam_081DBF64
+	move_get_move_script_id
+	jump_if__8_in_list_8 AI_data2_081DBF64 AI_highparam_081DBF64
 	ai_jump AI_jumphealth_081DBF64
 AI_highparam_081DBF64:
 	random_goto__high_param_likely 0x32 AI_jumphealth_081DBF64
@@ -646,13 +651,16 @@ AI_highparam_081DBF64:
 AI_jumphealth_081DBF64:
 	jump_if_health_percentage_ge 0x00 0x46 AI_moveget3_081DBF64
 	jump_if_health_percentage_ge 0x00 0x1E AI_moveget4_081DBF64
-	move_get_move_script_id 0x1B AI_data6_081DBF64 AI_highparam2_081DBF64
+	move_get_move_script_id
+	jump_if__8_in_list_8 AI_data6_081DBF64 AI_highparam2_081DBF64
 	ai_jump AI_ret_081DBF64
 AI_moveget3_081DBF64:
-	move_get_move_script_id 0x1B AI_data4_081DBF64 AI_highparam2_081DBF64
+	move_get_move_script_id
+	jump_if__8_in_list_8 AI_data4_081DBF64 AI_highparam2_081DBF64
 	ai_jump AI_ret_081DBF64
 AI_moveget4_081DBF64:
-	move_get_move_script_id 0x1B AI_data5_081DBF64 AI_highparam2_081DBF64
+	move_get_move_script_id
+	jump_if__8_in_list_8 AI_data5_081DBF64 AI_highparam2_081DBF64
 	ai_jump AI_ret_081DBF64
 AI_highparam2_081DBF64:
 	random_goto__high_param_likely 0x32 AI_ret_081DBF64

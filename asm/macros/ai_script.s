@@ -89,7 +89,11 @@
 	.2byte \param
 	.endm
 	
-@ 1B jump_if__8_in_list_8
+	.macro jump_if__8_in_list_8 addr1 addr2
+	.byte 0x1B
+	.4byte \addr1
+	.4byte \addr2
+	.endm
 
 	.macro jump_if__8_not_in_list_8 addr1 addr2
 	.byte 0x1C
@@ -154,14 +158,8 @@
 
 @ 2D get_move_id__8
 	
-	.macro move_get_move_script_id param1 addr1 addr2  param2 param3 addr3
+	.macro move_get_move_script_id
 	.byte 0x2E
-	.byte \param1
-	.4byte \addr1
-	.4byte \addr2
-	.byte \param2
-	.byte \param3
-	.4byte \addr3
 	.endm
 
 	.macro get_ability ability
