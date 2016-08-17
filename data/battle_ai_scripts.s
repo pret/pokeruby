@@ -291,12 +291,12 @@ AI_ret_move8:
 
 AI_movejump9_081DABEC:
 	jump_if_move_would_hit_first 0x01 AI_moveexec_081DABEC
-	get_move_to_execute_B 0x00 0x1E AI_data_081DABEC AI_moveexec_081DABEC
+	get_move_to_execute_B 0x00 0x1E AI_movedata_081DABEC AI_moveexec_081DABEC
 	random_goto__high_param_likely 0x80 AI_ret_081DABEC
 	viability_score 0x02
 	ai_jump AI_ret_081DABEC
 AI_moveexec_081DABEC:
-	get_move_to_execute_B 0x00 0x1D AI_data_081DABEC AI_ret_081DABEC
+	get_move_to_execute_B 0x00 0x1D AI_movedata_081DABEC AI_ret_081DABEC
 	random_goto__high_param_likely 0x50 AI_ret_081DABEC
 	viability_score 0xFF
 AI_ret_081DABEC:
@@ -304,12 +304,46 @@ AI_ret_081DABEC:
 
 	.align 2
 AI_movedata_081DABEC: @ these are moves. label later, no move constants
-	.2byte 0x004f, 0x008e, 0x0093, 0x005f, 0x002f, 0x0140, 0x0145
-	.2byte 0x001c, 0x006c, 0x005c, 0x000c, 0x0020, 0x005a, 0x0149, 0x00ee
-	.2byte 0x00b1, 0x006d, 0x00ba, 0x0067, 0x00b2, 0x00b8, 0x0139, 0x013f
-	.2byte 0x0056, 0x0089, 0x004d, 0x00f7, 0x00df, 0x003f, 0x00f5, 0x00a8
-	.2byte 0x0157, 0x00d5, 0x00cf, 0x0103, 0x0104, 0x010f, 0x0114, 0x011d
-	.2byte 0xffff
+	.2byte MOVE_SLEEP_POWDER
+	.2byte MOVE_LOVELY_KISS
+	.2byte MOVE_SPORE
+	.2byte MOVE_HYPNOSIS
+	.2byte MOVE_SING
+	.2byte MOVE_GRASS_WHISTLE
+	.2byte MOVE_SHADOW_PUNCH
+	.2byte MOVE_SAND_ATTACK
+	.2byte MOVE_SMOKESCREEN
+	.2byte MOVE_TOXIC
+	.2byte MOVE_GUILLOTINE
+	.2byte MOVE_HORN_DRILL
+	.2byte MOVE_FISSURE
+	.2byte MOVE_SHEER_COLD
+	.2byte MOVE_CROSS_CHOP
+	.2byte MOVE_AEROBLAST
+	.2byte MOVE_CONFUSE_RAY
+	.2byte MOVE_SWEET_KISS
+	.2byte MOVE_SCREECH
+	.2byte MOVE_COTTON_SPORE
+	.2byte MOVE_SCARY_FACE
+	.2byte MOVE_FAKE_TEARS
+	.2byte MOVE_METAL_SOUND
+	.2byte MOVE_THUNDER_WAVE
+	.2byte MOVE_GLARE
+	.2byte MOVE_POISON_POWDER
+	.2byte MOVE_SHADOW_BALL
+	.2byte MOVE_DYNAMIC_PUNCH
+	.2byte MOVE_HYPER_BEAM
+	.2byte MOVE_EXTREME_SPEED
+	.2byte MOVE_THIEF
+	.2byte MOVE_COVET
+	.2byte MOVE_ATTRACT
+	.2byte MOVE_SWAGGER
+	.2byte MOVE_TORMENT
+	.2byte MOVE_FLATTER
+	.2byte MOVE_TRICK
+	.2byte MOVE_SUPERPOWER
+	.2byte MOVE_SKILL_SWAP
+	.2byte 0xFFFF @ terminator
 
 AI_movejump10_081DAC70:
 	.incbin "baserom.gba", 0x001dac70, 0x3B
