@@ -476,17 +476,17 @@
 	.byte 0x57
 	.endm
 
-	.macro ai_call address
+	.macro call address
 	.byte 0x58
 	.4byte \address
 	.endm
 
-	.macro ai_jump address
+	.macro jump address
 	.byte 0x59
 	.4byte \address
 	.endm
 
-	.macro ai_end 
+	.macro end 
 	.byte 0x5a
 	.endm
 
