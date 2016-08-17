@@ -290,17 +290,27 @@ AI_ret_move8:
 	ai_ret
 
 AI_movejump9_081DABEC:
-	jump_if_move_would_hit_first 0x01 0x081DAC0A
-	get_move_to_execute_B 0x00 0x1E 0x081DAC20 0x081DAC0A
-	random_goto__high_param_likely 0x80 0x081DAC1D
+	jump_if_move_would_hit_first 0x01 AI_moveexec_081DABEC
+	get_move_to_execute_B 0x00 0x1E AI_data_081DABEC AI_moveexec_081DABEC
+	random_goto__high_param_likely 0x80 AI_ret_081DABEC
 	viability_score 0x02
-	ai_jump 0x081DAC1D
-	get_move_to_execute_B 0x00 0x1D 0x081DAC20 0x081DAC1D
-	random_goto__high_param_likely 0x50 0x081DAC1D
+	ai_jump AI_ret_081DABEC
+AI_moveexec_081DABEC:
+	get_move_to_execute_B 0x00 0x1D AI_data_081DABEC AI_ret_081DABEC
+	random_goto__high_param_likely 0x50 AI_ret_081DABEC
 	viability_score 0xFF
+AI_ret_081DABEC:
 	ai_ret
 
-	.incbin "baserom.gba", 0x001dac1e, 0x52
+	.align 2
+AI_movedata_081DABEC: @ these are moves. label later, no move constants
+	.2byte 0x004f, 0x008e, 0x0093, 0x005f, 0x002f, 0x0140, 0x0145
+	.2byte 0x001c, 0x006c, 0x005c, 0x000c, 0x0020, 0x005a, 0x0149, 0x00ee
+	.2byte 0x00b1, 0x006d, 0x00ba, 0x0067, 0x00b2, 0x00b8, 0x0139, 0x013f
+	.2byte 0x0056, 0x0089, 0x004d, 0x00f7, 0x00df, 0x003f, 0x00f5, 0x00a8
+	.2byte 0x0157, 0x00d5, 0x00cf, 0x0103, 0x0104, 0x010f, 0x0114, 0x011d
+	.2byte 0xffff
+
 AI_movejump10_081DAC70:
 	.incbin "baserom.gba", 0x001dac70, 0x3B
 AI_movejump11_081DACAB:
