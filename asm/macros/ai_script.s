@@ -36,8 +36,14 @@
 	
 @ 08 jump_if_health_percentage_ne
 @ 09 jump_if_any_status1_bit
-@ 0A jump_if_no_status1_bit
-	
+
+	.macro jump_if_no_status1_bit param mask addr
+	.byte 0x0A
+	.byte \param
+	.4byte \mask
+	.4byte \addr
+	.endm
+
 	.macro jump_if_any_status2_bit param mask addr
 	.byte 0x0B
 	.byte \param
@@ -99,7 +105,14 @@
 	.4byte \addr
 	.endm
 	
-@ 25 get_move_to_execute_B
+	.macro get_move_to_execute_B param1 param2 addr1 addr2
+	.byte 0x25
+	.byte \param1
+	.byte \param2
+	.4byte \addr1
+	.4byte \addr2
+	.endm
+
 @ 26 jump_if__8_ne_2
 @ 27 jump_if__8_eq_2
 

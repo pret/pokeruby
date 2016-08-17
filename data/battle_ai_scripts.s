@@ -3,11 +3,11 @@
 
 	.section script_data, "aw", %progbits
 	
-@ 0	won't use moves that have no or a negative effect
-@ 1	will actually create some difference in viability scores based on basic calculations
-@ 2	starts understanding things like type effectiveness, damage and fainting
-@ 3	with a chance of about 3/10, some status moves will get priority on the first turn (list of move scripts at 081DBAA7)
-@ 4	with a chance of about 5/10, move effects in this list will get priority (below list):
+@ 0	won't use moves that have no or a negative effect (CheckForBadMove)
+@ 1	will actually create some difference in viability scores based on basic calculations (CheckViability)
+@ 2	starts understanding things like type effectiveness, damage and fainting (CheckTypeAndDamage)
+@ 3	with a chance of about 3/10, some status moves will get priority on the first turn (TryForStatusMove)
+@ 4	with a chance of about 5/10, move effects in this list will get priority (TryForMoveEffect):
 @ ----------------------------------------
 @ sleep
 @ selfdestruct
@@ -29,54 +29,55 @@
 @ double damage if user was hurt in same turn
 @ confuse all
 @ -------------------------------------------
-@ 5	with a chance of about 4/10, non-damaging moves will get priority
+@ 5	with a chance of about 4/10, non-damaging moves will get priority (TryForNonDamagingMove)
 @ 6	if there are other pokes left on the ai's team, with a chance of a bit more than 6/10 it will give priority to non-damaging moves. chance raises to a bit more than 9/10 if the user (possibly also its ally) has baton pass
-@ 7	nop
-@ 8	ai will start looking at health percentages and decide using moves based on that
-@ 9	broken/unfinished, does nothing
-@ 10-28	nop
-@ 29	roamer; will attempt to flee on the first turn
-@ 30	safari
-@ 31	unused; will flee on 20% health and lower
+@ (TryForNonDamagingMoveWhenThreatened)
+@ 7	nop (AI_nop)
+@ 8	ai will start looking at health percentages and decide using moves based on that (CheckForMovesWhenThreatened)
+@ 9	broken/unfinished, does nothing (AI_unknown)
+@ 10-28	nop (AI_nop2)
+@ 29	roamer; will attempt to flee on the first turn (RoamingLogic)
+@ 30	safari (SafariLogic)
+@ 31	unused; will flee on 20% health and lower (Unused_WildRunningLogic)
 
 @ applies to the incbin directly below.
 
 	.align 2
 gUnknown_081DA01C:: @ 81DA01C
-	.4byte Unknown_081DA09C
-	.4byte Unknown_081DA86D
-	.4byte Unknown_081DBE97
-	.4byte Unknown_081DBEB5
-	.4byte Unknown_081DBF17
-	.4byte Unknown_081DBF07
-	.4byte Unknown_081DBF3E
-	.4byte Unknown_081DBF63
-	.4byte Unknown_081DBF64
-	.4byte Unknown_081DC0B9
-	.4byte Unknown_081DC115
-	.4byte Unknown_081DC115
-	.4byte Unknown_081DC115
-	.4byte Unknown_081DC115
-	.4byte Unknown_081DC115
-	.4byte Unknown_081DC115
-	.4byte Unknown_081DC115
-	.4byte Unknown_081DC115
-	.4byte Unknown_081DC115
-	.4byte Unknown_081DC115
-	.4byte Unknown_081DC115
-	.4byte Unknown_081DC115
-	.4byte Unknown_081DC115
-	.4byte Unknown_081DC115
-	.4byte Unknown_081DC115
-	.4byte Unknown_081DC115
-	.4byte Unknown_081DC115
-	.4byte Unknown_081DC115
-	.4byte Unknown_081DC115
-	.4byte Unknown_081DC0D0
-	.4byte Unknown_081DC0FE
-	.4byte Unknown_081DC105
+	.4byte CheckForBadMove
+	.4byte CheckViability
+	.4byte CheckTypeAndDamage
+	.4byte TryForStatusMove
+	.4byte TryForMoveEffect
+	.4byte TryForNonDamagingMove
+	.4byte TryForNonDamagingMoveWhenThreatened
+	.4byte AI_nop
+	.4byte TryMovesWhenThreatened
+	.4byte AI_unknown
+	.4byte AI_nop2
+	.4byte AI_nop2
+	.4byte AI_nop2
+	.4byte AI_nop2
+	.4byte AI_nop2
+	.4byte AI_nop2
+	.4byte AI_nop2
+	.4byte AI_nop2
+	.4byte AI_nop2
+	.4byte AI_nop2
+	.4byte AI_nop2
+	.4byte AI_nop2
+	.4byte AI_nop2
+	.4byte AI_nop2
+	.4byte AI_nop2
+	.4byte AI_nop2
+	.4byte AI_nop2
+	.4byte AI_nop2
+	.4byte AI_nop2
+	.4byte RoamingLogic
+	.4byte SafariLogic
+	.4byte Unused_WildRunningLogic
 
-Unknown_081DA09C::
+CheckForBadMove::
 	.incbin "baserom.gba", 0x001da09c, 0x7B0
 
 Unknown_081DA84C::
@@ -113,7 +114,7 @@ AI_viability05_081DA84C:
 	viability_score 0x05
 	ai_ret
 
-Unknown_081DA86D::
+CheckViability::
 	jump_if_move_id_eq_8 1, AI_movejump1_081DA86D
 	jump_if_move_id_eq_8 3, AI_movejump3_081DAB60
 	jump_if_move_id_eq_8 7, AI_movejump7_081DAB7A
@@ -287,8 +288,19 @@ AI_viability_move8:
 	viability_score 0xFF
 AI_ret_move8:
 	ai_ret
+
 AI_movejump9_081DABEC:
-	.incbin "baserom.gba", 0x001dabec, 0x84
+	jump_if_move_would_hit_first 0x01 0x081DAC0A
+	get_move_to_execute_B 0x00 0x1E 0x081DAC20 0x081DAC0A
+	random_goto__high_param_likely 0x80 0x081DAC1D
+	viability_score 0x02
+	ai_jump 0x081DAC1D
+	get_move_to_execute_B 0x00 0x1D 0x081DAC20 0x081DAC1D
+	random_goto__high_param_likely 0x50 0x081DAC1D
+	viability_score 0xFF
+	ai_ret
+
+	.incbin "baserom.gba", 0x001dac1e, 0x52
 AI_movejump10_081DAC70:
 	.incbin "baserom.gba", 0x001dac70, 0x3B
 AI_movejump11_081DACAB:
@@ -301,6 +313,7 @@ AI_movejump14_081DAD62:
 	.incbin "baserom.gba", 0x001dad62, 0x66
 AI_movejump15_081DADC8:
 	.incbin "baserom.gba", 0x001dadc8, 0x1A
+
 AI_movejump16_081DADE2:
 	.incbin "baserom.gba", 0x001dade2, 0x9A
 AI_movejump17_081DAE7C:
@@ -317,6 +330,7 @@ AI_movejump21_081DAF4B:
 	.incbin "baserom.gba", 0x001daf4b, 0x54
 AI_movejump22_081DAF9F:
 	.incbin "baserom.gba", 0x001daf9f, 0x21
+
 AI_movejump23_081DAFC0:
 	.incbin "baserom.gba", 0x001dafc0, 0x94
 AI_movejump24_081DB054:
@@ -333,6 +347,7 @@ AI_movejump132_081DB191:
 	.incbin "baserom.gba", 0x001db191, 0x1A
 AI_movejump32_081DB1AB:
 	.incbin "baserom.gba", 0x001db1ab, 0x59
+
 AI_movejump33_081DB204:
 	.incbin "baserom.gba", 0x001db204, 0x3F
 AI_movejump35_081DB243:
@@ -349,6 +364,7 @@ AI_movejump43_081DB313:
 	.incbin "baserom.gba", 0x001db313, 0x27
 AI_movejump166_081DB33A:
 	.incbin "baserom.gba", 0x001db33a, 0x8
+
 AI_movejump49_081DB342:
 	.incbin "baserom.gba", 0x001db342, 0x22
 AI_movejump65_081DB364:
@@ -365,6 +381,7 @@ AI_movejump80_081DB47B:
 	.incbin "baserom.gba", 0x001db47b, 0x28
 AI_movejump86_081DB4A3:
 	.incbin "baserom.gba", 0x001db4a3, 0x1F
+
 AI_movejump89_081DB4C2:
 	.incbin "baserom.gba", 0x001db4c2, 0xA1
 AI_movejump90_081DB563:
@@ -381,6 +398,7 @@ AI_movejump98_081DB606:
 	.incbin "baserom.gba", 0x001db606, 0x36
 AI_movejump99_081DB63C:
 	.incbin "baserom.gba", 0x001db63c, 0x45
+
 AI_movejump102_081DB681:
 	.incbin "baserom.gba", 0x001db681, 0x17
 AI_movejump105_081DB698:
@@ -397,6 +415,7 @@ AI_movejump127_081DB817:
 	.incbin "baserom.gba", 0x001db817, 0x9C
 AI_movejump128_081DB8B3:
 	.incbin "baserom.gba", 0x001db8b3, 0x36
+
 AI_movejump136_081DB8E9:
 	.incbin "baserom.gba", 0x001db8e9, 0x3F
 AI_movejump137_081DB928:
@@ -413,6 +432,7 @@ AI_movejump155_081DBA91:
 	.incbin "baserom.gba", 0x001dba91, 0x8A
 AI_movejump158_081DBB1B:
 	.incbin "baserom.gba", 0x001dbb1b, 0x3
+
 AI_movejump161_081DBB1E:
 	.incbin "baserom.gba", 0x001dbb1e, 0x11
 AI_movejump164_081DBB2F:
@@ -429,6 +449,7 @@ AI_movejump178_081DBC11:
 	.incbin "baserom.gba", 0x001dbc11, 0x37
 AI_movejump182_081DBC48:
 	.incbin "baserom.gba", 0x001dbc48, 0x30
+
 AI_movejump183_081DBC78:
 	.incbin "baserom.gba", 0x001dbc78, 0x33
 AI_movejump184_081DBCAB:
@@ -445,6 +466,7 @@ AI_movejump190_081DBD4E:
 	.incbin "baserom.gba", 0x001dbd4e, 0x28
 AI_movejump192_081DBD76:
 	.incbin "baserom.gba", 0x001dbd76, 0x11
+
 AI_movejump193_081DBD87:
 	.incbin "baserom.gba", 0x001dbd87, 0xF
 AI_movejump195_081DBD96:
@@ -458,7 +480,7 @@ AI_movejump210_081DBE4E:
 AI_movejump212_081DBE74:
 	.incbin "baserom.gba", 0x001dbe74, 0x23
 
-Unknown_081DBE97::
+CheckTypeAndDamage::
 	determine_move_damage_jump_if_fatal AI_jump1_081DBE97, 0x24
 	jump_if__8_eq 0x01, Unknown_081DA84C
 	ai_ret
@@ -471,7 +493,7 @@ viableScore_04_081DBE97:
 AI_ret_081DBE97:
 	ai_ret
 
-Unknown_081DBEB5::
+TryForStatusMove::
 	get_battle_turn_counter 0x14, AI_ret_081DBEB5
 	move_get_move_script_id 0x1C, AI_data_081DBEB5, AI_ret_081DBEB5
 	random_goto__high_param_likely 0x50, AI_ret_081DBEB5
@@ -483,14 +505,15 @@ AI_data_081DBEB5:
 	.byte 0x1E, 0x23, 0x36, 0x2F, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x3A, 0x3B
 	.byte 0x3C, 0x3D, 0x3E, 0x3F, 0x40, 0x41, 0x42, 0x43, 0x4F, 0x54, 0x6C, 0x6D, 0x76, 0xD5
 	.byte 0xBB, 0x9C, 0xA5, 0xA6, 0xA7, 0xB5, 0xC0, 0xC7, 0xCD, 0xCE, 0xD0, 0xD3, 0xD5, 0xFF
-Unknown_081DBF07::
+
+TryForNonDamagingMove::
 	is_most_powerful_move 0x14, AI_ret_081DBF07
 	random_goto__high_param_likely 0x64, AI_ret_081DBF07
 	viability_score 0x02
 AI_ret_081DBF07:
 	ai_ret
 
-Unknown_081DBF17::
+TryForMoveEffect::
 	move_get_move_script_id 0x1C, AI_data_081DBF17, AI_ret_081DBF17
 	random_goto__high_param_likely 0x80, AI_ret_081DBF17
 	viability_score 0x02
@@ -501,7 +524,7 @@ AI_data_081DBF17:
 	.byte 0x76, 0x78, 0x7A, 0x8C, 0x8E, 0x90, 0xAA, 0xB9, 0xC7
 	.byte 0xFF
 
-Unknown_081DBF3E::
+TryForNonDamagingMoveWhenThreatened::
 	count_alive_pokemon_on_team 0x01, 0x13, AI_ret_081DBF3E
 	is_most_powerful_move 0x14, AI_ret_081DBF3E
 	jump_if_move_with_same_movescript_in_either_0_2_history_or_1_3_moveset 0x01, 0x7F, AI_ranhigh_081DBF3E
@@ -512,10 +535,10 @@ AI_ranhigh_081DBF3E:
 AI_ret_081DBF3E:
 	ai_ret
 
-Unknown_081DBF63::
+AI_nop:: @ dummied out maybe?
 	ai_ret
 
-Unknown_081DBF64::
+TryMovesWhenThreatened::
 	jump_if_health_percentage_ge 0x01 0x46 AI_moveget_081DBF64
 	jump_if_health_percentage_ge 0x01 0x1E AI_moveget2_081DBF64
 	move_get_move_script_id 0x1B AI_data3_081DBF64 AI_highparam_081DBF64
@@ -569,7 +592,7 @@ AI_data6_081DBF64: @ 0x081DC07D
 	.byte 0x28, 0x2e, 0x2f, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x3a, 0x3b, 0x3c, 0x3d, 0x3e, 0x3f, 0x40, 0x42, 0x43, 0x5b, 0x5d
 	.byte 0x5e, 0x64, 0x72, 0x76, 0x77, 0x78, 0x7c, 0x8f, 0x90, 0xa7, 0xcd, 0xce, 0xd0, 0xd3, 0xd4, 0xff
 
-Unknown_081DC0B9::
+AI_unknown::
 	jump_if_move_id_ne_8 0x89, AI_ret_081DC0B9
 	jump_if__8_eq 0x00, AI_ret_081DC0B9
 	enter_battle_countdown_get_state 0x01, 0x13, AI_ret_081DC0B9
@@ -577,7 +600,7 @@ Unknown_081DC0B9::
 AI_ret_081DC0B9:
 	ai_ret
 
-Unknown_081DC0D0::
+RoamingLogic::
 	jump_if_any_status2_bit 0x01, 0x0000E000, AI_ret_081DC0D0
 	jump_if_any_status2_bit 0x01, 0x04000000, AI_ret_081DC0D0
 	get_ability 0x00
@@ -591,18 +614,18 @@ AI_bitmask_081DC0D0:
 AI_ret_081DC0D0:
 	ai_ret
 
-Unknown_081DC0FE::
+SafariLogic::
 	jump_random_unknown AI_bitmask_081DC0FE
 	f10_or_b1101
 AI_bitmask_081DC0FE:
 	f10_or_b1011
 
-Unknown_081DC105::
+Unused_WildRunningLogic::
 	jump_if_health_percentage_eq 0x00, 0x14, AI_bitmask_081DC105
 	jump_if_health_percentage_lt 0x00, 0x14, AI_bitmask_081DC105
 	ai_ret
 AI_bitmask_081DC105:
 	f10_or_b1011
 
-Unknown_081DC115::
+AI_nop2::
 	ai_ret
