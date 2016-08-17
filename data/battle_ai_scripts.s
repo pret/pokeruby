@@ -397,9 +397,33 @@ AI_data_move11:
 	.byte 0xFF
 
 AI_movejump12_081DAD11:
-	.incbin "baserom.gba", 0x001dad11, 0x16
+	jump_if_move_would_hit_first 0x01 AI_highparam_move12
+	viability_score 0xFD
+	ai_jump AI_ret_move12
+AI_highparam_move12:
+	random_goto__high_param_likely 0x46 AI_ret_move12
+	viability_score 0x03
+AI_ret_move12:
+	ai_ret
+
 AI_movejump13_081DAD27:
-	.incbin "baserom.gba", 0x001dad27, 0x3B
+	jump_if_stat_buff_lt 0x01 0x04 0x09 AI_healthcheck_move13
+	random_goto__high_param_likely 0x64 AI_healthcheck2_move13
+	viability_score 0xFF
+	ai_jump AI_healthcheck2_move13
+AI_healthcheck_move13:
+	jump_if_health_percentage_ne 0x01 0x64 AI_healthcheck2_move13
+	random_goto__high_param_likely 0x80 AI_healthcheck2_move13
+	viability_score 0x02
+AI_healthcheck2_move13:
+	jump_if_health_percentage_ge 0x01 0x46 AI_ret_move13
+	jump_if_health_percentage_lt 0x01 0x28 AI_viability_move13
+	random_goto__high_param_likely 0x46 AI_ret_move13
+AI_viability_move13:
+	viability_score 0xFE
+AI_ret_move13:
+	ai_ret
+
 AI_movejump14_081DAD62:
 	.incbin "baserom.gba", 0x001dad62, 0x66
 AI_movejump15_081DADC8:
