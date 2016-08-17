@@ -1,283 +1,505 @@
-	.macro random_goto__high_param_likely param addr
+	.macro if_random percent, address
 	.byte 0x00
-	.byte \param
-	.4byte \addr
+	.byte \percent
+	.4byte \address
 	.endm
-	
-@ 01 random_goto__low_param_likely
-@ 02 random_goto__1_in_256_chance
-@ 03 random_goto__255_in_256_chance
 
-	.macro viability_score score
+	.macro if_not_random percent, address
+	.byte 0x01
+	.byte \percent
+	.4byte \address
+	.endm
+
+	.macro if_random_1 address
+	.byte 0x02
+	.4byte \address
+	.endm
+
+	.macro if_not_random_1 address
+	.byte 0x03
+	.4byte \address
+	.endm
+
+	.macro score score
 	.byte 0x04
 	.byte \score
 	.endm
-	
-	.macro jump_if_health_percentage_lt target percent addr
+
+	.macro if_hp_less_than target, percent, address
 	.byte 0x05
 	.byte \target
 	.byte \percent
-	.4byte \addr
+	.4byte \address
 	.endm
-	
-	.macro jump_if_health_percentage_ge target percent addr
+
+	.macro if_hp_more_than target, percent, address
 	.byte 0x06
 	.byte \target
 	.byte \percent
-	.4byte \addr
+	.4byte \address
 	.endm
-	
-	.macro jump_if_health_percentage_eq target percent addr
+
+	.macro if_hp_equal target, percent, address
 	.byte 0x07
 	.byte \target
 	.byte \percent
-	.4byte \addr
+	.4byte \address
 	.endm
-	
-	.macro jump_if_health_percentage_ne target percent addr
+
+	.macro if_hp_not_equal target, percent, address
 	.byte 0x08
 	.byte \target
 	.byte \percent
-	.4byte \addr
+	.4byte \address
 	.endm
 
-@ 09 jump_if_any_status1_bit
-
-	.macro jump_if_no_status1_bit param mask addr
-	.byte 0x0A
-	.byte \param
-	.4byte \mask
-	.4byte \addr
+	.macro if_status target, status, address
+	.byte 0x09
+	.byte \target
+	.4byte \status
+	.4byte \address
 	.endm
 
-	.macro jump_if_any_status2_bit param mask addr
-	.byte 0x0B
-	.byte \param
-	.4byte \mask
-	.4byte \addr
+	.macro if_not_status target, status, address
+	.byte 0x0a
+	.byte \target
+	.4byte \status
+	.4byte \address
 	.endm
-	
-@ 0C jump_if_no_status2_bit
-@ 0D jump_if_any_status3_bit
-@ 0E jump_if_no_status3_bit
-@ 0F jump_if_any_status4_bit
-@ 10 jump_if_no_status4_bit
-@ 11 jump_if__8_lt_8
-@ 12 jump_if__8_gt_8
-	
-	.macro jump_if__8_eq param addr
+
+	.macro if_any_status2 target, status, address
+	.byte 0x0b
+	.byte \target
+	.4byte \status
+	.4byte \address
+	.endm
+
+	.macro if_no_status2 target, status, address
+	.byte 0x0c
+	.byte \target
+	.4byte \status
+	.4byte \address
+	.endm
+
+	.macro if_any_status3 target, status, address
+	.byte 0x0d
+	.byte \target
+	.4byte \status
+	.4byte \address
+	.endm
+
+	.macro if_no_status3 target, status, address
+	.byte 0x0e
+	.byte \target
+	.4byte \status
+	.4byte \address
+	.endm
+
+	.macro if_any_status4 target, status, address
+	.byte 0x0f
+	.byte \target
+	.4byte \status
+	.4byte \address
+	.endm
+
+	.macro if_no_status4 target, status, address
+	.byte 0x10
+	.byte \target
+	.4byte \status
+	.4byte \address
+	.endm
+
+	.macro if_less_than value, address
+	.byte 0x11
+	.byte \value
+	.4byte \address
+	.endm
+
+	.macro if_more_than value, address
+	.byte 0x12
+	.byte \value
+	.4byte \address
+	.endm
+
+	.macro if_equal value, address
 	.byte 0x13
-	.byte \param
-	.4byte \addr
+	.byte \value
+	.4byte \address
 	.endm
 
-	.macro jump_if__8_ne_8 param addr
+	.macro if_not_equal value, address
 	.byte 0x14
-	.byte \param
-	.4byte \addr
+	.byte \value
+	.4byte \address
 	.endm
 
-@ 15 jump_if__8_lt_32
-@ 16 jump_if__8_gt_32
-@ 17 jump_if__8_eq_32
-@ 18 jump_if__8_ne_32
-	
-	.macro jump_if_move_id_eq move param
+	.macro if_less_than_32 value, address
+	.byte 0x15
+	.4byte \value
+	.4byte \address
+	.endm
+
+	.macro if_more_than_32 value, address
+	.byte 0x16
+	.4byte \value
+	.4byte \address
+	.endm
+
+	.macro if_equal_32 value, address
+	.byte 0x17
+	.4byte \value
+	.4byte \address
+	.endm
+
+	.macro if_not_equal_32 value, address
+	.byte 0x18
+	.4byte \value
+	.4byte \address
+	.endm
+
+	.macro if_move move, address
 	.byte 0x19
 	.2byte \move
-	.2byte \param
+	.4byte \address
 	.endm
-	
-	.macro jump_if_move_id_ne move param
-	.byte 0x1A
+
+	.macro if_not_move move, address
+	.byte 0x1a
 	.2byte \move
-	.2byte \param
-	.endm
-	
-	.macro jump_if__8_in_list_8 addr1 addr2
-	.byte 0x1B
-	.4byte \addr1
-	.4byte \addr2
+	.4byte \address
 	.endm
 
-	.macro jump_if__8_not_in_list_8 addr1 addr2
-	.byte 0x1C
-	.4byte \addr1
-	.4byte \addr2
+	.macro if_in list, address
+	.byte 0x1b
+	.4byte \list
+	.4byte \address
 	.endm
 
-	.macro jump_if__8_in_list_16 addr1 addr2
-	.byte 0x1D
-	.4byte \addr1
-	.4byte \addr2
-	.endm
-	
-	.macro jump_if__8_not_in_list_16 addr1 addr2
-	.byte 0x1E
-	.4byte \addr1
-	.4byte \addr2
+	.macro if_not_in list, address
+	.byte 0x1c
+	.4byte \list
+	.4byte \address
 	.endm
 
-@ 1F jump_if_attacker_has_any_damaging_moves
-@ 20 jump_if_attacker_has_no_damaging_moves
-	
-	.macro get_battle_turn_counter
+	.macro if_in2 list, address
+	.byte 0x1d
+	.4byte \list
+	.4byte \address
+	.endm
+
+	.macro if_not_in2 list, address
+	.byte 0x1e
+	.4byte \list
+	.4byte \address
+	.endm
+
+	.macro if_user_can_damage address
+	.byte 0x1f
+	.4byte \address
+	.endm
+
+	.macro if_user_cant_damage address
+	.byte 0x20
+	.4byte \address
+	.endm
+
+	.macro get_turn_count 
 	.byte 0x21
 	.endm
-	
-@ 22 get_some_type
-@ 23 move_get_power__2_8
-	
-	.macro is_most_powerful_move
+
+	.macro ai_22 byte
+	.byte 0x22
+	.byte \byte
+	.endm
+
+	.macro ai_23 
+	.byte 0x23
+	.endm
+
+	.macro is_most_powerful_move 
 	.byte 0x24
 	.endm
-	
-	.macro get_move_to_execute_B param
+
+	.macro ai_25 target
 	.byte 0x25
-	.byte \param
+	.byte \target
 	.endm
 
-@ 26 jump_if__8_ne_2
-@ 27 jump_if__8_eq_2
+	.macro if_type type, address
+	.byte 0x26
+	.byte \type
+	.4byte \address
+	.endm
 
-	.macro jump_if_move_would_hit_first param addr
+	.macro ai_27 
+	.byte 0x27
+	.endm
+
+	.macro if_would_go_first target, address
 	.byte 0x28
-	.byte \param
-	.4byte \addr
+	.byte \target
+	.4byte \address
 	.endm
 
-@ 29 jump_if_move_would_hit_second
-@ 2A ai_unk2A
-@ 2B ai_unk2B
-
-	.macro count_alive_pokemon_on_team param
-	.byte 0x2C
-	.byte \param
+	.macro if_would_not_go_first target, address
+	.byte 0x29
+	.byte \target
+	.4byte \address
 	.endm
 
-@ 2D get_move_id__8
-	
-	.macro move_get_move_script_id
-	.byte 0x2E
+	.macro ai_2a 
+	.byte 0x2a
+	.endm
+
+	.macro ai_2b 
+	.byte 0x2b
+	.endm
+
+	.macro count_alive_pokemon target
+	.byte 0x2c
+	.byte \target
+	.endm
+
+	.macro ai_2d 
+	.byte 0x2d
+	.endm
+
+	.macro ai_2e 
+	.byte 0x2e
 	.endm
 
 	.macro get_ability target
-	.byte 0x2F
+	.byte 0x2f
 	.byte \target
 	.endm
-	
-@ 30 simulate_damage_muliplier_four_times
 
-	.macro simulate_damage_bonus_jump_if_eq param addr
-	.byte 0x31
-	.byte \param
-	.4byte \addr
+	.macro ai_30 
+	.byte 0x30
 	.endm
 
-@ 32 ai_unk32
-@ 33 ai_unk33
-@ 34 jump_if_any_party_member_has_status_ailment_32
-@ 35 jump_if_no_party_member_has_status_ailment_32_BUGGED
-@ 36 get_weather__8
+	.macro if_damage_bonus value, address
+	.byte 0x31
+	.byte \value
+	.4byte \address
+	.endm
 
-	.macro jump_if_move_id_eq_8 byte address
+	.macro ai_32 
+	.byte 0x32
+	.endm
+
+	.macro ai_33 
+	.byte 0x33
+	.endm
+
+	.macro ai_34 target, status, address
+	.byte 0x34
+	.byte \target
+	.4byte \status
+	.4byte \address
+	.endm
+
+	.macro ai_35 
+	.byte 0x35
+	.endm
+
+	.macro get_weather 
+	.byte 0x36
+	.endm
+
+	.macro if_effect byte, address
 	.byte 0x37
 	.byte \byte
 	.4byte \address
 	.endm
-	
-	.macro jump_if_move_id_ne_8 byte address
+
+	.macro if_not_effect byte, address
 	.byte 0x38
 	.byte \byte
 	.4byte \address
 	.endm
 
-@ 38 jump_if_move_id_ne_8
-
-	.macro jump_if_stat_buff_lt param1 param2 param3 addr
+	.macro if_stat_level_less_than target, stat, level, address
 	.byte 0x39
-	.byte \param1
-	.byte \param2
-	.byte \param3
-	.4byte \addr
-	.endm
-
-@ 3A jump_if_stat_buff_gt
-@ 3B jump_if_stat_buff_eq
-@ 3C jump_if_stat_buff_ne
-
-	.macro determine_move_damage_jump_if_fatal address
-	.byte 0x3D
+	.byte \target
+	.byte \stat
+	.byte \level
 	.4byte \address
 	.endm
 
-@ 3E determine_move_damage_jump_if_not_fatal
-@ 3F jump_if_has_move
-@ 40 jump_if_hasnt_move
-
-	.macro jump_if_move_with_same_movescript_in_either_0_2_history_or_1_3_moveset param1 param2 addr
-	.byte 0x41
-	.byte \param1
-	.byte \param2
-	.4byte \addr
+	.macro if_stat_level_more_than target, stat, level, address
+	.byte 0x3a
+	.byte \target
+	.byte \stat
+	.byte \level
+	.4byte \address
 	.endm
 
-@ 42 jump_if_move_with_same_movescript_in_neither_0_2_history_nor_1_3_moveset
-@ 43 is_moveset_restricted
-@ 44 jump_if_or_if_not_current_move_in_encore
+	.macro if_stat_level_equal target, stat, level, address
+	.byte 0x3b
+	.byte \target
+	.byte \stat
+	.byte \level
+	.4byte \address
+	.endm
 
-	.macro f10_or_b1011
+	.macro if_stat_level_not_equal target, stat, level, address
+	.byte 0x3c
+	.byte \target
+	.byte \stat
+	.byte \level
+	.4byte \address
+	.endm
+
+	.macro if_can_faint address
+	.byte 0x3d
+	.4byte \address
+	.endm
+
+	.macro if_cant_faint address
+	.byte 0x3e
+	.4byte \address
+	.endm
+
+	.macro if_has_move 
+	.byte 0x3f
+	.endm
+
+	.macro if_dont_have_move 
+	.byte 0x40
+	.endm
+
+	.macro if_similar_move byte, byte2, address
+	.byte 0x41
+	.byte \byte
+	.byte \byte2
+	.4byte \address
+	.endm
+
+	.macro if_no_similar_move byte, byte2, address
+	.byte 0x42
+	.byte \byte
+	.byte \byte2
+	.4byte \address
+	.endm
+
+	.macro ai_43 
+	.byte 0x43
+	.endm
+
+	.macro if_encored address
+	.byte 0x44
+	.4byte \address
+	.endm
+
+	.macro ai_45 
 	.byte 0x45
 	.endm
 
-	.macro jump_random_unknown addr
+	.macro ai_46 address
 	.byte 0x46
-	.4byte \addr
+	.4byte \address
 	.endm
 
-	.macro f10_or_b1101
+	.macro ai_47 
 	.byte 0x47
 	.endm
 
-@ 48 get_held_item_x12__8
-@ 49 pokemon_species_get_gender_info
-
-	.macro enter_battle_countdown_get_state param1 param2 addr
-	.byte 0x4A
-	.byte \param1
+	.macro ai_48 target
+	.byte 0x48
+	.byte \target
 	.endm
 
-@ 4B stockpile_get_num_uses
-@ 4C is_double_battle
-@ 4D get_dp08_item__8
-
-	.macro move_get_type__8
-	.byte 0x4E
-	.endm
-	
-	.macro move_get_power__8_8
-	.byte 0x4F
+	.macro get_gender target
+	.byte 0x49
+	.byte \target
 	.endm
 
-@ 50 move_get_move_script_id__8
-@ 51 get_protect_endure_activity
-@ 52 ai_unk52
-@ 53 ai_unk53
-@ 54 ai_unk54
-@ 55 ai_unk55
-@ 56 ai_unk56
-@ 57 ai_unk57
-@ 58 call
+	.macro ai_4a byte, word, address
+	.byte 0x4a
+	.byte \byte
+	.2byte \word
+	.4byte \address
+	.endm
 
-	.macro ai_jump addr
+	.macro get_stockpile_count target
+	.byte 0x4b
+	.byte \target
+	.endm
+
+	.macro is_double_battle 
+	.byte 0x4c
+	.endm
+
+	.macro get_item target
+	.byte 0x4d
+	.byte \target
+	.endm
+
+	.macro get_move_type 
+	.byte 0x4e
+	.endm
+
+	.macro get_move_power 
+	.byte 0x4f
+	.endm
+
+	.macro get_move_effect 
+	.byte 0x50
+	.endm
+
+	.macro get_protect_count target
+	.byte 0x51
+	.byte \target
+	.endm
+
+	.macro ai_52 
+	.byte 0x52
+	.endm
+
+	.macro ai_53 
+	.byte 0x53
+	.endm
+
+	.macro ai_54 
+	.byte 0x54
+	.endm
+
+	.macro ai_55 
+	.byte 0x55
+	.endm
+
+	.macro ai_56 
+	.byte 0x56
+	.endm
+
+	.macro ai_57 
+	.byte 0x57
+	.endm
+
+	.macro ai_call address
+	.byte 0x58
+	.4byte \address
+	.endm
+
+	.macro ai_jump address
 	.byte 0x59
-	.4byte \addr
+	.4byte \address
 	.endm
 
-	.macro ai_ret
-	.byte 0x5A
+	.macro ai_end 
+	.byte 0x5a
 	.endm
-	
-@ 5B compare_attacker_defender_levels
-@ 5C jump_if_taunt_turns_ne_0
-@ 5D jump_if_taunt_turns_eq_0
+
+	.macro ai_5b 
+	.byte 0x5b
+	.endm
+
+	.macro if_taunted address
+	.byte 0x5c
+	.4byte \address
+	.endm
+
+	.macro if_not_taunted address
+	.byte 0x5d
+	.4byte \address
+	.endm
