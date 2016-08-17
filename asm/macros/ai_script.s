@@ -150,11 +150,9 @@
 @ 2A ai_unk2A
 @ 2B ai_unk2B
 
-	.macro count_alive_pokemon_on_team param1 param2 addr
+	.macro count_alive_pokemon_on_team param
 	.byte 0x2C
-	.byte \param1
-	.2byte \param2
-	.4byte \addr
+	.byte \param
 	.endm
 
 @ 2D get_move_id__8
@@ -208,10 +206,9 @@
 @ 3B jump_if_stat_buff_eq
 @ 3C jump_if_stat_buff_ne
 
-	.macro determine_move_damage_jump_if_fatal address byte
+	.macro determine_move_damage_jump_if_fatal address
 	.byte 0x3D
 	.4byte \address
-	.byte \byte
 	.endm
 
 @ 3E determine_move_damage_jump_if_not_fatal

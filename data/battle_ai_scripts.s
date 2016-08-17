@@ -621,7 +621,8 @@ AI_data_081DBF17:
 	.byte 0xFF
 
 TryForNonDamagingMoveWhenThreatened::
-	count_alive_pokemon_on_team 0x01, 0x13, AI_ret_081DBF3E
+	count_alive_pokemon_on_team 0x01
+	jump_if__8_eq AI_ret_081DBF3E
 	is_most_powerful_move
 	jump_if__8_ne_8 0x00 AI_ret_081DBF3E
 	jump_if_move_with_same_movescript_in_either_0_2_history_or_1_3_moveset 0x01, 0x7F, AI_ranhigh_081DBF3E
