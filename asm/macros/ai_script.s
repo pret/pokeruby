@@ -71,7 +71,12 @@
 	.4byte \addr
 	.endm
 
-@ 14 jump_if__8_ne_8
+	.macro jump_if__8_ne_8 param addr
+	.byte 0x14
+	.byte \param
+	.4byte \addr
+	.endm
+
 @ 15 jump_if__8_lt_32
 @ 16 jump_if__8_gt_32
 @ 17 jump_if__8_eq_32
@@ -116,19 +121,15 @@
 @ 1F jump_if_attacker_has_any_damaging_moves
 @ 20 jump_if_attacker_has_no_damaging_moves
 	
-	.macro get_battle_turn_counter param addr
+	.macro get_battle_turn_counter
 	.byte 0x21
-	.2byte \param
-	.4byte \addr
 	.endm
 	
 @ 22 get_some_type
 @ 23 move_get_power__2_8
 	
-	.macro is_most_powerful_move param addr
+	.macro is_most_powerful_move
 	.byte 0x24
-	.2byte \param
-	.4byte \addr
 	.endm
 	
 	.macro get_move_to_execute_B param
@@ -162,9 +163,9 @@
 	.byte 0x2E
 	.endm
 
-	.macro get_ability ability
+	.macro get_ability target
 	.byte 0x2F
-	.byte \ability
+	.byte \target
 	.endm
 	
 @ 30 simulate_damage_muliplier_four_times
@@ -247,8 +248,6 @@
 	.macro enter_battle_countdown_get_state param1 param2 addr
 	.byte 0x4A
 	.byte \param1
-	.2byte \param2
-	.4byte \addr
 	.endm
 
 @ 4B stockpile_get_num_uses

@@ -572,7 +572,8 @@ AI_movejump212_081DBE74:
 	.incbin "baserom.gba", 0x001dbe74, 0x23
 
 CheckTypeAndDamage::
-	determine_move_damage_jump_if_fatal AI_jump1_081DBE97, 0x24
+	determine_move_damage_jump_if_fatal AI_jump1_081DBE97
+	is_most_powerful_move
 	jump_if__8_eq 0x01, Unknown_081DA84C
 	ai_ret
 AI_jump1_081DBE97:
@@ -585,7 +586,8 @@ AI_ret_081DBE97:
 	ai_ret
 
 TryForStatusMove::
-	get_battle_turn_counter 0x14, AI_ret_081DBEB5
+	get_battle_turn_counter
+	jump_if__8_ne_8 0x00 AI_ret_081DBEB5
 	move_get_move_script_id
 	jump_if__8_not_in_list_8 AI_data_081DBEB5, AI_ret_081DBEB5
 	random_goto__high_param_likely 0x50, AI_ret_081DBEB5
@@ -599,7 +601,8 @@ AI_data_081DBEB5:
 	.byte 0xBB, 0x9C, 0xA5, 0xA6, 0xA7, 0xB5, 0xC0, 0xC7, 0xCD, 0xCE, 0xD0, 0xD3, 0xD5, 0xFF
 
 TryForNonDamagingMove::
-	is_most_powerful_move 0x14, AI_ret_081DBF07
+	is_most_powerful_move
+	jump_if__8_ne_8 0x00 AI_ret_081DBF07
 	random_goto__high_param_likely 0x64, AI_ret_081DBF07
 	viability_score 0x02
 AI_ret_081DBF07:
@@ -619,7 +622,8 @@ AI_data_081DBF17:
 
 TryForNonDamagingMoveWhenThreatened::
 	count_alive_pokemon_on_team 0x01, 0x13, AI_ret_081DBF3E
-	is_most_powerful_move 0x14, AI_ret_081DBF3E
+	is_most_powerful_move
+	jump_if__8_ne_8 0x00 AI_ret_081DBF3E
 	jump_if_move_with_same_movescript_in_either_0_2_history_or_1_3_moveset 0x01, 0x7F, AI_ranhigh_081DBF3E
 	random_goto__high_param_likely 0x50, AI_ret_081DBF17
 AI_ranhigh_081DBF3E:
@@ -694,7 +698,8 @@ AI_data6_081DBF64: @ 0x081DC07D
 AI_unknown::
 	jump_if_move_id_ne_8 0x89, AI_ret_081DC0B9
 	jump_if__8_eq 0x00, AI_ret_081DC0B9
-	enter_battle_countdown_get_state 0x01, 0x13, AI_ret_081DC0B9
+	enter_battle_countdown_get_state 0x01
+	jump_if__8_eq 0x00, AI_ret_081DC0B9
 	viability_score 0x05
 AI_ret_081DC0B9:
 	ai_ret
