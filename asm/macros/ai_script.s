@@ -490,8 +490,10 @@
 	.byte 0x5a
 	.endm
 
-	.macro ai_5b 
+	.macro ai_5b param addr
 	.byte 0x5b
+	.byte \param
+	.4byte \addr
 	.endm
 
 	.macro if_taunted address

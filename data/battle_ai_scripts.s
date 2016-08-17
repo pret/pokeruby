@@ -343,8 +343,8 @@ BattleAIScript_1DA5BD: @ 81DA5BD
 	if_damage_bonus 0, BattleAIScript_1DA85B
 	get_ability TARGET
 	if_equal ABILITY_STURDY, BattleAIScript_1DA85B
-	ai_5b
-	if_not_random 91, 0x5a081da8
+	ai_5b 0x01, BattleAIScript_1DA85B
+	ai_end
 
 BattleAIScript_1DA5D2: @ 81DA5D2
 	get_ability TARGET
@@ -607,8 +607,14 @@ BattleAIScript_1DA85B: @ 81DA85B
 BattleAIScript_1DA85E: @ 81DA85E
 	score -12
 	ai_end
-
-	.incbin "baserom.gba", 0x001da861, 0xc
+	score +1
+	ai_end
+	score +2
+	ai_end
+	score +3
+	ai_end
+	score +5
+	ai_end
 
 BattleAIScript_1DA86D: @ 81DA86D
 	if_effect EFFECT_SLEEP, BattleAIScript_1DAB44
@@ -817,8 +823,8 @@ BattleAIScript_1DAC0A: @ 81DAC0A
 BattleAIScript_1DAC1D: @ 81DAC1D
 	ai_end
 
-	.incbin "baserom.gba", 0x001dac1e, 0x2
-
+	
+	.align 2
 WordList_1DAC20: @ 81DAC20
 	.2byte 79
 	.2byte 142
@@ -1355,8 +1361,9 @@ BattleAIScript_1DB1AB: @ 81DB1AB
 	if_would_go_first USER, BattleAIScript_1DB1DA
 	score -8
 	ai_jump BattleAIScript_1DB203
-
-	.incbin "baserom.gba", 0x001db1bf, 0x14
+	if_hp_less_than USER, 50, BattleAIScript_1DB1EE
+	if_hp_more_than USER, 80, BattleAIScript_1DB1D3
+	if_random 70, BattleAIScript_1DB1EE
 
 BattleAIScript_1DB1D3: @ 81DB1D3
 	score -3
@@ -2452,8 +2459,7 @@ BattleAIScript_1DBC87: @ 81DBC87
 	if_random 150, BattleAIScript_1DBCAA
 	score +1
 	ai_jump BattleAIScript_1DBCAA
-
-	.incbin "baserom.gba", 0x001dbc9c, 0x6
+	if_random 50, BattleAIScript_1DBCAA
 
 BattleAIScript_1DBCA2: @ 81DBCA2
 	if_random 30, BattleAIScript_1DBCAA
