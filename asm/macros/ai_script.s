@@ -34,7 +34,13 @@
 	.4byte \addr
 	.endm
 	
-@ 08 jump_if_health_percentage_ne
+	.macro jump_if_health_percentage_ne target percent addr
+	.byte 0x08
+	.byte \target
+	.byte \percent
+	.4byte \addr
+	.endm
+
 @ 09 jump_if_any_status1_bit
 
 	.macro jump_if_no_status1_bit param mask addr
@@ -84,9 +90,25 @@
 	.endm
 	
 @ 1B jump_if__8_in_list_8
-@ 1C jump_if__8_not_in_list_8
-@ 1D jump_if__8_in_list_16
-@ 1E jump_if__8_not_in_list_16
+
+	.macro jump_if__8_not_in_list_8 addr1 addr2
+	.byte 0x1C
+	.4byte \addr1
+	.4byte \addr2
+	.endm
+
+	.macro jump_if__8_in_list_16 addr1 addr2
+	.byte 0x1D
+	.4byte \addr1
+	.4byte \addr2
+	.endm
+	
+	.macro jump_if__8_not_in_list_16 addr1 addr2
+	.byte 0x1E
+	.4byte \addr1
+	.4byte \addr2
+	.endm
+
 @ 1F jump_if_attacker_has_any_damaging_moves
 @ 20 jump_if_attacker_has_no_damaging_moves
 	
@@ -105,12 +127,9 @@
 	.4byte \addr
 	.endm
 	
-	.macro get_move_to_execute_B param1 param2 addr1 addr2
+	.macro get_move_to_execute_B param
 	.byte 0x25
-	.byte \param1
-	.byte \param2
-	.4byte \addr1
-	.4byte \addr2
+	.byte \param
 	.endm
 
 @ 26 jump_if__8_ne_2
@@ -176,7 +195,6 @@
 	.4byte \address
 	.endm
 
-@ 37 jump_if_move_id_eq_8
 @ 38 jump_if_move_id_ne_8
 
 	.macro jump_if_stat_buff_lt param1 param2 param3 addr
@@ -196,8 +214,7 @@
 	.4byte \address
 	.byte \byte
 	.endm
-	
-@ 3D determine_move_damage_jump_if_fatal
+
 @ 3E determine_move_damage_jump_if_not_fatal
 @ 3F jump_if_has_move
 @ 40 jump_if_hasnt_move
@@ -226,9 +243,6 @@
 	.byte 0x47
 	.endm
 
-@ 45 f10_or_b1011
-@ 46 jump_random_unknown
-@ 47 f10_or_b1101
 @ 48 get_held_item_x12__8
 @ 49 pokemon_species_get_gender_info
 
@@ -242,8 +256,15 @@
 @ 4B stockpile_get_num_uses
 @ 4C is_double_battle
 @ 4D get_dp08_item__8
-@ 4E move_get_type__8
-@ 4F move_get_power__8_8
+
+	.macro move_get_type__8
+	.byte 0x4E
+	.endm
+	
+	.macro move_get_power__8_8
+	.byte 0x4F
+	.endm
+
 @ 50 move_get_move_script_id__8
 @ 51 get_protect_endure_activity
 @ 52 ai_unk52
