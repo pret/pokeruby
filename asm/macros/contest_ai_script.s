@@ -20,8 +20,19 @@
 @ 06
 @ 07
 @ 08
-@ 09
-@ 0A
+
+	.macro contest_09 param addr
+	.byte 0x09
+	.byte \param
+	.4byte \addr
+	.endm
+
+	.macro contest_0A param addr
+	.byte 0x0A
+	.byte \param
+	.4byte \addr
+	.endm
+
 @ 0B
 @ 0C
 @ 0D
@@ -32,7 +43,12 @@
 	.4byte \addr
 	.endm
 
-@ 0F
+	.macro contest_0F param addr
+	.byte 0x0F
+	.byte \param
+	.4byte \addr
+	.endm
+
 @ 10
 @ 11
 @ 12
@@ -58,9 +74,21 @@
 
 @ 21
 @ 22
-@ 23
+	
+	.macro contest_23 param addr
+	.byte 0x23
+	.byte \param
+	.4byte \addr
+	.endm
+
 @ 24
-@ 25
+
+	.macro contest_25 param addr
+	.byte 0x25
+	.byte \param
+	.4byte \addr
+	.endm
+
 @ 26
 @ 27
 	
@@ -70,7 +98,12 @@
 	.4byte \addr
 	.endm
 
-@ 29
+	.macro contest_29 param addr
+	.byte 0x29
+	.byte \param
+	.4byte \addr
+	.endm
+
 @ 2A
 @ 2B
 @ 2C
@@ -90,7 +123,12 @@
 @ 3A
 @ 3B
 @ 3C
-@ 3D
+
+	.macro contest_3D param addr
+	.byte 0x3D
+	.byte \param
+	.4byte \addr
+	.endm
 	
 	.macro contest_3E param addr
 	.byte 0x3E
@@ -200,7 +238,12 @@
 	.endm
 
 @ 82
-@ 83
+
+	.macro contest_83 addr
+	.byte 0x83
+	.4byte \addr
+	.endm
+
 @ 84
 @ 85
 @ 86

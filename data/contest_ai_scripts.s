@@ -61,7 +61,61 @@ AI_score4_081DC27F:
 AI_end_081DC27F:
 	end
 Unknown_081DC2AB:
-	.incbin "baserom.gba", 0x001dc2ab, 0x9D
+	contest_23 0x00 AI_contest09_081DC2AB
+	contest_25 0x00 AI_contest7D_4_081DC2AB
+	contest_25 0x01 AI_contest3D_081DC2AB
+	end
+AI_contest09_081DC2AB:
+	contest_09 0x04 AI_contest0F_1_081DC2AB
+	contest_09 0x03 AI_contest0F_2_081DC2AB
+	contest_83 AI_end_081DC2AB
+	score 0x0F 
+	end
+AI_contest0F_1_081DC2AB:
+	contest_0F 0x00 AI_contest7D_1_081DC2AB
+	contest_7D 0x33 AI_end_081DC2AB
+	score 0x14 
+	end
+AI_contest7D_1_081DC2AB:
+	contest_7D 0x7F AI_end_081DC2AB
+	score 0xF6 
+	end
+AI_contest0F_2_081DC2AB:
+	contest_0F 0x00 AI_contest7D_3_081DC2AB
+	contest_04 0x04 AI_score_081DC2AB
+AI_contest7D_2_081DC2AB:
+	contest_7D 0x33 AI_end_081DC2AB
+	score 0x0A 
+	end
+AI_score_081DC2AB:
+	score 0x0F 
+	end
+AI_contest7D_3_081DC2AB:
+	contest_7D 0x7F AI_end_081DC2AB
+	score 0x0A 
+	end
+AI_contest7D_4_081DC2AB:
+	contest_7D 0x7F AI_end_081DC2AB
+	score 0x0A 
+	end
+AI_contest3D_081DC2AB:
+	contest_3D 0x00 AI_contest29_081DC2AB
+	contest_0F 0x00 AI_contest7D_5_081DC2AB
+	contest_0A 0x04 AI_contest7D_5_081DC2AB
+	score 0x1E 
+	end
+AI_contest7D_5_081DC2AB:
+	contest_7D 0x64 AI_end_081DC2AB
+	score 0x0A 
+	end
+AI_contest29_081DC2AB:
+	contest_29 0x03 AI_end_081DC2AB
+	contest_0F 0x00 AI_contest7D_5_081DC2AB
+	contest_0A 0x04 AI_contest7D_5_081DC2AB
+	score 0x1E 
+	end
+AI_end_081DC2AB:
+	end
 Unknown_081DC348:
 	contest_47 AI_score_081DC348
 	contest_80 AI_contest3F_081DC348
