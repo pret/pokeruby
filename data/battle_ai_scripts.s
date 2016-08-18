@@ -5,41 +5,41 @@
 	.section script_data, "aw", %progbits
 
 	.align 2
-gUnknown_081DA01C:: @ 81DA01C
-	.4byte BattleAIScript_1DA09C
-	.4byte BattleAIScript_1DA86D
-	.4byte BattleAIScript_1DBE97
-	.4byte BattleAIScript_1DBEB5
-	.4byte BattleAIScript_1DBF17
-	.4byte BattleAIScript_1DBF07
-	.4byte BattleAIScript_1DBF3E
-	.4byte BattleAIScript_1DBF63
-	.4byte BattleAIScript_1DBF64
-	.4byte BattleAIScript_1DC0B9
-	.4byte BattleAIScript_1DC115
-	.4byte BattleAIScript_1DC115
-	.4byte BattleAIScript_1DC115
-	.4byte BattleAIScript_1DC115
-	.4byte BattleAIScript_1DC115
-	.4byte BattleAIScript_1DC115
-	.4byte BattleAIScript_1DC115
-	.4byte BattleAIScript_1DC115
-	.4byte BattleAIScript_1DC115
-	.4byte BattleAIScript_1DC115
-	.4byte BattleAIScript_1DC115
-	.4byte BattleAIScript_1DC115
-	.4byte BattleAIScript_1DC115
-	.4byte BattleAIScript_1DC115
-	.4byte BattleAIScript_1DC115
-	.4byte BattleAIScript_1DC115
-	.4byte BattleAIScript_1DC115
-	.4byte BattleAIScript_1DC115
-	.4byte BattleAIScript_1DC115
-	.4byte BattleAIScript_1DC0D0
-	.4byte BattleAIScript_1DC0FE
-	.4byte BattleAIScript_1DC105
+BattleAIs:: @ 81DA01C
+	.4byte AI_CheckBadMove
+	.4byte AI_CheckViability
+	.4byte AI_TryToFaint
+	.4byte AI_SetupFirstTurn
+	.4byte AI_Risky
+	.4byte AI_PreferStrongestMove
+	.4byte AI_PreferBatonPass
+	.4byte AI_Nothing
+	.4byte AI_HPAware
+	.4byte AI_Unknown
+	.4byte AI_Unused
+	.4byte AI_Unused
+	.4byte AI_Unused
+	.4byte AI_Unused
+	.4byte AI_Unused
+	.4byte AI_Unused
+	.4byte AI_Unused
+	.4byte AI_Unused
+	.4byte AI_Unused
+	.4byte AI_Unused
+	.4byte AI_Unused
+	.4byte AI_Unused
+	.4byte AI_Unused
+	.4byte AI_Unused
+	.4byte AI_Unused
+	.4byte AI_Unused
+	.4byte AI_Unused
+	.4byte AI_Unused
+	.4byte AI_Unused
+	.4byte AI_Roaming
+	.4byte AI_Safari
+	.4byte AI_FleeInDanger
 
-BattleAIScript_1DA09C: @ 81DA09C
+AI_CheckBadMove: @ 81DA09C
 	is_most_powerful_move
 	if_equal 0, BattleAIScript_1DA108
 	if_damage_bonus 0, BattleAIScript_1DA85B
@@ -487,7 +487,7 @@ BattleAIScript_1DA742: @ 81DA742
 	end
 
 BattleAIScript_1DA74D: @ 81DA74D
-	ai_4a USER
+	is_first_turn USER
 	if_equal 0, BattleAIScript_1DA85B
 	end
 
@@ -624,7 +624,7 @@ BattleAIScript_1DA85E: @ 81DA85E
 	score +5
 	end
 
-BattleAIScript_1DA86D: @ 81DA86D
+AI_CheckViability: @ 81DA86D
 	if_effect EFFECT_SLEEP, BattleAIScript_1DAB44
 	if_effect EFFECT_ABSORB, BattleAIScript_1DAB60
 	if_effect EFFECT_EXPLOSION, BattleAIScript_1DAB7A
@@ -2074,7 +2074,7 @@ BattleAIScript_1DB8B2: @ 81DB8B2
 	end
 
 BattleAIScript_1DB8B3: @ 81DB8B3
-	ai_4a USER
+	is_first_turn USER
 	if_not_equal 0, BattleAIScript_1DB8E8
 	get_type 0
 	if_equal TYPE_GHOST, BattleAIScript_1DB8E0
@@ -2339,7 +2339,7 @@ BattleAIScript_1DBB65: @ 81DBB65
 	if_status TARGET, SLP, BattleAIScript_1DBBB1
 	if_status2 TARGET, 0xf0000, BattleAIScript_1DBBAB
 	if_status2 TARGET, S_CONFUSED, BattleAIScript_1DBBAB
-	ai_4a USER
+	is_first_turn USER
 	if_not_equal 0, BattleAIScript_1DBBB3
 	if_random 100, BattleAIScript_1DBBB3
 	score +1
@@ -2465,7 +2465,7 @@ BattleAIScript_1DBC78: @ 81DBC78
 	score -1
 
 BattleAIScript_1DBC87: @ 81DBC87
-	ai_4a USER
+	is_first_turn USER
 	if_equal 0, BattleAIScript_1DBCA2
 	if_random 150, BattleAIScript_1DBCAA
 	score +1
@@ -2526,7 +2526,7 @@ BattleAIScript_1DBD09: @ 81DBD09
 
 BattleAIScript_1DBD0A: @ 81DBD0A
 	if_hp_less_than TARGET, 30, BattleAIScript_1DBD21
-	ai_4a USER
+	is_first_turn USER
 	if_more_than 0, BattleAIScript_1DBD21
 	if_random 180, BattleAIScript_1DBD21
 	score +1
@@ -2569,7 +2569,7 @@ BattleAIScript_1DBD75: @ 81DBD75
 	end
 
 BattleAIScript_1DBD76: @ 81DBD76
-	ai_4a USER
+	is_first_turn USER
 	if_more_than 0, BattleAIScript_1DBD86
 	if_random 100, BattleAIScript_1DBD86
 	score +2
@@ -2588,7 +2588,7 @@ BattleAIScript_1DBD95: @ 81DBD95
 	end
 
 BattleAIScript_1DBD96: @ 81DBD96
-	ai_4a USER
+	is_first_turn USER
 	if_equal 1, BattleAIScript_1DBDDD
 	if_random 30, BattleAIScript_1DBDFF
 	if_would_go_first USER, BattleAIScript_1DBDC3
@@ -2686,7 +2686,7 @@ BattleAIScript_1DBE8E: @ 81DBE8E
 BattleAIScript_1DBE96: @ 81DBE96
 	end
 
-BattleAIScript_1DBE97: @ 81DBE97
+AI_TryToFaint: @ 81DBE97
 	if_can_faint BattleAIScript_1DBEA4
 	is_most_powerful_move
 	if_equal 1, BattleAIScript_1DA84C
@@ -2703,7 +2703,7 @@ BattleAIScript_1DBEB2: @ 81DBEB2
 BattleAIScript_1DBEB4: @ 81DBEB4
 	end
 
-BattleAIScript_1DBEB5: @ 81DBEB5
+AI_SetupFirstTurn: @ 81DBEB5
 	get_turn_count
 	if_not_equal 0, BattleAIScript_1DBECE
 	get_effect
@@ -2772,7 +2772,7 @@ MoveEffectList_1DBECF: @ 81DBECF
 	.byte EFFECT_CAMOUFLAGE
 	.byte -1
 
-BattleAIScript_1DBF07: @ 81DBF07
+AI_PreferStrongestMove: @ 81DBF07
 	is_most_powerful_move
 	if_not_equal 0, BattleAIScript_1DBF16
 	if_random 100, BattleAIScript_1DBF16
@@ -2781,7 +2781,7 @@ BattleAIScript_1DBF07: @ 81DBF07
 BattleAIScript_1DBF16: @ 81DBF16
 	end
 
-BattleAIScript_1DBF17: @ 81DBF17
+AI_Risky: @ 81DBF17
 	get_effect
 	if_not_in_bytes MoveEffectList_1DBF2A, BattleAIScript_1DBF29
 	if_random 128, BattleAIScript_1DBF29
@@ -2812,7 +2812,7 @@ MoveEffectList_1DBF2A: @ 81DBF2A
 	.byte EFFECT_TEETER_DANCE
 	.byte -1
 
-BattleAIScript_1DBF3E: @ 81DBF3E
+AI_PreferBatonPass: @ 81DBF3E
 	count_alive_pokemon USER
 	if_equal 0, BattleAIScript_1DBF62
 	is_most_powerful_move
@@ -2827,10 +2827,10 @@ BattleAIScript_1DBF5A: @ 81DBF5A
 BattleAIScript_1DBF62: @ 81DBF62
 	end
 
-BattleAIScript_1DBF63: @ 81DBF63
+AI_Nothing: @ 81DBF63
 	end
 
-BattleAIScript_1DBF64: @ 81DBF64
+AI_HPAware: @ 81DBF64
 	if_hp_more_than USER, 70, BattleAIScript_1DBF81
 	if_hp_more_than USER, 30, BattleAIScript_1DBF90
 	get_effect
@@ -3093,17 +3093,17 @@ MoveEffectList_1DC07D: @ 81DC07D
 	.byte EFFECT_DRAGON_DANCE
 	.byte -1
 
-BattleAIScript_1DC0B9: @ 81DC0B9
+AI_Unknown: @ 81DC0B9
 	if_not_effect EFFECT_SUNNY_DAY, BattleAIScript_1DC0CF
 	if_equal 0, BattleAIScript_1DC0CF
-	ai_4a USER
+	is_first_turn USER
 	if_equal 0, BattleAIScript_1DC0CF
 	score +5
 
 BattleAIScript_1DC0CF: @ 81DC0CF
 	end
 
-BattleAIScript_1DC0D0: @ 81DC0D0
+AI_Roaming: @ 81DC0D0
 	if_status2 USER, 0xe000, BattleAIScript_1DC0FD
 	if_status2 USER, S_MEAN_LOOK, BattleAIScript_1DC0FD
 	get_ability TARGET
@@ -3114,25 +3114,25 @@ BattleAIScript_1DC0D0: @ 81DC0D0
 	if_equal ABILITY_ARENA_TRAP, BattleAIScript_1DC0FD
 
 BattleAIScript_1DC0FC: @ 81DC0FC
-	ai_45
+	flee
 
 BattleAIScript_1DC0FD: @ 81DC0FD
 	end
 
-BattleAIScript_1DC0FE: @ 81DC0FE
+AI_Safari: @ 81DC0FE
 	ai_46 BattleAIScript_1DC104
 	ai_47
 
 BattleAIScript_1DC104: @ 81DC104
-	ai_45
+	flee
 
-BattleAIScript_1DC105: @ 81DC105
+AI_FleeInDanger: @ 81DC105
 	if_hp_equal TARGET, 20, BattleAIScript_1DC114
 	if_hp_less_than TARGET, 20, BattleAIScript_1DC114
 	end
 
 BattleAIScript_1DC114: @ 81DC114
-	ai_45
+	flee
 
-BattleAIScript_1DC115: @ 81DC115
+AI_Unused: @ 81DC115
 	end

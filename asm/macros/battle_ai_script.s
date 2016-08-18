@@ -394,7 +394,7 @@
 	.4byte \address
 	.endm
 
-	.macro ai_45 
+	.macro flee
 	.byte 0x45
 	.endm
 
@@ -417,7 +417,7 @@
 	.byte \target
 	.endm
 
-	.macro ai_4a target
+	.macro is_first_turn target
 	.byte 0x4a
 	.byte \target
 	.endm
