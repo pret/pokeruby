@@ -344,7 +344,7 @@ BattleAIScript_1DA5BD: @ 81DA5BD
 	if_damage_bonus 0, BattleAIScript_1DA85B
 	get_ability TARGET
 	if_equal ABILITY_STURDY, BattleAIScript_1DA85B
-	ai_5b USER, BattleAIScript_1DA85B
+	if_target_higher_level BattleAIScript_1DA85B
 	end
 
 BattleAIScript_1DA5D2: @ 81DA5D2
@@ -1896,7 +1896,7 @@ BattleAIScript_1DB680: @ 81DB680
 
 BattleAIScript_1DB681: @ 81DB681
 	if_status TARGET, SLP | PSN | BRN | FRZ | PAR | TOX, BattleAIScript_1DB697
-	ai_34 TARGET, S_CONFUSED | 0xf8, BattleAIScript_1DB697
+	if_status_in_party TARGET, SLP | PSN | BRN | FRZ | PAR | TOX, BattleAIScript_1DB697
 	score -5
 
 BattleAIScript_1DB697: @ 81DB697
@@ -3120,8 +3120,8 @@ BattleAIScript_1DC0FD: @ 81DC0FD
 	end
 
 AI_Safari: @ 81DC0FE
-	ai_46 BattleAIScript_1DC104
-	ai_47
+	if_random_2 BattleAIScript_1DC104
+	flee2
 
 BattleAIScript_1DC104: @ 81DC104
 	flee

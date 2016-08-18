@@ -203,7 +203,7 @@
 	.4byte \address
 	.endm
 
-	.macro get_turn_count 
+	.macro get_turn_count
 	.byte 0x21
 	.endm
 
@@ -212,11 +212,11 @@
 	.byte \byte
 	.endm
 
-	.macro ai_23 
+	.macro ai_23
 	.byte 0x23
 	.endm
 
-	.macro is_most_powerful_move 
+	.macro is_most_powerful_move
 	.byte 0x24
 	.endm
 
@@ -231,7 +231,7 @@
 	.4byte \address
 	.endm
 
-	.macro ai_27 
+	.macro ai_27
 	.byte 0x27
 	.endm
 
@@ -247,11 +247,11 @@
 	.4byte \address
 	.endm
 
-	.macro ai_2a 
+	.macro ai_2a
 	.byte 0x2a
 	.endm
 
-	.macro ai_2b 
+	.macro ai_2b
 	.byte 0x2b
 	.endm
 
@@ -260,11 +260,11 @@
 	.byte \target
 	.endm
 
-	.macro ai_2d 
+	.macro ai_2d
 	.byte 0x2d
 	.endm
 
-	.macro get_effect 
+	.macro get_effect
 	.byte 0x2e
 	.endm
 
@@ -273,7 +273,7 @@
 	.byte \target
 	.endm
 
-	.macro ai_30 
+	.macro ai_30
 	.byte 0x30
 	.endm
 
@@ -283,26 +283,30 @@
 	.4byte \address
 	.endm
 
-	.macro ai_32 
+	.macro ai_32
 	.byte 0x32
 	.endm
 
-	.macro ai_33 
+	.macro ai_33
 	.byte 0x33
 	.endm
 
-	.macro ai_34 target, status, address
+	.macro if_status_in_party target, status, address
 	.byte 0x34
 	.byte \target
 	.4byte \status
 	.4byte \address
 	.endm
 
-	.macro ai_35 
+	@ bugged
+	.macro if_not_status_in_party target, status, address
 	.byte 0x35
+	.byte \target
+	.4byte \status
+	.4byte \address
 	.endm
 
-	.macro get_weather 
+	.macro get_weather
 	.byte 0x36
 	.endm
 
@@ -360,11 +364,11 @@
 	.4byte \address
 	.endm
 
-	.macro if_has_move 
+	.macro if_has_move
 	.byte 0x3f
 	.endm
 
-	.macro if_dont_have_move 
+	.macro if_dont_have_move
 	.byte 0x40
 	.endm
 
@@ -398,12 +402,12 @@
 	.byte 0x45
 	.endm
 
-	.macro ai_46 address
+	.macro if_random_2 address
 	.byte 0x46
 	.4byte \address
 	.endm
 
-	.macro ai_47 
+	.macro flee2
 	.byte 0x47
 	.endm
 
@@ -427,7 +431,7 @@
 	.byte \target
 	.endm
 
-	.macro is_double_battle 
+	.macro is_double_battle
 	.byte 0x4c
 	.endm
 
@@ -436,15 +440,15 @@
 	.byte \target
 	.endm
 
-	.macro get_move_type 
+	.macro get_move_type
 	.byte 0x4e
 	.endm
 
-	.macro get_move_power 
+	.macro get_move_power
 	.byte 0x4f
 	.endm
 
-	.macro get_move_effect 
+	.macro get_move_effect
 	.byte 0x50
 	.endm
 
@@ -453,27 +457,27 @@
 	.byte \target
 	.endm
 
-	.macro ai_52 
+	.macro ai_52
 	.byte 0x52
 	.endm
 
-	.macro ai_53 
+	.macro ai_53
 	.byte 0x53
 	.endm
 
-	.macro ai_54 
+	.macro ai_54
 	.byte 0x54
 	.endm
 
-	.macro ai_55 
+	.macro ai_55
 	.byte 0x55
 	.endm
 
-	.macro ai_56 
+	.macro ai_56
 	.byte 0x56
 	.endm
 
-	.macro ai_57 
+	.macro ai_57
 	.byte 0x57
 	.endm
 
@@ -487,14 +491,26 @@
 	.4byte \address
 	.endm
 
-	.macro end 
+	.macro end
 	.byte 0x5a
 	.endm
 
-	.macro ai_5b target, address
+	.macro if_level_cond cond, address
 	.byte 0x5b
-	.byte \target
+	.byte \cond
 	.4byte \address
+	.endm
+
+	.macro if_user_higher_level address
+	if_level_cond 0, \address
+	.endm
+
+	.macro if_target_higher_level address
+	if_level_cond 1, \address
+	.endm
+
+	.macro if_equal_levels address
+	if_level_cond 2, \address
 	.endm
 
 	.macro if_taunted address
