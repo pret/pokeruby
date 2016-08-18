@@ -24,4 +24,5 @@
 	.include "constants/hold_effects.s"
 	.include "constants/battle.s"
 	.include "constants/battle_text.s"
-	.include "constants/move_effects.s"
+	.include "constants/battle_move_effects.s"
+	.include "constants/contest_move_effects.s"
