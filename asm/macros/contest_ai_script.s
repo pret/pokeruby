@@ -49,9 +49,21 @@
 	.4byte \addr
 	.endm
 
-@ 10
-@ 11
-@ 12
+	.macro  get_user_condition
+	.byte 0x10
+	.endm
+	
+	.macro if_user_condition_more_than param addr
+	.byte 0x11
+	.byte \param
+	.4byte \addr
+	.endm
+	
+	.macro if_user_condition_less_than param addr
+	.byte 0x12
+	.byte \param
+	.4byte \addr
+	.endm
 
 	.macro if_user_condition param addr
 	.byte 0x13
@@ -136,7 +148,7 @@
 	.4byte \addr
 	.endm
 	
-	.macro contest_3E param addr
+	.macro if_move_used_count_eq param addr
 	.byte 0x3E
 	.byte \param
 	.4byte \addr

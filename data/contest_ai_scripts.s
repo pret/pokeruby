@@ -42,10 +42,10 @@ gUnknown_081DC118:: @ 81DC118
 
 Unknown_081DC27F:
 	if_effect 3, AI_end_081DC27F
-	contest_3E 0x01 AI_score1_081DC27F
-	contest_3E 0x02 AI_score2_081DC27F
-	contest_3E 0x03 AI_score3_081DC27F
-	contest_3E 0x04 AI_score4_081DC27F
+	if_move_used_count_eq 1 AI_score1_081DC27F
+	if_move_used_count_eq 2 AI_score2_081DC27F
+	if_move_used_count_eq 3 AI_score3_081DC27F
+	if_move_used_count_eq 4 AI_score4_081DC27F
 	end
 AI_score1_081DC27F:
 	score 0xFB
@@ -244,7 +244,7 @@ ContestEffect38_score1:
 ContestEffect38_contest04:
 	contest_04 0x04 ContestEffect38_score2
 	contest_04 0x00 ContestEffect38_random
-	contest_3E 0x01 ContestEffectEnd
+	if_move_used_count_eq 1 ContestEffectEnd
 	if_random 0x7D ContestEffectEnd
 	score 0x0A
 	end
@@ -296,7 +296,41 @@ AI_end_081DC7DE:
 	end
 
 Unknown_081DC7FB:
-	.incbin "baserom.gba", 0x001dc7fb, 0x251
+	if_effect 8, 0x081dc8c2
+	if_effect 10, 0x081dc8c2
+	if_effect 12, 0x081dc8c2
+	if_effect 14, 0x081dc8c2
+	if_effect 32, 0x081dc8c2
+	if_effect 35, 0x081dc8c2
+	if_effect 36, 0x081dc8c2
+	if_effect 37, 0x081dc8c2
+	if_effect 9, 0x081dc8f9
+	if_effect 11, 0x081dc8f9
+	if_effect 13, 0x081dc8f9
+	if_effect 15, 0x081dc8f9
+	if_effect 17, 0x081dc8f9
+	if_effect 16, 0x081dc8f9
+	if_effect 18, 0x081dc8f9
+	if_effect 19, 0x081dc8f9
+	if_effect 45, 0x081dc8f9
+	if_effect 20, 0x081dc8f9
+	if_effect 21, 0x081dc8f9
+	if_effect 22, 0x081dc8f9
+	if_effect 23, 0x081dc8f9
+	if_effect 24, 0x081dc8f9
+	if_effect 28, 0x081dc8f9
+	if_effect 27, 0x081dc8f9
+	if_effect 31, 0x081dc8f9
+	if_effect 25, 0x081dc942
+	if_effect 26, 0x081dc972
+	if_effect 47, 0x081dc972
+	if_effect 38, 0x081dc9b4
+	if_effect 4, 0x081dc9bd
+	if_effect 5, 0x081dc9bd
+	if_effect 6, 0x081dc9bd
+	if_effect 2, 0x081dc9ff
+	end
+	.incbin "baserom.gba", 0x001dc8c2, 0x18A
 
 Unknown_081DCA4C:
 	.incbin "baserom.gba", 0x001dca4c, 0xA7
