@@ -489,7 +489,7 @@ BattleAIScript_1DA742: @ 81DA742
 	end
 
 BattleAIScript_1DA74D: @ 81DA74D
-	ai_4a 1
+	ai_4a USER
 	if_equal 0, BattleAIScript_1DA85B
 	end
 
@@ -2068,7 +2068,7 @@ BattleAIScript_1DB8B2: @ 81DB8B2
 	end
 
 BattleAIScript_1DB8B3: @ 81DB8B3
-	ai_4a 1
+	ai_4a USER
 	if_not_equal 0, BattleAIScript_1DB8E8
 	ai_22 0
 	if_equal 7, BattleAIScript_1DB8E0
@@ -2333,7 +2333,7 @@ BattleAIScript_1DBB65: @ 81DBB65
 	if_status TARGET, SLP, BattleAIScript_1DBBB1
 	if_any_status2 TARGET, 0xf0000, BattleAIScript_1DBBAB
 	if_any_status2 TARGET, S_CONFUSED, BattleAIScript_1DBBAB
-	ai_4a 1
+	ai_4a USER
 	if_not_equal 0, BattleAIScript_1DBBB3
 	if_random 100, BattleAIScript_1DBBB3
 	score +1
@@ -2459,7 +2459,7 @@ BattleAIScript_1DBC78: @ 81DBC78
 	score -1
 
 BattleAIScript_1DBC87: @ 81DBC87
-	ai_4a 1
+	ai_4a USER
 	if_equal 0, BattleAIScript_1DBCA2
 	if_random 150, BattleAIScript_1DBCAA
 	score +1
@@ -2518,7 +2518,7 @@ BattleAIScript_1DBD09: @ 81DBD09
 
 BattleAIScript_1DBD0A: @ 81DBD0A
 	if_hp_less_than TARGET, 30, BattleAIScript_1DBD21
-	ai_4a 1
+	ai_4a USER
 	if_more_than 0, BattleAIScript_1DBD21
 	if_random 180, BattleAIScript_1DBD21
 	score +1
@@ -2561,7 +2561,7 @@ BattleAIScript_1DBD75: @ 81DBD75
 	end
 
 BattleAIScript_1DBD76: @ 81DBD76
-	ai_4a 1
+	ai_4a USER
 	if_more_than 0, BattleAIScript_1DBD86
 	if_random 100, BattleAIScript_1DBD86
 	score +2
@@ -2580,7 +2580,7 @@ BattleAIScript_1DBD95: @ 81DBD95
 	end
 
 BattleAIScript_1DBD96: @ 81DBD96
-	ai_4a 1
+	ai_4a USER
 	if_equal 1, BattleAIScript_1DBDDD
 	if_random 30, BattleAIScript_1DBDFF
 	if_would_go_first USER, BattleAIScript_1DBDC3
@@ -3088,7 +3088,7 @@ ByteList_1DC07D: @ 81DC07D
 BattleAIScript_1DC0B9: @ 81DC0B9
 	if_not_effect EFFECT_SUNNY_DAY, BattleAIScript_1DC0CF
 	if_equal 0, BattleAIScript_1DC0CF
-	ai_4a 1
+	ai_4a USER
 	if_equal 0, BattleAIScript_1DC0CF
 	score +5
 
