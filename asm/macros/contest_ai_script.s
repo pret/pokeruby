@@ -92,7 +92,7 @@
 @ 26
 @ 27
 	
-	.macro contest_28 param addr
+	.macro if_effect param addr
 	.byte 0x28
 	.byte \param
 	.4byte \addr

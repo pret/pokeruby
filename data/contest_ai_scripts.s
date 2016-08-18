@@ -39,8 +39,9 @@ gUnknown_081DC118:: @ 81DC118
 	.4byte Unknown_081DCAF3
 	.4byte Unknown_081DCAF3
 	.incbin "baserom.gba", 0x001dc198, 0xE7 @ unreferenced?
+
 Unknown_081DC27F:
-	contest_28 0x03 AI_end_081DC27F
+	if_effect 3, AI_end_081DC27F
 	contest_3E 0x01 AI_score1_081DC27F
 	contest_3E 0x02 AI_score2_081DC27F
 	contest_3E 0x03 AI_score3_081DC27F
@@ -60,6 +61,7 @@ AI_score4_081DC27F:
 	end
 AI_end_081DC27F:
 	end
+
 Unknown_081DC2AB:
 	contest_23 0x00 AI_contest09_081DC2AB
 	contest_25 0x00 AI_contest7D_4_081DC2AB
@@ -116,6 +118,7 @@ AI_contest29_081DC2AB:
 	end
 AI_end_081DC2AB:
 	end
+
 Unknown_081DC348:
 	contest_47 AI_score_081DC348
 	contest_80 AI_contest3F_081DC348
@@ -161,8 +164,50 @@ AI_contest7D_081DC348:
 	end
 AI_end_081DC348:
 	end
+
 Unknown_081DC3C7:
-	.incbin "baserom.gba", 0x001dc3c7, 0x417
+	if_effect 39, ContestEffect39
+	if_effect 40, ContestEffect40
+	if_effect 41, ContestEffect41
+	if_effect 3, ContestEffect3
+	if_effect 38, ContestEffect38
+	if_effect 47, ContestEffect47
+	if_effect 31, ContestEffect31
+	if_effect 32, ContestEffect32
+	if_effect 46, ContestEffect46
+	if_effect 27, ContestEffect27
+	if_effect 16, ContestEffect16or17
+	if_effect 17, ContestEffect16or17
+	if_effect 26, ContestEffect26
+	if_effect 18, ContestEffect18
+	end
+ContestEffect39:
+	.incbin "baserom.gba", 0x001dc41c, 0x31
+ContestEffect40:	
+	.incbin "baserom.gba", 0x001dc44d, 0x10
+ContestEffect41:
+	.incbin "baserom.gba", 0x001dc45d, 0x10
+ContestEffect3:
+	.incbin "baserom.gba", 0x001dc46d, 0x2A
+ContestEffect38:
+	.incbin "baserom.gba", 0x001dc497, 0x40
+ContestEffect47:
+	.incbin "baserom.gba", 0x001dc4d7, 0x2F
+ContestEffect31:
+	.incbin "baserom.gba", 0x001dc506, 0x1C
+ContestEffect32:
+	.incbin "baserom.gba", 0x001dc522, 0x61
+ContestEffect46:
+	.incbin "baserom.gba", 0x001dc583, 0x44
+ContestEffect27:
+	.incbin "baserom.gba", 0x001dc5c7, 0xF9
+ContestEffect16or17:
+	.incbin "baserom.gba", 0x001dc6c0, 0x72
+ContestEffect26:
+	.incbin "baserom.gba", 0x001dc732, 0x60
+ContestEffect18:
+	.incbin "baserom.gba", 0x001dc792, 0x4C
+
 Unknown_081DC7DE:
 	contest_20 0x02 AI_contest7D_081DC7DE
 	contest_20 0x03 AI_contest7D_081DC7DE
@@ -174,9 +219,12 @@ AI_contest7D_081DC7DE:
 	end
 AI_end_081DC7DE:
 	end
+
 Unknown_081DC7FB:
 	.incbin "baserom.gba", 0x001dc7fb, 0x251
+
 Unknown_081DCA4C:
 	.incbin "baserom.gba", 0x001dca4c, 0xA7
+
 Unknown_081DCAF3:
 	end
