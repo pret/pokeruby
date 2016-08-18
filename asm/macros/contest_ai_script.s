@@ -16,9 +16,20 @@
 	.4byte \addr
 	.endm
 
-@ 05
+	.macro contest_05 param addr
+	.byte 0x05
+	.byte \param
+	.4byte \addr
+	.endm
+
 @ 06
-@ 07
+
+	.macro contest_07 param addr
+	.byte 0x07
+	.byte \param
+	.4byte \addr
+	.endm
+
 @ 08
 
 	.macro contest_09 param addr

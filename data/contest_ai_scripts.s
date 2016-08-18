@@ -257,7 +257,18 @@ ContestEffect38_score2:
 	end
 
 ContestEffect47:
-	.incbin "baserom.gba", 0x001dc4d7, 0x2F
+	if_move_used_count_eq 1 ContestEffectEnd
+	contest_0E 0x00 ContestEffect47_random
+	contest_0E 0x01 ContestEffect47_random
+	contest_05 0x04 ContestEffectEnd
+	contest_83 ContestEffectEnd
+	contest_07 0x01 ContestEffectEnd
+	score 0x0A
+	end
+ContestEffect47_random:
+	if_random 0x7F ContestEffectEnd
+	score 0x0A
+	end
 
 ContestEffect31:
 	.incbin "baserom.gba", 0x001dc506, 0x1C
