@@ -10,7 +10,7 @@
 @ 02
 @ 03
 
-	.macro contest_04 addr
+	.macro contest_04 param addr
 	.byte 0x04
 	.byte \param
 	.4byte \addr
@@ -26,7 +26,7 @@
 @ 0C
 @ 0D
 
-	.macro contest_0E addr
+	.macro contest_0E param addr
 	.byte 0x0E
 	.byte \param
 	.4byte \addr
@@ -98,7 +98,12 @@
 	.4byte \addr
 	.endm
 	
-@ 3F
+	.macro contest_3F param addr
+	.byte 0x3F
+	.byte \param
+	.4byte \addr
+	.endm
+
 @ 40
 @ 41
 
