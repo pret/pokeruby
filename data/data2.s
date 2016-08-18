@@ -13523,9 +13523,10 @@ gUnknown_083CC5A2:: @ 83CC5A2
 gUnknown_083CC5A4:: @ 83CC5A4
 	.incbin "baserom.gba", 0x003cc5a4, 0x10
 
-gUnknown_083CC5B4:: @ 83CC5B4
-	.incbin "baserom.gba", 0x003cc5b4, 0x1c
+@ 83CC5B4
+	.include "data/contest_excitement_table.s"
 
+	.align 2
 gUnknown_083CC5D0:: @ 83CC5D0
 	.incbin "baserom.gba", 0x003cc5d0, 0x100
 
