@@ -299,7 +299,7 @@
 	.endm
 
 	@ bugged
-	.macro if_not_status_in_party target, status, address
+	.macro if_status_not_in_party target, status, address
 	.byte 0x35
 	.byte \target
 	.4byte \status
