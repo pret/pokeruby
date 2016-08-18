@@ -53,7 +53,7 @@
 @ 11
 @ 12
 
-	.macro contest_13 param addr
+	.macro if_user_condition param addr
 	.byte 0x13
 	.byte \param
 	.4byte \addr
@@ -225,7 +225,7 @@
 @ 7B
 @ 7C
 
-	.macro contest_7D param addr
+	.macro if_random param addr
 	.byte 0x7D
 	.byte \param
 	.4byte \addr

@@ -75,29 +75,29 @@ AI_contest09_081DC2AB:
 	end
 AI_contest0F_1_081DC2AB:
 	contest_0F 0x00 AI_contest7D_1_081DC2AB
-	contest_7D 0x33 AI_end_081DC2AB
+	if_random 0x33 AI_end_081DC2AB
 	score 0x14 
 	end
 AI_contest7D_1_081DC2AB:
-	contest_7D 0x7F AI_end_081DC2AB
+	if_random 0x7F AI_end_081DC2AB
 	score 0xF6 
 	end
 AI_contest0F_2_081DC2AB:
 	contest_0F 0x00 AI_contest7D_3_081DC2AB
 	contest_04 0x04 AI_score_081DC2AB
 AI_contest7D_2_081DC2AB:
-	contest_7D 0x33 AI_end_081DC2AB
+	if_random 0x33 AI_end_081DC2AB
 	score 0x0A 
 	end
 AI_score_081DC2AB:
 	score 0x0F 
 	end
 AI_contest7D_3_081DC2AB:
-	contest_7D 0x7F AI_end_081DC2AB
+	if_random 0x7F AI_end_081DC2AB
 	score 0x0A 
 	end
 AI_contest7D_4_081DC2AB:
-	contest_7D 0x7F AI_end_081DC2AB
+	if_random 0x7F AI_end_081DC2AB
 	score 0x0A 
 	end
 AI_contest3D_081DC2AB:
@@ -107,7 +107,7 @@ AI_contest3D_081DC2AB:
 	score 0x1E 
 	end
 AI_contest7D_5_081DC2AB:
-	contest_7D 0x64 AI_end_081DC2AB
+	if_random 0x64 AI_end_081DC2AB
 	score 0x0A 
 	end
 AI_contest29_081DC2AB:
@@ -141,17 +141,17 @@ AI_score_081DC348:
 	end
 AI_contest04_1_081DC348:
 	contest_04 0x04 AI_contest7D_081DC348
-	contest_7D 0x96 AI_end_081DC348
+	if_random 0x96 AI_end_081DC348
 	score 0x0A
 	end
 AI_contest04_2_081DC348:
 	contest_04 0x04 AI_contest7D_081DC348
-	contest_7D 0x7D AI_end_081DC348
+	if_random 0x7D AI_end_081DC348
 	score 0x0A
 	end
 AI_contest04_3_081DC348:
 	contest_04 0x04 AI_contest7D_081DC348
-	contest_7D 0x32 AI_end_081DC348
+	if_random 0x32 AI_end_081DC348
 	score 0x0A
 	end
 AI_contest04_4_081DC348:
@@ -159,7 +159,7 @@ AI_contest04_4_081DC348:
 	score 0x0A
 	end
 AI_contest7D_081DC348:
-	contest_7D 0x7D AI_end_081DC348
+	if_random 0x7D AI_end_081DC348
 	score 0xF1
 	end
 AI_end_081DC348:
@@ -183,20 +183,20 @@ Unknown_081DC3C7:
 	end
 
 ContestEffect39:
-	contest_13 0x03 ContestEffect39_score1
-	contest_13 0x02 ContestEffect39_score2
-	contest_13 0x01 ContestEffect39_score3
-	contest_13 0x00 ContestEffect39_score4
+	if_user_condition 0x03 ContestEffect39_score1
+	if_user_condition 0x02 ContestEffect39_score2
+	if_user_condition 0x01 ContestEffect39_score3
+	if_user_condition 0x00 ContestEffect39_score4
 	end
 ContestEffect39_score1:
 	score 0x14
 	end
 ContestEffect39_score2:
-	contest_7D 0x7D ContestEffectEnd
+	if_random 0x7D ContestEffectEnd
 	score 0x0F
 	end
 ContestEffect39_score3:
-	contest_7D 0x7D ContestEffectEnd
+	if_random 0x7D ContestEffectEnd
 	score 0x05
 	end
 ContestEffect39_score4:
@@ -205,27 +205,27 @@ ContestEffect39_score4:
 
 ContestEffect40:	
 	contest_87 0x1D ContestEffectEnd
-	contest_7D 0x32 ContestEffectEnd
+	if_random 0x32 ContestEffectEnd
 	score 0x14
 	end
 
 ContestEffect41:
 	contest_87 0x1E ContestEffectEnd
-	contest_7D 0x32 ContestEffectEnd
+	if_random 0x32 ContestEffectEnd
 	score 0x14
 	end
 
 ContestEffect3:
 	contest_0F 0x03 ContestEffectEnd
-	contest_7D 0x32 ContestEffectEnd
+	if_random 0x32 ContestEffectEnd
 	score 0x0F
 	end
 	contest_04 0x04 ContestEffect3_7D
-	contest_7D 0xDC ContestEffect3_score
+	if_random 0xDC ContestEffect3_score
 	score 0x0A
 	end
 ContestEffect3_7D:
-	contest_7D 0x14 ContestEffectEnd
+	if_random 0x14 ContestEffectEnd
 	score 0x0F
 	end
 ContestEffect3_score:
@@ -233,7 +233,28 @@ ContestEffect3_score:
 	end
 
 ContestEffect38:
-	.incbin "baserom.gba", 0x001dc497, 0x40
+	contest_87 0x27 ContestEffect38_contest04
+	if_user_condition 0x03 ContestEffect38_score1
+	if_random 0x32 ContestEffectEnd
+	score 0x0F
+	end
+ContestEffect38_score1:
+	score 0xF6
+	end
+ContestEffect38_contest04:
+	contest_04 0x04 ContestEffect38_score2
+	contest_04 0x00 ContestEffect38_random
+	contest_3E 0x01 ContestEffectEnd
+	if_random 0x7D ContestEffectEnd
+	score 0x0A
+	end
+ContestEffect38_random:
+	if_random 0x64 ContestEffectEnd
+	score 0x0A
+	end
+ContestEffect38_score2:
+	score 0xF6
+	end
 
 ContestEffect47:
 	.incbin "baserom.gba", 0x001dc4d7, 0x2F
@@ -268,7 +289,7 @@ Unknown_081DC7DE:
 	contest_20 0x04 AI_contest7D_081DC7DE
 	end
 AI_contest7D_081DC7DE:
-	contest_7D 0x7D AI_end_081DC7DE
+	if_random 0x7D AI_end_081DC7DE
 	score 0x0A
 	end
 AI_end_081DC7DE:
