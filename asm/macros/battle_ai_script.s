@@ -414,11 +414,9 @@
 	.byte \target
 	.endm
 
-	.macro ai_4a byte, word, address
+	.macro ai_4a byte
 	.byte 0x4a
 	.byte \byte
-	.2byte \word
-	.4byte \address
 	.endm
 
 	.macro get_stockpile_count target
