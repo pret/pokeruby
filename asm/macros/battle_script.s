@@ -4,9 +4,6 @@
 @ 3 >
 @ 4 &=
 
-.equiv TARGET, 0
-.equiv USER, 1
-
 	.macro calculatedamage
 	critical
 	atk5
