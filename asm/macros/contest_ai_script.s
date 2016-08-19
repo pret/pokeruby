@@ -207,7 +207,13 @@
 @ 52
 @ 53
 @ 54
-@ 55
+
+	.macro contest_55 param addr
+	.byte 0x55
+	.byte \param
+	.4byte \addr
+	.endm
+
 @ 56
 @ 57
 @ 58
@@ -255,7 +261,11 @@
 	.endm
 
 @ 7E
-@ 7F
+
+	.macro contest_7F addr
+	.byte 0x7F
+	.4byte \addr
+	.endm
 
 	.macro contest_80 addr
 	.byte 0x80
