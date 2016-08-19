@@ -6,38 +6,38 @@
 
 	.align 2
 gUnknown_081DC118:: @ 81DC118
-	.4byte Unknown_081DC7FB
-	.4byte Unknown_081DC348
-	.4byte Unknown_081DC27F
-	.4byte Unknown_081DC2AB
-	.4byte Unknown_081DCA4C
-	.4byte Unknown_081DC3C7
-	.4byte Unknown_081DC7DE
-	.4byte Unknown_081DCAF3
-	.4byte Unknown_081DCAF3
-	.4byte Unknown_081DCAF3
-	.4byte Unknown_081DCAF3
-	.4byte Unknown_081DCAF3
-	.4byte Unknown_081DCAF3
-	.4byte Unknown_081DCAF3
-	.4byte Unknown_081DCAF3
-	.4byte Unknown_081DCAF3
-	.4byte Unknown_081DCAF3
-	.4byte Unknown_081DCAF3
-	.4byte Unknown_081DCAF3
-	.4byte Unknown_081DCAF3
-	.4byte Unknown_081DCAF3
-	.4byte Unknown_081DCAF3
-	.4byte Unknown_081DCAF3
-	.4byte Unknown_081DCAF3
-	.4byte Unknown_081DCAF3
-	.4byte Unknown_081DCAF3
-	.4byte Unknown_081DCAF3
-	.4byte Unknown_081DCAF3
-	.4byte Unknown_081DCAF3
-	.4byte Unknown_081DCAF3
-	.4byte Unknown_081DCAF3
-	.4byte Unknown_081DCAF3
+	.4byte CheckForBadMove
+	.4byte CheckForCombo
+	.4byte CheckBoring
+	.4byte CheckExcitement
+	.4byte CheckOrder
+	.4byte CheckForGoodMove
+	.4byte TryErraticInCuteSmartTough
+	.4byte AI_nothing
+	.4byte AI_nothing
+	.4byte AI_nothing
+	.4byte AI_nothing
+	.4byte AI_nothing
+	.4byte AI_nothing
+	.4byte AI_nothing
+	.4byte AI_nothing
+	.4byte AI_nothing
+	.4byte AI_nothing
+	.4byte AI_nothing
+	.4byte AI_nothing
+	.4byte AI_nothing
+	.4byte AI_nothing
+	.4byte AI_nothing
+	.4byte AI_nothing
+	.4byte AI_nothing
+	.4byte AI_nothing
+	.4byte AI_nothing
+	.4byte AI_nothing
+	.4byte AI_nothing
+	.4byte AI_nothing
+	.4byte AI_nothing
+	.4byte AI_nothing
+	.4byte AI_nothing
 
 	@ unreferenced
 	if_turn_not_eq 0x00 ContestUnreferenced_80
@@ -107,7 +107,7 @@ ContestUnreferenced_score2:
 	score +10
 	end
 
-Unknown_081DC27F:
+CheckBoring:
 	if_effect_eq CONTEST_EFFECT_REPETITION_NOT_BORING, AI_end_081DC27F
 	if_move_used_count_eq 1 AI_score1_081DC27F
 	if_move_used_count_eq 2 AI_score2_081DC27F
@@ -129,7 +129,7 @@ AI_score4_081DC27F:
 AI_end_081DC27F:
 	end
 
-Unknown_081DC2AB:
+CheckExcitement:
 	if_move_excitement_less_than 0x00 AI_contest09_081DC2AB
 	if_move_excitement_eq 0x00 AI_contest7D_4_081DC2AB
 	if_move_excitement_eq 0x01 AI_contest3D_081DC2AB
@@ -186,7 +186,7 @@ AI_contest29_081DC2AB:
 AI_end_081DC2AB:
 	end
 
-Unknown_081DC348:
+CheckForCombo:
 	if_would_finish_combo AI_score_081DC348
 	call AI_contest3F_081DC348
 	call AI_contest45_081DC348
@@ -232,7 +232,7 @@ AI_contest7D_081DC348:
 AI_end_081DC348:
 	end
 
-Unknown_081DC3C7:
+CheckForGoodMove:
 	if_effect_eq CONTEST_EFFECT_BETTER_WITH_GOOD_CONDITION, ContestEffect39
 	if_effect_eq CONTEST_EFFECT_NEXT_APPEAL_EARLIER, ContestEffect40
 	if_effect_eq CONTEST_EFFECT_NEXT_APPEAL_LATER, ContestEffect41
@@ -586,7 +586,7 @@ ContestEffect18_random3:
 ContestEffectEnd:
 	end
 
-Unknown_081DC7DE:
+TryErraticInCuteSmartTough:
 	if_contest_type_eq CONTEST_CUTE, AI_contest7D_081DC7DE
 	if_contest_type_eq CONTEST_SMART, AI_contest7D_081DC7DE
 	if_contest_type_eq CONTEST_TOUGH, AI_contest7D_081DC7DE
@@ -598,7 +598,7 @@ AI_contest7D_081DC7DE:
 AI_end_081DC7DE:
 	end
 
-Unknown_081DC7FB:
+CheckForBadMove:
 	if_effect_eq CONTEST_EFFECT_STARTLE_FRONT_MON, ContestEffect2_8
 	if_effect_eq CONTEST_EFFECT_STARTLE_PREV_MON, ContestEffect2_8
 	if_effect_eq CONTEST_EFFECT_BADLY_STARTLE_FRONT_MON, ContestEffect2_8
@@ -780,7 +780,7 @@ ContestEffect2_2_score5:
 ContestEffectEnd2:
 	end
 
-Unknown_081DCA4C:
+CheckOrder:
 	if_user_order_eq 0x00 AI_effectcheck1_081DCA4C
 	if_user_order_eq 0x01 AI_effectcheck2_081DCA4C
 	if_user_order_eq 0x02 AI_effectcheck3_081DCA4C
@@ -843,5 +843,5 @@ AI_score7_081DCA4C:
 	score +5
 	end
 
-Unknown_081DCAF3:
+AI_nothing:
 	end
