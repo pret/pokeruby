@@ -596,41 +596,61 @@ AI_end_081DC7DE:
 	end
 
 Unknown_081DC7FB:
-	if_effect 8, 0x081dc8c2
-	if_effect 10, 0x081dc8c2
-	if_effect 12, 0x081dc8c2
-	if_effect 14, 0x081dc8c2
-	if_effect 32, 0x081dc8c2
-	if_effect 35, 0x081dc8c2
-	if_effect 36, 0x081dc8c2
-	if_effect 37, 0x081dc8c2
-	if_effect 9, 0x081dc8f9
-	if_effect 11, 0x081dc8f9
-	if_effect 13, 0x081dc8f9
-	if_effect 15, 0x081dc8f9
-	if_effect 17, 0x081dc8f9
-	if_effect 16, 0x081dc8f9
-	if_effect 18, 0x081dc8f9
-	if_effect 19, 0x081dc8f9
-	if_effect 45, 0x081dc8f9
-	if_effect 20, 0x081dc8f9
-	if_effect 21, 0x081dc8f9
-	if_effect 22, 0x081dc8f9
-	if_effect 23, 0x081dc8f9
-	if_effect 24, 0x081dc8f9
-	if_effect 28, 0x081dc8f9
-	if_effect 27, 0x081dc8f9
-	if_effect 31, 0x081dc8f9
-	if_effect 25, 0x081dc942
-	if_effect 26, 0x081dc972
-	if_effect 47, 0x081dc972
-	if_effect 38, 0x081dc9b4
-	if_effect 4, 0x081dc9bd
-	if_effect 5, 0x081dc9bd
-	if_effect 6, 0x081dc9bd
-	if_effect 2, 0x081dc9ff
+	if_effect 8, ContestEffect2_8
+	if_effect 10, ContestEffect2_8
+	if_effect 12, ContestEffect2_8
+	if_effect 14, ContestEffect2_8
+	if_effect 32, ContestEffect2_8
+	if_effect 35, ContestEffect2_8
+	if_effect 36, ContestEffect2_8
+	if_effect 37, ContestEffect2_8
+	if_effect 9, ContestEffect2_9
+	if_effect 11, ContestEffect2_9
+	if_effect 13, ContestEffect2_9
+	if_effect 15, ContestEffect2_9
+	if_effect 17, ContestEffect2_9
+	if_effect 16, ContestEffect2_9
+	if_effect 18, ContestEffect2_9
+	if_effect 19, ContestEffect2_9
+	if_effect 45, ContestEffect2_9
+	if_effect 20, ContestEffect2_9
+	if_effect 21, ContestEffect2_9
+	if_effect 22, ContestEffect2_9
+	if_effect 23, ContestEffect2_9
+	if_effect 24, ContestEffect2_9
+	if_effect 28, ContestEffect2_9
+	if_effect 27, ContestEffect2_9
+	if_effect 31, ContestEffect2_9
+	if_effect 25, ContestEffect2_25
+	if_effect 26, ContestEffect2_26
+	if_effect 47, ContestEffect2_26
+	if_effect 38, ContestEffect2_38
+	if_effect 4, ContestEffect2_4
+	if_effect 5, ContestEffect2_4
+	if_effect 6, ContestEffect2_4
+	if_effect 2, ContestEffect2_2
 	end
-	.incbin "baserom.gba", 0x001dc8c2, 0x189
+
+ContestEffect2_8:
+	.incbin "baserom.gba", 0x001dc8c2, 0x37
+
+ContestEffect2_9:
+	.incbin "baserom.gba", 0x001dc8f9, 0x49
+
+ContestEffect2_25:
+	.incbin "baserom.gba", 0x001dc942, 0x30
+
+ContestEffect2_26:
+	.incbin "baserom.gba", 0x001dc972, 0x42
+
+ContestEffect2_38:
+	.incbin "baserom.gba", 0x001dc9b4, 0x9
+
+ContestEffect2_4:
+	.incbin "baserom.gba", 0x001dc9bd, 0x42
+
+ContestEffect2_2:
+	.incbin "baserom.gba", 0x001dc9ff, 0x4C
 	
 ContestEffectEnd2:
 	end
