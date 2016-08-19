@@ -187,7 +187,7 @@ AI_end_081DC2AB:
 	end
 
 Unknown_081DC348:
-	contest_47 AI_score_081DC348
+	if_would_finish_combo AI_score_081DC348
 	contest_80 AI_contest3F_081DC348
 	contest_80 AI_contest45_081DC348
 	end

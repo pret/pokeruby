@@ -307,14 +307,22 @@
 	.4byte \addr
 	.endm
 
-@ 46
+@ whether the current move would finish a combo
 
-	.macro contest_47 addr
+	.macro check_would_finish_combo
+	.byte 0x46
+	.endm
+
+	.macro if_would_finish_combo addr
 	.byte 0x47
 	.4byte \addr
 	.endm
 
-@ 48
+	.macro if_would_not_finish_combo addr
+	.byte 0x48
+	.4byte \addr
+	.endm
+
 @ 49
 @ 4A
 @ 4B
