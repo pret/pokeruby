@@ -245,7 +245,7 @@ Unknown_081DC3C7:
 	if_effect_eq 27, ContestEffect27
 	if_effect_eq 16, ContestEffect16or17
 	if_effect_eq 17, ContestEffect16or17
-	if_effect_eq 26, ContestEffect26
+	if_effect_eq 26, ContestEffect_FollowingMonsNervous
 	if_effect_eq 18, ContestEffect18
 	end
 
@@ -522,32 +522,35 @@ ContestEffect16or17_0E_2:
 	score 0x08
 	end
 
-ContestEffect26:
-	if_user_order_eq 0x03 ContestEffectEnd
-	jump ContestEffect26_55
+@ This routine checks the following mons using contest_51 and contest_55
+@ in order to decide if moves that make the following mons nervous should
+@ be encouraged.
+ContestEffect_FollowingMonsNervous:
+	if_user_order_eq 3, ContestEffectEnd
+	jump ContestEffect_FollowingMonsNervous_CheckMon3
 	end
-ContestEffect26_55:
-	contest_55 0x03 ContestEffect26_0E_1
-	contest_51 0x03 0x00 ContestEffect26_0E_1
-	score 0x05
-	if_random 0x7D ContestEffect16or17_0E_1
-	score 0x05
+ContestEffect_FollowingMonsNervous_CheckMon3:
+	contest_55 0x03, ContestEffect_FollowingMonsNervous_CheckMon2
+	contest_51 0x03, 0x00, ContestEffect_FollowingMonsNervous_CheckMon2
+	score +5
+	if_random 125, ContestEffect16or17_0E_1
+	score +5
 	end
-ContestEffect26_0E_1:
-	if_user_order_eq 0x02 ContestEffectEnd
-	contest_55 0x02 ContestEffect26_0E_2
-	contest_51 0x02 0x00 ContestEffect26_0E_2
-	score 0x05
-	if_random 0x7D ContestEffect16or17_0E_2
-	score 0x05
+ContestEffect_FollowingMonsNervous_CheckMon2:
+	if_user_order_eq 2, ContestEffectEnd
+	contest_55 0x02, ContestEffect_FollowingMonsNervous_CheckMon1
+	contest_51 0x02, 0x00, ContestEffect_FollowingMonsNervous_CheckMon1
+	score +5
+	if_random 125, ContestEffect16or17_0E_2
+	score +5
 	end
-ContestEffect26_0E_2:
-	if_user_order_eq 0x01 ContestEffectEnd
-	contest_55 0x01 ContestEffectEnd
-	contest_51 0x01 0x00 ContestEffectEnd
-	score 0x05
-	if_random 0x7D ContestEffectEnd
-	score 0x05
+ContestEffect_FollowingMonsNervous_CheckMon1:
+	if_user_order_eq 1, ContestEffectEnd
+	contest_55 0x01, ContestEffectEnd
+	contest_51 0x01, 0x00 ContestEffectEnd
+	score +5
+	if_random 125, ContestEffectEnd
+	score +5
 	end
 
 ContestEffect18:
