@@ -101,7 +101,7 @@ ContestUnreferenced_score:
 	score 0x0A
 	end
 	end
-	contest_2E ContestUnreferenced_score2
+	if_most_appealing_move ContestUnreferenced_score2
 	end
 ContestUnreferenced_score2:
 	score 0x0A

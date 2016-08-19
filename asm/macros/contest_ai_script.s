@@ -221,9 +221,13 @@
 	.4byte \addr
 	.endm
 
-@ 2D
+@ whether the current move is the most appealing in the user's moveset
 
-	.macro contest_2E addr
+	.macro check_most_appealing_move
+	.byte 0x2D
+	.endm
+
+	.macro if_most_appealing_move addr
 	.byte 0x2E
 	.4byte \addr
 	.endm
