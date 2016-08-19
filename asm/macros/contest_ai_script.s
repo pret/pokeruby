@@ -83,7 +83,7 @@
 	.byte \param
 	.4byte \addr
 	.endm
-	
+
 	.macro if_user_order_eq param addr
 	.byte 0x0E
 	.byte \param
@@ -101,13 +101,13 @@
 	.macro  get_user_condition
 	.byte 0x10
 	.endm
-	
+
 	.macro if_user_condition_less_than param addr
 	.byte 0x11
 	.byte \param
 	.4byte \addr
 	.endm
-	
+
 	.macro if_user_condition_more_than param addr
 	.byte 0x12
 	.byte \param
@@ -218,7 +218,7 @@
 	.byte 0x2E
 	.4byte \addr
 	.endm
-	
+
 @ 2F
 @ 30
 @ 31
@@ -239,13 +239,13 @@
 	.byte \param
 	.4byte \addr
 	.endm
-	
+
 	.macro if_move_used_count_eq param addr
 	.byte 0x3E
 	.byte \param
 	.4byte \addr
 	.endm
-	
+
 	.macro contest_3F param addr
 	.byte 0x3F
 	.byte \param
@@ -398,7 +398,7 @@
 
 @ 85
 @ 86
-	
+
 	.macro if_effect_in_user_moveset param addr
 	.byte 0x87
 	.2byte \param
