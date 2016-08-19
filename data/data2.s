@@ -13356,6 +13356,10 @@ gUnknown_083CA4C4:: @ 83CA4C4
 gUnknown_083CA4CC:: @ 83CA4CC
 	obj_pal gContest3Pal, 0xabe0
 
+	.align 2
+gUnknown_083CA4D4:: @ 83CA4D4
+	spr_template 0xABE0, 0xABE0, gOamData_837DF2C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
+
 	.include "data/text/contest_strings.s"
 
 gUnknown_083CC355:: @ 83CC355

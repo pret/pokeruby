@@ -1,5 +1,3 @@
-gUnknown_083CA4D4:: @ 83CA4D4
-	.incbin "baserom.gba", 0x003ca4d4, 0x18
 ContestString_DescHighlyAppealing:
 	.string "A highly appealing move.$"
 ContestString_DescStartled1:
