@@ -48,8 +48,8 @@ ContestUnreferenced_80:
 	end
 ContestUnreferenced_0D:
 	if_user_order_more_than 0x01 ContestUnreferenced_end
-	contest_2C 0x02 ContestUnreferenced_end
-	contest_2C 0x03 ContestUnreferenced_end
+	if_effect_type_not_eq 0x02 ContestUnreferenced_end
+	if_effect_type_not_eq 0x03 ContestUnreferenced_end
 	score 0x0A
 ContestUnreferenced_end:
 	end
@@ -66,12 +66,12 @@ ContestUnreferenced_0F_1:
 	if_user_order_not_eq 0x03 ContestUnreferenced_2B_1
 	end
 ContestUnreferenced_2B_1:
-	contest_2B 0x01 ContestUnreferenced_score
+	if_effect_type_eq 0x01 ContestUnreferenced_score
 	end
 ContestUnreferenced_2B_2:
-	contest_2B 0x01 ContestUnreferenced_score
+	if_effect_type_eq 0x01 ContestUnreferenced_score
 	end
-	contest_2B 0x01 ContestUnreferenced_score
+	if_effect_type_eq 0x01 ContestUnreferenced_score
 	end
 ContestUnreferenced_0F_2:
 	if_user_order_not_eq 0x00 ContestUnreferenced_2B_1
@@ -786,7 +786,7 @@ Unknown_081DCA4C:
 AI_effectcheck1_081DCA4C:
 	if_effect_eq 0x1D AI_score1_081DCA4C
 	if_effect_eq 0x21 AI_score2_081DCA4C
-	contest_2B 0x01 AI_random1_081DCA4C
+	if_effect_type_eq 0x01 AI_random1_081DCA4C
 	end
 AI_score1_081DCA4C:
 	score 0x0F
@@ -800,7 +800,7 @@ AI_random1_081DCA4C:
 	end
 AI_effectcheck2_081DCA4C:
 	if_effect_eq 0x21 AI_score3_081DCA4C
-	contest_2B 0x01 AI_random2_081DCA4C
+	if_effect_type_eq 0x01 AI_random2_081DCA4C
 	end
 AI_score3_081DCA4C:
 	score 0xFB
@@ -823,8 +823,8 @@ AI_effectcheck4_081DCA4C:
 	if_effect_eq 0x1F AI_score5_081DCA4C
 	if_effect_eq 0x01 AI_score5_081DCA4C
 	if_effect_eq 0x12 AI_score7_081DCA4C
-	contest_2B 0x01 AI_score6_081DCA4C
-	contest_2B 0x03 AI_random3_081DCA4C
+	if_effect_type_eq 0x01 AI_score6_081DCA4C
+	if_effect_type_eq 0x03 AI_random3_081DCA4C
 	end
 AI_score5_081DCA4C:
 	score 0x0F

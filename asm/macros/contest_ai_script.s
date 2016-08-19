@@ -203,15 +203,19 @@
 	.4byte \addr
 	.endm
 
-@ 2A
+@ move effect type
 
-	.macro contest_2B param addr
+	.macro get_effect_type
+	.byte 0x2A
+	.endm
+
+	.macro if_effect_type_eq param, addr
 	.byte 0x2B
 	.byte \param
 	.4byte \addr
 	.endm
 
-	.macro contest_2C param addr
+	.macro if_effect_type_not_eq param, addr
 	.byte 0x2C
 	.byte \param
 	.4byte \addr
