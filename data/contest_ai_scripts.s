@@ -250,10 +250,10 @@ Unknown_081DC3C7:
 	end
 
 ContestEffect39:
-	if_user_condition 0x03 ContestEffect39_score1
-	if_user_condition 0x02 ContestEffect39_score2
-	if_user_condition 0x01 ContestEffect39_score3
-	if_user_condition 0x00 ContestEffect39_score4
+	if_user_condition_eq 0x03 ContestEffect39_score1
+	if_user_condition_eq 0x02 ContestEffect39_score2
+	if_user_condition_eq 0x01 ContestEffect39_score3
+	if_user_condition_eq 0x00 ContestEffect39_score4
 	end
 ContestEffect39_score1:
 	score 0x14
@@ -301,7 +301,7 @@ ContestEffect3_score:
 
 ContestEffect38:
 	if_effect_in_user_moveset 0x27 ContestEffect38_contest04
-	if_user_condition 0x03 ContestEffect38_score1
+	if_user_condition_eq 0x03 ContestEffect38_score1
 	if_random 0x32 ContestEffectEnd
 	score 0x0F
 	end

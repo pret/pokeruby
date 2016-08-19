@@ -98,29 +98,34 @@
 
 @ user condition
 
-	.macro  get_user_condition
+	.macro get_user_condition
 	.byte 0x10
 	.endm
 
-	.macro if_user_condition_less_than param addr
+	.macro if_user_condition_less_than param, addr
 	.byte 0x11
 	.byte \param
 	.4byte \addr
 	.endm
 
-	.macro if_user_condition_more_than param addr
+	.macro if_user_condition_more_than param, addr
 	.byte 0x12
 	.byte \param
 	.4byte \addr
 	.endm
 
-	.macro if_user_condition param addr
+	.macro if_user_condition_eq param, addr
 	.byte 0x13
 	.byte \param
 	.4byte \addr
 	.endm
 
-@ 14
+	.macro if_user_condition_not_eq param, addr
+	.byte 0x14
+	.byte \param
+	.4byte \addr
+	.endm
+
 @ 15
 @ 16
 @ 17
