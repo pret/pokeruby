@@ -630,10 +630,73 @@ Unknown_081DC7FB:
 	if_effect 6, 0x081dc9bd
 	if_effect 2, 0x081dc9ff
 	end
-	.incbin "baserom.gba", 0x001dc8c2, 0x18A
+	.incbin "baserom.gba", 0x001dc8c2, 0x189
+	
+ContestEffectEnd2:
+	end
 
 Unknown_081DCA4C:
-	.incbin "baserom.gba", 0x001dca4c, 0xA7
+	contest_0E 0x00 AI_effectcheck1_081DCA4C
+	contest_0E 0x01 AI_effectcheck2_081DCA4C
+	contest_0E 0x02 AI_effectcheck3_081DCA4C
+	contest_0E 0x03 AI_effectcheck4_081DCA4C
+	end
+AI_effectcheck1_081DCA4C:
+	if_effect 0x1D AI_score1_081DCA4C
+	if_effect 0x21 AI_score2_081DCA4C
+	contest_2B 0x01 AI_random1_081DCA4C
+	end
+AI_score1_081DCA4C:
+	score 0x0F 
+	end
+AI_score2_081DCA4C:
+	score 0xF1 
+	end
+AI_random1_081DCA4C:
+	if_random 0x64 ContestEffectEnd2
+	score 0x0A 
+	end
+AI_effectcheck2_081DCA4C:
+	if_effect 0x21 AI_score3_081DCA4C
+	contest_2B 0x01 AI_random2_081DCA4C
+	end
+AI_score3_081DCA4C:
+	score 0xFB 
+	end
+AI_random2_081DCA4C:
+	if_random 0x7D ContestEffectEnd2
+	score 0x0A 
+	end
+AI_effectcheck3_081DCA4C:
+	if_effect 0x21 AI_score4_081DCA4C
+	if_effect 0x1F AI_score4_081DCA4C 
+	if_effect 0x01 AI_score4_081DCA4C
+	end
+AI_score4_081DCA4C:
+	score 0x05 
+	end
+AI_effectcheck4_081DCA4C:
+	if_effect 0x21 AI_score5_081DCA4C
+	if_effect 0x1E AI_score5_081DCA4C
+	if_effect 0x1F AI_score5_081DCA4C
+	if_effect 0x01 AI_score5_081DCA4C
+	if_effect 0x12 AI_score7_081DCA4C
+	contest_2B 0x01 AI_score6_081DCA4C
+	contest_2B 0x03 AI_random3_081DCA4C
+	end
+AI_score5_081DCA4C:
+	score 0x0F 
+	end
+AI_score6_081DCA4C:
+	score 0xF6 
+	end
+AI_random3_081DCA4C:
+	if_random 0x7D ContestEffectEnd2
+	score 0x0A 
+	end
+AI_score7_081DCA4C:
+	score 0x05 
+	end
 
 Unknown_081DCAF3:
 	end
