@@ -339,35 +339,8 @@
 @ 85
 @ 86
 	
-	.macro contest_87 param addr
+	.macro if_effect_in_user_moveset param addr
 	.byte 0x87
 	.2byte \param
 	.4byte \addr
 	.endm
-
-@ 88
-@ 89
-@ 8A
-@ 8B
-@ 8C
-@ 8D
-@ 8E
-@ 8F
-@ 90
-@ 91
-@ 92
-@ 93
-@ 94
-@ 95
-@ 96
-@ 97
-@ 98
-@ 99
-@ 9A
-@ 9B
-@ 9C
-@ 9D
-@ 9E
-@ 9F
-
-@ adding more if I find more macros greater than 9F.

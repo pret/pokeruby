@@ -271,13 +271,13 @@ ContestEffect39_score4:
 	end
 
 ContestEffect40:	
-	contest_87 0x1D ContestEffectEnd
+	if_effect_in_user_moveset 0x1D ContestEffectEnd
 	if_random 0x32 ContestEffectEnd
 	score 0x14
 	end
 
 ContestEffect41:
-	contest_87 0x1E ContestEffectEnd
+	if_effect_in_user_moveset 0x1E ContestEffectEnd
 	if_random 0x32 ContestEffectEnd
 	score 0x14
 	end
@@ -300,7 +300,7 @@ ContestEffect3_score:
 	end
 
 ContestEffect38:
-	contest_87 0x27 ContestEffect38_contest04
+	if_effect_in_user_moveset 0x27 ContestEffect38_contest04
 	if_user_condition 0x03 ContestEffect38_score1
 	if_random 0x32 ContestEffectEnd
 	score 0x0F
