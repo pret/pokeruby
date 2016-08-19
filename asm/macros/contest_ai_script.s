@@ -275,10 +275,18 @@
 	.4byte \addr
 	.endm
 
-@ 40
-@ 41
+@ whether the current move is a combo starter
 
-	.macro contest_42 addr
+	.macro check_combo_starter
+	.byte 0x40
+	.endm
+
+	.macro if_combo_starter addr
+	.byte 0x41
+	.4byte \addr
+	.endm
+
+	.macro if_not_combo_starter addr
 	.byte 0x42
 	.4byte \addr
 	.endm

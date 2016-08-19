@@ -193,7 +193,7 @@ Unknown_081DC348:
 	end
 AI_contest3F_081DC348:
 	if_move_used_count_not_eq 0x00 AI_end_081DC348
-	contest_42 AI_end_081DC348
+	if_not_combo_starter AI_end_081DC348
 	if_user_order_eq 0x00 AI_contest04_1_081DC348
 	if_user_order_eq 0x01 AI_contest04_2_081DC348
 	if_user_order_eq 0x02 AI_contest04_3_081DC348
