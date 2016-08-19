@@ -47,9 +47,9 @@ ContestUnreferenced_80:
 	call ContestUnreferenced_0D
 	end
 ContestUnreferenced_0D:
-	if_user_order_more_than 0x01 ContestUnreferenced_end
-	if_effect_type_not_eq CONTEST_CUTE ContestUnreferenced_end
-	if_effect_type_not_eq CONTEST_SMART ContestUnreferenced_end
+	if_user_order_more_than 1 ContestUnreferenced_end
+	if_effect_type_not_eq 2 ContestUnreferenced_end
+	if_effect_type_not_eq 3 ContestUnreferenced_end
 	score +10
 ContestUnreferenced_end:
 	end
@@ -60,42 +60,42 @@ ContestUnreferenced_end:
 	if_turn_eq 0x04 ContestUnreferenced_0F_5
 	end
 ContestUnreferenced_0F_1:
-	if_user_order_not_eq 0x00 ContestUnreferenced_2B_1
-	if_user_order_not_eq 0x01 ContestUnreferenced_2B_2
-	if_user_order_not_eq 0x02 ContestUnreferenced_2B_1
-	if_user_order_not_eq 0x03 ContestUnreferenced_2B_1
+	if_user_order_not_eq 0 ContestUnreferenced_2B_1
+	if_user_order_not_eq 1 ContestUnreferenced_2B_2
+	if_user_order_not_eq 2 ContestUnreferenced_2B_1
+	if_user_order_not_eq 3 ContestUnreferenced_2B_1
 	end
 ContestUnreferenced_2B_1:
-	if_effect_type_eq CONTEST_BEAUTY ContestUnreferenced_score
+	if_effect_type_eq 1 ContestUnreferenced_score
 	end
 ContestUnreferenced_2B_2:
-	if_effect_type_eq CONTEST_BEAUTY ContestUnreferenced_score
+	if_effect_type_eq 1 ContestUnreferenced_score
 	end
-	if_effect_type_eq CONTEST_BEAUTY ContestUnreferenced_score
+	if_effect_type_eq 1 ContestUnreferenced_score
 	end
 ContestUnreferenced_0F_2:
-	if_user_order_not_eq 0x00 ContestUnreferenced_2B_1
-	if_user_order_not_eq 0x01 ContestUnreferenced_2B_1
-	if_user_order_not_eq 0x02 ContestUnreferenced_2B_1
-	if_user_order_not_eq 0x03 ContestUnreferenced_2B_1
+	if_user_order_not_eq 0 ContestUnreferenced_2B_1
+	if_user_order_not_eq 1 ContestUnreferenced_2B_1
+	if_user_order_not_eq 2 ContestUnreferenced_2B_1
+	if_user_order_not_eq 3 ContestUnreferenced_2B_1
 	end
 ContestUnreferenced_0F_3:
-	if_user_order_not_eq 0x00 ContestUnreferenced_2B_1
-	if_user_order_not_eq 0x01 ContestUnreferenced_2B_1
-	if_user_order_not_eq 0x02 ContestUnreferenced_2B_1
-	if_user_order_not_eq 0x03 ContestUnreferenced_2B_1
+	if_user_order_not_eq 0 ContestUnreferenced_2B_1
+	if_user_order_not_eq 1 ContestUnreferenced_2B_1
+	if_user_order_not_eq 2 ContestUnreferenced_2B_1
+	if_user_order_not_eq 3 ContestUnreferenced_2B_1
 	end
 ContestUnreferenced_0F_4:
-	if_user_order_not_eq 0x00 ContestUnreferenced_2B_1
-	if_user_order_not_eq 0x01 ContestUnreferenced_2B_1
-	if_user_order_not_eq 0x02 ContestUnreferenced_2B_1
-	if_user_order_not_eq 0x03 ContestUnreferenced_2B_1
+	if_user_order_not_eq 0 ContestUnreferenced_2B_1
+	if_user_order_not_eq 1 ContestUnreferenced_2B_1
+	if_user_order_not_eq 2 ContestUnreferenced_2B_1
+	if_user_order_not_eq 3 ContestUnreferenced_2B_1
 	end
 ContestUnreferenced_0F_5:
-	if_user_order_not_eq 0x00 ContestUnreferenced_2B_1
-	if_user_order_not_eq 0x01 ContestUnreferenced_2B_1
-	if_user_order_not_eq 0x02 ContestUnreferenced_2B_1
-	if_user_order_not_eq 0x03 ContestUnreferenced_2B_1
+	if_user_order_not_eq 0 ContestUnreferenced_2B_1
+	if_user_order_not_eq 1 ContestUnreferenced_2B_1
+	if_user_order_not_eq 2 ContestUnreferenced_2B_1
+	if_user_order_not_eq 3 ContestUnreferenced_2B_1
 	end
 ContestUnreferenced_score:
 	score +10
@@ -789,7 +789,7 @@ Unknown_081DCA4C:
 AI_effectcheck1_081DCA4C:
 	if_effect_eq CONTEST_EFFECT_BETTER_IF_FIRST AI_score1_081DCA4C
 	if_effect_eq CONTEST_EFFECT_BETTER_WHEN_LATER AI_score2_081DCA4C
-	if_effect_type_eq CONTEST_BEAUTY AI_random1_081DCA4C
+	if_effect_type_eq 1 AI_random1_081DCA4C
 	end
 AI_score1_081DCA4C:
 	score +15
@@ -803,7 +803,7 @@ AI_random1_081DCA4C:
 	end
 AI_effectcheck2_081DCA4C:
 	if_effect_eq CONTEST_EFFECT_BETTER_WHEN_LATER AI_score3_081DCA4C
-	if_effect_type_eq CONTEST_BEAUTY AI_random2_081DCA4C
+	if_effect_type_eq 1 AI_random2_081DCA4C
 	end
 AI_score3_081DCA4C:
 	score -5
@@ -826,8 +826,8 @@ AI_effectcheck4_081DCA4C:
 	if_effect_eq CONTEST_EFFECT_APPEAL_AS_GOOD_AS_PREV_ONES AI_score5_081DCA4C
 	if_effect_eq CONTEST_EFFECT_USER_MORE_EASILY_STARTLED AI_score5_081DCA4C
 	if_effect_eq CONTEST_EFFECT_JAMS_OTHERS_BUT_MISS_ONE_TURN AI_score7_081DCA4C
-	if_effect_type_eq CONTEST_BEAUTY AI_score6_081DCA4C
-	if_effect_type_eq CONTEST_SMART AI_random3_081DCA4C
+	if_effect_type_eq 1 AI_score6_081DCA4C
+	if_effect_type_eq 3 AI_random3_081DCA4C
 	end
 AI_score5_081DCA4C:
 	score +15
