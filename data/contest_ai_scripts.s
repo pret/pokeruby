@@ -530,24 +530,24 @@ ContestEffect_FollowingMonsNervous:
 	jump ContestEffect_FollowingMonsNervous_CheckMon3
 	end
 ContestEffect_FollowingMonsNervous_CheckMon3:
-	contest_55 0x03, ContestEffect_FollowingMonsNervous_CheckMon2
-	contest_51 0x03, 0x00, ContestEffect_FollowingMonsNervous_CheckMon2
+	contest_55 3, ContestEffect_FollowingMonsNervous_CheckMon2
+	contest_51 3, 0, ContestEffect_FollowingMonsNervous_CheckMon2
 	score +5
 	if_random 125, ContestEffect16or17_0E_1
 	score +5
 	end
 ContestEffect_FollowingMonsNervous_CheckMon2:
 	if_user_order_eq 2, ContestEffectEnd
-	contest_55 0x02, ContestEffect_FollowingMonsNervous_CheckMon1
-	contest_51 0x02, 0x00, ContestEffect_FollowingMonsNervous_CheckMon1
+	contest_55 2, ContestEffect_FollowingMonsNervous_CheckMon1
+	contest_51 2, 0, ContestEffect_FollowingMonsNervous_CheckMon1
 	score +5
 	if_random 125, ContestEffect16or17_0E_2
 	score +5
 	end
 ContestEffect_FollowingMonsNervous_CheckMon1:
 	if_user_order_eq 1, ContestEffectEnd
-	contest_55 0x01, ContestEffectEnd
-	contest_51 0x01, 0x00 ContestEffectEnd
+	contest_55 1, ContestEffectEnd
+	contest_51 1, 0, ContestEffectEnd
 	score +5
 	if_random 125, ContestEffectEnd
 	score +5
