@@ -46,8 +46,13 @@
 
 @ 0B
 @ 0C
-@ 0D
 
+	.macro contest_0D param addr
+	.byte 0x0D
+	.byte \param
+	.4byte \addr
+	.endm
+	
 	.macro contest_0E param addr
 	.byte 0x0E
 	.byte \param
@@ -198,12 +203,26 @@
 @ 49
 @ 4A
 @ 4B
-@ 4C
+
+	.macro contest_4C param1 param2 addr
+	.byte 0x4C
+	.byte \param1
+	.byte \param2
+	.4byte \addr
+	.endm
+
 @ 4D
 @ 4E
 @ 4F
 @ 50
-@ 51
+
+	.macro contest_51 param1 param2 addr
+	.byte 0x51
+	.byte \param1
+	.byte \param2
+	.4byte \addr
+	.endm
+
 @ 52
 @ 53
 @ 54
@@ -216,7 +235,13 @@
 
 @ 56
 @ 57
-@ 58
+
+	.macro contest_58 param addr
+	.byte 0x58
+	.byte \param
+	.4byte \addr
+	.endm
+
 @ 59
 @ 5A
 @ 5B
@@ -276,14 +301,20 @@
 	.byte 0x81
 	.endm
 
-@ 82
+	.macro check_user_has_exciting_move
+	.byte 0x82
+	.endm
 
-	.macro contest_83 addr
+	.macro if_user_has_exciting_move addr
 	.byte 0x83
 	.4byte \addr
 	.endm
 
-@ 84
+	.macro if_user_doesnt_have_exciting_move addr
+	.byte 0x84
+	.4byte \addr
+	.endm
+
 @ 85
 @ 86
 	

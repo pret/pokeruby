@@ -70,7 +70,7 @@ Unknown_081DC2AB:
 AI_contest09_081DC2AB:
 	contest_09 0x04 AI_contest0F_1_081DC2AB
 	contest_09 0x03 AI_contest0F_2_081DC2AB
-	contest_83 AI_end_081DC2AB
+	if_user_has_exciting_move AI_end_081DC2AB
 	score 0x0F 
 	end
 AI_contest0F_1_081DC2AB:
@@ -261,7 +261,7 @@ ContestEffect47:
 	contest_0E 0x00 ContestEffect47_random
 	contest_0E 0x01 ContestEffect47_random
 	contest_05 0x04 ContestEffectEnd
-	contest_83 ContestEffectEnd
+	if_user_has_exciting_move ContestEffectEnd
 	contest_07 0x01 ContestEffectEnd
 	score 0x0A
 	end
@@ -323,19 +323,195 @@ ContestEffect32_score7:
 	end
 
 ContestEffect46:
-	.incbin "baserom.gba", 0x001dc583, 0x44
+	contest_0E 0x00 ContestEffect46_05
+	contest_0D 0x00 ContestEffect46_score4
+	end
+ContestEffect46_05:
+	contest_05 0x00 ContestEffect46_score1
+	contest_09 0x04 ContestEffect46_score2
+	contest_09 0x03 ContestEffect46_score3
+	end
+ContestEffect46_score1:
+	if_random 0x7D ContestEffectEnd
+	score 0xF1
+	end
+ContestEffect46_score2:
+	if_random 0x7D ContestEffectEnd
+	score 0x14
+	end
+ContestEffect46_score3:
+	if_random 0x7D ContestEffectEnd
+	score 0x0F
+	end
+ContestEffect46_score4:
+	if_random 0xB2 ContestEffectEnd
+	score 0x0A
+	end
 
 ContestEffect27:
-	.incbin "baserom.gba", 0x001dc5c7, 0xF9
+	contest_0E 0x00 ContestEffectEnd
+	contest_7F ContestEffect27_55_1
+	end
+ContestEffect27_55_1:
+	contest_55 0x00 ContestEffect27_noscore
+	contest_4C 0x00 0x00 ContestEffect27_noscore
+	contest_4C 0x00 0x01 ContestEffect27_score1
+	contest_4C 0x00 0x02 ContestEffect27_score2
+	contest_4C 0x00 0x03 ContestEffect27_score3
+	end
+ContestEffect27_score1:
+	if_random 0x7D ContestEffect27_55_2
+	score 0x05 
+	contest_0D 0x01 ContestEffect27_55_2
+	end
+ContestEffect27_score2:
+	if_random 0x7D ContestEffect27_55_2
+	score 0x0A 
+	contest_0D 0x01 ContestEffect27_55_2
+	end
+ContestEffect27_score3:
+	if_random 0x7D ContestEffect27_55_2
+	score 0x0F 
+	contest_0D 0x01 ContestEffect27_55_2
+	end
+ContestEffect27_noscore:
+	contest_0D 0x01 ContestEffect27_55_2
+	end
+ContestEffect27_55_2:
+	contest_55 0x01 ContestEffect27_noscore2
+	contest_4C 0x01 0x00 ContestEffect27_noscore2
+	contest_4C 0x01 0x01 ContestEffect27_score4
+	contest_4C 0x01 0x02 ContestEffect27_score5
+	contest_4C 0x01 0x03 ContestEffect27_score6
+	end
+ContestEffect27_score4:
+	if_random 0x7D ContestEffect27_55_3
+	score 0x05 
+	contest_0D 0x02 ContestEffect27_55_3
+	end
+ContestEffect27_score5:
+	if_random 0x7D ContestEffect27_55_3
+	score 0x0A 
+	contest_0D 0x02 ContestEffect27_55_3
+	end
+ContestEffect27_score6:
+	if_random 0x7D ContestEffect27_55_3
+	score 0x0F 
+	contest_0D 0x02 ContestEffect27_55_3
+	end
+ContestEffect27_noscore2:
+	contest_0D 0x02 ContestEffect27_55_3
+	end
+ContestEffect27_55_3:
+	contest_55 0x02 ContestEffect27_end
+	contest_4C 0x02 0x00 ContestEffect27_end
+	contest_4C 0x02 0x01 ContestEffect27_score7
+	contest_4C 0x02 0x02 ContestEffect27_score8
+	contest_4C 0x02 0x03 ContestEffect27_score9
+	end
+ContestEffect27_score7:
+	if_random 0x7D ContestEffectEnd 
+	score 0x05 
+	end
+ContestEffect27_score8:
+	if_random 0x7D ContestEffectEnd 
+	score 0x0A 
+	end
+ContestEffect27_score9:
+	if_random 0x7D ContestEffectEnd 
+	score 0x0F 
+	end
+ContestEffect27_end:
+	end
 
 ContestEffect16or17:
-	.incbin "baserom.gba", 0x001dc6c0, 0x72
+	contest_0E 0x00 ContestEffectEnd
+	contest_7F ContestEffect16or17_55
+	end
+ContestEffect16or17_55:
+	contest_55 0x00 ContestEffect16or17_0E_1
+	contest_51 0x00 0x01 ContestEffect16or17_0E_1
+	if_random 0x7D ContestEffect16or17_0E_1
+	score 0x02 
+	contest_58 0x00 ContestEffect16or17_0E_1
+	score 0x08 
+	end
+ContestEffect16or17_0E_1:
+	contest_0E 0x01 ContestEffectEnd
+	contest_55 0x01 ContestEffect16or17_0E_2
+	contest_51 0x01 0x01 ContestEffect16or17_0E_2
+	if_random 0x7D ContestEffect16or17_0E_2
+	score 0x02 
+	contest_58 0x01 ContestEffect16or17_0E_2
+	score 0x08 
+	end
+ContestEffect16or17_0E_2:
+	contest_0E 0x02 ContestEffectEnd
+	contest_55 0x02 ContestEffectEnd
+	contest_51 0x02 0x01 ContestEffectEnd
+	if_random 0x7D ContestEffectEnd
+	score 0x02 
+	contest_58 0x02 ContestEffectEnd
+	score 0x08 
+	end
 
 ContestEffect26:
-	.incbin "baserom.gba", 0x001dc732, 0x60
+	contest_0E 0x03 ContestEffectEnd
+	contest_7F ContestEffect26_55
+	end
+ContestEffect26_55:
+	contest_55 0x03 ContestEffect26_0E_1
+	contest_51 0x03 0x00 ContestEffect26_0E_1
+	score 0x05 
+	if_random 0x7D ContestEffect16or17_0E_1
+	score 0x05 
+	end
+ContestEffect26_0E_1:
+	contest_0E 0x02 ContestEffectEnd
+	contest_55 0x02 ContestEffect26_0E_2
+	contest_51 0x02 0x00 ContestEffect26_0E_2
+	score 0x05 
+	if_random 0x7D ContestEffect16or17_0E_2
+	score 0x05
+	end
+ContestEffect26_0E_2:
+	contest_0E 0x01 ContestEffectEnd
+	contest_55 0x01 ContestEffectEnd
+	contest_51 0x01 0x00 ContestEffectEnd
+	score 0x05 
+	if_random 0x7D ContestEffectEnd
+	score 0x05
+	end
 
 ContestEffect18:
-	.incbin "baserom.gba", 0x001dc792, 0x4B
+	contest_04 0x04 ContestEffect18_score1
+	contest_7F ContestEffect18_0E
+	end
+ContestEffect18_score1:
+	score 0x05 
+	contest_7F ContestEffect18_0E
+	end
+ContestEffect18_0E:
+	contest_0E 0x00 ContestEffect18_score2
+	contest_0E 0x01 ContestEffect18_random1
+	contest_0E 0x02 ContestEffect18_random2
+	contest_0E 0x03 ContestEffect18_random3
+	end
+ContestEffect18_score2:
+	score 0xF1 
+	end
+ContestEffect18_random1:
+	if_random 0x7D ContestEffectEnd
+	score 0xF6 
+	end
+ContestEffect18_random2:
+	if_random 0x7D ContestEffectEnd
+	score 0x05 
+	end
+ContestEffect18_random3:
+	if_random 0x7D ContestEffectEnd
+	score 0x0F 
+	end
 
 ContestEffectEnd:
 	end
