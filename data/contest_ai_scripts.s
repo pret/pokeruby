@@ -44,7 +44,7 @@ gUnknown_081DC118:: @ 81DC118
 	if_effect_not_eq 0x26 ContestUnreferenced_80
 	score 0x0A
 ContestUnreferenced_80:
-	contest_80 ContestUnreferenced_0D
+	call ContestUnreferenced_0D
 	end
 ContestUnreferenced_0D:
 	if_user_order_more_than 0x01 ContestUnreferenced_end
@@ -188,8 +188,8 @@ AI_end_081DC2AB:
 
 Unknown_081DC348:
 	if_would_finish_combo AI_score_081DC348
-	contest_80 AI_contest3F_081DC348
-	contest_80 AI_contest45_081DC348
+	call AI_contest3F_081DC348
+	call AI_contest45_081DC348
 	end
 AI_contest3F_081DC348:
 	if_move_used_count_not_eq 0x00 AI_end_081DC348

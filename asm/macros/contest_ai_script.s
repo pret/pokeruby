@@ -420,7 +420,7 @@
 	.4byte \addr
 	.endm
 
-	.macro contest_80 addr
+	.macro call addr
 	.byte 0x80
 	.4byte \addr
 	.endm
