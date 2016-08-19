@@ -69,13 +69,13 @@
 	.byte 0x10
 	.endm
 	
-	.macro if_user_condition_more_than param addr
+	.macro if_user_condition_less_than param addr
 	.byte 0x11
 	.byte \param
 	.4byte \addr
 	.endm
 	
-	.macro if_user_condition_less_than param addr
+	.macro if_user_condition_more_than param addr
 	.byte 0x12
 	.byte \param
 	.4byte \addr
@@ -241,7 +241,12 @@
 
 @ 52
 @ 53
-@ 54
+
+	.macro contest_54 param addr
+	.byte 0x54
+	.byte \param
+	.4byte \addr
+	.endm
 
 	.macro contest_55 param addr
 	.byte 0x55
