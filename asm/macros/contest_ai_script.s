@@ -244,22 +244,32 @@
 @ 38
 @ 39
 @ 3A
-@ 3B
-@ 3C
 
-	.macro contest_3D param addr
+@ number of times current move has been used
+
+	.macro get_move_used_count
+	.byte 0x3B
+	.endm
+
+	.macro if_move_used_count_less_than param, addr
+	.byte 0x3C
+	.byte \param
+	.4byte \addr
+	.endm
+
+	.macro if_move_used_count_more_than param, addr
 	.byte 0x3D
 	.byte \param
 	.4byte \addr
 	.endm
 
-	.macro if_move_used_count_eq param addr
+	.macro if_move_used_count_eq param, addr
 	.byte 0x3E
 	.byte \param
 	.4byte \addr
 	.endm
 
-	.macro contest_3F param addr
+	.macro if_move_used_count_not_eq param, addr
 	.byte 0x3F
 	.byte \param
 	.4byte \addr

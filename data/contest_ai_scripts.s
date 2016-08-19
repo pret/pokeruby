@@ -168,7 +168,7 @@ AI_contest7D_4_081DC2AB:
 	score 0x0A
 	end
 AI_contest3D_081DC2AB:
-	contest_3D 0x00 AI_contest29_081DC2AB
+	if_move_used_count_more_than 0x00 AI_contest29_081DC2AB
 	if_user_order_not_eq 0x00 AI_contest7D_5_081DC2AB
 	if_excitement_not_eq 0x04 AI_contest7D_5_081DC2AB
 	score 0x1E
@@ -192,7 +192,7 @@ Unknown_081DC348:
 	contest_80 AI_contest45_081DC348
 	end
 AI_contest3F_081DC348:
-	contest_3F 0x00 AI_end_081DC348
+	if_move_used_count_not_eq 0x00 AI_end_081DC348
 	contest_42 AI_end_081DC348
 	if_user_order_eq 0x00 AI_contest04_1_081DC348
 	if_user_order_eq 0x01 AI_contest04_2_081DC348
