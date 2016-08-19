@@ -6,43 +6,67 @@
 	.byte \score
 	.endm
 
-@ 01
-@ 02
-@ 03
+@ turn (AKA "Appeal No.")
 
-	.macro contest_04 param addr
+	.macro get_turn
+	.byte 0x01
+	.endm
+
+	.macro if_turn_less_than param, addr
+	.byte 0x02
+	.byte \param
+	.4byte \addr
+	.endm
+
+	.macro if_turn_more_than param, addr
+	.byte 0x03
+	.byte \param
+	.4byte \addr
+	.endm
+
+	.macro if_turn_eq param, addr
 	.byte 0x04
 	.byte \param
 	.4byte \addr
 	.endm
 
-	.macro contest_05 param addr
+	.macro if_turn_not_eq param, addr
 	.byte 0x05
 	.byte \param
 	.4byte \addr
 	.endm
 
-@ 06
+@ audience excitement
 
-	.macro contest_07 param addr
+	.macro get_excitement
+	.byte 0x06
+	.endm
+
+	.macro if_excitement_less_than param, addr
 	.byte 0x07
 	.byte \param
 	.4byte \addr
 	.endm
 
-@ 08
+	.macro if_excitement_more_than param, addr
+	.byte 0x08
+	.byte \param
+	.4byte \addr
+	.endm
 
-	.macro contest_09 param addr
+	.macro if_excitement_eq param, addr
 	.byte 0x09
 	.byte \param
 	.4byte \addr
 	.endm
 
-	.macro contest_0A param addr
+	.macro if_excitement_not_eq param, addr
 	.byte 0x0A
 	.byte \param
 	.4byte \addr
 	.endm
+
+@ the order that the user goes in the current turn
 
 	.macro get_user_order
 	.byte 0x0B
@@ -71,6 +95,8 @@
 	.byte \param
 	.4byte \addr
 	.endm
+
+@ user condition
 
 	.macro  get_user_condition
 	.byte 0x10
