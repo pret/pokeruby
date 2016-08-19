@@ -38,7 +38,74 @@ gUnknown_081DC118:: @ 81DC118
 	.4byte Unknown_081DCAF3
 	.4byte Unknown_081DCAF3
 	.4byte Unknown_081DCAF3
-	.incbin "baserom.gba", 0x001dc198, 0xE7 @ unreferenced?
+	
+	@ unreferenced
+	contest_05 0x00 ContestUnreferenced_80
+	contest_29 0x26 ContestUnreferenced_80
+	score 0x0A 
+ContestUnreferenced_80:
+	contest_80 ContestUnreferenced_0D
+	end
+ContestUnreferenced_0D:
+	contest_0D 0x01 ContestUnreferenced_end
+	contest_2C 0x02 ContestUnreferenced_end
+	contest_2C 0x03 ContestUnreferenced_end
+	score 0x0A 
+ContestUnreferenced_end:
+	end
+	contest_04 0x00 ContestUnreferenced_0F_1
+	contest_04 0x01 ContestUnreferenced_0F_2
+	contest_04 0x02 ContestUnreferenced_0F_3
+	contest_04 0x03 ContestUnreferenced_0F_4
+	contest_04 0x04 ContestUnreferenced_0F_5
+	end
+ContestUnreferenced_0F_1:
+	contest_0F 0x00 ContestUnreferenced_2B_1
+	contest_0F 0x01 ContestUnreferenced_2B_2
+	contest_0F 0x02 ContestUnreferenced_2B_1
+	contest_0F 0x03 ContestUnreferenced_2B_1 
+	end
+ContestUnreferenced_2B_1:
+	contest_2B 0x01 ContestUnreferenced_score
+	end
+ContestUnreferenced_2B_2:
+	contest_2B 0x01 ContestUnreferenced_score
+	end
+	contest_2B 0x01 ContestUnreferenced_score
+	end
+ContestUnreferenced_0F_2:
+	contest_0F 0x00 ContestUnreferenced_2B_1
+	contest_0F 0x01 ContestUnreferenced_2B_1
+	contest_0F 0x02 ContestUnreferenced_2B_1
+	contest_0F 0x03 ContestUnreferenced_2B_1
+	end
+ContestUnreferenced_0F_3:
+	contest_0F 0x00 ContestUnreferenced_2B_1
+	contest_0F 0x01 ContestUnreferenced_2B_1
+	contest_0F 0x02 ContestUnreferenced_2B_1
+	contest_0F 0x03 ContestUnreferenced_2B_1
+	end
+ContestUnreferenced_0F_4:
+	contest_0F 0x00 ContestUnreferenced_2B_1
+	contest_0F 0x01 ContestUnreferenced_2B_1
+	contest_0F 0x02 ContestUnreferenced_2B_1
+	contest_0F 0x03 ContestUnreferenced_2B_1
+	end
+ContestUnreferenced_0F_5:
+	contest_0F 0x00 ContestUnreferenced_2B_1
+	contest_0F 0x01 ContestUnreferenced_2B_1
+	contest_0F 0x02 ContestUnreferenced_2B_1
+	contest_0F 0x03 ContestUnreferenced_2B_1
+	end
+ContestUnreferenced_score:
+	score 0x0A 
+	end
+	end
+	contest_2E ContestUnreferenced_score2
+	end
+ContestUnreferenced_score2:
+	score 0x0A 
+	end
 
 Unknown_081DC27F:
 	if_effect 3, AI_end_081DC27F

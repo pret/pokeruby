@@ -139,10 +139,26 @@
 	.endm
 
 @ 2A
-@ 2B
-@ 2C
+
+	.macro contest_2B param addr
+	.byte 0x2B
+	.byte \param
+	.4byte \addr
+	.endm
+
+	.macro contest_2C param addr
+	.byte 0x2C
+	.byte \param
+	.4byte \addr
+	.endm
+
 @ 2D
-@ 2E
+
+	.macro contest_2E addr
+	.byte 0x2E
+	.4byte \addr
+	.endm
+	
 @ 2F
 @ 30
 @ 31
