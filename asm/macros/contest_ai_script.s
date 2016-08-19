@@ -275,7 +275,7 @@
 	.4byte \addr
 	.endm
 
-@ whether the current move is a combo starter
+@ whether the current move is a combo starter (with another move in the moveset)
 
 	.macro check_combo_starter
 	.byte 0x40
@@ -291,10 +291,18 @@
 	.4byte \addr
 	.endm
 
-@ 43
-@ 44
+@ whether the current move is a combo finisher (with another move in the moveset)
 
-	.macro contest_45 addr
+	.macro check_combo_finisher
+	.byte 0x43
+	.endm
+
+	.macro if_combo_finisher addr
+	.byte 0x44
+	.4byte \addr
+	.endm
+
+	.macro if_not_combo_finisher addr
 	.byte 0x45
 	.4byte \addr
 	.endm

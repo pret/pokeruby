@@ -200,7 +200,7 @@ AI_contest3F_081DC348:
 	if_user_order_eq 0x03 AI_contest04_4_081DC348
 	end
 AI_contest45_081DC348:
-	contest_45 AI_end_081DC348
+	if_not_combo_finisher AI_end_081DC348
 	score 0xF6
 	end
 AI_score_081DC348:
