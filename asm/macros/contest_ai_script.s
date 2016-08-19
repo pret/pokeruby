@@ -44,22 +44,29 @@
 	.4byte \addr
 	.endm
 
-@ 0B
-@ 0C
+	.macro get_user_order
+	.byte 0x0B
+	.endm
 
-	.macro contest_0D param addr
+	.macro if_user_order_less_than param addr
+	.byte 0x0C
+	.byte \param
+	.4byte \addr
+	.endm
+
+	.macro if_user_order_more_than param addr
 	.byte 0x0D
 	.byte \param
 	.4byte \addr
 	.endm
 	
-	.macro contest_0E param addr
+	.macro if_user_order_eq param addr
 	.byte 0x0E
 	.byte \param
 	.4byte \addr
 	.endm
 
-	.macro contest_0F param addr
+	.macro if_user_order_not_eq param addr
 	.byte 0x0F
 	.byte \param
 	.4byte \addr
