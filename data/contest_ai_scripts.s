@@ -368,7 +368,7 @@ ContestEffect32_score2:
 ContestEffect32_score3:
 	contest_55 0x00 ContestEffect32_score4
 	score 0x05
-	contest_7F ContestEffect32_score4
+	jump ContestEffect32_score4
 	end
 ContestEffect32_score4:
 	contest_55 0x01 ContestEffectEnd
@@ -377,12 +377,12 @@ ContestEffect32_score4:
 ContestEffect32_score5:
 	contest_55 0x00 ContestEffect32_score6
 	score 0x05
-	contest_7F ContestEffect32_score6
+	jump ContestEffect32_score6
 	end
 ContestEffect32_score6:
 	contest_55 0x01 ContestEffect32_score7
 	score 0x05
-	contest_7F ContestEffect32_score7
+	jump ContestEffect32_score7
 	end
 ContestEffect32_score7:
 	contest_55 0x02 ContestEffectEnd
@@ -417,14 +417,14 @@ ContestEffect46_score4:
 
 ContestEffect27:
 	if_user_order_eq 0x00 ContestEffectEnd
-	contest_7F ContestEffect27_55_1
+	jump ContestEffect27_55_1
 	end
 ContestEffect27_55_1:
 	contest_55 0x00 ContestEffect27_noscore
-	contest_4C 0x00 0x00 ContestEffect27_noscore
-	contest_4C 0x00 0x01 ContestEffect27_score1
-	contest_4C 0x00 0x02 ContestEffect27_score2
-	contest_4C 0x00 0x03 ContestEffect27_score3
+	if_condition_eq 0x00 0x00 ContestEffect27_noscore
+	if_condition_eq 0x00 0x01 ContestEffect27_score1
+	if_condition_eq 0x00 0x02 ContestEffect27_score2
+	if_condition_eq 0x00 0x03 ContestEffect27_score3
 	end
 ContestEffect27_score1:
 	if_random 0x7D ContestEffect27_55_2
@@ -446,10 +446,10 @@ ContestEffect27_noscore:
 	end
 ContestEffect27_55_2:
 	contest_55 0x01 ContestEffect27_noscore2
-	contest_4C 0x01 0x00 ContestEffect27_noscore2
-	contest_4C 0x01 0x01 ContestEffect27_score4
-	contest_4C 0x01 0x02 ContestEffect27_score5
-	contest_4C 0x01 0x03 ContestEffect27_score6
+	if_condition_eq 0x01 0x00 ContestEffect27_noscore2
+	if_condition_eq 0x01 0x01 ContestEffect27_score4
+	if_condition_eq 0x01 0x02 ContestEffect27_score5
+	if_condition_eq 0x01 0x03 ContestEffect27_score6
 	end
 ContestEffect27_score4:
 	if_random 0x7D ContestEffect27_55_3
@@ -471,10 +471,10 @@ ContestEffect27_noscore2:
 	end
 ContestEffect27_55_3:
 	contest_55 0x02 ContestEffect27_end
-	contest_4C 0x02 0x00 ContestEffect27_end
-	contest_4C 0x02 0x01 ContestEffect27_score7
-	contest_4C 0x02 0x02 ContestEffect27_score8
-	contest_4C 0x02 0x03 ContestEffect27_score9
+	if_condition_eq 0x02 0x00 ContestEffect27_end
+	if_condition_eq 0x02 0x01 ContestEffect27_score7
+	if_condition_eq 0x02 0x02 ContestEffect27_score8
+	if_condition_eq 0x02 0x03 ContestEffect27_score9
 	end
 ContestEffect27_score7:
 	if_random 0x7D ContestEffectEnd
@@ -493,7 +493,7 @@ ContestEffect27_end:
 
 ContestEffect16or17:
 	if_user_order_eq 0x00 ContestEffectEnd
-	contest_7F ContestEffect16or17_55
+	jump ContestEffect16or17_55
 	end
 ContestEffect16or17_55:
 	contest_55 0x00 ContestEffect16or17_0E_1
@@ -524,7 +524,7 @@ ContestEffect16or17_0E_2:
 
 ContestEffect26:
 	if_user_order_eq 0x03 ContestEffectEnd
-	contest_7F ContestEffect26_55
+	jump ContestEffect26_55
 	end
 ContestEffect26_55:
 	contest_55 0x03 ContestEffect26_0E_1
@@ -552,11 +552,11 @@ ContestEffect26_0E_2:
 
 ContestEffect18:
 	if_turn_eq 0x04 ContestEffect18_score1
-	contest_7F ContestEffect18_0E
+	jump ContestEffect18_0E
 	end
 ContestEffect18_score1:
 	score 0x05
-	contest_7F ContestEffect18_0E
+	jump ContestEffect18_0E
 	end
 ContestEffect18_0E:
 	if_user_order_eq 0x00 ContestEffect18_score2

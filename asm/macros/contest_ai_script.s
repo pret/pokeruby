@@ -323,18 +323,41 @@
 	.4byte \addr
 	.endm
 
-@ 49
-@ 4A
-@ 4B
+@ condition of mon (indexed by order)
 
-	.macro contest_4C param1 param2 addr
-	.byte 0x4C
-	.byte \param1
-	.byte \param2
+	.macro get_condition mon
+	.byte 0x49
+	.byte \mon
+	.endm
+
+	.macro if_condition_less_than mon, value, addr
+	.byte 0x4A
+	.byte \mon
+	.byte \value
 	.4byte \addr
 	.endm
 
-@ 4D
+	.macro if_condition_more_than mon, value, addr
+	.byte 0x4B
+	.byte \mon
+	.byte \value
+	.4byte \addr
+	.endm
+
+	.macro if_condition_eq mon, value, addr
+	.byte 0x4C
+	.byte \mon
+	.byte \value
+	.4byte \addr
+	.endm
+
+	.macro if_condition_not_eq mon, value, addr
+	.byte 0x4D
+	.byte \mon
+	.byte \value
+	.4byte \addr
+	.endm
+
 @ 4E
 @ 4F
 @ 50
@@ -415,7 +438,7 @@
 
 @ 7E
 
-	.macro contest_7F addr
+	.macro jump addr
 	.byte 0x7F
 	.4byte \addr
 	.endm
