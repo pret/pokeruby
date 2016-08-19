@@ -131,41 +131,68 @@
 @ 1C
 @ 1D
 @ 1E
-@ 1F
 
-	.macro contest_20 param addr
+@ contest type
+
+	.macro get_contest_type
+	.byte 0x1F
+	.endm
+
+	.macro if_contest_type_eq param, addr
 	.byte 0x20
 	.byte \param
 	.4byte \addr
 	.endm
 
-@ 21
-@ 22
-	
-	.macro contest_23 param addr
+	.macro if_contest_type_not_eq param, addr
+	.byte 0x21
+	.byte \param
+	.4byte \addr
+	.endm
+
+@ move excitement (change in excitement due to move)
+
+	.macro get_move_excitement
+	.byte 0x22
+	.endm
+
+	.macro if_move_excitement_less_than param, addr
 	.byte 0x23
 	.byte \param
 	.4byte \addr
 	.endm
 
-@ 24
+	.macro if_move_excitement_more_than param, addr
+	.byte 0x24
+	.byte \param
+	.4byte \addr
+	.endm
 
-	.macro contest_25 param addr
+	.macro if_move_excitement_eq param, addr
 	.byte 0x25
 	.byte \param
 	.4byte \addr
 	.endm
 
-@ 26
-@ 27
-	
-	.macro if_effect param addr
+	.macro if_move_excitement_not_eq param, addr
+	.byte 0x26
+	.byte \param
+	.4byte \addr
+	.endm
+
+@ move effect
+
+	.macro get_effect
+	.byte 0x27
+	.endm
+
+	.macro if_effect_eq param, addr
 	.byte 0x28
 	.byte \param
 	.4byte \addr
 	.endm
 
-	.macro contest_29 param addr
+	.macro if_effect_not_eq param, addr
 	.byte 0x29
 	.byte \param
 	.4byte \addr

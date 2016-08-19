@@ -41,7 +41,7 @@ gUnknown_081DC118:: @ 81DC118
 	
 	@ unreferenced
 	if_turn_not_eq 0x00 ContestUnreferenced_80
-	contest_29 0x26 ContestUnreferenced_80
+	if_effect_not_eq 0x26 ContestUnreferenced_80
 	score 0x0A 
 ContestUnreferenced_80:
 	contest_80 ContestUnreferenced_0D
@@ -108,7 +108,7 @@ ContestUnreferenced_score2:
 	end
 
 Unknown_081DC27F:
-	if_effect 3, AI_end_081DC27F
+	if_effect_eq 3, AI_end_081DC27F
 	if_move_used_count_eq 1 AI_score1_081DC27F
 	if_move_used_count_eq 2 AI_score2_081DC27F
 	if_move_used_count_eq 3 AI_score3_081DC27F
@@ -130,9 +130,9 @@ AI_end_081DC27F:
 	end
 
 Unknown_081DC2AB:
-	contest_23 0x00 AI_contest09_081DC2AB
-	contest_25 0x00 AI_contest7D_4_081DC2AB
-	contest_25 0x01 AI_contest3D_081DC2AB
+	if_move_excitement_less_than 0x00 AI_contest09_081DC2AB
+	if_move_excitement_eq 0x00 AI_contest7D_4_081DC2AB
+	if_move_excitement_eq 0x01 AI_contest3D_081DC2AB
 	end
 AI_contest09_081DC2AB:
 	if_excitement_eq 0x04 AI_contest0F_1_081DC2AB
@@ -178,7 +178,7 @@ AI_contest7D_5_081DC2AB:
 	score 0x0A 
 	end
 AI_contest29_081DC2AB:
-	contest_29 0x03 AI_end_081DC2AB
+	if_effect_not_eq 0x03 AI_end_081DC2AB
 	if_user_order_not_eq 0x00 AI_contest7D_5_081DC2AB
 	if_excitement_not_eq 0x04 AI_contest7D_5_081DC2AB
 	score 0x1E 
@@ -233,20 +233,20 @@ AI_end_081DC348:
 	end
 
 Unknown_081DC3C7:
-	if_effect 39, ContestEffect39
-	if_effect 40, ContestEffect40
-	if_effect 41, ContestEffect41
-	if_effect 3, ContestEffect3
-	if_effect 38, ContestEffect38
-	if_effect 47, ContestEffect47
-	if_effect 31, ContestEffect31
-	if_effect 32, ContestEffect32
-	if_effect 46, ContestEffect46
-	if_effect 27, ContestEffect27
-	if_effect 16, ContestEffect16or17
-	if_effect 17, ContestEffect16or17
-	if_effect 26, ContestEffect26
-	if_effect 18, ContestEffect18
+	if_effect_eq 39, ContestEffect39
+	if_effect_eq 40, ContestEffect40
+	if_effect_eq 41, ContestEffect41
+	if_effect_eq 3, ContestEffect3
+	if_effect_eq 38, ContestEffect38
+	if_effect_eq 47, ContestEffect47
+	if_effect_eq 31, ContestEffect31
+	if_effect_eq 32, ContestEffect32
+	if_effect_eq 46, ContestEffect46
+	if_effect_eq 27, ContestEffect27
+	if_effect_eq 16, ContestEffect16or17
+	if_effect_eq 17, ContestEffect16or17
+	if_effect_eq 26, ContestEffect26
+	if_effect_eq 18, ContestEffect18
 	end
 
 ContestEffect39:
@@ -584,9 +584,9 @@ ContestEffectEnd:
 	end
 
 Unknown_081DC7DE:
-	contest_20 0x02 AI_contest7D_081DC7DE
-	contest_20 0x03 AI_contest7D_081DC7DE
-	contest_20 0x04 AI_contest7D_081DC7DE
+	if_contest_type_eq CONTEST_CUTE, AI_contest7D_081DC7DE
+	if_contest_type_eq CONTEST_SMART, AI_contest7D_081DC7DE
+	if_contest_type_eq CONTEST_TOUGH, AI_contest7D_081DC7DE
 	end
 AI_contest7D_081DC7DE:
 	if_random 0x7D AI_end_081DC7DE
@@ -596,39 +596,39 @@ AI_end_081DC7DE:
 	end
 
 Unknown_081DC7FB:
-	if_effect 8, ContestEffect2_8
-	if_effect 10, ContestEffect2_8
-	if_effect 12, ContestEffect2_8
-	if_effect 14, ContestEffect2_8
-	if_effect 32, ContestEffect2_8
-	if_effect 35, ContestEffect2_8
-	if_effect 36, ContestEffect2_8
-	if_effect 37, ContestEffect2_8
-	if_effect 9, ContestEffect2_9
-	if_effect 11, ContestEffect2_9
-	if_effect 13, ContestEffect2_9
-	if_effect 15, ContestEffect2_9
-	if_effect 17, ContestEffect2_9
-	if_effect 16, ContestEffect2_9
-	if_effect 18, ContestEffect2_9
-	if_effect 19, ContestEffect2_9
-	if_effect 45, ContestEffect2_9
-	if_effect 20, ContestEffect2_9
-	if_effect 21, ContestEffect2_9
-	if_effect 22, ContestEffect2_9
-	if_effect 23, ContestEffect2_9
-	if_effect 24, ContestEffect2_9
-	if_effect 28, ContestEffect2_9
-	if_effect 27, ContestEffect2_9
-	if_effect 31, ContestEffect2_9
-	if_effect 25, ContestEffect2_25
-	if_effect 26, ContestEffect2_26
-	if_effect 47, ContestEffect2_26
-	if_effect 38, ContestEffect2_38
-	if_effect 4, ContestEffect2_4
-	if_effect 5, ContestEffect2_4
-	if_effect 6, ContestEffect2_4
-	if_effect 2, ContestEffect2_2
+	if_effect_eq 8, ContestEffect2_8
+	if_effect_eq 10, ContestEffect2_8
+	if_effect_eq 12, ContestEffect2_8
+	if_effect_eq 14, ContestEffect2_8
+	if_effect_eq 32, ContestEffect2_8
+	if_effect_eq 35, ContestEffect2_8
+	if_effect_eq 36, ContestEffect2_8
+	if_effect_eq 37, ContestEffect2_8
+	if_effect_eq 9, ContestEffect2_9
+	if_effect_eq 11, ContestEffect2_9
+	if_effect_eq 13, ContestEffect2_9
+	if_effect_eq 15, ContestEffect2_9
+	if_effect_eq 17, ContestEffect2_9
+	if_effect_eq 16, ContestEffect2_9
+	if_effect_eq 18, ContestEffect2_9
+	if_effect_eq 19, ContestEffect2_9
+	if_effect_eq 45, ContestEffect2_9
+	if_effect_eq 20, ContestEffect2_9
+	if_effect_eq 21, ContestEffect2_9
+	if_effect_eq 22, ContestEffect2_9
+	if_effect_eq 23, ContestEffect2_9
+	if_effect_eq 24, ContestEffect2_9
+	if_effect_eq 28, ContestEffect2_9
+	if_effect_eq 27, ContestEffect2_9
+	if_effect_eq 31, ContestEffect2_9
+	if_effect_eq 25, ContestEffect2_25
+	if_effect_eq 26, ContestEffect2_26
+	if_effect_eq 47, ContestEffect2_26
+	if_effect_eq 38, ContestEffect2_38
+	if_effect_eq 4, ContestEffect2_4
+	if_effect_eq 5, ContestEffect2_4
+	if_effect_eq 6, ContestEffect2_4
+	if_effect_eq 2, ContestEffect2_2
 	end
 
 ContestEffect2_8:
@@ -784,8 +784,8 @@ Unknown_081DCA4C:
 	if_user_order_eq 0x03 AI_effectcheck4_081DCA4C
 	end
 AI_effectcheck1_081DCA4C:
-	if_effect 0x1D AI_score1_081DCA4C
-	if_effect 0x21 AI_score2_081DCA4C
+	if_effect_eq 0x1D AI_score1_081DCA4C
+	if_effect_eq 0x21 AI_score2_081DCA4C
 	contest_2B 0x01 AI_random1_081DCA4C
 	end
 AI_score1_081DCA4C:
@@ -799,7 +799,7 @@ AI_random1_081DCA4C:
 	score 0x0A 
 	end
 AI_effectcheck2_081DCA4C:
-	if_effect 0x21 AI_score3_081DCA4C
+	if_effect_eq 0x21 AI_score3_081DCA4C
 	contest_2B 0x01 AI_random2_081DCA4C
 	end
 AI_score3_081DCA4C:
@@ -810,19 +810,19 @@ AI_random2_081DCA4C:
 	score 0x0A 
 	end
 AI_effectcheck3_081DCA4C:
-	if_effect 0x21 AI_score4_081DCA4C
-	if_effect 0x1F AI_score4_081DCA4C 
-	if_effect 0x01 AI_score4_081DCA4C
+	if_effect_eq 0x21 AI_score4_081DCA4C
+	if_effect_eq 0x1F AI_score4_081DCA4C 
+	if_effect_eq 0x01 AI_score4_081DCA4C
 	end
 AI_score4_081DCA4C:
 	score 0x05 
 	end
 AI_effectcheck4_081DCA4C:
-	if_effect 0x21 AI_score5_081DCA4C
-	if_effect 0x1E AI_score5_081DCA4C
-	if_effect 0x1F AI_score5_081DCA4C
-	if_effect 0x01 AI_score5_081DCA4C
-	if_effect 0x12 AI_score7_081DCA4C
+	if_effect_eq 0x21 AI_score5_081DCA4C
+	if_effect_eq 0x1E AI_score5_081DCA4C
+	if_effect_eq 0x1F AI_score5_081DCA4C
+	if_effect_eq 0x01 AI_score5_081DCA4C
+	if_effect_eq 0x12 AI_score7_081DCA4C
 	contest_2B 0x01 AI_score6_081DCA4C
 	contest_2B 0x03 AI_random3_081DCA4C
 	end
