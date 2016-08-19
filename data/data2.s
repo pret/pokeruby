@@ -7059,7 +7059,7 @@ gJumpLanding_MetatileFunctionPointers:: @ 8376010
 	.4byte MetatileBehavior_IsShallowFlowingWater
 	.4byte sub_8056D9C
 
-@ This table contains bitmasks used for determining the animation that happens when the player lands on 
+@ This table contains bitmasks used for determining the animation that happens when the player lands on
 @ the ground after jumping over a ledge. Each entry corresponds to the gJumpLanding_MetatileFunctionPointers table.
 	.align 2
 gJumpLanding_Bitmasks:: @ 8376028
@@ -24425,8 +24425,65 @@ gUnknown_08401E60:: @ 8401E60
 	.4byte sub_812AE44
 	.4byte sub_812AE88
 
+	.align 2
 gUnknown_08402080:: @ 8402080
-	.incbin "baserom.gba", 0x00402080, 0xE4
+	.4byte sub_812B864
+	.4byte sub_812B870
+	.4byte sub_812B87C
+	.4byte sub_812B888
+	.4byte sub_812B894
+	.4byte sub_812B8A0
+	.4byte sub_812B8AC
+	.4byte sub_812B8B8
+	.4byte sub_812B994
+	.4byte sub_812B9A0
+	.4byte sub_812B9AC
+	.4byte sub_812B9B8
+	.4byte sub_812B9C4
+	.4byte sub_812BA14
+	.4byte sub_812BA70
+	.4byte sub_812BA7C
+	.4byte dp01t_10_6_message
+	.4byte dp01t_11_6_message_for_player_only
+	.4byte sub_812BB10
+	.4byte sub_812BBFC
+	.4byte sub_812BC08
+	.4byte sub_812BC14
+	.4byte sub_812BC54
+	.4byte sub_812BC60
+	.4byte sub_812BC6C
+	.4byte sub_812BC78
+	.4byte sub_812BC84
+	.4byte sub_812BCC0
+	.4byte sub_812BCCC
+	.4byte sub_812BCD8
+	.4byte sub_812BCE4
+	.4byte sub_812BCF0
+	.4byte sub_812BCFC
+	.4byte sub_812BD08
+	.4byte sub_812BD14
+	.4byte sub_812BD20
+	.4byte sub_812BD2C
+	.4byte sub_812BD38
+	.4byte sub_812BD44
+	.4byte sub_812BD50
+	.4byte sub_812BD5C
+	.4byte sub_812BD68
+	.4byte sub_812BD74
+	.4byte sub_812BD80
+	.4byte sub_812BDC4
+	.4byte sub_812BDF4
+	.4byte dp01t_2E_6_battle_intro
+	.4byte sub_812BE64
+	.4byte sub_812BEB0
+	.4byte sub_812BEBC
+	.4byte sub_812BEC8
+	.4byte sub_812BED4
+	.4byte sub_812BEE0
+	.4byte sub_812BF3C
+	.4byte sub_812BF48
+	.4byte sub_812BF54
+	.4byte nullsub_78
 
 	.align 2
 gSpriteAnim_8402164:: @ 8402164
