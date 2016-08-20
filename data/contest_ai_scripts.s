@@ -3,7 +3,7 @@
 	.include "constants/constants.s"
 
 	.section script_data, "aw", %progbits
-	
+
 	enum_start
 	enum MON_1
 	enum MON_2
@@ -12,13 +12,13 @@
 
 	.align 2
 gUnknown_081DC118:: @ 81DC118
-	.4byte CheckForBadMove
-	.4byte CheckForCombo
-	.4byte CheckBoring
-	.4byte CheckExcitement
-	.4byte CheckOrder
-	.4byte CheckForGoodMove
-	.4byte TryErraticInCuteSmartTough
+	.4byte AI_CheckForBadMove
+	.4byte AI_CheckForCombo
+	.4byte AI_CheckBoring
+	.4byte AI_CheckExcitement
+	.4byte AI_CheckOrder
+	.4byte AI_CheckForGoodMove
+	.4byte AI_Erratic
 	.4byte AI_nothing
 	.4byte AI_nothing
 	.4byte AI_nothing
@@ -113,7 +113,7 @@ ContestUnreferenced_score2:
 	score +10
 	end
 
-CheckBoring:
+AI_CheckBoring:
 	if_effect_eq CONTEST_EFFECT_REPETITION_NOT_BORING, AI_end_081DC27F
 	if_move_used_count_eq 1 AI_score1_081DC27F
 	if_move_used_count_eq 2 AI_score2_081DC27F
@@ -135,75 +135,75 @@ AI_score4_081DC27F:
 AI_end_081DC27F:
 	end
 
-CheckExcitement:
-	if_move_excitement_less_than 0 AI_contest09_081DC2AB
-	if_move_excitement_eq 0 AI_contest7D_4_081DC2AB
-	if_move_excitement_eq 1 AI_contest3D_081DC2AB
+AI_CheckExcitement:
+	if_move_excitement_less_than 0, AI_contest09_081DC2AB
+	if_move_excitement_eq 0, AI_contest7D_4_081DC2AB
+	if_move_excitement_eq 1, AI_contest3D_081DC2AB
 	end
 AI_contest09_081DC2AB:
-	if_excitement_eq 4 AI_contest0F_1_081DC2AB
-	if_excitement_eq 3 AI_contest0F_2_081DC2AB
+	if_excitement_eq 4, AI_contest0F_1_081DC2AB
+	if_excitement_eq 3, AI_contest0F_2_081DC2AB
 	if_user_has_exciting_move AI_end_081DC2AB
 	score +15
 	end
 AI_contest0F_1_081DC2AB:
-	if_user_order_not_eq MON_1 AI_contest7D_1_081DC2AB
-	if_random 51 AI_end_081DC2AB
+	if_user_order_not_eq MON_1, AI_contest7D_1_081DC2AB
+	if_random 51, AI_end_081DC2AB
 	score +20
 	end
 AI_contest7D_1_081DC2AB:
-	if_random 127 AI_end_081DC2AB
+	if_random 127, AI_end_081DC2AB
 	score -10
 	end
 AI_contest0F_2_081DC2AB:
-	if_user_order_not_eq MON_1 AI_contest7D_3_081DC2AB
-	if_turn_eq 4 AI_score_081DC2AB
+	if_user_order_not_eq MON_1, AI_contest7D_3_081DC2AB
+	if_turn_eq 4, AI_score_081DC2AB
 AI_contest7D_2_081DC2AB:
-	if_random 51 AI_end_081DC2AB
+	if_random 51, AI_end_081DC2AB
 	score +10
 	end
 AI_score_081DC2AB:
 	score +15
 	end
 AI_contest7D_3_081DC2AB:
-	if_random 127 AI_end_081DC2AB
+	if_random 127, AI_end_081DC2AB
 	score +10
 	end
 AI_contest7D_4_081DC2AB:
-	if_random 127 AI_end_081DC2AB
+	if_random 127, AI_end_081DC2AB
 	score +10
 	end
 AI_contest3D_081DC2AB:
-	if_move_used_count_more_than 0 AI_contest29_081DC2AB
-	if_user_order_not_eq MON_1 AI_contest7D_5_081DC2AB
-	if_excitement_not_eq 4 AI_contest7D_5_081DC2AB
+	if_move_used_count_more_than 0, AI_contest29_081DC2AB
+	if_user_order_not_eq MON_1, AI_contest7D_5_081DC2AB
+	if_excitement_not_eq 4, AI_contest7D_5_081DC2AB
 	score +30
 	end
 AI_contest7D_5_081DC2AB:
-	if_random 100 AI_end_081DC2AB
+	if_random 100, AI_end_081DC2AB
 	score +10
 	end
 AI_contest29_081DC2AB:
-	if_effect_not_eq CONTEST_EFFECT_REPETITION_NOT_BORING AI_end_081DC2AB
-	if_user_order_not_eq MON_1 AI_contest7D_5_081DC2AB
-	if_excitement_not_eq 4 AI_contest7D_5_081DC2AB
+	if_effect_not_eq CONTEST_EFFECT_REPETITION_NOT_BORING, AI_end_081DC2AB
+	if_user_order_not_eq MON_1, AI_contest7D_5_081DC2AB
+	if_excitement_not_eq 4, AI_contest7D_5_081DC2AB
 	score +30
 	end
 AI_end_081DC2AB:
 	end
 
-CheckForCombo:
+AI_CheckForCombo:
 	if_would_finish_combo AI_score_081DC348
 	call AI_contest3F_081DC348
 	call AI_contest45_081DC348
 	end
 AI_contest3F_081DC348:
-	if_move_used_count_not_eq 0 AI_end_081DC348
+	if_move_used_count_not_eq 0, AI_end_081DC348
 	if_not_combo_starter AI_end_081DC348
-	if_user_order_eq MON_1 AI_contest04_1_081DC348
-	if_user_order_eq MON_2 AI_contest04_2_081DC348
-	if_user_order_eq MON_3 AI_contest04_3_081DC348
-	if_user_order_eq MON_4 AI_contest04_4_081DC348
+	if_user_order_eq MON_1, AI_contest04_1_081DC348
+	if_user_order_eq MON_2, AI_contest04_2_081DC348
+	if_user_order_eq MON_3, AI_contest04_3_081DC348
+	if_user_order_eq MON_4, AI_contest04_4_081DC348
 	end
 AI_contest45_081DC348:
 	if_not_combo_finisher AI_end_081DC348
@@ -213,32 +213,32 @@ AI_score_081DC348:
 	score +25
 	end
 AI_contest04_1_081DC348:
-	if_turn_eq 4 AI_contest7D_081DC348
-	if_random 150 AI_end_081DC348
+	if_turn_eq 4, AI_contest7D_081DC348
+	if_random 150, AI_end_081DC348
 	score +10
 	end
 AI_contest04_2_081DC348:
-	if_turn_eq 4 AI_contest7D_081DC348
-	if_random 125 AI_end_081DC348
+	if_turn_eq 4, AI_contest7D_081DC348
+	if_random 125, AI_end_081DC348
 	score +10
 	end
 AI_contest04_3_081DC348:
-	if_turn_eq 4 AI_contest7D_081DC348
-	if_random 50 AI_end_081DC348
+	if_turn_eq 4, AI_contest7D_081DC348
+	if_random 50, AI_end_081DC348
 	score +10
 	end
 AI_contest04_4_081DC348:
-	if_turn_eq 4 AI_contest7D_081DC348
+	if_turn_eq 4, AI_contest7D_081DC348
 	score +10
 	end
 AI_contest7D_081DC348:
-	if_random 125 AI_end_081DC348
+	if_random 125, AI_end_081DC348
 	score -15
 	end
 AI_end_081DC348:
 	end
 
-CheckForGoodMove:
+AI_CheckForGoodMove:
 	if_effect_eq CONTEST_EFFECT_BETTER_WITH_GOOD_CONDITION, ContestEffect39
 	if_effect_eq CONTEST_EFFECT_NEXT_APPEAL_EARLIER, ContestEffect40
 	if_effect_eq CONTEST_EFFECT_NEXT_APPEAL_LATER, ContestEffect41
@@ -256,20 +256,20 @@ CheckForGoodMove:
 	end
 
 ContestEffect39:
-	if_user_condition_eq 0x03 ContestEffect39_score1
-	if_user_condition_eq 0x02 ContestEffect39_score2
-	if_user_condition_eq 0x01 ContestEffect39_score3
-	if_user_condition_eq 0x00 ContestEffect39_score4
+	if_user_condition_eq 3, ContestEffect39_score1
+	if_user_condition_eq 2, ContestEffect39_score2
+	if_user_condition_eq 1, ContestEffect39_score3
+	if_user_condition_eq 0, ContestEffect39_score4
 	end
 ContestEffect39_score1:
 	score +20
 	end
 ContestEffect39_score2:
-	if_random 125 ContestEffectEnd
+	if_random 125, ContestEffectEnd
 	score +15
 	end
 ContestEffect39_score3:
-	if_random 125 ContestEffectEnd
+	if_random 125, ContestEffectEnd
 	score +5
 	end
 ContestEffect39_score4:
@@ -277,28 +277,28 @@ ContestEffect39_score4:
 	end
 
 ContestEffect40:
-	if_effect_in_user_moveset CONTEST_EFFECT_BETTER_IF_FIRST ContestEffectEnd
-	if_random 50 ContestEffectEnd
+	if_effect_in_user_moveset CONTEST_EFFECT_BETTER_IF_FIRST, ContestEffectEnd
+	if_random 50, ContestEffectEnd
 	score +20
 	end
 
 ContestEffect41:
-	if_effect_in_user_moveset CONTEST_EFFECT_BETTER_IF_LAST ContestEffectEnd
-	if_random 50 ContestEffectEnd
+	if_effect_in_user_moveset CONTEST_EFFECT_BETTER_IF_LAST, ContestEffectEnd
+	if_random 50, ContestEffectEnd
 	score +20
 	end
 
 ContestEffect3:
-	if_user_order_not_eq MON_4 ContestEffectEnd
-	if_random 50 ContestEffectEnd
+	if_user_order_not_eq MON_4, ContestEffectEnd
+	if_random 50, ContestEffectEnd
 	score +15
 	end
-	if_turn_eq 4 ContestEffect3_7D
-	if_random 220 ContestEffect3_score
+	if_turn_eq 4, ContestEffect3_7D
+	if_random 220, ContestEffect3_score
 	score +10
 	end
 ContestEffect3_7D:
-	if_random 20 ContestEffectEnd
+	if_random 20, ContestEffectEnd
 	score +15
 	end
 ContestEffect3_score:
@@ -306,23 +306,23 @@ ContestEffect3_score:
 	end
 
 ContestEffect38:
-	if_effect_in_user_moveset CONTEST_EFFECT_BETTER_WITH_GOOD_CONDITION ContestEffect38_contest04
-	if_user_condition_eq 0x03 ContestEffect38_score1
-	if_random 50 ContestEffectEnd
+	if_effect_in_user_moveset CONTEST_EFFECT_BETTER_WITH_GOOD_CONDITION, ContestEffect38_contest04
+	if_user_condition_eq 3, ContestEffect38_score1
+	if_random 50, ContestEffectEnd
 	score +15
 	end
 ContestEffect38_score1:
 	score -10
 	end
 ContestEffect38_contest04:
-	if_turn_eq 4 ContestEffect38_score2
-	if_turn_eq 0 ContestEffect38_random
-	if_move_used_count_eq 1 ContestEffectEnd
-	if_random 125 ContestEffectEnd
+	if_turn_eq 4, ContestEffect38_score2
+	if_turn_eq 0, ContestEffect38_random
+	if_move_used_count_eq 1, ContestEffectEnd
+	if_random 125, ContestEffectEnd
 	score +10
 	end
 ContestEffect38_random:
-	if_random 100 ContestEffectEnd
+	if_random 100, ContestEffectEnd
 	score +10
 	end
 ContestEffect38_score2:
@@ -330,23 +330,23 @@ ContestEffect38_score2:
 	end
 
 ContestEffect47:
-	if_move_used_count_eq 1 ContestEffectEnd
-	if_user_order_eq MON_1 ContestEffect47_random
-	if_user_order_eq MON_2 ContestEffect47_random
-	if_turn_not_eq 4 ContestEffectEnd
+	if_move_used_count_eq 1, ContestEffectEnd
+	if_user_order_eq MON_1, ContestEffect47_random
+	if_user_order_eq MON_2, ContestEffect47_random
+	if_turn_not_eq 4, ContestEffectEnd
 	if_user_has_exciting_move ContestEffectEnd
-	if_excitement_less_than 1 ContestEffectEnd
+	if_excitement_less_than 1, ContestEffectEnd
 	score +10
 	end
 ContestEffect47_random:
-	if_random 127 ContestEffectEnd
+	if_random 127, ContestEffectEnd
 	score +10
 	end
 
 ContestEffect31:
-	if_user_order_eq MON_2 ContestEffect31_score1
-	if_user_order_eq MON_3 ContestEffect31_score2
-	if_user_order_eq MON_4 ContestEffect31_score3
+	if_user_order_eq MON_2, ContestEffect31_score1
+	if_user_order_eq MON_3, ContestEffect31_score2
+	if_user_order_eq MON_4, ContestEffect31_score3
 	end
 ContestEffect31_score1:
 	score +5
@@ -396,28 +396,28 @@ ContestEffect32_score7:
 	end
 
 ContestEffect46:
-	if_user_order_eq MON_1 ContestEffect46_05
-	if_user_order_more_than MON_1 ContestEffect46_score4
+	if_user_order_eq MON_1, ContestEffect46_05
+	if_user_order_more_than MON_1, ContestEffect46_score4
 	end
 ContestEffect46_05:
-	if_turn_not_eq 0 ContestEffect46_score1
-	if_excitement_eq 4 ContestEffect46_score2
-	if_excitement_eq 3 ContestEffect46_score3
+	if_turn_not_eq 0, ContestEffect46_score1
+	if_excitement_eq 4, ContestEffect46_score2
+	if_excitement_eq 3, ContestEffect46_score3
 	end
 ContestEffect46_score1:
-	if_random 125 ContestEffectEnd
+	if_random 125, ContestEffectEnd
 	score -15
 	end
 ContestEffect46_score2:
-	if_random 125 ContestEffectEnd
+	if_random 125, ContestEffectEnd
 	score +20
 	end
 ContestEffect46_score3:
-	if_random 125 ContestEffectEnd
+	if_random 125, ContestEffectEnd
 	score +15
 	end
 ContestEffect46_score4:
-	if_random 178 ContestEffectEnd
+	if_random 178, ContestEffectEnd
 	score +10
 	end
 
@@ -557,7 +557,7 @@ ContestEffect_FollowingMonsNervous_CheckMon2:
 	end
 
 ContestEffect18:
-	if_turn_eq 4 ContestEffect18_score1
+	if_turn_eq 4, ContestEffect18_score1
 	jump ContestEffect18_0E
 	end
 ContestEffect18_score1:
@@ -565,43 +565,44 @@ ContestEffect18_score1:
 	jump ContestEffect18_0E
 	end
 ContestEffect18_0E:
-	if_user_order_eq MON_1 ContestEffect18_score2
-	if_user_order_eq MON_2 ContestEffect18_random1
-	if_user_order_eq MON_3 ContestEffect18_random2
-	if_user_order_eq MON_4 ContestEffect18_random3
+	if_user_order_eq MON_1, ContestEffect18_score2
+	if_user_order_eq MON_2, ContestEffect18_random1
+	if_user_order_eq MON_3, ContestEffect18_random2
+	if_user_order_eq MON_4, ContestEffect18_random3
 	end
 ContestEffect18_score2:
 	score -15
 	end
 ContestEffect18_random1:
-	if_random 125 ContestEffectEnd
+	if_random 125, ContestEffectEnd
 	score -10
 	end
 ContestEffect18_random2:
-	if_random 125 ContestEffectEnd
+	if_random 125, ContestEffectEnd
 	score +5
 	end
 ContestEffect18_random3:
-	if_random 125 ContestEffectEnd
+	if_random 125, ContestEffectEnd
 	score +15
 	end
 
 ContestEffectEnd:
 	end
 
-TryErraticInCuteSmartTough:
-	if_contest_type_eq CONTEST_CUTE, AI_contest7D_081DC7DE
-	if_contest_type_eq CONTEST_SMART, AI_contest7D_081DC7DE
-	if_contest_type_eq CONTEST_TOUGH, AI_contest7D_081DC7DE
+@ Randomly encourage moves in Cute, Smart, and Tough contests.
+AI_Erratic:
+	if_contest_type_eq CONTEST_CUTE, Erratic_CuteSmartTough
+	if_contest_type_eq CONTEST_SMART, Erratic_CuteSmartTough
+	if_contest_type_eq CONTEST_TOUGH, Erratic_CuteSmartTough
 	end
-AI_contest7D_081DC7DE:
-	if_random 125 AI_end_081DC7DE
+Erratic_CuteSmartTough:
+	if_random 125, Erratic_NoScoreIncrease
 	score +10
 	end
-AI_end_081DC7DE:
+Erratic_NoScoreIncrease:
 	end
 
-CheckForBadMove:
+AI_CheckForBadMove:
 	if_effect_eq CONTEST_EFFECT_STARTLE_FRONT_MON, ContestEffect2_8
 	if_effect_eq CONTEST_EFFECT_STARTLE_PREV_MON, ContestEffect2_8
 	if_effect_eq CONTEST_EFFECT_BADLY_STARTLE_FRONT_MON, ContestEffect2_8
@@ -783,7 +784,7 @@ ContestEffect2_2_score5:
 ContestEffectEnd2:
 	end
 
-CheckOrder:
+AI_CheckOrder:
 	if_user_order_eq MON_1, AI_effectcheck1_081DCA4C
 	if_user_order_eq MON_2, AI_effectcheck2_081DCA4C
 	if_user_order_eq MON_3, AI_effectcheck3_081DCA4C
