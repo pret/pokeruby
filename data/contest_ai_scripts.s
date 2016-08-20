@@ -45,68 +45,75 @@ gUnknown_081DC118:: @ 81DC118
 	.4byte AI_Nothing
 	.4byte AI_Nothing
 
-	@ unreferenced
-	if_turn_not_eq 0 ContestUnreferenced_80
-	if_effect_not_eq CONTEST_EFFECT_IMPROVE_CONDITION_PREVENT_NERVOUSNESS ContestUnreferenced_80
+@ Unreferenced AI routine to encourage moves that improve condition on the first
+@ turn. Additionally, it checks the appeal order of the user and the effect
+@ type, but the code is buggy and doesn't affect the score.
+	if_turn_not_eq 0, ContestUnreferenced_80
+	if_effect_not_eq CONTEST_EFFECT_IMPROVE_CONDITION_PREVENT_NERVOUSNESS, ContestUnreferenced_80
 	score +10
 ContestUnreferenced_80:
 	call ContestUnreferenced_0D
 	end
 ContestUnreferenced_0D:
-	if_user_order_more_than MON_2 ContestUnreferenced_end
-	if_effect_type_not_eq 2 ContestUnreferenced_end
-	if_effect_type_not_eq 3 ContestUnreferenced_end
-	score +10
+	if_user_order_more_than MON_2, ContestUnreferenced_end
+	if_effect_type_not_eq 2, ContestUnreferenced_end
+	if_effect_type_not_eq 3, ContestUnreferenced_end
+	score +10 @ unreachable
 ContestUnreferenced_end:
 	end
-	if_turn_eq 0 ContestUnreferenced_0F_1
-	if_turn_eq 1 ContestUnreferenced_0F_2
-	if_turn_eq 2 ContestUnreferenced_0F_3
-	if_turn_eq 3 ContestUnreferenced_0F_4
-	if_turn_eq 4 ContestUnreferenced_0F_5
+
+@ Unreferenced AI routine that doesn't make much sense.
+	if_turn_eq 0, ContestUnreferenced_0F_1
+	if_turn_eq 1, ContestUnreferenced_0F_2
+	if_turn_eq 2, ContestUnreferenced_0F_3
+	if_turn_eq 3, ContestUnreferenced_0F_4
+	if_turn_eq 4, ContestUnreferenced_0F_5
 	end
 ContestUnreferenced_0F_1:
-	if_user_order_not_eq MON_1 ContestUnreferenced_2B_1
-	if_user_order_not_eq MON_2 ContestUnreferenced_2B_2
-	if_user_order_not_eq MON_3 ContestUnreferenced_2B_1
-	if_user_order_not_eq MON_4 ContestUnreferenced_2B_1
+	if_user_order_not_eq MON_1, ContestUnreferenced_2B_1
+	if_user_order_not_eq MON_2, ContestUnreferenced_2B_2
+	if_user_order_not_eq MON_3, ContestUnreferenced_2B_1
+	if_user_order_not_eq MON_4, ContestUnreferenced_2B_1
 	end
 ContestUnreferenced_2B_1:
-	if_effect_type_eq 1 ContestUnreferenced_score
+	if_effect_type_eq 1, ContestUnreferenced_score
 	end
 ContestUnreferenced_2B_2:
-	if_effect_type_eq 1 ContestUnreferenced_score
+	if_effect_type_eq 1, ContestUnreferenced_score
 	end
-	if_effect_type_eq 1 ContestUnreferenced_score
+	if_effect_type_eq 1, ContestUnreferenced_score
 	end
 ContestUnreferenced_0F_2:
-	if_user_order_not_eq MON_1 ContestUnreferenced_2B_1
-	if_user_order_not_eq MON_2 ContestUnreferenced_2B_1
-	if_user_order_not_eq MON_3 ContestUnreferenced_2B_1
-	if_user_order_not_eq MON_4 ContestUnreferenced_2B_1
+	if_user_order_not_eq MON_1, ContestUnreferenced_2B_1
+	if_user_order_not_eq MON_2, ContestUnreferenced_2B_1
+	if_user_order_not_eq MON_3, ContestUnreferenced_2B_1
+	if_user_order_not_eq MON_4, ContestUnreferenced_2B_1
 	end
 ContestUnreferenced_0F_3:
-	if_user_order_not_eq MON_1 ContestUnreferenced_2B_1
-	if_user_order_not_eq MON_2 ContestUnreferenced_2B_1
-	if_user_order_not_eq MON_3 ContestUnreferenced_2B_1
-	if_user_order_not_eq MON_4 ContestUnreferenced_2B_1
+	if_user_order_not_eq MON_1, ContestUnreferenced_2B_1
+	if_user_order_not_eq MON_2, ContestUnreferenced_2B_1
+	if_user_order_not_eq MON_3, ContestUnreferenced_2B_1
+	if_user_order_not_eq MON_4, ContestUnreferenced_2B_1
 	end
 ContestUnreferenced_0F_4:
-	if_user_order_not_eq MON_1 ContestUnreferenced_2B_1
-	if_user_order_not_eq MON_2 ContestUnreferenced_2B_1
-	if_user_order_not_eq MON_3 ContestUnreferenced_2B_1
-	if_user_order_not_eq MON_4 ContestUnreferenced_2B_1
+	if_user_order_not_eq MON_1, ContestUnreferenced_2B_1
+	if_user_order_not_eq MON_2, ContestUnreferenced_2B_1
+	if_user_order_not_eq MON_3, ContestUnreferenced_2B_1
+	if_user_order_not_eq MON_4, ContestUnreferenced_2B_1
 	end
 ContestUnreferenced_0F_5:
-	if_user_order_not_eq MON_1 ContestUnreferenced_2B_1
-	if_user_order_not_eq MON_2 ContestUnreferenced_2B_1
-	if_user_order_not_eq MON_3 ContestUnreferenced_2B_1
-	if_user_order_not_eq MON_4 ContestUnreferenced_2B_1
+	if_user_order_not_eq MON_1, ContestUnreferenced_2B_1
+	if_user_order_not_eq MON_2, ContestUnreferenced_2B_1
+	if_user_order_not_eq MON_3, ContestUnreferenced_2B_1
+	if_user_order_not_eq MON_4, ContestUnreferenced_2B_1
 	end
 ContestUnreferenced_score:
 	score +10
 	end
+
 	end
+
+@ Unreferenced AI routine to encourage the most appealing move.
 	if_most_appealing_move ContestUnreferenced_score2
 	end
 ContestUnreferenced_score2:
@@ -115,10 +122,10 @@ ContestUnreferenced_score2:
 
 AI_CheckBoring:
 	if_effect_eq CONTEST_EFFECT_REPETITION_NOT_BORING, AI_end_081DC27F
-	if_move_used_count_eq 1 AI_score1_081DC27F
-	if_move_used_count_eq 2 AI_score2_081DC27F
-	if_move_used_count_eq 3 AI_score3_081DC27F
-	if_move_used_count_eq 4 AI_score4_081DC27F
+	if_move_used_count_eq 1, AI_score1_081DC27F
+	if_move_used_count_eq 2, AI_score2_081DC27F
+	if_move_used_count_eq 3, AI_score3_081DC27F
+	if_move_used_count_eq 4, AI_score4_081DC27F
 	end
 AI_score1_081DC27F:
 	score -5
