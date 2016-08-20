@@ -358,29 +358,60 @@
 	.4byte \addr
 	.endm
 
-@ 4E
-@ 4F
-@ 50
+@ whether the mon used a combo starter move
+@ Even though this value is always 1 or 0 (i.e. TRUE/FALSE),
+@ there are less-than and greater-than comparison operations for some reason.
 
-	.macro contest_51 param1 param2 addr
+	.macro get_used_combo_starter mon
+	.byte 0x4E
+	.byte \mon
+	.endm
+
+	.macro if_used_combo_starter_less_than mon, value, addr
+	.byte 0x4F
+	.byte \mon
+	.byte \value
+	.4byte \addr
+	.endm
+
+	.macro if_used_combo_starter_more_than mon, value, addr
+	.byte 0x50
+	.byte \mon
+	.byte \value
+	.4byte \addr
+	.endm
+
+
+	.macro if_used_combo_starter_eq mon, value, addr
 	.byte 0x51
-	.byte \param1
-	.byte \param2
+	.byte \mon
+	.byte \value
 	.4byte \addr
 	.endm
 
-@ 52
-@ 53
+	.macro if_used_combo_starter_not_eq mon, value, addr
+	.byte 0x52
+	.byte \mon
+	.byte \value
+	.4byte \addr
+	.endm
 
-	.macro contest_54 param addr
+@ whether the mon can make an appeal
+
+	.macro check_can_participate mon
+	.byte 0x53
+	.byte \mon
+	.endm
+
+	.macro if_can_participate mon, addr
 	.byte 0x54
-	.byte \param
+	.byte \mon
 	.4byte \addr
 	.endm
 
-	.macro contest_55 param addr
+	.macro if_cannot_participate mon, addr
 	.byte 0x55
-	.byte \param
+	.byte \mon
 	.4byte \addr
 	.endm
 
