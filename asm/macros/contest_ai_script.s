@@ -1,5 +1,4 @@
-@ contest AI macro research
-
+@ Add a positive/negative value to the score of the move being evaluated.
 
 	.macro score score
 	.byte 0x00
