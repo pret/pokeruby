@@ -19,31 +19,31 @@ gUnknown_081DC118:: @ 81DC118
 	.4byte AI_CheckOrder
 	.4byte AI_CheckForGoodMove
 	.4byte AI_Erratic
-	.4byte AI_nothing
-	.4byte AI_nothing
-	.4byte AI_nothing
-	.4byte AI_nothing
-	.4byte AI_nothing
-	.4byte AI_nothing
-	.4byte AI_nothing
-	.4byte AI_nothing
-	.4byte AI_nothing
-	.4byte AI_nothing
-	.4byte AI_nothing
-	.4byte AI_nothing
-	.4byte AI_nothing
-	.4byte AI_nothing
-	.4byte AI_nothing
-	.4byte AI_nothing
-	.4byte AI_nothing
-	.4byte AI_nothing
-	.4byte AI_nothing
-	.4byte AI_nothing
-	.4byte AI_nothing
-	.4byte AI_nothing
-	.4byte AI_nothing
-	.4byte AI_nothing
-	.4byte AI_nothing
+	.4byte AI_Nothing
+	.4byte AI_Nothing
+	.4byte AI_Nothing
+	.4byte AI_Nothing
+	.4byte AI_Nothing
+	.4byte AI_Nothing
+	.4byte AI_Nothing
+	.4byte AI_Nothing
+	.4byte AI_Nothing
+	.4byte AI_Nothing
+	.4byte AI_Nothing
+	.4byte AI_Nothing
+	.4byte AI_Nothing
+	.4byte AI_Nothing
+	.4byte AI_Nothing
+	.4byte AI_Nothing
+	.4byte AI_Nothing
+	.4byte AI_Nothing
+	.4byte AI_Nothing
+	.4byte AI_Nothing
+	.4byte AI_Nothing
+	.4byte AI_Nothing
+	.4byte AI_Nothing
+	.4byte AI_Nothing
+	.4byte AI_Nothing
 
 	@ unreferenced
 	if_turn_not_eq 0 ContestUnreferenced_80
@@ -847,5 +847,5 @@ AI_score7_081DCA4C:
 	score +5
 	end
 
-AI_nothing:
+AI_Nothing:
 	end
