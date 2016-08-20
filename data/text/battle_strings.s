@@ -1860,8 +1860,7 @@ gUnknown_0840164C:: @ 840164C
 	.2byte BATTLE_TEXT_SubTookDamage
 	.2byte BATTLE_TEXT_CoinScatter
 	.2byte BATTLE_TEXT_SandTombTrapped
-
-	.incbin "baserom.gba", 0x401658, 0x4
+	.2byte 0xFFFF
 
 	.align 2
 gUnknown_0840165C:: @ 840165C
