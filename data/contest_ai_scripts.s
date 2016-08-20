@@ -11,7 +11,7 @@
 	enum MON_4
 
 	.align 2
-gUnknown_081DC118:: @ 81DC118
+gContestAIs:: @ 81DC118
 	.4byte AI_CheckForBadMove
 	.4byte AI_CheckForCombo
 	.4byte AI_CheckBoring
