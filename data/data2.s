@@ -929,7 +929,23 @@ gOamData_81F96F0:: @ 81F96F0
 	.2byte 0x2800
 
 	.align 2
-	.incbin "baserom.gba", 0x001f96f8, 0x28
+gSpriteAnim_81F96F8:: @ 81F96F8
+	obj_image_anim_frame 0, 5
+	obj_image_anim_jump 0
+
+	.align 2
+gSpriteAnimTable_81F9700:: @ 81F9700
+	.4byte gSpriteAnim_81F96F8
+
+	.align 2
+gSpriteAffineAnim_81F9704:: @ 81F9704
+	obj_rot_scal_anim_frame 0xFFF0, 0x0, 0, 4
+	obj_rot_scal_anim_frame 0x0, 0x0, 0, 60
+	obj_rot_scal_anim_jump 1
+
+	.align 2
+gSpriteAffineAnimTable_81F971C:: @ 81F971C
+	.4byte gSpriteAffineAnim_81F9704
 
 @ 81F9720
 	.include "data/type_effectiveness.s"
