@@ -1504,6 +1504,8 @@ VoiceGroupTable_8430894: @ 8430894
 	.4byte DirectSoundWaveData_847CBAC
 	.byte 255, 0, 218, 165
 
+VoiceGroupTable_84308AC: @ 84308AC
+
 @ Percussion 84308AC
 	.byte 0x80, 0, 0, 0
 	.4byte VoiceGroupTable_8435FAC
@@ -1998,6 +2000,8 @@ VoiceGroupTable_8430894: @ 8430894
 	.byte 3
 	.byte 0, 0, 0
 	.byte 0, 0, 7, 1
+
+VoiceGroupTable_8430C9C: @ 8430C9C
 
 @ Percussion 8430C9C
 	.byte 0x80, 0, 0, 0
@@ -2761,6 +2765,8 @@ VoiceGroupTable_8430894: @ 8430894
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
 
+VoiceGroupTable_843129C: @ 843129C
+
 @ Percussion 843129C
 	.byte 0x80, 0, 0, 0
 	.4byte VoiceGroupTable_842FEF8
@@ -3358,6 +3364,8 @@ VoiceGroupTable_8430894: @ 8430894
 	.byte 0, 0, 0
 	.byte 0, 2, 0, 0
 
+VoiceGroupTable_8431764: @ 8431764
+
 @ Percussion 8431764
 	.byte 0x80, 0, 0, 0
 	.4byte VoiceGroupTable_842FEF8
@@ -3892,6 +3900,8 @@ VoiceGroupTable_8430894: @ 8430894
 	.byte 0, 0, 0
 	.byte 0, 0, 7, 1
 
+VoiceGroupTable_8431B9C: @ 8431B9C
+
 @ Percussion 8431B9C
 	.byte 0x80, 0, 0, 0
 	.4byte VoiceGroupTable_842FEF8
@@ -4390,6 +4400,8 @@ VoiceGroupTable_8430894: @ 8430894
 	.byte 3
 	.byte 0, 0, 0
 	.byte 0, 0, 7, 0
+
+VoiceGroupTable_8431F98: @ 8431F98
 
 @ Percussion 8431F98
 	.byte 0x80, 0, 0, 0
@@ -5321,6 +5333,8 @@ VoiceGroupTable_84323E8: @ 84323E8
 	.4byte DirectSoundWaveData_84622A4
 	.byte 255, 0, 255, 0
 
+VoiceGroupTable_84326F4: @ 84326F4
+
 @ Percussion 84326F4
 	.byte 0x80, 0, 0, 0
 	.4byte VoiceGroupTable_842FEF8
@@ -5856,6 +5870,8 @@ VoiceGroupTable_84323E8: @ 84323E8
 	.byte 1
 	.byte 0, 0, 0
 	.byte 0, 0, 6, 2
+
+VoiceGroupTable_8432B38: @ 8432B38
 
 @ Percussion 8432B38
 	.byte 0x80, 0, 0, 0
@@ -6619,6 +6635,8 @@ VoiceGroupTable_84323E8: @ 84323E8
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 3
 
+VoiceGroupTable_8433138: @ 8433138
+
 @ SquareWave1 8433138
 	.byte 0x1, 0x3c, 0x0, 0x0
 	.byte 2
@@ -7122,6 +7140,8 @@ VoiceGroupTable_84323E8: @ 84323E8
 	.byte 1
 	.byte 0, 0, 0
 	.byte 0, 0, 7, 1
+
+VoiceGroupTable_8433534: @ 8433534
 
 @ Key-Split 8433534
 	.byte 0x40, 0, 0, 0
@@ -7640,6 +7660,8 @@ VoiceGroupTable_84323E8: @ 84323E8
 	.byte 2
 	.byte 0, 0, 0
 	.byte 0, 0, 7, 1
+
+VoiceGroupTable_8433948: @ 8433948
 
 @ Percussion 8433948
 	.byte 0x80, 0, 0, 0
@@ -8322,6 +8344,8 @@ VoiceGroupTable_8433BAC: @ 8433BAC
 	.4byte DirectSoundWaveData_84622A4
 	.byte 255, 0, 255, 0
 
+VoiceGroupTable_8433EB8: @ 8433EB8
+
 @ Key-Split 8433EB8
 	.byte 0x40, 0, 0, 0
 	.4byte VoiceGroupTable_8430204
@@ -8848,6 +8872,8 @@ VoiceGroupTable_8433BAC: @ 8433BAC
 	.byte 3
 	.byte 0, 0, 0
 	.byte 0, 0, 7, 0
+
+VoiceGroupTable_84342E4: @ 84342E4
 
 @ Percussion 84342E4
 	.byte 0x80, 0, 0, 0
@@ -9385,6 +9411,8 @@ VoiceGroupTable_8433BAC: @ 8433BAC
 	.4byte ProgrammableWaveData_845541C
 	.byte 0, 7, 15, 1
 
+VoiceGroupTable_8434728: @ 8434728
+
 @ Percussion 8434728
 	.byte 0x80, 0, 0, 0
 	.4byte VoiceGroupTable_842FEF8
@@ -9882,6 +9910,8 @@ VoiceGroupTable_8433BAC: @ 8433BAC
 	.byte 2
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
+
+VoiceGroupTable_8434B18: @ 8434B18
 
 @ Percussion 8434B18
 	.byte 0x80, 0, 0, 0
@@ -10388,6 +10418,8 @@ VoiceGroupTable_8433BAC: @ 8433BAC
 	.byte 3
 	.byte 0, 0, 0
 	.byte 0, 1, 7, 0
+
+VoiceGroupTable_8434F14: @ 8434F14
 
 @ Percussion 8434F14
 	.byte 0x80, 0, 0, 0
@@ -11151,6 +11183,8 @@ VoiceGroupTable_8433BAC: @ 8433BAC
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 2
 
+VoiceGroupTable_8435514: @ 8435514
+
 @ Percussion 8435514
 	.byte 0x80, 0, 0, 0
 	.4byte VoiceGroupTable_842FEF8
@@ -11643,6 +11677,8 @@ VoiceGroupTable_8433BAC: @ 8433BAC
 	.byte 3
 	.byte 0, 0, 0
 	.byte 0, 4, 0, 0
+
+VoiceGroupTable_84358F8: @ 84358F8
 
 @ Percussion 84358F8
 	.byte 0x80, 0, 0, 0
@@ -12162,6 +12198,8 @@ VoiceGroupTable_8433BAC: @ 8433BAC
 	.byte 0
 	.byte 0, 0, 0
 	.byte 0, 1, 7, 0
+
+VoiceGroupTable_8435D18: @ 8435D18
 
 @ Percussion 8435D18
 	.byte 0x80, 0, 0, 0
@@ -12869,6 +12907,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0x8, 0x48, 0x0, 0xca
 	.4byte DirectSoundWaveData_84622A4
 	.byte 255, 0, 255, 0
+
+VoiceGroupTable_84362B8: @ 84362B8
 
 @ Percussion 84362B8
 	.byte 0x80, 0, 0, 0
@@ -13632,6 +13672,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 2
 
+VoiceGroupTable_84368B8: @ 84368B8
+
 @ Percussion 84368B8
 	.byte 0x80, 0, 0, 0
 	.4byte VoiceGroupTable_842FEF8
@@ -14123,6 +14165,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 2
 	.byte 0, 0, 0
 	.byte 0, 1, 4, 1
+
+VoiceGroupTable_8436C9C: @ 8436C9C
 
 @ Percussion 8436C9C
 	.byte 0x80, 0, 0, 0
@@ -14620,6 +14664,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0x3, 0x3c, 0x0, 0x0
 	.4byte ProgrammableWaveData_845544C
 	.byte 0, 7, 15, 2
+
+VoiceGroupTable_843708C: @ 843708C
 
 @ Percussion 843708C
 	.byte 0x80, 0, 0, 0
@@ -15122,6 +15168,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 3
 	.byte 0, 0, 0
 	.byte 0, 0, 6, 1
+
+VoiceGroupTable_8437488: @ 8437488
 
 @ Percussion 8437488
 	.byte 0x80, 0, 0, 0
@@ -15884,6 +15932,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 2
 
+VoiceGroupTable_8437A88: @ 8437A88
+
 @ Percussion 8437A88
 	.byte 0x80, 0, 0, 0
 	.4byte VoiceGroupTable_8435FAC
@@ -16409,6 +16459,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.4byte ProgrammableWaveData_845541C
 	.byte 0, 7, 15, 2
 
+VoiceGroupTable_8437EB4: @ 8437EB4
+
 @ Percussion 8437EB4
 	.byte 0x80, 0, 0, 0
 	.4byte VoiceGroupTable_842FEF8
@@ -16896,6 +16948,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0xb, 0x3c, 0x0, 0x0
 	.4byte ProgrammableWaveData_84553DC
 	.byte 0, 7, 15, 0
+
+VoiceGroupTable_843828C: @ 843828C
 
 @ Percussion 843828C
 	.byte 0x80, 0, 0, 0
@@ -17656,6 +17710,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
 
+VoiceGroupTable_843888C: @ 843888C
+
 @ Percussion 843888C
 	.byte 0x80, 0, 0, 0
 	.4byte VoiceGroupTable_842FEF8
@@ -18414,6 +18470,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
+
+VoiceGroupTable_8438E8C: @ 8438E8C
 
 @ Percussion 8438E8C
 	.byte 0x80, 0, 0, 0
@@ -19174,6 +19232,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
 
+VoiceGroupTable_843948C: @ 843948C
+
 @ Percussion 843948C
 	.byte 0x80, 0, 0, 0
 	.4byte VoiceGroupTable_842FEF8
@@ -19933,6 +19993,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
 
+VoiceGroupTable_8439A8C: @ 8439A8C
+
 @ SquareWave1 8439A8C
 	.byte 0x1, 0x3c, 0x0, 0x0
 	.byte 2
@@ -20414,6 +20476,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0, 0, 0
 	.byte 0, 2, 4, 0
 
+VoiceGroupTable_8439E58: @ 8439E58
+
 @ Key-Split 8439E58
 	.byte 0x40, 0, 0, 0
 	.4byte VoiceGroupTable_8430204
@@ -20893,6 +20957,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0xb, 0x3c, 0x0, 0x0
 	.4byte ProgrammableWaveData_845540C
 	.byte 0, 7, 15, 1
+
+VoiceGroupTable_843A224: @ 843A224
 
 @ Percussion 843A224
 	.byte 0x80, 0, 0, 0
@@ -21653,6 +21719,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
+
+VoiceGroupTable_843A824: @ 843A824
 
 @ Key-Split 843A824
 	.byte 0x40, 0, 0, 0
@@ -22415,6 +22483,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
 
+VoiceGroupTable_843AE24: @ 843AE24
+
 @ Percussion 843AE24
 	.byte 0x80, 0, 0, 0
 	.4byte VoiceGroupTable_842FEF8
@@ -23173,6 +23243,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
 
+VoiceGroupTable_843B424: @ 843B424
+
 @ Percussion 843B424
 	.byte 0x80, 0, 0, 0
 	.4byte VoiceGroupTable_842FEF8
@@ -23690,6 +23762,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0
 	.byte 0, 0, 0
 	.byte 0, 2, 4, 0
+
+VoiceGroupTable_843B844: @ 843B844
 
 @ Percussion 843B844
 	.byte 0x80, 0, 0, 0
@@ -24446,6 +24520,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
+
+VoiceGroupTable_843BE44: @ 843BE44
 
 @ Percussion 843BE44
 	.byte 0x80, 0, 0, 0
@@ -25209,6 +25285,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
 
+VoiceGroupTable_843C444: @ 843C444
+
 @ Percussion 843C444
 	.byte 0x80, 0, 0, 0
 	.4byte VoiceGroupTable_842FEF8
@@ -25646,6 +25724,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0x0, 0x3c, 0x0, 0x0
 	.4byte DirectSoundWaveData_84830A0
 	.byte 255, 0, 255, 165
+
+VoiceGroupTable_843C7BC: @ 843C7BC
 
 @ Percussion 843C7BC
 	.byte 0x80, 0, 0, 0
@@ -26405,6 +26485,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0
 	.byte 0, 0, 0
 	.byte 0, 2, 0, 0
+
+VoiceGroupTable_843CDBC: @ 843CDBC
 
 @ Percussion 843CDBC
 	.byte 0x80, 0, 0, 0
@@ -27167,6 +27249,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
 
+VoiceGroupTable_843D3BC: @ 843D3BC
+
 @ Percussion 843D3BC
 	.byte 0x80, 0, 0, 0
 	.4byte VoiceGroupTable_842FEF8
@@ -27927,6 +28011,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
 
+VoiceGroupTable_843D9BC: @ 843D9BC
+
 @ Percussion 843D9BC
 	.byte 0x80, 0, 0, 0
 	.4byte VoiceGroupTable_842FEF8
@@ -28684,6 +28770,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
+
+VoiceGroupTable_843DFBC: @ 843DFBC
 
 @ Percussion 843DFBC
 	.byte 0x80, 0, 0, 0
@@ -29447,6 +29535,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
 
+VoiceGroupTable_843E5BC: @ 843E5BC
+
 @ Percussion 843E5BC
 	.byte 0x80, 0, 0, 0
 	.4byte VoiceGroupTable_842FEF8
@@ -30203,6 +30293,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
+
+VoiceGroupTable_843EBBC: @ 843EBBC
 
 @ Percussion 843EBBC
 	.byte 0x80, 0, 0, 0
@@ -30966,6 +31058,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
 
+VoiceGroupTable_843F1BC: @ 843F1BC
+
 @ Percussion 843F1BC
 	.byte 0x80, 0, 0, 0
 	.4byte VoiceGroupTable_842FEF8
@@ -31484,6 +31578,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 3
 	.byte 0, 0, 0
 	.byte 0, 1, 6, 2
+
+VoiceGroupTable_843F5E8: @ 843F5E8
 
 @ Percussion 843F5E8
 	.byte 0x80, 0, 0, 0
@@ -32241,6 +32337,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
+
+VoiceGroupTable_843FBE8: @ 843FBE8
 
 @ Percussion 843FBE8
 	.byte 0x80, 0, 0, 0
@@ -33002,6 +33100,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
+
+VoiceGroupTable_84401E8: @ 84401E8
 
 @ Percussion 84401E8
 	.byte 0x80, 0, 0, 0
@@ -33767,6 +33867,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
 
+VoiceGroupTable_84407E8: @ 84407E8
+
 @ Percussion 84407E8
 	.byte 0x80, 0, 0, 0
 	.4byte VoiceGroupTable_842FEF8
@@ -34529,6 +34631,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
 
+VoiceGroupTable_8440DE8: @ 8440DE8
+
 @ Percussion 8440DE8
 	.byte 0x80, 0, 0, 0
 	.4byte VoiceGroupTable_842FEF8
@@ -35289,6 +35393,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
 
+VoiceGroupTable_84413E8: @ 84413E8
+
 @ Percussion 84413E8
 	.byte 0x80, 0, 0, 0
 	.4byte VoiceGroupTable_842FEF8
@@ -36048,6 +36154,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
+
+VoiceGroupTable_84419E8: @ 84419E8
 
 @ Percussion 84419E8
 	.byte 0x80, 0, 0, 0
@@ -36810,6 +36918,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
 
+VoiceGroupTable_8441FE8: @ 8441FE8
+
 @ Percussion 8441FE8
 	.byte 0x80, 0, 0, 0
 	.4byte VoiceGroupTable_842FEF8
@@ -37569,6 +37679,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
 
+VoiceGroupTable_84425E8: @ 84425E8
+
 @ Percussion 84425E8
 	.byte 0x80, 0, 0, 0
 	.4byte VoiceGroupTable_842FEF8
@@ -38325,6 +38437,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
+
+VoiceGroupTable_8442BE8: @ 8442BE8
 
 @ Percussion 8442BE8
 	.byte 0x80, 0, 0, 0
@@ -39083,6 +39197,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
+
+VoiceGroupTable_84431E8: @ 84431E8
 
 @ Percussion 84431E8
 	.byte 0x80, 0, 0, 0
@@ -39843,6 +39959,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
+
+VoiceGroupTable_84437E8: @ 84437E8
 
 @ Percussion 84437E8
 	.byte 0x80, 0, 0, 0
@@ -40607,6 +40725,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
 
+VoiceGroupTable_8443DE8: @ 8443DE8
+
 @ Percussion 8443DE8
 	.byte 0x80, 0, 0, 0
 	.4byte VoiceGroupTable_842FEF8
@@ -41363,6 +41483,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
 
+VoiceGroupTable_84443E8: @ 84443E8
+
 @ Percussion 84443E8
 	.byte 0x80, 0, 0, 0
 	.4byte VoiceGroupTable_842FEF8
@@ -42117,6 +42239,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
+
+VoiceGroupTable_84449E8: @ 84449E8
 
 @ Percussion 84449E8
 	.byte 0x80, 0, 0, 0
@@ -42880,6 +43004,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
 
+VoiceGroupTable_8444FE8: @ 8444FE8
+
 @ Percussion 8444FE8
 	.byte 0x80, 0, 0, 0
 	.4byte VoiceGroupTable_842FEF8
@@ -43633,6 +43759,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
+
+VoiceGroupTable_84455E8: @ 84455E8
 
 @ Percussion 84455E8
 	.byte 0x80, 0, 0, 0
@@ -44395,6 +44523,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
 
+VoiceGroupTable_8445BE8: @ 8445BE8
+
 @ Percussion 8445BE8
 	.byte 0x80, 0, 0, 0
 	.4byte VoiceGroupTable_842FEF8
@@ -45153,6 +45283,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
+
+VoiceGroupTable_84461E8: @ 84461E8
 
 @ Percussion 84461E8
 	.byte 0x80, 0, 0, 0
@@ -45913,6 +46045,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0, 0, 0
 	.byte 0, 2, 0, 2
 
+VoiceGroupTable_84467E8: @ 84467E8
+
 @ Percussion 84467E8
 	.byte 0x80, 0, 0, 0
 	.4byte VoiceGroupTable_842FEF8
@@ -46668,6 +46802,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
+
+VoiceGroupTable_8446DE8: @ 8446DE8
 
 @ Percussion 8446DE8
 	.byte 0x80, 0, 0, 0
@@ -47427,6 +47563,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
 
+VoiceGroupTable_84473E8: @ 84473E8
+
 @ SquareWave1 84473E8
 	.byte 0x1, 0x3c, 0x0, 0x0
 	.byte 2
@@ -47437,6 +47575,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0x40, 0, 0, 0
 	.4byte VoiceGroupTable_8430204
 	.4byte KeySplitTable_8455224
+
+VoiceGroupTable_8447400: @ 8447400
 
 @ Percussion 8447400
 	.byte 0x80, 0, 0, 0
@@ -48196,6 +48336,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
 
+VoiceGroupTable_8447A00: @ 8447A00
+
 @ Percussion 8447A00
 	.byte 0x80, 0, 0, 0
 	.4byte VoiceGroupTable_842FEF8
@@ -48686,6 +48828,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0xb, 0x3c, 0x0, 0x0
 	.4byte ProgrammableWaveData_84553BC
 	.byte 0, 2, 6, 1
+
+VoiceGroupTable_8447DF0: @ 8447DF0
 
 @ Percussion 8447DF0
 	.byte 0x80, 0, 0, 0
@@ -49445,6 +49589,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
+
+VoiceGroupTable_84483F0: @ 84483F0
 
 @ Percussion 84483F0
 	.byte 0x80, 0, 0, 0
@@ -50206,6 +50352,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
 
+VoiceGroupTable_84489F0: @ 84489F0
+
 @ Percussion 84489F0
 	.byte 0x80, 0, 0, 0
 	.4byte VoiceGroupTable_842FEF8
@@ -50961,6 +51109,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
+
+VoiceGroupTable_8448FF0: @ 8448FF0
 
 @ Percussion 8448FF0
 	.byte 0x80, 0, 0, 0
@@ -51722,6 +51872,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
 
+VoiceGroupTable_84495F0: @ 84495F0
+
 @ Percussion 84495F0
 	.byte 0x80, 0, 0, 0
 	.4byte VoiceGroupTable_842FEF8
@@ -52476,6 +52628,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
+
+VoiceGroupTable_8449BF0: @ 8449BF0
 
 @ Percussion 8449BF0
 	.byte 0x80, 0, 0, 0
@@ -53236,6 +53390,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
+
+VoiceGroupTable_844A1F0: @ 844A1F0
 
 @ Percussion 844A1F0
 	.byte 0x80, 0, 0, 0
@@ -54003,6 +54159,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
 
+VoiceGroupTable_844A7F0: @ 844A7F0
+
 @ Percussion 844A7F0
 	.byte 0x80, 0, 0, 0
 	.4byte VoiceGroupTable_842FEF8
@@ -54755,6 +54913,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
+
+VoiceGroupTable_844ADF0: @ 844ADF0
 
 @ Percussion 844ADF0
 	.byte 0x80, 0, 0, 0
@@ -55518,6 +55678,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
 
+VoiceGroupTable_844B3F0: @ 844B3F0
+
 @ Percussion 844B3F0
 	.byte 0x80, 0, 0, 0
 	.4byte VoiceGroupTable_842FEF8
@@ -56275,6 +56437,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
 
+VoiceGroupTable_844B9F0: @ 844B9F0
+
 @ Percussion 844B9F0
 	.byte 0x80, 0, 0, 0
 	.4byte VoiceGroupTable_842FEF8
@@ -57029,6 +57193,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
+
+VoiceGroupTable_844BFF0: @ 844BFF0
 
 @ Percussion 844BFF0
 	.byte 0x80, 0, 0, 0
@@ -57792,6 +57958,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
 
+VoiceGroupTable_844C5F0: @ 844C5F0
+
 @ Percussion 844C5F0
 	.byte 0x80, 0, 0, 0
 	.4byte VoiceGroupTable_842FEF8
@@ -58550,6 +58718,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
+
+VoiceGroupTable_844CBF0: @ 844CBF0
 
 @ Percussion 844CBF0
 	.byte 0x80, 0, 0, 0
@@ -59312,6 +59482,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
 
+VoiceGroupTable_844D1F0: @ 844D1F0
+
 @ Percussion 844D1F0
 	.byte 0x80, 0, 0, 0
 	.4byte VoiceGroupTable_842FEF8
@@ -60072,6 +60244,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
+
+VoiceGroupTable_844D7F0: @ 844D7F0
 
 @ Percussion 844D7F0
 	.byte 0x80, 0, 0, 0
@@ -60835,6 +61009,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
 
+VoiceGroupTable_844DDF0: @ 844DDF0
+
 @ Percussion 844DDF0
 	.byte 0x80, 0, 0, 0
 	.4byte VoiceGroupTable_842FEF8
@@ -61592,6 +61768,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 0
 
+VoiceGroupTable_844E3F0: @ 844E3F0
+
 @ Percussion 844E3F0
 	.byte 0x80, 0, 0, 0
 	.4byte VoiceGroupTable_842FEF8
@@ -62238,6 +62416,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0, 0, 0
 	.byte 1, 1, 6, 1
 
+VoiceGroupTable_844E918: @ 844E918
+
 @ SquareWave1 844E918
 	.byte 0x1, 0x3c, 0x0, 0x0
 	.byte 2
@@ -62728,6 +62908,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0, 0, 0
 	.byte 0, 6, 0, 6
 
+VoiceGroupTable_844ECF0: @ 844ECF0
+
 @ Percussion 844ECF0
 	.byte 0x80, 0, 0, 0
 	.4byte VoiceGroupTable_842FEF8
@@ -63210,6 +63392,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0xb, 0x3c, 0x0, 0x0
 	.4byte ProgrammableWaveData_84553DC
 	.byte 0, 7, 15, 2
+
+VoiceGroupTable_844F0C8: @ 844F0C8
 
 @ Percussion 844F0C8
 	.byte 0x80, 0, 0, 0
@@ -63742,6 +63926,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0x0, 0x3c, 0x0, 0x0
 	.4byte DirectSoundWaveData_849F40C
 	.byte 255, 0, 255, 127
+
+VoiceGroupTable_844F50C: @ 844F50C
 
 @ Percussion 844F50C
 	.byte 0x80, 0, 0, 0
@@ -64277,6 +64463,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0xb, 0x3c, 0x0, 0x0
 	.4byte ProgrammableWaveData_845541C
 	.byte 0, 7, 15, 2
+
+VoiceGroupTable_844F950: @ 844F950
 
 @ Percussion 844F950
 	.byte 0x80, 0, 0, 0
@@ -64814,6 +65002,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.4byte ProgrammableWaveData_845541C
 	.byte 0, 7, 15, 2
 
+VoiceGroupTable_844FD94: @ 844FD94
+
 @ Percussion 844FD94
 	.byte 0x80, 0, 0, 0
 	.4byte VoiceGroupTable_842FEF8
@@ -65320,6 +65510,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0, 0, 0
 	.byte 0, 0, 7, 1
 
+VoiceGroupTable_845019C: @ 845019C
+
 @ Percussion 845019C
 	.byte 0x80, 0, 0, 0
 	.4byte VoiceGroupTable_842FEF8
@@ -65815,6 +66007,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 3
 	.byte 0, 0, 0
 	.byte 0, 0, 9, 1
+
+VoiceGroupTable_845058C: @ 845058C
 
 @ Percussion 845058C
 	.byte 0x80, 0, 0, 0
@@ -66575,6 +66769,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.4byte DirectSoundWaveData_8460E60
 	.byte 255, 246, 0, 216
 
+VoiceGroupTable_8450B8C: @ 8450B8C
+
 @ Percussion 8450B8C
 	.byte 0x80, 0, 0, 0
 	.4byte VoiceGroupTable_842FEF8
@@ -67088,6 +67284,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0, 0, 0
 	.byte 0, 2, 7, 1
 
+VoiceGroupTable_8450FA0: @ 8450FA0
+
 @ Percussion 8450FA0
 	.byte 0x80, 0, 0, 0
 	.4byte VoiceGroupTable_842FEF8
@@ -67584,6 +67782,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 3
 	.byte 0, 0, 0
 	.byte 0, 0, 7, 1
+
+VoiceGroupTable_8451390: @ 8451390
 
 @ Percussion 8451390
 	.byte 0x80, 0, 0, 0
@@ -68343,6 +68543,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0x0, 0x3c, 0x0, 0x0
 	.4byte DirectSoundWaveData_8460E60
 	.byte 255, 246, 0, 216
+
+VoiceGroupTable_8451990: @ 8451990
 
 @ Direct Sound 8451990
 	.byte 0x0, 0x3c, 0x0, 0x0
@@ -69107,6 +69309,8 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0, 0, 0
 	.byte 0, 1, 0, 1
 
+VoiceGroupTable_8451F90: @ 8451F90
+
 @ Direct Sound 8451F90
 	.byte 0x8, 0x3c, 0x0, 0x0
 	.4byte DirectSoundWaveData_8488F44
@@ -69843,6 +70047,8 @@ gUnknown_084543C0:: @ 84543C0
 gUnknown_084549C0:: @ 84549C0
 	.incbin "baserom.gba", 0x004549c0, 0x30
 
+VoiceGroupTable_84549F0: @ 84549F0
+
 @ Direct Sound 84549F0
 	.byte 0x0, 0x3c, 0x0, 0x0
 	.4byte DirectSoundWaveData_8639898
@@ -70097,6 +70303,8 @@ gUnknown_084549C0:: @ 84549C0
 	.byte 0x0, 0x3c, 0x0, 0x0
 	.4byte DirectSoundWaveData_8654170
 	.byte 255, 0, 255, 0
+
+VoiceGroupTable_8454C54: @ 8454C54
 
 @ Percussion 8454C54
 	.byte 0x80, 0, 0, 0

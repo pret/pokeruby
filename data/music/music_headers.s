@@ -1,7 +1,7 @@
 Music0_Header:: @ 8655FF0
 	.byte 0 @ number of tracks
 	.byte 0, 0, 168 @ unknown
-	.4byte 0x0842FC88 @ voice group pointer
+	.4byte gUnknown_0842FC88
 
 Music1_Track0:: @ 8655FF8
 	.incbin "data/music/tracks/music1_track0.bin"
@@ -9,7 +9,7 @@ Music1_Track0:: @ 8655FF8
 Music1_Header:: @ 8656010
 	.byte 1 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x08451990 @ voice group pointer
+	.4byte VoiceGroupTable_8451990
 	.4byte Music1_Track0
 
 Music2_Track0:: @ 865601C
@@ -18,7 +18,7 @@ Music2_Track0:: @ 865601C
 Music2_Header:: @ 865603C
 	.byte 1 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x08451990 @ voice group pointer
+	.4byte VoiceGroupTable_8451990
 	.4byte Music2_Track0
 
 Music3_Track0:: @ 8656048
@@ -27,7 +27,7 @@ Music3_Track0:: @ 8656048
 Music3_Header:: @ 8656060
 	.byte 1 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x08451990 @ voice group pointer
+	.4byte VoiceGroupTable_8451990
 	.4byte Music3_Track0
 
 Music4_Track0:: @ 865606C
@@ -36,7 +36,7 @@ Music4_Track0:: @ 865606C
 Music4_Header:: @ 86560A4
 	.byte 1 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x08451990 @ voice group pointer
+	.4byte VoiceGroupTable_8451990
 	.4byte Music4_Track0
 
 Music5_Track0:: @ 86560B0
@@ -45,7 +45,7 @@ Music5_Track0:: @ 86560B0
 Music5_Header:: @ 86560D0
 	.byte 1 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x08451990 @ voice group pointer
+	.4byte VoiceGroupTable_8451990
 	.4byte Music5_Track0
 
 Music6_Track0:: @ 86560DC
@@ -54,7 +54,7 @@ Music6_Track0:: @ 86560DC
 Music6_Header:: @ 86560EC
 	.byte 1 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x08451990 @ voice group pointer
+	.4byte VoiceGroupTable_8451990
 	.4byte Music6_Track0
 
 Music7_Track0:: @ 86560F8
@@ -63,7 +63,7 @@ Music7_Track0:: @ 86560F8
 Music7_Header:: @ 8656108
 	.byte 1 @ number of tracks
 	.byte 0, 2, 178 @ unknown
-	.4byte 0x08451990 @ voice group pointer
+	.4byte VoiceGroupTable_8451990
 	.4byte Music7_Track0
 
 Music8_Track0:: @ 8656114
@@ -72,7 +72,7 @@ Music8_Track0:: @ 8656114
 Music8_Header:: @ 8656124
 	.byte 1 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x08451990 @ voice group pointer
+	.4byte VoiceGroupTable_8451990
 	.4byte Music8_Track0
 
 Music9_Track0:: @ 8656130
@@ -81,7 +81,7 @@ Music9_Track0:: @ 8656130
 Music9_Header:: @ 8656158
 	.byte 1 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x08451990 @ voice group pointer
+	.4byte VoiceGroupTable_8451990
 	.4byte Music9_Track0
 
 Music10_Track0:: @ 8656164
@@ -90,7 +90,7 @@ Music10_Track0:: @ 8656164
 Music10_Header:: @ 865617C
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451990 @ voice group pointer
+	.4byte VoiceGroupTable_8451990
 	.4byte Music10_Track0
 
 Music11_Track0:: @ 8656188
@@ -99,7 +99,7 @@ Music11_Track0:: @ 8656188
 Music11_Header:: @ 8656198
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music11_Track0
 
 Music12_Track0:: @ 86561A4
@@ -111,7 +111,7 @@ Music12_Track1:: @ 86561B5
 Music12_Header:: @ 86561C4
 	.byte 2 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x08451990 @ voice group pointer
+	.4byte VoiceGroupTable_8451990
 	.4byte Music12_Track0
 	.4byte Music12_Track1
 
@@ -124,7 +124,7 @@ Music13_Track1:: @ 86561F6
 Music13_Header:: @ 8656210
 	.byte 2 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x08451990 @ voice group pointer
+	.4byte VoiceGroupTable_8451990
 	.4byte Music13_Track0
 	.4byte Music13_Track1
 
@@ -137,7 +137,7 @@ Music14_Track1:: @ 8656256
 Music14_Header:: @ 865628C
 	.byte 2 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x08451990 @ voice group pointer
+	.4byte VoiceGroupTable_8451990
 	.4byte Music14_Track0
 	.4byte Music14_Track1
 
@@ -153,7 +153,7 @@ Music15_Track2:: @ 86562CB
 Music15_Header:: @ 86562E0
 	.byte 3 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x08451990 @ voice group pointer
+	.4byte VoiceGroupTable_8451990
 	.4byte Music15_Track0
 	.4byte Music15_Track1
 	.4byte Music15_Track2
@@ -170,7 +170,7 @@ Music16_Track2:: @ 8656322
 Music16_Header:: @ 8656334
 	.byte 3 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x08451990 @ voice group pointer
+	.4byte VoiceGroupTable_8451990
 	.4byte Music16_Track0
 	.4byte Music16_Track1
 	.4byte Music16_Track2
@@ -181,7 +181,7 @@ Music17_Track0:: @ 8656348
 Music17_Header:: @ 8656384
 	.byte 1 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x08451990 @ voice group pointer
+	.4byte VoiceGroupTable_8451990
 	.4byte Music17_Track0
 
 Music18_Track0:: @ 8656390
@@ -190,7 +190,7 @@ Music18_Track0:: @ 8656390
 Music18_Header:: @ 86563A0
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music18_Track0
 
 Music19_Track0:: @ 86563AC
@@ -199,7 +199,7 @@ Music19_Track0:: @ 86563AC
 Music19_Header:: @ 86563F4
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451990 @ voice group pointer
+	.4byte VoiceGroupTable_8451990
 	.4byte Music19_Track0
 
 Music20_Track0:: @ 8656400
@@ -208,7 +208,7 @@ Music20_Track0:: @ 8656400
 Music20_Header:: @ 865643C
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music20_Track0
 
 Music21_Track0:: @ 8656448
@@ -217,7 +217,7 @@ Music21_Track0:: @ 8656448
 Music21_Header:: @ 8656468
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451990 @ voice group pointer
+	.4byte VoiceGroupTable_8451990
 	.4byte Music21_Track0
 
 Music22_Track0:: @ 8656474
@@ -226,7 +226,7 @@ Music22_Track0:: @ 8656474
 Music22_Header:: @ 865648C
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451990 @ voice group pointer
+	.4byte VoiceGroupTable_8451990
 	.4byte Music22_Track0
 
 Music23_Track0:: @ 8656498
@@ -235,7 +235,7 @@ Music23_Track0:: @ 8656498
 Music23_Header:: @ 86564B0
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451990 @ voice group pointer
+	.4byte VoiceGroupTable_8451990
 	.4byte Music23_Track0
 
 Music24_Track0:: @ 86564BC
@@ -253,7 +253,7 @@ Music24_Track3:: @ 8656521
 Music24_Header:: @ 8656534
 	.byte 4 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451990 @ voice group pointer
+	.4byte VoiceGroupTable_8451990
 	.4byte Music24_Track0
 	.4byte Music24_Track1
 	.4byte Music24_Track2
@@ -265,7 +265,7 @@ Music25_Track0:: @ 865654C
 Music25_Header:: @ 8656560
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music25_Track0
 
 Music26_Track0:: @ 865656C
@@ -274,7 +274,7 @@ Music26_Track0:: @ 865656C
 Music26_Header:: @ 8656580
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music26_Track0
 
 Music27_Track0:: @ 865658C
@@ -283,7 +283,7 @@ Music27_Track0:: @ 865658C
 Music27_Header:: @ 86565A0
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music27_Track0
 
 Music28_Track0:: @ 86565AC
@@ -292,7 +292,7 @@ Music28_Track0:: @ 86565AC
 Music28_Header:: @ 86565C0
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music28_Track0
 
 Music29_Track0:: @ 86565CC
@@ -301,7 +301,7 @@ Music29_Track0:: @ 86565CC
 Music29_Header:: @ 86565E0
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music29_Track0
 
 Music30_Track0:: @ 86565EC
@@ -310,7 +310,7 @@ Music30_Track0:: @ 86565EC
 Music30_Header:: @ 8656600
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music30_Track0
 
 Music31_Track0:: @ 865660C
@@ -319,7 +319,7 @@ Music31_Track0:: @ 865660C
 Music31_Header:: @ 8656620
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451990 @ voice group pointer
+	.4byte VoiceGroupTable_8451990
 	.4byte Music31_Track0
 
 Music32_Track0:: @ 865662C
@@ -328,7 +328,7 @@ Music32_Track0:: @ 865662C
 Music32_Header:: @ 8656650
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451990 @ voice group pointer
+	.4byte VoiceGroupTable_8451990
 	.4byte Music32_Track0
 
 Music33_Track0:: @ 865665C
@@ -337,7 +337,7 @@ Music33_Track0:: @ 865665C
 Music33_Header:: @ 86567D0
 	.byte 1 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music33_Track0
 
 Music34_Track0:: @ 86567DC
@@ -346,7 +346,7 @@ Music34_Track0:: @ 86567DC
 Music34_Header:: @ 86567F4
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451990 @ voice group pointer
+	.4byte VoiceGroupTable_8451990
 	.4byte Music34_Track0
 
 Music35_Track0:: @ 8656800
@@ -355,7 +355,7 @@ Music35_Track0:: @ 8656800
 Music35_Header:: @ 8656818
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451990 @ voice group pointer
+	.4byte VoiceGroupTable_8451990
 	.4byte Music35_Track0
 
 Music36_Track0:: @ 8656824
@@ -364,7 +364,7 @@ Music36_Track0:: @ 8656824
 Music36_Header:: @ 865683C
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451990 @ voice group pointer
+	.4byte VoiceGroupTable_8451990
 	.4byte Music36_Track0
 
 Music37_Track0:: @ 8656848
@@ -373,7 +373,7 @@ Music37_Track0:: @ 8656848
 Music37_Header:: @ 865686C
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451990 @ voice group pointer
+	.4byte VoiceGroupTable_8451990
 	.4byte Music37_Track0
 
 Music38_Track0:: @ 8656878
@@ -382,7 +382,7 @@ Music38_Track0:: @ 8656878
 Music38_Header:: @ 8656890
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451990 @ voice group pointer
+	.4byte VoiceGroupTable_8451990
 	.4byte Music38_Track0
 
 Music39_Track0:: @ 865689C
@@ -391,7 +391,7 @@ Music39_Track0:: @ 865689C
 Music39_Header:: @ 86568DC
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451990 @ voice group pointer
+	.4byte VoiceGroupTable_8451990
 	.4byte Music39_Track0
 
 Music40_Track0:: @ 86568E8
@@ -403,7 +403,7 @@ Music40_Track1:: @ 8656901
 Music40_Header:: @ 8656914
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music40_Track0
 	.4byte Music40_Track1
 
@@ -416,7 +416,7 @@ Music41_Track1:: @ 8656952
 Music41_Header:: @ 8656968
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music41_Track0
 	.4byte Music41_Track1
 
@@ -429,7 +429,7 @@ Music42_Track1:: @ 865698F
 Music42_Header:: @ 86569A4
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451990 @ voice group pointer
+	.4byte VoiceGroupTable_8451990
 	.4byte Music42_Track0
 	.4byte Music42_Track1
 
@@ -439,7 +439,7 @@ Music43_Track0:: @ 86569B4
 Music43_Header:: @ 86569FC
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music43_Track0
 
 Music44_Track0:: @ 8656A08
@@ -451,7 +451,7 @@ Music44_Track1:: @ 8656A2E
 Music44_Header:: @ 8656A40
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music44_Track0
 	.4byte Music44_Track1
 
@@ -461,7 +461,7 @@ Music45_Track0:: @ 8656A50
 Music45_Header:: @ 8656A7C
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451990 @ voice group pointer
+	.4byte VoiceGroupTable_8451990
 	.4byte Music45_Track0
 
 Music46_Track0:: @ 8656A88
@@ -470,7 +470,7 @@ Music46_Track0:: @ 8656A88
 Music46_Header:: @ 8656ABC
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451990 @ voice group pointer
+	.4byte VoiceGroupTable_8451990
 	.4byte Music46_Track0
 
 Music47_Track0:: @ 8656AC8
@@ -479,7 +479,7 @@ Music47_Track0:: @ 8656AC8
 Music47_Header:: @ 8656AE8
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451990 @ voice group pointer
+	.4byte VoiceGroupTable_8451990
 	.4byte Music47_Track0
 
 Music48_Track0:: @ 8656AF4
@@ -488,7 +488,7 @@ Music48_Track0:: @ 8656AF4
 Music48_Header:: @ 8656B24
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music48_Track0
 
 Music49_Track0:: @ 8656B30
@@ -500,7 +500,7 @@ Music49_Track1:: @ 8656B5C
 Music49_Header:: @ 8656BD0
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music49_Track0
 	.4byte Music49_Track1
 
@@ -516,7 +516,7 @@ Music50_Track2:: @ 8656C34
 Music50_Header:: @ 8656C48
 	.byte 3 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music50_Track0
 	.4byte Music50_Track1
 	.4byte Music50_Track2
@@ -527,7 +527,7 @@ Music51_Track0:: @ 8656C5C
 Music51_Header:: @ 8656C74
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451990 @ voice group pointer
+	.4byte VoiceGroupTable_8451990
 	.4byte Music51_Track0
 
 Music52_Track0:: @ 8656C80
@@ -539,7 +539,7 @@ Music52_Track1:: @ 8656C95
 Music52_Header:: @ 8656CA8
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music52_Track0
 	.4byte Music52_Track1
 
@@ -549,7 +549,7 @@ Music53_Track0:: @ 8656CB8
 Music53_Header:: @ 8656CD4
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music53_Track0
 
 Music54_Track0:: @ 8656CE0
@@ -558,7 +558,7 @@ Music54_Track0:: @ 8656CE0
 Music54_Header:: @ 8656D34
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music54_Track0
 
 Music55_Track0:: @ 8656D40
@@ -570,7 +570,7 @@ Music55_Track1:: @ 8656D5E
 Music55_Header:: @ 8656D78
 	.byte 2 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music55_Track0
 	.4byte Music55_Track1
 
@@ -583,7 +583,7 @@ Music56_Track1:: @ 8656D97
 Music56_Header:: @ 8656DA4
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music56_Track0
 	.4byte Music56_Track1
 
@@ -596,7 +596,7 @@ Music57_Track1:: @ 8656DC3
 Music57_Header:: @ 8656DD0
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music57_Track0
 	.4byte Music57_Track1
 
@@ -609,7 +609,7 @@ Music58_Track1:: @ 8656DEF
 Music58_Header:: @ 8656DFC
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music58_Track0
 	.4byte Music58_Track1
 
@@ -622,7 +622,7 @@ Music59_Track1:: @ 8656E1B
 Music59_Header:: @ 8656E28
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music59_Track0
 	.4byte Music59_Track1
 
@@ -635,7 +635,7 @@ Music60_Track1:: @ 8656E62
 Music60_Header:: @ 8656E7C
 	.byte 2 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x08451990 @ voice group pointer
+	.4byte VoiceGroupTable_8451990
 	.4byte Music60_Track0
 	.4byte Music60_Track1
 
@@ -645,7 +645,7 @@ Music61_Track0:: @ 8656E8C
 Music61_Header:: @ 8656EC0
 	.byte 1 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music61_Track0
 
 Music62_Track0:: @ 8656ECC
@@ -657,7 +657,7 @@ Music62_Track1:: @ 8656EE0
 Music62_Header:: @ 8656EF4
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music62_Track0
 	.4byte Music62_Track1
 
@@ -670,7 +670,7 @@ Music63_Track1:: @ 8656F18
 Music63_Header:: @ 8656F2C
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music63_Track0
 	.4byte Music63_Track1
 
@@ -683,7 +683,7 @@ Music64_Track1:: @ 8656F50
 Music64_Header:: @ 8656F64
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music64_Track0
 	.4byte Music64_Track1
 
@@ -696,7 +696,7 @@ Music65_Track1:: @ 8656F88
 Music65_Header:: @ 8656F9C
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music65_Track0
 	.4byte Music65_Track1
 
@@ -709,7 +709,7 @@ Music66_Track1:: @ 8656FC0
 Music66_Header:: @ 8656FD4
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music66_Track0
 	.4byte Music66_Track1
 
@@ -722,7 +722,7 @@ Music67_Track1:: @ 8656FF8
 Music67_Header:: @ 865700C
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music67_Track0
 	.4byte Music67_Track1
 
@@ -735,7 +735,7 @@ Music68_Track1:: @ 8657030
 Music68_Header:: @ 8657044
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music68_Track0
 	.4byte Music68_Track1
 
@@ -748,7 +748,7 @@ Music69_Track1:: @ 8657068
 Music69_Header:: @ 865707C
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music69_Track0
 	.4byte Music69_Track1
 
@@ -758,7 +758,7 @@ Music70_Track0:: @ 865708C
 Music70_Header:: @ 86570B0
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music70_Track0
 
 Music71_Track0:: @ 86570BC
@@ -767,7 +767,7 @@ Music71_Track0:: @ 86570BC
 Music71_Header:: @ 86570D4
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music71_Track0
 
 Music72_Track0:: @ 86570E0
@@ -779,7 +779,7 @@ Music72_Track1:: @ 8657105
 Music72_Header:: @ 8657120
 	.byte 2 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x08451990 @ voice group pointer
+	.4byte VoiceGroupTable_8451990
 	.4byte Music72_Track0
 	.4byte Music72_Track1
 
@@ -792,7 +792,7 @@ Music73_Track1:: @ 8657159
 Music73_Header:: @ 8657180
 	.byte 2 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x08451990 @ voice group pointer
+	.4byte VoiceGroupTable_8451990
 	.4byte Music73_Track0
 	.4byte Music73_Track1
 
@@ -802,7 +802,7 @@ Music74_Track0:: @ 8657190
 Music74_Header:: @ 86571B4
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music74_Track0
 
 Music75_Track0:: @ 86571C0
@@ -811,7 +811,7 @@ Music75_Track0:: @ 86571C0
 Music75_Header:: @ 86571E4
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music75_Track0
 
 Music76_Track0:: @ 86571F0
@@ -820,7 +820,7 @@ Music76_Track0:: @ 86571F0
 Music76_Header:: @ 865721C
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music76_Track0
 
 Music77_Track0:: @ 8657228
@@ -829,7 +829,7 @@ Music77_Track0:: @ 8657228
 Music77_Header:: @ 8657260
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music77_Track0
 
 Music78_Track0:: @ 865726C
@@ -838,7 +838,7 @@ Music78_Track0:: @ 865726C
 Music78_Header:: @ 8657290
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music78_Track0
 
 Music79_Track0:: @ 865729C
@@ -847,7 +847,7 @@ Music79_Track0:: @ 865729C
 Music79_Header:: @ 86572B8
 	.byte 1 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x08451990 @ voice group pointer
+	.4byte VoiceGroupTable_8451990
 	.4byte Music79_Track0
 
 Music80_Track0:: @ 86572C4
@@ -856,7 +856,7 @@ Music80_Track0:: @ 86572C4
 Music80_Header:: @ 8657320
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music80_Track0
 
 Music81_Track0:: @ 865732C
@@ -865,7 +865,7 @@ Music81_Track0:: @ 865732C
 Music81_Header:: @ 865735C
 	.byte 1 @ number of tracks
 	.byte 0, 2, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music81_Track0
 
 Music82_Track0:: @ 8657368
@@ -874,7 +874,7 @@ Music82_Track0:: @ 8657368
 Music82_Header:: @ 865739C
 	.byte 1 @ number of tracks
 	.byte 0, 2, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music82_Track0
 
 Music83_Track0:: @ 86573A8
@@ -883,7 +883,7 @@ Music83_Track0:: @ 86573A8
 Music83_Header:: @ 86573D8
 	.byte 1 @ number of tracks
 	.byte 0, 2, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music83_Track0
 
 Music84_Track0:: @ 86573E4
@@ -892,7 +892,7 @@ Music84_Track0:: @ 86573E4
 Music84_Header:: @ 8657418
 	.byte 1 @ number of tracks
 	.byte 0, 2, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music84_Track0
 
 Music85_Track0:: @ 8657424
@@ -901,7 +901,7 @@ Music85_Track0:: @ 8657424
 Music85_Header:: @ 8657454
 	.byte 1 @ number of tracks
 	.byte 0, 2, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music85_Track0
 
 Music86_Track0:: @ 8657460
@@ -910,7 +910,7 @@ Music86_Track0:: @ 8657460
 Music86_Header:: @ 8657494
 	.byte 1 @ number of tracks
 	.byte 0, 2, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music86_Track0
 
 Music87_Track0:: @ 86574A0
@@ -919,7 +919,7 @@ Music87_Track0:: @ 86574A0
 Music87_Header:: @ 86574FC
 	.byte 1 @ number of tracks
 	.byte 0, 3, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music87_Track0
 
 Music88_Track0:: @ 8657508
@@ -928,7 +928,7 @@ Music88_Track0:: @ 8657508
 Music88_Header:: @ 865754C
 	.byte 1 @ number of tracks
 	.byte 0, 3, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music88_Track0
 
 Music89_Track0:: @ 8657558
@@ -940,7 +940,7 @@ Music89_Track1:: @ 8657572
 Music89_Header:: @ 8657588
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music89_Track0
 	.4byte Music89_Track1
 
@@ -950,7 +950,7 @@ Music90_Track0:: @ 8657598
 Music90_Header:: @ 86575B8
 	.byte 1 @ number of tracks
 	.byte 0, 3, 178 @ unknown
-	.4byte 0x08451990 @ voice group pointer
+	.4byte VoiceGroupTable_8451990
 	.4byte Music90_Track0
 
 Music91_Track0:: @ 86575C4
@@ -962,7 +962,7 @@ Music91_Track1:: @ 86575E7
 Music91_Header:: @ 8657604
 	.byte 2 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music91_Track0
 	.4byte Music91_Track1
 
@@ -972,7 +972,7 @@ Music92_Track0:: @ 8657614
 Music92_Header:: @ 8657628
 	.byte 1 @ number of tracks
 	.byte 0, 2, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music92_Track0
 
 Music93_Track0:: @ 8657634
@@ -981,7 +981,7 @@ Music93_Track0:: @ 8657634
 Music93_Header:: @ 865767C
 	.byte 1 @ number of tracks
 	.byte 0, 2, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music93_Track0
 
 Music94_Track0:: @ 8657688
@@ -993,7 +993,7 @@ Music94_Track1:: @ 86576E3
 Music94_Header:: @ 8657710
 	.byte 2 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music94_Track0
 	.4byte Music94_Track1
 
@@ -1006,7 +1006,7 @@ Music95_Track1:: @ 865773A
 Music95_Header:: @ 865774C
 	.byte 2 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x08451990 @ voice group pointer
+	.4byte VoiceGroupTable_8451990
 	.4byte Music95_Track0
 	.4byte Music95_Track1
 
@@ -1016,7 +1016,7 @@ Music96_Track0:: @ 865775C
 Music96_Header:: @ 8657770
 	.byte 1 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music96_Track0
 
 Music97_Track0:: @ 865777C
@@ -1028,7 +1028,7 @@ Music97_Track1:: @ 865779C
 Music97_Header:: @ 86577D4
 	.byte 2 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music97_Track0
 	.4byte Music97_Track1
 
@@ -1041,7 +1041,7 @@ Music98_Track1:: @ 8657804
 Music98_Header:: @ 865783C
 	.byte 2 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music98_Track0
 	.4byte Music98_Track1
 
@@ -1051,7 +1051,7 @@ Music99_Track0:: @ 865784C
 Music99_Header:: @ 8657864
 	.byte 1 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music99_Track0
 
 Music100_Track0:: @ 8657870
@@ -1060,7 +1060,7 @@ Music100_Track0:: @ 8657870
 Music100_Header:: @ 8657898
 	.byte 1 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music100_Track0
 
 Music101_Track0:: @ 86578A4
@@ -1069,7 +1069,7 @@ Music101_Track0:: @ 86578A4
 Music101_Header:: @ 86578C4
 	.byte 1 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music101_Track0
 
 Music102_Track0:: @ 86578D0
@@ -1078,7 +1078,7 @@ Music102_Track0:: @ 86578D0
 Music102_Header:: @ 8657940
 	.byte 1 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music102_Track0
 
 Music103_Track0:: @ 865794C
@@ -1087,7 +1087,7 @@ Music103_Track0:: @ 865794C
 Music103_Header:: @ 8657A00
 	.byte 1 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x08451990 @ voice group pointer
+	.4byte VoiceGroupTable_8451990
 	.4byte Music103_Track0
 
 Music104_Track0:: @ 8657A0C
@@ -1099,7 +1099,7 @@ Music104_Track1:: @ 8657A56
 Music104_Header:: @ 8657AE8
 	.byte 2 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music104_Track0
 	.4byte Music104_Track1
 
@@ -1109,7 +1109,7 @@ Music105_Track0:: @ 8657AF8
 Music105_Header:: @ 8657C00
 	.byte 1 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music105_Track0
 
 Music106_Track0:: @ 8657C0C
@@ -1118,7 +1118,7 @@ Music106_Track0:: @ 8657C0C
 Music106_Header:: @ 8657C24
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music106_Track0
 
 Music107_Track0:: @ 8657C30
@@ -1130,7 +1130,7 @@ Music107_Track1:: @ 8657CB4
 Music107_Header:: @ 8657D38
 	.byte 2 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music107_Track0
 	.4byte Music107_Track1
 
@@ -1140,7 +1140,7 @@ Music108_Track0:: @ 8657D48
 Music108_Header:: @ 8657D64
 	.byte 1 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x08451990 @ voice group pointer
+	.4byte VoiceGroupTable_8451990
 	.4byte Music108_Track0
 
 Music109_Track0:: @ 8657D70
@@ -1149,7 +1149,7 @@ Music109_Track0:: @ 8657D70
 Music109_Header:: @ 8657D98
 	.byte 1 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x08451990 @ voice group pointer
+	.4byte VoiceGroupTable_8451990
 	.4byte Music109_Track0
 
 Music110_Track0:: @ 8657DA4
@@ -1161,7 +1161,7 @@ Music110_Track1:: @ 8657DD1
 Music110_Header:: @ 8657DFC
 	.byte 2 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x08451990 @ voice group pointer
+	.4byte VoiceGroupTable_8451990
 	.4byte Music110_Track0
 	.4byte Music110_Track1
 
@@ -1174,7 +1174,7 @@ Music111_Track1:: @ 8657E39
 Music111_Header:: @ 8657E64
 	.byte 2 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x08451990 @ voice group pointer
+	.4byte VoiceGroupTable_8451990
 	.4byte Music111_Track0
 	.4byte Music111_Track1
 
@@ -1187,7 +1187,7 @@ Music112_Track1:: @ 8657F6D
 Music112_Header:: @ 8658060
 	.byte 2 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x08451990 @ voice group pointer
+	.4byte VoiceGroupTable_8451990
 	.4byte Music112_Track0
 	.4byte Music112_Track1
 
@@ -1200,7 +1200,7 @@ Music113_Track1:: @ 86580B7
 Music113_Header:: @ 86580EC
 	.byte 2 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music113_Track0
 	.4byte Music113_Track1
 
@@ -1213,7 +1213,7 @@ Music114_Track1:: @ 8658129
 Music114_Header:: @ 865813C
 	.byte 2 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music114_Track0
 	.4byte Music114_Track1
 
@@ -1223,7 +1223,7 @@ Music115_Track0:: @ 865814C
 Music115_Header:: @ 8658168
 	.byte 1 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music115_Track0
 
 Music116_Track0:: @ 8658174
@@ -1232,7 +1232,7 @@ Music116_Track0:: @ 8658174
 Music116_Header:: @ 8658188
 	.byte 1 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x08451990 @ voice group pointer
+	.4byte VoiceGroupTable_8451990
 	.4byte Music116_Track0
 
 Music117_Track0:: @ 8658194
@@ -1241,7 +1241,7 @@ Music117_Track0:: @ 8658194
 Music117_Header:: @ 86581C4
 	.byte 1 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music117_Track0
 
 Music118_Track0:: @ 86581D0
@@ -1253,7 +1253,7 @@ Music118_Track1:: @ 8658230
 Music118_Header:: @ 8658258
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music118_Track0
 	.4byte Music118_Track1
 
@@ -1266,7 +1266,7 @@ Music119_Track1:: @ 8658299
 Music119_Header:: @ 86582C4
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music119_Track0
 	.4byte Music119_Track1
 
@@ -1279,7 +1279,7 @@ Music120_Track1:: @ 86582FB
 Music120_Header:: @ 865830C
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music120_Track0
 	.4byte Music120_Track1
 
@@ -1292,7 +1292,7 @@ Music121_Track1:: @ 865836E
 Music121_Header:: @ 86583D0
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music121_Track0
 	.4byte Music121_Track1
 
@@ -1305,7 +1305,7 @@ Music122_Track1:: @ 865840F
 Music122_Header:: @ 8658424
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music122_Track0
 	.4byte Music122_Track1
 
@@ -1318,7 +1318,7 @@ Music123_Track1:: @ 8658489
 Music123_Header:: @ 86584A4
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music123_Track0
 	.4byte Music123_Track1
 
@@ -1328,7 +1328,7 @@ Music124_Track0:: @ 86584B4
 Music124_Header:: @ 86584DC
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music124_Track0
 
 Music125_Track0:: @ 86584E8
@@ -1340,7 +1340,7 @@ Music125_Track1:: @ 8658501
 Music125_Header:: @ 8658510
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music125_Track0
 	.4byte Music125_Track1
 
@@ -1350,7 +1350,7 @@ Music126_Track0:: @ 8658520
 Music126_Header:: @ 8658550
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music126_Track0
 
 Music127_Track0:: @ 865855C
@@ -1359,7 +1359,7 @@ Music127_Track0:: @ 865855C
 Music127_Header:: @ 86585C8
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music127_Track0
 
 Music128_Track0:: @ 86585D4
@@ -1371,7 +1371,7 @@ Music128_Track1:: @ 8658632
 Music128_Header:: @ 8658648
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music128_Track0
 	.4byte Music128_Track1
 
@@ -1381,7 +1381,7 @@ Music129_Track0:: @ 8658658
 Music129_Header:: @ 86586A0
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music129_Track0
 
 Music130_Track0:: @ 86586AC
@@ -1393,7 +1393,7 @@ Music130_Track1:: @ 865871B
 Music130_Header:: @ 8658744
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music130_Track0
 	.4byte Music130_Track1
 
@@ -1403,7 +1403,7 @@ Music131_Track0:: @ 8658754
 Music131_Header:: @ 8658790
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music131_Track0
 
 Music132_Track0:: @ 865879C
@@ -1412,7 +1412,7 @@ Music132_Track0:: @ 865879C
 Music132_Header:: @ 865880C
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music132_Track0
 
 Music133_Track0:: @ 8658818
@@ -1421,7 +1421,7 @@ Music133_Track0:: @ 8658818
 Music133_Header:: @ 8658858
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music133_Track0
 
 Music134_Track0:: @ 8658864
@@ -1430,7 +1430,7 @@ Music134_Track0:: @ 8658864
 Music134_Header:: @ 865888C
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music134_Track0
 
 Music135_Track0:: @ 8658898
@@ -1439,7 +1439,7 @@ Music135_Track0:: @ 8658898
 Music135_Header:: @ 86588D8
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music135_Track0
 
 Music136_Track0:: @ 86588E4
@@ -1451,7 +1451,7 @@ Music136_Track1:: @ 8658927
 Music136_Header:: @ 8658938
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music136_Track0
 	.4byte Music136_Track1
 
@@ -1464,7 +1464,7 @@ Music137_Track1:: @ 8658968
 Music137_Header:: @ 8658984
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music137_Track0
 	.4byte Music137_Track1
 
@@ -1477,7 +1477,7 @@ Music138_Track1:: @ 86589E0
 Music138_Header:: @ 8658A08
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music138_Track0
 	.4byte Music138_Track1
 
@@ -1490,7 +1490,7 @@ Music139_Track1:: @ 8658A42
 Music139_Header:: @ 8658A5C
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music139_Track0
 	.4byte Music139_Track1
 
@@ -1500,7 +1500,7 @@ Music140_Track0:: @ 8658A6C
 Music140_Header:: @ 8658B28
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music140_Track0
 
 Music141_Track0:: @ 8658B34
@@ -1512,7 +1512,7 @@ Music141_Track1:: @ 8658B9C
 Music141_Header:: @ 8658BC8
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music141_Track0
 	.4byte Music141_Track1
 
@@ -1522,7 +1522,7 @@ Music142_Track0:: @ 8658BD8
 Music142_Header:: @ 8658C04
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music142_Track0
 
 Music143_Track0:: @ 8658C10
@@ -1531,7 +1531,7 @@ Music143_Track0:: @ 8658C10
 Music143_Header:: @ 8658C50
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music143_Track0
 
 Music144_Track0:: @ 8658C5C
@@ -1543,7 +1543,7 @@ Music144_Track1:: @ 8658CA9
 Music144_Header:: @ 8658CD4
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music144_Track0
 	.4byte Music144_Track1
 
@@ -1556,7 +1556,7 @@ Music145_Track1:: @ 8658D2B
 Music145_Header:: @ 8658D44
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music145_Track0
 	.4byte Music145_Track1
 
@@ -1569,7 +1569,7 @@ Music146_Track1:: @ 8658DFB
 Music146_Header:: @ 8658E18
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music146_Track0
 	.4byte Music146_Track1
 
@@ -1582,7 +1582,7 @@ Music147_Track1:: @ 8658E9E
 Music147_Header:: @ 8658EBC
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music147_Track0
 	.4byte Music147_Track1
 
@@ -1592,7 +1592,7 @@ Music148_Track0:: @ 8658ECC
 Music148_Header:: @ 8658F2C
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music148_Track0
 
 Music149_Track0:: @ 8658F38
@@ -1604,7 +1604,7 @@ Music149_Track1:: @ 8658F80
 Music149_Header:: @ 8658FA0
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music149_Track0
 	.4byte Music149_Track1
 
@@ -1617,7 +1617,7 @@ Music150_Track1:: @ 865905D
 Music150_Header:: @ 8659080
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music150_Track0
 	.4byte Music150_Track1
 
@@ -1627,7 +1627,7 @@ Music151_Track0:: @ 8659090
 Music151_Header:: @ 86590BC
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music151_Track0
 
 Music152_Track0:: @ 86590C8
@@ -1636,7 +1636,7 @@ Music152_Track0:: @ 86590C8
 Music152_Header:: @ 8659124
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music152_Track0
 
 Music153_Track0:: @ 8659130
@@ -1645,7 +1645,7 @@ Music153_Track0:: @ 8659130
 Music153_Header:: @ 86591A0
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music153_Track0
 
 Music154_Track0:: @ 86591AC
@@ -1654,7 +1654,7 @@ Music154_Track0:: @ 86591AC
 Music154_Header:: @ 86591EC
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music154_Track0
 
 Music155_Track0:: @ 86591F8
@@ -1663,7 +1663,7 @@ Music155_Track0:: @ 86591F8
 Music155_Header:: @ 8659234
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music155_Track0
 
 Music156_Track0:: @ 8659240
@@ -1675,7 +1675,7 @@ Music156_Track1:: @ 865928A
 Music156_Header:: @ 865929C
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music156_Track0
 	.4byte Music156_Track1
 
@@ -1688,7 +1688,7 @@ Music157_Track1:: @ 865930D
 Music157_Header:: @ 8659338
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music157_Track0
 	.4byte Music157_Track1
 
@@ -1701,7 +1701,7 @@ Music158_Track1:: @ 865943C
 Music158_Header:: @ 865949C
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music158_Track0
 	.4byte Music158_Track1
 
@@ -1714,7 +1714,7 @@ Music159_Track1:: @ 86594F5
 Music159_Header:: @ 8659504
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music159_Track0
 	.4byte Music159_Track1
 
@@ -1724,7 +1724,7 @@ Music160_Track0:: @ 8659514
 Music160_Header:: @ 8659548
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music160_Track0
 
 Music161_Track0:: @ 8659554
@@ -1736,7 +1736,7 @@ Music161_Track1:: @ 86595B2
 Music161_Header:: @ 86595C4
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music161_Track0
 	.4byte Music161_Track1
 
@@ -1746,7 +1746,7 @@ Music162_Track0:: @ 86595D4
 Music162_Header:: @ 8659630
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music162_Track0
 
 Music163_Track0:: @ 865963C
@@ -1755,7 +1755,7 @@ Music163_Track0:: @ 865963C
 Music163_Header:: @ 86596B0
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music163_Track0
 
 Music164_Track0:: @ 86596BC
@@ -1767,7 +1767,7 @@ Music164_Track1:: @ 865970F
 Music164_Header:: @ 8659730
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music164_Track0
 	.4byte Music164_Track1
 
@@ -1777,7 +1777,7 @@ Music165_Track0:: @ 8659740
 Music165_Header:: @ 86597CC
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music165_Track0
 
 Music166_Track0:: @ 86597D8
@@ -1786,7 +1786,7 @@ Music166_Track0:: @ 86597D8
 Music166_Header:: @ 8659818
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music166_Track0
 
 Music167_Track0:: @ 8659824
@@ -1795,7 +1795,7 @@ Music167_Track0:: @ 8659824
 Music167_Header:: @ 8659858
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music167_Track0
 
 Music168_Track0:: @ 8659864
@@ -1804,7 +1804,7 @@ Music168_Track0:: @ 8659864
 Music168_Header:: @ 86598D0
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music168_Track0
 
 Music169_Track0:: @ 86598DC
@@ -1813,7 +1813,7 @@ Music169_Track0:: @ 86598DC
 Music169_Header:: @ 865990C
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music169_Track0
 
 Music170_Track0:: @ 8659918
@@ -1822,7 +1822,7 @@ Music170_Track0:: @ 8659918
 Music170_Header:: @ 8659964
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music170_Track0
 
 Music171_Track0:: @ 8659970
@@ -1831,7 +1831,7 @@ Music171_Track0:: @ 8659970
 Music171_Header:: @ 8659A2C
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music171_Track0
 
 Music172_Track0:: @ 8659A38
@@ -1843,7 +1843,7 @@ Music172_Track1:: @ 8659AA6
 Music172_Header:: @ 8659B20
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music172_Track0
 	.4byte Music172_Track1
 
@@ -1856,7 +1856,7 @@ Music173_Track1:: @ 8659BCF
 Music173_Header:: @ 8659C30
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music173_Track0
 	.4byte Music173_Track1
 
@@ -1866,7 +1866,7 @@ Music174_Track0:: @ 8659C40
 Music174_Header:: @ 8659CB8
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music174_Track0
 
 Music175_Track0:: @ 8659CC4
@@ -1875,7 +1875,7 @@ Music175_Track0:: @ 8659CC4
 Music175_Header:: @ 8659D00
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music175_Track0
 
 Music176_Track0:: @ 8659D0C
@@ -1884,7 +1884,7 @@ Music176_Track0:: @ 8659D0C
 Music176_Header:: @ 8659D60
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music176_Track0
 
 Music177_Track0:: @ 8659D6C
@@ -1893,7 +1893,7 @@ Music177_Track0:: @ 8659D6C
 Music177_Header:: @ 8659DAC
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music177_Track0
 
 Music178_Track0:: @ 8659DB8
@@ -1905,7 +1905,7 @@ Music178_Track1:: @ 8659E17
 Music178_Header:: @ 8659E34
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music178_Track0
 	.4byte Music178_Track1
 
@@ -1918,7 +1918,7 @@ Music179_Track1:: @ 8659EA3
 Music179_Header:: @ 8659EF0
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music179_Track0
 	.4byte Music179_Track1
 
@@ -1928,7 +1928,7 @@ Music180_Track0:: @ 8659F00
 Music180_Header:: @ 8659F48
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music180_Track0
 
 Music181_Track0:: @ 8659F54
@@ -1940,7 +1940,7 @@ Music181_Track1:: @ 8659FA6
 Music181_Header:: @ 8659FC4
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music181_Track0
 	.4byte Music181_Track1
 
@@ -1950,7 +1950,7 @@ Music182_Track0:: @ 8659FD4
 Music182_Header:: @ 865A08C
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music182_Track0
 
 Music183_Track0:: @ 865A098
@@ -1959,7 +1959,7 @@ Music183_Track0:: @ 865A098
 Music183_Header:: @ 865A148
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music183_Track0
 
 Music184_Track0:: @ 865A154
@@ -1968,7 +1968,7 @@ Music184_Track0:: @ 865A154
 Music184_Header:: @ 865A234
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music184_Track0
 
 Music185_Track0:: @ 865A240
@@ -1977,7 +1977,7 @@ Music185_Track0:: @ 865A240
 Music185_Header:: @ 865A274
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music185_Track0
 
 Music186_Track0:: @ 865A280
@@ -1986,7 +1986,7 @@ Music186_Track0:: @ 865A280
 Music186_Header:: @ 865A2D0
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music186_Track0
 
 Music187_Track0:: @ 865A2DC
@@ -1995,7 +1995,7 @@ Music187_Track0:: @ 865A2DC
 Music187_Header:: @ 865A308
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music187_Track0
 
 Music188_Track0:: @ 865A314
@@ -2004,7 +2004,7 @@ Music188_Track0:: @ 865A314
 Music188_Header:: @ 865A3BC
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music188_Track0
 
 Music189_Track0:: @ 865A3C8
@@ -2016,7 +2016,7 @@ Music189_Track1:: @ 865A42F
 Music189_Header:: @ 865A45C
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music189_Track0
 	.4byte Music189_Track1
 
@@ -2026,7 +2026,7 @@ Music190_Track0:: @ 865A46C
 Music190_Header:: @ 865A4C4
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music190_Track0
 
 Music191_Track0:: @ 865A4D0
@@ -2038,7 +2038,7 @@ Music191_Track1:: @ 865A5CA
 Music191_Header:: @ 865A5E8
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music191_Track0
 	.4byte Music191_Track1
 
@@ -2051,7 +2051,7 @@ Music192_Track1:: @ 865A64B
 Music192_Header:: @ 865A664
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music192_Track0
 	.4byte Music192_Track1
 
@@ -2061,7 +2061,7 @@ Music193_Track0:: @ 865A674
 Music193_Header:: @ 865A6C0
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music193_Track0
 
 Music194_Track0:: @ 865A6CC
@@ -2070,7 +2070,7 @@ Music194_Track0:: @ 865A6CC
 Music194_Header:: @ 865A6F8
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music194_Track0
 
 Music195_Track0:: @ 865A704
@@ -2079,7 +2079,7 @@ Music195_Track0:: @ 865A704
 Music195_Header:: @ 865A748
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music195_Track0
 
 Music196_Track0:: @ 865A754
@@ -2088,7 +2088,7 @@ Music196_Track0:: @ 865A754
 Music196_Header:: @ 865A7D4
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music196_Track0
 
 Music197_Track0:: @ 865A7E0
@@ -2100,7 +2100,7 @@ Music197_Track1:: @ 865A815
 Music197_Header:: @ 865A838
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music197_Track0
 	.4byte Music197_Track1
 
@@ -2113,7 +2113,7 @@ Music198_Track1:: @ 865A889
 Music198_Header:: @ 865A8B0
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music198_Track0
 	.4byte Music198_Track1
 
@@ -2123,7 +2123,7 @@ Music199_Track0:: @ 865A8C0
 Music199_Header:: @ 865A918
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music199_Track0
 
 Music200_Track0:: @ 865A924
@@ -2132,7 +2132,7 @@ Music200_Track0:: @ 865A924
 Music200_Header:: @ 865AA6C
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music200_Track0
 
 Music201_Track0:: @ 865AA78
@@ -2141,7 +2141,7 @@ Music201_Track0:: @ 865AA78
 Music201_Header:: @ 865AB40
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music201_Track0
 
 Music202_Track0:: @ 865AB4C
@@ -2153,7 +2153,7 @@ Music202_Track1:: @ 865ABE9
 Music202_Header:: @ 865AC50
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music202_Track0
 	.4byte Music202_Track1
 
@@ -2163,7 +2163,7 @@ Music203_Track0:: @ 865AC60
 Music203_Header:: @ 865AD34
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music203_Track0
 
 Music204_Track0:: @ 865AD40
@@ -2172,7 +2172,7 @@ Music204_Track0:: @ 865AD40
 Music204_Header:: @ 865AE14
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music204_Track0
 
 Music205_Track0:: @ 865AE20
@@ -2181,7 +2181,7 @@ Music205_Track0:: @ 865AE20
 Music205_Header:: @ 865AE60
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music205_Track0
 
 Music206_Track0:: @ 865AE6C
@@ -2193,7 +2193,7 @@ Music206_Track1:: @ 865AED9
 Music206_Header:: @ 865AEEC
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music206_Track0
 	.4byte Music206_Track1
 
@@ -2206,7 +2206,7 @@ Music207_Track1:: @ 865B014
 Music207_Header:: @ 865B07C
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music207_Track0
 	.4byte Music207_Track1
 
@@ -2219,7 +2219,7 @@ Music208_Track1:: @ 865B1B4
 Music208_Header:: @ 865B21C
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music208_Track0
 	.4byte Music208_Track1
 
@@ -2229,7 +2229,7 @@ Music209_Track0:: @ 865B22C
 Music209_Header:: @ 865B28C
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music209_Track0
 
 Music210_Track0:: @ 865B298
@@ -2238,7 +2238,7 @@ Music210_Track0:: @ 865B298
 Music210_Header:: @ 865B2DC
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music210_Track0
 
 Music211_Track0:: @ 865B2E8
@@ -2250,7 +2250,7 @@ Music211_Track1:: @ 865B37E
 Music211_Header:: @ 865B400
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music211_Track0
 	.4byte Music211_Track1
 
@@ -2260,7 +2260,7 @@ Music212_Track0:: @ 865B410
 Music212_Header:: @ 865B480
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music212_Track0
 
 Music213_Track0:: @ 865B48C
@@ -2269,7 +2269,7 @@ Music213_Track0:: @ 865B48C
 Music213_Header:: @ 865B570
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music213_Track0
 
 Music214_Track0:: @ 865B57C
@@ -2281,7 +2281,7 @@ Music214_Track1:: @ 865B5AD
 Music214_Header:: @ 865B5D4
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music214_Track0
 	.4byte Music214_Track1
 
@@ -2294,7 +2294,7 @@ Music215_Track1:: @ 865B612
 Music215_Header:: @ 865B630
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music215_Track0
 	.4byte Music215_Track1
 
@@ -2307,7 +2307,7 @@ Music216_Track1:: @ 865B6BD
 Music216_Header:: @ 865B6E4
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music216_Track0
 	.4byte Music216_Track1
 
@@ -2320,7 +2320,7 @@ Music217_Track1:: @ 865B85B
 Music217_Header:: @ 865B8E0
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music217_Track0
 	.4byte Music217_Track1
 
@@ -2330,7 +2330,7 @@ Music218_Track0:: @ 865B8F0
 Music218_Header:: @ 865BA00
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music218_Track0
 
 Music219_Track0:: @ 865BA0C
@@ -2342,7 +2342,7 @@ Music219_Track1:: @ 865BAD7
 Music219_Header:: @ 865BB70
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music219_Track0
 	.4byte Music219_Track1
 
@@ -2355,7 +2355,7 @@ Music220_Track1:: @ 865BBC6
 Music220_Header:: @ 865BBE0
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music220_Track0
 	.4byte Music220_Track1
 
@@ -2368,7 +2368,7 @@ Music221_Track1:: @ 865BC67
 Music221_Header:: @ 865BC78
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music221_Track0
 	.4byte Music221_Track1
 
@@ -2378,7 +2378,7 @@ Music222_Track0:: @ 865BC88
 Music222_Header:: @ 865BCB0
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music222_Track0
 
 Music223_Track0:: @ 865BCBC
@@ -2387,7 +2387,7 @@ Music223_Track0:: @ 865BCBC
 Music223_Header:: @ 865BD88
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music223_Track0
 
 Music224_Track0:: @ 865BD94
@@ -2399,7 +2399,7 @@ Music224_Track1:: @ 865BE3D
 Music224_Header:: @ 865BE60
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music224_Track0
 	.4byte Music224_Track1
 
@@ -2412,7 +2412,7 @@ Music225_Track1:: @ 865BEF5
 Music225_Header:: @ 865BF0C
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music225_Track0
 	.4byte Music225_Track1
 
@@ -2425,7 +2425,7 @@ Music226_Track1:: @ 865BF68
 Music226_Header:: @ 865BFA4
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music226_Track0
 	.4byte Music226_Track1
 
@@ -2438,7 +2438,7 @@ Music227_Track1:: @ 865BFF7
 Music227_Header:: @ 865C03C
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music227_Track0
 	.4byte Music227_Track1
 
@@ -2451,7 +2451,7 @@ Music228_Track1:: @ 865C0A5
 Music228_Header:: @ 865C0E4
 	.byte 2 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music228_Track0
 	.4byte Music228_Track1
 
@@ -2461,7 +2461,7 @@ Music229_Track0:: @ 865C0F4
 Music229_Header:: @ 865C130
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music229_Track0
 
 Music230_Track0:: @ 865C13C
@@ -2473,7 +2473,7 @@ Music230_Track1:: @ 865C1D2
 Music230_Header:: @ 865C22C
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music230_Track0
 	.4byte Music230_Track1
 
@@ -2486,7 +2486,7 @@ Music231_Track1:: @ 865C27B
 Music231_Header:: @ 865C2C0
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music231_Track0
 	.4byte Music231_Track1
 
@@ -2499,7 +2499,7 @@ Music232_Track1:: @ 865C311
 Music232_Header:: @ 865C324
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music232_Track0
 	.4byte Music232_Track1
 
@@ -2512,7 +2512,7 @@ Music233_Track1:: @ 865C3A2
 Music233_Header:: @ 865C3C0
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music233_Track0
 	.4byte Music233_Track1
 
@@ -2525,7 +2525,7 @@ Music234_Track1:: @ 865C521
 Music234_Header:: @ 865C5C8
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music234_Track0
 	.4byte Music234_Track1
 
@@ -2538,7 +2538,7 @@ Music235_Track1:: @ 865C696
 Music235_Header:: @ 865C6C4
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music235_Track0
 	.4byte Music235_Track1
 
@@ -2551,7 +2551,7 @@ Music236_Track1:: @ 865C747
 Music236_Header:: @ 865C7B4
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music236_Track0
 	.4byte Music236_Track1
 
@@ -2564,7 +2564,7 @@ Music237_Track1:: @ 865C818
 Music237_Header:: @ 865C838
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music237_Track0
 	.4byte Music237_Track1
 
@@ -2577,7 +2577,7 @@ Music238_Track1:: @ 865C895
 Music238_Header:: @ 865C8AC
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music238_Track0
 	.4byte Music238_Track1
 
@@ -2590,7 +2590,7 @@ Music239_Track1:: @ 865C9E6
 Music239_Header:: @ 865CA2C
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music239_Track0
 	.4byte Music239_Track1
 
@@ -2603,7 +2603,7 @@ Music240_Track1:: @ 865CB01
 Music240_Header:: @ 865CB30
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music240_Track0
 	.4byte Music240_Track1
 
@@ -2613,7 +2613,7 @@ Music241_Track0:: @ 865CB40
 Music241_Header:: @ 865CB90
 	.byte 1 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music241_Track0
 
 Music242_Track0:: @ 865CB9C
@@ -2625,7 +2625,7 @@ Music242_Track1:: @ 865CBE1
 Music242_Header:: @ 865CC00
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music242_Track0
 	.4byte Music242_Track1
 
@@ -2638,7 +2638,7 @@ Music243_Track1:: @ 865CCAE
 Music243_Header:: @ 865CD1C
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music243_Track0
 	.4byte Music243_Track1
 
@@ -2651,7 +2651,7 @@ Music244_Track1:: @ 865CD85
 Music244_Header:: @ 865CDC0
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music244_Track0
 	.4byte Music244_Track1
 
@@ -2664,7 +2664,7 @@ Music245_Track1:: @ 865CEE8
 Music245_Header:: @ 865CF30
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music245_Track0
 	.4byte Music245_Track1
 
@@ -2677,7 +2677,7 @@ Music246_Track1:: @ 865D026
 Music246_Header:: @ 865D064
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music246_Track0
 	.4byte Music246_Track1
 
@@ -2690,7 +2690,7 @@ Music247_Track1:: @ 865D0CB
 Music247_Header:: @ 865D0E8
 	.byte 2 @ number of tracks
 	.byte 0, 4, 178 @ unknown
-	.4byte 0x08451F90 @ voice group pointer
+	.4byte VoiceGroupTable_8451F90
 	.4byte Music247_Track0
 	.4byte Music247_Track1
 
@@ -2700,7 +2700,7 @@ Music248_Track0:: @ 865D0F8
 Music248_Header:: @ 865D108
 	.byte 1 @ number of tracks
 	.byte 0, 4, 0 @ unknown
-	.4byte 0x084549F0 @ voice group pointer
+	.4byte VoiceGroupTable_84549F0
 	.4byte Music248_Track0
 
 Music249_Track0:: @ 865D114
@@ -2709,7 +2709,7 @@ Music249_Track0:: @ 865D114
 Music249_Header:: @ 865D12C
 	.byte 1 @ number of tracks
 	.byte 0, 4, 0 @ unknown
-	.4byte 0x084549F0 @ voice group pointer
+	.4byte VoiceGroupTable_84549F0
 	.4byte Music249_Track0
 
 Music250_Track0:: @ 865D138
@@ -2718,7 +2718,7 @@ Music250_Track0:: @ 865D138
 Music250_Header:: @ 865D148
 	.byte 1 @ number of tracks
 	.byte 0, 4, 0 @ unknown
-	.4byte 0x084549F0 @ voice group pointer
+	.4byte VoiceGroupTable_84549F0
 	.4byte Music250_Track0
 
 Music251_Track0:: @ 865D154
@@ -2727,7 +2727,7 @@ Music251_Track0:: @ 865D154
 Music251_Header:: @ 865D164
 	.byte 1 @ number of tracks
 	.byte 0, 4, 0 @ unknown
-	.4byte 0x084549F0 @ voice group pointer
+	.4byte VoiceGroupTable_84549F0
 	.4byte Music251_Track0
 
 Music252_Track0:: @ 865D170
@@ -2736,7 +2736,7 @@ Music252_Track0:: @ 865D170
 Music252_Header:: @ 865D188
 	.byte 1 @ number of tracks
 	.byte 0, 4, 0 @ unknown
-	.4byte 0x084549F0 @ voice group pointer
+	.4byte VoiceGroupTable_84549F0
 	.4byte Music252_Track0
 
 Music253_Track0:: @ 865D194
@@ -2745,7 +2745,7 @@ Music253_Track0:: @ 865D194
 Music253_Header:: @ 865D1A4
 	.byte 1 @ number of tracks
 	.byte 0, 4, 0 @ unknown
-	.4byte 0x084549F0 @ voice group pointer
+	.4byte VoiceGroupTable_84549F0
 	.4byte Music253_Track0
 
 Music254_Track0:: @ 865D1B0
@@ -2754,7 +2754,7 @@ Music254_Track0:: @ 865D1B0
 Music254_Header:: @ 865D1C0
 	.byte 1 @ number of tracks
 	.byte 0, 4, 0 @ unknown
-	.4byte 0x084549F0 @ voice group pointer
+	.4byte VoiceGroupTable_84549F0
 	.4byte Music254_Track0
 
 Music255_Track0:: @ 865D1CC
@@ -2763,7 +2763,7 @@ Music255_Track0:: @ 865D1CC
 Music255_Header:: @ 865D1E4
 	.byte 1 @ number of tracks
 	.byte 0, 4, 0 @ unknown
-	.4byte 0x084549F0 @ voice group pointer
+	.4byte VoiceGroupTable_84549F0
 	.4byte Music255_Track0
 
 Music256_Track0:: @ 865D1F0
@@ -2772,7 +2772,7 @@ Music256_Track0:: @ 865D1F0
 Music256_Header:: @ 865D200
 	.byte 1 @ number of tracks
 	.byte 0, 4, 0 @ unknown
-	.4byte 0x084549F0 @ voice group pointer
+	.4byte VoiceGroupTable_84549F0
 	.4byte Music256_Track0
 
 Music257_Track0:: @ 865D20C
@@ -2781,7 +2781,7 @@ Music257_Track0:: @ 865D20C
 Music257_Header:: @ 865D21C
 	.byte 1 @ number of tracks
 	.byte 0, 4, 0 @ unknown
-	.4byte 0x084549F0 @ voice group pointer
+	.4byte VoiceGroupTable_84549F0
 	.4byte Music257_Track0
 
 Music258_Track0:: @ 865D228
@@ -2790,7 +2790,7 @@ Music258_Track0:: @ 865D228
 Music258_Header:: @ 865D240
 	.byte 1 @ number of tracks
 	.byte 0, 4, 0 @ unknown
-	.4byte 0x084549F0 @ voice group pointer
+	.4byte VoiceGroupTable_84549F0
 	.4byte Music258_Track0
 
 Music259_Track0:: @ 865D24C
@@ -2799,7 +2799,7 @@ Music259_Track0:: @ 865D24C
 Music259_Header:: @ 865D25C
 	.byte 1 @ number of tracks
 	.byte 0, 4, 0 @ unknown
-	.4byte 0x084549F0 @ voice group pointer
+	.4byte VoiceGroupTable_84549F0
 	.4byte Music259_Track0
 
 Music260_Track0:: @ 865D268
@@ -2808,7 +2808,7 @@ Music260_Track0:: @ 865D268
 Music260_Header:: @ 865D278
 	.byte 1 @ number of tracks
 	.byte 0, 4, 0 @ unknown
-	.4byte 0x084549F0 @ voice group pointer
+	.4byte VoiceGroupTable_84549F0
 	.4byte Music260_Track0
 
 Music261_Track0:: @ 865D284
@@ -2817,7 +2817,7 @@ Music261_Track0:: @ 865D284
 Music261_Header:: @ 865D29C
 	.byte 1 @ number of tracks
 	.byte 0, 4, 0 @ unknown
-	.4byte 0x084549F0 @ voice group pointer
+	.4byte VoiceGroupTable_84549F0
 	.4byte Music261_Track0
 
 Music262_Track0:: @ 865D2A8
@@ -2826,7 +2826,7 @@ Music262_Track0:: @ 865D2A8
 Music262_Header:: @ 865D2B8
 	.byte 1 @ number of tracks
 	.byte 0, 4, 0 @ unknown
-	.4byte 0x084549F0 @ voice group pointer
+	.4byte VoiceGroupTable_84549F0
 	.4byte Music262_Track0
 
 Music263_Track0:: @ 865D2C4
@@ -2835,7 +2835,7 @@ Music263_Track0:: @ 865D2C4
 Music263_Header:: @ 865D2D4
 	.byte 1 @ number of tracks
 	.byte 0, 4, 0 @ unknown
-	.4byte 0x084549F0 @ voice group pointer
+	.4byte VoiceGroupTable_84549F0
 	.4byte Music263_Track0
 
 Music264_Track0:: @ 865D2E0
@@ -2844,7 +2844,7 @@ Music264_Track0:: @ 865D2E0
 Music264_Header:: @ 865D2F8
 	.byte 1 @ number of tracks
 	.byte 0, 4, 0 @ unknown
-	.4byte 0x084549F0 @ voice group pointer
+	.4byte VoiceGroupTable_84549F0
 	.4byte Music264_Track0
 
 Music265_Track0:: @ 865D304
@@ -2853,7 +2853,7 @@ Music265_Track0:: @ 865D304
 Music265_Header:: @ 865D314
 	.byte 1 @ number of tracks
 	.byte 0, 4, 0 @ unknown
-	.4byte 0x084549F0 @ voice group pointer
+	.4byte VoiceGroupTable_84549F0
 	.4byte Music265_Track0
 
 Music266_Track0:: @ 865D320
@@ -2862,7 +2862,7 @@ Music266_Track0:: @ 865D320
 Music266_Header:: @ 865D330
 	.byte 1 @ number of tracks
 	.byte 0, 4, 0 @ unknown
-	.4byte 0x084549F0 @ voice group pointer
+	.4byte VoiceGroupTable_84549F0
 	.4byte Music266_Track0
 
 Music267_Track0:: @ 865D33C
@@ -2871,7 +2871,7 @@ Music267_Track0:: @ 865D33C
 Music267_Header:: @ 865D354
 	.byte 1 @ number of tracks
 	.byte 0, 4, 0 @ unknown
-	.4byte 0x084549F0 @ voice group pointer
+	.4byte VoiceGroupTable_84549F0
 	.4byte Music267_Track0
 
 Music268_Track0:: @ 865D360
@@ -2880,7 +2880,7 @@ Music268_Track0:: @ 865D360
 Music268_Header:: @ 865D370
 	.byte 1 @ number of tracks
 	.byte 0, 4, 0 @ unknown
-	.4byte 0x084549F0 @ voice group pointer
+	.4byte VoiceGroupTable_84549F0
 	.4byte Music268_Track0
 
 Music269_Track0:: @ 865D37C
@@ -2889,7 +2889,7 @@ Music269_Track0:: @ 865D37C
 Music269_Header:: @ 865D38C
 	.byte 1 @ number of tracks
 	.byte 0, 4, 0 @ unknown
-	.4byte 0x084549F0 @ voice group pointer
+	.4byte VoiceGroupTable_84549F0
 	.4byte Music269_Track0
 
 Music270_Track0:: @ 865D398
@@ -2898,7 +2898,7 @@ Music270_Track0:: @ 865D398
 Music270_Header:: @ 865D3B0
 	.byte 1 @ number of tracks
 	.byte 0, 4, 0 @ unknown
-	.4byte 0x084549F0 @ voice group pointer
+	.4byte VoiceGroupTable_84549F0
 	.4byte Music270_Track0
 
 Music271_Track0:: @ 865D3BC
@@ -2907,7 +2907,7 @@ Music271_Track0:: @ 865D3BC
 Music271_Header:: @ 865D3CC
 	.byte 1 @ number of tracks
 	.byte 0, 4, 0 @ unknown
-	.4byte 0x084549F0 @ voice group pointer
+	.4byte VoiceGroupTable_84549F0
 	.4byte Music271_Track0
 
 Music272_Track0:: @ 865D3D8
@@ -2916,7 +2916,7 @@ Music272_Track0:: @ 865D3D8
 Music272_Header:: @ 865D3E8
 	.byte 1 @ number of tracks
 	.byte 0, 4, 0 @ unknown
-	.4byte 0x084549F0 @ voice group pointer
+	.4byte VoiceGroupTable_84549F0
 	.4byte Music272_Track0
 
 Music273_Track0:: @ 865D3F4
@@ -2925,7 +2925,7 @@ Music273_Track0:: @ 865D3F4
 Music273_Header:: @ 865D40C
 	.byte 1 @ number of tracks
 	.byte 0, 4, 0 @ unknown
-	.4byte 0x084549F0 @ voice group pointer
+	.4byte VoiceGroupTable_84549F0
 	.4byte Music273_Track0
 
 Music274_Track0:: @ 865D418
@@ -2934,7 +2934,7 @@ Music274_Track0:: @ 865D418
 Music274_Header:: @ 865D428
 	.byte 1 @ number of tracks
 	.byte 0, 4, 0 @ unknown
-	.4byte 0x084549F0 @ voice group pointer
+	.4byte VoiceGroupTable_84549F0
 	.4byte Music274_Track0
 
 Music275_Track0:: @ 865D434
@@ -2943,7 +2943,7 @@ Music275_Track0:: @ 865D434
 Music275_Header:: @ 865D444
 	.byte 1 @ number of tracks
 	.byte 0, 4, 0 @ unknown
-	.4byte 0x084549F0 @ voice group pointer
+	.4byte VoiceGroupTable_84549F0
 	.4byte Music275_Track0
 
 Music276_Track0:: @ 865D450
@@ -2952,7 +2952,7 @@ Music276_Track0:: @ 865D450
 Music276_Header:: @ 865D468
 	.byte 1 @ number of tracks
 	.byte 0, 4, 0 @ unknown
-	.4byte 0x084549F0 @ voice group pointer
+	.4byte VoiceGroupTable_84549F0
 	.4byte Music276_Track0
 
 Music277_Track0:: @ 865D474
@@ -2961,7 +2961,7 @@ Music277_Track0:: @ 865D474
 Music277_Header:: @ 865D484
 	.byte 1 @ number of tracks
 	.byte 0, 4, 0 @ unknown
-	.4byte 0x084549F0 @ voice group pointer
+	.4byte VoiceGroupTable_84549F0
 	.4byte Music277_Track0
 
 Music278_Track0:: @ 865D490
@@ -2970,7 +2970,7 @@ Music278_Track0:: @ 865D490
 Music278_Header:: @ 865D4A0
 	.byte 1 @ number of tracks
 	.byte 0, 4, 0 @ unknown
-	.4byte 0x084549F0 @ voice group pointer
+	.4byte VoiceGroupTable_84549F0
 	.4byte Music278_Track0
 
 Music279_Track0:: @ 865D4AC
@@ -2979,7 +2979,7 @@ Music279_Track0:: @ 865D4AC
 Music279_Header:: @ 865D4C4
 	.byte 1 @ number of tracks
 	.byte 0, 4, 0 @ unknown
-	.4byte 0x084549F0 @ voice group pointer
+	.4byte VoiceGroupTable_84549F0
 	.4byte Music279_Track0
 
 Music280_Track0:: @ 865D4D0
@@ -2988,7 +2988,7 @@ Music280_Track0:: @ 865D4D0
 Music280_Header:: @ 865D4E0
 	.byte 1 @ number of tracks
 	.byte 0, 4, 0 @ unknown
-	.4byte 0x084549F0 @ voice group pointer
+	.4byte VoiceGroupTable_84549F0
 	.4byte Music280_Track0
 
 Music281_Track0:: @ 865D4EC
@@ -2997,7 +2997,7 @@ Music281_Track0:: @ 865D4EC
 Music281_Header:: @ 865D4FC
 	.byte 1 @ number of tracks
 	.byte 0, 4, 0 @ unknown
-	.4byte 0x084549F0 @ voice group pointer
+	.4byte VoiceGroupTable_84549F0
 	.4byte Music281_Track0
 
 Music282_Track0:: @ 865D508
@@ -3006,7 +3006,7 @@ Music282_Track0:: @ 865D508
 Music282_Header:: @ 865D520
 	.byte 1 @ number of tracks
 	.byte 0, 4, 0 @ unknown
-	.4byte 0x084549F0 @ voice group pointer
+	.4byte VoiceGroupTable_84549F0
 	.4byte Music282_Track0
 
 Music283_Track0:: @ 865D52C
@@ -3015,7 +3015,7 @@ Music283_Track0:: @ 865D52C
 Music283_Header:: @ 865D53C
 	.byte 1 @ number of tracks
 	.byte 0, 4, 0 @ unknown
-	.4byte 0x084549F0 @ voice group pointer
+	.4byte VoiceGroupTable_84549F0
 	.4byte Music283_Track0
 
 Music284_Track0:: @ 865D548
@@ -3024,7 +3024,7 @@ Music284_Track0:: @ 865D548
 Music284_Header:: @ 865D558
 	.byte 1 @ number of tracks
 	.byte 0, 4, 0 @ unknown
-	.4byte 0x084549F0 @ voice group pointer
+	.4byte VoiceGroupTable_84549F0
 	.4byte Music284_Track0
 
 Music285_Track0:: @ 865D564
@@ -3033,7 +3033,7 @@ Music285_Track0:: @ 865D564
 Music285_Header:: @ 865D57C
 	.byte 1 @ number of tracks
 	.byte 0, 4, 0 @ unknown
-	.4byte 0x084549F0 @ voice group pointer
+	.4byte VoiceGroupTable_84549F0
 	.4byte Music285_Track0
 
 Music286_Track0:: @ 865D588
@@ -3042,7 +3042,7 @@ Music286_Track0:: @ 865D588
 Music286_Header:: @ 865D598
 	.byte 1 @ number of tracks
 	.byte 0, 4, 0 @ unknown
-	.4byte 0x084549F0 @ voice group pointer
+	.4byte VoiceGroupTable_84549F0
 	.4byte Music286_Track0
 
 Music287_Track0:: @ 865D5A4
@@ -3051,7 +3051,7 @@ Music287_Track0:: @ 865D5A4
 Music287_Header:: @ 865D5B4
 	.byte 1 @ number of tracks
 	.byte 0, 4, 0 @ unknown
-	.4byte 0x084549F0 @ voice group pointer
+	.4byte VoiceGroupTable_84549F0
 	.4byte Music287_Track0
 
 Music288_Track0:: @ 865D5C0
@@ -3060,7 +3060,7 @@ Music288_Track0:: @ 865D5C0
 Music288_Header:: @ 865D5D8
 	.byte 1 @ number of tracks
 	.byte 0, 4, 0 @ unknown
-	.4byte 0x084549F0 @ voice group pointer
+	.4byte VoiceGroupTable_84549F0
 	.4byte Music288_Track0
 
 Music289_Track0:: @ 865D5E4
@@ -3069,7 +3069,7 @@ Music289_Track0:: @ 865D5E4
 Music289_Header:: @ 865D5F4
 	.byte 1 @ number of tracks
 	.byte 0, 4, 0 @ unknown
-	.4byte 0x084549F0 @ voice group pointer
+	.4byte VoiceGroupTable_84549F0
 	.4byte Music289_Track0
 
 Music290_Track0:: @ 865D600
@@ -3078,7 +3078,7 @@ Music290_Track0:: @ 865D600
 Music290_Header:: @ 865D610
 	.byte 1 @ number of tracks
 	.byte 0, 4, 0 @ unknown
-	.4byte 0x084549F0 @ voice group pointer
+	.4byte VoiceGroupTable_84549F0
 	.4byte Music290_Track0
 
 Music291_Track0:: @ 865D61C
@@ -3087,7 +3087,7 @@ Music291_Track0:: @ 865D61C
 Music291_Header:: @ 865D634
 	.byte 1 @ number of tracks
 	.byte 0, 4, 0 @ unknown
-	.4byte 0x084549F0 @ voice group pointer
+	.4byte VoiceGroupTable_84549F0
 	.4byte Music291_Track0
 
 Music292_Track0:: @ 865D640
@@ -3096,7 +3096,7 @@ Music292_Track0:: @ 865D640
 Music292_Header:: @ 865D650
 	.byte 1 @ number of tracks
 	.byte 0, 4, 0 @ unknown
-	.4byte 0x084549F0 @ voice group pointer
+	.4byte VoiceGroupTable_84549F0
 	.4byte Music292_Track0
 
 Music293_Track0:: @ 865D65C
@@ -3105,7 +3105,7 @@ Music293_Track0:: @ 865D65C
 Music293_Header:: @ 865D66C
 	.byte 1 @ number of tracks
 	.byte 0, 4, 0 @ unknown
-	.4byte 0x084549F0 @ voice group pointer
+	.4byte VoiceGroupTable_84549F0
 	.4byte Music293_Track0
 
 Music294_Track0:: @ 865D678
@@ -3114,7 +3114,7 @@ Music294_Track0:: @ 865D678
 Music294_Header:: @ 865D690
 	.byte 1 @ number of tracks
 	.byte 0, 4, 0 @ unknown
-	.4byte 0x084549F0 @ voice group pointer
+	.4byte VoiceGroupTable_84549F0
 	.4byte Music294_Track0
 
 Music295_Track0:: @ 865D69C
@@ -3123,7 +3123,7 @@ Music295_Track0:: @ 865D69C
 Music295_Header:: @ 865D6AC
 	.byte 1 @ number of tracks
 	.byte 0, 4, 0 @ unknown
-	.4byte 0x084549F0 @ voice group pointer
+	.4byte VoiceGroupTable_84549F0
 	.4byte Music295_Track0
 
 Music296_Track0:: @ 865D6B8
@@ -3132,7 +3132,7 @@ Music296_Track0:: @ 865D6B8
 Music296_Header:: @ 865D6C8
 	.byte 1 @ number of tracks
 	.byte 0, 4, 0 @ unknown
-	.4byte 0x084549F0 @ voice group pointer
+	.4byte VoiceGroupTable_84549F0
 	.4byte Music296_Track0
 
 Music297_Track0:: @ 865D6D4
@@ -3141,7 +3141,7 @@ Music297_Track0:: @ 865D6D4
 Music297_Header:: @ 865D6EC
 	.byte 1 @ number of tracks
 	.byte 0, 4, 0 @ unknown
-	.4byte 0x084549F0 @ voice group pointer
+	.4byte VoiceGroupTable_84549F0
 	.4byte Music297_Track0
 
 Music298_Track0:: @ 865D6F8
@@ -3150,7 +3150,7 @@ Music298_Track0:: @ 865D6F8
 Music298_Header:: @ 865D708
 	.byte 1 @ number of tracks
 	.byte 0, 4, 0 @ unknown
-	.4byte 0x084549F0 @ voice group pointer
+	.4byte VoiceGroupTable_84549F0
 	.4byte Music298_Track0
 
 Music350_Track0:: @ 865D714
@@ -3183,7 +3183,7 @@ Music350_Track8:: @ 865E076
 Music350_Header:: @ 865E100
 	.byte 9 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x08436C9C @ voice group pointer
+	.4byte VoiceGroupTable_8436C9C
 	.4byte Music350_Track0
 	.4byte Music350_Track1
 	.4byte Music350_Track2
@@ -3209,7 +3209,7 @@ Music351_Track3:: @ 865E417
 Music351_Header:: @ 865E4D8
 	.byte 4 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x0842FC88 @ voice group pointer
+	.4byte gUnknown_0842FC88
 	.4byte Music351_Track0
 	.4byte Music351_Track1
 	.4byte Music351_Track2
@@ -3239,7 +3239,7 @@ Music352_Track6:: @ 865E866
 Music352_Header:: @ 865E90C
 	.byte 7 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x08434728 @ voice group pointer
+	.4byte VoiceGroupTable_8434728
 	.4byte Music352_Track0
 	.4byte Music352_Track1
 	.4byte Music352_Track2
@@ -3272,7 +3272,7 @@ Music353_Track6:: @ 865ED9A
 Music353_Header:: @ 865EE3C
 	.byte 7 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x08434728 @ voice group pointer
+	.4byte VoiceGroupTable_8434728
 	.4byte Music353_Track0
 	.4byte Music353_Track1
 	.4byte Music353_Track2
@@ -3308,7 +3308,7 @@ Music354_Track7:: @ 865FBA5
 Music354_Header:: @ 865FD2C
 	.byte 8 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x084342E4 @ voice group pointer
+	.4byte VoiceGroupTable_84342E4
 	.4byte Music354_Track0
 	.4byte Music354_Track1
 	.4byte Music354_Track2
@@ -3345,7 +3345,7 @@ Music355_Track7:: @ 86607B3
 Music355_Header:: @ 86608C0
 	.byte 8 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x084358F8 @ voice group pointer
+	.4byte VoiceGroupTable_84358F8
 	.4byte Music355_Track0
 	.4byte Music355_Track1
 	.4byte Music355_Track2
@@ -3367,7 +3367,7 @@ Music356_Track2:: @ 8660AD8
 Music356_Header:: @ 8660BA4
 	.byte 3 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x0842FC88 @ voice group pointer
+	.4byte gUnknown_0842FC88
 	.4byte Music356_Track0
 	.4byte Music356_Track1
 	.4byte Music356_Track2
@@ -3387,7 +3387,7 @@ Music357_Track3:: @ 8661002
 Music357_Header:: @ 8661164
 	.byte 4 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x0842FC88 @ voice group pointer
+	.4byte gUnknown_0842FC88
 	.4byte Music357_Track0
 	.4byte Music357_Track1
 	.4byte Music357_Track2
@@ -3405,7 +3405,7 @@ Music358_Track2:: @ 86617A9
 Music358_Header:: @ 8661B3C
 	.byte 3 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x0842FC88 @ voice group pointer
+	.4byte gUnknown_0842FC88
 	.4byte Music358_Track0
 	.4byte Music358_Track1
 	.4byte Music358_Track2
@@ -3437,7 +3437,7 @@ Music359_Track7:: @ 86622F6
 Music359_Header:: @ 8662408
 	.byte 8 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x08430C9C @ voice group pointer
+	.4byte VoiceGroupTable_8430C9C
 	.4byte Music359_Track0
 	.4byte Music359_Track1
 	.4byte Music359_Track2
@@ -3477,7 +3477,7 @@ Music360_Track8:: @ 8662EE6
 Music360_Header:: @ 8662F80
 	.byte 9 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x084308AC @ voice group pointer
+	.4byte VoiceGroupTable_84308AC
 	.4byte Music360_Track0
 	.4byte Music360_Track1
 	.4byte Music360_Track2
@@ -3515,7 +3515,7 @@ Music361_Track7:: @ 8664051
 Music361_Header:: @ 866421C
 	.byte 8 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x08431B9C @ voice group pointer
+	.4byte VoiceGroupTable_8431B9C
 	.4byte Music361_Track0
 	.4byte Music361_Track1
 	.4byte Music361_Track2
@@ -3552,7 +3552,7 @@ Music362_Track7:: @ 8664BA4
 Music362_Header:: @ 8664CE0
 	.byte 8 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x08431F98 @ voice group pointer
+	.4byte VoiceGroupTable_8431F98
 	.4byte Music362_Track0
 	.4byte Music362_Track1
 	.4byte Music362_Track2
@@ -3586,7 +3586,7 @@ Music363_Track6:: @ 866557C
 Music363_Header:: @ 86655CC
 	.byte 7 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x08433138 @ voice group pointer
+	.4byte VoiceGroupTable_8433138
 	.4byte Music363_Track0
 	.4byte Music363_Track1
 	.4byte Music363_Track2
@@ -3619,7 +3619,7 @@ Music364_Track6:: @ 8665DCE
 Music364_Header:: @ 8665FCC
 	.byte 7 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x08431764 @ voice group pointer
+	.4byte VoiceGroupTable_8431764
 	.4byte Music364_Track0
 	.4byte Music364_Track1
 	.4byte Music364_Track2
@@ -3649,7 +3649,7 @@ Music365_Track5:: @ 8666BDF
 Music365_Header:: @ 8666E70
 	.byte 6 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x084326F4 @ voice group pointer
+	.4byte VoiceGroupTable_84326F4
 	.4byte Music365_Track0
 	.4byte Music365_Track1
 	.4byte Music365_Track2
@@ -3687,7 +3687,7 @@ Music366_Track8:: @ 8667749
 Music366_Header:: @ 8667790
 	.byte 9 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x08432B38 @ voice group pointer
+	.4byte VoiceGroupTable_8432B38
 	.4byte Music366_Track0
 	.4byte Music366_Track1
 	.4byte Music366_Track2
@@ -3716,7 +3716,7 @@ Music367_Track4:: @ 8667850
 Music367_Header:: @ 8667884
 	.byte 5 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x0843129C @ voice group pointer
+	.4byte VoiceGroupTable_843129C
 	.4byte Music367_Track0
 	.4byte Music367_Track1
 	.4byte Music367_Track2
@@ -3738,7 +3738,7 @@ Music368_Track3:: @ 866790B
 Music368_Header:: @ 8667950
 	.byte 4 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x0843129C @ voice group pointer
+	.4byte VoiceGroupTable_843129C
 	.4byte Music368_Track0
 	.4byte Music368_Track1
 	.4byte Music368_Track2
@@ -3768,7 +3768,7 @@ Music369_Track6:: @ 8667BA0
 Music369_Header:: @ 8667C1C
 	.byte 7 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x0843129C @ voice group pointer
+	.4byte VoiceGroupTable_843129C
 	.4byte Music369_Track0
 	.4byte Music369_Track1
 	.4byte Music369_Track2
@@ -3798,7 +3798,7 @@ Music370_Track5:: @ 8667D3D
 Music370_Header:: @ 8667D70
 	.byte 6 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x0843129C @ voice group pointer
+	.4byte VoiceGroupTable_843129C
 	.4byte Music370_Track0
 	.4byte Music370_Track1
 	.4byte Music370_Track2
@@ -3830,7 +3830,7 @@ Music371_Track6:: @ 8667EC9
 Music371_Header:: @ 8667F0C
 	.byte 7 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x0843129C @ voice group pointer
+	.4byte VoiceGroupTable_843129C
 	.4byte Music371_Track0
 	.4byte Music371_Track1
 	.4byte Music371_Track2
@@ -3863,7 +3863,7 @@ Music372_Track6:: @ 8668045
 Music372_Header:: @ 8668098
 	.byte 7 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x0843129C @ voice group pointer
+	.4byte VoiceGroupTable_843129C
 	.4byte Music372_Track0
 	.4byte Music372_Track1
 	.4byte Music372_Track2
@@ -3893,7 +3893,7 @@ Music373_Track5:: @ 8668A2D
 Music373_Header:: @ 8668B5C
 	.byte 6 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x08433534 @ voice group pointer
+	.4byte VoiceGroupTable_8433534
 	.4byte Music373_Track0
 	.4byte Music373_Track1
 	.4byte Music373_Track2
@@ -3928,7 +3928,7 @@ Music374_Track7:: @ 86697F8
 Music374_Header:: @ 8669A04
 	.byte 8 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x08433948 @ voice group pointer
+	.4byte VoiceGroupTable_8433948
 	.4byte Music374_Track0
 	.4byte Music374_Track1
 	.4byte Music374_Track2
@@ -3962,7 +3962,7 @@ Music375_Track6:: @ 866A6F4
 Music375_Header:: @ 866A860
 	.byte 7 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x08433EB8 @ voice group pointer
+	.4byte VoiceGroupTable_8433EB8
 	.4byte Music375_Track0
 	.4byte Music375_Track1
 	.4byte Music375_Track2
@@ -3986,7 +3986,7 @@ Music376_Track3:: @ 866A8C4
 Music376_Header:: @ 866A8D4
 	.byte 4 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x08434B18 @ voice group pointer
+	.4byte VoiceGroupTable_8434B18
 	.4byte Music376_Track0
 	.4byte Music376_Track1
 	.4byte Music376_Track2
@@ -4016,7 +4016,7 @@ Music377_Track6:: @ 866ACDF
 Music377_Header:: @ 866AE44
 	.byte 7 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x08434B18 @ voice group pointer
+	.4byte VoiceGroupTable_8434B18
 	.4byte Music377_Track0
 	.4byte Music377_Track1
 	.4byte Music377_Track2
@@ -4046,7 +4046,7 @@ Music378_Track5:: @ 866AF0F
 Music378_Header:: @ 866AF28
 	.byte 6 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x0843129C @ voice group pointer
+	.4byte VoiceGroupTable_843129C
 	.4byte Music378_Track0
 	.4byte Music378_Track1
 	.4byte Music378_Track2
@@ -4081,7 +4081,7 @@ Music379_Track7:: @ 866B42B
 Music379_Header:: @ 866B4B0
 	.byte 8 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x08434F14 @ voice group pointer
+	.4byte VoiceGroupTable_8434F14
 	.4byte Music379_Track0
 	.4byte Music379_Track1
 	.4byte Music379_Track2
@@ -4115,7 +4115,7 @@ Music380_Track6:: @ 866BA0D
 Music380_Header:: @ 866BB0C
 	.byte 7 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x08435514 @ voice group pointer
+	.4byte VoiceGroupTable_8435514
 	.4byte Music380_Track0
 	.4byte Music380_Track1
 	.4byte Music380_Track2
@@ -4151,7 +4151,7 @@ Music381_Track7:: @ 866C33E
 Music381_Header:: @ 866C448
 	.byte 8 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x08435D18 @ voice group pointer
+	.4byte VoiceGroupTable_8435D18
 	.4byte Music381_Track0
 	.4byte Music381_Track1
 	.4byte Music381_Track2
@@ -4188,7 +4188,7 @@ Music382_Track7:: @ 866CC4C
 Music382_Header:: @ 866CD7C
 	.byte 8 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x084362B8 @ voice group pointer
+	.4byte VoiceGroupTable_84362B8
 	.4byte Music382_Track0
 	.4byte Music382_Track1
 	.4byte Music382_Track2
@@ -4222,7 +4222,7 @@ Music383_Track6:: @ 866D3C5
 Music383_Header:: @ 866D42C
 	.byte 7 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x084368B8 @ voice group pointer
+	.4byte VoiceGroupTable_84368B8
 	.4byte Music383_Track0
 	.4byte Music383_Track1
 	.4byte Music383_Track2
@@ -4261,7 +4261,7 @@ Music384_Track8:: @ 866DEC1
 Music384_Header:: @ 866DFB4
 	.byte 9 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x0843708C @ voice group pointer
+	.4byte VoiceGroupTable_843708C
 	.4byte Music384_Track0
 	.4byte Music384_Track1
 	.4byte Music384_Track2
@@ -4299,7 +4299,7 @@ Music385_Track7:: @ 866E420
 Music385_Header:: @ 866E494
 	.byte 8 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x08437488 @ voice group pointer
+	.4byte VoiceGroupTable_8437488
 	.4byte Music385_Track0
 	.4byte Music385_Track1
 	.4byte Music385_Track2
@@ -4339,7 +4339,7 @@ Music386_Track8:: @ 866ED7F
 Music386_Header:: @ 866EDB8
 	.byte 9 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x08437A88 @ voice group pointer
+	.4byte VoiceGroupTable_8437A88
 	.4byte Music386_Track0
 	.4byte Music386_Track1
 	.4byte Music386_Track2
@@ -4368,7 +4368,7 @@ Music387_Track4:: @ 866EE57
 Music387_Header:: @ 866EE98
 	.byte 5 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x0843129C @ voice group pointer
+	.4byte VoiceGroupTable_843129C
 	.4byte Music387_Track0
 	.4byte Music387_Track1
 	.4byte Music387_Track2
@@ -4399,7 +4399,7 @@ Music388_Track6:: @ 866F1BF
 Music388_Header:: @ 866F1FC
 	.byte 7 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x0843129C @ voice group pointer
+	.4byte VoiceGroupTable_843129C
 	.4byte Music388_Track0
 	.4byte Music388_Track1
 	.4byte Music388_Track2
@@ -4432,7 +4432,7 @@ Music389_Track6:: @ 866F3BA
 Music389_Header:: @ 866F428
 	.byte 7 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x0843129C @ voice group pointer
+	.4byte VoiceGroupTable_843129C
 	.4byte Music389_Track0
 	.4byte Music389_Track1
 	.4byte Music389_Track2
@@ -4465,7 +4465,7 @@ Music390_Track6:: @ 866F532
 Music390_Header:: @ 866F568
 	.byte 7 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x0843129C @ voice group pointer
+	.4byte VoiceGroupTable_843129C
 	.4byte Music390_Track0
 	.4byte Music390_Track1
 	.4byte Music390_Track2
@@ -4492,7 +4492,7 @@ Music391_Track4:: @ 866F64B
 Music391_Header:: @ 866F664
 	.byte 5 @ number of tracks
 	.byte 0, 5, 178 @ unknown
-	.4byte 0x0843129C @ voice group pointer
+	.4byte VoiceGroupTable_843129C
 	.4byte Music391_Track0
 	.4byte Music391_Track1
 	.4byte Music391_Track2
@@ -4523,7 +4523,7 @@ Music392_Track6:: @ 866FBE9
 Music392_Header:: @ 866FC78
 	.byte 7 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x08437EB4 @ voice group pointer
+	.4byte VoiceGroupTable_8437EB4
 	.4byte Music392_Track0
 	.4byte Music392_Track1
 	.4byte Music392_Track2
@@ -4556,7 +4556,7 @@ Music393_Track6:: @ 86703F6
 Music393_Header:: @ 8670500
 	.byte 7 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x0843828C @ voice group pointer
+	.4byte VoiceGroupTable_843828C
 	.4byte Music393_Track0
 	.4byte Music393_Track1
 	.4byte Music393_Track2
@@ -4589,7 +4589,7 @@ Music394_Track6:: @ 8670C50
 Music394_Header:: @ 8670E44
 	.byte 7 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x0843888C @ voice group pointer
+	.4byte VoiceGroupTable_843888C
 	.4byte Music394_Track0
 	.4byte Music394_Track1
 	.4byte Music394_Track2
@@ -4622,7 +4622,7 @@ Music395_Track6:: @ 867167C
 Music395_Header:: @ 86717C0
 	.byte 7 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x08438E8C @ voice group pointer
+	.4byte VoiceGroupTable_8438E8C
 	.4byte Music395_Track0
 	.4byte Music395_Track1
 	.4byte Music395_Track2
@@ -4649,7 +4649,7 @@ Music396_Track4:: @ 8671EAD
 Music396_Header:: @ 8672064
 	.byte 5 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x0843948C @ voice group pointer
+	.4byte VoiceGroupTable_843948C
 	.4byte Music396_Track0
 	.4byte Music396_Track1
 	.4byte Music396_Track2
@@ -4674,7 +4674,7 @@ Music397_Track4:: @ 86725AD
 Music397_Header:: @ 86726A8
 	.byte 5 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x08439A8C @ voice group pointer
+	.4byte VoiceGroupTable_8439A8C
 	.4byte Music397_Track0
 	.4byte Music397_Track1
 	.4byte Music397_Track2
@@ -4714,7 +4714,7 @@ Music398_Track9:: @ 86730B0
 Music398_Header:: @ 8673158
 	.byte 10 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x08439E58 @ voice group pointer
+	.4byte VoiceGroupTable_8439E58
 	.4byte Music398_Track0
 	.4byte Music398_Track1
 	.4byte Music398_Track2
@@ -4753,7 +4753,7 @@ Music399_Track7:: @ 8674276
 Music399_Header:: @ 8674454
 	.byte 8 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x0843A224 @ voice group pointer
+	.4byte VoiceGroupTable_843A224
 	.4byte Music399_Track0
 	.4byte Music399_Track1
 	.4byte Music399_Track2
@@ -4793,7 +4793,7 @@ Music400_Track8:: @ 8674F0F
 Music400_Header:: @ 8675094
 	.byte 9 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x0843A824 @ voice group pointer
+	.4byte VoiceGroupTable_843A824
 	.4byte Music400_Track0
 	.4byte Music400_Track1
 	.4byte Music400_Track2
@@ -4837,7 +4837,7 @@ Music401_Track9:: @ 8676278
 Music401_Header:: @ 867645C
 	.byte 10 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x0843AE24 @ voice group pointer
+	.4byte VoiceGroupTable_843AE24
 	.4byte Music401_Track0
 	.4byte Music401_Track1
 	.4byte Music401_Track2
@@ -4879,7 +4879,7 @@ Music402_Track8:: @ 8677FBC
 Music402_Header:: @ 8678164
 	.byte 9 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x0843B424 @ voice group pointer
+	.4byte VoiceGroupTable_843B424
 	.4byte Music402_Track0
 	.4byte Music402_Track1
 	.4byte Music402_Track2
@@ -4920,7 +4920,7 @@ Music403_Track8:: @ 86797D3
 Music403_Header:: @ 8679948
 	.byte 9 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x0843B844 @ voice group pointer
+	.4byte VoiceGroupTable_843B844
 	.4byte Music403_Track0
 	.4byte Music403_Track1
 	.4byte Music403_Track2
@@ -4958,7 +4958,7 @@ Music404_Track7:: @ 867A902
 Music404_Header:: @ 867AC08
 	.byte 8 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x0843BE44 @ voice group pointer
+	.4byte VoiceGroupTable_843BE44
 	.4byte Music404_Track0
 	.4byte Music404_Track1
 	.4byte Music404_Track2
@@ -4998,7 +4998,7 @@ Music405_Track8:: @ 867BDDF
 Music405_Header:: @ 867BE5C
 	.byte 9 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x0843C444 @ voice group pointer
+	.4byte VoiceGroupTable_843C444
 	.4byte Music405_Track0
 	.4byte Music405_Track1
 	.4byte Music405_Track2
@@ -5039,7 +5039,7 @@ Music406_Track8:: @ 867E1B6
 Music406_Header:: @ 867E31C
 	.byte 9 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x0843C7BC @ voice group pointer
+	.4byte VoiceGroupTable_843C7BC
 	.4byte Music406_Track0
 	.4byte Music406_Track1
 	.4byte Music406_Track2
@@ -5080,7 +5080,7 @@ Music407_Track8:: @ 867E8CF
 Music407_Header:: @ 867E98C
 	.byte 9 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x0843CDBC @ voice group pointer
+	.4byte VoiceGroupTable_843CDBC
 	.4byte Music407_Track0
 	.4byte Music407_Track1
 	.4byte Music407_Track2
@@ -5112,7 +5112,7 @@ Music408_Track5:: @ 867F847
 Music408_Header:: @ 867FB80
 	.byte 6 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x0843D3BC @ voice group pointer
+	.4byte VoiceGroupTable_843D3BC
 	.4byte Music408_Track0
 	.4byte Music408_Track1
 	.4byte Music408_Track2
@@ -5147,7 +5147,7 @@ Music409_Track7:: @ 8680920
 Music409_Header:: @ 8680AFC
 	.byte 8 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x0843D9BC @ voice group pointer
+	.4byte VoiceGroupTable_843D9BC
 	.4byte Music409_Track0
 	.4byte Music409_Track1
 	.4byte Music409_Track2
@@ -5181,7 +5181,7 @@ Music410_Track6:: @ 8680E0D
 Music410_Header:: @ 8680ED0
 	.byte 7 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x0843DFBC @ voice group pointer
+	.4byte VoiceGroupTable_843DFBC
 	.4byte Music410_Track0
 	.4byte Music410_Track1
 	.4byte Music410_Track2
@@ -5223,7 +5223,7 @@ Music411_Track9:: @ 86823CA
 Music411_Header:: @ 86824D4
 	.byte 10 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x0843E5BC @ voice group pointer
+	.4byte VoiceGroupTable_843E5BC
 	.4byte Music411_Track0
 	.4byte Music411_Track1
 	.4byte Music411_Track2
@@ -5265,7 +5265,7 @@ Music412_Track8:: @ 8683581
 Music412_Header:: @ 8683660
 	.byte 9 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x0843EBBC @ voice group pointer
+	.4byte VoiceGroupTable_843EBBC
 	.4byte Music412_Track0
 	.4byte Music412_Track1
 	.4byte Music412_Track2
@@ -5309,7 +5309,7 @@ Music413_Track9:: @ 8686099
 Music413_Header:: @ 8686464
 	.byte 10 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x0843F1BC @ voice group pointer
+	.4byte VoiceGroupTable_843F1BC
 	.4byte Music413_Track0
 	.4byte Music413_Track1
 	.4byte Music413_Track2
@@ -5354,7 +5354,7 @@ Music414_Track9:: @ 8687531
 Music414_Header:: @ 8687600
 	.byte 10 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x0843F5E8 @ voice group pointer
+	.4byte VoiceGroupTable_843F5E8
 	.4byte Music414_Track0
 	.4byte Music414_Track1
 	.4byte Music414_Track2
@@ -5399,7 +5399,7 @@ Music415_Track9:: @ 8688157
 Music415_Header:: @ 8688304
 	.byte 10 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x0843FBE8 @ voice group pointer
+	.4byte VoiceGroupTable_843FBE8
 	.4byte Music415_Track0
 	.4byte Music415_Track1
 	.4byte Music415_Track2
@@ -5438,7 +5438,7 @@ Music416_Track7:: @ 8688AE6
 Music416_Header:: @ 8688C38
 	.byte 8 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x084401E8 @ voice group pointer
+	.4byte VoiceGroupTable_84401E8
 	.4byte Music416_Track0
 	.4byte Music416_Track1
 	.4byte Music416_Track2
@@ -5478,7 +5478,7 @@ Music417_Track8:: @ 8689816
 Music417_Header:: @ 8689908
 	.byte 9 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x084407E8 @ voice group pointer
+	.4byte VoiceGroupTable_84407E8
 	.4byte Music417_Track0
 	.4byte Music417_Track1
 	.4byte Music417_Track2
@@ -5519,7 +5519,7 @@ Music418_Track8:: @ 868ADFC
 Music418_Header:: @ 868B04C
 	.byte 9 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x08440DE8 @ voice group pointer
+	.4byte VoiceGroupTable_8440DE8
 	.4byte Music418_Track0
 	.4byte Music418_Track1
 	.4byte Music418_Track2
@@ -5563,7 +5563,7 @@ Music419_Track9:: @ 868BCD2
 Music419_Header:: @ 868BE88
 	.byte 10 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x084413E8 @ voice group pointer
+	.4byte VoiceGroupTable_84413E8
 	.4byte Music419_Track0
 	.4byte Music419_Track1
 	.4byte Music419_Track2
@@ -5602,7 +5602,7 @@ Music420_Track7:: @ 868C3F9
 Music420_Header:: @ 868C4C0
 	.byte 8 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x084419E8 @ voice group pointer
+	.4byte VoiceGroupTable_84419E8
 	.4byte Music420_Track0
 	.4byte Music420_Track1
 	.4byte Music420_Track2
@@ -5645,7 +5645,7 @@ Music421_Track9:: @ 868D012
 Music421_Header:: @ 868D1BC
 	.byte 10 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x08441FE8 @ voice group pointer
+	.4byte VoiceGroupTable_8441FE8
 	.4byte Music421_Track0
 	.4byte Music421_Track1
 	.4byte Music421_Track2
@@ -5684,7 +5684,7 @@ Music422_Track7:: @ 868DE2E
 Music422_Header:: @ 868DFC4
 	.byte 8 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x084425E8 @ voice group pointer
+	.4byte VoiceGroupTable_84425E8
 	.4byte Music422_Track0
 	.4byte Music422_Track1
 	.4byte Music422_Track2
@@ -5724,7 +5724,7 @@ Music423_Track8:: @ 868E717
 Music423_Header:: @ 868E88C
 	.byte 9 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x08442BE8 @ voice group pointer
+	.4byte VoiceGroupTable_8442BE8
 	.4byte Music423_Track0
 	.4byte Music423_Track1
 	.4byte Music423_Track2
@@ -5765,7 +5765,7 @@ Music424_Track8:: @ 868ECB1
 Music424_Header:: @ 868ED5C
 	.byte 9 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x084431E8 @ voice group pointer
+	.4byte VoiceGroupTable_84431E8
 	.4byte Music424_Track0
 	.4byte Music424_Track1
 	.4byte Music424_Track2
@@ -5806,7 +5806,7 @@ Music425_Track8:: @ 868F381
 Music425_Header:: @ 868F3D0
 	.byte 9 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x084437E8 @ voice group pointer
+	.4byte VoiceGroupTable_84437E8
 	.4byte Music425_Track0
 	.4byte Music425_Track1
 	.4byte Music425_Track2
@@ -5850,7 +5850,7 @@ Music426_Track9:: @ 8690969
 Music426_Header:: @ 8690AF4
 	.byte 10 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x08443DE8 @ voice group pointer
+	.4byte VoiceGroupTable_8443DE8
 	.4byte Music426_Track0
 	.4byte Music426_Track1
 	.4byte Music426_Track2
@@ -5895,7 +5895,7 @@ Music427_Track9:: @ 86917FF
 Music427_Header:: @ 8691940
 	.byte 10 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x084443E8 @ voice group pointer
+	.4byte VoiceGroupTable_84443E8
 	.4byte Music427_Track0
 	.4byte Music427_Track1
 	.4byte Music427_Track2
@@ -5937,7 +5937,7 @@ Music428_Track8:: @ 8692032
 Music428_Header:: @ 86920D0
 	.byte 9 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x084449E8 @ voice group pointer
+	.4byte VoiceGroupTable_84449E8
 	.4byte Music428_Track0
 	.4byte Music428_Track1
 	.4byte Music428_Track2
@@ -5981,7 +5981,7 @@ Music429_Track9:: @ 86933E3
 Music429_Header:: @ 869346C
 	.byte 10 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x08444FE8 @ voice group pointer
+	.4byte VoiceGroupTable_8444FE8
 	.4byte Music429_Track0
 	.4byte Music429_Track1
 	.4byte Music429_Track2
@@ -6023,7 +6023,7 @@ Music430_Track8:: @ 8693BF9
 Music430_Header:: @ 8693D7C
 	.byte 9 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x084455E8 @ voice group pointer
+	.4byte VoiceGroupTable_84455E8
 	.4byte Music430_Track0
 	.4byte Music430_Track1
 	.4byte Music430_Track2
@@ -6064,7 +6064,7 @@ Music431_Track8:: @ 8694A96
 Music431_Header:: @ 8694B84
 	.byte 9 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x08445BE8 @ voice group pointer
+	.4byte VoiceGroupTable_8445BE8
 	.4byte Music431_Track0
 	.4byte Music431_Track1
 	.4byte Music431_Track2
@@ -6108,7 +6108,7 @@ Music432_Track9:: @ 869561C
 Music432_Header:: @ 8695834
 	.byte 10 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x084461E8 @ voice group pointer
+	.4byte VoiceGroupTable_84461E8
 	.4byte Music432_Track0
 	.4byte Music432_Track1
 	.4byte Music432_Track2
@@ -6153,7 +6153,7 @@ Music433_Track9:: @ 8697476
 Music433_Header:: @ 8697670
 	.byte 10 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x084467E8 @ voice group pointer
+	.4byte VoiceGroupTable_84467E8
 	.4byte Music433_Track0
 	.4byte Music433_Track1
 	.4byte Music433_Track2
@@ -6198,7 +6198,7 @@ Music434_Track9:: @ 8699745
 Music434_Header:: @ 86998C4
 	.byte 10 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x08446DE8 @ voice group pointer
+	.4byte VoiceGroupTable_8446DE8
 	.4byte Music434_Track0
 	.4byte Music434_Track1
 	.4byte Music434_Track2
@@ -6225,7 +6225,7 @@ Music435_Track3:: @ 8699B81
 Music435_Header:: @ 8699C24
 	.byte 4 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x084473E8 @ voice group pointer
+	.4byte VoiceGroupTable_84473E8
 	.4byte Music435_Track0
 	.4byte Music435_Track1
 	.4byte Music435_Track2
@@ -6264,7 +6264,7 @@ Music436_Track9:: @ 869A6C0
 Music436_Header:: @ 869A7BC
 	.byte 10 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x08447400 @ voice group pointer
+	.4byte VoiceGroupTable_8447400
 	.4byte Music436_Track0
 	.4byte Music436_Track1
 	.4byte Music436_Track2
@@ -6306,7 +6306,7 @@ Music437_Track8:: @ 869B4EE
 Music437_Header:: @ 869B678
 	.byte 9 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x08447A00 @ voice group pointer
+	.4byte VoiceGroupTable_8447A00
 	.4byte Music437_Track0
 	.4byte Music437_Track1
 	.4byte Music437_Track2
@@ -6344,7 +6344,7 @@ Music438_Track7:: @ 869BD3B
 Music438_Header:: @ 869BE8C
 	.byte 8 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x08447DF0 @ voice group pointer
+	.4byte VoiceGroupTable_8447DF0
 	.4byte Music438_Track0
 	.4byte Music438_Track1
 	.4byte Music438_Track2
@@ -6381,7 +6381,7 @@ Music439_Track7:: @ 869C3D3
 Music439_Header:: @ 869C498
 	.byte 8 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x084483F0 @ voice group pointer
+	.4byte VoiceGroupTable_84483F0
 	.4byte Music439_Track0
 	.4byte Music439_Track1
 	.4byte Music439_Track2
@@ -6418,7 +6418,7 @@ Music440_Track7:: @ 869D215
 Music440_Header:: @ 869D35C
 	.byte 8 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x084489F0 @ voice group pointer
+	.4byte VoiceGroupTable_84489F0
 	.4byte Music440_Track0
 	.4byte Music440_Track1
 	.4byte Music440_Track2
@@ -6461,7 +6461,7 @@ Music441_Track9:: @ 869DE11
 Music441_Header:: @ 869DEBC
 	.byte 10 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x08448FF0 @ voice group pointer
+	.4byte VoiceGroupTable_8448FF0
 	.4byte Music441_Track0
 	.4byte Music441_Track1
 	.4byte Music441_Track2
@@ -6503,7 +6503,7 @@ Music442_Track8:: @ 869E9C9
 Music442_Header:: @ 869EAE0
 	.byte 9 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x084495F0 @ voice group pointer
+	.4byte VoiceGroupTable_84495F0
 	.4byte Music442_Track0
 	.4byte Music442_Track1
 	.4byte Music442_Track2
@@ -6535,7 +6535,7 @@ Music443_Track5:: @ 869EF7A
 Music443_Header:: @ 869F140
 	.byte 6 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x08449BF0 @ voice group pointer
+	.4byte VoiceGroupTable_8449BF0
 	.4byte Music443_Track0
 	.4byte Music443_Track1
 	.4byte Music443_Track2
@@ -6555,7 +6555,7 @@ Music444_Track2:: @ 869F371
 Music444_Header:: @ 869F41C
 	.byte 3 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x0844A1F0 @ voice group pointer
+	.4byte VoiceGroupTable_844A1F0
 	.4byte Music444_Track0
 	.4byte Music444_Track1
 	.4byte Music444_Track2
@@ -6587,7 +6587,7 @@ Music445_Track7:: @ 86A0103
 Music445_Header:: @ 86A04F8
 	.byte 8 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x0844A7F0 @ voice group pointer
+	.4byte VoiceGroupTable_844A7F0
 	.4byte Music445_Track0
 	.4byte Music445_Track1
 	.4byte Music445_Track2
@@ -6624,7 +6624,7 @@ Music446_Track7:: @ 86A08E2
 Music446_Header:: @ 86A095C
 	.byte 8 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x0844ADF0 @ voice group pointer
+	.4byte VoiceGroupTable_844ADF0
 	.4byte Music446_Track0
 	.4byte Music446_Track1
 	.4byte Music446_Track2
@@ -6658,7 +6658,7 @@ Music447_Track6:: @ 86A1093
 Music447_Header:: @ 86A1118
 	.byte 7 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x0844B3F0 @ voice group pointer
+	.4byte VoiceGroupTable_844B3F0
 	.4byte Music447_Track0
 	.4byte Music447_Track1
 	.4byte Music447_Track2
@@ -6694,7 +6694,7 @@ Music448_Track7:: @ 86A1DD6
 Music448_Header:: @ 86A1FF8
 	.byte 8 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x0844B9F0 @ voice group pointer
+	.4byte VoiceGroupTable_844B9F0
 	.4byte Music448_Track0
 	.4byte Music448_Track1
 	.4byte Music448_Track2
@@ -6737,7 +6737,7 @@ Music449_Track9:: @ 86A2465
 Music449_Header:: @ 86A2500
 	.byte 10 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x0844BFF0 @ voice group pointer
+	.4byte VoiceGroupTable_844BFF0
 	.4byte Music449_Track0
 	.4byte Music449_Track1
 	.4byte Music449_Track2
@@ -6779,7 +6779,7 @@ Music450_Track8:: @ 86A3008
 Music450_Header:: @ 86A3188
 	.byte 9 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x0844C5F0 @ voice group pointer
+	.4byte VoiceGroupTable_844C5F0
 	.4byte Music450_Track0
 	.4byte Music450_Track1
 	.4byte Music450_Track2
@@ -6817,7 +6817,7 @@ Music451_Track7:: @ 86A3664
 Music451_Header:: @ 86A370C
 	.byte 8 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x0844CBF0 @ voice group pointer
+	.4byte VoiceGroupTable_844CBF0
 	.4byte Music451_Track0
 	.4byte Music451_Track1
 	.4byte Music451_Track2
@@ -6854,7 +6854,7 @@ Music452_Track7:: @ 86A3CEE
 Music452_Header:: @ 86A3D94
 	.byte 8 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x0844D1F0 @ voice group pointer
+	.4byte VoiceGroupTable_844D1F0
 	.4byte Music452_Track0
 	.4byte Music452_Track1
 	.4byte Music452_Track2
@@ -6894,7 +6894,7 @@ Music453_Track8:: @ 86A4285
 Music453_Header:: @ 86A4318
 	.byte 9 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x0844D7F0 @ voice group pointer
+	.4byte VoiceGroupTable_844D7F0
 	.4byte Music453_Track0
 	.4byte Music453_Track1
 	.4byte Music453_Track2
@@ -6938,7 +6938,7 @@ Music454_Track9:: @ 86A52CA
 Music454_Header:: @ 86A53FC
 	.byte 10 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x0844DDF0 @ voice group pointer
+	.4byte VoiceGroupTable_844DDF0
 	.4byte Music454_Track0
 	.4byte Music454_Track1
 	.4byte Music454_Track2
@@ -6983,7 +6983,7 @@ Music455_Track9:: @ 86A7585
 Music455_Header:: @ 86A7A28
 	.byte 10 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x0844E3F0 @ voice group pointer
+	.4byte VoiceGroupTable_844E3F0
 	.4byte Music455_Track0
 	.4byte Music455_Track1
 	.4byte Music455_Track2
@@ -7004,7 +7004,7 @@ Music456_Track1:: @ 86A7D7D
 Music456_Header:: @ 86A7F4C
 	.byte 2 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x0844E918 @ voice group pointer
+	.4byte VoiceGroupTable_844E918
 	.4byte Music456_Track0
 	.4byte Music456_Track1
 
@@ -7035,7 +7035,7 @@ Music457_Track7:: @ 86A891A
 Music457_Header:: @ 86A8A04
 	.byte 8 @ number of tracks
 	.byte 0, 1, 178 @ unknown
-	.4byte 0x0844ECF0 @ voice group pointer
+	.4byte VoiceGroupTable_844ECF0
 	.4byte Music457_Track0
 	.4byte Music457_Track1
 	.4byte Music457_Track2
@@ -7072,7 +7072,7 @@ Music458_Track7:: @ 86A9AC8
 Music458_Header:: @ 86A9C6C
 	.byte 8 @ number of tracks
 	.byte 0, 1, 178 @ unknown
-	.4byte 0x0844F0C8 @ voice group pointer
+	.4byte VoiceGroupTable_844F0C8
 	.4byte Music458_Track0
 	.4byte Music458_Track1
 	.4byte Music458_Track2
@@ -7109,7 +7109,7 @@ Music459_Track7:: @ 86AAAFE
 Music459_Header:: @ 86AAD10
 	.byte 8 @ number of tracks
 	.byte 0, 1, 178 @ unknown
-	.4byte 0x0844F50C @ voice group pointer
+	.4byte VoiceGroupTable_844F50C
 	.4byte Music459_Track0
 	.4byte Music459_Track1
 	.4byte Music459_Track2
@@ -7146,7 +7146,7 @@ Music460_Track7:: @ 86AB9E3
 Music460_Header:: @ 86ABB40
 	.byte 8 @ number of tracks
 	.byte 0, 1, 178 @ unknown
-	.4byte 0x0844F950 @ voice group pointer
+	.4byte VoiceGroupTable_844F950
 	.4byte Music460_Track0
 	.4byte Music460_Track1
 	.4byte Music460_Track2
@@ -7183,7 +7183,7 @@ Music461_Track7:: @ 86AC896
 Music461_Header:: @ 86ACA30
 	.byte 8 @ number of tracks
 	.byte 0, 1, 178 @ unknown
-	.4byte 0x0844FD94 @ voice group pointer
+	.4byte VoiceGroupTable_844FD94
 	.4byte Music461_Track0
 	.4byte Music461_Track1
 	.4byte Music461_Track2
@@ -7220,7 +7220,7 @@ Music462_Track7:: @ 86AD261
 Music462_Header:: @ 86AD344
 	.byte 8 @ number of tracks
 	.byte 0, 1, 178 @ unknown
-	.4byte 0x0845019C @ voice group pointer
+	.4byte VoiceGroupTable_845019C
 	.4byte Music462_Track0
 	.4byte Music462_Track1
 	.4byte Music462_Track2
@@ -7251,7 +7251,7 @@ Music463_Track5:: @ 86AD87C
 Music463_Header:: @ 86ADA34
 	.byte 6 @ number of tracks
 	.byte 0, 1, 178 @ unknown
-	.4byte 0x0845058C @ voice group pointer
+	.4byte VoiceGroupTable_845058C
 	.4byte Music463_Track0
 	.4byte Music463_Track1
 	.4byte Music463_Track2
@@ -7286,7 +7286,7 @@ Music464_Track7:: @ 86AE5C0
 Music464_Header:: @ 86AE6DC
 	.byte 8 @ number of tracks
 	.byte 0, 1, 178 @ unknown
-	.4byte 0x08450B8C @ voice group pointer
+	.4byte VoiceGroupTable_8450B8C
 	.4byte Music464_Track0
 	.4byte Music464_Track1
 	.4byte Music464_Track2
@@ -7323,7 +7323,7 @@ Music465_Track7:: @ 86AF1D5
 Music465_Header:: @ 86AF30C
 	.byte 8 @ number of tracks
 	.byte 0, 1, 178 @ unknown
-	.4byte 0x08450FA0 @ voice group pointer
+	.4byte VoiceGroupTable_8450FA0
 	.4byte Music465_Track0
 	.4byte Music465_Track1
 	.4byte Music465_Track2
@@ -7360,7 +7360,7 @@ Music466_Track7:: @ 86B001F
 Music466_Header:: @ 86B01A4
 	.byte 8 @ number of tracks
 	.byte 0, 1, 178 @ unknown
-	.4byte 0x08451390 @ voice group pointer
+	.4byte VoiceGroupTable_8451390
 	.4byte Music466_Track0
 	.4byte Music466_Track1
 	.4byte Music466_Track2
@@ -7388,7 +7388,7 @@ Music467_Track4:: @ 86B0639
 Music467_Header:: @ 86B070C
 	.byte 5 @ number of tracks
 	.byte 0, 0, 178 @ unknown
-	.4byte 0x08454C54 @ voice group pointer
+	.4byte VoiceGroupTable_8454C54
 	.4byte Music467_Track0
 	.4byte Music467_Track1
 	.4byte Music467_Track2
