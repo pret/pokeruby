@@ -1,4 +1,4 @@
-@ gSongTable
+gSongTable:: @ 845548C
 	.4byte Music0_Header
 	.byte 0, 0, 0, 0
 

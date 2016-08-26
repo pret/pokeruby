@@ -1,5 +1,7 @@
 	.section .rodata
 
+	.include "asm/macros/music_voice.s"
+
 gUnknown_0842FC88:: @ 842FC88
 @ Percussion 842FC88
 	.byte 0x80, 0, 0, 0
@@ -54,9 +56,7 @@ gUnknown_0842FC88:: @ 842FC88
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 842FCF4
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8456330
-	.byte 255, 165, 51, 235
+	voice_directsound 60, 0, DirectSoundWaveData_8456330, 255, 165, 51, 235
 
 @ SquareWave1 842FD00
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -432,9 +432,7 @@ VoiceGroupTable_842FEF8: @ 842FEF8
 	.byte 0, 0, 15, 0
 
 @ WaveMemory 842FFF4
-	.byte 0x3, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553BC
-	.byte 0, 7, 15, 1
+	voice_programmable_wave ProgrammableWaveData_84553BC, 0, 7, 15, 1
 
 @ SquareWave1 8430000
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -479,9 +477,7 @@ VoiceGroupTable_842FEF8: @ 842FEF8
 	.byte 0, 1, 6, 0
 
 @ WaveMemory 8430054
-	.byte 0x3, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553DC
-	.byte 0, 7, 15, 1
+	voice_programmable_wave ProgrammableWaveData_84553DC, 0, 7, 15, 1
 
 @ SquareWave1 8430060
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -520,9 +516,7 @@ VoiceGroupTable_842FEF8: @ 842FEF8
 	.byte 0, 1, 6, 0
 
 @ Direct Sound 84300A8
-	.byte 0x8, 0x3c, 0x0, 0xc0
-	.4byte DirectSoundWaveData_845AE14
-	.byte 255, 0, 255, 242
+	voice_directsound_no_resample 60, 0x40, DirectSoundWaveData_845AE14, 255, 0, 255, 242
 
 @ SquareWave1 84300B4
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -556,9 +550,7 @@ VoiceGroupTable_842FEF8: @ 842FEF8
 	.byte 255, 127, 0, 188
 
 @ Direct Sound 84300FC
-	.byte 0x0, 0x33, 0x0, 0xb1
-	.4byte DirectSoundWaveData_845CAB0
-	.byte 255, 216, 77, 204
+	voice_directsound 51, 0x31, DirectSoundWaveData_845CAB0, 255, 216, 77, 204
 
 @ SquareWave1 8430108
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -4842,9 +4834,7 @@ VoiceGroupTable_8431F98: @ 8431F98
 	.byte 255, 127, 231, 127
 
 @ WaveMemory 8432310
-	.byte 0x3, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553BC
-	.byte 0, 7, 15, 1
+	voice_programmable_wave ProgrammableWaveData_84553BC, 0, 7, 15, 1
 
 @ SquareWave1 843231C
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -5773,9 +5763,7 @@ VoiceGroupTable_84326F4: @ 84326F4
 	.byte 255, 127, 231, 127
 
 @ WaveMemory 8432A6C
-	.byte 0x3, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553BC
-	.byte 0, 7, 15, 0
+	voice_programmable_wave ProgrammableWaveData_84553BC, 0, 7, 15, 0
 
 @ SquareWave1 8432A78
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -7119,9 +7107,7 @@ VoiceGroupTable_8433138: @ 8433138
 	.byte 0, 1, 7, 1
 
 @ WaveMemory 8433504
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553FC
-	.byte 0, 7, 15, 2
+	voice_programmable_wave_alt ProgrammableWaveData_84553FC, 0, 7, 15, 2
 
 @ SquareWave1 8433510
 	.byte 0x9, 0x3c, 0x0, 0x0
@@ -10856,9 +10842,7 @@ VoiceGroupTable_8434F14: @ 8434F14
 	.byte 0, 0, 15, 0
 
 @ WaveMemory 8435280
-	.byte 0x3, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553BC
-	.byte 0, 7, 15, 0
+	voice_programmable_wave ProgrammableWaveData_84553BC, 0, 7, 15, 0
 
 @ SquareWave1 843528C
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -11172,10 +11156,7 @@ VoiceGroupTable_8434F14: @ 8434F14
 	.byte 0, 0, 15, 0
 
 @ Noise 84354FC
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 4, 1, 4
+	voice_noise_alt 0, 0, 4, 1, 4
 
 @ Noise 8435508
 	.byte 0xc, 0x3c, 0x0, 0x0
@@ -11519,9 +11500,7 @@ VoiceGroupTable_8435514: @ 8435514
 	.byte 0, 0, 15, 0
 
 @ Key-Split 84357B4
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 84357C0
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -11681,9 +11660,7 @@ VoiceGroupTable_8435514: @ 8435514
 VoiceGroupTable_84358F8: @ 84358F8
 
 @ Percussion 84358F8
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 8435904
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -13351,9 +13328,7 @@ VoiceGroupTable_84362B8: @ 84362B8
 	.byte 255, 127, 231, 127
 
 @ WaveMemory 8436630
-	.byte 0x3, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553BC
-	.byte 0, 7, 15, 1
+	voice_programmable_wave ProgrammableWaveData_84553BC, 0, 7, 15, 1
 
 @ SquareWave1 843663C
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -14661,9 +14636,7 @@ VoiceGroupTable_8436C9C: @ 8436C9C
 	.byte 0, 0, 15, 0
 
 @ WaveMemory 8437080
-	.byte 0x3, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845544C
-	.byte 0, 7, 15, 2
+	voice_programmable_wave ProgrammableWaveData_845544C, 0, 7, 15, 2
 
 VoiceGroupTable_843708C: @ 843708C
 
@@ -15604,9 +15577,7 @@ VoiceGroupTable_8437488: @ 8437488
 	.byte 0, 0, 15, 0
 
 @ WaveMemory 84377F4
-	.byte 0x3, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553BC
-	.byte 0, 7, 15, 0
+	voice_programmable_wave ProgrammableWaveData_84553BC, 0, 7, 15, 0
 
 @ SquareWave1 8437800
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -25310,16 +25281,10 @@ VoiceGroupTable_843C444: @ 843C444
 	.byte 0, 0, 15, 0
 
 @ SquareWave2 843C474
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 1, 4, 4, 2
+	voice_square_2_alt 2, 1, 4, 4, 2
 
 @ SquareWave1 843C480
-	.byte 0x9, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 3, 4, 1
+	voice_square_1_alt 0, 2, 0, 3, 4, 1
 
 @ SquareWave2 843C48C
 	.byte 0xa, 0x3c, 0x0, 0x0
@@ -69256,16 +69221,10 @@ VoiceGroupTable_8451990: @ 8451990
 	.byte 0, 0, 15, 0
 
 @ Noise 8451F24
-	.byte 0x4, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 7, 15, 0
+	voice_noise 0, 0, 7, 15, 0
 
 @ Noise 8451F30
-	.byte 0x4, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 2, 7, 15, 0
+	voice_noise 0, 2, 7, 15, 0
 
 @ Noise 8451F3C
 	.byte 0xc, 0x3c, 0x0, 0x0
@@ -69376,16 +69335,10 @@ VoiceGroupTable_8451F90: @ 8451F90
 	.byte 0, 2, 0, 0
 
 @ SquareWave1 8452020
-	.byte 0x1, 0x3c, 0x0, 0x67
-	.byte 3
-	.byte 0, 0, 0
-	.byte 2, 7, 0, 0
+	voice_square_1 0x67, 3, 2, 7, 0, 0
 
 @ SquareWave2 845202C
-	.byte 0x2, 0x3c, 0x0, 0x0
-	.byte 3
-	.byte 0, 0, 0
-	.byte 2, 7, 0, 0
+	voice_square_2 3, 2, 7, 0, 0
 
 @ Direct Sound 8452038
 	.byte 0x0, 0x3c, 0x0, 0x0
@@ -71114,8 +71067,7 @@ ProgrammableWaveData_845544C: @ 845544C
 gMPlayTable:: @ 845545C
 	.incbin "baserom.gba", 0x0045545c, 0x30
 
-gSongTable:: @ 845548C
-	.include "data/music/music_pointers.s"
+	.include "data/music/music_pointers.s" @ 845548C
 
 BlankMusic_Header: @ 845632C
 	.byte 0 @ number of tracks
