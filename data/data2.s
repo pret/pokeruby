@@ -12973,20 +12973,23 @@ gUnknown_083C1640:: @ 83C1640
 	.4byte OtherText_Terminator19, 0x0
 	.4byte OtherText_Confirm, sub_80A69E0
 
+@ 6-byte entries; format of entry is unknown
 gUnknown_083C1690:: @ 83C1690
-	.4byte 0x2060100, 0x1060000
-	.4byte 0x208, 0x2060800
-	.4byte 0x70000, 0x2060801
-
-	.incbin "baserom.gba", 0x3c16a8, 0x6
+	.byte 0, 1, 6, 2, 0, 0
+	.byte 6, 1, 8, 2, 0, 0
+	.byte 0, 8, 6, 2, 0, 0
+	.byte 7, 0, 1, 8, 6, 2
+	.byte 0, 8, 3, 2, 0, 0
 
 gUnknown_083C16AE:: @ 83C16AE
-
-	.incbin "baserom.gba", 0x3c16ae, 0x2
-	.4byte 0x2060206, 0x20206
+	.byte 6, 2
+	.byte 6, 2
+	.byte 6, 2
+	.byte 6, 2
+	.byte 2, 0
 
 gUnknown_083C16B8:: @ 83C16B8
-	.incbin "baserom.gba", 0x003c16b8, 0x4
+	.byte 7, 9, 8, 2
 
 	.align 2
 gUnknown_083C16BC:: @ 83C16BC
@@ -31216,6 +31219,7 @@ gUnknown_0842F5BC:: @ 842F5BC
 gUnknown_0842F5C0:: @ 842F5C0
 	.incbin "baserom.gba", 0x0042f5c0, 0x100
 
+	.align 2
 gUnknown_0842F6C0:: @ 842F6C0
 	.4byte 0x2, Unknown_842F2C8
 	.4byte 0x2, Unknown_842F2C8
