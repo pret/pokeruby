@@ -8,6 +8,11 @@
 	_voice_directsound \base_midi_key, \pan, \sample_data_pointer, \attack, \decay, \sustain, \release
 	.endm
 
+	.macro voice_directsound_alt base_midi_key, pan, sample_data_pointer, attack, decay, sustain, release
+	.byte 16
+	_voice_directsound \base_midi_key, \pan, \sample_data_pointer, \attack, \decay, \sustain, \release
+	.endm
+
 	.macro _voice_directsound base_midi_key, pan, sample_data_pointer, attack, decay, sustain, release
 	.byte \base_midi_key
 	.byte 0

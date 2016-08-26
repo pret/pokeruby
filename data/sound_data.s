@@ -69276,9 +69276,7 @@ VoiceGroupTable_8451F90: @ 8451F90
 	.byte 255, 249, 0, 165
 
 @ Direct Sound 8451F9C
-	.byte 0x10, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8488F44
-	.byte 255, 0, 255, 165
+	voice_directsound_alt 60, 0, DirectSoundWaveData_8488F44, 255, 0, 255, 165
 
 @ Direct Sound 8451FA8
 	.byte 0x0, 0x3c, 0x0, 0x0
@@ -70385,9 +70383,7 @@ VoiceGroupTable_8454C54: @ 8454C54
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8454D50
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8654C20
-	.byte 255, 249, 25, 248
+	voice_directsound 60, 0, DirectSoundWaveData_8654C20, 255, 249, 25, 248
 
 @ SquareWave1 8454D5C
 	.byte 0x1, 0x3c, 0x0, 0x0
