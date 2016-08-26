@@ -26,10 +26,7 @@ gUnknown_0842FC88:: @ 842FC88
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 842FCD0
-	.byte 0x2, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 0, 9, 2
+	voice_square_2 2, 0, 0, 9, 2
 
 @ SquareWave1 842FCDC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -257,10 +254,7 @@ VoiceGroupTable_842FEF8: @ 842FEF8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 8430048
-	.byte 0x2, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 1, 6, 0
+	voice_square_2 2, 0, 1, 6, 0
 
 @ WaveMemory 8430054
 	voice_programmable_wave ProgrammableWaveData_84553DC, 0, 7, 15, 1
@@ -269,10 +263,7 @@ VoiceGroupTable_842FEF8: @ 842FEF8
 	voice_square_1 0, 2, 0, 1, 6, 0
 
 @ SquareWave2 843006C
-	.byte 0x2, 0x3c, 0x0, 0x0
-	.byte 3
-	.byte 0, 0, 0
-	.byte 0, 1, 6, 0
+	voice_square_2 3, 0, 1, 6, 0
 
 @ SquareWave1 8430078
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -818,10 +809,7 @@ VoiceGroupTable_84308AC: @ 84308AC
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 84308DC
-	.byte 0x2, 0x3c, 0x0, 0x0
-	.byte 3
-	.byte 0, 0, 0
-	.byte 0, 4, 0, 1
+	voice_square_2 3, 0, 4, 0, 1
 
 @ SquareWave1 84308E8
 	voice_square_1 0, 3, 0, 4, 0, 1
@@ -1057,10 +1045,7 @@ VoiceGroupTable_84308AC: @ 84308AC
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 8430C6C
-	.byte 0x2, 0x3c, 0x0, 0x0
-	.byte 3
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_square_2 3, 0, 1, 7, 1
 
 @ WaveMemory 8430C78
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -1093,22 +1078,13 @@ VoiceGroupTable_8430C9C: @ 8430C9C
 	voice_square_1_alt 0, 3, 0, 2, 4, 0
 
 @ SquareWave2 8430CD8
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 3
-	.byte 0, 0, 0
-	.byte 0, 2, 4, 0
+	voice_square_2_alt 3, 0, 2, 4, 0
 
 @ SquareWave2 8430CE4
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 3, 0, 0
+	voice_square_2_alt 2, 0, 3, 0, 0
 
 @ SquareWave2 8430CF0
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 3, 0, 0
+	voice_square_2_alt 2, 0, 3, 0, 0
 
 @ SquareWave1 8430CFC
 	voice_square_1_alt 0, 2, 0, 3, 0, 0
@@ -1331,10 +1307,7 @@ VoiceGroupTable_8430C9C: @ 8430C9C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 843105C
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 1, 1, 7, 1
+	voice_square_2_alt 2, 1, 1, 7, 1
 
 @ SquareWave1 8431068
 	voice_square_1_alt 0, 2, 1, 1, 7, 1
@@ -1735,28 +1708,19 @@ VoiceGroupTable_843129C: @ 843129C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 843165C
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_square_2_alt 2, 0, 1, 7, 1
 
 @ SquareWave1 8431668
 	voice_square_1_alt 0, 2, 0, 1, 7, 1
 
 @ SquareWave2 8431674
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 3
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_square_2_alt 3, 0, 1, 7, 1
 
 @ SquareWave1 8431680
 	voice_square_1_alt 0, 3, 0, 1, 7, 1
 
 @ SquareWave2 843168C
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 1
+	voice_square_2_alt 2, 0, 1, 4, 1
 
 @ SquareWave1 8431698
 	voice_square_1_alt 0, 2, 0, 1, 4, 1
@@ -1778,10 +1742,7 @@ VoiceGroupTable_843129C: @ 843129C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 84316D4
-	.byte 0x2, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 1
+	voice_square_2 2, 0, 1, 4, 1
 
 @ SquareWave1 84316E0
 	voice_square_1 0, 2, 0, 1, 4, 1
@@ -2067,10 +2028,7 @@ VoiceGroupTable_8431764: @ 8431764
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 8431B24
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_square_2_alt 1, 0, 1, 7, 1
 
 @ SquareWave1 8431B30
 	voice_square_1_alt 0, 1, 0, 1, 7, 1
@@ -2082,10 +2040,7 @@ VoiceGroupTable_8431764: @ 8431764
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 8431B54
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 3
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_square_2_alt 3, 0, 1, 7, 1
 
 @ SquareWave1 8431B60
 	voice_square_1_alt 0, 3, 0, 1, 7, 1
@@ -2123,19 +2078,13 @@ VoiceGroupTable_8431B9C: @ 8431B9C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 8431BCC
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 3
-	.byte 0, 0, 0
-	.byte 0, 1, 6, 1
+	voice_square_2_alt 3, 0, 1, 6, 1
 
 @ SquareWave1 8431BD8
 	voice_square_1_alt 0, 3, 0, 1, 6, 1
 
 @ SquareWave2 8431BE4
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 1, 6, 1
+	voice_square_2_alt 2, 0, 1, 6, 1
 
 @ SquareWave1 8431BF0
 	voice_square_1_alt 0, 2, 0, 1, 6, 1
@@ -2363,10 +2312,7 @@ VoiceGroupTable_8431B9C: @ 8431B9C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 8431F5C
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 3
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_square_2_alt 3, 0, 1, 7, 1
 
 @ WaveMemory 8431F68
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -2463,19 +2409,13 @@ VoiceGroupTable_8431F98: @ 8431F98
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 84320B8
-	.byte 0x2, 0x3c, 0x0, 0x0
-	.byte 3
-	.byte 0, 0, 0
-	.byte 0, 2, 0, 0
+	voice_square_2 3, 0, 2, 0, 0
 
 @ SquareWave1 84320C4
 	voice_square_1 0, 3, 0, 2, 0, 0
 
 @ SquareWave2 84320D0
-	.byte 0x2, 0x3c, 0x0, 0x0
-	.byte 3
-	.byte 0, 0, 0
-	.byte 0, 6, 0, 0
+	voice_square_2 3, 0, 6, 0, 0
 
 @ SquareWave1 84320DC
 	voice_square_1 0, 3, 0, 6, 0, 0
@@ -2887,10 +2827,7 @@ VoiceGroupTable_84326F4: @ 84326F4
 	.4byte 0x00000000
 
 @ SquareWave2 8432700
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 3, 3, 1
+	voice_square_2_alt 2, 0, 3, 3, 1
 
 @ SquareWave1 843270C
 	voice_square_1_alt 0, 2, 0, 3, 3, 1
@@ -2899,19 +2836,13 @@ VoiceGroupTable_84326F4: @ 84326F4
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 8432724
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 2
+	voice_square_2_alt 2, 0, 1, 7, 2
 
 @ SquareWave1 8432730
 	voice_square_1_alt 0, 2, 0, 1, 7, 2
 
 @ SquareWave2 843273C
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 1, 1, 0, 0
+	voice_square_2_alt 2, 1, 1, 0, 0
 
 @ SquareWave1 8432748
 	voice_square_1_alt 0, 2, 1, 1, 0, 0
@@ -3139,10 +3070,7 @@ VoiceGroupTable_84326F4: @ 84326F4
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 8432AB4
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 1, 1, 7, 2
+	voice_square_2_alt 2, 1, 1, 7, 2
 
 @ WaveMemory 8432AC0
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -3153,10 +3081,7 @@ VoiceGroupTable_84326F4: @ 84326F4
 	voice_square_1_alt 0, 2, 1, 1, 7, 2
 
 @ SquareWave2 8432AD8
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 3
-	.byte 0, 0, 0
-	.byte 1, 1, 7, 2
+	voice_square_2_alt 3, 1, 1, 7, 2
 
 @ SquareWave1 8432AE4
 	voice_square_1_alt 0, 3, 1, 1, 7, 2
@@ -3173,10 +3098,7 @@ VoiceGroupTable_84326F4: @ 84326F4
 	voice_square_1_alt 0, 3, 0, 0, 7, 2
 
 @ SquareWave2 8432B14
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 1, 2, 6, 2
+	voice_square_2_alt 1, 1, 2, 6, 2
 
 @ SquareWave1 8432B20
 	voice_square_1_alt 0, 1, 1, 2, 6, 2
@@ -3203,10 +3125,7 @@ VoiceGroupTable_8432B38: @ 8432B38
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 8432B68
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_square_2_alt 0, 0, 1, 7, 1
 
 @ SquareWave1 8432B74
 	voice_square_1_alt 0, 0, 0, 1, 7, 1
@@ -3436,10 +3355,7 @@ VoiceGroupTable_8432B38: @ 8432B38
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 8432EF8
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_square_2_alt 2, 0, 1, 7, 1
 
 @ WaveMemory 8432F04
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -3602,19 +3518,13 @@ VoiceGroupTable_8433138: @ 8433138
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 8433168
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_square_2_alt 1, 0, 1, 7, 1
 
 @ SquareWave1 8433174
 	voice_square_1_alt 0, 1, 0, 1, 7, 1
 
 @ SquareWave2 8433180
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 2, 6, 1
+	voice_square_2_alt 2, 0, 2, 6, 1
 
 @ SquareWave1 843318C
 	voice_square_1_alt 0, 2, 0, 2, 6, 1
@@ -3842,10 +3752,7 @@ VoiceGroupTable_8433138: @ 8433138
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 84334F8
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_square_2_alt 2, 0, 1, 7, 1
 
 @ WaveMemory 8433504
 	voice_programmable_wave_alt ProgrammableWaveData_84553FC, 0, 7, 15, 2
@@ -4108,10 +4015,7 @@ VoiceGroupTable_8433534: @ 8433534
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 84338F4
-	.byte 0x2, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_square_2 2, 0, 1, 7, 1
 
 @ SquareWave1 8433900
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -4120,10 +4024,7 @@ VoiceGroupTable_8433534: @ 8433534
 	voice_square_1 0, 2, 0, 1, 7, 1
 
 @ SquareWave2 8433918
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 0, 1, 6, 2
+	voice_square_2_alt 1, 0, 1, 6, 2
 
 @ SquareWave1 8433924
 	voice_square_1_alt 0, 1, 0, 1, 6, 2
@@ -4145,19 +4046,13 @@ VoiceGroupTable_8433948: @ 8433948
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 8433960
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 3
-	.byte 0, 0, 0
-	.byte 0, 2, 0, 0
+	voice_square_2_alt 3, 0, 2, 0, 0
 
 @ SquareWave1 843396C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 8433978
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 3
-	.byte 0, 0, 0
-	.byte 0, 1, 6, 0
+	voice_square_2_alt 3, 0, 1, 6, 0
 
 @ SquareWave1 8433984
 	voice_square_1_alt 0, 3, 0, 1, 6, 0
@@ -4395,10 +4290,7 @@ VoiceGroupTable_8433BAC: @ 8433BAC
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 8433D08
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 0
+	voice_square_2_alt 0, 0, 1, 7, 0
 
 @ WaveMemory 8433D14
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -4764,10 +4656,7 @@ VoiceGroupTable_8433EB8: @ 8433EB8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 8434278
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 0
+	voice_square_2_alt 2, 0, 1, 7, 0
 
 @ WaveMemory 8434284
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -4778,19 +4667,13 @@ VoiceGroupTable_8433EB8: @ 8433EB8
 	voice_square_1_alt 0, 2, 0, 1, 7, 0
 
 @ SquareWave2 843429C
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 1, 6, 1
+	voice_square_2_alt 2, 0, 1, 6, 1
 
 @ SquareWave1 84342A8
 	voice_square_1_alt 0, 2, 0, 1, 6, 1
 
 @ SquareWave2 84342B4
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 3
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 0
+	voice_square_2_alt 3, 0, 1, 7, 0
 
 @ SquareWave1 84342C0
 	voice_square_1_alt 0, 3, 0, 1, 7, 0
@@ -5052,10 +4935,7 @@ VoiceGroupTable_84342E4: @ 84342E4
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 84346A4
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 0
+	voice_square_2_alt 2, 0, 1, 7, 0
 
 @ WaveMemory 84346B0
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -5066,16 +4946,10 @@ VoiceGroupTable_84342E4: @ 84342E4
 	voice_square_1_alt 0, 2, 0, 1, 7, 0
 
 @ SquareWave2 84346C8
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 2, 0, 0
+	voice_square_2_alt 2, 0, 2, 0, 0
 
 @ SquareWave2 84346D4
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 3
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 0
+	voice_square_2_alt 3, 0, 1, 7, 0
 
 @ SquareWave1 84346E0
 	voice_square_1_alt 0, 3, 0, 1, 7, 0
@@ -5348,10 +5222,7 @@ VoiceGroupTable_8434728: @ 8434728
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 8434AE8
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_square_2_alt 1, 0, 1, 7, 1
 
 @ WaveMemory 8434AF4
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -5362,10 +5233,7 @@ VoiceGroupTable_8434728: @ 8434728
 	voice_square_1_alt 0, 1, 0, 1, 7, 1
 
 @ SquareWave2 8434B0C
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_square_2_alt 2, 0, 1, 0, 0
 
 VoiceGroupTable_8434B18: @ 8434B18
 
@@ -5614,10 +5482,7 @@ VoiceGroupTable_8434B18: @ 8434B18
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 8434ED8
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 1, 9, 0
+	voice_square_2_alt 2, 0, 1, 9, 0
 
 @ WaveMemory 8434EE4
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -5628,10 +5493,7 @@ VoiceGroupTable_8434B18: @ 8434B18
 	voice_square_1_alt 0, 2, 0, 1, 9, 0
 
 @ SquareWave2 8434EFC
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 3
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 0
+	voice_square_2_alt 3, 0, 1, 7, 0
 
 @ SquareWave1 8434F08
 	voice_square_1_alt 0, 3, 0, 1, 7, 0
@@ -5715,19 +5577,13 @@ VoiceGroupTable_8434F14: @ 8434F14
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 8435034
-	.byte 0x2, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 0, 2, 0, 0
+	voice_square_2 1, 0, 2, 0, 0
 
 @ SquareWave1 8435040
 	voice_square_1 0, 1, 0, 2, 0, 0
 
 @ SquareWave2 843504C
-	.byte 0x2, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 0, 6, 0, 0
+	voice_square_2 1, 0, 6, 0, 0
 
 @ SquareWave1 8435058
 	voice_square_1 0, 1, 0, 6, 0, 0
@@ -6063,19 +5919,13 @@ VoiceGroupTable_8435514: @ 8435514
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 8435568
-	.byte 0x2, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 2, 0, 0
+	voice_square_2 0, 0, 2, 0, 0
 
 @ SquareWave1 8435574
 	voice_square_1 0, 0, 0, 2, 0, 0
 
 @ SquareWave2 8435580
-	.byte 0x2, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 6, 0, 0
+	voice_square_2 0, 0, 6, 0, 0
 
 @ SquareWave1 843558C
 	voice_square_1 0, 0, 0, 6, 0, 0
@@ -6288,10 +6138,7 @@ VoiceGroupTable_8435514: @ 8435514
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 84358D4
-	.byte 0x2, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 2, 0, 0
+	voice_square_2 2, 0, 2, 0, 0
 
 @ WaveMemory 84358E0
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -6299,10 +6146,7 @@ VoiceGroupTable_8435514: @ 8435514
 	.byte 0, 7, 15, 0
 
 @ SquareWave2 84358EC
-	.byte 0x2, 0x3c, 0x0, 0x0
-	.byte 3
-	.byte 0, 0, 0
-	.byte 0, 4, 0, 0
+	voice_square_2 3, 0, 4, 0, 0
 
 VoiceGroupTable_84358F8: @ 84358F8
 
@@ -6328,10 +6172,7 @@ VoiceGroupTable_84358F8: @ 84358F8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 843594C
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 0, 2, 4, 0
+	voice_square_2_alt 1, 0, 2, 4, 0
 
 @ SquareWave1 8435958
 	voice_square_1_alt 0, 1, 0, 2, 7, 0
@@ -6346,10 +6187,7 @@ VoiceGroupTable_84358F8: @ 84358F8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 8435988
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 2, 0, 0
+	voice_square_2_alt 2, 0, 2, 0, 0
 
 @ SquareWave1 8435994
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -6559,10 +6397,7 @@ VoiceGroupTable_84358F8: @ 84358F8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 8435CB8
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 3
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 0
+	voice_square_2_alt 3, 0, 1, 7, 0
 
 @ WaveMemory 8435CC4
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -6573,10 +6408,7 @@ VoiceGroupTable_84358F8: @ 84358F8
 	voice_square_1_alt 0, 3, 0, 1, 7, 0
 
 @ SquareWave2 8435CDC
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 3
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_square_2_alt 3, 0, 1, 0, 0
 
 @ SquareWave1 8435CE8
 	voice_square_1_alt 0, 3, 0, 1, 0, 0
@@ -6618,10 +6450,7 @@ VoiceGroupTable_8435D18: @ 8435D18
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 8435D6C
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 3
-	.byte 0, 0, 0
-	.byte 0, 2, 4, 0
+	voice_square_2_alt 3, 0, 2, 4, 0
 
 @ SquareWave1 8435D78
 	voice_square_1_alt 0, 3, 0, 2, 4, 0
@@ -6993,10 +6822,7 @@ VoiceGroupTable_84362B8: @ 84362B8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 843630C
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 3
-	.byte 0, 0, 0
-	.byte 0, 3, 4, 0
+	voice_square_2_alt 3, 0, 3, 4, 0
 
 @ SquareWave1 8436318
 	voice_square_1_alt 0, 3, 0, 3, 4, 0
@@ -7618,10 +7444,7 @@ VoiceGroupTable_84368B8: @ 84368B8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 8436C78
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 1
+	voice_square_2_alt 2, 0, 1, 4, 1
 
 @ SquareWave1 8436C84
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -7648,10 +7471,7 @@ VoiceGroupTable_8436C9C: @ 8436C9C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 8436CCC
-	.byte 0x2, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 2
+	voice_square_2 2, 0, 1, 4, 2
 
 @ SquareWave1 8436CD8
 	voice_square_1 0, 2, 0, 1, 4, 1
@@ -7911,10 +7731,7 @@ VoiceGroupTable_843708C: @ 843708C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 84370BC
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_square_2_alt 2, 0, 1, 7, 1
 
 @ SquareWave1 84370C8
 	voice_square_1_alt 0, 2, 0, 1, 7, 1
@@ -8148,10 +7965,7 @@ VoiceGroupTable_843708C: @ 843708C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 843744C
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 3
-	.byte 0, 0, 0
-	.byte 0, 1, 6, 1
+	voice_square_2_alt 3, 0, 1, 6, 1
 
 @ WaveMemory 8437458
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -8186,10 +8000,7 @@ VoiceGroupTable_8437488: @ 8437488
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 84374B8
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 1, 6, 1
+	voice_square_2_alt 2, 0, 1, 6, 1
 
 @ SquareWave1 84374C4
 	voice_square_1_alt 0, 2, 0, 1, 6, 1
@@ -8421,10 +8232,7 @@ VoiceGroupTable_8437488: @ 8437488
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 8437848
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 2, 4, 1
+	voice_square_2_alt 2, 0, 2, 4, 1
 
 @ SquareWave1 8437854
 	voice_square_1_alt 0, 2, 0, 2, 4, 1
@@ -8590,10 +8398,7 @@ VoiceGroupTable_8437A88: @ 8437A88
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 8437AB8
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 2, 4, 1
+	voice_square_2_alt 2, 0, 2, 4, 1
 
 @ SquareWave1 8437AC4
 	voice_square_1_alt 0, 2, 0, 2, 4, 1
@@ -8827,10 +8632,7 @@ VoiceGroupTable_8437A88: @ 8437A88
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 8437E48
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_square_2_alt 0, 0, 1, 7, 1
 
 @ WaveMemory 8437E54
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -8877,10 +8679,7 @@ VoiceGroupTable_8437EB4: @ 8437EB4
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 8437EE4
-	.byte 0x2, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 1
+	voice_square_2 2, 0, 1, 4, 1
 
 @ SquareWave1 8437EF0
 	voice_square_1 0, 2, 0, 1, 4, 1
@@ -9369,10 +9168,7 @@ VoiceGroupTable_843828C: @ 843828C
 	voice_square_1_alt 0, 2, 0, 2, 4, 0
 
 @ SquareWave2 8438658
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 0, 2, 4, 0
+	voice_square_2_alt 1, 0, 2, 4, 0
 
 @ SquareWave1 8438664
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -9774,10 +9570,7 @@ VoiceGroupTable_843888C: @ 843888C
 	voice_square_1_alt 0, 2, 0, 2, 4, 0
 
 @ SquareWave2 8438C58
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 0, 2, 4, 0
+	voice_square_2_alt 1, 0, 2, 4, 0
 
 @ SquareWave1 8438C64
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -10179,10 +9972,7 @@ VoiceGroupTable_8438E8C: @ 8438E8C
 	voice_square_1_alt 0, 2, 0, 2, 4, 0
 
 @ SquareWave2 8439258
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 0, 2, 4, 0
+	voice_square_2_alt 1, 0, 2, 4, 0
 
 @ SquareWave1 8439264
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -10584,10 +10374,7 @@ VoiceGroupTable_843948C: @ 843948C
 	voice_square_1_alt 0, 2, 0, 2, 4, 0
 
 @ SquareWave2 8439858
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 0, 2, 4, 0
+	voice_square_2_alt 1, 0, 2, 4, 0
 
 @ SquareWave1 8439864
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -10984,10 +10771,7 @@ VoiceGroupTable_8439A8C: @ 8439A8C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 8439E4C
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 0, 2, 4, 0
+	voice_square_2_alt 1, 0, 2, 4, 0
 
 VoiceGroupTable_8439E58: @ 8439E58
 
@@ -11009,16 +10793,10 @@ VoiceGroupTable_8439E58: @ 8439E58
 	voice_square_1_alt 0, 2, 0, 5, 1, 7
 
 @ SquareWave2 8439E94
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 3
-	.byte 0, 0, 0
-	.byte 0, 4, 3, 6
+	voice_square_2_alt 3, 0, 4, 3, 6
 
 @ SquareWave2 8439EA0
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 1, 1, 4, 0
+	voice_square_2_alt 2, 1, 1, 4, 0
 
 @ SquareWave1 8439EAC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -11260,10 +11038,7 @@ VoiceGroupTable_843A224: @ 843A224
 	voice_square_1_alt 0, 3, 1, 2, 6, 0
 
 @ SquareWave2 843A248
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 3
-	.byte 0, 0, 0
-	.byte 1, 2, 6, 0
+	voice_square_2_alt 3, 1, 2, 6, 0
 
 @ WaveMemory 843A254
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -11274,10 +11049,7 @@ VoiceGroupTable_843A224: @ 843A224
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 843A26C
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 0, 2, 0, 1
+	voice_square_2_alt 1, 0, 2, 0, 1
 
 @ WaveMemory 843A278
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -11667,10 +11439,7 @@ VoiceGroupTable_843A824: @ 843A824
 	voice_square_1_alt 0, 0, 1, 1, 9, 0
 
 @ SquareWave2 843A848
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 2, 6, 3
+	voice_square_2_alt 2, 0, 2, 6, 3
 
 @ WaveMemory 843A854
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -11681,10 +11450,7 @@ VoiceGroupTable_843A824: @ 843A824
 	voice_directsound 60, 0, DirectSoundWaveData_84571CC, 255, 253, 0, 216
 
 @ SquareWave2 843A86C
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 0, 2, 6, 3
+	voice_square_2_alt 1, 0, 2, 6, 3
 
 @ SquareWave1 843A878
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -12307,10 +12073,7 @@ VoiceGroupTable_843AE24: @ 843AE24
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 843B1E4
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 1, 6, 2
+	voice_square_2_alt 2, 0, 1, 6, 2
 
 @ WaveMemory 843B1F0
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -12318,10 +12081,7 @@ VoiceGroupTable_843AE24: @ 843AE24
 	.byte 0, 7, 15, 0
 
 @ SquareWave2 843B1FC
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 3
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 1
+	voice_square_2_alt 3, 0, 1, 4, 1
 
 @ WaveMemory 843B208
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -12329,10 +12089,7 @@ VoiceGroupTable_843AE24: @ 843AE24
 	.byte 1, 7, 15, 2
 
 @ SquareWave2 843B214
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 1, 1, 4, 1
+	voice_square_2_alt 1, 1, 1, 4, 1
 
 @ SquareWave1 843B220
 	voice_square_1_alt 0, 1, 1, 2, 4, 1
@@ -12341,10 +12098,7 @@ VoiceGroupTable_843AE24: @ 843AE24
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 843B238
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 1, 6, 1
+	voice_square_2_alt 2, 0, 1, 6, 1
 
 @ SquareWave1 843B244
 	voice_square_1_alt 0, 2, 0, 1, 6, 1
@@ -12724,10 +12478,7 @@ VoiceGroupTable_843B424: @ 843B424
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 843B7E4
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 3
-	.byte 0, 0, 0
-	.byte 0, 4, 4, 0
+	voice_square_2_alt 3, 0, 4, 4, 0
 
 @ SquareWave1 843B7F0
 	voice_square_1_alt 0, 3, 0, 3, 6, 0
@@ -12744,19 +12495,13 @@ VoiceGroupTable_843B424: @ 843B424
 	.byte 0, 7, 12, 1
 
 @ SquareWave2 843B820
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 3
+	voice_square_2_alt 1, 0, 1, 4, 3
 
 @ SquareWave1 843B82C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 843B838
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 2, 4, 0
+	voice_square_2_alt 0, 0, 2, 4, 0
 
 VoiceGroupTable_843B844: @ 843B844
 
@@ -13014,10 +12759,7 @@ VoiceGroupTable_843B844: @ 843B844
 	voice_square_1_alt 0, 2, 0, 2, 4, 1
 
 @ SquareWave2 843BC10
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 1, 3, 4, 2
+	voice_square_2_alt 1, 1, 3, 4, 2
 
 @ SquareWave1 843BC1C
 	voice_square_1_alt 0, 3, 0, 1, 4, 1
@@ -13028,16 +12770,10 @@ VoiceGroupTable_843B844: @ 843B844
 	.byte 1, 7, 15, 0
 
 @ SquareWave2 843BC34
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 2, 4, 2
+	voice_square_2_alt 2, 0, 2, 4, 2
 
 @ SquareWave2 843BC40
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 1, 3, 4, 2
+	voice_square_2_alt 1, 1, 3, 4, 2
 
 @ SquareWave1 843BC4C
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -13415,10 +13151,7 @@ VoiceGroupTable_843BE44: @ 843BE44
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 843C204
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 3
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 1
+	voice_square_2_alt 3, 0, 1, 4, 1
 
 @ SquareWave1 843C210
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -13591,10 +13324,7 @@ VoiceGroupTable_843C444: @ 843C444
 	voice_square_1_alt 0, 2, 0, 3, 4, 1
 
 @ SquareWave2 843C48C
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 1, 3, 4, 2
+	voice_square_2_alt 2, 1, 3, 4, 2
 
 @ SquareWave1 843C498
 	voice_square_1_alt 0, 2, 0, 3, 4, 1
@@ -13813,10 +13543,7 @@ VoiceGroupTable_843C7BC: @ 843C7BC
 	voice_square_1 0, 3, 1, 2, 6, 0
 
 @ SquareWave2 843C7E0
-	.byte 0x2, 0x3c, 0x0, 0x0
-	.byte 3
-	.byte 0, 0, 0
-	.byte 1, 2, 6, 0
+	voice_square_2 3, 1, 2, 6, 0
 
 @ SquareWave1 843C7EC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -14057,10 +13784,7 @@ VoiceGroupTable_843C7BC: @ 843C7BC
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 843CB7C
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 0, 1, 6, 1
+	voice_square_2_alt 1, 0, 1, 6, 1
 
 @ SquareWave1 843CB88
 	voice_square_1_alt 0, 0, 0, 1, 7, 1
@@ -14071,10 +13795,7 @@ VoiceGroupTable_843C7BC: @ 843C7BC
 	.byte 0, 7, 15, 1
 
 @ SquareWave2 843CBA0
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 2
+	voice_square_2_alt 0, 0, 1, 4, 2
 
 @ WaveMemory 843CBAC
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -14091,10 +13812,7 @@ VoiceGroupTable_843C7BC: @ 843C7BC
 	voice_square_1_alt 0, 1, 0, 7, 6, 1
 
 @ SquareWave2 843CBDC
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 1, 6, 1
+	voice_square_2_alt 2, 0, 1, 6, 1
 
 @ SquareWave1 843CBE8
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -14471,10 +14189,7 @@ VoiceGroupTable_843CDBC: @ 843CDBC
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 843D17C
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 2
+	voice_square_2_alt 2, 0, 1, 4, 2
 
 @ SquareWave1 843D188
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -14873,10 +14588,7 @@ VoiceGroupTable_843D3BC: @ 843D3BC
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 843D77C
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 1, 5, 2
+	voice_square_2_alt 2, 0, 1, 5, 2
 
 @ SquareWave1 843D788
 	voice_square_1_alt 0, 3, 0, 1, 4, 1
@@ -15277,10 +14989,7 @@ VoiceGroupTable_843D9BC: @ 843D9BC
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 843DD7C
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 1
+	voice_square_2_alt 2, 0, 1, 4, 1
 
 @ SquareWave1 843DD88
 	voice_square_1_alt 0, 3, 0, 1, 6, 0
@@ -15296,10 +15005,7 @@ VoiceGroupTable_843D9BC: @ 843D9BC
 	.byte 0, 7, 15, 2
 
 @ SquareWave2 843DDAC
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 1, 1, 4, 1
+	voice_square_2_alt 1, 1, 1, 4, 1
 
 @ SquareWave1 843DDB8
 	voice_square_1_alt 0, 1, 0, 1, 4, 2
@@ -15308,10 +15014,7 @@ VoiceGroupTable_843D9BC: @ 843D9BC
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 843DDD0
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 1, 6, 1
+	voice_square_2_alt 2, 0, 1, 6, 1
 
 @ SquareWave1 843DDDC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -15685,10 +15388,7 @@ VoiceGroupTable_843DFBC: @ 843DFBC
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 843E37C
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 1
+	voice_square_2_alt 0, 0, 1, 4, 1
 
 @ SquareWave1 843E388
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -16121,10 +15821,7 @@ VoiceGroupTable_843E5BC: @ 843E5BC
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 843EA0C
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 1, 5, 9, 1
+	voice_square_2_alt 2, 1, 5, 9, 1
 
 @ SquareWave1 843EA18
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -16491,16 +16188,10 @@ VoiceGroupTable_843EBBC: @ 843EBBC
 	voice_square_1_alt 0, 2, 0, 1, 4, 1
 
 @ SquareWave2 843EF88
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 1
+	voice_square_2_alt 2, 0, 1, 4, 1
 
 @ SquareWave2 843EF94
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 1
+	voice_square_2_alt 0, 0, 1, 4, 1
 
 @ SquareWave1 843EFA0
 	voice_square_1_alt 0, 0, 0, 1, 4, 1
@@ -16662,10 +16353,7 @@ VoiceGroupTable_843F1BC: @ 843F1BC
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 843F1EC
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 1, 1, 6, 2
+	voice_square_2_alt 1, 1, 1, 6, 2
 
 @ WaveMemory 843F1F8
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -16908,10 +16596,7 @@ VoiceGroupTable_843F1BC: @ 843F1BC
 	voice_square_1_alt 0, 2, 0, 1, 6, 2
 
 @ SquareWave2 843F588
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 1, 6, 0
+	voice_square_2_alt 2, 0, 1, 6, 0
 
 @ WaveMemory 843F594
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -16936,10 +16621,7 @@ VoiceGroupTable_843F1BC: @ 843F1BC
 	.byte 0, 7, 15, 0
 
 @ SquareWave2 843F5DC
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 3
-	.byte 0, 0, 0
-	.byte 0, 1, 6, 2
+	voice_square_2_alt 3, 0, 1, 6, 2
 
 VoiceGroupTable_843F5E8: @ 843F5E8
 
@@ -17196,10 +16878,7 @@ VoiceGroupTable_843F5E8: @ 843F5E8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 843F9A8
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 1, 1, 6, 1
+	voice_square_2_alt 1, 1, 1, 6, 1
 
 @ SquareWave1 843F9B4
 	voice_square_1_alt 0, 1, 0, 4, 4, 1
@@ -17208,10 +16887,7 @@ VoiceGroupTable_843F5E8: @ 843F5E8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 843F9CC
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 7, 3, 3
+	voice_square_2_alt 2, 0, 7, 3, 3
 
 @ SquareWave1 843F9D8
 	voice_square_1_alt 0, 2, 0, 7, 3, 3
@@ -17220,10 +16896,7 @@ VoiceGroupTable_843F5E8: @ 843F5E8
 	voice_square_1_alt 0, 3, 2, 2, 7, 0
 
 @ SquareWave2 843F9F0
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 1, 2, 3, 0
+	voice_square_2_alt 1, 1, 2, 3, 0
 
 @ SquareWave1 843F9FC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -17601,16 +17274,10 @@ VoiceGroupTable_843FBE8: @ 843FBE8
 	voice_square_1_alt 0, 2, 0, 1, 4, 1
 
 @ SquareWave2 843FFB4
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 1
+	voice_square_2_alt 2, 0, 1, 4, 1
 
 @ SquareWave2 843FFC0
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 1
+	voice_square_2_alt 0, 0, 1, 4, 1
 
 @ WaveMemory 843FFCC
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -18009,10 +17676,7 @@ VoiceGroupTable_84401E8: @ 84401E8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 84405B4
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 1
+	voice_square_2_alt 0, 0, 1, 4, 1
 
 @ SquareWave1 84405C0
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -18408,16 +18072,10 @@ VoiceGroupTable_84407E8: @ 84407E8
 	voice_square_1_alt 0, 1, 0, 1, 4, 1
 
 @ SquareWave2 8440BB4
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 1
+	voice_square_2_alt 1, 0, 1, 4, 1
 
 @ SquareWave2 8440BC0
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 1
+	voice_square_2_alt 0, 0, 1, 4, 1
 
 @ WaveMemory 8440BCC
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -18816,10 +18474,7 @@ VoiceGroupTable_8440DE8: @ 8440DE8
 	voice_square_1_alt 0, 0, 0, 1, 4, 1
 
 @ SquareWave2 84411B4
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 1
+	voice_square_2_alt 0, 0, 1, 4, 1
 
 @ WaveMemory 84411C0
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -18827,10 +18482,7 @@ VoiceGroupTable_8440DE8: @ 8440DE8
 	.byte 0, 7, 15, 0
 
 @ SquareWave2 84411CC
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 3
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 1
+	voice_square_2_alt 3, 0, 1, 4, 1
 
 @ SquareWave1 84411D8
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -19222,16 +18874,10 @@ VoiceGroupTable_84413E8: @ 84413E8
 	voice_square_1_alt 0, 1, 0, 1, 4, 1
 
 @ SquareWave2 84417B4
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 1
+	voice_square_2_alt 1, 0, 1, 4, 1
 
 @ SquareWave2 84417C0
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 1
+	voice_square_2_alt 0, 0, 1, 4, 1
 
 @ WaveMemory 84417CC
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -19247,10 +18893,7 @@ VoiceGroupTable_84413E8: @ 84413E8
 	voice_square_1_alt 0, 2, 0, 1, 4, 1
 
 @ SquareWave2 84417F0
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 1
+	voice_square_2_alt 2, 0, 1, 4, 1
 
 @ WaveMemory 84417FC
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -19631,10 +19274,7 @@ VoiceGroupTable_84419E8: @ 84419E8
 	voice_square_1 0, 1, 0, 1, 4, 1
 
 @ SquareWave2 8441DB4
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 1
+	voice_square_2_alt 1, 0, 1, 4, 1
 
 @ WaveMemory 8441DC0
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -19642,10 +19282,7 @@ VoiceGroupTable_84419E8: @ 84419E8
 	.byte 0, 7, 15, 3
 
 @ SquareWave2 8441DCC
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 3
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 1
+	voice_square_2_alt 3, 0, 1, 4, 1
 
 @ SquareWave1 8441DD8
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -20037,16 +19674,10 @@ VoiceGroupTable_8441FE8: @ 8441FE8
 	voice_square_1_alt 0, 1, 0, 1, 4, 1
 
 @ SquareWave2 84423B4
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 1
+	voice_square_2_alt 1, 0, 1, 4, 1
 
 @ SquareWave2 84423C0
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 1
+	voice_square_2_alt 0, 0, 1, 4, 1
 
 @ WaveMemory 84423CC
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -20445,16 +20076,10 @@ VoiceGroupTable_84425E8: @ 84425E8
 	voice_square_1 0, 2, 0, 2, 3, 1
 
 @ SquareWave2 84429B4
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 2, 3, 1
+	voice_square_2_alt 2, 0, 2, 3, 1
 
 @ SquareWave2 84429C0
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 1
+	voice_square_2_alt 0, 0, 1, 4, 1
 
 @ WaveMemory 84429CC
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -20853,10 +20478,7 @@ VoiceGroupTable_8442BE8: @ 8442BE8
 	voice_square_1_alt 0, 0, 0, 1, 4, 1
 
 @ SquareWave2 8442FB4
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 1
+	voice_square_2_alt 0, 0, 1, 4, 1
 
 @ SquareWave1 8442FC0
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -21256,16 +20878,10 @@ VoiceGroupTable_84431E8: @ 84431E8
 	voice_square_1_alt 0, 0, 0, 1, 4, 1
 
 @ SquareWave2 84435B4
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 1
+	voice_square_2_alt 2, 0, 1, 4, 1
 
 @ SquareWave2 84435C0
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 1
+	voice_square_2_alt 0, 0, 1, 4, 1
 
 @ WaveMemory 84435CC
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -21664,10 +21280,7 @@ VoiceGroupTable_84437E8: @ 84437E8
 	voice_square_1_alt 0, 0, 0, 1, 4, 1
 
 @ SquareWave2 8443BB4
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 1
+	voice_square_2_alt 0, 0, 1, 4, 1
 
 @ SquareWave1 8443BC0
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -22068,10 +21681,7 @@ VoiceGroupTable_8443DE8: @ 8443DE8
 	voice_square_1_alt 0, 2, 0, 1, 4, 1
 
 @ SquareWave2 84441B4
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 1
+	voice_square_2_alt 2, 0, 1, 4, 1
 
 @ WaveMemory 84441C0
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -22084,10 +21694,7 @@ VoiceGroupTable_8443DE8: @ 8443DE8
 	.byte 0, 7, 15, 0
 
 @ SquareWave2 84441D8
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 0
+	voice_square_2_alt 0, 0, 1, 4, 0
 
 @ SquareWave1 84441E4
 	voice_square_1_alt 0, 0, 0, 1, 4, 0
@@ -22480,10 +22087,7 @@ VoiceGroupTable_84443E8: @ 84443E8
 	voice_square_1_alt 0, 2, 0, 2, 4, 1
 
 @ SquareWave2 84447B4
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 2, 4, 1
+	voice_square_2_alt 2, 0, 2, 4, 1
 
 @ WaveMemory 84447C0
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -22491,10 +22095,7 @@ VoiceGroupTable_84443E8: @ 84443E8
 	.byte 0, 7, 15, 0
 
 @ SquareWave2 84447CC
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 0
+	voice_square_2_alt 0, 0, 1, 4, 0
 
 @ SquareWave1 84447D8
 	voice_square_1_alt 0, 0, 0, 1, 4, 0
@@ -22882,10 +22483,7 @@ VoiceGroupTable_84449E8: @ 84449E8
 	voice_square_1_alt 0, 2, 0, 1, 4, 0
 
 @ SquareWave2 8444DB4
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 0
+	voice_square_2_alt 2, 0, 1, 4, 0
 
 @ WaveMemory 8444DC0
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -22893,10 +22491,7 @@ VoiceGroupTable_84449E8: @ 84449E8
 	.byte 0, 7, 15, 0
 
 @ SquareWave2 8444DCC
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 1
+	voice_square_2_alt 0, 0, 1, 4, 1
 
 @ SquareWave1 8444DD8
 	voice_square_1_alt 0, 1, 0, 1, 4, 1
@@ -23296,10 +22891,7 @@ VoiceGroupTable_8444FE8: @ 8444FE8
 	voice_square_1_alt 0, 1, 0, 2, 3, 1
 
 @ SquareWave2 84453B4
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 1
+	voice_square_2_alt 2, 0, 1, 4, 1
 
 @ WaveMemory 84453C0
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -23312,10 +22904,7 @@ VoiceGroupTable_8444FE8: @ 8444FE8
 	.byte 0, 7, 15, 0
 
 @ SquareWave2 84453D8
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 1
+	voice_square_2_alt 1, 0, 1, 4, 1
 
 @ WaveMemory 84453E4
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -23704,10 +23293,7 @@ VoiceGroupTable_84455E8: @ 84455E8
 	voice_square_1_alt 0, 1, 0, 1, 4, 1
 
 @ SquareWave2 84459B4
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 1
+	voice_square_2_alt 1, 0, 1, 4, 1
 
 @ WaveMemory 84459C0
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -24107,10 +23693,7 @@ VoiceGroupTable_8445BE8: @ 8445BE8
 	voice_square_1_alt 0, 1, 0, 1, 4, 1
 
 @ SquareWave2 8445FB4
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 1
+	voice_square_2_alt 1, 0, 1, 4, 1
 
 @ WaveMemory 8445FC0
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -24510,10 +24093,7 @@ VoiceGroupTable_84461E8: @ 84461E8
 	voice_square_1_alt 0, 1, 0, 1, 4, 1
 
 @ SquareWave2 84465B4
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 1
+	voice_square_2_alt 1, 0, 1, 4, 1
 
 @ WaveMemory 84465C0
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -24683,16 +24263,10 @@ VoiceGroupTable_84467E8: @ 84467E8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 8446824
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 3
-	.byte 0, 0, 0
-	.byte 0, 2, 4, 1
+	voice_square_2_alt 3, 0, 2, 4, 1
 
 @ SquareWave2 8446830
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 6, 2
+	voice_square_2_alt 0, 0, 1, 6, 2
 
 @ SquareWave1 844683C
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -24921,10 +24495,7 @@ VoiceGroupTable_84467E8: @ 84467E8
 	voice_square_1_alt 0, 3, 0, 2, 4, 1
 
 @ SquareWave2 8446BB4
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 3
-	.byte 0, 0, 0
-	.byte 0, 1, 6, 2
+	voice_square_2_alt 3, 0, 1, 6, 2
 
 @ WaveMemory 8446BC0
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -24946,10 +24517,7 @@ VoiceGroupTable_84467E8: @ 84467E8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 8446BFC
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 1, 6, 2
+	voice_square_2_alt 2, 0, 1, 6, 2
 
 @ SquareWave1 8446C08
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -25329,10 +24897,7 @@ VoiceGroupTable_8446DE8: @ 8446DE8
 	voice_square_1_alt 0, 1, 0, 1, 4, 1
 
 @ SquareWave2 84471B4
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 1
+	voice_square_2_alt 1, 0, 1, 4, 1
 
 @ WaveMemory 84471C0
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -25340,10 +24905,7 @@ VoiceGroupTable_8446DE8: @ 8446DE8
 	.byte 0, 7, 15, 0
 
 @ SquareWave2 84471CC
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 3
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 1
+	voice_square_2_alt 3, 0, 1, 4, 1
 
 @ SquareWave1 84471D8
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -25749,10 +25311,7 @@ VoiceGroupTable_8447400: @ 8447400
 	voice_square_1_alt 0, 3, 0, 2, 4, 1
 
 @ SquareWave2 84477CC
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 3
-	.byte 0, 0, 0
-	.byte 0, 1, 6, 2
+	voice_square_2_alt 3, 0, 1, 6, 2
 
 @ WaveMemory 84477D8
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -26158,10 +25717,7 @@ VoiceGroupTable_8447A00: @ 8447A00
 	voice_square_1_alt 0, 2, 0, 1, 4, 1
 
 @ SquareWave2 8447DCC
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 2
+	voice_square_2_alt 2, 0, 1, 4, 2
 
 @ WaveMemory 8447DD8
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -26425,10 +25981,7 @@ VoiceGroupTable_8447DF0: @ 8447DF0
 	voice_square_1_alt 0, 1, 0, 2, 4, 0
 
 @ SquareWave2 84481BC
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 0, 2, 4, 0
+	voice_square_2_alt 1, 0, 2, 4, 0
 
 @ SquareWave1 84481C8
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -26826,10 +26379,7 @@ VoiceGroupTable_84483F0: @ 84483F0
 	voice_square_1_alt 0, 2, 1, 2, 4, 0
 
 @ SquareWave2 84487BC
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 0, 2, 4, 0
+	voice_square_2_alt 1, 0, 2, 4, 0
 
 @ SquareWave1 84487C8
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -27233,10 +26783,7 @@ VoiceGroupTable_84489F0: @ 84489F0
 	voice_square_1_alt 0, 2, 0, 2, 4, 0
 
 @ SquareWave2 8448DBC
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 0, 2, 4, 0
+	voice_square_2_alt 1, 0, 2, 4, 0
 
 @ SquareWave1 8448DC8
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -27638,10 +27185,7 @@ VoiceGroupTable_8448FF0: @ 8448FF0
 	voice_square_1_alt 0, 0, 0, 1, 4, 1
 
 @ SquareWave2 84493BC
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 1
+	voice_square_2_alt 0, 0, 1, 4, 1
 
 @ SquareWave1 84493C8
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -27808,10 +27352,7 @@ VoiceGroupTable_84495F0: @ 84495F0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 8449620
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 1, 1, 6, 2
+	voice_square_2_alt 1, 1, 1, 6, 2
 
 @ SquareWave1 844962C
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -28052,10 +27593,7 @@ VoiceGroupTable_84495F0: @ 84495F0
 	voice_square_1_alt 0, 1, 0, 1, 6, 2
 
 @ SquareWave2 84499BC
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 0, 2, 4, 0
+	voice_square_2_alt 1, 0, 2, 4, 0
 
 @ WaveMemory 84499C8
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -28080,10 +27618,7 @@ VoiceGroupTable_84495F0: @ 84495F0
 	.byte 0, 7, 15, 0
 
 @ SquareWave2 8449A10
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 3
-	.byte 0, 0, 0
-	.byte 0, 1, 6, 2
+	voice_square_2_alt 3, 0, 1, 6, 2
 
 @ SquareWave1 8449A1C
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -28457,10 +27992,7 @@ VoiceGroupTable_8449BF0: @ 8449BF0
 	voice_square_1_alt 0, 1, 0, 2, 4, 0
 
 @ SquareWave2 8449FBC
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 2, 4, 0
+	voice_square_2_alt 2, 0, 2, 4, 0
 
 @ WaveMemory 8449FC8
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -28860,10 +28392,7 @@ VoiceGroupTable_844A1F0: @ 844A1F0
 	voice_square_1_alt 0, 0, 0, 2, 4, 1
 
 @ SquareWave2 844A5BC
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 2, 4, 1
+	voice_square_2_alt 0, 0, 2, 4, 1
 
 @ WaveMemory 844A5C8
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -29267,10 +28796,7 @@ VoiceGroupTable_844A7F0: @ 844A7F0
 	voice_square_1_alt 0, 2, 0, 1, 5, 2
 
 @ SquareWave2 844ABBC
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 1, 5, 2
+	voice_square_2_alt 2, 0, 1, 5, 2
 
 @ WaveMemory 844ABC8
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -29668,10 +29194,7 @@ VoiceGroupTable_844ADF0: @ 844ADF0
 	voice_square_1_alt 0, 2, 0, 1, 4, 1
 
 @ SquareWave2 844B1BC
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 2
+	voice_square_2_alt 2, 0, 1, 4, 2
 
 @ WaveMemory 844B1C8
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -30073,10 +29596,7 @@ VoiceGroupTable_844B3F0: @ 844B3F0
 	voice_square_1_alt 0, 1, 0, 1, 4, 1
 
 @ SquareWave2 844B7BC
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 1
+	voice_square_2_alt 1, 0, 1, 4, 1
 
 @ WaveMemory 844B7C8
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -30478,10 +29998,7 @@ VoiceGroupTable_844B9F0: @ 844B9F0
 	voice_square_1_alt 0, 0, 0, 1, 4, 1
 
 @ SquareWave2 844BDBC
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 1
+	voice_square_2_alt 0, 0, 1, 4, 1
 
 @ WaveMemory 844BDC8
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -30877,10 +30394,7 @@ VoiceGroupTable_844BFF0: @ 844BFF0
 	voice_square_1_alt 0, 1, 0, 1, 4, 1
 
 @ SquareWave2 844C3BC
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 1
+	voice_square_2_alt 1, 0, 1, 4, 1
 
 @ WaveMemory 844C3C8
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -30888,10 +30402,7 @@ VoiceGroupTable_844BFF0: @ 844BFF0
 	.byte 0, 7, 15, 3
 
 @ SquareWave2 844C3D4
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 3
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 1
+	voice_square_2_alt 3, 0, 1, 4, 1
 
 @ SquareWave1 844C3E0
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -31281,10 +30792,7 @@ VoiceGroupTable_844C5F0: @ 844C5F0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 844C9BC
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 1
+	voice_square_2_alt 0, 0, 1, 4, 1
 
 @ SquareWave1 844C9C8
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -31686,10 +31194,7 @@ VoiceGroupTable_844CBF0: @ 844CBF0
 	voice_square_1_alt 0, 3, 0, 1, 4, 1
 
 @ SquareWave2 844CFBC
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 3
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 1
+	voice_square_2_alt 3, 0, 1, 4, 1
 
 @ WaveMemory 844CFC8
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -32089,10 +31594,7 @@ VoiceGroupTable_844D1F0: @ 844D1F0
 	voice_square_1_alt 0, 0, 0, 1, 4, 0
 
 @ SquareWave2 844D5BC
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 0
+	voice_square_2_alt 0, 0, 1, 4, 0
 
 @ WaveMemory 844D5C8
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -32487,10 +31989,7 @@ VoiceGroupTable_844D7F0: @ 844D7F0
 	voice_square_1_alt 0, 0, 0, 1, 4, 0
 
 @ SquareWave2 844DBBC
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 0
+	voice_square_2_alt 0, 0, 1, 4, 0
 
 @ WaveMemory 844DBC8
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -32501,10 +32000,7 @@ VoiceGroupTable_844D7F0: @ 844D7F0
 	voice_square_1_alt 0, 1, 2, 1, 5, 0
 
 @ SquareWave2 844DBE0
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 2, 1, 5, 0
+	voice_square_2_alt 1, 2, 1, 5, 0
 
 @ SquareWave1 844DBEC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -32896,16 +32392,10 @@ VoiceGroupTable_844DDF0: @ 844DDF0
 	voice_square_1_alt 0, 2, 1, 1, 4, 1
 
 @ SquareWave2 844E1C8
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 1, 1, 4, 1
+	voice_square_2_alt 2, 1, 1, 4, 1
 
 @ SquareWave2 844E1D4
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 0, 1, 4, 1
+	voice_square_2_alt 1, 0, 1, 4, 1
 
 @ SquareWave1 844E1E0
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -33069,10 +32559,7 @@ VoiceGroupTable_844E3F0: @ 844E3F0
 	voice_square_1_alt 0, 1, 1, 5, 2, 4
 
 @ SquareWave2 844E42C
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 1, 5, 2, 4
+	voice_square_2_alt 1, 1, 5, 2, 4
 
 @ WaveMemory 844E438
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -33309,10 +32796,7 @@ VoiceGroupTable_844E3F0: @ 844E3F0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 844E7B0
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 1, 1, 6, 0
+	voice_square_2_alt 1, 1, 1, 6, 0
 
 @ SquareWave1 844E7BC
 	voice_square_1_alt 0, 0, 0, 4, 6, 2
@@ -33332,10 +32816,7 @@ VoiceGroupTable_844E3F0: @ 844E3F0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 844E7F8
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 1, 4, 6, 1
+	voice_square_2_alt 1, 1, 4, 6, 1
 
 @ WaveMemory 844E804
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -33394,10 +32875,7 @@ VoiceGroupTable_844E3F0: @ 844E3F0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 844E8DC
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 1, 2, 4, 1
+	voice_square_2_alt 0, 1, 2, 4, 1
 
 @ SquareWave1 844E8E8
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -33409,10 +32887,7 @@ VoiceGroupTable_844E3F0: @ 844E3F0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 844E90C
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 1, 1, 6, 1
+	voice_square_2_alt 0, 1, 1, 6, 1
 
 VoiceGroupTable_844E918: @ 844E918
 
@@ -33660,10 +33135,7 @@ VoiceGroupTable_844E918: @ 844E918
 	voice_square_1_alt 0, 2, 0, 6, 0, 6
 
 @ SquareWave2 844ECE4
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 6, 0, 6
+	voice_square_2_alt 2, 0, 6, 0, 6
 
 VoiceGroupTable_844ECF0: @ 844ECF0
 
@@ -33682,10 +33154,7 @@ VoiceGroupTable_844ECF0: @ 844ECF0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 844ED20
-	.byte 0x2, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 1, 1, 1
+	voice_square_2 2, 0, 1, 1, 1
 
 @ SquareWave1 844ED2C
 	voice_square_1 0, 2, 0, 1, 1, 1
@@ -33921,10 +33390,7 @@ VoiceGroupTable_844ECF0: @ 844ECF0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 844F0B0
-	.byte 0x2, 0x3c, 0x0, 0x0
-	.byte 3
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_square_2 3, 0, 1, 7, 1
 
 @ WaveMemory 844F0BC
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -33948,10 +33414,7 @@ VoiceGroupTable_844F0C8: @ 844F0C8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 844F0F8
-	.byte 0x2, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_square_2 0, 0, 1, 7, 1
 
 @ SquareWave1 844F104
 	voice_square_1 0, 0, 0, 1, 7, 1
@@ -34185,10 +33648,7 @@ VoiceGroupTable_844F0C8: @ 844F0C8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 844F488
-	.byte 0x2, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_square_2 2, 0, 1, 7, 1
 
 @ WaveMemory 844F494
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -34243,19 +33703,13 @@ VoiceGroupTable_844F50C: @ 844F50C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 844F53C
-	.byte 0x2, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 2, 4, 1
+	voice_square_2 0, 0, 2, 4, 1
 
 @ SquareWave1 844F548
 	voice_square_1 0, 0, 0, 2, 4, 1
 
 @ SquareWave2 844F554
-	.byte 0x2, 0x3c, 0x0, 0x0
-	.byte 3
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_square_2 3, 0, 1, 7, 1
 
 @ SquareWave1 844F560
 	voice_square_1 0, 3, 0, 1, 7, 1
@@ -34483,10 +33937,7 @@ VoiceGroupTable_844F50C: @ 844F50C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 844F8CC
-	.byte 0x2, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_square_2 2, 0, 1, 7, 1
 
 @ WaveMemory 844F8D8
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -34497,10 +33948,7 @@ VoiceGroupTable_844F50C: @ 844F50C
 	voice_square_1 0, 2, 0, 1, 7, 1
 
 @ SquareWave2 844F8F0
-	.byte 0x2, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 0, 1, 9, 1
+	voice_square_2 1, 0, 1, 9, 1
 
 @ SquareWave1 844F8FC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -34544,19 +33992,13 @@ VoiceGroupTable_844F950: @ 844F950
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 844F980
-	.byte 0x2, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 2, 6, 1
+	voice_square_2 2, 0, 2, 6, 1
 
 @ SquareWave1 844F98C
 	voice_square_1 0, 2, 0, 2, 6, 1
 
 @ SquareWave2 844F998
-	.byte 0x2, 0x3c, 0x0, 0x0
-	.byte 3
-	.byte 0, 0, 0
-	.byte 0, 2, 4, 1
+	voice_square_2 3, 0, 2, 4, 1
 
 @ SquareWave1 844F9A4
 	voice_square_1 0, 3, 0, 2, 4, 1
@@ -34784,10 +34226,7 @@ VoiceGroupTable_844F950: @ 844F950
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 844FD10
-	.byte 0x2, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_square_2 2, 0, 1, 7, 1
 
 @ WaveMemory 844FD1C
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -34801,10 +34240,7 @@ VoiceGroupTable_844F950: @ 844F950
 	voice_square_1 0, 2, 0, 0, 7, 1
 
 @ SquareWave2 844FD40
-	.byte 0x2, 0x3c, 0x0, 0x0
-	.byte 3
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_square_2 3, 0, 1, 7, 1
 
 @ SquareWave1 844FD4C
 	voice_square_1 0, 3, 0, 1, 7, 1
@@ -35079,10 +34515,7 @@ VoiceGroupTable_844FD94: @ 844FD94
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 8450154
-	.byte 0x2, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_square_2 2, 0, 1, 7, 1
 
 @ WaveMemory 8450160
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -35093,10 +34526,7 @@ VoiceGroupTable_844FD94: @ 844FD94
 	voice_square_1 0, 2, 0, 1, 7, 1
 
 @ SquareWave2 8450178
-	.byte 0x2, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_square_2 0, 0, 1, 7, 1
 
 @ SquareWave1 8450184
 	voice_square_1 0, 0, 0, 1, 7, 1
@@ -35121,19 +34551,13 @@ VoiceGroupTable_845019C: @ 845019C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 84501CC
-	.byte 0x2, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 0, 1, 6, 1
+	voice_square_2 1, 0, 1, 6, 1
 
 @ SquareWave1 84501D8
 	voice_square_1 0, 1, 0, 1, 6, 1
 
 @ SquareWave2 84501E4
-	.byte 0x2, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 1, 6, 1
+	voice_square_2 2, 0, 1, 6, 1
 
 @ SquareWave1 84501F0
 	voice_square_1 0, 2, 0, 1, 6, 1
@@ -35623,10 +35047,7 @@ VoiceGroupTable_845058C: @ 845058C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 845094C
-	.byte 0x2, 0x3c, 0x0, 0x0
-	.byte 3
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_square_2 3, 0, 1, 7, 1
 
 @ SquareWave1 8450958
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -35788,10 +35209,7 @@ VoiceGroupTable_8450B8C: @ 8450B8C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 8450BBC
-	.byte 0x2, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 2, 3, 1
+	voice_square_2 2, 0, 2, 3, 1
 
 @ SquareWave1 8450BC8
 	voice_square_1 0, 2, 0, 2, 3, 1
@@ -36025,10 +35443,7 @@ VoiceGroupTable_8450B8C: @ 8450B8C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 8450F4C
-	.byte 0x2, 0x3c, 0x0, 0x0
-	.byte 3
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_square_2 3, 0, 1, 7, 1
 
 @ WaveMemory 8450F58
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -36042,19 +35457,13 @@ VoiceGroupTable_8450B8C: @ 8450B8C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 8450F7C
-	.byte 0x2, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_square_2 2, 0, 1, 7, 1
 
 @ SquareWave1 8450F88
 	voice_square_1 0, 2, 0, 1, 7, 1
 
 @ SquareWave2 8450F94
-	.byte 0x2, 0x3c, 0x0, 0x0
-	.byte 3
-	.byte 0, 0, 0
-	.byte 0, 2, 7, 1
+	voice_square_2 3, 0, 2, 7, 1
 
 VoiceGroupTable_8450FA0: @ 8450FA0
 
@@ -36073,10 +35482,7 @@ VoiceGroupTable_8450FA0: @ 8450FA0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 8450FD0
-	.byte 0x2, 0x3c, 0x0, 0x0
-	.byte 2
-	.byte 0, 0, 0
-	.byte 0, 2, 3, 1
+	voice_square_2 2, 0, 2, 3, 1
 
 @ SquareWave1 8450FDC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -36310,10 +35716,7 @@ VoiceGroupTable_8450FA0: @ 8450FA0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 8451360
-	.byte 0x2, 0x3c, 0x0, 0x0
-	.byte 3
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_square_2 3, 0, 1, 7, 1
 
 @ WaveMemory 845136C
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -36343,10 +35746,7 @@ VoiceGroupTable_8451390: @ 8451390
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 84513C0
-	.byte 0x2, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 1, 1, 7, 1
+	voice_square_2 0, 1, 1, 7, 1
 
 @ SquareWave1 84513CC
 	voice_square_1 0, 0, 1, 1, 7, 1
@@ -36580,10 +35980,7 @@ VoiceGroupTable_8451390: @ 8451390
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 8451750
-	.byte 0x2, 0x3c, 0x0, 0x0
-	.byte 3
-	.byte 0, 0, 0
-	.byte 1, 1, 6, 1
+	voice_square_2 3, 1, 1, 6, 1
 
 @ WaveMemory 845175C
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -36973,10 +36370,7 @@ VoiceGroupTable_8451990: @ 8451990
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ SquareWave2 8451D50
-	.byte 0xa, 0x3c, 0x0, 0x0
-	.byte 3
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 1
+	voice_square_2_alt 3, 0, 1, 0, 1
 
 @ SquareWave1 8451D5C
 	voice_square_1_alt 0, 3, 0, 1, 0, 1
