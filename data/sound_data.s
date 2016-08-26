@@ -1444,10 +1444,7 @@ VoiceGroupTable_8430C9C: @ 8430C9C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 8431290
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_843129C: @ 843129C
 
@@ -2705,16 +2702,10 @@ VoiceGroupTable_84323E8: @ 84323E8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 8432580
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 2, 0, 2
+	voice_noise_alt 0, 0, 2, 0, 2
 
 @ Noise 843258C
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 1
+	voice_noise_alt 0, 0, 1, 0, 1
 
 @ Direct Sound 8432598
 	voice_directsound_no_resample 60, 192, DirectSoundWaveData_845AE14, 255, 0, 255, 242
@@ -3476,10 +3467,7 @@ VoiceGroupTable_8432B38: @ 8432B38
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 843312C
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 3
+	voice_noise_alt 1, 0, 1, 0, 3
 
 VoiceGroupTable_8433138: @ 8433138
 
@@ -5844,10 +5832,7 @@ VoiceGroupTable_8434F14: @ 8434F14
 	voice_noise_alt 0, 0, 4, 1, 4
 
 @ Noise 8435508
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 2
+	voice_noise_alt 0, 0, 1, 0, 2
 
 VoiceGroupTable_8435514: @ 8435514
 
@@ -7126,22 +7111,13 @@ VoiceGroupTable_84362B8: @ 84362B8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 8436894
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 @ Noise 84368A0
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 4, 1, 4
+	voice_noise_alt 0, 0, 4, 1, 4
 
 @ Noise 84368AC
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 2
+	voice_noise_alt 0, 0, 1, 0, 2
 
 VoiceGroupTable_84368B8: @ 84368B8
 
@@ -8314,16 +8290,10 @@ VoiceGroupTable_8437488: @ 8437488
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 8437A70
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 4, 1, 4
+	voice_noise_alt 0, 0, 4, 1, 4
 
 @ Noise 8437A7C
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 2
+	voice_noise_alt 0, 0, 1, 0, 2
 
 VoiceGroupTable_8437A88: @ 8437A88
 
@@ -9241,16 +9211,10 @@ VoiceGroupTable_843828C: @ 843828C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 8438874
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_noise_alt 0, 0, 1, 7, 1
 
 @ Noise 8438880
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_843888C: @ 843888C
 
@@ -9641,16 +9605,10 @@ VoiceGroupTable_843888C: @ 843888C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 8438E74
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_noise_alt 0, 0, 1, 7, 1
 
 @ Noise 8438E80
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_8438E8C: @ 8438E8C
 
@@ -10041,16 +9999,10 @@ VoiceGroupTable_8438E8C: @ 8438E8C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 8439474
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_noise_alt 0, 0, 1, 7, 1
 
 @ Noise 8439480
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_843948C: @ 843948C
 
@@ -10441,16 +10393,10 @@ VoiceGroupTable_843948C: @ 843948C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 8439A74
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_noise_alt 0, 0, 1, 7, 1
 
 @ Noise 8439A80
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_8439A8C: @ 8439A8C
 
@@ -11342,10 +11288,7 @@ VoiceGroupTable_843A224: @ 843A224
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 843A818
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_843A824: @ 843A824
 
@@ -11735,10 +11678,7 @@ VoiceGroupTable_843A824: @ 843A824
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 843AE18
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_843AE24: @ 843AE24
 
@@ -12134,10 +12074,7 @@ VoiceGroupTable_843AE24: @ 843AE24
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 843B418
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_843B424: @ 843B424
 
@@ -12809,10 +12746,7 @@ VoiceGroupTable_843B844: @ 843B844
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 843BE38
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_843BE44: @ 843BE44
 
@@ -13202,10 +13136,7 @@ VoiceGroupTable_843BE44: @ 843BE44
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 843C438
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_843C444: @ 843C444
 
@@ -13825,22 +13756,13 @@ VoiceGroupTable_843C7BC: @ 843C7BC
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 843CD98
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 9, 4
+	voice_noise_alt 0, 0, 1, 9, 4
 
 @ Noise 843CDA4
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 3, 1, 10, 0
+	voice_noise_alt 0, 3, 1, 10, 0
 
 @ Noise 843CDB0
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 2, 0, 0
+	voice_noise_alt 0, 0, 2, 0, 0
 
 VoiceGroupTable_843CDBC: @ 843CDBC
 
@@ -14232,10 +14154,7 @@ VoiceGroupTable_843CDBC: @ 843CDBC
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 843D3B0
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_843D3BC: @ 843D3BC
 
@@ -14629,10 +14548,7 @@ VoiceGroupTable_843D3BC: @ 843D3BC
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 843D9B0
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_843D9BC: @ 843D9BC
 
@@ -15028,10 +14944,7 @@ VoiceGroupTable_843D9BC: @ 843D9BC
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 843DFB0
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_843DFBC: @ 843DFBC
 
@@ -15423,10 +15336,7 @@ VoiceGroupTable_843DFBC: @ 843DFBC
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 843E5B0
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_843E5BC: @ 843E5BC
 
@@ -15813,16 +15723,10 @@ VoiceGroupTable_843E5BC: @ 843E5BC
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 843EBA4
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_noise_alt 0, 0, 1, 7, 1
 
 @ Noise 843EBB0
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_843EBBC: @ 843EBBC
 
@@ -16211,16 +16115,10 @@ VoiceGroupTable_843EBBC: @ 843EBBC
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 843F1A4
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 2, 4, 0
+	voice_noise_alt 0, 0, 2, 4, 0
 
 @ Noise 843F1B0
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_843F1BC: @ 843F1BC
 
@@ -16899,10 +16797,7 @@ VoiceGroupTable_843F5E8: @ 843F5E8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 843FBDC
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_843FBE8: @ 843FBE8
 
@@ -17289,16 +17184,10 @@ VoiceGroupTable_843FBE8: @ 843FBE8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 84401D0
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_noise_alt 0, 0, 1, 7, 1
 
 @ Noise 84401DC
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_84401E8: @ 84401E8
 
@@ -17685,16 +17574,10 @@ VoiceGroupTable_84401E8: @ 84401E8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 84407D0
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_noise_alt 0, 0, 1, 7, 1
 
 @ Noise 84407DC
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_84407E8: @ 84407E8
 
@@ -18081,16 +17964,10 @@ VoiceGroupTable_84407E8: @ 84407E8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 8440DD0
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_noise_alt 0, 0, 1, 7, 1
 
 @ Noise 8440DDC
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_8440DE8: @ 8440DE8
 
@@ -18479,16 +18356,10 @@ VoiceGroupTable_8440DE8: @ 8440DE8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 84413D0
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_noise_alt 0, 0, 1, 7, 1
 
 @ Noise 84413DC
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_84413E8: @ 84413E8
 
@@ -18877,16 +18748,10 @@ VoiceGroupTable_84413E8: @ 84413E8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 84419D0
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_noise_alt 0, 0, 1, 7, 1
 
 @ Noise 84419DC
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_84419E8: @ 84419E8
 
@@ -19271,16 +19136,10 @@ VoiceGroupTable_84419E8: @ 84419E8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 8441FD0
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_noise_alt 0, 0, 1, 7, 1
 
 @ Noise 8441FDC
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_8441FE8: @ 8441FE8
 
@@ -19669,16 +19528,10 @@ VoiceGroupTable_8441FE8: @ 8441FE8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 84425D0
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_noise_alt 0, 0, 1, 7, 1
 
 @ Noise 84425DC
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_84425E8: @ 84425E8
 
@@ -20067,16 +19920,10 @@ VoiceGroupTable_84425E8: @ 84425E8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 8442BD0
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_noise_alt 0, 0, 1, 7, 1
 
 @ Noise 8442BDC
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_8442BE8: @ 8442BE8
 
@@ -20465,16 +20312,10 @@ VoiceGroupTable_8442BE8: @ 8442BE8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 84431D0
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_noise_alt 0, 0, 1, 7, 1
 
 @ Noise 84431DC
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_84431E8: @ 84431E8
 
@@ -20863,16 +20704,10 @@ VoiceGroupTable_84431E8: @ 84431E8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 84437D0
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 2, 4, 0
+	voice_noise_alt 0, 0, 2, 4, 0
 
 @ Noise 84437DC
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_84437E8: @ 84437E8
 
@@ -21266,10 +21101,7 @@ VoiceGroupTable_84437E8: @ 84437E8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 8443DDC
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_8443DE8: @ 8443DE8
 
@@ -21662,16 +21494,10 @@ VoiceGroupTable_8443DE8: @ 8443DE8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 84443D0
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 2, 4, 0
+	voice_noise_alt 0, 0, 2, 4, 0
 
 @ Noise 84443DC
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_84443E8: @ 84443E8
 
@@ -22064,16 +21890,10 @@ VoiceGroupTable_84443E8: @ 84443E8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 84449D0
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 2, 4, 0
+	voice_noise_alt 0, 0, 2, 4, 0
 
 @ Noise 84449DC
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_84449E8: @ 84449E8
 
@@ -22458,16 +22278,10 @@ VoiceGroupTable_84449E8: @ 84449E8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 8444FD0
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 2, 4, 0
+	voice_noise_alt 0, 0, 2, 4, 0
 
 @ Noise 8444FDC
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_8444FE8: @ 8444FE8
 
@@ -22862,16 +22676,10 @@ VoiceGroupTable_8444FE8: @ 8444FE8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 84455D0
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 3, 4, 0
+	voice_noise_alt 0, 0, 3, 4, 0
 
 @ Noise 84455DC
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_84455E8: @ 84455E8
 
@@ -23258,16 +23066,10 @@ VoiceGroupTable_84455E8: @ 84455E8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 8445BD0
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_noise_alt 0, 0, 1, 7, 1
 
 @ Noise 8445BDC
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_8445BE8: @ 8445BE8
 
@@ -23654,16 +23456,10 @@ VoiceGroupTable_8445BE8: @ 8445BE8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 84461D0
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 2, 4, 0
+	voice_noise_alt 0, 0, 2, 4, 0
 
 @ Noise 84461DC
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_84461E8: @ 84461E8
 
@@ -24052,16 +23848,10 @@ VoiceGroupTable_84461E8: @ 84461E8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 84467D0
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 2, 4, 0
+	voice_noise_alt 0, 0, 2, 4, 0
 
 @ Noise 84467DC
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 2, 0, 2
+	voice_noise_alt 0, 0, 2, 0, 2
 
 VoiceGroupTable_84467E8: @ 84467E8
 
@@ -24450,16 +24240,10 @@ VoiceGroupTable_84467E8: @ 84467E8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 8446DD0
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_noise_alt 0, 0, 1, 7, 1
 
 @ Noise 8446DDC
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_8446DE8: @ 8446DE8
 
@@ -24848,16 +24632,10 @@ VoiceGroupTable_8446DE8: @ 8446DE8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 84473D0
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_noise_alt 0, 0, 1, 7, 1
 
 @ Noise 84473DC
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_84473E8: @ 84473E8
 
@@ -25260,16 +25038,10 @@ VoiceGroupTable_8447400: @ 8447400
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 84479E8
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_noise_alt 0, 0, 1, 7, 1
 
 @ Noise 84479F4
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_8447A00: @ 8447A00
 
@@ -25922,16 +25694,10 @@ VoiceGroupTable_8447DF0: @ 8447DF0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 84483D8
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_noise_alt 0, 0, 1, 7, 1
 
 @ Noise 84483E4
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_84483F0: @ 84483F0
 
@@ -26318,16 +26084,10 @@ VoiceGroupTable_84483F0: @ 84483F0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 84489D8
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_noise_alt 0, 0, 1, 7, 1
 
 @ Noise 84489E4
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_84489F0: @ 84489F0
 
@@ -26718,16 +26478,10 @@ VoiceGroupTable_84489F0: @ 84489F0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 8448FD8
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_noise_alt 0, 0, 1, 7, 1
 
 @ Noise 8448FE4
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_8448FF0: @ 8448FF0
 
@@ -27116,16 +26870,10 @@ VoiceGroupTable_8448FF0: @ 8448FF0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 84495D8
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_noise_alt 0, 0, 1, 7, 1
 
 @ Noise 84495E4
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_84495F0: @ 84495F0
 
@@ -27523,10 +27271,7 @@ VoiceGroupTable_84495F0: @ 84495F0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 8449BE4
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_8449BF0: @ 8449BF0
 
@@ -27915,16 +27660,10 @@ VoiceGroupTable_8449BF0: @ 8449BF0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 844A1D8
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_noise_alt 0, 0, 1, 7, 1
 
 @ Noise 844A1E4
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_844A1F0: @ 844A1F0
 
@@ -28309,16 +28048,10 @@ VoiceGroupTable_844A1F0: @ 844A1F0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 844A7D8
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_noise_alt 0, 0, 1, 7, 1
 
 @ Noise 844A7E4
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_844A7F0: @ 844A7F0
 
@@ -28711,16 +28444,10 @@ VoiceGroupTable_844A7F0: @ 844A7F0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 844ADD8
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_noise_alt 0, 0, 1, 7, 1
 
 @ Noise 844ADE4
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_844ADF0: @ 844ADF0
 
@@ -29105,16 +28832,10 @@ VoiceGroupTable_844ADF0: @ 844ADF0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 844B3D8
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_noise_alt 0, 0, 1, 7, 1
 
 @ Noise 844B3E4
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_844B3F0: @ 844B3F0
 
@@ -29505,16 +29226,10 @@ VoiceGroupTable_844B3F0: @ 844B3F0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 844B9D8
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_noise_alt 0, 0, 1, 7, 1
 
 @ Noise 844B9E4
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_844B9F0: @ 844B9F0
 
@@ -29905,16 +29620,10 @@ VoiceGroupTable_844B9F0: @ 844B9F0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 844BFD8
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_noise_alt 0, 0, 1, 7, 1
 
 @ Noise 844BFE4
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_844BFF0: @ 844BFF0
 
@@ -30299,16 +30008,10 @@ VoiceGroupTable_844BFF0: @ 844BFF0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 844C5D8
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_noise_alt 0, 0, 1, 7, 1
 
 @ Noise 844C5E4
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_844C5F0: @ 844C5F0
 
@@ -30695,16 +30398,10 @@ VoiceGroupTable_844C5F0: @ 844C5F0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 844CBD8
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_noise_alt 0, 0, 1, 7, 1
 
 @ Noise 844CBE4
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_844CBF0: @ 844CBF0
 
@@ -31095,16 +30792,10 @@ VoiceGroupTable_844CBF0: @ 844CBF0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 844D1D8
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_noise_alt 0, 0, 1, 7, 1
 
 @ Noise 844D1E4
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_844D1F0: @ 844D1F0
 
@@ -31496,10 +31187,7 @@ VoiceGroupTable_844D1F0: @ 844D1F0
 	voice_directsound 60, 0, DirectSoundWaveData_845B9A8, 255, 255, 255, 127
 
 @ Noise 844D7E4
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_844D7F0: @ 844D7F0
 
@@ -31886,16 +31574,10 @@ VoiceGroupTable_844D7F0: @ 844D7F0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 844DDD8
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_noise_alt 0, 0, 1, 7, 1
 
 @ Noise 844DDE4
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_844DDF0: @ 844DDF0
 
@@ -32282,16 +31964,10 @@ VoiceGroupTable_844DDF0: @ 844DDF0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 844E3D8
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_noise_alt 0, 0, 1, 7, 1
 
 @ Noise 844E3E4
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 VoiceGroupTable_844E3F0: @ 844E3F0
 
@@ -36217,46 +35893,25 @@ VoiceGroupTable_8451990: @ 8451990
 	voice_noise 0, 2, 7, 15, 0
 
 @ Noise 8451F3C
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 2, 0, 15, 0
+	voice_noise_alt 0, 2, 0, 15, 0
 
 @ Noise 8451F48
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 0, 0, 15, 0
+	voice_noise_alt 1, 0, 0, 15, 0
 
 @ Noise 8451F54
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 0, 15, 0
+	voice_noise_alt 0, 0, 0, 15, 0
 
 @ Noise 8451F60
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 3, 0, 0
+	voice_noise_alt 0, 0, 3, 0, 0
 
 @ Noise 8451F6C
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 2, 0, 0
+	voice_noise_alt 0, 0, 2, 0, 0
 
 @ Noise 8451F78
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 0
+	voice_noise_alt 0, 0, 1, 0, 0
 
 @ Noise 8451F84
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 1
+	voice_noise_alt 0, 0, 1, 0, 1
 
 VoiceGroupTable_8451F90: @ 8451F90
 
@@ -36273,16 +35928,10 @@ VoiceGroupTable_8451F90: @ 8451F90
 	voice_directsound 60, 0, DirectSoundWaveData_8456330, 255, 242, 0, 127
 
 @ Noise 8451FC0
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 1
+	voice_noise_alt 0, 0, 1, 0, 1
 
 @ Noise 8451FCC
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 0, 1, 0, 1
+	voice_noise_alt 1, 0, 1, 0, 1
 
 @ Direct Sound 8451FD8
 	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 0, 255, 165
@@ -36300,10 +35949,7 @@ VoiceGroupTable_8451F90: @ 8451F90
 	voice_directsound 60, 0, DirectSoundWaveData_848C4A4, 255, 0, 255, 127
 
 @ Noise 8452014
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 0, 2, 0, 0
+	voice_noise_alt 1, 0, 2, 0, 0
 
 @ SquareWave1 8452020
 	voice_square_1 0x67, 3, 2, 7, 0, 0
@@ -36345,19 +35991,13 @@ VoiceGroupTable_8451F90: @ 8451F90
 	voice_directsound 60, 0, DirectSoundWaveData_845B2B4, 255, 0, 255, 127
 
 @ Noise 84520BC
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 7, 15, 1
+	voice_noise_alt 0, 0, 7, 15, 1
 
 @ Direct Sound 84520C8
 	voice_directsound 60, 0, DirectSoundWaveData_8493D20, 255, 0, 255, 127
 
 @ Noise 84520D4
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 1
-	.byte 0, 0, 0
-	.byte 0, 7, 15, 1
+	voice_noise_alt 1, 0, 7, 15, 1
 
 @ Direct Sound 84520E0
 	voice_directsound 60, 0, DirectSoundWaveData_8456330, 255, 246, 0, 127
@@ -36447,10 +36087,7 @@ VoiceGroupTable_8451F90: @ 8451F90
 	voice_directsound 60, 0, DirectSoundWaveData_848BD68, 255, 127, 0, 127
 
 @ Noise 845223C
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 1, 6, 0, 0
+	voice_noise_alt 0, 1, 6, 0, 0
 
 @ Direct Sound 8452248
 	voice_directsound 60, 0, DirectSoundWaveData_8457D98, 255, 255, 255, 127
@@ -36477,10 +36114,7 @@ VoiceGroupTable_8451F90: @ 8451F90
 	voice_directsound 60, 0, DirectSoundWaveData_845CAB0, 255, 0, 255, 165
 
 @ Noise 84522A8
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 5, 7, 15, 1
+	voice_noise_alt 0, 5, 7, 15, 1
 
 @ Direct Sound 84522B4
 	voice_directsound 60, 0, DirectSoundWaveData_8487330, 128, 242, 0, 165
@@ -36492,16 +36126,10 @@ VoiceGroupTable_8451F90: @ 8451F90
 	voice_square_1 0, 0, 1, 5, 0, 0
 
 @ Noise 84522D8
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 6, 6, 0, 1
+	voice_noise_alt 0, 6, 6, 0, 1
 
 @ Noise 84522E4
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 3, 6, 0, 1
+	voice_noise_alt 0, 3, 6, 0, 1
 
 @ SquareWave1 84522F0
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -37234,10 +36862,7 @@ KeySplitTable_8455224: @ 8455224
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Noise 845523C
-	.byte 0xc, 0x3c, 0x0, 0x0
-	.byte 0
-	.byte 0, 0, 0
-	.byte 0, 1, 7, 1
+	voice_noise_alt 0, 0, 1, 7, 1
 
 	.incbin "baserom.gba", 0x00455248, 0x24
 
