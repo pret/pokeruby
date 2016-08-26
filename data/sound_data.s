@@ -1048,9 +1048,7 @@ VoiceGroupTable_84308AC: @ 84308AC
 	voice_square_2 3, 0, 1, 7, 1
 
 @ WaveMemory 8430C78
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845541C
-	.byte 0, 7, 15, 2
+	voice_programmable_wave_alt ProgrammableWaveData_845541C, 0, 7, 15, 2
 
 @ SquareWave1 8430C84
 	voice_square_1 0, 3, 0, 1, 7, 1
@@ -1287,9 +1285,7 @@ VoiceGroupTable_8430C9C: @ 8430C9C
 	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 127, 231, 127
 
 @ WaveMemory 8431014
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553BC
-	.byte 0, 7, 15, 1
+	voice_programmable_wave_alt ProgrammableWaveData_84553BC, 0, 7, 15, 1
 
 @ SquareWave1 8431020
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -1729,14 +1725,10 @@ VoiceGroupTable_843129C: @ 843129C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ WaveMemory 84316B0
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845540C
-	.byte 0, 7, 15, 2
+	voice_programmable_wave_alt ProgrammableWaveData_845540C, 0, 7, 15, 2
 
 @ WaveMemory 84316BC
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845541C
-	.byte 0, 7, 15, 2
+	voice_programmable_wave_alt ProgrammableWaveData_845541C, 0, 7, 15, 2
 
 @ SquareWave1 84316C8
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -2049,9 +2041,7 @@ VoiceGroupTable_8431764: @ 8431764
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ WaveMemory 8431B78
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845541C
-	.byte 0, 7, 15, 1
+	voice_programmable_wave_alt ProgrammableWaveData_845541C, 0, 7, 15, 1
 
 @ SquareWave1 8431B84
 	voice_square_1_alt 0, 1, 0, 0, 7, 1
@@ -2315,17 +2305,13 @@ VoiceGroupTable_8431B9C: @ 8431B9C
 	voice_square_2_alt 3, 0, 1, 7, 1
 
 @ WaveMemory 8431F68
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845541C
-	.byte 0, 7, 15, 1
+	voice_programmable_wave_alt ProgrammableWaveData_845541C, 0, 7, 15, 1
 
 @ SquareWave1 8431F74
 	voice_square_1_alt 0, 3, 0, 1, 7, 1
 
 @ WaveMemory 8431F80
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845541C
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_845541C, 0, 7, 15, 0
 
 @ SquareWave1 8431F8C
 	voice_square_1_alt 0, 3, 0, 0, 7, 0
@@ -2582,9 +2568,7 @@ VoiceGroupTable_8431F98: @ 8431F98
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ WaveMemory 8432364
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553DC
-	.byte 0, 7, 15, 2
+	voice_programmable_wave_alt ProgrammableWaveData_84553DC, 0, 7, 15, 2
 
 @ SquareWave1 8432370
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -3073,9 +3057,7 @@ VoiceGroupTable_84326F4: @ 84326F4
 	voice_square_2_alt 2, 1, 1, 7, 2
 
 @ WaveMemory 8432AC0
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845540C
-	.byte 0, 7, 15, 2
+	voice_programmable_wave_alt ProgrammableWaveData_845540C, 0, 7, 15, 2
 
 @ SquareWave1 8432ACC
 	voice_square_1_alt 0, 2, 1, 1, 7, 2
@@ -3087,9 +3069,7 @@ VoiceGroupTable_84326F4: @ 84326F4
 	voice_square_1_alt 0, 3, 1, 1, 7, 2
 
 @ WaveMemory 8432AF0
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845540C
-	.byte 0, 7, 15, 3
+	voice_programmable_wave_alt ProgrammableWaveData_845540C, 0, 7, 15, 3
 
 @ SquareWave1 8432AFC
 	voice_square_1_alt 0, 2, 0, 0, 7, 2
@@ -3358,9 +3338,7 @@ VoiceGroupTable_8432B38: @ 8432B38
 	voice_square_2_alt 2, 0, 1, 7, 1
 
 @ WaveMemory 8432F04
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845540C
-	.byte 0, 7, 15, 2
+	voice_programmable_wave_alt ProgrammableWaveData_845540C, 0, 7, 15, 2
 
 @ SquareWave1 8432F10
 	voice_square_1_alt 0, 2, 0, 1, 7, 1
@@ -4293,27 +4271,19 @@ VoiceGroupTable_8433BAC: @ 8433BAC
 	voice_square_2_alt 0, 0, 1, 7, 0
 
 @ WaveMemory 8433D14
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845541C
-	.byte 0, 7, 15, 1
+	voice_programmable_wave_alt ProgrammableWaveData_845541C, 0, 7, 15, 1
 
 @ SquareWave1 8433D20
 	voice_square_1_alt 0, 0, 0, 1, 7, 0
 
 @ WaveMemory 8433D2C
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845541C
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_845541C, 0, 7, 15, 0
 
 @ WaveMemory 8433D38
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553FC
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_84553FC, 0, 7, 15, 0
 
 @ WaveMemory 8433D44
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553FC
-	.byte 0, 7, 15, 1
+	voice_programmable_wave_alt ProgrammableWaveData_84553FC, 0, 7, 15, 1
 
 @ SquareWave1 8433D50
 	voice_square_1_alt 0, 0, 0, 0, 7, 0
@@ -4659,9 +4629,7 @@ VoiceGroupTable_8433EB8: @ 8433EB8
 	voice_square_2_alt 2, 0, 1, 7, 0
 
 @ WaveMemory 8434284
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845541C
-	.byte 0, 7, 15, 1
+	voice_programmable_wave_alt ProgrammableWaveData_845541C, 0, 7, 15, 1
 
 @ SquareWave1 8434290
 	voice_square_1_alt 0, 2, 0, 1, 7, 0
@@ -4938,9 +4906,7 @@ VoiceGroupTable_84342E4: @ 84342E4
 	voice_square_2_alt 2, 0, 1, 7, 0
 
 @ WaveMemory 84346B0
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845541C
-	.byte 0, 7, 15, 1
+	voice_programmable_wave_alt ProgrammableWaveData_845541C, 0, 7, 15, 1
 
 @ SquareWave1 84346BC
 	voice_square_1_alt 0, 2, 0, 1, 7, 0
@@ -4964,14 +4930,10 @@ VoiceGroupTable_84342E4: @ 84342E4
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ WaveMemory 8434710
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845541C
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_845541C, 0, 7, 15, 0
 
 @ WaveMemory 843471C
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845541C
-	.byte 0, 7, 15, 1
+	voice_programmable_wave_alt ProgrammableWaveData_845541C, 0, 7, 15, 1
 
 VoiceGroupTable_8434728: @ 8434728
 
@@ -5225,9 +5187,7 @@ VoiceGroupTable_8434728: @ 8434728
 	voice_square_2_alt 1, 0, 1, 7, 1
 
 @ WaveMemory 8434AF4
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553BC
-	.byte 0, 7, 15, 1
+	voice_programmable_wave_alt ProgrammableWaveData_84553BC, 0, 7, 15, 1
 
 @ SquareWave1 8434B00
 	voice_square_1_alt 0, 1, 0, 1, 7, 1
@@ -5485,9 +5445,7 @@ VoiceGroupTable_8434B18: @ 8434B18
 	voice_square_2_alt 2, 0, 1, 9, 0
 
 @ WaveMemory 8434EE4
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845541C
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_845541C, 0, 7, 15, 0
 
 @ SquareWave1 8434EF0
 	voice_square_1_alt 0, 2, 0, 1, 9, 0
@@ -5748,9 +5706,7 @@ VoiceGroupTable_8434F14: @ 8434F14
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ WaveMemory 84352E0
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845540C
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_845540C, 0, 7, 15, 0
 
 @ SquareWave1 84352EC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -6141,9 +6097,7 @@ VoiceGroupTable_8435514: @ 8435514
 	voice_square_2 2, 0, 2, 0, 0
 
 @ WaveMemory 84358E0
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845540C
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_845540C, 0, 7, 15, 0
 
 @ SquareWave2 84358EC
 	voice_square_2 3, 0, 4, 0, 0
@@ -6400,9 +6354,7 @@ VoiceGroupTable_84358F8: @ 84358F8
 	voice_square_2_alt 3, 0, 1, 7, 0
 
 @ WaveMemory 8435CC4
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845541C
-	.byte 0, 7, 15, 1
+	voice_programmable_wave_alt ProgrammableWaveData_845541C, 0, 7, 15, 1
 
 @ SquareWave1 8435CD0
 	voice_square_1_alt 0, 3, 0, 1, 7, 0
@@ -6676,9 +6628,7 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ WaveMemory 84360E4
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553DC
-	.byte 0, 7, 15, 1
+	voice_programmable_wave_alt ProgrammableWaveData_84553DC, 0, 7, 15, 1
 
 @ SquareWave1 84360F0
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -7044,9 +6994,7 @@ VoiceGroupTable_84362B8: @ 84362B8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ WaveMemory 8436684
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845540C
-	.byte 0, 7, 15, 2
+	voice_programmable_wave_alt ProgrammableWaveData_845540C, 0, 7, 15, 2
 
 @ SquareWave1 8436690
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -7968,17 +7916,13 @@ VoiceGroupTable_843708C: @ 843708C
 	voice_square_2_alt 3, 0, 1, 6, 1
 
 @ WaveMemory 8437458
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845541C
-	.byte 0, 7, 15, 2
+	voice_programmable_wave_alt ProgrammableWaveData_845541C, 0, 7, 15, 2
 
 @ SquareWave1 8437464
 	voice_square_1_alt 0, 3, 0, 1, 6, 1
 
 @ WaveMemory 8437470
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845541C
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_845541C, 0, 7, 15, 0
 
 @ SquareWave1 843747C
 	voice_square_1_alt 0, 3, 0, 0, 6, 1
@@ -8635,9 +8579,7 @@ VoiceGroupTable_8437A88: @ 8437A88
 	voice_square_2_alt 0, 0, 1, 7, 1
 
 @ WaveMemory 8437E54
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553DC
-	.byte 0, 7, 15, 2
+	voice_programmable_wave_alt ProgrammableWaveData_84553DC, 0, 7, 15, 2
 
 @ SquareWave1 8437E60
 	voice_square_1_alt 0, 0, 0, 1, 7, 1
@@ -8658,9 +8600,7 @@ VoiceGroupTable_8437A88: @ 8437A88
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ WaveMemory 8437EA8
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845541C
-	.byte 0, 7, 15, 2
+	voice_programmable_wave_alt ProgrammableWaveData_845541C, 0, 7, 15, 2
 
 VoiceGroupTable_8437EB4: @ 8437EB4
 
@@ -8910,9 +8850,7 @@ VoiceGroupTable_8437EB4: @ 8437EB4
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ WaveMemory 8438280
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553DC
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_84553DC, 0, 7, 15, 0
 
 VoiceGroupTable_843828C: @ 843828C
 
@@ -9174,9 +9112,7 @@ VoiceGroupTable_843828C: @ 843828C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ WaveMemory 8438670
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845540C
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_845540C, 0, 7, 15, 0
 
 @ SquareWave1 843867C
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -9576,9 +9512,7 @@ VoiceGroupTable_843888C: @ 843888C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ WaveMemory 8438C70
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845540C
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_845540C, 0, 7, 15, 0
 
 @ SquareWave1 8438C7C
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -9978,9 +9912,7 @@ VoiceGroupTable_8438E8C: @ 8438E8C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ WaveMemory 8439270
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845540C
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_845540C, 0, 7, 15, 0
 
 @ SquareWave1 843927C
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -10380,9 +10312,7 @@ VoiceGroupTable_843948C: @ 843948C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ WaveMemory 8439870
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845540C
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_845540C, 0, 7, 15, 0
 
 @ SquareWave1 843987C
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -11020,9 +10950,7 @@ VoiceGroupTable_8439E58: @ 8439E58
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ WaveMemory 843A218
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845540C
-	.byte 0, 7, 15, 1
+	voice_programmable_wave_alt ProgrammableWaveData_845540C, 0, 7, 15, 1
 
 VoiceGroupTable_843A224: @ 843A224
 
@@ -11041,9 +10969,7 @@ VoiceGroupTable_843A224: @ 843A224
 	voice_square_2_alt 3, 1, 2, 6, 0
 
 @ WaveMemory 843A254
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553BC
-	.byte 0, 7, 15, 1
+	voice_programmable_wave_alt ProgrammableWaveData_84553BC, 0, 7, 15, 1
 
 @ SquareWave1 843A260
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -11052,9 +10978,7 @@ VoiceGroupTable_843A224: @ 843A224
 	voice_square_2_alt 1, 0, 2, 0, 1
 
 @ WaveMemory 843A278
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553EC
-	.byte 1, 7, 15, 1
+	voice_programmable_wave_alt ProgrammableWaveData_84553EC, 1, 7, 15, 1
 
 @ SquareWave1 843A284
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -11431,9 +11355,7 @@ VoiceGroupTable_843A824: @ 843A824
 	.4byte KeySplitTable_8455224
 
 @ WaveMemory 843A830
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845542C
-	.byte 0, 1, 12, 0
+	voice_programmable_wave_alt ProgrammableWaveData_845542C, 0, 1, 12, 0
 
 @ SquareWave1 843A83C
 	voice_square_1_alt 0, 0, 1, 1, 9, 0
@@ -11442,9 +11364,7 @@ VoiceGroupTable_843A824: @ 843A824
 	voice_square_2_alt 2, 0, 2, 6, 3
 
 @ WaveMemory 843A854
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553DC
-	.byte 0, 7, 15, 1
+	voice_programmable_wave_alt ProgrammableWaveData_84553DC, 0, 7, 15, 1
 
 @ Direct Sound 843A860
 	voice_directsound 60, 0, DirectSoundWaveData_84571CC, 255, 253, 0, 216
@@ -12076,17 +11996,13 @@ VoiceGroupTable_843AE24: @ 843AE24
 	voice_square_2_alt 2, 0, 1, 6, 2
 
 @ WaveMemory 843B1F0
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845544C
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_845544C, 0, 7, 15, 0
 
 @ SquareWave2 843B1FC
 	voice_square_2_alt 3, 0, 1, 4, 1
 
 @ WaveMemory 843B208
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553DC
-	.byte 1, 7, 15, 2
+	voice_programmable_wave_alt ProgrammableWaveData_84553DC, 1, 7, 15, 2
 
 @ SquareWave2 843B214
 	voice_square_2_alt 1, 1, 1, 4, 1
@@ -12455,9 +12371,7 @@ VoiceGroupTable_843B424: @ 843B424
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ WaveMemory 843B790
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553CC
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_84553CC, 0, 7, 15, 0
 
 @ SquareWave1 843B79C
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -12490,9 +12404,7 @@ VoiceGroupTable_843B424: @ 843B424
 	voice_square_1_alt 0, 0, 0, 3, 3, 0
 
 @ WaveMemory 843B814
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845540C
-	.byte 0, 7, 12, 1
+	voice_programmable_wave_alt ProgrammableWaveData_845540C, 0, 7, 12, 1
 
 @ SquareWave2 843B820
 	voice_square_2_alt 1, 0, 1, 4, 3
@@ -12765,9 +12677,7 @@ VoiceGroupTable_843B844: @ 843B844
 	voice_square_1_alt 0, 3, 0, 1, 4, 1
 
 @ WaveMemory 843BC28
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845540C
-	.byte 1, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_845540C, 1, 7, 15, 0
 
 @ SquareWave2 843BC34
 	voice_square_2_alt 2, 0, 2, 4, 2
@@ -13160,9 +13070,7 @@ VoiceGroupTable_843BE44: @ 843BE44
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ WaveMemory 843C228
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845540C
-	.byte 0, 7, 15, 1
+	voice_programmable_wave_alt ProgrammableWaveData_845540C, 0, 7, 15, 1
 
 @ SquareWave1 843C234
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -13621,9 +13529,7 @@ VoiceGroupTable_843C7BC: @ 843C7BC
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ WaveMemory 843C918
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553EC
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_84553EC, 0, 7, 15, 0
 
 @ SquareWave1 843C924
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -13790,17 +13696,13 @@ VoiceGroupTable_843C7BC: @ 843C7BC
 	voice_square_1_alt 0, 0, 0, 1, 7, 1
 
 @ WaveMemory 843CB94
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553DC
-	.byte 0, 7, 15, 1
+	voice_programmable_wave_alt ProgrammableWaveData_84553DC, 0, 7, 15, 1
 
 @ SquareWave2 843CBA0
 	voice_square_2_alt 0, 0, 1, 4, 2
 
 @ WaveMemory 843CBAC
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845541C
-	.byte 0, 7, 15, 1
+	voice_programmable_wave_alt ProgrammableWaveData_845541C, 0, 7, 15, 1
 
 @ SquareWave1 843CBB8
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -14198,9 +14100,7 @@ VoiceGroupTable_843CDBC: @ 843CDBC
 	voice_square_1_alt 0, 3, 0, 1, 4, 1
 
 @ WaveMemory 843D1A0
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553BC
-	.byte 0, 7, 12, 0
+	voice_programmable_wave_alt ProgrammableWaveData_84553BC, 0, 7, 12, 0
 
 @ SquareWave1 843D1AC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -14594,9 +14494,7 @@ VoiceGroupTable_843D3BC: @ 843D3BC
 	voice_square_1_alt 0, 3, 0, 1, 4, 1
 
 @ WaveMemory 843D794
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553BC
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_84553BC, 0, 7, 15, 0
 
 @ SquareWave1 843D7A0
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -14995,14 +14893,10 @@ VoiceGroupTable_843D9BC: @ 843D9BC
 	voice_square_1_alt 0, 3, 0, 1, 6, 0
 
 @ WaveMemory 843DD94
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845540C
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_845540C, 0, 7, 15, 0
 
 @ WaveMemory 843DDA0
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553EC
-	.byte 0, 7, 15, 2
+	voice_programmable_wave_alt ProgrammableWaveData_84553EC, 0, 7, 15, 2
 
 @ SquareWave2 843DDAC
 	voice_square_2_alt 1, 1, 1, 4, 1
@@ -15409,9 +15303,7 @@ VoiceGroupTable_843DFBC: @ 843DFBC
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ WaveMemory 843E3D0
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845540C
-	.byte 0, 7, 15, 1
+	voice_programmable_wave_alt ProgrammableWaveData_845540C, 0, 7, 15, 1
 
 @ SquareWave1 843E3DC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -15789,9 +15681,7 @@ VoiceGroupTable_843E5BC: @ 843E5BC
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ WaveMemory 843E994
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553BC
-	.byte 1, 4, 10, 1
+	voice_programmable_wave_alt ProgrammableWaveData_84553BC, 1, 4, 10, 1
 
 @ SquareWave1 843E9A0
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -16168,9 +16058,7 @@ VoiceGroupTable_843EBBC: @ 843EBBC
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ WaveMemory 843EF40
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553CC
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_84553CC, 0, 7, 15, 0
 
 @ SquareWave1 843EF4C
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -16356,14 +16244,10 @@ VoiceGroupTable_843F1BC: @ 843F1BC
 	voice_square_2_alt 1, 1, 1, 6, 2
 
 @ WaveMemory 843F1F8
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553BC
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_84553BC, 0, 7, 15, 0
 
 @ WaveMemory 843F204
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553FC
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_84553FC, 0, 7, 15, 0
 
 @ SquareWave1 843F210
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -16599,9 +16483,7 @@ VoiceGroupTable_843F1BC: @ 843F1BC
 	voice_square_2_alt 2, 0, 1, 6, 0
 
 @ WaveMemory 843F594
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553CC
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_84553CC, 0, 7, 15, 0
 
 @ SquareWave1 843F5A0
 	voice_square_1_alt 0, 1, 0, 1, 4, 1
@@ -16616,9 +16498,7 @@ VoiceGroupTable_843F1BC: @ 843F1BC
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ WaveMemory 843F5D0
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845540C
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_845540C, 0, 7, 15, 0
 
 @ SquareWave2 843F5DC
 	voice_square_2_alt 3, 0, 1, 6, 2
@@ -17280,14 +17160,10 @@ VoiceGroupTable_843FBE8: @ 843FBE8
 	voice_square_2_alt 0, 0, 1, 4, 1
 
 @ WaveMemory 843FFCC
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553CC
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_84553CC, 0, 7, 15, 0
 
 @ WaveMemory 843FFD8
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845540C
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_845540C, 0, 7, 15, 0
 
 @ SquareWave1 843FFE4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -17516,9 +17392,7 @@ VoiceGroupTable_84401E8: @ 84401E8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ WaveMemory 8440344
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845543C
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_845543C, 0, 7, 15, 0
 
 @ SquareWave1 8440350
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -18078,14 +17952,10 @@ VoiceGroupTable_84407E8: @ 84407E8
 	voice_square_2_alt 0, 0, 1, 4, 1
 
 @ WaveMemory 8440BCC
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553CC
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_84553CC, 0, 7, 15, 0
 
 @ WaveMemory 8440BD8
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845540C
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_845540C, 0, 7, 15, 0
 
 @ SquareWave1 8440BE4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -18477,9 +18347,7 @@ VoiceGroupTable_8440DE8: @ 8440DE8
 	voice_square_2_alt 0, 0, 1, 4, 1
 
 @ WaveMemory 84411C0
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553BC
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_84553BC, 0, 7, 15, 0
 
 @ SquareWave2 84411CC
 	voice_square_2_alt 3, 0, 1, 4, 1
@@ -18880,14 +18748,10 @@ VoiceGroupTable_84413E8: @ 84413E8
 	voice_square_2_alt 0, 0, 1, 4, 1
 
 @ WaveMemory 84417CC
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553DC
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_84553DC, 0, 7, 15, 0
 
 @ WaveMemory 84417D8
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845540C
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_845540C, 0, 7, 15, 0
 
 @ SquareWave1 84417E4
 	voice_square_1_alt 0, 2, 0, 1, 4, 1
@@ -18896,9 +18760,7 @@ VoiceGroupTable_84413E8: @ 84413E8
 	voice_square_2_alt 2, 0, 1, 4, 1
 
 @ WaveMemory 84417FC
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845544C
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_845544C, 0, 7, 15, 0
 
 @ SquareWave1 8441808
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -19277,9 +19139,7 @@ VoiceGroupTable_84419E8: @ 84419E8
 	voice_square_2_alt 1, 0, 1, 4, 1
 
 @ WaveMemory 8441DC0
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845540C
-	.byte 0, 7, 15, 3
+	voice_programmable_wave_alt ProgrammableWaveData_845540C, 0, 7, 15, 3
 
 @ SquareWave2 8441DCC
 	voice_square_2_alt 3, 0, 1, 4, 1
@@ -19680,14 +19540,10 @@ VoiceGroupTable_8441FE8: @ 8441FE8
 	voice_square_2_alt 0, 0, 1, 4, 1
 
 @ WaveMemory 84423CC
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553CC
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_84553CC, 0, 7, 15, 0
 
 @ WaveMemory 84423D8
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845540C
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_845540C, 0, 7, 15, 0
 
 @ SquareWave1 84423E4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -20082,14 +19938,10 @@ VoiceGroupTable_84425E8: @ 84425E8
 	voice_square_2_alt 0, 0, 1, 4, 1
 
 @ WaveMemory 84429CC
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553CC
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_84553CC, 0, 7, 15, 0
 
 @ WaveMemory 84429D8
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845540C
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_845540C, 0, 7, 15, 0
 
 @ SquareWave1 84429E4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -20484,9 +20336,7 @@ VoiceGroupTable_8442BE8: @ 8442BE8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ WaveMemory 8442FCC
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845541C
-	.byte 0, 7, 15, 3
+	voice_programmable_wave_alt ProgrammableWaveData_845541C, 0, 7, 15, 3
 
 @ SquareWave1 8442FD8
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -20884,9 +20734,7 @@ VoiceGroupTable_84431E8: @ 84431E8
 	voice_square_2_alt 0, 0, 1, 4, 1
 
 @ WaveMemory 84435CC
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553CC
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_84553CC, 0, 7, 15, 0
 
 @ SquareWave1 84435D8
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -21286,9 +21134,7 @@ VoiceGroupTable_84437E8: @ 84437E8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ WaveMemory 8443BCC
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845540C
-	.byte 0, 7, 15, 2
+	voice_programmable_wave_alt ProgrammableWaveData_845540C, 0, 7, 15, 2
 
 @ SquareWave1 8443BD8
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -21684,14 +21530,10 @@ VoiceGroupTable_8443DE8: @ 8443DE8
 	voice_square_2_alt 2, 0, 1, 4, 1
 
 @ WaveMemory 84441C0
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845540C
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_845540C, 0, 7, 15, 0
 
 @ WaveMemory 84441CC
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553CC
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_84553CC, 0, 7, 15, 0
 
 @ SquareWave2 84441D8
 	voice_square_2_alt 0, 0, 1, 4, 0
@@ -22090,9 +21932,7 @@ VoiceGroupTable_84443E8: @ 84443E8
 	voice_square_2_alt 2, 0, 2, 4, 1
 
 @ WaveMemory 84447C0
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845540C
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_845540C, 0, 7, 15, 0
 
 @ SquareWave2 84447CC
 	voice_square_2_alt 0, 0, 1, 4, 0
@@ -22486,9 +22326,7 @@ VoiceGroupTable_84449E8: @ 84449E8
 	voice_square_2_alt 2, 0, 1, 4, 0
 
 @ WaveMemory 8444DC0
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553CC
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_84553CC, 0, 7, 15, 0
 
 @ SquareWave2 8444DCC
 	voice_square_2_alt 0, 0, 1, 4, 1
@@ -22503,9 +22341,7 @@ VoiceGroupTable_84449E8: @ 84449E8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ WaveMemory 8444DFC
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845540C
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_845540C, 0, 7, 15, 0
 
 @ SquareWave1 8444E08
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -22894,22 +22730,16 @@ VoiceGroupTable_8444FE8: @ 8444FE8
 	voice_square_2_alt 2, 0, 1, 4, 1
 
 @ WaveMemory 84453C0
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845540C
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_845540C, 0, 7, 15, 0
 
 @ WaveMemory 84453CC
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845541C
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_845541C, 0, 7, 15, 0
 
 @ SquareWave2 84453D8
 	voice_square_2_alt 1, 0, 1, 4, 1
 
 @ WaveMemory 84453E4
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553CC
-	.byte 0, 7, 15, 1
+	voice_programmable_wave_alt ProgrammableWaveData_84553CC, 0, 7, 15, 1
 
 @ SquareWave1 84453F0
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -23296,14 +23126,10 @@ VoiceGroupTable_84455E8: @ 84455E8
 	voice_square_2_alt 1, 0, 1, 4, 1
 
 @ WaveMemory 84459C0
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845540C
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_845540C, 0, 7, 15, 0
 
 @ WaveMemory 84459CC
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845543C
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_845543C, 0, 7, 15, 0
 
 @ SquareWave1 84459D8
 	voice_square_1_alt 0, 0, 0, 1, 4, 1
@@ -23696,9 +23522,7 @@ VoiceGroupTable_8445BE8: @ 8445BE8
 	voice_square_2_alt 1, 0, 1, 4, 1
 
 @ WaveMemory 8445FC0
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553CC
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_84553CC, 0, 7, 15, 0
 
 @ SquareWave1 8445FCC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -24096,9 +23920,7 @@ VoiceGroupTable_84461E8: @ 84461E8
 	voice_square_2_alt 1, 0, 1, 4, 1
 
 @ WaveMemory 84465C0
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553BC
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_84553BC, 0, 7, 15, 0
 
 @ SquareWave1 84465CC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -24365,9 +24187,7 @@ VoiceGroupTable_84467E8: @ 84467E8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ WaveMemory 84469BC
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553FC
-	.byte 0, 7, 6, 2
+	voice_programmable_wave_alt ProgrammableWaveData_84553FC, 0, 7, 6, 2
 
 @ SquareWave1 84469C8
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -24498,17 +24318,13 @@ VoiceGroupTable_84467E8: @ 84467E8
 	voice_square_2_alt 3, 0, 1, 6, 2
 
 @ WaveMemory 8446BC0
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845541C
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_845541C, 0, 7, 15, 0
 
 @ SquareWave1 8446BCC
 	voice_square_1_alt 0, 2, 0, 2, 6, 5
 
 @ WaveMemory 8446BD8
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553BC
-	.byte 0, 7, 4, 4
+	voice_programmable_wave_alt ProgrammableWaveData_84553BC, 0, 7, 4, 4
 
 @ SquareWave1 8446BE4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -24900,9 +24716,7 @@ VoiceGroupTable_8446DE8: @ 8446DE8
 	voice_square_2_alt 1, 0, 1, 4, 1
 
 @ WaveMemory 84471C0
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553BC
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_84553BC, 0, 7, 15, 0
 
 @ SquareWave2 84471CC
 	voice_square_2_alt 3, 0, 1, 4, 1
@@ -25314,14 +25128,10 @@ VoiceGroupTable_8447400: @ 8447400
 	voice_square_2_alt 3, 0, 1, 6, 2
 
 @ WaveMemory 84477D8
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845540C
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_845540C, 0, 7, 15, 0
 
 @ WaveMemory 84477E4
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553BC
-	.byte 0, 7, 4, 4
+	voice_programmable_wave_alt ProgrammableWaveData_84553BC, 0, 7, 4, 4
 
 @ SquareWave1 84477F0
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -25720,14 +25530,10 @@ VoiceGroupTable_8447A00: @ 8447A00
 	voice_square_2_alt 2, 0, 1, 4, 2
 
 @ WaveMemory 8447DD8
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553BC
-	.byte 0, 7, 6, 4
+	voice_programmable_wave_alt ProgrammableWaveData_84553BC, 0, 7, 6, 4
 
 @ WaveMemory 8447DE4
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553BC
-	.byte 0, 2, 6, 1
+	voice_programmable_wave_alt ProgrammableWaveData_84553BC, 0, 2, 6, 1
 
 VoiceGroupTable_8447DF0: @ 8447DF0
 
@@ -25999,9 +25805,7 @@ VoiceGroupTable_8447DF0: @ 8447DF0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ WaveMemory 8448204
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845540C
-	.byte 0, 7, 15, 1
+	voice_programmable_wave_alt ProgrammableWaveData_845540C, 0, 7, 15, 1
 
 @ SquareWave1 8448210
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -26385,14 +26189,10 @@ VoiceGroupTable_84483F0: @ 84483F0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ WaveMemory 84487D4
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553BC
-	.byte 0, 7, 15, 1
+	voice_programmable_wave_alt ProgrammableWaveData_84553BC, 0, 7, 15, 1
 
 @ WaveMemory 84487E0
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845540C
-	.byte 0, 7, 13, 1
+	voice_programmable_wave_alt ProgrammableWaveData_845540C, 0, 7, 13, 1
 
 @ SquareWave1 84487EC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -26789,9 +26589,7 @@ VoiceGroupTable_84489F0: @ 84489F0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ WaveMemory 8448DD4
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845540C
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_845540C, 0, 7, 15, 0
 
 @ SquareWave1 8448DE0
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -27023,9 +26821,7 @@ VoiceGroupTable_8448FF0: @ 8448FF0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ WaveMemory 844914C
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845543C
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_845543C, 0, 7, 15, 0
 
 @ SquareWave1 8449158
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -27191,9 +26987,7 @@ VoiceGroupTable_8448FF0: @ 8448FF0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ WaveMemory 84493D4
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845544C
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_845544C, 0, 7, 15, 0
 
 @ SquareWave1 84493E0
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -27358,9 +27152,7 @@ VoiceGroupTable_84495F0: @ 84495F0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ WaveMemory 8449638
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553FC
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_84553FC, 0, 7, 15, 0
 
 @ SquareWave1 8449644
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -27596,9 +27388,7 @@ VoiceGroupTable_84495F0: @ 84495F0
 	voice_square_2_alt 1, 0, 2, 4, 0
 
 @ WaveMemory 84499C8
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553CC
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_84553CC, 0, 7, 15, 0
 
 @ SquareWave1 84499D4
 	voice_square_1_alt 0, 1, 0, 1, 4, 1
@@ -27613,9 +27403,7 @@ VoiceGroupTable_84495F0: @ 84495F0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ WaveMemory 8449A04
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845541C
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_845541C, 0, 7, 15, 0
 
 @ SquareWave2 8449A10
 	voice_square_2_alt 3, 0, 1, 6, 2
@@ -27995,19 +27783,13 @@ VoiceGroupTable_8449BF0: @ 8449BF0
 	voice_square_2_alt 2, 0, 2, 4, 0
 
 @ WaveMemory 8449FC8
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553FC
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_84553FC, 0, 7, 15, 0
 
 @ WaveMemory 8449FD4
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845544C
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_845544C, 0, 7, 15, 0
 
 @ WaveMemory 8449FE0
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553BC
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_84553BC, 0, 7, 15, 0
 
 @ SquareWave1 8449FEC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -28395,9 +28177,7 @@ VoiceGroupTable_844A1F0: @ 844A1F0
 	voice_square_2_alt 0, 0, 2, 4, 1
 
 @ WaveMemory 844A5C8
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845540C
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_845540C, 0, 7, 15, 0
 
 @ SquareWave1 844A5D4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -28799,14 +28579,10 @@ VoiceGroupTable_844A7F0: @ 844A7F0
 	voice_square_2_alt 2, 0, 1, 5, 2
 
 @ WaveMemory 844ABC8
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845541C
-	.byte 0, 7, 7, 0
+	voice_programmable_wave_alt ProgrammableWaveData_845541C, 0, 7, 7, 0
 
 @ WaveMemory 844ABD4
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553BC
-	.byte 0, 2, 6, 1
+	voice_programmable_wave_alt ProgrammableWaveData_84553BC, 0, 2, 6, 1
 
 @ SquareWave1 844ABE0
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -29197,9 +28973,7 @@ VoiceGroupTable_844ADF0: @ 844ADF0
 	voice_square_2_alt 2, 0, 1, 4, 2
 
 @ WaveMemory 844B1C8
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553BC
-	.byte 0, 7, 7, 0
+	voice_programmable_wave_alt ProgrammableWaveData_84553BC, 0, 7, 7, 0
 
 @ SquareWave1 844B1D4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -29599,9 +29373,7 @@ VoiceGroupTable_844B3F0: @ 844B3F0
 	voice_square_2_alt 1, 0, 1, 4, 1
 
 @ WaveMemory 844B7C8
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845541C
-	.byte 0, 7, 7, 0
+	voice_programmable_wave_alt ProgrammableWaveData_845541C, 0, 7, 7, 0
 
 @ SquareWave1 844B7D4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -30001,9 +29773,7 @@ VoiceGroupTable_844B9F0: @ 844B9F0
 	voice_square_2_alt 0, 0, 1, 4, 1
 
 @ WaveMemory 844BDC8
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845540C
-	.byte 0, 7, 7, 0
+	voice_programmable_wave_alt ProgrammableWaveData_845540C, 0, 7, 7, 0
 
 @ SquareWave1 844BDD4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -30397,9 +30167,7 @@ VoiceGroupTable_844BFF0: @ 844BFF0
 	voice_square_2_alt 1, 0, 1, 4, 1
 
 @ WaveMemory 844C3C8
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845540C
-	.byte 0, 7, 15, 3
+	voice_programmable_wave_alt ProgrammableWaveData_845540C, 0, 7, 15, 3
 
 @ SquareWave2 844C3D4
 	voice_square_2_alt 3, 0, 1, 4, 1
@@ -30801,9 +30569,7 @@ VoiceGroupTable_844C5F0: @ 844C5F0
 	voice_square_1_alt 0, 0, 0, 1, 4, 1
 
 @ WaveMemory 844C9E0
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845543C
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_845543C, 0, 7, 15, 0
 
 @ SquareWave1 844C9EC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -31197,9 +30963,7 @@ VoiceGroupTable_844CBF0: @ 844CBF0
 	voice_square_2_alt 3, 0, 1, 4, 1
 
 @ WaveMemory 844CFC8
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553FC
-	.byte 0, 7, 7, 0
+	voice_programmable_wave_alt ProgrammableWaveData_84553FC, 0, 7, 7, 0
 
 @ SquareWave1 844CFD4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -31597,9 +31361,7 @@ VoiceGroupTable_844D1F0: @ 844D1F0
 	voice_square_2_alt 0, 0, 1, 4, 0
 
 @ WaveMemory 844D5C8
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553FC
-	.byte 0, 7, 7, 0
+	voice_programmable_wave_alt ProgrammableWaveData_84553FC, 0, 7, 7, 0
 
 @ SquareWave1 844D5D4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -31992,9 +31754,7 @@ VoiceGroupTable_844D7F0: @ 844D7F0
 	voice_square_2_alt 0, 0, 1, 4, 0
 
 @ WaveMemory 844DBC8
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553FC
-	.byte 0, 7, 7, 0
+	voice_programmable_wave_alt ProgrammableWaveData_84553FC, 0, 7, 7, 0
 
 @ SquareWave1 844DBD4
 	voice_square_1_alt 0, 1, 2, 1, 5, 0
@@ -32229,9 +31989,7 @@ VoiceGroupTable_844DDF0: @ 844DDF0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ WaveMemory 844DF4C
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845543C
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_845543C, 0, 7, 15, 0
 
 @ SquareWave1 844DF58
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -32401,9 +32159,7 @@ VoiceGroupTable_844DDF0: @ 844DDF0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ WaveMemory 844E1EC
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553BC
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_84553BC, 0, 7, 15, 0
 
 @ SquareWave1 844E1F8
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -32562,9 +32318,7 @@ VoiceGroupTable_844E3F0: @ 844E3F0
 	voice_square_2_alt 1, 1, 5, 2, 4
 
 @ WaveMemory 844E438
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553BC
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_84553BC, 0, 7, 15, 0
 
 @ SquareWave1 844E444
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -32776,9 +32530,7 @@ VoiceGroupTable_844E3F0: @ 844E3F0
 	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 0, 255, 165
 
 @ WaveMemory 844E768
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845540C
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_845540C, 0, 7, 15, 0
 
 @ SquareWave1 844E774
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -32802,9 +32554,7 @@ VoiceGroupTable_844E3F0: @ 844E3F0
 	voice_square_1_alt 0, 0, 0, 4, 6, 2
 
 @ WaveMemory 844E7C8
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553CC
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_84553CC, 0, 7, 15, 0
 
 @ SquareWave1 844E7D4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -32819,9 +32569,7 @@ VoiceGroupTable_844E3F0: @ 844E3F0
 	voice_square_2_alt 1, 1, 4, 6, 1
 
 @ WaveMemory 844E804
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845540C
-	.byte 0, 7, 15, 0
+	voice_programmable_wave_alt ProgrammableWaveData_845540C, 0, 7, 15, 0
 
 @ SquareWave1 844E810
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -33393,9 +33141,7 @@ VoiceGroupTable_844ECF0: @ 844ECF0
 	voice_square_2 3, 0, 1, 7, 1
 
 @ WaveMemory 844F0BC
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553DC
-	.byte 0, 7, 15, 2
+	voice_programmable_wave_alt ProgrammableWaveData_84553DC, 0, 7, 15, 2
 
 VoiceGroupTable_844F0C8: @ 844F0C8
 
@@ -33651,9 +33397,7 @@ VoiceGroupTable_844F0C8: @ 844F0C8
 	voice_square_2 2, 0, 1, 7, 1
 
 @ WaveMemory 844F494
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553DC
-	.byte 0, 7, 15, 2
+	voice_programmable_wave_alt ProgrammableWaveData_84553DC, 0, 7, 15, 2
 
 @ SquareWave1 844F4A0
 	voice_square_1 0, 2, 0, 1, 7, 1
@@ -33662,9 +33406,7 @@ VoiceGroupTable_844F0C8: @ 844F0C8
 	voice_square_1 0, 2, 0, 0, 7, 1
 
 @ WaveMemory 844F4B8
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845540C
-	.byte 0, 7, 15, 2
+	voice_programmable_wave_alt ProgrammableWaveData_845540C, 0, 7, 15, 2
 
 @ SquareWave1 844F4C4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -33940,9 +33682,7 @@ VoiceGroupTable_844F50C: @ 844F50C
 	voice_square_2 2, 0, 1, 7, 1
 
 @ WaveMemory 844F8D8
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553FC
-	.byte 0, 7, 15, 2
+	voice_programmable_wave_alt ProgrammableWaveData_84553FC, 0, 7, 15, 2
 
 @ SquareWave1 844F8E4
 	voice_square_1 0, 2, 0, 1, 7, 1
@@ -33969,9 +33709,7 @@ VoiceGroupTable_844F50C: @ 844F50C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ WaveMemory 844F944
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845541C
-	.byte 0, 7, 15, 2
+	voice_programmable_wave_alt ProgrammableWaveData_845541C, 0, 7, 15, 2
 
 VoiceGroupTable_844F950: @ 844F950
 
@@ -34229,9 +33967,7 @@ VoiceGroupTable_844F950: @ 844F950
 	voice_square_2 2, 0, 1, 7, 1
 
 @ WaveMemory 844FD1C
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553DC
-	.byte 0, 7, 15, 2
+	voice_programmable_wave_alt ProgrammableWaveData_84553DC, 0, 7, 15, 2
 
 @ SquareWave1 844FD28
 	voice_square_1 0, 2, 0, 1, 7, 1
@@ -34258,9 +33994,7 @@ VoiceGroupTable_844F950: @ 844F950
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ WaveMemory 844FD88
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845541C
-	.byte 0, 7, 15, 2
+	voice_programmable_wave_alt ProgrammableWaveData_845541C, 0, 7, 15, 2
 
 VoiceGroupTable_844FD94: @ 844FD94
 
@@ -34518,9 +34252,7 @@ VoiceGroupTable_844FD94: @ 844FD94
 	voice_square_2 2, 0, 1, 7, 1
 
 @ WaveMemory 8450160
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_845541C
-	.byte 0, 7, 15, 2
+	voice_programmable_wave_alt ProgrammableWaveData_845541C, 0, 7, 15, 2
 
 @ SquareWave1 845016C
 	voice_square_1 0, 2, 0, 1, 7, 1
@@ -34786,9 +34518,7 @@ VoiceGroupTable_845019C: @ 845019C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ WaveMemory 8450568
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553DC
-	.byte 0, 7, 15, 2
+	voice_programmable_wave_alt ProgrammableWaveData_84553DC, 0, 7, 15, 2
 
 @ SquareWave1 8450574
 	voice_square_1 0, 3, 0, 1, 9, 1
@@ -35446,9 +35176,7 @@ VoiceGroupTable_8450B8C: @ 8450B8C
 	voice_square_2 3, 0, 1, 7, 1
 
 @ WaveMemory 8450F58
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553DC
-	.byte 0, 7, 15, 2
+	voice_programmable_wave_alt ProgrammableWaveData_84553DC, 0, 7, 15, 2
 
 @ SquareWave1 8450F64
 	voice_square_1 0, 3, 0, 1, 7, 1
@@ -35719,9 +35447,7 @@ VoiceGroupTable_8450FA0: @ 8450FA0
 	voice_square_2 3, 0, 1, 7, 1
 
 @ WaveMemory 845136C
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553DC
-	.byte 0, 7, 15, 2
+	voice_programmable_wave_alt ProgrammableWaveData_84553DC, 0, 7, 15, 2
 
 @ SquareWave1 8451378
 	voice_square_1 0, 3, 0, 1, 7, 1
@@ -35983,9 +35709,7 @@ VoiceGroupTable_8451390: @ 8451390
 	voice_square_2 3, 1, 1, 6, 1
 
 @ WaveMemory 845175C
-	.byte 0xb, 0x3c, 0x0, 0x0
-	.4byte ProgrammableWaveData_84553DC
-	.byte 0, 7, 15, 2
+	voice_programmable_wave_alt ProgrammableWaveData_84553DC, 0, 7, 15, 2
 
 @ SquareWave1 8451768
 	voice_square_1 0, 3, 1, 1, 6, 1
