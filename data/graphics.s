@@ -895,7 +895,10 @@ gUnknown_08D1212C::
 gUnknown_08D1214C::
 	.incbin "baserom.gba", 0xd1214c, 0x20
 gUnknown_08D1216C:: @ 8D1216C
-	.incbin "baserom.gba", 0x00d1216c, 0xec0
+	.incbin "baserom.gba", 0xd1216c, 0x840
+
+Tiles_D129AC:: @ 8D129AC
+	.incbin "baserom.gba", 0xd129ac, 0x680
 
 	.align 2
 gBattleAnimSpriteSheet_116:: @ 8D1302C
@@ -3081,10 +3084,22 @@ gBattleAnimSpriteSheet_271:: @ 8E7EB3C
 	.incbin "graphics/battle_anims/sprites/271.4bpp.lz"
 
 gUnknown_08E7EB9C:: @ 8E7EB9C
-	.incbin "baserom.gba", 0x00e7eb9c, 0xa0
+	.incbin "baserom.gba", 0xe7eb9c, 0x80
+
+Palette_08E7EC1C:: @ 8E7EC1C
+	.incbin "baserom.gba", 0xe7ec1c, 0x20
 
 gUnknown_08E7EC3C:: @ 8E7EC3C
-	.incbin "baserom.gba", 0x00e7ec3c, 0x1d30
+	.incbin "baserom.gba", 0xe7ec3c, 0x19d8
+
+gUnknown_08E80614:: @ 8E80614
+	.incbin "baserom.gba", 0xe80614, 0x300
+
+gUnknown_08E80914:: @ 8E80914
+	.incbin "baserom.gba", 0xe80914, 0x30
+
+gUnknown_08E80944:: @ 8E80944
+	.incbin "baserom.gba", 0xe80944, 0x28
 
 gUnknown_08E8096C:: @ 8E8096C
 	.incbin "baserom.gba", 0x00e8096c, 0x72c
@@ -3362,7 +3377,10 @@ gUnknown_08E88A28:: @ 8E88A28
 	.incbin "baserom.gba", 0x00e88a28, 0x20
 
 gUnknown_08E88A48:: @ 8E88A48
-	.incbin "baserom.gba", 0x00e88a48, 0x40
+	.incbin "baserom.gba", 0xe88a48, 0x20
+
+Palette_E88A68:: @ 8E88A68
+	.incbin "baserom.gba", 0xe88a68, 0x20
 
 gUnknown_08E88A88:: @ 8E88A88
 	.incbin "baserom.gba", 0x00e88a88, 0x2c4
@@ -3398,15 +3416,25 @@ gUnknown_08E8A1C2:: @ 8E8A1C2
 	.incbin "baserom.gba", 0x00e8a1c2, 0x1e
 
 gUnknown_08E8A1E0:: @ 8E8A1E0
-	.incbin "baserom.gba", 0x00e8a1e0, 0x3b8
+	.incbin "baserom.gba", 0xe8a1e0, 0x2b8
+
+gTiles_08E8A498:: @ 8E8A498
+	.incbin "baserom.gba", 0xe8a498, 0x100
+
+PokenavContestPokeballPalette:: @ 8E8A598
 	.incbin "graphics/pokenav/contest_pokeball.gbapal"
-	.incbin "baserom.gba", 0x00E8A5B8, 0x20
+
+Palette_E8A5B8:: @ 8E8A5B8
+	.incbin "baserom.gba", 0xe8a5b8, 0x20
 
 gUnknown_08E8A5D8:: @ 8E8A5D8
 	.incbin "baserom.gba", 0x00e8a5d8, 0x1ec
 
 gUnknown_08E8A7C4:: @ 8E8A7C4
-	.incbin "baserom.gba", 0x00e8a7c4, 0x540
+	.incbin "baserom.gba", 0xe8a7c4, 0x520
+
+Palette_E8ACE4:: @ 8E8ACE4
+	.incbin "baserom.gba", 0xe8ace4, 0x20
 
 gUnknown_08E8AD04:: @ 8E8AD04
 	.incbin "baserom.gba", 0x00e8ad04, 0x4c0
@@ -3680,8 +3708,41 @@ gSlotMachineSpritePalette5:: @ 8E97768
 gSlotMachineSpritePalette6:: @ 8E97788
 	.incbin "graphics/slot_machine/spr6.gbapal"
 
-	.incbin "graphics/slot_machine/reel_symbols.4bpp"
-	.incbin "graphics/slot_machine/numbers.4bpp"
+gSlotMachineReelSymbol1Tiles::
+	.incbin "graphics/slot_machine/reel_symbols/1.4bpp"
+gSlotMachineReelSymbol2Tiles::
+	.incbin "graphics/slot_machine/reel_symbols/2.4bpp"
+gSlotMachineReelSymbol3Tiles::
+	.incbin "graphics/slot_machine/reel_symbols/3.4bpp"
+gSlotMachineReelSymbol4Tiles::
+	.incbin "graphics/slot_machine/reel_symbols/4.4bpp"
+gSlotMachineReelSymbol5Tiles::
+	.incbin "graphics/slot_machine/reel_symbols/5.4bpp"
+gSlotMachineReelSymbol6Tiles::
+	.incbin "graphics/slot_machine/reel_symbols/6.4bpp"
+gSlotMachineReelSymbol7Tiles::
+	.incbin "graphics/slot_machine/reel_symbols/7.4bpp"
+
+gSlotMachineNumber0Tiles::
+	.incbin "graphics/slot_machine/numbers/0.4bpp"
+gSlotMachineNumber1Tiles::
+	.incbin "graphics/slot_machine/numbers/1.4bpp"
+gSlotMachineNumber2Tiles::
+	.incbin "graphics/slot_machine/numbers/2.4bpp"
+gSlotMachineNumber3Tiles::
+	.incbin "graphics/slot_machine/numbers/3.4bpp"
+gSlotMachineNumber4Tiles::
+	.incbin "graphics/slot_machine/numbers/4.4bpp"
+gSlotMachineNumber5Tiles::
+	.incbin "graphics/slot_machine/numbers/5.4bpp"
+gSlotMachineNumber6Tiles::
+	.incbin "graphics/slot_machine/numbers/6.4bpp"
+gSlotMachineNumber7Tiles::
+	.incbin "graphics/slot_machine/numbers/7.4bpp"
+gSlotMachineNumber8Tiles::
+	.incbin "graphics/slot_machine/numbers/8.4bpp"
+gSlotMachineNumber9Tiles::
+	.incbin "graphics/slot_machine/numbers/9.4bpp"
 
 	.align 2
 gSpriteImage_8E98828:: @ 8E98828
@@ -3911,16 +3972,25 @@ gUnknown_08E9CA24:: @ 8E9CA24
 	.incbin "baserom.gba", 0x00e9ca24, 0x20
 
 gUnknown_08E9CA44:: @ 8E9CA44
-	.incbin "baserom.gba", 0x00e9ca44, 0xe68
+	.incbin "baserom.gba", 0xe9ca44, 0x500
 
+Tiles_E9CF44:: @ 8E9CF44
+	.incbin "baserom.gba", 0xe9cf44, 0x700
+
+Tiles_E9D644:: @ 8E9D644
+	.incbin "baserom.gba", 0xe9d644, 0x268
+
+gTitleScreenLogoShinePalette::
 	.incbin "graphics/title_screen/logo_shine.gbapal"
 
 gUnknown_08E9D8CC:: @ 8E9D8CC
 	.ifdef SAPPHIRE
 	.incbin "graphics/title_screen/pokemon_sapphire.8bpp.lz"
+gVersionTiles::
 	.incbin "graphics/title_screen/sapphireversion.8bpp.lz"
 	.else
 	.incbin "graphics/title_screen/pokemon_ruby.8bpp.lz"
+gVersionTiles::
 	.incbin "graphics/title_screen/rubyversion.8bpp.lz"
 	.endif
 
@@ -3933,10 +4003,15 @@ gUnknown_08E9F624:: @ 8E9F624
 
 gUnknown_08E9F7E4:: @ 8E9F7E4
 	.incbin "baserom.gba", 0x00e9f7e4, 0x184
+
+gPokenavContestArrowsPalette::
 	.incbin "graphics/pokenav/contest_arrows.gbapal"
 
 gUnknown_08E9F988:: @ 8E9F988
-	.incbin "baserom.gba", 0x00e9f988, 0x60
+	.incbin "baserom.gba", 0xe9f988, 0x20
+
+Tiles_E9F9A8:: @ 8E9F9A8
+	.incbin "baserom.gba", 0xe9f9a8, 0x40
 
 gUnknown_08E9F9E8:: @ 8E9F9E8
 	.incbin "baserom.gba", 0x00e9f9e8, 0x20
