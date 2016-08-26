@@ -101,9 +101,7 @@ gUnknown_0842FC88:: @ 842FC88
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 842FD54
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84569D4
-	.byte 255, 0, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_84569D4, 255, 0, 255, 127
 
 @ SquareWave1 842FD60
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -190,9 +188,7 @@ gUnknown_0842FC88:: @ 842FC88
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 842FE08
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84571CC
-	.byte 255, 253, 0, 149
+	voice_directsound 60, 0, DirectSoundWaveData_84571CC, 255, 253, 0, 149
 
 @ SquareWave1 842FE14
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -213,9 +209,7 @@ gUnknown_0842FC88:: @ 842FC88
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 842FE38
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8457D98
-	.byte 255, 235, 128, 115
+	voice_directsound 60, 0, DirectSoundWaveData_8457D98, 255, 235, 128, 115
 
 @ SquareWave1 842FE44
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -224,9 +218,7 @@ gUnknown_0842FC88:: @ 842FC88
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 842FE50
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8458CD0
-	.byte 255, 252, 0, 115
+	voice_directsound 60, 0, DirectSoundWaveData_8458CD0, 255, 252, 0, 115
 
 @ SquareWave1 842FE5C
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -277,9 +269,7 @@ gUnknown_0842FC88:: @ 842FC88
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 842FEBC
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8459944
-	.byte 255, 204, 193, 239
+	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 204, 193, 239
 
 @ Key-Split 842FEC8
 	.byte 0x40, 0, 0, 0
@@ -525,29 +515,19 @@ VoiceGroupTable_842FEF8: @ 842FEF8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 84300C0
-	.byte 0x8, 0x3c, 0x0, 0xc0
-	.4byte DirectSoundWaveData_845B2B4
-	.byte 255, 0, 255, 242
+	voice_directsound_no_resample 60, 192, DirectSoundWaveData_845B2B4, 255, 0, 255, 242
 
 @ Direct Sound 84300CC
-	.byte 0x8, 0x3c, 0x0, 0xc0
-	.4byte DirectSoundWaveData_845B9A8
-	.byte 255, 255, 255, 127
+	voice_directsound_no_resample 60, 192, DirectSoundWaveData_845B9A8, 255, 255, 255, 127
 
 @ Direct Sound 84300D8
-	.byte 0x8, 0x3c, 0x0, 0xc0
-	.4byte DirectSoundWaveData_845C238
-	.byte 255, 0, 255, 242
+	voice_directsound_no_resample 60, 192, DirectSoundWaveData_845C238, 255, 0, 255, 242
 
 @ Direct Sound 84300E4
-	.byte 0x0, 0x30, 0x0, 0xac
-	.4byte DirectSoundWaveData_845CAB0
-	.byte 255, 210, 77, 204
+	voice_directsound 48, 172, DirectSoundWaveData_845CAB0, 255, 210, 77, 204
 
 @ Direct Sound 84300F0
-	.byte 0x8, 0x3c, 0x0, 0xcf
-	.4byte DirectSoundWaveData_845DAF0
-	.byte 255, 127, 0, 188
+	voice_directsound_no_resample 60, 207, DirectSoundWaveData_845DAF0, 255, 127, 0, 188
 
 @ Direct Sound 84300FC
 	voice_directsound 51, 0x31, DirectSoundWaveData_845CAB0, 255, 216, 77, 204
@@ -559,24 +539,16 @@ VoiceGroupTable_842FEF8: @ 842FEF8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8430114
-	.byte 0x0, 0x36, 0x0, 0xbb
-	.4byte DirectSoundWaveData_845CAB0
-	.byte 255, 216, 77, 204
+	voice_directsound 54, 187, DirectSoundWaveData_845CAB0, 255, 216, 77, 204
 
 @ Direct Sound 8430120
-	.byte 0x8, 0x3c, 0x0, 0xcf
-	.4byte DirectSoundWaveData_845DF04
-	.byte 255, 242, 141, 0
+	voice_directsound_no_resample 60, 207, DirectSoundWaveData_845DF04, 255, 242, 141, 0
 
 @ Direct Sound 843012C
-	.byte 0x0, 0x39, 0x0, 0xc5
-	.4byte DirectSoundWaveData_845CAB0
-	.byte 255, 210, 77, 204
+	voice_directsound 57, 197, DirectSoundWaveData_845CAB0, 255, 210, 77, 204
 
 @ Direct Sound 8430138
-	.byte 0x0, 0x3c, 0x0, 0xcf
-	.4byte DirectSoundWaveData_845CAB0
-	.byte 255, 204, 77, 204
+	voice_directsound 60, 207, DirectSoundWaveData_845CAB0, 255, 204, 77, 204
 
 @ SquareWave1 8430144
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -585,9 +557,7 @@ VoiceGroupTable_842FEF8: @ 842FEF8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8430150
-	.byte 0x0, 0x3e, 0x0, 0xd4
-	.4byte DirectSoundWaveData_845CAB0
-	.byte 255, 204, 77, 204
+	voice_directsound 62, 212, DirectSoundWaveData_845CAB0, 255, 204, 77, 204
 
 @ SquareWave1 843015C
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -602,19 +572,13 @@ VoiceGroupTable_842FEF8: @ 842FEF8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8430174
-	.byte 0x8, 0x46, 0x0, 0xb1
-	.4byte DirectSoundWaveData_845ED34
-	.byte 255, 165, 103, 231
+	voice_directsound_no_resample 70, 177, DirectSoundWaveData_845ED34, 255, 165, 103, 231
 
 @ Direct Sound 8430180
-	.byte 0x8, 0x20, 0x0, 0xa2
-	.4byte DirectSoundWaveData_845FCC8
-	.byte 255, 127, 77, 204
+	voice_directsound_no_resample 32, 162, DirectSoundWaveData_845FCC8, 255, 127, 77, 204
 
 @ Direct Sound 843018C
-	.byte 0x8, 0x3c, 0x0, 0x8e
-	.4byte DirectSoundWaveData_846057C
-	.byte 255, 235, 0, 165
+	voice_directsound_no_resample 60, 142, DirectSoundWaveData_846057C, 255, 235, 0, 165
 
 @ SquareWave1 8430198
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -623,9 +587,7 @@ VoiceGroupTable_842FEF8: @ 842FEF8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 84301A4
-	.byte 0x8, 0x1e, 0x0, 0xb6
-	.4byte DirectSoundWaveData_8460E60
-	.byte 255, 246, 0, 216
+	voice_directsound_no_resample 30, 182, DirectSoundWaveData_8460E60, 255, 246, 0, 216
 
 @ SquareWave1 84301B0
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -634,14 +596,10 @@ VoiceGroupTable_842FEF8: @ 842FEF8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 84301BC
-	.byte 0x8, 0x1e, 0x0, 0xb6
-	.4byte DirectSoundWaveData_8460E60
-	.byte 255, 246, 0, 216
+	voice_directsound_no_resample 30, 182, DirectSoundWaveData_8460E60, 255, 246, 0, 216
 
 @ Direct Sound 84301C8
-	.byte 0x8, 0x1e, 0x0, 0xb6
-	.4byte DirectSoundWaveData_8460E60
-	.byte 8, 0, 255, 216
+	voice_directsound_no_resample 30, 182, DirectSoundWaveData_8460E60, 8, 0, 255, 216
 
 @ SquareWave1 84301D4
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -650,9 +608,7 @@ VoiceGroupTable_842FEF8: @ 842FEF8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 84301E0
-	.byte 0x8, 0x48, 0x0, 0xe8
-	.4byte DirectSoundWaveData_8461D8C
-	.byte 255, 0, 255, 0
+	voice_directsound_no_resample 72, 232, DirectSoundWaveData_8461D8C, 255, 0, 255, 0
 
 @ SquareWave1 84301EC
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -661,65 +617,43 @@ VoiceGroupTable_842FEF8: @ 842FEF8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 84301F8
-	.byte 0x8, 0x48, 0x0, 0xde
-	.4byte DirectSoundWaveData_84622A4
-	.byte 255, 0, 255, 0
+	voice_directsound_no_resample 72, 222, DirectSoundWaveData_84622A4, 255, 0, 255, 0
 
 VoiceGroupTable_8430204: @ 8430204
 
 @ Direct Sound 8430204
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_846286C
-	.byte 255, 252, 0, 239
+	voice_directsound 60, 0, DirectSoundWaveData_846286C, 255, 252, 0, 239
 
 @ Direct Sound 8430210
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84637CC
-	.byte 255, 250, 0, 221
+	voice_directsound 60, 0, DirectSoundWaveData_84637CC, 255, 250, 0, 221
 
 @ Direct Sound 843021C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8464E2C
-	.byte 255, 250, 0, 221
+	voice_directsound 60, 0, DirectSoundWaveData_8464E2C, 255, 250, 0, 221
 
 @ Direct Sound 8430228
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8466388
-	.byte 255, 247, 0, 221
+	voice_directsound 60, 0, DirectSoundWaveData_8466388, 255, 247, 0, 221
 
 VoiceGroupTable_8430234: @ 8430234
 
 @ Direct Sound 8430234
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8466F14
-	.byte 255, 0, 255, 196
+	voice_directsound 60, 0, DirectSoundWaveData_8466F14, 255, 0, 255, 196
 
 @ Direct Sound 8430240
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_846A4B8
-	.byte 255, 0, 255, 196
+	voice_directsound 60, 0, DirectSoundWaveData_846A4B8, 255, 0, 255, 196
 
 @ Direct Sound 843024C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_846C7D4
-	.byte 255, 0, 255, 196
+	voice_directsound 60, 0, DirectSoundWaveData_846C7D4, 255, 0, 255, 196
 
 VoiceGroupTable_8430258: @ 8430258
 
 @ Direct Sound 8430258
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_846FEA0
-	.byte 255, 0, 193, 127
+	voice_directsound 60, 0, DirectSoundWaveData_846FEA0, 255, 0, 193, 127
 
 @ Direct Sound 8430264
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84711F0
-	.byte 255, 0, 193, 127
+	voice_directsound 60, 0, DirectSoundWaveData_84711F0, 255, 0, 193, 127
 
 @ Direct Sound 8430270
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8472700
-	.byte 255, 0, 193, 127
+	voice_directsound 60, 0, DirectSoundWaveData_8472700, 255, 0, 193, 127
 
 @ SquareWave1 843027C
 	.byte 0x9, 0x3c, 0x0, 0x26
@@ -1475,26 +1409,18 @@ VoiceGroupTable_8430258: @ 8430258
 
 VoiceGroupTable_843087C: @ 843087C
 @ Direct Sound 843087C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8473B20
-	.byte 255, 0, 255, 165
+	voice_directsound 60, 0, DirectSoundWaveData_8473B20, 255, 0, 255, 165
 
 @ Direct Sound 8430888
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8474BBC
-	.byte 255, 0, 255, 165
+	voice_directsound 60, 0, DirectSoundWaveData_8474BBC, 255, 0, 255, 165
 
 VoiceGroupTable_8430894: @ 8430894
 
 @ Direct Sound 8430894
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8475C18
-	.byte 255, 0, 224, 165
+	voice_directsound 60, 0, DirectSoundWaveData_8475C18, 255, 0, 224, 165
 
 @ Direct Sound 84308A0
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_847CBAC
-	.byte 255, 0, 218, 165
+	voice_directsound 60, 0, DirectSoundWaveData_847CBAC, 255, 0, 218, 165
 
 VoiceGroupTable_84308AC: @ 84308AC
 
@@ -1582,9 +1508,7 @@ VoiceGroupTable_84308AC: @ 84308AC
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8430954
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_849BAEC
-	.byte 255, 216, 90, 242
+	voice_directsound 60, 0, DirectSoundWaveData_849BAEC, 255, 216, 90, 242
 
 @ SquareWave1 8430960
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -1773,14 +1697,10 @@ VoiceGroupTable_84308AC: @ 84308AC
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8430AD4
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A26EC
-	.byte 255, 242, 0, 204
+	voice_directsound 60, 0, DirectSoundWaveData_84A26EC, 255, 242, 0, 204
 
 @ Direct Sound 8430AE0
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8459944
-	.byte 255, 246, 0, 226
+	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 246, 0, 226
 
 @ Key-Split 8430AEC
 	.byte 0x40, 0, 0, 0
@@ -2139,9 +2059,7 @@ VoiceGroupTable_8430C9C: @ 8430C9C
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8430DBC
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8481130
-	.byte 255, 249, 25, 149
+	voice_directsound 60, 0, DirectSoundWaveData_8481130, 255, 249, 25, 149
 
 @ SquareWave1 8430DC8
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -2204,9 +2122,7 @@ VoiceGroupTable_8430C9C: @ 8430C9C
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8430E40
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84571CC
-	.byte 255, 253, 0, 149
+	voice_directsound 60, 0, DirectSoundWaveData_84571CC, 255, 253, 0, 149
 
 @ SquareWave1 8430E4C
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -2430,9 +2346,7 @@ VoiceGroupTable_8430C9C: @ 8430C9C
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8431008
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 127, 231, 127
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 127, 231, 127
 
 @ WaveMemory 8431014
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -2770,9 +2684,7 @@ VoiceGroupTable_843129C: @ 843129C
 	.4byte KeySplitTable_8455224
 
 @ Direct Sound 84312B4
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8497134
-	.byte 255, 178, 180, 165
+	voice_directsound 60, 0, DirectSoundWaveData_8497134, 255, 178, 180, 165
 
 @ SquareWave1 84312C0
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -2811,9 +2723,7 @@ VoiceGroupTable_843129C: @ 843129C
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8431308
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8456330
-	.byte 255, 165, 51, 235
+	voice_directsound 60, 0, DirectSoundWaveData_8456330, 255, 165, 51, 235
 
 @ SquareWave1 8431314
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -2834,9 +2744,7 @@ VoiceGroupTable_843129C: @ 843129C
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8431338
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A311C
-	.byte 255, 235, 0, 204
+	voice_directsound 60, 0, DirectSoundWaveData_84A311C, 255, 235, 0, 204
 
 @ SquareWave1 8431344
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -2983,9 +2891,7 @@ VoiceGroupTable_843129C: @ 843129C
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8431464
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8458CD0
-	.byte 255, 252, 0, 115
+	voice_directsound 60, 0, DirectSoundWaveData_8458CD0, 255, 252, 0, 115
 
 @ SquareWave1 8431470
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -3030,14 +2936,10 @@ VoiceGroupTable_843129C: @ 843129C
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 84314C4
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A26EC
-	.byte 255, 242, 0, 204
+	voice_directsound 60, 0, DirectSoundWaveData_84A26EC, 255, 242, 0, 204
 
 @ Direct Sound 84314D0
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8459944
-	.byte 255, 246, 0, 226
+	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 246, 0, 226
 
 @ Key-Split 84314DC
 	.byte 0x40, 0, 0, 0
@@ -3186,9 +3088,7 @@ VoiceGroupTable_843129C: @ 843129C
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8431608
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 127, 231, 127
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 127, 231, 127
 
 @ SquareWave1 8431614
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -3640,9 +3540,7 @@ VoiceGroupTable_8431764: @ 8431764
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8431998
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8459944
-	.byte 255, 246, 0, 226
+	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 246, 0, 226
 
 @ Key-Split 84319A4
 	.byte 0x40, 0, 0, 0
@@ -4037,9 +3935,7 @@ VoiceGroupTable_8431B9C: @ 8431B9C
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8431CBC
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8481130
-	.byte 255, 249, 25, 149
+	voice_directsound 60, 0, DirectSoundWaveData_8481130, 255, 249, 25, 149
 
 @ SquareWave1 8431CC8
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -4168,14 +4064,10 @@ VoiceGroupTable_8431B9C: @ 8431B9C
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8431DC4
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A26EC
-	.byte 255, 246, 0, 235
+	voice_directsound 60, 0, DirectSoundWaveData_84A26EC, 255, 246, 0, 235
 
 @ Direct Sound 8431DD0
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8459944
-	.byte 255, 246, 0, 226
+	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 246, 0, 226
 
 @ Key-Split 8431DDC
 	.byte 0x40, 0, 0, 0
@@ -4325,9 +4217,7 @@ VoiceGroupTable_8431B9C: @ 8431B9C
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8431F08
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 127, 231, 127
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 127, 231, 127
 
 @ SquareWave1 8431F14
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -4604,9 +4494,7 @@ VoiceGroupTable_8431F98: @ 8431F98
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843213C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84571CC
-	.byte 255, 253, 0, 149
+	voice_directsound 60, 0, DirectSoundWaveData_84571CC, 255, 253, 0, 149
 
 @ SquareWave1 8432148
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -4728,9 +4616,7 @@ VoiceGroupTable_8431F98: @ 8431F98
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8432238
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A5F58
-	.byte 255, 0, 255, 165
+	voice_directsound 60, 0, DirectSoundWaveData_84A5F58, 255, 0, 255, 165
 
 @ SquareWave1 8432244
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -4829,9 +4715,7 @@ VoiceGroupTable_8431F98: @ 8431F98
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8432304
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 127, 231, 127
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 127, 231, 127
 
 @ WaveMemory 8432310
 	voice_programmable_wave ProgrammableWaveData_84553BC, 0, 7, 15, 1
@@ -5156,9 +5040,7 @@ VoiceGroupTable_84323E8: @ 84323E8
 	.byte 0, 1, 0, 1
 
 @ Direct Sound 8432598
-	.byte 0x8, 0x3c, 0x0, 0xc0
-	.4byte DirectSoundWaveData_845AE14
-	.byte 255, 0, 255, 242
+	voice_directsound_no_resample 60, 192, DirectSoundWaveData_845AE14, 255, 0, 255, 242
 
 @ SquareWave1 84325A4
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -5167,9 +5049,7 @@ VoiceGroupTable_84323E8: @ 84323E8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 84325B0
-	.byte 0x8, 0x3c, 0x0, 0xc0
-	.4byte DirectSoundWaveData_845B2B4
-	.byte 255, 0, 255, 242
+	voice_directsound_no_resample 60, 192, DirectSoundWaveData_845B2B4, 255, 0, 255, 242
 
 @ SquareWave1 84325BC
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -5178,9 +5058,7 @@ VoiceGroupTable_84323E8: @ 84323E8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 84325C8
-	.byte 0x8, 0x3c, 0x0, 0xc0
-	.4byte DirectSoundWaveData_845C238
-	.byte 255, 0, 255, 242
+	voice_directsound_no_resample 60, 192, DirectSoundWaveData_845C238, 255, 0, 255, 242
 
 @ SquareWave1 84325D4
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -5261,9 +5139,7 @@ VoiceGroupTable_84323E8: @ 84323E8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8432670
-	.byte 0x8, 0x20, 0x0, 0xca
-	.4byte DirectSoundWaveData_845FCC8
-	.byte 255, 127, 77, 204
+	voice_directsound_no_resample 32, 202, DirectSoundWaveData_845FCC8, 255, 127, 77, 204
 
 @ SquareWave1 843267C
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -5308,9 +5184,7 @@ VoiceGroupTable_84323E8: @ 84323E8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 84326D0
-	.byte 0x8, 0x48, 0x0, 0xc2
-	.4byte DirectSoundWaveData_8461D8C
-	.byte 255, 0, 255, 0
+	voice_directsound_no_resample 72, 194, DirectSoundWaveData_8461D8C, 255, 0, 255, 0
 
 @ SquareWave1 84326DC
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -5319,9 +5193,7 @@ VoiceGroupTable_84323E8: @ 84323E8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 84326E8
-	.byte 0x8, 0x48, 0x0, 0xbe
-	.4byte DirectSoundWaveData_84622A4
-	.byte 255, 0, 255, 0
+	voice_directsound_no_resample 72, 190, DirectSoundWaveData_84622A4, 255, 0, 255, 0
 
 VoiceGroupTable_84326F4: @ 84326F4
 
@@ -5595,14 +5467,10 @@ VoiceGroupTable_84326F4: @ 84326F4
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8432910
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_848BD68
-	.byte 255, 216, 0, 165
+	voice_directsound 60, 0, DirectSoundWaveData_848BD68, 255, 216, 0, 165
 
 @ Direct Sound 843291C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A26EC
-	.byte 255, 242, 0, 204
+	voice_directsound 60, 0, DirectSoundWaveData_84A26EC, 255, 242, 0, 204
 
 @ SquareWave1 8432928
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -5758,9 +5626,7 @@ VoiceGroupTable_84326F4: @ 84326F4
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8432A60
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 127, 231, 127
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 127, 231, 127
 
 @ WaveMemory 8432A6C
 	voice_programmable_wave ProgrammableWaveData_84553BC, 0, 7, 15, 0
@@ -6130,9 +5996,7 @@ VoiceGroupTable_8432B38: @ 8432B38
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8432D54
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_848BD68
-	.byte 255, 216, 0, 165
+	voice_directsound 60, 0, DirectSoundWaveData_848BD68, 255, 216, 0, 165
 
 @ SquareWave1 8432D60
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -6296,9 +6160,7 @@ VoiceGroupTable_8432B38: @ 8432B38
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8432EA4
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 127, 231, 127
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 127, 231, 127
 
 @ SquareWave1 8432EB0
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -6896,9 +6758,7 @@ VoiceGroupTable_8433138: @ 8433138
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8433354
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_848BD68
-	.byte 255, 216, 0, 165
+	voice_directsound 60, 0, DirectSoundWaveData_848BD68, 255, 216, 0, 165
 
 @ SquareWave1 8433360
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -7060,9 +6920,7 @@ VoiceGroupTable_8433138: @ 8433138
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 84334A4
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 127, 231, 127
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 127, 231, 127
 
 @ SquareWave1 84334B0
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -7399,9 +7257,7 @@ VoiceGroupTable_8433534: @ 8433534
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8433750
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_848BD68
-	.byte 255, 216, 0, 165
+	voice_directsound 60, 0, DirectSoundWaveData_848BD68, 255, 216, 0, 165
 
 @ SquareWave1 843375C
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -7931,9 +7787,7 @@ VoiceGroupTable_8433948: @ 8433948
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8433B7C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8459944
-	.byte 255, 246, 0, 226
+	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 246, 0, 226
 
 @ Key-Split 8433B88
 	.byte 0x40, 0, 0, 0
@@ -8084,9 +7938,7 @@ VoiceGroupTable_8433BAC: @ 8433BAC
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8433CB4
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 127, 231, 127
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 127, 231, 127
 
 @ SquareWave1 8433CC0
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -8163,9 +8015,7 @@ VoiceGroupTable_8433BAC: @ 8433BAC
 	.byte 0, 0, 7, 0
 
 @ Direct Sound 8433D5C
-	.byte 0x8, 0x3c, 0x0, 0xc0
-	.4byte DirectSoundWaveData_845AE14
-	.byte 255, 0, 255, 242
+	voice_directsound_no_resample 60, 192, DirectSoundWaveData_845AE14, 255, 0, 255, 242
 
 @ SquareWave1 8433D68
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -8174,9 +8024,7 @@ VoiceGroupTable_8433BAC: @ 8433BAC
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8433D74
-	.byte 0x8, 0x3c, 0x0, 0xc0
-	.4byte DirectSoundWaveData_845B2B4
-	.byte 255, 0, 255, 242
+	voice_directsound_no_resample 60, 192, DirectSoundWaveData_845B2B4, 255, 0, 255, 242
 
 @ SquareWave1 8433D80
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -8185,9 +8033,7 @@ VoiceGroupTable_8433BAC: @ 8433BAC
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8433D8C
-	.byte 0x8, 0x3c, 0x0, 0xc0
-	.4byte DirectSoundWaveData_845C238
-	.byte 255, 0, 255, 242
+	voice_directsound_no_resample 60, 192, DirectSoundWaveData_845C238, 255, 0, 255, 242
 
 @ SquareWave1 8433D98
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -8268,9 +8114,7 @@ VoiceGroupTable_8433BAC: @ 8433BAC
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8433E34
-	.byte 0x8, 0x20, 0x0, 0xa2
-	.4byte DirectSoundWaveData_845FCC8
-	.byte 255, 127, 77, 204
+	voice_directsound_no_resample 32, 162, DirectSoundWaveData_845FCC8, 255, 127, 77, 204
 
 @ SquareWave1 8433E40
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -8315,9 +8159,7 @@ VoiceGroupTable_8433BAC: @ 8433BAC
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8433E94
-	.byte 0x8, 0x48, 0x0, 0xc3
-	.4byte DirectSoundWaveData_8461D8C
-	.byte 255, 0, 255, 0
+	voice_directsound_no_resample 72, 195, DirectSoundWaveData_8461D8C, 255, 0, 255, 0
 
 @ SquareWave1 8433EA0
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -8326,9 +8168,7 @@ VoiceGroupTable_8433BAC: @ 8433BAC
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8433EAC
-	.byte 0x8, 0x48, 0x0, 0xbd
-	.4byte DirectSoundWaveData_84622A4
-	.byte 255, 0, 255, 0
+	voice_directsound_no_resample 72, 189, DirectSoundWaveData_84622A4, 255, 0, 255, 0
 
 VoiceGroupTable_8433EB8: @ 8433EB8
 
@@ -8541,9 +8381,7 @@ VoiceGroupTable_8433EB8: @ 8433EB8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843405C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84571CC
-	.byte 255, 253, 0, 149
+	voice_directsound 60, 0, DirectSoundWaveData_84571CC, 255, 253, 0, 149
 
 @ SquareWave1 8434068
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -8606,9 +8444,7 @@ VoiceGroupTable_8433EB8: @ 8433EB8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 84340E0
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A26EC
-	.byte 255, 246, 0, 235
+	voice_directsound 60, 0, DirectSoundWaveData_84A26EC, 255, 246, 0, 235
 
 @ SquareWave1 84340EC
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -9131,9 +8967,7 @@ VoiceGroupTable_84342E4: @ 84342E4
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8434500
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_848BD68
-	.byte 255, 216, 0, 165
+	voice_directsound 60, 0, DirectSoundWaveData_848BD68, 255, 216, 0, 165
 
 @ SquareWave1 843450C
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -9142,9 +8976,7 @@ VoiceGroupTable_84342E4: @ 84342E4
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8434518
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8459944
-	.byte 255, 246, 0, 226
+	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 246, 0, 226
 
 @ Key-Split 8434524
 	.byte 0x40, 0, 0, 0
@@ -9294,9 +9126,7 @@ VoiceGroupTable_84342E4: @ 84342E4
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8434650
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 127, 231, 127
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 127, 231, 127
 
 @ SquareWave1 843465C
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -9681,9 +9511,7 @@ VoiceGroupTable_8434728: @ 8434728
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843495C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8459944
-	.byte 255, 246, 0, 226
+	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 246, 0, 226
 
 @ SquareWave1 8434968
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -9834,9 +9662,7 @@ VoiceGroupTable_8434728: @ 8434728
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8434A94
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 127, 231, 127
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 127, 231, 127
 
 @ SquareWave1 8434AA0
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -10181,9 +10007,7 @@ VoiceGroupTable_8434B18: @ 8434B18
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8434D4C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8459944
-	.byte 255, 246, 0, 226
+	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 246, 0, 226
 
 @ SquareWave1 8434D58
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -10484,9 +10308,7 @@ VoiceGroupTable_8434F14: @ 8434F14
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8434FB0
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A311C
-	.byte 255, 235, 0, 204
+	voice_directsound 60, 0, DirectSoundWaveData_84A311C, 255, 235, 0, 204
 
 @ SquareWave1 8434FBC
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -10633,9 +10455,7 @@ VoiceGroupTable_8434F14: @ 8434F14
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 84350DC
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8458CD0
-	.byte 255, 252, 0, 115
+	voice_directsound 60, 0, DirectSoundWaveData_8458CD0, 255, 252, 0, 115
 
 @ SquareWave1 84350E8
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -11268,9 +11088,7 @@ VoiceGroupTable_8435514: @ 8435514
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 84355E0
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84569D4
-	.byte 255, 0, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_84569D4, 255, 0, 255, 127
 
 @ SquareWave1 84355EC
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -11381,9 +11199,7 @@ VoiceGroupTable_8435514: @ 8435514
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 84356C4
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8457D98
-	.byte 255, 235, 128, 99
+	voice_directsound 60, 0, DirectSoundWaveData_8457D98, 255, 235, 128, 99
 
 @ SquareWave1 84356D0
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -11741,9 +11557,7 @@ VoiceGroupTable_84358F8: @ 84358F8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 84359A0
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_849BAEC
-	.byte 255, 216, 90, 242
+	voice_directsound 60, 0, DirectSoundWaveData_849BAEC, 255, 216, 90, 242
 
 @ SquareWave1 84359AC
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -11926,9 +11740,7 @@ VoiceGroupTable_84358F8: @ 84358F8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8435B14
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_848BD68
-	.byte 255, 216, 0, 165
+	voice_directsound 60, 0, DirectSoundWaveData_848BD68, 255, 216, 0, 165
 
 @ SquareWave1 8435B20
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -11937,9 +11749,7 @@ VoiceGroupTable_84358F8: @ 84358F8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8435B2C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8459944
-	.byte 255, 246, 0, 226
+	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 246, 0, 226
 
 @ Key-Split 8435B38
 	.byte 0x40, 0, 0, 0
@@ -12089,9 +11899,7 @@ VoiceGroupTable_84358F8: @ 84358F8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8435C64
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 127, 231, 127
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 127, 231, 127
 
 @ SquareWave1 8435C70
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -12261,9 +12069,7 @@ VoiceGroupTable_8435D18: @ 8435D18
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8435DC0
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_849BAEC
-	.byte 255, 216, 90, 242
+	voice_directsound 60, 0, DirectSoundWaveData_849BAEC, 255, 216, 90, 242
 
 @ SquareWave1 8435DCC
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -12278,9 +12084,7 @@ VoiceGroupTable_8435D18: @ 8435D18
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8435DE4
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84569D4
-	.byte 37, 165, 180, 127
+	voice_directsound 60, 0, DirectSoundWaveData_84569D4, 37, 165, 180, 127
 
 @ SquareWave1 8435DF0
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -12451,14 +12255,10 @@ VoiceGroupTable_8435D18: @ 8435D18
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8435F40
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A26EC
-	.byte 255, 246, 0, 235
+	voice_directsound 60, 0, DirectSoundWaveData_84A26EC, 255, 246, 0, 235
 
 @ Direct Sound 8435F4C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8459944
-	.byte 255, 246, 0, 226
+	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 246, 0, 226
 
 @ SquareWave1 8435F58
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -12713,9 +12513,7 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8436150
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_849F40C
-	.byte 255, 165, 154, 127
+	voice_directsound 60, 0, DirectSoundWaveData_849F40C, 255, 165, 154, 127
 
 @ SquareWave1 843615C
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -12742,9 +12540,7 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843618C
-	.byte 0x8, 0x3c, 0x0, 0xc0
-	.4byte DirectSoundWaveData_845C238
-	.byte 255, 0, 255, 242
+	voice_directsound_no_resample 60, 192, DirectSoundWaveData_845C238, 255, 0, 255, 242
 
 @ SquareWave1 8436198
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -12825,9 +12621,7 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8436234
-	.byte 0x8, 0x20, 0x0, 0xb1
-	.4byte DirectSoundWaveData_845FCC8
-	.byte 255, 127, 77, 204
+	voice_directsound_no_resample 32, 177, DirectSoundWaveData_845FCC8, 255, 127, 77, 204
 
 @ SquareWave1 8436240
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -12842,9 +12636,7 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8436258
-	.byte 0x8, 0x1e, 0x0, 0xb6
-	.4byte DirectSoundWaveData_8460E60
-	.byte 8, 0, 255, 216
+	voice_directsound_no_resample 30, 182, DirectSoundWaveData_8460E60, 8, 0, 255, 216
 
 @ SquareWave1 8436264
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -12853,9 +12645,7 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8436270
-	.byte 0x8, 0x1e, 0x0, 0xb6
-	.4byte DirectSoundWaveData_8460E60
-	.byte 255, 246, 0, 216
+	voice_directsound_no_resample 30, 182, DirectSoundWaveData_8460E60, 255, 246, 0, 216
 
 @ SquareWave1 843627C
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -12870,9 +12660,7 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8436294
-	.byte 0x8, 0x48, 0x0, 0xcf
-	.4byte DirectSoundWaveData_8461D8C
-	.byte 255, 0, 255, 0
+	voice_directsound_no_resample 72, 207, DirectSoundWaveData_8461D8C, 255, 0, 255, 0
 
 @ SquareWave1 84362A0
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -12881,9 +12669,7 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 84362AC
-	.byte 0x8, 0x48, 0x0, 0xca
-	.4byte DirectSoundWaveData_84622A4
-	.byte 255, 0, 255, 0
+	voice_directsound_no_resample 72, 202, DirectSoundWaveData_84622A4, 255, 0, 255, 0
 
 VoiceGroupTable_84362B8: @ 84362B8
 
@@ -13096,9 +12882,7 @@ VoiceGroupTable_84362B8: @ 84362B8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843645C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8483804
-	.byte 255, 250, 0, 149
+	voice_directsound 60, 0, DirectSoundWaveData_8483804, 255, 250, 0, 149
 
 @ SquareWave1 8436468
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -13323,9 +13107,7 @@ VoiceGroupTable_84362B8: @ 84362B8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8436624
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 127, 231, 127
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 127, 231, 127
 
 @ WaveMemory 8436630
 	voice_programmable_wave ProgrammableWaveData_84553BC, 0, 7, 15, 1
@@ -13859,9 +13641,7 @@ VoiceGroupTable_84368B8: @ 84368B8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8436A5C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84571CC
-	.byte 255, 253, 0, 149
+	voice_directsound 60, 0, DirectSoundWaveData_84571CC, 255, 253, 0, 149
 
 @ SquareWave1 8436A68
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -13924,9 +13704,7 @@ VoiceGroupTable_84368B8: @ 84368B8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8436AE0
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A26EC
-	.byte 255, 246, 0, 235
+	voice_directsound 60, 0, DirectSoundWaveData_84A26EC, 255, 246, 0, 235
 
 @ SquareWave1 8436AEC
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -14083,9 +13861,7 @@ VoiceGroupTable_84368B8: @ 84368B8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8436C24
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 127, 231, 127
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 127, 231, 127
 
 @ SquareWave1 8436C30
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -14352,9 +14128,7 @@ VoiceGroupTable_8436C9C: @ 8436C9C
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8436E40
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84571CC
-	.byte 255, 253, 0, 188
+	voice_directsound 60, 0, DirectSoundWaveData_84571CC, 255, 253, 0, 188
 
 @ SquareWave1 8436E4C
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -14411,9 +14185,7 @@ VoiceGroupTable_8436C9C: @ 8436C9C
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8436EB8
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_848BD68
-	.byte 255, 226, 0, 38
+	voice_directsound 60, 0, DirectSoundWaveData_848BD68, 255, 226, 0, 38
 
 @ SquareWave1 8436EC4
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -14577,9 +14349,7 @@ VoiceGroupTable_8436C9C: @ 8436C9C
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8437008
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 0, 255, 165
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 0, 255, 165
 
 @ SquareWave1 8437014
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -14921,9 +14691,7 @@ VoiceGroupTable_843708C: @ 843708C
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 84372C0
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8459944
-	.byte 255, 246, 0, 226
+	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 246, 0, 226
 
 @ Key-Split 84372CC
 	.byte 0x40, 0, 0, 0
@@ -15342,9 +15110,7 @@ VoiceGroupTable_8437488: @ 8437488
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8437614
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8483804
-	.byte 255, 253, 0, 149
+	voice_directsound 60, 0, DirectSoundWaveData_8483804, 255, 253, 0, 149
 
 @ SquareWave1 8437620
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -15413,14 +15179,10 @@ VoiceGroupTable_8437488: @ 8437488
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 84376A4
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_848BD68
-	.byte 255, 216, 0, 165
+	voice_directsound 60, 0, DirectSoundWaveData_848BD68, 255, 216, 0, 165
 
 @ Direct Sound 84376B0
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A26EC
-	.byte 255, 246, 0, 235
+	voice_directsound 60, 0, DirectSoundWaveData_84A26EC, 255, 246, 0, 235
 
 @ SquareWave1 84376BC
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -15989,9 +15751,7 @@ VoiceGroupTable_8437A88: @ 8437A88
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8437B30
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_849BAEC
-	.byte 255, 216, 90, 242
+	voice_directsound 60, 0, DirectSoundWaveData_849BAEC, 255, 216, 90, 242
 
 @ SquareWave1 8437B3C
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -16180,14 +15940,10 @@ VoiceGroupTable_8437A88: @ 8437A88
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8437CB0
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A26EC
-	.byte 255, 246, 0, 235
+	voice_directsound 60, 0, DirectSoundWaveData_84A26EC, 255, 246, 0, 235
 
 @ Direct Sound 8437CBC
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8459944
-	.byte 255, 246, 0, 226
+	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 246, 0, 226
 
 @ Key-Split 8437CC8
 	.byte 0x40, 0, 0, 0
@@ -16534,9 +16290,7 @@ VoiceGroupTable_8437EB4: @ 8437EB4
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8437F80
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84569D4
-	.byte 255, 0, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_84569D4, 255, 0, 255, 127
 
 @ SquareWave1 8437F8C
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -16659,9 +16413,7 @@ VoiceGroupTable_8437EB4: @ 8437EB4
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843807C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8458CD0
-	.byte 255, 252, 0, 115
+	voice_directsound 60, 0, DirectSoundWaveData_8458CD0, 255, 252, 0, 115
 
 @ SquareWave1 8438088
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -17024,9 +16776,7 @@ VoiceGroupTable_843828C: @ 843828C
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8438358
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84569D4
-	.byte 255, 0, 255, 165
+	voice_directsound 60, 0, DirectSoundWaveData_84569D4, 255, 0, 255, 165
 
 @ SquareWave1 8438364
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -17065,9 +16815,7 @@ VoiceGroupTable_843828C: @ 843828C
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 84383AC
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8481130
-	.byte 255, 249, 25, 76
+	voice_directsound 60, 0, DirectSoundWaveData_8481130, 255, 249, 25, 76
 
 @ SquareWave1 84383B8
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -17136,9 +16884,7 @@ VoiceGroupTable_843828C: @ 843828C
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843843C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8457D98
-	.byte 255, 235, 128, 99
+	voice_directsound 60, 0, DirectSoundWaveData_8457D98, 255, 235, 128, 99
 
 @ SquareWave1 8438448
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -17354,9 +17100,7 @@ VoiceGroupTable_843828C: @ 843828C
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 84385F8
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 0, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 0, 255, 127
 
 @ SquareWave1 8438604
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -17785,9 +17529,7 @@ VoiceGroupTable_843888C: @ 843888C
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8438958
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84569D4
-	.byte 255, 0, 255, 165
+	voice_directsound 60, 0, DirectSoundWaveData_84569D4, 255, 0, 255, 165
 
 @ SquareWave1 8438964
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -17826,9 +17568,7 @@ VoiceGroupTable_843888C: @ 843888C
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 84389AC
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8481130
-	.byte 255, 249, 25, 76
+	voice_directsound 60, 0, DirectSoundWaveData_8481130, 255, 249, 25, 76
 
 @ SquareWave1 84389B8
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -17897,9 +17637,7 @@ VoiceGroupTable_843888C: @ 843888C
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8438A3C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8457D98
-	.byte 255, 235, 128, 99
+	voice_directsound 60, 0, DirectSoundWaveData_8457D98, 255, 235, 128, 99
 
 @ SquareWave1 8438A48
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -18115,9 +17853,7 @@ VoiceGroupTable_843888C: @ 843888C
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8438BF8
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 0, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 0, 255, 127
 
 @ SquareWave1 8438C04
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -18546,9 +18282,7 @@ VoiceGroupTable_8438E8C: @ 8438E8C
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8438F58
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84569D4
-	.byte 255, 0, 255, 165
+	voice_directsound 60, 0, DirectSoundWaveData_84569D4, 255, 0, 255, 165
 
 @ SquareWave1 8438F64
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -18587,9 +18321,7 @@ VoiceGroupTable_8438E8C: @ 8438E8C
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8438FAC
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8481130
-	.byte 255, 249, 25, 76
+	voice_directsound 60, 0, DirectSoundWaveData_8481130, 255, 249, 25, 76
 
 @ SquareWave1 8438FB8
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -18658,9 +18390,7 @@ VoiceGroupTable_8438E8C: @ 8438E8C
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843903C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8457D98
-	.byte 255, 235, 128, 99
+	voice_directsound 60, 0, DirectSoundWaveData_8457D98, 255, 235, 128, 99
 
 @ SquareWave1 8439048
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -18876,9 +18606,7 @@ VoiceGroupTable_8438E8C: @ 8438E8C
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 84391F8
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 0, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 0, 255, 127
 
 @ SquareWave1 8439204
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -19307,9 +19035,7 @@ VoiceGroupTable_843948C: @ 843948C
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8439558
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84569D4
-	.byte 255, 0, 255, 165
+	voice_directsound 60, 0, DirectSoundWaveData_84569D4, 255, 0, 255, 165
 
 @ SquareWave1 8439564
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -19348,9 +19074,7 @@ VoiceGroupTable_843948C: @ 843948C
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 84395AC
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8481130
-	.byte 255, 249, 25, 76
+	voice_directsound 60, 0, DirectSoundWaveData_8481130, 255, 249, 25, 76
 
 @ SquareWave1 84395B8
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -19419,9 +19143,7 @@ VoiceGroupTable_843948C: @ 843948C
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843963C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8457D98
-	.byte 255, 235, 128, 99
+	voice_directsound 60, 0, DirectSoundWaveData_8457D98, 255, 235, 128, 99
 
 @ SquareWave1 8439648
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -19637,9 +19359,7 @@ VoiceGroupTable_843948C: @ 843948C
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 84397F8
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 0, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 0, 255, 127
 
 @ SquareWave1 8439804
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -20158,9 +19878,7 @@ VoiceGroupTable_8439A8C: @ 8439A8C
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8439C0C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84571CC
-	.byte 255, 253, 0, 149
+	voice_directsound 60, 0, DirectSoundWaveData_84571CC, 255, 253, 0, 149
 
 @ SquareWave1 8439C18
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -20401,9 +20119,7 @@ VoiceGroupTable_8439A8C: @ 8439A8C
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8439DF8
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 0, 255, 165
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 0, 255, 165
 
 @ SquareWave1 8439E04
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -20659,9 +20375,7 @@ VoiceGroupTable_8439E58: @ 8439E58
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8439FFC
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84571CC
-	.byte 255, 253, 0, 224
+	voice_directsound 60, 0, DirectSoundWaveData_84571CC, 255, 253, 0, 224
 
 @ SquareWave1 843A008
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -20718,9 +20432,7 @@ VoiceGroupTable_8439E58: @ 8439E58
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843A074
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_848BD68
-	.byte 255, 226, 0, 38
+	voice_directsound 60, 0, DirectSoundWaveData_848BD68, 255, 226, 0, 38
 
 @ SquareWave1 843A080
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -20884,9 +20596,7 @@ VoiceGroupTable_8439E58: @ 8439E58
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843A1C4
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 0, 255, 165
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 0, 255, 165
 
 @ SquareWave1 843A1D0
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -21030,9 +20740,7 @@ VoiceGroupTable_843A224: @ 843A224
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843A2F0
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84569D4
-	.byte 255, 0, 255, 210
+	voice_directsound 60, 0, DirectSoundWaveData_84569D4, 255, 0, 255, 210
 
 @ SquareWave1 843A2FC
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -21155,9 +20863,7 @@ VoiceGroupTable_843A224: @ 843A224
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843A3EC
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84571CC
-	.byte 255, 253, 0, 216
+	voice_directsound 60, 0, DirectSoundWaveData_84571CC, 255, 253, 0, 216
 
 @ SquareWave1 843A3F8
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -21363,9 +21069,7 @@ VoiceGroupTable_843A224: @ 843A224
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843A590
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 0, 255, 165
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 0, 255, 165
 
 @ SquareWave1 843A59C
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -21721,9 +21425,7 @@ VoiceGroupTable_843A824: @ 843A824
 	.byte 0, 7, 15, 1
 
 @ Direct Sound 843A860
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84571CC
-	.byte 255, 253, 0, 216
+	voice_directsound 60, 0, DirectSoundWaveData_84571CC, 255, 253, 0, 216
 
 @ SquareWave2 843A86C
 	.byte 0xa, 0x3c, 0x0, 0x0
@@ -21960,9 +21662,7 @@ VoiceGroupTable_843A824: @ 843A824
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843AA40
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_848BD68
-	.byte 255, 226, 0, 165
+	voice_directsound 60, 0, DirectSoundWaveData_848BD68, 255, 226, 0, 165
 
 @ SquareWave1 843AA4C
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -22126,9 +21826,7 @@ VoiceGroupTable_843A824: @ 843A824
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843AB90
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 0, 255, 165
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 0, 255, 165
 
 @ SquareWave1 843AB9C
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -22684,9 +22382,7 @@ VoiceGroupTable_843AE24: @ 843AE24
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843AFEC
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8458CD0
-	.byte 255, 252, 0, 115
+	voice_directsound 60, 0, DirectSoundWaveData_8458CD0, 255, 252, 0, 115
 
 @ SquareWave1 843AFF8
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -22731,14 +22427,10 @@ VoiceGroupTable_843AE24: @ 843AE24
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843B04C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A26EC
-	.byte 255, 242, 0, 204
+	voice_directsound 60, 0, DirectSoundWaveData_84A26EC, 255, 242, 0, 204
 
 @ Direct Sound 843B058
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8459944
-	.byte 255, 204, 193, 239
+	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 204, 193, 239
 
 @ Key-Split 843B064
 	.byte 0x40, 0, 0, 0
@@ -23270,9 +22962,7 @@ VoiceGroupTable_843B424: @ 843B424
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843B490
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8456330
-	.byte 255, 204, 51, 242
+	voice_directsound 60, 0, DirectSoundWaveData_8456330, 255, 204, 51, 242
 
 @ SquareWave1 843B49C
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -23491,14 +23181,10 @@ VoiceGroupTable_843B424: @ 843B424
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843B64C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A26EC
-	.byte 255, 242, 0, 242
+	voice_directsound 60, 0, DirectSoundWaveData_84A26EC, 255, 242, 0, 242
 
 @ Direct Sound 843B658
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8459944
-	.byte 255, 0, 193, 239
+	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 0, 193, 239
 
 @ Key-Split 843B664
 	.byte 0x40, 0, 0, 0
@@ -23789,9 +23475,7 @@ VoiceGroupTable_843B844: @ 843B844
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843B8B0
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8456330
-	.byte 255, 165, 51, 242
+	voice_directsound 60, 0, DirectSoundWaveData_8456330, 255, 165, 51, 242
 
 @ SquareWave1 843B8BC
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -23944,9 +23628,7 @@ VoiceGroupTable_843B844: @ 843B844
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843B9E8
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84571CC
-	.byte 255, 253, 0, 188
+	voice_directsound 60, 0, DirectSoundWaveData_84571CC, 255, 253, 0, 188
 
 @ SquareWave1 843B9F4
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -24003,19 +23685,13 @@ VoiceGroupTable_843B844: @ 843B844
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843BA60
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_848BD68
-	.byte 255, 226, 0, 38
+	voice_directsound 60, 0, DirectSoundWaveData_848BD68, 255, 226, 0, 38
 
 @ Direct Sound 843BA6C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A26EC
-	.byte 255, 242, 0, 242
+	voice_directsound 60, 0, DirectSoundWaveData_84A26EC, 255, 242, 0, 242
 
 @ Direct Sound 843BA78
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8459944
-	.byte 255, 0, 193, 226
+	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 0, 193, 226
 
 @ Key-Split 843BA84
 	.byte 0x40, 0, 0, 0
@@ -24165,9 +23841,7 @@ VoiceGroupTable_843B844: @ 843B844
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843BBB0
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 0, 255, 165
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 0, 255, 165
 
 @ SquareWave1 843BBBC
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -24595,9 +24269,7 @@ VoiceGroupTable_843BE44: @ 843BE44
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843BF10
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84569D4
-	.byte 255, 0, 255, 210
+	voice_directsound 60, 0, DirectSoundWaveData_84569D4, 255, 0, 255, 210
 
 @ SquareWave1 843BF1C
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -24702,9 +24374,7 @@ VoiceGroupTable_843BE44: @ 843BE44
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843BFE8
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84571CC
-	.byte 255, 253, 0, 188
+	voice_directsound 60, 0, DirectSoundWaveData_84571CC, 255, 253, 0, 188
 
 @ SquareWave1 843BFF4
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -24767,9 +24437,7 @@ VoiceGroupTable_843BE44: @ 843BE44
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843C06C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A26EC
-	.byte 255, 242, 0, 242
+	voice_directsound 60, 0, DirectSoundWaveData_84A26EC, 255, 242, 0, 242
 
 @ SquareWave1 843C078
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -25461,9 +25129,7 @@ VoiceGroupTable_843C444: @ 843C444
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843C5E8
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84571CC
-	.byte 255, 253, 0, 188
+	voice_directsound 60, 0, DirectSoundWaveData_84571CC, 255, 253, 0, 188
 
 @ SquareWave1 843C5F4
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -25520,9 +25186,7 @@ VoiceGroupTable_843C444: @ 843C444
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843C660
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_848BD68
-	.byte 255, 226, 0, 99
+	voice_directsound 60, 0, DirectSoundWaveData_848BD68, 255, 226, 0, 99
 
 @ SquareWave1 843C66C
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -25686,9 +25350,7 @@ VoiceGroupTable_843C444: @ 843C444
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843C7B0
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 0, 255, 165
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 0, 255, 165
 
 VoiceGroupTable_843C7BC: @ 843C7BC
 
@@ -25973,9 +25635,7 @@ VoiceGroupTable_843C7BC: @ 843C7BC
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843C9F0
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8459944
-	.byte 255, 0, 193, 226
+	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 0, 193, 226
 
 @ Key-Split 843C9FC
 	.byte 0x40, 0, 0, 0
@@ -26662,9 +26322,7 @@ VoiceGroupTable_843CDBC: @ 843CDBC
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843CF60
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84571CC
-	.byte 255, 253, 0, 188
+	voice_directsound 60, 0, DirectSoundWaveData_84571CC, 255, 253, 0, 188
 
 @ SquareWave1 843CF6C
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -26721,9 +26379,7 @@ VoiceGroupTable_843CDBC: @ 843CDBC
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843CFD8
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_848BD68
-	.byte 255, 226, 0, 38
+	voice_directsound 60, 0, DirectSoundWaveData_848BD68, 255, 226, 0, 38
 
 @ SquareWave1 843CFE4
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -26887,9 +26543,7 @@ VoiceGroupTable_843CDBC: @ 843CDBC
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843D128
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 0, 255, 165
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 0, 255, 165
 
 @ SquareWave1 843D134
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -27486,14 +27140,10 @@ VoiceGroupTable_843D3BC: @ 843D3BC
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843D5D8
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_848BD68
-	.byte 255, 226, 0, 38
+	voice_directsound 60, 0, DirectSoundWaveData_848BD68, 255, 226, 0, 38
 
 @ Direct Sound 843D5E4
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A26EC
-	.byte 255, 242, 0, 242
+	voice_directsound 60, 0, DirectSoundWaveData_84A26EC, 255, 242, 0, 242
 
 @ SquareWave1 843D5F0
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -27649,9 +27299,7 @@ VoiceGroupTable_843D3BC: @ 843D3BC
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843D728
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 0, 255, 165
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 0, 255, 165
 
 @ SquareWave1 843D734
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -28206,9 +27854,7 @@ VoiceGroupTable_843D9BC: @ 843D9BC
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843DB84
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8458CD0
-	.byte 255, 252, 0, 115
+	voice_directsound 60, 0, DirectSoundWaveData_8458CD0, 255, 252, 0, 115
 
 @ SquareWave1 843DB90
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -28253,14 +27899,10 @@ VoiceGroupTable_843D9BC: @ 843D9BC
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843DBE4
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A26EC
-	.byte 255, 242, 0, 204
+	voice_directsound 60, 0, DirectSoundWaveData_84A26EC, 255, 242, 0, 204
 
 @ Direct Sound 843DBF0
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8459944
-	.byte 255, 204, 193, 239
+	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 204, 193, 239
 
 @ Key-Split 843DBFC
 	.byte 0x40, 0, 0, 0
@@ -28966,9 +28608,7 @@ VoiceGroupTable_843DFBC: @ 843DFBC
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843E184
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8458CD0
-	.byte 255, 252, 0, 115
+	voice_directsound 60, 0, DirectSoundWaveData_8458CD0, 255, 252, 0, 115
 
 @ SquareWave1 843E190
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -29173,9 +28813,7 @@ VoiceGroupTable_843DFBC: @ 843DFBC
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843E328
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 0, 255, 165
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 0, 255, 165
 
 @ SquareWave1 843E334
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -29556,9 +29194,7 @@ VoiceGroupTable_843E5BC: @ 843E5BC
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843E628
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8456330
-	.byte 255, 188, 51, 242
+	voice_directsound 60, 0, DirectSoundWaveData_8456330, 255, 188, 51, 242
 
 @ SquareWave1 843E634
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -29585,9 +29221,7 @@ VoiceGroupTable_843E5BC: @ 843E5BC
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843E664
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_849BAEC
-	.byte 128, 165, 90, 216
+	voice_directsound 60, 0, DirectSoundWaveData_849BAEC, 128, 165, 90, 216
 
 @ SquareWave1 843E670
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -29638,9 +29272,7 @@ VoiceGroupTable_843E5BC: @ 843E5BC
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843E6D0
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8492D10
-	.byte 255, 0, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_8492D10, 255, 0, 255, 127
 
 @ SquareWave1 843E6DC
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -29709,9 +29341,7 @@ VoiceGroupTable_843E5BC: @ 843E5BC
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843E760
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84571CC
-	.byte 255, 253, 0, 188
+	voice_directsound 60, 0, DirectSoundWaveData_84571CC, 255, 253, 0, 188
 
 @ SquareWave1 843E76C
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -29768,19 +29398,13 @@ VoiceGroupTable_843E5BC: @ 843E5BC
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843E7D8
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_848BD68
-	.byte 255, 226, 0, 38
+	voice_directsound 60, 0, DirectSoundWaveData_848BD68, 255, 226, 0, 38
 
 @ Direct Sound 843E7E4
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A26EC
-	.byte 255, 242, 0, 242
+	voice_directsound 60, 0, DirectSoundWaveData_84A26EC, 255, 242, 0, 242
 
 @ Direct Sound 843E7F0
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8459944
-	.byte 255, 0, 193, 226
+	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 0, 193, 226
 
 @ Key-Split 843E7FC
 	.byte 0x40, 0, 0, 0
@@ -29932,9 +29556,7 @@ VoiceGroupTable_843E5BC: @ 843E5BC
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843E928
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 0, 255, 165
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 0, 255, 165
 
 @ SquareWave1 843E934
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -30363,9 +29985,7 @@ VoiceGroupTable_843EBBC: @ 843EBBC
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843EC88
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84569D4
-	.byte 255, 0, 255, 210
+	voice_directsound 60, 0, DirectSoundWaveData_84569D4, 255, 0, 255, 210
 
 @ SquareWave1 843EC94
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -30470,9 +30090,7 @@ VoiceGroupTable_843EBBC: @ 843EBBC
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843ED60
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84571CC
-	.byte 255, 253, 0, 188
+	voice_directsound 60, 0, DirectSoundWaveData_84571CC, 255, 253, 0, 188
 
 @ SquareWave1 843ED6C
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -31076,9 +30694,7 @@ VoiceGroupTable_843F1BC: @ 843F1BC
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843F228
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8456330
-	.byte 255, 165, 51, 242
+	voice_directsound 60, 0, DirectSoundWaveData_8456330, 255, 165, 51, 242
 
 @ SquareWave1 843F234
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -31105,9 +30721,7 @@ VoiceGroupTable_843F1BC: @ 843F1BC
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843F264
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_849BAEC
-	.byte 255, 165, 90, 216
+	voice_directsound 60, 0, DirectSoundWaveData_849BAEC, 255, 165, 90, 216
 
 @ SquareWave1 843F270
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -31296,14 +30910,10 @@ VoiceGroupTable_843F1BC: @ 843F1BC
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843F3E4
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A26EC
-	.byte 255, 242, 51, 242
+	voice_directsound 60, 0, DirectSoundWaveData_84A26EC, 255, 242, 51, 242
 
 @ Direct Sound 843F3F0
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8459944
-	.byte 255, 0, 180, 239
+	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 0, 180, 239
 
 @ Key-Split 843F3FC
 	.byte 0x40, 0, 0, 0
@@ -31452,9 +31062,7 @@ VoiceGroupTable_843F1BC: @ 843F1BC
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843F528
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 0, 255, 165
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 0, 255, 165
 
 @ SquareWave1 843F534
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -31623,9 +31231,7 @@ VoiceGroupTable_843F5E8: @ 843F5E8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843F684
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A311C
-	.byte 255, 235, 0, 204
+	voice_directsound 60, 0, DirectSoundWaveData_84A311C, 255, 235, 0, 204
 
 @ SquareWave1 843F690
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -31814,19 +31420,13 @@ VoiceGroupTable_843F5E8: @ 843F5E8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843F804
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_848BD68
-	.byte 128, 226, 0, 38
+	voice_directsound 60, 0, DirectSoundWaveData_848BD68, 128, 226, 0, 38
 
 @ Direct Sound 843F810
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A26EC
-	.byte 255, 242, 51, 242
+	voice_directsound 60, 0, DirectSoundWaveData_84A26EC, 255, 242, 51, 242
 
 @ Direct Sound 843F81C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8459944
-	.byte 255, 0, 180, 246
+	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 0, 180, 246
 
 @ Key-Split 843F828
 	.byte 0x40, 0, 0, 0
@@ -31975,9 +31575,7 @@ VoiceGroupTable_843F5E8: @ 843F5E8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843F954
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 0, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 0, 255, 127
 
 @ SquareWave1 843F960
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -32407,9 +32005,7 @@ VoiceGroupTable_843FBE8: @ 843FBE8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843FCB4
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84569D4
-	.byte 255, 0, 255, 210
+	voice_directsound 60, 0, DirectSoundWaveData_84569D4, 255, 0, 255, 210
 
 @ SquareWave1 843FCC0
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -32520,9 +32116,7 @@ VoiceGroupTable_843FBE8: @ 843FBE8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843FD98
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8457D98
-	.byte 255, 235, 128, 115
+	voice_directsound 60, 0, DirectSoundWaveData_8457D98, 255, 235, 128, 115
 
 @ SquareWave1 843FDA4
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -32740,9 +32334,7 @@ VoiceGroupTable_843FBE8: @ 843FBE8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 843FF54
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 0, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 0, 255, 127
 
 @ SquareWave1 843FF60
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -33295,9 +32887,7 @@ VoiceGroupTable_84401E8: @ 84401E8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 84403B0
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8458CD0
-	.byte 255, 252, 0, 115
+	voice_directsound 60, 0, DirectSoundWaveData_8458CD0, 255, 252, 0, 115
 
 @ SquareWave1 84403BC
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -33936,9 +33526,7 @@ VoiceGroupTable_84407E8: @ 84407E8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 84408B4
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84569D4
-	.byte 255, 0, 255, 165
+	voice_directsound 60, 0, DirectSoundWaveData_84569D4, 255, 0, 255, 165
 
 @ SquareWave1 84408C0
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -34049,9 +33637,7 @@ VoiceGroupTable_84407E8: @ 84407E8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8440998
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8457D98
-	.byte 255, 235, 128, 99
+	voice_directsound 60, 0, DirectSoundWaveData_8457D98, 255, 235, 128, 99
 
 @ SquareWave1 84409A4
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -34742,9 +34328,7 @@ VoiceGroupTable_8440DE8: @ 8440DE8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8440F08
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8481130
-	.byte 255, 249, 25, 76
+	voice_directsound 60, 0, DirectSoundWaveData_8481130, 255, 249, 25, 76
 
 @ SquareWave1 8440F14
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -34873,14 +34457,10 @@ VoiceGroupTable_8440DE8: @ 8440DE8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8441010
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A26EC
-	.byte 255, 242, 51, 242
+	voice_directsound 60, 0, DirectSoundWaveData_84A26EC, 255, 242, 51, 242
 
 @ Direct Sound 844101C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8459944
-	.byte 255, 0, 180, 246
+	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 0, 180, 246
 
 @ Key-Split 8441028
 	.byte 0x40, 0, 0, 0
@@ -35031,9 +34611,7 @@ VoiceGroupTable_8440DE8: @ 8440DE8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8441154
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 0, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 0, 255, 127
 
 @ SquareWave1 8441160
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -35461,9 +35039,7 @@ VoiceGroupTable_84413E8: @ 84413E8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 84414B4
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84569D4
-	.byte 255, 0, 255, 165
+	voice_directsound 60, 0, DirectSoundWaveData_84569D4, 255, 0, 255, 165
 
 @ SquareWave1 84414C0
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -35574,9 +35150,7 @@ VoiceGroupTable_84413E8: @ 84413E8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8441598
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8457D98
-	.byte 255, 235, 128, 99
+	voice_directsound 60, 0, DirectSoundWaveData_8457D98, 255, 235, 128, 99
 
 @ SquareWave1 84415A4
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -36266,9 +35840,7 @@ VoiceGroupTable_84419E8: @ 84419E8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8441B08
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8481130
-	.byte 255, 249, 25, 76
+	voice_directsound 60, 0, DirectSoundWaveData_8481130, 255, 249, 25, 76
 
 @ SquareWave1 8441B14
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -36331,9 +35903,7 @@ VoiceGroupTable_84419E8: @ 84419E8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8441B8C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84571CC
-	.byte 255, 253, 0, 188
+	voice_directsound 60, 0, DirectSoundWaveData_84571CC, 255, 253, 0, 188
 
 @ SquareWave1 8441B98
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -36348,9 +35918,7 @@ VoiceGroupTable_84419E8: @ 84419E8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8441BB0
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8458CD0
-	.byte 255, 252, 0, 115
+	voice_directsound 60, 0, DirectSoundWaveData_8458CD0, 255, 252, 0, 115
 
 @ SquareWave1 8441BBC
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -36389,9 +35957,7 @@ VoiceGroupTable_84419E8: @ 84419E8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8441C04
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_848BD68
-	.byte 255, 226, 0, 38
+	voice_directsound 60, 0, DirectSoundWaveData_848BD68, 255, 226, 0, 38
 
 @ SquareWave1 8441C10
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -36556,9 +36122,7 @@ VoiceGroupTable_84419E8: @ 84419E8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8441D54
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 0, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 0, 255, 127
 
 @ SquareWave1 8441D60
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -36986,9 +36550,7 @@ VoiceGroupTable_8441FE8: @ 8441FE8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 84420B4
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84569D4
-	.byte 255, 0, 255, 210
+	voice_directsound 60, 0, DirectSoundWaveData_84569D4, 255, 0, 255, 210
 
 @ SquareWave1 84420C0
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -37027,9 +36589,7 @@ VoiceGroupTable_8441FE8: @ 8441FE8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8442108
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8481130
-	.byte 255, 249, 25, 76
+	voice_directsound 60, 0, DirectSoundWaveData_8481130, 255, 249, 25, 76
 
 @ SquareWave1 8442114
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -37110,9 +36670,7 @@ VoiceGroupTable_8441FE8: @ 8441FE8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 84421B0
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8458CD0
-	.byte 255, 252, 0, 115
+	voice_directsound 60, 0, DirectSoundWaveData_8458CD0, 255, 252, 0, 115
 
 @ SquareWave1 84421BC
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -37318,9 +36876,7 @@ VoiceGroupTable_8441FE8: @ 8441FE8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8442354
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 0, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 0, 255, 127
 
 @ SquareWave1 8442360
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -37729,9 +37285,7 @@ VoiceGroupTable_84425E8: @ 84425E8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8442690
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_849BAEC
-	.byte 255, 165, 90, 216
+	voice_directsound 60, 0, DirectSoundWaveData_849BAEC, 255, 165, 90, 216
 
 @ SquareWave1 844269C
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -37746,9 +37300,7 @@ VoiceGroupTable_84425E8: @ 84425E8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 84426B4
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84569D4
-	.byte 255, 0, 255, 210
+	voice_directsound 60, 0, DirectSoundWaveData_84569D4, 255, 0, 255, 210
 
 @ SquareWave1 84426C0
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -37787,9 +37339,7 @@ VoiceGroupTable_84425E8: @ 84425E8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8442708
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8481130
-	.byte 255, 249, 25, 76
+	voice_directsound 60, 0, DirectSoundWaveData_8481130, 255, 249, 25, 76
 
 @ SquareWave1 8442714
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -37852,9 +37402,7 @@ VoiceGroupTable_84425E8: @ 84425E8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844278C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84571CC
-	.byte 255, 253, 0, 188
+	voice_directsound 60, 0, DirectSoundWaveData_84571CC, 255, 253, 0, 188
 
 @ SquareWave1 8442798
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -37869,9 +37417,7 @@ VoiceGroupTable_84425E8: @ 84425E8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 84427B0
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8458CD0
-	.byte 255, 252, 0, 115
+	voice_directsound 60, 0, DirectSoundWaveData_8458CD0, 255, 252, 0, 115
 
 @ SquareWave1 84427BC
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -38077,9 +37623,7 @@ VoiceGroupTable_84425E8: @ 84425E8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8442954
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 0, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 0, 255, 127
 
 @ SquareWave1 8442960
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -38507,9 +38051,7 @@ VoiceGroupTable_8442BE8: @ 8442BE8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8442CB4
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84569D4
-	.byte 255, 0, 255, 210
+	voice_directsound 60, 0, DirectSoundWaveData_84569D4, 255, 0, 255, 210
 
 @ SquareWave1 8442CC0
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -38548,9 +38090,7 @@ VoiceGroupTable_8442BE8: @ 8442BE8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8442D08
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8481130
-	.byte 255, 249, 25, 76
+	voice_directsound 60, 0, DirectSoundWaveData_8481130, 255, 249, 25, 76
 
 @ SquareWave1 8442D14
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -38613,9 +38153,7 @@ VoiceGroupTable_8442BE8: @ 8442BE8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8442D8C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84571CC
-	.byte 255, 253, 0, 188
+	voice_directsound 60, 0, DirectSoundWaveData_84571CC, 255, 253, 0, 188
 
 @ SquareWave1 8442D98
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -38630,9 +38168,7 @@ VoiceGroupTable_8442BE8: @ 8442BE8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8442DB0
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8458CD0
-	.byte 255, 252, 0, 115
+	voice_directsound 60, 0, DirectSoundWaveData_8458CD0, 255, 252, 0, 115
 
 @ SquareWave1 8442DBC
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -38671,9 +38207,7 @@ VoiceGroupTable_8442BE8: @ 8442BE8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8442E04
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_848BD68
-	.byte 255, 226, 0, 38
+	voice_directsound 60, 0, DirectSoundWaveData_848BD68, 255, 226, 0, 38
 
 @ SquareWave1 8442E10
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -38836,9 +38370,7 @@ VoiceGroupTable_8442BE8: @ 8442BE8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8442F54
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 0, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 0, 255, 127
 
 @ SquareWave1 8442F60
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -39309,9 +38841,7 @@ VoiceGroupTable_84431E8: @ 84431E8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8443308
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8481130
-	.byte 255, 249, 25, 76
+	voice_directsound 60, 0, DirectSoundWaveData_8481130, 255, 249, 25, 76
 
 @ SquareWave1 8443314
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -39374,9 +38904,7 @@ VoiceGroupTable_84431E8: @ 84431E8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844338C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84571CC
-	.byte 255, 253, 0, 188
+	voice_directsound 60, 0, DirectSoundWaveData_84571CC, 255, 253, 0, 188
 
 @ SquareWave1 8443398
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -39439,14 +38967,10 @@ VoiceGroupTable_84431E8: @ 84431E8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8443410
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A26EC
-	.byte 255, 242, 51, 242
+	voice_directsound 60, 0, DirectSoundWaveData_84A26EC, 255, 242, 51, 242
 
 @ Direct Sound 844341C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8459944
-	.byte 255, 0, 180, 246
+	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 0, 180, 246
 
 @ Key-Split 8443428
 	.byte 0x40, 0, 0, 0
@@ -40769,9 +40293,7 @@ VoiceGroupTable_8443DE8: @ 8443DE8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8443E84
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A311C
-	.byte 255, 235, 0, 204
+	voice_directsound 60, 0, DirectSoundWaveData_84A311C, 255, 235, 0, 204
 
 @ SquareWave1 8443E90
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -40792,9 +40314,7 @@ VoiceGroupTable_8443DE8: @ 8443DE8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8443EB4
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84569D4
-	.byte 255, 0, 255, 210
+	voice_directsound 60, 0, DirectSoundWaveData_84569D4, 255, 0, 255, 210
 
 @ SquareWave1 8443EC0
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -40833,9 +40353,7 @@ VoiceGroupTable_8443DE8: @ 8443DE8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8443F08
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8481130
-	.byte 255, 249, 25, 76
+	voice_directsound 60, 0, DirectSoundWaveData_8481130, 255, 249, 25, 76
 
 @ SquareWave1 8443F14
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -40898,9 +40416,7 @@ VoiceGroupTable_8443DE8: @ 8443DE8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8443F8C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84571CC
-	.byte 255, 253, 0, 188
+	voice_directsound 60, 0, DirectSoundWaveData_84571CC, 255, 253, 0, 188
 
 @ SquareWave1 8443F98
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -40963,9 +40479,7 @@ VoiceGroupTable_8443DE8: @ 8443DE8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8444010
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A26EC
-	.byte 255, 242, 51, 242
+	voice_directsound 60, 0, DirectSoundWaveData_84A26EC, 255, 242, 51, 242
 
 @ SquareWave1 844401C
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -41527,9 +41041,7 @@ VoiceGroupTable_84443E8: @ 84443E8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8444484
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A311C
-	.byte 255, 235, 0, 204
+	voice_directsound 60, 0, DirectSoundWaveData_84A311C, 255, 235, 0, 204
 
 @ SquareWave1 8444490
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -41550,9 +41062,7 @@ VoiceGroupTable_84443E8: @ 84443E8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 84444B4
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84569D4
-	.byte 255, 0, 255, 210
+	voice_directsound 60, 0, DirectSoundWaveData_84569D4, 255, 0, 255, 210
 
 @ SquareWave1 84444C0
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -41591,9 +41101,7 @@ VoiceGroupTable_84443E8: @ 84443E8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8444508
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8481130
-	.byte 255, 249, 25, 76
+	voice_directsound 60, 0, DirectSoundWaveData_8481130, 255, 249, 25, 76
 
 @ SquareWave1 8444514
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -41656,9 +41164,7 @@ VoiceGroupTable_84443E8: @ 84443E8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844458C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84571CC
-	.byte 255, 253, 0, 188
+	voice_directsound 60, 0, DirectSoundWaveData_84571CC, 255, 253, 0, 188
 
 @ SquareWave1 8444598
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -41673,9 +41179,7 @@ VoiceGroupTable_84443E8: @ 84443E8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 84445B0
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8458CD0
-	.byte 255, 252, 0, 115
+	voice_directsound 60, 0, DirectSoundWaveData_8458CD0, 255, 252, 0, 115
 
 @ SquareWave1 84445BC
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -41720,9 +41224,7 @@ VoiceGroupTable_84443E8: @ 84443E8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8444610
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A26EC
-	.byte 255, 242, 51, 242
+	voice_directsound 60, 0, DirectSoundWaveData_84A26EC, 255, 242, 51, 242
 
 @ SquareWave1 844461C
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -41878,9 +41380,7 @@ VoiceGroupTable_84443E8: @ 84443E8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8444754
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 0, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 0, 255, 127
 
 @ SquareWave1 8444760
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -42285,9 +41785,7 @@ VoiceGroupTable_84449E8: @ 84449E8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8444A84
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A311C
-	.byte 255, 235, 0, 204
+	voice_directsound 60, 0, DirectSoundWaveData_84A311C, 255, 235, 0, 204
 
 @ SquareWave1 8444A90
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -42416,9 +41914,7 @@ VoiceGroupTable_84449E8: @ 84449E8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8444B8C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84571CC
-	.byte 255, 253, 0, 188
+	voice_directsound 60, 0, DirectSoundWaveData_84571CC, 255, 253, 0, 188
 
 @ SquareWave1 8444B98
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -42487,9 +41983,7 @@ VoiceGroupTable_84449E8: @ 84449E8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8444C1C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8459944
-	.byte 255, 0, 180, 216
+	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 0, 180, 216
 
 @ SquareWave1 8444C28
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -43054,9 +42548,7 @@ VoiceGroupTable_8444FE8: @ 8444FE8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8445090
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_849BAEC
-	.byte 255, 165, 90, 216
+	voice_directsound 60, 0, DirectSoundWaveData_849BAEC, 255, 165, 90, 216
 
 @ SquareWave1 844509C
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -43179,14 +42671,10 @@ VoiceGroupTable_8444FE8: @ 8444FE8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844518C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84571CC
-	.byte 255, 253, 0, 188
+	voice_directsound 60, 0, DirectSoundWaveData_84571CC, 255, 253, 0, 188
 
 @ Direct Sound 8445198
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8457D98
-	.byte 255, 235, 128, 99
+	voice_directsound 60, 0, DirectSoundWaveData_8457D98, 255, 235, 128, 99
 
 @ SquareWave1 84451A4
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -43249,9 +42737,7 @@ VoiceGroupTable_8444FE8: @ 8444FE8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844521C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8459944
-	.byte 255, 0, 180, 246
+	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 0, 180, 246
 
 @ Key-Split 8445228
 	.byte 0x40, 0, 0, 0
@@ -43400,9 +42886,7 @@ VoiceGroupTable_8444FE8: @ 8444FE8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8445354
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 0, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 0, 255, 127
 
 @ SquareWave1 8445360
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -43829,9 +43313,7 @@ VoiceGroupTable_84455E8: @ 84455E8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 84456B4
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84569D4
-	.byte 255, 0, 255, 165
+	voice_directsound 60, 0, DirectSoundWaveData_84569D4, 255, 0, 255, 165
 
 @ SquareWave1 84456C0
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -43936,14 +43418,10 @@ VoiceGroupTable_84455E8: @ 84455E8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844578C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84571CC
-	.byte 255, 253, 0, 188
+	voice_directsound 60, 0, DirectSoundWaveData_84571CC, 255, 253, 0, 188
 
 @ Direct Sound 8445798
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8457D98
-	.byte 255, 235, 128, 99
+	voice_directsound 60, 0, DirectSoundWaveData_8457D98, 255, 235, 128, 99
 
 @ SquareWave1 84457A4
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -44568,9 +44046,7 @@ VoiceGroupTable_8445BE8: @ 8445BE8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8445C84
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A311C
-	.byte 255, 235, 0, 204
+	voice_directsound 60, 0, DirectSoundWaveData_84A311C, 255, 235, 0, 204
 
 @ SquareWave1 8445C90
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -44591,9 +44067,7 @@ VoiceGroupTable_8445BE8: @ 8445BE8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8445CB4
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84569D4
-	.byte 255, 0, 255, 210
+	voice_directsound 60, 0, DirectSoundWaveData_84569D4, 255, 0, 255, 210
 
 @ SquareWave1 8445CC0
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -44632,9 +44106,7 @@ VoiceGroupTable_8445BE8: @ 8445BE8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8445D08
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8481130
-	.byte 255, 249, 25, 76
+	voice_directsound 60, 0, DirectSoundWaveData_8481130, 255, 249, 25, 76
 
 @ SquareWave1 8445D14
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -44697,9 +44169,7 @@ VoiceGroupTable_8445BE8: @ 8445BE8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8445D8C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84571CC
-	.byte 255, 253, 0, 196
+	voice_directsound 60, 0, DirectSoundWaveData_84571CC, 255, 253, 0, 196
 
 @ SquareWave1 8445D98
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -44762,9 +44232,7 @@ VoiceGroupTable_8445BE8: @ 8445BE8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8445E10
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A26EC
-	.byte 255, 242, 51, 242
+	voice_directsound 60, 0, DirectSoundWaveData_84A26EC, 255, 242, 51, 242
 
 @ SquareWave1 8445E1C
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -44922,9 +44390,7 @@ VoiceGroupTable_8445BE8: @ 8445BE8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8445F54
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 0, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 0, 255, 127
 
 @ SquareWave1 8445F60
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -45335,9 +44801,7 @@ VoiceGroupTable_84461E8: @ 84461E8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8446290
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_849BAEC
-	.byte 255, 165, 90, 216
+	voice_directsound 60, 0, DirectSoundWaveData_849BAEC, 255, 165, 90, 216
 
 @ SquareWave1 844629C
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -45394,9 +44858,7 @@ VoiceGroupTable_84461E8: @ 84461E8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8446308
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8481130
-	.byte 255, 249, 25, 76
+	voice_directsound 60, 0, DirectSoundWaveData_8481130, 255, 249, 25, 76
 
 @ SquareWave1 8446314
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -45459,9 +44921,7 @@ VoiceGroupTable_84461E8: @ 84461E8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844638C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84571CC
-	.byte 255, 253, 0, 196
+	voice_directsound 60, 0, DirectSoundWaveData_84571CC, 255, 253, 0, 196
 
 @ SquareWave1 8446398
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -45518,9 +44978,7 @@ VoiceGroupTable_84461E8: @ 84461E8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8446404
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_848BD68
-	.byte 255, 226, 0, 38
+	voice_directsound 60, 0, DirectSoundWaveData_848BD68, 255, 226, 0, 38
 
 @ SquareWave1 8446410
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -45529,9 +44987,7 @@ VoiceGroupTable_84461E8: @ 84461E8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844641C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8459944
-	.byte 255, 0, 180, 246
+	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 0, 180, 246
 
 @ Key-Split 8446428
 	.byte 0x40, 0, 0, 0
@@ -46095,9 +45551,7 @@ VoiceGroupTable_84467E8: @ 84467E8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8446890
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_849BAEC
-	.byte 255, 165, 90, 216
+	voice_directsound 60, 0, DirectSoundWaveData_849BAEC, 255, 165, 90, 216
 
 @ SquareWave1 844689C
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -46112,9 +45566,7 @@ VoiceGroupTable_84467E8: @ 84467E8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 84468B4
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84569D4
-	.byte 255, 0, 255, 210
+	voice_directsound 60, 0, DirectSoundWaveData_84569D4, 255, 0, 255, 210
 
 @ SquareWave1 84468C0
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -46153,9 +45605,7 @@ VoiceGroupTable_84467E8: @ 84467E8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8446908
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8481130
-	.byte 255, 249, 25, 76
+	voice_directsound 60, 0, DirectSoundWaveData_8481130, 255, 249, 25, 76
 
 @ SquareWave1 8446914
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -46277,14 +45727,10 @@ VoiceGroupTable_84467E8: @ 84467E8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8446A04
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_848BD68
-	.byte 255, 226, 0, 38
+	voice_directsound 60, 0, DirectSoundWaveData_848BD68, 255, 226, 0, 38
 
 @ Direct Sound 8446A10
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A26EC
-	.byte 255, 242, 51, 242
+	voice_directsound 60, 0, DirectSoundWaveData_84A26EC, 255, 242, 51, 242
 
 @ SquareWave1 8446A1C
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -46442,9 +45888,7 @@ VoiceGroupTable_84467E8: @ 84467E8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8446B54
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 0, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 0, 255, 127
 
 @ SquareWave1 8446B60
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -46914,9 +46358,7 @@ VoiceGroupTable_8446DE8: @ 8446DE8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8446F08
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8481130
-	.byte 255, 249, 25, 76
+	voice_directsound 60, 0, DirectSoundWaveData_8481130, 255, 249, 25, 76
 
 @ SquareWave1 8446F14
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -46997,9 +46439,7 @@ VoiceGroupTable_8446DE8: @ 8446DE8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8446FB0
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8458CD0
-	.byte 255, 252, 0, 115
+	voice_directsound 60, 0, DirectSoundWaveData_8458CD0, 255, 252, 0, 115
 
 @ SquareWave1 8446FBC
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -47038,19 +46478,13 @@ VoiceGroupTable_8446DE8: @ 8446DE8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8447004
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_848BD68
-	.byte 255, 226, 0, 38
+	voice_directsound 60, 0, DirectSoundWaveData_848BD68, 255, 226, 0, 38
 
 @ Direct Sound 8447010
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A26EC
-	.byte 255, 242, 51, 242
+	voice_directsound 60, 0, DirectSoundWaveData_84A26EC, 255, 242, 51, 242
 
 @ Direct Sound 844701C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8459944
-	.byte 255, 0, 180, 246
+	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 0, 180, 246
 
 @ Key-Split 8447028
 	.byte 0x40, 0, 0, 0
@@ -47201,9 +46635,7 @@ VoiceGroupTable_8446DE8: @ 8446DE8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8447154
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 0, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 0, 255, 127
 
 @ SquareWave1 8447160
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -47626,9 +47058,7 @@ VoiceGroupTable_8447400: @ 8447400
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 84474A8
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_849BAEC
-	.byte 255, 165, 90, 216
+	voice_directsound 60, 0, DirectSoundWaveData_849BAEC, 255, 165, 90, 216
 
 @ SquareWave1 84474B4
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -47685,9 +47115,7 @@ VoiceGroupTable_8447400: @ 8447400
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8447520
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8481130
-	.byte 255, 249, 25, 76
+	voice_directsound 60, 0, DirectSoundWaveData_8481130, 255, 249, 25, 76
 
 @ SquareWave1 844752C
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -47822,9 +47250,7 @@ VoiceGroupTable_8447400: @ 8447400
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8447634
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8459944
-	.byte 255, 0, 180, 246
+	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 0, 180, 246
 
 @ Key-Split 8447640
 	.byte 0x40, 0, 0, 0
@@ -48356,9 +47782,7 @@ VoiceGroupTable_8447A00: @ 8447A00
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8447A6C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8456330
-	.byte 255, 165, 72, 249
+	voice_directsound 60, 0, DirectSoundWaveData_8456330, 255, 165, 72, 249
 
 @ SquareWave1 8447A78
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -48445,9 +47869,7 @@ VoiceGroupTable_8447A00: @ 8447A00
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8447B20
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8481130
-	.byte 128, 249, 25, 76
+	voice_directsound 60, 0, DirectSoundWaveData_8481130, 128, 249, 25, 76
 
 @ SquareWave1 8447B2C
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -48510,9 +47932,7 @@ VoiceGroupTable_8447A00: @ 8447A00
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8447BA4
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84571CC
-	.byte 255, 253, 0, 188
+	voice_directsound 60, 0, DirectSoundWaveData_84571CC, 255, 253, 0, 188
 
 @ SquareWave1 8447BB0
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -48569,14 +47989,10 @@ VoiceGroupTable_8447A00: @ 8447A00
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8447C1C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_848BD68
-	.byte 255, 226, 0, 38
+	voice_directsound 60, 0, DirectSoundWaveData_848BD68, 255, 226, 0, 38
 
 @ Direct Sound 8447C28
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A26EC
-	.byte 255, 242, 0, 242
+	voice_directsound 60, 0, DirectSoundWaveData_84A26EC, 255, 242, 0, 242
 
 @ SquareWave1 8447C34
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -48732,9 +48148,7 @@ VoiceGroupTable_8447A00: @ 8447A00
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8447D6C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 0, 255, 165
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 0, 255, 165
 
 @ SquareWave1 8447D78
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -48880,9 +48294,7 @@ VoiceGroupTable_8447DF0: @ 8447DF0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8447E98
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_849BAEC
-	.byte 255, 165, 90, 216
+	voice_directsound 60, 0, DirectSoundWaveData_849BAEC, 255, 165, 90, 216
 
 @ SquareWave1 8447EA4
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -48939,9 +48351,7 @@ VoiceGroupTable_8447DF0: @ 8447DF0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8447F10
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8481130
-	.byte 255, 249, 25, 76
+	voice_directsound 60, 0, DirectSoundWaveData_8481130, 255, 249, 25, 76
 
 @ SquareWave1 8447F1C
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -49070,14 +48480,10 @@ VoiceGroupTable_8447DF0: @ 8447DF0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8448018
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A26EC
-	.byte 255, 242, 51, 242
+	voice_directsound 60, 0, DirectSoundWaveData_84A26EC, 255, 242, 51, 242
 
 @ Direct Sound 8448024
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8459944
-	.byte 255, 0, 180, 246
+	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 0, 180, 246
 
 @ Key-Split 8448030
 	.byte 0x40, 0, 0, 0
@@ -49228,9 +48634,7 @@ VoiceGroupTable_8447DF0: @ 8447DF0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844815C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 0, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 0, 255, 127
 
 @ SquareWave1 8448168
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -49701,9 +49105,7 @@ VoiceGroupTable_84483F0: @ 84483F0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8448510
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8481130
-	.byte 255, 249, 25, 76
+	voice_directsound 60, 0, DirectSoundWaveData_8481130, 255, 249, 25, 76
 
 @ SquareWave1 844851C
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -49832,14 +49234,10 @@ VoiceGroupTable_84483F0: @ 84483F0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8448618
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A26EC
-	.byte 255, 242, 51, 242
+	voice_directsound 60, 0, DirectSoundWaveData_84A26EC, 255, 242, 51, 242
 
 @ Direct Sound 8448624
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8459944
-	.byte 255, 0, 180, 246
+	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 0, 180, 246
 
 @ SquareWave1 8448630
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -49991,9 +49389,7 @@ VoiceGroupTable_84483F0: @ 84483F0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844875C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 0, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 0, 255, 127
 
 @ SquareWave1 8448768
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -50403,9 +49799,7 @@ VoiceGroupTable_84489F0: @ 84489F0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8448A98
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_849BAEC
-	.byte 255, 165, 90, 216
+	voice_directsound 60, 0, DirectSoundWaveData_849BAEC, 255, 165, 90, 216
 
 @ SquareWave1 8448AA4
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -50420,9 +49814,7 @@ VoiceGroupTable_84489F0: @ 84489F0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8448ABC
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84569D4
-	.byte 255, 0, 255, 165
+	voice_directsound 60, 0, DirectSoundWaveData_84569D4, 255, 0, 255, 165
 
 @ SquareWave1 8448AC8
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -50461,9 +49853,7 @@ VoiceGroupTable_84489F0: @ 84489F0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8448B10
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8481130
-	.byte 255, 249, 25, 76
+	voice_directsound 60, 0, DirectSoundWaveData_8481130, 255, 249, 25, 76
 
 @ SquareWave1 8448B1C
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -50526,14 +49916,10 @@ VoiceGroupTable_84489F0: @ 84489F0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8448B94
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84571CC
-	.byte 255, 253, 0, 188
+	voice_directsound 60, 0, DirectSoundWaveData_84571CC, 255, 253, 0, 188
 
 @ Direct Sound 8448BA0
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8457D98
-	.byte 255, 235, 128, 99
+	voice_directsound 60, 0, DirectSoundWaveData_8457D98, 255, 235, 128, 99
 
 @ SquareWave1 8448BAC
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -50590,9 +49976,7 @@ VoiceGroupTable_84489F0: @ 84489F0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8448C18
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A26EC
-	.byte 255, 242, 51, 242
+	voice_directsound 60, 0, DirectSoundWaveData_84A26EC, 255, 242, 51, 242
 
 @ SquareWave1 8448C24
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -50748,9 +50132,7 @@ VoiceGroupTable_84489F0: @ 84489F0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8448D5C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 0, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 0, 255, 127
 
 @ SquareWave1 8448D68
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -51292,9 +50674,7 @@ VoiceGroupTable_8448FF0: @ 8448FF0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 84491A0
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8457D98
-	.byte 255, 235, 128, 99
+	voice_directsound 60, 0, DirectSoundWaveData_8457D98, 255, 235, 128, 99
 
 @ SquareWave1 84491AC
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -51303,9 +50683,7 @@ VoiceGroupTable_8448FF0: @ 8448FF0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 84491B8
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8458CD0
-	.byte 255, 252, 0, 115
+	voice_directsound 60, 0, DirectSoundWaveData_8458CD0, 255, 252, 0, 115
 
 @ SquareWave1 84491C4
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -51356,9 +50734,7 @@ VoiceGroupTable_8448FF0: @ 8448FF0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8449224
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8459944
-	.byte 255, 0, 180, 246
+	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 0, 180, 246
 
 @ SquareWave1 8449230
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -51921,9 +51297,7 @@ VoiceGroupTable_84495F0: @ 84495F0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8449698
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_849BAEC
-	.byte 255, 165, 90, 216
+	voice_directsound 60, 0, DirectSoundWaveData_849BAEC, 255, 165, 90, 216
 
 @ SquareWave1 84496A4
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -52112,14 +51486,10 @@ VoiceGroupTable_84495F0: @ 84495F0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8449818
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A26EC
-	.byte 255, 242, 51, 242
+	voice_directsound 60, 0, DirectSoundWaveData_84A26EC, 255, 242, 51, 242
 
 @ Direct Sound 8449824
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8459944
-	.byte 255, 0, 180, 239
+	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 0, 180, 239
 
 @ Key-Split 8449830
 	.byte 0x40, 0, 0, 0
@@ -52268,9 +51638,7 @@ VoiceGroupTable_84495F0: @ 84495F0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844995C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 0, 255, 165
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 0, 255, 165
 
 @ SquareWave1 8449968
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -52680,9 +52048,7 @@ VoiceGroupTable_8449BF0: @ 8449BF0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8449C98
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_849BAEC
-	.byte 255, 165, 90, 216
+	voice_directsound 60, 0, DirectSoundWaveData_849BAEC, 255, 165, 90, 216
 
 @ SquareWave1 8449CA4
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -53031,9 +52397,7 @@ VoiceGroupTable_8449BF0: @ 8449BF0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8449F5C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 0, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 0, 255, 127
 
 @ SquareWave1 8449F68
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -54179,9 +53543,7 @@ VoiceGroupTable_844A7F0: @ 844A7F0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844A85C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8456330
-	.byte 255, 165, 72, 249
+	voice_directsound 60, 0, DirectSoundWaveData_8456330, 255, 165, 72, 249
 
 @ SquareWave1 844A868
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -54202,9 +53564,7 @@ VoiceGroupTable_844A7F0: @ 844A7F0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844A88C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A311C
-	.byte 255, 235, 0, 204
+	voice_directsound 60, 0, DirectSoundWaveData_84A311C, 255, 235, 0, 204
 
 @ SquareWave1 844A898
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -54225,9 +53585,7 @@ VoiceGroupTable_844A7F0: @ 844A7F0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844A8BC
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84569D4
-	.byte 255, 0, 255, 165
+	voice_directsound 60, 0, DirectSoundWaveData_84569D4, 255, 0, 255, 165
 
 @ SquareWave1 844A8C8
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -54266,9 +53624,7 @@ VoiceGroupTable_844A7F0: @ 844A7F0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844A910
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8481130
-	.byte 128, 249, 25, 76
+	voice_directsound 60, 0, DirectSoundWaveData_8481130, 128, 249, 25, 76
 
 @ SquareWave1 844A91C
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -54331,9 +53687,7 @@ VoiceGroupTable_844A7F0: @ 844A7F0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844A994
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84571CC
-	.byte 255, 253, 0, 188
+	voice_directsound 60, 0, DirectSoundWaveData_84571CC, 255, 253, 0, 188
 
 @ SquareWave1 844A9A0
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -54390,14 +53744,10 @@ VoiceGroupTable_844A7F0: @ 844A7F0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844AA0C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_848BD68
-	.byte 255, 226, 0, 38
+	voice_directsound 60, 0, DirectSoundWaveData_848BD68, 255, 226, 0, 38
 
 @ Direct Sound 844AA18
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A26EC
-	.byte 255, 242, 0, 242
+	voice_directsound 60, 0, DirectSoundWaveData_84A26EC, 255, 242, 0, 242
 
 @ SquareWave1 844AA24
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -54553,9 +53903,7 @@ VoiceGroupTable_844A7F0: @ 844A7F0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844AB5C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 0, 255, 165
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 0, 255, 165
 
 @ SquareWave1 844AB68
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -54959,9 +54307,7 @@ VoiceGroupTable_844ADF0: @ 844ADF0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844AE8C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A311C
-	.byte 255, 235, 0, 204
+	voice_directsound 60, 0, DirectSoundWaveData_84A311C, 255, 235, 0, 204
 
 @ SquareWave1 844AE98
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -55024,9 +54370,7 @@ VoiceGroupTable_844ADF0: @ 844ADF0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844AF10
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8481130
-	.byte 128, 249, 25, 76
+	voice_directsound 60, 0, DirectSoundWaveData_8481130, 128, 249, 25, 76
 
 @ SquareWave1 844AF1C
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -55107,9 +54451,7 @@ VoiceGroupTable_844ADF0: @ 844ADF0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844AFB8
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8458CD0
-	.byte 255, 252, 0, 115
+	voice_directsound 60, 0, DirectSoundWaveData_8458CD0, 255, 252, 0, 115
 
 @ SquareWave1 844AFC4
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -55154,9 +54496,7 @@ VoiceGroupTable_844ADF0: @ 844ADF0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844B018
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A26EC
-	.byte 255, 242, 0, 242
+	voice_directsound 60, 0, DirectSoundWaveData_84A26EC, 255, 242, 0, 242
 
 @ SquareWave1 844B024
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -55723,9 +55063,7 @@ VoiceGroupTable_844B3F0: @ 844B3F0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844B48C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A311C
-	.byte 255, 235, 0, 204
+	voice_directsound 60, 0, DirectSoundWaveData_84A311C, 255, 235, 0, 204
 
 @ SquareWave1 844B498
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -55788,9 +55126,7 @@ VoiceGroupTable_844B3F0: @ 844B3F0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844B510
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8481130
-	.byte 128, 249, 25, 76
+	voice_directsound 60, 0, DirectSoundWaveData_8481130, 128, 249, 25, 76
 
 @ SquareWave1 844B51C
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -55859,9 +55195,7 @@ VoiceGroupTable_844B3F0: @ 844B3F0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844B5A0
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8457D98
-	.byte 255, 235, 128, 99
+	voice_directsound 60, 0, DirectSoundWaveData_8457D98, 255, 235, 128, 99
 
 @ SquareWave1 844B5AC
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -55870,9 +55204,7 @@ VoiceGroupTable_844B3F0: @ 844B3F0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844B5B8
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8458CD0
-	.byte 255, 252, 0, 115
+	voice_directsound 60, 0, DirectSoundWaveData_8458CD0, 255, 252, 0, 115
 
 @ SquareWave1 844B5C4
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -55917,9 +55249,7 @@ VoiceGroupTable_844B3F0: @ 844B3F0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844B618
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A26EC
-	.byte 255, 242, 0, 242
+	voice_directsound 60, 0, DirectSoundWaveData_84A26EC, 255, 242, 0, 242
 
 @ SquareWave1 844B624
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -56075,9 +55405,7 @@ VoiceGroupTable_844B3F0: @ 844B3F0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844B75C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 0, 255, 165
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 0, 255, 165
 
 @ SquareWave1 844B768
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -56458,9 +55786,7 @@ VoiceGroupTable_844B9F0: @ 844B9F0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844BA5C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8456330
-	.byte 255, 165, 72, 249
+	voice_directsound 60, 0, DirectSoundWaveData_8456330, 255, 165, 72, 249
 
 @ SquareWave1 844BA68
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -56481,14 +55807,10 @@ VoiceGroupTable_844B9F0: @ 844B9F0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844BA8C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A311C
-	.byte 255, 235, 0, 204
+	voice_directsound 60, 0, DirectSoundWaveData_84A311C, 255, 235, 0, 204
 
 @ Direct Sound 844BA98
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_849BAEC
-	.byte 255, 165, 90, 216
+	voice_directsound 60, 0, DirectSoundWaveData_849BAEC, 255, 165, 90, 216
 
 @ SquareWave1 844BAA4
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -56503,9 +55825,7 @@ VoiceGroupTable_844B9F0: @ 844B9F0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844BABC
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84569D4
-	.byte 255, 0, 255, 210
+	voice_directsound 60, 0, DirectSoundWaveData_84569D4, 255, 0, 255, 210
 
 @ SquareWave1 844BAC8
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -56526,9 +55846,7 @@ VoiceGroupTable_844B9F0: @ 844B9F0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844BAEC
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A5F58
-	.byte 255, 0, 255, 165
+	voice_directsound 60, 0, DirectSoundWaveData_84A5F58, 255, 0, 255, 165
 
 @ SquareWave1 844BAF8
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -56543,9 +55861,7 @@ VoiceGroupTable_844B9F0: @ 844B9F0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844BB10
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8481130
-	.byte 128, 249, 25, 76
+	voice_directsound 60, 0, DirectSoundWaveData_8481130, 128, 249, 25, 76
 
 @ SquareWave1 844BB1C
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -56680,9 +55996,7 @@ VoiceGroupTable_844B9F0: @ 844B9F0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844BC24
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8459944
-	.byte 255, 0, 180, 246
+	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 0, 180, 246
 
 @ Key-Split 844BC30
 	.byte 0x40, 0, 0, 0
@@ -56832,9 +56146,7 @@ VoiceGroupTable_844B9F0: @ 844B9F0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844BD5C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 0, 255, 165
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 0, 255, 165
 
 @ SquareWave1 844BD68
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -57263,9 +56575,7 @@ VoiceGroupTable_844BFF0: @ 844BFF0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844C0BC
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84569D4
-	.byte 255, 0, 255, 210
+	voice_directsound 60, 0, DirectSoundWaveData_84569D4, 255, 0, 255, 210
 
 @ SquareWave1 844C0C8
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -57304,9 +56614,7 @@ VoiceGroupTable_844BFF0: @ 844BFF0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844C110
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8481130
-	.byte 255, 249, 25, 76
+	voice_directsound 60, 0, DirectSoundWaveData_8481130, 255, 249, 25, 76
 
 @ SquareWave1 844C11C
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -57387,9 +56695,7 @@ VoiceGroupTable_844BFF0: @ 844BFF0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844C1B8
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8458CD0
-	.byte 255, 252, 0, 115
+	voice_directsound 60, 0, DirectSoundWaveData_8458CD0, 255, 252, 0, 115
 
 @ SquareWave1 844C1C4
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -57596,9 +56902,7 @@ VoiceGroupTable_844BFF0: @ 844BFF0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844C35C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 0, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 0, 255, 127
 
 @ SquareWave1 844C368
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -58003,9 +57307,7 @@ VoiceGroupTable_844C5F0: @ 844C5F0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844C68C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A311C
-	.byte 255, 235, 0, 204
+	voice_directsound 60, 0, DirectSoundWaveData_84A311C, 255, 235, 0, 204
 
 @ SquareWave1 844C698
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -58026,9 +57328,7 @@ VoiceGroupTable_844C5F0: @ 844C5F0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844C6BC
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84569D4
-	.byte 255, 0, 255, 210
+	voice_directsound 60, 0, DirectSoundWaveData_84569D4, 255, 0, 255, 210
 
 @ SquareWave1 844C6C8
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -58067,9 +57367,7 @@ VoiceGroupTable_844C5F0: @ 844C5F0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844C710
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8481130
-	.byte 255, 249, 25, 76
+	voice_directsound 60, 0, DirectSoundWaveData_8481130, 255, 249, 25, 76
 
 @ SquareWave1 844C71C
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -58138,9 +57436,7 @@ VoiceGroupTable_844C5F0: @ 844C5F0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844C7A0
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8457D98
-	.byte 255, 235, 128, 99
+	voice_directsound 60, 0, DirectSoundWaveData_8457D98, 255, 235, 128, 99
 
 @ SquareWave1 844C7AC
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -58149,9 +57445,7 @@ VoiceGroupTable_844C5F0: @ 844C5F0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844C7B8
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8458CD0
-	.byte 255, 252, 0, 115
+	voice_directsound 60, 0, DirectSoundWaveData_8458CD0, 255, 252, 0, 115
 
 @ SquareWave1 844C7C4
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -58202,9 +57496,7 @@ VoiceGroupTable_844C5F0: @ 844C5F0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844C824
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8459944
-	.byte 255, 0, 180, 246
+	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 0, 180, 246
 
 @ SquareWave1 844C830
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -58769,9 +58061,7 @@ VoiceGroupTable_844CBF0: @ 844CBF0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844CC98
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_849BAEC
-	.byte 255, 165, 90, 216
+	voice_directsound 60, 0, DirectSoundWaveData_849BAEC, 255, 165, 90, 216
 
 @ SquareWave1 844CCA4
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -58966,9 +58256,7 @@ VoiceGroupTable_844CBF0: @ 844CBF0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844CE24
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8459944
-	.byte 255, 0, 180, 249
+	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 0, 180, 249
 
 @ SquareWave1 844CE30
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -59885,9 +59173,7 @@ VoiceGroupTable_844D1F0: @ 844D1F0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844D55C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 0, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 0, 255, 127
 
 @ SquareWave1 844D568
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -60195,14 +59481,10 @@ VoiceGroupTable_844D1F0: @ 844D1F0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844D7CC
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A3B50
-	.byte 255, 255, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_84A3B50, 255, 255, 255, 127
 
 @ Direct Sound 844D7D8
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_845B9A8
-	.byte 255, 255, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_845B9A8, 255, 255, 255, 127
 
 @ Noise 844D7E4
 	.byte 0xc, 0x3c, 0x0, 0x0
@@ -60290,9 +59572,7 @@ VoiceGroupTable_844D7F0: @ 844D7F0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844D88C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A311C
-	.byte 255, 235, 0, 204
+	voice_directsound 60, 0, DirectSoundWaveData_84A311C, 255, 235, 0, 204
 
 @ SquareWave1 844D898
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -60427,9 +59707,7 @@ VoiceGroupTable_844D7F0: @ 844D7F0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844D9A0
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8457D98
-	.byte 255, 235, 128, 99
+	voice_directsound 60, 0, DirectSoundWaveData_8457D98, 255, 235, 128, 99
 
 @ SquareWave1 844D9AC
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -60438,9 +59716,7 @@ VoiceGroupTable_844D7F0: @ 844D7F0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844D9B8
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8458CD0
-	.byte 255, 252, 0, 115
+	voice_directsound 60, 0, DirectSoundWaveData_8458CD0, 255, 252, 0, 115
 
 @ SquareWave1 844D9C4
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -61054,9 +60330,7 @@ VoiceGroupTable_844DDF0: @ 844DDF0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844DE8C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A311C
-	.byte 255, 235, 0, 204
+	voice_directsound 60, 0, DirectSoundWaveData_84A311C, 255, 235, 0, 204
 
 @ SquareWave1 844DE98
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -61077,9 +60351,7 @@ VoiceGroupTable_844DDF0: @ 844DDF0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844DEBC
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84569D4
-	.byte 255, 0, 255, 210
+	voice_directsound 60, 0, DirectSoundWaveData_84569D4, 255, 0, 255, 210
 
 @ SquareWave1 844DEC8
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -61118,9 +60390,7 @@ VoiceGroupTable_844DDF0: @ 844DDF0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844DF10
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8481130
-	.byte 255, 249, 25, 76
+	voice_directsound 60, 0, DirectSoundWaveData_8481130, 255, 249, 25, 76
 
 @ SquareWave1 844DF1C
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -61188,9 +60458,7 @@ VoiceGroupTable_844DDF0: @ 844DDF0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844DFA0
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8457D98
-	.byte 255, 235, 128, 99
+	voice_directsound 60, 0, DirectSoundWaveData_8457D98, 255, 235, 128, 99
 
 @ SquareWave1 844DFAC
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -61199,9 +60467,7 @@ VoiceGroupTable_844DDF0: @ 844DDF0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844DFB8
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8458CD0
-	.byte 255, 252, 0, 115
+	voice_directsound 60, 0, DirectSoundWaveData_8458CD0, 255, 252, 0, 115
 
 @ SquareWave1 844DFC4
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -61252,9 +60518,7 @@ VoiceGroupTable_844DDF0: @ 844DDF0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844E024
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8459944
-	.byte 255, 0, 180, 246
+	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 0, 180, 246
 
 @ SquareWave1 844E030
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -61406,9 +60670,7 @@ VoiceGroupTable_844DDF0: @ 844DDF0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844E15C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 0, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 0, 255, 127
 
 @ SquareWave1 844E168
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -61817,9 +61079,7 @@ VoiceGroupTable_844E3F0: @ 844E3F0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844E498
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_849BAEC
-	.byte 255, 165, 90, 216
+	voice_directsound 60, 0, DirectSoundWaveData_849BAEC, 255, 165, 90, 216
 
 @ SquareWave1 844E4A4
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -62008,14 +61268,10 @@ VoiceGroupTable_844E3F0: @ 844E3F0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844E618
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A26EC
-	.byte 255, 242, 51, 242
+	voice_directsound 60, 0, DirectSoundWaveData_84A26EC, 255, 242, 51, 242
 
 @ Direct Sound 844E624
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8459944
-	.byte 255, 0, 180, 239
+	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 0, 180, 239
 
 @ Key-Split 844E630
 	.byte 0x40, 0, 0, 0
@@ -62164,9 +61420,7 @@ VoiceGroupTable_844E3F0: @ 844E3F0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844E75C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 0, 255, 165
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 0, 255, 165
 
 @ WaveMemory 844E768
 	.byte 0xb, 0x3c, 0x0, 0x0
@@ -62528,9 +61782,7 @@ VoiceGroupTable_844E918: @ 844E918
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844EA38
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8481130
-	.byte 255, 249, 25, 248
+	voice_directsound 60, 0, DirectSoundWaveData_8481130, 255, 249, 25, 248
 
 @ SquareWave1 844EA44
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -62659,9 +61911,7 @@ VoiceGroupTable_844E918: @ 844E918
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844EB40
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A26EC
-	.byte 255, 242, 51, 165
+	voice_directsound 60, 0, DirectSoundWaveData_84A26EC, 255, 242, 51, 165
 
 @ SquareWave1 844EB4C
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -63073,9 +62323,7 @@ VoiceGroupTable_844ECF0: @ 844ECF0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844EE7C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8483804
-	.byte 255, 253, 0, 149
+	voice_directsound 60, 0, DirectSoundWaveData_8483804, 255, 253, 0, 149
 
 @ SquareWave1 844EE88
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -63150,14 +62398,10 @@ VoiceGroupTable_844ECF0: @ 844ECF0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844EF18
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A26EC
-	.byte 255, 246, 0, 235
+	voice_directsound 60, 0, DirectSoundWaveData_84A26EC, 255, 246, 0, 235
 
 @ Direct Sound 844EF24
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8459944
-	.byte 255, 246, 0, 226
+	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 246, 0, 226
 
 @ Key-Split 844EF30
 	.byte 0x40, 0, 0, 0
@@ -63444,9 +62688,7 @@ VoiceGroupTable_844F0C8: @ 844F0C8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844F170
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_849BAEC
-	.byte 255, 250, 0, 242
+	voice_directsound 60, 0, DirectSoundWaveData_849BAEC, 255, 250, 0, 242
 
 @ SquareWave1 844F17C
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -63461,9 +62703,7 @@ VoiceGroupTable_844F0C8: @ 844F0C8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844F194
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84569D4
-	.byte 255, 0, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_84569D4, 255, 0, 255, 127
 
 @ SquareWave1 844F1A0
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -63484,9 +62724,7 @@ VoiceGroupTable_844F0C8: @ 844F0C8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844F1C4
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A5F58
-	.byte 255, 0, 255, 165
+	voice_directsound 60, 0, DirectSoundWaveData_84A5F58, 255, 0, 255, 165
 
 @ SquareWave1 844F1D0
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -63555,9 +62793,7 @@ VoiceGroupTable_844F0C8: @ 844F0C8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844F254
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8483804
-	.byte 255, 253, 0, 149
+	voice_directsound 60, 0, DirectSoundWaveData_8483804, 255, 253, 0, 149
 
 @ SquareWave1 844F260
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -63584,9 +62820,7 @@ VoiceGroupTable_844F0C8: @ 844F0C8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844F290
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8458CD0
-	.byte 255, 252, 0, 115
+	voice_directsound 60, 0, DirectSoundWaveData_8458CD0, 255, 252, 0, 115
 
 @ SquareWave1 844F29C
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -63631,14 +62865,10 @@ VoiceGroupTable_844F0C8: @ 844F0C8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844F2F0
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A26EC
-	.byte 255, 246, 0, 235
+	voice_directsound 60, 0, DirectSoundWaveData_84A26EC, 255, 246, 0, 235
 
 @ Direct Sound 844F2FC
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8459944
-	.byte 255, 246, 0, 226
+	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 246, 0, 226
 
 @ Key-Split 844F308
 	.byte 0x40, 0, 0, 0
@@ -63888,9 +63118,7 @@ VoiceGroupTable_844F0C8: @ 844F0C8
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844F500
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_849F40C
-	.byte 255, 0, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_849F40C, 255, 0, 255, 127
 
 VoiceGroupTable_844F50C: @ 844F50C
 
@@ -63995,9 +63223,7 @@ VoiceGroupTable_844F50C: @ 844F50C
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844F5D8
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84569D4
-	.byte 255, 0, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_84569D4, 255, 0, 255, 127
 
 @ SquareWave1 844F5E4
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -64090,9 +63316,7 @@ VoiceGroupTable_844F50C: @ 844F50C
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844F698
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8483804
-	.byte 255, 253, 0, 149
+	voice_directsound 60, 0, DirectSoundWaveData_8483804, 255, 253, 0, 149
 
 @ SquareWave1 844F6A4
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -64167,14 +63391,10 @@ VoiceGroupTable_844F50C: @ 844F50C
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844F734
-	.byte 0x8, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8485454
-	.byte 255, 246, 0, 226
+	voice_directsound_no_resample 60, 0, DirectSoundWaveData_8485454, 255, 246, 0, 226
 
 @ Direct Sound 844F740
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8459944
-	.byte 255, 246, 0, 226
+	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 246, 0, 226
 
 @ Key-Split 844F74C
 	.byte 0x40, 0, 0, 0
@@ -64628,9 +63848,7 @@ VoiceGroupTable_844F950: @ 844F950
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844FADC
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8483804
-	.byte 255, 253, 0, 149
+	voice_directsound 60, 0, DirectSoundWaveData_8483804, 255, 253, 0, 149
 
 @ SquareWave1 844FAE8
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -64699,9 +63917,7 @@ VoiceGroupTable_844F950: @ 844F950
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844FB6C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_848BD68
-	.byte 255, 216, 0, 165
+	voice_directsound 60, 0, DirectSoundWaveData_848BD68, 255, 216, 0, 165
 
 @ SquareWave1 844FB78
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -64710,9 +63926,7 @@ VoiceGroupTable_844F950: @ 844F950
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844FB84
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8459944
-	.byte 255, 246, 0, 226
+	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 246, 0, 226
 
 @ Key-Split 844FB90
 	.byte 0x40, 0, 0, 0
@@ -65166,9 +64380,7 @@ VoiceGroupTable_844FD94: @ 844FD94
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844FF20
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8483804
-	.byte 255, 253, 0, 149
+	voice_directsound 60, 0, DirectSoundWaveData_8483804, 255, 253, 0, 149
 
 @ SquareWave1 844FF2C
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -65237,9 +64449,7 @@ VoiceGroupTable_844FD94: @ 844FD94
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844FFB0
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_848BD68
-	.byte 255, 216, 0, 165
+	voice_directsound 60, 0, DirectSoundWaveData_848BD68, 255, 216, 0, 165
 
 @ SquareWave1 844FFBC
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -65248,9 +64458,7 @@ VoiceGroupTable_844FD94: @ 844FD94
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 844FFC8
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8459944
-	.byte 255, 246, 0, 226
+	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 246, 0, 226
 
 @ Key-Split 844FFD4
 	.byte 0x40, 0, 0, 0
@@ -65400,9 +64608,7 @@ VoiceGroupTable_844FD94: @ 844FD94
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8450100
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 0, 255, 165
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 0, 255, 165
 
 @ SquareWave1 845010C
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -65693,9 +64899,7 @@ VoiceGroupTable_845019C: @ 845019C
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 845034C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8457D98
-	.byte 255, 235, 128, 99
+	voice_directsound 60, 0, DirectSoundWaveData_8457D98, 255, 235, 128, 99
 
 @ SquareWave1 8450358
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -65746,9 +64950,7 @@ VoiceGroupTable_845019C: @ 845019C
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 84503B8
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_848BD68
-	.byte 255, 216, 0, 165
+	voice_directsound 60, 0, DirectSoundWaveData_848BD68, 255, 216, 0, 165
 
 @ SquareWave1 84503C4
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -65757,9 +64959,7 @@ VoiceGroupTable_845019C: @ 845019C
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 84503D0
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8459944
-	.byte 255, 246, 0, 226
+	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 246, 0, 226
 
 @ Key-Split 84503DC
 	.byte 0x40, 0, 0, 0
@@ -65809,9 +65009,7 @@ VoiceGroupTable_845019C: @ 845019C
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 845043C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_849F40C
-	.byte 255, 165, 154, 127
+	voice_directsound 60, 0, DirectSoundWaveData_849F40C, 255, 165, 154, 127
 
 @ SquareWave1 8450448
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -66059,9 +65257,7 @@ VoiceGroupTable_845058C: @ 845058C
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8450634
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_849BAEC
-	.byte 255, 216, 90, 242
+	voice_directsound 60, 0, DirectSoundWaveData_849BAEC, 255, 216, 90, 242
 
 @ SquareWave1 8450640
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -66172,9 +65368,7 @@ VoiceGroupTable_845058C: @ 845058C
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8450718
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8483804
-	.byte 255, 253, 0, 149
+	voice_directsound 60, 0, DirectSoundWaveData_8483804, 255, 253, 0, 149
 
 @ SquareWave1 8450724
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -66255,9 +65449,7 @@ VoiceGroupTable_845058C: @ 845058C
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 84507C0
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8459944
-	.byte 255, 246, 0, 226
+	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 246, 0, 226
 
 @ Key-Split 84507CC
 	.byte 0x40, 0, 0, 0
@@ -66407,9 +65599,7 @@ VoiceGroupTable_845058C: @ 845058C
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 84508F8
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84830A0
-	.byte 255, 0, 255, 165
+	voice_directsound 60, 0, DirectSoundWaveData_84830A0, 255, 0, 255, 165
 
 @ SquareWave1 8450904
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -66730,9 +65920,7 @@ VoiceGroupTable_845058C: @ 845058C
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8450B80
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8460E60
-	.byte 255, 246, 0, 216
+	voice_directsound 60, 0, DirectSoundWaveData_8460E60, 255, 246, 0, 216
 
 VoiceGroupTable_8450B8C: @ 8450B8C
 
@@ -66933,9 +66121,7 @@ VoiceGroupTable_8450B8C: @ 8450B8C
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8450D18
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8483804
-	.byte 255, 253, 0, 149
+	voice_directsound 60, 0, DirectSoundWaveData_8483804, 255, 253, 0, 149
 
 @ SquareWave1 8450D24
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -67010,14 +66196,10 @@ VoiceGroupTable_8450B8C: @ 8450B8C
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8450DB4
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A26EC
-	.byte 255, 246, 0, 235
+	voice_directsound 60, 0, DirectSoundWaveData_84A26EC, 255, 246, 0, 235
 
 @ Direct Sound 8450DC0
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8459944
-	.byte 255, 246, 0, 226
+	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 246, 0, 226
 
 @ Key-Split 8450DCC
 	.byte 0x40, 0, 0, 0
@@ -67479,9 +66661,7 @@ VoiceGroupTable_8450FA0: @ 8450FA0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8451168
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8458CD0
-	.byte 255, 252, 0, 115
+	voice_directsound 60, 0, DirectSoundWaveData_8458CD0, 255, 252, 0, 115
 
 @ SquareWave1 8451174
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -67532,9 +66712,7 @@ VoiceGroupTable_8450FA0: @ 8450FA0
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 84511D4
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8459944
-	.byte 255, 246, 0, 226
+	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 246, 0, 226
 
 @ Key-Split 84511E0
 	.byte 0x40, 0, 0, 0
@@ -67948,9 +67126,7 @@ VoiceGroupTable_8451390: @ 8451390
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 845151C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8457D98
-	.byte 255, 235, 128, 99
+	voice_directsound 60, 0, DirectSoundWaveData_8457D98, 255, 235, 128, 99
 
 @ SquareWave1 8451528
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -68031,9 +67207,7 @@ VoiceGroupTable_8451390: @ 8451390
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 84515C4
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8459944
-	.byte 255, 246, 0, 226
+	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 246, 0, 226
 
 @ Key-Split 84515D0
 	.byte 0x40, 0, 0, 0
@@ -68500,21 +67674,15 @@ VoiceGroupTable_8451390: @ 8451390
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8451978
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8460E60
-	.byte 255, 235, 0, 216
+	voice_directsound 60, 0, DirectSoundWaveData_8460E60, 255, 235, 0, 216
 
 @ Direct Sound 8451984
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8460E60
-	.byte 255, 246, 0, 216
+	voice_directsound 60, 0, DirectSoundWaveData_8460E60, 255, 246, 0, 216
 
 VoiceGroupTable_8451990: @ 8451990
 
 @ Direct Sound 8451990
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8486924
-	.byte 255, 249, 103, 165
+	voice_directsound 60, 0, DirectSoundWaveData_8486924, 255, 249, 103, 165
 
 @ SquareWave1 845199C
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -68589,14 +67757,10 @@ VoiceGroupTable_8451990: @ 8451990
 	.byte 0, 1, 9, 0
 
 @ Direct Sound 8451A2C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8487330
-	.byte 255, 0, 255, 165
+	voice_directsound 60, 0, DirectSoundWaveData_8487330, 255, 0, 255, 165
 
 @ Direct Sound 8451A38
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8487330
-	.byte 255, 226, 0, 165
+	voice_directsound 60, 0, DirectSoundWaveData_8487330, 255, 226, 0, 165
 
 @ SquareWave1 8451A44
 	.byte 0x9, 0x3c, 0x0, 0x0
@@ -68791,9 +67955,7 @@ VoiceGroupTable_8451990: @ 8451990
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8451BC4
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8459944
-	.byte 255, 246, 0, 226
+	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 246, 0, 226
 
 @ Key-Split 8451BD0
 	.byte 0x40, 0, 0, 0
@@ -69271,22 +68433,16 @@ VoiceGroupTable_8451990: @ 8451990
 VoiceGroupTable_8451F90: @ 8451F90
 
 @ Direct Sound 8451F90
-	.byte 0x8, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8488F44
-	.byte 255, 249, 0, 165
+	voice_directsound_no_resample 60, 0, DirectSoundWaveData_8488F44, 255, 249, 0, 165
 
 @ Direct Sound 8451F9C
 	voice_directsound_alt 60, 0, DirectSoundWaveData_8488F44, 255, 0, 255, 165
 
 @ Direct Sound 8451FA8
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8486924
-	.byte 255, 0, 255, 165
+	voice_directsound 60, 0, DirectSoundWaveData_8486924, 255, 0, 255, 165
 
 @ Direct Sound 8451FB4
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8456330
-	.byte 255, 242, 0, 127
+	voice_directsound 60, 0, DirectSoundWaveData_8456330, 255, 242, 0, 127
 
 @ Noise 8451FC0
 	.byte 0xc, 0x3c, 0x0, 0x0
@@ -69301,9 +68457,7 @@ VoiceGroupTable_8451F90: @ 8451F90
 	.byte 0, 1, 0, 1
 
 @ Direct Sound 8451FD8
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8459944
-	.byte 255, 0, 255, 165
+	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 0, 255, 165
 
 @ SquareWave1 8451FE4
 	.byte 0x9, 0x3c, 0x0, 0x0
@@ -69312,19 +68466,13 @@ VoiceGroupTable_8451F90: @ 8451F90
 	.byte 0, 2, 0, 1
 
 @ Direct Sound 8451FF0
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_848A8A4
-	.byte 255, 0, 255, 165
+	voice_directsound 60, 0, DirectSoundWaveData_848A8A4, 255, 0, 255, 165
 
 @ Direct Sound 8451FFC
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_848BD68
-	.byte 255, 0, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_848BD68, 255, 0, 255, 127
 
 @ Direct Sound 8452008
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_848C4A4
-	.byte 255, 0, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_848C4A4, 255, 0, 255, 127
 
 @ Noise 8452014
 	.byte 0xc, 0x3c, 0x0, 0x0
@@ -69339,19 +68487,13 @@ VoiceGroupTable_8451F90: @ 8451F90
 	voice_square_2 3, 2, 7, 0, 0
 
 @ Direct Sound 8452038
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8487330
-	.byte 255, 226, 0, 127
+	voice_directsound 60, 0, DirectSoundWaveData_8487330, 255, 226, 0, 127
 
 @ Direct Sound 8452044
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_848E094
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_848E094, 255, 0, 255, 0
 
 @ Direct Sound 8452050
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8487330
-	.byte 255, 204, 0, 127
+	voice_directsound 60, 0, DirectSoundWaveData_8487330, 255, 204, 0, 127
 
 @ SquareWave1 845205C
 	.byte 0x9, 0x3c, 0x0, 0x0
@@ -69360,14 +68502,10 @@ VoiceGroupTable_8451F90: @ 8451F90
 	.byte 0, 2, 0, 1
 
 @ Direct Sound 8452068
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_848F448
-	.byte 255, 0, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_848F448, 255, 0, 255, 127
 
 @ Direct Sound 8452074
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8487330
-	.byte 255, 0, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_8487330, 255, 0, 255, 127
 
 @ SquareWave1 8452080
 	.byte 0x1, 0x3c, 0x0, 0x67
@@ -69376,24 +68514,16 @@ VoiceGroupTable_8451F90: @ 8451F90
 	.byte 0, 7, 0, 0
 
 @ Direct Sound 845208C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_845C238
-	.byte 255, 0, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_845C238, 255, 0, 255, 127
 
 @ Direct Sound 8452098
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8491ACC
-	.byte 255, 0, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_8491ACC, 255, 0, 255, 127
 
 @ Direct Sound 84520A4
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8492D10
-	.byte 255, 0, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_8492D10, 255, 0, 255, 127
 
 @ Direct Sound 84520B0
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_845B2B4
-	.byte 255, 0, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_845B2B4, 255, 0, 255, 127
 
 @ Noise 84520BC
 	.byte 0xc, 0x3c, 0x0, 0x0
@@ -69402,9 +68532,7 @@ VoiceGroupTable_8451F90: @ 8451F90
 	.byte 0, 7, 15, 1
 
 @ Direct Sound 84520C8
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8493D20
-	.byte 255, 0, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_8493D20, 255, 0, 255, 127
 
 @ Noise 84520D4
 	.byte 0xc, 0x3c, 0x0, 0x0
@@ -69413,14 +68541,10 @@ VoiceGroupTable_8451F90: @ 8451F90
 	.byte 0, 7, 15, 1
 
 @ Direct Sound 84520E0
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8456330
-	.byte 255, 246, 0, 127
+	voice_directsound 60, 0, DirectSoundWaveData_8456330, 255, 246, 0, 127
 
 @ Direct Sound 84520EC
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8495028
-	.byte 255, 0, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_8495028, 255, 0, 255, 127
 
 @ SquareWave1 84520F8
 	.byte 0x9, 0x3c, 0x0, 0x13
@@ -69429,9 +68553,7 @@ VoiceGroupTable_8451F90: @ 8451F90
 	.byte 0, 2, 0, 0
 
 @ Direct Sound 8452104
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8497134
-	.byte 255, 0, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_8497134, 255, 0, 255, 127
 
 @ SquareWave1 8452110
 	.byte 0x1, 0x3c, 0x0, 0x67
@@ -69440,49 +68562,31 @@ VoiceGroupTable_8451F90: @ 8451F90
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 845211C
-	.byte 0x10, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8495028
-	.byte 255, 0, 255, 127
+	voice_directsound_alt 60, 0, DirectSoundWaveData_8495028, 255, 0, 255, 127
 
 @ Direct Sound 8452128
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84571CC
-	.byte 255, 255, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_84571CC, 255, 255, 255, 127
 
 @ Direct Sound 8452134
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8458CD0
-	.byte 255, 0, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_8458CD0, 255, 0, 255, 127
 
 @ Direct Sound 8452140
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8499110
-	.byte 255, 0, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_8499110, 255, 0, 255, 127
 
 @ Direct Sound 845214C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8497134
-	.byte 255, 242, 0, 0
+	voice_directsound 60, 0, DirectSoundWaveData_8497134, 255, 242, 0, 0
 
 @ Direct Sound 8452158
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_849B320
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_849B320, 255, 0, 255, 0
 
 @ Direct Sound 8452164
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_849BAEC
-	.byte 255, 165, 90, 216
+	voice_directsound 60, 0, DirectSoundWaveData_849BAEC, 255, 165, 90, 216
 
 @ Direct Sound 8452170
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_845DAF0
-	.byte 255, 127, 0, 188
+	voice_directsound 60, 0, DirectSoundWaveData_845DAF0, 255, 127, 0, 188
 
 @ Direct Sound 845217C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_849D45C
-	.byte 255, 249, 0, 165
+	voice_directsound 60, 0, DirectSoundWaveData_849D45C, 255, 249, 0, 165
 
 @ SquareWave1 8452188
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -69491,24 +68595,16 @@ VoiceGroupTable_8451F90: @ 8451F90
 	.byte 4, 6, 0, 0
 
 @ Direct Sound 8452194
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8456330
-	.byte 13, 0, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_8456330, 13, 0, 255, 127
 
 @ Direct Sound 84521A0
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_849BAEC
-	.byte 13, 0, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_849BAEC, 13, 0, 255, 127
 
 @ Direct Sound 84521AC
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_849F40C
-	.byte 255, 0, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_849F40C, 255, 0, 255, 127
 
 @ Direct Sound 84521B8
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A26EC
-	.byte 255, 252, 0, 204
+	voice_directsound 60, 0, DirectSoundWaveData_84A26EC, 255, 252, 0, 204
 
 @ SquareWave1 84521C4
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -69517,9 +68613,7 @@ VoiceGroupTable_8451F90: @ 8451F90
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 84521D0
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A311C
-	.byte 255, 235, 0, 204
+	voice_directsound 60, 0, DirectSoundWaveData_84A311C, 255, 235, 0, 204
 
 @ SquareWave1 84521DC
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -69528,19 +68622,13 @@ VoiceGroupTable_8451F90: @ 8451F90
 	.byte 4, 0, 15, 0
 
 @ Direct Sound 84521E8
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A311C
-	.byte 255, 188, 0, 0
+	voice_directsound 60, 0, DirectSoundWaveData_84A311C, 255, 188, 0, 0
 
 @ Direct Sound 84521F4
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_849BAEC
-	.byte 255, 226, 0, 127
+	voice_directsound 60, 0, DirectSoundWaveData_849BAEC, 255, 226, 0, 127
 
 @ Direct Sound 8452200
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8460E60
-	.byte 26, 0, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_8460E60, 26, 0, 255, 127
 
 @ SquareWave1 845220C
 	.byte 0x9, 0x3c, 0x0, 0x0
@@ -69549,9 +68637,7 @@ VoiceGroupTable_8451F90: @ 8451F90
 	.byte 0, 1, 0, 0
 
 @ Direct Sound 8452218
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8456330
-	.byte 255, 252, 0, 127
+	voice_directsound 60, 0, DirectSoundWaveData_8456330, 255, 252, 0, 127
 
 @ SquareWave1 8452224
 	.byte 0x9, 0x3c, 0x0, 0x0
@@ -69560,9 +68646,7 @@ VoiceGroupTable_8451F90: @ 8451F90
 	.byte 0, 2, 0, 0
 
 @ Direct Sound 8452230
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_848BD68
-	.byte 255, 127, 0, 127
+	voice_directsound 60, 0, DirectSoundWaveData_848BD68, 255, 127, 0, 127
 
 @ Noise 845223C
 	.byte 0xc, 0x3c, 0x0, 0x0
@@ -69571,24 +68655,16 @@ VoiceGroupTable_8451F90: @ 8451F90
 	.byte 1, 6, 0, 0
 
 @ Direct Sound 8452248
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8457D98
-	.byte 255, 255, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_8457D98, 255, 255, 255, 127
 
 @ Direct Sound 8452254
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_845B9A8
-	.byte 255, 255, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_845B9A8, 255, 255, 255, 127
 
 @ Direct Sound 8452260
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A3B50
-	.byte 255, 255, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_84A3B50, 255, 255, 255, 127
 
 @ Direct Sound 845226C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_847CBAC
-	.byte 11, 242, 0, 127
+	voice_directsound 60, 0, DirectSoundWaveData_847CBAC, 11, 242, 0, 127
 
 @ SquareWave1 8452278
 	.byte 0x9, 0x3c, 0x0, 0x0
@@ -69597,19 +68673,13 @@ VoiceGroupTable_8451F90: @ 8451F90
 	.byte 4, 6, 0, 0
 
 @ Direct Sound 8452284
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A5690
-	.byte 255, 255, 255, 127
+	voice_directsound 60, 0, DirectSoundWaveData_84A5690, 255, 255, 255, 127
 
 @ Direct Sound 8452290
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A5F58
-	.byte 255, 0, 255, 165
+	voice_directsound 60, 0, DirectSoundWaveData_84A5F58, 255, 0, 255, 165
 
 @ Direct Sound 845229C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_845CAB0
-	.byte 255, 0, 255, 165
+	voice_directsound 60, 0, DirectSoundWaveData_845CAB0, 255, 0, 255, 165
 
 @ Noise 84522A8
 	.byte 0xc, 0x3c, 0x0, 0x0
@@ -69618,14 +68688,10 @@ VoiceGroupTable_8451F90: @ 8451F90
 	.byte 5, 7, 15, 1
 
 @ Direct Sound 84522B4
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8487330
-	.byte 128, 242, 0, 165
+	voice_directsound 60, 0, DirectSoundWaveData_8487330, 128, 242, 0, 165
 
 @ Direct Sound 84522C0
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_846A4B8
-	.byte 255, 0, 255, 165
+	voice_directsound 60, 0, DirectSoundWaveData_846A4B8, 255, 0, 255, 165
 
 @ SquareWave1 84522CC
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -69652,9 +68718,7 @@ VoiceGroupTable_8451F90: @ 8451F90
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 84522FC
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8497134
-	.byte 15, 127, 231, 127
+	voice_directsound 60, 0, DirectSoundWaveData_8497134, 15, 127, 231, 127
 
 @ SquareWave1 8452308
 	.byte 0x1, 0x3c, 0x0, 0x0
@@ -69945,34 +69009,22 @@ VoiceGroupTable_8451F90: @ 8451F90
 	.byte 0, 0, 15, 0
 
 @ Direct Sound 8452548
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A7328
-	.byte 255, 0, 255, 165
+	voice_directsound 60, 0, DirectSoundWaveData_84A7328, 255, 0, 255, 165
 
 @ Direct Sound 8452554
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A7F38
-	.byte 255, 0, 255, 165
+	voice_directsound 60, 0, DirectSoundWaveData_84A7F38, 255, 0, 255, 165
 
 @ Direct Sound 8452560
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A8AC8
-	.byte 255, 0, 255, 165
+	voice_directsound 60, 0, DirectSoundWaveData_84A8AC8, 255, 0, 255, 165
 
 @ Direct Sound 845256C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A9564
-	.byte 255, 0, 255, 165
+	voice_directsound 60, 0, DirectSoundWaveData_84A9564, 255, 0, 255, 165
 
 @ Direct Sound 8452578
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84A9EAC
-	.byte 255, 0, 255, 165
+	voice_directsound 60, 0, DirectSoundWaveData_84A9EAC, 255, 0, 255, 165
 
 @ Direct Sound 8452584
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_84AA8F4
-	.byte 255, 0, 255, 165
+	voice_directsound 60, 0, DirectSoundWaveData_84AA8F4, 255, 0, 255, 165
 
 gUnknown_08452590:: @ 8452590
 	.incbin "baserom.gba", 0x00452590, 0x600
@@ -70001,259 +69053,157 @@ gUnknown_084549C0:: @ 84549C0
 VoiceGroupTable_84549F0: @ 84549F0
 
 @ Direct Sound 84549F0
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8639898
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_8639898, 255, 0, 255, 0
 
 @ Direct Sound 84549FC
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8639EF8
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_8639EF8, 255, 0, 255, 0
 
 @ Direct Sound 8454A08
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_863A3DC
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_863A3DC, 255, 0, 255, 0
 
 @ Direct Sound 8454A14
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_863AD2C
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_863AD2C, 255, 0, 255, 0
 
 @ Direct Sound 8454A20
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_863B79C
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_863B79C, 255, 0, 255, 0
 
 @ Direct Sound 8454A2C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_863BABC
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_863BABC, 255, 0, 255, 0
 
 @ Direct Sound 8454A38
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_863C744
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_863C744, 255, 0, 255, 0
 
 @ Direct Sound 8454A44
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_863CD64
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_863CD64, 255, 0, 255, 0
 
 @ Direct Sound 8454A50
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_863D0EC
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_863D0EC, 255, 0, 255, 0
 
 @ Direct Sound 8454A5C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_863DED0
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_863DED0, 255, 0, 255, 0
 
 @ Direct Sound 8454A68
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_863E840
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_863E840, 255, 0, 255, 0
 
 @ Direct Sound 8454A74
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_863EBDC
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_863EBDC, 255, 0, 255, 0
 
 @ Direct Sound 8454A80
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_863F390
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_863F390, 255, 0, 255, 0
 
 @ Direct Sound 8454A8C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_86400EC
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_86400EC, 255, 0, 255, 0
 
 @ Direct Sound 8454A98
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8640330
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_8640330, 255, 0, 255, 0
 
 @ Direct Sound 8454AA4
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8641170
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_8641170, 255, 0, 255, 0
 
 @ Direct Sound 8454AB0
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8641AC4
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_8641AC4, 255, 0, 255, 0
 
 @ Direct Sound 8454ABC
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8641E18
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_8641E18, 255, 0, 255, 0
 
 @ Direct Sound 8454AC8
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_864244C
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_864244C, 255, 0, 255, 0
 
 @ Direct Sound 8454AD4
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_86430B8
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_86430B8, 255, 0, 255, 0
 
 @ Direct Sound 8454AE0
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8643650
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_8643650, 255, 0, 255, 0
 
 @ Direct Sound 8454AEC
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8644154
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_8644154, 255, 0, 255, 0
 
 @ Direct Sound 8454AF8
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8644758
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_8644758, 255, 0, 255, 0
 
 @ Direct Sound 8454B04
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8644950
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_8644950, 255, 0, 255, 0
 
 @ Direct Sound 8454B10
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_86452B4
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_86452B4, 255, 0, 255, 0
 
 @ Direct Sound 8454B1C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8646240
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_8646240, 255, 0, 255, 0
 
 @ Direct Sound 8454B28
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8646878
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_8646878, 255, 0, 255, 0
 
 @ Direct Sound 8454B34
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_864734C
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_864734C, 255, 0, 255, 0
 
 @ Direct Sound 8454B40
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8648290
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_8648290, 255, 0, 255, 0
 
 @ Direct Sound 8454B4C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8648808
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_8648808, 255, 0, 255, 0
 
 @ Direct Sound 8454B58
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8649654
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_8649654, 255, 0, 255, 0
 
 @ Direct Sound 8454B64
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_864A55C
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_864A55C, 255, 0, 255, 0
 
 @ Direct Sound 8454B70
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_864B030
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_864B030, 255, 0, 255, 0
 
 @ Direct Sound 8454B7C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_864BBC4
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_864BBC4, 255, 0, 255, 0
 
 @ Direct Sound 8454B88
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_864C59C
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_864C59C, 255, 0, 255, 0
 
 @ Direct Sound 8454B94
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_864CBDC
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_864CBDC, 255, 0, 255, 0
 
 @ Direct Sound 8454BA0
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_864D6BC
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_864D6BC, 255, 0, 255, 0
 
 @ Direct Sound 8454BAC
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_864DCF8
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_864DCF8, 255, 0, 255, 0
 
 @ Direct Sound 8454BB8
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_864E410
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_864E410, 255, 0, 255, 0
 
 @ Direct Sound 8454BC4
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_864ED4C
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_864ED4C, 255, 0, 255, 0
 
 @ Direct Sound 8454BD0
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_864F508
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_864F508, 255, 0, 255, 0
 
 @ Direct Sound 8454BDC
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_864FA6C
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_864FA6C, 255, 0, 255, 0
 
 @ Direct Sound 8454BE8
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_86507E0
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_86507E0, 255, 0, 255, 0
 
 @ Direct Sound 8454BF4
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8650C5C
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_8650C5C, 255, 0, 255, 0
 
 @ Direct Sound 8454C00
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8651148
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_8651148, 255, 0, 255, 0
 
 @ Direct Sound 8454C0C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8651910
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_8651910, 255, 0, 255, 0
 
 @ Direct Sound 8454C18
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_865250C
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_865250C, 255, 0, 255, 0
 
 @ Direct Sound 8454C24
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8652884
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_8652884, 255, 0, 255, 0
 
 @ Direct Sound 8454C30
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8653040
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_8653040, 255, 0, 255, 0
 
 @ Direct Sound 8454C3C
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8653CA4
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_8653CA4, 255, 0, 255, 0
 
 @ Direct Sound 8454C48
-	.byte 0x0, 0x3c, 0x0, 0x0
-	.4byte DirectSoundWaveData_8654170
-	.byte 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_8654170, 255, 0, 255, 0
 
 VoiceGroupTable_8454C54: @ 8454C54
 
