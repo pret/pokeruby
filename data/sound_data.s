@@ -4,9 +4,7 @@
 
 gUnknown_0842FC88:: @ 842FC88
 @ Percussion 842FC88
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ Key-Split 842FC94
 	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
@@ -789,9 +787,7 @@ VoiceGroupTable_8430894: @ 8430894
 VoiceGroupTable_84308AC: @ 84308AC
 
 @ Percussion 84308AC
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_8435FAC
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_8435FAC
 
 @ SquareWave1 84308B8
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -1045,9 +1041,7 @@ VoiceGroupTable_84308AC: @ 84308AC
 VoiceGroupTable_8430C9C: @ 8430C9C
 
 @ Percussion 8430C9C
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_8433BAC
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_8433BAC
 
 @ SquareWave1 8430CA8
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -1433,9 +1427,7 @@ VoiceGroupTable_8430C9C: @ 8430C9C
 VoiceGroupTable_843129C: @ 843129C
 
 @ Percussion 843129C
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ Key-Split 84312A8
 	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
@@ -1743,9 +1735,7 @@ VoiceGroupTable_843129C: @ 843129C
 VoiceGroupTable_8431764: @ 8431764
 
 @ Percussion 8431764
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 8431770
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -2017,9 +2007,7 @@ VoiceGroupTable_8431764: @ 8431764
 VoiceGroupTable_8431B9C: @ 8431B9C
 
 @ Percussion 8431B9C
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ Key-Split 8431BA8
 	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
@@ -2276,9 +2264,7 @@ VoiceGroupTable_8431B9C: @ 8431B9C
 VoiceGroupTable_8431F98: @ 8431F98
 
 @ Percussion 8431F98
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_84323E8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_84323E8
 
 @ Key-Split 8431FA4
 	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
@@ -2753,9 +2739,7 @@ VoiceGroupTable_84323E8: @ 84323E8
 VoiceGroupTable_84326F4: @ 84326F4
 
 @ Percussion 84326F4
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave2 8432700
 	voice_square_2_alt 2, 0, 3, 3, 1
@@ -3030,9 +3014,7 @@ VoiceGroupTable_84326F4: @ 84326F4
 VoiceGroupTable_8432B38: @ 8432B38
 
 @ Percussion 8432B38
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ Key-Split 8432B44
 	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
@@ -3938,9 +3920,7 @@ VoiceGroupTable_8433534: @ 8433534
 VoiceGroupTable_8433948: @ 8433948
 
 @ Percussion 8433948
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 8433954
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -4295,9 +4275,7 @@ VoiceGroupTable_8433EB8: @ 8433EB8
 	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
 
 @ Percussion 8433EC4
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 8433ED0
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -4563,9 +4541,7 @@ VoiceGroupTable_8433EB8: @ 8433EB8
 VoiceGroupTable_84342E4: @ 84342E4
 
 @ Percussion 84342E4
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 84342F0
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -4840,9 +4816,7 @@ VoiceGroupTable_84342E4: @ 84342E4
 VoiceGroupTable_8434728: @ 8434728
 
 @ Percussion 8434728
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 8434734
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -5096,9 +5070,7 @@ VoiceGroupTable_8434728: @ 8434728
 VoiceGroupTable_8434B18: @ 8434B18
 
 @ Percussion 8434B18
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 8434B24
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -5355,9 +5327,7 @@ VoiceGroupTable_8434B18: @ 8434B18
 VoiceGroupTable_8434F14: @ 8434F14
 
 @ Percussion 8434F14
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ Key-Split 8434F20
 	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
@@ -5743,9 +5713,7 @@ VoiceGroupTable_8434F14: @ 8434F14
 VoiceGroupTable_8435514: @ 8435514
 
 @ Percussion 8435514
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 8435520
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -6262,9 +6230,7 @@ VoiceGroupTable_84358F8: @ 84358F8
 VoiceGroupTable_8435D18: @ 8435D18
 
 @ Percussion 8435D18
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_8435FAC
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_8435FAC
 
 @ Key-Split 8435D24
 	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
@@ -6628,9 +6594,7 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 VoiceGroupTable_84362B8: @ 84362B8
 
 @ Percussion 84362B8
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_84323E8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_84323E8
 
 @ Key-Split 84362C4
 	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
@@ -7016,9 +6980,7 @@ VoiceGroupTable_84362B8: @ 84362B8
 VoiceGroupTable_84368B8: @ 84368B8
 
 @ Percussion 84368B8
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 84368C4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -7269,9 +7231,7 @@ VoiceGroupTable_84368B8: @ 84368B8
 VoiceGroupTable_8436C9C: @ 8436C9C
 
 @ Percussion 8436C9C
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ Key-Split 8436CA8
 	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
@@ -7525,9 +7485,7 @@ VoiceGroupTable_8436C9C: @ 8436C9C
 VoiceGroupTable_843708C: @ 843708C
 
 @ Percussion 843708C
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_8435FAC
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_8435FAC
 
 @ Key-Split 8437098
 	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
@@ -7784,9 +7742,7 @@ VoiceGroupTable_843708C: @ 843708C
 VoiceGroupTable_8437488: @ 8437488
 
 @ Percussion 8437488
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 8437494
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -8172,9 +8128,7 @@ VoiceGroupTable_8437488: @ 8437488
 VoiceGroupTable_8437A88: @ 8437A88
 
 @ Percussion 8437A88
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_8435FAC
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_8435FAC
 
 @ SquareWave1 8437A94
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -8443,9 +8397,7 @@ VoiceGroupTable_8437A88: @ 8437A88
 VoiceGroupTable_8437EB4: @ 8437EB4
 
 @ Percussion 8437EB4
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 8437EC0
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -8693,9 +8645,7 @@ VoiceGroupTable_8437EB4: @ 8437EB4
 VoiceGroupTable_843828C: @ 843828C
 
 @ Percussion 843828C
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 8438298
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -9081,9 +9031,7 @@ VoiceGroupTable_843828C: @ 843828C
 VoiceGroupTable_843888C: @ 843888C
 
 @ Percussion 843888C
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 8438898
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -9469,9 +9417,7 @@ VoiceGroupTable_843888C: @ 843888C
 VoiceGroupTable_8438E8C: @ 8438E8C
 
 @ Percussion 8438E8C
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 8438E98
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -9857,9 +9803,7 @@ VoiceGroupTable_8438E8C: @ 8438E8C
 VoiceGroupTable_843948C: @ 843948C
 
 @ Percussion 843948C
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 8439498
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -10735,9 +10679,7 @@ VoiceGroupTable_8439E58: @ 8439E58
 VoiceGroupTable_843A224: @ 843A224
 
 @ Percussion 843A224
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 843A230
 	voice_square_1_alt 0, 1, 0, 2, 0, 1
@@ -11509,9 +11451,7 @@ VoiceGroupTable_843A824: @ 843A824
 VoiceGroupTable_843AE24: @ 843AE24
 
 @ Percussion 843AE24
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 843AE30
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -11897,9 +11837,7 @@ VoiceGroupTable_843AE24: @ 843AE24
 VoiceGroupTable_843B424: @ 843B424
 
 @ Percussion 843B424
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 843B430
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -12165,9 +12103,7 @@ VoiceGroupTable_843B424: @ 843B424
 VoiceGroupTable_843B844: @ 843B844
 
 @ Percussion 843B844
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ Key-Split 843B850
 	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
@@ -12553,9 +12489,7 @@ VoiceGroupTable_843B844: @ 843B844
 VoiceGroupTable_843BE44: @ 843BE44
 
 @ Percussion 843BE44
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ Key-Split 843BE50
 	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
@@ -12941,9 +12875,7 @@ VoiceGroupTable_843BE44: @ 843BE44
 VoiceGroupTable_843C444: @ 843C444
 
 @ Percussion 843C444
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ Key-Split 843C450
 	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
@@ -13167,9 +13099,7 @@ VoiceGroupTable_843C444: @ 843C444
 VoiceGroupTable_843C7BC: @ 843C7BC
 
 @ Percussion 843C7BC
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 843C7C8
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -13555,9 +13485,7 @@ VoiceGroupTable_843C7BC: @ 843C7BC
 VoiceGroupTable_843CDBC: @ 843CDBC
 
 @ Percussion 843CDBC
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ Key-Split 843CDC8
 	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
@@ -13943,9 +13871,7 @@ VoiceGroupTable_843CDBC: @ 843CDBC
 VoiceGroupTable_843D3BC: @ 843D3BC
 
 @ Percussion 843D3BC
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 843D3C8
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -14331,9 +14257,7 @@ VoiceGroupTable_843D3BC: @ 843D3BC
 VoiceGroupTable_843D9BC: @ 843D9BC
 
 @ Percussion 843D9BC
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 843D9C8
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -14719,9 +14643,7 @@ VoiceGroupTable_843D9BC: @ 843D9BC
 VoiceGroupTable_843DFBC: @ 843DFBC
 
 @ Percussion 843DFBC
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 843DFC8
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -15107,9 +15029,7 @@ VoiceGroupTable_843DFBC: @ 843DFBC
 VoiceGroupTable_843E5BC: @ 843E5BC
 
 @ Percussion 843E5BC
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 843E5C8
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -15495,9 +15415,7 @@ VoiceGroupTable_843E5BC: @ 843E5BC
 VoiceGroupTable_843EBBC: @ 843EBBC
 
 @ Percussion 843EBBC
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 843EBC8
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -15883,9 +15801,7 @@ VoiceGroupTable_843EBBC: @ 843EBBC
 VoiceGroupTable_843F1BC: @ 843F1BC
 
 @ Percussion 843F1BC
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ Key-Split 843F1C8
 	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
@@ -16154,9 +16070,7 @@ VoiceGroupTable_843F1BC: @ 843F1BC
 VoiceGroupTable_843F5E8: @ 843F5E8
 
 @ Percussion 843F5E8
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ Key-Split 843F5F4
 	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
@@ -16542,9 +16456,7 @@ VoiceGroupTable_843F5E8: @ 843F5E8
 VoiceGroupTable_843FBE8: @ 843FBE8
 
 @ Percussion 843FBE8
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 843FBF4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -16930,9 +16842,7 @@ VoiceGroupTable_843FBE8: @ 843FBE8
 VoiceGroupTable_84401E8: @ 84401E8
 
 @ Percussion 84401E8
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 84401F4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -17318,9 +17228,7 @@ VoiceGroupTable_84401E8: @ 84401E8
 VoiceGroupTable_84407E8: @ 84407E8
 
 @ Percussion 84407E8
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 84407F4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -17706,9 +17614,7 @@ VoiceGroupTable_84407E8: @ 84407E8
 VoiceGroupTable_8440DE8: @ 8440DE8
 
 @ Percussion 8440DE8
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 8440DF4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -18094,9 +18000,7 @@ VoiceGroupTable_8440DE8: @ 8440DE8
 VoiceGroupTable_84413E8: @ 84413E8
 
 @ Percussion 84413E8
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ Key-Split 84413F4
 	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
@@ -18482,9 +18386,7 @@ VoiceGroupTable_84413E8: @ 84413E8
 VoiceGroupTable_84419E8: @ 84419E8
 
 @ Percussion 84419E8
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 84419F4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -18870,9 +18772,7 @@ VoiceGroupTable_84419E8: @ 84419E8
 VoiceGroupTable_8441FE8: @ 8441FE8
 
 @ Percussion 8441FE8
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ Key-Split 8441FF4
 	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
@@ -19258,9 +19158,7 @@ VoiceGroupTable_8441FE8: @ 8441FE8
 VoiceGroupTable_84425E8: @ 84425E8
 
 @ Percussion 84425E8
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ Key-Split 84425F4
 	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
@@ -19646,9 +19544,7 @@ VoiceGroupTable_84425E8: @ 84425E8
 VoiceGroupTable_8442BE8: @ 8442BE8
 
 @ Percussion 8442BE8
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 8442BF4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -20034,9 +19930,7 @@ VoiceGroupTable_8442BE8: @ 8442BE8
 VoiceGroupTable_84431E8: @ 84431E8
 
 @ Percussion 84431E8
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 84431F4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -20422,9 +20316,7 @@ VoiceGroupTable_84431E8: @ 84431E8
 VoiceGroupTable_84437E8: @ 84437E8
 
 @ Percussion 84437E8
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 84437F4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -20810,9 +20702,7 @@ VoiceGroupTable_84437E8: @ 84437E8
 VoiceGroupTable_8443DE8: @ 8443DE8
 
 @ Percussion 8443DE8
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ Key-Split 8443DF4
 	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
@@ -21198,9 +21088,7 @@ VoiceGroupTable_8443DE8: @ 8443DE8
 VoiceGroupTable_84443E8: @ 84443E8
 
 @ Percussion 84443E8
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ Key-Split 84443F4
 	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
@@ -21586,9 +21474,7 @@ VoiceGroupTable_84443E8: @ 84443E8
 VoiceGroupTable_84449E8: @ 84449E8
 
 @ Percussion 84449E8
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 84449F4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -21974,9 +21860,7 @@ VoiceGroupTable_84449E8: @ 84449E8
 VoiceGroupTable_8444FE8: @ 8444FE8
 
 @ Percussion 8444FE8
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ Key-Split 8444FF4
 	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
@@ -22362,9 +22246,7 @@ VoiceGroupTable_8444FE8: @ 8444FE8
 VoiceGroupTable_84455E8: @ 84455E8
 
 @ Percussion 84455E8
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 84455F4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -22750,9 +22632,7 @@ VoiceGroupTable_84455E8: @ 84455E8
 VoiceGroupTable_8445BE8: @ 8445BE8
 
 @ Percussion 8445BE8
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 8445BF4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -23138,9 +23018,7 @@ VoiceGroupTable_8445BE8: @ 8445BE8
 VoiceGroupTable_84461E8: @ 84461E8
 
 @ Percussion 84461E8
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 84461F4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -23526,9 +23404,7 @@ VoiceGroupTable_84461E8: @ 84461E8
 VoiceGroupTable_84467E8: @ 84467E8
 
 @ Percussion 84467E8
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ Key-Split 84467F4
 	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
@@ -23914,9 +23790,7 @@ VoiceGroupTable_84467E8: @ 84467E8
 VoiceGroupTable_8446DE8: @ 8446DE8
 
 @ Percussion 8446DE8
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 8446DF4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -24310,9 +24184,7 @@ VoiceGroupTable_84473E8: @ 84473E8
 VoiceGroupTable_8447400: @ 8447400
 
 @ Percussion 8447400
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ Key-Split 844740C
 	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
@@ -24698,9 +24570,7 @@ VoiceGroupTable_8447400: @ 8447400
 VoiceGroupTable_8447A00: @ 8447A00
 
 @ Percussion 8447A00
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ Key-Split 8447A0C
 	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
@@ -24954,9 +24824,7 @@ VoiceGroupTable_8447A00: @ 8447A00
 VoiceGroupTable_8447DF0: @ 8447DF0
 
 @ Percussion 8447DF0
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 8447DFC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -25342,9 +25210,7 @@ VoiceGroupTable_8447DF0: @ 8447DF0
 VoiceGroupTable_84483F0: @ 84483F0
 
 @ Percussion 84483F0
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 84483FC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -25730,9 +25596,7 @@ VoiceGroupTable_84483F0: @ 84483F0
 VoiceGroupTable_84489F0: @ 84489F0
 
 @ Percussion 84489F0
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 84489FC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -26118,9 +25982,7 @@ VoiceGroupTable_84489F0: @ 84489F0
 VoiceGroupTable_8448FF0: @ 8448FF0
 
 @ Percussion 8448FF0
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 8448FFC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -26506,9 +26368,7 @@ VoiceGroupTable_8448FF0: @ 8448FF0
 VoiceGroupTable_84495F0: @ 84495F0
 
 @ Percussion 84495F0
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ Key-Split 84495FC
 	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
@@ -26894,9 +26754,7 @@ VoiceGroupTable_84495F0: @ 84495F0
 VoiceGroupTable_8449BF0: @ 8449BF0
 
 @ Percussion 8449BF0
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 8449BFC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -27282,9 +27140,7 @@ VoiceGroupTable_8449BF0: @ 8449BF0
 VoiceGroupTable_844A1F0: @ 844A1F0
 
 @ Percussion 844A1F0
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 844A1FC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -27670,9 +27526,7 @@ VoiceGroupTable_844A1F0: @ 844A1F0
 VoiceGroupTable_844A7F0: @ 844A7F0
 
 @ Percussion 844A7F0
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ Key-Split 844A7FC
 	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
@@ -28058,9 +27912,7 @@ VoiceGroupTable_844A7F0: @ 844A7F0
 VoiceGroupTable_844ADF0: @ 844ADF0
 
 @ Percussion 844ADF0
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 844ADFC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -28446,9 +28298,7 @@ VoiceGroupTable_844ADF0: @ 844ADF0
 VoiceGroupTable_844B3F0: @ 844B3F0
 
 @ Percussion 844B3F0
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 844B3FC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -28834,9 +28684,7 @@ VoiceGroupTable_844B3F0: @ 844B3F0
 VoiceGroupTable_844B9F0: @ 844B9F0
 
 @ Percussion 844B9F0
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 844B9FC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -29222,9 +29070,7 @@ VoiceGroupTable_844B9F0: @ 844B9F0
 VoiceGroupTable_844BFF0: @ 844BFF0
 
 @ Percussion 844BFF0
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 844BFFC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -29610,9 +29456,7 @@ VoiceGroupTable_844BFF0: @ 844BFF0
 VoiceGroupTable_844C5F0: @ 844C5F0
 
 @ Percussion 844C5F0
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 844C5FC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -29998,9 +29842,7 @@ VoiceGroupTable_844C5F0: @ 844C5F0
 VoiceGroupTable_844CBF0: @ 844CBF0
 
 @ Percussion 844CBF0
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ Key-Split 844CBFC
 	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
@@ -30386,9 +30228,7 @@ VoiceGroupTable_844CBF0: @ 844CBF0
 VoiceGroupTable_844D1F0: @ 844D1F0
 
 @ Percussion 844D1F0
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 844D1FC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -30774,9 +30614,7 @@ VoiceGroupTable_844D1F0: @ 844D1F0
 VoiceGroupTable_844D7F0: @ 844D7F0
 
 @ Percussion 844D7F0
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 844D7FC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -31162,9 +31000,7 @@ VoiceGroupTable_844D7F0: @ 844D7F0
 VoiceGroupTable_844DDF0: @ 844DDF0
 
 @ Percussion 844DDF0
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 844DDFC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -31550,9 +31386,7 @@ VoiceGroupTable_844DDF0: @ 844DDF0
 VoiceGroupTable_844E3F0: @ 844E3F0
 
 @ Percussion 844E3F0
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ Key-Split 844E3FC
 	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
@@ -32132,9 +31966,7 @@ VoiceGroupTable_844E918: @ 844E918
 VoiceGroupTable_844ECF0: @ 844ECF0
 
 @ Percussion 844ECF0
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 844ECFC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -32382,9 +32214,7 @@ VoiceGroupTable_844ECF0: @ 844ECF0
 VoiceGroupTable_844F0C8: @ 844F0C8
 
 @ Percussion 844F0C8
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 844F0D4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -32659,9 +32489,7 @@ VoiceGroupTable_844F0C8: @ 844F0C8
 VoiceGroupTable_844F50C: @ 844F50C
 
 @ Percussion 844F50C
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ Key-Split 844F518
 	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
@@ -32936,9 +32764,7 @@ VoiceGroupTable_844F50C: @ 844F50C
 VoiceGroupTable_844F950: @ 844F950
 
 @ Percussion 844F950
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ Key-Split 844F95C
 	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
@@ -33213,9 +33039,7 @@ VoiceGroupTable_844F950: @ 844F950
 VoiceGroupTable_844FD94: @ 844FD94
 
 @ Percussion 844FD94
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ Key-Split 844FDA0
 	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
@@ -33475,9 +33299,7 @@ VoiceGroupTable_844FD94: @ 844FD94
 VoiceGroupTable_845019C: @ 845019C
 
 @ Percussion 845019C
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 84501A8
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -33731,9 +33553,7 @@ VoiceGroupTable_845019C: @ 845019C
 VoiceGroupTable_845058C: @ 845058C
 
 @ Percussion 845058C
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 8450598
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -34119,9 +33939,7 @@ VoiceGroupTable_845058C: @ 845058C
 VoiceGroupTable_8450B8C: @ 8450B8C
 
 @ Percussion 8450B8C
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ Key-Split 8450B98
 	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
@@ -34384,9 +34202,7 @@ VoiceGroupTable_8450B8C: @ 8450B8C
 VoiceGroupTable_8450FA0: @ 8450FA0
 
 @ Percussion 8450FA0
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 8450FAC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -34640,9 +34456,7 @@ VoiceGroupTable_8450FA0: @ 8450FA0
 VoiceGroupTable_8451390: @ 8451390
 
 @ Percussion 8451390
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 845139C
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -35979,9 +35793,7 @@ VoiceGroupTable_84549F0: @ 84549F0
 VoiceGroupTable_8454C54: @ 8454C54
 
 @ Percussion 8454C54
-	.byte 0x80, 0, 0, 0
-	.4byte VoiceGroupTable_842FEF8
-	.4byte 0x00000000
+	voice_keysplit_all VoiceGroupTable_842FEF8
 
 @ SquareWave1 8454C60
 	voice_square_1 0, 2, 0, 0, 15, 0
