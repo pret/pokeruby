@@ -55,13 +55,13 @@ static int s_maxNote;
 
 void Seek(long offset)
 {
-    if (fseek(g_inputFile, offset, SEEK_SET) != 0)
+    if (std::fseek(g_inputFile, offset, SEEK_SET) != 0)
         RaiseError("failed to seek to %l", offset);
 }
 
 void Skip(long offset)
 {
-    if (fseek(g_inputFile, offset, SEEK_CUR) != 0)
+    if (std::fseek(g_inputFile, offset, SEEK_CUR) != 0)
         RaiseError("failed to skip %l bytes", offset);
 }
 
@@ -161,7 +161,7 @@ long ReadMidiTrackHeader(long offset)
 
     long size = ReadInt32();
 
-    s_trackDataStart = ftell(g_inputFile);
+    s_trackDataStart = std::ftell(g_inputFile);
 
     return size + 8;
 }
