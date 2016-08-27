@@ -899,15 +899,49 @@ gBattleTerrainTable:: @ 81F95AC
 	.4byte gBattleTerrainAnimTilemap_Building
 	.4byte gBattleTerrainPalette_Plain
 
+	.align 2
 gUnknown_081F9674:: @ 81F9674
-	.incbin "baserom.gba", 0x001f9674, 0xc
+	.4byte REG_BG3HOFS
+	.4byte ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_DEST_RELOAD) << 16) | 1
+	.4byte 1
 
 	.align 2
 gUnknown_081F9680:: @ 81F9680
-	obj_tiles 0x030041d0, 32, 0x1013
+	.4byte 0x030041D0
+	.2byte 0x20
+	.byte 0x13
+	.byte 0x10
+	.4byte BG_VRAM + 0xE104
 
-gUnknown_081F9688:: @ 81F9688
-	.incbin "baserom.gba", 0x001f9688, 0x40
+	.4byte 0x03004250
+	.2byte 0x40
+	.byte 0x13
+	.byte 0x10
+	.4byte BG_VRAM + 0xF104
+
+	.4byte 0x030041D0
+	.2byte 0x60
+	.byte 0x13
+	.byte 0x30
+	.4byte BG_VRAM + 0xE204
+
+	.4byte 0x03004250
+	.2byte 0x80
+	.byte 0x13
+	.byte 0x30
+	.4byte BG_VRAM + 0xF204
+
+	.4byte 0x030041D0
+	.2byte 0x20
+	.byte 0x13
+	.byte 0x18
+	.4byte BG_VRAM + 0xE1C4
+
+	.4byte 0x03004250
+	.2byte 0x40
+	.byte 0x13
+	.byte 0x18
+	.4byte BG_VRAM + 0xF1C4
 
 gUnknown_081F96C8:: @ 81F96C8
 	.string "ヌケニン$" @ "Nukenin" (Shedinja)
@@ -2189,7 +2223,11 @@ gUnknown_0820A784:: @ 820A784
 	obj_tiles Tiles_D129AC, 0x80, 0xd714
 	obj_tiles Tiles_D129AC, 0x80, 0xd715
 
-	.incbin "baserom.gba", 0x0020a794, 0x8
+	.align 2
+gOamData_820A794:: @ 820A794
+	.2byte 0x4000
+	.2byte 0xC000
+	.2byte 0x0400
 
 	.align 2
 gOamData_820A79C:: @ 820A79C
@@ -2213,53 +2251,107 @@ gSpriteTemplate_820A7D4:: @ 820A7D4
 gSpriteTemplate_820A7EC:: @ 820A7EC
 	spr_template 55061, 55059, gOamData_820A79C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_804507C
 
+	.align 2
 gUnknown_0820A804:: @ 820A804
-	.incbin "baserom.gba", 0x0020a804, 0x8
+	.4byte OBJ_VRAM0 + 0x940
+	.4byte OBJ_VRAM0 + 0x960
 
+	.align 2
 gUnknown_0820A80C:: @ 820A80C
-	.incbin "baserom.gba", 0x0020a80c, 0x8
+	.4byte OBJ_VRAM0 + 0x520
+	.4byte OBJ_VRAM0 + 0x540
 
+	.align 2
 gUnknown_0820A814:: @ 820A814
-	.incbin "baserom.gba", 0x0020a814, 0x8
+	.4byte OBJ_VRAM0 + 0x540
+	.4byte OBJ_VRAM0 + 0x560
 
 gUnknown_0820A81C:: @ 820A81C
-	.incbin "baserom.gba", 0x0020a81c, 0x20
+	.string "{COLOR DARK_GREY}{HIGHLIGHT RED}                        "
 
+	.align 2
 gUnknown_0820A83C:: @ 820A83C
-	.incbin "baserom.gba", 0x0020a83c, 0xc
+	.4byte OBJ_VRAM0 + 0x3E0
+	.4byte OBJ_VRAM0 + 0xB00
+	.4byte OBJ_VRAM0 + 0xB20
 
+	.align 2
 gUnknown_0820A848:: @ 820A848
-	.incbin "baserom.gba", 0x0020a848, 0xc
+	.4byte OBJ_VRAM0 + 0x2C0
+	.4byte OBJ_VRAM0 + 0x2E0
+	.4byte OBJ_VRAM0 + 0x600
 
+	.align 2
 gUnknown_0820A854:: @ 820A854
-	.incbin "baserom.gba", 0x0020a854, 0x8
+	.4byte OBJ_VRAM0 + 0xB40
+	.4byte OBJ_VRAM0 + 0xB60
 
+	.align 2
 gUnknown_0820A85C:: @ 820A85C
-	.incbin "baserom.gba", 0x0020a85c, 0x8
+	.4byte OBJ_VRAM0 + 0x620
+	.4byte OBJ_VRAM0 + 0x640
 
 gUnknown_0820A864:: @ 820A864
-	.incbin "baserom.gba", 0x0020a864, 0x18
+	.string "{COLOR DARK_GREY}{HIGHLIGHT RED}              /$"
 
+	.align 2
 gUnknown_0820A87C:: @ 820A87C
-	.incbin "baserom.gba", 0x0020a87c, 0x18
+	.4byte OBJ_VRAM0
+	.4byte OBJ_VRAM0 + 0x20
+	.4byte OBJ_VRAM0 + 0x40
+	.4byte OBJ_VRAM0 + 0x60
+	.4byte OBJ_VRAM0 + 0x80
+	.4byte OBJ_VRAM0 + 0xA0
 
+	.align 2
 gUnknown_0820A894:: @ 820A894
-	.incbin "baserom.gba", 0x0020a894, 0x8
+	.4byte OBJ_VRAM0 + 0xC0
+	.4byte OBJ_VRAM0 + 0xE0
 
 gUnknown_0820A89C:: @ 820A89C
-	.incbin "baserom.gba", 0x0020a89c, 0x14
+	.string "{COLOR DARK_GREY}{HIGHLIGHT TRANSPARENT}              "
 
 gUnknown_0820A8B0:: @ 820A8B0
-	.incbin "baserom.gba", 0x0020a8b0, 0x4
+	.string "{HIGHLIGHT RED}$"
 
+	.align 2
 gUnknown_0820A8B4:: @ 820A8B4
-	.incbin "baserom.gba", 0x0020a8b4, 0x28
+	.4byte OBJ_VRAM0 + 0x40
+	.4byte OBJ_VRAM0 + 0x60
+	.4byte OBJ_VRAM0 + 0x80
+	.4byte OBJ_VRAM0 + 0xA0
+	.4byte OBJ_VRAM0 + 0xC0
+	.4byte OBJ_VRAM0 + 0xE0
+	.4byte OBJ_VRAM0 + 0x800
+	.4byte OBJ_VRAM0 + 0x820
+	.4byte OBJ_VRAM0 + 0x840
+	.4byte OBJ_VRAM0 + 0x860
 
+	.align 2
 gUnknown_0820A8DC:: @ 820A8DC
-	.incbin "baserom.gba", 0x0020a8dc, 0x28
+	.4byte OBJ_VRAM0 + 0x20
+	.4byte OBJ_VRAM0 + 0x40
+	.4byte OBJ_VRAM0 + 0x60
+	.4byte OBJ_VRAM0 + 0x80
+	.4byte OBJ_VRAM0 + 0xA0
+	.4byte OBJ_VRAM0 + 0xC0
+	.4byte OBJ_VRAM0 + 0xE0
+	.4byte OBJ_VRAM0 + 0x400
+	.4byte OBJ_VRAM0 + 0x420
+	.4byte OBJ_VRAM0 + 0x440
 
+	.align 2
 gUnknown_0820A904:: @ 820A904
-	.incbin "baserom.gba", 0x0020a904, 0x28
+	.4byte OBJ_VRAM0 + 0x40
+	.4byte OBJ_VRAM0 + 0x60
+	.4byte OBJ_VRAM0 + 0x80
+	.4byte OBJ_VRAM0 + 0xA0
+	.4byte OBJ_VRAM0 + 0xC0
+	.4byte OBJ_VRAM0 + 0xE0
+	.4byte OBJ_VRAM0 + 0x400
+	.4byte OBJ_VRAM0 + 0x420
+	.4byte OBJ_VRAM0 + 0x440
+	.4byte OBJ_VRAM0 + 0x460
 
 	.align 2
 gUnknown_0820A92C:: @ 820A92C @ graphics
@@ -2299,19 +2391,23 @@ gOamData_820A9EC:: @ 820A9EC
 
 	.align 2
 gSpriteAnim_820A9F4: @ 820A9F4
-	.incbin "baserom.gba", 0x20a9f4, 0x8
+	obj_image_anim_frame 0, 5
+	obj_image_anim_jump 0
 
 	.align 2
 gSpriteAnim_820A9FC: @ 820A9FC
-	.incbin "baserom.gba", 0x20a9fc, 0x8
+	obj_image_anim_frame 4, 1
+	obj_image_anim_jump 0
 
 	.align 2
 gSpriteAnim_820AA04: @ 820AA04
-	.incbin "baserom.gba", 0x20aa04, 0x8
+	obj_image_anim_frame 8, 5
+	obj_image_anim_jump 0
 
 	.align 2
 gSpriteAnim_820AA0C: @ 820AA0C
-	.incbin "baserom.gba", 0x20aa0c, 0x8
+	obj_image_anim_frame 12, 1
+	obj_image_anim_jump 0
 
 	.align 2
 gSpriteAnim_820AA14:: @ 820AA14
