@@ -9,9 +9,7 @@ gUnknown_0842FC88:: @ 842FC88
 	.4byte 0x00000000
 
 @ Key-Split 842FC94
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430204
-	.4byte KeySplitTable_8455224
+	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
 
 @ SquareWave1 842FCA0
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -152,9 +150,7 @@ gUnknown_0842FC88:: @ 842FC88
 	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 204, 193, 239
 
 @ Key-Split 842FEC8
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 842FED4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -180,9 +176,7 @@ VoiceGroupTable_842FEF8: @ 842FEF8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 842FF28
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 842FF34
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -941,9 +935,7 @@ VoiceGroupTable_84308AC: @ 84308AC
 	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 246, 0, 226
 
 @ Key-Split 8430AEC
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 8430AF8
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -967,25 +959,19 @@ VoiceGroupTable_84308AC: @ 84308AC
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8430B4C
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 8430B58
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8430B64
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_843087C
-	.4byte KeySplitTable_8455308
+	voice_keysplit VoiceGroupTable_843087C, KeySplitTable_8455308
 
 @ SquareWave1 8430B70
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8430B7C
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 8430B88
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -1205,9 +1191,7 @@ VoiceGroupTable_8430C9C: @ 8430C9C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8430EDC
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 8430EE8
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -1454,9 +1438,7 @@ VoiceGroupTable_843129C: @ 843129C
 	.4byte 0x00000000
 
 @ Key-Split 84312A8
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430204
-	.4byte KeySplitTable_8455224
+	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
 
 @ Direct Sound 84312B4
 	voice_directsound 60, 0, DirectSoundWaveData_8497134, 255, 178, 180, 165
@@ -1597,9 +1579,7 @@ VoiceGroupTable_843129C: @ 843129C
 	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 246, 0, 226
 
 @ Key-Split 84314DC
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 84314E8
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -1623,25 +1603,19 @@ VoiceGroupTable_843129C: @ 843129C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 843153C
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 8431548
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8431554
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_843087C
-	.4byte KeySplitTable_8455308
+	voice_keysplit VoiceGroupTable_843087C, KeySplitTable_8455308
 
 @ SquareWave1 8431560
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 843156C
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 8431578
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -1915,9 +1889,7 @@ VoiceGroupTable_8431764: @ 8431764
 	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 246, 0, 226
 
 @ Key-Split 84319A4
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 84319B0
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -1941,9 +1913,7 @@ VoiceGroupTable_8431764: @ 8431764
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8431A04
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 8431A10
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -1955,9 +1925,7 @@ VoiceGroupTable_8431764: @ 8431764
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8431A34
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 8431A40
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -2054,9 +2022,7 @@ VoiceGroupTable_8431B9C: @ 8431B9C
 	.4byte 0x00000000
 
 @ Key-Split 8431BA8
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430204
-	.4byte KeySplitTable_8455224
+	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
 
 @ SquareWave1 8431BB4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -2197,9 +2163,7 @@ VoiceGroupTable_8431B9C: @ 8431B9C
 	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 246, 0, 226
 
 @ Key-Split 8431DDC
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 8431DE8
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -2223,9 +2187,7 @@ VoiceGroupTable_8431B9C: @ 8431B9C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8431E3C
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 8431E48
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -2237,9 +2199,7 @@ VoiceGroupTable_8431B9C: @ 8431B9C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8431E6C
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 8431E78
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -2321,9 +2281,7 @@ VoiceGroupTable_8431F98: @ 8431F98
 	.4byte 0x00000000
 
 @ Key-Split 8431FA4
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430204
-	.4byte KeySplitTable_8455224
+	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
 
 @ SquareWave1 8431FB0
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -2464,9 +2422,7 @@ VoiceGroupTable_8431F98: @ 8431F98
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 84321D8
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 84321E4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -2943,9 +2899,7 @@ VoiceGroupTable_84326F4: @ 84326F4
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8432934
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 8432940
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -2975,17 +2929,13 @@ VoiceGroupTable_84326F4: @ 84326F4
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 84329AC
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_843087C
-	.4byte KeySplitTable_8455308
+	voice_keysplit VoiceGroupTable_843087C, KeySplitTable_8455308
 
 @ SquareWave1 84329B8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 84329C4
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 84329D0
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -3085,9 +3035,7 @@ VoiceGroupTable_8432B38: @ 8432B38
 	.4byte 0x00000000
 
 @ Key-Split 8432B44
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430204
-	.4byte KeySplitTable_8455224
+	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
 
 @ SquareWave1 8432B50
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -3228,9 +3176,7 @@ VoiceGroupTable_8432B38: @ 8432B38
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8432D78
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 8432D84
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -3616,9 +3562,7 @@ VoiceGroupTable_8433138: @ 8433138
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8433378
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 8433384
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -3648,17 +3592,13 @@ VoiceGroupTable_8433138: @ 8433138
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 84333F0
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_843087C
-	.4byte KeySplitTable_8455308
+	voice_keysplit VoiceGroupTable_843087C, KeySplitTable_8455308
 
 @ SquareWave1 84333FC
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8433408
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 8433414
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -3735,9 +3675,7 @@ VoiceGroupTable_8433138: @ 8433138
 VoiceGroupTable_8433534: @ 8433534
 
 @ Key-Split 8433534
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430204
-	.4byte KeySplitTable_8455224
+	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
 
 @ SquareWave1 8433540
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -3881,9 +3819,7 @@ VoiceGroupTable_8433534: @ 8433534
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8433774
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 8433780
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -3913,9 +3849,7 @@ VoiceGroupTable_8433534: @ 8433534
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 84337EC
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_843087C
-	.4byte KeySplitTable_8455308
+	voice_keysplit VoiceGroupTable_843087C, KeySplitTable_8455308
 
 @ SquareWave1 84337F8
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -4150,9 +4084,7 @@ VoiceGroupTable_8433948: @ 8433948
 	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 246, 0, 226
 
 @ Key-Split 8433B88
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 8433B94
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -4178,25 +4110,19 @@ VoiceGroupTable_8433BAC: @ 8433BAC
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8433BE8
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 8433BF4
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8433C00
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_843087C
-	.4byte KeySplitTable_8455308
+	voice_keysplit VoiceGroupTable_843087C, KeySplitTable_8455308
 
 @ SquareWave1 8433C0C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8433C18
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 8433C24
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -4366,9 +4292,7 @@ VoiceGroupTable_8433BAC: @ 8433BAC
 VoiceGroupTable_8433EB8: @ 8433EB8
 
 @ Key-Split 8433EB8
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430204
-	.4byte KeySplitTable_8455224
+	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
 
 @ Percussion 8433EC4
 	.byte 0x80, 0, 0, 0
@@ -4514,9 +4438,7 @@ VoiceGroupTable_8433EB8: @ 8433EB8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 84340F8
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 8434104
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -4540,9 +4462,7 @@ VoiceGroupTable_8433EB8: @ 8433EB8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8434158
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 8434164
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -4789,9 +4709,7 @@ VoiceGroupTable_84342E4: @ 84342E4
 	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 246, 0, 226
 
 @ Key-Split 8434524
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 8434530
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -4815,9 +4733,7 @@ VoiceGroupTable_84342E4: @ 84342E4
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8434584
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 8434590
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -4829,9 +4745,7 @@ VoiceGroupTable_84342E4: @ 84342E4
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 84345B4
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 84345C0
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -5096,17 +5010,13 @@ VoiceGroupTable_8434728: @ 8434728
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 84349C8
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 84349D4
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 84349E0
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_843087C
-	.4byte KeySplitTable_8455308
+	voice_keysplit VoiceGroupTable_843087C, KeySplitTable_8455308
 
 @ SquareWave1 84349EC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -5368,9 +5278,7 @@ VoiceGroupTable_8434B18: @ 8434B18
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8434DE8
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 8434DF4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -5452,9 +5360,7 @@ VoiceGroupTable_8434F14: @ 8434F14
 	.4byte 0x00000000
 
 @ Key-Split 8434F20
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430204
-	.4byte KeySplitTable_8455224
+	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
 
 @ SquareWave1 8434F2C
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -6234,9 +6140,7 @@ VoiceGroupTable_84358F8: @ 84358F8
 	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 246, 0, 226
 
 @ Key-Split 8435B38
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 8435B44
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -6260,9 +6164,7 @@ VoiceGroupTable_84358F8: @ 84358F8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8435B98
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 8435BA4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -6274,9 +6176,7 @@ VoiceGroupTable_84358F8: @ 84358F8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8435BC8
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 8435BD4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -6367,9 +6267,7 @@ VoiceGroupTable_8435D18: @ 8435D18
 	.4byte 0x00000000
 
 @ Key-Split 8435D24
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430204
-	.4byte KeySplitTable_8455224
+	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
 
 @ SquareWave1 8435D30
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -6548,9 +6446,7 @@ VoiceGroupTable_8435FAC: @ 8435FAC
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8435FE8
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 8435FF4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -6737,9 +6633,7 @@ VoiceGroupTable_84362B8: @ 84362B8
 	.4byte 0x00000000
 
 @ Key-Split 84362C4
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430204
-	.4byte KeySplitTable_8455224
+	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
 
 @ SquareWave1 84362D0
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -7268,9 +7162,7 @@ VoiceGroupTable_84368B8: @ 84368B8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8436AF8
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 8436B04
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -7306,9 +7198,7 @@ VoiceGroupTable_84368B8: @ 84368B8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8436B88
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 8436B94
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -7384,9 +7274,7 @@ VoiceGroupTable_8436C9C: @ 8436C9C
 	.4byte 0x00000000
 
 @ Key-Split 8436CA8
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430204
-	.4byte KeySplitTable_8455224
+	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
 
 @ SquareWave1 8436CB4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -7527,9 +7415,7 @@ VoiceGroupTable_8436C9C: @ 8436C9C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8436EDC
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 8436EE8
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -7644,9 +7530,7 @@ VoiceGroupTable_843708C: @ 843708C
 	.4byte 0x00000000
 
 @ Key-Split 8437098
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430204
-	.4byte KeySplitTable_8455224
+	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
 
 @ SquareWave1 84370A4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -7787,9 +7671,7 @@ VoiceGroupTable_843708C: @ 843708C
 	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 246, 0, 226
 
 @ Key-Split 84372CC
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 84372D8
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -7813,9 +7695,7 @@ VoiceGroupTable_843708C: @ 843708C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 843732C
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 8437338
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -7827,9 +7707,7 @@ VoiceGroupTable_843708C: @ 843708C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 843735C
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 8437368
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -8052,9 +7930,7 @@ VoiceGroupTable_8437488: @ 8437488
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 84376C8
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 84376D4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -8090,9 +7966,7 @@ VoiceGroupTable_8437488: @ 8437488
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8437758
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 8437764
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -8444,9 +8318,7 @@ VoiceGroupTable_8437A88: @ 8437A88
 	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 246, 0, 226
 
 @ Key-Split 8437CC8
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 8437CD4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -8476,17 +8348,13 @@ VoiceGroupTable_8437A88: @ 8437A88
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8437D40
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_843087C
-	.4byte KeySplitTable_8455308
+	voice_keysplit VoiceGroupTable_843087C, KeySplitTable_8455308
 
 @ SquareWave1 8437D4C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8437D58
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 8437D64
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -8971,9 +8839,7 @@ VoiceGroupTable_843828C: @ 843828C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 84384CC
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 84384D8
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -8997,9 +8863,7 @@ VoiceGroupTable_843828C: @ 843828C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 843852C
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 8438538
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -9011,9 +8875,7 @@ VoiceGroupTable_843828C: @ 843828C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 843855C
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 8438568
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -9365,9 +9227,7 @@ VoiceGroupTable_843888C: @ 843888C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8438ACC
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 8438AD8
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -9391,9 +9251,7 @@ VoiceGroupTable_843888C: @ 843888C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8438B2C
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 8438B38
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -9405,9 +9263,7 @@ VoiceGroupTable_843888C: @ 843888C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8438B5C
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 8438B68
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -9759,9 +9615,7 @@ VoiceGroupTable_8438E8C: @ 8438E8C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 84390CC
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 84390D8
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -9785,9 +9639,7 @@ VoiceGroupTable_8438E8C: @ 8438E8C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 843912C
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 8439138
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -9799,9 +9651,7 @@ VoiceGroupTable_8438E8C: @ 8438E8C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 843915C
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 8439168
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -10153,9 +10003,7 @@ VoiceGroupTable_843948C: @ 843948C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 84396CC
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 84396D8
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -10179,9 +10027,7 @@ VoiceGroupTable_843948C: @ 843948C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 843972C
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 8439738
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -10193,9 +10039,7 @@ VoiceGroupTable_843948C: @ 843948C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 843975C
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 8439768
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -10404,9 +10248,7 @@ VoiceGroupTable_8439A8C: @ 8439A8C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8439A98
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430204
-	.4byte KeySplitTable_8455224
+	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
 
 @ SquareWave1 8439AA4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -10547,9 +10389,7 @@ VoiceGroupTable_8439A8C: @ 8439A8C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8439CCC
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 8439CD8
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -10579,9 +10419,7 @@ VoiceGroupTable_8439A8C: @ 8439A8C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8439D44
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_843087C
-	.4byte KeySplitTable_8455308
+	voice_keysplit VoiceGroupTable_843087C, KeySplitTable_8455308
 
 @ SquareWave1 8439D50
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -10652,9 +10490,7 @@ VoiceGroupTable_8439A8C: @ 8439A8C
 VoiceGroupTable_8439E58: @ 8439E58
 
 @ Key-Split 8439E58
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430204
-	.4byte KeySplitTable_8455224
+	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
 
 @ SquareWave1 8439E64
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -10798,9 +10634,7 @@ VoiceGroupTable_8439E58: @ 8439E58
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 843A098
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 843A0A4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -10933,9 +10767,7 @@ VoiceGroupTable_843A224: @ 843A224
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 843A29C
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430204
-	.4byte KeySplitTable_8455224
+	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
 
 @ SquareWave1 843A2A8
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -11049,9 +10881,7 @@ VoiceGroupTable_843A224: @ 843A224
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 843A464
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 843A470
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -11293,9 +11123,7 @@ VoiceGroupTable_843A224: @ 843A224
 VoiceGroupTable_843A824: @ 843A824
 
 @ Key-Split 843A824
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430204
-	.4byte KeySplitTable_8455224
+	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
 
 @ WaveMemory 843A830
 	voice_programmable_wave_alt ProgrammableWaveData_845542C, 0, 1, 12, 0
@@ -11439,9 +11267,7 @@ VoiceGroupTable_843A824: @ 843A824
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 843AA64
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 843AA70
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -11829,9 +11655,7 @@ VoiceGroupTable_843AE24: @ 843AE24
 	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 204, 193, 239
 
 @ Key-Split 843B064
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 843B070
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -11855,25 +11679,19 @@ VoiceGroupTable_843AE24: @ 843AE24
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 843B0C4
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 843B0D0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 843B0DC
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_843087C
-	.4byte KeySplitTable_8455308
+	voice_keysplit VoiceGroupTable_843087C, KeySplitTable_8455308
 
 @ SquareWave1 843B0E8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 843B0F4
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 843B100
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -12225,9 +12043,7 @@ VoiceGroupTable_843B424: @ 843B424
 	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 0, 193, 239
 
 @ Key-Split 843B664
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 843B670
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -12251,25 +12067,19 @@ VoiceGroupTable_843B424: @ 843B424
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 843B6C4
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 843B6D0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 843B6DC
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_843087C
-	.4byte KeySplitTable_8455308
+	voice_keysplit VoiceGroupTable_843087C, KeySplitTable_8455308
 
 @ SquareWave1 843B6E8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 843B6F4
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 843B700
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -12360,9 +12170,7 @@ VoiceGroupTable_843B844: @ 843B844
 	.4byte 0x00000000
 
 @ Key-Split 843B850
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430204
-	.4byte KeySplitTable_8455224
+	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
 
 @ SquareWave1 843B85C
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -12503,9 +12311,7 @@ VoiceGroupTable_843B844: @ 843B844
 	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 0, 193, 226
 
 @ Key-Split 843BA84
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 843BA90
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -12529,9 +12335,7 @@ VoiceGroupTable_843B844: @ 843B844
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 843BAE4
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 843BAF0
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -12543,9 +12347,7 @@ VoiceGroupTable_843B844: @ 843B844
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 843BB14
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 843BB20
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -12756,9 +12558,7 @@ VoiceGroupTable_843BE44: @ 843BE44
 	.4byte 0x00000000
 
 @ Key-Split 843BE50
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430204
-	.4byte KeySplitTable_8455224
+	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
 
 @ SquareWave1 843BE5C
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -13146,9 +12946,7 @@ VoiceGroupTable_843C444: @ 843C444
 	.4byte 0x00000000
 
 @ Key-Split 843C450
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430204
-	.4byte KeySplitTable_8455224
+	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
 
 @ SquareWave1 843C45C
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -13289,9 +13087,7 @@ VoiceGroupTable_843C444: @ 843C444
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 843C684
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 843C690
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -13517,9 +13313,7 @@ VoiceGroupTable_843C7BC: @ 843C7BC
 	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 0, 193, 226
 
 @ Key-Split 843C9FC
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 843CA08
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -13543,25 +13337,19 @@ VoiceGroupTable_843C7BC: @ 843C7BC
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 843CA5C
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 843CA68
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 843CA74
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_843087C
-	.4byte KeySplitTable_8455308
+	voice_keysplit VoiceGroupTable_843087C, KeySplitTable_8455308
 
 @ SquareWave1 843CA80
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 843CA8C
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 843CA98
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -13772,9 +13560,7 @@ VoiceGroupTable_843CDBC: @ 843CDBC
 	.4byte 0x00000000
 
 @ Key-Split 843CDC8
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430204
-	.4byte KeySplitTable_8455224
+	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
 
 @ SquareWave1 843CDD4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -13915,9 +13701,7 @@ VoiceGroupTable_843CDBC: @ 843CDBC
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 843CFFC
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 843D008
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -14305,9 +14089,7 @@ VoiceGroupTable_843D3BC: @ 843D3BC
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 843D5FC
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 843D608
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -14337,17 +14119,13 @@ VoiceGroupTable_843D3BC: @ 843D3BC
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 843D674
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_843087C
-	.4byte KeySplitTable_8455308
+	voice_keysplit VoiceGroupTable_843087C, KeySplitTable_8455308
 
 @ SquareWave1 843D680
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 843D68C
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 843D698
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -14699,9 +14477,7 @@ VoiceGroupTable_843D9BC: @ 843D9BC
 	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 204, 193, 239
 
 @ Key-Split 843DBFC
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 843DC08
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -14725,25 +14501,19 @@ VoiceGroupTable_843D9BC: @ 843D9BC
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 843DC5C
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 843DC68
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 843DC74
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_843087C
-	.4byte KeySplitTable_8455308
+	voice_keysplit VoiceGroupTable_843087C, KeySplitTable_8455308
 
 @ SquareWave1 843DC80
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 843DC8C
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 843DC98
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -15095,9 +14865,7 @@ VoiceGroupTable_843DFBC: @ 843DFBC
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 843E1FC
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 843E208
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -15133,9 +14901,7 @@ VoiceGroupTable_843DFBC: @ 843DFBC
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 843E28C
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 843E298
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -15487,9 +15253,7 @@ VoiceGroupTable_843E5BC: @ 843E5BC
 	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 0, 193, 226
 
 @ Key-Split 843E7FC
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 843E808
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -15901,17 +15665,13 @@ VoiceGroupTable_843EBBC: @ 843EBBC
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 843EE5C
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 843EE68
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 843EE74
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_843087C
-	.4byte KeySplitTable_8455308
+	voice_keysplit VoiceGroupTable_843087C, KeySplitTable_8455308
 
 @ SquareWave1 843EE80
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -16128,9 +15888,7 @@ VoiceGroupTable_843F1BC: @ 843F1BC
 	.4byte 0x00000000
 
 @ Key-Split 843F1C8
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430204
-	.4byte KeySplitTable_8455224
+	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
 
 @ SquareWave1 843F1D4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -16271,9 +16029,7 @@ VoiceGroupTable_843F1BC: @ 843F1BC
 	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 0, 180, 239
 
 @ Key-Split 843F3FC
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 843F408
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -16297,25 +16053,19 @@ VoiceGroupTable_843F1BC: @ 843F1BC
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 843F45C
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 843F468
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 843F474
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_843087C
-	.4byte KeySplitTable_8455308
+	voice_keysplit VoiceGroupTable_843087C, KeySplitTable_8455308
 
 @ SquareWave1 843F480
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 843F48C
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 843F498
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -16409,9 +16159,7 @@ VoiceGroupTable_843F5E8: @ 843F5E8
 	.4byte 0x00000000
 
 @ Key-Split 843F5F4
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430204
-	.4byte KeySplitTable_8455224
+	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
 
 @ SquareWave1 843F600
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -16552,9 +16300,7 @@ VoiceGroupTable_843F5E8: @ 843F5E8
 	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 0, 180, 246
 
 @ Key-Split 843F828
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 843F834
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -16578,25 +16324,19 @@ VoiceGroupTable_843F5E8: @ 843F5E8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 843F888
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 843F894
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 843F8A0
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_843087C
-	.4byte KeySplitTable_8455308
+	voice_keysplit VoiceGroupTable_843087C, KeySplitTable_8455308
 
 @ SquareWave1 843F8AC
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 843F8B8
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 843F8C4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -16972,9 +16712,7 @@ VoiceGroupTable_843FBE8: @ 843FBE8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 843FE88
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 843FE94
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -17362,9 +17100,7 @@ VoiceGroupTable_84401E8: @ 84401E8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8440488
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 8440494
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -17752,9 +17488,7 @@ VoiceGroupTable_84407E8: @ 84407E8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8440A88
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 8440A94
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -18118,9 +17852,7 @@ VoiceGroupTable_8440DE8: @ 8440DE8
 	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 0, 180, 246
 
 @ Key-Split 8441028
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 8441034
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -18156,9 +17888,7 @@ VoiceGroupTable_8440DE8: @ 8440DE8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 84410B8
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 84410C4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -18369,9 +18099,7 @@ VoiceGroupTable_84413E8: @ 84413E8
 	.4byte 0x00000000
 
 @ Key-Split 84413F4
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430204
-	.4byte KeySplitTable_8455224
+	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
 
 @ SquareWave1 8441400
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -18536,9 +18264,7 @@ VoiceGroupTable_84413E8: @ 84413E8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8441688
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 8441694
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -19149,9 +18875,7 @@ VoiceGroupTable_8441FE8: @ 8441FE8
 	.4byte 0x00000000
 
 @ Key-Split 8441FF4
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430204
-	.4byte KeySplitTable_8455224
+	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
 
 @ SquareWave1 8442000
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -19316,9 +19040,7 @@ VoiceGroupTable_8441FE8: @ 8441FE8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8442288
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 8442294
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -19541,9 +19263,7 @@ VoiceGroupTable_84425E8: @ 84425E8
 	.4byte 0x00000000
 
 @ Key-Split 84425F4
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430204
-	.4byte KeySplitTable_8455224
+	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
 
 @ SquareWave1 8442600
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -19708,9 +19428,7 @@ VoiceGroupTable_84425E8: @ 84425E8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8442888
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 8442894
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -20074,9 +19792,7 @@ VoiceGroupTable_8442BE8: @ 8442BE8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8442E28
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 8442E34
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -20106,9 +19822,7 @@ VoiceGroupTable_8442BE8: @ 8442BE8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8442EA0
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_843087C
-	.4byte KeySplitTable_8455308
+	voice_keysplit VoiceGroupTable_843087C, KeySplitTable_8455308
 
 @ SquareWave1 8442EAC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -20466,9 +20180,7 @@ VoiceGroupTable_84431E8: @ 84431E8
 	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 0, 180, 246
 
 @ Key-Split 8443428
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 8443434
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -20492,9 +20204,7 @@ VoiceGroupTable_84431E8: @ 84431E8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8443488
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 8443494
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -20882,25 +20592,19 @@ VoiceGroupTable_84437E8: @ 84437E8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8443A88
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 8443A94
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8443AA0
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_843087C
-	.4byte KeySplitTable_8455308
+	voice_keysplit VoiceGroupTable_843087C, KeySplitTable_8455308
 
 @ SquareWave1 8443AAC
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8443AB8
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 8443AC4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -21111,9 +20815,7 @@ VoiceGroupTable_8443DE8: @ 8443DE8
 	.4byte 0x00000000
 
 @ Key-Split 8443DF4
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430204
-	.4byte KeySplitTable_8455224
+	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
 
 @ SquareWave1 8443E00
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -21254,9 +20956,7 @@ VoiceGroupTable_8443DE8: @ 8443DE8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8444028
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 8444034
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -21280,9 +20980,7 @@ VoiceGroupTable_8443DE8: @ 8443DE8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8444088
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 8444094
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -21294,9 +20992,7 @@ VoiceGroupTable_8443DE8: @ 8443DE8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 84440B8
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 84440C4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -21507,9 +21203,7 @@ VoiceGroupTable_84443E8: @ 84443E8
 	.4byte 0x00000000
 
 @ Key-Split 84443F4
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430204
-	.4byte KeySplitTable_8455224
+	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
 
 @ SquareWave1 8444400
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -21650,9 +21344,7 @@ VoiceGroupTable_84443E8: @ 84443E8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8444628
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 8444634
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -21676,9 +21368,7 @@ VoiceGroupTable_84443E8: @ 84443E8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8444688
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 8444694
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -21690,9 +21380,7 @@ VoiceGroupTable_84443E8: @ 84443E8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 84446B8
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 84446C4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -22291,9 +21979,7 @@ VoiceGroupTable_8444FE8: @ 8444FE8
 	.4byte 0x00000000
 
 @ Key-Split 8444FF4
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430204
-	.4byte KeySplitTable_8455224
+	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
 
 @ SquareWave1 8445000
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -22434,9 +22120,7 @@ VoiceGroupTable_8444FE8: @ 8444FE8
 	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 0, 180, 246
 
 @ Key-Split 8445228
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 8445234
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -22460,25 +22144,19 @@ VoiceGroupTable_8444FE8: @ 8444FE8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8445288
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 8445294
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 84452A0
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_843087C
-	.4byte KeySplitTable_8455308
+	voice_keysplit VoiceGroupTable_843087C, KeySplitTable_8455308
 
 @ SquareWave1 84452AC
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 84452B8
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 84452C4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -22854,9 +22532,7 @@ VoiceGroupTable_84455E8: @ 84455E8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8445888
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 8445894
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -23220,9 +22896,7 @@ VoiceGroupTable_8445BE8: @ 8445BE8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8445E28
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 8445E34
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -23610,9 +23284,7 @@ VoiceGroupTable_84461E8: @ 84461E8
 	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 0, 180, 246
 
 @ Key-Split 8446428
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 8446434
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -23648,9 +23320,7 @@ VoiceGroupTable_84461E8: @ 84461E8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 84464B8
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 84464C4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -23861,9 +23531,7 @@ VoiceGroupTable_84467E8: @ 84467E8
 	.4byte 0x00000000
 
 @ Key-Split 84467F4
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430204
-	.4byte KeySplitTable_8455224
+	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
 
 @ SquareWave1 8446800
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -24004,9 +23672,7 @@ VoiceGroupTable_84467E8: @ 84467E8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8446A28
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 8446A34
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -24394,9 +24060,7 @@ VoiceGroupTable_8446DE8: @ 8446DE8
 	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 0, 180, 246
 
 @ Key-Split 8447028
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 8447034
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -24432,9 +24096,7 @@ VoiceGroupTable_8446DE8: @ 8446DE8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 84470B8
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 84470C4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -24643,9 +24305,7 @@ VoiceGroupTable_84473E8: @ 84473E8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 84473F4
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430204
-	.4byte KeySplitTable_8455224
+	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
 
 VoiceGroupTable_8447400: @ 8447400
 
@@ -24655,9 +24315,7 @@ VoiceGroupTable_8447400: @ 8447400
 	.4byte 0x00000000
 
 @ Key-Split 844740C
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430204
-	.4byte KeySplitTable_8455224
+	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
 
 @ SquareWave1 8447418
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -24798,9 +24456,7 @@ VoiceGroupTable_8447400: @ 8447400
 	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 0, 180, 246
 
 @ Key-Split 8447640
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 844764C
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -24824,9 +24480,7 @@ VoiceGroupTable_8447400: @ 8447400
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 84476A0
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 84476AC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -24838,9 +24492,7 @@ VoiceGroupTable_8447400: @ 8447400
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 84476D0
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 84476DC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -25051,9 +24703,7 @@ VoiceGroupTable_8447A00: @ 8447A00
 	.4byte 0x00000000
 
 @ Key-Split 8447A0C
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430204
-	.4byte KeySplitTable_8455224
+	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
 
 @ SquareWave1 8447A18
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -25194,9 +24844,7 @@ VoiceGroupTable_8447A00: @ 8447A00
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8447C40
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 8447C4C
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -25226,17 +24874,13 @@ VoiceGroupTable_8447A00: @ 8447A00
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8447CB8
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_843087C
-	.4byte KeySplitTable_8455308
+	voice_keysplit VoiceGroupTable_843087C, KeySplitTable_8455308
 
 @ SquareWave1 8447CC4
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8447CD0
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 8447CDC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -25456,9 +25100,7 @@ VoiceGroupTable_8447DF0: @ 8447DF0
 	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 0, 180, 246
 
 @ Key-Split 8448030
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 844803C
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -25494,9 +25136,7 @@ VoiceGroupTable_8447DF0: @ 8447DF0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 84480C0
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 84480CC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -25872,9 +25512,7 @@ VoiceGroupTable_84483F0: @ 84483F0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8448690
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 844869C
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -26238,9 +25876,7 @@ VoiceGroupTable_84489F0: @ 84489F0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8448C30
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 8448C3C
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -26264,9 +25900,7 @@ VoiceGroupTable_84489F0: @ 84489F0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8448C90
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 8448C9C
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -26278,9 +25912,7 @@ VoiceGroupTable_84489F0: @ 84489F0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8448CC0
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 8448CCC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -26656,9 +26288,7 @@ VoiceGroupTable_8448FF0: @ 8448FF0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8449290
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 844929C
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -26670,9 +26300,7 @@ VoiceGroupTable_8448FF0: @ 8448FF0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 84492C0
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 84492CC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -26883,9 +26511,7 @@ VoiceGroupTable_84495F0: @ 84495F0
 	.4byte 0x00000000
 
 @ Key-Split 84495FC
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430204
-	.4byte KeySplitTable_8455224
+	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
 
 @ SquareWave1 8449608
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -27026,9 +26652,7 @@ VoiceGroupTable_84495F0: @ 84495F0
 	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 0, 180, 239
 
 @ Key-Split 8449830
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 844983C
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -27052,25 +26676,19 @@ VoiceGroupTable_84495F0: @ 84495F0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8449890
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 844989C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 84498A8
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_843087C
-	.4byte KeySplitTable_8455308
+	voice_keysplit VoiceGroupTable_843087C, KeySplitTable_8455308
 
 @ SquareWave1 84498B4
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 84498C0
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 84498CC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -27422,9 +27040,7 @@ VoiceGroupTable_8449BF0: @ 8449BF0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8449E30
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 8449E3C
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -27460,9 +27076,7 @@ VoiceGroupTable_8449BF0: @ 8449BF0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8449EC0
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 8449ECC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -28061,9 +27675,7 @@ VoiceGroupTable_844A7F0: @ 844A7F0
 	.4byte 0x00000000
 
 @ Key-Split 844A7FC
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430204
-	.4byte KeySplitTable_8455224
+	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
 
 @ SquareWave1 844A808
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -28204,9 +27816,7 @@ VoiceGroupTable_844A7F0: @ 844A7F0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 844AA30
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 844AA3C
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -28236,17 +27846,13 @@ VoiceGroupTable_844A7F0: @ 844A7F0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 844AAA8
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_843087C
-	.4byte KeySplitTable_8455308
+	voice_keysplit VoiceGroupTable_843087C, KeySplitTable_8455308
 
 @ SquareWave1 844AAB4
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 844AAC0
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 844AACC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -28986,9 +28592,7 @@ VoiceGroupTable_844B3F0: @ 844B3F0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 844B630
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 844B63C
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -29018,17 +28622,13 @@ VoiceGroupTable_844B3F0: @ 844B3F0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 844B6A8
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_843087C
-	.4byte KeySplitTable_8455308
+	voice_keysplit VoiceGroupTable_843087C, KeySplitTable_8455308
 
 @ SquareWave1 844B6B4
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 844B6C0
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 844B6CC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -29380,9 +28980,7 @@ VoiceGroupTable_844B9F0: @ 844B9F0
 	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 0, 180, 246
 
 @ Key-Split 844BC30
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 844BC3C
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -29406,9 +29004,7 @@ VoiceGroupTable_844B9F0: @ 844B9F0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 844BC90
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 844BC9C
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -29420,9 +29016,7 @@ VoiceGroupTable_844B9F0: @ 844B9F0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 844BCC0
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 844BCCC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -30186,9 +29780,7 @@ VoiceGroupTable_844C5F0: @ 844C5F0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 844C890
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 844C89C
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -30411,9 +30003,7 @@ VoiceGroupTable_844CBF0: @ 844CBF0
 	.4byte 0x00000000
 
 @ Key-Split 844CBFC
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430204
-	.4byte KeySplitTable_8455224
+	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
 
 @ SquareWave1 844CC08
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -30584,17 +30174,13 @@ VoiceGroupTable_844CBF0: @ 844CBF0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 844CEA8
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_843087C
-	.4byte KeySplitTable_8455308
+	voice_keysplit VoiceGroupTable_843087C, KeySplitTable_8455308
 
 @ SquareWave1 844CEB4
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 844CEC0
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 844CECC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -30970,17 +30556,13 @@ VoiceGroupTable_844D1F0: @ 844D1F0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 844D490
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 844D49C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 844D4A8
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_843087C
-	.4byte KeySplitTable_8455308
+	voice_keysplit VoiceGroupTable_843087C, KeySplitTable_8455308
 
 @ SquareWave1 844D4B4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -31362,9 +30944,7 @@ VoiceGroupTable_844D7F0: @ 844D7F0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 844DA90
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 844DA9C
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -31752,9 +31332,7 @@ VoiceGroupTable_844DDF0: @ 844DDF0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 844E090
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 844E09C
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -31977,9 +31555,7 @@ VoiceGroupTable_844E3F0: @ 844E3F0
 	.4byte 0x00000000
 
 @ Key-Split 844E3FC
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430204
-	.4byte KeySplitTable_8455224
+	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
 
 @ SquareWave1 844E408
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -32120,9 +31696,7 @@ VoiceGroupTable_844E3F0: @ 844E3F0
 	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 0, 180, 239
 
 @ Key-Split 844E630
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 844E63C
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -32146,25 +31720,19 @@ VoiceGroupTable_844E3F0: @ 844E3F0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 844E690
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 844E69C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 844E6A8
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_843087C
-	.4byte KeySplitTable_8455308
+	voice_keysplit VoiceGroupTable_843087C, KeySplitTable_8455308
 
 @ SquareWave1 844E6B4
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 844E6C0
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 844E6CC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -32710,9 +32278,7 @@ VoiceGroupTable_844ECF0: @ 844ECF0
 	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 246, 0, 226
 
 @ Key-Split 844EF30
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 844EF3C
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -32736,25 +32302,19 @@ VoiceGroupTable_844ECF0: @ 844ECF0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 844EF90
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 844EF9C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 844EFA8
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_843087C
-	.4byte KeySplitTable_8455308
+	voice_keysplit VoiceGroupTable_843087C, KeySplitTable_8455308
 
 @ SquareWave1 844EFB4
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 844EFC0
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 844EFCC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -32968,9 +32528,7 @@ VoiceGroupTable_844F0C8: @ 844F0C8
 	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 246, 0, 226
 
 @ Key-Split 844F308
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 844F314
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -33000,17 +32558,13 @@ VoiceGroupTable_844F0C8: @ 844F0C8
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 844F380
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_843087C
-	.4byte KeySplitTable_8455308
+	voice_keysplit VoiceGroupTable_843087C, KeySplitTable_8455308
 
 @ SquareWave1 844F38C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 844F398
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 844F3A4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -33110,9 +32664,7 @@ VoiceGroupTable_844F50C: @ 844F50C
 	.4byte 0x00000000
 
 @ Key-Split 844F518
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430204
-	.4byte KeySplitTable_8455224
+	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
 
 @ SquareWave1 844F524
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -33253,9 +32805,7 @@ VoiceGroupTable_844F50C: @ 844F50C
 	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 246, 0, 226
 
 @ Key-Split 844F74C
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 844F758
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -33279,9 +32829,7 @@ VoiceGroupTable_844F50C: @ 844F50C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 844F7AC
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 844F7B8
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -33293,9 +32841,7 @@ VoiceGroupTable_844F50C: @ 844F50C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 844F7DC
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 844F7E8
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -33395,9 +32941,7 @@ VoiceGroupTable_844F950: @ 844F950
 	.4byte 0x00000000
 
 @ Key-Split 844F95C
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430204
-	.4byte KeySplitTable_8455224
+	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
 
 @ SquareWave1 844F968
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -33538,9 +33082,7 @@ VoiceGroupTable_844F950: @ 844F950
 	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 246, 0, 226
 
 @ Key-Split 844FB90
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 844FB9C
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -33564,9 +33106,7 @@ VoiceGroupTable_844F950: @ 844F950
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 844FBF0
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 844FBFC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -33578,9 +33118,7 @@ VoiceGroupTable_844F950: @ 844F950
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 844FC20
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 844FC2C
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -33680,9 +33218,7 @@ VoiceGroupTable_844FD94: @ 844FD94
 	.4byte 0x00000000
 
 @ Key-Split 844FDA0
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430204
-	.4byte KeySplitTable_8455224
+	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
 
 @ SquareWave1 844FDAC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -33823,9 +33359,7 @@ VoiceGroupTable_844FD94: @ 844FD94
 	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 246, 0, 226
 
 @ Key-Split 844FFD4
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 844FFE0
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -33849,9 +33383,7 @@ VoiceGroupTable_844FD94: @ 844FD94
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8450034
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 8450040
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -33863,9 +33395,7 @@ VoiceGroupTable_844FD94: @ 844FD94
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8450064
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 8450070
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -34091,9 +33621,7 @@ VoiceGroupTable_845019C: @ 845019C
 	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 246, 0, 226
 
 @ Key-Split 84503DC
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 84503E8
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -34129,9 +33657,7 @@ VoiceGroupTable_845019C: @ 845019C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 845046C
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 8450478
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -34351,9 +33877,7 @@ VoiceGroupTable_845058C: @ 845058C
 	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 246, 0, 226
 
 @ Key-Split 84507CC
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 84507D8
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -34377,9 +33901,7 @@ VoiceGroupTable_845058C: @ 845058C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 845082C
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 8450838
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -34391,9 +33913,7 @@ VoiceGroupTable_845058C: @ 845058C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 845085C
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 8450868
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -34604,9 +34124,7 @@ VoiceGroupTable_8450B8C: @ 8450B8C
 	.4byte 0x00000000
 
 @ Key-Split 8450B98
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430204
-	.4byte KeySplitTable_8455224
+	voice_keysplit VoiceGroupTable_8430204, KeySplitTable_8455224
 
 @ SquareWave1 8450BA4
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -34747,9 +34265,7 @@ VoiceGroupTable_8450B8C: @ 8450B8C
 	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 246, 0, 226
 
 @ Key-Split 8450DCC
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 8450DD8
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -34773,9 +34289,7 @@ VoiceGroupTable_8450B8C: @ 8450B8C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8450E2C
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 8450E38
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -34787,9 +34301,7 @@ VoiceGroupTable_8450B8C: @ 8450B8C
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8450E5C
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 8450E68
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -35018,9 +34530,7 @@ VoiceGroupTable_8450FA0: @ 8450FA0
 	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 246, 0, 226
 
 @ Key-Split 84511E0
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 84511EC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -35044,9 +34554,7 @@ VoiceGroupTable_8450FA0: @ 8450FA0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8451240
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 845124C
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -35058,9 +34566,7 @@ VoiceGroupTable_8450FA0: @ 8450FA0
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8451270
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 845127C
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -35280,9 +34786,7 @@ VoiceGroupTable_8451390: @ 8451390
 	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 246, 0, 226
 
 @ Key-Split 84515D0
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 84515DC
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -35306,9 +34810,7 @@ VoiceGroupTable_8451390: @ 8451390
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8451630
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430258
-	.4byte KeySplitTable_84552B4
+	voice_keysplit VoiceGroupTable_8430258, KeySplitTable_84552B4
 
 @ SquareWave1 845163C
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -35320,9 +34822,7 @@ VoiceGroupTable_8451390: @ 8451390
 	voice_square_1 0, 2, 0, 0, 15, 0
 
 @ Key-Split 8451660
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430894
-	.4byte KeySplitTable_8455350
+	voice_keysplit VoiceGroupTable_8430894, KeySplitTable_8455350
 
 @ SquareWave1 845166C
 	voice_square_1 0, 2, 0, 0, 15, 0
@@ -35672,9 +35172,7 @@ VoiceGroupTable_8451990: @ 8451990
 	voice_directsound 60, 0, DirectSoundWaveData_8459944, 255, 246, 0, 226
 
 @ Key-Split 8451BD0
-	.byte 0x40, 0, 0, 0
-	.4byte VoiceGroupTable_8430234
-	.4byte KeySplitTable_845526C
+	voice_keysplit VoiceGroupTable_8430234, KeySplitTable_845526C
 
 @ SquareWave1 8451BDC
 	voice_square_1 0, 2, 0, 0, 15, 0
