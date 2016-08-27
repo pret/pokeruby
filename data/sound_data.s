@@ -263,8 +263,9 @@ VoiceGroupTable_8430258: @ 8430258
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 8430834
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 8430840
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 843084C
-
-	.incbin "baserom.gba", 0x00430858, 0x24
+	voice_square_1 0, 2, 0, 0, 15, 0  @ 8430858
+	voice_square_1_alt 36, 2, 0, 1, 4, 2  @ 8430864
+	voice_square_1_alt 21, 2, 0, 0, 15, 2  @ 8430870
 
 VoiceGroupTable_843087C: @ 843087
 	voice_directsound 60, 0, DirectSoundWaveData_8473B20, 255, 0, 255, 165  @ 843087C
