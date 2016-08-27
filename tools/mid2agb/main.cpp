@@ -63,7 +63,7 @@ bool g_compressionEnabled = true;
 
 static std::string StripExtension(std::string s)
 {
-    size_t pos = s.find_last_of('.');
+    std::size_t pos = s.find_last_of('.');
 
     if (pos > 0 && pos != std::string::npos)
     {
@@ -75,7 +75,7 @@ static std::string StripExtension(std::string s)
 
 static std::string GetExtension(std::string s)
 {
-    size_t pos = s.find_last_of('.');
+    std::size_t pos = s.find_last_of('.');
 
     if (pos > 0 && pos != std::string::npos)
     {

@@ -30,7 +30,7 @@
 #include "agb.h"
 #include "tables.h"
 
-enum MidiEventCategory
+enum class MidiEventCategory
 {
     Control,
     SysEx,
