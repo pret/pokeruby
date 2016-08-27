@@ -2,6 +2,11 @@
 
 	.equiv PCM_DMA_BUF_SIZE, 1584
 
+	.equiv TONEDATA_TYPE_CGB, 0x07
+	.equiv TONEDATA_TYPE_FIX, 0x08
+	.equiv TONEDATA_TYPE_SPL, 0x40 @ key split
+	.equiv TONEDATA_TYPE_RHY, 0x80 @ rhythm
+
 	.macro struct_begin
 	.struct 0
 	.endm
@@ -81,9 +86,9 @@
 	struct_field o_MusicPlayerTrack_wai, 1
 	struct_field o_MusicPlayerTrack_patP, 1
 	struct_field o_MusicPlayerTrack_repN, 1
-	struct_field o_MusicPlayerTrack_gat, 1
+	struct_field o_MusicPlayerTrack_gateTime, 1
 	struct_field o_MusicPlayerTrack_key, 1
-	struct_field o_MusicPlayerTrack_vel, 1
+	struct_field o_MusicPlayerTrack_velocity, 1
 	struct_field o_MusicPlayerTrack_run, 1
 	struct_field o_MusicPlayerTrack_keyM, 1
 	struct_field o_MusicPlayerTrack_pitM, 1
@@ -125,3 +130,5 @@
 	struct_field o_MusicPlayerTrack_cmdPtr, 4
 	struct_field o_MusicPlayerTrack_patS, 12
 	struct_field MusicPlayerTrack_size, 0
+
+	.equiv o_MusicPlayerTrack_ToneData_keySplitTable, o_MusicPlayerTrack_ToneData_attack
