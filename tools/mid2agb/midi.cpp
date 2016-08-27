@@ -933,8 +933,6 @@ void ReadMidiTracks()
                 if (g_compressionEnabled)
                     Compress(*events);
 
-                events->pop_back(); // Remove the EndOfTrack event.
-
                 PrintAgbTrack(*events);
 
                 g_agbTrack++;

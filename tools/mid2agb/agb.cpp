@@ -339,7 +339,7 @@ void PrintAgbTrack(std::vector<Event>& events)
     if (!foundVolBeforeNote)
         PrintByte("\tVOL   , 127*%s_mvl/mxv", g_asmLabel.c_str());
 
-    for (unsigned i = 0; i < events.size(); i++)
+    for (unsigned i = 0; events[i].type != EventType::EndOfTrack; i++)
     {
         const Event& event = events[i];
 
