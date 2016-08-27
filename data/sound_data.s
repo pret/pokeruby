@@ -12227,11 +12227,11 @@ VoiceGroupTable_8454C54: @ 8454C54
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 8455218
 
 KeySplitTable_8455224: @ 845522
+@ This is weird.  There are instruments at the beginning of the keysplit table.
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 8455224
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 8455230
 	voice_noise_alt 0, 0, 1, 7, 1  @ 845523C
-
-	.incbin "baserom.gba", 0x00455248, 0x24
+	.incbin "data/music/key_split_tables/8455248.bin"
 
 KeySplitTable_845526C: @ 845526C
 	.incbin "data/music/key_split_tables/845526C.bin"
