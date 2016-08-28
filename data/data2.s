@@ -15341,20 +15341,28 @@ gSpriteAffineAnim_83D5EAC:: @ 83D5EAC
 	obj_rot_scal_anim_jump 0
 
 	.align 2
-SpriteAffineAnim_3D5EBC:: @ 83D5EBC
-	.incbin "baserom.gba", 0x3d5ebc, 0x18
+gSpriteAffineAnim_83D5EBC:: @ 83D5EBC
+	obj_rot_scal_anim_frame 0x100, 0x100, 0, 0
+	obj_rot_scal_anim_frame 0x0, 0x0, -4, 16
+	obj_rot_scal_anim_end
 
 	.align 2
-SpriteAffineAnim_3D5ED4:: @ 83D5ED4
-	.incbin "baserom.gba", 0x3d5ed4, 0x18
+gSpriteAffineAnim_83D5ED4:: @ 83D5ED4
+	obj_rot_scal_anim_frame 0x100, 0x100, -64, 0
+	obj_rot_scal_anim_frame 0x0, 0x0, -4, 16
+	obj_rot_scal_anim_end
 
 	.align 2
-SpriteAffineAnim_3D5EEC:: @ 83D5EEC
-	.incbin "baserom.gba", 0x3d5eec, 0x18
+gSpriteAffineAnim_83D5EEC:: @ 83D5EEC
+	obj_rot_scal_anim_frame 0x100, 0x100, -128, 0
+	obj_rot_scal_anim_frame 0x0, 0x0, -4, 16
+	obj_rot_scal_anim_end
 
 	.align 2
-SpriteAffineAnim_3D5F04:: @ 83D5F04
-	.incbin "baserom.gba", 0x3d5f04, 0x18
+gSpriteAffineAnim_83D5F04:: @ 83D5F04
+	obj_rot_scal_anim_frame 0x100, 0x100, 64, 0
+	obj_rot_scal_anim_frame 0x0, 0x0, -4, 16
+	obj_rot_scal_anim_end
 
 	.align 2
 gSpriteAffineAnim_83D5F1C:: @ 83D5F1C
@@ -15363,12 +15371,16 @@ gSpriteAffineAnim_83D5F1C:: @ 83D5F1C
 	obj_rot_scal_anim_end
 
 	.align 2
-SpriteAffineAnim_3D5F34:: @ 83D5F34
-	.incbin "baserom.gba", 0x3d5f34, 0x18
+gSpriteAffineAnim_83D5F34:: @ 83D5F34
+	obj_rot_scal_anim_frame 0x100, 0x100, 64, 0
+	obj_rot_scal_anim_frame 0x0, 0x0, 4, 16
+	obj_rot_scal_anim_end
 
 	.align 2
-SpriteAffineAnim_3D5F4C:: @ 83D5F4C
-	.incbin "baserom.gba", 0x3d5f4c, 0x18
+gSpriteAffineAnim_83D5F4C:: @ 83D5F4C
+	obj_rot_scal_anim_frame 0x100, 0x100, -128, 0
+	obj_rot_scal_anim_frame 0x0, 0x0, 4, 16
+	obj_rot_scal_anim_end
 
 	.align 2
 gSpriteAffineAnim_83D5F64:: @ 83D5F64
@@ -15377,36 +15389,52 @@ gSpriteAffineAnim_83D5F64:: @ 83D5F64
 	obj_rot_scal_anim_end
 
 	.align 2
-SpriteAffineAnim_3D5F7C:: @ 83D5F7C
-	.incbin "baserom.gba", 0x3d5f7c, 0x18
+gSpriteAffineAnim_83D5F7C:: @ 83D5F7C
+	obj_rot_scal_anim_frame 0x100, 0x100, 0, 0
+	obj_rot_scal_anim_frame 0x0, 0x0, -8, 8
+	obj_rot_scal_anim_end
 
 	.align 2
-SpriteAffineAnim_3D5F94:: @ 83D5F94
-	.incbin "baserom.gba", 0x3d5f94, 0x18
+gSpriteAffineAnim_83D5F94:: @ 83D5F94
+	obj_rot_scal_anim_frame 0x100, 0x100, -64, 0
+	obj_rot_scal_anim_frame 0x0, 0x0, -8, 8
+	obj_rot_scal_anim_end
 
 	.align 2
-SpriteAffineAnim_3D5FAC:: @ 83D5FAC
-	.incbin "baserom.gba", 0x3d5fac, 0x18
+gSpriteAffineAnim_83D5FAC:: @ 83D5FAC
+	obj_rot_scal_anim_frame 0x100, 0x100, -128, 0
+	obj_rot_scal_anim_frame 0x0, 0x0, -8, 8
+	obj_rot_scal_anim_end
 
 	.align 2
-SpriteAffineAnim_3D5FC4:: @ 83D5FC4
-	.incbin "baserom.gba", 0x3d5fc4, 0x18
+gSpriteAffineAnim_83D5FC4:: @ 83D5FC4
+	obj_rot_scal_anim_frame 0x100, 0x100, 64, 0
+	obj_rot_scal_anim_frame 0x0, 0x0, -8, 8
+	obj_rot_scal_anim_end
 
 	.align 2
-SpriteAffineAnim_3D5FDC:: @ 83D5FDC
-	.incbin "baserom.gba", 0x3d5fdc, 0x18
+gSpriteAffineAnim_83D5FDC:: @ 83D5FDC
+	obj_rot_scal_anim_frame 0x100, 0x100, 0, 0
+	obj_rot_scal_anim_frame 0x0, 0x0, 8, 8
+	obj_rot_scal_anim_end
 
 	.align 2
-SpriteAffineAnim_3D5FF4:: @ 83D5FF4
-	.incbin "baserom.gba", 0x3d5ff4, 0x18
+gSpriteAffineAnim_83D5FF4:: @ 83D5FF4
+	obj_rot_scal_anim_frame 0x100, 0x100, 64, 0
+	obj_rot_scal_anim_frame 0x0, 0x0, 8, 8
+	obj_rot_scal_anim_end
 
 	.align 2
-SpriteAffineAnim_3D600C:: @ 83D600C
-	.incbin "baserom.gba", 0x3d600c, 0x18
+gSpriteAffineAnim_83D600C:: @ 83D600C
+	obj_rot_scal_anim_frame 0x100, 0x100, -128, 0
+	obj_rot_scal_anim_frame 0x0, 0x0, 8, 8
+	obj_rot_scal_anim_end
 
 	.align 2
-SpriteAffineAnim_3D6024:: @ 83D6024
-	.incbin "baserom.gba", 0x3d6024, 0x18
+gSpriteAffineAnim_83D6024:: @ 83D6024
+	obj_rot_scal_anim_frame 0x100, 0x100, -64, 0
+	obj_rot_scal_anim_frame 0x0, 0x0, 8, 8
+	obj_rot_scal_anim_end
 
 	.align 2
 gSpriteAffineAnimTable_83D603C:: @ 83D603C
@@ -15416,23 +15444,20 @@ gSpriteAffineAnimTable_83D603C:: @ 83D603C
 	.4byte gSpriteAffineAnim_83D5EAC
 	.4byte gSpriteAffineAnim_83D5F1C
 	.4byte gSpriteAffineAnim_83D5F64
-
-	.align 2
-@ unused part of previous table? @ 83D6054
-	.4byte SpriteAffineAnim_3D5F4C
-	.4byte SpriteAffineAnim_3D5F34
-	.4byte SpriteAffineAnim_3D5EBC
-	.4byte SpriteAffineAnim_3D5ED4
-	.4byte SpriteAffineAnim_3D5EEC
-	.4byte SpriteAffineAnim_3D5F04
-	.4byte SpriteAffineAnim_3D5FDC
-	.4byte SpriteAffineAnim_3D6024
-	.4byte SpriteAffineAnim_3D600C
-	.4byte SpriteAffineAnim_3D5FF4
-	.4byte SpriteAffineAnim_3D5F7C
-	.4byte SpriteAffineAnim_3D5F94
-	.4byte SpriteAffineAnim_3D5FAC
-	.4byte SpriteAffineAnim_3D5FC4
+	.4byte gSpriteAffineAnim_83D5F4C
+	.4byte gSpriteAffineAnim_83D5F34
+	.4byte gSpriteAffineAnim_83D5EBC
+	.4byte gSpriteAffineAnim_83D5ED4
+	.4byte gSpriteAffineAnim_83D5EEC
+	.4byte gSpriteAffineAnim_83D5F04
+	.4byte gSpriteAffineAnim_83D5FDC
+	.4byte gSpriteAffineAnim_83D6024
+	.4byte gSpriteAffineAnim_83D600C
+	.4byte gSpriteAffineAnim_83D5FF4
+	.4byte gSpriteAffineAnim_83D5F7C
+	.4byte gSpriteAffineAnim_83D5F94
+	.4byte gSpriteAffineAnim_83D5FAC
+	.4byte gSpriteAffineAnim_83D5FC4
 
 	.align 2
 gSpriteTemplate_83D608C:: @ 83D608C
