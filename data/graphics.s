@@ -275,7 +275,7 @@ gBattleAnimSpriteSheet_017:: @ 8D04368
 	.incbin "graphics/battle_anims/sprites/017.4bpp.lz"
 
 	.align 2
-	.incbin "baserom.gba", 0xD04388, 0x21 @ LZ, uncomp. size = 0x20
+	.incbin "baserom.gba", 0xD04388, 0x24 @ LZ, uncomp. size = 0x20
 
 	.align 2
 gBattleAnimSpritePalette_019:: @ 8D043AC
@@ -302,10 +302,10 @@ gBattleAnimSpriteSheet_023:: @ 8D045A4
 	.incbin "graphics/battle_anims/sprites/023.4bpp.lz"
 
 	.align 2
-	.incbin "baserom.gba", 0xD046AC, 0x26 @ LZ, uncomp. size = 0x20
+	.incbin "baserom.gba", 0xD046AC, 0x26 @ palette
 
 	.align 2
-	.incbin "baserom.gba", 0xD046D4, 0xFA @ LZ, uncomp. size = 0x400
+	.incbin "graphics/unused/music_notes.4bpp.lz"
 
 	.align 2
 gBattleAnimSpritePalette_021:: @ 8D047D0
@@ -979,22 +979,22 @@ gBattleAnimSpriteSheet_115:: @ 8D11B74
 	.incbin "graphics/battle_anims/sprites/115.4bpp.lz"
 
 	.align 2
-	.incbin "baserom.gba", 0xD11CA4, 0x188 @ LZ, uncomp. size = 0x800
+	.incbin "graphics/unused/water_splash.8bpp.lz"
 
 	.align 2
-	.incbin "baserom.gba", 0xD11E2C, 0xDD @ LZ, uncomp. size = 0x400
+	.incbin "graphics/unused/water_splash.bin.lz"
 
 	.align 2
-	.incbin "baserom.gba", 0xD11F0C, 0x5D @ LZ, uncomp. size = 0x200
+	.incbin "graphics/unused/water_splash.gbapal.lz"
 
 	.align 2
-	.incbin "baserom.gba", 0xD11F6C, 0x8C @ LZ, uncomp. size = 0x140
+	.incbin "graphics/unused/basic_frame.4bpp.lz"
 
 	.align 2
-	.incbin "baserom.gba", 0xD11FF8, 0x28 @ LZ, uncomp. size = 0x20
+	.incbin "graphics/unused/basic_frame.gbapal.lz"
 
 	.align 2
-	.incbin "baserom.gba", 0xD12020, 0x10C @ LZ, uncomp. size = 0x800
+	.incbin "graphics/unused/basic_frame.bin.lz"
 
 	.align 2
 gUnknown_08D1212C::
@@ -1002,11 +1002,20 @@ gUnknown_08D1212C::
 
 	.align 2
 gUnknown_08D1214C::
-	.incbin "baserom.gba", 0xd1214c, 0x20
+	.incbin "graphics/battle_interface/hpbar.gbapal"
 	
 	.align 2
 gUnknown_08D1216C:: @ 8D1216C
-	.incbin "baserom.gba", 0xd1216c, 0x840
+	.incbin "graphics/battle_interface/hpbar.4bpp"
+	.incbin "graphics/battle_interface/expbar.4bpp"
+	.incbin "graphics/battle_interface/status_psn.4bpp"
+	.incbin "graphics/battle_interface/status_par.4bpp"
+	.incbin "graphics/battle_interface/status_slp.4bpp"
+	.incbin "graphics/battle_interface/status_frz.4bpp"
+	.incbin "graphics/battle_interface/status_brn.4bpp"
+	.incbin "graphics/battle_interface/misc.4bpp"
+	.incbin "graphics/battle_interface/hpbar_anim.4bpp"
+	.incbin "graphics/battle_interface/misc_frameend.4bpp"
 
 Tiles_D129AC:: @ 8D129AC
 	.incbin "baserom.gba", 0xd129ac, 0x680
