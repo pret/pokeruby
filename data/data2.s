@@ -1058,16 +1058,31 @@ gUnknown_081FA6D4:: @ 81FA6D4
 	.4byte gStatusConditionString_LoveJpn, BattleText_Love
 
 gUnknown_081FA70C:: @ 81FA70C
-	.incbin "baserom.gba", 0x001fa70c, 0xf
+	.byte 0, 0, 0
+	.byte 3, 5, 0
+	.byte 2, 3, 0
+	.byte 1, 2, 0
+	.byte 1, 1, 0
 
 gUnknown_081FA71B:: @ 81FA71B
-	.incbin "baserom.gba", 0x001fa71b, 0x4
+	.byte 4, 3, 2, 1
 
 gUnknown_081FA71F:: @ 81FA71F
-	.incbin "baserom.gba", 0x001fa71f, 0x5
+	.byte 4, 4, 4, 4
 
+	.align 1
 gUnknown_081FA724:: @ 81FA724
-	.incbin "baserom.gba", 0x001fa724, 0x18
+	.2byte   0x2D
+	.2byte   0x2E
+	.2byte   0x2F
+	.2byte   0x30
+	.2byte   0x67
+	.2byte   0xAD
+	.2byte   0xFD
+	.2byte  0x13F
+	.2byte  0x140
+	.2byte  0x130
+	.2byte 0xFFFF
 
 	.align 2
 gUnknown_081FA73C:: @ 81FA73C
@@ -7646,6 +7661,7 @@ gUnknown_08376504:: @ 8376504
 	.2byte MOVE_DIVE
 
 	.4byte gTileBuffer @ unreferenced?
+
 MenuGfx_HoldIcons:
 	.incbin "graphics/interface/hold_icons.4bpp"
 MenuPal_HoldIcons:
@@ -7748,6 +7764,7 @@ gUnknown_08376A5E:: @ 8376A5E
 gUnknown_08376B54:: @ 8376B54
 	.4byte ether_effect_related_2
 	.4byte sub_80704F0
+
 Unknown_08376B5C:
 	.incbin "baserom.gba", 0x00376b5c, 0x2c
 Unknown_08376B88:
@@ -22434,6 +22451,7 @@ gUnknown_083ECE6C:: @ 83ECE6C
 gUnknown_083ECE7E:: @ 83ECE7E
 	.incbin "baserom.gba", 0x003ece7e, 0x8e
 
+	.align 2
 gUnknown_083ECF0C:: @ 83ECF0C
 	.4byte sub_8105C64
 	.4byte sub_8105F54
@@ -22496,6 +22514,7 @@ gUnknown_083ED048:: @ 83ED048
 	.4byte Unknown_83ED020
 	.4byte Unknown_83ECFF8
 
+	.align 2
 gUnknown_083ED064:: @ 83ED064
 	.4byte sub_810639C
 	.4byte sub_8106364
@@ -26624,25 +26643,25 @@ gUnknown_084062F8:: @ 84062F8
 	.4byte OtherText_Cancel2, sub_813B734
 
 gUnknown_08406318:: @ 8406318
-	.incbin "baserom.gba", 0x00406318, 0x6
+	.string "{STR_VAR_1}{CLEAR_TO 80}$"
 
 gUnknown_0840631E:: @ 840631E
-	.incbin "baserom.gba", 0x0040631e, 0x9
+	.string "{COLOR RED}{STR_VAR_1}{CLEAR_TO 80}$"
 
 gUnknown_08406327:: @ 8406327
-	.incbin "baserom.gba", 0x00406327, 0x3
+	.string "{STR_VAR_1}$"
 
 gUnknown_0840632A:: @ 840632A
-	.incbin "baserom.gba", 0x0040632a, 0x6
+	.string "{COLOR RED}{STR_VAR_1}$"
 
 gUnknown_08406330:: @ 8406330
-	.incbin "baserom.gba", 0x00406330, 0x4
+	.string "{CLEAR_TO 32}$"
 
 gUnknown_08406334:: @ 8406334
 	.incbin "baserom.gba", 0x00406334, 0x6
 
 gUnknown_0840633A:: @ 840633A
-	.incbin "baserom.gba", 0x0040633a, 0x6
+	.string "{COLOR RED}{STR_VAR_1}$"
 
 Palette_406340:: @ 8406340
 	.incbin "baserom.gba", 0x406340, 0x20
@@ -27523,8 +27542,8 @@ gUnknown_0840B878::
 	.include "data/text/credits.s"
 
 gUnknown_0840CA00:: @ 840CA00
-Unknown_840CA00:
 	.incbin "baserom.gba", 0x0040ca00, 0x8
+
 Unknown_840CA08:
 	.incbin "baserom.gba", 0x0040ca08, 0x14
 Unknown_840CA1C:
@@ -27536,11 +27555,11 @@ Unknown_840CA40:
 
 	.align 2
 gUnknown_0840CA54:: @ 840CA54
-Unknown_840CA54:
 	.4byte Unknown_840CA08
 	.4byte Unknown_840CA1C
 	.4byte Unknown_840CA30
 	.4byte Unknown_840CA40
+
 Unknown_840CA64:
 	.incbin "baserom.gba", 0x0040ca64, 0x14
 Unknown_840CA78:
