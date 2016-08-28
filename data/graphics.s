@@ -30,78 +30,103 @@ gSmokescreenImpactTiles:: @ 8D02410
 gSmokescreenImpactPalette:: @ 8D024F0
 	.incbin "graphics/battle_anims/sprites/smokescreen_impact.gbapal.lz"
 
+	.align 2
 gInterfaceGfx_PokeBall::
 	.incbin "graphics/interface/ball/poke.4bpp.lz" @ 0xBC
 
+	.align 2
 gInterfacePal_PokeBall::
 	.incbin "graphics/interface/ball/poke.gbapal.lz"
 
+	.align 2
 gInterfaceGfx_GreatBall::
 	.incbin "graphics/interface/ball/great.4bpp.lz" @ 0xBC
 
+	.align 2
 gInterfacePal_GreatBall::
 	.incbin "graphics/interface/ball/great.gbapal.lz"
 
+	.align 2
 gInterfaceGfx_SafariBall::
 	.incbin "graphics/interface/ball/safari.4bpp.lz" @ 0xBC
 
+	.align 2
 gInterfacePal_SafariBall::
 	.incbin "graphics/interface/ball/safari.gbapal.lz"
 
+	.align 2
 gInterfaceGfx_UltraBall::
 	.incbin "graphics/interface/ball/ultra.4bpp.lz" @ 0xBC
 
+	.align 2
 gInterfacePal_UltraBall::
 	.incbin "graphics/interface/ball/ultra.gbapal.lz"
 
+	.align 2
 gInterfaceGfx_MasterBall::
 	.incbin "graphics/interface/ball/master.4bpp.lz" @ 0xBC
 
+	.align 2
 gInterfacePal_MasterBall::
 	.incbin "graphics/interface/ball/master.gbapal.lz"
 
+	.align 2
 gInterfaceGfx_NetBall::
 	.incbin "graphics/interface/ball/net.4bpp.lz" @ 0xBC
 
+	.align 2
 gInterfacePal_NetBall::
 	.incbin "graphics/interface/ball/net.gbapal.lz"
 
+	.align 2
 gInterfaceGfx_DiveBall::
 	.incbin "graphics/interface/ball/dive.4bpp.lz" @ 0xBC
 
+	.align 2
 gInterfacePal_DiveBall::
 	.incbin "graphics/interface/ball/dive.gbapal.lz"
 
+	.align 2
 gInterfaceGfx_NestBall::
 	.incbin "graphics/interface/ball/nest.4bpp.lz" @ 0xBC
 
+	.align 2
 gInterfacePal_NestBall::
 	.incbin "graphics/interface/ball/nest.gbapal.lz"
 
+	.align 2
 gInterfaceGfx_RepeatBall::
 	.incbin "graphics/interface/ball/repeat.4bpp.lz" @ 0xBC
 
+	.align 2
 gInterfacePal_RepeatBall::
 	.incbin "graphics/interface/ball/repeat.gbapal.lz"
 
+	.align 2
 gInterfaceGfx_TimerBall::
 	.incbin "graphics/interface/ball/timer.4bpp.lz" @ 0xBC
 
+	.align 2
 gInterfacePal_TimerBall::
 	.incbin "graphics/interface/ball/timer.gbapal.lz"
 
+	.align 2
 gInterfaceGfx_LuxuryBall::
 	.incbin "graphics/interface/ball/luxury.4bpp.lz" @ 0xBC
 
+	.align 2
 gInterfacePal_LuxuryBall::
 	.incbin "graphics/interface/ball/luxury.gbapal.lz"
 
+	.align 2
 gInterfaceGfx_PremierBall::
 	.incbin "graphics/interface/ball/premier.4bpp.lz" @ 0xBC
 
+	.align 2
 gInterfacePal_PremierBall::
 	.incbin "graphics/interface/ball/premier.gbapal.lz"
 
+	.align 2
 gUnknown_08D030D0:: @ 8D030D0
 	.incbin "graphics/interface/ball_open.4bpp.lz"
 
@@ -388,8 +413,35 @@ gBattleAnimSpriteSheet_036:: @ 8D07448
 	.align 2
 gBattleAnimSpriteSheet_037:: @ 8D0781C
 	.incbin "graphics/battle_anims/sprites/037.4bpp.lz"
+	
+@ old battle interface data, unused
 
-	.incbin "baserom.gba", 0xd07b68, 0xb7c
+	.align 2
+	.incbin "graphics/unknown/unknown_D07B68.4bpp.lz"
+	
+	.align 2
+	.incbin "graphics/unknown/unknown_D07B68.gbapal.lz"
+	
+	.align 2
+	.incbin "graphics/unknown/unknown_D07B68_2.gbapal.lz"
+	
+	.align 2
+	.incbin "graphics/unused/obi1.4bpp.lz"
+	
+	.align 2
+	.incbin "graphics/unused/obi_palpak1.gbapal.lz" @ palettes 1-3
+	
+	.align 2
+	.incbin "graphics/unused/obi_pal4.gbapal.lz" @ 4 is by itself
+	
+	.align 2
+	.incbin "graphics/unused/obi_palpak3.gbapal.lz" @ palettes 5-7
+	
+	.align 2
+	.incbin "graphics/unused/obi2.4bpp.lz"
+	
+	.align 2
+	.incbin "graphics/unused/obi_tilemap.bin.lz"
 
 	.align 2
 gBattleAnimSpritePalette_038:: @ 8D086E4

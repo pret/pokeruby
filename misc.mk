@@ -5,6 +5,7 @@ PSSGFXDIR := graphics/pokemon_storage
 MISCGFXDIR := graphics/misc
 PKNAVGFXDIR := graphics/pokenav
 UNKNOWNGFXDIR := graphics/unknown
+UNUSEDGFXDIR := graphics/unused
 REELGFXDIR := graphics/slot_machine
 ROULGFXDIR := graphics/roulette
 BTLANMSPRGFXDIR := graphics/battle_anims/sprites
@@ -165,3 +166,15 @@ $(PICFRAMEGFXDIR)/frame5.4bpp: $(PICFRAMEGFXDIR)/frame5.png
 
 $(MISCGFXDIR)/nextturn.4bpp: $(MISCGFXDIR)/nextturn.png
 	$(GFX) $< $@ -num_tiles 8
+	
+$(UNUSEDGFXDIR)/obi_palpak1.gbapal: $(UNUSEDGFXDIR)/obi_pal1.gbapal $(UNUSEDGFXDIR)/obi_pal2.gbapal $(UNUSEDGFXDIR)/obi_pal3.gbapal
+	@cat $(UNUSEDGFXDIR)/obi_pal1.gbapal $(UNUSEDGFXDIR)/obi_pal2.gbapal $(UNUSEDGFXDIR)/obi_pal3.gbapal >$@
+
+$(UNUSEDGFXDIR)/obi_palpak3.gbapal: $(UNUSEDGFXDIR)/obi_pal5.gbapal $(UNUSEDGFXDIR)/obi_pal6.gbapal $(UNUSEDGFXDIR)/obi_pal7.gbapal
+	@cat $(UNUSEDGFXDIR)/obi_pal5.gbapal $(UNUSEDGFXDIR)/obi_pal6.gbapal $(UNUSEDGFXDIR)/obi_pal7.gbapal >$@
+
+$(UNUSEDGFXDIR)/obi1.4bpp: $(UNUSEDGFXDIR)/obi_bulbasaur.4bpp $(UNUSEDGFXDIR)/obi_charizard.4bpp
+	@cat $(UNUSEDGFXDIR)/obi_bulbasaur.4bpp $(UNUSEDGFXDIR)/obi_charizard.4bpp >$@
+
+$(UNUSEDGFXDIR)/obi2.4bpp: $(UNUSEDGFXDIR)/obi_bulbasaur2.4bpp $(UNUSEDGFXDIR)/obi_battle_interface_1.4bpp $(UNUSEDGFXDIR)/obi_battle_interface_2.4bpp $(UNUSEDGFXDIR)/obi_battle_interface_3.4bpp
+	@cat $(UNUSEDGFXDIR)/obi_bulbasaur2.4bpp $(UNUSEDGFXDIR)/obi_battle_interface_1.4bpp $(UNUSEDGFXDIR)/obi_battle_interface_2.4bpp $(UNUSEDGFXDIR)/obi_battle_interface_3.4bpp >$@
