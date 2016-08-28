@@ -499,8 +499,9 @@ gBattleAnimSpritePalette_045:: @ 8D099B4
 gBattleAnimSpriteSheet_045:: @ 8D099DC
 	.incbin "graphics/battle_anims/sprites/045.4bpp.lz"
 
+	.align 2
 gUnknown_08D09C48:: @ 8D09C48
-	.incbin "baserom.gba", 0x00d09c48, 0x214
+	.incbin "graphics/interface/hp_numbers.4bpp.lz"
 
 	.align 2
 gBattleAnimSpriteSheet_046:: @ 8D09E5C
@@ -542,7 +543,11 @@ gBattleAnimSpriteSheet_051:: @ 8D0A62C
 gBattleAnimSpriteSheet_052:: @ 8D0A6D8
 	.incbin "graphics/battle_anims/sprites/052.4bpp.lz"
 
-	.incbin "baserom.gba", 0xd0a7a4, 0x194
+	.align 2
+	.incbin "graphics/unused/line_sketch.4bpp.lz" @ unused
+	
+	.align 2
+	.incbin "graphics/unused/line_sketch.gbapal.lz"
 
 	.align 2
 gBattleAnimSpriteSheet_054:: @ 8D0A938
@@ -620,7 +625,8 @@ gBattleAnimSpriteSheet_063:: @ 8D0B9D4
 gBattleAnimSpritePalette_063:: @ 8D0BB90
 	.incbin "graphics/battle_anims/sprites/063.gbapal.lz"
 
-	.incbin "baserom.gba", 0xd0bbb8, 0x70
+	.align 2
+	.incbin "graphics/unused/metronome_hand_small.4bpp.lz" @ unused, was for metronome at one point
 
 	.align 2
 gBattleAnimSpritePalette_091:: @ 8D0BC28
@@ -933,8 +939,18 @@ gBattleAnimSpriteSheet_114:: @ 8D10F78
 	.align 2
 gBattleAnimSpritePalette_114:: @ 8D1106C
 	.incbin "graphics/battle_anims/sprites/114.gbapal.lz"
+	
+	.align 2
+	.incbin "graphics/unused/blue_frame.bin.lz" @  P1, P2, P3 and P4 tilemaps?
 
-	.incbin "baserom.gba", 0xd11094, 0xae0
+	.align 2
+	.incbin "graphics/unused/redyellowgreen_frame.bin.lz"
+	
+	.align 2
+	.incbin "graphics/unused/color_frames.4bpp.lz"
+	
+	.align 2
+	.incbin "graphics/unused/color_frames.gbapal.lz"
 
 	.align 2
 gBattleAnimSpriteSheet_115:: @ 8D11B74
@@ -942,10 +958,15 @@ gBattleAnimSpriteSheet_115:: @ 8D11B74
 
 	.incbin "baserom.gba", 0xd11ca4, 0x488
 
+	.align 2
 gUnknown_08D1212C::
 	.incbin "graphics/interface/battle_window.gbapal"
+
+	.align 2
 gUnknown_08D1214C::
 	.incbin "baserom.gba", 0xd1214c, 0x20
+	
+	.align 2
 gUnknown_08D1216C:: @ 8D1216C
 	.incbin "baserom.gba", 0xd1216c, 0x840
 

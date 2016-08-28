@@ -178,3 +178,13 @@ $(UNUSEDGFXDIR)/obi1.4bpp: $(UNUSEDGFXDIR)/obi_bulbasaur.4bpp $(UNUSEDGFXDIR)/ob
 
 $(UNUSEDGFXDIR)/obi2.4bpp: $(UNUSEDGFXDIR)/obi_bulbasaur2.4bpp $(UNUSEDGFXDIR)/obi_battle_interface_1.4bpp $(UNUSEDGFXDIR)/obi_battle_interface_2.4bpp $(UNUSEDGFXDIR)/obi_battle_interface_3.4bpp
 	@cat $(UNUSEDGFXDIR)/obi_bulbasaur2.4bpp $(UNUSEDGFXDIR)/obi_battle_interface_1.4bpp $(UNUSEDGFXDIR)/obi_battle_interface_2.4bpp $(UNUSEDGFXDIR)/obi_battle_interface_3.4bpp >$@
+
+$(MENUGFXDIR)/hp_numbers.4bpp: $(MENUGFXDIR)/hpbar_anim.4bpp $(MENUGFXDIR)/numbers1.4bpp $(MENUGFXDIR)/numbers2.4bpp
+	@cat $(MENUGFXDIR)/hpbar_anim.4bpp $(MENUGFXDIR)/numbers1.4bpp $(MENUGFXDIR)/numbers2.4bpp >$@
+
+$(UNUSEDGFXDIR)/redyellowgreen_frame.bin: $(UNUSEDGFXDIR)/red_frame.bin $(UNUSEDGFXDIR)/yellow_frame.bin $(UNUSEDGFXDIR)/green_frame.bin $(UNUSEDGFXDIR)/blank_frame.bin
+	@cat $(UNUSEDGFXDIR)/red_frame.bin $(UNUSEDGFXDIR)/yellow_frame.bin $(UNUSEDGFXDIR)/green_frame.bin $(UNUSEDGFXDIR)/blank_frame.bin >$@
+	
+$(UNUSEDGFXDIR)/color_frames.4bpp: $(UNUSEDGFXDIR)/color_frames.png
+	$(GFX) $< $@ -num_tiles 353
+
