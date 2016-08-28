@@ -283,7 +283,11 @@ CreditsTerminator::
 	credits_entry 0, Text_CreditsTerminator
 
 CreditsVersion::
+	.ifdef SAPPHIRE
+	credits_entry 7, Text_Version
+	.else
 	credits_entry 8, Text_Version
+	.endif
 
 CreditsCredits::
 	credits_entry 11, Category_Credits

@@ -15,6 +15,17 @@
 	.set IWRAM_START, 0x03000000
 	.set IWRAM_END,   IWRAM_START + 0x8000
 
+	.set PLTT,     0x5000000
+	.set BG_PLTT,  PLTT
+	.set OBJ_PLTT, PLTT + 0x200
+
+	.set VRAM,      0x6000000
+	.set BG_VRAM,   VRAM
+	.set OBJ_VRAM0, VRAM + 0x10000 @ text-mode BG
+	.set OBJ_VRAM1, VRAM + 0x14000 @ bitmap-mode BG
+
+	.set OAM, 0x7000000
+
 	.set SOUND_INFO_PTR, IWRAM_END - 0x10
 	.set INTR_VECTOR,    IWRAM_END - 0x4
 

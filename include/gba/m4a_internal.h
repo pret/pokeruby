@@ -45,8 +45,8 @@ struct WaveData
 
 #define TONEDATA_TYPE_CGB    0x07
 #define TONEDATA_TYPE_FIX    0x08
-#define TONEDATA_TYPE_SPL    0x40
-#define TONEDATA_TYPE_RHY    0x80
+#define TONEDATA_TYPE_SPL    0x40 // key split
+#define TONEDATA_TYPE_RHY    0x80 // rhythm
 
 #define TONEDATA_P_S_PAN    0xc0
 #define TONEDATA_P_S_PAM    TONEDATA_P_S_PAN
@@ -241,9 +241,9 @@ struct MusicPlayerTrack
     u8 wai;
     u8 patP;
     u8 repN;
-    u8 gat;
+    u8 gateTime;
     u8 key;
-    u8 vel;
+    u8 velocity;
     u8 run;
     u8 keyM;
     u8 pitM;

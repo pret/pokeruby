@@ -5854,7 +5854,7 @@ _08043C20: .4byte 0xfffffc00
 _08043C24: .4byte sub_8043D5C
 _08043C28: .4byte 0x02024a72
 _08043C2C: .4byte gSpriteTemplate_820A56C
-_08043C30: .4byte gUnknown_0820A684
+_08043C30: .4byte gSubspriteTables_820A684
 _08043C34: .4byte 0x06010000
 _08043C38: .4byte REG_BG0HOFS
 	thumb_func_end battle_make_oam_normal_battle
@@ -7518,7 +7518,7 @@ _08044940: .4byte gUnknown_0820A764
 _08044944: .4byte gUnknown_0820A774
 _08044948: .4byte gSpriteTemplate_820A7A4
 _0804494C: .4byte 0x02020004
-_08044950: .4byte gUnknown_0820A6E4
+_08044950: .4byte gSubspriteTables_820A6E4
 _08044954:
 	ldrh r0, [r4, 0x20]
 	adds r0, 0x60
@@ -8160,7 +8160,7 @@ _08044DFA:
 _08044E3C: .4byte sub_8045110
 _08044E40: .4byte 0x02020004
 _08044E44: .4byte sub_8045048
-_08044E48: .4byte gUnknown_0820A6EC
+_08044E48: .4byte gSubspriteTables_820A6EC
 _08044E4C: .4byte 0x03004b20
 _08044E50: .4byte sub_8044E74
 _08044E54:
