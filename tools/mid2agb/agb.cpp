@@ -37,6 +37,7 @@ static int s_lastVelocity;
 static bool s_noteChanged;
 static bool s_velocityChanged;
 static bool s_inPattern;
+static int s_extendedCommand;
 
 void PrintAgbHeader()
 {
@@ -246,6 +247,24 @@ void PrintSeqLoopLabel(const Event& event)
     ResetTrackVars();
 }
 
+void PrintExtendedOp(const Event& event)
+{
+    // TODO: support for other extended commands
+
+    switch (s_extendedCommand)
+    {
+    case 0x08:
+        PrintOp(event.time, "XCMD  ", "xIECV , %u", event.param2);
+        break;
+    case 0x09:
+        PrintOp(event.time, "XCMD  ", "xIECL , %u", event.param2);
+        break;
+    default:
+        PrintWait(event.time);
+        break;
+    }
+}
+
 void PrintControllerOp(const Event& event)
 {
     switch (event.param1)
@@ -294,9 +313,10 @@ void PrintControllerOp(const Event& event)
         break;
     case 0x1D:
     case 0x1F:
-        // TODO: extended op
+        PrintExtendedOp(event);
         break;
     case 0x1E:
+        s_extendedCommand = event.param2;
         // TODO: loop op
         break;
     case 0x21:
