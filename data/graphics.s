@@ -19,8 +19,8 @@ gUnknown_08D00524:: @ 8D00524
 
 @ 8D019E4
 	.incbin "graphics/unused/old.4bpp.lz" @ japanese table and bunch of stuff
-	.incbin "graphics/unused/unknown_D021BC.bin"
-	.incbin "graphics/unused/unknown_D023E8.bin"
+	.incbin "graphics/unused/old.bin.lz"
+	.incbin "graphics/unused/old.gbapal.lz"
 
 	.align 2
 gSmokescreenImpactTiles:: @ 8D02410
