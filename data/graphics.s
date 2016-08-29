@@ -302,7 +302,7 @@ gBattleAnimSpriteSheet_023:: @ 8D045A4
 	.incbin "graphics/battle_anims/sprites/023.4bpp.lz"
 
 	.align 2
-	.incbin "baserom.gba", 0xD046AC, 0x26 @ palette
+	.incbin "baserom.gba", 0xD046AC, 0x28 @ palette
 
 	.align 2
 	.incbin "graphics/unused/music_notes.4bpp.lz"
@@ -418,8 +418,6 @@ gBattleAnimSpriteSheet_036:: @ 8D07448
 	.align 2
 gBattleAnimSpriteSheet_037:: @ 8D0781C
 	.incbin "graphics/battle_anims/sprites/037.4bpp.lz"
-	
-@ old battle interface data, unused
 
 	.align 2
 	.incbin "graphics/unknown/unknown_D07B68.4bpp.lz"
@@ -429,6 +427,8 @@ gBattleAnimSpriteSheet_037:: @ 8D0781C
 	
 	.align 2
 	.incbin "graphics/unknown/unknown_D07B68_2.gbapal.lz"
+	
+@ old battle interface data, unused
 	
 	.align 2
 	.incbin "graphics/unused/obi1.4bpp.lz"
@@ -1021,6 +1021,7 @@ gUnknown_08D1216C:: @ 8D1216C
 Tiles_D129AC:: @ 8D129AC
 	.incbin "graphics/battle_interface/ball_display.4bpp"
 	
+	@ extra stuff
 	.incbin "graphics/battle_interface/ball_display_unused_extra.4bpp"
 	.incbin "graphics/battle_interface/status2.4bpp" @ these three duplicate sets of graphics are for the opponent pokemon and are also for use in double battles. they use dynamic palettes so coloring them is an extreme headache and wont be done for now.
 	.incbin "graphics/battle_interface/status3.4bpp"
@@ -1197,15 +1198,15 @@ gContestNumbers_UnusedPal::
 	.incbin "graphics/unused/numbers.gbapal.lz"
 
 	.align 2
-	.incbin "baserom.gba", 0xD16134, 0x100F @ LZ, uncomp. size = 0x4000
+	.incbin "graphics/unused/old_contest_2.4bpp.lz"
 
 	.align 2
 gUnknown_08D17144:: @ 8D17144
-	.incbin "baserom.gba", 0xD17144, 0x116 @ LZ, uncomp. size = 0x200
+	.incbin "graphics/unused/old_contest_2.gbapal.lz"
 
 	.align 2
 gUnknown_08D1725C:: @ 8D1725C
-	.incbin "baserom.gba", 0xD1725C, 0x1C5 @ LZ, uncomp. size = 0x800
+	.incbin "graphics/unused/old_contest_2.bin.lz"
 
 	.align 2
 gUnknown_08D17424:: @ 8D17424
@@ -1224,6 +1225,7 @@ gUnknown_08D17C3C:: @ 8D17C3C
 	.align 2
 gUnknown_08D17D6C:: @ 8D17D6C
 	.incbin "baserom.gba", 0xD17D6C, 0xAAA @ LZ, uncomp. size = 0x2000
+	@.incbin "graphics/contest/misc.4bpp.lz"
 
 	.align 2
 gUnknown_08D18818:: @ 8D18818
@@ -1234,11 +1236,11 @@ gUnknown_08D18818:: @ 8D18818
 
 	.align 2
 gContestJudgeSymbolsGfx:: @ 8D19590
-	.incbin "graphics/misc/judge_symbols.4bpp.lz"
+	.incbin "graphics/contest/judge_symbols.4bpp.lz"
 
 	.align 2
 gContest3Pal::
-	.incbin "graphics/misc/judge_symbols.gbapal.lz"
+	.incbin "graphics/contest/judge_symbols.gbapal.lz"
 
 	.align 2
 gTiles_8D1975C:: @ 8D1975C
@@ -1521,11 +1523,11 @@ gBattleAnimSpritePalette_172:: @ 8D1C728
 
 	.align 2
 gContestJudgeGfx::
-	.incbin "graphics/misc/judge.4bpp.lz"
+	.incbin "graphics/contest/judge.4bpp.lz"
 
 	.align 2
 gContest2Pal:: @ 8D1CA1C
-	.incbin "graphics/misc/judge.gbapal.lz"
+	.incbin "graphics/contest/judge.gbapal.lz"
 
 	.align 2
 gBattleAnimSpriteSheet_001:: @ 8D1CA44
@@ -2827,7 +2829,7 @@ gBattleAnimSpritePalette_262:: @ 8E693DC
 
 	.align 2
 gContestNextTurnGfx::
-	.incbin "graphics/misc/nextturn.4bpp.lz"
+	.incbin "graphics/contest/nextturn.4bpp.lz"
 
 gUnknown_08E69478:: @ 8E69478
 	.incbin "baserom.gba", 0x00e69478, 0x100
@@ -2864,7 +2866,7 @@ gUnknown_08E6978C:: @ 8E6978C
 
 	.align 2
 gContestPal::
-	.incbin "graphics/misc/nextturn.gbapal"
+	.incbin "graphics/contest/nextturn.gbapal"
 
 	.align 2
 gBattleAnimSpriteSheet_272:: @ 8E6982C

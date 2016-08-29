@@ -10,6 +10,7 @@ REELGFXDIR := graphics/slot_machine
 ROULGFXDIR := graphics/roulette
 BTLANMSPRGFXDIR := graphics/battle_anims/sprites
 PICFRAMEGFXDIR := graphics/picture_frame
+CONTESTGFXDIR := graphics/contest
 
 $(MENUGFXDIR)/menu.gbapal: $(MENUGFXDIR)/menu_0.gbapal $(MENUGFXDIR)/menu_1.gbapal
 	@cat $(MENUGFXDIR)/menu_0.gbapal $(MENUGFXDIR)/menu_1.gbapal >$@
@@ -164,7 +165,7 @@ $(BTLANMSPRGFXDIR)/159.4bpp: $(BTLANMSPRGFXDIR)/159_0.4bpp $(BTLANMSPRGFXDIR)/15
 $(PICFRAMEGFXDIR)/frame5.4bpp: $(PICFRAMEGFXDIR)/frame5.png
 	$(GFX) $< $@ -num_tiles 86
 
-$(MISCGFXDIR)/nextturn.4bpp: $(MISCGFXDIR)/nextturn.png
+$(CONTESTGFXDIR)/nextturn.4bpp: $(CONTESTGFXDIR)/nextturn.png
 	$(GFX) $< $@ -num_tiles 8
 	
 $(UNUSEDGFXDIR)/obi_palpak1.gbapal: $(UNUSEDGFXDIR)/old_pal1.gbapal $(UNUSEDGFXDIR)/old_pal2.gbapal $(UNUSEDGFXDIR)/old_pal3.gbapal
@@ -190,3 +191,6 @@ $(UNUSEDGFXDIR)/color_frames.4bpp: $(UNUSEDGFXDIR)/color_frames.png
 
 $(UNUSEDGFXDIR)/old_contest.4bpp: $(UNUSEDGFXDIR)/old_contest_frame_1.4bpp $(UNUSEDGFXDIR)/old_contest_floor.4bpp $(UNUSEDGFXDIR)/old_contest_frame_2.4bpp $(UNUSEDGFXDIR)/old_contest_symbols.4bpp $(UNUSEDGFXDIR)/old_contest_meter.4bpp $(UNUSEDGFXDIR)/old_contest_classes.4bpp $(UNUSEDGFXDIR)/old_contest_numbers.4bpp
 	@cat $(UNUSEDGFXDIR)/old_contest_frame_1.4bpp $(UNUSEDGFXDIR)/old_contest_floor.4bpp $(UNUSEDGFXDIR)/old_contest_frame_2.4bpp $(UNUSEDGFXDIR)/old_contest_symbols.4bpp $(UNUSEDGFXDIR)/old_contest_meter.4bpp $(UNUSEDGFXDIR)/old_contest_classes.4bpp $(UNUSEDGFXDIR)/old_contest_numbers.4bpp >$@
+
+$(UNUSEDGFXDIR)/old_contest_2.4bpp: $(UNUSEDGFXDIR)/old_contest_2_1.4bpp $(UNUSEDGFXDIR)/old_contest_2_2.4bpp
+	@cat $(UNUSEDGFXDIR)/old_contest_2_1.4bpp $(UNUSEDGFXDIR)/old_contest_2_2.4bpp >$@
