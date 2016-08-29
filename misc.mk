@@ -188,3 +188,5 @@ $(UNUSEDGFXDIR)/redyellowgreen_frame.bin: $(UNUSEDGFXDIR)/red_frame.bin $(UNUSED
 $(UNUSEDGFXDIR)/color_frames.4bpp: $(UNUSEDGFXDIR)/color_frames.png
 	$(GFX) $< $@ -num_tiles 353
 
+$(UNUSEDGFXDIR)/beta_contest.4bpp: $(UNUSEDGFXDIR)/beta_contest_frame_1.4bpp $(UNUSEDGFXDIR)/beta_contest_floor.4bpp $(UNUSEDGFXDIR)/beta_contest_frame_2.4bpp $(UNUSEDGFXDIR)/beta_contest_symbols.4bpp $(UNUSEDGFXDIR)/beta_contest_meter.4bpp $(UNUSEDGFXDIR)/beta_contest_classes.4bpp $(UNUSEDGFXDIR)/beta_contest_numbers.4bpp
+	@cat $(UNUSEDGFXDIR)/beta_contest_frame_1.4bpp $(UNUSEDGFXDIR)/beta_contest_floor.4bpp $(UNUSEDGFXDIR)/beta_contest_frame_2.4bpp $(UNUSEDGFXDIR)/beta_contest_symbols.4bpp $(UNUSEDGFXDIR)/beta_contest_meter.4bpp $(UNUSEDGFXDIR)/beta_contest_classes.4bpp $(UNUSEDGFXDIR)/beta_contest_numbers.4bpp >$@

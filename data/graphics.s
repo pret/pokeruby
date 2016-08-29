@@ -1017,8 +1017,16 @@ gUnknown_08D1216C:: @ 8D1216C
 	.incbin "graphics/battle_interface/hpbar_anim.4bpp"
 	.incbin "graphics/battle_interface/misc_frameend.4bpp"
 
+	.align 2
 Tiles_D129AC:: @ 8D129AC
-	.incbin "baserom.gba", 0xd129ac, 0x680
+	.incbin "graphics/battle_interface/ball_display.4bpp"
+	
+	.incbin "graphics/battle_interface/ball_display_unused_extra.4bpp"
+	.incbin "graphics/battle_interface/status2.4bpp" @ these three duplicate sets of graphics are for the opponent pokemon and are also for use in double battles. they use dynamic palettes so coloring them is an extreme headache and wont be done for now.
+	.incbin "graphics/battle_interface/status3.4bpp"
+	.incbin "graphics/battle_interface/status4.4bpp"
+	.incbin "graphics/unknown/unknown_D12FEC.4bpp"
+	.incbin "graphics/unknown/unknown_D1300C.4bpp"
 
 	.align 2
 gBattleAnimSpriteSheet_116:: @ 8D1302C
@@ -1169,13 +1177,13 @@ gBattleAnimSpriteSheet_077:: @ 8D150F4
 	.incbin "graphics/battle_anims/sprites/077.4bpp.lz"
 
 	.align 2
-	.incbin "baserom.gba", 0xD151C8, 0x912 @ LZ, uncomp. size = 0x2000
+	.incbin "graphics/unused/beta_contest.4bpp.lz"
 
 	.align 2
-	.incbin "baserom.gba", 0xD15ADC, 0x104 @ LZ, uncomp. size = 0x200
+	.incbin "graphics/unused/beta_contest.gbapal.lz"
 
 	.align 2
-	.incbin "baserom.gba", 0xD15BE0, 0x183 @ LZ, uncomp. size = 0x800
+	.incbin "graphics/unused/beta_contest.bin.lz"
 
 	.align 2
 	.incbin "baserom.gba", 0xD15D64, 0x2C0 @ LZ, uncomp. size = 0x1000
