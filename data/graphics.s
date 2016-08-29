@@ -1224,8 +1224,7 @@ gUnknown_08D17C3C:: @ 8D17C3C
 
 	.align 2
 gUnknown_08D17D6C:: @ 8D17D6C
-	.incbin "baserom.gba", 0xD17D6C, 0xAAA @ LZ, uncomp. size = 0x2000
-	@.incbin "graphics/contest/misc.4bpp.lz"
+	.incbin "graphics/contest/misc.4bpp.lz"
 
 	.align 2
 gUnknown_08D18818:: @ 8D18818
