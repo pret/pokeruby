@@ -167,17 +167,17 @@ $(PICFRAMEGFXDIR)/frame5.4bpp: $(PICFRAMEGFXDIR)/frame5.png
 $(MISCGFXDIR)/nextturn.4bpp: $(MISCGFXDIR)/nextturn.png
 	$(GFX) $< $@ -num_tiles 8
 	
-$(UNUSEDGFXDIR)/obi_palpak1.gbapal: $(UNUSEDGFXDIR)/obi_pal1.gbapal $(UNUSEDGFXDIR)/obi_pal2.gbapal $(UNUSEDGFXDIR)/obi_pal3.gbapal
-	@cat $(UNUSEDGFXDIR)/obi_pal1.gbapal $(UNUSEDGFXDIR)/obi_pal2.gbapal $(UNUSEDGFXDIR)/obi_pal3.gbapal >$@
+$(UNUSEDGFXDIR)/obi_palpak1.gbapal: $(UNUSEDGFXDIR)/old_pal1.gbapal $(UNUSEDGFXDIR)/old_pal2.gbapal $(UNUSEDGFXDIR)/old_pal3.gbapal
+	@cat $(UNUSEDGFXDIR)/old_pal1.gbapal $(UNUSEDGFXDIR)/old_pal2.gbapal $(UNUSEDGFXDIR)/old_pal3.gbapal >$@
 
-$(UNUSEDGFXDIR)/obi_palpak3.gbapal: $(UNUSEDGFXDIR)/obi_pal5.gbapal $(UNUSEDGFXDIR)/obi_pal6.gbapal $(UNUSEDGFXDIR)/obi_pal7.gbapal
-	@cat $(UNUSEDGFXDIR)/obi_pal5.gbapal $(UNUSEDGFXDIR)/obi_pal6.gbapal $(UNUSEDGFXDIR)/obi_pal7.gbapal >$@
+$(UNUSEDGFXDIR)/obi_palpak3.gbapal: $(UNUSEDGFXDIR)/old_pal5.gbapal $(UNUSEDGFXDIR)/old_pal6.gbapal $(UNUSEDGFXDIR)/old_pal7.gbapal
+	@cat $(UNUSEDGFXDIR)/old_pal5.gbapal $(UNUSEDGFXDIR)/old_pal6.gbapal $(UNUSEDGFXDIR)/old_pal7.gbapal >$@
 
-$(UNUSEDGFXDIR)/obi1.4bpp: $(UNUSEDGFXDIR)/obi_bulbasaur.4bpp $(UNUSEDGFXDIR)/obi_charizard.4bpp
-	@cat $(UNUSEDGFXDIR)/obi_bulbasaur.4bpp $(UNUSEDGFXDIR)/obi_charizard.4bpp >$@
+$(UNUSEDGFXDIR)/obi1.4bpp: $(UNUSEDGFXDIR)/old_bulbasaur.4bpp $(UNUSEDGFXDIR)/old_charizard.4bpp
+	@cat $(UNUSEDGFXDIR)/old_bulbasaur.4bpp $(UNUSEDGFXDIR)/old_charizard.4bpp >$@
 
-$(UNUSEDGFXDIR)/obi2.4bpp: $(UNUSEDGFXDIR)/obi_bulbasaur2.4bpp $(UNUSEDGFXDIR)/obi_battle_interface_1.4bpp $(UNUSEDGFXDIR)/obi_battle_interface_2.4bpp $(UNUSEDGFXDIR)/obi_battle_interface_3.4bpp
-	@cat $(UNUSEDGFXDIR)/obi_bulbasaur2.4bpp $(UNUSEDGFXDIR)/obi_battle_interface_1.4bpp $(UNUSEDGFXDIR)/obi_battle_interface_2.4bpp $(UNUSEDGFXDIR)/obi_battle_interface_3.4bpp >$@
+$(UNUSEDGFXDIR)/obi2.4bpp: $(UNUSEDGFXDIR)/old_bulbasaur2.4bpp $(UNUSEDGFXDIR)/old_battle_interface_1.4bpp $(UNUSEDGFXDIR)/old_battle_interface_2.4bpp $(UNUSEDGFXDIR)/old_battle_interface_3.4bpp
+	@cat $(UNUSEDGFXDIR)/old_bulbasaur2.4bpp $(UNUSEDGFXDIR)/old_battle_interface_1.4bpp $(UNUSEDGFXDIR)/old_battle_interface_2.4bpp $(UNUSEDGFXDIR)/old_battle_interface_3.4bpp >$@
 
 $(MENUGFXDIR)/hp_numbers.4bpp: $(MENUGFXDIR)/hpbar_anim.4bpp $(MENUGFXDIR)/numbers1.4bpp $(MENUGFXDIR)/numbers2.4bpp
 	@cat $(MENUGFXDIR)/hpbar_anim.4bpp $(MENUGFXDIR)/numbers1.4bpp $(MENUGFXDIR)/numbers2.4bpp >$@
@@ -188,5 +188,5 @@ $(UNUSEDGFXDIR)/redyellowgreen_frame.bin: $(UNUSEDGFXDIR)/red_frame.bin $(UNUSED
 $(UNUSEDGFXDIR)/color_frames.4bpp: $(UNUSEDGFXDIR)/color_frames.png
 	$(GFX) $< $@ -num_tiles 353
 
-$(UNUSEDGFXDIR)/beta_contest.4bpp: $(UNUSEDGFXDIR)/beta_contest_frame_1.4bpp $(UNUSEDGFXDIR)/beta_contest_floor.4bpp $(UNUSEDGFXDIR)/beta_contest_frame_2.4bpp $(UNUSEDGFXDIR)/beta_contest_symbols.4bpp $(UNUSEDGFXDIR)/beta_contest_meter.4bpp $(UNUSEDGFXDIR)/beta_contest_classes.4bpp $(UNUSEDGFXDIR)/beta_contest_numbers.4bpp
-	@cat $(UNUSEDGFXDIR)/beta_contest_frame_1.4bpp $(UNUSEDGFXDIR)/beta_contest_floor.4bpp $(UNUSEDGFXDIR)/beta_contest_frame_2.4bpp $(UNUSEDGFXDIR)/beta_contest_symbols.4bpp $(UNUSEDGFXDIR)/beta_contest_meter.4bpp $(UNUSEDGFXDIR)/beta_contest_classes.4bpp $(UNUSEDGFXDIR)/beta_contest_numbers.4bpp >$@
+$(UNUSEDGFXDIR)/old_contest.4bpp: $(UNUSEDGFXDIR)/old_contest_frame_1.4bpp $(UNUSEDGFXDIR)/old_contest_floor.4bpp $(UNUSEDGFXDIR)/old_contest_frame_2.4bpp $(UNUSEDGFXDIR)/old_contest_symbols.4bpp $(UNUSEDGFXDIR)/old_contest_meter.4bpp $(UNUSEDGFXDIR)/old_contest_classes.4bpp $(UNUSEDGFXDIR)/old_contest_numbers.4bpp
+	@cat $(UNUSEDGFXDIR)/old_contest_frame_1.4bpp $(UNUSEDGFXDIR)/old_contest_floor.4bpp $(UNUSEDGFXDIR)/old_contest_frame_2.4bpp $(UNUSEDGFXDIR)/old_contest_symbols.4bpp $(UNUSEDGFXDIR)/old_contest_meter.4bpp $(UNUSEDGFXDIR)/old_contest_classes.4bpp $(UNUSEDGFXDIR)/old_contest_numbers.4bpp >$@

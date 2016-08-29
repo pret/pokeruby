@@ -18,9 +18,9 @@ gUnknown_08D00524:: @ 8D00524
 	.include "data/graphics/pokemon/circled_question_mark_graphics.s"
 
 @ 8D019E4
-	.incbin "graphics/unused/old.4bpp.lz" @ japanese table and bunch of stuff
-	.incbin "graphics/unused/old.bin.lz"
-	.incbin "graphics/unused/old.gbapal.lz"
+	.incbin "graphics/unused/old_charmap.4bpp.lz" @ japanese table and bunch of stuff
+	.incbin "graphics/unused/old_charmap.bin.lz"
+	.incbin "graphics/unused/old_charmap.gbapal.lz"
 
 	.align 2
 gSmokescreenImpactTiles:: @ 8D02410
@@ -437,7 +437,7 @@ gBattleAnimSpriteSheet_037:: @ 8D0781C
 	.incbin "graphics/unused/obi_palpak1.gbapal.lz" @ palettes 1-3
 	
 	.align 2
-	.incbin "graphics/unused/obi_pal4.gbapal.lz" @ 4 is by itself
+	.incbin "graphics/unused/old_pal4.gbapal.lz" @ 4 is by itself
 	
 	.align 2
 	.incbin "graphics/unused/obi_palpak3.gbapal.lz" @ palettes 5-7
@@ -446,7 +446,7 @@ gBattleAnimSpriteSheet_037:: @ 8D0781C
 	.incbin "graphics/unused/obi2.4bpp.lz"
 	
 	.align 2
-	.incbin "graphics/unused/obi_tilemap.bin.lz"
+	.incbin "graphics/unused/old_battle_interface_tilemap.bin.lz"
 
 	.align 2
 gBattleAnimSpritePalette_038:: @ 8D086E4
@@ -1177,13 +1177,13 @@ gBattleAnimSpriteSheet_077:: @ 8D150F4
 	.incbin "graphics/battle_anims/sprites/077.4bpp.lz"
 
 	.align 2
-	.incbin "graphics/unused/beta_contest.4bpp.lz"
+	.incbin "graphics/unused/old_contest.4bpp.lz"
 
 	.align 2
-	.incbin "graphics/unused/beta_contest.gbapal.lz"
+	.incbin "graphics/unused/old_contest.gbapal.lz"
 
 	.align 2
-	.incbin "graphics/unused/beta_contest.bin.lz"
+	.incbin "graphics/unused/old_contest.bin.lz"
 
 	.align 2
 	.incbin "baserom.gba", 0xD15D64, 0x2C0 @ LZ, uncomp. size = 0x1000
