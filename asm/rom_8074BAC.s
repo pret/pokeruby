@@ -947,7 +947,7 @@ _080752C6:
 	ldr r1, _080752D8
 	b _08075350
 	.align 2, 0
-_080752D8: .4byte gUnknown_084537C0
+_080752D8: .4byte voicegroup_84537C0
 _080752DC:
 	lsls r0, r1, 1
 	adds r0, r1
@@ -955,7 +955,7 @@ _080752DC:
 	ldr r1, _080752E8
 	b _08075350
 	.align 2, 0
-_080752E8: .4byte gUnknown_08452590
+_080752E8: .4byte voicegroup_8452590
 _080752EC:
 	mov r2, r9
 	cmp r2, 0
@@ -966,7 +966,7 @@ _080752EC:
 	ldr r1, _080752FC
 	b _08075350
 	.align 2, 0
-_080752FC: .4byte gUnknown_08453DC0
+_080752FC: .4byte voicegroup_8453DC0
 _08075300:
 	lsls r0, r1, 1
 	adds r0, r1
@@ -974,7 +974,7 @@ _08075300:
 	ldr r1, _0807530C
 	b _08075350
 	.align 2, 0
-_0807530C: .4byte gUnknown_08452B90
+_0807530C: .4byte voicegroup_8452B90
 _08075310:
 	mov r0, r9
 	cmp r0, 0
@@ -985,7 +985,7 @@ _08075310:
 	ldr r1, _08075320
 	b _08075350
 	.align 2, 0
-_08075320: .4byte gUnknown_084543C0
+_08075320: .4byte voicegroup_84543C0
 _08075324:
 	lsls r0, r1, 1
 	adds r0, r1
@@ -993,7 +993,7 @@ _08075324:
 	ldr r1, _08075330
 	b _08075350
 	.align 2, 0
-_08075330: .4byte gUnknown_08453190
+_08075330: .4byte voicegroup_8453190
 _08075334:
 	mov r2, r9
 	cmp r2, 0
@@ -1004,7 +1004,7 @@ _08075334:
 	ldr r1, _08075344
 	b _08075350
 	.align 2, 0
-_08075344: .4byte gUnknown_084549C0
+_08075344: .4byte voicegroup_84549C0
 _08075348:
 	lsls r0, r1, 1
 	adds r0, r1
@@ -1025,7 +1025,7 @@ _0807535A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807536C: .4byte gUnknown_08453790
+_0807536C: .4byte voicegroup_8453790
 _08075370: .4byte 0x0202f79c
 	thumb_func_end sub_80751C0
 
