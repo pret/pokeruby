@@ -11,6 +11,7 @@ ROULGFXDIR := graphics/roulette
 BTLANMSPRGFXDIR := graphics/battle_anims/sprites
 PICFRAMEGFXDIR := graphics/picture_frame
 CONTESTGFXDIR := graphics/contest
+MASKSGFXDIR := graphics/battle_anims/masks
 
 $(MENUGFXDIR)/menu.gbapal: $(MENUGFXDIR)/menu_0.gbapal $(MENUGFXDIR)/menu_1.gbapal
 	@cat $(MENUGFXDIR)/menu_0.gbapal $(MENUGFXDIR)/menu_1.gbapal >$@
@@ -194,3 +195,6 @@ $(UNUSEDGFXDIR)/old_contest.4bpp: $(UNUSEDGFXDIR)/old_contest_frame_1.4bpp $(UNU
 
 $(UNUSEDGFXDIR)/old_contest_2.4bpp: $(UNUSEDGFXDIR)/old_contest_2_1.4bpp $(UNUSEDGFXDIR)/old_contest_2_2.4bpp
 	@cat $(UNUSEDGFXDIR)/old_contest_2_1.4bpp $(UNUSEDGFXDIR)/old_contest_2_2.4bpp >$@
+
+$(MASKSGFXDIR)/unknown_D2EDFC.4bpp: $(MASKSGFXDIR)/unknown_D2EDFC.png
+	$(GFX) $< $@ -num_tiles 14

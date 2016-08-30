@@ -1202,7 +1202,7 @@ gContestNumbers_UnusedPal::
 
 	.align 2
 gUnknown_08D17144:: @ 8D17144
-	.incbin "graphics/unused/old_contest_2.gbapal.lz"
+	.incbin "graphics/unused/old_contest_2.gbapal.lz" @ the tilemap and palette for unused contest assets are used. however, these two files aren't old
 
 	.align 2
 gUnknown_08D1725C:: @ 8D1725C
@@ -1223,12 +1223,12 @@ gUnknown_08D17C3C:: @ 8D17C3C
 	.incbin "baserom.gba", 0xD17C3C, 0x12D @ LZ, uncomp. size = 0x800
 
 	.align 2
-gUnknown_08D17D6C:: @ 8D17D6C
+gContestMiscGfx:: @ 8D17D6C
 	.incbin "graphics/contest/misc.4bpp.lz"
 
 	.align 2
-gUnknown_08D18818:: @ 8D18818
-	.incbin "baserom.gba", 0xD18818, 0xC59 @ LZ, uncomp. size = 0x2000
+gContestAudienceGfx:: @ 8D18818
+	.incbin "graphics/contest/audience.4bpp.lz"
 
 	.align 2
 	.incbin "baserom.gba", 0xD19474, 0x11C @ LZ, uncomp. size = 0x180
@@ -1243,27 +1243,27 @@ gContest3Pal::
 
 	.align 2
 gTiles_8D1975C:: @ 8D1975C
-	.incbin "baserom.gba", 0x00d1975c, 0x20
+	.incbin "graphics/contest/heart.4bpp"
 
 	.align 2
 gUnknown_08D1977C:: @ 8D1977C
-	.incbin "baserom.gba", 0xD1977C, 0xAD1 @ LZ, uncomp. size = 0x2400
+	.incbin "graphics/contest/misc_2.4bpp.lz"
 
 	.align 2
 gUnknown_08D1A250:: @ 8D1A250
-	.incbin "baserom.gba", 0xD1A250, 0x112 @ LZ, uncomp. size = 0x800
+	.incbin "graphics/contest/misc_2_tilemap_1.bin.lz"
 
 	.align 2
 gUnknown_08D1A364:: @ 8D1A364
-	.incbin "baserom.gba", 0xD1A364, 0x129 @ LZ, uncomp. size = 0x800
+	.incbin "graphics/contest/misc_2_tilemap_2.bin.lz"
 
 	.align 2
 gUnknown_08D1A490:: @ 8D1A490
-	.incbin "baserom.gba", 0xD1A490, 0x188 @ LZ, uncomp. size = 0x800
+	.incbin "graphics/contest/misc_2_tilemap_3.bin.lz"
 
 	.align 2
 gUnknown_08D1A618:: @ 8D1A618
-	.incbin "baserom.gba", 0xD1A618, 0xEA @ LZ, uncomp. size = 0x200
+	.incbin "graphics/contest/misc_2.gbapal.lz"
 
 	.align 2
 gBattleAnimSpriteSheet_135:: @ 8D1A704
@@ -1326,10 +1326,10 @@ gBattleAnimSpriteSheet_142:: @ 8D1B1B8
 	.incbin "graphics/battle_anims/sprites/142.4bpp.lz"
 
 	.align 2
-	.incbin "baserom.gba", 0xD1B218, 0x9C @ LZ, uncomp. size = 0x200
+	.incbin "graphics/unused/old_beatup.4bpp.lz"
 
 	.align 2
-	.incbin "baserom.gba", 0xD1B2B4, 0x1B @ LZ, uncomp. size = 0x20
+	.incbin "graphics/unused/old_beatup.gbapal.lz"
 
 	.align 2
 gBattleAnimSpriteSheet_147:: @ 8D1B2D0
@@ -1448,13 +1448,13 @@ gBattleAnimSpritePalette_144:: @ 8D1C040
 	.incbin "graphics/battle_anims/sprites/144.gbapal.lz"
 
 	.align 2
-	.incbin "baserom.gba", 0xD1C060, 0x26 @ LZ, uncomp. size = 0x60
+	.incbin "graphics/unused/unknown_D1C060.4bpp.lz"
 
 	.align 2
-	.incbin "baserom.gba", 0xD1C088, 0x16 @ LZ, uncomp. size = 0x20
+	.incbin "graphics/unused/unknown_D1C060.gbapal.lz"
 
 	.align 2
-	.incbin "baserom.gba", 0xD1C0A0, 0x102 @ LZ, uncomp. size = 0x800
+	.incbin "graphics/unused/unknown_D1C060.bin.lz"
 
 	.align 2
 gBattleAnimSpriteSheet_162:: @ 8D1C1A4
@@ -1554,11 +1554,11 @@ gBattleAnimBackgroundTilemap_00:: @ 8D1D1C0
 
 	.align 2
 gUnknown_08D1D410:: @ 8D1D410
-	.incbin "baserom.gba", 0xD1D410, 0x13A @ LZ, uncomp. size = 0x800
+	.incbin "graphics/battle_anims/masks/metal_shine.4bpp.lz"
 
 	.align 2
 gUnknown_08D1D54C:: @ 8D1D54C
-	.incbin "baserom.gba", 0xD1D54C, 0x28 @ LZ, uncomp. size = 0x20
+	.incbin "graphics/battle_anims/masks/metal_shine.gbapal.lz"
 
 	.align 2
 gUnknown_08D1D574:: @ 8D1D574
@@ -1765,11 +1765,11 @@ gBattleAnimSpritePalette_193:: @ 8D209EC
 
 	.align 2
 gUnknown_08D20A14:: @ 8D20A14
-	.incbin "baserom.gba", 0xD20A14, 0x1A @ LZ, uncomp. size = 0x60
+	.incbin "graphics/battle_anims/masks/curse.4bpp.lz"
 
 	.align 2
 gUnknown_08D20A30:: @ 8D20A30
-	.incbin "baserom.gba", 0xD20A30, 0xFD @ LZ, uncomp. size = 0x800
+	.incbin "graphics/battle_anims/masks/curse.bin.lz"
 
 	.align 2
 gBattleAnimSpriteSheet_002:: @ 8D20B30
@@ -2226,15 +2226,15 @@ gBattleAnimBackgroundTilemap_10:: @ 8D2A6E8
 
 	.align 2
 gUnknown_08D2A9E0:: @ 8D2A9E0
-	.incbin "baserom.gba", 0xD2A9E0, 0x9F @ LZ, uncomp. size = 0x280
+	.incbin "graphics/battle_anims/masks/morning_sun.4bpp.lz"
 
 	.align 2
 gUnknown_08D2AA80:: @ 8D2AA80
-	.incbin "baserom.gba", 0xD2AA80, 0x16 @ LZ, uncomp. size = 0x20
+	.incbin "graphics/battle_anims/masks/morning_sun.gbapal.lz"
 
 	.align 2
 gUnknown_08D2AA98:: @ 8D2AA98
-	.incbin "baserom.gba", 0xD2AA98, 0x11B @ LZ, uncomp. size = 0x800
+	.incbin "graphics/battle_anims/masks/morning_sun.bin.lz"
 
 	.align 2
 gBattleAnimBackgroundTilemap_12:: @ 8D2ABB4
@@ -2338,39 +2338,39 @@ gBattleAnimSpritePalette_243:: @ 8D2DAA4
 
 	.align 2
 gUnknown_08D2DACC:: @ 8D2DACC
-	.incbin "baserom.gba", 0xD2DACC, 0x20E @ LZ, uncomp. size = 0x800
+	.incbin "graphics/battle_anims/masks/stat.4bpp.lz"
 
 	.align 2
 gUnknown_08D2DCDC:: @ 8D2DCDC
-	.incbin "baserom.gba", 0xD2DCDC, 0x11C @ LZ, uncomp. size = 0x800
+	.incbin "graphics/battle_anims/masks/stat_tilemap_1.bin.lz"
 
 	.align 2
 gUnknown_08D2DDF8:: @ 8D2DDF8
-	.incbin "baserom.gba", 0xD2DDF8, 0x11C @ LZ, uncomp. size = 0x800
+	.incbin "graphics/battle_anims/masks/stat_tilemap_2.bin.lz"
 
 	.align 2
 gUnknown_08D2DF14:: @ 8D2DF14
-	.incbin "baserom.gba", 0xD2DF14, 0x1D @ LZ, uncomp. size = 0x20
+	.incbin "graphics/battle_anims/masks/stat1.gbapal.lz"
 
 	.align 2
 gUnknown_08D2DF34:: @ 8D2DF34
-	.incbin "baserom.gba", 0xD2DF34, 0x1D @ LZ, uncomp. size = 0x20
+	.incbin "graphics/battle_anims/masks/stat2.gbapal.lz"
 
 	.align 2
 gUnknown_08D2DF54:: @ 8D2DF54
-	.incbin "baserom.gba", 0xD2DF54, 0x1F @ LZ, uncomp. size = 0x20
+	.incbin "graphics/battle_anims/masks/stat3.gbapal.lz"
 
 	.align 2
 gUnknown_08D2DF74:: @ 8D2DF74
-	.incbin "baserom.gba", 0xD2DF74, 0x1D @ LZ, uncomp. size = 0x20
+	.incbin "graphics/battle_anims/masks/stat4.gbapal.lz"
 
 	.align 2
 gUnknown_08D2DF94:: @ 8D2DF94
-	.incbin "baserom.gba", 0xD2DF94, 0x1D @ LZ, uncomp. size = 0x20
+	.incbin "graphics/battle_anims/masks/stat5.gbapal.lz"
 
 	.align 2
 gUnknown_08D2DFB4:: @ 8D2DFB4
-	.incbin "baserom.gba", 0xD2DFB4, 0x1D @ LZ, uncomp. size = 0x20
+	.incbin "graphics/battle_anims/masks/stat6.gbapal.lz"
 
 	.align 2
 gUnknown_08D2DFD4:: @ 8D2DFD4
@@ -2382,15 +2382,15 @@ gUnknown_08D2DFF4:: @ 8D2DFF4
 
 	.align 2
 gUnknown_08D2E014:: @ 8D2E014
-	.incbin "baserom.gba", 0xD2E014, 0x13A @ LZ, uncomp. size = 0x200
+	.incbin "graphics/battle_anims/masks/cure_bubbles.4bpp.lz"
 
 	.align 2
 gUnknown_08D2E150:: @ 8D2E150
-	.incbin "baserom.gba", 0xD2E150, 0x1D @ LZ, uncomp. size = 0x20
+	.incbin "graphics/battle_anims/masks/cure_bubbles.gbapal.lz"
 
 	.align 2
 gUnknown_08D2E170:: @ 8D2E170
-	.incbin "baserom.gba", 0xD2E170, 0x11C @ LZ, uncomp. size = 0x800
+	.incbin "graphics/battle_anims/masks/cure_bubbles.bin.lz"
 
 	.align 2
 gBattleAnimSpritePalette_245:: @ 8D2E28C
@@ -2422,11 +2422,11 @@ gBattleAnimSpriteSheet_053:: @ 8D2EBDC
 
 	.align 2
 gUnknown_08D2EDFC:: @ 8D2EDFC
-	.incbin "baserom.gba", 0xD2EDFC, 0x4B @ LZ, uncomp. size = 0x1C0
+	.incbin "graphics/battle_anims/masks/unknown_D2EDFC.4bpp.lz"
 
 	.align 2
 gUnknown_08D2EE48:: @ 8D2EE48
-	.incbin "baserom.gba", 0xD2EE48, 0x106 @ LZ, uncomp. size = 0x800
+	.incbin "graphics/battle_anims/masks/unknown_D2EDFC.bin.lz"
 
 	.align 2
 gBattleAnimSpriteSheet_248:: @ 8D2EF50
