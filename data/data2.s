@@ -987,9 +987,8 @@ gSpriteAffineAnimTable_81F971C:: @ 81F971C
 @ 81F9870
 	.include "data/text/type_names.s"
 
-	.align 2
-gUnknown_081F98F0:: @ 81F98F0
-	.incbin "baserom.gba", 0x001f98f0, 0xdc
+@ 81F98F0
+	.include "data/trainer_money.s"
 
 @ 81F99CC
 	.include "data/text/ability_descriptions.s"

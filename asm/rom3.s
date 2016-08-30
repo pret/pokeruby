@@ -52578,7 +52578,7 @@ _080240FE:
 	muls r4, r0
 	b _08024140
 	.align 2, 0
-_08024120: .4byte gUnknown_081F98F0
+_08024120: .4byte gTrainerMoney
 _08024124: .4byte 0x02000000
 _08024128: .4byte 0x020239f8
 _0802412C: .4byte 0x02025bc4
