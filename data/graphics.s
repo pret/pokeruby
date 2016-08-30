@@ -1231,7 +1231,7 @@ gContestAudienceGfx:: @ 8D18818
 	.incbin "graphics/contest/audience.4bpp.lz"
 
 	.align 2
-	.incbin "baserom.gba", 0xD19474, 0x11C @ LZ, uncomp. size = 0x180
+	.incbin "graphics/contest/faces.4bpp.lz"
 
 	.align 2
 gContestJudgeSymbolsGfx:: @ 8D19590
@@ -1562,16 +1562,16 @@ gUnknown_08D1D54C:: @ 8D1D54C
 
 	.align 2
 gUnknown_08D1D574:: @ 8D1D574
-	.incbin "baserom.gba", 0xD1D574, 0x172 @ LZ, uncomp. size = 0x800
+	.incbin "graphics/battle_anims/masks/metal_shine.bin.lz"
 
 	.align 2
-	.incbin "baserom.gba", 0xD1D6E8, 0x10E @ LZ, uncomp. size = 0x600
+	.incbin "graphics/unused/goosuto.4bpp.lz" @ ghost
 
 	.align 2
-	.incbin "baserom.gba", 0xD1D7F8, 0x16 @ LZ, uncomp. size = 0x20
+	.incbin "graphics/unused/goosuto.gbapal.lz"
 
 	.align 2
-	.incbin "baserom.gba", 0xD1D810, 0x14E @ LZ, uncomp. size = 0x800
+	.incbin "graphics/unused/goosuto.bin.lz"
 
 	.align 2
 gBattleAnimSpriteSheet_174:: @ 8D1D960
@@ -1710,10 +1710,10 @@ gBattleWindowLarge2Gfx:: @ 8d1fc94
 	.incbin "graphics/interface/battle_window5.4bpp.lz"
 
 	.align 2
-	.incbin "baserom.gba", 0xD1FF0C, 0x5D @ LZ, uncomp. size = 0x100
+	.incbin "graphics/unused/shadow.4bpp.lz"
 
 	.align 2
-	.incbin "baserom.gba", 0xD1FF6C, 0x12 @ LZ, uncomp. size = 0x20
+	.incbin "graphics/unused/shadow.gbapal.lz"
 
 	.align 2
 gBattleAnimSpriteSheet_014:: @ 8D1FF80
@@ -1872,7 +1872,6 @@ gBattleAnimSpriteSheet_206:: @ 8D227B0
 	.incbin "graphics/battle_anims/sprites/206.4bpp.lz"
 
 	.align 2
-gUnknown_08D229BC::
 gBattleAnimSpritePalette_206:: @ 8D229BC
 	.incbin "graphics/battle_anims/sprites/206.gbapal.lz"
 
@@ -1929,16 +1928,16 @@ gBattleAnimSpritePalette_216:: @ 8D2366C
 	.incbin "graphics/battle_anims/sprites/216.gbapal.lz"
 
 	.align 2
-gUnknown_08D2368C:: @ 8D2368C
-	.incbin "baserom.gba", 0xD2368C, 0xA6E @ LZ, uncomp. size = 0x2000
+gAttractGfx:: @ 8D2368C
+	.incbin "graphics/battle_anims/backgrounds/attract.4bpp.lz"
 
 	.align 2
-gUnknown_08D240FC:: @ 8D240FC
-	.incbin "baserom.gba", 0xD240FC, 0x28 @ LZ, uncomp. size = 0x20
+gAttractPal:: @ 8D240FC
+	.incbin "graphics/battle_anims/backgrounds/attract.gbapal.lz"
 
 	.align 2
-gUnknown_08D24124:: @ 8D24124
-	.incbin "baserom.gba", 0xD24124, 0x27A @ LZ, uncomp. size = 0x800
+gAttractTilemap:: @ 8D24124
+	.incbin "graphics/battle_anims/backgrounds/attract.bin.lz"
 
 	.align 2
 gBattleAnimSpriteSheet_217:: @ 8D243A0
@@ -1977,12 +1976,12 @@ gBattleAnimSpritePalette_215:: @ 8D24D58
 	.incbin "graphics/battle_anims/sprites/215.gbapal.lz"
 
 	.align 2
-gUnknown_08D24D7C:: @ 8D24D7C
-	.incbin "baserom.gba", 0xD24D7C, 0x28 @ LZ, uncomp. size = 0x20
+gScaryFacePal:: @ 8D24D7C
+	.incbin "graphics/battle_anims/backgrounds/scary_face.gbapal.lz"
 
 	.align 2
-gUnknown_08D24DA4:: @ 8D24DA4
-	.incbin "baserom.gba", 0xD24DA4, 0x22D @ LZ, uncomp. size = 0xA00
+gScaryFaceGfx:: @ 8D24DA4
+	.incbin "graphics/battle_anims/backgrounds/scary_face.4bpp.lz"
 
 	.align 2
 gBattleAnimSpritePalette_218:: @ 8D24FD4
@@ -2293,16 +2292,16 @@ gBattleAnimSpritePalette_240:: @ 8D2D240
 	.incbin "graphics/battle_anims/sprites/240.gbapal.lz"
 
 	.align 2
-gUnknown_08D2D268:: @ 8D2D268
-	.incbin "baserom.gba", 0xD2D268, 0x24 @ LZ, uncomp. size = 0x20
+gSubstituteDollPal:: @ 8D2D268
+	.incbin "graphics/battle_anims/sprites/substitute.gbapal.lz"
 
 	.align 2
-gUnknown_08D2D28C:: @ 8D2D28C
-	.incbin "baserom.gba", 0xD2D28C, 0x23D @ LZ, uncomp. size = 0x800
+gSubstituteDollGfx:: @ 8D2D28C
+	.incbin "graphics/battle_anims/sprites/substitute.4bpp.lz"
 
 	.align 2
-gUnknown_08D2D4CC:: @ 8D2D4CC
-	.incbin "baserom.gba", 0xD2D4CC, 0x225 @ LZ, uncomp. size = 0x800
+gSubstituteDollTilemap:: @ 8D2D4CC
+	.incbin "graphics/battle_anims/sprites/substitute.bin.lz"
 
 	.align 2
 gBattleAnimSpriteSheet_241:: @ 8D2D6F4
@@ -2527,16 +2526,16 @@ gMonFootprint_QuestionMark:: @ 8E5D9F0
 	.incbin "graphics/pokemon/question_mark/footprint.1bpp"
 
 	.align 2
-gUnknown_08E5DA10:: @ 8E5DA10
-	.incbin "baserom.gba", 0xE5DA10, 0xE5 @ LZ, uncomp. size = 0x200
+gVersusFrameGfx:: @ 8E5DA10
+	.incbin "graphics/battle_transitions/vs_frame.4bpp.lz"
 
 	.align 2
-gUnknown_08E5DAF8:: @ 8E5DAF8
-	.incbin "baserom.gba", 0xE5DAF8, 0x10A @ LZ, uncomp. size = 0x800
+gVersusFrameTilemap:: @ 8E5DAF8
+	.incbin "graphics/battle_transitions/vs_frame.bin.lz"
 
 	.align 2
-gUnknown_08E5DC04:: @ 8E5DC04
-	.incbin "baserom.gba", 0xE5DC04, 0x28 @ LZ, uncomp. size = 0x20
+gVersusFramePal:: @ 8E5DC04
+	.incbin "graphics/battle_transitions/vs_frame.gbapal.lz"
 
 	.align 2
 gUnknown_08E5DC2C:: @ 8E5DC2C
@@ -2647,68 +2646,68 @@ gBattleTerrainTiles_Building:: @ 8E62514
 	.incbin "graphics/battle_terrain/building/tiles.4bpp.lz"
 
 	.align 2
-gUnknown_08E62AC0:: @ 8E62AC0
-	.incbin "baserom.gba", 0xE62AC0, 0x3C @ LZ, uncomp. size = 0x60
+gBattleTerrainPalette_BattleTower:: @ 8E62AC0
+	.incbin "graphics/battle_terrain/stadium/battle_tower.gbapal.lz" @ this is also used for link battles
 
 	.align 2
 gBattleTerrainTilemap_Building:: @ 8E62AFC
 	.incbin "graphics/battle_terrain/building/map.bin.lz"
 
 	.align 2
-gUnknown_08E62DAC:: @ 8E62DAC
-	.incbin "baserom.gba", 0xE62DAC, 0x606 @ LZ, uncomp. size = 0x2000
+gBattleTerrainTiles_Stadium:: @ 8E62DAC
+	.incbin "graphics/battle_terrain/stadium/tiles.4bpp.lz"
 
 	.align 2
-gUnknown_08E633B4:: @ 8E633B4
-	.incbin "baserom.gba", 0xE633B4, 0x2AE @ LZ, uncomp. size = 0x1000
+gBattleTerrainTilemap_Stadium:: @ 8E633B4
+	.incbin "graphics/battle_terrain/stadium/map.bin.lz"
 
 	.align 2
 gBattleTerrainPalette_Building:: @ 8E63664
 	.incbin "graphics/battle_terrain/building/palette.gbapal.lz"
 
 	.align 2
-gUnknown_08E636A4:: @ 8E636A4
-	.incbin "baserom.gba", 0xE636A4, 0x3C @ LZ, uncomp. size = 0x60
+gBattleTerrainPalette_Kyogre::
+	.incbin "graphics/battle_terrain/water/kyogre.gbapal.lz"
 
 	.align 2
-gUnknown_08E636E0:: @ 8E636E0
-	.incbin "baserom.gba", 0xE636E0, 0x57 @ LZ, uncomp. size = 0x60
+gBattleTerrainPalette_Groudon::
+	.incbin "graphics/battle_terrain/cave/groudon.gbapal.lz"
 
 	.align 2
-gUnknown_08E63738:: @ 8E63738
-	.incbin "baserom.gba", 0xE63738, 0x3C @ LZ, uncomp. size = 0x60
+gBattleTerrainPalette_BuildingGym:: @ 8E63738
+	.incbin "graphics/battle_terrain/building/palette2.gbapal.lz"
 
 	.align 2
-gUnknown_08E63774:: @ 8E63774
-	.incbin "baserom.gba", 0xE63774, 0x3C @ LZ, uncomp. size = 0x60
+gBattleTerrainPalette_BuildingLeader:: @ 8E63774
+	.incbin "graphics/battle_terrain/building/palette3.gbapal.lz"
 
 	.align 2
-gUnknown_08E637B0:: @ 8E637B0
-	.incbin "baserom.gba", 0xE637B0, 0x5E @ LZ, uncomp. size = 0x60
+gBattleTerrainPalette_StadiumAqua:: @ 8E637B0
+	.incbin "graphics/battle_terrain/stadium/palette1.gbapal.lz"
 
 	.align 2
-gUnknown_08E63810:: @ 8E63810
-	.incbin "baserom.gba", 0xE63810, 0x6A @ LZ, uncomp. size = 0x60
+gBattleTerrainPalette_StadiumMagma:: @ 8E63810
+	.incbin "graphics/battle_terrain/stadium/palette2.gbapal.lz"
 
 	.align 2
-gUnknown_08E6387C:: @ 8E6387C
-	.incbin "baserom.gba", 0xE6387C, 0x4E @ LZ, uncomp. size = 0x60
+gBattleTerrainPalette_StadiumSidney:: @ 8E6387C
+	.incbin "graphics/battle_terrain/stadium/palette3.gbapal.lz"
 
 	.align 2
-gUnknown_08E638CC:: @ 8E638CC
-	.incbin "baserom.gba", 0xE638CC, 0x48 @ LZ, uncomp. size = 0x60
+gBattleTerrainPalette_StadiumPhoebe:: @ 8E638CC
+	.incbin "graphics/battle_terrain/stadium/palette4.gbapal.lz"
 
 	.align 2
-gUnknown_08E63914:: @ 8E63914
-	.incbin "baserom.gba", 0xE63914, 0x41 @ LZ, uncomp. size = 0x60
+gBattleTerrainPalette_StadiumGlacia:: @ 8E63914
+	.incbin "graphics/battle_terrain/stadium/palette5.gbapal.lz"
 
 	.align 2
-gUnknown_08E63958:: @ 8E63958
-	.incbin "baserom.gba", 0xE63958, 0x4E @ LZ, uncomp. size = 0x60
+gBattleTerrainPalette_StadiumDrake:: @ 8E63958
+	.incbin "graphics/battle_terrain/stadium/palette6.gbapal.lz"
 
 	.align 2
-gUnknown_08E639A8:: @ 8E639A8
-	.incbin "baserom.gba", 0xE639A8, 0x3B @ LZ, uncomp. size = 0x60
+gBattleTerrainPalette_StadiumSteven:: @ 8E639A8
+	.incbin "graphics/battle_terrain/stadium/palette7.gbapal.lz"
 
 	.align 2
 gBattleTerrainAnimTiles_TallGrass:: @ 8E639E4

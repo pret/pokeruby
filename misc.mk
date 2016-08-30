@@ -12,6 +12,7 @@ BTLANMSPRGFXDIR := graphics/battle_anims/sprites
 PICFRAMEGFXDIR := graphics/picture_frame
 CONTESTGFXDIR := graphics/contest
 MASKSGFXDIR := graphics/battle_anims/masks
+BATTRANSGFXDIR := graphics/battle_transitions
 
 $(MENUGFXDIR)/menu.gbapal: $(MENUGFXDIR)/menu_0.gbapal $(MENUGFXDIR)/menu_1.gbapal
 	@cat $(MENUGFXDIR)/menu_0.gbapal $(MENUGFXDIR)/menu_1.gbapal >$@
@@ -198,3 +199,6 @@ $(UNUSEDGFXDIR)/old_contest_2.4bpp: $(UNUSEDGFXDIR)/old_contest_2_1.4bpp $(UNUSE
 
 $(MASKSGFXDIR)/unknown_D2EDFC.4bpp: $(MASKSGFXDIR)/unknown_D2EDFC.png
 	$(GFX) $< $@ -num_tiles 14
+	
+$(BATTRANSGFXDIR)/vs_frame.4bpp: $(BATTRANSGFXDIR)/vs_frame.png
+	$(GFX) $< $@ -num_tiles 16
