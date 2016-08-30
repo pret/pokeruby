@@ -37242,7 +37242,7 @@ _0801C544:
 _0801C56C: .4byte 0x02024c07
 _0801C570: .4byte gBattleMoves
 _0801C574: .4byte 0x02024db8
-_0801C578: .4byte gUnknown_081FAB1C
+_0801C578: .4byte gAccuracyStageRatios
 _0801C57C: .4byte 0x02024a80
 _0801C580: .4byte 0x02024c08
 _0801C584: .4byte 0x02024df0

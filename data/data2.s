@@ -1334,8 +1334,21 @@ gUnknown_081FA73C:: @ 81FA73C
 	.4byte sub_802BF48
 	.4byte sub_802BF54
 
-gUnknown_081FAB1C:: @ 81FAB1C
-	.incbin "baserom.gba", 0x001fab1c, 0x34
+	.align 2
+gAccuracyStageRatios:: @ 81FAB1C
+	.byte  33, 100, 0, 0 @ -6
+	.byte  36, 100, 0, 0 @ -5
+	.byte  43, 100, 0, 0 @ -4
+	.byte  50, 100, 0, 0 @ -3
+	.byte  60, 100, 0, 0 @ -2
+	.byte  75, 100, 0, 0 @ -1
+	.byte   1,   1, 0, 0 @  0
+	.byte 133, 100, 0, 0 @ +1
+	.byte 166, 100, 0, 0 @ +2
+	.byte   2,   1, 0, 0 @ +3
+	.byte 233, 100, 0, 0 @ +4
+	.byte 133,  50, 0, 0 @ +5
+	.byte   3,   1, 0, 0 @ +6
 
 gUnknown_081FAB50:: @ 81FAB50
 	.incbin "baserom.gba", 0x001fab50, 0xc
