@@ -275,7 +275,7 @@ gBattleAnimSpriteSheet_017:: @ 8D04368
 	.incbin "graphics/battle_anims/sprites/017.4bpp.lz"
 
 	.align 2
-	.incbin "baserom.gba", 0xD04388, 0x24 @ LZ, uncomp. size = 0x20
+	.incbin "graphics/unknown/unknown_D04388.4bpp.lz"
 
 	.align 2
 gBattleAnimSpritePalette_019:: @ 8D043AC
@@ -302,7 +302,7 @@ gBattleAnimSpriteSheet_023:: @ 8D045A4
 	.incbin "graphics/battle_anims/sprites/023.4bpp.lz"
 
 	.align 2
-	.incbin "baserom.gba", 0xD046AC, 0x28 @ palette
+	.incbin "graphics/unused/battle_anim_023.gbapal.lz"
 
 	.align 2
 	.incbin "graphics/unused/music_notes.4bpp.lz"
@@ -717,23 +717,23 @@ gBattleAnimSpriteSheet_081:: @ 8D0CF04
 gBattleAnimSpritePalette_081:: @ 8D0CF88
 	.incbin "graphics/battle_anims/sprites/081.gbapal.lz"
 
-	.align 2
-	.incbin "baserom.gba", 0xD0CFAC, 0x24 @ LZ, uncomp. size = 0x20
+	.align 2 @ 8D0CFAC
+	.incbin "graphics/unknown/unknown_D0CFAC.bin"
+
+	.align 2 @ 8D0CFD0
+	.incbin "graphics/unknown/unknown_D0CFD0.bin"
+
+	.align 2 @ 8D0CFF4
+	.incbin "graphics/unknown/unknown_D0CFF4.bin"
 
 	.align 2
-	.incbin "baserom.gba", 0xD0CFD0, 0x24 @ LZ, uncomp. size = 0x20
+	.incbin "graphics/unused/line_sketch_2.8bpp.lz"
+
+	.align 2 @ 8D0D070
+	.incbin "graphics/unknown/unknown_D0D070.bin"
 
 	.align 2
-	.incbin "baserom.gba", 0xD0CFF4, 0x24 @ LZ, uncomp. size = 0x20
-
-	.align 2
-	.incbin "baserom.gba", 0xD0D018, 0x57 @ LZ, uncomp. size = 0x240
-
-	.align 2
-	.incbin "baserom.gba", 0xD0D070, 0x1F @ LZ, uncomp. size = 0x20
-
-	.align 2
-	.incbin "baserom.gba", 0xD0D090, 0x8F @ LZ, uncomp. size = 0x400
+	.incbin "graphics/unused/line_sketch_2.bin.lz"
 
 	.align 2
 gBattleAnimSpriteSheet_082:: @ 8D0D120
@@ -784,7 +784,7 @@ gBattleAnimSpritePalette_094:: @ 8D0D294
 	.incbin "graphics/battle_anims/sprites/094.gbapal.lz"
 
 	.align 2
-	.incbin "baserom.gba", 0xD0D2B4, 0x1D @ LZ, uncomp. size = 0x20
+	.incbin "graphics/unknown/unknown_D0D2B4.bin.lz"
 
 	.align 2
 gBattleAnimSpritePalette_095:: @ 8D0D2D4
@@ -1448,13 +1448,13 @@ gBattleAnimSpritePalette_144:: @ 8D1C040
 	.incbin "graphics/battle_anims/sprites/144.gbapal.lz"
 
 	.align 2
-	.incbin "graphics/unused/unknown_D1C060.4bpp.lz"
+	.incbin "graphics/unknown/unknown_D1C060.4bpp.lz"
 
 	.align 2
-	.incbin "graphics/unused/unknown_D1C060.gbapal.lz"
+	.incbin "graphics/unknown/unknown_D1C060.gbapal.lz"
 
 	.align 2
-	.incbin "graphics/unused/unknown_D1C060.bin.lz"
+	.incbin "graphics/unknown/unknown_D1C060.bin.lz"
 
 	.align 2
 gBattleAnimSpriteSheet_162:: @ 8D1C1A4
@@ -2786,14 +2786,14 @@ gBattleAnimSpriteSheet_261:: @ 8E67D6C
 	.incbin "graphics/battle_anims/sprites/261.4bpp.lz"
 
 	.align 2
-gUnknown_08E67ED8:: @ 8E67ED8
-	.incbin "baserom.gba", 0xE67ED8, 0x17C @ LZ, uncomp. size = 0x800
+gBattleAnimBackgroundTilemap_SandstormBrew:: @ 8E67ED8
+	.incbin "graphics/battle_anims/backgrounds/sandstorm_brew.bin.lz"
 
 	.align 2
-gUnknown_08E68054:: @ 8E68054
-	.incbin "baserom.gba", 0xE68054, 0x52C @ LZ, uncomp. size = 0x800
+gBattleAnimBackgroundImage_SandstormBrew:: @ 8E68054
+	.incbin "graphics/battle_anims/backgrounds/sandstorm_brew.4bpp.lz"
 
-gUnknown_08E68580:: @ 8E68580
+	.align 2
 gBattleAnimSpritePalette_261:: @ 8E68580
 	.incbin "graphics/battle_anims/sprites/261.gbapal.lz"
 
@@ -2829,9 +2829,11 @@ gBattleAnimSpritePalette_262:: @ 8E693DC
 gContestNextTurnGfx::
 	.incbin "graphics/contest/nextturn.4bpp.lz"
 
+	.align 2
 gUnknown_08E69478:: @ 8E69478
 	.incbin "baserom.gba", 0x00e69478, 0x100
 
+	.align 2
 gUnknown_08E69578:: @ 8E69578
 	.incbin "baserom.gba", 0x00e69578, 0x40
 
