@@ -6561,7 +6561,7 @@ _08077E20:
 	ldr r0, _08077E2C
 	b _08077E34
 	.align 2, 0
-_08077E2C: .4byte gUnknown_081ECB14
+_08077E2C: .4byte gEnemyMonElevation
 _08077E30:
 	ldr r0, _08077E40
 	adds r0, r7, r0
@@ -6573,7 +6573,7 @@ _08077E36:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08077E40: .4byte gUnknown_081ECB14
+_08077E40: .4byte gEnemyMonElevation
 	thumb_func_end sub_8077DD8
 
 	thumb_func_start sub_8077E44

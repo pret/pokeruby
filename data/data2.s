@@ -764,8 +764,8 @@ gUnknown_081ECACC:: @ 81ECACC
 @ 81ECAFC
 	.include "data/graphics/trainers/back_pic_palette_table.s"
 
-gUnknown_081ECB14:: @ 81ECB14
-	.incbin "baserom.gba", 0x001ecb14, 0x19C
+@ 81ECB14
+	.include "data/enemy_mon_elevation.s"
 
 @ 81ECCB0
 	.include "data/trainer_parties.s"

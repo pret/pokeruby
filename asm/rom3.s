@@ -81425,7 +81425,7 @@ _08032964:
 	bx r0
 	.align 2, 0
 _08032970: .4byte 0x02017800
-_08032974: .4byte gUnknown_081ECB14
+_08032974: .4byte gEnemyMonElevation
 	thumb_func_end sub_80328A4
 
 	thumb_func_start sub_8032978
@@ -81479,7 +81479,7 @@ _080329AA:
 	b _080329F8
 	.align 2, 0
 _080329D0: .4byte 0x02017800
-_080329D4: .4byte gUnknown_081ECB14
+_080329D4: .4byte gEnemyMonElevation
 _080329D8: .4byte 0x02020004
 _080329DC: .4byte sub_80328A4
 _080329E0:
