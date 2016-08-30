@@ -1350,9 +1350,16 @@ gAccuracyStageRatios:: @ 81FAB1C
 	.byte 133,  50, 0, 0 @ +5
 	.byte   3,   1, 0, 0 @ +6
 
-gUnknown_081FAB50:: @ 81FAB50
-	.incbin "baserom.gba", 0x001fab50, 0xc
+@ The chance is 1/N for each stage.
+	.align 1
+gCriticalHitChance:: @ 81FAB50
+	.2byte 16 @ +0
+	.2byte  8 @ +1
+	.2byte  4 @ +2
+	.2byte  3 @ +3
+	.2byte  2 @ +4
 
+	.align 2
 gUnknown_081FAB5C:: @ 81FAB5C
 	.incbin "baserom.gba", 0x001fab5c, 0xf0
 
