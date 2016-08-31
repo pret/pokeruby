@@ -18,16 +18,16 @@ MtPyre_2F_EventScript_15D392:: @ 815D392
 	end
 
 MtPyre_2F_EventScript_15D39B:: @ 815D39B
-	trainerbattle 0, 145, 0, MtPyre_2F_Text_196674, MtPyre_2F_Text_1966BE
+	trainerbattle 0, OPPONENT_MARK, 0, MtPyre_2F_Text_196674, MtPyre_2F_Text_1966BE
 	msgbox MtPyre_2F_Text_1966E7, 6
 	end
 
 MtPyre_2F_EventScript_15D3B2:: @ 815D3B2
-	trainerbattle 4, 640, 0, MtPyre_2F_Text_1962C6, MtPyre_2F_Text_196358, MtPyre_2F_Text_1963CB
+	trainerbattle 4, OPPONENT_DEZ_AND_LUKE, 0, MtPyre_2F_Text_1962C6, MtPyre_2F_Text_196358, MtPyre_2F_Text_1963CB
 	msgbox MtPyre_2F_Text_196368, 6
 	end
 
 MtPyre_2F_EventScript_15D3CD:: @ 815D3CD
-	trainerbattle 4, 640, 0, MtPyre_2F_Text_196449, MtPyre_2F_Text_1964EB, MtPyre_2F_Text_196539
+	trainerbattle 4, OPPONENT_DEZ_AND_LUKE, 0, MtPyre_2F_Text_196449, MtPyre_2F_Text_1964EB, MtPyre_2F_Text_196539
 	msgbox MtPyre_2F_Text_196504, 6
 	end

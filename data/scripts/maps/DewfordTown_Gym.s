@@ -7,7 +7,7 @@ DewfordTown_Gym_MapScript1_15306B:: @ 815306B
 	end
 
 DewfordTown_Gym_EventScript_153071:: @ 8153071
-	checktrainerflag 266
+	checktrainerflag OPPONENT_BRAWLY
 	jumpeq DewfordTown_Gym_EventScript_1530AA
 	call DewfordTown_Gym_EventScript_153122
 	copyvar 0x8001, 0x8000
@@ -81,17 +81,17 @@ DewfordTown_Gym_EventScript_153117:: @ 8153117
 
 DewfordTown_Gym_EventScript_153122:: @ 8153122
 	setvar 0x8000, 0
-	checktrainerflag 179
+	checktrainerflag OPPONENT_HIDEKI
 	jumpif 0, DewfordTown_Gym_EventScript_153135
 	addvar 0x8000, 1
 
 DewfordTown_Gym_EventScript_153135:: @ 8153135
-	checktrainerflag 425
+	checktrainerflag OPPONENT_TESSA
 	jumpif 0, DewfordTown_Gym_EventScript_153143
 	addvar 0x8000, 1
 
 DewfordTown_Gym_EventScript_153143:: @ 8153143
-	checktrainerflag 426
+	checktrainerflag OPPONENT_LAURA
 	jumpif 0, DewfordTown_Gym_EventScript_153151
 	addvar 0x8000, 1
 
@@ -99,7 +99,7 @@ DewfordTown_Gym_EventScript_153151:: @ 8153151
 	return
 
 DewfordTown_Gym_EventScript_153152:: @ 8153152
-	trainerbattle 1, 266, 0, DewfordTown_Gym_Text_175182, DewfordTown_Gym_Text_175246, DewfordTown_Gym_EventScript_153177
+	trainerbattle 1, OPPONENT_BRAWLY, 0, DewfordTown_Gym_Text_175182, DewfordTown_Gym_Text_175246, DewfordTown_Gym_EventScript_153177
 	checkflag 166
 	jumpif 0, DewfordTown_Gym_EventScript_1531B5
 	msgbox DewfordTown_Gym_Text_175412, 4
@@ -132,7 +132,7 @@ DewfordTown_Gym_EventScript_1531B5:: @ 81531B5
 	end
 
 DewfordTown_Gym_EventScript_1531D9:: @ 81531D9
-	trainerbattle 2, 179, 0, DewfordTown_Gym_Text_174F61, DewfordTown_Gym_Text_174F7A, DewfordTown_Gym_EventScript_1531F4
+	trainerbattle 2, OPPONENT_HIDEKI, 0, DewfordTown_Gym_Text_174F61, DewfordTown_Gym_Text_174F7A, DewfordTown_Gym_EventScript_1531F4
 	msgbox DewfordTown_Gym_Text_174F8E, 6
 	end
 
@@ -142,7 +142,7 @@ DewfordTown_Gym_EventScript_1531F4:: @ 81531F4
 	end
 
 DewfordTown_Gym_EventScript_1531FB:: @ 81531FB
-	trainerbattle 2, 425, 0, DewfordTown_Gym_Text_174FCE, DewfordTown_Gym_Text_175009, DewfordTown_Gym_EventScript_153216
+	trainerbattle 2, OPPONENT_TESSA, 0, DewfordTown_Gym_Text_174FCE, DewfordTown_Gym_Text_175009, DewfordTown_Gym_EventScript_153216
 	msgbox DewfordTown_Gym_Text_175031, 6
 	end
 
@@ -152,7 +152,7 @@ DewfordTown_Gym_EventScript_153216:: @ 8153216
 	end
 
 DewfordTown_Gym_EventScript_15321D:: @ 815321D
-	trainerbattle 2, 426, 0, DewfordTown_Gym_Text_1750C9, DewfordTown_Gym_Text_175104, DewfordTown_Gym_EventScript_153238
+	trainerbattle 2, OPPONENT_LAURA, 0, DewfordTown_Gym_Text_1750C9, DewfordTown_Gym_Text_175104, DewfordTown_Gym_EventScript_153238
 	msgbox DewfordTown_Gym_Text_175117, 6
 	end
 

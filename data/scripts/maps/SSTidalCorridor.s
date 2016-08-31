@@ -176,21 +176,21 @@ SSTidalCorridor_EventScript_15FE7A:: @ 815FE7A
 	end
 
 SSTidalCorridor_EventScript_15FE84:: @ 815FE84
-	checktrainerflag 494
+	checktrainerflag OPPONENT_PHILLIP
 	jumpif 0, SSTidalCorridor_EventScript_15FED5
-	checktrainerflag 495
+	checktrainerflag OPPONENT_LEONARD
 	jumpif 0, SSTidalCorridor_EventScript_15FED5
-	checktrainerflag 294
+	checktrainerflag OPPONENT_COLTON
 	jumpif 0, SSTidalCorridor_EventScript_15FED5
-	checktrainerflag 255
+	checktrainerflag OPPONENT_TUCKER
 	jumpif 0, SSTidalCorridor_EventScript_15FED5
-	checktrainerflag 256
+	checktrainerflag OPPONENT_THOMAS
 	jumpif 0, SSTidalCorridor_EventScript_15FED5
-	checktrainerflag 641
+	checktrainerflag OPPONENT_LEA_AND_JED
 	jumpif 0, SSTidalCorridor_EventScript_15FED5
-	checktrainerflag 138
+	checktrainerflag OPPONENT_GARRET
 	jumpif 0, SSTidalCorridor_EventScript_15FED5
-	checktrainerflag 119
+	checktrainerflag OPPONENT_ANETTE
 	jumpif 0, SSTidalCorridor_EventScript_15FED5
 	setflag 247
 	jump SSTidalCorridor_EventScript_15FE7A

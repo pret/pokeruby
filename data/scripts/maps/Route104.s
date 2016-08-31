@@ -398,17 +398,17 @@ Route104_Movement_14F16F:: @ 814F16F
 	step_end
 
 Route104_EventScript_14F172:: @ 814F172
-	trainerbattle 0, 337, 0, Route104_Text_1B85EB, Route104_Text_1B8637
+	trainerbattle 0, OPPONENT_IVAN, 0, Route104_Text_1B85EB, Route104_Text_1B8637
 	msgbox Route104_Text_1B8680, 6
 	end
 
 Route104_EventScript_14F189:: @ 814F189
-	trainerbattle 0, 319, 0, Route104_Text_1B86BE, Route104_Text_1B86E8
+	trainerbattle 0, OPPONENT_BILLY, 0, Route104_Text_1B86BE, Route104_Text_1B86E8
 	msgbox Route104_Text_1B871C, 6
 	end
 
 Route104_EventScript_14F1A0:: @ 814F1A0
-	trainerbattle 0, 604, 0, Route104_Text_1B8770, Route104_Text_1B87A7
+	trainerbattle 0, OPPONENT_HALEY_1, 0, Route104_Text_1B8770, Route104_Text_1B87A7
 	specialval RESULT, 57
 	compare RESULT, 1
 	jumpeq Route104_EventScript_14F1C7
@@ -416,12 +416,12 @@ Route104_EventScript_14F1A0:: @ 814F1A0
 	end
 
 Route104_EventScript_14F1C7:: @ 814F1C7
-	trainerbattle 5, 604, 0, Route104_Text_1B8839, Route104_Text_1B8852
+	trainerbattle 5, OPPONENT_HALEY_1, 0, Route104_Text_1B8839, Route104_Text_1B8852
 	msgbox Route104_Text_1B8872, 6
 	end
 
 Route104_EventScript_14F1DE:: @ 814F1DE
-	trainerbattle 0, 136, 0, Route104_Text_1B88D4, Route104_Text_1B8911
+	trainerbattle 0, OPPONENT_WINSTON_1, 0, Route104_Text_1B88D4, Route104_Text_1B8911
 	specialval RESULT, 57
 	compare RESULT, 1
 	jumpeq Route104_EventScript_14F205
@@ -429,12 +429,12 @@ Route104_EventScript_14F1DE:: @ 814F1DE
 	end
 
 Route104_EventScript_14F205:: @ 814F205
-	trainerbattle 5, 136, 0, Route104_Text_1B895E, Route104_Text_1B899E
+	trainerbattle 5, OPPONENT_WINSTON_1, 0, Route104_Text_1B895E, Route104_Text_1B899E
 	msgbox Route104_Text_1B89C0, 6
 	end
 
 Route104_EventScript_14F21C:: @ 814F21C
-	trainerbattle 0, 114, 0, Route104_Text_1B8A24, Route104_Text_1B8A61
+	trainerbattle 0, OPPONENT_CINDY_1, 0, Route104_Text_1B8A24, Route104_Text_1B8A61
 	specialval RESULT, 57
 	compare RESULT, 1
 	jumpeq Route104_EventScript_14F243
@@ -442,19 +442,19 @@ Route104_EventScript_14F21C:: @ 814F21C
 	end
 
 Route104_EventScript_14F243:: @ 814F243
-	trainerbattle 5, 114, 0, Route104_Text_1B8AA7, Route104_Text_1B8AD9
+	trainerbattle 5, OPPONENT_CINDY_1, 0, Route104_Text_1B8AA7, Route104_Text_1B8AD9
 	msgbox Route104_Text_1B8B02, 6
 	end
 
 Route104_EventScript_14F25A:: @ 814F25A
-	trainerbattle 4, 483, 0, Route104_Text_1B83E9, Route104_Text_1B8414, Route104_Text_1B845C
+	trainerbattle 4, OPPONENT_GINA_AND_MIA_1, 0, Route104_Text_1B83E9, Route104_Text_1B8414, Route104_Text_1B845C
 	special 148
 	msgbox Route104_Text_1B842C, 4
 	release
 	end
 
 Route104_EventScript_14F279:: @ 814F279
-	trainerbattle 4, 483, 0, Route104_Text_1B84DB, Route104_Text_1B850D, Route104_Text_1B8577
+	trainerbattle 4, OPPONENT_GINA_AND_MIA_1, 0, Route104_Text_1B84DB, Route104_Text_1B850D, Route104_Text_1B8577
 	special 148
 	msgbox Route104_Text_1B853B, 4
 	release
