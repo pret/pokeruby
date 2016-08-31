@@ -3226,7 +3226,7 @@ gUnknown_08E77004:: @ 8E77004
 	.incbin "baserom.gba", 0x00e77004, 0x800
 
 	.align 2
-gMenuMartFrame_Gfx:: @ 8E77804
+gBuyMenuFrame_Gfx:: @ 8E77804
 	.incbin "graphics/interface/mart_frame.4bpp.lz"
 
 	.align 2
@@ -3234,7 +3234,7 @@ gMenuMoneyPal:: @ 8E77900
 	.incbin "graphics/interface/money.gbapal.lz"
 
 	.align 2
-gMenuMartFrame_Tilemap:: @ 8E77928
+gBuyMenuFrame_Tilemap:: @ 8E77928
 	.incbin "graphics/interface/mart_frame.bin.lz"
 
 	.align 2
