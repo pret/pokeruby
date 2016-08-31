@@ -30120,11 +30120,8 @@ gUnknown_08411960:: @ 8411960
 gUnknown_08411980:: @ 8411980
 	.incbin "graphics/misc/clock_small.4bpp.lz"
 
-gUnknown_08411A10:: @ 8411A10
-	.incbin "baserom.gba", 0x00411a10, 0x32
-
-gUnknown_08411A42:: @ 8411A42
-	.incbin "baserom.gba", 0x00411A42, 0x44c
+@ 8411A10
+	.include "data/mon_pokeblock_anims.s"
 
 	.align 2
 gSpriteAffineAnim_8411E90:: @ 8411E90
