@@ -181,7 +181,7 @@ Route128_Movement_1522A1:: @ 81522A1
 	step_end
 
 Route128_EventScript_1522A4:: @ 81522A4
-	trainerbattle 0, 376, 0, Route128_Text_1C1C67, Route128_Text_1C1C95
+	trainerbattle 0, OPPONENT_ISAIAH_1, 0, Route128_Text_1C1C67, Route128_Text_1C1C95
 	specialval RESULT, 57
 	compare RESULT, 1
 	jumpeq Route128_EventScript_1522CB
@@ -189,12 +189,12 @@ Route128_EventScript_1522A4:: @ 81522A4
 	end
 
 Route128_EventScript_1522CB:: @ 81522CB
-	trainerbattle 5, 376, 0, Route128_Text_1C1D02, Route128_Text_1C1D45
+	trainerbattle 5, OPPONENT_ISAIAH_1, 0, Route128_Text_1C1D02, Route128_Text_1C1D45
 	msgbox Route128_Text_1C1D6B, 6
 	end
 
 Route128_EventScript_1522E2:: @ 81522E2
-	trainerbattle 0, 386, 0, Route128_Text_1C1DB0, Route128_Text_1C1E25
+	trainerbattle 0, OPPONENT_KATELYN_1, 0, Route128_Text_1C1DB0, Route128_Text_1C1E25
 	specialval RESULT, 57
 	compare RESULT, 1
 	jumpeq Route128_EventScript_152309
@@ -202,21 +202,21 @@ Route128_EventScript_1522E2:: @ 81522E2
 	end
 
 Route128_EventScript_152309:: @ 8152309
-	trainerbattle 5, 386, 0, Route128_Text_1C1E90, Route128_Text_1C1EFA
+	trainerbattle 5, OPPONENT_KATELYN_1, 0, Route128_Text_1C1E90, Route128_Text_1C1EFA
 	msgbox Route128_Text_1C1F2E, 6
 	end
 
 Route128_EventScript_152320:: @ 8152320
-	trainerbattle 0, 670, 0, Route128_Text_1C1F6D, Route128_Text_1C1FCC
+	trainerbattle 0, OPPONENT_ALEXA, 0, Route128_Text_1C1F6D, Route128_Text_1C1FCC
 	msgbox Route128_Text_1C1FE8, 6
 	end
 
 Route128_EventScript_152337:: @ 8152337
-	trainerbattle 0, 671, 0, Route128_Text_1C202C, Route128_Text_1C2051
+	trainerbattle 0, OPPONENT_RUBEN, 0, Route128_Text_1C202C, Route128_Text_1C2051
 	msgbox Route128_Text_1C2060, 6
 	end
 
 Route128_EventScript_15234E:: @ 815234E
-	trainerbattle 0, 673, 0, Route128_Text_1C2090, Route128_Text_1C20FC
+	trainerbattle 0, OPPONENT_WAYNE, 0, Route128_Text_1C2090, Route128_Text_1C20FC
 	msgbox Route128_Text_1C210D, 6
 	end

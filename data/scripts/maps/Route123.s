@@ -46,22 +46,22 @@ Route123_EventScript_151CC8:: @ 8151CC8
 	end
 
 Route123_EventScript_151CD1:: @ 8151CD1
-	trainerbattle 0, 92, 0, Route123_Text_1BFF6A, Route123_Text_1BFFA2
+	trainerbattle 0, OPPONENT_WENDY, 0, Route123_Text_1BFF6A, Route123_Text_1BFFA2
 	msgbox Route123_Text_1BFFC1, 6
 	end
 
 Route123_EventScript_151CE8:: @ 8151CE8
-	trainerbattle 0, 75, 0, Route123_Text_1BFFF0, Route123_Text_1C0057
+	trainerbattle 0, OPPONENT_CLYDE, 0, Route123_Text_1BFFF0, Route123_Text_1C0057
 	msgbox Route123_Text_1C0075, 6
 	end
 
 Route123_EventScript_151CFF:: @ 8151CFF
-	trainerbattle 0, 39, 0, Route123_Text_1C009E, Route123_Text_1C00D4
+	trainerbattle 0, OPPONENT_VIOLET, 0, Route123_Text_1C009E, Route123_Text_1C00D4
 	msgbox Route123_Text_1C0100, 6
 	end
 
 Route123_EventScript_151D16:: @ 8151D16
-	trainerbattle 0, 238, 0, Route123_Text_1C013F, Route123_Text_1C01A3
+	trainerbattle 0, OPPONENT_CAMERON_1, 0, Route123_Text_1C013F, Route123_Text_1C01A3
 	specialval RESULT, 57
 	compare RESULT, 1
 	jumpeq Route123_EventScript_151D3D
@@ -69,12 +69,12 @@ Route123_EventScript_151D16:: @ 8151D16
 	end
 
 Route123_EventScript_151D3D:: @ 8151D3D
-	trainerbattle 5, 238, 0, Route123_Text_1C01F9, Route123_Text_1C0240
+	trainerbattle 5, OPPONENT_CAMERON_1, 0, Route123_Text_1C01F9, Route123_Text_1C0240
 	msgbox Route123_Text_1C024E, 6
 	end
 
 Route123_EventScript_151D54:: @ 8151D54
-	trainerbattle 0, 249, 0, Route123_Text_1C028C, Route123_Text_1C0303
+	trainerbattle 0, OPPONENT_JACKI_1, 0, Route123_Text_1C028C, Route123_Text_1C0303
 	specialval RESULT, 57
 	compare RESULT, 1
 	jumpeq Route123_EventScript_151D7B
@@ -82,21 +82,21 @@ Route123_EventScript_151D54:: @ 8151D54
 	end
 
 Route123_EventScript_151D7B:: @ 8151D7B
-	trainerbattle 5, 249, 0, Route123_Text_1C0351, Route123_Text_1C0380
+	trainerbattle 5, OPPONENT_JACKI_1, 0, Route123_Text_1C0351, Route123_Text_1C0380
 	msgbox Route123_Text_1C038C, 6
 	end
 
 Route123_EventScript_151D92:: @ 8151D92
-	trainerbattle 4, 484, 0, Route123_Text_1C03CB, Route123_Text_1C040E, Route123_Text_1C0462
+	trainerbattle 4, OPPONENT_MIU_AND_YUKI, 0, Route123_Text_1C03CB, Route123_Text_1C040E, Route123_Text_1C0462
 	msgbox Route123_Text_1C0423, 6
 	end
 
 Route123_EventScript_151DAD:: @ 8151DAD
-	trainerbattle 4, 484, 0, Route123_Text_1C049C, Route123_Text_1C04CD, Route123_Text_1C0519
+	trainerbattle 4, OPPONENT_MIU_AND_YUKI, 0, Route123_Text_1C049C, Route123_Text_1C04CD, Route123_Text_1C0519
 	msgbox Route123_Text_1C04E3, 6
 	end
 
 Route123_EventScript_151DC8:: @ 8151DC8
-	trainerbattle 0, 106, 0, Route123_Text_1C0554, Route123_Text_1C059F
+	trainerbattle 0, OPPONENT_KINDRA, 0, Route123_Text_1C0554, Route123_Text_1C059F
 	msgbox Route123_Text_1C05BC, 6
 	end

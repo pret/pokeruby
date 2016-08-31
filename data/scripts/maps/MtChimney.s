@@ -439,7 +439,7 @@ MtChimney_EventScript_15D1DA:: @ 815D1DA
 	end
 
 MtChimney_EventScript_15D1E3:: @ 815D1E3
-	trainerbattle 0, 313, 0, MtChimney_Text_19597F, MtChimney_Text_1959D8
+	trainerbattle 0, OPPONENT_SHELBY_1, 0, MtChimney_Text_19597F, MtChimney_Text_1959D8
 	specialval RESULT, 57
 	compare RESULT, 1
 	jumpeq MtChimney_EventScript_15D20A
@@ -447,21 +447,21 @@ MtChimney_EventScript_15D1E3:: @ 815D1E3
 	end
 
 MtChimney_EventScript_15D20A:: @ 815D20A
-	trainerbattle 5, 313, 0, MtChimney_Text_195A45, MtChimney_Text_195AAD
+	trainerbattle 5, OPPONENT_SHELBY_1, 0, MtChimney_Text_195A45, MtChimney_Text_195AAD
 	msgbox MtChimney_Text_195AD9, 6
 	end
 
 MtChimney_EventScript_15D221:: @ 815D221
-	trainerbattle 0, 124, 0, MtChimney_Text_195B1C, MtChimney_Text_195B5F
+	trainerbattle 0, OPPONENT_MELISSA, 0, MtChimney_Text_195B1C, MtChimney_Text_195B5F
 	msgbox MtChimney_Text_195B84, 6
 	end
 
 MtChimney_EventScript_15D238:: @ 815D238
-	trainerbattle 0, 125, 0, MtChimney_Text_195BB2, MtChimney_Text_195BF9
+	trainerbattle 0, OPPONENT_SHEILA, 0, MtChimney_Text_195BB2, MtChimney_Text_195BF9
 	msgbox MtChimney_Text_195C31, 6
 	end
 
 MtChimney_EventScript_15D24F:: @ 815D24F
-	trainerbattle 0, 126, 0, MtChimney_Text_195CD8, MtChimney_Text_195D2F
+	trainerbattle 0, OPPONENT_SHIRLEY, 0, MtChimney_Text_195CD8, MtChimney_Text_195D2F
 	msgbox MtChimney_Text_195D5C, 6
 	end

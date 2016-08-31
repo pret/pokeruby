@@ -96,17 +96,17 @@ Route119_EventScript_15125E:: @ 815125E
 	end
 
 Route119_EventScript_15128D:: @ 815128D
-	trainerbattle 3, 534, 0, Route119_Text_171156
+	trainerbattle 3, OPPONENT_MAY_6, 0, Route119_Text_171156
 	jump Route119_EventScript_1512BD
 	end
 
 Route119_EventScript_15129D:: @ 815129D
-	trainerbattle 3, 537, 0, Route119_Text_171156
+	trainerbattle 3, OPPONENT_MAY_9, 0, Route119_Text_171156
 	jump Route119_EventScript_1512BD
 	end
 
 Route119_EventScript_1512AD:: @ 81512AD
-	trainerbattle 3, 531, 0, Route119_Text_171156
+	trainerbattle 3, OPPONENT_MAY_3, 0, Route119_Text_171156
 	jump Route119_EventScript_1512BD
 	end
 
@@ -126,17 +126,17 @@ Route119_EventScript_1512D8:: @ 81512D8
 	end
 
 Route119_EventScript_151307:: @ 8151307
-	trainerbattle 3, 525, 0, Route119_Text_1713E2
+	trainerbattle 3, OPPONENT_BRENDAN_6, 0, Route119_Text_1713E2
 	jump Route119_EventScript_151337
 	end
 
 Route119_EventScript_151317:: @ 8151317
-	trainerbattle 3, 528, 0, Route119_Text_1713E2
+	trainerbattle 3, OPPONENT_BRENDAN_9, 0, Route119_Text_1713E2
 	jump Route119_EventScript_151337
 	end
 
 Route119_EventScript_151327:: @ 8151327
-	trainerbattle 3, 522, 0, Route119_Text_1713E2
+	trainerbattle 3, OPPONENT_BRENDAN_3, 0, Route119_Text_1713E2
 	jump Route119_EventScript_151337
 	end
 
@@ -265,37 +265,37 @@ Route119_EventScript_15142C:: @ 815142C
 	end
 
 Route119_EventScript_151435:: @ 8151435
-	trainerbattle 0, 223, 0, Route119_Text_1BE521, Route119_Text_1BE54F
+	trainerbattle 0, OPPONENT_BRENT, 0, Route119_Text_1BE521, Route119_Text_1BE54F
 	msgbox Route119_Text_1BE561, 6
 	end
 
 Route119_EventScript_15144C:: @ 815144C
-	trainerbattle 0, 224, 0, Route119_Text_1BE5A4, Route119_Text_1BE5DF
+	trainerbattle 0, OPPONENT_DONALD, 0, Route119_Text_1BE5A4, Route119_Text_1BE5DF
 	msgbox Route119_Text_1BE5F8, 6
 	end
 
 Route119_EventScript_151463:: @ 8151463
-	trainerbattle 0, 225, 0, Route119_Text_1BE632, Route119_Text_1BE67B
+	trainerbattle 0, OPPONENT_TAYLOR, 0, Route119_Text_1BE632, Route119_Text_1BE67B
 	msgbox Route119_Text_1BE695, 6
 	end
 
 Route119_EventScript_15147A:: @ 815147A
-	trainerbattle 0, 618, 0, Route119_Text_1BE6EA, Route119_Text_1BE729
+	trainerbattle 0, OPPONENT_DOUG, 0, Route119_Text_1BE6EA, Route119_Text_1BE729
 	msgbox Route119_Text_1BE748, 6
 	end
 
 Route119_EventScript_151491:: @ 8151491
-	trainerbattle 0, 619, 0, Route119_Text_1BE784, Route119_Text_1BE7D3
+	trainerbattle 0, OPPONENT_GREG, 0, Route119_Text_1BE784, Route119_Text_1BE7D3
 	msgbox Route119_Text_1BE7E9, 6
 	end
 
 Route119_EventScript_1514A8:: @ 81514A8
-	trainerbattle 0, 620, 0, Route119_Text_1BE82F, Route119_Text_1BE88D
+	trainerbattle 0, OPPONENT_KENT, 0, Route119_Text_1BE82F, Route119_Text_1BE88D
 	msgbox Route119_Text_1BE89A, 6
 	end
 
 Route119_EventScript_1514BF:: @ 81514BF
-	trainerbattle 0, 552, 0, Route119_Text_1BE8BB, Route119_Text_1BE90E
+	trainerbattle 0, OPPONENT_JACKSON_1, 0, Route119_Text_1BE8BB, Route119_Text_1BE90E
 	specialval RESULT, 57
 	compare RESULT, 1
 	jumpeq Route119_EventScript_1514E6
@@ -303,12 +303,12 @@ Route119_EventScript_1514BF:: @ 81514BF
 	end
 
 Route119_EventScript_1514E6:: @ 81514E6
-	trainerbattle 5, 552, 0, Route119_Text_1BE98D, Route119_Text_1BE9D0
+	trainerbattle 5, OPPONENT_JACKSON_1, 0, Route119_Text_1BE98D, Route119_Text_1BE9D0
 	msgbox Route119_Text_1BE9E8, 6
 	end
 
 Route119_EventScript_1514FD:: @ 81514FD
-	trainerbattle 0, 559, 0, Route119_Text_1BEA3A, Route119_Text_1BEA88
+	trainerbattle 0, OPPONENT_CATHERINE_1, 0, Route119_Text_1BEA3A, Route119_Text_1BEA88
 	specialval RESULT, 57
 	compare RESULT, 1
 	jumpeq Route119_EventScript_151524
@@ -316,37 +316,37 @@ Route119_EventScript_1514FD:: @ 81514FD
 	end
 
 Route119_EventScript_151524:: @ 8151524
-	trainerbattle 5, 559, 0, Route119_Text_1BEB22, Route119_Text_1BEB49
+	trainerbattle 5, OPPONENT_CATHERINE_1, 0, Route119_Text_1BEB22, Route119_Text_1BEB49
 	msgbox Route119_Text_1BEB68, 6
 	end
 
 Route119_EventScript_15153B:: @ 815153B
-	trainerbattle 0, 399, 0, Route119_Text_1BEBC0, Route119_Text_1BEC1C
+	trainerbattle 0, OPPONENT_HUGH, 0, Route119_Text_1BEBC0, Route119_Text_1BEC1C
 	msgbox Route119_Text_1BEC2A, 6
 	end
 
 Route119_EventScript_151552:: @ 8151552
-	trainerbattle 0, 400, 0, Route119_Text_1BEC5E, Route119_Text_1BEC9A
+	trainerbattle 0, OPPONENT_PHIL, 0, Route119_Text_1BEC5E, Route119_Text_1BEC9A
 	msgbox Route119_Text_1BECB1, 6
 	end
 
 Route119_EventScript_151569:: @ 8151569
-	trainerbattle 0, 415, 0, Route119_Text_1BECF1, Route119_Text_1BED4C
+	trainerbattle 0, OPPONENT_YASU, 0, Route119_Text_1BECF1, Route119_Text_1BED4C
 	msgbox Route119_Text_1BED5C, 6
 	end
 
 Route119_EventScript_151580:: @ 8151580
-	trainerbattle 0, 416, 0, Route119_Text_1BEDB6, Route119_Text_1BEDEC
+	trainerbattle 0, OPPONENT_TAKASHI, 0, Route119_Text_1BEDB6, Route119_Text_1BEDEC
 	msgbox Route119_Text_1BEE06, 6
 	end
 
 Route119_EventScript_151597:: @ 8151597
-	trainerbattle 0, 651, 0, Route119_Text_1BEE2D, Route119_Text_1BEE4B
+	trainerbattle 0, OPPONENT_HIDEO_2, 0, Route119_Text_1BEE2D, Route119_Text_1BEE4B
 	msgbox Route119_Text_1BEE66, 6
 	end
 
 Route119_EventScript_1515AE:: @ 81515AE
-	trainerbattle 0, 693, 0, Route119_Text_1BEED0, Route119_Text_1BEF37
+	trainerbattle 0, OPPONENT_EUGENE, 0, Route119_Text_1BEED0, Route119_Text_1BEF37
 	msgbox Route119_Text_1BEF67, 6
 	end
 

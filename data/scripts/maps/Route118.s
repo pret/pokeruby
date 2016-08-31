@@ -160,7 +160,7 @@ Route118_Movement_151086:: @ 8151086
 	step_end
 
 Route118_EventScript_15108F:: @ 815108F
-	trainerbattle 0, 37, 0, Route118_Text_1BDFF4, Route118_Text_1BE03C
+	trainerbattle 0, OPPONENT_ROSE_1, 0, Route118_Text_1BDFF4, Route118_Text_1BE03C
 	specialval RESULT, 57
 	compare RESULT, 1
 	jumpeq Route118_EventScript_1510B6
@@ -168,22 +168,22 @@ Route118_EventScript_15108F:: @ 815108F
 	end
 
 Route118_EventScript_1510B6:: @ 81510B6
-	trainerbattle 5, 37, 0, Route118_Text_1BE0AB, Route118_Text_1BE0D3
+	trainerbattle 5, OPPONENT_ROSE_1, 0, Route118_Text_1BE0AB, Route118_Text_1BE0D3
 	msgbox Route118_Text_1BE104, 6
 	end
 
 Route118_EventScript_1510CD:: @ 81510CD
-	trainerbattle 0, 343, 0, Route118_Text_1BE24A, Route118_Text_1BE291
+	trainerbattle 0, OPPONENT_BARNY, 0, Route118_Text_1BE24A, Route118_Text_1BE291
 	msgbox Route118_Text_1BE2BE, 6
 	end
 
 Route118_EventScript_1510E4:: @ 81510E4
-	trainerbattle 0, 344, 0, Route118_Text_1BE318, Route118_Text_1BE385
+	trainerbattle 0, OPPONENT_WADE, 0, Route118_Text_1BE318, Route118_Text_1BE385
 	msgbox Route118_Text_1BE39C, 6
 	end
 
 Route118_EventScript_1510FB:: @ 81510FB
-	trainerbattle 0, 196, 0, Route118_Text_1BE3E8, Route118_Text_1BE406
+	trainerbattle 0, OPPONENT_DALTON_1, 0, Route118_Text_1BE3E8, Route118_Text_1BE406
 	specialval RESULT, 57
 	compare RESULT, 1
 	jumpeq Route118_EventScript_151122
@@ -191,16 +191,16 @@ Route118_EventScript_1510FB:: @ 81510FB
 	end
 
 Route118_EventScript_151122:: @ 8151122
-	trainerbattle 5, 196, 0, Route118_Text_1BE489, Route118_Text_1BE4CC
+	trainerbattle 5, OPPONENT_DALTON_1, 0, Route118_Text_1BE489, Route118_Text_1BE4CC
 	msgbox Route118_Text_1BE4D9, 6
 	end
 
 Route118_EventScript_151139:: @ 8151139
-	trainerbattle 0, 398, 0, Route118_Text_1BE148, Route118_Text_1BE188
+	trainerbattle 0, OPPONENT_PERRY, 0, Route118_Text_1BE148, Route118_Text_1BE188
 	msgbox Route118_Text_1BE19D, 6
 	end
 
 Route118_EventScript_151150:: @ 8151150
-	trainerbattle 0, 408, 0, Route118_Text_1BE1D7, Route118_Text_1BE1F5
+	trainerbattle 0, OPPONENT_CHESTER, 0, Route118_Text_1BE1D7, Route118_Text_1BE1F5
 	msgbox Route118_Text_1BE20D, 6
 	end

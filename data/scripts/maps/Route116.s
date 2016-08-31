@@ -229,17 +229,17 @@ Route116_Movement_150C57:: @ 8150C57
 	step_end
 
 Route116_EventScript_150C62:: @ 8150C62
-	trainerbattle 0, 322, 0, Route116_Text_1BD02B, Route116_Text_1BD04C
+	trainerbattle 0, OPPONENT_JOEY, 0, Route116_Text_1BD02B, Route116_Text_1BD04C
 	msgbox Route116_Text_1BD078, 6
 	end
 
 Route116_EventScript_150C79:: @ 8150C79
-	trainerbattle 0, 617, 0, Route116_Text_1BD0AF, Route116_Text_1BD0D7
+	trainerbattle 0, OPPONENT_JOSE, 0, Route116_Text_1BD0AF, Route116_Text_1BD0D7
 	msgbox Route116_Text_1BD0F4, 6
 	end
 
 Route116_EventScript_150C90:: @ 8150C90
-	trainerbattle 0, 273, 0, Route116_Text_1BD1C0, Route116_Text_1BD21A
+	trainerbattle 0, OPPONENT_JERRY_1, 0, Route116_Text_1BD1C0, Route116_Text_1BD21A
 	specialval RESULT, 57
 	compare RESULT, 1
 	jumpeq Route116_EventScript_150CB7
@@ -247,22 +247,22 @@ Route116_EventScript_150C90:: @ 8150C90
 	end
 
 Route116_EventScript_150CB7:: @ 8150CB7
-	trainerbattle 5, 273, 0, Route116_Text_1BD2A5, Route116_Text_1BD2FE
+	trainerbattle 5, OPPONENT_JERRY_1, 0, Route116_Text_1BD2A5, Route116_Text_1BD2FE
 	msgbox Route116_Text_1BD31A, 6
 	end
 
 Route116_EventScript_150CCE:: @ 8150CCE
-	trainerbattle 0, 631, 0, Route116_Text_1BCF79, Route116_Text_1BCFBB
+	trainerbattle 0, OPPONENT_CLARK, 0, Route116_Text_1BCF79, Route116_Text_1BCFBB
 	msgbox Route116_Text_1BCFE3, 6
 	end
 
 Route116_EventScript_150CE5:: @ 8150CE5
-	trainerbattle 0, 605, 0, Route116_Text_1BD131, Route116_Text_1BD165
+	trainerbattle 0, OPPONENT_JANICE, 0, Route116_Text_1BD131, Route116_Text_1BD165
 	msgbox Route116_Text_1BD180, 6
 	end
 
 Route116_EventScript_150CFC:: @ 8150CFC
-	trainerbattle 0, 280, 0, Route116_Text_1BD377, Route116_Text_1BD3AC
+	trainerbattle 0, OPPONENT_KAREN_1, 0, Route116_Text_1BD377, Route116_Text_1BD3AC
 	specialval RESULT, 57
 	compare RESULT, 1
 	jumpeq Route116_EventScript_150D23
@@ -270,6 +270,6 @@ Route116_EventScript_150CFC:: @ 8150CFC
 	end
 
 Route116_EventScript_150D23:: @ 8150D23
-	trainerbattle 5, 280, 0, Route116_Text_1BD405, Route116_Text_1BD44A
+	trainerbattle 5, OPPONENT_KAREN_1, 0, Route116_Text_1BD405, Route116_Text_1BD44A
 	msgbox Route116_Text_1BD466, 6
 	end

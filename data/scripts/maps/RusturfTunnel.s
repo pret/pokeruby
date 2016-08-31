@@ -416,6 +416,6 @@ RusturfTunnel_Movement_15CAC3:: @ 815CAC3
 	step_end
 
 RusturfTunnel_EventScript_15CACD:: @ 815CACD
-	trainerbattle 0, 635, 0, RusturfTunnel_Text_194814, RusturfTunnel_Text_1948A2
+	trainerbattle 0, OPPONENT_MIKE_2, 0, RusturfTunnel_Text_194814, RusturfTunnel_Text_1948A2
 	msgbox RusturfTunnel_Text_1948C4, 6
 	end

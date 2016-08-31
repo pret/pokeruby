@@ -2,7 +2,7 @@ MeteorFalls_1F_2R_MapScripts:: @ 815C678
 	.byte 0
 
 MeteorFalls_1F_2R_EventScript_15C679:: @ 815C679
-	trainerbattle 0, 392, 0, MeteorFalls_1F_2R_Text_1939C5, MeteorFalls_1F_2R_Text_193A35
+	trainerbattle 0, OPPONENT_NICOLAS_1, 0, MeteorFalls_1F_2R_Text_1939C5, MeteorFalls_1F_2R_Text_193A35
 	specialval RESULT, 57
 	compare RESULT, 1
 	jumpeq MeteorFalls_1F_2R_EventScript_15C6A0
@@ -10,12 +10,12 @@ MeteorFalls_1F_2R_EventScript_15C679:: @ 815C679
 	end
 
 MeteorFalls_1F_2R_EventScript_15C6A0:: @ 815C6A0
-	trainerbattle 5, 392, 0, MeteorFalls_1F_2R_Text_193AB3, MeteorFalls_1F_2R_Text_193B21
+	trainerbattle 5, OPPONENT_NICOLAS_1, 0, MeteorFalls_1F_2R_Text_193AB3, MeteorFalls_1F_2R_Text_193B21
 	msgbox MeteorFalls_1F_2R_Text_193B4C, 6
 	end
 
 MeteorFalls_1F_2R_EventScript_15C6B7:: @ 815C6B7
-	trainerbattle 4, 681, 0, MeteorFalls_1F_2R_Text_193BB7, MeteorFalls_1F_2R_Text_193C10, MeteorFalls_1F_2R_Text_193C9F
+	trainerbattle 4, OPPONENT_JOHN_AND_JAY_1, 0, MeteorFalls_1F_2R_Text_193BB7, MeteorFalls_1F_2R_Text_193C10, MeteorFalls_1F_2R_Text_193C9F
 	specialval RESULT, 57
 	compare RESULT, 1
 	jumpeq MeteorFalls_1F_2R_EventScript_15C6E2
@@ -23,12 +23,12 @@ MeteorFalls_1F_2R_EventScript_15C6B7:: @ 815C6B7
 	end
 
 MeteorFalls_1F_2R_EventScript_15C6E2:: @ 815C6E2
-	trainerbattle 7, 681, 0, MeteorFalls_1F_2R_Text_193E75, MeteorFalls_1F_2R_Text_193ECE, MeteorFalls_1F_2R_Text_193F59
+	trainerbattle 7, OPPONENT_JOHN_AND_JAY_1, 0, MeteorFalls_1F_2R_Text_193E75, MeteorFalls_1F_2R_Text_193ECE, MeteorFalls_1F_2R_Text_193F59
 	msgbox MeteorFalls_1F_2R_Text_193EF3, 6
 	end
 
 MeteorFalls_1F_2R_EventScript_15C6FD:: @ 815C6FD
-	trainerbattle 4, 681, 0, MeteorFalls_1F_2R_Text_193D10, MeteorFalls_1F_2R_Text_193D6E, MeteorFalls_1F_2R_Text_193DFB
+	trainerbattle 4, OPPONENT_JOHN_AND_JAY_1, 0, MeteorFalls_1F_2R_Text_193D10, MeteorFalls_1F_2R_Text_193D6E, MeteorFalls_1F_2R_Text_193DFB
 	specialval RESULT, 57
 	compare RESULT, 1
 	jumpeq MeteorFalls_1F_2R_EventScript_15C728
@@ -36,6 +36,6 @@ MeteorFalls_1F_2R_EventScript_15C6FD:: @ 815C6FD
 	end
 
 MeteorFalls_1F_2R_EventScript_15C728:: @ 815C728
-	trainerbattle 7, 681, 0, MeteorFalls_1F_2R_Text_193FCA, MeteorFalls_1F_2R_Text_19403A, MeteorFalls_1F_2R_Text_1940DF
+	trainerbattle 7, OPPONENT_JOHN_AND_JAY_1, 0, MeteorFalls_1F_2R_Text_193FCA, MeteorFalls_1F_2R_Text_19403A, MeteorFalls_1F_2R_Text_1940DF
 	msgbox MeteorFalls_1F_2R_Text_194066, 6
 	end

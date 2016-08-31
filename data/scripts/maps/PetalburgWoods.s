@@ -265,12 +265,12 @@ PetalburgWoods_EventScript_15CF1E:: @ 815CF1E
 	end
 
 PetalburgWoods_EventScript_15CF27:: @ 815CF27
-	trainerbattle 0, 616, 0, PetalburgWoods_Text_1951BE, PetalburgWoods_Text_195202
+	trainerbattle 0, OPPONENT_LYLE, 0, PetalburgWoods_Text_1951BE, PetalburgWoods_Text_195202
 	msgbox PetalburgWoods_Text_195232, 6
 	end
 
 PetalburgWoods_EventScript_15CF3E:: @ 815CF3E
-	trainerbattle 0, 621, 0, PetalburgWoods_Text_19526A, PetalburgWoods_Text_1952AE
+	trainerbattle 0, OPPONENT_JAMES_1, 0, PetalburgWoods_Text_19526A, PetalburgWoods_Text_1952AE
 	specialval RESULT, 57
 	compare RESULT, 1
 	jumpeq PetalburgWoods_EventScript_15CF65
@@ -278,6 +278,6 @@ PetalburgWoods_EventScript_15CF3E:: @ 815CF3E
 	end
 
 PetalburgWoods_EventScript_15CF65:: @ 815CF65
-	trainerbattle 5, 621, 0, PetalburgWoods_Text_195306, PetalburgWoods_Text_195338
+	trainerbattle 5, OPPONENT_JAMES_1, 0, PetalburgWoods_Text_195306, PetalburgWoods_Text_195338
 	msgbox PetalburgWoods_Text_195356, 6
 	end

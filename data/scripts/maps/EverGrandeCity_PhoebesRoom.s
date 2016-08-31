@@ -45,7 +45,7 @@ EverGrandeCity_PhoebesRoom_EventScript_15B630:: @ 815B630
 	jumpeq EverGrandeCity_PhoebesRoom_EventScript_15B657
 	playmusic 450, 0
 	msgbox EverGrandeCity_PhoebesRoom_Text_1908F5, 4
-	trainerbattle 3, 262, 0, EverGrandeCity_PhoebesRoom_Text_190A0C
+	trainerbattle 3, OPPONENT_PHOEBE, 0, EverGrandeCity_PhoebesRoom_Text_190A0C
 	jump EverGrandeCity_PhoebesRoom_EventScript_15B661
 	end
 
