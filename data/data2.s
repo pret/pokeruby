@@ -23956,8 +23956,8 @@ gSpriteTemplate_83F7B28:: @ 83F7B28
 gSpriteTemplate_83F7B40:: @ 83F7B40
 	spr_template 4096, 4096, gOamData_83F7B08, gSpriteAnimTable_83F7B24, NULL, gDummySpriteAffineAnimTable, sub_810B230
 
-gUnknown_083F7B58:: @ 83F7B58
-	.incbin "baserom.gba", 0x003f7b58, 0x2d0
+@ 83F7B58
+	.include "data/clock_hand_coords.s"
 
 gUnknown_083F7E28:: @ 83F7E28
 	.incbin "baserom.gba", 0x003f7e28, 0x80
