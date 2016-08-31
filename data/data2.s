@@ -764,8 +764,8 @@ gUnknown_081ECACC:: @ 81ECACC
 @ 81ECAFC
 	.include "data/graphics/trainers/back_pic_palette_table.s"
 
-gUnknown_081ECB14:: @ 81ECB14
-	.incbin "baserom.gba", 0x001ecb14, 0x19C
+@ 81ECB14
+	.include "data/enemy_mon_elevation.s"
 
 @ 81ECCB0
 	.include "data/trainer_parties.s"
@@ -987,9 +987,8 @@ gSpriteAffineAnimTable_81F971C:: @ 81F971C
 @ 81F9870
 	.include "data/text/type_names.s"
 
-	.align 2
-gUnknown_081F98F0:: @ 81F98F0
-	.incbin "baserom.gba", 0x001f98f0, 0xdc
+@ 81F98F0
+	.include "data/trainer_money.s"
 
 @ 81F99CC
 	.include "data/text/ability_descriptions.s"
@@ -1335,14 +1334,93 @@ gUnknown_081FA73C:: @ 81FA73C
 	.4byte sub_802BF48
 	.4byte sub_802BF54
 
-gUnknown_081FAB1C:: @ 81FAB1C
-	.incbin "baserom.gba", 0x001fab1c, 0x34
+	.align 2
+gAccuracyStageRatios:: @ 81FAB1C
+	.byte  33, 100, 0, 0 @ -6
+	.byte  36, 100, 0, 0 @ -5
+	.byte  43, 100, 0, 0 @ -4
+	.byte  50, 100, 0, 0 @ -3
+	.byte  60, 100, 0, 0 @ -2
+	.byte  75, 100, 0, 0 @ -1
+	.byte   1,   1, 0, 0 @  0
+	.byte 133, 100, 0, 0 @ +1
+	.byte 166, 100, 0, 0 @ +2
+	.byte   2,   1, 0, 0 @ +3
+	.byte 233, 100, 0, 0 @ +4
+	.byte 133,  50, 0, 0 @ +5
+	.byte   3,   1, 0, 0 @ +6
 
-gUnknown_081FAB50:: @ 81FAB50
-	.incbin "baserom.gba", 0x001fab50, 0xc
+@ The chance is 1/N for each stage.
+	.align 1
+gCriticalHitChance:: @ 81FAB50
+	.2byte 16 @ +0
+	.2byte  8 @ +1
+	.2byte  4 @ +2
+	.2byte  3 @ +3
+	.2byte  2 @ +4
 
+	.align 2
 gUnknown_081FAB5C:: @ 81FAB5C
-	.incbin "baserom.gba", 0x001fab5c, 0xf0
+	.4byte 0x00000000
+	.4byte 0x00000007
+	.4byte 0x00000008
+	.4byte 0x00000010
+	.4byte 0x00000020
+	.4byte 0x00000040
+	.4byte 0x00000080
+	.4byte 0x00000007
+	.4byte 0x00000008
+	.4byte 0x00000000
+	.4byte 0x00000070
+	.4byte 0x00000000
+	.4byte 0x00001000
+	.4byte 0x0000E000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00400000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x04000000
+	.4byte 0x08000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000C00
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
 
 	.align 2
 gUnknown_081FAC4C:: @ 81FAC4C
@@ -1386,13 +1464,20 @@ gUnknown_081FAC4C:: @ 81FAC4C
 	.4byte BattleScript_1D963E
 	.4byte BattleScript_1D96C8
 
-	.incbin "baserom.gba", 0x001face8, 0x7
+@ unreferenced bit masks
+	.byte 0x00, 0x01, 0x03, 0x07, 0x0F, 0x1F, 0x3F
 
-gUnknown_081FACEF:: @ 81FACEF
-	.incbin "baserom.gba", 0x001facef, 0x7
+gLevelUpStatBoxStats:: @ 81FACEF
+	.byte 0x3A @ HP
+	.byte 0x3E @ Sp. Attack
+	.byte 0x3B @ Attack
+	.byte 0x3F @ Sp. Defense
+	.byte 0x3C @ Defense
+	.byte 0x3D @ Speed
 
-gUnknown_081FACF6:: @ 81FACF6
-	.incbin "baserom.gba", 0x001facf6, 0x8
+	.align 1
+gProtectSuccessRates:: @ 81FACF6
+	.2byte 0xFFFF, 0x7FFF, 0x3FFF, 0x1FFF
 
 	.align 1
 gUnknown_081FACFE:: @ 81FACFE
@@ -1463,11 +1548,25 @@ gPickupItems:: @ 81FAD5E
 	.2byte ITEM_PP_UP, 99
 	.2byte ITEM_KINGS_ROCK, 1
 
-gUnknown_081FAD86:: @ 81FAD86
-	.incbin "baserom.gba", 0x001fad86, 0xa
+gTerrainToType:: @ 81FAD86
+	.byte TYPE_GRASS  @ tall grass
+	.byte TYPE_GRASS  @ long grass
+	.byte TYPE_GROUND @ sand
+	.byte TYPE_WATER  @ underwater
+	.byte TYPE_WATER  @ water
+	.byte TYPE_WATER  @ pond water
+	.byte TYPE_ROCK   @ rock
+	.byte TYPE_ROCK   @ cave
+	.byte TYPE_NORMAL @ building
+	.byte TYPE_NORMAL @ plain
 
-gUnknown_081FAD90:: @ 81FAD90
-	.incbin "baserom.gba", 0x001fad90, 0x8
+gBallCatchBonuses:: @ 81FAD90
+	.byte 20 @ Ultra Ball
+	.byte 15 @ Great Ball
+	.byte 10 @ Poké Ball
+	.byte 15 @ Safari Ball
+
+	.string "ターン$" @ "turn"
 
 	.align 2
 gUnknown_081FAD98:: @ 81FAD98
@@ -1685,7 +1784,8 @@ gUnknown_081FAF5C:: @ 81FAF5C
 	.4byte sub_8035FA4
 	.4byte nullsub_46
 
-	.incbin "baserom.gba", 0x001fb040, 0x8
+@ unreferenced unknown values
+	.byte 0xB0, 0xB0, 0xC8, 0x98, 0x28, 0x28, 0x28, 0x20
 
 	.align 2
 gUnknown_081FB048:: @ 81FB048
@@ -1933,8 +2033,26 @@ gBitTable:: @ 820872C
 gSpriteTemplate_82087AC:: @ 82087AC
 	spr_template 0, 0, gDummyOamData, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
+@ sprite dimensions
+	.align 2
 gUnknown_082087C4:: @ 82087C4
-	.incbin "baserom.gba", 0x002087c4, 0x18
+	@ square
+	.byte 1, 1
+	.byte 2, 2
+	.byte 4, 4
+	.byte 8, 8
+
+	@ horizontal rectangle
+	.byte 2, 1
+	.byte 4, 1
+	.byte 4, 2
+	.byte 8, 4
+
+	@ vertical rectangle
+	.byte 1, 2
+	.byte 1, 4
+	.byte 2, 4
+	.byte 4, 8
 
 @ 82087DC
 	.include "data/crc16_table.s"
@@ -2051,8 +2169,28 @@ gSpriteAnimTable_820A408:: @ 820A408
 gSpriteTemplate_820A418:: @ 820A418
 	spr_template 23456, 54321, gOamData_820A3E0, gSpriteAnimTable_820A408, NULL, gDummySpriteAffineAnimTable, sub_80435A4
 
-gUnknown_0820A430:: @ 820A430
-	.incbin "baserom.gba", 0x0020a430, 0x4c
+@ The values are Q8.8 fixed-point numbers.
+	.align 1
+gEggShardVelocities:: @ 820A430
+	.2byte 0xFE80, 0xFC40 @ (-1.5, -3.75)
+	.2byte 0xFB00, 0xFD00 @ (-5, -3)
+	.2byte 0x0380, 0xFD00 @ (3.5, -3)
+	.2byte 0xFC00, 0xFC40 @ (-4, -3.75)
+	.2byte 0x0200, 0xFE80 @ (2, -1.5)
+	.2byte 0xFF80, 0xF940 @ (-0.5, -6.75)
+	.2byte 0x0500, 0xFDC0 @ (5, -2.25)
+	.2byte 0xFE80, 0xFC40 @ (-1.5, -3.75)
+	.2byte 0x0480, 0xFE80 @ (4.5, -1.5)
+	.2byte 0xFF00, 0xF940 @ (-1, -6.75)
+	.2byte 0x0400, 0xFDC0 @ (4, -2.25)
+	.2byte 0xFC80, 0xFC40 @ (-3.5, -3.75)
+	.2byte 0x0100, 0xFE80 @ (1, -1.5)
+	.2byte 0xFC7C, 0xF940 @ (-3.515625, -6.75)
+	.2byte 0x0480, 0xFDC0 @ (4.5, -2.25)
+	.2byte 0xFF80, 0xF880 @ (-0.5, -7.5)
+	.2byte 0x0100, 0xFB80 @ (1, -4.5)
+	.2byte 0xFD80, 0xFDC0 @ (-2.5, -2.25)
+	.2byte 0x0280, 0xF880 @ (2.5, -7.5)
 
 	.align 2
 gUnknown_0820A47C:: @ 820A47C
@@ -2215,8 +2353,8 @@ gSubspriteTables_820A6E4:: @ 820A6E4
 gSubspriteTables_820A6EC:: @ 820A6EC
 	.4byte 6, gSubspriteTable_820A6B4
 
-@ unreferenced; possibly tiles
-	.incbin "baserom.gba", 0x0020a6f4, 0x60
+@ unused dakuten/handakuten tiles
+	.incbin "graphics/unused/dakuten.4bpp"
 
 	.align 2
 gUnknown_0820A754:: @ 820A754
@@ -2502,20 +2640,28 @@ gSpriteTemplate_820AAB4:: @ 820AAB4
 	spr_template 55011, 55011, gOamData_820A9EC, gSpriteAnimTable_820AA34, NULL, gSpriteAffineAnimTable_820AAA0, objc_0804ABD4
 
 	.align 2
-	.incbin "baserom.gba", 0x0020abd4, 0x1c
+	.byte 0x90, 0x08, 0x00, 0x00
+	.byte 0xC0, 0x3A, 0x00, 0x00
+	.byte 0x1C, 0x00, 0x00, 0x00
+	.byte 0x30, 0x05, 0x00, 0x00
+	.byte 0x24, 0x00, 0x00, 0x00
+	.byte 0x64, 0x00, 0x00, 0x00
+	.byte 0xD8, 0x04, 0x00, 0x00
 
-gUnknown_0820ABF0:: @ 820ABF0
-	.incbin "baserom.gba", 0x0020abf0, 0x1fe
+	.align 1
+gTradeMovesBoxTilemap:: @ 820ABF0
+	.incbin "graphics/trade/moves_box_map.bin"
 
-gUnknown_0820ADEE:: @ 820ADEE
-	.incbin "baserom.gba", 0x0020adee, 0x1fe
+	.align 1
+gTradePartyBoxTilemap:: @ 820ADEE
+	.incbin "graphics/trade/party_box_map.bin"
 
 	.align 2
-gUnknown_0820AFEC:: @ 820AFEC
+gTradeStripesBG2Tilemap:: @ 820AFEC
 	.incbin "graphics/trade/stripes_bg2_map.bin"
 
 	.align 2
-gUnknown_0820B7EC:: @ 820B7EC
+gTradeStripesBG3Tilemap:: @ 820B7EC
 	.incbin "graphics/trade/stripes_bg3_map.bin"
 
 	.align 2

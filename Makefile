@@ -44,6 +44,9 @@ data/event_scripts.o data/battle_anim_scripts.o \
 data/battle_scripts_1.o data/battle_scripts_2.o data/field_effect_scripts.o \
 data/battle_ai_scripts.o data/contest_ai_scripts.o data/script_funcs.o
 
+SONG_SRCS := $(wildcard sound/songs/*.s)
+SONG_OBJS := $(SONG_SRCS:%.s=%.o)
+
 OBJS := $(C_OBJS) $(ASM_OBJS) $(DATA_ASM_OBJS)
 pokeruby_OBJS := $(OBJS:.o=_ruby.o)
 pokesapphire_OBJS := $(OBJS:.o=_sapphire.o)
@@ -69,7 +72,7 @@ clean:
 	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.rl' \) -exec rm {} +
 
 tidy:
-	rm -f $(ROM) $(ELF) $(OBJS) $(pokeruby_OBJS) $(pokesapphire_OBJS) $(C_SRCS:%.c=%.i) pokeruby.map pokesapphire.map
+	rm -f $(ROM) $(ELF) $(OBJS) $(pokeruby_OBJS) $(pokesapphire_OBJS) $(C_SRCS:%.c=%.i) pokeruby.map pokesapphire.map ld_script_ruby.txt ld_script_sapphire.txt
 
 include castform.mk
 include tilesets.mk
@@ -130,15 +133,18 @@ data/%_ruby.o: data/%.s $$(dep)
 data/%_sapphire.o: data/%.s $$(dep)
 	$(PREPROC) $< charmap.txt | $(AS) $(ASFLAGS) --defsym SAPPHIRE=1 -o $@
 
+$(SONG_OBJS): %.o: %.s
+	$(AS) $(ASFLAGS) -I sound -o $@ $<
+
 ld_script_ruby.txt: ld_script.txt
 	@sed 's#\(\(src\|asm\|data\)/.*\)\.o#\1_ruby.o#g' $< > $@
 ld_script_sapphire.txt: ld_script.txt
 	@sed 's#\(\(src\|asm\|data\)/.*\)\.o#\1_sapphire.o#g' $< > $@
 
-pokeruby.elf: ld_script_ruby.txt $(pokeruby_OBJS)
-	$(LD) $(pokeruby_LDFLAGS) -o $@ $(pokeruby_OBJS) $(LIBGCC)
-pokesapphire.elf: ld_script_sapphire.txt $(pokesapphire_OBJS)
-	$(LD) $(pokesapphire_LDFLAGS) -o $@ $(pokesapphire_OBJS) $(LIBGCC)
+pokeruby.elf: ld_script_ruby.txt $(pokeruby_OBJS) $(SONG_OBJS)
+	$(LD) $(pokeruby_LDFLAGS) -o $@ $(pokeruby_OBJS) $(SONG_OBJS) $(LIBGCC)
+pokesapphire.elf: ld_script_sapphire.txt $(pokesapphire_OBJS) $(SONG_OBJS)
+	$(LD) $(pokesapphire_LDFLAGS) -o $@ $(pokesapphire_OBJS) $(SONG_OBJS) $(LIBGCC)
 
 %.gba: %.elf
 	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0x9000000 $< $@

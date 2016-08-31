@@ -37242,7 +37242,7 @@ _0801C544:
 _0801C56C: .4byte 0x02024c07
 _0801C570: .4byte gBattleMoves
 _0801C574: .4byte 0x02024db8
-_0801C578: .4byte gUnknown_081FAB1C
+_0801C578: .4byte gAccuracyStageRatios
 _0801C57C: .4byte 0x02024a80
 _0801C580: .4byte 0x02024c08
 _0801C584: .4byte 0x02024df0
@@ -37782,7 +37782,7 @@ _0801C960:
 _0801C9BC: .4byte 0x02024c08
 _0801C9C0: .4byte 0x02024c98
 _0801C9C4: .4byte 0x020239f8
-_0801C9C8: .4byte gUnknown_081FAB50
+_0801C9C8: .4byte gCriticalHitChance
 _0801C9CC: .4byte 0x02024c0d
 _0801C9D0:
 	ldr r1, _0801C9E4
@@ -52578,7 +52578,7 @@ _080240FE:
 	muls r4, r0
 	b _08024140
 	.align 2, 0
-_08024120: .4byte gUnknown_081F98F0
+_08024120: .4byte gTrainerMoney
 _08024124: .4byte 0x02000000
 _08024128: .4byte 0x020239f8
 _0802412C: .4byte 0x02025bc4
@@ -53644,7 +53644,7 @@ _080249A4: .4byte gUnknown_0840165C
 _080249A8: .4byte 0x02000000
 _080249AC: .4byte 0x00016018
 _080249B0: .4byte 0x03004360
-_080249B4: .4byte gUnknown_081FACEF
+_080249B4: .4byte gLevelUpStatBoxStats
 _080249B8: .4byte _080249BC
 	.align 2, 0
 _080249BC:
@@ -53883,7 +53883,7 @@ _08024B9C: .4byte gUnknown_08400D9F
 _08024BA0: .4byte 0x00016018
 _08024BA4: .4byte gUnknown_0840165C
 _08024BA8: .4byte 0x03004360
-_08024BAC: .4byte gUnknown_081FACEF
+_08024BAC: .4byte gLevelUpStatBoxStats
 _08024BB0:
 	strb r6, [r5]
 	movs r0, 0x11
@@ -54689,7 +54689,7 @@ _08025200: .4byte 0x02024c07
 _08025204: .4byte 0x02024ca8
 _08025208: .4byte 0x02024a7e
 _0802520C: .4byte 0x02024a68
-_08025210: .4byte gUnknown_081FACF6
+_08025210: .4byte gProtectSuccessRates
 _08025214: .4byte gBattleMoves
 _08025218: .4byte 0x02024be6
 _0802521C: .4byte 0x02024d28
@@ -67010,7 +67010,7 @@ atkEB_settypetoterrain: @ 802B330
 	.align 2, 0
 _0802B3A0: .4byte 0x02024a80
 _0802B3A4: .4byte 0x02024c07
-_0802B3A8: .4byte gUnknown_081FAD86
+_0802B3A8: .4byte gTerrainToType
 _0802B3AC: .4byte 0x0300428c
 _0802B3B0: .4byte 0x030041c0
 _0802B3B4: .4byte 0x02024c10
@@ -67532,7 +67532,7 @@ _0802B7DC:
 	strb r1, [r0, 0x5]
 	b _0802B81C
 	.align 2, 0
-_0802B7F4: .4byte gUnknown_081FAD90
+_0802B7F4: .4byte gBallCatchBonuses
 _0802B7F8: .4byte 0x02024a80
 _0802B7FC: .4byte 0x02024c08
 _0802B800: .4byte 0x02024c04
@@ -81425,7 +81425,7 @@ _08032964:
 	bx r0
 	.align 2, 0
 _08032970: .4byte 0x02017800
-_08032974: .4byte gUnknown_081ECB14
+_08032974: .4byte gEnemyMonElevation
 	thumb_func_end sub_80328A4
 
 	thumb_func_start sub_8032978
@@ -81479,7 +81479,7 @@ _080329AA:
 	b _080329F8
 	.align 2, 0
 _080329D0: .4byte 0x02017800
-_080329D4: .4byte gUnknown_081ECB14
+_080329D4: .4byte gEnemyMonElevation
 _080329D8: .4byte 0x02020004
 _080329DC: .4byte sub_80328A4
 _080329E0:
