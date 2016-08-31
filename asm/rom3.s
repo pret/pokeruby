@@ -53644,7 +53644,7 @@ _080249A4: .4byte gUnknown_0840165C
 _080249A8: .4byte 0x02000000
 _080249AC: .4byte 0x00016018
 _080249B0: .4byte 0x03004360
-_080249B4: .4byte gUnknown_081FACEF
+_080249B4: .4byte gLevelUpStatBoxStats
 _080249B8: .4byte _080249BC
 	.align 2, 0
 _080249BC:
@@ -53883,7 +53883,7 @@ _08024B9C: .4byte gUnknown_08400D9F
 _08024BA0: .4byte 0x00016018
 _08024BA4: .4byte gUnknown_0840165C
 _08024BA8: .4byte 0x03004360
-_08024BAC: .4byte gUnknown_081FACEF
+_08024BAC: .4byte gLevelUpStatBoxStats
 _08024BB0:
 	strb r6, [r5]
 	movs r0, 0x11
@@ -54689,7 +54689,7 @@ _08025200: .4byte 0x02024c07
 _08025204: .4byte 0x02024ca8
 _08025208: .4byte 0x02024a7e
 _0802520C: .4byte 0x02024a68
-_08025210: .4byte gUnknown_081FACF6
+_08025210: .4byte gProtectSuccessRates
 _08025214: .4byte gBattleMoves
 _08025218: .4byte 0x02024be6
 _0802521C: .4byte 0x02024d28
@@ -67010,7 +67010,7 @@ atkEB_settypetoterrain: @ 802B330
 	.align 2, 0
 _0802B3A0: .4byte 0x02024a80
 _0802B3A4: .4byte 0x02024c07
-_0802B3A8: .4byte gUnknown_081FAD86
+_0802B3A8: .4byte gTerrainToType
 _0802B3AC: .4byte 0x0300428c
 _0802B3B0: .4byte 0x030041c0
 _0802B3B4: .4byte 0x02024c10
@@ -67532,7 +67532,7 @@ _0802B7DC:
 	strb r1, [r0, 0x5]
 	b _0802B81C
 	.align 2, 0
-_0802B7F4: .4byte gUnknown_081FAD90
+_0802B7F4: .4byte gBallCatchBonuses
 _0802B7F8: .4byte 0x02024a80
 _0802B7FC: .4byte 0x02024c08
 _0802B800: .4byte 0x02024c04

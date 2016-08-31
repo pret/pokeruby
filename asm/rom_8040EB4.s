@@ -5102,7 +5102,7 @@ sub_80435FC: @ 80435FC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804364C: .4byte gUnknown_0820A430
+_0804364C: .4byte gEggShardVelocities
 _08043650: .4byte 0x0300481c
 	thumb_func_end sub_80435FC
 
@@ -15873,7 +15873,7 @@ _08048B7A:
 	b _08048C3A
 	.align 2, 0
 _08048BA0: .4byte gUnknown_08EA0348
-_08048BA4: .4byte gUnknown_0820AFEC
+_08048BA4: .4byte gTradeStripesBG2Tilemap
 _08048BA8: .4byte gUnknown_08EA02C8
 _08048BAC: .4byte 0x0202eec8
 _08048BB0: .4byte 0x0202eac8
@@ -15940,7 +15940,7 @@ _08048C3A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08048C40: .4byte gUnknown_0820B7EC
+_08048C40: .4byte gTradeStripesBG3Tilemap
 _08048C44: .4byte 0x06003800
 _08048C48: .4byte 0x040000d4
 _08048C4C: .4byte 0x80000400
@@ -18507,7 +18507,7 @@ _0804A098: .4byte gUnknown_0820C29C
 _0804A09C: .4byte 0x03004824
 _0804A0A0: .4byte sub_809D62C
 _0804A0A4: .4byte gUnknown_0820C330
-_0804A0A8: .4byte gUnknown_0820ADEE
+_0804A0A8: .4byte gTradePartyBoxTilemap
 _0804A0AC:
 	ldr r2, _0804A0DC
 	ldr r1, [sp, 0x6C]
@@ -18694,7 +18694,7 @@ _0804A0E4:
 	ldr r1, [r2]
 	b _0804A28A
 	.align 2, 0
-_0804A228: .4byte gUnknown_0820ABF0
+_0804A228: .4byte gTradeMovesBoxTilemap
 _0804A22C: .4byte 0x03004824
 _0804A230: .4byte 0x02020004
 _0804A234: .4byte gUnknown_0820C29C
@@ -19506,7 +19506,7 @@ sub_804A840: @ 804A840
 	.align 2, 0
 _0804A89C: .4byte 0x03004824
 _0804A8A0: .4byte gUnknown_0820C330
-_0804A8A4: .4byte gUnknown_0820ADEE
+_0804A8A4: .4byte gTradePartyBoxTilemap
 _0804A8A8:
 	bl sub_8072DEC
 	ldr r4, _0804A924
@@ -19566,7 +19566,7 @@ _0804A8FA:
 	.align 2, 0
 _0804A924: .4byte 0x03004824
 _0804A928: .4byte gUnknown_0820C330
-_0804A92C: .4byte gUnknown_0820ADEE
+_0804A92C: .4byte gTradePartyBoxTilemap
 _0804A930: .4byte gUnknown_0820C14C
 _0804A934: .4byte 0x06010000
 	thumb_func_end sub_804A840
