@@ -1859,7 +1859,7 @@ gUnknown_081FC1D0:: @ 81FC1D0
 	.space 2
 
 @ 81FC1E0
-	.include "data/pokedex_order.s"
+	.include "data/species_id_conversion_tables.s"
 
 @ 81FCB84
 	.include "data/spinda_spot_graphics.s"
@@ -11611,14 +11611,8 @@ gUnknown_0839F988:: @ 839F988
 gUnknown_0839FA7C:: @ 839FA7C
 	.incbin "graphics/pokedex/noball.4bpp.lz"
 
-gUnknown_0839FAC4:: @ 839FAC4
-	.incbin "baserom.gba", 0x0039fac4, 0x336
-
-gUnknown_0839FDFA:: @ 839FDFA
-	.incbin "baserom.gba", 0x0039fdfa, 0x304
-
-gUnknown_083A00FE:: @ 83A00FE
-	.incbin "baserom.gba", 0x003a00fe, 0x306
+@ 839FAC4
+	.include "data/pokedex_orders.s"
 
 	.align 2
 gOamData_83A0404:: @ 83A0404
