@@ -48,9 +48,9 @@ MtChimney_EventScript_1B2CCB:: @ 81B2CCB
 	msgbox MtChimney_Text_1B38B3, 4
 	.endif
 	.ifdef SAPPHIRE
-	trainerbattle 3, TRAINER_MT_CHIMNEY_GRUNT_3, 0, MtChimney_Text_1B3099
+	trainerbattle 3, OPPONENT_MT_CHIMNEY_GRUNT_3, 0, MtChimney_Text_1B3099
 	.else
-	trainerbattle 3, TRAINER_MT_CHIMNEY_GRUNT_3, 0, MtChimney_Text_1B3A68
+	trainerbattle 3, OPPONENT_MT_CHIMNEY_GRUNT_3, 0, MtChimney_Text_1B3A68
 	.endif
 	.ifdef SAPPHIRE
 	msgbox MtChimney_Text_1B30C2, 4

@@ -311,7 +311,7 @@ RusturfTunnel_EventScript_15C9EA:: @ 815C9EA
 	faceplayer
 	playmusic BGM_EVIL_TEAM, 0
 	msgbox RusturfTunnel_Text_19419B, 4
-	trainerbattle 3, TRAINER_RUSTURF_TUNNEL_GRUNT, 0, RusturfTunnel_Text_194243
+	trainerbattle 3, OPPONENT_RUSTURF_TUNNEL_GRUNT, 0, RusturfTunnel_Text_194243
 	msgbox RusturfTunnel_Text_194274, 4
 	giveitem ITEM_DEVON_GOODS
 	closebutton

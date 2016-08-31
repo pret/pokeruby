@@ -330,20 +330,20 @@ MtChimney_EventScript_15D107:: @ 815D107
 
 MtChimney_EventScript_15D110:: @ 815D110
 	.ifdef SAPPHIRE
-	trainerbattle 0, TRAINER_MT_CHIMNEY_GRUNT_1, 0, MtChimney_Text_1B3168, MtChimney_Text_1B31EA
+	trainerbattle 0, OPPONENT_MT_CHIMNEY_GRUNT_1, 0, MtChimney_Text_1B3168, MtChimney_Text_1B31EA
 	msgbox MtChimney_Text_1B3239, 6
 	.else
-	trainerbattle 0, TRAINER_MT_CHIMNEY_GRUNT_1, 0, MtChimney_Text_1B3B36, MtChimney_Text_1B3BB8
+	trainerbattle 0, OPPONENT_MT_CHIMNEY_GRUNT_1, 0, MtChimney_Text_1B3B36, MtChimney_Text_1B3BB8
 	msgbox MtChimney_Text_1B3C07, 6
 	.endif
 	end
 
 MtChimney_EventScript_15D127:: @ 815D127
 	.ifdef SAPPHIRE
-	trainerbattle 0, TRAINER_MT_CHIMNEY_GRUNT_2, 0, MtChimney_Text_1B32C8, MtChimney_Text_1B336E
+	trainerbattle 0, OPPONENT_MT_CHIMNEY_GRUNT_2, 0, MtChimney_Text_1B32C8, MtChimney_Text_1B336E
 	msgbox MtChimney_Text_1B338D, 6
 	.else
-	trainerbattle 0, TRAINER_MT_CHIMNEY_GRUNT_2, 0, MtChimney_Text_1B3C96, MtChimney_Text_1B3D1E
+	trainerbattle 0, OPPONENT_MT_CHIMNEY_GRUNT_2, 0, MtChimney_Text_1B3C96, MtChimney_Text_1B3D1E
 	msgbox MtChimney_Text_1B3D3D, 6
 	.endif
 	end

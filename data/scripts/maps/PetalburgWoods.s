@@ -30,7 +30,7 @@ PetalburgWoods_EventScript_15CCA8:: @ 815CCA8
 	move 3, PetalburgWoods_Movement_15CEC8
 	waitmove 0
 	msgbox PetalburgWoods_Text_194EE8, 4
-	trainerbattle 3, TRAINER_PETALBURG_WOODS_GRUNT, 0, PetalburgWoods_Text_194F83
+	trainerbattle 3, OPPONENT_PETALBURG_WOODS_GRUNT, 0, PetalburgWoods_Text_194F83
 	move 3, PetalburgWoods_Movement_15CEB3
 	waitmove 0
 	call PetalburgWoods_EventScript_15CDFA
@@ -65,7 +65,7 @@ PetalburgWoods_EventScript_15CD42:: @ 815CD42
 	move 255, PetalburgWoods_Movement_1A0841
 	waitmove 0
 	msgbox PetalburgWoods_Text_194EE8, 4
-	trainerbattle 3, TRAINER_PETALBURG_WOODS_GRUNT, 0, PetalburgWoods_Text_194F83
+	trainerbattle 3, OPPONENT_PETALBURG_WOODS_GRUNT, 0, PetalburgWoods_Text_194F83
 	move 3, PetalburgWoods_Movement_15CEB3
 	waitmove 0
 	call PetalburgWoods_EventScript_15CDFA
