@@ -30345,11 +30345,13 @@ gUnknown_0841221C:: @ 841221C
 gUnknown_0841223C:: @ 841223C
 	.incbin "baserom.gba", 0x0041223c, 0x20
 
+	.align 2
 gUnknown_0841225C:: @ 841225C
 	.incbin "graphics/intro/intro2_grass.4bpp.lz"
 
+	.align 2
 gUnknown_084126DC:: @ 84126DC
-	.incbin "baserom.gba", 0x004126dc, 0x13c
+	.incbin "graphics/intro/intro2_grass_map.bin.lz"
 
 gUnknown_08412818:: @ 8412818
 	.incbin "baserom.gba", 0x00412818, 0x60
@@ -30357,11 +30359,13 @@ gUnknown_08412818:: @ 8412818
 gUnknown_08412878:: @ 8412878
 	.incbin "baserom.gba", 0x00412878, 0x60
 
+	.align 2
 gUnknown_084128D8:: @ 84128D8
 	.incbin "graphics/intro/intro2_bgclouds.4bpp.lz"
 
+	.align 2
 gUnknown_08412EB4:: @ 8412EB4
-	.incbin "baserom.gba", 0x00412eb4, 0x2d0
+	.incbin "graphics/intro/intro2_bgclouds_map.bin.lz"
 
 gUnknown_08413184:: @ 8413184
 	.incbin "graphics/intro/intro2_bgclouds.gbapal"
@@ -30378,11 +30382,13 @@ gUnknown_08413300:: @ 8413300
 gUnknown_08413320:: @ 8413320
 	.incbin "baserom.gba", 0x00413320, 0x20
 
+	.align 2
 gUnknown_08413340:: @ 8413340
 	.incbin "graphics/intro/intro2_bgtrees.4bpp.lz"
 
+	.align 2
 gUnknown_084139C8:: @ 84139C8
-	.incbin "baserom.gba", 0x004139c8, 0x304
+	.incbin "graphics/intro/intro2_bgtrees_map.bin.lz"
 
 	.align 2
 gUnknown_08413CCC:: @ 8413CCC
@@ -30403,12 +30409,13 @@ gUnknown_08413E78:: @ 8413E78
 gUnknown_08414064:: @ 8414064
 	.incbin "graphics/intro/intro2_bgnight.gbapal"
 
+	.align 2
 gUnknown_08414084:: @ 8414084
-	.incbin "baserom.gba", 0x00414084, 0x2AC
+	.incbin "graphics/intro/intro2_bgnight_map.bin.lz"
 
 	.align 2
-gIntro2NightBGTiles:: @ 8414330
-	.incbin "graphics/intro/intro2_bgnight2.4bpp.lz"
+gIntro2NightTiles:: @ 8414330
+	.incbin "graphics/intro/intro2_night.4bpp.lz"
 
 	.align 1
 gIntro2BrendanPalette:: @ 84143B4
@@ -30520,7 +30527,7 @@ gUnknown_08416C10:: @ 8416C10
 
 	.align 2
 gUnknown_08416C70:: @ 8416C70
-	obj_tiles gIntro2NightBGTiles, 0x400, 2000
+	obj_tiles gIntro2NightTiles, 0x400, 2000
 	null_obj_tiles
 
 	.align 2
