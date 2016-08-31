@@ -10981,6 +10981,7 @@ gUnknown_0839AE70:: @ 839AE70
 	.align 2
 gUnknown_0839B1F0:: @ 839B1F0
 	.2byte 0x0807, 0x0808, 0x0809, 0x080a, 0x080b, 0x080c, 0x080d, 0x080e
+
 Unknown_839B200:
 	.incbin "baserom.gba", 0x0039b200, 0x7
 Unknown_839B207:
@@ -30120,11 +30121,8 @@ gUnknown_08411960:: @ 8411960
 gUnknown_08411980:: @ 8411980
 	.incbin "graphics/misc/clock_small.4bpp.lz"
 
-gUnknown_08411A10:: @ 8411A10
-	.incbin "baserom.gba", 0x00411a10, 0x32
-
-gUnknown_08411A42:: @ 8411A42
-	.incbin "baserom.gba", 0x00411A42, 0x44c
+@ 8411A10
+	.include "data/mon_pokeblock_anims.s"
 
 	.align 2
 gSpriteAffineAnim_8411E90:: @ 8411E90

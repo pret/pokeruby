@@ -39,7 +39,7 @@ Route117_EventScript_150D84:: @ 8150D84
 	end
 
 Route117_EventScript_150D8D:: @ 8150D8D
-	trainerbattle 0, 538, 0, Route117_Text_1BD49E, Route117_Text_1BD4D9
+	trainerbattle 0, OPPONENT_ISAAC_1, 0, Route117_Text_1BD49E, Route117_Text_1BD4D9
 	specialval RESULT, 57
 	compare RESULT, 1
 	jumpeq Route117_EventScript_150DB4
@@ -47,12 +47,12 @@ Route117_EventScript_150D8D:: @ 8150D8D
 	end
 
 Route117_EventScript_150DB4:: @ 8150DB4
-	trainerbattle 5, 538, 0, Route117_Text_1BD569, Route117_Text_1BD5AB
+	trainerbattle 5, OPPONENT_ISAAC_1, 0, Route117_Text_1BD569, Route117_Text_1BD5AB
 	msgbox Route117_Text_1BD5F2, 6
 	end
 
 Route117_EventScript_150DCB:: @ 8150DCB
-	trainerbattle 0, 545, 0, Route117_Text_1BD634, Route117_Text_1BD67B
+	trainerbattle 0, OPPONENT_LYDIA_1, 0, Route117_Text_1BD634, Route117_Text_1BD67B
 	specialval RESULT, 57
 	compare RESULT, 1
 	jumpeq Route117_EventScript_150DF2
@@ -60,12 +60,12 @@ Route117_EventScript_150DCB:: @ 8150DCB
 	end
 
 Route117_EventScript_150DF2:: @ 8150DF2
-	trainerbattle 5, 545, 0, Route117_Text_1BD6F2, Route117_Text_1BD733
+	trainerbattle 5, OPPONENT_LYDIA_1, 0, Route117_Text_1BD6F2, Route117_Text_1BD733
 	msgbox Route117_Text_1BD74F, 6
 	end
 
 Route117_EventScript_150E09:: @ 8150E09
-	trainerbattle 0, 364, 0, Route117_Text_1BD79A, Route117_Text_1BD7E0
+	trainerbattle 0, OPPONENT_DYLAN_1, 0, Route117_Text_1BD79A, Route117_Text_1BD7E0
 	specialval RESULT, 57
 	compare RESULT, 1
 	jumpeq Route117_EventScript_150E30
@@ -73,12 +73,12 @@ Route117_EventScript_150E09:: @ 8150E09
 	end
 
 Route117_EventScript_150E30:: @ 8150E30
-	trainerbattle 5, 364, 0, Route117_Text_1BD83F, Route117_Text_1BD8A2
+	trainerbattle 5, OPPONENT_DYLAN_1, 0, Route117_Text_1BD83F, Route117_Text_1BD8A2
 	msgbox Route117_Text_1BD8BD, 6
 	end
 
 Route117_EventScript_150E47:: @ 8150E47
-	trainerbattle 0, 369, 0, Route117_Text_1BD914, Route117_Text_1BD965
+	trainerbattle 0, OPPONENT_MARIA_1, 0, Route117_Text_1BD914, Route117_Text_1BD965
 	specialval RESULT, 57
 	compare RESULT, 1
 	jumpeq Route117_EventScript_150E6E
@@ -86,17 +86,17 @@ Route117_EventScript_150E47:: @ 8150E47
 	end
 
 Route117_EventScript_150E6E:: @ 8150E6E
-	trainerbattle 5, 369, 0, Route117_Text_1BD9F1, Route117_Text_1BDA41
+	trainerbattle 5, OPPONENT_MARIA_1, 0, Route117_Text_1BD9F1, Route117_Text_1BDA41
 	msgbox Route117_Text_1BDA6B, 6
 	end
 
 Route117_EventScript_150E85:: @ 8150E85
-	trainerbattle 0, 227, 0, Route117_Text_1BDAA7, Route117_Text_1BDAFC
+	trainerbattle 0, OPPONENT_DEREK, 0, Route117_Text_1BDAA7, Route117_Text_1BDAFC
 	msgbox Route117_Text_1BDB24, 6
 	end
 
 Route117_EventScript_150E9C:: @ 8150E9C
-	trainerbattle 4, 287, 0, Route117_Text_1BDBC3, Route117_Text_1BDC07, Route117_Text_1BDC96
+	trainerbattle 4, OPPONENT_ANNA_AND_MEG_1, 0, Route117_Text_1BDBC3, Route117_Text_1BDC07, Route117_Text_1BDC96
 	specialval RESULT, 57
 	compare RESULT, 1
 	jumpeq Route117_EventScript_150EC7
@@ -104,12 +104,12 @@ Route117_EventScript_150E9C:: @ 8150E9C
 	end
 
 Route117_EventScript_150EC7:: @ 8150EC7
-	trainerbattle 7, 287, 0, Route117_Text_1BDDEF, Route117_Text_1BDE2F, Route117_Text_1BDEA7
+	trainerbattle 7, OPPONENT_ANNA_AND_MEG_1, 0, Route117_Text_1BDDEF, Route117_Text_1BDE2F, Route117_Text_1BDEA7
 	msgbox Route117_Text_1BDE55, 6
 	end
 
 Route117_EventScript_150EE2:: @ 8150EE2
-	trainerbattle 4, 287, 0, Route117_Text_1BDCD2, Route117_Text_1BDD1E, Route117_Text_1BDD8B
+	trainerbattle 4, OPPONENT_ANNA_AND_MEG_1, 0, Route117_Text_1BDCD2, Route117_Text_1BDD1E, Route117_Text_1BDD8B
 	specialval RESULT, 57
 	compare RESULT, 1
 	jumpeq Route117_EventScript_150F0D
@@ -117,6 +117,6 @@ Route117_EventScript_150EE2:: @ 8150EE2
 	end
 
 Route117_EventScript_150F0D:: @ 8150F0D
-	trainerbattle 7, 287, 0, Route117_Text_1BDEE3, Route117_Text_1BDF26, Route117_Text_1BDF90
+	trainerbattle 7, OPPONENT_ANNA_AND_MEG_1, 0, Route117_Text_1BDEE3, Route117_Text_1BDF26, Route117_Text_1BDF90
 	msgbox Route117_Text_1BDF37, 6
 	end

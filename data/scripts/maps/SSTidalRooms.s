@@ -30,36 +30,36 @@ SSTidalRooms_EventScript_15FF47:: @ 815FF47
 	end
 
 SSTidalRooms_EventScript_15FF5D:: @ 815FF5D
-	trainerbattle 0, 294, 0, SSTidalRooms_Text_19958A, SSTidalRooms_Text_199613
+	trainerbattle 0, OPPONENT_COLTON, 0, SSTidalRooms_Text_19958A, SSTidalRooms_Text_199613
 	msgbox SSTidalRooms_Text_199630, 6
 	end
 
 SSTidalRooms_EventScript_15FF74:: @ 815FF74
-	trainerbattle 0, 255, 0, SSTidalRooms_Text_1996A6, SSTidalRooms_Text_1996BF
+	trainerbattle 0, OPPONENT_TUCKER, 0, SSTidalRooms_Text_1996A6, SSTidalRooms_Text_1996BF
 	msgbox SSTidalRooms_Text_1996E1, 6
 	end
 
 SSTidalRooms_EventScript_15FF8B:: @ 815FF8B
-	trainerbattle 0, 256, 0, SSTidalRooms_Text_199723, SSTidalRooms_Text_199747
+	trainerbattle 0, OPPONENT_THOMAS, 0, SSTidalRooms_Text_199723, SSTidalRooms_Text_199747
 	msgbox SSTidalRooms_Text_199778, 6
 	end
 
 SSTidalRooms_EventScript_15FFA2:: @ 815FFA2
-	trainerbattle 4, 641, 0, SSTidalRooms_Text_1997C1, SSTidalRooms_Text_199813, SSTidalRooms_Text_199887
+	trainerbattle 4, OPPONENT_LEA_AND_JED, 0, SSTidalRooms_Text_1997C1, SSTidalRooms_Text_199813, SSTidalRooms_Text_199887
 	msgbox SSTidalRooms_Text_199820, 6
 	end
 
 SSTidalRooms_EventScript_15FFBD:: @ 815FFBD
-	trainerbattle 4, 641, 0, SSTidalRooms_Text_1998C5, SSTidalRooms_Text_19990E, SSTidalRooms_Text_199975
+	trainerbattle 4, OPPONENT_LEA_AND_JED, 0, SSTidalRooms_Text_1998C5, SSTidalRooms_Text_19990E, SSTidalRooms_Text_199975
 	msgbox SSTidalRooms_Text_19991C, 6
 	end
 
 SSTidalRooms_EventScript_15FFD8:: @ 815FFD8
-	trainerbattle 0, 138, 0, SSTidalRooms_Text_1999B7, SSTidalRooms_Text_1999FF
+	trainerbattle 0, OPPONENT_GARRET, 0, SSTidalRooms_Text_1999B7, SSTidalRooms_Text_1999FF
 	msgbox SSTidalRooms_Text_199A10, 6
 	end
 
 SSTidalRooms_EventScript_15FFEF:: @ 815FFEF
-	trainerbattle 0, 119, 0, SSTidalRooms_Text_199A62, SSTidalRooms_Text_199ABF
+	trainerbattle 0, OPPONENT_ANETTE, 0, SSTidalRooms_Text_199A62, SSTidalRooms_Text_199ABF
 	msgbox SSTidalRooms_Text_199ADE, 6
 	end

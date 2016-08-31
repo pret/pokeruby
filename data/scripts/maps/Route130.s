@@ -30,11 +30,11 @@ Route130_EventScript_15240C:: @ 815240C
 	end
 
 Route130_EventScript_152410:: @ 8152410
-	trainerbattle 0, 165, 0, Route130_Text_1C2401, Route130_Text_1C245D
+	trainerbattle 0, OPPONENT_RODNEY, 0, Route130_Text_1C2401, Route130_Text_1C245D
 	msgbox Route130_Text_1C2479, 6
 	end
 
 Route130_EventScript_152427:: @ 8152427
-	trainerbattle 0, 455, 0, Route130_Text_1C24DC, Route130_Text_1C2525
+	trainerbattle 0, OPPONENT_KATIE, 0, Route130_Text_1C24DC, Route130_Text_1C2525
 	msgbox Route130_Text_1C256E, 6
 	end

@@ -1917,7 +1917,7 @@ gBattleMoves:: @ 81FB12C
 @ CURSE
 	.byte EFFECT_CURSE
 	.byte 0 @ power
-	.byte TYPE_UNKNOWN
+	.byte TYPE_MYSTERY
 	.byte 0 @ accuracy
 	.byte 10 @ PP
 	.byte 0 @ secondary effect chance
