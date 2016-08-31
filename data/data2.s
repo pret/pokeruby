@@ -1859,7 +1859,7 @@ gUnknown_081FC1D0:: @ 81FC1D0
 	.space 2
 
 @ 81FC1E0
-	.include "data/pokedex_order.s"
+	.include "data/species_id_conversion_tables.s"
 
 @ 81FCB84
 	.include "data/spinda_spot_graphics.s"
@@ -10975,8 +10975,8 @@ gUnknown_0839ADE0:: @ 839ADE0
 gUnknown_0839AE28:: @ 839AE28
 	.incbin "baserom.gba", 0x0039ae28, 0x48
 
-gUnknown_0839AE70:: @ 839AE70
-	.incbin "baserom.gba", 0x0039ae70, 0x380
+@ 839AE70
+	.include "data/trainer_eye_trainers.s"
 
 	.align 2
 gUnknown_0839B1F0:: @ 839B1F0
@@ -11178,23 +11178,33 @@ gSpriteImage_839E7F4:: @ 839E7F4
 gFieldEffectObjectPalette5: @ 839E8F4
 	.incbin "graphics/field_effect_objects/palettes/05.gbapal"
 
-gUnknown_0839E914:: @ 839E914
-	.incbin "baserom.gba", 0x0039e914, 0x200
+@ Graphics for the lights streaking past your Pokémon when it uses a field move.
 
-gUnknown_0839EB14:: @ 839EB14
-	.incbin "baserom.gba", 0x0039eb14, 0x20
+	.align 2
+gFieldMoveStreaksTiles:: @ 839E914
+	.incbin "graphics/misc/field_move_streaks.4bpp"
 
-gUnknown_0839EB34:: @ 839EB34
-	.incbin "baserom.gba", 0x0039eb34, 0x280
+	.align 2
+gFieldMoveStreaksPalette:: @ 839EB14
+	.incbin "graphics/misc/field_move_streaks.gbapal"
 
-gUnknown_0839EDB4:: @ 839EDB4
-	.incbin "baserom.gba", 0x0039edb4, 0x80
+	.align 2
+gFieldMoveStreaksTilemap:: @ 839EB34
+	.incbin "graphics/misc/field_move_streaks_map.bin"
 
-gUnknown_0839EE34:: @ 839EE34
-	.incbin "baserom.gba", 0x0039ee34, 0x20
+@ The following light streaks effect is used when the map is dark (e.g. a cave).
 
-gUnknown_0839EE54:: @ 839EE54
-	.incbin "baserom.gba", 0x0039ee54, 0x280
+	.align 2
+gDarknessFieldMoveStreaksTiles:: @ 839EDB4
+	.incbin "graphics/misc/darkness_field_move_streaks.4bpp"
+
+	.align 2
+gDarknessFieldMoveStreaksPalette:: @ 839EE34
+	.incbin "graphics/misc/darkness_field_move_streaks.gbapal"
+
+	.align 2
+gDarknessFieldMoveStreaksTilemap:: @ 839EE54
+	.incbin "graphics/misc/darkness_field_move_streaks_map.bin"
 
 	.align 2
 gUnknown_0839F0D4:: @ 839F0D4
@@ -11611,14 +11621,8 @@ gUnknown_0839F988:: @ 839F988
 gUnknown_0839FA7C:: @ 839FA7C
 	.incbin "graphics/pokedex/noball.4bpp.lz"
 
-gUnknown_0839FAC4:: @ 839FAC4
-	.incbin "baserom.gba", 0x0039fac4, 0x336
-
-gUnknown_0839FDFA:: @ 839FDFA
-	.incbin "baserom.gba", 0x0039fdfa, 0x304
-
-gUnknown_083A00FE:: @ 83A00FE
-	.incbin "baserom.gba", 0x003a00fe, 0x306
+@ 839FAC4
+	.include "data/pokedex_orders.s"
 
 	.align 2
 gOamData_83A0404:: @ 83A0404
@@ -23731,8 +23735,11 @@ gUnknown_083F62D8:: @ 83F62D8
 	.4byte SecretBaseText_Dennis
 	.4byte SecretBaseText_Roberto
 
-gUnknown_083F62E8:: @ 83F62E8
-	.incbin "baserom.gba", 0x003f62e8, 0x4
+gTraderDecorations:: @ 83F62E8
+	.byte DECOR_DUSKULL_DOLL
+	.byte DECOR_BALL_CUSHION
+	.byte DECOR_TIRE
+	.byte DECOR_PRETTY_FLOWERS
 
 gUnknown_083F62EC:: @ 83F62EC
 	.incbin "graphics/misc/birch_bag.gbapal"
@@ -23962,8 +23969,8 @@ gSpriteTemplate_83F7B28:: @ 83F7B28
 gSpriteTemplate_83F7B40:: @ 83F7B40
 	spr_template 4096, 4096, gOamData_83F7B08, gSpriteAnimTable_83F7B24, NULL, gDummySpriteAffineAnimTable, sub_810B230
 
-gUnknown_083F7B58:: @ 83F7B58
-	.incbin "baserom.gba", 0x003f7b58, 0x2d0
+@ 83F7B58
+	.include "data/clock_hand_coords.s"
 
 gUnknown_083F7E28:: @ 83F7E28
 	.incbin "baserom.gba", 0x003f7e28, 0x80
@@ -30351,11 +30358,13 @@ gUnknown_0841221C:: @ 841221C
 gUnknown_0841223C:: @ 841223C
 	.incbin "baserom.gba", 0x0041223c, 0x20
 
+	.align 2
 gUnknown_0841225C:: @ 841225C
 	.incbin "graphics/intro/intro2_grass.4bpp.lz"
 
+	.align 2
 gUnknown_084126DC:: @ 84126DC
-	.incbin "baserom.gba", 0x004126dc, 0x13c
+	.incbin "graphics/intro/intro2_grass_map.bin.lz"
 
 gUnknown_08412818:: @ 8412818
 	.incbin "baserom.gba", 0x00412818, 0x60
@@ -30363,11 +30372,13 @@ gUnknown_08412818:: @ 8412818
 gUnknown_08412878:: @ 8412878
 	.incbin "baserom.gba", 0x00412878, 0x60
 
+	.align 2
 gUnknown_084128D8:: @ 84128D8
 	.incbin "graphics/intro/intro2_bgclouds.4bpp.lz"
 
+	.align 2
 gUnknown_08412EB4:: @ 8412EB4
-	.incbin "baserom.gba", 0x00412eb4, 0x2d0
+	.incbin "graphics/intro/intro2_bgclouds_map.bin.lz"
 
 gUnknown_08413184:: @ 8413184
 	.incbin "graphics/intro/intro2_bgclouds.gbapal"
@@ -30384,11 +30395,13 @@ gUnknown_08413300:: @ 8413300
 gUnknown_08413320:: @ 8413320
 	.incbin "baserom.gba", 0x00413320, 0x20
 
+	.align 2
 gUnknown_08413340:: @ 8413340
 	.incbin "graphics/intro/intro2_bgtrees.4bpp.lz"
 
+	.align 2
 gUnknown_084139C8:: @ 84139C8
-	.incbin "baserom.gba", 0x004139c8, 0x304
+	.incbin "graphics/intro/intro2_bgtrees_map.bin.lz"
 
 	.align 2
 gUnknown_08413CCC:: @ 8413CCC
@@ -30409,12 +30422,13 @@ gUnknown_08413E78:: @ 8413E78
 gUnknown_08414064:: @ 8414064
 	.incbin "graphics/intro/intro2_bgnight.gbapal"
 
+	.align 2
 gUnknown_08414084:: @ 8414084
-	.incbin "baserom.gba", 0x00414084, 0x2AC
+	.incbin "graphics/intro/intro2_bgnight_map.bin.lz"
 
 	.align 2
-gIntro2NightBGTiles:: @ 8414330
-	.incbin "graphics/intro/intro2_bgnight2.4bpp.lz"
+gIntro2NightTiles:: @ 8414330
+	.incbin "graphics/intro/intro2_night.4bpp.lz"
 
 	.align 1
 gIntro2BrendanPalette:: @ 84143B4
@@ -30526,7 +30540,7 @@ gUnknown_08416C10:: @ 8416C10
 
 	.align 2
 gUnknown_08416C70:: @ 8416C70
-	obj_tiles gIntro2NightBGTiles, 0x400, 2000
+	obj_tiles gIntro2NightTiles, 0x400, 2000
 	null_obj_tiles
 
 	.align 2
