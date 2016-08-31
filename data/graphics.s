@@ -3160,6 +3160,7 @@ gMoveTypes_Pal:: @ 8E726E4
 gMenuSummaryGfx:: @ 8E7274C
 	.incbin "graphics/interface/summary_frames.4bpp.lz" @ the arrows appear to be unused.
 
+	.align 2
 gMenuSummaryPal:: @ 8E72848
 	.incbin "graphics/interface/summary_frames.gbapal.lz"
 
@@ -3172,19 +3173,20 @@ gStatusPal_Icons:: @ 8E72A50
 	.incbin "graphics/interface/status_icons.gbapal.lz"
 
 	.align 2
-gUnknown_08E72A78:: @ 8E72A78
-	.incbin "baserom.gba", 0xE72A78, 0x9F0 @ LZ, uncomp. size = 0x1B20
+gStatusScreen_Gfx:: @ 8E72A78
+	.incbin "graphics/interface/status_screen.4bpp.lz"
 
 	.align 2
-gUnknown_08E73468:: @ 8E73468
-	.incbin "baserom.gba", 0xE73468, 0xA0 @ LZ, uncomp. size = 0xA0
+gStatusScreen_Pal:: @ 8E73468
+	.incbin "graphics/interface/status_screen.gbapal.lz"
 
+	.align 2
 gUnknown_08E73508:: @ 8E73508
-	.incbin "baserom.gba", 0x00e73508, 0x800
+	.incbin "baserom.gba", 0xE73508, 0x800
 
 	.align 2
-gUnknown_08E73D08:: @ 8E73D08
-	.incbin "baserom.gba", 0xE73D08, 0x180 @ LZ, uncomp. size = 0x800
+gStatusScreen_Tilemap:: @ 8E73D08
+	.incbin "graphics/interface/status_screen.bin.lz"
 
 gUnknown_08E73E88:: @ 8E73E88
 	.incbin "baserom.gba", 0x00e73e88, 0x800
@@ -3209,43 +3211,43 @@ gBagPalette:: @ 8E76700
 	.incbin "graphics/misc/bag.gbapal.lz"
 
 	.align 2
-gUnknown_08E76728:: @ 8E76728
-	.incbin "baserom.gba", 0xE76728, 0x86B @ LZ, uncomp. size = 0x2000
+gBagScreen_Gfx:: @ 8E76728
+	.incbin "graphics/interface/bag_screen.4bpp.lz"
 
 	.align 2
-gUnknown_08E76F94:: @ 8E76F94
-	.incbin "baserom.gba", 0xE76F94, 0x38 @ LZ, uncomp. size = 0x40
+gBagScreenMale_Pal:: @ 8E76F94
+	.incbin "graphics/interface/bag_screen_male.gbapal.lz"
 
 	.align 2
-gUnknown_08E76FCC:: @ 8E76FCC
-	.incbin "baserom.gba", 0xE76FCC, 0x38 @ LZ, uncomp. size = 0x40
+gBagScreenFemale_Pal:: @ 8E76FCC
+	.incbin "graphics/interface/bag_screen_female.gbapal.lz"
 
 gUnknown_08E77004:: @ 8E77004
 	.incbin "baserom.gba", 0x00e77004, 0x800
 
 	.align 2
-gUnknown_08E77804:: @ 8E77804
-	.incbin "baserom.gba", 0xE77804, 0xFA @ LZ, uncomp. size = 0x300
+gMenuMartFrame_Gfx:: @ 8E77804
+	.incbin "graphics/interface/mart_frame.4bpp.lz"
 
 	.align 2
 gMenuMoneyPal:: @ 8E77900
 	.incbin "graphics/interface/money.gbapal.lz"
 
 	.align 2
-gUnknown_08E77928:: @ 8E77928
-	.incbin "baserom.gba", 0xE77928, 0x134 @ LZ, uncomp. size = 0x800
+gMenuMartFrame_Tilemap:: @ 8E77928
+	.incbin "graphics/interface/mart_frame.bin.lz"
 
 	.align 2
 gMenuMoneyGfx:: @ 8E77A5C
 	.incbin "graphics/interface/money.4bpp.lz"
 
 	.align 2
-gUnknown_08E77AE4:: @ 8E77AE4
-	.incbin "baserom.gba", 0xE77AE4, 0x23A @ LZ, uncomp. size = 0x800
+gMenuPokeblock_Gfx:: @ 8E77AE4
+	.incbin "graphics/interface/pokeblock_case_frame.4bpp.lz"
 
 	.align 2
-gUnknown_08E77D20:: @ 8E77D20
-	.incbin "baserom.gba", 0xE77D20, 0x6E @ LZ, uncomp. size = 0xC0
+gMenuPokeblock_Pal:: @ 8E77D20
+	.incbin "graphics/interface/pokeblock_case_frame.gbapal.lz"
 
 	.align 2
 gMenuPokeblockDevice_Gfx:: @ 8E77D90
@@ -3256,8 +3258,8 @@ gMenuPokeblockDevice_Pal:: @ 8E78050
 	.incbin "graphics/interface/pokeblock_device.gbapal.lz"
 
 	.align 2
-gUnknown_08E78078:: @ 8E78078
-	.incbin "baserom.gba", 0xE78078, 0x150 @ LZ, uncomp. size = 0x800
+gMenuPokeblock_Tilemap:: @ 8E78078
+	.incbin "graphics/interface/pokeblock.bin.lz"
 
 	.align 2
 gPokeblock_Gfx::

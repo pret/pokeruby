@@ -10499,7 +10499,7 @@ gUnknown_08396FA8:: @ 8396FA8
 	.4byte DroughtPaletteData_3
 	.4byte DroughtPaletteData_4
 	.4byte DroughtPaletteData_5
-
+	@.4byte unk_20000000
 	.incbin "baserom.gba", 0x00396fc0, 0x4 @ pointer to unk_2000000?
 
 	.align 2
