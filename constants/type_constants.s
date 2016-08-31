@@ -7,7 +7,7 @@
 	.set TYPE_BUG,      0x06
 	.set TYPE_GHOST,    0x07
 	.set TYPE_STEEL,    0x08
-	.set TYPE_UNKNOWN,  0x09
+	.set TYPE_MYSTERY,  0x09
 	.set TYPE_FIRE,     0x0a
 	.set TYPE_WATER,    0x0b
 	.set TYPE_GRASS,    0x0c

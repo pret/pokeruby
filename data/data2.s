@@ -10981,6 +10981,7 @@ gUnknown_0839AE70:: @ 839AE70
 	.align 2
 gUnknown_0839B1F0:: @ 839B1F0
 	.2byte 0x0807, 0x0808, 0x0809, 0x080a, 0x080b, 0x080c, 0x080d, 0x080e
+
 Unknown_839B200:
 	.incbin "baserom.gba", 0x0039b200, 0x7
 Unknown_839B207:
