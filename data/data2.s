@@ -1606,7 +1606,7 @@ gSpriteTemplate_81FAF0C:: @ 81FAF0C
 
 	.align 2
 gUnknown_081FAF24:: @ 81FAF24
-	obj_tiles gUnknown_08E6A728, 128, 0xD759
+	obj_tiles gEnemyMonShadow_Gfx, 128, 0xD759
 
 	.align 2
 gOamData_81FAF2C:: @ 81FAF2C
@@ -2220,8 +2220,8 @@ gSubspriteTables_820A6EC:: @ 820A6EC
 
 	.align 2
 gUnknown_0820A754:: @ 820A754
-	obj_tiles gUnknown_08E6A758, 512, 0xd70c
-	obj_tiles gUnknown_08E6A758, 512, 0xd70d
+	obj_tiles gBattleGfx_BallStatus, 512, 0xd70c
+	obj_tiles gBattleGfx_BallStatus, 512, 0xd70d
 
 	.align 2
 gUnknown_0820A764:: @ 820A764
@@ -12978,7 +12978,7 @@ gSpriteAnimTable_83C115C:: @ 83C115C
 
 	.align 2
 gUnknown_083C11B8:: @ 83C11B8
-	obj_tiles gUnknown_08E71D10, 5888, 0x7532
+	obj_tiles gMoveTypes_Gfx, 5888, 0x7532
 
 	.align 2
 gSpriteTemplate_83C11C0:: @ 83C11C0

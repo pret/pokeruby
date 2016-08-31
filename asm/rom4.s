@@ -58703,14 +58703,14 @@ _0806D7BA:
 	bx r1
 	.align 2, 0
 _0806D7C4: .4byte 0x00007fff
-_0806D7C8: .4byte gUnknown_08E71354
-_0806D7CC: .4byte gUnknown_08E71788
+_0806D7C8: .4byte gPartyMenuMisc_Gfx
+_0806D7CC: .4byte gPartyMenuMisc_Tilemap
 _0806D7D0: .4byte 0x06003800
-_0806D7D4: .4byte gUnknown_08E716A0
+_0806D7D4: .4byte gPartyMenuMisc_Pal
 _0806D7D8: .4byte gFontDefaultPalette
-_0806D7DC: .4byte gUnknown_08E71894
+_0806D7DC: .4byte gPartyMenuHpBar_Gfx
 _0806D7E0: .4byte 0x06006000
-_0806D7E4: .4byte gUnknown_08E71934
+_0806D7E4: .4byte gPartyMenuOrderText_Gfx
 _0806D7E8: .4byte 0x06006180
 _0806D7EC: .4byte gStatusGfx_Icons
 _0806D7F0: .4byte 0x06007180

@@ -13,6 +13,10 @@ PICFRAMEGFXDIR := graphics/picture_frame
 CONTESTGFXDIR := graphics/contest
 MASKSGFXDIR := graphics/battle_anims/masks
 BATTRANSGFXDIR := graphics/battle_transitions
+TYPESGFXDIR := graphics/types
+
+types := normal fight flying poison ground rock bug ghost steel mystery fire water grass electric psychic ice dragon dark
+contest_types := cool beauty cute smart tough
 
 $(MENUGFXDIR)/menu.gbapal: $(MENUGFXDIR)/menu_0.gbapal $(MENUGFXDIR)/menu_1.gbapal
 	@cat $(MENUGFXDIR)/menu_0.gbapal $(MENUGFXDIR)/menu_1.gbapal >$@
@@ -202,3 +206,12 @@ $(MASKSGFXDIR)/unknown_D2EDFC.4bpp: $(MASKSGFXDIR)/unknown_D2EDFC.png
 	
 $(BATTRANSGFXDIR)/vs_frame.4bpp: $(BATTRANSGFXDIR)/vs_frame.png
 	$(GFX) $< $@ -num_tiles 16
+
+$(MENUGFXDIR)/party_menu_misc.4bpp: $(MENUGFXDIR)/party_menu_misc.png
+	$(GFX) $< $@ -num_tiles 116
+
+$(TYPESGFXDIR)/move_types.4bpp: $(types:%=$(TYPESGFXDIR)/%.4bpp) $(contest_types:%=$(TYPESGFXDIR)/contest_%.4bpp)
+	@cat $^ >$@
+
+$(TYPESGFXDIR)/move_types.gbapal: $(TYPESGFXDIR)/move_types_1.gbapal $(TYPESGFXDIR)/move_types_2.gbapal $(TYPESGFXDIR)/move_types_3.gbapal
+	@cat $(TYPESGFXDIR)/move_types_1.gbapal $(TYPESGFXDIR)/move_types_2.gbapal $(TYPESGFXDIR)/move_types_3.gbapal >$@
