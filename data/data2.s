@@ -11178,23 +11178,33 @@ gSpriteImage_839E7F4:: @ 839E7F4
 gFieldEffectObjectPalette5: @ 839E8F4
 	.incbin "graphics/field_effect_objects/palettes/05.gbapal"
 
-gUnknown_0839E914:: @ 839E914
-	.incbin "baserom.gba", 0x0039e914, 0x200
+@ Graphics for the lights streaking past your Pokémon when it uses a field move.
 
-gUnknown_0839EB14:: @ 839EB14
-	.incbin "baserom.gba", 0x0039eb14, 0x20
+	.align 2
+gFieldMoveStreaksTiles:: @ 839E914
+	.incbin "graphics/misc/field_move_streaks.4bpp"
 
-gUnknown_0839EB34:: @ 839EB34
-	.incbin "baserom.gba", 0x0039eb34, 0x280
+	.align 2
+gFieldMoveStreaksPalette:: @ 839EB14
+	.incbin "graphics/misc/field_move_streaks.gbapal"
 
-gUnknown_0839EDB4:: @ 839EDB4
-	.incbin "baserom.gba", 0x0039edb4, 0x80
+	.align 2
+gFieldMoveStreaksTilemap:: @ 839EB34
+	.incbin "graphics/misc/field_move_streaks_map.bin"
 
-gUnknown_0839EE34:: @ 839EE34
-	.incbin "baserom.gba", 0x0039ee34, 0x20
+@ The following light streaks effect is used when the map is dark (e.g. a cave).
 
-gUnknown_0839EE54:: @ 839EE54
-	.incbin "baserom.gba", 0x0039ee54, 0x280
+	.align 2
+gDarknessFieldMoveStreaksTiles:: @ 839EDB4
+	.incbin "graphics/misc/darkness_field_move_streaks.4bpp"
+
+	.align 2
+gDarknessFieldMoveStreaksPalette:: @ 839EE34
+	.incbin "graphics/misc/darkness_field_move_streaks.gbapal"
+
+	.align 2
+gDarknessFieldMoveStreaksTilemap:: @ 839EE54
+	.incbin "graphics/misc/darkness_field_move_streaks_map.bin"
 
 	.align 2
 gUnknown_0839F0D4:: @ 839F0D4
