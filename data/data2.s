@@ -23735,8 +23735,11 @@ gUnknown_083F62D8:: @ 83F62D8
 	.4byte SecretBaseText_Dennis
 	.4byte SecretBaseText_Roberto
 
-gUnknown_083F62E8:: @ 83F62E8
-	.incbin "baserom.gba", 0x003f62e8, 0x4
+gTraderDecorations:: @ 83F62E8
+	.byte DECOR_DUSKULL_DOLL
+	.byte DECOR_BALL_CUSHION
+	.byte DECOR_TIRE
+	.byte DECOR_PRETTY_FLOWERS
 
 gUnknown_083F62EC:: @ 83F62EC
 	.incbin "graphics/misc/birch_bag.gbapal"
