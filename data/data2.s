@@ -10975,8 +10975,8 @@ gUnknown_0839ADE0:: @ 839ADE0
 gUnknown_0839AE28:: @ 839AE28
 	.incbin "baserom.gba", 0x0039ae28, 0x48
 
-gUnknown_0839AE70:: @ 839AE70
-	.incbin "baserom.gba", 0x0039ae70, 0x380
+@ 839AE70
+	.include "data/trainer_eye_trainers.s"
 
 	.align 2
 gUnknown_0839B1F0:: @ 839B1F0
