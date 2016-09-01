@@ -3,11 +3,18 @@ unk_2004000 = 0x2004000;
 
 gUnknown_020239F8 = 0x20239F8;
 
-battle_data = 0x02024A80;
+BattleData = 0x02024A80;
 
-b_movescr_cursor = 0x02024C10;
+AttackToExecuteA = 0x02024BE6;
 
-effect_chooser = 0x02024D21;
+BattleAttacker = 0x02024C07;
+
+MovescrCursor = 0x02024C10;
+
+AttackEffectivity = 0x02024C68;
+
+BattlePreparationPhase = 0x02024D1E;
+EffectChooser = 0x02024D21;
 
 gSaveBlock2 = 0x2024EA4;
 
