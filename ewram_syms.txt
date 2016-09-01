@@ -3,7 +3,7 @@ unk_2004000 = 0x2004000;
 
 gUnknown_020239F8 = 0x20239F8;
 
-battle_data = 0x02024A80
+battle_data = 0x02024A80;
 
 b_movescr_cursor = 0x02024C10;
 
