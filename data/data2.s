@@ -21174,12 +21174,12 @@ gUnknown_083E3D00:: @ 83E3D00
 	.incbin "graphics/misc/ribbons_full.4bpp.lz"
 
 	.align 2
-gUnknownPal_083E41D8::
-	.incbin "graphics/unknown/unknown_3E41D8.gbapal"
+PokenavBlueLightPalette:
+	.incbin "graphics/pokenav/blue_light.gbapal"
 
 	.align 2
-gUnknownGfx_083E41D8::
-	.incbin "graphics/unknown/unknown_3E41D8.4bpp"
+PokenavBlueLightTiles:
+	.incbin "graphics/pokenav/blue_light.4bpp"
 
 Palette_3E42D8: @ 83E42D8
 	.incbin "baserom.gba", 0x3e42d8, 0x20
@@ -21351,12 +21351,12 @@ gSpriteTemplate_83E4454:: @ 83E4454
 	spr_template 0, 0, gOamData_83E4318, gSpriteAnimTable_83E43E0, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 	.align 2
-gUnknown_083E446C:: @ 83E446C
-	obj_tiles gUnknownGfx_083E41D8, 256, 0x0019
+gSpriteSheet_PokenavBlueLight:: @ 83E446C
+	obj_tiles PokenavBlueLightTiles, 0x100, 25
 
 	.align 2
-gUnknown_083E4474:: @ 83E4474
-	obj_pal gUnknownPal_083E41D8, 0x0011
+gSpritePalette_PokenavBlueLight:: @ 83E4474
+	obj_pal PokenavBlueLightPalette, 17
 
 	.align 2
 gOamData_83E447C:: @ 83E447C
