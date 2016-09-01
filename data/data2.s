@@ -24334,6 +24334,7 @@ gSpriteTemplate_83F7F84:: @ 83F7F84
 gUnknown_083F7F9C:: @ 83F7F9C
 	.incbin "baserom.gba", 0x003f7f9c, 0x28
 
+	.align 2
 gUnknown_083F7FC4:: @ 83F7FC4
 	.byte 1, 4, 1, 0
 	.4byte sub_810CFF8
@@ -24372,11 +24373,17 @@ gUnknown_083F7FC4:: @ 83F7FC4
 	.byte 0, 0, 0, 0
 	.4byte NULL
 
+	.align 2
 gUnknown_083F804C:: @ 83F804C
-	.incbin "baserom.gba", 0x003f804c, 0x20
+	.rept 16
+	.2byte 0x7FFF
+	.endr
 
+	.align 2
 gUnknown_083F806C:: @ 83F806C
-	.space 32
+	.rept 16
+	.2byte 0x0000
+	.endr
 
 gUnknown_083F808C:: @ 83F808C
 	.incbin "baserom.gba", 0x003f808c, 0x10
@@ -26902,8 +26909,19 @@ gUnknown_08405E92:: @ 8405E92
 gUnknown_08405EB0:: @ 8405EB0
 	.incbin "baserom.gba", 0x00405eb0, 0x14
 
-gUnknown_08405EC4:: @ 8405EC4
-	.incbin "baserom.gba", 0x00405ec4, 0x16
+	.align 1
+gBattleTowerBanlist:: @ 8405EC4
+	.2byte SPECIES_MEW
+	.2byte SPECIES_MEWTWO
+	.2byte SPECIES_HO_OH
+	.2byte SPECIES_LUGIA
+	.2byte SPECIES_CELEBI
+	.2byte SPECIES_KYOGRE
+	.2byte SPECIES_GROUDON
+	.2byte SPECIES_RAYQUAZA
+	.2byte SPECIES_JIRACHI
+	.2byte SPECIES_DEOXYS
+	.2byte -1
 
 gUnknown_08405EDA:: @ 8405EDA
 	.incbin "baserom.gba", 0x00405eda, 0xc
