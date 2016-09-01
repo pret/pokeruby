@@ -4381,8 +4381,9 @@ gUnknown_08EA0348:: @ 8EA0348
 gUnknown_08EA15C8:: @ 8EA15C8
 	.incbin "graphics/trade/menu_map.bin"
 
-gUnknown_08EA1DC8:: @ 8EA1DC8
-	.incbin "baserom.gba", 0x00ea1dc8, 0x24
+	.align 2
+gTradeMonBoxTilemap:: @ 8EA1DC8
+	.incbin "graphics/trade/mon_box_map.bin"
 
 	.align 2
 gUnknown_08EA1DEC:: @ 8EA1DEC

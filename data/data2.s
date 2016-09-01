@@ -2779,23 +2779,144 @@ gUnknown_0820C14C:: @ 820C14C
 	.4byte TradeText_CancelTradePrompt
 	.4byte TradeText_PressBToExit
 
-gUnknown_0820C164:: @ 820C164
-	.incbin "baserom.gba", 0x0020c164, 0x138
+@ This is used to determine the next mon to select when the D-Pad is
+@ pressed in a given direction.
+@ Note that the mons are laid out like this.
+@ 0-5 are the player's party and 6-11 are the trading partner's party.
+@ 12 is the cancel button.
+@  0  1  6  7
+@  2  3  8  9
+@  4  5 10 11
+@          12
+gTradeNextSelectedMonTable:: @ 820C164
+	@ 0
+	.byte  4,  2, 12, 12,  0,  0 @ up
+	.byte  2,  4, 12, 12,  0,  0 @ down
+	.byte  7,  6,  1,  0,  0,  0 @ left
+	.byte  1,  6,  7,  0,  0,  0 @ right
+	@ 1
+	.byte  5,  3, 12, 12,  0,  0 @ up
+	.byte  3,  5, 12, 12,  0,  0 @ down
+	.byte  0,  7,  6,  1,  0,  0 @ left
+	.byte  6,  7,  0,  1,  0,  0 @ right
+	@ 2
+	.byte  0,  0,  0,  0,  0,  0 @ up
+	.byte  4,  0,  0,  0,  0,  0 @ down
+	.byte  9,  8,  7,  6,  0,  0 @ left
+	.byte  3,  1,  0,  0,  0,  0 @ right
+	@ 3
+	.byte  1,  1,  1,  1,  0,  0 @ up
+	.byte  5,  1,  1,  1,  0,  0 @ down
+	.byte  2,  9,  8,  7,  0,  0 @ left
+	.byte  8,  9,  6,  6,  0,  0 @ right
+	@ 4
+	.byte  2,  2,  2,  2,  0,  0 @ up
+	.byte  0,  0,  0,  0,  0,  0 @ down
+	.byte 11, 10,  9,  8,  7,  6 @ left
+	.byte  5,  3,  1,  0,  0,  0 @ right
+	@ 5
+	.byte  3,  3,  3,  3,  0,  0 @ up
+	.byte  1,  1,  1,  1,  0,  0 @ down
+	.byte  4,  4,  4,  4,  0,  0 @ left
+	.byte 10,  8,  6,  0,  0,  0 @ right
+	@ 6
+	.byte 10,  8, 12,  0,  0,  0 @ up
+	.byte  8, 10, 12,  0,  0,  0 @ down
+	.byte  1,  0,  0,  0,  0,  0 @ left
+	.byte  7,  0,  1,  0,  0,  0 @ right
+	@ 7
+	.byte 12,  0,  0,  0,  0,  0 @ up
+	.byte  9, 12,  0,  0,  0,  0 @ down
+	.byte  6,  0,  0,  0,  0,  0 @ left
+	.byte  0,  0,  0,  0,  0,  0 @ right
+	@ 8
+	.byte  6,  0,  0,  0,  0,  0 @ up
+	.byte 10,  6,  0,  0,  0,  0 @ down
+	.byte  3,  2,  1,  0,  0,  0 @ left
+	.byte  9,  7,  0,  0,  0,  0 @ right
+	@ 9
+	.byte  7,  0,  0,  0,  0,  0 @ up
+	.byte 11, 12,  0,  0,  0,  0 @ down
+	.byte  8,  0,  0,  0,  0,  0 @ left
+	.byte  2,  1,  0,  0,  0,  0 @ right
+	@ 10
+	.byte  8,  0,  0,  0,  0,  0 @ up
+	.byte  6,  0,  0,  0,  0,  0 @ down
+	.byte  5,  4,  3,  2,  1,  0 @ left
+	.byte 11,  9,  7,  0,  0,  0 @ right
+	@ 11
+	.byte  9,  0,  0,  0,  0,  0 @ up
+	.byte 12,  0,  0,  0,  0,  0 @ down
+	.byte 10,  0,  0,  0,  0,  0 @ left
+	.byte  4,  2,  0,  0,  0,  0 @ right
+	@ 12
+	.byte 11,  9,  7,  6,  0,  0 @ up
+	.byte  7,  6,  0,  0,  0,  0 @ down
+	.byte 12,  0,  0,  0,  0,  0 @ left
+	.byte 12,  0,  0,  0,  0,  0 @ right
 
-gUnknown_0820C29C:: @ 820C29C
-	.incbin "baserom.gba", 0x0020c29c, 0x1a
+@ The coordinates are in units of tiles.
+@ These are used for both mon icons and the selected mon cursor,
+@ but the origins of the coordinates differ.
+gTradeMonSpriteCoords:: @ 820C29C
+	@ left-side party
+	.byte  1,  5
+	.byte  8,  5
+	.byte  1, 10
+	.byte  8, 10
+	.byte  1, 15
+	.byte  8, 15
 
-gUnknown_0820C2B6:: @ 820C2B6
-	.incbin "baserom.gba", 0x0020c2b6, 0x18
+	@ right-side party
+	.byte 16,  5
+	.byte 23,  5
+	.byte 16, 10
+	.byte 23, 10
+	.byte 16, 15
+	.byte 23, 15
 
-gUnknown_0820C2CE:: @ 820C2CE
-	.incbin "baserom.gba", 0x0020c2ce, 0x18
+	@ cancel button
+	.byte 23, 18
 
-gUnknown_0820C2E6:: @ 820C2E6
-	.incbin "baserom.gba", 0x0020c2e6, 0x3
+gTradeLevelDisplayCoords:: @ 820C2B6
+	@ left-side party
+	.byte  5,  4
+	.byte 12,  4
+	.byte  5,  9
+	.byte 12,  9
+	.byte  5, 14
+	.byte 12, 14
 
-gUnknown_0820C2E9:: @ 820C2E9
-	.incbin "baserom.gba", 0x0020c2e9, 0x7
+	@ right-side party
+	.byte 20,  4
+	.byte 27,  4
+	.byte 20,  9
+	.byte 27,  9
+	.byte 20, 14
+	.byte 27, 14
+
+gTradeMonBoxCoords:: @ 820C2CE
+	@ left-side party
+	.byte  1,  3
+	.byte  8,  3
+	.byte  1,  8
+	.byte  8,  8
+	.byte  1, 13
+	.byte  8, 13
+
+	@ right-side party
+	.byte 16,  3
+	.byte 23,  3
+	.byte 16,  8
+	.byte 23,  8
+	.byte 16, 13
+	.byte 23, 13
+
+gTradeUnknownSpriteCoords:: @ 820C2E6
+	.byte  59, 10
+	.byte 179, 10
+	.byte  59, 10
+	.byte 179, 10
 
 	.align 2
 gUnknown_0820C2F0:: @ 820C2F0
@@ -2811,10 +2932,8 @@ gUnknown_0820C308:: @ 820C308
 
 	.align 2
 gUnknown_0820C320:: @ 820C320
-	.4byte TradeText_Summary2
-	.4byte sub_804A9F4 @unknown
-	.4byte TradeText_Trade2
-	.4byte sub_804AA00
+	.4byte TradeText_Summary2, sub_804A9F4 @unknown
+	.4byte TradeText_Trade2, sub_804AA00
 
 gUnknown_0820C330:: @ 820C330
 	.byte 0, 14
@@ -3162,8 +3281,115 @@ gSpriteAffineAnimTable_8215AC0:: @ 8215AC0
 @ 8215AC4
 	.include "data/ingame_trades.s"
 
-gUnknown_08215BA0:: @ 8215BA0
-	.incbin "baserom.gba", 0x00215ba0, 0x6c
+gTradeBallVerticalVelocityTable:: @ 8215BA0
+	.byte  0
+	.byte  0
+	.byte  1
+	.byte  0
+	.byte  1
+	.byte  0
+	.byte  1
+	.byte  1
+	.byte  1
+	.byte  1
+	.byte  2
+	.byte  2
+	.byte  2
+	.byte  2
+	.byte  3
+	.byte  3
+	.byte  3
+	.byte  3
+	.byte  4
+	.byte  4
+	.byte  4
+	.byte  4
+	.byte -4
+	.byte -4
+	.byte -4
+	.byte -3
+	.byte -3
+	.byte -3
+	.byte -3
+	.byte -2
+	.byte -2
+	.byte -2
+	.byte -2
+	.byte -1
+	.byte -1
+	.byte -1
+	.byte -1
+	.byte  0
+	.byte -1
+	.byte  0
+	.byte -1
+	.byte  0
+	.byte  0
+	.byte  0
+	.byte  0
+	.byte  0
+	.byte  1
+	.byte  0
+	.byte  1
+	.byte  0
+	.byte  1
+	.byte  1
+	.byte  1
+	.byte  1
+	.byte  2
+	.byte  2
+	.byte  2
+	.byte  2
+	.byte  3
+	.byte  3
+	.byte  3
+	.byte  3
+	.byte  4
+	.byte  4
+	.byte  4
+	.byte  4
+	.byte -4
+	.byte -3
+	.byte -3
+	.byte -2
+	.byte -2
+	.byte -1
+	.byte -1
+	.byte -1
+	.byte  0
+	.byte -1
+	.byte  0
+	.byte  0
+	.byte  0
+	.byte  0
+	.byte  0
+	.byte  0
+	.byte  1
+	.byte  0
+	.byte  1
+	.byte  1
+	.byte  1
+	.byte  2
+	.byte  2
+	.byte  3
+	.byte  3
+	.byte  4
+	.byte -4
+	.byte -3
+	.byte -2
+	.byte -1
+	.byte -1
+	.byte -1
+	.byte  0
+	.byte  0
+	.byte  0
+	.byte  0
+	.byte  1
+	.byte  0
+	.byte  1
+	.byte  1
+	.byte  2
+	.byte  3
 
 	.align 2
 gUnknown_08215C0C:: @ 8215C0C
@@ -12921,38 +13147,84 @@ gUnknown_083BBCA0:: @ 83BBCA0
 @ 83BC5B8
 	.include "data/graphics/pokemon/icon_palette_table.s"
 
-gUnknown_083BC5E8:: @ 83BC5E8
-	.incbin "baserom.gba", 0x003BC5E8, 0x8
-Unknown_83BC5F0:
-	.incbin "baserom.gba", 0x003BC5F0, 0xC
-Unknown_83BC5FC:
-	.incbin "baserom.gba", 0x003BC5FC, 0xC
-Unknown_83BC608:
-	.incbin "baserom.gba", 0x003BC608, 0xC
-Unknown_83BC614:
-	.incbin "baserom.gba", 0x003BC614, 0xC
-Unknown_83BC620:
-	.incbin "baserom.gba", 0x003BC620, 0xC
+	.align 2
+gOamData_83BC5E8:: @ 83BC5E8
+	.2byte 0x0000
+	.2byte 0x8000
+	.2byte 0x0400
 
 	.align 2
-gUnknown_083BC62C:: @ 83BC62C
-	.4byte Unknown_83BC5F0
-	.4byte Unknown_83BC5FC
-	.4byte Unknown_83BC608
-	.4byte Unknown_83BC614
-	.4byte Unknown_83BC620
-Unknown_83BC640:
-	.incbin "baserom.gba", 0x003bc640, 0x10
-Unknown_83BC650:
-	.incbin "baserom.gba", 0x003bc650, 0x10
+gSpriteAnim_83BC5F0:: @ 83BC5F0
+	obj_image_anim_frame 0, 6
+	obj_image_anim_frame 1, 6
+	obj_image_anim_jump 0
 
 	.align 2
-gUnknown_083BC660:: @ 83BC660
-	.4byte Unknown_83BC640
-	.4byte Unknown_83BC650
+gSpriteAnim_83BC5FC:: @ 83BC5FC
+	obj_image_anim_frame 0, 8
+	obj_image_anim_frame 1, 8
+	obj_image_anim_jump 0
 
-gUnknown_083BC668:: @ 83BC668
-	.incbin "baserom.gba", 0x003bc668, 0x18
+	.align 2
+gSpriteAnim_83BC608:: @ 83BC608
+	obj_image_anim_frame 0, 14
+	obj_image_anim_frame 1, 14
+	obj_image_anim_jump 0
+
+	.align 2
+gSpriteAnim_83BC614:: @ 83BC614
+	obj_image_anim_frame 0, 22
+	obj_image_anim_frame 1, 22
+	obj_image_anim_jump 0
+
+	.align 2
+gSpriteAnim_83BC620:: @ 83BC620
+	obj_image_anim_frame 0, 29
+	obj_image_anim_frame 0, 29
+	obj_image_anim_jump 0
+
+	.align 2
+gSpriteAnimTable_83BC62C:: @ 83BC62C
+	.4byte gSpriteAnim_83BC5F0
+	.4byte gSpriteAnim_83BC5FC
+	.4byte gSpriteAnim_83BC608
+	.4byte gSpriteAnim_83BC614
+	.4byte gSpriteAnim_83BC620
+
+	.align 2
+gSpriteAffineAnim_83BC640:: @ 83BC640
+	obj_rot_scal_anim_frame 0x0, 0x0, 0, 10
+	obj_rot_scal_anim_end
+
+	.align 2
+gSpriteAffineAnim_83BC650:: @ 83BC650
+	obj_rot_scal_anim_frame 0xFFFE, 0xFFFE, 0, 122
+	obj_rot_scal_anim_end
+
+	.align 2
+gSpriteAffineAnimTable_83BC660:: @ 83BC660
+	.4byte gSpriteAffineAnim_83BC640
+	.4byte gSpriteAffineAnim_83BC650
+
+	.align 1
+gSpriteImageSizes:: @ 83BC668
+	@ square
+	.2byte  0x20 @ 1×1
+	.2byte  0x80 @ 2×2
+	.2byte 0x200 @ 4×4
+	.2byte 0x800 @ 8×8
+
+	@ horizontal rectangle
+	.2byte  0x40 @ 2×1
+	.2byte  0x80 @ 4×1
+	.2byte 0x100 @ 4×2
+	.2byte 0x400 @ 8×4
+
+	@ vertical rectangle
+	.2byte  0x40 @ 1×2
+	.2byte  0x80 @ 1×4
+	.2byte 0x100 @ 2×4
+	.2byte 0x400 @ 4×8
 
 @ 83BC680
 	.include "data/text/move_descriptions.s"

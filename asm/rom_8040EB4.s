@@ -14321,10 +14321,10 @@ _08047DEE:
 	bx r0
 	.align 2, 0
 _08047E30: .4byte gSaveBlock2
-_08047E34: .4byte gUnknown_0820C2E6
+_08047E34: .4byte gTradeUnknownSpriteCoords
 _08047E38: .4byte gSpriteTemplate_820C0EC
 _08047E3C: .4byte 0x03002978
-_08047E40: .4byte gUnknown_0820C2E9
+_08047E40: .4byte gTradeUnknownSpriteCoords + 0x3
 	thumb_func_end sub_8047D58
 
 	thumb_func_start sub_8047E44
@@ -14828,7 +14828,7 @@ _0804828A:
 _08048294: .4byte 0x03004824
 _08048298: .4byte 0x03004350
 _0804829C: .4byte 0x030045b8
-_080482A0: .4byte gUnknown_0820C29C
+_080482A0: .4byte gTradeMonSpriteCoords
 _080482A4: .4byte 0x03004360
 _080482A8: .4byte 0xfff40000
 _080482AC: .4byte sub_809D62C
@@ -14944,7 +14944,7 @@ _08048360:
 	b _080484C6
 	.align 2, 0
 _080483A4: .4byte gSpriteTemplate_820C134
-_080483A8: .4byte gUnknown_0820C29C
+_080483A8: .4byte gTradeMonSpriteCoords
 _080483AC: .4byte 0x03004824
 _080483B0: .4byte 0x03001770
 _080483B4: .4byte 0x0000043c
@@ -15403,7 +15403,7 @@ _080487B0:
 _080487C0: .4byte 0x03004824
 _080487C4: .4byte 0x03004350
 _080487C8: .4byte 0x030045b8
-_080487CC: .4byte gUnknown_0820C29C
+_080487CC: .4byte gTradeMonSpriteCoords
 _080487D0: .4byte 0x03004360
 _080487D4: .4byte 0xfff40000
 _080487D8: .4byte sub_809D62C
@@ -15542,7 +15542,7 @@ _080488B8:
 	b _080489CA
 	.align 2, 0
 _08048900: .4byte gSpriteTemplate_820C134
-_08048904: .4byte gUnknown_0820C29C
+_08048904: .4byte gTradeMonSpriteCoords
 _08048908: .4byte 0x03004824
 _0804890C: .4byte 0x03001770
 _08048910: .4byte 0x0000043c
@@ -17069,7 +17069,7 @@ _0804953A:
 	b _08049558
 	.align 2, 0
 _08049548: .4byte 0x03004824
-_0804954C: .4byte gUnknown_0820C164
+_0804954C: .4byte gTradeNextSelectedMonTable
 _08049550:
 	adds r2, 0x1
 	adds r5, 0x1
@@ -17175,7 +17175,7 @@ _0804960C:
 	.align 2, 0
 _08049614: .4byte 0x03004824
 _08049618: .4byte 0x02020004
-_0804961C: .4byte gUnknown_0820C29C
+_0804961C: .4byte gTradeMonSpriteCoords
 	thumb_func_end sub_8049560
 
 	thumb_func_start sub_8049620
@@ -18503,7 +18503,7 @@ _0804A08C:
 	b _0804A294
 	.align 2, 0
 _0804A094: .4byte 0x02020004
-_0804A098: .4byte gUnknown_0820C29C
+_0804A098: .4byte gTradeMonSpriteCoords
 _0804A09C: .4byte 0x03004824
 _0804A0A0: .4byte sub_809D62C
 _0804A0A4: .4byte gUnknown_0820C330
@@ -18697,7 +18697,7 @@ _0804A0E4:
 _0804A228: .4byte gTradeMovesBoxTilemap
 _0804A22C: .4byte 0x03004824
 _0804A230: .4byte 0x02020004
-_0804A234: .4byte gUnknown_0820C29C
+_0804A234: .4byte gTradeMonSpriteCoords
 _0804A238: .4byte gUnknown_0820C334
 _0804A23C: .4byte gUnknown_0820C334 + 0x1
 _0804A240: .4byte gUnknown_0842C7CA
@@ -18977,7 +18977,7 @@ _0804A462:
 	b _0804A484
 	.align 2, 0
 _0804A470: .4byte 0x03004824
-_0804A474: .4byte gUnknown_0820C29C
+_0804A474: .4byte gTradeMonSpriteCoords
 _0804A478: .4byte 0x03004360
 _0804A47C:
 	movs r0, 0x64
@@ -19122,7 +19122,7 @@ sub_804A51C: @ 804A51C
 	b _0804A5D4
 	.align 2, 0
 _0804A59C: .4byte 0x03004824
-_0804A5A0: .4byte gUnknown_08EA1DC8
+_0804A5A0: .4byte gTradeMonBoxTilemap
 _0804A5A4: .4byte 0x03004360
 _0804A5A8:
 	movs r0, 0x64
@@ -19326,8 +19326,8 @@ _0804A72C:
 	bx r0
 	.align 2, 0
 _0804A734: .4byte 0x03004824
-_0804A738: .4byte gUnknown_0820C2B6
-_0804A73C: .4byte gUnknown_0820C2CE
+_0804A738: .4byte gTradeLevelDisplayCoords
+_0804A73C: .4byte gTradeMonBoxCoords
 	thumb_func_end sub_804A6DC
 
 	thumb_func_start sub_804A740
@@ -19433,7 +19433,7 @@ _0804A7F2:
 	.align 2, 0
 _0804A800: .4byte 0x03004824
 _0804A804: .4byte 0x02020004
-_0804A808: .4byte gUnknown_0820C29C
+_0804A808: .4byte gTradeMonSpriteCoords
 	thumb_func_end sub_804A740
 
 	thumb_func_start sub_804A80C
@@ -25071,7 +25071,7 @@ _0804D796:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804D7A0: .4byte gUnknown_08215BA0
+_0804D7A0: .4byte gTradeBallVerticalVelocityTable
 _0804D7A4: .4byte sub_804D7AC
 _0804D7A8: .4byte 0x0000ffff
 	thumb_func_end sub_804D738
@@ -25123,7 +25123,7 @@ _0804D7FE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804D804: .4byte gUnknown_08215BA0
+_0804D804: .4byte gTradeBallVerticalVelocityTable
 _0804D808: .4byte 0x03004828
 	thumb_func_end sub_804D7AC
 
@@ -25198,7 +25198,7 @@ _0804D88C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804D894: .4byte gUnknown_08215BA0
+_0804D894: .4byte gTradeBallVerticalVelocityTable
 _0804D898: .4byte SpriteCallbackDummy
 	thumb_func_end sub_804D80C
 
