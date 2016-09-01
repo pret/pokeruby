@@ -26912,14 +26912,12 @@ gUnknown_08405EE6:: @ 8405EE6
 	.incbin "baserom.gba", 0x00405ee6, 0x12
 
 	.align 2
-gUnknownPal_08405EF8::
-	.incbin "baserom.gba", 0x00405ef8, 0x20
+ConditionUpDownPalette:
+	.incbin "graphics/misc/condition_up_down.gbapal"
 
 	.align 2
-gUnknownPal_08405F18::
-	.incbin "baserom.gba", 0x00405f18, 0x20
-
-	.incbin "baserom.gba", 0x00405f38, 0x1E0
+ConditionUpDownTiles:
+	.incbin "graphics/misc/condition_up_down.4bpp"
 
 gUnknown_08406118:: @ 8406118
 	.incbin "baserom.gba", 0x00406118, 0x14
@@ -26937,12 +26935,12 @@ gUnknown_08406134:: @ 8406134
 	.4byte OtherText_Beauty
 
 	.align 2
-gUnknown_08406148:: @ 8406148
-	obj_pal gUnknownPal_08405F18, 0x0200
+gSpriteSheet_ConditionUpDown:: @ 8406148
+	obj_tiles ConditionUpDownTiles, 0x200, 0
 
 	.align 2
-gUnknown_08406150:: @ 8406150
-	obj_pal gUnknownPal_08405EF8, 0x0000
+gSpritePalette_ConditionUpDown:: @ 8406150
+	obj_pal ConditionUpDownPalette, 0
 
 gUnknown_08406158:: @ 8406158
 	.incbin "baserom.gba", 0x00406158, 0x14
