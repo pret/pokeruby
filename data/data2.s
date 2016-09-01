@@ -3407,7 +3407,15 @@ gUnknown_0821602C:: @ 821602C
 	.align 2
 	.incbin "baserom.gba", 0x0021604c, 0x20
 
-	.incbin "baserom.gba", 0x0021606c, 0x1dd
+	.space 0x1C0
+
+	.string "▶$"
+	.string " $"
+	.string "カッコイ$" @ "cool" (missing an イ at the end)
+	.string "カワイイ$" @ "cute"
+	.string "ウツクシ$" @ "beautiful" (missing an イ at the end)
+	.string "カシコイ$" @ "smart"
+	.string "タクマシ$" @ "tough" (missing an イ at the end)
 
 gUnknown_08216249:: @ 8216249
 	.string "\p$"
