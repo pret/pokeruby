@@ -3,6 +3,10 @@ unk_2004000 = 0x2004000;
 
 gUnknown_020239F8 = 0x20239F8;
 
+battle_data = 0x02024A80
+
+b_movescr_cursor = 0x02024C10;
+
 gSaveBlock2 = 0x2024EA4;
 
 gPlttBufferUnfaded = 0x202EAC8;
@@ -17,5 +21,3 @@ word_203855E = 0x203855E;
 gUnknown_0203869A = 0x203869A;
 
 gTileBuffer = 0x2039360;
-
-b_movescr_cursor = 0x02024C10
