@@ -25874,8 +25874,11 @@ gSpriteTemplate_8401D70:: @ 8401D70
 gUnknown_08401D88:: @ 8401D88
 	.incbin "baserom.gba", 0x00401d88, 0x2
 
-gUnknown_08401D8A:: @ 8401D8A
-	.incbin "baserom.gba", 0x00401d8a, 0x4
+gMtChimneyHikerGraphicsIDs:: @ 8401D8A
+	.byte MAP_OBJ_GFX_HIKER
+	.byte MAP_OBJ_GFX_CAMPER
+	.byte MAP_OBJ_GFX_PICNICKER
+	.byte MAP_OBJ_GFX_POOCHYENA
 
 gUnknown_08401D8E:: @ 8401D8E
 	.incbin "baserom.gba", 0x00401d8e, 0x8
