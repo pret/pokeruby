@@ -12855,7 +12855,8 @@ gWallpaperTiles_Plain: @ 83BAD78
 gWallpaperTilemap_Plain: @ 83BAE74
 	.incbin "graphics/pokemon_storage/plain.bin.lz"
 
-	.incbin "baserom.gba", 0x003BAEF8, 0x1B0
+@ 12×18 tilemap
+	.incbin "graphics/unused/tilemap_3BAEF8.bin"
 
 gUnknown_083BB0A8:: @ 83BB0A8
 	.incbin "baserom.gba", 0x003bb0a8, 0x40
@@ -23758,8 +23759,8 @@ gUnknown_083EDDA0:: @ 83EDDA0
 
 	.align 2
 gUnknown_083EDDAC:: @ 83EDDAC
-Unknown_83EDDAC:
 	.4byte gUnknown_08E95A18 + 32
+
 Unknown_83EDDB0:
 	.incbin "baserom.gba", 0x003eddb0, 0x20
 Unknown_83EDDD0:
@@ -23793,6 +23794,7 @@ gSlotMachineSpritePalettes:: @ 83EDE44
 	obj_pal gSlotMachineSpritePalette4, 7
 	null_obj_pal
 
+	.align 2
 gUnknown_083EDE8C:: @ 83EDE8C
 	.incbin "graphics/slot_machine/reel_time.4bpp.lz"
 
