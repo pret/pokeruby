@@ -11831,12 +11831,12 @@ gSpriteTemplate_83A05B4:: @ 83A05B4
 
 	.align 2
 gUnknown_083A05CC:: @ 83A05CC
-	obj_tiles gUnknown_08E874C8, 0x1F00, 0x1000
+	obj_tiles gPokedexMenu2_Gfx, 0x1F00, 0x1000
 	null_obj_tiles
 
 	.align 2
 gUnknown_083A05DC:: @ 83A05DC
-	obj_pal gUnknown_08E87AF4, 0x1000
+	obj_pal gPokedexMenu_Pal, 0x1000
 	null_obj_pal
 
 gUnknown_083A05EC:: @ 83A05EC
@@ -13615,11 +13615,11 @@ gSpriteTemplate_83C1E04:: @ 83C1E04
 
 	.align 2
 gUnknown_083C1F74:: @ 83C1F74
-	obj_tiles gUnknown_08E78BB4, 2048, 0x2710
+	obj_tiles gBerryCheckCircle_Gfx, 2048, 0x2710
 
 	.align 2
 gUnknown_083C1F7C:: @ 83C1F7C
-	obj_pal gUnknown_08E7883C, 0x2710
+	obj_pal gBerryCheck_Pal, 0x2710
 
 	.align 2
 gOamData_83C1F84:: @ 83C1F84
@@ -25559,14 +25559,14 @@ gUnknown_08401CD4:: @ 8401CD4
 
 	.align 2
 gUnknown_08401CF8:: @ 8401CF8
-	obj_tiles gUnknown_08E80614, 0x800, 1
-	obj_tiles gUnknown_08E80914, 0x40, 2
-	obj_tiles gUnknown_08E80944, 0x80, 3
+	obj_tiles gCableCar_Gfx, 0x800, 1
+	obj_tiles gCableCarDoor_Gfx, 0x40, 2
+	obj_tiles gCableCarCord_Gfx, 0x80, 3
 	.space 8
 
 	.align 2
 gUnknown_08401D18:: @ 8401D18
-	obj_pal Palette_08E7EC1C, 1
+	obj_pal gCableCar_Pal, 1
 	.space 8
 
 	.align 2
