@@ -24025,11 +24025,13 @@ gBirchBallarrow_Pal::
 gBirchCircle_Pal::
 	.incbin "graphics/misc/birch_circle.gbapal"
 
-gUnknown_083F636C:: @ 83F636C
-	.incbin "baserom.gba", 0x003f636c, 0x18c
+	.align 2
+gBirchBagTilemap:: @ 83F636C
+	.incbin "graphics/misc/birch_bag_map.bin.lz"
 
-gUnknown_083F64F8:: @ 83F64F8
-	.incbin "baserom.gba", 0x003f64f8, 0x1f8
+	.align 2
+gBirchGrassTilemap:: @ 83F64F8
+	.incbin "graphics/misc/birch_grass_map.bin.lz"
 
 gUnknown_083F66F0:: @ 83F66F0
 	.incbin "graphics/misc/birch_help.4bpp.lz"
