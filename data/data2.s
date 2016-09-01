@@ -24374,13 +24374,13 @@ gUnknown_083F7FC4:: @ 83F7FC4
 	.4byte NULL
 
 	.align 2
-gUnknown_083F804C:: @ 83F804C
+gCaveTransitionPalette_White:: @ 83F804C
 	.rept 16
 	.2byte 0x7FFF
 	.endr
 
 	.align 2
-gUnknown_083F806C:: @ 83F806C
+gCaveTransitionPalette_Black:: @ 83F806C
 	.rept 16
 	.2byte 0x0000
 	.endr
@@ -24391,11 +24391,13 @@ gUnknown_083F808C:: @ 83F808C
 gUnknown_083F809C:: @ 83F809C
 	.incbin "baserom.gba", 0x003f809c, 0x10
 
-gUnknown_083F80AC:: @ 83F80AC
-	.incbin "baserom.gba", 0x003f80ac, 0x1e0
+	.align 2
+gCaveTransitionTilemap:: @ 83F80AC
+	.incbin "graphics/misc/cave_transition_map.bin.lz"
 
-gUnknown_083F828C:: @ 83F828C
-	.incbin "graphics/pokenav/map_squares.4bpp.lz"
+	.align 2
+gCaveTransitionTiles:: @ 83F828C
+	.incbin "graphics/misc/cave_transition.4bpp.lz"
 
 gUnknown_083F8340:: @ 83F8340
 	.incbin "baserom.gba", 0x003f8340, 0x18
