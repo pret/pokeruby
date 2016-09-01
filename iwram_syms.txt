@@ -8,8 +8,8 @@ gPlayTimeCounterState = 0x300057C;
 
 gLocalTime = 0x3004038;
 
-player_party_data = 0x03004360;
-enemy_party_data = 0x030045C0;
+PlayerPartyData = 0x03004360;
+EnemyPartyData = 0x030045C0;
 
 gRngValue = 0x03004818;
 
