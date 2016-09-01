@@ -25871,20 +25871,26 @@ gSpriteTemplate_8401D58:: @ 8401D58
 gSpriteTemplate_8401D70:: @ 8401D70
 	spr_template 3, 1, gOamData_8401D38, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, nullsub_76
 
-gUnknown_08401D88:: @ 8401D88
-	.incbin "baserom.gba", 0x00401d88, 0x2
+gCableCarPlayerGraphicsIDs:: @ 8401D88
+	.byte MAP_OBJ_GFX_RIVAL_BRENDAN_NORMAL
+	.byte MAP_OBJ_GFX_RIVAL_MAY_NORMAL
 
 gMtChimneyHikerGraphicsIDs:: @ 8401D8A
 	.byte MAP_OBJ_GFX_HIKER
 	.byte MAP_OBJ_GFX_CAMPER
 	.byte MAP_OBJ_GFX_PICNICKER
-	.byte MAP_OBJ_GFX_POOCHYENA
+	.byte MAP_OBJ_GFX_POOCHYENA @ not used
 
-gUnknown_08401D8E:: @ 8401D8E
-	.incbin "baserom.gba", 0x00401d8e, 0x8
+	.align 1
+gMtChimneyHikerCoords:: @ 8401D8E
+	.2byte   0,  80
+	.2byte 240, 146
 
-gUnknown_08401D96:: @ 8401D96
-	.incbin "baserom.gba", 0x00401d96, 0x4
+gMtChimneyHikerMovementDelayTable:: @ 8401D96
+	.byte   0
+	.byte  60
+	.byte 120
+	.byte 170
 
 	.align 2
 gUnknown_08401D9C:: @ 8401D9C
