@@ -25827,26 +25827,34 @@ gUnknown_08401810:: @ 8401810
 	.4byte 2307, gUnknown_08401808
 	.4byte 2306, gUnknown_0840180B
 
-gUnknown_08401820:: @ 8401820
-	.incbin "baserom.gba", 0x00401820, 0x158
+	.align 2
+gCableCarMtChimneyTilemap:: @ 8401820
+	.incbin "graphics/misc/cable_car_mt_chimney_map.bin.lz"
 
-gUnknown_08401978:: @ 8401978
-	.incbin "baserom.gba", 0x00401978, 0x184
+	.align 2
+gCableCarTreeTilemap:: @ 8401978
+	.incbin "graphics/misc/cable_car_tree_map.bin.lz"
 
-gUnknown_08401AFC:: @ 8401AFC
-	.incbin "baserom.gba", 0x00401afc, 0x1c4
+	.align 2
+gCableCarMountainTilemap:: @ 8401AFC
+	.incbin "graphics/misc/cable_car_mountain_map.bin.lz"
 
-gUnknown_08401CC0:: @ 8401CC0
-	.incbin "baserom.gba", 0x00401cc0, 0x4
+	.align 2
+gCableCarPylonHookTilemapEntries:: @ 8401CC0
+	.2byte 0x3000
+	.2byte 0x3001
+	.2byte 0x3002
+	.2byte 0x3003
+	.2byte 0x3004
+	.2byte 0x3005
+	.2byte 0x3006
+	.2byte 0x3007
+	.2byte 0x3008
+	.2byte 0x3009
 
-gUnknown_08401CC4:: @ 8401CC4
-	.incbin "baserom.gba", 0x00401cc4, 0x4
-
-gUnknown_08401CC8:: @ 8401CC8
-	.incbin "baserom.gba", 0x00401cc8, 0xc
-
-gUnknown_08401CD4:: @ 8401CD4
-	.incbin "baserom.gba", 0x00401cd4, 0x24
+	.align 2
+gCableCarPylonStemTilemap:: @ 8401CD4
+	.incbin "graphics/misc/cable_car_pylon_stem_map.bin.lz"
 
 	.align 2
 gUnknown_08401CF8:: @ 8401CF8
