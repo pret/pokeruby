@@ -27142,15 +27142,19 @@ gUnknown_08406334:: @ 8406334
 gUnknown_0840633A:: @ 840633A
 	.string "{COLOR RED}{STR_VAR_1}$"
 
+	.align 2
 Palette_406340:: @ 8406340
 	.incbin "baserom.gba", 0x406340, 0x20
 
+	.align 2
 Palette_406360:: @ 8406360
 	.incbin "baserom.gba", 0x406360, 0x20
 
+	.align 2
 gIntroTiles::
 	.incbin "graphics/intro/intro.4bpp.lz"
 
+	.align 2
 gUnknown_08406974:: @ 8406974
 	.incbin "graphics/intro/intro1_bgpal1.gbapal"
 	.incbin "graphics/intro/intro1_bgpal2.gbapal"
@@ -27185,35 +27189,51 @@ gUnknown_0840725C:: @ 840725C
 gUnknown_0840754C:: @ 840754C
 	.incbin "graphics/intro/intro1_bg3_map.bin.lz"
 
+	.align 2
 gUnknown_08407764:: @ 8407764
 	.incbin "graphics/intro/introgfx.4bpp.lz"
 
+	.align 2
 gUnknown_084098D4:: @ 84098D4
 	.incbin "graphics/intro/intro3_pokeball.gbapal"
 
+	.align 2
 gUnknown_08409AD4:: @ 8409AD4
-	.incbin "baserom.gba", 0x00409ad4, 0x130
+	.incbin "graphics/intro/intro3_pokeball_map.bin.lz"
 
+	.align 2
 gUnknown_08409C04:: @ 8409C04
 	.incbin "graphics/intro/intro3_pokeball.8bpp.lz"
 
+	.align 2
 gUnknown_0840A758:: @ 840A758
-	.incbin "baserom.gba", 0x0040a758, 0x20
+	.incbin "graphics/intro/intro3_streaks.gbapal"
 
+	.align 2
 gUnknown_0840A778:: @ 840A778
-	.incbin "baserom.gba", 0x0040a778, 0x6c
+	.incbin "graphics/intro/intro3_streaks.4bpp.lz"
 
+	.align 2
 gUnknown_0840A7E4:: @ 840A7E4
-	.incbin "baserom.gba", 0x0040a7e4, 0x13c
+	.incbin "graphics/intro/intro3_streaks_map.bin.lz"
 
+	.align 2
 gIntro3Misc1Palette::
 	.incbin "graphics/intro/intro3_misc1.gbapal"
+
+	.align 2
 gIntro3Misc2Palette::
 	.incbin "graphics/intro/intro3_misc2.gbapal"
+
+	.align 2
 gIntro3MiscTiles::
 	.incbin "graphics/intro/intro3_misc.4bpp.lz"
+
+	.align 2
 gIntro1EonPalette::
 	.incbin "graphics/intro/intro1_eon.gbapal"
+
+	.align 2
 gIntro1EonTiles::
 	.incbin "graphics/intro/intro1_eon.4bpp.lz"
 
