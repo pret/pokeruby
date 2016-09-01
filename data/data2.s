@@ -13563,21 +13563,27 @@ gUnknown_083C12FC:: @ 83C12FC
 gSpriteTemplate_83C1304:: @ 83C1304
 	spr_template 30001, 30001, gOamData_83C1298, gSpriteAnimTable_83C12D8, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
-gUnknown_083C131C:: @ 83C131C
-	.incbin "baserom.gba", 0x003c131c, 0x20
+	.align 2
+gSummaryScreenMonMarkingsPalette:: @ 83C131C
+	.incbin "graphics/summary_screen/mon_markings.gbapal"
 
-gUnknown_083C133C:: @ 83C133C
-	.incbin "baserom.gba", 0x003c133c, 0x140
+	.align 2
+gSummaryScreenTextTiles:: @ 83C133C
+	.incbin "graphics/summary_screen/text.4bpp"
 
-gUnknown_083C147C:: @ 83C147C
-	.incbin "baserom.gba", 0x003c147c, 0x100
+	.align 2
+gSummaryScreenButtonTiles:: @ 83C147C
+	.incbin "graphics/summary_screen/buttons.4bpp"
 
+	.align 1
 gUnknown_083C157C:: @ 83C157C
-	.incbin "baserom.gba", 0x003c157c, 0x2
+	.2byte 0x5F5A @ palette color
 
+	.align 1
 gUnknown_083C157E:: @ 83C157E
-	.incbin "baserom.gba", 0x003c157e, 0x2
+	.2byte 0x6FDE @ palette color
 
+	.align 2
 gUnknown_083C1580:: @ 83C1580
 	.4byte sub_809FC0C
 	.4byte sub_809FEB8
@@ -13597,13 +13603,13 @@ gUnknown_083C1598:: @ 83C1598
 	.4byte sub_80A015C
 
 gUnknown_083C15A8:: @ 83C15A8
-	.incbin "baserom.gba", 0x003c15a8, 0x6
+	.byte 0, 2, 3, 1, 4, 5
 
 gUnknown_083C15AE:: @ 83C15AE
-	.incbin "baserom.gba", 0x003c15ae, 0x6
+	.string "{STR_VAR_1}{CLEAR_TO 64}$"
 
 gUnknown_083C15B4:: @ 83C15B4
-	.incbin "baserom.gba", 0x003c15b4, 0x8
+	.string "{STR_VAR_1}{CLEAR_TO 72}$"
 
 	.align 2
 gUnknown_083C15BC:: @ 83C15BC
