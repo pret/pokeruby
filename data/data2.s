@@ -2927,8 +2927,13 @@ gUnknown_0820C2F0:: @ 820C2F0
 	.4byte TradeText_WaitingForFriend
 	.4byte TradeText_WantToTrade
 
-gUnknown_0820C308:: @ 820C308
-	.incbin "baserom.gba", 0x0020c308, 0x18
+gTradeMessageWindowRects:: @ 820C308
+	.byte 8, 7, 22, 12
+	.byte 8, 7, 22, 12
+	.byte 6, 7, 24, 12
+	.byte 6, 7, 24, 12
+	.byte 8, 7, 22, 12
+	.byte 7, 7, 23, 12
 
 	.align 2
 gUnknown_0820C320:: @ 820C320
@@ -3266,8 +3271,20 @@ gUnknown_08215A78:: @ 8215A78
 gSpriteTemplate_8215A80:: @ 8215A80
 	spr_template 5556, 5555, gOamData_8215A48, gSpriteAnimTable_8215A74, NULL, gDummySpriteAffineAnimTable, sub_804B104
 
-gUnknown_08215A98:: @ 8215A98
-	.incbin "baserom.gba", 0x00215a98, 0x18
+	.align 1
+gTradeGlow2PaletteAnimTable:: @ 8215A98
+	.2byte 0x7F12
+	.2byte 0x7F12
+	.2byte 0x7F12
+	.2byte 0x7FFF
+	.2byte 0x7FFF
+	.2byte 0x7FFF
+	.2byte 0x7F12
+	.2byte 0x7F12
+	.2byte 0x7F12
+	.2byte 0x7FFF
+	.2byte 0x7FFF
+	.2byte 0x7FFF
 
 	.align 2
 gSpriteAffineAnim_8215AB0:: @ 8215AB0
@@ -3490,10 +3507,13 @@ gUnknown_082162E4:: @ 82162E4
 	.byte 168, 128
 
 gUnknown_082162EC:: @ 82162EC
-	.incbin "baserom.gba", 0x002162ec, 0xc
+	.byte -1,  0,  1, -1
+	.byte -1,  0,  1,  2
+	.byte  0,  1,  2,  3
 
+	.align 1
 gUnknown_082162F8:: @ 82162F8
-	.incbin "baserom.gba", 0x002162f8, 0x8
+	.2byte 0x0000, 0xC000, 0x4000, 0x8000
 
 gUnknown_08216300:: @ 8216300
 	.byte 1
@@ -3787,29 +3807,42 @@ gUnknown_08216574:: @ 8216574
 gSpriteTemplate_821657C:: @ 821657C
 	spr_template 12346, 46546, gOamData_8216560, gSpriteAnimTable_8216570, NULL, gDummySpriteAffineAnimTable, sub_80518CC
 
+	.align 1
 gUnknown_08216594:: @ 8216594
-	.incbin "baserom.gba", 0x00216594, 0x28
+	.2byte -10,  20,  10,   2,   1
+	.2byte 250,  20,  10,  -2,   1
+	.2byte -10, 140,  10,   2,  -1
+	.2byte 250, 140,  10,  -2,  -1
 
 gUnknown_082165BC:: @ 82165BC
-	.incbin "baserom.gba", 0x002165bc, 0x1e
+	.byte 4, 3, 2
+	.byte 0, 4, 3
+	.byte 1, 0, 4
+	.byte 2, 1, 0
+	.byte 3, 2, 1
+	.byte 0, 2, 3
+	.byte 1, 3, 4
+	.byte 2, 4, 0
+	.byte 3, 0, 1
+	.byte 4, 1, 2
 
 gUnknown_082165DA:: @ 82165DA
-	.incbin "baserom.gba", 0x002165da, 0x5
+	.byte 1, 1, 2, 3, 4
 
 gUnknown_082165DF:: @ 82165DF
-	.incbin "baserom.gba", 0x002165df, 0xa
+	.byte 0x1C, 0x16, 0x13, 0x1A, 0x19, 0x0E, 0x0D, 0x0B, 0x07, 0x15
 
 gUnknown_082165E9:: @ 82165E9
-	.incbin "baserom.gba", 0x002165e9, 0x5
+	.byte 6, 6, 6, 6, 5
 
 gUnknown_082165EE:: @ 82165EE
-	.incbin "baserom.gba", 0x002165ee, 0x5
+	.byte 3, 3, 3, 2, 2
 
 gUnknown_082165F3:: @ 82165F3
-	.incbin "baserom.gba", 0x002165f3, 0x5
+	.byte 3, 3, 3, 3, 2
 
 gUnknown_082165F8:: @ 82165F8
-	.incbin "baserom.gba", 0x002165f8, 0x2
+	.string " $"
 
 gUnknown_082165FA:: @ 82165FA
 OtherText_BPM::
@@ -3818,7 +3851,9 @@ OtherText_Dash::
 	.string "-$"
 
 gUnknown_08216600:: @ 8216600
-	.incbin "baserom.gba", 0x00216600, 0x4
+	.string "\n$"
+
+	.string "\n$"
 
 gUnknown_08216604:: @ 8216604
 	.incbin "baserom.gba", 0x00216604, 0x20
