@@ -2358,8 +2358,8 @@ gSubspriteTables_820A6EC:: @ 820A6EC
 
 	.align 2
 gUnknown_0820A754:: @ 820A754
-	obj_tiles gBattleGfx_BallStatus, 512, 0xd70c
-	obj_tiles gBattleGfx_BallStatus, 512, 0xd70d
+	obj_tiles gBattleGfx_BallStatusBar, 512, 0xd70c
+	obj_tiles gBattleGfx_BallStatusBar, 512, 0xd70d
 
 	.align 2
 gUnknown_0820A764:: @ 820A764

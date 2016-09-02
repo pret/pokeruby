@@ -2934,7 +2934,7 @@ gEnemyMonShadow_Gfx:: @ 8E6A728
 	.incbin "graphics/battle_interface/enemy_mon_shadow.4bpp.lz"
 
 	.align 2
-gBattleGfx_BallStatus:: @ 8E6A758
+gBattleGfx_BallStatusBar:: @ 8E6A758
 	.incbin "graphics/battle_interface/bar.4bpp.lz"
 
 	.align 2
