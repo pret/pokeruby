@@ -4269,8 +4269,9 @@ gUnknown_08E9CA24:: @ 8E9CA24
 gUnknown_08E9CA44:: @ 8E9CA44
 	.incbin "baserom.gba", 0xe9ca44, 0x500
 
-Tiles_E9CF44:: @ 8E9CF44
-	.incbin "baserom.gba", 0xe9cf44, 0x700
+	.align 2
+gInterviewOutlineCursorTiles:: @ 8E9CF44
+	.incbin "graphics/misc/interview_outline_cursor.4bpp"
 
 	.align 2
 Tiles_E9D644:: @ 8E9D644

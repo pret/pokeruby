@@ -20669,17 +20669,21 @@ gUnknown_083DB7EC:: @ 83DB7EC
 gUnknown_083DB7F4:: @ 83DB7F4
 	.incbin "baserom.gba", 0x3db7f4, 0xc
 
-Palette_3DB800:: @ 83DB800
-	.incbin "baserom.gba", 0x3db800, 0x20
+	.align 2
+InterviewPalette_0:: @ 83DB800
+	.incbin "graphics/misc/interview_pal0.gbapal"
 
-Palette_3DB820:: @ 83DB820
-	.incbin "baserom.gba", 0x3db820, 0x20
+	.align 2
+InterviewPalette_1:: @ 83DB820
+	.incbin "graphics/misc/interview_pal1.gbapal"
 
-Tiles_3DB840: @ 83DB840
-	.incbin "baserom.gba", 0x3db840, 0x100
+	.align 2
+InterviewArrowTiles: @ 83DB840
+	.incbin "graphics/misc/interview_arrow.4bpp"
 
-Tiles_3DB940: @ 83DB940
-	.incbin "baserom.gba", 0x3db940, 0x100
+	.align 2
+InterviewButtonTiles: @ 83DB940
+	.incbin "graphics/misc/interview_buttons.4bpp"
 
 	.align 2
 gMenuInterviewFrame_Pal::
@@ -20689,22 +20693,23 @@ gMenuInterviewFrame_Pal::
 gMenuInterviewFrame_Gfx::
 	.incbin "graphics/misc/interview_frame.4bpp.lz"
 
-Tiles_3DBB94: @ 83DBB94
-	.incbin "baserom.gba", 0x3dbb94, 0x20
+	.align 2
+InterviewTriangleCursorTiles: @ 83DBB94
+	.incbin "graphics/misc/interview_triangle_cursor.4bpp"
 
 	.align 2
-gUnknown_083DBBB4:: @ 83DBBB4
-	obj_tiles Tiles_3DBB94, 0x20, 0
-	obj_tiles Tiles_E9CF44, 0x700, 1
-	obj_tiles Tiles_3DB840, 0x100, 2
-	obj_tiles Tiles_3DB940, 0x100, 3
+gSpriteSheets_Interview:: @ 83DBBB4
+	obj_tiles InterviewTriangleCursorTiles, 0x20, 0
+	obj_tiles gInterviewOutlineCursorTiles, 0x700, 1
+	obj_tiles InterviewArrowTiles, 0x100, 2
+	obj_tiles InterviewButtonTiles, 0x100, 3
 	null_obj_tiles
 
 	.align 2
-gUnknown_083DBBDC:: @ 83DBBDC
-	obj_pal Palette_3DB800, 0
-	obj_pal Palette_3DB820, 1
-	obj_pal 0x0, 0
+gSpritePalettes_Interview:: @ 83DBBDC
+	obj_pal InterviewPalette_0, 0
+	obj_pal InterviewPalette_1, 1
+	null_obj_pal
 
 	.align 2
 gOamData_83DBBF4:: @ 83DBBF4
