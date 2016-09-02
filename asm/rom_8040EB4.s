@@ -19757,7 +19757,7 @@ sub_804AA0C: @ 804AA0C
 	bx r0
 	.align 2, 0
 _0804AA7C: .4byte 0x03004824
-_0804AA80: .4byte gUnknown_0820C308
+_0804AA80: .4byte gTradeMessageWindowRects
 _0804AA84: .4byte gUnknown_0820C2F0
 	thumb_func_end sub_804AA0C
 
@@ -20575,7 +20575,7 @@ _0804B0B2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804B0B8: .4byte gUnknown_08215A98
+_0804B0B8: .4byte gTradeGlow2PaletteAnimTable
 	thumb_func_end sub_804B07C
 
 	thumb_func_start sub_804B0BC

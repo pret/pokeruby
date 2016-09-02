@@ -57,7 +57,7 @@
 	.set OPPONENT_GABBY_AND_TY_6,  56
 	.set OPPONENT_LOLA_1,          57
 	.set OPPONENT_CARMEN,          58
-	.set OPPONENT_GWEN ,           59
+	.set OPPONENT_GWEN,            59
 	.set OPPONENT_LOLA_2,          60
 	.set OPPONENT_LOLA_3,          61
 	.set OPPONENT_LOLA_4,          62
