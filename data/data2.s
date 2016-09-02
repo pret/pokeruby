@@ -11807,13 +11807,13 @@ gUnknown_0839B24A:: @ 839B24A
 	.string "ND$"
 
 gUnknown_0839B24D:: @ 839B24D
-	.incbin "baserom.gba", 0x0039b24d, 0x8
+	.string "の　こどもは\n$" @ "'s child <topic-particle>"
 
 gUnknown_0839B255:: @ 839B255
-	.incbin "baserom.gba", 0x0039b255, 0x2
+	.string " $"
 
 gUnknown_0839B257:: @ 839B257
-	.incbin "baserom.gba", 0x39b257, 0xb
+	.string "ながいなまえぽけもん$" @ "long name pokemon" (used as test name)
 
 Text_39B262: @ 839B262
 	.string "Search a child$"
