@@ -3669,106 +3669,114 @@ gPokedexMenuSearch_Pal:: @ 8E882D8
 	.incbin "graphics/pokedex/menu3.gbapal"
 
 	.align 2
-gUnknown_08E88358:: @ 8E88358
-	.incbin "baserom.gba", 0xE88358, 0x173 @ LZ, uncomp. size = 0x600
+gPokenavMainMenu_Gfx:: @ 8E88358
+	.incbin "graphics/pokenav/mainmenu.4bpp.lz"
 
 	.align 2
-gUnknown_08E884CC:: @ 8E884CC
-	.incbin "baserom.gba", 0xE884CC, 0x55A @ LZ, uncomp. size = 0x1400
+gPokenavMenuOptions_Gfx:: @ 8E884CC
+	.incbin "graphics/pokenav/menu_options.4bpp.lz"
 
 	.align 2
-gUnknown_08E88A28:: @ 8E88A28
-	.incbin "baserom.gba", 0x00e88a28, 0x20
+gPokenavMenuOptions1_Pal:: @ 8E88A28
+	.incbin "graphics/pokenav/pokenav1.gbapal"
 
 	.align 2
-gUnknown_08E88A48:: @ 8E88A48
-	.incbin "baserom.gba", 0xe88a48, 0x20
+gPokenavMenuOptions2_Pal:: @ 8E88A48
+	.incbin "graphics/pokenav/pokenav2.gbapal"
 
 	.align 2
-Palette_E88A68:: @ 8E88A68
-	.incbin "baserom.gba", 0xe88a68, 0x20
+gPokenavMenuOptions3_Pal:: @ 8E88A68
+	.incbin "graphics/pokenav/pokenav3.gbapal"
 
 	.align 2
-gUnknown_08E88A88:: @ 8E88A88
-	.incbin "baserom.gba", 0xE88A88, 0x2C4 @ LZ, uncomp. size = 0xC00
+gPokenavHoennMapHeader_Gfx:: @ 8E88A88
+	.incbin "graphics/pokenav/map_header.4bpp.lz"
 
 	.align 2
-gUnknown_08E88D4C:: @ 8E88D4C
-	.incbin "baserom.gba", 0xE88D4C, 0x575 @ LZ, uncomp. size = 0x1200
+gPokenavHoennMapMisc_Gfx:: @ 8E88D4C
+	.incbin "graphics/pokenav/map_misc2.4bpp.lz"
 
 	.align 2
-gUnknown_08E892C4:: @ 8E892C4
-	.incbin "baserom.gba", 0xE892C4, 0x364 @ LZ, uncomp. size = 0x840
+gPokenavHoennMapSquares_Gfx:: @ 8E892C4
+	.incbin "graphics/pokenav/map_squares.4bpp.lz"
 
-gUnknown_08E89628:: @ 8E89628
-	.incbin "baserom.gba", 0x00e89628, 0x20
+	.align 2
+gPokenavHoennMap1_Pal:: @ 8E89628
+	.incbin "graphics/pokenav/map_menu.gbapal"
 
-gUnknown_08E89648:: @ 8E89648
+	.align 2
+gPokenavHoennMapSquares_Pal:: @ 8E89648
 	.incbin "graphics/pokenav/map_squares.gbapal"
 
 	.align 2
-gUnknown_08E89668:: @ 8E89668
-	.incbin "baserom.gba", 0xE89668, 0x2EE @ LZ, uncomp. size = 0xC00
+gPokenavConditionMenu_Gfx:: @ 8E89668
+	.incbin "graphics/pokenav/condition_menu.4bpp.lz"
 
 	.align 2
-gUnknown_08E89958:: @ 8E89958
-	.incbin "baserom.gba", 0x00e89958, 0x20
+gPokenavConditionMenu_Pal:: @ 8E89958
+	.incbin "graphics/pokenav/condition1.gbapal"
 
 	.align 2
-gUnknown_08E89978:: @ 8E89978
-	.incbin "baserom.gba", 0xE89978, 0x15D @ LZ, uncomp. size = 0x600
+gPokenavConditionMenuHeader_Gfx:: @ 8E89978
+	.incbin "graphics/pokenav/condition_menu_header.4bpp.lz"
 
 	.align 2
-gUnknown_08E89AD8:: @ 8E89AD8
-	.incbin "baserom.gba", 0xE89AD8, 0x6E6 @ LZ, uncomp. size = 0xFA0
+gPokenavConditionView_Gfx:: @ 8E89AD8
+	.incbin "graphics/pokenav/condition_view.4bpp.lz"
 
 	.align 2
-gUnknown_08E8A1C0:: @ 8E8A1C0
-	.incbin "baserom.gba", 0x00e8a1c0, 0x20
+gPokenavConditionMenu2_Pal:: @ 8E8A1C0
+	.incbin "graphics/pokenav/condition2.gbapal"
 
 	.align 2
-gUnknown_08E8A1E0:: @ 8E8A1E0
-	.incbin "baserom.gba", 0xE8A1E0, 0x2B8 @ LZ, uncomp. size = 0x800
-
-gTiles_08E8A498:: @ 8E8A498
-	.incbin "baserom.gba", 0xe8a498, 0x100
-
-PokenavContestPokeballPalette:: @ 8E8A598
-	.incbin "graphics/pokenav/contest_pokeball.gbapal"
-
-Palette_E8A5B8:: @ 8E8A5B8
-	.incbin "baserom.gba", 0xe8a5b8, 0x20
+gPokenavConditionMenuOptions_Gfx:: @ 8E8A1E0
+	.incbin "graphics/pokenav/condition_menu_options.4bpp.lz"
 
 	.align 2
-gUnknown_08E8A5D8:: @ 8E8A5D8
-	.incbin "baserom.gba", 0xE8A5D8, 0x1EB @ LZ, uncomp. size = 0x600
+gPokenavConditionMenuCancel_Gfx:: @ 8E8A498
+	.incbin "graphics/pokenav/condition_cancel.4bpp"
 
 	.align 2
-gUnknown_08E8A7C4:: @ 8E8A7C4
-	.incbin "baserom.gba", 0xe8a7c4, 0x520
-
-Palette_E8ACE4:: @ 8E8ACE4
-	.incbin "baserom.gba", 0xe8ace4, 0x20
+gPokenavConditionPokeball_Pal:: @ 8E8A598
+	.incbin "graphics/pokenav/condition3.gbapal"
 
 	.align 2
-gUnknown_08E8AD04:: @ 8E8AD04
-	.incbin "baserom.gba", 0xE8AD04, 0x4BE @ LZ, uncomp. size = 0x1800
+gPokenavCondition4_Pal:: @ 8E8A5B8
+	.incbin "graphics/pokenav/condition4.gbapal"
 
 	.align 2
-gUnknown_08E8B1C4:: @ 8E8B1C4
-	.incbin "baserom.gba", 0x00e8b1c4, 0x20
-
-gUnknown_08E8B1E4:: @ 8E8B1E4
-	.incbin "baserom.gba", 0x00e8b1e4, 0x20
+gPokenavConditionMenuOptions2_Gfx:: @ 8E8A5D8
+	.incbin "graphics/pokenav/condition_menu_options2.4bpp.lz"
 
 	.align 2
-gUnknown_08E8B204:: @ 8E8B204
-	.incbin "baserom.gba", 0xE8B204, 0x19B @ LZ, uncomp. size = 0x600
+gPokenavConditionMenuMisc_Gfx:: @ 8E8A7C4
+	.incbin "graphics/pokenav/condition_menu_misc.4bpp"
 
 	.align 2
-gUnknown_08E8B3A0:: @ 8E8B3A0
-	.incbin "baserom.gba", 0xE8B3A0, 0x140 @ LZ, uncomp. size = 0x600
+gPokenavCondition5_Pal:: @ 8E8ACE4
+	.incbin "graphics/pokenav/condition5.gbapal"
 
+	.align 2
+gPokenavConditionSearch_Gfx:: @ 8E8AD04
+	.incbin "graphics/pokenav/condition_search.4bpp.lz"
+
+	.align 2
+gPokenavCondition6_Pal:: @ 8E8B1C4
+	.incbin "graphics/pokenav/condition6.gbapal"
+
+	.align 2
+gPokenavCondition7_Pal:: @ 8E8B1E4
+	.incbin "graphics/pokenav/condition7.bin" @ another palette thats impossible to leave as native pal file due to 0xFFFF instead of 0x7FFF.
+
+	.align 2
+gPokenavTrainersEyesHeader_Gfx:: @ 8E8B204
+	.incbin "graphics/pokenav/trainereyes.4bpp.lz"
+
+	.align 2
+gPokenavRibbonsHeader_Gfx:: @ 8E8B3A0
+	.incbin "graphics/pokenav/ribbons.4bpp.lz"
+
+	.align 2
 gUnknown_08E8B4E0:: @ 8E8B4E0
 	.incbin "baserom.gba", 0x00e8b4e0, 0x1400
 
@@ -4366,7 +4374,7 @@ gUnknown_08E9F7E4:: @ 8E9F7E4
 
 	.align 2
 gPokenavContestArrowsPalette::
-	.incbin "graphics/pokenav/contest_arrows.gbapal"
+	.incbin "graphics/pokenav/arrows.gbapal"
 
 gUnknown_08E9F988:: @ 8E9F988
 	.incbin "baserom.gba", 0xe9f988, 0x20

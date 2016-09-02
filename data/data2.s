@@ -21715,31 +21715,42 @@ gUnknown_083E3270:: @ 83E3270
 	.4byte sub_80F0A24
 	.4byte sub_80F0A74
 
+	.align 2
 gPokenavIconPalette::
 	.incbin "graphics/pokenav/icon.gbapal"
 
+	.align 2
 gUnknown_083E329C:: @ 83E329C
 	.incbin "graphics/pokenav/icon.4bpp.lz"
-gPokenavContestPokeballTiles::
-	.incbin "graphics/pokenav/contest_pokeball.4bpp"
+
+	.align 2
+gPokenavPokeballTiles::
+	.incbin "graphics/pokenav/pokeball.4bpp"
+
+	.align 2
 gUnknown_083E3780: @ 83E3780
 	.incbin "baserom.gba", 0x3e3780, 0x20
 
 	.align 2
-gContestSparkle_Pal::
-	.incbin "graphics/pokenav/contest_sparkle.gbapal"
+gPokenavSparkle_Pal::
+	.incbin "graphics/pokenav/sparkle.gbapal"
 
 	.align 2
-gContestSparkle_Gfx::
-	.incbin "graphics/pokenav/contest_sparkle.4bpp"
+gPokenavSparkle_Gfx::
+	.incbin "graphics/pokenav/sparkle.4bpp"
 
+	.align 2
 gContestArrows_Gfx::
-	.incbin "graphics/pokenav/contest_arrows.4bpp"
+	.incbin "graphics/pokenav/arrows.4bpp"
+
 gUnknown_083E3BC0::
 	.incbin "baserom.gba", 0x003E3BC0, 0x20
+
+	.align 2
 gTiles_083E3BE0::
 	.incbin "graphics/unknown/unknown_3E3BE0.4bpp"
 
+	.align 2
 gUnknown_083E3C60:: @ 83E3C60
 	.incbin "graphics/misc/ribbons_cool.gbapal"
 	.incbin "graphics/misc/ribbons_beauty.gbapal"
@@ -21947,8 +21958,8 @@ gSpriteTemplate_83E4484:: @ 83E4484
 	spr_template 25, 17, gOamData_83E447C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80F2654
 
 gUnknown_083E449C:: @ 83E449C
-	obj_pal Palette_E88A68, 2
-	obj_pal Palette_E8ACE4, 3
+	obj_pal gPokenavMenuOptions3_Pal, 2
+	obj_pal gPokenavCondition5_Pal, 3
 	obj_pal 0x0, 0
 
 	.align 2
@@ -22100,15 +22111,15 @@ gSpriteAnimTable_83E4620:: @ 83E4620
 
 	.align 2
 gUnknown_083E4628:: @ 83E4628
-	obj_tiles gPokenavContestPokeballTiles, 0x100, 3
+	obj_tiles gPokenavPokeballTiles, 0x100, 3
 	obj_tiles gUnknown_083E3780, 0x20, 4
-	obj_tiles gTiles_08E8A498, 0x100, 5
+	obj_tiles gPokenavConditionMenuCancel_Gfx, 0x100, 5
 	null_obj_tiles
 
 	.align 2
 gUnknown_083E4648:: @ 83E4648
-	obj_pal PokenavContestPokeballPalette, 4
-	obj_pal Palette_E8A5B8, 5
+	obj_pal gPokenavConditionPokeball_Pal, 4
+	obj_pal gPokenavCondition4_Pal, 5
 	.space 8
 
 	.align 2
@@ -22156,11 +22167,11 @@ gSpriteTemplate_83E476C:: @ 83E476C
 
 	.align 2
 gUnknown_083E4784:: @ 83E4784
-	obj_tiles gContestSparkle_Gfx, 896, 0x0017
+	obj_tiles gPokenavSparkle_Gfx, 896, 0x0017
 
 	.align 2
 gUnknown_083E478C:: @ 83E478C
-	obj_pal gContestSparkle_Pal, 0x000f
+	obj_pal gPokenavSparkle_Pal, 0x000f
 
 gUnknown_083E4794:: @ 83E4794
 	.incbin "baserom.gba", 0x003e4794, 0x28
@@ -31585,9 +31596,11 @@ gUnknown_08416E34:: @ 8416E34
 	obj_tiles gIntro2MayTiles, 0x2000, 1003
 	.space 8
 
+	.align 2
 gEvoSparklePalette: @ 8416E44
 	.incbin "graphics/misc/evo_sparkle.gbapal"
 
+	.align 2
 gEvoSparkleTiles: @ 8416E64
 	.incbin "graphics/misc/evo_sparkle.4bpp.lz"
 
