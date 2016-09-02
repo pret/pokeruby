@@ -4342,11 +4342,14 @@ gTitleScreenLogoShinePalette::
 gUnknown_08E9D8CC:: @ 8E9D8CC
 	.ifdef SAPPHIRE
 	.incbin "graphics/title_screen/pokemon_sapphire.8bpp.lz"
-gVersionTiles::
-	.incbin "graphics/title_screen/sapphireversion.8bpp.lz"
 	.else
 	.incbin "graphics/title_screen/pokemon_ruby.8bpp.lz"
+	.endif
+
 gVersionTiles::
+	.ifdef SAPPHIRE
+	.incbin "graphics/title_screen/sapphireversion.8bpp.lz"
+	.else
 	.incbin "graphics/title_screen/rubyversion.8bpp.lz"
 	.endif
 
