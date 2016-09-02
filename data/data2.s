@@ -11790,11 +11790,21 @@ gTrainerCardColorNames:: @ 839B21C
 	.4byte TrainerCardColorName_Silver
 	.4byte TrainerCardColorName_Gold
 
+@ These seem to be strings for keypad test code.
 gUnknown_0839B22C:: @ 839B22C
-	.incbin "baserom.gba", 0x0039b22c, 0x1e
+	.string " A$" @ A
+	.string " B$" @ B
+	.string "SL$" @ SELECT
+	.string "ST$" @ START
+	.string "RK$" @ right
+	.string "LK$" @ left
+	.string "UK$" @ up
+	.string "DK$" @ down
+	.string "RT$" @ R
+	.string "LT$" @ L
 
 gUnknown_0839B24A:: @ 839B24A
-	.incbin "baserom.gba", 0x0039b24a, 0x3
+	.string "ND$"
 
 gUnknown_0839B24D:: @ 839B24D
 	.incbin "baserom.gba", 0x0039b24d, 0x8
