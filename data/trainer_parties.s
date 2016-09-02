@@ -761,7 +761,7 @@ gTrainerParty_Carmen: @ 81ED0A0
 
 	.align 2
 
-gTrainerParty_Gwen : @ 81ED0A8
+gTrainerParty_Gwen: @ 81ED0A8
 	.2byte 0 @ IV (0-255)
 	.2byte 27 @ level
 	.2byte SPECIES_MARILL
