@@ -32177,11 +32177,44 @@ Unknown_842F558: @ 842F558
 	.4byte Unknown_842F4F0
 	.4byte Unknown_842F520
 
+	.align 2
 gUnknown_0842F5BC:: @ 842F5BC
 	.4byte Unknown_842F558
 
-gUnknown_0842F5C0:: @ 842F5C0
-	.incbin "baserom.gba", 0x0042f5c0, 0x100
+	.align 2
+gSubspriteTables_842F5C0:: @ 842F5C0
+	.4byte  1, gSubspriteTable_203A380
+	.4byte  1, gSubspriteTable_203A380
+	.4byte  2, gSubspriteTable_203A380
+	.4byte  3, gSubspriteTable_203A380
+	.4byte  4, gSubspriteTable_203A380
+	.4byte  5, gSubspriteTable_203A380
+	.4byte  6, gSubspriteTable_203A380
+	.4byte  7, gSubspriteTable_203A380
+	.4byte  8, gSubspriteTable_203A380
+	.4byte  9, gSubspriteTable_203A380
+	.4byte 10, gSubspriteTable_203A380
+	.4byte 11, gSubspriteTable_203A380
+	.4byte 12, gSubspriteTable_203A380
+	.4byte 13, gSubspriteTable_203A380
+	.4byte 14, gSubspriteTable_203A380
+	.4byte 15, gSubspriteTable_203A380
+	.4byte  1, gSubspriteTable_203A380
+	.4byte 17, gSubspriteTable_203A380
+	.4byte 18, gSubspriteTable_203A380
+	.4byte 19, gSubspriteTable_203A380
+	.4byte 20, gSubspriteTable_203A380
+	.4byte 21, gSubspriteTable_203A380
+	.4byte 22, gSubspriteTable_203A380
+	.4byte 23, gSubspriteTable_203A380
+	.4byte 24, gSubspriteTable_203A380
+	.4byte 25, gSubspriteTable_203A380
+	.4byte 26, gSubspriteTable_203A380
+	.4byte 27, gSubspriteTable_203A380
+	.4byte 28, gSubspriteTable_203A380
+	.4byte 29, gSubspriteTable_203A380
+	.4byte 30, gSubspriteTable_203A380
+	.4byte 31, gSubspriteTable_203A380
 
 	.align 2
 gUnknown_0842F6C0:: @ 842F6C0
