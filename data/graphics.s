@@ -421,30 +421,30 @@ gBattleAnimSpriteSheet_037:: @ 8D0781C
 
 	.align 2
 	.incbin "graphics/unknown/unknown_D07B68.4bpp.lz"
-	
+
 	.align 2
 	.incbin "graphics/unknown/unknown_D07B68.gbapal.lz"
-	
+
 	.align 2
 	.incbin "graphics/unknown/unknown_D07B68_2.gbapal.lz"
-	
+
 @ old battle interface data, unused
-	
+
 	.align 2
 	.incbin "graphics/unused/obi1.4bpp.lz"
-	
+
 	.align 2
 	.incbin "graphics/unused/obi_palpak1.gbapal.lz" @ palettes 1-3
-	
+
 	.align 2
 	.incbin "graphics/unused/old_pal4.gbapal.lz" @ 4 is by itself
-	
+
 	.align 2
 	.incbin "graphics/unused/obi_palpak3.gbapal.lz" @ palettes 5-7
-	
+
 	.align 2
 	.incbin "graphics/unused/obi2.4bpp.lz"
-	
+
 	.align 2
 	.incbin "graphics/unused/old_battle_interface_tilemap.bin.lz"
 
@@ -550,7 +550,7 @@ gBattleAnimSpriteSheet_052:: @ 8D0A6D8
 
 	.align 2
 	.incbin "graphics/unused/line_sketch.4bpp.lz" @ unused
-	
+
 	.align 2
 	.incbin "graphics/unused/line_sketch.gbapal.lz"
 
@@ -961,16 +961,16 @@ gBattleAnimSpriteSheet_114:: @ 8D10F78
 	.align 2
 gBattleAnimSpritePalette_114:: @ 8D1106C
 	.incbin "graphics/battle_anims/sprites/114.gbapal.lz"
-	
+
 	.align 2
 	.incbin "graphics/unused/blue_frame.bin.lz" @  P1, P2, P3 and P4 tilemaps?
 
 	.align 2
 	.incbin "graphics/unused/redyellowgreen_frame.bin.lz"
-	
+
 	.align 2
 	.incbin "graphics/unused/color_frames.4bpp.lz"
-	
+
 	.align 2
 	.incbin "graphics/unused/color_frames.gbapal.lz"
 
@@ -1003,7 +1003,7 @@ gUnknown_08D1212C::
 	.align 2
 gUnknown_08D1214C::
 	.incbin "graphics/battle_interface/hpbar.gbapal"
-	
+
 	.align 2
 gUnknown_08D1216C:: @ 8D1216C
 	.incbin "graphics/battle_interface/hpbar.4bpp"
@@ -1020,7 +1020,7 @@ gUnknown_08D1216C:: @ 8D1216C
 	.align 2
 Tiles_D129AC:: @ 8D129AC
 	.incbin "graphics/battle_interface/ball_display.4bpp"
-	
+
 	@ extra stuff
 	.incbin "graphics/battle_interface/ball_display_unused_extra.4bpp"
 	.incbin "graphics/battle_interface/status2.4bpp" @ these three duplicate sets of graphics are for the opponent pokemon and are also for use in double battles. they use dynamic palettes so coloring them is an extreme headache and wont be done for now.
