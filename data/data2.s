@@ -11774,21 +11774,21 @@ gUnknown_0839AE28:: @ 839AE28
 gUnknown_0839B1F0:: @ 839B1F0
 	.2byte 0x0807, 0x0808, 0x0809, 0x080a, 0x080b, 0x080c, 0x080d, 0x080e
 
-Unknown_839B200:
-	.incbin "baserom.gba", 0x0039b200, 0x7
-Unknown_839B207:
-	.incbin "baserom.gba", 0x0039b207, 0x7
-Unknown_839B20E:
-	.incbin "baserom.gba", 0x0039b20e, 0x7
-Unknown_839B215:
-	.incbin "baserom.gba", 0x0039b215, 0x7
+TrainerCardColorName_Bronze:
+	.string "BRONZE$", 7
+TrainerCardColorName_Copper:
+	.string "COPPER$", 7
+TrainerCardColorName_Silver:
+	.string "SILVER$", 7
+TrainerCardColorName_Gold:
+	.string "GOLD$", 7
 
 	.align 2
-gUnknown_0839B21C:: @ 839B21C
-	.4byte Unknown_839B200
-	.4byte Unknown_839B207
-	.4byte Unknown_839B20E
-	.4byte Unknown_839B215
+gTrainerCardColorNames:: @ 839B21C
+	.4byte TrainerCardColorName_Bronze
+	.4byte TrainerCardColorName_Copper
+	.4byte TrainerCardColorName_Silver
+	.4byte TrainerCardColorName_Gold
 
 gUnknown_0839B22C:: @ 839B22C
 	.incbin "baserom.gba", 0x0039b22c, 0x1e
