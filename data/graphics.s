@@ -3641,15 +3641,15 @@ gPokedexMenu_Gfx:: @ 8E86758
 	.incbin "graphics/pokedex/menu.4bpp.lz"
 
 	.align 2
-gPokedexMenu2_Gfx:: @ E874C8
+gPokedexMenu2_Gfx:: @ 8E874C8
 	.incbin "graphics/pokedex/menu2.4bpp.lz"
 
 	.align 2
-gPokedexMenu_Pal:: @ E87AF4
+gPokedexMenu_Pal:: @ 8E87AF4
 	.incbin "graphics/pokedex/menu1.gbapal"
 
 	.align 2
-gPokedexMenu2_Pal:: @ E87B54
+gPokedexMenu2_Pal:: @ 8E87B54
 	.incbin "graphics/pokedex/menu2.gbapal"
 
 	.align 2
