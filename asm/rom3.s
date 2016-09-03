@@ -8430,7 +8430,7 @@ _0800D7E4: .4byte gBattleTerrainTiles_Building
 _0800D7E8: .4byte 0x06008000
 _0800D7EC: .4byte gBattleTerrainTilemap_Building
 _0800D7F0: .4byte 0x0600d000
-_0800D7F4: .4byte gUnknown_08E62AC0
+_0800D7F4: .4byte gBattleTerrainPalette_BattleTower
 _0800D7F8:
 	movs r0, 0x80
 	lsls r0, 5
@@ -8455,7 +8455,7 @@ _0800D824: .4byte gBattleTerrainTiles_Cave
 _0800D828: .4byte 0x06008000
 _0800D82C: .4byte gBattleTerrainTilemap_Cave
 _0800D830: .4byte 0x0600d000
-_0800D834: .4byte gUnknown_08E636E0
+_0800D834: .4byte gBattleTerrainPalette_Groudon
 _0800D838:
 	ldr r0, _0800D84C
 	ldr r1, _0800D850
@@ -8470,7 +8470,7 @@ _0800D84C: .4byte gBattleTerrainTiles_Water
 _0800D850: .4byte 0x06008000
 _0800D854: .4byte gBattleTerrainTilemap_Water
 _0800D858: .4byte 0x0600d000
-_0800D85C: .4byte gUnknown_08E636A4
+_0800D85C: .4byte gBattleTerrainPalette_Kyogre
 _0800D860:
 	movs r0, 0x8
 	ands r0, r1
@@ -8501,7 +8501,7 @@ _0800D898: .4byte gBattleTerrainTiles_Building
 _0800D89C: .4byte 0x06008000
 _0800D8A0: .4byte gBattleTerrainTilemap_Building
 _0800D8A4: .4byte 0x0600d000
-_0800D8A8: .4byte gUnknown_08E63774
+_0800D8A8: .4byte gBattleTerrainPalette_BuildingLeader
 _0800D8AC:
 	cmp r0, 0x20
 	bne _0800D8D8
@@ -8514,11 +8514,11 @@ _0800D8AC:
 	ldr r0, _0800D8D4
 	b _0800DA66
 	.align 2, 0
-_0800D8C4: .4byte gUnknown_08E62DAC
+_0800D8C4: .4byte gBattleTerrainTiles_Stadium
 _0800D8C8: .4byte 0x06008000
-_0800D8CC: .4byte gUnknown_08E633B4
+_0800D8CC: .4byte gBattleTerrainTilemap_Stadium
 _0800D8D0: .4byte 0x0600d000
-_0800D8D4: .4byte gUnknown_08E639A8
+_0800D8D4: .4byte gBattleTerrainPalette_StadiumSteven
 _0800D8D8:
 	bl sav1_map_get_battletype
 	lsls r0, 24
@@ -8592,7 +8592,7 @@ _0800D978: .4byte gBattleTerrainTiles_Building
 _0800D97C: .4byte 0x06008000
 _0800D980: .4byte gBattleTerrainTilemap_Building
 _0800D984: .4byte 0x0600d000
-_0800D988: .4byte gUnknown_08E63738
+_0800D988: .4byte gBattleTerrainPalette_BuildingGym
 _0800D98C:
 	ldr r0, _0800D9A0
 	ldr r1, _0800D9A4
@@ -8603,11 +8603,11 @@ _0800D98C:
 	ldr r0, _0800D9B0
 	b _0800DA66
 	.align 2, 0
-_0800D9A0: .4byte gUnknown_08E62DAC
+_0800D9A0: .4byte gBattleTerrainTiles_Stadium
 _0800D9A4: .4byte 0x06008000
-_0800D9A8: .4byte gUnknown_08E633B4
+_0800D9A8: .4byte gBattleTerrainTilemap_Stadium
 _0800D9AC: .4byte 0x0600d000
-_0800D9B0: .4byte gUnknown_08E63810
+_0800D9B0: .4byte gBattleTerrainPalette_StadiumMagma
 _0800D9B4:
 	ldr r0, _0800D9C8
 	ldr r1, _0800D9CC
@@ -8618,11 +8618,11 @@ _0800D9B4:
 	ldr r0, _0800D9D8
 	b _0800DA66
 	.align 2, 0
-_0800D9C8: .4byte gUnknown_08E62DAC
+_0800D9C8: .4byte gBattleTerrainTiles_Stadium
 _0800D9CC: .4byte 0x06008000
-_0800D9D0: .4byte gUnknown_08E633B4
+_0800D9D0: .4byte gBattleTerrainTilemap_Stadium
 _0800D9D4: .4byte 0x0600d000
-_0800D9D8: .4byte gUnknown_08E637B0
+_0800D9D8: .4byte gBattleTerrainPalette_StadiumAqua
 _0800D9DC:
 	ldr r0, _0800D9F0
 	ldr r1, _0800D9F4
@@ -8633,11 +8633,11 @@ _0800D9DC:
 	ldr r0, _0800DA00
 	b _0800DA66
 	.align 2, 0
-_0800D9F0: .4byte gUnknown_08E62DAC
+_0800D9F0: .4byte gBattleTerrainTiles_Stadium
 _0800D9F4: .4byte 0x06008000
-_0800D9F8: .4byte gUnknown_08E633B4
+_0800D9F8: .4byte gBattleTerrainTilemap_Stadium
 _0800D9FC: .4byte 0x0600d000
-_0800DA00: .4byte gUnknown_08E6387C
+_0800DA00: .4byte gBattleTerrainPalette_StadiumSidney
 _0800DA04:
 	ldr r0, _0800DA18
 	ldr r1, _0800DA1C
@@ -8648,11 +8648,11 @@ _0800DA04:
 	ldr r0, _0800DA28
 	b _0800DA66
 	.align 2, 0
-_0800DA18: .4byte gUnknown_08E62DAC
+_0800DA18: .4byte gBattleTerrainTiles_Stadium
 _0800DA1C: .4byte 0x06008000
-_0800DA20: .4byte gUnknown_08E633B4
+_0800DA20: .4byte gBattleTerrainTilemap_Stadium
 _0800DA24: .4byte 0x0600d000
-_0800DA28: .4byte gUnknown_08E638CC
+_0800DA28: .4byte gBattleTerrainPalette_StadiumPhoebe
 _0800DA2C:
 	ldr r0, _0800DA40
 	ldr r1, _0800DA44
@@ -8663,11 +8663,11 @@ _0800DA2C:
 	ldr r0, _0800DA50
 	b _0800DA66
 	.align 2, 0
-_0800DA40: .4byte gUnknown_08E62DAC
+_0800DA40: .4byte gBattleTerrainTiles_Stadium
 _0800DA44: .4byte 0x06008000
-_0800DA48: .4byte gUnknown_08E633B4
+_0800DA48: .4byte gBattleTerrainTilemap_Stadium
 _0800DA4C: .4byte 0x0600d000
-_0800DA50: .4byte gUnknown_08E63914
+_0800DA50: .4byte gBattleTerrainPalette_StadiumGlacia
 _0800DA54:
 	ldr r0, _0800DA70
 	ldr r1, _0800DA74
@@ -8682,11 +8682,11 @@ _0800DA66:
 	bl LoadCompressedPalette
 	b _0800DA9E
 	.align 2, 0
-_0800DA70: .4byte gUnknown_08E62DAC
+_0800DA70: .4byte gBattleTerrainTiles_Stadium
 _0800DA74: .4byte 0x06008000
-_0800DA78: .4byte gUnknown_08E633B4
+_0800DA78: .4byte gBattleTerrainTilemap_Stadium
 _0800DA7C: .4byte 0x0600d000
-_0800DA80: .4byte gUnknown_08E63958
+_0800DA80: .4byte gBattleTerrainPalette_StadiumDrake
 _0800DA84:
 	ldr r0, _0800DAA4
 	ldr r1, _0800DAA8
@@ -8707,7 +8707,7 @@ _0800DAA4: .4byte gBattleTerrainTiles_Building
 _0800DAA8: .4byte 0x06008000
 _0800DAAC: .4byte gBattleTerrainTilemap_Building
 _0800DAB0: .4byte 0x0600d000
-_0800DAB4: .4byte gUnknown_08E62AC0
+_0800DAB4: .4byte gBattleTerrainPalette_BattleTower
 	thumb_func_end sub_800D7B8
 
 	thumb_func_start sub_800DAB8
@@ -9673,14 +9673,14 @@ sub_800E23C: @ 800E23C
 	b _0800E3FC
 	.align 2, 0
 _0800E29C: .4byte 0x020239f8
-_0800E2A0: .4byte gUnknown_08E5DA10
+_0800E2A0: .4byte gVersusFrameGfx
 _0800E2A4: .4byte 0x06004000
-_0800E2A8: .4byte gUnknown_08E5DAF8
+_0800E2A8: .4byte gVersusFrameTilemap
 _0800E2AC: .4byte 0x0600e000
 _0800E2B0: .4byte 0x0600f000
 _0800E2B4: .4byte gUnknown_08E5DC2C
 _0800E2B8: .4byte 0x06010000
-_0800E2BC: .4byte gUnknown_08E5DC04
+_0800E2BC: .4byte gVersusFramePal
 _0800E2C0: .4byte REG_BG1CNT
 _0800E2C4: .4byte 0x00005c04
 _0800E2C8: .4byte REG_WININ
@@ -9926,7 +9926,7 @@ _0800E4C0:
 	.align 2, 0
 _0800E4E4: .4byte gTrainers
 _0800E4E8: .4byte 0x0202ff5e
-_0800E4EC: .4byte gUnknown_08E62DAC
+_0800E4EC: .4byte gBattleTerrainTiles_Stadium
 _0800E4F0:
 	bl sav1_map_get_battletype
 	lsls r0, 24
@@ -9970,32 +9970,32 @@ _0800E54C:
 	ldr r0, _0800E550
 	b _0800E57E
 	.align 2, 0
-_0800E550: .4byte gUnknown_08E62DAC
+_0800E550: .4byte gBattleTerrainTiles_Stadium
 _0800E554:
 	ldr r0, _0800E558
 	b _0800E57E
 	.align 2, 0
-_0800E558: .4byte gUnknown_08E62DAC
+_0800E558: .4byte gBattleTerrainTiles_Stadium
 _0800E55C:
 	ldr r0, _0800E560
 	b _0800E57E
 	.align 2, 0
-_0800E560: .4byte gUnknown_08E62DAC
+_0800E560: .4byte gBattleTerrainTiles_Stadium
 _0800E564:
 	ldr r0, _0800E568
 	b _0800E57E
 	.align 2, 0
-_0800E568: .4byte gUnknown_08E62DAC
+_0800E568: .4byte gBattleTerrainTiles_Stadium
 _0800E56C:
 	ldr r0, _0800E570
 	b _0800E57E
 	.align 2, 0
-_0800E570: .4byte gUnknown_08E62DAC
+_0800E570: .4byte gBattleTerrainTiles_Stadium
 _0800E574:
 	ldr r0, _0800E578
 	b _0800E57E
 	.align 2, 0
-_0800E578: .4byte gUnknown_08E62DAC
+_0800E578: .4byte gBattleTerrainTiles_Stadium
 _0800E57C:
 	ldr r0, _0800E588
 _0800E57E:
@@ -10057,7 +10057,7 @@ _0800E5CC:
 	.align 2, 0
 _0800E5F0: .4byte gTrainers
 _0800E5F4: .4byte 0x0202ff5e
-_0800E5F8: .4byte gUnknown_08E633B4
+_0800E5F8: .4byte gBattleTerrainTilemap_Stadium
 _0800E5FC:
 	bl sav1_map_get_battletype
 	lsls r0, 24
@@ -10102,32 +10102,32 @@ _0800E658:
 	ldr r0, _0800E65C
 	b _0800E68A
 	.align 2, 0
-_0800E65C: .4byte gUnknown_08E633B4
+_0800E65C: .4byte gBattleTerrainTilemap_Stadium
 _0800E660:
 	ldr r0, _0800E664
 	b _0800E68A
 	.align 2, 0
-_0800E664: .4byte gUnknown_08E633B4
+_0800E664: .4byte gBattleTerrainTilemap_Stadium
 _0800E668:
 	ldr r0, _0800E66C
 	b _0800E68A
 	.align 2, 0
-_0800E66C: .4byte gUnknown_08E633B4
+_0800E66C: .4byte gBattleTerrainTilemap_Stadium
 _0800E670:
 	ldr r0, _0800E674
 	b _0800E68A
 	.align 2, 0
-_0800E674: .4byte gUnknown_08E633B4
+_0800E674: .4byte gBattleTerrainTilemap_Stadium
 _0800E678:
 	ldr r0, _0800E67C
 	b _0800E68A
 	.align 2, 0
-_0800E67C: .4byte gUnknown_08E633B4
+_0800E67C: .4byte gBattleTerrainTilemap_Stadium
 _0800E680:
 	ldr r0, _0800E684
 	b _0800E68A
 	.align 2, 0
-_0800E684: .4byte gUnknown_08E633B4
+_0800E684: .4byte gBattleTerrainTilemap_Stadium
 _0800E688:
 	ldr r0, _0800E694
 _0800E68A:
@@ -10161,12 +10161,12 @@ _0800E6AA:
 _0800E6C0: .4byte 0x020239f8
 _0800E6C4: .4byte 0x00000902
 _0800E6C8: .4byte gGameVersion
-_0800E6CC: .4byte gUnknown_08E636E0
+_0800E6CC: .4byte gBattleTerrainPalette_Groudon
 _0800E6D0:
 	ldr r0, _0800E6D4
 	b _0800E7A6
 	.align 2, 0
-_0800E6D4: .4byte gUnknown_08E636A4
+_0800E6D4: .4byte gBattleTerrainPalette_Kyogre
 _0800E6D8:
 	movs r0, 0x8
 	ands r0, r1
@@ -10187,14 +10187,14 @@ _0800E6D8:
 	.align 2, 0
 _0800E6F8: .4byte gTrainers
 _0800E6FC: .4byte 0x0202ff5e
-_0800E700: .4byte gUnknown_08E63774
+_0800E700: .4byte gBattleTerrainPalette_BuildingLeader
 _0800E704:
 	cmp r0, 0x20
 	bne _0800E710
 	ldr r0, _0800E70C
 	b _0800E7A6
 	.align 2, 0
-_0800E70C: .4byte gUnknown_08E639A8
+_0800E70C: .4byte gBattleTerrainPalette_StadiumSteven
 _0800E710:
 	bl sav1_map_get_battletype
 	lsls r0, 24
@@ -10237,37 +10237,37 @@ _0800E76C:
 	ldr r0, _0800E770
 	b _0800E7A6
 	.align 2, 0
-_0800E770: .4byte gUnknown_08E63738
+_0800E770: .4byte gBattleTerrainPalette_BuildingGym
 _0800E774:
 	ldr r0, _0800E778
 	b _0800E7A6
 	.align 2, 0
-_0800E778: .4byte gUnknown_08E63810
+_0800E778: .4byte gBattleTerrainPalette_StadiumMagma
 _0800E77C:
 	ldr r0, _0800E780
 	b _0800E7A6
 	.align 2, 0
-_0800E780: .4byte gUnknown_08E637B0
+_0800E780: .4byte gBattleTerrainPalette_StadiumAqua
 _0800E784:
 	ldr r0, _0800E788
 	b _0800E7A6
 	.align 2, 0
-_0800E788: .4byte gUnknown_08E6387C
+_0800E788: .4byte gBattleTerrainPalette_StadiumSidney
 _0800E78C:
 	ldr r0, _0800E790
 	b _0800E7A6
 	.align 2, 0
-_0800E790: .4byte gUnknown_08E638CC
+_0800E790: .4byte gBattleTerrainPalette_StadiumPhoebe
 _0800E794:
 	ldr r0, _0800E798
 	b _0800E7A6
 	.align 2, 0
-_0800E798: .4byte gUnknown_08E63914
+_0800E798: .4byte gBattleTerrainPalette_StadiumGlacia
 _0800E79C:
 	ldr r0, _0800E7A0
 	b _0800E7A6
 	.align 2, 0
-_0800E7A0: .4byte gUnknown_08E63958
+_0800E7A0: .4byte gBattleTerrainPalette_StadiumDrake
 _0800E7A4:
 	ldr r0, _0800E7B0
 _0800E7A6:
@@ -10276,7 +10276,7 @@ _0800E7A6:
 	bl LoadCompressedPalette
 	b _0800E7BC
 	.align 2, 0
-_0800E7B0: .4byte gUnknown_08E62AC0
+_0800E7B0: .4byte gBattleTerrainPalette_BattleTower
 _0800E7B4:
 	bl sub_800D74C
 	b _0800E7BC
@@ -67969,7 +67969,7 @@ _0802BB8C: .4byte gBattleTerrainTiles_Building
 _0802BB90: .4byte 0x06008000
 _0802BB94: .4byte gBattleTerrainTilemap_Building
 _0802BB98: .4byte 0x0600d000
-_0802BB9C: .4byte gUnknown_08E62AC0
+_0802BB9C: .4byte gBattleTerrainPalette_BattleTower
 _0802BBA0: .4byte REG_BG3CNT
 _0802BBA4: .4byte 0x00005a0b
 _0802BBA8: .4byte 0x030041b0
@@ -80675,7 +80675,7 @@ _08032376:
 	ldr r0, _08032384
 	b _08032396
 	.align 2, 0
-_08032384: .4byte gUnknown_08D2D4CC
+_08032384: .4byte gSubstituteDollTilemap
 _08032388:
 	adds r0, r5, 0
 	bl battle_side_get_owner
@@ -80691,7 +80691,7 @@ _08032396:
 	bl LZDecompressVram
 	b _080323BA
 	.align 2, 0
-_080323A4: .4byte gUnknown_08D2D28C
+_080323A4: .4byte gSubstituteDollGfx
 _080323A8: .4byte gUnknown_081FAF4C
 _080323AC:
 	ldr r0, _080323F4
@@ -80731,9 +80731,9 @@ _080323D4:
 	bl LoadCompressedPalette
 	b _08032456
 	.align 2, 0
-_080323F4: .4byte gUnknown_08D2D4CC
+_080323F4: .4byte gSubstituteDollTilemap
 _080323F8: .4byte gUnknown_081FAF4C
-_080323FC: .4byte gUnknown_08D2D268
+_080323FC: .4byte gSubstituteDollPal
 _08032400: .4byte 0x040000d4
 _08032404: .4byte 0x84000200
 _08032408:

@@ -5,10 +5,19 @@ PSSGFXDIR := graphics/pokemon_storage
 MISCGFXDIR := graphics/misc
 PKNAVGFXDIR := graphics/pokenav
 UNKNOWNGFXDIR := graphics/unknown
+UNUSEDGFXDIR := graphics/unused
 REELGFXDIR := graphics/slot_machine
 ROULGFXDIR := graphics/roulette
 BTLANMSPRGFXDIR := graphics/battle_anims/sprites
 PICFRAMEGFXDIR := graphics/picture_frame
+CONTESTGFXDIR := graphics/contest
+MASKSGFXDIR := graphics/battle_anims/masks
+BATTRANSGFXDIR := graphics/battle_transitions
+TYPESGFXDIR := graphics/types
+TITLEGFXDIR := graphics/title_screen
+
+types := normal fight flying poison ground rock bug ghost steel mystery fire water grass electric psychic ice dragon dark
+contest_types := cool beauty cute smart tough
 
 $(MENUGFXDIR)/menu.gbapal: $(MENUGFXDIR)/menu_0.gbapal $(MENUGFXDIR)/menu_1.gbapal
 	@cat $(MENUGFXDIR)/menu_0.gbapal $(MENUGFXDIR)/menu_1.gbapal >$@
@@ -163,5 +172,80 @@ $(BTLANMSPRGFXDIR)/159.4bpp: $(BTLANMSPRGFXDIR)/159_0.4bpp $(BTLANMSPRGFXDIR)/15
 $(PICFRAMEGFXDIR)/frame5.4bpp: $(PICFRAMEGFXDIR)/frame5.png
 	$(GFX) $< $@ -num_tiles 86
 
-$(MISCGFXDIR)/nextturn.4bpp: $(MISCGFXDIR)/nextturn.png
+$(CONTESTGFXDIR)/nextturn.4bpp: $(CONTESTGFXDIR)/nextturn.png
 	$(GFX) $< $@ -num_tiles 8
+
+$(UNUSEDGFXDIR)/obi_palpak1.gbapal: $(UNUSEDGFXDIR)/old_pal1.gbapal $(UNUSEDGFXDIR)/old_pal2.gbapal $(UNUSEDGFXDIR)/old_pal3.gbapal
+	@cat $(UNUSEDGFXDIR)/old_pal1.gbapal $(UNUSEDGFXDIR)/old_pal2.gbapal $(UNUSEDGFXDIR)/old_pal3.gbapal >$@
+
+$(UNUSEDGFXDIR)/obi_palpak3.gbapal: $(UNUSEDGFXDIR)/old_pal5.gbapal $(UNUSEDGFXDIR)/old_pal6.gbapal $(UNUSEDGFXDIR)/old_pal7.gbapal
+	@cat $(UNUSEDGFXDIR)/old_pal5.gbapal $(UNUSEDGFXDIR)/old_pal6.gbapal $(UNUSEDGFXDIR)/old_pal7.gbapal >$@
+
+$(UNUSEDGFXDIR)/obi1.4bpp: $(UNUSEDGFXDIR)/old_bulbasaur.4bpp $(UNUSEDGFXDIR)/old_charizard.4bpp
+	@cat $(UNUSEDGFXDIR)/old_bulbasaur.4bpp $(UNUSEDGFXDIR)/old_charizard.4bpp >$@
+
+$(UNUSEDGFXDIR)/obi2.4bpp: $(UNUSEDGFXDIR)/old_bulbasaur2.4bpp $(UNUSEDGFXDIR)/old_battle_interface_1.4bpp $(UNUSEDGFXDIR)/old_battle_interface_2.4bpp $(UNUSEDGFXDIR)/old_battle_interface_3.4bpp
+	@cat $(UNUSEDGFXDIR)/old_bulbasaur2.4bpp $(UNUSEDGFXDIR)/old_battle_interface_1.4bpp $(UNUSEDGFXDIR)/old_battle_interface_2.4bpp $(UNUSEDGFXDIR)/old_battle_interface_3.4bpp >$@
+
+$(MENUGFXDIR)/hp_numbers.4bpp: $(MENUGFXDIR)/hpbar_anim.4bpp $(MENUGFXDIR)/numbers1.4bpp $(MENUGFXDIR)/numbers2.4bpp
+	@cat $(MENUGFXDIR)/hpbar_anim.4bpp $(MENUGFXDIR)/numbers1.4bpp $(MENUGFXDIR)/numbers2.4bpp >$@
+
+$(UNUSEDGFXDIR)/redyellowgreen_frame.bin: $(UNUSEDGFXDIR)/red_frame.bin $(UNUSEDGFXDIR)/yellow_frame.bin $(UNUSEDGFXDIR)/green_frame.bin $(UNUSEDGFXDIR)/blank_frame.bin
+	@cat $(UNUSEDGFXDIR)/red_frame.bin $(UNUSEDGFXDIR)/yellow_frame.bin $(UNUSEDGFXDIR)/green_frame.bin $(UNUSEDGFXDIR)/blank_frame.bin >$@
+
+$(UNUSEDGFXDIR)/color_frames.4bpp: $(UNUSEDGFXDIR)/color_frames.png
+	$(GFX) $< $@ -num_tiles 353
+
+$(UNUSEDGFXDIR)/old_contest.4bpp: $(UNUSEDGFXDIR)/old_contest_frame_1.4bpp $(UNUSEDGFXDIR)/old_contest_floor.4bpp $(UNUSEDGFXDIR)/old_contest_frame_2.4bpp $(UNUSEDGFXDIR)/old_contest_symbols.4bpp $(UNUSEDGFXDIR)/old_contest_meter.4bpp $(UNUSEDGFXDIR)/old_contest_classes.4bpp $(UNUSEDGFXDIR)/old_contest_numbers.4bpp
+	@cat $(UNUSEDGFXDIR)/old_contest_frame_1.4bpp $(UNUSEDGFXDIR)/old_contest_floor.4bpp $(UNUSEDGFXDIR)/old_contest_frame_2.4bpp $(UNUSEDGFXDIR)/old_contest_symbols.4bpp $(UNUSEDGFXDIR)/old_contest_meter.4bpp $(UNUSEDGFXDIR)/old_contest_classes.4bpp $(UNUSEDGFXDIR)/old_contest_numbers.4bpp >$@
+
+$(UNUSEDGFXDIR)/old_contest_2.4bpp: $(UNUSEDGFXDIR)/old_contest_2_1.4bpp $(UNUSEDGFXDIR)/old_contest_2_2.4bpp
+	@cat $(UNUSEDGFXDIR)/old_contest_2_1.4bpp $(UNUSEDGFXDIR)/old_contest_2_2.4bpp >$@
+
+$(MASKSGFXDIR)/unknown_D2EDFC.4bpp: $(MASKSGFXDIR)/unknown_D2EDFC.png
+	$(GFX) $< $@ -num_tiles 14
+
+$(BATTRANSGFXDIR)/vs_frame.4bpp: $(BATTRANSGFXDIR)/vs_frame.png
+	$(GFX) $< $@ -num_tiles 16
+
+$(MENUGFXDIR)/party_menu_misc.4bpp: $(MENUGFXDIR)/party_menu_misc.png
+	$(GFX) $< $@ -num_tiles 116
+
+$(TYPESGFXDIR)/move_types.4bpp: $(types:%=$(TYPESGFXDIR)/%.4bpp) $(contest_types:%=$(TYPESGFXDIR)/contest_%.4bpp)
+	@cat $^ >$@
+
+$(TYPESGFXDIR)/move_types.gbapal: $(TYPESGFXDIR)/move_types_1.gbapal $(TYPESGFXDIR)/move_types_2.gbapal $(TYPESGFXDIR)/move_types_3.gbapal
+	@cat $(TYPESGFXDIR)/move_types_1.gbapal $(TYPESGFXDIR)/move_types_2.gbapal $(TYPESGFXDIR)/move_types_3.gbapal >$@
+
+$(MENUGFXDIR)/status_screen.4bpp: $(MENUGFXDIR)/status_screen.png
+	$(GFX) $< $@ -num_tiles 217
+
+$(PKNAVGFXDIR)/menu_options.4bpp: $(PKNAVGFXDIR)/menu_hoennmap.4bpp $(PKNAVGFXDIR)/menu_condition.4bpp $(PKNAVGFXDIR)/menu_eyes.4bpp $(PKNAVGFXDIR)/menu_ribbons.4bpp $(PKNAVGFXDIR)/menu_off.4bpp
+	@cat $(PKNAVGFXDIR)/menu_hoennmap.4bpp $(PKNAVGFXDIR)/menu_condition.4bpp $(PKNAVGFXDIR)/menu_eyes.4bpp $(PKNAVGFXDIR)/menu_ribbons.4bpp $(PKNAVGFXDIR)/menu_off.4bpp >$@
+
+$(PKNAVGFXDIR)/condition_menu_misc.4bpp: $(PKNAVGFXDIR)/condition_menu_misc.png
+	$(GFX) $< $@ -num_tiles 41
+
+$(PKNAVGFXDIR)/condition_search.4bpp: $(PKNAVGFXDIR)/condition_search_cool.4bpp $(PKNAVGFXDIR)/condition_search_beauty.4bpp $(PKNAVGFXDIR)/condition_search_cute.4bpp $(PKNAVGFXDIR)/condition_search_smart.4bpp $(PKNAVGFXDIR)/condition_search_tough.4bpp $(PKNAVGFXDIR)/condition_search_cancel.4bpp
+	@cat $(PKNAVGFXDIR)/condition_search_cool.4bpp $(PKNAVGFXDIR)/condition_search_beauty.4bpp $(PKNAVGFXDIR)/condition_search_cute.4bpp $(PKNAVGFXDIR)/condition_search_smart.4bpp $(PKNAVGFXDIR)/condition_search_tough.4bpp $(PKNAVGFXDIR)/condition_search_cancel.4bpp >$@
+
+$(PSSGFXDIR)/header.4bpp: $(PSSGFXDIR)/header.png
+	$(GFX) $< $@ -num_tiles 47
+
+$(PSSGFXDIR)/misc1.4bpp: $(PSSGFXDIR)/misc1.png
+	$(GFX) $< $@ -num_tiles 91
+
+$(MISCGFXDIR)/hof.4bpp: $(MISCGFXDIR)/hof.png
+	$(GFX) $< $@ -num_tiles 37
+
+$(MENUGFXDIR)/wordgroup_frame.4bpp: $(MENUGFXDIR)/wordgroup_frame.png
+	$(GFX) $< $@ -num_tiles 65
+
+$(INTROGFXDIR)/copyright.4bpp: $(INTROGFXDIR)/copyright.png
+	$(GFX) $< $@ -num_tiles 43
+
+$(TITLEGFXDIR)/press_start.4bpp: $(TITLEGFXDIR)/press_start.png
+	$(GFX) $< $@ -num_tiles 41
+
+$(MISCGFXDIR)/end_copyright.4bpp: $(MISCGFXDIR)/end_copyright.png
+	$(GFX) $< $@ -num_tiles 90

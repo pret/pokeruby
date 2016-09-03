@@ -1705,7 +1705,7 @@ gSpriteTemplate_81FAF0C:: @ 81FAF0C
 
 	.align 2
 gUnknown_081FAF24:: @ 81FAF24
-	obj_tiles gUnknown_08E6A728, 128, 0xD759
+	obj_tiles gEnemyMonShadow_Gfx, 128, 0xD759
 
 	.align 2
 gOamData_81FAF2C:: @ 81FAF2C
@@ -2358,8 +2358,8 @@ gSubspriteTables_820A6EC:: @ 820A6EC
 
 	.align 2
 gUnknown_0820A754:: @ 820A754
-	obj_tiles gUnknown_08E6A758, 512, 0xd70c
-	obj_tiles gUnknown_08E6A758, 512, 0xd70d
+	obj_tiles gBattleGfx_BallStatusBar, 512, 0xd70c
+	obj_tiles gBattleGfx_BallStatusBar, 512, 0xd70d
 
 	.align 2
 gUnknown_0820A764:: @ 820A764
@@ -7858,46 +7858,26 @@ gUnknown_083761EC:: @ 83761EC
 
 	.align 2
 gUnknown_083761F0:: @ 83761F0
-	.4byte gUnknown_08E9ADDC
-	.4byte gUnknown_08E9AEFC
-	.4byte gUnknown_08E9AF1C
-	.4byte gUnknown_08E9B03C
-	.4byte gUnknown_08E9B05C
-	.4byte gUnknown_08E9B17C
-	.4byte gUnknown_08E9B19C
-	.4byte gUnknown_08E9B2BC
-	.4byte gUnknown_08E9B2DC
-	.4byte gUnknown_08E9B3FC
-	.4byte gUnknown_08E9B41C
-	.4byte gUnknown_08E9B53C
-	.4byte gUnknown_08E9B55C
-	.4byte gUnknown_08E9B67C
-	.4byte gUnknown_08E9B69C
-	.4byte gUnknown_08E9B7BC
-	.4byte gUnknown_08E9B7DC
-	.4byte gUnknown_08E9B8FC
-	.4byte gUnknown_08E9B91C
-	.4byte gUnknown_08E9BA3C
-	.4byte gUnknown_08E9BA5C
-	.4byte gUnknown_08E9BB7C
-	.4byte gUnknown_08E9BB9C
-	.4byte gUnknown_08E9BCBC
-	.4byte gUnknown_08E9BCDC
-	.4byte gUnknown_08E9BDFC
-	.4byte gUnknown_08E9BE1C
-	.4byte gUnknown_08E9BF3C
-	.4byte gUnknown_08E9BF5C
-	.4byte gUnknown_08E9C07C
-	.4byte gUnknown_08E9C09C
-	.4byte gUnknown_08E9C1BC
-	.4byte gUnknown_08E9C1DC
-	.4byte gUnknown_08E9C2FC
-	.4byte gUnknown_08E9C31C
-	.4byte gUnknown_08E9C43C
-	.4byte gUnknown_08E9C45C
-	.4byte gUnknown_08E9C57C
-	.4byte gUnknown_08E9C59C
-	.4byte gUnknown_08E9C6BC
+	.4byte gTextWindowFrame1_Gfx, gTextWindowFrame1_Pal
+	.4byte gTextWindowFrame2_Gfx, gTextWindowFrame2_Pal
+	.4byte gTextWindowFrame3_Gfx, gTextWindowFrame3_Pal
+	.4byte gTextWindowFrame4_Gfx, gTextWindowFrame4_Pal
+	.4byte gTextWindowFrame5_Gfx, gTextWindowFrame5_Pal
+	.4byte gTextWindowFrame6_Gfx, gTextWindowFrame6_Pal
+	.4byte gTextWindowFrame7_Gfx, gTextWindowFrame7_Pal
+	.4byte gTextWindowFrame8_Gfx, gTextWindowFrame8_Pal
+	.4byte gTextWindowFrame9_Gfx, gTextWindowFrame9_Pal
+	.4byte gTextWindowFrame10_Gfx, gTextWindowFrame10_Pal
+	.4byte gTextWindowFrame11_Gfx, gTextWindowFrame11_Pal
+	.4byte gTextWindowFrame12_Gfx, gTextWindowFrame12_Pal
+	.4byte gTextWindowFrame13_Gfx, gTextWindowFrame13_Pal
+	.4byte gTextWindowFrame14_Gfx, gTextWindowFrame14_Pal
+	.4byte gTextWindowFrame15_Gfx, gTextWindowFrame15_Pal
+	.4byte gTextWindowFrame16_Gfx, gTextWindowFrame16_Pal
+	.4byte gTextWindowFrame17_Gfx, gTextWindowFrame17_Pal
+	.4byte gTextWindowFrame18_Gfx, gTextWindowFrame18_Pal
+	.4byte gTextWindowFrame19_Gfx, gTextWindowFrame19_Pal
+	.4byte gTextWindowFrame20_Gfx, gTextWindowFrame20_Pal
 
 gUnknown_08376290:: @ 8376290
 	.incbin "baserom.gba", 0x00376290, 0x48
@@ -11227,7 +11207,7 @@ gSpriteTemplate_8393F74:: @ 8393F74
 
 	.align 2
 gUnknown_08393F8C:: @ 8393F8C
-	obj_tiles Tiles_E9D644, 0x520, 1001
+	obj_tiles gTitleScreenPressStart_Gfx, 0x520, 1001
 	null_obj_tiles
 
 	.align 2
@@ -11291,7 +11271,7 @@ gUnknown_08396FA8:: @ 8396FA8
 	.4byte DroughtPaletteData_3
 	.4byte DroughtPaletteData_4
 	.4byte DroughtPaletteData_5
-
+	@.4byte unk_20000000
 	.incbin "baserom.gba", 0x00396fc0, 0x4 @ pointer to unk_2000000?
 
 	.align 2
@@ -12641,12 +12621,12 @@ gSpriteTemplate_83A05B4:: @ 83A05B4
 
 	.align 2
 gUnknown_083A05CC:: @ 83A05CC
-	obj_tiles gUnknown_08E874C8, 0x1F00, 0x1000
+	obj_tiles gPokedexMenu2_Gfx, 0x1F00, 0x1000
 	null_obj_tiles
 
 	.align 2
 gUnknown_083A05DC:: @ 83A05DC
-	obj_pal gUnknown_08E87AF4, 0x1000
+	obj_pal gPokedexMenu_Pal, 0x1000
 	null_obj_pal
 
 gUnknown_083A05EC:: @ 83A05EC
@@ -12944,11 +12924,11 @@ gUnknown_083B5EF4:: @ 83B5EF4
 
 	.align 2
 gUnknown_083B5EF8:: @ 83B5EF8
-	.4byte gUnknown_08E8C8E0
-	.4byte gUnknown_08E8C940
-	.4byte gUnknown_08E8C9A0
-	.4byte gUnknown_08E8CA00
-	.4byte gUnknown_08E8CA60
+	.4byte gMenuTrainerCard0Star_Pal
+	.4byte gMenuTrainerCard1Star_Pal
+	.4byte gMenuTrainerCard2Star_Pal
+	.4byte gMenuTrainerCard3Star_Pal
+	.4byte gMenuTrainerCard4Star_Pal
 
 gUnknown_083B5F0C:: @ 83B5F0C
 	.incbin "baserom.gba", 0x003b5f0c, 0x20
@@ -13986,7 +13966,7 @@ gSpriteAnimTable_83C115C:: @ 83C115C
 
 	.align 2
 gUnknown_083C11B8:: @ 83C11B8
-	obj_tiles gUnknown_08E71D10, 5888, 0x7532
+	obj_tiles gMoveTypes_Gfx, 5888, 0x7532
 
 	.align 2
 gSpriteTemplate_83C11C0:: @ 83C11C0
@@ -14478,11 +14458,11 @@ gSpriteTemplate_83C1E04:: @ 83C1E04
 
 	.align 2
 gUnknown_083C1F74:: @ 83C1F74
-	obj_tiles gUnknown_08E78BB4, 2048, 0x2710
+	obj_tiles gBerryCheckCircle_Gfx, 2048, 0x2710
 
 	.align 2
 gUnknown_083C1F7C:: @ 83C1F7C
-	obj_pal gUnknown_08E7883C, 0x2710
+	obj_pal gBerryCheck_Pal, 0x2710
 
 	.align 2
 gOamData_83C1F84:: @ 83C1F84
@@ -18636,8 +18616,8 @@ gBattleAnimSpriteTemplate_83D7D74:: @ 83D7D74
 	spr_template 10244, 10244, gOamData_837E13C, gDummySpriteAnimTable, NULL, gSpriteAffineAnimTable_83D7D6C, sub_80D3014
 
 	.align 2
-	.incbin "graphics/unused/unknown_3D7D8C.4bpp"
-	.incbin "graphics/unused/unknown_3D810C.bin"
+	.incbin "graphics/unknown/unknown_3D7D8C.4bpp"
+	.incbin "graphics/unknown/unknown_3D810C.bin"
 
 	.align 2
 gSpriteAnim_83D910C:: @ 83D910C
@@ -21515,11 +21495,11 @@ gSpriteTemplate_83DBD48:: @ 83DBD48
 
 	.align 2
 gUnknown_083DBD60:: @ 83DBD60
-	obj_tiles gMenuWordGroup_Gfx, 4096, 0x0007
+	obj_tiles gMenuWordGroupIndicator_Gfx, 4096, 0x0007
 
 	.align 2
 gUnknown_083DBD68:: @ 83DBD68
-	obj_pal gMenuWordGroup_Pal, 0x0005
+	obj_pal gMenuWordGroupIndicator_Pal, 0x0005
 
 	.align 2
 gOamData_83DBD70:: @ 83DBD70
@@ -21651,8 +21631,9 @@ gUnknown_083E0254:: @ 83E0254
 gUnknown_083E0274:: @ 83E0274
 	.incbin "baserom.gba", 0x003e0274, 0x20
 
-gUnknown_083E0294:: @ 83E0294
-	.incbin "baserom.gba", 0x003e0294, 0x20
+	.align 2
+gPokenavConditionSearch2_Pal:: @ 83E0294
+	.incbin "graphics/pokenav/condition_search2.gbapal"
 
 gUnknown_083E02B4:: @ 83E02B4
 	.incbin "baserom.gba", 0x003e02b4, 0x60
@@ -21660,9 +21641,11 @@ gUnknown_083E02B4:: @ 83E02B4
 gUnknown_083E0314:: @ 83E0314
 	.incbin "baserom.gba", 0x003e0314, 0x20
 
+	.align 2
 gUnknown_083E0334:: @ 83E0334
 	.incbin "graphics/pokenav/trainereyes_misc_pal.bin" @ the original bytes have an "FF FF" instance which is incompatible with gbagfx to produce the bytes needed to match the original ROM, so I am forced to include it as a .bin until the lowest bit is properly handled or a better workaround is produced
 
+	.align 2
 gUnknown_083E0354:: @ 83E0354
 	.incbin "graphics/pokenav/trainereyes_misc.4bpp.lz"
 
@@ -21837,31 +21820,42 @@ gUnknown_083E3270:: @ 83E3270
 	.4byte sub_80F0A24
 	.4byte sub_80F0A74
 
+	.align 2
 gPokenavIconPalette::
 	.incbin "graphics/pokenav/icon.gbapal"
 
+	.align 2
 gUnknown_083E329C:: @ 83E329C
 	.incbin "graphics/pokenav/icon.4bpp.lz"
-gPokenavContestPokeballTiles::
-	.incbin "graphics/pokenav/contest_pokeball.4bpp"
+
+	.align 2
+gPokenavPokeballTiles::
+	.incbin "graphics/pokenav/pokeball.4bpp"
+
+	.align 2
 gUnknown_083E3780: @ 83E3780
 	.incbin "baserom.gba", 0x3e3780, 0x20
 
 	.align 2
-gContestSparkle_Pal::
-	.incbin "graphics/pokenav/contest_sparkle.gbapal"
+gPokenavSparkle_Pal::
+	.incbin "graphics/pokenav/sparkle.gbapal"
 
 	.align 2
-gContestSparkle_Gfx::
-	.incbin "graphics/pokenav/contest_sparkle.4bpp"
+gPokenavSparkle_Gfx::
+	.incbin "graphics/pokenav/sparkle.4bpp"
 
-gContestArrows_Gfx::
-	.incbin "graphics/pokenav/contest_arrows.4bpp"
+	.align 2
+gPokenavUpDownArrows_Gfx::
+	.incbin "graphics/pokenav/arrows.4bpp"
+
 gUnknown_083E3BC0::
 	.incbin "baserom.gba", 0x003E3BC0, 0x20
+
+	.align 2
 gTiles_083E3BE0::
 	.incbin "graphics/unknown/unknown_3E3BE0.4bpp"
 
+	.align 2
 gUnknown_083E3C60:: @ 83E3C60
 	.incbin "graphics/misc/ribbons_cool.gbapal"
 	.incbin "graphics/misc/ribbons_beauty.gbapal"
@@ -22069,8 +22063,8 @@ gSpriteTemplate_83E4484:: @ 83E4484
 	spr_template 25, 17, gOamData_83E447C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80F2654
 
 gUnknown_083E449C:: @ 83E449C
-	obj_pal Palette_E88A68, 2
-	obj_pal Palette_E8ACE4, 3
+	obj_pal gPokenavMenuOptions3_Pal, 2
+	obj_pal gPokenavCondition5_Pal, 3
 	obj_pal 0x0, 0
 
 	.align 2
@@ -22156,13 +22150,13 @@ gUnknown_083E4588:: @ 83E4588
 
 	.align 2
 gUnknown_083E4590:: @ 83E4590
-	obj_tiles Tiles_E9F9A8, 0x40, 9
-	obj_tiles gContestArrows_Gfx, 0x80, 10
+	obj_tiles gPokenavArrow_Gfx, 0x40, 9
+	obj_tiles gPokenavUpDownArrows_Gfx, 0x80, 10
 	null_obj_tiles
 
 	.align 2
 gUnknown_083E45A8:: @ 83E45A8
-	obj_pal gPokenavContestArrowsPalette, 9
+	obj_pal gPokenavArrowsPalette, 9
 
 	.align 2
 gOamData_83E45B0:: @ 83E45B0
@@ -22222,15 +22216,15 @@ gSpriteAnimTable_83E4620:: @ 83E4620
 
 	.align 2
 gUnknown_083E4628:: @ 83E4628
-	obj_tiles gPokenavContestPokeballTiles, 0x100, 3
+	obj_tiles gPokenavPokeballTiles, 0x100, 3
 	obj_tiles gUnknown_083E3780, 0x20, 4
-	obj_tiles gTiles_08E8A498, 0x100, 5
+	obj_tiles gPokenavConditionMenuCancel_Gfx, 0x100, 5
 	null_obj_tiles
 
 	.align 2
 gUnknown_083E4648:: @ 83E4648
-	obj_pal PokenavContestPokeballPalette, 4
-	obj_pal Palette_E8A5B8, 5
+	obj_pal gPokenavConditionPokeball_Pal, 4
+	obj_pal gPokenavCondition4_Pal, 5
 	.space 8
 
 	.align 2
@@ -22278,11 +22272,11 @@ gSpriteTemplate_83E476C:: @ 83E476C
 
 	.align 2
 gUnknown_083E4784:: @ 83E4784
-	obj_tiles gContestSparkle_Gfx, 896, 0x0017
+	obj_tiles gPokenavSparkle_Gfx, 896, 0x0017
 
 	.align 2
 gUnknown_083E478C:: @ 83E478C
-	obj_pal gContestSparkle_Pal, 0x000f
+	obj_pal gPokenavSparkle_Pal, 0x000f
 
 gUnknown_083E4794:: @ 83E4794
 	.incbin "baserom.gba", 0x003e4794, 0x28
@@ -24877,8 +24871,8 @@ gUnknown_083F7A90:: @ 83F7A90
 	.space 8
 
 gUnknown_083F7AA0:: @ 83F7AA0
-	obj_pal gUnknown_08E8F804, 0x1000
-	obj_pal gUnknown_08E8F824, 0x1001
+	obj_pal gMiscClockMale_Pal, 0x1000
+	obj_pal gMiscClockFemale_Pal, 0x1001
 	.space 8
 
 	.align 2
@@ -26568,14 +26562,14 @@ gCableCarPylonStemTilemap:: @ 8401CD4
 
 	.align 2
 gUnknown_08401CF8:: @ 8401CF8
-	obj_tiles gUnknown_08E80614, 0x800, 1
-	obj_tiles gUnknown_08E80914, 0x40, 2
-	obj_tiles gUnknown_08E80944, 0x80, 3
+	obj_tiles gCableCar_Gfx, 0x800, 1
+	obj_tiles gCableCarDoor_Gfx, 0x40, 2
+	obj_tiles gCableCarCord_Gfx, 0x80, 3
 	.space 8
 
 	.align 2
 gUnknown_08401D18:: @ 8401D18
-	obj_pal Palette_08E7EC1C, 1
+	obj_pal gCableCar_Pal, 1
 	.space 8
 
 	.align 2
@@ -31299,20 +31293,20 @@ gSpriteAffineAnimTable_8412050:: @ 8412050
 
 	.align 2
 gUnknown_084120A4:: @ 84120A4
-	.4byte gUnknown_08E781E4
-	.4byte gUnknown_08E781F8
-	.4byte gUnknown_08E7820C
-	.4byte gUnknown_08E78220
-	.4byte gUnknown_08E78234
-	.4byte gUnknown_08E78248
-	.4byte gUnknown_08E7825C
-	.4byte gUnknown_08E78270
-	.4byte gUnknown_08E78284
-	.4byte gUnknown_08E78298
-	.4byte gUnknown_08E782ac
-	.4byte gUnknown_08E782c0
-	.4byte gUnknown_08E782d4
-	.4byte gUnknown_08E782e8
+	.4byte gPokeblockRed_Pal
+	.4byte gPokeblockBlue_Pal
+	.4byte gPokeblockPink_Pal
+	.4byte gPokeblockGreen_Pal
+	.4byte gPokeblockYellow_Pal
+	.4byte gPokeblockPurple_Pal
+	.4byte gPokeblockIndigo_Pal
+	.4byte gPokeblockBrown_Pal
+	.4byte gPokeblockLiteBlue_Pal
+	.4byte gPokeblockOlive_Pal
+	.4byte gPokeblockGray_Pal
+	.4byte gPokeblockBlack_Pal
+	.4byte gPokeblockWhite_Pal
+	.4byte gPokeblockGold_Pal
 
 	.align 2
 gSpriteAffineAnim_84120DC:: @ 84120DC
@@ -31724,9 +31718,11 @@ gUnknown_08416E34:: @ 8416E34
 	obj_tiles gIntro2MayTiles, 0x2000, 1003
 	.space 8
 
+	.align 2
 gEvoSparklePalette: @ 8416E44
 	.incbin "graphics/misc/evo_sparkle.gbapal"
 
+	.align 2
 gEvoSparkleTiles: @ 8416E64
 	.incbin "graphics/misc/evo_sparkle.4bpp.lz"
 

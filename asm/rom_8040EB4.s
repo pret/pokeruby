@@ -9374,7 +9374,7 @@ _080457BA:
 	bx r0
 	.align 2, 0
 _080457C8: .4byte 0x02020004
-_080457CC: .4byte gUnknown_08E903F8
+_080457CC: .4byte gBattleInterfaceStatusIcons_DynPal
 _080457D0: .4byte 0x0202ecc8
 _080457D4: .4byte 0x05000200
 _080457D8: .4byte 0x06010000
