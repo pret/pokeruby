@@ -12936,11 +12936,11 @@ gUnknown_083B5EF4:: @ 83B5EF4
 
 	.align 2
 gUnknown_083B5EF8:: @ 83B5EF8
-	.4byte gUnknown_08E8C8E0
-	.4byte gUnknown_08E8C940
-	.4byte gUnknown_08E8C9A0
-	.4byte gUnknown_08E8CA00
-	.4byte gUnknown_08E8CA60
+	.4byte gMenuTrainerCard0Star_Pal
+	.4byte gMenuTrainerCard1Star_Pal
+	.4byte gMenuTrainerCard2Star_Pal
+	.4byte gMenuTrainerCard3Star_Pal
+	.4byte gMenuTrainerCard4Star_Pal
 
 gUnknown_083B5F0C:: @ 83B5F0C
 	.incbin "baserom.gba", 0x003b5f0c, 0x20

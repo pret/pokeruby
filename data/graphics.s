@@ -3777,23 +3777,28 @@ gPokenavRibbonsHeader_Gfx:: @ 8E8B3A0
 	.incbin "graphics/pokenav/ribbons.4bpp.lz"
 
 	.align 2
-gUnknown_08E8B4E0:: @ 8E8B4E0
-	.incbin "baserom.gba", 0x00e8b4e0, 0x1400
+gMenuTrainerCard_Gfx:: @ 8E8B4E0
+	.incbin "graphics/misc/trainer_card.4bpp"
 
-gUnknown_08E8C8E0::
-	.incbin "baserom.gba", 0x00e8c8e0, 0x60
+	.align 2
+gMenuTrainerCard0Star_Pal::
+	.incbin "graphics/misc/trainer_card_0star.gbapal"
 
-gUnknown_08E8C940::
-	.incbin "baserom.gba", 0x00e8c940, 0x60
+	.align 2
+gMenuTrainerCard1Star_Pal::
+	.incbin "graphics/misc/trainer_card_1star.gbapal"
 
-gUnknown_08E8C9A0::
-	.incbin "baserom.gba", 0x00e8c9a0, 0x60
+	.align 2
+gMenuTrainerCard2Star_Pal::
+	.incbin "graphics/misc/trainer_card_2star.gbapal"
 
-gUnknown_08E8CA00::
-	.incbin "baserom.gba", 0x00e8ca00, 0x60
+	.align 2
+gMenuTrainerCard3Star_Pal::
+	.incbin "graphics/misc/trainer_card_3star.gbapal"
 
-gUnknown_08E8CA60::
-	.incbin "baserom.gba", 0x00e8ca60, 0x60
+	.align 2
+gMenuTrainerCard4Star_Pal::
+	.incbin "graphics/misc/trainer_card_4star.gbapal"
 
 gUnknown_08E8CAC0::
 	.incbin "baserom.gba", 0x00e8cac0, 0x500
