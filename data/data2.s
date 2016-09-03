@@ -21495,11 +21495,11 @@ gSpriteTemplate_83DBD48:: @ 83DBD48
 
 	.align 2
 gUnknown_083DBD60:: @ 83DBD60
-	obj_tiles gMenuWordGroup_Gfx, 4096, 0x0007
+	obj_tiles gMenuWordGroupIndicator_Gfx, 4096, 0x0007
 
 	.align 2
 gUnknown_083DBD68:: @ 83DBD68
-	obj_pal gMenuWordGroup_Pal, 0x0005
+	obj_pal gMenuWordGroupIndicator_Pal, 0x0005
 
 	.align 2
 gOamData_83DBD70:: @ 83DBD70
@@ -31293,20 +31293,20 @@ gSpriteAffineAnimTable_8412050:: @ 8412050
 
 	.align 2
 gUnknown_084120A4:: @ 84120A4
-	.4byte gUnknown_08E781E4
-	.4byte gUnknown_08E781F8
-	.4byte gUnknown_08E7820C
-	.4byte gUnknown_08E78220
-	.4byte gUnknown_08E78234
-	.4byte gUnknown_08E78248
-	.4byte gUnknown_08E7825C
-	.4byte gUnknown_08E78270
-	.4byte gUnknown_08E78284
-	.4byte gUnknown_08E78298
-	.4byte gUnknown_08E782ac
-	.4byte gUnknown_08E782c0
-	.4byte gUnknown_08E782d4
-	.4byte gUnknown_08E782e8
+	.4byte gPokeblockRed_Pal
+	.4byte gPokeblockBlue_Pal
+	.4byte gPokeblockPink_Pal
+	.4byte gPokeblockGreen_Pal
+	.4byte gPokeblockYellow_Pal
+	.4byte gPokeblockPurple_Pal
+	.4byte gPokeblockIndigo_Pal
+	.4byte gPokeblockBrown_Pal
+	.4byte gPokeblockLiteBlue_Pal
+	.4byte gPokeblockOlive_Pal
+	.4byte gPokeblockGray_Pal
+	.4byte gPokeblockBlack_Pal
+	.4byte gPokeblockWhite_Pal
+	.4byte gPokeblockGold_Pal
 
 	.align 2
 gSpriteAffineAnim_84120DC:: @ 84120DC
