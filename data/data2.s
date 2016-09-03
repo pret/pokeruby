@@ -24481,8 +24481,9 @@ gSlotMachineSpritePalettes:: @ 83EDE44
 gUnknown_083EDE8C:: @ 83EDE8C
 	.incbin "graphics/slot_machine/reel_time.4bpp.lz"
 
-gUnknown_083EEFE0:: @ 83EEFE0
-	.incbin "baserom.gba", 0x003eefe0, 0x1b8
+	.align 2
+gReelTimeWindowTilemap:: @ 83EEFE0
+	.incbin "graphics/slot_machine/reel_time_window_map.bin"
 
 	.align 2
 gPictureFramePalettes:: @ 83EF198
