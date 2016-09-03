@@ -11207,7 +11207,7 @@ gSpriteTemplate_8393F74:: @ 8393F74
 
 	.align 2
 gUnknown_08393F8C:: @ 8393F8C
-	obj_tiles Tiles_E9D644, 0x520, 1001
+	obj_tiles gTitleScreenPressStart_Gfx, 0x520, 1001
 	null_obj_tiles
 
 	.align 2
@@ -21631,8 +21631,10 @@ gUnknown_083E0254:: @ 83E0254
 gUnknown_083E0274:: @ 83E0274
 	.incbin "baserom.gba", 0x003e0274, 0x20
 
-gUnknown_083E0294:: @ 83E0294
-	.incbin "baserom.gba", 0x003e0294, 0x20
+	.align 2
+gPokenavConditionSearch2_Pal:: @ 83E0294
+	@.incbin "graphics/pokenav/condition_search2.gbapal"
+	.incbin "baserom.gba", 0x3e0294, 0x20
 
 gUnknown_083E02B4:: @ 83E02B4
 	.incbin "baserom.gba", 0x003e02b4, 0x60
@@ -21640,9 +21642,11 @@ gUnknown_083E02B4:: @ 83E02B4
 gUnknown_083E0314:: @ 83E0314
 	.incbin "baserom.gba", 0x003e0314, 0x20
 
+	.align 2
 gUnknown_083E0334:: @ 83E0334
 	.incbin "graphics/pokenav/trainereyes_misc_pal.bin" @ the original bytes have an "FF FF" instance which is incompatible with gbagfx to produce the bytes needed to match the original ROM, so I am forced to include it as a .bin until the lowest bit is properly handled or a better workaround is produced
 
+	.align 2
 gUnknown_083E0354:: @ 83E0354
 	.incbin "graphics/pokenav/trainereyes_misc.4bpp.lz"
 
@@ -21842,7 +21846,7 @@ gPokenavSparkle_Gfx::
 	.incbin "graphics/pokenav/sparkle.4bpp"
 
 	.align 2
-gContestArrows_Gfx::
+gPokenavUpDownArrows_Gfx::
 	.incbin "graphics/pokenav/arrows.4bpp"
 
 gUnknown_083E3BC0::
@@ -22147,13 +22151,13 @@ gUnknown_083E4588:: @ 83E4588
 
 	.align 2
 gUnknown_083E4590:: @ 83E4590
-	obj_tiles Tiles_E9F9A8, 0x40, 9
-	obj_tiles gContestArrows_Gfx, 0x80, 10
+	obj_tiles gPokenavArrow_Gfx, 0x40, 9
+	obj_tiles gPokenavUpDownArrows_Gfx, 0x80, 10
 	null_obj_tiles
 
 	.align 2
 gUnknown_083E45A8:: @ 83E45A8
-	obj_pal gPokenavContestArrowsPalette, 9
+	obj_pal gPokenavArrowsPalette, 9
 
 	.align 2
 gOamData_83E45B0:: @ 83E45B0

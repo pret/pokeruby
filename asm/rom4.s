@@ -41238,7 +41238,7 @@ sub_8065348: @ 8065348
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08065364: .4byte gUnknown_08EA0108
+_08065364: .4byte gTextWindowMainFrame_Gfx
 _08065368: .4byte 0x030005ae
 	thumb_func_end sub_8065348
 

@@ -14,6 +14,7 @@ CONTESTGFXDIR := graphics/contest
 MASKSGFXDIR := graphics/battle_anims/masks
 BATTRANSGFXDIR := graphics/battle_transitions
 TYPESGFXDIR := graphics/types
+TITLEGFXDIR := graphics/title_screen
 
 types := normal fight flying poison ground rock bug ghost steel mystery fire water grass electric psychic ice dragon dark
 contest_types := cool beauty cute smart tough
@@ -234,8 +235,17 @@ $(PSSGFXDIR)/header.4bpp: $(PSSGFXDIR)/header.png
 $(PSSGFXDIR)/misc1.4bpp: $(PSSGFXDIR)/misc1.png
 	$(GFX) $< $@ -num_tiles 91
 
-$(PSSGFXDIR)/hof_header.4bpp: $(PSSGFXDIR)/hof_header.png
+$(MISCGFXDIR)/hof.4bpp: $(MISCGFXDIR)/hof.png
 	$(GFX) $< $@ -num_tiles 37
 
 $(MENUGFXDIR)/wordgroup_frame.4bpp: $(MENUGFXDIR)/wordgroup_frame.png
 	$(GFX) $< $@ -num_tiles 65
+
+$(INTROGFXDIR)/copyright.4bpp: $(INTROGFXDIR)/copyright.png
+	$(GFX) $< $@ -num_tiles 43
+
+$(TITLEGFXDIR)/press_start.4bpp: $(TITLEGFXDIR)/press_start.png
+	$(GFX) $< $@ -num_tiles 41
+
+$(MISCGFXDIR)/end_copyright.4bpp: $(MISCGFXDIR)/end_copyright.png
+	$(GFX) $< $@ -num_tiles 90

@@ -3845,12 +3845,12 @@ gPSSMenuMisc_Tilemap:: @ 8E8E6E8
 	.incbin "graphics/pokemon_storage/misc1.bin.lz"
 
 	.align 2
-gPSSHallOfFameHeader_Gfx:: @ 8E8E8B0
-	.incbin "graphics/pokemon_storage/hof_header.4bpp.lz"
+gHallOfFame_Gfx:: @ 8E8E8B0
+	.incbin "graphics/misc/hof.4bpp.lz"
 
 	.align 2
-gPSSHallOfFameHeader_Pal:: @ 8E8EA78
-	.incbin "graphics/pokemon_storage/hof_header.gbapal"
+gHallOfFame_Pal:: @ 8E8EA78
+	.incbin "graphics/misc/hof.gbapal"
 
 	.align 2
 gMenuWordGroup_Gfx:: @ 8E8EA98
@@ -4412,28 +4412,30 @@ gUnknown_08E9C6DC:: @ 8E9C6DC
 	.incbin "baserom.gba", 0xE9C6DC, 0xBC @ LZ, uncomp. size = 0x500
 
 	.align 2
-gUnknown_08E9C798:: @ 8E9C798
-	.incbin "baserom.gba", 0xE9C798, 0x289 @ LZ, uncomp. size = 0x560
+gIntroCopyright_Gfx:: @ 8E9C798
+	.incbin "graphics/intro/copyright.4bpp.lz"
 
 	.align 2
-gUnknown_08E9CA24:: @ 8E9CA24
-	.incbin "baserom.gba", 0x00e9ca24, 0x20
+gIntroCopyright_Pal:: @ 8E9CA24
+	.incbin "graphics/intro/copyright.gbapal"
 
-gUnknown_08E9CA44:: @ 8E9CA44
-	.incbin "baserom.gba", 0xe9ca44, 0x500
+	.align 2
+gIntroCopyright_Tilemap:: @ 8E9CA44
+	.incbin "graphics/intro/copyright.bin"
 
 	.align 2
 gInterviewOutlineCursorTiles:: @ 8E9CF44
 	.incbin "graphics/misc/interview_outline_cursor.4bpp"
 
 	.align 2
-Tiles_E9D644:: @ 8E9D644
-	.incbin "baserom.gba", 0xE9D644, 0x265 @ LZ, uncomp. size = 0x520
+gTitleScreenPressStart_Gfx:: @ 8E9D644
+	.incbin "graphics/title_screen/press_start.4bpp.lz"
 
 	.align 2
-gTitleScreenLogoShinePalette::
+gTitleScreenLogoShinePalette:: @ E9D8E4
 	.incbin "graphics/title_screen/logo_shine.gbapal"
 
+	.align 2
 gUnknown_08E9D8CC:: @ 8E9D8CC
 	.ifdef SAPPHIRE
 	.incbin "graphics/title_screen/pokemon_sapphire.8bpp.lz"
@@ -4441,6 +4443,7 @@ gUnknown_08E9D8CC:: @ 8E9D8CC
 	.incbin "graphics/title_screen/pokemon_ruby.8bpp.lz"
 	.endif
 
+	.align 2
 gVersionTiles::
 	.ifdef SAPPHIRE
 	.incbin "graphics/title_screen/sapphireversion.8bpp.lz"
@@ -4448,6 +4451,7 @@ gVersionTiles::
 	.incbin "graphics/title_screen/rubyversion.8bpp.lz"
 	.endif
 
+	.align 2
 gUnknown_08E9F624:: @ 8E9F624
 	.ifdef SAPPHIRE
 	.incbin "graphics/title_screen/logo_sapphire.gbapal" @ for some reason, the sapphire palette is different even though the visible colors for the logo and version are not, weird
@@ -4460,32 +4464,30 @@ gUnknown_08E9F7E4:: @ 8E9F7E4
 	.incbin "baserom.gba", 0xE9F7E4, 0x182 @ LZ, uncomp. size = 0x400
 
 	.align 2
-gPokenavContestArrowsPalette::
+gPokenavArrowsPalette::
 	.incbin "graphics/pokenav/arrows.gbapal"
 
 gUnknown_08E9F988:: @ 8E9F988
 	.incbin "baserom.gba", 0xe9f988, 0x20
 
-Tiles_E9F9A8:: @ 8E9F9A8
-	.incbin "baserom.gba", 0xe9f9a8, 0x40
+	.align 2
+gPokenavArrow_Gfx:: @ 8E9F9A8
+	.incbin "graphics/pokenav/arrow2.4bpp"
 
 gUnknown_08E9F9E8:: @ 8E9F9E8
 	.incbin "baserom.gba", 0x00e9f9e8, 0x20
 
 	.align 2
-gUnknown_08E9FA08:: @ 8E9FA08
-	.incbin "baserom.gba", 0xE9FA08, 0xF2 @ LZ, uncomp. size = 0x300
+gPokenavConditionSearch2_Gfx:: @ 8E9FA08
+	.incbin "graphics/pokenav/condition_search2.4bpp.lz"
 
 	.align 2
-gUnknown_08E9FAFC:: @ 8E9FAFC
-	.incbin "baserom.gba", 0x00e9fafc, 0x1c
-
-gUnknown_08E9FB18:: @ 8E9FB18
-	.incbin "baserom.gba", 0x00e9fb18, 0x4
+gPokenavRibbonView_Pal:: @ 8E9FAFC
+	.incbin "graphics/pokenav/ribbon_view.pal.bin"
 
 	.align 2
-gUnknown_08E9FB1C:: @ 8E9FB1C
-	.incbin "baserom.gba", 0xE9FB1C, 0x83 @ LZ, uncomp. size = 0x160
+gPokenavRibbonView_Gfx:: @ 8E9FB1C
+	.incbin "graphics/pokenav/ribbon_view.4bpp.lz"
 
 	.align 2
 gUnknown_08E9FBA0:: @ 8E9FBA0
@@ -4514,11 +4516,12 @@ gUnknown_08E9FF58:: @ 8E9FF58
 	.incbin "baserom.gba", 0xE9FF58, 0xCF @ LZ, uncomp. size = 0x640
 
 	.align 2
-gUnknown_08EA0028:: @ 8EA0028
-	.incbin "baserom.gba", 0x00ea0028, 0xe0
+gPokenavRibbonPokeView_Gfx:: @ 8EA0028
+	.incbin "graphics/pokenav/ribbon_pokeview.4bpp"
 
-gUnknown_08EA0108:: @ 8EA0108
-	.incbin "baserom.gba", 0x00ea0108, 0x1c0
+	.align 2
+gTextWindowMainFrame_Gfx:: @ 8EA0108
+	.incbin "graphics/text_window/main.4bpp"
 
 	.align 2
 gUnknown_08EA02C8:: @ 8EA02C8
@@ -4549,21 +4552,25 @@ gUnknown_08EA1DEC:: @ 8EA1DEC
 	.incbin "baserom.gba", 0x00ea25ec, 0x20
 
 	.align 2
-gUnknown_08EA260C:: @ 8EA260C
-	.incbin "baserom.gba", 0xEA260C, 0x436 @ LZ, uncomp. size = 0xB40
+gCreditsCopyrightEnd_Gfx:: @ 8EA260C
+	.incbin "graphics/misc/end_copyright.4bpp.lz"
 
 	.align 2
-gUnknown_08EA2A44:: @ 8EA2A44
-	.incbin "baserom.gba", 0x00ea2a44, 0x200
+gDecoration10000_Gfx:: @ 8EA2A44
+	.incbin "graphics/misc/decoration_10000.4bpp"
 
+	.align 2
 gFont3LatinGlyphs:: @ 8EA2C44
 	.incbin "graphics/fonts/font3_lat.4bpp"
 
+	.align 2
 gFont4LatinGlyphs:: @ 8EA6BC4
 	.incbin "graphics/fonts/font4_lat.4bpp"
 
+	.align 2
 gFont3JapaneseGlyphs:: @ 8EA8744
 	.incbin "graphics/fonts/font3_jpn.4bpp"
 
+	.align 2
 gFont4JapaneseGlyphs:: @ 8EAC6C4
 	.incbin "graphics/fonts/font4_jpn.4bpp"
