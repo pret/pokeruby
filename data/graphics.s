@@ -4548,7 +4548,7 @@ gTradeMonBoxTilemap:: @ 8EA1DC8
 gUnknown_08EA1DEC:: @ 8EA1DEC
 	.incbin "graphics/trade/selected_mon.4bpp"
 
-	.incbin "graphics/unused/unknown_EA25EC.bin"
+	.incbin "graphics/unknown/unknown_EA25EC.bin"
 
 	.align 2
 gCreditsCopyrightEnd_Gfx:: @ 8EA260C
