@@ -3914,7 +3914,7 @@ gBerryBlenderStartTiles:: @ 8E91018
 	.incbin "graphics/berry_blender/start.4bpp"
 
 	.incbin "graphics/unknown/unknown_E91418.bin"
-	
+
 	.space 0x1E0
 
 	.align 2
@@ -4107,35 +4107,35 @@ gSlotMachineNumber0Tiles::
 	.align 2
 gSlotMachineNumber1Tiles::
 	.incbin "graphics/slot_machine/numbers/1.4bpp"
-	
+
 	.align 2
 gSlotMachineNumber2Tiles::
 	.incbin "graphics/slot_machine/numbers/2.4bpp"
-	
+
 	.align 2
 gSlotMachineNumber3Tiles::
 	.incbin "graphics/slot_machine/numbers/3.4bpp"
-	
+
 	.align 2
 gSlotMachineNumber4Tiles::
 	.incbin "graphics/slot_machine/numbers/4.4bpp"
-	
+
 	.align 2
 gSlotMachineNumber5Tiles::
 	.incbin "graphics/slot_machine/numbers/5.4bpp"
-	
+
 	.align 2
 gSlotMachineNumber6Tiles::
 	.incbin "graphics/slot_machine/numbers/6.4bpp"
-	
+
 	.align 2
 gSlotMachineNumber7Tiles::
 	.incbin "graphics/slot_machine/numbers/7.4bpp"
-	
+
 	.align 2
 gSlotMachineNumber8Tiles::
 	.incbin "graphics/slot_machine/numbers/8.4bpp"
-	
+
 	.align 2
 gSlotMachineNumber9Tiles::
 	.incbin "graphics/slot_machine/numbers/9.4bpp"
