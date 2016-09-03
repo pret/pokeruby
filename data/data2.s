@@ -12402,21 +12402,29 @@ gUnknown_0839F58C:: @ 839F58C
 	.4byte sub_8133CCC, 0x10
 	.4byte sub_812BFB4, 0x9
 
+	.align 2
 gUnknown_0839F5FC:: @ 839F5FC
 	.incbin "baserom.gba", 0x0039f5fc, 0x40
 
+	.align 2
 gUnknown_0839F63C:: @ 839F63C
-	.incbin "baserom.gba", 0x0039f63c, 0x42
+	.incbin "baserom.gba", 0x0039f63c, 0x40
 
-gUnknown_0839F67E:: @ 839F67E
-	.incbin "baserom.gba", 0x0039f67e, 0xc0
+	.align 2
+gUnknown_0839F67C:: @ 839F67C
+	.incbin "graphics/pokedex/search.gbapal"
 
-gUnknown_0839F73E:: @ 839F73E
-	.incbin "baserom.gba", 0x0039f73e, 0x162
+	.align 2
+gUnknown_0839F73C:: @ 839F73C
+	.incbin "graphics/pokedex/national.gbapal"
 
+	.space 0xA4
+
+	.align 2
 gUnknown_0839F8A0:: @ 839F8A0
 	.incbin "baserom.gba", 0x0039f8a0, 0xe8
 
+	.align 2
 gUnknown_0839F988:: @ 839F988
 	.incbin "baserom.gba", 0x0039f988, 0xf4
 
@@ -24492,8 +24500,9 @@ gSlotMachineSpritePalettes:: @ 83EDE44
 gUnknown_083EDE8C:: @ 83EDE8C
 	.incbin "graphics/slot_machine/reel_time.4bpp.lz"
 
-gUnknown_083EEFE0:: @ 83EEFE0
-	.incbin "baserom.gba", 0x003eefe0, 0x1b8
+	.align 2
+gReelTimeWindowTilemap:: @ 83EEFE0
+	.incbin "graphics/slot_machine/reel_time_window_map.bin"
 
 	.align 2
 gPictureFramePalettes:: @ 83EF198
