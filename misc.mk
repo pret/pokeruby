@@ -173,7 +173,7 @@ $(PICFRAMEGFXDIR)/frame5.4bpp: $(PICFRAMEGFXDIR)/frame5.png
 
 $(CONTESTGFXDIR)/nextturn.4bpp: $(CONTESTGFXDIR)/nextturn.png
 	$(GFX) $< $@ -num_tiles 8
-	
+
 $(UNUSEDGFXDIR)/obi_palpak1.gbapal: $(UNUSEDGFXDIR)/old_pal1.gbapal $(UNUSEDGFXDIR)/old_pal2.gbapal $(UNUSEDGFXDIR)/old_pal3.gbapal
 	@cat $(UNUSEDGFXDIR)/old_pal1.gbapal $(UNUSEDGFXDIR)/old_pal2.gbapal $(UNUSEDGFXDIR)/old_pal3.gbapal >$@
 
@@ -191,7 +191,7 @@ $(MENUGFXDIR)/hp_numbers.4bpp: $(MENUGFXDIR)/hpbar_anim.4bpp $(MENUGFXDIR)/numbe
 
 $(UNUSEDGFXDIR)/redyellowgreen_frame.bin: $(UNUSEDGFXDIR)/red_frame.bin $(UNUSEDGFXDIR)/yellow_frame.bin $(UNUSEDGFXDIR)/green_frame.bin $(UNUSEDGFXDIR)/blank_frame.bin
 	@cat $(UNUSEDGFXDIR)/red_frame.bin $(UNUSEDGFXDIR)/yellow_frame.bin $(UNUSEDGFXDIR)/green_frame.bin $(UNUSEDGFXDIR)/blank_frame.bin >$@
-	
+
 $(UNUSEDGFXDIR)/color_frames.4bpp: $(UNUSEDGFXDIR)/color_frames.png
 	$(GFX) $< $@ -num_tiles 353
 
@@ -203,7 +203,7 @@ $(UNUSEDGFXDIR)/old_contest_2.4bpp: $(UNUSEDGFXDIR)/old_contest_2_1.4bpp $(UNUSE
 
 $(MASKSGFXDIR)/unknown_D2EDFC.4bpp: $(MASKSGFXDIR)/unknown_D2EDFC.png
 	$(GFX) $< $@ -num_tiles 14
-	
+
 $(BATTRANSGFXDIR)/vs_frame.4bpp: $(BATTRANSGFXDIR)/vs_frame.png
 	$(GFX) $< $@ -num_tiles 16
 
@@ -224,6 +224,12 @@ $(PKNAVGFXDIR)/menu_options.4bpp: $(PKNAVGFXDIR)/menu_hoennmap.4bpp $(PKNAVGFXDI
 
 $(PKNAVGFXDIR)/condition_menu_misc.4bpp: $(PKNAVGFXDIR)/condition_menu_misc.png
 	$(GFX) $< $@ -num_tiles 41
-	
+
 $(PKNAVGFXDIR)/condition_search.4bpp: $(PKNAVGFXDIR)/condition_search_cool.4bpp $(PKNAVGFXDIR)/condition_search_beauty.4bpp $(PKNAVGFXDIR)/condition_search_cute.4bpp $(PKNAVGFXDIR)/condition_search_smart.4bpp $(PKNAVGFXDIR)/condition_search_tough.4bpp $(PKNAVGFXDIR)/condition_search_cancel.4bpp
 	@cat $(PKNAVGFXDIR)/condition_search_cool.4bpp $(PKNAVGFXDIR)/condition_search_beauty.4bpp $(PKNAVGFXDIR)/condition_search_cute.4bpp $(PKNAVGFXDIR)/condition_search_smart.4bpp $(PKNAVGFXDIR)/condition_search_tough.4bpp $(PKNAVGFXDIR)/condition_search_cancel.4bpp >$@
+
+$(PSSGFXDIR)/header.4bpp: $(PSSGFXDIR)/header.png
+	$(GFX) $< $@ -num_tiles 47
+
+$(PSSGFXDIR)/misc1.4bpp: $(PSSGFXDIR)/misc1.png
+	$(GFX) $< $@ -num_tiles 100

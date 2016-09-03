@@ -3813,33 +3813,36 @@ gUnknown_08E8D9C0:: @ 8E8D9C0
 	.incbin "baserom.gba", 0x00e8d9c0, 0x500
 
 	.align 2
-gUnknown_08E8DEC0:: @ 8E8DEC0
-	.incbin "baserom.gba", 0xE8DEC0, 0x226 @ LZ, uncomp. size = 0x5E0
+gPCMenuHeader_Gfx:: @ 8E8DEC0
+	.incbin "graphics/pokemon_storage/header.4bpp.lz"
 
 	.align 2
-gUnknown_08E8E0E8:: @ 8E8E0E8
-	.incbin "baserom.gba", 0x00e8e0e8, 0x20
-
-gUnknown_08E8E108:: @ 8E8E108
-	.incbin "baserom.gba", 0x00e8e108, 0x20
+gPCMenu1_Pal:: @ 8E8E0E8
+	.incbin "graphics/pokemon_storage/menu1.gbapal"
 
 	.align 2
-gUnknown_08E8E128:: @ 8E8E128
-	.incbin "baserom.gba", 0xE8E128, 0x119 @ LZ, uncomp. size = 0x500
+gPCMenu2_Pal:: @ 8E8E108
+	.incbin "graphics/pokemon_storage/menu2.bin"
 
 	.align 2
-gUnknown_08E8E244:: @ 8E8E244
-	.incbin "baserom.gba", 0xE8E244, 0x464 @ LZ, uncomp. size = 0xB60
-
-gUnknown_08E8E6A8:: @ 8E8E6A8
-	.incbin "baserom.gba", 0x00e8e6a8, 0x20
-
-gUnknown_08E8E6C8:: @ 8E8E6C8
-	.incbin "baserom.gba", 0x00e8e6c8, 0x20
+gPCMenuHeader_Tilemap:: @ 8E8E128
+	.incbin "graphics/pokemon_storage/header.bin.lz"
 
 	.align 2
-gUnknown_08E8E6E8:: @ 8E8E6E8
-	.incbin "baserom.gba", 0xE8E6E8, 0x1C5 @ LZ, uncomp. size = 0x800
+gPCMenuMisc_Gfx:: @ 8E8E244
+	.incbin "graphics/pokemon_storage/misc1.4bpp.lz"
+
+	.align 2
+gPCMenu3_Pal:: @ 8E8E6A8
+	.incbin "graphics/pokemon_storage/menu3.gbapal"
+
+	.align 2
+gPCMenu4_Pal:: @ 8E8E6C8
+	.incbin "graphics/pokemon_storage/menu4.gbapal"
+
+	.align 2
+gPCMenuMisc_Tilemap:: @ 8E8E6E8
+	.incbin "graphics/pokemon_storage/misc1.bin.lz"
 
 	.align 2
 gUnknown_08E8E8B0:: @ 8E8E8B0
