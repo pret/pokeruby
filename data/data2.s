@@ -7858,46 +7858,26 @@ gUnknown_083761EC:: @ 83761EC
 
 	.align 2
 gUnknown_083761F0:: @ 83761F0
-	.4byte gUnknown_08E9ADDC
-	.4byte gUnknown_08E9AEFC
-	.4byte gUnknown_08E9AF1C
-	.4byte gUnknown_08E9B03C
-	.4byte gUnknown_08E9B05C
-	.4byte gUnknown_08E9B17C
-	.4byte gUnknown_08E9B19C
-	.4byte gUnknown_08E9B2BC
-	.4byte gUnknown_08E9B2DC
-	.4byte gUnknown_08E9B3FC
-	.4byte gUnknown_08E9B41C
-	.4byte gUnknown_08E9B53C
-	.4byte gUnknown_08E9B55C
-	.4byte gUnknown_08E9B67C
-	.4byte gUnknown_08E9B69C
-	.4byte gUnknown_08E9B7BC
-	.4byte gUnknown_08E9B7DC
-	.4byte gUnknown_08E9B8FC
-	.4byte gUnknown_08E9B91C
-	.4byte gUnknown_08E9BA3C
-	.4byte gUnknown_08E9BA5C
-	.4byte gUnknown_08E9BB7C
-	.4byte gUnknown_08E9BB9C
-	.4byte gUnknown_08E9BCBC
-	.4byte gUnknown_08E9BCDC
-	.4byte gUnknown_08E9BDFC
-	.4byte gUnknown_08E9BE1C
-	.4byte gUnknown_08E9BF3C
-	.4byte gUnknown_08E9BF5C
-	.4byte gUnknown_08E9C07C
-	.4byte gUnknown_08E9C09C
-	.4byte gUnknown_08E9C1BC
-	.4byte gUnknown_08E9C1DC
-	.4byte gUnknown_08E9C2FC
-	.4byte gUnknown_08E9C31C
-	.4byte gUnknown_08E9C43C
-	.4byte gUnknown_08E9C45C
-	.4byte gUnknown_08E9C57C
-	.4byte gUnknown_08E9C59C
-	.4byte gUnknown_08E9C6BC
+	.4byte gTextWindowFrame1_Gfx, gTextWindowFrame1_Pal
+	.4byte gTextWindowFrame2_Gfx, gTextWindowFrame2_Pal
+	.4byte gTextWindowFrame3_Gfx, gTextWindowFrame3_Pal
+	.4byte gTextWindowFrame4_Gfx, gTextWindowFrame4_Pal
+	.4byte gTextWindowFrame5_Gfx, gTextWindowFrame5_Pal
+	.4byte gTextWindowFrame6_Gfx, gTextWindowFrame6_Pal
+	.4byte gTextWindowFrame7_Gfx, gTextWindowFrame7_Pal
+	.4byte gTextWindowFrame8_Gfx, gTextWindowFrame8_Pal
+	.4byte gTextWindowFrame9_Gfx, gTextWindowFrame9_Pal
+	.4byte gTextWindowFrame10_Gfx, gTextWindowFrame10_Pal
+	.4byte gTextWindowFrame11_Gfx, gTextWindowFrame11_Pal
+	.4byte gTextWindowFrame12_Gfx, gTextWindowFrame12_Pal
+	.4byte gTextWindowFrame13_Gfx, gTextWindowFrame13_Pal
+	.4byte gTextWindowFrame14_Gfx, gTextWindowFrame14_Pal
+	.4byte gTextWindowFrame15_Gfx, gTextWindowFrame15_Pal
+	.4byte gTextWindowFrame16_Gfx, gTextWindowFrame16_Pal
+	.4byte gTextWindowFrame17_Gfx, gTextWindowFrame17_Pal
+	.4byte gTextWindowFrame18_Gfx, gTextWindowFrame18_Pal
+	.4byte gTextWindowFrame19_Gfx, gTextWindowFrame19_Pal
+	.4byte gTextWindowFrame20_Gfx, gTextWindowFrame20_Pal
 
 gUnknown_08376290:: @ 8376290
 	.incbin "baserom.gba", 0x00376290, 0x48
@@ -24888,8 +24868,8 @@ gUnknown_083F7A90:: @ 83F7A90
 	.space 8
 
 gUnknown_083F7AA0:: @ 83F7AA0
-	obj_pal gUnknown_08E8F804, 0x1000
-	obj_pal gUnknown_08E8F824, 0x1001
+	obj_pal gMiscClockMale_Pal, 0x1000
+	obj_pal gMiscClockFemale_Pal, 0x1001
 	.space 8
 
 	.align 2

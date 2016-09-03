@@ -232,4 +232,10 @@ $(PSSGFXDIR)/header.4bpp: $(PSSGFXDIR)/header.png
 	$(GFX) $< $@ -num_tiles 47
 
 $(PSSGFXDIR)/misc1.4bpp: $(PSSGFXDIR)/misc1.png
-	$(GFX) $< $@ -num_tiles 100
+	$(GFX) $< $@ -num_tiles 91
+
+$(PSSGFXDIR)/hof_header.4bpp: $(PSSGFXDIR)/hof_header.png
+	$(GFX) $< $@ -num_tiles 37
+
+$(MENUGFXDIR)/wordgroup_frame.4bpp: $(MENUGFXDIR)/wordgroup_frame.png
+	$(GFX) $< $@ -num_tiles 65
