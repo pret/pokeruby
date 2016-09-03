@@ -12412,11 +12412,11 @@ gUnknown_0839F63C:: @ 839F63C
 
 	.align 2
 gUnknown_0839F67C:: @ 839F67C
-	.incbin "baserom.gba", 0x0039f67c, 0xc0
+	.incbin "graphics/pokedex/search.gbapal"
 
 	.align 2
 gUnknown_0839F73C:: @ 839F73C
-	.incbin "baserom.gba", 0x0039f73c, 0xc0
+	.incbin "graphics/pokedex/national.gbapal"
 
 	.space 0xA4
 
