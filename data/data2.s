@@ -21633,8 +21633,7 @@ gUnknown_083E0274:: @ 83E0274
 
 	.align 2
 gPokenavConditionSearch2_Pal:: @ 83E0294
-	@.incbin "graphics/pokenav/condition_search2.gbapal"
-	.incbin "baserom.gba", 0x3e0294, 0x20
+	.incbin "graphics/pokenav/condition_search2.gbapal"
 
 gUnknown_083E02B4:: @ 83E02B4
 	.incbin "baserom.gba", 0x003e02b4, 0x60
