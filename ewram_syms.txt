@@ -5,6 +5,14 @@ gUnknown_020239F8 = 0x20239F8;
 
 gSaveBlock2 = 0x2024EA4;
 
+stru_202E908 = 0x202E908;
+dword_202E9C8 = 0x202E9C8;
+byte_202E9CC = 0x202E9CC;
+word_202E9CE = 0x202E9CE;
+word_202E9D0 = 0x202E9D0;
+word_202E9D2 = 0x202E9D2;
+word_202E9D4 = 0x202E9D4;
+
 gPlttBufferUnfaded = 0x202EAC8;
 gPlttBufferFaded = 0x202EEC8;
 gPlttBufferTransferPending = 0x202F398;

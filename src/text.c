@@ -2523,7 +2523,7 @@ u8 sub_80037A0(struct Window *win)
     return retVal;
 }
 
-u8 sub_80037C8(struct Window *win, u8 lineLength)
+u32 sub_80037C8(struct Window *win, u8 lineLength)
 {
     u8 retVal;
 
