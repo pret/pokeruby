@@ -16,4 +16,6 @@ word_3004858 = 0x3004858;
 
 gTasks = 0x3004B20;
 
+gSaveFileStatus = 0x3005EB8;
+
 gMPlayMemAccArea = 0x3007440;

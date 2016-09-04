@@ -69,6 +69,7 @@ SECTIONS {
         src/string_util.o(.text);
         src/link.o(.text);
         src/rtc.o(.text);
+        src/main_menu.o(.text);
         asm/rom3.o(.text);
         src/rng.o(.text);
         asm/rom_8040EB4.o(.text);

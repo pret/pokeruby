@@ -27,7 +27,7 @@ gUnknown_081E796C:: @ 81E796C
 	.space 16
 
 	.align 2
-gUnknown_081E797C:: @ 81E797C
+gMainMenuPalette:: @ 81E797C
 	.incbin "graphics/misc/main_menu.gbapal"
 
 	.align 2
@@ -28868,60 +28868,52 @@ gUnknown_0840DCC8:: @ 840DCC8
 SystemText_Pokemon2:
 	.string "POKéMON$"
 
-gUnknown_0840DCD0:: @ 840DCD0
-SystemText_NewGame:
+gMainMenuString_NewGame:: @ 840DCD0
 	.string "NEW GAME$"
 
-gUnknown_0840DCD9:: @ 840DCD9
-SystemText_Continue:
+gMainMenuString_Continue:: @ 840DCD9
 	.string "CONTINUE$"
 
-gUnknown_0840DCE2:: @ 840DCE2
-SystemText_Option2:
+gMainMenuString_Option:: @ 840DCE2
 	.string "OPTION$"
 
-gUnknown_0840DCE9:: @ 840DCE9
-SystemText_MysteryEvents:
+gMainMenuString_MysteryEvents:: @ 840DCE9
 	.string "MYSTERY EVENTS$"
+
 SystemText_UpdatingSaveExternal:
 	.string "Updating save file using external\ndata. Please wait.$"
+
 SystemText_SaveUpdated:
 	.string "The save file has been updated.$"
+
 SystemText_SaveUpdatedExchangeBackup:
 	.string "The save file has been updated.\pFurther game data cannot be saved\nto the backup memory.\pPlease exchange the backup memory.\pFor details, please contact the\nNintendo Service Center.$"
+
 SystemText_SaveNotUpdated:
 	.string "The save file could not be updated.\pPlease exchange the backup\nmemory.\pFor details, please contact the\nNintendo Service Center.$"
 
-gUnknown_0840DE81:: @ 840DE81
-SystemText_SaveCorrupt:
+gSaveFileCorruptMessage:: @ 840DE81
 	.string "The save file is corrupt. The\nprevious save file will be loaded.$"
 
-gUnknown_0840DEC2:: @ 840DEC2
-SystemText_SaveDeleted:
+gSaveFileDeletedMessage:: @ 840DEC2
 	.string " The save file has been deleted...$"
 
-gUnknown_0840DEE5:: @ 840DEE5
-SystemText_1MSubCircuitNotInstalled:
+gBoardNotInstalledMessage:: @ 840DEE5
 	.string "The 1M sub-circuit board is\nnot installed.$"
 
-gUnknown_0840DF10:: @ 840DF10
-SystemText_InternalBatteryIsDry:
+gBatteryDryMessage:: @ 840DF10
 	.string "The internal battery has run dry.\nThe game can be played.\pHowever, clock-based events will\nno longer occur.$"
 
-gUnknown_0840DF7C:: @ 840DF7C
-SystemText_Player2::
+gMainMenuString_Player:: @ 840DF7C
 	.string "PLAYER$"
 
-gUnknown_0840DF83:: @ 840DF83
-SystemText_Pokedex2::
+gMainMenuString_Pokedex:: @ 840DF83
 	.string "POKéDEX$"
 
-gUnknown_0840DF8B:: @ 840DF8B
-SystemText_Time::
+gMainMenuString_Time:: @ 840DF8B
 	.string "TIME$"
 
-gUnknown_0840DF90:: @ 840DF90
-SystemText_Badges::
+gMainMenuString_Badges:: @ 840DF90
 	.string "BADGES$"
 
 gBirchText_Boy::
