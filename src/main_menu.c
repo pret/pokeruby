@@ -118,9 +118,9 @@ u32 InitMainMenu(u8 a1)
     sub_8071C4C(&gWindowConfig_81E6CE4);
 
     if (a1)
-        BeginNormalPaletteFade(-1, 0, 0x10u, 0, 0);
+        BeginNormalPaletteFade(-1, 0, 0x10, 0, 0x0000); // fade to black
     else
-        BeginNormalPaletteFade(-1, 0, 0x10u, 0, -1);
+        BeginNormalPaletteFade(-1, 0, 0x10, 0, 0xFFFF); // fade to white
 
     REG_WIN0H = 0;
     REG_WIN0V = 0;
@@ -175,16 +175,16 @@ void Task_CheckSave(u8 taskId)
     case 2:
         DrawDefaultWindow(2, 14, 27, 19);
         AddTextPrinterWithCallbackForMessage(gSaveFileDeletedMessage, 3, 15);
-        REG_WIN0H = 4575;
-        REG_WIN0V = 29087;
+        REG_WIN0H = WIN_RANGE(17, 223);
+        REG_WIN0V = WIN_RANGE(113, 159);
         gTasks[taskId].data[0] = 0;
         gTasks[taskId].func = Task_WaitForSaveErrorAck;
         break;
     case 255:
         DrawDefaultWindow(2, 14, 27, 19);
         AddTextPrinterWithCallbackForMessage(gSaveFileCorruptMessage, 3, 15);
-        REG_WIN0H = 4575;
-        REG_WIN0V = 29087;
+        REG_WIN0H = WIN_RANGE(17, 223);
+        REG_WIN0V = WIN_RANGE(113, 159);
         gTasks[taskId].data[0] = 1;
         gTasks[taskId].func = Task_WaitForSaveErrorAck;
 
@@ -201,8 +201,8 @@ void Task_CheckSave(u8 taskId)
     case 4:
         DrawDefaultWindow(2, 14, 27, 19);
         AddTextPrinterWithCallbackForMessage(gBoardNotInstalledMessage, 3, 15);
-        REG_WIN0H = 4575;
-        REG_WIN0V = 29087;
+        REG_WIN0H = WIN_RANGE(17, 223);
+        REG_WIN0V = WIN_RANGE(113, 159);
         gTasks[taskId].data[0] = 0;
         gTasks[taskId].func = Task_WaitForSaveErrorAck;
         return;
@@ -227,7 +227,7 @@ void Task_CheckRtc(u8 taskId)
     {
         REG_WIN0H = 0;
         REG_WIN0V = 0;
-        REG_WININ = 4369;
+        REG_WININ = 0x1111;
         REG_WINOUT = 49;
         REG_BLDCNT = 241;
         REG_BLDALPHA = 0;
@@ -241,8 +241,8 @@ void Task_CheckRtc(u8 taskId)
         {
             DrawDefaultWindow(2, 14, 27, 19);
             AddTextPrinterWithCallbackForMessage(gBatteryDryMessage, 3, 15);
-            REG_WIN0H = 4575;
-            REG_WIN0V = 29087;
+            REG_WIN0H = WIN_RANGE(17, 223);
+            REG_WIN0V = WIN_RANGE(113, 159);
             gTasks[taskId].func = Task_WaitForRtcErrorAck;
         }
     }
@@ -268,7 +268,7 @@ void Task_DrawMainMenu(u8 taskId)
     {
         REG_WIN0H = 0;
         REG_WIN0V = 0;
-        REG_WININ = 4369;
+        REG_WININ = 0x1111;
         REG_WINOUT = 49;
         REG_BLDCNT = 241;
         REG_BLDALPHA = 0;
@@ -334,15 +334,15 @@ bool8 MainMenuProcessKeyInput(u8 taskId)
     if (gMain.newKeys & A_BUTTON)
     {
         audio_play(SE_SELECT);
-        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0);
+        BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0x0000);
         gTasks[taskId].func = MainMenuPressedA;
     }
     else if (gMain.newKeys & B_BUTTON)
     {
         audio_play(SE_SELECT);
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0xFFFF);
-        REG_WIN0H = 240;
-        REG_WIN0V = 160;
+        REG_WIN0H = WIN_RANGE(0, 240);
+        REG_WIN0V = WIN_RANGE(0, 160);
         gTasks[taskId].func = MainMenuPressedB;
     }
     else
@@ -456,24 +456,24 @@ void MainMenuPressedA(u8 taskId)
 
     switch ((int)action)
     {
-    case 0:
+    case NEW_GAME:
     default:
         gPlttBufferUnfaded[0] = 0;
         gPlttBufferFaded[0] = 0;
         gTasks[taskId].func = Task_Birch1;
         break;
-    case 1:
+    case CONTINUE:
         gPlttBufferUnfaded[0] = 0;
         gPlttBufferFaded[0] = 0;
         SetMainCallback2(CB2_ContinueSavedGame);
         DestroyTask(taskId);
         break;
-    case 2:
+    case OPTION:
         gMain.field_8 = (u32)sub_80096FC;
         SetMainCallback2(CB2_InitOptionMenu);
         DestroyTask(taskId);
         break;
-    case 3:
+    case MYSTERY_EVENTS:
         SetMainCallback2(CB2_InitMysteryEventMenu);
         DestroyTask(taskId);
         break;
@@ -491,7 +491,7 @@ void MainMenuPressedB(u8 taskId)
 
 void HighlightCurrentMenuItem(u8 layout, u8 menuItem)
 {
-    REG_WIN0H = 2535;
+    REG_WIN0H = WIN_RANGE(9, 231);
 
     switch (layout)
     {
@@ -501,10 +501,10 @@ void HighlightCurrentMenuItem(u8 layout, u8 menuItem)
         {
         case 0:
         default:
-            REG_WIN0V = 287;
+            REG_WIN0V = WIN_RANGE(1, 31);
             break;
         case 1:
-            REG_WIN0V = 8511;
+            REG_WIN0V = WIN_RANGE(33, 63);
             break;
         }
         break;
@@ -513,13 +513,13 @@ void HighlightCurrentMenuItem(u8 layout, u8 menuItem)
         {
         case 0:
         default:
-            REG_WIN0V = 319;
+            REG_WIN0V = WIN_RANGE(1, 63);
             break;
         case 1:
-            REG_WIN0V = 16735;
+            REG_WIN0V = WIN_RANGE(65, 95);
             break;
         case 2:
-            REG_WIN0V = 24959;
+            REG_WIN0V = WIN_RANGE(97, 127);
             break;
         }
         break;
@@ -528,16 +528,16 @@ void HighlightCurrentMenuItem(u8 layout, u8 menuItem)
         {
         case 0:
         default:
-            REG_WIN0V = 319;
+            REG_WIN0V = WIN_RANGE(1, 63);
             break;
         case 1:
-            REG_WIN0V = 16735;
+            REG_WIN0V = WIN_RANGE(65, 95);
             break;
         case 2:
-            REG_WIN0V = 24959;
+            REG_WIN0V = WIN_RANGE(97, 127);
             break;
         case 3:
-            REG_WIN0V = 33183;
+            REG_WIN0V = WIN_RANGE(129, 159);
             break;
         }
         break;
