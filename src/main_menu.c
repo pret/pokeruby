@@ -745,7 +745,7 @@ void Task_Birch1(u8 taskId)
     gTasks[taskId].data[2] = 0xFF;
     gTasks[taskId].data[3] = 0xFF;
     gTasks[taskId].data[7] = 0xD8;
-    
+
     sub_8075474(0xBB << 1);
 }
 
@@ -753,7 +753,7 @@ void task_new_game_prof_birch_speech_2(u8 taskId)
 {
     struct Task *tasks = gTasks;
     struct Task *task = &tasks[taskId];
-    
+
     if(task->data[7] != 0)
     {
         task->data[7]--;
@@ -778,12 +778,12 @@ void task_new_game_prof_birch_speech_3(u8 taskId)
 {
     struct Task *tasks = gTasks;
     struct Task *task = &tasks[taskId];
-    
+
     if(task->data[5] != 0)
     {
         struct Sprite *sprites = gSprites;
         struct Sprite *sprite = &sprites[(s16)task->data[8]];
-        
+
         sprite->oam.objMode = 0;
         if((u16)task->data[7])
         {
@@ -822,7 +822,7 @@ void task_new_game_prof_birch_speech_6(u8 taskId)
     u8 data = (u8)task->data[9];
     struct Sprite *sprites = gSprites;
     struct Sprite *sprite = &sprites[data];
-    
+
     sprite->pos1.x = 0x68;
     sprite->pos1.y = 0x48;
     sprite->invisible = 0;
@@ -836,12 +836,12 @@ void task_new_game_prof_birch_speech_7(u8 taskId)
 {
     struct Task *tasks;
     struct Task *task;
-    
+
     if(sub_8075374())
     {
         struct Task *tasks = gTasks;
         struct Task *task = &tasks[taskId]; //r5
-        
+
         if(task->data[7] > 0x5F)
         {
             sub_807206C((u32)&gUnknown_0840DFF7);
@@ -889,7 +889,7 @@ void task_new_game_prof_birch_speech_10(u8 taskId)
         struct Task *task = &tasks[taskId];
         struct Sprite *sprite = &sprites[task->data[8]];
         struct Sprite *sprite2;
-        
+
         sprite->oam.objMode = 1;
         sprite2 = &sprites[task->data[9]];
         sprite2->oam.objMode = 1;
@@ -904,7 +904,7 @@ void task_new_game_prof_birch_speech_11(u8 taskId)
 {
     struct Task *tasks = gTasks;
     struct Task *task = &tasks[taskId];
-    
+
     if((s16)task->data[4] != -0x3C)
     {
         task->data[4] -= 2;
@@ -932,7 +932,7 @@ void task_new_game_prof_birch_speech_12(u8 taskId)
         else
         {
             u8 data10 = gTasks[taskId].data[10];
-            
+
             gSprites[data10].pos1.x = 0xB4;
             gSprites[data10].pos1.y = 0x3C;
             gSprites[data10].invisible = 0;
@@ -950,12 +950,12 @@ void task_new_game_prof_birch_speech_13(u8 taskId)
 {
     struct Task *tasks = gTasks;
     struct Task *task = &tasks[taskId];
-    
+
     if(task->data[5])
     {
         struct Sprite *sprites = gSprites;
         struct Sprite *sprite = &sprites[task->data[2]];
-        
+
         sprite->oam.objMode = 0;
         task->func = task_new_game_prof_birch_speech_14;
     }
@@ -1014,7 +1014,7 @@ void task_new_game_prof_birch_speech_16(u8 taskId)
 void task_new_game_prof_birch_speech_17(u8 taskId)
 {
     u8 spriteId = gTasks[taskId].data[2];
-    
+
     if(gTasks[taskId].data[5] == 0)
     {
         gSprites[spriteId].pos1.x += 4;
@@ -1030,7 +1030,7 @@ void task_new_game_prof_birch_speech_17(u8 taskId)
         {
             spriteId = gTasks[taskId].data[10];
         }
-        
+
         gSprites[spriteId].pos1.x = 0xF0;
         gSprites[spriteId].pos1.y = 0x3C;
         gSprites[spriteId].invisible = 0;
@@ -1044,7 +1044,7 @@ void task_new_game_prof_birch_speech_17(u8 taskId)
 void task_new_game_prof_birch_speech_18(u8 taskId)
 {
     u8 spriteId = gTasks[taskId].data[2];
-    
+
     if(gSprites[spriteId].pos1.x > 0xB4)
     {
         gSprites[spriteId].pos1.x -= 4;
@@ -1173,25 +1173,25 @@ void task_new_game_prof_birch_speech_part2_6(u8 taskId)
     if(gTasks[taskId].data[5])
     {
         s16 spriteId;
-        
+
         spriteId = gTasks[taskId].data[10];
         gSprites[spriteId].invisible = 1;
-        
+
         spriteId = gTasks[taskId].data[11];
         gSprites[spriteId].invisible = 1;
-        
+
         spriteId = (u8)gTasks[taskId].data[8];
         gSprites[spriteId].pos1.x = 0x88;
         gSprites[spriteId].pos1.y = 0x40;
         gSprites[spriteId].invisible = 0;
         gSprites[spriteId].oam.objMode = 1;
-        
+
         spriteId = (u8)gTasks[taskId].data[9];
         gSprites[spriteId].pos1.x = 0x68;
         gSprites[spriteId].pos1.y = 0x48;
         gSprites[spriteId].invisible = 0;
         gSprites[spriteId].oam.objMode = 1;
-        
+
         sub_800B534(taskId, 2);
         sub_800B6C0(taskId, 1);
         DrawDefaultWindow(2, 13, 27, 18);
@@ -1206,21 +1206,21 @@ void task_new_game_prof_birch_speech_part2_7(u8 taskId)
     if(gTasks[taskId].data[5])
     {
         s16 spriteId;
-        
+
         spriteId = gTasks[taskId].data[8];
         gSprites[spriteId].oam.objMode = 0;
-        
+
         spriteId = gTasks[taskId].data[9];
         gSprites[spriteId].oam.objMode = 0;
-        
+
         if(sub_8072CF4(0x18))
         {
             spriteId = gTasks[taskId].data[8];
             gSprites[spriteId].oam.objMode = 1;
-            
+
             spriteId = gTasks[taskId].data[9];
             gSprites[spriteId].oam.objMode = 1;
-            
+
             sub_800B458(taskId, 2);
             sub_800B614(taskId, 1);
             gTasks[taskId].data[7] = 0x40;
@@ -1234,13 +1234,13 @@ void task_new_game_prof_birch_speech_part2_8(u8 taskId)
     if(gTasks[taskId].data[5])
     {
         s16 spriteId;
-        
+
         spriteId = gTasks[taskId].data[8];
         gSprites[spriteId].invisible = 1;
-        
+
         spriteId = gTasks[taskId].data[9];
         gSprites[spriteId].invisible = 1;
-        
+
         if(gTasks[taskId].data[7])
         {
             gTasks[taskId].data[7]--;
@@ -1248,18 +1248,18 @@ void task_new_game_prof_birch_speech_part2_8(u8 taskId)
         else
         {
             u8 spriteId;
-            
+
             if(gSaveBlock2.playerGender)
                 spriteId = (u8)gTasks[taskId].data[11];
             else
                 spriteId = (u8)gTasks[taskId].data[10];
-            
+
             gSprites[spriteId].pos1.x = 0x78;
             gSprites[spriteId].pos1.y = 0x3C;
             gSprites[spriteId].invisible = 0;
             gSprites[spriteId].oam.objMode = 1;
             gTasks[taskId].data[2] = spriteId;
-            
+
             sub_800B534(taskId, 2);
             sub_800B6C0(taskId, 1);
             DrawDefaultWindow(2, 13, 27, 18);
@@ -1274,14 +1274,14 @@ void task_new_game_prof_birch_speech_part2_9(u8 taskId)
     if(gTasks[taskId].data[5])
     {
         s16 spriteId;
-        
+
         spriteId = gTasks[taskId].data[2];
         gSprites[spriteId].oam.objMode = 0;
-        
+
         if(sub_8072CF4(0x18))
         {
             u8 spriteId;
-            
+
             spriteId = gTasks[taskId].data[2];
             gSprites[spriteId].oam.affineMode = 1;
             gSprites[spriteId].affineAnims = (union AffineAnimCmd **)gSpriteAffineAnimTable_81E79AC;
