@@ -917,7 +917,6 @@ void task_new_game_prof_birch_speech_11(u8 taskId)
     }
 }
 
-//Fix Me: Uses a few different registers, and I can't figure out why.
 void task_new_game_prof_birch_speech_12(u8 taskId)
 {
     if(gTasks[taskId].data[5])
@@ -977,7 +976,6 @@ void task_new_game_prof_birch_speech_15(u8 taskId)
     }
 }
 
-//Fix Me
 void task_new_game_prof_birch_speech_16(u8 taskId)
 {
     u8 cursorPos;
@@ -1076,7 +1074,6 @@ void Task_800A9B4(u8 taskId)
     }
 }
 
-//Fix Me
 void sub_800A9EC(u8 taskId)
 {
     s8 n = NameMenuProcessInput();
@@ -1107,7 +1104,6 @@ void sub_800A9EC(u8 taskId)
     }
 }
 
-//Fix Me
 void sub_800AAAC(u8 taskId)
 {
     if (!gPaletteFade.active)
