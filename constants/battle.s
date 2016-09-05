@@ -53,3 +53,29 @@
 	enum SP_DEFENSE
 	enum ACCURACY
 	enum EVASION
+
+@ battle_data_t
+.equiv Battle_Species,	    0x00
+.equiv Battle_Stats,        0x02 @ atk/def/spe/spatk/spdef
+.equiv Battle_Move_IDs,     0x0C @ four attacks
+.equiv Battle_IVs,          0x14
+.equiv Battle_Stat_Buffs,   0x18 @ hp/atk/def/spe/spatk/spdef
+.equiv Battle_Ability_ID,   0x20
+.equiv Battle_Type_1,       0x21
+.equiv Battle_Type_2,       0x22
+.equiv Battle_unk,          0x23 @undefined
+.equiv Battle_PP,           0x24
+.equiv Battle_Current_HP,   0x28
+.equiv Battle_Level,        0x2A
+.equiv Battle_Happiness,    0x2B
+.equiv Battle_Max_HP,       0x2C
+.equiv Battle_Held_Item,    0x2E
+.equiv Battle_Name,         0x30
+.equiv Battle_3B,           0x3B
+.equiv Battle_Trainer_Name, 0x3C
+.equiv Battle_padding,      0x44
+.equiv Battle_PID,          0x48
+.equiv Battle_Status1,      0x4C
+.equiv Battle_Status2,      0x50
+.equiv Battle_OTID,         0x54
+.equiv Battle_End,          0x58

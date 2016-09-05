@@ -3,6 +3,19 @@ unk_2004000 = 0x2004000;
 
 gUnknown_020239F8 = 0x20239F8;
 
+BattleData = 0x02024A80;
+
+AttackToExecuteA = 0x02024BE6;
+
+BattleAttacker = 0x02024C07;
+
+MovescrCursor = 0x02024C10;
+
+AttackEffectivity = 0x02024C68;
+
+BattlePreparationPhase = 0x02024D1E;
+EffectChooser = 0x02024D21;
+
 gSaveBlock2 = 0x2024EA4;
 
 stru_202E908 = 0x202E908;
