@@ -3,6 +3,8 @@ unk_2004000 = 0x2004000;
 
 gUnknown_020239F8 = 0x20239F8;
 
+gUnknown_02024E8C = 0x2024E8C;
+
 gSaveBlock2 = 0x2024EA4;
 
 stru_202E908 = 0x202E908;
