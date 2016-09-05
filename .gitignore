@@ -12,9 +12,7 @@
 *.latfont
 *.hwjpnfont
 *.fwjpnfont
-pokeas
-pokeld
-pokeobjcopy
+*.bat
 src/*.s
 tools/agbcc
 ld_script_ruby.txt

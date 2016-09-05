@@ -4519,8 +4519,8 @@ gPokenavRibbonPokeView_Gfx:: @ 8EA0028
 	.incbin "graphics/pokenav/ribbon_pokeview.4bpp"
 
 	.align 2
-gTextWindowMainFrame_Gfx:: @ 8EA0108
-	.incbin "graphics/text_window/main.4bpp"
+gMessageBox_Gfx:: @ 8EA0108
+	.incbin "graphics/text_window/message_box.4bpp"
 
 	.align 2
 gUnknown_08EA02C8:: @ 8EA02C8

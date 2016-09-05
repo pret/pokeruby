@@ -7879,8 +7879,9 @@ gUnknown_083761F0:: @ 83761F0
 	.4byte gTextWindowFrame19_Gfx, gTextWindowFrame19_Pal
 	.4byte gTextWindowFrame20_Gfx, gTextWindowFrame20_Pal
 
-gUnknown_08376290:: @ 8376290
-	.incbin "baserom.gba", 0x00376290, 0x48
+	.align 1
+gMessageBoxTilemap:: @ 8376290
+	.incbin "graphics/text_window/message_box_map.bin"
 
 gUnknown_083762D8:: @ 83762D8
 	.space 4
