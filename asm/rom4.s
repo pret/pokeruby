@@ -40006,7 +40006,7 @@ sub_8064A74: @ 8064A74
 	strb r0, [r1]
 	ldr r0, _08064A94
 	ldrh r0, [r0]
-	bl sub_80651C8
+	bl SetMessageBoxBaseTileNum
 	ldr r0, _08064A98
 	ldr r1, _08064A9C
 	bl InitWindowFromConfig
@@ -40046,13 +40046,13 @@ _08064AC8:
 	b _08064B28
 _08064ACE:
 	ldr r0, _08064AD8
-	bl sub_8065348
+	bl LoadMessageBoxTiles
 	b _08064AE2
 	.align 2, 0
 _08064AD8: .4byte 0x0202e87c
 _08064ADC:
 	ldr r0, _08064AEC
-	bl draw_win
+	bl DrawStandardMessageBox
 _08064AE2:
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
@@ -40306,7 +40306,7 @@ unref_sub_8064CA0: @ 8064CA0
 	push {lr}
 	bl task_del_textbox
 	ldr r0, _08064CB8
-	bl draw_win
+	bl DrawStandardMessageBox
 	ldr r1, _08064CBC
 	movs r0, 0
 	strb r0, [r1]

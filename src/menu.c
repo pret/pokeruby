@@ -2,6 +2,7 @@
 #include "main.h"
 #include "text.h"
 #include "songs.h"
+#include "text_window.h"
 
 struct Menu
 {
@@ -83,12 +84,6 @@ void sub_8072DCC(u8);
 void sub_8072DDC(u8);
 void sub_8072DEC(void);
 
-extern u16 sub_8064EF4(u16);
-extern void sub_8064F08(struct Window *);
-extern void sub_8064F6C(struct Window *, u8);
-extern u16 sub_80651C8(u16);
-extern void AddTextPrinterParametrized(struct Window *win, u8 left, u8 top, u8 right, u8 bottom);
-extern void copy_textbox_border_tile_patterns_to_vram(struct Window *);
 extern void sub_814A5C0(u8, u16, u8, u16, u8);
 extern void sub_814A880(u8, u8);
 extern void sub_814A904(void);
@@ -140,13 +135,13 @@ bool32 sub_8071C94(void)
             goto fail;
         goto next;
     case 3:
-        word_202E9D2 = sub_8064EF4(word_202E9D0);
+        word_202E9D2 = SetTextWindowBaseTileNum(word_202E9D0);
     next:
         byte_202E9CC++;
         return 0;
     case 4:
-        sub_8064F08(dword_202E9C8);
-        word_202E9D4 = sub_80651C8(word_202E9D2);
+        LoadTextWindowGraphics(dword_202E9C8);
+        word_202E9D4 = SetMessageBoxBaseTileNum(word_202E9D2);
         return 1;
     default:
     fail:
@@ -160,9 +155,9 @@ void sub_8071D48(struct WindowConfig *a1, u16 a2)
     InitWindowFromConfig(&stru_202E908, a1);
     word_202E9CE = a2;
     word_202E9D0 = InitWindowTileData(dword_202E9C8, word_202E9CE);
-    word_202E9D2 = sub_8064EF4(word_202E9D0);
-    sub_8064F08(dword_202E9C8);
-    word_202E9D4 = sub_80651C8(word_202E9D2);
+    word_202E9D2 = SetTextWindowBaseTileNum(word_202E9D0);
+    LoadTextWindowGraphics(dword_202E9C8);
+    word_202E9D4 = SetMessageBoxBaseTileNum(word_202E9D2);
 }
 
 void unref_sub_8071DA4(struct WindowConfig *a1, u16 a2)
@@ -170,20 +165,20 @@ void unref_sub_8071DA4(struct WindowConfig *a1, u16 a2)
     dword_202E9C8 = &stru_202E908;
     InitWindowFromConfig(&stru_202E908, a1);
     word_202E9D0 = a2;
-    word_202E9D2 = sub_8064EF4(word_202E9D0);
-    sub_8064F08(dword_202E9C8);
-    word_202E9CE = sub_80651C8(word_202E9D2);
+    word_202E9D2 = SetTextWindowBaseTileNum(word_202E9D0);
+    LoadTextWindowGraphics(dword_202E9C8);
+    word_202E9CE = SetMessageBoxBaseTileNum(word_202E9D2);
     word_202E9D4 = InitWindowTileData(dword_202E9C8, word_202E9CE);
 }
 
 void sub_8071E00(u8 a1)
 {
-    sub_8064F6C(dword_202E9C8, a1);
+    LoadTextWindowGraphics_OverrideFrameType(dword_202E9C8, a1);
 }
 
 void GetMapNamePopUpWindowId(void)
 {
-    sub_8064F08(dword_202E9C8);
+    LoadTextWindowGraphics(dword_202E9C8);
 }
 
 void sub_8071E2C(struct WindowConfig *a1)
@@ -214,7 +209,7 @@ void sub_8071EF4(void)
 
 void DrawDefaultWindow(u8 left, u8 top, u8 right, u8 bottom)
 {
-    AddTextPrinterParametrized(dword_202E9C8, left, top, right, bottom);
+    DrawTextWindow(dword_202E9C8, left, top, right, bottom);
 }
 
 void sub_8071F40(u8 *str)
@@ -240,7 +235,7 @@ void unref_sub_8071FBC(u16 a1, u8 a2, u8 a3, u8 a4, u8 a5)
 
 void sub_8071FFC(void)
 {
-    copy_textbox_border_tile_patterns_to_vram(dword_202E9C8);
+    DisplayMessageBox(dword_202E9C8);
 }
 
 void AddTextPrinterWithCallbackForMessage(u8 *str, u8 a2, u8 a3)

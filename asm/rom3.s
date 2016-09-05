@@ -4128,16 +4128,16 @@ _0800D748: .4byte 0x0000bf40
 sub_800D74C: @ 800D74C
 	push {r4,lr}
 	movs r0, 0x12
-	bl sub_8064EF4
+	bl SetTextWindowBaseTileNum
 	ldr r4, _0800D79C
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_8064F38
+	bl LoadTextWindowGraphics_OverridePalSlot
 	movs r0, 0x22
-	bl sub_8064EF4
+	bl SetTextWindowBaseTileNum
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_8064F38
+	bl LoadTextWindowGraphics_OverridePalSlot
 	ldr r3, _0800D7A0
 	adds r0, r3, 0
 	adds r0, 0xB8
@@ -43018,8 +43018,8 @@ _0802157A:
 	bx r0
 	thumb_func_end sub_80214B4
 
-	thumb_func_start sub_8021580
-sub_8021580: @ 8021580
+	thumb_func_start atk47
+atk47: @ 8021580
 	push {r4,lr}
 	movs r3, 0
 	ldr r0, _080215A0
@@ -43083,7 +43083,7 @@ _080215EC: .4byte 0x0001601e
 _080215F0: .4byte 0x000160a4
 _080215F4: .4byte 0x000160a5
 _080215F8: .4byte 0x02024c10
-	thumb_func_end sub_8021580
+	thumb_func_end atk47
 
 	thumb_func_start atk48_playstatchangeanimation
 atk48_playstatchangeanimation: @ 80215FC

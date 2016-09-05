@@ -4047,13 +4047,13 @@ _08042D90:
 	adds r1, r5, 0
 	bl InitWindowFromConfig
 	movs r0, 0x14
-	bl sub_8064EF4
+	bl SetTextWindowBaseTileNum
 	ldr r1, [r4]
 	adds r1, 0x38
 	strb r0, [r1]
 	ldr r0, [r4]
 	adds r0, 0x8
-	bl sub_8064F08
+	bl LoadTextWindowGraphics
 	b _08042F04
 	.align 2, 0
 _08042DBC: .4byte gWindowConfig_81E6F84
@@ -14464,14 +14464,14 @@ _08047F48:
 	adds r1, r4, 0
 	bl InitWindowFromConfig
 	movs r0, 0x14
-	bl sub_8064EF4
+	bl SetTextWindowBaseTileNum
 	ldr r1, [r5]
 	adds r1, 0x7A
 	movs r4, 0
 	strb r0, [r1]
 	ldr r0, [r5]
 	adds r0, 0x4
-	bl sub_8064F08
+	bl LoadTextWindowGraphics
 	bl sub_8071EF4
 	bl sub_809D51C
 	ldr r0, [r5]
@@ -15159,14 +15159,14 @@ _0804857C:
 	adds r1, r4, 0
 	bl InitWindowFromConfig
 	movs r0, 0x14
-	bl sub_8064EF4
+	bl SetTextWindowBaseTileNum
 	ldr r1, [r5]
 	adds r1, 0x7A
 	movs r4, 0
 	strb r0, [r1]
 	ldr r0, [r5]
 	adds r0, 0x4
-	bl sub_8064F08
+	bl LoadTextWindowGraphics
 	bl sub_8071EF4
 	bl sub_809D51C
 	ldr r0, [r5]
@@ -17302,7 +17302,7 @@ _080496F4:
 	movs r1, 0x12
 	movs r2, 0xE
 	movs r3, 0x1C
-	bl AddTextPrinterParametrized
+	bl DrawTextWindow
 	ldr r3, _08049758
 	movs r0, 0x13
 	movs r1, 0xF
@@ -17350,7 +17350,7 @@ _0804977A:
 	movs r1, 0x18
 	movs r2, 0xE
 	movs r3, 0x1D
-	bl AddTextPrinterParametrized
+	bl DrawTextWindow
 	movs r0, 0x18
 	movs r1, 0xE
 	movs r2, 0x4
@@ -18054,7 +18054,7 @@ DisplayMessageAndContinueTask: @ 8049CF0
 	movs r1, 0x18
 	movs r2, 0xE
 	movs r3, 0x1D
-	bl AddTextPrinterParametrized
+	bl DrawTextWindow
 	movs r0, 0x18
 	movs r1, 0xE
 	movs r2, 0x4
@@ -19727,7 +19727,7 @@ sub_804AA0C: @ 804AA0C
 	str r1, [sp]
 	adds r1, r6, 0
 	adds r2, r5, 0
-	bl AddTextPrinterParametrized
+	bl DrawTextWindow
 	mov r1, r8
 	ldr r3, [r1]
 	adds r0, r3, 0x4
@@ -21085,13 +21085,13 @@ _0804B47C:
 	adds r1, r4, 0
 	bl InitWindowFromConfig
 	movs r0, 0x2
-	bl sub_8064EF4
+	bl SetTextWindowBaseTileNum
 	ldr r1, [r6]
 	adds r1, 0x34
 	strb r0, [r1]
 	ldr r0, [r6]
 	adds r0, 0x4
-	bl sub_8064F08
+	bl LoadTextWindowGraphics
 	bl sub_8071EF4
 	ldr r1, _0804B580
 	ldr r4, _0804B584
@@ -21487,13 +21487,13 @@ _0804B7F4:
 	adds r1, r4, 0
 	bl InitWindowFromConfig
 	movs r0, 0x2
-	bl sub_8064EF4
+	bl SetTextWindowBaseTileNum
 	ldr r1, [r5]
 	adds r1, 0x34
 	strb r0, [r1]
 	ldr r0, [r5]
 	adds r0, 0x4
-	bl sub_8064F08
+	bl LoadTextWindowGraphics
 	bl sub_8071EF4
 	ldr r1, _0804B904
 	ldr r2, _0804B908

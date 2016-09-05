@@ -1156,7 +1156,7 @@ gUnknown_081FA73C:: @ 81FA73C
 	.4byte sub_80213D0
 	.4byte atk46_cmd46
 	.4byte sub_80214B4
-	.4byte sub_8021580
+	.4byte atk47
 	.4byte atk48_playstatchangeanimation
 	.4byte sub_80217F8
 	.4byte atk4A_damagecalc2
@@ -26671,22 +26671,22 @@ gUnknown_08401E5A:: @ 8401E5A
 	.align 2
 gUnknown_08401E60:: @ 8401E60
 	.4byte sub_8128AA8
-	.4byte sub_8128AF0
+	.4byte contest_ai_get_turn
 	.4byte sub_8128B0C
 	.4byte sub_8128B4C
 	.4byte sub_8128B8C
 	.4byte sub_8128BCC
-	.4byte sub_8128C0C
+	.4byte contest_ai_get_excitement
 	.4byte sub_8128C2C
 	.4byte sub_8128C6C
 	.4byte sub_8128CAC
 	.4byte sub_8128CEC
-	.4byte sub_8128D2C
+	.4byte contest_ai_get_user_order
 	.4byte sub_8128D50
 	.4byte sub_8128D90
 	.4byte sub_8128DD0
 	.4byte sub_8128E10
-	.4byte sub_8128E50
+	.4byte contest_ai_get_user_condition_maybe
 	.4byte sub_8128E90
 	.4byte sub_8128ED0
 	.4byte sub_8128F10
@@ -26701,21 +26701,21 @@ gUnknown_08401E60:: @ 8401E60
 	.4byte sub_8129160
 	.4byte sub_81291AC
 	.4byte sub_81291F8
-	.4byte sub_8129244
+	.4byte contest_ai_get_contest_type
 	.4byte sub_8129264
 	.4byte sub_81292A4
-	.4byte sub_81292E4
+	.4byte contest_ai_get_move_excitement
 	.4byte sub_8129324
 	.4byte sub_8129368
 	.4byte sub_81293AC
 	.4byte sub_81293F0
-	.4byte sub_8129434
+	.4byte contest_ai_get_move_effect
 	.4byte sub_8129470
 	.4byte sub_81294B0
-	.4byte sub_81294F0
+	.4byte contest_ai_get_move_effect_type
 	.4byte sub_8129538
 	.4byte sub_8129578
-	.4byte sub_81295B8
+	.4byte contest_ai_check_move_has_highest_appeal
 	.4byte sub_8129638
 	.4byte sub_812967C
 	.4byte sub_81296FC
@@ -26729,34 +26729,34 @@ gUnknown_08401E60:: @ 8401E60
 	.4byte sub_8129930
 	.4byte sub_8129970
 	.4byte sub_81299B0
-	.4byte sub_81299F0
+	.4byte contest_ai_get_move_used_count
 	.4byte sub_8129A44
 	.4byte sub_8129A84
 	.4byte sub_8129AC4
 	.4byte sub_8129B04
-	.4byte sub_8129B44
+	.4byte contest_ai_check_combo_starter
 	.4byte sub_8129BB8
 	.4byte sub_8129BFC
-	.4byte sub_8129C40
+	.4byte contest_ai_check_combo_finisher
 	.4byte sub_8129CB4
 	.4byte sub_8129CF8
-	.4byte sub_8129D3C
+	.4byte contest_ai_check_would_finish_combo
 	.4byte sub_8129D98
 	.4byte sub_8129DDC
-	.4byte sub_8129E20
+	.4byte contest_ai_get_condition
 	.4byte sub_8129E64
 	.4byte sub_8129EA4
 	.4byte sub_8129EE4
 	.4byte sub_8129F24
-	.4byte sub_8129F64
+	.4byte contest_ai_get_used_combo_starter
 	.4byte sub_8129FBC
 	.4byte sub_8129FFC
 	.4byte sub_812A03C
 	.4byte sub_812A07C
-	.4byte sub_812A0BC
+	.4byte contest_ai_check_can_participate
 	.4byte sub_812A100
 	.4byte sub_812A144
-	.4byte sub_812A188
+	.4byte contest_ai_get_val_812A188
 	.4byte sub_812A1C4
 	.4byte sub_812A208
 	.4byte sub_812A24C
@@ -26800,7 +26800,7 @@ gUnknown_08401E60:: @ 8401E60
 	.4byte sub_812AC34
 	.4byte sub_812AC54
 	.4byte sub_812AC84
-	.4byte sub_812ACFC
+	.4byte contest_ai_check_for_exciting_move
 	.4byte sub_812AD50
 	.4byte sub_812AD94
 	.4byte sub_812ADD8
