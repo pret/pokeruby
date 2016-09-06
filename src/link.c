@@ -27,7 +27,7 @@ struct LinkTestBGInfo
     u32 dummy_C;
 };
 
-extern void sub_8071C4C(const struct WindowConfig *);
+extern void InitMenuWindowConfig(const struct WindowConfig *);
 extern void sub_80516C4(u8, u16);
 
 extern u8 unk_2000000[];
@@ -237,7 +237,7 @@ static void LinkTestScreen(void)
     ResetTasks();
     SetVBlankCallback(VBlankCB_LinkTest);
     SetUpWindowConfig(&gWindowConfig_81E6CE4);
-    sub_8071C4C(&gWindowConfig_81E6CE4);
+    InitMenuWindowConfig(&gWindowConfig_81E6CE4);
     ResetBlockSend();
     gLinkType = 0x1111;
     OpenLink();
@@ -1224,8 +1224,8 @@ void CB2_LinkError(void)
     ResetTasks();
     SetVBlankCallback(VBlankCB_LinkTest);
     SetUpWindowConfig(&gWindowConfig_81E7198);
-    sub_8071C4C(&gWindowConfig_81E7198);
-    sub_8071EF4();
+    InitMenuWindowConfig(&gWindowConfig_81E7198);
+    MenuZeroFillScreen();
     REG_BLDALPHA = 0;
     REG_BG0VOFS = 0;
     REG_BG0HOFS = 0;

@@ -8,8 +8,8 @@
 #include "palette.h"
 #include "string_util.h"
 
-extern u8 sub_8072080(void);
-extern void Print(u8 *, u8, u8);
+extern u8 MenuUpdateWindowText(void);
+extern void MenuPrint(u8 *, u8, u8);
 extern void CB2_ContinueSavedGame(void);
 extern void CB2_InitMysteryEventMenu(void);
 extern void CB2_InitOptionMenu(void);
@@ -21,21 +21,21 @@ extern u8 *sub_8072C14(u8 *, s32, u8, u8);
 extern u8 sub_80729D8(u8 *, u8, u16, u8);
 extern u8 GetBadgeCount(void);
 extern void Task_Birch1(u8);
-void AddTextPrinterWithCallbackForMessage(const u8 *string, u8 a, u8 b);
+void MenuPrintMessage(const u8 *string, u8 a, u8 b);
 u8 sub_8072CF4(u8 a);
 void sub_8072DEC(void);
 u8 sub_8075374(void);
-void sub_807206C(u32);
+void MenuSetText(u32);
 void cry_related(u16, u8);
 void audio_play(u8 a);
-void Reset(u8 a, u8 b, u8 c, u8 d);
+void MenuZeroFillWindowRect(u8 a, u8 b, u8 c, u8 d);
 u8 GetMenuCursorPos(void);
 void DoNamingScreen(u8 r0, struct SaveBlock2 *r1, u16 r2, u16 r3, u8 s0, MainCallback s4);
-void sub_8072974(u8 r0, u8 r1, u32 r2);
-s8 FillWindowPixelBuffer(void);
+void DisplayYesNoMenu(u8 r0, u8 r1, u32 r2);
+s8 ProcessMenuInputNoWrap_(void);
 void c2_load_new_map_2(void);
 void LZ77UnCompVram(const void *src, void *dest);
-void sub_8071C4C(const struct WindowConfig *);
+void InitMenuWindowConfig(const struct WindowConfig *);
 void CB2_MainMenu(void);
 void VBlankCB_MainMenu(void);
 void DecompressPicFromTable_2(const struct SpriteSheet *, u8, u8, void *, void *, u32);
@@ -43,7 +43,7 @@ void LoadCompressedObjectPalette(const struct SpritePalette *);
 void gpu_pal_obj_decompress_and_apply(u16, u8);
 u8 AddNewGameBirchObject(u8, u8, u8);
 u8 sub_80859BC(u8, u16, u16, u8, void *);
-void DrawDefaultWindow(u8 a, u8 b, u8 c, u8 d);
+void MenuDrawTextWindow(u8 a, u8 b, u8 c, u8 d);
 
 extern struct PaletteFadeControl gPaletteFade;
 extern u8 gSaveFileDeletedMessage[];
@@ -139,7 +139,7 @@ u32 InitMainMenu(u8 a1)
     ResetSpriteData();
     FreeAllSpritePalettes();
     SetUpWindowConfig(&gWindowConfig_81E6C3C);
-    sub_8071C4C(&gWindowConfig_81E6CE4);
+    InitMenuWindowConfig(&gWindowConfig_81E6CE4);
 
     if (a1)
         BeginNormalPaletteFade(-1, 0, 0x10, 0, 0x0000); // fade to black
@@ -197,16 +197,16 @@ void Task_CheckSave(u8 taskId)
         gTasks[taskId].func = Task_CheckRtc;
         break;
     case 2:
-        DrawDefaultWindow(2, 14, 27, 19);
-        AddTextPrinterWithCallbackForMessage(gSaveFileDeletedMessage, 3, 15);
+        MenuDrawTextWindow(2, 14, 27, 19);
+        MenuPrintMessage(gSaveFileDeletedMessage, 3, 15);
         REG_WIN0H = WIN_RANGE(17, 223);
         REG_WIN0V = WIN_RANGE(113, 159);
         gTasks[taskId].data[0] = 0;
         gTasks[taskId].func = Task_WaitForSaveErrorAck;
         break;
     case 255:
-        DrawDefaultWindow(2, 14, 27, 19);
-        AddTextPrinterWithCallbackForMessage(gSaveFileCorruptMessage, 3, 15);
+        MenuDrawTextWindow(2, 14, 27, 19);
+        MenuPrintMessage(gSaveFileCorruptMessage, 3, 15);
         REG_WIN0H = WIN_RANGE(17, 223);
         REG_WIN0V = WIN_RANGE(113, 159);
         gTasks[taskId].data[0] = 1;
@@ -223,8 +223,8 @@ void Task_CheckSave(u8 taskId)
         gTasks[taskId].func = Task_CheckRtc;
         break;
     case 4:
-        DrawDefaultWindow(2, 14, 27, 19);
-        AddTextPrinterWithCallbackForMessage(gBoardNotInstalledMessage, 3, 15);
+        MenuDrawTextWindow(2, 14, 27, 19);
+        MenuPrintMessage(gBoardNotInstalledMessage, 3, 15);
         REG_WIN0H = WIN_RANGE(17, 223);
         REG_WIN0V = WIN_RANGE(113, 159);
         gTasks[taskId].data[0] = 0;
@@ -235,11 +235,11 @@ void Task_CheckSave(u8 taskId)
 
 void Task_WaitForSaveErrorAck(u8 taskId)
 {
-    if (sub_8072080())
+    if (MenuUpdateWindowText())
     {
         if (gMain.newKeys & A_BUTTON)
         {
-            Reset(2, 14, 27, 19);
+            MenuZeroFillWindowRect(2, 14, 27, 19);
             gTasks[taskId].func = Task_CheckRtc;
         }
     }
@@ -263,8 +263,8 @@ void Task_CheckRtc(u8 taskId)
         }
         else
         {
-            DrawDefaultWindow(2, 14, 27, 19);
-            AddTextPrinterWithCallbackForMessage(gBatteryDryMessage, 3, 15);
+            MenuDrawTextWindow(2, 14, 27, 19);
+            MenuPrintMessage(gBatteryDryMessage, 3, 15);
             REG_WIN0H = WIN_RANGE(17, 223);
             REG_WIN0V = WIN_RANGE(113, 159);
             gTasks[taskId].func = Task_WaitForRtcErrorAck;
@@ -274,11 +274,11 @@ void Task_CheckRtc(u8 taskId)
 
 void Task_WaitForRtcErrorAck(u8 taskId)
 {
-    if (sub_8072080())
+    if (MenuUpdateWindowText())
     {
         if ( gMain.newKeys & 1 )
         {
-            Reset(2, 14, 27, 19);
+            MenuZeroFillWindowRect(2, 14, 27, 19);
             gTasks[taskId].func = Task_DrawMainMenu;
         }
     }
@@ -316,28 +316,28 @@ void Task_DrawMainMenu(u8 taskId)
         {
         case 0:
         default:
-            DrawDefaultWindow(1, 0, 28, 3);
+            MenuDrawTextWindow(1, 0, 28, 3);
             PrintMainMenuItem(gMainMenuString_NewGame, 2, 1);
-            DrawDefaultWindow(1, 4, 28, 7);
+            MenuDrawTextWindow(1, 4, 28, 7);
             PrintMainMenuItem(gMainMenuString_Option, 2, 5);
             break;
         case 1:
-            DrawDefaultWindow(1, 0, 28, 7);
+            MenuDrawTextWindow(1, 0, 28, 7);
             PrintMainMenuItem(gMainMenuString_Continue, 2, 1);
-            DrawDefaultWindow(1, 8, 28, 11);
+            MenuDrawTextWindow(1, 8, 28, 11);
             PrintMainMenuItem(gMainMenuString_NewGame, 2, 9);
-            DrawDefaultWindow(1, 12, 28, 15);
+            MenuDrawTextWindow(1, 12, 28, 15);
             PrintMainMenuItem(gMainMenuString_Option, 2, 13);
             PrintSaveFileInfo();
             break;
         case 2:
-            DrawDefaultWindow(1, 0, 28, 7);
+            MenuDrawTextWindow(1, 0, 28, 7);
             PrintMainMenuItem(gMainMenuString_Continue, 2, 1);
-            DrawDefaultWindow(1, 8, 28, 11);
+            MenuDrawTextWindow(1, 8, 28, 11);
             PrintMainMenuItem(gMainMenuString_NewGame, 2, 9);
-            DrawDefaultWindow(1, 12, 28, 15);
+            MenuDrawTextWindow(1, 12, 28, 15);
             PrintMainMenuItem(gMainMenuString_MysteryEvents, 2, 13);
-            DrawDefaultWindow(1, 16, 28, 19);
+            MenuDrawTextWindow(1, 16, 28, 19);
             PrintMainMenuItem(gMainMenuString_Option, 2, 0x11);
             PrintSaveFileInfo();
             break;
@@ -582,7 +582,7 @@ void PrintMainMenuItem(u8 *text, u8 left, u8 top)
 
     buffer[29] = EOS;
 
-    Print(buffer, left, top);
+    MenuPrint(buffer, left, top);
 }
 
 void PrintSaveFileInfo(void)
@@ -595,8 +595,8 @@ void PrintSaveFileInfo(void)
 
 void PrintPlayerName(void)
 {
-    Print(gMainMenuString_Player, 2, 3);
-    Print(gSaveBlock2.playerName, 9, 3);
+    MenuPrint(gMainMenuString_Player, 2, 3);
+    MenuPrint(gSaveBlock2.playerName, 9, 3);
 }
 
 void PrintPlayTime(void)
@@ -604,26 +604,26 @@ void PrintPlayTime(void)
     u8 playTime[16];
     u8 alignedPlayTime[32];
 
-    Print(gMainMenuString_Time, 16, 3);
+    MenuPrint(gMainMenuString_Time, 16, 3);
     FormatPlayTime(playTime, gSaveBlock2.playTimeHours, gSaveBlock2.playTimeMinutes, 1);
     sub_8072C74(alignedPlayTime, playTime, 48, 1);
-    Print(alignedPlayTime, 22, 3);
+    MenuPrint(alignedPlayTime, 22, 3);
 }
 
 void PrintPokedexCount(void)
 {
     u8 buffer[16];
 
-    Print(gMainMenuString_Pokedex, 2, 5);
+    MenuPrint(gMainMenuString_Pokedex, 2, 5);
     sub_8072C14(buffer, GetPokedexSeenCount(), 18, 0);
-    Print(buffer, 9, 5);
+    MenuPrint(buffer, 9, 5);
 }
 
 void PrintBadgeCount(void)
 {
     u8 buffer[16];
 
-    Print(gMainMenuString_Badges, 16, 5);
+    MenuPrint(gMainMenuString_Badges, 16, 5);
     ConvertIntToDecimalString(buffer, GetBadgeCount());
     sub_80729D8(buffer, 205, 40, 1);
 }
@@ -721,7 +721,7 @@ void set_default_player_name(u8 a);
 void Task_Birch1(u8 taskId)
 {
     SetUpWindowConfig(&gWindowConfig_81E6C3C);
-    sub_8071C4C(&gWindowConfig_81E6CE4);
+    InitMenuWindowConfig(&gWindowConfig_81E6CE4);
     REG_WIN0H = 0;
     REG_WIN0V = 0;
     REG_WININ = 0;
@@ -791,8 +791,8 @@ void task_new_game_prof_birch_speech_3(u8 taskId)
         }
         else
         {
-            DrawDefaultWindow(0x2, 0xD, 0x1B, 0x12);
-            AddTextPrinterWithCallbackForMessage(gUnknown_081C6D78, 0x3, 0xE);
+            MenuDrawTextWindow(0x2, 0xD, 0x1B, 0x12);
+            MenuPrintMessage(gUnknown_081C6D78, 0x3, 0xE);
             task->func = task_new_game_prof_birch_speech_4;
         }
     }
@@ -805,7 +805,7 @@ void task_new_game_prof_birch_speech_4(u8 taskId)
         struct Task *tasks = gTasks;
         struct Task *task = &tasks[taskId];
         task->func = task_new_game_prof_birch_speech_5;
-        AddTextPrinterWithCallbackForMessage(gUnknown_081C6DF8, 0x3, 0xE);
+        MenuPrintMessage(gUnknown_081C6DF8, 0x3, 0xE);
     }
 }
 
@@ -844,7 +844,7 @@ void task_new_game_prof_birch_speech_7(u8 taskId)
 
         if(task->data[7] > 0x5F)
         {
-            sub_807206C((u32)&gUnknown_0840DFF7);
+            MenuSetText((u32)&gUnknown_0840DFF7);
             task->func = task_new_game_prof_birch_speech_8;
         }
     }
@@ -865,7 +865,7 @@ void task_new_game_prof_birch_speech_8(u8 taskId)
 {
     if(sub_8072CF4(0x18))
     {
-        AddTextPrinterWithCallbackForMessage(gUnknown_081C6E1A, 0x3, 0xE);
+        MenuPrintMessage(gUnknown_081C6E1A, 0x3, 0xE);
         gTasks[taskId].func = task_new_game_prof_birch_speech_9;
     }
 }
@@ -874,8 +874,8 @@ void task_new_game_prof_birch_speech_9(u8 taskId)
 {
     if(sub_8072CF4(0x18))
     {
-        DrawDefaultWindow(0x2, 0xD, 0x1B, 0x12);
-        AddTextPrinterWithCallbackForMessage(gUnknown_081C6FCB, 0x3, 0xE);
+        MenuDrawTextWindow(0x2, 0xD, 0x1B, 0x12);
+        MenuPrintMessage(gUnknown_081C6FCB, 0x3, 0xE);
         gTasks[taskId].func = task_new_game_prof_birch_speech_10;
     }
 }
@@ -962,8 +962,8 @@ void task_new_game_prof_birch_speech_13(u8 taskId)
 
 void task_new_game_prof_birch_speech_14(u8 taskId)
 {
-    DrawDefaultWindow(2, 0xD, 0x1B, 0x12);
-    AddTextPrinterWithCallbackForMessage(gUnknown_081C6FD8, 3, 14);
+    MenuDrawTextWindow(2, 0xD, 0x1B, 0x12);
+    MenuPrintMessage(gUnknown_081C6FD8, 3, 14);
     gTasks[taskId].func = task_new_game_prof_birch_speech_15;
 }
 
@@ -986,14 +986,14 @@ void task_new_game_prof_birch_speech_16(u8 taskId)
         sub_8072DEC();
         audio_play(5);
         gSaveBlock2.playerGender = MALE;
-        Reset(2, 4, 8, 9);
+        MenuZeroFillWindowRect(2, 4, 8, 9);
         gTasks[taskId].func = sub_800A974;
         break;
     case FEMALE:
         sub_8072DEC();
         audio_play(5);
         gSaveBlock2.playerGender = FEMALE;
-        Reset(2, 4, 8, 9);
+        MenuZeroFillWindowRect(2, 4, 8, 9);
         gTasks[taskId].func = sub_800A974;
         break;
     }
@@ -1060,8 +1060,8 @@ void task_new_game_prof_birch_speech_18(u8 taskId)
 
 void sub_800A974(u8 taskId)
 {
-    DrawDefaultWindow(2, 13, 27, 18);
-    AddTextPrinterWithCallbackForMessage(gUnknown_081C6FFA, 3, 14);
+    MenuDrawTextWindow(2, 13, 27, 18);
+    MenuPrintMessage(gUnknown_081C6FFA, 3, 14);
     gTasks[taskId].func = Task_800A9B4;
 }
 
@@ -1086,7 +1086,7 @@ void sub_800A9EC(u8 taskId)
     case 4:
         sub_8072DEC();
         audio_play(5);
-        Reset(2, 1, 22, 12);
+        MenuZeroFillWindowRect(2, 1, 22, 12);
         set_default_player_name(n);
         gTasks[taskId].func = task_new_game_prof_birch_speech_part2_1;
         break;
@@ -1098,7 +1098,7 @@ void sub_800A9EC(u8 taskId)
     case -1:
         sub_8072DEC();
         audio_play(5);
-        Reset(2, 1, 22, 12);
+        MenuZeroFillWindowRect(2, 1, 22, 12);
         gTasks[taskId].func = task_new_game_prof_birch_speech_14;
         break;
     }
@@ -1115,9 +1115,9 @@ void sub_800AAAC(u8 taskId)
 
 void task_new_game_prof_birch_speech_part2_1(u8 taskId)
 {
-    DrawDefaultWindow(2, 13, 27, 18);
+    MenuDrawTextWindow(2, 13, 27, 18);
     StringExpandPlaceholders(gStringVar4, gUnknown_081C7017);
-    AddTextPrinterWithCallbackForMessage(gStringVar4, 3, 14);
+    MenuPrintMessage(gStringVar4, 3, 14);
     gTasks[taskId].func = sub_800AB38;
 }
 
@@ -1125,18 +1125,18 @@ void sub_800AB38(u8 taskId)
 {
     if(sub_8072CF4(0x18))
     {
-        sub_8072974(2, 1, 1);
+        DisplayYesNoMenu(2, 1, 1);
         gTasks[taskId].func = task_new_game_prof_birch_speech_part2_4;
     }
 }
 
 void task_new_game_prof_birch_speech_part2_4(u8 taskId)
 {
-    switch (FillWindowPixelBuffer())
+    switch (ProcessMenuInputNoWrap_())
     {
     case 0:
         audio_play(5);
-        Reset(2, 1, 8, 7);
+        MenuZeroFillWindowRect(2, 1, 8, 7);
         gSprites[gTasks[taskId].data[2]].oam.objMode = ST_OAM_OBJ_BLEND;
         sub_800B458(taskId, 2);
         sub_800B614(taskId, 1);
@@ -1145,7 +1145,7 @@ void task_new_game_prof_birch_speech_part2_4(u8 taskId)
     case -1:
     case 1:
         audio_play(5);
-        Reset(2, 1, 8, 7);
+        MenuZeroFillWindowRect(2, 1, 8, 7);
         gTasks[taskId].func = task_new_game_prof_birch_speech_14;
         break;
     }
@@ -1190,9 +1190,9 @@ void task_new_game_prof_birch_speech_part2_6(u8 taskId)
 
         sub_800B534(taskId, 2);
         sub_800B6C0(taskId, 1);
-        DrawDefaultWindow(2, 13, 27, 18);
+        MenuDrawTextWindow(2, 13, 27, 18);
         StringExpandPlaceholders(gStringVar4, gUnknown_081C7025);
-        AddTextPrinterWithCallbackForMessage(gStringVar4, 3, 14);
+        MenuPrintMessage(gStringVar4, 3, 14);
         gTasks[taskId].func = task_new_game_prof_birch_speech_part2_7;
     }
 }
@@ -1258,8 +1258,8 @@ void task_new_game_prof_birch_speech_part2_8(u8 taskId)
 
             sub_800B534(taskId, 2);
             sub_800B6C0(taskId, 1);
-            DrawDefaultWindow(2, 13, 27, 18);
-            AddTextPrinterWithCallbackForMessage(gUnknown_081C7074, 3, 14);
+            MenuDrawTextWindow(2, 13, 27, 18);
+            MenuPrintMessage(gUnknown_081C7074, 3, 14);
             gTasks[taskId].func = task_new_game_prof_birch_speech_part2_9;
         }
     }
@@ -1363,7 +1363,7 @@ void new_game_prof_birch_speech_part2_start()
     AddBirchSpeechObjects(taskId);
 
     SetUpWindowConfig(&gWindowConfig_81E6C3C);
-    sub_8071C4C(&gWindowConfig_81E6CE4);
+    InitMenuWindowConfig(&gWindowConfig_81E6CE4);
 
     if (gSaveBlock2.playerGender != MALE)
     {
@@ -1612,10 +1612,10 @@ void sub_800B6C0(u8 a1, u8 a2)
 void CreateGenderMenu(u8 left, u8 top)
 {
     u8 menuLeft, menuTop;
-    DrawDefaultWindow(left, top, left + 6, top + 5);
+    MenuDrawTextWindow(left, top, left + 6, top + 5);
     menuLeft = left + 1;
     menuTop = top + 1;
-    PrintStringArray(menuLeft, menuTop, 2, gUnknown_081E79B0);
+    PrintMenuItems(menuLeft, menuTop, 2, gUnknown_081E79B0);
     InitMenu(0, menuLeft, menuTop, 2, 0, 5);
 }
 
@@ -1626,15 +1626,15 @@ s8 GenderMenuProcessInput(void)
 
 void CreateNameMenu(u8 left, u8 top)
 {
-    DrawDefaultWindow(left, top, left + 10, top + 11);
+    MenuDrawTextWindow(left, top, left + 10, top + 11);
 
     if (gSaveBlock2.playerGender == MALE)
     {
-        PrintStringArray((u8)(left + 1), (u8)(top + 1), 5, gUnknown_081E79C0);
+        PrintMenuItems((u8)(left + 1), (u8)(top + 1), 5, gUnknown_081E79C0);
     }
     else
     {
-        PrintStringArray((u8)(left + 1), (u8)(top + 1), 5, gUnknown_081E79E8);
+        PrintMenuItems((u8)(left + 1), (u8)(top + 1), 5, gUnknown_081E79E8);
     }
 
     InitMenu(0, (u8)(left + 1), (u8)(top + 1), 5, 0, 9);

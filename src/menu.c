@@ -17,33 +17,33 @@ struct Menu
     u8 columnXCoords[8];
 };
 
-void sub_8071C4C(struct WindowConfig *);
-void sub_8071C58(struct WindowConfig *);
-void sub_8071C64(struct WindowConfig *, u16);
-bool32 sub_8071C94(void);
-void sub_8071D48(struct WindowConfig *, u16);
+void InitMenuWindowConfig(struct WindowConfig *);
+void MultistepInitMenuWindowConfigBegin(struct WindowConfig *);
+void MultistepInitMenuWindowConfigInternal(struct WindowConfig *, u16);
+bool32 MultistepInitMenuWindowConfigContinue(void);
+void InitMenuWindowConfigInternal(struct WindowConfig *, u16);
 void unref_sub_8071DA4(struct WindowConfig *, u16);
-void sub_8071E00(u8);
-void GetMapNamePopUpWindowId(void);
-void sub_8071E2C(struct WindowConfig *);
-void Print(u8 *, u8, u8);
-void Reset(u8, u8, u8, u8);
-void sub_8071EBC(u8, u8, u8, u8);
-void sub_8071EF4(void);
-void DrawDefaultWindow(u8, u8, u8, u8);
+void MenuLoadTextWindowGraphics_OverrideFrameType(u8);
+void MenuLoadTextWindowGraphics(void);
+void BasicInitMenuWindowConfig(struct WindowConfig *);
+void MenuPrint(u8 *, u8, u8);
+void MenuZeroFillWindowRect(u8, u8, u8, u8);
+void MenuFillWindowRectWithBlankTile(u8, u8, u8, u8);
+void MenuZeroFillScreen(void);
+void MenuDrawTextWindow(u8, u8, u8, u8);
 void sub_8071F40(u8 *);
 void sub_8071F60(u8, u8, u8, u8);
 u16 unref_sub_8071F98(u8, u8);
 void unref_sub_8071FBC(u16, u8, u8, u8, u8);
-void sub_8071FFC(void);
-void AddTextPrinterWithCallbackForMessage(u8 *, u8, u8);
+void MenuDisplayMessageBox(void);
+void MenuPrintMessage(u8 *, u8, u8);
 void sub_8072044(u8 *);
-void sub_807206C(u8 *);
-u8 sub_8072080(void);
+void MenuSetText(u8 *);
+u8 MenuUpdateWindowText(void);
 u8 unref_sub_8072098(void);
 void sub_80720B0(void);
 u8 MoveMenuCursor(s8);
-u8 MoveMenuCursorNoWrapAround(s8);
+u8 MoveMenuCursorNoWrap(s8);
 u8 GetMenuCursorPos(void);
 s8 ProcessMenuInput(void);
 s8 ProcessMenuInputNoWrap(void);
@@ -56,18 +56,18 @@ void sub_8072620(u8, u8, u8, u8*[][2], u8);
 void sub_807274C(u8, u8, u8, u8, u8*[][2], u8, u32);
 s8 sub_80727CC(void);
 u8 sub_807288C(u8);
-void PrintStringArray(u8, u8, u8, u8*[][2]);
-void sub_80728E4(u8, u8, u8, u8*[][2], u8*);
-void sub_807292C(u8, u8, u8);
-void sub_8072974(u8, u8, u32);
-s8 FillWindowPixelBuffer(void);
+void PrintMenuItems(u8, u8, u8, u8*[][2]);
+void PrintMenuItemsReordered(u8, u8, u8, u8*[][2], u8*);
+void InitYesNoMenu(u8, u8, u8);
+void DisplayYesNoMenu(u8, u8, u32);
+s8 ProcessMenuInputNoWrap_(void);
 u8 sub_80729D8(u8 *, u8, u16, u8);
 u8 sub_8072A18(u8 *, u8, u16, u8, u32);
 u8 unref_sub_8072A5C(u8 *, u8 *, u8, u16, u8, u32);
 int sub_8072AB0(u8 *, u8, u16, u8, u8, u32);
-void PrintCoinsString(u8 *, u8, u8);
+void sub_8072B4C(u8 *, u8, u8);
 void sub_8072B80(u8 *, u8, u8, u8 *);
-void Free(u8 *, u8, u8, u16);
+void sub_8072BD8(u8 *, u8, u8, u16);
 u8 *sub_8072C14(u8 *, s32, u8, u8);
 u8 *sub_8072C44(u8 *, s32, u8, u8);
 u8 *sub_8072C74(u8 *, u8 *, u8, u8);
@@ -92,56 +92,56 @@ extern void sub_814A7FC(void);
 
 static struct Menu gMenu;
 
-extern struct Window stru_202E908;
-extern struct Window *dword_202E9C8;
-extern u8 byte_202E9CC;
-extern u16 word_202E9CE;
-extern u16 word_202E9D0;
-extern u16 word_202E9D2;
-extern u16 word_202E9D4;
+extern struct Window gMenuWindow;
+extern struct Window *gMenuWindowPtr;
+extern u8 gMenuMultistepInitState;
+extern u16 gMenuTextTileOffset;
+extern u16 gMenuTextWindowTileOffset;
+extern u16 gMenuTextWindowContentTileOffset;
+extern u16 gMenuMessageBoxContentTileOffset;
 
 extern const u8 *gUnknown_08376D74[][2];
 
-void sub_8071C4C(struct WindowConfig *a1)
+void InitMenuWindowConfig(struct WindowConfig *winConfig)
 {
-    sub_8071D48(a1, 1);
+    InitMenuWindowConfigInternal(winConfig, 1);
 }
 
-void sub_8071C58(struct WindowConfig *a1)
+void MultistepInitMenuWindowConfigBegin(struct WindowConfig *winConfig)
 {
-    sub_8071C64(a1, 1);
+    MultistepInitMenuWindowConfigInternal(winConfig, 1);
 }
 
-void sub_8071C64(struct WindowConfig *a1, u16 a2)
+void MultistepInitMenuWindowConfigInternal(struct WindowConfig *winConfig, u16 tileOffset)
 {
-    byte_202E9CC = 0;
-    word_202E9CE = a2;
-    dword_202E9C8 = &stru_202E908;
-    InitWindowFromConfig(&stru_202E908, a1);
+    gMenuMultistepInitState = 0;
+    gMenuTextTileOffset = tileOffset;
+    gMenuWindowPtr = &gMenuWindow;
+    InitWindowFromConfig(&gMenuWindow, winConfig);
 }
 
-bool32 sub_8071C94(void)
+bool32 MultistepInitMenuWindowConfigContinue(void)
 {
-    switch (byte_202E9CC)
+    switch (gMenuMultistepInitState)
     {
     case 0:
-        byte_202E9CC++;
+        gMenuMultistepInitState++;
         return 0;
     case 1:
-        word_202E9D0 = MultistepInitWindowTileData(dword_202E9C8, word_202E9CE);
+        gMenuTextWindowTileOffset = MultistepInitWindowTileData(gMenuWindowPtr, gMenuTextTileOffset);
         goto next;
     case 2:
         if (!MultistepLoadFont())
             goto fail;
         goto next;
     case 3:
-        word_202E9D2 = SetTextWindowBaseTileNum(word_202E9D0);
+        gMenuTextWindowContentTileOffset = SetTextWindowBaseTileNum(gMenuTextWindowTileOffset);
     next:
-        byte_202E9CC++;
+        gMenuMultistepInitState++;
         return 0;
     case 4:
-        LoadTextWindowGraphics(dword_202E9C8);
-        word_202E9D4 = SetMessageBoxBaseTileNum(word_202E9D2);
+        LoadTextWindowGraphics(gMenuWindowPtr);
+        gMenuMessageBoxContentTileOffset = SetMessageBoxBaseTileNum(gMenuTextWindowContentTileOffset);
         return 1;
     default:
     fail:
@@ -149,123 +149,123 @@ bool32 sub_8071C94(void)
     }
 }
 
-void sub_8071D48(struct WindowConfig *a1, u16 a2)
+void InitMenuWindowConfigInternal(struct WindowConfig *winConfig, u16 tileOffset)
 {
-    dword_202E9C8 = &stru_202E908;
-    InitWindowFromConfig(&stru_202E908, a1);
-    word_202E9CE = a2;
-    word_202E9D0 = InitWindowTileData(dword_202E9C8, word_202E9CE);
-    word_202E9D2 = SetTextWindowBaseTileNum(word_202E9D0);
-    LoadTextWindowGraphics(dword_202E9C8);
-    word_202E9D4 = SetMessageBoxBaseTileNum(word_202E9D2);
+    gMenuWindowPtr = &gMenuWindow;
+    InitWindowFromConfig(&gMenuWindow, winConfig);
+    gMenuTextTileOffset = tileOffset;
+    gMenuTextWindowTileOffset = InitWindowTileData(gMenuWindowPtr, gMenuTextTileOffset);
+    gMenuTextWindowContentTileOffset = SetTextWindowBaseTileNum(gMenuTextWindowTileOffset);
+    LoadTextWindowGraphics(gMenuWindowPtr);
+    gMenuMessageBoxContentTileOffset = SetMessageBoxBaseTileNum(gMenuTextWindowContentTileOffset);
 }
 
-void unref_sub_8071DA4(struct WindowConfig *a1, u16 a2)
+void unref_sub_8071DA4(struct WindowConfig *winConfig, u16 tileOffset)
 {
-    dword_202E9C8 = &stru_202E908;
-    InitWindowFromConfig(&stru_202E908, a1);
-    word_202E9D0 = a2;
-    word_202E9D2 = SetTextWindowBaseTileNum(word_202E9D0);
-    LoadTextWindowGraphics(dword_202E9C8);
-    word_202E9CE = SetMessageBoxBaseTileNum(word_202E9D2);
-    word_202E9D4 = InitWindowTileData(dword_202E9C8, word_202E9CE);
+    gMenuWindowPtr = &gMenuWindow;
+    InitWindowFromConfig(&gMenuWindow, winConfig);
+    gMenuTextWindowTileOffset = tileOffset;
+    gMenuTextWindowContentTileOffset = SetTextWindowBaseTileNum(gMenuTextWindowTileOffset);
+    LoadTextWindowGraphics(gMenuWindowPtr);
+    gMenuTextTileOffset = SetMessageBoxBaseTileNum(gMenuTextWindowContentTileOffset);
+    gMenuMessageBoxContentTileOffset = InitWindowTileData(gMenuWindowPtr, gMenuTextTileOffset);
 }
 
-void sub_8071E00(u8 a1)
+void MenuLoadTextWindowGraphics_OverrideFrameType(u8 frameType)
 {
-    LoadTextWindowGraphics_OverrideFrameType(dword_202E9C8, a1);
+    LoadTextWindowGraphics_OverrideFrameType(gMenuWindowPtr, frameType);
 }
 
-void GetMapNamePopUpWindowId(void)
+void MenuLoadTextWindowGraphics(void)
 {
-    LoadTextWindowGraphics(dword_202E9C8);
+    LoadTextWindowGraphics(gMenuWindowPtr);
 }
 
-void sub_8071E2C(struct WindowConfig *a1)
+void BasicInitMenuWindowConfig(struct WindowConfig *winConfig)
 {
-    InitWindowFromConfig(dword_202E9C8, a1);
-    dword_202E9C8->tileDataStartOffset = word_202E9CE;
+    InitWindowFromConfig(gMenuWindowPtr, winConfig);
+    gMenuWindowPtr->tileDataStartOffset = gMenuTextTileOffset;
 }
 
-void Print(u8 *str, u8 left, u8 top)
+void MenuPrint(u8 *str, u8 left, u8 top)
 {
-    sub_8003460(dword_202E9C8, str, word_202E9CE, left, top);
+    sub_8003460(gMenuWindowPtr, str, gMenuTextTileOffset, left, top);
 }
 
-void Reset(u8 a1, u8 a2, u8 a3, u8 a4)
+void MenuZeroFillWindowRect(u8 a1, u8 a2, u8 a3, u8 a4)
 {
-    ZeroFillWindowRect(dword_202E9C8, a1, a2, a3, a4);
+    ZeroFillWindowRect(gMenuWindowPtr, a1, a2, a3, a4);
 }
 
-void sub_8071EBC(u8 left, u8 top, u8 right, u8 bottom)
+void MenuFillWindowRectWithBlankTile(u8 left, u8 top, u8 right, u8 bottom)
 {
-    FillWindowRectWithBlankTile(dword_202E9C8, left, top, right, bottom);
+    FillWindowRectWithBlankTile(gMenuWindowPtr, left, top, right, bottom);
 }
 
-void sub_8071EF4(void)
+void MenuZeroFillScreen(void)
 {
-    Reset(0, 0, 29, 19);
+    MenuZeroFillWindowRect(0, 0, 29, 19);
 }
 
-void DrawDefaultWindow(u8 left, u8 top, u8 right, u8 bottom)
+void MenuDrawTextWindow(u8 left, u8 top, u8 right, u8 bottom)
 {
-    DrawTextWindow(dword_202E9C8, left, top, right, bottom);
+    DrawTextWindow(gMenuWindowPtr, left, top, right, bottom);
 }
 
 void sub_8071F40(u8 *str)
 {
-    DrawDefaultWindow(2, 14, 28, 19);
-    Print(str, 3, 15);
+    MenuDrawTextWindow(2, 14, 28, 19);
+    MenuPrint(str, 3, 15);
 }
 
 void sub_8071F60(u8 a1, u8 a2, u8 a3, u8 a4)
 {
-    sub_8003490(dword_202E9C8, a1, word_202E9CE, a2, a3);
+    sub_8003490(gMenuWindowPtr, a1, gMenuTextTileOffset, a2, a3);
 }
 
 u16 unref_sub_8071F98(u8 x, u8 y)
 {
-    return GetWindowTilemapEntry(dword_202E9C8, x, y);
+    return GetWindowTilemapEntry(gMenuWindowPtr, x, y);
 }
 
 void unref_sub_8071FBC(u16 a1, u8 a2, u8 a3, u8 a4, u8 a5)
 {
-    DrawWindowRect(dword_202E9C8, a1, a2, a3, a4, a5);
+    DrawWindowRect(gMenuWindowPtr, a1, a2, a3, a4, a5);
 }
 
-void sub_8071FFC(void)
+void MenuDisplayMessageBox(void)
 {
-    DisplayMessageBox(dword_202E9C8);
+    DisplayMessageBox(gMenuWindowPtr);
 }
 
-void AddTextPrinterWithCallbackForMessage(u8 *str, u8 a2, u8 a3)
+void MenuPrintMessage(u8 *str, u8 left, u8 top)
 {
-    sub_8002EB0(dword_202E9C8, str, word_202E9CE, a2, a3);
+    sub_8002EB0(gMenuWindowPtr, str, gMenuTextTileOffset, left, top);
 }
 
 void sub_8072044(u8 *str)
 {
-    sub_8002EB0(dword_202E9C8, str, word_202E9CE, 2, 15);
+    sub_8002EB0(gMenuWindowPtr, str, gMenuTextTileOffset, 2, 15);
 }
 
-void sub_807206C(u8 *str)
+void MenuSetText(u8 *str)
 {
-    sub_8002E90(dword_202E9C8, str);
+    sub_8002E90(gMenuWindowPtr, str);
 }
 
-u8 sub_8072080(void)
+u8 MenuUpdateWindowText(void)
 {
-    return sub_80035AC(dword_202E9C8);
+    return sub_80035AC(gMenuWindowPtr);
 }
 
 u8 unref_sub_8072098(void)
 {
-    return sub_8003418(dword_202E9C8);
+    return sub_8003418(gMenuWindowPtr);
 }
 
 void sub_80720B0(void)
 {
-    ClearWindowTextLines(dword_202E9C8);
+    ClearWindowTextLines(gMenuWindowPtr);
 }
 
 u8 MoveMenuCursor(s8 delta)
@@ -283,7 +283,7 @@ u8 MoveMenuCursor(s8 delta)
     return gMenu.cursorPos;
 }
 
-u8 MoveMenuCursorNoWrapAround(s8 delta)
+u8 MoveMenuCursorNoWrap(s8 delta)
 {
     s32 newPos = gMenu.cursorPos + delta;
 
@@ -357,18 +357,18 @@ s8 ProcessMenuInputNoWrap(void)
 
     if (gMain.newKeys & DPAD_UP)
     {
-        if (cursorPos != MoveMenuCursorNoWrapAround(-1))
+        if (cursorPos != MoveMenuCursorNoWrap(-1))
             audio_play(SE_SELECT);
         return -2;
     }
     else if (gMain.newKeys & DPAD_DOWN)
     {
-        if (cursorPos != MoveMenuCursorNoWrapAround(1))
+        if (cursorPos != MoveMenuCursorNoWrap(1))
             audio_play(SE_SELECT);
         return -2;
     }
 
-    MoveMenuCursorNoWrapAround(0);
+    MoveMenuCursorNoWrap(0);
     return -2;
 }
 
@@ -501,7 +501,7 @@ u8 sub_80724F4(u8 left, u8 top, u8 menuItemCount, u8 *menuItems[][2], u8 columnC
         totalWidth = (gMenu.columnXCoords[columnCount] + 1);
         right = left + totalWidth;
 
-        DrawDefaultWindow(left, top, right, bottom);
+        MenuDrawTextWindow(left, top, right, bottom);
     }
 
     return maxWidth;
@@ -656,7 +656,7 @@ _080725EA:\n\
 	lsl r2, #24\n\
 	lsr r2, #24\n\
 	ldr r1, [sp, #0x4]\n\
-	bl DrawDefaultWindow\n\
+	bl MenuDrawTextWindow\n\
 	add r0, r7, #0\n\
 	add sp, #0xC\n\
 	pop {r3-r5}\n\
@@ -699,7 +699,7 @@ void sub_8072620(u8 left, u8 top, u8 menuItemCount, u8 *menuItems[][2], u8 colum
         u8 row = 0;
         u8 j;
         for (j = 0; i + j < menuItemCount; j += columnCount, row++)
-            Print(menuItems[i + j][0], left + gMenu.columnXCoords[i % columnCount], top + 2 * row);
+            MenuPrint(menuItems[i + j][0], left + gMenu.columnXCoords[i % columnCount], top + 2 * row);
     }
 }
 
@@ -761,53 +761,53 @@ u8 sub_807288C(u8 column)
     return gMenu.columnXCoords[column];
 }
 
-void PrintStringArray(u8 left, u8 top, u8 menuItemCount, u8 *menuItems[][2])
+void PrintMenuItems(u8 left, u8 top, u8 menuItemCount, u8 *menuItems[][2])
 {
     u8 i;
 
     for (i = 0; i < menuItemCount; i++)
-        Print(menuItems[i][0], left, top + 2 * i);
+        MenuPrint(menuItems[i][0], left, top + 2 * i);
 }
 
-void sub_80728E4(u8 left, u8 top, u8 menuItemCount, u8 *menuItems[][2], u8 *order)
+void PrintMenuItemsReordered(u8 left, u8 top, u8 menuItemCount, u8 *menuItems[][2], u8 *order)
 {
     u8 i;
 
     for (i = 0; i < menuItemCount; i++)
-        Print(menuItems[order[i]][0], left, top + 2 * i);
+        MenuPrint(menuItems[order[i]][0], left, top + 2 * i);
 }
 
-void sub_807292C(u8 left, u8 top, u8 a3)
+void InitYesNoMenu(u8 left, u8 top, u8 a3)
 {
-    PrintStringArray(left + 1, top + 1, 2, (void *)gUnknown_08376D74);
+    PrintMenuItems(left + 1, top + 1, 2, (void *)gUnknown_08376D74);
     InitMenu(0, left + 1, top + 1, 2, 0, a3);
 }
 
-void sub_8072974(u8 left, u8 top, u32 a3)
+void DisplayYesNoMenu(u8 left, u8 top, u32 a3)
 {
-    DrawDefaultWindow(left, top, left + 6, top + 5);
-    sub_807292C(left, top, 5);
+    MenuDrawTextWindow(left, top, left + 6, top + 5);
+    InitYesNoMenu(left, top, 5);
     gMenu.menu_field_7 = a3 ? -1 : 0;
 }
 
-s8 FillWindowPixelBuffer(void)
+s8 ProcessMenuInputNoWrap_(void)
 {
     return ProcessMenuInputNoWrap();
 }
 
-u8 sub_80729D8(u8 *a1, u8 a2, u16 a3, u8 a4)
+u8 sub_80729D8(u8 *text, u8 left, u16 top, u8 a4)
 {
-    return sub_8004D04(dword_202E9C8, a1, word_202E9CE, a2, a3, a4);
+    return sub_8004D04(gMenuWindowPtr, text, gMenuTextTileOffset, left, top, a4);
 }
 
-u8 sub_8072A18(u8 *a1, u8 a2, u16 a3, u8 a4, u32 a5)
+u8 sub_8072A18(u8 *text, u8 left, u16 top, u8 width, u32 a5)
 {
-    return sub_8004FD0(dword_202E9C8, 0, a1, word_202E9CE, a2, a3, a4, a5);
+    return sub_8004FD0(gMenuWindowPtr, 0, text, gMenuTextTileOffset, left, top, width, a5);
 }
 
-u8 unref_sub_8072A5C(u8 *a1, u8 *a2, u8 a3, u16 a4, u8 a5, u32 a6)
+u8 unref_sub_8072A5C(u8 *dest, u8 *src, u8 left, u16 top, u8 width, u32 a6)
 {
-    return sub_8004FD0(dword_202E9C8, a1, a2, word_202E9CE, a3, a4, a5, a6);
+    return sub_8004FD0(gMenuWindowPtr, dest, src, gMenuTextTileOffset, left, top, width, a6);
 }
 
 __attribute__((naked))
@@ -876,7 +876,7 @@ int sub_8072AB0(u8 *str, u8 left, u16 top, u8 width, u8 height, u32 a6)
 	lsl r3, #24\n\
 	lsr r3, #24\n\
 	mov r0, r12\n\
-	bl sub_8071EBC\n\
+	bl MenuFillWindowRectWithBlankTile\n\
 _08072B34:\n\
 	add sp, #0x10\n\
 	pop {r3,r4}\n\
@@ -890,62 +890,62 @@ _08072B44: .4byte 0x0202e9c8\n\
 _08072B48: .4byte 0x0202e9ce\n");
 }
 
-void PrintCoinsString(u8 *str, u8 left, u8 top)
+void sub_8072B4C(u8 *str, u8 left, u8 top)
 {
-    sub_8004D38(dword_202E9C8, str, word_202E9CE, left, top);
+    sub_8004D38(gMenuWindowPtr, str, gMenuTextTileOffset, left, top);
 }
 
 void sub_8072B80(u8 *a1, u8 a2, u8 a3, u8 *a4)
 {
     u8 buffer[64];
-    u8 width = GetStringWidth(dword_202E9C8, a4);
-    AlignString(dword_202E9C8, buffer, a1, width, 1);
-    sub_8003460(dword_202E9C8, buffer, word_202E9CE, a2, a3);
+    u8 width = GetStringWidth(gMenuWindowPtr, a4);
+    AlignString(gMenuWindowPtr, buffer, a1, width, 1);
+    sub_8003460(gMenuWindowPtr, buffer, gMenuTextTileOffset, a2, a3);
 }
 
-void Free(u8 *a1, u8 a2, u8 a3, u16 a4)
+void sub_8072BD8(u8 *a1, u8 a2, u8 a3, u16 a4)
 {
-    sub_8004DB0(dword_202E9C8, a1, word_202E9CE, a2, a3, a4);
+    sub_8004DB0(gMenuWindowPtr, a1, gMenuTextTileOffset, a2, a3, a4);
 }
 
 u8 *sub_8072C14(u8 *a1, s32 a2, u8 a3, u8 a4)
 {
-    return AlignInt1(dword_202E9C8, a1, a2, a3, a4);
+    return AlignInt1(gMenuWindowPtr, a1, a2, a3, a4);
 }
 
 u8 *sub_8072C44(u8 *a1, s32 a2, u8 a3, u8 a4)
 {
-    return AlignInt2(dword_202E9C8, a1, a2, a3, a4);
+    return AlignInt2(gMenuWindowPtr, a1, a2, a3, a4);
 }
 
 u8 *sub_8072C74(u8 *a1, u8 *a2, u8 a3, u8 a4)
 {
-    return AlignString(dword_202E9C8, a1, a2, a3, a4);
+    return AlignString(gMenuWindowPtr, a1, a2, a3, a4);
 }
 
 u8 sub_8072CA4(u8 *str)
 {
-    return GetStringWidth(dword_202E9C8, str);
+    return GetStringWidth(gMenuWindowPtr, str);
 }
 
 u8 sub_8072CBC()
 {
-    return sub_8004E24(dword_202E9C8);
+    return sub_8004E24(gMenuWindowPtr);
 }
 
 void sub_8072CD4(u8 *a1, u8 *a2, u8 *a3)
 {
-    sub_8004E28(dword_202E9C8, a1, a2, a3);
+    sub_8004E28(gMenuWindowPtr, a1, a2, a3);
 }
 
 u32 sub_8072CF4(u8 a1)
 {
-    return sub_80037C8(dword_202E9C8, a1);
+    return sub_80037C8(gMenuWindowPtr, a1);
 }
 
 struct Window *unref_sub_8072D0C(void)
 {
-    return dword_202E9C8;
+    return gMenuWindowPtr;
 }
 
 void sub_8072D18(u8 a1, u8 a2)

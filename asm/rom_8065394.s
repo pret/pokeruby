@@ -4127,7 +4127,7 @@ sub_80671B4: @ 80671B4
 	adds r4, 0x1
 	str r4, [r0, 0x8]
 	adds r0, r5, 0
-	bl DrawDefaultWindow
+	bl MenuDrawTextWindow
 	movs r0, 0
 	pop {r4,r5}
 	pop {r1}
@@ -4195,7 +4195,7 @@ sub_8067230: @ 8067230
 	adds r4, 0x1
 	str r4, [r0, 0x8]
 	adds r0, r5, 0
-	bl Reset
+	bl MenuZeroFillWindowRect
 	movs r0, 0
 	pop {r4,r5}
 	pop {r1}
@@ -4324,11 +4324,11 @@ sub_806730C: @ 806730C
 	adds r1, r6, 0
 	mov r2, r8
 	mov r3, r9
-	bl DrawDefaultWindow
+	bl MenuDrawTextWindow
 	adds r0, r4, 0
 	mov r1, r10
 	adds r2, r7, 0
-	bl Print
+	bl MenuPrint
 	movs r0, 0
 	pop {r3-r5}
 	mov r8, r3
@@ -11234,7 +11234,7 @@ sub_806A738: @ 806A738
 	movs r1, 0x8
 	movs r2, 0x19
 	movs r3, 0xB
-	bl Reset
+	bl MenuZeroFillWindowRect
 	pop {r0}
 	bx r0
 	thumb_func_end sub_806A738
@@ -11338,7 +11338,7 @@ sub_806A74C: @ 806A74C
 	ldr r0, _0806A83C
 	mov r1, r10
 	ldr r2, [sp]
-	bl Print
+	bl MenuPrint
 	add sp, 0x4
 	pop {r3-r5}
 	mov r8, r3
@@ -11379,11 +11379,11 @@ sub_806A850: @ 806A850
 	movs r1, 0x8
 	movs r2, 0x19
 	movs r3, 0xB
-	bl DrawDefaultWindow
+	bl MenuDrawTextWindow
 	ldr r0, _0806A8A8
 	movs r1, 0x14
 	movs r2, 0x9
-	bl Print
+	bl MenuPrint
 	str r4, [sp]
 	str r5, [sp, 0x4]
 	movs r0, 0x4
@@ -11759,7 +11759,7 @@ _0806AB16:
 	adds r0, r4, 0
 	bl SetUpWindowConfig
 	adds r0, r4, 0
-	bl sub_8071C4C
+	bl InitMenuWindowConfig
 	movs r1, 0x80
 	lsls r1, 19
 	movs r2, 0x88
@@ -11812,11 +11812,11 @@ sub_806ABC8: @ 806ABC8
 sub_806ABDC: @ 806ABDC
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8071FFC
+	bl MenuDisplayMessageBox
 	adds r0, r4, 0
 	movs r1, 0x2
 	movs r2, 0xF
-	bl Print
+	bl MenuPrint
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -11843,16 +11843,16 @@ sub_806ABF4: @ 806ABF4
 	.align 2, 0
 _0806AC14: .4byte 0x03004b28
 _0806AC18:
-	bl sub_8071EF4
+	bl MenuZeroFillScreen
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0x14
 	movs r3, 0xA
-	bl DrawDefaultWindow
+	bl MenuDrawTextWindow
 	ldr r0, _0806AC98
 	movs r1, 0x1
 	movs r2, 0x1
-	bl Print
+	bl MenuPrint
 	ldr r0, _0806AC9C
 	ldrh r2, [r0]
 	ldrb r3, [r0, 0x2]
@@ -11866,7 +11866,7 @@ _0806AC18:
 	ldr r0, _0806ACA0
 	movs r1, 0x1
 	movs r2, 0x5
-	bl Print
+	bl MenuPrint
 	ldr r1, _0806ACA4
 	adds r0, r1, 0
 	adds r0, 0xA0
@@ -12019,7 +12019,7 @@ _0806AD80:
 	bne _0806AD96
 	b _0806AEC4
 _0806AD96:
-	bl sub_8071EF4
+	bl MenuZeroFillScreen
 	ldr r0, _0806ADC8
 	bl sub_806ABDC
 	ldr r2, _0806ADCC
@@ -12756,12 +12756,12 @@ _0806B3B8: .4byte 0x03001770
 _0806B3BC: .4byte 0x0000043c
 _0806B3C0:
 	ldr r0, _0806B3C8
-	bl sub_8071C58
+	bl MultistepInitMenuWindowConfigBegin
 	b _0806B426
 	.align 2, 0
 _0806B3C8: .4byte gWindowConfig_81E6CC8
 _0806B3CC:
-	bl sub_8071C94
+	bl MultistepInitMenuWindowConfigContinue
 	cmp r0, 0
 	beq _0806B450
 	ldr r1, _0806B3DC
@@ -17145,14 +17145,14 @@ _0806D570:
 	movs r2, 0x16
 _0806D576:
 	movs r3, 0x13
-	bl DrawDefaultWindow
+	bl MenuDrawTextWindow
 	b _0806D58A
 _0806D57E:
 	movs r0, 0
 	movs r1, 0x10
 	movs r2, 0x12
 	movs r3, 0x13
-	bl DrawDefaultWindow
+	bl MenuDrawTextWindow
 _0806D58A:
 	ldr r0, _0806D5A0
 	lsls r1, r4, 2
@@ -17160,7 +17160,7 @@ _0806D58A:
 	ldr r0, [r1]
 	movs r1, 0x1
 	movs r2, 0x11
-	bl Print
+	bl MenuPrint
 _0806D59A:
 	pop {r4}
 	pop {r0}
@@ -17176,7 +17176,7 @@ sub_806D5A4: @ 806D5A4
 	movs r1, 0x10
 	movs r2, 0x1D
 	movs r3, 0x13
-	bl Reset
+	bl MenuZeroFillWindowRect
 	pop {r0}
 	bx r0
 	thumb_func_end sub_806D5A4
@@ -19579,7 +19579,7 @@ sub_806E7D0: @ 806E7D0
 	adds r3, 0x1
 	lsls r3, 24
 	lsrs r3, 24
-	bl Reset
+	bl MenuZeroFillWindowRect
 	bl sub_8072DEC
 	add sp, 0x4
 	pop {r4-r6}
@@ -19616,11 +19616,11 @@ sub_806E834: @ 806E834
 	movs r1, 0xE
 	movs r2, 0x1A
 	movs r3, 0x13
-	bl DrawDefaultWindow
+	bl MenuDrawTextWindow
 	adds r0, r5, 0
 	movs r1, 0x4
 	movs r2, 0xF
-	bl AddTextPrinterWithCallbackForMessage
+	bl MenuPrintMessage
 	ldr r0, _0806E87C
 	movs r1, 0x1
 	bl CreateTask
@@ -19647,7 +19647,7 @@ sub_806E884: @ 806E884
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r5, r4, 0
-	bl sub_8072080
+	bl MenuUpdateWindowText
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806E8C0
@@ -19667,7 +19667,7 @@ sub_806E884: @ 806E884
 	movs r1, 0xE
 	movs r2, 0x1A
 	movs r3, 0x13
-	bl Reset
+	bl MenuZeroFillWindowRect
 _0806E8BA:
 	adds r0, r5, 0
 	bl DestroyTask
@@ -19926,7 +19926,7 @@ sub_806EACC: @ 806EACC
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
-	bl FillWindowPixelBuffer
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -19935,7 +19935,7 @@ sub_806EACC: @ 806EACC
 	movs r1, 0x8
 	movs r2, 0x1D
 	movs r3, 0xD
-	bl Reset
+	bl MenuZeroFillWindowRect
 	ldr r4, _0806EB30
 	ldr r0, [r4]
 	movs r1, 0xC
@@ -20012,7 +20012,7 @@ _0806EB8E:
 	movs r1, 0x8
 	movs r2, 0x1D
 	movs r3, 0xD
-	bl Reset
+	bl MenuZeroFillWindowRect
 _0806EB9A:
 	ldr r0, _0806EBB0
 	lsls r1, r6, 2
@@ -20042,7 +20042,7 @@ sub_806EBB8: @ 806EBB8
 	movs r0, 0x17
 	movs r1, 0x8
 	movs r2, 0x1
-	bl sub_8072974
+	bl DisplayYesNoMenu
 	ldr r0, _0806EBE8
 	lsls r1, r4, 2
 	adds r1, r4
@@ -20342,7 +20342,7 @@ sub_806EE5C: @ 806EE5C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl FillWindowPixelBuffer
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -20395,13 +20395,13 @@ _0806EECA:
 	movs r1, 0x8
 	movs r2, 0x1D
 	movs r3, 0xD
-	bl Reset
+	bl MenuZeroFillWindowRect
 	movs r0, 0
 	movs r1, 0xE
 	movs r2, 0x1D
 	movs r3, 0x13
 _0806EEDE:
-	bl Reset
+	bl MenuZeroFillWindowRect
 	ldr r0, _0806EEF8
 	lsls r1, r4, 2
 	adds r1, r4
@@ -20430,7 +20430,7 @@ sub_806EF00: @ 806EF00
 	movs r0, 0x17
 	movs r1, 0x8
 	movs r2, 0x1
-	bl sub_8072974
+	bl DisplayYesNoMenu
 	ldr r0, _0806EF30
 	lsls r1, r4, 2
 	adds r1, r4
@@ -20453,7 +20453,7 @@ sub_806EF38: @ 806EF38
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl FillWindowPixelBuffer
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -20462,7 +20462,7 @@ sub_806EF38: @ 806EF38
 	movs r1, 0x8
 	movs r2, 0x1D
 	movs r3, 0xD
-	bl Reset
+	bl MenuZeroFillWindowRect
 	ldr r0, _0806EF70
 	ldr r0, [r0]
 	bl sub_80A2E78
@@ -20513,7 +20513,7 @@ _0806EFB6:
 	movs r1, 0x8
 	movs r2, 0x1D
 	movs r3, 0xD
-	bl Reset
+	bl MenuZeroFillWindowRect
 	ldr r0, _0806EFE0
 	movs r1, 0x1
 	bl sub_806E834
@@ -20546,7 +20546,7 @@ sub_806EFEC: @ 806EFEC
 	movs r0, 0x17
 	movs r1, 0x8
 	movs r2, 0x1
-	bl sub_8072974
+	bl DisplayYesNoMenu
 	ldr r0, _0806F01C
 	lsls r1, r4, 2
 	adds r1, r4
@@ -20968,7 +20968,7 @@ sub_806F358: @ 806F358
 	movs r0, 0x17
 	movs r1, 0x8
 	movs r2, 0x1
-	bl sub_8072974
+	bl DisplayYesNoMenu
 	ldr r0, _0806F388
 	lsls r1, r4, 2
 	adds r1, r4
@@ -20992,7 +20992,7 @@ sub_806F390: @ 806F390
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r5, r4, 0
-	bl FillWindowPixelBuffer
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -21001,7 +21001,7 @@ sub_806F390: @ 806F390
 	movs r1, 0x8
 	movs r2, 0x1D
 	movs r3, 0xD
-	bl Reset
+	bl MenuZeroFillWindowRect
 	ldr r0, _0806F3C8
 	movs r1, 0x1
 	bl sub_806E834
@@ -21292,7 +21292,7 @@ sub_806F614: @ 806F614
 	movs r1, 0x8
 	movs r2, 0x1D
 	movs r3, 0xD
-	bl Reset
+	bl MenuZeroFillWindowRect
 	ldr r0, _0806F660
 	ldr r1, _0806F664
 	ldrh r2, [r1, 0x8]
@@ -21340,7 +21340,7 @@ sub_806F67C: @ 806F67C
 	movs r0, 0x17
 	movs r1, 0x8
 	movs r2, 0x1
-	bl sub_8072974
+	bl DisplayYesNoMenu
 	ldr r0, _0806F6AC
 	lsls r1, r4, 2
 	adds r1, r4
@@ -21364,7 +21364,7 @@ sub_806F6B4: @ 806F6B4
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r6, r5, 0
-	bl FillWindowPixelBuffer
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -21373,7 +21373,7 @@ sub_806F6B4: @ 806F6B4
 	movs r1, 0x8
 	movs r2, 0x1D
 	movs r3, 0xD
-	bl Reset
+	bl MenuZeroFillWindowRect
 	ldr r4, _0806F710
 	ldr r0, [r4]
 	ldr r1, _0806F714
@@ -21427,7 +21427,7 @@ _0806F74A:
 	movs r1, 0x8
 	movs r2, 0x1D
 	movs r3, 0xD
-	bl Reset
+	bl MenuZeroFillWindowRect
 	ldr r4, _0806F798
 	ldr r0, [r4]
 	ldr r1, _0806F79C
@@ -22622,7 +22622,7 @@ _08070134:
 	movs r1, 0xE
 	movs r2, 0x1A
 	movs r3, 0x13
-	bl Reset
+	bl MenuZeroFillWindowRect
 	movs r0, 0x1
 	bl audio_play
 	ldr r0, [r4]
@@ -22825,7 +22825,7 @@ sub_80702E4: @ 80702E4
 	movs r1, 0xA
 	movs r2, 0x1D
 	movs r3, 0x13
-	bl DrawDefaultWindow
+	bl MenuDrawTextWindow
 	movs r5, 0
 	movs r0, 0x64
 	adds r7, r4, 0
@@ -22851,7 +22851,7 @@ _0807030C:
 	adds r2, r1
 	lsrs r2, 24
 	movs r1, 0x14
-	bl Print
+	bl MenuPrint
 	cmp r4, 0
 	beq _08070340
 	adds r0, r6, 0x1
@@ -23047,7 +23047,7 @@ ether_effect_related_2: @ 80704B0
 	movs r1, 0xA
 	movs r2, 0x1D
 	movs r3, 0x13
-	bl Reset
+	bl MenuZeroFillWindowRect
 	bl sub_806D5A4
 	bl GetMenuCursorPos
 	ldr r2, _080704EC
@@ -23077,7 +23077,7 @@ sub_80704F0: @ 80704F0
 	movs r1, 0xA
 	movs r2, 0x1D
 	movs r3, 0x13
-	bl Reset
+	bl MenuZeroFillWindowRect
 	ldr r0, _08070528
 	ldr r1, _0807052C
 	adds r0, r1
@@ -23464,7 +23464,7 @@ sub_8070848: @ 8070848
 	movs r1, 0
 	movs r2, 0x1D
 	movs r3, 0x7
-	bl DrawDefaultWindow
+	bl MenuDrawTextWindow
 	movs r7, 0
 	ldr r0, _080708E4
 	mov r10, r0
@@ -23782,7 +23782,7 @@ _08070AF4:
 	movs r1, 0
 	movs r2, 0x1D
 	movs r3, 0x7
-	bl Reset
+	bl MenuZeroFillWindowRect
 	ldr r7, _08070B28
 	ldr r0, [r7]
 	movs r1, 0x1
@@ -24515,11 +24515,11 @@ sub_80710DC: @ 80710DC
 	movs r1, 0
 	movs r2, 0xA
 	movs r3, 0x5
-	bl DrawDefaultWindow
+	bl MenuDrawTextWindow
 	ldr r0, _08071110
 	movs r1, 0x1
 	movs r2, 0x1
-	bl Print
+	bl MenuPrint
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -24552,7 +24552,7 @@ _0807112E:
 	ldr r0, [r0]
 	lsrs r2, r5, 24
 	movs r1, 0x17
-	bl Print
+	bl MenuPrint
 	movs r0, 0x80
 	lsls r0, 18
 	adds r5, r0
@@ -24621,7 +24621,7 @@ _080711BA:
 	movs r0, 0x16
 	movs r1, 0
 	movs r2, 0x1D
-	bl DrawDefaultWindow
+	bl MenuDrawTextWindow
 	movs r0, 0
 	strh r0, [r5]
 	b _080711F6
@@ -24725,7 +24725,7 @@ sub_8071284: @ 8071284
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	ldr r0, _080712AC
-	bl sub_8071C4C
+	bl InitMenuWindowConfig
 	ldr r4, _080712B0
 	adds r0, r4, 0
 	movs r1, 0x50
@@ -25167,7 +25167,7 @@ sub_80715C0: @ 80715C0
 	beq _080715F4
 	b _08071604
 _080715DC:
-	bl sub_8071EF4
+	bl MenuZeroFillScreen
 	bl sub_8071230
 	ldr r1, _080715EC
 	ldr r0, _080715F0
@@ -25177,7 +25177,7 @@ _080715DC:
 _080715EC: .4byte 0x03004ae8
 _080715F0: .4byte sub_8071338
 _080715F4:
-	bl sub_8071EF4
+	bl MenuZeroFillScreen
 	bl sub_8064E2C
 	bl script_env_2_disable
 	movs r0, 0x1
@@ -25214,7 +25214,7 @@ sub_8071630: @ 8071630
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0807164C
-	bl sub_8072080
+	bl MenuUpdateWindowText
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807164C
@@ -25261,7 +25261,7 @@ sub_8071684: @ 8071684
 	adds r0, r4, 0
 	adds r1, r2, 0
 	bl StringExpandPlaceholders
-	bl sub_8071FFC
+	bl MenuDisplayMessageBox
 	adds r0, r4, 0
 	bl sub_8072044
 	ldr r1, _080716B4
@@ -25334,7 +25334,7 @@ sub_8071710: @ 8071710
 	movs r1, 0x8
 	movs r2, 0x1A
 	movs r3, 0xD
-	bl Reset
+	bl MenuZeroFillWindowRect
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8071710
@@ -25411,7 +25411,7 @@ _0807178E:
 	thumb_func_start sub_8071794
 sub_8071794: @ 8071794
 	push {lr}
-	bl sub_8071EF4
+	bl MenuZeroFillScreen
 	movs r0, 0
 	movs r1, 0
 	bl sub_80945C0
@@ -25432,7 +25432,7 @@ sub_80717B8: @ 80717B8
 	movs r0, 0x14
 	movs r1, 0x8
 	movs r2, 0x1
-	bl sub_8072974
+	bl DisplayYesNoMenu
 	ldr r1, _080717D0
 	ldr r0, _080717D4
 	str r0, [r1]
@@ -25447,7 +25447,7 @@ _080717D4: .4byte sub_80717D8
 	thumb_func_start sub_80717D8
 sub_80717D8: @ 80717D8
 	push {lr}
-	bl FillWindowPixelBuffer
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -25535,7 +25535,7 @@ sub_807187C: @ 807187C
 	movs r0, 0x14
 	movs r1, 0x8
 	movs r2, 0x1
-	bl sub_8072974
+	bl DisplayYesNoMenu
 	ldr r1, _08071894
 	ldr r0, _08071898
 	str r0, [r1]
@@ -25550,7 +25550,7 @@ _08071898: .4byte sub_807189C
 	thumb_func_start sub_807189C
 sub_807189C: @ 807189C
 	push {lr}
-	bl FillWindowPixelBuffer
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
@@ -25652,7 +25652,7 @@ _0807195C: .4byte sub_80719AC
 	thumb_func_start sub_8071960
 sub_8071960: @ 8071960
 	push {lr}
-	bl sub_8072080
+	bl MenuUpdateWindowText
 	lsls r0, 24
 	cmp r0, 0
 	beq _08071978
@@ -25694,7 +25694,7 @@ _080719A8:
 	thumb_func_start sub_80719AC
 sub_80719AC: @ 80719AC
 	push {lr}
-	bl sub_8072080
+	bl MenuUpdateWindowText
 	lsls r0, 24
 	cmp r0, 0
 	beq _080719C4
@@ -25829,7 +25829,7 @@ _08071AB6:
 	adds r0, r4, 0
 	bl SetUpWindowConfig
 	adds r0, r4, 0
-	bl sub_8071C4C
+	bl InitMenuWindowConfig
 	movs r1, 0x80
 	lsls r1, 19
 	movs r2, 0x80
@@ -25948,11 +25948,11 @@ _08071BA0:
 	.4byte _08071BEE
 	.4byte _08071C06
 _08071BB4:
-	bl sub_8071FFC
+	bl MenuDisplayMessageBox
 	ldr r0, _08071BD0
 	movs r1, 0x2
 	movs r2, 0xF
-	bl Print
+	bl MenuPrint
 	movs r0, 0x1
 	negs r0, r0
 	movs r1, 0
@@ -26007,7 +26007,7 @@ sub_8071C20: @ 8071C20
 	push {lr}
 	movs r0, 0x5
 	bl audio_play
-	bl sub_8071EF4
+	bl MenuZeroFillScreen
 	bl sub_8064E2C
 	bl script_env_2_disable
 	bl sub_8072DEC

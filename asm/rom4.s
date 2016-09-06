@@ -3664,7 +3664,7 @@ _080548C4:
 	ldr r0, _080548DC
 	bl SetUpWindowConfig
 	ldr r0, _080548E0
-	bl sub_8071C4C
+	bl InitMenuWindowConfig
 	b _08054928
 	.align 2, 0
 _080548DC: .4byte gWindowConfig_81E6C3C
@@ -3772,7 +3772,7 @@ _080549B4:
 	ldr r0, _080549CC
 	bl SetUpWindowConfig
 	ldr r0, _080549D0
-	bl sub_8071C4C
+	bl InitMenuWindowConfig
 	b _08054A38
 	.align 2, 0
 _080549CC: .4byte gWindowConfig_81E6C3C
@@ -3934,7 +3934,7 @@ _08054B0C:
 	ldr r0, _08054B24
 	bl SetUpWindowConfig
 	ldr r0, _08054B28
-	bl sub_8071C4C
+	bl InitMenuWindowConfig
 	b _08054B70
 	.align 2, 0
 _08054B24: .4byte gWindowConfig_81E6C3C
@@ -4079,7 +4079,7 @@ sub_8054C2C: @ 8054C2C
 	ldr r0, _08054C4C
 	bl SetUpWindowConfig
 	ldr r0, _08054C50
-	bl sub_8071C4C
+	bl InitMenuWindowConfig
 	bl mapdata_load_assets_to_gpu_and_full_redraw
 	pop {r0}
 	bx r0
@@ -16815,7 +16815,7 @@ _0805A488:
 fish3: @ 805A490
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_8071FFC
+	bl MenuDisplayMessageBox
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	movs r1, 0
@@ -16916,7 +16916,7 @@ _0805A54E:
 	lsrs r1, 24
 	mov r0, sp
 	movs r2, 0xF
-	bl Print
+	bl MenuPrint
 	ldrh r0, [r4, 0xC]
 	adds r0, 0x1
 	strh r0, [r4, 0xC]
@@ -16985,7 +16985,7 @@ sub_805A5CC: @ 805A5CC
 	ldr r0, _0805A5F0
 	movs r1, 0x4
 	movs r2, 0x11
-	bl Print
+	bl MenuPrint
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	movs r1, 0
@@ -17108,7 +17108,7 @@ sub_805A6B4: @ 805A6B4
 	bl sub_805A954
 	ldr r0, _0805A6D8
 	bl sub_8072044
-	bl sub_8071FFC
+	bl MenuDisplayMessageBox
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	movs r1, 0
@@ -17137,7 +17137,7 @@ sub_805A6DC: @ 805A6DC
 	ldrsh r6, [r5, r0]
 	cmp r6, 0
 	bne _0805A780
-	bl sub_8072080
+	bl MenuUpdateWindowText
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805A778
@@ -17186,7 +17186,7 @@ _0805A746:
 	lsls r0, 2
 	adds r0, r2
 	strh r6, [r0, 0x26]
-	bl sub_8071EF4
+	bl MenuZeroFillScreen
 	ldrh r0, [r5, 0xA]
 	adds r0, 0x1
 	strh r0, [r5, 0xA]
@@ -17304,7 +17304,7 @@ fishD: @ 805A858
 	push {r4,lr}
 	adds r4, r0, 0
 	bl sub_805A954
-	bl sub_8071FFC
+	bl MenuDisplayMessageBox
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
@@ -17396,7 +17396,7 @@ _0805A910: .4byte 0x030048a0
 	thumb_func_start fishF
 fishF: @ 805A914
 	push {lr}
-	bl sub_8072080
+	bl MenuUpdateWindowText
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805A946
@@ -17405,7 +17405,7 @@ fishF: @ 805A914
 	strb r0, [r1, 0x6]
 	bl script_env_2_disable
 	bl sub_806451C
-	bl sub_8071EF4
+	bl MenuZeroFillScreen
 	movs r0, 0
 	bl sub_80BE97C
 	ldr r0, _0805A950
