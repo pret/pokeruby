@@ -12818,8 +12818,8 @@ sub_80472D8: @ 80472D8
 	bx r1
 	thumb_func_end sub_80472D8
 
-	thumb_func_start AddTextPrinterForMessage
-AddTextPrinterForMessage: @ 80472F0
+	thumb_func_start CreatePokeballSprite
+CreatePokeballSprite: @ 80472F0
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -12924,7 +12924,7 @@ _080473C0: .4byte gUnknown_0820A98C
 _080473C4: .4byte gSpriteTemplate_820AAB4
 _080473C8: .4byte 0x02020004
 _080473CC: .4byte sub_80473D0
-	thumb_func_end AddTextPrinterForMessage
+	thumb_func_end CreatePokeballSprite
 
 	thumb_func_start sub_80473D0
 sub_80473D0: @ 80473D0
@@ -24555,7 +24555,7 @@ _0804D314:
 	str r2, [sp, 0xC]
 	movs r2, 0x78
 	movs r3, 0x54
-	bl AddTextPrinterForMessage
+	bl CreatePokeballSprite
 	ldr r0, [r6]
 	ldr r5, _0804D3C0
 	adds r0, r5

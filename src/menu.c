@@ -74,7 +74,7 @@ u8 *sub_8072C74(u8 *, u8 *, u8, u8);
 u8 sub_8072CA4(u8 *s);
 u8 sub_8072CBC(void);
 void sub_8072CD4(u8 *, u8 *, u8 *);
-u32 sub_8072CF4(u8);
+u32 MenuUpdateWindowText_OverrideLineLength(u8);
 struct Window * unref_sub_8072D0C(void);
 void sub_8072D18(u8, u8);
 u8 InitMenu(u8, u8, u8, u8, u8, u8);
@@ -938,9 +938,9 @@ void sub_8072CD4(u8 *a1, u8 *a2, u8 *a3)
     sub_8004E28(gMenuWindowPtr, a1, a2, a3);
 }
 
-u32 sub_8072CF4(u8 a1)
+u32 MenuUpdateWindowText_OverrideLineLength(u8 lineLength)
 {
-    return sub_80037C8(gMenuWindowPtr, a1);
+    return sub_80037C8(gMenuWindowPtr, lineLength);
 }
 
 struct Window *unref_sub_8072D0C(void)

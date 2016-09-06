@@ -7,6 +7,7 @@
 #include "songs.h"
 #include "palette.h"
 #include "string_util.h"
+#include "species.h"
 
 extern u8 MenuUpdateWindowText(void);
 extern void MenuPrint(u8 *, u8, u8);
@@ -22,7 +23,7 @@ extern u8 sub_80729D8(u8 *, u8, u16, u8);
 extern u8 GetBadgeCount(void);
 extern void Task_Birch1(u8);
 void MenuPrintMessage(const u8 *string, u8 a, u8 b);
-u8 sub_8072CF4(u8 a);
+u8 MenuUpdateWindowText_OverrideLineLength(u8 a);
 void sub_8072DEC(void);
 u8 sub_8075374(void);
 void MenuSetText(u32);
@@ -702,7 +703,7 @@ void sub_800B034(u8 taskId);
 void new_game_prof_birch_speech_part2_start();
 void nullsub_34(struct Sprite *sprite);
 void sub_800B240(struct Sprite *sprite);
-u8 sub_800B25C(u8, u8);
+u8 CreateAzurillSprite(u8, u8);
 void AddBirchSpeechObjects(u8);
 void sub_800B3EC(u8);
 void sub_800B458(u8, u8);
@@ -739,14 +740,14 @@ void Task_Birch1(u8 taskId)
     AddBirchSpeechObjects(taskId);
     BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
     REG_BG1CNT = 0x00000703;
-    REG_DISPCNT = 0x9A << 5;
+    REG_DISPCNT = DISPCNT_BG0_ON | DISPCNT_BG1_ON | DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP;
     gTasks[taskId].data[4] = 0;
     gTasks[taskId].func = task_new_game_prof_birch_speech_2;
     gTasks[taskId].data[2] = 0xFF;
     gTasks[taskId].data[3] = 0xFF;
     gTasks[taskId].data[7] = 0xD8;
 
-    sub_8075474(0xBB << 1);
+    sub_8075474(BGM_DOORO_X4);
 }
 
 void task_new_game_prof_birch_speech_2(u8 taskId)
@@ -782,17 +783,17 @@ void task_new_game_prof_birch_speech_3(u8 taskId)
     if (task->data[5] != 0)
     {
         struct Sprite *sprites = gSprites;
-        struct Sprite *sprite = &sprites[(s16)task->data[8]];
+        struct Sprite *sprite = &sprites[task->data[8]];
 
         sprite->oam.objMode = 0;
-        if ((u16)task->data[7])
+        if (task->data[7])
         {
             task->data[7]--;
         }
         else
         {
             MenuDrawTextWindow(0x2, 0xD, 0x1B, 0x12);
-            MenuPrintMessage(gUnknown_081C6D78, 0x3, 0xE);
+            MenuPrintMessage(gUnknown_081C6D78, 3, 14);
             task->func = task_new_game_prof_birch_speech_4;
         }
     }
@@ -800,18 +801,16 @@ void task_new_game_prof_birch_speech_3(u8 taskId)
 
 void task_new_game_prof_birch_speech_4(u8 taskId)
 {
-    if (!gPaletteFade.active && sub_8072CF4(0x18))
+    if (!gPaletteFade.active && MenuUpdateWindowText_OverrideLineLength(24))
     {
-        struct Task *tasks = gTasks;
-        struct Task *task = &tasks[taskId];
-        task->func = task_new_game_prof_birch_speech_5;
-        MenuPrintMessage(gUnknown_081C6DF8, 0x3, 0xE);
+        gTasks[taskId].func = task_new_game_prof_birch_speech_5;
+        MenuPrintMessage(gUnknown_081C6DF8, 3, 14);
     }
 }
 
 void task_new_game_prof_birch_speech_5(u8 taskId)
 {
-    if (sub_8072CF4(0x18))
+    if (MenuUpdateWindowText_OverrideLineLength(24))
         gTasks[taskId].func = task_new_game_prof_birch_speech_6;
 }
 
@@ -819,7 +818,7 @@ void task_new_game_prof_birch_speech_6(u8 taskId)
 {
     struct Task *tasks = gTasks;
     struct Task *task = &tasks[taskId];
-    u8 data = (u8)task->data[9];
+    u8 data = task->data[9];
     struct Sprite *sprites = gSprites;
     struct Sprite *sprite = &sprites[data];
 
@@ -827,7 +826,7 @@ void task_new_game_prof_birch_speech_6(u8 taskId)
     sprite->pos1.y = 0x48;
     sprite->invisible = 0;
     sprite->data0 = 0;
-    AddTextPrinterForMessage(data, sprite->oam.paletteNum, 0x70, 0x3A, 0, 0, 0x20, 0x0000FFFF);
+    CreatePokeballSprite(data, sprite->oam.paletteNum, 0x70, 0x3A, 0, 0, 0x20, 0x0000FFFF);
     task->func = task_new_game_prof_birch_speech_7;
     task->data[7] = 0;
 }
@@ -840,7 +839,7 @@ void task_new_game_prof_birch_speech_7(u8 taskId)
     if (sub_8075374())
     {
         struct Task *tasks = gTasks;
-        struct Task *task = &tasks[taskId]; //r5
+        struct Task *task = &tasks[taskId];
 
         if (task->data[7] > 0x5F)
         {
@@ -848,41 +847,42 @@ void task_new_game_prof_birch_speech_7(u8 taskId)
             task->func = task_new_game_prof_birch_speech_8;
         }
     }
-    //_0800A4E4
+
     tasks = gTasks;
-    task = &tasks[taskId]; //r2
-    if ((s16)task->data[7] <= 0x00003fff)
+    task = &tasks[taskId];
+
+    if (task->data[7] < 0x4000)
     {
         task->data[7]++;
         if (task->data[7] == 0x20)
         {
-            cry_related(0xAF << 1, 0);
+            cry_related(SPECIES_AZURILL, 0);
         }
     }
 }
 
 void task_new_game_prof_birch_speech_8(u8 taskId)
 {
-    if (sub_8072CF4(0x18))
+    if (MenuUpdateWindowText_OverrideLineLength(24))
     {
-        MenuPrintMessage(gUnknown_081C6E1A, 0x3, 0xE);
+        MenuPrintMessage(gUnknown_081C6E1A, 3, 14);
         gTasks[taskId].func = task_new_game_prof_birch_speech_9;
     }
 }
 
 void task_new_game_prof_birch_speech_9(u8 taskId)
 {
-    if (sub_8072CF4(0x18))
+    if (MenuUpdateWindowText_OverrideLineLength(24))
     {
         MenuDrawTextWindow(0x2, 0xD, 0x1B, 0x12);
-        MenuPrintMessage(gUnknown_081C6FCB, 0x3, 0xE);
+        MenuPrintMessage(gUnknown_081C6FCB, 3, 14);
         gTasks[taskId].func = task_new_game_prof_birch_speech_10;
     }
 }
 
 void task_new_game_prof_birch_speech_10(u8 taskId)
 {
-    if (sub_8072CF4(0x18))
+    if (MenuUpdateWindowText_OverrideLineLength(24))
     {
         struct Sprite *sprites = gSprites;
         struct Task *tasks = gTasks;
@@ -905,7 +905,7 @@ void task_new_game_prof_birch_speech_11(u8 taskId)
     struct Task *tasks = gTasks;
     struct Task *task = &tasks[taskId];
 
-    if ((s16)task->data[4] != -0x3C)
+    if (task->data[4] != -0x3C)
     {
         task->data[4] -= 2;
         REG_BG1HOFS = task->data[4];
@@ -969,7 +969,7 @@ void task_new_game_prof_birch_speech_14(u8 taskId)
 
 void task_new_game_prof_birch_speech_15(u8 taskId)
 {
-    if (sub_8072CF4(0x18))
+    if (MenuUpdateWindowText_OverrideLineLength(24))
     {
         CreateGenderMenu(2, 4);
         gTasks[taskId].func = task_new_game_prof_birch_speech_16;
@@ -984,14 +984,14 @@ void task_new_game_prof_birch_speech_16(u8 taskId)
     {
     case MALE:
         sub_8072DEC();
-        audio_play(5);
+        audio_play(SE_SELECT);
         gSaveBlock2.playerGender = MALE;
         MenuZeroFillWindowRect(2, 4, 8, 9);
         gTasks[taskId].func = sub_800A974;
         break;
     case FEMALE:
         sub_8072DEC();
-        audio_play(5);
+        audio_play(SE_SELECT);
         gSaveBlock2.playerGender = FEMALE;
         MenuZeroFillWindowRect(2, 4, 8, 9);
         gTasks[taskId].func = sub_800A974;
@@ -1000,7 +1000,7 @@ void task_new_game_prof_birch_speech_16(u8 taskId)
 
     cursorPos = GetMenuCursorPos();
 
-    if (cursorPos != (s16)gTasks[taskId].data[6])
+    if (cursorPos != gTasks[taskId].data[6])
     {
         gTasks[taskId].data[6] = cursorPos;
         gSprites[gTasks[taskId].data[2]].oam.objMode = 1;
@@ -1067,7 +1067,7 @@ void sub_800A974(u8 taskId)
 
 void Task_800A9B4(u8 taskId)
 {
-    if (sub_8072CF4(0x18))
+    if (MenuUpdateWindowText_OverrideLineLength(24))
     {
         CreateNameMenu(2, 1);
         gTasks[taskId].func = sub_800A9EC;
@@ -1085,19 +1085,19 @@ void sub_800A9EC(u8 taskId)
     case 3:
     case 4:
         sub_8072DEC();
-        audio_play(5);
+        audio_play(SE_SELECT);
         MenuZeroFillWindowRect(2, 1, 22, 12);
         set_default_player_name(n);
         gTasks[taskId].func = task_new_game_prof_birch_speech_part2_1;
         break;
     case 0:
-        audio_play(5);
+        audio_play(SE_SELECT);
         BeginNormalPaletteFade(-1, 0, 0, 16, 0);
         gTasks[taskId].func = sub_800AAAC;
         break;
     case -1:
         sub_8072DEC();
-        audio_play(5);
+        audio_play(SE_SELECT);
         MenuZeroFillWindowRect(2, 1, 22, 12);
         gTasks[taskId].func = task_new_game_prof_birch_speech_14;
         break;
@@ -1123,7 +1123,7 @@ void task_new_game_prof_birch_speech_part2_1(u8 taskId)
 
 void sub_800AB38(u8 taskId)
 {
-    if (sub_8072CF4(0x18))
+    if (MenuUpdateWindowText_OverrideLineLength(24))
     {
         DisplayYesNoMenu(2, 1, 1);
         gTasks[taskId].func = task_new_game_prof_birch_speech_part2_4;
@@ -1135,7 +1135,7 @@ void task_new_game_prof_birch_speech_part2_4(u8 taskId)
     switch (ProcessMenuInputNoWrap_())
     {
     case 0:
-        audio_play(5);
+        audio_play(SE_SELECT);
         MenuZeroFillWindowRect(2, 1, 8, 7);
         gSprites[gTasks[taskId].data[2]].oam.objMode = ST_OAM_OBJ_BLEND;
         sub_800B458(taskId, 2);
@@ -1144,7 +1144,7 @@ void task_new_game_prof_birch_speech_part2_4(u8 taskId)
         break;
     case -1:
     case 1:
-        audio_play(5);
+        audio_play(SE_SELECT);
         MenuZeroFillWindowRect(2, 1, 8, 7);
         gTasks[taskId].func = task_new_game_prof_birch_speech_14;
         break;
@@ -1209,7 +1209,7 @@ void task_new_game_prof_birch_speech_part2_7(u8 taskId)
         spriteId = gTasks[taskId].data[9];
         gSprites[spriteId].oam.objMode = 0;
 
-        if (sub_8072CF4(0x18))
+        if (MenuUpdateWindowText_OverrideLineLength(24))
         {
             spriteId = gTasks[taskId].data[8];
             gSprites[spriteId].oam.objMode = 1;
@@ -1274,7 +1274,7 @@ void task_new_game_prof_birch_speech_part2_9(u8 taskId)
         spriteId = gTasks[taskId].data[2];
         gSprites[spriteId].oam.objMode = 0;
 
-        if (sub_8072CF4(0x18))
+        if (MenuUpdateWindowText_OverrideLineLength(24))
         {
             u8 spriteId;
 
@@ -1416,17 +1416,17 @@ void sub_800B240(struct Sprite *sprite)
     sprite->data0 = y;
 }
 
-u8 sub_800B25C(u8 a1, u8 a2)
+u8 CreateAzurillSprite(u8 a1, u8 a2)
 {
     DecompressPicFromTable_2(
-        &gMonFrontPicTable[350],
-        gMonFrontPicCoords[350].x,
-        gMonFrontPicCoords[350].y,
+        &gMonFrontPicTable[SPECIES_AZURILL],
+        gMonFrontPicCoords[SPECIES_AZURILL].x,
+        gMonFrontPicCoords[SPECIES_AZURILL].y,
         gUnknown_081FAF4C[0],
         gUnknown_081FAF4C[1],
-        350);
-    LoadCompressedObjectPalette(&gMonPaletteTable[350]);
-    gpu_pal_obj_decompress_and_apply(350, 1);
+        SPECIES_AZURILL);
+    LoadCompressedObjectPalette(&gMonPaletteTable[SPECIES_AZURILL]);
+    gpu_pal_obj_decompress_and_apply(SPECIES_AZURILL, 1);
     return CreateSprite(&gUnknown_02024E8C, a1, a2, 0);
 }
 
@@ -1440,7 +1440,7 @@ void AddBirchSpeechObjects(u8 taskId)
     gSprites[spriteId].invisible = 1;
     gTasks[taskId].data[8] = spriteId;
 
-    spriteId = sub_800B25C(0x68, 0x48);
+    spriteId = CreateAzurillSprite(0x68, 0x48);
     gSprites[spriteId].callback = nullsub_34;
     gSprites[spriteId].oam.priority = 0;
     gSprites[spriteId].invisible = 1;
