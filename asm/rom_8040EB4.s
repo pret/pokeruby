@@ -14455,7 +14455,7 @@ _08047F48:
 	ldr r0, _08048024
 	bl SetVBlankCallback
 	ldr r0, _08048028
-	bl InitMenuWindowConfig
+	bl InitMenuWindow
 	ldr r4, _0804802C
 	adds r0, r4, 0
 	bl SetUpWindowConfig
@@ -15150,7 +15150,7 @@ _0804857C:
 	ldr r0, _0804863C
 	bl SetVBlankCallback
 	ldr r0, _08048640
-	bl InitMenuWindowConfig
+	bl InitMenuWindow
 	ldr r4, _08048644
 	adds r0, r4, 0
 	bl SetUpWindowConfig
@@ -26668,7 +26668,7 @@ _0804E5AC:
 	adds r0, r4, 0
 	bl SetUpWindowConfig
 	adds r0, r4, 0
-	bl InitMenuWindowConfig
+	bl InitMenuWindow
 	ldr r3, _0804E610
 	ldr r2, [r3]
 	ldrb r0, [r2]
@@ -27327,7 +27327,7 @@ _0804EBBC:
 	adds r0, r4, 0
 	bl SetUpWindowConfig
 	adds r0, r4, 0
-	bl InitMenuWindowConfig
+	bl InitMenuWindow
 	ldr r1, _0804EC68
 	ldr r2, _0804EC6C
 	adds r0, r2, 0
@@ -27976,7 +27976,7 @@ sub_804F0F4: @ 804F0F4
 	adds r0, r4, 0
 	bl SetUpWindowConfig
 	adds r0, r4, 0
-	bl InitMenuWindowConfig
+	bl InitMenuWindow
 	ldr r1, _0804F160
 	ldr r2, _0804F164
 	adds r0, r2, 0
@@ -34568,7 +34568,7 @@ unref_sub_80524BC: @ 80524BC
 	adds r0, r4, 0
 	bl SetUpWindowConfig
 	adds r0, r4, 0
-	bl InitMenuWindowConfig
+	bl InitMenuWindow
 	ldr r0, _08052524
 	ldrh r0, [r0, 0x20]
 	bl SeedRng

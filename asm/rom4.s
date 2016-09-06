@@ -3664,7 +3664,7 @@ _080548C4:
 	ldr r0, _080548DC
 	bl SetUpWindowConfig
 	ldr r0, _080548E0
-	bl InitMenuWindowConfig
+	bl InitMenuWindow
 	b _08054928
 	.align 2, 0
 _080548DC: .4byte gWindowConfig_81E6C3C
@@ -3772,7 +3772,7 @@ _080549B4:
 	ldr r0, _080549CC
 	bl SetUpWindowConfig
 	ldr r0, _080549D0
-	bl InitMenuWindowConfig
+	bl InitMenuWindow
 	b _08054A38
 	.align 2, 0
 _080549CC: .4byte gWindowConfig_81E6C3C
@@ -3934,7 +3934,7 @@ _08054B0C:
 	ldr r0, _08054B24
 	bl SetUpWindowConfig
 	ldr r0, _08054B28
-	bl InitMenuWindowConfig
+	bl InitMenuWindow
 	b _08054B70
 	.align 2, 0
 _08054B24: .4byte gWindowConfig_81E6C3C
@@ -4079,7 +4079,7 @@ sub_8054C2C: @ 8054C2C
 	ldr r0, _08054C4C
 	bl SetUpWindowConfig
 	ldr r0, _08054C50
-	bl InitMenuWindowConfig
+	bl InitMenuWindow
 	bl mapdata_load_assets_to_gpu_and_full_redraw
 	pop {r0}
 	bx r0

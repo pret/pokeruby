@@ -11759,7 +11759,7 @@ _0806AB16:
 	adds r0, r4, 0
 	bl SetUpWindowConfig
 	adds r0, r4, 0
-	bl InitMenuWindowConfig
+	bl InitMenuWindow
 	movs r1, 0x80
 	lsls r1, 19
 	movs r2, 0x88
@@ -12756,12 +12756,12 @@ _0806B3B8: .4byte 0x03001770
 _0806B3BC: .4byte 0x0000043c
 _0806B3C0:
 	ldr r0, _0806B3C8
-	bl MultistepInitMenuWindowConfigBegin
+	bl MultistepInitMenuWindowBegin
 	b _0806B426
 	.align 2, 0
 _0806B3C8: .4byte gWindowConfig_81E6CC8
 _0806B3CC:
-	bl MultistepInitMenuWindowConfigContinue
+	bl MultistepInitMenuWindowContinue
 	cmp r0, 0
 	beq _0806B450
 	ldr r1, _0806B3DC
@@ -24725,7 +24725,7 @@ sub_8071284: @ 8071284
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	ldr r0, _080712AC
-	bl InitMenuWindowConfig
+	bl InitMenuWindow
 	ldr r4, _080712B0
 	adds r0, r4, 0
 	movs r1, 0x50
@@ -25829,7 +25829,7 @@ _08071AB6:
 	adds r0, r4, 0
 	bl SetUpWindowConfig
 	adds r0, r4, 0
-	bl InitMenuWindowConfig
+	bl InitMenuWindow
 	movs r1, 0x80
 	lsls r1, 19
 	movs r2, 0x80

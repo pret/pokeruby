@@ -17,15 +17,15 @@ struct Menu
     u8 columnXCoords[8];
 };
 
-void InitMenuWindowConfig(struct WindowConfig *);
-void MultistepInitMenuWindowConfigBegin(struct WindowConfig *);
-void MultistepInitMenuWindowConfigInternal(struct WindowConfig *, u16);
-bool32 MultistepInitMenuWindowConfigContinue(void);
-void InitMenuWindowConfigInternal(struct WindowConfig *, u16);
+void InitMenuWindow(struct WindowConfig *);
+void MultistepInitMenuWindowBegin(struct WindowConfig *);
+void MultistepInitMenuWindowInternal(struct WindowConfig *, u16);
+bool32 MultistepInitMenuWindowContinue(void);
+void InitMenuWindowInternal(struct WindowConfig *, u16);
 void unref_sub_8071DA4(struct WindowConfig *, u16);
 void MenuLoadTextWindowGraphics_OverrideFrameType(u8);
 void MenuLoadTextWindowGraphics(void);
-void BasicInitMenuWindowConfig(struct WindowConfig *);
+void BasicInitMenuWindow(struct WindowConfig *);
 void MenuPrint(u8 *, u8, u8);
 void MenuZeroFillWindowRect(u8, u8, u8, u8);
 void MenuFillWindowRectWithBlankTile(u8, u8, u8, u8);
@@ -102,17 +102,17 @@ extern u16 gMenuMessageBoxContentTileOffset;
 
 extern const u8 *gUnknown_08376D74[][2];
 
-void InitMenuWindowConfig(struct WindowConfig *winConfig)
+void InitMenuWindow(struct WindowConfig *winConfig)
 {
-    InitMenuWindowConfigInternal(winConfig, 1);
+    InitMenuWindowInternal(winConfig, 1);
 }
 
-void MultistepInitMenuWindowConfigBegin(struct WindowConfig *winConfig)
+void MultistepInitMenuWindowBegin(struct WindowConfig *winConfig)
 {
-    MultistepInitMenuWindowConfigInternal(winConfig, 1);
+    MultistepInitMenuWindowInternal(winConfig, 1);
 }
 
-void MultistepInitMenuWindowConfigInternal(struct WindowConfig *winConfig, u16 tileOffset)
+void MultistepInitMenuWindowInternal(struct WindowConfig *winConfig, u16 tileOffset)
 {
     gMenuMultistepInitState = 0;
     gMenuTextTileOffset = tileOffset;
@@ -120,7 +120,7 @@ void MultistepInitMenuWindowConfigInternal(struct WindowConfig *winConfig, u16 t
     InitWindowFromConfig(&gMenuWindow, winConfig);
 }
 
-bool32 MultistepInitMenuWindowConfigContinue(void)
+bool32 MultistepInitMenuWindowContinue(void)
 {
     switch (gMenuMultistepInitState)
     {
@@ -149,7 +149,7 @@ bool32 MultistepInitMenuWindowConfigContinue(void)
     }
 }
 
-void InitMenuWindowConfigInternal(struct WindowConfig *winConfig, u16 tileOffset)
+void InitMenuWindowInternal(struct WindowConfig *winConfig, u16 tileOffset)
 {
     gMenuWindowPtr = &gMenuWindow;
     InitWindowFromConfig(&gMenuWindow, winConfig);
@@ -181,7 +181,7 @@ void MenuLoadTextWindowGraphics(void)
     LoadTextWindowGraphics(gMenuWindowPtr);
 }
 
-void BasicInitMenuWindowConfig(struct WindowConfig *winConfig)
+void BasicInitMenuWindow(struct WindowConfig *winConfig)
 {
     InitWindowFromConfig(gMenuWindowPtr, winConfig);
     gMenuWindowPtr->tileDataStartOffset = gMenuTextTileOffset;

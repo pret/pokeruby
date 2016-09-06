@@ -35,7 +35,7 @@ void DisplayYesNoMenu(u8 r0, u8 r1, u32 r2);
 s8 ProcessMenuInputNoWrap_(void);
 void c2_load_new_map_2(void);
 void LZ77UnCompVram(const void *src, void *dest);
-void InitMenuWindowConfig(const struct WindowConfig *);
+void InitMenuWindow(const struct WindowConfig *);
 void CB2_MainMenu(void);
 void VBlankCB_MainMenu(void);
 void DecompressPicFromTable_2(const struct SpriteSheet *, u8, u8, void *, void *, u32);
@@ -139,7 +139,7 @@ u32 InitMainMenu(u8 a1)
     ResetSpriteData();
     FreeAllSpritePalettes();
     SetUpWindowConfig(&gWindowConfig_81E6C3C);
-    InitMenuWindowConfig(&gWindowConfig_81E6CE4);
+    InitMenuWindow(&gWindowConfig_81E6CE4);
 
     if (a1)
         BeginNormalPaletteFade(-1, 0, 0x10, 0, 0x0000); // fade to black
@@ -721,7 +721,7 @@ void set_default_player_name(u8 a);
 void Task_Birch1(u8 taskId)
 {
     SetUpWindowConfig(&gWindowConfig_81E6C3C);
-    InitMenuWindowConfig(&gWindowConfig_81E6CE4);
+    InitMenuWindow(&gWindowConfig_81E6CE4);
     REG_WIN0H = 0;
     REG_WIN0V = 0;
     REG_WININ = 0;
@@ -1363,7 +1363,7 @@ void new_game_prof_birch_speech_part2_start()
     AddBirchSpeechObjects(taskId);
 
     SetUpWindowConfig(&gWindowConfig_81E6C3C);
-    InitMenuWindowConfig(&gWindowConfig_81E6CE4);
+    InitMenuWindow(&gWindowConfig_81E6CE4);
 
     if (gSaveBlock2.playerGender != MALE)
     {
