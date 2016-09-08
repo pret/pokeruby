@@ -19,6 +19,8 @@ SHA1 := sha1sum -c
 
 GFX := @tools/gbagfx/gbagfx
 
+AIF := @tools/aif2pcm/aif2pcm
+
 SCANINC := tools/scaninc/scaninc
 
 PREPROC := tools/preproc/preproc
@@ -29,7 +31,7 @@ PREPROC := tools/preproc/preproc
 # Secondary expansion is required for dependency variables in object rules.
 .SECONDEXPANSION:
 
-.PRECIOUS: %.1bpp %.4bpp %.8bpp %.gbapal %.lz %.rl
+.PRECIOUS: %.1bpp %.4bpp %.8bpp %.gbapal %.lz %.rl %.pcm
 
 .PHONY: all clean compare ruby sapphire
 
@@ -81,12 +83,14 @@ include misc.mk
 %.bin: ;
 %.png: ;
 %.pal: ;
+%.aif: ;
 %.1bpp: %.png  ; $(GFX) $< $@
 %.4bpp: %.png  ; $(GFX) $< $@
 %.8bpp: %.png  ; $(GFX) $< $@
 %.gbapal: %.pal ; $(GFX) $< $@
 %.lz: % ; $(GFX) $< $@
 %.rl: % ; $(GFX) $< $@
+%.pcm: %.aif  ; $(AIF) $< $@
 
 src/libc_ruby.o src/libc_sapphire.o: CC1 := tools/agbcc/bin/old_agbcc
 src/libc_ruby.o src/libc_sapphire.o: CFLAGS := -O2
