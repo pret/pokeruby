@@ -31,7 +31,7 @@ PREPROC := tools/preproc/preproc
 # Secondary expansion is required for dependency variables in object rules.
 .SECONDEXPANSION:
 
-.PRECIOUS: %.1bpp %.4bpp %.8bpp %.gbapal %.lz %.rl %.pcm
+.PRECIOUS: %.1bpp %.4bpp %.8bpp %.gbapal %.lz %.rl %.pcm %.bin
 
 .PHONY: all clean compare ruby sapphire
 
@@ -91,6 +91,7 @@ include misc.mk
 %.lz: % ; $(GFX) $< $@
 %.rl: % ; $(GFX) $< $@
 %.pcm: %.aif  ; $(AIF) $< $@
+%.bin: %.aif  ; $(AIF) $< $@
 
 src/libc_ruby.o src/libc_sapphire.o: CC1 := tools/agbcc/bin/old_agbcc
 src/libc_ruby.o src/libc_sapphire.o: CFLAGS := -O2

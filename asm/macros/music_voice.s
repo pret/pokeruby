@@ -111,17 +111,3 @@
 	.4byte \voice_group_pointer
 	.4byte 0
 	.endm
-
-	.macro directsound_looped pitch_adjust, loop_start_sample_index, num_samples
-	.4byte 0x40000000
-	.4byte \pitch_adjust
-	.4byte \loop_start_sample_index
-	.4byte \num_samples
-	.endm
-
-	.macro directsound_not_looped pitch_adjust, num_samples
-	.4byte 0x0
-	.4byte \pitch_adjust
-	.4byte 0x0
-	.4byte \num_samples
-	.endm

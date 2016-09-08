@@ -228,6 +228,11 @@ void aif2pcm(const char *aif_filename)
 	strcpy(pcm_filename, aif_filename);
 	change_file_extension(pcm_filename, "pcm");
 
+	// Get .metadata filename.
+	char metadata_filename[strlen(aif_filename)];
+	strcpy(metadata_filename, aif_filename);
+	change_file_extension(metadata_filename, "bin");
+
 	// Open the given .aif file so we can read its contents.
 	FILE *aif_file;
 	aif_file = fopen(aif_filename, "rb");
@@ -263,6 +268,14 @@ void aif2pcm(const char *aif_filename)
 	pcm_file = fopen(pcm_filename, "wb");
 	fwrite(aif_data->samples, aif_data->num_samples, 1, pcm_file);
 	fclose(pcm_file);
+
+	// Write the output .bin file containing .aif metadata.
+	FILE *metadata_file;
+	metadata_file = fopen(metadata_filename, "wb");
+	unsigned long pitch_adjust = (unsigned long)(aif_data->sample_rate * 1024);
+	fwrite(&pitch_adjust, sizeof(unsigned long), 1, metadata_file);
+	fwrite(&(aif_data->loop_offset), sizeof(unsigned long), 1, metadata_file);
+	fclose(metadata_file);
 
 	free(aif_data->samples);
 	free(aif_data);
