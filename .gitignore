@@ -13,7 +13,7 @@
 *.latfont
 *.hwjpnfont
 *.fwjpnfont
-data/music/direct_sound_samples/*.bin
+data/music/**/*.bin
 pokeas
 pokeld
 pokeobjcopy

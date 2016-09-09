@@ -152,7 +152,6 @@ AifData *read_aif(char * aif_file_data, unsigned long aif_file_data_size)
 			double sample_rate = ieee754_read_extended((unsigned char*)(aif_file_data + pos));
 			pos += 10;
 
-			aif_data->num_samples = num_sample_frames;
 			aif_data->sample_rate = sample_rate;
 		}
 		else if (strcmp(chunk_name, "MARK") == 0)
@@ -183,6 +182,10 @@ AifData *read_aif(char * aif_file_data, unsigned long aif_file_data_size)
 				if (strcmp(marker_name, "START") == 0)
 				{
 					loop_start = marker_position;
+				}
+				else if (strcmp(marker_name, "END") == 0)
+				{
+					aif_data->num_samples = marker_position;
 				}
 
 				free(marker_name);
@@ -224,12 +227,12 @@ AifData *read_aif(char * aif_file_data, unsigned long aif_file_data_size)
 void aif2pcm(const char *aif_filename)
 {
 	// Get .pcm filename.
-	char pcm_filename[strlen(aif_filename)];
+	char pcm_filename[strlen(aif_filename) + 1];
 	strcpy(pcm_filename, aif_filename);
 	change_file_extension(pcm_filename, "pcm");
 
 	// Get .metadata filename.
-	char metadata_filename[strlen(aif_filename)];
+	char metadata_filename[strlen(aif_filename) + 1];
 	strcpy(metadata_filename, aif_filename);
 	change_file_extension(metadata_filename, "bin");
 
@@ -275,6 +278,8 @@ void aif2pcm(const char *aif_filename)
 	unsigned long pitch_adjust = (unsigned long)(aif_data->sample_rate * 1024);
 	fwrite(&pitch_adjust, sizeof(unsigned long), 1, metadata_file);
 	fwrite(&(aif_data->loop_offset), sizeof(unsigned long), 1, metadata_file);
+	unsigned long adjusted_num_samples = aif_data->num_samples - 1;
+	fwrite(&adjusted_num_samples, sizeof(unsigned long), 1, metadata_file);
 	fclose(metadata_file);
 
 	free(aif_data->samples);
