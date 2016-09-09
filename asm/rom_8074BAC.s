@@ -1578,7 +1578,7 @@ _08075798:
 _0807579E:
 	adds r0, r1
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	strh r0, [r5]
 	adds r6, 0x2
 	adds r5, 0x2
@@ -6249,7 +6249,7 @@ _08077BA8:
 _08077BC2:
 	adds r0, r1
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r1, r0, 16
 	b _08077BDE
@@ -6330,7 +6330,7 @@ _08077C44:
 	ldr r1, _08077C74
 	adds r0, r1
 	movs r1, 0
-	bl PokemonGetField
+	bl GetMonData
 	adds r2, r0, 0
 	b _08077C7E
 	.align 2, 0
@@ -6428,7 +6428,7 @@ _08077D04:
 	ldr r1, _08077D38
 	adds r0, r1
 	movs r1, 0
-	bl PokemonGetField
+	bl GetMonData
 	adds r2, r0, 0
 	b _08077D42
 	.align 2, 0
@@ -6831,7 +6831,7 @@ _08078010:
 _0807802A:
 	adds r0, r1
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r4, r0, 16
 	b _08078046
@@ -8059,7 +8059,7 @@ _080788D4:
 _080788E2:
 	adds r0, r1
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _080788FC
 _080788EE:
@@ -10557,7 +10557,7 @@ _08079B54:
 	ldr r1, _08079B90
 	adds r0, r1
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r1, r0, 16
 	b _08079B96
@@ -10587,7 +10587,7 @@ _08079B9E:
 	ldr r1, _08079BCC
 	adds r0, r1
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r1, r0, 16
 	b _08079BD2
@@ -11396,14 +11396,14 @@ _0807A1A4:
 	ldr r5, _0807A1F4
 	adds r0, r5
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r7, r0, 16
 	ldrh r0, [r4]
 	muls r0, r6
 	adds r0, r5
 	movs r1, 0
-	bl PokemonGetField
+	bl GetMonData
 	adds r2, r0, 0
 	b _0807A200
 	.align 2, 0
@@ -11491,14 +11491,14 @@ _0807A26C:
 	ldr r5, _0807A2B0
 	adds r0, r5
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r7, r0, 16
 	ldrh r0, [r4]
 	muls r0, r6
 	adds r0, r5
 	movs r1, 0
-	bl PokemonGetField
+	bl GetMonData
 	adds r2, r0, 0
 	b _0807A2BC
 	.align 2, 0

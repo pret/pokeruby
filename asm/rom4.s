@@ -15342,7 +15342,7 @@ _0805990A:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	bne _080598F2
 _08059924:

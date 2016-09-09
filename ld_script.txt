@@ -74,6 +74,8 @@ SECTIONS {
         src/rtc.o(.text);
         src/main_menu.o(.text);
         asm/rom3.o(.text);
+        src/pokemon.o(.text);
+        asm/rom_803D1FC.o(.text);
         src/rng.o(.text);
         asm/rom_8040EB4.o(.text);
         src/play_time.o(.text);

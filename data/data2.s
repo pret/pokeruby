@@ -32324,8 +32324,7 @@ OtherText_Cancel::
 OtherText_Lv::
 	.string "LV$"
 
-gUnknown_0842CC34:: @ 842CC34
-OtherText_Egg::
+gEggNickname:: @ 842CC34
 	.string "EGG$"
 
 gUnknown_0842CC38:: @ 842CC38
