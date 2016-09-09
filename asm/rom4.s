@@ -677,7 +677,7 @@ _08053266:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805326C: .4byte gUnknown_08304F18
+_0805326C: .4byte gMapAttributes
 	thumb_func_end get_mapdata_header
 
 	thumb_func_start warp_shift
@@ -779,7 +779,7 @@ get_mapheader_by_bank_and_number: @ 8053310
 	ldr r0, [r1]
 	bx lr
 	.align 2, 0
-_08053324: .4byte gUnknown_08308588
+_08053324: .4byte gMapGroups
 	thumb_func_end get_mapheader_by_bank_and_number
 
 	thumb_func_start warp1_get_mapheader
