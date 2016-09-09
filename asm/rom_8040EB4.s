@@ -566,7 +566,7 @@ pokemon_get_nick: @ 80412B0
 	adds r4, r1, 0
 	movs r1, 0x2
 	mov r2, sp
-	bl PokemonGetField
+	bl GetMonData
 	adds r0, r4, 0
 	mov r1, sp
 	bl StringCopy10
@@ -583,7 +583,7 @@ pokemon_get_nick_: @ 80412D0
 	adds r4, r1, 0
 	movs r1, 0x2
 	mov r2, sp
-	bl PokemonGetEncryptedField
+	bl GetMonBoxData
 	adds r0, r4, 0
 	mov r1, sp
 	bl StringCopy10
@@ -605,7 +605,7 @@ _080412F8:
 	lsls r0, 4
 	adds r0, r6, r0
 	movs r1, 0xB
-	bl PokemonGetEncryptedField
+	bl GetMonBoxData
 	cmp r0, 0
 	beq _08041310
 	adds r0, r5, 0x1
@@ -646,7 +646,7 @@ _0804133E:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl PokemonGetEncryptedField
+	bl GetMonBoxData
 	cmp r0, 0
 	beq _0804136E
 	adds r0, r7, 0x1
@@ -654,7 +654,7 @@ _0804133E:
 	lsrs r7, r0, 24
 	adds r0, r4, 0
 	movs r1, 0xC
-	bl PokemonGetEncryptedField
+	bl GetMonBoxData
 	adds r1, r0, 0
 	cmp r1, 0
 	bne _0804136E
@@ -694,7 +694,7 @@ _0804139A:
 	lsls r0, 4
 	adds r0, r5, r0
 	movs r1, 0xB
-	bl PokemonGetEncryptedField
+	bl GetMonBoxData
 	cmp r0, 0
 	bne _080413B2
 	lsls r0, r4, 24
@@ -754,7 +754,7 @@ sub_80413C8: @ 80413C8
 	bl pokemon_get_nick
 	adds r0, r7, 0
 	movs r1, 0x40
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 24
 	lsrs r0, 24
 	add r4, r8
@@ -837,12 +837,12 @@ sub_80414C0: @ 80414C0
 	adds r4, 0x50
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl PokemonGetEncryptedField
+	bl GetMonBoxData
 	cmp r0, 0
 	beq _08041516
 	adds r0, r5, 0
 	movs r1, 0xB
-	bl PokemonGetEncryptedField
+	bl GetMonBoxData
 	adds r6, r0, 0
 	cmp r6, 0
 	bne _08041516
@@ -851,7 +851,7 @@ sub_80414C0: @ 80414C0
 	movs r2, 0x50
 	bl memcpy
 	adds r0, r4, 0
-	bl zero_pokemon_boxed_data
+	bl ZeroPokemonBoxData
 	adds r0, r5, 0
 	adds r0, 0xA0
 	adds r4, 0x88
@@ -938,7 +938,7 @@ sub_8041570: @ 8041570
 	bl pokemon_get_nick_
 	adds r0, r6, 0
 	movs r1, 0xB
-	bl PokemonGetEncryptedField
+	bl GetMonBoxData
 	lsls r0, 16
 	lsrs r0, 16
 	mov r9, r0
@@ -947,12 +947,12 @@ sub_8041570: @ 8041570
 	bl sub_803B4B4
 	mov r0, sp
 	movs r1, 0x38
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0x64
 	beq _080415D8
 	mov r0, sp
 	movs r1, 0x19
-	bl PokemonGetField
+	bl GetMonData
 	movs r2, 0x88
 	lsls r2, 1
 	adds r1, r5, r2
@@ -963,7 +963,7 @@ sub_8041570: @ 8041570
 	add r2, sp, 0x64
 	mov r0, sp
 	movs r1, 0x19
-	bl pokemon_setattr
+	bl SetMonData
 	mov r0, sp
 	bl sub_804151C
 _080415D8:
@@ -995,7 +995,7 @@ _080415D8:
 _08041610:
 	bl party_compaction
 	adds r0, r6, 0
-	bl zero_pokemon_boxed_data
+	bl ZeroPokemonBoxData
 	movs r2, 0x88
 	lsls r2, 1
 	adds r0, r5, r2
@@ -1046,13 +1046,13 @@ sub_8041664: @ 8041664
 	bl memcpy
 	adds r0, r4, 0
 	movs r1, 0x19
-	bl PokemonGetEncryptedField
+	bl GetMonBoxData
 	adds r0, r5
 	str r0, [sp, 0x50]
 	add r2, sp, 0x50
 	mov r0, sp
 	movs r1, 0x19
-	bl PokemonSetEncryptedField
+	bl SetMonBoxData
 	mov r0, sp
 	bl sub_803B570
 	lsls r0, 24
@@ -1218,7 +1218,7 @@ sub_80417B8: @ 80417B8
 	ldr r4, _080417DC
 	adds r0, r4
 	movs r1, 0xB
-	bl PokemonGetEncryptedField
+	bl GetMonBoxData
 	cmp r0, 0
 	bne _080417E0
 	movs r0, 0
@@ -1276,7 +1276,7 @@ _0804182A:
 	adds r0, r4, r5
 	lsls r0, 4
 	adds r0, r6, r0
-	bl zero_pokemon_boxed_data
+	bl ZeroPokemonBoxData
 	movs r1, 0x88
 	lsls r1, 1
 	adds r0, r6, r1
@@ -1574,12 +1574,12 @@ _08041A4C:
 	lsls r0, 4
 	add r0, r8
 	movs r1, 0x27
-	bl PokemonGetEncryptedField
+	bl GetMonBoxData
 	add r2, sp, 0x10
 	strb r0, [r2]
 	mov r0, r9
 	movs r1, 0x27
-	bl pokemon_setattr
+	bl SetMonData
 	b _08041B02
 _08041A6C:
 	add r4, sp, 0x10
@@ -1590,7 +1590,7 @@ _08041A6C:
 	lsls r0, 4
 	add r0, r8
 	movs r1, 0x28
-	bl PokemonGetEncryptedField
+	bl GetMonBoxData
 	strb r0, [r4]
 	mov r0, r9
 	movs r1, 0x28
@@ -1604,7 +1604,7 @@ _08041A88:
 	lsls r0, 4
 	add r0, r8
 	movs r1, 0x29
-	bl PokemonGetEncryptedField
+	bl GetMonBoxData
 	strb r0, [r4]
 	mov r0, r9
 	movs r1, 0x29
@@ -1618,7 +1618,7 @@ _08041AA4:
 	lsls r0, 4
 	add r0, r8
 	movs r1, 0x2A
-	bl PokemonGetEncryptedField
+	bl GetMonBoxData
 	strb r0, [r4]
 	mov r0, r9
 	movs r1, 0x2A
@@ -1632,13 +1632,13 @@ _08041AC0:
 	lsls r0, 4
 	add r0, r8
 	movs r1, 0x2B
-	bl PokemonGetEncryptedField
+	bl GetMonBoxData
 	strb r0, [r4]
 	mov r0, r9
 	movs r1, 0x2B
 _08041ADA:
 	adds r2, r4, 0
-	bl pokemon_setattr
+	bl SetMonData
 	b _08041B02
 _08041AE2:
 	add r4, sp, 0x10
@@ -1649,12 +1649,12 @@ _08041AE2:
 	lsls r0, 4
 	add r0, r8
 	movs r1, 0x2C
-	bl PokemonGetEncryptedField
+	bl GetMonBoxData
 	strb r0, [r4]
 	mov r0, r9
 	movs r1, 0x2C
 	adds r2, r4, 0
-	bl pokemon_setattr
+	bl SetMonData
 _08041B02:
 	adds r0, r5, 0x1
 	lsls r0, 24
@@ -1679,7 +1679,7 @@ pokemon_get_eggmoves: @ 8041B1C
 	movs r6, 0
 	movs r4, 0
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r3, r0, 16
 	movs r2, 0
@@ -1815,7 +1815,7 @@ _08041C18:
 	bls _08041C18
 	adds r0, r7, 0
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r1, _08041CD8
@@ -1831,14 +1831,14 @@ _08041C46:
 	adds r5, 0xD
 	mov r0, r10
 	adds r1, r5, 0
-	bl PokemonGetEncryptedField
+	bl GetMonBoxData
 	lsls r4, r6, 1
 	mov r2, r8
 	adds r1, r4, r2
 	strh r0, [r1]
 	mov r0, r9
 	adds r1, r5, 0
-	bl PokemonGetEncryptedField
+	bl GetMonBoxData
 	ldr r1, _08041CC8
 	adds r4, r1
 	strh r0, [r4]
@@ -2140,13 +2140,13 @@ incense_effects: @ 8041E8C
 _08041EA4:
 	adds r0, r5, 0
 	movs r1, 0xC
-	bl PokemonGetEncryptedField
+	bl GetMonBoxData
 	lsls r0, 16
 	lsrs r6, r0, 16
 	adds r0, r5, 0
 	adds r0, 0x50
 	movs r1, 0xC
-	bl PokemonGetEncryptedField
+	bl GetMonBoxData
 	lsls r0, 16
 	lsrs r2, r0, 16
 	ldrh r0, [r4]
@@ -2194,7 +2194,7 @@ _08041EFC:
 	adds r5, r1, r0
 	adds r0, r5, 0
 	movs r1, 0xB
-	bl PokemonGetEncryptedField
+	bl GetMonBoxData
 	lsls r1, r4, 1
 	add r1, sp
 	strh r0, [r1]
@@ -2328,7 +2328,7 @@ sub_8041FC4: @ 8041FC4
 	strb r0, [r2]
 	mov r0, sp
 	movs r1, 0x2D
-	bl pokemon_setattr
+	bl SetMonData
 	ldr r0, _08042040
 	movs r1, 0xFA
 	lsls r1, 1
@@ -2387,11 +2387,11 @@ sub_8042044: @ 8042044
 	adds r0, r7, 0
 	movs r1, 0x26
 	add r2, sp, 0x10
-	bl pokemon_setattr
+	bl SetMonData
 	ldr r2, _080420F4
 	adds r0, r7, 0
 	movs r1, 0x2
-	bl pokemon_setattr
+	bl SetMonData
 	lsls r2, r5, 3
 	subs r2, r5
 	lsls r2, 2
@@ -2399,15 +2399,15 @@ sub_8042044: @ 8042044
 	adds r2, r0
 	adds r0, r7, 0
 	movs r1, 0x20
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r7, 0
 	movs r1, 0x24
 	mov r2, r8
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r7, 0
 	movs r1, 0x3
 	adds r2, r4, 0
-	bl pokemon_setattr
+	bl SetMonData
 	cmp r6, 0
 	beq _080420D6
 	add r2, sp, 0x14
@@ -2415,7 +2415,7 @@ sub_8042044: @ 8042044
 	strb r0, [r2]
 	adds r0, r7, 0
 	movs r1, 0x23
-	bl pokemon_setattr
+	bl SetMonData
 _080420D6:
 	mov r2, sp
 	adds r2, 0x15
@@ -2423,7 +2423,7 @@ _080420D6:
 	strb r0, [r2]
 	adds r0, r7, 0
 	movs r1, 0x2D
-	bl pokemon_setattr
+	bl SetMonData
 	add sp, 0x18
 	pop {r3,r4}
 	mov r8, r3
@@ -2481,11 +2481,11 @@ sub_80420FC: @ 80420FC
 	adds r0, r6, 0
 	movs r1, 0x26
 	add r2, sp, 0x10
-	bl pokemon_setattr
+	bl SetMonData
 	ldr r2, _08042198
 	adds r0, r6, 0
 	movs r1, 0x2
-	bl pokemon_setattr
+	bl SetMonData
 	lsls r2, r5, 3
 	subs r2, r5
 	lsls r2, 2
@@ -2493,15 +2493,15 @@ sub_80420FC: @ 80420FC
 	adds r2, r0
 	adds r0, r6, 0
 	movs r1, 0x20
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r6, 0
 	movs r1, 0x24
 	mov r2, r9
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r6, 0
 	movs r1, 0x3
 	adds r2, r4, 0
-	bl pokemon_setattr
+	bl SetMonData
 	add sp, 0x14
 	pop {r3,r4}
 	mov r8, r3
@@ -2538,7 +2538,7 @@ _080421BC:
 	adds r0, r5, 0
 	movs r1, 0x5
 	str r2, [sp, 0x4]
-	bl PokemonGetEncryptedField
+	bl GetMonBoxData
 	ldr r2, [sp, 0x4]
 	cmp r0, 0
 	beq _080421DE
@@ -2606,12 +2606,12 @@ _08042244:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _08042286
 	adds r0, r4, 0
 	movs r1, 0x20
-	bl PokemonGetField
+	bl GetMonData
 	str r0, [sp]
 	cmp r0, 0
 	bne _08042278
@@ -2628,7 +2628,7 @@ _08042278:
 	adds r0, r4, 0
 	movs r1, 0x20
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 _08042286:
 	adds r6, 0x1
 _08042288:
@@ -2677,7 +2677,7 @@ sub_80422C4: @ 80422C4
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	movs r1, 0xB
-	bl PokemonGetEncryptedField
+	bl GetMonBoxData
 	cmp r0, 0
 	beq _080422FC
 	ldr r1, _0804231C
@@ -2685,7 +2685,7 @@ sub_80422C4: @ 80422C4
 	bl pokemon_get_nick_
 	adds r0, r6, 0
 	movs r1, 0x3
-	bl PokemonGetEncryptedField
+	bl GetMonBoxData
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -2693,7 +2693,7 @@ sub_80422C4: @ 80422C4
 	adds r0, r6, 0
 	movs r1, 0x7
 	adds r2, r5, 0
-	bl PokemonGetEncryptedField
+	bl GetMonBoxData
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl ConvertInternationalString
@@ -2702,7 +2702,7 @@ _080422FC:
 	adds r4, 0x50
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl PokemonGetEncryptedField
+	bl GetMonBoxData
 	cmp r0, 0
 	beq _08042314
 	ldr r1, _08042324
@@ -2733,7 +2733,7 @@ sub_8042328: @ 8042328
 	muls r0, r5
 	adds r0, r4
 	movs r1, 0xB
-	bl PokemonGetEncryptedField
+	bl GetMonBoxData
 	lsls r0, 16
 	lsrs r0, 16
 	pop {r4-r6}
@@ -2852,17 +2852,17 @@ daycare_relationship_score: @ 80423D8
 _0804240E:
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl PokemonGetEncryptedField
+	bl GetMonBoxData
 	strh r0, [r5]
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl PokemonGetEncryptedField
+	bl GetMonBoxData
 	ldr r1, [sp, 0x28]
 	stm r1!, {r0}
 	str r1, [sp, 0x28]
 	adds r0, r4, 0
 	movs r1, 0
-	bl PokemonGetEncryptedField
+	bl GetMonBoxData
 	adds r1, r0, 0
 	ldrh r0, [r5]
 	bl pokemon_species_get_gender_info
@@ -3355,7 +3355,7 @@ _0804279C:
 	movs r1, 0x6
 	movs r2, 0x1D
 	movs r3, 0xD
-	bl Reset
+	bl MenuZeroFillWindowRect
 	bl script_env_2_enable_and_set_ctx_running
 	b _08042816
 	.align 2, 0
@@ -3380,7 +3380,7 @@ _080427E8:
 	movs r1, 0x6
 	movs r2, 0x1D
 	movs r3, 0xD
-	bl Reset
+	bl MenuZeroFillWindowRect
 	bl script_env_2_enable_and_set_ctx_running
 _08042816:
 	pop {r4,r5}
@@ -3399,7 +3399,7 @@ sub_8042824: @ 8042824
 	movs r1, 0x6
 	movs r2, 0x1D
 	movs r3, 0xD
-	bl DrawDefaultWindow
+	bl MenuDrawTextWindow
 	ldr r4, _08042880
 	adds r0, r4, 0
 	add r1, sp, 0x8
@@ -3407,7 +3407,7 @@ sub_8042824: @ 8042824
 	add r0, sp, 0x8
 	movs r1, 0x10
 	movs r2, 0x7
-	bl Print
+	bl MenuPrint
 	adds r0, r4, 0
 	add r1, sp, 0x8
 	bl sub_80426B0
@@ -3464,7 +3464,7 @@ sub_80428A4: @ 80428A4
 	adds r6, r0, 0
 	adds r5, r1, 0
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	mov r10, r0
@@ -3487,7 +3487,7 @@ _080428DE:
 	adds r1, r4, 0
 	adds r1, 0xD
 	adds r0, r6, 0
-	bl PokemonGetField
+	bl GetMonData
 	lsls r1, r4, 1
 	add r1, sp
 	adds r1, 0x10
@@ -3499,14 +3499,14 @@ _080428DE:
 	bls _080428DE
 	adds r0, r6, 0
 	movs r1, 0
-	bl PokemonGetField
+	bl GetMonData
 	mov r8, r0
 	movs r4, 0
 _08042906:
 	adds r1, r4, 0
 	adds r1, 0x27
 	adds r0, r6, 0
-	bl PokemonGetField
+	bl GetMonData
 	lsls r1, r4, 2
 	adds r1, r7, r1
 	str r0, [r1]
@@ -3517,17 +3517,17 @@ _08042906:
 	bls _08042906
 	adds r0, r6, 0
 	movs r1, 0x25
-	bl PokemonGetField
+	bl GetMonData
 	ldr r1, [sp, 0x38]
 	strb r0, [r1]
 	adds r0, r6, 0
 	movs r1, 0x8
-	bl PokemonGetField
+	bl GetMonData
 	ldr r1, [sp, 0x3C]
 	strb r0, [r1]
 	adds r0, r6, 0
 	movs r1, 0x22
-	bl PokemonGetField
+	bl GetMonData
 	str r0, [sp, 0x34]
 	movs r0, 0x1
 	str r0, [sp]
@@ -3550,7 +3550,7 @@ _0804295E:
 	adds r2, r0
 	adds r2, 0x10
 	adds r0, r5, 0
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -3563,7 +3563,7 @@ _0804297C:
 	lsls r2, r4, 2
 	adds r2, r7, r2
 	adds r0, r5, 0
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -3575,26 +3575,26 @@ _0804297C:
 	adds r0, r5, 0
 	movs r1, 0x3
 	mov r2, r9
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r5, 0
 	movs r1, 0x25
 	ldr r2, [sp, 0x38]
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r5, 0
 	movs r1, 0x8
 	ldr r2, [sp, 0x3C]
-	bl pokemon_setattr
+	bl SetMonData
 	movs r0, 0x78
 	ldr r1, [sp, 0x40]
 	strb r0, [r1]
 	adds r0, r5, 0
 	movs r1, 0x20
 	ldr r2, [sp, 0x40]
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r5, 0
 	movs r1, 0x22
 	ldr r2, [sp, 0x44]
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r6, 0
 	adds r1, r5, 0
 	movs r2, 0x64
@@ -3628,10 +3628,10 @@ sub_80429EC: @ 80429EC
 	strb r6, [r2]
 	adds r0, r5, 0
 	movs r1, 0x2D
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r5, 0
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -3641,7 +3641,7 @@ sub_80429EC: @ 80429EC
 	adds r0, r5, 0
 	movs r1, 0x2
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	bl SpeciesToNationalPokedexNum
 	adds r4, r0, 0
@@ -3662,19 +3662,19 @@ sub_80429EC: @ 80429EC
 	strh r0, [r2]
 	adds r0, r5, 0
 	movs r1, 0x26
-	bl pokemon_setattr
+	bl SetMonData
 	add r2, sp, 0x10
 	strh r6, [r2]
 	adds r0, r5, 0
 	movs r1, 0x24
-	bl pokemon_setattr
+	bl SetMonData
 	bl sav1_map_get_name
 	mov r2, sp
 	adds r2, 0x12
 	strb r0, [r2]
 	adds r0, r5, 0
 	movs r1, 0x23
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r5, 0
 	bl sub_8040B1C
 	adds r0, r5, 0
@@ -3829,13 +3829,13 @@ _08042BB0: .4byte 0x03004360
 _08042BB4:
 	adds r0, r7, 0
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	adds r5, r0, 0
 	lsls r5, 16
 	lsrs r5, 16
 	adds r0, r7, 0
 	movs r1, 0
-	bl PokemonGetField
+	bl GetMonData
 	mov r8, r0
 	lsls r0, r5, 3
 	ldr r1, _08042C04
@@ -4047,13 +4047,13 @@ _08042D90:
 	adds r1, r5, 0
 	bl InitWindowFromConfig
 	movs r0, 0x14
-	bl sub_8064EF4
+	bl SetTextWindowBaseTileNum
 	ldr r1, [r4]
 	adds r1, 0x38
 	strb r0, [r1]
 	ldr r0, [r4]
 	adds r0, 0x8
-	bl sub_8064F08
+	bl LoadTextWindowGraphics
 	b _08042F04
 	.align 2, 0
 _08042DBC: .4byte gWindowConfig_81E6F84
@@ -4264,7 +4264,7 @@ sub_8042F88: @ 8042F88
 	adds r0, r1
 	ldr r2, _08042FB0
 	movs r1, 0x2
-	bl pokemon_setattr
+	bl SetMonData
 	ldr r0, _08042FB4
 	bl SetMainCallback2
 	pop {r0}
@@ -4524,14 +4524,14 @@ _080431B8:
 	movs r1, 0x8
 	movs r2, 0x1B
 	movs r3, 0xD
-	bl DrawDefaultWindow
+	bl MenuDrawTextWindow
 	movs r0, 0x16
 	movs r1, 0x8
 	movs r2, 0x4
-	bl sub_807292C
+	bl InitYesNoMenu
 	b _08043298
 _080431DA:
-	bl FillWindowPixelBuffer
+	bl ProcessMenuInputNoWrap_
 	lsls r0, 24
 	lsrs r2, r0, 24
 	asrs r0, 24
@@ -4569,7 +4569,7 @@ _080431DA:
 	adds r0, r1, 0
 	adds r0, r6
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	adds r5, r0, 0
 	lsls r5, 16
 	lsrs r5, 16
@@ -4593,7 +4593,7 @@ _080431DA:
 	adds r0, r6
 	movs r1, 0
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	str r0, [sp]
 	ldr r0, _08043284
 	str r0, [sp, 0x4]
@@ -4780,7 +4780,7 @@ sub_80433A0: @ 80433A0
 	ldr r1, _0804340C
 	adds r0, r1
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	ldr r4, _08043410
 	ldr r3, [r5]
@@ -7161,7 +7161,7 @@ _0804460C:
 	ldr r2, _08044690
 	adds r0, r2
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	adds r1, r0, 0
 	lsls r1, 16
 	asrs r1, 16
@@ -7270,7 +7270,7 @@ _0804470C:
 	ldr r2, _08044788
 	adds r0, r2
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	adds r1, r0, 0
 	lsls r1, 16
 	asrs r1, 16
@@ -7286,7 +7286,7 @@ _0804470C:
 _08044766:
 	adds r0, r1
 	movs r1, 0x3A
-	bl PokemonGetField
+	bl GetMonData
 	adds r1, r0, 0
 	lsls r1, 16
 	asrs r1, 16
@@ -8644,7 +8644,7 @@ sub_80451A0: @ 80451A0
 	adds r0, r7, 0
 	movs r1, 0x2
 	mov r2, sp
-	bl PokemonGetField
+	bl GetMonData
 	mov r0, sp
 	bl StringGetEnd10
 	adds r4, 0x3
@@ -8668,13 +8668,13 @@ sub_80451A0: @ 80451A0
 	lsrs r6, r0, 24
 	adds r0, r7, 0
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r7, 0
 	movs r1, 0x3
-	bl PokemonGetField
+	bl GetMonData
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -8748,13 +8748,13 @@ _08045256:
 	mov r10, r1
 	adds r0, r7, 0
 	movs r1, 0x3
-	bl PokemonGetField
+	bl GetMonData
 	str r4, [sp, 0xC]
 	cmp r0, 0x1
 	bne _08045338
 	adds r0, r7, 0
 	movs r1, 0x2D
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	bne _08045338
 	mov r4, r8
@@ -9005,7 +9005,7 @@ sub_8045458: @ 8045458
 	ldr r1, _08045500
 	adds r0, r1
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	bl SpeciesToNationalPokedexNum
@@ -9109,7 +9109,7 @@ draw_status_ailment_maybe: @ 8045540
 	ldr r1, _080455AC
 	adds r0, r1
 	movs r1, 0x37
-	bl PokemonGetField
+	bl GetMonData
 	adds r4, r0, 0
 	bl battle_type_is_double
 	lsls r0, 24
@@ -9134,7 +9134,7 @@ _080455B0:
 	ldr r1, _080455F0
 	adds r0, r1
 	movs r1, 0x37
-	bl PokemonGetField
+	bl GetMonData
 	adds r4, r0, 0
 	movs r1, 0x11
 	mov r8, r1
@@ -9374,7 +9374,7 @@ _080457BA:
 	bx r0
 	.align 2, 0
 _080457C8: .4byte 0x02020004
-_080457CC: .4byte gUnknown_08E903F8
+_080457CC: .4byte gBattleInterfaceStatusIcons_DynPal
 _080457D0: .4byte 0x0202ecc8
 _080457D4: .4byte 0x05000200
 _080457D8: .4byte 0x06010000
@@ -9719,7 +9719,7 @@ _08045A92:
 _08045A9A:
 	mov r0, r9
 	movs r1, 0x38
-	bl PokemonGetField
+	bl GetMonData
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -9730,7 +9730,7 @@ _08045AAE:
 	bhi _08045AC8
 	mov r0, r9
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	adds r1, r0, 0
 	lsls r1, 16
 	asrs r1, 16
@@ -9745,7 +9745,7 @@ _08045AC8:
 _08045AD0:
 	mov r0, r9
 	movs r1, 0x3A
-	bl PokemonGetField
+	bl GetMonData
 	adds r1, r0, 0
 	lsls r1, 16
 	asrs r1, 16
@@ -9762,11 +9762,11 @@ _08045AEE:
 	bl load_gfxc_health_bar
 	mov r0, r9
 	movs r1, 0x3A
-	bl PokemonGetField
+	bl GetMonData
 	adds r4, r0, 0
 	mov r0, r9
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	adds r3, r0, 0
 	movs r0, 0
 	str r0, [sp]
@@ -9795,19 +9795,19 @@ _08045B38:
 	bl load_gfxc_health_bar
 	mov r0, r9
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	adds r5, r0, 0
 	lsls r5, 16
 	lsrs r5, 16
 	mov r0, r9
 	movs r1, 0x38
-	bl PokemonGetField
+	bl GetMonData
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	mov r0, r9
 	movs r1, 0x19
-	bl PokemonGetField
+	bl GetMonData
 	adds r3, r0, 0
 	ldr r6, _08045BE8
 	lsls r1, r4, 2
@@ -9884,7 +9884,7 @@ _08045BF0:
 _08045BF8:
 	mov r0, r9
 	movs r1, 0x38
-	bl PokemonGetField
+	bl GetMonData
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -9900,11 +9900,11 @@ _08045C14:
 	bl load_gfxc_health_bar
 	mov r0, r9
 	movs r1, 0x3A
-	bl PokemonGetField
+	bl GetMonData
 	adds r4, r0, 0
 	mov r0, r9
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	adds r3, r0, 0
 	movs r0, 0
 	str r0, [sp]
@@ -10209,7 +10209,7 @@ _08045E54:
 	ldr r1, _08045EF8
 	adds r0, r1
 	movs r1, 0x38
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 24
 	lsrs r0, 24
 	adds r1, r5, 0
@@ -11047,7 +11047,7 @@ _080464C8:
 _080464D6:
 	adds r0, r1
 	movs r1, 0x26
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	bl ball_number_to_ball_processing_index
@@ -12090,7 +12090,7 @@ _08046D20:
 	mov r8, r1
 _08046D34:
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r7, r0, 16
 	movs r0, 0
@@ -12818,8 +12818,8 @@ sub_80472D8: @ 80472D8
 	bx r1
 	thumb_func_end sub_80472D8
 
-	thumb_func_start AddTextPrinterForMessage
-AddTextPrinterForMessage: @ 80472F0
+	thumb_func_start CreatePokeballSprite
+CreatePokeballSprite: @ 80472F0
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -12924,7 +12924,7 @@ _080473C0: .4byte gUnknown_0820A98C
 _080473C4: .4byte gSpriteTemplate_820AAB4
 _080473C8: .4byte 0x02020004
 _080473CC: .4byte sub_80473D0
-	thumb_func_end AddTextPrinterForMessage
+	thumb_func_end CreatePokeballSprite
 
 	thumb_func_start sub_80473D0
 sub_80473D0: @ 80473D0
@@ -13705,7 +13705,7 @@ _080479A4:
 _080479B2:
 	adds r0, r1
 	movs r1, 0x26
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	pop {r4}
@@ -14321,10 +14321,10 @@ _08047DEE:
 	bx r0
 	.align 2, 0
 _08047E30: .4byte gSaveBlock2
-_08047E34: .4byte gUnknown_0820C2E6
+_08047E34: .4byte gTradeUnknownSpriteCoords
 _08047E38: .4byte gSpriteTemplate_820C0EC
 _08047E3C: .4byte 0x03002978
-_08047E40: .4byte gUnknown_0820C2E9
+_08047E40: .4byte gTradeUnknownSpriteCoords + 0x3
 	thumb_func_end sub_8047D58
 
 	thumb_func_start sub_8047E44
@@ -14455,7 +14455,7 @@ _08047F48:
 	ldr r0, _08048024
 	bl SetVBlankCallback
 	ldr r0, _08048028
-	bl sub_8071C4C
+	bl InitMenuWindow
 	ldr r4, _0804802C
 	adds r0, r4, 0
 	bl SetUpWindowConfig
@@ -14464,15 +14464,15 @@ _08047F48:
 	adds r1, r4, 0
 	bl InitWindowFromConfig
 	movs r0, 0x14
-	bl sub_8064EF4
+	bl SetTextWindowBaseTileNum
 	ldr r1, [r5]
 	adds r1, 0x7A
 	movs r4, 0
 	strb r0, [r1]
 	ldr r0, [r5]
 	adds r0, 0x4
-	bl sub_8064F08
-	bl sub_8071EF4
+	bl LoadTextWindowGraphics
+	bl MenuZeroFillScreen
 	bl sub_809D51C
 	ldr r0, [r5]
 	adds r0, 0x75
@@ -14726,13 +14726,13 @@ _080481BA:
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl PokemonGetField
+	bl GetMonData
 	adds r5, r0, 0
 	lsls r5, 16
 	lsrs r5, 16
 	adds r0, r4, 0
 	movs r1, 0
-	bl PokemonGetField
+	bl GetMonData
 	ldrb r2, [r7]
 	lsls r2, 19
 	movs r1, 0xE0
@@ -14783,13 +14783,13 @@ _0804822C:
 	adds r0, r4, 0
 	movs r1, 0x41
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	adds r5, r0, 0
 	lsls r5, 16
 	lsrs r5, 16
 	adds r0, r4, 0
 	movs r1, 0
-	bl PokemonGetField
+	bl GetMonData
 	ldrb r2, [r7]
 	lsls r2, 19
 	movs r3, 0xE0
@@ -14828,7 +14828,7 @@ _0804828A:
 _08048294: .4byte 0x03004824
 _08048298: .4byte 0x03004350
 _0804829C: .4byte 0x030045b8
-_080482A0: .4byte gUnknown_0820C29C
+_080482A0: .4byte gTradeMonSpriteCoords
 _080482A4: .4byte 0x03004360
 _080482A8: .4byte 0xfff40000
 _080482AC: .4byte sub_809D62C
@@ -14944,7 +14944,7 @@ _08048360:
 	b _080484C6
 	.align 2, 0
 _080483A4: .4byte gSpriteTemplate_820C134
-_080483A8: .4byte gUnknown_0820C29C
+_080483A8: .4byte gTradeMonSpriteCoords
 _080483AC: .4byte 0x03004824
 _080483B0: .4byte 0x03001770
 _080483B4: .4byte 0x0000043c
@@ -15150,7 +15150,7 @@ _0804857C:
 	ldr r0, _0804863C
 	bl SetVBlankCallback
 	ldr r0, _08048640
-	bl sub_8071C4C
+	bl InitMenuWindow
 	ldr r4, _08048644
 	adds r0, r4, 0
 	bl SetUpWindowConfig
@@ -15159,15 +15159,15 @@ _0804857C:
 	adds r1, r4, 0
 	bl InitWindowFromConfig
 	movs r0, 0x14
-	bl sub_8064EF4
+	bl SetTextWindowBaseTileNum
 	ldr r1, [r5]
 	adds r1, 0x7A
 	movs r4, 0
 	strb r0, [r1]
 	ldr r0, [r5]
 	adds r0, 0x4
-	bl sub_8064F08
-	bl sub_8071EF4
+	bl LoadTextWindowGraphics
+	bl MenuZeroFillScreen
 	bl sub_809D51C
 	ldr r0, [r5]
 	adds r0, 0x75
@@ -15298,13 +15298,13 @@ _080486DE:
 	adds r0, r4, 0
 	movs r1, 0x41
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	adds r5, r0, 0
 	lsls r5, 16
 	lsrs r5, 16
 	adds r0, r4, 0
 	movs r1, 0
-	bl PokemonGetField
+	bl GetMonData
 	ldrb r2, [r7]
 	lsls r2, 19
 	movs r1, 0xE0
@@ -15355,13 +15355,13 @@ _08048752:
 	adds r0, r4, 0
 	movs r1, 0x41
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	adds r5, r0, 0
 	lsls r5, 16
 	lsrs r5, 16
 	adds r0, r4, 0
 	movs r1, 0
-	bl PokemonGetField
+	bl GetMonData
 	ldrb r2, [r7]
 	lsls r2, 19
 	movs r3, 0xE0
@@ -15403,7 +15403,7 @@ _080487B0:
 _080487C0: .4byte 0x03004824
 _080487C4: .4byte 0x03004350
 _080487C8: .4byte 0x030045b8
-_080487CC: .4byte gUnknown_0820C29C
+_080487CC: .4byte gTradeMonSpriteCoords
 _080487D0: .4byte 0x03004360
 _080487D4: .4byte 0xfff40000
 _080487D8: .4byte sub_809D62C
@@ -15542,7 +15542,7 @@ _080488B8:
 	b _080489CA
 	.align 2, 0
 _08048900: .4byte gSpriteTemplate_820C134
-_08048904: .4byte gUnknown_0820C29C
+_08048904: .4byte gTradeMonSpriteCoords
 _08048908: .4byte 0x03004824
 _0804890C: .4byte 0x03001770
 _08048910: .4byte 0x0000043c
@@ -16408,7 +16408,7 @@ _08049018:
 _0804901E:
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0
@@ -16417,13 +16417,13 @@ _0804901E:
 	bne _0804905E
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0x1
 	beq _0804905E
 	adds r0, r4, 0
 	movs r1, 0x2
 	mov r2, sp
-	bl PokemonGetField
+	bl GetMonData
 	mov r0, sp
 	ldr r1, _08049074
 	bl StringCompareWithoutExtCtrlCodes
@@ -16432,7 +16432,7 @@ _0804901E:
 	adds r0, r4, 0
 	movs r1, 0x2
 	ldr r2, _08049078
-	bl pokemon_setattr
+	bl SetMonData
 _0804905E:
 	adds r4, 0x64
 	subs r5, 0x1
@@ -17069,7 +17069,7 @@ _0804953A:
 	b _08049558
 	.align 2, 0
 _08049548: .4byte 0x03004824
-_0804954C: .4byte gUnknown_0820C164
+_0804954C: .4byte gTradeNextSelectedMonTable
 _08049550:
 	adds r2, 0x1
 	adds r5, 0x1
@@ -17175,7 +17175,7 @@ _0804960C:
 	.align 2, 0
 _08049614: .4byte 0x03004824
 _08049618: .4byte 0x02020004
-_0804961C: .4byte gUnknown_0820C29C
+_0804961C: .4byte gTradeMonSpriteCoords
 	thumb_func_end sub_8049560
 
 	thumb_func_start sub_8049620
@@ -17302,12 +17302,12 @@ _080496F4:
 	movs r1, 0x12
 	movs r2, 0xE
 	movs r3, 0x1C
-	bl AddTextPrinterParametrized
+	bl DrawTextWindow
 	ldr r3, _08049758
 	movs r0, 0x13
 	movs r1, 0xF
 	movs r2, 0x2
-	bl PrintStringArray
+	bl PrintMenuItems
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0x9
@@ -17350,11 +17350,11 @@ _0804977A:
 	movs r1, 0x18
 	movs r2, 0xE
 	movs r3, 0x1D
-	bl AddTextPrinterParametrized
+	bl DrawTextWindow
 	movs r0, 0x18
 	movs r1, 0xE
 	movs r2, 0x4
-	bl sub_807292C
+	bl InitYesNoMenu
 	ldr r0, [r4]
 	adds r0, 0x7B
 	movs r1, 0x4
@@ -18054,11 +18054,11 @@ DisplayMessageAndContinueTask: @ 8049CF0
 	movs r1, 0x18
 	movs r2, 0xE
 	movs r3, 0x1D
-	bl AddTextPrinterParametrized
+	bl DrawTextWindow
 	movs r0, 0x18
 	movs r1, 0xE
 	movs r2, 0x4
-	bl sub_807292C
+	bl InitYesNoMenu
 	ldr r0, [r4]
 	adds r0, 0xB4
 	movs r1, 0
@@ -18503,7 +18503,7 @@ _0804A08C:
 	b _0804A294
 	.align 2, 0
 _0804A094: .4byte 0x02020004
-_0804A098: .4byte gUnknown_0820C29C
+_0804A098: .4byte gTradeMonSpriteCoords
 _0804A09C: .4byte 0x03004824
 _0804A0A0: .4byte sub_809D62C
 _0804A0A4: .4byte gUnknown_0820C330
@@ -18697,7 +18697,7 @@ _0804A0E4:
 _0804A228: .4byte gTradeMovesBoxTilemap
 _0804A22C: .4byte 0x03004824
 _0804A230: .4byte 0x02020004
-_0804A234: .4byte gUnknown_0820C29C
+_0804A234: .4byte gTradeMonSpriteCoords
 _0804A238: .4byte gUnknown_0820C334
 _0804A23C: .4byte gUnknown_0820C334 + 0x1
 _0804A240: .4byte gUnknown_0842C7CA
@@ -18775,7 +18775,7 @@ sub_804A2B4: @ 804A2B4
 	adds r0, r4, 0
 	movs r1, 0x2
 	mov r2, sp
-	bl PokemonGetField
+	bl GetMonData
 	adds r0, r5, 0
 	mov r1, sp
 	bl StringCopy10
@@ -18783,7 +18783,7 @@ sub_804A2B4: @ 804A2B4
 	bl pokemon_get_gender
 	adds r0, r4, 0
 	movs r1, 0x38
-	bl PokemonGetField
+	bl GetMonData
 	b _0804A31E
 	.align 2, 0
 _0804A2F0: .4byte 0x03004360
@@ -18796,7 +18796,7 @@ _0804A2F4:
 	adds r0, r4, 0
 	movs r1, 0x2
 	mov r2, sp
-	bl PokemonGetField
+	bl GetMonData
 	adds r0, r5, 0
 	mov r1, sp
 	bl StringCopy10
@@ -18804,7 +18804,7 @@ _0804A2F4:
 	bl pokemon_get_gender
 	adds r0, r4, 0
 	movs r1, 0x38
-	bl PokemonGetField
+	bl GetMonData
 _0804A31E:
 	ldr r0, _0804A338
 	adds r1, r5, 0
@@ -18869,7 +18869,7 @@ _0804A390:
 _0804A396:
 	adds r0, r5, r2
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	lsls r1, r4, 1
 	add r1, sp
 	strh r0, [r1]
@@ -18977,7 +18977,7 @@ _0804A462:
 	b _0804A484
 	.align 2, 0
 _0804A470: .4byte 0x03004824
-_0804A474: .4byte gUnknown_0820C29C
+_0804A474: .4byte gTradeMonSpriteCoords
 _0804A478: .4byte 0x03004360
 _0804A47C:
 	movs r0, 0x64
@@ -18989,7 +18989,7 @@ _0804A484:
 	adds r0, r4, 0
 	movs r1, 0x2
 	add r2, sp, 0x4
-	bl PokemonGetField
+	bl GetMonData
 	mov r0, sp
 	adds r0, 0x22
 	add r1, sp, 0x4
@@ -19108,7 +19108,7 @@ sub_804A51C: @ 804A51C
 	adds r0, r4, 0
 	movs r1, 0x38
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 24
 	lsrs r6, r0, 24
 	adds r0, r4, 0
@@ -19118,11 +19118,11 @@ sub_804A51C: @ 804A51C
 	adds r0, r4, 0
 	movs r1, 0x2
 	add r2, sp, 0xC
-	bl PokemonGetField
+	bl GetMonData
 	b _0804A5D4
 	.align 2, 0
 _0804A59C: .4byte 0x03004824
-_0804A5A0: .4byte gUnknown_08EA1DC8
+_0804A5A0: .4byte gTradeMonBoxTilemap
 _0804A5A4: .4byte 0x03004360
 _0804A5A8:
 	movs r0, 0x64
@@ -19133,7 +19133,7 @@ _0804A5A8:
 	adds r0, r4, 0
 	movs r1, 0x38
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 24
 	lsrs r6, r0, 24
 	adds r0, r4, 0
@@ -19143,7 +19143,7 @@ _0804A5A8:
 	adds r0, r4, 0
 	movs r1, 0x2
 	add r2, sp, 0xC
-	bl PokemonGetField
+	bl GetMonData
 _0804A5D4:
 	ldr r1, _0804A660
 	ldr r5, [r1]
@@ -19326,8 +19326,8 @@ _0804A72C:
 	bx r0
 	.align 2, 0
 _0804A734: .4byte 0x03004824
-_0804A738: .4byte gUnknown_0820C2B6
-_0804A73C: .4byte gUnknown_0820C2CE
+_0804A738: .4byte gTradeLevelDisplayCoords
+_0804A73C: .4byte gTradeMonBoxCoords
 	thumb_func_end sub_804A6DC
 
 	thumb_func_start sub_804A740
@@ -19433,7 +19433,7 @@ _0804A7F2:
 	.align 2, 0
 _0804A800: .4byte 0x03004824
 _0804A804: .4byte 0x02020004
-_0804A808: .4byte gUnknown_0820C29C
+_0804A808: .4byte gTradeMonSpriteCoords
 	thumb_func_end sub_804A740
 
 	thumb_func_start sub_804A80C
@@ -19686,7 +19686,7 @@ _0804A9DE:
 	thumb_func_start sub_804A9F4
 sub_804A9F4: @ 804A9F4
 	push {lr}
-	bl sub_8071EF4
+	bl MenuZeroFillScreen
 	pop {r0}
 	bx r0
 	thumb_func_end sub_804A9F4
@@ -19694,7 +19694,7 @@ sub_804A9F4: @ 804A9F4
 	thumb_func_start sub_804AA00
 sub_804AA00: @ 804AA00
 	push {lr}
-	bl sub_8071EF4
+	bl MenuZeroFillScreen
 	pop {r0}
 	bx r0
 	thumb_func_end sub_804AA00
@@ -19727,7 +19727,7 @@ sub_804AA0C: @ 804AA0C
 	str r1, [sp]
 	adds r1, r6, 0
 	adds r2, r5, 0
-	bl AddTextPrinterParametrized
+	bl DrawTextWindow
 	mov r1, r8
 	ldr r3, [r1]
 	adds r0, r3, 0x4
@@ -19757,7 +19757,7 @@ sub_804AA0C: @ 804AA0C
 	bx r0
 	.align 2, 0
 _0804AA7C: .4byte 0x03004824
-_0804AA80: .4byte gUnknown_0820C308
+_0804AA80: .4byte gTradeMessageWindowRects
 _0804AA84: .4byte gUnknown_0820C2F0
 	thumb_func_end sub_804AA0C
 
@@ -20106,7 +20106,7 @@ _0804AD22:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl PokemonGetField
+	bl GetMonData
 	adds r1, r0, 0
 	cmp r1, 0x1
 	bne _0804AD54
@@ -20125,7 +20125,7 @@ _0804AD50: .4byte 0x03004360
 _0804AD54:
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	adds r1, r0, 0
 	cmp r1, 0
 	bne _0804AD72
@@ -20181,7 +20181,7 @@ _0804ADB6:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl PokemonGetField
+	bl GetMonData
 	adds r1, r0, 0
 	cmp r1, 0x1
 	bne _0804ADE8
@@ -20200,7 +20200,7 @@ _0804ADE4: .4byte 0x030045c0
 _0804ADE8:
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	adds r1, r0, 0
 	cmp r1, 0
 	bne _0804AE06
@@ -20271,12 +20271,12 @@ _0804AE5C:
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r5, r0, 16
 	adds r0, r4, 0
 	movs r1, 0x3A
-	bl PokemonGetField
+	bl GetMonData
 	adds r1, r0, 0
 	lsls r0, r5, 16
 	asrs r0, 16
@@ -20316,12 +20316,12 @@ _0804AEBC:
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r5, r0, 16
 	adds r0, r4, 0
 	movs r1, 0x3A
-	bl PokemonGetField
+	bl GetMonData
 	adds r1, r0, 0
 	lsls r0, r5, 16
 	asrs r0, 16
@@ -20575,7 +20575,7 @@ _0804B0B2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804B0B8: .4byte gUnknown_08215A98
+_0804B0B8: .4byte gTradeGlow2PaletteAnimTable
 	thumb_func_end sub_804B07C
 
 	thumb_func_start sub_804B0BC
@@ -20921,13 +20921,13 @@ _0804B32C: .4byte 0x030045c0
 _0804B330:
 	mov r0, r10
 	movs r1, 0x41
-	bl PokemonGetField
+	bl GetMonData
 	adds r5, r0, 0
 	lsls r5, 16
 	lsrs r5, 16
 	mov r0, r10
 	movs r1, 0
-	bl PokemonGetField
+	bl GetMonData
 	mov r9, r0
 	lsls r0, r5, 3
 	ldr r1, _0804B390
@@ -21085,14 +21085,14 @@ _0804B47C:
 	adds r1, r4, 0
 	bl InitWindowFromConfig
 	movs r0, 0x2
-	bl sub_8064EF4
+	bl SetTextWindowBaseTileNum
 	ldr r1, [r6]
 	adds r1, 0x34
 	strb r0, [r1]
 	ldr r0, [r6]
 	adds r0, 0x4
-	bl sub_8064F08
-	bl sub_8071EF4
+	bl LoadTextWindowGraphics
+	bl MenuZeroFillScreen
 	ldr r1, _0804B580
 	ldr r4, _0804B584
 	adds r0, r4, 0
@@ -21460,7 +21460,7 @@ _0804B7F4:
 	ldr r0, _0804B8F0
 	movs r1, 0x7
 	add r2, sp, 0x4
-	bl PokemonGetField
+	bl GetMonData
 	adds r4, 0x1C
 	adds r0, r4, 0
 	add r1, sp, 0x4
@@ -21487,14 +21487,14 @@ _0804B7F4:
 	adds r1, r4, 0
 	bl InitWindowFromConfig
 	movs r0, 0x2
-	bl sub_8064EF4
+	bl SetTextWindowBaseTileNum
 	ldr r1, [r5]
 	adds r1, 0x34
 	strb r0, [r1]
 	ldr r0, [r5]
 	adds r0, 0x4
-	bl sub_8064F08
-	bl sub_8071EF4
+	bl LoadTextWindowGraphics
+	bl MenuZeroFillScreen
 	ldr r1, _0804B904
 	ldr r2, _0804B908
 	adds r0, r2, 0
@@ -21690,13 +21690,13 @@ sub_804BA18: @ 804BA18
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	bne _0804BA5A
 	adds r0, r4, 0
 	movs r1, 0xB
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	bl SpeciesToNationalPokedexNum
@@ -21764,7 +21764,7 @@ sub_804BA94: @ 804BA94
 	adds r7, r1, r0
 	adds r0, r7, 0
 	movs r1, 0x40
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r6, r0, 16
 	adds r1, r4, 0
@@ -21773,7 +21773,7 @@ sub_804BA94: @ 804BA94
 	adds r5, r1, r0
 	adds r0, r5, 0
 	movs r1, 0x40
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	mov r8, r0
@@ -21806,13 +21806,13 @@ _0804BAE8:
 	strb r1, [r0]
 	adds r0, r7, 0
 	movs r1, 0x2D
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	bne _0804BB28
 	adds r0, r7, 0
 	movs r1, 0x20
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 _0804BB28:
 	mov r0, r8
 	cmp r0, 0xFF
@@ -22320,7 +22320,7 @@ _0804BF4C:
 	movs r1, 0xF
 	movs r2, 0x1B
 	movs r3, 0x12
-	bl Reset
+	bl MenuZeroFillWindowRect
 	b _0804C0CA
 	.align 2, 0
 _0804BF78: .4byte 0x03004828
@@ -22615,7 +22615,7 @@ sub_804C1A8: @ 804C1A8
 	adds r0, r1
 	movs r1, 0x2
 	mov r2, sp
-	bl PokemonGetField
+	bl GetMonData
 	ldr r0, _0804C230
 	mov r1, sp
 	bl StringCopy10
@@ -22625,7 +22625,7 @@ sub_804C1A8: @ 804C1A8
 	adds r0, r1
 	movs r1, 0x2
 	mov r2, sp
-	bl PokemonGetField
+	bl GetMonData
 	ldr r0, _0804C238
 	mov r1, sp
 	bl StringCopy10
@@ -22662,7 +22662,7 @@ _0804C23C:
 	adds r0, r1
 	movs r1, 0x2
 	mov r2, sp
-	bl PokemonGetField
+	bl GetMonData
 	ldr r0, _0804C298
 	mov r1, sp
 	bl StringCopy10
@@ -24555,7 +24555,7 @@ _0804D314:
 	str r2, [sp, 0xC]
 	movs r2, 0x78
 	movs r3, 0x54
-	bl AddTextPrinterForMessage
+	bl CreatePokeballSprite
 	ldr r0, [r6]
 	ldr r5, _0804D3C0
 	adds r0, r5
@@ -25071,7 +25071,7 @@ _0804D796:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804D7A0: .4byte gUnknown_08215BA0
+_0804D7A0: .4byte gTradeBallVerticalVelocityTable
 _0804D7A4: .4byte sub_804D7AC
 _0804D7A8: .4byte 0x0000ffff
 	thumb_func_end sub_804D738
@@ -25123,7 +25123,7 @@ _0804D7FE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804D804: .4byte gUnknown_08215BA0
+_0804D804: .4byte gTradeBallVerticalVelocityTable
 _0804D808: .4byte 0x03004828
 	thumb_func_end sub_804D7AC
 
@@ -25198,7 +25198,7 @@ _0804D88C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804D894: .4byte gUnknown_08215BA0
+_0804D894: .4byte gTradeBallVerticalVelocityTable
 _0804D898: .4byte SpriteCallbackDummy
 	thumb_func_end sub_804D80C
 
@@ -25255,7 +25255,7 @@ sub_804D8E4: @ 804D8E4
 	adds r0, r1
 	movs r1, 0x2
 	mov r2, sp
-	bl PokemonGetField
+	bl GetMonData
 	ldr r0, _0804D93C
 	mov r1, sp
 	bl StringCopy10
@@ -25298,7 +25298,7 @@ sub_804D948: @ 804D948
 	ldr r1, _0804DAA8
 	adds r0, r1
 	movs r1, 0x38
-	bl PokemonGetField
+	bl GetMonData
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -25321,85 +25321,85 @@ sub_804D948: @ 804D948
 	adds r2, 0xE
 	adds r0, r6, 0
 	movs r1, 0x27
-	bl pokemon_setattr
+	bl SetMonData
 	adds r2, r5, 0
 	adds r2, 0xF
 	adds r0, r6, 0
 	movs r1, 0x28
-	bl pokemon_setattr
+	bl SetMonData
 	adds r2, r5, 0
 	adds r2, 0x10
 	adds r0, r6, 0
 	movs r1, 0x29
-	bl pokemon_setattr
+	bl SetMonData
 	adds r2, r5, 0
 	adds r2, 0x11
 	adds r0, r6, 0
 	movs r1, 0x2A
-	bl pokemon_setattr
+	bl SetMonData
 	adds r2, r5, 0
 	adds r2, 0x12
 	adds r0, r6, 0
 	movs r1, 0x2B
-	bl pokemon_setattr
+	bl SetMonData
 	adds r2, r5, 0
 	adds r2, 0x13
 	adds r0, r6, 0
 	movs r1, 0x2C
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r6, 0
 	movs r1, 0x2
 	adds r2, r5, 0
-	bl pokemon_setattr
+	bl SetMonData
 	adds r2, r5, 0
 	adds r2, 0x2B
 	adds r0, r6, 0
 	movs r1, 0x7
-	bl pokemon_setattr
+	bl SetMonData
 	adds r2, r5, 0
 	adds r2, 0x36
 	adds r0, r6, 0
 	movs r1, 0x31
-	bl pokemon_setattr
+	bl SetMonData
 	adds r2, r5, 0
 	adds r2, 0x14
 	adds r0, r6, 0
 	movs r1, 0x2E
-	bl pokemon_setattr
+	bl SetMonData
 	adds r2, r5, 0
 	adds r2, 0x1D
 	adds r0, r6, 0
 	movs r1, 0x17
-	bl pokemon_setattr
+	bl SetMonData
 	adds r2, r5, 0
 	adds r2, 0x1E
 	adds r0, r6, 0
 	movs r1, 0x18
-	bl pokemon_setattr
+	bl SetMonData
 	adds r2, r5, 0
 	adds r2, 0x1C
 	adds r0, r6, 0
 	movs r1, 0x16
-	bl pokemon_setattr
+	bl SetMonData
 	adds r2, r5, 0
 	adds r2, 0x1F
 	adds r0, r6, 0
 	movs r1, 0x21
-	bl pokemon_setattr
+	bl SetMonData
 	adds r2, r5, 0
 	adds r2, 0x20
 	adds r0, r6, 0
 	movs r1, 0x2F
-	bl pokemon_setattr
+	bl SetMonData
 	adds r2, r5, 0
 	adds r2, 0x37
 	adds r0, r6, 0
 	movs r1, 0x30
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r6, 0
 	movs r1, 0x23
 	adds r2, r4, 0
-	bl pokemon_setattr
+	bl SetMonData
 	mov r4, sp
 	adds r4, 0x35
 	movs r0, 0
@@ -25425,12 +25425,12 @@ sub_804D948: @ 804D948
 	adds r0, r6, 0
 	movs r1, 0x40
 	adds r2, r4, 0
-	bl pokemon_setattr
+	bl SetMonData
 	adds r2, r5, 0
 	adds r2, 0x28
 	adds r0, r6, 0
 	movs r1, 0xC
-	bl pokemon_setattr
+	bl SetMonData
 	b _0804DAC0
 	.align 2, 0
 _0804DAA4: .4byte gIngameTrades
@@ -25442,7 +25442,7 @@ _0804DAB4:
 	adds r2, 0x28
 	adds r0, r6, 0
 	movs r1, 0xC
-	bl pokemon_setattr
+	bl SetMonData
 _0804DAC0:
 	ldr r0, _0804DAD0
 	bl pokemon_calc_effective_stats
@@ -25511,14 +25511,14 @@ sub_804DB2C: @ 804DB2C
 	ldr r4, _0804DB5C
 	adds r0, r4
 	movs r1, 0x2D
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	bne _0804DB60
 	ldrh r0, [r6]
 	muls r0, r5
 	adds r0, r4
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	b _0804DB62
@@ -26230,7 +26230,7 @@ _0804E1E2:
 	adds r0, r1
 	adds r1, r4, 0
 	adds r1, 0x43
-	bl PokemonGetField
+	bl GetMonData
 	adds r0, r5, r0
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -26668,7 +26668,7 @@ _0804E5AC:
 	adds r0, r4, 0
 	bl SetUpWindowConfig
 	adds r0, r4, 0
-	bl sub_8071C4C
+	bl InitMenuWindow
 	ldr r3, _0804E610
 	ldr r2, [r3]
 	ldrb r0, [r2]
@@ -26774,11 +26774,11 @@ _0804E6A8:
 	movs r1, 0xE
 	movs r2, 0x1D
 	movs r3, 0x13
-	bl DrawDefaultWindow
+	bl MenuDrawTextWindow
 	ldr r0, _0804E6CC
 	movs r1, 0x1
 	movs r2, 0xF
-	bl AddTextPrinterWithCallbackForMessage
+	bl MenuPrintMessage
 _0804E6BE:
 	ldr r0, _0804E6D0
 	ldr r1, [r0]
@@ -26790,7 +26790,7 @@ _0804E6BE:
 _0804E6CC: .4byte gUnknown_0842D307
 _0804E6D0: .4byte 0x03004854
 _0804E6D4:
-	bl sub_8072080
+	bl MenuUpdateWindowText
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804E71A
@@ -27327,7 +27327,7 @@ _0804EBBC:
 	adds r0, r4, 0
 	bl SetUpWindowConfig
 	adds r0, r4, 0
-	bl sub_8071C4C
+	bl InitMenuWindow
 	ldr r1, _0804EC68
 	ldr r2, _0804EC6C
 	adds r0, r2, 0
@@ -27482,11 +27482,11 @@ _0804ED14:
 	movs r1, 0xD
 	movs r2, 0x1D
 	movs r3, 0x13
-	bl DrawDefaultWindow
+	bl MenuDrawTextWindow
 	ldr r0, _0804ED40
 	movs r1, 0x1
 	movs r2, 0xE
-	bl Print
+	bl MenuPrint
 	ldr r2, _0804ED44
 	ldr r1, [r2]
 	movs r3, 0
@@ -27566,7 +27566,7 @@ _0804EDB8:
 	bgt _0804EDCE
 	b _0804F0CE
 _0804EDCE:
-	bl sub_8071EF4
+	bl MenuZeroFillScreen
 	bl GetBlockRecievedStatus
 	adds r4, r0, 0
 	bl sub_8008198
@@ -27911,16 +27911,16 @@ _0804F084:
 	movs r1, 0xD
 	movs r2, 0x1D
 	movs r3, 0x13
-	bl DrawDefaultWindow
+	bl MenuDrawTextWindow
 	ldr r0, _0804F09C
 	movs r1, 0x1
 	movs r2, 0xF
-	bl AddTextPrinterWithCallbackForMessage
+	bl MenuPrintMessage
 	b _0804F0AA
 	.align 2, 0
 _0804F09C: .4byte gUnknown_0842D2D9
 _0804F0A0:
-	bl sub_8072080
+	bl MenuUpdateWindowText
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804F0CE
@@ -27976,7 +27976,7 @@ sub_804F0F4: @ 804F0F4
 	adds r0, r4, 0
 	bl SetUpWindowConfig
 	adds r0, r4, 0
-	bl sub_8071C4C
+	bl InitMenuWindow
 	ldr r1, _0804F160
 	ldr r2, _0804F164
 	adds r0, r2, 0
@@ -31066,7 +31066,7 @@ sub_80508FC: @ 80508FC
 	movs r1, 0x8
 	movs r2, 0x1C
 	movs r3, 0xD
-	bl DrawDefaultWindow
+	bl MenuDrawTextWindow
 	ldr r1, _08050948
 	ldr r3, _0805094C
 	movs r0, 0x20
@@ -31077,7 +31077,7 @@ sub_80508FC: @ 80508FC
 	ldr r0, _08050950
 	movs r1, 0x18
 	movs r2, 0x9
-	bl Print
+	bl MenuPrint
 	ldr r0, [r4]
 	adds r0, 0xAA
 	ldrb r0, [r0]
@@ -31307,17 +31307,17 @@ _08050B08:
 	movs r1, 0xE
 	movs r2, 0x1D
 	movs r3, 0x13
-	bl DrawDefaultWindow
+	bl MenuDrawTextWindow
 	ldr r0, _08050B30
 	movs r1, 0x1
 	movs r2, 0xF
-	bl AddTextPrinterWithCallbackForMessage
+	bl MenuPrintMessage
 	b _08050CB6
 	.align 2, 0
 _08050B2C: .4byte 0x03004854
 _08050B30: .4byte gUnknown_0842D3B5
 _08050B34:
-	bl sub_8072080
+	bl MenuUpdateWindowText
 	lsls r0, 24
 	cmp r0, 0
 	bne _08050B40
@@ -31481,7 +31481,7 @@ _08050C78:
 	ldr r0, _08050C90
 	movs r1, 0x1
 	movs r2, 0xF
-	bl AddTextPrinterWithCallbackForMessage
+	bl MenuPrintMessage
 _08050C82:
 	ldr r0, _08050C94
 	ldr r1, [r0]
@@ -31496,7 +31496,7 @@ _08050C88:
 _08050C90: .4byte gUnknown_0842D3A5
 _08050C94: .4byte 0x03004854
 _08050C98:
-	bl sub_8072080
+	bl MenuUpdateWindowText
 	lsls r0, 24
 	cmp r0, 0
 	beq _08050CB6
@@ -31779,7 +31779,7 @@ _08050ED8:
 	movs r1, 0x8
 	movs r2, 0x1C
 	movs r3, 0xD
-	bl Reset
+	bl MenuZeroFillWindowRect
 	ldr r4, _08050F0C
 	ldr r0, [r5]
 	adds r0, 0x7A
@@ -31808,7 +31808,7 @@ _08050F18:
 	movs r1, 0x8
 	movs r2, 0x1C
 	movs r3, 0xD
-	bl Reset
+	bl MenuZeroFillWindowRect
 	ldr r4, _08050F60
 	ldr r0, [r5]
 	adds r0, 0x7A
@@ -31827,14 +31827,14 @@ _08050F4C:
 	adds r0, r4, 0
 	movs r1, 0x1
 	movs r2, 0xF
-	bl AddTextPrinterWithCallbackForMessage
+	bl MenuPrintMessage
 	b _080510C4
 	.align 2, 0
 _08050F60: .4byte 0x020234cc
 _08050F64: .4byte 0x03002978
 _08050F68: .4byte gUnknown_0842D434
 _08050F6C:
-	bl sub_8072080
+	bl MenuUpdateWindowText
 	lsls r0, 24
 	cmp r0, 0
 	bne _08050F78
@@ -31873,11 +31873,11 @@ _08050FAA:
 	movs r1, 0xE
 	movs r2, 0x1D
 	movs r3, 0x13
-	bl DrawDefaultWindow
+	bl MenuDrawTextWindow
 	ldr r0, _08050FCC
 	movs r1, 0x2
 	movs r2, 0xF
-	bl Print
+	bl MenuPrint
 	bl sub_80084A4
 	ldr r0, _08050FD0
 	ldr r1, [r0]
@@ -32089,7 +32089,7 @@ _0805116E:
 	movs r1, 0x8
 	movs r2, 0x1C
 	movs r3, 0xD
-	bl Reset
+	bl MenuZeroFillWindowRect
 	ldr r0, _0805118C
 	b _080511AC
 	.align 2, 0
@@ -32105,17 +32105,17 @@ _08051190:
 	movs r1, 0x8
 	movs r2, 0x1C
 	movs r3, 0xD
-	bl Reset
+	bl MenuZeroFillWindowRect
 	ldr r0, _080511B8
 _080511AC:
 	movs r1, 0x1
 	movs r2, 0xF
-	bl AddTextPrinterWithCallbackForMessage
+	bl MenuPrintMessage
 	b _0805121E
 	.align 2, 0
 _080511B8: .4byte gUnknown_0842D3DC
 _080511BC:
-	bl sub_8072080
+	bl MenuUpdateWindowText
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805121E
@@ -32845,7 +32845,7 @@ _08051730:
 	movs r1, 0x4
 	movs r2, 0xA
 	movs r3, 0xC
-	bl DrawDefaultWindow
+	bl MenuDrawTextWindow
 	movs r2, 0
 	ldr r6, _080517C4
 _0805175C:
@@ -32867,17 +32867,17 @@ _0805175C:
 	adds r2, r1
 	lsrs r2, 24
 	movs r1, 0x5
-	bl Print
+	bl MenuPrint
 _08051784:
 	movs r0, 0
 	movs r1, 0xD
 	movs r2, 0x1D
 	movs r3, 0x13
-	bl DrawDefaultWindow
+	bl MenuDrawTextWindow
 	ldr r0, _080517CC
 	movs r1, 0x1
 	movs r2, 0xF
-	bl Print
+	bl MenuPrint
 	adds r2, r4, 0
 	cmp r2, 0x2
 	ble _0805175C
@@ -32908,7 +32908,7 @@ _080517D4:
 	ldr r0, _08051814
 	movs r1, 0x3
 	movs r2, 0xA
-	bl Print
+	bl MenuPrint
 _080517E6:
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
@@ -33637,12 +33637,12 @@ _08051D20:
 	movs r1, 0x2
 	movs r2, 0x19
 	movs r3, 0x11
-	bl DrawDefaultWindow
+	bl MenuDrawTextWindow
 	ldr r0, _08051F14
 	movs r1, 0x5
 	movs r2, 0x3
 	movs r3, 0xA0
-	bl Free
+	bl sub_8072BD8
 	movs r6, 0
 	ldr r1, _08051F18
 	ldr r0, [r1]
@@ -33730,7 +33730,7 @@ _08051D56:
 	lsls r2, 24
 	lsrs r2, 24
 	movs r1, 0x5
-	bl Print
+	bl MenuPrint
 	lsls r5, 16
 	lsrs r6, r5, 16
 	mov r1, r8
@@ -33791,7 +33791,7 @@ _08051E04:
 	adds r0, 0xAB
 	movs r1, 0x5
 	movs r2, 0xD
-	bl Print
+	bl MenuPrint
 	ldr r0, [r6]
 	movs r2, 0x96
 	lsls r2, 1
@@ -33849,7 +33849,7 @@ _08051E04:
 	adds r0, 0xAB
 	movs r1, 0x5
 	movs r2, 0xF
-	bl Print
+	bl MenuPrint
 	ldr r1, [r6]
 	movs r0, 0x98
 	lsls r0, 1
@@ -33882,12 +33882,12 @@ _08051F44:
 	.align 2, 0
 _08051F54: .4byte 0x03001770
 _08051F58:
-	bl sub_8071EF4
+	bl MenuZeroFillScreen
 	movs r0, 0
 	movs r1, 0xE
 	movs r2, 0x1D
 	movs r3, 0x13
-	bl DrawDefaultWindow
+	bl MenuDrawTextWindow
 	movs r6, 0
 	add r5, sp, 0x28
 	ldr r0, _08051FEC
@@ -33936,7 +33936,7 @@ _08051F86:
 	adds r0, 0xAB
 	movs r1, 0x1
 	movs r2, 0xF
-	bl AddTextPrinterWithCallbackForMessage
+	bl MenuPrintMessage
 	ldr r0, _08051FF4
 	ldrh r0, [r0]
 	movs r1, 0x1
@@ -33954,7 +33954,7 @@ _08051FEC: .4byte 0x03004854
 _08051FF0: .4byte sub_8052BD0
 _08051FF4: .4byte 0x0203855e
 _08051FF8:
-	bl sub_8072080
+	bl MenuUpdateWindowText
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805200A
@@ -34315,12 +34315,12 @@ _080522B6:
 	movs r1, 0x2
 	movs r2, 0x19
 	movs r3, 0x11
-	bl DrawDefaultWindow
+	bl MenuDrawTextWindow
 	ldr r0, _0805236C
 	movs r1, 0x5
 	movs r2, 0x3
 	movs r3, 0xA0
-	bl Free
+	bl sub_8072BD8
 	ldr r6, _08052370
 	adds r0, r6, 0
 	movs r1, 0x8C
@@ -34485,7 +34485,7 @@ _08052380:
 	lsls r2, 24
 	lsrs r2, 24
 	movs r1, 0x5
-	bl Print
+	bl MenuPrint
 	lsls r6, 16
 	lsrs r6, 16
 	mov r8, r6
@@ -34568,7 +34568,7 @@ unref_sub_80524BC: @ 80524BC
 	adds r0, r4, 0
 	bl SetUpWindowConfig
 	adds r0, r4, 0
-	bl sub_8071C4C
+	bl InitMenuWindow
 	ldr r0, _08052524
 	ldrh r0, [r0, 0x20]
 	bl SeedRng
@@ -34616,7 +34616,7 @@ sub_8052530: @ 8052530
 	mov r0, sp
 	movs r1, 0x2
 	movs r2, 0
-	bl Print
+	bl MenuPrint
 	ldr r4, _080525CC
 	movs r1, 0x1A
 	ldrsh r0, [r4, r1]
@@ -34632,7 +34632,7 @@ sub_8052530: @ 8052530
 	mov r0, sp
 	movs r1, 0x6
 	movs r2, 0
-	bl Print
+	bl MenuPrint
 	movs r6, 0
 	mov r2, sp
 	adds r2, 0x3
@@ -34705,7 +34705,7 @@ _080525F8:
 	mov r0, sp
 	movs r1, 0x2
 	adds r2, r5, 0
-	bl Print
+	bl MenuPrint
 	mov r4, r8
 	adds r4, 0x1
 	adds r4, r6, r4
@@ -34799,7 +34799,7 @@ _080525F8:
 	mov r0, sp
 	movs r1, 0x7
 	adds r2, r5, 0
-	bl Print
+	bl MenuPrint
 	adds r0, r6, 0x1
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -34822,7 +34822,7 @@ _080526EC:
 	mov r0, sp
 	movs r1, 0x2
 	movs r2, 0xF
-	bl Print
+	bl MenuPrint
 	mov r3, r8
 	ldrb r1, [r3, 0x11]
 	mov r0, sp
@@ -34884,7 +34884,7 @@ _080526EC:
 	mov r0, sp
 	movs r1, 0x7
 	movs r2, 0x11
-	bl Print
+	bl MenuPrint
 _080527A4:
 	add sp, 0x98
 	pop {r3-r5}
@@ -35044,7 +35044,7 @@ _080528E8:
 	mov r0, sp
 	movs r1, 0x2
 	movs r2, 0xF
-	bl Print
+	bl MenuPrint
 	add sp, 0x58
 	pop {r3,r4}
 	mov r8, r3
@@ -35335,15 +35335,15 @@ ShowBerryBlenderRecordWindow: @ 8052B14
 	movs r1, 0x3
 	movs r2, 0x17
 	movs r3, 0x10
-	bl DrawDefaultWindow
+	bl MenuDrawTextWindow
 	ldr r0, _08052BBC
 	movs r1, 0x8
 	movs r2, 0x4
-	bl Print
+	bl MenuPrint
 	ldr r0, _08052BC0
 	movs r1, 0x8
 	movs r2, 0x9
-	bl Print
+	bl MenuPrint
 	movs r0, 0
 	mov r8, r0
 	ldr r0, _08052BC4
@@ -35384,7 +35384,7 @@ _08052B50:
 	lsrs r2, r7, 24
 	mov r0, sp
 	movs r1, 0xF
-	bl Print
+	bl MenuPrint
 	movs r0, 0x80
 	lsls r0, 18
 	adds r7, r0

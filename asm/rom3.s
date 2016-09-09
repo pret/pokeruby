@@ -6,4242 +6,6 @@
 
 	.text
 
-	thumb_func_start CB2_MainMenu
-CB2_MainMenu: @ 80096C4
-	push {lr}
-	bl RunTasks
-	bl AnimateSprites
-	bl BuildOamBuffer
-	bl UpdatePaletteFade
-	pop {r0}
-	bx r0
-	thumb_func_end CB2_MainMenu
-
-	thumb_func_start VBlankCB_MainMenu
-VBlankCB_MainMenu: @ 80096DC
-	push {lr}
-	bl LoadOam
-	bl ProcessSpriteCopyRequests
-	bl TransferPlttBuffer
-	pop {r0}
-	bx r0
-	thumb_func_end VBlankCB_MainMenu
-
-	thumb_func_start CB2_InitMainMenu
-CB2_InitMainMenu: @ 80096F0
-	push {lr}
-	movs r0, 0
-	bl InitMainMenu
-	pop {r0}
-	bx r0
-	thumb_func_end CB2_InitMainMenu
-
-	thumb_func_start sub_80096FC
-sub_80096FC: @ 80096FC
-	push {lr}
-	movs r0, 0x1
-	bl InitMainMenu
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80096FC
-
-	thumb_func_start InitMainMenu
-InitMainMenu: @ 8009708
-	push {r4,r5,lr}
-	sub sp, 0xC
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	movs r0, 0
-	bl SetVBlankCallback
-	movs r0, 0x80
-	lsls r0, 19
-	movs r1, 0
-	strh r1, [r0]
-	adds r0, 0xC
-	strh r1, [r0]
-	subs r0, 0x2
-	strh r1, [r0]
-	subs r0, 0x2
-	strh r1, [r0]
-	adds r0, 0x10
-	strh r1, [r0]
-	adds r0, 0x2
-	strh r1, [r0]
-	subs r0, 0x6
-	strh r1, [r0]
-	adds r0, 0x2
-	strh r1, [r0]
-	subs r0, 0x6
-	strh r1, [r0]
-	adds r0, 0x2
-	strh r1, [r0]
-	add r0, sp, 0x4
-	strh r1, [r0]
-	ldr r1, _080097BC
-	str r0, [r1]
-	movs r0, 0xC0
-	lsls r0, 19
-	str r0, [r1, 0x4]
-	ldr r0, _080097C0
-	str r0, [r1, 0x8]
-	ldr r0, [r1, 0x8]
-	movs r5, 0
-	str r5, [sp, 0x8]
-	add r0, sp, 0x8
-	str r0, [r1]
-	movs r0, 0xE0
-	lsls r0, 19
-	str r0, [r1, 0x4]
-	ldr r0, _080097C4
-	str r0, [r1, 0x8]
-	ldr r0, [r1, 0x8]
-	add r0, sp, 0x4
-	strh r5, [r0]
-	str r0, [r1]
-	ldr r0, _080097C8
-	str r0, [r1, 0x4]
-	ldr r0, _080097CC
-	str r0, [r1, 0x8]
-	ldr r0, [r1, 0x8]
-	bl ResetPaletteFade
-	ldr r0, _080097D0
-	movs r1, 0
-	movs r2, 0x20
-	bl LoadPalette
-	bl remove_some_task
-	bl ResetTasks
-	bl ResetSpriteData
-	bl FreeAllSpritePalettes
-	ldr r0, _080097D4
-	bl SetUpWindowConfig
-	ldr r0, _080097D8
-	bl sub_8071C4C
-	cmp r4, 0
-	beq _080097DC
-	movs r0, 0x1
-	negs r0, r0
-	str r5, [sp]
-	movs r1, 0
-	movs r2, 0x10
-	movs r3, 0
-	bl BeginNormalPaletteFade
-	b _080097EE
-	.align 2, 0
-_080097BC: .4byte 0x040000d4
-_080097C0: .4byte 0x8100c000
-_080097C4: .4byte 0x85000100
-_080097C8: .4byte 0x05000002
-_080097CC: .4byte 0x810001ff
-_080097D0: .4byte gUnknown_081E797C
-_080097D4: .4byte gWindowConfig_81E6C3C
-_080097D8: .4byte gWindowConfig_81E6CE4
-_080097DC:
-	movs r0, 0x1
-	negs r0, r0
-	ldr r1, _08009858
-	str r1, [sp]
-	movs r1, 0
-	movs r2, 0x10
-	movs r3, 0
-	bl BeginNormalPaletteFade
-_080097EE:
-	ldr r0, _0800985C
-	movs r1, 0
-	strh r1, [r0]
-	adds r0, 0x4
-	strh r1, [r0]
-	adds r0, 0x4
-	strh r1, [r0]
-	adds r0, 0x2
-	strh r1, [r0]
-	adds r0, 0x6
-	strh r1, [r0]
-	adds r0, 0x2
-	strh r1, [r0]
-	adds r0, 0x2
-	strh r1, [r0]
-	ldr r3, _08009860
-	ldrh r2, [r3]
-	strh r1, [r3]
-	ldr r4, _08009864
-	ldrh r0, [r4]
-	movs r1, 0x1
-	orrs r0, r1
-	strh r0, [r4]
-	strh r2, [r3]
-	ldr r0, _08009868
-	bl SetVBlankCallback
-	ldr r0, _0800986C
-	bl SetMainCallback2
-	movs r1, 0x80
-	lsls r1, 19
-	movs r2, 0xC5
-	lsls r2, 6
-	adds r0, r2, 0
-	strh r0, [r1]
-	ldr r0, _08009870
-	movs r1, 0
-	bl CreateTask
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, _08009874
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	adds r1, r2
-	movs r0, 0
-	strh r0, [r1, 0xA]
-	add sp, 0xC
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08009858: .4byte 0x0000ffff
-_0800985C: .4byte REG_WIN0H
-_08009860: .4byte 0x04000208
-_08009864: .4byte 0x04000200
-_08009868: .4byte VBlankCB_MainMenu
-_0800986C: .4byte CB2_MainMenu
-_08009870: .4byte Task_CheckSave
-_08009874: .4byte 0x03004b20
-	thumb_func_end InitMainMenu
-
-	thumb_func_start Task_CheckSave
-Task_CheckSave: @ 8009878
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	lsls r0, 24
-	lsrs r5, r0, 24
-	ldr r0, _080098D4
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	lsls r0, 24
-	lsrs r6, r0, 24
-	cmp r6, 0
-	beq _08009894
-	b _080099FC
-_08009894:
-	ldr r7, _080098D8
-	strh r6, [r7]
-	ldr r0, _080098DC
-	mov r8, r0
-	strh r6, [r0]
-	ldr r1, _080098E0
-	ldr r2, _080098E4
-	adds r0, r2, 0
-	strh r0, [r1]
-	adds r1, 0x2
-	movs r0, 0x31
-	strh r0, [r1]
-	adds r1, 0x6
-	movs r0, 0xF1
-	strh r0, [r1]
-	ldr r0, _080098E8
-	strh r6, [r0]
-	adds r1, 0x4
-	movs r0, 0x7
-	strh r0, [r1]
-	ldr r0, _080098EC
-	ldrh r4, [r0]
-	cmp r4, 0x2
-	beq _0800993C
-	cmp r4, 0x2
-	bgt _080098F0
-	cmp r4, 0
-	beq _080099AC
-	cmp r4, 0x1
-	beq _080098FA
-	b _080099AC
-	.align 2, 0
-_080098D4: .4byte 0x0202f388
-_080098D8: .4byte REG_WIN0H
-_080098DC: .4byte REG_WIN0V
-_080098E0: .4byte REG_WININ
-_080098E4: .4byte 0x00001111
-_080098E8: .4byte REG_BLDALPHA
-_080098EC: .4byte 0x03005eb8
-_080098F0:
-	cmp r4, 0x4
-	beq _080099C8
-	cmp r4, 0xFF
-	beq _08009950
-	b _080099AC
-_080098FA:
-	bl sub_806918C
-	cmp r0, 0x1
-	bne _0800991C
-	ldr r2, _08009918
-	lsls r3, r5, 2
-	adds r0, r3, r5
-	lsls r0, 3
-	adds r0, r2
-	movs r1, 0x2
-	strh r1, [r0, 0x8]
-	adds r1, r2, 0
-	adds r2, r3, 0
-	b _0800992A
-	.align 2, 0
-_08009918: .4byte 0x03004b20
-_0800991C:
-	ldr r0, _08009934
-	lsls r2, r5, 2
-	adds r1, r2, r5
-	lsls r1, 3
-	adds r1, r0
-	strh r4, [r1, 0x8]
-	adds r1, r0, 0
-_0800992A:
-	adds r0, r2, r5
-	lsls r0, 3
-	adds r0, r1
-	ldr r1, _08009938
-	b _080099FA
-	.align 2, 0
-_08009934: .4byte 0x03004b20
-_08009938: .4byte Task_CheckRtc
-_0800993C:
-	movs r0, 0x2
-	movs r1, 0xE
-	movs r2, 0x1B
-	movs r3, 0x13
-	bl DrawDefaultWindow
-	ldr r0, _0800994C
-	b _080099D6
-	.align 2, 0
-_0800994C: .4byte gUnknown_0840DEC2
-_08009950:
-	movs r0, 0x2
-	movs r1, 0xE
-	movs r2, 0x1B
-	movs r3, 0x13
-	bl DrawDefaultWindow
-	ldr r0, _08009994
-	movs r1, 0x3
-	movs r2, 0xF
-	bl AddTextPrinterWithCallbackForMessage
-	ldr r2, _08009998
-	adds r0, r2, 0
-	strh r0, [r7]
-	ldr r1, _0800999C
-	adds r0, r1, 0
-	mov r2, r8
-	strh r0, [r2]
-	ldr r1, _080099A0
-	lsls r0, r5, 2
-	adds r0, r5
-	lsls r0, 3
-	adds r4, r0, r1
-	movs r5, 0x1
-	strh r5, [r4, 0x8]
-	ldr r0, _080099A4
-	str r0, [r4]
-	bl sub_806918C
-	cmp r0, 0x1
-	bne _080099A8
-	movs r0, 0x2
-	strh r0, [r4, 0x8]
-	b _080099FC
-	.align 2, 0
-_08009994: .4byte gUnknown_0840DE81
-_08009998: .4byte 0x000011df
-_0800999C: .4byte 0x0000719f
-_080099A0: .4byte 0x03004b20
-_080099A4: .4byte Task_WaitForSaveErrorAck
-_080099A8:
-	strh r5, [r4, 0x8]
-	b _080099FC
-_080099AC:
-	ldr r1, _080099C0
-	lsls r0, r5, 2
-	adds r0, r5
-	lsls r0, 3
-	adds r0, r1
-	movs r1, 0
-	strh r1, [r0, 0x8]
-	ldr r1, _080099C4
-	b _080099FA
-	.align 2, 0
-_080099C0: .4byte 0x03004b20
-_080099C4: .4byte Task_CheckRtc
-_080099C8:
-	movs r0, 0x2
-	movs r1, 0xE
-	movs r2, 0x1B
-	movs r3, 0x13
-	bl DrawDefaultWindow
-	ldr r0, _08009A08
-_080099D6:
-	movs r1, 0x3
-	movs r2, 0xF
-	bl AddTextPrinterWithCallbackForMessage
-	ldr r1, _08009A0C
-	adds r0, r1, 0
-	strh r0, [r7]
-	ldr r2, _08009A10
-	adds r0, r2, 0
-	mov r1, r8
-	strh r0, [r1]
-	ldr r1, _08009A14
-	lsls r0, r5, 2
-	adds r0, r5
-	lsls r0, 3
-	adds r0, r1
-	strh r6, [r0, 0x8]
-	ldr r1, _08009A18
-_080099FA:
-	str r1, [r0]
-_080099FC:
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08009A08: .4byte gUnknown_0840DEE5
-_08009A0C: .4byte 0x000011df
-_08009A10: .4byte 0x0000719f
-_08009A14: .4byte 0x03004b20
-_08009A18: .4byte Task_WaitForSaveErrorAck
-	thumb_func_end Task_CheckSave
-
-	thumb_func_start Task_WaitForSaveErrorAck
-Task_WaitForSaveErrorAck: @ 8009A1C
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	bl sub_8072080
-	lsls r0, 24
-	cmp r0, 0
-	beq _08009A52
-	ldr r0, _08009A58
-	ldrh r1, [r0, 0x2E]
-	movs r0, 0x1
-	ands r0, r1
-	cmp r0, 0
-	beq _08009A52
-	movs r0, 0x2
-	movs r1, 0xE
-	movs r2, 0x1B
-	movs r3, 0x13
-	bl Reset
-	ldr r0, _08009A5C
-	lsls r1, r4, 2
-	adds r1, r4
-	lsls r1, 3
-	adds r1, r0
-	ldr r0, _08009A60
-	str r0, [r1]
-_08009A52:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08009A58: .4byte 0x03001770
-_08009A5C: .4byte 0x03004b20
-_08009A60: .4byte Task_CheckRtc
-	thumb_func_end Task_WaitForSaveErrorAck
-
-	thumb_func_start Task_CheckRtc
-Task_CheckRtc: @ 8009A64
-	push {r4-r7,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	adds r5, r4, 0
-	ldr r0, _08009AC0
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	lsls r0, 24
-	lsrs r2, r0, 24
-	cmp r2, 0
-	bne _08009B10
-	ldr r6, _08009AC4
-	strh r2, [r6]
-	ldr r7, _08009AC8
-	strh r2, [r7]
-	ldr r1, _08009ACC
-	ldr r3, _08009AD0
-	adds r0, r3, 0
-	strh r0, [r1]
-	adds r1, 0x2
-	movs r0, 0x31
-	strh r0, [r1]
-	adds r1, 0x6
-	movs r0, 0xF1
-	strh r0, [r1]
-	ldr r0, _08009AD4
-	strh r2, [r0]
-	adds r1, 0x4
-	movs r0, 0x7
-	strh r0, [r1]
-	bl RtcGetErrorStatus
-	movs r1, 0xFF
-	lsls r1, 4
-	ands r1, r0
-	cmp r1, 0
-	bne _08009AE0
-	ldr r0, _08009AD8
-	lsls r1, r4, 2
-	adds r1, r4
-	lsls r1, 3
-	adds r1, r0
-	ldr r0, _08009ADC
-	str r0, [r1]
-	b _08009B10
-	.align 2, 0
-_08009AC0: .4byte 0x0202f388
-_08009AC4: .4byte REG_WIN0H
-_08009AC8: .4byte REG_WIN0V
-_08009ACC: .4byte REG_WININ
-_08009AD0: .4byte 0x00001111
-_08009AD4: .4byte REG_BLDALPHA
-_08009AD8: .4byte 0x03004b20
-_08009ADC: .4byte Task_DrawMainMenu
-_08009AE0:
-	movs r0, 0x2
-	movs r1, 0xE
-	movs r2, 0x1B
-	movs r3, 0x13
-	bl DrawDefaultWindow
-	ldr r0, _08009B18
-	movs r1, 0x3
-	movs r2, 0xF
-	bl AddTextPrinterWithCallbackForMessage
-	ldr r1, _08009B1C
-	adds r0, r1, 0
-	strh r0, [r6]
-	ldr r3, _08009B20
-	adds r0, r3, 0
-	strh r0, [r7]
-	ldr r1, _08009B24
-	lsls r0, r5, 2
-	adds r0, r5
-	lsls r0, 3
-	adds r0, r1
-	ldr r1, _08009B28
-	str r1, [r0]
-_08009B10:
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08009B18: .4byte gUnknown_0840DF10
-_08009B1C: .4byte 0x000011df
-_08009B20: .4byte 0x0000719f
-_08009B24: .4byte 0x03004b20
-_08009B28: .4byte Task_WaitForRtcErrorAck
-	thumb_func_end Task_CheckRtc
-
-	thumb_func_start Task_WaitForRtcErrorAck
-Task_WaitForRtcErrorAck: @ 8009B2C
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	bl sub_8072080
-	lsls r0, 24
-	cmp r0, 0
-	beq _08009B62
-	ldr r0, _08009B68
-	ldrh r1, [r0, 0x2E]
-	movs r0, 0x1
-	ands r0, r1
-	cmp r0, 0
-	beq _08009B62
-	movs r0, 0x2
-	movs r1, 0xE
-	movs r2, 0x1B
-	movs r3, 0x13
-	bl Reset
-	ldr r0, _08009B6C
-	lsls r1, r4, 2
-	adds r1, r4
-	lsls r1, 3
-	adds r1, r0
-	ldr r0, _08009B70
-	str r0, [r1]
-_08009B62:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08009B68: .4byte 0x03001770
-_08009B6C: .4byte 0x03004b20
-_08009B70: .4byte Task_DrawMainMenu
-	thumb_func_end Task_WaitForRtcErrorAck
-
-	thumb_func_start Task_DrawMainMenu
-Task_DrawMainMenu: @ 8009B74
-	push {r4,r5,lr}
-	sub sp, 0x4
-	lsls r0, 24
-	lsrs r4, r0, 24
-	ldr r0, _08009BDC
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	lsls r0, 24
-	lsrs r2, r0, 24
-	cmp r2, 0
-	beq _08009B8E
-	b _08009D20
-_08009B8E:
-	ldr r0, _08009BE0
-	strh r2, [r0]
-	adds r0, 0x4
-	strh r2, [r0]
-	ldr r1, _08009BE4
-	ldr r3, _08009BE8
-	adds r0, r3, 0
-	strh r0, [r1]
-	adds r1, 0x2
-	movs r0, 0x31
-	strh r0, [r1]
-	adds r1, 0x6
-	movs r0, 0xF1
-	strh r0, [r1]
-	ldr r0, _08009BEC
-	strh r2, [r0]
-	adds r1, 0x4
-	movs r0, 0x7
-	strh r0, [r1]
-	mov r0, sp
-	strh r2, [r0]
-	movs r1, 0xFE
-	movs r2, 0x2
-	bl LoadPalette
-	ldr r0, _08009BF0
-	ldrb r0, [r0, 0x8]
-	cmp r0, 0
-	bne _08009BF8
-	mov r1, sp
-	ldr r2, _08009BF4
-	adds r0, r2, 0
-	strh r0, [r1]
-	mov r0, sp
-	movs r1, 0xF1
-	movs r2, 0x2
-	bl LoadPalette
-	b _08009C0A
-	.align 2, 0
-_08009BDC: .4byte 0x0202f388
-_08009BE0: .4byte REG_WIN0H
-_08009BE4: .4byte REG_WININ
-_08009BE8: .4byte 0x00001111
-_08009BEC: .4byte REG_BLDALPHA
-_08009BF0: .4byte gSaveBlock2
-_08009BF4: .4byte 0x00007e04
-_08009BF8:
-	mov r1, sp
-	ldr r3, _08009C54
-	adds r0, r3, 0
-	strh r0, [r1]
-	mov r0, sp
-	movs r1, 0xF1
-	movs r2, 0x2
-	bl LoadPalette
-_08009C0A:
-	ldr r2, _08009C58
-	lsls r1, r4, 2
-	adds r0, r1, r4
-	lsls r0, 3
-	adds r0, r2
-	movs r2, 0x8
-	ldrsh r0, [r0, r2]
-	adds r5, r1, 0
-	cmp r0, 0x1
-	beq _08009C64
-	cmp r0, 0x1
-	ble _08009C26
-	cmp r0, 0x2
-	beq _08009CB8
-_08009C26:
-	movs r0, 0x1
-	movs r1, 0
-	movs r2, 0x1C
-	movs r3, 0x3
-	bl DrawDefaultWindow
-	ldr r0, _08009C5C
-	movs r1, 0x2
-	movs r2, 0x1
-	bl PrintMainMenuItem
-	movs r0, 0x1
-	movs r1, 0x4
-	movs r2, 0x1C
-	movs r3, 0x7
-	bl DrawDefaultWindow
-	ldr r0, _08009C60
-	movs r1, 0x2
-	movs r2, 0x5
-	bl PrintMainMenuItem
-	b _08009D14
-	.align 2, 0
-_08009C54: .4byte 0x0000547f
-_08009C58: .4byte 0x03004b20
-_08009C5C: .4byte gUnknown_0840DCD0
-_08009C60: .4byte gUnknown_0840DCE2
-_08009C64:
-	movs r0, 0x1
-	movs r1, 0
-	movs r2, 0x1C
-	movs r3, 0x7
-	bl DrawDefaultWindow
-	ldr r0, _08009CAC
-	movs r1, 0x2
-	movs r2, 0x1
-	bl PrintMainMenuItem
-	movs r0, 0x1
-	movs r1, 0x8
-	movs r2, 0x1C
-	movs r3, 0xB
-	bl DrawDefaultWindow
-	ldr r0, _08009CB0
-	movs r1, 0x2
-	movs r2, 0x9
-	bl PrintMainMenuItem
-	movs r0, 0x1
-	movs r1, 0xC
-	movs r2, 0x1C
-	movs r3, 0xF
-	bl DrawDefaultWindow
-	ldr r0, _08009CB4
-	movs r1, 0x2
-	movs r2, 0xD
-	bl PrintMainMenuItem
-	bl PrintSaveFileInfo
-	b _08009D14
-	.align 2, 0
-_08009CAC: .4byte gUnknown_0840DCD9
-_08009CB0: .4byte gUnknown_0840DCD0
-_08009CB4: .4byte gUnknown_0840DCE2
-_08009CB8:
-	movs r0, 0x1
-	movs r1, 0
-	movs r2, 0x1C
-	movs r3, 0x7
-	bl DrawDefaultWindow
-	ldr r0, _08009D28
-	movs r1, 0x2
-	movs r2, 0x1
-	bl PrintMainMenuItem
-	movs r0, 0x1
-	movs r1, 0x8
-	movs r2, 0x1C
-	movs r3, 0xB
-	bl DrawDefaultWindow
-	ldr r0, _08009D2C
-	movs r1, 0x2
-	movs r2, 0x9
-	bl PrintMainMenuItem
-	movs r0, 0x1
-	movs r1, 0xC
-	movs r2, 0x1C
-	movs r3, 0xF
-	bl DrawDefaultWindow
-	ldr r0, _08009D30
-	movs r1, 0x2
-	movs r2, 0xD
-	bl PrintMainMenuItem
-	movs r0, 0x1
-	movs r1, 0x10
-	movs r2, 0x1C
-	movs r3, 0x13
-	bl DrawDefaultWindow
-	ldr r0, _08009D34
-	movs r1, 0x2
-	movs r2, 0x11
-	bl PrintMainMenuItem
-	bl PrintSaveFileInfo
-_08009D14:
-	ldr r0, _08009D38
-	adds r1, r5, r4
-	lsls r1, 3
-	adds r1, r0
-	ldr r0, _08009D3C
-	str r0, [r1]
-_08009D20:
-	add sp, 0x4
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08009D28: .4byte gUnknown_0840DCD9
-_08009D2C: .4byte gUnknown_0840DCD0
-_08009D30: .4byte gUnknown_0840DCE9
-_08009D34: .4byte gUnknown_0840DCE2
-_08009D38: .4byte 0x03004b20
-_08009D3C: .4byte Task_HighlightCurrentMenuItem
-	thumb_func_end Task_DrawMainMenu
-
-	thumb_func_start Task_HighlightCurrentMenuItem
-Task_HighlightCurrentMenuItem: @ 8009D40
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r1, _08009D64
-	lsls r4, r0, 2
-	adds r4, r0
-	lsls r4, 3
-	adds r4, r1
-	ldrb r0, [r4, 0x8]
-	ldrb r1, [r4, 0xA]
-	bl HighlightCurrentMenuItem
-	ldr r0, _08009D68
-	str r0, [r4]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08009D64: .4byte 0x03004b20
-_08009D68: .4byte Task_MainMenuProcessKeyInput
-	thumb_func_end Task_HighlightCurrentMenuItem
-
-	thumb_func_start MainMenuProcessKeyInput
-MainMenuProcessKeyInput: @ 8009D6C
-	push {r4-r7,lr}
-	sub sp, 0x4
-	lsls r0, 24
-	lsrs r4, r0, 24
-	ldr r1, _08009DA8
-	ldrh r2, [r1, 0x2E]
-	movs r0, 0x1
-	ands r0, r2
-	mov r12, r1
-	cmp r0, 0
-	beq _08009DB4
-	movs r0, 0x5
-	bl audio_play
-	movs r0, 0x1
-	negs r0, r0
-	movs r1, 0
-	str r1, [sp]
-	movs r2, 0
-	movs r3, 0x10
-	bl BeginNormalPaletteFade
-	ldr r1, _08009DAC
-	lsls r0, r4, 2
-	adds r0, r4
-	lsls r0, 3
-	adds r0, r1
-	ldr r1, _08009DB0
-	str r1, [r0]
-	b _08009E74
-	.align 2, 0
-_08009DA8: .4byte 0x03001770
-_08009DAC: .4byte 0x03004b20
-_08009DB0: .4byte MainMenuPressedA
-_08009DB4:
-	movs r0, 0x2
-	ands r0, r2
-	cmp r0, 0
-	beq _08009E00
-	movs r0, 0x5
-	bl audio_play
-	movs r0, 0x1
-	negs r0, r0
-	ldr r1, _08009DF0
-	str r1, [sp]
-	movs r1, 0
-	movs r2, 0
-	movs r3, 0x10
-	bl BeginNormalPaletteFade
-	ldr r1, _08009DF4
-	movs r0, 0xF0
-	strh r0, [r1]
-	adds r1, 0x4
-	movs r0, 0xA0
-	strh r0, [r1]
-	ldr r1, _08009DF8
-	lsls r0, r4, 2
-	adds r0, r4
-	lsls r0, 3
-	adds r0, r1
-	ldr r1, _08009DFC
-	str r1, [r0]
-	b _08009E74
-	.align 2, 0
-_08009DF0: .4byte 0x0000ffff
-_08009DF4: .4byte REG_WIN0H
-_08009DF8: .4byte 0x03004b20
-_08009DFC: .4byte MainMenuPressedB
-_08009E00:
-	ldr r0, _08009E20
-	lsls r2, r4, 2
-	adds r1, r2, r4
-	lsls r1, 3
-	adds r1, r0
-	movs r3, 0x8
-	ldrsh r1, [r1, r3]
-	adds r6, r0, 0
-	cmp r1, 0x1
-	beq _08009E24
-	cmp r1, 0x1
-	ble _08009E1C
-	cmp r1, 0x2
-	beq _08009E28
-_08009E1C:
-	movs r5, 0x2
-	b _08009E2A
-	.align 2, 0
-_08009E20: .4byte 0x03004b20
-_08009E24:
-	movs r5, 0x3
-	b _08009E2A
-_08009E28:
-	movs r5, 0x4
-_08009E2A:
-	mov r7, r12
-	ldrh r1, [r7, 0x2E]
-	movs r0, 0x40
-	ands r0, r1
-	cmp r0, 0
-	beq _08009E4E
-	adds r0, r2, r4
-	lsls r0, 3
-	adds r1, r0, r6
-	ldrh r3, [r1, 0xA]
-	movs r7, 0xA
-	ldrsh r0, [r1, r7]
-	cmp r0, 0
-	ble _08009E4E
-	subs r0, r3, 0x1
-	strh r0, [r1, 0xA]
-	movs r0, 0x1
-	b _08009E76
-_08009E4E:
-	mov r0, r12
-	ldrh r1, [r0, 0x2E]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	beq _08009E74
-	adds r0, r2, r4
-	lsls r0, 3
-	adds r2, r0, r6
-	movs r3, 0xA
-	ldrsh r1, [r2, r3]
-	subs r0, r5, 0x1
-	cmp r1, r0
-	bge _08009E74
-	ldrh r0, [r2, 0xA]
-	adds r0, 0x1
-	strh r0, [r2, 0xA]
-	movs r0, 0x1
-	b _08009E76
-_08009E74:
-	movs r0, 0
-_08009E76:
-	add sp, 0x4
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end MainMenuProcessKeyInput
-
-	thumb_func_start Task_MainMenuProcessKeyInput
-Task_MainMenuProcessKeyInput: @ 8009E80
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	adds r0, r4, 0
-	bl MainMenuProcessKeyInput
-	lsls r0, 24
-	cmp r0, 0
-	beq _08009EA0
-	ldr r0, _08009EA8
-	lsls r1, r4, 2
-	adds r1, r4
-	lsls r1, 3
-	adds r1, r0
-	ldr r0, _08009EAC
-	str r0, [r1]
-_08009EA0:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08009EA8: .4byte 0x03004b20
-_08009EAC: .4byte Task_HighlightCurrentMenuItem
-	thumb_func_end Task_MainMenuProcessKeyInput
-
-	thumb_func_start MainMenuPressedA
-MainMenuPressedA: @ 8009EB0
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	ldr r0, _08009EEC
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _08009FA4
-	ldr r0, _08009EF0
-	lsls r2, r4, 2
-	adds r1, r2, r4
-	lsls r1, 3
-	adds r1, r0
-	movs r5, 0x8
-	ldrsh r3, [r1, r5]
-	adds r5, r0, 0
-	cmp r3, 0x1
-	beq _08009EF4
-	cmp r3, 0x1
-	ble _08009EDE
-	cmp r3, 0x2
-	beq _08009F06
-_08009EDE:
-	movs r0, 0xA
-	ldrsh r1, [r1, r0]
-	cmp r1, 0
-	beq _08009F1E
-	cmp r1, 0x1
-	bne _08009F1E
-	b _08009F26
-	.align 2, 0
-_08009EEC: .4byte 0x0202f388
-_08009EF0: .4byte 0x03004b20
-_08009EF4:
-	movs r0, 0xA
-	ldrsh r1, [r1, r0]
-	cmp r1, 0x1
-	beq _08009F1E
-	cmp r1, 0x1
-	ble _08009F1A
-	cmp r1, 0x2
-	bne _08009F1A
-	b _08009F26
-_08009F06:
-	movs r0, 0xA
-	ldrsh r1, [r1, r0]
-	cmp r1, 0x1
-	beq _08009F1E
-	cmp r1, 0x1
-	ble _08009F1A
-	cmp r1, 0x2
-	beq _08009F22
-	cmp r1, 0x3
-	beq _08009F26
-_08009F1A:
-	movs r0, 0x1
-	b _08009F28
-_08009F1E:
-	movs r0, 0
-	b _08009F28
-_08009F22:
-	movs r0, 0x3
-	b _08009F28
-_08009F26:
-	movs r0, 0x2
-_08009F28:
-	cmp r0, 0x1
-	beq _08009F5C
-	cmp r0, 0x1
-	ble _08009F38
-	cmp r0, 0x2
-	beq _08009F78
-	cmp r0, 0x3
-	beq _08009F98
-_08009F38:
-	ldr r0, _08009F50
-	movs r1, 0
-	strh r1, [r0]
-	ldr r0, _08009F54
-	strh r1, [r0]
-	adds r0, r2, r4
-	lsls r0, 3
-	adds r0, r5
-	ldr r1, _08009F58
-	str r1, [r0]
-	b _08009FA4
-	.align 2, 0
-_08009F50: .4byte 0x0202eac8
-_08009F54: .4byte 0x0202eec8
-_08009F58: .4byte Task_Birch1
-_08009F5C:
-	ldr r0, _08009F6C
-	movs r1, 0
-	strh r1, [r0]
-	ldr r0, _08009F70
-	strh r1, [r0]
-	ldr r0, _08009F74
-	b _08009F80
-	.align 2, 0
-_08009F6C: .4byte 0x0202eac8
-_08009F70: .4byte 0x0202eec8
-_08009F74: .4byte CB2_ContinueSavedGame
-_08009F78:
-	ldr r0, _08009F8C
-	ldr r1, _08009F90
-	str r1, [r0, 0x8]
-	ldr r0, _08009F94
-_08009F80:
-	bl SetMainCallback2
-	adds r0, r4, 0
-	bl DestroyTask
-	b _08009FA4
-	.align 2, 0
-_08009F8C: .4byte 0x03001770
-_08009F90: .4byte sub_80096FC
-_08009F94: .4byte CB2_InitOptionMenu
-_08009F98:
-	ldr r0, _08009FAC
-	bl SetMainCallback2
-	adds r0, r4, 0
-	bl DestroyTask
-_08009FA4:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08009FAC: .4byte CB2_InitMysteryEventMenu
-	thumb_func_end MainMenuPressedA
-
-	thumb_func_start MainMenuPressedB
-MainMenuPressedB: @ 8009FB0
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	ldr r0, _08009FD4
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _08009FCE
-	ldr r0, _08009FD8
-	bl SetMainCallback2
-	adds r0, r4, 0
-	bl DestroyTask
-_08009FCE:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08009FD4: .4byte 0x0202f388
-_08009FD8: .4byte CB2_InitTitleScreen
-	thumb_func_end MainMenuPressedB
-
-	thumb_func_start HighlightCurrentMenuItem
-HighlightCurrentMenuItem: @ 8009FDC
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r3, r0, 24
-	lsls r1, 24
-	lsrs r2, r1, 24
-	ldr r1, _0800A008
-	ldr r4, _0800A00C
-	adds r0, r4, 0
-	strh r0, [r1]
-	cmp r3, 0x1
-	beq _0800A028
-	cmp r3, 0x1
-	ble _08009FFA
-	cmp r3, 0x2
-	beq _0800A064
-_08009FFA:
-	cmp r2, 0
-	beq _0800A002
-	cmp r2, 0x1
-	beq _0800A018
-_0800A002:
-	ldr r1, _0800A010
-	ldr r2, _0800A014
-	b _0800A0A8
-	.align 2, 0
-_0800A008: .4byte REG_WIN0H
-_0800A00C: .4byte 0x000009e7
-_0800A010: .4byte REG_WIN0V
-_0800A014: .4byte 0x0000011f
-_0800A018:
-	ldr r1, _0800A020
-	ldr r4, _0800A024
-	adds r0, r4, 0
-	b _0800A0AA
-	.align 2, 0
-_0800A020: .4byte REG_WIN0V
-_0800A024: .4byte 0x0000213f
-_0800A028:
-	cmp r2, 0x1
-	beq _0800A044
-	cmp r2, 0x1
-	ble _0800A034
-	cmp r2, 0x2
-	beq _0800A054
-_0800A034:
-	ldr r1, _0800A03C
-	ldr r2, _0800A040
-	b _0800A0A8
-	.align 2, 0
-_0800A03C: .4byte REG_WIN0V
-_0800A040: .4byte 0x0000013f
-_0800A044:
-	ldr r1, _0800A04C
-	ldr r4, _0800A050
-	adds r0, r4, 0
-	b _0800A0AA
-	.align 2, 0
-_0800A04C: .4byte REG_WIN0V
-_0800A050: .4byte 0x0000415f
-_0800A054:
-	ldr r1, _0800A05C
-	ldr r2, _0800A060
-	b _0800A0A8
-	.align 2, 0
-_0800A05C: .4byte REG_WIN0V
-_0800A060: .4byte 0x0000617f
-_0800A064:
-	cmp r2, 0x1
-	beq _0800A084
-	cmp r2, 0x1
-	ble _0800A074
-	cmp r2, 0x2
-	beq _0800A094
-	cmp r2, 0x3
-	beq _0800A0A4
-_0800A074:
-	ldr r1, _0800A07C
-	ldr r4, _0800A080
-	adds r0, r4, 0
-	b _0800A0AA
-	.align 2, 0
-_0800A07C: .4byte REG_WIN0V
-_0800A080: .4byte 0x0000013f
-_0800A084:
-	ldr r1, _0800A08C
-	ldr r2, _0800A090
-	b _0800A0A8
-	.align 2, 0
-_0800A08C: .4byte REG_WIN0V
-_0800A090: .4byte 0x0000415f
-_0800A094:
-	ldr r1, _0800A09C
-	ldr r4, _0800A0A0
-	adds r0, r4, 0
-	b _0800A0AA
-	.align 2, 0
-_0800A09C: .4byte REG_WIN0V
-_0800A0A0: .4byte 0x0000617f
-_0800A0A4:
-	ldr r1, _0800A0B4
-	ldr r2, _0800A0B8
-_0800A0A8:
-	adds r0, r2, 0
-_0800A0AA:
-	strh r0, [r1]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800A0B4: .4byte REG_WIN0V
-_0800A0B8: .4byte 0x0000819f
-	thumb_func_end HighlightCurrentMenuItem
-
-	thumb_func_start PrintMainMenuItem
-PrintMainMenuItem: @ 800A0BC
-	push {r4-r6,lr}
-	sub sp, 0x20
-	adds r4, r0, 0
-	lsls r1, 24
-	lsrs r5, r1, 24
-	lsls r2, 24
-	lsrs r2, 24
-	mov r1, sp
-	movs r0, 0xFC
-	strb r0, [r1]
-	movs r0, 0x1
-	strb r0, [r1, 0x1]
-	movs r0, 0xE
-	strb r0, [r1, 0x2]
-	movs r3, 0
-_0800A0DA:
-	adds r0, r3, 0x3
-	mov r6, sp
-	adds r1, r6, r0
-	adds r0, r4, r3
-	ldrb r0, [r0]
-	strb r0, [r1]
-	adds r0, r3, 0x1
-	lsls r0, 24
-	lsrs r3, r0, 24
-	cmp r3, 0x19
-	bls _0800A0DA
-	mov r1, sp
-	movs r0, 0xFF
-	strb r0, [r1, 0x1D]
-	mov r0, sp
-	adds r1, r5, 0
-	bl Print
-	add sp, 0x20
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	thumb_func_end PrintMainMenuItem
-
-	thumb_func_start PrintSaveFileInfo
-PrintSaveFileInfo: @ 800A108
-	push {lr}
-	bl PrintPlayerName
-	bl PrintPokedexCount
-	bl PrintPlayTime
-	bl PrintBadgeCount
-	pop {r0}
-	bx r0
-	thumb_func_end PrintSaveFileInfo
-
-	thumb_func_start PrintPlayerName
-PrintPlayerName: @ 800A120
-	push {lr}
-	ldr r0, _0800A13C
-	movs r1, 0x2
-	movs r2, 0x3
-	bl Print
-	ldr r0, _0800A140
-	movs r1, 0x9
-	movs r2, 0x3
-	bl Print
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800A13C: .4byte gUnknown_0840DF7C
-_0800A140: .4byte gSaveBlock2
-	thumb_func_end PrintPlayerName
-
-	thumb_func_start PrintPlayTime
-PrintPlayTime: @ 800A144
-	push {r4,lr}
-	sub sp, 0x30
-	ldr r0, _0800A180
-	movs r1, 0x10
-	movs r2, 0x3
-	bl Print
-	ldr r0, _0800A184
-	ldrh r1, [r0, 0xE]
-	ldrb r2, [r0, 0x10]
-	mov r0, sp
-	movs r3, 0x1
-	bl FormatPlayTime
-	add r4, sp, 0x10
-	adds r0, r4, 0
-	mov r1, sp
-	movs r2, 0x30
-	movs r3, 0x1
-	bl sub_8072C74
-	adds r0, r4, 0
-	movs r1, 0x16
-	movs r2, 0x3
-	bl Print
-	add sp, 0x30
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800A180: .4byte gUnknown_0840DF8B
-_0800A184: .4byte gSaveBlock2
-	thumb_func_end PrintPlayTime
-
-	thumb_func_start PrintPokedexCount
-PrintPokedexCount: @ 800A188
-	push {lr}
-	sub sp, 0x10
-	ldr r0, _0800A1BC
-	movs r1, 0x2
-	movs r2, 0x5
-	bl Print
-	bl GetPokedexSeenCount
-	adds r1, r0, 0
-	lsls r1, 16
-	lsrs r1, 16
-	mov r0, sp
-	movs r2, 0x12
-	movs r3, 0
-	bl sub_8072C14
-	mov r0, sp
-	movs r1, 0x9
-	movs r2, 0x5
-	bl Print
-	add sp, 0x10
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800A1BC: .4byte gUnknown_0840DF83
-	thumb_func_end PrintPokedexCount
-
-	thumb_func_start PrintBadgeCount
-PrintBadgeCount: @ 800A1C0
-	push {lr}
-	sub sp, 0x10
-	ldr r0, _0800A1F0
-	movs r1, 0x10
-	movs r2, 0x5
-	bl Print
-	bl GetBadgeCount
-	adds r1, r0, 0
-	lsls r1, 24
-	lsrs r1, 24
-	mov r0, sp
-	bl ConvertIntToDecimalString
-	mov r0, sp
-	movs r1, 0xCD
-	movs r2, 0x28
-	movs r3, 0x1
-	bl sub_80729D8
-	add sp, 0x10
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800A1F0: .4byte gUnknown_0840DF90
-	thumb_func_end PrintBadgeCount
-
-	thumb_func_start Task_Birch1
-Task_Birch1: @ 800A1F4
-	push {r4,r5,lr}
-	sub sp, 0x4
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	ldr r0, _0800A2B0
-	bl SetUpWindowConfig
-	ldr r0, _0800A2B4
-	bl sub_8071C4C
-	ldr r0, _0800A2B8
-	movs r1, 0
-	strh r1, [r0]
-	adds r0, 0x4
-	strh r1, [r0]
-	adds r0, 0x4
-	strh r1, [r0]
-	adds r0, 0x2
-	strh r1, [r0]
-	adds r0, 0x6
-	strh r1, [r0]
-	adds r0, 0x2
-	strh r1, [r0]
-	adds r0, 0x2
-	strh r1, [r0]
-	ldr r0, _0800A2BC
-	movs r1, 0xC0
-	lsls r1, 19
-	bl LZ77UnCompVram
-	ldr r0, _0800A2C0
-	ldr r1, _0800A2C4
-	bl LZ77UnCompVram
-	ldr r0, _0800A2C8
-	movs r1, 0
-	movs r2, 0x40
-	bl LoadPalette
-	ldr r0, _0800A2CC
-	movs r1, 0x1
-	movs r2, 0x10
-	bl LoadPalette
-	bl remove_some_task
-	bl ResetSpriteData
-	bl FreeAllSpritePalettes
-	adds r0, r4, 0
-	bl AddBirchSpeechObjects
-	movs r0, 0x1
-	negs r0, r0
-	movs r5, 0
-	str r5, [sp]
-	movs r1, 0
-	movs r2, 0x10
-	movs r3, 0
-	bl BeginNormalPaletteFade
-	ldr r1, _0800A2D0
-	ldr r2, _0800A2D4
-	adds r0, r2, 0
-	strh r0, [r1]
-	subs r1, 0xA
-	movs r2, 0x9A
-	lsls r2, 5
-	adds r0, r2, 0
-	strh r0, [r1]
-	ldr r1, _0800A2D8
-	lsls r0, r4, 2
-	adds r0, r4
-	lsls r0, 3
-	adds r0, r1
-	strh r5, [r0, 0x10]
-	ldr r1, _0800A2DC
-	str r1, [r0]
-	movs r1, 0xFF
-	strh r1, [r0, 0xC]
-	strh r1, [r0, 0xE]
-	movs r1, 0xD8
-	strh r1, [r0, 0x16]
-	movs r0, 0xBB
-	lsls r0, 1
-	bl sub_8075474
-	add sp, 0x4
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800A2B0: .4byte gWindowConfig_81E6C3C
-_0800A2B4: .4byte gWindowConfig_81E6CE4
-_0800A2B8: .4byte REG_WIN0H
-_0800A2BC: .4byte gUnknown_081E768C
-_0800A2C0: .4byte gUnknown_081E7834
-_0800A2C4: .4byte 0x06003800
-_0800A2C8: .4byte gUnknown_081E764C
-_0800A2CC: .4byte gUnknown_081E796C
-_0800A2D0: .4byte REG_BG1CNT
-_0800A2D4: .4byte 0x00000703
-_0800A2D8: .4byte 0x03004b20
-_0800A2DC: .4byte task_new_game_prof_birch_speech_2
-	thumb_func_end Task_Birch1
-
-	thumb_func_start task_new_game_prof_birch_speech_2
-task_new_game_prof_birch_speech_2: @ 800A2E0
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r5, r0, 24
-	ldr r1, _0800A300
-	lsls r0, r5, 2
-	adds r0, r5
-	lsls r0, 3
-	adds r4, r0, r1
-	ldrh r1, [r4, 0x16]
-	movs r2, 0x16
-	ldrsh r0, [r4, r2]
-	cmp r0, 0
-	beq _0800A304
-	subs r0, r1, 0x1
-	strh r0, [r4, 0x16]
-	b _0800A34A
-	.align 2, 0
-_0800A300: .4byte 0x03004b20
-_0800A304:
-	ldrb r0, [r4, 0x18]
-	ldr r2, _0800A350
-	lsls r1, r0, 4
-	adds r1, r0
-	lsls r1, 2
-	adds r1, r2
-	movs r0, 0x88
-	strh r0, [r1, 0x20]
-	movs r0, 0x3C
-	strh r0, [r1, 0x22]
-	adds r3, r1, 0
-	adds r3, 0x3E
-	ldrb r2, [r3]
-	subs r0, 0x41
-	ands r0, r2
-	strb r0, [r3]
-	ldrb r2, [r1, 0x1]
-	movs r0, 0xD
-	negs r0, r0
-	ands r0, r2
-	movs r2, 0x4
-	orrs r0, r2
-	strb r0, [r1, 0x1]
-	adds r0, r5, 0
-	movs r1, 0xA
-	bl sub_800B534
-	adds r0, r5, 0
-	movs r1, 0x14
-	bl sub_800B6C0
-	movs r0, 0x50
-	strh r0, [r4, 0x16]
-	ldr r0, _0800A354
-	str r0, [r4]
-_0800A34A:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800A350: .4byte 0x02020004
-_0800A354: .4byte task_new_game_prof_birch_speech_3
-	thumb_func_end task_new_game_prof_birch_speech_2
-
-	thumb_func_start task_new_game_prof_birch_speech_3
-task_new_game_prof_birch_speech_3: @ 800A358
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, _0800A398
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	adds r4, r1, r2
-	movs r1, 0x12
-	ldrsh r0, [r4, r1]
-	cmp r0, 0
-	beq _0800A3BA
-	ldr r2, _0800A39C
-	movs r1, 0x18
-	ldrsh r0, [r4, r1]
-	lsls r1, r0, 4
-	adds r1, r0
-	lsls r1, 2
-	adds r1, r2
-	ldrb r2, [r1, 0x1]
-	movs r0, 0xD
-	negs r0, r0
-	ands r0, r2
-	strb r0, [r1, 0x1]
-	ldrh r1, [r4, 0x16]
-	movs r2, 0x16
-	ldrsh r0, [r4, r2]
-	cmp r0, 0
-	beq _0800A3A0
-	subs r0, r1, 0x1
-	strh r0, [r4, 0x16]
-	b _0800A3BA
-	.align 2, 0
-_0800A398: .4byte 0x03004b20
-_0800A39C: .4byte 0x02020004
-_0800A3A0:
-	movs r0, 0x2
-	movs r1, 0xD
-	movs r2, 0x1B
-	movs r3, 0x12
-	bl DrawDefaultWindow
-	ldr r0, _0800A3C0
-	movs r1, 0x3
-	movs r2, 0xE
-	bl AddTextPrinterWithCallbackForMessage
-	ldr r0, _0800A3C4
-	str r0, [r4]
-_0800A3BA:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800A3C0: .4byte gUnknown_081C6D78
-_0800A3C4: .4byte task_new_game_prof_birch_speech_4
-	thumb_func_end task_new_game_prof_birch_speech_3
-
-	thumb_func_start task_new_game_prof_birch_speech_4
-task_new_game_prof_birch_speech_4: @ 800A3C8
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	ldr r0, _0800A404
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _0800A3FE
-	movs r0, 0x18
-	bl sub_8072CF4
-	lsls r0, 24
-	cmp r0, 0
-	beq _0800A3FE
-	ldr r1, _0800A408
-	lsls r0, r4, 2
-	adds r0, r4
-	lsls r0, 3
-	adds r0, r1
-	ldr r1, _0800A40C
-	str r1, [r0]
-	ldr r0, _0800A410
-	movs r1, 0x3
-	movs r2, 0xE
-	bl AddTextPrinterWithCallbackForMessage
-_0800A3FE:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800A404: .4byte 0x0202f388
-_0800A408: .4byte 0x03004b20
-_0800A40C: .4byte task_new_game_prof_birch_speech_5
-_0800A410: .4byte gUnknown_081C6DF8
-	thumb_func_end task_new_game_prof_birch_speech_4
-
-	thumb_func_start task_new_game_prof_birch_speech_5
-task_new_game_prof_birch_speech_5: @ 800A414
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	movs r0, 0x18
-	bl sub_8072CF4
-	lsls r0, 24
-	cmp r0, 0
-	beq _0800A434
-	ldr r0, _0800A43C
-	lsls r1, r4, 2
-	adds r1, r4
-	lsls r1, 3
-	adds r1, r0
-	ldr r0, _0800A440
-	str r0, [r1]
-_0800A434:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800A43C: .4byte 0x03004b20
-_0800A440: .4byte task_new_game_prof_birch_speech_6
-	thumb_func_end task_new_game_prof_birch_speech_5
-
-	thumb_func_start task_new_game_prof_birch_speech_6
-task_new_game_prof_birch_speech_6: @ 800A444
-	push {r4,r5,lr}
-	sub sp, 0x10
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r1, _0800A4A8
-	lsls r4, r0, 2
-	adds r4, r0
-	lsls r4, 3
-	adds r4, r1
-	ldrb r0, [r4, 0x1A]
-	ldr r1, _0800A4AC
-	lsls r2, r0, 4
-	adds r2, r0
-	lsls r2, 2
-	adds r2, r1
-	movs r5, 0
-	movs r1, 0x68
-	strh r1, [r2, 0x20]
-	movs r1, 0x48
-	strh r1, [r2, 0x22]
-	movs r1, 0x3E
-	adds r1, r2
-	mov r12, r1
-	ldrb r3, [r1]
-	movs r1, 0x5
-	negs r1, r1
-	ands r1, r3
-	mov r3, r12
-	strb r1, [r3]
-	strh r5, [r2, 0x2E]
-	ldrb r1, [r2, 0x5]
-	lsrs r1, 4
-	str r5, [sp]
-	str r5, [sp, 0x4]
-	movs r2, 0x20
-	str r2, [sp, 0x8]
-	ldr r2, _0800A4B0
-	str r2, [sp, 0xC]
-	movs r2, 0x70
-	movs r3, 0x3A
-	bl AddTextPrinterForMessage
-	ldr r0, _0800A4B4
-	str r0, [r4]
-	strh r5, [r4, 0x16]
-	add sp, 0x10
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800A4A8: .4byte 0x03004b20
-_0800A4AC: .4byte 0x02020004
-_0800A4B0: .4byte 0x0000ffff
-_0800A4B4: .4byte task_new_game_prof_birch_speech_7
-	thumb_func_end task_new_game_prof_birch_speech_6
-
-	thumb_func_start task_new_game_prof_birch_speech_7
-task_new_game_prof_birch_speech_7: @ 800A4B8
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	bl sub_8075374
-	lsls r0, 24
-	cmp r0, 0
-	beq _0800A4E4
-	ldr r0, _0800A518
-	lsls r1, r4, 2
-	adds r1, r4
-	lsls r1, 3
-	adds r5, r1, r0
-	movs r1, 0x16
-	ldrsh r0, [r5, r1]
-	cmp r0, 0x5F
-	ble _0800A4E4
-	ldr r0, _0800A51C
-	bl sub_807206C
-	ldr r0, _0800A520
-	str r0, [r5]
-_0800A4E4:
-	ldr r1, _0800A518
-	lsls r0, r4, 2
-	adds r0, r4
-	lsls r0, 3
-	adds r2, r0, r1
-	ldrh r3, [r2, 0x16]
-	movs r0, 0x16
-	ldrsh r1, [r2, r0]
-	ldr r0, _0800A524
-	cmp r1, r0
-	bgt _0800A510
-	adds r0, r3, 0x1
-	strh r0, [r2, 0x16]
-	lsls r0, 16
-	asrs r0, 16
-	cmp r0, 0x20
-	bne _0800A510
-	movs r0, 0xAF
-	lsls r0, 1
-	movs r1, 0
-	bl cry_related
-_0800A510:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800A518: .4byte 0x03004b20
-_0800A51C: .4byte gUnknown_0840DFF7
-_0800A520: .4byte task_new_game_prof_birch_speech_8
-_0800A524: .4byte 0x00003fff
-	thumb_func_end task_new_game_prof_birch_speech_7
-
-	thumb_func_start task_new_game_prof_birch_speech_8
-task_new_game_prof_birch_speech_8: @ 800A528
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	movs r0, 0x18
-	bl sub_8072CF4
-	lsls r0, 24
-	cmp r0, 0
-	beq _0800A552
-	ldr r0, _0800A558
-	movs r1, 0x3
-	movs r2, 0xE
-	bl AddTextPrinterWithCallbackForMessage
-	ldr r1, _0800A55C
-	lsls r0, r4, 2
-	adds r0, r4
-	lsls r0, 3
-	adds r0, r1
-	ldr r1, _0800A560
-	str r1, [r0]
-_0800A552:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800A558: .4byte gUnknown_081C6E1A
-_0800A55C: .4byte 0x03004b20
-_0800A560: .4byte task_new_game_prof_birch_speech_9
-	thumb_func_end task_new_game_prof_birch_speech_8
-
-	thumb_func_start task_new_game_prof_birch_speech_9
-task_new_game_prof_birch_speech_9: @ 800A564
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	movs r0, 0x18
-	bl sub_8072CF4
-	lsls r0, 24
-	cmp r0, 0
-	beq _0800A59A
-	movs r0, 0x2
-	movs r1, 0xD
-	movs r2, 0x1B
-	movs r3, 0x12
-	bl DrawDefaultWindow
-	ldr r0, _0800A5A0
-	movs r1, 0x3
-	movs r2, 0xE
-	bl AddTextPrinterWithCallbackForMessage
-	ldr r1, _0800A5A4
-	lsls r0, r4, 2
-	adds r0, r4
-	lsls r0, 3
-	adds r0, r1
-	ldr r1, _0800A5A8
-	str r1, [r0]
-_0800A59A:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800A5A0: .4byte gUnknown_081C6FCB
-_0800A5A4: .4byte 0x03004b20
-_0800A5A8: .4byte task_new_game_prof_birch_speech_10
-	thumb_func_end task_new_game_prof_birch_speech_9
-
-	thumb_func_start task_new_game_prof_birch_speech_10
-task_new_game_prof_birch_speech_10: @ 800A5AC
-	push {r4-r6,lr}
-	lsls r0, 24
-	lsrs r6, r0, 24
-	movs r0, 0x18
-	bl sub_8072CF4
-	lsls r0, 24
-	cmp r0, 0
-	beq _0800A612
-	ldr r5, _0800A618
-	ldr r0, _0800A61C
-	lsls r4, r6, 2
-	adds r4, r6
-	lsls r4, 3
-	adds r4, r0
-	movs r1, 0x18
-	ldrsh r0, [r4, r1]
-	lsls r1, r0, 4
-	adds r1, r0
-	lsls r1, 2
-	adds r1, r5
-	ldrb r3, [r1, 0x1]
-	movs r2, 0xD
-	negs r2, r2
-	adds r0, r2, 0
-	ands r0, r3
-	movs r3, 0x4
-	orrs r0, r3
-	strb r0, [r1, 0x1]
-	movs r0, 0x1A
-	ldrsh r1, [r4, r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r5
-	ldrb r1, [r0, 0x1]
-	ands r2, r1
-	orrs r2, r3
-	strb r2, [r0, 0x1]
-	adds r0, r6, 0
-	movs r1, 0x2
-	bl sub_800B458
-	adds r0, r6, 0
-	movs r1, 0x1
-	bl sub_800B614
-	movs r0, 0x40
-	strh r0, [r4, 0x16]
-	ldr r0, _0800A620
-	str r0, [r4]
-_0800A612:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800A618: .4byte 0x02020004
-_0800A61C: .4byte 0x03004b20
-_0800A620: .4byte task_new_game_prof_birch_speech_11
-	thumb_func_end task_new_game_prof_birch_speech_10
-
-	thumb_func_start task_new_game_prof_birch_speech_11
-task_new_game_prof_birch_speech_11: @ 800A624
-	push {lr}
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, _0800A64C
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	adds r2, r1, r2
-	ldrh r3, [r2, 0x10]
-	movs r0, 0x10
-	ldrsh r1, [r2, r0]
-	movs r0, 0x3C
-	negs r0, r0
-	cmp r1, r0
-	beq _0800A654
-	subs r1, r3, 0x2
-	strh r1, [r2, 0x10]
-	ldr r0, _0800A650
-	strh r1, [r0]
-	b _0800A65C
-	.align 2, 0
-_0800A64C: .4byte 0x03004b20
-_0800A650: .4byte REG_BG1HOFS
-_0800A654:
-	ldr r0, _0800A660
-	strh r0, [r2, 0x10]
-	ldr r0, _0800A664
-	str r0, [r2]
-_0800A65C:
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800A660: .4byte 0x0000ffc4
-_0800A664: .4byte task_new_game_prof_birch_speech_12
-	thumb_func_end task_new_game_prof_birch_speech_11
-
-	thumb_func_start task_new_game_prof_birch_speech_12
-task_new_game_prof_birch_speech_12: @ 800A668
-	push {r4-r7,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	adds r5, r0, 0
-	ldr r1, _0800A6C0
-	lsls r0, r5, 2
-	adds r0, r5
-	lsls r0, 3
-	adds r4, r0, r1
-	movs r1, 0x12
-	ldrsh r0, [r4, r1]
-	cmp r0, 0
-	beq _0800A70E
-	ldr r2, _0800A6C4
-	movs r0, 0x18
-	ldrsh r1, [r4, r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	adds r0, 0x3E
-	ldrb r1, [r0]
-	movs r7, 0x4
-	orrs r1, r7
-	strb r1, [r0]
-	movs r0, 0x1A
-	ldrsh r1, [r4, r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	adds r0, 0x3E
-	ldrb r1, [r0]
-	orrs r1, r7
-	strb r1, [r0]
-	ldrh r0, [r4, 0x16]
-	movs r1, 0x16
-	ldrsh r6, [r4, r1]
-	cmp r6, 0
-	beq _0800A6C8
-	subs r0, 0x1
-	strh r0, [r4, 0x16]
-	b _0800A70E
-	.align 2, 0
-_0800A6C0: .4byte 0x03004b20
-_0800A6C4: .4byte 0x02020004
-_0800A6C8:
-	ldrb r3, [r4, 0x1C]
-	lsls r1, r3, 4
-	adds r1, r3
-	lsls r1, 2
-	adds r1, r2
-	movs r0, 0xB4
-	strh r0, [r1, 0x20]
-	movs r0, 0x3C
-	strh r0, [r1, 0x22]
-	movs r2, 0x3E
-	adds r2, r1
-	mov r12, r2
-	ldrb r2, [r2]
-	subs r0, 0x41
-	ands r0, r2
-	mov r2, r12
-	strb r0, [r2]
-	ldrb r2, [r1, 0x1]
-	movs r0, 0xD
-	negs r0, r0
-	ands r0, r2
-	orrs r0, r7
-	strb r0, [r1, 0x1]
-	strh r3, [r4, 0xC]
-	strh r6, [r4, 0x14]
-	adds r0, r5, 0
-	movs r1, 0x2
-	bl sub_800B534
-	adds r0, r5, 0
-	movs r1, 0x1
-	bl sub_800B6C0
-	ldr r0, _0800A714
-	str r0, [r4]
-_0800A70E:
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800A714: .4byte task_new_game_prof_birch_speech_13
-	thumb_func_end task_new_game_prof_birch_speech_12
-
-	thumb_func_start task_new_game_prof_birch_speech_13
-task_new_game_prof_birch_speech_13: @ 800A718
-	push {lr}
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, _0800A750
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	adds r3, r1, r2
-	movs r1, 0x12
-	ldrsh r0, [r3, r1]
-	cmp r0, 0
-	beq _0800A74C
-	ldr r2, _0800A754
-	movs r1, 0xC
-	ldrsh r0, [r3, r1]
-	lsls r1, r0, 4
-	adds r1, r0
-	lsls r1, 2
-	adds r1, r2
-	ldrb r2, [r1, 0x1]
-	movs r0, 0xD
-	negs r0, r0
-	ands r0, r2
-	strb r0, [r1, 0x1]
-	ldr r0, _0800A758
-	str r0, [r3]
-_0800A74C:
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800A750: .4byte 0x03004b20
-_0800A754: .4byte 0x02020004
-_0800A758: .4byte task_new_game_prof_birch_speech_14
-	thumb_func_end task_new_game_prof_birch_speech_13
-
-	thumb_func_start task_new_game_prof_birch_speech_14
-task_new_game_prof_birch_speech_14: @ 800A75C
-	push {r4,lr}
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	movs r0, 0x2
-	movs r1, 0xD
-	movs r2, 0x1B
-	movs r3, 0x12
-	bl DrawDefaultWindow
-	ldr r0, _0800A790
-	movs r1, 0x3
-	movs r2, 0xE
-	bl AddTextPrinterWithCallbackForMessage
-	ldr r1, _0800A794
-	lsls r0, r4, 2
-	adds r0, r4
-	lsls r0, 3
-	adds r0, r1
-	ldr r1, _0800A798
-	str r1, [r0]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800A790: .4byte gUnknown_081C6FD8
-_0800A794: .4byte 0x03004b20
-_0800A798: .4byte task_new_game_prof_birch_speech_15
-	thumb_func_end task_new_game_prof_birch_speech_14
-
-	thumb_func_start task_new_game_prof_birch_speech_15
-task_new_game_prof_birch_speech_15: @ 800A79C
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	movs r0, 0x18
-	bl sub_8072CF4
-	lsls r0, 24
-	cmp r0, 0
-	beq _0800A7C4
-	movs r0, 0x2
-	movs r1, 0x4
-	bl CreateGenderMenu
-	ldr r0, _0800A7CC
-	lsls r1, r4, 2
-	adds r1, r4
-	lsls r1, 3
-	adds r1, r0
-	ldr r0, _0800A7D0
-	str r0, [r1]
-_0800A7C4:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800A7CC: .4byte 0x03004b20
-_0800A7D0: .4byte task_new_game_prof_birch_speech_16
-	thumb_func_end task_new_game_prof_birch_speech_15
-
-	thumb_func_start task_new_game_prof_birch_speech_16
-task_new_game_prof_birch_speech_16: @ 800A7D4
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r5, r0, 24
-	bl GenderMenuProcessInput
-	lsls r0, 24
-	asrs r4, r0, 24
-	cmp r4, 0
-	beq _0800A7EE
-	cmp r4, 0x1
-	beq _0800A7EE
-	lsls r4, r5, 2
-	b _0800A818
-_0800A7EE:
-	bl sub_8072DEC
-	movs r0, 0x5
-	bl audio_play
-	ldr r0, _0800A860
-	strb r4, [r0, 0x8]
-	movs r0, 0x2
-	movs r1, 0x4
-	movs r2, 0x8
-	movs r3, 0x9
-	bl Reset
-	ldr r1, _0800A864
-	lsls r2, r5, 2
-	adds r0, r2, r5
-	lsls r0, 3
-	adds r0, r1
-	ldr r1, _0800A868
-	str r1, [r0]
-	adds r4, r2, 0
-_0800A818:
-	bl GetMenuCursorPos
-	lsls r0, 24
-	lsrs r3, r0, 24
-	ldr r1, _0800A864
-	adds r0, r4, r5
-	lsls r0, 3
-	adds r4, r0, r1
-	movs r1, 0x14
-	ldrsh r0, [r4, r1]
-	cmp r3, r0
-	beq _0800A85A
-	strh r3, [r4, 0x14]
-	ldr r2, _0800A86C
-	movs r0, 0xC
-	ldrsh r1, [r4, r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrb r2, [r0, 0x1]
-	movs r1, 0xD
-	negs r1, r1
-	ands r1, r2
-	movs r2, 0x4
-	orrs r1, r2
-	strb r1, [r0, 0x1]
-	adds r0, r5, 0
-	movs r1, 0
-	bl sub_800B458
-	ldr r0, _0800A870
-	str r0, [r4]
-_0800A85A:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800A860: .4byte gSaveBlock2
-_0800A864: .4byte 0x03004b20
-_0800A868: .4byte sub_800A974
-_0800A86C: .4byte 0x02020004
-_0800A870: .4byte task_new_game_prof_birch_speech_17
-	thumb_func_end task_new_game_prof_birch_speech_16
-
-	thumb_func_start task_new_game_prof_birch_speech_17
-task_new_game_prof_birch_speech_17: @ 800A874
-	push {r4-r7,lr}
-	lsls r0, 24
-	lsrs r6, r0, 24
-	ldr r1, _0800A8A4
-	lsls r0, r6, 2
-	adds r0, r6
-	lsls r0, 3
-	adds r4, r0, r1
-	ldrb r5, [r4, 0xC]
-	movs r2, 0x12
-	ldrsh r0, [r4, r2]
-	adds r7, r1, 0
-	cmp r0, 0
-	bne _0800A8AC
-	ldr r0, _0800A8A8
-	lsls r1, r5, 4
-	adds r1, r5
-	lsls r1, 2
-	adds r1, r0
-	ldrh r0, [r1, 0x20]
-	adds r0, 0x4
-	strh r0, [r1, 0x20]
-	b _0800A912
-	.align 2, 0
-_0800A8A4: .4byte 0x03004b20
-_0800A8A8: .4byte 0x02020004
-_0800A8AC:
-	ldr r3, _0800A8CC
-	lsls r0, r5, 4
-	adds r0, r5
-	lsls r0, 2
-	adds r0, r3
-	adds r0, 0x3E
-	ldrb r1, [r0]
-	movs r2, 0x4
-	orrs r1, r2
-	strb r1, [r0]
-	movs r1, 0x14
-	ldrsh r0, [r4, r1]
-	cmp r0, 0
-	beq _0800A8D0
-	ldrb r5, [r4, 0x1E]
-	b _0800A8D2
-	.align 2, 0
-_0800A8CC: .4byte 0x02020004
-_0800A8D0:
-	ldrb r5, [r4, 0x1C]
-_0800A8D2:
-	lsls r2, r5, 4
-	adds r2, r5
-	lsls r2, 2
-	adds r2, r3
-	movs r0, 0xF0
-	strh r0, [r2, 0x20]
-	movs r0, 0x3C
-	strh r0, [r2, 0x22]
-	adds r3, r2, 0
-	adds r3, 0x3E
-	ldrb r1, [r3]
-	subs r0, 0x41
-	ands r0, r1
-	strb r0, [r3]
-	lsls r4, r6, 2
-	adds r4, r6
-	lsls r4, 3
-	adds r4, r7
-	strh r5, [r4, 0xC]
-	ldrb r1, [r2, 0x1]
-	movs r0, 0xD
-	negs r0, r0
-	ands r0, r1
-	movs r1, 0x4
-	orrs r0, r1
-	strb r0, [r2, 0x1]
-	adds r0, r6, 0
-	movs r1, 0
-	bl sub_800B534
-	ldr r0, _0800A918
-	str r0, [r4]
-_0800A912:
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800A918: .4byte task_new_game_prof_birch_speech_18
-	thumb_func_end task_new_game_prof_birch_speech_17
-
-	thumb_func_start task_new_game_prof_birch_speech_18
-task_new_game_prof_birch_speech_18: @ 800A91C
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, _0800A948
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	adds r3, r1, r2
-	ldrb r1, [r3, 0xC]
-	ldr r2, _0800A94C
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r2, r0, r2
-	ldrh r1, [r2, 0x20]
-	movs r4, 0x20
-	ldrsh r0, [r2, r4]
-	cmp r0, 0xB4
-	ble _0800A950
-	subs r0, r1, 0x4
-	strh r0, [r2, 0x20]
-	b _0800A96A
-	.align 2, 0
-_0800A948: .4byte 0x03004b20
-_0800A94C: .4byte 0x02020004
-_0800A950:
-	movs r0, 0xB4
-	strh r0, [r2, 0x20]
-	movs r1, 0x12
-	ldrsh r0, [r3, r1]
-	cmp r0, 0
-	beq _0800A96A
-	ldrb r0, [r2, 0x1]
-	movs r1, 0xD
-	negs r1, r1
-	ands r1, r0
-	strb r1, [r2, 0x1]
-	ldr r0, _0800A970
-	str r0, [r3]
-_0800A96A:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800A970: .4byte task_new_game_prof_birch_speech_16
-	thumb_func_end task_new_game_prof_birch_speech_18
-
-	thumb_func_start sub_800A974
-sub_800A974: @ 800A974
-	push {r4,lr}
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	movs r0, 0x2
-	movs r1, 0xD
-	movs r2, 0x1B
-	movs r3, 0x12
-	bl DrawDefaultWindow
-	ldr r0, _0800A9A8
-	movs r1, 0x3
-	movs r2, 0xE
-	bl AddTextPrinterWithCallbackForMessage
-	ldr r1, _0800A9AC
-	lsls r0, r4, 2
-	adds r0, r4
-	lsls r0, 3
-	adds r0, r1
-	ldr r1, _0800A9B0
-	str r1, [r0]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800A9A8: .4byte gUnknown_081C6FFA
-_0800A9AC: .4byte 0x03004b20
-_0800A9B0: .4byte Task_800A9B4
-	thumb_func_end sub_800A974
-
-	thumb_func_start Task_800A9B4
-Task_800A9B4: @ 800A9B4
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	movs r0, 0x18
-	bl sub_8072CF4
-	lsls r0, 24
-	cmp r0, 0
-	beq _0800A9DC
-	movs r0, 0x2
-	movs r1, 0x1
-	bl CreateNameMenu
-	ldr r0, _0800A9E4
-	lsls r1, r4, 2
-	adds r1, r4
-	lsls r1, 3
-	adds r1, r0
-	ldr r0, _0800A9E8
-	str r0, [r1]
-_0800A9DC:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800A9E4: .4byte 0x03004b20
-_0800A9E8: .4byte sub_800A9EC
-	thumb_func_end Task_800A9B4
-
-	thumb_func_start sub_800A9EC
-sub_800A9EC: @ 800A9EC
-	push {r4-r6,lr}
-	sub sp, 0x4
-	lsls r0, 24
-	lsrs r5, r0, 24
-	bl NameMenuProcessInput
-	lsls r6, r0, 24
-	asrs r4, r6, 24
-	cmp r4, 0
-	beq _0800AA48
-	cmp r4, 0
-	bgt _0800AA0E
-	movs r0, 0x1
-	negs r0, r0
-	cmp r4, r0
-	beq _0800AA78
-	b _0800AA9C
-_0800AA0E:
-	cmp r4, 0x4
-	bgt _0800AA9C
-	bl sub_8072DEC
-	movs r0, 0x5
-	bl audio_play
-	movs r0, 0x2
-	movs r1, 0x1
-	movs r2, 0x16
-	movs r3, 0xC
-	bl Reset
-	lsrs r0, r6, 24
-	bl set_default_player_name
-	ldr r1, _0800AA40
-	lsls r0, r5, 2
-	adds r0, r5
-	lsls r0, 3
-	adds r0, r1
-	ldr r1, _0800AA44
-	str r1, [r0]
-	b _0800AA9C
-	.align 2, 0
-_0800AA40: .4byte 0x03004b20
-_0800AA44: .4byte task_new_game_prof_birch_speech_part2_1
-_0800AA48:
-	movs r0, 0x5
-	bl audio_play
-	movs r0, 0x1
-	negs r0, r0
-	str r4, [sp]
-	movs r1, 0
-	movs r2, 0
-	movs r3, 0x10
-	bl BeginNormalPaletteFade
-	ldr r1, _0800AA70
-	lsls r0, r5, 2
-	adds r0, r5
-	lsls r0, 3
-	adds r0, r1
-	ldr r1, _0800AA74
-	str r1, [r0]
-	b _0800AA9C
-	.align 2, 0
-_0800AA70: .4byte 0x03004b20
-_0800AA74: .4byte sub_800AAAC
-_0800AA78:
-	bl sub_8072DEC
-	movs r0, 0x5
-	bl audio_play
-	movs r0, 0x2
-	movs r1, 0x1
-	movs r2, 0x16
-	movs r3, 0xC
-	bl Reset
-	ldr r0, _0800AAA4
-	lsls r1, r5, 2
-	adds r1, r5
-	lsls r1, 3
-	adds r1, r0
-	ldr r0, _0800AAA8
-	str r0, [r1]
-_0800AA9C:
-	add sp, 0x4
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800AAA4: .4byte 0x03004b20
-_0800AAA8: .4byte task_new_game_prof_birch_speech_14
-	thumb_func_end sub_800A9EC
-
-	thumb_func_start sub_800AAAC
-sub_800AAAC: @ 800AAAC
-	push {r4,lr}
-	sub sp, 0x8
-	ldr r0, _0800AAE0
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	lsls r0, 24
-	lsrs r4, r0, 24
-	cmp r4, 0
-	bne _0800AAD8
-	movs r0, 0x1
-	bl set_default_player_name
-	ldr r1, _0800AAE4
-	ldrb r2, [r1, 0x8]
-	str r4, [sp]
-	ldr r0, _0800AAE8
-	str r0, [sp, 0x4]
-	movs r0, 0
-	movs r3, 0
-	bl DoNamingScreen
-_0800AAD8:
-	add sp, 0x8
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800AAE0: .4byte 0x0202f388
-_0800AAE4: .4byte gSaveBlock2
-_0800AAE8: .4byte new_game_prof_birch_speech_part2_start
-	thumb_func_end sub_800AAAC
-
-	thumb_func_start task_new_game_prof_birch_speech_part2_1
-task_new_game_prof_birch_speech_part2_1: @ 800AAEC
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	movs r0, 0x2
-	movs r1, 0xD
-	movs r2, 0x1B
-	movs r3, 0x12
-	bl DrawDefaultWindow
-	ldr r5, _0800AB28
-	ldr r1, _0800AB2C
-	adds r0, r5, 0
-	bl StringExpandPlaceholders
-	adds r0, r5, 0
-	movs r1, 0x3
-	movs r2, 0xE
-	bl AddTextPrinterWithCallbackForMessage
-	ldr r1, _0800AB30
-	lsls r0, r4, 2
-	adds r0, r4
-	lsls r0, 3
-	adds r0, r1
-	ldr r1, _0800AB34
-	str r1, [r0]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800AB28: .4byte 0x020234cc
-_0800AB2C: .4byte gUnknown_081C7017
-_0800AB30: .4byte 0x03004b20
-_0800AB34: .4byte sub_800AB38
-	thumb_func_end task_new_game_prof_birch_speech_part2_1
-
-	thumb_func_start sub_800AB38
-sub_800AB38: @ 800AB38
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	movs r0, 0x18
-	bl sub_8072CF4
-	lsls r0, 24
-	cmp r0, 0
-	beq _0800AB62
-	movs r0, 0x2
-	movs r1, 0x1
-	movs r2, 0x1
-	bl sub_8072974
-	ldr r0, _0800AB68
-	lsls r1, r4, 2
-	adds r1, r4
-	lsls r1, 3
-	adds r1, r0
-	ldr r0, _0800AB6C
-	str r0, [r1]
-_0800AB62:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800AB68: .4byte 0x03004b20
-_0800AB6C: .4byte task_new_game_prof_birch_speech_part2_4
-	thumb_func_end sub_800AB38
-
-	thumb_func_start task_new_game_prof_birch_speech_part2_4
-task_new_game_prof_birch_speech_part2_4: @ 800AB70
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r5, r0, 24
-	bl FillWindowPixelBuffer
-	lsls r0, 24
-	asrs r1, r0, 24
-	cmp r1, 0
-	beq _0800AB96
-	cmp r1, 0
-	bgt _0800AB90
-	movs r0, 0x1
-	negs r0, r0
-	cmp r1, r0
-	beq _0800ABF0
-	b _0800AC10
-_0800AB90:
-	cmp r1, 0x1
-	beq _0800ABF0
-	b _0800AC10
-_0800AB96:
-	movs r0, 0x5
-	bl audio_play
-	movs r0, 0x2
-	movs r1, 0x1
-	movs r2, 0x8
-	movs r3, 0x7
-	bl Reset
-	ldr r2, _0800ABE4
-	ldr r0, _0800ABE8
-	lsls r4, r5, 2
-	adds r4, r5
-	lsls r4, 3
-	adds r4, r0
-	movs r0, 0xC
-	ldrsh r1, [r4, r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrb r2, [r0, 0x1]
-	movs r1, 0xD
-	negs r1, r1
-	ands r1, r2
-	movs r2, 0x4
-	orrs r1, r2
-	strb r1, [r0, 0x1]
-	adds r0, r5, 0
-	movs r1, 0x2
-	bl sub_800B458
-	adds r0, r5, 0
-	movs r1, 0x1
-	bl sub_800B614
-	ldr r0, _0800ABEC
-	str r0, [r4]
-	b _0800AC10
-	.align 2, 0
-_0800ABE4: .4byte 0x02020004
-_0800ABE8: .4byte 0x03004b20
-_0800ABEC: .4byte sub_800AC20
-_0800ABF0:
-	movs r0, 0x5
-	bl audio_play
-	movs r0, 0x2
-	movs r1, 0x1
-	movs r2, 0x8
-	movs r3, 0x7
-	bl Reset
-	ldr r0, _0800AC18
-	lsls r1, r5, 2
-	adds r1, r5
-	lsls r1, 3
-	adds r1, r0
-	ldr r0, _0800AC1C
-	str r0, [r1]
-_0800AC10:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800AC18: .4byte 0x03004b20
-_0800AC1C: .4byte task_new_game_prof_birch_speech_14
-	thumb_func_end task_new_game_prof_birch_speech_part2_4
-
-	thumb_func_start sub_800AC20
-sub_800AC20: @ 800AC20
-	push {lr}
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, _0800AC44
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	adds r2, r1, r2
-	ldrh r1, [r2, 0x10]
-	movs r3, 0x10
-	ldrsh r0, [r2, r3]
-	cmp r0, 0
-	beq _0800AC4C
-	adds r1, 0x2
-	strh r1, [r2, 0x10]
-	ldr r0, _0800AC48
-	strh r1, [r0]
-	b _0800AC50
-	.align 2, 0
-_0800AC44: .4byte 0x03004b20
-_0800AC48: .4byte REG_BG1HOFS
-_0800AC4C:
-	ldr r0, _0800AC54
-	str r0, [r2]
-_0800AC50:
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800AC54: .4byte task_new_game_prof_birch_speech_part2_6
-	thumb_func_end sub_800AC20
-
-	thumb_func_start task_new_game_prof_birch_speech_part2_6
-task_new_game_prof_birch_speech_part2_6: @ 800AC58
-	push {r4-r7,lr}
-	lsls r0, 24
-	lsrs r6, r0, 24
-	ldr r1, _0800AD34
-	lsls r0, r6, 2
-	adds r0, r6
-	lsls r0, 3
-	adds r7, r0, r1
-	movs r1, 0x12
-	ldrsh r0, [r7, r1]
-	cmp r0, 0
-	beq _0800AD2C
-	ldr r5, _0800AD38
-	movs r2, 0x1C
-	ldrsh r1, [r7, r2]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r5
-	adds r0, 0x3E
-	ldrb r1, [r0]
-	movs r3, 0x4
-	mov r12, r3
-	mov r2, r12
-	orrs r1, r2
-	strb r1, [r0]
-	movs r3, 0x1E
-	ldrsh r1, [r7, r3]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r5
-	adds r0, 0x3E
-	ldrb r1, [r0]
-	orrs r1, r2
-	strb r1, [r0]
-	ldrb r0, [r7, 0x18]
-	lsls r1, r0, 4
-	adds r1, r0
-	lsls r1, 2
-	adds r1, r5
-	movs r0, 0x88
-	strh r0, [r1, 0x20]
-	movs r0, 0x40
-	strh r0, [r1, 0x22]
-	adds r3, r1, 0
-	adds r3, 0x3E
-	ldrb r2, [r3]
-	movs r4, 0x5
-	negs r4, r4
-	adds r0, r4, 0
-	ands r0, r2
-	strb r0, [r3]
-	ldrb r3, [r1, 0x1]
-	movs r2, 0xD
-	negs r2, r2
-	adds r0, r2, 0
-	ands r0, r3
-	mov r3, r12
-	orrs r0, r3
-	strb r0, [r1, 0x1]
-	ldrb r1, [r7, 0x1A]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r5
-	movs r1, 0x68
-	strh r1, [r0, 0x20]
-	movs r1, 0x48
-	strh r1, [r0, 0x22]
-	adds r3, r0, 0
-	adds r3, 0x3E
-	ldrb r1, [r3]
-	ands r4, r1
-	strb r4, [r3]
-	ldrb r1, [r0, 0x1]
-	ands r2, r1
-	mov r1, r12
-	orrs r2, r1
-	strb r2, [r0, 0x1]
-	adds r0, r6, 0
-	movs r1, 0x2
-	bl sub_800B534
-	adds r0, r6, 0
-	movs r1, 0x1
-	bl sub_800B6C0
-	movs r0, 0x2
-	movs r1, 0xD
-	movs r2, 0x1B
-	movs r3, 0x12
-	bl DrawDefaultWindow
-	ldr r4, _0800AD3C
-	ldr r1, _0800AD40
-	adds r0, r4, 0
-	bl StringExpandPlaceholders
-	adds r0, r4, 0
-	movs r1, 0x3
-	movs r2, 0xE
-	bl AddTextPrinterWithCallbackForMessage
-	ldr r0, _0800AD44
-	str r0, [r7]
-_0800AD2C:
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800AD34: .4byte 0x03004b20
-_0800AD38: .4byte 0x02020004
-_0800AD3C: .4byte 0x020234cc
-_0800AD40: .4byte gUnknown_081C7025
-_0800AD44: .4byte task_new_game_prof_birch_speech_part2_7
-	thumb_func_end task_new_game_prof_birch_speech_part2_6
-
-	thumb_func_start task_new_game_prof_birch_speech_part2_7
-task_new_game_prof_birch_speech_part2_7: @ 800AD48
-	push {r4-r7,lr}
-	lsls r0, 24
-	lsrs r5, r0, 24
-	ldr r1, _0800ADE8
-	lsls r0, r5, 2
-	adds r0, r5
-	lsls r0, 3
-	adds r4, r0, r1
-	movs r1, 0x12
-	ldrsh r0, [r4, r1]
-	cmp r0, 0
-	beq _0800ADE0
-	ldr r7, _0800ADEC
-	movs r1, 0x18
-	ldrsh r0, [r4, r1]
-	lsls r1, r0, 4
-	adds r1, r0
-	lsls r1, 2
-	adds r1, r7
-	ldrb r2, [r1, 0x1]
-	movs r6, 0xD
-	negs r6, r6
-	adds r0, r6, 0
-	ands r0, r2
-	strb r0, [r1, 0x1]
-	movs r1, 0x1A
-	ldrsh r0, [r4, r1]
-	lsls r1, r0, 4
-	adds r1, r0
-	lsls r1, 2
-	adds r1, r7
-	ldrb r2, [r1, 0x1]
-	adds r0, r6, 0
-	ands r0, r2
-	strb r0, [r1, 0x1]
-	movs r0, 0x18
-	bl sub_8072CF4
-	lsls r0, 24
-	cmp r0, 0
-	beq _0800ADE0
-	movs r0, 0x18
-	ldrsh r1, [r4, r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r7
-	ldrb r2, [r0, 0x1]
-	adds r1, r6, 0
-	ands r1, r2
-	movs r3, 0x4
-	orrs r1, r3
-	strb r1, [r0, 0x1]
-	movs r1, 0x1A
-	ldrsh r0, [r4, r1]
-	lsls r1, r0, 4
-	adds r1, r0
-	lsls r1, 2
-	adds r1, r7
-	ldrb r2, [r1, 0x1]
-	adds r0, r6, 0
-	ands r0, r2
-	orrs r0, r3
-	strb r0, [r1, 0x1]
-	adds r0, r5, 0
-	movs r1, 0x2
-	bl sub_800B458
-	adds r0, r5, 0
-	movs r1, 0x1
-	bl sub_800B614
-	movs r0, 0x40
-	strh r0, [r4, 0x16]
-	ldr r0, _0800ADF0
-	str r0, [r4]
-_0800ADE0:
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800ADE8: .4byte 0x03004b20
-_0800ADEC: .4byte 0x02020004
-_0800ADF0: .4byte task_new_game_prof_birch_speech_part2_8
-	thumb_func_end task_new_game_prof_birch_speech_part2_7
-
-	thumb_func_start task_new_game_prof_birch_speech_part2_8
-task_new_game_prof_birch_speech_part2_8: @ 800ADF4
-	push {r4-r7,lr}
-	lsls r0, 24
-	lsrs r6, r0, 24
-	ldr r1, _0800AE4C
-	lsls r0, r6, 2
-	adds r0, r6
-	lsls r0, 3
-	adds r4, r0, r1
-	movs r2, 0x12
-	ldrsh r0, [r4, r2]
-	adds r7, r1, 0
-	cmp r0, 0
-	beq _0800AEC4
-	ldr r2, _0800AE50
-	movs r3, 0x18
-	ldrsh r1, [r4, r3]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	adds r0, 0x3E
-	ldrb r1, [r0]
-	movs r3, 0x4
-	orrs r1, r3
-	strb r1, [r0]
-	movs r0, 0x1A
-	ldrsh r1, [r4, r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	adds r0, 0x3E
-	ldrb r1, [r0]
-	orrs r1, r3
-	strb r1, [r0]
-	ldrh r1, [r4, 0x16]
-	movs r3, 0x16
-	ldrsh r0, [r4, r3]
-	cmp r0, 0
-	beq _0800AE54
-	subs r0, r1, 0x1
-	strh r0, [r4, 0x16]
-	b _0800AEC4
-	.align 2, 0
-_0800AE4C: .4byte 0x03004b20
-_0800AE50: .4byte 0x02020004
-_0800AE54:
-	ldr r0, _0800AE60
-	ldrb r0, [r0, 0x8]
-	cmp r0, 0
-	beq _0800AE64
-	ldrb r5, [r4, 0x1E]
-	b _0800AE66
-	.align 2, 0
-_0800AE60: .4byte gSaveBlock2
-_0800AE64:
-	ldrb r5, [r4, 0x1C]
-_0800AE66:
-	lsls r1, r5, 4
-	adds r1, r5
-	lsls r1, 2
-	adds r1, r2
-	movs r0, 0x78
-	strh r0, [r1, 0x20]
-	movs r0, 0x3C
-	strh r0, [r1, 0x22]
-	adds r3, r1, 0
-	adds r3, 0x3E
-	ldrb r2, [r3]
-	subs r0, 0x41
-	ands r0, r2
-	strb r0, [r3]
-	ldrb r2, [r1, 0x1]
-	movs r0, 0xD
-	negs r0, r0
-	ands r0, r2
-	movs r2, 0x4
-	orrs r0, r2
-	strb r0, [r1, 0x1]
-	lsls r4, r6, 2
-	adds r4, r6
-	lsls r4, 3
-	adds r4, r7
-	strh r5, [r4, 0xC]
-	adds r0, r6, 0
-	movs r1, 0x2
-	bl sub_800B534
-	adds r0, r6, 0
-	movs r1, 0x1
-	bl sub_800B6C0
-	movs r0, 0x2
-	movs r1, 0xD
-	movs r2, 0x1B
-	movs r3, 0x12
-	bl DrawDefaultWindow
-	ldr r0, _0800AECC
-	movs r1, 0x3
-	movs r2, 0xE
-	bl AddTextPrinterWithCallbackForMessage
-	ldr r0, _0800AED0
-	str r0, [r4]
-_0800AEC4:
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800AECC: .4byte gUnknown_081C7074
-_0800AED0: .4byte task_new_game_prof_birch_speech_part2_9
-	thumb_func_end task_new_game_prof_birch_speech_part2_8
-
-	thumb_func_start task_new_game_prof_birch_speech_part2_9
-task_new_game_prof_birch_speech_part2_9: @ 800AED4
-	push {r4-r7,lr}
-	sub sp, 0x4
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, _0800AF6C
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	adds r6, r1, r2
-	movs r1, 0x12
-	ldrsh r0, [r6, r1]
-	cmp r0, 0
-	beq _0800AF64
-	ldr r7, _0800AF70
-	movs r1, 0xC
-	ldrsh r0, [r6, r1]
-	lsls r1, r0, 4
-	adds r1, r0
-	lsls r1, 2
-	adds r1, r7
-	ldrb r2, [r1, 0x1]
-	movs r0, 0xD
-	negs r0, r0
-	ands r0, r2
-	strb r0, [r1, 0x1]
-	movs r0, 0x18
-	bl sub_8072CF4
-	lsls r0, 24
-	cmp r0, 0
-	beq _0800AF64
-	ldrb r0, [r6, 0xC]
-	lsls r4, r0, 4
-	adds r4, r0
-	lsls r4, 2
-	adds r5, r4, r7
-	ldrb r1, [r5, 0x1]
-	movs r0, 0x4
-	negs r0, r0
-	ands r0, r1
-	movs r1, 0x1
-	orrs r0, r1
-	strb r0, [r5, 0x1]
-	adds r0, r7, 0
-	adds r0, 0x10
-	adds r0, r4, r0
-	ldr r1, _0800AF74
-	str r1, [r0]
-	adds r0, r5, 0
-	bl InitSpriteAffineAnim
-	adds r0, r5, 0
-	movs r1, 0
-	bl StartSpriteAffineAnim
-	adds r0, r7, 0
-	adds r0, 0x1C
-	adds r4, r0
-	ldr r0, _0800AF78
-	str r0, [r4]
-	ldr r0, _0800AF7C
-	movs r1, 0
-	str r1, [sp]
-	movs r2, 0
-	movs r3, 0x10
-	bl BeginNormalPaletteFade
-	movs r0, 0x4
-	bl play_sound_effect
-	ldr r0, _0800AF80
-	str r0, [r6]
-_0800AF64:
-	add sp, 0x4
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800AF6C: .4byte 0x03004b20
-_0800AF70: .4byte 0x02020004
-_0800AF74: .4byte gSpriteAffineAnimTable_81E79AC
-_0800AF78: .4byte sub_800B240
-_0800AF7C: .4byte 0x0000ffff
-_0800AF80: .4byte task_new_game_prof_birch_speech_part2_10
-	thumb_func_end task_new_game_prof_birch_speech_part2_9
-
-	thumb_func_start task_new_game_prof_birch_speech_part2_10
-task_new_game_prof_birch_speech_part2_10: @ 800AF84
-	push {lr}
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, _0800AFB4
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	adds r3, r1, r2
-	ldrb r1, [r3, 0xC]
-	ldr r2, _0800AFB8
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	adds r0, 0x3F
-	ldrb r0, [r0]
-	lsls r0, 26
-	cmp r0, 0
-	bge _0800AFAE
-	ldr r0, _0800AFBC
-	str r0, [r3]
-_0800AFAE:
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800AFB4: .4byte 0x03004b20
-_0800AFB8: .4byte 0x02020004
-_0800AFBC: .4byte sub_800AFC0
-	thumb_func_end task_new_game_prof_birch_speech_part2_10
-
-	thumb_func_start sub_800AFC0
-sub_800AFC0: @ 800AFC0
-	push {r4,lr}
-	sub sp, 0x4
-	lsls r0, 24
-	lsrs r2, r0, 24
-	ldr r0, _0800B018
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _0800B010
-	ldr r0, _0800B01C
-	lsls r4, r2, 2
-	adds r4, r2
-	lsls r4, 3
-	adds r4, r0
-	ldrb r2, [r4, 0xC]
-	ldr r1, _0800B020
-	lsls r0, r2, 4
-	adds r0, r2
-	lsls r0, 2
-	adds r1, 0x1C
-	adds r0, r1
-	ldr r1, _0800B024
-	str r1, [r0]
-	movs r1, 0x80
-	lsls r1, 19
-	movs r2, 0x82
-	lsls r2, 5
-	adds r0, r2, 0
-	strh r0, [r1]
-	ldr r0, _0800B028
-	ldr r1, _0800B02C
-	str r1, [sp]
-	movs r1, 0
-	movs r2, 0
-	movs r3, 0x10
-	bl BeginNormalPaletteFade
-	ldr r0, _0800B030
-	str r0, [r4]
-_0800B010:
-	add sp, 0x4
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800B018: .4byte 0x0202f388
-_0800B01C: .4byte 0x03004b20
-_0800B020: .4byte 0x02020004
-_0800B024: .4byte nullsub_34
-_0800B028: .4byte 0xffff0000
-_0800B02C: .4byte 0x0000ffff
-_0800B030: .4byte sub_800B034
-	thumb_func_end sub_800AFC0
-
-	thumb_func_start sub_800B034
-sub_800B034: @ 800B034
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	ldr r0, _0800B058
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _0800B052
-	ldr r0, _0800B05C
-	bl SetMainCallback2
-	adds r0, r4, 0
-	bl DestroyTask
-_0800B052:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800B058: .4byte 0x0202f388
-_0800B05C: .4byte c2_load_new_map_2
-	thumb_func_end sub_800B034
-
-	thumb_func_start new_game_prof_birch_speech_part2_start
-new_game_prof_birch_speech_part2_start: @ 800B060
-	push {r4,r5,lr}
-	sub sp, 0xC
-	movs r0, 0
-	bl SetVBlankCallback
-	movs r0, 0x80
-	lsls r0, 19
-	movs r4, 0
-	strh r4, [r0]
-	adds r0, 0xC
-	strh r4, [r0]
-	subs r0, 0x2
-	strh r4, [r0]
-	subs r0, 0x2
-	strh r4, [r0]
-	adds r0, 0x10
-	strh r4, [r0]
-	adds r0, 0x2
-	strh r4, [r0]
-	subs r0, 0x6
-	strh r4, [r0]
-	adds r0, 0x2
-	strh r4, [r0]
-	subs r0, 0x6
-	strh r4, [r0]
-	adds r0, 0x2
-	strh r4, [r0]
-	add r0, sp, 0x4
-	strh r4, [r0]
-	ldr r1, _0800B13C
-	str r0, [r1]
-	movs r4, 0xC0
-	lsls r4, 19
-	str r4, [r1, 0x4]
-	ldr r0, _0800B140
-	str r0, [r1, 0x8]
-	ldr r0, [r1, 0x8]
-	movs r2, 0
-	str r2, [sp, 0x8]
-	add r0, sp, 0x8
-	str r0, [r1]
-	movs r0, 0xE0
-	lsls r0, 19
-	str r0, [r1, 0x4]
-	ldr r0, _0800B144
-	str r0, [r1, 0x8]
-	ldr r0, [r1, 0x8]
-	add r0, sp, 0x4
-	strh r2, [r0]
-	str r0, [r1]
-	movs r0, 0xA0
-	lsls r0, 19
-	str r0, [r1, 0x4]
-	ldr r0, _0800B148
-	str r0, [r1, 0x8]
-	ldr r0, [r1, 0x8]
-	bl ResetPaletteFade
-	ldr r0, _0800B14C
-	adds r1, r4, 0
-	bl LZ77UnCompVram
-	ldr r0, _0800B150
-	ldr r1, _0800B154
-	bl LZ77UnCompVram
-	ldr r0, _0800B158
-	movs r1, 0
-	movs r2, 0x40
-	bl LoadPalette
-	bl ResetTasks
-	ldr r0, _0800B15C
-	movs r1, 0
-	bl CreateTask
-	lsls r0, 24
-	lsrs r5, r0, 24
-	ldr r1, _0800B160
-	lsls r0, r5, 2
-	adds r0, r5
-	lsls r0, 3
-	adds r4, r0, r1
-	ldr r0, _0800B164
-	strh r0, [r4, 0x10]
-	bl remove_some_task
-	bl ResetSpriteData
-	bl FreeAllSpritePalettes
-	adds r0, r5, 0
-	bl AddBirchSpeechObjects
-	ldr r0, _0800B168
-	bl SetUpWindowConfig
-	ldr r0, _0800B16C
-	bl sub_8071C4C
-	ldr r0, _0800B170
-	ldrb r0, [r0, 0x8]
-	cmp r0, 0
-	beq _0800B174
-	movs r0, 0x1
-	strh r0, [r4, 0x14]
-	ldrb r3, [r4, 0x1E]
-	b _0800B178
-	.align 2, 0
-_0800B13C: .4byte 0x040000d4
-_0800B140: .4byte 0x8100c000
-_0800B144: .4byte 0x85000100
-_0800B148: .4byte 0x81000200
-_0800B14C: .4byte gUnknown_081E768C
-_0800B150: .4byte gUnknown_081E7834
-_0800B154: .4byte 0x06003800
-_0800B158: .4byte gUnknown_081E764C
-_0800B15C: .4byte task_new_game_prof_birch_speech_part2_1
-_0800B160: .4byte 0x03004b20
-_0800B164: .4byte 0x0000ffc4
-_0800B168: .4byte gWindowConfig_81E6C3C
-_0800B16C: .4byte gWindowConfig_81E6CE4
-_0800B170: .4byte gSaveBlock2
-_0800B174:
-	strh r0, [r4, 0x14]
-	ldrb r3, [r4, 0x1C]
-_0800B178:
-	ldr r0, _0800B210
-	lsls r1, r3, 4
-	adds r1, r3
-	lsls r1, 2
-	adds r1, r0
-	movs r4, 0
-	movs r0, 0xB4
-	strh r0, [r1, 0x20]
-	movs r0, 0x3C
-	strh r0, [r1, 0x22]
-	adds r1, 0x3E
-	ldrb r2, [r1]
-	subs r0, 0x41
-	ands r0, r2
-	strb r0, [r1]
-	ldr r1, _0800B214
-	lsls r0, r5, 2
-	adds r0, r5
-	lsls r0, 3
-	adds r0, r1
-	strh r3, [r0, 0xC]
-	ldr r1, _0800B218
-	ldr r2, _0800B21C
-	adds r0, r2, 0
-	strh r0, [r1]
-	movs r0, 0x1
-	negs r0, r0
-	str r4, [sp]
-	movs r1, 0
-	movs r2, 0x10
-	movs r3, 0
-	bl BeginNormalPaletteFade
-	ldr r0, _0800B220
-	strh r4, [r0]
-	adds r0, 0x4
-	strh r4, [r0]
-	adds r0, 0x4
-	strh r4, [r0]
-	adds r0, 0x2
-	strh r4, [r0]
-	adds r0, 0x6
-	strh r4, [r0]
-	adds r0, 0x2
-	strh r4, [r0]
-	adds r0, 0x2
-	strh r4, [r0]
-	ldr r3, _0800B224
-	ldrh r2, [r3]
-	strh r4, [r3]
-	ldr r4, _0800B228
-	ldrh r0, [r4]
-	movs r1, 0x1
-	orrs r0, r1
-	strh r0, [r4]
-	strh r2, [r3]
-	ldr r0, _0800B22C
-	bl SetVBlankCallback
-	ldr r0, _0800B230
-	bl SetMainCallback2
-	ldr r1, _0800B234
-	ldr r2, _0800B238
-	adds r0, r2, 0
-	strh r0, [r1]
-	subs r1, 0xA
-	movs r2, 0x9A
-	lsls r2, 5
-	adds r0, r2, 0
-	strh r0, [r1]
-	add sp, 0xC
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800B210: .4byte 0x02020004
-_0800B214: .4byte 0x03004b20
-_0800B218: .4byte REG_BG1HOFS
-_0800B21C: .4byte 0x0000ffc4
-_0800B220: .4byte REG_WIN0H
-_0800B224: .4byte 0x04000208
-_0800B228: .4byte 0x04000200
-_0800B22C: .4byte VBlankCB_MainMenu
-_0800B230: .4byte CB2_MainMenu
-_0800B234: .4byte REG_BG1CNT
-_0800B238: .4byte 0x00000703
-	thumb_func_end new_game_prof_birch_speech_part2_start
-
-	thumb_func_start nullsub_34
-nullsub_34: @ 800B23C
-	bx lr
-	thumb_func_end nullsub_34
-
-	thumb_func_start sub_800B240
-sub_800B240: @ 800B240
-	movs r2, 0x22
-	ldrsh r1, [r0, r2]
-	lsls r1, 16
-	movs r3, 0x2E
-	ldrsh r2, [r0, r3]
-	adds r1, r2
-	movs r2, 0xC0
-	lsls r2, 8
-	adds r1, r2
-	lsrs r2, r1, 16
-	strh r2, [r0, 0x22]
-	strh r1, [r0, 0x2E]
-	bx lr
-	thumb_func_end sub_800B240
-
-	thumb_func_start sub_800B25C
-sub_800B25C: @ 800B25C
-	push {r4-r6,lr}
-	sub sp, 0x8
-	adds r5, r0, 0
-	adds r6, r1, 0
-	lsls r5, 24
-	lsrs r5, 24
-	lsls r6, 24
-	lsrs r6, 24
-	ldr r0, _0800B2B8
-	ldr r2, _0800B2BC
-	movs r3, 0xAF
-	lsls r3, 3
-	adds r1, r2, r3
-	ldrb r1, [r1]
-	adds r3, 0x1
-	adds r2, r3
-	ldrb r2, [r2]
-	ldr r4, _0800B2C0
-	ldr r3, [r4]
-	ldr r4, [r4, 0x4]
-	str r4, [sp]
-	movs r4, 0xAF
-	lsls r4, 1
-	str r4, [sp, 0x4]
-	bl DecompressPicFromTable_2
-	ldr r0, _0800B2C4
-	bl LoadCompressedObjectPalette
-	adds r0, r4, 0
-	movs r1, 0x1
-	bl gpu_pal_obj_decompress_and_apply
-	ldr r0, _0800B2C8
-	adds r1, r5, 0
-	adds r2, r6, 0
-	movs r3, 0
-	bl CreateSprite
-	lsls r0, 24
-	lsrs r0, 24
-	add sp, 0x8
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0800B2B8: .4byte gMonFrontPicTable + 0xAF0
-_0800B2BC: .4byte gMonFrontPicCoords
-_0800B2C0: .4byte gUnknown_081FAF4C
-_0800B2C4: .4byte gMonPaletteTable + 0xAF0
-_0800B2C8: .4byte 0x02024e8c
-	thumb_func_end sub_800B25C
-
-	thumb_func_start AddBirchSpeechObjects
-AddBirchSpeechObjects: @ 800B2CC
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x4
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	movs r0, 0x88
-	movs r1, 0x3C
-	movs r2, 0x1
-	bl AddNewGameBirchObject
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r1, _0800B3DC
-	mov r9, r1
-	lsls r2, r0, 4
-	adds r2, r0
-	lsls r2, 2
-	movs r3, 0x1C
-	add r3, r9
-	mov r8, r3
-	adds r1, r2, r3
-	ldr r7, _0800B3E0
-	str r7, [r1]
-	add r2, r9
-	ldrb r3, [r2, 0x5]
-	movs r6, 0xD
-	negs r6, r6
-	adds r1, r6, 0
-	ands r1, r3
-	strb r1, [r2, 0x5]
-	adds r2, 0x3E
-	ldrb r1, [r2]
-	movs r3, 0x4
-	mov r10, r3
-	mov r3, r10
-	orrs r1, r3
-	strb r1, [r2]
-	ldr r1, _0800B3E4
-	lsls r5, r4, 2
-	adds r5, r4
-	lsls r5, 3
-	adds r5, r1
-	strh r0, [r5, 0x18]
-	movs r0, 0x68
-	movs r1, 0x48
-	bl sub_800B25C
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r2, r0, 4
-	adds r2, r0
-	lsls r2, 2
-	mov r4, r8
-	adds r1, r2, r4
-	str r7, [r1]
-	add r2, r9
-	ldrb r3, [r2, 0x5]
-	adds r1, r6, 0
-	ands r1, r3
-	strb r1, [r2, 0x5]
-	adds r2, 0x3E
-	ldrb r1, [r2]
-	mov r3, r10
-	orrs r1, r3
-	strb r1, [r2]
-	strh r0, [r5, 0x1A]
-	ldr r4, _0800B3E8
-	str r4, [sp]
-	movs r0, 0
-	movs r1, 0x78
-	movs r2, 0x3C
-	movs r3, 0
-	bl sub_80859BC
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r2, r0, 4
-	adds r2, r0
-	lsls r2, 2
-	mov r3, r8
-	adds r1, r2, r3
-	str r7, [r1]
-	add r2, r9
-	adds r3, r2, 0
-	adds r3, 0x3E
-	ldrb r1, [r3]
-	mov r4, r10
-	orrs r1, r4
-	strb r1, [r3]
-	ldrb r3, [r2, 0x5]
-	adds r1, r6, 0
-	ands r1, r3
-	strb r1, [r2, 0x5]
-	strh r0, [r5, 0x1C]
-	ldr r0, _0800B3E8
-	movs r1, 0x80
-	lsls r1, 4
-	adds r4, r0, r1
-	str r4, [sp]
-	movs r0, 0x1
-	movs r1, 0x78
-	movs r2, 0x3C
-	movs r3, 0
-	bl sub_80859BC
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r2, r0, 4
-	adds r2, r0
-	lsls r2, 2
-	add r8, r2
-	mov r3, r8
-	str r7, [r3]
-	add r2, r9
-	adds r3, r2, 0
-	adds r3, 0x3E
-	ldrb r1, [r3]
-	mov r4, r10
-	orrs r1, r4
-	strb r1, [r3]
-	ldrb r1, [r2, 0x5]
-	ands r6, r1
-	strb r6, [r2, 0x5]
-	strh r0, [r5, 0x1E]
-	add sp, 0x4
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800B3DC: .4byte 0x02020004
-_0800B3E0: .4byte nullsub_34
-_0800B3E4: .4byte 0x03004b20
-_0800B3E8: .4byte 0x02000000
-	thumb_func_end AddBirchSpeechObjects
-
-	thumb_func_start sub_800B3EC
-sub_800B3EC: @ 800B3EC
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r2, r0, 24
-	ldr r4, _0800B420
-	lsls r0, r2, 2
-	adds r0, r2
-	lsls r0, 3
-	adds r3, r0, r4
-	ldrh r1, [r3, 0xA]
-	movs r5, 0xA
-	ldrsh r0, [r3, r5]
-	cmp r0, 0
-	bne _0800B424
-	movs r1, 0x8
-	ldrsh r0, [r3, r1]
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	adds r1, r4
-	movs r0, 0x1
-	strh r0, [r1, 0x12]
-	adds r0, r2, 0
-	bl DestroyTask
-	b _0800B44E
-	.align 2, 0
-_0800B420: .4byte 0x03004b20
-_0800B424:
-	ldrh r2, [r3, 0x10]
-	movs r4, 0x10
-	ldrsh r0, [r3, r4]
-	cmp r0, 0
-	beq _0800B434
-	subs r0, r2, 0x1
-	strh r0, [r3, 0x10]
-	b _0800B44E
-_0800B434:
-	ldrh r0, [r3, 0xE]
-	strh r0, [r3, 0x10]
-	subs r1, 0x1
-	strh r1, [r3, 0xA]
-	ldrh r0, [r3, 0xC]
-	adds r0, 0x1
-	strh r0, [r3, 0xC]
-	ldr r2, _0800B454
-	movs r5, 0xC
-	ldrsh r0, [r3, r5]
-	lsls r0, 8
-	adds r1, r0
-	strh r1, [r2]
-_0800B44E:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800B454: .4byte REG_BLDALPHA
-	thumb_func_end sub_800B3EC
-
-	thumb_func_start sub_800B458
-sub_800B458: @ 800B458
-	push {r4-r6,lr}
-	mov r6, r8
-	push {r6}
-	adds r4, r0, 0
-	adds r5, r1, 0
-	lsls r4, 24
-	lsrs r4, 24
-	lsls r5, 24
-	lsrs r5, 24
-	ldr r1, _0800B4BC
-	movs r2, 0x94
-	lsls r2, 2
-	adds r0, r2, 0
-	strh r0, [r1]
-	adds r1, 0x2
-	movs r0, 0x10
-	strh r0, [r1]
-	adds r1, 0x2
-	movs r0, 0
-	strh r0, [r1]
-	ldr r0, _0800B4C0
-	mov r8, r0
-	lsls r0, r4, 2
-	adds r0, r4
-	lsls r0, 3
-	add r0, r8
-	movs r6, 0
-	strh r6, [r0, 0x12]
-	ldr r0, _0800B4C4
-	movs r1, 0
-	bl CreateTask
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	add r1, r8
-	strh r4, [r1, 0x8]
-	movs r0, 0x10
-	strh r0, [r1, 0xA]
-	strh r6, [r1, 0xC]
-	strh r5, [r1, 0xE]
-	strh r5, [r1, 0x10]
-	pop {r3}
-	mov r8, r3
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800B4BC: .4byte REG_BLDCNT
-_0800B4C0: .4byte 0x03004b20
-_0800B4C4: .4byte sub_800B3EC
-	thumb_func_end sub_800B458
-
-	thumb_func_start sub_800B4C8
-sub_800B4C8: @ 800B4C8
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r2, r0, 24
-	ldr r4, _0800B4FC
-	lsls r0, r2, 2
-	adds r0, r2
-	lsls r0, 3
-	adds r3, r0, r4
-	ldrh r1, [r3, 0xA]
-	movs r5, 0xA
-	ldrsh r0, [r3, r5]
-	cmp r0, 0x10
-	bne _0800B500
-	movs r1, 0x8
-	ldrsh r0, [r3, r1]
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	adds r1, r4
-	movs r0, 0x1
-	strh r0, [r1, 0x12]
-	adds r0, r2, 0
-	bl DestroyTask
-	b _0800B52A
-	.align 2, 0
-_0800B4FC: .4byte 0x03004b20
-_0800B500:
-	ldrh r2, [r3, 0x10]
-	movs r4, 0x10
-	ldrsh r0, [r3, r4]
-	cmp r0, 0
-	beq _0800B510
-	subs r0, r2, 0x1
-	strh r0, [r3, 0x10]
-	b _0800B52A
-_0800B510:
-	ldrh r0, [r3, 0xE]
-	strh r0, [r3, 0x10]
-	adds r1, 0x1
-	strh r1, [r3, 0xA]
-	ldrh r0, [r3, 0xC]
-	subs r0, 0x1
-	strh r0, [r3, 0xC]
-	ldr r2, _0800B530
-	movs r5, 0xC
-	ldrsh r0, [r3, r5]
-	lsls r0, 8
-	adds r1, r0
-	strh r1, [r2]
-_0800B52A:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800B530: .4byte REG_BLDALPHA
-	thumb_func_end sub_800B4C8
-
-	thumb_func_start sub_800B534
-sub_800B534: @ 800B534
-	push {r4-r6,lr}
-	mov r6, r8
-	push {r6}
-	adds r4, r0, 0
-	adds r5, r1, 0
-	lsls r4, 24
-	lsrs r4, 24
-	lsls r5, 24
-	lsrs r5, 24
-	ldr r1, _0800B59C
-	movs r2, 0x94
-	lsls r2, 2
-	adds r0, r2, 0
-	strh r0, [r1]
-	adds r1, 0x2
-	movs r2, 0x80
-	lsls r2, 5
-	adds r0, r2, 0
-	strh r0, [r1]
-	adds r1, 0x2
-	movs r0, 0
-	strh r0, [r1]
-	ldr r0, _0800B5A0
-	mov r8, r0
-	lsls r0, r4, 2
-	adds r0, r4
-	lsls r0, 3
-	add r0, r8
-	movs r6, 0
-	strh r6, [r0, 0x12]
-	ldr r0, _0800B5A4
-	movs r1, 0
-	bl CreateTask
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	add r1, r8
-	strh r4, [r1, 0x8]
-	strh r6, [r1, 0xA]
-	movs r0, 0x10
-	strh r0, [r1, 0xC]
-	strh r5, [r1, 0xE]
-	strh r5, [r1, 0x10]
-	pop {r3}
-	mov r8, r3
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800B59C: .4byte REG_BLDCNT
-_0800B5A0: .4byte 0x03004b20
-_0800B5A4: .4byte sub_800B4C8
-	thumb_func_end sub_800B534
-
-	thumb_func_start sub_800B5A8
-sub_800B5A8: @ 800B5A8
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r2, r0, 24
-	ldr r1, _0800B5C8
-	lsls r0, r2, 2
-	adds r0, r2
-	lsls r0, 3
-	adds r1, r0, r1
-	ldrh r3, [r1, 0xC]
-	movs r4, 0xC
-	ldrsh r0, [r1, r4]
-	cmp r0, 0
-	beq _0800B5CC
-	subs r0, r3, 0x1
-	strh r0, [r1, 0xC]
-	b _0800B608
-	.align 2, 0
-_0800B5C8: .4byte 0x03004b20
-_0800B5CC:
-	ldrh r3, [r1, 0xA]
-	movs r4, 0xA
-	ldrsh r0, [r1, r4]
-	cmp r0, 0x8
-	bne _0800B5DE
-	adds r0, r2, 0
-	bl DestroyTask
-	b _0800B608
-_0800B5DE:
-	ldrh r2, [r1, 0x10]
-	movs r4, 0x10
-	ldrsh r0, [r1, r4]
-	cmp r0, 0
-	beq _0800B5EE
-	subs r0, r2, 0x1
-	strh r0, [r1, 0x10]
-	b _0800B608
-_0800B5EE:
-	ldrh r0, [r1, 0xE]
-	strh r0, [r1, 0x10]
-	adds r0, r3, 0x1
-	strh r0, [r1, 0xA]
-	movs r2, 0xA
-	ldrsh r0, [r1, r2]
-	lsls r0, 1
-	ldr r1, _0800B610
-	adds r0, r1
-	movs r1, 0x1
-	movs r2, 0x10
-	bl LoadPalette
-_0800B608:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800B610: .4byte gUnknown_081E795C
-	thumb_func_end sub_800B5A8
-
-	thumb_func_start sub_800B614
-sub_800B614: @ 800B614
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	adds r5, r1, 0
-	lsls r4, 24
-	lsrs r4, 24
-	lsls r5, 24
-	lsrs r5, 24
-	ldr r0, _0800B64C
-	movs r1, 0
-	bl CreateTask
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, _0800B650
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	adds r1, r2
-	movs r0, 0
-	strh r4, [r1, 0x8]
-	strh r0, [r1, 0xA]
-	movs r0, 0x8
-	strh r0, [r1, 0xC]
-	strh r5, [r1, 0xE]
-	strh r5, [r1, 0x10]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800B64C: .4byte sub_800B5A8
-_0800B650: .4byte 0x03004b20
-	thumb_func_end sub_800B614
-
-	thumb_func_start sub_800B654
-sub_800B654: @ 800B654
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r2, r0, 24
-	ldr r1, _0800B674
-	lsls r0, r2, 2
-	adds r0, r2
-	lsls r0, 3
-	adds r1, r0, r1
-	ldrh r3, [r1, 0xC]
-	movs r4, 0xC
-	ldrsh r0, [r1, r4]
-	cmp r0, 0
-	beq _0800B678
-	subs r0, r3, 0x1
-	strh r0, [r1, 0xC]
-	b _0800B6B4
-	.align 2, 0
-_0800B674: .4byte 0x03004b20
-_0800B678:
-	ldrh r3, [r1, 0xA]
-	movs r4, 0xA
-	ldrsh r0, [r1, r4]
-	cmp r0, 0
-	bne _0800B68A
-	adds r0, r2, 0
-	bl DestroyTask
-	b _0800B6B4
-_0800B68A:
-	ldrh r2, [r1, 0x10]
-	movs r4, 0x10
-	ldrsh r0, [r1, r4]
-	cmp r0, 0
-	beq _0800B69A
-	subs r0, r2, 0x1
-	strh r0, [r1, 0x10]
-	b _0800B6B4
-_0800B69A:
-	ldrh r0, [r1, 0xE]
-	strh r0, [r1, 0x10]
-	subs r0, r3, 0x1
-	strh r0, [r1, 0xA]
-	movs r2, 0xA
-	ldrsh r0, [r1, r2]
-	lsls r0, 1
-	ldr r1, _0800B6BC
-	adds r0, r1
-	movs r1, 0x1
-	movs r2, 0x10
-	bl LoadPalette
-_0800B6B4:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800B6BC: .4byte gUnknown_081E795C
-	thumb_func_end sub_800B654
-
-	thumb_func_start sub_800B6C0
-sub_800B6C0: @ 800B6C0
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	adds r5, r1, 0
-	lsls r4, 24
-	lsrs r4, 24
-	lsls r5, 24
-	lsrs r5, 24
-	ldr r0, _0800B6F8
-	movs r1, 0
-	bl CreateTask
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, _0800B6FC
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	adds r1, r2
-	strh r4, [r1, 0x8]
-	movs r0, 0x8
-	strh r0, [r1, 0xA]
-	strh r0, [r1, 0xC]
-	strh r5, [r1, 0xE]
-	strh r5, [r1, 0x10]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800B6F8: .4byte sub_800B654
-_0800B6FC: .4byte 0x03004b20
-	thumb_func_end sub_800B6C0
-
-	thumb_func_start CreateGenderMenu
-CreateGenderMenu: @ 800B700
-	push {r4,r5,lr}
-	sub sp, 0x8
-	adds r2, r0, 0
-	adds r3, r1, 0
-	lsls r2, 24
-	lsls r3, 24
-	lsrs r5, r2, 24
-	movs r0, 0xC0
-	lsls r0, 19
-	adds r2, r0
-	lsrs r2, 24
-	lsrs r4, r3, 24
-	movs r0, 0xA0
-	lsls r0, 19
-	adds r3, r0
-	lsrs r3, 24
-	adds r0, r5, 0
-	adds r1, r4, 0
-	bl DrawDefaultWindow
-	adds r5, 0x1
-	lsls r5, 24
-	lsrs r5, 24
-	adds r4, 0x1
-	lsls r4, 24
-	lsrs r4, 24
-	ldr r3, _0800B75C
-	adds r0, r5, 0
-	adds r1, r4, 0
-	movs r2, 0x2
-	bl PrintStringArray
-	movs r0, 0
-	str r0, [sp]
-	movs r0, 0x5
-	str r0, [sp, 0x4]
-	movs r0, 0
-	adds r1, r5, 0
-	adds r2, r4, 0
-	movs r3, 0x2
-	bl InitMenu
-	add sp, 0x8
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800B75C: .4byte gUnknown_081E79B0
-	thumb_func_end CreateGenderMenu
-
-	thumb_func_start GenderMenuProcessInput
-GenderMenuProcessInput: @ 800B760
-	push {lr}
-	bl ProcessMenuInputNoWrap
-	lsls r0, 24
-	asrs r0, 24
-	pop {r1}
-	bx r1
-	thumb_func_end GenderMenuProcessInput
-
-	thumb_func_start CreateNameMenu
-CreateNameMenu: @ 800B770
-	push {r4,r5,lr}
-	sub sp, 0x8
-	adds r2, r0, 0
-	adds r3, r1, 0
-	lsls r2, 24
-	lsls r3, 24
-	lsrs r5, r2, 24
-	movs r0, 0xA0
-	lsls r0, 20
-	adds r2, r0
-	lsrs r2, 24
-	lsrs r4, r3, 24
-	movs r0, 0xB0
-	lsls r0, 20
-	adds r3, r0
-	lsrs r3, 24
-	adds r0, r5, 0
-	adds r1, r4, 0
-	bl DrawDefaultWindow
-	ldr r0, _0800B7B8
-	ldrb r0, [r0, 0x8]
-	cmp r0, 0
-	bne _0800B7C0
-	adds r5, 0x1
-	lsls r0, r5, 24
-	lsrs r0, 24
-	adds r4, 0x1
-	lsls r1, r4, 24
-	lsrs r1, 24
-	ldr r3, _0800B7BC
-	movs r2, 0x5
-	bl PrintStringArray
-	b _0800B7D4
-	.align 2, 0
-_0800B7B8: .4byte gSaveBlock2
-_0800B7BC: .4byte gUnknown_081E79C0
-_0800B7C0:
-	adds r5, 0x1
-	lsls r0, r5, 24
-	lsrs r0, 24
-	adds r4, 0x1
-	lsls r1, r4, 24
-	lsrs r1, 24
-	ldr r3, _0800B7F4
-	movs r2, 0x5
-	bl PrintStringArray
-_0800B7D4:
-	lsls r1, r5, 24
-	lsrs r1, 24
-	lsls r2, r4, 24
-	lsrs r2, 24
-	movs r0, 0
-	str r0, [sp]
-	movs r0, 0x9
-	str r0, [sp, 0x4]
-	movs r0, 0
-	movs r3, 0x5
-	bl InitMenu
-	add sp, 0x8
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800B7F4: .4byte gUnknown_081E79E8
-	thumb_func_end CreateNameMenu
-
-	thumb_func_start NameMenuProcessInput
-NameMenuProcessInput: @ 800B7F8
-	push {lr}
-	bl ProcessMenuInput
-	lsls r0, 24
-	asrs r0, 24
-	pop {r1}
-	bx r1
-	thumb_func_end NameMenuProcessInput
-
-	thumb_func_start set_default_player_name
-set_default_player_name: @ 800B808
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r2, r0, 24
-	ldr r0, _0800B81C
-	ldrb r1, [r0, 0x8]
-	adds r5, r0, 0
-	cmp r1, 0
-	bne _0800B824
-	ldr r1, _0800B820
-	b _0800B826
-	.align 2, 0
-_0800B81C: .4byte gSaveBlock2
-_0800B820: .4byte gUnknown_081E79C0
-_0800B824:
-	ldr r1, _0800B850
-_0800B826:
-	lsls r0, r2, 3
-	adds r0, r1
-	ldr r3, [r0]
-	movs r2, 0
-	ldr r4, _0800B854
-_0800B830:
-	adds r1, r2, r4
-	adds r0, r3, r2
-	ldrb r0, [r0]
-	strb r0, [r1]
-	adds r0, r2, 0x1
-	lsls r0, 24
-	lsrs r2, r0, 24
-	cmp r2, 0x6
-	bls _0800B830
-	adds r1, r2, r5
-	movs r0, 0xFF
-	strb r0, [r1]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0800B850: .4byte gUnknown_081E79E8
-_0800B854: .4byte gSaveBlock2
-	thumb_func_end set_default_player_name
-
 	thumb_func_start sub_800B858
 sub_800B858: @ 800B858
 	push {lr}
@@ -4328,7 +92,7 @@ _0800B8A0:
 	adds r0, r4, 0
 	movs r1, 0xC
 	add r2, sp, 0x10
-	bl pokemon_setattr
+	bl SetMonData
 _0800B90E:
 	ldr r0, _0800B948
 	str r5, [r0]
@@ -4913,24 +677,24 @@ _0800BDAE:
 	adds r4, r7, r0
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _0800BE74
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _0800BE74
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl PokemonGetField
+	bl GetMonData
 	movs r1, 0xCE
 	lsls r1, 1
 	cmp r0, r1
 	beq _0800BE74
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	bne _0800BE74
 	ldr r0, _0800BDF0
@@ -4951,7 +715,7 @@ _0800BDF4:
 	adds r4, r7, r0
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _0800BE74
 	adds r0, r4, 0
@@ -4964,25 +728,25 @@ _0800BE1C:
 	adds r4, r7, r0
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _0800BE74
 	adds r0, r4, 0
 	movs r1, 0x41
 _0800BE30:
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _0800BE74
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl PokemonGetField
+	bl GetMonData
 	movs r1, 0xCE
 	lsls r1, 1
 	cmp r0, r1
 	beq _0800BE74
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	bne _0800BE74
 	ldr r1, _0800BE70
@@ -8364,16 +4128,16 @@ _0800D748: .4byte 0x0000bf40
 sub_800D74C: @ 800D74C
 	push {r4,lr}
 	movs r0, 0x12
-	bl sub_8064EF4
+	bl SetTextWindowBaseTileNum
 	ldr r4, _0800D79C
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_8064F38
+	bl LoadTextWindowGraphics_OverridePalSlot
 	movs r0, 0x22
-	bl sub_8064EF4
+	bl SetTextWindowBaseTileNum
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_8064F38
+	bl LoadTextWindowGraphics_OverridePalSlot
 	ldr r3, _0800D7A0
 	adds r0, r3, 0
 	adds r0, 0xB8
@@ -8430,7 +4194,7 @@ _0800D7E4: .4byte gBattleTerrainTiles_Building
 _0800D7E8: .4byte 0x06008000
 _0800D7EC: .4byte gBattleTerrainTilemap_Building
 _0800D7F0: .4byte 0x0600d000
-_0800D7F4: .4byte gUnknown_08E62AC0
+_0800D7F4: .4byte gBattleTerrainPalette_BattleTower
 _0800D7F8:
 	movs r0, 0x80
 	lsls r0, 5
@@ -8455,7 +4219,7 @@ _0800D824: .4byte gBattleTerrainTiles_Cave
 _0800D828: .4byte 0x06008000
 _0800D82C: .4byte gBattleTerrainTilemap_Cave
 _0800D830: .4byte 0x0600d000
-_0800D834: .4byte gUnknown_08E636E0
+_0800D834: .4byte gBattleTerrainPalette_Groudon
 _0800D838:
 	ldr r0, _0800D84C
 	ldr r1, _0800D850
@@ -8470,7 +4234,7 @@ _0800D84C: .4byte gBattleTerrainTiles_Water
 _0800D850: .4byte 0x06008000
 _0800D854: .4byte gBattleTerrainTilemap_Water
 _0800D858: .4byte 0x0600d000
-_0800D85C: .4byte gUnknown_08E636A4
+_0800D85C: .4byte gBattleTerrainPalette_Kyogre
 _0800D860:
 	movs r0, 0x8
 	ands r0, r1
@@ -8501,7 +4265,7 @@ _0800D898: .4byte gBattleTerrainTiles_Building
 _0800D89C: .4byte 0x06008000
 _0800D8A0: .4byte gBattleTerrainTilemap_Building
 _0800D8A4: .4byte 0x0600d000
-_0800D8A8: .4byte gUnknown_08E63774
+_0800D8A8: .4byte gBattleTerrainPalette_BuildingLeader
 _0800D8AC:
 	cmp r0, 0x20
 	bne _0800D8D8
@@ -8514,11 +4278,11 @@ _0800D8AC:
 	ldr r0, _0800D8D4
 	b _0800DA66
 	.align 2, 0
-_0800D8C4: .4byte gUnknown_08E62DAC
+_0800D8C4: .4byte gBattleTerrainTiles_Stadium
 _0800D8C8: .4byte 0x06008000
-_0800D8CC: .4byte gUnknown_08E633B4
+_0800D8CC: .4byte gBattleTerrainTilemap_Stadium
 _0800D8D0: .4byte 0x0600d000
-_0800D8D4: .4byte gUnknown_08E639A8
+_0800D8D4: .4byte gBattleTerrainPalette_StadiumSteven
 _0800D8D8:
 	bl sav1_map_get_battletype
 	lsls r0, 24
@@ -8592,7 +4356,7 @@ _0800D978: .4byte gBattleTerrainTiles_Building
 _0800D97C: .4byte 0x06008000
 _0800D980: .4byte gBattleTerrainTilemap_Building
 _0800D984: .4byte 0x0600d000
-_0800D988: .4byte gUnknown_08E63738
+_0800D988: .4byte gBattleTerrainPalette_BuildingGym
 _0800D98C:
 	ldr r0, _0800D9A0
 	ldr r1, _0800D9A4
@@ -8603,11 +4367,11 @@ _0800D98C:
 	ldr r0, _0800D9B0
 	b _0800DA66
 	.align 2, 0
-_0800D9A0: .4byte gUnknown_08E62DAC
+_0800D9A0: .4byte gBattleTerrainTiles_Stadium
 _0800D9A4: .4byte 0x06008000
-_0800D9A8: .4byte gUnknown_08E633B4
+_0800D9A8: .4byte gBattleTerrainTilemap_Stadium
 _0800D9AC: .4byte 0x0600d000
-_0800D9B0: .4byte gUnknown_08E63810
+_0800D9B0: .4byte gBattleTerrainPalette_StadiumMagma
 _0800D9B4:
 	ldr r0, _0800D9C8
 	ldr r1, _0800D9CC
@@ -8618,11 +4382,11 @@ _0800D9B4:
 	ldr r0, _0800D9D8
 	b _0800DA66
 	.align 2, 0
-_0800D9C8: .4byte gUnknown_08E62DAC
+_0800D9C8: .4byte gBattleTerrainTiles_Stadium
 _0800D9CC: .4byte 0x06008000
-_0800D9D0: .4byte gUnknown_08E633B4
+_0800D9D0: .4byte gBattleTerrainTilemap_Stadium
 _0800D9D4: .4byte 0x0600d000
-_0800D9D8: .4byte gUnknown_08E637B0
+_0800D9D8: .4byte gBattleTerrainPalette_StadiumAqua
 _0800D9DC:
 	ldr r0, _0800D9F0
 	ldr r1, _0800D9F4
@@ -8633,11 +4397,11 @@ _0800D9DC:
 	ldr r0, _0800DA00
 	b _0800DA66
 	.align 2, 0
-_0800D9F0: .4byte gUnknown_08E62DAC
+_0800D9F0: .4byte gBattleTerrainTiles_Stadium
 _0800D9F4: .4byte 0x06008000
-_0800D9F8: .4byte gUnknown_08E633B4
+_0800D9F8: .4byte gBattleTerrainTilemap_Stadium
 _0800D9FC: .4byte 0x0600d000
-_0800DA00: .4byte gUnknown_08E6387C
+_0800DA00: .4byte gBattleTerrainPalette_StadiumSidney
 _0800DA04:
 	ldr r0, _0800DA18
 	ldr r1, _0800DA1C
@@ -8648,11 +4412,11 @@ _0800DA04:
 	ldr r0, _0800DA28
 	b _0800DA66
 	.align 2, 0
-_0800DA18: .4byte gUnknown_08E62DAC
+_0800DA18: .4byte gBattleTerrainTiles_Stadium
 _0800DA1C: .4byte 0x06008000
-_0800DA20: .4byte gUnknown_08E633B4
+_0800DA20: .4byte gBattleTerrainTilemap_Stadium
 _0800DA24: .4byte 0x0600d000
-_0800DA28: .4byte gUnknown_08E638CC
+_0800DA28: .4byte gBattleTerrainPalette_StadiumPhoebe
 _0800DA2C:
 	ldr r0, _0800DA40
 	ldr r1, _0800DA44
@@ -8663,11 +4427,11 @@ _0800DA2C:
 	ldr r0, _0800DA50
 	b _0800DA66
 	.align 2, 0
-_0800DA40: .4byte gUnknown_08E62DAC
+_0800DA40: .4byte gBattleTerrainTiles_Stadium
 _0800DA44: .4byte 0x06008000
-_0800DA48: .4byte gUnknown_08E633B4
+_0800DA48: .4byte gBattleTerrainTilemap_Stadium
 _0800DA4C: .4byte 0x0600d000
-_0800DA50: .4byte gUnknown_08E63914
+_0800DA50: .4byte gBattleTerrainPalette_StadiumGlacia
 _0800DA54:
 	ldr r0, _0800DA70
 	ldr r1, _0800DA74
@@ -8682,11 +4446,11 @@ _0800DA66:
 	bl LoadCompressedPalette
 	b _0800DA9E
 	.align 2, 0
-_0800DA70: .4byte gUnknown_08E62DAC
+_0800DA70: .4byte gBattleTerrainTiles_Stadium
 _0800DA74: .4byte 0x06008000
-_0800DA78: .4byte gUnknown_08E633B4
+_0800DA78: .4byte gBattleTerrainTilemap_Stadium
 _0800DA7C: .4byte 0x0600d000
-_0800DA80: .4byte gUnknown_08E63958
+_0800DA80: .4byte gBattleTerrainPalette_StadiumDrake
 _0800DA84:
 	ldr r0, _0800DAA4
 	ldr r1, _0800DAA8
@@ -8707,7 +4471,7 @@ _0800DAA4: .4byte gBattleTerrainTiles_Building
 _0800DAA8: .4byte 0x06008000
 _0800DAAC: .4byte gBattleTerrainTilemap_Building
 _0800DAB0: .4byte 0x0600d000
-_0800DAB4: .4byte gUnknown_08E62AC0
+_0800DAB4: .4byte gBattleTerrainPalette_BattleTower
 	thumb_func_end sub_800D7B8
 
 	thumb_func_start sub_800DAB8
@@ -9673,14 +5437,14 @@ sub_800E23C: @ 800E23C
 	b _0800E3FC
 	.align 2, 0
 _0800E29C: .4byte 0x020239f8
-_0800E2A0: .4byte gUnknown_08E5DA10
+_0800E2A0: .4byte gVersusFrameGfx
 _0800E2A4: .4byte 0x06004000
-_0800E2A8: .4byte gUnknown_08E5DAF8
+_0800E2A8: .4byte gVersusFrameTilemap
 _0800E2AC: .4byte 0x0600e000
 _0800E2B0: .4byte 0x0600f000
 _0800E2B4: .4byte gUnknown_08E5DC2C
 _0800E2B8: .4byte 0x06010000
-_0800E2BC: .4byte gUnknown_08E5DC04
+_0800E2BC: .4byte gVersusFramePal
 _0800E2C0: .4byte REG_BG1CNT
 _0800E2C4: .4byte 0x00005c04
 _0800E2C8: .4byte REG_WININ
@@ -9926,7 +5690,7 @@ _0800E4C0:
 	.align 2, 0
 _0800E4E4: .4byte gTrainers
 _0800E4E8: .4byte 0x0202ff5e
-_0800E4EC: .4byte gUnknown_08E62DAC
+_0800E4EC: .4byte gBattleTerrainTiles_Stadium
 _0800E4F0:
 	bl sav1_map_get_battletype
 	lsls r0, 24
@@ -9970,32 +5734,32 @@ _0800E54C:
 	ldr r0, _0800E550
 	b _0800E57E
 	.align 2, 0
-_0800E550: .4byte gUnknown_08E62DAC
+_0800E550: .4byte gBattleTerrainTiles_Stadium
 _0800E554:
 	ldr r0, _0800E558
 	b _0800E57E
 	.align 2, 0
-_0800E558: .4byte gUnknown_08E62DAC
+_0800E558: .4byte gBattleTerrainTiles_Stadium
 _0800E55C:
 	ldr r0, _0800E560
 	b _0800E57E
 	.align 2, 0
-_0800E560: .4byte gUnknown_08E62DAC
+_0800E560: .4byte gBattleTerrainTiles_Stadium
 _0800E564:
 	ldr r0, _0800E568
 	b _0800E57E
 	.align 2, 0
-_0800E568: .4byte gUnknown_08E62DAC
+_0800E568: .4byte gBattleTerrainTiles_Stadium
 _0800E56C:
 	ldr r0, _0800E570
 	b _0800E57E
 	.align 2, 0
-_0800E570: .4byte gUnknown_08E62DAC
+_0800E570: .4byte gBattleTerrainTiles_Stadium
 _0800E574:
 	ldr r0, _0800E578
 	b _0800E57E
 	.align 2, 0
-_0800E578: .4byte gUnknown_08E62DAC
+_0800E578: .4byte gBattleTerrainTiles_Stadium
 _0800E57C:
 	ldr r0, _0800E588
 _0800E57E:
@@ -10057,7 +5821,7 @@ _0800E5CC:
 	.align 2, 0
 _0800E5F0: .4byte gTrainers
 _0800E5F4: .4byte 0x0202ff5e
-_0800E5F8: .4byte gUnknown_08E633B4
+_0800E5F8: .4byte gBattleTerrainTilemap_Stadium
 _0800E5FC:
 	bl sav1_map_get_battletype
 	lsls r0, 24
@@ -10102,32 +5866,32 @@ _0800E658:
 	ldr r0, _0800E65C
 	b _0800E68A
 	.align 2, 0
-_0800E65C: .4byte gUnknown_08E633B4
+_0800E65C: .4byte gBattleTerrainTilemap_Stadium
 _0800E660:
 	ldr r0, _0800E664
 	b _0800E68A
 	.align 2, 0
-_0800E664: .4byte gUnknown_08E633B4
+_0800E664: .4byte gBattleTerrainTilemap_Stadium
 _0800E668:
 	ldr r0, _0800E66C
 	b _0800E68A
 	.align 2, 0
-_0800E66C: .4byte gUnknown_08E633B4
+_0800E66C: .4byte gBattleTerrainTilemap_Stadium
 _0800E670:
 	ldr r0, _0800E674
 	b _0800E68A
 	.align 2, 0
-_0800E674: .4byte gUnknown_08E633B4
+_0800E674: .4byte gBattleTerrainTilemap_Stadium
 _0800E678:
 	ldr r0, _0800E67C
 	b _0800E68A
 	.align 2, 0
-_0800E67C: .4byte gUnknown_08E633B4
+_0800E67C: .4byte gBattleTerrainTilemap_Stadium
 _0800E680:
 	ldr r0, _0800E684
 	b _0800E68A
 	.align 2, 0
-_0800E684: .4byte gUnknown_08E633B4
+_0800E684: .4byte gBattleTerrainTilemap_Stadium
 _0800E688:
 	ldr r0, _0800E694
 _0800E68A:
@@ -10161,12 +5925,12 @@ _0800E6AA:
 _0800E6C0: .4byte 0x020239f8
 _0800E6C4: .4byte 0x00000902
 _0800E6C8: .4byte gGameVersion
-_0800E6CC: .4byte gUnknown_08E636E0
+_0800E6CC: .4byte gBattleTerrainPalette_Groudon
 _0800E6D0:
 	ldr r0, _0800E6D4
 	b _0800E7A6
 	.align 2, 0
-_0800E6D4: .4byte gUnknown_08E636A4
+_0800E6D4: .4byte gBattleTerrainPalette_Kyogre
 _0800E6D8:
 	movs r0, 0x8
 	ands r0, r1
@@ -10187,14 +5951,14 @@ _0800E6D8:
 	.align 2, 0
 _0800E6F8: .4byte gTrainers
 _0800E6FC: .4byte 0x0202ff5e
-_0800E700: .4byte gUnknown_08E63774
+_0800E700: .4byte gBattleTerrainPalette_BuildingLeader
 _0800E704:
 	cmp r0, 0x20
 	bne _0800E710
 	ldr r0, _0800E70C
 	b _0800E7A6
 	.align 2, 0
-_0800E70C: .4byte gUnknown_08E639A8
+_0800E70C: .4byte gBattleTerrainPalette_StadiumSteven
 _0800E710:
 	bl sav1_map_get_battletype
 	lsls r0, 24
@@ -10237,37 +6001,37 @@ _0800E76C:
 	ldr r0, _0800E770
 	b _0800E7A6
 	.align 2, 0
-_0800E770: .4byte gUnknown_08E63738
+_0800E770: .4byte gBattleTerrainPalette_BuildingGym
 _0800E774:
 	ldr r0, _0800E778
 	b _0800E7A6
 	.align 2, 0
-_0800E778: .4byte gUnknown_08E63810
+_0800E778: .4byte gBattleTerrainPalette_StadiumMagma
 _0800E77C:
 	ldr r0, _0800E780
 	b _0800E7A6
 	.align 2, 0
-_0800E780: .4byte gUnknown_08E637B0
+_0800E780: .4byte gBattleTerrainPalette_StadiumAqua
 _0800E784:
 	ldr r0, _0800E788
 	b _0800E7A6
 	.align 2, 0
-_0800E788: .4byte gUnknown_08E6387C
+_0800E788: .4byte gBattleTerrainPalette_StadiumSidney
 _0800E78C:
 	ldr r0, _0800E790
 	b _0800E7A6
 	.align 2, 0
-_0800E790: .4byte gUnknown_08E638CC
+_0800E790: .4byte gBattleTerrainPalette_StadiumPhoebe
 _0800E794:
 	ldr r0, _0800E798
 	b _0800E7A6
 	.align 2, 0
-_0800E798: .4byte gUnknown_08E63914
+_0800E798: .4byte gBattleTerrainPalette_StadiumGlacia
 _0800E79C:
 	ldr r0, _0800E7A0
 	b _0800E7A6
 	.align 2, 0
-_0800E7A0: .4byte gUnknown_08E63958
+_0800E7A0: .4byte gBattleTerrainPalette_StadiumDrake
 _0800E7A4:
 	ldr r0, _0800E7B0
 _0800E7A6:
@@ -10276,7 +6040,7 @@ _0800E7A6:
 	bl LoadCompressedPalette
 	b _0800E7BC
 	.align 2, 0
-_0800E7B0: .4byte gUnknown_08E62AC0
+_0800E7B0: .4byte gBattleTerrainPalette_BattleTower
 _0800E7B4:
 	bl sub_800D74C
 	b _0800E7BC
@@ -10538,17 +6302,17 @@ _0800EA02:
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r5, r0, 16
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r7, r0, 16
 	adds r0, r4, 0
 	movs r1, 0x37
-	bl PokemonGetField
+	bl GetMonData
 	adds r1, r0, 0
 	cmp r5, 0
 	beq _0800EA7E
@@ -10834,20 +6598,20 @@ shedinja_something: @ 800EC44
 	strb r0, [r5]
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	ldr r1, _0800EC94
 	cmp r0, r1
 	bne _0800EC8C
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl PokemonGetField
+	bl GetMonData
 	ldrb r1, [r5]
 	cmp r0, r1
 	beq _0800EC8C
 	adds r0, r4, 0
 	movs r1, 0x2
 	mov r2, sp
-	bl PokemonGetField
+	bl GetMonData
 	ldr r1, _0800EC98
 	mov r0, sp
 	bl StringCompareWithoutExtCtrlCodes
@@ -10856,7 +6620,7 @@ shedinja_something: @ 800EC44
 	adds r0, r4, 0
 	movs r1, 0x3
 	adds r2, r5, 0
-	bl pokemon_setattr
+	bl SetMonData
 _0800EC8C:
 	add sp, 0x10
 	pop {r4,r5}
@@ -11301,7 +7065,7 @@ _0800F03E:
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	movs r1, 0x4
 	negs r1, r1
 	add r1, r10
@@ -11310,34 +7074,34 @@ _0800F03E:
 	strh r0, [r5]
 	adds r0, r4, 0
 	movs r1, 0xC
-	bl PokemonGetField
+	bl GetMonData
 	strh r0, [r5, 0x2]
 	adds r0, r4, 0
 	movs r1, 0x2
 	adds r2, r7, 0
-	bl PokemonGetField
+	bl GetMonData
 	adds r0, r4, 0
 	movs r1, 0x38
-	bl PokemonGetField
+	bl GetMonData
 	strb r0, [r5, 0xF]
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	strh r0, [r5, 0x10]
 	adds r0, r4, 0
 	movs r1, 0x3A
-	bl PokemonGetField
+	bl GetMonData
 	strh r0, [r5, 0x12]
 	adds r0, r4, 0
 	movs r1, 0x37
-	bl PokemonGetField
+	bl GetMonData
 	mov r1, r10
 	adds r1, 0x10
 	adds r6, r1
 	str r0, [r6]
 	adds r0, r4, 0
 	movs r1, 0
-	bl PokemonGetField
+	bl GetMonData
 	str r0, [r7, 0x14]
 	adds r0, r4, 0
 	bl pokemon_get_gender
@@ -11346,7 +7110,7 @@ _0800F03E:
 	bl SkipExtCtrlCodes
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl PokemonGetField
+	bl GetMonData
 	strb r0, [r5, 0x1D]
 	lsls r0, 24
 	lsrs r0, 24
@@ -12649,7 +8413,7 @@ _0800FAE8:
 	adds r1, 0xD
 	adds r0, r5, 0
 	adds r2, r4, 0
-	bl pokemon_setattr
+	bl SetMonData
 	adds r1, r6, 0
 	adds r1, 0x11
 	ldrh r0, [r4]
@@ -12659,7 +8423,7 @@ _0800FAE8:
 	ldr r0, _0800FB18
 	adds r2, r0
 	adds r0, r5, 0
-	bl pokemon_setattr
+	bl SetMonData
 	adds r4, 0x2
 	adds r6, 0x1
 	cmp r6, 0x3
@@ -12738,7 +8502,7 @@ _0800FB5E:
 	adds r0, r4, 0
 	movs r1, 0xC
 	adds r2, r5, 0
-	bl pokemon_setattr
+	bl SetMonData
 	b _0800FC74
 	.align 2, 0
 _0800FBAC: .4byte gSpeciesNames
@@ -12813,7 +8577,7 @@ _0800FBF2:
 	adds r0, r4, 0
 	movs r1, 0xC
 	adds r2, r5, 0
-	bl pokemon_setattr
+	bl SetMonData
 	movs r6, 0
 	adds r5, r4, 0
 	mov r0, r8
@@ -12824,7 +8588,7 @@ _0800FC4A:
 	adds r1, 0xD
 	adds r0, r5, 0
 	adds r2, r4, 0
-	bl pokemon_setattr
+	bl SetMonData
 	adds r1, r6, 0
 	adds r1, 0x11
 	ldrh r0, [r4]
@@ -12834,7 +8598,7 @@ _0800FC4A:
 	ldr r0, _0800FCC8
 	adds r2, r0
 	adds r0, r5, 0
-	bl pokemon_setattr
+	bl SetMonData
 	adds r4, 0x2
 	adds r6, 0x1
 	cmp r6, 0x3
@@ -13150,17 +8914,17 @@ _0800FED0:
 	adds r4, r0, r4
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r5, r0, 16
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r6, r0, 16
 	adds r0, r4, 0
 	movs r1, 0x37
-	bl PokemonGetField
+	bl GetMonData
 	adds r1, r0, 0
 	cmp r5, 0
 	beq _0800FF40
@@ -13229,17 +8993,17 @@ _0800FF6A:
 	adds r4, r2, r4
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r5, r0, 16
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r6, r0, 16
 	adds r0, r4, 0
 	movs r1, 0x37
-	bl PokemonGetField
+	bl GetMonData
 	adds r1, r0, 0
 	cmp r5, 0
 	beq _0800FFDA
@@ -13755,7 +9519,7 @@ _080103AC:
 	ldr r7, _08010418
 	adds r0, r7
 	movs r1, 0
-	bl PokemonGetField
+	bl GetMonData
 	cmp r4, SPECIES_UNOWN
 	bne _08010430
 	ldrh r0, [r5]
@@ -13764,7 +9528,7 @@ _080103AC:
 	adds r0, r1, 0
 	adds r0, r7
 	movs r1, 0
-	bl PokemonGetField
+	bl GetMonData
 	adds r2, r0, 0
 	movs r0, 0xC0
 	lsls r0, 18
@@ -14583,7 +10347,7 @@ _08010994:
 	strb r5, [r0]
 	ldr r0, _08010B60
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	ldr r2, _08010B64
 	lsls r1, r0, 3
 	subs r1, r0
@@ -16085,12 +11849,12 @@ _0801162A:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _08011650
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl PokemonGetField
+	bl GetMonData
 	movs r1, 0xCE
 	lsls r1, 1
 	cmp r0, r1
@@ -16108,11 +11872,11 @@ _08011664: .4byte 0x0000ffff
 _08011668:
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	strh r0, [r5]
 	adds r0, r4, 0
 	movs r1, 0x37
-	bl PokemonGetField
+	bl GetMonData
 _0801167A:
 	str r0, [r6]
 	adds r6, 0x8
@@ -16141,12 +11905,12 @@ _080116A6:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _080116CC
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl PokemonGetField
+	bl GetMonData
 	movs r1, 0xCE
 	lsls r1, 1
 	cmp r0, r1
@@ -16163,11 +11927,11 @@ _080116DC: .4byte 0x0000ffff
 _080116E0:
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	strh r0, [r5]
 	adds r0, r4, 0
 	movs r1, 0x37
-	bl PokemonGetField
+	bl GetMonData
 _080116F2:
 	str r0, [r6]
 	adds r6, 0x8
@@ -16204,12 +11968,12 @@ _08011732:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _08011758
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl PokemonGetField
+	bl GetMonData
 	movs r1, 0xCE
 	lsls r1, 1
 	cmp r0, r1
@@ -16225,11 +11989,11 @@ _08011764: .4byte 0x0000ffff
 _08011768:
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	strh r0, [r5]
 	adds r0, r4, 0
 	movs r1, 0x37
-	bl PokemonGetField
+	bl GetMonData
 _0801177A:
 	str r0, [r6]
 	adds r6, 0x8
@@ -29033,17 +24797,17 @@ _08018084:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _080180B4
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _080180B4
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl PokemonGetField
+	bl GetMonData
 	movs r1, 0xCE
 	lsls r1, 1
 	cmp r0, r1
@@ -29124,17 +24888,17 @@ _0801813A:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _0801818A
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _0801818A
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl PokemonGetField
+	bl GetMonData
 	movs r1, 0xCE
 	lsls r1, 1
 	cmp r0, r1
@@ -29472,23 +25236,23 @@ _080183F4:
 	adds r5, r1, r0
 	adds r0, r7, 0
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	str r0, [sp, 0x8]
 	adds r0, r7, 0
 	movs r1, 0
-	bl PokemonGetField
+	bl GetMonData
 	str r0, [sp, 0x10]
 	adds r0, r5, 0
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	str r0, [sp, 0xC]
 	adds r0, r5, 0
 	movs r1, 0
-	bl PokemonGetField
+	bl GetMonData
 	str r0, [sp, 0x14]
 	ldr r0, _0801844C
 	ldrh r1, [r0]
@@ -33109,17 +28873,17 @@ _0801A33A:
 	mov r1, r10
 	adds r1, 0xD
 	adds r0, r4, 0
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r6, r0, 16
 	mov r1, r10
 	adds r1, 0x11
 	adds r0, r4, 0
-	bl PokemonGetField
+	bl GetMonData
 	strb r0, [r5]
 	adds r0, r4, 0
 	movs r1, 0x15
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r6, 0
@@ -44621,12 +40385,12 @@ _08020104:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _0802016A
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _0802016A
 	ldr r0, _08020158
@@ -44641,7 +40405,7 @@ _08020104:
 _08020138:
 	adds r0, r4, 0
 	movs r1, 0xC
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0xAF
@@ -44760,7 +40524,7 @@ _08020220:
 	ldr r1, _08020260
 	adds r0, r1
 	movs r1, 0xC
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0xAF
@@ -44813,7 +40577,7 @@ _080202A0:
 	ldr r1, _080202D8
 	adds r0, r1
 	movs r1, 0x38
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0x64
 	bne _080202E8
 	ldr r2, _080202DC
@@ -44868,7 +40632,7 @@ _08020316:
 	ldr r1, _08020364
 	adds r0, r1
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	bne _08020332
 	b _0802051E
@@ -45147,21 +40911,21 @@ _08020566:
 	ldr r5, _08020634
 	adds r0, r5
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _08020612
 	ldrb r0, [r7]
 	muls r0, r6
 	adds r0, r5
 	movs r1, 0x38
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0x64
 	beq _08020612
 	ldrb r0, [r7]
 	muls r0, r6
 	adds r0, r5
 	movs r1, 0x3A
-	bl PokemonGetField
+	bl GetMonData
 	ldr r1, _08020638
 	adds r4, r1
 	strh r0, [r4]
@@ -45169,31 +40933,31 @@ _08020566:
 	muls r0, r6
 	adds r0, r5
 	movs r1, 0x3B
-	bl PokemonGetField
+	bl GetMonData
 	strh r0, [r4, 0x2]
 	ldrb r0, [r7]
 	muls r0, r6
 	adds r0, r5
 	movs r1, 0x3C
-	bl PokemonGetField
+	bl GetMonData
 	strh r0, [r4, 0x4]
 	ldrb r0, [r7]
 	muls r0, r6
 	adds r0, r5
 	movs r1, 0x3D
-	bl PokemonGetField
+	bl GetMonData
 	strh r0, [r4, 0x6]
 	ldrb r0, [r7]
 	muls r0, r6
 	adds r0, r5
 	movs r1, 0x3E
-	bl PokemonGetField
+	bl GetMonData
 	strh r0, [r4, 0x8]
 	ldrb r0, [r7]
 	muls r0, r6
 	adds r0, r5
 	movs r1, 0x3F
-	bl PokemonGetField
+	bl GetMonData
 	strh r0, [r4, 0xA]
 	ldr r4, _0802063C
 	mov r2, r8
@@ -45309,7 +41073,7 @@ _080206A8:
 	ldr r7, _080208CC
 	adds r0, r7
 	movs r1, 0x38
-	bl PokemonGetField
+	bl GetMonData
 	strb r0, [r4, 0x4]
 	movs r0, 0x1
 	negs r0, r0
@@ -45360,7 +41124,7 @@ _080206A8:
 	muls r0, r1
 	adds r0, r7
 	movs r1, 0x38
-	bl PokemonGetField
+	bl GetMonData
 	adds r1, r4, 0
 	adds r1, 0x2A
 	strb r0, [r1]
@@ -45370,7 +41134,7 @@ _080206A8:
 	adds r0, r1, 0
 	adds r0, r7
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	strh r0, [r4, 0x28]
 	ldrb r0, [r6]
 	mov r2, r8
@@ -45378,7 +41142,7 @@ _080206A8:
 	adds r0, r2, 0
 	adds r0, r7
 	movs r1, 0x3A
-	bl PokemonGetField
+	bl GetMonData
 	strh r0, [r4, 0x2C]
 	ldrb r0, [r6]
 	mov r3, r8
@@ -45386,7 +41150,7 @@ _080206A8:
 	adds r0, r3, 0
 	adds r0, r7
 	movs r1, 0x3B
-	bl PokemonGetField
+	bl GetMonData
 	strh r0, [r4, 0x2]
 	ldrb r0, [r6]
 	mov r1, r8
@@ -45394,7 +41158,7 @@ _080206A8:
 	adds r0, r1, 0
 	adds r0, r7
 	movs r1, 0x3C
-	bl PokemonGetField
+	bl GetMonData
 	strh r0, [r4, 0x4]
 	ldrb r0, [r6]
 	mov r2, r8
@@ -45402,7 +41166,7 @@ _080206A8:
 	adds r0, r2, 0
 	adds r0, r7
 	movs r1, 0x3D
-	bl PokemonGetField
+	bl GetMonData
 	strh r0, [r4, 0x6]
 	ldrb r0, [r6]
 	mov r3, r8
@@ -45410,7 +41174,7 @@ _080206A8:
 	adds r0, r3, 0
 	adds r0, r7
 	movs r1, 0x3D
-	bl PokemonGetField
+	bl GetMonData
 	strh r0, [r4, 0x6]
 	ldrb r0, [r6]
 	mov r1, r8
@@ -45418,7 +41182,7 @@ _080206A8:
 	adds r0, r1, 0
 	adds r0, r7
 	movs r1, 0x3E
-	bl PokemonGetField
+	bl GetMonData
 	strh r0, [r4, 0x8]
 	ldrb r0, [r6]
 	mov r2, r8
@@ -45426,7 +41190,7 @@ _080206A8:
 	adds r0, r2, 0
 	adds r0, r7
 	movs r1, 0x3F
-	bl PokemonGetField
+	bl GetMonData
 	strh r0, [r4, 0xA]
 _080207EC:
 	ldr r0, _080208C4
@@ -45456,7 +41220,7 @@ _080207EC:
 	ldr r4, _080208CC
 	adds r0, r4
 	movs r1, 0x38
-	bl PokemonGetField
+	bl GetMonData
 	adds r1, r6, 0
 	adds r1, 0xDA
 	strb r0, [r1]
@@ -45464,14 +41228,14 @@ _080207EC:
 	muls r0, r5
 	adds r0, r4
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	mov r1, r8
 	strh r0, [r1]
 	ldrb r0, [r7]
 	muls r0, r5
 	adds r0, r4
 	movs r1, 0x3A
-	bl PokemonGetField
+	bl GetMonData
 	adds r1, r6, 0
 	adds r1, 0xDC
 	strh r0, [r1]
@@ -45479,7 +41243,7 @@ _080207EC:
 	muls r0, r5
 	adds r0, r4
 	movs r1, 0x3B
-	bl PokemonGetField
+	bl GetMonData
 	adds r1, r6, 0
 	adds r1, 0xB2
 	strh r0, [r1]
@@ -45487,7 +41251,7 @@ _080207EC:
 	muls r0, r5
 	adds r0, r4
 	movs r1, 0x3C
-	bl PokemonGetField
+	bl GetMonData
 	adds r1, r6, 0
 	adds r1, 0xB4
 	strh r0, [r1]
@@ -45495,7 +41259,7 @@ _080207EC:
 	muls r0, r5
 	adds r0, r4
 	movs r1, 0x3D
-	bl PokemonGetField
+	bl GetMonData
 	movs r2, 0xB6
 	adds r2, r6
 	mov r8, r2
@@ -45504,14 +41268,14 @@ _080207EC:
 	muls r0, r5
 	adds r0, r4
 	movs r1, 0x3D
-	bl PokemonGetField
+	bl GetMonData
 	mov r3, r8
 	strh r0, [r3]
 	ldrb r0, [r7]
 	muls r0, r5
 	adds r0, r4
 	movs r1, 0x3E
-	bl PokemonGetField
+	bl GetMonData
 	adds r1, r6, 0
 	adds r1, 0xB8
 	strh r0, [r1]
@@ -45650,17 +41414,17 @@ _080209C8:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _080209F8
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	bne _080209F8
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	adds r0, r6, r0
 	lsls r0, 16
 	lsrs r6, r0, 16
@@ -45686,17 +41450,17 @@ _08020A10:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _08020A40
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	bne _08020A40
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	adds r0, r6, r0
 	lsls r0, 16
 	lsrs r6, r0, 16
@@ -47254,8 +43018,8 @@ _0802157A:
 	bx r0
 	thumb_func_end sub_80214B4
 
-	thumb_func_start sub_8021580
-sub_8021580: @ 8021580
+	thumb_func_start atk47
+atk47: @ 8021580
 	push {r4,lr}
 	movs r3, 0
 	ldr r0, _080215A0
@@ -47319,7 +43083,7 @@ _080215EC: .4byte 0x0001601e
 _080215F0: .4byte 0x000160a4
 _080215F4: .4byte 0x000160a5
 _080215F8: .4byte 0x02024c10
-	thumb_func_end sub_8021580
+	thumb_func_end atk47
 
 	thumb_func_start atk48_playstatchangeanimation
 atk48_playstatchangeanimation: @ 80215FC
@@ -49646,17 +45410,17 @@ _080228EE:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _08022928
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	bne _08022928
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _08022928
 	ldr r0, _08022938
@@ -49741,17 +45505,17 @@ _080229B0:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _080229F2
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _080229F2
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	bne _080229F2
 	ldr r1, _08022A1C
@@ -52055,7 +47819,7 @@ _08023CC8:
 	adds r0, r7
 	adds r1, r5, 0
 	adds r1, 0xD
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r0, r4, 0
@@ -52823,12 +48587,12 @@ _08024300:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _08024324
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl PokemonGetField
+	bl GetMonData
 	movs r1, 0xCE
 	lsls r1, 1
 	cmp r0, r1
@@ -52848,11 +48612,11 @@ _08024340: .4byte 0x0000ffff
 _08024344:
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	strh r0, [r5]
 	adds r0, r4, 0
 	movs r1, 0x37
-	bl PokemonGetField
+	bl GetMonData
 _08024356:
 	str r0, [r6]
 	adds r6, 0x8
@@ -53627,7 +49391,7 @@ _0802495A:
 	ldr r1, _080249B4
 	add r1, r8
 	ldrb r1, [r1]
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r1, r0, 16
 	mov r0, r8
@@ -53836,7 +49600,7 @@ _08024B1C:
 	ldr r1, _08024BAC
 	add r1, r8
 	ldrb r1, [r1]
-	bl PokemonGetField
+	bl GetMonData
 	adds r1, r0, 0
 	strb r6, [r5]
 	movs r0, 0x13
@@ -57205,17 +52969,17 @@ _080265E8:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _0802661A
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	bne _0802661A
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _0802661A
 	adds r0, r7, 0x1
@@ -57244,17 +53008,17 @@ _0802663C:
 	adds r4, r2, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _0802666E
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	bne _0802666E
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _0802666E
 	adds r0, r7, 0x1
@@ -57370,17 +53134,17 @@ _0802671A:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _080266DC
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0x1
 	beq _080266DC
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _080266DC
 	b _08026832
@@ -57422,17 +53186,17 @@ _0802677E:
 	adds r4, r2, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _0802677E
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0x1
 	beq _0802677E
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _0802677E
 	b _08026832
@@ -57462,17 +53226,17 @@ _080267E6:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _080267E6
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0x1
 	beq _080267E6
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _080267E6
 _08026832:
@@ -58573,23 +54337,23 @@ _080270F0:
 	adds r4, r1, r0
 	adds r0, r5, 0
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	mov r10, r0
 	adds r0, r5, 0
 	movs r1, 0
-	bl PokemonGetField
+	bl GetMonData
 	mov r9, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	mov r8, r0
 	adds r0, r4, 0
 	movs r1, 0
-	bl PokemonGetField
+	bl GetMonData
 	adds r7, r0, 0
 	ldr r5, _08027154
 	ldrb r0, [r5]
@@ -61659,12 +57423,12 @@ _0802896A:
 	add r4, r9
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r5, r0, 16
 	adds r0, r4, 0
 	movs r1, 0x2E
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r5, 0
@@ -63835,21 +59599,21 @@ _08029AB4:
 	muls r0, r5
 	adds r0, r7, r0
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _08029AF8
 	ldrb r0, [r6]
 	muls r0, r5
 	adds r0, r7, r0
 	movs r1, 0x41
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _08029AF8
 	ldrb r0, [r4]
 	muls r0, r5
 	adds r0, r7, r0
 	movs r1, 0x41
-	bl PokemonGetField
+	bl GetMonData
 	movs r1, 0xCE
 	lsls r1, 1
 	cmp r0, r1
@@ -63858,7 +59622,7 @@ _08029AB4:
 	muls r0, r5
 	adds r0, r7, r0
 	movs r1, 0x37
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _08029B08
 _08029AF8:
@@ -63900,7 +59664,7 @@ _08029B08:
 	muls r0, r4
 	adds r0, r7, r0
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
@@ -63924,7 +59688,7 @@ _08029B08:
 	muls r0, r4
 	adds r0, r7, r0
 	movs r1, 0x38
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 1
 	movs r1, 0x5
 	bl __udivsi3
@@ -65900,12 +61664,12 @@ _0802AAAE:
 	adds r4, r0, r6
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _0802AB54
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl PokemonGetField
+	bl GetMonData
 	movs r1, 0xCE
 	lsls r1, 1
 	cmp r0, r1
@@ -65924,7 +61688,7 @@ _0802AAF8:
 	adds r1, 0xD
 	ldr r0, [sp]
 	add r0, r9
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r0, r4, 0
@@ -66491,17 +62255,17 @@ _0802AF7A:
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r5, r0, 16
 	adds r0, r4, 0
 	movs r1, 0xC
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r6, r0, 16
 	adds r0, r4, 0
 	movs r1, 0x2E
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _0802AFC0
 	lsls r0, r5, 3
@@ -66569,7 +62333,7 @@ _0802B020:
 	lsls r2, 1
 	add r2, r8
 	movs r1, 0xC
-	bl pokemon_setattr
+	bl SetMonData
 _0802B032:
 	adds r7, r4, 0
 	cmp r7, 0x5
@@ -67572,7 +63336,7 @@ _0802B81C:
 	adds r0, r1
 	ldr r2, _0802B87C
 	movs r1, 0x26
-	bl pokemon_setattr
+	bl SetMonData
 	bl calc_player_party_count
 	lsls r0, 24
 	lsrs r0, 24
@@ -67649,7 +63413,7 @@ _0802B8CC:
 	adds r0, r1
 	movs r1, 0x26
 	adds r2, r5, 0
-	bl pokemon_setattr
+	bl SetMonData
 	bl calc_player_party_count
 	lsls r0, 24
 	lsrs r0, 24
@@ -67734,7 +63498,7 @@ sub_802B960: @ 802B960
 	adds r0, r6
 	adds r2, 0x2A
 	movs r1, 0x2
-	bl PokemonGetField
+	bl GetMonData
 	ldr r1, _0802B9DC
 	ldr r0, [r1]
 	adds r0, 0x1
@@ -67969,7 +63733,7 @@ _0802BB8C: .4byte gBattleTerrainTiles_Building
 _0802BB90: .4byte 0x06008000
 _0802BB94: .4byte gBattleTerrainTilemap_Building
 _0802BB98: .4byte 0x0600d000
-_0802BB9C: .4byte gUnknown_08E62AC0
+_0802BB9C: .4byte gBattleTerrainPalette_BattleTower
 _0802BBA0: .4byte REG_BG3CNT
 _0802BBA4: .4byte 0x00005a0b
 _0802BBA8: .4byte 0x030041b0
@@ -68246,7 +64010,7 @@ _0802BD92:
 	add r0, r8
 	movs r1, 0x2
 	ldr r2, _0802BE44
-	bl PokemonGetField
+	bl GetMonData
 	mov r1, r10
 	ldrb r0, [r1]
 	eors r0, r4
@@ -68258,7 +64022,7 @@ _0802BD92:
 	adds r0, r1, 0
 	add r0, r8
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	adds r6, r0, 0
 	lsls r6, 16
 	lsrs r6, 16
@@ -68288,7 +64052,7 @@ _0802BD92:
 	add r0, r8
 	movs r1, 0
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	str r0, [sp]
 	ldr r0, _0802BE48
 	str r0, [sp, 0x4]
@@ -68336,7 +64100,7 @@ _0802BE50:
 	adds r0, r1
 	ldr r2, _0802BEA0
 	movs r1, 0x2
-	bl pokemon_setattr
+	bl SetMonData
 	b _0802BEC0
 	.align 2, 0
 _0802BE88: .4byte 0x03001770
@@ -69130,7 +64894,7 @@ _0802C4C2:
 	adds r2, r1
 	ldrb r1, [r2]
 	adds r1, 0xD
-	bl PokemonGetField
+	bl GetMonData
 	ldr r2, _0802C530
 	lsls r1, r0, 1
 	adds r1, r0
@@ -69271,7 +65035,7 @@ _0802C5E6:
 	adds r2, r1
 	ldrb r1, [r2]
 	adds r1, 0xD
-	bl PokemonGetField
+	bl GetMonData
 	ldr r2, _0802C670
 	lsls r1, r0, 1
 	adds r1, r0
@@ -70073,7 +65837,7 @@ _0802CC66:
 	adds r0, r5
 	adds r1, r6, 0
 	adds r1, 0xD
-	bl PokemonGetField
+	bl GetMonData
 	strh r0, [r4]
 	mov r2, r8
 	ldrb r0, [r2]
@@ -70084,7 +65848,7 @@ _0802CC66:
 	adds r0, r5
 	adds r1, r6, 0
 	adds r1, 0x11
-	bl PokemonGetField
+	bl GetMonData
 	mov r3, r10
 	adds r1, r3, r6
 	strb r0, [r1]
@@ -70103,7 +65867,7 @@ _0802CC66:
 	ldr r1, _0802CE10
 	adds r0, r1
 	movs r1, 0x15
-	bl PokemonGetField
+	bl GetMonData
 	ldr r5, [sp, 0x28]
 	strb r0, [r5]
 	movs r6, 0
@@ -70223,7 +65987,7 @@ _0802CD8C:
 	adds r1, r6, 0
 	adds r1, 0xD
 	adds r2, r4, 0
-	bl pokemon_setattr
+	bl SetMonData
 	mov r3, r9
 	ldrb r0, [r3]
 	lsls r0, 1
@@ -70236,7 +66000,7 @@ _0802CD8C:
 	adds r1, r6, 0
 	adds r1, 0x11
 	adds r2, r5, 0
-	bl pokemon_setattr
+	bl SetMonData
 	adds r5, 0x1
 	adds r4, 0x2
 	adds r6, 0x1
@@ -70254,7 +66018,7 @@ _0802CD8C:
 	adds r0, r1
 	movs r1, 0x15
 	ldr r2, [sp, 0x28]
-	bl pokemon_setattr
+	bl SetMonData
 	b _0802CE1C
 	.align 2, 0
 _0802CDEC: .4byte 0x03001770
@@ -71635,19 +67399,19 @@ _0802D96A:
 	adds r6, r1, r0
 	adds r0, r6, 0
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	adds r5, r0, 0
 	lsls r5, 16
 	lsrs r5, 16
 	adds r0, r6, 0
 	movs r1, 0x38
-	bl PokemonGetField
+	bl GetMonData
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r6, 0
 	movs r1, 0x19
-	bl PokemonGetField
+	bl GetMonData
 	str r0, [sp, 0x4]
 	ldr r3, _0802DA30
 	adds r4, 0x1
@@ -71674,7 +67438,7 @@ _0802D96A:
 	adds r0, r6, 0
 	movs r1, 0x19
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r6, 0
 	bl pokemon_calc_effective_stats
 	ldr r2, [sp]
@@ -71739,7 +67503,7 @@ _0802DA58:
 	add r2, sp, 0x4
 	adds r0, r6, 0
 	movs r1, 0x19
-	bl pokemon_setattr
+	bl SetMonData
 	ldr r1, _0802DA78
 	ldr r3, [sp, 0x8]
 	lsls r0, r3, 2
@@ -71804,19 +67568,19 @@ sub_802DA9C: @ 802DA9C
 	adds r6, r0
 	adds r0, r6, 0
 	movs r1, 0x38
-	bl PokemonGetField
+	bl GetMonData
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r6, 0
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	adds r5, r0, 0
 	lsls r5, 16
 	lsrs r5, 16
 	adds r0, r6, 0
 	movs r1, 0x19
-	bl PokemonGetField
+	bl GetMonData
 	adds r3, r0, 0
 	ldr r6, _0802DB5C
 	lsls r1, r4, 2
@@ -71928,17 +67692,17 @@ _0802DB9C:
 	adds r5, r1, r0
 	adds r0, r5, 0
 	movs r1, 0x38
-	bl PokemonGetField
+	bl GetMonData
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r5, 0
 	movs r1, 0x19
-	bl PokemonGetField
+	bl GetMonData
 	str r0, [sp, 0x4]
 	adds r0, r5, 0
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r3, _0802DC6C
@@ -71967,7 +67731,7 @@ _0802DB9C:
 	adds r0, r5, 0
 	movs r1, 0x19
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r5, 0
 	bl pokemon_calc_effective_stats
 	ldr r2, [sp]
@@ -71999,7 +67763,7 @@ _0802DC7C:
 	add r2, sp, 0x4
 	adds r0, r5, 0
 	movs r1, 0x19
-	bl pokemon_setattr
+	bl SetMonData
 	ldr r1, _0802DCA8
 	lsls r0, r7, 2
 	adds r0, r1
@@ -72099,7 +67863,7 @@ sub_802DD10: @ 802DD10
 	adds r7, r1, r0
 	adds r0, r7, 0
 	movs r1, 0x38
-	bl PokemonGetField
+	bl GetMonData
 	bl battle_type_is_double
 	lsls r0, 24
 	lsrs r0, 24
@@ -72173,7 +67937,7 @@ sub_802DDC4: @ 802DDC4
 	ldr r1, _0802DE04
 	adds r0, r1
 	movs r1, 0x38
-	bl PokemonGetField
+	bl GetMonData
 	ldrb r0, [r4, 0xC]
 	ldr r1, _0802DE08
 	lsls r0, 2
@@ -72221,7 +67985,7 @@ sub_802DE10: @ 802DE10
 	ldr r1, _0802DEA4
 	adds r0, r1
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	bl nullsub_9
@@ -73201,12 +68965,12 @@ _0802E674:
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1]
 	adds r0, r4, 0
 	movs r1, 0xC
-	bl PokemonGetField
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x2E]
 	movs r6, 0
@@ -73234,12 +68998,12 @@ _0802E6C0:
 	adds r1, r6, 0
 	adds r1, 0xD
 	mov r0, r8
-	bl PokemonGetField
+	bl GetMonData
 	strh r0, [r4]
 	adds r1, r6, 0
 	adds r1, 0x11
 	mov r0, r8
-	bl PokemonGetField
+	bl GetMonData
 	mov r2, r9
 	adds r1, r2, r6
 	strb r0, [r1]
@@ -73254,21 +69018,21 @@ _0802E6C0:
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0x15
-	bl PokemonGetField
+	bl GetMonData
 	mov r1, r10
 	strb r0, [r1]
 	adds r0, r4, 0
 	movs r1, 0x20
-	bl PokemonGetField
+	bl GetMonData
 	ldr r2, [sp, 0x80]
 	strb r0, [r2]
 	adds r0, r4, 0
 	movs r1, 0x19
-	bl PokemonGetField
+	bl GetMonData
 	str r0, [sp, 0x44]
 	adds r0, r4, 0
 	movs r1, 0x27
-	bl PokemonGetField
+	bl GetMonData
 	mov r3, sp
 	movs r5, 0x1F
 	ands r0, r5
@@ -73280,7 +69044,7 @@ _0802E6C0:
 	strb r1, [r3, 0x14]
 	adds r0, r4, 0
 	movs r1, 0x28
-	bl PokemonGetField
+	bl GetMonData
 	mov r3, sp
 	movs r6, 0x1F
 	ands r0, r6
@@ -73292,7 +69056,7 @@ _0802E6C0:
 	strh r1, [r3, 0x14]
 	adds r0, r4, 0
 	movs r1, 0x29
-	bl PokemonGetField
+	bl GetMonData
 	mov r3, sp
 	ands r0, r5
 	lsls r0, 2
@@ -73304,7 +69068,7 @@ _0802E6C0:
 	strb r1, [r3, 0x15]
 	adds r0, r4, 0
 	movs r1, 0x2A
-	bl PokemonGetField
+	bl GetMonData
 	movs r1, 0x1F
 	ands r1, r0
 	lsls r1, 15
@@ -73315,7 +69079,7 @@ _0802E6C0:
 	str r0, [sp, 0x14]
 	adds r0, r4, 0
 	movs r1, 0x2B
-	bl PokemonGetField
+	bl GetMonData
 	mov r3, sp
 	ands r0, r6
 	lsls r0, 4
@@ -73326,7 +69090,7 @@ _0802E6C0:
 	strh r1, [r3, 0x16]
 	adds r0, r4, 0
 	movs r1, 0x2C
-	bl PokemonGetField
+	bl GetMonData
 	mov r3, sp
 	ands r0, r5
 	lsls r0, 1
@@ -73338,55 +69102,55 @@ _0802E6C0:
 	strb r1, [r3, 0x17]
 	adds r0, r4, 0
 	movs r1, 0
-	bl PokemonGetField
+	bl GetMonData
 	str r0, [sp, 0x48]
 	adds r0, r4, 0
 	movs r1, 0x37
-	bl PokemonGetField
+	bl GetMonData
 	str r0, [sp, 0x4C]
 	adds r0, r4, 0
 	movs r1, 0x38
-	bl PokemonGetField
+	bl GetMonData
 	ldr r1, [sp, 0x7C]
 	strb r0, [r1]
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x28]
 	adds r0, r4, 0
 	movs r1, 0x3A
-	bl PokemonGetField
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x2C]
 	adds r0, r4, 0
 	movs r1, 0x3B
-	bl PokemonGetField
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x2]
 	adds r0, r4, 0
 	movs r1, 0x3C
-	bl PokemonGetField
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x4]
 	adds r0, r4, 0
 	movs r1, 0x3D
-	bl PokemonGetField
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x6]
 	adds r0, r4, 0
 	movs r1, 0x3E
-	bl PokemonGetField
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x8]
 	adds r0, r4, 0
 	movs r1, 0x3F
-	bl PokemonGetField
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0xA]
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl PokemonGetField
+	bl GetMonData
 	mov r3, sp
 	movs r1, 0x1
 	ands r0, r1
@@ -73399,7 +69163,7 @@ _0802E6C0:
 	strb r1, [r3, 0x17]
 	adds r0, r4, 0
 	movs r1, 0x2E
-	bl PokemonGetField
+	bl GetMonData
 	mov r3, sp
 	lsls r0, 7
 	ldrb r2, [r3, 0x17]
@@ -73409,19 +69173,19 @@ _0802E6C0:
 	strb r1, [r3, 0x17]
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl PokemonGetField
+	bl GetMonData
 	str r0, [sp, 0x54]
 	adds r0, r4, 0
 	movs r1, 0x2
 	ldr r2, [sp, 0x8C]
-	bl PokemonGetField
+	bl GetMonData
 	ldr r0, [sp, 0x84]
 	ldr r1, [sp, 0x8C]
 	bl StringCopy10
 	adds r0, r4, 0
 	movs r1, 0x7
 	ldr r2, [sp, 0x88]
-	bl PokemonGetField
+	bl GetMonData
 	mov r2, sp
 	movs r6, 0
 _0802E878:
@@ -73472,13 +69236,13 @@ _0802E8CE:
 	adds r1, r6, 0
 	adds r1, 0xD
 	adds r0, r4, 0
-	bl PokemonGetField
+	bl GetMonData
 	mov r1, r8
 	strh r0, [r1]
 	adds r1, r6, 0
 	adds r1, 0x11
 	adds r0, r4, 0
-	bl PokemonGetField
+	bl GetMonData
 	mov r2, r10
 	adds r1, r2, r6
 	strb r0, [r1]
@@ -73492,7 +69256,7 @@ _0802E8CE:
 	ldr r1, _0802E91C
 	adds r0, r1
 	movs r1, 0x15
-	bl PokemonGetField
+	bl GetMonData
 	mov r1, r9
 	strb r0, [r1, 0xC]
 	mov r2, r9
@@ -73534,7 +69298,7 @@ _0802E948:
 	adds r1, 0x11
 	mov r2, r8
 	adds r0, r4, r2
-	bl PokemonGetField
+	bl GetMonData
 	adds r1, r7, r6
 	strb r0, [r1]
 	adds r6, 0x1
@@ -73545,7 +69309,7 @@ _0802E948:
 	ldr r1, _0802E974
 	adds r0, r1
 	movs r1, 0x15
-	bl PokemonGetField
+	bl GetMonData
 	adds r1, r7, r6
 	strb r0, [r1]
 	adds r6, 0x1
@@ -73582,7 +69346,7 @@ _0802E9A4:
 	adds r0, r1
 	movs r1, 0x19
 _0802E9AE:
-	bl PokemonGetField
+	bl GetMonData
 	adds r1, r0, 0
 	strb r1, [r7]
 	movs r0, 0xFF
@@ -73715,27 +69479,27 @@ _0802EA94:
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0x27
-	bl PokemonGetField
+	bl GetMonData
 	strb r0, [r7]
 	adds r0, r4, 0
 	movs r1, 0x28
-	bl PokemonGetField
+	bl GetMonData
 	strb r0, [r7, 0x1]
 	adds r0, r4, 0
 	movs r1, 0x29
-	bl PokemonGetField
+	bl GetMonData
 	strb r0, [r7, 0x2]
 	adds r0, r4, 0
 	movs r1, 0x2A
-	bl PokemonGetField
+	bl GetMonData
 	strb r0, [r7, 0x3]
 	adds r0, r4, 0
 	movs r1, 0x2B
-	bl PokemonGetField
+	bl GetMonData
 	strb r0, [r7, 0x4]
 	adds r0, r4, 0
 	movs r1, 0x2C
-	bl PokemonGetField
+	bl GetMonData
 	strb r0, [r7, 0x5]
 	movs r6, 0x6
 	b _0802ECDA
@@ -73820,7 +69584,7 @@ _0802EB64:
 	adds r0, r1
 	movs r1, 0x37
 _0802EB6E:
-	bl PokemonGetField
+	bl GetMonData
 	adds r1, r0, 0
 	strb r1, [r7]
 	movs r0, 0xFF
@@ -73909,7 +69673,7 @@ _0802EC08:
 	adds r0, r1
 	movs r1, 0x3F
 _0802EC12:
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	strb r0, [r7]
@@ -74016,7 +69780,7 @@ _0802ECC8:
 	adds r0, r1
 	movs r1, 0x36
 _0802ECD2:
-	bl PokemonGetField
+	bl GetMonData
 	strb r0, [r7]
 	movs r6, 0x1
 _0802ECDA:
@@ -74251,12 +70015,12 @@ _0802EF04:
 	adds r0, r4, 0
 	movs r1, 0xB
 	adds r2, r6, 0
-	bl pokemon_setattr
+	bl SetMonData
 	adds r2, r6, 0
 	adds r2, 0x2E
 	adds r0, r4, 0
 	movs r1, 0xC
-	bl pokemon_setattr
+	bl SetMonData
 	movs r0, 0
 	mov r8, r0
 	movs r0, 0x3B
@@ -74297,12 +70061,12 @@ _0802EF6A:
 	adds r1, 0xD
 	mov r0, r9
 	adds r2, r4, 0
-	bl pokemon_setattr
+	bl SetMonData
 	mov r1, r8
 	adds r1, 0x11
 	mov r0, r9
 	adds r2, r7, 0
-	bl pokemon_setattr
+	bl SetMonData
 	adds r7, 0x1
 	adds r4, 0x2
 	movs r0, 0x1
@@ -74318,15 +70082,15 @@ _0802EF6A:
 	adds r0, r4, 0
 	movs r1, 0x15
 	mov r2, r10
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x20
 	ldr r2, [sp, 0x20]
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x19
 	ldr r2, [sp, 0x28]
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r0, [r6, 0x14]
 	lsls r0, 27
 	lsrs r0, 27
@@ -74335,7 +70099,7 @@ _0802EF6A:
 	adds r0, r4, 0
 	movs r1, 0x27
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	mov r1, sp
 	ldrh r0, [r6, 0x14]
 	lsls r0, 22
@@ -74344,7 +70108,7 @@ _0802EF6A:
 	adds r0, r4, 0
 	movs r1, 0x28
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	mov r1, sp
 	ldrb r0, [r6, 0x15]
 	lsls r0, 25
@@ -74353,7 +70117,7 @@ _0802EF6A:
 	adds r0, r4, 0
 	movs r1, 0x29
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	mov r1, sp
 	ldr r0, [r6, 0x14]
 	lsls r0, 12
@@ -74362,7 +70126,7 @@ _0802EF6A:
 	adds r0, r4, 0
 	movs r1, 0x2A
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	mov r1, sp
 	ldrh r0, [r6, 0x16]
 	lsls r0, 23
@@ -74371,7 +70135,7 @@ _0802EF6A:
 	adds r0, r4, 0
 	movs r1, 0x2B
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	mov r1, sp
 	ldrb r0, [r6, 0x17]
 	lsls r0, 26
@@ -74380,47 +70144,47 @@ _0802EF6A:
 	adds r0, r4, 0
 	movs r1, 0x2C
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0
 	ldr r2, [sp, 0x2C]
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x37
 	ldr r2, [sp, 0x30]
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x38
 	ldr r2, [sp, 0x1C]
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x39
 	ldr r2, [sp, 0x18]
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x3A
 	ldr r2, [sp, 0x24]
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x3B
 	ldr r2, [sp, 0x4]
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x3C
 	ldr r2, [sp, 0x8]
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x3D
 	ldr r2, [sp, 0xC]
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x3E
 	ldr r2, [sp, 0x10]
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x3F
 	ldr r2, [sp, 0x14]
-	bl pokemon_setattr
+	bl SetMonData
 	b _0802F796
 	.align 2, 0
 _0802F098: .4byte 0x03004360
@@ -74434,7 +70198,7 @@ _0802F09C:
 	lsls r2, 9
 	adds r2, r7
 	movs r1, 0xB
-	bl pokemon_setattr
+	bl SetMonData
 	b _0802F796
 	.align 2, 0
 _0802F0B4: .4byte 0x03004360
@@ -74449,7 +70213,7 @@ _0802F0BC:
 	lsls r2, 9
 	adds r2, r7
 	movs r1, 0xC
-	bl pokemon_setattr
+	bl SetMonData
 	b _0802F796
 	.align 2, 0
 _0802F0D4: .4byte 0x03004360
@@ -74473,12 +70237,12 @@ _0802F0F6:
 	adds r1, 0xD
 	adds r0, r7, 0
 	adds r2, r4, 0
-	bl pokemon_setattr
+	bl SetMonData
 	mov r1, r8
 	adds r1, 0x11
 	adds r0, r7, 0
 	adds r2, r6, 0
-	bl pokemon_setattr
+	bl SetMonData
 	adds r6, 0x1
 	adds r4, 0x2
 	movs r0, 0x1
@@ -74492,7 +70256,7 @@ _0802F0F6:
 	adds r0, r1
 	movs r1, 0x15
 	mov r2, r9
-	bl pokemon_setattr
+	bl SetMonData
 	b _0802F796
 	.align 2, 0
 _0802F130: .4byte 0x03004360
@@ -74526,35 +70290,35 @@ _0802F15C:
 	adds r2, r7
 	adds r0, r4, 0
 	movs r1, 0x11
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r2, [r5]
 	lsls r2, 9
 	adds r0, r7, 0x1
 	adds r2, r0
 	adds r0, r4, 0
 	movs r1, 0x12
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r2, [r5]
 	lsls r2, 9
 	adds r0, r7, 0x2
 	adds r2, r0
 	adds r0, r4, 0
 	movs r1, 0x13
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r2, [r5]
 	lsls r2, 9
 	adds r0, r7, 0x3
 	adds r2, r0
 	adds r0, r4, 0
 	movs r1, 0x14
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r2, [r5]
 	lsls r2, 9
 	adds r0, r7, 0x4
 	adds r2, r0
 	adds r0, r4, 0
 	movs r1, 0x15
-	bl pokemon_setattr
+	bl SetMonData
 	b _0802F796
 	.align 2, 0
 _0802F1B8: .4byte 0x03004360
@@ -74575,7 +70339,7 @@ _0802F1C0:
 _0802F1D8:
 	adds r3, 0x3
 	adds r2, r3
-	bl pokemon_setattr
+	bl SetMonData
 	b _0802F796
 	.align 2, 0
 _0802F1E4: .4byte 0x03004360
@@ -74591,7 +70355,7 @@ _0802F1F0:
 	lsls r2, 9
 	adds r2, r7
 	movs r1, 0x1
-	bl pokemon_setattr
+	bl SetMonData
 	b _0802F796
 	.align 2, 0
 _0802F208: .4byte 0x03004360
@@ -74606,7 +70370,7 @@ _0802F210:
 	lsls r2, 9
 	adds r2, r7
 	movs r1, 0x19
-	bl pokemon_setattr
+	bl SetMonData
 	b _0802F796
 	.align 2, 0
 _0802F228: .4byte 0x03004360
@@ -74621,7 +70385,7 @@ _0802F230:
 	lsls r2, 9
 	adds r2, r7
 	movs r1, 0x1A
-	bl pokemon_setattr
+	bl SetMonData
 	b _0802F796
 	.align 2, 0
 _0802F248: .4byte 0x03004360
@@ -74636,7 +70400,7 @@ _0802F250:
 	lsls r2, 9
 	adds r2, r7
 	movs r1, 0x1B
-	bl pokemon_setattr
+	bl SetMonData
 	b _0802F796
 	.align 2, 0
 _0802F268: .4byte 0x03004360
@@ -74651,7 +70415,7 @@ _0802F270:
 	lsls r2, 9
 	adds r2, r7
 	movs r1, 0x1C
-	bl pokemon_setattr
+	bl SetMonData
 	b _0802F796
 	.align 2, 0
 _0802F288: .4byte 0x03004360
@@ -74666,7 +70430,7 @@ _0802F290:
 	lsls r2, 9
 	adds r2, r7
 	movs r1, 0x1D
-	bl pokemon_setattr
+	bl SetMonData
 	b _0802F796
 	.align 2, 0
 _0802F2A8: .4byte 0x03004360
@@ -74681,7 +70445,7 @@ _0802F2B0:
 	lsls r2, 9
 	adds r2, r7
 	movs r1, 0x1E
-	bl pokemon_setattr
+	bl SetMonData
 	b _0802F796
 	.align 2, 0
 _0802F2C8: .4byte 0x03004360
@@ -74696,7 +70460,7 @@ _0802F2D0:
 	lsls r2, 9
 	adds r2, r7
 	movs r1, 0x1F
-	bl pokemon_setattr
+	bl SetMonData
 	b _0802F796
 	.align 2, 0
 _0802F2E8: .4byte 0x03004360
@@ -74711,7 +70475,7 @@ _0802F2F0:
 	lsls r2, 9
 	adds r2, r7
 	movs r1, 0x20
-	bl pokemon_setattr
+	bl SetMonData
 	b _0802F796
 	.align 2, 0
 _0802F308: .4byte 0x03004360
@@ -74726,7 +70490,7 @@ _0802F310:
 	lsls r2, 9
 	adds r2, r7
 	movs r1, 0x22
-	bl pokemon_setattr
+	bl SetMonData
 	b _0802F796
 	.align 2, 0
 _0802F328: .4byte 0x03004360
@@ -74741,7 +70505,7 @@ _0802F330:
 	lsls r2, 9
 	adds r2, r7
 	movs r1, 0x23
-	bl pokemon_setattr
+	bl SetMonData
 	b _0802F796
 	.align 2, 0
 _0802F348: .4byte 0x03004360
@@ -74756,7 +70520,7 @@ _0802F350:
 	lsls r2, 9
 	adds r2, r7
 	movs r1, 0x24
-	bl pokemon_setattr
+	bl SetMonData
 	b _0802F796
 	.align 2, 0
 _0802F368: .4byte 0x03004360
@@ -74771,7 +70535,7 @@ _0802F370:
 	lsls r2, 9
 	adds r2, r7
 	movs r1, 0x25
-	bl pokemon_setattr
+	bl SetMonData
 	b _0802F796
 	.align 2, 0
 _0802F388: .4byte 0x03004360
@@ -74786,7 +70550,7 @@ _0802F390:
 	lsls r2, 9
 	adds r2, r7
 	movs r1, 0x26
-	bl pokemon_setattr
+	bl SetMonData
 	b _0802F796
 	.align 2, 0
 _0802F3A8: .4byte 0x03004360
@@ -74803,35 +70567,35 @@ _0802F3B0:
 	adds r2, r7
 	adds r0, r4, 0
 	movs r1, 0x27
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r2, [r5]
 	lsls r2, 9
 	adds r0, r7, 0x1
 	adds r2, r0
 	adds r0, r4, 0
 	movs r1, 0x28
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r2, [r5]
 	lsls r2, 9
 	adds r0, r7, 0x2
 	adds r2, r0
 	adds r0, r4, 0
 	movs r1, 0x29
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r2, [r5]
 	lsls r2, 9
 	adds r0, r7, 0x3
 	adds r2, r0
 	adds r0, r4, 0
 	movs r1, 0x2A
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r2, [r5]
 	lsls r2, 9
 	adds r0, r7, 0x4
 	adds r2, r0
 	adds r0, r4, 0
 	movs r1, 0x2B
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r2, [r5]
 	lsls r2, 9
 	adds r0, r7, 0x5
@@ -74851,7 +70615,7 @@ _0802F420:
 	lsls r2, 9
 	adds r2, r7
 	movs r1, 0x27
-	bl pokemon_setattr
+	bl SetMonData
 	b _0802F796
 	.align 2, 0
 _0802F438: .4byte 0x03004360
@@ -74866,7 +70630,7 @@ _0802F440:
 	lsls r2, 9
 	adds r2, r7
 	movs r1, 0x28
-	bl pokemon_setattr
+	bl SetMonData
 	b _0802F796
 	.align 2, 0
 _0802F458: .4byte 0x03004360
@@ -74881,7 +70645,7 @@ _0802F460:
 	lsls r2, 9
 	adds r2, r7
 	movs r1, 0x29
-	bl pokemon_setattr
+	bl SetMonData
 	b _0802F796
 	.align 2, 0
 _0802F478: .4byte 0x03004360
@@ -74896,7 +70660,7 @@ _0802F480:
 	lsls r2, 9
 	adds r2, r7
 	movs r1, 0x2A
-	bl pokemon_setattr
+	bl SetMonData
 	b _0802F796
 	.align 2, 0
 _0802F498: .4byte 0x03004360
@@ -74911,7 +70675,7 @@ _0802F4A0:
 	lsls r2, 9
 	adds r2, r7
 	movs r1, 0x2B
-	bl pokemon_setattr
+	bl SetMonData
 	b _0802F796
 	.align 2, 0
 _0802F4B8: .4byte 0x03004360
@@ -74927,7 +70691,7 @@ _0802F4C0:
 	adds r2, r7
 _0802F4D0:
 	movs r1, 0x2C
-	bl pokemon_setattr
+	bl SetMonData
 	b _0802F796
 	.align 2, 0
 _0802F4D8: .4byte 0x03004360
@@ -74942,7 +70706,7 @@ _0802F4E0:
 	lsls r2, 9
 	adds r2, r7
 	movs r1, 0
-	bl pokemon_setattr
+	bl SetMonData
 	b _0802F796
 	.align 2, 0
 _0802F4F8: .4byte 0x03004360
@@ -74957,7 +70721,7 @@ _0802F500:
 	lsls r2, 9
 	adds r2, r7
 	movs r1, 0x9
-	bl pokemon_setattr
+	bl SetMonData
 	b _0802F796
 	.align 2, 0
 _0802F518: .4byte 0x03004360
@@ -74972,7 +70736,7 @@ _0802F520:
 	lsls r2, 9
 	adds r2, r7
 	movs r1, 0x37
-	bl pokemon_setattr
+	bl SetMonData
 	b _0802F796
 	.align 2, 0
 _0802F538: .4byte 0x03004360
@@ -74987,7 +70751,7 @@ _0802F540:
 	lsls r2, 9
 	adds r2, r7
 	movs r1, 0x38
-	bl pokemon_setattr
+	bl SetMonData
 	b _0802F796
 	.align 2, 0
 _0802F558: .4byte 0x03004360
@@ -75002,7 +70766,7 @@ _0802F560:
 	lsls r2, 9
 	adds r2, r7
 	movs r1, 0x39
-	bl pokemon_setattr
+	bl SetMonData
 	b _0802F796
 	.align 2, 0
 _0802F578: .4byte 0x03004360
@@ -75017,7 +70781,7 @@ _0802F580:
 	lsls r2, 9
 	adds r2, r7
 	movs r1, 0x3A
-	bl pokemon_setattr
+	bl SetMonData
 	b _0802F796
 	.align 2, 0
 _0802F598: .4byte 0x03004360
@@ -75032,7 +70796,7 @@ _0802F5A0:
 	lsls r2, 9
 	adds r2, r7
 	movs r1, 0x3B
-	bl pokemon_setattr
+	bl SetMonData
 	b _0802F796
 	.align 2, 0
 _0802F5B8: .4byte 0x03004360
@@ -75047,7 +70811,7 @@ _0802F5C0:
 	lsls r2, 9
 	adds r2, r7
 	movs r1, 0x3C
-	bl pokemon_setattr
+	bl SetMonData
 	b _0802F796
 	.align 2, 0
 _0802F5D8: .4byte 0x03004360
@@ -75062,7 +70826,7 @@ _0802F5E0:
 	lsls r2, 9
 	adds r2, r7
 	movs r1, 0x3D
-	bl pokemon_setattr
+	bl SetMonData
 	b _0802F796
 	.align 2, 0
 _0802F5F8: .4byte 0x03004360
@@ -75077,7 +70841,7 @@ _0802F600:
 	lsls r2, 9
 	adds r2, r7
 	movs r1, 0x3E
-	bl pokemon_setattr
+	bl SetMonData
 	b _0802F796
 	.align 2, 0
 _0802F618: .4byte 0x03004360
@@ -75092,7 +70856,7 @@ _0802F620:
 	lsls r2, 9
 	adds r2, r7
 	movs r1, 0x3F
-	bl pokemon_setattr
+	bl SetMonData
 	b _0802F796
 	.align 2, 0
 _0802F638: .4byte 0x03004360
@@ -75107,7 +70871,7 @@ _0802F640:
 	lsls r2, 9
 	adds r2, r7
 	movs r1, 0x16
-	bl pokemon_setattr
+	bl SetMonData
 	b _0802F796
 	.align 2, 0
 _0802F658: .4byte 0x03004360
@@ -75122,7 +70886,7 @@ _0802F660:
 	lsls r2, 9
 	adds r2, r7
 	movs r1, 0x17
-	bl pokemon_setattr
+	bl SetMonData
 	b _0802F796
 	.align 2, 0
 _0802F678: .4byte 0x03004360
@@ -75137,7 +70901,7 @@ _0802F680:
 	lsls r2, 9
 	adds r2, r7
 	movs r1, 0x18
-	bl pokemon_setattr
+	bl SetMonData
 	b _0802F796
 	.align 2, 0
 _0802F698: .4byte 0x03004360
@@ -75152,7 +70916,7 @@ _0802F6A0:
 	lsls r2, 9
 	adds r2, r7
 	movs r1, 0x21
-	bl pokemon_setattr
+	bl SetMonData
 	b _0802F796
 	.align 2, 0
 _0802F6B8: .4byte 0x03004360
@@ -75167,7 +70931,7 @@ _0802F6C0:
 	lsls r2, 9
 	adds r2, r7
 	movs r1, 0x2F
-	bl pokemon_setattr
+	bl SetMonData
 	b _0802F796
 	.align 2, 0
 _0802F6D8: .4byte 0x03004360
@@ -75182,7 +70946,7 @@ _0802F6E0:
 	lsls r2, 9
 	adds r2, r7
 	movs r1, 0x30
-	bl pokemon_setattr
+	bl SetMonData
 	b _0802F796
 	.align 2, 0
 _0802F6F8: .4byte 0x03004360
@@ -75197,7 +70961,7 @@ _0802F700:
 	lsls r2, 9
 	adds r2, r7
 	movs r1, 0x32
-	bl pokemon_setattr
+	bl SetMonData
 	b _0802F796
 	.align 2, 0
 _0802F718: .4byte 0x03004360
@@ -75212,7 +70976,7 @@ _0802F720:
 	lsls r2, 9
 	adds r2, r7
 	movs r1, 0x33
-	bl pokemon_setattr
+	bl SetMonData
 	b _0802F796
 	.align 2, 0
 _0802F738: .4byte 0x03004360
@@ -75227,7 +70991,7 @@ _0802F740:
 	lsls r2, 9
 	adds r2, r7
 	movs r1, 0x34
-	bl pokemon_setattr
+	bl SetMonData
 	b _0802F796
 	.align 2, 0
 _0802F758: .4byte 0x03004360
@@ -75242,7 +71006,7 @@ _0802F760:
 	lsls r2, 9
 	adds r2, r7
 	movs r1, 0x35
-	bl pokemon_setattr
+	bl SetMonData
 	b _0802F796
 	.align 2, 0
 _0802F778: .4byte 0x03004360
@@ -75257,7 +71021,7 @@ _0802F780:
 	lsls r2, 9
 	adds r2, r7
 	movs r1, 0x36
-	bl pokemon_setattr
+	bl SetMonData
 _0802F796:
 	ldr r2, _0802F7C8
 	ldr r0, _0802F7C4
@@ -75483,7 +71247,7 @@ sub_802F934: @ 802F934
 	ldr r1, _0802FA80
 	adds r0, r1
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	mov r8, r0
 	lsls r0, 16
 	lsrs r0, 16
@@ -77108,7 +72872,7 @@ sub_8030698: @ 8030698
 	ldr r4, _08030720
 	adds r0, r4
 	movs r1, 0x3A
-	bl PokemonGetField
+	bl GetMonData
 	mov r8, r0
 	mov r1, r9
 	ldrb r0, [r1]
@@ -77118,7 +72882,7 @@ sub_8030698: @ 8030698
 	muls r0, r5
 	adds r0, r4
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	adds r3, r0, 0
 	mov r1, r9
 	ldrb r0, [r1]
@@ -77146,7 +72910,7 @@ _08030728:
 	ldr r1, _08030784
 	adds r0, r1
 	movs r1, 0x3A
-	bl PokemonGetField
+	bl GetMonData
 	adds r2, r0, 0
 	mov r1, r9
 	ldrb r0, [r1]
@@ -77204,7 +72968,7 @@ sub_8030798: @ 8030798
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x38
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0x63
 	bls _080307D0
 	bl dp01_tbl1_exec_completed
@@ -77218,7 +72982,7 @@ _080307D0:
 	bl load_gfxc_health_bar
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	ldrb r1, [r6]
 	lsls r1, 9
 	adds r0, r5, 0x2
@@ -77383,7 +73147,7 @@ sub_8030910: @ 8030910
 	ldr r5, _08030974
 	adds r0, r5
 	movs r1, 0x37
-	bl PokemonGetField
+	bl GetMonData
 	ldr r2, _08030978
 	ldrb r1, [r4]
 	lsls r1, 9
@@ -77401,7 +73165,7 @@ sub_8030910: @ 8030910
 	adds r0, r5
 	movs r1, 0x37
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	bl dp01_tbl1_exec_completed
 	add sp, 0x4
 	pop {r3}
@@ -77808,7 +73572,7 @@ sub_8030C4C: @ 8030C4C
 	ldr r1, _08030C88
 	adds r0, r1
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x19
@@ -79236,7 +75000,7 @@ sub_8031794: @ 8031794
 	lsrs r1, 24
 	mov r9, r1
 	movs r1, 0
-	bl PokemonGetField
+	bl GetMonData
 	str r0, [sp, 0xC]
 	mov r0, r9
 	lsls r1, r0, 2
@@ -79247,7 +75011,7 @@ sub_8031794: @ 8031794
 	bne _080317D4
 	mov r0, r8
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r6, r0, 16
 	ldr r7, [sp, 0xC]
@@ -79262,7 +75026,7 @@ _080317D4:
 _080317DC:
 	mov r0, r8
 	movs r1, 0x1
-	bl PokemonGetField
+	bl GetMonData
 	mov r10, r0
 	mov r0, r9
 	bl battle_get_per_side_status
@@ -79400,7 +75164,7 @@ sub_80318FC: @ 80318FC
 	lsrs r1, 24
 	mov r9, r1
 	movs r1, 0
-	bl PokemonGetField
+	bl GetMonData
 	str r0, [sp, 0xC]
 	mov r0, r9
 	lsls r1, r0, 2
@@ -79411,7 +75175,7 @@ sub_80318FC: @ 80318FC
 	bne _0803193C
 	mov r0, r8
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r6, r0, 16
 	ldr r7, [sp, 0xC]
@@ -79426,7 +75190,7 @@ _0803193C:
 _08031944:
 	mov r0, r8
 	movs r1, 0x1
-	bl PokemonGetField
+	bl GetMonData
 	mov r10, r0
 	mov r0, r9
 	bl battle_get_per_side_status
@@ -80396,7 +76160,7 @@ _08032104:
 _08032114:
 	adds r0, r1
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r7, r0, 16
 	mov r0, r8
@@ -80414,13 +76178,13 @@ _08032114:
 	ldr r5, _08032190
 	adds r0, r5
 	movs r1, 0
-	bl PokemonGetField
+	bl GetMonData
 	mov r9, r0
 	ldrh r0, [r4]
 	muls r0, r6
 	adds r0, r5
 	movs r1, 0x1
-	bl PokemonGetField
+	bl GetMonData
 	adds r6, r0, 0
 	lsls r0, r7, 3
 	ldr r1, _08032194
@@ -80468,13 +76232,13 @@ _080321A4:
 	ldr r5, _0803230C
 	adds r0, r5
 	movs r1, 0
-	bl PokemonGetField
+	bl GetMonData
 	mov r9, r0
 	ldrh r0, [r4]
 	muls r0, r6
 	adds r0, r5
 	movs r1, 0x1
-	bl PokemonGetField
+	bl GetMonData
 	adds r6, r0, 0
 	lsls r0, r7, 3
 	ldr r1, _08032310
@@ -80675,7 +76439,7 @@ _08032376:
 	ldr r0, _08032384
 	b _08032396
 	.align 2, 0
-_08032384: .4byte gUnknown_08D2D4CC
+_08032384: .4byte gSubstituteDollTilemap
 _08032388:
 	adds r0, r5, 0
 	bl battle_side_get_owner
@@ -80691,7 +76455,7 @@ _08032396:
 	bl LZDecompressVram
 	b _080323BA
 	.align 2, 0
-_080323A4: .4byte gUnknown_08D2D28C
+_080323A4: .4byte gSubstituteDollGfx
 _080323A8: .4byte gUnknown_081FAF4C
 _080323AC:
 	ldr r0, _080323F4
@@ -80731,9 +76495,9 @@ _080323D4:
 	bl LoadCompressedPalette
 	b _08032456
 	.align 2, 0
-_080323F4: .4byte gUnknown_08D2D4CC
+_080323F4: .4byte gSubstituteDollTilemap
 _080323F8: .4byte gUnknown_081FAF4C
-_080323FC: .4byte gUnknown_08D2D268
+_080323FC: .4byte gSubstituteDollPal
 _08032400: .4byte 0x040000d4
 _08032404: .4byte 0x84000200
 _08032408:
@@ -80871,13 +76635,13 @@ sub_80324F8: @ 80324F8
 	lsrs r6, r1, 24
 	adds r7, r6, 0
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
 	movs r1, 0x3A
-	bl PokemonGetField
+	bl GetMonData
 	adds r1, r0, 0
 	lsls r4, 16
 	asrs r4, 16
@@ -81001,13 +76765,13 @@ unref_sub_8032604: @ 8032604
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
 	movs r1, 0x3A
-	bl PokemonGetField
+	bl GetMonData
 	adds r1, r0, 0
 	lsls r4, 16
 	asrs r4, 16
@@ -81069,7 +76833,7 @@ sub_8032638: @ 8032638
 	adds r4, r0, r6
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _080326AA
 	adds r0, r4, 0
@@ -81085,7 +76849,7 @@ _080326AA:
 	adds r4, r0, r6
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _080326CE
 	adds r0, r4, 0
@@ -82182,7 +77946,7 @@ _08032EC6:
 	muls r0, r6
 	adds r0, r5
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
@@ -82233,7 +77997,7 @@ _08032F58:
 	adds r0, r1, 0
 	adds r0, r6
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
@@ -82791,7 +78555,7 @@ _08033402:
 	ldr r1, _0803347C
 	adds r0, r1
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
@@ -83054,12 +78818,12 @@ _080336C8:
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1]
 	adds r0, r4, 0
 	movs r1, 0xC
-	bl PokemonGetField
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x2E]
 	movs r6, 0
@@ -83087,12 +78851,12 @@ _08033714:
 	adds r1, r6, 0
 	adds r1, 0xD
 	mov r0, r8
-	bl PokemonGetField
+	bl GetMonData
 	strh r0, [r4]
 	adds r1, r6, 0
 	adds r1, 0x11
 	mov r0, r8
-	bl PokemonGetField
+	bl GetMonData
 	mov r2, r9
 	adds r1, r2, r6
 	strb r0, [r1]
@@ -83107,21 +78871,21 @@ _08033714:
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0x15
-	bl PokemonGetField
+	bl GetMonData
 	mov r1, r10
 	strb r0, [r1]
 	adds r0, r4, 0
 	movs r1, 0x20
-	bl PokemonGetField
+	bl GetMonData
 	ldr r2, [sp, 0x80]
 	strb r0, [r2]
 	adds r0, r4, 0
 	movs r1, 0x19
-	bl PokemonGetField
+	bl GetMonData
 	str r0, [sp, 0x44]
 	adds r0, r4, 0
 	movs r1, 0x27
-	bl PokemonGetField
+	bl GetMonData
 	mov r3, sp
 	movs r5, 0x1F
 	ands r0, r5
@@ -83133,7 +78897,7 @@ _08033714:
 	strb r1, [r3, 0x14]
 	adds r0, r4, 0
 	movs r1, 0x28
-	bl PokemonGetField
+	bl GetMonData
 	mov r3, sp
 	movs r6, 0x1F
 	ands r0, r6
@@ -83145,7 +78909,7 @@ _08033714:
 	strh r1, [r3, 0x14]
 	adds r0, r4, 0
 	movs r1, 0x29
-	bl PokemonGetField
+	bl GetMonData
 	mov r3, sp
 	ands r0, r5
 	lsls r0, 2
@@ -83157,7 +78921,7 @@ _08033714:
 	strb r1, [r3, 0x15]
 	adds r0, r4, 0
 	movs r1, 0x2A
-	bl PokemonGetField
+	bl GetMonData
 	movs r1, 0x1F
 	ands r1, r0
 	lsls r1, 15
@@ -83168,7 +78932,7 @@ _08033714:
 	str r0, [sp, 0x14]
 	adds r0, r4, 0
 	movs r1, 0x2B
-	bl PokemonGetField
+	bl GetMonData
 	mov r3, sp
 	ands r0, r6
 	lsls r0, 4
@@ -83179,7 +78943,7 @@ _08033714:
 	strh r1, [r3, 0x16]
 	adds r0, r4, 0
 	movs r1, 0x2C
-	bl PokemonGetField
+	bl GetMonData
 	mov r3, sp
 	ands r0, r5
 	lsls r0, 1
@@ -83191,55 +78955,55 @@ _08033714:
 	strb r1, [r3, 0x17]
 	adds r0, r4, 0
 	movs r1, 0
-	bl PokemonGetField
+	bl GetMonData
 	str r0, [sp, 0x48]
 	adds r0, r4, 0
 	movs r1, 0x37
-	bl PokemonGetField
+	bl GetMonData
 	str r0, [sp, 0x4C]
 	adds r0, r4, 0
 	movs r1, 0x38
-	bl PokemonGetField
+	bl GetMonData
 	ldr r1, [sp, 0x7C]
 	strb r0, [r1]
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x28]
 	adds r0, r4, 0
 	movs r1, 0x3A
-	bl PokemonGetField
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x2C]
 	adds r0, r4, 0
 	movs r1, 0x3B
-	bl PokemonGetField
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x2]
 	adds r0, r4, 0
 	movs r1, 0x3C
-	bl PokemonGetField
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x4]
 	adds r0, r4, 0
 	movs r1, 0x3D
-	bl PokemonGetField
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x6]
 	adds r0, r4, 0
 	movs r1, 0x3E
-	bl PokemonGetField
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x8]
 	adds r0, r4, 0
 	movs r1, 0x3F
-	bl PokemonGetField
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0xA]
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl PokemonGetField
+	bl GetMonData
 	mov r3, sp
 	movs r1, 0x1
 	ands r0, r1
@@ -83252,7 +79016,7 @@ _08033714:
 	strb r1, [r3, 0x17]
 	adds r0, r4, 0
 	movs r1, 0x2E
-	bl PokemonGetField
+	bl GetMonData
 	mov r3, sp
 	lsls r0, 7
 	ldrb r2, [r3, 0x17]
@@ -83262,19 +79026,19 @@ _08033714:
 	strb r1, [r3, 0x17]
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl PokemonGetField
+	bl GetMonData
 	str r0, [sp, 0x54]
 	adds r0, r4, 0
 	movs r1, 0x2
 	ldr r2, [sp, 0x8C]
-	bl PokemonGetField
+	bl GetMonData
 	ldr r0, [sp, 0x84]
 	ldr r1, [sp, 0x8C]
 	bl StringCopy10
 	adds r0, r4, 0
 	movs r1, 0x7
 	ldr r2, [sp, 0x88]
-	bl PokemonGetField
+	bl GetMonData
 	mov r2, sp
 	movs r6, 0
 _080338CC:
@@ -83325,13 +79089,13 @@ _08033922:
 	adds r1, r6, 0
 	adds r1, 0xD
 	adds r0, r4, 0
-	bl PokemonGetField
+	bl GetMonData
 	mov r1, r8
 	strh r0, [r1]
 	adds r1, r6, 0
 	adds r1, 0x11
 	adds r0, r4, 0
-	bl PokemonGetField
+	bl GetMonData
 	mov r2, r10
 	adds r1, r2, r6
 	strb r0, [r1]
@@ -83345,7 +79109,7 @@ _08033922:
 	ldr r1, _08033970
 	adds r0, r1
 	movs r1, 0x15
-	bl PokemonGetField
+	bl GetMonData
 	mov r1, r9
 	strb r0, [r1, 0xC]
 	mov r2, r9
@@ -83387,7 +79151,7 @@ _0803399C:
 	adds r1, 0x11
 	mov r2, r8
 	adds r0, r4, r2
-	bl PokemonGetField
+	bl GetMonData
 	adds r1, r7, r6
 	strb r0, [r1]
 	adds r6, 0x1
@@ -83398,7 +79162,7 @@ _0803399C:
 	ldr r1, _080339C8
 	adds r0, r1
 	movs r1, 0x15
-	bl PokemonGetField
+	bl GetMonData
 	adds r1, r7, r6
 	strb r0, [r1]
 	adds r6, 0x1
@@ -83435,7 +79199,7 @@ _080339F8:
 	adds r0, r1
 	movs r1, 0x19
 _08033A02:
-	bl PokemonGetField
+	bl GetMonData
 	adds r1, r0, 0
 	strb r1, [r7]
 	movs r0, 0xFF
@@ -83568,27 +79332,27 @@ _08033AE8:
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0x27
-	bl PokemonGetField
+	bl GetMonData
 	strb r0, [r7]
 	adds r0, r4, 0
 	movs r1, 0x28
-	bl PokemonGetField
+	bl GetMonData
 	strb r0, [r7, 0x1]
 	adds r0, r4, 0
 	movs r1, 0x29
-	bl PokemonGetField
+	bl GetMonData
 	strb r0, [r7, 0x2]
 	adds r0, r4, 0
 	movs r1, 0x2A
-	bl PokemonGetField
+	bl GetMonData
 	strb r0, [r7, 0x3]
 	adds r0, r4, 0
 	movs r1, 0x2B
-	bl PokemonGetField
+	bl GetMonData
 	strb r0, [r7, 0x4]
 	adds r0, r4, 0
 	movs r1, 0x2C
-	bl PokemonGetField
+	bl GetMonData
 	strb r0, [r7, 0x5]
 	movs r6, 0x6
 	b _08033D2E
@@ -83673,7 +79437,7 @@ _08033BB8:
 	adds r0, r1
 	movs r1, 0x37
 _08033BC2:
-	bl PokemonGetField
+	bl GetMonData
 	adds r1, r0, 0
 	strb r1, [r7]
 	movs r0, 0xFF
@@ -83762,7 +79526,7 @@ _08033C5C:
 	adds r0, r1
 	movs r1, 0x3F
 _08033C66:
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	strb r0, [r7]
@@ -83869,7 +79633,7 @@ _08033D1C:
 	adds r0, r1
 	movs r1, 0x36
 _08033D26:
-	bl PokemonGetField
+	bl GetMonData
 	strb r0, [r7]
 	movs r6, 0x1
 _08033D2E:
@@ -84105,12 +79869,12 @@ _08033F58:
 	adds r0, r4, 0
 	movs r1, 0xB
 	adds r2, r7, 0
-	bl pokemon_setattr
+	bl SetMonData
 	adds r2, r7, 0
 	adds r2, 0x2E
 	adds r0, r4, 0
 	movs r1, 0xC
-	bl pokemon_setattr
+	bl SetMonData
 	movs r0, 0
 	mov r8, r0
 	movs r0, 0x3B
@@ -84151,12 +79915,12 @@ _08033FBE:
 	adds r1, 0xD
 	mov r0, r9
 	adds r2, r4, 0
-	bl pokemon_setattr
+	bl SetMonData
 	mov r1, r8
 	adds r1, 0x11
 	mov r0, r9
 	adds r2, r6, 0
-	bl pokemon_setattr
+	bl SetMonData
 	adds r6, 0x1
 	adds r4, 0x2
 	movs r0, 0x1
@@ -84172,15 +79936,15 @@ _08033FBE:
 	adds r0, r4, 0
 	movs r1, 0x15
 	mov r2, r10
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x20
 	ldr r2, [sp, 0x20]
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x19
 	ldr r2, [sp, 0x28]
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r0, [r7, 0x14]
 	lsls r0, 27
 	lsrs r0, 27
@@ -84189,7 +79953,7 @@ _08033FBE:
 	adds r0, r4, 0
 	movs r1, 0x27
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	mov r1, sp
 	ldrh r0, [r7, 0x14]
 	lsls r0, 22
@@ -84198,7 +79962,7 @@ _08033FBE:
 	adds r0, r4, 0
 	movs r1, 0x28
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	mov r1, sp
 	ldrb r0, [r7, 0x15]
 	lsls r0, 25
@@ -84207,7 +79971,7 @@ _08033FBE:
 	adds r0, r4, 0
 	movs r1, 0x29
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	mov r1, sp
 	ldr r0, [r7, 0x14]
 	lsls r0, 12
@@ -84216,7 +79980,7 @@ _08033FBE:
 	adds r0, r4, 0
 	movs r1, 0x2A
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	mov r1, sp
 	ldrh r0, [r7, 0x16]
 	lsls r0, 23
@@ -84225,7 +79989,7 @@ _08033FBE:
 	adds r0, r4, 0
 	movs r1, 0x2B
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	mov r1, sp
 	ldrb r0, [r7, 0x17]
 	lsls r0, 26
@@ -84234,47 +79998,47 @@ _08033FBE:
 	adds r0, r4, 0
 	movs r1, 0x2C
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0
 	ldr r2, [sp, 0x2C]
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x37
 	ldr r2, [sp, 0x30]
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x38
 	ldr r2, [sp, 0x1C]
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x39
 	ldr r2, [sp, 0x18]
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x3A
 	ldr r2, [sp, 0x24]
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x3B
 	ldr r2, [sp, 0x4]
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x3C
 	ldr r2, [sp, 0x8]
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x3D
 	ldr r2, [sp, 0xC]
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x3E
 	ldr r2, [sp, 0x10]
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x3F
 	ldr r2, [sp, 0x14]
-	bl pokemon_setattr
+	bl SetMonData
 	b _08034730
 	.align 2, 0
 _080340EC: .4byte 0x030045c0
@@ -84287,7 +80051,7 @@ _080340F0:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0xB
-	bl pokemon_setattr
+	bl SetMonData
 	b _08034730
 	.align 2, 0
 _08034108: .4byte 0x030045c0
@@ -84300,7 +80064,7 @@ _0803410C:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0xC
-	bl pokemon_setattr
+	bl SetMonData
 	b _08034730
 	.align 2, 0
 _08034124: .4byte 0x030045c0
@@ -84322,12 +80086,12 @@ _08034140:
 	adds r1, 0xD
 	adds r0, r7, 0
 	adds r2, r4, 0
-	bl pokemon_setattr
+	bl SetMonData
 	mov r1, r8
 	adds r1, 0x11
 	adds r0, r7, 0
 	adds r2, r6, 0
-	bl pokemon_setattr
+	bl SetMonData
 	adds r6, 0x1
 	adds r4, 0x2
 	movs r0, 0x1
@@ -84341,7 +80105,7 @@ _08034140:
 	adds r0, r1
 	movs r1, 0x15
 	mov r2, r9
-	bl pokemon_setattr
+	bl SetMonData
 	b _08034730
 	.align 2, 0
 _08034178: .4byte 0x030045c0
@@ -84373,7 +80137,7 @@ _0803419C:
 	adds r0, r4, 0
 	movs r1, 0x11
 	str r3, [sp, 0x34]
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r2, [r6]
 	lsls r2, 9
 	ldr r3, [sp, 0x34]
@@ -84381,7 +80145,7 @@ _0803419C:
 	adds r2, r0
 	adds r0, r4, 0
 	movs r1, 0x12
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r2, [r6]
 	lsls r2, 9
 	ldr r3, [sp, 0x34]
@@ -84389,7 +80153,7 @@ _0803419C:
 	adds r2, r0
 	adds r0, r4, 0
 	movs r1, 0x13
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r2, [r6]
 	lsls r2, 9
 	ldr r3, [sp, 0x34]
@@ -84397,7 +80161,7 @@ _0803419C:
 	adds r2, r0
 	adds r0, r4, 0
 	movs r1, 0x14
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r2, [r6]
 	lsls r2, 9
 	ldr r3, [sp, 0x34]
@@ -84405,7 +80169,7 @@ _0803419C:
 	adds r2, r0
 	adds r0, r4, 0
 	movs r1, 0x15
-	bl pokemon_setattr
+	bl SetMonData
 	b _08034730
 	.align 2, 0
 _08034200: .4byte 0x030045c0
@@ -84424,7 +80188,7 @@ _08034204:
 _0803421A:
 	adds r3, 0x3
 	adds r2, r3
-	bl pokemon_setattr
+	bl SetMonData
 	b _08034730
 	.align 2, 0
 _08034224: .4byte 0x030045c0
@@ -84438,7 +80202,7 @@ _0803422C:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x1
-	bl pokemon_setattr
+	bl SetMonData
 	b _08034730
 	.align 2, 0
 _08034244: .4byte 0x030045c0
@@ -84451,7 +80215,7 @@ _08034248:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x19
-	bl pokemon_setattr
+	bl SetMonData
 	b _08034730
 	.align 2, 0
 _08034260: .4byte 0x030045c0
@@ -84464,7 +80228,7 @@ _08034264:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x1A
-	bl pokemon_setattr
+	bl SetMonData
 	b _08034730
 	.align 2, 0
 _0803427C: .4byte 0x030045c0
@@ -84477,7 +80241,7 @@ _08034280:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x1B
-	bl pokemon_setattr
+	bl SetMonData
 	b _08034730
 	.align 2, 0
 _08034298: .4byte 0x030045c0
@@ -84490,7 +80254,7 @@ _0803429C:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x1C
-	bl pokemon_setattr
+	bl SetMonData
 	b _08034730
 	.align 2, 0
 _080342B4: .4byte 0x030045c0
@@ -84503,7 +80267,7 @@ _080342B8:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x1D
-	bl pokemon_setattr
+	bl SetMonData
 	b _08034730
 	.align 2, 0
 _080342D0: .4byte 0x030045c0
@@ -84516,7 +80280,7 @@ _080342D4:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x1E
-	bl pokemon_setattr
+	bl SetMonData
 	b _08034730
 	.align 2, 0
 _080342EC: .4byte 0x030045c0
@@ -84529,7 +80293,7 @@ _080342F0:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x1F
-	bl pokemon_setattr
+	bl SetMonData
 	b _08034730
 	.align 2, 0
 _08034308: .4byte 0x030045c0
@@ -84542,7 +80306,7 @@ _0803430C:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x20
-	bl pokemon_setattr
+	bl SetMonData
 	b _08034730
 	.align 2, 0
 _08034324: .4byte 0x030045c0
@@ -84555,7 +80319,7 @@ _08034328:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x22
-	bl pokemon_setattr
+	bl SetMonData
 	b _08034730
 	.align 2, 0
 _08034340: .4byte 0x030045c0
@@ -84568,7 +80332,7 @@ _08034344:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x23
-	bl pokemon_setattr
+	bl SetMonData
 	b _08034730
 	.align 2, 0
 _0803435C: .4byte 0x030045c0
@@ -84581,7 +80345,7 @@ _08034360:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x24
-	bl pokemon_setattr
+	bl SetMonData
 	b _08034730
 	.align 2, 0
 _08034378: .4byte 0x030045c0
@@ -84594,7 +80358,7 @@ _0803437C:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x25
-	bl pokemon_setattr
+	bl SetMonData
 	b _08034730
 	.align 2, 0
 _08034394: .4byte 0x030045c0
@@ -84607,7 +80371,7 @@ _08034398:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x26
-	bl pokemon_setattr
+	bl SetMonData
 	b _08034730
 	.align 2, 0
 _080343B0: .4byte 0x030045c0
@@ -84623,7 +80387,7 @@ _080343B4:
 	adds r0, r4, 0
 	movs r1, 0x27
 	str r3, [sp, 0x34]
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r2, [r6]
 	lsls r2, 9
 	ldr r3, [sp, 0x34]
@@ -84631,7 +80395,7 @@ _080343B4:
 	adds r2, r0
 	adds r0, r4, 0
 	movs r1, 0x28
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r2, [r6]
 	lsls r2, 9
 	ldr r3, [sp, 0x34]
@@ -84639,7 +80403,7 @@ _080343B4:
 	adds r2, r0
 	adds r0, r4, 0
 	movs r1, 0x29
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r2, [r6]
 	lsls r2, 9
 	ldr r3, [sp, 0x34]
@@ -84647,7 +80411,7 @@ _080343B4:
 	adds r2, r0
 	adds r0, r4, 0
 	movs r1, 0x2A
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r2, [r6]
 	lsls r2, 9
 	ldr r3, [sp, 0x34]
@@ -84655,7 +80419,7 @@ _080343B4:
 	adds r2, r0
 	adds r0, r4, 0
 	movs r1, 0x2B
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r2, [r6]
 	lsls r2, 9
 	ldr r3, [sp, 0x34]
@@ -84674,7 +80438,7 @@ _08034428:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x27
-	bl pokemon_setattr
+	bl SetMonData
 	b _08034730
 	.align 2, 0
 _08034440: .4byte 0x030045c0
@@ -84687,7 +80451,7 @@ _08034444:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x28
-	bl pokemon_setattr
+	bl SetMonData
 	b _08034730
 	.align 2, 0
 _0803445C: .4byte 0x030045c0
@@ -84700,7 +80464,7 @@ _08034460:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x29
-	bl pokemon_setattr
+	bl SetMonData
 	b _08034730
 	.align 2, 0
 _08034478: .4byte 0x030045c0
@@ -84713,7 +80477,7 @@ _0803447C:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x2A
-	bl pokemon_setattr
+	bl SetMonData
 	b _08034730
 	.align 2, 0
 _08034494: .4byte 0x030045c0
@@ -84726,7 +80490,7 @@ _08034498:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x2B
-	bl pokemon_setattr
+	bl SetMonData
 	b _08034730
 	.align 2, 0
 _080344B0: .4byte 0x030045c0
@@ -84740,7 +80504,7 @@ _080344B4:
 	adds r2, r3
 _080344C2:
 	movs r1, 0x2C
-	bl pokemon_setattr
+	bl SetMonData
 	b _08034730
 	.align 2, 0
 _080344CC: .4byte 0x030045c0
@@ -84753,7 +80517,7 @@ _080344D0:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0
-	bl pokemon_setattr
+	bl SetMonData
 	b _08034730
 	.align 2, 0
 _080344E8: .4byte 0x030045c0
@@ -84766,7 +80530,7 @@ _080344EC:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x9
-	bl pokemon_setattr
+	bl SetMonData
 	b _08034730
 	.align 2, 0
 _08034504: .4byte 0x030045c0
@@ -84779,7 +80543,7 @@ _08034508:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x37
-	bl pokemon_setattr
+	bl SetMonData
 	b _08034730
 	.align 2, 0
 _08034520: .4byte 0x030045c0
@@ -84792,7 +80556,7 @@ _08034524:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x38
-	bl pokemon_setattr
+	bl SetMonData
 	b _08034730
 	.align 2, 0
 _0803453C: .4byte 0x030045c0
@@ -84805,7 +80569,7 @@ _08034540:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x39
-	bl pokemon_setattr
+	bl SetMonData
 	b _08034730
 	.align 2, 0
 _08034558: .4byte 0x030045c0
@@ -84818,7 +80582,7 @@ _0803455C:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x3A
-	bl pokemon_setattr
+	bl SetMonData
 	b _08034730
 	.align 2, 0
 _08034574: .4byte 0x030045c0
@@ -84831,7 +80595,7 @@ _08034578:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x3B
-	bl pokemon_setattr
+	bl SetMonData
 	b _08034730
 	.align 2, 0
 _08034590: .4byte 0x030045c0
@@ -84844,7 +80608,7 @@ _08034594:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x3C
-	bl pokemon_setattr
+	bl SetMonData
 	b _08034730
 	.align 2, 0
 _080345AC: .4byte 0x030045c0
@@ -84857,7 +80621,7 @@ _080345B0:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x3D
-	bl pokemon_setattr
+	bl SetMonData
 	b _08034730
 	.align 2, 0
 _080345C8: .4byte 0x030045c0
@@ -84870,7 +80634,7 @@ _080345CC:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x3E
-	bl pokemon_setattr
+	bl SetMonData
 	b _08034730
 	.align 2, 0
 _080345E4: .4byte 0x030045c0
@@ -84883,7 +80647,7 @@ _080345E8:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x3F
-	bl pokemon_setattr
+	bl SetMonData
 	b _08034730
 	.align 2, 0
 _08034600: .4byte 0x030045c0
@@ -84896,7 +80660,7 @@ _08034604:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x16
-	bl pokemon_setattr
+	bl SetMonData
 	b _08034730
 	.align 2, 0
 _0803461C: .4byte 0x030045c0
@@ -84909,7 +80673,7 @@ _08034620:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x17
-	bl pokemon_setattr
+	bl SetMonData
 	b _08034730
 	.align 2, 0
 _08034638: .4byte 0x030045c0
@@ -84922,7 +80686,7 @@ _0803463C:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x18
-	bl pokemon_setattr
+	bl SetMonData
 	b _08034730
 	.align 2, 0
 _08034654: .4byte 0x030045c0
@@ -84935,7 +80699,7 @@ _08034658:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x21
-	bl pokemon_setattr
+	bl SetMonData
 	b _08034730
 	.align 2, 0
 _08034670: .4byte 0x030045c0
@@ -84948,7 +80712,7 @@ _08034674:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x2F
-	bl pokemon_setattr
+	bl SetMonData
 	b _08034730
 	.align 2, 0
 _0803468C: .4byte 0x030045c0
@@ -84961,7 +80725,7 @@ _08034690:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x30
-	bl pokemon_setattr
+	bl SetMonData
 	b _08034730
 	.align 2, 0
 _080346A8: .4byte 0x030045c0
@@ -84974,7 +80738,7 @@ _080346AC:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x32
-	bl pokemon_setattr
+	bl SetMonData
 	b _08034730
 	.align 2, 0
 _080346C4: .4byte 0x030045c0
@@ -84987,7 +80751,7 @@ _080346C8:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x33
-	bl pokemon_setattr
+	bl SetMonData
 	b _08034730
 	.align 2, 0
 _080346E0: .4byte 0x030045c0
@@ -85000,7 +80764,7 @@ _080346E4:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x34
-	bl pokemon_setattr
+	bl SetMonData
 	b _08034730
 	.align 2, 0
 _080346FC: .4byte 0x030045c0
@@ -85013,7 +80777,7 @@ _08034700:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x35
-	bl pokemon_setattr
+	bl SetMonData
 	b _08034730
 	.align 2, 0
 _08034718: .4byte 0x030045c0
@@ -85026,7 +80790,7 @@ _0803471C:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x36
-	bl pokemon_setattr
+	bl SetMonData
 _08034730:
 	add sp, 0x38
 	pop {r3-r5}
@@ -85118,7 +80882,7 @@ sub_80347B8: @ 80347B8
 	mov r10, r2
 	add r0, r10
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	mov r8, r0
 	lsls r0, 16
 	lsrs r0, 16
@@ -85223,7 +80987,7 @@ sub_80347B8: @ 80347B8
 	muls r0, r7
 	add r0, r10
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
@@ -85324,7 +81088,7 @@ sub_803495C: @ 803495C
 	ldr r5, _08034AC0
 	adds r0, r5
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	mov r8, r0
 	lsls r0, 16
 	lsrs r0, 16
@@ -86871,7 +82635,7 @@ _0803562E:
 	ldr r1, _0803565C
 	adds r0, r1
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _0803562C
 	ldr r1, _08035660
@@ -86975,7 +82739,7 @@ sub_80356CC: @ 80356CC
 	ldr r4, _08035754
 	adds r0, r4
 	movs r1, 0x3A
-	bl PokemonGetField
+	bl GetMonData
 	mov r8, r0
 	mov r1, r9
 	ldrb r0, [r1]
@@ -86985,7 +82749,7 @@ sub_80356CC: @ 80356CC
 	muls r0, r5
 	adds r0, r4
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	adds r3, r0, 0
 	mov r1, r9
 	ldrb r0, [r1]
@@ -87013,7 +82777,7 @@ _0803575C:
 	ldr r1, _080357A8
 	adds r0, r1
 	movs r1, 0x3A
-	bl PokemonGetField
+	bl GetMonData
 	adds r2, r0, 0
 	mov r1, r9
 	ldrb r0, [r1]
@@ -87449,7 +83213,7 @@ sub_8035A94: @ 8035A94
 	ldr r1, _08035ACC
 	adds r0, r1
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x19
@@ -88259,17 +84023,17 @@ _08036110:
 	adds r4, r5, r2
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _080361C2
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _080361C2
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl PokemonGetField
+	bl GetMonData
 	movs r1, 0xCE
 	lsls r1, 1
 	cmp r0, r1
@@ -88284,10 +84048,10 @@ _08036110:
 	beq _080361C2
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	adds r0, r4, 0
 	movs r1, 0x2E
-	bl PokemonGetField
+	bl GetMonData
 	movs r0, 0
 	bl battle_get_side_with_given_state
 	lsls r0, 24
@@ -88305,7 +84069,7 @@ _0803617C:
 	adds r1, 0xD
 	mov r0, r8
 	add r0, r9
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0
@@ -88530,17 +84294,17 @@ _08036342:
 	adds r5, r1, r0
 	adds r0, r5, 0
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _080363FA
 	adds r0, r5, 0
 	movs r1, 0x41
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _080363FA
 	adds r0, r5, 0
 	movs r1, 0x41
-	bl PokemonGetField
+	bl GetMonData
 	movs r1, 0xCE
 	lsls r1, 1
 	cmp r0, r1
@@ -88572,12 +84336,12 @@ _08036342:
 	beq _080363FA
 	adds r0, r5, 0
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r0, r5, 0
 	movs r1, 0x2E
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _080363E0
 	lsls r0, r4, 3
@@ -89079,21 +84843,21 @@ _0803679E:
 	adds r5, r1, r0
 	adds r0, r5, 0
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	bne _080367B6
 	b _080368D0
 _080367B6:
 	adds r0, r5, 0
 	movs r1, 0x41
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	bne _080367C4
 	b _080368D0
 _080367C4:
 	adds r0, r5, 0
 	movs r1, 0x41
-	bl PokemonGetField
+	bl GetMonData
 	movs r1, 0xCE
 	lsls r1, 1
 	cmp r0, r1
@@ -89126,12 +84890,12 @@ _080367C4:
 	beq _080368D0
 	adds r0, r5, 0
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r0, r5, 0
 	movs r1, 0x2E
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _08036844
 	lsls r0, r4, 3
@@ -89190,7 +84954,7 @@ _0803688E:
 	adds r1, r4, 0
 	adds r1, 0xD
 	add r0, r8
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0
@@ -89385,17 +85149,17 @@ _08036A1A:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _08036A7E
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _08036A7E
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl PokemonGetField
+	bl GetMonData
 	movs r1, 0xCE
 	lsls r1, 1
 	cmp r0, r1
@@ -89556,7 +85320,7 @@ _08036B8E:
 	ldr r1, _08036C0C
 	adds r0, r1
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _08036BCE
 	ldr r1, _08036C10
@@ -89823,14 +85587,14 @@ _08036DA2:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r5, r0, 16
 	cmp r5, 0
 	beq _08036E7C
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _08036E7C
 	mov r1, r8
@@ -89939,7 +85703,7 @@ _08036EA4:
 	adds r1, r7, 0
 	adds r1, 0xD
 	adds r0, r5, r6
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r4, r0, 16
 	cmp r4, 0
@@ -90013,7 +85777,7 @@ _08036F2C:
 	adds r4, r6, r2
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	adds r3, r7, 0x1
 	str r3, [sp, 0x18]
@@ -90021,7 +85785,7 @@ _08036F2C:
 	beq _08036FE8
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _08036FE8
 	ldr r1, _0803701C
@@ -90059,7 +85823,7 @@ _08036F90:
 	adds r1, 0xD
 	ldr r0, _08037018
 	add r0, r9
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r4, r0, 16
 	movs r0, 0
@@ -90204,17 +85968,17 @@ _080370A0:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _080370DC
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl PokemonGetField
+	bl GetMonData
 	cmp r0, 0
 	beq _080370DC
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl PokemonGetField
+	bl GetMonData
 	movs r1, 0xCE
 	lsls r1, 1
 	cmp r0, r1
@@ -91347,7 +87111,7 @@ _0803791A:
 	adds r0, r1, 0
 	adds r0, r6
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
@@ -91398,7 +87162,7 @@ _080379B2:
 	adds r0, r1, 0
 	adds r0, r6
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
@@ -91957,7 +87721,7 @@ _08037E5E:
 	ldr r1, _08037ED8
 	adds r0, r1
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
@@ -92338,12 +88102,12 @@ _08038220:
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1]
 	adds r0, r4, 0
 	movs r1, 0xC
-	bl PokemonGetField
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x2E]
 	movs r6, 0
@@ -92371,12 +88135,12 @@ _0803826C:
 	adds r1, r6, 0
 	adds r1, 0xD
 	mov r0, r8
-	bl PokemonGetField
+	bl GetMonData
 	strh r0, [r4]
 	adds r1, r6, 0
 	adds r1, 0x11
 	mov r0, r8
-	bl PokemonGetField
+	bl GetMonData
 	mov r2, r9
 	adds r1, r2, r6
 	strb r0, [r1]
@@ -92391,21 +88155,21 @@ _0803826C:
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0x15
-	bl PokemonGetField
+	bl GetMonData
 	mov r1, r10
 	strb r0, [r1]
 	adds r0, r4, 0
 	movs r1, 0x20
-	bl PokemonGetField
+	bl GetMonData
 	ldr r2, [sp, 0x80]
 	strb r0, [r2]
 	adds r0, r4, 0
 	movs r1, 0x19
-	bl PokemonGetField
+	bl GetMonData
 	str r0, [sp, 0x44]
 	adds r0, r4, 0
 	movs r1, 0x27
-	bl PokemonGetField
+	bl GetMonData
 	mov r3, sp
 	movs r5, 0x1F
 	ands r0, r5
@@ -92417,7 +88181,7 @@ _0803826C:
 	strb r1, [r3, 0x14]
 	adds r0, r4, 0
 	movs r1, 0x28
-	bl PokemonGetField
+	bl GetMonData
 	mov r3, sp
 	movs r6, 0x1F
 	ands r0, r6
@@ -92429,7 +88193,7 @@ _0803826C:
 	strh r1, [r3, 0x14]
 	adds r0, r4, 0
 	movs r1, 0x29
-	bl PokemonGetField
+	bl GetMonData
 	mov r3, sp
 	ands r0, r5
 	lsls r0, 2
@@ -92441,7 +88205,7 @@ _0803826C:
 	strb r1, [r3, 0x15]
 	adds r0, r4, 0
 	movs r1, 0x2A
-	bl PokemonGetField
+	bl GetMonData
 	movs r1, 0x1F
 	ands r1, r0
 	lsls r1, 15
@@ -92452,7 +88216,7 @@ _0803826C:
 	str r0, [sp, 0x14]
 	adds r0, r4, 0
 	movs r1, 0x2B
-	bl PokemonGetField
+	bl GetMonData
 	mov r3, sp
 	ands r0, r6
 	lsls r0, 4
@@ -92463,7 +88227,7 @@ _0803826C:
 	strh r1, [r3, 0x16]
 	adds r0, r4, 0
 	movs r1, 0x2C
-	bl PokemonGetField
+	bl GetMonData
 	mov r3, sp
 	ands r0, r5
 	lsls r0, 1
@@ -92475,55 +88239,55 @@ _0803826C:
 	strb r1, [r3, 0x17]
 	adds r0, r4, 0
 	movs r1, 0
-	bl PokemonGetField
+	bl GetMonData
 	str r0, [sp, 0x48]
 	adds r0, r4, 0
 	movs r1, 0x37
-	bl PokemonGetField
+	bl GetMonData
 	str r0, [sp, 0x4C]
 	adds r0, r4, 0
 	movs r1, 0x38
-	bl PokemonGetField
+	bl GetMonData
 	ldr r1, [sp, 0x7C]
 	strb r0, [r1]
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x28]
 	adds r0, r4, 0
 	movs r1, 0x3A
-	bl PokemonGetField
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x2C]
 	adds r0, r4, 0
 	movs r1, 0x3B
-	bl PokemonGetField
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x2]
 	adds r0, r4, 0
 	movs r1, 0x3C
-	bl PokemonGetField
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x4]
 	adds r0, r4, 0
 	movs r1, 0x3D
-	bl PokemonGetField
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x6]
 	adds r0, r4, 0
 	movs r1, 0x3E
-	bl PokemonGetField
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x8]
 	adds r0, r4, 0
 	movs r1, 0x3F
-	bl PokemonGetField
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0xA]
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl PokemonGetField
+	bl GetMonData
 	mov r3, sp
 	movs r1, 0x1
 	ands r0, r1
@@ -92536,7 +88300,7 @@ _0803826C:
 	strb r1, [r3, 0x17]
 	adds r0, r4, 0
 	movs r1, 0x2E
-	bl PokemonGetField
+	bl GetMonData
 	mov r3, sp
 	lsls r0, 7
 	ldrb r2, [r3, 0x17]
@@ -92546,19 +88310,19 @@ _0803826C:
 	strb r1, [r3, 0x17]
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl PokemonGetField
+	bl GetMonData
 	str r0, [sp, 0x54]
 	adds r0, r4, 0
 	movs r1, 0x2
 	ldr r2, [sp, 0x8C]
-	bl PokemonGetField
+	bl GetMonData
 	ldr r0, [sp, 0x84]
 	ldr r1, [sp, 0x8C]
 	bl StringCopy10
 	adds r0, r4, 0
 	movs r1, 0x7
 	ldr r2, [sp, 0x88]
-	bl PokemonGetField
+	bl GetMonData
 	mov r2, sp
 	movs r6, 0
 _08038424:
@@ -92609,13 +88373,13 @@ _0803847A:
 	adds r1, r6, 0
 	adds r1, 0xD
 	adds r0, r4, 0
-	bl PokemonGetField
+	bl GetMonData
 	mov r1, r8
 	strh r0, [r1]
 	adds r1, r6, 0
 	adds r1, 0x11
 	adds r0, r4, 0
-	bl PokemonGetField
+	bl GetMonData
 	mov r2, r10
 	adds r1, r2, r6
 	strb r0, [r1]
@@ -92629,7 +88393,7 @@ _0803847A:
 	ldr r1, _080384C8
 	adds r0, r1
 	movs r1, 0x15
-	bl PokemonGetField
+	bl GetMonData
 	mov r1, r9
 	strb r0, [r1, 0xC]
 	mov r2, r9
@@ -92671,7 +88435,7 @@ _080384F4:
 	adds r1, 0x11
 	mov r2, r8
 	adds r0, r4, r2
-	bl PokemonGetField
+	bl GetMonData
 	adds r1, r7, r6
 	strb r0, [r1]
 	adds r6, 0x1
@@ -92682,7 +88446,7 @@ _080384F4:
 	ldr r1, _08038520
 	adds r0, r1
 	movs r1, 0x15
-	bl PokemonGetField
+	bl GetMonData
 	adds r1, r7, r6
 	strb r0, [r1]
 	adds r6, 0x1
@@ -92719,7 +88483,7 @@ _08038550:
 	adds r0, r1
 	movs r1, 0x19
 _0803855A:
-	bl PokemonGetField
+	bl GetMonData
 	adds r1, r0, 0
 	strb r1, [r7]
 	movs r0, 0xFF
@@ -92852,27 +88616,27 @@ _08038640:
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0x27
-	bl PokemonGetField
+	bl GetMonData
 	strb r0, [r7]
 	adds r0, r4, 0
 	movs r1, 0x28
-	bl PokemonGetField
+	bl GetMonData
 	strb r0, [r7, 0x1]
 	adds r0, r4, 0
 	movs r1, 0x29
-	bl PokemonGetField
+	bl GetMonData
 	strb r0, [r7, 0x2]
 	adds r0, r4, 0
 	movs r1, 0x2A
-	bl PokemonGetField
+	bl GetMonData
 	strb r0, [r7, 0x3]
 	adds r0, r4, 0
 	movs r1, 0x2B
-	bl PokemonGetField
+	bl GetMonData
 	strb r0, [r7, 0x4]
 	adds r0, r4, 0
 	movs r1, 0x2C
-	bl PokemonGetField
+	bl GetMonData
 	strb r0, [r7, 0x5]
 	movs r6, 0x6
 	b _08038886
@@ -92957,7 +88721,7 @@ _08038710:
 	adds r0, r1
 	movs r1, 0x37
 _0803871A:
-	bl PokemonGetField
+	bl GetMonData
 	adds r1, r0, 0
 	strb r1, [r7]
 	movs r0, 0xFF
@@ -93046,7 +88810,7 @@ _080387B4:
 	adds r0, r1
 	movs r1, 0x3F
 _080387BE:
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	strb r0, [r7]
@@ -93153,7 +88917,7 @@ _08038874:
 	adds r0, r1
 	movs r1, 0x36
 _0803887E:
-	bl PokemonGetField
+	bl GetMonData
 	strb r0, [r7]
 	movs r6, 0x1
 _08038886:
@@ -93329,12 +89093,12 @@ _08038A34:
 	adds r0, r4, 0
 	movs r1, 0xB
 	adds r2, r7, 0
-	bl pokemon_setattr
+	bl SetMonData
 	adds r2, r7, 0
 	adds r2, 0x2E
 	adds r0, r4, 0
 	movs r1, 0xC
-	bl pokemon_setattr
+	bl SetMonData
 	movs r0, 0
 	mov r8, r0
 	movs r0, 0x3B
@@ -93375,12 +89139,12 @@ _08038A9A:
 	adds r1, 0xD
 	mov r0, r9
 	adds r2, r4, 0
-	bl pokemon_setattr
+	bl SetMonData
 	mov r1, r8
 	adds r1, 0x11
 	mov r0, r9
 	adds r2, r6, 0
-	bl pokemon_setattr
+	bl SetMonData
 	adds r6, 0x1
 	adds r4, 0x2
 	movs r0, 0x1
@@ -93396,15 +89160,15 @@ _08038A9A:
 	adds r0, r4, 0
 	movs r1, 0x15
 	mov r2, r10
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x20
 	ldr r2, [sp, 0x20]
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x19
 	ldr r2, [sp, 0x28]
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r0, [r7, 0x14]
 	lsls r0, 27
 	lsrs r0, 27
@@ -93413,7 +89177,7 @@ _08038A9A:
 	adds r0, r4, 0
 	movs r1, 0x27
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	mov r1, sp
 	ldrh r0, [r7, 0x14]
 	lsls r0, 22
@@ -93422,7 +89186,7 @@ _08038A9A:
 	adds r0, r4, 0
 	movs r1, 0x28
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	mov r1, sp
 	ldrb r0, [r7, 0x15]
 	lsls r0, 25
@@ -93431,7 +89195,7 @@ _08038A9A:
 	adds r0, r4, 0
 	movs r1, 0x29
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	mov r1, sp
 	ldr r0, [r7, 0x14]
 	lsls r0, 12
@@ -93440,7 +89204,7 @@ _08038A9A:
 	adds r0, r4, 0
 	movs r1, 0x2A
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	mov r1, sp
 	ldrh r0, [r7, 0x16]
 	lsls r0, 23
@@ -93449,7 +89213,7 @@ _08038A9A:
 	adds r0, r4, 0
 	movs r1, 0x2B
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	mov r1, sp
 	ldrb r0, [r7, 0x17]
 	lsls r0, 26
@@ -93458,47 +89222,47 @@ _08038A9A:
 	adds r0, r4, 0
 	movs r1, 0x2C
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0
 	ldr r2, [sp, 0x2C]
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x37
 	ldr r2, [sp, 0x30]
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x38
 	ldr r2, [sp, 0x1C]
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x39
 	ldr r2, [sp, 0x18]
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x3A
 	ldr r2, [sp, 0x24]
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x3B
 	ldr r2, [sp, 0x4]
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x3C
 	ldr r2, [sp, 0x8]
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x3D
 	ldr r2, [sp, 0xC]
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x3E
 	ldr r2, [sp, 0x10]
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x3F
 	ldr r2, [sp, 0x14]
-	bl pokemon_setattr
+	bl SetMonData
 	b _0803920C
 	.align 2, 0
 _08038BC8: .4byte 0x030045c0
@@ -93511,7 +89275,7 @@ _08038BCC:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0xB
-	bl pokemon_setattr
+	bl SetMonData
 	b _0803920C
 	.align 2, 0
 _08038BE4: .4byte 0x030045c0
@@ -93524,7 +89288,7 @@ _08038BE8:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0xC
-	bl pokemon_setattr
+	bl SetMonData
 	b _0803920C
 	.align 2, 0
 _08038C00: .4byte 0x030045c0
@@ -93546,12 +89310,12 @@ _08038C1C:
 	adds r1, 0xD
 	adds r0, r7, 0
 	adds r2, r4, 0
-	bl pokemon_setattr
+	bl SetMonData
 	mov r1, r8
 	adds r1, 0x11
 	adds r0, r7, 0
 	adds r2, r6, 0
-	bl pokemon_setattr
+	bl SetMonData
 	adds r6, 0x1
 	adds r4, 0x2
 	movs r0, 0x1
@@ -93565,7 +89329,7 @@ _08038C1C:
 	adds r0, r1
 	movs r1, 0x15
 	mov r2, r9
-	bl pokemon_setattr
+	bl SetMonData
 	b _0803920C
 	.align 2, 0
 _08038C54: .4byte 0x030045c0
@@ -93597,7 +89361,7 @@ _08038C78:
 	adds r0, r4, 0
 	movs r1, 0x11
 	str r3, [sp, 0x34]
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r2, [r6]
 	lsls r2, 9
 	ldr r3, [sp, 0x34]
@@ -93605,7 +89369,7 @@ _08038C78:
 	adds r2, r0
 	adds r0, r4, 0
 	movs r1, 0x12
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r2, [r6]
 	lsls r2, 9
 	ldr r3, [sp, 0x34]
@@ -93613,7 +89377,7 @@ _08038C78:
 	adds r2, r0
 	adds r0, r4, 0
 	movs r1, 0x13
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r2, [r6]
 	lsls r2, 9
 	ldr r3, [sp, 0x34]
@@ -93621,7 +89385,7 @@ _08038C78:
 	adds r2, r0
 	adds r0, r4, 0
 	movs r1, 0x14
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r2, [r6]
 	lsls r2, 9
 	ldr r3, [sp, 0x34]
@@ -93629,7 +89393,7 @@ _08038C78:
 	adds r2, r0
 	adds r0, r4, 0
 	movs r1, 0x15
-	bl pokemon_setattr
+	bl SetMonData
 	b _0803920C
 	.align 2, 0
 _08038CDC: .4byte 0x030045c0
@@ -93648,7 +89412,7 @@ _08038CE0:
 _08038CF6:
 	adds r3, 0x3
 	adds r2, r3
-	bl pokemon_setattr
+	bl SetMonData
 	b _0803920C
 	.align 2, 0
 _08038D00: .4byte 0x030045c0
@@ -93662,7 +89426,7 @@ _08038D08:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x1
-	bl pokemon_setattr
+	bl SetMonData
 	b _0803920C
 	.align 2, 0
 _08038D20: .4byte 0x030045c0
@@ -93675,7 +89439,7 @@ _08038D24:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x19
-	bl pokemon_setattr
+	bl SetMonData
 	b _0803920C
 	.align 2, 0
 _08038D3C: .4byte 0x030045c0
@@ -93688,7 +89452,7 @@ _08038D40:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x1A
-	bl pokemon_setattr
+	bl SetMonData
 	b _0803920C
 	.align 2, 0
 _08038D58: .4byte 0x030045c0
@@ -93701,7 +89465,7 @@ _08038D5C:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x1B
-	bl pokemon_setattr
+	bl SetMonData
 	b _0803920C
 	.align 2, 0
 _08038D74: .4byte 0x030045c0
@@ -93714,7 +89478,7 @@ _08038D78:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x1C
-	bl pokemon_setattr
+	bl SetMonData
 	b _0803920C
 	.align 2, 0
 _08038D90: .4byte 0x030045c0
@@ -93727,7 +89491,7 @@ _08038D94:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x1D
-	bl pokemon_setattr
+	bl SetMonData
 	b _0803920C
 	.align 2, 0
 _08038DAC: .4byte 0x030045c0
@@ -93740,7 +89504,7 @@ _08038DB0:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x1E
-	bl pokemon_setattr
+	bl SetMonData
 	b _0803920C
 	.align 2, 0
 _08038DC8: .4byte 0x030045c0
@@ -93753,7 +89517,7 @@ _08038DCC:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x1F
-	bl pokemon_setattr
+	bl SetMonData
 	b _0803920C
 	.align 2, 0
 _08038DE4: .4byte 0x030045c0
@@ -93766,7 +89530,7 @@ _08038DE8:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x20
-	bl pokemon_setattr
+	bl SetMonData
 	b _0803920C
 	.align 2, 0
 _08038E00: .4byte 0x030045c0
@@ -93779,7 +89543,7 @@ _08038E04:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x22
-	bl pokemon_setattr
+	bl SetMonData
 	b _0803920C
 	.align 2, 0
 _08038E1C: .4byte 0x030045c0
@@ -93792,7 +89556,7 @@ _08038E20:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x23
-	bl pokemon_setattr
+	bl SetMonData
 	b _0803920C
 	.align 2, 0
 _08038E38: .4byte 0x030045c0
@@ -93805,7 +89569,7 @@ _08038E3C:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x24
-	bl pokemon_setattr
+	bl SetMonData
 	b _0803920C
 	.align 2, 0
 _08038E54: .4byte 0x030045c0
@@ -93818,7 +89582,7 @@ _08038E58:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x25
-	bl pokemon_setattr
+	bl SetMonData
 	b _0803920C
 	.align 2, 0
 _08038E70: .4byte 0x030045c0
@@ -93831,7 +89595,7 @@ _08038E74:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x26
-	bl pokemon_setattr
+	bl SetMonData
 	b _0803920C
 	.align 2, 0
 _08038E8C: .4byte 0x030045c0
@@ -93847,7 +89611,7 @@ _08038E90:
 	adds r0, r4, 0
 	movs r1, 0x27
 	str r3, [sp, 0x34]
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r2, [r6]
 	lsls r2, 9
 	ldr r3, [sp, 0x34]
@@ -93855,7 +89619,7 @@ _08038E90:
 	adds r2, r0
 	adds r0, r4, 0
 	movs r1, 0x28
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r2, [r6]
 	lsls r2, 9
 	ldr r3, [sp, 0x34]
@@ -93863,7 +89627,7 @@ _08038E90:
 	adds r2, r0
 	adds r0, r4, 0
 	movs r1, 0x29
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r2, [r6]
 	lsls r2, 9
 	ldr r3, [sp, 0x34]
@@ -93871,7 +89635,7 @@ _08038E90:
 	adds r2, r0
 	adds r0, r4, 0
 	movs r1, 0x2A
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r2, [r6]
 	lsls r2, 9
 	ldr r3, [sp, 0x34]
@@ -93879,7 +89643,7 @@ _08038E90:
 	adds r2, r0
 	adds r0, r4, 0
 	movs r1, 0x2B
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r2, [r6]
 	lsls r2, 9
 	ldr r3, [sp, 0x34]
@@ -93898,7 +89662,7 @@ _08038F04:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x27
-	bl pokemon_setattr
+	bl SetMonData
 	b _0803920C
 	.align 2, 0
 _08038F1C: .4byte 0x030045c0
@@ -93911,7 +89675,7 @@ _08038F20:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x28
-	bl pokemon_setattr
+	bl SetMonData
 	b _0803920C
 	.align 2, 0
 _08038F38: .4byte 0x030045c0
@@ -93924,7 +89688,7 @@ _08038F3C:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x29
-	bl pokemon_setattr
+	bl SetMonData
 	b _0803920C
 	.align 2, 0
 _08038F54: .4byte 0x030045c0
@@ -93937,7 +89701,7 @@ _08038F58:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x2A
-	bl pokemon_setattr
+	bl SetMonData
 	b _0803920C
 	.align 2, 0
 _08038F70: .4byte 0x030045c0
@@ -93950,7 +89714,7 @@ _08038F74:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x2B
-	bl pokemon_setattr
+	bl SetMonData
 	b _0803920C
 	.align 2, 0
 _08038F8C: .4byte 0x030045c0
@@ -93964,7 +89728,7 @@ _08038F90:
 	adds r2, r3
 _08038F9E:
 	movs r1, 0x2C
-	bl pokemon_setattr
+	bl SetMonData
 	b _0803920C
 	.align 2, 0
 _08038FA8: .4byte 0x030045c0
@@ -93977,7 +89741,7 @@ _08038FAC:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0
-	bl pokemon_setattr
+	bl SetMonData
 	b _0803920C
 	.align 2, 0
 _08038FC4: .4byte 0x030045c0
@@ -93990,7 +89754,7 @@ _08038FC8:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x9
-	bl pokemon_setattr
+	bl SetMonData
 	b _0803920C
 	.align 2, 0
 _08038FE0: .4byte 0x030045c0
@@ -94003,7 +89767,7 @@ _08038FE4:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x37
-	bl pokemon_setattr
+	bl SetMonData
 	b _0803920C
 	.align 2, 0
 _08038FFC: .4byte 0x030045c0
@@ -94016,7 +89780,7 @@ _08039000:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x38
-	bl pokemon_setattr
+	bl SetMonData
 	b _0803920C
 	.align 2, 0
 _08039018: .4byte 0x030045c0
@@ -94029,7 +89793,7 @@ _0803901C:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x39
-	bl pokemon_setattr
+	bl SetMonData
 	b _0803920C
 	.align 2, 0
 _08039034: .4byte 0x030045c0
@@ -94042,7 +89806,7 @@ _08039038:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x3A
-	bl pokemon_setattr
+	bl SetMonData
 	b _0803920C
 	.align 2, 0
 _08039050: .4byte 0x030045c0
@@ -94055,7 +89819,7 @@ _08039054:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x3B
-	bl pokemon_setattr
+	bl SetMonData
 	b _0803920C
 	.align 2, 0
 _0803906C: .4byte 0x030045c0
@@ -94068,7 +89832,7 @@ _08039070:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x3C
-	bl pokemon_setattr
+	bl SetMonData
 	b _0803920C
 	.align 2, 0
 _08039088: .4byte 0x030045c0
@@ -94081,7 +89845,7 @@ _0803908C:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x3D
-	bl pokemon_setattr
+	bl SetMonData
 	b _0803920C
 	.align 2, 0
 _080390A4: .4byte 0x030045c0
@@ -94094,7 +89858,7 @@ _080390A8:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x3E
-	bl pokemon_setattr
+	bl SetMonData
 	b _0803920C
 	.align 2, 0
 _080390C0: .4byte 0x030045c0
@@ -94107,7 +89871,7 @@ _080390C4:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x3F
-	bl pokemon_setattr
+	bl SetMonData
 	b _0803920C
 	.align 2, 0
 _080390DC: .4byte 0x030045c0
@@ -94120,7 +89884,7 @@ _080390E0:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x16
-	bl pokemon_setattr
+	bl SetMonData
 	b _0803920C
 	.align 2, 0
 _080390F8: .4byte 0x030045c0
@@ -94133,7 +89897,7 @@ _080390FC:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x17
-	bl pokemon_setattr
+	bl SetMonData
 	b _0803920C
 	.align 2, 0
 _08039114: .4byte 0x030045c0
@@ -94146,7 +89910,7 @@ _08039118:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x18
-	bl pokemon_setattr
+	bl SetMonData
 	b _0803920C
 	.align 2, 0
 _08039130: .4byte 0x030045c0
@@ -94159,7 +89923,7 @@ _08039134:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x21
-	bl pokemon_setattr
+	bl SetMonData
 	b _0803920C
 	.align 2, 0
 _0803914C: .4byte 0x030045c0
@@ -94172,7 +89936,7 @@ _08039150:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x2F
-	bl pokemon_setattr
+	bl SetMonData
 	b _0803920C
 	.align 2, 0
 _08039168: .4byte 0x030045c0
@@ -94185,7 +89949,7 @@ _0803916C:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x30
-	bl pokemon_setattr
+	bl SetMonData
 	b _0803920C
 	.align 2, 0
 _08039184: .4byte 0x030045c0
@@ -94198,7 +89962,7 @@ _08039188:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x32
-	bl pokemon_setattr
+	bl SetMonData
 	b _0803920C
 	.align 2, 0
 _080391A0: .4byte 0x030045c0
@@ -94211,7 +89975,7 @@ _080391A4:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x33
-	bl pokemon_setattr
+	bl SetMonData
 	b _0803920C
 	.align 2, 0
 _080391BC: .4byte 0x030045c0
@@ -94224,7 +89988,7 @@ _080391C0:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x34
-	bl pokemon_setattr
+	bl SetMonData
 	b _0803920C
 	.align 2, 0
 _080391D8: .4byte 0x030045c0
@@ -94237,7 +90001,7 @@ _080391DC:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x35
-	bl pokemon_setattr
+	bl SetMonData
 	b _0803920C
 	.align 2, 0
 _080391F4: .4byte 0x030045c0
@@ -94250,7 +90014,7 @@ _080391F8:
 	lsls r2, 9
 	adds r2, r3
 	movs r1, 0x36
-	bl pokemon_setattr
+	bl SetMonData
 _0803920C:
 	add sp, 0x38
 	pop {r3-r5}
@@ -94345,7 +90109,7 @@ sub_8039294: @ 8039294
 	mov r9, r1
 	add r0, r9
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -94442,7 +90206,7 @@ sub_8039294: @ 8039294
 	adds r0, r1, 0
 	add r0, r9
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
@@ -94543,7 +90307,7 @@ sub_8039430: @ 8039430
 	ldr r5, _08039594
 	adds r0, r5
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	mov r8, r0
 	lsls r0, 16
 	lsrs r0, 16
@@ -95699,7 +91463,7 @@ sub_8039D80: @ 8039D80
 	ldr r4, _08039E08
 	adds r0, r4
 	movs r1, 0x3A
-	bl PokemonGetField
+	bl GetMonData
 	mov r8, r0
 	mov r1, r9
 	ldrb r0, [r1]
@@ -95709,7 +91473,7 @@ sub_8039D80: @ 8039D80
 	muls r0, r5
 	adds r0, r4
 	movs r1, 0x39
-	bl PokemonGetField
+	bl GetMonData
 	adds r3, r0, 0
 	mov r1, r9
 	ldrb r0, [r1]
@@ -95737,7 +91501,7 @@ _08039E10:
 	ldr r1, _08039E5C
 	adds r0, r1
 	movs r1, 0x3A
-	bl PokemonGetField
+	bl GetMonData
 	adds r2, r0, 0
 	mov r1, r9
 	ldrb r0, [r1]
@@ -96173,7 +91937,7 @@ sub_803A148: @ 803A148
 	ldr r1, _0803A180
 	adds r0, r1
 	movs r1, 0xB
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x19
@@ -96844,8 +92608,8 @@ nullsub_48: @ 803A6BC
 	bx lr
 	thumb_func_end nullsub_48
 
-	thumb_func_start zero_pokemon_boxed_data
-zero_pokemon_boxed_data: @ 803A6C0
+	thumb_func_start ZeroPokemonBoxData
+ZeroPokemonBoxData: @ 803A6C0
 	push {lr}
 	adds r2, r0, 0
 	movs r1, 0
@@ -96858,58 +92622,58 @@ _0803A6C8:
 	bls _0803A6C8
 	pop {r0}
 	bx r0
-	thumb_func_end zero_pokemon_boxed_data
+	thumb_func_end ZeroPokemonBoxData
 
 	thumb_func_start zero_pokemon_struct
 zero_pokemon_struct: @ 803A6D8
 	push {r4,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
-	bl zero_pokemon_boxed_data
+	bl ZeroPokemonBoxData
 	movs r0, 0
 	str r0, [sp]
 	adds r0, r4, 0
 	movs r1, 0x37
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x38
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x39
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x3A
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x3B
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x3C
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x3D
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x3E
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x3F
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	movs r0, 0xFF
 	str r0, [sp]
 	adds r0, r4, 0
 	movs r1, 0x40
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	add sp, 0x4
 	pop {r4}
 	pop {r0}
@@ -96994,13 +92758,13 @@ create_pokemon_set_level: @ 803A798
 	mov r0, r8
 	movs r1, 0x38
 	add r2, sp, 0x10
-	bl pokemon_setattr
+	bl SetMonData
 	movs r0, 0xFF
 	str r0, [sp, 0x14]
 	add r2, sp, 0x14
 	mov r0, r8
 	movs r1, 0x40
-	bl pokemon_setattr
+	bl SetMonData
 	mov r0, r8
 	bl pokemon_calc_effective_stats
 	add sp, 0x1C
@@ -97036,7 +92800,7 @@ create_pokemon: @ 803A808
 	lsrs r0, 24
 	mov r10, r0
 	adds r0, r7, 0
-	bl zero_pokemon_boxed_data
+	bl ZeroPokemonBoxData
 	cmp r4, 0
 	beq _0803A844
 	ldr r0, [sp, 0x44]
@@ -97055,7 +92819,7 @@ _0803A858:
 	add r2, sp, 0x14
 	adds r0, r7, 0
 	movs r1, 0
-	bl PokemonSetEncryptedField
+	bl SetMonBoxData
 	add r0, sp, 0x18
 	mov r9, r0
 	add r5, sp, 0xC
@@ -97117,37 +92881,37 @@ _0803A8D4:
 	adds r0, r7, 0
 	movs r1, 0x1
 	mov r2, r9
-	bl PokemonSetEncryptedField
+	bl SetMonBoxData
 	adds r0, r7, 0
 	bl pokemon_calc_checksum
 	strh r0, [r5]
 	adds r0, r7, 0
 	movs r1, 0x9
 	adds r2, r5, 0
-	bl PokemonSetEncryptedField
+	bl SetMonBoxData
 	adds r0, r7, 0
-	bl pokemon_encrypt
+	bl EncryptMon
 	mov r0, sp
 	ldrh r1, [r0, 0xE]
 	bl GetSpeciesName
 	adds r0, r7, 0
 	movs r1, 0x2
 	mov r2, sp
-	bl PokemonSetEncryptedField
+	bl SetMonBoxData
 	ldr r2, _0803AA04
 	adds r0, r7, 0
 	movs r1, 0x3
-	bl PokemonSetEncryptedField
+	bl SetMonBoxData
 	ldr r5, _0803AA00
 	adds r0, r7, 0
 	movs r1, 0x7
 	adds r2, r5, 0
-	bl PokemonSetEncryptedField
+	bl SetMonBoxData
 	adds r0, r7, 0
 	movs r1, 0xB
 	mov r2, sp
 	adds r2, 0xE
-	bl PokemonSetEncryptedField
+	bl SetMonBoxData
 	ldr r4, _0803AA08
 	mov r2, sp
 	ldrh r1, [r2, 0xE]
@@ -97168,7 +92932,7 @@ _0803A8D4:
 	adds r2, r0
 	adds r0, r7, 0
 	movs r1, 0x19
-	bl PokemonSetEncryptedField
+	bl SetMonBoxData
 	mov r1, sp
 	ldrh r0, [r1, 0xE]
 	lsls r2, r0, 3
@@ -97178,7 +92942,7 @@ _0803A8D4:
 	adds r2, r4
 	adds r0, r7, 0
 	movs r1, 0x20
-	bl PokemonSetEncryptedField
+	bl SetMonBoxData
 	bl sav1_map_get_name
 	lsls r0, 24
 	lsrs r0, 24
@@ -97186,26 +92950,26 @@ _0803A8D4:
 	adds r0, r7, 0
 	movs r1, 0x23
 	mov r2, r9
-	bl PokemonSetEncryptedField
+	bl SetMonBoxData
 	adds r0, r7, 0
 	movs r1, 0x24
 	add r2, sp, 0x10
-	bl PokemonSetEncryptedField
+	bl SetMonBoxData
 	ldr r2, _0803AA10
 	adds r0, r7, 0
 	movs r1, 0x25
-	bl PokemonSetEncryptedField
+	bl SetMonBoxData
 	movs r0, 0x4
 	str r0, [sp, 0x18]
 	adds r0, r7, 0
 	movs r1, 0x26
 	mov r2, r9
-	bl PokemonSetEncryptedField
+	bl SetMonBoxData
 	adds r5, 0x8
 	adds r0, r7, 0
 	movs r1, 0x31
 	adds r2, r5, 0
-	bl PokemonSetEncryptedField
+	bl SetMonBoxData
 	mov r2, sp
 	ldrb r0, [r2, 0x11]
 	cmp r0, 0x1F
@@ -97213,32 +92977,32 @@ _0803A8D4:
 	adds r0, r7, 0
 	movs r1, 0x27
 	adds r2, 0x11
-	bl PokemonSetEncryptedField
+	bl SetMonBoxData
 	adds r0, r7, 0
 	movs r1, 0x28
 	mov r2, sp
 	adds r2, 0x11
-	bl PokemonSetEncryptedField
+	bl SetMonBoxData
 	adds r0, r7, 0
 	movs r1, 0x29
 	mov r2, sp
 	adds r2, 0x11
-	bl PokemonSetEncryptedField
+	bl SetMonBoxData
 	adds r0, r7, 0
 	movs r1, 0x2A
 	mov r2, sp
 	adds r2, 0x11
-	bl PokemonSetEncryptedField
+	bl SetMonBoxData
 	adds r0, r7, 0
 	movs r1, 0x2B
 	mov r2, sp
 	adds r2, 0x11
-	bl PokemonSetEncryptedField
+	bl SetMonBoxData
 	adds r0, r7, 0
 	movs r1, 0x2C
 	mov r2, sp
 	adds r2, 0x11
-	bl PokemonSetEncryptedField
+	bl SetMonBoxData
 	b _0803AA9C
 	.align 2, 0
 _0803AA00: .4byte gSaveBlock2
@@ -97259,7 +93023,7 @@ _0803AA14:
 	adds r0, r7, 0
 	movs r1, 0x27
 	adds r2, r4, 0
-	bl PokemonSetEncryptedField
+	bl SetMonBoxData
 	ldr r0, [sp, 0x18]
 	movs r6, 0xF8
 	lsls r6, 2
@@ -97269,7 +93033,7 @@ _0803AA14:
 	adds r0, r7, 0
 	movs r1, 0x28
 	adds r2, r4, 0
-	bl PokemonSetEncryptedField
+	bl SetMonBoxData
 	ldr r0, [sp, 0x18]
 	movs r5, 0xF8
 	lsls r5, 7
@@ -97279,7 +93043,7 @@ _0803AA14:
 	adds r0, r7, 0
 	movs r1, 0x29
 	adds r2, r4, 0
-	bl PokemonSetEncryptedField
+	bl SetMonBoxData
 	bl Random
 	lsls r0, 16
 	lsrs r0, 16
@@ -97290,7 +93054,7 @@ _0803AA14:
 	adds r0, r7, 0
 	movs r1, 0x2A
 	adds r2, r4, 0
-	bl PokemonSetEncryptedField
+	bl SetMonBoxData
 	ldr r0, [sp, 0x18]
 	ands r0, r6
 	lsrs r0, 5
@@ -97298,7 +93062,7 @@ _0803AA14:
 	adds r0, r7, 0
 	movs r1, 0x2B
 	adds r2, r4, 0
-	bl PokemonSetEncryptedField
+	bl SetMonBoxData
 	ldr r0, [sp, 0x18]
 	ands r0, r5
 	lsrs r0, 10
@@ -97306,7 +93070,7 @@ _0803AA14:
 	adds r0, r7, 0
 	movs r1, 0x2C
 	adds r2, r4, 0
-	bl PokemonSetEncryptedField
+	bl SetMonBoxData
 _0803AA9C:
 	ldr r2, _0803AAD8
 	mov r3, sp
@@ -97325,7 +93089,7 @@ _0803AA9C:
 	adds r0, r7, 0
 	movs r1, 0x2E
 	mov r2, r9
-	bl PokemonSetEncryptedField
+	bl SetMonBoxData
 _0803AAC2:
 	adds r0, r7, 0
 	bl sub_803B720
@@ -97590,7 +93354,7 @@ sub_803ACAC: @ 803ACAC
 	adds r0, r4, 0
 	movs r1, 0x42
 	add r2, sp, 0x10
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	bl pokemon_calc_effective_stats
 	add sp, 0x14
@@ -97622,28 +93386,28 @@ unref_sub_803ACEC: @ 803ACEC
 	adds r0, r5, 0
 	movs r1, 0x27
 	adds r2, r4, 0
-	bl pokemon_setattr
+	bl SetMonData
 	adds r2, r4, 0x1
 	adds r0, r5, 0
 	movs r1, 0x28
-	bl pokemon_setattr
+	bl SetMonData
 	adds r2, r4, 0x2
 	adds r0, r5, 0
 	movs r1, 0x29
-	bl pokemon_setattr
+	bl SetMonData
 	adds r2, r4, 0x3
 	adds r0, r5, 0
 	movs r1, 0x2A
-	bl pokemon_setattr
+	bl SetMonData
 	adds r2, r4, 0x4
 	adds r0, r5, 0
 	movs r1, 0x2B
-	bl pokemon_setattr
+	bl SetMonData
 	adds r4, 0x5
 	adds r0, r5, 0
 	movs r1, 0x2C
 	adds r2, r4, 0
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r5, 0
 	bl pokemon_calc_effective_stats
 	add sp, 0x10
@@ -97707,7 +93471,7 @@ _0803ADB8:
 	adds r1, 0x1A
 	adds r0, r7, 0
 	add r2, sp, 0x10
-	bl pokemon_setattr
+	bl SetMonData
 _0803ADCC:
 	lsls r0, r4, 25
 	lsrs r4, r0, 24
@@ -97766,11 +93530,11 @@ _0803AE1E:
 	adds r2, 0xD
 	adds r0, r7, 0
 	movs r1, 0x15
-	bl pokemon_setattr
+	bl SetMonData
 	adds r2, r6, 0x2
 	adds r0, r7, 0
 	movs r1, 0xC
-	bl pokemon_setattr
+	bl SetMonData
 	adds r1, r6, 0
 	adds r1, 0x20
 	add r0, sp, 0x10
@@ -97793,48 +93557,48 @@ _0803AE68:
 	adds r0, r7, 0
 	movs r1, 0x3
 	mov r2, r9
-	bl pokemon_setattr
+	bl SetMonData
 	add r0, sp, 0x10
 	bl SkipExtCtrlCodes
 	adds r0, r7, 0
 	movs r1, 0x2
 	add r2, sp, 0x10
-	bl pokemon_setattr
+	bl SetMonData
 	adds r2, r6, 0
 	adds r2, 0x2B
 	adds r0, r7, 0
 	movs r1, 0x20
-	bl pokemon_setattr
+	bl SetMonData
 	adds r2, r6, 0
 	adds r2, 0xE
 	adds r0, r7, 0
 	movs r1, 0x1A
-	bl pokemon_setattr
+	bl SetMonData
 	adds r2, r6, 0
 	adds r2, 0xF
 	adds r0, r7, 0
 	movs r1, 0x1B
-	bl pokemon_setattr
+	bl SetMonData
 	adds r2, r6, 0
 	adds r2, 0x10
 	adds r0, r7, 0
 	movs r1, 0x1C
-	bl pokemon_setattr
+	bl SetMonData
 	adds r2, r6, 0
 	adds r2, 0x11
 	adds r0, r7, 0
 	movs r1, 0x1D
-	bl pokemon_setattr
+	bl SetMonData
 	adds r2, r6, 0
 	adds r2, 0x12
 	adds r0, r7, 0
 	movs r1, 0x1E
-	bl pokemon_setattr
+	bl SetMonData
 	adds r2, r6, 0
 	adds r2, 0x13
 	adds r0, r7, 0
 	movs r1, 0x1F
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r0, [r6, 0x1B]
 	lsrs r0, 7
 	mov r1, r8
@@ -97842,7 +93606,7 @@ _0803AE68:
 	adds r0, r7, 0
 	movs r1, 0x2E
 	mov r2, r8
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r0, [r6, 0x18]
 	lsls r0, 27
 	lsrs r0, 27
@@ -97851,7 +93615,7 @@ _0803AE68:
 	adds r0, r7, 0
 	movs r1, 0x27
 	mov r2, r8
-	bl pokemon_setattr
+	bl SetMonData
 	ldrh r0, [r6, 0x18]
 	lsls r0, 22
 	lsrs r0, 27
@@ -97860,7 +93624,7 @@ _0803AE68:
 	adds r0, r7, 0
 	movs r1, 0x28
 	mov r2, r8
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r0, [r6, 0x19]
 	lsls r0, 25
 	lsrs r0, 27
@@ -97869,7 +93633,7 @@ _0803AE68:
 	adds r0, r7, 0
 	movs r1, 0x29
 	mov r2, r8
-	bl pokemon_setattr
+	bl SetMonData
 	ldr r0, [r6, 0x18]
 	lsls r0, 12
 	lsrs r0, 27
@@ -97878,7 +93642,7 @@ _0803AE68:
 	adds r0, r7, 0
 	movs r1, 0x2A
 	mov r2, r8
-	bl pokemon_setattr
+	bl SetMonData
 	ldrh r0, [r6, 0x1A]
 	lsls r0, 23
 	lsrs r0, 27
@@ -97887,7 +93651,7 @@ _0803AE68:
 	adds r0, r7, 0
 	movs r1, 0x2B
 	mov r2, r8
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r0, [r6, 0x1B]
 	lsls r0, 26
 	lsrs r0, 27
@@ -97896,7 +93660,7 @@ _0803AE68:
 	adds r0, r7, 0
 	movs r1, 0x2C
 	mov r2, r8
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r7, 0
 	bl pokemon_calc_effective_stats
 	add sp, 0x20
@@ -97918,12 +93682,12 @@ sub_803AF78: @ 803AF78
 	adds r6, r1, 0
 	movs r1, 0xB
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	strh r0, [r6]
 	adds r0, r7, 0
 	movs r1, 0xC
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0xAF
@@ -97944,7 +93708,7 @@ _0803AFB4:
 	adds r1, 0xD
 	adds r0, r7, 0
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	strh r0, [r4]
 	adds r4, 0x2
 	adds r5, 0x1
@@ -97953,58 +93717,58 @@ _0803AFB4:
 	adds r0, r7, 0
 	movs r1, 0x38
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	strb r0, [r6, 0xC]
 	adds r0, r7, 0
 	movs r1, 0x15
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	strb r0, [r6, 0xD]
 	adds r0, r7, 0
 	movs r1, 0x1
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	str r0, [r6, 0x14]
 	adds r0, r7, 0
 	movs r1, 0x1A
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	strb r0, [r6, 0xE]
 	adds r0, r7, 0
 	movs r1, 0x1B
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	strb r0, [r6, 0xF]
 	adds r0, r7, 0
 	movs r1, 0x1C
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	strb r0, [r6, 0x10]
 	adds r0, r7, 0
 	movs r1, 0x1D
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	strb r0, [r6, 0x11]
 	adds r0, r7, 0
 	movs r1, 0x1E
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	strb r0, [r6, 0x12]
 	adds r0, r7, 0
 	movs r1, 0x1F
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	strb r0, [r6, 0x13]
 	adds r0, r7, 0
 	movs r1, 0x20
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	mov r1, r8
 	strb r0, [r1]
 	adds r0, r7, 0
 	movs r1, 0x27
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	movs r4, 0x1F
 	ands r0, r4
 	ldrb r2, [r6, 0x18]
@@ -98016,7 +93780,7 @@ _0803AFB4:
 	adds r0, r7, 0
 	movs r1, 0x28
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	movs r5, 0x1F
 	ands r0, r5
 	lsls r0, 5
@@ -98028,7 +93792,7 @@ _0803AFB4:
 	adds r0, r7, 0
 	movs r1, 0x29
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	ands r0, r4
 	lsls r0, 2
 	ldrb r2, [r6, 0x19]
@@ -98040,7 +93804,7 @@ _0803AFB4:
 	adds r0, r7, 0
 	movs r1, 0x2A
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	movs r1, 0x1F
 	ands r1, r0
 	lsls r1, 15
@@ -98052,7 +93816,7 @@ _0803AFB4:
 	adds r0, r7, 0
 	movs r1, 0x2B
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	ands r0, r5
 	lsls r0, 4
 	ldrh r2, [r6, 0x1A]
@@ -98063,7 +93827,7 @@ _0803AFB4:
 	adds r0, r7, 0
 	movs r1, 0x2C
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	ands r0, r4
 	lsls r0, 1
 	ldrb r2, [r6, 0x1B]
@@ -98075,7 +93839,7 @@ _0803AFB4:
 	adds r0, r7, 0
 	movs r1, 0x2E
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 7
 	ldrb r2, [r6, 0x1B]
 	movs r1, 0x7F
@@ -98085,12 +93849,12 @@ _0803AFB4:
 	adds r0, r7, 0
 	movs r1, 0
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	str r0, [r6, 0x1C]
 	adds r0, r7, 0
 	movs r1, 0x2
 	mov r2, r9
-	bl PokemonGetField
+	bl GetMonData
 	pop {r3,r4}
 	mov r8, r3
 	mov r9, r4
@@ -98112,22 +93876,22 @@ pokemon_calc_checksum: @ 803B124
 	movs r6, 0
 	ldr r1, [r4]
 	movs r2, 0
-	bl sub_803C638
+	bl GetSubstruct
 	adds r5, r0, 0
 	ldr r1, [r4]
 	adds r0, r4, 0
 	movs r2, 0x1
-	bl sub_803C638
+	bl GetSubstruct
 	adds r7, r0, 0
 	ldr r1, [r4]
 	adds r0, r4, 0
 	movs r2, 0x2
-	bl sub_803C638
+	bl GetSubstruct
 	mov r8, r0
 	ldr r1, [r4]
 	adds r0, r4, 0
 	movs r2, 0x3
-	bl sub_803C638
+	bl GetSubstruct
 	adds r3, r0, 0
 	movs r1, 0x5
 _0803B15E:
@@ -98191,77 +93955,77 @@ pokemon_calc_effective_stats: @ 803B1B8
 	adds r5, r0, 0
 	movs r1, 0x3A
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	mov r8, r0
 	adds r0, r5, 0
 	movs r1, 0x39
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	str r0, [sp, 0x1C]
 	adds r0, r5, 0
 	movs r1, 0x27
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	adds r6, r0, 0
 	adds r0, r5, 0
 	movs r1, 0x1A
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	adds r4, r0, 0
 	adds r0, r5, 0
 	movs r1, 0x28
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	mov r10, r0
 	adds r0, r5, 0
 	movs r1, 0x1B
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	mov r9, r0
 	adds r0, r5, 0
 	movs r1, 0x29
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	str r0, [sp, 0x20]
 	adds r0, r5, 0
 	movs r1, 0x1C
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	str r0, [sp, 0x24]
 	adds r0, r5, 0
 	movs r1, 0x2A
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	str r0, [sp, 0x28]
 	adds r0, r5, 0
 	movs r1, 0x1D
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	str r0, [sp, 0x2C]
 	adds r0, r5, 0
 	movs r1, 0x2B
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	str r0, [sp, 0x30]
 	adds r0, r5, 0
 	movs r1, 0x1E
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	str r0, [sp, 0x34]
 	adds r0, r5, 0
 	movs r1, 0x2C
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	str r0, [sp, 0x38]
 	adds r0, r5, 0
 	movs r1, 0x1F
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	str r0, [sp, 0x3C]
 	adds r0, r5, 0
 	movs r1, 0xB
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r7, r0, 16
 	adds r0, r5, 0
@@ -98272,7 +94036,7 @@ pokemon_calc_effective_stats: @ 803B1B8
 	adds r0, r5, 0
 	movs r1, 0x38
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	ldr r0, _0803B2A0
 	cmp r7, r0
 	bne _0803B2A4
@@ -98323,7 +94087,7 @@ _0803B2D2:
 _0803B2EC:
 	adds r0, r5, 0
 	movs r1, 0x3A
-	bl pokemon_setattr
+	bl SetMonData
 	ldr r0, _0803B470
 	subs r1, r6, r7
 	lsls r1, 2
@@ -98359,7 +94123,7 @@ _0803B30C:
 	adds r0, r5, 0
 	movs r1, 0x3B
 	adds r2, r4, 0
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r0, [r6, 0x2]
 	lsls r0, 1
 	ldr r3, [sp, 0x20]
@@ -98391,7 +94155,7 @@ _0803B352:
 	adds r0, r5, 0
 	movs r1, 0x3C
 	adds r2, r4, 0
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r0, [r6, 0x3]
 	lsls r0, 1
 	ldr r2, [sp, 0x28]
@@ -98423,7 +94187,7 @@ _0803B398:
 	adds r0, r5, 0
 	movs r1, 0x3D
 	adds r2, r4, 0
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r0, [r6, 0x4]
 	lsls r0, 1
 	ldr r3, [sp, 0x30]
@@ -98455,7 +94219,7 @@ _0803B3DE:
 	adds r0, r5, 0
 	movs r1, 0x3E
 	adds r2, r4, 0
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r0, [r6, 0x5]
 	lsls r0, 1
 	ldr r2, [sp, 0x38]
@@ -98487,7 +94251,7 @@ _0803B424:
 	adds r0, r5, 0
 	movs r1, 0x3F
 	adds r2, r4, 0
-	bl pokemon_setattr
+	bl SetMonData
 	ldr r0, _0803B47C
 	cmp r7, r0
 	bne _0803B480
@@ -98524,7 +94288,7 @@ _0803B498:
 	add r2, sp, 0x1C
 	adds r0, r5, 0
 	movs r1, 0x39
-	bl pokemon_setattr
+	bl SetMonData
 _0803B4A4:
 	add sp, 0x40
 	pop {r3-r5}
@@ -98551,21 +94315,21 @@ sub_803B4B4: @ 803B4B4
 	adds r0, r4, 0
 	movs r1, 0x37
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x39
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x3A
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	movs r0, 0xFF
 	str r0, [sp]
 	adds r0, r4, 0
 	movs r1, 0x40
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	bl pokemon_calc_effective_stats
 	add sp, 0x4
@@ -98580,14 +94344,14 @@ level_by_exp: @ 803B504
 	adds r5, r0, 0
 	movs r1, 0xB
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
 	movs r1, 0x19
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	adds r3, r0, 0
 	movs r2, 0x1
 	ldr r6, _0803B568
@@ -98636,14 +94400,14 @@ sub_803B570: @ 803B570
 	adds r5, r0, 0
 	movs r1, 0xB
 	movs r2, 0
-	bl PokemonGetEncryptedField
+	bl GetMonBoxData
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
 	movs r1, 0x19
 	movs r2, 0
-	bl PokemonGetEncryptedField
+	bl GetMonBoxData
 	adds r3, r0, 0
 	movs r2, 0x1
 	ldr r6, _0803B5D4
@@ -98713,7 +94477,7 @@ _0803B5FE:
 	adds r0, r7, 0
 	adds r1, r4, 0
 	movs r2, 0
-	bl PokemonGetEncryptedField
+	bl GetMonBoxData
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0
@@ -98721,7 +94485,7 @@ _0803B5FE:
 	adds r0, r7, 0
 	adds r1, r4, 0
 	mov r2, sp
-	bl PokemonSetEncryptedField
+	bl SetMonBoxData
 	adds r1, r5, 0
 	adds r1, 0x11
 	ldrh r0, [r6]
@@ -98731,7 +94495,7 @@ _0803B5FE:
 	ldr r0, _0803B638
 	adds r2, r0
 	adds r0, r7, 0
-	bl PokemonSetEncryptedField
+	bl SetMonBoxData
 	ldrh r0, [r6]
 	b _0803B654
 	.align 2, 0
@@ -98813,7 +94577,7 @@ sub_803B6A4: @ 803B6A4
 	adds r1, 0xD
 	adds r0, r5, 0
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	adds r4, 0x11
 	mov r0, sp
 	ldrh r0, [r0]
@@ -98824,7 +94588,7 @@ sub_803B6A4: @ 803B6A4
 	adds r2, r0
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl pokemon_setattr
+	bl SetMonData
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r0}
@@ -98880,7 +94644,7 @@ sub_803B720: @ 803B720
 	mov r8, r0
 	movs r1, 0xB
 	movs r2, 0
-	bl PokemonGetEncryptedField
+	bl GetMonBoxData
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -98970,14 +94734,14 @@ sub_803B7C8: @ 803B7C8
 	mov r0, r8
 	movs r1, 0xB
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	mov r9, r0
 	mov r0, r8
 	movs r1, 0x38
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r0
@@ -99111,13 +94875,13 @@ _0803B8F0:
 	adds r1, 0xE
 	adds r0, r6, 0
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	strh r0, [r5]
 	adds r1, r4, 0
 	adds r1, 0x12
 	adds r0, r6, 0
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	adds r1, r7, r4
 	strb r0, [r1]
 	adds r5, 0x2
@@ -99127,7 +94891,7 @@ _0803B8F0:
 	adds r0, r6, 0
 	movs r1, 0x15
 	movs r2, 0
-	bl PokemonGetField
+	bl GetMonData
 	mov r1, r9
 	strb r0, [r1]
 	ldrb r0, [r1]
@@ -99151,12 +94915,12 @@ _0803B944:
 	adds r1, 0xD
 	adds r0, r6, 0
 	adds r2, r5, 0
-	bl pokemon_setattr
+	bl SetMonData
 	adds r1, r4, 0
 	adds r1, 0x11
 	adds r2, r7, r4
 	adds r0, r6, 0
-	bl pokemon_setattr
+	bl SetMonData
 	adds r5, 0x2
 	adds r4, 0x1
 	cmp r4, 0x3
@@ -99164,7 +94928,7 @@ _0803B944:
 	adds r0, r6, 0
 	movs r1, 0x15
 	mov r2, r9
-	bl pokemon_setattr
+	bl SetMonData
 	add sp, 0x10
 	pop {r3,r4}
 	mov r8, r3
@@ -99197,13 +94961,13 @@ _0803B99C:
 	adds r1, 0xE
 	adds r0, r6, 0
 	movs r2, 0
-	bl PokemonGetEncryptedField
+	bl GetMonBoxData
 	strh r0, [r5]
 	adds r1, r4, 0
 	adds r1, 0x12
 	adds r0, r6, 0
 	movs r2, 0
-	bl PokemonGetEncryptedField
+	bl GetMonBoxData
 	adds r1, r7, r4
 	strb r0, [r1]
 	adds r5, 0x2
@@ -99213,7 +94977,7 @@ _0803B99C:
 	adds r0, r6, 0
 	movs r1, 0x15
 	movs r2, 0
-	bl PokemonGetEncryptedField
+	bl GetMonBoxData
 	mov r1, r9
 	strb r0, [r1]
 	ldrb r0, [r1]
@@ -99237,12 +95001,12 @@ _0803B9F0:
 	adds r1, 0xD
 	adds r0, r6, 0
 	adds r2, r5, 0
-	bl PokemonSetEncryptedField
+	bl SetMonBoxData
 	adds r1, r4, 0
 	adds r1, 0x11
 	adds r2, r7, r4
 	adds r0, r6, 0
-	bl PokemonSetEncryptedField
+	bl SetMonBoxData
 	adds r5, 0x2
 	adds r4, 0x1
 	cmp r4, 0x3
@@ -99250,7 +95014,7 @@ _0803B9F0:
 	adds r0, r6, 0
 	movs r1, 0x15
 	mov r2, r9
-	bl PokemonSetEncryptedField
+	bl SetMonBoxData
 	add sp, 0x10
 	pop {r3,r4}
 	mov r8, r3
@@ -100623,13 +96387,13 @@ pokemon_roll_gender: @ 803C4C8
 	adds r4, r0, 0
 	movs r1, 0xB
 	movs r2, 0
-	bl PokemonGetEncryptedField
+	bl GetMonBoxData
 	lsls r0, 16
 	lsrs r5, r0, 16
 	adds r0, r4, 0
 	movs r1, 0
 	movs r2, 0
-	bl PokemonGetEncryptedField
+	bl GetMonBoxData
 	adds r2, r0, 0
 	ldr r1, _0803C518
 	lsls r0, r5, 3
@@ -100781,9540 +96545,4 @@ _0803C5DE:
 _0803C5EC: .4byte gUnknown_081EC2A4
 	thumb_func_end sub_803C5A0
 
-	thumb_func_start pokemon_encrypt
-pokemon_encrypt: @ 803C5F0
-	push {r4,lr}
-	adds r3, r0, 0
-	movs r4, 0
-	adds r2, r3, 0
-	adds r2, 0x20
-_0803C5FA:
-	ldr r0, [r2]
-	ldr r1, [r3]
-	eors r0, r1
-	str r0, [r2]
-	ldr r1, [r3, 0x4]
-	eors r0, r1
-	stm r2!, {r0}
-	adds r4, 0x1
-	cmp r4, 0xB
-	bls _0803C5FA
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end pokemon_encrypt
-
-	thumb_func_start pokemon_decrypt
-pokemon_decrypt: @ 803C614
-	push {r4,lr}
-	adds r3, r0, 0
-	movs r4, 0
-	adds r2, r3, 0
-	adds r2, 0x20
-_0803C61E:
-	ldr r0, [r2]
-	ldr r1, [r3, 0x4]
-	eors r0, r1
-	str r0, [r2]
-	ldr r1, [r3]
-	eors r0, r1
-	stm r2!, {r0}
-	adds r4, 0x1
-	cmp r4, 0xB
-	bls _0803C61E
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end pokemon_decrypt
-
-	thumb_func_start sub_803C638
-sub_803C638: @ 803C638
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x4C
-	lsls r2, 24
-	lsrs r4, r2, 24
-	movs r5, 0
-	adds r0, 0x20
-	str r0, [sp, 0x4]
-	str r0, [sp]
-	str r0, [sp, 0xC]
-	str r0, [sp, 0x8]
-	str r0, [sp, 0x14]
-	str r0, [sp, 0x10]
-	str r0, [sp, 0x1C]
-	str r0, [sp, 0x18]
-	str r0, [sp, 0x24]
-	str r0, [sp, 0x20]
-	str r0, [sp, 0x2C]
-	str r0, [sp, 0x28]
-	mov r10, r0
-	str r0, [sp, 0x30]
-	mov r8, r10
-	str r0, [sp, 0x34]
-	mov r3, r8
-	str r3, [sp, 0x38]
-	adds r7, r3, 0
-	str r7, [sp, 0x3C]
-	adds r6, r7, 0
-	str r6, [sp, 0x40]
-	adds r2, r6, 0
-	mov r9, r2
-	adds r0, r1, 0
-	movs r1, 0x18
-	str r2, [sp, 0x44]
-	str r3, [sp, 0x48]
-	bl __umodsi3
-	ldr r2, [sp, 0x44]
-	ldr r3, [sp, 0x48]
-	cmp r0, 0x17
-	bls _0803C692
-	b _0803CB4E
-_0803C692:
-	lsls r0, 2
-	ldr r1, _0803C69C
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_0803C69C: .4byte _0803C6A0
-	.align 2, 0
-_0803C6A0:
-	.4byte _0803C700
-	.4byte _0803C72E
-	.4byte _0803C75C
-	.4byte _0803C78A
-	.4byte _0803C7B8
-	.4byte _0803C7E6
-	.4byte _0803C814
-	.4byte _0803C842
-	.4byte _0803C870
-	.4byte _0803C89E
-	.4byte _0803C8CC
-	.4byte _0803C8FA
-	.4byte _0803C928
-	.4byte _0803C956
-	.4byte _0803C984
-	.4byte _0803C9B2
-	.4byte _0803C9E0
-	.4byte _0803CA0E
-	.4byte _0803CA3C
-	.4byte _0803CA6A
-	.4byte _0803CA98
-	.4byte _0803CAC6
-	.4byte _0803CAF4
-	.4byte _0803CB22
-_0803C700:
-	cmp r4, 0x1
-	beq _0803C71C
-	cmp r4, 0x1
-	bgt _0803C70E
-	cmp r4, 0
-	beq _0803C718
-	b _0803CB4E
-_0803C70E:
-	cmp r4, 0x2
-	beq _0803C722
-	cmp r4, 0x3
-	beq _0803C728
-	b _0803CB4E
-_0803C718:
-	ldr r5, [sp]
-	b _0803CB4E
-_0803C71C:
-	ldr r5, [sp]
-	adds r5, 0xC
-	b _0803CB4E
-_0803C722:
-	ldr r5, [sp]
-	adds r5, 0x18
-	b _0803CB4E
-_0803C728:
-	ldr r5, [sp]
-	adds r5, 0x24
-	b _0803CB4E
-_0803C72E:
-	cmp r4, 0x1
-	beq _0803C74A
-	cmp r4, 0x1
-	bgt _0803C73C
-	cmp r4, 0
-	beq _0803C746
-	b _0803CB4E
-_0803C73C:
-	cmp r4, 0x2
-	beq _0803C750
-	cmp r4, 0x3
-	beq _0803C756
-	b _0803CB4E
-_0803C746:
-	ldr r5, [sp, 0x4]
-	b _0803CB4E
-_0803C74A:
-	ldr r5, [sp, 0x4]
-	adds r5, 0xC
-	b _0803CB4E
-_0803C750:
-	ldr r5, [sp, 0x4]
-	adds r5, 0x24
-	b _0803CB4E
-_0803C756:
-	ldr r5, [sp, 0x4]
-	adds r5, 0x18
-	b _0803CB4E
-_0803C75C:
-	cmp r4, 0x1
-	beq _0803C778
-	cmp r4, 0x1
-	bgt _0803C76A
-	cmp r4, 0
-	beq _0803C774
-	b _0803CB4E
-_0803C76A:
-	cmp r4, 0x2
-	beq _0803C77E
-	cmp r4, 0x3
-	beq _0803C784
-	b _0803CB4E
-_0803C774:
-	ldr r5, [sp, 0x8]
-	b _0803CB4E
-_0803C778:
-	ldr r5, [sp, 0x8]
-	adds r5, 0x18
-	b _0803CB4E
-_0803C77E:
-	ldr r5, [sp, 0x8]
-	adds r5, 0xC
-	b _0803CB4E
-_0803C784:
-	ldr r5, [sp, 0x8]
-	adds r5, 0x24
-	b _0803CB4E
-_0803C78A:
-	cmp r4, 0x1
-	beq _0803C7A6
-	cmp r4, 0x1
-	bgt _0803C798
-	cmp r4, 0
-	beq _0803C7A2
-	b _0803CB4E
-_0803C798:
-	cmp r4, 0x2
-	beq _0803C7AC
-	cmp r4, 0x3
-	beq _0803C7B2
-	b _0803CB4E
-_0803C7A2:
-	ldr r5, [sp, 0xC]
-	b _0803CB4E
-_0803C7A6:
-	ldr r5, [sp, 0xC]
-	adds r5, 0x24
-	b _0803CB4E
-_0803C7AC:
-	ldr r5, [sp, 0xC]
-	adds r5, 0xC
-	b _0803CB4E
-_0803C7B2:
-	ldr r5, [sp, 0xC]
-	adds r5, 0x18
-	b _0803CB4E
-_0803C7B8:
-	cmp r4, 0x1
-	beq _0803C7D4
-	cmp r4, 0x1
-	bgt _0803C7C6
-	cmp r4, 0
-	beq _0803C7D0
-	b _0803CB4E
-_0803C7C6:
-	cmp r4, 0x2
-	beq _0803C7DA
-	cmp r4, 0x3
-	beq _0803C7E0
-	b _0803CB4E
-_0803C7D0:
-	ldr r5, [sp, 0x10]
-	b _0803CB4E
-_0803C7D4:
-	ldr r5, [sp, 0x10]
-	adds r5, 0x18
-	b _0803CB4E
-_0803C7DA:
-	ldr r5, [sp, 0x10]
-	adds r5, 0x24
-	b _0803CB4E
-_0803C7E0:
-	ldr r5, [sp, 0x10]
-	adds r5, 0xC
-	b _0803CB4E
-_0803C7E6:
-	cmp r4, 0x1
-	beq _0803C802
-	cmp r4, 0x1
-	bgt _0803C7F4
-	cmp r4, 0
-	beq _0803C7FE
-	b _0803CB4E
-_0803C7F4:
-	cmp r4, 0x2
-	beq _0803C808
-	cmp r4, 0x3
-	beq _0803C80E
-	b _0803CB4E
-_0803C7FE:
-	ldr r5, [sp, 0x14]
-	b _0803CB4E
-_0803C802:
-	ldr r5, [sp, 0x14]
-	adds r5, 0x24
-	b _0803CB4E
-_0803C808:
-	ldr r5, [sp, 0x14]
-	adds r5, 0x18
-	b _0803CB4E
-_0803C80E:
-	ldr r5, [sp, 0x14]
-	adds r5, 0xC
-	b _0803CB4E
-_0803C814:
-	cmp r4, 0x1
-	beq _0803C832
-	cmp r4, 0x1
-	bgt _0803C822
-	cmp r4, 0
-	beq _0803C82C
-	b _0803CB4E
-_0803C822:
-	cmp r4, 0x2
-	beq _0803C836
-	cmp r4, 0x3
-	beq _0803C83C
-	b _0803CB4E
-_0803C82C:
-	ldr r5, [sp, 0x18]
-	adds r5, 0xC
-	b _0803CB4E
-_0803C832:
-	ldr r5, [sp, 0x18]
-	b _0803CB4E
-_0803C836:
-	ldr r5, [sp, 0x18]
-	adds r5, 0x18
-	b _0803CB4E
-_0803C83C:
-	ldr r5, [sp, 0x18]
-	adds r5, 0x24
-	b _0803CB4E
-_0803C842:
-	cmp r4, 0x1
-	beq _0803C860
-	cmp r4, 0x1
-	bgt _0803C850
-	cmp r4, 0
-	beq _0803C85A
-	b _0803CB4E
-_0803C850:
-	cmp r4, 0x2
-	beq _0803C864
-	cmp r4, 0x3
-	beq _0803C86A
-	b _0803CB4E
-_0803C85A:
-	ldr r5, [sp, 0x1C]
-	adds r5, 0xC
-	b _0803CB4E
-_0803C860:
-	ldr r5, [sp, 0x1C]
-	b _0803CB4E
-_0803C864:
-	ldr r5, [sp, 0x1C]
-	adds r5, 0x24
-	b _0803CB4E
-_0803C86A:
-	ldr r5, [sp, 0x1C]
-	adds r5, 0x18
-	b _0803CB4E
-_0803C870:
-	cmp r4, 0x1
-	beq _0803C88E
-	cmp r4, 0x1
-	bgt _0803C87E
-	cmp r4, 0
-	beq _0803C888
-	b _0803CB4E
-_0803C87E:
-	cmp r4, 0x2
-	beq _0803C892
-	cmp r4, 0x3
-	beq _0803C898
-	b _0803CB4E
-_0803C888:
-	ldr r5, [sp, 0x20]
-	adds r5, 0x18
-	b _0803CB4E
-_0803C88E:
-	ldr r5, [sp, 0x20]
-	b _0803CB4E
-_0803C892:
-	ldr r5, [sp, 0x20]
-	adds r5, 0xC
-	b _0803CB4E
-_0803C898:
-	ldr r5, [sp, 0x20]
-	adds r5, 0x24
-	b _0803CB4E
-_0803C89E:
-	cmp r4, 0x1
-	beq _0803C8BC
-	cmp r4, 0x1
-	bgt _0803C8AC
-	cmp r4, 0
-	beq _0803C8B6
-	b _0803CB4E
-_0803C8AC:
-	cmp r4, 0x2
-	beq _0803C8C0
-	cmp r4, 0x3
-	beq _0803C8C6
-	b _0803CB4E
-_0803C8B6:
-	ldr r5, [sp, 0x24]
-	adds r5, 0x24
-	b _0803CB4E
-_0803C8BC:
-	ldr r5, [sp, 0x24]
-	b _0803CB4E
-_0803C8C0:
-	ldr r5, [sp, 0x24]
-	adds r5, 0xC
-	b _0803CB4E
-_0803C8C6:
-	ldr r5, [sp, 0x24]
-	adds r5, 0x18
-	b _0803CB4E
-_0803C8CC:
-	cmp r4, 0x1
-	beq _0803C8EA
-	cmp r4, 0x1
-	bgt _0803C8DA
-	cmp r4, 0
-	beq _0803C8E4
-	b _0803CB4E
-_0803C8DA:
-	cmp r4, 0x2
-	beq _0803C8EE
-	cmp r4, 0x3
-	beq _0803C8F4
-	b _0803CB4E
-_0803C8E4:
-	ldr r5, [sp, 0x28]
-	adds r5, 0x18
-	b _0803CB4E
-_0803C8EA:
-	ldr r5, [sp, 0x28]
-	b _0803CB4E
-_0803C8EE:
-	ldr r5, [sp, 0x28]
-	adds r5, 0x24
-	b _0803CB4E
-_0803C8F4:
-	ldr r5, [sp, 0x28]
-	adds r5, 0xC
-	b _0803CB4E
-_0803C8FA:
-	cmp r4, 0x1
-	beq _0803C918
-	cmp r4, 0x1
-	bgt _0803C908
-	cmp r4, 0
-	beq _0803C912
-	b _0803CB4E
-_0803C908:
-	cmp r4, 0x2
-	beq _0803C91C
-	cmp r4, 0x3
-	beq _0803C922
-	b _0803CB4E
-_0803C912:
-	ldr r5, [sp, 0x2C]
-	adds r5, 0x24
-	b _0803CB4E
-_0803C918:
-	ldr r5, [sp, 0x2C]
-	b _0803CB4E
-_0803C91C:
-	ldr r5, [sp, 0x2C]
-	adds r5, 0x18
-	b _0803CB4E
-_0803C922:
-	ldr r5, [sp, 0x2C]
-	adds r5, 0xC
-	b _0803CB4E
-_0803C928:
-	cmp r4, 0x1
-	beq _0803C946
-	cmp r4, 0x1
-	bgt _0803C936
-	cmp r4, 0
-	beq _0803C940
-	b _0803CB4E
-_0803C936:
-	cmp r4, 0x2
-	beq _0803C94C
-	cmp r4, 0x3
-	beq _0803C950
-	b _0803CB4E
-_0803C940:
-	ldr r5, [sp, 0x30]
-	adds r5, 0xC
-	b _0803CB4E
-_0803C946:
-	ldr r5, [sp, 0x30]
-	adds r5, 0x18
-	b _0803CB4E
-_0803C94C:
-	ldr r5, [sp, 0x30]
-	b _0803CB4E
-_0803C950:
-	ldr r5, [sp, 0x30]
-	adds r5, 0x24
-	b _0803CB4E
-_0803C956:
-	cmp r4, 0x1
-	beq _0803C974
-	cmp r4, 0x1
-	bgt _0803C964
-	cmp r4, 0
-	beq _0803C96E
-	b _0803CB4E
-_0803C964:
-	cmp r4, 0x2
-	beq _0803C97A
-	cmp r4, 0x3
-	beq _0803C97E
-	b _0803CB4E
-_0803C96E:
-	mov r5, r10
-	adds r5, 0xC
-	b _0803CB4E
-_0803C974:
-	mov r5, r10
-	adds r5, 0x24
-	b _0803CB4E
-_0803C97A:
-	mov r5, r10
-	b _0803CB4E
-_0803C97E:
-	mov r5, r10
-	adds r5, 0x18
-	b _0803CB4E
-_0803C984:
-	cmp r4, 0x1
-	beq _0803C9A2
-	cmp r4, 0x1
-	bgt _0803C992
-	cmp r4, 0
-	beq _0803C99C
-	b _0803CB4E
-_0803C992:
-	cmp r4, 0x2
-	beq _0803C9A8
-	cmp r4, 0x3
-	beq _0803C9AC
-	b _0803CB4E
-_0803C99C:
-	ldr r5, [sp, 0x34]
-	adds r5, 0x18
-	b _0803CB4E
-_0803C9A2:
-	ldr r5, [sp, 0x34]
-	adds r5, 0xC
-	b _0803CB4E
-_0803C9A8:
-	ldr r5, [sp, 0x34]
-	b _0803CB4E
-_0803C9AC:
-	ldr r5, [sp, 0x34]
-	adds r5, 0x24
-	b _0803CB4E
-_0803C9B2:
-	cmp r4, 0x1
-	beq _0803C9D0
-	cmp r4, 0x1
-	bgt _0803C9C0
-	cmp r4, 0
-	beq _0803C9CA
-	b _0803CB4E
-_0803C9C0:
-	cmp r4, 0x2
-	beq _0803C9D6
-	cmp r4, 0x3
-	beq _0803C9DA
-	b _0803CB4E
-_0803C9CA:
-	mov r5, r8
-	adds r5, 0x24
-	b _0803CB4E
-_0803C9D0:
-	mov r5, r8
-	adds r5, 0xC
-	b _0803CB4E
-_0803C9D6:
-	mov r5, r8
-	b _0803CB4E
-_0803C9DA:
-	mov r5, r8
-	adds r5, 0x18
-	b _0803CB4E
-_0803C9E0:
-	cmp r4, 0x1
-	beq _0803C9FE
-	cmp r4, 0x1
-	bgt _0803C9EE
-	cmp r4, 0
-	beq _0803C9F8
-	b _0803CB4E
-_0803C9EE:
-	cmp r4, 0x2
-	beq _0803CA04
-	cmp r4, 0x3
-	beq _0803CA08
-	b _0803CB4E
-_0803C9F8:
-	ldr r5, [sp, 0x38]
-	adds r5, 0x18
-	b _0803CB4E
-_0803C9FE:
-	ldr r5, [sp, 0x38]
-	adds r5, 0x24
-	b _0803CB4E
-_0803CA04:
-	ldr r5, [sp, 0x38]
-	b _0803CB4E
-_0803CA08:
-	ldr r5, [sp, 0x38]
-	adds r5, 0xC
-	b _0803CB4E
-_0803CA0E:
-	cmp r4, 0x1
-	beq _0803CA2C
-	cmp r4, 0x1
-	bgt _0803CA1C
-	cmp r4, 0
-	beq _0803CA26
-	b _0803CB4E
-_0803CA1C:
-	cmp r4, 0x2
-	beq _0803CA32
-	cmp r4, 0x3
-	beq _0803CA36
-	b _0803CB4E
-_0803CA26:
-	adds r5, r3, 0
-	adds r5, 0x24
-	b _0803CB4E
-_0803CA2C:
-	adds r5, r3, 0
-	adds r5, 0x18
-	b _0803CB4E
-_0803CA32:
-	adds r5, r3, 0
-	b _0803CB4E
-_0803CA36:
-	adds r5, r3, 0
-	adds r5, 0xC
-	b _0803CB4E
-_0803CA3C:
-	cmp r4, 0x1
-	beq _0803CA5A
-	cmp r4, 0x1
-	bgt _0803CA4A
-	cmp r4, 0
-	beq _0803CA54
-	b _0803CB4E
-_0803CA4A:
-	cmp r4, 0x2
-	beq _0803CA60
-	cmp r4, 0x3
-	beq _0803CA66
-	b _0803CB4E
-_0803CA54:
-	ldr r5, [sp, 0x3C]
-	adds r5, 0xC
-	b _0803CB4E
-_0803CA5A:
-	ldr r5, [sp, 0x3C]
-	adds r5, 0x18
-	b _0803CB4E
-_0803CA60:
-	ldr r5, [sp, 0x3C]
-	adds r5, 0x24
-	b _0803CB4E
-_0803CA66:
-	ldr r5, [sp, 0x3C]
-	b _0803CB4E
-_0803CA6A:
-	cmp r4, 0x1
-	beq _0803CA88
-	cmp r4, 0x1
-	bgt _0803CA78
-	cmp r4, 0
-	beq _0803CA82
-	b _0803CB4E
-_0803CA78:
-	cmp r4, 0x2
-	beq _0803CA8E
-	cmp r4, 0x3
-	beq _0803CA94
-	b _0803CB4E
-_0803CA82:
-	adds r5, r7, 0
-	adds r5, 0xC
-	b _0803CB4E
-_0803CA88:
-	adds r5, r7, 0
-	adds r5, 0x24
-	b _0803CB4E
-_0803CA8E:
-	adds r5, r7, 0
-	adds r5, 0x18
-	b _0803CB4E
-_0803CA94:
-	adds r5, r7, 0
-	b _0803CB4E
-_0803CA98:
-	cmp r4, 0x1
-	beq _0803CAB6
-	cmp r4, 0x1
-	bgt _0803CAA6
-	cmp r4, 0
-	beq _0803CAB0
-	b _0803CB4E
-_0803CAA6:
-	cmp r4, 0x2
-	beq _0803CABC
-	cmp r4, 0x3
-	beq _0803CAC2
-	b _0803CB4E
-_0803CAB0:
-	ldr r5, [sp, 0x40]
-	adds r5, 0x18
-	b _0803CB4E
-_0803CAB6:
-	ldr r5, [sp, 0x40]
-	adds r5, 0xC
-	b _0803CB4E
-_0803CABC:
-	ldr r5, [sp, 0x40]
-	adds r5, 0x24
-	b _0803CB4E
-_0803CAC2:
-	ldr r5, [sp, 0x40]
-	b _0803CB4E
-_0803CAC6:
-	cmp r4, 0x1
-	beq _0803CAE4
-	cmp r4, 0x1
-	bgt _0803CAD4
-	cmp r4, 0
-	beq _0803CADE
-	b _0803CB4E
-_0803CAD4:
-	cmp r4, 0x2
-	beq _0803CAEA
-	cmp r4, 0x3
-	beq _0803CAF0
-	b _0803CB4E
-_0803CADE:
-	adds r5, r6, 0
-	adds r5, 0x24
-	b _0803CB4E
-_0803CAE4:
-	adds r5, r6, 0
-	adds r5, 0xC
-	b _0803CB4E
-_0803CAEA:
-	adds r5, r6, 0
-	adds r5, 0x18
-	b _0803CB4E
-_0803CAF0:
-	adds r5, r6, 0
-	b _0803CB4E
-_0803CAF4:
-	cmp r4, 0x1
-	beq _0803CB12
-	cmp r4, 0x1
-	bgt _0803CB02
-	cmp r4, 0
-	beq _0803CB0C
-	b _0803CB4E
-_0803CB02:
-	cmp r4, 0x2
-	beq _0803CB18
-	cmp r4, 0x3
-	beq _0803CB1E
-	b _0803CB4E
-_0803CB0C:
-	mov r5, r9
-	adds r5, 0x18
-	b _0803CB4E
-_0803CB12:
-	mov r5, r9
-	adds r5, 0x24
-	b _0803CB4E
-_0803CB18:
-	mov r5, r9
-	adds r5, 0xC
-	b _0803CB4E
-_0803CB1E:
-	mov r5, r9
-	b _0803CB4E
-_0803CB22:
-	cmp r4, 0x1
-	beq _0803CB40
-	cmp r4, 0x1
-	bgt _0803CB30
-	cmp r4, 0
-	beq _0803CB3A
-	b _0803CB4E
-_0803CB30:
-	cmp r4, 0x2
-	beq _0803CB46
-	cmp r4, 0x3
-	beq _0803CB4C
-	b _0803CB4E
-_0803CB3A:
-	adds r5, r2, 0
-	adds r5, 0x24
-	b _0803CB4E
-_0803CB40:
-	adds r5, r2, 0
-	adds r5, 0x18
-	b _0803CB4E
-_0803CB46:
-	adds r5, r2, 0
-	adds r5, 0xC
-	b _0803CB4E
-_0803CB4C:
-	adds r5, r2, 0
-_0803CB4E:
-	adds r0, r5, 0
-	add sp, 0x4C
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_803C638
-
-	thumb_func_start PokemonGetField
-PokemonGetField: @ 803CB60
-	push {lr}
-	adds r3, r0, 0
-	adds r0, r1, 0
-	subs r0, 0x37
-	cmp r0, 0x9
-	bhi _0803CBF0
-	lsls r0, 2
-	ldr r1, _0803CB78
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_0803CB78: .4byte _0803CB7C
-	.align 2, 0
-_0803CB7C:
-	.4byte _0803CBA4
-	.4byte _0803CBA8
-	.4byte _0803CBB0
-	.4byte _0803CBB8
-	.4byte _0803CBC0
-	.4byte _0803CBC8
-	.4byte _0803CBD0
-	.4byte _0803CBD8
-	.4byte _0803CBE0
-	.4byte _0803CBE8
-_0803CBA4:
-	ldr r0, [r3, 0x50]
-	b _0803CBF6
-_0803CBA8:
-	adds r0, r3, 0
-	adds r0, 0x54
-	ldrb r0, [r0]
-	b _0803CBF6
-_0803CBB0:
-	adds r0, r3, 0
-	adds r0, 0x56
-	ldrh r0, [r0]
-	b _0803CBF6
-_0803CBB8:
-	adds r0, r3, 0
-	adds r0, 0x58
-	ldrh r0, [r0]
-	b _0803CBF6
-_0803CBC0:
-	adds r0, r3, 0
-	adds r0, 0x5A
-	ldrh r0, [r0]
-	b _0803CBF6
-_0803CBC8:
-	adds r0, r3, 0
-	adds r0, 0x5C
-	ldrh r0, [r0]
-	b _0803CBF6
-_0803CBD0:
-	adds r0, r3, 0
-	adds r0, 0x5E
-	ldrh r0, [r0]
-	b _0803CBF6
-_0803CBD8:
-	adds r0, r3, 0
-	adds r0, 0x60
-	ldrh r0, [r0]
-	b _0803CBF6
-_0803CBE0:
-	adds r0, r3, 0
-	adds r0, 0x62
-	ldrh r0, [r0]
-	b _0803CBF6
-_0803CBE8:
-	adds r0, r3, 0
-	adds r0, 0x55
-	ldrb r0, [r0]
-	b _0803CBF6
-_0803CBF0:
-	adds r0, r3, 0
-	bl PokemonGetEncryptedField
-_0803CBF6:
-	pop {r1}
-	bx r1
-	thumb_func_end PokemonGetField
-
-	thumb_func_start PokemonGetEncryptedField
-PokemonGetEncryptedField: @ 803CBFC
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x4
-	mov r8, r0
-	str r1, [sp]
-	adds r7, r2, 0
-	movs r4, 0
-	mov r9, r4
-	mov r10, r4
-	movs r6, 0
-	movs r5, 0
-	cmp r1, 0xA
-	ble _0803CC7A
-	ldr r1, [r0]
-	movs r2, 0
-	bl sub_803C638
-	mov r9, r0
-	mov r0, r8
-	ldr r1, [r0]
-	movs r2, 0x1
-	bl sub_803C638
-	mov r10, r0
-	mov r2, r8
-	ldr r1, [r2]
-	mov r0, r8
-	movs r2, 0x2
-	bl sub_803C638
-	adds r6, r0, 0
-	mov r0, r8
-	ldr r1, [r0]
-	movs r2, 0x3
-	bl sub_803C638
-	adds r5, r0, 0
-	mov r0, r8
-	bl pokemon_decrypt
-	mov r0, r8
-	bl pokemon_calc_checksum
-	lsls r0, 16
-	lsrs r0, 16
-	mov r1, r8
-	ldrh r1, [r1, 0x1C]
-	cmp r0, r1
-	beq _0803CC7A
-	mov r2, r8
-	ldrb r0, [r2, 0x13]
-	movs r1, 0x1
-	orrs r0, r1
-	movs r1, 0x4
-	orrs r0, r1
-	strb r0, [r2, 0x13]
-	ldrb r0, [r5, 0x7]
-	movs r1, 0x40
-	orrs r0, r1
-	strb r0, [r5, 0x7]
-_0803CC7A:
-	ldr r0, [sp]
-	cmp r0, 0x52
-	bls _0803CC82
-	b _0803D1DC
-_0803CC82:
-	lsls r0, 2
-	ldr r1, _0803CC8C
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_0803CC8C: .4byte _0803CC90
-	.align 2, 0
-_0803CC90:
-	.4byte _0803CDDC
-	.4byte _0803CDE2
-	.4byte _0803CDE8
-	.4byte _0803CE5C
-	.4byte _0803CE62
-	.4byte _0803CE68
-	.4byte _0803CE6E
-	.4byte _0803CE74
-	.4byte _0803CEA0
-	.4byte _0803CEA6
-	.4byte _0803CEAC
-	.4byte _0803CEB2
-	.4byte _0803CECA
-	.4byte _0803CEE2
-	.4byte _0803CEE2
-	.4byte _0803CEE2
-	.4byte _0803CEE2
-	.4byte _0803CEEE
-	.4byte _0803CEEE
-	.4byte _0803CEEE
-	.4byte _0803CEEE
-	.4byte _0803CED6
-	.4byte _0803CF10
-	.4byte _0803CF14
-	.4byte _0803CF18
-	.4byte _0803CED0
-	.4byte _0803CEF8
-	.4byte _0803CEFC
-	.4byte _0803CF00
-	.4byte _0803CF04
-	.4byte _0803CF08
-	.4byte _0803CF0C
-	.4byte _0803CEDC
-	.4byte _0803CF1C
-	.4byte _0803CF28
-	.4byte _0803CF2C
-	.4byte _0803CF30
-	.4byte _0803CF38
-	.4byte _0803CF40
-	.4byte _0803CF4E
-	.4byte _0803CF56
-	.4byte _0803CF5E
-	.4byte _0803CF66
-	.4byte _0803CF6E
-	.4byte _0803CF76
-	.4byte _0803CF7E
-	.4byte _0803CF82
-	.4byte _0803CF20
-	.4byte _0803CF24
-	.4byte _0803CF48
-	.4byte _0803CF88
-	.4byte _0803CF90
-	.4byte _0803CF98
-	.4byte _0803CFA0
-	.4byte _0803CFA8
-	.4byte _0803D1DC
-	.4byte _0803D1DC
-	.4byte _0803D1DC
-	.4byte _0803D1DC
-	.4byte _0803D1DC
-	.4byte _0803D1DC
-	.4byte _0803D1DC
-	.4byte _0803D1DC
-	.4byte _0803D1DC
-	.4byte _0803D1DC
-	.4byte _0803D006
-	.4byte _0803D02C
-	.4byte _0803CFB0
-	.4byte _0803CFB6
-	.4byte _0803CFBA
-	.4byte _0803CFBE
-	.4byte _0803CFC2
-	.4byte _0803CFCA
-	.4byte _0803CFD2
-	.4byte _0803CFDA
-	.4byte _0803CFE2
-	.4byte _0803CFE8
-	.4byte _0803CFF0
-	.4byte _0803CFF8
-	.4byte _0803D000
-	.4byte _0803D066
-	.4byte _0803D0C0
-	.4byte _0803D142
-_0803CDDC:
-	mov r1, r8
-	ldr r4, [r1]
-	b _0803D1DC
-_0803CDE2:
-	mov r2, r8
-	ldr r4, [r2, 0x4]
-	b _0803D1DC
-_0803CDE8:
-	mov r0, r8
-	ldrb r1, [r0, 0x13]
-	movs r0, 0x1
-	ands r0, r1
-	cmp r0, 0
-	beq _0803CE04
-	ldr r1, _0803CE00
-	adds r0, r7, 0
-	bl StringCopy
-	b _0803CE50
-	.align 2, 0
-_0803CE00: .4byte gUnknown_08400E3A
-_0803CE04:
-	movs r0, 0x4
-	ands r0, r1
-	cmp r0, 0
-	beq _0803CE1C
-	ldr r1, _0803CE18
-	adds r0, r7, 0
-	bl StringCopy
-	b _0803CE50
-	.align 2, 0
-_0803CE18: .4byte gUnknown_0842CC34
-_0803CE1C:
-	movs r4, 0
-	mov r1, r8
-	adds r1, 0x8
-	mov r2, r8
-	ldrb r0, [r2, 0x8]
-	ldrb r3, [r2, 0x12]
-	cmp r0, 0xFF
-	beq _0803CE42
-	adds r2, r1, 0
-_0803CE2E:
-	adds r1, r7, r4
-	ldrb r0, [r2]
-	strb r0, [r1]
-	adds r2, 0x1
-	adds r4, 0x1
-	cmp r4, 0x9
-	bhi _0803CE42
-	ldrb r0, [r2]
-	cmp r0, 0xFF
-	bne _0803CE2E
-_0803CE42:
-	adds r1, r7, r4
-	movs r0, 0xFF
-	strb r0, [r1]
-	adds r0, r7, 0
-	adds r1, r3, 0
-	bl ConvertInternationalString
-_0803CE50:
-	adds r0, r7, 0
-	bl StringLength
-	lsls r0, 16
-	lsrs r4, r0, 16
-	b _0803D1DC
-_0803CE5C:
-	mov r7, r8
-	ldrb r4, [r7, 0x12]
-	b _0803D1DC
-_0803CE62:
-	mov r1, r8
-	ldrb r0, [r1, 0x13]
-	b _0803CFEA
-_0803CE68:
-	mov r2, r8
-	ldrb r0, [r2, 0x13]
-	b _0803CFF2
-_0803CE6E:
-	mov r7, r8
-	ldrb r0, [r7, 0x13]
-	b _0803CFFA
-_0803CE74:
-	movs r4, 0
-	mov r1, r8
-	adds r1, 0x14
-	mov r2, r8
-	ldrb r0, [r2, 0x14]
-	cmp r0, 0xFF
-	beq _0803CE98
-	adds r2, r1, 0
-_0803CE84:
-	adds r1, r7, r4
-	ldrb r0, [r2]
-	strb r0, [r1]
-	adds r2, 0x1
-	adds r4, 0x1
-	cmp r4, 0x6
-	bhi _0803CE98
-	ldrb r0, [r2]
-	cmp r0, 0xFF
-	bne _0803CE84
-_0803CE98:
-	adds r1, r7, r4
-	movs r0, 0xFF
-	strb r0, [r1]
-	b _0803D1DC
-_0803CEA0:
-	mov r7, r8
-	ldrb r4, [r7, 0x1B]
-	b _0803D1DC
-_0803CEA6:
-	mov r0, r8
-	ldrh r4, [r0, 0x1C]
-	b _0803D1DC
-_0803CEAC:
-	mov r1, r8
-	ldrh r4, [r1, 0x1E]
-	b _0803D1DC
-_0803CEB2:
-	mov r2, r8
-	ldrb r1, [r2, 0x13]
-	movs r0, 0x1
-	ands r0, r1
-	movs r4, 0xCE
-	lsls r4, 1
-	cmp r0, 0
-	beq _0803CEC4
-	b _0803D1DC
-_0803CEC4:
-	mov r7, r9
-	ldrh r4, [r7]
-	b _0803D1DC
-_0803CECA:
-	mov r0, r9
-	ldrh r4, [r0, 0x2]
-	b _0803D1DC
-_0803CED0:
-	mov r1, r9
-	ldr r4, [r1, 0x4]
-	b _0803D1DC
-_0803CED6:
-	mov r2, r9
-	ldrb r4, [r2, 0x8]
-	b _0803D1DC
-_0803CEDC:
-	mov r7, r9
-	ldrb r4, [r7, 0x9]
-	b _0803D1DC
-_0803CEE2:
-	ldr r0, [sp]
-	subs r0, 0xD
-	lsls r0, 1
-	add r0, r10
-	ldrh r4, [r0]
-	b _0803D1DC
-_0803CEEE:
-	ldr r0, [sp]
-	add r0, r10
-	subs r0, 0x9
-	ldrb r4, [r0]
-	b _0803D1DC
-_0803CEF8:
-	ldrb r4, [r6]
-	b _0803D1DC
-_0803CEFC:
-	ldrb r4, [r6, 0x1]
-	b _0803D1DC
-_0803CF00:
-	ldrb r4, [r6, 0x2]
-	b _0803D1DC
-_0803CF04:
-	ldrb r4, [r6, 0x3]
-	b _0803D1DC
-_0803CF08:
-	ldrb r4, [r6, 0x4]
-	b _0803D1DC
-_0803CF0C:
-	ldrb r4, [r6, 0x5]
-	b _0803D1DC
-_0803CF10:
-	ldrb r4, [r6, 0x6]
-	b _0803D1DC
-_0803CF14:
-	ldrb r4, [r6, 0x7]
-	b _0803D1DC
-_0803CF18:
-	ldrb r4, [r6, 0x8]
-	b _0803D1DC
-_0803CF1C:
-	ldrb r4, [r6, 0x9]
-	b _0803D1DC
-_0803CF20:
-	ldrb r4, [r6, 0xA]
-	b _0803D1DC
-_0803CF24:
-	ldrb r4, [r6, 0xB]
-	b _0803D1DC
-_0803CF28:
-	ldrb r4, [r5]
-	b _0803D1DC
-_0803CF2C:
-	ldrb r4, [r5, 0x1]
-	b _0803D1DC
-_0803CF30:
-	ldrb r0, [r5, 0x2]
-	lsls r0, 25
-	lsrs r4, r0, 25
-	b _0803D1DC
-_0803CF38:
-	ldrh r0, [r5, 0x2]
-	lsls r0, 21
-	lsrs r4, r0, 28
-	b _0803D1DC
-_0803CF40:
-	ldrb r0, [r5, 0x3]
-	lsls r0, 25
-	lsrs r4, r0, 28
-	b _0803D1DC
-_0803CF48:
-	ldrb r0, [r5, 0x3]
-	lsrs r4, r0, 7
-	b _0803D1DC
-_0803CF4E:
-	ldrb r0, [r5, 0x4]
-	lsls r0, 27
-	lsrs r4, r0, 27
-	b _0803D1DC
-_0803CF56:
-	ldrh r0, [r5, 0x4]
-	lsls r0, 22
-	lsrs r4, r0, 27
-	b _0803D1DC
-_0803CF5E:
-	ldrb r0, [r5, 0x5]
-	lsls r0, 25
-	lsrs r4, r0, 27
-	b _0803D1DC
-_0803CF66:
-	ldr r0, [r5, 0x4]
-	lsls r0, 12
-	lsrs r4, r0, 27
-	b _0803D1DC
-_0803CF6E:
-	ldrh r0, [r5, 0x6]
-	lsls r0, 23
-	lsrs r4, r0, 27
-	b _0803D1DC
-_0803CF76:
-	ldrb r0, [r5, 0x7]
-	lsls r0, 26
-	lsrs r4, r0, 27
-	b _0803D1DC
-_0803CF7E:
-	ldrb r0, [r5, 0x7]
-	b _0803CFDC
-_0803CF82:
-	ldrb r0, [r5, 0x7]
-	lsrs r4, r0, 7
-	b _0803D1DC
-_0803CF88:
-	ldrb r0, [r5, 0x8]
-	lsls r0, 29
-	lsrs r4, r0, 29
-	b _0803D1DC
-_0803CF90:
-	ldrb r0, [r5, 0x8]
-	lsls r0, 26
-	lsrs r4, r0, 29
-	b _0803D1DC
-_0803CF98:
-	ldrh r0, [r5, 0x8]
-	lsls r0, 23
-	lsrs r4, r0, 29
-	b _0803D1DC
-_0803CFA0:
-	ldrb r0, [r5, 0x9]
-	lsls r0, 28
-	lsrs r4, r0, 29
-	b _0803D1DC
-_0803CFA8:
-	ldrb r0, [r5, 0x9]
-	lsls r0, 25
-	lsrs r4, r0, 29
-	b _0803D1DC
-_0803CFB0:
-	ldrb r0, [r5, 0x9]
-	lsrs r4, r0, 7
-	b _0803D1DC
-_0803CFB6:
-	ldrb r0, [r5, 0xA]
-	b _0803CFEA
-_0803CFBA:
-	ldrb r0, [r5, 0xA]
-	b _0803CFF2
-_0803CFBE:
-	ldrb r0, [r5, 0xA]
-	b _0803CFFA
-_0803CFC2:
-	ldrb r0, [r5, 0xA]
-	lsls r0, 28
-	lsrs r4, r0, 31
-	b _0803D1DC
-_0803CFCA:
-	ldrb r0, [r5, 0xA]
-	lsls r0, 27
-	lsrs r4, r0, 31
-	b _0803D1DC
-_0803CFD2:
-	ldrb r0, [r5, 0xA]
-	lsls r0, 26
-	lsrs r4, r0, 31
-	b _0803D1DC
-_0803CFDA:
-	ldrb r0, [r5, 0xA]
-_0803CFDC:
-	lsls r0, 25
-	lsrs r4, r0, 31
-	b _0803D1DC
-_0803CFE2:
-	ldrb r0, [r5, 0xA]
-	lsrs r4, r0, 7
-	b _0803D1DC
-_0803CFE8:
-	ldrb r0, [r5, 0xB]
-_0803CFEA:
-	lsls r0, 31
-	lsrs r4, r0, 31
-	b _0803D1DC
-_0803CFF0:
-	ldrb r0, [r5, 0xB]
-_0803CFF2:
-	lsls r0, 30
-	lsrs r4, r0, 31
-	b _0803D1DC
-_0803CFF8:
-	ldrb r0, [r5, 0xB]
-_0803CFFA:
-	lsls r0, 29
-	lsrs r4, r0, 31
-	b _0803D1DC
-_0803D000:
-	ldrb r0, [r5, 0xB]
-	lsrs r4, r0, 3
-	b _0803D1DC
-_0803D006:
-	mov r0, r9
-	ldrh r4, [r0]
-	cmp r4, 0
-	bne _0803D010
-	b _0803D1DC
-_0803D010:
-	ldrb r0, [r5, 0x7]
-	lsls r0, 25
-	cmp r0, 0
-	blt _0803D026
-	mov r2, r8
-	ldrb r1, [r2, 0x13]
-	movs r0, 0x1
-	ands r0, r1
-	cmp r0, 0
-	bne _0803D026
-	b _0803D1DC
-_0803D026:
-	movs r4, 0xCE
-	lsls r4, 1
-	b _0803D1DC
-_0803D02C:
-	ldrb r0, [r5, 0x4]
-	lsls r0, 27
-	lsrs r4, r0, 27
-	ldrh r1, [r5, 0x4]
-	movs r0, 0xF8
-	lsls r0, 2
-	ands r0, r1
-	orrs r4, r0
-	ldrb r0, [r5, 0x5]
-	lsls r0, 25
-	lsrs r0, 27
-	lsls r0, 10
-	orrs r4, r0
-	ldr r0, [r5, 0x4]
-	movs r1, 0xF8
-	lsls r1, 12
-	ands r0, r1
-	orrs r4, r0
-	ldrh r0, [r5, 0x6]
-	lsls r0, 23
-	lsrs r0, 27
-	lsls r0, 20
-	orrs r4, r0
-	ldrb r0, [r5, 0x7]
-	lsls r0, 26
-	lsrs r0, 27
-	lsls r0, 25
-	orrs r4, r0
-	b _0803D1DC
-_0803D066:
-	mov r1, r9
-	ldrh r0, [r1]
-	cmp r0, 0
-	bne _0803D070
-	b _0803D1DC
-_0803D070:
-	ldrb r0, [r5, 0x7]
-	lsls r0, 25
-	cmp r0, 0
-	bge _0803D07A
-	b _0803D1DC
-_0803D07A:
-	ldrh r0, [r7]
-	ldr r1, _0803D0B8
-	cmp r0, r1
-	bne _0803D084
-	b _0803D1DC
-_0803D084:
-	mov r2, r10
-	ldrh r5, [r2]
-	adds r6, r1, 0
-	adds r2, r7, 0
-	ldr r1, _0803D0BC
-_0803D08E:
-	ldrh r3, [r2]
-	cmp r5, r3
-	beq _0803D0A8
-	mov r7, r10
-	ldrh r0, [r7, 0x2]
-	cmp r0, r3
-	beq _0803D0A8
-	ldrh r0, [r7, 0x4]
-	cmp r0, r3
-	beq _0803D0A8
-	ldrh r0, [r7, 0x6]
-	cmp r0, r3
-	bne _0803D0AC
-_0803D0A8:
-	ldr r0, [r1]
-	orrs r4, r0
-_0803D0AC:
-	adds r2, 0x2
-	adds r1, 0x4
-	ldrh r0, [r2]
-	cmp r0, r6
-	bne _0803D08E
-	b _0803D1DC
-	.align 2, 0
-_0803D0B8: .4byte 0x00000163
-_0803D0BC: .4byte gBitTable
-_0803D0C0:
-	movs r4, 0
-	mov r1, r9
-	ldrh r0, [r1]
-	cmp r0, 0
-	bne _0803D0CC
-	b _0803D1DC
-_0803D0CC:
-	ldrb r0, [r5, 0x7]
-	lsls r0, 25
-	cmp r0, 0
-	bge _0803D0D6
-	b _0803D1DC
-_0803D0D6:
-	ldrb r0, [r5, 0x8]
-	lsls r1, r0, 29
-	lsrs r4, r1, 29
-	lsls r0, 26
-	lsrs r0, 29
-	adds r4, r0
-	ldrh r0, [r5, 0x8]
-	lsls r0, 23
-	lsrs r0, 29
-	adds r4, r0
-	ldrb r1, [r5, 0x9]
-	lsls r0, r1, 28
-	lsrs r0, 29
-	adds r4, r0
-	lsls r0, r1, 25
-	lsrs r0, 29
-	adds r4, r0
-	lsrs r1, 7
-	adds r4, r1
-	ldrb r1, [r5, 0xA]
-	lsls r0, r1, 31
-	lsrs r0, 31
-	adds r4, r0
-	lsls r0, r1, 30
-	lsrs r0, 31
-	adds r4, r0
-	lsls r0, r1, 29
-	lsrs r0, 31
-	adds r4, r0
-	lsls r0, r1, 28
-	lsrs r0, 31
-	adds r4, r0
-	lsls r0, r1, 27
-	lsrs r0, 31
-	adds r4, r0
-	lsls r0, r1, 26
-	lsrs r0, 31
-	adds r4, r0
-	lsls r0, r1, 25
-	lsrs r0, 31
-	adds r4, r0
-	lsrs r1, 7
-	adds r4, r1
-	ldrb r1, [r5, 0xB]
-	lsls r0, r1, 31
-	lsrs r0, 31
-	adds r4, r0
-	lsls r0, r1, 30
-	lsrs r0, 31
-	adds r4, r0
-	lsls r1, 29
-	lsrs r1, 31
-	adds r4, r1
-	b _0803D1DC
-_0803D142:
-	movs r4, 0
-	mov r2, r9
-	ldrh r0, [r2]
-	cmp r0, 0
-	beq _0803D1DC
-	ldrb r0, [r5, 0x7]
-	lsls r0, 25
-	cmp r0, 0
-	blt _0803D1DC
-	ldrb r2, [r5, 0x9]
-	lsrs r4, r2, 7
-	ldrb r1, [r5, 0x8]
-	lsls r0, r1, 29
-	lsrs r0, 28
-	orrs r4, r0
-	lsls r1, 26
-	lsrs r1, 29
-	lsls r1, 4
-	orrs r4, r1
-	ldrh r0, [r5, 0x8]
-	lsls r0, 23
-	lsrs r0, 29
-	lsls r0, 7
-	orrs r4, r0
-	lsls r0, r2, 28
-	lsrs r0, 29
-	lsls r0, 10
-	orrs r4, r0
-	lsls r2, 25
-	lsrs r2, 29
-	lsls r2, 13
-	orrs r4, r2
-	ldrb r1, [r5, 0xA]
-	lsls r0, r1, 31
-	lsrs r0, 31
-	lsls r0, 16
-	orrs r4, r0
-	lsls r0, r1, 30
-	lsrs r0, 31
-	lsls r0, 17
-	orrs r4, r0
-	lsls r0, r1, 29
-	lsrs r0, 31
-	lsls r0, 18
-	orrs r4, r0
-	lsls r0, r1, 28
-	lsrs r0, 31
-	lsls r0, 19
-	orrs r4, r0
-	lsls r0, r1, 27
-	lsrs r0, 31
-	lsls r0, 20
-	orrs r4, r0
-	lsls r0, r1, 26
-	lsrs r0, 31
-	lsls r0, 21
-	orrs r4, r0
-	lsls r0, r1, 25
-	lsrs r0, 31
-	lsls r0, 22
-	orrs r4, r0
-	lsrs r1, 7
-	lsls r1, 23
-	orrs r4, r1
-	ldrb r1, [r5, 0xB]
-	lsls r0, r1, 31
-	lsrs r0, 31
-	lsls r0, 24
-	orrs r4, r0
-	lsls r0, r1, 30
-	lsrs r0, 31
-	lsls r0, 25
-	orrs r4, r0
-	lsls r1, 29
-	lsrs r1, 31
-	lsls r1, 26
-	orrs r4, r1
-_0803D1DC:
-	ldr r7, [sp]
-	cmp r7, 0xA
-	ble _0803D1E8
-	mov r0, r8
-	bl pokemon_encrypt
-_0803D1E8:
-	adds r0, r4, 0
-	add sp, 0x4
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end PokemonGetEncryptedField
-
-	thumb_func_start pokemon_setattr
-pokemon_setattr: @ 803D1FC
-	push {lr}
-	adds r3, r0, 0
-	adds r0, r1, 0
-	subs r0, 0x37
-	cmp r0, 0xA
-	bhi _0803D2E0
-	lsls r0, 2
-	ldr r1, _0803D214
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_0803D214: .4byte _0803D218
-	.align 2, 0
-_0803D218:
-	.4byte _0803D244
-	.4byte _0803D25C
-	.4byte _0803D266
-	.4byte _0803D276
-	.4byte _0803D286
-	.4byte _0803D296
-	.4byte _0803D2A6
-	.4byte _0803D2B6
-	.4byte _0803D2C6
-	.4byte _0803D2D6
-	.4byte _0803D2E6
-_0803D244:
-	ldrb r1, [r2]
-	ldrb r0, [r2, 0x1]
-	lsls r0, 8
-	adds r1, r0
-	ldrb r0, [r2, 0x2]
-	lsls r0, 16
-	adds r1, r0
-	ldrb r0, [r2, 0x3]
-	lsls r0, 24
-	adds r1, r0
-	str r1, [r3, 0x50]
-	b _0803D2E6
-_0803D25C:
-	ldrb r1, [r2]
-	adds r0, r3, 0
-	adds r0, 0x54
-	strb r1, [r0]
-	b _0803D2E6
-_0803D266:
-	ldrb r0, [r2]
-	ldrb r1, [r2, 0x1]
-	lsls r1, 8
-	adds r0, r1
-	adds r1, r3, 0
-	adds r1, 0x56
-	strh r0, [r1]
-	b _0803D2E6
-_0803D276:
-	ldrb r0, [r2]
-	ldrb r1, [r2, 0x1]
-	lsls r1, 8
-	adds r0, r1
-	adds r1, r3, 0
-	adds r1, 0x58
-	strh r0, [r1]
-	b _0803D2E6
-_0803D286:
-	ldrb r0, [r2]
-	ldrb r1, [r2, 0x1]
-	lsls r1, 8
-	adds r0, r1
-	adds r1, r3, 0
-	adds r1, 0x5A
-	strh r0, [r1]
-	b _0803D2E6
-_0803D296:
-	ldrb r0, [r2]
-	ldrb r1, [r2, 0x1]
-	lsls r1, 8
-	adds r0, r1
-	adds r1, r3, 0
-	adds r1, 0x5C
-	strh r0, [r1]
-	b _0803D2E6
-_0803D2A6:
-	ldrb r0, [r2]
-	ldrb r1, [r2, 0x1]
-	lsls r1, 8
-	adds r0, r1
-	adds r1, r3, 0
-	adds r1, 0x5E
-	strh r0, [r1]
-	b _0803D2E6
-_0803D2B6:
-	ldrb r0, [r2]
-	ldrb r1, [r2, 0x1]
-	lsls r1, 8
-	adds r0, r1
-	adds r1, r3, 0
-	adds r1, 0x60
-	strh r0, [r1]
-	b _0803D2E6
-_0803D2C6:
-	ldrb r0, [r2]
-	ldrb r1, [r2, 0x1]
-	lsls r1, 8
-	adds r0, r1
-	adds r1, r3, 0
-	adds r1, 0x62
-	strh r0, [r1]
-	b _0803D2E6
-_0803D2D6:
-	ldrb r1, [r2]
-	adds r0, r3, 0
-	adds r0, 0x55
-	strb r1, [r0]
-	b _0803D2E6
-_0803D2E0:
-	adds r0, r3, 0
-	bl PokemonSetEncryptedField
-_0803D2E6:
-	pop {r0}
-	bx r0
-	thumb_func_end pokemon_setattr
-
-	thumb_func_start PokemonSetEncryptedField
-PokemonSetEncryptedField: @ 803D2EC
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	adds r7, r0, 0
-	mov r10, r1
-	adds r4, r2, 0
-	movs r0, 0
-	mov r8, r0
-	mov r9, r0
-	movs r6, 0
-	movs r5, 0
-	cmp r1, 0xA
-	ble _0803D36C
-	ldr r1, [r7]
-	adds r0, r7, 0
-	movs r2, 0
-	bl sub_803C638
-	mov r8, r0
-	ldr r1, [r7]
-	adds r0, r7, 0
-	movs r2, 0x1
-	bl sub_803C638
-	mov r9, r0
-	ldr r1, [r7]
-	adds r0, r7, 0
-	movs r2, 0x2
-	bl sub_803C638
-	adds r6, r0, 0
-	ldr r1, [r7]
-	adds r0, r7, 0
-	movs r2, 0x3
-	bl sub_803C638
-	adds r5, r0, 0
-	adds r0, r7, 0
-	bl pokemon_decrypt
-	adds r0, r7, 0
-	bl pokemon_calc_checksum
-	lsls r0, 16
-	lsrs r0, 16
-	ldrh r1, [r7, 0x1C]
-	cmp r0, r1
-	beq _0803D36C
-	ldrb r0, [r7, 0x13]
-	movs r1, 0x1
-	orrs r0, r1
-	movs r1, 0x4
-	orrs r0, r1
-	strb r0, [r7, 0x13]
-	ldrb r0, [r5, 0x7]
-	movs r1, 0x40
-	orrs r0, r1
-	strb r0, [r5, 0x7]
-	adds r0, r7, 0
-	bl pokemon_encrypt
-	b _0803D8F6
-_0803D36C:
-	mov r0, r10
-	cmp r0, 0x4F
-	bls _0803D374
-	b _0803D8E2
-_0803D374:
-	lsls r0, 2
-	ldr r1, _0803D380
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_0803D380: .4byte _0803D384
-	.align 2, 0
-_0803D384:
-	.4byte _0803D4C4
-	.4byte _0803D4DC
-	.4byte _0803D4F4
-	.4byte _0803D50A
-	.4byte _0803D510
-	.4byte _0803D520
-	.4byte _0803D532
-	.4byte _0803D544
-	.4byte _0803D55A
-	.4byte _0803D560
-	.4byte _0803D56C
-	.4byte _0803D578
-	.4byte _0803D598
-	.4byte _0803D5D0
-	.4byte _0803D5D0
-	.4byte _0803D5D0
-	.4byte _0803D5D0
-	.4byte _0803D5E4
-	.4byte _0803D5E4
-	.4byte _0803D5E4
-	.4byte _0803D5E4
-	.4byte _0803D5C0
-	.4byte _0803D614
-	.4byte _0803D61A
-	.4byte _0803D620
-	.4byte _0803D5A6
-	.4byte _0803D5F0
-	.4byte _0803D5F6
-	.4byte _0803D5FC
-	.4byte _0803D602
-	.4byte _0803D608
-	.4byte _0803D60E
-	.4byte _0803D5C8
-	.4byte _0803D626
-	.4byte _0803D638
-	.4byte _0803D63E
-	.4byte _0803D644
-	.4byte _0803D658
-	.4byte _0803D670
-	.4byte _0803D696
-	.4byte _0803D6AA
-	.4byte _0803D6C4
-	.4byte _0803D6DA
-	.4byte _0803D6F4
-	.4byte _0803D70C
-	.4byte _0803D720
-	.4byte _0803D750
-	.4byte _0803D62C
-	.4byte _0803D632
-	.4byte _0803D686
-	.4byte _0803D760
-	.4byte _0803D76E
-	.4byte _0803D784
-	.4byte _0803D79C
-	.4byte _0803D7AC
-	.4byte _0803D8E2
-	.4byte _0803D8E2
-	.4byte _0803D8E2
-	.4byte _0803D8E2
-	.4byte _0803D8E2
-	.4byte _0803D8E2
-	.4byte _0803D8E2
-	.4byte _0803D8E2
-	.4byte _0803D8E2
-	.4byte _0803D8E2
-	.4byte _0803D8E2
-	.4byte _0803D89A
-	.4byte _0803D7C2
-	.4byte _0803D7D2
-	.4byte _0803D7E0
-	.4byte _0803D7F0
-	.4byte _0803D800
-	.4byte _0803D810
-	.4byte _0803D820
-	.4byte _0803D830
-	.4byte _0803D846
-	.4byte _0803D856
-	.4byte _0803D864
-	.4byte _0803D874
-	.4byte _0803D88A
-_0803D4C4:
-	ldrb r1, [r4]
-	ldrb r0, [r4, 0x1]
-	lsls r0, 8
-	adds r1, r0
-	ldrb r0, [r4, 0x2]
-	lsls r0, 16
-	adds r1, r0
-	ldrb r0, [r4, 0x3]
-	lsls r0, 24
-	adds r1, r0
-	str r1, [r7]
-	b _0803D8E2
-_0803D4DC:
-	ldrb r1, [r4]
-	ldrb r0, [r4, 0x1]
-	lsls r0, 8
-	adds r1, r0
-	ldrb r0, [r4, 0x2]
-	lsls r0, 16
-	adds r1, r0
-	ldrb r0, [r4, 0x3]
-	lsls r0, 24
-	adds r1, r0
-	str r1, [r7, 0x4]
-	b _0803D8E2
-_0803D4F4:
-	movs r2, 0
-	adds r3, r7, 0
-	adds r3, 0x8
-_0803D4FA:
-	adds r0, r3, r2
-	adds r1, r4, r2
-	ldrb r1, [r1]
-	strb r1, [r0]
-	adds r2, 0x1
-	cmp r2, 0x9
-	ble _0803D4FA
-	b _0803D8E2
-_0803D50A:
-	ldrb r0, [r4]
-	strb r0, [r7, 0x12]
-	b _0803D8E2
-_0803D510:
-	ldrb r0, [r4]
-	movs r1, 0x1
-	ands r1, r0
-	ldrb r2, [r7, 0x13]
-	movs r0, 0x2
-	negs r0, r0
-	ands r0, r2
-	b _0803D73E
-_0803D520:
-	ldrb r0, [r4]
-	movs r1, 0x1
-	ands r1, r0
-	lsls r1, 1
-	ldrb r2, [r7, 0x13]
-	movs r0, 0x3
-	negs r0, r0
-	ands r0, r2
-	b _0803D73E
-_0803D532:
-	ldrb r0, [r4]
-	movs r1, 0x1
-	ands r1, r0
-	lsls r1, 2
-	ldrb r2, [r7, 0x13]
-	movs r0, 0x5
-	negs r0, r0
-	ands r0, r2
-	b _0803D73E
-_0803D544:
-	movs r2, 0
-	adds r3, r7, 0
-	adds r3, 0x14
-_0803D54A:
-	adds r0, r3, r2
-	adds r1, r4, r2
-	ldrb r1, [r1]
-	strb r1, [r0]
-	adds r2, 0x1
-	cmp r2, 0x6
-	ble _0803D54A
-	b _0803D8E2
-_0803D55A:
-	ldrb r0, [r4]
-	strb r0, [r7, 0x1B]
-	b _0803D8E2
-_0803D560:
-	ldrb r1, [r4]
-	ldrb r0, [r4, 0x1]
-	lsls r0, 8
-	adds r1, r0
-	strh r1, [r7, 0x1C]
-	b _0803D8E2
-_0803D56C:
-	ldrb r1, [r4]
-	ldrb r0, [r4, 0x1]
-	lsls r0, 8
-	adds r1, r0
-	strh r1, [r7, 0x1E]
-	b _0803D8E2
-_0803D578:
-	ldrb r1, [r4]
-	ldrb r0, [r4, 0x1]
-	lsls r0, 8
-	adds r1, r0
-	mov r0, r8
-	strh r1, [r0]
-	lsls r1, 16
-	cmp r1, 0
-	beq _0803D590
-	ldrb r0, [r7, 0x13]
-	movs r1, 0x2
-	b _0803D73E
-_0803D590:
-	ldrb r1, [r7, 0x13]
-	movs r0, 0x3
-	negs r0, r0
-	b _0803D74A
-_0803D598:
-	ldrb r1, [r4]
-	ldrb r0, [r4, 0x1]
-	lsls r0, 8
-	adds r1, r0
-	mov r0, r8
-	strh r1, [r0, 0x2]
-	b _0803D8E2
-_0803D5A6:
-	ldrb r1, [r4]
-	ldrb r0, [r4, 0x1]
-	lsls r0, 8
-	adds r1, r0
-	ldrb r0, [r4, 0x2]
-	lsls r0, 16
-	adds r1, r0
-	ldrb r0, [r4, 0x3]
-	lsls r0, 24
-	adds r1, r0
-	mov r0, r8
-	str r1, [r0, 0x4]
-	b _0803D8E2
-_0803D5C0:
-	ldrb r0, [r4]
-	mov r1, r8
-	strb r0, [r1, 0x8]
-	b _0803D8E2
-_0803D5C8:
-	ldrb r0, [r4]
-	mov r1, r8
-	strb r0, [r1, 0x9]
-	b _0803D8E2
-_0803D5D0:
-	mov r2, r10
-	subs r2, 0xD
-	lsls r2, 1
-	add r2, r9
-	ldrb r1, [r4]
-	ldrb r0, [r4, 0x1]
-	lsls r0, 8
-	adds r1, r0
-	strh r1, [r2]
-	b _0803D8E2
-_0803D5E4:
-	mov r0, r9
-	add r0, r10
-	subs r0, 0x9
-	ldrb r1, [r4]
-	strb r1, [r0]
-	b _0803D8E2
-_0803D5F0:
-	ldrb r0, [r4]
-	strb r0, [r6]
-	b _0803D8E2
-_0803D5F6:
-	ldrb r0, [r4]
-	strb r0, [r6, 0x1]
-	b _0803D8E2
-_0803D5FC:
-	ldrb r0, [r4]
-	strb r0, [r6, 0x2]
-	b _0803D8E2
-_0803D602:
-	ldrb r0, [r4]
-	strb r0, [r6, 0x3]
-	b _0803D8E2
-_0803D608:
-	ldrb r0, [r4]
-	strb r0, [r6, 0x4]
-	b _0803D8E2
-_0803D60E:
-	ldrb r0, [r4]
-	strb r0, [r6, 0x5]
-	b _0803D8E2
-_0803D614:
-	ldrb r0, [r4]
-	strb r0, [r6, 0x6]
-	b _0803D8E2
-_0803D61A:
-	ldrb r0, [r4]
-	strb r0, [r6, 0x7]
-	b _0803D8E2
-_0803D620:
-	ldrb r0, [r4]
-	strb r0, [r6, 0x8]
-	b _0803D8E2
-_0803D626:
-	ldrb r0, [r4]
-	strb r0, [r6, 0x9]
-	b _0803D8E2
-_0803D62C:
-	ldrb r0, [r4]
-	strb r0, [r6, 0xA]
-	b _0803D8E2
-_0803D632:
-	ldrb r0, [r4]
-	strb r0, [r6, 0xB]
-	b _0803D8E2
-_0803D638:
-	ldrb r0, [r4]
-	strb r0, [r5]
-	b _0803D8E2
-_0803D63E:
-	ldrb r0, [r4]
-	strb r0, [r5, 0x1]
-	b _0803D8E2
-_0803D644:
-	ldrb r1, [r4]
-	movs r0, 0x7F
-	ands r1, r0
-	ldrb r2, [r5, 0x2]
-	movs r0, 0x80
-	negs r0, r0
-	ands r0, r2
-	orrs r0, r1
-	strb r0, [r5, 0x2]
-	b _0803D8E2
-_0803D658:
-	ldrb r1, [r4]
-	movs r0, 0xF
-	ands r1, r0
-	lsls r1, 7
-	ldrh r2, [r5, 0x2]
-	ldr r0, _0803D66C
-	ands r0, r2
-	orrs r0, r1
-	strh r0, [r5, 0x2]
-	b _0803D8E2
-	.align 2, 0
-_0803D66C: .4byte 0xfffff87f
-_0803D670:
-	ldrb r1, [r4]
-	movs r0, 0xF
-	ands r1, r0
-	lsls r1, 3
-	ldrb r2, [r5, 0x3]
-	movs r0, 0x79
-	negs r0, r0
-	ands r0, r2
-	orrs r0, r1
-	strb r0, [r5, 0x3]
-	b _0803D8E2
-_0803D686:
-	ldrb r0, [r4]
-	lsls r0, 7
-	ldrb r2, [r5, 0x3]
-	movs r1, 0x7F
-	ands r1, r2
-	orrs r1, r0
-	strb r1, [r5, 0x3]
-	b _0803D8E2
-_0803D696:
-	ldrb r1, [r4]
-	movs r0, 0x1F
-	ands r1, r0
-	ldrb r2, [r5, 0x4]
-	movs r0, 0x20
-	negs r0, r0
-	ands r0, r2
-	orrs r0, r1
-	strb r0, [r5, 0x4]
-	b _0803D8E2
-_0803D6AA:
-	ldrb r1, [r4]
-	movs r0, 0x1F
-	ands r1, r0
-	lsls r1, 5
-	ldrh r2, [r5, 0x4]
-	ldr r0, _0803D6C0
-	ands r0, r2
-	orrs r0, r1
-	strh r0, [r5, 0x4]
-	b _0803D8E2
-	.align 2, 0
-_0803D6C0: .4byte 0xfffffc1f
-_0803D6C4:
-	ldrb r1, [r4]
-	movs r0, 0x1F
-	ands r1, r0
-	lsls r1, 2
-	ldrb r2, [r5, 0x5]
-	movs r0, 0x7D
-	negs r0, r0
-	ands r0, r2
-	orrs r0, r1
-	strb r0, [r5, 0x5]
-	b _0803D8E2
-_0803D6DA:
-	ldrb r2, [r4]
-	movs r0, 0x1F
-	ands r2, r0
-	lsls r2, 15
-	ldr r0, [r5, 0x4]
-	ldr r1, _0803D6F0
-	ands r0, r1
-	orrs r0, r2
-	str r0, [r5, 0x4]
-	b _0803D8E2
-	.align 2, 0
-_0803D6F0: .4byte 0xfff07fff
-_0803D6F4:
-	ldrb r1, [r4]
-	movs r0, 0x1F
-	ands r1, r0
-	lsls r1, 4
-	ldrh r2, [r5, 0x6]
-	ldr r0, _0803D708
-	ands r0, r2
-	orrs r0, r1
-	strh r0, [r5, 0x6]
-	b _0803D8E2
-	.align 2, 0
-_0803D708: .4byte 0xfffffe0f
-_0803D70C:
-	ldrb r1, [r4]
-	movs r0, 0x1F
-	ands r1, r0
-	lsls r1, 1
-	ldrb r2, [r5, 0x7]
-	movs r0, 0x3F
-	negs r0, r0
-	ands r0, r2
-	orrs r0, r1
-	b _0803D8E0
-_0803D720:
-	ldrb r1, [r4]
-	movs r0, 0x1
-	ands r1, r0
-	lsls r1, 6
-	ldrb r2, [r5, 0x7]
-	movs r0, 0x41
-	negs r0, r0
-	ands r0, r2
-	orrs r0, r1
-	strb r0, [r5, 0x7]
-	lsls r0, 25
-	cmp r0, 0
-	bge _0803D744
-	ldrb r0, [r7, 0x13]
-	movs r1, 0x4
-_0803D73E:
-	orrs r0, r1
-	strb r0, [r7, 0x13]
-	b _0803D8E2
-_0803D744:
-	ldrb r1, [r7, 0x13]
-	movs r0, 0x5
-	negs r0, r0
-_0803D74A:
-	ands r0, r1
-	strb r0, [r7, 0x13]
-	b _0803D8E2
-_0803D750:
-	ldrb r0, [r4]
-	lsls r0, 7
-	ldrb r2, [r5, 0x7]
-	movs r1, 0x7F
-	ands r1, r2
-	orrs r1, r0
-	strb r1, [r5, 0x7]
-	b _0803D8E2
-_0803D760:
-	ldrb r1, [r4]
-	movs r0, 0x7
-	ands r1, r0
-	ldrb r2, [r5, 0x8]
-	movs r0, 0x8
-	negs r0, r0
-	b _0803D77C
-_0803D76E:
-	ldrb r1, [r4]
-	movs r0, 0x7
-	ands r1, r0
-	lsls r1, 3
-	ldrb r2, [r5, 0x8]
-	movs r0, 0x39
-	negs r0, r0
-_0803D77C:
-	ands r0, r2
-	orrs r0, r1
-	strb r0, [r5, 0x8]
-	b _0803D8E2
-_0803D784:
-	ldrb r1, [r4]
-	movs r0, 0x7
-	ands r1, r0
-	lsls r1, 6
-	ldrh r2, [r5, 0x8]
-	ldr r0, _0803D798
-	ands r0, r2
-	orrs r0, r1
-	strh r0, [r5, 0x8]
-	b _0803D8E2
-	.align 2, 0
-_0803D798: .4byte 0xfffffe3f
-_0803D79C:
-	ldrb r1, [r4]
-	movs r0, 0x7
-	ands r1, r0
-	lsls r1, 1
-	ldrb r2, [r5, 0x9]
-	movs r0, 0xF
-	negs r0, r0
-	b _0803D7BA
-_0803D7AC:
-	ldrb r1, [r4]
-	movs r0, 0x7
-	ands r1, r0
-	lsls r1, 4
-	ldrb r2, [r5, 0x9]
-	movs r0, 0x71
-	negs r0, r0
-_0803D7BA:
-	ands r0, r2
-	orrs r0, r1
-	strb r0, [r5, 0x9]
-	b _0803D8E2
-_0803D7C2:
-	ldrb r0, [r4]
-	lsls r0, 7
-	ldrb r2, [r5, 0x9]
-	movs r1, 0x7F
-	ands r1, r2
-	orrs r1, r0
-	strb r1, [r5, 0x9]
-	b _0803D8E2
-_0803D7D2:
-	ldrb r1, [r4]
-	movs r0, 0x1
-	ands r1, r0
-	ldrb r2, [r5, 0xA]
-	movs r0, 0x2
-	negs r0, r0
-	b _0803D83E
-_0803D7E0:
-	ldrb r1, [r4]
-	movs r0, 0x1
-	ands r1, r0
-	lsls r1, 1
-	ldrb r2, [r5, 0xA]
-	movs r0, 0x3
-	negs r0, r0
-	b _0803D83E
-_0803D7F0:
-	ldrb r1, [r4]
-	movs r0, 0x1
-	ands r1, r0
-	lsls r1, 2
-	ldrb r2, [r5, 0xA]
-	movs r0, 0x5
-	negs r0, r0
-	b _0803D83E
-_0803D800:
-	ldrb r1, [r4]
-	movs r0, 0x1
-	ands r1, r0
-	lsls r1, 3
-	ldrb r2, [r5, 0xA]
-	movs r0, 0x9
-	negs r0, r0
-	b _0803D83E
-_0803D810:
-	ldrb r1, [r4]
-	movs r0, 0x1
-	ands r1, r0
-	lsls r1, 4
-	ldrb r2, [r5, 0xA]
-	movs r0, 0x11
-	negs r0, r0
-	b _0803D83E
-_0803D820:
-	ldrb r1, [r4]
-	movs r0, 0x1
-	ands r1, r0
-	lsls r1, 5
-	ldrb r2, [r5, 0xA]
-	movs r0, 0x21
-	negs r0, r0
-	b _0803D83E
-_0803D830:
-	ldrb r1, [r4]
-	movs r0, 0x1
-	ands r1, r0
-	lsls r1, 6
-	ldrb r2, [r5, 0xA]
-	movs r0, 0x41
-	negs r0, r0
-_0803D83E:
-	ands r0, r2
-	orrs r0, r1
-	strb r0, [r5, 0xA]
-	b _0803D8E2
-_0803D846:
-	ldrb r0, [r4]
-	lsls r0, 7
-	ldrb r2, [r5, 0xA]
-	movs r1, 0x7F
-	ands r1, r2
-	orrs r1, r0
-	strb r1, [r5, 0xA]
-	b _0803D8E2
-_0803D856:
-	ldrb r1, [r4]
-	movs r0, 0x1
-	ands r1, r0
-	ldrb r2, [r5, 0xB]
-	movs r0, 0x2
-	negs r0, r0
-	b _0803D882
-_0803D864:
-	ldrb r1, [r4]
-	movs r0, 0x1
-	ands r1, r0
-	lsls r1, 1
-	ldrb r2, [r5, 0xB]
-	movs r0, 0x3
-	negs r0, r0
-	b _0803D882
-_0803D874:
-	ldrb r1, [r4]
-	movs r0, 0x1
-	ands r1, r0
-	lsls r1, 2
-	ldrb r2, [r5, 0xB]
-	movs r0, 0x5
-	negs r0, r0
-_0803D882:
-	ands r0, r2
-	orrs r0, r1
-	strb r0, [r5, 0xB]
-	b _0803D8E2
-_0803D88A:
-	ldrb r0, [r4]
-	lsls r0, 3
-	ldrb r2, [r5, 0xB]
-	movs r1, 0x7
-	ands r1, r2
-	orrs r1, r0
-	strb r1, [r5, 0xB]
-	b _0803D8E2
-_0803D89A:
-	ldrb r1, [r4]
-	movs r4, 0x1F
-	adds r2, r1, 0
-	ands r2, r4
-	ldrb r3, [r5, 0x4]
-	movs r0, 0x20
-	negs r0, r0
-	ands r0, r3
-	orrs r0, r2
-	strb r0, [r5, 0x4]
-	lsrs r1, 5
-	ands r1, r4
-	lsls r1, 5
-	ldrh r2, [r5, 0x4]
-	ldr r0, _0803D904
-	ands r0, r2
-	orrs r0, r1
-	strh r0, [r5, 0x4]
-	ldrb r1, [r5, 0x5]
-	movs r0, 0x7D
-	negs r0, r0
-	ands r0, r1
-	strb r0, [r5, 0x5]
-	ldr r0, [r5, 0x4]
-	ldr r1, _0803D908
-	ands r0, r1
-	str r0, [r5, 0x4]
-	ldrh r1, [r5, 0x6]
-	ldr r0, _0803D90C
-	ands r0, r1
-	strh r0, [r5, 0x6]
-	ldrb r1, [r5, 0x7]
-	movs r0, 0x3F
-	negs r0, r0
-	ands r0, r1
-_0803D8E0:
-	strb r0, [r5, 0x7]
-_0803D8E2:
-	mov r0, r10
-	cmp r0, 0xA
-	ble _0803D8F6
-	adds r0, r7, 0
-	bl pokemon_calc_checksum
-	strh r0, [r7, 0x1C]
-	adds r0, r7, 0
-	bl pokemon_encrypt
-_0803D8F6:
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0803D904: .4byte 0xfffffc1f
-_0803D908: .4byte 0xfff07fff
-_0803D90C: .4byte 0xfffffe0f
-	thumb_func_end PokemonSetEncryptedField
-
-	thumb_func_start memcpy_pokemon
-memcpy_pokemon: @ 803D910
-	push {lr}
-	bl memcpy
-	pop {r0}
-	bx r0
-	thumb_func_end memcpy_pokemon
-
-	thumb_func_start pokemon_catch
-pokemon_catch: @ 803D91C
-	push {r4-r6,lr}
-	adds r6, r0, 0
-	ldr r4, _0803D948
-	movs r1, 0x7
-	adds r2, r4, 0
-	bl pokemon_setattr
-	adds r2, r4, 0
-	adds r2, 0x8
-	adds r0, r6, 0
-	movs r1, 0x31
-	bl pokemon_setattr
-	adds r4, 0xA
-	adds r0, r6, 0
-	movs r1, 0x1
-	adds r2, r4, 0
-	bl pokemon_setattr
-	movs r5, 0
-	b _0803D94E
-	.align 2, 0
-_0803D948: .4byte gSaveBlock2
-_0803D94C:
-	adds r5, 0x1
-_0803D94E:
-	cmp r5, 0x5
-	bgt _0803D988
-	movs r0, 0x64
-	adds r1, r5, 0
-	muls r1, r0
-	ldr r0, _0803D980
-	adds r4, r1, r0
-	adds r0, r4, 0
-	movs r1, 0xB
-	movs r2, 0
-	bl PokemonGetField
-	cmp r0, 0
-	bne _0803D94C
-	adds r0, r4, 0
-	adds r1, r6, 0
-	movs r2, 0x64
-	bl memcpy_pokemon
-	ldr r1, _0803D984
-	adds r0, r5, 0x1
-	strb r0, [r1]
-	movs r0, 0
-	b _0803D992
-	.align 2, 0
-_0803D980: .4byte 0x03004360
-_0803D984: .4byte 0x03004350
-_0803D988:
-	adds r0, r6, 0
-	bl sub_803D998
-	lsls r0, 24
-	lsrs r0, 24
-_0803D992:
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end pokemon_catch
-
-	thumb_func_start sub_803D998
-sub_803D998: @ 803D998
-	push {r4-r7,lr}
-	mov r7, r9
-	mov r6, r8
-	push {r6,r7}
-	sub sp, 0x4
-	mov r9, r0
-	ldr r0, _0803D9E8
-	ldrb r5, [r0]
-_0803D9A8:
-	movs r7, 0
-	lsls r1, r5, 2
-	adds r1, r5
-	lsls r0, r1, 4
-	subs r0, r1
-	lsls r0, 5
-	mov r8, r0
-	movs r6, 0
-_0803D9B8:
-	ldr r3, _0803D9EC
-	adds r0, r6, r3
-	mov r1, r8
-	adds r4, r1, r0
-	adds r0, r4, 0
-	movs r1, 0xB
-	movs r2, 0
-	str r3, [sp]
-	bl PokemonGetEncryptedField
-	ldr r3, [sp]
-	cmp r0, 0
-	bne _0803D9F0
-	mov r0, r9
-	bl sub_8040B1C
-	adds r0, r4, 0
-	mov r1, r9
-	movs r2, 0x50
-	bl memcpy_pokemon
-	movs r0, 0x1
-	b _0803DA0A
-	.align 2, 0
-_0803D9E8: .4byte 0x020300a0
-_0803D9EC: .4byte 0x020300a4
-_0803D9F0:
-	adds r6, 0x50
-	adds r7, 0x1
-	cmp r7, 0x1D
-	ble _0803D9B8
-	adds r5, 0x1
-	cmp r5, 0xE
-	bne _0803DA00
-	movs r5, 0
-_0803DA00:
-	subs r0, r3, 0x4
-	ldrb r0, [r0]
-	cmp r5, r0
-	bne _0803D9A8
-	movs r0, 0x2
-_0803DA0A:
-	add sp, 0x4
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_803D998
-
-	thumb_func_start calc_player_party_count
-calc_player_party_count: @ 803DA18
-	push {r4,lr}
-	ldr r0, _0803DA24
-	movs r1, 0
-	strb r1, [r0]
-	b _0803DA30
-	.align 2, 0
-_0803DA24: .4byte 0x03004350
-_0803DA28:
-	ldrb r0, [r4]
-	adds r0, 0x1
-	strb r0, [r4]
-	adds r0, r4, 0
-_0803DA30:
-	adds r4, r0, 0
-	ldrb r0, [r4]
-	cmp r0, 0x5
-	bhi _0803DA4E
-	adds r1, r0, 0
-	movs r0, 0x64
-	muls r0, r1
-	ldr r1, _0803DA58
-	adds r0, r1
-	movs r1, 0xB
-	movs r2, 0
-	bl PokemonGetField
-	cmp r0, 0
-	bne _0803DA28
-_0803DA4E:
-	ldrb r0, [r4]
-	pop {r4}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0803DA58: .4byte 0x03004360
-	thumb_func_end calc_player_party_count
-
-	thumb_func_start calc_enemy_party_count
-calc_enemy_party_count: @ 803DA5C
-	push {r4,lr}
-	ldr r0, _0803DA68
-	movs r1, 0
-	strb r1, [r0]
-	b _0803DA74
-	.align 2, 0
-_0803DA68: .4byte 0x030045b8
-_0803DA6C:
-	ldrb r0, [r4]
-	adds r0, 0x1
-	strb r0, [r4]
-	adds r0, r4, 0
-_0803DA74:
-	adds r4, r0, 0
-	ldrb r0, [r4]
-	cmp r0, 0x5
-	bhi _0803DA92
-	adds r1, r0, 0
-	movs r0, 0x64
-	muls r0, r1
-	ldr r1, _0803DA9C
-	adds r0, r1
-	movs r1, 0xB
-	movs r2, 0
-	bl PokemonGetField
-	cmp r0, 0
-	bne _0803DA6C
-_0803DA92:
-	ldrb r0, [r4]
-	pop {r4}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0803DA9C: .4byte 0x030045c0
-	thumb_func_end calc_enemy_party_count
-
-	thumb_func_start sub_803DAA0
-sub_803DAA0: @ 803DAA0
-	push {r4-r6,lr}
-	movs r6, 0
-	bl calc_player_party_count
-	ldr r1, _0803DB0C
-	ldrb r0, [r1]
-	cmp r0, 0x1
-	beq _0803DB04
-	movs r5, 0
-	ldrb r1, [r1]
-	cmp r6, r1
-	bge _0803DAFC
-_0803DAB8:
-	movs r0, 0x64
-	adds r1, r5, 0
-	muls r1, r0
-	ldr r0, _0803DB10
-	adds r4, r1, r0
-	adds r0, r4, 0
-	movs r1, 0x39
-	movs r2, 0
-	bl PokemonGetField
-	cmp r0, 0
-	beq _0803DAF2
-	adds r0, r4, 0
-	movs r1, 0x41
-	movs r2, 0
-	bl PokemonGetField
-	cmp r0, 0
-	beq _0803DAF2
-	adds r0, r4, 0
-	movs r1, 0x41
-	movs r2, 0
-	bl PokemonGetField
-	movs r1, 0xCE
-	lsls r1, 1
-	cmp r0, r1
-	beq _0803DAF2
-	adds r6, 0x1
-_0803DAF2:
-	adds r5, 0x1
-	ldr r0, _0803DB0C
-	ldrb r0, [r0]
-	cmp r5, r0
-	blt _0803DAB8
-_0803DAFC:
-	movs r0, 0
-	cmp r6, 0x1
-	bgt _0803DB04
-	movs r0, 0x2
-_0803DB04:
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0803DB0C: .4byte 0x03004350
-_0803DB10: .4byte 0x03004360
-	thumb_func_end sub_803DAA0
-
-	thumb_func_start sub_803DB14
-sub_803DB14: @ 803DB14
-	push {lr}
-	lsls r0, 16
-	lsrs r3, r0, 16
-	lsls r1, 24
-	cmp r1, 0
-	beq _0803DB38
-	ldr r2, _0803DB30
-	ldr r1, _0803DB34
-	lsls r0, r3, 3
-	subs r0, r3
-	lsls r0, 2
-	adds r0, r1
-	ldrb r0, [r0, 0x17]
-	b _0803DB46
-	.align 2, 0
-_0803DB30: .4byte 0x02024c06
-_0803DB34: .4byte gBaseStats
-_0803DB38:
-	ldr r2, _0803DB50
-	ldr r1, _0803DB54
-	lsls r0, r3, 3
-	subs r0, r3
-	lsls r0, 2
-	adds r0, r1
-	ldrb r0, [r0, 0x16]
-_0803DB46:
-	strb r0, [r2]
-	ldrb r0, [r2]
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0803DB50: .4byte 0x02024c06
-_0803DB54: .4byte gBaseStats
-	thumb_func_end sub_803DB14
-
-	thumb_func_start GetMonAbility
-GetMonAbility: @ 803DB58
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	movs r1, 0xB
-	movs r2, 0
-	bl PokemonGetField
-	adds r4, r0, 0
-	lsls r4, 16
-	lsrs r4, 16
-	adds r0, r5, 0
-	movs r1, 0x2E
-	movs r2, 0
-	bl PokemonGetField
-	adds r1, r0, 0
-	lsls r1, 24
-	lsrs r1, 24
-	adds r0, r4, 0
-	bl sub_803DB14
-	lsls r0, 24
-	lsrs r0, 24
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end GetMonAbility
-
-	thumb_func_start create_enemy_party
-create_enemy_party: @ 803DB8C
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x18
-	adds r4, r0, 0
-	bl zero_enemy_party_data
-	ldr r5, _0803DC8C
-	adds r0, r5, 0
-	adds r1, r4, 0
-	movs r2, 0xA0
-	bl memcpy
-	movs r7, 0
-_0803DBAC:
-	lsls r0, r7, 1
-	mov r9, r0
-	ldr r2, _0803DC8C
-	adds r2, 0x7C
-	mov r10, r2
-	mov r1, r9
-	add r1, r10
-	ldrh r0, [r1]
-	adds r2, r7, 0x1
-	str r2, [sp, 0x10]
-	cmp r0, 0
-	beq _0803DC64
-	movs r0, 0x64
-	adds r6, r7, 0
-	muls r6, r0
-	ldr r2, _0803DC90
-	mov r8, r2
-	adds r5, r6, r2
-	ldrh r1, [r1]
-	ldr r0, _0803DC8C
-	adds r0, 0x94
-	adds r0, r7, r0
-	ldrb r2, [r0]
-	movs r0, 0x1
-	str r0, [sp]
-	lsls r4, r7, 2
-	ldr r0, _0803DC8C
-	adds r0, 0x34
-	adds r0, r4, r0
-	ldr r0, [r0]
-	str r0, [sp, 0x4]
-	movs r0, 0x2
-	str r0, [sp, 0x8]
-	movs r0, 0
-	str r0, [sp, 0xC]
-	adds r0, r5, 0
-	movs r3, 0xF
-	bl create_pokemon_set_level
-	ldr r2, _0803DC94
-	add r2, r9
-	adds r0, r5, 0
-	movs r1, 0xC
-	bl pokemon_setattr
-	movs r5, 0
-	mov r9, r4
-	mov r3, r8
-	mov r4, r10
-	adds r4, 0x1E
-_0803DC10:
-	adds r1, r5, 0
-	adds r1, 0x1A
-	adds r0, r6, r3
-	adds r2, r7, r4
-	str r3, [sp, 0x14]
-	bl pokemon_setattr
-	adds r5, 0x1
-	ldr r3, [sp, 0x14]
-	cmp r5, 0x5
-	ble _0803DC10
-	movs r5, 0
-	movs r0, 0x64
-	adds r1, r7, 0
-	muls r1, r0
-	ldr r0, _0803DC90
-	adds r7, r1, r0
-	mov r2, r9
-	lsls r6, r2, 1
-_0803DC36:
-	adds r1, r5, 0
-	adds r1, 0xD
-	ldr r4, _0803DC98
-	adds r4, r6, r4
-	adds r0, r7, 0
-	adds r2, r4, 0
-	bl pokemon_setattr
-	adds r1, r5, 0
-	adds r1, 0x11
-	ldrh r0, [r4]
-	lsls r2, r0, 1
-	adds r2, r0
-	lsls r2, 2
-	ldr r0, _0803DC9C
-	adds r2, r0
-	adds r0, r7, 0
-	bl pokemon_setattr
-	adds r6, 0x2
-	adds r5, 0x1
-	cmp r5, 0x3
-	ble _0803DC36
-_0803DC64:
-	ldr r7, [sp, 0x10]
-	cmp r7, 0x5
-	ble _0803DBAC
-	ldr r1, _0803DCA0
-	movs r0, 0x8
-	strh r0, [r1]
-	ldr r1, _0803DCA4
-	movs r2, 0x80
-	lsls r2, 3
-	adds r0, r2, 0
-	strh r0, [r1]
-	add sp, 0x18
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0803DC8C: .4byte 0x02017000
-_0803DC90: .4byte 0x030045c0
-_0803DC94: .4byte 0x02017088
-_0803DC98: .4byte 0x0201704c
-_0803DC9C: .4byte gBattleMoves + 0x4 @ PP offset
-_0803DCA0: .4byte 0x020239f8
-_0803DCA4: .4byte 0x0202ff5e
-	thumb_func_end create_enemy_party
-
-	thumb_func_start sub_803DCA8
-sub_803DCA8: @ 803DCA8
-	push {r4,r5,lr}
-	ldr r5, _0803DCD8
-	ldr r4, _0803DCDC
-	ldrb r0, [r4, 0x9]
-	movs r1, 0x5
-	bl __umodsi3
-	lsls r0, 24
-	lsrs r0, 24
-	ldrb r2, [r4, 0x1]
-	lsls r2, 27
-	lsrs r2, 31
-	lsls r1, r2, 2
-	adds r1, r2
-	adds r0, r1
-	adds r0, r5
-	ldrb r0, [r0]
-	ldr r1, _0803DCE0
-	adds r0, r1
-	ldrb r0, [r0]
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0803DCD8: .4byte gUnknown_082082E8
-_0803DCDC: .4byte 0x02017000
-_0803DCE0: .4byte gTrainerClassToPicIndex
-	thumb_func_end sub_803DCA8
-
-	thumb_func_start sub_803DCE4
-sub_803DCE4: @ 803DCE4
-	push {r4,r5,lr}
-	ldr r5, _0803DD14
-	ldr r4, _0803DD18
-	ldrb r0, [r4, 0x9]
-	movs r1, 0x5
-	bl __umodsi3
-	lsls r0, 24
-	lsrs r0, 24
-	ldrb r2, [r4, 0x1]
-	lsls r2, 27
-	lsrs r2, 31
-	lsls r1, r2, 2
-	adds r1, r2
-	adds r0, r1
-	adds r0, r5
-	ldrb r0, [r0]
-	ldr r1, _0803DD1C
-	adds r0, r1
-	ldrb r0, [r0]
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0803DD14: .4byte gUnknown_082082E8
-_0803DD18: .4byte 0x02017000
-_0803DD1C: .4byte gTrainerClassToNameIndex
-	thumb_func_end sub_803DCE4
-
-	thumb_func_start sub_803DD20
-sub_803DD20: @ 803DD20
-	push {r4,lr}
-	movs r4, 0
-_0803DD24:
-	movs r0, 0x64
-	muls r0, r4
-	ldr r1, _0803DD3C
-	adds r0, r1
-	movs r1, 0xB
-	movs r2, 0
-	bl PokemonGetField
-	cmp r0, 0
-	bne _0803DD40
-	movs r0, 0
-	b _0803DD4E
-	.align 2, 0
-_0803DD3C: .4byte 0x03004360
-_0803DD40:
-	adds r4, 0x1
-	cmp r4, 0x5
-	ble _0803DD24
-	bl sub_803DD54
-	lsls r0, 24
-	lsrs r0, 24
-_0803DD4E:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_803DD20
-
-	thumb_func_start sub_803DD54
-sub_803DD54: @ 803DD54
-	push {r4-r7,lr}
-	sub sp, 0x4
-	movs r3, 0
-	movs r7, 0
-_0803DD5C:
-	movs r5, 0
-	adds r6, r7, 0
-	movs r4, 0
-_0803DD62:
-	ldr r0, _0803DD7C
-	adds r0, r4, r0
-	adds r0, r6, r0
-	movs r1, 0xB
-	movs r2, 0
-	str r3, [sp]
-	bl PokemonGetEncryptedField
-	ldr r3, [sp]
-	cmp r0, 0
-	bne _0803DD80
-	movs r0, 0
-	b _0803DD96
-	.align 2, 0
-_0803DD7C: .4byte 0x020300a4
-_0803DD80:
-	adds r4, 0x50
-	adds r5, 0x1
-	cmp r5, 0x1D
-	ble _0803DD62
-	movs r0, 0x96
-	lsls r0, 4
-	adds r7, r0
-	adds r3, 0x1
-	cmp r3, 0xD
-	ble _0803DD5C
-	movs r0, 0x1
-_0803DD96:
-	add sp, 0x4
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_803DD54
-
-	thumb_func_start GetSpeciesName
-GetSpeciesName: @ 803DDA0
-	push {r4-r7,lr}
-	adds r6, r0, 0
-	lsls r1, 16
-	lsrs r5, r1, 16
-	movs r1, 0
-	movs r0, 0xCE
-	lsls r0, 1
-	mov r12, r0
-	ldr r7, _0803DDBC
-	movs r0, 0xB
-	muls r0, r5
-	adds r3, r0, r7
-	adds r2, r6, 0
-	b _0803DDC6
-	.align 2, 0
-_0803DDBC: .4byte gSpeciesNames
-_0803DDC0:
-	adds r3, 0x1
-	adds r2, 0x1
-	adds r1, 0x1
-_0803DDC6:
-	adds r4, r6, r1
-	cmp r1, 0xA
-	bgt _0803DDE0
-	cmp r5, r12
-	bls _0803DDD6
-	adds r0, r1, r7
-	ldrb r0, [r0]
-	b _0803DDD8
-_0803DDD6:
-	ldrb r0, [r3]
-_0803DDD8:
-	strb r0, [r2]
-	ldrb r0, [r4]
-	cmp r0, 0xFF
-	bne _0803DDC0
-_0803DDE0:
-	movs r0, 0xFF
-	strb r0, [r4]
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end GetSpeciesName
-
-	thumb_func_start CalcPPWithPPUps
-CalcPPWithPPUps: @ 803DDEC
-	push {r4,lr}
-	lsls r0, 16
-	lsrs r0, 16
-	lsls r2, 24
-	lsrs r2, 24
-	ldr r4, _0803DE2C
-	lsls r3, r0, 1
-	adds r3, r0
-	lsls r3, 2
-	adds r3, r4
-	ldrb r4, [r3, 0x4]
-	ldr r0, _0803DE30
-	adds r0, r2, r0
-	ldrb r3, [r0]
-	ands r3, r1
-	lsls r2, 1
-	asrs r3, r2
-	lsls r0, r3, 2
-	adds r0, r3
-	lsls r0, 2
-	muls r0, r4
-	movs r1, 0x64
-	bl __divsi3
-	adds r4, r0
-	lsls r4, 24
-	lsrs r4, 24
-	adds r0, r4, 0
-	pop {r4}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0803DE2C: .4byte gBattleMoves
-_0803DE30: .4byte gUnknown_08208238
-	thumb_func_end CalcPPWithPPUps
-
-	thumb_func_start sub_803DE34
-sub_803DE34: @ 803DE34
-	push {r4,r5,lr}
-	sub sp, 0x4
-	adds r5, r0, 0
-	lsls r4, r1, 24
-	lsrs r4, 24
-	movs r1, 0x15
-	movs r2, 0
-	bl PokemonGetField
-	lsls r0, 24
-	lsrs r0, 24
-	mov r1, sp
-	strb r0, [r1]
-	ldr r1, _0803DE6C
-	adds r4, r1
-	ldrb r1, [r4]
-	ands r1, r0
-	mov r0, sp
-	strb r1, [r0]
-	adds r0, r5, 0
-	movs r1, 0x15
-	mov r2, sp
-	bl pokemon_setattr
-	add sp, 0x4
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0803DE6C: .4byte gUnknown_0820823C
-	thumb_func_end sub_803DE34
-
-	thumb_func_start sub_803DE70
-sub_803DE70: @ 803DE70
-	lsls r1, 24
-	lsrs r1, 24
-	adds r0, 0x3B
-	ldr r2, _0803DE84
-	adds r1, r2
-	ldrb r2, [r0]
-	ldrb r1, [r1]
-	ands r1, r2
-	strb r1, [r0]
-	bx lr
-	.align 2, 0
-_0803DE84: .4byte gUnknown_0820823C
-	thumb_func_end sub_803DE70
-
-	thumb_func_start battle_data_fill
-battle_data_fill: @ 803DE88
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x18
-	lsls r0, 24
-	lsrs r0, 24
-	str r0, [sp, 0x14]
-	lsls r1, 24
-	lsrs r1, 24
-	mov r9, r1
-	movs r0, 0x64
-	mov r5, r9
-	muls r5, r0
-	ldr r0, _0803E170
-	adds r5, r0
-	adds r0, r5, 0
-	movs r1, 0xB
-	movs r2, 0
-	bl PokemonGetField
-	ldr r1, _0803E174
-	mov r8, r1
-	movs r1, 0x58
-	ldr r2, [sp, 0x14]
-	adds r4, r2, 0
-	muls r4, r1
-	mov r3, r8
-	adds r6, r4, r3
-	strh r0, [r6]
-	adds r0, r5, 0
-	movs r1, 0xC
-	movs r2, 0
-	bl PokemonGetField
-	strh r0, [r6, 0x2E]
-	movs r6, 0
-	mov r0, r8
-	adds r0, 0x24
-	adds r7, r4, r0
-_0803DEDA:
-	adds r1, r6, 0
-	adds r1, 0xD
-	adds r0, r5, 0
-	movs r2, 0
-	bl PokemonGetField
-	movs r1, 0xC
-	add r1, r8
-	mov r10, r1
-	adds r1, r4, r1
-	strh r0, [r1]
-	adds r1, r6, 0
-	adds r1, 0x11
-	adds r0, r5, 0
-	movs r2, 0
-	bl PokemonGetField
-	strb r0, [r7]
-	adds r7, 0x1
-	adds r4, 0x2
-	adds r6, 0x1
-	cmp r6, 0x3
-	ble _0803DEDA
-	movs r0, 0x64
-	mov r4, r9
-	muls r4, r0
-	ldr r0, _0803E170
-	adds r4, r0
-	adds r0, r4, 0
-	movs r1, 0x15
-	movs r2, 0
-	bl PokemonGetField
-	movs r2, 0xC
-	negs r2, r2
-	add r2, r10
-	mov r9, r2
-	movs r1, 0x58
-	ldr r3, [sp, 0x14]
-	adds r5, r3, 0
-	muls r5, r1
-	adds r7, r5, r2
-	adds r1, r7, 0
-	adds r1, 0x3B
-	strb r0, [r1]
-	adds r0, r4, 0
-	movs r1, 0x20
-	movs r2, 0
-	bl PokemonGetField
-	adds r1, r7, 0
-	adds r1, 0x2B
-	strb r0, [r1]
-	adds r0, r4, 0
-	movs r1, 0x19
-	movs r2, 0
-	bl PokemonGetField
-	mov r1, r10
-	adds r1, 0x38
-	adds r1, r5, r1
-	str r0, [r1]
-	adds r0, r4, 0
-	movs r1, 0x27
-	movs r2, 0
-	bl PokemonGetField
-	movs r6, 0x1F
-	ands r0, r6
-	ldrb r2, [r7, 0x14]
-	movs r1, 0x20
-	negs r1, r1
-	ands r1, r2
-	orrs r1, r0
-	strb r1, [r7, 0x14]
-	adds r0, r4, 0
-	movs r1, 0x28
-	movs r2, 0
-	bl PokemonGetField
-	movs r1, 0x1F
-	mov r8, r1
-	mov r2, r8
-	ands r0, r2
-	lsls r0, 5
-	ldrh r2, [r7, 0x14]
-	ldr r1, _0803E178
-	ands r1, r2
-	orrs r1, r0
-	strh r1, [r7, 0x14]
-	adds r0, r4, 0
-	movs r1, 0x29
-	movs r2, 0
-	bl PokemonGetField
-	ands r0, r6
-	lsls r0, 2
-	ldrb r2, [r7, 0x15]
-	movs r1, 0x7D
-	negs r1, r1
-	ands r1, r2
-	orrs r1, r0
-	strb r1, [r7, 0x15]
-	adds r0, r4, 0
-	movs r1, 0x2A
-	movs r2, 0
-	bl PokemonGetField
-	movs r1, 0x1F
-	ands r1, r0
-	lsls r1, 15
-	ldr r0, [r7, 0x14]
-	ldr r2, _0803E17C
-	ands r0, r2
-	orrs r0, r1
-	str r0, [r7, 0x14]
-	adds r0, r4, 0
-	movs r1, 0x2B
-	movs r2, 0
-	bl PokemonGetField
-	mov r3, r8
-	ands r0, r3
-	lsls r0, 4
-	ldrh r2, [r7, 0x16]
-	ldr r1, _0803E180
-	ands r1, r2
-	orrs r1, r0
-	strh r1, [r7, 0x16]
-	adds r0, r4, 0
-	movs r1, 0x2C
-	movs r2, 0
-	bl PokemonGetField
-	ands r0, r6
-	lsls r0, 1
-	ldrb r2, [r7, 0x17]
-	movs r1, 0x3F
-	negs r1, r1
-	ands r1, r2
-	orrs r1, r0
-	strb r1, [r7, 0x17]
-	adds r0, r4, 0
-	movs r1, 0
-	movs r2, 0
-	bl PokemonGetField
-	mov r1, r10
-	adds r1, 0x3C
-	adds r1, r5, r1
-	str r0, [r1]
-	adds r0, r4, 0
-	movs r1, 0x37
-	movs r2, 0
-	bl PokemonGetField
-	mov r1, r10
-	adds r1, 0x40
-	adds r1, r5, r1
-	str r0, [r1]
-	adds r0, r4, 0
-	movs r1, 0x38
-	movs r2, 0
-	bl PokemonGetField
-	adds r1, r7, 0
-	adds r1, 0x2A
-	strb r0, [r1]
-	adds r0, r4, 0
-	movs r1, 0x39
-	movs r2, 0
-	bl PokemonGetField
-	strh r0, [r7, 0x28]
-	adds r0, r4, 0
-	movs r1, 0x3A
-	movs r2, 0
-	bl PokemonGetField
-	strh r0, [r7, 0x2C]
-	adds r0, r4, 0
-	movs r1, 0x3B
-	movs r2, 0
-	bl PokemonGetField
-	strh r0, [r7, 0x2]
-	adds r0, r4, 0
-	movs r1, 0x3C
-	movs r2, 0
-	bl PokemonGetField
-	strh r0, [r7, 0x4]
-	adds r0, r4, 0
-	movs r1, 0x3D
-	movs r2, 0
-	bl PokemonGetField
-	strh r0, [r7, 0x6]
-	adds r0, r4, 0
-	movs r1, 0x3E
-	movs r2, 0
-	bl PokemonGetField
-	strh r0, [r7, 0x8]
-	adds r0, r4, 0
-	movs r1, 0x3F
-	movs r2, 0
-	bl PokemonGetField
-	strh r0, [r7, 0xA]
-	adds r0, r4, 0
-	movs r1, 0x2D
-	movs r2, 0
-	bl PokemonGetField
-	movs r1, 0x1
-	ands r0, r1
-	lsls r0, 6
-	ldrb r2, [r7, 0x17]
-	movs r1, 0x41
-	negs r1, r1
-	ands r1, r2
-	orrs r1, r0
-	strb r1, [r7, 0x17]
-	adds r0, r4, 0
-	movs r1, 0x2E
-	movs r2, 0
-	bl PokemonGetField
-	lsls r0, 7
-	ldrb r2, [r7, 0x17]
-	movs r1, 0x7F
-	ands r1, r2
-	orrs r1, r0
-	strb r1, [r7, 0x17]
-	adds r0, r4, 0
-	movs r1, 0x1
-	movs r2, 0
-	bl PokemonGetField
-	mov r1, r10
-	adds r1, 0x48
-	adds r1, r5, r1
-	str r0, [r1]
-	ldr r2, _0803E184
-	ldrh r1, [r7]
-	lsls r0, r1, 3
-	subs r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrb r0, [r0, 0x6]
-	adds r1, r7, 0
-	adds r1, 0x21
-	strb r0, [r1]
-	ldrh r1, [r7]
-	lsls r0, r1, 3
-	subs r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrb r0, [r0, 0x7]
-	adds r1, r7, 0
-	adds r1, 0x22
-	strb r0, [r1]
-	ldrh r0, [r7]
-	ldrb r1, [r7, 0x17]
-	lsrs r1, 7
-	bl sub_803DB14
-	adds r1, r7, 0
-	adds r1, 0x20
-	strb r0, [r1]
-	adds r0, r4, 0
-	movs r1, 0x2
-	mov r2, sp
-	bl PokemonGetField
-	mov r0, r10
-	adds r0, 0x24
-	adds r0, r5, r0
-	mov r1, sp
-	bl StringCopy10
-	mov r2, r10
-	adds r2, 0x30
-	adds r2, r5, r2
-	adds r0, r4, 0
-	movs r1, 0x7
-	bl PokemonGetField
-	ldr r0, [sp, 0x14]
-	bl battle_side_get_owner
-	lsls r0, 24
-	lsrs r0, 23
-	ldr r1, _0803E188
-	adds r0, r1
-	ldrh r1, [r7, 0x28]
-	strh r1, [r0]
-	movs r2, 0x6
-	mov r1, r9
-	movs r6, 0x7
-	add r5, r10
-	adds r0, r5, 0
-	adds r0, 0x13
-_0803E13A:
-	strb r2, [r0]
-	subs r0, 0x1
-	subs r6, 0x1
-	cmp r6, 0
-	bge _0803E13A
-	movs r2, 0
-	movs r0, 0x58
-	ldr r3, [sp, 0x14]
-	muls r0, r3
-	adds r1, 0x50
-	adds r0, r1
-	str r2, [r0]
-	ldr r0, [sp, 0x14]
-	bl sub_80157C4
-	ldr r0, [sp, 0x14]
-	movs r1, 0
-	bl sub_8032AA8
-	add sp, 0x18
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0803E170: .4byte 0x03004360
-_0803E174: .4byte 0x02024a80
-_0803E178: .4byte 0xfffffc1f
-_0803E17C: .4byte 0xfff07fff
-_0803E180: .4byte 0xfffffe0f
-_0803E184: .4byte gBaseStats
-_0803E188: .4byte 0x020160bc
-	thumb_func_end battle_data_fill
-
-	thumb_func_start ExecuteTableBasedItemEffect_
-ExecuteTableBasedItemEffect_: @ 803E18C
-	push {r4,lr}
-	sub sp, 0x4
-	lsls r1, 16
-	lsrs r1, 16
-	lsls r2, 24
-	lsrs r2, 24
-	lsls r3, 24
-	lsrs r3, 24
-	movs r4, 0
-	str r4, [sp]
-	bl sub_803E1B0
-	lsls r0, 24
-	lsrs r0, 24
-	add sp, 0x4
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end ExecuteTableBasedItemEffect_
-
-	thumb_func_start sub_803E1B0
-sub_803E1B0: @ 803E1B0
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x3C
-	mov r8, r0
-	ldr r0, [sp, 0x5C]
-	lsls r1, 16
-	lsrs r1, 16
-	str r1, [sp, 0x8]
-	lsls r2, 24
-	lsrs r2, 24
-	str r2, [sp, 0xC]
-	lsls r3, 24
-	lsrs r3, 24
-	str r3, [sp, 0x10]
-	lsls r0, 24
-	lsrs r0, 24
-	str r0, [sp, 0x14]
-	movs r0, 0x1
-	str r0, [sp, 0x1C]
-	movs r1, 0x6
-	str r1, [sp, 0x24]
-	movs r2, 0
-	str r2, [sp, 0x2C]
-	movs r3, 0x4
-	str r3, [sp, 0x34]
-	mov r0, r8
-	movs r1, 0xC
-	bl PokemonGetField
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, 0xAF
-	bne _0803E240
-	ldr r0, _0803E21C
-	ldr r4, _0803E220
-	adds r0, r4
-	ldrb r1, [r0]
-	movs r0, 0x2
-	ands r0, r1
-	cmp r0, 0
-	beq _0803E22C
-	ldr r2, _0803E224
-	ldr r0, _0803E228
-	ldrb r1, [r0]
-	lsls r0, r1, 3
-	subs r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrb r0, [r0, 0x7]
-	b _0803E248
-	.align 2, 0
-_0803E21C: .4byte 0x03001770
-_0803E220: .4byte 0x0000043d
-_0803E224: .4byte 0x02024df0
-_0803E228: .4byte 0x02024e6c
-_0803E22C:
-	ldr r0, _0803E238
-	ldr r5, _0803E23C
-	adds r0, r5
-	ldrb r0, [r0]
-	b _0803E248
-	.align 2, 0
-_0803E238: .4byte 0x02025734
-_0803E23C: .4byte 0x00003688
-_0803E240:
-	bl itemid_get_x12
-	lsls r0, 24
-	lsrs r0, 24
-_0803E248:
-	str r0, [sp, 0x30]
-	ldr r1, _0803E2A4
-	ldr r0, _0803E2A8
-	ldrb r2, [r0]
-	strb r2, [r1]
-	ldr r0, _0803E2AC
-	ldr r1, _0803E2B0
-	adds r0, r1
-	ldrb r1, [r0]
-	movs r0, 0x2
-	ands r0, r1
-	lsls r0, 24
-	lsrs r1, r0, 24
-	cmp r1, 0
-	beq _0803E2E8
-	ldr r0, _0803E2B4
-	strb r2, [r0]
-	ldrb r0, [r0]
-	bl battle_side_get_owner
-	lsls r0, 24
-	lsrs r0, 24
-	negs r1, r0
-	orrs r1, r0
-	lsrs r1, 31
-	str r1, [sp, 0x18]
-	ldr r0, _0803E2B8
-	ldr r4, [sp, 0x8]
-	subs r4, 0xD
-	ldrb r0, [r0]
-	cmp r1, r0
-	bge _0803E2F4
-	ldr r2, _0803E2BC
-	lsls r0, r1, 1
-	adds r0, r2
-	ldrh r3, [r0]
-	ldr r5, [sp, 0xC]
-	lsls r0, r5, 16
-	lsrs r1, r0, 16
-	adds r5, r0, 0
-	cmp r3, r1
-	bne _0803E2C0
-	ldr r0, [sp, 0x18]
-	str r0, [sp, 0x34]
-	b _0803E2F4
-	.align 2, 0
-_0803E2A4: .4byte 0x02024c0b
-_0803E2A8: .4byte 0x02024e6c
-_0803E2AC: .4byte 0x03001770
-_0803E2B0: .4byte 0x0000043d
-_0803E2B4: .4byte 0x02024a60
-_0803E2B8: .4byte 0x02024a68
-_0803E2BC: .4byte 0x02024a6a
-_0803E2C0:
-	ldr r1, [sp, 0x18]
-	adds r1, 0x2
-	str r1, [sp, 0x18]
-	ldr r0, _0803E2E4
-	ldrb r0, [r0]
-	cmp r1, r0
-	bge _0803E2F4
-	lsls r0, r1, 1
-	adds r0, r2
-	ldrh r1, [r0]
-	lsrs r0, r5, 16
-	cmp r1, r0
-	bne _0803E2C0
-	ldr r2, [sp, 0x18]
-	lsls r0, r2, 24
-	lsrs r0, 24
-	str r0, [sp, 0x34]
-	b _0803E2F4
-	.align 2, 0
-_0803E2E4: .4byte 0x02024a68
-_0803E2E8:
-	ldr r0, _0803E310
-	strb r1, [r0]
-	movs r3, 0x4
-	str r3, [sp, 0x34]
-	ldr r4, [sp, 0x8]
-	subs r4, 0xD
-_0803E2F4:
-	lsls r0, r4, 16
-	lsrs r0, 16
-	cmp r0, 0xA5
-	bhi _0803E36C
-	ldr r1, _0803E314
-	lsls r0, r4, 2
-	adds r0, r1
-	ldr r0, [r0]
-	cmp r0, 0
-	bne _0803E318
-	ldr r4, [sp, 0x8]
-	cmp r4, 0xAF
-	beq _0803E31E
-	b _0803E36C
-	.align 2, 0
-_0803E310: .4byte 0x02024a60
-_0803E314: .4byte gItemEffectTable
-_0803E318:
-	ldr r5, [sp, 0x8]
-	cmp r5, 0xAF
-	bne _0803E372
-_0803E31E:
-	ldr r0, _0803E340
-	ldr r1, _0803E344
-	adds r0, r1
-	ldrb r1, [r0]
-	movs r0, 0x2
-	ands r0, r1
-	cmp r0, 0
-	beq _0803E350
-	ldr r0, _0803E348
-	ldrb r1, [r0]
-	lsls r0, r1, 3
-	subs r0, r1
-	lsls r0, 2
-	ldr r1, _0803E34C
-	adds r0, r1
-	b _0803E372
-	.align 2, 0
-_0803E340: .4byte 0x03001770
-_0803E344: .4byte 0x0000043d
-_0803E348: .4byte 0x02024a60
-_0803E34C: .4byte 0x02024df8
-_0803E350:
-	ldr r2, _0803E358
-	str r2, [sp, 0x20]
-	b _0803E374
-	.align 2, 0
-_0803E358: .4byte 0x02028daa
-_0803E35C:
-	mov r0, r8
-	movs r2, 0
-	ldr r3, [sp, 0xC]
-	bl sub_8111924
-	movs r0, 0
-	bl _0803F15C
-_0803E36C:
-	movs r0, 0x1
-	bl _0803F15C
-_0803E372:
-	str r0, [sp, 0x20]
-_0803E374:
-	movs r3, 0
-	str r3, [sp, 0x18]
-_0803E378:
-	ldr r4, [sp, 0x18]
-	cmp r4, 0x5
-	bls _0803E382
-	bl _0803F14C
-_0803E382:
-	lsls r0, r4, 2
-	ldr r1, _0803E38C
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_0803E38C: .4byte _0803E390
-	.align 2, 0
-_0803E390:
-	.4byte _0803E3A8
-	.4byte _0803E474
-	.4byte _0803E508
-	.4byte _0803E59C
-	.4byte _0803E77C
-	.4byte _0803EE1E
-_0803E3A8:
-	ldr r5, [sp, 0x20]
-	ldr r0, [sp, 0x18]
-	adds r2, r5, r0
-	ldrb r1, [r2]
-	movs r0, 0x80
-	ands r0, r1
-	adds r6, r2, 0
-	cmp r0, 0
-	beq _0803E3F0
-	ldr r0, _0803E460
-	ldr r1, _0803E464
-	adds r0, r1
-	ldrb r1, [r0]
-	movs r0, 0x2
-	ands r0, r1
-	cmp r0, 0
-	beq _0803E3F0
-	ldr r2, [sp, 0x34]
-	cmp r2, 0x4
-	beq _0803E3F0
-	ldr r1, _0803E468
-	movs r0, 0x58
-	muls r0, r2
-	adds r1, 0x50
-	adds r2, r0, r1
-	ldr r1, [r2]
-	movs r0, 0xF0
-	lsls r0, 12
-	ands r0, r1
-	cmp r0, 0
-	beq _0803E3F0
-	ldr r0, _0803E46C
-	ands r1, r0
-	str r1, [r2]
-	movs r3, 0
-	str r3, [sp, 0x1C]
-_0803E3F0:
-	ldrb r1, [r6]
-	movs r0, 0x30
-	ands r0, r1
-	cmp r0, 0
-	beq _0803E41E
-	ldr r1, _0803E468
-	ldr r0, _0803E470
-	ldrb r2, [r0]
-	movs r0, 0x58
-	muls r0, r2
-	adds r1, 0x50
-	adds r2, r0, r1
-	ldr r1, [r2]
-	movs r3, 0x80
-	lsls r3, 13
-	adds r0, r1, 0
-	ands r0, r3
-	cmp r0, 0
-	bne _0803E41E
-	orrs r1, r3
-	str r1, [r2]
-	movs r4, 0
-	str r4, [sp, 0x1C]
-_0803E41E:
-	ldrb r0, [r6]
-	movs r3, 0xF
-	ands r3, r0
-	cmp r3, 0
-	bne _0803E42C
-	bl _0803F14C
-_0803E42C:
-	ldr r6, _0803E468
-	ldr r5, _0803E470
-	ldrb r0, [r5]
-	movs r4, 0x58
-	muls r0, r4
-	adds r1, r0, r6
-	ldrb r2, [r1, 0x19]
-	movs r0, 0x19
-	ldrsb r0, [r1, r0]
-	cmp r0, 0xB
-	ble _0803E446
-	bl _0803F14C
-_0803E446:
-	adds r0, r2, r3
-	strb r0, [r1, 0x19]
-	ldrb r0, [r5]
-	muls r0, r4
-	adds r1, r0, r6
-	movs r0, 0x19
-	ldrsb r0, [r1, r0]
-	cmp r0, 0xC
-	bgt _0803E45A
-	b _0803E74E
-_0803E45A:
-	movs r0, 0xC
-	strb r0, [r1, 0x19]
-	b _0803E74E
-	.align 2, 0
-_0803E460: .4byte 0x03001770
-_0803E464: .4byte 0x0000043d
-_0803E468: .4byte 0x02024a80
-_0803E46C: .4byte 0xfff0ffff
-_0803E470: .4byte 0x02024a60
-_0803E474:
-	ldr r0, [sp, 0x20]
-	ldr r1, [sp, 0x18]
-	adds r2, r0, r1
-	ldrb r1, [r2]
-	movs r0, 0xF0
-	ands r0, r1
-	lsls r3, r0, 24
-	adds r6, r2, 0
-	cmp r3, 0
-	beq _0803E4BA
-	ldr r7, _0803E500
-	ldr r5, _0803E504
-	ldrb r0, [r5]
-	movs r4, 0x58
-	muls r0, r4
-	adds r1, r0, r7
-	ldrb r2, [r1, 0x1A]
-	movs r0, 0x1A
-	ldrsb r0, [r1, r0]
-	cmp r0, 0xB
-	bgt _0803E4BA
-	lsrs r0, r3, 28
-	adds r0, r2, r0
-	strb r0, [r1, 0x1A]
-	ldrb r0, [r5]
-	muls r0, r4
-	adds r1, r0, r7
-	movs r0, 0x1A
-	ldrsb r0, [r1, r0]
-	cmp r0, 0xC
-	ble _0803E4B6
-	movs r0, 0xC
-	strb r0, [r1, 0x1A]
-_0803E4B6:
-	movs r2, 0
-	str r2, [sp, 0x1C]
-_0803E4BA:
-	ldrb r0, [r6]
-	movs r3, 0xF
-	ands r3, r0
-	cmp r3, 0
-	bne _0803E4C8
-	bl _0803F14C
-_0803E4C8:
-	ldr r6, _0803E500
-	ldr r5, _0803E504
-	ldrb r0, [r5]
-	movs r4, 0x58
-	muls r0, r4
-	adds r1, r0, r6
-	ldrb r2, [r1, 0x1B]
-	movs r0, 0x1B
-	ldrsb r0, [r1, r0]
-	cmp r0, 0xB
-	ble _0803E4E2
-	bl _0803F14C
-_0803E4E2:
-	adds r0, r2, r3
-	strb r0, [r1, 0x1B]
-	ldrb r0, [r5]
-	muls r0, r4
-	adds r1, r0, r6
-	movs r0, 0x1B
-	ldrsb r0, [r1, r0]
-	cmp r0, 0xC
-	ble _0803E4F8
-	movs r0, 0xC
-	strb r0, [r1, 0x1B]
-_0803E4F8:
-	movs r3, 0
-	str r3, [sp, 0x1C]
-	bl _0803F14C
-	.align 2, 0
-_0803E500: .4byte 0x02024a80
-_0803E504: .4byte 0x02024a60
-_0803E508:
-	ldr r4, [sp, 0x20]
-	ldr r5, [sp, 0x18]
-	adds r2, r4, r5
-	ldrb r1, [r2]
-	movs r0, 0xF0
-	ands r0, r1
-	lsls r3, r0, 24
-	adds r6, r2, 0
-	cmp r3, 0
-	beq _0803E54E
-	ldr r7, _0803E594
-	ldr r5, _0803E598
-	ldrb r0, [r5]
-	movs r4, 0x58
-	muls r0, r4
-	adds r1, r0, r7
-	ldrb r2, [r1, 0x1E]
-	movs r0, 0x1E
-	ldrsb r0, [r1, r0]
-	cmp r0, 0xB
-	bgt _0803E54E
-	lsrs r0, r3, 28
-	adds r0, r2, r0
-	strb r0, [r1, 0x1E]
-	ldrb r0, [r5]
-	muls r0, r4
-	adds r1, r0, r7
-	movs r0, 0x1E
-	ldrsb r0, [r1, r0]
-	cmp r0, 0xC
-	ble _0803E54A
-	movs r0, 0xC
-	strb r0, [r1, 0x1E]
-_0803E54A:
-	movs r0, 0
-	str r0, [sp, 0x1C]
-_0803E54E:
-	ldrb r0, [r6]
-	movs r3, 0xF
-	ands r3, r0
-	cmp r3, 0
-	bne _0803E55C
-	bl _0803F14C
-_0803E55C:
-	ldr r6, _0803E594
-	ldr r5, _0803E598
-	ldrb r0, [r5]
-	movs r4, 0x58
-	muls r0, r4
-	adds r1, r0, r6
-	ldrb r2, [r1, 0x1C]
-	movs r0, 0x1C
-	ldrsb r0, [r1, r0]
-	cmp r0, 0xB
-	ble _0803E576
-	bl _0803F14C
-_0803E576:
-	adds r0, r2, r3
-	strb r0, [r1, 0x1C]
-	ldrb r0, [r5]
-	muls r0, r4
-	adds r1, r0, r6
-	movs r0, 0x1C
-	ldrsb r0, [r1, r0]
-	cmp r0, 0xC
-	ble _0803E58C
-	movs r0, 0xC
-	strb r0, [r1, 0x1C]
-_0803E58C:
-	movs r1, 0
-	str r1, [sp, 0x1C]
-	bl _0803F14C
-	.align 2, 0
-_0803E594: .4byte 0x02024a80
-_0803E598: .4byte 0x02024a60
-_0803E59C:
-	ldr r3, [sp, 0x20]
-	ldr r4, [sp, 0x18]
-	adds r2, r3, r4
-	ldrb r1, [r2]
-	movs r0, 0x80
-	ands r0, r1
-	adds r6, r2, 0
-	cmp r0, 0
-	beq _0803E5E4
-	ldr r5, _0803E758
-	ldr r4, _0803E75C
-	ldrb r0, [r4]
-	bl battle_side_get_owner
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r1, r0, 1
-	adds r1, r0
-	lsls r1, 2
-	adds r1, r5
-	ldrb r0, [r1, 0x2]
-	cmp r0, 0
-	bne _0803E5E4
-	ldrb r0, [r4]
-	bl battle_side_get_owner
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r1, r0, 1
-	adds r1, r0
-	lsls r1, 2
-	adds r1, r5
-	movs r0, 0x5
-	strb r0, [r1, 0x2]
-	movs r5, 0
-	str r5, [sp, 0x1C]
-_0803E5E4:
-	ldrb r1, [r6]
-	movs r0, 0x40
-	ands r0, r1
-	cmp r0, 0
-	beq _0803E646
-	mov r0, r8
-	movs r1, 0x38
-	movs r2, 0
-	bl PokemonGetField
-	cmp r0, 0x64
-	beq _0803E646
-	ldr r5, _0803E760
-	mov r0, r8
-	movs r1, 0x38
-	movs r2, 0
-	bl PokemonGetField
-	adds r4, r0, 0
-	mov r0, r8
-	movs r1, 0xB
-	movs r2, 0
-	bl PokemonGetField
-	adds r4, 0x1
-	lsls r4, 2
-	ldr r2, _0803E764
-	lsls r1, r0, 3
-	subs r1, r0
-	lsls r1, 2
-	adds r1, r2
-	ldrb r1, [r1, 0x13]
-	movs r0, 0xCA
-	lsls r0, 1
-	muls r0, r1
-	adds r4, r0
-	adds r4, r5
-	ldr r0, [r4]
-	str r0, [sp]
-	mov r0, r8
-	movs r1, 0x19
-	mov r2, sp
-	bl pokemon_setattr
-	mov r0, r8
-	bl pokemon_calc_effective_stats
-	movs r0, 0
-	str r0, [sp, 0x1C]
-_0803E646:
-	ldrb r1, [r6]
-	movs r0, 0x20
-	ands r0, r1
-	cmp r0, 0
-	beq _0803E682
-	mov r0, r8
-	ldr r1, [sp, 0xC]
-	movs r2, 0x7
-	ldr r3, [sp, 0x34]
-	bl HealStatusConditions
-	lsls r0, 24
-	cmp r0, 0
-	bne _0803E682
-	ldr r1, [sp, 0x34]
-	cmp r1, 0x4
-	beq _0803E67E
-	ldr r1, _0803E768
-	movs r0, 0x58
-	ldr r3, [sp, 0x34]
-	adds r2, r3, 0
-	muls r2, r0
-	adds r1, 0x50
-	adds r2, r1
-	ldr r0, [r2]
-	ldr r1, _0803E76C
-	ands r0, r1
-	str r0, [r2]
-_0803E67E:
-	movs r4, 0
-	str r4, [sp, 0x1C]
-_0803E682:
-	ldrb r1, [r6]
-	movs r0, 0x10
-	ands r0, r1
-	cmp r0, 0
-	beq _0803E6A2
-	ldr r2, _0803E770
-	mov r0, r8
-	ldr r1, [sp, 0xC]
-	ldr r3, [sp, 0x34]
-	bl HealStatusConditions
-	lsls r0, 24
-	cmp r0, 0
-	bne _0803E6A2
-	movs r5, 0
-	str r5, [sp, 0x1C]
-_0803E6A2:
-	ldrb r1, [r6]
-	movs r0, 0x8
-	ands r0, r1
-	cmp r0, 0
-	beq _0803E6C2
-	mov r0, r8
-	ldr r1, [sp, 0xC]
-	movs r2, 0x10
-	ldr r3, [sp, 0x34]
-	bl HealStatusConditions
-	lsls r0, 24
-	cmp r0, 0
-	bne _0803E6C2
-	movs r0, 0
-	str r0, [sp, 0x1C]
-_0803E6C2:
-	ldrb r1, [r6]
-	movs r0, 0x4
-	ands r0, r1
-	cmp r0, 0
-	beq _0803E6E2
-	mov r0, r8
-	ldr r1, [sp, 0xC]
-	movs r2, 0x20
-	ldr r3, [sp, 0x34]
-	bl HealStatusConditions
-	lsls r0, 24
-	cmp r0, 0
-	bne _0803E6E2
-	movs r1, 0
-	str r1, [sp, 0x1C]
-_0803E6E2:
-	ldrb r1, [r6]
-	movs r0, 0x2
-	ands r0, r1
-	cmp r0, 0
-	beq _0803E702
-	mov r0, r8
-	ldr r1, [sp, 0xC]
-	movs r2, 0x40
-	ldr r3, [sp, 0x34]
-	bl HealStatusConditions
-	lsls r0, 24
-	cmp r0, 0
-	bne _0803E702
-	movs r2, 0
-	str r2, [sp, 0x1C]
-_0803E702:
-	ldrb r1, [r6]
-	movs r0, 0x1
-	ands r0, r1
-	cmp r0, 0
-	bne _0803E710
-	bl _0803F14C
-_0803E710:
-	ldr r0, _0803E774
-	ldr r3, _0803E778
-	adds r0, r3
-	ldrb r1, [r0]
-	movs r0, 0x2
-	ands r0, r1
-	cmp r0, 0
-	bne _0803E724
-	bl _0803F14C
-_0803E724:
-	ldr r4, [sp, 0x34]
-	cmp r4, 0x4
-	bne _0803E72E
-	bl _0803F14C
-_0803E72E:
-	ldr r1, _0803E768
-	movs r0, 0x58
-	muls r0, r4
-	adds r1, 0x50
-	adds r2, r0, r1
-	ldr r1, [r2]
-	movs r0, 0x7
-	ands r0, r1
-	cmp r0, 0
-	bne _0803E746
-	bl _0803F14C
-_0803E746:
-	movs r0, 0x8
-	negs r0, r0
-	ands r1, r0
-	str r1, [r2]
-_0803E74E:
-	movs r5, 0
-	str r5, [sp, 0x1C]
-	bl _0803F14C
-	.align 2, 0
-_0803E758: .4byte 0x02024c80
-_0803E75C: .4byte 0x02024a60
-_0803E760: .4byte gExperienceTables
-_0803E764: .4byte gBaseStats
-_0803E768: .4byte 0x02024a80
-_0803E76C: .4byte 0xf7ffffff
-_0803E770: .4byte 0x00000f88
-_0803E774: .4byte 0x03001770
-_0803E778: .4byte 0x0000043d
-_0803E77C:
-	ldr r1, [sp, 0x20]
-	ldr r2, [sp, 0x18]
-	adds r0, r1, r2
-	ldrb r0, [r0]
-	mov r10, r0
-	movs r0, 0x20
-	mov r3, r10
-	ands r0, r3
-	cmp r0, 0
-	beq _0803E854
-	movs r0, 0xDF
-	ands r3, r0
-	mov r10, r3
-	mov r0, r8
-	movs r1, 0x15
-	movs r2, 0
-	bl PokemonGetField
-	ldr r1, _0803E880
-	ldr r4, [sp, 0x10]
-	adds r1, r4, r1
-	ldrb r1, [r1]
-	ands r0, r1
-	lsls r1, r4, 1
-	lsrs r0, r1
-	str r0, [sp]
-	adds r5, r4, 0
-	adds r5, 0xD
-	mov r0, r8
-	adds r1, r5, 0
-	movs r2, 0
-	bl PokemonGetField
-	adds r4, r0, 0
-	lsls r4, 16
-	lsrs r4, 16
-	mov r0, r8
-	movs r1, 0x15
-	movs r2, 0
-	bl PokemonGetField
-	adds r1, r0, 0
-	lsls r1, 24
-	lsrs r1, 24
-	adds r0, r4, 0
-	ldr r2, [sp, 0x10]
-	bl CalcPPWithPPUps
-	lsls r0, 24
-	lsrs r0, 24
-	str r0, [sp, 0x28]
-	ldr r0, [sp]
-	cmp r0, 0x2
-	bhi _0803E854
-	ldr r0, [sp, 0x28]
-	cmp r0, 0x4
-	bls _0803E854
-	mov r0, r8
-	movs r1, 0x15
-	movs r2, 0
-	bl PokemonGetField
-	ldr r1, _0803E884
-	ldr r2, [sp, 0x10]
-	adds r1, r2, r1
-	ldrb r1, [r1]
-	adds r0, r1
-	str r0, [sp]
-	mov r0, r8
-	movs r1, 0x15
-	mov r2, sp
-	bl pokemon_setattr
-	mov r0, r8
-	adds r1, r5, 0
-	movs r2, 0
-	bl PokemonGetField
-	lsls r0, 16
-	lsrs r0, 16
-	ldr r1, [sp]
-	lsls r1, 24
-	lsrs r1, 24
-	ldr r2, [sp, 0x10]
-	bl CalcPPWithPPUps
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r3, [sp, 0x28]
-	subs r0, r3
-	str r0, [sp]
-	ldr r4, [sp, 0x10]
-	adds r4, 0x11
-	mov r0, r8
-	adds r1, r4, 0
-	movs r2, 0
-	bl PokemonGetField
-	ldr r1, [sp]
-	adds r0, r1
-	str r0, [sp]
-	mov r0, r8
-	adds r1, r4, 0
-	mov r2, sp
-	bl pokemon_setattr
-	movs r4, 0
-	str r4, [sp, 0x1C]
-_0803E854:
-	movs r5, 0
-	str r5, [sp, 0x28]
-	mov r0, r10
-	cmp r0, 0
-	bne _0803E862
-	bl _0803F14C
-_0803E862:
-	movs r0, 0x1
-	mov r1, r10
-	ands r0, r1
-	cmp r0, 0
-	bne _0803E86E
-	b _0803EE0A
-_0803E86E:
-	ldr r2, [sp, 0x28]
-	cmp r2, 0x7
-	bls _0803E876
-	b _0803EE0A
-_0803E876:
-	lsls r0, r2, 2
-	ldr r1, _0803E888
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_0803E880: .4byte gUnknown_08208238
-_0803E884: .4byte gUnknown_08208240
-_0803E888: .4byte _0803E88C
-	.align 2, 0
-_0803E88C:
-	.4byte _0803E8AC
-	.4byte _0803E8AC
-	.4byte _0803E934
-	.4byte _0803EB5C
-	.4byte _0803EE0A
-	.4byte _0803EE0A
-	.4byte _0803EE0A
-	.4byte _0803EDF4
-_0803E8AC:
-	mov r0, r8
-	bl sub_8040020
-	lsls r0, 16
-	lsrs r5, r0, 16
-	ldr r0, _0803E8EC
-	cmp r5, r0
-	bls _0803E8BE
-	b _0803E36C
-_0803E8BE:
-	ldr r0, _0803E8F0
-	ldr r3, [sp, 0x28]
-	adds r0, r3, r0
-	ldrb r1, [r0]
-	mov r0, r8
-	movs r2, 0
-	bl PokemonGetField
-	adds r1, r0, 0
-	str r1, [sp]
-	cmp r1, 0x63
-	bls _0803E8D8
-	b _0803EE0A
-_0803E8D8:
-	ldr r4, [sp, 0x20]
-	ldr r2, [sp, 0x24]
-	adds r0, r4, r2
-	ldrb r0, [r0]
-	adds r1, r0
-	cmp r1, 0x64
-	bls _0803E8F4
-	adds r0, 0x64
-	subs r4, r0, r1
-	b _0803E8F6
-	.align 2, 0
-_0803E8EC: .4byte 0x000001fd
-_0803E8F0: .4byte gUnknown_082082F2
-_0803E8F4:
-	adds r4, r0, 0
-_0803E8F6:
-	adds r1, r5, r4
-	movs r0, 0xFF
-	lsls r0, 1
-	cmp r1, r0
-	bls _0803E904
-	adds r0, r4, r0
-	subs r4, r0, r1
-_0803E904:
-	ldr r0, [sp]
-	adds r0, r4
-	str r0, [sp]
-	ldr r0, _0803E930
-	ldr r3, [sp, 0x28]
-	adds r0, r3, r0
-	ldrb r1, [r0]
-	mov r0, r8
-	mov r2, sp
-	bl pokemon_setattr
-	mov r0, r8
-	bl pokemon_calc_effective_stats
-	ldr r0, [sp, 0x24]
-	adds r0, 0x1
-	lsls r0, 24
-	lsrs r0, 24
-	str r0, [sp, 0x24]
-	movs r4, 0
-	str r4, [sp, 0x1C]
-	b _0803EE0A
-	.align 2, 0
-_0803E930: .4byte gUnknown_082082F2
-_0803E934:
-	movs r0, 0x10
-	mov r5, r10
-	ands r0, r5
-	cmp r0, 0
-	beq _0803E9F4
-	mov r0, r8
-	movs r1, 0x39
-	movs r2, 0
-	bl PokemonGetField
-	cmp r0, 0
-	beq _0803E954
-	ldr r0, [sp, 0x24]
-	adds r0, 0x1
-	lsls r0, 24
-	b _0803EC9E
-_0803E954:
-	ldr r0, _0803E99C
-	ldr r1, _0803E9A0
-	adds r0, r1
-	ldrb r1, [r0]
-	movs r4, 0x2
-	movs r0, 0x2
-	ands r0, r1
-	cmp r0, 0
-	beq _0803EA0A
-	ldr r2, [sp, 0x34]
-	cmp r2, 0x4
-	beq _0803E9B4
-	ldr r2, _0803E9A4
-	ldr r1, _0803E9A8
-	ldr r3, [sp, 0x34]
-	lsls r0, r3, 2
-	adds r0, r1
-	ldr r1, [r0]
-	ldrb r0, [r2]
-	bics r0, r1
-	strb r0, [r2]
-	ldr r1, _0803E9AC
-	lsls r0, r3, 1
-	adds r0, r1
-	ldrb r0, [r0]
-	bl pokemon_order_func
-	adds r1, r0, 0
-	lsls r1, 24
-	lsrs r1, 24
-	ldr r0, [sp, 0x34]
-	bl battle_data_fill
-	ldr r0, _0803E9B0
-	ldrb r0, [r0]
-	b _0803E9CC
-	.align 2, 0
-_0803E99C: .4byte 0x03001770
-_0803E9A0: .4byte 0x0000043d
-_0803E9A4: .4byte 0x02024c0c
-_0803E9A8: .4byte gBitTable
-_0803E9AC: .4byte 0x02024a6a
-_0803E9B0: .4byte 0x02024a60
-_0803E9B4:
-	ldr r3, _0803E9E4
-	ldr r1, _0803E9E8
-	ldr r2, _0803E9EC
-	ldrb r0, [r2]
-	eors r0, r4
-	lsls r0, 2
-	adds r0, r1
-	ldr r1, [r0]
-	ldrb r0, [r3]
-	bics r0, r1
-	strb r0, [r3]
-	ldrb r0, [r2]
-_0803E9CC:
-	bl battle_side_get_owner
-	lsls r0, 24
-	cmp r0, 0
-	bne _0803EA0A
-	ldr r1, _0803E9F0
-	ldrb r0, [r1, 0x4]
-	cmp r0, 0xFE
-	bhi _0803EA0A
-	adds r0, 0x1
-	strb r0, [r1, 0x4]
-	b _0803EA0A
-	.align 2, 0
-_0803E9E4: .4byte 0x02024c0c
-_0803E9E8: .4byte gBitTable
-_0803E9EC: .4byte 0x02024a60
-_0803E9F0: .4byte 0x030042e0
-_0803E9F4:
-	mov r0, r8
-	movs r1, 0x39
-	movs r2, 0
-	bl PokemonGetField
-	cmp r0, 0
-	bne _0803EA0A
-	ldr r0, [sp, 0x24]
-	adds r0, 0x1
-	lsls r0, 24
-	b _0803EC9E
-_0803EA0A:
-	ldr r1, [sp, 0x24]
-	adds r0, r1, 0x1
-	lsls r0, 24
-	lsrs r0, 24
-	str r0, [sp, 0x24]
-	ldr r4, [sp, 0x20]
-	adds r1, r4, r1
-	ldrb r1, [r1]
-	str r1, [sp]
-	adds r0, r1, 0
-	cmp r0, 0xFE
-	beq _0803EA4C
-	cmp r0, 0xFE
-	bhi _0803EA2C
-	cmp r0, 0xFD
-	beq _0803EA62
-	b _0803EA6C
-_0803EA2C:
-	cmp r1, 0xFF
-	bne _0803EA6C
-	mov r0, r8
-	movs r1, 0x3A
-	movs r2, 0
-	bl PokemonGetField
-	adds r4, r0, 0
-	mov r0, r8
-	movs r1, 0x39
-	movs r2, 0
-	bl PokemonGetField
-	subs r4, r0
-	str r4, [sp]
-	b _0803EA6C
-_0803EA4C:
-	mov r0, r8
-	movs r1, 0x3A
-	movs r2, 0
-	bl PokemonGetField
-	lsrs r0, 1
-	str r0, [sp]
-	cmp r0, 0
-	bne _0803EA6C
-	movs r0, 0x1
-	b _0803EA6A
-_0803EA62:
-	ldr r0, _0803EB24
-	ldr r5, _0803EB28
-	adds r0, r5
-	ldrb r0, [r0]
-_0803EA6A:
-	str r0, [sp]
-_0803EA6C:
-	mov r0, r8
-	movs r1, 0x3A
-	movs r2, 0
-	bl PokemonGetField
-	adds r4, r0, 0
-	mov r0, r8
-	movs r1, 0x39
-	movs r2, 0
-	bl PokemonGetField
-	cmp r4, r0
-	beq _0803EB4C
-	ldr r0, [sp, 0x14]
-	cmp r0, 0
-	bne _0803EB40
-	mov r0, r8
-	movs r1, 0x39
-	movs r2, 0
-	bl PokemonGetField
-	ldr r1, [sp]
-	adds r0, r1
-	str r0, [sp]
-	mov r0, r8
-	movs r1, 0x3A
-	movs r2, 0
-	bl PokemonGetField
-	ldr r1, [sp]
-	cmp r1, r0
-	bls _0803EAB8
-	mov r0, r8
-	movs r1, 0x3A
-	movs r2, 0
-	bl PokemonGetField
-	str r0, [sp]
-_0803EAB8:
-	mov r0, r8
-	movs r1, 0x39
-	mov r2, sp
-	bl pokemon_setattr
-	ldr r0, _0803EB2C
-	ldr r1, _0803EB30
-	adds r0, r1
-	ldrb r1, [r0]
-	movs r0, 0x2
-	ands r0, r1
-	cmp r0, 0
-	beq _0803EB48
-	ldr r2, [sp, 0x34]
-	cmp r2, 0x4
-	beq _0803EB48
-	ldr r1, _0803EB34
-	movs r0, 0x58
-	muls r0, r2
-	adds r0, r1
-	ldr r1, [sp]
-	strh r1, [r0, 0x28]
-	movs r0, 0x10
-	mov r3, r10
-	ands r0, r3
-	cmp r0, 0
-	bne _0803EB48
-	ldr r4, _0803EB38
-	ldrb r0, [r4]
-	bl battle_side_get_owner
-	lsls r0, 24
-	cmp r0, 0
-	bne _0803EB48
-	ldr r1, _0803EB3C
-	ldrb r0, [r1, 0x3]
-	cmp r0, 0xFE
-	bhi _0803EB08
-	adds r0, 0x1
-	strb r0, [r1, 0x3]
-_0803EB08:
-	ldrb r5, [r4]
-	add r0, sp, 0x34
-	ldrb r0, [r0]
-	strb r0, [r4]
-	movs r0, 0
-	movs r1, 0
-	movs r2, 0
-	bl dp01_build_cmdbuf_x00_a_b_0
-	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
-	strb r5, [r4]
-	b _0803EB48
-	.align 2, 0
-_0803EB24: .4byte 0x02000000
-_0803EB28: .4byte 0x000160fa
-_0803EB2C: .4byte 0x03001770
-_0803EB30: .4byte 0x0000043d
-_0803EB34: .4byte 0x02024a80
-_0803EB38: .4byte 0x02024a60
-_0803EB3C: .4byte 0x030042e0
-_0803EB40:
-	ldr r1, _0803EB58
-	ldr r0, [sp]
-	negs r0, r0
-	str r0, [r1]
-_0803EB48:
-	movs r1, 0
-	str r1, [sp, 0x1C]
-_0803EB4C:
-	movs r0, 0xEF
-	mov r2, r10
-	ands r2, r0
-	mov r10, r2
-	b _0803EE0A
-	.align 2, 0
-_0803EB58: .4byte 0x02024bec
-_0803EB5C:
-	movs r7, 0x2
-	mov r0, r10
-	ands r0, r7
-	cmp r0, 0
-	beq _0803EB68
-	b _0803ECB8
-_0803EB68:
-	movs r5, 0
-	ldr r3, [sp, 0x24]
-	adds r3, 0x1
-	str r3, [sp, 0x38]
-_0803EB70:
-	movs r4, 0x11
-	adds r4, r5
-	mov r9, r4
-	mov r0, r8
-	mov r1, r9
-	movs r2, 0
-	bl PokemonGetField
-	str r0, [sp]
-	adds r7, r5, 0
-	adds r7, 0xD
-	mov r0, r8
-	adds r1, r7, 0
-	movs r2, 0
-	bl PokemonGetField
-	adds r4, r0, 0
-	lsls r4, 16
-	lsrs r4, 16
-	mov r0, r8
-	movs r1, 0x15
-	movs r2, 0
-	bl PokemonGetField
-	adds r1, r0, 0
-	lsls r1, 24
-	lsrs r1, 24
-	lsls r0, r5, 24
-	lsrs r6, r0, 24
-	adds r0, r4, 0
-	adds r2, r6, 0
-	bl CalcPPWithPPUps
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r1, [sp]
-	cmp r1, r0
-	beq _0803EC92
-	ldr r2, [sp, 0x20]
-	ldr r3, [sp, 0x24]
-	adds r0, r2, r3
-	ldrb r0, [r0]
-	adds r0, r1, r0
-	str r0, [sp]
-	mov r0, r8
-	adds r1, r7, 0
-	movs r2, 0
-	bl PokemonGetField
-	adds r4, r0, 0
-	lsls r4, 16
-	lsrs r4, 16
-	mov r0, r8
-	movs r1, 0x15
-	movs r2, 0
-	bl PokemonGetField
-	adds r1, r0, 0
-	lsls r1, 24
-	lsrs r1, 24
-	adds r0, r4, 0
-	adds r2, r6, 0
-	bl CalcPPWithPPUps
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r1, [sp]
-	cmp r1, r0
-	bls _0803EC28
-	mov r0, r8
-	adds r1, r7, 0
-	movs r2, 0
-	bl PokemonGetField
-	adds r4, r0, 0
-	lsls r4, 16
-	lsrs r4, 16
-	mov r0, r8
-	movs r1, 0x15
-	movs r2, 0
-	bl PokemonGetField
-	adds r1, r0, 0
-	lsls r1, 24
-	lsrs r1, 24
-	adds r0, r4, 0
-	adds r2, r6, 0
-	bl CalcPPWithPPUps
-	lsls r0, 24
-	lsrs r0, 24
-	str r0, [sp]
-_0803EC28:
-	mov r0, r8
-	mov r1, r9
-	mov r2, sp
-	bl pokemon_setattr
-	ldr r0, _0803ECA4
-	ldr r4, _0803ECA8
-	adds r0, r4
-	ldrb r1, [r0]
-	movs r0, 0x2
-	ands r0, r1
-	cmp r0, 0
-	beq _0803EC8E
-	ldr r0, [sp, 0x34]
-	cmp r0, 0x4
-	beq _0803EC8E
-	ldr r4, _0803ECAC
-	movs r0, 0x58
-	ldr r1, [sp, 0x34]
-	adds r3, r1, 0
-	muls r3, r0
-	adds r0, r4, 0
-	adds r0, 0x50
-	adds r0, r3, r0
-	ldr r1, [r0]
-	movs r0, 0x80
-	lsls r0, 14
-	ands r1, r0
-	cmp r1, 0
-	bne _0803EC8E
-	ldr r1, _0803ECB0
-	ldr r2, [sp, 0x34]
-	lsls r0, r2, 3
-	subs r0, r2
-	lsls r0, 2
-	adds r0, r1
-	ldrb r1, [r0, 0x18]
-	lsrs r1, 4
-	ldr r2, _0803ECB4
-	lsls r0, r5, 2
-	adds r0, r2
-	ldr r0, [r0]
-	ands r1, r0
-	cmp r1, 0
-	bne _0803EC8E
-	adds r0, r5, r3
-	adds r1, r4, 0
-	adds r1, 0x24
-	adds r0, r1
-	ldr r1, [sp]
-	strb r1, [r0]
-_0803EC8E:
-	movs r3, 0
-	str r3, [sp, 0x1C]
-_0803EC92:
-	adds r5, 0x1
-	cmp r5, 0x3
-	bgt _0803EC9A
-	b _0803EB70
-_0803EC9A:
-	ldr r4, [sp, 0x38]
-	lsls r0, r4, 24
-_0803EC9E:
-	lsrs r0, 24
-	str r0, [sp, 0x24]
-	b _0803EE0A
-	.align 2, 0
-_0803ECA4: .4byte 0x03001770
-_0803ECA8: .4byte 0x0000043d
-_0803ECAC: .4byte 0x02024a80
-_0803ECB0: .4byte 0x02024ca8
-_0803ECB4: .4byte gBitTable
-_0803ECB8:
-	ldr r6, [sp, 0x10]
-	adds r6, 0x11
-	mov r0, r8
-	adds r1, r6, 0
-	movs r2, 0
-	bl PokemonGetField
-	str r0, [sp]
-	ldr r5, [sp, 0x10]
-	adds r5, 0xD
-	mov r0, r8
-	adds r1, r5, 0
-	movs r2, 0
-	bl PokemonGetField
-	adds r4, r0, 0
-	lsls r4, 16
-	lsrs r4, 16
-	mov r0, r8
-	movs r1, 0x15
-	movs r2, 0
-	bl PokemonGetField
-	adds r1, r0, 0
-	lsls r1, 24
-	lsrs r1, 24
-	adds r0, r4, 0
-	ldr r2, [sp, 0x10]
-	bl CalcPPWithPPUps
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, [sp]
-	cmp r2, r0
-	bne _0803ED00
-	b _0803EE0A
-_0803ED00:
-	ldr r1, [sp, 0x24]
-	adds r0, r1, 0x1
-	lsls r0, 24
-	lsrs r0, 24
-	str r0, [sp, 0x24]
-	ldr r0, [sp, 0x20]
-	adds r1, r0, r1
-	ldrb r0, [r1]
-	adds r0, r2, r0
-	str r0, [sp]
-	mov r0, r8
-	adds r1, r5, 0
-	movs r2, 0
-	bl PokemonGetField
-	adds r4, r0, 0
-	lsls r4, 16
-	lsrs r4, 16
-	mov r0, r8
-	movs r1, 0x15
-	movs r2, 0
-	bl PokemonGetField
-	adds r1, r0, 0
-	lsls r1, 24
-	lsrs r1, 24
-	adds r0, r4, 0
-	ldr r2, [sp, 0x10]
-	bl CalcPPWithPPUps
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r1, [sp]
-	cmp r1, r0
-	bls _0803ED74
-	mov r0, r8
-	adds r1, r5, 0
-	movs r2, 0
-	bl PokemonGetField
-	adds r4, r0, 0
-	lsls r4, 16
-	lsrs r4, 16
-	mov r0, r8
-	movs r1, 0x15
-	movs r2, 0
-	bl PokemonGetField
-	adds r1, r0, 0
-	lsls r1, 24
-	lsrs r1, 24
-	adds r0, r4, 0
-	ldr r2, [sp, 0x10]
-	bl CalcPPWithPPUps
-	lsls r0, 24
-	lsrs r0, 24
-	str r0, [sp]
-_0803ED74:
-	mov r0, r8
-	adds r1, r6, 0
-	mov r2, sp
-	bl pokemon_setattr
-	ldr r0, _0803EDE0
-	ldr r1, _0803EDE4
-	adds r0, r1
-	ldrb r1, [r0]
-	adds r0, r7, 0
-	ands r0, r1
-	cmp r0, 0
-	beq _0803EDD8
-	ldr r2, [sp, 0x34]
-	cmp r2, 0x4
-	beq _0803EDD8
-	ldr r4, _0803EDE8
-	movs r0, 0x58
-	adds r3, r2, 0
-	muls r3, r0
-	adds r0, r4, 0
-	adds r0, 0x50
-	adds r0, r3, r0
-	ldr r0, [r0]
-	movs r1, 0x80
-	lsls r1, 14
-	ands r0, r1
-	cmp r0, 0
-	bne _0803EDD8
-	ldr r1, _0803EDEC
-	lsls r0, r2, 3
-	subs r0, r2
-	lsls r0, 2
-	adds r0, r1
-	ldrb r1, [r0, 0x18]
-	lsrs r1, 4
-	ldr r2, _0803EDF0
-	ldr r5, [sp, 0x10]
-	lsls r0, r5, 2
-	adds r0, r2
-	ldr r0, [r0]
-	ands r1, r0
-	cmp r1, 0
-	bne _0803EDD8
-	adds r0, r5, r3
-	adds r1, r4, 0
-	adds r1, 0x24
-	adds r0, r1
-	ldr r1, [sp]
-	strb r1, [r0]
-_0803EDD8:
-	movs r0, 0
-	str r0, [sp, 0x1C]
-	b _0803EE0A
-	.align 2, 0
-_0803EDE0: .4byte 0x03001770
-_0803EDE4: .4byte 0x0000043d
-_0803EDE8: .4byte 0x02024a80
-_0803EDEC: .4byte 0x02024ca8
-_0803EDF0: .4byte gBitTable
-_0803EDF4:
-	mov r0, r8
-	movs r1, 0x2
-	ldr r2, [sp, 0x8]
-	bl GetEvolutionTargetSpecies
-	lsls r0, 16
-	lsrs r1, r0, 16
-	cmp r1, 0
-	beq _0803EE0A
-	bl _0803E35C
-_0803EE0A:
-	ldr r1, [sp, 0x28]
-	adds r1, 0x1
-	str r1, [sp, 0x28]
-	mov r2, r10
-	lsrs r2, 1
-	mov r10, r2
-	cmp r2, 0
-	beq _0803EE1C
-	b _0803E862
-_0803EE1C:
-	b _0803F14C
-_0803EE1E:
-	ldr r3, [sp, 0x20]
-	ldr r4, [sp, 0x18]
-	adds r0, r3, r4
-	ldrb r0, [r0]
-	mov r10, r0
-	movs r5, 0
-	str r5, [sp, 0x28]
-	cmp r0, 0
-	bne _0803EE32
-	b _0803F14C
-_0803EE32:
-	movs r0, 0x1
-	mov r1, r10
-	ands r0, r1
-	cmp r0, 0
-	bne _0803EE3E
-	b _0803F13A
-_0803EE3E:
-	ldr r2, [sp, 0x28]
-	cmp r2, 0x7
-	bls _0803EE46
-	b _0803F13A
-_0803EE46:
-	lsls r0, r2, 2
-	ldr r1, _0803EE50
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_0803EE50: .4byte _0803EE54
-	.align 2, 0
-_0803EE54:
-	.4byte _0803EE74
-	.4byte _0803EE74
-	.4byte _0803EE74
-	.4byte _0803EE74
-	.4byte _0803EEF8
-	.4byte _0803EFCC
-	.4byte _0803F026
-	.4byte _0803F07C
-_0803EE74:
-	mov r0, r8
-	bl sub_8040020
-	lsls r0, 16
-	lsrs r5, r0, 16
-	ldr r0, _0803EEBC
-	cmp r5, r0
-	bls _0803EE88
-	bl _0803E36C
-_0803EE88:
-	ldr r0, _0803EEC0
-	ldr r4, [sp, 0x28]
-	adds r4, 0x2
-	adds r0, r4, r0
-	ldrb r1, [r0]
-	mov r0, r8
-	movs r2, 0
-	bl PokemonGetField
-	adds r1, r0, 0
-	str r1, [sp]
-	adds r2, r4, 0
-	cmp r1, 0x63
-	bls _0803EEA6
-	b _0803F13A
-_0803EEA6:
-	ldr r3, [sp, 0x20]
-	ldr r4, [sp, 0x24]
-	adds r0, r3, r4
-	ldrb r0, [r0]
-	adds r1, r0
-	cmp r1, 0x64
-	bls _0803EEC4
-	adds r0, 0x64
-	subs r4, r0, r1
-	b _0803EEC6
-	.align 2, 0
-_0803EEBC: .4byte 0x000001fd
-_0803EEC0: .4byte gUnknown_082082F2
-_0803EEC4:
-	adds r4, r0, 0
-_0803EEC6:
-	adds r1, r5, r4
-	movs r0, 0xFF
-	lsls r0, 1
-	cmp r1, r0
-	bls _0803EED4
-	adds r0, r4, r0
-	subs r4, r0, r1
-_0803EED4:
-	ldr r0, [sp]
-	adds r0, r4
-	str r0, [sp]
-	ldr r0, _0803EEF4
-	adds r0, r2, r0
-	ldrb r1, [r0]
-	mov r0, r8
-	mov r2, sp
-	bl pokemon_setattr
-	mov r0, r8
-	bl pokemon_calc_effective_stats
-	movs r5, 0
-	str r5, [sp, 0x1C]
-	b _0803F130
-	.align 2, 0
-_0803EEF4: .4byte gUnknown_082082F2
-_0803EEF8:
-	mov r0, r8
-	movs r1, 0x15
-	movs r2, 0
-	bl PokemonGetField
-	ldr r1, _0803EFC0
-	ldr r2, [sp, 0x10]
-	adds r1, r2, r1
-	ldrb r1, [r1]
-	ands r0, r1
-	lsls r1, r2, 1
-	lsrs r0, r1
-	str r0, [sp]
-	cmp r0, 0x2
-	bls _0803EF18
-	b _0803F13A
-_0803EF18:
-	adds r5, r2, 0
-	adds r5, 0xD
-	mov r0, r8
-	adds r1, r5, 0
-	movs r2, 0
-	bl PokemonGetField
-	adds r4, r0, 0
-	lsls r4, 16
-	lsrs r4, 16
-	mov r0, r8
-	movs r1, 0x15
-	movs r2, 0
-	bl PokemonGetField
-	adds r1, r0, 0
-	lsls r1, 24
-	lsrs r1, 24
-	adds r0, r4, 0
-	ldr r2, [sp, 0x10]
-	bl CalcPPWithPPUps
-	lsls r0, 24
-	lsrs r4, r0, 24
-	mov r0, r8
-	movs r1, 0x15
-	movs r2, 0
-	bl PokemonGetField
-	str r0, [sp]
-	ldr r1, _0803EFC4
-	ldr r3, [sp, 0x10]
-	adds r1, r3, r1
-	ldrb r2, [r1]
-	ands r2, r0
-	str r2, [sp]
-	ldr r0, _0803EFC8
-	adds r0, r3, r0
-	ldrb r1, [r0]
-	lsls r0, r1, 1
-	adds r0, r1
-	adds r2, r0
-	str r2, [sp]
-	mov r0, r8
-	movs r1, 0x15
-	mov r2, sp
-	bl pokemon_setattr
-	mov r0, r8
-	adds r1, r5, 0
-	movs r2, 0
-	bl PokemonGetField
-	lsls r0, 16
-	lsrs r0, 16
-	ldr r1, [sp]
-	lsls r1, 24
-	lsrs r1, 24
-	ldr r2, [sp, 0x10]
-	bl CalcPPWithPPUps
-	lsls r0, 24
-	lsrs r0, 24
-	subs r0, r4
-	str r0, [sp]
-	ldr r4, [sp, 0x10]
-	adds r4, 0x11
-	mov r0, r8
-	adds r1, r4, 0
-	movs r2, 0
-	bl PokemonGetField
-	ldr r1, [sp]
-	adds r0, r1
-	str r0, [sp]
-	mov r0, r8
-	adds r1, r4, 0
-	mov r2, sp
-	bl pokemon_setattr
-	movs r4, 0
-	str r4, [sp, 0x1C]
-	b _0803F13A
-	.align 2, 0
-_0803EFC0: .4byte gUnknown_08208238
-_0803EFC4: .4byte gUnknown_0820823C
-_0803EFC8: .4byte gUnknown_08208240
-_0803EFCC:
-	mov r0, r8
-	movs r1, 0x20
-	movs r2, 0
-	bl PokemonGetField
-	cmp r0, 0x63
-	bls _0803EFDC
-	b _0803F130
-_0803EFDC:
-	ldr r5, [sp, 0x1C]
-	cmp r5, 0
-	beq _0803EFE4
-	b _0803F130
-_0803EFE4:
-	ldr r0, [sp, 0x2C]
-	cmp r0, 0
-	beq _0803EFEC
-	b _0803F130
-_0803EFEC:
-	ldr r1, [sp, 0x20]
-	ldr r2, [sp, 0x24]
-	adds r0, r1, r2
-	ldrb r0, [r0]
-	str r0, [sp, 0x2C]
-	mov r0, r8
-	movs r1, 0x20
-	movs r2, 0
-	bl PokemonGetField
-	adds r5, r0, 0
-	str r5, [sp, 0x4]
-	ldr r3, [sp, 0x2C]
-	lsls r4, r3, 24
-	asrs r1, r4, 24
-	cmp r1, 0
-	ble _0803F0D0
-	ldr r0, [sp, 0x30]
-	cmp r0, 0x1B
-	bne _0803F0D0
-	movs r0, 0x96
-	muls r0, r1
-	movs r1, 0x64
-	bl __divsi3
-	adds r0, r5, r0
-	str r0, [sp, 0x4]
-	adds r2, r4, 0
-	b _0803F0DC
-_0803F026:
-	mov r0, r8
-	movs r1, 0x20
-	movs r2, 0
-	bl PokemonGetField
-	cmp r0, 0x63
-	bls _0803F130
-	mov r0, r8
-	movs r1, 0x20
-	movs r2, 0
-	bl PokemonGetField
-	cmp r0, 0xC7
-	bhi _0803F130
-	ldr r2, [sp, 0x1C]
-	cmp r2, 0
-	bne _0803F130
-	ldr r3, [sp, 0x2C]
-	cmp r3, 0
-	bne _0803F130
-	ldr r4, [sp, 0x20]
-	ldr r5, [sp, 0x24]
-	adds r0, r4, r5
-	ldrb r0, [r0]
-	str r0, [sp, 0x2C]
-	mov r0, r8
-	movs r1, 0x20
-	movs r2, 0
-	bl PokemonGetField
-	adds r4, r0, 0
-	str r4, [sp, 0x4]
-	ldr r0, [sp, 0x2C]
-	lsls r5, r0, 24
-	asrs r1, r5, 24
-	cmp r1, 0
-	ble _0803F076
-	ldr r2, [sp, 0x30]
-	cmp r2, 0x1B
-	beq _0803F0BE
-_0803F076:
-	ldr r3, [sp, 0x2C]
-	lsls r2, r3, 24
-	b _0803F0D4
-_0803F07C:
-	mov r0, r8
-	movs r1, 0x20
-	movs r2, 0
-	bl PokemonGetField
-	cmp r0, 0xC7
-	bls _0803F130
-	ldr r4, [sp, 0x1C]
-	cmp r4, 0
-	bne _0803F130
-	ldr r5, [sp, 0x2C]
-	cmp r5, 0
-	bne _0803F130
-	ldr r1, [sp, 0x20]
-	ldr r2, [sp, 0x24]
-	adds r0, r1, r2
-	ldrb r0, [r0]
-	str r0, [sp, 0x2C]
-	mov r0, r8
-	movs r1, 0x20
-	movs r2, 0
-	bl PokemonGetField
-	adds r4, r0, 0
-	str r4, [sp, 0x4]
-	ldr r3, [sp, 0x2C]
-	lsls r5, r3, 24
-	asrs r1, r5, 24
-	cmp r1, 0
-	ble _0803F0D0
-	ldr r0, [sp, 0x30]
-	cmp r0, 0x1B
-	bne _0803F0D0
-_0803F0BE:
-	movs r0, 0x96
-	muls r0, r1
-	movs r1, 0x64
-	bl __divsi3
-	adds r0, r4, r0
-	str r0, [sp, 0x4]
-	adds r2, r5, 0
-	b _0803F0DC
-_0803F0D0:
-	ldr r1, [sp, 0x2C]
-	lsls r2, r1, 24
-_0803F0D4:
-	asrs r1, r2, 24
-	ldr r0, [sp, 0x4]
-	adds r0, r1
-	str r0, [sp, 0x4]
-_0803F0DC:
-	cmp r2, 0
-	ble _0803F112
-	mov r0, r8
-	movs r1, 0x26
-	movs r2, 0
-	bl PokemonGetField
-	cmp r0, 0xB
-	bne _0803F0F4
-	ldr r0, [sp, 0x4]
-	adds r0, 0x1
-	str r0, [sp, 0x4]
-_0803F0F4:
-	mov r0, r8
-	movs r1, 0x23
-	movs r2, 0
-	bl PokemonGetField
-	adds r4, r0, 0
-	bl sav1_map_get_name
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r4, r0
-	bne _0803F112
-	ldr r0, [sp, 0x4]
-	adds r0, 0x1
-	str r0, [sp, 0x4]
-_0803F112:
-	ldr r0, [sp, 0x4]
-	cmp r0, 0
-	bge _0803F11C
-	movs r0, 0
-	str r0, [sp, 0x4]
-_0803F11C:
-	ldr r0, [sp, 0x4]
-	cmp r0, 0xFF
-	ble _0803F126
-	movs r0, 0xFF
-	str r0, [sp, 0x4]
-_0803F126:
-	add r2, sp, 0x4
-	mov r0, r8
-	movs r1, 0x20
-	bl pokemon_setattr
-_0803F130:
-	ldr r0, [sp, 0x24]
-	adds r0, 0x1
-	lsls r0, 24
-	lsrs r0, 24
-	str r0, [sp, 0x24]
-_0803F13A:
-	ldr r2, [sp, 0x28]
-	adds r2, 0x1
-	str r2, [sp, 0x28]
-	mov r3, r10
-	lsrs r3, 1
-	mov r10, r3
-	cmp r3, 0
-	beq _0803F14C
-	b _0803EE32
-_0803F14C:
-	ldr r4, [sp, 0x18]
-	adds r4, 0x1
-	str r4, [sp, 0x18]
-	cmp r4, 0x5
-	bgt _0803F15A
-	bl _0803E378
-_0803F15A:
-	ldr r0, [sp, 0x1C]
-_0803F15C:
-	add sp, 0x3C
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_803E1B0
-
-	thumb_func_start HealStatusConditions
-HealStatusConditions: @ 803F16C
-	push {r4-r6,lr}
-	sub sp, 0x4
-	adds r5, r0, 0
-	adds r4, r2, 0
-	lsls r3, 24
-	lsrs r6, r3, 24
-	movs r1, 0x37
-	movs r2, 0
-	bl PokemonGetField
-	adds r1, r0, 0
-	str r1, [sp]
-	ands r0, r4
-	cmp r0, 0
-	beq _0803F1D0
-	mvns r4, r4
-	ands r1, r4
-	str r1, [sp]
-	adds r0, r5, 0
-	movs r1, 0x37
-	mov r2, sp
-	bl pokemon_setattr
-	ldr r0, _0803F1C4
-	ldr r1, _0803F1C8
-	adds r0, r1
-	ldrb r1, [r0]
-	movs r0, 0x2
-	ands r0, r1
-	cmp r0, 0
-	beq _0803F1BE
-	cmp r6, 0x4
-	beq _0803F1BE
-	ldr r0, _0803F1CC
-	movs r1, 0x58
-	muls r1, r6
-	adds r0, 0x4C
-	adds r1, r0
-	ldr r0, [r1]
-	ands r0, r4
-	str r0, [r1]
-_0803F1BE:
-	movs r0, 0
-	b _0803F1D2
-	.align 2, 0
-_0803F1C4: .4byte 0x03001770
-_0803F1C8: .4byte 0x0000043d
-_0803F1CC: .4byte 0x02024a80
-_0803F1D0:
-	movs r0, 0x1
-_0803F1D2:
-	add sp, 0x4
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end HealStatusConditions
-
-	thumb_func_start sub_803F1DC
-sub_803F1DC: @ 803F1DC
-	push {r4-r7,lr}
-	lsls r0, 16
-	lsrs r3, r0, 16
-	lsls r1, 24
-	lsrs r4, r1, 24
-	lsls r2, 24
-	lsrs r5, r2, 24
-	movs r7, 0x6
-	ldr r1, _0803F204
-	adds r0, r3, 0
-	subs r0, 0xD
-	lsls r0, 2
-	adds r0, r1
-	ldr r0, [r0]
-	cmp r0, 0
-	bne _0803F208
-	cmp r3, 0xAF
-	beq _0803F20C
-_0803F200:
-	movs r0, 0
-	b _0803F31C
-	.align 2, 0
-_0803F204: .4byte gItemEffectTable
-_0803F208:
-	cmp r3, 0xAF
-	bne _0803F21A
-_0803F20C:
-	ldr r0, _0803F22C
-	ldrb r1, [r0]
-	lsls r0, r1, 3
-	subs r0, r1
-	lsls r0, 2
-	ldr r1, _0803F230
-	adds r0, r1
-_0803F21A:
-	mov r12, r0
-	movs r2, 0
-_0803F21E:
-	cmp r2, 0x4
-	beq _0803F23E
-	cmp r2, 0x4
-	ble _0803F234
-	cmp r2, 0x5
-	beq _0803F2C8
-	b _0803F312
-	.align 2, 0
-_0803F22C: .4byte 0x02024a60
-_0803F230: .4byte 0x02024df8
-_0803F234:
-	cmp r2, 0
-	blt _0803F312
-	cmp r2, r4
-	bne _0803F312
-	b _0803F200
-_0803F23E:
-	mov r0, r12
-	ldrb r3, [r0, 0x4]
-	movs r0, 0x20
-	ands r0, r3
-	cmp r0, 0
-	beq _0803F24E
-	movs r0, 0xDF
-	ands r3, r0
-_0803F24E:
-	movs r6, 0
-	cmp r3, 0
-	beq _0803F312
-_0803F254:
-	movs r0, 0x1
-	ands r0, r3
-	cmp r0, 0
-	beq _0803F2B4
-	cmp r6, 0x7
-	bhi _0803F2B4
-	lsls r0, r6, 2
-	ldr r1, _0803F26C
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_0803F26C: .4byte _0803F270
-	.align 2, 0
-_0803F270:
-	.4byte _0803F29C
-	.4byte _0803F29C
-	.4byte _0803F290
-	.4byte _0803F29C
-	.4byte _0803F2B4
-	.4byte _0803F2B4
-	.4byte _0803F2B4
-	.4byte _0803F2B0
-_0803F290:
-	movs r0, 0x10
-	ands r0, r3
-	cmp r0, 0
-	beq _0803F29C
-	movs r0, 0xEF
-	ands r3, r0
-_0803F29C:
-	cmp r2, r4
-	bne _0803F2A8
-	adds r0, r3, 0
-	ands r0, r5
-	cmp r0, 0
-	bne _0803F31A
-_0803F2A8:
-	adds r0, r7, 0x1
-	lsls r0, 24
-	lsrs r7, r0, 24
-	b _0803F2B4
-_0803F2B0:
-	cmp r2, r4
-	beq _0803F200
-_0803F2B4:
-	adds r0, r6, 0x1
-	lsls r0, 24
-	lsrs r6, r0, 24
-	lsrs r3, 1
-	cmp r2, r4
-	bne _0803F2C2
-	lsrs r5, 1
-_0803F2C2:
-	cmp r3, 0
-	bne _0803F254
-	b _0803F312
-_0803F2C8:
-	mov r0, r12
-	ldrb r3, [r0, 0x5]
-	movs r6, 0
-_0803F2CE:
-	cmp r3, 0
-	beq _0803F312
-	movs r0, 0x1
-	ands r0, r3
-	cmp r0, 0
-	beq _0803F302
-	cmp r6, 0
-	blt _0803F302
-	cmp r6, 0x6
-	ble _0803F2E8
-	cmp r6, 0x7
-	beq _0803F2FC
-	b _0803F302
-_0803F2E8:
-	cmp r2, r4
-	bne _0803F2F4
-	adds r0, r3, 0
-	ands r0, r5
-	cmp r0, 0
-	bne _0803F31A
-_0803F2F4:
-	adds r0, r7, 0x1
-	lsls r0, 24
-	lsrs r7, r0, 24
-	b _0803F302
-_0803F2FC:
-	cmp r2, r4
-	bne _0803F302
-	b _0803F200
-_0803F302:
-	adds r0, r6, 0x1
-	lsls r0, 24
-	lsrs r6, r0, 24
-	lsrs r3, 1
-	cmp r2, r4
-	bne _0803F2CE
-	lsrs r5, 1
-	b _0803F2CE
-_0803F312:
-	adds r2, 0x1
-	cmp r2, 0x5
-	bgt _0803F31A
-	b _0803F21E
-_0803F31A:
-	adds r0, r7, 0
-_0803F31C:
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_803F1DC
-
-	thumb_func_start sub_803F324
-sub_803F324: @ 803F324
-	push {lr}
-	ldr r2, _0803F358
-	ldr r1, _0803F35C
-	ldrb r1, [r1]
-	strb r1, [r2]
-	ldr r3, _0803F360
-	ldr r2, _0803F364
-	ldr r1, _0803F368
-	adds r0, r1
-	ldrb r0, [r0]
-	lsls r0, 2
-	adds r0, r2
-	ldr r1, [r0]
-	adds r0, r3, 0
-	bl StringCopy
-	ldr r0, _0803F36C
-	ldr r1, _0803F370
-	bl StringCopy
-	ldr r0, _0803F374
-	bl get_battle_strings_
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0803F358: .4byte 0x02024c08
-_0803F35C: .4byte 0x02024e6c
-_0803F360: .4byte 0x030041c0
-_0803F364: .4byte gUnknown_08400F58
-_0803F368: .4byte gUnknown_082082F8
-_0803F36C: .4byte 0x03004290
-_0803F370: .4byte gUnknown_083FFDB3
-_0803F374: .4byte gUnknown_083FFDD3
-	thumb_func_end sub_803F324
-
-	thumb_func_start sub_803F378
-sub_803F378: @ 803F378
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, 0xAF
-	bne _0803F3C0
-	ldr r0, _0803F3A8
-	ldr r1, _0803F3AC
-	adds r0, r1
-	ldrb r1, [r0]
-	movs r0, 0x2
-	ands r0, r1
-	cmp r0, 0
-	beq _0803F3B8
-	ldr r2, _0803F3B0
-	ldrb r1, [r2]
-	lsls r0, r1, 3
-	subs r0, r1
-	lsls r0, 2
-	ldr r1, _0803F3B4
-	adds r7, r0, r1
-	b _0803F3CC
-	.align 2, 0
-_0803F3A8: .4byte 0x03001770
-_0803F3AC: .4byte 0x0000043d
-_0803F3B0: .4byte 0x02024e6c
-_0803F3B4: .4byte 0x02024df8
-_0803F3B8:
-	ldr r7, _0803F3BC
-	b _0803F3CA
-	.align 2, 0
-_0803F3BC: .4byte 0x02028daa
-_0803F3C0:
-	ldr r1, _0803F404
-	subs r0, 0xD
-	lsls r0, 2
-	adds r0, r1
-	ldr r7, [r0]
-_0803F3CA:
-	ldr r2, _0803F408
-_0803F3CC:
-	ldr r1, _0803F40C
-	ldrb r0, [r2]
-	strb r0, [r1]
-	movs r5, 0
-	ldr r0, _0803F410
-	mov r8, r0
-	movs r6, 0
-_0803F3DA:
-	adds r4, r7, r5
-	ldrb r1, [r4]
-	movs r0, 0xF
-	ands r0, r1
-	cmp r0, 0
-	beq _0803F3EC
-	adds r0, r6, 0
-	bl sub_803F324
-_0803F3EC:
-	ldrb r1, [r4]
-	movs r0, 0xF0
-	ands r0, r1
-	cmp r0, 0
-	beq _0803F422
-	cmp r5, 0
-	beq _0803F414
-	adds r0, r6, 0x1
-	bl sub_803F324
-	b _0803F422
-	.align 2, 0
-_0803F404: .4byte gItemEffectTable
-_0803F408: .4byte 0x02024e6c
-_0803F40C: .4byte 0x02024c0b
-_0803F410: .4byte 0x02024c07
-_0803F414:
-	ldr r0, _0803F450
-	ldrb r0, [r0]
-	mov r1, r8
-	strb r0, [r1]
-	ldr r0, _0803F454
-	bl get_battle_strings_
-_0803F422:
-	adds r6, 0x2
-	adds r5, 0x1
-	cmp r5, 0x2
-	ble _0803F3DA
-	ldrb r1, [r7, 0x3]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	beq _0803F442
-	ldr r1, _0803F458
-	ldr r0, _0803F450
-	ldrb r0, [r0]
-	strb r0, [r1]
-	ldr r0, _0803F45C
-	bl get_battle_strings_
-_0803F442:
-	ldr r0, _0803F460
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0803F450: .4byte 0x02024e6c
-_0803F454: .4byte gUnknown_083FEE92
-_0803F458: .4byte 0x02024c07
-_0803F45C: .4byte gUnknown_083FEE5D
-_0803F460: .4byte 0x020238cc
-	thumb_func_end sub_803F378
-
-	thumb_func_start GetNature
-GetNature: @ 803F464
-	push {lr}
-	movs r1, 0
-	movs r2, 0
-	bl PokemonGetField
-	movs r1, 0x19
-	bl __umodsi3
-	lsls r0, 24
-	lsrs r0, 24
-	pop {r1}
-	bx r1
-	thumb_func_end GetNature
-
-	thumb_func_start GetNatureFromPersonality
-GetNatureFromPersonality: @ 803F47C
-	push {lr}
-	movs r1, 0x19
-	bl __umodsi3
-	lsls r0, 24
-	lsrs r0, 24
-	pop {r1}
-	bx r1
-	thumb_func_end GetNatureFromPersonality
-
-	thumb_func_start GetEvolutionTargetSpecies
-GetEvolutionTargetSpecies: @ 803F48C
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x14
-	mov r8, r0
-	lsls r1, 24
-	lsrs r5, r1, 24
-	lsls r2, 16
-	lsrs r2, 16
-	mov r9, r2
-	movs r0, 0
-	mov r10, r0
-	mov r0, r8
-	movs r1, 0xB
-	movs r2, 0
-	bl PokemonGetField
-	lsls r0, 16
-	lsrs r7, r0, 16
-	mov r0, r8
-	movs r1, 0xC
-	movs r2, 0
-	bl PokemonGetField
-	mov r1, sp
-	strh r0, [r1]
-	mov r0, r8
-	movs r1, 0
-	movs r2, 0
-	bl PokemonGetField
-	adds r4, r0, 0
-	mov r0, r8
-	movs r1, 0x17
-	movs r2, 0
-	bl PokemonGetField
-	lsls r0, 24
-	lsrs r0, 24
-	str r0, [sp, 0xC]
-	lsrs r4, 16
-	str r4, [sp, 0x10]
-	mov r0, sp
-	ldrh r0, [r0]
-	cmp r0, 0xAF
-	bne _0803F500
-	ldr r0, _0803F4F8
-	ldr r1, _0803F4FC
-	adds r0, r1
-	ldrb r0, [r0]
-	b _0803F508
-	.align 2, 0
-_0803F4F8: .4byte 0x02025734
-_0803F4FC: .4byte 0x00003688
-_0803F500:
-	bl itemid_get_x12
-	lsls r0, 24
-	lsrs r0, 24
-_0803F508:
-	cmp r0, 0x26
-	bne _0803F514
-	cmp r5, 0x3
-	beq _0803F514
-	movs r0, 0
-	b _0803F7A4
-_0803F514:
-	cmp r5, 0x1
-	bne _0803F51A
-	b _0803F734
-_0803F51A:
-	cmp r5, 0x1
-	bgt _0803F524
-	cmp r5, 0
-	beq _0803F538
-	b _0803F7A2
-_0803F524:
-	cmp r5, 0x3
-	ble _0803F52A
-	b _0803F7A2
-_0803F52A:
-	movs r2, 0
-	str r2, [sp, 0x4]
-	ldr r3, _0803F534
-	lsls r6, r7, 2
-	b _0803F782
-	.align 2, 0
-_0803F534: .4byte gEvolutionTable
-_0803F538:
-	mov r0, r8
-	movs r1, 0x38
-	movs r2, 0
-	bl PokemonGetField
-	lsls r0, 24
-	lsrs r0, 24
-	mov r9, r0
-	mov r0, r8
-	movs r1, 0x20
-	movs r2, 0
-	bl PokemonGetField
-	lsls r0, 16
-	lsrs r0, 16
-	str r0, [sp, 0x8]
-	movs r0, 0
-	str r0, [sp, 0x4]
-	lsls r6, r7, 2
-_0803F55E:
-	ldr r1, _0803F584
-	ldr r0, [sp, 0x4]
-	lsls r2, r0, 3
-	adds r0, r6, r7
-	lsls r0, 3
-	adds r0, r2, r0
-	adds r0, r1
-	ldrh r0, [r0]
-	subs r0, 0x1
-	adds r3, r1, 0
-	adds r4, r2, 0
-	cmp r0, 0xE
-	bls _0803F57A
-	b _0803F726
-_0803F57A:
-	lsls r0, 2
-	ldr r1, _0803F588
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_0803F584: .4byte gEvolutionTable
-_0803F588: .4byte _0803F58C
-	.align 2, 0
-_0803F58C:
-	.4byte _0803F5C8
-	.4byte _0803F5DA
-	.4byte _0803F5FC
-	.4byte _0803F62C
-	.4byte _0803F726
-	.4byte _0803F726
-	.4byte _0803F726
-	.4byte _0803F63C
-	.4byte _0803F666
-	.4byte _0803F690
-	.4byte _0803F6BE
-	.4byte _0803F6DE
-	.4byte _0803F702
-	.4byte _0803F726
-	.4byte _0803F712
-_0803F5C8:
-	ldr r1, [sp, 0x8]
-	cmp r1, 0xDB
-	bhi _0803F5D0
-	b _0803F726
-_0803F5D0:
-	adds r0, r6, r7
-	lsls r0, 3
-	adds r0, r4, r0
-	adds r0, r3
-	b _0803F61C
-_0803F5DA:
-	bl RtcCalcLocalTime
-	ldr r0, _0803F5F8
-	ldrb r0, [r0, 0x2]
-	subs r0, 0xC
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0xB
-	bls _0803F5EE
-	b _0803F726
-_0803F5EE:
-	ldr r2, [sp, 0x8]
-	cmp r2, 0xDB
-	bhi _0803F5F6
-	b _0803F726
-_0803F5F6:
-	b _0803F612
-	.align 2, 0
-_0803F5F8: .4byte 0x03004038
-_0803F5FC:
-	bl RtcCalcLocalTime
-	ldr r0, _0803F624
-	ldrb r0, [r0, 0x2]
-	cmp r0, 0xB
-	bls _0803F60A
-	b _0803F726
-_0803F60A:
-	ldr r0, [sp, 0x8]
-	cmp r0, 0xDB
-	bhi _0803F612
-	b _0803F726
-_0803F612:
-	ldr r1, _0803F628
-	adds r0, r6, r7
-	lsls r0, 3
-	adds r0, r4, r0
-	adds r0, r1
-_0803F61C:
-	ldrh r0, [r0, 0x4]
-	mov r10, r0
-	b _0803F726
-	.align 2, 0
-_0803F624: .4byte 0x03004038
-_0803F628: .4byte gEvolutionTable
-_0803F62C:
-	adds r0, r6, r7
-	lsls r0, 3
-	adds r0, r4, r0
-	adds r1, r0, r3
-	ldrh r0, [r1, 0x2]
-	cmp r0, r9
-	bhi _0803F726
-	b _0803F722
-_0803F63C:
-	adds r0, r6, r7
-	lsls r0, 3
-	adds r0, r4, r0
-	adds r5, r0, r3
-	ldrh r0, [r5, 0x2]
-	cmp r0, r9
-	bhi _0803F726
-	mov r0, r8
-	movs r1, 0x3B
-	movs r2, 0
-	bl PokemonGetField
-	adds r4, r0, 0
-	mov r0, r8
-	movs r1, 0x3C
-	movs r2, 0
-	bl PokemonGetField
-	cmp r4, r0
-	bls _0803F726
-	b _0803F6B8
-_0803F666:
-	adds r0, r6, r7
-	lsls r0, 3
-	adds r0, r4, r0
-	adds r5, r0, r3
-	ldrh r0, [r5, 0x2]
-	cmp r0, r9
-	bhi _0803F726
-	mov r0, r8
-	movs r1, 0x3B
-	movs r2, 0
-	bl PokemonGetField
-	adds r4, r0, 0
-	mov r0, r8
-	movs r1, 0x3C
-	movs r2, 0
-	bl PokemonGetField
-	cmp r4, r0
-	bne _0803F726
-	b _0803F6B8
-_0803F690:
-	adds r0, r6, r7
-	lsls r0, 3
-	adds r0, r4, r0
-	adds r5, r0, r3
-	ldrh r0, [r5, 0x2]
-	cmp r0, r9
-	bhi _0803F726
-	mov r0, r8
-	movs r1, 0x3B
-	movs r2, 0
-	bl PokemonGetField
-	adds r4, r0, 0
-	mov r0, r8
-	movs r1, 0x3C
-	movs r2, 0
-	bl PokemonGetField
-	cmp r4, r0
-	bcs _0803F726
-_0803F6B8:
-	ldrh r5, [r5, 0x4]
-	mov r10, r5
-	b _0803F726
-_0803F6BE:
-	adds r0, r6, r7
-	lsls r0, 3
-	adds r0, r4, r0
-	adds r4, r0, r3
-	ldrh r0, [r4, 0x2]
-	cmp r0, r9
-	bhi _0803F726
-	ldr r0, [sp, 0x10]
-	movs r1, 0xA
-	bl __umodsi3
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, 0x4
-	bhi _0803F726
-	b _0803F6FC
-_0803F6DE:
-	adds r0, r6, r7
-	lsls r0, 3
-	adds r0, r4, r0
-	adds r4, r0, r3
-	ldrh r0, [r4, 0x2]
-	cmp r0, r9
-	bhi _0803F726
-	ldr r0, [sp, 0x10]
-	movs r1, 0xA
-	bl __umodsi3
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, 0x4
-	bls _0803F726
-_0803F6FC:
-	ldrh r4, [r4, 0x4]
-	mov r10, r4
-	b _0803F726
-_0803F702:
-	adds r0, r6, r7
-	lsls r0, 3
-	adds r0, r4, r0
-	adds r1, r0, r3
-	ldrh r0, [r1, 0x2]
-	cmp r0, r9
-	bhi _0803F726
-	b _0803F722
-_0803F712:
-	adds r0, r6, r7
-	lsls r0, 3
-	adds r0, r4, r0
-	adds r1, r0, r3
-	ldrh r0, [r1, 0x2]
-	ldr r2, [sp, 0xC]
-	cmp r0, r2
-	bhi _0803F726
-_0803F722:
-	ldrh r1, [r1, 0x4]
-	mov r10, r1
-_0803F726:
-	ldr r0, [sp, 0x4]
-	adds r0, 0x1
-	str r0, [sp, 0x4]
-	cmp r0, 0x4
-	bgt _0803F732
-	b _0803F55E
-_0803F732:
-	b _0803F7A2
-_0803F734:
-	lsls r6, r7, 2
-	ldr r1, _0803F778
-	adds r0, r6, r7
-	lsls r0, 3
-	adds r4, r0, r1
-	mov r5, sp
-	movs r1, 0x4
-	str r1, [sp, 0x4]
-_0803F744:
-	ldrh r0, [r4]
-	cmp r0, 0x5
-	beq _0803F764
-	cmp r0, 0x6
-	bne _0803F768
-	ldrh r0, [r4, 0x2]
-	ldrh r1, [r5]
-	cmp r0, r1
-	bne _0803F768
-	movs r0, 0
-	strh r0, [r5]
-	mov r0, r8
-	movs r1, 0xC
-	mov r2, sp
-	bl pokemon_setattr
-_0803F764:
-	ldrh r2, [r4, 0x4]
-	mov r10, r2
-_0803F768:
-	adds r4, 0x8
-	ldr r0, [sp, 0x4]
-	subs r0, 0x1
-	str r0, [sp, 0x4]
-	cmp r0, 0
-	bge _0803F744
-	b _0803F7A2
-	.align 2, 0
-_0803F778: .4byte gEvolutionTable
-_0803F77C:
-	ldrh r1, [r1, 0x4]
-	mov r10, r1
-	b _0803F7A2
-_0803F782:
-	adds r0, r6, r7
-	ldr r1, [sp, 0x4]
-	adds r0, r1
-	lsls r0, 3
-	adds r1, r0, r3
-	ldrh r0, [r1]
-	cmp r0, 0x7
-	bne _0803F798
-	ldrh r0, [r1, 0x2]
-	cmp r0, r9
-	beq _0803F77C
-_0803F798:
-	ldr r2, [sp, 0x4]
-	adds r2, 0x1
-	str r2, [sp, 0x4]
-	cmp r2, 0x4
-	ble _0803F782
-_0803F7A2:
-	mov r0, r10
-_0803F7A4:
-	add sp, 0x14
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end GetEvolutionTargetSpecies
-
-	thumb_func_start HoennPokedexNumToSpecies
-HoennPokedexNumToSpecies: @ 803F7B4
-	push {r4,lr}
-	lsls r0, 16
-	lsrs r2, r0, 16
-	cmp r2, 0
-	beq _0803F7F8
-	movs r1, 0
-	ldr r3, _0803F7F0
-	ldrh r0, [r3]
-	cmp r0, r2
-	beq _0803F7E0
-	movs r4, 0xCD
-	lsls r4, 1
-_0803F7CC:
-	adds r0, r1, 0x1
-	lsls r0, 16
-	lsrs r1, r0, 16
-	cmp r1, r4
-	bhi _0803F7E0
-	lsls r0, r1, 1
-	adds r0, r3
-	ldrh r0, [r0]
-	cmp r0, r2
-	bne _0803F7CC
-_0803F7E0:
-	ldr r0, _0803F7F4
-	cmp r1, r0
-	beq _0803F7F8
-	adds r0, r1, 0x1
-	lsls r0, 16
-	lsrs r0, 16
-	b _0803F7FA
-	.align 2, 0
-_0803F7F0: .4byte gSpeciesToHoennPokedexNum
-_0803F7F4: .4byte 0x0000019b
-_0803F7F8:
-	movs r0, 0
-_0803F7FA:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end HoennPokedexNumToSpecies
-
-	thumb_func_start NationalPokedexNumToSpecies
-NationalPokedexNumToSpecies: @ 803F800
-	push {r4,lr}
-	lsls r0, 16
-	lsrs r2, r0, 16
-	cmp r2, 0
-	beq _0803F844
-	movs r1, 0
-	ldr r3, _0803F83C
-	ldrh r0, [r3]
-	cmp r0, r2
-	beq _0803F82C
-	movs r4, 0xCD
-	lsls r4, 1
-_0803F818:
-	adds r0, r1, 0x1
-	lsls r0, 16
-	lsrs r1, r0, 16
-	cmp r1, r4
-	bhi _0803F82C
-	lsls r0, r1, 1
-	adds r0, r3
-	ldrh r0, [r0]
-	cmp r0, r2
-	bne _0803F818
-_0803F82C:
-	ldr r0, _0803F840
-	cmp r1, r0
-	beq _0803F844
-	adds r0, r1, 0x1
-	lsls r0, 16
-	lsrs r0, 16
-	b _0803F846
-	.align 2, 0
-_0803F83C: .4byte gSpeciesToNationalPokedexNum
-_0803F840: .4byte 0x0000019b
-_0803F844:
-	movs r0, 0
-_0803F846:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end NationalPokedexNumToSpecies
-
-	thumb_func_start NationalToHoennOrder
-NationalToHoennOrder: @ 803F84C
-	push {r4,lr}
-	lsls r0, 16
-	lsrs r2, r0, 16
-	cmp r2, 0
-	beq _0803F890
-	movs r1, 0
-	ldr r3, _0803F888
-	ldrh r0, [r3]
-	cmp r0, r2
-	beq _0803F878
-	movs r4, 0xCD
-	lsls r4, 1
-_0803F864:
-	adds r0, r1, 0x1
-	lsls r0, 16
-	lsrs r1, r0, 16
-	cmp r1, r4
-	bhi _0803F878
-	lsls r0, r1, 1
-	adds r0, r3
-	ldrh r0, [r0]
-	cmp r0, r2
-	bne _0803F864
-_0803F878:
-	ldr r0, _0803F88C
-	cmp r1, r0
-	beq _0803F890
-	adds r0, r1, 0x1
-	lsls r0, 16
-	lsrs r0, 16
-	b _0803F892
-	.align 2, 0
-_0803F888: .4byte gHoennToNationalOrder
-_0803F88C: .4byte 0x0000019b
-_0803F890:
-	movs r0, 0
-_0803F892:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end NationalToHoennOrder
-
-	thumb_func_start SpeciesToNationalPokedexNum
-SpeciesToNationalPokedexNum: @ 803F898
-	push {lr}
-	lsls r0, 16
-	lsrs r1, r0, 16
-	cmp r1, 0
-	beq _0803F8B4
-	ldr r0, _0803F8B0
-	subs r1, 0x1
-	lsls r1, 1
-	adds r1, r0
-	ldrh r0, [r1]
-	b _0803F8B6
-	.align 2, 0
-_0803F8B0: .4byte gSpeciesToNationalPokedexNum
-_0803F8B4:
-	movs r0, 0
-_0803F8B6:
-	pop {r1}
-	bx r1
-	thumb_func_end SpeciesToNationalPokedexNum
-
-	thumb_func_start SpeciesToHoennPokedexNum
-SpeciesToHoennPokedexNum: @ 803F8BC
-	push {lr}
-	lsls r0, 16
-	lsrs r1, r0, 16
-	cmp r1, 0
-	beq _0803F8D8
-	ldr r0, _0803F8D4
-	subs r1, 0x1
-	lsls r1, 1
-	adds r1, r0
-	ldrh r0, [r1]
-	b _0803F8DA
-	.align 2, 0
-_0803F8D4: .4byte gSpeciesToHoennPokedexNum
-_0803F8D8:
-	movs r0, 0
-_0803F8DA:
-	pop {r1}
-	bx r1
-	thumb_func_end SpeciesToHoennPokedexNum
-
-	thumb_func_start HoennToNationalOrder
-HoennToNationalOrder: @ 803F8E0
-	push {lr}
-	lsls r0, 16
-	lsrs r1, r0, 16
-	cmp r1, 0
-	beq _0803F8FC
-	ldr r0, _0803F8F8
-	subs r1, 0x1
-	lsls r1, 1
-	adds r1, r0
-	ldrh r0, [r1]
-	b _0803F8FE
-	.align 2, 0
-_0803F8F8: .4byte gHoennToNationalOrder
-_0803F8FC:
-	movs r0, 0
-_0803F8FE:
-	pop {r1}
-	bx r1
-	thumb_func_end HoennToNationalOrder
-
-	thumb_func_start speciesid_conv
-speciesid_conv: @ 803F904
-	push {lr}
-	lsls r0, 16
-	lsrs r0, 16
-	adds r1, r0, 0
-	cmp r0, 0xFA
-	bls _0803F932
-	ldr r0, _0803F924
-	cmp r1, r0
-	bls _0803F930
-	ldr r0, _0803F928
-	ldr r2, _0803F92C
-	adds r1, r2
-	lsls r1, 1
-	adds r1, r0
-	ldrh r0, [r1]
-	b _0803F932
-	.align 2, 0
-_0803F924: .4byte 0x00000113
-_0803F928: .4byte gSpeciesIdToCryId
-_0803F92C: .4byte 0xfffffeec
-_0803F930:
-	movs r0, 0xC8
-_0803F932:
-	pop {r1}
-	bx r1
-	thumb_func_end speciesid_conv
-
-	thumb_func_start unref_sub_803F938
-unref_sub_803F938: @ 803F938
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x8
-	adds r5, r1, 0
-	mov r10, r2
-	lsls r0, 16
-	movs r1, 0x9A
-	lsls r1, 17
-	cmp r0, r1
-	bne _0803FA42
-	ldr r1, _0803FA04
-	ldr r0, [r1]
-	cmp r10, r0
-	beq _0803FA42
-	ldr r0, [r1, 0x8]
-	cmp r10, r0
-	beq _0803FA42
-	movs r6, 0
-_0803F962:
-	lsls r3, r6, 3
-	adds r3, r6
-	lsls r3, 2
-	ldr r0, _0803FA08
-	adds r4, r3, r0
-	ldrb r1, [r4]
-	adds r1, 0xF8
-	movs r2, 0xF
-	adds r0, r5, 0
-	ands r0, r2
-	adds r1, r0
-	lsls r1, 24
-	lsrs r1, 24
-	mov r12, r1
-	ldrb r1, [r4, 0x1]
-	adds r1, 0xF8
-	movs r0, 0xF0
-	ands r0, r5
-	lsrs r0, 4
-	adds r1, r0
-	lsls r1, 24
-	lsrs r1, 24
-	movs r2, 0
-	lsrs r5, 8
-	str r5, [sp, 0x4]
-	adds r6, 0x1
-	str r6, [sp]
-	mov r9, r3
-_0803F99A:
-	lsls r0, r2, 1
-	add r0, r9
-	ldr r3, _0803FA0C
-	adds r0, r3
-	ldrh r3, [r0]
-	mov r4, r12
-	adds r0, r4, 0
-	adds r0, 0x10
-	adds r7, r1, 0x1
-	adds r2, 0x1
-	mov r8, r2
-	cmp r4, r0
-	bge _0803FA30
-	lsrs r0, r1, 3
-	lsls r6, r0, 8
-	movs r0, 0x7
-	ands r1, r0
-	lsls r5, r1, 2
-_0803F9BE:
-	adds r0, r4, 0
-	cmp r4, 0
-	bge _0803F9C6
-	adds r0, r4, 0x7
-_0803F9C6:
-	asrs r0, 3
-	lsls r2, r0, 5
-	add r2, r10
-	lsls r0, 3
-	subs r0, r4, r0
-	lsrs r1, r0, 31
-	adds r0, r1
-	asrs r0, 1
-	adds r2, r0
-	adds r2, r6
-	adds r2, r5
-	movs r1, 0x1
-	adds r0, r3, 0
-	ands r0, r1
-	cmp r0, 0
-	beq _0803FA24
-	adds r0, r4, 0
-	ands r0, r1
-	cmp r0, 0
-	beq _0803FA10
-	ldrb r1, [r2]
-	movs r0, 0xF0
-	ands r0, r1
-	subs r0, 0x10
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x20
-	bhi _0803FA24
-	adds r0, r1, 0
-	adds r0, 0x40
-	b _0803FA22
-	.align 2, 0
-_0803FA04: .4byte gUnknown_081FAF4C
-_0803FA08: .4byte gSpindaSpotGraphics
-_0803FA0C: .4byte gSpindaSpotGraphics + 0x2
-_0803FA10:
-	ldrb r1, [r2]
-	movs r0, 0xF
-	ands r0, r1
-	subs r0, 0x1
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x2
-	bhi _0803FA24
-	adds r0, r1, 0x4
-_0803FA22:
-	strb r0, [r2]
-_0803FA24:
-	asrs r3, 1
-	adds r4, 0x1
-	mov r0, r12
-	adds r0, 0x10
-	cmp r4, r0
-	blt _0803F9BE
-_0803FA30:
-	lsls r0, r7, 24
-	lsrs r1, r0, 24
-	mov r2, r8
-	cmp r2, 0xF
-	ble _0803F99A
-	ldr r5, [sp, 0x4]
-	ldr r6, [sp]
-	cmp r6, 0x3
-	ble _0803F962
-_0803FA42:
-	add sp, 0x8
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end unref_sub_803F938
-
-	thumb_func_start DrawSpindaSpots
-DrawSpindaSpots: @ 803FA54
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x8
-	adds r5, r1, 0
-	str r2, [sp]
-	lsls r0, 16
-	lsls r3, 24
-	lsrs r3, 24
-	movs r1, 0x9A
-	lsls r1, 17
-	cmp r0, r1
-	bne _0803FB56
-	cmp r3, 0
-	beq _0803FB56
-	movs r6, 0
-_0803FA78:
-	lsls r3, r6, 3
-	adds r3, r6
-	lsls r3, 2
-	ldr r0, _0803FB1C
-	adds r4, r3, r0
-	ldrb r1, [r4]
-	adds r1, 0xF8
-	movs r2, 0xF
-	adds r0, r5, 0
-	ands r0, r2
-	adds r1, r0
-	lsls r1, 24
-	lsrs r1, 24
-	mov r12, r1
-	ldrb r1, [r4, 0x1]
-	adds r1, 0xF8
-	movs r0, 0xF0
-	ands r0, r5
-	lsrs r0, 4
-	adds r1, r0
-	lsls r1, 24
-	lsrs r1, 24
-	movs r2, 0
-	lsrs r5, 8
-	str r5, [sp, 0x4]
-	adds r6, 0x1
-	mov r10, r6
-	mov r9, r3
-_0803FAB0:
-	lsls r0, r2, 1
-	add r0, r9
-	ldr r3, _0803FB20
-	adds r0, r3
-	ldrh r3, [r0]
-	mov r4, r12
-	adds r0, r4, 0
-	adds r0, 0x10
-	adds r7, r1, 0x1
-	adds r2, 0x1
-	mov r8, r2
-	cmp r4, r0
-	bge _0803FB44
-	lsrs r0, r1, 3
-	lsls r6, r0, 8
-	movs r0, 0x7
-	ands r1, r0
-	lsls r5, r1, 2
-_0803FAD4:
-	adds r0, r4, 0
-	cmp r4, 0
-	bge _0803FADC
-	adds r0, r4, 0x7
-_0803FADC:
-	asrs r0, 3
-	lsls r2, r0, 5
-	ldr r1, [sp]
-	adds r2, r1, r2
-	lsls r0, 3
-	subs r0, r4, r0
-	lsrs r1, r0, 31
-	adds r0, r1
-	asrs r0, 1
-	adds r2, r0
-	adds r2, r6
-	adds r2, r5
-	movs r1, 0x1
-	adds r0, r3, 0
-	ands r0, r1
-	cmp r0, 0
-	beq _0803FB38
-	adds r0, r4, 0
-	ands r0, r1
-	cmp r0, 0
-	beq _0803FB24
-	ldrb r1, [r2]
-	movs r0, 0xF0
-	ands r0, r1
-	subs r0, 0x10
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x20
-	bhi _0803FB38
-	adds r0, r1, 0
-	adds r0, 0x40
-	b _0803FB36
-	.align 2, 0
-_0803FB1C: .4byte gSpindaSpotGraphics
-_0803FB20: .4byte gSpindaSpotGraphics + 0x2
-_0803FB24:
-	ldrb r1, [r2]
-	movs r0, 0xF
-	ands r0, r1
-	subs r0, 0x1
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x2
-	bhi _0803FB38
-	adds r0, r1, 0x4
-_0803FB36:
-	strb r0, [r2]
-_0803FB38:
-	asrs r3, 1
-	adds r4, 0x1
-	mov r0, r12
-	adds r0, 0x10
-	cmp r4, r0
-	blt _0803FAD4
-_0803FB44:
-	lsls r0, r7, 24
-	lsrs r1, r0, 24
-	mov r2, r8
-	cmp r2, 0xF
-	ble _0803FAB0
-	ldr r5, [sp, 0x4]
-	mov r6, r10
-	cmp r6, 0x3
-	ble _0803FA78
-_0803FB56:
-	add sp, 0x8
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end DrawSpindaSpots
-
-	thumb_func_start sub_803FB68
-sub_803FB68: @ 803FB68
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	adds r7, r0, 0
-	adds r4, r1, 0
-	lsls r4, 16
-	lsrs r4, 16
-	lsls r2, 16
-	lsrs r2, 16
-	mov r8, r2
-	ldr r5, _0803FBB4
-	movs r1, 0x2
-	adds r2, r5, 0
-	bl PokemonGetField
-	movs r6, 0xB
-	adds r0, r4, 0
-	muls r0, r6
-	ldr r4, _0803FBB8
-	adds r0, r4
-	adds r1, r5, 0
-	bl StringCompareWithoutExtCtrlCodes
-	cmp r0, 0
-	bne _0803FBA8
-	mov r2, r8
-	muls r2, r6
-	adds r2, r4
-	adds r0, r7, 0
-	movs r1, 0x2
-	bl pokemon_setattr
-_0803FBA8:
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0803FBB4: .4byte 0x020231cc
-_0803FBB8: .4byte gSpeciesNames
-	thumb_func_end sub_803FB68
-
-	thumb_func_start sub_803FBBC
-sub_803FBBC: @ 803FBBC
-	push {r4,r5,lr}
-	movs r5, 0
-	ldr r4, _0803FBE4
-	bl GetMultiplayerId
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r1, r0, 3
-	subs r1, r0
-	lsls r1, 2
-	adds r1, r4
-	ldrh r0, [r1, 0x18]
-	cmp r0, 0x2
-	bgt _0803FBE8
-	cmp r0, 0x1
-	bge _0803FBF0
-	cmp r0, 0
-	beq _0803FBEC
-	b _0803FBF2
-	.align 2, 0
-_0803FBE4: .4byte 0x03002970
-_0803FBE8:
-	cmp r0, 0x3
-	bne _0803FBF2
-_0803FBEC:
-	movs r5, 0
-	b _0803FBF2
-_0803FBF0:
-	movs r5, 0x1
-_0803FBF2:
-	adds r0, r5, 0
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_803FBBC
-
-	thumb_func_start sub_803FBFC
-sub_803FBFC: @ 803FBFC
-	push {lr}
-	lsls r0, 24
-	lsrs r0, 24
-	movs r3, 0
-	ldr r2, _0803FC20
-	lsls r1, r0, 3
-	subs r1, r0
-	lsls r1, 2
-	adds r1, r2
-	ldrh r0, [r1, 0x18]
-	cmp r0, 0x2
-	bgt _0803FC24
-	cmp r0, 0x1
-	bge _0803FC2C
-	cmp r0, 0
-	beq _0803FC28
-	b _0803FC2E
-	.align 2, 0
-_0803FC20: .4byte 0x03002970
-_0803FC24:
-	cmp r0, 0x3
-	bne _0803FC2E
-_0803FC28:
-	movs r3, 0
-	b _0803FC2E
-_0803FC2C:
-	movs r3, 0x1
-_0803FC2E:
-	adds r0, r3, 0
-	pop {r1}
-	bx r1
-	thumb_func_end sub_803FBFC
-
-	thumb_func_start sub_803FC34
-sub_803FC34: @ 803FC34
-	push {lr}
-	lsls r0, 16
-	lsrs r3, r0, 16
-	movs r2, 0
-	ldr r1, _0803FC40
-	b _0803FC4C
-	.align 2, 0
-_0803FC40: .4byte 0x03002970
-_0803FC44:
-	adds r1, 0x1C
-	adds r2, 0x1
-	cmp r2, 0x3
-	bgt _0803FC52
-_0803FC4C:
-	ldrh r0, [r1, 0x18]
-	cmp r0, r3
-	bne _0803FC44
-_0803FC52:
-	adds r0, r2, 0
-	pop {r1}
-	bx r1
-	thumb_func_end sub_803FC34
-
-	thumb_func_start sub_803FC58
-sub_803FC58: @ 803FC58
-	lsls r0, 16
-	lsrs r0, 16
-	ldr r2, _0803FC70
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	adds r1, r2
-	ldrb r1, [r1, 0x2]
-	movs r0, 0x7F
-	ands r0, r1
-	bx lr
-	.align 2, 0
-_0803FC70: .4byte gTrainers
-	thumb_func_end sub_803FC58
-
-	thumb_func_start nature_stat_mod
-nature_stat_mod: @ 803FC74
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	lsls r1, 16
-	lsrs r3, r1, 16
-	lsls r2, 24
-	lsrs r5, r2, 24
-	movs r0, 0xFF
-	lsls r0, 24
-	adds r2, r0
-	lsrs r2, 24
-	cmp r2, 0x4
-	bls _0803FC92
-	adds r0, r3, 0
-	b _0803FCCE
-_0803FC92:
-	ldr r0, _0803FCB4
-	lsls r1, r4, 2
-	adds r1, r4
-	subs r1, 0x1
-	adds r1, r5, r1
-	adds r1, r0
-	ldrb r1, [r1]
-	lsls r1, 24
-	asrs r1, 24
-	movs r0, 0x1
-	negs r0, r0
-	cmp r1, r0
-	beq _0803FCB8
-	cmp r1, 0x1
-	bne _0803FCCC
-	movs r0, 0x6E
-	b _0803FCBA
-	.align 2, 0
-_0803FCB4: .4byte gNatureStatTable
-_0803FCB8:
-	movs r0, 0x5A
-_0803FCBA:
-	muls r0, r3
-	lsls r0, 16
-	lsrs r0, 16
-	movs r1, 0x64
-	bl __udivsi3
-	lsls r0, 16
-	lsrs r0, 16
-	b _0803FCCE
-_0803FCCC:
-	adds r0, r3, 0
-_0803FCCE:
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end nature_stat_mod
-
-	thumb_func_start sub_803FCD4
-sub_803FCD4: @ 803FCD4
-	push {r4-r7,lr}
-	sub sp, 0x4
-	adds r7, r0, 0
-	lsls r1, 24
-	lsrs r5, r1, 24
-	movs r1, 0x41
-	movs r2, 0
-	bl PokemonGetField
-	lsls r0, 16
-	lsrs r6, r0, 16
-	adds r0, r7, 0
-	movs r1, 0xC
-	movs r2, 0
-	bl PokemonGetField
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, 0xAF
-	bne _0803FD34
-	ldr r0, _0803FD14
-	ldr r1, _0803FD18
-	adds r0, r1
-	ldrb r1, [r0]
-	movs r0, 0x2
-	ands r0, r1
-	cmp r0, 0
-	beq _0803FD20
-	ldr r0, _0803FD1C
-	ldrb r4, [r0, 0x7]
-	b _0803FD3C
-	.align 2, 0
-_0803FD14: .4byte 0x03001770
-_0803FD18: .4byte 0x0000043d
-_0803FD1C: .4byte 0x02024df0
-_0803FD20:
-	ldr r0, _0803FD2C
-	ldr r1, _0803FD30
-	adds r0, r1
-	ldrb r4, [r0]
-	b _0803FD3C
-	.align 2, 0
-_0803FD2C: .4byte 0x02025734
-_0803FD30: .4byte 0x00003688
-_0803FD34:
-	bl itemid_get_x12
-	lsls r0, 24
-	lsrs r4, r0, 24
-_0803FD3C:
-	cmp r6, 0
-	bne _0803FD42
-	b _0803FE56
-_0803FD42:
-	movs r0, 0xCE
-	lsls r0, 1
-	cmp r6, r0
-	bne _0803FD4C
-	b _0803FE56
-_0803FD4C:
-	movs r6, 0
-	adds r0, r7, 0
-	movs r1, 0x20
-	movs r2, 0
-	bl PokemonGetField
-	lsls r0, 16
-	lsrs r0, 16
-	mov r1, sp
-	strh r0, [r1]
-	lsls r0, 16
-	asrs r0, 16
-	cmp r0, 0x63
-	ble _0803FD6A
-	movs r6, 0x1
-_0803FD6A:
-	cmp r0, 0xC7
-	ble _0803FD74
-	adds r0, r6, 0x1
-	lsls r0, 24
-	lsrs r6, r0, 24
-_0803FD74:
-	cmp r5, 0x5
-	bne _0803FD84
-	bl Random
-	movs r1, 0x1
-	ands r1, r0
-	cmp r1, 0
-	bne _0803FE56
-_0803FD84:
-	cmp r5, 0x3
-	bne _0803FDB4
-	ldr r0, _0803FE60
-	ldrh r1, [r0]
-	movs r0, 0x8
-	ands r0, r1
-	cmp r0, 0
-	beq _0803FE56
-	ldr r2, _0803FE64
-	ldr r0, _0803FE68
-	ldrh r1, [r0]
-	lsls r0, r1, 2
-	adds r0, r1
-	lsls r0, 3
-	adds r0, r2
-	ldrb r1, [r0, 0x1]
-	adds r0, r1, 0
-	subs r0, 0x18
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bls _0803FDB4
-	cmp r1, 0x20
-	bne _0803FE56
-_0803FDB4:
-	ldr r1, _0803FE6C
-	lsls r0, r5, 1
-	adds r0, r5
-	adds r0, r6, r0
-	adds r0, r1
-	ldrb r2, [r0]
-	movs r1, 0
-	ldrsb r1, [r0, r1]
-	cmp r1, 0
-	ble _0803FDDA
-	cmp r4, 0x1B
-	bne _0803FDDA
-	movs r0, 0x96
-	muls r0, r1
-	movs r1, 0x64
-	bl __divsi3
-	lsls r0, 24
-	lsrs r2, r0, 24
-_0803FDDA:
-	lsls r2, 24
-	asrs r2, 24
-	mov r0, sp
-	movs r1, 0
-	ldrsh r0, [r0, r1]
-	adds r0, r2
-	mov r1, sp
-	strh r0, [r1]
-	cmp r2, 0
-	ble _0803FE2C
-	adds r0, r7, 0
-	movs r1, 0x26
-	movs r2, 0
-	bl PokemonGetField
-	cmp r0, 0xB
-	bne _0803FE08
-	mov r0, sp
-	movs r1, 0
-	ldrsh r0, [r0, r1]
-	adds r0, 0x1
-	mov r1, sp
-	strh r0, [r1]
-_0803FE08:
-	adds r0, r7, 0
-	movs r1, 0x23
-	movs r2, 0
-	bl PokemonGetField
-	adds r4, r0, 0
-	bl sav1_map_get_name
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r4, r0
-	bne _0803FE2C
-	mov r0, sp
-	movs r1, 0
-	ldrsh r0, [r0, r1]
-	adds r0, 0x1
-	mov r1, sp
-	strh r0, [r1]
-_0803FE2C:
-	mov r0, sp
-	movs r1, 0
-	ldrsh r0, [r0, r1]
-	cmp r0, 0
-	bge _0803FE3C
-	movs r1, 0
-	mov r0, sp
-	strh r1, [r0]
-_0803FE3C:
-	mov r0, sp
-	movs r1, 0
-	ldrsh r0, [r0, r1]
-	cmp r0, 0xFF
-	ble _0803FE4C
-	movs r1, 0xFF
-	mov r0, sp
-	strh r1, [r0]
-_0803FE4C:
-	adds r0, r7, 0
-	movs r1, 0x20
-	mov r2, sp
-	bl pokemon_setattr
-_0803FE56:
-	add sp, 0x4
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0803FE60: .4byte 0x020239f8
-_0803FE64: .4byte gTrainers
-_0803FE68: .4byte 0x0202ff5e
-_0803FE6C: .4byte gUnknown_082082FE
-	thumb_func_end sub_803FCD4
-
-	thumb_func_start sub_803FE70
-sub_803FE70: @ 803FE70
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	sub sp, 0x8
-	mov r8, r0
-	lsls r1, 16
-	lsrs r5, r1, 16
-	movs r4, 0
-	movs r7, 0
-	movs r6, 0
-_0803FE84:
-	adds r1, r6, 0
-	adds r1, 0x1A
-	mov r0, r8
-	movs r2, 0
-	bl PokemonGetField
-	mov r2, sp
-	adds r1, r2, r6
-	strb r0, [r1]
-	ldrb r0, [r1]
-	adds r0, r7, r0
-	lsls r0, 16
-	lsrs r7, r0, 16
-	adds r6, 0x1
-	cmp r6, 0x5
-	ble _0803FE84
-	movs r6, 0
-	b _08040006
-_0803FEA8:
-	mov r0, r8
-	movs r1, 0
-	bl sub_8040178
-	lsls r0, 24
-	movs r2, 0x1
-	cmp r0, 0
-	beq _0803FEBA
-	movs r2, 0x2
-_0803FEBA:
-	cmp r6, 0x5
-	bhi _0803FF5C
-	lsls r0, r6, 2
-	ldr r1, _0803FEC8
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_0803FEC8: .4byte _0803FECC
-	.align 2, 0
-_0803FECC:
-	.4byte _0803FEE4
-	.4byte _0803FEF8
-	.4byte _0803FF0C
-	.4byte _0803FF20
-	.4byte _0803FF34
-	.4byte _0803FF48
-_0803FEE4:
-	ldr r0, _0803FEF4
-	lsls r1, r5, 3
-	subs r1, r5
-	lsls r1, 2
-	adds r1, r0
-	ldrb r0, [r1, 0xA]
-	lsls r0, 30
-	b _0803FF56
-	.align 2, 0
-_0803FEF4: .4byte gBaseStats
-_0803FEF8:
-	ldr r0, _0803FF08
-	lsls r1, r5, 3
-	subs r1, r5
-	lsls r1, 2
-	adds r1, r0
-	ldrb r0, [r1, 0xA]
-	b _0803FF54
-	.align 2, 0
-_0803FF08: .4byte gBaseStats
-_0803FF0C:
-	ldr r0, _0803FF1C
-	lsls r1, r5, 3
-	subs r1, r5
-	lsls r1, 2
-	adds r1, r0
-	ldrb r0, [r1, 0xA]
-	lsls r0, 26
-	b _0803FF56
-	.align 2, 0
-_0803FF1C: .4byte gBaseStats
-_0803FF20:
-	ldr r0, _0803FF30
-	lsls r1, r5, 3
-	subs r1, r5
-	lsls r1, 2
-	adds r1, r0
-	ldrb r0, [r1, 0xA]
-	lsrs r0, 6
-	b _0803FF58
-	.align 2, 0
-_0803FF30: .4byte gBaseStats
-_0803FF34:
-	ldr r0, _0803FF44
-	lsls r1, r5, 3
-	subs r1, r5
-	lsls r1, 2
-	adds r1, r0
-	ldrb r0, [r1, 0xB]
-	lsls r0, 30
-	b _0803FF56
-	.align 2, 0
-_0803FF44: .4byte gBaseStats
-_0803FF48:
-	ldr r0, _0803FF84
-	lsls r1, r5, 3
-	subs r1, r5
-	lsls r1, 2
-	adds r1, r0
-	ldrb r0, [r1, 0xB]
-_0803FF54:
-	lsls r0, 28
-_0803FF56:
-	lsrs r0, 30
-_0803FF58:
-	adds r4, r0, 0
-	muls r4, r2
-_0803FF5C:
-	mov r0, r8
-	movs r1, 0xC
-	movs r2, 0
-	bl PokemonGetField
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, 0xAF
-	bne _0803FFA8
-	ldr r0, _0803FF88
-	ldr r1, _0803FF8C
-	adds r0, r1
-	ldrb r1, [r0]
-	movs r0, 0x2
-	ands r0, r1
-	cmp r0, 0
-	beq _0803FF94
-	ldr r0, _0803FF90
-	ldrb r0, [r0, 0x7]
-	b _0803FFB0
-	.align 2, 0
-_0803FF84: .4byte gBaseStats
-_0803FF88: .4byte 0x03001770
-_0803FF8C: .4byte 0x0000043d
-_0803FF90: .4byte 0x02024df0
-_0803FF94:
-	ldr r0, _0803FFA0
-	ldr r2, _0803FFA4
-	adds r0, r2
-	ldrb r0, [r0]
-	b _0803FFB0
-	.align 2, 0
-_0803FFA0: .4byte 0x02025734
-_0803FFA4: .4byte 0x00003688
-_0803FFA8:
-	bl itemid_get_x12
-	lsls r0, 24
-	lsrs r0, 24
-_0803FFB0:
-	cmp r0, 0x18
-	bne _0803FFB8
-	lsls r0, r4, 17
-	lsrs r4, r0, 16
-_0803FFB8:
-	lsls r0, r4, 16
-	asrs r2, r0, 16
-	adds r1, r7, r2
-	movs r0, 0xFF
-	lsls r0, 1
-	cmp r1, r0
-	ble _0803FFD0
-	adds r0, r2, r0
-	adds r1, r7, r4
-	subs r0, r1
-	lsls r0, 16
-	lsrs r4, r0, 16
-_0803FFD0:
-	mov r0, sp
-	adds r2, r0, r6
-	ldrb r3, [r2]
-	lsls r0, r4, 16
-	asrs r1, r0, 16
-	adds r0, r3, r1
-	cmp r0, 0xFF
-	ble _0803FFEC
-	adds r0, r1, 0
-	adds r0, 0xFF
-	adds r1, r3, r4
-	subs r0, r1
-	lsls r0, 16
-	lsrs r4, r0, 16
-_0803FFEC:
-	adds r0, r3, r4
-	strb r0, [r2]
-	adds r0, r7, r4
-	lsls r0, 16
-	lsrs r7, r0, 16
-	adds r1, r6, 0
-	adds r1, 0x1A
-	mov r0, r8
-	bl pokemon_setattr
-	adds r6, 0x1
-	cmp r6, 0x5
-	bgt _0804000E
-_08040006:
-	ldr r0, _0804001C
-	cmp r7, r0
-	bhi _0804000E
-	b _0803FEA8
-_0804000E:
-	add sp, 0x8
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0804001C: .4byte 0x000001fd
-	thumb_func_end sub_803FE70
-
-	thumb_func_start sub_8040020
-sub_8040020: @ 8040020
-	push {r4-r6,lr}
-	adds r6, r0, 0
-	movs r5, 0
-	movs r4, 0
-_08040028:
-	adds r1, r4, 0
-	adds r1, 0x1A
-	adds r0, r6, 0
-	movs r2, 0
-	bl PokemonGetField
-	adds r0, r5, r0
-	lsls r0, 16
-	lsrs r5, r0, 16
-	adds r4, 0x1
-	cmp r4, 0x5
-	ble _08040028
-	adds r0, r5, 0
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8040020
-
-	thumb_func_start sub_8040048
-sub_8040048: @ 8040048
-	push {r4-r6,lr}
-	sub sp, 0x4
-	adds r6, r0, 0
-	bl Random
-	lsls r0, 16
-	lsrs r5, r0, 16
-	movs r0, 0x80
-	lsls r0, 7
-	cmp r5, r0
-	beq _0804006E
-	movs r0, 0x80
-	lsls r0, 8
-	cmp r5, r0
-	beq _0804006E
-	movs r0, 0xC0
-	lsls r0, 8
-	cmp r5, r0
-	bne _08040104
-_0804006E:
-	bl Random
-	lsls r0, 16
-	lsrs r0, 16
-	movs r1, 0x6
-	bl __umodsi3
-	lsls r0, 16
-	lsrs r5, r0, 16
-	movs r0, 0x64
-	muls r0, r5
-	adds r4, r6, r0
-	adds r0, r4, 0
-	movs r1, 0xB
-	movs r2, 0
-	bl PokemonGetField
-	cmp r0, 0
-	beq _0804006E
-	adds r0, r4, 0
-	movs r1, 0x2D
-	movs r2, 0
-	bl PokemonGetField
-	cmp r0, 0
-	bne _0804006E
-	ldr r1, _0804010C
-	lsls r0, r5, 2
-	adds r0, r1
-	ldrb r1, [r0]
-	adds r0, r6, 0
-	bl sub_8040178
-	lsls r0, 24
-	cmp r0, 0
-	bne _08040104
-	mov r4, sp
-_080400B8:
-	bl Random
-	lsls r0, 24
-	lsrs r0, 24
-	strb r0, [r4]
-	cmp r0, 0
-	beq _080400B8
-	movs r0, 0xF0
-	mov r1, sp
-	ldrb r1, [r1]
-	ands r0, r1
-	cmp r0, 0
-	beq _080400DA
-	movs r0, 0x7
-	ands r1, r0
-	mov r0, sp
-	strb r1, [r0]
-_080400DA:
-	mov r0, sp
-	ldrb r0, [r0]
-	lsls r1, r0, 4
-	orrs r0, r1
-	lsls r0, 24
-	lsrs r0, 24
-	mov r1, sp
-	strb r0, [r1]
-	movs r1, 0xF3
-	ands r1, r0
-	mov r0, sp
-	strb r1, [r0]
-	adds r1, 0x1
-	strb r1, [r0]
-	movs r0, 0x64
-	muls r0, r5
-	adds r0, r6, r0
-	movs r1, 0x22
-	mov r2, sp
-	bl pokemon_setattr
-_08040104:
-	add sp, 0x4
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0804010C: .4byte gBitTable
-	thumb_func_end sub_8040048
-
-	thumb_func_start sub_8040110
-sub_8040110: @ 8040110
-	push {r4-r7,lr}
-	sub sp, 0x4
-	adds r7, r0, 0
-	lsls r1, 24
-	lsrs r4, r1, 24
-	movs r3, 0
-	movs r6, 0x1
-	movs r5, 0
-	cmp r4, 0
-	beq _08040158
-_08040124:
-	movs r0, 0x1
-	ands r0, r4
-	cmp r0, 0
-	beq _0804014C
-	movs r0, 0x64
-	muls r0, r3
-	adds r0, r7, r0
-	movs r1, 0x22
-	movs r2, 0
-	str r3, [sp]
-	bl PokemonGetField
-	movs r1, 0xF
-	ands r1, r0
-	ldr r3, [sp]
-	cmp r1, 0
-	beq _0804014C
-	orrs r5, r6
-	lsls r0, r5, 24
-	lsrs r5, r0, 24
-_0804014C:
-	adds r3, 0x1
-	lsls r6, 1
-	lsrs r4, 1
-	cmp r4, 0
-	bne _08040124
-	b _0804016C
-_08040158:
-	adds r0, r7, 0
-	movs r1, 0x22
-	movs r2, 0
-	bl PokemonGetField
-	movs r1, 0xF
-	ands r1, r0
-	cmp r1, 0
-	beq _0804016C
-	movs r5, 0x1
-_0804016C:
-	adds r0, r5, 0
-	add sp, 0x4
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8040110
-
-	thumb_func_start sub_8040178
-sub_8040178: @ 8040178
-	push {r4-r7,lr}
-	sub sp, 0x4
-	adds r7, r0, 0
-	lsls r1, 24
-	lsrs r4, r1, 24
-	movs r3, 0
-	movs r6, 0x1
-	movs r5, 0
-	cmp r4, 0
-	beq _080401BC
-_0804018C:
-	movs r0, 0x1
-	ands r0, r4
-	cmp r0, 0
-	beq _080401B0
-	movs r0, 0x64
-	muls r0, r3
-	adds r0, r7, r0
-	movs r1, 0x22
-	movs r2, 0
-	str r3, [sp]
-	bl PokemonGetField
-	ldr r3, [sp]
-	cmp r0, 0
-	beq _080401B0
-	orrs r5, r6
-	lsls r0, r5, 24
-	lsrs r5, r0, 24
-_080401B0:
-	adds r3, 0x1
-	lsls r6, 1
-	lsrs r4, 1
-	cmp r4, 0
-	bne _0804018C
-	b _080401CC
-_080401BC:
-	adds r0, r7, 0
-	movs r1, 0x22
-	movs r2, 0
-	bl PokemonGetField
-	cmp r0, 0
-	beq _080401CC
-	movs r5, 0x1
-_080401CC:
-	adds r0, r5, 0
-	add sp, 0x4
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8040178
-
-	thumb_func_start sub_80401D8
-sub_80401D8: @ 80401D8
-	push {r4-r7,lr}
-	sub sp, 0x4
-	lsls r0, 16
-	lsrs r7, r0, 16
-	movs r5, 0
-	mov r6, sp
-_080401E4:
-	movs r0, 0x64
-	adds r1, r5, 0
-	muls r1, r0
-	ldr r0, _08040224
-	adds r4, r1, r0
-	adds r0, r4, 0
-	movs r1, 0xB
-	movs r2, 0
-	bl PokemonGetField
-	cmp r0, 0
-	beq _0804023C
-	adds r0, r4, 0
-	movs r1, 0x22
-	movs r2, 0
-	bl PokemonGetField
-	lsls r0, 24
-	lsrs r0, 24
-	strb r0, [r6]
-	movs r1, 0xF
-	adds r2, r0, 0
-	ands r1, r2
-	cmp r1, 0
-	beq _0804023C
-	cmp r1, r7
-	bcc _0804021E
-	cmp r7, 0x4
-	bls _08040228
-_0804021E:
-	movs r0, 0xF0
-	ands r0, r2
-	b _0804022A
-	.align 2, 0
-_08040224: .4byte 0x03004360
-_08040228:
-	subs r0, r2, r7
-_0804022A:
-	strb r0, [r6]
-	movs r0, 0x64
-	muls r0, r5
-	ldr r1, _0804024C
-	adds r0, r1
-	movs r1, 0x22
-	mov r2, sp
-	bl pokemon_setattr
-_0804023C:
-	adds r5, 0x1
-	cmp r5, 0x5
-	ble _080401E4
-	add sp, 0x4
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0804024C: .4byte 0x03004360
-	thumb_func_end sub_80401D8
-
-	thumb_func_start atkE5_pickupitemcalculation
-atkE5_pickupitemcalculation: @ 8040250
-	push {r4-r7,lr}
-	sub sp, 0x4
-	adds r7, r0, 0
-	bl Random
-	lsls r0, 16
-	lsrs r0, 16
-	movs r1, 0x3
-	bl __umodsi3
-	lsls r0, 16
-	cmp r0, 0
-	bne _080402F6
-	movs r5, 0
-_0804026C:
-	movs r0, 0x64
-	adds r6, r5, 0
-	muls r6, r0
-	adds r4, r7, r6
-	adds r0, r4, 0
-	movs r1, 0xB
-	movs r2, 0
-	bl PokemonGetField
-	cmp r0, 0
-	beq _080402F0
-	adds r0, r4, 0
-	movs r1, 0x22
-	movs r2, 0
-	bl PokemonGetField
-	lsls r0, 24
-	lsrs r1, r0, 24
-	mov r0, sp
-	strb r1, [r0]
-	cmp r1, 0
-	beq _080402F0
-	movs r0, 0xF
-	ands r0, r1
-	cmp r0, 0
-	beq _080402F0
-	cmp r5, 0
-	beq _080402C6
-	adds r0, r6, 0
-	subs r0, 0x64
-	adds r4, r7, r0
-	adds r0, r4, 0
-	movs r1, 0x22
-	movs r2, 0
-	bl PokemonGetField
-	movs r1, 0xF0
-	ands r1, r0
-	cmp r1, 0
-	bne _080402C6
-	adds r0, r4, 0
-	movs r1, 0x22
-	mov r2, sp
-	bl pokemon_setattr
-_080402C6:
-	cmp r5, 0x5
-	beq _080402F0
-	movs r0, 0x64
-	muls r0, r5
-	adds r0, 0x64
-	adds r4, r7, r0
-	adds r0, r4, 0
-	movs r1, 0x22
-	movs r2, 0
-	bl PokemonGetField
-	movs r1, 0xF0
-	ands r1, r0
-	cmp r1, 0
-	bne _080402F0
-	adds r0, r4, 0
-	movs r1, 0x22
-	mov r2, sp
-	bl pokemon_setattr
-	adds r5, 0x1
-_080402F0:
-	adds r5, 0x1
-	cmp r5, 0x5
-	ble _0804026C
-_080402F6:
-	add sp, 0x4
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end atkE5_pickupitemcalculation
-
-	thumb_func_start sub_8040300
-sub_8040300: @ 8040300
-	push {r4-r6,lr}
-	sub sp, 0x4
-	adds r6, r0, 0
-	movs r1, 0xB
-	movs r2, 0
-	bl PokemonGetField
-	adds r4, r0, 0
-	lsls r4, 16
-	lsrs r4, 16
-	adds r0, r6, 0
-	movs r1, 0x38
-	movs r2, 0
-	bl PokemonGetField
-	adds r0, 0x1
-	mov r1, sp
-	strb r0, [r1]
-	adds r0, r6, 0
-	movs r1, 0x19
-	movs r2, 0
-	bl PokemonGetField
-	ldr r5, _08040358
-	mov r1, sp
-	ldrb r2, [r1]
-	lsls r2, 2
-	ldr r3, _0804035C
-	lsls r1, r4, 3
-	subs r1, r4
-	lsls r1, 2
-	adds r1, r3
-	ldrb r3, [r1, 0x13]
-	movs r1, 0xCA
-	lsls r1, 1
-	muls r1, r3
-	adds r2, r1
-	adds r2, r5
-	ldr r1, [r2]
-	cmp r0, r1
-	bhi _08040360
-	movs r0, 0
-	b _0804036C
-	.align 2, 0
-_08040358: .4byte gExperienceTables
-_0804035C: .4byte gBaseStats
-_08040360:
-	adds r0, r6, 0
-	movs r1, 0x38
-	mov r2, sp
-	bl pokemon_setattr
-	movs r0, 0x1
-_0804036C:
-	add sp, 0x4
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8040300
-
-	thumb_func_start sub_8040374
-sub_8040374: @ 8040374
-	push {r4,r5,lr}
-	lsls r1, 24
-	lsrs r4, r1, 24
-	adds r5, r4, 0
-	movs r1, 0x41
-	movs r2, 0
-	bl PokemonGetField
-	lsls r0, 16
-	lsrs r1, r0, 16
-	adds r3, r1, 0
-	movs r0, 0xCE
-	lsls r0, 1
-	cmp r1, r0
-	bne _08040396
-	movs r0, 0
-	b _080403C2
-_08040396:
-	cmp r4, 0x1F
-	bls _080403B4
-	adds r0, r4, 0
-	subs r0, 0x20
-	movs r2, 0x1
-	lsls r2, r0
-	ldr r0, _080403B0
-	lsls r1, 3
-	adds r0, 0x4
-	adds r1, r0
-	ldr r0, [r1]
-	ands r0, r2
-	b _080403C2
-	.align 2, 0
-_080403B0: .4byte gTMHMLearnsets
-_080403B4:
-	movs r1, 0x1
-	lsls r1, r5
-	ldr r2, _080403C8
-	lsls r0, r3, 3
-	adds r0, r2
-	ldr r0, [r0]
-	ands r0, r1
-_080403C2:
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_080403C8: .4byte gTMHMLearnsets
-	thumb_func_end sub_8040374
-
-	thumb_func_start sub_80403CC
-sub_80403CC: @ 80403CC
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x18
-	adds r6, r0, 0
-	str r1, [sp, 0x8]
-	movs r0, 0
-	mov r10, r0
-	adds r0, r6, 0
-	movs r1, 0xB
-	movs r2, 0
-	bl PokemonGetField
-	lsls r0, 16
-	lsrs r7, r0, 16
-	adds r0, r6, 0
-	movs r1, 0x38
-	movs r2, 0
-	bl PokemonGetField
-	lsls r0, 24
-	lsrs r0, 24
-	str r0, [sp, 0xC]
-	movs r5, 0
-	mov r4, sp
-_08040402:
-	adds r1, r5, 0
-	adds r1, 0xD
-	adds r0, r6, 0
-	movs r2, 0
-	bl PokemonGetField
-	strh r0, [r4]
-	adds r4, 0x2
-	adds r5, 0x1
-	cmp r5, 0x3
-	ble _08040402
-	movs r5, 0
-	ldr r6, _08040510
-	lsls r1, r7, 2
-	adds r2, r1, r6
-	ldr r3, [r2]
-	ldrh r0, [r3]
-	ldr r4, _08040514
-	str r1, [sp, 0x14]
-	cmp r0, r4
-	beq _080404FC
-	mov r9, r2
-	str r3, [sp, 0x10]
-_08040430:
-	lsls r2, r5, 1
-	ldr r1, [sp, 0x10]
-	adds r0, r2, r1
-	ldrh r3, [r0]
-	movs r0, 0xFE
-	lsls r0, 8
-	ands r0, r3
-	ldr r4, [sp, 0xC]
-	lsls r1, r4, 9
-	adds r7, r2, 0
-	adds r5, 0x1
-	mov r12, r5
-	cmp r0, r1
-	bgt _080404E6
-	movs r4, 0
-	mov r0, sp
-	ldrh r1, [r0]
-	ldr r0, _08040518
-	ands r0, r3
-	cmp r1, r0
-	beq _08040480
-	ldr r0, [sp, 0x14]
-	ldr r1, _08040510
-	adds r6, r0, r1
-	ldr r2, _08040518
-	mov r8, r2
-	mov r3, sp
-	adds r5, r7, 0
-_08040468:
-	adds r3, 0x2
-	adds r4, 0x1
-	cmp r4, 0x3
-	bgt _08040480
-	ldr r0, [r6]
-	adds r0, r5, r0
-	ldrh r1, [r0]
-	ldrh r2, [r3]
-	mov r0, r8
-	ands r0, r1
-	cmp r2, r0
-	bne _08040468
-_08040480:
-	cmp r4, 0x4
-	bne _080404E6
-	movs r4, 0
-	cmp r4, r10
-	bge _080404C4
-	mov r1, r9
-	ldr r0, [r1]
-	adds r0, r7, r0
-	ldrh r1, [r0]
-	ldr r0, [sp, 0x8]
-	ldrh r2, [r0]
-	ldr r0, _08040518
-	ands r0, r1
-	cmp r2, r0
-	beq _080404C4
-	ldr r1, [sp, 0x14]
-	ldr r2, _08040510
-	adds r6, r1, r2
-	ldr r0, _08040518
-	mov r8, r0
-	ldr r3, [sp, 0x8]
-	adds r5, r7, 0
-_080404AC:
-	adds r3, 0x2
-	adds r4, 0x1
-	cmp r4, r10
-	bge _080404C4
-	ldr r0, [r6]
-	adds r0, r5, r0
-	ldrh r1, [r0]
-	ldrh r2, [r3]
-	mov r0, r8
-	ands r0, r1
-	cmp r2, r0
-	bne _080404AC
-_080404C4:
-	cmp r4, r10
-	bne _080404E6
-	mov r0, r10
-	adds r0, 0x1
-	lsls r0, 24
-	lsrs r0, 24
-	mov r10, r0
-	lsls r2, r4, 1
-	ldr r1, [sp, 0x8]
-	adds r2, r1
-	mov r4, r9
-	ldr r0, [r4]
-	adds r0, r7, r0
-	ldrh r1, [r0]
-	ldr r0, _08040518
-	ands r0, r1
-	strh r0, [r2]
-_080404E6:
-	mov r5, r12
-	cmp r5, 0x13
-	bgt _080404FC
-	mov r1, r9
-	ldr r0, [r1]
-	lsls r1, r5, 1
-	adds r1, r0
-	ldrh r0, [r1]
-	ldr r2, _08040514
-	cmp r0, r2
-	bne _08040430
-_080404FC:
-	mov r0, r10
-	add sp, 0x18
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08040510: .4byte gLevelUpLearnsetPointers
-_08040514: .4byte 0x0000ffff
-_08040518: .4byte 0x000001ff
-	thumb_func_end sub_80403CC
-
-	thumb_func_start sub_804051C
-sub_804051C: @ 804051C
-	push {r4-r7,lr}
-	adds r6, r1, 0
-	lsls r0, 16
-	movs r5, 0
-	movs r4, 0
-	ldr r1, _08040568
-	lsrs r0, 14
-	adds r0, r1
-	ldr r2, [r0]
-	ldrh r0, [r2]
-	ldr r1, _0804056C
-	cmp r0, r1
-	beq _08040560
-	ldr r0, _08040570
-	mov r12, r0
-	adds r7, r1, 0
-	adds r3, r2, 0
-_0804053E:
-	adds r1, r5, 0
-	adds r0, r1, 0x1
-	lsls r0, 24
-	lsrs r5, r0, 24
-	lsls r1, 1
-	adds r1, r6
-	ldrh r2, [r3]
-	mov r0, r12
-	ands r0, r2
-	strh r0, [r1]
-	adds r3, 0x2
-	adds r4, 0x1
-	cmp r4, 0x13
-	bgt _08040560
-	ldrh r0, [r3]
-	cmp r0, r7
-	bne _0804053E
-_08040560:
-	adds r0, r5, 0
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08040568: .4byte gLevelUpLearnsetPointers
-_0804056C: .4byte 0x0000ffff
-_08040570: .4byte 0x000001ff
-	thumb_func_end sub_804051C
-
-	thumb_func_start sub_8040574
-sub_8040574: @ 8040574
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x3C
-	adds r6, r0, 0
-	movs r0, 0
-	mov r10, r0
-	adds r0, r6, 0
-	movs r1, 0x41
-	movs r2, 0
-	bl PokemonGetField
-	lsls r0, 16
-	lsrs r4, r0, 16
-	adds r0, r6, 0
-	movs r1, 0x38
-	movs r2, 0
-	bl PokemonGetField
-	lsls r0, 24
-	lsrs r0, 24
-	str r0, [sp, 0x30]
-	movs r0, 0xCE
-	lsls r0, 1
-	cmp r4, r0
-	bne _080405B0
-	movs r0, 0
-	b _080406BA
-_080405B0:
-	movs r5, 0
-	lsls r4, 2
-	str r4, [sp, 0x38]
-	mov r4, sp
-_080405B8:
-	adds r1, r5, 0
-	adds r1, 0xD
-	adds r0, r6, 0
-	movs r2, 0
-	bl PokemonGetField
-	strh r0, [r4]
-	adds r4, 0x2
-	adds r5, 0x1
-	cmp r5, 0x3
-	ble _080405B8
-	movs r5, 0
-	ldr r3, _080406CC
-	ldr r2, [sp, 0x38]
-	adds r1, r2, r3
-	ldr r0, [r1]
-	ldrh r0, [r0]
-	ldr r2, _080406D0
-	cmp r0, r2
-	beq _080406B8
-	mov r9, r1
-	mov r4, sp
-	adds r4, 0x8
-	str r4, [sp, 0x34]
-_080405E8:
-	mov r1, r9
-	ldr r0, [r1]
-	lsls r2, r5, 1
-	adds r0, r2, r0
-	ldrh r3, [r0]
-	movs r0, 0xFE
-	lsls r0, 8
-	ands r0, r3
-	ldr r4, [sp, 0x30]
-	lsls r1, r4, 9
-	adds r7, r2, 0
-	adds r5, 0x1
-	mov r12, r5
-	cmp r0, r1
-	bgt _080406A2
-	movs r4, 0
-	mov r0, sp
-	ldrh r1, [r0]
-	ldr r0, _080406D4
-	ands r0, r3
-	cmp r1, r0
-	beq _0804063A
-	ldr r0, [sp, 0x38]
-	ldr r1, _080406CC
-	adds r6, r0, r1
-	ldr r2, _080406D4
-	mov r8, r2
-	mov r3, sp
-	adds r5, r7, 0
-_08040622:
-	adds r3, 0x2
-	adds r4, 0x1
-	cmp r4, 0x3
-	bgt _0804063A
-	ldr r0, [r6]
-	adds r0, r5, r0
-	ldrh r1, [r0]
-	ldrh r2, [r3]
-	mov r0, r8
-	ands r0, r1
-	cmp r2, r0
-	bne _08040622
-_0804063A:
-	cmp r4, 0x4
-	bne _080406A2
-	movs r4, 0
-	cmp r4, r10
-	bge _08040680
-	mov r1, r9
-	ldr r0, [r1]
-	adds r0, r7, r0
-	ldrh r1, [r0]
-	ldr r0, [sp, 0x34]
-	ldrh r2, [r0]
-	ldr r0, _080406D4
-	ands r0, r1
-	add r1, sp, 0x8
-	cmp r2, r0
-	beq _08040680
-	ldr r2, [sp, 0x38]
-	ldr r0, _080406CC
-	adds r6, r2, r0
-	ldr r2, _080406D4
-	mov r8, r2
-	adds r3, r1, 0
-	adds r5, r7, 0
-_08040668:
-	adds r3, 0x2
-	adds r4, 0x1
-	cmp r4, r10
-	bge _08040680
-	ldr r0, [r6]
-	adds r0, r5, r0
-	ldrh r1, [r0]
-	ldrh r2, [r3]
-	mov r0, r8
-	ands r0, r1
-	cmp r2, r0
-	bne _08040668
-_08040680:
-	cmp r4, r10
-	bne _080406A2
-	mov r0, r10
-	adds r0, 0x1
-	lsls r0, 24
-	lsrs r0, 24
-	mov r10, r0
-	lsls r2, r4, 1
-	ldr r4, [sp, 0x34]
-	adds r2, r4, r2
-	mov r1, r9
-	ldr r0, [r1]
-	adds r0, r7, r0
-	ldrh r1, [r0]
-	ldr r0, _080406D4
-	ands r0, r1
-	strh r0, [r2]
-_080406A2:
-	mov r5, r12
-	cmp r5, 0x13
-	bgt _080406B8
-	mov r2, r9
-	ldr r0, [r2]
-	lsls r1, r5, 1
-	adds r1, r0
-	ldrh r0, [r1]
-	ldr r4, _080406D0
-	cmp r0, r4
-	bne _080405E8
-_080406B8:
-	mov r0, r10
-_080406BA:
-	add sp, 0x3C
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_080406CC: .4byte gLevelUpLearnsetPointers
-_080406D0: .4byte 0x0000ffff
-_080406D4: .4byte 0x000001ff
-	thumb_func_end sub_8040574
-
-	thumb_func_start sub_80406D8
-sub_80406D8: @ 80406D8
-	push {r4,lr}
-	lsls r0, 16
-	lsrs r4, r0, 16
-	bl sub_806912C
-	cmp r0, 0
-	beq _080406F2
-	adds r0, r4, 0
-	bl SpeciesToNationalPokedexNum
-	lsls r0, 16
-	lsrs r0, 16
-	b _0804070A
-_080406F2:
-	adds r0, r4, 0
-	bl SpeciesToHoennPokedexNum
-	adds r4, r0, 0
-	cmp r4, 0xCA
-	bls _08040708
-	ldr r0, _08040704
-	b _0804070A
-	.align 2, 0
-_08040704: .4byte 0x0000ffff
-_08040708:
-	adds r0, r4, 0
-_0804070A:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80406D8
-
-	thumb_func_start sub_8040710
-sub_8040710: @ 8040710
-	push {lr}
-	ldr r1, _08040724
-	movs r2, 0
-	adds r0, r1, 0x3
-_08040718:
-	strb r2, [r0]
-	subs r0, 0x1
-	cmp r0, r1
-	bge _08040718
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08040724: .4byte 0x02024e84
-	thumb_func_end sub_8040710
-
-	thumb_func_start sub_8040728
-sub_8040728: @ 8040728
-	push {lr}
-	ldr r0, _0804073C
-	ldrh r1, [r0]
-	movs r0, 0x80
-	lsls r0, 5
-	ands r0, r1
-	cmp r0, 0
-	beq _08040744
-	ldr r0, _08040740
-	b _080408B2
-	.align 2, 0
-_0804073C: .4byte 0x020239f8
-_08040740: .4byte 0x000001cf
-_08040744:
-	movs r0, 0x80
-	lsls r0, 7
-	ands r0, r1
-	cmp r0, 0
-	beq _08040754
-	movs r0, 0xE7
-	lsls r0, 1
-	b _080408B2
-_08040754:
-	movs r0, 0x2
-	ands r0, r1
-	cmp r0, 0
-	beq _0804075E
-	b _080408A8
-_0804075E:
-	movs r0, 0x8
-	ands r0, r1
-	cmp r0, 0
-	bne _08040768
-	b _080408B0
-_08040768:
-	ldr r3, _0804078C
-	ldr r2, _08040790
-	ldrh r1, [r2]
-	lsls r0, r1, 2
-	adds r0, r1
-	lsls r0, 3
-	adds r0, r3
-	ldrb r0, [r0, 0x1]
-	subs r0, 0x2
-	cmp r0, 0x31
-	bls _08040780
-	b _080408A8
-_08040780:
-	lsls r0, 2
-	ldr r1, _08040794
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_0804078C: .4byte gTrainers
-_08040790: .4byte 0x0202ff5e
-_08040794: .4byte _08040798
-	.align 2, 0
-_08040798:
-	.4byte _08040860
-	.4byte _08040866
-	.4byte _08040866
-	.4byte _080408A8
-	.4byte _080408A8
-	.4byte _080408A8
-	.4byte _080408A8
-	.4byte _080408A8
-	.4byte _080408A8
-	.4byte _080408A8
-	.4byte _080408A8
-	.4byte _080408A8
-	.4byte _080408A8
-	.4byte _080408A8
-	.4byte _080408A8
-	.4byte _080408A8
-	.4byte _080408A8
-	.4byte _080408A8
-	.4byte _080408A8
-	.4byte _080408A8
-	.4byte _080408A8
-	.4byte _080408A8
-	.4byte _080408A0
-	.4byte _0804086C
-	.4byte _080408A8
-	.4byte _080408A8
-	.4byte _080408A8
-	.4byte _080408A8
-	.4byte _080408A8
-	.4byte _080408A8
-	.4byte _08040872
-	.4byte _080408A8
-	.4byte _080408A8
-	.4byte _080408A8
-	.4byte _080408A8
-	.4byte _080408A8
-	.4byte _080408A8
-	.4byte _080408A8
-	.4byte _080408A8
-	.4byte _080408A8
-	.4byte _080408A8
-	.4byte _080408A8
-	.4byte _080408A8
-	.4byte _080408A8
-	.4byte _0804087C
-	.4byte _080408A8
-	.4byte _080408A8
-	.4byte _08040860
-	.4byte _08040866
-	.4byte _08040866
-_08040860:
-	movs r0, 0xE9
-	lsls r0, 1
-	b _080408B2
-_08040866:
-	movs r0, 0xE5
-	lsls r0, 1
-	b _080408B2
-_0804086C:
-	movs r0, 0xE6
-	lsls r0, 1
-	b _080408B2
-_08040872:
-	ldr r0, _08040878
-	b _080408B2
-	.align 2, 0
-_08040878: .4byte 0x000001cd
-_0804087C:
-	ldrh r1, [r2]
-	lsls r0, r1, 2
-	adds r0, r1
-	lsls r0, 3
-	ldr r1, _08040898
-	adds r0, r1
-	ldr r1, _0804089C
-	bl StringCompare
-	cmp r0, 0
-	beq _080408A8
-	movs r0, 0xE8
-	lsls r0, 1
-	b _080408B2
-	.align 2, 0
-_08040898: .4byte gTrainers + 0x4
-_0804089C: .4byte gUnknown_08400E42
-_080408A0:
-	ldr r0, _080408A4
-	b _080408B2
-	.align 2, 0
-_080408A4: .4byte 0x000001d1
-_080408A8:
-	ldr r0, _080408AC
-	b _080408B2
-	.align 2, 0
-_080408AC: .4byte 0x000001cb
-_080408B0:
-	ldr r0, _080408B8
-_080408B2:
-	pop {r1}
-	bx r1
-	.align 2, 0
-_080408B8: .4byte 0x000001c9
-	thumb_func_end sub_8040728
-
-	thumb_func_start sub_80408BC
-sub_80408BC: @ 80408BC
-	push {lr}
-	bl map_music_set_to_zero
-	bl m4aMPlayAllStop
-	bl sub_8040728
-	lsls r0, 16
-	lsrs r0, 16
-	bl sub_8075474
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80408BC
-
-	thumb_func_start current_map_music_set__default_for_battle
-current_map_music_set__default_for_battle: @ 80408D8
-	push {r4,lr}
-	lsls r0, 16
-	lsrs r4, r0, 16
-	bl map_music_set_to_zero
-	bl m4aMPlayAllStop
-	cmp r4, 0
-	beq _080408F2
-	adds r0, r4, 0
-	bl current_map_music_set
-	b _080408FE
-_080408F2:
-	bl sub_8040728
-	lsls r0, 16
-	lsrs r0, 16
-	bl current_map_music_set
-_080408FE:
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end current_map_music_set__default_for_battle
-
-	thumb_func_start pokemon_get_pal
-pokemon_get_pal: @ 8040904
-	push {r4-r6,lr}
-	adds r5, r0, 0
-	movs r1, 0x41
-	movs r2, 0
-	bl PokemonGetField
-	adds r4, r0, 0
-	lsls r4, 16
-	lsrs r4, 16
-	adds r0, r5, 0
-	movs r1, 0x1
-	movs r2, 0
-	bl PokemonGetField
-	adds r6, r0, 0
-	adds r0, r5, 0
-	movs r1, 0
-	movs r2, 0
-	bl PokemonGetField
-	adds r2, r0, 0
-	adds r0, r4, 0
-	adds r1, r6, 0
-	bl species_and_otid_get_pal
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end pokemon_get_pal
-
-	thumb_func_start species_and_otid_get_pal
-species_and_otid_get_pal: @ 804093C
-	push {r4,r5,lr}
-	adds r3, r2, 0
-	lsls r0, 16
-	lsrs r4, r0, 16
-	adds r5, r4, 0
-	movs r0, 0xCE
-	lsls r0, 1
-	cmp r4, r0
-	bls _08040958
-	ldr r0, _08040954
-	ldr r0, [r0]
-	b _08040984
-	.align 2, 0
-_08040954: .4byte gMonPaletteTable
-_08040958:
-	lsrs r0, r1, 16
-	ldr r2, _08040974
-	ands r1, r2
-	eors r0, r1
-	lsrs r1, r3, 16
-	eors r0, r1
-	ands r3, r2
-	eors r0, r3
-	cmp r0, 0x7
-	bls _0804097C
-	ldr r0, _08040978
-	lsls r1, r4, 3
-	b _08040980
-	.align 2, 0
-_08040974: .4byte 0x0000ffff
-_08040978: .4byte gMonPaletteTable
-_0804097C:
-	ldr r0, _0804098C
-	lsls r1, r5, 3
-_08040980:
-	adds r1, r0
-	ldr r0, [r1]
-_08040984:
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0804098C: .4byte gMonShinyPaletteTable
-	thumb_func_end species_and_otid_get_pal
-
-	thumb_func_start sub_8040990
-sub_8040990: @ 8040990
-	push {r4-r6,lr}
-	adds r5, r0, 0
-	movs r1, 0x41
-	movs r2, 0
-	bl PokemonGetField
-	adds r4, r0, 0
-	lsls r4, 16
-	lsrs r4, 16
-	adds r0, r5, 0
-	movs r1, 0x1
-	movs r2, 0
-	bl PokemonGetField
-	adds r6, r0, 0
-	adds r0, r5, 0
-	movs r1, 0
-	movs r2, 0
-	bl PokemonGetField
-	adds r2, r0, 0
-	adds r0, r4, 0
-	adds r1, r6, 0
-	bl sub_80409C8
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8040990
-
-	thumb_func_start sub_80409C8
-sub_80409C8: @ 80409C8
-	push {r4,lr}
-	lsls r0, 16
-	lsrs r4, r0, 16
-	lsrs r0, r1, 16
-	ldr r3, _080409E8
-	ands r1, r3
-	eors r0, r1
-	lsrs r1, r2, 16
-	eors r0, r1
-	ands r2, r3
-	eors r0, r2
-	cmp r0, 0x7
-	bls _080409F0
-	lsls r0, r4, 3
-	ldr r1, _080409EC
-	b _080409F4
-	.align 2, 0
-_080409E8: .4byte 0x0000ffff
-_080409EC: .4byte gMonPaletteTable
-_080409F0:
-	lsls r0, r4, 3
-	ldr r1, _080409FC
-_080409F4:
-	adds r0, r1
-	pop {r4}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_080409FC: .4byte gMonShinyPaletteTable
-	thumb_func_end sub_80409C8
-
-	thumb_func_start sub_8040A00
-sub_8040A00: @ 8040A00
-	push {r4,lr}
-	lsls r0, 16
-	lsrs r3, r0, 16
-	ldr r2, _08040A24
-	ldrh r0, [r2]
-	ldr r1, _08040A28
-	cmp r0, r1
-	beq _08040A32
-	adds r4, r1, 0
-	adds r1, r2, 0
-_08040A14:
-	ldrh r0, [r2]
-	adds r1, 0x2
-	adds r2, 0x2
-	cmp r0, r3
-	bne _08040A2C
-	movs r0, 0x1
-	b _08040A34
-	.align 2, 0
-_08040A24: .4byte gUnknown_0820831A
-_08040A28: .4byte 0x0000ffff
-_08040A2C:
-	ldrh r0, [r1]
-	cmp r0, r4
-	bne _08040A14
-_08040A32:
-	movs r0, 0
-_08040A34:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8040A00
-
-	thumb_func_start sub_8040A3C
-sub_8040A3C: @ 8040A3C
-	lsls r0, 16
-	lsrs r0, 16
-	ldr r2, _08040A50
-	lsls r1, r0, 3
-	subs r1, r0
-	lsls r1, 2
-	adds r1, r2
-	ldrb r0, [r1, 0x19]
-	lsrs r0, 7
-	bx lr
-	.align 2, 0
-_08040A50: .4byte gBaseStats
-	thumb_func_end sub_8040A3C
-
-	thumb_func_start sub_8040A54
-sub_8040A54: @ 8040A54
-	push {r4,lr}
-	lsls r4, r1, 24
-	lsrs r4, 24
-	bl GetNature
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, _08040A78
-	lsls r1, r0, 2
-	adds r1, r0
-	adds r1, r4
-	adds r1, r2
-	movs r0, 0
-	ldrsb r0, [r1, r0]
-	pop {r4}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08040A78: .4byte gUnknown_083F7E28
-	thumb_func_end sub_8040A54
-
-	thumb_func_start sub_8040A7C
-sub_8040A7C: @ 8040A7C
-	push {r4,lr}
-	lsls r4, r1, 24
-	lsrs r4, 24
-	bl GetNatureFromPersonality
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, _08040AA0
-	lsls r1, r0, 2
-	adds r1, r0
-	adds r1, r4
-	adds r1, r2
-	movs r0, 0
-	ldrsb r0, [r1, r0]
-	pop {r4}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08040AA0: .4byte gUnknown_083F7E28
-	thumb_func_end sub_8040A7C
-
-	thumb_func_start sub_8040AA4
-sub_8040AA4: @ 8040AA4
-	push {r4,lr}
-	sub sp, 0x8
-	adds r4, r0, 0
-	movs r1, 0x7
-	mov r2, sp
-	bl PokemonGetField
-	adds r0, r4, 0
-	movs r1, 0x1
-	movs r2, 0
-	bl PokemonGetField
-	mov r1, sp
-	bl sub_8040AD0
-	lsls r0, 24
-	lsrs r0, 24
-	add sp, 0x8
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8040AA4
-
-	thumb_func_start sub_8040AD0
-sub_8040AD0: @ 8040AD0
-	push {r4,r5,lr}
-	adds r5, r1, 0
-	ldr r3, _08040B10
-	ldrb r2, [r3, 0xA]
-	ldrb r1, [r3, 0xB]
-	lsls r1, 8
-	orrs r2, r1
-	ldrb r1, [r3, 0xC]
-	lsls r1, 16
-	orrs r2, r1
-	ldrb r1, [r3, 0xD]
-	lsls r1, 24
-	orrs r2, r1
-	cmp r0, r2
-	bne _08040B14
-	movs r4, 0
-	ldrb r0, [r5]
-	cmp r0, 0xFF
-	beq _08040B0C
-	adds r2, r5, 0
-_08040AF8:
-	adds r1, r4, r3
-	ldrb r0, [r2]
-	ldrb r1, [r1]
-	cmp r0, r1
-	bne _08040B14
-	adds r2, 0x1
-	adds r4, 0x1
-	ldrb r0, [r2]
-	cmp r0, 0xFF
-	bne _08040AF8
-_08040B0C:
-	movs r0, 0
-	b _08040B16
-	.align 2, 0
-_08040B10: .4byte gSaveBlock2
-_08040B14:
-	movs r0, 0x1
-_08040B16:
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8040AD0
-
-	thumb_func_start sub_8040B1C
-sub_8040B1C: @ 8040B1C
-	push {lr}
-	bl pokemon_restore_pp
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8040B1C
-
-	thumb_func_start pokemon_restore_pp
-pokemon_restore_pp: @ 8040B28
-	push {r4-r6,lr}
-	sub sp, 0x4
-	adds r5, r0, 0
-	movs r6, 0
-_08040B30:
-	adds r4, r6, 0
-	adds r4, 0xD
-	adds r0, r5, 0
-	adds r1, r4, 0
-	movs r2, 0
-	bl PokemonGetEncryptedField
-	cmp r0, 0
-	beq _08040B7C
-	adds r0, r5, 0
-	adds r1, r4, 0
-	movs r2, 0
-	bl PokemonGetEncryptedField
-	adds r4, r0, 0
-	lsls r4, 16
-	lsrs r4, 16
-	adds r0, r5, 0
-	movs r1, 0x15
-	movs r2, 0
-	bl PokemonGetEncryptedField
-	adds r1, r0, 0
-	lsls r1, 24
-	lsrs r1, 24
-	lsls r2, r6, 24
-	lsrs r2, 24
-	adds r0, r4, 0
-	bl CalcPPWithPPUps
-	mov r1, sp
-	strb r0, [r1]
-	adds r1, r6, 0
-	adds r1, 0x11
-	adds r0, r5, 0
-	mov r2, sp
-	bl PokemonSetEncryptedField
-_08040B7C:
-	adds r6, 0x1
-	cmp r6, 0x3
-	ble _08040B30
-	add sp, 0x4
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	thumb_func_end pokemon_restore_pp
-
-	thumb_func_start sub_8040B8C
-sub_8040B8C: @ 8040B8C
-	push {r4,r5,lr}
-	ldr r1, _08040BCC
-	ldr r2, _08040BD0
-	ldr r3, _08040BD4
-	adds r0, r2, r3
-	ldrb r0, [r0]
-	strb r0, [r1]
-	ldr r5, _08040BD8
-	movs r0, 0xFD
-	strb r0, [r5]
-	movs r0, 0x4
-	strb r0, [r5, 0x1]
-	ldr r0, _08040BDC
-	adds r4, r2, r0
-	ldrb r0, [r4]
-	strb r0, [r5, 0x2]
-	movs r0, 0xFF
-	strb r0, [r5, 0x4]
-	ldrb r0, [r4]
-	bl battle_side_get_owner
-	lsls r0, 24
-	cmp r0, 0
-	bne _08040BE4
-	ldr r1, _08040BE0
-	ldrb r0, [r4]
-	lsls r0, 1
-	adds r0, r1
-	ldrb r0, [r0]
-	bl pokemon_order_func
-	b _08040BEE
-	.align 2, 0
-_08040BCC: .4byte 0x02024c06
-_08040BD0: .4byte 0x02000000
-_08040BD4: .4byte 0x000160c0
-_08040BD8: .4byte 0x030041c0
-_08040BDC: .4byte 0x00016054
-_08040BE0: .4byte 0x02024a6a
-_08040BE4:
-	ldr r0, _08040C24
-	ldrb r1, [r4]
-	lsls r1, 1
-	adds r1, r0
-	ldrh r0, [r1]
-_08040BEE:
-	strb r0, [r5, 0x3]
-	ldr r4, _08040C28
-	movs r0, 0xFD
-	strb r0, [r4]
-	movs r0, 0x4
-	strb r0, [r4, 0x1]
-	ldr r1, _08040C2C
-	ldrb r0, [r1]
-	strb r0, [r4, 0x2]
-	ldr r2, _08040C24
-	ldrb r0, [r1]
-	lsls r0, 1
-	adds r0, r2
-	ldrb r0, [r0]
-	bl pokemon_order_func
-	strb r0, [r4, 0x3]
-	movs r0, 0xFF
-	strb r0, [r4, 0x4]
-	ldr r0, _08040C30
-	ldr r1, _08040C34
-	bl sub_8120FFC
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08040C24: .4byte 0x02024a6a
-_08040C28: .4byte 0x03004290
-_08040C2C: .4byte 0x02024e6c
-_08040C30: .4byte gUnknown_083FFCCA
-_08040C34: .4byte 0x020234cc
-	thumb_func_end sub_8040B8C
-
-	thumb_func_start sub_8040C38
-sub_8040C38: @ 8040C38
-	push {r4,r5,lr}
-	ldr r0, _08040C90
-	ldrh r1, [r0]
-	ldr r0, _08040C94
-	ands r0, r1
-	cmp r0, 0
-	bne _08040CAC
-	bl Random
-	lsls r0, 16
-	lsrs r0, 16
-	movs r1, 0x64
-	bl __umodsi3
-	lsls r0, 16
-	lsrs r5, r0, 16
-	ldr r4, _08040C98
-	adds r0, r4, 0
-	movs r1, 0xB
-	movs r2, 0
-	bl PokemonGetField
-	lsls r0, 16
-	lsrs r0, 16
-	ldr r2, _08040C9C
-	lsls r1, r0, 3
-	subs r1, r0
-	lsls r3, r1, 2
-	adds r1, r3, r2
-	ldrh r0, [r1, 0xC]
-	ldrh r1, [r1, 0xE]
-	cmp r0, r1
-	beq _08040C82
-	cmp r5, 0x2C
-	bls _08040CAC
-	cmp r5, 0x5E
-	bhi _08040CA0
-_08040C82:
-	adds r2, 0xC
-	adds r2, r3, r2
-	adds r0, r4, 0
-	movs r1, 0xC
-	bl pokemon_setattr
-	b _08040CAC
-	.align 2, 0
-_08040C90: .4byte 0x020239f8
-_08040C94: .4byte 0x00002008
-_08040C98: .4byte 0x030045c0
-_08040C9C: .4byte gBaseStats
-_08040CA0:
-	adds r2, 0xE
-	adds r2, r3, r2
-	adds r0, r4, 0
-	movs r1, 0xC
-	bl pokemon_setattr
-_08040CAC:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8040C38
-
-	thumb_func_start sub_8040CB4
-sub_8040CB4: @ 8040CB4
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	movs r1, 0x1
-	movs r2, 0
-	bl PokemonGetField
-	adds r5, r0, 0
-	adds r0, r4, 0
-	movs r1, 0
-	movs r2, 0
-	bl PokemonGetField
-	adds r1, r0, 0
-	adds r0, r5, 0
-	bl sub_8040CE0
-	lsls r0, 24
-	lsrs r0, 24
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8040CB4
-
-	thumb_func_start sub_8040CE0
-sub_8040CE0: @ 8040CE0
-	push {r4,lr}
-	movs r4, 0
-	lsrs r2, r0, 16
-	ldr r3, _08040D04
-	ands r0, r3
-	eors r2, r0
-	lsrs r0, r1, 16
-	eors r2, r0
-	ands r1, r3
-	eors r2, r1
-	cmp r2, 0x7
-	bhi _08040CFA
-	movs r4, 0x1
-_08040CFA:
-	adds r0, r4, 0
-	pop {r4}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08040D04: .4byte 0x0000ffff
-	thumb_func_end sub_8040CE0
-
-	thumb_func_start sub_8040D08
-sub_8040D08: @ 8040D08
-	push {r4,lr}
-	bl GetMultiplayerId
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r4, _08040D38
-	lsls r1, r0, 3
-	subs r1, r0
-	lsls r1, 2
-	adds r1, r4
-	ldrh r1, [r1, 0x18]
-	movs r0, 0x2
-	eors r0, r1
-	bl sub_803FC34
-	adds r1, r0, 0
-	lsls r0, r1, 3
-	subs r0, r1
-	lsls r0, 2
-	adds r4, 0x8
-	adds r0, r4
-	pop {r4}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08040D38: .4byte 0x03002970
-	thumb_func_end sub_8040D08
-
-	thumb_func_start sub_8040D3C
-sub_8040D3C: @ 8040D3C
-	push {r4,lr}
-	adds r4, r1, 0
-	lsls r0, 16
-	lsrs r1, r0, 16
-	adds r0, r1, 0
-	lsls r2, 24
-	lsrs r2, 24
-	movs r3, 0
-	cmp r1, 0x20
-	beq _08040D54
-	cmp r1, 0x1D
-	bne _08040D7E
-_08040D54:
-	cmp r2, 0x2
-	bne _08040D68
-	movs r0, 0xB
-	muls r1, r0
-	ldr r0, _08040D64
-	adds r1, r0
-	b _08040D70
-	.align 2, 0
-_08040D64: .4byte gSpeciesNames
-_08040D68:
-	ldr r1, _08040D88
-	cmp r0, 0x20
-	bne _08040D70
-	subs r1, 0xB
-_08040D70:
-	adds r0, r4, 0
-	bl StringCompareWithoutExtCtrlCodes
-	movs r3, 0
-	cmp r0, 0
-	bne _08040D7E
-	movs r3, 0x1
-_08040D7E:
-	adds r0, r3, 0
-	pop {r4}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08040D88: .4byte gUnknown_08208337
-	thumb_func_end sub_8040D3C
-
-	thumb_func_start sub_8040D8C
-sub_8040D8C: @ 8040D8C
-	push {lr}
-	lsls r0, 16
-	lsrs r3, r0, 16
-	movs r2, 0x2
-	ldrb r0, [r1]
-	cmp r0, 0xFC
-	bne _08040DA2
-	ldrb r0, [r1, 0x1]
-	cmp r0, 0x15
-	bne _08040DA2
-	movs r2, 0x1
-_08040DA2:
-	adds r0, r3, 0
-	bl sub_8040D3C
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8040D8C
-
-	thumb_func_start unref_sub_8040DAC
-unref_sub_8040DAC: @ 8040DAC
-	push {r4-r6,lr}
-	sub sp, 0xC
-	adds r6, r0, 0
-	movs r1, 0xB
-	movs r2, 0
-	bl PokemonGetField
-	adds r5, r0, 0
-	lsls r5, 16
-	lsrs r5, 16
-	adds r0, r6, 0
-	movs r1, 0x3
-	movs r2, 0
-	bl PokemonGetField
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	adds r0, r6, 0
-	movs r1, 0x2
-	mov r2, sp
-	bl PokemonGetField
-	adds r0, r5, 0
-	mov r1, sp
-	adds r2, r4, 0
-	bl sub_8040D3C
-	add sp, 0xC
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end unref_sub_8040DAC
-
-	thumb_func_start sine
-sine: @ 8040DEC
-	lsls r1, 16
-	asrs r1, 16
-	ldr r2, _08040E04
-	lsls r0, 16
-	asrs r0, 15
-	adds r0, r2
-	movs r2, 0
-	ldrsh r0, [r0, r2]
-	muls r0, r1
-	lsls r0, 8
-	asrs r0, 16
-	bx lr
-	.align 2, 0
-_08040E04: .4byte gSineTable
-	thumb_func_end sine
-
-	thumb_func_start cosine
-cosine: @ 8040E08
-	lsls r1, 16
-	asrs r1, 16
-	ldr r2, _08040E24
-	lsls r0, 16
-	asrs r0, 15
-	adds r0, 0x80
-	adds r0, r2
-	movs r2, 0
-	ldrsh r0, [r0, r2]
-	muls r0, r1
-	lsls r0, 8
-	asrs r0, 16
-	bx lr
-	.align 2, 0
-_08040E24: .4byte gSineTable
-	thumb_func_end cosine
-
-	thumb_func_start sine2
-sine2: @ 8040E28
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	lsls r5, 16
-	lsrs r5, 16
-	adds r0, r5, 0
-	movs r1, 0xB4
-	bl __umodsi3
-	adds r4, r0, 0
-	lsls r4, 16
-	lsrs r4, 16
-	adds r0, r5, 0
-	movs r1, 0xB4
-	bl __udivsi3
-	movs r1, 0x1
-	ands r0, r1
-	ldr r1, _08040E5C
-	lsls r4, 1
-	adds r4, r1
-	ldrh r1, [r4]
-	cmp r0, 0
-	bne _08040E60
-	lsls r0, r1, 16
-	b _08040E64
-	.align 2, 0
-_08040E5C: .4byte gSineDegreeTable
-_08040E60:
-	lsls r0, r1, 16
-	negs r0, r0
-_08040E64:
-	asrs r0, 16
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end sine2
-
-	thumb_func_start cosine2
-cosine2: @ 8040E6C
-	push {lr}
-	lsls r0, 16
-	movs r1, 0xB4
-	lsls r1, 15
-	adds r0, r1
-	lsrs r0, 16
-	bl sine2
-	lsls r0, 16
-	asrs r0, 16
-	pop {r1}
-	bx r1
-	thumb_func_end cosine2
+	.align 2, 0 @ Don't pad with nop.

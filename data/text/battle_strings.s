@@ -1156,8 +1156,7 @@ gUnknown_08400E36:: @ 8400E36
 BattleText_Format9:
 	.string "are$"
 
-gUnknown_08400E3A:: @ 8400E3A
-BattleText_BadEGG:
+gBadEggNickname:: @ 8400E3A
 	.string "Bad EGG$"
 
 gUnknown_08400E42:: @ 8400E42

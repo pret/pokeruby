@@ -3,7 +3,17 @@ unk_2004000 = 0x2004000;
 
 gUnknown_020239F8 = 0x20239F8;
 
+gUnknown_02024E8C = 0x2024E8C;
+
 gSaveBlock2 = 0x2024EA4;
+
+gMenuWindow = 0x202E908;
+gMenuWindowPtr = 0x202E9C8;
+gMenuMultistepInitState = 0x202E9CC;
+gMenuTextTileOffset = 0x202E9CE;
+gMenuTextWindowTileOffset = 0x202E9D0;
+gMenuTextWindowContentTileOffset = 0x202E9D2;
+gMenuMessageBoxContentTileOffset = 0x202E9D4;
 
 gPlttBufferUnfaded = 0x202EAC8;
 gPlttBufferFaded = 0x202EEC8;
@@ -17,3 +27,5 @@ word_203855E = 0x203855E;
 gUnknown_0203869A = 0x203869A;
 
 gTileBuffer = 0x2039360;
+
+gSubspriteTable_203A380 = 0x203A380;

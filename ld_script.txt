@@ -31,6 +31,12 @@ SECTIONS {
         src/link.o(.bss);
         src/rtc.o(.bss);
 
+        . = 0x5AC;
+        src/text_window.o(.bss);
+
+        . = 0x6B0;
+        src/menu.o(.bss);
+
         . = 0xF28;
         src/agb_flash.o(.bss);
         . = 0xF36;
@@ -66,11 +72,18 @@ SECTIONS {
         src/string_util.o(.text);
         src/link.o(.text);
         src/rtc.o(.text);
+        src/main_menu.o(.text);
         asm/rom3.o(.text);
+        src/pokemon.o(.text);
+        asm/rom_803D1FC.o(.text);
         src/rng.o(.text);
         asm/rom_8040EB4.o(.text);
         src/play_time.o(.text);
         asm/rom4.o(.text);
+        src/text_window.o(.text);
+        asm/rom_8065394.o(.text);
+        src/menu.o(.text);
+        asm/rom_8072DF8.o(.text);
         src/palette.o(.text);
         asm/rom_8074BAC.o(.text);
         src/task.o(.text);
