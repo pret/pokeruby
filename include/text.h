@@ -152,7 +152,7 @@ u8 sub_80035AC(struct Window *win);
 u8 sub_800374C(struct Window *win);
 u8 sub_8003778(struct Window *win);
 u8 sub_80037A0(struct Window *win);
-u8 sub_80037C8(struct Window *win, u8 lineLength);
+u32 sub_80037C8(struct Window *win, u8 lineLength);
 void ClearWindowTextLines(struct Window *win);
 u16 GetWindowTilemapEntry(struct Window *win, u8 x, u8 y);
 void DrawWindowRect(struct Window *win, u16 tilemapEntry, u8 left, u8 top, u8 right, u8 bottom);

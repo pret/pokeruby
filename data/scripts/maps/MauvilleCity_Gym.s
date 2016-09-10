@@ -68,7 +68,7 @@ MauvilleCity_Gym_EventScript_1565A7:: @ 81565A7
 	end
 
 MauvilleCity_Gym_EventScript_1565AB:: @ 81565AB
-	trainerbattle 1, 267, 0, MauvilleCity_Gym_Text_180C32, MauvilleCity_Gym_Text_180D64, MauvilleCity_Gym_EventScript_1565DB
+	trainerbattle 1, OPPONENT_WATTSON, 0, MauvilleCity_Gym_Text_180C32, MauvilleCity_Gym_Text_180D64, MauvilleCity_Gym_EventScript_1565DB
 	checkflag 167
 	jumpif 0, MauvilleCity_Gym_EventScript_15661D
 	compare 0x40ba, 2
@@ -169,22 +169,22 @@ MauvilleCity_Gym_EventScript_1566E1:: @ 81566E1
 	end
 
 MauvilleCity_Gym_EventScript_1566E6:: @ 81566E6
-	trainerbattle 0, 191, 0, MauvilleCity_Gym_Text_180956, MauvilleCity_Gym_Text_180997
+	trainerbattle 0, OPPONENT_KIRK, 0, MauvilleCity_Gym_Text_180956, MauvilleCity_Gym_Text_180997
 	msgbox MauvilleCity_Gym_Text_1809D1, 6
 	end
 
 MauvilleCity_Gym_EventScript_1566FD:: @ 81566FD
-	trainerbattle 0, 194, 0, MauvilleCity_Gym_Text_180A05, MauvilleCity_Gym_Text_180A42
+	trainerbattle 0, OPPONENT_SHAWN, 0, MauvilleCity_Gym_Text_180A05, MauvilleCity_Gym_Text_180A42
 	msgbox MauvilleCity_Gym_Text_180A5E, 6
 	end
 
 MauvilleCity_Gym_EventScript_156714:: @ 8156714
-	trainerbattle 0, 323, 0, MauvilleCity_Gym_Text_180AE0, MauvilleCity_Gym_Text_180B06
+	trainerbattle 0, OPPONENT_BEN, 0, MauvilleCity_Gym_Text_180AE0, MauvilleCity_Gym_Text_180B06
 	msgbox MauvilleCity_Gym_Text_180B1D, 6
 	end
 
 MauvilleCity_Gym_EventScript_15672B:: @ 815672B
-	trainerbattle 0, 649, 0, MauvilleCity_Gym_Text_180B5A, MauvilleCity_Gym_Text_180B93
+	trainerbattle 0, OPPONENT_VIVIAN, 0, MauvilleCity_Gym_Text_180B5A, MauvilleCity_Gym_Text_180B93
 	msgbox MauvilleCity_Gym_Text_180BAE, 6
 	end
 

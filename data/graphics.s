@@ -18,9 +18,9 @@ gUnknown_08D00524:: @ 8D00524
 	.include "data/graphics/pokemon/circled_question_mark_graphics.s"
 
 @ 8D019E4
-	.incbin "graphics/unused/old.4bpp.lz" @ japanese table and bunch of stuff
-	.incbin "graphics/unused/unknown_D021BC.bin"
-	.incbin "graphics/unused/unknown_D023E8.bin"
+	.incbin "graphics/unused/old_charmap.4bpp.lz" @ japanese table and bunch of stuff
+	.incbin "graphics/unused/old_charmap.bin.lz"
+	.incbin "graphics/unused/old_charmap.gbapal.lz"
 
 	.align 2
 gSmokescreenImpactTiles:: @ 8D02410
@@ -30,78 +30,103 @@ gSmokescreenImpactTiles:: @ 8D02410
 gSmokescreenImpactPalette:: @ 8D024F0
 	.incbin "graphics/battle_anims/sprites/smokescreen_impact.gbapal.lz"
 
+	.align 2
 gInterfaceGfx_PokeBall::
 	.incbin "graphics/interface/ball/poke.4bpp.lz" @ 0xBC
 
+	.align 2
 gInterfacePal_PokeBall::
 	.incbin "graphics/interface/ball/poke.gbapal.lz"
 
+	.align 2
 gInterfaceGfx_GreatBall::
 	.incbin "graphics/interface/ball/great.4bpp.lz" @ 0xBC
 
+	.align 2
 gInterfacePal_GreatBall::
 	.incbin "graphics/interface/ball/great.gbapal.lz"
 
+	.align 2
 gInterfaceGfx_SafariBall::
 	.incbin "graphics/interface/ball/safari.4bpp.lz" @ 0xBC
 
+	.align 2
 gInterfacePal_SafariBall::
 	.incbin "graphics/interface/ball/safari.gbapal.lz"
 
+	.align 2
 gInterfaceGfx_UltraBall::
 	.incbin "graphics/interface/ball/ultra.4bpp.lz" @ 0xBC
 
+	.align 2
 gInterfacePal_UltraBall::
 	.incbin "graphics/interface/ball/ultra.gbapal.lz"
 
+	.align 2
 gInterfaceGfx_MasterBall::
 	.incbin "graphics/interface/ball/master.4bpp.lz" @ 0xBC
 
+	.align 2
 gInterfacePal_MasterBall::
 	.incbin "graphics/interface/ball/master.gbapal.lz"
 
+	.align 2
 gInterfaceGfx_NetBall::
 	.incbin "graphics/interface/ball/net.4bpp.lz" @ 0xBC
 
+	.align 2
 gInterfacePal_NetBall::
 	.incbin "graphics/interface/ball/net.gbapal.lz"
 
+	.align 2
 gInterfaceGfx_DiveBall::
 	.incbin "graphics/interface/ball/dive.4bpp.lz" @ 0xBC
 
+	.align 2
 gInterfacePal_DiveBall::
 	.incbin "graphics/interface/ball/dive.gbapal.lz"
 
+	.align 2
 gInterfaceGfx_NestBall::
 	.incbin "graphics/interface/ball/nest.4bpp.lz" @ 0xBC
 
+	.align 2
 gInterfacePal_NestBall::
 	.incbin "graphics/interface/ball/nest.gbapal.lz"
 
+	.align 2
 gInterfaceGfx_RepeatBall::
 	.incbin "graphics/interface/ball/repeat.4bpp.lz" @ 0xBC
 
+	.align 2
 gInterfacePal_RepeatBall::
 	.incbin "graphics/interface/ball/repeat.gbapal.lz"
 
+	.align 2
 gInterfaceGfx_TimerBall::
 	.incbin "graphics/interface/ball/timer.4bpp.lz" @ 0xBC
 
+	.align 2
 gInterfacePal_TimerBall::
 	.incbin "graphics/interface/ball/timer.gbapal.lz"
 
+	.align 2
 gInterfaceGfx_LuxuryBall::
 	.incbin "graphics/interface/ball/luxury.4bpp.lz" @ 0xBC
 
+	.align 2
 gInterfacePal_LuxuryBall::
 	.incbin "graphics/interface/ball/luxury.gbapal.lz"
 
+	.align 2
 gInterfaceGfx_PremierBall::
 	.incbin "graphics/interface/ball/premier.4bpp.lz" @ 0xBC
 
+	.align 2
 gInterfacePal_PremierBall::
 	.incbin "graphics/interface/ball/premier.gbapal.lz"
 
+	.align 2
 gUnknown_08D030D0:: @ 8D030D0
 	.incbin "graphics/interface/ball_open.4bpp.lz"
 
@@ -249,7 +274,8 @@ gBattleAnimSpritePalette_016:: @ 8D04358
 gBattleAnimSpriteSheet_017:: @ 8D04368
 	.incbin "graphics/battle_anims/sprites/017.4bpp.lz"
 
-	.incbin "baserom.gba", 0xd04388, 0x24
+	.align 2
+	.incbin "graphics/unknown/unknown_D04388.4bpp.lz"
 
 	.align 2
 gBattleAnimSpritePalette_019:: @ 8D043AC
@@ -275,7 +301,11 @@ gBattleAnimSpritePalette_023:: @ 8D0457C
 gBattleAnimSpriteSheet_023:: @ 8D045A4
 	.incbin "graphics/battle_anims/sprites/023.4bpp.lz"
 
-	.incbin "baserom.gba", 0xd046ac, 0x124
+	.align 2
+	.incbin "graphics/unused/battle_anim_023.gbapal.lz"
+
+	.align 2
+	.incbin "graphics/unused/music_notes.4bpp.lz"
 
 	.align 2
 gBattleAnimSpritePalette_021:: @ 8D047D0
@@ -389,7 +419,34 @@ gBattleAnimSpriteSheet_036:: @ 8D07448
 gBattleAnimSpriteSheet_037:: @ 8D0781C
 	.incbin "graphics/battle_anims/sprites/037.4bpp.lz"
 
-	.incbin "baserom.gba", 0xd07b68, 0xb7c
+	.align 2
+	.incbin "graphics/unknown/unknown_D07B68.4bpp.lz"
+
+	.align 2
+	.incbin "graphics/unknown/unknown_D07B68.gbapal.lz"
+
+	.align 2
+	.incbin "graphics/unknown/unknown_D07B68_2.gbapal.lz"
+
+@ old battle interface data, unused
+
+	.align 2
+	.incbin "graphics/unused/obi1.4bpp.lz"
+
+	.align 2
+	.incbin "graphics/unused/obi_palpak1.gbapal.lz" @ palettes 1-3
+
+	.align 2
+	.incbin "graphics/unused/old_pal4.gbapal.lz" @ 4 is by itself
+
+	.align 2
+	.incbin "graphics/unused/obi_palpak3.gbapal.lz" @ palettes 5-7
+
+	.align 2
+	.incbin "graphics/unused/obi2.4bpp.lz"
+
+	.align 2
+	.incbin "graphics/unused/old_battle_interface_tilemap.bin.lz"
 
 	.align 2
 gBattleAnimSpritePalette_038:: @ 8D086E4
@@ -447,8 +504,9 @@ gBattleAnimSpritePalette_045:: @ 8D099B4
 gBattleAnimSpriteSheet_045:: @ 8D099DC
 	.incbin "graphics/battle_anims/sprites/045.4bpp.lz"
 
+	.align 2
 gUnknown_08D09C48:: @ 8D09C48
-	.incbin "baserom.gba", 0x00d09c48, 0x214
+	.incbin "graphics/interface/hp_numbers.4bpp.lz"
 
 	.align 2
 gBattleAnimSpriteSheet_046:: @ 8D09E5C
@@ -490,7 +548,11 @@ gBattleAnimSpriteSheet_051:: @ 8D0A62C
 gBattleAnimSpriteSheet_052:: @ 8D0A6D8
 	.incbin "graphics/battle_anims/sprites/052.4bpp.lz"
 
-	.incbin "baserom.gba", 0xd0a7a4, 0x194
+	.align 2
+	.incbin "graphics/unused/line_sketch.4bpp.lz" @ unused
+
+	.align 2
+	.incbin "graphics/unused/line_sketch.gbapal.lz"
 
 	.align 2
 gBattleAnimSpriteSheet_054:: @ 8D0A938
@@ -568,7 +630,8 @@ gBattleAnimSpriteSheet_063:: @ 8D0B9D4
 gBattleAnimSpritePalette_063:: @ 8D0BB90
 	.incbin "graphics/battle_anims/sprites/063.gbapal.lz"
 
-	.incbin "baserom.gba", 0xd0bbb8, 0x70
+	.align 2
+	.incbin "graphics/unused/metronome_hand_small.4bpp.lz" @ unused, was for metronome at one point
 
 	.align 2
 gBattleAnimSpritePalette_091:: @ 8D0BC28
@@ -654,7 +717,23 @@ gBattleAnimSpriteSheet_081:: @ 8D0CF04
 gBattleAnimSpritePalette_081:: @ 8D0CF88
 	.incbin "graphics/battle_anims/sprites/081.gbapal.lz"
 
-	.incbin "baserom.gba", 0xd0cfac, 0x174
+	.align 2 @ 8D0CFAC
+	.incbin "graphics/unknown/unknown_D0CFAC.bin"
+
+	.align 2 @ 8D0CFD0
+	.incbin "graphics/unknown/unknown_D0CFD0.bin"
+
+	.align 2 @ 8D0CFF4
+	.incbin "graphics/unknown/unknown_D0CFF4.bin"
+
+	.align 2
+	.incbin "graphics/unused/line_sketch_2.8bpp.lz"
+
+	.align 2 @ 8D0D070
+	.incbin "graphics/unknown/unknown_D0D070.bin"
+
+	.align 2
+	.incbin "graphics/unused/line_sketch_2.bin.lz"
 
 	.align 2
 gBattleAnimSpriteSheet_082:: @ 8D0D120
@@ -704,7 +783,8 @@ gBattleAnimSpritePalette_093:: @ 8D0D26C
 gBattleAnimSpritePalette_094:: @ 8D0D294
 	.incbin "graphics/battle_anims/sprites/094.gbapal.lz"
 
-	.incbin "baserom.gba", 0xd0d2b4, 0x20
+	.align 2
+	.incbin "graphics/unknown/unknown_D0D2B4.bin.lz"
 
 	.align 2
 gBattleAnimSpritePalette_095:: @ 8D0D2D4
@@ -882,20 +962,72 @@ gBattleAnimSpriteSheet_114:: @ 8D10F78
 gBattleAnimSpritePalette_114:: @ 8D1106C
 	.incbin "graphics/battle_anims/sprites/114.gbapal.lz"
 
-	.incbin "baserom.gba", 0xd11094, 0xae0
+	.align 2
+	.incbin "graphics/unused/blue_frame.bin.lz" @  P1, P2, P3 and P4 tilemaps?
+
+	.align 2
+	.incbin "graphics/unused/redyellowgreen_frame.bin.lz"
+
+	.align 2
+	.incbin "graphics/unused/color_frames.4bpp.lz"
+
+	.align 2
+	.incbin "graphics/unused/color_frames.gbapal.lz"
 
 	.align 2
 gBattleAnimSpriteSheet_115:: @ 8D11B74
 	.incbin "graphics/battle_anims/sprites/115.4bpp.lz"
 
-	.incbin "baserom.gba", 0xd11ca4, 0x488
+	.align 2
+	.incbin "graphics/unused/water_splash.8bpp.lz"
 
+	.align 2
+	.incbin "graphics/unused/water_splash.bin.lz"
+
+	.align 2
+	.incbin "graphics/unused/water_splash.gbapal.lz"
+
+	.align 2
+	.incbin "graphics/unused/basic_frame.4bpp.lz"
+
+	.align 2
+	.incbin "graphics/unused/basic_frame.gbapal.lz"
+
+	.align 2
+	.incbin "graphics/unused/basic_frame.bin.lz"
+
+	.align 2
 gUnknown_08D1212C::
-	.incbin "graphics/interface/battle_window.gbapal"
+	.incbin "graphics/battle_interface/window.gbapal"
+
+	.align 2
 gUnknown_08D1214C::
-	.incbin "baserom.gba", 0xd1214c, 0x20
+	.incbin "graphics/battle_interface/hpbar.gbapal"
+
+	.align 2
 gUnknown_08D1216C:: @ 8D1216C
-	.incbin "baserom.gba", 0x00d1216c, 0xec0
+	.incbin "graphics/battle_interface/hpbar.4bpp"
+	.incbin "graphics/battle_interface/expbar.4bpp"
+	.incbin "graphics/battle_interface/status_psn.4bpp"
+	.incbin "graphics/battle_interface/status_par.4bpp"
+	.incbin "graphics/battle_interface/status_slp.4bpp"
+	.incbin "graphics/battle_interface/status_frz.4bpp"
+	.incbin "graphics/battle_interface/status_brn.4bpp"
+	.incbin "graphics/battle_interface/misc.4bpp"
+	.incbin "graphics/battle_interface/hpbar_anim.4bpp"
+	.incbin "graphics/battle_interface/misc_frameend.4bpp"
+
+	.align 2
+Tiles_D129AC:: @ 8D129AC
+	.incbin "graphics/battle_interface/ball_display.4bpp"
+
+	@ extra stuff
+	.incbin "graphics/battle_interface/ball_display_unused_extra.4bpp"
+	.incbin "graphics/battle_interface/status2.4bpp" @ these three duplicate sets of graphics are for the opponent pokemon and are also for use in double battles. they use dynamic palettes so coloring them is an extreme headache and wont be done for now.
+	.incbin "graphics/battle_interface/status3.4bpp"
+	.incbin "graphics/battle_interface/status4.4bpp"
+	.incbin "graphics/unknown/unknown_D12FEC.4bpp"
+	.incbin "graphics/unknown/unknown_D1300C.4bpp"
 
 	.align 2
 gBattleAnimSpriteSheet_116:: @ 8D1302C
@@ -1045,7 +1177,17 @@ gBattleAnimSpritePalette_076:: @ 8D150CC
 gBattleAnimSpriteSheet_077:: @ 8D150F4
 	.incbin "graphics/battle_anims/sprites/077.4bpp.lz"
 
-	.incbin "baserom.gba", 0x00d151c8, 0xE5C
+	.align 2
+	.incbin "graphics/unused/old_contest.4bpp.lz"
+
+	.align 2
+	.incbin "graphics/unused/old_contest.gbapal.lz"
+
+	.align 2
+	.incbin "graphics/unused/old_contest.bin.lz"
+
+	.align 2
+	.incbin "baserom.gba", 0xD15D64, 0x2C0 @ LZ, uncomp. size = 0x1000
 
 	.align 2
 gContestNumbers_UnusedGfx::
@@ -1055,52 +1197,73 @@ gContestNumbers_UnusedGfx::
 gContestNumbers_UnusedPal::
 	.incbin "graphics/unused/numbers.gbapal.lz"
 
-	.incbin "baserom.gba", 0x00d16134, 0x1010
+	.align 2
+	.incbin "graphics/unused/old_contest_2.4bpp.lz"
 
+	.align 2
 gUnknown_08D17144:: @ 8D17144
-	.incbin "baserom.gba", 0x00d17144, 0x118
+	.incbin "graphics/unused/old_contest_2.gbapal.lz" @ the tilemap and palette for unused contest assets are used. however, these two files aren't old
 
+	.align 2
 gUnknown_08D1725C:: @ 8D1725C
-	.incbin "baserom.gba", 0x00d1725c, 0x1c8
+	.incbin "graphics/unused/old_contest_2.bin.lz"
 
+	.align 2
 gUnknown_08D17424:: @ 8D17424
-	.incbin "baserom.gba", 0x00d17424, 0x818
+	.incbin "baserom.gba", 0xD17424, 0x2A7 @ LZ, uncomp. size = 0x1000
 
+	.align 2
+	.incbin "baserom.gba", 0xD176CC, 0x10A @ LZ, uncomp. size = 0x800
+
+	.align 2
+	.incbin "baserom.gba", 0xD177D8, 0x462 @ LZ, uncomp. size = 0x2000
+
+	.align 2
 gUnknown_08D17C3C:: @ 8D17C3C
-	.incbin "baserom.gba", 0x00d17c3c, 0x130
+	.incbin "baserom.gba", 0xD17C3C, 0x12D @ LZ, uncomp. size = 0x800
 
-gUnknown_08D17D6C:: @ 8D17D6C
-	.incbin "baserom.gba", 0x00d17d6c, 0xaac
+	.align 2
+gContestMiscGfx:: @ 8D17D6C
+	.incbin "graphics/contest/misc.4bpp.lz"
 
-gUnknown_08D18818:: @ 8D18818
-	.incbin "baserom.gba", 0x00d18818, 0xd78
+	.align 2
+gContestAudienceGfx:: @ 8D18818
+	.incbin "graphics/contest/audience.4bpp.lz"
+
+	.align 2
+	.incbin "graphics/contest/faces.4bpp.lz"
 
 	.align 2
 gContestJudgeSymbolsGfx:: @ 8D19590
-	.incbin "graphics/misc/judge_symbols.4bpp.lz"
+	.incbin "graphics/contest/judge_symbols.4bpp.lz"
 
 	.align 2
 gContest3Pal::
-	.incbin "graphics/misc/judge_symbols.gbapal.lz"
+	.incbin "graphics/contest/judge_symbols.gbapal.lz"
 
 	.align 2
 gTiles_8D1975C:: @ 8D1975C
-	.incbin "baserom.gba", 0x00d1975c, 0x20
+	.incbin "graphics/contest/heart.4bpp"
 
+	.align 2
 gUnknown_08D1977C:: @ 8D1977C
-	.incbin "baserom.gba", 0x00d1977c, 0xad4
+	.incbin "graphics/contest/misc_2.4bpp.lz"
 
+	.align 2
 gUnknown_08D1A250:: @ 8D1A250
-	.incbin "baserom.gba", 0x00d1a250, 0x114
+	.incbin "graphics/contest/misc_2_tilemap_1.bin.lz"
 
+	.align 2
 gUnknown_08D1A364:: @ 8D1A364
-	.incbin "baserom.gba", 0x00d1a364, 0x12c
+	.incbin "graphics/contest/misc_2_tilemap_2.bin.lz"
 
+	.align 2
 gUnknown_08D1A490:: @ 8D1A490
-	.incbin "baserom.gba", 0x00d1a490, 0x188
+	.incbin "graphics/contest/misc_2_tilemap_3.bin.lz"
 
+	.align 2
 gUnknown_08D1A618:: @ 8D1A618
-	.incbin "baserom.gba", 0x00d1a618, 0xec
+	.incbin "graphics/contest/misc_2.gbapal.lz"
 
 	.align 2
 gBattleAnimSpriteSheet_135:: @ 8D1A704
@@ -1162,7 +1325,11 @@ gBattleAnimSpritePalette_141:: @ 8D1B198
 gBattleAnimSpriteSheet_142:: @ 8D1B1B8
 	.incbin "graphics/battle_anims/sprites/142.4bpp.lz"
 
-	.incbin "baserom.gba", 0xd1b218, 0xb8
+	.align 2
+	.incbin "graphics/unused/old_beatup.4bpp.lz"
+
+	.align 2
+	.incbin "graphics/unused/old_beatup.gbapal.lz"
 
 	.align 2
 gBattleAnimSpriteSheet_147:: @ 8D1B2D0
@@ -1280,7 +1447,14 @@ gBattleAnimSpriteSheet_144:: @ 8D1BFC8
 gBattleAnimSpritePalette_144:: @ 8D1C040
 	.incbin "graphics/battle_anims/sprites/144.gbapal.lz"
 
-	.incbin "baserom.gba", 0xd1c060, 0x144
+	.align 2
+	.incbin "graphics/unknown/unknown_D1C060.4bpp.lz"
+
+	.align 2
+	.incbin "graphics/unknown/unknown_D1C060.gbapal.lz"
+
+	.align 2
+	.incbin "graphics/unknown/unknown_D1C060.bin.lz"
 
 	.align 2
 gBattleAnimSpriteSheet_162:: @ 8D1C1A4
@@ -1348,11 +1522,11 @@ gBattleAnimSpritePalette_172:: @ 8D1C728
 
 	.align 2
 gContestJudgeGfx::
-	.incbin "graphics/misc/judge.4bpp.lz"
+	.incbin "graphics/contest/judge.4bpp.lz"
 
 	.align 2
 gContest2Pal:: @ 8D1CA1C
-	.incbin "graphics/misc/judge.gbapal.lz"
+	.incbin "graphics/contest/judge.gbapal.lz"
 
 	.align 2
 gBattleAnimSpriteSheet_001:: @ 8D1CA44
@@ -1378,14 +1552,26 @@ gBattleAnimBackgroundPalette_00:: @ 8D1D1A0
 gBattleAnimBackgroundTilemap_00:: @ 8D1D1C0
 	.incbin "graphics/battle_anims/backgrounds/00.bin.lz"
 
+	.align 2
 gUnknown_08D1D410:: @ 8D1D410
-	.incbin "baserom.gba", 0x00d1d410, 0x13c
+	.incbin "graphics/battle_anims/masks/metal_shine.4bpp.lz"
 
+	.align 2
 gUnknown_08D1D54C:: @ 8D1D54C
-	.incbin "baserom.gba", 0x00d1d54c, 0x28
+	.incbin "graphics/battle_anims/masks/metal_shine.gbapal.lz"
 
+	.align 2
 gUnknown_08D1D574:: @ 8D1D574
-	.incbin "baserom.gba", 0x00d1d574, 0x3ec
+	.incbin "graphics/battle_anims/masks/metal_shine.bin.lz"
+
+	.align 2
+	.incbin "graphics/unused/goosuto.4bpp.lz" @ ghost
+
+	.align 2
+	.incbin "graphics/unused/goosuto.gbapal.lz"
+
+	.align 2
+	.incbin "graphics/unused/goosuto.bin.lz"
 
 	.align 2
 gBattleAnimSpriteSheet_174:: @ 8D1D960
@@ -1505,25 +1691,29 @@ gBattleAnimSpritePalette_186:: @ 8D1F508
 
 	.align 2
 gBattleWindowLargeGfx::
-	.incbin "graphics/interface/battle_window.4bpp.lz"
+	.incbin "graphics/battle_interface/window.4bpp.lz"
 
 	.align 2
 gBattleWindowSmallGfx::
-	.incbin "graphics/interface/battle_window2.4bpp.lz"
+	.incbin "graphics/battle_interface/window2.4bpp.lz"
 
 	.align 2
 gBattleWindowSmall2Gfx::
-	.incbin "graphics/interface/battle_window3.4bpp.lz"
+	.incbin "graphics/battle_interface/window3.4bpp.lz"
 
 	.align 2
 gBattleWindowSmall3Gfx::
-	.incbin "graphics/interface/battle_window4.4bpp.lz"
+	.incbin "graphics/battle_interface/window4.4bpp.lz"
 
 	.align 2
-gBattleWindowLarge2Gfx:: @ 8d1fc94
-	.incbin "graphics/interface/battle_window5.4bpp.lz"
+gBattleWindowLarge2Gfx::
+	.incbin "graphics/battle_interface/window5.4bpp.lz"
 
-	.incbin "baserom.gba", 0xd1ff0C, 0x74
+	.align 2
+	.incbin "graphics/unused/shadow.4bpp.lz"
+
+	.align 2
+	.incbin "graphics/unused/shadow.gbapal.lz"
 
 	.align 2
 gBattleAnimSpriteSheet_014:: @ 8D1FF80
@@ -1573,11 +1763,13 @@ gBattleAnimSpriteSheet_193:: @ 8D20890
 gBattleAnimSpritePalette_193:: @ 8D209EC
 	.incbin "graphics/battle_anims/sprites/193.gbapal.lz"
 
+	.align 2
 gUnknown_08D20A14:: @ 8D20A14
-	.incbin "baserom.gba", 0x00d20a14, 0x1c
+	.incbin "graphics/battle_anims/masks/curse.4bpp.lz"
 
+	.align 2
 gUnknown_08D20A30:: @ 8D20A30
-	.incbin "baserom.gba", 0x00d20a30, 0x100
+	.incbin "graphics/battle_anims/masks/curse.bin.lz"
 
 	.align 2
 gBattleAnimSpriteSheet_002:: @ 8D20B30
@@ -1680,7 +1872,6 @@ gBattleAnimSpriteSheet_206:: @ 8D227B0
 	.incbin "graphics/battle_anims/sprites/206.4bpp.lz"
 
 	.align 2
-gUnknown_08D229BC::
 gBattleAnimSpritePalette_206:: @ 8D229BC
 	.incbin "graphics/battle_anims/sprites/206.gbapal.lz"
 
@@ -1736,14 +1927,17 @@ gBattleAnimSpritePalette_210:: @ 8D2364C
 gBattleAnimSpritePalette_216:: @ 8D2366C
 	.incbin "graphics/battle_anims/sprites/216.gbapal.lz"
 
-gUnknown_08D2368C:: @ 8D2368C
-	.incbin "baserom.gba", 0x00d2368c, 0xa70
+	.align 2
+gAttractGfx:: @ 8D2368C
+	.incbin "graphics/battle_anims/backgrounds/attract.4bpp.lz"
 
-gUnknown_08D240FC:: @ 8D240FC
-	.incbin "baserom.gba", 0x00d240fc, 0x28
+	.align 2
+gAttractPal:: @ 8D240FC
+	.incbin "graphics/battle_anims/backgrounds/attract.gbapal.lz"
 
-gUnknown_08D24124:: @ 8D24124
-	.incbin "baserom.gba", 0x00d24124, 0x27C
+	.align 2
+gAttractTilemap:: @ 8D24124
+	.incbin "graphics/battle_anims/backgrounds/attract.bin.lz"
 
 	.align 2
 gBattleAnimSpriteSheet_217:: @ 8D243A0
@@ -1781,11 +1975,13 @@ gBattleAnimSpriteSheet_215:: @ 8D24BCC
 gBattleAnimSpritePalette_215:: @ 8D24D58
 	.incbin "graphics/battle_anims/sprites/215.gbapal.lz"
 
-gUnknown_08D24D7C:: @ 8D24D7C
-	.incbin "baserom.gba", 0x00d24d7c, 0x28
+	.align 2
+gBattleAnimBackgroundPalette_ScaryFace:: @ 8D24D7C
+	.incbin "graphics/battle_anims/backgrounds/scary_face.gbapal.lz"
 
-gUnknown_08D24DA4:: @ 8D24DA4
-	.incbin "baserom.gba", 0x00d24da4, 0x230
+	.align 2
+gBattleAnimBackgroundImage_ScaryFace:: @ 8D24DA4
+	.incbin "graphics/battle_anims/backgrounds/scary_face.4bpp.lz"
 
 	.align 2
 gBattleAnimSpritePalette_218:: @ 8D24FD4
@@ -2027,14 +2223,17 @@ gBattleAnimBackgroundImage_09:: @ 8D2A168
 gBattleAnimBackgroundTilemap_10:: @ 8D2A6E8
 	.incbin "graphics/battle_anims/backgrounds/10.bin.lz"
 
+	.align 2
 gUnknown_08D2A9E0:: @ 8D2A9E0
-	.incbin "baserom.gba", 0x00d2a9e0, 0xa0
+	.incbin "graphics/battle_anims/masks/morning_sun.4bpp.lz"
 
+	.align 2
 gUnknown_08D2AA80:: @ 8D2AA80
-	.incbin "baserom.gba", 0x00d2aa80, 0x18
+	.incbin "graphics/battle_anims/masks/morning_sun.gbapal.lz"
 
+	.align 2
 gUnknown_08D2AA98:: @ 8D2AA98
-	.incbin "baserom.gba", 0x00d2aa98, 0x11C
+	.incbin "graphics/battle_anims/masks/morning_sun.bin.lz"
 
 	.align 2
 gBattleAnimBackgroundTilemap_12:: @ 8D2ABB4
@@ -2092,14 +2291,17 @@ gBattleAnimSpriteSheet_240:: @ 8D2D1A0
 gBattleAnimSpritePalette_240:: @ 8D2D240
 	.incbin "graphics/battle_anims/sprites/240.gbapal.lz"
 
-gUnknown_08D2D268:: @ 8D2D268
-	.incbin "baserom.gba", 0x00d2d268, 0x24
+	.align 2
+gSubstituteDollPal:: @ 8D2D268
+	.incbin "graphics/battle_anims/sprites/substitute.gbapal.lz"
 
-gUnknown_08D2D28C:: @ 8D2D28C
-	.incbin "baserom.gba", 0x00d2d28c, 0x240
+	.align 2
+gSubstituteDollGfx:: @ 8D2D28C
+	.incbin "graphics/battle_anims/sprites/substitute.4bpp.lz"
 
-gUnknown_08D2D4CC:: @ 8D2D4CC
-	.incbin "baserom.gba", 0x00d2d4cc, 0x228
+	.align 2
+gSubstituteDollTilemap:: @ 8D2D4CC
+	.incbin "graphics/battle_anims/sprites/substitute.bin.lz"
 
 	.align 2
 gBattleAnimSpriteSheet_241:: @ 8D2D6F4
@@ -2133,47 +2335,61 @@ gBattleAnimSpriteSheet_243:: @ 8D2DA7C
 gBattleAnimSpritePalette_243:: @ 8D2DAA4
 	.incbin "graphics/battle_anims/sprites/243.gbapal.lz"
 
-gUnknown_08D2DACC:: @ 8D2DACC
-	.incbin "baserom.gba", 0x00d2dacc, 0x210
+	.align 2
+gBattleStatMask_Gfx:: @ 8D2DACC
+	.incbin "graphics/battle_anims/masks/stat.4bpp.lz"
 
-gUnknown_08D2DCDC:: @ 8D2DCDC
-	.incbin "baserom.gba", 0x00d2dcdc, 0x11c
+	.align 2
+gBattleStatMask1_Tilemap:: @ 8D2DCDC
+	.incbin "graphics/battle_anims/masks/stat_tilemap_1.bin.lz"
 
-gUnknown_08D2DDF8:: @ 8D2DDF8
-	.incbin "baserom.gba", 0x00d2ddf8, 0x11c
+	.align 2
+gBattleStatMask2_Tilemap:: @ 8D2DDF8
+	.incbin "graphics/battle_anims/masks/stat_tilemap_2.bin.lz"
 
-gUnknown_08D2DF14:: @ 8D2DF14
-	.incbin "baserom.gba", 0x00d2df14, 0x20
+	.align 2
+gBattleStatMask1_Pal:: @ 8D2DF14
+	.incbin "graphics/battle_anims/masks/stat1.gbapal.lz"
 
-gUnknown_08D2DF34:: @ 8D2DF34
-	.incbin "baserom.gba", 0x00d2df34, 0x20
+	.align 2
+gBattleStatMask2_Pal:: @ 8D2DF34
+	.incbin "graphics/battle_anims/masks/stat2.gbapal.lz"
 
-gUnknown_08D2DF54:: @ 8D2DF54
-	.incbin "baserom.gba", 0x00d2df54, 0x20
+	.align 2
+gBattleStatMask3_Pal:: @ 8D2DF54
+	.incbin "graphics/battle_anims/masks/stat3.gbapal.lz"
 
-gUnknown_08D2DF74:: @ 8D2DF74
-	.incbin "baserom.gba", 0x00d2df74, 0x20
+	.align 2
+gBattleStatMask4_Pal:: @ 8D2DF74
+	.incbin "graphics/battle_anims/masks/stat4.gbapal.lz"
 
-gUnknown_08D2DF94:: @ 8D2DF94
-	.incbin "baserom.gba", 0x00d2df94, 0x20
+	.align 2
+gBattleStatMask5_Pal:: @ 8D2DF94
+	.incbin "graphics/battle_anims/masks/stat5.gbapal.lz"
 
-gUnknown_08D2DFB4:: @ 8D2DFB4
-	.incbin "baserom.gba", 0x00d2dfb4, 0x20
+	.align 2
+gBattleStatMask6_Pal:: @ 8D2DFB4
+	.incbin "graphics/battle_anims/masks/stat6.gbapal.lz"
 
-gUnknown_08D2DFD4:: @ 8D2DFD4
-	.incbin "baserom.gba", 0x00d2dfd4, 0x20
+	.align 2
+gBattleStatMask7_Pal:: @ 8D2DFD4
+	.incbin "graphics/battle_anims/masks/stat7.gbapal.lz"
 
-gUnknown_08D2DFF4:: @ 8D2DFF4
-	.incbin "baserom.gba", 0x00d2dff4, 0x20
+	.align 2
+gBattleStatMask8_Pal:: @ 8D2DFF4
+	.incbin "graphics/battle_anims/masks/stat8.gbapal.lz"
 
+	.align 2
 gUnknown_08D2E014:: @ 8D2E014
-	.incbin "baserom.gba", 0x00d2e014, 0x13c
+	.incbin "graphics/battle_anims/masks/cure_bubbles.4bpp.lz"
 
+	.align 2
 gUnknown_08D2E150:: @ 8D2E150
-	.incbin "baserom.gba", 0x00d2e150, 0x20
+	.incbin "graphics/battle_anims/masks/cure_bubbles.gbapal.lz"
 
+	.align 2
 gUnknown_08D2E170:: @ 8D2E170
-	.incbin "baserom.gba", 0x00d2e170, 0x11C
+	.incbin "graphics/battle_anims/masks/cure_bubbles.bin.lz"
 
 	.align 2
 gBattleAnimSpritePalette_245:: @ 8D2E28C
@@ -2203,11 +2419,13 @@ gBattleAnimSpriteSheet_247:: @ 8D2E9F8
 gBattleAnimSpriteSheet_053:: @ 8D2EBDC
 	.incbin "graphics/battle_anims/sprites/053.4bpp.lz"
 
+	.align 2
 gUnknown_08D2EDFC:: @ 8D2EDFC
-	.incbin "baserom.gba", 0x00d2edfc, 0x4c
+	.incbin "graphics/battle_anims/masks/unknown_D2EDFC.4bpp.lz"
 
+	.align 2
 gUnknown_08D2EE48:: @ 8D2EE48
-	.incbin "baserom.gba", 0x00d2ee48, 0x108
+	.incbin "graphics/battle_anims/masks/unknown_D2EDFC.bin.lz"
 
 	.align 2
 gBattleAnimSpriteSheet_248:: @ 8D2EF50
@@ -2307,14 +2525,17 @@ gMonIcon_QuestionMark:: @ 8E5D5F0
 gMonFootprint_QuestionMark:: @ 8E5D9F0
 	.incbin "graphics/pokemon/question_mark/footprint.1bpp"
 
-gUnknown_08E5DA10:: @ 8E5DA10
-	.incbin "baserom.gba", 0x00e5da10, 0xe8
+	.align 2
+gVersusFrameGfx:: @ 8E5DA10
+	.incbin "graphics/battle_transitions/vs_frame.4bpp.lz"
 
-gUnknown_08E5DAF8:: @ 8E5DAF8
-	.incbin "baserom.gba", 0x00e5daf8, 0x10c
+	.align 2
+gVersusFrameTilemap:: @ 8E5DAF8
+	.incbin "graphics/battle_transitions/vs_frame.bin.lz"
 
-gUnknown_08E5DC04:: @ 8E5DC04
-	.incbin "baserom.gba", 0x00e5dc04, 0x28
+	.align 2
+gVersusFramePal:: @ 8E5DC04
+	.incbin "graphics/battle_transitions/vs_frame.gbapal.lz"
 
 	.align 2
 gUnknown_08E5DC2C:: @ 8E5DC2C
@@ -2424,56 +2645,69 @@ gBattleTerrainPalette_Plain:: @ 8E624D8
 gBattleTerrainTiles_Building:: @ 8E62514
 	.incbin "graphics/battle_terrain/building/tiles.4bpp.lz"
 
-gUnknown_08E62AC0:: @ 8E62AC0
-	.incbin "baserom.gba", 0x00e62ac0, 0x3c
+	.align 2
+gBattleTerrainPalette_BattleTower:: @ 8E62AC0
+	.incbin "graphics/battle_terrain/stadium/battle_tower.gbapal.lz" @ this is also used for link battles
 
 	.align 2
 gBattleTerrainTilemap_Building:: @ 8E62AFC
 	.incbin "graphics/battle_terrain/building/map.bin.lz"
 
-gUnknown_08E62DAC:: @ 8E62DAC
-	.incbin "baserom.gba", 0x00e62dac, 0x608
+	.align 2
+gBattleTerrainTiles_Stadium:: @ 8E62DAC
+	.incbin "graphics/battle_terrain/stadium/tiles.4bpp.lz"
 
-gUnknown_08E633B4:: @ 8E633B4
-	.incbin "baserom.gba", 0x00e633b4, 0x2b0
+	.align 2
+gBattleTerrainTilemap_Stadium:: @ 8E633B4
+	.incbin "graphics/battle_terrain/stadium/map.bin.lz"
 
 	.align 2
 gBattleTerrainPalette_Building:: @ 8E63664
 	.incbin "graphics/battle_terrain/building/palette.gbapal.lz"
 
 	.align 2
-gUnknown_08E636A4:: @ 8E636A4
-	.incbin "baserom.gba", 0x00e636a4, 0x3c
+gBattleTerrainPalette_Kyogre::
+	.incbin "graphics/battle_terrain/water/kyogre.gbapal.lz"
 
-gUnknown_08E636E0:: @ 8E636E0
-	.incbin "baserom.gba", 0x00e636e0, 0x58
+	.align 2
+gBattleTerrainPalette_Groudon::
+	.incbin "graphics/battle_terrain/cave/groudon.gbapal.lz"
 
-gUnknown_08E63738:: @ 8E63738
-	.incbin "baserom.gba", 0x00e63738, 0x3c
+	.align 2
+gBattleTerrainPalette_BuildingGym:: @ 8E63738
+	.incbin "graphics/battle_terrain/building/palette2.gbapal.lz"
 
-gUnknown_08E63774:: @ 8E63774
-	.incbin "baserom.gba", 0x00e63774, 0x3c
+	.align 2
+gBattleTerrainPalette_BuildingLeader:: @ 8E63774
+	.incbin "graphics/battle_terrain/building/palette3.gbapal.lz"
 
-gUnknown_08E637B0:: @ 8E637B0
-	.incbin "baserom.gba", 0x00e637b0, 0x60
+	.align 2
+gBattleTerrainPalette_StadiumAqua:: @ 8E637B0
+	.incbin "graphics/battle_terrain/stadium/palette1.gbapal.lz"
 
-gUnknown_08E63810:: @ 8E63810
-	.incbin "baserom.gba", 0x00e63810, 0x6c
+	.align 2
+gBattleTerrainPalette_StadiumMagma:: @ 8E63810
+	.incbin "graphics/battle_terrain/stadium/palette2.gbapal.lz"
 
-gUnknown_08E6387C:: @ 8E6387C
-	.incbin "baserom.gba", 0x00e6387c, 0x50
+	.align 2
+gBattleTerrainPalette_StadiumSidney:: @ 8E6387C
+	.incbin "graphics/battle_terrain/stadium/palette3.gbapal.lz"
 
-gUnknown_08E638CC:: @ 8E638CC
-	.incbin "baserom.gba", 0x00e638cc, 0x48
+	.align 2
+gBattleTerrainPalette_StadiumPhoebe:: @ 8E638CC
+	.incbin "graphics/battle_terrain/stadium/palette4.gbapal.lz"
 
-gUnknown_08E63914:: @ 8E63914
-	.incbin "baserom.gba", 0x00e63914, 0x44
+	.align 2
+gBattleTerrainPalette_StadiumGlacia:: @ 8E63914
+	.incbin "graphics/battle_terrain/stadium/palette5.gbapal.lz"
 
-gUnknown_08E63958:: @ 8E63958
-	.incbin "baserom.gba", 0x00e63958, 0x50
+	.align 2
+gBattleTerrainPalette_StadiumDrake:: @ 8E63958
+	.incbin "graphics/battle_terrain/stadium/palette6.gbapal.lz"
 
-gUnknown_08E639A8:: @ 8E639A8
-	.incbin "baserom.gba", 0x00e639a8, 0x3C
+	.align 2
+gBattleTerrainPalette_StadiumSteven:: @ 8E639A8
+	.incbin "graphics/battle_terrain/stadium/palette7.gbapal.lz"
 
 	.align 2
 gBattleTerrainAnimTiles_TallGrass:: @ 8E639E4
@@ -2551,13 +2785,15 @@ gBattleTerrainAnimTilemap_Building:: @ 8E67C48
 gBattleAnimSpriteSheet_261:: @ 8E67D6C
 	.incbin "graphics/battle_anims/sprites/261.4bpp.lz"
 
-gUnknown_08E67ED8:: @ 8E67ED8
-	.incbin "baserom.gba", 0x00e67ed8, 0x17c
+	.align 2
+gBattleAnimBackgroundTilemap_SandstormBrew:: @ 8E67ED8
+	.incbin "graphics/battle_anims/backgrounds/sandstorm_brew.bin.lz"
 
-gUnknown_08E68054:: @ 8E68054
-	.incbin "baserom.gba", 0x00e68054, 0x52c
+	.align 2
+gBattleAnimBackgroundImage_SandstormBrew:: @ 8E68054
+	.incbin "graphics/battle_anims/backgrounds/sandstorm_brew.4bpp.lz"
 
-gUnknown_08E68580:: @ 8E68580
+	.align 2
 gBattleAnimSpritePalette_261:: @ 8E68580
 	.incbin "graphics/battle_anims/sprites/261.gbapal.lz"
 
@@ -2591,13 +2827,15 @@ gBattleAnimSpritePalette_262:: @ 8E693DC
 
 	.align 2
 gContestNextTurnGfx::
-	.incbin "graphics/misc/nextturn.4bpp.lz"
+	.incbin "graphics/contest/nextturn.4bpp.lz"
 
-gUnknown_08E69478:: @ 8E69478
-	.incbin "baserom.gba", 0x00e69478, 0x100
+	.align 2
+gContestNextTurnNumbersGfx:: @ 8E69478
+	.incbin "graphics/contest/nextturn_numbers.4bpp"
 
-gUnknown_08E69578:: @ 8E69578
-	.incbin "baserom.gba", 0x00e69578, 0x40
+	.align 2
+gContestNextTurnRandomGfx:: @ 8E69578
+	.incbin "graphics/contest/nextturn_random.4bpp"
 
 	.align 2
 gBattleAnimSpriteSheet_264:: @ 8E695B8
@@ -2621,14 +2859,15 @@ gBattleAnimSpritePalette_068:: @ 8E69628
 
 	.align 2
 gContestApplauseGfx::
-	.incbin "graphics/misc/applause.4bpp.lz"
+	.incbin "graphics/contest/applause.4bpp.lz"
 
-gUnknown_08E6978C:: @ 8E6978C
-	.incbin "baserom.gba", 0x00e6978c, 0x80
+	.align 2
+gContestApplauseMeterGfx:: @ 8E6978C
+	.incbin "graphics/contest/applause_meter.4bpp"
 
 	.align 2
 gContestPal::
-	.incbin "graphics/misc/nextturn.gbapal"
+	.incbin "graphics/contest/nextturn.gbapal"
 
 	.align 2
 gBattleAnimSpriteSheet_272:: @ 8E6982C
@@ -2686,14 +2925,17 @@ gBattleAnimSpriteSheet_280:: @ 8E6A2E8
 gBattleAnimSpritePalette_280:: @ 8E6A6E4
 	.incbin "graphics/battle_anims/sprites/280.gbapal.lz"
 
-gUnknown_08E6A704:: @ 8E6A704
-	.incbin "baserom.gba", 0x00e6a704, 0x24
+	.align 2
+gBattleAnimBackgroundImageMuddyWater_Pal:: @ 8E6A704
+	.incbin "graphics/battle_anims/backgrounds/water_muddy.gbapal.lz"
 
-gUnknown_08E6A728:: @ 8E6A728
-	.incbin "baserom.gba", 0x00e6a728, 0x30
+	.align 2
+gEnemyMonShadow_Gfx:: @ 8E6A728
+	.incbin "graphics/battle_interface/enemy_mon_shadow.4bpp.lz"
 
-gUnknown_08E6A758:: @ 8E6A758
-	.incbin "baserom.gba", 0x00e6a758, 0x84
+	.align 2
+gBattleGfx_BallStatusBar:: @ 8E6A758
+	.incbin "graphics/battle_interface/bar.4bpp.lz"
 
 	.align 2
 gMonIcon_Egg:: @ 8E6A7DC
@@ -2719,7 +2961,8 @@ gBattleAnimSpritePalette_287:: @ 8E6BBB4
 gBattleAnimBackgroundPalette_24:: @ 8E6BBDC
 	.incbin "graphics/battle_anims/backgrounds/24.gbapal.lz"
 
-	.incbin "baserom.gba", 0xe6bc04, 0x4FC
+	.align 2
+	.incbin "baserom.gba", 0xE6BC04, 0x4FB @ LZ, uncomp. size = 0x500
 
 	.align 2
 gUnknown_08E6C100:: @ 8E6C100
@@ -2753,8 +2996,9 @@ gBattleAnimSpritePalette_277:: @ 8E6DA2C
 gBattleAnimSpriteSheet_277:: @ 8E6DA54
 	.incbin "graphics/battle_anims/sprites/277.4bpp.lz"
 
-gUnknown_08E6DE48:: @ 8E6DE48
-	.incbin "baserom.gba", 0x00e6de48, 0x178
+	.align 2
+gWeatherFog1Tilemap:: @ 8E6DE48
+	.incbin "graphics/weather/fog1.bin.lz"
 
 	.align 2
 gBattleAnimSpritePalette_283:: @ 8E6DFC0
@@ -2764,14 +3008,17 @@ gBattleAnimSpritePalette_283:: @ 8E6DFC0
 gBattleAnimSpriteSheet_283:: @ 8E6DFDC
 	.incbin "graphics/battle_anims/sprites/283.4bpp.lz"
 
-gUnknown_08E6E100:: @ 8E6E100
-	.incbin "baserom.gba", 0x00e6e100, 0x1e4
+	.align 2
+gBattleAnimBackgroundTilemap_ScaryFacePlayer:: @ 8E6E100
+	.incbin "graphics/battle_anims/backgrounds/scary_face_player.bin.lz"
 
-gUnknown_08E6E2E4:: @ 8E6E2E4
-	.incbin "baserom.gba", 0x00e6e2e4, 0x1e4
+	.align 2
+gBattleAnimBackgroundTilemap_ScaryFaceOpponent:: @ 8E6E2E4
+	.incbin "graphics/battle_anims/backgrounds/scary_face_opponent.bin.lz"
 
-gUnknown_08E6E4C8:: @ 8E6E4C8
-	.incbin "baserom.gba", 0x00e6e4c8, 0x1e4
+	.align 2
+gBattleAnimBackgroundTilemap_ScaryFaceContest:: @ 8E6E4C8
+	.incbin "graphics/battle_anims/backgrounds/scary_face_contest.bin.lz"
 
 	.align 2
 gBattleAnimSpriteSheet_263:: @ 8E6E6AC
@@ -2849,20 +3096,25 @@ gBattleAnimSpriteSheet_285:: @ 8E6F558
 gBattleAnimSpritePalette_285:: @ 8E6F5F8
 	.incbin "graphics/battle_anims/sprites/285.gbapal.lz"
 
-gUnknown_08E6F620:: @ 8E6F620
-	.incbin "baserom.gba", 0x00e6f620, 0x1320
+	.align 2
+gBattleAnimBackgroundImage_Surf:: @ 8E6F620
+	.incbin "graphics/battle_anims/backgrounds/water.4bpp.lz"
 
-gUnknown_08E70940:: @ 8E70940
-	.incbin "baserom.gba", 0x00e70940, 0x28
+	.align 2
+gBattleAnimBackgroundPalette_Surf:: @ 8E70940
+	.incbin "graphics/battle_anims/backgrounds/water.gbapal.lz"
 
+	.align 2
 gUnknown_08E70968:: @ 8E70968
-	.incbin "baserom.gba", 0x00e70968, 0x2d0
+	.incbin "baserom.gba", 0xE70968, 0x2D0 @ LZ, uncomp. size = 0x1000
 
+	.align 2
 gUnknown_08E70C38:: @ 8E70C38
-	.incbin "baserom.gba", 0x00e70c38, 0x2d4
+	.incbin "baserom.gba", 0xE70C38, 0x2D3 @ LZ, uncomp. size = 0x1000
 
+	.align 2
 gUnknown_08E70F0C:: @ 8E70F0C
-	.incbin "baserom.gba", 0x00e70f0c, 0x2f4
+	.incbin "baserom.gba", 0xE70F0C, 0x2F2 @ LZ, uncomp. size = 0x1000
 
 	.align 2
 gBattleAnimSpritePalette_286:: @ 8E71200
@@ -2876,30 +3128,39 @@ gBattleAnimSpriteSheet_188:: @ 8E71228
 gBattleAnimSpritePalette_188:: @ 8E7133C
 	.incbin "graphics/battle_anims/sprites/188.gbapal.lz"
 
-gUnknown_08E71354:: @ 8E71354
-	.incbin "baserom.gba", 0x00e71354, 0x34c
+	.align 2
+gPartyMenuMisc_Gfx:: @ 8E71354
+	.incbin "graphics/interface/party_menu_misc.4bpp.lz"
 
-gUnknown_08E716A0:: @ 8E716A0
-	.incbin "baserom.gba", 0x00e716a0, 0xe8
+	.align 2
+gPartyMenuMisc_Pal:: @ 8E716A0
+	.incbin "graphics/interface/party_menu_misc.gbapal.lz"
 
-gUnknown_08E71788:: @ 8E71788
-	.incbin "baserom.gba", 0x00e71788, 0x10c
+	.align 2
+gPartyMenuMisc_Tilemap:: @ 8E71788
+	.incbin "graphics/interface/party_menu_misc.bin.lz"
 
-gUnknown_08E71894:: @ 8E71894
-	.incbin "baserom.gba", 0x00e71894, 0xa0
+	.align 2
+gPartyMenuHpBar_Gfx:: @ 8E71894
+	.incbin "graphics/interface/party_menu_hpbar.4bpp.lz"
 
-gUnknown_08E71934:: @ 8E71934
-	.incbin "baserom.gba", 0x00e71934, 0x3dc
+	.align 2
+gPartyMenuOrderText_Gfx:: @ 8E71934
+	.incbin "graphics/interface/party_menu_ordertext.4bpp.lz"
 
-gUnknown_08E71D10:: @ 8E71D10
-	.incbin "baserom.gba", 0x00e71d10, 0x9d4
+	.align 2
+gMoveTypes_Gfx:: @ 8E71D10
+	.incbin "graphics/types/move_types.4bpp.lz"
 
-gUnknown_08E726E4:: @ 8E726E4
-	.incbin "baserom.gba", 0x00e726e4, 0x68
+	.align 2
+gMoveTypes_Pal:: @ 8E726E4
+	.incbin "graphics/types/move_types.gbapal.lz"
 
+	.align 2
 gMenuSummaryGfx:: @ 8E7274C
 	.incbin "graphics/interface/summary_frames.4bpp.lz" @ the arrows appear to be unused.
 
+	.align 2
 gMenuSummaryPal:: @ 8E72848
 	.incbin "graphics/interface/summary_frames.gbapal.lz"
 
@@ -2911,17 +3172,21 @@ gStatusGfx_Icons:: @ 8E72860
 gStatusPal_Icons:: @ 8E72A50
 	.incbin "graphics/interface/status_icons.gbapal.lz"
 
-gUnknown_08E72A78:: @ 8E72A78
-	.incbin "baserom.gba", 0x00e72a78, 0x9f0
+	.align 2
+gStatusScreen_Gfx:: @ 8E72A78
+	.incbin "graphics/interface/status_screen.4bpp.lz"
 
-gUnknown_08E73468:: @ 8E73468
-	.incbin "baserom.gba", 0x00e73468, 0xa0
+	.align 2
+gStatusScreen_Pal:: @ 8E73468
+	.incbin "graphics/interface/status_screen.gbapal.lz"
 
+	.align 2
 gUnknown_08E73508:: @ 8E73508
-	.incbin "baserom.gba", 0x00e73508, 0x800
+	.incbin "baserom.gba", 0xE73508, 0x800
 
-gUnknown_08E73D08:: @ 8E73D08
-	.incbin "baserom.gba", 0x00e73d08, 0x180
+	.align 2
+gStatusScreen_Tilemap:: @ 8E73D08
+	.incbin "graphics/interface/status_screen.bin.lz"
 
 gUnknown_08E73E88:: @ 8E73E88
 	.incbin "baserom.gba", 0x00e73e88, 0x800
@@ -2929,8 +3194,9 @@ gUnknown_08E73E88:: @ 8E73E88
 gUnknown_08E74688:: @ 8E74688
 	.incbin "baserom.gba", 0x00e74688, 0x800
 
+	.align 2
 gUnknown_08E74E88:: @ 8E74E88
-	.incbin "baserom.gba", 0x00e74e88, 0x19c
+	.incbin "baserom.gba", 0xE74E88, 0x19C @ LZ, uncomp. size = 0x800
 
 	.align 2
 gBagMaleTiles:: @ 8E75024
@@ -2945,37 +3211,43 @@ gBagPalette:: @ 8E76700
 	.incbin "graphics/misc/bag.gbapal.lz"
 
 	.align 2
-gUnknown_08E76728:: @ 8E76728
-	.incbin "baserom.gba", 0x00e76728, 0x86c
+gBagScreen_Gfx:: @ 8E76728
+	.incbin "graphics/interface/bag_screen.4bpp.lz"
 
-gUnknown_08E76F94:: @ 8E76F94
-	.incbin "baserom.gba", 0x00e76f94, 0x38
+	.align 2
+gBagScreenMale_Pal:: @ 8E76F94
+	.incbin "graphics/interface/bag_screen_male.gbapal.lz"
 
-gUnknown_08E76FCC:: @ 8E76FCC
-	.incbin "baserom.gba", 0x00e76fcc, 0x38
+	.align 2
+gBagScreenFemale_Pal:: @ 8E76FCC
+	.incbin "graphics/interface/bag_screen_female.gbapal.lz"
 
 gUnknown_08E77004:: @ 8E77004
 	.incbin "baserom.gba", 0x00e77004, 0x800
 
-gUnknown_08E77804:: @ 8E77804
-	.incbin "baserom.gba", 0x00e77804, 0xfc
+	.align 2
+gBuyMenuFrame_Gfx:: @ 8E77804
+	.incbin "graphics/interface/mart_frame.4bpp.lz"
 
 	.align 2
 gMenuMoneyPal:: @ 8E77900
 	.incbin "graphics/interface/money.gbapal.lz"
 
-gUnknown_08E77928:: @ 8E77928
-	.incbin "baserom.gba", 0x00e77928, 0x134
+	.align 2
+gBuyMenuFrame_Tilemap:: @ 8E77928
+	.incbin "graphics/interface/mart_frame.bin.lz"
 
 	.align 2
 gMenuMoneyGfx:: @ 8E77A5C
 	.incbin "graphics/interface/money.4bpp.lz"
 
-gUnknown_08E77AE4:: @ 8E77AE4
-	.incbin "baserom.gba", 0x00e77ae4, 0x23c
+	.align 2
+gMenuPokeblock_Gfx:: @ 8E77AE4
+	.incbin "graphics/interface/pokeblock_case_frame.4bpp.lz"
 
-gUnknown_08E77D20:: @ 8E77D20
-	.incbin "baserom.gba", 0x00e77d20, 0x70
+	.align 2
+gMenuPokeblock_Pal:: @ 8E77D20
+	.incbin "graphics/interface/pokeblock_case_frame.gbapal.lz"
 
 	.align 2
 gMenuPokeblockDevice_Gfx:: @ 8E77D90
@@ -2985,73 +3257,93 @@ gMenuPokeblockDevice_Gfx:: @ 8E77D90
 gMenuPokeblockDevice_Pal:: @ 8E78050
 	.incbin "graphics/interface/pokeblock_device.gbapal.lz"
 
-gUnknown_08E78078:: @ 8E78078
-	.incbin "baserom.gba", 0x00e78078, 0x150
+	.align 2
+gMenuPokeblock_Tilemap:: @ 8E78078
+	.incbin "graphics/interface/pokeblock.bin.lz"
 
 	.align 2
 gPokeblock_Gfx::
-	.incbin "graphics/misc/pokeblock.4bpp.lz"
-
-gUnknown_08E781E4::
-	.incbin "baserom.gba", 0x00e781e4, 0x14
-
-gUnknown_08E781F8::
-	.incbin "baserom.gba", 0x00e781f8, 0x14
-
-gUnknown_08E7820C::
-	.incbin "baserom.gba", 0x00e7820c, 0x14
-
-gUnknown_08E78220::
-	.incbin "baserom.gba", 0x00e78220, 0x14
-
-gUnknown_08E78234::
-	.incbin "baserom.gba", 0x00e78234, 0x14
-
-gUnknown_08E78248::
-	.incbin "baserom.gba", 0x00e78248, 0x14
-
-gUnknown_08E7825C::
-	.incbin "baserom.gba", 0x00e7825c, 0x14
-
-gUnknown_08E78270::
-	.incbin "baserom.gba", 0x00e78270, 0x14
-
-gUnknown_08E78284::
-	.incbin "baserom.gba", 0x00e78284, 0x14
-
-gUnknown_08E78298::
-	.incbin "baserom.gba", 0x00e78298, 0x14
-
-gUnknown_08E782ac::
-	.incbin "baserom.gba", 0x00e782ac, 0x14
-
-gUnknown_08E782c0::
-	.incbin "baserom.gba", 0x00e782c0, 0x14
-
-gUnknown_08E782d4::
-	.incbin "baserom.gba", 0x00e782d4, 0x14
-
-gUnknown_08E782e8::
-	.incbin "baserom.gba", 0x00e782e8, 0x14
-
-gUnknown_08E782FC:: @ 8E782FC
-	.incbin "baserom.gba", 0x00e782fc, 0x100
-
-gUnknown_08E783FC:: @ 8E783FC
-	.incbin "baserom.gba", 0x00e783fc, 0x440
+	.incbin "graphics/pokeblock/pokeblock.4bpp.lz"
 
 	.align 2
-gUnknown_08E7883C:: @ 8E7883C
-	.incbin "graphics/battle_transitions/vs.gbapal.lz"
+gPokeblockRed_Pal::
+	.incbin "graphics/pokeblock/red.gbapal.lz"
 
+	.align 2
+gPokeblockBlue_Pal::
+	.incbin "graphics/pokeblock/blue.gbapal.lz"
+
+	.align 2
+gPokeblockPink_Pal::
+	.incbin "graphics/pokeblock/pink.gbapal.lz"
+
+	.align 2
+gPokeblockGreen_Pal::
+	.incbin "graphics/pokeblock/green.gbapal.lz"
+
+	.align 2
+gPokeblockYellow_Pal::
+	.incbin "graphics/pokeblock/yellow.gbapal.lz"
+
+	.align 2
+gPokeblockPurple_Pal::
+	.incbin "graphics/pokeblock/purple.gbapal.lz"
+
+	.align 2
+gPokeblockIndigo_Pal::
+	.incbin "graphics/pokeblock/indigo.gbapal.lz"
+
+	.align 2
+gPokeblockBrown_Pal::
+	.incbin "graphics/pokeblock/brown.gbapal.lz"
+
+	.align 2
+gPokeblockLiteBlue_Pal::
+	.incbin "graphics/pokeblock/liteblue.gbapal.lz"
+
+	.align 2
+gPokeblockOlive_Pal::
+	.incbin "graphics/pokeblock/olive.gbapal.lz"
+
+	.align 2
+gPokeblockGray_Pal::
+	.incbin "graphics/pokeblock/gray.gbapal.lz"
+
+	.align 2
+gPokeblockBlack_Pal::
+	.incbin "graphics/pokeblock/black.gbapal.lz"
+
+	.align 2
+gPokeblockWhite_Pal::
+	.incbin "graphics/pokeblock/white.gbapal.lz"
+
+	.align 2
+gPokeblockGold_Pal::
+	.incbin "graphics/pokeblock/gold.gbapal.lz"
+
+	.align 2
+gUnknown_08E782FC:: @ 8E782FC
+	.incbin "baserom.gba", 0xE782FC, 0x100 @ LZ, uncomp. size = 0x800
+
+	.align 2
+gBerryCheck_Gfx:: @ 8E783FC
+	.incbin "graphics/interface/check_berry.4bpp.lz"
+
+	.align 2
+gBerryCheck_Pal:: @ 8E7883C
+	.incbin "graphics/interface/check_berry.gbapal.lz"
+
+	.align 2
 gUnknown_08E788E4:: @ 8E788E4
-	.incbin "baserom.gba", 0x00e788e4, 0x1a0
+	.incbin "baserom.gba", 0xE788E4, 0x19E @ LZ, uncomp. size = 0x800
 
+	.align 2
 gUnknown_08E78A84:: @ 8E78A84
-	.incbin "baserom.gba", 0x00e78a84, 0x130
+	.incbin "baserom.gba", 0xE78A84, 0x12D @ LZ, uncomp. size = 0x800
 
-gUnknown_08E78BB4:: @ 8E78BB4
-	.incbin "baserom.gba", 0x00e78bb4, 0x14C
+	.align 2
+gBerryCheckCircle_Gfx:: @ 8E78BB4
+	.incbin "graphics/interface/check_berry_circle.4bpp.lz"
 
 @ 8E78D00
 	.include "data/graphics/berries/graphics.s"
@@ -3080,17 +3372,37 @@ gBattleAnimSpritePalette_271:: @ 8E7EB24
 gBattleAnimSpriteSheet_271:: @ 8E7EB3C
 	.incbin "graphics/battle_anims/sprites/271.4bpp.lz"
 
-gUnknown_08E7EB9C:: @ 8E7EB9C
-	.incbin "baserom.gba", 0x00e7eb9c, 0xa0
+	.align 2
+gCableCarBG_Pal:: @ 8E7EB9C
+	.incbin "graphics/misc/cable_car_bg.gbapal"
 
-gUnknown_08E7EC3C:: @ 8E7EC3C
-	.incbin "baserom.gba", 0x00e7ec3c, 0x1d30
+	.align 2
+gCableCar_Pal:: @ 8E7EC1C
+	.incbin "graphics/misc/cable_car.gbapal"
 
+	.align 2
+gCableCarBG_Gfx:: @ 8E7EC3C
+	.incbin "graphics/misc/cable_car_bg.4bpp.lz"
+
+	.align 2
+gCableCar_Gfx:: @ 8E80614
+	.incbin "graphics/misc/cable_car.4bpp.lz"
+
+	.align 2
+gCableCarDoor_Gfx:: @ 8E80914
+	.incbin "graphics/misc/cable_car_door.4bpp.lz"
+
+	.align 2
+gCableCarCord_Gfx:: @ 8E80944
+	.incbin "graphics/misc/cable_car_cord.4bpp.lz"
+
+	.align 2
 gUnknown_08E8096C:: @ 8E8096C
-	.incbin "baserom.gba", 0x00e8096c, 0x72c
+	.incbin "baserom.gba", 0xE8096C, 0x72C @ LZ, uncomp. size = 0x2000
 
+	.align 2
 gUnknown_08E81098:: @ 8E81098
-	.incbin "baserom.gba", 0x00e81098, 0x10A8
+	.incbin "baserom.gba", 0xE81098, 0x10A5 @ LZ, uncomp. size = 0x4000
 
 	.align 2
 gRouletteCenter_Gfx::
@@ -3306,10 +3618,11 @@ gNamingScreenLowerTextTiles:: @ 8E85778
 gNamingScreenUpperTextTiles:: @ 8E857D8
 	.incbin "graphics/naming_screen/upper_text.4bpp"
 
-	.incbin "baserom.gba", 0x00e85838, 0x160
+	.space 352
 
-gUnknown_08E85998:: @ 8E85998
-	.incbin "baserom.gba", 0x00e85998, 0x800
+	.align 2
+gNamingScreenMenu_Gfx:: @ 8E85998
+	.incbin "graphics/naming_screen/menu.4bpp"
 
 	.align 2
 gNamingScreenPalettes:: @ 8E86198
@@ -3323,20 +3636,21 @@ gNamingScreenPalettes:: @ 8E86198
 gUnknown_08E86258:: @ 8E86258
 	.incbin "baserom.gba", 0x00e86258, 0x500
 
-gUnknown_08E86758:: @ 8E86758
-	.incbin "baserom.gba", 0x00e86758, 0xd70
+	.align 2
+gPokedexMenu_Gfx:: @ 8E86758
+	.incbin "graphics/pokedex/menu.4bpp.lz"
 
-gUnknown_08E874C8::
-	.incbin "baserom.gba", 0x00e874c8, 0x62c
+	.align 2
+gPokedexMenu2_Gfx:: @ 8E874C8
+	.incbin "graphics/pokedex/menu2.4bpp.lz"
 
-gUnknown_08E87AF4::
-	.incbin "baserom.gba", 0x00e87af4, 0x2
+	.align 2
+gPokedexMenu_Pal:: @ 8E87AF4
+	.incbin "graphics/pokedex/menu1.gbapal"
 
-gUnknown_08E87AF6:: @ 8E87AF6
-	.incbin "baserom.gba", 0x00e87af6, 0x60
-
-gUnknown_08E87B56:: @ 8E87B56
-	.incbin "baserom.gba", 0x00e87b56, 0x5e
+	.align 2
+gPokedexMenu2_Pal:: @ 8E87B54
+	.incbin "graphics/pokedex/menu2.gbapal"
 
 	.align 2
 gAreaUnknownTiles:: @ 8E87BB4
@@ -3346,100 +3660,145 @@ gAreaUnknownTiles:: @ 8E87BB4
 gAreaUnknownPalette:: @ 8E87D90
 	.incbin "graphics/pokedex/area_unknown.gbapal"
 
-gUnknown_08E87DB0:: @ 8E87DB0
-	.incbin "baserom.gba", 0x00e87db0, 0x52a
+	.align 2
+gPokedexMenuSearch_Gfx:: @ 8E87DB0
+	.incbin "graphics/pokedex/menu_search.4bpp.lz"
 
-gUnknown_08E882DA:: @ 8E882DA
-	.incbin "baserom.gba", 0x00e882da, 0x7e
+	.align 2
+gPokedexMenuSearch_Pal:: @ 8E882D8
+	.incbin "graphics/pokedex/menu3.gbapal"
 
-gUnknown_08E88358:: @ 8E88358
-	.incbin "baserom.gba", 0x00e88358, 0x174
+	.align 2
+gPokenavMainMenu_Gfx:: @ 8E88358
+	.incbin "graphics/pokenav/mainmenu.4bpp.lz"
 
-gUnknown_08E884CC:: @ 8E884CC
-	.incbin "baserom.gba", 0x00e884cc, 0x55c
+	.align 2
+gPokenavMenuOptions_Gfx:: @ 8E884CC
+	.incbin "graphics/pokenav/menu_options.4bpp.lz"
 
-gUnknown_08E88A28:: @ 8E88A28
-	.incbin "baserom.gba", 0x00e88a28, 0x20
+	.align 2
+gPokenavMenuOptions1_Pal:: @ 8E88A28
+	.incbin "graphics/pokenav/pokenav1.gbapal"
 
-gUnknown_08E88A48:: @ 8E88A48
-	.incbin "baserom.gba", 0x00e88a48, 0x40
+	.align 2
+gPokenavMenuOptions2_Pal:: @ 8E88A48
+	.incbin "graphics/pokenav/pokenav2.gbapal"
 
-gUnknown_08E88A88:: @ 8E88A88
-	.incbin "baserom.gba", 0x00e88a88, 0x2c4
+	.align 2
+gPokenavMenuOptions3_Pal:: @ 8E88A68
+	.incbin "graphics/pokenav/pokenav3.gbapal"
 
-gUnknown_08E88D4C:: @ 8E88D4C
-	.incbin "baserom.gba", 0x00e88d4c, 0x578
+	.align 2
+gPokenavHoennMapHeader_Gfx:: @ 8E88A88
+	.incbin "graphics/pokenav/map_header.4bpp.lz"
 
-gUnknown_08E892C4:: @ 8E892C4
-	.incbin "baserom.gba", 0x00e892c4, 0x364
+	.align 2
+gPokenavHoennMapMisc_Gfx:: @ 8E88D4C
+	.incbin "graphics/pokenav/map_misc2.4bpp.lz"
 
-gUnknown_08E89628:: @ 8E89628
-	.incbin "baserom.gba", 0x00e89628, 0x20
+	.align 2
+gPokenavHoennMapSquares_Gfx:: @ 8E892C4
+	.incbin "graphics/pokenav/map_squares.4bpp.lz"
 
-gUnknown_08E89648:: @ 8E89648
+	.align 2
+gPokenavHoennMap1_Pal:: @ 8E89628
+	.incbin "graphics/pokenav/map_menu.gbapal"
+
+	.align 2
+gPokenavHoennMapSquares_Pal:: @ 8E89648
 	.incbin "graphics/pokenav/map_squares.gbapal"
 
-gUnknown_08E89668:: @ 8E89668
-	.incbin "baserom.gba", 0x00e89668, 0x2f0
+	.align 2
+gPokenavConditionMenu_Gfx:: @ 8E89668
+	.incbin "graphics/pokenav/condition_menu.4bpp.lz"
 
-gUnknown_08E89958:: @ 8E89958
-	.incbin "baserom.gba", 0x00e89958, 0x20
+	.align 2
+gPokenavConditionMenu_Pal:: @ 8E89958
+	.incbin "graphics/pokenav/condition1.gbapal"
 
-gUnknown_08E89978:: @ 8E89978
-	.incbin "baserom.gba", 0x00e89978, 0x160
+	.align 2
+gPokenavConditionMenuHeader_Gfx:: @ 8E89978
+	.incbin "graphics/pokenav/condition_menu_header.4bpp.lz"
 
-gUnknown_08E89AD8:: @ 8E89AD8
-	.incbin "baserom.gba", 0x00e89ad8, 0x6e8
+	.align 2
+gPokenavConditionView_Gfx:: @ 8E89AD8
+	.incbin "graphics/pokenav/condition_view.4bpp.lz"
 
-gUnknown_08E8A1C0:: @ 8E8A1C0
-	.incbin "baserom.gba", 0x00e8a1c0, 0x2
+	.align 2
+gPokenavConditionMenu2_Pal:: @ 8E8A1C0
+	.incbin "graphics/pokenav/condition2.gbapal"
 
-gUnknown_08E8A1C2:: @ 8E8A1C2
-	.incbin "baserom.gba", 0x00e8a1c2, 0x1e
+	.align 2
+gPokenavConditionMenuOptions_Gfx:: @ 8E8A1E0
+	.incbin "graphics/pokenav/condition_menu_options.4bpp.lz"
 
-gUnknown_08E8A1E0:: @ 8E8A1E0
-	.incbin "baserom.gba", 0x00e8a1e0, 0x3b8
-	.incbin "graphics/pokenav/contest_pokeball.gbapal"
-	.incbin "baserom.gba", 0x00E8A5B8, 0x20
+	.align 2
+gPokenavConditionMenuCancel_Gfx:: @ 8E8A498
+	.incbin "graphics/pokenav/condition_cancel.4bpp"
 
-gUnknown_08E8A5D8:: @ 8E8A5D8
-	.incbin "baserom.gba", 0x00e8a5d8, 0x1ec
+	.align 2
+gPokenavConditionPokeball_Pal:: @ 8E8A598
+	.incbin "graphics/pokenav/condition3.gbapal"
 
-gUnknown_08E8A7C4:: @ 8E8A7C4
-	.incbin "baserom.gba", 0x00e8a7c4, 0x540
+	.align 2
+gPokenavCondition4_Pal:: @ 8E8A5B8
+	.incbin "graphics/pokenav/condition4.gbapal"
 
-gUnknown_08E8AD04:: @ 8E8AD04
-	.incbin "baserom.gba", 0x00e8ad04, 0x4c0
+	.align 2
+gPokenavConditionMenuOptions2_Gfx:: @ 8E8A5D8
+	.incbin "graphics/pokenav/condition_menu_options2.4bpp.lz"
 
-gUnknown_08E8B1C4:: @ 8E8B1C4
-	.incbin "baserom.gba", 0x00e8b1c4, 0x20
+	.align 2
+gPokenavConditionMenuMisc_Gfx:: @ 8E8A7C4
+	.incbin "graphics/pokenav/condition_menu_misc.4bpp"
 
-gUnknown_08E8B1E4:: @ 8E8B1E4
-	.incbin "baserom.gba", 0x00e8b1e4, 0x20
+	.align 2
+gPokenavCondition5_Pal:: @ 8E8ACE4
+	.incbin "graphics/pokenav/condition5.gbapal"
 
-gUnknown_08E8B204:: @ 8E8B204
-	.incbin "baserom.gba", 0x00e8b204, 0x19c
+	.align 2
+gPokenavConditionSearch_Gfx:: @ 8E8AD04
+	.incbin "graphics/pokenav/condition_search.4bpp.lz"
 
-gUnknown_08E8B3A0:: @ 8E8B3A0
-	.incbin "baserom.gba", 0x00e8b3a0, 0x140
+	.align 2
+gPokenavCondition6_Pal:: @ 8E8B1C4
+	.incbin "graphics/pokenav/condition6.gbapal"
 
-gUnknown_08E8B4E0:: @ 8E8B4E0
-	.incbin "baserom.gba", 0x00e8b4e0, 0x1400
+	.align 2
+gPokenavCondition7_Pal:: @ 8E8B1E4
+	.incbin "graphics/pokenav/condition7.bin" @ another palette thats impossible to leave as native pal file due to 0xFFFF instead of 0x7FFF.
 
-gUnknown_08E8C8E0::
-	.incbin "baserom.gba", 0x00e8c8e0, 0x60
+	.align 2
+gPokenavTrainersEyesHeader_Gfx:: @ 8E8B204
+	.incbin "graphics/pokenav/trainereyes.4bpp.lz"
 
-gUnknown_08E8C940::
-	.incbin "baserom.gba", 0x00e8c940, 0x60
+	.align 2
+gPokenavRibbonsHeader_Gfx:: @ 8E8B3A0
+	.incbin "graphics/pokenav/ribbons.4bpp.lz"
 
-gUnknown_08E8C9A0::
-	.incbin "baserom.gba", 0x00e8c9a0, 0x60
+	.align 2
+gMenuTrainerCard_Gfx:: @ 8E8B4E0
+	.incbin "graphics/misc/trainer_card.4bpp"
 
-gUnknown_08E8CA00::
-	.incbin "baserom.gba", 0x00e8ca00, 0x60
+	.align 2
+gMenuTrainerCard0Star_Pal::
+	.incbin "graphics/misc/trainer_card_0star.gbapal"
 
-gUnknown_08E8CA60::
-	.incbin "baserom.gba", 0x00e8ca60, 0x60
+	.align 2
+gMenuTrainerCard1Star_Pal::
+	.incbin "graphics/misc/trainer_card_1star.gbapal"
+
+	.align 2
+gMenuTrainerCard2Star_Pal::
+	.incbin "graphics/misc/trainer_card_2star.gbapal"
+
+	.align 2
+gMenuTrainerCard3Star_Pal::
+	.incbin "graphics/misc/trainer_card_3star.gbapal"
+
+	.align 2
+gMenuTrainerCard4Star_Pal::
+	.incbin "graphics/misc/trainer_card_4star.gbapal"
 
 gUnknown_08E8CAC0::
 	.incbin "baserom.gba", 0x00e8cac0, 0x500
@@ -3453,70 +3812,88 @@ gUnknown_08E8D4C0::
 gUnknown_08E8D9C0:: @ 8E8D9C0
 	.incbin "baserom.gba", 0x00e8d9c0, 0x500
 
-gUnknown_08E8DEC0:: @ 8E8DEC0
-	.incbin "baserom.gba", 0x00e8dec0, 0x228
-
-gUnknown_08E8E0E8:: @ 8E8E0E8
-	.incbin "baserom.gba", 0x00e8e0e8, 0x20
-
-gUnknown_08E8E108:: @ 8E8E108
-	.incbin "baserom.gba", 0x00e8e108, 0x20
-
-gUnknown_08E8E128:: @ 8E8E128
-	.incbin "baserom.gba", 0x00e8e128, 0x11c
-
-gUnknown_08E8E244:: @ 8E8E244
-	.incbin "baserom.gba", 0x00e8e244, 0x464
-
-gUnknown_08E8E6A8:: @ 8E8E6A8
-	.incbin "baserom.gba", 0x00e8e6a8, 0x20
-
-gUnknown_08E8E6C8:: @ 8E8E6C8
-	.incbin "baserom.gba", 0x00e8e6c8, 0x20
-
-gUnknown_08E8E6E8:: @ 8E8E6E8
-	.incbin "baserom.gba", 0x00e8e6e8, 0x1c8
-
-gUnknown_08E8E8B0:: @ 8E8E8B0
-	.incbin "baserom.gba", 0x00e8e8b0, 0x1c8
-
-gUnknown_08E8EA78:: @ 8E8EA78
-	.incbin "baserom.gba", 0x00e8ea78, 0x20
+	.align 2
+gPSSMenuHeader_Gfx:: @ 8E8DEC0
+	.incbin "graphics/pokemon_storage/header.4bpp.lz"
 
 	.align 2
-gMenuWordGroup_Gfx:: @ 8E8EA98
-	.incbin "graphics/interface/wordgroup.4bpp.lz"
-
-gUnknown_08E8EE18:: @ 8E8EE18
-	.incbin "baserom.gba", 0x00e8ee18, 0x340
+gPSSMenu1_Pal:: @ 8E8E0E8
+	.incbin "graphics/pokemon_storage/menu1.gbapal"
 
 	.align 2
-gMenuWordGroup_Pal:: @ 8E8F158
-	.incbin "graphics/interface/wordgroup.gbapal"
+gPSSMenu2_Pal:: @ 8E8E108
+	.incbin "graphics/pokemon_storage/menu2.bin"
 
-gUnknown_08E8F178:: @ 8E8F178
-	.incbin "baserom.gba", 0x00e8f178, 0x22
+	.align 2
+gPSSMenuHeader_Tilemap:: @ 8E8E128
+	.incbin "graphics/pokemon_storage/header.bin.lz"
 
-gUnknown_08E8F19A:: @ 8E8F19A
-	.incbin "baserom.gba", 0x00e8f19a, 0x6
+	.align 2
+gPSSMenuMisc_Gfx:: @ 8E8E244
+	.incbin "graphics/pokemon_storage/misc1.4bpp.lz"
 
-gUnknown_08E8F1A0:: @ 8E8F1A0
-	.incbin "baserom.gba", 0x00e8f1a0, 0x18
+	.align 2
+gPSSMenu3_Pal:: @ 8E8E6A8
+	.incbin "graphics/pokemon_storage/menu3.gbapal"
 
-gUnknown_08E8F1B8:: @ 8E8F1B8
-	.incbin "baserom.gba", 0x00e8f1b8, 0x64c
+	.align 2
+gPSSMenu4_Pal:: @ 8E8E6C8
+	.incbin "graphics/pokemon_storage/menu4.gbapal"
 
-gUnknown_08E8F804:: @ 8E8F804
-	.incbin "graphics/misc/clock1.gbapal"
+	.align 2
+gPSSMenuMisc_Tilemap:: @ 8E8E6E8
+	.incbin "graphics/pokemon_storage/misc1.bin.lz"
 
-gUnknown_08E8F824:: @ 8E8F824
-	.incbin "graphics/misc/clock2.gbapal"
+	.align 2
+gHallOfFame_Gfx:: @ 8E8E8B0
+	.incbin "graphics/misc/hof.4bpp.lz"
 
-gUnknown_08E8F844:: @ 8E8F844
-	.incbin "baserom.gba", 0x00e8f844, 0xbb4
+	.align 2
+gHallOfFame_Pal:: @ 8E8EA78
+	.incbin "graphics/misc/hof.gbapal"
 
-gUnknown_08E903F8:: @ 8E903F8
-	.incbin "baserom.gba", 0x00e903f8, 0x220
+	.align 2
+gMenuWordGroupIndicator_Gfx:: @ 8E8EA98
+	.incbin "graphics/interface/wordgroup_indicator.4bpp.lz"
+
+	.align 2
+gMenuWordGroupFrame_Gfx:: @ 8E8EE18
+	.incbin "graphics/interface/wordgroup_frame.4bpp.lz"
+
+	.align 2
+gMenuWordGroupIndicator_Pal:: @ 8E8F158
+	.incbin "graphics/interface/wordgroup_indicator.gbapal"
+
+	.align 2
+gMenuWordGroupFrame1_Pal:: @ 8E8F178
+	.incbin "graphics/interface/wordgroup_pink.gbapal"
+
+	.align 2
+gMenuWordGroupFrame2_Pal:: @ 8E8F198
+	.incbin "graphics/interface/wordgroup_blue.gbapal"
+
+	.align 2
+gMiscClock_Gfx:: @ 8E8F1B8
+	.incbin "graphics/misc/clock.4bpp.lz"
+
+	.align 2
+gMiscClockMale_Pal:: @ 8E8F804
+	.incbin "graphics/misc/clock1.gbapal" @ male
+
+	.align 2
+gMiscClockFemale_Pal:: @ 8E8F824
+	.incbin "graphics/misc/clock2.gbapal" @ female
+
+	.align 2
+gSlotMachine_Gfx:: @ 8E8F844
+	.incbin "graphics/slot_machine/slots.4bpp.lz"
+
+	.align 2
+gBattleInterfaceStatusIcons_DynPal:: @ 8E903F8
+	.incbin "graphics/battle_interface/status.gbapal"
+
+	@ unused
+	.incbin "graphics/unused/arrow.4bpp"
 
 	.align 2
 gBerryBlenderMarubatsuTiles:: @ 8E90618
@@ -3536,13 +3913,15 @@ gBerryBlenderCountdownNumbersTiles:: @ 8E90A18
 gBerryBlenderStartTiles:: @ 8E91018
 	.incbin "graphics/berry_blender/start.4bpp"
 
-	.incbin "baserom.gba", 0x00e91418, 0x200
+	.incbin "graphics/unknown/unknown_E91418.bin"
+
+	.space 0x1E0
 
 	.align 2
 gBerryBlenderArrowTiles:: @ 8E91618
 	.incbin "graphics/berry_blender/arrow.4bpp"
 
-	.incbin "baserom.gba", 0x00e91e18, 0x2c0
+	.space 0x2C0
 
 	.align 2
 gBerryBlenderMiscPalette:: @ 8E920D8
@@ -3587,15 +3966,19 @@ gUnknown_08E945D0:: @ 8E945D0
 gUnknown_08E94AD0:: @ 8E94AD0
 	.incbin "baserom.gba", 0x00e94ad0, 0x900
 
+	.align 2
 gUnknown_08E953D0:: @ 8E953D0
-	.incbin "baserom.gba", 0x00e953d0, 0xe0
+	.incbin "baserom.gba", 0xE953D0, 0xE0 @ LZ, uncomp. size = 0x480
 
+	.align 2
 gUnknown_08E954B0:: @ 8E954B0
-	.incbin "baserom.gba", 0x00e954b0, 0x2c4
+	.incbin "baserom.gba", 0xE954B0, 0x2C3 @ LZ, uncomp. size = 0x500
 
+	.align 2
 gUnknown_08E95774:: @ 8E95774
-	.incbin "baserom.gba", 0x00e95774, 0x2a4
+	.incbin "baserom.gba", 0xE95774, 0x2A1 @ LZ, uncomp. size = 0x500
 
+	.align 2
 gUnknown_08E95A18:: @ 8E95A18
 	.ifdef SAPPHIRE
 	.incbin "graphics/slot_machine/sapphire.gbapal"
@@ -3615,32 +3998,41 @@ gUnknown_08E964B8:: @ 8E964B8
 gUnknown_08E966B8:: @ 8E966B8
 	.incbin "baserom.gba", 0x00e966b8, 0x20
 
+	.align 2
 gMonIconPalettes:: @ 8E966D8
 	.incbin "graphics/pokemon_icon_palettes/0.gbapal"
 	.incbin "graphics/pokemon_icon_palettes/1.gbapal"
 	.incbin "graphics/pokemon_icon_palettes/2.gbapal"
 
+	.align 2
 gUnknown_08E96738:: @ 8E96738
-	.incbin "baserom.gba", 0x00e96738, 0x150
+	.incbin "baserom.gba", 0xE96738, 0x14F @ LZ, uncomp. size = 0x500
 
+	.align 2
 gUnknown_08E96888:: @ 8E96888
-	.incbin "baserom.gba", 0x00e96888, 0x10c
+	.incbin "baserom.gba", 0xE96888, 0x109 @ LZ, uncomp. size = 0x300
 
+	.align 2
 gUnknown_08E96994:: @ 8E96994
-	.incbin "baserom.gba", 0x00e96994, 0x138
+	.incbin "baserom.gba", 0xE96994, 0x137 @ LZ, uncomp. size = 0x300
 
+	.align 2
 gUnknown_08E96ACC:: @ 8E96ACC
-	.incbin "baserom.gba", 0x00e96acc, 0x8c
+	.incbin "baserom.gba", 0xE96ACC, 0x8B @ LZ, uncomp. size = 0xC0
 
+	.align 2
 gUnknown_08E96B58:: @ 8E96B58
-	.incbin "baserom.gba", 0x00e96b58, 0x7c
+	.incbin "baserom.gba", 0xE96B58, 0x7B @ LZ, uncomp. size = 0xC0
 
+	.align 2
 gUnknown_08E96BD4:: @ 8E96BD4
-	.incbin "baserom.gba", 0x00e96bd4, 0x158
+	.incbin "baserom.gba", 0xE96BD4, 0x155 @ LZ, uncomp. size = 0x500
 
+	.align 2
 gUnknown_08E96D2C:: @ 8E96D2C
-	.incbin "baserom.gba", 0x00e96d2c, 0x19c
+	.incbin "baserom.gba", 0xE96D2C, 0x19B @ LZ, uncomp. size = 0x500
 
+	.align 2
 gUnknown_08E96EC8:: @ 8E96EC8
 	.incbin "baserom.gba", 0x00e96ec8, 0x800
 
@@ -3680,8 +4072,73 @@ gSlotMachineSpritePalette5:: @ 8E97768
 gSlotMachineSpritePalette6:: @ 8E97788
 	.incbin "graphics/slot_machine/spr6.gbapal"
 
-	.incbin "graphics/slot_machine/reel_symbols.4bpp"
-	.incbin "graphics/slot_machine/numbers.4bpp"
+	.align 2
+gSlotMachineReelSymbol1Tiles::
+	.incbin "graphics/slot_machine/reel_symbols/1.4bpp"
+
+	.align 2
+gSlotMachineReelSymbol2Tiles::
+	.incbin "graphics/slot_machine/reel_symbols/2.4bpp"
+
+	.align 2
+gSlotMachineReelSymbol3Tiles::
+	.incbin "graphics/slot_machine/reel_symbols/3.4bpp"
+
+	.align 2
+gSlotMachineReelSymbol4Tiles::
+	.incbin "graphics/slot_machine/reel_symbols/4.4bpp"
+
+	.align 2
+gSlotMachineReelSymbol5Tiles::
+	.incbin "graphics/slot_machine/reel_symbols/5.4bpp"
+
+	.align 2
+gSlotMachineReelSymbol6Tiles::
+	.incbin "graphics/slot_machine/reel_symbols/6.4bpp"
+
+	.align 2
+gSlotMachineReelSymbol7Tiles::
+	.incbin "graphics/slot_machine/reel_symbols/7.4bpp"
+
+	.align 2
+gSlotMachineNumber0Tiles::
+	.incbin "graphics/slot_machine/numbers/0.4bpp"
+
+	.align 2
+gSlotMachineNumber1Tiles::
+	.incbin "graphics/slot_machine/numbers/1.4bpp"
+
+	.align 2
+gSlotMachineNumber2Tiles::
+	.incbin "graphics/slot_machine/numbers/2.4bpp"
+
+	.align 2
+gSlotMachineNumber3Tiles::
+	.incbin "graphics/slot_machine/numbers/3.4bpp"
+
+	.align 2
+gSlotMachineNumber4Tiles::
+	.incbin "graphics/slot_machine/numbers/4.4bpp"
+
+	.align 2
+gSlotMachineNumber5Tiles::
+	.incbin "graphics/slot_machine/numbers/5.4bpp"
+
+	.align 2
+gSlotMachineNumber6Tiles::
+	.incbin "graphics/slot_machine/numbers/6.4bpp"
+
+	.align 2
+gSlotMachineNumber7Tiles::
+	.incbin "graphics/slot_machine/numbers/7.4bpp"
+
+	.align 2
+gSlotMachineNumber8Tiles::
+	.incbin "graphics/slot_machine/numbers/8.4bpp"
+
+	.align 2
+gSlotMachineNumber9Tiles::
+	.incbin "graphics/slot_machine/numbers/9.4bpp"
 
 	.align 2
 gSpriteImage_8E98828:: @ 8E98828
@@ -3751,12 +4208,15 @@ gUnknownPalette_08E997E8:: @ 8E997E8
 gSpriteImage_8E99808:: @ 8E99808
 	.incbin "graphics/unknown_sprites/8E99808.4bpp"
 
-gUnknown_08E99848:: @ 8E99848
-	.incbin "baserom.gba", 0x00e99848, 0x768
+	.align 2
+gSlotMachineReelTimeLights_Gfx:: @ 8E99848
+	.incbin "graphics/slot_machine/reel_time_lights.4bpp.lz"
 
+	.align 2
 gUnknown_08E99FB0:: @ 8E99FB0
-	.incbin "baserom.gba", 0x00e99fb0, 0x150
+	.incbin "baserom.gba", 0xE99FB0, 0x14E @ LZ, uncomp. size = 0x600
 
+	.align 2
 gUnknown_08E9A100:: @ 8E9A100
 	.incbin "baserom.gba", 0x00e9a100, 0x200
 
@@ -3769,161 +4229,228 @@ gUnknown_08E9AB00:: @ 8E9AB00
 gUnknown_08E9AB40:: @ 8E9AB40
 	.incbin "baserom.gba", 0x00e9ab40, 0x20
 
+	.align 2
 gUnknown_08E9AB60:: @ 8E9AB60
-	.incbin "baserom.gba", 0x00e9ab60, 0x54
+	.incbin "baserom.gba", 0xE9AB60, 0x53 @ LZ, uncomp. size = 0x280
 
+	.align 2
 gUnknown_08E9ABB4:: @ 8E9ABB4
 	.incbin "baserom.gba", 0x00e9abb4, 0x78
 
 gUnknown_08E9AC2C:: @ 8E9AC2C
 	.incbin "baserom.gba", 0x00e9ac2c, 0x20
 
+	.align 2
 gUnknown_08E9AC4C:: @ 8E9AC4C
-	.incbin "baserom.gba", 0x00e9ac4c, 0x190
+	.incbin "baserom.gba", 0xE9AC4C, 0x18F @ LZ, uncomp. size = 0x500
 
-gUnknown_08E9ADDC::
-	.incbin "baserom.gba", 0x00e9addc, 0x120
+@ text window frames
 
-gUnknown_08E9AEFC::
-	.incbin "baserom.gba", 0x00e9aefc, 0x20
+	.align 2
+gTextWindowFrame1_Gfx::
+	.incbin "graphics/text_window/1.4bpp"
 
-gUnknown_08E9AF1C::
-	.incbin "baserom.gba", 0x00e9af1c, 0x120
+	.align 2
+gTextWindowFrame1_Pal::
+	.incbin "graphics/text_window/1.gbapal"
 
-gUnknown_08E9B03C::
-	.incbin "baserom.gba", 0x00e9b03c, 0x20
+	.align 2
+gTextWindowFrame2_Gfx::
+	.incbin "graphics/text_window/2.4bpp"
 
-gUnknown_08E9B05C::
-	.incbin "baserom.gba", 0x00e9b05c, 0x120
+	.align 2
+gTextWindowFrame2_Pal::
+	.incbin "graphics/text_window/2.gbapal"
 
-gUnknown_08E9B17C::
-	.incbin "baserom.gba", 0x00e9b17c, 0x20
+	.align 2
+gTextWindowFrame3_Gfx::
+	.incbin "graphics/text_window/3.4bpp"
 
-gUnknown_08E9B19C::
-	.incbin "baserom.gba", 0x00e9b19c, 0x120
+	.align 2
+gTextWindowFrame3_Pal::
+	.incbin "graphics/text_window/3.gbapal"
 
-gUnknown_08E9B2BC::
-	.incbin "baserom.gba", 0x00e9b2bc, 0x20
+	.align 2
+gTextWindowFrame4_Gfx::
+	.incbin "graphics/text_window/4.4bpp"
 
-gUnknown_08E9B2DC::
-	.incbin "baserom.gba", 0x00e9b2dc, 0x120
+	.align 2
+gTextWindowFrame4_Pal::
+	.incbin "graphics/text_window/4.gbapal"
 
-gUnknown_08E9B3FC::
-	.incbin "baserom.gba", 0x00e9b3fc, 0x20
+	.align 2
+gTextWindowFrame5_Gfx::
+	.incbin "graphics/text_window/5.4bpp"
 
-gUnknown_08E9B41C::
-	.incbin "baserom.gba", 0x00e9b41c, 0x120
+	.align 2
+gTextWindowFrame5_Pal::
+	.incbin "graphics/text_window/5.gbapal"
 
-gUnknown_08E9B53C::
-	.incbin "baserom.gba", 0x00e9b53c, 0x20
+	.align 2
+gTextWindowFrame6_Gfx::
+	.incbin "graphics/text_window/6.4bpp"
 
-gUnknown_08E9B55C::
-	.incbin "baserom.gba", 0x00e9b55c, 0x120
+	.align 2
+gTextWindowFrame6_Pal::
+	.incbin "graphics/text_window/6.gbapal"
 
-gUnknown_08E9B67C::
-	.incbin "baserom.gba", 0x00e9b67c, 0x20
+	.align 2
+gTextWindowFrame7_Gfx::
+	.incbin "graphics/text_window/7.4bpp"
 
-gUnknown_08E9B69C::
-	.incbin "baserom.gba", 0x00e9b69c, 0x120
+	.align 2
+gTextWindowFrame7_Pal::
+	.incbin "graphics/text_window/7.gbapal"
 
-gUnknown_08E9B7BC::
-	.incbin "baserom.gba", 0x00e9b7bc, 0x20
+	.align 2
+gTextWindowFrame8_Gfx::
+	.incbin "graphics/text_window/8.4bpp"
 
-gUnknown_08E9B7DC::
-	.incbin "baserom.gba", 0x00e9b7dc, 0x120
+	.align 2
+gTextWindowFrame8_Pal::
+	.incbin "graphics/text_window/8.gbapal"
 
-gUnknown_08E9B8FC::
-	.incbin "baserom.gba", 0x00e9b8fc, 0x20
+	.align 2
+gTextWindowFrame9_Gfx::
+	.incbin "graphics/text_window/9.4bpp"
 
-gUnknown_08E9B91C::
-	.incbin "baserom.gba", 0x00e9b91c, 0x120
+	.align 2
+gTextWindowFrame9_Pal::
+	.incbin "graphics/text_window/9.gbapal"
 
-gUnknown_08E9BA3C::
-	.incbin "baserom.gba", 0x00e9ba3c, 0x20
+	.align 2
+gTextWindowFrame10_Gfx::
+	.incbin "graphics/text_window/10.4bpp"
 
-gUnknown_08E9BA5C::
-	.incbin "baserom.gba", 0x00e9ba5c, 0x120
+	.align 2
+gTextWindowFrame10_Pal::
+	.incbin "graphics/text_window/10.gbapal"
 
-gUnknown_08E9BB7C::
-	.incbin "baserom.gba", 0x00e9bb7c, 0x20
+	.align 2
+gTextWindowFrame11_Gfx::
+	.incbin "graphics/text_window/11.4bpp"
 
-gUnknown_08E9BB9C::
-	.incbin "baserom.gba", 0x00e9bb9c, 0x120
+	.align 2
+gTextWindowFrame11_Pal::
+	.incbin "graphics/text_window/11.gbapal"
 
-gUnknown_08E9BCBC::
-	.incbin "baserom.gba", 0x00e9bcbc, 0x20
+	.align 2
+gTextWindowFrame12_Gfx::
+	.incbin "graphics/text_window/12.4bpp"
 
-gUnknown_08E9BCDC::
-	.incbin "baserom.gba", 0x00e9bcdc, 0x120
+	.align 2
+gTextWindowFrame12_Pal::
+	.incbin "graphics/text_window/12.gbapal"
 
-gUnknown_08E9BDFC::
-	.incbin "baserom.gba", 0x00e9bdfc, 0x20
+	.align 2
+gTextWindowFrame13_Gfx::
+	.incbin "graphics/text_window/13.4bpp"
 
-gUnknown_08E9BE1C::
-	.incbin "baserom.gba", 0x00e9be1c, 0x120
+	.align 2
+gTextWindowFrame13_Pal::
+	.incbin "graphics/text_window/13.gbapal"
 
-gUnknown_08E9BF3C::
-	.incbin "baserom.gba", 0x00e9bf3c, 0x20
+	.align 2
+gTextWindowFrame14_Gfx::
+	.incbin "graphics/text_window/14.4bpp"
 
-gUnknown_08E9BF5C::
-	.incbin "baserom.gba", 0x00e9bf5c, 0x120
+	.align 2
+gTextWindowFrame14_Pal::
+	.incbin "graphics/text_window/14.gbapal"
 
-gUnknown_08E9C07C::
-	.incbin "baserom.gba", 0x00e9c07c, 0x20
+	.align 2
+gTextWindowFrame15_Gfx::
+	.incbin "graphics/text_window/15.4bpp"
 
-gUnknown_08E9C09C::
-	.incbin "baserom.gba", 0x00e9c09c, 0x120
+	.align 2
+gTextWindowFrame15_Pal::
+	.incbin "graphics/text_window/15.gbapal"
 
-gUnknown_08E9C1BC::
-	.incbin "baserom.gba", 0x00e9c1bc, 0x20
+	.align 2
+gTextWindowFrame16_Gfx::
+	.incbin "graphics/text_window/16.4bpp"
 
-gUnknown_08E9C1DC::
-	.incbin "baserom.gba", 0x00e9c1dc, 0x120
+	.align 2
+gTextWindowFrame16_Pal::
+	.incbin "graphics/text_window/16.gbapal"
 
-gUnknown_08E9C2FC::
-	.incbin "baserom.gba", 0x00e9c2fc, 0x20
+	.align 2
+gTextWindowFrame17_Gfx::
+	.incbin "graphics/text_window/17.4bpp"
 
-gUnknown_08E9C31C::
-	.incbin "baserom.gba", 0x00e9c31c, 0x120
+	.align 2
+gTextWindowFrame17_Pal::
+	.incbin "graphics/text_window/17.gbapal"
 
-gUnknown_08E9C43C::
-	.incbin "baserom.gba", 0x00e9c43c, 0x20
+	.align 2
+gTextWindowFrame18_Gfx::
+	.incbin "graphics/text_window/18.4bpp"
 
-gUnknown_08E9C45C::
-	.incbin "baserom.gba", 0x00e9c45c, 0x120
+	.align 2
+gTextWindowFrame18_Pal::
+	.incbin "graphics/text_window/18.gbapal"
 
-gUnknown_08E9C57C::
-	.incbin "baserom.gba", 0x00e9c57c, 0x20
+	.align 2
+gTextWindowFrame19_Gfx::
+	.incbin "graphics/text_window/19.4bpp"
 
-gUnknown_08E9C59C::
-	.incbin "baserom.gba", 0x00e9c59c, 0x120
+	.align 2
+gTextWindowFrame19_Pal::
+	.incbin "graphics/text_window/19.gbapal"
 
-gUnknown_08E9C6BC::
-	.incbin "baserom.gba", 0x00e9c6bc, 0x20
+	.align 2
+gTextWindowFrame20_Gfx::
+	.incbin "graphics/text_window/20.4bpp"
 
+	.align 2
+gTextWindowFrame20_Pal::
+	.incbin "graphics/text_window/20.gbapal"
+
+	.align 2
 gUnknown_08E9C6DC:: @ 8E9C6DC
-	.incbin "baserom.gba", 0x00e9c6dc, 0xbc
+	.incbin "baserom.gba", 0xE9C6DC, 0xBC @ LZ, uncomp. size = 0x500
 
-gUnknown_08E9C798:: @ 8E9C798
-	.incbin "baserom.gba", 0x00e9c798, 0x28c
+	.align 2
+gIntroCopyright_Gfx:: @ 8E9C798
+	.incbin "graphics/intro/copyright.4bpp.lz"
 
-gUnknown_08E9CA24:: @ 8E9CA24
-	.incbin "baserom.gba", 0x00e9ca24, 0x20
+	.align 2
+gIntroCopyright_Pal:: @ 8E9CA24
+	.incbin "graphics/intro/copyright.gbapal"
 
-gUnknown_08E9CA44:: @ 8E9CA44
-	.incbin "baserom.gba", 0x00e9ca44, 0xe68
+	.align 2
+gIntroCopyright_Tilemap:: @ 8E9CA44
+	.incbin "graphics/intro/copyright.bin"
 
+	.align 2
+gInterviewOutlineCursorTiles:: @ 8E9CF44
+	.incbin "graphics/misc/interview_outline_cursor.4bpp"
+
+	.align 2
+gTitleScreenPressStart_Gfx:: @ 8E9D644
+	.incbin "graphics/title_screen/press_start.4bpp.lz"
+
+	.align 2
+gTitleScreenLogoShinePalette:: @ E9D8E4
 	.incbin "graphics/title_screen/logo_shine.gbapal"
 
+	.align 2
 gUnknown_08E9D8CC:: @ 8E9D8CC
 	.ifdef SAPPHIRE
 	.incbin "graphics/title_screen/pokemon_sapphire.8bpp.lz"
-	.incbin "graphics/title_screen/sapphireversion.8bpp.lz"
 	.else
 	.incbin "graphics/title_screen/pokemon_ruby.8bpp.lz"
+	.endif
+
+	.align 2
+gVersionTiles::
+	.ifdef SAPPHIRE
+	.incbin "graphics/title_screen/sapphireversion.8bpp.lz"
+	.else
 	.incbin "graphics/title_screen/rubyversion.8bpp.lz"
 	.endif
 
+	.align 2
 gUnknown_08E9F624:: @ 8E9F624
 	.ifdef SAPPHIRE
 	.incbin "graphics/title_screen/logo_sapphire.gbapal" @ for some reason, the sapphire palette is different even though the visible colors for the logo and version are not, weird
@@ -3931,34 +4458,45 @@ gUnknown_08E9F624:: @ 8E9F624
 	.incbin "graphics/title_screen/logo_ruby.gbapal"
 	.endif
 
+	.align 2
 gUnknown_08E9F7E4:: @ 8E9F7E4
-	.incbin "baserom.gba", 0x00e9f7e4, 0x184
-	.incbin "graphics/pokenav/contest_arrows.gbapal"
+	.incbin "baserom.gba", 0xE9F7E4, 0x182 @ LZ, uncomp. size = 0x400
+
+	.align 2
+gPokenavArrowsPalette::
+	.incbin "graphics/pokenav/arrows.gbapal"
 
 gUnknown_08E9F988:: @ 8E9F988
-	.incbin "baserom.gba", 0x00e9f988, 0x60
+	.incbin "baserom.gba", 0xe9f988, 0x20
+
+	.align 2
+gPokenavArrow_Gfx:: @ 8E9F9A8
+	.incbin "graphics/pokenav/arrow2.4bpp"
 
 gUnknown_08E9F9E8:: @ 8E9F9E8
 	.incbin "baserom.gba", 0x00e9f9e8, 0x20
 
-gUnknown_08E9FA08:: @ 8E9FA08
-	.incbin "baserom.gba", 0x00e9fa08, 0xf4
+	.align 2
+gPokenavConditionSearch2_Gfx:: @ 8E9FA08
+	.incbin "graphics/pokenav/condition_search2.4bpp.lz"
 
-gUnknown_08E9FAFC:: @ 8E9FAFC
-	.incbin "baserom.gba", 0x00e9fafc, 0x1c
+	.align 2
+gPokenavRibbonView_Pal:: @ 8E9FAFC
+	.incbin "graphics/pokenav/ribbon_view.pal.bin"
 
-gUnknown_08E9FB18:: @ 8E9FB18
-	.incbin "baserom.gba", 0x00e9fb18, 0x4
+	.align 2
+gPokenavRibbonView_Gfx:: @ 8E9FB1C
+	.incbin "graphics/pokenav/ribbon_view.4bpp.lz"
 
-gUnknown_08E9FB1C:: @ 8E9FB1C
-	.incbin "baserom.gba", 0x00e9fb1c, 0x84
-
+	.align 2
 gUnknown_08E9FBA0:: @ 8E9FBA0
-	.incbin "baserom.gba", 0x00e9fba0, 0xc4
+	.incbin "baserom.gba", 0xE9FBA0, 0xC3 @ LZ, uncomp. size = 0x500
 
+	.align 2
 gUnknown_08E9FC64:: @ 8E9FC64
-	.incbin "baserom.gba", 0x00e9fc64, 0xb8
+	.incbin "baserom.gba", 0xE9FC64, 0xB6 @ LZ, uncomp. size = 0x500
 
+	.align 2
 gUnknown_08E9FD1C:: @ 8E9FD1C
 	.incbin "baserom.gba", 0x00e9fd1c, 0x48
 
@@ -3968,17 +4506,21 @@ gUnknown_08E9FD64:: @ 8E9FD64
 gUnknown_08E9FE54:: @ 8E9FE54
 	.incbin "baserom.gba", 0x00e9fe54, 0x60
 
+	.align 2
 gUnknown_08E9FEB4:: @ 8E9FEB4
-	.incbin "baserom.gba", 0x00e9feb4, 0xa4
+	.incbin "baserom.gba", 0xE9FEB4, 0xA2 @ LZ, uncomp. size = 0x500
 
+	.align 2
 gUnknown_08E9FF58:: @ 8E9FF58
-	.incbin "baserom.gba", 0x00e9ff58, 0xd0
+	.incbin "baserom.gba", 0xE9FF58, 0xCF @ LZ, uncomp. size = 0x640
 
-gUnknown_08EA0028:: @ 8EA0028
-	.incbin "baserom.gba", 0x00ea0028, 0xe0
+	.align 2
+gPokenavRibbonPokeView_Gfx:: @ 8EA0028
+	.incbin "graphics/pokenav/ribbon_pokeview.4bpp"
 
-gUnknown_08EA0108:: @ 8EA0108
-	.incbin "baserom.gba", 0x00ea0108, 0x1c0
+	.align 2
+gMessageBox_Gfx:: @ 8EA0108
+	.incbin "graphics/text_window/message_box.4bpp"
 
 	.align 2
 gUnknown_08EA02C8:: @ 8EA02C8
@@ -3998,29 +4540,36 @@ gUnknown_08EA0348:: @ 8EA0348
 gUnknown_08EA15C8:: @ 8EA15C8
 	.incbin "graphics/trade/menu_map.bin"
 
-gUnknown_08EA1DC8:: @ 8EA1DC8
-	.incbin "baserom.gba", 0x00ea1dc8, 0x24
+	.align 2
+gTradeMonBoxTilemap:: @ 8EA1DC8
+	.incbin "graphics/trade/mon_box_map.bin"
 
 	.align 2
 gUnknown_08EA1DEC:: @ 8EA1DEC
 	.incbin "graphics/trade/selected_mon.4bpp"
 
-	.incbin "baserom.gba", 0x00ea25ec, 0x20
+	.incbin "graphics/unknown/unknown_EA25EC.bin"
 
-gUnknown_08EA260C:: @ 8EA260C
-	.incbin "baserom.gba", 0x00ea260c, 0x438
+	.align 2
+gCreditsCopyrightEnd_Gfx:: @ 8EA260C
+	.incbin "graphics/misc/end_copyright.4bpp.lz"
 
-gUnknown_08EA2A44:: @ 8EA2A44
-	.incbin "baserom.gba", 0x00ea2a44, 0x200
+	.align 2
+gDecoration10000_Gfx:: @ 8EA2A44
+	.incbin "graphics/misc/decoration_10000.4bpp"
 
+	.align 2
 gFont3LatinGlyphs:: @ 8EA2C44
 	.incbin "graphics/fonts/font3_lat.4bpp"
 
+	.align 2
 gFont4LatinGlyphs:: @ 8EA6BC4
 	.incbin "graphics/fonts/font4_lat.4bpp"
 
+	.align 2
 gFont3JapaneseGlyphs:: @ 8EA8744
 	.incbin "graphics/fonts/font3_jpn.4bpp"
 
+	.align 2
 gFont4JapaneseGlyphs:: @ 8EAC6C4
 	.incbin "graphics/fonts/font4_jpn.4bpp"

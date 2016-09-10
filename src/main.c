@@ -18,7 +18,13 @@ void SerialIntr(void);
 void IntrDummy(void);
 void Timer3Intr(void);
 
-const u8 gGameVersion = 2; // Ruby
+#ifdef SAPPHIRE
+#define GAME_VERSION VERSION_SAPPHIRE
+#else
+#define GAME_VERSION VERSION_RUBY
+#endif
+
+const u8 gGameVersion = GAME_VERSION;
 
 const u8 gGameLanguage = 2; // English
 

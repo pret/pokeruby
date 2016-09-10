@@ -1941,66 +1941,66 @@ SootopolisCity_Gym_1F_EventScript_1A01C0:: @ 81A01C0
 	end
 
 DewfordTown_Gym_EventScript_1A021E:: @ 81A021E
-	cleartrainerflag 320
-	cleartrainerflag 321
+	cleartrainerflag OPPONENT_JOSH
+	cleartrainerflag OPPONENT_TOMMY
 	return
 
 DewfordTown_Gym_EventScript_1A0225:: @ 81A0225
-	cleartrainerflag 179
-	cleartrainerflag 425
-	cleartrainerflag 426
+	cleartrainerflag OPPONENT_HIDEKI
+	cleartrainerflag OPPONENT_TESSA
+	cleartrainerflag OPPONENT_LAURA
 	return
 
 DewfordTown_Gym_EventScript_1A022F:: @ 81A022F
-	cleartrainerflag 191
-	cleartrainerflag 194
-	cleartrainerflag 323
-	cleartrainerflag 649
+	cleartrainerflag OPPONENT_KIRK
+	cleartrainerflag OPPONENT_SHAWN
+	cleartrainerflag OPPONENT_BEN
+	cleartrainerflag OPPONENT_VIVIAN
 	return
 
 DewfordTown_Gym_EventScript_1A023C:: @ 81A023C
-	cleartrainerflag 201
-	cleartrainerflag 203
-	cleartrainerflag 205
-	cleartrainerflag 648
-	cleartrainerflag 650
+	cleartrainerflag OPPONENT_COLE
+	cleartrainerflag OPPONENT_AXLE
+	cleartrainerflag OPPONENT_ANDY
+	cleartrainerflag OPPONENT_ZANE
+	cleartrainerflag OPPONENT_SADIE
 	return
 
 DewfordTown_Gym_EventScript_1A024C:: @ 81A024C
-	cleartrainerflag 71
-	cleartrainerflag 72
-	cleartrainerflag 73
-	cleartrainerflag 74
-	cleartrainerflag 89
-	cleartrainerflag 90
-	cleartrainerflag 91
+	cleartrainerflag OPPONENT_RANDALL
+	cleartrainerflag OPPONENT_PARKER
+	cleartrainerflag OPPONENT_GEORGE
+	cleartrainerflag OPPONENT_BERKE
+	cleartrainerflag OPPONENT_MARY
+	cleartrainerflag OPPONENT_LORI
+	cleartrainerflag OPPONENT_JODY
 	return
 
 DewfordTown_Gym_EventScript_1A0262:: @ 81A0262
-	cleartrainerflag 401
-	cleartrainerflag 654
-	cleartrainerflag 655
-	cleartrainerflag 404
+	cleartrainerflag OPPONENT_JARED
+	cleartrainerflag OPPONENT_TERRELL
+	cleartrainerflag OPPONENT_KYLEE
+	cleartrainerflag OPPONENT_WILL
 	return
 
 DewfordTown_Gym_EventScript_1A026F:: @ 81A026F
-	cleartrainerflag 233
-	cleartrainerflag 234
-	cleartrainerflag 235
-	cleartrainerflag 244
-	cleartrainerflag 245
-	cleartrainerflag 246
+	cleartrainerflag OPPONENT_PRESTON
+	cleartrainerflag OPPONENT_VIRGIL
+	cleartrainerflag OPPONENT_FRITZ
+	cleartrainerflag OPPONENT_HANNAH
+	cleartrainerflag OPPONENT_SAMANTHA
+	cleartrainerflag OPPONENT_MAURA
 	return
 
 DewfordTown_Gym_EventScript_1A0282:: @ 81A0282
-	cleartrainerflag 613
-	cleartrainerflag 614
-	cleartrainerflag 118
-	cleartrainerflag 128
-	cleartrainerflag 129
-	cleartrainerflag 130
-	cleartrainerflag 131
-	cleartrainerflag 301
+	cleartrainerflag OPPONENT_ANDREA
+	cleartrainerflag OPPONENT_CRISSY
+	cleartrainerflag OPPONENT_BRIANNA_2
+	cleartrainerflag OPPONENT_CONNIE
+	cleartrainerflag OPPONENT_BRIDGET
+	cleartrainerflag OPPONENT_OLIVIA
+	cleartrainerflag OPPONENT_TIFFANY
+	cleartrainerflag OPPONENT_MARISSA
 	return
 
 DewfordTown_Gym_EventScript_1A029B:: @ 81A029B

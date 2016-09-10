@@ -317,32 +317,32 @@ LilycoveCity_EventScript_14CE35:: @ 814CE35
 	end
 
 LilycoveCity_EventScript_14CE46:: @ 814CE46
-	trainerbattle 3, 665, 0, LilycoveCity_Text_167BD5
+	trainerbattle 3, OPPONENT_MAY_11, 0, LilycoveCity_Text_167BD5
 	jump LilycoveCity_EventScript_14CEA6
 	end
 
 LilycoveCity_EventScript_14CE56:: @ 814CE56
-	trainerbattle 3, 666, 0, LilycoveCity_Text_167BD5
+	trainerbattle 3, OPPONENT_MAY_12, 0, LilycoveCity_Text_167BD5
 	jump LilycoveCity_EventScript_14CEA6
 	end
 
 LilycoveCity_EventScript_14CE66:: @ 814CE66
-	trainerbattle 3, 664, 0, LilycoveCity_Text_167BD5
+	trainerbattle 3, OPPONENT_MAY_10, 0, LilycoveCity_Text_167BD5
 	jump LilycoveCity_EventScript_14CEA6
 	end
 
 LilycoveCity_EventScript_14CE76:: @ 814CE76
-	trainerbattle 3, 662, 0, LilycoveCity_Text_1680E4
+	trainerbattle 3, OPPONENT_BRENDAN_11, 0, LilycoveCity_Text_1680E4
 	jump LilycoveCity_EventScript_14CF12
 	end
 
 LilycoveCity_EventScript_14CE86:: @ 814CE86
-	trainerbattle 3, 663, 0, LilycoveCity_Text_1680E4
+	trainerbattle 3, OPPONENT_BRENDAN_12, 0, LilycoveCity_Text_1680E4
 	jump LilycoveCity_EventScript_14CF12
 	end
 
 LilycoveCity_EventScript_14CE96:: @ 814CE96
-	trainerbattle 3, 661, 0, LilycoveCity_Text_1680E4
+	trainerbattle 3, OPPONENT_BRENDAN_10, 0, LilycoveCity_Text_1680E4
 	jump LilycoveCity_EventScript_14CF12
 	end
 

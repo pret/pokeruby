@@ -46,7 +46,7 @@ EverGrandeCity_SidneysRoom_EventScript_15B596:: @ 815B596
 	jumpeq EverGrandeCity_SidneysRoom_EventScript_15B5BD
 	playmusic 450, 0
 	msgbox EverGrandeCity_SidneysRoom_Text_190728, 4
-	trainerbattle 3, 261, 0, EverGrandeCity_SidneysRoom_Text_190823
+	trainerbattle 3, OPPONENT_SIDNEY, 0, EverGrandeCity_SidneysRoom_Text_190823
 	jump EverGrandeCity_SidneysRoom_EventScript_15B5C7
 	end
 

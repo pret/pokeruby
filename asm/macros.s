@@ -4,7 +4,6 @@
 	.include "asm/macros/pokemon_data.s"
 	.include "asm/macros/ec.s"
 	.include "asm/macros/map.s"
-	.include "asm/macros/field_effect_script.s"
 
 	.macro region_map_location x, y, width, height, name
 	.byte \x
@@ -119,7 +118,7 @@
 	.2byte \unknown
 	.fill 4 @ padding
 	.endm
-	
+
 	.macro credits_entry number, text
 	.4byte \number
 	.4byte \text
@@ -136,4 +135,15 @@
 	.2byte \unknown
 	.4byte \tile_addr
 	.4byte \palette_addr
+	.endm
+
+	.macro trainer_eye_trainer opp_1, opp_2, opp_3, opp_4, opp_5, map_name
+	.2byte OPPONENT_\opp_1
+	.2byte OPPONENT_\opp_2
+	.2byte OPPONENT_\opp_3
+	.2byte OPPONENT_\opp_4
+	.2byte OPPONENT_\opp_5
+	.2byte GROUP_\map_name
+	.2byte MAP_\map_name
+	.space 2
 	.endm

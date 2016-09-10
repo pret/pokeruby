@@ -18,6 +18,12 @@ extern u8 gStringVar3[];
 
 enum
 {
+    VERSION_SAPPHIRE = 1,
+    VERSION_RUBY = 2,
+};
+
+enum
+{
     MALE,
     FEMALE
 };

@@ -1156,8 +1156,7 @@ gUnknown_08400E36:: @ 8400E36
 BattleText_Format9:
 	.string "are$"
 
-gUnknown_08400E3A:: @ 8400E3A
-BattleText_BadEGG:
+gBadEggNickname:: @ 8400E3A
 	.string "Bad EGG$"
 
 gUnknown_08400E42:: @ 8400E42
@@ -1860,8 +1859,7 @@ gUnknown_0840164C:: @ 840164C
 	.2byte BATTLE_TEXT_SubTookDamage
 	.2byte BATTLE_TEXT_CoinScatter
 	.2byte BATTLE_TEXT_SandTombTrapped
-
-	.incbin "baserom.gba", 0x401658, 0x4
+	.2byte 0xFFFF
 
 	.align 2
 gUnknown_0840165C:: @ 840165C

@@ -1,4 +1,4 @@
-KeySplitTable_8455224: @ 845522
+KeySplitTable_8455224: @ 8455224
 @ This is weird.  There are instruments at the beginning of the keysplit table.
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 8455224
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 8455230

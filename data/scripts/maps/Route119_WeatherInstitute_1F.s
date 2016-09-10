@@ -45,11 +45,11 @@ Route119_WeatherInstitute_1F_EventScript_163C83:: @ 8163C83
 	end
 
 Route119_WeatherInstitute_1F_EventScript_163C94:: @ 8163C94
-	trainerbattle 0, TRAINER_WEATHER_INSTITUTE_GRUNT_1, 0, Route119_WeatherInstitute_1F_Text_19EB8A, Route119_WeatherInstitute_1F_Text_19EBEE
+	trainerbattle 0, OPPONENT_WEATHER_INSTITUTE_GRUNT_1, 0, Route119_WeatherInstitute_1F_Text_19EB8A, Route119_WeatherInstitute_1F_Text_19EBEE
 	msgbox Route119_WeatherInstitute_1F_Text_19EC0E, 6
 	end
 
 Route119_WeatherInstitute_1F_EventScript_163CAB:: @ 8163CAB
-	trainerbattle 0, TRAINER_WEATHER_INSTITUTE_GRUNT_2, 0, Route119_WeatherInstitute_1F_Text_19EC6B, Route119_WeatherInstitute_1F_Text_19EC89
+	trainerbattle 0, OPPONENT_WEATHER_INSTITUTE_GRUNT_2, 0, Route119_WeatherInstitute_1F_Text_19EC6B, Route119_WeatherInstitute_1F_Text_19EC89
 	msgbox Route119_WeatherInstitute_1F_Text_19EC97, 6
 	end

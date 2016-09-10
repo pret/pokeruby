@@ -86,7 +86,7 @@ SootopolisCity_Gym_1F_Movement_15AFFD:: @ 815AFFD
 	step_end
 
 SootopolisCity_Gym_1F_EventScript_15AFFF:: @ 815AFFF
-	trainerbattle 1, 272, 0, SootopolisCity_Gym_1F_Text_18F0CA, SootopolisCity_Gym_1F_Text_18F282, SootopolisCity_Gym_1F_EventScript_15B02D
+	trainerbattle 1, OPPONENT_WALLACE, 0, SootopolisCity_Gym_1F_Text_18F0CA, SootopolisCity_Gym_1F_Text_18F282, SootopolisCity_Gym_1F_EventScript_15B02D
 	checkflag 172
 	jumpif 0, SootopolisCity_Gym_1F_EventScript_15B056
 	checkflag 2060
