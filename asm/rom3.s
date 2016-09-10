@@ -76,7 +76,7 @@ _0800B8A0:
 	ands r0, r1
 	cmp r0, 0
 	beq _0800B90E
-	bl zero_enemy_party_data
+	bl ZeroEnemyPartyMons
 	ldr r4, _0800B944
 	movs r1, 0x8F
 	lsls r1, 1
@@ -87,7 +87,7 @@ _0800B8A0:
 	adds r0, r4, 0
 	movs r2, 0x2
 	movs r3, 0x20
-	bl create_pokemon_set_level
+	bl CreateMon
 	str r5, [sp, 0x10]
 	adds r0, r4, 0
 	movs r1, 0xC
@@ -7612,8 +7612,8 @@ _0800F4C4:
 	subs r4, 0x1
 	cmp r4, 0
 	bge _0800F464
-	bl zero_player_party_data
-	bl zero_enemy_party_data
+	bl ZeroPlayerPartyMons
+	bl ZeroEnemyPartyMons
 	ldr r1, _0800F4FC
 	ldrb r0, [r1]
 	adds r0, 0x1
@@ -8175,7 +8175,7 @@ _0800F90C:
 	beq _0800F920
 	b _0800FCA4
 _0800F920:
-	bl zero_enemy_party_data
+	bl ZeroEnemyPartyMons
 	movs r2, 0
 	str r2, [sp, 0x18]
 	ldr r2, _0800F944
@@ -8333,7 +8333,7 @@ _0800FA18:
 	movs r3, 0
 	str r3, [sp, 0xC]
 	adds r3, r6, 0
-	bl create_pokemon_set_level
+	bl CreateMon
 	b _0800FC74
 	.align 2, 0
 _0800FA58: .4byte gSpeciesNames
@@ -8403,7 +8403,7 @@ _0800FA9E:
 	str r0, [sp, 0xC]
 	adds r0, r5, 0
 	adds r3, r6, 0
-	bl create_pokemon_set_level
+	bl CreateMon
 	movs r6, 0
 	mov r0, r8
 	adds r0, 0x6
@@ -8497,7 +8497,7 @@ _0800FB5E:
 	str r0, [sp, 0xC]
 	adds r0, r4, 0
 	adds r3, r6, 0
-	bl create_pokemon_set_level
+	bl CreateMon
 	adds r5, 0x6
 	adds r0, r4, 0
 	movs r1, 0xC
@@ -8572,7 +8572,7 @@ _0800FBF2:
 	str r0, [sp, 0xC]
 	adds r0, r4, 0
 	adds r3, r6, 0
-	bl create_pokemon_set_level
+	bl CreateMon
 	adds r5, 0x6
 	adds r0, r4, 0
 	movs r1, 0xC
@@ -47482,7 +47482,7 @@ _080239C8:
 	bne _08023A08
 	adds r0, r2, r3
 	adds r1, r5, 0
-	bl sub_803B660
+	bl GiveMoveToBattleMon
 _08023A08:
 	ldr r0, _08023A78
 	ldrh r1, [r0]
@@ -47519,7 +47519,7 @@ _08023A08:
 	bne _08023A54
 	adds r0, r2, r3
 	adds r1, r5, 0
-	bl sub_803B660
+	bl GiveMoveToBattleMon
 _08023A54:
 	ldr r0, _08023A7C
 	str r6, [r0]
@@ -47880,7 +47880,7 @@ _08023D20:
 	ldr r7, _08023E18
 	ldrh r1, [r7]
 	adds r2, r5, 0
-	bl sub_803B6A4
+	bl SetMonMoveSlot
 	ldr r0, _08023E1C
 	ldrh r0, [r0]
 	ldrb r6, [r6]
@@ -47909,7 +47909,7 @@ _08023D20:
 	ldrh r1, [r7]
 	adds r0, r4, 0
 	adds r2, r5, 0
-	bl sub_803B6E4
+	bl SetBattleMonMoveSlot
 _08023DB0:
 	ldr r0, _08023E2C
 	ldrh r1, [r0]
@@ -47954,7 +47954,7 @@ _08023DB0:
 	ldrh r1, [r0]
 	adds r0, r4, 0
 	adds r2, r5, 0
-	bl sub_803B6E4
+	bl SetBattleMonMoveSlot
 	b _08023E5C
 	.align 2, 0
 _08023E10: .4byte 0x02024c10
@@ -67440,7 +67440,7 @@ _0802D96A:
 	mov r2, sp
 	bl SetMonData
 	adds r0, r6, 0
-	bl pokemon_calc_effective_stats
+	bl CalculateMonStats
 	ldr r2, [sp]
 	add r0, sp, 0x4
 	ldrh r0, [r0]
@@ -67733,7 +67733,7 @@ _0802DB9C:
 	mov r2, sp
 	bl SetMonData
 	adds r0, r5, 0
-	bl pokemon_calc_effective_stats
+	bl CalculateMonStats
 	ldr r2, [sp]
 	add r0, sp, 0x4
 	ldrh r0, [r0]

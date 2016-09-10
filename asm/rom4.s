@@ -194,8 +194,8 @@ sub_8052E4C: @ 8052E4C
 	movs r0, 0
 	strb r0, [r1]
 	bl sub_808C0A0
-	bl zero_player_party_data
-	bl zero_enemy_party_data
+	bl ZeroPlayerPartyMons
+	bl ZeroEnemyPartyMons
 	bl sub_80A3684
 	pop {r0}
 	bx r0
@@ -218,8 +218,8 @@ _08052E7E:
 	ldr r1, _08052F40
 	movs r0, 0x1
 	strb r0, [r1]
-	bl zero_player_party_data
-	bl zero_enemy_party_data
+	bl ZeroPlayerPartyMons
+	bl ZeroEnemyPartyMons
 	bl sub_808C02C
 	bl sub_8052DE4
 	ldr r4, _08052F44
@@ -253,7 +253,7 @@ _08052E7E:
 	bl sub_80C5BDC
 	ldr r0, _08052F50
 	strb r5, [r0]
-	bl zero_player_party_data
+	bl ZeroPlayerPartyMons
 	bl sub_80961D8
 	bl sub_81341F8
 	bl sub_813420C

@@ -20728,7 +20728,7 @@ _0806F178: .4byte party_menu_link_mon_held_item_object
 _0806F17C:
 	ldr r0, [r5]
 	ldrh r1, [r5, 0x8]
-	bl pokemon_moveset_pad_
+	bl GiveMoveToMon
 	lsls r0, 16
 	ldr r1, _0806F194
 	cmp r0, r1
@@ -21211,7 +21211,7 @@ sub_806F53C: @ 806F53C
 	lsrs r2, 24
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_803B6A4
+	bl SetMonMoveSlot
 	adds r0, r6, 0
 	bl sub_806F1D0
 _0806F57A:

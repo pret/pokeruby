@@ -1367,13 +1367,13 @@ pokemon_roll_gender: @ 803C4C8
 	adds r4, r0, 0
 	movs r1, 0xB
 	movs r2, 0
-	bl GetMonBoxData
+	bl GetBoxMonData
 	lsls r0, 16
 	lsrs r5, r0, 16
 	adds r0, r4, 0
 	movs r1, 0
 	movs r2, 0
-	bl GetMonBoxData
+	bl GetBoxMonData
 	adds r2, r0, 0
 	ldr r1, _0803C518
 	lsls r0, r5, 3

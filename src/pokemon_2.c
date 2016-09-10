@@ -9,7 +9,7 @@ extern u8 gBadEggNickname[];
 extern u8 gEggNickname[];
 extern u32 gBitTable[];
 
-void EncryptMon(struct BoxPokemon *boxMon)
+void EncryptBoxMon(struct BoxPokemon *boxMon)
 {
     u32 i;
     for (i = 0; i < 12; i++)
@@ -19,7 +19,7 @@ void EncryptMon(struct BoxPokemon *boxMon)
     }
 }
 
-void DecryptMon(struct BoxPokemon *boxMon)
+void DecryptBoxMon(struct BoxPokemon *boxMon)
 {
     u32 i;
     for (i = 0; i < 12; i++)
@@ -133,11 +133,11 @@ u32 GetMonData(struct Pokemon *mon, s32 field, u8 *data)
     case MON_DATA_64:
         return mon->pokerus;
     default:
-        return GetMonBoxData(&mon->box, field, data);
+        return GetBoxMonData(&mon->box, field, data);
     }
 }
 
-u32 GetMonBoxData(struct BoxPokemon *boxMon, s32 field, u8 *data)
+u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
 {
     u32 retVal = 0;
     struct PokemonSubstruct0 *substruct0 = NULL;
@@ -152,9 +152,9 @@ u32 GetMonBoxData(struct BoxPokemon *boxMon, s32 field, u8 *data)
         substruct2 = &(GetSubstruct(boxMon, boxMon->personality, 2)->type2);
         substruct3 = &(GetSubstruct(boxMon, boxMon->personality, 3)->type3);
 
-        DecryptMon(boxMon);
+        DecryptBoxMon(boxMon);
 
-        if (pokemon_calc_checksum(boxMon) != boxMon->checksum)
+        if (CalculateBoxMonChecksum(boxMon) != boxMon->checksum)
         {
             boxMon->isBadEgg = 1;
             boxMon->sanity3 = 1;
@@ -468,7 +468,7 @@ u32 GetMonBoxData(struct BoxPokemon *boxMon, s32 field, u8 *data)
     }
 
     if (field > MON_DATA_10)
-        EncryptMon(boxMon);
+        EncryptBoxMon(boxMon);
 
     return retVal;
 }

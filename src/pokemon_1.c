@@ -19,7 +19,7 @@ extern struct BaseStats gBaseStats[];
 extern struct BattleMove gBattleMoves[];
 extern const u16 *gLevelUpLearnsets[];
 
-void ZeroPokemonBoxData(struct BoxPokemon *boxMon)
+void ZeroBoxMonData(struct BoxPokemon *boxMon)
 {
     u8 *raw = (u8 *)boxMon;
     u32 i;
@@ -27,10 +27,10 @@ void ZeroPokemonBoxData(struct BoxPokemon *boxMon)
         raw[i] = 0;
 }
 
-void zero_pokemon_struct(struct Pokemon *mon)
+void ZeroMonData(struct Pokemon *mon)
 {
     u32 arg;
-    ZeroPokemonBoxData(&mon->box);
+    ZeroBoxMonData(&mon->box);
     arg = 0;
     SetMonData(mon, MON_DATA_STATUS, (u8 *)&arg);
     SetMonData(mon, MON_DATA_LEVEL, (u8 *)&arg);
@@ -45,39 +45,39 @@ void zero_pokemon_struct(struct Pokemon *mon)
     SetMonData(mon, MON_DATA_64, (u8 *)&arg);
 }
 
-void zero_player_party_data(void)
+void ZeroPlayerPartyMons(void)
 {
     s32 i;
     for (i = 0; i < 6; i++)
-        zero_pokemon_struct(&gPlayerParty[i]);
+        ZeroMonData(&gPlayerParty[i]);
 }
 
-void zero_enemy_party_data(void)
+void ZeroEnemyPartyMons(void)
 {
     s32 i;
     for (i = 0; i < 6; i++)
-        zero_pokemon_struct(&gEnemyParty[i]);
+        ZeroMonData(&gEnemyParty[i]);
 }
 
-void create_pokemon_set_level(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId)
+void CreateMon(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId)
 {
     u32 arg;
-    zero_pokemon_struct(mon);
-    create_pokemon(&mon->box, species, level, fixedIV, hasFixedPersonality, fixedPersonality, otIdType, fixedOtId);
+    ZeroMonData(mon);
+    CreateBoxMon(&mon->box, species, level, fixedIV, hasFixedPersonality, fixedPersonality, otIdType, fixedOtId);
     SetMonData(mon, MON_DATA_LEVEL, &level);
     arg = 255;
     SetMonData(mon, MON_DATA_64, (u8 *)&arg);
-    pokemon_calc_effective_stats(mon);
+    CalculateMonStats(mon);
 }
 
-void create_pokemon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId)
+void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId)
 {
     u8 speciesName[10];
     u32 personality;
     u32 value;
     u16 checksum;
 
-    ZeroPokemonBoxData(boxMon);
+    ZeroBoxMonData(boxMon);
 
     if (hasFixedPersonality)
     {
@@ -89,7 +89,7 @@ void create_pokemon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV
         personality = (u16)r | (Random() << 16);
     }
 
-    SetMonBoxData(boxMon, MON_DATA_PERSONALITY, (u8 *)&personality);
+    SetBoxMonData(boxMon, MON_DATA_PERSONALITY, (u8 *)&personality);
 
     if (otIdType == 2)
     {
@@ -114,34 +114,34 @@ void create_pokemon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV
               | (gSaveBlock2.playerTrainerId[3] << 24);
     }
 
-    SetMonBoxData(boxMon, MON_DATA_OT_ID, (u8 *)&value);
+    SetBoxMonData(boxMon, MON_DATA_OT_ID, (u8 *)&value);
 
-    checksum = pokemon_calc_checksum(boxMon);
-    SetMonBoxData(boxMon, MON_DATA_CHECKSUM, (u8 *)&checksum);
-    EncryptMon(boxMon);
+    checksum = CalculateBoxMonChecksum(boxMon);
+    SetBoxMonData(boxMon, MON_DATA_CHECKSUM, (u8 *)&checksum);
+    EncryptBoxMon(boxMon);
     GetSpeciesName(speciesName, species);
-    SetMonBoxData(boxMon, MON_DATA_NICKNAME, speciesName);
-    SetMonBoxData(boxMon, MON_DATA_LANGUAGE, &gGameLanguage);
-    SetMonBoxData(boxMon, MON_DATA_OT_NAME, gSaveBlock2.playerName);
-    SetMonBoxData(boxMon, MON_DATA_SPECIES, (u8 *)&species);
-    SetMonBoxData(boxMon, MON_DATA_EXP, (u8 *)&gExperienceTables[gBaseStats[species].growthRate][level]);
-    SetMonBoxData(boxMon, MON_DATA_FRIENDSHIP, &gBaseStats[species].friendship);
+    SetBoxMonData(boxMon, MON_DATA_NICKNAME, speciesName);
+    SetBoxMonData(boxMon, MON_DATA_LANGUAGE, &gGameLanguage);
+    SetBoxMonData(boxMon, MON_DATA_OT_NAME, gSaveBlock2.playerName);
+    SetBoxMonData(boxMon, MON_DATA_SPECIES, (u8 *)&species);
+    SetBoxMonData(boxMon, MON_DATA_EXP, (u8 *)&gExperienceTables[gBaseStats[species].growthRate][level]);
+    SetBoxMonData(boxMon, MON_DATA_FRIENDSHIP, &gBaseStats[species].friendship);
     value = sav1_map_get_name();
-    SetMonBoxData(boxMon, MON_DATA_MET_LOCATION, (u8 *)&value);
-    SetMonBoxData(boxMon, MON_DATA_MET_LEVEL, &level);
-    SetMonBoxData(boxMon, MON_DATA_MET_GAME, &gGameVersion);
+    SetBoxMonData(boxMon, MON_DATA_MET_LOCATION, (u8 *)&value);
+    SetBoxMonData(boxMon, MON_DATA_MET_LEVEL, &level);
+    SetBoxMonData(boxMon, MON_DATA_MET_GAME, &gGameVersion);
     value = 4;
-    SetMonBoxData(boxMon, MON_DATA_POKEBALL, (u8 *)&value);
-    SetMonBoxData(boxMon, MON_DATA_OT_GENDER, &gSaveBlock2.playerGender);
+    SetBoxMonData(boxMon, MON_DATA_POKEBALL, (u8 *)&value);
+    SetBoxMonData(boxMon, MON_DATA_OT_GENDER, &gSaveBlock2.playerGender);
 
     if (fixedIV < 32)
     {
-        SetMonBoxData(boxMon, MON_DATA_HP_IV, &fixedIV);
-        SetMonBoxData(boxMon, MON_DATA_ATK_IV, &fixedIV);
-        SetMonBoxData(boxMon, MON_DATA_DEF_IV, &fixedIV);
-        SetMonBoxData(boxMon, MON_DATA_SPD_IV, &fixedIV);
-        SetMonBoxData(boxMon, MON_DATA_SPATK_IV, &fixedIV);
-        SetMonBoxData(boxMon, MON_DATA_SPDEF_IV, &fixedIV);
+        SetBoxMonData(boxMon, MON_DATA_HP_IV, &fixedIV);
+        SetBoxMonData(boxMon, MON_DATA_ATK_IV, &fixedIV);
+        SetBoxMonData(boxMon, MON_DATA_DEF_IV, &fixedIV);
+        SetBoxMonData(boxMon, MON_DATA_SPD_IV, &fixedIV);
+        SetBoxMonData(boxMon, MON_DATA_SPATK_IV, &fixedIV);
+        SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &fixedIV);
     }
     else
     {
@@ -149,32 +149,32 @@ void create_pokemon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV
         value = (u16)Random();
 
         iv = value & 0x1F;
-        SetMonBoxData(boxMon, MON_DATA_HP_IV, (u8 *)&iv);
+        SetBoxMonData(boxMon, MON_DATA_HP_IV, (u8 *)&iv);
         iv = (value & 0x3E0) >> 5;
-        SetMonBoxData(boxMon, MON_DATA_ATK_IV, (u8 *)&iv);
+        SetBoxMonData(boxMon, MON_DATA_ATK_IV, (u8 *)&iv);
         iv = (value &0x7C00) >> 10;
-        SetMonBoxData(boxMon, MON_DATA_DEF_IV, (u8 *)&iv);
+        SetBoxMonData(boxMon, MON_DATA_DEF_IV, (u8 *)&iv);
 
         value = (u16)Random();
 
         iv = value & 0x1F;
-        SetMonBoxData(boxMon, MON_DATA_SPD_IV, (u8 *)&iv);
+        SetBoxMonData(boxMon, MON_DATA_SPD_IV, (u8 *)&iv);
         iv = (value & 0x3E0) >> 5;
-        SetMonBoxData(boxMon, MON_DATA_SPATK_IV, (u8 *)&iv);
+        SetBoxMonData(boxMon, MON_DATA_SPATK_IV, (u8 *)&iv);
         iv = (value &0x7C00) >> 10;
-        SetMonBoxData(boxMon, MON_DATA_SPDEF_IV, (u8 *)&iv);
+        SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, (u8 *)&iv);
     }
 
     if (gBaseStats[species].ability2)
     {
         value = personality & 1;
-        SetMonBoxData(boxMon, MON_DATA_ALT_ABILITY, (u8 *)&value);
+        SetBoxMonData(boxMon, MON_DATA_ALT_ABILITY, (u8 *)&value);
     }
 
-    sub_803B720(boxMon);
+    GiveBoxMonInitialMoveset(boxMon);
 }
 
-void pokemon_make_with_nature(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 nature)
+void CreateMonWithNature(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 nature)
 {
     u32 personality;
 
@@ -185,10 +185,10 @@ void pokemon_make_with_nature(struct Pokemon *mon, u16 species, u8 level, u8 fix
     }
     while (nature != GetNatureFromPersonality(personality));
 
-    create_pokemon_set_level(mon, species, level, fixedIV, 1, personality, 0, 0);
+    CreateMon(mon, species, level, fixedIV, 1, personality, 0, 0);
 }
 
-void unref_sub_803AB44(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 gender, u8 nature, u8 unownLetter)
+void CreateMonWithGenderNatureLetter(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 gender, u8 nature, u8 unownLetter)
 {
     u32 personality;
 
@@ -217,10 +217,10 @@ void unref_sub_803AB44(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u
             || gender != pokemon_species_get_gender_info(species, personality));
     }
 
-    create_pokemon_set_level(mon, species, level, fixedIV, 1, personality, 0, 0);
+    CreateMon(mon, species, level, fixedIV, 1, personality, 0, 0);
 }
 
-void sub_803AC44(struct Pokemon *mon, u16 species, u8 level)
+void CreateFemaleMon(struct Pokemon *mon, u16 species, u8 level)
 {
     u32 personality;
     u32 otId;
@@ -234,29 +234,29 @@ void sub_803AC44(struct Pokemon *mon, u16 species, u8 level)
         personality = (u16)r2 | (Random() << 16);
     }
     while (pokemon_species_get_gender_info(species, personality) != MALE);
-    create_pokemon_set_level(mon, species, level, 32, 1, personality, 1, otId);
+    CreateMon(mon, species, level, 32, 1, personality, 1, otId);
 }
 
-void sub_803ACAC(struct Pokemon *mon, u16 species, u8 level, u32 ivs, u32 personality)
+void CreateMonWithIVsPersonality(struct Pokemon *mon, u16 species, u8 level, u32 ivs, u32 personality)
 {
-    create_pokemon_set_level(mon, species, level, 0, 1, personality, 0, 0);
+    CreateMon(mon, species, level, 0, 1, personality, 0, 0);
     SetMonData(mon, MON_DATA_IVS, (u8 *)&ivs);
-    pokemon_calc_effective_stats(mon);
+    CalculateMonStats(mon);
 }
 
-void unref_sub_803ACEC(struct Pokemon *mon, u16 species, u8 level, u8 *ivs, u32 otId)
+void CreateMonWithIVsOTID(struct Pokemon *mon, u16 species, u8 level, u8 *ivs, u32 otId)
 {
-    create_pokemon_set_level(mon, species, level, 0, 0, 0, 1, otId);
+    CreateMon(mon, species, level, 0, 0, 0, 1, otId);
     SetMonData(mon, MON_DATA_HP_IV, &ivs[0]);
     SetMonData(mon, MON_DATA_ATK_IV, &ivs[1]);
     SetMonData(mon, MON_DATA_DEF_IV, &ivs[2]);
     SetMonData(mon, MON_DATA_SPD_IV, &ivs[3]);
     SetMonData(mon, MON_DATA_SPATK_IV, &ivs[4]);
     SetMonData(mon, MON_DATA_SPDEF_IV, &ivs[5]);
-    pokemon_calc_effective_stats(mon);
+    CalculateMonStats(mon);
 }
 
-void pokemon_make_ev_something(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 evSpread)
+void CreateMonWithEVSpread(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 evSpread)
 {
     register s32 i asm("r5");
     register u32 temp asm("r4");
@@ -265,7 +265,7 @@ void pokemon_make_ev_something(struct Pokemon *mon, u16 species, u8 level, u8 fi
     register u32 mask1 asm("r1");
     u8 mask2;
 
-    create_pokemon_set_level(mon, species, level, fixedIV, 0, 0, 0, 0);
+    CreateMon(mon, species, level, fixedIV, 0, 0, 0, 0);
 
     temp = evSpread;
     mask1 = 1;
@@ -290,7 +290,7 @@ void pokemon_make_ev_something(struct Pokemon *mon, u16 species, u8 level, u8 fi
         i++;
     } while (i < 6);
 
-    pokemon_calc_effective_stats(mon);
+    CalculateMonStats(mon);
 }
 
 void sub_803ADE8(struct Pokemon *mon, struct UnknownPokemonStruct *src)
@@ -300,10 +300,10 @@ void sub_803ADE8(struct Pokemon *mon, struct UnknownPokemonStruct *src)
     u8 language;
     u8 value;
 
-    create_pokemon_set_level(mon, src->species, src->level, 0, 1, src->personality, 1, src->otId);
+    CreateMon(mon, src->species, src->level, 0, 1, src->personality, 1, src->otId);
 
     for (i = 0; i < 4; i++)
-        sub_803B6A4(mon, src->moves[i], i);
+        SetMonMoveSlot(mon, src->moves[i], i);
 
     SetMonData(mon, MON_DATA_PP_BONUSES, (u8 *)&src->ppBonuses);
     SetMonData(mon, MON_DATA_HELD_ITEM, (u8 *)&src->heldItem);
@@ -339,7 +339,7 @@ void sub_803ADE8(struct Pokemon *mon, struct UnknownPokemonStruct *src)
     SetMonData(mon, MON_DATA_SPATK_IV, &value);
     value = src->spDefenseIV;
     SetMonData(mon, MON_DATA_SPDEF_IV, &value);
-    pokemon_calc_effective_stats(mon);
+    CalculateMonStats(mon);
 }
 
 void sub_803AF78(struct Pokemon *mon, struct UnknownPokemonStruct *dest)
@@ -379,7 +379,7 @@ void sub_803AF78(struct Pokemon *mon, struct UnknownPokemonStruct *dest)
     GetMonData(mon, MON_DATA_NICKNAME, dest->nickname);
 }
 
-u16 pokemon_calc_checksum(struct BoxPokemon *boxMon)
+u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon)
 {
     u16 checksum = 0;
     union PokemonSubstruct *substruct0 = GetSubstruct(boxMon, boxMon->personality, 0);
@@ -412,7 +412,7 @@ u16 pokemon_calc_checksum(struct BoxPokemon *boxMon)
     SetMonData(mon, field, (u8 *)&n);                           \
 }
 
-void pokemon_calc_effective_stats(struct Pokemon *mon)
+void CalculateMonStats(struct Pokemon *mon)
 {
     s32 oldMaxHP = GetMonData(mon, MON_DATA_MAX_HP, NULL);
     s32 currentHP = GetMonData(mon, MON_DATA_HP, NULL);
@@ -429,7 +429,7 @@ void pokemon_calc_effective_stats(struct Pokemon *mon)
     s32 spDefenseIV = GetMonData(mon, MON_DATA_SPDEF_IV, NULL);
     s32 spDefenseEV = GetMonData(mon, MON_DATA_SPDEF_EV, NULL);
     u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
-    s32 level = level_by_exp(mon);
+    s32 level = GetLevelFromMonExp(mon);
     s32 newMaxHP;
     u8 nature;
 
@@ -488,10 +488,10 @@ void sub_803B4B4(struct Pokemon *src, struct Pokemon *dest)
     SetMonData(dest, MON_DATA_MAX_HP, (u8 *)&value);
     value = 255;
     SetMonData(dest, MON_DATA_64, (u8 *)&value);
-    pokemon_calc_effective_stats(dest);
+    CalculateMonStats(dest);
 }
 
-u8 level_by_exp(struct Pokemon *mon)
+u8 GetLevelFromMonExp(struct Pokemon *mon)
 {
     u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
     u32 exp = GetMonData(mon, MON_DATA_EXP, NULL);
@@ -503,10 +503,10 @@ u8 level_by_exp(struct Pokemon *mon)
     return level - 1;
 }
 
-u8 sub_803B570(struct BoxPokemon *boxMon)
+u8 GetLevelFromBoxMonExp(struct BoxPokemon *boxMon)
 {
-    u16 species = GetMonBoxData(boxMon, MON_DATA_SPECIES, NULL);
-    u32 exp = GetMonBoxData(boxMon, MON_DATA_EXP, NULL);
+    u16 species = GetBoxMonData(boxMon, MON_DATA_SPECIES, NULL);
+    u32 exp = GetBoxMonData(boxMon, MON_DATA_EXP, NULL);
     s32 level = 1;
 
     while (level <= 100 && gExperienceTables[gBaseStats[species].growthRate][level] <= exp)
@@ -515,30 +515,30 @@ u8 sub_803B570(struct BoxPokemon *boxMon)
     return level - 1;
 }
 
-u16 pokemon_moveset_pad_(struct Pokemon *mon, u16 value)
+u16 GiveMoveToMon(struct Pokemon *mon, u16 move)
 {
-    return pokemon_moveset_pad(&mon->box, value);
+    return GiveMoveToBoxMon(&mon->box, move);
 }
 
-u16 pokemon_moveset_pad(struct BoxPokemon *boxMon, u16 value)
+u16 GiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move)
 {
     s32 i;
     for (i = 0; i < 4; i++)
     {
-        u16 move = GetMonBoxData(boxMon, MON_DATA_MOVE1 + i, NULL);
-        if (!move)
+        u16 existingMove = GetBoxMonData(boxMon, MON_DATA_MOVE1 + i, NULL);
+        if (!existingMove)
         {
-            SetMonBoxData(boxMon, MON_DATA_MOVE1 + i, (u8 *)&value);
-            SetMonBoxData(boxMon, MON_DATA_PP1 + i, &gBattleMoves[value].pp);
-            return value;
+            SetBoxMonData(boxMon, MON_DATA_MOVE1 + i, (u8 *)&move);
+            SetBoxMonData(boxMon, MON_DATA_PP1 + i, &gBattleMoves[move].pp);
+            return move;
         }
-        if (move == value)
+        if (existingMove == move)
             return -2;
     }
     return -1;
 }
 
-u16 sub_803B660(struct BattlePokemon *mon, u16 value)
+u16 GiveMoveToBattleMon(struct BattlePokemon *mon, u16 move)
 {
     s32 i;
 
@@ -546,36 +546,36 @@ u16 sub_803B660(struct BattlePokemon *mon, u16 value)
     {
         if (!mon->moves[i])
         {
-            mon->moves[i] = value;
-            mon->pp[i] = gBattleMoves[value].pp;
-            return value;
+            mon->moves[i] = move;
+            mon->pp[i] = gBattleMoves[move].pp;
+            return move;
         }
     }
 
     return -1;
 }
 
-void sub_803B6A4(struct Pokemon *mon, u16 move, u8 slot)
+void SetMonMoveSlot(struct Pokemon *mon, u16 move, u8 slot)
 {
     SetMonData(mon, MON_DATA_MOVE1 + slot, (u8 *)&move);
     SetMonData(mon, MON_DATA_PP1 + slot, &gBattleMoves[move].pp);
 }
 
-void sub_803B6E4(struct BattlePokemon *mon, u16 move, u8 slot)
+void SetBattleMonMoveSlot(struct BattlePokemon *mon, u16 move, u8 slot)
 {
     mon->moves[slot] = move;
     mon->pp[slot] = gBattleMoves[move].pp;
 }
 
-void unref_sub_803B714(struct Pokemon *mon)
+void GiveMonInitialMoveset(struct Pokemon *mon)
 {
-    sub_803B720(&mon->box);
+    GiveBoxMonInitialMoveset(&mon->box);
 }
 
-void sub_803B720(struct BoxPokemon *boxMon)
+void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon)
 {
-    u16 species = GetMonBoxData(boxMon, MON_DATA_SPECIES, NULL);
-    s32 level = sub_803B570(boxMon);
+    u16 species = GetBoxMonData(boxMon, MON_DATA_SPECIES, NULL);
+    s32 level = GetLevelFromBoxMonExp(boxMon);
     s32 i;
 
     for (i = 0; gLevelUpLearnsets[species][i] != (u16)-1; i++)
@@ -590,8 +590,8 @@ void sub_803B720(struct BoxPokemon *boxMon)
 
         move = (gLevelUpLearnsets[species][i] & 0x1FF);
 
-        if (pokemon_moveset_pad(boxMon, move) == (u16)-1)
-            sub_803B980(boxMon, move);
+        if (GiveMoveToBoxMon(boxMon, move) == (u16)-1)
+            DeleteFirstMoveAndGiveMoveToBoxMon(boxMon, move);
     }
 }
 
@@ -617,13 +617,13 @@ u16 sub_803B7C8(struct Pokemon *mon, u8 a2)
     {
         word_2024E82 = (gLevelUpLearnsets[species][byte_2024E88] & 0x1FF);
         byte_2024E88++;
-        retVal = pokemon_moveset_pad_(mon, word_2024E82);
+        retVal = GiveMoveToMon(mon, word_2024E82);
     }
 
     return retVal;
 }
 
-void sub_803B8D4(struct Pokemon *mon, u16 move)
+void DeleteFirstMoveAndGiveMoveToMon(struct Pokemon *mon, u16 move)
 {
     s32 i;
     u16 moves[4];
@@ -650,7 +650,7 @@ void sub_803B8D4(struct Pokemon *mon, u16 move)
     SetMonData(mon, MON_DATA_PP_BONUSES, &ppBonuses);
 }
 
-void sub_803B980(struct BoxPokemon *boxMon, u16 move)
+void DeleteFirstMoveAndGiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move)
 {
     s32 i;
     u16 moves[4];
@@ -659,20 +659,20 @@ void sub_803B980(struct BoxPokemon *boxMon, u16 move)
 
     for (i = 0; i < 3; i++)
     {
-        moves[i] = GetMonBoxData(boxMon, MON_DATA_MOVE2 + i, NULL);
-        pp[i]= GetMonBoxData(boxMon, MON_DATA_PP2 + i, NULL);
+        moves[i] = GetBoxMonData(boxMon, MON_DATA_MOVE2 + i, NULL);
+        pp[i]= GetBoxMonData(boxMon, MON_DATA_PP2 + i, NULL);
     }
 
-    ppBonuses = GetMonBoxData(boxMon, MON_DATA_PP_BONUSES, NULL);
+    ppBonuses = GetBoxMonData(boxMon, MON_DATA_PP_BONUSES, NULL);
     ppBonuses >>= 2;
     moves[3] = move;
     pp[3] = gBattleMoves[move].pp;
 
     for (i = 0; i < 4; i++)
     {
-        SetMonBoxData(boxMon, MON_DATA_MOVE1 + i, (u8 *)&moves[i]);
-        SetMonBoxData(boxMon, MON_DATA_PP1 + i, &pp[i]);
+        SetBoxMonData(boxMon, MON_DATA_MOVE1 + i, (u8 *)&moves[i]);
+        SetBoxMonData(boxMon, MON_DATA_PP1 + i, &pp[i]);
     }
 
-    SetMonBoxData(boxMon, MON_DATA_PP_BONUSES, &ppBonuses);
+    SetBoxMonData(boxMon, MON_DATA_PP_BONUSES, &ppBonuses);
 }

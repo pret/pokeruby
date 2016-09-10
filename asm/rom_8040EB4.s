@@ -583,7 +583,7 @@ pokemon_get_nick_: @ 80412D0
 	adds r4, r1, 0
 	movs r1, 0x2
 	mov r2, sp
-	bl GetMonBoxData
+	bl GetBoxMonData
 	adds r0, r4, 0
 	mov r1, sp
 	bl StringCopy10
@@ -605,7 +605,7 @@ _080412F8:
 	lsls r0, 4
 	adds r0, r6, r0
 	movs r1, 0xB
-	bl GetMonBoxData
+	bl GetBoxMonData
 	cmp r0, 0
 	beq _08041310
 	adds r0, r5, 0x1
@@ -646,7 +646,7 @@ _0804133E:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl GetMonBoxData
+	bl GetBoxMonData
 	cmp r0, 0
 	beq _0804136E
 	adds r0, r7, 0x1
@@ -654,7 +654,7 @@ _0804133E:
 	lsrs r7, r0, 24
 	adds r0, r4, 0
 	movs r1, 0xC
-	bl GetMonBoxData
+	bl GetBoxMonData
 	adds r1, r0, 0
 	cmp r1, 0
 	bne _0804136E
@@ -694,7 +694,7 @@ _0804139A:
 	lsls r0, 4
 	adds r0, r5, r0
 	movs r1, 0xB
-	bl GetMonBoxData
+	bl GetBoxMonData
 	cmp r0, 0
 	bne _080413B2
 	lsls r0, r4, 24
@@ -795,7 +795,7 @@ _0804144A:
 	movs r1, 0
 	str r1, [r0]
 	adds r0, r7, 0
-	bl zero_pokemon_struct
+	bl ZeroMonData
 	bl party_compaction
 	bl calc_player_party_count
 	pop {r3,r4}
@@ -837,12 +837,12 @@ sub_80414C0: @ 80414C0
 	adds r4, 0x50
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl GetMonBoxData
+	bl GetBoxMonData
 	cmp r0, 0
 	beq _08041516
 	adds r0, r5, 0
 	movs r1, 0xB
-	bl GetMonBoxData
+	bl GetBoxMonData
 	adds r6, r0, 0
 	cmp r6, 0
 	bne _08041516
@@ -851,7 +851,7 @@ sub_80414C0: @ 80414C0
 	movs r2, 0x50
 	bl memcpy
 	adds r0, r4, 0
-	bl ZeroPokemonBoxData
+	bl ZeroBoxMonData
 	adds r0, r5, 0
 	adds r0, 0xA0
 	adds r4, 0x88
@@ -898,7 +898,7 @@ _0804153C:
 	ldr r0, _0804156C
 	ldrh r1, [r0]
 	adds r0, r4, 0
-	bl sub_803B8D4
+	bl DeleteFirstMoveAndGiveMoveToMon
 _0804154C:
 	adds r0, r4, 0
 	adds r1, r6, 0
@@ -911,7 +911,7 @@ _0804154C:
 	ble _08041524
 _08041560:
 	adds r0, r4, 0
-	bl pokemon_calc_effective_stats
+	bl CalculateMonStats
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -938,7 +938,7 @@ sub_8041570: @ 8041570
 	bl pokemon_get_nick_
 	adds r0, r6, 0
 	movs r1, 0xB
-	bl GetMonBoxData
+	bl GetBoxMonData
 	lsls r0, 16
 	lsrs r0, 16
 	mov r9, r0
@@ -995,7 +995,7 @@ _080415D8:
 _08041610:
 	bl party_compaction
 	adds r0, r6, 0
-	bl ZeroPokemonBoxData
+	bl ZeroBoxMonData
 	movs r2, 0x88
 	lsls r2, 1
 	adds r0, r5, r2
@@ -1046,15 +1046,15 @@ sub_8041664: @ 8041664
 	bl memcpy
 	adds r0, r4, 0
 	movs r1, 0x19
-	bl GetMonBoxData
+	bl GetBoxMonData
 	adds r0, r5
 	str r0, [sp, 0x50]
 	add r2, sp, 0x50
 	mov r0, sp
 	movs r1, 0x19
-	bl SetMonBoxData
+	bl SetBoxMonData
 	mov r0, sp
-	bl sub_803B570
+	bl GetLevelFromBoxMonExp
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x54
@@ -1077,7 +1077,7 @@ sub_80416A0: @ 80416A0
 	lsls r4, 4
 	adds r4, r5, r4
 	adds r0, r4, 0
-	bl sub_803B570
+	bl GetLevelFromBoxMonExp
 	adds r6, r0, 0
 	lsls r6, 24
 	lsrs r6, 24
@@ -1218,7 +1218,7 @@ sub_80417B8: @ 80417B8
 	ldr r4, _080417DC
 	adds r0, r4
 	movs r1, 0xB
-	bl GetMonBoxData
+	bl GetBoxMonData
 	cmp r0, 0
 	bne _080417E0
 	movs r0, 0
@@ -1276,7 +1276,7 @@ _0804182A:
 	adds r0, r4, r5
 	lsls r0, 4
 	adds r0, r6, r0
-	bl ZeroPokemonBoxData
+	bl ZeroBoxMonData
 	movs r1, 0x88
 	lsls r1, 1
 	adds r0, r6, r1
@@ -1574,7 +1574,7 @@ _08041A4C:
 	lsls r0, 4
 	add r0, r8
 	movs r1, 0x27
-	bl GetMonBoxData
+	bl GetBoxMonData
 	add r2, sp, 0x10
 	strb r0, [r2]
 	mov r0, r9
@@ -1590,7 +1590,7 @@ _08041A6C:
 	lsls r0, 4
 	add r0, r8
 	movs r1, 0x28
-	bl GetMonBoxData
+	bl GetBoxMonData
 	strb r0, [r4]
 	mov r0, r9
 	movs r1, 0x28
@@ -1604,7 +1604,7 @@ _08041A88:
 	lsls r0, 4
 	add r0, r8
 	movs r1, 0x29
-	bl GetMonBoxData
+	bl GetBoxMonData
 	strb r0, [r4]
 	mov r0, r9
 	movs r1, 0x29
@@ -1618,7 +1618,7 @@ _08041AA4:
 	lsls r0, 4
 	add r0, r8
 	movs r1, 0x2A
-	bl GetMonBoxData
+	bl GetBoxMonData
 	strb r0, [r4]
 	mov r0, r9
 	movs r1, 0x2A
@@ -1632,7 +1632,7 @@ _08041AC0:
 	lsls r0, 4
 	add r0, r8
 	movs r1, 0x2B
-	bl GetMonBoxData
+	bl GetBoxMonData
 	strb r0, [r4]
 	mov r0, r9
 	movs r1, 0x2B
@@ -1649,7 +1649,7 @@ _08041AE2:
 	lsls r0, 4
 	add r0, r8
 	movs r1, 0x2C
-	bl GetMonBoxData
+	bl GetBoxMonData
 	strb r0, [r4]
 	mov r0, r9
 	movs r1, 0x2C
@@ -1831,14 +1831,14 @@ _08041C46:
 	adds r5, 0xD
 	mov r0, r10
 	adds r1, r5, 0
-	bl GetMonBoxData
+	bl GetBoxMonData
 	lsls r4, r6, 1
 	mov r2, r8
 	adds r1, r4, r2
 	strh r0, [r1]
 	mov r0, r9
 	adds r1, r5, 0
-	bl GetMonBoxData
+	bl GetBoxMonData
 	ldr r1, _08041CC8
 	adds r4, r1
 	strh r0, [r4]
@@ -1878,7 +1878,7 @@ _08041C9A:
 	adds r1, r0, 0
 	adds r0, r7, 0
 	str r2, [sp, 0x8]
-	bl pokemon_moveset_pad_
+	bl GiveMoveToMon
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r2, [sp, 0x8]
@@ -1886,7 +1886,7 @@ _08041C9A:
 	bne _08041CEA
 	ldrh r1, [r4]
 	adds r0, r7, 0
-	bl sub_803B8D4
+	bl DeleteFirstMoveAndGiveMoveToMon
 	b _08041CEA
 	.align 2, 0
 _08041CC8: .4byte 0x03000500
@@ -1945,14 +1945,14 @@ _08041D16:
 	beq _08041D52
 	ldrh r1, [r4]
 	adds r0, r7, 0
-	bl pokemon_moveset_pad_
+	bl GiveMoveToMon
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, r6
 	bne _08041D52
 	ldrh r1, [r4]
 	adds r0, r7, 0
-	bl sub_803B8D4
+	bl DeleteFirstMoveAndGiveMoveToMon
 _08041D52:
 	adds r0, r5, 0x1
 	lsls r0, 16
@@ -2046,7 +2046,7 @@ _08041DDE:
 	adds r1, r0, 0
 	adds r0, r7, 0
 	str r2, [sp, 0x8]
-	bl pokemon_moveset_pad_
+	bl GiveMoveToMon
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r2, [sp, 0x8]
@@ -2054,7 +2054,7 @@ _08041DDE:
 	bne _08041E38
 	ldrh r1, [r4]
 	adds r0, r7, 0
-	bl sub_803B8D4
+	bl DeleteFirstMoveAndGiveMoveToMon
 	b _08041E38
 	.align 2, 0
 _08041E14: .4byte 0x030004d8
@@ -2140,13 +2140,13 @@ incense_effects: @ 8041E8C
 _08041EA4:
 	adds r0, r5, 0
 	movs r1, 0xC
-	bl GetMonBoxData
+	bl GetBoxMonData
 	lsls r0, 16
 	lsrs r6, r0, 16
 	adds r0, r5, 0
 	adds r0, 0x50
 	movs r1, 0xC
-	bl GetMonBoxData
+	bl GetBoxMonData
 	lsls r0, 16
 	lsrs r2, r0, 16
 	ldrh r0, [r4]
@@ -2194,7 +2194,7 @@ _08041EFC:
 	adds r5, r1, r0
 	adds r0, r5, 0
 	movs r1, 0xB
-	bl GetMonBoxData
+	bl GetBoxMonData
 	lsls r1, r4, 1
 	add r1, sp
 	strh r0, [r1]
@@ -2370,7 +2370,7 @@ sub_8042044: @ 8042044
 	adds r1, r5, 0
 	movs r2, 0x5
 	movs r3, 0x20
-	bl create_pokemon_set_level
+	bl CreateMon
 	movs r0, 0x12
 	add r0, sp
 	mov r8, r0
@@ -2466,7 +2466,7 @@ sub_80420FC: @ 80420FC
 	adds r1, r5, 0
 	movs r2, 0x5
 	movs r3, 0x20
-	bl create_pokemon_set_level
+	bl CreateMon
 	movs r1, 0x12
 	add r1, sp
 	mov r9, r1
@@ -2538,7 +2538,7 @@ _080421BC:
 	adds r0, r5, 0
 	movs r1, 0x5
 	str r2, [sp, 0x4]
-	bl GetMonBoxData
+	bl GetBoxMonData
 	ldr r2, [sp, 0x4]
 	cmp r0, 0
 	beq _080421DE
@@ -2677,7 +2677,7 @@ sub_80422C4: @ 80422C4
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	movs r1, 0xB
-	bl GetMonBoxData
+	bl GetBoxMonData
 	cmp r0, 0
 	beq _080422FC
 	ldr r1, _0804231C
@@ -2685,7 +2685,7 @@ sub_80422C4: @ 80422C4
 	bl pokemon_get_nick_
 	adds r0, r6, 0
 	movs r1, 0x3
-	bl GetMonBoxData
+	bl GetBoxMonData
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -2693,7 +2693,7 @@ sub_80422C4: @ 80422C4
 	adds r0, r6, 0
 	movs r1, 0x7
 	adds r2, r5, 0
-	bl GetMonBoxData
+	bl GetBoxMonData
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl ConvertInternationalString
@@ -2702,7 +2702,7 @@ _080422FC:
 	adds r4, 0x50
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl GetMonBoxData
+	bl GetBoxMonData
 	cmp r0, 0
 	beq _08042314
 	ldr r1, _08042324
@@ -2733,7 +2733,7 @@ sub_8042328: @ 8042328
 	muls r0, r5
 	adds r0, r4
 	movs r1, 0xB
-	bl GetMonBoxData
+	bl GetBoxMonData
 	lsls r0, 16
 	lsrs r0, 16
 	pop {r4-r6}
@@ -2852,17 +2852,17 @@ daycare_relationship_score: @ 80423D8
 _0804240E:
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl GetMonBoxData
+	bl GetBoxMonData
 	strh r0, [r5]
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl GetMonBoxData
+	bl GetBoxMonData
 	ldr r1, [sp, 0x28]
 	stm r1!, {r0}
 	str r1, [sp, 0x28]
 	adds r0, r4, 0
 	movs r1, 0
-	bl GetMonBoxData
+	bl GetBoxMonData
 	adds r1, r0, 0
 	ldrh r0, [r5]
 	bl pokemon_species_get_gender_info
@@ -3540,7 +3540,7 @@ _08042906:
 	mov r1, r10
 	movs r2, 0x5
 	movs r3, 0x20
-	bl create_pokemon_set_level
+	bl CreateMon
 	movs r4, 0
 _0804295E:
 	adds r1, r4, 0
@@ -3678,7 +3678,7 @@ sub_80429EC: @ 80429EC
 	adds r0, r5, 0
 	bl sub_8040B1C
 	adds r0, r5, 0
-	bl pokemon_calc_effective_stats
+	bl CalculateMonStats
 	add sp, 0x14
 	pop {r4-r6}
 	pop {r0}
@@ -14563,7 +14563,7 @@ _08048058:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x20
-	bl create_pokemon_set_level
+	bl CreateMon
 	adds r6, 0x1
 	cmp r6, 0x5
 	ble _08048058
@@ -25316,7 +25316,7 @@ sub_804D948: @ 804D948
 	str r0, [sp, 0xC]
 	adds r0, r6, 0
 	movs r3, 0x20
-	bl create_pokemon_set_level
+	bl CreateMon
 	adds r2, r5, 0
 	adds r2, 0xE
 	adds r0, r6, 0
@@ -25445,7 +25445,7 @@ _0804DAB4:
 	bl SetMonData
 _0804DAC0:
 	ldr r0, _0804DAD0
-	bl pokemon_calc_effective_stats
+	bl CalculateMonStats
 	add sp, 0x38
 	pop {r4-r7}
 	pop {r0}

@@ -124,14 +124,14 @@ _0803D2D6:
 	b _0803D2E6
 _0803D2E0:
 	adds r0, r3, 0
-	bl SetMonBoxData
+	bl SetBoxMonData
 _0803D2E6:
 	pop {r0}
 	bx r0
 	thumb_func_end SetMonData
 
-	thumb_func_start SetMonBoxData
-SetMonBoxData: @ 803D2EC
+	thumb_func_start SetBoxMonData
+SetBoxMonData: @ 803D2EC
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -168,9 +168,9 @@ SetMonBoxData: @ 803D2EC
 	bl GetSubstruct
 	adds r5, r0, 0
 	adds r0, r7, 0
-	bl DecryptMon
+	bl DecryptBoxMon
 	adds r0, r7, 0
-	bl pokemon_calc_checksum
+	bl CalculateBoxMonChecksum
 	lsls r0, 16
 	lsrs r0, 16
 	ldrh r1, [r7, 0x1C]
@@ -187,7 +187,7 @@ SetMonBoxData: @ 803D2EC
 	orrs r0, r1
 	strb r0, [r5, 0x7]
 	adds r0, r7, 0
-	bl EncryptMon
+	bl EncryptBoxMon
 	b _0803D8F6
 _0803D36C:
 	mov r0, r10
@@ -888,10 +888,10 @@ _0803D8E2:
 	cmp r0, 0xA
 	ble _0803D8F6
 	adds r0, r7, 0
-	bl pokemon_calc_checksum
+	bl CalculateBoxMonChecksum
 	strh r0, [r7, 0x1C]
 	adds r0, r7, 0
-	bl EncryptMon
+	bl EncryptBoxMon
 _0803D8F6:
 	pop {r3-r5}
 	mov r8, r3
@@ -904,7 +904,7 @@ _0803D8F6:
 _0803D904: .4byte 0xfffffc1f
 _0803D908: .4byte 0xfff07fff
 _0803D90C: .4byte 0xfffffe0f
-	thumb_func_end SetMonBoxData
+	thumb_func_end SetBoxMonData
 
 	thumb_func_start CopyMon
 CopyMon: @ 803D910
@@ -1003,7 +1003,7 @@ _0803D9B8:
 	movs r1, 0xB
 	movs r2, 0
 	str r3, [sp]
-	bl GetMonBoxData
+	bl GetBoxMonData
 	ldr r3, [sp]
 	cmp r0, 0
 	bne _0803D9F0
@@ -1251,7 +1251,7 @@ create_enemy_party: @ 803DB8C
 	push {r5-r7}
 	sub sp, 0x18
 	adds r4, r0, 0
-	bl zero_enemy_party_data
+	bl ZeroEnemyPartyMons
 	ldr r5, _0803DC8C
 	adds r0, r5, 0
 	adds r1, r4, 0
@@ -1296,7 +1296,7 @@ _0803DBAC:
 	str r0, [sp, 0xC]
 	adds r0, r5, 0
 	movs r3, 0xF
-	bl create_pokemon_set_level
+	bl CreateMon
 	ldr r2, _0803DC94
 	add r2, r9
 	adds r0, r5, 0
@@ -1486,7 +1486,7 @@ _0803DD62:
 	movs r1, 0xB
 	movs r2, 0
 	str r3, [sp]
-	bl GetMonBoxData
+	bl GetBoxMonData
 	ldr r3, [sp]
 	cmp r0, 0
 	bne _0803DD80
@@ -2588,7 +2588,7 @@ _0803E5E4:
 	mov r2, sp
 	bl SetMonData
 	mov r0, r8
-	bl pokemon_calc_effective_stats
+	bl CalculateMonStats
 	movs r0, 0
 	str r0, [sp, 0x1C]
 _0803E646:
@@ -2935,7 +2935,7 @@ _0803E904:
 	mov r2, sp
 	bl SetMonData
 	mov r0, r8
-	bl pokemon_calc_effective_stats
+	bl CalculateMonStats
 	ldr r0, [sp, 0x24]
 	adds r0, 0x1
 	lsls r0, 24
@@ -3641,7 +3641,7 @@ _0803EED4:
 	mov r2, sp
 	bl SetMonData
 	mov r0, r8
-	bl pokemon_calc_effective_stats
+	bl CalculateMonStats
 	movs r5, 0
 	str r5, [sp, 0x1C]
 	b _0803F130
@@ -7423,20 +7423,20 @@ _08040B30:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	movs r2, 0
-	bl GetMonBoxData
+	bl GetBoxMonData
 	cmp r0, 0
 	beq _08040B7C
 	adds r0, r5, 0
 	adds r1, r4, 0
 	movs r2, 0
-	bl GetMonBoxData
+	bl GetBoxMonData
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
 	movs r1, 0x15
 	movs r2, 0
-	bl GetMonBoxData
+	bl GetBoxMonData
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -7450,7 +7450,7 @@ _08040B30:
 	adds r1, 0x11
 	adds r0, r5, 0
 	mov r2, sp
-	bl SetMonBoxData
+	bl SetBoxMonData
 _08040B7C:
 	adds r6, 0x1
 	cmp r6, 0x3
