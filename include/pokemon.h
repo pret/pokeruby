@@ -330,12 +330,12 @@ struct BattleMove
     u32 flags;
 };
 
-void ZeroPokemonBoxData(struct Pokemon *mon);
+void ZeroPokemonBoxData(struct BoxPokemon *boxMon);
 void zero_pokemon_struct(struct Pokemon *mon);
 void zero_player_party_data(void);
 void zero_enemy_party_data(void);
 void create_pokemon_set_level(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId);
-void create_pokemon(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId);
+void create_pokemon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId);
 void pokemon_make_with_nature(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 nature);
 void unref_sub_803AB44(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 gender, u8 nature, u8 unownLetter);
 void sub_803AC44(struct Pokemon *mon, u16 species, u8 level);
@@ -343,31 +343,31 @@ void unref_sub_803ACEC(struct Pokemon *mon, u16 species, u8 level, u8 *ivs, u32 
 void pokemon_make_ev_something(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 evSpread);
 void sub_803ADE8(struct Pokemon *mon, struct UnknownPokemonStruct *src);
 void sub_803AF78(struct Pokemon *mon, struct UnknownPokemonStruct *dest);
-u16 pokemon_calc_checksum(struct Pokemon *mon);
+u16 pokemon_calc_checksum(struct BoxPokemon *boxMon);
 void pokemon_calc_effective_stats(struct Pokemon *mon);
 void sub_803B4B4(struct Pokemon *src, struct Pokemon *dest);
 u8 level_by_exp(struct Pokemon *mon);
-u8 sub_803B570(struct BoxPokemon *mon);
+u8 sub_803B570(struct BoxPokemon *boxMon);
 u16 pokemon_moveset_pad_(struct Pokemon *mon, u16 value);
-u16 pokemon_moveset_pad(struct Pokemon *mon, u16 value);
+u16 pokemon_moveset_pad(struct BoxPokemon *boxMon, u16 value);
 u16 sub_803B660(struct BattlePokemon *mon, u16 value);
 void sub_803B6A4(struct Pokemon *mon, u16 move, u8 slot);
 void sub_803B6E4(struct BattlePokemon *mon, u16 move, u8 slot);
 void unref_sub_803B714(struct Pokemon *mon);
-void sub_803B720(struct Pokemon *mon);
+void sub_803B720(struct BoxPokemon *boxMon);
 u16 sub_803B7C8(struct Pokemon *mon, u8 a2);
 void sub_803B8D4(struct Pokemon *mon, u16 move);
-void sub_803B980(struct Pokemon *mon, u16 move);
+void sub_803B980(struct BoxPokemon *boxMon, u16 move);
 
 u8 pokemon_species_get_gender_info(u16 species, u32 personality);
 
-void EncryptMon(struct Pokemon *mon);
-void DecryptMon(struct Pokemon *mon);
-union PokemonSubstruct *GetSubstruct(struct Pokemon *mon, u32 personality, u8 substructType);
+void EncryptMon(struct BoxPokemon *boxMon);
+void DecryptMon(struct BoxPokemon *boxMon);
+union PokemonSubstruct *GetSubstruct(struct BoxPokemon *boxMon, u32 personality, u8 substructType);
 u32 GetMonData(struct Pokemon *mon, s32 field, u8 *data);
-u32 GetMonBoxData(struct Pokemon *mon, s32 field, u8 *data);
+u32 GetMonBoxData(struct BoxPokemon *boxMon, s32 field, u8 *data);
 void SetMonData(struct Pokemon *mon, s32 field, u8 *data);
-void SetMonBoxData(struct Pokemon *mon, s32 field, const u8 *data);
+void SetMonBoxData(struct BoxPokemon *boxMon, s32 field, const u8 *data);
 
 u8 GetNature(struct Pokemon *mon);
 u8 GetNatureFromPersonality(u32 personality);
