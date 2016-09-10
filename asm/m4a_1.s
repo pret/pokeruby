@@ -679,7 +679,7 @@ sub_81DD520:
 	add r2, r2, r1
 	add r2, r2, 0x10
 	ldr r5, =0x030007b8
-	ldr r6, =gUnknown_0842F9F4
+	ldr r6, =gDeltaEncodingTable
 	mov r7, 0x40
 	ldrb lr, [r2], 1
 	strb lr, [r5], 1
