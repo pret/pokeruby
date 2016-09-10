@@ -32,7 +32,7 @@ double ieee754_read_extended (unsigned char*);
 #define FATAL_ERROR(format, ...)           \
 do                                         \
 {                                          \
-    fprintf(stderr, format, __VA_ARGS__,); \
+    fprintf(stderr, format, __VA_ARGS__);  \
     exit(1);                               \
 } while (0)
 
@@ -227,12 +227,24 @@ AifData *read_aif(char * aif_file_data, unsigned long aif_file_data_size)
 void aif2pcm(const char *aif_filename)
 {
 	// Get .pcm filename.
-	char pcm_filename[strlen(aif_filename) + 1];
+	char *pcm_filename = malloc(strlen(aif_filename) + 1);
+
+	if (!pcm_filename)
+	{
+		FATAL_ERROR("Failed to allocate space for pcm filename.\n");
+	}
+
 	strcpy(pcm_filename, aif_filename);
 	change_file_extension(pcm_filename, "pcm");
 
 	// Get .metadata filename.
-	char metadata_filename[strlen(aif_filename) + 1];
+	char *metadata_filename = malloc(strlen(aif_filename) + 1);
+
+	if (!metadata_filename)
+	{
+		FATAL_ERROR("Failed to allocate space for metadata filename.\n");
+	}
+
 	strcpy(metadata_filename, aif_filename);
 	change_file_extension(metadata_filename, "bin");
 
@@ -255,7 +267,7 @@ void aif2pcm(const char *aif_filename)
 	{
 		FATAL_ERROR("Failed to allocate buffer for aif file data!\n");
 	}
-	
+
 	// Populate buffer from file.
 	unsigned long read = fread(aif_file_data, aif_file_length, 1, aif_file);
 	fclose(aif_file);
@@ -285,6 +297,8 @@ void aif2pcm(const char *aif_filename)
 	free(aif_data->samples);
 	free(aif_data);
 	free(aif_file_data);
+	free(metadata_filename);
+	free(pcm_filename);
 }
 
 // Reads a .pcm file containing an array of 8-bit samples and produces an .aif file.
@@ -292,7 +306,13 @@ void aif2pcm(const char *aif_filename)
 void pcm2aif(const char *pcm_filename, char base_note, long pitch_adjust, long loop_start)
 {
 	// Get .aif filename.
-	char aif_filename[strlen(pcm_filename)];
+	char *aif_filename = malloc(strlen(pcm_filename) + 1);
+
+	if (!aif_filename)
+	{
+		FATAL_ERROR("Failed to allocate space for aif filename.\n");
+	}
+
 	strcpy(aif_filename, pcm_filename);
 	change_file_extension(aif_filename, "aif");
 
@@ -508,7 +528,7 @@ void pcm2aif(const char *pcm_filename, char base_note, long pitch_adjust, long l
 	aif_buffer[pos++] = 0;
 
 	// Sound Data Chunk soundData
-	for (unsigned int i = 0; i < loop_start; i++)
+	for (int i = 0; i < loop_start; i++)
 	{
 		aif_buffer[pos++] = pcm_samples[i];
 	}
@@ -533,18 +553,19 @@ void pcm2aif(const char *pcm_filename, char base_note, long pitch_adjust, long l
 
 	free(aif_buffer);
 	free(pcm_samples);
+	free(aif_filename);
 }
 
 int main(int argc, char **argv)
 {
 	if (argc < 2)
 	{
-    	FATAL_ERROR("Usage: aif2pcm <aif_file>\n");
+		FATAL_ERROR("Usage: aif2pcm <aif_file>\n");
 	}
 
 	char *input_filename = argv[1];
 	char *extension = get_file_extension(input_filename);
-	
+
 	if (strcmp(extension, "aif") == 0)
 	{
 		aif2pcm(input_filename);
@@ -566,5 +587,5 @@ int main(int argc, char **argv)
 		FATAL_ERROR("Input file must be .aif or .pcm: '%s'\n", input_filename);
 	}
 
-   	return 0;
+	return 0;
 }

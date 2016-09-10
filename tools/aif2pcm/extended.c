@@ -44,11 +44,11 @@
 
 /*
  * IEEE 754 Extended Precision
- * 
+ *
  * Implementation here is the 80-bit extended precision
  * format of Motorola 68881, Motorola 68882 and Motorola
  * 68040 FPUs, as well as Intel 80x87 FPUs.
- * 
+ *
  * See:
  *    http://www.freescale.com/files/32bit/doc/fact_sheet/BR509.pdf
  */
@@ -112,7 +112,7 @@ ieee754_write_extended(double in, unsigned char* out)
 done:
 	lexp = ((unsigned int) exp) >> 8;
 	hexp = ((unsigned int) exp) & 0xFF;
-	
+
 	/* big endian */
 	out[0] = ((unsigned char) sgn) << 7;
 	out[0] |= (unsigned char) lexp;
