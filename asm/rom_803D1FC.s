@@ -6617,7 +6617,7 @@ _080404FC:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08040510: .4byte gLevelUpLearnsetPointers
+_08040510: .4byte gLevelUpLearnsets
 _08040514: .4byte 0x0000ffff
 _08040518: .4byte 0x000001ff
 	thumb_func_end sub_80403CC
@@ -6665,7 +6665,7 @@ _08040560:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08040568: .4byte gLevelUpLearnsetPointers
+_08040568: .4byte gLevelUpLearnsets
 _0804056C: .4byte 0x0000ffff
 _08040570: .4byte 0x000001ff
 	thumb_func_end sub_804051C
@@ -6851,7 +6851,7 @@ _080406BA:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080406CC: .4byte gLevelUpLearnsetPointers
+_080406CC: .4byte gLevelUpLearnsets
 _080406D0: .4byte 0x0000ffff
 _080406D4: .4byte 0x000001ff
 	thumb_func_end sub_8040574

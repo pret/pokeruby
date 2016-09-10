@@ -17,7 +17,7 @@ extern u8 byte_2024E88;
 extern u32 gExperienceTables[8][101];
 extern struct BaseStats gBaseStats[];
 extern struct BattleMove gBattleMoves[];
-extern const u16 *gLevelUpLearnsetPointers[];
+extern const u16 *gLevelUpLearnsets[];
 
 void ZeroPokemonBoxData(struct BoxPokemon *boxMon)
 {
@@ -578,17 +578,17 @@ void sub_803B720(struct BoxPokemon *boxMon)
     s32 level = sub_803B570(boxMon);
     s32 i;
 
-    for (i = 0; gLevelUpLearnsetPointers[species][i] != (u16)-1; i++)
+    for (i = 0; gLevelUpLearnsets[species][i] != (u16)-1; i++)
     {
         u16 moveLevel;
         u16 move;
 
-        moveLevel = (gLevelUpLearnsetPointers[species][i] & 0xFE00);
+        moveLevel = (gLevelUpLearnsets[species][i] & 0xFE00);
 
         if (moveLevel > (level << 9))
             break;
 
-        move = (gLevelUpLearnsetPointers[species][i] & 0x1FF);
+        move = (gLevelUpLearnsets[species][i] & 0x1FF);
 
         if (pokemon_moveset_pad(boxMon, move) == (u16)-1)
             sub_803B980(boxMon, move);
@@ -605,17 +605,17 @@ u16 sub_803B7C8(struct Pokemon *mon, u8 a2)
     {
         byte_2024E88 = retVal;
 
-        while ((gLevelUpLearnsetPointers[species][byte_2024E88] & 0xFE00) != (level << 9))
+        while ((gLevelUpLearnsets[species][byte_2024E88] & 0xFE00) != (level << 9))
         {
             byte_2024E88++;
-            if (gLevelUpLearnsetPointers[species][byte_2024E88] == (u16)-1)
+            if (gLevelUpLearnsets[species][byte_2024E88] == (u16)-1)
                 return 0;
         }
     }
 
-    if ((gLevelUpLearnsetPointers[species][byte_2024E88] & 0xFE00) == (level << 9))
+    if ((gLevelUpLearnsets[species][byte_2024E88] & 0xFE00) == (level << 9))
     {
-        word_2024E82 = (gLevelUpLearnsetPointers[species][byte_2024E88] & 0x1FF);
+        word_2024E82 = (gLevelUpLearnsets[species][byte_2024E88] & 0x1FF);
         byte_2024E88++;
         retVal = pokemon_moveset_pad_(mon, word_2024E82);
     }
