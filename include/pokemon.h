@@ -183,8 +183,8 @@ struct BoxPokemon
     u8 nickname[POKEMON_NAME_LENGTH];
     u8 language;
     u8 isBadEgg:1;
-    u8 sanity2:1;
-    u8 sanity3:1;
+    u8 hasSpecies:1;
+    u8 isEgg:1;
     u8 unused:5;
     u8 otName[OT_NAME_LENGTH];
     u8 markings;
@@ -376,7 +376,7 @@ void DecryptBoxMon(struct BoxPokemon *boxMon);
 union PokemonSubstruct *GetSubstruct(struct BoxPokemon *boxMon, u32 personality, u8 substructType);
 u32 GetMonData(struct Pokemon *mon, s32 field, u8 *data);
 u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data);
-void SetMonData(struct Pokemon *mon, s32 field, u8 *data);
+void SetMonData(struct Pokemon *mon, s32 field, const u8 *data);
 void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const u8 *data);
 
 u8 GetNature(struct Pokemon *mon);
