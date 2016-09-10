@@ -72,7 +72,7 @@ compare: both
 
 clean:
 	rm -f $(ROM) $(ELF) $(OBJS) $(pokeruby_OBJS) $(pokesapphire_OBJS) $(C_SRCS:%.c=%.i) pokeruby.map pokesapphire.map
-	rm -f data/music/programmable_wave_samples/*.bin data/music/direct_sound_samples/*.bin data/music/**/*.pcm
+	rm -f sound/programmable_wave_samples/*.bin sound/direct_sound_samples/*.bin sound/**/*.pcm
 	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.rl' \) -exec rm {} +
 
 tidy:
