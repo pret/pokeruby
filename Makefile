@@ -19,6 +19,8 @@ SHA1 := sha1sum -c
 
 GFX := @tools/gbagfx/gbagfx
 
+AIF := @tools/aif2pcm/aif2pcm
+
 SCANINC := tools/scaninc/scaninc
 
 PREPROC := tools/preproc/preproc
@@ -29,7 +31,7 @@ PREPROC := tools/preproc/preproc
 # Secondary expansion is required for dependency variables in object rules.
 .SECONDEXPANSION:
 
-.PRECIOUS: %.1bpp %.4bpp %.8bpp %.gbapal %.lz %.rl
+.PRECIOUS: %.1bpp %.4bpp %.8bpp %.gbapal %.lz %.rl %.pcm %.bin
 
 .PHONY: all clean compare ruby sapphire
 
@@ -70,6 +72,7 @@ compare: both
 
 clean:
 	rm -f $(ROM) $(ELF) $(OBJS) $(pokeruby_OBJS) $(pokesapphire_OBJS) $(C_SRCS:%.c=%.i) pokeruby.map pokesapphire.map
+	rm -f sound/programmable_wave_samples/*.bin sound/direct_sound_samples/*.bin sound/**/*.pcm
 	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.rl' \) -exec rm {} +
 
 tidy:
@@ -85,12 +88,15 @@ include misc.mk
 %.bin: ;
 %.png: ;
 %.pal: ;
+%.aif: ;
 %.1bpp: %.png  ; $(GFX) $< $@
 %.4bpp: %.png  ; $(GFX) $< $@
 %.8bpp: %.png  ; $(GFX) $< $@
 %.gbapal: %.pal ; $(GFX) $< $@
 %.lz: % ; $(GFX) $< $@
 %.rl: % ; $(GFX) $< $@
+%.pcm: %.aif  ; $(AIF) $< $@
+%.bin: %.aif  ; $(AIF) $< $@
 
 src/libc_ruby.o src/libc_sapphire.o: CC1 := tools/agbcc/bin/old_agbcc
 src/libc_ruby.o src/libc_sapphire.o: CFLAGS := -O2
