@@ -3,6 +3,9 @@ unk_2004000 = 0x2004000;
 
 gUnknown_020239F8 = 0x20239F8;
 
+word_2024E82 = 0x2024E82;
+byte_2024E88 = 0x2024E88;
+
 gUnknown_02024E8C = 0x2024E8C;
 
 gSaveBlock2 = 0x2024EA4;

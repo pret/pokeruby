@@ -91,4 +91,287 @@
 #define MON_DATA_SPATK2            87
 #define MON_DATA_SPDEF2            88
 
+struct PokemonSubstruct0
+{
+    u16 species;
+    u16 heldItem;
+    u32 experience;
+    u8 ppBonuses;
+    u8 friendship;
+};
+
+struct PokemonSubstruct1
+{
+    u16 moves[4];
+    u8 pp[4];
+};
+
+struct PokemonSubstruct2
+{
+    u8 hpEV;
+    u8 attackEV;
+    u8 defenseEV;
+    u8 speedEV;
+    u8 spAttackEV;
+    u8 spDefenseEV;
+    u8 cool;
+    u8 beauty;
+    u8 cute;
+    u8 smart;
+    u8 tough;
+    u8 sheen;
+};
+
+struct PokemonSubstruct3
+{
+    u8 pokerus;
+    u8 metLocation;
+
+    u16 metLevel:7;
+    u16 metGame:4;
+    u16 pokeball:4;
+    u16 otGender:1;
+
+    u32 hpIV:5;
+    u32 attackIV:5;
+    u32 defenseIV:5;
+    u32 speedIV:5;
+    u32 spAttackIV:5;
+    u32 spDefenseIV:5;
+    u32 isEgg:1;
+    u32 altAbility:1;
+
+    u32 coolRibbon:3;
+    u32 beautyRibbon:3;
+    u32 cuteRibbon:3;
+    u32 smartRibbon:3;
+    u32 toughRibbon:3;
+    u32 championRibbon:1;
+    u32 winningRibbon:1;
+    u32 victoryRibbon:1;
+    u32 artistRibbon:1;
+    u32 effortRibbon:1;
+    u32 giftRibbon1:1;
+    u32 giftRibbon2:1;
+    u32 giftRibbon3:1;
+    u32 giftRibbon4:1;
+    u32 giftRibbon5:1;
+    u32 giftRibbon6:1;
+    u32 giftRibbon7:1;
+    u32 fatefulEncounter:5; // unused in Ruby/Sapphire, but the high bit must be set for Mew/Deoxys to obey in FR/LG/Emerald
+};
+
+union PokemonSubstruct
+{
+    struct PokemonSubstruct0 type0;
+    struct PokemonSubstruct1 type1;
+    struct PokemonSubstruct2 type2;
+    struct PokemonSubstruct3 type3;
+    u16 raw[6];
+};
+
+struct BoxPokemon
+{
+    u32 personality;
+    u32 otId;
+    u8 nickname[10];
+    u8 language;
+    u8 isBadEgg:1;
+    u8 sanity2:1;
+    u8 sanity3:1;
+    u8 unused:5;
+    u8 otName[7];
+    u8 markings;
+    u16 checksum;
+    u16 unknown;
+
+    union
+    {
+        u32 raw[12];
+        union PokemonSubstruct substructs[4];
+    } secure;
+};
+
+struct Pokemon
+{
+    struct BoxPokemon box;
+    u32 status;
+    u8 level;
+    u8 pokerus;
+    u16 hp;
+    u16 maxHP;
+    u16 attack;
+    u16 defense;
+    u16 speed;
+    u16 spAttack;
+    u16 spDefense;
+};
+
+struct UnknownPokemonStruct
+{
+    u16 species;
+    u16 heldItem;
+    u16 moves[4];
+    u8 level;
+    u8 ppBonuses;
+    u8 hpEV;
+    u8 attackEV;
+    u8 defenseEV;
+    u8 speedEV;
+    u8 spAttackEV;
+    u8 spDefenseEV;
+    u32 otId;
+    u32 hpIV:5;
+    u32 attackIV:5;
+    u32 defenseIV:5;
+    u32 speedIV:5;
+    u32 spAttackIV:5;
+    u32 spDefenseIV:5;
+    u32 gap:1;
+    u32 altAbility:1;
+    u32 personality;
+    u8 nickname[11];
+    u8 friendship;
+};
+
+struct BattlePokemon
+{
+    u16 species;
+    u16 attack;
+    u16 defense;
+    u16 speed;
+    u16 spAttack;
+    u16 spDefense;
+    u16 moves[4];
+    u32 hpIV:5;
+    u32 attackIV:5;
+    u32 defenseIV:5;
+    u32 speedIV:5;
+    u32 spAttackIV:5;
+    u32 spDefenseIV:5;
+    u8 hpStage; // not used
+    u8 attackStage;
+    u8 defenseStage;
+    u8 speedStage;
+    u8 spAttackStage;
+    u8 spDefenseStage;
+    u8 accuracyStage;
+    u8 evasionStage;
+    u8 ability;
+    u8 type1, type2;
+    u8 unknown;
+    u8 pp[4];
+    u16 hp;
+    u8 level;
+    u8 friendship;
+    u16 maxHP;
+    u16 item;
+    u8 nickname[11];
+    u8 unknown2;
+    u8 otName[8];
+    u32 unknown3;
+    u32 personality;
+    u32 status1;
+    u32 status2;
+    u32 otId;
+};
+
+struct BaseStats
+{
+    u8 baseHP;
+    u8 baseAttack;
+    u8 baseDefense;
+    u8 baseSpeed;
+    u8 baseSpAttack;
+    u8 baseSpDefense;
+
+    u8 type1, type2;
+
+    u8 catchRate;
+
+    u8 expYield;
+
+    u16 evYield_HP:2;
+    u16 evYield_Attack:2;
+    u16 evYield_Defense:2;
+    u16 evYield_Speed:2;
+    u16 evYield_SpAttack:2;
+    u16 evYield_SpDefense:2;
+
+    u16 item1, item2;
+
+    u8 genderRatio;
+
+    u8 eggCycles;
+
+    u8 friendship;
+
+    u8 growthRate;
+
+    u8 eggGroup1, eggGroup2;
+
+    u8 ability1, ability2;
+
+    u8 safariZoneFleeRate;
+
+    u8 bodyColor;
+};
+
+struct BattleMove
+{
+    u8 effect;
+    u8 power;
+    u8 type;
+    u8 accuracy;
+    u8 pp;
+    u8 secondaryEffectChance;
+    u8 target;
+    u8 priority;
+    u32 flags;
+};
+
+void ZeroPokemonBoxData(struct Pokemon *mon);
+void zero_pokemon_struct(struct Pokemon *mon);
+void zero_player_party_data(void);
+void zero_enemy_party_data(void);
+void create_pokemon_set_level(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId);
+void create_pokemon(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId);
+void pokemon_make_with_nature(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 nature);
+void unref_sub_803AB44(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 gender, u8 nature, u8 unownLetter);
+void sub_803AC44(struct Pokemon *mon, u16 species, u8 level);
+void unref_sub_803ACEC(struct Pokemon *mon, u16 species, u8 level, u8 *ivs, u32 otId);
+void pokemon_make_ev_something(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 evSpread);
+void sub_803ADE8(struct Pokemon *mon, struct UnknownPokemonStruct *src);
+void sub_803AF78(struct Pokemon *mon, struct UnknownPokemonStruct *dest);
+u16 pokemon_calc_checksum(struct Pokemon *mon);
+void pokemon_calc_effective_stats(struct Pokemon *mon);
+void sub_803B4B4(struct Pokemon *src, struct Pokemon *dest);
+u8 level_by_exp(struct Pokemon *mon);
+u8 sub_803B570(struct BoxPokemon *mon);
+u16 pokemon_moveset_pad_(struct Pokemon *mon, u16 value);
+u16 pokemon_moveset_pad(struct Pokemon *mon, u16 value);
+u16 sub_803B660(struct BattlePokemon *mon, u16 value);
+void sub_803B6A4(struct Pokemon *mon, u16 move, u8 slot);
+void sub_803B6E4(struct BattlePokemon *mon, u16 move, u8 slot);
+void unref_sub_803B714(struct Pokemon *mon);
+void sub_803B720(struct Pokemon *mon);
+u16 sub_803B7C8(struct Pokemon *mon, u8 a2);
+void sub_803B8D4(struct Pokemon *mon, u16 move);
+void sub_803B980(struct Pokemon *mon, u16 move);
+
+u8 pokemon_species_get_gender_info(u16 species, u32 personality);
+
+void EncryptMon(struct Pokemon *mon);
+void DecryptMon(struct Pokemon *mon);
+union PokemonSubstruct *GetSubstruct(struct Pokemon *mon, u32 personality, u8 substructType);
+u32 GetMonData(struct Pokemon *mon, s32 field, u8 *data);
+u32 GetMonBoxData(struct Pokemon *mon, s32 field, u8 *data);
+void SetMonData(struct Pokemon *mon, s32 field, u8 *data);
+void SetMonBoxData(struct Pokemon *mon, s32 field, const u8 *data);
+
+u8 GetNature(struct Pokemon *mon);
+u8 GetNatureFromPersonality(u32 personality);
+
+u16 nature_stat_mod(u8 nature, u16 n, u8 statIndex);
+
 #endif // GUARD_POKEMON_H
