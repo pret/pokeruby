@@ -220,7 +220,8 @@ void CreateMonWithGenderNatureLetter(struct Pokemon *mon, u16 species, u8 level,
     CreateMon(mon, species, level, fixedIV, 1, personality, 0, 0);
 }
 
-void CreateFemaleMon(struct Pokemon *mon, u16 species, u8 level)
+// This is only used to create Wally's Ralts.
+void CreateMaleMon(struct Pokemon *mon, u16 species, u8 level)
 {
     u32 personality;
     u32 otId;
