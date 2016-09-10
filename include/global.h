@@ -12,6 +12,9 @@
 
 #define ARRAY_COUNT(array) (sizeof(array) / sizeof((array)[0]))
 
+#define POKEMON_NAME_LENGTH 10
+#define OT_NAME_LENGTH 7
+
 extern u8 gStringVar1[];
 extern u8 gStringVar2[];
 extern u8 gStringVar3[];

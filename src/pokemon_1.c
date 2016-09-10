@@ -73,7 +73,7 @@ void CreateMon(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 hasFix
 
 void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId)
 {
-    u8 speciesName[10];
+    u8 speciesName[POKEMON_NAME_LENGTH + 1];
     u32 personality;
     u32 value;
     u16 checksum;
@@ -298,7 +298,7 @@ void CreateMonWithEVSpread(struct Pokemon *mon, u16 species, u8 level, u8 fixedI
 void sub_803ADE8(struct Pokemon *mon, struct UnknownPokemonStruct *src)
 {
     s32 i;
-    u8 nickname[11];
+    u8 nickname[POKEMON_NAME_LENGTH + 1];
     u8 language;
     u8 value;
 

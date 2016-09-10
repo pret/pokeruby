@@ -1,6 +1,8 @@
 #ifndef GUARD_POKEMON_H
 #define GUARD_POKEMON_H
 
+#include "global.h"
+
 #define MON_DATA_PERSONALITY        0
 #define MON_DATA_OT_ID              1
 #define MON_DATA_NICKNAME           2
@@ -178,13 +180,13 @@ struct BoxPokemon
 {
     u32 personality;
     u32 otId;
-    u8 nickname[10];
+    u8 nickname[POKEMON_NAME_LENGTH];
     u8 language;
     u8 isBadEgg:1;
     u8 sanity2:1;
     u8 sanity3:1;
     u8 unused:5;
-    u8 otName[7];
+    u8 otName[OT_NAME_LENGTH];
     u8 markings;
     u16 checksum;
     u16 unknown;
@@ -234,7 +236,7 @@ struct UnknownPokemonStruct
     u32 gap:1;
     u32 altAbility:1;
     u32 personality;
-    u8 nickname[11];
+    u8 nickname[POKEMON_NAME_LENGTH + 1];
     u8 friendship;
 };
 
@@ -270,7 +272,7 @@ struct BattlePokemon
     u8 friendship;
     u16 maxHP;
     u16 item;
-    u8 nickname[11];
+    u8 nickname[POKEMON_NAME_LENGTH + 1];
     u8 unknown2;
     u8 otName[8];
     u32 unknown3;
