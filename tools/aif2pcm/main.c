@@ -533,8 +533,6 @@ void pcm2aif(const char *pcm_filename, char base_note, long pitch_adjust, long l
 
 	free(aif_buffer);
 	free(pcm_samples);
-
-	printf("Wrote %s\n", aif_filename);
 }
 
 int main(int argc, char **argv)
