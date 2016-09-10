@@ -4,10 +4,75 @@
 #include "pokemon.h"
 #include "species.h"
 #include "main.h"
+#include "sprite.h"
+
+extern struct SpriteTemplate gUnknown_02024E8C;
 
 extern u8 gBadEggNickname[];
 extern u8 gEggNickname[];
 extern u32 gBitTable[];
+extern struct BaseStats gBaseStats[];
+extern struct SpriteTemplate gSpriteTemplate_8208288[];
+extern union AmimCmd *gSpriteAnimTable_81E7C64[];
+extern union AnimCmd **gUnknown_081EC2A4[];
+extern union AnimCmd **gUnknown_081ECACC[];
+
+u8 GetMonGender(struct Pokemon *mon)
+{
+    return GetBoxMonGender(&mon->box);
+}
+
+u8 GetBoxMonGender(struct BoxPokemon *boxMon)
+{
+    u16 species = GetBoxMonData(boxMon, MON_DATA_SPECIES, NULL);
+    u32 personality = GetBoxMonData(boxMon, MON_DATA_PERSONALITY, NULL);
+
+    switch (gBaseStats[species].genderRatio)
+    {
+    case MON_MALE:
+    case MON_FEMALE:
+    case MON_GENDERLESS:
+        return gBaseStats[species].genderRatio;
+    }
+
+    if (gBaseStats[species].genderRatio > (personality & 0xFF))
+        return MON_FEMALE;
+    else
+        return MON_MALE;
+}
+
+u8 GetGenderFromSpeciesAndPersonality(u16 species, u32 personality)
+{
+    switch (gBaseStats[species].genderRatio)
+    {
+    case MON_MALE:
+    case MON_FEMALE:
+    case MON_GENDERLESS:
+        return gBaseStats[species].genderRatio;
+    }
+
+    if (gBaseStats[species].genderRatio > (personality & 0xFF))
+        return MON_FEMALE;
+    else
+        return MON_MALE;
+}
+
+void GetMonSpriteTemplate_803C56C(u16 species, u8 a2)
+{
+    gUnknown_02024E8C = gSpriteTemplate_8208288[a2];
+    gUnknown_02024E8C.paletteTag = species;
+    gUnknown_02024E8C.anims = (union AnimCmd **)gSpriteAnimTable_81E7C64;
+}
+
+void GetMonSpriteTemplate_803C5A0(u16 species, u8 a2)
+{
+    gUnknown_02024E8C = gSpriteTemplate_8208288[a2];
+    gUnknown_02024E8C.paletteTag = species;
+    if (a2 == 0 || a2 == 2)
+        gUnknown_02024E8C.anims = gUnknown_081ECACC[species];
+    else
+        gUnknown_02024E8C.anims = gUnknown_081EC2A4[species];
+}
 
 void EncryptBoxMon(struct BoxPokemon *boxMon)
 {

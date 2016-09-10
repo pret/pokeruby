@@ -4,6 +4,7 @@
 #include "pokemon.h"
 #include "species.h"
 #include "main.h"
+#include "sprite.h"
 
 extern u8 sav1_map_get_name();
 
@@ -203,7 +204,7 @@ void CreateMonWithGenderNatureLetter(struct Pokemon *mon, u16 species, u8 level,
             actualLetter = ((((personality & 0x3000000) >> 18) | ((personality & 0x30000) >> 12) | ((personality & 0x300) >> 6) | personality & 0x3) % 28);
         }
         while (nature != GetNatureFromPersonality(personality)
-            || gender != pokemon_species_get_gender_info(species, personality)
+            || gender != GetGenderFromSpeciesAndPersonality(species, personality)
             || actualLetter != unownLetter - 1);
     }
     else
@@ -214,7 +215,7 @@ void CreateMonWithGenderNatureLetter(struct Pokemon *mon, u16 species, u8 level,
             personality = (u16)r | (Random() << 16);
         }
         while (nature != GetNatureFromPersonality(personality)
-            || gender != pokemon_species_get_gender_info(species, personality));
+            || gender != GetGenderFromSpeciesAndPersonality(species, personality));
     }
 
     CreateMon(mon, species, level, fixedIV, 1, personality, 0, 0);
@@ -234,7 +235,7 @@ void CreateMaleMon(struct Pokemon *mon, u16 species, u8 level)
         r2 = Random();
         personality = (u16)r2 | (Random() << 16);
     }
-    while (pokemon_species_get_gender_info(species, personality) != MALE);
+    while (GetGenderFromSpeciesAndPersonality(species, personality) != MON_MALE);
     CreateMon(mon, species, level, 32, 1, personality, 1, otId);
 }
 

@@ -8,6 +8,7 @@
 #include "palette.h"
 #include "string_util.h"
 #include "species.h"
+#include "pokemon.h"
 
 extern u8 MenuUpdateWindowText(void);
 extern void MenuPrint(u8 *, u8, u8);
@@ -41,7 +42,6 @@ void CB2_MainMenu(void);
 void VBlankCB_MainMenu(void);
 void DecompressPicFromTable_2(const struct SpriteSheet *, u8, u8, void *, void *, u32);
 void LoadCompressedObjectPalette(const struct SpritePalette *);
-void gpu_pal_obj_decompress_and_apply(u16, u8);
 u8 AddNewGameBirchObject(u8, u8, u8);
 u8 sub_80859BC(u8, u16, u16, u8, void *);
 void MenuDrawTextWindow(u8 a, u8 b, u8 c, u8 d);
@@ -1426,7 +1426,7 @@ u8 CreateAzurillSprite(u8 a1, u8 a2)
         gUnknown_081FAF4C[1],
         SPECIES_AZURILL);
     LoadCompressedObjectPalette(&gMonPaletteTable[SPECIES_AZURILL]);
-    gpu_pal_obj_decompress_and_apply(SPECIES_AZURILL, 1);
+    GetMonSpriteTemplate_803C56C(SPECIES_AZURILL, 1);
     return CreateSprite(&gUnknown_02024E8C, a1, a2, 0);
 }
 

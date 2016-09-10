@@ -91,6 +91,10 @@
 #define MON_DATA_SPATK2            87
 #define MON_DATA_SPDEF2            88
 
+#define MON_MALE       0x00
+#define MON_FEMALE     0xFE
+#define MON_GENDERLESS 0xFF
+
 struct PokemonSubstruct0
 {
     u16 species;
@@ -360,8 +364,11 @@ u16 sub_803B7C8(struct Pokemon *mon, u8 a2);
 void DeleteFirstMoveAndGiveMoveToMon(struct Pokemon *mon, u16 move);
 void DeleteFirstMoveAndGiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move);
 
-u8 pokemon_species_get_gender_info(u16 species, u32 personality);
-
+u8 GetMonGender(struct Pokemon *mon);
+u8 GetBoxMonGender(struct BoxPokemon *boxMon);
+u8 GetGenderFromSpeciesAndPersonality(u16 species, u32 personality);
+void GetMonSpriteTemplate_803C56C(u16 species, u8 a2);
+void GetMonSpriteTemplate_803C5A0(u16 species, u8 a2);
 void EncryptBoxMon(struct BoxPokemon *boxMon);
 void DecryptBoxMon(struct BoxPokemon *boxMon);
 union PokemonSubstruct *GetSubstruct(struct BoxPokemon *boxMon, u32 personality, u8 substructType);

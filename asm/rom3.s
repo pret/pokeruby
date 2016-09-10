@@ -7104,7 +7104,7 @@ _0800F03E:
 	bl GetMonData
 	str r0, [r7, 0x14]
 	adds r0, r4, 0
-	bl pokemon_get_gender
+	bl GetMonGender
 	strb r0, [r5, 0x1C]
 	adds r0, r7, 0
 	bl SkipExtCtrlCodes
@@ -27025,11 +27025,11 @@ _08019384:
 _08019396:
 	ldr r0, [sp, 0x8]
 	ldr r1, [sp, 0x10]
-	bl pokemon_species_get_gender_info
+	bl GetGenderFromSpeciesAndPersonality
 	adds r4, r0, 0
 	ldr r0, [sp, 0xC]
 	ldr r1, [sp, 0x14]
-	bl pokemon_species_get_gender_info
+	bl GetGenderFromSpeciesAndPersonality
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
@@ -27051,7 +27051,7 @@ _080193B4:
 _080193CE:
 	ldr r0, [sp, 0x8]
 	ldr r1, [sp, 0x10]
-	bl pokemon_species_get_gender_info
+	bl GetGenderFromSpeciesAndPersonality
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
@@ -27060,7 +27060,7 @@ _080193CE:
 _080193E2:
 	ldr r0, [sp, 0xC]
 	ldr r1, [sp, 0x14]
-	bl pokemon_species_get_gender_info
+	bl GetGenderFromSpeciesAndPersonality
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
@@ -54385,11 +54385,11 @@ _08027164: .4byte 0x02024c06
 _08027168:
 	mov r0, r10
 	mov r1, r9
-	bl pokemon_species_get_gender_info
+	bl GetGenderFromSpeciesAndPersonality
 	adds r4, r0, 0
 	mov r0, r8
 	adds r1, r7, 0
-	bl pokemon_species_get_gender_info
+	bl GetGenderFromSpeciesAndPersonality
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
@@ -54416,14 +54416,14 @@ _08027168:
 	bne _080271CA
 	mov r0, r10
 	mov r1, r9
-	bl pokemon_species_get_gender_info
+	bl GetGenderFromSpeciesAndPersonality
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
 	beq _080271CA
 	mov r0, r8
 	adds r1, r7, 0
-	bl pokemon_species_get_gender_info
+	bl GetGenderFromSpeciesAndPersonality
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
@@ -64036,7 +64036,7 @@ _0802BD92:
 	muls r1, r0
 	adds r0, r1, 0
 	add r0, r8
-	bl pokemon_get_gender
+	bl GetMonGender
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
@@ -71265,7 +71265,7 @@ sub_802F934: @ 802F934
 	lsls r1, 24
 	lsrs r1, 24
 	mov r0, r8
-	bl gpu_pal_obj_decompress_and_apply
+	bl GetMonSpriteTemplate_803C56C
 	ldr r0, _0802FA8C
 	mov r10, r0
 	adds r0, r6, 0
@@ -71560,7 +71560,7 @@ _0802FBEA:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl sub_803C5A0
+	bl GetMonSpriteTemplate_803C5A0
 	ldr r0, _0802FCC0
 	mov r8, r0
 	lsls r5, r7, 16
@@ -71674,7 +71674,7 @@ sub_802FCE0: @ 802FCE0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r6, 0
-	bl sub_803C5A0
+	bl GetMonSpriteTemplate_803C5A0
 	ldr r0, _0802FD9C
 	ldr r2, _0802FDA0
 	ldrb r1, [r4, 0x8]
@@ -80901,7 +80901,7 @@ sub_80347B8: @ 80347B8
 	lsls r1, 24
 	lsrs r1, 24
 	mov r0, r8
-	bl gpu_pal_obj_decompress_and_apply
+	bl GetMonSpriteTemplate_803C56C
 	ldr r0, _080348F4
 	mov r9, r0
 	ldrb r0, [r6]
@@ -81113,7 +81113,7 @@ sub_803495C: @ 803495C
 	lsls r1, 24
 	lsrs r1, 24
 	mov r0, r8
-	bl gpu_pal_obj_decompress_and_apply
+	bl GetMonSpriteTemplate_803C56C
 	ldr r0, _08034ACC
 	mov r9, r0
 	adds r0, r6, 0
@@ -81431,7 +81431,7 @@ _08034C56:
 	lsls r1, 24
 	lsrs r1, 24
 	mov r0, r9
-	bl sub_803C5A0
+	bl GetMonSpriteTemplate_803C5A0
 	ldr r5, _08034D90
 	ldr r1, _08034D94
 	mov r2, r9
@@ -81642,7 +81642,7 @@ _08034E1A:
 	lsls r1, 24
 	lsrs r1, 24
 	mov r0, r9
-	bl sub_803C5A0
+	bl GetMonSpriteTemplate_803C5A0
 	ldr r0, _08034F54
 	ldr r2, _08034F58
 	mov r3, r9
@@ -90128,7 +90128,7 @@ sub_8039294: @ 8039294
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl gpu_pal_obj_decompress_and_apply
+	bl GetMonSpriteTemplate_803C56C
 	ldr r0, _080393C8
 	mov r8, r0
 	ldrb r0, [r6]
@@ -90332,7 +90332,7 @@ sub_8039430: @ 8039430
 	lsls r1, 24
 	lsrs r1, 24
 	mov r0, r8
-	bl gpu_pal_obj_decompress_and_apply
+	bl GetMonSpriteTemplate_803C56C
 	ldr r0, _080395A0
 	mov r9, r0
 	adds r0, r6, 0
@@ -90647,7 +90647,7 @@ _08039724:
 	lsls r1, 24
 	lsrs r1, 24
 	mov r0, r9
-	bl sub_803C5A0
+	bl GetMonSpriteTemplate_803C5A0
 	ldr r6, _08039874
 	lsls r5, 16
 	movs r2, 0xB0

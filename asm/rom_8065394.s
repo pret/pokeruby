@@ -13968,7 +13968,7 @@ _0806BCEE:
 	cmp r0, 0
 	bne _0806BD38
 	adds r0, r4, 0
-	bl pokemon_get_gender
+	bl GetMonGender
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -19037,7 +19037,7 @@ sub_806E3C0: @ 806E3C0
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
-	bl pokemon_get_gender
+	bl GetMonGender
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24

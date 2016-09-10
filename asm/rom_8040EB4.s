@@ -2209,7 +2209,7 @@ _08041EFC:
 	b _08041F3C
 _08041F26:
 	adds r0, r5, 0
-	bl pokemon_roll_gender
+	bl GetBoxMonGender
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFE
@@ -2269,7 +2269,7 @@ _08041F88:
 	adds r0, r1
 	lsls r0, 4
 	add r0, r8
-	bl pokemon_roll_gender
+	bl GetBoxMonGender
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFE
@@ -2865,7 +2865,7 @@ _0804240E:
 	bl GetBoxMonData
 	adds r1, r0, 0
 	ldrh r0, [r5]
-	bl pokemon_species_get_gender_info
+	bl GetGenderFromSpeciesAndPersonality
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, [sp, 0x24]
@@ -3140,7 +3140,7 @@ sub_8042614: @ 8042614
 	push {r4,lr}
 	adds r4, r0, 0
 	adds r0, r1, 0
-	bl pokemon_roll_gender
+	bl GetBoxMonGender
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -3871,7 +3871,7 @@ _08042C14:
 	bl sub_8040990
 	ldrh r0, [r0, 0x4]
 	adds r1, r5, 0
-	bl gpu_pal_obj_decompress_and_apply
+	bl GetMonSpriteTemplate_803C56C
 	ldr r0, _08042C60
 	movs r1, 0x78
 	movs r2, 0x46
@@ -4580,7 +4580,7 @@ _080431DA:
 	muls r1, r0
 	adds r0, r1, 0
 	adds r0, r6
-	bl pokemon_get_gender
+	bl GetMonGender
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -8663,7 +8663,7 @@ sub_80451A0: @ 80451A0
 	strb r0, [r5, 0x4]
 	adds r5, 0x5
 	adds r0, r7, 0
-	bl pokemon_get_gender
+	bl GetMonGender
 	lsls r0, 24
 	lsrs r6, r0, 24
 	adds r0, r7, 0
@@ -18780,7 +18780,7 @@ sub_804A2B4: @ 804A2B4
 	mov r1, sp
 	bl StringCopy10
 	adds r0, r4, 0
-	bl pokemon_get_gender
+	bl GetMonGender
 	adds r0, r4, 0
 	movs r1, 0x38
 	bl GetMonData
@@ -18801,7 +18801,7 @@ _0804A2F4:
 	mov r1, sp
 	bl StringCopy10
 	adds r0, r4, 0
-	bl pokemon_get_gender
+	bl GetMonGender
 	adds r0, r4, 0
 	movs r1, 0x38
 	bl GetMonData
@@ -18995,7 +18995,7 @@ _0804A484:
 	add r1, sp, 0x4
 	bl StringCopy10
 	adds r0, r4, 0
-	bl pokemon_get_gender
+	bl GetMonGender
 	mov r1, sp
 	adds r1, 0x22
 	ldr r0, _0804A518
@@ -19112,7 +19112,7 @@ sub_804A51C: @ 804A51C
 	lsls r0, 24
 	lsrs r6, r0, 24
 	adds r0, r4, 0
-	bl pokemon_get_gender
+	bl GetMonGender
 	lsls r0, 24
 	lsrs r7, r0, 24
 	adds r0, r4, 0
@@ -19137,7 +19137,7 @@ _0804A5A8:
 	lsls r0, 24
 	lsrs r6, r0, 24
 	adds r0, r4, 0
-	bl pokemon_get_gender
+	bl GetMonGender
 	lsls r0, 24
 	lsrs r7, r0, 24
 	adds r0, r4, 0
@@ -20973,7 +20973,7 @@ _0804B3A4:
 	bl sub_8040990
 	ldrh r0, [r0, 0x4]
 	adds r1, r4, 0
-	bl gpu_pal_obj_decompress_and_apply
+	bl GetMonSpriteTemplate_803C56C
 	ldr r0, _0804B40C
 	movs r1, 0x78
 	movs r2, 0x3C
