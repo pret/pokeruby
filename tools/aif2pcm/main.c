@@ -287,11 +287,11 @@ void aif2pcm(const char *aif_filename)
 	// Write the output .bin file containing .aif metadata.
 	FILE *metadata_file;
 	metadata_file = fopen(metadata_filename, "wb");
-	unsigned long pitch_adjust = (unsigned long)(aif_data->sample_rate * 1024);
-	fwrite(&pitch_adjust, sizeof(unsigned long), 1, metadata_file);
-	fwrite(&(aif_data->loop_offset), sizeof(unsigned long), 1, metadata_file);
-	unsigned long adjusted_num_samples = aif_data->num_samples - 1;
-	fwrite(&adjusted_num_samples, sizeof(unsigned long), 1, metadata_file);
+	uint32_t pitch_adjust = (uint32_t)(aif_data->sample_rate * 1024);
+	fwrite(&pitch_adjust, sizeof(uint32_t), 1, metadata_file);
+	fwrite(&(aif_data->loop_offset), sizeof(uint32_t), 1, metadata_file);
+	uint32_t adjusted_num_samples = (uint32_t)(aif_data->num_samples - 1);
+	fwrite(&adjusted_num_samples, sizeof(uint32_t), 1, metadata_file);
 	fclose(metadata_file);
 
 	free(aif_data->samples);
