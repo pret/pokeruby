@@ -22,6 +22,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include <stdint.h>
 
 /* extended.c */
 void ieee754_write_extended (double, unsigned char*);
