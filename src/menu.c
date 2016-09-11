@@ -451,7 +451,6 @@ u8 sub_8072484(u8 a1, u8 a2, u8 menuItemCount, u8 a4, u8 width, u8 a6, u32 a7)
     return a4;
 }
 
-#ifdef NONMATCHING
 u8 sub_80724F4(u8 left, u8 top, u8 menuItemCount, u8 *menuItems[][2], u8 columnCount)
 {
     u8 i;
@@ -490,13 +489,16 @@ u8 sub_80724F4(u8 left, u8 top, u8 menuItemCount, u8 *menuItems[][2], u8 columnC
     }
 
     {
+        // TODO: Make this code less hideous but still match the original asm.
         u8 right;
         u8 bottom;
         u32 totalWidth;
         register s32 val asm("r1");
 
         val = (s8)top + height;
-        bottom = val;
+        val = val << 24;
+        asm("" ::: "r3");
+        bottom = val >> 24;
 
         totalWidth = (gMenu.columnXCoords[columnCount] + 1);
         right = left + totalWidth;
@@ -506,168 +508,6 @@ u8 sub_80724F4(u8 left, u8 top, u8 menuItemCount, u8 *menuItems[][2], u8 columnC
 
     return maxWidth;
 }
-#else
-__attribute__((naked))
-u8 sub_80724F4(u8 left, u8 top, u8 menuItemCount, u8 *menuItems[][2], u8 columnCount)
-{
-    asm("push {r4-r7,lr}\n\
-	mov r7, r10\n\
-	mov r6, r9\n\
-	mov r5, r8\n\
-	push {r5-r7}\n\
-	sub sp, #0xC\n\
-	mov r8, r3\n\
-	ldr r3, [sp, #0x2C]\n\
-	lsl r0, #24\n\
-	lsr r0, #24\n\
-	str r0, [sp]\n\
-	lsl r1, #24\n\
-	lsr r1, #24\n\
-	str r1, [sp, #0x4]\n\
-	lsl r2, #24\n\
-	lsr r6, r2, #24\n\
-	lsl r3, #24\n\
-	lsr r5, r3, #24\n\
-	movs r4, #0\n\
-	ldr r0, _080725D4\n\
-	mov r9, r0\n\
-	mov r1, r9\n\
-	add r1, #0x8\n\
-	movs r2, #0\n\
-_08072524:\n\
-	add r0, r4, r1\n\
-	strb r2, [r0]\n\
-	add r0, r4, #0x1\n\
-	lsl r0, #24\n\
-	lsr r4, r0, #24\n\
-	cmp r4, #0x6\n\
-	bls _08072524\n\
-	movs r7, #0\n\
-	movs r4, #0\n\
-	lsr r2, r6, #1\n\
-	mov r10, r2\n\
-	ldr r0, [sp, #0x4]\n\
-	lsl r0, #24\n\
-	str r0, [sp, #0x8]\n\
-	cmp r7, r6\n\
-	bcs _08072566\n\
-_08072544:\n\
-	lsl r0, r4, #3\n\
-	add r0, r8\n\
-	ldr r0, [r0]\n\
-	bl sub_8072CA4\n\
-	lsl r0, #24\n\
-	lsr r0, #24\n\
-	add r1, r0, #0x7\n\
-	lsr r0, r1, #3\n\
-	cmp r0, r7\n\
-	bls _0807255C\n\
-	add r7, r0, #0\n\
-_0807255C:\n\
-	add r0, r4, #0x1\n\
-	lsl r0, #24\n\
-	lsr r4, r0, #24\n\
-	cmp r4, r6\n\
-	bcc _08072544\n\
-_08072566:\n\
-	movs r4, #0x1\n\
-	ldr r2, _080725D4\n\
-	mov r9, r2\n\
-	cmp r4, r5\n\
-	bhi _08072582\n\
-	mov r1, r9\n\
-	add r1, #0x8\n\
-_08072574:\n\
-	add r0, r4, r1\n\
-	strb r7, [r0]\n\
-	add r0, r4, #0x1\n\
-	lsl r0, #24\n\
-	lsr r4, r0, #24\n\
-	cmp r4, r5\n\
-	bls _08072574\n\
-_08072582:\n\
-	movs r4, #0x1\n\
-	cmp r4, r5\n\
-	bhi _080725A4\n\
-	ldr r3, _080725D8\n\
-_0807258A:\n\
-	add r2, r4, r3\n\
-	ldrb r1, [r2]\n\
-	sub r0, r4, #0x1\n\
-	add r0, r3\n\
-	add r1, #0x1\n\
-	ldrb r0, [r0]\n\
-	add r1, r0\n\
-	strb r1, [r2]\n\
-	add r0, r4, #0x1\n\
-	lsl r0, #24\n\
-	lsr r4, r0, #24\n\
-	cmp r4, r5\n\
-	bls _0807258A\n\
-_080725A4:\n\
-	mov r1, r9\n\
-	add r1, #0x8\n\
-	add r1, r5, r1\n\
-	ldrb r0, [r1]\n\
-	sub r0, #0x1\n\
-	strb r0, [r1]\n\
-	cmp r10, r5\n\
-	bcc _080725BC\n\
-	movs r0, #0x1\n\
-	and r0, r6\n\
-	cmp r0, #0\n\
-	beq _080725C4\n\
-_080725BC:\n\
-	cmp r5, #0x1\n\
-	beq _080725C4\n\
-	cmp r5, r6\n\
-	bne _080725DC\n\
-_080725C4:\n\
-	add r0, r6, #0\n\
-	add r1, r5, #0\n\
-	bl __udivsi3\n\
-	lsl r0, #24\n\
-	lsr r0, #23\n\
-	add r0, #0x1\n\
-	b _080725EA\n\
-	.align 2, 0\n\
-_080725D4: .4byte 0x030006b0\n\
-_080725D8: .4byte 0x030006b8\n\
-_080725DC:\n\
-	add r0, r6, #0\n\
-	add r1, r5, #0\n\
-	bl __udivsi3\n\
-	lsl r0, #24\n\
-	lsr r0, #23\n\
-	add r0, #0x3\n\
-_080725EA:\n\
-	ldr r2, [sp, #0x8]\n\
-	asr r1, r2, #24\n\
-	add r1, r0\n\
-	lsl r1, #24\n\
-	lsr r3, r1, #24\n\
-	mov r0, r9\n\
-	add r0, #0x8\n\
-	add r0, r5, r0\n\
-	ldrb r2, [r0]\n\
-	add r2, #0x1\n\
-	ldr r0, [sp]\n\
-	add r2, r0, r2\n\
-	lsl r2, #24\n\
-	lsr r2, #24\n\
-	ldr r1, [sp, #0x4]\n\
-	bl MenuDrawTextWindow\n\
-	add r0, r7, #0\n\
-	add sp, #0xC\n\
-	pop {r3-r5}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	mov r10, r5\n\
-	pop {r4-r7}\n\
-	pop {r1}\n\
-	bx r1\n");
-}
-#endif // NONMATCHING
 
 void sub_8072620(u8 left, u8 top, u8 menuItemCount, u8 *menuItems[][2], u8 columnCount)
 {
