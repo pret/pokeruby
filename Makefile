@@ -65,7 +65,7 @@ sapphire: pokesapphire.gba
 	@:
 
 # For contributors to make sure a change didn't affect the contents of the ROM.
-compare: both
+compare: all
 	@$(SHA1) rom.sha1
 
 clean:
