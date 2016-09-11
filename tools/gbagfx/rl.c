@@ -33,12 +33,18 @@ unsigned char *RLDecompress(unsigned char *src, int srcSize, int *uncompressedSi
             int length = (flags & 0x7F) + 3;
             unsigned char data = src[srcPos++];
 
+            if (destPos + length > destSize)
+                goto fail;
+
             for (int i = 0; i < length; i++)
                 dest[destPos++] = data;
         }
         else
         {
             int length = (flags & 0x7F) + 1;
+
+            if (destPos + length > destSize)
+                goto fail;
 
             for (int i = 0; i < length; i++)
                 dest[destPos++] = src[srcPos++];
