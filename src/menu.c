@@ -810,84 +810,17 @@ u8 unref_sub_8072A5C(u8 *dest, u8 *src, u8 left, u16 top, u8 width, u32 a6)
     return sub_8004FD0(gMenuWindowPtr, dest, src, gMenuTextTileOffset, left, top, width, a6);
 }
 
-__attribute__((naked))
 int sub_8072AB0(u8 *str, u8 left, u16 top, u8 width, u8 height, u32 a6)
 {
-    asm("push {r4-r7,lr}\n\
-	mov r7, r9\n\
-	mov r6, r8\n\
-	push {r6,r7}\n\
-	sub sp, #0x10\n\
-	mov r9, r0\n\
-	add r4, r1, #0\n\
-	add r5, r2, #0\n\
-	ldr r0, [sp, #0x2C]\n\
-	ldr r2, [sp, #0x30]\n\
-	lsl r4, #24\n\
-	lsr r1, r4, #24\n\
-	mov r12, r1\n\
-	lsl r5, #16\n\
-	lsr r7, r5, #16\n\
-	lsl r3, #24\n\
-	lsr r6, r3, #24\n\
-	lsl r0, #24\n\
-	lsr r0, #24\n\
-	mov r8, r0\n\
-	ldr r0, _08072B44\n\
-	ldr r0, [r0]\n\
-	ldr r1, _08072B48\n\
-	ldrh r3, [r1]\n\
-	mov r1, r12\n\
-	str r1, [sp]\n\
-	str r7, [sp, #0x4]\n\
-	str r6, [sp, #0x8]\n\
-	str r2, [sp, #0xC]\n\
-	movs r1, #0\n\
-	mov r2, r9\n\
-	bl sub_8004FD0\n\
-	add r1, r0, #0\n\
-	lsl r1, #24\n\
-	lsr r2, r1, #24\n\
-	lsr r4, #27\n\
-	mov r12, r4\n\
-	lsr r7, r5, #19\n\
-	add r1, r6, #0x7\n\
-	lsr r6, r1, #3\n\
-	mov r1, r8\n\
-	add r1, #0x7\n\
-	asr r1, #3\n\
-	lsl r1, #24\n\
-	lsr r1, #24\n\
-	mov r8, r1\n\
-	cmp r2, r8\n\
-	bcs _08072B34\n\
-	lsl r1, r2, #1\n\
-	add r1, r7, r1\n\
-	lsl r1, #24\n\
-	lsr r1, #24\n\
-	mov r0, r12\n\
-	add r2, r0, r6\n\
-	sub r2, #0x1\n\
-	lsl r2, #24\n\
-	lsr r2, #24\n\
-	mov r0, r8\n\
-	add r3, r0, r7\n\
-	sub r3, #0x1\n\
-	lsl r3, #24\n\
-	lsr r3, #24\n\
-	mov r0, r12\n\
-	bl MenuFillWindowRectWithBlankTile\n\
-_08072B34:\n\
-	add sp, #0x10\n\
-	pop {r3,r4}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	pop {r4-r7}\n\
-	pop {r1}\n\
-	bx r1\n\
-	.align 2, 0\n\
-_08072B44: .4byte 0x0202e9c8\n\
-_08072B48: .4byte 0x0202e9ce\n");
+    u8 newlineCount = sub_8004FD0(gMenuWindowPtr, NULL, str, gMenuTextTileOffset, left, top, width, a6);
+
+    left /= 8;
+    top /= 8;
+    width = (width + 7) / 8;
+    height = (height + 7) / 8;
+
+    if (newlineCount < height)
+        MenuFillWindowRectWithBlankTile(left, top + 2 * newlineCount, left + width - 1, height + top - 1);
 }
 
 void sub_8072B4C(u8 *str, u8 left, u8 top)
