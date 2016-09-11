@@ -2257,5 +2257,3 @@ DirectSoundWaveData_8654C20:: @ 8654C20
 	.4byte 0x40000000  @ looped directsound
 	.incbin "sound/direct_sound_samples/8654C20.bin"
 	.incbin "sound/direct_sound_samples/8654C20.pcm"
-
-	.align 2
