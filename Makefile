@@ -17,9 +17,9 @@ LIBGCC := tools/agbcc/lib/libgcc.a
 
 SHA1 := sha1sum -c
 
-GFX := @tools/gbagfx/gbagfx
+GFX := tools/gbagfx/gbagfx
 
-AIF := @tools/aif2pcm/aif2pcm
+AIF := tools/aif2pcm/aif2pcm
 
 SCANINC := tools/scaninc/scaninc
 
@@ -57,9 +57,7 @@ pokesapphire_OBJS := $(OBJS:.o=_sapphire.o)
 ROM := pokeruby.gba pokesapphire.gba
 ELF := $(ROM:.gba=.elf)
 
-all: ruby
-	@:
-both: ruby sapphire
+all: ruby sapphire
 	@:
 ruby: pokeruby.gba
 	@:

@@ -111,3 +111,15 @@
 	.4byte \voice_group_pointer
 	.4byte 0
 	.endm
+
+	.macro cry sample
+	.byte 0x20, 60, 0, 0
+	.4byte \sample
+	.byte 0xff, 0, 0xff, 0
+	.endm
+
+	.macro cry2 sample
+	.byte 0x30, 60, 0, 0
+	.4byte \sample
+	.byte 0xff, 0, 0xff, 0
+	.endm
