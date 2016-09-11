@@ -57,9 +57,7 @@ pokesapphire_OBJS := $(OBJS:.o=_sapphire.o)
 ROM := pokeruby.gba pokesapphire.gba
 ELF := $(ROM:.gba=.elf)
 
-all: ruby
-	@:
-both: ruby sapphire
+all: ruby sapphire
 	@:
 ruby: pokeruby.gba
 	@:
