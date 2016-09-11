@@ -51,13 +51,13 @@ RomHeaderReserved1:
 	.space 7
 
 RomHeaderSoftwareVersion:
-	.byte 0
+	.byte REVISION
 
 RomHeaderChecksum:
 	.ifdef SAPPHIRE
-	.byte 0x55
+	.byte 0x55 - REVISION
 	.else
-	.byte 0x41
+	.byte 0x41 - REVISION
 	.endif
 
 RomHeaderReserved2:

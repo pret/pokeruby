@@ -13,7 +13,11 @@ OldaleTown_PokemonCenter_2F_Text_1A457E:: @ 81A457E
 
 OldaleTown_PokemonCenter_2F_Text_1A45FE:: @ 81A45FE
 	.string "Welcome to the POKéMON CABLE CLUB\n"
+	.if REVISION >= 1
+	.string "RECORD CORNER.\p"
+	.else
 	.string "RECORD CENTER.\p"
+	.endif
 	.string "You may mix your records as a TRAINER\n"
 	.string "with the records of your friends.\p"
 	.string "Would you like to mix records?$"

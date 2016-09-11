@@ -363,7 +363,11 @@ DecorDesc_MARILL_DOLL: @ 83EACF2
 	.string "or a desk.$"
 
 DecorDesc_TOGEPI_DOLL: @ 83EAD1E
+	.if REVISION >= 1
+	.string "A TOGEPI doll.\n"
+	.else
 	.string "A TOPGEPI doll.\n"
+	.endif
 	.string "Place it on a mat\n"
 	.string "or a desk.$"
 

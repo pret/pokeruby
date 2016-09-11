@@ -320,16 +320,34 @@ DexDescription_Vileplume_2:
 	.endif
 
 	.ifdef SAPPHIRE
+
+	.if REVISION >= 1
+DexDescription_Paras_1:
+	.string "PARAS has parasitic mushrooms growing\non its back called tochukaso. They grow\nlarge by drawing nutrients from this$"
+DexDescription_Paras_2:
+	.string "BUG/GRASS POKéMON host. They are\nhighly valued as a medicine for\nextending life.$"
+	.else
 DexDescription_Paras_1:
 	.string "PARAS has parasitic mushrooms growing\non its back called tochukaso. They grow\nlarge by drawing nutrients from this$"
 DexDescription_Paras_2:
 	.string "BUG POKéMON host. They are highly\nvalued as a medicine for extending life.$"
+	.endif @ REVISION >= 1
+
+	.else
+
+	.if REVISION >= 1
+DexDescription_Paras_1:
+	.string "PARAS has parasitic mushrooms growing\non its back called tochukaso. They grow\nlarge by drawing nutrients from this$"
+DexDescription_Paras_2:
+	.string "BUG/GRASS POKéMON host. They are\nhighly valued as a medicine for\nextending life.$"
 	.else
 DexDescription_Paras_1:
 	.string "PARAS has parasitic mushrooms growing\non its back called tochukaso. They grow\nlarge by drawing nutrients from the BUG$"
 DexDescription_Paras_2:
 	.string "POKéMON host. They are highly valued as\na medicine for extending life.$"
-	.endif
+	.endif @ REVISION >= 1
+
+	.endif @ SAPPHIRE
 
 DexDescription_Parasect_1:
 	.string "PARASECT is known to infest large trees\nen masse and drain nutrients from the\nlower trunk and roots.$"
@@ -2347,16 +2365,27 @@ DexDescription_Sableye_2:
 	.endif
 
 	.ifdef SAPPHIRE
+
 DexDescription_Mawile_1:
 	.string "Don’t be taken in by this POKéMON’s\ncute face - it’s very dangerous. MAWILE\nfools the foe into letting down its$"
 DexDescription_Mawile_2:
 	.string "guard, then chomps down with its\nmassive jaws. The steel jaws are really\nhorns that have been transformed.$"
+
+	.else
+
+	.if REVISION >= 1
+DexDescription_Mawile_1:
+	.string "MAWILE’s huge jaws are actually steel\nhorns that have been transformed.\nIts docile-looking face serves to lull$"
+DexDescription_Mawile_2:
+	.string "its foe into letting down its guard.\nWhen the foe least expects it, MAWILE\nchomps it with its gaping jaws.$"
 	.else
 DexDescription_Mawile_1:
 	.string "MAWHILE’s huge jaws are actually steel\nhorns that have been transformed.\nIts docile-looking face serves to lull$"
 DexDescription_Mawile_2:
 	.string "its foe into letting down its guard.\nWhen the foe least expects it, MAWHILE\nchomps it with its gaping jaws.$"
-	.endif
+	.endif @ REVISION >= 1
+
+	.endif @ SAPPHIRE
 
 	.ifdef SAPPHIRE
 DexDescription_Aron_1:

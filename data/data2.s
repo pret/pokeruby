@@ -28796,7 +28796,11 @@ OtherText_WontHaveAnyEffect:
 
 gUnknown_0840EFA1:: @ 840EFA1
 OtherText_CantUseItemOnPoke:
+	.if REVISION >= 1
+	.string "This can’t be used on\nthat POKéMON.{PAUSE_UNTIL_PRESS}$"
+	.else
 	.string "This item can’t be used on\nthat POKéMON.{PAUSE_UNTIL_PRESS}$"
+	.endif
 
 gUnknown_0840EFCC:: @ 840EFCC
 OtherText_CantBeSwitched:

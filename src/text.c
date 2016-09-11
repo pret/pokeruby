@@ -3352,7 +3352,11 @@ static u8 GetGlyphWidth(struct Window *win, u32 glyph)
 {
     u8 width = 8;
 
+#if REVISION >= 1
+    if (win->charset != CHARSET_JAPANESE)
+#else
     if (win->charset == CHARSET_LATIN)
+#endif
     {
         width = win->spacing;
         if (!win->spacing)

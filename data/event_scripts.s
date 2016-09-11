@@ -4953,8 +4953,10 @@ Text_1C6C62: @ 81C6C62
 	.string "テストよう　メッセージです！\n"
 	.string "ざひょう　チェックの　イベントです$"
 
-@ 81C6C83
-	.string " $"
+@ 81C6C84
+@ object file boundary?
+	.align 2
+	.string "$"
 
 	.include "data/text/save.s"
 	.include "data/text/intro.s"

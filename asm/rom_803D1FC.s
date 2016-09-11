@@ -4411,6 +4411,62 @@ _0803FB56:
 	bx r0
 	thumb_func_end DrawSpindaSpots
 
+	.if REVISION >= 1
+	thumb_func_start sub_803FB68
+sub_803FB68: @ 803FB68
+	push {r4-r7,lr}
+	mov r7, r9
+	mov r6, r8
+	push {r6,r7}
+	sub sp, 0x4
+	adds r5, r0, 0
+	lsls r1, 16
+	lsrs r7, r1, 16
+	lsls r2, 16
+	lsrs r2, 16
+	mov r8, r2
+	ldr r0, =0x20231CC
+	mov r9, r0
+	adds r0, r5, 0
+	movs r1, 0x2
+	mov r2, r9
+	bl GetMonData
+	mov r4, sp
+	adds r0, r5, 0
+	movs r1, 0x3
+	mov r2, sp
+	bl GetMonData
+	strb r0, [r4, 0x0]
+	lsls r0, 24
+	lsrs r0, 24
+	cmp r0, 0x2
+	bne _0803FBC4
+	movs r6, 0xB
+	adds r0, r7, 0
+	muls r0, r6
+	ldr r4, =gSpeciesNames
+	adds r0, r4
+	mov r1, r9
+	bl StringCompareWithoutExtCtrlCodes
+	cmp r0, 0
+	bne _0803FBC4
+	mov r2, r8
+	muls r2, r6
+	adds r2, r4
+	adds r0, r5, 0
+	movs r1, 0x2
+	bl SetMonData
+_0803FBC4:
+	add sp, 0x4
+	pop {r3,r4}
+	mov r8, r3
+	mov r9, r4
+	pop {r4-r7}
+	pop {r0}
+	bx r0
+	.pool
+	thumb_func_end sub_803FB68
+	.else
 	thumb_func_start sub_803FB68
 sub_803FB68: @ 803FB68
 	push {r4-r7,lr}
@@ -4452,6 +4508,7 @@ _0803FBA8:
 _0803FBB4: .4byte 0x020231cc
 _0803FBB8: .4byte gSpeciesNames
 	thumb_func_end sub_803FB68
+	.endif
 
 	thumb_func_start sub_803FBBC
 sub_803FBBC: @ 803FBBC

@@ -25,6 +25,8 @@ SCANINC := tools/scaninc/scaninc
 
 PREPROC := tools/preproc/preproc
 
+REVISION := 0
+
 # Clear the default suffixes.
 .SUFFIXES:
 
@@ -33,7 +35,9 @@ PREPROC := tools/preproc/preproc
 
 .PRECIOUS: %.1bpp %.4bpp %.8bpp %.gbapal %.lz %.rl %.pcm %.bin
 
-.PHONY: all clean compare ruby sapphire
+.PHONY: all clean tidy compare ruby sapphire \
+rev1 ruby_rev1 sapphire_rev1 compare_rev1 \
+rev2 ruby_rev2 sapphire_rev2 compare_rev2
 
 C_SRCS := $(wildcard src/*.c)
 C_OBJS := $(C_SRCS:%.c=%.o)
@@ -64,9 +68,40 @@ ruby: pokeruby.gba
 sapphire: pokesapphire.gba
 	@:
 
+rev1: REVISION := 1
+rev1: all
+	@:
+
+ruby_rev1: REVISION := 1
+ruby_rev1: ruby
+	@:
+
+sapphire_rev1: REVISION := 1
+sapphire_rev1: sapphire
+	@:
+
+rev2: REVISION := 2
+rev2: all
+	@:
+
+ruby_rev2: REVISION := 2
+ruby_rev2: ruby
+	@:
+
+sapphire_rev2: REVISION := 2
+sapphire_rev2: sapphire
+	@:
+
 # For contributors to make sure a change didn't affect the contents of the ROM.
+
 compare: all
 	@$(SHA1) rom.sha1
+
+compare_rev1: rev1
+	@$(SHA1) rom_rev1.sha1
+
+compare_rev2: rev2
+	@$(SHA1) rom_rev2.sha1
 
 clean:
 	rm -f $(ROM) $(ELF) $(OBJS) $(pokeruby_OBJS) $(pokesapphire_OBJS) $(C_SRCS:%.c=%.i) pokeruby.map pokesapphire.map
@@ -112,12 +147,12 @@ src/text_ruby.o src/text_sapphire.o: src/text.c $(GEN_FONT_HEADERS)
 src/link_ruby.o src/link_sapphire.o: src/link.c $(GEN_LINK_HEADERS)
 
 src/%_ruby.o: src/%.c
-	@$(CPP) $(CPPFLAGS) -D RUBY $< -o src/$*_ruby.i
+	@$(CPP) $(CPPFLAGS) -D RUBY -D REVISION=$(REVISION) $< -o src/$*_ruby.i
 	@$(PREPROC) src/$*_ruby.i charmap.txt | $(CC1) $(CFLAGS) -o src/$*_ruby.s
 	@printf ".text\n\t.align\t2, 0\n" >> src/$*_ruby.s
 	$(AS) $(ASFLAGS) -o $@ src/$*_ruby.s
 src/%_sapphire.o: src/%.c
-	@$(CPP) $(CPPFLAGS) -D SAPPHIRE $< -o src/$*_sapphire.i
+	@$(CPP) $(CPPFLAGS) -D SAPPHIRE -D REVISION=$(REVISION) $< -o src/$*_sapphire.i
 	@$(PREPROC) src/$*_sapphire.i charmap.txt | $(CC1) $(CFLAGS) -o src/$*_sapphire.s
 	@printf ".text\n\t.align\t2, 0\n" >> src/$*_sapphire.s
 	$(AS) $(ASFLAGS) -o $@ src/$*_sapphire.s
@@ -126,17 +161,17 @@ asm/%_ruby.o: dep = $(shell $(SCANINC) asm/$*.s)
 asm/%_sapphire.o: dep = $(shell $(SCANINC) asm/$*.s)
 
 asm/%_ruby.o: asm/%.s $$(dep)
-	$(AS) $(ASFLAGS) --defsym RUBY=1 -o $@ $<
+	$(AS) $(ASFLAGS) --defsym RUBY=1 --defsym REVISION=$(REVISION) -o $@ $<
 asm/%_sapphire.o: asm/%.s $$(dep)
-	$(AS) $(ASFLAGS) --defsym SAPPHIRE=1 -o $@ $<
+	$(AS) $(ASFLAGS) --defsym SAPPHIRE=1 --defsym REVISION=$(REVISION) -o $@ $<
 
 data/%_ruby.o: dep = $(shell $(SCANINC) data/$*.s)
 data/%_sapphire.o: dep = $(shell $(SCANINC) data/$*.s)
 
 data/%_ruby.o: data/%.s $$(dep)
-	$(PREPROC) $< charmap.txt | $(AS) $(ASFLAGS) --defsym RUBY=1 -o $@
+	$(PREPROC) $< charmap.txt | $(AS) $(ASFLAGS) --defsym RUBY=1 --defsym REVISION=$(REVISION) -o $@
 data/%_sapphire.o: data/%.s $$(dep)
-	$(PREPROC) $< charmap.txt | $(AS) $(ASFLAGS) --defsym SAPPHIRE=1 -o $@
+	$(PREPROC) $< charmap.txt | $(AS) $(ASFLAGS) --defsym SAPPHIRE=1 --defsym REVISION=$(REVISION) -o $@
 
 $(SONG_OBJS): %.o: %.s
 	$(AS) $(ASFLAGS) -I sound -o $@ $<
