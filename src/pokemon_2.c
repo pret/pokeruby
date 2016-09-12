@@ -902,8 +902,7 @@ u8 SendMonToPC(struct Pokemon *mon)
         i++;
         if (i == 14)
             i = 0;
-    }
-    while (i != gPokemonStorage.currentBox);
+    } while (i != gPokemonStorage.currentBox);
 
     return 2;
 }
