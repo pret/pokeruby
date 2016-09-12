@@ -63337,7 +63337,7 @@ _0802B81C:
 	ldr r2, _0802B87C
 	movs r1, 0x26
 	bl SetMonData
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x6
@@ -63414,7 +63414,7 @@ _0802B8CC:
 	movs r1, 0x26
 	adds r2, r5, 0
 	bl SetMonData
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x6
@@ -63479,7 +63479,7 @@ sub_802B960: @ 802B960
 	adds r0, r1, 0
 	ldr r6, _0802B9D0
 	adds r0, r6
-	bl pokemon_catch
+	bl GiveMonToPlayer
 	ldr r2, _0802B9D4
 	ldr r1, _0802B9D8
 	ldrb r0, [r5]
@@ -64111,7 +64111,7 @@ _0802BE98: .4byte 0x02024c07
 _0802BE9C: .4byte 0x030045c0
 _0802BEA0: .4byte 0x02016079
 _0802BEA4:
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x6

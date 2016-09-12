@@ -2976,7 +2976,7 @@ _08066930: .4byte 0x02025734
 s43_get_player_party_count: @ 8066934
 	push {r4,lr}
 	ldr r4, _0806694C
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4]

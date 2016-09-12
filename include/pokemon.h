@@ -336,6 +336,12 @@ struct BattleMove
     u32 flags;
 };
 
+struct PokemonStorage
+{
+    u8 currentBox;
+    struct BoxPokemon boxes[14][30];
+};
+
 void ZeroBoxMonData(struct BoxPokemon *boxMon);
 void ZeroMonData(struct Pokemon *mon);
 void ZeroPlayerPartyMons(void);
@@ -378,10 +384,17 @@ u32 GetMonData(struct Pokemon *mon, s32 field, u8 *data);
 u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data);
 void SetMonData(struct Pokemon *mon, s32 field, const u8 *data);
 void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const u8 *data);
+void CopyMon(void *dest, void *src, size_t size);
+u8 GiveMonToPlayer(struct Pokemon *mon);
+u8 SendMonToPC(struct Pokemon *mon);
+u8 CalculatePlayerPartyCount(void);
+u8 CalculateEnemyPartyCount(void);
 
 u8 GetNature(struct Pokemon *mon);
 u8 GetNatureFromPersonality(u32 personality);
 
 u16 nature_stat_mod(u8 nature, u16 n, u8 statIndex);
+
+void sub_8040B1C(void *);
 
 #endif // GUARD_POKEMON_H

@@ -8,7 +8,9 @@ gPlayTimeCounterState = 0x300057C;
 
 gLocalTime = 0x3004038;
 
+gPlayerPartyCount = 0x3004350;
 gPlayerParty = 0x3004360;
+gEnemyPartyCount = 0x30045B8;
 gEnemyParty = 0x30045C0;
 
 gRngValue = 0x03004818;

@@ -6,7 +6,13 @@
 #include "main.h"
 #include "sprite.h"
 
+extern u8 gPlayerPartyCount;
+extern struct Pokemon gPlayerParty[6];
+extern u8 gEnemyPartyCount;
+extern struct Pokemon gEnemyParty[6];
+
 extern struct SpriteTemplate gUnknown_02024E8C;
+extern struct PokemonStorage gPokemonStorage;
 
 extern u8 gBadEggNickname[];
 extern u8 gEggNickname[];
@@ -848,4 +854,82 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const u8 *data)
         boxMon->checksum = CalculateBoxMonChecksum(boxMon);
         EncryptBoxMon(boxMon);
     }
+}
+
+void CopyMon(void *dest, void *src, size_t size)
+{
+    memcpy(dest, src, size);
+}
+
+u8 GiveMonToPlayer(struct Pokemon *mon)
+{
+    s32 i;
+
+    SetMonData(mon, MON_DATA_OT_NAME, gSaveBlock2.playerName);
+    SetMonData(mon, MON_DATA_OT_GENDER, &gSaveBlock2.playerGender);
+    SetMonData(mon, MON_DATA_OT_ID, gSaveBlock2.playerTrainerId);
+
+    i = 0;
+
+    while (i < 6 && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL) != SPECIES_NONE)
+        i++;
+
+    if (i >= 6)
+        return SendMonToPC(mon);
+
+    CopyMon(&gPlayerParty[i], mon, sizeof(*mon));
+    gPlayerPartyCount = i + 1;
+    return 0;
+}
+
+u8 SendMonToPC(struct Pokemon *mon)
+{
+    s32 i = gPokemonStorage.currentBox;
+
+    do
+    {
+        s32 j;
+        for (j = 0; j < 30; j++)
+        {
+            if (GetBoxMonData(&gPokemonStorage.boxes[i][j], MON_DATA_SPECIES, NULL) == SPECIES_NONE)
+            {
+                sub_8040B1C(mon);
+                CopyMon(&gPokemonStorage.boxes[i][j], &mon->box, sizeof(mon->box));
+                return 1;
+            }
+        }
+
+        i++;
+        if (i == 14)
+            i = 0;
+    }
+    while (i != gPokemonStorage.currentBox);
+
+    return 2;
+}
+
+u8 CalculatePlayerPartyCount(void)
+{
+    gPlayerPartyCount = 0;
+
+    while (gPlayerPartyCount < 6
+        && GetMonData(&gPlayerParty[gPlayerPartyCount], MON_DATA_SPECIES, NULL) != SPECIES_NONE)
+    {
+        gPlayerPartyCount++;
+    }
+
+    return gPlayerPartyCount;
+}
+
+u8 CalculateEnemyPartyCount(void)
+{
+    gEnemyPartyCount = 0;
+
+    while (gEnemyPartyCount < 6
+        && GetMonData(&gEnemyParty[gEnemyPartyCount], MON_DATA_SPECIES, NULL) != SPECIES_NONE)
+    {
+        gEnemyPartyCount++;
+    }
+
+    return gEnemyPartyCount;
 }

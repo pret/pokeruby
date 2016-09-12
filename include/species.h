@@ -1,6 +1,7 @@
 #ifndef GUARD_SPECIES_H
 #define GUARD_SPECIES_H
 
+#define SPECIES_NONE       0x000
 #define SPECIES_BULBASAUR  0x001
 #define SPECIES_IVYSAUR    0x002
 #define SPECIES_VENUSAUR   0x003

@@ -797,7 +797,7 @@ _0804144A:
 	adds r0, r7, 0
 	bl ZeroMonData
 	bl party_compaction
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	pop {r3,r4}
 	mov r8, r3
 	mov r9, r4
@@ -1004,7 +1004,7 @@ _08041610:
 	str r1, [r0]
 	adds r0, r5, 0
 	bl sub_80414C0
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	mov r0, r9
 	add sp, 0x68
 	pop {r3,r4}
@@ -2337,7 +2337,7 @@ sub_8041FC4: @ 8041FC4
 	movs r2, 0x64
 	bl memcpy
 	bl party_compaction
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	adds r0, r5, 0
 	bl sub_8041E64
 	add sp, 0x6C
@@ -14665,7 +14665,7 @@ _0804813A:
 	beq _08048148
 	b _080484C6
 _08048148:
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	ldr r1, _08048158
 	ldr r2, _0804815C
 	adds r1, r2
@@ -14684,7 +14684,7 @@ _0804816C:
 	bl sub_804AF84
 	b _08048492
 _08048172:
-	bl calc_enemy_party_count
+	bl CalculateEnemyPartyCount
 	ldr r4, _08048294
 	ldr r0, [r4]
 	adds r0, 0x4
@@ -15246,7 +15246,7 @@ _08048674:
 	.align 2, 0
 _0804867C: .4byte 0x0000043c
 _08048680:
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	ldr r1, _0804868C
 	ldr r0, _08048690
 	adds r1, r0
@@ -15261,7 +15261,7 @@ _08048694:
 	.align 2, 0
 _0804869C: .4byte 0x0000043c
 _080486A0:
-	bl calc_enemy_party_count
+	bl CalculateEnemyPartyCount
 	movs r1, 0x80
 	lsls r1, 19
 	movs r0, 0
