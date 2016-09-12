@@ -1,3 +1,4 @@
+	.align 2
 gSpecials::
 	.4byte sp000_heal_pokemon
 	.4byte sub_8068FEC

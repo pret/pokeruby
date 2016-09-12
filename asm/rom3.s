@@ -11628,7 +11628,7 @@ _08011406:
 	ldrh r0, [r1]
 	ldrb r1, [r1, 0x17]
 	lsrs r1, 7
-	bl sub_803DB14
+	bl GetAbilityBySpecies
 	mov r2, r8
 	ldrb r1, [r2]
 	muls r1, r7
@@ -13834,7 +13834,7 @@ _0801264E:
 	ldrb r1, [r1]
 	lsls r2, r4, 24
 	lsrs r2, 24
-	bl CalcPPWithPPUps
+	bl CalculatePPWithBonus
 	mov r2, r10
 	adds r1, r2, r4
 	strb r0, [r1]
@@ -14094,7 +14094,7 @@ _0801289E:
 _080128A8: .4byte 0x02024a60
 _080128AC: .4byte 0x0201606c
 _080128B0:
-	bl sub_803DD20
+	bl PlayerPartyAndPokemonStorageFull
 	lsls r0, 24
 	cmp r0, 0
 	beq _08012968
@@ -28906,7 +28906,7 @@ _0801A37E:
 	lsls r2, r4, 24
 	lsrs r2, 24
 	adds r0, r6, 0
-	bl CalcPPWithPPUps
+	bl CalculatePPWithBonus
 	lsls r0, 24
 	lsrs r2, r0, 24
 	add r0, sp, 0x4
@@ -45115,7 +45115,7 @@ _0802262C:
 	ldrh r0, [r1]
 	ldrb r1, [r1, 0x17]
 	lsrs r1, 7
-	bl sub_803DB14
+	bl GetAbilityBySpecies
 	ldrb r1, [r7]
 	muls r1, r6
 	adds r1, r4
@@ -47871,7 +47871,7 @@ _08023D20:
 	adds r0, r1, 0
 	adds r0, r7
 	adds r1, r5, 0
-	bl sub_803DE34
+	bl RemoveMonPPBonus
 	ldrb r0, [r6]
 	mov r2, r8
 	muls r2, r0
@@ -47905,7 +47905,7 @@ _08023D20:
 	bne _08023DB0
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_803DE70
+	bl RemoveBattleMonPPBonus
 	ldrh r1, [r7]
 	adds r0, r4, 0
 	adds r2, r5, 0
@@ -47949,7 +47949,7 @@ _08023DB0:
 	adds r4, 0xB0
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_803DE70
+	bl RemoveBattleMonPPBonus
 	ldr r0, _08023E18
 	ldrh r1, [r0]
 	adds r0, r4, 0
@@ -57491,7 +57491,7 @@ _08028A00: .4byte gBitTable
 _08028A04:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_803DB14
+	bl GetAbilityBySpecies
 	lsls r0, 24
 	lsrs r0, 24
 _08028A10:
@@ -81382,7 +81382,7 @@ c2_8123744: @ 8034BFC
 	lsls r0, 3
 	cmp r1, r0
 	bne _08034C1C
-	bl sub_803DCA8
+	bl GetSecretBaseTrainerPicIndex
 	b _08034C42
 	.align 2, 0
 _08034C18: .4byte 0x0202ff5e
@@ -81593,7 +81593,7 @@ sub_8034DC0: @ 8034DC0
 	lsls r0, 3
 	cmp r1, r0
 	bne _08034DE0
-	bl sub_803DCA8
+	bl GetSecretBaseTrainerPicIndex
 	b _08034E06
 	.align 2, 0
 _08034DDC: .4byte 0x0202ff5e

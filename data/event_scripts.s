@@ -7,6 +7,7 @@
 @ 814AE30
 	.include "data/script_cmd_table.s"
 
+	.align 2
 gUnknown_0814B14C::
 	.4byte 0x202e8c4
 	.4byte 0x202e8c6
@@ -29,6 +30,7 @@ gUnknown_0814B14C::
 
 	.include "data/specials.s"
 
+	.align 2
 gStdScripts::
 	.4byte Std_ObtainItem
 	.4byte Std_FindItem

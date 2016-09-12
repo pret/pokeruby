@@ -1,7 +1,15 @@
 unk_2000000 = 0x2000000;
 unk_2004000 = 0x2004000;
 
+unk_20160BC = 0x20160BC;
+
+gSecretBaseRecord = 0x2017000;
+
 gUnknown_020239F8 = 0x20239F8;
+
+gBattleMons = 0x2024A80;
+
+byte_2024C06 = 0x2024C06;
 
 word_2024E82 = 0x2024E82;
 byte_2024E88 = 0x2024E88;
@@ -24,6 +32,8 @@ gPlttBufferTransferPending = 0x202F398;
 gPaletteDecompressionBuffer = 0x202F39C;
 gPaletteStructs = 0x202F2C8;
 gPaletteFade = 0x202F388;
+
+word_202FF5E = 0x202FF5E;
 
 gPokemonStorage = 0x20300A0;
 

@@ -21202,7 +21202,7 @@ sub_806F53C: @ 806F53C
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl sub_803DE34
+	bl RemoveMonPPBonus
 	ldr r5, [r4]
 	ldrh r4, [r4, 0x8]
 	bl sub_809FA30

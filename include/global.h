@@ -51,6 +51,27 @@ struct Coords16
     s16 y;
 };
 
+struct SecretBaseRecord
+{
+    u8 sbr_field_0; // ID?
+    u8 sbr_field_1_0:4;
+    u8 gender:1;
+    u8 sbr_field_1_5:1;
+    u8 sbr_field_2[7]; // 0xFF bytes?
+    u8 trainerId[4]; // byte 0 is used for determining trainer class
+    u16 sbr_field_e;
+    u8 sbr_field_10;
+    u8 sbr_field_11;
+    u8 decorations[16];
+    u8 sbr_field_22[16];
+    u32 partyPersonality[6];
+    u16 partyMoves[6 * 4];
+    u16 partySpecies[6];
+    u16 partyHeldItems[6];
+    u8 partyLevels[6];
+    u8 partyEVs[6];
+};
+
 struct Time
 {
     s16 days;

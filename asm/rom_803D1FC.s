@@ -6,884 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_803DAA0
-sub_803DAA0: @ 803DAA0
-	push {r4-r6,lr}
-	movs r6, 0
-	bl CalculatePlayerPartyCount
-	ldr r1, _0803DB0C
-	ldrb r0, [r1]
-	cmp r0, 0x1
-	beq _0803DB04
-	movs r5, 0
-	ldrb r1, [r1]
-	cmp r6, r1
-	bge _0803DAFC
-_0803DAB8:
-	movs r0, 0x64
-	adds r1, r5, 0
-	muls r1, r0
-	ldr r0, _0803DB10
-	adds r4, r1, r0
-	adds r0, r4, 0
-	movs r1, 0x39
-	movs r2, 0
-	bl GetMonData
-	cmp r0, 0
-	beq _0803DAF2
-	adds r0, r4, 0
-	movs r1, 0x41
-	movs r2, 0
-	bl GetMonData
-	cmp r0, 0
-	beq _0803DAF2
-	adds r0, r4, 0
-	movs r1, 0x41
-	movs r2, 0
-	bl GetMonData
-	movs r1, 0xCE
-	lsls r1, 1
-	cmp r0, r1
-	beq _0803DAF2
-	adds r6, 0x1
-_0803DAF2:
-	adds r5, 0x1
-	ldr r0, _0803DB0C
-	ldrb r0, [r0]
-	cmp r5, r0
-	blt _0803DAB8
-_0803DAFC:
-	movs r0, 0
-	cmp r6, 0x1
-	bgt _0803DB04
-	movs r0, 0x2
-_0803DB04:
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0803DB0C: .4byte 0x03004350
-_0803DB10: .4byte 0x03004360
-	thumb_func_end sub_803DAA0
-
-	thumb_func_start sub_803DB14
-sub_803DB14: @ 803DB14
-	push {lr}
-	lsls r0, 16
-	lsrs r3, r0, 16
-	lsls r1, 24
-	cmp r1, 0
-	beq _0803DB38
-	ldr r2, _0803DB30
-	ldr r1, _0803DB34
-	lsls r0, r3, 3
-	subs r0, r3
-	lsls r0, 2
-	adds r0, r1
-	ldrb r0, [r0, 0x17]
-	b _0803DB46
-	.align 2, 0
-_0803DB30: .4byte 0x02024c06
-_0803DB34: .4byte gBaseStats
-_0803DB38:
-	ldr r2, _0803DB50
-	ldr r1, _0803DB54
-	lsls r0, r3, 3
-	subs r0, r3
-	lsls r0, 2
-	adds r0, r1
-	ldrb r0, [r0, 0x16]
-_0803DB46:
-	strb r0, [r2]
-	ldrb r0, [r2]
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0803DB50: .4byte 0x02024c06
-_0803DB54: .4byte gBaseStats
-	thumb_func_end sub_803DB14
-
-	thumb_func_start GetMonAbility
-GetMonAbility: @ 803DB58
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	movs r1, 0xB
-	movs r2, 0
-	bl GetMonData
-	adds r4, r0, 0
-	lsls r4, 16
-	lsrs r4, 16
-	adds r0, r5, 0
-	movs r1, 0x2E
-	movs r2, 0
-	bl GetMonData
-	adds r1, r0, 0
-	lsls r1, 24
-	lsrs r1, 24
-	adds r0, r4, 0
-	bl sub_803DB14
-	lsls r0, 24
-	lsrs r0, 24
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end GetMonAbility
-
-	thumb_func_start create_enemy_party
-create_enemy_party: @ 803DB8C
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x18
-	adds r4, r0, 0
-	bl ZeroEnemyPartyMons
-	ldr r5, _0803DC8C
-	adds r0, r5, 0
-	adds r1, r4, 0
-	movs r2, 0xA0
-	bl memcpy
-	movs r7, 0
-_0803DBAC:
-	lsls r0, r7, 1
-	mov r9, r0
-	ldr r2, _0803DC8C
-	adds r2, 0x7C
-	mov r10, r2
-	mov r1, r9
-	add r1, r10
-	ldrh r0, [r1]
-	adds r2, r7, 0x1
-	str r2, [sp, 0x10]
-	cmp r0, 0
-	beq _0803DC64
-	movs r0, 0x64
-	adds r6, r7, 0
-	muls r6, r0
-	ldr r2, _0803DC90
-	mov r8, r2
-	adds r5, r6, r2
-	ldrh r1, [r1]
-	ldr r0, _0803DC8C
-	adds r0, 0x94
-	adds r0, r7, r0
-	ldrb r2, [r0]
-	movs r0, 0x1
-	str r0, [sp]
-	lsls r4, r7, 2
-	ldr r0, _0803DC8C
-	adds r0, 0x34
-	adds r0, r4, r0
-	ldr r0, [r0]
-	str r0, [sp, 0x4]
-	movs r0, 0x2
-	str r0, [sp, 0x8]
-	movs r0, 0
-	str r0, [sp, 0xC]
-	adds r0, r5, 0
-	movs r3, 0xF
-	bl CreateMon
-	ldr r2, _0803DC94
-	add r2, r9
-	adds r0, r5, 0
-	movs r1, 0xC
-	bl SetMonData
-	movs r5, 0
-	mov r9, r4
-	mov r3, r8
-	mov r4, r10
-	adds r4, 0x1E
-_0803DC10:
-	adds r1, r5, 0
-	adds r1, 0x1A
-	adds r0, r6, r3
-	adds r2, r7, r4
-	str r3, [sp, 0x14]
-	bl SetMonData
-	adds r5, 0x1
-	ldr r3, [sp, 0x14]
-	cmp r5, 0x5
-	ble _0803DC10
-	movs r5, 0
-	movs r0, 0x64
-	adds r1, r7, 0
-	muls r1, r0
-	ldr r0, _0803DC90
-	adds r7, r1, r0
-	mov r2, r9
-	lsls r6, r2, 1
-_0803DC36:
-	adds r1, r5, 0
-	adds r1, 0xD
-	ldr r4, _0803DC98
-	adds r4, r6, r4
-	adds r0, r7, 0
-	adds r2, r4, 0
-	bl SetMonData
-	adds r1, r5, 0
-	adds r1, 0x11
-	ldrh r0, [r4]
-	lsls r2, r0, 1
-	adds r2, r0
-	lsls r2, 2
-	ldr r0, _0803DC9C
-	adds r2, r0
-	adds r0, r7, 0
-	bl SetMonData
-	adds r6, 0x2
-	adds r5, 0x1
-	cmp r5, 0x3
-	ble _0803DC36
-_0803DC64:
-	ldr r7, [sp, 0x10]
-	cmp r7, 0x5
-	ble _0803DBAC
-	ldr r1, _0803DCA0
-	movs r0, 0x8
-	strh r0, [r1]
-	ldr r1, _0803DCA4
-	movs r2, 0x80
-	lsls r2, 3
-	adds r0, r2, 0
-	strh r0, [r1]
-	add sp, 0x18
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0803DC8C: .4byte 0x02017000
-_0803DC90: .4byte 0x030045c0
-_0803DC94: .4byte 0x02017088
-_0803DC98: .4byte 0x0201704c
-_0803DC9C: .4byte gBattleMoves + 0x4 @ PP offset
-_0803DCA0: .4byte 0x020239f8
-_0803DCA4: .4byte 0x0202ff5e
-	thumb_func_end create_enemy_party
-
-	thumb_func_start sub_803DCA8
-sub_803DCA8: @ 803DCA8
-	push {r4,r5,lr}
-	ldr r5, _0803DCD8
-	ldr r4, _0803DCDC
-	ldrb r0, [r4, 0x9]
-	movs r1, 0x5
-	bl __umodsi3
-	lsls r0, 24
-	lsrs r0, 24
-	ldrb r2, [r4, 0x1]
-	lsls r2, 27
-	lsrs r2, 31
-	lsls r1, r2, 2
-	adds r1, r2
-	adds r0, r1
-	adds r0, r5
-	ldrb r0, [r0]
-	ldr r1, _0803DCE0
-	adds r0, r1
-	ldrb r0, [r0]
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0803DCD8: .4byte gUnknown_082082E8
-_0803DCDC: .4byte 0x02017000
-_0803DCE0: .4byte gTrainerClassToPicIndex
-	thumb_func_end sub_803DCA8
-
-	thumb_func_start sub_803DCE4
-sub_803DCE4: @ 803DCE4
-	push {r4,r5,lr}
-	ldr r5, _0803DD14
-	ldr r4, _0803DD18
-	ldrb r0, [r4, 0x9]
-	movs r1, 0x5
-	bl __umodsi3
-	lsls r0, 24
-	lsrs r0, 24
-	ldrb r2, [r4, 0x1]
-	lsls r2, 27
-	lsrs r2, 31
-	lsls r1, r2, 2
-	adds r1, r2
-	adds r0, r1
-	adds r0, r5
-	ldrb r0, [r0]
-	ldr r1, _0803DD1C
-	adds r0, r1
-	ldrb r0, [r0]
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0803DD14: .4byte gUnknown_082082E8
-_0803DD18: .4byte 0x02017000
-_0803DD1C: .4byte gTrainerClassToNameIndex
-	thumb_func_end sub_803DCE4
-
-	thumb_func_start sub_803DD20
-sub_803DD20: @ 803DD20
-	push {r4,lr}
-	movs r4, 0
-_0803DD24:
-	movs r0, 0x64
-	muls r0, r4
-	ldr r1, _0803DD3C
-	adds r0, r1
-	movs r1, 0xB
-	movs r2, 0
-	bl GetMonData
-	cmp r0, 0
-	bne _0803DD40
-	movs r0, 0
-	b _0803DD4E
-	.align 2, 0
-_0803DD3C: .4byte 0x03004360
-_0803DD40:
-	adds r4, 0x1
-	cmp r4, 0x5
-	ble _0803DD24
-	bl sub_803DD54
-	lsls r0, 24
-	lsrs r0, 24
-_0803DD4E:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_803DD20
-
-	thumb_func_start sub_803DD54
-sub_803DD54: @ 803DD54
-	push {r4-r7,lr}
-	sub sp, 0x4
-	movs r3, 0
-	movs r7, 0
-_0803DD5C:
-	movs r5, 0
-	adds r6, r7, 0
-	movs r4, 0
-_0803DD62:
-	ldr r0, _0803DD7C
-	adds r0, r4, r0
-	adds r0, r6, r0
-	movs r1, 0xB
-	movs r2, 0
-	str r3, [sp]
-	bl GetBoxMonData
-	ldr r3, [sp]
-	cmp r0, 0
-	bne _0803DD80
-	movs r0, 0
-	b _0803DD96
-	.align 2, 0
-_0803DD7C: .4byte 0x020300a4
-_0803DD80:
-	adds r4, 0x50
-	adds r5, 0x1
-	cmp r5, 0x1D
-	ble _0803DD62
-	movs r0, 0x96
-	lsls r0, 4
-	adds r7, r0
-	adds r3, 0x1
-	cmp r3, 0xD
-	ble _0803DD5C
-	movs r0, 0x1
-_0803DD96:
-	add sp, 0x4
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_803DD54
-
-	thumb_func_start GetSpeciesName
-GetSpeciesName: @ 803DDA0
-	push {r4-r7,lr}
-	adds r6, r0, 0
-	lsls r1, 16
-	lsrs r5, r1, 16
-	movs r1, 0
-	movs r0, 0xCE
-	lsls r0, 1
-	mov r12, r0
-	ldr r7, _0803DDBC
-	movs r0, 0xB
-	muls r0, r5
-	adds r3, r0, r7
-	adds r2, r6, 0
-	b _0803DDC6
-	.align 2, 0
-_0803DDBC: .4byte gSpeciesNames
-_0803DDC0:
-	adds r3, 0x1
-	adds r2, 0x1
-	adds r1, 0x1
-_0803DDC6:
-	adds r4, r6, r1
-	cmp r1, 0xA
-	bgt _0803DDE0
-	cmp r5, r12
-	bls _0803DDD6
-	adds r0, r1, r7
-	ldrb r0, [r0]
-	b _0803DDD8
-_0803DDD6:
-	ldrb r0, [r3]
-_0803DDD8:
-	strb r0, [r2]
-	ldrb r0, [r4]
-	cmp r0, 0xFF
-	bne _0803DDC0
-_0803DDE0:
-	movs r0, 0xFF
-	strb r0, [r4]
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end GetSpeciesName
-
-	thumb_func_start CalcPPWithPPUps
-CalcPPWithPPUps: @ 803DDEC
-	push {r4,lr}
-	lsls r0, 16
-	lsrs r0, 16
-	lsls r2, 24
-	lsrs r2, 24
-	ldr r4, _0803DE2C
-	lsls r3, r0, 1
-	adds r3, r0
-	lsls r3, 2
-	adds r3, r4
-	ldrb r4, [r3, 0x4]
-	ldr r0, _0803DE30
-	adds r0, r2, r0
-	ldrb r3, [r0]
-	ands r3, r1
-	lsls r2, 1
-	asrs r3, r2
-	lsls r0, r3, 2
-	adds r0, r3
-	lsls r0, 2
-	muls r0, r4
-	movs r1, 0x64
-	bl __divsi3
-	adds r4, r0
-	lsls r4, 24
-	lsrs r4, 24
-	adds r0, r4, 0
-	pop {r4}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0803DE2C: .4byte gBattleMoves
-_0803DE30: .4byte gUnknown_08208238
-	thumb_func_end CalcPPWithPPUps
-
-	thumb_func_start sub_803DE34
-sub_803DE34: @ 803DE34
-	push {r4,r5,lr}
-	sub sp, 0x4
-	adds r5, r0, 0
-	lsls r4, r1, 24
-	lsrs r4, 24
-	movs r1, 0x15
-	movs r2, 0
-	bl GetMonData
-	lsls r0, 24
-	lsrs r0, 24
-	mov r1, sp
-	strb r0, [r1]
-	ldr r1, _0803DE6C
-	adds r4, r1
-	ldrb r1, [r4]
-	ands r1, r0
-	mov r0, sp
-	strb r1, [r0]
-	adds r0, r5, 0
-	movs r1, 0x15
-	mov r2, sp
-	bl SetMonData
-	add sp, 0x4
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0803DE6C: .4byte gUnknown_0820823C
-	thumb_func_end sub_803DE34
-
-	thumb_func_start sub_803DE70
-sub_803DE70: @ 803DE70
-	lsls r1, 24
-	lsrs r1, 24
-	adds r0, 0x3B
-	ldr r2, _0803DE84
-	adds r1, r2
-	ldrb r2, [r0]
-	ldrb r1, [r1]
-	ands r1, r2
-	strb r1, [r0]
-	bx lr
-	.align 2, 0
-_0803DE84: .4byte gUnknown_0820823C
-	thumb_func_end sub_803DE70
-
-	thumb_func_start battle_data_fill
-battle_data_fill: @ 803DE88
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x18
-	lsls r0, 24
-	lsrs r0, 24
-	str r0, [sp, 0x14]
-	lsls r1, 24
-	lsrs r1, 24
-	mov r9, r1
-	movs r0, 0x64
-	mov r5, r9
-	muls r5, r0
-	ldr r0, _0803E170
-	adds r5, r0
-	adds r0, r5, 0
-	movs r1, 0xB
-	movs r2, 0
-	bl GetMonData
-	ldr r1, _0803E174
-	mov r8, r1
-	movs r1, 0x58
-	ldr r2, [sp, 0x14]
-	adds r4, r2, 0
-	muls r4, r1
-	mov r3, r8
-	adds r6, r4, r3
-	strh r0, [r6]
-	adds r0, r5, 0
-	movs r1, 0xC
-	movs r2, 0
-	bl GetMonData
-	strh r0, [r6, 0x2E]
-	movs r6, 0
-	mov r0, r8
-	adds r0, 0x24
-	adds r7, r4, r0
-_0803DEDA:
-	adds r1, r6, 0
-	adds r1, 0xD
-	adds r0, r5, 0
-	movs r2, 0
-	bl GetMonData
-	movs r1, 0xC
-	add r1, r8
-	mov r10, r1
-	adds r1, r4, r1
-	strh r0, [r1]
-	adds r1, r6, 0
-	adds r1, 0x11
-	adds r0, r5, 0
-	movs r2, 0
-	bl GetMonData
-	strb r0, [r7]
-	adds r7, 0x1
-	adds r4, 0x2
-	adds r6, 0x1
-	cmp r6, 0x3
-	ble _0803DEDA
-	movs r0, 0x64
-	mov r4, r9
-	muls r4, r0
-	ldr r0, _0803E170
-	adds r4, r0
-	adds r0, r4, 0
-	movs r1, 0x15
-	movs r2, 0
-	bl GetMonData
-	movs r2, 0xC
-	negs r2, r2
-	add r2, r10
-	mov r9, r2
-	movs r1, 0x58
-	ldr r3, [sp, 0x14]
-	adds r5, r3, 0
-	muls r5, r1
-	adds r7, r5, r2
-	adds r1, r7, 0
-	adds r1, 0x3B
-	strb r0, [r1]
-	adds r0, r4, 0
-	movs r1, 0x20
-	movs r2, 0
-	bl GetMonData
-	adds r1, r7, 0
-	adds r1, 0x2B
-	strb r0, [r1]
-	adds r0, r4, 0
-	movs r1, 0x19
-	movs r2, 0
-	bl GetMonData
-	mov r1, r10
-	adds r1, 0x38
-	adds r1, r5, r1
-	str r0, [r1]
-	adds r0, r4, 0
-	movs r1, 0x27
-	movs r2, 0
-	bl GetMonData
-	movs r6, 0x1F
-	ands r0, r6
-	ldrb r2, [r7, 0x14]
-	movs r1, 0x20
-	negs r1, r1
-	ands r1, r2
-	orrs r1, r0
-	strb r1, [r7, 0x14]
-	adds r0, r4, 0
-	movs r1, 0x28
-	movs r2, 0
-	bl GetMonData
-	movs r1, 0x1F
-	mov r8, r1
-	mov r2, r8
-	ands r0, r2
-	lsls r0, 5
-	ldrh r2, [r7, 0x14]
-	ldr r1, _0803E178
-	ands r1, r2
-	orrs r1, r0
-	strh r1, [r7, 0x14]
-	adds r0, r4, 0
-	movs r1, 0x29
-	movs r2, 0
-	bl GetMonData
-	ands r0, r6
-	lsls r0, 2
-	ldrb r2, [r7, 0x15]
-	movs r1, 0x7D
-	negs r1, r1
-	ands r1, r2
-	orrs r1, r0
-	strb r1, [r7, 0x15]
-	adds r0, r4, 0
-	movs r1, 0x2A
-	movs r2, 0
-	bl GetMonData
-	movs r1, 0x1F
-	ands r1, r0
-	lsls r1, 15
-	ldr r0, [r7, 0x14]
-	ldr r2, _0803E17C
-	ands r0, r2
-	orrs r0, r1
-	str r0, [r7, 0x14]
-	adds r0, r4, 0
-	movs r1, 0x2B
-	movs r2, 0
-	bl GetMonData
-	mov r3, r8
-	ands r0, r3
-	lsls r0, 4
-	ldrh r2, [r7, 0x16]
-	ldr r1, _0803E180
-	ands r1, r2
-	orrs r1, r0
-	strh r1, [r7, 0x16]
-	adds r0, r4, 0
-	movs r1, 0x2C
-	movs r2, 0
-	bl GetMonData
-	ands r0, r6
-	lsls r0, 1
-	ldrb r2, [r7, 0x17]
-	movs r1, 0x3F
-	negs r1, r1
-	ands r1, r2
-	orrs r1, r0
-	strb r1, [r7, 0x17]
-	adds r0, r4, 0
-	movs r1, 0
-	movs r2, 0
-	bl GetMonData
-	mov r1, r10
-	adds r1, 0x3C
-	adds r1, r5, r1
-	str r0, [r1]
-	adds r0, r4, 0
-	movs r1, 0x37
-	movs r2, 0
-	bl GetMonData
-	mov r1, r10
-	adds r1, 0x40
-	adds r1, r5, r1
-	str r0, [r1]
-	adds r0, r4, 0
-	movs r1, 0x38
-	movs r2, 0
-	bl GetMonData
-	adds r1, r7, 0
-	adds r1, 0x2A
-	strb r0, [r1]
-	adds r0, r4, 0
-	movs r1, 0x39
-	movs r2, 0
-	bl GetMonData
-	strh r0, [r7, 0x28]
-	adds r0, r4, 0
-	movs r1, 0x3A
-	movs r2, 0
-	bl GetMonData
-	strh r0, [r7, 0x2C]
-	adds r0, r4, 0
-	movs r1, 0x3B
-	movs r2, 0
-	bl GetMonData
-	strh r0, [r7, 0x2]
-	adds r0, r4, 0
-	movs r1, 0x3C
-	movs r2, 0
-	bl GetMonData
-	strh r0, [r7, 0x4]
-	adds r0, r4, 0
-	movs r1, 0x3D
-	movs r2, 0
-	bl GetMonData
-	strh r0, [r7, 0x6]
-	adds r0, r4, 0
-	movs r1, 0x3E
-	movs r2, 0
-	bl GetMonData
-	strh r0, [r7, 0x8]
-	adds r0, r4, 0
-	movs r1, 0x3F
-	movs r2, 0
-	bl GetMonData
-	strh r0, [r7, 0xA]
-	adds r0, r4, 0
-	movs r1, 0x2D
-	movs r2, 0
-	bl GetMonData
-	movs r1, 0x1
-	ands r0, r1
-	lsls r0, 6
-	ldrb r2, [r7, 0x17]
-	movs r1, 0x41
-	negs r1, r1
-	ands r1, r2
-	orrs r1, r0
-	strb r1, [r7, 0x17]
-	adds r0, r4, 0
-	movs r1, 0x2E
-	movs r2, 0
-	bl GetMonData
-	lsls r0, 7
-	ldrb r2, [r7, 0x17]
-	movs r1, 0x7F
-	ands r1, r2
-	orrs r1, r0
-	strb r1, [r7, 0x17]
-	adds r0, r4, 0
-	movs r1, 0x1
-	movs r2, 0
-	bl GetMonData
-	mov r1, r10
-	adds r1, 0x48
-	adds r1, r5, r1
-	str r0, [r1]
-	ldr r2, _0803E184
-	ldrh r1, [r7]
-	lsls r0, r1, 3
-	subs r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrb r0, [r0, 0x6]
-	adds r1, r7, 0
-	adds r1, 0x21
-	strb r0, [r1]
-	ldrh r1, [r7]
-	lsls r0, r1, 3
-	subs r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrb r0, [r0, 0x7]
-	adds r1, r7, 0
-	adds r1, 0x22
-	strb r0, [r1]
-	ldrh r0, [r7]
-	ldrb r1, [r7, 0x17]
-	lsrs r1, 7
-	bl sub_803DB14
-	adds r1, r7, 0
-	adds r1, 0x20
-	strb r0, [r1]
-	adds r0, r4, 0
-	movs r1, 0x2
-	mov r2, sp
-	bl GetMonData
-	mov r0, r10
-	adds r0, 0x24
-	adds r0, r5, r0
-	mov r1, sp
-	bl StringCopy10
-	mov r2, r10
-	adds r2, 0x30
-	adds r2, r5, r2
-	adds r0, r4, 0
-	movs r1, 0x7
-	bl GetMonData
-	ldr r0, [sp, 0x14]
-	bl battle_side_get_owner
-	lsls r0, 24
-	lsrs r0, 23
-	ldr r1, _0803E188
-	adds r0, r1
-	ldrh r1, [r7, 0x28]
-	strh r1, [r0]
-	movs r2, 0x6
-	mov r1, r9
-	movs r6, 0x7
-	add r5, r10
-	adds r0, r5, 0
-	adds r0, 0x13
-_0803E13A:
-	strb r2, [r0]
-	subs r0, 0x1
-	subs r6, 0x1
-	cmp r6, 0
-	bge _0803E13A
-	movs r2, 0
-	movs r0, 0x58
-	ldr r3, [sp, 0x14]
-	muls r0, r3
-	adds r1, 0x50
-	adds r0, r1
-	str r2, [r0]
-	ldr r0, [sp, 0x14]
-	bl sub_80157C4
-	ldr r0, [sp, 0x14]
-	movs r1, 0
-	bl sub_8032AA8
-	add sp, 0x18
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0803E170: .4byte 0x03004360
-_0803E174: .4byte 0x02024a80
-_0803E178: .4byte 0xfffffc1f
-_0803E17C: .4byte 0xfff07fff
-_0803E180: .4byte 0xfffffe0f
-_0803E184: .4byte gBaseStats
-_0803E188: .4byte 0x020160bc
-	thumb_func_end battle_data_fill
-
 	thumb_func_start ExecuteTableBasedItemEffect_
 ExecuteTableBasedItemEffect_: @ 803E18C
 	push {r4,lr}
@@ -1670,7 +792,7 @@ _0803E77C:
 	lsrs r1, 24
 	adds r0, r4, 0
 	ldr r2, [sp, 0x10]
-	bl CalcPPWithPPUps
+	bl CalculatePPWithBonus
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x28]
@@ -1704,7 +826,7 @@ _0803E77C:
 	lsls r1, 24
 	lsrs r1, 24
 	ldr r2, [sp, 0x10]
-	bl CalcPPWithPPUps
+	bl CalculatePPWithBonus
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r3, [sp, 0x28]
@@ -1880,7 +1002,7 @@ _0803E954:
 	lsls r1, 24
 	lsrs r1, 24
 	ldr r0, [sp, 0x34]
-	bl battle_data_fill
+	bl CopyPlayerPartyMonToBattleData
 	ldr r0, _0803E9B0
 	ldrb r0, [r0]
 	b _0803E9CC
@@ -2134,7 +1256,7 @@ _0803EB70:
 	lsrs r6, r0, 24
 	adds r0, r4, 0
 	adds r2, r6, 0
-	bl CalcPPWithPPUps
+	bl CalculatePPWithBonus
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, [sp]
@@ -2162,7 +1284,7 @@ _0803EB70:
 	lsrs r1, 24
 	adds r0, r4, 0
 	adds r2, r6, 0
-	bl CalcPPWithPPUps
+	bl CalculatePPWithBonus
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, [sp]
@@ -2184,7 +1306,7 @@ _0803EB70:
 	lsrs r1, 24
 	adds r0, r4, 0
 	adds r2, r6, 0
-	bl CalcPPWithPPUps
+	bl CalculatePPWithBonus
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp]
@@ -2286,7 +1408,7 @@ _0803ECB8:
 	lsrs r1, 24
 	adds r0, r4, 0
 	ldr r2, [sp, 0x10]
-	bl CalcPPWithPPUps
+	bl CalculatePPWithBonus
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, [sp]
@@ -2320,7 +1442,7 @@ _0803ED00:
 	lsrs r1, 24
 	adds r0, r4, 0
 	ldr r2, [sp, 0x10]
-	bl CalcPPWithPPUps
+	bl CalculatePPWithBonus
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, [sp]
@@ -2342,7 +1464,7 @@ _0803ED00:
 	lsrs r1, 24
 	adds r0, r4, 0
 	ldr r2, [sp, 0x10]
-	bl CalcPPWithPPUps
+	bl CalculatePPWithBonus
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp]
@@ -2569,7 +1691,7 @@ _0803EF18:
 	lsrs r1, 24
 	adds r0, r4, 0
 	ldr r2, [sp, 0x10]
-	bl CalcPPWithPPUps
+	bl CalculatePPWithBonus
 	lsls r0, 24
 	lsrs r4, r0, 24
 	mov r0, r8
@@ -2604,7 +1726,7 @@ _0803EF18:
 	lsls r1, 24
 	lsrs r1, 24
 	ldr r2, [sp, 0x10]
-	bl CalcPPWithPPUps
+	bl CalculatePPWithBonus
 	lsls r0, 24
 	lsrs r0, 24
 	subs r0, r4
@@ -6387,7 +5509,7 @@ _08040B30:
 	lsls r2, r6, 24
 	lsrs r2, 24
 	adds r0, r4, 0
-	bl CalcPPWithPPUps
+	bl CalculatePPWithBonus
 	mov r1, sp
 	strb r0, [r1]
 	adds r1, r6, 0

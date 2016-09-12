@@ -11,17 +11,32 @@ extern struct Pokemon gPlayerParty[6];
 extern u8 gEnemyPartyCount;
 extern struct Pokemon gEnemyParty[6];
 
+extern u16 unk_20160BC[];
+extern struct SecretBaseRecord gSecretBaseRecord;
+extern u16 gUnknown_020239F8;
+extern struct BattlePokemon gBattleMons[4];
+extern u8 byte_2024C06;
 extern struct SpriteTemplate gUnknown_02024E8C;
+extern u16 word_202FF5E;
 extern struct PokemonStorage gPokemonStorage;
 
 extern u8 gBadEggNickname[];
 extern u8 gEggNickname[];
 extern u32 gBitTable[];
 extern struct BaseStats gBaseStats[];
+extern u8 gSpeciesNames[][11];
+extern struct BattleMove gBattleMoves[];
 extern struct SpriteTemplate gSpriteTemplate_8208288[];
 extern union AmimCmd *gSpriteAnimTable_81E7C64[];
 extern union AnimCmd **gUnknown_081EC2A4[];
 extern union AnimCmd **gUnknown_081ECACC[];
+extern u8 gTrainerClassToPicIndex[];
+extern u8 gTrainerClassToNameIndex[];
+extern u8 gSecretBaseTrainerClasses[];
+extern u8 gUnknown_08208238[];
+extern u8 gUnknown_0820823C[];
+
+extern u8 battle_side_get_owner(u8);
 
 u8 GetMonGender(struct Pokemon *mon)
 {
@@ -931,4 +946,201 @@ u8 CalculateEnemyPartyCount(void)
     }
 
     return gEnemyPartyCount;
+}
+
+u8 sub_803DAA0(void)
+{
+    s32 aliveCount = 0;
+    s32 i;
+    CalculatePlayerPartyCount();
+
+    if (gPlayerPartyCount == 1)
+        return gPlayerPartyCount;
+
+    for (i = 0; i < gPlayerPartyCount; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_HP, NULL) != 0
+         && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL) != SPECIES_NONE
+         && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL) != 412)
+            aliveCount++;
+    }
+
+    return (aliveCount > 1) ? 0 : 2;
+}
+
+u8 GetAbilityBySpecies(u16 species, bool8 altAbility)
+{
+    if (altAbility)
+        byte_2024C06 = gBaseStats[species].ability2;
+    else
+        byte_2024C06 = gBaseStats[species].ability1;
+
+    return byte_2024C06;
+}
+
+u8 GetMonAbility(struct Pokemon *mon)
+{
+    u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
+    u8 altAbility = GetMonData(mon, MON_DATA_ALT_ABILITY, NULL);
+    return GetAbilityBySpecies(species, altAbility);
+}
+
+void CreateSecretBaseEnemyParty(struct SecretBaseRecord *secretBaseRecord)
+{
+    s32 i, j;
+
+    ZeroEnemyPartyMons();
+    memcpy(&gSecretBaseRecord, secretBaseRecord, sizeof(*secretBaseRecord));
+
+    for (i = 0; i < 6; i++)
+    {
+        if (gSecretBaseRecord.partySpecies[i])
+        {
+            CreateMon(&gEnemyParty[i],
+                gSecretBaseRecord.partySpecies[i],
+                gSecretBaseRecord.partyLevels[i],
+                15,
+                1,
+                gSecretBaseRecord.partyPersonality[i],
+                2,
+                0);
+
+            SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, (u8 *)&gSecretBaseRecord.partyHeldItems[i]);
+
+            for (j = 0; j < 6; j++)
+                SetMonData(&gEnemyParty[i], MON_DATA_HP_EV + j, &gSecretBaseRecord.partyEVs[i]);
+
+            for (j = 0; j < 4; j++)
+            {
+                SetMonData(&gEnemyParty[i], MON_DATA_MOVE1 + j, (u8 *)&gSecretBaseRecord.partyMoves[i * 4 + j]);
+                SetMonData(&gEnemyParty[i], MON_DATA_PP1 + j, &gBattleMoves[gSecretBaseRecord.partyMoves[i * 4 + j]].pp);
+            }
+        }
+    }
+
+    gUnknown_020239F8 = 8;
+    word_202FF5E = 1024;
+}
+
+u8 GetSecretBaseTrainerPicIndex(void)
+{
+    u8 trainerClass = gSecretBaseTrainerClasses[(gSecretBaseRecord.trainerId[0] % 5) + (5 * gSecretBaseRecord.gender)];
+    return gTrainerClassToPicIndex[trainerClass];
+}
+
+u8 GetSecretBaseTrainerNameIndex(void)
+{
+    u8 trainerClass = gSecretBaseTrainerClasses[(gSecretBaseRecord.trainerId[0] % 5) + (5 * gSecretBaseRecord.gender)];
+    return gTrainerClassToNameIndex[trainerClass];
+}
+
+u8 PlayerPartyAndPokemonStorageFull(void)
+{
+    s32 i;
+
+    for (i = 0; i < 6; i++)
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL) == SPECIES_NONE)
+            return 0;
+
+    return PokemonStorageFull();
+}
+
+u8 PokemonStorageFull(void)
+{
+    s32 i, j;
+
+    for (i = 0; i < 14; i++)
+        for (j = 0; j < 30; j++)
+            if (GetBoxMonData(&gPokemonStorage.boxes[i][j], MON_DATA_SPECIES, NULL) == SPECIES_NONE)
+                return 0;
+
+    return 1;
+}
+
+void GetSpeciesName(u8 *name, u16 species)
+{
+    s32 i;
+
+    for (i = 0; i <= POKEMON_NAME_LENGTH; i++)
+    {
+        if (species > 412)
+            name[i] = gSpeciesNames[0][i];
+        else
+            name[i] = gSpeciesNames[species][i];
+
+        if (name[i] == EOS)
+            break;
+    }
+
+    name[i] = EOS;
+}
+
+u8 CalculatePPWithBonus(u16 move, u8 ppBonuses, u8 moveIndex)
+{
+    u8 basePP = gBattleMoves[move].pp;
+    return basePP + ((basePP * 20 * ((gUnknown_08208238[moveIndex] & ppBonuses) >> (2 * moveIndex))) / 100);
+}
+
+void RemoveMonPPBonus(struct Pokemon *mon, u8 moveIndex)
+{
+    u8 ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES, NULL);
+    ppBonuses &= gUnknown_0820823C[moveIndex];
+    SetMonData(mon, MON_DATA_PP_BONUSES, &ppBonuses);
+}
+
+void RemoveBattleMonPPBonus(struct BattlePokemon *mon, u8 moveIndex)
+{
+    mon->ppBonuses &= gUnknown_0820823C[moveIndex];
+}
+
+void CopyPlayerPartyMonToBattleData(u8 battleIndex, u8 partyIndex)
+{
+    s32 i;
+    s8 nickname[POKEMON_NAME_LENGTH * 2];
+
+    gBattleMons[battleIndex].species = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPECIES, NULL);
+    gBattleMons[battleIndex].item = GetMonData(&gPlayerParty[partyIndex], MON_DATA_HELD_ITEM, NULL);
+
+    for (i = 0; i < 4; i++)
+    {
+        gBattleMons[battleIndex].moves[i] = GetMonData(&gPlayerParty[partyIndex], MON_DATA_MOVE1 + i, NULL);
+        gBattleMons[battleIndex].pp[i] = GetMonData(&gPlayerParty[partyIndex], MON_DATA_PP1 + i, NULL);
+    }
+
+    gBattleMons[battleIndex].ppBonuses = GetMonData(&gPlayerParty[partyIndex], MON_DATA_PP_BONUSES, NULL);
+    gBattleMons[battleIndex].friendship = GetMonData(&gPlayerParty[partyIndex], MON_DATA_FRIENDSHIP, NULL);
+    gBattleMons[battleIndex].experience = GetMonData(&gPlayerParty[partyIndex], MON_DATA_EXP, NULL);
+    gBattleMons[battleIndex].hpIV = GetMonData(&gPlayerParty[partyIndex], MON_DATA_HP_IV, NULL);
+    gBattleMons[battleIndex].attackIV = GetMonData(&gPlayerParty[partyIndex], MON_DATA_ATK_IV, NULL);
+    gBattleMons[battleIndex].defenseIV = GetMonData(&gPlayerParty[partyIndex], MON_DATA_DEF_IV, NULL);
+    gBattleMons[battleIndex].speedIV = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPD_IV, NULL);
+    gBattleMons[battleIndex].spAttackIV = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPATK_IV, NULL);
+    gBattleMons[battleIndex].spDefenseIV = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPDEF_IV, NULL);
+    gBattleMons[battleIndex].personality = GetMonData(&gPlayerParty[partyIndex], MON_DATA_PERSONALITY, NULL);
+    gBattleMons[battleIndex].status1 = GetMonData(&gPlayerParty[partyIndex], MON_DATA_STATUS, NULL);
+    gBattleMons[battleIndex].level = GetMonData(&gPlayerParty[partyIndex], MON_DATA_LEVEL, NULL);
+    gBattleMons[battleIndex].hp = GetMonData(&gPlayerParty[partyIndex], MON_DATA_HP, NULL);
+    gBattleMons[battleIndex].maxHP = GetMonData(&gPlayerParty[partyIndex], MON_DATA_MAX_HP, NULL);
+    gBattleMons[battleIndex].attack = GetMonData(&gPlayerParty[partyIndex], MON_DATA_ATK, NULL);
+    gBattleMons[battleIndex].defense = GetMonData(&gPlayerParty[partyIndex], MON_DATA_DEF, NULL);
+    gBattleMons[battleIndex].speed = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPD, NULL);
+    gBattleMons[battleIndex].spAttack = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPATK, NULL);
+    gBattleMons[battleIndex].spDefense = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPDEF, NULL);
+    gBattleMons[battleIndex].isEgg = GetMonData(&gPlayerParty[partyIndex], MON_DATA_IS_EGG, NULL);
+    gBattleMons[battleIndex].altAbility = GetMonData(&gPlayerParty[partyIndex], MON_DATA_ALT_ABILITY, NULL);
+    gBattleMons[battleIndex].otId = GetMonData(&gPlayerParty[partyIndex], MON_DATA_OT_ID, NULL);
+    gBattleMons[battleIndex].type1 = gBaseStats[gBattleMons[battleIndex].species].type1;
+    gBattleMons[battleIndex].type2 = gBaseStats[gBattleMons[battleIndex].species].type2;
+    gBattleMons[battleIndex].ability = GetAbilityBySpecies(gBattleMons[battleIndex].species, gBattleMons[battleIndex].altAbility);
+    GetMonData(&gPlayerParty[partyIndex], MON_DATA_NICKNAME, nickname);
+    StringCopy10(gBattleMons[battleIndex].nickname, nickname);
+    GetMonData(&gPlayerParty[partyIndex], MON_DATA_OT_NAME, gBattleMons[battleIndex].otName);
+    *(unk_20160BC + battle_side_get_owner(battleIndex)) = gBattleMons[battleIndex].hp;
+
+    for (i = 0; i < 8; i++)
+        gBattleMons[battleIndex].statStages[i] = 6;
+
+    gBattleMons[battleIndex].status2 = 0;
+    sub_80157C4(battleIndex);
+    sub_8032AA8(battleIndex, 0);
 }
