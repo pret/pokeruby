@@ -2950,18 +2950,16 @@ gUnknown_0820C334:: @ 820C334
 	.byte 18, 5
 	.byte 18, 7
 
-gUnknown_0820C33C::
+gOtherText_Terminator::
 	.string "$"
 
-gUnknown_0820C33D:: @ 820C33D
-OtherText_MaleSymbol3::
+gOtherText_MaleSymbol3:: @ 820C33D
 	.string "♂$"
 
-gUnknown_0820C33F:: @ 820C33F
-OtherText_FemaleSymbol3::
+gOtherText_FemaleSymbol3:: @ 820C33F
 	.string "♀$"
 
-gUnknown_0820C341:: @ 820C341
+gOtherText_GenderlessSymbol:: @ 820C341
 	.string "$$"
 
 	.align 2
@@ -3844,10 +3842,8 @@ gUnknown_082165F3:: @ 82165F3
 gUnknown_082165F8:: @ 82165F8
 	.string " $"
 
-gUnknown_082165FA:: @ 82165FA
-OtherText_BPM::
+gOtherText_BPMAndDash:: @ 82165FA
 	.string "BPM$"
-OtherText_Dash::
 	.string "-$"
 
 gUnknown_08216600:: @ 8216600
@@ -7286,7 +7282,7 @@ gUnknown_08376624:: @ 8376624
 	.4byte OtherText_CantUseThatHere
 	.4byte OtherText_RestoreWhatMove
 	.4byte OtherText_BoostPP
-	.4byte OtherText_Terminator19
+	.4byte gOtherText_CancelWithTerminator
 	.4byte OtherText_DoWhatWithItem
 	.4byte OtherText_NoPokeForBattle
 	.4byte OtherText_ChoosePoke2
@@ -7906,12 +7902,12 @@ gUnknown_08376CEC:: @ 8376CEC
 
 	.align 2
 gUnknown_08376D04:: @ 8376D04
-	.4byte OtherText_HP
-	.4byte OtherText_Attack
-	.4byte OtherText_Defense
-	.4byte OtherText_SpAtk
-	.4byte OtherText_SpDef
-	.4byte OtherText_Speed
+	.4byte gOtherText_HP
+	.4byte gOtherText_Attack
+	.4byte gOtherText_Defense
+	.4byte gOtherText_SpAtk
+	.4byte gOtherText_SpDef
+	.4byte gOtherText_Speed
 
 gUnknown_08376D1C:: @ 8376D1C
 	.byte 0x3A @ HP
@@ -11501,13 +11497,13 @@ gUnknown_0839F494:: @ 839F494
 	.4byte OtherText_Summary, sub_8089FCC
 	.4byte OtherText_Switch2, sub_808A02C
 	.4byte OtherText_Item, sub_808A140
-	.4byte OtherText_Cancel2, sub_808A918
+	.4byte gOtherText_CancelNoTerminator, sub_808A918
 	.4byte OtherText_Give2, sub_808A630
 	.4byte OtherText_Take2, sub_808A688
 	.4byte OtherText_Take, sub_808A6B8
 	.4byte OtherText_Mail, sub_808A6E8
 	.4byte OtherText_Read2, sub_808A810
-	.4byte OtherText_Cancel2, sub_808A938
+	.4byte gOtherText_CancelNoTerminator, sub_808A938
 	.4byte gMoveNames + 13 * MOVE_CUT, sub_808A984
 	.4byte gMoveNames + 13 * MOVE_FLASH, sub_808A984
 	.4byte gMoveNames + 13 * MOVE_ROCK_SMASH, sub_808A984
@@ -12126,7 +12122,7 @@ gUnknown_083B5F8C:: @ 83B5F8C
 	.align 2
 gUnknown_083B5FCC:: @ 83B5FCC
 	.4byte OtherText_Summary, sub_8095544
-	.4byte OtherText_Cancel2, sub_80958C4
+	.4byte gOtherText_CancelNoTerminator, sub_80958C4
 	.4byte OtherText_Shift, sub_8095584
 	.4byte OtherText_SendOut, sub_8095584
 
@@ -12983,7 +12979,7 @@ gUnknown_083C1068:: @ 83C1068
 	.4byte OtherText_ContestMoves
 	.4byte OtherText_Switch
 	.4byte OtherText_Info
-	.4byte OtherText_Cancel2
+	.4byte gOtherText_CancelNoTerminator
 
 	.align 2
 gSpriteAffineAnim_83C1088:: @ 83C1088
@@ -13389,13 +13385,13 @@ gUnknown_083C1618:: @ 83C1618
 gUnknown_083C1640:: @ 83C1640
 	.4byte OtherText_Use, sub_80A5B78
 	.4byte OtherText_Toss, sub_80A5F14
-	.4byte OtherText_Cancel2, sub_80A5F80
+	.4byte gOtherText_CancelNoTerminator, sub_80A5F80
 	.4byte OtherText_Register, sub_80A5FAC
 	.4byte OtherText_Use, ItemMenu_UseInBattle
-	.4byte OtherText_Cancel2, sub_80A7124
+	.4byte gOtherText_CancelNoTerminator, sub_80A7124
 	.4byte OtherText_Give2, ItemMenu_Give
 	.4byte OtherText_CheckTag, sub_80A6178
-	.4byte OtherText_Terminator19, 0x0
+	.4byte gOtherText_CancelWithTerminator, 0x0
 	.4byte OtherText_Confirm, sub_80A69E0
 
 @ 6-byte entries; format of entry is unknown
@@ -13694,9 +13690,7 @@ Unknown_83C9166:
 
 Unknown_83C916E:
 	.string "Contest results$"
-
 	.string "パラメータへんこう$" @ "Change parameter"
-
 	.string "わざ へんこう$" @ "Change move"
 
 Unknown_83C9190:
@@ -13792,7 +13786,6 @@ gUnknown_083C92E4:: @ 83C92E4
 
 gUnknown_083C932C:: @ 83C932C
 	.string "{COLOR CYAN}{HIGHLIGHT RED}$"
-
 	.string "かいし$" @ Start
 
 gUnknown_083C9337:: @ 83C9337
@@ -14032,16 +14025,12 @@ gUnknown_083CA4D4:: @ 83CA4D4
 
 	.include "data/text/contest_strings.s"
 
-gUnknown_083CC355:: @ 83CC355
-UnknownText_MissedTurn::
+gUnknownText_MissedTurn:: @ 83CC355
 	.string "Missed turn$"
 
-gUnknown_083CC361:: @ 83CC361
-UnknownText_LinkStandby::
+gUnknownText_LinkStandbyAndWinner:: @ 83CC361
 	.string "Link standby...$"
-UnknownText_UnknownFormatting::
 	.string "{COLOR WHITE2}$"
-UnknownText_WinnerIs::
 	.string "The winner is {STR_VAR_1}’s {STR_VAR_2}!\nCongratulations!$"
 
 @ unknown, unreferenced data
@@ -14049,12 +14038,10 @@ UnknownText_WinnerIs::
 	.byte 0x9C
 	.byte 0x77
 
-gUnknown_083CC3A0:: @ 83CC3A0
-UnknownText_UnknownFormatting2::
+gUnknownText_UnknownFormatting2:: @ 83CC3A0
 	.string "{COLOR GREEN}{SHADOW RED}$"
 
-gUnknown_083CC3A7:: @ 83CC3A7
-UnknownText_UnknownFormatting3::
+gUnknownText_UnknownFormatting3:: @ 83CC3A7
 	.string "{COLOR LIGHT_GREY}$"
 
 	.align 2
@@ -14210,9 +14197,9 @@ gUnknown_083CC5D0:: @ 83CC5D0
 
 	.align 2
 gUnknown_083CC6D0:: @ 83CC6D0
-	.4byte ContestStatsText_Buy, sub_80B2EFC
-	.4byte ContestStatsText_Sell, sub_80B2F30
-	.4byte ContestStatsText_Quit2, HandleShopMenuQuit
+	.4byte MartText_Buy, sub_80B2EFC
+	.4byte MartText_Sell, sub_80B2F30
+	.4byte MartText_Quit2, HandleShopMenuQuit
 
 gUnknown_083CC6E8:: @ 83CC6E8
 	.byte 0, 1, 2
@@ -14749,27 +14736,22 @@ gUnknown_083D02BA:: @ 83D02BA
 
 	.align 2 @ object file boundary?
 
-gUnknown_083D02C8:: @ 83D02C8
-DebugText_SoundCheckJap:
+gDebugText_SoundCheckJap:: @ 83D02C8
 	.string "サウンドチェック$" @ Sound Check
 
-gUnknown_083D02D1:: @ 83D02D1
-DebugText_BGM:
+gDebugText_BGM:: @ 83D02D1
 	.string "BGM$"
 
-gUnknown_083D02D5:: @ 83D02D5
-DebugText_SE:
+gDebugText_SE:: @ 83D02D5
 	.string "SE $"
 
 gUnknown_083D02D9:: @ 83D02D9
 	.incbin "baserom.gba", 0x003d02d9, 0xd
 
-gUnknown_083D02E6:: @ 83D02E6
-DebugText_UpDown:
+gDebugText_UpDown:: @ 83D02E6
 	.string "L‥UP R‥DOWN$"
 
-gUnknown_083D02F2:: @ 83D02F2
-DebugText_DriverTest:
+gDebugText_DriverTest:: @ 83D02F2
 	.string "R‥DRIVER-TEST$"
 
 gUnknown_083D0300:: @ 83D0300
@@ -14781,40 +14763,31 @@ gUnknown_083D0312:: @ 83D0312
 gUnknown_083D031C:: @ 83D031C
 	.incbin "baserom.gba", 0x003d031c, 0xb
 
-gUnknown_083D0327:: @ 83D0327
-DebugText_Voice:
+gDebugText_Voice:: @ 83D0327
 	.string "VOICE‥‥‥‥$"
 
-gUnknown_083D0331:: @ 83D0331
-DebugText_Volume:
+gDebugText_Volume:: @ 83D0331
 	.string "VOLUME‥‥‥$"
 
-gUnknown_083D033B:: @ 83D033B
-DebugText_Panpot:
+gDebugText_Panpot:: @ 83D033B
 	.string "PANPOT‥‥‥$"
 
-gUnknown_083D0345:: @ 83D0345
-DebugText_Pitch:
+gDebugText_Pitch:: @ 83D0345
 	.string "PITCH‥‥‥‥$"
 
-gUnknown_083D034F:: @ 83D034F
-DebugText_Length:
+gDebugText_Length:: @ 83D034F
 	.string "LENGTH‥‥‥$"
 
-gUnknown_083D0359:: @ 83D0359
-DebugText_Release:
+gDebugText_Release:: @ 83D0359
 	.string "RELEASE‥‥$"
 
-gUnknown_083D0363:: @ 83D0363
-DebugText_Progress:
+gDebugText_Progress:: @ 83D0363
 	.string "PROGRESS‥$"
 
-gUnknown_083D036D:: @ 83D036D
-DebugText_Chorus:
+gDebugText_Chorus:: @ 83D036D
 	.string "CHORUS‥‥‥$"
 
-gUnknown_083D0377:: @ 83D0377
-DebugText_Priority:
+gDebugText_Priority:: @ 83D0377
 	.string "PRIORITY‥$"
 
 gUnknown_083D0381:: @ 83D0381
@@ -14841,20 +14814,16 @@ gUnknown_083D03E0:: @ 83D03E0
 gUnknown_083D03F8:: @ 83D03F8
 	.byte 0x3F, 0x00, 0xC0, 0x7F, 0x80 @ stereo panning
 
-gUnknown_083D03FD:: @ 83D03FD
-OtherText_SE:
+gOtherText_SE:: @ 83D03FD
 	.string "SE$"
 
-gUnknown_083D0400:: @ 83D0400
-OtherText_Pan:
+gOtherText_Pan:: @ 83D0400
 	.string "PAN$"
 
-gUnknown_083D0404:: @ 83D0404
-OtherText_LR:
+gOtherText_LR:: @ 83D0404
 	.string "  LR$"
 
-gUnknown_083D0409:: @ 83D0409
-OtherText_RL:
+gOtherText_RL:: @ 83D0409
 	.string "  RL$"
 
 @ 83D040E
@@ -14869,7 +14838,7 @@ gUnknown_083D1374:: @ 83D1374
 	.align 2
 gUnknown_083D13D4:: @ 83D13D4
 	.4byte SecretBaseText_DelRegist, sub_80BCA84
-	.4byte UnknownText_Exit, sub_80BCBF8
+	.4byte gUnknownText_Exit, sub_80BCBF8
 
 	.align 2
 gUnknown_083D13E4:: @ 83D13E4
@@ -22278,14 +22247,14 @@ gUnknown_083EC604:: @ 83EC604
 	.4byte SecretBaseText_Decorate, sub_80FF160
 	.4byte SecretBaseText_PutAway, sub_8100A0C
 	.4byte SecretBaseText_Toss, sub_8101700
-	.4byte UnknownText_Exit, gpu_pal_decompress_alloc_tag_and_upload
+	.4byte gUnknownText_Exit, gpu_pal_decompress_alloc_tag_and_upload
 
 	.align 2
 gUnknown_083EC624:: @ 83EC624
 	.4byte SecretBaseText_PutOutDecor
 	.4byte SecretBaseText_StoreChosenDecor
 	.4byte SecretBaseText_ThrowAwayDecor
-	.4byte MenuText_GoBackToPrev
+	.4byte gMenuText_GoBackToPrev
 
 	.align 2
 gUnknown_083EC634:: @ 83EC634
@@ -24149,7 +24118,7 @@ gUnknown_083F7EB8:: @ 83F7EB8
 gUnknown_083F7EF4:: @ 83F7EF4
 	.4byte OtherText_Use,     sub_810C508
 	.4byte OtherText_Toss,    sub_810C5C0
-	.4byte OtherText_Cancel2, sub_810C748
+	.4byte gOtherText_CancelNoTerminator, sub_810C748
 	.4byte OtherText_Use,     sub_810C788
 	.4byte OtherText_Use,     sub_810C854
 
@@ -24318,7 +24287,7 @@ gUnknown_083F83C0:: @ 83F83C0
 	.4byte OtherText_BlackFlute
 	.4byte OtherText_PrettyChair
 	.4byte OtherText_PrettyDesk
-	.4byte OtherText_Cancel2
+	.4byte gOtherText_CancelNoTerminator
 
 gUnknown_083F83E0:: @ 83F83E0
 	.incbin "baserom.gba", 0x003f83e0, 0xc
@@ -25661,7 +25630,7 @@ gUnknown_084017B0:: @ 84017B0
 	.4byte OtherText_Summary, sub_812265C
 	.4byte OtherText_Enter2, sub_8122694
 	.4byte OtherText_NoEntry, sub_8122770
-	.4byte UnknownText_Exit, sub_8122838
+	.4byte gUnknownText_Exit, sub_8122838
 
 gUnknown_084017D0:: @ 84017D0
 	.byte 1, 0, 3
@@ -25690,7 +25659,7 @@ gUnknown_084017D8:: @ 84017D8
 gUnknown_084017F0:: @ 84017F0
 	.4byte OtherText_Store, sub_8122F70
 	.4byte OtherText_Summary, sub_81230BC
-	.4byte UnknownText_Exit, sub_81230F4
+	.4byte gUnknownText_Exit, sub_81230F4
 
 gUnknown_08401808:: @ 8401808
 	.byte 0, 1, 2
@@ -26952,12 +26921,12 @@ gUnknown_08406288:: @ 8406288
 	.4byte PCText_TakeOutItems
 	.4byte PCText_StoreItems
 	.4byte PCText_ThrowAwayItems
-	.4byte MenuText_GoBackToPrev
+	.4byte gMenuText_GoBackToPrev
 
 	.align 2
 gUnknown_08406298:: @ 8406298
 	.4byte SecretBaseText_ItemStorage, sub_8139E40
-	.4byte PCText_Mailbox, sub_8139E6C
+	.4byte gPCText_Mailbox, sub_8139E6C
 	.4byte SecretBaseText_Decoration, sub_8139ED8
 	.4byte SecretBaseText_TurnOff, sub_8139EF8
 
@@ -26972,7 +26941,7 @@ gUnknown_084062C0:: @ 84062C0
 	.4byte PCText_WithdrawItem, sub_813A118
 	.4byte PCText_DepositItem, sub_813A0A0
 	.4byte PCText_TossItem, sub_813A198
-	.4byte UnknownText_Exit, sub_813A21C
+	.4byte gUnknownText_Exit, sub_813A21C
 
 	.align 2
 gUnknown_084062E0:: @ 84062E0
@@ -26990,9 +26959,9 @@ gUnknown_084062F0:: @ 84062F0
 	.align 2
 gUnknown_084062F8:: @ 84062F8
 	.4byte OtherText_Read, sub_813B428
-	.4byte OtherText_MoveToBag, sub_813B510
+	.4byte gOtherText_MoveToBag, sub_813B510
 	.4byte OtherText_Give, sub_813B630
-	.4byte OtherText_Cancel2, sub_813B734
+	.4byte gOtherText_CancelNoTerminator, sub_813B734
 
 gUnknown_08406318:: @ 8406318
 	.string "{STR_VAR_1}{CLEAR_TO 80}$"
@@ -28037,12 +28006,10 @@ gExpandedPlaceholder_Brendan:: @ 840DCB8
 gExpandedPlaceholder_May:: @ 840DCC0
 	.string "MAY$"
 
-gUnknown_0840DCC4:: @ 840DCC4
-SystemText_Egg:
+gSystemText_Egg:: @ 840DCC4
 	.string "EGG$"
 
-gUnknown_0840DCC8:: @ 840DCC8
-SystemText_Pokemon2:
+gSystemText_Pokemon2:: @ 840DCC8
 	.string "POKéMON$"
 
 gMainMenuString_NewGame:: @ 840DCD0
@@ -28126,50 +28093,41 @@ gDefaultGirlName3::
 gDefaultGirlName4::
 	.string "SARA$"
 
-SystemText_IntroWeCall::
+gSystemText_IntroWeCall::
 	.string "This is what we call\na POKéMON.$"
 
-gUnknown_0840DFF7:: @ 840DFF7
-SystemText_NewPara::
+gSystemText_NewPara:: @ 840DFF7
 	.string "\p$"
 
-gUnknown_0840DFF9:: @ 840DFF9
-DexText_UnknownPoke::
+gDexText_UnknownPoke:: @ 840DFF9
 	.string "            ????? POKéMON$" @ why 12 spaces?
 
-gUnknown_0840E013:: @ 840E013
-	.incbin "baserom.gba", 0x0040e013, 0xa
+gDexText_UnknownHeight:: @ 840E013
+	.string "{CLEAR_TO 0x0C}??’??”$"
 
-gUnknown_0840E01D:: @ 840E01D
-DexText_UnknownWeight:
+gDexText_UnknownWeight:: @ 840E01D
 	.string "????.? lbs.$"
-DexText_Terminator4:
 	.string "$"
 
-gUnknown_0840E02A:: @ 840E02A
+gDexText_CryOf:: @ 840E02A
 	.string "{CLEAR_TO 2}CRY OF$"
-
 	.string "$"
 
-gUnknown_0840E035:: @ 840E035
-DexText_SizeComparedTo:
+gDexText_SizeComparedTo:: @ 840E035
 	.string "SIZE COMPARED TO $"
 
-gUnknown_0840E047:: @ 840E047
-DexText_RegisterComplete:
+gDexText_RegisterComplete:: @ 840E047
 	.string "POKéDEX registration completed.$"
 
-gUnknown_0840E067:: @ 840E067
-DexText_Searching:
+gDexText_Searching:: @ 840E067
 	.string "Searching...\nPlease wait.$"
 
-gUnknown_0840E081:: @ 840E081
-DexText_SearchComplete:
+gDexText_SearchComplete:: @ 840E081
 	.string "Search completed.$"
 
-gUnknown_0840E093:: @ 840E093
-DexText_NoMatching::
+gDexText_NoMatching:: @ 840E093
 	.string "No matching POKéMON were found.$"
+
 DexText_SearchForPoke::
 	.string "Search for POKéMON based on\nselected parameters.$"
 DexText_SwitchDex::
@@ -28269,66 +28227,50 @@ DexText_RightPointingTriangle::
 DexText_Terminator6::
 	.string " $"
 
-gUnknown_0840E44F:: @ 840E44F
-MenuText_WelcomeToHOF::
+gMenuText_WelcomeToHOFAndDexRating:: @ 840E44F
 	.string "Welcome to the HALL OF FAME!$"
-MenuText_HOFDexRate::
 	.string "Spotted POKéMON: {STR_VAR_1}!\nOwned POKéMON: {STR_VAR_2}!\pPROF. BIRCH’s POKéDEX rating!\pPROF. BIRCH: Let’s see...\p$"
 
-gUnknown_0840E4CD:: @ 840E4CD
-MenuText_HOFSaving::
+gMenuText_HOFSaving:: @ 840E4CD
 	.string "SAVING...\nDON’T TURN OFF THE POWER.$"
 
-gUnknown_0840E4F1:: @ 840E4F1
-MenuText_HOFCorrupt::
+gMenuText_HOFCorrupt:: @ 840E4F1
 	.string "The HALL OF FAME data is corrupt.$"
 
-gUnknown_0840E513:: @ 840E513
-MenuText_HOFNumber::
+gMenuText_HOFNumber:: @ 840E513
 	.string "HALL OF FAME No. $"
 
-gUnknown_0840E525:: @ 840E525
-MenuText_HOFCongratulations::
+gMenuText_HOFCongratulations:: @ 840E525
 	.string "LEAGUE CHAMPION!\nCONGRATULATIONS!$"
 
-gUnknown_0840E547:: @ 840E547
-OtherText_Number2::
+gOtherText_Number2:: @ 840E547
 	.string "No. $"
 
-gUnknown_0840E54C:: @ 840E54C
-OtherText_Level3::
+gOtherText_Level3:: @ 840E54C
 	.string "Lv. $"
 
-gUnknown_0840E551:: @ 840E551
-OtherText_IDNumber::
+gOtherText_IDNumber:: @ 840E551
 	.string "IDNo. /$"
 
-gUnknown_0840E559:: @ 840E559
-OtherText_Name::
+gOtherText_Name:: @ 840E559
 	.string "NAME /$"
 
-gUnknown_0840E560:: @ 840E560
-OtherText_IDNumber2::
-	.string "IDNo. /$" @ identical string for no reason?
+gOtherText_IDNumber2:: @ 840E560
+	.string "IDNo. /$"
 
-gUnknown_0840E568:: @ 840E568
-OtherText_BirchInTrouble::
+gOtherText_BirchInTrouble:: @ 840E568
 	.string "{HIGHLIGHT WHITE2}{COLOR DARK_GREY}PROF. BIRCH is in trouble!\nRelease a POKéMON and rescue him!$"
 
-gUnknown_0840E5AB:: @ 840E5AB
-OtherText_DoYouChoosePoke::
+gOtherText_DoYouChoosePoke:: @ 840E5AB
 	.string "{HIGHLIGHT WHITE2}{COLOR DARK_GREY}Do you choose this POKéMON?$"
 
-gUnknown_0840E5CD:: @ 840E5CD
-OtherText_Poke::
+gOtherText_Poke:: @ 840E5CD
 	.string "POKéMON$"
 
-gUnknown_0840E5D5:: @ 840E5D5
-SystemText_SaveErrorExchangeBackup::
+gSystemText_SaveErrorExchangeBackup:: @ 840E5D5
 	.string "Save error.\pPlease exchange the\nbackup memory.$"
 
-gUnknown_0840E604:: @ 840E604
-OtherText_FlyToWhere::
+gOtherText_FlyToWhere:: @ 840E604
 	.string "FLY to where?$"
 
 OtherText_Use::
@@ -28344,23 +28286,18 @@ OtherText_CheckTag::
 OtherText_Confirm::
 	.string "CONFIRM$"
 
-gUnknown_0840E63B:: @ 840E63B
-OtherText_Walk::
+gOtherText_Walk:: @ 840E63B
 	.string "WALK$"
 
-gUnknown_0840E640:: @ 840E640
-UnknownText_Exit::
+gUnknownText_Exit:: @ 840E640
 	.string "EXIT$"
 
-gUnknown_0840E645:: @ 840E645
-OtherText_Cancel2::
+gOtherText_CancelNoTerminator:: @ 840E645
 	.string "CANCEL$"
 
-gUnknown_0840E64C:: @ 840E64C
-OtherText_Terminator19::
-	.string "$"
-OtherText_Cancel3::
-	.string "CANCEL$"
+gOtherText_CancelWithTerminator:: @ 840E64C
+	.string "$CANCEL$"
+
 OtherText_Item::
 	.string "ITEM$"
 OtherText_Mail::
@@ -28370,75 +28307,57 @@ OtherText_Take2::
 OtherText_Store::
 	.string "STORE$"
 
-gUnknown_0840E669:: @ 840E669
-OtherText_Check::
+gOtherText_Check:: @ 840E669
 	.string "CHECK$"
 
-gUnknown_0840E66F:: @ 840E66F
-OtherText_None::
+gOtherText_None:: @ 840E66F
 	.string "NONE$"
 
-gUnknown_0840E674:: @ 840E674
-OtherText_ThreeQuestions2::
+gOtherText_ThreeQuestions2:: @ 840E674
 	.string "???$"
 
-gUnknown_0840E678:: @ 840E678
-OtherText_FiveQuestions::
+gOtherText_FiveQuestionsAndSlash:: @ 840E678
 	.string "?????$"
-OtherText_Backslash::
 	.string "/$"
 
-gUnknown_0840E680:: @ 840E680
-OtherText_OneDash::
+gOtherText_OneDash:: @ 840E680
 	.string "-$"
 
-gUnknown_0840E682:: @ 840E682
-OtherText_TwoDashes::
+gOtherText_TwoDashes:: @ 840E682
 	.string "--$"
 
-gUnknown_0840E685:: @ 840E685
-OtherText_ThreeDashes2::
+gOtherText_ThreeDashes2:: @ 840E685
 	.string "---$"
 
-gUnknown_0840E689:: @ 840E689
-OtherText_MaleSymbol2::
+gOtherText_MaleSymbol2:: @ 840E689
 	.string "♂$"
 
-gUnknown_0840E68B:: @ 840E68B
-OtherText_FemaleSymbol2::
+gOtherText_FemaleSymbolAndLv:: @ 840E68B
 	.string "♀$"
-OtherText_Level2::
 	.string "Lv.$"
 
-gUnknown_0840E691:: @ 840E691
-OtherText_TallPlus::
+gOtherText_TallPlusAndRightArrow:: @ 840E691
 	.string "{TALL_PLUS}$"
-OtherText_RightArrow::
 	.string "{RIGHT_ARROW}$"
 
-gUnknown_0840E697:: @ 840E697
-MenuText_GoBackToPrev::
+gMenuText_GoBackToPrev:: @ 840E697
 	.string "Go back to the\nprevious menu.$"
 
-gUnknown_0840E6B5:: @ 840E6B5
-OtherText_WhatWillYouDo::
+gOtherText_WhatWillYouDo:: @ 840E6B5
 	.string "What would you like to do?$"
 
-gUnknown_0840E6D0:: @ 840E6D0
-OtherText_xString1::
+gOtherText_xString1:: @ 840E6D0
 	.string "×{STR_VAR_1}$"
 
-gUnknown_0840E6D4:: @ 840E6D4
-OtherText_Berry2::
+gOtherText_Berry2:: @ 840E6D4
 	.string " BERRY$"
 
-gUnknown_0840E6DB:: @ 840E6DB
-OtherText_Coins2::
+gOtherText_Coins2:: @ 840E6DB
 	.string "{STR_VAR_1} COINS$"
 
-gUnknown_0840E6E4:: @ 840E6E4
-OtherText_CloseBag::
+gOtherText_CloseBag:: @ 840E6E4
 	.string "CLOSE BAG$"
+
 OtherText_TheField3::
 	.string "the field.$"
 OtherText_TheBattle::
@@ -28464,132 +28383,100 @@ gUnknown_0840E740:: @ 840E740
 	.4byte OtherText_TheField2
 	.4byte OtherText_ThePC
 
-gUnknown_0840E75C:: @ 840E75C
-OtherText_ReturnTo:
+gOtherText_ReturnTo:: @ 840E75C
 	.string "Return to$"
 
-gUnknown_0840E766:: @ 840E766
-OtherText_WhatWillYouDo2:
+gOtherText_WhatWillYouDo2:: @ 840E766
 	.string "What would you\nlike to do?$"
 
-gUnknown_0840E781:: @ 840E781
-OtherText_CantWriteMail:
+gOtherText_CantWriteMail:: @ 840E781
 	.string "You can’t write\nMAIL here.$"
 
-gUnknown_0840E79C:: @ 840E79C
-OtherText_NoPokemon:
+gOtherText_NoPokemon:: @ 840E79C
 	.string "There is no\nPOKéMON.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840E7B3:: @ 840E7B3
-OtherText_SwitchWhichItem:
+gOtherText_SwitchWhichItem:: @ 840E7B3
 	.string "Switch with which\nitem?$"
 
-gUnknown_0840E7CB:: @ 840E7CB
-OtherText_CantBeHeld:
+gOtherText_CantBeHeld:: @ 840E7CB
 	.string "{STR_VAR_1} can’t be held.$"
 
-gUnknown_0840E7DD:: @ 840E7DD
-OtherText_CantBeHeldHere:
+gOtherText_CantBeHeldHere:: @ 840E7DD
 	.string "{STR_VAR_1} can’t be held here.$"
 
-gUnknown_0840E7F4:: @ 840E7F4
-OtherText_HowManyToDeposit:
+gOtherText_HowManyToDeposit:: @ 840E7F4
 	.string "How many do you\nwant to deposit?$"
 
-gUnknown_0840E815:: @ 840E815
-OtherText_DepositedItems:
+gOtherText_DepositedItems:: @ 840E815
 	.string "Deposited {STR_VAR_2}\n{STR_VAR_1}(s).$"
 
-gUnknown_0840E829:: @ 840E829
-OtherText_NoRoomForItems:
+gOtherText_NoRoomForItems:: @ 840E829
 	.string "There’s no room to\nstore items.$"
 
-gUnknown_0840E849:: @ 840E849
-OtherText_CantStoreSomeoneItem:
+gOtherText_CantStoreSomeoneItem:: @ 840E849
 	.string "You can’t store\nsomeone else’s item\nin the PC.$"
 
-gUnknown_0840E878:: @ 840E878
-OtherText_TooImportant:
+gOtherText_TooImportant:: @ 840E878
 	.string "That’s much too\nimportant to toss\nout!$"
 
-gUnknown_0840E89F:: @ 840E89F
-OtherText_HowManyToToss:
+gOtherText_HowManyToToss:: @ 840E89F
 	.string "Toss out how many?$"
 
-gUnknown_0840E8B2:: @ 840E8B2
-OtherText_ThrewAwayItem:
+gOtherText_ThrewAwayItem:: @ 840E8B2
 	.string "Threw away {STR_VAR_2}\n{STR_VAR_1}(s).$"
 
-gUnknown_0840E8C7:: @ 840E8C7
-OtherText_OkayToThrowAwayPrompt:
+gOtherText_OkayToThrowAwayPrompt:: @ 840E8C7
 	.string "Is it okay to\nthrow away {STR_VAR_2}\n{STR_VAR_1}(s)?$"
 
-gUnknown_0840E8EA:: @ 840E8EA
-OtherText_DadsAdvice:
+gOtherText_DadsAdvice:: @ 840E8EA
 	.string "DAD’s advice...\n{PLAYER}, there’s a time and place for\leverything!{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840E929:: @ 840E929
-OtherText_CantGetOffBike:
+gOtherText_CantGetOffBike:: @ 840E929
 	.string "You can’t dismount your BIKE here.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840E94E:: @ 840E94E
-OtherText_ItemfinderResponding:
+gOtherText_ItemfinderResponding:: @ 840E94E
 	.string "Oh!\nThe machine’s responding!\pThere’s an item buried around here!{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840E992:: @ 840E992
-OtherText_ItemfinderFoundItem:
+gOtherText_ItemfinderFoundItem:: @ 840E992
 	.string "The machine’s indicating something\nright underfoot!{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840E9C8:: @ 840E9C8
-OtherText_NoResponse:
+gOtherText_NoResponse:: @ 840E9C8
 	.string "... ... ... ... Nope!\nThere’s no response.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840E9F5:: @ 840E9F5
-OtherText_Coins3:
+gOtherText_Coins3:: @ 840E9F5
 	.string "Your COINS:\n{STR_VAR_1}{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840EA06:: @ 840EA06
-OtherText_BootedTM:
+gOtherText_BootedTM:: @ 840EA06
 	.string "Booted up a TM.$"
 
-gUnknown_0840EA16:: @ 840EA16
-OtherText_BootedHM:
+gOtherText_BootedHM:: @ 840EA16
 	.string "Booted up an HM.$"
 
-gUnknown_0840EA27:: @ 840EA27
-OtherText_ContainsMove:
+gOtherText_ContainsMove:: @ 840EA27
 	.string "It contained\n{STR_VAR_1}.\pTeach {STR_VAR_1}\nto a POKéMON?$"
 
-gUnknown_0840EA4F:: @ 840EA4F
-OtherText_UsedItem:
+gOtherText_UsedItem:: @ 840EA4F
 	.string "{PLAYER} used the\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840EA61:: @ 840EA61
-OtherText_RepelLingers:
+gOtherText_RepelLingers:: @ 840EA61
 	.string "But the effects of a REPEL lingered\nfrom earlier.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840EA95:: @ 840EA95
-OtherText_UsedFlute:
+gOtherText_UsedFlute:: @ 840EA95
 	.string "{PLAYER} used the\n{STR_VAR_2}.\pWild POKéMON will be lured.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840EAC3:: @ 840EAC3
-OtherText_UsedRepel:
+gOtherText_UsedRepel:: @ 840EAC3
 	.string "{PLAYER} used the\n{STR_VAR_2}.\pWild POKéMON will be repelled.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840EAF4:: @ 840EAF4
-OtherText_BoxIsFull:
+gOtherText_BoxIsFull:: @ 840EAF4
 	.string "The BOX is full.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840EB07:: @ 840EB07
-OtherText_Size:
+gOtherText_Size:: @ 840EB07
 	.string "SIZE /$"
 
-gUnknown_0840EB0E:: @ 840EB0E
-OtherText_Firm:
+gOtherText_Firm:: @ 840EB0E
 	.string "FIRM /$"
 
-gUnknown_0840EB15:: @ 840EB15
-ContestStatsText_Unknown1:
+gContestStatsText_Unknown1:: @ 840EB15
 	.string "{STR_VAR_1}.{STR_VAR_2}”$"
 
 ContestStatsText_VerySoft:
@@ -28602,7 +28489,6 @@ ContestStatsText_VeryHard:
 	.string "Very hard$"
 ContestStatsText_SuperHard:
 	.string "Super hard$"
-
 ContestStatsText_RedPokeBlock:
 	.string "RED {POKEBLOCK}$"
 ContestStatsText_BluePokeBlock:
@@ -28632,131 +28518,102 @@ ContestStatsText_WhitePokeBlock:
 ContestStatsText_GoldPokeBlock:
 	.string "GOLD {POKEBLOCK}$"
 
-gUnknown_0840EBED:: @ 840EBED
-ContestStatsText_Spicy:
+gContestStatsText_Spicy:: @ 840EBED
 	.string "SPICY$"
 
-gUnknown_0840EBF3:: @ 840EBF3
-ContestStatsText_Dry:
+gContestStatsText_Dry:: @ 840EBF3
 	.string "DRY$"
 
-gUnknown_0840EBF7:: @ 840EBF7
-ContestStatsText_Sweet:
+gContestStatsText_Sweet:: @ 840EBF7
 	.string "SWEET$"
 
-gUnknown_0840EBFD:: @ 840EBFD
-ContestStatsText_Bitter:
+gContestStatsText_Bitter:: @ 840EBFD
 	.string "BITTER$"
 
-gUnknown_0840EC04:: @ 840EC04
-ContestStatsText_Sour:
+gContestStatsText_Sour:: @ 840EC04
 	.string "SOUR$"
-ContestStatsText_Tasty:
-	.string "TASTY$"
-ContestStatsText_Feel:
+	.string "TASTY$" @ tasty is probably unused, but feel isn't.
 	.string "FEEL$"
 
-gUnknown_0840EC14:: @ 840EC14
-ContestStatsText_StowCase:
+gContestStatsText_StowCase:: @ 840EC14
 	.string "Stow CASE.$"
 
-gUnknown_0840EC1F:: @ 840EC1F
-ContestStatsText_ThrowAwayPrompt:
+gContestStatsText_ThrowAwayPrompt:: @ 840EC1F
 	.string "Throw away this\n{STR_VAR_1}?$"
 
-gUnknown_0840EC33:: @ 840EC33
-ContestStatsText_WasThrownAway:
+gContestStatsText_WasThrownAway:: @ 840EC33
 	.string "The {STR_VAR_1}\nwas thrown away.$"
 
-gUnknown_0840EC4B:: @ 840EC4B
-ContestStatsText_NormallyAte:
+gContestStatsText_NormallyAte:: @ 840EC4B
 	.string "{STR_VAR_1} ate the\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840EC5C:: @ 840EC5C
-ContestStatsText_HappilyAte:
+gContestStatsText_HappilyAte:: @ 840EC5C
 	.string "{STR_VAR_1} happily ate the\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840EC75:: @ 840EC75
-ContestStatsText_DisdainfullyAte:
+gContestStatsText_DisdainfullyAte:: @ 840EC75
 	.string "{STR_VAR_1} disdainfully ate the\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}$"
-ContestStatsText_Buy: @ i have a feeling contest things still call these
+
+MartText_Buy:
 	.string "BUY$"
-ContestStatsText_Sell:
+MartText_Sell:
 	.string "SELL$"
-ContestStatsText_Quit2:
+MartText_Quit2:
 	.string "QUIT$"
 
-gUnknown_0840ECA1:: @ 840ECA1
-OtherText_QuitShopping:
+gOtherText_QuitShopping:: @ 840ECA1
 	.string "Quit shopping.$"
 
-gUnknown_0840ECB0:: @ 840ECB0
-OtherText_HowManyYouWant:
+gOtherText_HowManyYouWant:: @ 840ECB0
 	.string "{STR_VAR_1}? Certainly.\nHow many would you like?$"
 
-gUnknown_0840ECD8:: @ 840ECD8
-OtherText_ThatWillBe:
+gOtherText_ThatWillBe:: @ 840ECD8
 	.string "{STR_VAR_1}? And you wanted {STR_VAR_2}?\nThat will be ¥{STR_VAR_3}.$"
 
-gUnknown_0840ED01:: @ 840ED01
-OtherText_ThatWillBe2:
+gOtherText_ThatWillBe2:: @ 840ED01
 	.string "{STR_VAR_1}, is it?\nThat’ll be ¥{STR_VAR_2}. Do you want it?$"
 
-gUnknown_0840ED2C:: @ 840ED2C
-OtherText_ThatWillBe3:
+gOtherText_ThatWillBe3:: @ 840ED2C
 	.string "You wanted {STR_VAR_1}?\nThat’ll be ¥{STR_VAR_2}. Will that be okay?$"
 
-gUnknown_0840ED5E:: @ 840ED5E
-OtherText_HereYouGo:
+gOtherText_HereYouGo:: @ 840ED5E
 	.string "Here you go!\nThank you very much.$"
 
-gUnknown_0840ED80:: @ 840ED80
-OtherText_HereYouGo2:
+gOtherText_HereYouGo2:: @ 840ED80
 	.string "Thank you!\nI’ll send it to your home PC.$"
 
-gUnknown_0840EDA9:: @ 840EDA9
-OtherText_HereYouGo3:
+gOtherText_HereYouGo3:: @ 840EDA9
 	.string "Thanks!\nI’ll send it to your PC at home.$"
 
-gUnknown_0840EDD2:: @ 840EDD2
-OtherText_NotEnoughMoney:
+gOtherText_NotEnoughMoney:: @ 840EDD2
 	.string "You don’t have enough money.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840EDF1:: @ 840EDF1
-OtherText_NoRoomFor:
+gOtherText_NoRoomFor:: @ 840EDF1
 	.string "You have no more room for items.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840EE14:: @ 840EE14
-OtherText_SpaceForIsFull:
+gOtherText_SpaceForIsFull:: @ 840EE14
 	.string "The space for {STR_VAR_1} is full.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840EE30:: @ 840EE30
-OtherText_AnythingElse:
+gOtherText_AnythingElse:: @ 840EE30
 	.string "Is there anything else I can help\nyou with?$"
 
-gUnknown_0840EE5C:: @ 840EE5C
-OtherText_CanIHelpYou:
+gOtherText_CanIHelpYou:: @ 840EE5C
 	.string "Can I help you with anything else?$"
 
-gUnknown_0840EE7F:: @ 840EE7F
-OtherText_FreePremierBall:
+gOtherText_FreePremierBall:: @ 840EE7F
 	.string "I’ll throw in a PREMIER BALL, too.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840EEA4:: @ 840EEA4
-OtherText_CantBuyThat:
+gOtherText_CantBuyThat:: @ 840EEA4
 	.string "{STR_VAR_2}? Oh, no.\nI can’t buy that.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840EEC4:: @ 840EEC4
-OtherText_HowManyToSell:
+gOtherText_HowManyToSell:: @ 840EEC4
 	.string "{STR_VAR_2}?\nHow many would you like to sell?$"
 
-gUnknown_0840EEE9:: @ 840EEE9
-OtherText_CanPay:
+gOtherText_CanPay:: @ 840EEE9
 	.string "I can pay ¥{STR_VAR_1}.\nWould that be okay?$"
 
-gUnknown_0840EF0C:: @ 840EF0C
-OtherText_SoldItem::
+gOtherText_SoldItem:: @ 840EF0C
 	.string "Turned over the {STR_VAR_2}\nand received ¥{STR_VAR_1}.$"
+
 OtherText_Money::
 	.string "¥{STR_VAR_1}$"
 OtherText_Shift::
@@ -28778,205 +28635,157 @@ OtherText_Take::
 OtherText_Read2::
 	.string "READ$"
 
-gUnknown_0840EF72:: @ 840EF72
-OtherText_Hp2:
+gOtherText_Hp2:: @ 840EF72
 	.string "HP$"
 
-gUnknown_0840EF75:: @ 840EF75
-OtherText_SpAtk2:
+gOtherText_SpAtk2:: @ 840EF75
 	.string "SP. ATK$"
 
-gUnknown_0840EF7D:: @ 840EF7D
-OtherText_SpDef2:
+gOtherText_SpDef2:: @ 840EF7D
 	.string "SP. DEF$"
 
-gUnknown_0840EF85:: @ 840EF85
-OtherText_WontHaveAnyEffect:
+gOtherText_WontHaveAnyEffect:: @ 840EF85
 	.string "It won’t have any effect.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840EFA1:: @ 840EFA1
-OtherText_CantUseItemOnPoke:
+gOtherText_CantUseOnPoke:: @ 840EFA1
 	.if REVISION >= 1
 	.string "This can’t be used on\nthat POKéMON.{PAUSE_UNTIL_PRESS}$"
 	.else
 	.string "This item can’t be used on\nthat POKéMON.{PAUSE_UNTIL_PRESS}$"
 	.endif
 
-gUnknown_0840EFCC:: @ 840EFCC
-OtherText_CantBeSwitched:
+gOtherText_CantBeSwitched:: @ 840EFCC
 	.string "{STR_VAR_1} can’t be switched\nout!{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840EFE8:: @ 840EFE8
-OtherText_AlreadyBattle:
+gOtherText_AlreadyBattle:: @ 840EFE8
 	.string "{STR_VAR_1} is already\nin battle!{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840F003:: @ 840F003
-OtherText_AlreadySelected:
+gOtherText_AlreadySelected:: @ 840F003
 	.string "{STR_VAR_1} has already been\nselected.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840F023:: @ 840F023
-OtherText_NoEnergyLeft:
+gOtherText_NoEnergyLeft:: @ 840F023
 	.string "{STR_VAR_1} has no energy\nleft to battle!{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840F046:: @ 840F046
-OtherText_CantSwitchPokeWithYours:
+gOtherText_CantSwitchPokeWithYours:: @ 840F046
 	.string "You can’t switch {STR_VAR_1}’s\nPOKéMON with one of yours!{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840F079:: @ 840F079
-OtherText_EGGCantBattle:
+gOtherText_EGGCantBattle:: @ 840F079
 	.string "An EGG can’t battle!{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840F090:: @ 840F090
-OtherText_CantBeUsedBadge:
+gOtherText_CantBeUsedBadge:: @ 840F090
 	.string "This can’t be used until a new\nBADGE is obtained.$"
 
-gUnknown_0840F0C2:: @ 840F0C2
-OtherText_NoMoreThreePoke:
+gOtherText_NoMoreThreePoke:: @ 840F0C2
 	.string "No more than three POKéMON\nmay enter.$"
 
-gUnknown_0840F0E8:: @ 840F0E8
-OtherText_SendRemovedMailPrompt:
+gOtherText_SendRemovedMailPrompt:: @ 840F0E8
 	.string "Send the removed MAIL to\nyour PC?$"
 
-gUnknown_0840F10A:: @ 840F10A
-OtherText_MailWasSent:
+gOtherText_MailWasSent:: @ 840F10A
 	.string "The MAIL was sent to your PC.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840F12A:: @ 840F12A
-OtherText_MailboxIsFull:
+gOtherText_MailboxIsFull:: @ 840F12A
 	.string "Your PC’s MAILBOX is full.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840F147:: @ 840F147
-OtherText_MailRemovedMessageLost:
+gOtherText_MailRemovedMessageLost:: @ 840F147
 	.string "If the MAIL is removed, the\nmessage will be lost. Okay?$"
 
-gUnknown_0840F17F:: @ 840F17F
-OtherText_MailMustBeRemoved:
+gOtherText_MailMustBeRemoved:: @ 840F17F
 	.string "MAIL must be removed before\nholding an item.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840F1AE:: @ 840F1AE
-OtherText_WasGivenToHold:
+gOtherText_WasGivenToHold:: @ 840F1AE
 	.string "{STR_VAR_1} was given the\n{STR_VAR_2} to hold.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840F1CD:: @ 840F1CD
-OtherText_AlreadyHolding:
+gOtherText_AlreadyHolding:: @ 840F1CD
 	.string "{STR_VAR_1} is already holding\none {STR_VAR_2}.\pWould you like to switch the\ntwo items?$"
 
-gUnknown_0840F213:: @ 840F213
-OtherText_NotHoldingAnything:
+gOtherText_NotHoldingAnything:: @ 840F213
 	.string "{STR_VAR_1} isn’t\nholding anything.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840F230:: @ 840F230
-OtherText_ReceivedTheThingFrom:
+gOtherText_ReceivedTheThingFrom:: @ 840F230
 	.string "Received the {STR_VAR_2}\nfrom {STR_VAR_1}.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840F24B:: @ 840F24B
-OtherText_MailTaken:
+gOtherText_MailTaken:: @ 840F24B
 	.string "MAIL was taken from the\nPOKéMON.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840F26E:: @ 840F26E
-OtherText_TakenAndReplaced:
+gOtherText_TakenAndReplaced:: @ 840F26E
 	.string "The {STR_VAR_2} was taken and\nreplaced with the {STR_VAR_1}.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840F29B:: @ 840F29B
-OtherText_PokeHoldingItemCantMail:
+gOtherText_PokeHoldingItemCantMail:: @ 840F29B
 	.string "This POKéMON is holding an item.\nIt cannot hold MAIL.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840F2D3:: @ 840F2D3
-OtherText_MailTransferredMailbox:
+gOtherText_MailTransferredMailbox:: @ 840F2D3
 	.string "MAIL was transferred from\nthe MAILBOX.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840F2FC:: @ 840F2FC
-OtherText_BagFullCannotRemoveItem:
+gOtherText_BagFullCannotRemoveItem:: @ 840F2FC
 	.string "The BAG is full. The POKéMON’s\nitem could not be removed.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840F338:: @ 840F338
-OtherText_LearnedMove:
+gOtherText_LearnedMove:: @ 840F338
 	.string "{STR_VAR_1} learned\n{STR_VAR_2}!$"
 
-gUnknown_0840F347:: @ 840F347
-OtherText_NotCompatible:
+gOtherText_NotCompatible:: @ 840F347
 	.string "{STR_VAR_1} and {STR_VAR_2}\nare not compatible.\p{STR_VAR_2} can’t be learned.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840F37C:: @ 840F37C
-OtherText_WantsToLearn:
+gOtherText_WantsToLearn:: @ 840F37C
 	.string "{STR_VAR_1} wants to learn the\nmove {STR_VAR_2}.\pHowever, {STR_VAR_1} already\nknows four moves.\pShould a move be deleted and\nreplaced with {STR_VAR_2}?$"
 
-gUnknown_0840F3F0:: @ 840F3F0
-OtherText_StopTryingTo:
+gOtherText_StopTryingTo:: @ 840F3F0
 	.string "Stop trying to teach\n{STR_VAR_2}?$"
 
-gUnknown_0840F409:: @ 840F409
-OtherText_DidNotLearnMove2:
+gOtherText_DidNotLearnMove2:: @ 840F409
 	.string "{STR_VAR_1} did not learn the\nmove {STR_VAR_2}.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840F429:: @ 840F429
-OtherText_WhichMoveToForget2:
+gOtherText_WhichMoveToForget2:: @ 840F429
 	.string "Which move should be forgotten?{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840F44B:: @ 840F44B
-OtherText_ForgetMove123_2: @ it might look like its a dupe but one's used in a menu while one's for battle
+gOtherText_ForgetMove123_2:: @ 840F44B
 	.string "{PAUSE 32}1, {PAUSE 15}2, and{PAUSE 15}... {PAUSE 15}... {PAUSE 15}... {PAUSE 15}{PLAY_SE SE_KON}Poof!\p{STR_VAR_1} forgot how to\nuse {STR_VAR_2}.\pAnd...{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840F49E:: @ 840F49E
-OtherText_AlreadyKnows:
+gOtherText_AlreadyKnows:: @ 840F49E
 	.string "{STR_VAR_1} already knows\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840F4B5:: @ 840F4B5
-OtherText_HPRestoredBy:
+gOtherText_HPRestoredBy:: @ 840F4B5
 	.string "{STR_VAR_1}’s HP was restored by\n{STR_VAR_2} points.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840F4DA:: @ 840F4DA
-OtherText_CuredPoisoning:
+gOtherText_CuredPoisoning:: @ 840F4DA
 	.string "{STR_VAR_1} was cured of its\npoisoning.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840F4FB:: @ 840F4FB
-OtherText_CuredParalysis:
+gOtherText_CuredParalysis:: @ 840F4FB
 	.string "{STR_VAR_1} was cured of\nparalysis.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840F518:: @ 840F518
-OtherText_WokeUp:
+gOtherText_WokeUp:: @ 840F518
 	.string "{STR_VAR_1} woke up.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840F526:: @ 840F526
-OtherText_BurnHealed:
+gOtherText_BurnHealed:: @ 840F526
 	.string "{STR_VAR_1}’s burn was healed.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840F53E:: @ 840F53E
-OtherText_ThawedOut:
+gOtherText_ThawedOut:: @ 840F53E
 	.string "{STR_VAR_1} was thawed out.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840F553:: @ 840F553
-OtherText_PPRestored:
+gOtherText_PPRestored:: @ 840F553
 	.string "PP was restored.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840F566:: @ 840F566
-OtherText_RegainedHealth:
+gOtherText_RegainedHealth:: @ 840F566
 	.string "{STR_VAR_1} regained health.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840F57C:: @ 840F57C
-OtherText_BecameHealthy:
+gOtherText_BecameHealthy:: @ 840F57C
 	.string "{STR_VAR_1} became healthy.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840F591:: @ 840F591
-OtherText_PPIncreased:
+gOtherText_PPIncreased:: @ 840F591
 	.string "{STR_VAR_1}’s PP increased.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840F5A6:: @ 840F5A6
-OtherText_ElevatedTo:
+gOtherText_ElevatedTo:: @ 840F5A6
 	.string "{STR_VAR_1} was elevated to\nLv. {STR_VAR_2}.$"
 
-gUnknown_0840F5C1:: @ 840F5C1
-OtherText_WasRaised:
+gOtherText_WasRaised:: @ 840F5C1
 	.string "{STR_VAR_1}’s {STR_VAR_2} was\nraised.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840F5D7:: @ 840F5D7
-OtherText_SnapConfusion:
+gOtherText_SnapConfusion:: @ 840F5D7
 	.string "{STR_VAR_1} snapped out of its\nconfusion.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840F5FA:: @ 840F5FA
-OtherText_GotOverLove::
+gOtherText_GotOverLove:: @ 840F5FA
 	.string "{STR_VAR_1} got over its\ninfatuation.{PAUSE_UNTIL_PRESS}$"
+
 OtherText_ChoosePoke::
 	.string "Choose a POKéMON.$"
 OtherText_MovePokeTo::
@@ -29018,73 +28827,57 @@ OtherText_NoIdenticalHoldItems::
 OtherText_TeachWhichPoke::
 	.string "Teach which POKéMON?$"
 
-gUnknown_0840F7C6:: @ 840F7C6
-OtherText_Attack:
+gOtherText_Attack:: @ 840F7C6
 	.string "ATTACK$"
 
-gUnknown_0840F7CD:: @ 840F7CD
-OtherText_Defense:
+gOtherText_Defense:: @ 840F7CD
 	.string "DEFENSE$"
 
-gUnknown_0840F7D5:: @ 840F7D5
-OtherText_SpAtk:
+gOtherText_SpAtk:: @ 840F7D5
 	.string "SP. ATK$"
 
-gUnknown_0840F7DD:: @ 840F7DD
-OtherText_SpDef:
+gOtherText_SpDef:: @ 840F7DD
 	.string "SP. DEF$"
 
-gUnknown_0840F7E5:: @ 840F7E5
-OtherText_Speed:
+gOtherText_Speed:: @ 840F7E5
 	.string "SPEED$"
 
-gUnknown_0840F7EB:: @ 840F7EB
-OtherText_HP:
+gOtherText_HP:: @ 840F7EB
 	.string "HP$"
 
-gUnknown_0840F7EE:: @ 840F7EE
-OtherText_Terminator18:
+gOtherText_Terminator18:: @ 840F7EE
 	.string "$"
 
-gUnknown_0840F7EF:: @ 840F7EF
-OtherText_OriginalTrainer:
+gOtherText_OriginalTrainer:: @ 840F7EF
 	.string "OT/$"
 
-gUnknown_0840F7F3:: @ 840F7F3
-OtherText_Type2:
+gOtherText_Type2:: @ 840F7F3
 	.string "TYPE/$"
 
-gUnknown_0840F7F9:: @ 840F7F9
-OtherText_Power2:
+gOtherText_Power2:: @ 840F7F9
 	.string "POWER$"
 
-gUnknown_0840F7FF:: @ 840F7FF
-OtherText_Accuracy2:
+gOtherText_Accuracy2:: @ 840F7FF
 	.string "ACCURACY$"
 
-gUnknown_0840F808:: @ 840F808
-OtherText_Appeal2:
+gOtherText_Appeal2:: @ 840F808
 	.string "APPEAL$"
 
-gUnknown_0840F80F:: @ 840F80F
-OtherText_Jam2:
+gOtherText_Jam2:: @ 840F80F
 	.string "JAM$"
 
-gUnknown_0840F813:: @ 840F813
-OtherText_Status:
+gOtherText_Status:: @ 840F813
 	.string "STATUS$"
 
-gUnknown_0840F81A:: @ 840F81A
-OtherText_ExpPoints:
+gOtherText_ExpPoints:: @ 840F81A
 	.string "EXP. POINTS$"
 
-gUnknown_0840F826:: @ 840F826
-OtherText_NextLv:
+gOtherText_NextLv:: @ 840F826
 	.string "NEXT LV.$"
 
-gUnknown_0840F82F:: @ 840F82F
-OtherText_Ribbons00::
+gOtherText_Ribbons00:: @ 840F82F
 	.string "RIBBONS: 00$"
+
 OtherText_Event::
 	.string "EVENT$"
 OtherText_Switch::
@@ -29100,41 +28893,33 @@ OtherText_ContestMoves::
 OtherText_Info::
 	.string "INFO$"
 
-gUnknown_0840F884:: @ 840F884
-OtherText_EggLong:
+gOtherText_EggLongTime:: @ 840F884
 	.string "It looks like this EGG will\ntake a long time to hatch.$"
 
-gUnknown_0840F8BB:: @ 840F8BB
-OtherText_EggSome:
+gOtherText_EggSomeTime:: @ 840F8BB
 	.string "What will hatch from this?\nIt will take some time.$"
 
-gUnknown_0840F8EE:: @ 840F8EE
-OtherText_EggSoon:
+gOtherText_EggSoon:: @ 840F8EE
 	.string "It moves occasionally.\nIt should hatch soon.$"
 
-gUnknown_0840F91B:: @ 840F91B
-OtherText_EggAbout:
+gOtherText_EggAbout:: @ 840F91B
 	.string "It’s making sounds.\nIt’s about to hatch!$"
 
-gUnknown_0840F944:: @ 840F944
-OtherText_CantForgetHMs:
+gOtherText_CantForgetHMs:: @ 840F944
 	.string "HM moves can’t be\nforgotten now.$"
 
-gUnknown_0840F965:: @ 840F965
-OtherText_PlayersBase:
+gOtherText_PlayersBase:: @ 840F965
 	.string "’s BASE$"
 
-gUnknown_0840F96D:: @ 840F96D
-OtherText_OkayToDeleteFromRegistry:
+gOtherText_OkayToDeleteFromRegistry:: @ 840F96D
 	.string "Is it okay to delete {STR_VAR_1}\nfrom the REGISTRY?$"
 
-gUnknown_0840F998:: @ 840F998
-OtherText_RegisteredDataDeleted:
+gOtherText_RegisteredDataDeleted:: @ 840F998
 	.string "The registered data was deleted.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840F9BB:: @ 840F9BB
-SecretBaseText_NoRegistry::
+gSecretBaseText_NoRegistry:: @ 840F9BB
 	.string "There is no REGISTRY.{PAUSE_UNTIL_PRESS}$"
+
 SecretBaseText_DelRegist::
 	.string "DEL REGIST.$"
 SecretBaseText_Decorate::
@@ -29150,9 +28935,9 @@ SecretBaseText_StoreChosenDecor::
 SecretBaseText_ThrowAwayDecor::
 	.string "Throw away unwanted decorations.$"
 
-gUnknown_0840FA64:: @ 840FA64
-SecretBaseText_NoDecors::
+gSecretBaseText_NoDecors:: @ 840FA64
 	.string "There are no decorations.{PAUSE_UNTIL_PRESS}$"
+
 SecretBaseText_Desk::
 	.string "DESK$"
 SecretBaseText_Chair::
@@ -29170,75 +28955,58 @@ SecretBaseText_Doll::
 SecretBaseText_Cushion::
 	.string "CUSHION$"
 
-gUnknown_0840FAB2:: @ 840FAB2
-SecretBaseText_GoldRank:
+gSecretBaseText_GoldRank:: @ 840FAB2
 	.string "GOLD$"
 
-gUnknown_0840FAB7:: @ 840FAB7
-SecretBaseText_SilverRank:
+gSecretBaseText_SilverRank:: @ 840FAB7
 	.string "SILVER$"
 
-gUnknown_0840FABE:: @ 840FABE
-SecretBaseText_PlaceItHere:
+gSecretBaseText_PlaceItHere:: @ 840FABE
 	.string "Place it here?$"
 
-gUnknown_0840FACD:: @ 840FACD
-SecretBaseText_CantBePlacedHere:
+gSecretBaseText_CantBePlacedHere:: @ 840FACD
 	.string "It can’t be placed here.$"
 
-gUnknown_0840FAE6:: @ 840FAE6
-SecretBaseText_CancelDecorating:
+gSecretBaseText_CancelDecorating:: @ 840FAE6
 	.string "Cancel decorating?$"
 
-gUnknown_0840FAF9:: @ 840FAF9
-SecretBaseText_InUseAlready:
+gSecretBaseText_InUseAlready:: @ 840FAF9
 	.string "This is in use already.$"
 
-gUnknown_0840FB11:: @ 840FB11
-SecretBaseText_NoMoreDecor:
+gSecretBaseText_NoMoreDecor:: @ 840FB11
 	.string "No more decorations can be placed.\nThe most that can be placed is {STR_VAR_1}.$"
 
-gUnknown_0840FB57:: @ 840FB57
-SecretBaseText_NoMoreDecor2:
+gSecretBaseText_NoMoreDecor2:: @ 840FB57
 	.string "No more decorations can be placed.\nThe most that can be placed is {STR_VAR_1}.$"
-SecretBaseText_CantBePlacedHere2:
 	.string "This can’t be placed here.\nIt must be on a DESK, etc.$"
 
-gUnknown_0840FBD3:: @ 840FBD3
-SecretBaseText_DecorCantPlace:
+gSecretBaseText_DecorCantPlace:: @ 840FBD3
 	.string "This decoration can’t be placed in\nyour own room.$"
 
-gUnknown_0840FC05:: @ 840FC05
-SecretBaseText_DecorInUse:
+gSecretBaseText_DecorInUse:: @ 840FC05
 	.string "This decoration is in use.\nIt can’t be thrown away.$"
 
-gUnknown_0840FC39:: @ 840FC39
-SecretBaseText_WillBeDiscarded:
+gSecretBaseText_WillBeDiscarded:: @ 840FC39
 	.string "This {STR_VAR_1} will be discarded.\nIs that okay?$"
 
-gUnknown_0840FC62:: @ 840FC62
-SecretBaseText_DecorThrownAway:
+gSecretBaseText_DecorThrownAway:: @ 840FC62
 	.string "The decoration item was thrown away.$"
 
-gUnknown_0840FC87:: @ 840FC87
-SecretBaseText_StopPuttingAwayDecor:
+gSecretBaseText_StopPuttingAwayDecor:: @ 840FC87
 	.string "Stop putting away decorations?$"
 
-gUnknown_0840FCA6:: @ 840FCA6
-SecretBaseText_NoDecor:
+gSecretBaseText_NoDecor:: @ 840FCA6
 	.string "There is no decoration item here.$"
 
-gUnknown_0840FCC8:: @ 840FCC8
-SecretBaseText_ReturnDecor:
+gSecretBaseText_ReturnDecor:: @ 840FCC8
 	.string "Return this decoration to the PC?$"
 
-gUnknown_0840FCEA:: @ 840FCEA
-SecretBaseText_DecorReturned:
+gSecretBaseText_DecorReturned:: @ 840FCEA
 	.string "The decoration was returned to the PC.$"
 
-gUnknown_0840FD11:: @ 840FD11
-SecretBaseText_NoDecorInUse::
+gSecretBaseText_NoDecorInUse:: @ 840FD11
 	.string "There are no decorations in use.{PAUSE_UNTIL_PRESS}$"
+
 SecretBaseText_Tristan::
 	.string "TRISTAN$"
 SecretBaseText_Philip::
@@ -29254,9 +29022,9 @@ SecretBaseText_Decoration::
 SecretBaseText_ItemStorage::
 	.string "ITEM STORAGE$"
 
-gUnknown_0840FD73:: @ 840FD73
-PCText_Mailbox::
+gPCText_Mailbox:: @ 840FD73
 	.string "MAILBOX$"
+
 PCText_DepositItem::
 	.string "DEPOSIT ITEM$"
 PCText_WithdrawItem::
@@ -29270,90 +29038,72 @@ PCText_TakeOutItems::
 PCText_ThrowAwayItems::
 	.string "Throw away items stored in the PC.$"
 
-gUnknown_0840FDF6:: @ 840FDF6
-OtherText_NoItems:
+gOtherText_NoItems:: @ 840FDF6
 	.string "There are no items.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840FE0C:: @ 840FE0C
-OtherText_NoMoreRoom:
+gOtherText_NoMoreRoom:: @ 840FE0C
 	.string "There is no more\nroom in the BAG.$"
 
-gUnknown_0840FE2E:: @ 840FE2E
-OtherText_HowManyToWithdraw:
+gOtherText_HowManyToWithdraw:: @ 840FE2E
 	.string "How many do you\nwant to withdraw?$"
 
-gUnknown_0840FE50:: @ 840FE50
-OtherText_WithdrewThing:
+gOtherText_WithdrewThing:: @ 840FE50
 	.string "Withdrew {STR_VAR_2}\n{STR_VAR_1}(s).$"
-OtherText_Read::
+
+OtherText_Read:
 	.string "READ$"
 
-gUnknown_0840FE68:: @ 840FE68
-OtherText_MoveToBag::
+gOtherText_MoveToBag:: @ 840FE68
 	.string "MOVE TO BAG$"
-OtherText_Give::
+
+OtherText_Give:
 	.string "GIVE$"
 
-gUnknown_0840FE79:: @ 840FE79
-OtherText_NoMailHere:
+gOtherText_NoMailHere:: @ 840FE79
 	.string "There’s no MAIL here.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840FE91:: @ 840FE91
-OtherText_WhatWillYouDoMail:
+gOtherText_WhatWillYouDoMail:: @ 840FE91
 	.string "What would you like to do with\n{STR_VAR_1}’s MAIL?$"
 
-gUnknown_0840FEBB:: @ 840FEBB
-OtherText_MessageWillBeLost:
+gOtherText_MessageWillBeLost:: @ 840FEBB
 	.string "The message will be lost.\nIs that okay?$"
 
-gUnknown_0840FEE3:: @ 840FEE3
-OtherText_BagIsFull:
+gOtherText_BagIsFull:: @ 840FEE3
 	.string "The BAG is full.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840FEF6:: @ 840FEF6
-OtherText_MailWasReturned:
+gOtherText_MailWasReturned:: @ 840FEF6
 	.string "The MAIL was returned to the BAG\nwith its message erased.{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0840FF32:: @ 840FF32
-OtherText_Dad:
+gOtherText_Dad:: @ 840FF32
 	.string "DAD$"
 
-gUnknown_0840FF36:: @ 840FF36
-OtherText_Mom:
+gOtherText_Mom:: @ 840FF36
 	.string "MOM$"
 
-gUnknown_0840FF3A:: @ 840FF3A
-OtherText_Wallace:
+gOtherText_Wallace:: @ 840FF3A
 	.string "WALLACE$"
 
-gUnknown_0840FF42:: @ 840FF42
-OtherText_Steven:
+gOtherText_Steven:: @ 840FF42
 	.string "STEVEN$"
 
-gUnknown_0840FF49:: @ 840FF49
-OtherText_Brawly:
+gOtherText_Brawly:: @ 840FF49
 	.string "BRAWLY$"
 
-gUnknown_0840FF50:: @ 840FF50
-OtherText_Winona:
+gOtherText_Winona:: @ 840FF50
 	.string "WINONA$"
 
-gUnknown_0840FF57:: @ 840FF57
-OtherText_Phoebe:
+gOtherText_Phoebe:: @ 840FF57
 	.string "PHOEBE$"
 
-gUnknown_0840FF5E:: @ 840FF5E
-OtherText_Glacia:
+gOtherText_Glacia:: @ 840FF5E
 	.string "GLACIA$"
 
-gUnknown_0840FF65:: @ 840FF65
-ContestText_ContestWinner:
+gContestText_ContestWinner:: @ 840FF65
 	.string "CONTEST WINNER\n$"
 
-gUnknown_0840FF75:: @ 840FF75
-@ come back to this one and clean up
-OtherText_Unknown1::
+gOtherText_Unknown1:: @ 840FF75
 	.string "’s $"
+
 OtherText_Cool::
 	.string "COOL $"
 OtherText_Beauty2::
@@ -29424,7 +29174,6 @@ OtherText_MightyTough::
 	.string "The mighty tough\nhyper POKéMON $"
 OtherText_Exclamation::
 	.string "!$"
-
 OtherText_Petalburg::
 	.string "PETALBURG$"
 OtherText_Slateport::
@@ -29726,59 +29475,46 @@ OtherText_TMsHMs::
 OtherText_Berries::
 	.string "BERRIES$"
 
-gUnknown_08410753:: @ 8410753
-PCText_SomeonesPC:
+gPCText_SomeonesPC:: @ 8410753
 	.string "SOMEONE’S PC$"
 
-gUnknown_08410760:: @ 8410760
-PCText_LanettesPC:
+gPCText_LanettesPC:: @ 8410760
 	.string "LANETTE’S PC$"
 
-gUnknown_0841076D:: @ 841076D
-PCText_PlayersPC:
+gPCText_PlayersPC:: @ 841076D
 	.string "{PLAYER}’s PC$"
 
-gUnknown_08410775:: @ 8410775
-PCText_HallOfFame:
+gPCText_HallOfFame:: @ 8410775
 	.string "HALL OF FAME$"
 
-gUnknown_08410782:: @ 8410782
-PCText_LogOff:
+gPCText_LogOff:: @ 8410782
 	.string "LOG OFF$"
 
-gUnknown_0841078A:: @ 841078A
-OtherText_99Times:
+gOtherText_99Times:: @ 841078A
 	.string "99 times +$"
 
-gUnknown_08410795:: @ 8410795
-OtherText_1Minute:
+gOtherText_1Minute:: @ 8410795
 	.string "1 minute +$"
 
-gUnknown_084107A0:: @ 84107A0
-OtherText_Seconds:
+gOtherText_Seconds:: @ 84107A0
 	.string " seconds$"
 
-gUnknown_084107A9:: @ 84107A9
-OtherText_Times:
+gOtherText_Times:: @ 84107A9
 	.string " times$"
-OtherText_Period2:
 	.string ".$"
 
-gUnknown_084107B2:: @ 84107B2
-OtherText_BigGuy:
+gOtherText_BigGuy:: @ 84107B2
 	.string "Big guy$"
 
-gUnknown_084107BA:: @ 84107BA
-OtherText_BigGirl:
+gOtherText_BigGirl:: @ 84107BA
 	.string "Big girl$"
 
-gUnknown_084107C3:: @ 84107C3
-OtherText_Son:
+gOtherText_Son:: @ 84107C3
 	.string "son$"
 
-gUnknown_084107C7:: @ 84107C7
-OtherText_Daughter:
+gOtherText_Daughter:: @ 84107C7
 	.string "daughter$"
+
 OtherText_BlueFlute:
 	.string "BLUE FLUTE$"
 OtherText_YellowFlute:
@@ -29826,13 +29562,12 @@ OtherText_B4F:
 OtherText_Rooftop:
 	.string "ROOFTOP$"
 
-gUnknown_0841085E:: @ 841085E
-OtherText_NowOn:
+gOtherText_NowOn:: @ 841085E
 	.string "Now on:$"
 
-gUnknown_08410866:: @ 8410866
-PCText_Cancel:
+gPCText_Cancel:: @ 8410866
 	.string "CANCEL$"
+
 PCText_ExitBox:
 	.string "Exit from the BOX.$"
 PCText_WhatYouDo:
@@ -29962,17 +29697,15 @@ PCText_OrganizeBoxesParty:
 PCText_ReturnToPrevMenu:
 	.string "Return to the previous menu.$"
 
-gUnknown_08410C1C:: @ 8410C1C
-PCText_OnlyOne:
+gPCText_OnlyOne:: @ 8410C1C
 	.string "There is just one POKéMON with you.$"
 
-gUnknown_08410C40:: @ 8410C40
-PCText_PartyFull2:
+gPCText_PartyFull2:: @ 8410C40
 	.string "Your party is full!$"
 
-gUnknown_08410C54:: @ 8410C54
-PCText_BOX:
+gPCText_BOX:: @ 8410C54
 	.string "BOX$"
+
 PCText_CheckMap:
 	.string "{CLEAR 0}Check the map of the HOENN region.$"
 PCText_CheckPoke:
@@ -30006,41 +29739,33 @@ PCText_FindTough:
 PCText_ReturnToCondition:
 	.string "{CLEAR 0}Return to the CONDITION menu.$"
 
-gUnknown_08410E22:: @ 8410E22
-OtherText_NumberRegistered:
+gOtherText_NumberRegistered:: @ 8410E22
 	.string "No. registered$"
 
-gUnknown_08410E31:: @ 8410E31
-OtherText_NumberBattles:
+gOtherText_NumberBattles:: @ 8410E31
 	.string "No. of battles$"
 
-gUnknown_08410E40:: @ 8410E40
-OtherText_Strategy:
+gOtherText_Strategy:: @ 8410E40
 	.string "{PALETTE 5}STRATEGY$"
 
-gUnknown_08410E4C:: @ 8410E4C
-OtherText_TrainersPokemon:
+gOtherText_TrainersPokemon:: @ 8410E4C
 	.string "{PALETTE 5}TRAINER’S POKéMON$"
 
-gUnknown_08410E61:: @ 8410E61
-OtherText_SelfIntroduction:
+gOtherText_SelfIntroduction:: @ 8410E61
 	.string "{PALETTE 5}SELF-INTRODUCTION$"
 
-gUnknown_08410E76:: @ 8410E76
-OtherText_Nature2:
+gOtherText_Nature2:: @ 8410E76
 	.string "NATURE/$"
 
-gUnknown_08410E7E:: @ 8410E7E
-OtherText_InParty:
+gOtherText_InParty:: @ 8410E7E
 	.string "IN PARTY$"
 
-gUnknown_08410E87:: @ 8410E87
-OtherText_Number:
+gOtherText_Number:: @ 8410E87
 	.string "No. $"
 
-gUnknown_08410E8C:: @ 8410E8C
-OtherText_Ribbons::
+gOtherText_Ribbons:: @ 8410E8C
 	.string "RIBBONS$"
+
 OtherText_MakeProfilePage1::
 	.string "Make your profile by combining$"
 OtherText_MakeProfilePage2::
@@ -30092,89 +29817,69 @@ OtherText_HipsterPage1::
 OtherText_HipsterPage2::
 	.string "teach you a good saying.$"
 
-gUnknown_084110EE:: @ 84110EE
-OtherText_TextDeletedConfirmPage1:
+gOtherText_TextDeletedConfirmPage1:: @ 84110EE
 	.string "All the text being edited will$"
 
-gUnknown_0841110D:: @ 841110D
-OtherText_TextDeletedConfirmPage2:
+gOtherText_TextDeletedConfirmPage2:: @ 841110D
 	.string "be deleted. Is that okay?$"
 
-gUnknown_08411127:: @ 8411127
-OtherText_QuitEditing:
+gOtherText_QuitEditing:: @ 8411127
 	.string "Quit editing?$"
 
-gUnknown_08411135:: @ 8411135
-OtherText_EditedTextNoSavePage1:
+gOtherText_EditedTextNoSavePage1:: @ 8411135
 	.string "The edited text will not be saved.$"
 
-gUnknown_08411158:: @ 8411158
-OtherText_EditedTextNoSavePage2:
+gOtherText_EditedTextNoSavePage2:: @ 8411158
 	.string "Is that okay?$"
 
-gUnknown_08411166:: @ 8411166
-OtherText_EnterAPhraseOrWord:
+gOtherText_EnterAPhraseOrWord:: @ 8411166
 	.string "Please enter a phrase or word.$"
 
-gUnknown_08411185:: @ 8411185
-OtherText_TextNoDelete:
+gOtherText_TextNoDelete:: @ 8411185
 	.string "The entire text can’t be deleted.$"
 
-gUnknown_084111A7:: @ 84111A7
-OtherText_OnlyOnePhrase:
+gOtherText_OnlyOnePhrase:: @ 84111A7
 	.string "Only one phrase may be changed.$"
 
-gUnknown_084111C7:: @ 84111C7
-OtherText_OriginalSongRestored:
+gOtherText_OriginalSongRestored:: @ 84111C7
 	.string "The original song will be restored.$"
 
-gUnknown_084111EB:: @ 84111EB
-OtherText_TrendyAlready:
+gOtherText_TrendyAlready:: @ 84111EB
 	.string "That’s trendy already!$"
 
-gUnknown_08411202:: @ 8411202
-OtherText_CombineTwoPhrases:
+gOtherText_CombineTwoPhrases:: @ 8411202
 	.string "Combine two words or phrases.$"
 
-gUnknown_08411220:: @ 8411220
-OtherText_QuitGivingInfo:
+gOtherText_QuitGivingInfo:: @ 8411220
 	.string "Quit giving information?$"
 
-gUnknown_08411239:: @ 8411239
-OtherText_StopGivingMail:
+gOtherText_StopGivingMail:: @ 8411239
 	.string "Stop giving the POKéMON MAIL?$"
 
-gUnknown_08411257:: @ 8411257
-OtherText_Profile:
+gOtherText_Profile:: @ 8411257
 	.string "PROFILE$"
 
-gUnknown_0841125F:: @ 841125F
-OtherText_AtBattleStart:
+gOtherText_AtBattleStart:: @ 841125F
 	.string "At the battle’s start.$"
 
-gUnknown_08411276:: @ 8411276
-OtherText_UponWinningBattle:
+gOtherText_UponWinningBattle:: @ 8411276
 	.string "Upon winning a battle.$"
 
-gUnknown_0841128D:: @ 841128D
-OtherText_UponLosingBattle:
+gOtherText_UponLosingBattle:: @ 841128D
 	.string "Upon losing a battle.$"
 
-gUnknown_084112A3:: @ 84112A3
-OtherText_TheBardsSong:
+gOtherText_TheBardsSong:: @ 84112A3
 	.string "The BARD’s Song$"
 
-gUnknown_084112B3:: @ 84112B3
-OtherText_WhatsHipHappening:
+gOtherText_WhatsHipHappening:: @ 84112B3
 	.string "What’s hip and happening?$"
 
-gUnknown_084112CD:: @ 84112CD
-OtherText_Interview:
+gOtherText_Interview:: @ 84112CD
 	.string "Interview$"
 
-gUnknown_084112D7:: @ 84112D7
-OtherText_GoodSaying::
+gOtherText_GoodSaying:: @ 84112D7
 	.string "Good saying$"
+
 OtherText_SoPretty::
 	.string " so pretty!$"
 OtherText_SoDarling::
@@ -30192,13 +29897,12 @@ OtherText_SoAmusing::
 OtherText_SoMagical::
 	.string " so magical!$"
 
-gUnknown_0841134B:: @ 841134B
-OtherText_Is:
+gOtherText_Is:: @ 841134B
 	.string " is$"
 
-gUnknown_0841134F:: @ 841134F
-OtherText_DontYouAgree::
+gOtherText_DontYouAgree:: @ 841134F
 	.string "\nDon’t you agree?$"
+
 OtherText_WantVacationNicePlace::
 	.string "I so want to go on a vacation.\nWould you happen to know a nice place?$"
 OtherText_BoughtCrayonsIsNice::
@@ -30220,9 +29924,9 @@ OtherText_PokeLeague::
 OtherText_PokeCenter::
 	.string "POKéMON CENTER$"
 
-gUnknown_08411581:: @ 8411581
-OtherText_GetAPokeBlock::
+gOtherText_GetsAPokeBlock:: @ 8411581
 	.string " gets a {POKEBLOCK}?$"
+
 OtherText_Coolness::
 	.string "Coolness $"
 OtherText_Beauty::
@@ -30234,92 +29938,70 @@ OtherText_Smartness::
 OtherText_Toughness::
 	.string "Toughness $"
 
-gUnknown_084115C2:: @ 84115C2
-SystemText_WasEnhanced:
+gOtherText_WasEnhanced:: @ 84115C2
 	.string "was enhanced!$"
 
-gUnknown_084115D0:: @ 84115D0
-SystemText_NothingChanged:
+gOtherText_NothingChanged:: @ 84115D0
 	.string "Nothing changed!$"
 
-gUnknown_084115E1:: @ 84115E1
-OtherText_WontEat:
+gOtherText_WontEat:: @ 84115E1
 	.string "It won’t eat anymore...$"
 
-gUnknown_084115F9:: @ 84115F9
-SystemText_SaveFailedBackupCheck:
+gSystemText_SaveFailedBackupCheck:: @ 84115F9
 	.string "Save failed.\nChecking the backup memory...\nPlease wait.\n{COLOR RED}“Time required: 1 minute”$"
 
-gUnknown_0841164E:: @ 841164E
-SystemText_BackupDamagedGameContinue:
+gSystemText_BackupDamagedGameContinue:: @ 841164E
 	.string "The backup memory is damaged or\nthe internal battery has run dry.\nThe game can be played. However,\nprogress cannot be saved.$"
 
-gUnknown_084116CB:: @ 84116CB
-SystemText_GameplayEnded:
+gSystemText_GameplayEnded:: @ 84116CB
 	.string "{COLOR RED}“Gameplay cannot be continued.\nReturning to the title screen...”$"
 
-gUnknown_0841170F:: @ 841170F
-SystemText_CheckCompleteSaveAttempt:
+gSystemText_CheckCompleteSaveAttempt:: @ 841170F
 	.string "Check completed.\nAttempting to save again.\nPlease wait.$"
 
-gUnknown_08411747:: @ 8411747
-SystemText_SaveCompletedGameEnd:
+gSystemText_SaveCompletedGameEnd:: @ 8411747
 	.string "Save completed.\n{COLOR RED}“Gameplay cannot be continued.\nReturning to the title screen.”$"
 
-gUnknown_08411799:: @ 8411799
-SystemText_SaveCompletedPressA:
+gSystemText_SaveCompletedPressA:: @ 8411799
 	.string "Save completed.\n{COLOR RED}“Please press the A Button.”$"
 
-gUnknown_084117C9:: @ 84117C9
-OtherText_Ferry:
+gOtherText_Ferry:: @ 84117C9
 	.string "FERRY$"
 
-gUnknown_084117CF:: @ 84117CF
-OtherText_SecretBase:
+gOtherText_SecretBase:: @ 84117CF
 	.string "SECRET BASE$"
 
-gUnknown_084117DB:: @ 84117DB
-OtherText_Hideout:
+gOtherText_Hideout:: @ 84117DB
 	.string "HIDEOUT$"
 
-gUnknown_084117E3:: @ 84117E3
-SystemText_ResetRTCPrompt:
+gSystemText_ResetRTCPrompt:: @ 84117E3
 	.string "Reset RTC?\nA: Confirm, B: Cancel$"
 
-gUnknown_08411804:: @ 8411804
-SystemText_PresentTime:
+gSystemText_PresentTime:: @ 8411804
 	.string "Present time in game$"
 
-gUnknown_08411819:: @ 8411819
-SystemText_PreviousTime:
+gSystemText_PreviousTime:: @ 8411819
 	.string "Previous time in game$"
 
-gUnknown_0841182F:: @ 841182F
-SystemText_PleaseResetTime:
+gSystemText_PleaseResetTime:: @ 841182F
 	.string "Please reset the time.$"
 
-gUnknown_08411846:: @ 8411846
-SystemText_ClockResetDataSave:
+gSystemText_ClockResetDataSave:: @ 8411846
 	.string "The clock has been reset.\nData will be saved. Please wait.$"
 
-gUnknown_08411881:: @ 8411881
-SystemText_SaveCompleted:
+gSystemText_SaveCompleted:: @ 8411881
 	.string "Save completed.$"
 
-gUnknown_08411891:: @ 8411891
-SystemText_SaveFailed:
+gSystemText_SaveFailed:: @ 8411891
 	.string "Save failed...$"
 
-gUnknown_084118A0:: @ 84118A0
-SystemText_NoSaveFileNoTime:
+gSystemText_NoSaveFileNoTime:: @ 84118A0
 	.string "There is no save file, so the time\ncan’t be set.$"
 
-gUnknown_084118D1:: @ 84118D1
-SystemText_ClockAdjustmentUsable:
+gSystemText_ClockAdjustmentUsable:: @ 84118D1
 	.string "The in-game clock adjustment system\nis now useable.$"
 
-gUnknown_08411905:: @ 8411905
-SystemText_Saving:
+gSystemText_Saving:: @ 8411905
 	.string "SAVING...\nDON’T TURN OFF THE POWER.$"
 
 	.align 2
@@ -31046,25 +30728,18 @@ gUnknown_084170F4:: @ 84170F4
 
 UnknownString_1stRound:
 	.string "1st round$"
-
 UnknownString_2ndRound:
 	.string "2nd round$"
-
 UnknownString_3rdRound:
 	.string "3rd round$"
-
 UnknownString_4thRound:
 	.string "4th round$"
-
 UnknownString_5thRound:
 	.string "5th round$"
-
 UnknownString_6thRound:
 	.string "6th round$"
-
 UnknownString_7thRound:
 	.string "7th round$"
-
 UnknownString_8thRound:
 	.string "8th round$"
 
@@ -31079,112 +30754,88 @@ gUnknown_0842C29C:: @ 842C29C
 	.4byte UnknownString_7thRound, sub_814A4B8
 	.4byte UnknownString_8thRound, sub_814A4B8
 
-OtherText_TopSpeed:
+	@ unused
+gOtherText_TopSpeed::
 	.string "TOP SPEED$"
 
-gUnknown_0842C2E6:: @ 842C2E6
-MultiText_BerryBlenderMaxSpeedRecord:
+gMultiText_BerryBlenderMaxSpeedRecord:: @ 842C2E6
 	.string "BERRY BLENDER\nMAXIMUM SPEED RECORD!$"
 
-gUnknown_0842C30A:: @ 842C30A
-MultiText_2P3P4P:
+gMultiText_2P3P4P:: @ 842C30A
 	.string "2 PLAYERS\n3 PLAYERS\n4 PLAYERS$"
 
-gUnknown_0842C328:: @ 842C328
-MultiText_Saving:
+gMultiText_Saving:: @ 842C328
 	.string "SAVING...\nDON’T TURN OFF THE POWER.$"
 
-gUnknown_0842C34C:: @ 842C34C
-MultiText_LinkError:
+gMultiText_LinkError:: @ 842C34C
 	.string "{HIGHLIGHT TRANSPARENT}{COLOR WHITE2}Link error...\nCheck your Game Link cable connection,\nand turn the power off and on.$"
 
-gUnknown_0842C3A6:: @ 842C3A6
-SystemText_OptionMenu:
+gSystemText_OptionMenu:: @ 842C3A6
 	.string "{PALETTE 9}OPTION$"
 
-gUnknown_0842C3B0:: @ 842C3B0
-SystemText_TextSpeed:
+gSystemText_TextSpeed:: @ 842C3B0
 	.string "{PALETTE 9}TEXT SPEED$"
 
-gUnknown_0842C3BE:: @ 842C3BE
-SystemText_BattleScene:
+gSystemText_BattleScene:: @ 842C3BE
 	.string "{PALETTE 9}BATTLE SCENE$"
 
-gUnknown_0842C3CE:: @ 842C3CE
-SystemText_BattleStyle:
+gSystemText_BattleStyle:: @ 842C3CE
 	.string "{PALETTE 9}BATTLE STYLE$"
 
-gUnknown_0842C3DE:: @ 842C3DE
-SystemText_Sound:
+gSystemText_Sound:: @ 842C3DE
 	.string "{PALETTE 9}SOUND$"
 
-gUnknown_0842C3E7:: @ 842C3E7
-SystemText_Frame:
+gSystemText_Frame:: @ 842C3E7
 	.string "{PALETTE 9}FRAME$"
 
-gUnknown_0842C3F0:: @ 842C3F0
-SystemText_Cancel:
+gSystemText_Cancel:: @ 842C3F0
 	.string "{PALETTE 9}CANCEL$"
 
-gUnknown_0842C3FA:: @ 842C3FA
-SystemText_ButtonMode:
+gSystemText_ButtonMode:: @ 842C3FA
 	.string "{PALETTE 9}BUTTON MODE$"
 
-gUnknown_0842C409:: @ 842C409
-SystemText_TextSpeedSlow:
+gSystemText_Slow:: @ 842C409
 	.string "{PALETTE 15}SLOW$"
 
-gUnknown_0842C411:: @ 842C411
-SystemText_Mid:
+gSystemText_Mid:: @ 842C411
 	.string "{PALETTE 15}MID$"
 
-gUnknown_0842C418:: @ 842C418
-SystemText_Fast:
+gSystemText_Fast:: @ 842C418
 	.string "{PALETTE 15}FAST$"
 
-gUnknown_0842C420:: @ 842C420
-SystemText_On:
+gSystemText_On:: @ 842C420
 	.string "{PALETTE 15}ON$"
 
-gUnknown_0842C426:: @ 842C426
-SystemText_Off:
+gSystemText_Off:: @ 842C426
 	.string "{PALETTE 15}OFF$"
 
-gUnknown_0842C42D:: @ 842C42D
-SystemText_Shift:
+gSystemText_Shift:: @ 842C42D
 	.string "{PALETTE 15}SHIFT$"
 
-gUnknown_0842C436:: @ 842C436
-SystemText_Set:
+gSystemText_Set:: @ 842C436
 	.string "{PALETTE 15}SET$"
 
-gUnknown_0842C43D:: @ 842C43D
-SystemText_Mono:
+gSystemText_Mono:: @ 842C43D
 	.string "{PALETTE 15}MONO$"
 
-gUnknown_0842C445:: @ 842C445
-SystemText_Stereo:
+gSystemText_Stereo:: @ 842C445
 	.string "{PALETTE 15}STEREO$"
 
-gUnknown_0842C44F:: @ 842C44F
-SystemText_Type:
+gSystemText_Type:: @ 842C44F
 	.string "{PALETTE 15}TYPE$"
 
-gUnknown_0842C457:: @ 842C457
-SystemText_Terminator:
+gSystemText_Terminator:: @ 842C457
 	.string "{PALETTE 8}$"
 
-gUnknown_0842C45B:: @ 842C45B
-SystemText_Normal:
+gSystemText_Normal:: @ 842C45B
 	.string "{PALETTE 15}NORMAL$"
 
-gUnknown_0842C465:: @ 842C465
-SystemText_LR:
+gSystemText_LR:: @ 842C465
 	.string "{PALETTE 15}LR$"
 
-gUnknown_0842C46B:: @ 842C46B
-SystemText_LA:
+gSystemText_LA:: @ 842C46B
 	.string "{PALETTE 15}L=A$"
+
 SystemText_Pokedex:
 	.string "POKéDEX$"
 SystemText_Pokemon:
@@ -31204,75 +30855,54 @@ SystemText_Exit:
 SystemText_Retire: @ safari zone?
 	.string "RETIRE$"
 
-gUnknown_0842C4A9:: @ 842C4A9
-OtherText_SafariStock:
+gOtherText_SafariStock:: @ 842C4A9
 	.string "SAFARI BALLS\nStock: {STR_VAR_1}$"
 
-gUnknown_0842C4C0:: @ 842C4C0
-SystemText_LinkStandby:
+gSystemText_LinkStandby:: @ 842C4C0
 	.string "Link standby...\n... ... B Button: Cancel$"
 
-gUnknown_0842C4E9:: @ 842C4E9
-SystemText_LoadEventPressA:
+gSystemText_LoadEventPressA:: @ 842C4E9
 	.string "Press the A Button to load event.\n... ... B Button: Cancel$"
 
-gUnknown_0842C524:: @ 842C524
-SystemText_LoadingEvent:
+gSystemText_LoadingEvent:: @ 842C524
 	.string "Loading event...$"
 
-gUnknown_0842C535:: @ 842C535
-SystemText_DontCutLink:
+gSystemText_DontCutLink:: @ 842C535
 	.string "Don’t remove the Game Link cable.\nDon’t turn off the power.$"
 
-gUnknown_0842C571:: @ 842C571
-SystemText_EventLoadSuccess:
-	.string "The event was safely loaded.$"
-SystemText_Terminator2:
-	.string "$"
+gSystemText_EventLoadSuccess:: @ 842C571
+	.string "The event was safely loaded.$$"
 
-gUnknown_0842C58F:: @ 842C58F
-SystemText_LoadingError:
-	.string "Loading error.\nEnding session.$"
-SystemText_Terminator3:
-	.string "$$$$$$$"
+gSystemText_LoadingError:: @ 842C58F
+	.string "Loading error.\nEnding session.$$$$$$$$"
 
-gUnknown_0842C5B5:: @ 842C5B5
-OtherText_Hoenn:
+gOtherText_Hoenn:: @ 842C5B5
 	.string "HOENN$"
 
-gUnknown_0842C5BB:: @ 842C5BB
-OtherText_OhABite:
+gOtherText_OhABite:: @ 842C5BB
 	.string "Oh! A bite!$"
 
-gUnknown_0842C5C7:: @ 842C5C7
-OtherText_PokeOnHook:
+gOtherText_PokeOnHook:: @ 842C5C7
 	.string "A POKéMON’s on the hook!{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0842C5E2:: @ 842C5E2
-OtherText_NotANibble:
+gOtherText_NotEvenANibble:: @ 842C5E2
 	.string "Not even a nibble...{PAUSE_UNTIL_PRESS}$"
 
-gUnknown_0842C5F9:: @ 842C5F9
-OtherText_ItGotAway:
-	.string "It got away...{PAUSE_UNTIL_PRESS}$"
-OtherText_Terminator:
-	.string "$"
+gOtherText_ItGotAway:: @ 842C5F9
+	.string "It got away...{PAUSE_UNTIL_PRESS}$$"
 
-gUnknown_0842C60B:: @ 842C60B
-TradeText_WillBeSent:
+gTradeText_WillBeSent:: @ 842C60B
 	.string "{STR_VAR_2} will be sent to {STR_VAR_1}.$"
 
-gUnknown_0842C622:: @ 842C622
-TradeText_ByeBye:
+gTradeText_ByeBye:: @ 842C622
 	.string "Bye-bye, {STR_VAR_2}!$"
 
-gUnknown_0842C62F:: @ 842C62F
-TradeText_SentOverPoke:
+gTradeText_SentOverPoke:: @ 842C62F
 	.string "{STR_VAR_1} sent over {STR_VAR_3}.$"
 
-gUnknown_0842C640:: @ 842C640
-TradeText_TakeGoodCare:
+gTradeText_TakeGoodCare:: @ 842C640
 	.string "Take good care of {STR_VAR_3}!$"
+
 TradeText_Cancel:
 	.string "CANCEL$"
 TradeText_ChoosePoke:
@@ -31301,190 +30931,146 @@ TradeText_WaitingForFriend:
 	.string "{COLOR DARK_GREY}{HIGHLIGHT WHITE2}{SHADOW LIGHT_GREY}Waiting for your\nfriend to finish...$"
 TradeText_WantToTrade:
 	.string "{COLOR DARK_GREY}{HIGHLIGHT WHITE2}{SHADOW LIGHT_GREY}Your friend wants\nto trade POKéMON.$"
-TradeText_Terminator:
 	.string "$"
 
-gUnknown_0842C7B6::
-TradeText_TradeOkayPrompt:
+gTradeText_TradeOkayPrompt:: @ 842C7B6
 	.string "Is this trade okay?$"
 
-gUnknown_0842C7CA::
-OtherText_Terminator2:
+gOtherText_Terminator2:: @ 842C7CA
 	.string "$"
 
-gUnknown_0842C7CB::
-OtherText_NewLine:
+gOtherText_ControlAndMiscText:: @ 842C7CB
 	.string "\n$"
-OtherText_Escape:
 	.string "/$"
-OtherText_Level:
 	.string "Lv$"
-OtherText_ThreeDashes:
 	.string "---$"
 
-gUnknown_0842C7D6::
-OtherText_FourQuestions:
+gOtherText_FourQuestions:: @ 842C7D6
 	.string "????$"
 
 @ 842C7DB
 	.include "data/text/easy_chat/group_name_strings.s"
 
-gUnknown_0842C890:: @ 842C890
-OtherText_ThreeQuestions::
+gOtherText_ThreeQuestions:: @ 842C890
 	.string "???$"
 
-gUnknown_0842C894:: @ 842C894
-OtherText_From::
+gOtherText_From:: @ 842C894
 	.string "From $"
 
-gUnknown_0842C89A:: @ 842C89A
-OtherText_MixingRecordsWithFriend::
+gOtherText_MixingRecordsWithFriend:: @ 842C89A
 	.string "Mixing records...$"
 
-gUnknown_0842C8AC:: @ 842C8AC
-OtherText_MixingComplete::
+gOtherText_MixingComplete:: @ 842C8AC
 	.string "Record mixing completed.\nThank you for waiting.$"
 
-gUnknown_0842C8DC:: @ 842C8DC
-OtherText_TrainersTrainerCard:: @ redundant but couldnt think of a better desc
+gOtherText_TrainersTrainerCard:: @ 842C8DC
 	.string "’s TRAINER CARD$"
 
-gUnknown_0842C8EC:: @ 842C8EC
-OtherText_FirstHOF::
+gOtherText_FirstHOF:: @ 842C8EC
 	.string "FIRST HALL OF FAME$"
 
-gUnknown_0842C8FF:: @ 842C8FF
-OtherText_LinkCableBattles::
+gOtherText_LinkCableBattles:: @ 842C8FF
 	.string "LINK CABLE BATTLES  W/            L/$"
 
-gUnknown_0842C924:: @ 842C924
-OtherText_BattleTowerWinRecord::
+gOtherText_BattleTowerWinRecord:: @ 842C924
 	.string "BATTLE TOWER W/{CLEAR_TO 0x72}&{CLEAR_TO 0x98}STRAIGHT$"
 
-gUnknown_0842C943:: @ 842C943
-OtherText_ContestRecord::
+gOtherText_ContestRecord:: @ 842C943
 	.string "CONTESTS W/FRIENDS W/$"
 
-gUnknown_0842C959:: @ 842C959
-OtherText_MixingRecord::
+gOtherText_MixingRecord:: @ 842C959
 	.string "{POKEBLOCK}S W/FRIENDS$"
 
-gUnknown_0842C96A:: @ 842C96A
-OtherText_TradeRecord::
+gOtherText_TradeRecord:: @ 842C96A
 	.string "POKéMON TRADES$"
 
-gUnknown_0842C979:: @ 842C979
-OtherText_Boy::
+gOtherText_Boy:: @ 842C979
 	.string "BOY$"
 
-gUnknown_0842C97D:: @ 842C97D
-OtherText_Girl::
+gOtherText_Girl:: @ 842C97D
 	.string "GIRL$"
-OtherText_Terminator3::
 	.string "$"
 
-gUnknown_0842C983:: @ 842C983
-OtherText_Player::
+gOtherText_Player:: @ 842C983
 	.string "PLAYER$"
 
-gUnknown_0842C98A:: @ 842C98A
-OtherText_Badges::
+gOtherText_Badges:: @ 842C98A
 	.string "BADGES$"
 	.string "$"
 
-gUnknown_0842C992:: @ 842C992
-OtherText_Pokedex::
+gOtherText_Pokedex:: @ 842C992
 	.string "POKéDEX$"
 
-gUnknown_0842C99A:: @ 842C99A
-OtherText_PlayTime::
+gOtherText_PlayTime:: @ 842C99A
 	.string "PLAY TIME$"
 
-gUnknown_0842C9A4:: @ 842C9A4
-OtherText_SentToPc::
+gOtherText_SentToPC:: @ 842C9A4
 	.string "{STR_VAR_1} was sent to\nthe PC.{PAUSE_UNTIL_PRESS}$"
-OtherText_YourName::
+
+OtherText_YourName:
 	.string "YOUR NAME?$"
-OtherText_BoxName::
+OtherText_BoxName:
 	.string "BOX NAME?$"
-OtherText_PokeName::
+OtherText_PokeName:
 	.string "{STR_VAR_1}’s nickname?$"
 
-gUnknown_0842C9E1:: @ 842C9E1
-OtherText_Marco:
+gOtherText_Marco:: @ 842C9E1
 	.string "MARCO$" @ polo
 
-gUnknown_0842C9E7:: @ 842C9E7
-OtherText_Coins:
+gOtherText_Coins:: @ 842C9E7
 	.string "{STR_VAR_1} COINS$"
 
-gUnknown_0842C9F0:: @ 842C9F0
-OtherText_BattleResults:
+gOtherText_BattleResults:: @ 842C9F0
 	.string "{PLAYER}’s BATTLE RESULTS$"
 
-gUnknown_0842CA04:: @ 842CA04
-OtherText_WinRecord:
+gOtherText_WinRecord:: @ 842CA04
 	.string "TOTAL RECORD W/{STR_VAR_1} L/{STR_VAR_2} D/{STR_VAR_3}$"
 
-gUnknown_0842CA20:: @ 842CA20
-OtherText_WinLoseDraw:
+gOtherText_WinLoseDraw:: @ 842CA20
 	.string "WIN        LOSE        DRAW$"
 
-gUnknown_0842CA3C:: @ 842CA3C
-OtherText_SevenDashes:
+gOtherText_SevenDashes:: @ 842CA3C
 	.string "-------$"
 
-gUnknown_0842CA44:: @ 842CA44
-OtherText_FourDashes:
+gOtherText_FourDashes:: @ 842CA44
 	.string "----$"
 
-gUnknown_0842CA49:: @ 842CA49
-OtherText_BattleTowerResults:
+gOtherText_BattleTowerResults:: @ 842CA49
 	.string "{PLAYER}’s BATTLE TOWER RESULTS$"
 
-gUnknown_0842CA63:: @ 842CA63
-OtherText_Lv50:
+gOtherText_Lv50:: @ 842CA63
 	.string "LV 50$"
 
-gUnknown_0842CA69:: @ 842CA69
-OtherText_Lv100:
+gOtherText_Lv100:: @ 842CA69
 	.string "LV 100$"
 
-gUnknown_0842CA70:: @ 842CA70
-OtherText_WinStreak:
+gOtherText_WinStreak:: @ 842CA70
 	.string "{STR_VAR_1}W STREAK$"
 
-gUnknown_0842CA7B:: @ 842CA7B
-OtherText_Current:
+gOtherText_Current:: @ 842CA7B
 	.string "CURRENT$"
 
-gUnknown_0842CA83:: @ 842CA83
-OtherText_Record:
+gOtherText_Record:: @ 842CA83
 	.string "RECORD$"
 
-gUnknown_0842CA8A:: @ 842CA8A
-OtherText_Prev:
+gOtherText_Prev:: @ 842CA8A
 	.string "PREV.$"
 
-gUnknown_0842CA90:: @ 842CA90
-OtherText_QuitGamePrompt:
+gOtherText_QuitGamePrompt:: @ 842CA90
 	.string "Quit the game?$"
 
-gUnknown_0842CA9F:: @ 842CA9F
-OtherText_MaxCoins:
+gOtherText_MaxCoins:: @ 842CA9F
 	.string "You’ve got 9,999 COINS.$"
 
-gUnknown_0842CAB7:: @ 842CAB7
-OtherText_OutOfCoins:
+gOtherText_OutOfCoins:: @ 842CAB7
 	.string "You’ve run out of COINS.\nGame over!$"
 
-gUnknown_0842CADB:: @ 842CADB
-OtherText_DontHaveThreeCoins:
+gOtherText_DontHaveThreeCoins:: @ 842CADB
 	.string "You don’t have three COINS.$"
 
-gUnknown_0842CAF7:: @ 842CAF7
-OtherText_ReelTime::
+gOtherText_ReelTime:: @ 842CAF7
 	.string "REEL TIME\nHere’s your chance to take\naim and nail marks!\nThe Reel Time continues for\nas often as the drawn number.\nIt all ends on a Big Bonus.$"
+
 DaycareText_GetAlongVeryWell::
 	.string "The two seem to get along very well.$"
 DaycareText_GetAlong::
@@ -31494,26 +31080,22 @@ DaycareText_DontLikeOther::
 DaycareText_PlayOther::
 	.string "The two prefer to play with other\nPOKéMON than each other.$"
 
-gUnknown_0842CC28:: @ 842CC28
-OtherText_NewLine2::
+gOtherText_NewLine2:: @ 842CC28
 	.string "\n$"
 
-gUnknown_0842CC2A:: @ 842CC2A
-OtherText_Cancel::
+gOtherText_CancelAndLv:: @ 842CC2A
 	.string "CANCEL$"
-OtherText_Lv::
 	.string "LV$"
 
-gEggNickname:: @ 842CC34
+gOtherText_EggNickname:: @ 842CC34
 	.string "EGG$"
 
-gUnknown_0842CC38:: @ 842CC38
-OtherText_HatchedFromEgg:
+gOtherText_HatchedFromEgg:: @ 842CC38
 	.string "{COLOR WHITE2}{HIGHLIGHT TRANSPARENT}{SHADOW DARK_GREY}{STR_VAR_1} hatched from the EGG!$"
 
-gUnknown_0842CC5A:: @ 842CC5A
-OtherText_NickHatchPrompt:
+gOtherText_NickHatchPrompt:: @ 842CC5A
 	.string "{COLOR WHITE2}{HIGHLIGHT TRANSPARENT}{SHADOW DARK_GREY}Would you like to nickname the newly\nhatched {STR_VAR_1}?$"
+
 OtherText_Battle::
 	.string "BATTLE$"
 OtherText_Contest::
@@ -31531,263 +31113,195 @@ OtherText_Appeal::
 OtherText_Jam::
 	.string "JAM$"
 
-gUnknown_0842CCC7:: @ 842CCC7
-OtherText_TeachWhichMove:
+gOtherText_TeachWhichMove:: @ 842CCC7
 	.string "Teach which move to {STR_VAR_1}?$"
 
-gUnknown_0842CCDF:: @ 842CCDF
-OtherText_TeachSpecificMove:
+gOtherText_TeachSpecificMove:: @ 842CCDF
 	.string "Teach {STR_VAR_2}?$"
 
-gUnknown_0842CCE9:: @ 842CCE9
-OtherText_PokeLearnedMove:
+gOtherText_PokeLearnedMove:: @ 842CCE9
 	.string "{STR_VAR_1} learned {STR_VAR_2}.$"
 
-gUnknown_0842CCF8:: @ 842CCF8
-OtherText_DeleteOlderMove:
+gOtherText_DeleteOlderMove:: @ 842CCF8
 	.string "{STR_VAR_1} is trying to learn\n{STR_VAR_2}.\pBut {STR_VAR_1} can’t learn more\nthan four moves.\pDelete an older move to make\nroom for {STR_VAR_2}?$"
 
-gUnknown_0842CD65:: @ 842CD65
-OtherText_StopLearningMove:
+gOtherText_StopLearningMove:: @ 842CD65
 	.string "Stop learning {STR_VAR_2}?$"
 
-gUnknown_0842CD77:: @ 842CD77
-OtherText_ForgotMove123:
+gOtherText_ForgotMove123:: @ 842CD77
 	.string "{PAUSE 32}1, {PAUSE 15}2 {PAUSE 15}...{PAUSE 15}...{PAUSE 15}...{PAUSE 15} {PLAY_SE 0x0038}Poof!\p$"
 
-gUnknown_0842CDA3:: @ 842CDA3
-OtherText_ForgotMove:
+gOtherText_ForgotOrDidNotLearnMove:: @ 842CDA3
 	.string "{STR_VAR_1} forgot {STR_VAR_3}.\pAnd...\p{STR_VAR_1} learned {STR_VAR_2}.$"
-OtherText_DidNotLearnMove:
 	.string "{STR_VAR_1} did not learn\n{STR_VAR_2}.$"
 
-gUnknown_0842CDDC:: @ 842CDDC
-OtherText_GiveUpTeachingMove:
+gOtherText_GiveUpTeachingMove:: @ 842CDDC
 	.string "Give up trying to teach a new move\nto {STR_VAR_1}?$"
 
-gUnknown_0842CE06:: @ 842CE06
-OtherText_WhichMoveToForget:
+gOtherText_WhichMoveToForget:: @ 842CE06
 	.string "Which move should be forgotten?\p$"
 
-gUnknown_0842CE27:: @ 842CE27
-OtherText_ClearAllSaveDataPrompt:
+gSystemText_ClearAllSaveDataPrompt:: @ 842CE27
 	.string "Clear all save data areas?$"
 
-gUnknown_0842CE42:: @ 842CE42
-OtherText_ClearingData:
+gSystemText_ClearingData:: @ 842CE42
 	.string "Clearing data...\nPlease wait.$"
 
-gUnknown_0842CE60:: @ 842CE60
-ContestText_AnnounceResults:
+gContestText_AnnounceResults:: @ 842CE60
 	.string "Announcing the results!$"
 
-gUnknown_0842CE78:: @ 842CE78
-ContestText_PreliminaryResults:
+gContestText_PreliminaryResults:: @ 842CE78
 	.string "The preliminary results!$"
 
-gUnknown_0842CE91:: @ 842CE91
-ContestText_Round2Results:
+gContestText_Round2Results:: @ 842CE91
 	.string "Round 2 results!$"
 
-gUnknown_0842CEA2:: @ 842CEA2
-ContestText_PokeWon:
+gContestText_PokeWon:: @ 842CEA2
 	.string "{STR_VAR_1}’s {STR_VAR_2} won!$"
 
-gUnknown_0842CEAF:: @ 842CEAF
-OtherText_LinkStandby:
+gOtherText_LinkStandby:: @ 842CEAF
 	.string "Link standby...$"
 
 @ 842CEBF
 	.include "data/text/landmarks.s"
 
-gUnknown_0842D0E6:: @ 842D0E6
-OtherText_Terminator4:
+gOtherText_Terminator4:: @ 842D0E6
 	.string "$"
 
-gUnknown_0842D0E7:: @ 842D0E7
-OtherText_Nature:
+gOtherText_Nature:: @ 842D0E7
 	.string " nature, $"
 
-gUnknown_0842D0F1:: @ 842D0F1
-OtherText_Comma:
+gOtherText_Comma:: @ 842D0F1
 	.string ",$"
 
-gUnknown_0842D0F3:: @ 842D0F3
-OtherText_Met:
+gOtherText_Met:: @ 842D0F3
 	.string " (met).$"
 
-gUnknown_0842D0FB:: @ 842D0FB
-OtherText_Egg2:
+gOtherText_Egg2:: @ 842D0FB
 	.string " (EGG).$"
 
-gUnknown_0842D103:: @ 842D103
-OtherText_ObtainedInTrade:
+gOtherText_ObtainedInTrade:: @ 842D103
 	.string "obtained in a trade.$"
 
-gUnknown_0842D118:: @ 842D118
-OtherText_FatefulEncounter:
+gOtherText_FatefulEncounter:: @ 842D118
 	.string "fateful encounter.$"
 
-gUnknown_0842D12B:: @ 842D12B
-OtherText_Met2:
+gOtherText_Met2:: @ 842D12B
 	.string " (met).$"
 
-gUnknown_0842D133:: @ 842D133
-OtherText_EggDayCare:
+gOtherText_EggDayCare:: @ 842D133
 	.string "An odd POKéMON EGG found\nby the DAY CARE couple.$"
 
-gUnknown_0842D164:: @ 842D164
-OtherText_EggNicePlace:
+gOtherText_EggNicePlace:: @ 842D164
 	.string "A peculiar POKéMON EGG\nobtained at the nice place.$"
 
-gUnknown_0842D197:: @ 842D197
-OtherText_EggObtainedInTrade:
+gOtherText_EggObtainedInTrade:: @ 842D197
 	.string "A peculiar POKéMON EGG\nobtained in a trade.$"
 
-gUnknown_0842D1C3:: @ 842D1C3
-OtherText_EggHotSprings:
+gOtherText_EggHotSprings:: @ 842D1C3
 	.string "A POKéMON EGG obtained\nat the hot springs.$"
 
-gUnknown_0842D1EE:: @ 842D1EE
-OtherText_LinkStandby2:
+gOtherText_LinkStandby2:: @ 842D1EE
 	.string "Link standby...$"
 
-gUnknown_0842D1FE:: @ 842D1FE
-OtherText_YesNo:
+gOtherText_YesNoAndPlayer:: @ 842D1FE
 	.string "{COLOR DARK_GREY}{HIGHLIGHT WHITE2}{SHADOW LIGHT_GREY}YES\nNO$"
-OtherText_Player2:
 	.string "{HIGHLIGHT TRANSPARENT}PLAYER$"
-OtherText_Terminator5:
 	.string "{HIGHLIGHT TRANSPARENT}$"
 
-gUnknown_0842D21C:: @ 842D21C
-OtherText_HoennDex:
+gOtherText_HoennDex:: @ 842D21C
 	.string "HOENN$"
 
-gUnknown_0842D222:: @ 842D222
-OtherText_NationalDex:
+gOtherText_NationalDex:: @ 842D222
 	.string "NATIONAL$"
 
-gUnknown_0842D22B:: @ 842D22B
-OtherText_DiplomaCertification:
+gOtherText_DiplomaCertificationGameFreak:: @ 842D22B
 	.string "{HIGHLIGHT TRANSPARENT}Player: {CLEAR 0x10}{COLOR RED}{PLAYER}\n\n{COLOR DARK_GREY}{STR_VAR_1} POKéDEX\nThis document certifies\nthat you have successfully\ncompleted your POKéDEX.\n\n{CLEAR_TO 0x42}{COLOR RED}GAME FREAK$"
-OtherText_DiplomaGameFreak:
 	.string "{COLOR RED}{HIGHLIGHT TRANSPARENT}GAME FREAK$"
 
-gUnknown_0842D2BC:: @ 842D2BC
-OtherText_PLink:
+gOtherText_PLink:: @ 842D2BC
 	.string "{STR_VAR_1}P LINK$"
 
-gUnknown_0842D2C5:: @ 842D2C5
-OtherText_YesNo2:
+gOtherText_YesNoTerminating:: @ 842D2C5
 	.string "YES\nNO$"
-OtherText_Terminating:
 	.string "Terminating.$"
 
-gUnknown_0842D2D9:: @ 842D2D9
-OtherText_LinkNotFound:
+gOtherText_LinkNotFound:: @ 842D2D9
 	.string "Link partner(s) not found.\nPlease try again.\p$"
 
-gUnknown_0842D307:: @ 842D307
-OtherText_BerryBlenderChoose:
+gOtherText_BlenderChooseBerry:: @ 842D307
 	.string "Starting up the BERRY BLENDER.\pPlease select a BERRY from your BAG\nto put in the BERRY BLENDER.\p$"
 
-gUnknown_0842D368:: @ 842D368
-OtherText_PokeBlockMade:
+gOtherText_PokeBlockMade:: @ 842D368
 	.string " was made!$"
 
-gUnknown_0842D373:: @ 842D373
-OtherText_PressAToStart:
+gOtherText_PressAToStart:: @ 842D373
 	.string "Press the A Button to start.$"
 
-gUnknown_0842D390:: @ 842D390
-OtherText_PleaseWait:
+gOtherText_PleaseWait:: @ 842D390
 	.string "Please wait a while.$"
 
-gUnknown_0842D3A5:: @ 842D3A5
-OtherText_LinkStandby3:
+gOtherText_LinkStandby3:: @ 842D3A5
 	.string "Link standby...$"
 
-gUnknown_0842D3B5:: @ 842D3B5
-OtherText_BlendAnotherBerryPrompt:
+gOtherText_BlendAnotherBerryPrompt:: @ 842D3B5
 	.string "Would you like to blend another BERRY?$"
 
-gUnknown_0842D3DC:: @ 842D3DC
-OtherText_OutOfBerries:
+gOtherText_OutOfBerries:: @ 842D3DC
 	.string "You’ve run out of BERRIES for\nblending in the BERRY BLENDER.\p$"
 
-gUnknown_0842D41A:: @ 842D41A
-OtherText_CaseIsFull:
+gOtherText_CaseIsFull:: @ 842D41A
 	.string "Your {POKEBLOCK} CASE is full.\p$"
 
-gUnknown_0842D434:: @ 842D434
-OtherText_NoBerriesForBlend:
+gOtherText_NoBerriesForBlend:: @ 842D434
 	.string " has no BERRIES to put in\nthe BERRY BLENDER.$"
 
-gUnknown_0842D461:: @ 842D461
-OtherText_OtherCaseIsFull:
+gOtherText_OtherCaseIsFull:: @ 842D461
 	.string "’s {POKEBLOCK} CASE is full.\p$"
 
-gUnknown_0842D479:: @ 842D479
-OtherText_ResultOfBlending:
+gOtherText_ResultsOfBlending:: @ 842D479
 	.string "RESULTS OF BLENDING$"
-OtherText_BerryUsed:
 	.string "BERRY USED$"
 
-gUnknown_0842D498:: @ 842D498
-OtherText_Berry:
+gOtherText_Berry:: @ 842D498
 	.string " BERRY$"
 
-gUnknown_0842D49F:: @ 842D49F
-OtherText_RequiredTime:
+gOtherText_RequiredTime:: @ 842D49F
 	.string "REQUIRED TIME$"
 
-gUnknown_0842D4AD:: @ 842D4AD
-OtherText_Min:
+gOtherText_Min:: @ 842D4AD
 	.string "MIN.$"
 
-gUnknown_0842D4B2:: @ 842D4B2
-OtherText_Sec:
+gOtherText_Sec:: @ 842D4B2
 	.string "SEC.$"
 
-gUnknown_0842D4B7:: @ 842D4B7
-OtherText_MaxSpeed:
+gOtherText_MaxSpeed:: @ 842D4B7
 	.string "MAXIMUM SPEED$"
 
-gUnknown_0842D4C5:: @ 842D4C5
-OtherText_RPM:
+gOtherText_RPM:: @ 842D4C5
 	.string "RPM$"
-OtherText_RPMPeriod:
 	.string ".$"
 
-gUnknown_0842D4CB:: @ 842D4CB
-OtherText_Ranking:
+gOtherText_Ranking:: @ 842D4CB
 	.string "RANKING$"
 
-gUnknown_0842D4D3:: @ 842D4D3
-OtherText_BlockLevelIs:
+gOtherText_BlockLevelIs:: @ 842D4D3
 	.string "The level is $"
 
-gUnknown_0842D4E1:: @ 842D4E1
-OtherText_BlockFeelIs:
+gOtherText_BlockFeelIs:: @ 842D4E1
 	.string ", and the feel is $"
 
-gUnknown_0842D4F4:: @ 842D4F4
-OtherText_Period:
+gOtherText_Period:: @ 842D4F4
 	.string ".$"
 
-gUnknown_0842D4F6:: @ 842D4F6
-OtherText_Day:
+gOtherText_Day:: @ 842D4F6
 	.string "DAY$"
-OtherText_DayColon:
 	.string ":$"
 
-gUnknown_0842D4FC:: @ 842D4FC
-OtherText_OK:
+gOtherText_OK:: @ 842D4FC
 	.string "OK$"
 
-gUnknown_0842D4FF:: @ 842D4FF
-OtherText_CorrectTimePrompt:
+gOtherText_CorrectTimePrompt:: @ 842D4FF
 	.string "Is this the correct time?$"
 
 	.align 2
@@ -32080,44 +31594,33 @@ gUnknown_0842F788:: @ 842F788
 gUnknown_0842F790:: @ 842F790
 	.incbin "baserom.gba", 0x0042f790, 0x8
 
-gUnknown_0842F798:: @ 842F798
-OtherText_BerryObtainedDadHasIt:
+gOtherText_BerryObtainedDadHasIt:: @ 842F798
 	.string "Obtained a {STR_VAR_2} BERRY!\nDad has it at PETALBURG GYM.$"
 
-gUnknown_0842F7CA:: @ 842F7CA
-OtherText_BerryTransformed:
+gOtherText_BerryTransformed:: @ 842F7CA
 	.string "The {STR_VAR_1} BERRY transformed into\none {STR_VAR_2} BERRY.$"
 
-gUnknown_0842F7F6:: @ 842F7F6
-OtherText_BerryAlreadyObtained:
+gOtherText_BerryAlreadyObtained:: @ 842F7F6
 	.string "The {STR_VAR_1} BERRY has already been\nobtained.$"
 
-gUnknown_0842F81E:: @ 842F81E
-OtherText_SpecialRibbonReceived:
+gOtherText_SpecialRibbonReceived:: @ 842F81E
 	.string "A special RIBBON was awarded to your\nparty POKéMON.$"
 
-gUnknown_0842F852:: @ 842F852
-OtherText_DexUpgraded:
+gOtherText_DexUpgraded:: @ 842F852
 	.string "The POKéDEX has been upgraded with\nthe NATIONAL MODE.$"
 
-gUnknown_0842F888:: @ 842F888
-OtherText_RareWordAdded:
+gOtherText_RareWordAdded:: @ 842F888
 	.string "A rare word has been added.$"
 
-gUnknown_0842F8A4:: @ 842F8A4
-OtherText_PokeWasSentOver:
+gOtherText_PokeWasSentOver:: @ 842F8A4
 	.string "{STR_VAR_1} was sent over!$"
 
-gUnknown_0842F8B6:: @ 842F8B6
-OtherText_PartyIsFull:
+gOtherText_PartyIsFull:: @ 842F8B6
 	.string "Your party is full.\n{STR_VAR_1} could not be sent over.$"
 
-gUnknown_0842F8E5:: @ 842F8E5
-OtherText_NewTrainerInHoenn:
+gOtherText_NewTrainerInHoenn:: @ 842F8E5
 	.string "A new TRAINER has arrived in HOENN.$"
-OtherText_BattleTowerNewAdversary:
 	.string "A new adversary has arrived in the\nBATTLE TOWER.$"
 
-gUnknown_0842F93A:: @ 842F93A
-OtherText_DataCannotUseVersion:
+gOtherText_DataCannotUseVersion:: @ 842F93A
 	.string "This data cannot be used in\nthis version.$"

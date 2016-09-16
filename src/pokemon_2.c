@@ -21,7 +21,7 @@ extern u16 word_202FF5E;
 extern struct PokemonStorage gPokemonStorage;
 
 extern u8 gBadEggNickname[];
-extern u8 gEggNickname[];
+extern u8 gOtherText_EggNickname[];
 extern u32 gBitTable[];
 extern struct BaseStats gBaseStats[];
 extern u8 gSpeciesNames[][11];
@@ -265,7 +265,7 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
             }
             else if (boxMon->isEgg)
             {
-                StringCopy(data, gEggNickname);
+                StringCopy(data, gOtherText_EggNickname);
                 retVal = StringLength(data);
             }
             else

@@ -659,7 +659,7 @@ extern const u8 gUnknown_081E764C[];
 extern const u8 gUnknown_081E768C[];
 extern const u8 gUnknown_081E7834[];
 extern const u8 gUnknown_081E796C[];
-extern const u8 gUnknown_0840DFF7[];
+extern const u8 gSystemText_NewPara[];
 
 extern u8 gSpriteAffineAnimTable_81E79AC[];
 
@@ -843,7 +843,7 @@ void task_new_game_prof_birch_speech_7(u8 taskId)
 
         if (task->data[7] > 0x5F)
         {
-            MenuSetText((u32)&gUnknown_0840DFF7);
+            MenuSetText((u32)&gSystemText_NewPara);
             task->func = task_new_game_prof_birch_speech_8;
         }
     }

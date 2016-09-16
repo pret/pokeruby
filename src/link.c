@@ -37,7 +37,7 @@ extern u16 word_203855E;
 
 extern u16 word_3004858;
 
-extern u8 gUnknown_0842C34C[];
+extern u8 gMultiText_LinkError[];
 
 static void InitLinkTestBG(u8, u8, u8, u8);
 static void InitLinkTestBG_Unused(u8, u8, u8, u8);
@@ -1247,7 +1247,7 @@ static void CB2_PrintErrorMessage(void)
     switch (gMain.state)
     {
     case 0:
-        sub_80729D8(gUnknown_0842C34C, 20, 56, 1);
+        sub_80729D8(gMultiText_LinkError, 20, 56, 1);
         break;
     case 30:
     case 60:

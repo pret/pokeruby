@@ -3109,7 +3109,7 @@ sub_80425C4: @ 80425C4
 	ldr r1, _080425E0
 	b _08042602
 	.align 2, 0
-_080425E0: .4byte gUnknown_0820C33D
+_080425E0: .4byte gOtherText_MaleSymbol3
 _080425E4:
 	cmp r1, 0xFE
 	bne _08042600
@@ -3122,7 +3122,7 @@ _080425E4:
 	ldr r1, _080425FC
 	b _08042602
 	.align 2, 0
-_080425FC: .4byte gUnknown_0820C33F
+_080425FC: .4byte gOtherText_FemaleSymbol3
 _08042600:
 	ldr r1, _08042610
 _08042602:
@@ -3132,7 +3132,7 @@ _08042602:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08042610: .4byte gUnknown_0820C341
+_08042610: .4byte gOtherText_GenderlessSymbol
 	thumb_func_end sub_80425C4
 
 	thumb_func_start sub_8042614
@@ -3208,8 +3208,8 @@ _08042648:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080426A8: .4byte gUnknown_0842CC28
-_080426AC: .4byte gUnknown_0842CC2A
+_080426A8: .4byte gOtherText_NewLine2
+_080426AC: .4byte gOtherText_CancelAndLv
 	thumb_func_end sub_8042630
 
 	thumb_func_start sub_80426B0
@@ -3273,7 +3273,7 @@ _080426C6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08042728: .4byte gUnknown_0842CC28
+_08042728: .4byte gOtherText_NewLine2
 	thumb_func_end sub_80426B0
 
 	thumb_func_start sub_804272C
@@ -4475,7 +4475,7 @@ _08043124:
 _08043150: .4byte 0x03004360
 _08043154: .4byte 0x020231cc
 _08043158: .4byte 0x020234cc
-_0804315C: .4byte gUnknown_0842CC38
+_0804315C: .4byte gOtherText_HatchedFromEgg
 _08043160: .4byte 0x00000173
 _08043164:
 	bl task_is_not_running_overworld_fanfare
@@ -4514,7 +4514,7 @@ _08043180:
 _080431A8: .4byte 0x03004360
 _080431AC: .4byte 0x020231cc
 _080431B0: .4byte 0x020234cc
-_080431B4: .4byte gUnknown_0842CC5A
+_080431B4: .4byte gOtherText_NickHatchPrompt
 _080431B8:
 	bl sub_8043724
 	lsls r0, 24
@@ -16475,7 +16475,7 @@ sub_8049088: @ 8049088
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080490B0: .4byte gUnknown_0842C7B6
+_080490B0: .4byte gTradeText_TradeOkayPrompt
 _080490B4: .4byte 0x03004824
 _080490B8: .4byte 0x06010000
 	thumb_func_end sub_8049088
@@ -18700,7 +18700,7 @@ _0804A230: .4byte 0x02020004
 _0804A234: .4byte gTradeMonSpriteCoords
 _0804A238: .4byte gUnknown_0820C334
 _0804A23C: .4byte gUnknown_0820C334 + 0x1
-_0804A240: .4byte gUnknown_0842C7CA
+_0804A240: .4byte gOtherText_Terminator2
 _0804A244:
 	ldr r0, _0804A2A4
 	ldr r0, [r0, 0x14]
@@ -18907,9 +18907,9 @@ _0804A3D4:
 	bls _0804A3B8
 	b _0804A404
 	.align 2, 0
-_0804A3E8: .4byte gUnknown_0820C33C
+_0804A3E8: .4byte gOtherText_Terminator
 _0804A3EC: .4byte gMoveNames
-_0804A3F0: .4byte gUnknown_0842C7CB
+_0804A3F0: .4byte gOtherText_ControlAndMiscText
 _0804A3F4:
 	ldr r1, _0804A414
 	adds r0, r6, 0
@@ -18926,8 +18926,8 @@ _0804A404:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804A414: .4byte gUnknown_0820C33C
-_0804A418: .4byte gUnknown_0842C7D6
+_0804A414: .4byte gOtherText_Terminator
+_0804A418: .4byte gOtherText_FourQuestions
 	thumb_func_end sub_804A33C
 
 	thumb_func_start sub_804A41C
@@ -23033,7 +23033,7 @@ _0804C6C8:
 	bl _0804D40C
 	.align 2, 0
 _0804C6F8: .4byte 0x020234cc
-_0804C6FC: .4byte gUnknown_0842C60B
+_0804C6FC: .4byte gTradeText_WillBeSent
 _0804C700: .4byte 0x03004828
 _0804C704:
 	ldr r2, [r6]
@@ -23103,7 +23103,7 @@ _0804C718:
 _0804C78C: .4byte 0x02020004
 _0804C790: .4byte 0x000fffff
 _0804C794: .4byte 0x020234cc
-_0804C798: .4byte gUnknown_0842C622
+_0804C798: .4byte gTradeText_ByeBye
 _0804C79C:
 	ldr r7, _0804C810
 	ldr r2, [r6]
@@ -24622,7 +24622,7 @@ _0804D40C:
 	b _0804D570
 	.align 2, 0
 _0804D414: .4byte 0x020234cc
-_0804D418: .4byte gUnknown_0842C62F
+_0804D418: .4byte gTradeText_SentOverPoke
 _0804D41C:
 	ldr r1, [r6]
 	adds r1, 0xC0
@@ -24675,7 +24675,7 @@ _0804D43E:
 	.align 2, 0
 _0804D480: .4byte 0x00000173
 _0804D484: .4byte 0x020234cc
-_0804D488: .4byte gUnknown_0842C640
+_0804D488: .4byte gTradeText_TakeGoodCare
 _0804D48C:
 	ldr r2, [r6]
 	adds r1, r2, 0
@@ -25820,7 +25820,7 @@ _0804DE88: .4byte 0x03004828
 _0804DE8C: .4byte 0x0201f000
 _0804DE90: .4byte 0x0000043c
 _0804DE94: .4byte 0x020234cc
-_0804DE98: .4byte gUnknown_0842D1EE
+_0804DE98: .4byte gOtherText_LinkStandby2
 _0804DE9C:
 	bl sub_80084A4
 	ldr r0, _0804DEAC
@@ -25908,7 +25908,7 @@ _0804DF3E:
 	.align 2, 0
 _0804DF48: .4byte 0x0000043c
 _0804DF4C: .4byte 0x03004828
-_0804DF50: .4byte gUnknown_08411905
+_0804DF50: .4byte gSystemText_Saving
 _0804DF54:
 	bl sub_8047A1C
 	movs r0, 0x15
@@ -26787,7 +26787,7 @@ _0804E6BE:
 	strb r0, [r1]
 	b _0804E71A
 	.align 2, 0
-_0804E6CC: .4byte gUnknown_0842D307
+_0804E6CC: .4byte gOtherText_BlenderChooseBerry
 _0804E6D0: .4byte 0x03004854
 _0804E6D4:
 	bl MenuUpdateWindowText
@@ -27499,7 +27499,7 @@ _0804ED14:
 	str r3, [r0]
 	b _0804F0CE
 	.align 2, 0
-_0804ED40: .4byte gUnknown_0842D3A5
+_0804ED40: .4byte gOtherText_LinkStandby3
 _0804ED44: .4byte 0x03004854
 _0804ED48:
 	mov r2, r8
@@ -27918,7 +27918,7 @@ _0804F084:
 	bl MenuPrintMessage
 	b _0804F0AA
 	.align 2, 0
-_0804F09C: .4byte gUnknown_0842D2D9
+_0804F09C: .4byte gOtherText_LinkNotFound
 _0804F0A0:
 	bl MenuUpdateWindowText
 	lsls r0, 24
@@ -31090,7 +31090,7 @@ sub_80508FC: @ 80508FC
 _08050944: .4byte 0x03004854
 _08050948: .4byte 0x0000ffff
 _0805094C: .4byte 0x00002d9f
-_08050950: .4byte gUnknown_0842D2C5
+_08050950: .4byte gOtherText_YesNoTerminating
 	thumb_func_end sub_80508FC
 
 	thumb_func_start sub_8050954
@@ -31315,7 +31315,7 @@ _08050B08:
 	b _08050CB6
 	.align 2, 0
 _08050B2C: .4byte 0x03004854
-_08050B30: .4byte gUnknown_0842D3B5
+_08050B30: .4byte gOtherText_BlendAnotherBerryPrompt
 _08050B34:
 	bl MenuUpdateWindowText
 	lsls r0, 24
@@ -31493,7 +31493,7 @@ _08050C88:
 	strb r0, [r1]
 	b _08050CB6
 	.align 2, 0
-_08050C90: .4byte gUnknown_0842D3A5
+_08050C90: .4byte gOtherText_LinkStandby3
 _08050C94: .4byte 0x03004854
 _08050C98:
 	bl MenuUpdateWindowText
@@ -31796,7 +31796,7 @@ _08050ED8:
 	.align 2, 0
 _08050F0C: .4byte 0x020234cc
 _08050F10: .4byte 0x03002978
-_08050F14: .4byte gUnknown_0842D461
+_08050F14: .4byte gOtherText_OtherCaseIsFull
 _08050F18:
 	ldr r1, [r5]
 	adds r1, 0x6F
@@ -31832,7 +31832,7 @@ _08050F4C:
 	.align 2, 0
 _08050F60: .4byte 0x020234cc
 _08050F64: .4byte 0x03002978
-_08050F68: .4byte gUnknown_0842D434
+_08050F68: .4byte gOtherText_NoBerriesForBlend
 _08050F6C:
 	bl MenuUpdateWindowText
 	lsls r0, 24
@@ -31883,7 +31883,7 @@ _08050FAA:
 	ldr r1, [r0]
 	b _080510AC
 	.align 2, 0
-_08050FCC: .4byte gUnknown_0842C328
+_08050FCC: .4byte gMultiText_Saving
 _08050FD0: .4byte 0x03004854
 _08050FD4:
 	bl sub_8007ECC
@@ -32093,7 +32093,7 @@ _0805116E:
 	ldr r0, _0805118C
 	b _080511AC
 	.align 2, 0
-_0805118C: .4byte gUnknown_0842D41A
+_0805118C: .4byte gOtherText_CaseIsFull
 _08051190:
 	ldr r0, [r3]
 	adds r0, 0x6F
@@ -32113,7 +32113,7 @@ _080511AC:
 	bl MenuPrintMessage
 	b _0805121E
 	.align 2, 0
-_080511B8: .4byte gUnknown_0842D3DC
+_080511B8: .4byte gOtherText_OutOfBerries
 _080511BC:
 	bl MenuUpdateWindowText
 	lsls r0, 24
@@ -32898,7 +32898,7 @@ _080517BC: .4byte 0x03002fa4
 _080517C0: .4byte 0x03004854
 _080517C4: .4byte 0x03002974
 _080517C8: .4byte gUnknown_08216284
-_080517CC: .4byte gUnknown_0842D373
+_080517CC: .4byte gOtherText_PressAToStart
 _080517D0: .4byte 0x03001770
 _080517D4:
 	movs r1, 0x8
@@ -32935,7 +32935,7 @@ _0805180C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08051814: .4byte gUnknown_0842D390
+_08051814: .4byte gOtherText_PleaseWait
 _08051818: .4byte 0x03002a68
 	thumb_func_end unref_sub_80516F8
 
@@ -33858,18 +33858,18 @@ _08051E04:
 	str r0, [r2]
 	b _08051FE2
 	.align 2, 0
-_08051F14: .4byte gUnknown_0842D479
+_08051F14: .4byte gOtherText_ResultsOfBlending
 _08051F18: .4byte 0x03004854
 _08051F1C: .4byte 0x03002970
-_08051F20: .4byte gUnknown_0842D498
+_08051F20: .4byte gOtherText_Berry
 _08051F24: .4byte 0x03002978
 _08051F28: .4byte gUnknown_082165E9
 _08051F2C: .4byte gUnknown_082165EE
-_08051F30: .4byte gUnknown_0842D4B7
-_08051F34: .4byte gUnknown_0842D4C5
-_08051F38: .4byte gUnknown_0842D49F
-_08051F3C: .4byte gUnknown_0842D4AD
-_08051F40: .4byte gUnknown_0842D4B2
+_08051F30: .4byte gOtherText_MaxSpeed
+_08051F34: .4byte gOtherText_RPM
+_08051F38: .4byte gOtherText_RequiredTime
+_08051F3C: .4byte gOtherText_Min
+_08051F40: .4byte gOtherText_Sec
 _08051F44:
 	ldr r0, _08051F54
 	ldrh r1, [r0, 0x2E]
@@ -34039,11 +34039,11 @@ sub_805201C: @ 805201C
 	bx r0
 	.align 2, 0
 _080520B0: .4byte gUnknown_083F7EB8
-_080520B4: .4byte gUnknown_0842D368
+_080520B4: .4byte gOtherText_PokeBlockMade
 _080520B8: .4byte gUnknown_082162C8
-_080520BC: .4byte gUnknown_0842D4D3
-_080520C0: .4byte gUnknown_0842D4E1
-_080520C4: .4byte gUnknown_0842D4F4
+_080520BC: .4byte gOtherText_BlockLevelIs
+_080520C0: .4byte gOtherText_BlockFeelIs
+_080520C4: .4byte gOtherText_Period
 _080520C8: .4byte gUnknown_08216249
 	thumb_func_end sub_805201C
 
@@ -34395,7 +34395,7 @@ _080522B6:
 	mov r8, r2
 	b _0805243C
 	.align 2, 0
-_0805236C: .4byte gUnknown_0842D4CB
+_0805236C: .4byte gOtherText_Ranking
 _08052370: .4byte gSpriteTemplate_821645C
 _08052374: .4byte 0x03004854
 _08052378: .4byte 0x02020004
@@ -34676,7 +34676,7 @@ _0805259E:
 	bl itemid_copy_name
 	b _080525F8
 	.align 2, 0
-_080525C8: .4byte gUnknown_082165FA
+_080525C8: .4byte gOtherText_BPMAndDash
 _080525CC: .4byte 0x03000560
 _080525D0: .4byte gBerries
 _080525D4: .4byte gUnknown_082165F8
@@ -35402,11 +35402,11 @@ _08052B50:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08052BBC: .4byte gUnknown_0842C2E6
-_08052BC0: .4byte gUnknown_0842C30A
+_08052BBC: .4byte gMultiText_BerryBlenderMaxSpeedRecord
+_08052BC0: .4byte gMultiText_2P3P4P
 _08052BC4: .4byte 0x02025734
 _08052BC8: .4byte 0x0000096c
-_08052BCC: .4byte gUnknown_0842D4C5
+_08052BCC: .4byte gOtherText_RPM
 	thumb_func_end ShowBerryBlenderRecordWindow
 
 	thumb_func_start sub_8052BD0
