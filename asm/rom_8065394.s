@@ -11351,7 +11351,7 @@ sub_806A74C: @ 806A74C
 _0806A83C: .4byte 0x020234cc
 _0806A840: .4byte 0x00002710
 _0806A844: .4byte 0x020231cc
-_0806A848: .4byte gUnknown_0842D4F6
+_0806A848: .4byte gOtherText_Day
 _0806A84C: .4byte gUnknown_08376500
 	thumb_func_end sub_806A74C
 
@@ -11398,7 +11398,7 @@ sub_806A850: @ 806A850
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806A8A8: .4byte gUnknown_0842D4FC
+_0806A8A8: .4byte gOtherText_OK
 	thumb_func_end sub_806A850
 
 	thumb_func_start sub_806A8AC
@@ -11900,11 +11900,11 @@ _0806AC80:
 	bl DoSoftReset
 	b _0806ACC4
 	.align 2, 0
-_0806AC98: .4byte gUnknown_08411804
+_0806AC98: .4byte gSystemText_PresentTime
 _0806AC9C: .4byte 0x03004038
-_0806ACA0: .4byte gUnknown_08411819
+_0806ACA0: .4byte gSystemText_PreviousTime
 _0806ACA4: .4byte gSaveBlock2
-_0806ACA8: .4byte gUnknown_084117E3
+_0806ACA8: .4byte gSystemText_ResetRTCPrompt
 _0806ACAC: .4byte 0x03001770
 _0806ACB0:
 	movs r0, 0x1
@@ -11994,7 +11994,7 @@ _0806AD4E:
 	.align 2, 0
 _0806AD5C: .4byte 0x0202f388
 _0806AD60: .4byte 0x03005eb8
-_0806AD64: .4byte gUnknown_084118A0
+_0806AD64: .4byte gSystemText_NoSaveFileNoTime
 _0806AD68:
 	bl RtcCalcLocalTime
 	ldr r0, _0806AD7C
@@ -12040,7 +12040,7 @@ _0806AD96:
 	b _0806AEC4
 	.align 2, 0
 _0806ADC4: .4byte 0x03004b20
-_0806ADC8: .4byte gUnknown_0841182F
+_0806ADC8: .4byte gSystemText_PleaseResetTime
 _0806ADCC: .4byte 0x03004038
 _0806ADD0: .4byte gSaveBlock2
 _0806ADD4: .4byte sub_806AA64
@@ -12101,7 +12101,7 @@ _0806AE08:
 _0806AE4C: .4byte 0x03004038
 _0806AE50: .4byte gSaveBlock2
 _0806AE54: .4byte 0x00004040
-_0806AE58: .4byte gUnknown_08411846
+_0806AE58: .4byte gSystemText_ClockResetDataSave
 _0806AE5C:
 	movs r0, 0
 	bl sub_8125D44
@@ -12115,7 +12115,7 @@ _0806AE5C:
 	bl audio_play
 	b _0806AE88
 	.align 2, 0
-_0806AE78: .4byte gUnknown_08411881
+_0806AE78: .4byte gSystemText_SaveCompleted
 _0806AE7C:
 	ldr r0, _0806AECC
 	bl sub_806ABDC
@@ -12157,7 +12157,7 @@ _0806AEC4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806AECC: .4byte gUnknown_08411891
+_0806AECC: .4byte gSystemText_SaveFailed
 _0806AED0: .4byte 0x03001770
 _0806AED4: .4byte 0x0000ffff
 _0806AED8: .4byte 0x0202f388
@@ -19819,7 +19819,7 @@ _0806E9D8: .4byte TaskDummy
 _0806E9DC: .4byte 0x0201c000
 _0806E9E0: .4byte 0x0202e8f4
 _0806E9E4: .4byte 0x0202e8f8
-_0806E9E8: .4byte gUnknown_0840F17F
+_0806E9E8: .4byte gOtherText_MailMustBeRemoved
 _0806E9EC: .4byte party_menu_link_mon_held_item_object
 _0806E9F0:
 	ldr r0, [r4]
@@ -19851,7 +19851,7 @@ _0806E9F0:
 _0806EA30: .4byte 0x020231cc
 _0806EA34: .4byte 0x020232cc
 _0806EA38: .4byte 0x020234cc
-_0806EA3C: .4byte gUnknown_0840F1CD
+_0806EA3C: .4byte gOtherText_AlreadyHolding
 _0806EA40: .4byte sub_806EBB8
 _0806EA44:
 	ldr r0, [r4]
@@ -19982,7 +19982,7 @@ _0806EB34:
 	.align 2, 0
 _0806EB50: .4byte 0x020231cc
 _0806EB54: .4byte 0x020234cc
-_0806EB58: .4byte gUnknown_0840F26E
+_0806EB58: .4byte gOtherText_TakenAndReplaced
 _0806EB5C:
 	ldr r0, _0806EB70
 	movs r1, 0
@@ -19992,7 +19992,7 @@ _0806EB5C:
 	bl sub_80A9424
 	b _0806EB9A
 	.align 2, 0
-_0806EB70: .4byte gUnknown_0840F2FC
+_0806EB70: .4byte gOtherText_BagFullCannotRemoveItem
 _0806EB74:
 	cmp r1, 0x1
 	beq _0806EB80
@@ -20095,7 +20095,7 @@ _0806EC30: .4byte 0x03004360
 _0806EC34: .4byte 0x020231cc
 _0806EC38: .4byte 0x020232cc
 _0806EC3C: .4byte 0x020234cc
-_0806EC40: .4byte gUnknown_0840F1AE
+_0806EC40: .4byte gOtherText_WasGivenToHold
 	thumb_func_end sub_806EBF0
 
 	thumb_func_start sub_806EC44
@@ -20148,7 +20148,7 @@ _0806ECA4: .4byte TaskDummy
 _0806ECA8: .4byte 0x0201c000
 _0806ECAC: .4byte 0x0202e8f4
 _0806ECB0: .4byte 0x02028280
-_0806ECB4: .4byte gUnknown_0840F29B
+_0806ECB4: .4byte gOtherText_PokeHoldingItemCantMail
 _0806ECB8: .4byte party_menu_link_mon_held_item_object
 _0806ECBC:
 	ldr r0, [r5]
@@ -20167,7 +20167,7 @@ _0806ECDA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806ECE0: .4byte gUnknown_0840F2D3
+_0806ECE0: .4byte gOtherText_MailTransferredMailbox
 _0806ECE4: .4byte party_menu_link_mon_held_item_object
 	thumb_func_end sub_806EC44
 
@@ -20212,7 +20212,7 @@ _0806ED38: .4byte 0x03004b20
 _0806ED3C: .4byte TaskDummy
 _0806ED40: .4byte 0x0201c000
 _0806ED44: .4byte 0x020234cc
-_0806ED48: .4byte gUnknown_0840F213
+_0806ED48: .4byte gOtherText_NotHoldingAnything
 _0806ED4C: .4byte party_menu_link_mon_held_item_object
 _0806ED50:
 	mov r0, sp
@@ -20258,7 +20258,7 @@ _0806EDA2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806EDAC: .4byte gUnknown_0840F2FC
+_0806EDAC: .4byte gOtherText_BagFullCannotRemoveItem
 _0806EDB0: .4byte party_menu_link_mon_held_item_object
 	thumb_func_end sub_806ECE8
 
@@ -20297,7 +20297,7 @@ _0806EDF4: .4byte 0x03004360
 _0806EDF8: .4byte 0x020231cc
 _0806EDFC: .4byte 0x020232cc
 _0806EE00: .4byte 0x020234cc
-_0806EE04: .4byte gUnknown_0840F230
+_0806EE04: .4byte gOtherText_ReceivedTheThingFrom
 	thumb_func_end sub_806EDB4
 
 	thumb_func_start sub_806EE08
@@ -20333,7 +20333,7 @@ sub_806EE08: @ 806EE08
 _0806EE48: .4byte 0x03004b20
 _0806EE4C: .4byte TaskDummy
 _0806EE50: .4byte 0x0201c000
-_0806EE54: .4byte gUnknown_0840F0E8
+_0806EE54: .4byte gOtherText_SendRemovedMailPrompt
 _0806EE58: .4byte sub_806EFEC
 	thumb_func_end sub_806EE08
 
@@ -20363,7 +20363,7 @@ sub_806EE5C: @ 806EE5C
 	b _0806EEA0
 	.align 2, 0
 _0806EE90: .4byte 0x0201c000
-_0806EE94: .4byte gUnknown_0840F24B
+_0806EE94: .4byte gOtherText_MailTaken
 _0806EE98:
 	ldr r0, _0806EEAC
 	movs r1, 0
@@ -20375,7 +20375,7 @@ _0806EEA0:
 	movs r3, 0xD
 	b _0806EEDE
 	.align 2, 0
-_0806EEAC: .4byte gUnknown_0840F2FC
+_0806EEAC: .4byte gOtherText_BagFullCannotRemoveItem
 _0806EEB0:
 	cmp r1, 0x1
 	beq _0806EEBC
@@ -20476,7 +20476,7 @@ sub_806EF38: @ 806EF38
 	b _0806EF80
 	.align 2, 0
 _0806EF70: .4byte 0x0201c000
-_0806EF74: .4byte gUnknown_0840F10A
+_0806EF74: .4byte gOtherText_MailWasSent
 _0806EF78:
 	ldr r0, _0806EF90
 	movs r1, 0
@@ -20491,7 +20491,7 @@ _0806EF80:
 	str r0, [r1]
 	b _0806EFD8
 	.align 2, 0
-_0806EF90: .4byte gUnknown_0840F12A
+_0806EF90: .4byte gOtherText_MailboxIsFull
 _0806EF94: .4byte 0x03004b20
 _0806EF98: .4byte party_menu_link_mon_held_item_object
 _0806EF9C:
@@ -20529,7 +20529,7 @@ _0806EFD8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806EFE0: .4byte gUnknown_0840F147
+_0806EFE0: .4byte gOtherText_MailRemovedMessageLost
 _0806EFE4: .4byte 0x03004b20
 _0806EFE8: .4byte sub_806EF00
 	thumb_func_end sub_806EF38
@@ -20694,7 +20694,7 @@ _0806F11C: .4byte 0x020232cc
 _0806F120: .4byte gMoveNames
 _0806F124: .4byte 0xfffff282
 _0806F128: .4byte 0x020234cc
-_0806F12C: .4byte gUnknown_0840F49E
+_0806F12C: .4byte gOtherText_AlreadyKnows
 _0806F130: .4byte 0x03004b20
 _0806F134: .4byte party_menu_link_mon_held_item_object
 _0806F138:
@@ -20722,7 +20722,7 @@ _0806F138:
 	b _0806F1B6
 	.align 2, 0
 _0806F16C: .4byte 0x020234cc
-_0806F170: .4byte gUnknown_0840F347
+_0806F170: .4byte gOtherText_NotCompatible
 _0806F174: .4byte 0x03004b20
 _0806F178: .4byte party_menu_link_mon_held_item_object
 _0806F17C:
@@ -20760,7 +20760,7 @@ _0806F1B8:
 	bx r0
 	.align 2, 0
 _0806F1C0: .4byte 0x020234cc
-_0806F1C4: .4byte gUnknown_0840F37C
+_0806F1C4: .4byte gOtherText_WantsToLearn
 _0806F1C8: .4byte 0x03004b20
 _0806F1CC: .4byte sub_806F358
 	thumb_func_end sub_806F0B4
@@ -20818,7 +20818,7 @@ _0806F234: .4byte 0x020232cc
 _0806F238: .4byte 0x0201c000
 _0806F23C: .4byte gMoveNames
 _0806F240: .4byte 0x020234cc
-_0806F244: .4byte gUnknown_0840F338
+_0806F244: .4byte gOtherText_LearnedMove
 _0806F248: .4byte 0xfffff282
 _0806F24C: .4byte 0x03004b20
 _0806F250: .4byte sub_806F254
@@ -21014,7 +21014,7 @@ sub_806F390: @ 806F390
 	str r1, [r0]
 	b _0806F3F4
 	.align 2, 0
-_0806F3C8: .4byte gUnknown_0840F429
+_0806F3C8: .4byte gOtherText_WhichMoveToForget2
 _0806F3CC: .4byte 0x03004b20
 _0806F3D0: .4byte sub_806F44C
 _0806F3D4:
@@ -21182,7 +21182,7 @@ _0806F524: .4byte 0x020231cc
 _0806F528: .4byte 0x020232cc
 _0806F52C: .4byte gMoveNames
 _0806F530: .4byte 0x020234cc
-_0806F534: .4byte gUnknown_0840F44B
+_0806F534: .4byte gOtherText_ForgetMove123_2
 _0806F538: .4byte sub_806F53C
 	thumb_func_end sub_806F490
 
@@ -21278,7 +21278,7 @@ _0806F5FC: .4byte 0x020232cc
 _0806F600: .4byte 0x0201c000
 _0806F604: .4byte gMoveNames
 _0806F608: .4byte 0x020234cc
-_0806F60C: .4byte gUnknown_0840F3F0
+_0806F60C: .4byte gOtherText_StopTryingTo
 _0806F610: .4byte sub_806F67C
 	thumb_func_end sub_806F588
 
@@ -21323,7 +21323,7 @@ _0806F660: .4byte 0x020232cc
 _0806F664: .4byte 0x0201c000
 _0806F668: .4byte gMoveNames
 _0806F66C: .4byte 0x020234cc
-_0806F670: .4byte gUnknown_0840F3F0
+_0806F670: .4byte gOtherText_StopTryingTo
 _0806F674: .4byte 0x03004b20
 _0806F678: .4byte sub_806F67C
 	thumb_func_end sub_806F614
@@ -21405,7 +21405,7 @@ _0806F714: .4byte 0x020231cc
 _0806F718: .4byte 0x020232cc
 _0806F71C: .4byte gMoveNames
 _0806F720: .4byte 0x020234cc
-_0806F724: .4byte gUnknown_0840F409
+_0806F724: .4byte gOtherText_DidNotLearnMove2
 _0806F728: .4byte 0x03004b20
 _0806F72C: .4byte sub_806F2FC
 _0806F730:
@@ -21464,7 +21464,7 @@ _0806F79C: .4byte 0x020231cc
 _0806F7A0: .4byte 0x020232cc
 _0806F7A4: .4byte gMoveNames
 _0806F7A8: .4byte 0x020234cc
-_0806F7AC: .4byte gUnknown_0840F37C
+_0806F7AC: .4byte gOtherText_WantsToLearn
 _0806F7B0: .4byte 0x03004b20
 _0806F7B4: .4byte sub_806F358
 	thumb_func_end sub_806F6B4
@@ -21678,7 +21678,7 @@ _0806F948: .4byte 0x020231cc
 _0806F94C: .4byte 0x020232cc
 _0806F950: .4byte 0x03004b20
 _0806F954: .4byte 0x020234cc
-_0806F958: .4byte gUnknown_0840F4B5
+_0806F958: .4byte gOtherText_HPRestoredBy
 _0806F95C:
 	ldr r0, _0806F9D4
 	ldr r1, _0806F9D8
@@ -21734,7 +21734,7 @@ _0806F964:
 	b _0806FA10
 	.align 2, 0
 _0806F9D4: .4byte 0x020234cc
-_0806F9D8: .4byte gUnknown_0840F566
+_0806F9D8: .4byte gOtherText_RegainedHealth
 _0806F9DC: .4byte 0x0201c000
 _0806F9E0: .4byte gUnknown_083769A8
 _0806F9E4: .4byte 0xfffff261
@@ -22031,7 +22031,7 @@ _0806FC40:
 	b _0806FD84
 	.align 2, 0
 _0806FC4C: .4byte 0x020234cc
-_0806FC50: .4byte gUnknown_0840F4DA
+_0806FC50: .4byte gOtherText_CuredPoisoning
 _0806FC54:
 	ldr r0, _0806FC60
 	ldr r1, _0806FC64
@@ -22039,7 +22039,7 @@ _0806FC54:
 	b _0806FD84
 	.align 2, 0
 _0806FC60: .4byte 0x020234cc
-_0806FC64: .4byte gUnknown_0840F518
+_0806FC64: .4byte gOtherText_WokeUp
 _0806FC68:
 	ldr r0, _0806FC74
 	ldr r1, _0806FC78
@@ -22047,7 +22047,7 @@ _0806FC68:
 	b _0806FD84
 	.align 2, 0
 _0806FC74: .4byte 0x020234cc
-_0806FC78: .4byte gUnknown_0840F526
+_0806FC78: .4byte gOtherText_BurnHealed
 _0806FC7C:
 	ldr r0, _0806FC88
 	ldr r1, _0806FC8C
@@ -22055,7 +22055,7 @@ _0806FC7C:
 	b _0806FD84
 	.align 2, 0
 _0806FC88: .4byte 0x020234cc
-_0806FC8C: .4byte gUnknown_0840F53E
+_0806FC8C: .4byte gOtherText_ThawedOut
 _0806FC90:
 	ldr r0, _0806FC9C
 	ldr r1, _0806FCA0
@@ -22063,7 +22063,7 @@ _0806FC90:
 	b _0806FD84
 	.align 2, 0
 _0806FC9C: .4byte 0x020234cc
-_0806FCA0: .4byte gUnknown_0840F4FB
+_0806FCA0: .4byte gOtherText_CuredParalysis
 _0806FCA4:
 	ldr r0, _0806FCB0
 	ldr r1, _0806FCB4
@@ -22071,7 +22071,7 @@ _0806FCA4:
 	b _0806FD84
 	.align 2, 0
 _0806FCB0: .4byte 0x020234cc
-_0806FCB4: .4byte gUnknown_0840F5D7
+_0806FCB4: .4byte gOtherText_SnapConfusion
 _0806FCB8:
 	ldr r0, _0806FCC4
 	ldr r1, _0806FCC8
@@ -22079,7 +22079,7 @@ _0806FCB8:
 	b _0806FD84
 	.align 2, 0
 _0806FCC4: .4byte 0x020234cc
-_0806FCC8: .4byte gUnknown_0840F5FA
+_0806FCC8: .4byte gOtherText_GotOverLove
 _0806FCCC:
 	ldr r0, _0806FCD8
 	ldr r1, _0806FCDC
@@ -22087,42 +22087,42 @@ _0806FCCC:
 	b _0806FD84
 	.align 2, 0
 _0806FCD8: .4byte 0x020234cc
-_0806FCDC: .4byte gUnknown_0840F57C
+_0806FCDC: .4byte gOtherText_BecameHealthy
 _0806FCE0:
 	ldr r0, _0806FCE8
 	ldr r1, _0806FCEC
 	b _0806FD34
 	.align 2, 0
 _0806FCE8: .4byte 0x020232cc
-_0806FCEC: .4byte gUnknown_0840EF72
+_0806FCEC: .4byte gOtherText_Hp2
 _0806FCF0:
 	ldr r0, _0806FCF8
 	ldr r1, _0806FCFC
 	b _0806FD34
 	.align 2, 0
 _0806FCF8: .4byte 0x020232cc
-_0806FCFC: .4byte gUnknown_0840F7C6
+_0806FCFC: .4byte gOtherText_Attack
 _0806FD00:
 	ldr r0, _0806FD08
 	ldr r1, _0806FD0C
 	b _0806FD34
 	.align 2, 0
 _0806FD08: .4byte 0x020232cc
-_0806FD0C: .4byte gUnknown_0840F7CD
+_0806FD0C: .4byte gOtherText_Defense
 _0806FD10:
 	ldr r0, _0806FD18
 	ldr r1, _0806FD1C
 	b _0806FD34
 	.align 2, 0
 _0806FD18: .4byte 0x020232cc
-_0806FD1C: .4byte gUnknown_0840F7E5
+_0806FD1C: .4byte gOtherText_Speed
 _0806FD20:
 	ldr r0, _0806FD28
 	ldr r1, _0806FD2C
 	b _0806FD34
 	.align 2, 0
 _0806FD28: .4byte 0x020232cc
-_0806FD2C: .4byte gUnknown_0840EF75
+_0806FD2C: .4byte gOtherText_SpAtk2
 _0806FD30:
 	ldr r0, _0806FD44
 	ldr r1, _0806FD48
@@ -22134,9 +22134,9 @@ _0806FD34:
 	b _0806FD84
 	.align 2, 0
 _0806FD44: .4byte 0x020232cc
-_0806FD48: .4byte gUnknown_0840EF7D
+_0806FD48: .4byte gOtherText_SpDef2
 _0806FD4C: .4byte 0x020234cc
-_0806FD50: .4byte gUnknown_0840F5C1
+_0806FD50: .4byte gOtherText_WasRaised
 _0806FD54:
 	ldr r0, _0806FD60
 	ldr r1, _0806FD64
@@ -22144,7 +22144,7 @@ _0806FD54:
 	b _0806FD84
 	.align 2, 0
 _0806FD60: .4byte 0x020234cc
-_0806FD64: .4byte gUnknown_0840F591
+_0806FD64: .4byte gOtherText_PPIncreased
 _0806FD68:
 	ldr r0, _0806FD74
 	ldr r1, _0806FD78
@@ -22152,7 +22152,7 @@ _0806FD68:
 	b _0806FD84
 	.align 2, 0
 _0806FD74: .4byte 0x020234cc
-_0806FD78: .4byte gUnknown_0840F553
+_0806FD78: .4byte gOtherText_PPRestored
 _0806FD7C:
 	ldr r0, _0806FD88
 	ldr r1, _0806FD8C
@@ -22162,7 +22162,7 @@ _0806FD84:
 	bx r0
 	.align 2, 0
 _0806FD88: .4byte 0x020234cc
-_0806FD8C: .4byte gUnknown_0840EF85
+_0806FD8C: .4byte gOtherText_WontHaveAnyEffect
 	thumb_func_end GetMedicineItemEffectMessage
 
 	thumb_func_start sub_806FD90
@@ -22352,7 +22352,7 @@ _0806FEE6:
 	b _08070002
 	.align 2, 0
 _0806FF08: .4byte 0x0202e8f4
-_0806FF0C: .4byte gUnknown_0840EF85
+_0806FF0C: .4byte gOtherText_WontHaveAnyEffect
 _0806FF10: .4byte 0x03004b20
 _0806FF14:
 	ldr r1, _0806FF30
@@ -22781,7 +22781,7 @@ _08070298: .4byte 0x0202e8f4
 _0807029C: .4byte 0xfffff280
 _080702A0: .4byte 0x03004b20
 _080702A4: .4byte TaskDummy
-_080702A8: .4byte gUnknown_0840EF85
+_080702A8: .4byte gOtherText_WontHaveAnyEffect
 _080702AC: .4byte sub_806FB0C
 _080702B0:
 	ldrh r0, [r4, 0x6]
@@ -23157,7 +23157,7 @@ ether_effect_related: @ 8070570
 _080705A8: .4byte 0x0201c000
 _080705AC: .4byte 0x03004b20
 _080705B0: .4byte 0x0202e8f4
-_080705B4: .4byte gUnknown_0840EF85
+_080705B4: .4byte gOtherText_WontHaveAnyEffect
 _080705B8:
 	ldr r1, _0807060C
 	movs r0, 0x1
@@ -23317,7 +23317,7 @@ _080706F6:
 	b _0807077C
 	.align 2, 0
 _08070718: .4byte 0x0202e8f4
-_0807071C: .4byte gUnknown_0840EF85
+_0807071C: .4byte gOtherText_WontHaveAnyEffect
 _08070720: .4byte sub_806FB0C
 _08070724:
 	ldr r1, _08070784
@@ -23365,7 +23365,7 @@ _08070788: .4byte 0x0201c000
 _0807078C: .4byte 0x020231cc
 _08070790: .4byte 0x020232cc
 _08070794: .4byte 0x020234cc
-_08070798: .4byte gUnknown_0840F5A6
+_08070798: .4byte gOtherText_ElevatedTo
 _0807079C: .4byte sub_80707A0
 	thumb_func_end sub_8070680
 
@@ -23534,7 +23534,7 @@ _080708E8: .4byte 0x0201c000
 _080708EC: .4byte gUnknown_08376D1C
 _080708F0: .4byte 0x0201b264
 _080708F4: .4byte gUnknown_08376D04
-_080708F8: .4byte gUnknown_0840E691
+_080708F8: .4byte gOtherText_TallPlusAndRightArrow
 _080708FC:
 	adds r4, r6, 0x6
 	lsls r1, r4, 3
@@ -23585,7 +23585,7 @@ _08070910:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08070960: .4byte gUnknown_0840E691
+_08070960: .4byte gOtherText_TallPlusAndRightArrow
 _08070964: .4byte 0x0201b264
 	thumb_func_end sub_8070848
 
@@ -23873,7 +23873,7 @@ _08070BC0: .4byte 0x020232cc
 _08070BC4: .4byte 0x02024e82
 _08070BC8: .4byte gMoveNames
 _08070BCC: .4byte 0x020234cc
-_08070BD0: .4byte gUnknown_0840F37C
+_08070BD0: .4byte gOtherText_WantsToLearn
 _08070BD4: .4byte 0x03004b20
 _08070BD8: .4byte sub_806F358
 _08070BDC:
@@ -23924,7 +23924,7 @@ _08070C38: .4byte 0x020231cc
 _08070C3C: .4byte 0x020232cc
 _08070C40: .4byte gMoveNames
 _08070C44: .4byte 0x020234cc
-_08070C48: .4byte gUnknown_0840F338
+_08070C48: .4byte gOtherText_LearnedMove
 _08070C4C: .4byte 0x03004b20
 _08070C50: .4byte sub_806F254
 	thumb_func_end sub_8070AC8
@@ -24019,7 +24019,7 @@ _08070D0C: .4byte 0x020232cc
 _08070D10: .4byte 0x02024e82
 _08070D14: .4byte gMoveNames
 _08070D18: .4byte 0x020234cc
-_08070D1C: .4byte gUnknown_0840F37C
+_08070D1C: .4byte gOtherText_WantsToLearn
 _08070D20: .4byte 0x03004b20
 _08070D24: .4byte sub_806F358
 _08070D28:
@@ -24062,7 +24062,7 @@ _08070D74: .4byte 0x020231cc
 _08070D78: .4byte 0x020232cc
 _08070D7C: .4byte gMoveNames
 _08070D80: .4byte 0x020234cc
-_08070D84: .4byte gUnknown_0840F338
+_08070D84: .4byte gOtherText_LearnedMove
 _08070D88: .4byte 0x03004b20
 _08070D8C: .4byte sub_806F254
 	thumb_func_end sub_8070C54
@@ -24140,7 +24140,7 @@ _08070E20: .4byte 0x03005e94
 _08070E24: .4byte sub_80A53F8
 _08070E28: .4byte 0x0201c000
 _08070E2C: .4byte 0x0202e8f4
-_08070E30: .4byte gUnknown_0840EF85
+_08070E30: .4byte gOtherText_WontHaveAnyEffect
 _08070E34: .4byte sub_806FB0C
 _08070E38:
 	adds r0, r6, 0
@@ -24525,7 +24525,7 @@ sub_80710DC: @ 80710DC
 	.align 2, 0
 _08071108: .4byte 0x020231cc
 _0807110C: .4byte 0x02038808
-_08071110: .4byte gUnknown_0842C4A9
+_08071110: .4byte gOtherText_SafariStock
 	thumb_func_end sub_80710DC
 
 	thumb_func_start sub_8071114
@@ -25645,7 +25645,7 @@ _0807194C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08071958: .4byte gUnknown_0840E5D5
+_08071958: .4byte gSystemText_SaveErrorExchangeBackup
 _0807195C: .4byte sub_80719AC
 	thumb_func_end sub_8071900
 
@@ -25961,7 +25961,7 @@ _08071BB4:
 	movs r3, 0
 	b _08071BFA
 	.align 2, 0
-_08071BD0: .4byte gUnknown_08411905
+_08071BD0: .4byte gSystemText_Saving
 _08071BD4:
 	bl sub_8047A1C
 	bl sub_8125E2C

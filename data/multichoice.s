@@ -2,20 +2,20 @@
 MultichoiceList_00:
 	.4byte OtherText_Petalburg, 0
 	.4byte OtherText_Slateport, 0
-	.4byte gUnknown_0840E645, 0
+	.4byte gOtherText_CancelNoTerminator, 0
 
 	.align 2
 MultichoiceList_02:
 	.4byte OtherText_Enter, 0
 	.4byte OtherText_Info3, 0
-	.4byte gUnknown_0840E645, 0
+	.4byte gOtherText_CancelNoTerminator, 0
 
 	.align 2
 MultichoiceList_03:
 	.4byte OtherText_WhatsAContest, 0
 	.4byte OtherText_TypesOfContest, 0
 	.4byte OtherText_Ranks, 0
-	.4byte gUnknown_0840E645, 0
+	.4byte gOtherText_CancelNoTerminator, 0
 
 	.align 2
 MultichoiceList_04:
@@ -24,27 +24,27 @@ MultichoiceList_04:
 	.4byte OtherText_CuteContest, 0
 	.4byte OtherText_SmartContest, 0
 	.4byte OtherText_ToughContest, 0
-	.4byte gUnknown_0840E645, 0
+	.4byte gOtherText_CancelNoTerminator, 0
 
 	.align 2
 MultichoiceList_06:
 	.4byte OtherText_Decoration, 0
 	.4byte OtherText_PackUp, 0
 	.4byte OtherText_Registry, 0
-	.4byte gUnknown_0840E645, 0
+	.4byte gOtherText_CancelNoTerminator, 0
 
 	.align 2
 MultichoiceList_05:
 	.4byte OtherText_Decoration, 0
 	.4byte OtherText_PackUp, 0
-	.4byte gUnknown_0840E645, 0
+	.4byte gOtherText_CancelNoTerminator, 0
 
 	.align 2
 MultichoiceList_07:
 	.4byte OtherText_Register, 0
 	.4byte OtherText_Registry, 0
 	.4byte OtherText_Information, 0
-	.4byte gUnknown_0840E645, 0
+	.4byte gOtherText_CancelNoTerminator, 0
 
 	.align 2
 MultichoiceList_12:
@@ -58,12 +58,12 @@ MultichoiceList_13:
 	.4byte OtherText_Sleep, 0
 	.4byte OtherText_Burn, 0
 	.4byte OtherText_Frozen, 0
-	.4byte gUnknown_0840E645, 0
+	.4byte gOtherText_CancelNoTerminator, 0
 
 	.align 2
 MultichoiceList_14:
 	.4byte OtherText_Dewford, 0
-	.4byte gUnknown_0840E645, 0
+	.4byte gOtherText_CancelNoTerminator, 0
 
 	.align 2
 MultichoiceList_16:
@@ -81,7 +81,7 @@ MultichoiceList_18:
 	.4byte OtherText_SingleBattle, 0
 	.4byte OtherText_DoubleBattle, 0
 	.4byte OtherText_MultiBattle, 0
-	.4byte gUnknown_0840E645, 0
+	.4byte gOtherText_CancelNoTerminator, 0
 
 	.align 2
 MultichoiceList_19:
@@ -99,13 +99,13 @@ MultichoiceList_20:
 MultichoiceList_23:
 	.4byte OtherText_MakeAChallenge, 0
 	.4byte OtherText_ObtainInformation, 0
-	.4byte gUnknown_0840E645, 0
+	.4byte gOtherText_CancelNoTerminator, 0
 
 	.align 2
 MultichoiceList_24:
 	.4byte OtherText_Lv50_2, 0
 	.4byte OtherText_Lv100_2, 0
-	.4byte gUnknown_0840E645, 0
+	.4byte gOtherText_CancelNoTerminator, 0
 
 	.align 2
 MultichoiceList_25:
@@ -202,21 +202,21 @@ MultichoiceList_42:
 	.4byte OtherText_FreshWater, 0
 	.4byte OtherText_SodaPop, 0
 	.4byte OtherText_Lemonade, 0
-	.4byte gUnknown_0840E645, 0
+	.4byte gOtherText_CancelNoTerminator, 0
 
 	.align 2
 MultichoiceList_43:
 	.4byte OtherText_HowToRide, 0
 	.4byte OtherText_HowToTurn, 0
 	.4byte OtherText_SandySlopes, 0
-	.4byte gUnknown_0840E645, 0
+	.4byte gOtherText_CancelNoTerminator, 0
 
 	.align 2
 MultichoiceList_44:
 	.4byte OtherText_Wheelies, 0
 	.4byte OtherText_BunnyHops, 0
 	.4byte OtherText_Jumping, 0
-	.4byte gUnknown_0840E645, 0
+	.4byte gOtherText_CancelNoTerminator, 0
 
 	.align 2
 MultichoiceList_45:
@@ -227,7 +227,7 @@ MultichoiceList_45:
 MultichoiceList_46:
 	.4byte OtherText_Deepseatooth, 0
 	.4byte OtherText_Deepseascale, 0
-	.4byte gUnknown_0840E645, 0
+	.4byte gOtherText_CancelNoTerminator, 0
 
 	.align 2
 MultichoiceList_47:
@@ -238,14 +238,14 @@ MultichoiceList_47:
 	.4byte OtherText_BlackFlute2, 0
 	.4byte OtherText_GlassChair, 0
 	.4byte OtherText_GlassDesk, 0
-	.4byte gUnknown_0840E645, 0
+	.4byte gOtherText_CancelNoTerminator, 0
 
 	.align 2
 MultichoiceList_48:
 	.4byte OtherText_TreeckoDoll, 0
 	.4byte OtherText_TorchicDoll, 0
 	.4byte OtherText_MudkipDoll, 0
-	.4byte gUnknown_0840E645, 0
+	.4byte gOtherText_CancelNoTerminator, 0
 
 	.align 2
 MultichoiceList_55:
@@ -254,13 +254,13 @@ MultichoiceList_55:
 	.4byte OtherText_TM35, 0
 	.4byte OtherText_TM24, 0
 	.4byte OtherText_TM13, 0
-	.4byte gUnknown_0840E645, 0
+	.4byte gOtherText_CancelNoTerminator, 0
 
 	.align 2
 MultichoiceList_49:
 	.4byte OtherText_50Coins, 0
 	.4byte OtherText_500Coins, 0
-	.4byte gUnknown_0840E645, 0
+	.4byte gOtherText_CancelNoTerminator, 0
 
 	.align 2
 MultichoiceList_50:
@@ -271,13 +271,13 @@ MultichoiceList_50:
 MultichoiceList_52:
 	.4byte OtherText_Lilycove, 0
 	.4byte OtherText_BattleTower, 0
-	.4byte gUnknown_0840E645, 0
+	.4byte gOtherText_CancelNoTerminator, 0
 
 	.align 2
 MultichoiceList_53:
 	.4byte OtherText_Slateport, 0
 	.4byte OtherText_Lilycove, 0
-	.4byte gUnknown_0840E645, 0
+	.4byte gOtherText_CancelNoTerminator, 0
 
 	.align 2
 MultichoiceList_54:
@@ -288,7 +288,7 @@ MultichoiceList_54:
 MultichoiceList_56:
 	.4byte OtherText_Slateport, 0
 	.4byte OtherText_BattleTower, 0
-	.4byte gUnknown_0840E645, 0
+	.4byte gOtherText_CancelNoTerminator, 0
 
 	.align 2
 MultichoiceList_57:
@@ -301,86 +301,86 @@ MultichoiceList_57:
 	.align 2
 MultichoiceList_58:
 	.4byte OtherText_RedShard, 0
-	.4byte gUnknown_0840E645, 0
+	.4byte gOtherText_CancelNoTerminator, 0
 
 	.align 2
 MultichoiceList_59:
 	.4byte OtherText_YellowShard, 0
-	.4byte gUnknown_0840E645, 0
+	.4byte gOtherText_CancelNoTerminator, 0
 
 	.align 2
 MultichoiceList_60:
 	.4byte OtherText_RedShard, 0
 	.4byte OtherText_YellowShard, 0
-	.4byte gUnknown_0840E645, 0
+	.4byte gOtherText_CancelNoTerminator, 0
 
 	.align 2
 MultichoiceList_61:
 	.4byte OtherText_BlueShard, 0
-	.4byte gUnknown_0840E645, 0
+	.4byte gOtherText_CancelNoTerminator, 0
 
 	.align 2
 MultichoiceList_62:
 	.4byte OtherText_RedShard, 0
 	.4byte OtherText_BlueShard, 0
-	.4byte gUnknown_0840E645, 0
+	.4byte gOtherText_CancelNoTerminator, 0
 
 	.align 2
 MultichoiceList_63:
 	.4byte OtherText_YellowShard, 0
 	.4byte OtherText_BlueShard, 0
-	.4byte gUnknown_0840E645, 0
+	.4byte gOtherText_CancelNoTerminator, 0
 
 	.align 2
 MultichoiceList_64:
 	.4byte OtherText_RedShard, 0
 	.4byte OtherText_YellowShard, 0
 	.4byte OtherText_BlueShard, 0
-	.4byte gUnknown_0840E645, 0
+	.4byte gOtherText_CancelNoTerminator, 0
 
 	.align 2
 MultichoiceList_65:
 	.4byte OtherText_GreenShard, 0
-	.4byte gUnknown_0840E645, 0
+	.4byte gOtherText_CancelNoTerminator, 0
 
 	.align 2
 MultichoiceList_66:
 	.4byte OtherText_RedShard, 0
 	.4byte OtherText_GreenShard, 0
-	.4byte gUnknown_0840E645, 0
+	.4byte gOtherText_CancelNoTerminator, 0
 
 	.align 2
 MultichoiceList_67:
 	.4byte OtherText_YellowShard, 0
 	.4byte OtherText_GreenShard, 0
-	.4byte gUnknown_0840E645, 0
+	.4byte gOtherText_CancelNoTerminator, 0
 
 	.align 2
 MultichoiceList_68:
 	.4byte OtherText_RedShard, 0
 	.4byte OtherText_YellowShard, 0
 	.4byte OtherText_GreenShard, 0
-	.4byte gUnknown_0840E645, 0
+	.4byte gOtherText_CancelNoTerminator, 0
 
 	.align 2
 MultichoiceList_69:
 	.4byte OtherText_BlueShard, 0
 	.4byte OtherText_GreenShard, 0
-	.4byte gUnknown_0840E645, 0
+	.4byte gOtherText_CancelNoTerminator, 0
 
 	.align 2
 MultichoiceList_70:
 	.4byte OtherText_RedShard, 0
 	.4byte OtherText_BlueShard, 0
 	.4byte OtherText_GreenShard, 0
-	.4byte gUnknown_0840E645, 0
+	.4byte gOtherText_CancelNoTerminator, 0
 
 	.align 2
 MultichoiceList_71:
 	.4byte OtherText_YellowShard, 0
 	.4byte OtherText_BlueShard, 0
 	.4byte OtherText_GreenShard, 0
-	.4byte gUnknown_0840E645, 0
+	.4byte gOtherText_CancelNoTerminator, 0
 
 	.align 2
 MultichoiceList_72:
@@ -388,11 +388,11 @@ MultichoiceList_72:
 	.4byte OtherText_YellowShard, 0
 	.4byte OtherText_BlueShard, 0
 	.4byte OtherText_GreenShard, 0
-	.4byte gUnknown_0840E645, 0
+	.4byte gOtherText_CancelNoTerminator, 0
 
 	.align 2
 MultichoiceList_01:
-	.4byte gUnknown_0840E645, 0
+	.4byte gOtherText_CancelNoTerminator, 0
 
 	.align 2
 gMultichoiceLists:: @ 83CDE00

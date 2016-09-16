@@ -16996,7 +16996,7 @@ sub_805A5CC: @ 805A5CC
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805A5F0: .4byte gUnknown_0842C5BB
+_0805A5F0: .4byte gOtherText_OhABite
 	thumb_func_end sub_805A5CC
 
 	thumb_func_start fish7
@@ -17119,7 +17119,7 @@ sub_805A6B4: @ 805A6B4
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805A6D8: .4byte gUnknown_0842C5C7
+_0805A6D8: .4byte gOtherText_PokeOnHook
 	thumb_func_end sub_805A6B4
 
 	thumb_func_start sub_805A6DC
@@ -17260,7 +17260,7 @@ sub_805A7BC: @ 805A7BC
 	.align 2, 0
 _0805A7FC: .4byte 0x0202e858
 _0805A800: .4byte 0x02020004
-_0805A804: .4byte gUnknown_0842C5E2
+_0805A804: .4byte gOtherText_NotEvenANibble
 	thumb_func_end sub_805A7BC
 
 	thumb_func_start sub_805A808
@@ -17296,7 +17296,7 @@ sub_805A808: @ 805A808
 	.align 2, 0
 _0805A84C: .4byte 0x0202e858
 _0805A850: .4byte 0x02020004
-_0805A854: .4byte gUnknown_0842C5F9
+_0805A854: .4byte gOtherText_ItGotAway
 	thumb_func_end sub_805A808
 
 	thumb_func_start fishD
