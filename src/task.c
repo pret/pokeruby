@@ -52,47 +52,42 @@ u8 CreateTask(TaskFunc func, u8 priority)
 #ifdef NONMATCHING
 static void InsertTask(u8 newTaskId)
 {
-   u8 newerTaskId;
-   u8 taskId = FindFirstActiveTask();
-   struct Task *tasks;
+    u8 taskId = FindFirstActiveTask();
 
-   if (taskId == NUM_TASKS)
-   {
-       // The new task is the only task.
-       gTasks[newTaskId].prev = HEAD_SENTINEL;
-       gTasks[newTaskId].next = TAIL_SENTINEL;
-   }
-    else
+    if (taskId == NUM_TASKS)
     {
-    
-    tasks = gTasks;
-
-   for (newerTaskId = newTaskId;;)
-   {
-       if (tasks[newerTaskId].priority < tasks[taskId].priority)
-       {
-           // We've found a task with a higher priority value,
-           // so we insert the new task before it.
-
-           tasks[newTaskId].prev = tasks[taskId].prev;
-           tasks[newTaskId].next = taskId;
-           tasks[taskId].prev = newTaskId;
-           return;
-       }
-
-       if (tasks[taskId].next != TAIL_SENTINEL)
-           taskId = tasks[taskId].next;
-       else
-           break;
-   }
-
-   // We've reached the end.
-   tasks[newTaskId].prev = taskId;
-   tasks[newTaskId].next = tasks[taskId].next;
-   if (tasks[taskId].prev != HEAD_SENTINEL)
-		tasks[tasks[taskId].prev].next = newTaskId;
-   tasks[taskId].next = newTaskId;
+        // The new task is the only task.
+        gTasks[newTaskId].prev = HEAD_SENTINEL;
+        gTasks[newTaskId].next = TAIL_SENTINEL;
+        return;
     }
+
+    for (;;)
+    {
+        if (gTasks[newTaskId].priority < gTasks[taskId].priority)
+        {
+            // We've found a task with a higher priority value,
+            // so we insert the new task before it.
+            gTasks[newTaskId].prev = gTasks[taskId].prev;
+            gTasks[newTaskId].next = taskId;
+
+            if (gTasks[taskId].prev != HEAD_SENTINEL)
+                gTasks[gTasks[taskId].prev].next = newTaskId;
+
+            gTasks[taskId].prev = newTaskId;
+            return;
+        }
+
+        if (gTasks[taskId].next != TAIL_SENTINEL)
+            taskId = gTasks[taskId].next;
+        else
+            break;
+    }
+
+    // We've reached the end.
+    gTasks[newTaskId].prev = taskId;
+    gTasks[newTaskId].next = gTasks[taskId].next;
+    gTasks[taskId].next = newTaskId;
 }
 #else
 __attribute__((naked))
