@@ -5,12 +5,27 @@ unk_20160BC = 0x20160BC;
 
 gSecretBaseRecord = 0x2017000;
 
+dword_2017100 = 0x2017100;
+
 gUnknown_020239F8 = 0x20239F8;
+
+gUnknown_02024A60 = 0x2024A60;
 
 gBattleMons = 0x2024A80;
 
-byte_2024C06 = 0x2024C06;
+gUnknown_02024BE6 = 0x2024BE6;
 
+byte_2024C06 = 0x2024C06;
+gUnknown_02024C07 = 0x2024C07;
+gUnknown_02024C08 = 0x2024C08;
+gUnknown_02024C0C = 0x2024C0C;
+gXXX_CritRelated = 0x2024C0D;
+
+word_2024DB8 = 0x2024DB8;
+
+gEnigmaBerries = 0x2024DF0;
+
+gBattleMovePower = 0x2024E80;
 word_2024E82 = 0x2024E82;
 byte_2024E88 = 0x2024E88;
 

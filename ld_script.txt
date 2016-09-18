@@ -4,11 +4,12 @@ gNumMusicPlayers = 4;
 gMaxLines = 60;
 
 SECTIONS {
-    . = 0x2020000;
+    . = 0x2000000;
 
     ewram (NOLOAD) :
     ALIGN(4)
     {
+        . = 0x20000;
         src/main.o(ewram_data);
         src/sprite.o(ewram_data);
         . = ALIGN(4);
@@ -17,6 +18,7 @@ SECTIONS {
         . += 0x2E8; /* big gap */
         src/link.o(ewram_data);
         src/rtc.o(ewram_data);
+        . = 0x40000;
     }
 
     . = 0x3000000;
@@ -58,6 +60,8 @@ SECTIONS {
 
         . = 0x7490;
         src/agb_flash.o(iwram_data);
+
+        . = 0x8000;
     }
 
     . = 0x8000000;
