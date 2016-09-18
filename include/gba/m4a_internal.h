@@ -401,6 +401,26 @@ void SampleFreqSet(u32 freq);
 void m4aSoundVSyncOn(void);
 void m4aSoundVSyncOff(void);
 
+void m4aMPlayTempoControl(struct MusicPlayerInfo *mplayInfo, u16 tempo);
+void m4aMPlayVolumeControl(struct MusicPlayerInfo *mplayInfo, u16 trackBits, u16 volume);
+void m4aMPlayPitchControl(struct MusicPlayerInfo *mplayInfo, u16 trackBits, u16 pitch);
+void m4aMPlayPanpotControl(struct MusicPlayerInfo *mplayInfo, u16 trackBits, s8 pan);
+void ClearModM(struct MusicPlayerTrack *track);
+void m4aMPlayModDepthSet(struct MusicPlayerInfo *mplayInfo, u16 trackBits, u8 modDepth);
+void m4aMPlayLFOSpeedSet(struct MusicPlayerInfo *mplayInfo, u16 trackBits, u8 lfoSpeed);
+
+struct MusicPlayerInfo *sub_81DF43C(u32 tone);
+void sub_81DF50C(u8 val);
+void sub_81DF520(s8 val);
+void sub_81DF538(s16 val);
+void sub_81DF570(u16 val);
+void sub_81DF57C(u8 val);
+void sub_81DF588(u32 val);
+int sub_81DF594(struct MusicPlayerInfo *mplayInfo);
+void sub_81DF5AC(s8 val);
+void sub_81DF5D8(u32 val);
+void sub_81DF618(u8 val);
+
 // sound command handler functions
 void ply_fine(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
 void ply_goto(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
