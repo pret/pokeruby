@@ -630,15 +630,15 @@ void PrintBadgeCount(void)
 }
 
 //Text Strings
-extern const u8 gUnknown_081C6D78[];    //Hi! Sorry to keep you waiting!...
-extern const u8 gUnknown_081C6DF8[];
-extern const u8 gUnknown_081C6E1A[];
-extern const u8 gUnknown_081C6FCB[];
-extern const u8 gUnknown_081C6FD8[];
-extern const u8 gUnknown_081C6FFA[];
-extern u8 gUnknown_081C7017[];
-extern u8 gUnknown_081C7025[];
-extern u8 gUnknown_081C7074[];
+extern const u8 gBirchSpeech_Welcome[];    //Hi! Sorry to keep you waiting!...
+extern const u8 gBirchSpeech_ThisIsPokemon[];
+extern const u8 gBirchSpeech_WorldInhabitedByPokemon[];
+extern const u8 gBirchSpeech_AndYouAre[];
+extern const u8 gBirchSpeech_AreYouBoyOrGirl[];
+extern const u8 gBirchSpeech_WhatsYourName[];
+extern u8 gBirchSpeech_SoItsPlayer[];
+extern u8 gBirchSpeech_AhOkayYouArePlayer[];
+extern u8 gBirchSpeech_AreYouReady[];
 
 struct MonCoords
 {
@@ -793,7 +793,7 @@ void task_new_game_prof_birch_speech_3(u8 taskId)
         else
         {
             MenuDrawTextWindow(0x2, 0xD, 0x1B, 0x12);
-            MenuPrintMessage(gUnknown_081C6D78, 3, 14);
+            MenuPrintMessage(gBirchSpeech_Welcome, 3, 14);
             task->func = task_new_game_prof_birch_speech_4;
         }
     }
@@ -804,7 +804,7 @@ void task_new_game_prof_birch_speech_4(u8 taskId)
     if (!gPaletteFade.active && MenuUpdateWindowText_OverrideLineLength(24))
     {
         gTasks[taskId].func = task_new_game_prof_birch_speech_5;
-        MenuPrintMessage(gUnknown_081C6DF8, 3, 14);
+        MenuPrintMessage(gBirchSpeech_ThisIsPokemon, 3, 14);
     }
 }
 
@@ -865,7 +865,7 @@ void task_new_game_prof_birch_speech_8(u8 taskId)
 {
     if (MenuUpdateWindowText_OverrideLineLength(24))
     {
-        MenuPrintMessage(gUnknown_081C6E1A, 3, 14);
+        MenuPrintMessage(gBirchSpeech_WorldInhabitedByPokemon, 3, 14);
         gTasks[taskId].func = task_new_game_prof_birch_speech_9;
     }
 }
@@ -875,7 +875,7 @@ void task_new_game_prof_birch_speech_9(u8 taskId)
     if (MenuUpdateWindowText_OverrideLineLength(24))
     {
         MenuDrawTextWindow(0x2, 0xD, 0x1B, 0x12);
-        MenuPrintMessage(gUnknown_081C6FCB, 3, 14);
+        MenuPrintMessage(gBirchSpeech_AndYouAre, 3, 14);
         gTasks[taskId].func = task_new_game_prof_birch_speech_10;
     }
 }
@@ -963,7 +963,7 @@ void task_new_game_prof_birch_speech_13(u8 taskId)
 void task_new_game_prof_birch_speech_14(u8 taskId)
 {
     MenuDrawTextWindow(2, 0xD, 0x1B, 0x12);
-    MenuPrintMessage(gUnknown_081C6FD8, 3, 14);
+    MenuPrintMessage(gBirchSpeech_AreYouBoyOrGirl, 3, 14);
     gTasks[taskId].func = task_new_game_prof_birch_speech_15;
 }
 
@@ -1061,7 +1061,7 @@ void task_new_game_prof_birch_speech_18(u8 taskId)
 void sub_800A974(u8 taskId)
 {
     MenuDrawTextWindow(2, 13, 27, 18);
-    MenuPrintMessage(gUnknown_081C6FFA, 3, 14);
+    MenuPrintMessage(gBirchSpeech_WhatsYourName, 3, 14);
     gTasks[taskId].func = Task_800A9B4;
 }
 
@@ -1116,7 +1116,7 @@ void sub_800AAAC(u8 taskId)
 void task_new_game_prof_birch_speech_part2_1(u8 taskId)
 {
     MenuDrawTextWindow(2, 13, 27, 18);
-    StringExpandPlaceholders(gStringVar4, gUnknown_081C7017);
+    StringExpandPlaceholders(gStringVar4, gBirchSpeech_SoItsPlayer);
     MenuPrintMessage(gStringVar4, 3, 14);
     gTasks[taskId].func = sub_800AB38;
 }
@@ -1191,7 +1191,7 @@ void task_new_game_prof_birch_speech_part2_6(u8 taskId)
         sub_800B534(taskId, 2);
         sub_800B6C0(taskId, 1);
         MenuDrawTextWindow(2, 13, 27, 18);
-        StringExpandPlaceholders(gStringVar4, gUnknown_081C7025);
+        StringExpandPlaceholders(gStringVar4, gBirchSpeech_AhOkayYouArePlayer);
         MenuPrintMessage(gStringVar4, 3, 14);
         gTasks[taskId].func = task_new_game_prof_birch_speech_part2_7;
     }
@@ -1259,7 +1259,7 @@ void task_new_game_prof_birch_speech_part2_8(u8 taskId)
             sub_800B534(taskId, 2);
             sub_800B6C0(taskId, 1);
             MenuDrawTextWindow(2, 13, 27, 18);
-            MenuPrintMessage(gUnknown_081C7074, 3, 14);
+            MenuPrintMessage(gBirchSpeech_AreYouReady, 3, 14);
             gTasks[taskId].func = task_new_game_prof_birch_speech_part2_9;
         }
     }
