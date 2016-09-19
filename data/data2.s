@@ -3029,13 +3029,15 @@ gUnknown_08211798:: @ 8211798
 gUnknown_08211F98:: @ 8211F98
 	.incbin "graphics/trade/pokeball_symbol_map.bin"
 
-	.incbin "baserom.gba", 0x00212098, 0x20
+	.incbin "graphics/unused/unknown/8212098.gbapal"
 
 	.align 2
 gTradeCableEndPalette:: @ 82120B8
 	.incbin "graphics/trade/cable_end.gbapal"
 
-	.incbin "baserom.gba", 0x002120D8, 0x40
+	.incbin "graphics/unused/unknown/82120D8.gbapal"
+
+	.space 32
 
 	.align 2
 gTradeGlowPalette:: @ 8212118
@@ -3419,9 +3421,7 @@ gUnknown_08215C2C:: @ 8215C2C
 gUnknown_0821602C:: @ 821602C
 	.incbin "graphics/berry_blender/outer.gbapal"
 
-	@ unused palette
-	.align 2
-	.incbin "baserom.gba", 0x0021604c, 0x20
+	.incbin "graphics/unused/unknown/821604C.gbapal"
 
 	.space 0x1C0
 
