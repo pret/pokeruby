@@ -82,6 +82,7 @@ SECTIONS {
         asm/rom_803BA2C.o(.text);
         src/pokemon_2.o(.text);
         asm/rom_803D1FC.o(.text);
+        src/trig.o(.text);
         src/rng.o(.text);
         asm/rom_8040EB4.o(.text);
         src/play_time.o(.text);

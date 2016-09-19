@@ -6969,13 +6969,13 @@ sub_8078114: @ 8078114
 	ldrsh r0, [r4, r2]
 	movs r2, 0x30
 	ldrsh r1, [r4, r2]
-	bl sine
+	bl Sin
 	strh r0, [r4, 0x24]
 	movs r1, 0x2E
 	ldrsh r0, [r4, r1]
 	movs r2, 0x30
 	ldrsh r1, [r4, r2]
-	bl cosine
+	bl Cos
 	strh r0, [r4, 0x26]
 	ldrh r0, [r4, 0x32]
 	ldrh r2, [r4, 0x2E]
@@ -7028,7 +7028,7 @@ sub_8078174: @ 8078174
 	adds r1, r2
 	lsls r1, 16
 	asrs r1, 16
-	bl sine
+	bl Sin
 	strh r0, [r4, 0x24]
 	movs r1, 0x2E
 	ldrsh r0, [r4, r1]
@@ -7039,7 +7039,7 @@ sub_8078174: @ 8078174
 	adds r1, r2
 	lsls r1, 16
 	asrs r1, 16
-	bl cosine
+	bl Cos
 	strh r0, [r4, 0x26]
 	ldrh r0, [r4, 0x32]
 	ldrh r2, [r4, 0x2E]
@@ -7091,13 +7091,13 @@ unref_sub_80781F0: @ 80781F0
 	ldrsh r0, [r4, r2]
 	movs r2, 0x30
 	ldrsh r1, [r4, r2]
-	bl sine
+	bl Sin
 	strh r0, [r4, 0x24]
 	movs r1, 0x36
 	ldrsh r0, [r4, r1]
 	movs r2, 0x30
 	ldrsh r1, [r4, r2]
-	bl cosine
+	bl Cos
 	strh r0, [r4, 0x26]
 	ldrh r0, [r4, 0x32]
 	ldrh r2, [r4, 0x2E]
@@ -7167,13 +7167,13 @@ sub_8078278: @ 8078278
 	ldrsh r0, [r4, r2]
 	movs r2, 0x30
 	ldrsh r1, [r4, r2]
-	bl sine
+	bl Sin
 	strh r0, [r4, 0x24]
 	movs r1, 0x2E
 	ldrsh r0, [r4, r1]
 	movs r2, 0x36
 	ldrsh r1, [r4, r2]
-	bl cosine
+	bl Cos
 	strh r0, [r4, 0x26]
 	ldrh r0, [r4, 0x32]
 	ldrh r2, [r4, 0x2E]
@@ -7824,7 +7824,7 @@ sub_8078718: @ 8078718
 	lsrs r0, 24
 	movs r2, 0x38
 	ldrsh r1, [r4, r2]
-	bl sine
+	bl Sin
 	ldrh r1, [r4, 0x26]
 	adds r0, r1
 	strh r0, [r4, 0x26]

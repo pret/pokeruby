@@ -5153,7 +5153,7 @@ _0800E03C:
 	beq _0800E0A4
 	ldr r4, _0800E090
 	ldrh r0, [r6, 0xA]
-	bl sine2
+	bl Sin2
 	lsls r0, 16
 	asrs r0, 16
 	cmp r0, 0
@@ -5168,7 +5168,7 @@ _0800E056:
 	strh r0, [r4]
 	ldr r4, _0800E094
 	ldrh r0, [r6, 0xC]
-	bl sine2
+	bl Sin2
 	lsls r0, 16
 	asrs r0, 16
 	cmp r0, 0
@@ -5197,7 +5197,7 @@ _0800E0A0: .4byte 0x03004280
 _0800E0A4:
 	ldr r4, _0800E134
 	ldrh r0, [r6, 0xA]
-	bl sine2
+	bl Sin2
 	lsls r0, 16
 	asrs r0, 16
 	cmp r0, 0
@@ -5212,7 +5212,7 @@ _0800E0B6:
 	strh r0, [r4]
 	ldr r4, _0800E138
 	ldrh r0, [r6, 0xA]
-	bl cosine2
+	bl Cos2
 	lsls r0, 16
 	asrs r0, 16
 	cmp r0, 0
@@ -5224,7 +5224,7 @@ _0800E0D4:
 	strh r0, [r4]
 	ldr r4, _0800E13C
 	ldrh r0, [r6, 0xC]
-	bl sine2
+	bl Sin2
 	lsls r0, 16
 	asrs r0, 16
 	cmp r0, 0
@@ -5239,7 +5239,7 @@ _0800E0EC:
 	strh r0, [r4]
 	ldr r4, _0800E140
 	ldrh r0, [r6, 0xC]
-	bl cosine2
+	bl Cos2
 	lsls r0, 16
 	asrs r0, 16
 	cmp r0, 0
@@ -10076,7 +10076,7 @@ _080107C8:
 _080107CC:
 	movs r2, 0x32
 	ldrsh r1, [r4, r2]
-	bl sine
+	bl Sin
 	ldr r2, _080107F8
 	lsls r1, r5, 4
 	adds r1, r5

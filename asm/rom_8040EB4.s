@@ -4680,7 +4680,7 @@ _08043304:
 	movs r1, 0x30
 	ldrsh r0, [r4, r1]
 	movs r1, 0x1
-	bl sine
+	bl Sin
 	strh r0, [r4, 0x24]
 	movs r1, 0x2E
 	ldrsh r0, [r4, r1]
@@ -4733,7 +4733,7 @@ _0804336C:
 	movs r1, 0x30
 	ldrsh r0, [r4, r1]
 	movs r1, 0x2
-	bl sine
+	bl Sin
 	strh r0, [r4, 0x24]
 	movs r1, 0x2E
 	ldrsh r0, [r4, r1]
@@ -4816,7 +4816,7 @@ _08043418:
 	movs r1, 0x30
 	ldrsh r0, [r4, r1]
 	movs r1, 0x2
-	bl sine
+	bl Sin
 	strh r0, [r4, 0x24]
 	movs r1, 0x2E
 	ldrsh r0, [r4, r1]
@@ -11457,14 +11457,14 @@ sub_80467F8: @ 80467F8
 	strh r1, [r4, 0x38]
 	movs r0, 0
 	movs r1, 0x20
-	bl cosine
+	bl Cos
 	ldrh r1, [r4, 0x22]
 	adds r0, r1
 	strh r0, [r4, 0x22]
 	movs r0, 0x36
 	ldrsh r1, [r4, r0]
 	movs r0, 0
-	bl cosine
+	bl Cos
 	negs r0, r0
 	strh r0, [r4, 0x26]
 	ldr r0, _08046848
@@ -11495,7 +11495,7 @@ _08046862:
 	ldrsh r0, [r4, r1]
 	movs r2, 0x36
 	ldrsh r1, [r4, r2]
-	bl cosine
+	bl Cos
 	negs r0, r0
 	strh r0, [r4, 0x26]
 	ldrh r1, [r4, 0x38]
@@ -11555,7 +11555,7 @@ _080468D6:
 	ldrsh r0, [r4, r2]
 	movs r2, 0x36
 	ldrsh r1, [r4, r2]
-	bl cosine
+	bl Cos
 	negs r0, r0
 	strh r0, [r4, 0x26]
 	ldrh r1, [r4, 0x38]
@@ -11579,7 +11579,7 @@ _08046902:
 	strh r5, [r4, 0x34]
 	movs r0, 0x40
 	movs r1, 0x20
-	bl cosine
+	bl Cos
 	ldrh r1, [r4, 0x22]
 	adds r0, r1
 	strh r0, [r4, 0x22]
@@ -12596,7 +12596,7 @@ _08047126:
 	ands r0, r2
 	movs r2, 0x38
 	ldrsh r1, [r5, r2]
-	bl sine
+	bl Sin
 	ldrh r1, [r5, 0x26]
 	adds r0, r1
 	strh r0, [r5, 0x26]
