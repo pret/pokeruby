@@ -35,7 +35,7 @@ u8 GetMenuCursorPos(void);
 void DoNamingScreen(u8 r0, struct SaveBlock2 *r1, u16 r2, u16 r3, u8 s0, MainCallback s4);
 void DisplayYesNoMenu(u8 r0, u8 r1, u32 r2);
 s8 ProcessMenuInputNoWrap_(void);
-void c2_load_new_map_2(void);
+void CB2_NewGame(void);
 void LZ77UnCompVram(const void *src, void *dest);
 void InitMenuWindow(const struct WindowConfig *);
 void CB2_MainMenu(void);
@@ -1315,7 +1315,7 @@ void sub_800B034(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        SetMainCallback2(c2_load_new_map_2);
+        SetMainCallback2(CB2_NewGame);
         DestroyTask(taskId);
     }
 }

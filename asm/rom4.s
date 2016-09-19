@@ -3130,10 +3130,10 @@ _08054400:
 _0805440C: .4byte 0x0300485c
 	thumb_func_end sub_80543E8
 
-	thumb_func_start c2_load_new_map_2
-c2_load_new_map_2: @ 8054410
+	thumb_func_start CB2_NewGame
+CB2_NewGame: @ 8054410
 	push {lr}
-	bl sub_80547A8
+	bl FieldClearVBlankHBlankCallbacks
 	bl sub_8074D08
 	bl ResetSafariZoneFlag_
 	bl NewGameInitData
@@ -3159,7 +3159,7 @@ _08054458: .4byte sub_80C76A0
 _0805445C: .4byte 0x03001bac
 _08054460: .4byte c1_overworld
 _08054464: .4byte c2_overworld
-	thumb_func_end c2_load_new_map_2
+	thumb_func_end CB2_NewGame
 
 	thumb_func_start c2_whiteout
 c2_whiteout: @ 8054468
@@ -3175,7 +3175,7 @@ c2_whiteout: @ 8054468
 	lsrs r0, 24
 	cmp r0, 0x77
 	bls _080544BE
-	bl sub_80547A8
+	bl FieldClearVBlankHBlankCallbacks
 	bl sub_8074D08
 	bl ResetSafariZoneFlag_
 	bl sub_8052F5C
@@ -3208,10 +3208,10 @@ _080544D4: .4byte c1_overworld
 _080544D8: .4byte c2_overworld
 	thumb_func_end c2_whiteout
 
-	thumb_func_start c2_load_new_map
-c2_load_new_map: @ 80544DC
+	thumb_func_start CB2_LoadMap
+CB2_LoadMap: @ 80544DC
 	push {lr}
-	bl sub_80547A8
+	bl FieldClearVBlankHBlankCallbacks
 	bl script_env_1_init
 	bl script_env_2_disable
 	movs r0, 0
@@ -3226,11 +3226,11 @@ c2_load_new_map: @ 80544DC
 	.align 2, 0
 _08054500: .4byte sub_810CC80
 _08054504: .4byte 0x03001770
-_08054508: .4byte CB2_NewGame
-	thumb_func_end c2_load_new_map
+_08054508: .4byte CB2_LoadMap2
+	thumb_func_end CB2_LoadMap
 
-	thumb_func_start CB2_NewGame
-CB2_NewGame: @ 805450C
+	thumb_func_start CB2_LoadMap2
+CB2_LoadMap2: @ 805450C
 	push {lr}
 	ldr r0, _08054528
 	bl do_load_map_stuff_loop
@@ -3245,7 +3245,7 @@ CB2_NewGame: @ 805450C
 _08054528: .4byte 0x03001bac
 _0805452C: .4byte c1_overworld
 _08054530: .4byte c2_overworld
-	thumb_func_end CB2_NewGame
+	thumb_func_end CB2_LoadMap2
 
 	thumb_func_start sub_8054534
 sub_8054534: @ 8054534
@@ -3256,7 +3256,7 @@ sub_8054534: @ 8054534
 	ldrb r0, [r4]
 	cmp r0, 0
 	bne _08054554
-	bl sub_80547A8
+	bl FieldClearVBlankHBlankCallbacks
 	bl script_env_1_init
 	bl script_env_2_disable
 	movs r0, 0
@@ -3286,7 +3286,7 @@ _08054584: .4byte c2_overworld
 	thumb_func_start sub_8054588
 sub_8054588: @ 8054588
 	push {lr}
-	bl sub_80547A8
+	bl FieldClearVBlankHBlankCallbacks
 	ldr r0, _080545A0
 	ldr r1, _080545A4
 	str r1, [r0]
@@ -3336,7 +3336,7 @@ c2_exit_to_overworld_2_switch: @ 80545E4
 	.align 2, 0
 _080545F8: .4byte c2_exit_to_overworld_2_link
 _080545FC:
-	bl sub_80547A8
+	bl FieldClearVBlankHBlankCallbacks
 	ldr r0, _0805460C
 	bl SetMainCallback2
 _08054606:
@@ -3387,7 +3387,7 @@ _08054658: .4byte c2_overworld
 	thumb_func_start sub_805465C
 sub_805465C: @ 805465C
 	push {lr}
-	bl sub_80547A8
+	bl FieldClearVBlankHBlankCallbacks
 	bl sub_8074D08
 	bl sub_8054F70
 	ldr r0, _0805468C
@@ -3412,7 +3412,7 @@ _08054698: .4byte sub_8080A3C
 	thumb_func_start sub_805469C
 sub_805469C: @ 805469C
 	push {lr}
-	bl sub_80547A8
+	bl FieldClearVBlankHBlankCallbacks
 	ldr r1, _080546B0
 	ldr r0, _080546B4
 	str r0, [r1]
@@ -3427,7 +3427,7 @@ _080546B4: .4byte atk17_seteffectuser
 	thumb_func_start sub_80546B8
 sub_80546B8: @ 80546B8
 	push {lr}
-	bl sub_80547A8
+	bl FieldClearVBlankHBlankCallbacks
 	ldr r1, _080546CC
 	ldr r0, _080546D0
 	str r0, [r1]
@@ -3442,7 +3442,7 @@ _080546D0: .4byte sub_80809B0
 	thumb_func_start c2_exit_to_overworld_1_continue_scripts_restart_music
 c2_exit_to_overworld_1_continue_scripts_restart_music: @ 80546D4
 	push {lr}
-	bl sub_80547A8
+	bl FieldClearVBlankHBlankCallbacks
 	ldr r1, _080546E8
 	ldr r0, _080546EC
 	str r0, [r1]
@@ -3457,7 +3457,7 @@ _080546EC: .4byte sub_8080990
 	thumb_func_start sub_80546F0
 sub_80546F0: @ 80546F0
 	push {lr}
-	bl sub_80547A8
+	bl FieldClearVBlankHBlankCallbacks
 	ldr r1, _08054704
 	ldr r0, _08054708
 	str r0, [r1]
@@ -3493,7 +3493,7 @@ _08054730: .4byte 0x0202e828
 	thumb_func_start CB2_ContinueSavedGame
 CB2_ContinueSavedGame: @ 8054734
 	push {lr}
-	bl sub_80547A8
+	bl FieldClearVBlankHBlankCallbacks
 	bl sub_8074D08
 	bl ResetSafariZoneFlag_
 	bl sub_805338C
@@ -3515,7 +3515,7 @@ CB2_ContinueSavedGame: @ 8054734
 	bl SetMainCallback2
 	b _08054798
 	.align 2, 0
-_08054784: .4byte c2_load_new_map
+_08054784: .4byte CB2_LoadMap
 _08054788:
 	ldr r0, _0805479C
 	ldr r1, _080547A0
@@ -3532,8 +3532,8 @@ _080547A0: .4byte sub_805470C
 _080547A4: .4byte c1_overworld
 	thumb_func_end CB2_ContinueSavedGame
 
-	thumb_func_start sub_80547A8
-sub_80547A8: @ 80547A8
+	thumb_func_start FieldClearVBlankHBlankCallbacks
+FieldClearVBlankHBlankCallbacks: @ 80547A8
 	push {r4,lr}
 	ldr r4, _080547D8
 	ldrh r3, [r4]
@@ -3560,7 +3560,7 @@ sub_80547A8: @ 80547A8
 _080547D8: .4byte 0x04000208
 _080547DC: .4byte 0x04000200
 _080547E0: .4byte 0x0000fffd
-	thumb_func_end sub_80547A8
+	thumb_func_end FieldClearVBlankHBlankCallbacks
 
 	thumb_func_start SetFieldVBlankCallback
 SetFieldVBlankCallback: @ 80547E4
@@ -3638,7 +3638,7 @@ _08054854:
 	.4byte _08054924
 	.4byte _08054930
 _0805488C:
-	bl sub_80547A8
+	bl FieldClearVBlankHBlankCallbacks
 	bl script_env_1_init
 	bl script_env_2_disable
 	bl sub_8054F70
@@ -3751,7 +3751,7 @@ _08054958:
 	.4byte _08054A34
 	.4byte _08054A40
 _08054990:
-	bl sub_80547A8
+	bl FieldClearVBlankHBlankCallbacks
 	adds r0, r5, 0
 	bl sub_8053994
 	b _08054A38
@@ -3916,7 +3916,7 @@ _08054AB4:
 	.4byte _08054B6C
 	.4byte _08054B78
 _08054AEC:
-	bl sub_80547A8
+	bl FieldClearVBlankHBlankCallbacks
 	bl sub_8054BA8
 	b _08054B70
 _08054AF6:
