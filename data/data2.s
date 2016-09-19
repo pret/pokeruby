@@ -3852,8 +3852,14 @@ gUnknown_08216600:: @ 8216600
 
 	.string "\n$"
 
+@ used to initialize part of save block 1 when starting a new game
+	.align 2
 gUnknown_08216604:: @ 8216604
-	.incbin "baserom.gba", 0x00216604, 0x20
+	.space 11
+	.byte 0xFF
+	.space 10
+	.byte 0xFF
+	.space 9
 
 gUnknown_08216624:: @ 8216624
 	.incbin "baserom.gba", 0x00216624, 0x28
