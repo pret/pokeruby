@@ -20001,7 +20001,7 @@ _0804AC60:
 	ldr r1, [r0]
 	b _0804ACC2
 	.align 2, 0
-_0804AC6C: .4byte gUnknown_0820C0E4
+_0804AC6C: .4byte gSpritePalette_TradeScreenText
 _0804AC70: .4byte 0x03004824
 _0804AC74:
 	ldr r0, _0804AC80

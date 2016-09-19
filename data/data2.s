@@ -2710,8 +2710,9 @@ gSpriteAnimTable_820C024:: @ 820C024
 	.4byte gSpriteAnim_820C01C
 
 	.align 2
-gUnknownPal_0820C03C::
-	.incbin "baserom.gba", 0x0020c03c, 0x40
+TradeScreenTextPalette: @ 820C03C
+	.incbin "graphics/trade/text1.gbapal"
+	.incbin "graphics/trade/text2.gbapal" @ unused?
 
 	.align 2
 gUnknown_0820C07C:: @ 820C07C
@@ -2730,8 +2731,8 @@ gUnknown_0820C07C:: @ 820C07C
 	obj_tiles 0x0201dc00, 256, 0x00d4
 
 	.align 2
-gUnknown_0820C0E4:: @ 820C0E4
-	obj_pal gUnknownPal_0820C03C, 0x133d
+gSpritePalette_TradeScreenText:: @ 820C0E4
+	obj_pal TradeScreenTextPalette, 4925
 
 	.align 2
 gSpriteTemplate_820C0EC:: @ 820C0EC
