@@ -2,6 +2,11 @@
 
 gPlayTimeCounterState = 0x300057C;
 
+sScriptContext1Status = 0x30005B0;
+sScriptContext1 = 0x30005B8;
+sScriptContext2 = 0x3000630;
+sScriptContext2Enabled = 0x30006A4;
+
 /* .bss.code starts at 0x3000F60 */
 
 /* COMMON starts at 0x3001760 */

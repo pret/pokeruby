@@ -5,1701 +5,8 @@
 
 	.text
 
-	thumb_func_start script_env_init
-script_env_init: @ 8065394
-	push {lr}
-	adds r3, r0, 0
-	movs r0, 0
-	strb r0, [r3, 0x1]
-	str r0, [r3, 0x8]
-	strb r0, [r3]
-	str r0, [r3, 0x4]
-	str r1, [r3, 0x5C]
-	str r2, [r3, 0x60]
-	movs r2, 0
-	movs r1, 0x3
-	adds r0, r3, 0
-	adds r0, 0x70
-_080653AE:
-	str r2, [r0]
-	subs r0, 0x4
-	subs r1, 0x1
-	cmp r1, 0
-	bge _080653AE
-	adds r1, r3, 0
-	adds r1, 0xC
-	movs r2, 0
-	adds r0, r3, 0
-	adds r0, 0x58
-_080653C2:
-	str r2, [r0]
-	subs r0, 0x4
-	cmp r0, r1
-	bge _080653C2
-	pop {r0}
-	bx r0
-	thumb_func_end script_env_init
-
-	thumb_func_start script_setup_bytecode_script
-script_setup_bytecode_script: @ 80653D0
-	str r1, [r0, 0x8]
-	movs r1, 0x1
-	strb r1, [r0, 0x1]
-	movs r0, 0x1
-	bx lr
-	thumb_func_end script_setup_bytecode_script
-
-	thumb_func_start script_setup_asm_script
-script_setup_asm_script: @ 80653DC
-	movs r2, 0x2
-	strb r2, [r0, 0x1]
-	str r1, [r0, 0x4]
-	bx lr
-	thumb_func_end script_setup_asm_script
-
-	thumb_func_start script_stop
-script_stop: @ 80653E4
-	movs r1, 0
-	strb r1, [r0, 0x1]
-	str r1, [r0, 0x8]
-	bx lr
-	thumb_func_end script_stop
-
-	thumb_func_start sub_80653EC
-sub_80653EC: @ 80653EC
-	push {r4,lr}
-	adds r4, r0, 0
-	ldrb r0, [r4, 0x1]
-	cmp r0, 0
-	bne _080653FA
-_080653F6:
-	movs r0, 0
-	b _0806546C
-_080653FA:
-	ldrb r0, [r4, 0x1]
-	cmp r0, 0x1
-	beq _08065432
-	cmp r0, 0x1
-	bgt _0806540A
-	cmp r0, 0
-	beq _080653F6
-	b _0806546A
-_0806540A:
-	cmp r0, 0x2
-	bne _0806546A
-	ldr r0, [r4, 0x4]
-	cmp r0, 0
-	beq _0806542E
-	bl _call_via_r0
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _0806546A
-	strb r0, [r4, 0x1]
-	b _0806546A
-_08065424:
-	strb r2, [r4, 0x1]
-	b _080653F6
-_08065428:
-	movs r0, 0
-	strb r0, [r4, 0x1]
-	b _0806546C
-_0806542E:
-	movs r0, 0x1
-	strb r0, [r4, 0x1]
-_08065432:
-	ldr r2, [r4, 0x8]
-	cmp r2, 0
-	beq _08065424
-	ldr r0, _08065444
-	ldr r0, [r0]
-	cmp r2, r0
-	bne _08065448
-_08065440:
-	swi 0x2
-	b _08065440
-	.align 2, 0
-_08065444: .4byte gUnknown_083762D8
-_08065448:
-	ldrb r1, [r2]
-	adds r0, r2, 0x1
-	str r0, [r4, 0x8]
-	lsls r1, 2
-	ldr r0, [r4, 0x5C]
-	adds r1, r0, r1
-	ldr r0, [r4, 0x60]
-	cmp r1, r0
-	bcs _08065428
-	ldr r1, [r1]
-	adds r0, r4, 0
-	bl _call_via_r1
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _08065432
-_0806546A:
-	movs r0, 0x1
-_0806546C:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80653EC
-
-	thumb_func_start script_stack_push
-script_stack_push: @ 8065474
-	push {lr}
-	adds r2, r0, 0
-	adds r3, r1, 0
-	ldrb r1, [r2]
-	adds r0, r1, 0x1
-	cmp r0, 0x13
-	bgt _08065496
-	lsls r0, r1, 2
-	adds r1, r2, 0
-	adds r1, 0xC
-	adds r1, r0
-	str r3, [r1]
-	ldrb r0, [r2]
-	adds r0, 0x1
-	strb r0, [r2]
-	movs r0, 0
-	b _08065498
-_08065496:
-	movs r0, 0x1
-_08065498:
-	pop {r1}
-	bx r1
-	thumb_func_end script_stack_push
-
-	thumb_func_start script_stack_pop
-script_stack_pop: @ 806549C
-	push {lr}
-	adds r2, r0, 0
-	ldrb r0, [r2]
-	cmp r0, 0
-	beq _080654B8
-	subs r0, 0x1
-	strb r0, [r2]
-	ldrb r1, [r2]
-	lsls r1, 2
-	adds r0, r2, 0
-	adds r0, 0xC
-	adds r0, r1
-	ldr r0, [r0]
-	b _080654BA
-_080654B8:
-	movs r0, 0
-_080654BA:
-	pop {r1}
-	bx r1
-	thumb_func_end script_stack_pop
-
-	thumb_func_start script_jump
-script_jump: @ 80654C0
-	str r1, [r0, 0x8]
-	bx lr
-	thumb_func_end script_jump
-
-	thumb_func_start script_call
-script_call: @ 80654C4
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	adds r5, r1, 0
-	ldr r1, [r4, 0x8]
-	bl script_stack_push
-	str r5, [r4, 0x8]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end script_call
-
-	thumb_func_start script_return
-script_return: @ 80654D8
-	push {r4,lr}
-	adds r4, r0, 0
-	bl script_stack_pop
-	str r0, [r4, 0x8]
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end script_return
-
-	thumb_func_start script_read_halfword
-script_read_halfword: @ 80654E8
-	adds r3, r0, 0
-	ldr r2, [r3, 0x8]
-	ldrb r0, [r2]
-	adds r2, 0x1
-	str r2, [r3, 0x8]
-	ldrb r1, [r2]
-	lsls r1, 8
-	orrs r0, r1
-	adds r2, 0x1
-	str r2, [r3, 0x8]
-	bx lr
-	thumb_func_end script_read_halfword
-
-	thumb_func_start script_read_word
-script_read_word: @ 8065500
-	push {r4-r6,lr}
-	adds r3, r0, 0
-	ldr r0, [r3, 0x8]
-	ldrb r6, [r0]
-	adds r0, 0x1
-	str r0, [r3, 0x8]
-	ldrb r5, [r0]
-	adds r2, r0, 0x1
-	str r2, [r3, 0x8]
-	ldrb r4, [r0, 0x1]
-	adds r1, r2, 0x1
-	str r1, [r3, 0x8]
-	ldrb r0, [r2, 0x1]
-	adds r1, 0x1
-	str r1, [r3, 0x8]
-	lsls r0, 8
-	adds r0, r4
-	lsls r0, 8
-	adds r0, r5
-	lsls r0, 8
-	adds r0, r6
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end script_read_word
-
-	thumb_func_start script_env_2_enable
-script_env_2_enable: @ 8065530
-	ldr r1, _08065538
-	movs r0, 0x1
-	strb r0, [r1]
-	bx lr
-	.align 2, 0
-_08065538: .4byte 0x030006a4
-	thumb_func_end script_env_2_enable
-
-	thumb_func_start script_env_2_disable
-script_env_2_disable: @ 806553C
-	ldr r1, _08065544
-	movs r0, 0
-	strb r0, [r1]
-	bx lr
-	.align 2, 0
-_08065544: .4byte 0x030006a4
-	thumb_func_end script_env_2_disable
-
-	thumb_func_start script_env_2_is_enabled
-script_env_2_is_enabled: @ 8065548
-	ldr r0, _08065550
-	ldrb r0, [r0]
-	bx lr
-	.align 2, 0
-_08065550: .4byte 0x030006a4
-	thumb_func_end script_env_2_is_enabled
-
-	thumb_func_start script_env_1_init
-script_env_1_init: @ 8065554
-	push {lr}
-	ldr r0, _0806556C
-	ldr r1, _08065570
-	ldr r2, _08065574
-	bl script_env_init
-	ldr r1, _08065578
-	movs r0, 0x2
-	strb r0, [r1]
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0806556C: .4byte 0x030005b8
-_08065570: .4byte gScriptCmdTable
-_08065574: .4byte gScriptCmdTableEnd
-_08065578: .4byte 0x030005b0
-	thumb_func_end script_env_1_init
-
-	thumb_func_start script_env_2_run_current_script
-script_env_2_run_current_script: @ 806557C
-	push {r4,lr}
-	ldr r4, _080655A0
-	ldrb r0, [r4]
-	cmp r0, 0x2
-	beq _080655B0
-	cmp r0, 0x1
-	beq _080655B0
-	bl script_env_2_enable
-	ldr r0, _080655A4
-	bl sub_80653EC
-	lsls r0, 24
-	cmp r0, 0
-	beq _080655A8
-	movs r0, 0x1
-	b _080655B2
-	.align 2, 0
-_080655A0: .4byte 0x030005b0
-_080655A4: .4byte 0x030005b8
-_080655A8:
-	movs r0, 0x2
-	strb r0, [r4]
-	bl script_env_2_disable
-_080655B0:
-	movs r0, 0
-_080655B2:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end script_env_2_run_current_script
-
-	thumb_func_start script_env_1_execute_new_script
-script_env_1_execute_new_script: @ 80655B8
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	ldr r4, _080655E0
-	ldr r1, _080655E4
-	ldr r2, _080655E8
-	adds r0, r4, 0
-	bl script_env_init
-	adds r0, r4, 0
-	adds r1, r5, 0
-	bl script_setup_bytecode_script
-	bl script_env_2_enable
-	ldr r1, _080655EC
-	movs r0, 0
-	strb r0, [r1]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080655E0: .4byte 0x030005b8
-_080655E4: .4byte gScriptCmdTable
-_080655E8: .4byte gScriptCmdTableEnd
-_080655EC: .4byte 0x030005b0
-	thumb_func_end script_env_1_execute_new_script
-
-	thumb_func_start sub_80655F0
-sub_80655F0: @ 80655F0
-	ldr r1, _080655F8
-	movs r0, 0x1
-	strb r0, [r1]
-	bx lr
-	.align 2, 0
-_080655F8: .4byte 0x030005b0
-	thumb_func_end sub_80655F0
-
-	thumb_func_start script_env_2_enable_and_set_ctx_running
-script_env_2_enable_and_set_ctx_running: @ 80655FC
-	push {lr}
-	ldr r1, _0806560C
-	movs r0, 0
-	strb r0, [r1]
-	bl script_env_2_enable
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0806560C: .4byte 0x030005b0
-	thumb_func_end script_env_2_enable_and_set_ctx_running
-
-	thumb_func_start script_env_2_execute_new_script
-script_env_2_execute_new_script: @ 8065610
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	ldr r4, _0806563C
-	ldr r1, _08065640
-	ldr r2, _08065644
-	adds r0, r4, 0
-	bl script_env_init
-	adds r0, r4, 0
-	adds r1, r5, 0
-	bl script_setup_bytecode_script
-_08065628:
-	ldr r0, _0806563C
-	bl sub_80653EC
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	beq _08065628
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0806563C: .4byte 0x03000630
-_08065640: .4byte gScriptCmdTable
-_08065644: .4byte gScriptCmdTableEnd
-	thumb_func_end script_env_2_execute_new_script
-
-	thumb_func_start mapheader_get_tagged_pointer
-mapheader_get_tagged_pointer: @ 8065648
-	push {lr}
-	lsls r0, 24
-	lsrs r1, r0, 24
-	ldr r0, _08065660
-	ldr r2, [r0, 0x8]
-	cmp r2, 0
-	beq _0806565C
-_08065656:
-	ldrb r0, [r2]
-	cmp r0, 0
-	bne _08065664
-_0806565C:
-	movs r0, 0
-	b _08065682
-	.align 2, 0
-_08065660: .4byte 0x0202e828
-_08065664:
-	cmp r0, r1
-	beq _0806566C
-	adds r2, 0x5
-	b _08065656
-_0806566C:
-	adds r2, 0x1
-	ldrb r0, [r2]
-	ldrb r1, [r2, 0x1]
-	lsls r1, 8
-	adds r0, r1
-	ldrb r1, [r2, 0x2]
-	lsls r1, 16
-	adds r0, r1
-	ldrb r1, [r2, 0x3]
-	lsls r1, 24
-	adds r0, r1
-_08065682:
-	pop {r1}
-	bx r1
-	thumb_func_end mapheader_get_tagged_pointer
-
-	thumb_func_start mapheader_run_script_by_tag
-mapheader_run_script_by_tag: @ 8065688
-	push {lr}
-	lsls r0, 24
-	lsrs r0, 24
-	bl mapheader_get_tagged_pointer
-	cmp r0, 0
-	beq _0806569A
-	bl script_env_2_execute_new_script
-_0806569A:
-	pop {r0}
-	bx r0
-	thumb_func_end mapheader_run_script_by_tag
-
-	thumb_func_start mapheader_get_first_match_from_tagged_ptr_list
-mapheader_get_first_match_from_tagged_ptr_list: @ 80656A0
-	push {r4-r6,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	bl mapheader_get_tagged_pointer
-	adds r6, r0, 0
-	cmp r6, 0
-	beq _080656BC
-_080656B0:
-	ldrb r1, [r6]
-	ldrb r0, [r6, 0x1]
-	lsls r0, 8
-	orrs r1, r0
-	cmp r1, 0
-	bne _080656C0
-_080656BC:
-	movs r0, 0
-	b _080656FA
-_080656C0:
-	adds r6, 0x2
-	ldrb r5, [r6]
-	ldrb r0, [r6, 0x1]
-	lsls r0, 8
-	orrs r5, r0
-	adds r6, 0x2
-	adds r0, r1, 0
-	bl VarGet
-	adds r4, r0, 0
-	adds r0, r5, 0
-	bl VarGet
-	lsls r4, 16
-	lsls r0, 16
-	cmp r4, r0
-	beq _080656E6
-	adds r6, 0x4
-	b _080656B0
-_080656E6:
-	ldrb r0, [r6]
-	ldrb r1, [r6, 0x1]
-	lsls r1, 8
-	adds r0, r1
-	ldrb r1, [r6, 0x2]
-	lsls r1, 16
-	adds r0, r1
-	ldrb r1, [r6, 0x3]
-	lsls r1, 24
-	adds r0, r1
-_080656FA:
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end mapheader_get_first_match_from_tagged_ptr_list
-
-	thumb_func_start mapheader_run_script_with_tag_x1
-mapheader_run_script_with_tag_x1: @ 8065700
-	push {lr}
-	movs r0, 0x1
-	bl mapheader_run_script_by_tag
-	pop {r0}
-	bx r0
-	thumb_func_end mapheader_run_script_with_tag_x1
-
-	thumb_func_start mapheader_run_script_with_tag_x3
-mapheader_run_script_with_tag_x3: @ 806570C
-	push {lr}
-	movs r0, 0x3
-	bl mapheader_run_script_by_tag
-	pop {r0}
-	bx r0
-	thumb_func_end mapheader_run_script_with_tag_x3
-
-	thumb_func_start mapheader_run_script_with_tag_x5
-mapheader_run_script_with_tag_x5: @ 8065718
-	push {lr}
-	movs r0, 0x5
-	bl mapheader_run_script_by_tag
-	pop {r0}
-	bx r0
-	thumb_func_end mapheader_run_script_with_tag_x5
-
-	thumb_func_start mapheader_run_script_with_tag_x6
-mapheader_run_script_with_tag_x6: @ 8065724
-	push {lr}
-	movs r0, 0x6
-	bl mapheader_run_script_by_tag
-	pop {r0}
-	bx r0
-	thumb_func_end mapheader_run_script_with_tag_x6
-
-	thumb_func_start mapheader_run_first_tag2_script_list_match
-mapheader_run_first_tag2_script_list_match: @ 8065730
-	push {lr}
-	movs r0, 0x2
-	bl mapheader_get_first_match_from_tagged_ptr_list
-	cmp r0, 0
-	beq _08065744
-	bl script_env_1_execute_new_script
-	movs r0, 0x1
-	b _08065746
-_08065744:
-	movs r0, 0
-_08065746:
-	pop {r1}
-	bx r1
-	thumb_func_end mapheader_run_first_tag2_script_list_match
-
-	thumb_func_start mapheader_run_first_tag4_script_list_match
-mapheader_run_first_tag4_script_list_match: @ 806574C
-	push {lr}
-	movs r0, 0x4
-	bl mapheader_get_first_match_from_tagged_ptr_list
-	cmp r0, 0
-	beq _0806575C
-	bl script_env_2_execute_new_script
-_0806575C:
-	pop {r0}
-	bx r0
-	thumb_func_end mapheader_run_first_tag4_script_list_match
-
-	thumb_func_start sub_8065760
-sub_8065760: @ 8065760
-	push {r4,lr}
-	movs r2, 0
-	movs r1, 0
-	ldr r4, _08065780
-	ldr r3, _08065784
-_0806576A:
-	adds r0, r1, r3
-	ldrb r0, [r0]
-	adds r2, r0
-	adds r1, 0x1
-	cmp r1, r4
-	bls _0806576A
-	adds r0, r2, 0
-	pop {r4}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08065780: .4byte 0x000003e7
-_08065784: .4byte 0x02028dc8
-	thumb_func_end sub_8065760
-
-	thumb_func_start killram
-killram: @ 8065788
-	push {lr}
-	sub sp, 0x4
-	movs r0, 0
-	str r0, [sp]
-	ldr r1, _080657A0
-	ldr r2, _080657A4
-	mov r0, sp
-	bl CpuSet
-	add sp, 0x4
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080657A0: .4byte 0x02028dc4
-_080657A4: .4byte 0x050000fb
-	thumb_func_end killram
-
-	thumb_func_start sub_80657A8
-sub_80657A8: @ 80657A8
-	push {r4-r7,lr}
-	mov r7, r9
-	mov r6, r8
-	push {r6,r7}
-	mov r9, r0
-	ldr r0, [sp, 0x1C]
-	lsls r1, 16
-	lsrs r1, 16
-	mov r8, r1
-	lsls r2, 24
-	lsrs r7, r2, 24
-	lsls r3, 24
-	lsrs r6, r3, 24
-	lsls r0, 24
-	lsrs r5, r0, 24
-	ldr r4, _080657F4
-	bl killram
-	ldr r0, _080657F8
-	cmp r8, r0
-	bhi _080657FC
-	movs r0, 0x33
-	strb r0, [r4]
-	strb r7, [r4, 0x1]
-	strb r6, [r4, 0x2]
-	strb r5, [r4, 0x3]
-	adds r0, r4, 0x4
-	mov r1, r9
-	mov r2, r8
-	bl memcpy
-	bl sub_8065760
-	subs r1, r4, 0x4
-	str r0, [r1]
-	movs r0, 0x1
-	b _080657FE
-	.align 2, 0
-_080657F4: .4byte 0x02028dc8
-_080657F8: .4byte 0x000003e3
-_080657FC:
-	movs r0, 0
-_080657FE:
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80657A8
-
-	thumb_func_start sub_806580C
-sub_806580C: @ 806580C
-	push {r4-r6,lr}
-	adds r5, r1, 0
-	lsls r0, 24
-	lsrs r3, r0, 24
-	ldr r4, _08065854
-	ldr r6, _08065858
-	movs r0, 0
-	str r0, [r6]
-	ldrb r0, [r4]
-	cmp r0, 0x33
-	bne _08065864
-	ldrb r1, [r4, 0x1]
-	ldr r0, _0806585C
-	adds r2, r4, r0
-	movs r0, 0x4
-	ldrsb r0, [r2, r0]
-	cmp r1, r0
-	bne _08065864
-	ldrb r1, [r4, 0x2]
-	movs r0, 0x5
-	ldrsb r0, [r2, r0]
-	cmp r1, r0
-	bne _08065864
-	ldrb r0, [r4, 0x3]
-	cmp r0, r3
-	bne _08065864
-	bl sub_8065760
-	subs r1, r4, 0x4
-	ldr r1, [r1]
-	cmp r0, r1
-	bne _08065860
-	str r5, [r6]
-	adds r0, r4, 0x4
-	b _08065866
-	.align 2, 0
-_08065854: .4byte 0x02028dc8
-_08065858: .4byte 0x0202e8ac
-_0806585C: .4byte 0xffffc96c
-_08065860:
-	bl killram
-_08065864:
-	adds r0, r5, 0
-_08065866:
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_806580C
-
-	thumb_func_start s00_nop
-s00_nop: @ 806586C
-	movs r0, 0
-	bx lr
-	thumb_func_end s00_nop
-
-	thumb_func_start sub_8065870
-sub_8065870: @ 8065870
-	movs r0, 0
-	bx lr
-	thumb_func_end sub_8065870
-
-	thumb_func_start s02_end
-s02_end: @ 8065874
-	push {lr}
-	bl script_stop
-	movs r0, 0
-	pop {r1}
-	bx r1
-	thumb_func_end s02_end
-
-	thumb_func_start s24_execute_ASM_2
-s24_execute_ASM_2: @ 8065880
-	push {r4,lr}
-	adds r4, r0, 0
-	bl script_read_word
-	adds r1, r0, 0
-	adds r0, r4, 0
-	bl script_setup_asm_script
-	movs r0, 0x1
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end s24_execute_ASM_2
-
-	thumb_func_start sub_8065898
-sub_8065898: @ 8065898
-	push {lr}
-	bl script_read_halfword
-	lsls r0, 16
-	ldr r1, _080658B4
-	lsrs r0, 14
-	adds r0, r1
-	ldr r0, [r0]
-	bl _call_via_r0
-	movs r0, 0
-	pop {r1}
-	bx r1
-	.align 2, 0
-_080658B4: .4byte gSpecials
-	thumb_func_end sub_8065898
-
-	thumb_func_start sub_80658B8
-sub_80658B8: @ 80658B8
-	push {r4-r6,lr}
-	adds r5, r0, 0
-	bl script_read_halfword
-	lsls r0, 16
-	lsrs r0, 16
-	bl GetVarPointer
-	adds r6, r0, 0
-	ldr r4, _080658E8
-	adds r0, r5, 0
-	bl script_read_halfword
-	lsls r0, 16
-	lsrs r0, 14
-	adds r0, r4
-	ldr r0, [r0]
-	bl _call_via_r0
-	strh r0, [r6]
-	movs r0, 0
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_080658E8: .4byte gSpecials
-	thumb_func_end sub_80658B8
-
-	thumb_func_start sub_80658EC
-sub_80658EC: @ 80658EC
-	push {lr}
-	bl script_read_word
-	bl _call_via_r0
-	movs r0, 0
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80658EC
-
-	thumb_func_start sub_80658FC
-sub_80658FC: @ 80658FC
-	push {lr}
-	bl sub_80655F0
-	movs r0, 0x1
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80658FC
-
-	thumb_func_start s05_goto
-s05_goto: @ 8065908
-	push {r4,lr}
-	adds r4, r0, 0
-	bl script_read_word
-	adds r1, r0, 0
-	adds r0, r4, 0
-	bl script_jump
-	movs r0, 0
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end s05_goto
-
-	thumb_func_start s03_return
-s03_return: @ 8065920
-	push {lr}
-	bl script_return
-	movs r0, 0
-	pop {r1}
-	bx r1
-	thumb_func_end s03_return
-
-	thumb_func_start s04_call
-s04_call: @ 806592C
-	push {r4,lr}
-	adds r4, r0, 0
-	bl script_read_word
-	adds r1, r0, 0
-	adds r0, r4, 0
-	bl script_call
-	movs r0, 0
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end s04_call
-
-	thumb_func_start s06_if_jump
-s06_if_jump: @ 8065944
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	ldr r0, [r5, 0x8]
-	ldrb r4, [r0]
-	adds r0, 0x1
-	str r0, [r5, 0x8]
-	adds r0, r5, 0
-	bl script_read_word
-	adds r2, r0, 0
-	ldr r1, _0806597C
-	lsls r0, r4, 1
-	adds r0, r4
-	ldrb r3, [r5, 0x2]
-	adds r0, r3
-	adds r0, r1
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	bne _08065972
-	adds r0, r5, 0
-	adds r1, r2, 0
-	bl script_jump
-_08065972:
-	movs r0, 0
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_0806597C: .4byte gUnknown_083762DC
-	thumb_func_end s06_if_jump
-
-	thumb_func_start s07_if_call
-s07_if_call: @ 8065980
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	ldr r0, [r5, 0x8]
-	ldrb r4, [r0]
-	adds r0, 0x1
-	str r0, [r5, 0x8]
-	adds r0, r5, 0
-	bl script_read_word
-	adds r2, r0, 0
-	ldr r1, _080659B8
-	lsls r0, r4, 1
-	adds r0, r4
-	ldrb r3, [r5, 0x2]
-	adds r0, r3
-	adds r0, r1
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	bne _080659AE
-	adds r0, r5, 0
-	adds r1, r2, 0
-	bl script_call
-_080659AE:
-	movs r0, 0
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_080659B8: .4byte gUnknown_083762DC
-	thumb_func_end s07_if_call
-
-	thumb_func_start sB8_set_virtual_address
-sB8_set_virtual_address: @ 80659BC
-	push {r4,lr}
-	ldr r4, [r0, 0x8]
-	subs r4, 0x1
-	bl script_read_word
-	ldr r1, _080659D4
-	subs r0, r4
-	str r0, [r1]
-	movs r0, 0
-	pop {r4}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_080659D4: .4byte 0x0202e8b0
-	thumb_func_end sB8_set_virtual_address
-
-	thumb_func_start sB9_virtual_jump
-sB9_virtual_jump: @ 80659D8
-	push {r4,lr}
-	adds r4, r0, 0
-	bl script_read_word
-	adds r1, r0, 0
-	ldr r0, _080659F8
-	ldr r0, [r0]
-	subs r1, r0
-	adds r0, r4, 0
-	bl script_jump
-	movs r0, 0
-	pop {r4}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_080659F8: .4byte 0x0202e8b0
-	thumb_func_end sB9_virtual_jump
-
-	thumb_func_start sBA_virtual_call
-sBA_virtual_call: @ 80659FC
-	push {r4,lr}
-	adds r4, r0, 0
-	bl script_read_word
-	adds r1, r0, 0
-	ldr r0, _08065A1C
-	ldr r0, [r0]
-	subs r1, r0
-	adds r0, r4, 0
-	bl script_call
-	movs r0, 0
-	pop {r4}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08065A1C: .4byte 0x0202e8b0
-	thumb_func_end sBA_virtual_call
-
-	thumb_func_start sBB_virtual_if_jump
-sBB_virtual_if_jump: @ 8065A20
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	ldr r0, [r5, 0x8]
-	ldrb r4, [r0]
-	adds r0, 0x1
-	str r0, [r5, 0x8]
-	adds r0, r5, 0
-	bl script_read_word
-	ldr r1, _08065A5C
-	ldr r1, [r1]
-	subs r2, r0, r1
-	ldr r1, _08065A60
-	lsls r0, r4, 1
-	adds r0, r4
-	ldrb r3, [r5, 0x2]
-	adds r0, r3
-	adds r0, r1
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	bne _08065A52
-	adds r0, r5, 0
-	adds r1, r2, 0
-	bl script_jump
-_08065A52:
-	movs r0, 0
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08065A5C: .4byte 0x0202e8b0
-_08065A60: .4byte gUnknown_083762DC
-	thumb_func_end sBB_virtual_if_jump
-
-	thumb_func_start sBC_virtual_if_call
-sBC_virtual_if_call: @ 8065A64
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	ldr r0, [r5, 0x8]
-	ldrb r4, [r0]
-	adds r0, 0x1
-	str r0, [r5, 0x8]
-	adds r0, r5, 0
-	bl script_read_word
-	ldr r1, _08065AA0
-	ldr r1, [r1]
-	subs r2, r0, r1
-	ldr r1, _08065AA4
-	lsls r0, r4, 1
-	adds r0, r4
-	ldrb r3, [r5, 0x2]
-	adds r0, r3
-	adds r0, r1
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	bne _08065A96
-	adds r0, r5, 0
-	adds r1, r2, 0
-	bl script_call
-_08065A96:
-	movs r0, 0
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08065AA0: .4byte 0x0202e8b0
-_08065AA4: .4byte gUnknown_083762DC
-	thumb_func_end sBC_virtual_if_call
-
-	thumb_func_start s08_jumpstd
-s08_jumpstd: @ 8065AA8
-	push {lr}
-	adds r2, r0, 0
-	ldr r0, [r2, 0x8]
-	ldrb r1, [r0]
-	adds r0, 0x1
-	str r0, [r2, 0x8]
-	lsls r1, 2
-	ldr r0, _08065AD0
-	adds r1, r0
-	ldr r0, _08065AD4
-	cmp r1, r0
-	bcs _08065AC8
-	ldr r1, [r1]
-	adds r0, r2, 0
-	bl script_jump
-_08065AC8:
-	movs r0, 0
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08065AD0: .4byte gStdScripts
-_08065AD4: .4byte gStdScripts_End
-	thumb_func_end s08_jumpstd
-
-	thumb_func_start s09_callstd
-s09_callstd: @ 8065AD8
-	push {lr}
-	adds r2, r0, 0
-	ldr r0, [r2, 0x8]
-	ldrb r1, [r0]
-	adds r0, 0x1
-	str r0, [r2, 0x8]
-	lsls r1, 2
-	ldr r0, _08065B00
-	adds r1, r0
-	ldr r0, _08065B04
-	cmp r1, r0
-	bcs _08065AF8
-	ldr r1, [r1]
-	adds r0, r2, 0
-	bl script_call
-_08065AF8:
-	movs r0, 0
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08065B00: .4byte gStdScripts
-_08065B04: .4byte gStdScripts_End
-	thumb_func_end s09_callstd
-
-	thumb_func_start s0A_jumpstd_if
-s0A_jumpstd_if: @ 8065B08
-	push {r4,lr}
-	adds r3, r0, 0
-	ldr r0, [r3, 0x8]
-	ldrb r2, [r0]
-	adds r0, 0x1
-	str r0, [r3, 0x8]
-	ldrb r4, [r0]
-	adds r0, 0x1
-	str r0, [r3, 0x8]
-	ldr r1, _08065B48
-	lsls r0, r2, 1
-	adds r0, r2
-	ldrb r2, [r3, 0x2]
-	adds r0, r2
-	adds r0, r1
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	bne _08065B40
-	lsls r0, r4, 2
-	ldr r1, _08065B4C
-	adds r1, r0, r1
-	ldr r0, _08065B50
-	cmp r1, r0
-	bcs _08065B40
-	ldr r1, [r1]
-	adds r0, r3, 0
-	bl script_jump
-_08065B40:
-	movs r0, 0
-	pop {r4}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08065B48: .4byte gUnknown_083762DC
-_08065B4C: .4byte gStdScripts
-_08065B50: .4byte gStdScripts_End
-	thumb_func_end s0A_jumpstd_if
-
-	thumb_func_start s0B_callstd_if
-s0B_callstd_if: @ 8065B54
-	push {r4,lr}
-	adds r3, r0, 0
-	ldr r0, [r3, 0x8]
-	ldrb r2, [r0]
-	adds r0, 0x1
-	str r0, [r3, 0x8]
-	ldrb r4, [r0]
-	adds r0, 0x1
-	str r0, [r3, 0x8]
-	ldr r1, _08065B94
-	lsls r0, r2, 1
-	adds r0, r2
-	ldrb r2, [r3, 0x2]
-	adds r0, r2
-	adds r0, r1
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	bne _08065B8C
-	lsls r0, r4, 2
-	ldr r1, _08065B98
-	adds r1, r0, r1
-	ldr r0, _08065B9C
-	cmp r1, r0
-	bcs _08065B8C
-	ldr r1, [r1]
-	adds r0, r3, 0
-	bl script_call
-_08065B8C:
-	movs r0, 0
-	pop {r4}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08065B94: .4byte gUnknown_083762DC
-_08065B98: .4byte gStdScripts
-_08065B9C: .4byte gStdScripts_End
-	thumb_func_end s0B_callstd_if
-
-	thumb_func_start s0C_restore_execution_after_sCF
-s0C_restore_execution_after_sCF: @ 8065BA0
-	push {lr}
-	ldr r1, _08065BB0
-	ldr r1, [r1]
-	bl script_jump
-	movs r0, 0
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08065BB0: .4byte 0x0202e8ac
-	thumb_func_end s0C_restore_execution_after_sCF
-
-	thumb_func_start s0D_endscript_killram
-s0D_endscript_killram: @ 8065BB4
-	push {r4,lr}
-	adds r4, r0, 0
-	bl killram
-	adds r0, r4, 0
-	bl script_stop
-	movs r0, 0x1
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end s0D_endscript_killram
-
-	thumb_func_start s0E_set_byte
-s0E_set_byte: @ 8065BCC
-	push {lr}
-	ldr r1, [r0, 0x8]
-	ldrb r2, [r1]
-	adds r1, 0x1
-	str r1, [r0, 0x8]
-	adds r0, r2, 0
-	bl sub_8126160
-	movs r0, 0
-	pop {r1}
-	bx r1
-	thumb_func_end s0E_set_byte
-
-	thumb_func_start s0F_u32_var_to_const
-s0F_u32_var_to_const: @ 8065BE4
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	ldr r0, [r4, 0x8]
-	ldrb r5, [r0]
-	adds r0, 0x1
-	str r0, [r4, 0x8]
-	adds r0, r4, 0
-	bl script_read_word
-	lsls r5, 2
-	adds r4, 0x64
-	adds r4, r5
-	str r0, [r4]
-	movs r0, 0
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end s0F_u32_var_to_const
-
-	thumb_func_start s12_u32_var_to_ptr
-s12_u32_var_to_ptr: @ 8065C08
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	ldr r0, [r4, 0x8]
-	ldrb r5, [r0]
-	adds r0, 0x1
-	str r0, [r4, 0x8]
-	adds r0, r4, 0
-	bl script_read_word
-	lsls r5, 2
-	adds r4, 0x64
-	adds r4, r5
-	ldrb r0, [r0]
-	str r0, [r4]
-	movs r0, 0
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end s12_u32_var_to_ptr
-
-	thumb_func_start s11_u8_ptr_to_const
-s11_u8_ptr_to_const: @ 8065C2C
-	push {r4,lr}
-	ldr r1, [r0, 0x8]
-	ldrb r4, [r1]
-	adds r1, 0x1
-	str r1, [r0, 0x8]
-	bl script_read_word
-	strb r4, [r0]
-	movs r0, 0
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end s11_u8_ptr_to_const
-
-	thumb_func_start sub_8065C44
-sub_8065C44: @ 8065C44
-	ldr r1, [r0, 0x8]
-	ldrb r3, [r1]
-	adds r1, 0x1
-	str r1, [r0, 0x8]
-	lsls r3, 2
-	adds r2, r0, 0
-	adds r2, 0x64
-	adds r2, r3
-	ldrb r3, [r1]
-	str r3, [r2]
-	adds r1, 0x1
-	str r1, [r0, 0x8]
-	movs r0, 0
-	bx lr
-	thumb_func_end sub_8065C44
-
-	thumb_func_start s13_u8_var_to_ptr
-s13_u8_var_to_ptr: @ 8065C60
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	ldr r0, [r4, 0x8]
-	ldrb r5, [r0]
-	adds r0, 0x1
-	str r0, [r4, 0x8]
-	adds r0, r4, 0
-	bl script_read_word
-	lsls r5, 2
-	adds r4, 0x64
-	adds r4, r5
-	ldr r1, [r4]
-	strb r1, [r0]
-	movs r0, 0
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end s13_u8_var_to_ptr
-
-	thumb_func_start s14_u32_var_to_var
-s14_u32_var_to_var: @ 8065C84
-	ldr r1, [r0, 0x8]
-	ldrb r3, [r1]
-	adds r1, 0x1
-	str r1, [r0, 0x8]
-	ldrb r2, [r1]
-	adds r1, 0x1
-	str r1, [r0, 0x8]
-	lsls r3, 2
-	adds r0, 0x64
-	adds r3, r0, r3
-	lsls r2, 2
-	adds r0, r2
-	ldr r0, [r0]
-	str r0, [r3]
-	movs r0, 0
-	bx lr
-	thumb_func_end s14_u32_var_to_var
-
-	thumb_func_start s15_u8_ptr_to_ptr
-s15_u8_ptr_to_ptr: @ 8065CA4
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	bl script_read_word
-	adds r5, r0, 0
-	adds r0, r4, 0
-	bl script_read_word
-	ldrb r0, [r0]
-	strb r0, [r5]
-	movs r0, 0
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end s15_u8_ptr_to_ptr
-
-	thumb_func_start s16_u16_gvar_to_const
-s16_u16_gvar_to_const: @ 8065CC0
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	bl script_read_halfword
-	lsls r0, 16
-	lsrs r0, 16
-	bl GetVarPointer
-	adds r4, r0, 0
-	adds r0, r5, 0
-	bl script_read_halfword
-	strh r0, [r4]
-	movs r0, 0
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end s16_u16_gvar_to_const
-
-	thumb_func_start s19_u16_gvar_gvar
-s19_u16_gvar_gvar: @ 8065CE4
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	bl script_read_halfword
-	lsls r0, 16
-	lsrs r0, 16
-	bl GetVarPointer
-	adds r5, r0, 0
-	adds r0, r4, 0
-	bl script_read_halfword
-	lsls r0, 16
-	lsrs r0, 16
-	bl GetVarPointer
-	ldrh r0, [r0]
-	strh r0, [r5]
-	movs r0, 0
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end s19_u16_gvar_gvar
-
-	thumb_func_start s1A_u16_gvar_gvar
-s1A_u16_gvar_gvar: @ 8065D10
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	bl script_read_halfword
-	lsls r0, 16
-	lsrs r0, 16
-	bl GetVarPointer
-	adds r5, r0, 0
-	adds r0, r4, 0
-	bl script_read_halfword
-	lsls r0, 16
-	lsrs r0, 16
-	bl VarGet
-	strh r0, [r5]
-	movs r0, 0
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end s1A_u16_gvar_gvar
-
-	thumb_func_start compare_012
-compare_012: @ 8065D3C
-	push {lr}
-	lsls r0, 16
-	lsrs r0, 16
-	lsls r1, 16
-	lsrs r1, 16
-	cmp r0, r1
-	bcs _08065D4E
-	movs r0, 0
-	b _08065D58
-_08065D4E:
-	cmp r0, r1
-	beq _08065D56
-	movs r0, 0x2
-	b _08065D58
-_08065D56:
-	movs r0, 0x1
-_08065D58:
-	pop {r1}
-	bx r1
-	thumb_func_end compare_012
-
-	thumb_func_start s1B_cmp_u8_var_var
-s1B_cmp_u8_var_var: @ 8065D5C
-	push {r4,lr}
-	adds r4, r0, 0
-	ldr r2, [r4, 0x8]
-	ldrb r0, [r2]
-	lsls r0, 2
-	adds r3, r4, 0
-	adds r3, 0x64
-	adds r0, r3, r0
-	ldrb r0, [r0]
-	adds r2, 0x1
-	str r2, [r4, 0x8]
-	ldrb r1, [r2]
-	lsls r1, 2
-	adds r3, r1
-	ldrb r1, [r3]
-	adds r2, 0x1
-	str r2, [r4, 0x8]
-	bl compare_012
-	strb r0, [r4, 0x2]
-	movs r0, 0
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end s1B_cmp_u8_var_var
-
-	thumb_func_start s1C_cmp_u8_var_const
-s1C_cmp_u8_var_const: @ 8065D8C
-	push {r4,lr}
-	adds r4, r0, 0
-	ldr r2, [r4, 0x8]
-	ldrb r1, [r2]
-	lsls r1, 2
-	adds r0, 0x64
-	adds r0, r1
-	ldrb r0, [r0]
-	adds r2, 0x1
-	str r2, [r4, 0x8]
-	ldrb r1, [r2]
-	adds r2, 0x1
-	str r2, [r4, 0x8]
-	bl compare_012
-	strb r0, [r4, 0x2]
-	movs r0, 0
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end s1C_cmp_u8_var_const
-
-	thumb_func_start s1D_cmp_u8_var_ptr
-s1D_cmp_u8_var_ptr: @ 8065DB4
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	ldr r2, [r4, 0x8]
-	ldrb r1, [r2]
-	lsls r1, 2
-	adds r0, 0x64
-	adds r0, r1
-	ldrb r5, [r0]
-	adds r2, 0x1
-	str r2, [r4, 0x8]
-	adds r0, r4, 0
-	bl script_read_word
-	ldrb r1, [r0]
-	adds r0, r5, 0
-	bl compare_012
-	strb r0, [r4, 0x2]
-	movs r0, 0
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end s1D_cmp_u8_var_ptr
-
-	thumb_func_start s1E_cmp_u8_ptr_var
-s1E_cmp_u8_ptr_var: @ 8065DE0
-	push {r4,lr}
-	adds r4, r0, 0
-	bl script_read_word
-	ldrb r0, [r0]
-	ldr r3, [r4, 0x8]
-	ldrb r2, [r3]
-	lsls r2, 2
-	adds r1, r4, 0
-	adds r1, 0x64
-	adds r1, r2
-	ldrb r1, [r1]
-	adds r3, 0x1
-	str r3, [r4, 0x8]
-	bl compare_012
-	strb r0, [r4, 0x2]
-	movs r0, 0
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end s1E_cmp_u8_ptr_var
-
-	thumb_func_start s1F_cmp_u8_ptr_const
-s1F_cmp_u8_ptr_const: @ 8065E0C
-	push {r4,lr}
-	adds r4, r0, 0
-	bl script_read_word
-	ldrb r0, [r0]
-	ldr r2, [r4, 0x8]
-	ldrb r1, [r2]
-	adds r2, 0x1
-	str r2, [r4, 0x8]
-	bl compare_012
-	strb r0, [r4, 0x2]
-	movs r0, 0
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end s1F_cmp_u8_ptr_const
-
-	thumb_func_start s20_cmp_u8_ptr_ptr
-s20_cmp_u8_ptr_ptr: @ 8065E2C
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	bl script_read_word
-	ldrb r5, [r0]
-	adds r0, r4, 0
-	bl script_read_word
-	ldrb r1, [r0]
-	adds r0, r5, 0
-	bl compare_012
-	strb r0, [r4, 0x2]
-	movs r0, 0
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end s20_cmp_u8_ptr_ptr
-
-	thumb_func_start s21_cmp_u16_gvar_const
-s21_cmp_u16_gvar_const: @ 8065E50
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	bl script_read_halfword
-	lsls r0, 16
-	lsrs r0, 16
-	bl GetVarPointer
-	ldrh r5, [r0]
-	adds r0, r4, 0
-	bl script_read_halfword
-	adds r1, r0, 0
-	lsls r1, 16
-	lsrs r1, 16
-	adds r0, r5, 0
-	bl compare_012
-	strb r0, [r4, 0x2]
-	movs r0, 0
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end s21_cmp_u16_gvar_const
-
-	thumb_func_start s22_cmp_u16_gvar_gvar
-s22_cmp_u16_gvar_gvar: @ 8065E80
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	bl script_read_halfword
-	lsls r0, 16
-	lsrs r0, 16
-	bl GetVarPointer
-	adds r5, r0, 0
-	adds r0, r4, 0
-	bl script_read_halfword
-	lsls r0, 16
-	lsrs r0, 16
-	bl GetVarPointer
-	ldrh r2, [r5]
-	ldrh r1, [r0]
-	adds r0, r2, 0
-	bl compare_012
-	strb r0, [r4, 0x2]
-	movs r0, 0
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end s22_cmp_u16_gvar_gvar
-
-	thumb_func_start s17_u16_gvar_add_const
-s17_u16_gvar_add_const: @ 8065EB4
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	bl script_read_halfword
-	lsls r0, 16
-	lsrs r0, 16
-	bl GetVarPointer
-	adds r4, r0, 0
-	adds r0, r5, 0
-	bl script_read_halfword
-	ldrh r1, [r4]
-	adds r0, r1
-	strh r0, [r4]
-	movs r0, 0
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end s17_u16_gvar_add_const
-
-	thumb_func_start sub_8065EDC
-sub_8065EDC: @ 8065EDC
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	bl script_read_halfword
-	lsls r0, 16
-	lsrs r0, 16
-	bl GetVarPointer
-	adds r5, r0, 0
-	adds r0, r4, 0
-	bl script_read_halfword
-	lsls r0, 16
-	lsrs r0, 16
-	bl VarGet
-	ldrh r1, [r5]
-	subs r1, r0
-	strh r1, [r5]
-	movs r0, 0
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8065EDC
-
-	thumb_func_start s8F_get_random_val
-s8F_get_random_val: @ 8065F0C
-	push {r4,r5,lr}
-	bl script_read_halfword
-	lsls r0, 16
-	lsrs r0, 16
-	bl VarGet
-	adds r4, r0, 0
-	lsls r4, 16
-	lsrs r4, 16
-	ldr r5, _08065F3C
-	bl Random
-	lsls r0, 16
-	lsrs r0, 16
-	adds r1, r4, 0
-	bl __umodsi3
-	strh r0, [r5]
-	movs r0, 0
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08065F3C: .4byte 0x0202e8dc
-	thumb_func_end s8F_get_random_val
-
-	thumb_func_start sub_8065F40
-sub_8065F40: @ 8065F40
+	thumb_func_start ScrCmd_additem
+ScrCmd_additem: @ 8065F40
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	bl script_read_halfword
@@ -1729,10 +36,10 @@ sub_8065F40: @ 8065F40
 	bx r1
 	.align 2, 0
 _08065F80: .4byte 0x0202e8dc
-	thumb_func_end sub_8065F40
+	thumb_func_end ScrCmd_additem
 
-	thumb_func_start sub_8065F84
-sub_8065F84: @ 8065F84
+	thumb_func_start ScrCmd_removeitem
+ScrCmd_removeitem: @ 8065F84
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	bl script_read_halfword
@@ -1762,10 +69,10 @@ sub_8065F84: @ 8065F84
 	bx r1
 	.align 2, 0
 _08065FC4: .4byte 0x0202e8dc
-	thumb_func_end sub_8065F84
+	thumb_func_end ScrCmd_removeitem
 
-	thumb_func_start sub_8065FC8
-sub_8065FC8: @ 8065FC8
+	thumb_func_start ScrCmd_checkitemspace
+ScrCmd_checkitemspace: @ 8065FC8
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	bl script_read_halfword
@@ -1795,10 +102,10 @@ sub_8065FC8: @ 8065FC8
 	bx r1
 	.align 2, 0
 _08066008: .4byte 0x0202e8dc
-	thumb_func_end sub_8065FC8
+	thumb_func_end ScrCmd_checkitemspace
 
-	thumb_func_start sub_806600C
-sub_806600C: @ 806600C
+	thumb_func_start ScrCmd_checkitem
+ScrCmd_checkitem: @ 806600C
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	bl script_read_halfword
@@ -1828,10 +135,10 @@ sub_806600C: @ 806600C
 	bx r1
 	.align 2, 0
 _0806604C: .4byte 0x0202e8dc
-	thumb_func_end sub_806600C
+	thumb_func_end ScrCmd_checkitem
 
-	thumb_func_start s48_get_item_type
-s48_get_item_type: @ 8066050
+	thumb_func_start ScrCmd_checkitemtype
+ScrCmd_checkitemtype: @ 8066050
 	push {r4,lr}
 	bl script_read_halfword
 	lsls r0, 16
@@ -1850,10 +157,10 @@ s48_get_item_type: @ 8066050
 	bx r1
 	.align 2, 0
 _08066078: .4byte 0x0202e8dc
-	thumb_func_end s48_get_item_type
+	thumb_func_end ScrCmd_checkitemtype
 
-	thumb_func_start sub_806607C
-sub_806607C: @ 806607C
+	thumb_func_start ScrCmd_addpcitem
+ScrCmd_addpcitem: @ 806607C
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	bl script_read_halfword
@@ -1883,10 +190,10 @@ sub_806607C: @ 806607C
 	bx r1
 	.align 2, 0
 _080660BC: .4byte 0x0202e8dc
-	thumb_func_end sub_806607C
+	thumb_func_end ScrCmd_addpcitem
 
-	thumb_func_start sub_80660C0
-sub_80660C0: @ 80660C0
+	thumb_func_start ScrCmd_checkpcitem
+ScrCmd_checkpcitem: @ 80660C0
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	bl script_read_halfword
@@ -1916,10 +223,10 @@ sub_80660C0: @ 80660C0
 	bx r1
 	.align 2, 0
 _08066100: .4byte 0x0202e8dc
-	thumb_func_end sub_80660C0
+	thumb_func_end ScrCmd_checkpcitem
 
-	thumb_func_start sub_8066104
-sub_8066104: @ 8066104
+	thumb_func_start ScrCmd_adddecor
+ScrCmd_adddecor: @ 8066104
 	push {r4,lr}
 	bl script_read_halfword
 	lsls r0, 16
@@ -1938,10 +245,10 @@ sub_8066104: @ 8066104
 	bx r1
 	.align 2, 0
 _0806612C: .4byte 0x0202e8dc
-	thumb_func_end sub_8066104
+	thumb_func_end ScrCmd_adddecor
 
-	thumb_func_start sub_8066130
-sub_8066130: @ 8066130
+	thumb_func_start ScrCmd_removedecor
+ScrCmd_removedecor: @ 8066130
 	push {r4,lr}
 	bl script_read_halfword
 	lsls r0, 16
@@ -1960,10 +267,10 @@ sub_8066130: @ 8066130
 	bx r1
 	.align 2, 0
 _08066158: .4byte 0x0202e8dc
-	thumb_func_end sub_8066130
+	thumb_func_end ScrCmd_removedecor
 
-	thumb_func_start sub_806615C
-sub_806615C: @ 806615C
+	thumb_func_start ScrCmd_checkdecor
+ScrCmd_checkdecor: @ 806615C
 	push {r4,lr}
 	bl script_read_halfword
 	lsls r0, 16
@@ -1982,10 +289,10 @@ sub_806615C: @ 806615C
 	bx r1
 	.align 2, 0
 _08066184: .4byte 0x0202e8dc
-	thumb_func_end sub_806615C
+	thumb_func_end ScrCmd_checkdecor
 
-	thumb_func_start sub_8066188
-sub_8066188: @ 8066188
+	thumb_func_start ScrCmd_testdecor
+ScrCmd_testdecor: @ 8066188
 	push {r4,lr}
 	bl script_read_halfword
 	lsls r0, 16
@@ -2004,10 +311,10 @@ sub_8066188: @ 8066188
 	bx r1
 	.align 2, 0
 _080661B0: .4byte 0x0202e8dc
-	thumb_func_end sub_8066188
+	thumb_func_end ScrCmd_testdecor
 
-	thumb_func_start s29_flag_set
-s29_flag_set: @ 80661B4
+	thumb_func_start ScrCmd_setflag
+ScrCmd_setflag: @ 80661B4
 	push {lr}
 	bl script_read_halfword
 	lsls r0, 16
@@ -2016,10 +323,10 @@ s29_flag_set: @ 80661B4
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end s29_flag_set
+	thumb_func_end ScrCmd_setflag
 
-	thumb_func_start s2A_flag_clear
-s2A_flag_clear: @ 80661C8
+	thumb_func_start ScrCmd_clearflag
+ScrCmd_clearflag: @ 80661C8
 	push {lr}
 	bl script_read_halfword
 	lsls r0, 16
@@ -2028,10 +335,10 @@ s2A_flag_clear: @ 80661C8
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end s2A_flag_clear
+	thumb_func_end ScrCmd_clearflag
 
-	thumb_func_start s2B_flag_check
-s2B_flag_check: @ 80661DC
+	thumb_func_start ScrCmd_checkflag
+ScrCmd_checkflag: @ 80661DC
 	push {r4,lr}
 	adds r4, r0, 0
 	bl script_read_halfword
@@ -2043,10 +350,10 @@ s2B_flag_check: @ 80661DC
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end s2B_flag_check
+	thumb_func_end ScrCmd_checkflag
 
-	thumb_func_start sC3_unknown
-sC3_unknown: @ 80661F8
+	thumb_func_start ScrCmd_inccounter
+ScrCmd_inccounter: @ 80661F8
 	push {lr}
 	ldr r1, [r0, 0x8]
 	ldrb r2, [r1]
@@ -2057,10 +364,10 @@ sC3_unknown: @ 80661F8
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sC3_unknown
+	thumb_func_end ScrCmd_inccounter
 
-	thumb_func_start s9A_unknown
-s9A_unknown: @ 8066210
+	thumb_func_start ScrCmd_lighten
+ScrCmd_lighten: @ 8066210
 	push {lr}
 	ldr r1, [r0, 0x8]
 	ldrb r2, [r1]
@@ -2072,10 +379,10 @@ s9A_unknown: @ 8066210
 	movs r0, 0x1
 	pop {r1}
 	bx r1
-	thumb_func_end s9A_unknown
+	thumb_func_end ScrCmd_lighten
 
-	thumb_func_start sub_806622C
-sub_806622C: @ 806622C
+	thumb_func_start ScrCmd_darken
+ScrCmd_darken: @ 806622C
 	push {lr}
 	bl script_read_halfword
 	lsls r0, 16
@@ -2087,7 +394,7 @@ sub_806622C: @ 806622C
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806622C
+	thumb_func_end ScrCmd_darken
 
 	thumb_func_start sub_8066248
 sub_8066248: @ 8066248
@@ -2109,8 +416,8 @@ _08066262:
 	bx r1
 	thumb_func_end sub_8066248
 
-	thumb_func_start s97_screen_special_effect
-s97_screen_special_effect: @ 8066268
+	thumb_func_start ScrCmd_fadescreen
+ScrCmd_fadescreen: @ 8066268
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r1, [r4, 0x8]
@@ -2128,10 +435,10 @@ s97_screen_special_effect: @ 8066268
 	bx r1
 	.align 2, 0
 _0806628C: .4byte sub_8066248
-	thumb_func_end s97_screen_special_effect
+	thumb_func_end ScrCmd_fadescreen
 
-	thumb_func_start sub_8066290
-sub_8066290: @ 8066290
+	thumb_func_start ScrCmd_fadescreendelay
+ScrCmd_fadescreendelay: @ 8066290
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r2, [r4, 0x8]
@@ -2151,7 +458,7 @@ sub_8066290: @ 8066290
 	bx r1
 	.align 2, 0
 _080662B8: .4byte sub_8066248
-	thumb_func_end sub_8066290
+	thumb_func_end ScrCmd_fadescreendelay
 
 	thumb_func_start s28_pause_asm
 s28_pause_asm: @ 80662BC
@@ -2174,8 +481,8 @@ _080662D6:
 	bx r1
 	thumb_func_end s28_pause_asm
 
-	thumb_func_start s28_pause
-s28_pause: @ 80662DC
+	thumb_func_start ScrCmd_pause
+ScrCmd_pause: @ 80662DC
 	push {r4,lr}
 	adds r4, r0, 0
 	bl script_read_halfword
@@ -2191,10 +498,10 @@ s28_pause: @ 80662DC
 	.align 2, 0
 _080662F8: .4byte 0x0202e8b4
 _080662FC: .4byte s28_pause_asm
-	thumb_func_end s28_pause
+	thumb_func_end ScrCmd_pause
 
-	thumb_func_start s2C_unknown
-s2C_unknown: @ 8066300
+	thumb_func_start ScrCmd_compareflags
+ScrCmd_compareflags: @ 8066300
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	bl script_read_halfword
@@ -2218,19 +525,19 @@ s2C_unknown: @ 8066300
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end s2C_unknown
+	thumb_func_end ScrCmd_compareflags
 
-	thumb_func_start s2D_unknown
-s2D_unknown: @ 8066338
+	thumb_func_start ScrCmd_checkdailyflags
+ScrCmd_checkdailyflags: @ 8066338
 	push {lr}
 	bl InTrainerHill
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end s2D_unknown
+	thumb_func_end ScrCmd_checkdailyflags
 
-	thumb_func_start s2E_unknown
-s2E_unknown: @ 8066344
+	thumb_func_start ScrCmd_resetvars
+ScrCmd_resetvars: @ 8066344
 	push {lr}
 	bl RtcCalcLocalTime
 	ldr r2, _0806636C
@@ -2254,10 +561,10 @@ _0806636C: .4byte 0x0202e8c4
 _08066370: .4byte 0x03004038
 _08066374: .4byte 0x0202e8c6
 _08066378: .4byte 0x0202e8c8
-	thumb_func_end s2E_unknown
+	thumb_func_end ScrCmd_resetvars
 
-	thumb_func_start sA4_set_weather_data
-sA4_set_weather_data: @ 806637C
+	thumb_func_start ScrCmd_setweather
+ScrCmd_setweather: @ 806637C
 	push {lr}
 	bl script_read_halfword
 	lsls r0, 16
@@ -2269,28 +576,28 @@ sA4_set_weather_data: @ 806637C
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sA4_set_weather_data
+	thumb_func_end ScrCmd_setweather
 
-	thumb_func_start sA3_set_standard_weather_data
-sA3_set_standard_weather_data: @ 8066398
+	thumb_func_start ScrCmd_resetweather
+ScrCmd_resetweather: @ 8066398
 	push {lr}
 	bl sub_80806E4
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sA3_set_standard_weather_data
+	thumb_func_end ScrCmd_resetweather
 
-	thumb_func_start sub_80663A4
-sub_80663A4: @ 80663A4
+	thumb_func_start ScrCmd_doweather
+ScrCmd_doweather: @ 80663A4
 	push {lr}
 	bl sub_808073C
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80663A4
+	thumb_func_end ScrCmd_doweather
 
-	thumb_func_start sA6_activate_per_step_callback_eg_ash
-sA6_activate_per_step_callback_eg_ash: @ 80663B0
+	thumb_func_start ScrCmd_tileeffect
+ScrCmd_tileeffect: @ 80663B0
 	push {lr}
 	ldr r1, [r0, 0x8]
 	ldrb r2, [r1]
@@ -2301,10 +608,10 @@ sA6_activate_per_step_callback_eg_ash: @ 80663B0
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sA6_activate_per_step_callback_eg_ash
+	thumb_func_end ScrCmd_tileeffect
 
-	thumb_func_start sub_80663C8
-sub_80663C8: @ 80663C8
+	thumb_func_start ScrCmd_setmapfooter
+ScrCmd_setmapfooter: @ 80663C8
 	push {lr}
 	bl script_read_halfword
 	lsls r0, 16
@@ -2316,10 +623,10 @@ sub_80663C8: @ 80663C8
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80663C8
+	thumb_func_end ScrCmd_setmapfooter
 
-	thumb_func_start s39_warp_sfx
-s39_warp_sfx: @ 80663E4
+	thumb_func_start ScrCmd_warp
+ScrCmd_warp: @ 80663E4
 	push {r4-r6,lr}
 	mov r6, r9
 	mov r5, r8
@@ -2380,10 +687,10 @@ s39_warp_sfx: @ 80663E4
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end s39_warp_sfx
+	thumb_func_end ScrCmd_warp
 
-	thumb_func_start s3A_warp_new_music
-s3A_warp_new_music: @ 806646C
+	thumb_func_start ScrCmd_warpmuted
+ScrCmd_warpmuted: @ 806646C
 	push {r4-r6,lr}
 	mov r6, r9
 	mov r5, r8
@@ -2444,10 +751,10 @@ s3A_warp_new_music: @ 806646C
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end s3A_warp_new_music
+	thumb_func_end ScrCmd_warpmuted
 
-	thumb_func_start s3B_warp_keep_music
-s3B_warp_keep_music: @ 80664F4
+	thumb_func_start ScrCmd_warpwalk
+ScrCmd_warpwalk: @ 80664F4
 	push {r4-r6,lr}
 	mov r6, r9
 	mov r5, r8
@@ -2508,10 +815,10 @@ s3B_warp_keep_music: @ 80664F4
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end s3B_warp_keep_music
+	thumb_func_end ScrCmd_warpwalk
 
-	thumb_func_start sub_806657C
-sub_806657C: @ 806657C
+	thumb_func_start ScrCmd_warphole
+ScrCmd_warphole: @ 806657C
 	push {r4-r6,lr}
 	sub sp, 0x8
 	ldr r1, [r0, 0x8]
@@ -2567,10 +874,10 @@ _080665DE:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806657C
+	thumb_func_end ScrCmd_warphole
 
-	thumb_func_start s3D_warp_v4
-s3D_warp_v4: @ 80665F0
+	thumb_func_start ScrCmd_warpteleport
+ScrCmd_warpteleport: @ 80665F0
 	push {r4-r6,lr}
 	mov r6, r9
 	mov r5, r8
@@ -2631,10 +938,10 @@ s3D_warp_v4: @ 80665F0
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end s3D_warp_v4
+	thumb_func_end ScrCmd_warpteleport
 
-	thumb_func_start s3E_set_new_map
-s3E_set_new_map: @ 8066678
+	thumb_func_start ScrCmd_warp3
+ScrCmd_warp3: @ 8066678
 	push {r4-r6,lr}
 	mov r6, r9
 	mov r5, r8
@@ -2693,10 +1000,10 @@ s3E_set_new_map: @ 8066678
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end s3E_set_new_map
+	thumb_func_end ScrCmd_warp3
 
-	thumb_func_start s3F_set_new_map_DMA
-s3F_set_new_map_DMA: @ 80666F8
+	thumb_func_start ScrCmd_warpplace
+ScrCmd_warpplace: @ 80666F8
 	push {r4-r6,lr}
 	mov r6, r9
 	mov r5, r8
@@ -2757,10 +1064,10 @@ s3F_set_new_map_DMA: @ 80666F8
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end s3F_set_new_map_DMA
+	thumb_func_end ScrCmd_warpplace
 
-	thumb_func_start sub_806677C
-sub_806677C: @ 806677C
+	thumb_func_start ScrCmd_warp4
+ScrCmd_warp4: @ 806677C
 	push {r4-r6,lr}
 	mov r6, r9
 	mov r5, r8
@@ -2819,10 +1126,10 @@ sub_806677C: @ 806677C
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806677C
+	thumb_func_end ScrCmd_warp4
 
-	thumb_func_start sub_80667FC
-sub_80667FC: @ 80667FC
+	thumb_func_start ScrCmd_warp5
+ScrCmd_warp5: @ 80667FC
 	push {r4-r6,lr}
 	mov r6, r9
 	mov r5, r8
@@ -2881,10 +1188,10 @@ sub_80667FC: @ 80667FC
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80667FC
+	thumb_func_end ScrCmd_warp5
 
-	thumb_func_start sC4_unknown
-sC4_unknown: @ 806687C
+	thumb_func_start ScrCmd_warp6
+ScrCmd_warp6: @ 806687C
 	push {r4-r6,lr}
 	mov r6, r9
 	mov r5, r8
@@ -2943,10 +1250,10 @@ sC4_unknown: @ 806687C
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sC4_unknown
+	thumb_func_end ScrCmd_warp6
 
-	thumb_func_start sub_80668FC
-sub_80668FC: @ 80668FC
+	thumb_func_start ScrCmd_getplayerxy
+ScrCmd_getplayerxy: @ 80668FC
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	bl script_read_halfword
@@ -2970,10 +1277,10 @@ sub_80668FC: @ 80668FC
 	bx r1
 	.align 2, 0
 _08066930: .4byte 0x02025734
-	thumb_func_end sub_80668FC
+	thumb_func_end ScrCmd_getplayerxy
 
-	thumb_func_start s43_get_player_party_count
-s43_get_player_party_count: @ 8066934
+	thumb_func_start ScrCmd_countpokemon
+ScrCmd_countpokemon: @ 8066934
 	push {r4,lr}
 	ldr r4, _0806694C
 	bl CalculatePlayerPartyCount
@@ -2986,10 +1293,10 @@ s43_get_player_party_count: @ 8066934
 	bx r1
 	.align 2, 0
 _0806694C: .4byte 0x0202e8dc
-	thumb_func_end s43_get_player_party_count
+	thumb_func_end ScrCmd_countpokemon
 
-	thumb_func_start s2F_music_play
-s2F_music_play: @ 8066950
+	thumb_func_start ScrCmd_playsfx
+ScrCmd_playsfx: @ 8066950
 	push {lr}
 	bl script_read_halfword
 	lsls r0, 16
@@ -2998,7 +1305,7 @@ s2F_music_play: @ 8066950
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end s2F_music_play
+	thumb_func_end ScrCmd_playsfx
 
 	thumb_func_start s30_music_check_asm
 s30_music_check_asm: @ 8066964
@@ -3016,8 +1323,8 @@ _08066976:
 	bx r1
 	thumb_func_end s30_music_check_asm
 
-	thumb_func_start sub_806697C
-sub_806697C: @ 806697C
+	thumb_func_start ScrCmd_checksound
+ScrCmd_checksound: @ 806697C
 	push {lr}
 	ldr r1, _0806698C
 	bl script_setup_asm_script
@@ -3026,10 +1333,10 @@ sub_806697C: @ 806697C
 	bx r1
 	.align 2, 0
 _0806698C: .4byte s30_music_check_asm
-	thumb_func_end sub_806697C
+	thumb_func_end ScrCmd_checksound
 
-	thumb_func_start s31_fanfare_play
-s31_fanfare_play: @ 8066990
+	thumb_func_start ScrCmd_fanfare
+ScrCmd_fanfare: @ 8066990
 	push {lr}
 	bl script_read_halfword
 	lsls r0, 16
@@ -3038,7 +1345,7 @@ s31_fanfare_play: @ 8066990
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end s31_fanfare_play
+	thumb_func_end ScrCmd_fanfare
 
 	thumb_func_start s32_fanfare_wait_asm
 s32_fanfare_wait_asm: @ 80669A4
@@ -3050,8 +1357,8 @@ s32_fanfare_wait_asm: @ 80669A4
 	bx r1
 	thumb_func_end s32_fanfare_wait_asm
 
-	thumb_func_start sub_80669B4
-sub_80669B4: @ 80669B4
+	thumb_func_start ScrCmd_waitfanfare
+ScrCmd_waitfanfare: @ 80669B4
 	push {lr}
 	ldr r1, _080669C4
 	bl script_setup_asm_script
@@ -3060,10 +1367,10 @@ sub_80669B4: @ 80669B4
 	bx r1
 	.align 2, 0
 _080669C4: .4byte s32_fanfare_wait_asm
-	thumb_func_end sub_80669B4
+	thumb_func_end ScrCmd_waitfanfare
 
-	thumb_func_start s33_play_music
-s33_play_music: @ 80669C8
+	thumb_func_start ScrCmd_playmusic
+ScrCmd_playmusic: @ 80669C8
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	bl script_read_halfword
@@ -3085,10 +1392,10 @@ _080669E8:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end s33_play_music
+	thumb_func_end ScrCmd_playmusic
 
-	thumb_func_start s34_unknown
-s34_unknown: @ 80669F8
+	thumb_func_start ScrCmd_playmusicbattle
+ScrCmd_playmusicbattle: @ 80669F8
 	push {lr}
 	bl script_read_halfword
 	lsls r0, 16
@@ -3097,19 +1404,19 @@ s34_unknown: @ 80669F8
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end s34_unknown
+	thumb_func_end ScrCmd_playmusicbattle
 
-	thumb_func_start s35_fade_to_default
-s35_fade_to_default: @ 8066A0C
+	thumb_func_start ScrCmd_fadedefault
+ScrCmd_fadedefault: @ 8066A0C
 	push {lr}
 	bl sub_8053F84
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end s35_fade_to_default
+	thumb_func_end ScrCmd_fadedefault
 
-	thumb_func_start s36_fade_to_music
-s36_fade_to_music: @ 8066A18
+	thumb_func_start ScrCmd_fademusic
+ScrCmd_fademusic: @ 8066A18
 	push {lr}
 	bl script_read_halfword
 	lsls r0, 16
@@ -3118,10 +1425,10 @@ s36_fade_to_music: @ 8066A18
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end s36_fade_to_music
+	thumb_func_end ScrCmd_fademusic
 
-	thumb_func_start s37_fadeout
-s37_fadeout: @ 8066A2C
+	thumb_func_start ScrCmd_fadeout
+ScrCmd_fadeout: @ 8066A2C
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r0, [r4, 0x8]
@@ -3147,10 +1454,10 @@ _08066A4C:
 	bx r1
 	.align 2, 0
 _08066A5C: .4byte sub_8074FD0
-	thumb_func_end s37_fadeout
+	thumb_func_end ScrCmd_fadeout
 
-	thumb_func_start s38_fadein
-s38_fadein: @ 8066A60
+	thumb_func_start ScrCmd_fadein
+ScrCmd_fadein: @ 8066A60
 	push {lr}
 	ldr r1, [r0, 0x8]
 	ldrb r2, [r1]
@@ -3169,10 +1476,10 @@ _08066A7E:
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end s38_fadein
+	thumb_func_end ScrCmd_fadein
 
-	thumb_func_start s4F_execute_movement
-s4F_execute_movement: @ 8066A84
+	thumb_func_start ScrCmd_move
+ScrCmd_move: @ 8066A84
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	bl script_read_halfword
@@ -3200,10 +1507,10 @@ s4F_execute_movement: @ 8066A84
 	.align 2, 0
 _08066ABC: .4byte 0x02025734
 _08066AC0: .4byte 0x0202e8b6
-	thumb_func_end s4F_execute_movement
+	thumb_func_end ScrCmd_move
 
-	thumb_func_start s50_execute_movement_remote
-s50_execute_movement_remote: @ 8066AC4
+	thumb_func_start ScrCmd_movecoords
+ScrCmd_movecoords: @ 8066AC4
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	bl script_read_halfword
@@ -3234,7 +1541,7 @@ s50_execute_movement_remote: @ 8066AC4
 	bx r1
 	.align 2, 0
 _08066B04: .4byte 0x0202e8b6
-	thumb_func_end s50_execute_movement_remote
+	thumb_func_end ScrCmd_movecoords
 
 	thumb_func_start s51a_0806B288
 s51a_0806B288: @ 8066B08
@@ -3256,8 +1563,8 @@ _08066B28: .4byte 0x0202e8ba
 _08066B2C: .4byte 0x0202e8b8
 	thumb_func_end s51a_0806B288
 
-	thumb_func_start s51_waitmove
-s51_waitmove: @ 8066B30
+	thumb_func_start ScrCmd_waitmove
+ScrCmd_waitmove: @ 8066B30
 	push {r4,lr}
 	adds r4, r0, 0
 	bl script_read_halfword
@@ -3293,10 +1600,10 @@ _08066B74: .4byte 0x0202e8b8
 _08066B78: .4byte 0x02025734
 _08066B7C: .4byte 0x0202e8ba
 _08066B80: .4byte s51a_0806B288
-	thumb_func_end s51_waitmove
+	thumb_func_end ScrCmd_waitmove
 
-	thumb_func_start s52_waitmove_remote
-s52_waitmove_remote: @ 8066B84
+	thumb_func_start ScrCmd_waitmovexy
+ScrCmd_waitmovexy: @ 8066B84
 	push {r4,lr}
 	adds r4, r0, 0
 	bl script_read_halfword
@@ -3333,10 +1640,10 @@ _08066BC8: .4byte 0x0202e8b6
 _08066BCC: .4byte 0x0202e8b8
 _08066BD0: .4byte 0x0202e8ba
 _08066BD4: .4byte s51a_0806B288
-	thumb_func_end s52_waitmove_remote
+	thumb_func_end ScrCmd_waitmovexy
 
-	thumb_func_start sub_8066BD8
-sub_8066BD8: @ 8066BD8
+	thumb_func_start ScrCmd_disappear
+ScrCmd_disappear: @ 8066BD8
 	push {lr}
 	bl script_read_halfword
 	lsls r0, 16
@@ -3353,10 +1660,10 @@ sub_8066BD8: @ 8066BD8
 	bx r1
 	.align 2, 0
 _08066BFC: .4byte 0x02025734
-	thumb_func_end sub_8066BD8
+	thumb_func_end ScrCmd_disappear
 
-	thumb_func_start s54_hide_sprite_set_coords
-s54_hide_sprite_set_coords: @ 8066C00
+	thumb_func_start ScrCmd_disappearxy
+ScrCmd_disappearxy: @ 8066C00
 	push {r4,lr}
 	adds r4, r0, 0
 	bl script_read_halfword
@@ -3377,10 +1684,10 @@ s54_hide_sprite_set_coords: @ 8066C00
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end s54_hide_sprite_set_coords
+	thumb_func_end ScrCmd_disappearxy
 
-	thumb_func_start sub_8066C30
-sub_8066C30: @ 8066C30
+	thumb_func_start ScrCmd_reappear
+ScrCmd_reappear: @ 8066C30
 	push {lr}
 	bl script_read_halfword
 	lsls r0, 16
@@ -3397,10 +1704,10 @@ sub_8066C30: @ 8066C30
 	bx r1
 	.align 2, 0
 _08066C54: .4byte 0x02025734
-	thumb_func_end sub_8066C30
+	thumb_func_end ScrCmd_reappear
 
-	thumb_func_start s56_show_sprite_set_coords
-s56_show_sprite_set_coords: @ 8066C58
+	thumb_func_start ScrCmd_reappearxy
+ScrCmd_reappearxy: @ 8066C58
 	push {r4,lr}
 	adds r4, r0, 0
 	bl script_read_halfword
@@ -3421,10 +1728,10 @@ s56_show_sprite_set_coords: @ 8066C58
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end s56_show_sprite_set_coords
+	thumb_func_end ScrCmd_reappearxy
 
-	thumb_func_start s57_move_sprites
-s57_move_sprites: @ 8066C88
+	thumb_func_start ScrCmd_movesprite
+ScrCmd_movesprite: @ 8066C88
 	push {r4-r6,lr}
 	sub sp, 0x4
 	adds r6, r0, 0
@@ -3468,10 +1775,10 @@ s57_move_sprites: @ 8066C88
 	bx r1
 	.align 2, 0
 _08066CE8: .4byte 0x02025734
-	thumb_func_end s57_move_sprites
+	thumb_func_end ScrCmd_movesprite
 
-	thumb_func_start s63_new_sprite_location_permanent
-s63_new_sprite_location_permanent: @ 8066CEC
+	thumb_func_start ScrCmd_movespriteperm
+ScrCmd_movespriteperm: @ 8066CEC
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	bl script_read_halfword
@@ -3508,10 +1815,10 @@ s63_new_sprite_location_permanent: @ 8066CEC
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end s63_new_sprite_location_permanent
+	thumb_func_end ScrCmd_movespriteperm
 
-	thumb_func_start s64_set_sprite_top_left_corner
-s64_set_sprite_top_left_corner: @ 8066D44
+	thumb_func_start ScrCmd_moveoffscreen
+ScrCmd_moveoffscreen: @ 8066D44
 	push {lr}
 	bl script_read_halfword
 	lsls r0, 16
@@ -3528,10 +1835,10 @@ s64_set_sprite_top_left_corner: @ 8066D44
 	bx r1
 	.align 2, 0
 _08066D68: .4byte 0x02025734
-	thumb_func_end s64_set_sprite_top_left_corner
+	thumb_func_end ScrCmd_moveoffscreen
 
-	thumb_func_start s58_npc_f1_clear_x20
-s58_npc_f1_clear_x20: @ 8066D6C
+	thumb_func_start ScrCmd_spritevisible
+ScrCmd_spritevisible: @ 8066D6C
 	push {r4,lr}
 	adds r4, r0, 0
 	bl script_read_halfword
@@ -3553,10 +1860,10 @@ s58_npc_f1_clear_x20: @ 8066D6C
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end s58_npc_f1_clear_x20
+	thumb_func_end ScrCmd_spritevisible
 
-	thumb_func_start s59_npc_f1_set_x20
-s59_npc_f1_set_x20: @ 8066D9C
+	thumb_func_start ScrCmd_spriteinvisible
+ScrCmd_spriteinvisible: @ 8066D9C
 	push {r4,lr}
 	adds r4, r0, 0
 	bl script_read_halfword
@@ -3578,10 +1885,10 @@ s59_npc_f1_set_x20: @ 8066D9C
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end s59_npc_f1_set_x20
+	thumb_func_end ScrCmd_spriteinvisible
 
-	thumb_func_start sA8_unknown
-sA8_unknown: @ 8066DCC
+	thumb_func_start ScrCmd_spritelevelup
+ScrCmd_spritelevelup: @ 8066DCC
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	bl script_read_halfword
@@ -3608,10 +1915,10 @@ sA8_unknown: @ 8066DCC
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sA8_unknown
+	thumb_func_end ScrCmd_spritelevelup
 
-	thumb_func_start sA9_unknown
-sA9_unknown: @ 8066E08
+	thumb_func_start ScrCmd_restorespritelevel
+ScrCmd_restorespritelevel: @ 8066E08
 	push {r4,lr}
 	adds r4, r0, 0
 	bl script_read_halfword
@@ -3632,10 +1939,10 @@ sA9_unknown: @ 8066E08
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sA9_unknown
+	thumb_func_end ScrCmd_restorespritelevel
 
-	thumb_func_start s5A_face_player
-s5A_face_player: @ 8066E38
+	thumb_func_start ScrCmd_faceplayer
+ScrCmd_faceplayer: @ 8066E38
 	push {r4,lr}
 	ldr r2, _08066E68
 	ldr r0, _08066E6C
@@ -3662,10 +1969,10 @@ _08066E60:
 	.align 2, 0
 _08066E68: .4byte 0x030048a0
 _08066E6C: .4byte 0x03004ae0
-	thumb_func_end s5A_face_player
+	thumb_func_end ScrCmd_faceplayer
 
-	thumb_func_start s5B_npc_set_direction
-s5B_npc_set_direction: @ 8066E70
+	thumb_func_start ScrCmd_spriteface
+ScrCmd_spriteface: @ 8066E70
 	push {r4,lr}
 	adds r4, r0, 0
 	bl script_read_halfword
@@ -3688,10 +1995,10 @@ s5B_npc_set_direction: @ 8066E70
 	bx r1
 	.align 2, 0
 _08066EA0: .4byte 0x02025734
-	thumb_func_end s5B_npc_set_direction
+	thumb_func_end ScrCmd_spriteface
 
-	thumb_func_start s65_set_sprite_behaviour
-s65_set_sprite_behaviour: @ 8066EA4
+	thumb_func_start ScrCmd_spritebehave
+ScrCmd_spritebehave: @ 8066EA4
 	push {r4,lr}
 	adds r4, r0, 0
 	bl script_read_halfword
@@ -3709,10 +2016,10 @@ s65_set_sprite_behaviour: @ 8066EA4
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end s65_set_sprite_behaviour
+	thumb_func_end ScrCmd_spritebehave
 
-	thumb_func_start sAA_create_new_sprite
-sAA_create_new_sprite: @ 8066ECC
+	thumb_func_start ScrCmd_createvsprite
+ScrCmd_createvsprite: @ 8066ECC
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -3764,10 +2071,10 @@ sAA_create_new_sprite: @ 8066ECC
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sAA_create_new_sprite
+	thumb_func_end ScrCmd_createvsprite
 
-	thumb_func_start sAB_unknown
-sAB_unknown: @ 8066F3C
+	thumb_func_start ScrCmd_vspriteface
+ScrCmd_vspriteface: @ 8066F3C
 	push {lr}
 	ldr r2, [r0, 0x8]
 	ldrb r3, [r2]
@@ -3781,10 +2088,10 @@ sAB_unknown: @ 8066F3C
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sAB_unknown
+	thumb_func_end ScrCmd_vspriteface
 
-	thumb_func_start sub_8066F58
-sub_8066F58: @ 8066F58
+	thumb_func_start ScrCmd_lockall
+ScrCmd_lockall: @ 8066F58
 	push {r4,lr}
 	adds r4, r0, 0
 	bl is_c1_link_related_active
@@ -3804,10 +2111,10 @@ _08066F7A:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8066F58
+	thumb_func_end ScrCmd_lockall
 
-	thumb_func_start sub_8066F80
-sub_8066F80: @ 8066F80
+	thumb_func_start ScrCmd_lock
+ScrCmd_lock: @ 8066F80
 	push {r4,lr}
 	adds r4, r0, 0
 	bl is_c1_link_related_active
@@ -3849,10 +2156,10 @@ _08066FCE:
 	bx r1
 	.align 2, 0
 _08066FD4: .4byte sub_8064CFC
-	thumb_func_end sub_8066F80
+	thumb_func_end ScrCmd_lock
 
-	thumb_func_start s6B_release
-s6B_release: @ 8066FD8
+	thumb_func_start ScrCmd_releaseall
+ScrCmd_releaseall: @ 8066FD8
 	push {lr}
 	bl textbox_close
 	movs r0, 0xFF
@@ -3875,10 +2182,10 @@ s6B_release: @ 8066FD8
 	bx r1
 	.align 2, 0
 _0806700C: .4byte 0x030048a0
-	thumb_func_end s6B_release
+	thumb_func_end ScrCmd_releaseall
 
-	thumb_func_start s6C_release_2
-s6C_release_2: @ 8067010
+	thumb_func_start ScrCmd_release
+ScrCmd_release: @ 8067010
 	push {r4,lr}
 	bl textbox_close
 	ldr r4, _08067060
@@ -3916,10 +2223,10 @@ _08067032:
 	.align 2, 0
 _08067060: .4byte 0x030048a0
 _08067064: .4byte 0x03004ae0
-	thumb_func_end s6C_release_2
+	thumb_func_end ScrCmd_release
 
-	thumb_func_start s67_execute_box
-s67_execute_box: @ 8067068
+	thumb_func_start ScrCmd_message
+ScrCmd_message: @ 8067068
 	push {r4,lr}
 	adds r4, r0, 0
 	bl script_read_word
@@ -3932,10 +2239,10 @@ _08067076:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end s67_execute_box
+	thumb_func_end ScrCmd_message
 
-	thumb_func_start s9B_unknown
-s9B_unknown: @ 8067084
+	thumb_func_start ScrCmd_message2
+ScrCmd_message2: @ 8067084
 	push {r4,lr}
 	adds r4, r0, 0
 	bl script_read_word
@@ -3948,10 +2255,10 @@ _08067092:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end s9B_unknown
+	thumb_func_end ScrCmd_message2
 
-	thumb_func_start sub_80670A0
-sub_80670A0: @ 80670A0
+	thumb_func_start ScrCmd_waittext
+ScrCmd_waittext: @ 80670A0
 	push {lr}
 	ldr r1, _080670B0
 	bl script_setup_asm_script
@@ -3960,16 +2267,16 @@ sub_80670A0: @ 80670A0
 	bx r1
 	.align 2, 0
 _080670B0: .4byte sub_8064C84
-	thumb_func_end sub_80670A0
+	thumb_func_end ScrCmd_waittext
 
-	thumb_func_start s68_close_box
-s68_close_box: @ 80670B4
+	thumb_func_start ScrCmd_closebutton
+ScrCmd_closebutton: @ 80670B4
 	push {lr}
 	bl textbox_close
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end s68_close_box
+	thumb_func_end ScrCmd_closebutton
 
 	thumb_func_start sub_80670C0
 sub_80670C0: @ 80670C0
@@ -3995,8 +2302,8 @@ _080670E2:
 	bx r1
 	thumb_func_end sub_80670C0
 
-	thumb_func_start sub_80670E8
-sub_80670E8: @ 80670E8
+	thumb_func_start ScrCmd_waitbutton
+ScrCmd_waitbutton: @ 80670E8
 	push {lr}
 	ldr r1, _080670F8
 	bl script_setup_asm_script
@@ -4005,10 +2312,10 @@ sub_80670E8: @ 80670E8
 	bx r1
 	.align 2, 0
 _080670F8: .4byte sub_80670C0
-	thumb_func_end sub_80670E8
+	thumb_func_end ScrCmd_waitbutton
 
-	thumb_func_start s6E_yes_no
-s6E_yes_no: @ 80670FC
+	thumb_func_start ScrCmd_yesnobox
+ScrCmd_yesnobox: @ 80670FC
 	push {lr}
 	ldr r2, [r0, 0x8]
 	ldrb r3, [r2]
@@ -4031,10 +2338,10 @@ _0806711E:
 _08067124:
 	pop {r1}
 	bx r1
-	thumb_func_end s6E_yes_no
+	thumb_func_end ScrCmd_yesnobox
 
-	thumb_func_start sub_8067128
-sub_8067128: @ 8067128
+	thumb_func_start ScrCmd_multichoice
+ScrCmd_multichoice: @ 8067128
 	push {r4,r5,lr}
 	ldr r2, [r0, 0x8]
 	ldrb r5, [r2]
@@ -4064,10 +2371,10 @@ _0806715C:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8067128
+	thumb_func_end ScrCmd_multichoice
 
-	thumb_func_start sub_8067164
-sub_8067164: @ 8067164
+	thumb_func_start ScrCmd_multichoicedef
+ScrCmd_multichoicedef: @ 8067164
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -4108,10 +2415,10 @@ _080671A8:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8067164
+	thumb_func_end ScrCmd_multichoicedef
 
-	thumb_func_start sub_80671B4
-sub_80671B4: @ 80671B4
+	thumb_func_start ScrCmd_showbox
+ScrCmd_showbox: @ 80671B4
 	push {r4,r5,lr}
 	ldr r2, [r0, 0x8]
 	ldrb r5, [r2]
@@ -4132,10 +2439,10 @@ sub_80671B4: @ 80671B4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80671B4
+	thumb_func_end ScrCmd_showbox
 
-	thumb_func_start sub_80671E0
-sub_80671E0: @ 80671E0
+	thumb_func_start ScrCmd_multichoicerow
+ScrCmd_multichoicerow: @ 80671E0
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -4176,10 +2483,10 @@ _08067224:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80671E0
+	thumb_func_end ScrCmd_multichoicerow
 
-	thumb_func_start sub_8067230
-sub_8067230: @ 8067230
+	thumb_func_start ScrCmd_hidebox
+ScrCmd_hidebox: @ 8067230
 	push {r4,r5,lr}
 	ldr r2, [r0, 0x8]
 	ldrb r5, [r2]
@@ -4200,10 +2507,10 @@ sub_8067230: @ 8067230
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8067230
+	thumb_func_end ScrCmd_hidebox
 
-	thumb_func_start s6F_multichoice
-s6F_multichoice: @ 806725C
+	thumb_func_start ScrCmd_clearbox
+ScrCmd_clearbox: @ 806725C
 	push {r4,r5,lr}
 	ldr r2, [r0, 0x8]
 	ldrb r5, [r2]
@@ -4233,10 +2540,10 @@ _08067290:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end s6F_multichoice
+	thumb_func_end ScrCmd_clearbox
 
-	thumb_func_start sub_8067298
-sub_8067298: @ 8067298
+	thumb_func_start ScrCmd_showpokepic
+ScrCmd_showpokepic: @ 8067298
 	push {r4,lr}
 	adds r4, r0, 0
 	bl script_read_halfword
@@ -4257,10 +2564,10 @@ sub_8067298: @ 8067298
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8067298
+	thumb_func_end ScrCmd_showpokepic
 
-	thumb_func_start s76_close_picture_box
-s76_close_picture_box: @ 80672C8
+	thumb_func_start ScrCmd_hidepokepic
+ScrCmd_hidepokepic: @ 80672C8
 	push {r4,lr}
 	adds r4, r0, 0
 	bl picbox_close
@@ -4277,10 +2584,10 @@ _080672E2:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end s76_close_picture_box
+	thumb_func_end ScrCmd_hidepokepic
 
-	thumb_func_start s77_showcontestwinner
-s77_showcontestwinner: @ 80672E8
+	thumb_func_start ScrCmd_showcontestwinner
+ScrCmd_showcontestwinner: @ 80672E8
 	push {lr}
 	ldr r1, [r0, 0x8]
 	ldrb r2, [r1]
@@ -4296,10 +2603,10 @@ _080672FC:
 	movs r0, 0x1
 	pop {r1}
 	bx r1
-	thumb_func_end s77_showcontestwinner
+	thumb_func_end ScrCmd_showcontestwinner
 
-	thumb_func_start sub_806730C
-sub_806730C: @ 806730C
+	thumb_func_start ScrCmd_braillemsg
+ScrCmd_braillemsg: @ 806730C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -4339,10 +2646,10 @@ sub_806730C: @ 806730C
 	bx r1
 	.align 2, 0
 _08067360: .4byte 0x020234cc
-	thumb_func_end sub_806730C
+	thumb_func_end ScrCmd_braillemsg
 
-	thumb_func_start sBD_virtual_message
-sBD_virtual_message: @ 8067364
+	thumb_func_start ScrCmd_vtext
+ScrCmd_vtext: @ 8067364
 	push {lr}
 	bl script_read_word
 	ldr r1, _0806737C
@@ -4354,10 +2661,10 @@ sBD_virtual_message: @ 8067364
 	bx r1
 	.align 2, 0
 _0806737C: .4byte 0x0202e8b0
-	thumb_func_end sBD_virtual_message
+	thumb_func_end ScrCmd_vtext
 
-	thumb_func_start s7D_load_pokename
-s7D_load_pokename: @ 8067380
+	thumb_func_start ScrCmd_bufferpoke
+ScrCmd_bufferpoke: @ 8067380
 	push {r4,lr}
 	ldr r1, [r0, 0x8]
 	ldrb r4, [r1]
@@ -4386,10 +2693,10 @@ s7D_load_pokename: @ 8067380
 	.align 2, 0
 _080673B8: .4byte gUnknown_083762F0
 _080673BC: .4byte gSpeciesNames
-	thumb_func_end s7D_load_pokename
+	thumb_func_end ScrCmd_bufferpoke
 
-	thumb_func_start s7E_load_first_pokenames
-s7E_load_first_pokenames: @ 80673C0
+	thumb_func_start ScrCmd_bufferfirstpoke
+ScrCmd_bufferfirstpoke: @ 80673C0
 	push {r4,lr}
 	ldr r1, [r0, 0x8]
 	ldrb r2, [r1]
@@ -4423,10 +2730,10 @@ s7E_load_first_pokenames: @ 80673C0
 _08067400: .4byte gUnknown_083762F0
 _08067404: .4byte 0x03004360
 _08067408: .4byte gSpeciesNames
-	thumb_func_end s7E_load_first_pokenames
+	thumb_func_end ScrCmd_bufferfirstpoke
 
-	thumb_func_start s7F_load_pokename_team
-s7F_load_pokename_team: @ 806740C
+	thumb_func_start ScrCmd_bufferpartypoke
+ScrCmd_bufferpartypoke: @ 806740C
 	push {r4,lr}
 	ldr r1, [r0, 0x8]
 	ldrb r4, [r1]
@@ -4458,10 +2765,10 @@ s7F_load_pokename_team: @ 806740C
 	.align 2, 0
 _0806744C: .4byte 0x03004360
 _08067450: .4byte gUnknown_083762F0
-	thumb_func_end s7F_load_pokename_team
+	thumb_func_end ScrCmd_bufferpartypoke
 
-	thumb_func_start s80_load_item_name
-s80_load_item_name: @ 8067454
+	thumb_func_start ScrCmd_bufferitem
+ScrCmd_bufferitem: @ 8067454
 	push {r4,lr}
 	ldr r1, [r0, 0x8]
 	ldrb r4, [r1]
@@ -4484,10 +2791,10 @@ s80_load_item_name: @ 8067454
 	bx r1
 	.align 2, 0
 _08067484: .4byte gUnknown_083762F0
-	thumb_func_end s80_load_item_name
+	thumb_func_end ScrCmd_bufferitem
 
-	thumb_func_start sub_8067488
-sub_8067488: @ 8067488
+	thumb_func_start ScrCmd_bufferdecor
+ScrCmd_bufferdecor: @ 8067488
 	push {r4,lr}
 	ldr r1, [r0, 0x8]
 	ldrb r4, [r1]
@@ -4514,10 +2821,10 @@ sub_8067488: @ 8067488
 	.align 2, 0
 _080674BC: .4byte gUnknown_083762F0
 _080674C0: .4byte gDecorations + 0x1
-	thumb_func_end sub_8067488
+	thumb_func_end ScrCmd_bufferdecor
 
-	thumb_func_start s82_load_item_name
-s82_load_item_name: @ 80674C4
+	thumb_func_start ScrCmd_bufferattack
+ScrCmd_bufferattack: @ 80674C4
 	push {r4,lr}
 	ldr r1, [r0, 0x8]
 	ldrb r4, [r1]
@@ -4546,10 +2853,10 @@ s82_load_item_name: @ 80674C4
 	.align 2, 0
 _080674FC: .4byte gUnknown_083762F0
 _08067500: .4byte gMoveNames
-	thumb_func_end s82_load_item_name
+	thumb_func_end ScrCmd_bufferattack
 
-	thumb_func_start s83_load_textvar_var
-s83_load_textvar_var: @ 8067504
+	thumb_func_start ScrCmd_buffernum
+ScrCmd_buffernum: @ 8067504
 	push {r4,r5,lr}
 	ldr r1, [r0, 0x8]
 	ldrb r5, [r1]
@@ -4580,10 +2887,10 @@ s83_load_textvar_var: @ 8067504
 	bx r1
 	.align 2, 0
 _08067544: .4byte gUnknown_083762F0
-	thumb_func_end s83_load_textvar_var
+	thumb_func_end ScrCmd_buffernum
 
-	thumb_func_start s84_load_textvar_std_expression
-s84_load_textvar_std_expression: @ 8067548
+	thumb_func_start ScrCmd_bufferstd
+ScrCmd_bufferstd: @ 8067548
 	push {r4,lr}
 	ldr r1, [r0, 0x8]
 	ldrb r4, [r1]
@@ -4611,10 +2918,10 @@ s84_load_textvar_std_expression: @ 8067548
 	.align 2, 0
 _08067580: .4byte gUnknown_083762F0
 _08067584: .4byte gUnknown_083CE048
-	thumb_func_end s84_load_textvar_std_expression
+	thumb_func_end ScrCmd_bufferstd
 
-	thumb_func_start s85_load_textvar_pointer
-s85_load_textvar_pointer: @ 8067588
+	thumb_func_start ScrCmd_buffertext
+ScrCmd_buffertext: @ 8067588
 	push {r4,lr}
 	ldr r1, [r0, 0x8]
 	ldrb r4, [r1]
@@ -4633,10 +2940,10 @@ s85_load_textvar_pointer: @ 8067588
 	bx r1
 	.align 2, 0
 _080675AC: .4byte gUnknown_083762F0
-	thumb_func_end s85_load_textvar_pointer
+	thumb_func_end ScrCmd_buffertext
 
-	thumb_func_start sBE_virtual_load_text
-sBE_virtual_load_text: @ 80675B0
+	thumb_func_start ScrCmd_vloadptr
+ScrCmd_vloadptr: @ 80675B0
 	push {lr}
 	bl script_read_word
 	adds r1, r0, 0
@@ -4651,10 +2958,10 @@ sBE_virtual_load_text: @ 80675B0
 	.align 2, 0
 _080675CC: .4byte 0x0202e8b0
 _080675D0: .4byte 0x020234cc
-	thumb_func_end sBE_virtual_load_text
+	thumb_func_end ScrCmd_vloadptr
 
-	thumb_func_start sBF_virtual_load_textbuffer
-sBF_virtual_load_textbuffer: @ 80675D4
+	thumb_func_start ScrCmd_vbuffer
+ScrCmd_vbuffer: @ 80675D4
 	push {r4,lr}
 	ldr r1, [r0, 0x8]
 	ldrb r4, [r1]
@@ -4677,10 +2984,10 @@ sBF_virtual_load_textbuffer: @ 80675D4
 	.align 2, 0
 _08067600: .4byte 0x0202e8b0
 _08067604: .4byte gUnknown_083762F0
-	thumb_func_end sBF_virtual_load_textbuffer
+	thumb_func_end ScrCmd_vbuffer
 
-	thumb_func_start s79_give_pokemon
-s79_give_pokemon: @ 8067608
+	thumb_func_start ScrCmd_givepokemon
+ScrCmd_givepokemon: @ 8067608
 	push {r4-r6,lr}
 	mov r6, r9
 	mov r5, r8
@@ -4737,10 +3044,10 @@ s79_give_pokemon: @ 8067608
 	bx r1
 	.align 2, 0
 _08067684: .4byte 0x0202e8dc
-	thumb_func_end s79_give_pokemon
+	thumb_func_end ScrCmd_givepokemon
 
-	thumb_func_start s7A_create_egg
-s7A_create_egg: @ 8067688
+	thumb_func_start ScrCmd_giveegg
+ScrCmd_giveegg: @ 8067688
 	push {r4,lr}
 	bl script_read_halfword
 	lsls r0, 16
@@ -4759,10 +3066,10 @@ s7A_create_egg: @ 8067688
 	bx r1
 	.align 2, 0
 _080676B0: .4byte 0x0202e8dc
-	thumb_func_end s7A_create_egg
+	thumb_func_end ScrCmd_giveegg
 
-	thumb_func_start s7B_change_pokedata_AP
-s7B_change_pokedata_AP: @ 80676B4
+	thumb_func_start ScrCmd_setpokemove
+ScrCmd_setpokemove: @ 80676B4
 	push {r4,r5,lr}
 	ldr r1, [r0, 0x8]
 	ldrb r5, [r1]
@@ -4782,10 +3089,10 @@ s7B_change_pokedata_AP: @ 80676B4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end s7B_change_pokedata_AP
+	thumb_func_end ScrCmd_setpokemove
 
-	thumb_func_start sub_80676E0
-sub_80676E0: @ 80676E0
+	thumb_func_start ScrCmd_checkattack
+ScrCmd_checkattack: @ 80676E0
 	push {r4-r7,lr}
 	bl script_read_halfword
 	lsls r0, 16
@@ -4845,10 +3152,10 @@ _0806774E:
 	bx r1
 	.align 2, 0
 _08067758: .4byte 0x03004360
-	thumb_func_end sub_80676E0
+	thumb_func_end ScrCmd_checkattack
 
-	thumb_func_start sub_806775C
-sub_806775C: @ 806775C
+	thumb_func_start ScrCmd_givemoney
+ScrCmd_givemoney: @ 806775C
 	push {r4,lr}
 	adds r4, r0, 0
 	bl script_read_word
@@ -4869,10 +3176,10 @@ _0806777A:
 	bx r1
 	.align 2, 0
 _08067784: .4byte 0x02025bc4
-	thumb_func_end sub_806775C
+	thumb_func_end ScrCmd_givemoney
 
-	thumb_func_start sub_8067788
-sub_8067788: @ 8067788
+	thumb_func_start ScrCmd_paymoney
+ScrCmd_paymoney: @ 8067788
 	push {r4,lr}
 	adds r4, r0, 0
 	bl script_read_word
@@ -4893,10 +3200,10 @@ _080677A6:
 	bx r1
 	.align 2, 0
 _080677B0: .4byte 0x02025bc4
-	thumb_func_end sub_8067788
+	thumb_func_end ScrCmd_paymoney
 
-	thumb_func_start s92_check_money
-s92_check_money: @ 80677B4
+	thumb_func_start ScrCmd_checkmoney
+ScrCmd_checkmoney: @ 80677B4
 	push {r4,lr}
 	adds r4, r0, 0
 	bl script_read_word
@@ -4926,10 +3233,10 @@ _080677E2:
 	.align 2, 0
 _080677EC: .4byte 0x0202e8dc
 _080677F0: .4byte 0x02025734
-	thumb_func_end s92_check_money
+	thumb_func_end ScrCmd_checkmoney
 
-	thumb_func_start sub_80677F4
-sub_80677F4: @ 80677F4
+	thumb_func_start ScrCmd_showmoney
+ScrCmd_showmoney: @ 80677F4
 	push {r4,lr}
 	ldr r1, [r0, 0x8]
 	ldrb r4, [r1]
@@ -4958,10 +3265,10 @@ _08067820:
 	bx r1
 	.align 2, 0
 _08067828: .4byte 0x02025734
-	thumb_func_end sub_80677F4
+	thumb_func_end ScrCmd_showmoney
 
-	thumb_func_start sub_806782C
-sub_806782C: @ 806782C
+	thumb_func_start ScrCmd_hidemoney
+ScrCmd_hidemoney: @ 806782C
 	push {lr}
 	ldr r2, [r0, 0x8]
 	ldrb r3, [r2]
@@ -4975,10 +3282,10 @@ sub_806782C: @ 806782C
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806782C
+	thumb_func_end ScrCmd_hidemoney
 
-	thumb_func_start sub_8067848
-sub_8067848: @ 8067848
+	thumb_func_start ScrCmd_updatemoney
+ScrCmd_updatemoney: @ 8067848
 	push {r4,lr}
 	ldr r1, [r0, 0x8]
 	ldrb r4, [r1]
@@ -5007,10 +3314,10 @@ _08067874:
 	bx r1
 	.align 2, 0
 _0806787C: .4byte 0x02025734
-	thumb_func_end sub_8067848
+	thumb_func_end ScrCmd_updatemoney
 
-	thumb_func_start sub_8067880
-sub_8067880: @ 8067880
+	thumb_func_start ScrCmd_showcoins
+ScrCmd_showcoins: @ 8067880
 	push {lr}
 	ldr r3, [r0, 0x8]
 	ldrb r1, [r3]
@@ -5030,10 +3337,10 @@ sub_8067880: @ 8067880
 	.align 2, 0
 _080678A4: .4byte 0x02025734
 _080678A8: .4byte 0x00000494
-	thumb_func_end sub_8067880
+	thumb_func_end ScrCmd_showcoins
 
-	thumb_func_start sub_80678AC
-sub_80678AC: @ 80678AC
+	thumb_func_start ScrCmd_hidecoins
+ScrCmd_hidecoins: @ 80678AC
 	push {lr}
 	ldr r2, [r0, 0x8]
 	ldrb r3, [r2]
@@ -5047,10 +3354,10 @@ sub_80678AC: @ 80678AC
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80678AC
+	thumb_func_end ScrCmd_hidecoins
 
-	thumb_func_start sub_80678C8
-sub_80678C8: @ 80678C8
+	thumb_func_start ScrCmd_updatecoins
+ScrCmd_updatecoins: @ 80678C8
 	push {lr}
 	ldr r3, [r0, 0x8]
 	ldrb r1, [r3]
@@ -5070,10 +3377,10 @@ sub_80678C8: @ 80678C8
 	.align 2, 0
 _080678EC: .4byte 0x02025734
 _080678F0: .4byte 0x00000494
-	thumb_func_end sub_80678C8
+	thumb_func_end ScrCmd_updatecoins
 
-	thumb_func_start s5C_trainer_battle_configure_and_start
-s5C_trainer_battle_configure_and_start: @ 80678F4
+	thumb_func_start ScrCmd_trainerbattle
+ScrCmd_trainerbattle: @ 80678F4
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r0, [r4, 0x8]
@@ -5083,19 +3390,19 @@ s5C_trainer_battle_configure_and_start: @ 80678F4
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end s5C_trainer_battle_configure_and_start
+	thumb_func_end ScrCmd_trainerbattle
 
-	thumb_func_start sub_8067908
-sub_8067908: @ 8067908
+	thumb_func_start ScrCmd_reptrainerbattle
+ScrCmd_reptrainerbattle: @ 8067908
 	push {lr}
 	bl sub_80825E4
 	movs r0, 0x1
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8067908
+	thumb_func_end ScrCmd_reptrainerbattle
 
-	thumb_func_start sub_8067914
-sub_8067914: @ 8067914
+	thumb_func_start ScrCmd_endtrainerbattle
+ScrCmd_endtrainerbattle: @ 8067914
 	push {r4,lr}
 	adds r4, r0, 0
 	bl sub_80826E8
@@ -5104,10 +3411,10 @@ sub_8067914: @ 8067914
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8067914
+	thumb_func_end ScrCmd_endtrainerbattle
 
-	thumb_func_start sub_8067928
-sub_8067928: @ 8067928
+	thumb_func_start ScrCmd_endtrainerbattle2
+ScrCmd_endtrainerbattle2: @ 8067928
 	push {r4,lr}
 	adds r4, r0, 0
 	bl sub_8082700
@@ -5116,10 +3423,10 @@ sub_8067928: @ 8067928
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8067928
+	thumb_func_end ScrCmd_endtrainerbattle2
 
-	thumb_func_start s60_check_trainer_flag
-s60_check_trainer_flag: @ 806793C
+	thumb_func_start ScrCmd_checktrainerflag
+ScrCmd_checktrainerflag: @ 806793C
 	push {r4,lr}
 	adds r4, r0, 0
 	bl script_read_halfword
@@ -5134,10 +3441,10 @@ s60_check_trainer_flag: @ 806793C
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end s60_check_trainer_flag
+	thumb_func_end ScrCmd_checktrainerflag
 
-	thumb_func_start s61_set_trainer_flag
-s61_set_trainer_flag: @ 8067960
+	thumb_func_start ScrCmd_cleartrainerflag
+ScrCmd_cleartrainerflag: @ 8067960
 	push {lr}
 	bl script_read_halfword
 	lsls r0, 16
@@ -5149,10 +3456,10 @@ s61_set_trainer_flag: @ 8067960
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end s61_set_trainer_flag
+	thumb_func_end ScrCmd_cleartrainerflag
 
-	thumb_func_start s62_unset_trainer_flag
-s62_unset_trainer_flag: @ 806797C
+	thumb_func_start ScrCmd_settrainerflag
+ScrCmd_settrainerflag: @ 806797C
 	push {lr}
 	bl script_read_halfword
 	lsls r0, 16
@@ -5164,10 +3471,10 @@ s62_unset_trainer_flag: @ 806797C
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end s62_unset_trainer_flag
+	thumb_func_end ScrCmd_settrainerflag
 
-	thumb_func_start sB6_load_battle
-sB6_load_battle: @ 8067998
+	thumb_func_start ScrCmd_setwildbattle
+ScrCmd_setwildbattle: @ 8067998
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	bl script_read_halfword
@@ -5190,20 +3497,20 @@ sB6_load_battle: @ 8067998
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sB6_load_battle
+	thumb_func_end ScrCmd_setwildbattle
 
-	thumb_func_start sub_80679CC
-sub_80679CC: @ 80679CC
+	thumb_func_start ScrCmd_dowildbattle
+ScrCmd_dowildbattle: @ 80679CC
 	push {lr}
 	bl sub_8081B3C
 	bl sub_80655F0
 	movs r0, 0x1
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80679CC
+	thumb_func_end ScrCmd_dowildbattle
 
-	thumb_func_start s86_pokemart
-s86_pokemart: @ 80679DC
+	thumb_func_start ScrCmd_pokemart
+ScrCmd_pokemart: @ 80679DC
 	push {lr}
 	bl script_read_word
 	bl CreatePokemartMenu
@@ -5211,10 +3518,10 @@ s86_pokemart: @ 80679DC
 	movs r0, 0x1
 	pop {r1}
 	bx r1
-	thumb_func_end s86_pokemart
+	thumb_func_end ScrCmd_pokemart
 
-	thumb_func_start s87_pokemartdecor
-s87_pokemartdecor: @ 80679F0
+	thumb_func_start ScrCmd_pokemartdecor
+ScrCmd_pokemartdecor: @ 80679F0
 	push {lr}
 	bl script_read_word
 	bl CreateDecorationShop1Menu
@@ -5222,10 +3529,10 @@ s87_pokemartdecor: @ 80679F0
 	movs r0, 0x1
 	pop {r1}
 	bx r1
-	thumb_func_end s87_pokemartdecor
+	thumb_func_end ScrCmd_pokemartdecor
 
-	thumb_func_start s88_pokemartbp
-s88_pokemartbp: @ 8067A04
+	thumb_func_start ScrCmd_pokemartbp
+ScrCmd_pokemartbp: @ 8067A04
 	push {lr}
 	bl script_read_word
 	bl CreateDecorationShop2Menu
@@ -5233,10 +3540,10 @@ s88_pokemartbp: @ 8067A04
 	movs r0, 0x1
 	pop {r1}
 	bx r1
-	thumb_func_end s88_pokemartbp
+	thumb_func_end ScrCmd_pokemartbp
 
-	thumb_func_start s89_open_casino_game1
-s89_open_casino_game1: @ 8067A18
+	thumb_func_start ScrCmd_pokecasino
+ScrCmd_pokecasino: @ 8067A18
 	push {lr}
 	bl script_read_halfword
 	lsls r0, 16
@@ -5252,10 +3559,10 @@ s89_open_casino_game1: @ 8067A18
 	bx r1
 	.align 2, 0
 _08067A3C: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
-	thumb_func_end s89_open_casino_game1
+	thumb_func_end ScrCmd_pokecasino
 
-	thumb_func_start berry_script_cmd
-berry_script_cmd: @ 8067A40
+	thumb_func_start ScrCmd_event_8a
+ScrCmd_event_8a: @ 8067A40
 	push {r4,r5,lr}
 	ldr r1, [r0, 0x8]
 	ldrb r5, [r1]
@@ -5286,10 +3593,10 @@ _08067A74:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end berry_script_cmd
+	thumb_func_end ScrCmd_event_8a
 
-	thumb_func_start sub_8067A7C
-sub_8067A7C: @ 8067A7C
+	thumb_func_start ScrCmd_event_96
+ScrCmd_event_96: @ 8067A7C
 	push {r4,lr}
 	bl script_read_halfword
 	lsls r0, 16
@@ -5308,40 +3615,40 @@ sub_8067A7C: @ 8067A7C
 	bx r1
 	.align 2, 0
 _08067AA4: .4byte 0x0202e8dc
-	thumb_func_end sub_8067A7C
+	thumb_func_end ScrCmd_event_96
 
-	thumb_func_start sub_8067AA8
-sub_8067AA8: @ 8067AA8
+	thumb_func_start ScrCmd_choosecontestpkmn
+ScrCmd_choosecontestpkmn: @ 8067AA8
 	push {lr}
 	bl sub_80F99CC
 	bl sub_80655F0
 	movs r0, 0x1
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8067AA8
+	thumb_func_end ScrCmd_choosecontestpkmn
 
-	thumb_func_start sub_8067AB8
-sub_8067AB8: @ 8067AB8
+	thumb_func_start ScrCmd_startcontest
+ScrCmd_startcontest: @ 8067AB8
 	push {lr}
 	bl sub_80C48C8
 	bl sub_80655F0
 	movs r0, 0x1
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8067AB8
+	thumb_func_end ScrCmd_startcontest
 
-	thumb_func_start sub_8067AC8
-sub_8067AC8: @ 8067AC8
+	thumb_func_start ScrCmd_showcontestresults
+ScrCmd_showcontestresults: @ 8067AC8
 	push {lr}
 	bl sub_80C4940
 	bl sub_80655F0
 	movs r0, 0x1
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8067AC8
+	thumb_func_end ScrCmd_showcontestresults
 
-	thumb_func_start sub_8067AD8
-sub_8067AD8: @ 8067AD8
+	thumb_func_start ScrCmd_contestlinktransfer
+ScrCmd_contestlinktransfer: @ 8067AD8
 	push {lr}
 	ldr r0, _08067AEC
 	ldrb r0, [r0]
@@ -5352,10 +3659,10 @@ sub_8067AD8: @ 8067AD8
 	bx r1
 	.align 2, 0
 _08067AEC: .4byte 0x0203869c
-	thumb_func_end sub_8067AD8
+	thumb_func_end ScrCmd_contestlinktransfer
 
-	thumb_func_start s9C_execute_HM
-s9C_execute_HM: @ 8067AF0
+	thumb_func_start ScrCmd_doanimation
+ScrCmd_doanimation: @ 8067AF0
 	push {lr}
 	bl script_read_halfword
 	lsls r0, 16
@@ -5373,10 +3680,10 @@ s9C_execute_HM: @ 8067AF0
 	bx r1
 	.align 2, 0
 _08067B14: .4byte 0x0202e8bc
-	thumb_func_end s9C_execute_HM
+	thumb_func_end ScrCmd_doanimation
 
-	thumb_func_start s9D_set_HM_animation_data
-s9D_set_HM_animation_data: @ 8067B18
+	thumb_func_start ScrCmd_setanimation
+ScrCmd_setanimation: @ 8067B18
 	push {r4,lr}
 	ldr r1, [r0, 0x8]
 	ldrb r4, [r1]
@@ -5398,7 +3705,7 @@ s9D_set_HM_animation_data: @ 8067B18
 	bx r1
 	.align 2, 0
 _08067B44: .4byte 0x0202ff84
-	thumb_func_end s9D_set_HM_animation_data
+	thumb_func_end ScrCmd_setanimation
 
 	thumb_func_start sub_8067B48
 sub_8067B48: @ 8067B48
@@ -5420,8 +3727,8 @@ _08067B62:
 	bx r1
 	thumb_func_end sub_8067B48
 
-	thumb_func_start s9E_checkarray_HM_animation
-s9E_checkarray_HM_animation: @ 8067B68
+	thumb_func_start ScrCmd_checkanimation
+ScrCmd_checkanimation: @ 8067B68
 	push {r4,lr}
 	adds r4, r0, 0
 	bl script_read_halfword
@@ -5440,10 +3747,10 @@ s9E_checkarray_HM_animation: @ 8067B68
 	.align 2, 0
 _08067B8C: .4byte 0x0202e8bc
 _08067B90: .4byte sub_8067B48
-	thumb_func_end s9E_checkarray_HM_animation
+	thumb_func_end ScrCmd_checkanimation
 
-	thumb_func_start sub_8067B94
-sub_8067B94: @ 8067B94
+	thumb_func_start ScrCmd_sethealplace
+ScrCmd_sethealplace: @ 8067B94
 	push {lr}
 	bl script_read_halfword
 	lsls r0, 16
@@ -5455,10 +3762,10 @@ sub_8067B94: @ 8067B94
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8067B94
+	thumb_func_end ScrCmd_sethealplace
 
-	thumb_func_start sub_8067BB0
-sub_8067BB0: @ 8067BB0
+	thumb_func_start ScrCmd_checkgender
+ScrCmd_checkgender: @ 8067BB0
 	ldr r0, _08067BBC
 	ldr r1, _08067BC0
 	ldrb r1, [r1, 0x8]
@@ -5468,10 +3775,10 @@ sub_8067BB0: @ 8067BB0
 	.align 2, 0
 _08067BBC: .4byte 0x0202e8dc
 _08067BC0: .4byte gSaveBlock2
-	thumb_func_end sub_8067BB0
+	thumb_func_end ScrCmd_checkgender
 
-	thumb_func_start sA1_play_cry
-sA1_play_cry: @ 8067BC4
+	thumb_func_start ScrCmd_pokecry
+ScrCmd_pokecry: @ 8067BC4
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	bl script_read_halfword
@@ -5495,10 +3802,10 @@ sA1_play_cry: @ 8067BC4
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sA1_play_cry
+	thumb_func_end ScrCmd_pokecry
 
-	thumb_func_start sub_8067BFC
-sub_8067BFC: @ 8067BFC
+	thumb_func_start ScrCmd_waitpokecry
+ScrCmd_waitpokecry: @ 8067BFC
 	push {lr}
 	ldr r1, _08067C0C
 	bl script_setup_asm_script
@@ -5507,10 +3814,10 @@ sub_8067BFC: @ 8067BFC
 	bx r1
 	.align 2, 0
 _08067C0C: .4byte sub_8075374
-	thumb_func_end sub_8067BFC
+	thumb_func_end ScrCmd_waitpokecry
 
-	thumb_func_start sA2_setmaptile
-sA2_setmaptile: @ 8067C10
+	thumb_func_start ScrCmd_setmaptile
+ScrCmd_setmaptile: @ 8067C10
 	push {r4-r7,lr}
 	adds r4, r0, 0
 	bl script_read_halfword
@@ -5566,10 +3873,10 @@ _08067C86:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sA2_setmaptile
+	thumb_func_end ScrCmd_setmaptile
 
-	thumb_func_start sAC_open_door
-sAC_open_door: @ 8067C90
+	thumb_func_start ScrCmd_setdooropened
+ScrCmd_setdooropened: @ 8067C90
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	bl script_read_halfword
@@ -5606,10 +3913,10 @@ sAC_open_door: @ 8067C90
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sAC_open_door
+	thumb_func_end ScrCmd_setdooropened
 
-	thumb_func_start sub_8067CE8
-sub_8067CE8: @ 8067CE8
+	thumb_func_start ScrCmd_setdoorclosed
+ScrCmd_setdoorclosed: @ 8067CE8
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	bl script_read_halfword
@@ -5639,7 +3946,7 @@ sub_8067CE8: @ 8067CE8
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8067CE8
+	thumb_func_end ScrCmd_setdoorclosed
 
 	thumb_func_start sub_8067D2C
 sub_8067D2C: @ 8067D2C
@@ -5657,8 +3964,8 @@ _08067D3E:
 	bx r1
 	thumb_func_end sub_8067D2C
 
-	thumb_func_start sub_8067D44
-sub_8067D44: @ 8067D44
+	thumb_func_start ScrCmd_doorchange
+ScrCmd_doorchange: @ 8067D44
 	push {lr}
 	ldr r1, _08067D54
 	bl script_setup_asm_script
@@ -5667,10 +3974,10 @@ sub_8067D44: @ 8067D44
 	bx r1
 	.align 2, 0
 _08067D54: .4byte sub_8067D2C
-	thumb_func_end sub_8067D44
+	thumb_func_end ScrCmd_doorchange
 
-	thumb_func_start sub_8067D58
-sub_8067D58: @ 8067D58
+	thumb_func_start ScrCmd_setdooropened2
+ScrCmd_setdooropened2: @ 8067D58
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	bl script_read_halfword
@@ -5700,10 +4007,10 @@ sub_8067D58: @ 8067D58
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8067D58
+	thumb_func_end ScrCmd_setdooropened2
 
-	thumb_func_start sub_8067D9C
-sub_8067D9C: @ 8067D9C
+	thumb_func_start ScrCmd_setdoorclosed2
+ScrCmd_setdoorclosed2: @ 8067D9C
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	bl script_read_halfword
@@ -5733,10 +4040,10 @@ sub_8067D9C: @ 8067D9C
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8067D9C
+	thumb_func_end ScrCmd_setdoorclosed2
 
-	thumb_func_start sub_8067DE0
-sub_8067DE0: @ 8067DE0
+	thumb_func_start ScrCmd_event_b1
+ScrCmd_event_b1: @ 8067DE0
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -5784,20 +4091,20 @@ sub_8067DE0: @ 8067DE0
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8067DE0
+	thumb_func_end ScrCmd_event_b1
 
-	thumb_func_start sub_8067E4C
-sub_8067E4C: @ 8067E4C
+	thumb_func_start ScrCmd_event_b2
+ScrCmd_event_b2: @ 8067E4C
 	push {lr}
 	bl sub_810E824
 	bl sub_80655F0
 	movs r0, 0x1
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8067E4C
+	thumb_func_end ScrCmd_event_b2
 
-	thumb_func_start sB3_get_coin_amount
-sB3_get_coin_amount: @ 8067E5C
+	thumb_func_start ScrCmd_checkcoins
+ScrCmd_checkcoins: @ 8067E5C
 	push {r4,lr}
 	bl script_read_halfword
 	lsls r0, 16
@@ -5810,10 +4117,10 @@ sB3_get_coin_amount: @ 8067E5C
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sB3_get_coin_amount
+	thumb_func_end ScrCmd_checkcoins
 
-	thumb_func_start sub_8067E7C
-sub_8067E7C: @ 8067E7C
+	thumb_func_start ScrCmd_givecoins
+ScrCmd_givecoins: @ 8067E7C
 	push {lr}
 	bl script_read_halfword
 	lsls r0, 16
@@ -5841,10 +4148,10 @@ _08067EA8:
 	bx r1
 	.align 2, 0
 _08067EB0: .4byte 0x0202e8dc
-	thumb_func_end sub_8067E7C
+	thumb_func_end ScrCmd_givecoins
 
-	thumb_func_start sub_8067EB4
-sub_8067EB4: @ 8067EB4
+	thumb_func_start ScrCmd_removecoins
+ScrCmd_removecoins: @ 8067EB4
 	push {lr}
 	bl script_read_halfword
 	lsls r0, 16
@@ -5872,7 +4179,7 @@ _08067EE0:
 	bx r1
 	.align 2, 0
 _08067EE8: .4byte 0x0202e8dc
-	thumb_func_end sub_8067EB4
+	thumb_func_end ScrCmd_removecoins
 
 	thumb_func_start sub_8067EEC
 sub_8067EEC: @ 8067EEC

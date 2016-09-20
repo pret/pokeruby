@@ -88,6 +88,8 @@ SECTIONS {
         src/play_time.o(.text);
         asm/rom4.o(.text);
         src/text_window.o(.text);
+        src/script.o(.text);
+        src/scrcmd.o(.text);
         asm/rom_8065394.o(.text);
         src/menu.o(.text);
         asm/rom_8072DF8.o(.text);

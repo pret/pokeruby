@@ -72,6 +72,39 @@ struct SecretBaseRecord
     u8 partyEVs[6];
 };
 
+struct WarpData
+{
+    s8 mapGroup;
+    s8 mapNum;
+    u8 warpId;
+    s16 x, y;
+};
+
+struct RamScriptData
+{
+    u8 magic;
+    u8 mapGroup;
+    u8 mapNum;
+    u8 objectId;
+    u8 script[995];
+};
+
+struct RamScript
+{
+    u32 checksum;
+    struct RamScriptData data;
+};
+
+struct SaveBlock1
+{
+    struct Coords16 pos;
+    struct WarpData location;
+    u8 filler[0x3684];
+    struct RamScript ramScript;
+};
+
+extern struct SaveBlock1 gSaveBlock1;
+
 struct Time
 {
     s16 days;

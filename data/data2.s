@@ -7062,8 +7062,9 @@ gUnknown_083761F0:: @ 83761F0
 gMessageBoxTilemap:: @ 8376290
 	.incbin "graphics/text_window/message_box_map.bin"
 
+	.align 2
 gUnknown_083762D8:: @ 83762D8
-	.space 4
+	.4byte NULL
 
 gUnknown_083762DC:: @ 83762DC
 	.incbin "baserom.gba", 0x003762dc, 0x14

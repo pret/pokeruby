@@ -33,6 +33,14 @@ gUnknown_02024E8C = 0x2024E8C;
 
 gSaveBlock2 = 0x2024EA4;
 
+gSaveBlock1 = 0x2025734;
+
+gMapHeader = 0x202E828;
+
+gUnknown_0202E8AC = 0x202E8AC;
+gUnknown_0202E8B0 = 0x202E8B0;
+gScriptResult = 0x202E8DC;
+
 gMenuWindow = 0x202E908;
 gMenuWindowPtr = 0x202E9C8;
 gMenuMultistepInitState = 0x202E9CC;
