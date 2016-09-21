@@ -39,6 +39,13 @@ gMapHeader = 0x202E828;
 
 gUnknown_0202E8AC = 0x202E8AC;
 gUnknown_0202E8B0 = 0x202E8B0;
+gUnknown_0202E8B4 = 0x202E8B4;
+gUnknown_0202E8B6 = 0x202E8B6;
+gUnknown_0202E8B8 = 0x202E8B8;
+gUnknown_0202E8BA = 0x202E8BA;
+gUnknown_0202E8C4 = 0x202E8C4;
+gUnknown_0202E8C6 = 0x202E8C6;
+gUnknown_0202E8C8 = 0x202E8C8;
 gScriptResult = 0x202E8DC;
 
 gMenuWindow = 0x202E908;

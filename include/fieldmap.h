@@ -32,6 +32,14 @@ struct MapHeader
     // TODO: rest of struct
 };
 
+struct MapObject
+{
+    u32 active:1;
+    u8 filler[0x20];
+};
+
+extern struct MapObject gMapObjects[];
+extern u8 gSelectedMapObject;
 extern struct MapHeader gMapHeader;
 
 #endif // GUARD_FIELDMAP_H

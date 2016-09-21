@@ -24,6 +24,9 @@ gUnknown_3004820 = 0x3004820;
 
 word_3004858 = 0x3004858;
 
+gMapObjects = 0x30048A0;
+gSelectedMapObject = 0x3004AE0;
+
 gTasks = 0x3004B20;
 
 gSaveFileStatus = 0x3005EB8;

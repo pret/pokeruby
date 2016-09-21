@@ -17,6 +17,8 @@
 
 #define RTC_ERR_FLAG_MASK      0x0FF0
 
+extern struct Time gLocalTime;
+
 void RtcInit();
 u16 RtcGetErrorStatus();
 void RtcReset();
