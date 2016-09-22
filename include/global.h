@@ -18,6 +18,7 @@
 extern u8 gStringVar1[];
 extern u8 gStringVar2[];
 extern u8 gStringVar3[];
+extern u8 gStringVar4[];
 
 enum
 {
@@ -99,7 +100,10 @@ struct SaveBlock1
 {
     struct Coords16 pos;
     struct WarpData location;
-    u8 filler[0x3684];
+    u8 filler_C[0x484];
+    u32 money;
+    u16 coins;
+    u8 filler_496[0x31FA];
     struct RamScript ramScript;
 };
 
