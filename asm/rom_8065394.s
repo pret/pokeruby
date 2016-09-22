@@ -440,7 +440,7 @@ _08068208:
 	bl audio_play
 _0806822C:
 	adds r0, r4, 0
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	movs r0, 0x1
 _08068234:
 	pop {r4}
@@ -675,7 +675,7 @@ _080683E8:
 	bl GetFieldObjectScriptPointerByFieldObjectId
 	adds r1, r0, 0
 	ldrb r0, [r4]
-	bl sub_806580C
+	bl GetRamScript
 	adds r1, r0, 0
 _0806840C:
 	pop {r4-r6}
@@ -1109,7 +1109,7 @@ sub_8068770: @ 8068770
 	cmp r0, 0x2
 	bne _0806879C
 	ldr r0, _08068798
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	movs r0, 0x1
 	b _0806879E
 	.align 2, 0
@@ -1140,7 +1140,7 @@ sub_80687A4: @ 80687A4
 	cmp r0, 0x1
 	bne _080687DC
 	ldr r0, _080687D8
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	movs r0, 0x1
 	b _080687DE
 	.align 2, 0
@@ -1216,7 +1216,7 @@ mapheader_trigger_activate_at__run_now: @ 806883C
 	bl mapheader_trigger_activate_at
 	cmp r0, 0
 	beq _08068868
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	movs r0, 0x1
 	b _0806886A
 	.align 2, 0
@@ -1242,7 +1242,7 @@ sub_8068870: @ 8068870
 	b _0806888C
 _08068884:
 	ldr r0, _08068890
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	movs r0, 0x1
 _0806888C:
 	pop {r1}
@@ -1291,7 +1291,7 @@ _080688CC:
 _080688E6:
 	ldr r0, _080688F4
 _080688E8:
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 _080688EC:
 	movs r0, 0x1
 _080688EE:
@@ -1579,7 +1579,7 @@ _08068B02:
 	cmp r0, 0x1
 	bne _08068B20
 	ldr r0, _08068B1C
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	movs r0, 0x1
 	b _08068B2A
 	.align 2, 0
@@ -1931,7 +1931,7 @@ _08068D92:
 	b _08068DB4
 _08068DAC:
 	adds r0, r1, 0
-	bl script_env_2_execute_new_script
+	bl ScriptContext2_RunNewScript
 _08068DB2:
 	movs r0, 0
 _08068DB4:
@@ -2952,7 +2952,7 @@ sub_80694B8: @ 80694B8
 	lsls r1, 3
 	ldr r0, _080694E8
 	adds r4, r1, r0
-	bl script_env_2_is_enabled
+	bl ScriptContext2_IsEnabled
 	lsls r0, 24
 	cmp r0, 0
 	bne _080694E0
@@ -18934,7 +18934,7 @@ sub_8071310: @ 8071310
 _08071326:
 	ldr r0, _08071334
 	bl sub_8071284
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -19310,7 +19310,7 @@ _080715F0: .4byte sub_8071338
 _080715F4:
 	bl MenuZeroFillScreen
 	bl sub_8064E2C
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 	movs r0, 0x1
 	b _08071606
 _08071604:
@@ -19439,7 +19439,7 @@ _080716E8:
 _080716EC:
 	adds r0, r4, 0
 	bl DestroyTask
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 _080716F6:
 	pop {r4}
 	pop {r0}
@@ -20140,7 +20140,7 @@ sub_8071C20: @ 8071C20
 	bl audio_play
 	bl MenuZeroFillScreen
 	bl sub_8064E2C
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 	bl sub_8072DEC
 	pop {r0}
 	bx r0

@@ -16,7 +16,7 @@ extern ScrCmdFunc gScriptCmdTable[];
 extern ScrCmdFunc gScriptCmdTableEnd[];
 extern void *gUnknown_083762D8;
 
-void script_env_init(struct ScriptContext *ctx, void *cmdTable, void *cmdTableEnd)
+void InitScriptContext(struct ScriptContext *ctx, void *cmdTable, void *cmdTableEnd)
 {
     s32 i;
 
@@ -34,26 +34,26 @@ void script_env_init(struct ScriptContext *ctx, void *cmdTable, void *cmdTableEn
         ctx->stack[i] = 0;
 }
 
-u8 script_setup_bytecode_script(struct ScriptContext *ctx, void *ptr)
+u8 SetupBytecodeScript(struct ScriptContext *ctx, void *ptr)
 {
     ctx->scriptPtr = ptr;
     ctx->mode = 1;
     return 1;
 }
 
-void script_setup_asm_script(struct ScriptContext *ctx, void *ptr)
+void SetupNativeScript(struct ScriptContext *ctx, void *ptr)
 {
     ctx->mode = 2;
     ctx->nativePtr = ptr;
 }
 
-void script_stop(struct ScriptContext *ctx)
+void StopScript(struct ScriptContext *ctx)
 {
     ctx->mode = 0;
     ctx->scriptPtr = 0;
 }
 
-u8 sub_80653EC(struct ScriptContext *ctx)
+u8 RunScript(struct ScriptContext *ctx)
 {
     if (ctx->mode == 0)
         return 0;
@@ -106,7 +106,7 @@ u8 sub_80653EC(struct ScriptContext *ctx)
     return 1;
 }
 
-u8 script_stack_push(struct ScriptContext *ctx, u8 *ptr)
+u8 ScriptPush(struct ScriptContext *ctx, u8 *ptr)
 {
     if (ctx->stackDepth + 1 >= 20)
     {
@@ -120,7 +120,7 @@ u8 script_stack_push(struct ScriptContext *ctx, u8 *ptr)
     }
 }
 
-u8 *script_stack_pop(struct ScriptContext *ctx)
+u8 *ScriptPop(struct ScriptContext *ctx)
 {
     if (ctx->stackDepth == 0)
         return NULL;
@@ -129,30 +129,30 @@ u8 *script_stack_pop(struct ScriptContext *ctx)
     return ctx->stack[ctx->stackDepth];
 }
 
-void script_jump(struct ScriptContext *ctx, u8 *ptr)
+void ScriptJump(struct ScriptContext *ctx, u8 *ptr)
 {
     ctx->scriptPtr = ptr;
 }
 
-void script_call(struct ScriptContext *ctx, u8 *ptr)
+void ScriptCall(struct ScriptContext *ctx, u8 *ptr)
 {
-    script_stack_push(ctx, ctx->scriptPtr);
+    ScriptPush(ctx, ctx->scriptPtr);
     ctx->scriptPtr = ptr;
 }
 
-void script_return(struct ScriptContext *ctx)
+void ScriptReturn(struct ScriptContext *ctx)
 {
-    ctx->scriptPtr = script_stack_pop(ctx);
+    ctx->scriptPtr = ScriptPop(ctx);
 }
 
-u16 script_read_halfword(struct ScriptContext *ctx)
+u16 ScriptReadHalfword(struct ScriptContext *ctx)
 {
     u16 value = *(ctx->scriptPtr++);
     value |= *(ctx->scriptPtr++) << 8;
     return value;
 }
 
-u32 script_read_word(struct ScriptContext *ctx)
+u32 ScriptReadWord(struct ScriptContext *ctx)
 {
     u32 value0 = *(ctx->scriptPtr++);
     u32 value1 = *(ctx->scriptPtr++);
@@ -161,28 +161,28 @@ u32 script_read_word(struct ScriptContext *ctx)
     return (((((value3 << 8) + value2) << 8) + value1) << 8) + value0;
 }
 
-void script_env_2_enable(void)
+void ScriptContext2_Enable(void)
 {
     sScriptContext2Enabled = TRUE;
 }
 
-void script_env_2_disable(void)
+void ScriptContext2_Disable(void)
 {
     sScriptContext2Enabled = FALSE;
 }
 
-bool8 script_env_2_is_enabled(void)
+bool8 ScriptContext2_IsEnabled(void)
 {
     return sScriptContext2Enabled;
 }
 
-void script_env_1_init(void)
+void ScriptContext1_Init(void)
 {
-    script_env_init(&sScriptContext1, gScriptCmdTable, gScriptCmdTableEnd);
+    InitScriptContext(&sScriptContext1, gScriptCmdTable, gScriptCmdTableEnd);
     sScriptContext1Status = 2;
 }
 
-bool8 script_env_2_run_current_script(void)
+bool8 ScriptContext2_RunScript(void)
 {
     if (sScriptContext1Status == 2)
         return 0;
@@ -190,42 +190,42 @@ bool8 script_env_2_run_current_script(void)
     if (sScriptContext1Status == 1)
         return 0;
 
-    script_env_2_enable();
+    ScriptContext2_Enable();
 
-    if (!sub_80653EC(&sScriptContext1))
+    if (!RunScript(&sScriptContext1))
     {
         sScriptContext1Status = 2;
-        script_env_2_disable();
+        ScriptContext2_Disable();
         return 0;
     }
 
     return 1;
 }
 
-void script_env_1_execute_new_script(u8 *ptr)
+void ScriptContext1_SetupScript(u8 *ptr)
 {
-    script_env_init(&sScriptContext1, gScriptCmdTable, gScriptCmdTableEnd);
-    script_setup_bytecode_script(&sScriptContext1, ptr);
-    script_env_2_enable();
+    InitScriptContext(&sScriptContext1, gScriptCmdTable, gScriptCmdTableEnd);
+    SetupBytecodeScript(&sScriptContext1, ptr);
+    ScriptContext2_Enable();
     sScriptContext1Status = 0;
 }
 
-void sub_80655F0(void)
+void ScriptContext1_Stop(void)
 {
     sScriptContext1Status = 1;
 }
 
-void script_env_2_enable_and_set_ctx_running()
+void EnableBothScriptContexts()
 {
     sScriptContext1Status = 0;
-    script_env_2_enable();
+    ScriptContext2_Enable();
 }
 
-void script_env_2_execute_new_script(u8 *ptr)
+void ScriptContext2_RunNewScript(u8 *ptr)
 {
-    script_env_init(&sScriptContext2, &gScriptCmdTable, &gScriptCmdTableEnd);
-    script_setup_bytecode_script(&sScriptContext2, ptr);
-    while (sub_80653EC(&sScriptContext2) == 1)
+    InitScriptContext(&sScriptContext2, &gScriptCmdTable, &gScriptCmdTableEnd);
+    SetupBytecodeScript(&sScriptContext2, ptr);
+    while (RunScript(&sScriptContext2) == 1)
         ;
 }
 
@@ -253,7 +253,7 @@ void mapheader_run_script_by_tag(u8 tag)
 {
     u8 *ptr = mapheader_get_tagged_pointer(tag);
     if (ptr)
-        script_env_2_execute_new_script(ptr);
+        ScriptContext2_RunNewScript(ptr);
 }
 
 u8 *mapheader_get_first_match_from_tagged_ptr_list(u8 tag)
@@ -306,7 +306,7 @@ bool8 mapheader_run_first_tag2_script_list_match(void)
     if (!ptr)
         return 0;
 
-    script_env_1_execute_new_script(ptr);
+    ScriptContext1_SetupScript(ptr);
     return 1;
 }
 
@@ -314,10 +314,10 @@ void mapheader_run_first_tag4_script_list_match()
 {
     u8 *ptr = mapheader_get_first_match_from_tagged_ptr_list(4);
     if (ptr)
-        script_env_2_execute_new_script(ptr);
+        ScriptContext2_RunNewScript(ptr);
 }
 
-u32 sub_8065760(void)
+u32 CalculateRamScriptChecksum(void)
 {
     u32 i;
     u32 sum = 0;
@@ -326,16 +326,16 @@ u32 sub_8065760(void)
     return sum;
 }
 
-void killram(void)
+void ClearRamScript(void)
 {
     CpuFill32(0, &gSaveBlock1.ramScript, sizeof(struct RamScript));
 }
 
-bool8 sub_80657A8(u8 *a1, u16 a2, u8 a3, u8 a4, u8 a5)
+bool8 InitRamScript(u8 *a1, u16 a2, u8 a3, u8 a4, u8 a5)
 {
     struct RamScriptData *scriptData = &gSaveBlock1.ramScript.data;
 
-    killram();
+    ClearRamScript();
 
     if (a2 > 995)
         return FALSE;
@@ -345,11 +345,11 @@ bool8 sub_80657A8(u8 *a1, u16 a2, u8 a3, u8 a4, u8 a5)
     scriptData->mapNum = a4;
     scriptData->objectId = a5;
     memcpy(scriptData->script, a1, a2);
-    gSaveBlock1.ramScript.checksum = sub_8065760();
+    gSaveBlock1.ramScript.checksum = CalculateRamScriptChecksum();
     return TRUE;
 }
 
-u8 *sub_806580C(u8 a1, u8 *a2)
+u8 *GetRamScript(u8 a1, u8 *a2)
 {
     struct RamScriptData *scriptData = &gSaveBlock1.ramScript.data;
     gUnknown_0202E8AC = 0;
@@ -358,12 +358,12 @@ u8 *sub_806580C(u8 a1, u8 *a2)
      && scriptData->mapNum == gSaveBlock1.location.mapNum
      && scriptData->objectId == a1)
     {
-        if (sub_8065760() == gSaveBlock1.ramScript.checksum)
+        if (CalculateRamScriptChecksum() == gSaveBlock1.ramScript.checksum)
         {
             gUnknown_0202E8AC = a2;
             return scriptData->script;
         }
-        killram();
+        ClearRamScript();
     }
     return a2;
 }

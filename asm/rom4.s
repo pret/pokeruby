@@ -271,7 +271,7 @@ _08052E7E:
 	bl sub_8145A78
 	bl sub_8052E04
 	ldr r0, _08052F58
-	bl script_env_2_execute_new_script
+	bl ScriptContext2_RunNewScript
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -290,7 +290,7 @@ _08052F58: .4byte gUnknown_0819FA81
 sub_8052F5C: @ 8052F5C
 	push {lr}
 	ldr r0, _08052F88
-	bl script_env_2_execute_new_script
+	bl ScriptContext2_RunNewScript
 	ldr r1, _08052F8C
 	movs r0, 0x92
 	lsls r0, 3
@@ -348,7 +348,7 @@ new_game: @ 8052FCC
 	ldr r0, _0805300C
 	bl FlagReset
 	ldr r0, _08053010
-	bl script_env_2_execute_new_script
+	bl ScriptContext2_RunNewScript
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -3000,7 +3000,7 @@ c1_overworld_normal: @ 80542F8
 	adds r1, r5, 0
 	adds r2, r4, 0
 	bl process_overworld_input
-	bl script_env_2_is_enabled
+	bl ScriptContext2_IsEnabled
 	lsls r0, 24
 	cmp r0, 0
 	bne _08054346
@@ -3008,7 +3008,7 @@ c1_overworld_normal: @ 80542F8
 	bl sub_8068024
 	cmp r0, 0x1
 	bne _0805433C
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	bl HideMapNamePopUpWindow
 	b _08054346
 _0805433C:
@@ -3045,7 +3045,7 @@ _0805436C: .4byte c2_overworld
 	thumb_func_start c2_overworld_basic
 c2_overworld_basic: @ 8054370
 	push {lr}
-	bl script_env_2_run_current_script
+	bl ScriptContext2_RunScript
 	bl RunTasks
 	bl AnimateSprites
 	bl CameraUpdate
@@ -3139,8 +3139,8 @@ CB2_NewGame: @ 8054410
 	bl NewGameInitData
 	bl player_avatar_init_params_reset
 	bl PlayTimeCounter_Start
-	bl script_env_1_init
-	bl script_env_2_disable
+	bl ScriptContext1_Init
+	bl ScriptContext2_Disable
 	ldr r1, _08054454
 	ldr r0, _08054458
 	str r0, [r1]
@@ -3180,8 +3180,8 @@ c2_whiteout: @ 8054468
 	bl ResetSafariZoneFlag_
 	bl sub_8052F5C
 	bl player_avatar_init_params_reset
-	bl script_env_1_init
-	bl script_env_2_disable
+	bl ScriptContext1_Init
+	bl ScriptContext2_Disable
 	ldr r1, _080544CC
 	ldr r0, _080544D0
 	str r0, [r1]
@@ -3212,8 +3212,8 @@ _080544D8: .4byte c2_overworld
 CB2_LoadMap: @ 80544DC
 	push {lr}
 	bl FieldClearVBlankHBlankCallbacks
-	bl script_env_1_init
-	bl script_env_2_disable
+	bl ScriptContext1_Init
+	bl ScriptContext2_Disable
 	movs r0, 0
 	bl set_callback1
 	ldr r0, _08054500
@@ -3257,8 +3257,8 @@ sub_8054534: @ 8054534
 	cmp r0, 0
 	bne _08054554
 	bl FieldClearVBlankHBlankCallbacks
-	bl script_env_1_init
-	bl script_env_2_disable
+	bl ScriptContext1_Init
+	bl ScriptContext2_Disable
 	movs r0, 0
 	bl set_callback1
 _08054554:
@@ -3397,8 +3397,8 @@ sub_805465C: @ 805465C
 	ldr r1, _08054694
 	ldr r0, _08054698
 	str r0, [r1]
-	bl script_env_1_init
-	bl script_env_2_disable
+	bl ScriptContext1_Init
+	bl ScriptContext2_Disable
 	bl c2_exit_to_overworld_2_switch
 	pop {r0}
 	bx r0
@@ -3503,8 +3503,8 @@ CB2_ContinueSavedGame: @ 8054734
 	bl sub_805308C
 	bl sub_8055FC0
 	bl PlayTimeCounter_Start
-	bl script_env_1_init
-	bl script_env_2_disable
+	bl ScriptContext1_Init
+	bl ScriptContext2_Disable
 	bl sub_80479F8
 	cmp r0, 0x1
 	bne _08054788
@@ -3639,8 +3639,8 @@ _08054854:
 	.4byte _08054930
 _0805488C:
 	bl FieldClearVBlankHBlankCallbacks
-	bl script_env_1_init
-	bl script_env_2_disable
+	bl ScriptContext1_Init
+	bl ScriptContext2_Disable
 	bl sub_8054F70
 	bl sub_8054BA8
 	b _08054928
@@ -5015,7 +5015,7 @@ _0805538C: .4byte 0x03000584
 sub_8055390: @ 8055390
 	push {r4,lr}
 	adds r4, r0, 0
-	bl script_env_2_is_enabled
+	bl ScriptContext2_IsEnabled
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -5064,7 +5064,7 @@ sub_80553E0: @ 80553E0
 	thumb_func_start sub_80553E4
 sub_80553E4: @ 80553E4
 	push {r4,lr}
-	bl script_env_2_is_enabled
+	bl ScriptContext2_IsEnabled
 	lsls r0, 24
 	lsrs r0, 24
 	movs r4, 0x11
@@ -5093,7 +5093,7 @@ sub_8055408: @ 8055408
 	cmp r0, 0x2
 	bhi _08055424
 	movs r4, 0x1A
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 	ldr r0, _08055434
 	bl sub_80543DC
 _08055424:
@@ -5118,7 +5118,7 @@ sub_8055438: @ 8055438
 	cmp r0, 0x2
 	bhi _08055454
 	movs r4, 0x1A
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 	ldr r0, _08055464
 	bl sub_80543DC
 _08055454:
@@ -5193,7 +5193,7 @@ sub_80554BC: @ 80554BC
 	cmp r0, 0x1
 	bne _080554D4
 	ldr r0, _080554DC
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	ldr r0, _080554E0
 	bl sub_80543DC
 _080554D4:
@@ -5621,7 +5621,7 @@ _080557E2:
 	thumb_func_start sub_80557E8
 sub_80557E8: @ 80557E8
 	push {lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80557E8
@@ -5632,7 +5632,7 @@ sub_80557F4: @ 80557F4
 	movs r0, 0x6
 	bl audio_play
 	bl sub_8071310
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80557F4
@@ -5644,8 +5644,8 @@ sub_8055808: @ 8055808
 	movs r0, 0x5
 	bl audio_play
 	adds r0, r4, 0
-	bl script_env_1_execute_new_script
-	bl script_env_2_enable
+	bl ScriptContext1_SetupScript
+	bl ScriptContext2_Enable
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -5657,8 +5657,8 @@ sub_8055824: @ 8055824
 	movs r0, 0x6
 	bl audio_play
 	ldr r0, _0805583C
-	bl script_env_1_execute_new_script
-	bl script_env_2_enable
+	bl ScriptContext1_SetupScript
+	bl ScriptContext2_Enable
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -5672,8 +5672,8 @@ sub_8055840: @ 8055840
 	movs r0, 0x5
 	bl audio_play
 	adds r0, r4, 0
-	bl script_env_1_execute_new_script
-	bl script_env_2_enable
+	bl ScriptContext1_SetupScript
+	bl ScriptContext2_Enable
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -5683,8 +5683,8 @@ sub_8055840: @ 8055840
 sub_805585C: @ 805585C
 	push {lr}
 	ldr r0, _0805586C
-	bl script_env_1_execute_new_script
-	bl script_env_2_enable
+	bl ScriptContext1_SetupScript
+	bl ScriptContext2_Enable
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -16055,7 +16055,7 @@ _08059E80: .4byte 0x0202e858
 sub_8059E84: @ 8059E84
 	push {r4,lr}
 	adds r4, r0, 0
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	ldr r1, _08059EA0
 	movs r0, 0x1
 	strb r0, [r1, 0x6]
@@ -16163,7 +16163,7 @@ sub_8059F40: @ 8059F40
 	ldr r1, _08059F8C
 	movs r0, 0
 	strb r0, [r1, 0x6]
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 	ldr r0, _08059F90
 	bl FindTaskIdByFunc
 	lsls r0, 24
@@ -16355,7 +16355,7 @@ sub_805A0D8: @ 805A0D8
 	ldr r1, _0805A0FC
 	movs r0, 0x1
 	strb r0, [r1, 0x6]
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	movs r0, 0x2D
 	bl audio_play
 	movs r0, 0x1
@@ -16478,7 +16478,7 @@ sub_805A1B8: @ 805A1B8
 	lsrs r1, 24
 	adds r0, r5, 0
 	bl FieldObjectSetSpecialAnim
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 	ldr r1, _0805A204
 	movs r0, 0
 	strb r0, [r1, 0x6]
@@ -16503,7 +16503,7 @@ sub_805A20C: @ 805A20C
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	bl sav1_reset_battle_music_maybe
 	bl sub_8053F84
 	ldr r2, _0805A258
@@ -16623,7 +16623,7 @@ sub_805A2D0: @ 805A2D0
 	bl FieldObjectSetSpecialAnim
 	movs r0, 0
 	strb r0, [r6, 0x6]
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 	ldrb r1, [r4, 0x1A]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -16704,7 +16704,7 @@ _0805A3B0: .4byte 0x03004b20
 sub_805A3B4: @ 805A3B4
 	push {r4,lr}
 	adds r4, r0, 0
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	ldr r1, _0805A3D0
 	movs r0, 0x1
 	strb r0, [r1, 0x6]
@@ -17204,7 +17204,7 @@ _0805A780:
 	ldr r1, _0805A7B4
 	movs r0, 0
 	strb r0, [r1, 0x6]
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 	ldrh r0, [r5, 0x26]
 	lsls r0, 24
 	lsrs r0, 24
@@ -17403,7 +17403,7 @@ fishF: @ 805A914
 	ldr r1, _0805A94C
 	movs r0, 0
 	strb r0, [r1, 0x6]
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 	bl sub_806451C
 	bl MenuZeroFillScreen
 	movs r0, 0

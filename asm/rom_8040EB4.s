@@ -3356,7 +3356,7 @@ _0804279C:
 	movs r2, 0x1D
 	movs r3, 0xD
 	bl MenuZeroFillWindowRect
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	b _08042816
 	.align 2, 0
 _080427DC: .4byte 0x03005ce0
@@ -3381,7 +3381,7 @@ _080427E8:
 	movs r2, 0x1D
 	movs r3, 0xD
 	bl MenuZeroFillWindowRect
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 _08042816:
 	pop {r4,r5}
 	pop {r0}
@@ -3923,7 +3923,7 @@ sub_8042C6C: @ 8042C6C
 sub_8042C80: @ 8042C80
 	push {lr}
 	sub sp, 0x4
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	ldr r0, _08042CA8
 	movs r1, 0xA
 	bl CreateTask
@@ -26165,7 +26165,7 @@ _0804E170: .4byte sub_8047CD8
 sub_804E174: @ 804E174
 	push {lr}
 	sub sp, 0x4
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	ldr r0, _0804E19C
 	movs r1, 0xA
 	bl CreateTask

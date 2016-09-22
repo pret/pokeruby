@@ -18,26 +18,26 @@ struct ScriptContext
     u32 data[4];
 };
 
-void script_env_init(struct ScriptContext *ctx, void *cmdTable, void *cmdTableEnd);
-u8 script_setup_bytecode_script(struct ScriptContext *ctx, void *ptr);
-void script_setup_asm_script(struct ScriptContext *ctx, void *ptr);
-void script_stop(struct ScriptContext *ctx);
-u8 sub_80653EC(struct ScriptContext *ctx);
-u8 script_stack_push(struct ScriptContext *ctx, u8 *ptr);
-u8 *script_stack_pop(struct ScriptContext *ctx);
-void script_jump(struct ScriptContext *ctx, u8 *ptr);
-void script_call(struct ScriptContext *ctx, u8 *ptr);
-void script_return(struct ScriptContext *ctx);
-u16 script_read_halfword(struct ScriptContext *ctx);
-u32 script_read_word(struct ScriptContext *ctx);
-void script_env_2_enable(void);
-void script_env_2_disable(void);
-bool8 script_env_2_is_enabled(void);
-void script_env_1_init(void);
-bool8 script_env_2_run_current_script(void);
-void script_env_1_execute_new_script(u8 *ptr);
-void sub_80655F0(void);
-void script_env_2_enable_and_set_ctx_running();
-void script_env_2_execute_new_script(u8 *ptr);
+void InitScriptContext(struct ScriptContext *ctx, void *cmdTable, void *cmdTableEnd);
+u8 SetupBytecodeScript(struct ScriptContext *ctx, void *ptr);
+void SetupNativeScript(struct ScriptContext *ctx, void *ptr);
+void StopScript(struct ScriptContext *ctx);
+u8 RunScript(struct ScriptContext *ctx);
+u8 ScriptPush(struct ScriptContext *ctx, u8 *ptr);
+u8 *ScriptPop(struct ScriptContext *ctx);
+void ScriptJump(struct ScriptContext *ctx, u8 *ptr);
+void ScriptCall(struct ScriptContext *ctx, u8 *ptr);
+void ScriptReturn(struct ScriptContext *ctx);
+u16 ScriptReadHalfword(struct ScriptContext *ctx);
+u32 ScriptReadWord(struct ScriptContext *ctx);
+void ScriptContext2_Enable(void);
+void ScriptContext2_Disable(void);
+bool8 ScriptContext2_IsEnabled(void);
+void ScriptContext1_Init(void);
+bool8 ScriptContext2_RunScript(void);
+void ScriptContext1_SetupScript(u8 *ptr);
+void ScriptContext1_Stop(void);
+void EnableBothScriptContexts();
+void ScriptContext2_RunNewScript(u8 *ptr);
 
 #endif // GUARD_SCRIPT_H
