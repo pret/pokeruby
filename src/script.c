@@ -2,15 +2,17 @@
 #include "script.h"
 #include "fieldmap.h"
 
+#define RAM_SCRIPT_MAGIC 51
+
 extern u16 VarGet(u16);
 
 extern u8 *gUnknown_0202E8AC;
 extern u32 gUnknown_0202E8B0;
 
-extern u8 sScriptContext1Status; // 0x30005B0
-extern struct ScriptContext sScriptContext1; // 0x30005B8
-extern struct ScriptContext sScriptContext2; // 0x3000630
-extern bool8 sScriptContext2Enabled; // 0x30006A4
+extern u8 sScriptContext1Status;
+extern struct ScriptContext sScriptContext1;
+extern struct ScriptContext sScriptContext2;
+extern bool8 sScriptContext2Enabled;
 
 extern ScrCmdFunc gScriptCmdTable[];
 extern ScrCmdFunc gScriptCmdTableEnd[];
@@ -331,39 +333,39 @@ void ClearRamScript(void)
     CpuFill32(0, &gSaveBlock1.ramScript, sizeof(struct RamScript));
 }
 
-bool8 InitRamScript(u8 *a1, u16 a2, u8 a3, u8 a4, u8 a5)
+bool8 InitRamScript(u8 *script, u16 scriptSize, u8 mapGroup, u8 mapNum, u8 objectId)
 {
     struct RamScriptData *scriptData = &gSaveBlock1.ramScript.data;
 
     ClearRamScript();
 
-    if (a2 > 995)
+    if (scriptSize > sizeof(scriptData->script))
         return FALSE;
 
-    scriptData->magic = 51;
-    scriptData->mapGroup = a3;
-    scriptData->mapNum = a4;
-    scriptData->objectId = a5;
-    memcpy(scriptData->script, a1, a2);
+    scriptData->magic = RAM_SCRIPT_MAGIC;
+    scriptData->mapGroup = mapGroup;
+    scriptData->mapNum = mapNum;
+    scriptData->objectId = objectId;
+    memcpy(scriptData->script, script, scriptSize);
     gSaveBlock1.ramScript.checksum = CalculateRamScriptChecksum();
     return TRUE;
 }
 
-u8 *GetRamScript(u8 a1, u8 *a2)
+u8 *GetRamScript(u8 objectId, u8 *script)
 {
     struct RamScriptData *scriptData = &gSaveBlock1.ramScript.data;
     gUnknown_0202E8AC = 0;
-    if (scriptData->magic == 51
+    if (scriptData->magic == RAM_SCRIPT_MAGIC
      && scriptData->mapGroup == gSaveBlock1.location.mapGroup
      && scriptData->mapNum == gSaveBlock1.location.mapNum
-     && scriptData->objectId == a1)
+     && scriptData->objectId == objectId)
     {
         if (CalculateRamScriptChecksum() == gSaveBlock1.ramScript.checksum)
         {
-            gUnknown_0202E8AC = a2;
+            gUnknown_0202E8AC = script;
             return scriptData->script;
         }
         ClearRamScript();
     }
-    return a2;
+    return script;
 }
