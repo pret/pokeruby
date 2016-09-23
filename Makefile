@@ -36,7 +36,7 @@ REVISION := 0
 
 .PRECIOUS: %.1bpp %.4bpp %.8bpp %.gbapal %.lz %.rl %.pcm %.bin
 
-.PHONY: all clean tidy \
+.PHONY: all clean tidy compare \
 ruby ruby_rev1 ruby_rev2 \
 compare_ruby compare_ruby_rev1 compare_ruby_rev2 \
 sapphire sapphire_rev1 sapphire_rev2 \
