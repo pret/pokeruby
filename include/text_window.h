@@ -14,6 +14,6 @@ void unref_sub_80651DC(struct Window *, u8 *);
 void DisplayMessageBox(struct Window *);
 void DrawStandardMessageBox(struct Window *win);
 void LoadMessageBoxTiles(struct Window *win);
-void sub_806536C(struct Window *win);
+void ClearStandardMessageBox(struct Window *win);
 
 #endif // GUARD_TEXT_WINDOW_H

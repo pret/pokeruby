@@ -132,7 +132,7 @@ static void PrintFieldMessageFromStringVar4(void)
 void HideFieldMessageBox(void)
 {
     DestroyFieldMessageBoxTask();
-    sub_806536C(&gFieldMessageBoxWindow);
+    ClearStandardMessageBox(&gFieldMessageBoxWindow);
     sMessageBoxMode = FIELD_MESSAGE_BOX_HIDDEN;
 }
 
