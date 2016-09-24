@@ -4212,7 +4212,7 @@ sub_8054D4C: @ 8054D4C
 	movs r0, 0
 	bl sub_805C7C4
 	bl FieldEffectActiveListClear
-	bl sub_8064A74
+	bl InitFieldMessageBox
 	bl sub_807C828
 	bl sub_8080750
 	cmp r4, 0

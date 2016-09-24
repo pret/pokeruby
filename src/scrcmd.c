@@ -7,6 +7,7 @@
 #include "fieldmap.h"
 #include "main.h"
 #include "decoration.h"
+#include "field_message_box.h"
 
 extern void ClearRamScript(void);
 extern u16 *GetVarPointer(u16);
@@ -80,14 +81,10 @@ extern void sub_8064D20(void);
 extern bool8 sub_8064CFC(void);
 extern void sub_8064DD8(void);
 extern bool8 sub_8064DB4(void);
-extern void textbox_close(void);
 extern u8 GetFieldObjectIdByLocalIdAndMap(u8, u8, u8);
 extern u8 FieldObjectClearAnimIfSpecialAnimFinished(void *);
 extern void sub_80A2178(void);
 extern void sub_806451C(void);
-extern bool8 box_related_two__2(u8 *);
-extern bool8 box_related_two__3(u8 *);
-extern bool8 sub_8064C84(void);
 extern bool8 yes_no_box(u8, u8);
 extern bool8 sub_80B5054(u8, u8, u8, u8);
 extern bool8 sub_80B50B0(u8, u8, u8, u8, u8);
@@ -1227,7 +1224,7 @@ bool8 ScrCmd_releaseall(struct ScriptContext *ctx)
 {
     u8 objectId;
 
-    textbox_close();
+    HideFieldMessageBox();
     objectId = GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0);
     FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[objectId]);
     sub_80A2178();
@@ -1239,7 +1236,7 @@ bool8 ScrCmd_release(struct ScriptContext *ctx)
 {
     u8 objectId;
 
-    textbox_close();
+    HideFieldMessageBox();
     if (gMapObjects[gSelectedMapObject].active)
         FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[gSelectedMapObject]);
     objectId = GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0);
@@ -1254,7 +1251,7 @@ bool8 ScrCmd_message(struct ScriptContext *ctx)
     u8 *msg = (u8 *)ScriptReadWord(ctx);
     if (!msg)
         msg = (u8 *)ctx->data[0];
-    box_related_two__2(msg);
+    ShowFieldMessage(msg);
     return FALSE;
 }
 
@@ -1263,19 +1260,19 @@ bool8 ScrCmd_message2(struct ScriptContext *ctx)
     u8 *msg = (u8 *)ScriptReadWord(ctx);
     if (!msg)
         msg = (u8 *)ctx->data[0];
-    box_related_two__3(msg);
+    ShowFieldAutoScrollMessage(msg);
     return FALSE;
 }
 
 bool8 ScrCmd_waittext(struct ScriptContext *ctx)
 {
-    SetupNativeScript(ctx, sub_8064C84);
+    SetupNativeScript(ctx, IsFieldMessageBoxHidden);
     return TRUE;
 }
 
 bool8 ScrCmd_closebutton(struct ScriptContext *ctx)
 {
-    textbox_close();
+    HideFieldMessageBox();
     return FALSE;
 }
 
@@ -1446,7 +1443,7 @@ bool8 ScrCmd_braillemsg(struct ScriptContext *ctx)
 bool8 ScrCmd_vtext(struct ScriptContext *ctx)
 {
     u32 v1 = ScriptReadWord(ctx);
-    box_related_two__2((u8 *)(v1 - gUnknown_0202E8B0));
+    ShowFieldMessage((u8 *)(v1 - gUnknown_0202E8B0));
     return FALSE;
 }
 
