@@ -110,13 +110,16 @@ compare_sapphire_rev2: sapphire_rev2
 
 clean: tidy
 	rm -f sound/programmable_wave_samples/*.bin sound/direct_sound_samples/*.bin sound/**/*.pcm
+	rm -f $(SONG_OBJS)
 	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.rl' \) -exec rm {} +
 
 tidy:
 	rm -f pokeruby.gba pokesapphire.gba
 	rm -f pokeruby.elf pokesapphire.elf
 	rm -f pokeruby.map pokesapphire.map
-	rm -f $(OBJS)
+	rm -f $(C_OBJS)
+	rm -f $(ASM_OBJS)
+	rm -f $(DATA_ASM_OBJS)
 	rm -f $(C_SRCS:%.c=%.i)
 	rm -f $(C_SRCS:%.c=%.s)
 
