@@ -33,7 +33,9 @@ SECTIONS {
         src/link.o(.bss);
         src/rtc.o(.bss);
 
-        . = 0x5AC;
+        . = 0x5A8;
+        src/field_message_box.o(.bss);
+        . = ALIGN(4);
         src/text_window.o(.bss);
 
         . = 0x6B0;

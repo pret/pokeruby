@@ -39,7 +39,7 @@ gMapHeader = 0x202E828;
 
 gPlayerAvatar = 0x202E858;
 
-unk_202E87C = 0x202E87C;
+gFieldMessageBoxWindow = 0x202E87C;
 
 gUnknown_0202E8AC = 0x202E8AC;
 gUnknown_0202E8B0 = 0x202E8B0;
@@ -56,7 +56,7 @@ gScriptResult = 0x202E8DC;
 gUnknown_0202E8E0 = 0x202E8E0;
 
 gMenuWindow = 0x202E908;
-word_202E9D2 = 0x202E9D2;
+gFieldMessageBoxBaseTileNum = 0x202E9D2;
 gMenuWindowPtr = 0x202E9C8;
 gMenuMultistepInitState = 0x202E9CC;
 gMenuTextTileOffset = 0x202E9CE;

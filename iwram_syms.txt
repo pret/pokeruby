@@ -2,8 +2,6 @@
 
 gPlayTimeCounterState = 0x300057C;
 
-byte_30005A8 = 0x30005A8;
-
 sScriptContext1Status = 0x30005B0;
 sScriptContext1 = 0x30005B8;
 sScriptContext2 = 0x3000630;
