@@ -52,6 +52,12 @@ struct Coords16
     s16 y;
 };
 
+struct UCoords16
+{
+    u16 x;
+    u16 y;
+};
+
 struct SecretBaseRecord
 {
     u8 sbr_field_0; // ID?

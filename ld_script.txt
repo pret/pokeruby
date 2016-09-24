@@ -87,6 +87,9 @@ SECTIONS {
         asm/rom_8040EB4.o(.text);
         src/play_time.o(.text);
         asm/rom4.o(.text);
+        src/map_obj_80643A4.o(.text);
+        src/field_message_box.o(.text);
+        src/map_obj_lock.o(.text);
         src/text_window.o(.text);
         src/script.o(.text);
         src/scrcmd.o(.text);

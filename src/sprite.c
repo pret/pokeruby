@@ -2,8 +2,6 @@
 #include "main.h"
 #include "sprite.h"
 
-#define MAX_SPRITES 64
-
 #define MAX_SPRITE_COPY_REQUESTS 64
 
 #define OAM_MATRIX_COUNT 32

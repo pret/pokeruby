@@ -5777,7 +5777,7 @@ gUnknown_08375694:: @ 8375694
 	.4byte MetatileBehavior_IsWestBlocked
 
 	.align 1
-gUnknown_083756A4:: @ 83756A4
+gDirectionToVector:: @ 83756A4
 	.2byte  0,  0
 	.2byte  0,  1
 	.2byte  0, -1
