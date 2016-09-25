@@ -6,7 +6,7 @@
 #include "field_message_box.h"
 
 extern struct Window gFieldMessageBoxWindow;
-extern u16 gFieldMessageBoxBaseTileNum;
+extern u16 gMenuTextWindowContentTileOffset;
 
 extern u16 gMenuTextTileOffset;
 
@@ -21,7 +21,7 @@ static void PrintFieldMessageFromStringVar4(void);
 void InitFieldMessageBox(void)
 {
     sMessageBoxMode = FIELD_MESSAGE_BOX_HIDDEN;
-    SetMessageBoxBaseTileNum(gFieldMessageBoxBaseTileNum);
+    SetMessageBoxBaseTileNum(gMenuTextWindowContentTileOffset);
     InitWindowFromConfig(&gFieldMessageBoxWindow, (struct WindowConfig *)&gWindowConfig_81E6CE4);
 }
 
