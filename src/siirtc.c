@@ -52,6 +52,7 @@
 
 extern vu16 GPIOPortDirection;
 
+static u16 sDummy; // unused variable
 static bool8 sLocked;
 
 static int WriteCommand(u8 value);

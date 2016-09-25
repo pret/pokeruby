@@ -10,7 +10,6 @@ CPP      := $(DEVKITARM)/bin/arm-none-eabi-cpp
 CPPFLAGS := -I tools/agbcc/include -iquote include -nostdinc -undef
 
 LD      := $(DEVKITARM)/bin/arm-none-eabi-ld
-LDFLAGS := -T ld_script.txt -T iwram_syms.txt -T ewram_syms.txt
 
 OBJCOPY := $(DEVKITARM)/bin/arm-none-eabi-objcopy
 
@@ -25,6 +24,8 @@ AIF := tools/aif2pcm/aif2pcm
 SCANINC := tools/scaninc/scaninc
 
 PREPROC := tools/preproc/preproc
+
+RAMSCRGEN := tools/ramscrgen/ramscrgen
 
 REVISION := 0
 
@@ -116,6 +117,7 @@ clean: tidy
 tidy:
 	rm -f pokeruby.gba pokesapphire.gba
 	rm -f pokeruby.elf pokesapphire.elf
+	rm -f ld_script.ld sym_bss.ld sym_common.ld sym_ewram.ld
 	rm -f pokeruby.map pokesapphire.map
 	rm -f $(C_OBJS)
 	rm -f $(ASM_OBJS)
@@ -175,8 +177,20 @@ $(DATA_ASM_OBJS): %.o: %.s $$(dep)
 $(SONG_OBJS): %.o: %.s
 	$(AS) $(ASFLAGS) -I sound -o $@ $<
 
-%.elf: ld_script.txt $(OBJS)
-	$(LD) $(LDFLAGS) -Map $*.map -o $@ $(OBJS) $(LIBGCC)
+sym_bss.ld: sym_bss.txt
+	$(RAMSCRGEN) .bss sym_bss.txt >$@
+
+sym_common.ld: sym_common.txt
+	$(RAMSCRGEN) COMMON sym_common.txt -c src,common_syms >$@
+
+sym_ewram.ld: sym_ewram.txt
+	$(RAMSCRGEN) ewram_data sym_ewram.txt >$@
+
+ld_script.ld: ld_script.txt sym_bss.ld sym_common.ld sym_ewram.ld
+	sed -f ld_script.sed ld_script.txt >ld_script.ld
+
+%.elf: ld_script.ld $(OBJS)
+	$(LD) -T ld_script.ld -T shared_syms.txt -Map $*.map -o $@ $(OBJS) $(LIBGCC)
 
 pokeruby.gba pokesapphire.gba: %.gba: %.elf
 	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0x9000000 $< $@

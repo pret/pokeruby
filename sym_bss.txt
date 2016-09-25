@@ -1,0 +1,226 @@
+	.include "src/main.o"
+	.include "src/sprite.o"
+	.include "src/text.o"
+	.include "src/string_util.o"
+	.include "src/link.o"
+	.include "src/rtc.o"
+
+	.align 2
+gUnknown_03000470: @ 3000470
+	.space 0x68
+
+gUnknown_030004D8: @ 30004D8
+	.space 0x8
+
+gUnknown_030004E0: @ 30004E0
+	.space 0x8
+
+gUnknown_030004E8: @ 30004E8
+	.space 0x18
+
+gUnknown_03000500: @ 3000500
+	.space 0x8
+
+gUnknown_03000508: @ 3000508
+	.space 0x8
+
+gUnknown_03000510: @ 3000510
+	.space 0x10
+
+gUnknown_03000520: @ 3000520
+	.space 0xC
+
+gUnknown_0300052C: @ 300052C
+	.space 0x2
+
+gUnknown_0300052E: @ 300052E
+	.space 0x2
+
+gUnknown_03000530: @ 3000530
+	.space 0x18
+
+gUnknown_03000548: @ 3000548
+	.space 0x14
+
+gUnknown_0300055C: @ 300055C
+	.space 0x4
+
+gUnknown_03000560: @ 3000560
+	.space 0x1C
+
+gPlayTimeCounterState: @ 300057C
+	.space 0x4
+
+gUnknown_03000580: @ 3000580
+	.space 0x4
+
+gUnknown_03000584: @ 3000584
+	.space 0x4
+
+gUnknown_03000588: @ 3000588
+	.space 0x8
+
+gUnknown_03000590: @ 3000590
+	.space 0x8
+
+gUnknown_03000598: @ 3000598
+	.space 0x2
+
+gUnknown_0300059A: @ 300059A
+	.space 0x2
+
+gUnknown_0300059C: @ 300059C
+	.space 0x4
+
+gUnknown_030005A0: @ 30005A0
+	.space 0x4
+
+gUnknown_030005A4: @ 30005A4
+	.space 0x2
+
+gUnknown_030005A6: @ 30005A6
+	.space 0x2
+
+	.include "src/field_message_box.o"
+	.include "src/text_window.o"
+
+	.align 2
+sScriptContext1Status: @ 30005B0
+	.space 0x8
+
+sScriptContext1: @ 30005B8
+	.space 0x78
+
+sScriptContext2: @ 3000630
+	.space 0x74
+
+sScriptContext2Enabled: @ 30006A4
+	.space 0x4
+
+gUnknown_030006A8: @ 30006A8
+	.space 0x4
+
+gUnknown_030006AC: @ 30006AC
+	.space 0x1
+
+gUnknown_030006AD: @ 30006AD
+	.space 0x3
+
+	.include "src/menu.o"
+
+	.align 2
+gUnknown_030006C0: @ 30006C0
+	.space 0x2
+
+gUnknown_030006C2: @ 30006C2
+	.space 0x2
+
+gUnknown_030006C4: @ 30006C4
+	.space 0x2
+
+gUnknown_030006C6: @ 30006C6
+	.space 0x2
+
+gUnknown_030006C8: @ 30006C8
+	.space 0x4
+
+gUnknown_030006CC: @ 30006CC
+	.space 0x4
+
+gUnknown_030006D0: @ 30006D0
+	.space 0x4
+
+gUnknown_030006D4: @ 30006D4
+	.space 0x2
+
+gUnknown_030006D6: @ 30006D6
+	.space 0x2
+
+gUnknown_030006D8: @ 30006D8
+	.space 0x1
+
+gUnknown_030006D9: @ 30006D9
+	.space 0x1
+
+gUnknown_030006DA: @ 30006DA
+	.space 0x2
+
+gUnknown_030006DC: @ 30006DC
+	.space 0x4
+
+gUnknown_030006E0: @ 30006E0
+	.space 0x20
+
+gUnknown_03000700: @ 3000700
+	.space 0x1
+
+gUnknown_03000701: @ 3000701
+	.space 0x3
+
+gUnknown_03000704: @ 3000704
+	.space 0x4
+
+gUnknown_03000708: @ 3000708
+	.space 0x10
+
+gUnknown_03000718: @ 3000718
+	.space 0x4
+
+gUnknown_0300071C: @ 300071C
+	.space 0x4
+
+gUnknown_03000720: @ 3000720
+	.space 0x1
+
+gUnknown_03000721: @ 3000721
+	.space 0x1
+
+gUnknown_03000722: @ 3000722
+	.space 0x6
+
+gUnknown_03000728: @ 3000728
+	.space 0x8
+
+gUnknown_03000730: @ 3000730
+	.space 0x10
+
+gUnknown_03000740: @ 3000740
+	.space 0x4
+
+gUnknown_03000744: @ 3000744
+	.space 0x4
+
+gUnknown_03000748: @ 3000748
+	.space 0x4
+
+gUnknown_0300074C: @ 300074C
+	.space 0x4
+
+gUnknown_03000750: @ 3000750
+	.space 0x2
+
+gUnknown_03000752: @ 3000752
+	.space 0x2
+
+gUnknown_03000754: @ 3000754
+	.space 0x2
+
+gUnknown_03000756: @ 3000756
+	.space 0x2
+
+gUnknown_03000758: @ 3000758
+	.space 0x8
+
+gUnknown_03000760: @ 3000760
+	.space 0x50
+
+gUnknown_030007B0: @ 30007B0
+	.space 0x4
+
+gUnknown_030007B4: @ 30007B4
+	.space 0x774
+
+	.include "src/agb_flash.o"
+	.include "src/siirtc.o"
+	.include "tools/agbcc/lib/libgcc.a:dp-bit.o"
+	.include "tools/agbcc/lib/libgcc.a:fp-bit.o"

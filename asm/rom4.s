@@ -53,7 +53,7 @@ set_player_trainer_id: @ 8052D2C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08052D50: .4byte 0x02024eae
+_08052D50: .4byte gUnknown_02024EAE
 	thumb_func_end set_player_trainer_id
 
 	thumb_func_start sub_8052D54
@@ -97,8 +97,8 @@ sub_8052D78: @ 8052D78
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08052DA0: .4byte 0x03005ce8
-_08052DA4: .4byte 0x02024ecc
+_08052DA0: .4byte gUnknown_03005CE8
+_08052DA4: .4byte gUnknown_02024ECC
 	thumb_func_end sub_8052D78
 
 	thumb_func_start sub_8052DA8
@@ -127,7 +127,7 @@ _08052DB8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08052DD8: .4byte 0x02025734
+_08052DD8: .4byte gSaveBlock1
 _08052DDC: .4byte gUnknown_08216604
 _08052DE0: .4byte 0x00002efc
 	thumb_func_end sub_8052DA8
@@ -146,7 +146,7 @@ sub_8052DE4: @ 8052DE4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08052DFC: .4byte 0x02024f4c
+_08052DFC: .4byte gUnknown_02024F4C
 _08052E00: .4byte 0x050001fa
 	thumb_func_end sub_8052DE4
 
@@ -200,7 +200,7 @@ sub_8052E4C: @ 8052E4C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08052E68: .4byte 0x020297ec
+_08052E68: .4byte gUnknown_020297EC
 	thumb_func_end sub_8052E4C
 
 	thumb_func_start NewGameInitData
@@ -276,12 +276,12 @@ _08052E7E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08052F3C: .4byte 0x03005eb8
-_08052F40: .4byte 0x020297ec
-_08052F44: .4byte 0x02025734
+_08052F3C: .4byte gSaveFileStatus
+_08052F40: .4byte gUnknown_020297EC
+_08052F44: .4byte gSaveBlock1
 _08052F48: .4byte gSaveBlock2
 _08052F4C: .4byte 0x00000bb8
-_08052F50: .4byte 0x03004350
+_08052F50: .4byte gPlayerPartyCount
 _08052F54: .4byte 0x00000496
 _08052F58: .4byte gUnknown_0819FA81
 	thumb_func_end NewGameInitData
@@ -306,7 +306,7 @@ sub_8052F5C: @ 8052F5C
 	bx r0
 	.align 2, 0
 _08052F88: .4byte gUnknown_0819FC74
-_08052F8C: .4byte 0x02025734
+_08052F8C: .4byte gSaveBlock1
 	thumb_func_end sub_8052F5C
 
 	thumb_func_start flag_var_implications_of_teleport_
@@ -440,7 +440,7 @@ _080530B8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080530C8: .4byte 0x02025734
+_080530C8: .4byte gSaveBlock1
 _080530CC: .4byte 0x00001604
 	thumb_func_end sub_80530AC
 
@@ -464,7 +464,7 @@ sav12_xor_increment: @ 80530D0
 	adds r0, r2, 0x1
 	b _080530FE
 	.align 2, 0
-_080530F4: .4byte 0x02025734
+_080530F4: .4byte gSaveBlock1
 _080530F8: .4byte 0x00fffffe
 _080530FC:
 	ldr r0, _08053104
@@ -493,7 +493,7 @@ sub_8053108: @ 8053108
 	ldr r0, [r1]
 	b _0805312A
 	.align 2, 0
-_08053124: .4byte 0x02025734
+_08053124: .4byte gSaveBlock1
 _08053128:
 	movs r0, 0
 _0805312A:
@@ -520,7 +520,7 @@ _0805314A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08053150: .4byte 0x02025734
+_08053150: .4byte gSaveBlock1
 	thumb_func_end sav12_xor_set
 
 	thumb_func_start sub_8053154
@@ -551,9 +551,9 @@ sub_8053154: @ 8053154
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805318C: .4byte 0x02026354
+_0805318C: .4byte gUnknown_02026354
 _08053190: .4byte 0x05000180
-_08053194: .4byte 0x0202e828
+_08053194: .4byte gMapHeader
 	thumb_func_end sub_8053154
 
 	thumb_func_start sub_8053198
@@ -575,8 +575,8 @@ _080531A4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080531B8: .4byte 0x0202e828
-_080531BC: .4byte 0x02026354
+_080531B8: .4byte gMapHeader
+_080531BC: .4byte gUnknown_02026354
 	thumb_func_end sub_8053198
 
 	thumb_func_start update_saveblock1_field_object_coords
@@ -598,7 +598,7 @@ _080531D2:
 	strh r2, [r3, 0x6]
 	b _080531EC
 	.align 2, 0
-_080531E0: .4byte 0x02026354
+_080531E0: .4byte gUnknown_02026354
 _080531E4:
 	adds r3, 0x18
 	adds r1, 0x1
@@ -626,7 +626,7 @@ _08053202:
 	strb r1, [r2, 0x9]
 	b _08053218
 	.align 2, 0
-_0805320C: .4byte 0x02026354
+_0805320C: .4byte gUnknown_02026354
 _08053210:
 	adds r2, 0x18
 	adds r3, 0x1
@@ -653,7 +653,7 @@ mapdata_load_assets_to_gpu_and_full_redraw: @ 8053220
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08053244: .4byte 0x0202e828
+_08053244: .4byte gMapHeader
 	thumb_func_end mapdata_load_assets_to_gpu_and_full_redraw
 
 	thumb_func_start get_mapdata_header
@@ -666,7 +666,7 @@ get_mapdata_header: @ 8053248
 	movs r0, 0
 	b _08053266
 	.align 2, 0
-_08053258: .4byte 0x02025734
+_08053258: .4byte gSaveBlock1
 _0805325C:
 	ldr r0, _0805326C
 	subs r1, 0x1
@@ -704,12 +704,12 @@ warp_shift: @ 8053270
 	str r1, [r2, 0x4]
 	bx lr
 	.align 2, 0
-_0805329C: .4byte 0x020297f0
-_080532A0: .4byte 0x02025734
-_080532A4: .4byte 0x020297f8
-_080532A8: .4byte 0x02029800
+_0805329C: .4byte gUnknown_020297F0
+_080532A0: .4byte gSaveBlock1
+_080532A4: .4byte gUnknown_020297F8
+_080532A8: .4byte gUnknown_02029800
 _080532AC: .4byte gUnknown_08216624
-_080532B0: .4byte 0x02029808
+_080532B0: .4byte gUnknown_02029808
 	thumb_func_end warp_shift
 
 	thumb_func_start warp_set
@@ -799,7 +799,7 @@ warp1_get_mapheader: @ 8053328
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08053348: .4byte 0x020297f8
+_08053348: .4byte gUnknown_020297F8
 	thumb_func_end warp1_get_mapheader
 
 	thumb_func_start set_current_map_header_from_sav1_save_old_name
@@ -831,8 +831,8 @@ set_current_map_header_from_sav1_save_old_name: @ 805334C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08053384: .4byte 0x0202e828
-_08053388: .4byte 0x02025734
+_08053384: .4byte gMapHeader
+_08053388: .4byte gSaveBlock1
 	thumb_func_end set_current_map_header_from_sav1_save_old_name
 
 	thumb_func_start sub_805338C
@@ -863,8 +863,8 @@ sub_805338C: @ 805338C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080533C4: .4byte 0x0202e828
-_080533C8: .4byte 0x02025734
+_080533C4: .4byte gMapHeader
+_080533C8: .4byte gSaveBlock1
 	thumb_func_end sub_805338C
 
 	thumb_func_start sub_80533CC
@@ -893,8 +893,8 @@ sub_80533CC: @ 80533CC
 	ldrh r0, [r1, 0x2]
 	b _08053434
 	.align 2, 0
-_080533FC: .4byte 0x02025734
-_08053400: .4byte 0x0202e828
+_080533FC: .4byte gSaveBlock1
+_08053400: .4byte gMapHeader
 _08053404:
 	ldrh r2, [r3, 0x8]
 	movs r1, 0x8
@@ -928,7 +928,7 @@ _08053436:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805343C: .4byte 0x0202e828
+_0805343C: .4byte gMapHeader
 	thumb_func_end sub_80533CC
 
 	thumb_func_start warp_in
@@ -971,7 +971,7 @@ warp1_set: @ 8053454
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805348C: .4byte 0x020297f8
+_0805348C: .4byte gUnknown_020297F8
 	thumb_func_end warp1_set
 
 	thumb_func_start warp1_set_2
@@ -1022,7 +1022,7 @@ saved_warp2_set: @ 80534B0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080534E8: .4byte 0x02025748
+_080534E8: .4byte gUnknown_02025748
 	thumb_func_end saved_warp2_set
 
 	thumb_func_start saved_warp2_set_2
@@ -1050,7 +1050,7 @@ saved_warp2_set_2: @ 80534EC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805351C: .4byte 0x02025748
+_0805351C: .4byte gUnknown_02025748
 	thumb_func_end saved_warp2_set_2
 
 	thumb_func_start copy_saved_warp2_bank_and_enter_x_to_warp1
@@ -1063,8 +1063,8 @@ copy_saved_warp2_bank_and_enter_x_to_warp1: @ 8053520
 	str r1, [r2, 0x4]
 	bx lr
 	.align 2, 0
-_08053530: .4byte 0x020297f8
-_08053534: .4byte 0x02025734
+_08053530: .4byte gUnknown_020297F8
+_08053534: .4byte gSaveBlock1
 	thumb_func_end copy_saved_warp2_bank_and_enter_x_to_warp1
 
 	thumb_func_start sub_8053538
@@ -1107,8 +1107,8 @@ sub_8053570: @ 8053570
 	str r1, [r2, 0x4]
 	bx lr
 	.align 2, 0
-_08053580: .4byte 0x020297f8
-_08053584: .4byte 0x02025734
+_08053580: .4byte gUnknown_020297F8
+_08053584: .4byte gSaveBlock1
 	thumb_func_end sub_8053570
 
 	thumb_func_start sub_8053588
@@ -1141,7 +1141,7 @@ _080535B8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080535C0: .4byte 0x02025750
+_080535C0: .4byte gUnknown_02025750
 	thumb_func_end sub_8053588
 
 	thumb_func_start sub_80535C4
@@ -1198,8 +1198,8 @@ _0805362A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08053634: .4byte 0x020297f8
-_08053638: .4byte 0x02025734
+_08053634: .4byte gUnknown_020297F8
+_08053638: .4byte gSaveBlock1
 	thumb_func_end sub_80535C4
 
 	thumb_func_start sub_805363C
@@ -1232,7 +1232,7 @@ sub_805363C: @ 805363C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08053674: .4byte 0x02025758
+_08053674: .4byte gUnknown_02025758
 	thumb_func_end sub_805363C
 
 	thumb_func_start sub_8053678
@@ -1245,8 +1245,8 @@ sub_8053678: @ 8053678
 	str r1, [r2, 0x4]
 	bx lr
 	.align 2, 0
-_08053688: .4byte 0x020297f8
-_0805368C: .4byte 0x02025734
+_08053688: .4byte gUnknown_020297F8
+_0805368C: .4byte gSaveBlock1
 	thumb_func_end sub_8053678
 
 	thumb_func_start sub_8053690
@@ -1279,7 +1279,7 @@ sub_8053690: @ 8053690
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080536C8: .4byte 0x02029800
+_080536C8: .4byte gUnknown_02029800
 	thumb_func_end sub_8053690
 
 	thumb_func_start warp1_set_to_warp2
@@ -1292,8 +1292,8 @@ warp1_set_to_warp2: @ 80536CC
 	str r1, [r2, 0x4]
 	bx lr
 	.align 2, 0
-_080536DC: .4byte 0x020297f8
-_080536E0: .4byte 0x02029800
+_080536DC: .4byte gUnknown_020297F8
+_080536E0: .4byte gUnknown_02029800
 	thumb_func_end warp1_set_to_warp2
 
 	thumb_func_start sub_80536E4
@@ -1326,7 +1326,7 @@ sub_80536E4: @ 80536E4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805371C: .4byte 0x02029808
+_0805371C: .4byte gUnknown_02029808
 	thumb_func_end sub_80536E4
 
 	thumb_func_start sub_8053720
@@ -1350,9 +1350,9 @@ sub_8053720: @ 8053720
 	str r1, [r2, 0x4]
 	b _0805376E
 	.align 2, 0
-_08053748: .4byte 0x02029808
-_0805374C: .4byte 0x020297f8
-_08053750: .4byte 0x020297f0
+_08053748: .4byte gUnknown_02029808
+_0805374C: .4byte gUnknown_020297F8
+_08053750: .4byte gUnknown_020297F0
 _08053754:
 	movs r0, 0
 	ldrsb r0, [r4, r0]
@@ -1383,8 +1383,8 @@ sub_8053778: @ 8053778
 	str r1, [r2, 0x4]
 	bx lr
 	.align 2, 0
-_08053788: .4byte 0x020297f8
-_0805378C: .4byte 0x02025734
+_08053788: .4byte gUnknown_020297F8
+_0805378C: .4byte gSaveBlock1
 	thumb_func_end sub_8053778
 
 	thumb_func_start unref_sub_8053790
@@ -1417,7 +1417,7 @@ unref_sub_8053790: @ 8053790
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080537C8: .4byte 0x02025740
+_080537C8: .4byte gUnknown_02025740
 	thumb_func_end unref_sub_8053790
 
 	thumb_func_start sub_80537CC
@@ -1450,7 +1450,7 @@ _080537FC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08053804: .4byte 0x02025740
+_08053804: .4byte gUnknown_02025740
 	thumb_func_end sub_80537CC
 
 	thumb_func_start gpu_sync_bg_hide
@@ -1462,7 +1462,7 @@ gpu_sync_bg_hide: @ 8053808
 	str r1, [r2, 0x10]
 	bx lr
 	.align 2, 0
-_08053814: .4byte 0x02025734
+_08053814: .4byte gSaveBlock1
 	thumb_func_end gpu_sync_bg_hide
 
 	thumb_func_start sub_8053818
@@ -1478,7 +1478,7 @@ sub_8053818: @ 8053818
 	bne _08053834
 	b _08053848
 	.align 2, 0
-_0805382C: .4byte 0x0202e828
+_0805382C: .4byte gMapHeader
 _08053830:
 	adds r0, r1, 0
 	b _0805384A
@@ -1539,7 +1539,7 @@ _08053888:
 	movs r0, 0
 	b _080538A6
 	.align 2, 0
-_0805389C: .4byte 0x02029800
+_0805389C: .4byte gUnknown_02029800
 _080538A0:
 	bl warp1_set_to_warp2
 _080538A4:
@@ -1644,7 +1644,7 @@ _0805395C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08053990: .4byte 0x0202e828
+_08053990: .4byte gMapHeader
 	thumb_func_end sub_80538F0
 
 	thumb_func_start sub_8053994
@@ -1708,10 +1708,10 @@ _08053A24:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08053A2C: .4byte 0x0202e828
-_08053A30: .4byte 0x02025734
+_08053A2C: .4byte gMapHeader
+_08053A30: .4byte gSaveBlock1
 _08053A34: .4byte 0x00000828
-_08053A38: .4byte 0x03004870
+_08053A38: .4byte gUnknown_03004870
 	thumb_func_end sub_8053994
 
 	thumb_func_start player_avatar_init_params_reset
@@ -1722,7 +1722,7 @@ player_avatar_init_params_reset: @ 8053A3C
 	strb r0, [r1]
 	bx lr
 	.align 2, 0
-_08053A48: .4byte 0x02029810
+_08053A48: .4byte gUnknown_02029810
 	thumb_func_end player_avatar_init_params_reset
 
 	thumb_func_start walkrun_find_lowest_active_bit_in_bitfield
@@ -1739,7 +1739,7 @@ walkrun_find_lowest_active_bit_in_bitfield: @ 8053A4C
 	movs r0, 0x2
 	b _08053A9E
 	.align 2, 0
-_08053A68: .4byte 0x02029810
+_08053A68: .4byte gUnknown_02029810
 _08053A6C:
 	movs r0, 0x4
 	bl TestPlayerAvatarFlags
@@ -1810,7 +1810,7 @@ sub_8053AA8: @ 8053AA8
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08053AF4: .4byte 0x02029810
+_08053AF4: .4byte gUnknown_02029810
 _08053AF8: .4byte 0xffffff00
 _08053AFC: .4byte 0xffff00ff
 	thumb_func_end sub_8053AA8
@@ -1988,7 +1988,7 @@ cur_mapdata_block_role_at_screen_center_acc_to_sav1: @ 8053C24
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08053C40: .4byte 0x02025734
+_08053C40: .4byte gSaveBlock1
 	thumb_func_end cur_mapdata_block_role_at_screen_center_acc_to_sav1
 
 	thumb_func_start sub_8053C44
@@ -2026,8 +2026,8 @@ _08053C7C:
 	movs r0, 0x1
 	b _08053C92
 	.align 2, 0
-_08053C80: .4byte 0x02025734
-_08053C84: .4byte 0x0202e828
+_08053C80: .4byte gSaveBlock1
+_08053C84: .4byte gMapHeader
 _08053C88: .4byte 0x00002418
 _08053C8C: .4byte 0x00002a18
 _08053C90:
@@ -2047,8 +2047,8 @@ sub_8053C98: @ 8053C98
 	ldr r0, _08053CAC
 	b _08053CD2
 	.align 2, 0
-_08053CA8: .4byte 0x0202e828
-_08053CAC: .4byte 0x02025734
+_08053CA8: .4byte gMapHeader
+_08053CAC: .4byte gSaveBlock1
 _08053CB0:
 	ldr r0, _08053CC4
 	bl FlagGet
@@ -2061,7 +2061,7 @@ _08053CB0:
 	b _08053CD4
 	.align 2, 0
 _08053CC4: .4byte 0x00000828
-_08053CC8: .4byte 0x02025734
+_08053CC8: .4byte gSaveBlock1
 _08053CCC:
 	ldr r0, _08053CDC
 	ldr r1, _08053CE0
@@ -2073,7 +2073,7 @@ _08053CD4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08053CDC: .4byte 0x02025734
+_08053CDC: .4byte gSaveBlock1
 _08053CE0: .4byte gUnknown_0839ACE8
 	thumb_func_end sub_8053C98
 
@@ -2097,7 +2097,7 @@ _08053CF6:
 	bx r0
 	.align 2, 0
 _08053D00: .4byte gUnknown_0839ACE8
-_08053D04: .4byte 0x02025734
+_08053D04: .4byte gSaveBlock1
 	thumb_func_end sub_8053CE4
 
 	thumb_func_start sav1_get_flash_used_on_map
@@ -2107,7 +2107,7 @@ sav1_get_flash_used_on_map: @ 8053D08
 	ldrb r0, [r0]
 	bx lr
 	.align 2, 0
-_08053D10: .4byte 0x02025734
+_08053D10: .4byte gSaveBlock1
 	thumb_func_end sav1_get_flash_used_on_map
 
 	thumb_func_start sub_8053D14
@@ -2121,8 +2121,8 @@ sub_8053D14: @ 8053D14
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08053D28: .4byte 0x02025734
-_08053D2C: .4byte 0x0202e828
+_08053D28: .4byte gSaveBlock1
+_08053D2C: .4byte gMapHeader
 	thumb_func_end sub_8053D14
 
 	thumb_func_start sub_8053D30
@@ -2254,7 +2254,7 @@ sav1_map_get_music: @ 8053DE4
 	ldr r0, _08053E08
 	b _08053E40
 	.align 2, 0
-_08053E04: .4byte 0x02025734
+_08053E04: .4byte gSaveBlock1
 _08053E08: .4byte 0x00000199
 _08053E0C:
 	ldr r4, _08053E24
@@ -2268,7 +2268,7 @@ _08053E0C:
 	adds r0, r1, 0
 	b _08053E40
 	.align 2, 0
-_08053E24: .4byte 0x02025738
+_08053E24: .4byte gUnknown_02025738
 _08053E28: .4byte 0x00007fff
 _08053E2C:
 	subs r0, r4, 0x4
@@ -2301,7 +2301,7 @@ warp1_target_get_music: @ 8053E48
 	adds r0, r1, 0
 	b _08053E80
 	.align 2, 0
-_08053E60: .4byte 0x020297f8
+_08053E60: .4byte gUnknown_020297F8
 _08053E64: .4byte 0x00007fff
 _08053E68:
 	ldr r0, _08053E78
@@ -2313,7 +2313,7 @@ _08053E68:
 	subs r0, 0x6E
 	b _08053E80
 	.align 2, 0
-_08053E78: .4byte 0x02025734
+_08053E78: .4byte gSaveBlock1
 _08053E7C:
 	movs r0, 0xB4
 	lsls r0, 1
@@ -2354,7 +2354,7 @@ sub_8053E90: @ 8053E90
 	.ifdef SAPPHIRE
 _sub_8053E90_LegendaryMusic: .4byte 443 @ OOAME (Kyogre's Heavy Rain theme)
 	.endif
-_08053EB0: .4byte 0x02025734
+_08053EB0: .4byte gSaveBlock1
 _08053EB4:
 	bl sav1_map_get_light_level
 	lsls r0, 24
@@ -2394,7 +2394,7 @@ sav1_set_battle_music_maybe: @ 8053EF4
 	strh r0, [r1, 0x2C]
 	bx lr
 	.align 2, 0
-_08053EFC: .4byte 0x02025734
+_08053EFC: .4byte gSaveBlock1
 	thumb_func_end sav1_set_battle_music_maybe
 
 	thumb_func_start sav1_reset_battle_music_maybe
@@ -2404,7 +2404,7 @@ sav1_reset_battle_music_maybe: @ 8053F00
 	strh r0, [r1, 0x2C]
 	bx lr
 	.align 2, 0
-_08053F08: .4byte 0x02025734
+_08053F08: .4byte gSaveBlock1
 	thumb_func_end sav1_reset_battle_music_maybe
 
 	thumb_func_start sub_8053F0C
@@ -2653,8 +2653,8 @@ _080540C0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080540C8: .4byte 0x02029816
-_080540CC: .4byte 0x02029814
+_080540C8: .4byte gUnknown_02029816
+_080540CC: .4byte gUnknown_02029814
 	thumb_func_end sub_8054050
 
 	thumb_func_start sub_80540D0
@@ -2688,7 +2688,7 @@ _08054100:
 	movs r0, 0x4
 	b _0805415C
 	.align 2, 0
-_0805410C: .4byte 0x02029814
+_0805410C: .4byte gUnknown_02029814
 _08054110:
 	movs r0, 0x1
 	b _0805415C
@@ -2753,8 +2753,8 @@ sub_8054164: @ 8054164
 	bl sub_8085514
 	b _08054196
 	.align 2, 0
-_08054188: .4byte 0x02025734
-_0805418C: .4byte 0x02029816
+_08054188: .4byte gSaveBlock1
+_0805418C: .4byte gUnknown_02029816
 _08054190:
 	ldr r0, _080541A0
 	bl wild_pokemon_rand_for_map
@@ -2764,8 +2764,8 @@ _08054196:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080541A0: .4byte 0x02029816
-_080541A4: .4byte 0x02029814
+_080541A0: .4byte gUnknown_02029816
+_080541A4: .4byte gUnknown_02029814
 	thumb_func_end sub_8054164
 
 	thumb_func_start get_map_light_level_by_bank_and_number
@@ -2808,7 +2808,7 @@ sav1_map_get_light_level: @ 80541D8
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080541E8: .4byte 0x02025738
+_080541E8: .4byte gUnknown_02025738
 	thumb_func_end sav1_map_get_light_level
 
 	thumb_func_start get_map_light_from_warp0
@@ -2821,7 +2821,7 @@ get_map_light_from_warp0: @ 80541EC
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080541FC: .4byte 0x020297f0
+_080541FC: .4byte gUnknown_020297F0
 	thumb_func_end get_map_light_from_warp0
 
 	thumb_func_start is_light_level_1_2_3_5_or_6
@@ -2909,7 +2909,7 @@ unref_sub_8054260: @ 8054260
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08054280: .4byte 0x02025734
+_08054280: .4byte gSaveBlock1
 	thumb_func_end unref_sub_8054260
 
 	thumb_func_start sav1_map_get_name
@@ -2930,7 +2930,7 @@ sav1_map_get_name: @ 8054284
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080542A4: .4byte 0x02025734
+_080542A4: .4byte gSaveBlock1
 	thumb_func_end sav1_map_get_name
 
 	thumb_func_start sav1_map_get_battletype
@@ -2951,7 +2951,7 @@ sav1_map_get_battletype: @ 80542A8
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080542C8: .4byte 0x02025734
+_080542C8: .4byte gSaveBlock1
 	thumb_func_end sav1_map_get_battletype
 
 	thumb_func_start ResetSafariZoneFlag_
@@ -2973,7 +2973,7 @@ is_c1_link_related_active: @ 80542D8
 	movs r0, 0
 	b _080542F2
 	.align 2, 0
-_080542E8: .4byte 0x03001770
+_080542E8: .4byte gMain
 _080542EC: .4byte sub_8055354
 _080542F0:
 	movs r0, 0x1
@@ -3038,7 +3038,7 @@ _08054364:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08054368: .4byte 0x03001770
+_08054368: .4byte gMain
 _0805436C: .4byte c2_overworld
 	thumb_func_end c1_overworld
 
@@ -3086,7 +3086,7 @@ _080543C4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080543CC: .4byte 0x0202f388
+_080543CC: .4byte gPaletteFade
 	thumb_func_end c2_overworld
 
 	thumb_func_start set_callback1
@@ -3095,7 +3095,7 @@ set_callback1: @ 80543D0
 	str r0, [r1]
 	bx lr
 	.align 2, 0
-_080543D8: .4byte 0x03001770
+_080543D8: .4byte gMain
 	thumb_func_end set_callback1
 
 	thumb_func_start sub_80543DC
@@ -3104,7 +3104,7 @@ sub_80543DC: @ 80543DC
 	str r0, [r1]
 	bx lr
 	.align 2, 0
-_080543E4: .4byte 0x03000584
+_080543E4: .4byte gUnknown_03000584
 	thumb_func_end sub_80543DC
 
 	thumb_func_start sub_80543E8
@@ -3117,7 +3117,7 @@ sub_80543E8: @ 80543E8
 	bl _call_via_r0
 	b _08054400
 	.align 2, 0
-_080543F8: .4byte 0x0300485c
+_080543F8: .4byte gUnknown_0300485C
 _080543FC:
 	bl mapldr_default
 _08054400:
@@ -3127,7 +3127,7 @@ _08054400:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805440C: .4byte 0x0300485c
+_0805440C: .4byte gUnknown_0300485C
 	thumb_func_end sub_80543E8
 
 	thumb_func_start CB2_NewGame
@@ -3154,9 +3154,9 @@ CB2_NewGame: @ 8054410
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08054454: .4byte 0x0300485c
+_08054454: .4byte gUnknown_0300485C
 _08054458: .4byte sub_80C76A0
-_0805445C: .4byte 0x03001bac
+_0805445C: .4byte gUnknown_03001BAC
 _08054460: .4byte c1_overworld
 _08054464: .4byte c2_overworld
 	thumb_func_end CB2_NewGame
@@ -3200,9 +3200,9 @@ _080544BE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080544C4: .4byte 0x03001770
+_080544C4: .4byte gMain
 _080544C8: .4byte 0x0000043c
-_080544CC: .4byte 0x0300485c
+_080544CC: .4byte gUnknown_0300485C
 _080544D0: .4byte sub_8080B60
 _080544D4: .4byte c1_overworld
 _080544D8: .4byte c2_overworld
@@ -3225,7 +3225,7 @@ CB2_LoadMap: @ 80544DC
 	bx r0
 	.align 2, 0
 _08054500: .4byte sub_810CC80
-_08054504: .4byte 0x03001770
+_08054504: .4byte gMain
 _08054508: .4byte CB2_LoadMap2
 	thumb_func_end CB2_LoadMap
 
@@ -3242,7 +3242,7 @@ CB2_LoadMap2: @ 805450C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08054528: .4byte 0x03001bac
+_08054528: .4byte gUnknown_03001BAC
 _0805452C: .4byte c1_overworld
 _08054530: .4byte c2_overworld
 	thumb_func_end CB2_LoadMap2
@@ -3277,7 +3277,7 @@ _08054570:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08054578: .4byte 0x03001770
+_08054578: .4byte gMain
 _0805457C: .4byte 0x0000043c
 _08054580: .4byte c1_overworld
 _08054584: .4byte c2_overworld
@@ -3295,7 +3295,7 @@ sub_8054588: @ 8054588
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080545A0: .4byte 0x0300485c
+_080545A0: .4byte gUnknown_0300485C
 _080545A4: .4byte sub_8080AC4
 _080545A8: .4byte c2_80567AC
 	thumb_func_end sub_8054588
@@ -3318,7 +3318,7 @@ _080545CE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080545D4: .4byte 0x03001bac
+_080545D4: .4byte gUnknown_03001BAC
 _080545D8: .4byte sub_8055354
 _080545DC: .4byte sub_8055390
 _080545E0: .4byte c2_overworld
@@ -3360,7 +3360,7 @@ _08054626:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805462C: .4byte 0x03001bac
+_0805462C: .4byte gUnknown_03001BAC
 _08054630: .4byte c2_overworld
 	thumb_func_end c2_exit_to_overworld_2_local
 
@@ -3380,7 +3380,7 @@ _0805464E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08054654: .4byte 0x03001bac
+_08054654: .4byte gUnknown_03001BAC
 _08054658: .4byte c2_overworld
 	thumb_func_end c2_exit_to_overworld_2_link
 
@@ -3405,7 +3405,7 @@ sub_805465C: @ 805465C
 	.align 2, 0
 _0805468C: .4byte sub_8055354
 _08054690: .4byte sub_8055390
-_08054694: .4byte 0x0300485c
+_08054694: .4byte gUnknown_0300485C
 _08054698: .4byte sub_8080A3C
 	thumb_func_end sub_805465C
 
@@ -3420,7 +3420,7 @@ sub_805469C: @ 805469C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080546B0: .4byte 0x0300485c
+_080546B0: .4byte gUnknown_0300485C
 _080546B4: .4byte atk17_seteffectuser
 	thumb_func_end sub_805469C
 
@@ -3435,7 +3435,7 @@ sub_80546B8: @ 80546B8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080546CC: .4byte 0x0300485c
+_080546CC: .4byte gUnknown_0300485C
 _080546D0: .4byte sub_80809B0
 	thumb_func_end sub_80546B8
 
@@ -3450,7 +3450,7 @@ c2_exit_to_overworld_1_continue_scripts_restart_music: @ 80546D4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080546E8: .4byte 0x0300485c
+_080546E8: .4byte gUnknown_0300485C
 _080546EC: .4byte sub_8080990
 	thumb_func_end c2_exit_to_overworld_1_continue_scripts_restart_music
 
@@ -3465,7 +3465,7 @@ sub_80546F0: @ 80546F0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08054704: .4byte 0x0300485c
+_08054704: .4byte gUnknown_0300485C
 _08054708: .4byte sub_8080B60
 	thumb_func_end sub_80546F0
 
@@ -3487,7 +3487,7 @@ _08054726:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08054730: .4byte 0x0202e828
+_08054730: .4byte gMapHeader
 	thumb_func_end sub_805470C
 
 	thumb_func_start CB2_ContinueSavedGame
@@ -3527,7 +3527,7 @@ _08054798:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805479C: .4byte 0x0300485c
+_0805479C: .4byte gUnknown_0300485C
 _080547A0: .4byte sub_805470C
 _080547A4: .4byte c1_overworld
 	thumb_func_end CB2_ContinueSavedGame
@@ -3678,21 +3678,21 @@ _080548EA:
 	bl sub_8056D28
 	b _08054928
 	.align 2, 0
-_080548F4: .4byte 0x0202e828
+_080548F4: .4byte gMapHeader
 _080548F8:
 	ldr r0, _08054904
 	ldr r0, [r0]
 	bl sub_8056D38
 	b _08054928
 	.align 2, 0
-_08054904: .4byte 0x0202e828
+_08054904: .4byte gMapHeader
 _08054908:
 	ldr r0, _08054914
 	ldr r0, [r0]
 	bl apply_map_tileset1_tileset2_palette
 	b _08054928
 	.align 2, 0
-_08054914: .4byte 0x0202e828
+_08054914: .4byte gMapHeader
 _08054918:
 	bl DrawWholeMapView
 	b _08054928
@@ -3786,21 +3786,21 @@ _080549DA:
 	bl sub_8056D28
 	b _08054A38
 	.align 2, 0
-_080549E4: .4byte 0x0202e828
+_080549E4: .4byte gMapHeader
 _080549E8:
 	ldr r0, _080549F4
 	ldr r0, [r0]
 	bl sub_8056D38
 	b _08054A38
 	.align 2, 0
-_080549F4: .4byte 0x0202e828
+_080549F4: .4byte gMapHeader
 _080549F8:
 	ldr r0, _08054A04
 	ldr r0, [r0]
 	bl apply_map_tileset1_tileset2_palette
 	b _08054A38
 	.align 2, 0
-_08054A04: .4byte 0x0202e828
+_08054A04: .4byte gMapHeader
 _08054A08:
 	bl DrawWholeMapView
 	b _08054A38
@@ -3820,7 +3820,7 @@ _08054A14:
 	bl AddMapNamePopUpWindowTask
 	b _08054A38
 	.align 2, 0
-_08054A30: .4byte 0x0202e828
+_08054A30: .4byte gMapHeader
 _08054A34:
 	bl sub_80543E8
 _08054A38:
@@ -3948,21 +3948,21 @@ _08054B32:
 	bl sub_8056D28
 	b _08054B70
 	.align 2, 0
-_08054B3C: .4byte 0x0202e828
+_08054B3C: .4byte gMapHeader
 _08054B40:
 	ldr r0, _08054B4C
 	ldr r0, [r0]
 	bl sub_8056D38
 	b _08054B70
 	.align 2, 0
-_08054B4C: .4byte 0x0202e828
+_08054B4C: .4byte gMapHeader
 _08054B50:
 	ldr r0, _08054B5C
 	ldr r0, [r0]
 	bl apply_map_tileset1_tileset2_palette
 	b _08054B70
 	.align 2, 0
-_08054B5C: .4byte 0x0202e828
+_08054B5C: .4byte gMapHeader
 _08054B60:
 	bl DrawWholeMapView
 	b _08054B70
@@ -4241,8 +4241,8 @@ sub_8054D90: @ 8054D90
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08054DB0: .4byte 0x0300489c
-_08054DB4: .4byte 0x03004898
+_08054DB0: .4byte gUnknown_0300489C
+_08054DB4: .4byte gUnknown_03004898
 	thumb_func_end sub_8054D90
 
 	thumb_func_start mli4_mapscripts_and_other
@@ -4284,8 +4284,8 @@ mli4_mapscripts_and_other: @ 8054DB8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08054E14: .4byte 0x0300489c
-_08054E18: .4byte 0x03004898
+_08054E14: .4byte gUnknown_0300489C
+_08054E18: .4byte gUnknown_03004898
 _08054E1C: .4byte gSaveBlock2
 	thumb_func_end mli4_mapscripts_and_other
 
@@ -4319,8 +4319,8 @@ sub_8054E34: @ 8054E34
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08054E58: .4byte 0x030048a0
-_08054E5C: .4byte 0x0202e858
+_08054E58: .4byte gMapObjects
+_08054E5C: .4byte gPlayerAvatar
 	thumb_func_end sub_8054E34
 
 	thumb_func_start sub_8054E60
@@ -4335,7 +4335,7 @@ sub_8054E60: @ 8054E60
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08054E78: .4byte 0x03004860
+_08054E78: .4byte gUnknown_03004860
 	thumb_func_end sub_8054E60
 
 	thumb_func_start sub_8054E7C
@@ -4350,7 +4350,7 @@ sub_8054E7C: @ 8054E7C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08054E94: .4byte 0x03004860
+_08054E94: .4byte gUnknown_03004860
 	thumb_func_end sub_8054E7C
 
 	thumb_func_start sub_8054E98
@@ -4376,7 +4376,7 @@ sub_8054E98: @ 8054E98
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08054EC4: .4byte 0x03004860
+_08054EC4: .4byte gUnknown_03004860
 	thumb_func_end sub_8054E98
 
 	thumb_func_start sub_8054EC8
@@ -4436,10 +4436,10 @@ _08054F2A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08054F38: .4byte 0x03004860
-_08054F3C: .4byte 0x03004864
-_08054F40: .4byte 0x03002970
-_08054F44: .4byte 0x03002910
+_08054F38: .4byte gUnknown_03004860
+_08054F3C: .4byte gUnknown_03004864
+_08054F40: .4byte gLinkPlayers
+_08054F44: .4byte word_3002910
 	thumb_func_end sub_8054EC8
 
 	thumb_func_start sub_8054F48
@@ -4463,7 +4463,7 @@ _08054F5C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08054F6C: .4byte 0x03004864
+_08054F6C: .4byte gUnknown_03004864
 	thumb_func_end sub_8054F48
 
 	thumb_func_start sub_8054F70
@@ -4480,7 +4480,7 @@ _08054F78:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08054F84: .4byte 0x03000580
+_08054F84: .4byte gUnknown_03000580
 	thumb_func_end sub_8054F70
 
 	thumb_func_start sub_8054F88
@@ -4502,8 +4502,8 @@ _08054F9A:
 	movs r0, 0
 	b _08054FB8
 	.align 2, 0
-_08054FA8: .4byte 0x03004864
-_08054FAC: .4byte 0x03000580
+_08054FA8: .4byte gUnknown_03004864
+_08054FAC: .4byte gUnknown_03000580
 _08054FB0:
 	adds r1, 0x1
 	cmp r1, r2
@@ -4535,8 +4535,8 @@ _08054FD2:
 	movs r0, 0x1
 	b _08054FF0
 	.align 2, 0
-_08054FE0: .4byte 0x03004864
-_08054FE4: .4byte 0x03000580
+_08054FE0: .4byte gUnknown_03004864
+_08054FE4: .4byte gUnknown_03000580
 _08054FE8:
 	adds r1, 0x1
 	cmp r1, r2
@@ -4589,7 +4589,7 @@ _08055038:
 	bl sub_8055808
 	b _08055206
 	.align 2, 0
-_08055048: .4byte 0x03000580
+_08055048: .4byte gUnknown_03000580
 _0805504C: .4byte sub_80553E4
 _08055050:
 	movs r0, 0x83
@@ -4653,7 +4653,7 @@ _080550BC:
 	bl sub_80557F4
 	b _08055192
 	.align 2, 0
-_080550E0: .4byte 0x03000580
+_080550E0: .4byte gUnknown_03000580
 _080550E4: .4byte sub_80553E4
 _080550E8:
 	adds r0, r6, 0
@@ -4672,7 +4672,7 @@ _080550E8:
 	bl sub_8055824
 	b _08055192
 	.align 2, 0
-_0805510C: .4byte 0x03000580
+_0805510C: .4byte gUnknown_03000580
 _08055110: .4byte sub_80553E4
 _08055114:
 	adds r0, r6, 0
@@ -4693,7 +4693,7 @@ _08055114:
 	bl sub_8055840
 	b _08055192
 	.align 2, 0
-_0805513C: .4byte 0x03000580
+_0805513C: .4byte gUnknown_03000580
 _08055140: .4byte sub_80553E4
 _08055144:
 	adds r0, r6, 0
@@ -4712,7 +4712,7 @@ _08055144:
 	bl sub_80557E8
 	b _08055192
 	.align 2, 0
-_08055168: .4byte 0x03000580
+_08055168: .4byte gUnknown_03000580
 _0805516C: .4byte sub_8055408
 _08055170:
 	adds r0, r6, 0
@@ -4739,7 +4739,7 @@ _08055192:
 	beq _080551C8
 	b _08055206
 	.align 2, 0
-_080551A4: .4byte 0x03000580
+_080551A4: .4byte gUnknown_03000580
 _080551A8: .4byte sub_8055438
 _080551AC:
 	mov r1, r8
@@ -4755,7 +4755,7 @@ _080551B8:
 	strb r1, [r0]
 	b _08055206
 	.align 2, 0
-_080551C4: .4byte 0x03000580
+_080551C4: .4byte gUnknown_03000580
 _080551C8:
 	ldr r0, _080551D4
 	adds r0, r7, r0
@@ -4763,7 +4763,7 @@ _080551C8:
 	strb r1, [r0]
 	b _08055206
 	.align 2, 0
-_080551D4: .4byte 0x03000580
+_080551D4: .4byte gUnknown_03000580
 _080551D8:
 	ldr r0, _080551F0
 	adds r0, r7, r0
@@ -4776,7 +4776,7 @@ _080551D8:
 	bl sub_80543DC
 	b _08055206
 	.align 2, 0
-_080551F0: .4byte 0x03000580
+_080551F0: .4byte gUnknown_03000580
 _080551F4: .4byte sub_8055390
 _080551F8:
 	ldr r0, _08055214
@@ -4794,7 +4794,7 @@ _08055206:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08055214: .4byte 0x03000580
+_08055214: .4byte gUnknown_03000580
 	thumb_func_end sub_8054FF8
 
 	thumb_func_start sub_8055218
@@ -4848,7 +4848,7 @@ _0805525C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805527C: .4byte 0x03000580
+_0805527C: .4byte gUnknown_03000580
 	thumb_func_end sub_8055218
 
 	thumb_func_start sub_8055280
@@ -4866,7 +4866,7 @@ sub_8055280: @ 8055280
 	b _080552A6
 	.align 2, 0
 _08055298: .4byte 0xffef0000
-_0805529C: .4byte 0x03004858
+_0805529C: .4byte word_3004858
 _080552A0:
 	ldr r1, _080552AC
 	movs r0, 0x11
@@ -4875,7 +4875,7 @@ _080552A6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080552AC: .4byte 0x03004858
+_080552AC: .4byte word_3004858
 	thumb_func_end sub_8055280
 
 	thumb_func_start sub_80552B0
@@ -4890,7 +4890,7 @@ sub_80552B0: @ 80552B0
 	movs r0, 0x13
 	b _08055308
 	.align 2, 0
-_080552C4: .4byte 0x03001770
+_080552C4: .4byte gMain
 _080552C8:
 	movs r0, 0x80
 	ands r0, r1
@@ -5006,9 +5006,9 @@ sub_8055354: @ 8055354
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08055384: .4byte 0x03004860
-_08055388: .4byte 0x03002910
-_0805538C: .4byte 0x03000584
+_08055384: .4byte gUnknown_03004860
+_08055388: .4byte word_3002910
+_0805538C: .4byte gUnknown_03000584
 	thumb_func_end sub_8055354
 
 	thumb_func_start sub_8055390
@@ -5032,7 +5032,7 @@ _080553A4:
 	movs r0, 0x1B
 	b _080553DA
 	.align 2, 0
-_080553B4: .4byte 0x03003070
+_080553B4: .4byte gLink
 _080553B8: .4byte 0x00000fbd
 _080553BC:
 	ldr r2, _080553CC
@@ -5102,7 +5102,7 @@ _08055424:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805542C: .4byte 0x03003070
+_0805542C: .4byte gLink
 _08055430: .4byte 0x00000fbd
 _08055434: .4byte sub_80553E0
 	thumb_func_end sub_8055408
@@ -5127,7 +5127,7 @@ _08055454:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805545C: .4byte 0x03003070
+_0805545C: .4byte gLink
 _08055460: .4byte 0x00000339
 _08055464: .4byte sub_80553E0
 	thumb_func_end sub_8055438
@@ -5157,8 +5157,8 @@ sub_805546C: @ 805546C
 	movs r0, 0x1D
 	b _0805549E
 	.align 2, 0
-_08055490: .4byte 0x03000580
-_08055494: .4byte 0x03001770
+_08055490: .4byte gUnknown_03000580
+_08055494: .4byte gMain
 _08055498: .4byte sub_8055468
 _0805549C:
 	movs r0, 0x11
@@ -5240,10 +5240,10 @@ sub_80554F8: @ 80554F8
 	movs r0, 0
 	b _08055562
 	.align 2, 0
-_08055524: .4byte 0x03000584
+_08055524: .4byte gUnknown_03000584
 _08055528: .4byte sub_805546C
-_0805552C: .4byte 0x03000580
-_08055530: .4byte 0x03004860
+_0805552C: .4byte gUnknown_03000580
+_08055530: .4byte gUnknown_03004860
 _08055534:
 	ldr r1, [r3]
 	ldr r0, _08055550
@@ -5261,8 +5261,8 @@ _0805554A:
 	b _08055562
 	.align 2, 0
 _08055550: .4byte sub_8055468
-_08055554: .4byte 0x03000580
-_08055558: .4byte 0x03004860
+_08055554: .4byte gUnknown_03000580
+_08055558: .4byte gUnknown_03004860
 _0805555C:
 	movs r0, 0x82
 	bl sub_8054F88
@@ -5365,7 +5365,7 @@ _080555C2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08055614: .4byte 0x02029818
+_08055614: .4byte gUnknown_02029818
 	thumb_func_end sub_80555B0
 
 	thumb_func_start sub_8055618
@@ -5523,7 +5523,7 @@ _08055710: .4byte gUnknown_0821664C
 _08055714: .4byte 0xffff0000
 _08055718: .4byte 0x0000ffff
 _0805571C: .4byte 0xffffff00
-_08055720: .4byte 0x03000580
+_08055720: .4byte gUnknown_03000580
 _08055724: .4byte gUnknown_081A4495
 _08055728:
 	adds r0, r2, 0
@@ -5710,9 +5710,9 @@ _0805587E:
 	movs r0, 0x1
 	b _080558A0
 	.align 2, 0
-_08055890: .4byte 0x03003070
+_08055890: .4byte gLink
 _08055894: .4byte 0x00000fbd
-_08055898: .4byte 0x03000588
+_08055898: .4byte gUnknown_03000588
 _0805589C:
 	ldr r1, _080558A8
 	movs r0, 0
@@ -5723,7 +5723,7 @@ _080558A4:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080558A8: .4byte 0x03000588
+_080558A8: .4byte gUnknown_03000588
 	thumb_func_end sub_8055870
 
 	thumb_func_start sub_80558AC
@@ -5764,11 +5764,11 @@ _080558F0:
 	movs r0, 0x1
 	b _0805590A
 	.align 2, 0
-_080558F4: .4byte 0x03000584
+_080558F4: .4byte gUnknown_03000584
 _080558F8: .4byte sub_8055408
 _080558FC: .4byte sub_80553E4
-_08055900: .4byte 0x03000588
-_08055904: .4byte 0x0202f388
+_08055900: .4byte gUnknown_03000588
+_08055904: .4byte gPaletteFade
 _08055908:
 	movs r0, 0
 _0805590A:
@@ -5794,7 +5794,7 @@ _0805592C:
 	movs r0, 0
 	b _0805593A
 	.align 2, 0
-_08055930: .4byte 0x03000584
+_08055930: .4byte gUnknown_03000584
 _08055934: .4byte sub_8055438
 _08055938:
 	movs r0, 0x1
@@ -5835,7 +5835,7 @@ strange_npc_table_clear: @ 805595C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805596C: .4byte 0x02029818
+_0805596C: .4byte gUnknown_02029818
 	thumb_func_end strange_npc_table_clear
 
 	thumb_func_start sub_8055970
@@ -5929,8 +5929,8 @@ sub_8055980: @ 8055980
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08055A24: .4byte 0x02029818
-_08055A28: .4byte 0x030048a0
+_08055A24: .4byte gUnknown_02029818
+_08055A28: .4byte gMapObjects
 	thumb_func_end sub_8055980
 
 	thumb_func_start sub_8055A2C
@@ -5989,8 +5989,8 @@ _08055A8E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08055A94: .4byte 0x02029818
-_08055A98: .4byte 0x030048a0
+_08055A94: .4byte gUnknown_02029818
+_08055A98: .4byte gMapObjects
 	thumb_func_end unref_sub_8055A6C
 
 	thumb_func_start unref_sub_8055A9C
@@ -6027,9 +6027,9 @@ _08055AC8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08055ADC: .4byte 0x02029818
-_08055AE0: .4byte 0x030048a0
-_08055AE4: .4byte 0x02020004
+_08055ADC: .4byte gUnknown_02029818
+_08055AE0: .4byte gMapObjects
+_08055AE4: .4byte gSprites
 	thumb_func_end unref_sub_8055A9C
 
 	thumb_func_start sub_8055AE8
@@ -6047,8 +6047,8 @@ sub_8055AE8: @ 8055AE8
 	ldrb r0, [r0, 0x4]
 	bx lr
 	.align 2, 0
-_08055B00: .4byte 0x02029818
-_08055B04: .4byte 0x030048a0
+_08055B00: .4byte gUnknown_02029818
+_08055B04: .4byte gMapObjects
 	thumb_func_end sub_8055AE8
 
 	thumb_func_start sub_8055B08
@@ -6069,8 +6069,8 @@ sub_8055B08: @ 8055B08
 	strh r0, [r2]
 	bx lr
 	.align 2, 0
-_08055B28: .4byte 0x02029818
-_08055B2C: .4byte 0x030048a0
+_08055B28: .4byte gUnknown_02029818
+_08055B2C: .4byte gMapObjects
 	thumb_func_end sub_8055B08
 
 	thumb_func_start sub_8055B30
@@ -6088,8 +6088,8 @@ sub_8055B30: @ 8055B30
 	ldrb r0, [r0, 0x19]
 	bx lr
 	.align 2, 0
-_08055B48: .4byte 0x02029818
-_08055B4C: .4byte 0x030048a0
+_08055B48: .4byte gUnknown_02029818
+_08055B4C: .4byte gMapObjects
 	thumb_func_end sub_8055B30
 
 	thumb_func_start sub_8055B50
@@ -6109,8 +6109,8 @@ sub_8055B50: @ 8055B50
 	lsrs r0, 28
 	bx lr
 	.align 2, 0
-_08055B6C: .4byte 0x02029818
-_08055B70: .4byte 0x030048a0
+_08055B6C: .4byte gUnknown_02029818
+_08055B70: .4byte gMapObjects
 	thumb_func_end sub_8055B50
 
 	thumb_func_start unref_sub_8055B74
@@ -6132,8 +6132,8 @@ unref_sub_8055B74: @ 8055B74
 	subs r0, r1
 	bx lr
 	.align 2, 0
-_08055B94: .4byte 0x02029818
-_08055B98: .4byte 0x030048a0
+_08055B94: .4byte gUnknown_02029818
+_08055B98: .4byte gMapObjects
 	thumb_func_end unref_sub_8055B74
 
 	thumb_func_start sub_8055B9C
@@ -6174,8 +6174,8 @@ _08055BBE:
 	adds r0, r2, 0
 	b _08055BF4
 	.align 2, 0
-_08055BE0: .4byte 0x02029818
-_08055BE4: .4byte 0x030048a0
+_08055BE0: .4byte gUnknown_02029818
+_08055BE4: .4byte gMapObjects
 _08055BE8:
 	adds r0, r2, 0x1
 	lsls r0, 24
@@ -6216,8 +6216,8 @@ sub_8055BFC: @ 8055BFC
 	strb r0, [r6]
 	b _08055C58
 	.align 2, 0
-_08055C2C: .4byte 0x02029818
-_08055C30: .4byte 0x030048a0
+_08055C2C: .4byte gUnknown_02029818
+_08055C30: .4byte gMapObjects
 _08055C34:
 	ldr r4, _08055C60
 	ldr r1, _08055C64
@@ -6502,7 +6502,7 @@ _08055E2E:
 	movs r0, 0x1
 	b _08055E4E
 	.align 2, 0
-_08055E34: .4byte 0x030048a0
+_08055E34: .4byte gMapObjects
 _08055E38:
 	adds r0, r4, 0x1
 	lsls r0, 24
@@ -6579,10 +6579,10 @@ _08055EBE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08055EC8: .4byte 0x02029818
-_08055ECC: .4byte 0x030048a0
+_08055EC8: .4byte gUnknown_02029818
+_08055ECC: .4byte gMapObjects
 _08055ED0: .4byte sub_8055ED8
-_08055ED4: .4byte 0x02020004
+_08055ED4: .4byte gSprites
 	thumb_func_end sub_8055E5C
 
 	thumb_func_start sub_8055ED8
@@ -6633,8 +6633,8 @@ sub_8055ED8: @ 8055ED8
 	bl StartSpriteAnim
 	b _08055F56
 	.align 2, 0
-_08055F3C: .4byte 0x02029818
-_08055F40: .4byte 0x030048a0
+_08055F3C: .4byte gUnknown_02029818
+_08055F40: .4byte gMapObjects
 _08055F44:
 	ldrb r0, [r6, 0x19]
 	bl get_go_image_anim_num
@@ -6698,7 +6698,7 @@ not_trainer_hill_battle_pyramid: @ 8055FA0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08055FBC: .4byte 0x0202e828
+_08055FBC: .4byte gMapHeader
 	thumb_func_end not_trainer_hill_battle_pyramid
 
 	thumb_func_start sub_8055FC0
@@ -6721,8 +6721,8 @@ sub_8055FC0: @ 8055FC0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08055FF0: .4byte 0x0202e828
-_08055FF4: .4byte 0x03004870
+_08055FF0: .4byte gMapHeader
+_08055FF4: .4byte gUnknown_03004870
 	thumb_func_end sub_8055FC0
 
 	thumb_func_start mapheader_copy_mapdata_with_padding
@@ -6764,9 +6764,9 @@ _0805603A:
 	bx r0
 	.align 2, 0
 _08056044: .4byte 0x03ff03ff
-_08056048: .4byte 0x02029828
+_08056048: .4byte gUnknown_02029828
 _0805604C: .4byte 0x01001400
-_08056050: .4byte 0x03004870
+_08056050: .4byte gUnknown_03004870
 	thumb_func_end mapheader_copy_mapdata_with_padding
 
 	thumb_func_start map_copy_with_padding
@@ -6815,7 +6815,7 @@ _0805609C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080560A8: .4byte 0x03004870
+_080560A8: .4byte gUnknown_03004870
 	thumb_func_end map_copy_with_padding
 
 	thumb_func_start sub_80560AC
@@ -6847,7 +6847,7 @@ _080560C6:
 	beq _080560F2
 	b _08056124
 	.align 2, 0
-_080560E0: .4byte 0x0202e850
+_080560E0: .4byte gUnknown_0202E850
 _080560E4: .4byte gUnknown_08308E28
 _080560E8:
 	cmp r0, 0x3
@@ -6942,7 +6942,7 @@ _08056186:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08056190: .4byte 0x03004870
+_08056190: .4byte gUnknown_03004870
 _08056194: .4byte 0x001fffff
 	thumb_func_end sub_8056134
 
@@ -6973,7 +6973,7 @@ _080561C2:
 	movs r2, 0
 	b _080561DC
 	.align 2, 0
-_080561C8: .4byte 0x03004870
+_080561C8: .4byte gUnknown_03004870
 _080561CC:
 	movs r6, 0
 	adds r0, r2, r4
@@ -7000,7 +7000,7 @@ _080561F2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080561FC: .4byte 0x03004870
+_080561FC: .4byte gUnknown_03004870
 	thumb_func_end sub_8056198
 
 	thumb_func_start sub_8056200
@@ -7028,7 +7028,7 @@ _08056226:
 	movs r2, 0
 	b _08056240
 	.align 2, 0
-_0805622C: .4byte 0x03004870
+_0805622C: .4byte gUnknown_03004870
 _08056230:
 	movs r6, 0
 	adds r0, r2, r4
@@ -7054,7 +7054,7 @@ _08056254:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805625C: .4byte 0x03004870
+_0805625C: .4byte gUnknown_03004870
 	thumb_func_end sub_8056200
 
 	thumb_func_start sub_8056260
@@ -7082,7 +7082,7 @@ _08056286:
 	movs r2, 0
 	b _080562A0
 	.align 2, 0
-_0805628C: .4byte 0x03004870
+_0805628C: .4byte gUnknown_03004870
 _08056290:
 	movs r6, 0
 	adds r0, r2, r4
@@ -7108,7 +7108,7 @@ _080562B4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080562BC: .4byte 0x03004870
+_080562BC: .4byte gUnknown_03004870
 	thumb_func_end sub_8056260
 
 	thumb_func_start sub_80562C0
@@ -7138,7 +7138,7 @@ _080562EA:
 	movs r2, 0
 	b _08056304
 	.align 2, 0
-_080562F0: .4byte 0x03004870
+_080562F0: .4byte gUnknown_03004870
 _080562F4:
 	movs r6, 0
 	adds r0, r2, r4
@@ -7164,7 +7164,7 @@ _08056318:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08056320: .4byte 0x03004870
+_08056320: .4byte gUnknown_03004870
 	thumb_func_end sub_80562C0
 
 	thumb_func_start MapGridGetZCoordAt
@@ -7192,7 +7192,7 @@ MapGridGetZCoordAt: @ 8056324
 	ldrh r1, [r0]
 	b _08056376
 	.align 2, 0
-_08056350: .4byte 0x03004870
+_08056350: .4byte gUnknown_03004870
 _08056354:
 	ldr r0, _08056380
 	ldr r3, [r0]
@@ -7218,7 +7218,7 @@ _08056376:
 	lsrs r0, r1, 12
 	b _0805638A
 	.align 2, 0
-_08056380: .4byte 0x0202e828
+_08056380: .4byte gMapHeader
 _08056384: .4byte 0x000003ff
 _08056388:
 	movs r0, 0
@@ -7253,7 +7253,7 @@ MapGridIsImpassableAt: @ 8056390
 	ldrh r1, [r0]
 	b _080563E2
 	.align 2, 0
-_080563BC: .4byte 0x03004870
+_080563BC: .4byte gUnknown_03004870
 _080563C0:
 	ldr r0, _080563F4
 	ldr r3, [r0]
@@ -7282,7 +7282,7 @@ _080563E2:
 	lsrs r0, r1, 10
 	b _080563FE
 	.align 2, 0
-_080563F4: .4byte 0x0202e828
+_080563F4: .4byte gMapHeader
 _080563F8: .4byte 0x000003ff
 _080563FC:
 	movs r0, 0x1
@@ -7317,7 +7317,7 @@ MapGridGetMetatileIdAt: @ 8056404
 	ldrh r4, [r0]
 	b _08056458
 	.align 2, 0
-_08056430: .4byte 0x03004870
+_08056430: .4byte gUnknown_03004870
 _08056434:
 	ldr r0, _08056464
 	ldr r3, [r0]
@@ -7345,7 +7345,7 @@ _08056458:
 	adds r0, r4, 0
 	b _08056490
 	.align 2, 0
-_08056464: .4byte 0x0202e828
+_08056464: .4byte gMapHeader
 _08056468: .4byte 0x000003ff
 _0805646C:
 	ldr r0, _08056498
@@ -7371,7 +7371,7 @@ _08056490:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08056498: .4byte 0x0202e828
+_08056498: .4byte gMapHeader
 	thumb_func_end MapGridGetMetatileIdAt
 
 	thumb_func_start MapGridGetMetatileBehaviorAt
@@ -7439,7 +7439,7 @@ _08056508:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08056510: .4byte 0x03004870
+_08056510: .4byte gUnknown_03004870
 _08056514: .4byte 0x00000fff
 	thumb_func_end MapGridSetMetatileIdAt
 
@@ -7472,7 +7472,7 @@ _08056544:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805654C: .4byte 0x03004870
+_0805654C: .4byte gUnknown_03004870
 	thumb_func_end MapGridSetMetatileEntryAt
 
 	thumb_func_start GetBehaviorByMetatileId
@@ -7492,7 +7492,7 @@ GetBehaviorByMetatileId: @ 8056550
 	b _08056592
 	.align 2, 0
 _0805656C: .4byte 0x000001ff
-_08056570: .4byte 0x0202e828
+_08056570: .4byte gMapHeader
 _08056574:
 	ldr r0, _08056580
 	cmp r2, r0
@@ -7516,7 +7516,7 @@ _08056596:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805659C: .4byte 0x0202e828
+_0805659C: .4byte gMapHeader
 _080565A0: .4byte 0xfffffc00
 	thumb_func_end GetBehaviorByMetatileId
 
@@ -7578,9 +7578,9 @@ _080565FE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805660C: .4byte 0x02025768
-_08056610: .4byte 0x03004870
-_08056614: .4byte 0x02029828
+_0805660C: .4byte gUnknown_02025768
+_08056610: .4byte gUnknown_03004870
+_08056614: .4byte gUnknown_02029828
 	thumb_func_end save_serialize_map
 
 	thumb_func_start sub_8056618
@@ -7605,7 +7605,7 @@ _08056622:
 	movs r0, 0
 	b _08056646
 	.align 2, 0
-_0805663C: .4byte 0x02025768
+_0805663C: .4byte gUnknown_02025768
 _08056640: .4byte 0x000001ff
 _08056644:
 	movs r0, 0x1
@@ -7630,7 +7630,7 @@ sav2_mapdata_clear: @ 805664C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08056668: .4byte 0x02025768
+_08056668: .4byte gUnknown_02025768
 _0805666C: .4byte 0x01000100
 	thumb_func_end sav2_mapdata_clear
 
@@ -7697,9 +7697,9 @@ _080566D6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080566E4: .4byte 0x02025768
-_080566E8: .4byte 0x03004870
-_080566EC: .4byte 0x02029828
+_080566E4: .4byte gUnknown_02025768
+_080566E8: .4byte gUnknown_03004870
+_080566EC: .4byte gUnknown_02029828
 	thumb_func_end sub_8056670
 
 	thumb_func_start sub_80566F0
@@ -7739,8 +7739,8 @@ sub_80566F0: @ 80566F0
 	beq _0805674E
 	b _08056766
 	.align 2, 0
-_08056734: .4byte 0x02025768
-_08056738: .4byte 0x03004870
+_08056734: .4byte gUnknown_02025768
+_08056738: .4byte gUnknown_03004870
 _0805673C:
 	cmp r2, 0x3
 	beq _08056758
@@ -7816,7 +7816,7 @@ _080567A8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080567BC: .4byte 0x02029828
+_080567BC: .4byte gUnknown_02029828
 	thumb_func_end sub_80566F0
 
 	thumb_func_start GetMapBorderIdAt
@@ -7847,7 +7847,7 @@ GetMapBorderIdAt: @ 80567C0
 	beq _08056894
 	b _08056824
 	.align 2, 0
-_080567F4: .4byte 0x03004870
+_080567F4: .4byte gUnknown_03004870
 _080567F8: .4byte 0x000003ff
 _080567FC:
 	ldr r0, _08056840
@@ -7885,10 +7885,10 @@ _08056824:
 	movs r0, 0x4
 	b _080568A6
 	.align 2, 0
-_08056840: .4byte 0x0202e828
+_08056840: .4byte gMapHeader
 _08056844: .4byte 0x000003ff
-_08056848: .4byte 0x03004870
-_0805684C: .4byte 0x0202e850
+_08056848: .4byte gUnknown_03004870
+_0805684C: .4byte gUnknown_0202E850
 _08056850:
 	cmp r4, 0x6
 	bgt _08056868
@@ -7901,7 +7901,7 @@ _08056850:
 	movs r0, 0x3
 	b _080568A6
 	.align 2, 0
-_08056864: .4byte 0x0202e850
+_08056864: .4byte gUnknown_0202E850
 _08056868:
 	ldr r0, [r1, 0x4]
 	subs r0, 0x7
@@ -7916,7 +7916,7 @@ _08056868:
 	movs r0, 0x1
 	b _080568A6
 	.align 2, 0
-_08056880: .4byte 0x0202e850
+_08056880: .4byte gUnknown_0202E850
 _08056884:
 	cmp r5, 0x6
 	bgt _080568A4
@@ -7931,7 +7931,7 @@ _08056894:
 	negs r0, r0
 	b _080568A6
 	.align 2, 0
-_0805689C: .4byte 0x0202e850
+_0805689C: .4byte gUnknown_0202E850
 _080568A0:
 	movs r0, 0x2
 	b _080568A6
@@ -7962,7 +7962,7 @@ GetPostCameraMoveMapBorderId: @ 80568AC
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080568D0: .4byte 0x02025734
+_080568D0: .4byte gSaveBlock1
 	thumb_func_end GetPostCameraMoveMapBorderId
 
 	thumb_func_start CanCameraMoveInDirection
@@ -7993,7 +7993,7 @@ CanCameraMoveInDirection: @ 80568D4
 	movs r0, 0x1
 	b _08056912
 	.align 2, 0
-_08056908: .4byte 0x02025734
+_08056908: .4byte gSaveBlock1
 _0805690C: .4byte gUnknown_0821664C
 _08056910:
 	movs r0, 0
@@ -8032,7 +8032,7 @@ _08056936:
 	subs r0, r2
 	b _08056986
 	.align 2, 0
-_0805694C: .4byte 0x02025734
+_0805694C: .4byte gSaveBlock1
 _08056950:
 	ldr r1, _08056960
 	ldr r0, [r3]
@@ -8043,7 +8043,7 @@ _08056950:
 	subs r0, r2
 	b _08056986
 	.align 2, 0
-_08056960: .4byte 0x02025734
+_08056960: .4byte gSaveBlock1
 _08056964:
 	ldr r1, _08056974
 	ldr r2, [r5, 0x4]
@@ -8053,7 +8053,7 @@ _08056964:
 	negs r0, r7
 	b _08056986
 	.align 2, 0
-_08056974: .4byte 0x02025734
+_08056974: .4byte gSaveBlock1
 _08056978:
 	ldr r1, _08056990
 	ldr r2, [r5, 0x4]
@@ -8069,7 +8069,7 @@ _08056988:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08056990: .4byte 0x02025734
+_08056990: .4byte gSaveBlock1
 	thumb_func_end sub_8056918
 
 	thumb_func_start CameraMove
@@ -8106,8 +8106,8 @@ CameraMove: @ 8056994
 	strh r1, [r0, 0x2]
 	b _08056A42
 	.align 2, 0
-_080569D4: .4byte 0x0202e844
-_080569D8: .4byte 0x02025734
+_080569D4: .4byte gUnknown_0202E844
+_080569D8: .4byte gSaveBlock1
 _080569DC:
 	bl save_serialize_map
 	ldr r5, _08056A5C
@@ -8169,8 +8169,8 @@ _08056A42:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08056A5C: .4byte 0x02025734
-_08056A60: .4byte 0x0202e844
+_08056A5C: .4byte gSaveBlock1
+_08056A60: .4byte gUnknown_0202E844
 	thumb_func_end CameraMove
 
 	thumb_func_start sub_8056A64
@@ -8206,7 +8206,7 @@ _08056A82:
 	adds r0, r4, 0
 	b _08056AAE
 	.align 2, 0
-_08056AA0: .4byte 0x0202e828
+_08056AA0: .4byte gMapHeader
 _08056AA4:
 	adds r5, 0x1
 	adds r4, 0xC
@@ -8250,7 +8250,7 @@ sub_8056ABC: @ 8056ABC
 	adds r0, r7, 0
 	b _08056B06
 	.align 2, 0
-_08056AF0: .4byte 0x0202e828
+_08056AF0: .4byte gMapHeader
 _08056AF4:
 	cmp r6, 0x4
 	bgt _08056B14
@@ -8267,7 +8267,7 @@ _08056B06:
 	lsrs r0, 24
 	b _08056B16
 	.align 2, 0
-_08056B10: .4byte 0x0202e828
+_08056B10: .4byte gMapHeader
 _08056B14:
 	movs r0, 0
 _08056B16:
@@ -8377,7 +8377,7 @@ sub_8056BA0: @ 8056BA0
 	bne _08056BC8
 	b _08056C3E
 	.align 2, 0
-_08056BC0: .4byte 0x0202e828
+_08056BC0: .4byte gMapHeader
 _08056BC4:
 	adds r0, r4, 0
 	b _08056C40
@@ -8471,7 +8471,7 @@ sub_8056C50: @ 8056C50
 	strh r1, [r2, 0x2]
 	bx lr
 	.align 2, 0
-_08056C64: .4byte 0x02025734
+_08056C64: .4byte gSaveBlock1
 	thumb_func_end sub_8056C50
 
 	thumb_func_start sav1_camera_get_focus_coords
@@ -8485,7 +8485,7 @@ sav1_camera_get_focus_coords: @ 8056C68
 	strh r0, [r1]
 	bx lr
 	.align 2, 0
-_08056C78: .4byte 0x02025734
+_08056C78: .4byte gSaveBlock1
 	thumb_func_end sav1_camera_get_focus_coords
 
 	thumb_func_start unref_sub_8056C7C
@@ -8495,7 +8495,7 @@ unref_sub_8056C7C: @ 8056C7C
 	strh r1, [r2, 0x2]
 	bx lr
 	.align 2, 0
-_08056C84: .4byte 0x02025734
+_08056C84: .4byte gSaveBlock1
 	thumb_func_end unref_sub_8056C7C
 
 	thumb_func_start GetCameraCoords
@@ -8507,7 +8507,7 @@ GetCameraCoords: @ 8056C88
 	strh r0, [r1]
 	bx lr
 	.align 2, 0
-_08056C94: .4byte 0x02025734
+_08056C94: .4byte gSaveBlock1
 	thumb_func_end GetCameraCoords
 
 	thumb_func_start sub_8056C98
@@ -11077,8 +11077,8 @@ move_tilemap_camera_to_upper_left_corner: @ 80579F8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08057A44: .4byte 0x03000590
-_08057A48: .4byte 0x020221cc
+_08057A44: .4byte gUnknown_03000590
+_08057A48: .4byte gBG2TilemapBuffer
 _08057A4C: .4byte 0x01000400
 _08057A50: .4byte 0xfffff800
 _08057A54: .4byte 0x00003014
@@ -11160,12 +11160,12 @@ _08057AE0:
 	bx r0
 	.align 2, 0
 _08057AE8: .4byte gBGHOffsetRegs
-_08057AEC: .4byte 0x03000590
-_08057AF0: .4byte 0x03000598
+_08057AEC: .4byte gUnknown_03000590
+_08057AF0: .4byte gUnknown_03000598
 _08057AF4: .4byte gBGVOffsetRegs
-_08057AF8: .4byte 0x0300059a
+_08057AF8: .4byte gUnknown_0300059A
 _08057AFC: .4byte 0x040000d4
-_08057B00: .4byte 0x020219cc
+_08057B00: .4byte gBG1TilemapBuffer
 _08057B04: .4byte 0x0600e800
 _08057B08: .4byte 0x80000400
 _08057B0C: .4byte 0x0600e000
@@ -11191,9 +11191,9 @@ sub_8057B14: @ 8057B14
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08057B34: .4byte 0x03000590
-_08057B38: .4byte 0x03000598
-_08057B3C: .4byte 0x0300059a
+_08057B34: .4byte gUnknown_03000590
+_08057B38: .4byte gUnknown_03000598
+_08057B3C: .4byte gUnknown_0300059A
 	thumb_func_end sub_8057B14
 
 	thumb_func_start DrawWholeMapView
@@ -11213,9 +11213,9 @@ DrawWholeMapView: @ 8057B40
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08057B60: .4byte 0x02025734
-_08057B64: .4byte 0x0202e828
-_08057B68: .4byte 0x03000590
+_08057B60: .4byte gSaveBlock1
+_08057B64: .4byte gMapHeader
+_08057B68: .4byte gUnknown_03000590
 	thumb_func_end DrawWholeMapView
 
 	thumb_func_start DrawWholeMapViewInternal
@@ -11287,7 +11287,7 @@ _08057BB2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08057BEC: .4byte 0x03000590
+_08057BEC: .4byte gUnknown_03000590
 	thumb_func_end DrawWholeMapViewInternal
 
 	thumb_func_start RedrawMapSlicesForCameraUpdate
@@ -11328,7 +11328,7 @@ _08057C2C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08057C38: .4byte 0x0202e828
+_08057C38: .4byte gMapHeader
 	thumb_func_end RedrawMapSlicesForCameraUpdate
 
 	thumb_func_start sub_8057C3C
@@ -11385,7 +11385,7 @@ _08057C70:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08057CA0: .4byte 0x02025734
+_08057CA0: .4byte gSaveBlock1
 	thumb_func_end sub_8057C3C
 
 	thumb_func_start RedrawMapSliceSouth
@@ -11430,7 +11430,7 @@ _08057CC8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08057CF0: .4byte 0x02025734
+_08057CF0: .4byte gSaveBlock1
 	thumb_func_end RedrawMapSliceSouth
 
 	thumb_func_start RedrawMapSliceEast
@@ -11477,7 +11477,7 @@ _08057D14:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08057D44: .4byte 0x02025734
+_08057D44: .4byte gSaveBlock1
 	thumb_func_end RedrawMapSliceEast
 
 	thumb_func_start sub_8057D48
@@ -11535,7 +11535,7 @@ _08057D7C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08057DAC: .4byte 0x02025734
+_08057DAC: .4byte gSaveBlock1
 	thumb_func_end sub_8057D48
 
 	thumb_func_start CurrentMapDrawMetatileAt
@@ -11565,8 +11565,8 @@ _08057DDC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08057DE4: .4byte 0x03000590
-_08057DE8: .4byte 0x0202e828
+_08057DE4: .4byte gUnknown_03000590
+_08057DE8: .4byte gMapHeader
 	thumb_func_end CurrentMapDrawMetatileAt
 
 	thumb_func_start DrawDoorMetatileAt
@@ -11594,7 +11594,7 @@ _08057E14:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08057E1C: .4byte 0x03000590
+_08057E1C: .4byte gUnknown_03000590
 	thumb_func_end DrawDoorMetatileAt
 
 	thumb_func_start DrawMetatileAt
@@ -11736,7 +11736,7 @@ _08057EAC:
 	strh r0, [r2]
 	b _08058010
 	.align 2, 0
-_08057F24: .4byte 0x020211cc
+_08057F24: .4byte gBG0TilemapBuffer
 _08057F28:
 	ldr r2, _08057F98
 	mov r12, r2
@@ -11795,8 +11795,8 @@ _08057F28:
 	adds r3, r1
 	b _0805800E
 	.align 2, 0
-_08057F98: .4byte 0x020211cc
-_08057F9C: .4byte 0x020219cc
+_08057F98: .4byte gBG0TilemapBuffer
+_08057F9C: .4byte gBG1TilemapBuffer
 _08057FA0:
 	ldr r1, _0805801C
 	mov r9, r1
@@ -11863,7 +11863,7 @@ _08058010:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805801C: .4byte 0x020211cc
+_0805801C: .4byte gBG0TilemapBuffer
 _08058020: .4byte 0x00003014
 	thumb_func_end DrawMetatile
 
@@ -11895,7 +11895,7 @@ _0805804C:
 	negs r0, r0
 	b _08058066
 	.align 2, 0
-_08058054: .4byte 0x02025734
+_08058054: .4byte gSaveBlock1
 _08058058:
 	ldrb r0, [r3, 0x3]
 	adds r2, r0
@@ -11933,7 +11933,7 @@ _0805808C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08058090: .4byte 0x02020004
+_08058090: .4byte gSprites
 	thumb_func_end CameraUpdateCallback
 
 	thumb_func_start ResetCameraUpdateInfo
@@ -11948,7 +11948,7 @@ ResetCameraUpdateInfo: @ 8058094
 	str r0, [r1]
 	bx lr
 	.align 2, 0
-_080580A8: .4byte 0x03004880
+_080580A8: .4byte gUnknown_03004880
 	thumb_func_end ResetCameraUpdateInfo
 
 	thumb_func_start InitCameraUpdateCallback
@@ -11979,8 +11979,8 @@ _080580C8:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080580E0: .4byte 0x03004880
-_080580E4: .4byte 0x02020004
+_080580E0: .4byte gUnknown_03004880
+_080580E4: .4byte gSprites
 _080580E8: .4byte CameraUpdateCallback
 	thumb_func_end InitCameraUpdateCallback
 
@@ -12116,10 +12116,10 @@ _080581C6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080581EC: .4byte 0x03004880
-_080581F0: .4byte 0x03000590
-_080581F4: .4byte 0x0300489c
-_080581F8: .4byte 0x03004898
+_080581EC: .4byte gUnknown_03004880
+_080581F0: .4byte gUnknown_03000590
+_080581F4: .4byte gUnknown_0300489C
+_080581F8: .4byte gUnknown_03004898
 	thumb_func_end CameraUpdate
 
 	thumb_func_start camera_move_and_redraw
@@ -12148,8 +12148,8 @@ camera_move_and_redraw: @ 80581FC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08058230: .4byte 0x0300489c
-_08058234: .4byte 0x03004898
+_08058230: .4byte gUnknown_0300489C
+_08058234: .4byte gUnknown_03004898
 	thumb_func_end camera_move_and_redraw
 
 	thumb_func_start SetCameraPanningCallback
@@ -12158,7 +12158,7 @@ SetCameraPanningCallback: @ 8058238
 	str r0, [r1]
 	bx lr
 	.align 2, 0
-_08058240: .4byte 0x030005a0
+_08058240: .4byte gUnknown_030005A0
 	thumb_func_end SetCameraPanningCallback
 
 	thumb_func_start SetCameraPanning
@@ -12172,8 +12172,8 @@ SetCameraPanning: @ 8058244
 	strh r1, [r0]
 	bx lr
 	.align 2, 0
-_08058254: .4byte 0x03000598
-_08058258: .4byte 0x0300059a
+_08058254: .4byte gUnknown_03000598
+_08058258: .4byte gUnknown_0300059A
 	thumb_func_end SetCameraPanning
 
 	thumb_func_start InstallCameraPanAheadCallback
@@ -12192,11 +12192,11 @@ InstallCameraPanAheadCallback: @ 805825C
 	strh r0, [r1]
 	bx lr
 	.align 2, 0
-_08058278: .4byte 0x030005a0
+_08058278: .4byte gUnknown_030005A0
 _0805827C: .4byte CameraPanningCB_PanAhead
-_08058280: .4byte 0x0300059c
-_08058284: .4byte 0x03000598
-_08058288: .4byte 0x0300059a
+_08058280: .4byte gUnknown_0300059C
+_08058284: .4byte gUnknown_03000598
+_08058288: .4byte gUnknown_0300059A
 	thumb_func_end InstallCameraPanAheadCallback
 
 	thumb_func_start UpdateCameraPanning
@@ -12226,13 +12226,13 @@ _0805829A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080582BC: .4byte 0x030005a0
-_080582C0: .4byte 0x030024d0
-_080582C4: .4byte 0x0300489c
-_080582C8: .4byte 0x03000598
-_080582CC: .4byte 0x030027e0
-_080582D0: .4byte 0x03004898
-_080582D4: .4byte 0x0300059a
+_080582BC: .4byte gUnknown_030005A0
+_080582C0: .4byte gSpriteCoordOffsetX
+_080582C4: .4byte gUnknown_0300489C
+_080582C8: .4byte gUnknown_03000598
+_080582CC: .4byte gSpriteCoordOffsetY
+_080582D0: .4byte gUnknown_03004898
+_080582D4: .4byte gUnknown_0300059A
 	thumb_func_end UpdateCameraPanning
 
 	thumb_func_start CameraPanningCB_PanAhead
@@ -12245,7 +12245,7 @@ CameraPanningCB_PanAhead: @ 80582D8
 	bl InstallCameraPanAheadCallback
 	b _08058374
 	.align 2, 0
-_080582E8: .4byte 0x0202e854
+_080582E8: .4byte gUnknown_0202E854
 _080582EC:
 	ldr r0, _08058304
 	ldrb r0, [r0, 0x3]
@@ -12260,8 +12260,8 @@ _080582EC:
 	beq _08058374
 	b _08058312
 	.align 2, 0
-_08058304: .4byte 0x0202e858
-_08058308: .4byte 0x0300059c
+_08058304: .4byte gPlayerAvatar
+_08058308: .4byte gUnknown_0300059C
 _0805830C:
 	ldr r1, _08058334
 	movs r0, 0
@@ -12283,8 +12283,8 @@ _08058312:
 	subs r0, r3, 0x2
 	b _08058372
 	.align 2, 0
-_08058334: .4byte 0x0300059c
-_08058338: .4byte 0x0300059a
+_08058334: .4byte gUnknown_0300059C
+_08058338: .4byte gUnknown_0300059A
 _0805833C:
 	cmp r0, 0x1
 	bne _08058358
@@ -12298,7 +12298,7 @@ _0805833C:
 	strh r0, [r1]
 	b _08058374
 	.align 2, 0
-_08058354: .4byte 0x0300059a
+_08058354: .4byte gUnknown_0300059A
 _08058358:
 	ldr r2, _08058368
 	ldrh r0, [r2]
@@ -12309,7 +12309,7 @@ _08058358:
 	adds r0, 0x2
 	b _08058372
 	.align 2, 0
-_08058368: .4byte 0x0300059a
+_08058368: .4byte gUnknown_0300059A
 _0805836C:
 	cmp r1, 0x20
 	ble _08058374
@@ -12534,7 +12534,7 @@ _080584F6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080584FC: .4byte 0x03004b28
+_080584FC: .4byte gUnknown_03004B28
 	thumb_func_end task50_overworld_door
 
 	thumb_func_start door_frame_last
@@ -12618,7 +12618,7 @@ task_overworld_door_add_if_inactive: @ 8058538
 	b _08058590
 	.align 2, 0
 _08058584: .4byte task50_overworld_door
-_08058588: .4byte 0x03004b28
+_08058588: .4byte gUnknown_03004B28
 _0805858C:
 	movs r0, 0x1
 	negs r0, r0
@@ -12941,7 +12941,7 @@ sub_80587B4: @ 80587B4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080587D0: .4byte 0x030048a0
+_080587D0: .4byte gMapObjects
 _080587D4: .4byte sub_80587D8
 	thumb_func_end sub_80587B4
 
@@ -13003,8 +13003,8 @@ _08058842:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805884C: .4byte 0x0202e858
-_08058850: .4byte 0x030048a0
+_0805884C: .4byte gPlayerAvatar
+_08058850: .4byte gMapObjects
 	thumb_func_end player_step
 
 	thumb_func_start sub_8058854
@@ -13070,7 +13070,7 @@ npc_clear_strange_bits: @ 80588A8
 	strb r0, [r2]
 	bx lr
 	.align 2, 0
-_080588C8: .4byte 0x0202e858
+_080588C8: .4byte gPlayerAvatar
 	thumb_func_end npc_clear_strange_bits
 
 	thumb_func_start MovePlayerAvatarUsingKeypadInput
@@ -13093,7 +13093,7 @@ MovePlayerAvatarUsingKeypadInput: @ 80588CC
 	bl MovePlayerOnBike
 	b _080588FC
 	.align 2, 0
-_080588F0: .4byte 0x0202e858
+_080588F0: .4byte gPlayerAvatar
 _080588F4:
 	adds r0, r3, 0
 	adds r1, r2, 0
@@ -13119,7 +13119,7 @@ _08058916:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805891C: .4byte 0x0202e858
+_0805891C: .4byte gPlayerAvatar
 	thumb_func_end PlayerAllowForcedMovementIfMovingSameDirection
 
 	thumb_func_start TryDoMetatileBehaviorForcedMovment
@@ -13173,8 +13173,8 @@ _08058964:
 	lsrs r0, 24
 	b _08058998
 	.align 2, 0
-_08058980: .4byte 0x0202e858
-_08058984: .4byte 0x030048a0
+_08058980: .4byte gPlayerAvatar
+_08058984: .4byte gMapObjects
 _08058988: .4byte gUnknown_0830FB58
 _0805898C:
 	adds r0, r4, 0x1
@@ -13226,8 +13226,8 @@ _080589DA:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080589E4: .4byte 0x0202e858
-_080589E8: .4byte 0x030048a0
+_080589E4: .4byte gPlayerAvatar
+_080589E8: .4byte gMapObjects
 	thumb_func_end ForcedMovement_None
 
 	thumb_func_start DoForcedMovement
@@ -13262,7 +13262,7 @@ DoForcedMovement: @ 80589EC
 	movs r0, 0
 	b _08058A54
 	.align 2, 0
-_08058A2C: .4byte 0x0202e858
+_08058A2C: .4byte gPlayerAvatar
 _08058A30:
 	cmp r7, 0x6
 	bne _08058A3A
@@ -13316,8 +13316,8 @@ DoForcedMovementInCurrentDirection: @ 8058A64
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08058A90: .4byte 0x0202e858
-_08058A94: .4byte 0x030048a0
+_08058A90: .4byte gPlayerAvatar
+_08058A94: .4byte gMapObjects
 	thumb_func_end DoForcedMovementInCurrentDirection
 
 	thumb_func_start ForcedMovement_Slip
@@ -13470,8 +13470,8 @@ ForcedMovement_Slide: @ 8058B6C
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08058B9C: .4byte 0x0202e858
-_08058BA0: .4byte 0x030048a0
+_08058B9C: .4byte gPlayerAvatar
+_08058BA0: .4byte gMapObjects
 	thumb_func_end ForcedMovement_Slide
 
 	thumb_func_start ForcedMovement_SlideSouth
@@ -13582,8 +13582,8 @@ _08058C42:
 	lsrs r0, 24
 	b _08058C6E
 	.align 2, 0
-_08058C60: .4byte 0x0202e858
-_08058C64: .4byte 0x030048a0
+_08058C60: .4byte gPlayerAvatar
+_08058C64: .4byte gMapObjects
 _08058C68: .4byte sub_80593C4
 _08058C6C:
 	movs r0, 0
@@ -13631,7 +13631,7 @@ CheckMovementInputNotOnBike: @ 8058CA4
 	movs r0, 0
 	b _08058CDE
 	.align 2, 0
-_08058CB8: .4byte 0x0202e858
+_08058CB8: .4byte gPlayerAvatar
 _08058CBC:
 	bl player_get_direction_upper_nybble
 	lsls r0, 24
@@ -13645,7 +13645,7 @@ _08058CBC:
 	movs r0, 0x1
 	b _08058CDC
 	.align 2, 0
-_08058CD4: .4byte 0x0202e858
+_08058CD4: .4byte gPlayerAvatar
 _08058CD8:
 	ldr r1, _08058CE4
 	movs r0, 0x2
@@ -13656,7 +13656,7 @@ _08058CDE:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08058CE4: .4byte 0x0202e858
+_08058CE4: .4byte gPlayerAvatar
 	thumb_func_end CheckMovementInputNotOnBike
 
 	thumb_func_start PlayerNotOnBikeNotMoving
@@ -13719,7 +13719,7 @@ _08058D44:
 	bl sub_80593C4
 	b _08058DAE
 	.align 2, 0
-_08058D58: .4byte 0x0202e858
+_08058D58: .4byte gPlayerAvatar
 _08058D5C:
 	movs r0, 0x10
 	ands r0, r1
@@ -13754,7 +13754,7 @@ _08058D5C:
 	strb r0, [r6]
 	b _08058DAE
 	.align 2, 0
-_08058DA4: .4byte 0x030048a0
+_08058DA4: .4byte gMapObjects
 _08058DA8:
 	adds r0, r5, 0
 	bl PlayerGoSpeed0
@@ -13813,8 +13813,8 @@ CheckForPlayerAvatarCollision: @ 8058DB4
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08058E18: .4byte 0x0202e858
-_08058E1C: .4byte 0x030048a0
+_08058E18: .4byte gPlayerAvatar
+_08058E1C: .4byte gMapObjects
 	thumb_func_end CheckForPlayerAvatarCollision
 
 	thumb_func_start CheckForFieldObjectCollision
@@ -13960,7 +13960,7 @@ sub_8058EF0: @ 8058EF0
 	movs r0, 0x1
 	b _08058F42
 	.align 2, 0
-_08058F3C: .4byte 0x0202e858
+_08058F3C: .4byte gPlayerAvatar
 _08058F40:
 	movs r0, 0
 _08058F42:
@@ -14064,7 +14064,7 @@ sub_8058F6C: @ 8058F6C
 	b _0805900E
 	.align 2, 0
 _08059004: .4byte 0x00000829
-_08059008: .4byte 0x030048a0
+_08059008: .4byte gMapObjects
 _0805900C:
 	movs r0, 0
 _0805900E:
@@ -14124,7 +14124,7 @@ SetPlayerAvatarTransitionFlags: @ 8059058
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08059070: .4byte 0x0202e858
+_08059070: .4byte gPlayerAvatar
 	thumb_func_end SetPlayerAvatarTransitionFlags
 
 	thumb_func_start DoPlayerAvatarTransition
@@ -14167,9 +14167,9 @@ _080590B4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080590BC: .4byte 0x0202e858
+_080590BC: .4byte gPlayerAvatar
 _080590C0: .4byte gUnknown_0830FC14
-_080590C4: .4byte 0x030048a0
+_080590C4: .4byte gMapObjects
 	thumb_func_end DoPlayerAvatarTransition
 
 	thumb_func_start nullsub_49
@@ -14288,8 +14288,8 @@ PlayerAvatarTransition_Surfing: @ 8059164
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080591B8: .4byte 0x0202ff84
-_080591BC: .4byte 0x0202e858
+_080591B8: .4byte gUnknown_0202FF84
+_080591BC: .4byte gPlayerAvatar
 	thumb_func_end PlayerAvatarTransition_Surfing
 
 	thumb_func_start PlayerAvatarTransition_Underwater
@@ -14326,7 +14326,7 @@ sub_80591F4: @ 80591F4
 	strb r0, [r2]
 	bx lr
 	.align 2, 0
-_08059200: .4byte 0x0202e858
+_08059200: .4byte gPlayerAvatar
 	thumb_func_end sub_80591F4
 
 	thumb_func_start sub_8059204
@@ -14350,7 +14350,7 @@ sub_8059204: @ 8059204
 	movs r0, 0x1
 	b _08059240
 	.align 2, 0
-_08059230: .4byte 0x0202e858
+_08059230: .4byte gPlayerAvatar
 _08059234:
 	bl sub_80592A4
 	lsls r0, 24
@@ -14406,8 +14406,8 @@ _0805928E:
 	movs r0, 0x1
 	b _0805929E
 	.align 2, 0
-_08059294: .4byte 0x030048a0
-_08059298: .4byte 0x0202e858
+_08059294: .4byte gMapObjects
+_08059298: .4byte gPlayerAvatar
 _0805929C:
 	movs r0, 0
 _0805929E:
@@ -14429,7 +14429,7 @@ sub_80592A4: @ 80592A4
 	movs r0, 0x1
 	b _080592C2
 	.align 2, 0
-_080592BC: .4byte 0x0202e858
+_080592BC: .4byte gPlayerAvatar
 _080592C0:
 	movs r0, 0
 _080592C2:
@@ -14453,8 +14453,8 @@ PlayerIsAnimActive: @ 80592C8
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080592E4: .4byte 0x0202e858
-_080592E8: .4byte 0x030048a0
+_080592E4: .4byte gPlayerAvatar
+_080592E8: .4byte gMapObjects
 	thumb_func_end PlayerIsAnimActive
 
 	thumb_func_start PlayerCheckIfAnimFinishedOrInactive
@@ -14473,8 +14473,8 @@ PlayerCheckIfAnimFinishedOrInactive: @ 80592EC
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08059308: .4byte 0x0202e858
-_0805930C: .4byte 0x030048a0
+_08059308: .4byte gPlayerAvatar
+_0805930C: .4byte gMapObjects
 	thumb_func_end PlayerCheckIfAnimFinishedOrInactive
 
 	thumb_func_start player_set_x22
@@ -14490,8 +14490,8 @@ player_set_x22: @ 8059310
 	strb r0, [r1]
 	bx lr
 	.align 2, 0
-_08059324: .4byte 0x030048a0
-_08059328: .4byte 0x0202e858
+_08059324: .4byte gMapObjects
+_08059328: .4byte gPlayerAvatar
 	thumb_func_end player_set_x22
 
 	thumb_func_start player_get_x22
@@ -14507,8 +14507,8 @@ player_get_x22: @ 805932C
 	ldrb r0, [r0]
 	bx lr
 	.align 2, 0
-_08059340: .4byte 0x030048a0
-_08059344: .4byte 0x0202e858
+_08059340: .4byte gMapObjects
+_08059344: .4byte gPlayerAvatar
 	thumb_func_end player_get_x22
 
 	thumb_func_start sub_8059348
@@ -14528,8 +14528,8 @@ sub_8059348: @ 8059348
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08059368: .4byte 0x0202e858
-_0805936C: .4byte 0x030048a0
+_08059368: .4byte gPlayerAvatar
+_0805936C: .4byte gMapObjects
 	thumb_func_end sub_8059348
 
 	thumb_func_start player_npc_set_state_and_x22_etc
@@ -14559,8 +14559,8 @@ _0805939E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080593A4: .4byte 0x0202e858
-_080593A8: .4byte 0x030048a0
+_080593A4: .4byte gPlayerAvatar
+_080593A8: .4byte gMapObjects
 	thumb_func_end player_npc_set_state_and_x22_etc
 
 	thumb_func_start PlayerGoSpeed0
@@ -14750,8 +14750,8 @@ _080594F6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080594FC: .4byte 0x0202e858
-_08059500: .4byte 0x030048a0
+_080594FC: .4byte gPlayerAvatar
+_08059500: .4byte gMapObjects
 	thumb_func_end sub_80594C0
 
 	thumb_func_start sub_8059504
@@ -14988,8 +14988,8 @@ _080596B0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080596B8: .4byte 0x030048a0
-_080596BC: .4byte 0x0202e858
+_080596B8: .4byte gMapObjects
+_080596BC: .4byte gPlayerAvatar
 _080596C0: .4byte gUnknown_0830FC34
 	thumb_func_end PlayCollisionSoundIfNotFacingWarp
 
@@ -15024,8 +15024,8 @@ GetXYCoordsOneStepInFrontOfPlayer: @ 80596C4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08059700: .4byte 0x030048a0
-_08059704: .4byte 0x0202e858
+_08059700: .4byte gMapObjects
+_08059704: .4byte gPlayerAvatar
 	thumb_func_end GetXYCoordsOneStepInFrontOfPlayer
 
 	thumb_func_start PlayerGetDestCoords
@@ -15051,8 +15051,8 @@ PlayerGetDestCoords: @ 8059708
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08059730: .4byte 0x030048a0
-_08059734: .4byte 0x0202e858
+_08059730: .4byte gMapObjects
+_08059734: .4byte gPlayerAvatar
 	thumb_func_end PlayerGetDestCoords
 
 	thumb_func_start player_get_direction_lower_nybble
@@ -15069,8 +15069,8 @@ player_get_direction_lower_nybble: @ 8059738
 	lsrs r0, 28
 	bx lr
 	.align 2, 0
-_08059750: .4byte 0x030048a0
-_08059754: .4byte 0x0202e858
+_08059750: .4byte gMapObjects
+_08059754: .4byte gPlayerAvatar
 	thumb_func_end player_get_direction_lower_nybble
 
 	thumb_func_start player_get_direction_upper_nybble
@@ -15086,8 +15086,8 @@ player_get_direction_upper_nybble: @ 8059758
 	lsrs r0, 4
 	bx lr
 	.align 2, 0
-_0805976C: .4byte 0x030048a0
-_08059770: .4byte 0x0202e858
+_0805976C: .4byte gMapObjects
+_08059770: .4byte gPlayerAvatar
 	thumb_func_end player_get_direction_upper_nybble
 
 	thumb_func_start PlayerGetZCoord
@@ -15103,8 +15103,8 @@ PlayerGetZCoord: @ 8059774
 	lsrs r0, 4
 	bx lr
 	.align 2, 0
-_08059788: .4byte 0x030048a0
-_0805978C: .4byte 0x0202e858
+_08059788: .4byte gMapObjects
+_0805978C: .4byte gPlayerAvatar
 	thumb_func_end PlayerGetZCoord
 
 	thumb_func_start unref_sub_8059790
@@ -15128,8 +15128,8 @@ unref_sub_8059790: @ 8059790
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080597B8: .4byte 0x0202e858
-_080597BC: .4byte 0x030048a0
+_080597B8: .4byte gPlayerAvatar
+_080597BC: .4byte gMapObjects
 	thumb_func_end unref_sub_8059790
 
 	thumb_func_start TestPlayerAvatarFlags
@@ -15140,7 +15140,7 @@ TestPlayerAvatarFlags: @ 80597C0
 	adds r0, r1, 0
 	bx lr
 	.align 2, 0
-_080597CC: .4byte 0x0202e858
+_080597CC: .4byte gPlayerAvatar
 	thumb_func_end TestPlayerAvatarFlags
 
 	thumb_func_start sub_80597D0
@@ -15149,7 +15149,7 @@ sub_80597D0: @ 80597D0
 	ldrb r0, [r0]
 	bx lr
 	.align 2, 0
-_080597D8: .4byte 0x0202e858
+_080597D8: .4byte gPlayerAvatar
 	thumb_func_end sub_80597D0
 
 	thumb_func_start GetPlayerAvatarObjectId
@@ -15158,7 +15158,7 @@ GetPlayerAvatarObjectId: @ 80597DC
 	ldrb r0, [r0, 0x4]
 	bx lr
 	.align 2, 0
-_080597E4: .4byte 0x0202e858
+_080597E4: .4byte gPlayerAvatar
 	thumb_func_end GetPlayerAvatarObjectId
 
 	thumb_func_start sub_80597E8
@@ -15199,8 +15199,8 @@ _0805982C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08059834: .4byte 0x0202e858
-_08059838: .4byte 0x030048a0
+_08059834: .4byte gPlayerAvatar
+_08059838: .4byte gMapObjects
 	thumb_func_end sub_80597F4
 
 	thumb_func_start sub_805983C
@@ -15246,7 +15246,7 @@ GetPlayerAvatarGraphicsIdByStateId: @ 805986C
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08059884: .4byte 0x0202e858
+_08059884: .4byte gPlayerAvatar
 	thumb_func_end GetPlayerAvatarGraphicsIdByStateId
 
 	thumb_func_start unref_sub_8059888
@@ -15352,7 +15352,7 @@ _08059926:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805992C: .4byte 0x03004360
+_0805992C: .4byte gPlayerParty
 	thumb_func_end PartyHasMonWithSurf
 
 	thumb_func_start IsPlayerSurfingNorth
@@ -15435,8 +15435,8 @@ IsPlayerFacingSurfableFishableWater: @ 8059954
 	movs r0, 0x1
 	b _080599D6
 	.align 2, 0
-_080599CC: .4byte 0x0202e858
-_080599D0: .4byte 0x030048a0
+_080599CC: .4byte gPlayerAvatar
+_080599D0: .4byte gMapObjects
 _080599D4:
 	movs r0, 0
 _080599D6:
@@ -15456,7 +15456,7 @@ ClearPlayerAvatarInfo: @ 80599E0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080599F0: .4byte 0x0202e858
+_080599F0: .4byte gPlayerAvatar
 	thumb_func_end ClearPlayerAvatarInfo
 
 	thumb_func_start SetPlayerAvatarStateMask
@@ -15471,7 +15471,7 @@ SetPlayerAvatarStateMask: @ 80599F4
 	strb r0, [r3]
 	bx lr
 	.align 2, 0
-_08059A08: .4byte 0x0202e858
+_08059A08: .4byte gPlayerAvatar
 	thumb_func_end SetPlayerAvatarStateMask
 
 	thumb_func_start GetPlayerAvatarStateTransitionByGraphicsId
@@ -15536,7 +15536,7 @@ _08059A60:
 	ldrb r0, [r0]
 	b _08059A88
 	.align 2, 0
-_08059A74: .4byte 0x0202e858
+_08059A74: .4byte gPlayerAvatar
 _08059A78: .4byte gUnknown_0830FC64
 _08059A7C:
 	adds r0, r2, 0x1
@@ -15573,7 +15573,7 @@ SetPlayerAvatarExtraStateTransition: @ 8059A90
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08059ABC: .4byte 0x0202e858
+_08059ABC: .4byte gPlayerAvatar
 	thumb_func_end SetPlayerAvatarExtraStateTransition
 
 	thumb_func_start InitPlayerAvatar
@@ -15669,8 +15669,8 @@ InitPlayerAvatar: @ 8059AC0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08059B80: .4byte 0x030048a0
-_08059B84: .4byte 0x0202e858
+_08059B80: .4byte gMapObjects
+_08059B84: .4byte gPlayerAvatar
 	thumb_func_end InitPlayerAvatar
 
 	thumb_func_start sub_8059B88
@@ -15723,9 +15723,9 @@ _08059BE0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08059BE8: .4byte 0x030048a0
-_08059BEC: .4byte 0x0202e858
-_08059BF0: .4byte 0x02020004
+_08059BE8: .4byte gMapObjects
+_08059BEC: .4byte gPlayerAvatar
+_08059BF0: .4byte gSprites
 	thumb_func_end sub_8059B88
 
 	thumb_func_start sub_8059BF4
@@ -15757,9 +15757,9 @@ sub_8059BF4: @ 8059BF4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08059C30: .4byte 0x0202e858
-_08059C34: .4byte 0x030048a0
-_08059C38: .4byte 0x02020004
+_08059C30: .4byte gPlayerAvatar
+_08059C34: .4byte gMapObjects
+_08059C38: .4byte gSprites
 	thumb_func_end sub_8059BF4
 
 	thumb_func_start sub_8059C3C
@@ -15799,9 +15799,9 @@ sub_8059C3C: @ 8059C3C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08059C88: .4byte 0x0202e858
-_08059C8C: .4byte 0x030048a0
-_08059C90: .4byte 0x02020004
+_08059C88: .4byte gPlayerAvatar
+_08059C8C: .4byte gMapObjects
+_08059C90: .4byte gSprites
 	thumb_func_end sub_8059C3C
 
 	thumb_func_start sub_8059C94
@@ -15853,9 +15853,9 @@ sub_8059C94: @ 8059C94
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08059CFC: .4byte 0x0202e858
-_08059D00: .4byte 0x030048a0
-_08059D04: .4byte 0x02020004
+_08059CFC: .4byte gPlayerAvatar
+_08059D00: .4byte gMapObjects
+_08059D04: .4byte gSprites
 	thumb_func_end sub_8059C94
 
 	thumb_func_start sub_8059D08
@@ -15895,9 +15895,9 @@ sub_8059D08: @ 8059D08
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08059D54: .4byte 0x0202e858
-_08059D58: .4byte 0x030048a0
-_08059D5C: .4byte 0x02020004
+_08059D54: .4byte gPlayerAvatar
+_08059D58: .4byte gMapObjects
+_08059D5C: .4byte gSprites
 	thumb_func_end sub_8059D08
 
 	thumb_func_start sub_8059D60
@@ -16003,7 +16003,7 @@ task_add_bump_boulder: @ 8059DF0
 	bx r0
 	.align 2, 0
 _08059E24: .4byte sub_8059E2C
-_08059E28: .4byte 0x03004b20
+_08059E28: .4byte gTasks
 	thumb_func_end task_add_bump_boulder
 
 	thumb_func_start sub_8059E2C
@@ -16046,9 +16046,9 @@ _08059E40:
 	bx r0
 	.align 2, 0
 _08059E74: .4byte gUnknown_0830FC88
-_08059E78: .4byte 0x03004b20
-_08059E7C: .4byte 0x030048a0
-_08059E80: .4byte 0x0202e858
+_08059E78: .4byte gTasks
+_08059E7C: .4byte gMapObjects
+_08059E80: .4byte gPlayerAvatar
 	thumb_func_end sub_8059E2C
 
 	thumb_func_start sub_8059E84
@@ -16067,7 +16067,7 @@ sub_8059E84: @ 8059E84
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08059EA0: .4byte 0x0202e858
+_08059EA0: .4byte gPlayerAvatar
 	thumb_func_end sub_8059E84
 
 	thumb_func_start sub_8059EA4
@@ -16137,8 +16137,8 @@ _08059F2E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08059F38: .4byte 0x0202ff84
-_08059F3C: .4byte 0x02020004
+_08059F38: .4byte gUnknown_0202FF84
+_08059F3C: .4byte gSprites
 	thumb_func_end sub_8059EA4
 
 	thumb_func_start sub_8059F40
@@ -16175,7 +16175,7 @@ _08059F82:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08059F8C: .4byte 0x0202e858
+_08059F8C: .4byte gPlayerAvatar
 _08059F90: .4byte sub_8059E2C
 	thumb_func_end sub_8059F40
 
@@ -16230,9 +16230,9 @@ _08059FC6:
 	bx r0
 	.align 2, 0
 _08059FF0: .4byte gUnknown_0830FC94
-_08059FF4: .4byte 0x03004b20
-_08059FF8: .4byte 0x0202e858
-_08059FFC: .4byte 0x030048a0
+_08059FF4: .4byte gTasks
+_08059FF8: .4byte gPlayerAvatar
+_08059FFC: .4byte gMapObjects
 	thumb_func_end sub_8059FB4
 
 	thumb_func_start sub_805A000
@@ -16283,7 +16283,7 @@ _0805A05C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805A064: .4byte 0x0202e858
+_0805A064: .4byte gPlayerAvatar
 _0805A068: .4byte sub_8059FB4
 	thumb_func_end sub_805A000
 
@@ -16338,9 +16338,9 @@ _0805A09E:
 	bx r0
 	.align 2, 0
 _0805A0C8: .4byte gUnknown_0830FC98
-_0805A0CC: .4byte 0x03004b20
-_0805A0D0: .4byte 0x0202e858
-_0805A0D4: .4byte 0x030048a0
+_0805A0CC: .4byte gTasks
+_0805A0D0: .4byte gPlayerAvatar
+_0805A0D4: .4byte gMapObjects
 	thumb_func_end sub_805A08C
 
 	thumb_func_start sub_805A0D8
@@ -16362,7 +16362,7 @@ sub_805A0D8: @ 805A0D8
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805A0FC: .4byte 0x0202e858
+_0805A0FC: .4byte gPlayerAvatar
 	thumb_func_end sub_805A0D8
 
 	thumb_func_start sub_805A100
@@ -16493,7 +16493,7 @@ _0805A1FC:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805A204: .4byte 0x0202e858
+_0805A204: .4byte gPlayerAvatar
 _0805A208: .4byte sub_805A08C
 	thumb_func_end sub_805A1B8
 
@@ -16532,9 +16532,9 @@ sub_805A20C: @ 805A20C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805A258: .4byte 0x0202e858
+_0805A258: .4byte gPlayerAvatar
 _0805A25C: .4byte taskFF_0805D1D4
-_0805A260: .4byte 0x03004b20
+_0805A260: .4byte gTasks
 	thumb_func_end sub_805A20C
 
 	thumb_func_start taskFF_0805D1D4
@@ -16582,9 +16582,9 @@ _0805A2B8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805A2C0: .4byte 0x0202e858
-_0805A2C4: .4byte 0x030048a0
-_0805A2C8: .4byte 0x03004b20
+_0805A2C0: .4byte gPlayerAvatar
+_0805A2C4: .4byte gMapObjects
+_0805A2C8: .4byte gTasks
 _0805A2CC: .4byte sub_805A2D0
 	thumb_func_end taskFF_0805D1D4
 
@@ -16638,9 +16638,9 @@ _0805A336:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805A33C: .4byte 0x0202e858
-_0805A340: .4byte 0x030048a0
-_0805A344: .4byte 0x02020004
+_0805A33C: .4byte gPlayerAvatar
+_0805A340: .4byte gMapObjects
+_0805A344: .4byte gSprites
 	thumb_func_end sub_805A2D0
 
 	thumb_func_start StartFishing
@@ -16667,7 +16667,7 @@ StartFishing: @ 805A348
 	bx r0
 	.align 2, 0
 _0805A374: .4byte sub_805A37C
-_0805A378: .4byte 0x03004b20
+_0805A378: .4byte gTasks
 	thumb_func_end StartFishing
 
 	thumb_func_start sub_805A37C
@@ -16697,7 +16697,7 @@ _0805A38E:
 	bx r0
 	.align 2, 0
 _0805A3AC: .4byte gUnknown_0830FCB4
-_0805A3B0: .4byte 0x03004b20
+_0805A3B0: .4byte gTasks
 	thumb_func_end sub_805A37C
 
 	thumb_func_start sub_805A3B4
@@ -16716,7 +16716,7 @@ sub_805A3B4: @ 805A3B4
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805A3D0: .4byte 0x0202e858
+_0805A3D0: .4byte gPlayerAvatar
 	thumb_func_end sub_805A3B4
 
 	thumb_func_start fish1
@@ -16785,8 +16785,8 @@ fish1: @ 805A3D4
 	.align 2, 0
 _0805A45C: .4byte gUnknown_0830FCF4
 _0805A460: .4byte gUnknown_0830FCFA
-_0805A464: .4byte 0x030048a0
-_0805A468: .4byte 0x0202e858
+_0805A464: .4byte gMapObjects
+_0805A468: .4byte gPlayerAvatar
 	thumb_func_end fish1
 
 	thumb_func_start fish2
@@ -16882,7 +16882,7 @@ _0805A50E:
 	b _0805A564
 	.align 2, 0
 _0805A514: .4byte gUnknown_0830FD00
-_0805A518: .4byte 0x03001770
+_0805A518: .4byte gMain
 _0805A51C:
 	lsls r0, r2, 16
 	asrs r0, 16
@@ -16973,8 +16973,8 @@ _0805A5BC:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805A5C4: .4byte 0x0202e858
-_0805A5C8: .4byte 0x02020004
+_0805A5C4: .4byte gPlayerAvatar
+_0805A5C8: .4byte gSprites
 	thumb_func_end party_menu_update_status_condition_object
 
 	thumb_func_start sub_805A5CC
@@ -17044,7 +17044,7 @@ _0805A63E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805A648: .4byte 0x03001770
+_0805A648: .4byte gMain
 	thumb_func_end fish7
 
 	thumb_func_start fish8
@@ -17192,9 +17192,9 @@ _0805A746:
 	strh r0, [r5, 0xA]
 	b _0805A7A8
 	.align 2, 0
-_0805A76C: .4byte 0x0202e858
-_0805A770: .4byte 0x030048a0
-_0805A774: .4byte 0x02020004
+_0805A76C: .4byte gPlayerAvatar
+_0805A770: .4byte gMapObjects
+_0805A774: .4byte gSprites
 _0805A778:
 	movs r1, 0xA
 	ldrsh r0, [r5, r1]
@@ -17224,7 +17224,7 @@ _0805A7A8:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805A7B4: .4byte 0x0202e858
+_0805A7B4: .4byte gPlayerAvatar
 _0805A7B8: .4byte sub_805A37C
 	thumb_func_end sub_805A6DC
 
@@ -17258,8 +17258,8 @@ sub_805A7BC: @ 805A7BC
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805A7FC: .4byte 0x0202e858
-_0805A800: .4byte 0x02020004
+_0805A7FC: .4byte gPlayerAvatar
+_0805A800: .4byte gSprites
 _0805A804: .4byte gOtherText_NotEvenANibble
 	thumb_func_end sub_805A7BC
 
@@ -17294,8 +17294,8 @@ sub_805A808: @ 805A808
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805A84C: .4byte 0x0202e858
-_0805A850: .4byte 0x02020004
+_0805A84C: .4byte gPlayerAvatar
+_0805A850: .4byte gSprites
 _0805A854: .4byte gOtherText_ItGotAway
 	thumb_func_end sub_805A808
 
@@ -17388,9 +17388,9 @@ _0805A8FA:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805A908: .4byte 0x02020004
-_0805A90C: .4byte 0x0202e858
-_0805A910: .4byte 0x030048a0
+_0805A908: .4byte gSprites
+_0805A90C: .4byte gPlayerAvatar
+_0805A910: .4byte gMapObjects
 	thumb_func_end sub_805A874
 
 	thumb_func_start fishF
@@ -17418,7 +17418,7 @@ _0805A946:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805A94C: .4byte 0x0202e858
+_0805A94C: .4byte gPlayerAvatar
 _0805A950: .4byte sub_805A37C
 	thumb_func_end fishF
 
@@ -17546,10 +17546,10 @@ _0805AA3A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805AA40: .4byte 0x0202e858
-_0805AA44: .4byte 0x02020004
+_0805AA40: .4byte gPlayerAvatar
+_0805AA44: .4byte gSprites
 _0805AA48: .4byte 0x0000fff8
-_0805AA4C: .4byte 0x030048a0
+_0805AA4C: .4byte gMapObjects
 	thumb_func_end sub_805A954
 
 	thumb_func_start npc_clear_ids_and_state
@@ -17591,7 +17591,7 @@ _0805AA76:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805AA94: .4byte 0x030048a0
+_0805AA94: .4byte gMapObjects
 	thumb_func_end npcs_clear_ids_and_state
 
 	thumb_func_start sub_805AA98
@@ -17681,7 +17681,7 @@ sub_805AAB0: @ 805AAB0
 	bx r0
 	.align 2, 0
 _0805AB4C: .4byte gFieldEffectObjectTemplatePointers
-_0805AB50: .4byte 0x02020004
+_0805AB50: .4byte gSprites
 	thumb_func_end sub_805AAB0
 
 	thumb_func_start sub_805AB54
@@ -17692,7 +17692,7 @@ sub_805AB54: @ 805AB54
 	ldrb r0, [r2]
 	b _0805AB78
 	.align 2, 0
-_0805AB60: .4byte 0x030048a0
+_0805AB60: .4byte gMapObjects
 _0805AB64:
 	adds r0, r1, 0x1
 	lsls r0, 24
@@ -17800,7 +17800,7 @@ _0805AC0C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805AC14: .4byte 0x030048a0
+_0805AC14: .4byte gMapObjects
 	thumb_func_end GetFieldObjectIdByXY
 
 	thumb_func_start GetFieldObjectIdByLocalIdAndMapInternal
@@ -17835,7 +17835,7 @@ _0805AC2A:
 	adds r0, r1, 0
 	b _0805AC60
 	.align 2, 0
-_0805AC50: .4byte 0x030048a0
+_0805AC50: .4byte gMapObjects
 _0805AC54:
 	adds r0, r1, 0x1
 	lsls r0, 24
@@ -17871,7 +17871,7 @@ _0805AC72:
 	adds r0, r2, 0
 	b _0805AC9C
 	.align 2, 0
-_0805AC8C: .4byte 0x030048a0
+_0805AC8C: .4byte gMapObjects
 _0805AC90:
 	adds r0, r2, 0x1
 	lsls r0, 24
@@ -18038,7 +18038,7 @@ _0805ADC2:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805ADD0: .4byte 0x030048a0
+_0805ADD0: .4byte gMapObjects
 _0805ADD4: .4byte gUnknown_0836DC09
 _0805ADD8: .4byte gUnknown_0836DBBC
 	thumb_func_end InitFieldObjectStateFromTemplate
@@ -18057,7 +18057,7 @@ sub_805ADDC: @ 805ADDC
 	bne _0805AE10
 	b _0805AE3E
 	.align 2, 0
-_0805ADF4: .4byte 0x0202e828
+_0805ADF4: .4byte gMapHeader
 _0805ADF8:
 	ldr r1, _0805AE0C
 	adds r0, r7, r1
@@ -18104,7 +18104,7 @@ _0805AE40:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805AE4C: .4byte 0x02026354
+_0805AE4C: .4byte gUnknown_02026354
 	thumb_func_end sub_805ADDC
 
 	thumb_func_start GetAvailableFieldObjectSlot
@@ -18160,7 +18160,7 @@ _0805AEA8:
 	movs r0, 0x1
 	b _0805AEE4
 	.align 2, 0
-_0805AEAC: .4byte 0x030048a0
+_0805AEAC: .4byte gMapObjects
 _0805AEB0:
 	mov r0, r12
 	strb r2, [r0]
@@ -18195,7 +18195,7 @@ _0805AEE4:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805AEEC: .4byte 0x030048a0
+_0805AEEC: .4byte gMapObjects
 	thumb_func_end GetAvailableFieldObjectSlot
 
 	thumb_func_start RemoveFieldObject
@@ -18245,7 +18245,7 @@ _0805AF42:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805AF48: .4byte 0x030048a0
+_0805AF48: .4byte gMapObjects
 	thumb_func_end RemoveFieldObjectByLocalIdAndMap
 
 	thumb_func_start RemoveFieldObjectInternal
@@ -18283,7 +18283,7 @@ RemoveFieldObjectInternal: @ 805AF4C
 	bx r0
 	.align 2, 0
 _0805AF90: .4byte 0xffff0000
-_0805AF94: .4byte 0x02020004
+_0805AF94: .4byte gSprites
 	thumb_func_end RemoveFieldObjectInternal
 
 	thumb_func_start npc_hide_all_but_player
@@ -18311,8 +18311,8 @@ _0805AFB2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805AFC4: .4byte 0x0202e858
-_0805AFC8: .4byte 0x030048a0
+_0805AFC4: .4byte gPlayerAvatar
+_0805AFC8: .4byte gMapObjects
 	thumb_func_end npc_hide_all_but_player
 
 	thumb_func_start sub_805AFCC
@@ -18366,7 +18366,7 @@ _0805B006:
 	bl npc_load_two_palettes__no_record
 	b _0805B042
 	.align 2, 0
-_0805B030: .4byte 0x030048a0
+_0805B030: .4byte gMapObjects
 _0805B034:
 	cmp r0, 0xA
 	bne _0805B042
@@ -18409,7 +18409,7 @@ _0805B050:
 	b _0805B154
 	.align 2, 0
 _0805B084: .4byte 0x0000ffff
-_0805B088: .4byte 0x030048a0
+_0805B088: .4byte gMapObjects
 _0805B08C:
 	lsls r0, r7, 4
 	adds r0, r7
@@ -18516,7 +18516,7 @@ _0805B154:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805B164: .4byte 0x02020004
+_0805B164: .4byte gSprites
 	thumb_func_end sub_805AFCC
 
 	thumb_func_start SpawnFieldObject
@@ -18616,8 +18616,8 @@ _0805B21A:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805B228: .4byte 0x02020004
-_0805B22C: .4byte 0x030048a0
+_0805B228: .4byte gSprites
+_0805B22C: .4byte gMapObjects
 	thumb_func_end SpawnFieldObject
 
 	thumb_func_start SpawnSpecialFieldObject
@@ -18648,7 +18648,7 @@ SpawnSpecialFieldObject: @ 805B230
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805B268: .4byte 0x02025734
+_0805B268: .4byte gSaveBlock1
 	thumb_func_end SpawnSpecialFieldObject
 
 	thumb_func_start SpawnSpecialFieldObjectParametrized
@@ -18871,7 +18871,7 @@ _0805B3FC:
 	bx r1
 	.align 2, 0
 _0805B408: .4byte 0x0000ffff
-_0805B40C: .4byte 0x02020004
+_0805B40C: .4byte gSprites
 	thumb_func_end AddPseudoFieldObject
 
 	thumb_func_start sub_805B410
@@ -19031,7 +19031,7 @@ _0805B53C:
 	.align 2, 0
 _0805B550: .4byte sub_8064970
 _0805B554: .4byte 0x0000ffff
-_0805B558: .4byte 0x02020004
+_0805B558: .4byte gSprites
 	thumb_func_end sub_805B410
 
 	thumb_func_start sub_805B55C
@@ -19140,9 +19140,9 @@ _0805B618:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805B628: .4byte 0x0202e828
-_0805B62C: .4byte 0x02025734
-_0805B630: .4byte 0x02026354
+_0805B628: .4byte gMapHeader
+_0805B62C: .4byte gSaveBlock1
+_0805B630: .4byte gUnknown_02026354
 	thumb_func_end sub_805B55C
 
 	thumb_func_start RemoveFieldObjectsOutsideView
@@ -19193,8 +19193,8 @@ _0805B67A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805B688: .4byte 0x02029818
-_0805B68C: .4byte 0x030048a0
+_0805B688: .4byte gUnknown_02029818
+_0805B68C: .4byte gMapObjects
 _0805B690: .4byte 0x00010001
 	thumb_func_end RemoveFieldObjectsOutsideView
 
@@ -19263,7 +19263,7 @@ _0805B706:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805B70C: .4byte 0x02025734
+_0805B70C: .4byte gSaveBlock1
 	thumb_func_end RemoveFieldObjectIfOutsideView
 
 	thumb_func_start sub_805B710
@@ -19304,7 +19304,7 @@ _0805B744:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805B758: .4byte 0x030048a0
+_0805B758: .4byte gMapObjects
 	thumb_func_end sub_805B710
 
 	thumb_func_start sub_805B75C
@@ -19514,11 +19514,11 @@ _0805B8EE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805B900: .4byte 0x02029818
-_0805B904: .4byte 0x030048a0
+_0805B900: .4byte gUnknown_02029818
+_0805B904: .4byte gMapObjects
 _0805B908: .4byte 0xffff0000
 _0805B90C: .4byte 0x0000ffff
-_0805B910: .4byte 0x02020004
+_0805B910: .4byte gSprites
 	thumb_func_end sub_805B75C
 
 	thumb_func_start sub_805B914
@@ -19575,8 +19575,8 @@ SetPlayerAvatarFieldObjectIdAndObjectId: @ 805B94C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805B978: .4byte 0x0202e858
-_0805B97C: .4byte 0x030048a0
+_0805B978: .4byte gPlayerAvatar
+_0805B97C: .4byte gMapObjects
 	thumb_func_end SetPlayerAvatarFieldObjectIdAndObjectId
 
 	thumb_func_start sub_805B980
@@ -19706,7 +19706,7 @@ _0805BA72:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805BA7C: .4byte 0x02020004
+_0805BA7C: .4byte gSprites
 	thumb_func_end sub_805B980
 
 	thumb_func_start unref_sub_805BA80
@@ -19741,7 +19741,7 @@ _0805BAB4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805BABC: .4byte 0x030048a0
+_0805BABC: .4byte gMapObjects
 	thumb_func_end unref_sub_805BA80
 
 	thumb_func_start FieldObjectTurn
@@ -19782,7 +19782,7 @@ _0805BB06:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805BB0C: .4byte 0x02020004
+_0805BB0C: .4byte gSprites
 	thumb_func_end FieldObjectTurn
 
 	thumb_func_start FieldObjectTurnByLocalIdAndMap
@@ -19817,7 +19817,7 @@ _0805BB44:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805BB4C: .4byte 0x030048a0
+_0805BB4C: .4byte gMapObjects
 	thumb_func_end FieldObjectTurnByLocalIdAndMap
 
 	thumb_func_start unref_sub_805BB50
@@ -19835,7 +19835,7 @@ unref_sub_805BB50: @ 805BB50
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805BB6C: .4byte 0x030048a0
+_0805BB6C: .4byte gMapObjects
 	thumb_func_end unref_sub_805BB50
 
 	thumb_func_start get_berry_tree_graphics
@@ -20003,7 +20003,7 @@ _0805BC9E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805BCA8: .4byte 0x030048a0
+_0805BCA8: .4byte gMapObjects
 	thumb_func_end npc_by_local_id_and_map_set_field_1_bit_x20
 
 	thumb_func_start FieldObjectGetLocalIdAndMap
@@ -20045,7 +20045,7 @@ _0805BCE8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805BCEC: .4byte 0x030048a0
+_0805BCEC: .4byte gMapObjects
 	thumb_func_end sub_805BCC0
 
 	thumb_func_start sub_805BCF0
@@ -20090,8 +20090,8 @@ _0805BD36:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805BD40: .4byte 0x030048a0
-_0805BD44: .4byte 0x02020004
+_0805BD40: .4byte gMapObjects
+_0805BD44: .4byte gSprites
 	thumb_func_end sub_805BCF0
 
 	thumb_func_start sub_805BD48
@@ -20130,7 +20130,7 @@ _0805BD84:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805BD8C: .4byte 0x030048a0
+_0805BD8C: .4byte gMapObjects
 	thumb_func_end sub_805BD48
 
 	thumb_func_start sub_805BD90
@@ -20174,8 +20174,8 @@ _0805BDD4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805BDDC: .4byte 0x030048a0
-_0805BDE0: .4byte 0x02020004
+_0805BDDC: .4byte gMapObjects
+_0805BDE0: .4byte gSprites
 	thumb_func_end sub_805BD90
 
 	thumb_func_start gpu_pal_allocator_reset__manage_upper_four
@@ -20188,7 +20188,7 @@ gpu_pal_allocator_reset__manage_upper_four: @ 805BDE4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805BDF4: .4byte 0x030028f8
+_0805BDF4: .4byte gReservedSpritePaletteCount
 	thumb_func_end gpu_pal_allocator_reset__manage_upper_four
 
 	thumb_func_start sub_805BDF8
@@ -20405,7 +20405,7 @@ _0805BF50:
 _0805BF74: .4byte gUnknown_08373874
 _0805BF78: .4byte 0x000011ff
 _0805BF7C: .4byte gUnknown_0830FD14
-_0805BF80: .4byte 0x030005a4
+_0805BF80: .4byte gUnknown_030005A4
 _0805BF84:
 	adds r0, r3, 0x1
 	lsls r0, 24
@@ -20460,11 +20460,11 @@ _0805BFC4:
 	bl pal_patch_for_npc
 	b _0805C00C
 	.align 2, 0
-_0805BFE8: .4byte 0x030005a6
+_0805BFE8: .4byte gUnknown_030005A6
 _0805BFEC: .4byte gUnknown_083738E4
 _0805BFF0: .4byte 0x000011ff
 _0805BFF4: .4byte gUnknown_0830FD14
-_0805BFF8: .4byte 0x030005a4
+_0805BFF8: .4byte gUnknown_030005A4
 _0805BFFC:
 	adds r0, r3, 0x1
 	lsls r0, 24
@@ -20601,7 +20601,7 @@ _0805C0EA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805C0F4: .4byte 0x02020004
+_0805C0F4: .4byte gSprites
 	thumb_func_end sub_805C058
 
 	thumb_func_start sub_805C0F8
@@ -20646,7 +20646,7 @@ _0805C140:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805C148: .4byte 0x030048a0
+_0805C148: .4byte gMapObjects
 	thumb_func_end sub_805C0F8
 
 	thumb_func_start npc_coords_shift_still
@@ -20714,8 +20714,8 @@ _0805C1B8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805C1C0: .4byte 0x0202e844
-_0805C1C4: .4byte 0x030048a0
+_0805C1C0: .4byte gUnknown_0202E844
+_0805C1C4: .4byte gMapObjects
 	thumb_func_end UpdateFieldObjectCoordsForCameraUpdate
 
 	thumb_func_start GetFieldObjectIdByXYZ
@@ -20759,7 +20759,7 @@ _0805C1E0:
 	adds r0, r4, 0
 	b _0805C224
 	.align 2, 0
-_0805C214: .4byte 0x030048a0
+_0805C214: .4byte gMapObjects
 _0805C218:
 	adds r0, r4, 0x1
 	lsls r0, 24
@@ -20855,7 +20855,7 @@ AddCameraObject: @ 805C284
 	bx r1
 	.align 2, 0
 _0805C2C0: .4byte gSpriteTemplate_830FD24
-_0805C2C4: .4byte 0x02020004
+_0805C2C4: .4byte gSprites
 	thumb_func_end AddCameraObject
 
 	thumb_func_start ObjectCB_CameraObject
@@ -20910,7 +20910,7 @@ CameraObject_0: @ 805C2F0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805C328: .4byte 0x02020004
+_0805C328: .4byte gSprites
 	thumb_func_end CameraObject_0
 
 	thumb_func_start CameraObject_1
@@ -20941,7 +20941,7 @@ CameraObject_1: @ 805C32C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805C360: .4byte 0x02020004
+_0805C360: .4byte gSprites
 	thumb_func_end CameraObject_1
 
 	thumb_func_start CameraObject_2
@@ -20969,7 +20969,7 @@ CameraObject_2: @ 805C364
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805C390: .4byte 0x02020004
+_0805C390: .4byte gSprites
 	thumb_func_end CameraObject_2
 
 	thumb_func_start FindCameraObject
@@ -20998,7 +20998,7 @@ _0805C39E:
 	adds r0, r2, 0
 	b _0805C3D4
 	.align 2, 0
-_0805C3C0: .4byte 0x02020004
+_0805C3C0: .4byte gSprites
 _0805C3C4: .4byte ObjectCB_CameraObject
 _0805C3C8:
 	adds r0, r3, 0x1
@@ -21111,7 +21111,7 @@ _0805C456:
 	strb r7, [r0]
 	b _0805C492
 	.align 2, 0
-_0805C484: .4byte 0x02020004
+_0805C484: .4byte gSprites
 _0805C488:
 	adds r0, r5, 0x1
 	lsls r0, 24
@@ -21171,7 +21171,7 @@ _0805C4BE:
 	lsrs r0, 24
 	b _0805C506
 	.align 2, 0
-_0805C4F4: .4byte 0x02020004
+_0805C4F4: .4byte gSprites
 _0805C4F8:
 	subs r0, r1, 0x1
 	lsls r0, 16
@@ -21258,7 +21258,7 @@ GetFieldObjectScriptPointerByFieldObjectId: @ 805C56C
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805C58C: .4byte 0x030048a0
+_0805C58C: .4byte gMapObjects
 	thumb_func_end GetFieldObjectScriptPointerByFieldObjectId
 
 	thumb_func_start GetFieldObjectFlagIdByLocalIdAndMap
@@ -21295,7 +21295,7 @@ GetFieldObjectFlagIdByFieldObjectId: @ 805C5A8
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805C5CC: .4byte 0x030048a0
+_0805C5CC: .4byte gMapObjects
 	thumb_func_end GetFieldObjectFlagIdByFieldObjectId
 
 	thumb_func_start unref_sub_805C5D0
@@ -21323,7 +21323,7 @@ unref_sub_805C5D0: @ 805C5D0
 	ldrb r0, [r0, 0x7]
 	b _0805C606
 	.align 2, 0
-_0805C600: .4byte 0x030048a0
+_0805C600: .4byte gMapObjects
 _0805C604:
 	movs r0, 0xFF
 _0805C606:
@@ -21344,7 +21344,7 @@ unref_sub_805C60C: @ 805C60C
 	ldrb r0, [r1, 0x7]
 	bx lr
 	.align 2, 0
-_0805C620: .4byte 0x030048a0
+_0805C620: .4byte gMapObjects
 	thumb_func_end unref_sub_805C60C
 
 	thumb_func_start unref_sub_805C624
@@ -21372,7 +21372,7 @@ unref_sub_805C624: @ 805C624
 	ldrb r0, [r0, 0x1D]
 	b _0805C65A
 	.align 2, 0
-_0805C654: .4byte 0x030048a0
+_0805C654: .4byte gMapObjects
 _0805C658:
 	movs r0, 0xFF
 _0805C65A:
@@ -21393,7 +21393,7 @@ FieldObjectGetBerryTreeId: @ 805C660
 	ldrb r0, [r1, 0x1D]
 	bx lr
 	.align 2, 0
-_0805C674: .4byte 0x030048a0
+_0805C674: .4byte gMapObjects
 	thumb_func_end FieldObjectGetBerryTreeId
 
 	thumb_func_start GetFieldObjectTemplateByLocalIdAndMap
@@ -21421,8 +21421,8 @@ GetFieldObjectTemplateByLocalIdAndMap: @ 805C678
 	ldr r0, [r0, 0x4]
 	b _0805C6B8
 	.align 2, 0
-_0805C6A4: .4byte 0x02025734
-_0805C6A8: .4byte 0x0202e828
+_0805C6A4: .4byte gSaveBlock1
+_0805C6A8: .4byte gMapHeader
 _0805C6AC:
 	adds r0, r2, 0
 	adds r1, r3, 0
@@ -21491,7 +21491,7 @@ sub_805C700: @ 805C700
 	beq _0805C72E
 	b _0805C74A
 	.align 2, 0
-_0805C720: .4byte 0x02025734
+_0805C720: .4byte gSaveBlock1
 _0805C724:
 	movs r1, 0xC2
 	lsls r1, 4
@@ -21585,7 +21585,7 @@ _0805C7BA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805C7C0: .4byte 0x030048a0
+_0805C7C0: .4byte gMapObjects
 	thumb_func_end sub_805C78C
 
 	thumb_func_start sub_805C7C4
@@ -21613,9 +21613,9 @@ sub_805C7C4: @ 805C7C4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805C7F4: .4byte 0x030005a6
+_0805C7F4: .4byte gUnknown_030005A6
 _0805C7F8: .4byte 0x000011ff
-_0805C7FC: .4byte 0x030005a4
+_0805C7FC: .4byte gUnknown_030005A4
 _0805C800: .4byte gUnknown_0837399C
 	thumb_func_end sub_805C7C4
 
@@ -21636,7 +21636,7 @@ npc_paltag_by_palslot: @ 805C804
 	b _0805C834
 	.align 2, 0
 _0805C820: .4byte gUnknown_0837399C
-_0805C824: .4byte 0x030005a4
+_0805C824: .4byte gUnknown_030005A4
 _0805C828:
 	adds r1, r4, 0x4
 	adds r1, r2, r1
@@ -21649,7 +21649,7 @@ _0805C834:
 	ldrh r0, [r0]
 	b _0805C872
 	.align 2, 0
-_0805C83C: .4byte 0x030005a4
+_0805C83C: .4byte gUnknown_030005A4
 _0805C840:
 	movs r3, 0
 	ldr r0, _0805C878
@@ -21685,7 +21685,7 @@ _0805C872:
 	.align 2, 0
 _0805C878: .4byte gUnknown_083738E4
 _0805C87C: .4byte 0x000011ff
-_0805C880: .4byte 0x030005a6
+_0805C880: .4byte gUnknown_030005A6
 	thumb_func_end npc_paltag_by_palslot
 
 	thumb_func_start sub_805C884
@@ -21704,7 +21704,7 @@ sub_805C884: @ 805C884
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805C8A0: .4byte 0x030048a0
+_0805C8A0: .4byte gMapObjects
 _0805C8A4: .4byte sub_805C8A8
 	thumb_func_end sub_805C884
 
@@ -21730,7 +21730,7 @@ sub_805C8AC: @ 805C8AC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805C8C8: .4byte 0x030048a0
+_0805C8C8: .4byte gMapObjects
 _0805C8CC: .4byte sub_805C8D0
 	thumb_func_end sub_805C8AC
 
@@ -22474,7 +22474,7 @@ sub_805CDE8: @ 805CDE8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805CE04: .4byte 0x030048a0
+_0805CE04: .4byte gMapObjects
 _0805CE08: .4byte sub_805CE0C
 	thumb_func_end sub_805CDE8
 
@@ -22647,7 +22647,7 @@ sub_805CF28: @ 805CF28
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805CF44: .4byte 0x030048a0
+_0805CF44: .4byte gMapObjects
 _0805CF48: .4byte sub_805CF4C
 	thumb_func_end sub_805CF28
 
@@ -22862,7 +22862,7 @@ sub_805D0AC: @ 805D0AC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805D0C8: .4byte 0x030048a0
+_0805D0C8: .4byte gMapObjects
 _0805D0CC: .4byte sub_805D0D0
 	thumb_func_end sub_805D0AC
 
@@ -23077,7 +23077,7 @@ sub_805D230: @ 805D230
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805D24C: .4byte 0x030048a0
+_0805D24C: .4byte gMapObjects
 _0805D250: .4byte sub_805D254
 	thumb_func_end sub_805D230
 
@@ -23186,7 +23186,7 @@ _0805D2FC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805D30C: .4byte 0x030048a0
+_0805D30C: .4byte gMapObjects
 _0805D310: .4byte sub_805D314
 	thumb_func_end FieldObjectCB_BerryTree
 
@@ -23263,7 +23263,7 @@ _0805D39A:
 	movs r0, 0
 	b _0805D3E6
 	.align 2, 0
-_0805D3A0: .4byte 0x0202ff84
+_0805D3A0: .4byte gUnknown_0202FF84
 _0805D3A4:
 	ldrb r1, [r4, 0x1]
 	movs r0, 0x21
@@ -23361,7 +23361,7 @@ do_berry_tree_growth_sparkle_2: @ 805D40C
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805D454: .4byte 0x0202ff84
+_0805D454: .4byte gUnknown_0202FF84
 	thumb_func_end do_berry_tree_growth_sparkle_2
 
 	thumb_func_start sub_805D458
@@ -23468,7 +23468,7 @@ sub_805D4F4: @ 805D4F4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805D510: .4byte 0x030048a0
+_0805D510: .4byte gMapObjects
 _0805D514: .4byte sub_805D518
 	thumb_func_end sub_805D4F4
 
@@ -23641,7 +23641,7 @@ sub_805D634: @ 805D634
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805D650: .4byte 0x030048a0
+_0805D650: .4byte gMapObjects
 _0805D654: .4byte sub_805D658
 	thumb_func_end sub_805D634
 
@@ -23814,7 +23814,7 @@ sub_805D774: @ 805D774
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805D790: .4byte 0x030048a0
+_0805D790: .4byte gMapObjects
 _0805D794: .4byte sub_805D798
 	thumb_func_end sub_805D774
 
@@ -23987,7 +23987,7 @@ sub_805D8B4: @ 805D8B4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805D8D0: .4byte 0x030048a0
+_0805D8D0: .4byte gMapObjects
 _0805D8D4: .4byte sub_805D8D8
 	thumb_func_end sub_805D8B4
 
@@ -24160,7 +24160,7 @@ sub_805D9F4: @ 805D9F4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805DA10: .4byte 0x030048a0
+_0805DA10: .4byte gMapObjects
 _0805DA14: .4byte sub_805DA18
 	thumb_func_end sub_805D9F4
 
@@ -24333,7 +24333,7 @@ sub_805DB34: @ 805DB34
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805DB50: .4byte 0x030048a0
+_0805DB50: .4byte gMapObjects
 _0805DB54: .4byte sub_805DB58
 	thumb_func_end sub_805DB34
 
@@ -24506,7 +24506,7 @@ sub_805DC74: @ 805DC74
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805DC90: .4byte 0x030048a0
+_0805DC90: .4byte gMapObjects
 _0805DC94: .4byte sub_805DC98
 	thumb_func_end sub_805DC74
 
@@ -24679,7 +24679,7 @@ sub_805DDB4: @ 805DDB4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805DDD0: .4byte 0x030048a0
+_0805DDD0: .4byte gMapObjects
 _0805DDD4: .4byte sub_805DDD8
 	thumb_func_end sub_805DDB4
 
@@ -24852,7 +24852,7 @@ sub_805DEF4: @ 805DEF4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805DF10: .4byte 0x030048a0
+_0805DF10: .4byte gMapObjects
 _0805DF14: .4byte sub_805DF18
 	thumb_func_end sub_805DEF4
 
@@ -25025,7 +25025,7 @@ sub_805E034: @ 805E034
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805E050: .4byte 0x030048a0
+_0805E050: .4byte gMapObjects
 _0805E054: .4byte sub_805E058
 	thumb_func_end sub_805E034
 
@@ -25198,7 +25198,7 @@ sub_805E174: @ 805E174
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805E190: .4byte 0x030048a0
+_0805E190: .4byte gMapObjects
 _0805E194: .4byte sub_805E198
 	thumb_func_end sub_805E174
 
@@ -25341,7 +25341,7 @@ sub_805E278: @ 805E278
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805E294: .4byte 0x030048a0
+_0805E294: .4byte gMapObjects
 _0805E298: .4byte sub_805E29C
 	thumb_func_end sub_805E278
 
@@ -25484,7 +25484,7 @@ sub_805E37C: @ 805E37C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805E398: .4byte 0x030048a0
+_0805E398: .4byte gMapObjects
 _0805E39C: .4byte sub_805E3A0
 	thumb_func_end sub_805E37C
 
@@ -25800,7 +25800,7 @@ sub_805E5DC: @ 805E5DC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805E5F8: .4byte 0x030048a0
+_0805E5F8: .4byte gMapObjects
 _0805E5FC: .4byte sub_805E600
 	thumb_func_end sub_805E5DC
 
@@ -25877,7 +25877,7 @@ sub_805E668: @ 805E668
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805E684: .4byte 0x030048a0
+_0805E684: .4byte gMapObjects
 _0805E688: .4byte sub_805E68C
 	thumb_func_end sub_805E668
 
@@ -25954,7 +25954,7 @@ sub_805E6F4: @ 805E6F4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805E710: .4byte 0x030048a0
+_0805E710: .4byte gMapObjects
 _0805E714: .4byte sub_805E718
 	thumb_func_end sub_805E6F4
 
@@ -26031,7 +26031,7 @@ sub_805E780: @ 805E780
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805E79C: .4byte 0x030048a0
+_0805E79C: .4byte gMapObjects
 _0805E7A0: .4byte sub_805E7A4
 	thumb_func_end sub_805E780
 
@@ -26108,7 +26108,7 @@ sub_805E80C: @ 805E80C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805E828: .4byte 0x030048a0
+_0805E828: .4byte gMapObjects
 _0805E82C: .4byte sub_805E830
 	thumb_func_end sub_805E80C
 
@@ -26185,7 +26185,7 @@ sub_805E898: @ 805E898
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805E8B4: .4byte 0x030048a0
+_0805E8B4: .4byte gMapObjects
 _0805E8B8: .4byte sub_805E8BC
 	thumb_func_end sub_805E898
 
@@ -26262,7 +26262,7 @@ sub_805E924: @ 805E924
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805E940: .4byte 0x030048a0
+_0805E940: .4byte gMapObjects
 _0805E944: .4byte sub_805E948
 	thumb_func_end sub_805E924
 
@@ -26339,7 +26339,7 @@ sub_805E9B0: @ 805E9B0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805E9CC: .4byte 0x030048a0
+_0805E9CC: .4byte gMapObjects
 _0805E9D0: .4byte sub_805E9D4
 	thumb_func_end sub_805E9B0
 
@@ -26416,7 +26416,7 @@ sub_805EA3C: @ 805EA3C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805EA58: .4byte 0x030048a0
+_0805EA58: .4byte gMapObjects
 _0805EA5C: .4byte sub_805EA60
 	thumb_func_end sub_805EA3C
 
@@ -26493,7 +26493,7 @@ sub_805EAC8: @ 805EAC8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805EAE4: .4byte 0x030048a0
+_0805EAE4: .4byte gMapObjects
 _0805EAE8: .4byte sub_805EAEC
 	thumb_func_end sub_805EAC8
 
@@ -26570,7 +26570,7 @@ sub_805EB54: @ 805EB54
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805EB70: .4byte 0x030048a0
+_0805EB70: .4byte gMapObjects
 _0805EB74: .4byte sub_805EB78
 	thumb_func_end sub_805EB54
 
@@ -26647,7 +26647,7 @@ sub_805EBE0: @ 805EBE0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805EBFC: .4byte 0x030048a0
+_0805EBFC: .4byte gMapObjects
 _0805EC00: .4byte sub_805EC04
 	thumb_func_end sub_805EBE0
 
@@ -26724,7 +26724,7 @@ sub_805EC6C: @ 805EC6C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805EC88: .4byte 0x030048a0
+_0805EC88: .4byte gMapObjects
 _0805EC8C: .4byte sub_805EC90
 	thumb_func_end sub_805EC6C
 
@@ -26801,7 +26801,7 @@ sub_805ECF8: @ 805ECF8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805ED14: .4byte 0x030048a0
+_0805ED14: .4byte gMapObjects
 _0805ED18: .4byte sub_805ED1C
 	thumb_func_end sub_805ECF8
 
@@ -26878,7 +26878,7 @@ sub_805ED84: @ 805ED84
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805EDA0: .4byte 0x030048a0
+_0805EDA0: .4byte gMapObjects
 _0805EDA4: .4byte sub_805EDA8
 	thumb_func_end sub_805ED84
 
@@ -26955,7 +26955,7 @@ sub_805EE10: @ 805EE10
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805EE2C: .4byte 0x030048a0
+_0805EE2C: .4byte gMapObjects
 _0805EE30: .4byte sub_805EE34
 	thumb_func_end sub_805EE10
 
@@ -27032,7 +27032,7 @@ sub_805EE9C: @ 805EE9C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805EEB8: .4byte 0x030048a0
+_0805EEB8: .4byte gMapObjects
 _0805EEBC: .4byte sub_805EEC0
 	thumb_func_end sub_805EE9C
 
@@ -27109,7 +27109,7 @@ sub_805EF28: @ 805EF28
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805EF44: .4byte 0x030048a0
+_0805EF44: .4byte gMapObjects
 _0805EF48: .4byte sub_805EF4C
 	thumb_func_end sub_805EF28
 
@@ -27186,7 +27186,7 @@ sub_805EFB4: @ 805EFB4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805EFD0: .4byte 0x030048a0
+_0805EFD0: .4byte gMapObjects
 _0805EFD4: .4byte sub_805EFD8
 	thumb_func_end sub_805EFB4
 
@@ -27263,7 +27263,7 @@ sub_805F040: @ 805F040
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805F05C: .4byte 0x030048a0
+_0805F05C: .4byte gMapObjects
 _0805F060: .4byte sub_805F064
 	thumb_func_end sub_805F040
 
@@ -27340,7 +27340,7 @@ sub_805F0CC: @ 805F0CC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805F0E8: .4byte 0x030048a0
+_0805F0E8: .4byte gMapObjects
 _0805F0EC: .4byte sub_805F0F0
 	thumb_func_end sub_805F0CC
 
@@ -27417,7 +27417,7 @@ sub_805F158: @ 805F158
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805F174: .4byte 0x030048a0
+_0805F174: .4byte gMapObjects
 _0805F178: .4byte sub_805F17C
 	thumb_func_end sub_805F158
 
@@ -27494,7 +27494,7 @@ sub_805F1E4: @ 805F1E4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805F200: .4byte 0x030048a0
+_0805F200: .4byte gMapObjects
 _0805F204: .4byte sub_805F208
 	thumb_func_end sub_805F1E4
 
@@ -27571,7 +27571,7 @@ sub_805F270: @ 805F270
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805F28C: .4byte 0x030048a0
+_0805F28C: .4byte gMapObjects
 _0805F290: .4byte sub_805F294
 	thumb_func_end sub_805F270
 
@@ -27648,7 +27648,7 @@ sub_805F2FC: @ 805F2FC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805F318: .4byte 0x030048a0
+_0805F318: .4byte gMapObjects
 _0805F31C: .4byte sub_805F320
 	thumb_func_end sub_805F2FC
 
@@ -27713,8 +27713,8 @@ _0805F384:
 	movs r0, 0
 	b _0805F3B8
 	.align 2, 0
-_0805F388: .4byte 0x030048a0
-_0805F38C: .4byte 0x0202e858
+_0805F388: .4byte gMapObjects
+_0805F38C: .4byte gPlayerAvatar
 _0805F390:
 	ldr r5, _0805F3C0
 	bl player_get_x22
@@ -28399,7 +28399,7 @@ sub_805F8E0: @ 805F8E0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805F8FC: .4byte 0x030048a0
+_0805F8FC: .4byte gMapObjects
 _0805F900: .4byte sub_805F904
 	thumb_func_end sub_805F8E0
 
@@ -28444,8 +28444,8 @@ _0805F944:
 	movs r0, 0
 	b _0805F978
 	.align 2, 0
-_0805F948: .4byte 0x030048a0
-_0805F94C: .4byte 0x0202e858
+_0805F948: .4byte gMapObjects
+_0805F94C: .4byte gPlayerAvatar
 _0805F950:
 	ldr r5, _0805F980
 	bl player_get_x22
@@ -28525,8 +28525,8 @@ _0805F9D0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805F9EC: .4byte 0x030048a0
-_0805F9F0: .4byte 0x0202ff84
+_0805F9EC: .4byte gMapObjects
+_0805F9F0: .4byte gUnknown_0202FF84
 _0805F9F4: .4byte sub_805F9F8
 	thumb_func_end FieldObjectCB_TreeDisguise
 
@@ -28591,8 +28591,8 @@ _0805FA4C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805FA68: .4byte 0x030048a0
-_0805FA6C: .4byte 0x0202ff84
+_0805FA68: .4byte gMapObjects
+_0805FA6C: .4byte gUnknown_0202FF84
 _0805FA70: .4byte sub_805F9F8
 	thumb_func_end FieldObjectCB_MountainDisguise
 
@@ -28644,7 +28644,7 @@ _0805FAB4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805FAD0: .4byte 0x030048a0
+_0805FAD0: .4byte gMapObjects
 _0805FAD4: .4byte sub_805FAD8
 	thumb_func_end FieldObjectCB_Hidden1
 
@@ -28709,7 +28709,7 @@ sub_805FB20: @ 805FB20
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805FB3C: .4byte 0x030048a0
+_0805FB3C: .4byte gMapObjects
 _0805FB40: .4byte sub_805FB44
 	thumb_func_end sub_805FB20
 
@@ -28771,7 +28771,7 @@ sub_805FB90: @ 805FB90
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805FBAC: .4byte 0x030048a0
+_0805FBAC: .4byte gMapObjects
 _0805FBB0: .4byte sub_805FBB4
 	thumb_func_end sub_805FB90
 
@@ -28833,7 +28833,7 @@ sub_805FC00: @ 805FC00
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805FC1C: .4byte 0x030048a0
+_0805FC1C: .4byte gMapObjects
 _0805FC20: .4byte sub_805FC24
 	thumb_func_end sub_805FC00
 
@@ -28895,7 +28895,7 @@ sub_805FC70: @ 805FC70
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805FC8C: .4byte 0x030048a0
+_0805FC8C: .4byte gMapObjects
 _0805FC90: .4byte sub_805FC94
 	thumb_func_end sub_805FC70
 
@@ -29309,7 +29309,7 @@ npc_set_running_behaviour_etc: @ 805FEC4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805FF08: .4byte 0x02020004
+_0805FF08: .4byte gSprites
 _0805FF0C: .4byte gUnknown_0836DA88
 	thumb_func_end npc_set_running_behaviour_etc
 
@@ -29727,7 +29727,7 @@ _08060200:
 	movs r0, 0x1
 	b _0806022C
 	.align 2, 0
-_0806021C: .4byte 0x030048a0
+_0806021C: .4byte gMapObjects
 _08060220:
 	adds r0, r4, 0x1
 	lsls r0, 24
@@ -29777,8 +29777,8 @@ sub_8060234: @ 8060234
 	movs r0, 0x1
 	b _08060282
 	.align 2, 0
-_08060278: .4byte 0x02020004
-_0806027C: .4byte 0x030048a0
+_08060278: .4byte gSprites
+_0806027C: .4byte gMapObjects
 _08060280:
 	movs r0, 0
 _08060282:
@@ -29824,8 +29824,8 @@ _080602C6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080602CC: .4byte 0x02020004
-_080602D0: .4byte 0x030048a0
+_080602CC: .4byte gSprites
+_080602D0: .4byte gMapObjects
 	thumb_func_end sub_8060288
 
 	thumb_func_start MoveCoords
@@ -29963,9 +29963,9 @@ sub_8060388: @ 8060388
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080603C0: .4byte 0x02025734
-_080603C4: .4byte 0x0300489c
-_080603C8: .4byte 0x03004898
+_080603C0: .4byte gSaveBlock1
+_080603C4: .4byte gUnknown_0300489C
+_080603C8: .4byte gUnknown_03004898
 	thumb_func_end sub_8060388
 
 	thumb_func_start sub_80603CC
@@ -30046,11 +30046,11 @@ _0806042C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806045C: .4byte 0x0300489c
-_08060460: .4byte 0x03004880
-_08060464: .4byte 0x03004898
+_0806045C: .4byte gUnknown_0300489C
+_08060460: .4byte gUnknown_03004880
+_08060464: .4byte gUnknown_03004898
 _08060468: .4byte 0xfff00000
-_0806046C: .4byte 0x02025734
+_0806046C: .4byte gSaveBlock1
 	thumb_func_end sub_80603CC
 
 	thumb_func_start sub_8060470
@@ -30130,7 +30130,7 @@ _080604F4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080604F8: .4byte 0x03004880
+_080604F8: .4byte gUnknown_03004880
 	thumb_func_end GetFieldObjectMovingCameraOffset
 
 	thumb_func_start FieldObjectMoveDestCoords
@@ -30218,7 +30218,7 @@ FieldObjectSetSpecialAnim: @ 8060550
 	movs r0, 0
 	b _08060592
 	.align 2, 0
-_0806058C: .4byte 0x02020004
+_0806058C: .4byte gSprites
 _08060590:
 	movs r0, 0x1
 _08060592:
@@ -30284,7 +30284,7 @@ FieldObjectClearAnim: @ 80605CC
 	strh r2, [r0, 0x32]
 	bx lr
 	.align 2, 0
-_080605FC: .4byte 0x02020004
+_080605FC: .4byte gSprites
 	thumb_func_end FieldObjectClearAnim
 
 	thumb_func_start FieldObjectCheckIfSpecialAnimFinishedOrInactive
@@ -34140,7 +34140,7 @@ _080620FA:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08062108: .4byte 0x030048a0
+_08062108: .4byte gMapObjects
 	thumb_func_end sub_80620B0
 
 	thumb_func_start sub_806210C
@@ -34190,7 +34190,7 @@ _0806215E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806216C: .4byte 0x030048a0
+_0806216C: .4byte gMapObjects
 	thumb_func_end sub_806210C
 
 	thumb_func_start sub_8062170
@@ -34928,7 +34928,7 @@ do_exclamation_mark_bubble_1: @ 8062654
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08062674: .4byte 0x0202ff84
+_08062674: .4byte gUnknown_0202FF84
 	thumb_func_end do_exclamation_mark_bubble_1
 
 	thumb_func_start do_exclamation_mark_bubble_2
@@ -34948,7 +34948,7 @@ do_exclamation_mark_bubble_2: @ 8062678
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08062698: .4byte 0x0202ff84
+_08062698: .4byte gUnknown_0202FF84
 	thumb_func_end do_exclamation_mark_bubble_2
 
 	thumb_func_start do_heart_bubble
@@ -34968,7 +34968,7 @@ do_heart_bubble: @ 806269C
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080626BC: .4byte 0x0202ff84
+_080626BC: .4byte gUnknown_0202FF84
 	thumb_func_end do_heart_bubble
 
 	thumb_func_start sub_80626C0
@@ -37053,8 +37053,8 @@ sub_80634E8: @ 80634E8
 	adds r0, r2
 	b _08063574
 	.align 2, 0
-_08063544: .4byte 0x030024d0
-_08063548: .4byte 0x030027e0
+_08063544: .4byte gSpriteCoordOffsetX
+_08063548: .4byte gSpriteCoordOffsetY
 _0806354C:
 	ldrh r1, [r4, 0x24]
 	ldrh r0, [r4, 0x20]
@@ -38243,7 +38243,7 @@ SetObjectSubpriorityByZCoord: @ 8063DC4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08063E04: .4byte 0x030027e0
+_08063E04: .4byte gSpriteCoordOffsetY
 _08063E08: .4byte gUnknown_08376050
 	thumb_func_end SetObjectSubpriorityByZCoord
 
@@ -38322,8 +38322,8 @@ GroundEffect_SpawnOnTallGrass: @ 8063E48
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08063E8C: .4byte 0x0202ff84
-_08063E90: .4byte 0x02025734
+_08063E8C: .4byte gUnknown_0202FF84
+_08063E90: .4byte gSaveBlock1
 	thumb_func_end GroundEffect_SpawnOnTallGrass
 
 	thumb_func_start sub_8063E94
@@ -38361,8 +38361,8 @@ sub_8063E94: @ 8063E94
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08063ED8: .4byte 0x0202ff84
-_08063EDC: .4byte 0x02025734
+_08063ED8: .4byte gUnknown_0202FF84
+_08063EDC: .4byte gSaveBlock1
 	thumb_func_end sub_8063E94
 
 	thumb_func_start sub_8063EE0
@@ -38400,8 +38400,8 @@ sub_8063EE0: @ 8063EE0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08063F24: .4byte 0x0202ff84
-_08063F28: .4byte 0x02025734
+_08063F24: .4byte gUnknown_0202FF84
+_08063F28: .4byte gSaveBlock1
 	thumb_func_end sub_8063EE0
 
 	thumb_func_start sub_8063F2C
@@ -38439,8 +38439,8 @@ sub_8063F2C: @ 8063F2C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08063F70: .4byte 0x0202ff84
-_08063F74: .4byte 0x02025734
+_08063F70: .4byte gUnknown_0202FF84
+_08063F74: .4byte gSaveBlock1
 	thumb_func_end sub_8063F2C
 
 	thumb_func_start GroundEffect_WaterReflection
@@ -38559,7 +38559,7 @@ DoTracksGroundEffect_Footprints: @ 8063FFC
 	bx r0
 	.align 2, 0
 _08064044: .4byte gSandFootprints_FieldEffectData
-_08064048: .4byte 0x0202ff84
+_08064048: .4byte gUnknown_0202FF84
 	thumb_func_end DoTracksGroundEffect_Footprints
 
 	thumb_func_start DoTracksGroundEffect_BikeTireTracks
@@ -38601,7 +38601,7 @@ _0806408E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08064094: .4byte 0x0202ff84
+_08064094: .4byte gUnknown_0202FF84
 _08064098: .4byte gBikeTireTracks_Transitions
 	thumb_func_end DoTracksGroundEffect_BikeTireTracks
 
@@ -38675,7 +38675,7 @@ _08064112:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806411C: .4byte 0x0202ff84
+_0806411C: .4byte gUnknown_0202FF84
 	thumb_func_end GroundEffect_JumpOnTallGrass
 
 	thumb_func_start GroundEffect_JumpOnLongGrass
@@ -38698,7 +38698,7 @@ GroundEffect_JumpOnLongGrass: @ 8064120
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08064144: .4byte 0x0202ff84
+_08064144: .4byte gUnknown_0202FF84
 	thumb_func_end GroundEffect_JumpOnLongGrass
 
 	thumb_func_start GroundEffect_JumpOnShallowWater
@@ -38724,7 +38724,7 @@ GroundEffect_JumpOnShallowWater: @ 8064148
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08064174: .4byte 0x0202ff84
+_08064174: .4byte gUnknown_0202FF84
 	thumb_func_end GroundEffect_JumpOnShallowWater
 
 	thumb_func_start GroundEffect_JumpOnWater
@@ -38750,7 +38750,7 @@ GroundEffect_JumpOnWater: @ 8064178
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080641A4: .4byte 0x0202ff84
+_080641A4: .4byte gUnknown_0202FF84
 	thumb_func_end GroundEffect_JumpOnWater
 
 	thumb_func_start GroundEffect_JumpLandingDust
@@ -38776,7 +38776,7 @@ GroundEffect_JumpLandingDust: @ 80641A8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080641D4: .4byte 0x0202ff84
+_080641D4: .4byte gUnknown_0202FF84
 	thumb_func_end GroundEffect_JumpLandingDust
 
 	thumb_func_start GroundEffect_ShortGrass
@@ -38814,7 +38814,7 @@ GroundEffect_Seaweed: @ 80641F8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08064214: .4byte 0x0202ff84
+_08064214: .4byte gUnknown_0202FF84
 	thumb_func_end GroundEffect_Seaweed
 
 	thumb_func_start sub_8064218

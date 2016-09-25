@@ -10,14 +10,9 @@ SECTIONS {
     ALIGN(4)
     {
         . = 0x20000;
-        src/main.o(ewram_data);
-        src/sprite.o(ewram_data);
-        . = ALIGN(4);
-        src/text.o(ewram_data);
-        src/string_util.o(ewram_data);
-        . += 0x2E8; /* big gap */
-        src/link.o(ewram_data);
-        src/rtc.o(ewram_data);
+
+<EWRAM>
+
         . = 0x40000;
     }
 
@@ -26,42 +21,14 @@ SECTIONS {
     iwram (NOLOAD) :
     ALIGN(4)
     {
-        src/main.o(.bss);
-        src/sprite.o(.bss);
-        src/text.o(.bss);
-        src/string_util.o(.bss);
-        src/link.o(.bss);
-        src/rtc.o(.bss);
+        /* .bss starts at 0x3000000 */
+<BSS>
 
-        . = 0x5A8;
-        src/field_message_box.o(.bss);
-        . = ALIGN(4);
-        src/text_window.o(.bss);
-
-        . = 0x6B0;
-        src/menu.o(.bss);
-
-        . = 0xF28;
-        src/agb_flash.o(.bss);
-        . = 0xF36;
-        src/siirtc.o(.bss);
-        tools/agbcc/lib/libgcc.a:dp-bit.o(.bss);
-        tools/agbcc/lib/libgcc.a:fp-bit.o(.bss);
-
+        /* .bss.code starts at 0x3000F60 */
         src/m4a_2.o(.bss.code);
 
-        src/main.o(iwram_data);
-        src/sprite.o(iwram_data);
-        src/text.o(iwram_data);
-        src/string_util.o(iwram_data);
-        src/link.o(iwram_data);
-        src/rtc.o(iwram_data);
-
-        . = 0x5FD0;
-        src/m4a_2.o(iwram_data);
-
-        . = 0x7490;
-        src/agb_flash.o(iwram_data);
+        /* COMMON starts at 0x3001760 */
+<COMMON>
 
         . = 0x8000;
     }
