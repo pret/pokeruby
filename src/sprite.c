@@ -308,16 +308,16 @@ static struct AffineAnimState sAffineAnimStates[OAM_MATRIX_COUNT];
 static u16 sSpritePaletteTags[16];
 
 u8 gSpriteOrder[MAX_SPRITES];
-u8 gSpriteTileAllocBitmap[128];
-s16 gSpriteCoordOffsetX;
-u8 gOamLimit;
-u16 gReservedSpriteTileCount;
+bool8 gShouldProcessSpriteCopyRequests;
 u8 gSpriteCopyRequestCount;
 struct SpriteCopyRequest gSpriteCopyRequests[MAX_SPRITE_COPY_REQUESTS];
+u8 gOamLimit;
+u16 gReservedSpriteTileCount;
+u8 gSpriteTileAllocBitmap[128];
+s16 gSpriteCoordOffsetX;
 s16 gSpriteCoordOffsetY;
-struct OamMatrix gOamMatrices[OAM_MATRIX_COUNT];
-bool8 gShouldProcessSpriteCopyRequests;
 u32 gOamMatrixAllocBitmap;
+struct OamMatrix gOamMatrices[OAM_MATRIX_COUNT];
 u8 gReservedSpritePaletteCount;
 
 EWRAM_DATA struct Sprite gSprites[MAX_SPRITES + 1] = {0};
