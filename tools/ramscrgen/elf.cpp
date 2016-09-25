@@ -118,6 +118,9 @@ static std::string GetSectionName(std::uint32_t shstrtabOffset, int index)
 
 static void FindTableOffsets()
 {
+    s_symtabOffset = 0;
+    s_strtabOffset = 0;
+
     Seek(s_sectionHeaderOffset + s_sectionHeaderEntrySize * s_shstrtabIndex + 0x10);
     std::uint32_t shstrtabOffset = ReadInt32();
 
@@ -152,9 +155,11 @@ static void FindTableOffsets()
 
 std::map<std::string, std::uint32_t> GetCommonSymbols(std::string path)
 {
+    s_elfPath = path;
+
     std::map<std::string, std::uint32_t> commonSymbols;
 
-    s_file = std::fopen(path.c_str(), "rb");
+    s_file = std::fopen(s_elfPath.c_str(), "rb");
 
     if (s_file == NULL)
         FATAL_ERROR("error: failed to open \"%s\" for reading\n", path.c_str());

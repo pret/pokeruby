@@ -14207,7 +14207,7 @@ sub_8047CE8: @ 8047CE8
 _08047D44: .4byte gWindowConfig_81E725C
 _08047D48: .4byte gUnknown_020296CC
 _08047D4C: .4byte gSaveBlock2
-_08047D50: .4byte gUnknown_03002978
+_08047D50: .4byte gLinkPlayers + 0x8
 _08047D54: .4byte gUnknown_0820C14C
 	thumb_func_end sub_8047CE8
 
@@ -14323,7 +14323,7 @@ _08047DEE:
 _08047E30: .4byte gSaveBlock2
 _08047E34: .4byte gTradeUnknownSpriteCoords
 _08047E38: .4byte gSpriteTemplate_820C0EC
-_08047E3C: .4byte gUnknown_03002978
+_08047E3C: .4byte gLinkPlayers + 0x8
 _08047E40: .4byte gTradeUnknownSpriteCoords + 0x3
 	thumb_func_end sub_8047D58
 
@@ -21553,7 +21553,7 @@ _0804B7F4:
 	.align 2, 0
 _0804B8E0: .4byte gUnknown_020297D8
 _0804B8E4: .4byte gUnknown_0202E8CE
-_0804B8E8: .4byte gUnknown_03002978
+_0804B8E8: .4byte gLinkPlayers + 0x8
 _0804B8EC: .4byte gSaveBlock2
 _0804B8F0: .4byte gEnemyParty
 _0804B8F4: .4byte gUnknown_03004828
@@ -22633,7 +22633,7 @@ sub_804C1A8: @ 804C1A8
 	.align 2, 0
 _0804C21C: .4byte gUnknown_03004828
 _0804C220: .4byte gStringVar1
-_0804C224: .4byte gUnknown_03002978
+_0804C224: .4byte gLinkPlayers + 0x8
 _0804C228: .4byte gUnknown_020297D8
 _0804C22C: .4byte gEnemyParty
 _0804C230: .4byte gStringVar3
@@ -27068,7 +27068,7 @@ _0804E8C4:
 	.align 2, 0
 _0804E8E4: .4byte gUnknown_03004834
 _0804E8E8: .4byte gUnknown_03004854
-_0804E8EC: .4byte gUnknown_03002978
+_0804E8EC: .4byte gLinkPlayers + 0x8
 _0804E8F0: .4byte gSaveBlock2
 _0804E8F4: .4byte gUnknown_082162B8
 _0804E8F8:
@@ -27097,7 +27097,7 @@ _0804E920:
 	.align 2, 0
 _0804E928: .4byte gUnknown_03004834
 _0804E92C: .4byte gUnknown_03004854
-_0804E930: .4byte gUnknown_03002978
+_0804E930: .4byte gLinkPlayers + 0x8
 _0804E934: .4byte gSaveBlock2
 _0804E938: .4byte gUnknown_082162B8
 _0804E93C:
@@ -27132,7 +27132,7 @@ _0804E974:
 	.align 2, 0
 _0804E97C: .4byte gUnknown_03004834
 _0804E980: .4byte gUnknown_03004854
-_0804E984: .4byte gUnknown_03002978
+_0804E984: .4byte gLinkPlayers + 0x8
 _0804E988: .4byte gSaveBlock2
 _0804E98C: .4byte gUnknown_082162B8
 	thumb_func_end sub_804E884
@@ -28289,7 +28289,7 @@ _0804F364: .4byte gUnknown_082162D4
 _0804F368: .4byte gStringVar1
 _0804F36C: .4byte gSprites
 _0804F370: .4byte gUnknown_082162C4
-_0804F374: .4byte gUnknown_03002978
+_0804F374: .4byte gLinkPlayers + 0x8
 	thumb_func_end BuyMenuDrawFieldObjects
 
 	thumb_func_start sub_804F378
@@ -31795,7 +31795,7 @@ _08050ED8:
 	b _08050F4C
 	.align 2, 0
 _08050F0C: .4byte gStringVar4
-_08050F10: .4byte gUnknown_03002978
+_08050F10: .4byte gLinkPlayers + 0x8
 _08050F14: .4byte gOtherText_OtherCaseIsFull
 _08050F18:
 	ldr r1, [r5]
@@ -31831,7 +31831,7 @@ _08050F4C:
 	b _080510C4
 	.align 2, 0
 _08050F60: .4byte gStringVar4
-_08050F64: .4byte gUnknown_03002978
+_08050F64: .4byte gLinkPlayers + 0x8
 _08050F68: .4byte gOtherText_NoBerriesForBlend
 _08050F6C:
 	bl MenuUpdateWindowText
@@ -32896,7 +32896,7 @@ _080517A0:
 _080517B8: .4byte gTasks
 _080517BC: .4byte gReceivedRemoteLinkPlayers
 _080517C0: .4byte gUnknown_03004854
-_080517C4: .4byte gUnknown_03002974
+_080517C4: .4byte gLinkPlayers + 0x4
 _080517C8: .4byte gUnknown_08216284
 _080517CC: .4byte gOtherText_PressAToStart
 _080517D0: .4byte gMain
@@ -33862,7 +33862,7 @@ _08051F14: .4byte gOtherText_ResultsOfBlending
 _08051F18: .4byte gUnknown_03004854
 _08051F1C: .4byte gLinkPlayers
 _08051F20: .4byte gOtherText_Berry
-_08051F24: .4byte gUnknown_03002978
+_08051F24: .4byte gLinkPlayers + 0x8
 _08051F28: .4byte gUnknown_082165E9
 _08051F2C: .4byte gUnknown_082165EE
 _08051F30: .4byte gOtherText_MaxSpeed
@@ -34504,7 +34504,7 @@ _0805243C:
 	str r0, [r2]
 	b _08052494
 	.align 2, 0
-_08052458: .4byte gUnknown_03002978
+_08052458: .4byte gLinkPlayers + 0x8
 _0805245C: .4byte gUnknown_082165F3
 _08052460: .4byte gUnknown_03004854
 _08052464:

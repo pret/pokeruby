@@ -180,7 +180,7 @@ $(SONG_OBJS): %.o: %.s
 sym_bss.ld: sym_bss.txt
 	$(RAMSCRGEN) .bss sym_bss.txt >$@
 
-sym_common.ld: sym_common.txt
+sym_common.ld: sym_common.txt $(C_OBJS) $(wildcard common_syms/*.txt)
 	$(RAMSCRGEN) COMMON sym_common.txt -c src,common_syms >$@
 
 sym_ewram.ld: sym_ewram.txt

@@ -1519,7 +1519,7 @@ _0800C458:
 	bx r0
 	.align 2, 0
 _0800C468: .4byte gBitTable
-_0800C46C: .4byte gUnknown_03002B84
+_0800C46C: .4byte gBlockRecvBuffer + 0x4
 _0800C470: .4byte gTasks
 _0800C474: .4byte gUnknown_020238C5
 _0800C478: .4byte 0x02015000
@@ -5077,7 +5077,7 @@ _0800DF84: .4byte 0x02000000
 _0800DF88: .4byte 0x000160cb
 _0800DF8C: .4byte gLinkPlayers
 _0800DF90: .4byte gUnknown_081F9680
-_0800DF94: .4byte gUnknown_03002978
+_0800DF94: .4byte gLinkPlayers + 0x8
 _0800DF98: .4byte gTasks
 _0800DF9C:
 	ldr r0, _0800E010
@@ -6584,7 +6584,7 @@ _0800EC28:
 	bx r0
 	.align 2, 0
 _0800EC38: .4byte gEnigmaBerries
-_0800EC3C: .4byte gUnknown_03002B84
+_0800EC3C: .4byte gBlockRecvBuffer + 0x4
 _0800EC40: .4byte gLinkPlayers
 	thumb_func_end sub_800EB08
 

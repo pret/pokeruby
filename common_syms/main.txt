@@ -1,0 +1,9 @@
+gKeyRepeatStartDelay
+gUnknown_3001764
+gMain
+gKeyRepeatContinueDelay
+gUnknown_3001BB4
+gIntrTable
+gLinkVSyncDisabled
+IntrMain_Buffer
+gPcmDmaCounter

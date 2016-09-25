@@ -50,15 +50,15 @@ const IntrFunc gIntrTableTemplate[] =
 
 #define INTR_COUNT ((int)(sizeof(gIntrTableTemplate)/sizeof(IntrFunc)))
 
-COMM_2(u16 gKeyRepeatStartDelay)
-COMM_2(u8 gUnknown_3001764)
-COMM_4(struct Main gMain)
-COMM_2(u16 gKeyRepeatContinueDelay)
-COMM_2(u8 gUnknown_3001BB4)
-COMM_4(IntrFunc gIntrTable[INTR_COUNT])
-COMM_2(bool8 gLinkVSyncDisabled)
-COMM_4(u32 IntrMain_Buffer[0x200])
-COMM_2(u8 gPcmDmaCounter)
+u16 gKeyRepeatStartDelay;
+u8 gUnknown_3001764;
+struct Main gMain;
+u16 gKeyRepeatContinueDelay;
+u8 gUnknown_3001BB4;
+IntrFunc gIntrTable[INTR_COUNT];
+bool8 gLinkVSyncDisabled;
+u32 IntrMain_Buffer[0x200];
+u8 gPcmDmaCounter;
 
 EWRAM_DATA void (*gFlashTimerIntrFunc)(void) = NULL;
 

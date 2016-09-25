@@ -20027,7 +20027,7 @@ _08071B42:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08071B48: .4byte gUnknown_03001BAC
+_08071B48: .4byte gMain + 0x43C
 _08071B4C: .4byte sub_8071B64
 _08071B50: .4byte sub_8071B54
 	thumb_func_end sub_8071B28

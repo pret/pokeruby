@@ -19,7 +19,7 @@ static u8 *ExpandPlaceholder_GoodLeader(void);
 static u8 *ExpandPlaceholder_EvilLegendary(void);
 static u8 *ExpandPlaceholder_GoodLegendary(void);
 
-COMM_4(u8 gUnknownStringVar[16])
+u8 gUnknownStringVar[16];
 
 const u8 gEmptyString_81E72B0[] = _"";
 const u8 gRightPointingTriangleString[] = _"▶";

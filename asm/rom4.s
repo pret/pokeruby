@@ -3156,7 +3156,7 @@ CB2_NewGame: @ 8054410
 	.align 2, 0
 _08054454: .4byte gUnknown_0300485C
 _08054458: .4byte sub_80C76A0
-_0805445C: .4byte gUnknown_03001BAC
+_0805445C: .4byte gMain + 0x43C
 _08054460: .4byte c1_overworld
 _08054464: .4byte c2_overworld
 	thumb_func_end CB2_NewGame
@@ -3242,7 +3242,7 @@ CB2_LoadMap2: @ 805450C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08054528: .4byte gUnknown_03001BAC
+_08054528: .4byte gMain + 0x43C
 _0805452C: .4byte c1_overworld
 _08054530: .4byte c2_overworld
 	thumb_func_end CB2_LoadMap2
@@ -3318,7 +3318,7 @@ _080545CE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080545D4: .4byte gUnknown_03001BAC
+_080545D4: .4byte gMain + 0x43C
 _080545D8: .4byte sub_8055354
 _080545DC: .4byte sub_8055390
 _080545E0: .4byte c2_overworld
@@ -3360,7 +3360,7 @@ _08054626:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805462C: .4byte gUnknown_03001BAC
+_0805462C: .4byte gMain + 0x43C
 _08054630: .4byte c2_overworld
 	thumb_func_end c2_exit_to_overworld_2_local
 
@@ -3380,7 +3380,7 @@ _0805464E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08054654: .4byte gUnknown_03001BAC
+_08054654: .4byte gMain + 0x43C
 _08054658: .4byte c2_overworld
 	thumb_func_end c2_exit_to_overworld_2_link
 
