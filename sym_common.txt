@@ -143,9 +143,9 @@ gUnknown_03004750: @ 3004750
 gUnknown_030047B4: @ 30047B4
 	.space 0x64
 
-gRngValue: @ 3004818
-	.space 0x4
+	.include "rng.o"
 
+	.align 2
 gUnknown_0300481C: @ 300481C
 	.space 0x4
 

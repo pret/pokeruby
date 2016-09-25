@@ -2868,7 +2868,7 @@ _080761AC: .4byte gSprites
 _080761B0: .4byte 0x02019348
 _080761B4: .4byte gUnknown_030041B4
 _080761B8: .4byte REG_BG1HOFS
-_080761BC: .4byte gUnknown_0202ECC8
+_080761BC: .4byte gPlttBufferUnfaded + 0x200
 _080761C0: .4byte 0x84000008
 _080761C4:
 	mov r0, r9
@@ -3074,7 +3074,7 @@ _08076364: .4byte gUnknown_02024BE0
 _08076368: .4byte gUnknown_03004288
 _0807636C: .4byte gUnknown_03004280
 _08076370: .4byte REG_BG2HOFS
-_08076374: .4byte gUnknown_0202ECC8
+_08076374: .4byte gPlttBufferUnfaded + 0x200
 _08076378: .4byte 0x05000120
 _0807637C: .4byte 0x84000008
 	thumb_func_end sub_8076034
@@ -3412,7 +3412,7 @@ _080765FC: .4byte gTasks
 _08076600: .4byte gSprites
 _08076604: .4byte gUnknown_030042C0
 _08076608: .4byte gUnknown_030041B4
-_0807660C: .4byte gUnknown_0202F0C8
+_0807660C: .4byte gPlttBufferFaded + 0x200
 _08076610: .4byte 0xfffffe00
 _08076614:
 	ldr r1, _08076648
@@ -3445,7 +3445,7 @@ _08076634:
 	.align 2, 0
 _08076648: .4byte gUnknown_03004288
 _0807664C: .4byte gUnknown_03004280
-_08076650: .4byte gUnknown_0202F0C8
+_08076650: .4byte gPlttBufferFaded + 0x200
 _08076654: .4byte 0x040000d4
 _08076658: .4byte 0x84000008
 	thumb_func_end task_pA_ma0A_obj_to_bg_pal

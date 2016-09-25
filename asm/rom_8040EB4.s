@@ -9375,7 +9375,7 @@ _080457BA:
 	.align 2, 0
 _080457C8: .4byte gSprites
 _080457CC: .4byte gBattleInterfaceStatusIcons_DynPal
-_080457D0: .4byte gUnknown_0202ECC8
+_080457D0: .4byte gPlttBufferUnfaded + 0x200
 _080457D4: .4byte 0x05000200
 _080457D8: .4byte 0x06010000
 _080457DC: .4byte REG_BG2HOFS

@@ -4167,7 +4167,7 @@ _0800D7A4: .4byte 0x00007fe0
 _0800D7A8: .4byte 0x00002529
 _0800D7AC: .4byte 0x00007fff
 _0800D7B0: .4byte 0x0000675a
-_0800D7B4: .4byte gUnknown_0202EF80
+_0800D7B4: .4byte gPlttBufferFaded + 0xB8
 	thumb_func_end sub_800D74C
 
 	thumb_func_start sub_800D7B8

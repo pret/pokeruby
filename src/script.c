@@ -9,10 +9,10 @@ extern u16 VarGet(u16);
 extern u8 *gUnknown_0202E8AC;
 extern u32 gUnknown_0202E8B0;
 
-extern u8 sScriptContext1Status;
-extern struct ScriptContext sScriptContext1;
-extern struct ScriptContext sScriptContext2;
-extern bool8 sScriptContext2Enabled;
+static u8 sScriptContext1Status;
+static struct ScriptContext sScriptContext1;
+static struct ScriptContext sScriptContext2;
+static bool8 sScriptContext2Enabled;
 
 extern ScrCmdFunc gScriptCmdTable[];
 extern ScrCmdFunc gScriptCmdTableEnd[];

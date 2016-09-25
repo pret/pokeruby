@@ -92,13 +92,14 @@ extern void sub_814A7FC(void);
 
 static struct Menu gMenu;
 
-extern struct Window gMenuWindow;
-extern struct Window *gMenuWindowPtr;
-extern u8 gMenuMultistepInitState;
-extern u16 gMenuTextTileOffset;
-extern u16 gMenuTextWindowTileOffset;
-extern u16 gMenuTextWindowContentTileOffset;
-extern u16 gMenuMessageBoxContentTileOffset;
+EWRAM_DATA struct Window gMenuWindow = {0};
+EWRAM_DATA u8 gFiller_202E908[0x90] = {0};
+EWRAM_DATA struct Window *gMenuWindowPtr = NULL;
+EWRAM_DATA u8 gMenuMultistepInitState = 0;
+EWRAM_DATA u16 gMenuTextTileOffset = 0;
+EWRAM_DATA u16 gMenuTextWindowTileOffset = 0;
+EWRAM_DATA u16 gMenuTextWindowContentTileOffset = 0;
+EWRAM_DATA u16 gMenuMessageBoxContentTileOffset = 0;
 
 extern const u8 *gUnknown_08376D74[][2];
 

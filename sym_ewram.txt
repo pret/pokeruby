@@ -715,81 +715,15 @@ gUnknown_0202E8FD: @ 202E8FD
 gUnknown_0202E8FE: @ 202E8FE
 	.space 0xA
 
-gMenuWindow: @ 202E908
-	.space 0xC0
+	.include "src/menu.o"
 
-gMenuWindowPtr: @ 202E9C8
-	.space 0x4
-
-gMenuMultistepInitState: @ 202E9CC
-	.space 0x2
-
-gMenuTextTileOffset: @ 202E9CE
-	.space 0x2
-
-gMenuTextWindowTileOffset: @ 202E9D0
-	.space 0x2
-
-gMenuTextWindowContentTileOffset: @ 202E9D2
-	.space 0x2
-
-gMenuMessageBoxContentTileOffset: @ 202E9D4
-	.space 0x4
-
+	.align 2
 gUnknown_0202E9D8: @ 202E9D8
 	.space 0xF0
 
-gPlttBufferUnfaded: @ 202EAC8
-	.space 0x2
+	.include "src/palette.o"
 
-gUnknown_0202EACA: @ 202EACA
-	.space 0x12
-
-gUnknown_0202EADC: @ 202EADC
-	.space 0x2C
-
-gUnknown_0202EB08: @ 202EB08
-	.space 0xC0
-
-gUnknown_0202EBC8: @ 202EBC8
-	.space 0xE2
-
-gUnknown_0202ECAA: @ 202ECAA
-	.space 0x1E
-
-gUnknown_0202ECC8: @ 202ECC8
-	.space 0x10
-
-gUnknown_0202ECD8: @ 202ECD8
-	.space 0x1F0
-
-gPlttBufferFaded: @ 202EEC8
-	.space 0x14
-
-gUnknown_0202EEDC: @ 202EEDC
-	.space 0x2C
-
-gUnknown_0202EF08: @ 202EF08
-	.space 0x78
-
-gUnknown_0202EF80: @ 202EF80
-	.space 0x148
-
-gUnknown_0202F0C8: @ 202F0C8
-	.space 0x200
-
-gPaletteStructs: @ 202F2C8
-	.space 0xC0
-
-gPaletteFade: @ 202F388
-	.space 0x10
-
-gPlttBufferTransferPending: @ 202F398
-	.space 0x4
-
-gPaletteDecompressionBuffer: @ 202F39C
-	.space 0x400
-
+	.align 2
 gUnknown_0202F79C: @ 202F79C
 	.space 0x4
 
