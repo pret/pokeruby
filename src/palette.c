@@ -40,7 +40,13 @@ struct PaletteStruct
 extern void sub_800D238(const void *src, void *dest);
 extern void BlendPalette(u16, u16, u8, u16);
 
-extern struct PaletteStruct gPaletteStructs[];
+EWRAM_DATA u16 gPlttBufferUnfaded[0x200] = {0};
+EWRAM_DATA u16 gPlttBufferFaded[0x200] = {0};
+EWRAM_DATA struct PaletteStruct gPaletteStructs[0x10] = {0};
+EWRAM_DATA struct PaletteFadeControl gPaletteFade = {0};
+EWRAM_DATA u32 gFiller_202F394 = 0;
+EWRAM_DATA u32 gPlttBufferTransferPending = 0;
+EWRAM_DATA u8 gPaletteDecompressionBuffer[0x400] = {0};
 
 extern struct PaletteStructTemplate gDummyPaletteStructTemplate;
 

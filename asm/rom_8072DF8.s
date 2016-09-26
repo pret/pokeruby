@@ -22,8 +22,8 @@ sub_8072DF8: @ 8072DF8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08072E18: .4byte 0x030006c0
-_08072E1C: .4byte 0x0202e9d8
+_08072E18: .4byte gUnknown_030006C0
+_08072E1C: .4byte gUnknown_0202E9D8
 _08072E20: .4byte 0x0500003c
 	thumb_func_end sub_8072DF8
 
@@ -66,8 +66,8 @@ _08072E64:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08072E6C: .4byte 0x030006c0
-_08072E70: .4byte 0x0202e9d8
+_08072E6C: .4byte gUnknown_030006C0
+_08072E70: .4byte gUnknown_0202E9D8
 	thumb_func_end sub_8072E24
 
 	thumb_func_start sub_8072E74
@@ -105,9 +105,9 @@ _08072EA6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08072EB0: .4byte 0x030006c0
+_08072EB0: .4byte gUnknown_030006C0
 _08072EB4: .4byte 0x040000d4
-_08072EB8: .4byte 0x0202e9d8
+_08072EB8: .4byte gUnknown_0202E9D8
 	thumb_func_end sub_8072E74
 
 	thumb_func_start cur_mapheader_run_tileset_funcs_after_some_cpuset
@@ -176,12 +176,12 @@ _08072F2E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08072F34: .4byte 0x030006c2
-_08072F38: .4byte 0x030006c4
-_08072F3C: .4byte 0x030006c6
-_08072F40: .4byte 0x030006c8
-_08072F44: .4byte 0x030006cc
-_08072F48: .4byte 0x030006d0
+_08072F34: .4byte gUnknown_030006C2
+_08072F38: .4byte gUnknown_030006C4
+_08072F3C: .4byte gUnknown_030006C6
+_08072F40: .4byte gUnknown_030006C8
+_08072F44: .4byte gUnknown_030006CC
+_08072F48: .4byte gUnknown_030006D0
 	thumb_func_end sub_8072EDC
 
 	thumb_func_start cur_mapheader_run_tileset1_func
@@ -208,10 +208,10 @@ _08072F72:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08072F78: .4byte 0x030006c2
-_08072F7C: .4byte 0x030006c4
-_08072F80: .4byte 0x030006cc
-_08072F84: .4byte 0x0202e828
+_08072F78: .4byte gUnknown_030006C2
+_08072F7C: .4byte gUnknown_030006C4
+_08072F80: .4byte gUnknown_030006CC
+_08072F84: .4byte gMapHeader
 	thumb_func_end cur_mapheader_run_tileset1_func
 
 	thumb_func_start cur_mapheader_run_tileset2_func
@@ -238,10 +238,10 @@ _08072FAE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08072FB4: .4byte 0x030006c6
-_08072FB8: .4byte 0x030006c8
-_08072FBC: .4byte 0x030006d0
-_08072FC0: .4byte 0x0202e828
+_08072FB4: .4byte gUnknown_030006C6
+_08072FB8: .4byte gUnknown_030006C8
+_08072FBC: .4byte gUnknown_030006D0
+_08072FC0: .4byte gMapHeader
 	thumb_func_end cur_mapheader_run_tileset2_func
 
 	thumb_func_start TilesetCB_General
@@ -259,9 +259,9 @@ TilesetCB_General: @ 8072FC4
 	str r0, [r1]
 	bx lr
 	.align 2, 0
-_08072FDC: .4byte 0x030006c2
-_08072FE0: .4byte 0x030006c4
-_08072FE4: .4byte 0x030006cc
+_08072FDC: .4byte gUnknown_030006C2
+_08072FE0: .4byte gUnknown_030006C4
+_08072FE4: .4byte gUnknown_030006CC
 _08072FE8: .4byte sub_8073014
 	thumb_func_end TilesetCB_General
 
@@ -280,9 +280,9 @@ TilesetCB_Building: @ 8072FEC
 	str r0, [r1]
 	bx lr
 	.align 2, 0
-_08073004: .4byte 0x030006c2
-_08073008: .4byte 0x030006c4
-_0807300C: .4byte 0x030006cc
+_08073004: .4byte gUnknown_030006C2
+_08073008: .4byte gUnknown_030006C4
+_0807300C: .4byte gUnknown_030006CC
 _08073010: .4byte sub_8073058
 	thumb_func_end TilesetCB_Building
 
@@ -440,10 +440,10 @@ TilesetCB_Petalburg: @ 8073110
 	str r0, [r1]
 	bx lr
 	.align 2, 0
-_08073128: .4byte 0x030006c6
-_0807312C: .4byte 0x030006c8
-_08073130: .4byte 0x030006c4
-_08073134: .4byte 0x030006d0
+_08073128: .4byte gUnknown_030006C6
+_0807312C: .4byte gUnknown_030006C8
+_08073130: .4byte gUnknown_030006C4
+_08073134: .4byte gUnknown_030006D0
 	thumb_func_end TilesetCB_Petalburg
 
 	thumb_func_start TilesetCB_Rustboro
@@ -460,10 +460,10 @@ TilesetCB_Rustboro: @ 8073138
 	str r0, [r1]
 	bx lr
 	.align 2, 0
-_08073150: .4byte 0x030006c6
-_08073154: .4byte 0x030006c8
-_08073158: .4byte 0x030006c4
-_0807315C: .4byte 0x030006d0
+_08073150: .4byte gUnknown_030006C6
+_08073154: .4byte gUnknown_030006C8
+_08073158: .4byte gUnknown_030006C4
+_0807315C: .4byte gUnknown_030006D0
 _08073160: .4byte sub_8073424
 	thumb_func_end TilesetCB_Rustboro
 
@@ -481,10 +481,10 @@ TilesetCB_Dewford: @ 8073164
 	str r0, [r1]
 	bx lr
 	.align 2, 0
-_0807317C: .4byte 0x030006c6
-_08073180: .4byte 0x030006c8
-_08073184: .4byte 0x030006c4
-_08073188: .4byte 0x030006d0
+_0807317C: .4byte gUnknown_030006C6
+_08073180: .4byte gUnknown_030006C8
+_08073184: .4byte gUnknown_030006C4
+_08073188: .4byte gUnknown_030006D0
 	thumb_func_end TilesetCB_Dewford
 
 	thumb_func_start TilesetCB_Slateport
@@ -501,10 +501,10 @@ TilesetCB_Slateport: @ 807318C
 	str r0, [r1]
 	bx lr
 	.align 2, 0
-_080731A4: .4byte 0x030006c6
-_080731A8: .4byte 0x030006c8
-_080731AC: .4byte 0x030006c4
-_080731B0: .4byte 0x030006d0
+_080731A4: .4byte gUnknown_030006C6
+_080731A8: .4byte gUnknown_030006C8
+_080731AC: .4byte gUnknown_030006C4
+_080731B0: .4byte gUnknown_030006D0
 	thumb_func_end TilesetCB_Slateport
 
 	thumb_func_start TilesetCB_Mauville
@@ -522,11 +522,11 @@ TilesetCB_Mauville: @ 80731B4
 	str r0, [r1]
 	bx lr
 	.align 2, 0
-_080731CC: .4byte 0x030006c6
-_080731D0: .4byte 0x030006c2
-_080731D4: .4byte 0x030006c8
-_080731D8: .4byte 0x030006c4
-_080731DC: .4byte 0x030006d0
+_080731CC: .4byte gUnknown_030006C6
+_080731D0: .4byte gUnknown_030006C2
+_080731D4: .4byte gUnknown_030006C8
+_080731D8: .4byte gUnknown_030006C4
+_080731DC: .4byte gUnknown_030006D0
 _080731E0: .4byte sub_80734A0
 	thumb_func_end TilesetCB_Mauville
 
@@ -544,10 +544,10 @@ TilesetCB_Lavaridge: @ 80731E4
 	str r0, [r1]
 	bx lr
 	.align 2, 0
-_080731FC: .4byte 0x030006c6
-_08073200: .4byte 0x030006c8
-_08073204: .4byte 0x030006c4
-_08073208: .4byte 0x030006d0
+_080731FC: .4byte gUnknown_030006C6
+_08073200: .4byte gUnknown_030006C8
+_08073204: .4byte gUnknown_030006C4
+_08073208: .4byte gUnknown_030006D0
 _0807320C: .4byte sub_8073514
 	thumb_func_end TilesetCB_Lavaridge
 
@@ -565,10 +565,10 @@ TilesetCB_Fallarbor: @ 8073210
 	str r0, [r1]
 	bx lr
 	.align 2, 0
-_08073228: .4byte 0x030006c6
-_0807322C: .4byte 0x030006c8
-_08073230: .4byte 0x030006c4
-_08073234: .4byte 0x030006d0
+_08073228: .4byte gUnknown_030006C6
+_0807322C: .4byte gUnknown_030006C8
+_08073230: .4byte gUnknown_030006C4
+_08073234: .4byte gUnknown_030006D0
 	thumb_func_end TilesetCB_Fallarbor
 
 	thumb_func_start TilesetCB_Fortree
@@ -585,10 +585,10 @@ TilesetCB_Fortree: @ 8073238
 	str r0, [r1]
 	bx lr
 	.align 2, 0
-_08073250: .4byte 0x030006c6
-_08073254: .4byte 0x030006c8
-_08073258: .4byte 0x030006c4
-_0807325C: .4byte 0x030006d0
+_08073250: .4byte gUnknown_030006C6
+_08073254: .4byte gUnknown_030006C8
+_08073258: .4byte gUnknown_030006C4
+_0807325C: .4byte gUnknown_030006D0
 	thumb_func_end TilesetCB_Fortree
 
 	thumb_func_start TilesetCB_Lilycove
@@ -605,10 +605,10 @@ TilesetCB_Lilycove: @ 8073260
 	str r0, [r1]
 	bx lr
 	.align 2, 0
-_08073278: .4byte 0x030006c6
-_0807327C: .4byte 0x030006c8
-_08073280: .4byte 0x030006c4
-_08073284: .4byte 0x030006d0
+_08073278: .4byte gUnknown_030006C6
+_0807327C: .4byte gUnknown_030006C8
+_08073280: .4byte gUnknown_030006C4
+_08073284: .4byte gUnknown_030006D0
 	thumb_func_end TilesetCB_Lilycove
 
 	thumb_func_start TilesetCB_Mossdeep
@@ -625,10 +625,10 @@ TilesetCB_Mossdeep: @ 8073288
 	str r0, [r1]
 	bx lr
 	.align 2, 0
-_080732A0: .4byte 0x030006c6
-_080732A4: .4byte 0x030006c8
-_080732A8: .4byte 0x030006c4
-_080732AC: .4byte 0x030006d0
+_080732A0: .4byte gUnknown_030006C6
+_080732A4: .4byte gUnknown_030006C8
+_080732A8: .4byte gUnknown_030006C4
+_080732AC: .4byte gUnknown_030006D0
 	thumb_func_end TilesetCB_Mossdeep
 
 	thumb_func_start TilesetCB_EverGrande
@@ -645,10 +645,10 @@ TilesetCB_EverGrande: @ 80732B0
 	str r0, [r1]
 	bx lr
 	.align 2, 0
-_080732C8: .4byte 0x030006c6
-_080732CC: .4byte 0x030006c8
-_080732D0: .4byte 0x030006c4
-_080732D4: .4byte 0x030006d0
+_080732C8: .4byte gUnknown_030006C6
+_080732CC: .4byte gUnknown_030006C8
+_080732D0: .4byte gUnknown_030006C4
+_080732D4: .4byte gUnknown_030006D0
 _080732D8: .4byte sub_8073540
 	thumb_func_end TilesetCB_EverGrande
 
@@ -667,11 +667,11 @@ TilesetCB_Pacifidlog: @ 80732DC
 	str r0, [r1]
 	bx lr
 	.align 2, 0
-_080732F4: .4byte 0x030006c6
-_080732F8: .4byte 0x030006c2
-_080732FC: .4byte 0x030006c8
-_08073300: .4byte 0x030006c4
-_08073304: .4byte 0x030006d0
+_080732F4: .4byte gUnknown_030006C6
+_080732F8: .4byte gUnknown_030006C2
+_080732FC: .4byte gUnknown_030006C8
+_08073300: .4byte gUnknown_030006C4
+_08073304: .4byte gUnknown_030006D0
 _08073308: .4byte sub_80735B4
 	thumb_func_end TilesetCB_Pacifidlog
 
@@ -689,10 +689,10 @@ TilesetCB_Sootopolis: @ 807330C
 	str r0, [r1]
 	bx lr
 	.align 2, 0
-_08073324: .4byte 0x030006c6
-_08073328: .4byte 0x030006c8
-_0807332C: .4byte 0x030006c4
-_08073330: .4byte 0x030006d0
+_08073324: .4byte gUnknown_030006C6
+_08073328: .4byte gUnknown_030006C8
+_0807332C: .4byte gUnknown_030006C4
+_08073330: .4byte gUnknown_030006D0
 	thumb_func_end TilesetCB_Sootopolis
 
 	thumb_func_start TilesetCB_Underwater
@@ -708,9 +708,9 @@ TilesetCB_Underwater: @ 8073334
 	str r0, [r1]
 	bx lr
 	.align 2, 0
-_08073348: .4byte 0x030006c6
-_0807334C: .4byte 0x030006c8
-_08073350: .4byte 0x030006d0
+_08073348: .4byte gUnknown_030006C6
+_0807334C: .4byte gUnknown_030006C8
+_08073350: .4byte gUnknown_030006D0
 _08073354: .4byte sub_80735E4
 	thumb_func_end TilesetCB_Underwater
 
@@ -727,9 +727,9 @@ TilesetCB_SootopolisGym: @ 8073358
 	str r0, [r1]
 	bx lr
 	.align 2, 0
-_0807336C: .4byte 0x030006c6
-_08073370: .4byte 0x030006c8
-_08073374: .4byte 0x030006d0
+_0807336C: .4byte gUnknown_030006C6
+_08073370: .4byte gUnknown_030006C8
+_08073374: .4byte gUnknown_030006D0
 _08073378: .4byte sub_80738A8
 	thumb_func_end TilesetCB_SootopolisGym
 
@@ -747,10 +747,10 @@ TilesetCB_Cave: @ 807337C
 	str r0, [r1]
 	bx lr
 	.align 2, 0
-_08073394: .4byte 0x030006c6
-_08073398: .4byte 0x030006c8
-_0807339C: .4byte 0x030006c4
-_080733A0: .4byte 0x030006d0
+_08073394: .4byte gUnknown_030006C6
+_08073398: .4byte gUnknown_030006C8
+_0807339C: .4byte gUnknown_030006C4
+_080733A0: .4byte gUnknown_030006D0
 _080733A4: .4byte sub_8073600
 	thumb_func_end TilesetCB_Cave
 
@@ -767,9 +767,9 @@ TilesetCB_EliteFour: @ 80733A8
 	str r0, [r1]
 	bx lr
 	.align 2, 0
-_080733BC: .4byte 0x030006c6
-_080733C0: .4byte 0x030006c8
-_080733C4: .4byte 0x030006d0
+_080733BC: .4byte gUnknown_030006C6
+_080733C0: .4byte gUnknown_030006C8
+_080733C4: .4byte gUnknown_030006D0
 _080733C8: .4byte sub_80738C0
 	thumb_func_end TilesetCB_EliteFour
 
@@ -787,10 +787,10 @@ TilesetCB_MauvilleGym: @ 80733CC
 	str r0, [r1]
 	bx lr
 	.align 2, 0
-_080733E4: .4byte 0x030006c6
-_080733E8: .4byte 0x030006c8
-_080733EC: .4byte 0x030006c4
-_080733F0: .4byte 0x030006d0
+_080733E4: .4byte gUnknown_030006C6
+_080733E8: .4byte gUnknown_030006C8
+_080733EC: .4byte gUnknown_030006C4
+_080733F0: .4byte gUnknown_030006D0
 _080733F4: .4byte sub_8073890
 	thumb_func_end TilesetCB_MauvilleGym
 
@@ -808,10 +808,10 @@ TilesetCB_BikeShop: @ 80733F8
 	str r0, [r1]
 	bx lr
 	.align 2, 0
-_08073410: .4byte 0x030006c6
-_08073414: .4byte 0x030006c8
-_08073418: .4byte 0x030006c4
-_0807341C: .4byte 0x030006d0
+_08073410: .4byte gUnknown_030006C6
+_08073414: .4byte gUnknown_030006C8
+_08073418: .4byte gUnknown_030006C4
+_0807341C: .4byte gUnknown_030006D0
 _08073420: .4byte sub_80738EC
 	thumb_func_end TilesetCB_BikeShop
 

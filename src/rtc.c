@@ -9,8 +9,7 @@ static struct SiiRtcInfo sRtc;
 static u8 sProbeResult;
 static u16 sSavedIme;
 
-// TODO: Define this in C. Gas prevents it from working at the moment.
-extern struct Time gLocalTime;
+struct Time gLocalTime;
 
 static const struct SiiRtcInfo sRtcDummy = {0, MONTH_JAN, 1}; // 2000 Jan 1
 

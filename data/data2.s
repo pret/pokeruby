@@ -2710,8 +2710,9 @@ gSpriteAnimTable_820C024:: @ 820C024
 	.4byte gSpriteAnim_820C01C
 
 	.align 2
-gUnknownPal_0820C03C::
-	.incbin "baserom.gba", 0x0020c03c, 0x40
+TradeScreenTextPalette: @ 820C03C
+	.incbin "graphics/trade/text1.gbapal"
+	.incbin "graphics/trade/text2.gbapal" @ unused?
 
 	.align 2
 gUnknown_0820C07C:: @ 820C07C
@@ -2730,8 +2731,8 @@ gUnknown_0820C07C:: @ 820C07C
 	obj_tiles 0x0201dc00, 256, 0x00d4
 
 	.align 2
-gUnknown_0820C0E4:: @ 820C0E4
-	obj_pal gUnknownPal_0820C03C, 0x133d
+gSpritePalette_TradeScreenText:: @ 820C0E4
+	obj_pal TradeScreenTextPalette, 4925
 
 	.align 2
 gSpriteTemplate_820C0EC:: @ 820C0EC
@@ -3028,13 +3029,15 @@ gUnknown_08211798:: @ 8211798
 gUnknown_08211F98:: @ 8211F98
 	.incbin "graphics/trade/pokeball_symbol_map.bin"
 
-	.incbin "baserom.gba", 0x00212098, 0x20
+	.incbin "graphics/unused/unknown/8212098.gbapal"
 
 	.align 2
 gTradeCableEndPalette:: @ 82120B8
 	.incbin "graphics/trade/cable_end.gbapal"
 
-	.incbin "baserom.gba", 0x002120D8, 0x40
+	.incbin "graphics/unused/unknown/82120D8.gbapal"
+
+	.space 32
 
 	.align 2
 gTradeGlowPalette:: @ 8212118
@@ -3418,9 +3421,7 @@ gUnknown_08215C2C:: @ 8215C2C
 gUnknown_0821602C:: @ 821602C
 	.incbin "graphics/berry_blender/outer.gbapal"
 
-	@ unused palette
-	.align 2
-	.incbin "baserom.gba", 0x0021604c, 0x20
+	.incbin "graphics/unused/unknown/821604C.gbapal"
 
 	.space 0x1C0
 
@@ -3851,8 +3852,14 @@ gUnknown_08216600:: @ 8216600
 
 	.string "\n$"
 
+@ used to initialize part of save block 1 when starting a new game
+	.align 2
 gUnknown_08216604:: @ 8216604
-	.incbin "baserom.gba", 0x00216604, 0x20
+	.space 11
+	.byte 0xFF
+	.space 10
+	.byte 0xFF
+	.space 9
 
 gUnknown_08216624:: @ 8216624
 	.incbin "baserom.gba", 0x00216624, 0x28
@@ -5770,7 +5777,7 @@ gUnknown_08375694:: @ 8375694
 	.4byte MetatileBehavior_IsWestBlocked
 
 	.align 1
-gUnknown_083756A4:: @ 83756A4
+gDirectionToVector:: @ 83756A4
 	.2byte  0,  0
 	.2byte  0,  1
 	.2byte  0, -1
@@ -7055,8 +7062,9 @@ gUnknown_083761F0:: @ 83761F0
 gMessageBoxTilemap:: @ 8376290
 	.incbin "graphics/text_window/message_box_map.bin"
 
+	.align 2
 gUnknown_083762D8:: @ 83762D8
-	.space 4
+	.4byte NULL
 
 gUnknown_083762DC:: @ 83762DC
 	.incbin "baserom.gba", 0x003762dc, 0x14

@@ -3,6 +3,11 @@
 #include "text.h"
 #include "text_window.h"
 
+#define STD_MSG_BOX_LEFT    0
+#define STD_MSG_BOX_TOP    14
+#define STD_MSG_BOX_WIDTH  26
+#define STD_MSG_BOX_HEIGHT  4
+
 u16 SetTextWindowBaseTileNum(u16);
 void LoadTextWindowGraphics(struct Window *);
 void LoadTextWindowGraphics_OverridePalSlot(struct Window *, u8);
@@ -19,7 +24,7 @@ static u16 GetMessageBoxTilemapEntry(u16 tilemapEntry, u8 x, u8 y, u8 width, u8 
 static void DrawMessageBox(struct Window *win, u8 left, u8 top, u8 width, u8 height);
 void DrawStandardMessageBox(struct Window *win);
 void LoadMessageBoxTiles(struct Window *win);
-void sub_806536C(struct Window *win);
+void ClearStandardMessageBox(struct Window *win);
 
 static u16 sTextWindowBaseTileNum;
 static u16 sMessageBoxBaseTileNum;
@@ -176,7 +181,7 @@ static void DrawMessageBox(struct Window *win, u8 left, u8 top, u8 width, u8 hei
 
 void DrawStandardMessageBox(struct Window *win)
 {
-    DrawMessageBox(win, 0, 14, 26, 4);
+    DrawMessageBox(win, STD_MSG_BOX_LEFT, STD_MSG_BOX_TOP, STD_MSG_BOX_WIDTH, STD_MSG_BOX_HEIGHT);
 }
 
 void LoadMessageBoxTiles(struct Window *win)
@@ -185,12 +190,12 @@ void LoadMessageBoxTiles(struct Window *win)
     CpuFastCopy(gMessageBox_Gfx, tileData + 32 * sMessageBoxBaseTileNum, 14 * TILE_SIZE_4BPP);
 }
 
-void sub_806536C(struct Window *win)
+void ClearStandardMessageBox(struct Window *win)
 {
     u8 i;
-    u16 *tilemap = win->config->tilemap + 0x1C0;
+    u16 *tilemap = win->config->tilemap + (STD_MSG_BOX_TOP * 32);
     u16 tilemapEntry = win->paletteNum << 12;
 
-    for (i = 0; i < 0xC0; i++)
+    for (i = 0; i < ((STD_MSG_BOX_HEIGHT + 2) * 32); i++)
         tilemap[i] = tilemapEntry;
 }

@@ -8,13 +8,13 @@ enum
     MAXED_OUT
 };
 
-extern u8 gPlayTimeCounterState;
+static u8 sPlayTimeCounterState;
 
 void PlayTimeCounter_SetToMax();
 
 void PlayTimeCounter_Reset()
 {
-    gPlayTimeCounterState = STOPPED;
+    sPlayTimeCounterState = STOPPED;
 
     gSaveBlock2.playTimeHours = 0;
     gSaveBlock2.playTimeMinutes = 0;
@@ -24,7 +24,7 @@ void PlayTimeCounter_Reset()
 
 void PlayTimeCounter_Start()
 {
-    gPlayTimeCounterState = RUNNING;
+    sPlayTimeCounterState = RUNNING;
 
     if (gSaveBlock2.playTimeHours > 999)
         PlayTimeCounter_SetToMax();
@@ -32,12 +32,12 @@ void PlayTimeCounter_Start()
 
 void PlayTimeCounter_Stop()
 {
-    gPlayTimeCounterState = STOPPED;
+    sPlayTimeCounterState = STOPPED;
 }
 
 void PlayTimeCounter_Update()
 {
-    if (gPlayTimeCounterState == RUNNING)
+    if (sPlayTimeCounterState == RUNNING)
     {
         gSaveBlock2.playTimeVBlanks++;
 
@@ -66,7 +66,7 @@ void PlayTimeCounter_Update()
 
 void PlayTimeCounter_SetToMax()
 {
-    gPlayTimeCounterState = MAXED_OUT;
+    sPlayTimeCounterState = MAXED_OUT;
 
     gSaveBlock2.playTimeHours = 999;
     gSaveBlock2.playTimeMinutes = 59;

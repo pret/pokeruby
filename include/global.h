@@ -18,6 +18,7 @@
 extern u8 gStringVar1[];
 extern u8 gStringVar2[];
 extern u8 gStringVar3[];
+extern u8 gStringVar4[];
 
 enum
 {
@@ -51,6 +52,12 @@ struct Coords16
     s16 y;
 };
 
+struct UCoords16
+{
+    u16 x;
+    u16 y;
+};
+
 struct SecretBaseRecord
 {
     u8 sbr_field_0; // ID?
@@ -71,6 +78,43 @@ struct SecretBaseRecord
     u8 partyLevels[6];
     u8 partyEVs[6];
 };
+
+struct WarpData
+{
+    s8 mapGroup;
+    s8 mapNum;
+    u8 warpId;
+    s16 x, y;
+};
+
+struct RamScriptData
+{
+    u8 magic;
+    u8 mapGroup;
+    u8 mapNum;
+    u8 objectId;
+    u8 script[995];
+};
+
+struct RamScript
+{
+    u32 checksum;
+    struct RamScriptData data;
+};
+
+struct SaveBlock1
+{
+    struct Coords16 pos;
+    struct WarpData location;
+    u8 filler_C[0x484];
+    u32 money;
+    u16 coins;
+    u8 filler_496[0x31FA];
+    struct RamScript ramScript;
+    u8 filler_3A7C[0x44];
+};
+
+extern struct SaveBlock1 gSaveBlock1;
 
 struct Time
 {
@@ -93,8 +137,9 @@ struct SaveBlock2
     u8 optionsButtonMode;  // OPTIONS_BUTTON_MODE_[NORMAL/LR/L_EQUALS_A]
     u8 optionsTextSpeed:3; // OPTIONS_TEXT_SPEED_[SLOW/MID/FAST]
     u8 optionsWindowFrameType:5; // Specifies one of the 20 decorative borders for text boxes
-    u8 filler[0x83];
+    u8 filler_15[0x83];
     struct Time localTimeOffset;
+    u8 filler_A0[0x7F0];
 };
 
 extern struct SaveBlock2 gSaveBlock2;

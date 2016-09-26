@@ -5,6 +5,7 @@
 #include "species.h"
 #include "main.h"
 #include "sprite.h"
+#include "berry.h"
 
 extern u8 gPlayerPartyCount;
 extern struct Pokemon gPlayerParty[6];
@@ -13,9 +14,19 @@ extern struct Pokemon gEnemyParty[6];
 
 extern u16 unk_20160BC[];
 extern struct SecretBaseRecord gSecretBaseRecord;
+extern u32 dword_2017100[];
 extern u16 gUnknown_020239F8;
+extern u8 gUnknown_02024A60;
 extern struct BattlePokemon gBattleMons[4];
+extern u16 gUnknown_02024BE6;
 extern u8 byte_2024C06;
+extern u8 gUnknown_02024C07;
+extern u8 gUnknown_02024C08;
+extern u8 gUnknown_02024C0C;
+extern u8 gXXX_CritRelated;
+extern u16 word_2024DB8;
+extern struct EnigmaBerry gEnigmaBerries[];
+extern u16 gBattleMovePower;
 extern struct SpriteTemplate gUnknown_02024E8C;
 extern u16 word_202FF5E;
 extern struct PokemonStorage gPokemonStorage;
@@ -35,8 +46,14 @@ extern u8 gTrainerClassToNameIndex[];
 extern u8 gSecretBaseTrainerClasses[];
 extern u8 gUnknown_08208238[];
 extern u8 gUnknown_0820823C[];
+extern u8 gStatStageRatios[][2];
+extern u8 gHoldEffectToType[][2];
 
 extern u8 battle_side_get_owner(u8);
+extern u8 battle_get_side_with_given_state(u8);
+extern u8 FlagGet(u16);
+extern u8 sub_8018324(u8, u8, u8, u8, u16);
+extern u8 sub_803C348(u8);
 
 u8 GetMonGender(struct Pokemon *mon)
 {

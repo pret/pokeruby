@@ -1,0 +1,437 @@
+	.include "main.o"
+	.include "sprite.o"
+	.include "string_util.o"
+	.include "link.o"
+	.include "rtc.o"
+
+	.align 4
+gUnknown_03004040: @ 3004040
+	.space 0x170
+
+gUnknown_030041B0: @ 30041B0
+	.space 0x4
+
+gUnknown_030041B4: @ 30041B4
+	.space 0x4
+
+gUnknown_030041B8: @ 30041B8
+	.space 0x8
+
+gUnknown_030041C0: @ 30041C0
+	.space 0x10
+
+gUnknown_030041D0: @ 30041D0
+	.space 0x30
+
+gUnknown_03004200: @ 3004200
+	.space 0x10
+
+gUnknown_03004210: @ 3004210
+	.space 0x30
+
+gUnknown_03004240: @ 3004240
+	.space 0x4
+
+gUnknown_03004244: @ 3004244
+	.space 0xC
+
+gUnknown_03004250: @ 3004250
+	.space 0x30
+
+gUnknown_03004280: @ 3004280
+	.space 0x4
+
+gUnknown_03004284: @ 3004284
+	.space 0x4
+
+gUnknown_03004288: @ 3004288
+	.space 0x4
+
+gUnknown_0300428C: @ 300428C
+	.space 0x4
+
+gUnknown_03004290: @ 3004290
+	.space 0x10
+
+gUnknown_030042A0: @ 30042A0
+	.space 0x4
+
+gUnknown_030042A4: @ 30042A4
+	.space 0xC
+
+gUnknown_030042B0: @ 30042B0
+	.space 0x10
+
+gUnknown_030042C0: @ 30042C0
+	.space 0x4
+
+gUnknown_030042C4: @ 30042C4
+	.space 0xC
+
+gUnknown_030042D0: @ 30042D0
+	.space 0x4
+
+gUnknown_030042D4: @ 30042D4
+	.space 0xC
+
+gUnknown_030042E0: @ 30042E0
+	.space 0x1C
+
+gUnknown_030042FC: @ 30042FC
+	.space 0xE
+
+gUnknown_0300430A: @ 300430A
+	.space 0xC
+
+gUnknown_03004316: @ 3004316
+	.space 0xE
+
+gUnknown_03004324: @ 3004324
+	.space 0xC
+
+gUnknown_03004330: @ 3004330
+	.space 0x10
+
+gUnknown_03004340: @ 3004340
+	.space 0x4
+
+gUnknown_03004344: @ 3004344
+	.space 0x4
+
+gUnknown_03004348: @ 3004348
+	.space 0x4
+
+gUnknown_0300434C: @ 300434C
+	.space 0x4
+
+gPlayerPartyCount: @ 3004350
+	.space 0x10
+
+gPlayerParty: @ 3004360
+	.space 0x64
+
+gUnknown_030043C4: @ 30043C4
+	.space 0x64
+
+gUnknown_03004428: @ 3004428
+	.space 0x64
+
+gUnknown_0300448C: @ 300448C
+	.space 0x64
+
+gUnknown_030044F0: @ 30044F0
+	.space 0x64
+
+gUnknown_03004554: @ 3004554
+	.space 0x64
+
+gEnemyPartyCount: @ 30045B8
+	.space 0x8
+
+gEnemyParty: @ 30045C0
+	.space 0xC8
+
+gUnknown_03004688: @ 3004688
+	.space 0x64
+
+gUnknown_030046EC: @ 30046EC
+	.space 0x64
+
+gUnknown_03004750: @ 3004750
+	.space 0x64
+
+gUnknown_030047B4: @ 30047B4
+	.space 0x64
+
+	.include "rng.o"
+
+	.align 2
+gUnknown_0300481C: @ 300481C
+	.space 0x4
+
+gUnknown_3004820: @ 3004820
+	.space 0x4
+
+gUnknown_03004824: @ 3004824
+	.space 0x4
+
+gUnknown_03004828: @ 3004828
+	.space 0x8
+
+gUnknown_03004830: @ 3004830
+	.space 0x4
+
+gUnknown_03004834: @ 3004834
+	.space 0xC
+
+gUnknown_03004840: @ 3004840
+	.space 0x14
+
+gUnknown_03004854: @ 3004854
+	.space 0x4
+
+word_3004858: @ 3004858
+	.space 0x4
+
+gUnknown_0300485C: @ 300485C
+	.space 0x4
+
+gUnknown_03004860: @ 3004860
+	.space 0x4
+
+gUnknown_03004864: @ 3004864
+	.space 0xC
+
+gUnknown_03004870: @ 3004870
+	.space 0x10
+
+gUnknown_03004880: @ 3004880
+	.space 0x18
+
+gUnknown_03004898: @ 3004898
+	.space 0x4
+
+gUnknown_0300489C: @ 300489C
+	.space 0x4
+
+gMapObjects: @ 30048A0
+	.space 0x240
+
+gSelectedMapObject: @ 3004AE0
+	.space 0x4
+
+gUnknown_03004AE4: @ 3004AE4
+	.space 0x4
+
+gUnknown_03004AE8: @ 3004AE8
+	.space 0x4
+
+gUnknown_03004AEC: @ 3004AEC
+	.space 0x4
+
+gUnknown_03004AF0: @ 3004AF0
+	.space 0x10
+
+gUnknown_03004B00: @ 3004B00
+	.space 0x10
+
+gUnknown_03004B10: @ 3004B10
+	.space 0x10
+
+gTasks: @ 3004B20
+	.space 0x8
+
+gUnknown_03004B28: @ 3004B28
+	.space 0x278
+
+gUnknown_03004DA0: @ 3004DA0
+	.space 0x20
+
+gUnknown_03004DC0: @ 3004DC0
+	.space 0x20
+
+gUnknown_03004DE0: @ 3004DE0
+	.space 0x2
+
+gUnknown_03004DE2: @ 3004DE2
+	.space 0x2
+
+gUnknown_03004DE4: @ 3004DE4
+	.space 0x27C
+
+gUnknown_03005060: @ 3005060
+	.space 0x500
+
+gUnknown_03005560: @ 3005560
+	.space 0x140
+
+gUnknown_030056A0: @ 30056A0
+	.space 0x640
+
+gUnknown_03005CE0: @ 3005CE0
+	.space 0x4
+
+gUnknown_03005CE4: @ 3005CE4
+	.space 0x4
+
+gUnknown_03005CE8: @ 3005CE8
+	.space 0x4
+
+gUnknown_03005CEC: @ 3005CEC
+	.space 0x4
+
+gUnknown_03005CF0: @ 3005CF0
+	.space 0x10
+
+gUnknown_03005D00: @ 3005D00
+	.space 0x10
+
+gUnknown_03005D10: @ 3005D10
+	.space 0x14
+
+gUnknown_03005D24: @ 3005D24
+	.space 0x4
+
+gUnknown_03005D28: @ 3005D28
+	.space 0x4
+
+gUnknown_03005D2C: @ 3005D2C
+	.space 0x4
+
+gUnknown_03005D30: @ 3005D30
+	.space 0x4
+
+gUnknown_03005D34: @ 3005D34
+	.space 0x4
+
+gUnknown_03005D38: @ 3005D38
+	.space 0x68
+
+gUnknown_03005DA0: @ 3005DA0
+	.space 0x48
+
+gUnknown_03005DE8: @ 3005DE8
+	.space 0x4
+
+gUnknown_03005DEC: @ 3005DEC
+	.space 0x4
+
+gUnknown_03005DF0: @ 3005DF0
+	.space 0x4
+
+gUnknown_03005DF4: @ 3005DF4
+	.space 0x4
+
+gUnknown_03005DF8: @ 3005DF8
+	.space 0x4
+
+gUnknown_03005DFC: @ 3005DFC
+	.space 0x4
+
+gUnknown_03005E00: @ 3005E00
+	.space 0x4
+
+gUnknown_03005E04: @ 3005E04
+	.space 0x4
+
+gUnknown_03005E08: @ 3005E08
+	.space 0x4
+
+gUnknown_03005E0C: @ 3005E0C
+	.space 0x4
+
+gUnknown_03005E10: @ 3005E10
+	.space 0x10
+
+gUnknown_03005E20: @ 3005E20
+	.space 0x20
+
+gUnknown_03005E40: @ 3005E40
+	.space 0x4C
+
+gUnknown_03005E8C: @ 3005E8C
+	.space 0x4
+
+gUnknown_03005E90: @ 3005E90
+	.space 0x4
+
+gUnknown_03005E94: @ 3005E94
+	.space 0x4
+
+gUnknown_03005E98: @ 3005E98
+	.space 0x4
+
+gUnknown_03005E9C: @ 3005E9C
+	.space 0x4
+
+gUnknown_03005EA0: @ 3005EA0
+	.space 0x4
+
+gUnknown_03005EA4: @ 3005EA4
+	.space 0x4
+
+gUnknown_03005EA8: @ 3005EA8
+	.space 0x4
+
+gUnknown_03005EAC: @ 3005EAC
+	.space 0x4
+
+gUnknown_03005EB0: @ 3005EB0
+	.space 0x4
+
+gUnknown_03005EB4: @ 3005EB4
+	.space 0x4
+
+gSaveFileStatus: @ 3005EB8
+	.space 0x4
+
+gUnknown_03005EBC: @ 3005EBC
+	.space 0x14
+
+gUnknown_03005ED0: @ 3005ED0
+	.space 0x10
+
+gUnknown_03005EE0: @ 3005EE0
+	.space 0x2C
+
+gUnknown_03005F0C: @ 3005F0C
+	.space 0x4
+
+gUnknown_03005F10: @ 3005F10
+	.space 0x4
+
+gUnknown_03005F14: @ 3005F14
+	.space 0xC
+
+gUnknown_03005F20: @ 3005F20
+	.space 0x4
+
+gUnknown_03005F24: @ 3005F24
+	.space 0x4
+
+gUnknown_03005F28: @ 3005F28
+	.space 0x4
+
+gUnknown_03005F2C: @ 3005F2C
+	.space 0x4
+
+gUnknown_03005F30: @ 3005F30
+	.space 0x4
+
+gUnknown_03005F34: @ 3005F34
+	.space 0x8
+
+gUnknown_03005F3C: @ 3005F3C
+	.space 0x4
+
+gUnknown_03005F40: @ 3005F40
+	.space 0x10
+
+gUnknown_03005F50: @ 3005F50
+	.space 0x44
+
+gUnknown_03005F94: @ 3005F94
+	.space 0xC
+
+gUnknown_03005FA0: @ 3005FA0
+	.space 0x30
+
+	.include "m4a_2.o"
+
+	.align 4
+gUnknown_03007380: @ 3007380
+	.space 0x40
+
+gUnknown_030073C0: @ 30073C0
+	.space 0x40
+
+gUnknown_03007400: @ 3007400
+	.space 0x40
+
+gMPlayMemAccArea: @ 3007440
+	.space 0x10
+
+gUnknown_03007450: @ 3007450
+	.space 0x40
+
+	.include "agb_flash.o"

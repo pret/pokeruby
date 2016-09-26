@@ -82,10 +82,10 @@ sub_803E1B0: @ 803E1B0
 	ldrb r0, [r0, 0x7]
 	b _0803E248
 	.align 2, 0
-_0803E21C: .4byte 0x03001770
+_0803E21C: .4byte gMain
 _0803E220: .4byte 0x0000043d
-_0803E224: .4byte 0x02024df0
-_0803E228: .4byte 0x02024e6c
+_0803E224: .4byte gEnigmaBerries
+_0803E228: .4byte gUnknown_02024E6C
 _0803E22C:
 	ldr r0, _0803E238
 	ldr r5, _0803E23C
@@ -93,7 +93,7 @@ _0803E22C:
 	ldrb r0, [r0]
 	b _0803E248
 	.align 2, 0
-_0803E238: .4byte 0x02025734
+_0803E238: .4byte gSaveBlock1
 _0803E23C: .4byte 0x00003688
 _0803E240:
 	bl itemid_get_x12
@@ -145,13 +145,13 @@ _0803E248:
 	str r0, [sp, 0x34]
 	b _0803E2F4
 	.align 2, 0
-_0803E2A4: .4byte 0x02024c0b
-_0803E2A8: .4byte 0x02024e6c
-_0803E2AC: .4byte 0x03001770
+_0803E2A4: .4byte gUnknown_02024C0B
+_0803E2A8: .4byte gUnknown_02024E6C
+_0803E2AC: .4byte gMain
 _0803E2B0: .4byte 0x0000043d
-_0803E2B4: .4byte 0x02024a60
-_0803E2B8: .4byte 0x02024a68
-_0803E2BC: .4byte 0x02024a6a
+_0803E2B4: .4byte gUnknown_02024A60
+_0803E2B8: .4byte gUnknown_02024A68
+_0803E2BC: .4byte gUnknown_02024A6A
 _0803E2C0:
 	ldr r1, [sp, 0x18]
 	adds r1, 0x2
@@ -172,7 +172,7 @@ _0803E2C0:
 	str r0, [sp, 0x34]
 	b _0803E2F4
 	.align 2, 0
-_0803E2E4: .4byte 0x02024a68
+_0803E2E4: .4byte gUnknown_02024A68
 _0803E2E8:
 	ldr r0, _0803E310
 	strb r1, [r0]
@@ -196,7 +196,7 @@ _0803E2F4:
 	beq _0803E31E
 	b _0803E36C
 	.align 2, 0
-_0803E310: .4byte 0x02024a60
+_0803E310: .4byte gUnknown_02024A60
 _0803E314: .4byte gItemEffectTable
 _0803E318:
 	ldr r5, [sp, 0x8]
@@ -220,16 +220,16 @@ _0803E31E:
 	adds r0, r1
 	b _0803E372
 	.align 2, 0
-_0803E340: .4byte 0x03001770
+_0803E340: .4byte gMain
 _0803E344: .4byte 0x0000043d
-_0803E348: .4byte 0x02024a60
-_0803E34C: .4byte 0x02024df8
+_0803E348: .4byte gUnknown_02024A60
+_0803E34C: .4byte gUnknown_02024DF8
 _0803E350:
 	ldr r2, _0803E358
 	str r2, [sp, 0x20]
 	b _0803E374
 	.align 2, 0
-_0803E358: .4byte 0x02028daa
+_0803E358: .4byte gSaveBlock1 + 0x3676
 _0803E35C:
 	mov r0, r8
 	movs r2, 0
@@ -363,11 +363,11 @@ _0803E45A:
 	strb r0, [r1, 0x19]
 	b _0803E74E
 	.align 2, 0
-_0803E460: .4byte 0x03001770
+_0803E460: .4byte gMain
 _0803E464: .4byte 0x0000043d
-_0803E468: .4byte 0x02024a80
+_0803E468: .4byte gBattleMons
 _0803E46C: .4byte 0xfff0ffff
-_0803E470: .4byte 0x02024a60
+_0803E470: .4byte gUnknown_02024A60
 _0803E474:
 	ldr r0, [sp, 0x20]
 	ldr r1, [sp, 0x18]
@@ -442,8 +442,8 @@ _0803E4F8:
 	str r3, [sp, 0x1C]
 	bl _0803F14C
 	.align 2, 0
-_0803E500: .4byte 0x02024a80
-_0803E504: .4byte 0x02024a60
+_0803E500: .4byte gBattleMons
+_0803E504: .4byte gUnknown_02024A60
 _0803E508:
 	ldr r4, [sp, 0x20]
 	ldr r5, [sp, 0x18]
@@ -518,8 +518,8 @@ _0803E58C:
 	str r1, [sp, 0x1C]
 	bl _0803F14C
 	.align 2, 0
-_0803E594: .4byte 0x02024a80
-_0803E598: .4byte 0x02024a60
+_0803E594: .4byte gBattleMons
+_0803E598: .4byte gUnknown_02024A60
 _0803E59C:
 	ldr r3, [sp, 0x20]
 	ldr r4, [sp, 0x18]
@@ -739,14 +739,14 @@ _0803E74E:
 	str r5, [sp, 0x1C]
 	bl _0803F14C
 	.align 2, 0
-_0803E758: .4byte 0x02024c80
-_0803E75C: .4byte 0x02024a60
+_0803E758: .4byte gUnknown_02024C80
+_0803E75C: .4byte gUnknown_02024A60
 _0803E760: .4byte gExperienceTables
 _0803E764: .4byte gBaseStats
-_0803E768: .4byte 0x02024a80
+_0803E768: .4byte gBattleMons
 _0803E76C: .4byte 0xf7ffffff
 _0803E770: .4byte 0x00000f88
-_0803E774: .4byte 0x03001770
+_0803E774: .4byte gMain
 _0803E778: .4byte 0x0000043d
 _0803E77C:
 	ldr r1, [sp, 0x20]
@@ -1007,12 +1007,12 @@ _0803E954:
 	ldrb r0, [r0]
 	b _0803E9CC
 	.align 2, 0
-_0803E99C: .4byte 0x03001770
+_0803E99C: .4byte gMain
 _0803E9A0: .4byte 0x0000043d
-_0803E9A4: .4byte 0x02024c0c
+_0803E9A4: .4byte gUnknown_02024C0C
 _0803E9A8: .4byte gBitTable
-_0803E9AC: .4byte 0x02024a6a
-_0803E9B0: .4byte 0x02024a60
+_0803E9AC: .4byte gUnknown_02024A6A
+_0803E9B0: .4byte gUnknown_02024A60
 _0803E9B4:
 	ldr r3, _0803E9E4
 	ldr r1, _0803E9E8
@@ -1039,10 +1039,10 @@ _0803E9CC:
 	strb r0, [r1, 0x4]
 	b _0803EA0A
 	.align 2, 0
-_0803E9E4: .4byte 0x02024c0c
+_0803E9E4: .4byte gUnknown_02024C0C
 _0803E9E8: .4byte gBitTable
-_0803E9EC: .4byte 0x02024a60
-_0803E9F0: .4byte 0x030042e0
+_0803E9EC: .4byte gUnknown_02024A60
+_0803E9F0: .4byte gUnknown_030042E0
 _0803E9F4:
 	mov r0, r8
 	movs r1, 0x39
@@ -1194,11 +1194,11 @@ _0803EB08:
 	.align 2, 0
 _0803EB24: .4byte 0x02000000
 _0803EB28: .4byte 0x000160fa
-_0803EB2C: .4byte 0x03001770
+_0803EB2C: .4byte gMain
 _0803EB30: .4byte 0x0000043d
-_0803EB34: .4byte 0x02024a80
-_0803EB38: .4byte 0x02024a60
-_0803EB3C: .4byte 0x030042e0
+_0803EB34: .4byte gBattleMons
+_0803EB38: .4byte gUnknown_02024A60
+_0803EB3C: .4byte gUnknown_030042E0
 _0803EB40:
 	ldr r1, _0803EB58
 	ldr r0, [sp]
@@ -1214,7 +1214,7 @@ _0803EB4C:
 	mov r10, r2
 	b _0803EE0A
 	.align 2, 0
-_0803EB58: .4byte 0x02024bec
+_0803EB58: .4byte gUnknown_02024BEC
 _0803EB5C:
 	movs r7, 0x2
 	mov r0, r10
@@ -1377,10 +1377,10 @@ _0803EC9E:
 	str r0, [sp, 0x24]
 	b _0803EE0A
 	.align 2, 0
-_0803ECA4: .4byte 0x03001770
+_0803ECA4: .4byte gMain
 _0803ECA8: .4byte 0x0000043d
-_0803ECAC: .4byte 0x02024a80
-_0803ECB0: .4byte 0x02024ca8
+_0803ECAC: .4byte gBattleMons
+_0803ECB0: .4byte gUnknown_02024CA8
 _0803ECB4: .4byte gBitTable
 _0803ECB8:
 	ldr r6, [sp, 0x10]
@@ -1523,10 +1523,10 @@ _0803EDD8:
 	str r0, [sp, 0x1C]
 	b _0803EE0A
 	.align 2, 0
-_0803EDE0: .4byte 0x03001770
+_0803EDE0: .4byte gMain
 _0803EDE4: .4byte 0x0000043d
-_0803EDE8: .4byte 0x02024a80
-_0803EDEC: .4byte 0x02024ca8
+_0803EDE8: .4byte gBattleMons
+_0803EDEC: .4byte gUnknown_02024CA8
 _0803EDF0: .4byte gBitTable
 _0803EDF4:
 	mov r0, r8
@@ -2012,9 +2012,9 @@ _0803F1BE:
 	movs r0, 0
 	b _0803F1D2
 	.align 2, 0
-_0803F1C4: .4byte 0x03001770
+_0803F1C4: .4byte gMain
 _0803F1C8: .4byte 0x0000043d
-_0803F1CC: .4byte 0x02024a80
+_0803F1CC: .4byte gBattleMons
 _0803F1D0:
 	movs r0, 0x1
 _0803F1D2:
@@ -2072,8 +2072,8 @@ _0803F21E:
 	beq _0803F2C8
 	b _0803F312
 	.align 2, 0
-_0803F22C: .4byte 0x02024a60
-_0803F230: .4byte 0x02024df8
+_0803F22C: .4byte gUnknown_02024A60
+_0803F230: .4byte gUnknown_02024DF8
 _0803F234:
 	cmp r2, 0
 	blt _0803F312
@@ -2232,12 +2232,12 @@ sub_803F324: @ 803F324
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803F358: .4byte 0x02024c08
-_0803F35C: .4byte 0x02024e6c
-_0803F360: .4byte 0x030041c0
+_0803F358: .4byte gUnknown_02024C08
+_0803F35C: .4byte gUnknown_02024E6C
+_0803F360: .4byte gUnknown_030041C0
 _0803F364: .4byte gUnknown_08400F58
 _0803F368: .4byte gUnknown_082082F8
-_0803F36C: .4byte 0x03004290
+_0803F36C: .4byte gUnknown_03004290
 _0803F370: .4byte gUnknown_083FFDB3
 _0803F374: .4byte gUnknown_083FFDD3
 	thumb_func_end sub_803F324
@@ -2268,15 +2268,15 @@ sub_803F378: @ 803F378
 	adds r7, r0, r1
 	b _0803F3CC
 	.align 2, 0
-_0803F3A8: .4byte 0x03001770
+_0803F3A8: .4byte gMain
 _0803F3AC: .4byte 0x0000043d
-_0803F3B0: .4byte 0x02024e6c
-_0803F3B4: .4byte 0x02024df8
+_0803F3B0: .4byte gUnknown_02024E6C
+_0803F3B4: .4byte gUnknown_02024DF8
 _0803F3B8:
 	ldr r7, _0803F3BC
 	b _0803F3CA
 	.align 2, 0
-_0803F3BC: .4byte 0x02028daa
+_0803F3BC: .4byte gSaveBlock1 + 0x3676
 _0803F3C0:
 	ldr r1, _0803F404
 	subs r0, 0xD
@@ -2315,9 +2315,9 @@ _0803F3EC:
 	b _0803F422
 	.align 2, 0
 _0803F404: .4byte gItemEffectTable
-_0803F408: .4byte 0x02024e6c
-_0803F40C: .4byte 0x02024c0b
-_0803F410: .4byte 0x02024c07
+_0803F408: .4byte gUnknown_02024E6C
+_0803F40C: .4byte gUnknown_02024C0B
+_0803F410: .4byte gUnknown_02024C07
 _0803F414:
 	ldr r0, _0803F450
 	ldrb r0, [r0]
@@ -2349,11 +2349,11 @@ _0803F442:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0803F450: .4byte 0x02024e6c
+_0803F450: .4byte gUnknown_02024E6C
 _0803F454: .4byte gUnknown_083FEE92
-_0803F458: .4byte 0x02024c07
+_0803F458: .4byte gUnknown_02024C07
 _0803F45C: .4byte gUnknown_083FEE5D
-_0803F460: .4byte 0x020238cc
+_0803F460: .4byte gUnknown_020238CC
 	thumb_func_end sub_803F378
 
 	thumb_func_start GetNature
@@ -2433,7 +2433,7 @@ GetEvolutionTargetSpecies: @ 803F48C
 	ldrb r0, [r0]
 	b _0803F508
 	.align 2, 0
-_0803F4F8: .4byte 0x02025734
+_0803F4F8: .4byte gSaveBlock1
 _0803F4FC: .4byte 0x00003688
 _0803F500:
 	bl itemid_get_x12
@@ -2556,7 +2556,7 @@ _0803F5EE:
 _0803F5F6:
 	b _0803F612
 	.align 2, 0
-_0803F5F8: .4byte 0x03004038
+_0803F5F8: .4byte gLocalTime
 _0803F5FC:
 	bl RtcCalcLocalTime
 	ldr r0, _0803F624
@@ -2580,7 +2580,7 @@ _0803F61C:
 	mov r10, r0
 	b _0803F726
 	.align 2, 0
-_0803F624: .4byte 0x03004038
+_0803F624: .4byte gLocalTime
 _0803F628: .4byte gEvolutionTable
 _0803F62C:
 	adds r0, r6, r7
@@ -3334,7 +3334,7 @@ sub_803FB68: @ 803FB68
 	lsls r2, 16
 	lsrs r2, 16
 	mov r8, r2
-	ldr r0, =0x20231CC
+	ldr r0, =gStringVar1
 	mov r9, r0
 	adds r0, r5, 0
 	movs r1, 0x2
@@ -3414,7 +3414,7 @@ _0803FBA8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803FBB4: .4byte 0x020231cc
+_0803FBB4: .4byte gStringVar1
 _0803FBB8: .4byte gSpeciesNames
 	thumb_func_end sub_803FB68
 	.endif
@@ -3440,7 +3440,7 @@ sub_803FBBC: @ 803FBBC
 	beq _0803FBEC
 	b _0803FBF2
 	.align 2, 0
-_0803FBE4: .4byte 0x03002970
+_0803FBE4: .4byte gLinkPlayers
 _0803FBE8:
 	cmp r0, 0x3
 	bne _0803FBF2
@@ -3476,7 +3476,7 @@ sub_803FBFC: @ 803FBFC
 	beq _0803FC28
 	b _0803FC2E
 	.align 2, 0
-_0803FC20: .4byte 0x03002970
+_0803FC20: .4byte gLinkPlayers
 _0803FC24:
 	cmp r0, 0x3
 	bne _0803FC2E
@@ -3500,7 +3500,7 @@ sub_803FC34: @ 803FC34
 	ldr r1, _0803FC40
 	b _0803FC4C
 	.align 2, 0
-_0803FC40: .4byte 0x03002970
+_0803FC40: .4byte gLinkPlayers
 _0803FC44:
 	adds r1, 0x1C
 	adds r2, 0x1
@@ -3621,9 +3621,9 @@ sub_803FCD4: @ 803FCD4
 	ldrb r4, [r0, 0x7]
 	b _0803FD3C
 	.align 2, 0
-_0803FD14: .4byte 0x03001770
+_0803FD14: .4byte gMain
 _0803FD18: .4byte 0x0000043d
-_0803FD1C: .4byte 0x02024df0
+_0803FD1C: .4byte gEnigmaBerries
 _0803FD20:
 	ldr r0, _0803FD2C
 	ldr r1, _0803FD30
@@ -3631,7 +3631,7 @@ _0803FD20:
 	ldrb r4, [r0]
 	b _0803FD3C
 	.align 2, 0
-_0803FD2C: .4byte 0x02025734
+_0803FD2C: .4byte gSaveBlock1
 _0803FD30: .4byte 0x00003688
 _0803FD34:
 	bl itemid_get_x12
@@ -3789,9 +3789,9 @@ _0803FE56:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803FE60: .4byte 0x020239f8
+_0803FE60: .4byte gUnknown_020239F8
 _0803FE64: .4byte gTrainers
-_0803FE68: .4byte 0x0202ff5e
+_0803FE68: .4byte word_202FF5E
 _0803FE6C: .4byte gUnknown_082082FE
 	thumb_func_end sub_803FCD4
 
@@ -3942,9 +3942,9 @@ _0803FF5C:
 	b _0803FFB0
 	.align 2, 0
 _0803FF84: .4byte gBaseStats
-_0803FF88: .4byte 0x03001770
+_0803FF88: .4byte gMain
 _0803FF8C: .4byte 0x0000043d
-_0803FF90: .4byte 0x02024df0
+_0803FF90: .4byte gEnigmaBerries
 _0803FF94:
 	ldr r0, _0803FFA0
 	ldr r2, _0803FFA4
@@ -3952,7 +3952,7 @@ _0803FF94:
 	ldrb r0, [r0]
 	b _0803FFB0
 	.align 2, 0
-_0803FFA0: .4byte 0x02025734
+_0803FFA0: .4byte gSaveBlock1
 _0803FFA4: .4byte 0x00003688
 _0803FFA8:
 	bl itemid_get_x12
@@ -4295,7 +4295,7 @@ _0804021E:
 	ands r0, r2
 	b _0804022A
 	.align 2, 0
-_08040224: .4byte 0x03004360
+_08040224: .4byte gPlayerParty
 _08040228:
 	subs r0, r2, r7
 _0804022A:
@@ -4316,7 +4316,7 @@ _0804023C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804024C: .4byte 0x03004360
+_0804024C: .4byte gPlayerParty
 	thumb_func_end sub_80401D8
 
 	thumb_func_start atkE5_pickupitemcalculation
@@ -4967,7 +4967,7 @@ _08040718:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08040724: .4byte 0x02024e84
+_08040724: .4byte gUnknown_02024E84
 	thumb_func_end sub_8040710
 
 	thumb_func_start sub_8040728
@@ -4983,7 +4983,7 @@ sub_8040728: @ 8040728
 	ldr r0, _08040740
 	b _080408B2
 	.align 2, 0
-_0804073C: .4byte 0x020239f8
+_0804073C: .4byte gUnknown_020239F8
 _08040740: .4byte 0x000001cf
 _08040744:
 	movs r0, 0x80
@@ -5027,7 +5027,7 @@ _08040780:
 	mov pc, r0
 	.align 2, 0
 _0804078C: .4byte gTrainers
-_08040790: .4byte 0x0202ff5e
+_08040790: .4byte word_202FF5E
 _08040794: .4byte _08040798
 	.align 2, 0
 _08040798:
@@ -5560,12 +5560,12 @@ sub_8040B8C: @ 8040B8C
 	bl pokemon_order_func
 	b _08040BEE
 	.align 2, 0
-_08040BCC: .4byte 0x02024c06
+_08040BCC: .4byte byte_2024C06
 _08040BD0: .4byte 0x02000000
 _08040BD4: .4byte 0x000160c0
-_08040BD8: .4byte 0x030041c0
+_08040BD8: .4byte gUnknown_030041C0
 _08040BDC: .4byte 0x00016054
-_08040BE0: .4byte 0x02024a6a
+_08040BE0: .4byte gUnknown_02024A6A
 _08040BE4:
 	ldr r0, _08040C24
 	ldrb r1, [r4]
@@ -5598,11 +5598,11 @@ _08040BEE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08040C24: .4byte 0x02024a6a
-_08040C28: .4byte 0x03004290
-_08040C2C: .4byte 0x02024e6c
+_08040C24: .4byte gUnknown_02024A6A
+_08040C28: .4byte gUnknown_03004290
+_08040C2C: .4byte gUnknown_02024E6C
 _08040C30: .4byte gUnknown_083FFCCA
-_08040C34: .4byte 0x020234cc
+_08040C34: .4byte gStringVar4
 	thumb_func_end sub_8040B8C
 
 	thumb_func_start sub_8040C38
@@ -5649,9 +5649,9 @@ _08040C82:
 	bl SetMonData
 	b _08040CAC
 	.align 2, 0
-_08040C90: .4byte 0x020239f8
+_08040C90: .4byte gUnknown_020239F8
 _08040C94: .4byte 0x00002008
-_08040C98: .4byte 0x030045c0
+_08040C98: .4byte gEnemyParty
 _08040C9C: .4byte gBaseStats
 _08040CA0:
 	adds r2, 0xE
@@ -5736,7 +5736,7 @@ sub_8040D08: @ 8040D08
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08040D38: .4byte 0x03002970
+_08040D38: .4byte gLinkPlayers
 	thumb_func_end sub_8040D08
 
 	thumb_func_start sub_8040D3C
@@ -5836,91 +5836,4 @@ unref_sub_8040DAC: @ 8040DAC
 	bx r1
 	thumb_func_end unref_sub_8040DAC
 
-	thumb_func_start sine
-sine: @ 8040DEC
-	lsls r1, 16
-	asrs r1, 16
-	ldr r2, _08040E04
-	lsls r0, 16
-	asrs r0, 15
-	adds r0, r2
-	movs r2, 0
-	ldrsh r0, [r0, r2]
-	muls r0, r1
-	lsls r0, 8
-	asrs r0, 16
-	bx lr
-	.align 2, 0
-_08040E04: .4byte gSineTable
-	thumb_func_end sine
-
-	thumb_func_start cosine
-cosine: @ 8040E08
-	lsls r1, 16
-	asrs r1, 16
-	ldr r2, _08040E24
-	lsls r0, 16
-	asrs r0, 15
-	adds r0, 0x80
-	adds r0, r2
-	movs r2, 0
-	ldrsh r0, [r0, r2]
-	muls r0, r1
-	lsls r0, 8
-	asrs r0, 16
-	bx lr
-	.align 2, 0
-_08040E24: .4byte gSineTable
-	thumb_func_end cosine
-
-	thumb_func_start sine2
-sine2: @ 8040E28
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	lsls r5, 16
-	lsrs r5, 16
-	adds r0, r5, 0
-	movs r1, 0xB4
-	bl __umodsi3
-	adds r4, r0, 0
-	lsls r4, 16
-	lsrs r4, 16
-	adds r0, r5, 0
-	movs r1, 0xB4
-	bl __udivsi3
-	movs r1, 0x1
-	ands r0, r1
-	ldr r1, _08040E5C
-	lsls r4, 1
-	adds r4, r1
-	ldrh r1, [r4]
-	cmp r0, 0
-	bne _08040E60
-	lsls r0, r1, 16
-	b _08040E64
-	.align 2, 0
-_08040E5C: .4byte gSineDegreeTable
-_08040E60:
-	lsls r0, r1, 16
-	negs r0, r0
-_08040E64:
-	asrs r0, 16
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end sine2
-
-	thumb_func_start cosine2
-cosine2: @ 8040E6C
-	push {lr}
-	lsls r0, 16
-	movs r1, 0xB4
-	lsls r1, 15
-	adds r0, r1
-	lsrs r0, 16
-	bl sine2
-	lsls r0, 16
-	asrs r0, 16
-	pop {r1}
-	bx r1
-	thumb_func_end cosine2
+	.align 2, 0 @ Don't pad with nop.

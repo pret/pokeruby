@@ -47,7 +47,7 @@ sub_803BA2C: @ 803BA2C
 	strh r0, [r2]
 	b _0803BA84
 	.align 2, 0
-_0803BA78: .4byte 0x02024e80
+_0803BA78: .4byte gBattleMovePower
 _0803BA7C: .4byte gBattleMoves
 _0803BA80:
 	ldr r0, _0803BA9C
@@ -65,7 +65,7 @@ _0803BA84:
 	mov r9, r0
 	b _0803BAAE
 	.align 2, 0
-_0803BA9C: .4byte 0x02024e80
+_0803BA9C: .4byte gBattleMovePower
 _0803BAA0: .4byte gBattleMoves
 _0803BAA4:
 	movs r0, 0x3F
@@ -97,7 +97,7 @@ _0803BAAE:
 	ldrb r0, [r0, 0x1A]
 	b _0803BAF6
 	.align 2, 0
-_0803BADC: .4byte 0x02024df0
+_0803BADC: .4byte gEnigmaBerries
 _0803BAE0:
 	ldrh r0, [r7, 0x2E]
 	bl itemid_get_x12
@@ -123,7 +123,7 @@ _0803BAF6:
 	str r0, [sp, 0x1C]
 	b _0803BB3C
 	.align 2, 0
-_0803BB10: .4byte 0x02024df0
+_0803BB10: .4byte gEnigmaBerries
 _0803BB14:
 	ldr r0, [sp, 0x20]
 	adds r0, 0x64
@@ -330,9 +330,9 @@ _0803BC9E:
 	mov r8, r0
 	b _0803BCDC
 	.align 2, 0
-_0803BCB8: .4byte 0x020239f8
+_0803BCB8: .4byte gUnknown_020239F8
 _0803BCBC: .4byte 0x00000902
-_0803BCC0: .4byte 0x0202ff5e
+_0803BCC0: .4byte word_202FF5E
 _0803BCC4: .4byte 0x00000807
 _0803BCC8: .4byte 0x0000080b
 _0803BCCC: .4byte 0x0000080d
@@ -730,13 +730,13 @@ _0803BFC4:
 	ldr r2, _0803BFF8
 	b _0803C006
 	.align 2, 0
-_0803BFDC: .4byte 0x020239f8
+_0803BFDC: .4byte gUnknown_020239F8
 _0803BFE0: .4byte 0xfffffe69
 _0803BFE4: .4byte 0x00000175
-_0803BFE8: .4byte 0x02024e80
+_0803BFE8: .4byte gBattleMovePower
 _0803BFEC: .4byte gBattleMoves
-_0803BFF0: .4byte 0x02024be6
-_0803BFF4: .4byte 0x02024c0d
+_0803BFF0: .4byte gUnknown_02024BE6
+_0803BFF4: .4byte gXXX_CritRelated
 _0803BFF8: .4byte gStatStageRatios
 _0803BFFC:
 	adds r5, r6, 0
@@ -784,7 +784,7 @@ _0803C01E:
 	b _0803C064
 	.align 2, 0
 _0803C050: .4byte gStatStageRatios
-_0803C054: .4byte 0x02024e80
+_0803C054: .4byte gBattleMovePower
 _0803C058:
 	ldr r3, [sp, 0x14]
 	b _0803C07E
@@ -853,7 +853,7 @@ _0803C0A8:
 	b _0803C0EA
 	.align 2, 0
 _0803C0DC: .4byte gStatStageRatios
-_0803C0E0: .4byte 0x020239f8
+_0803C0E0: .4byte gUnknown_020239F8
 _0803C0E4:
 	lsrs r0, r5, 31
 	adds r0, r5, r0
@@ -910,9 +910,9 @@ _0803C132:
 	ldr r2, _0803C154
 	b _0803C162
 	.align 2, 0
-_0803C148: .4byte 0x020239f8
+_0803C148: .4byte gUnknown_020239F8
 _0803C14C: .4byte gBattleMoves
-_0803C150: .4byte 0x02024c0d
+_0803C150: .4byte gXXX_CritRelated
 _0803C154: .4byte gStatStageRatios
 _0803C158:
 	mov r5, r8
@@ -957,7 +957,7 @@ _0803C17A:
 	b _0803C1BC
 	.align 2, 0
 _0803C1A8: .4byte gStatStageRatios
-_0803C1AC: .4byte 0x02024e80
+_0803C1AC: .4byte gBattleMovePower
 _0803C1B0:
 	ldr r3, [sp, 0x18]
 	b _0803C1D6
@@ -1013,7 +1013,7 @@ _0803C1D6:
 	b _0803C22A
 	.align 2, 0
 _0803C21C: .4byte gStatStageRatios
-_0803C220: .4byte 0x020239f8
+_0803C220: .4byte gUnknown_020239F8
 _0803C224:
 	lsrs r0, r5, 31
 	adds r0, r5, r0
@@ -1078,9 +1078,9 @@ _0803C25C:
 	beq _0803C2B8
 	b _0803C2C4
 	.align 2, 0
-_0803C2A4: .4byte 0x020239f8
+_0803C2A4: .4byte gUnknown_020239F8
 _0803C2A8: .4byte gBattleMoves
-_0803C2AC: .4byte 0x02024db8
+_0803C2AC: .4byte word_2024DB8
 _0803C2B0:
 	lsrs r0, r5, 31
 	adds r0, r5, r0
@@ -1118,7 +1118,7 @@ _0803C2DC:
 	beq _0803C306
 	b _0803C30C
 	.align 2, 0
-_0803C2F4: .4byte 0x02024be6
+_0803C2F4: .4byte gUnknown_02024BE6
 _0803C2F8:
 	lsls r0, r5, 4
 	subs r0, r5
@@ -1204,8 +1204,8 @@ _0803C384:
 	ble _0803C370
 	b _0803C41E
 	.align 2, 0
-_0803C390: .4byte 0x02024a60
-_0803C394: .4byte 0x02024c0c
+_0803C390: .4byte gUnknown_02024A60
+_0803C394: .4byte gUnknown_02024C0C
 _0803C398: .4byte gBitTable
 _0803C39C:
 	movs r5, 0
@@ -1239,8 +1239,8 @@ _0803C3D0:
 	ble _0803C39E
 	b _0803C41E
 	.align 2, 0
-_0803C3D8: .4byte 0x02024c07
-_0803C3DC: .4byte 0x02024c0c
+_0803C3D8: .4byte gUnknown_02024C07
+_0803C3DC: .4byte gUnknown_02024C0C
 _0803C3E0: .4byte gBitTable
 _0803C3E4:
 	movs r5, 0
@@ -1278,8 +1278,8 @@ _0803C41E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0803C428: .4byte 0x02024c08
-_0803C42C: .4byte 0x02024c0c
+_0803C428: .4byte gUnknown_02024C08
+_0803C42C: .4byte gUnknown_02024C0C
 _0803C430: .4byte gBitTable
 	thumb_func_end sub_803C348
 
@@ -1304,7 +1304,7 @@ sub_803C434: @ 803C434
 	adds r0, r4, 0
 	b _0803C4AA
 	.align 2, 0
-_0803C45C: .4byte 0x020239f8
+_0803C45C: .4byte gUnknown_020239F8
 _0803C460:
 	movs r0, 0
 	bl sub_803C348
@@ -1336,7 +1336,7 @@ _0803C484:
 	adds r0, r4, 0
 	b _0803C4AA
 	.align 2, 0
-_0803C49C: .4byte 0x02024c0c
+_0803C49C: .4byte gUnknown_02024C0C
 _0803C4A0: .4byte gBitTable
 _0803C4A4:
 	movs r0, 0x2

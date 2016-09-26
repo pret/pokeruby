@@ -1,15 +1,15 @@
+SHELL := /bin/bash -o pipefail
+
 AS      := $(DEVKITARM)/bin/arm-none-eabi-as
 ASFLAGS := -mcpu=arm7tdmi
 
 CC1    := tools/agbcc/bin/agbcc
-CFLAGS := -mthumb-interwork -O2
+CFLAGS := -mthumb-interwork -O2 -g
 
 CPP      := $(DEVKITARM)/bin/arm-none-eabi-cpp
 CPPFLAGS := -I tools/agbcc/include -iquote include -nostdinc -undef
 
 LD      := $(DEVKITARM)/bin/arm-none-eabi-ld
-pokeruby_LDFLAGS := -T ld_script_ruby.txt -T iwram_syms.txt -T ewram_syms.txt -Map pokeruby.map
-pokesapphire_LDFLAGS := -T ld_script_sapphire.txt -T iwram_syms.txt -T ewram_syms.txt -Map pokesapphire.map
 
 OBJCOPY := $(DEVKITARM)/bin/arm-none-eabi-objcopy
 
@@ -25,6 +25,8 @@ SCANINC := tools/scaninc/scaninc
 
 PREPROC := tools/preproc/preproc
 
+RAMSCRGEN := tools/ramscrgen/ramscrgen
+
 REVISION := 0
 
 # Clear the default suffixes.
@@ -35,9 +37,11 @@ REVISION := 0
 
 .PRECIOUS: %.1bpp %.4bpp %.8bpp %.gbapal %.lz %.rl %.pcm %.bin
 
-.PHONY: all clean tidy compare ruby sapphire \
-rev1 ruby_rev1 sapphire_rev1 compare_rev1 \
-rev2 ruby_rev2 sapphire_rev2 compare_rev2
+.PHONY: all clean tidy compare \
+ruby ruby_rev1 ruby_rev2 \
+compare_ruby compare_ruby_rev1 compare_ruby_rev2 \
+sapphire sapphire_rev1 sapphire_rev2 \
+compare_sapphire compare_sapphire_rev1 compare_sapphire_rev2
 
 C_SRCS := $(wildcard src/*.c)
 C_OBJS := $(C_SRCS:%.c=%.o)
@@ -54,22 +58,17 @@ data/battle_ai_scripts.o data/contest_ai_scripts.o data/script_funcs.o
 SONG_SRCS := $(wildcard sound/songs/*.s)
 SONG_OBJS := $(SONG_SRCS:%.s=%.o)
 
-OBJS := $(C_OBJS) $(ASM_OBJS) $(DATA_ASM_OBJS)
-pokeruby_OBJS := $(OBJS:.o=_ruby.o)
-pokesapphire_OBJS := $(OBJS:.o=_sapphire.o)
+OBJS := $(C_OBJS) $(ASM_OBJS) $(DATA_ASM_OBJS) $(SONG_OBJS)
 
-ROM := pokeruby.gba pokesapphire.gba
-ELF := $(ROM:.gba=.elf)
-
-all: ruby sapphire
+all: ruby
 	@:
+
+ruby: VERSION := RUBY
 ruby: pokeruby.gba
 	@:
-sapphire: pokesapphire.gba
-	@:
 
-rev1: REVISION := 1
-rev1: all
+sapphire: VERSION := SAPPHIRE
+sapphire: pokesapphire.gba
 	@:
 
 ruby_rev1: REVISION := 1
@@ -78,10 +77,6 @@ ruby_rev1: ruby
 
 sapphire_rev1: REVISION := 1
 sapphire_rev1: sapphire
-	@:
-
-rev2: REVISION := 2
-rev2: all
 	@:
 
 ruby_rev2: REVISION := 2
@@ -94,22 +89,41 @@ sapphire_rev2: sapphire
 
 # For contributors to make sure a change didn't affect the contents of the ROM.
 
-compare: all
-	@$(SHA1) rom.sha1
+compare: compare_ruby
 
-compare_rev1: rev1
-	@$(SHA1) rom_rev1.sha1
+compare_ruby: ruby
+	@$(SHA1) ruby.sha1
 
-compare_rev2: rev2
-	@$(SHA1) rom_rev2.sha1
+compare_sapphire: sapphire
+	@$(SHA1) sapphire.sha1
 
-clean:
-	rm -f $(ROM) $(ELF) $(OBJS) $(pokeruby_OBJS) $(pokesapphire_OBJS) $(C_SRCS:%.c=%.i) pokeruby.map pokesapphire.map
+compare_ruby_rev1: ruby_rev1
+	@$(SHA1) ruby_rev1.sha1
+
+compare_sapphire_rev1: sapphire_rev1
+	@$(SHA1) sapphire_rev1.sha1
+
+compare_ruby_rev2: ruby_rev2
+	@$(SHA1) ruby_rev2.sha1
+
+compare_sapphire_rev2: sapphire_rev2
+	@$(SHA1) sapphire_rev2.sha1
+
+clean: tidy
 	rm -f sound/programmable_wave_samples/*.bin sound/direct_sound_samples/*.bin sound/**/*.pcm
+	rm -f $(SONG_OBJS)
 	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.rl' \) -exec rm {} +
 
 tidy:
-	rm -f $(ROM) $(ELF) $(OBJS) $(pokeruby_OBJS) $(pokesapphire_OBJS) $(C_SRCS:%.c=%.i) pokeruby.map pokesapphire.map ld_script_ruby.txt ld_script_sapphire.txt
+	rm -f pokeruby.gba pokesapphire.gba
+	rm -f pokeruby.elf pokesapphire.elf
+	rm -f ld_script.ld sym_bss.ld sym_common.ld sym_ewram.ld
+	rm -f pokeruby.map pokesapphire.map
+	rm -f $(C_OBJS)
+	rm -f $(ASM_OBJS)
+	rm -f $(DATA_ASM_OBJS)
+	rm -f $(C_SRCS:%.c=%.i)
+	rm -f $(C_SRCS:%.c=%.s)
 
 include castform.mk
 include tilesets.mk
@@ -131,60 +145,52 @@ include misc.mk
 %.pcm: %.aif  ; $(AIF) $< $@
 %.bin: %.aif  ; $(AIF) $< $@
 
-src/libc_ruby.o src/libc_sapphire.o: CC1 := tools/agbcc/bin/old_agbcc
-src/libc_ruby.o src/libc_sapphire.o: CFLAGS := -O2
+src/libc.o: CC1 := tools/agbcc/bin/old_agbcc
+src/libc.o: CFLAGS := -O2
 
-src/siirtc_ruby.o src/siirtc_sapphire.o: CFLAGS := -mthumb-interwork
+src/siirtc.o: CFLAGS := -mthumb-interwork
 
-src/agb_flash_ruby.o src/agb_flash_sapphire.o: CFLAGS := -O -mthumb-interwork
-src/agb_flash_1m_ruby.o src/agb_flash_1m_sapphire.o: CFLAGS := -O -mthumb-interwork
-src/agb_flash_mx_ruby.o src/agb_flash_mx_sapphire.o: CFLAGS := -O -mthumb-interwork
+src/agb_flash.o: CFLAGS := -O -mthumb-interwork
+src/agb_flash_1m.o: CFLAGS := -O -mthumb-interwork
+src/agb_flash_mx.o: CFLAGS := -O -mthumb-interwork
 
-src/m4a_2_ruby.o src/m4a_2_sapphire.o: CC1 := tools/agbcc/bin/old_agbcc
-src/m4a_4_ruby.o src/m4a_4_sapphire.o: CC1 := tools/agbcc/bin/old_agbcc
+src/m4a_2.o: CC1 := tools/agbcc/bin/old_agbcc
+src/m4a_4.o: CC1 := tools/agbcc/bin/old_agbcc
 
-src/text_ruby.o src/text_sapphire.o: src/text.c $(GEN_FONT_HEADERS)
-src/link_ruby.o src/link_sapphire.o: src/link.c $(GEN_LINK_HEADERS)
+src/text.o: src/text.c $(GEN_FONT_HEADERS)
+src/link.o: src/link.c $(GEN_LINK_HEADERS)
 
-src/%_ruby.o: src/%.c
-	@$(CPP) $(CPPFLAGS) -D RUBY -D REVISION=$(REVISION) $< -o src/$*_ruby.i
-	@$(PREPROC) src/$*_ruby.i charmap.txt | $(CC1) $(CFLAGS) -o src/$*_ruby.s
-	@printf ".text\n\t.align\t2, 0\n" >> src/$*_ruby.s
-	$(AS) $(ASFLAGS) -o $@ src/$*_ruby.s
-src/%_sapphire.o: src/%.c
-	@$(CPP) $(CPPFLAGS) -D SAPPHIRE -D REVISION=$(REVISION) $< -o src/$*_sapphire.i
-	@$(PREPROC) src/$*_sapphire.i charmap.txt | $(CC1) $(CFLAGS) -o src/$*_sapphire.s
-	@printf ".text\n\t.align\t2, 0\n" >> src/$*_sapphire.s
-	$(AS) $(ASFLAGS) -o $@ src/$*_sapphire.s
+$(C_OBJS): %.o : %.c
+	@$(CPP) $(CPPFLAGS) -D $(VERSION) -D REVISION=$(REVISION) $< -o $*.i
+	@$(PREPROC) $*.i charmap.txt | $(CC1) $(CFLAGS) -o $*.s
+	@printf ".text\n\t.align\t2, 0\n" >> $*.s
+	$(AS) $(ASFLAGS) -o $@ $*.s
 
-asm/%_ruby.o: dep = $(shell $(SCANINC) asm/$*.s)
-asm/%_sapphire.o: dep = $(shell $(SCANINC) asm/$*.s)
+%.o: dep = $(shell $(SCANINC) $*.s)
 
-asm/%_ruby.o: asm/%.s $$(dep)
-	$(AS) $(ASFLAGS) --defsym RUBY=1 --defsym REVISION=$(REVISION) -o $@ $<
-asm/%_sapphire.o: asm/%.s $$(dep)
-	$(AS) $(ASFLAGS) --defsym SAPPHIRE=1 --defsym REVISION=$(REVISION) -o $@ $<
+$(ASM_OBJS): %.o: %.s $$(dep)
+	$(AS) $(ASFLAGS) --defsym $(VERSION)=1 --defsym REVISION=$(REVISION) -o $@ $<
 
-data/%_ruby.o: dep = $(shell $(SCANINC) data/$*.s)
-data/%_sapphire.o: dep = $(shell $(SCANINC) data/$*.s)
-
-data/%_ruby.o: data/%.s $$(dep)
-	$(PREPROC) $< charmap.txt | $(AS) $(ASFLAGS) --defsym RUBY=1 --defsym REVISION=$(REVISION) -o $@
-data/%_sapphire.o: data/%.s $$(dep)
-	$(PREPROC) $< charmap.txt | $(AS) $(ASFLAGS) --defsym SAPPHIRE=1 --defsym REVISION=$(REVISION) -o $@
+$(DATA_ASM_OBJS): %.o: %.s $$(dep)
+	$(PREPROC) $< charmap.txt | $(AS) $(ASFLAGS) --defsym $(VERSION)=1 --defsym REVISION=$(REVISION) -o $@
 
 $(SONG_OBJS): %.o: %.s
 	$(AS) $(ASFLAGS) -I sound -o $@ $<
 
-ld_script_ruby.txt: ld_script.txt
-	@sed 's#\(\(src\|asm\|data\)/.*\)\.o#\1_ruby.o#g' $< > $@
-ld_script_sapphire.txt: ld_script.txt
-	@sed 's#\(\(src\|asm\|data\)/.*\)\.o#\1_sapphire.o#g' $< > $@
+sym_bss.ld: sym_bss.txt
+	$(RAMSCRGEN) .bss sym_bss.txt >$@
 
-pokeruby.elf: ld_script_ruby.txt $(pokeruby_OBJS) $(SONG_OBJS)
-	$(LD) $(pokeruby_LDFLAGS) -o $@ $(pokeruby_OBJS) $(SONG_OBJS) $(LIBGCC)
-pokesapphire.elf: ld_script_sapphire.txt $(pokesapphire_OBJS) $(SONG_OBJS)
-	$(LD) $(pokesapphire_LDFLAGS) -o $@ $(pokesapphire_OBJS) $(SONG_OBJS) $(LIBGCC)
+sym_common.ld: sym_common.txt $(C_OBJS) $(wildcard common_syms/*.txt)
+	$(RAMSCRGEN) COMMON sym_common.txt -c src,common_syms >$@
 
-%.gba: %.elf
+sym_ewram.ld: sym_ewram.txt
+	$(RAMSCRGEN) ewram_data sym_ewram.txt >$@
+
+ld_script.ld: ld_script.txt sym_bss.ld sym_common.ld sym_ewram.ld
+	sed -f ld_script.sed ld_script.txt >ld_script.ld
+
+%.elf: ld_script.ld $(OBJS)
+	$(LD) -T ld_script.ld -T shared_syms.txt -Map $*.map -o $@ $(OBJS) $(LIBGCC)
+
+pokeruby.gba pokesapphire.gba: %.gba: %.elf
 	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0x9000000 $< $@

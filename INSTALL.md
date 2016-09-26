@@ -26,3 +26,33 @@ Install [**devkitARM**](http://devkitpro.org/wiki/Getting_Started/devkitARM).
 Then get the compiled tools from https://github.com/YamaArashi/pokeruby-tools. Copy the `tools/` folder over the `tools/` folder in your pokeruby directory.
 
 You can then build pokeruby using `make` in the MSYS environment provided with devkitARM.
+
+# Compiling Sapphire and later revisions
+
+When you simply enter `make` and don't specify a target, then Pokémon Ruby 1.0 will be built. However, Sapphire can also be built, along with revisions 1 and 2 of both Ruby and Sapphire. Here is a listing of each ROM that can be made, along with the command to make the ROM.
+
+Pokémon Ruby 1.0
+
+	make ruby
+
+Pokémon Ruby 1.1
+
+	make ruby_rev1
+
+Pokémon Ruby 1.2
+
+	make ruby_rev2
+
+Pokémon Sapphire 1.0
+
+	make sapphire
+
+Pokémon Sapphire 1.1
+
+	make sapphire_rev1
+
+Pokémon Sapphire 1.2
+
+	make sapphire_rev2
+
+Note that if you have already built a ROM, you must run `make tidy` before building a different one. This command will delete the ROM you built as well as intermediate files, so you should copy the ROM to another directory before running `make tidy` if you would like to keep the ROM.

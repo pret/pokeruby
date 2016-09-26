@@ -257,7 +257,7 @@ struct BattlePokemon
     u32 spDefenseIV:5;
     u32 isEgg:1;
     u32 altAbility:1;
-    u8 statStages[8];
+    s8 statStages[8];
     u8 ability;
     u8 type1, type2;
     u8 unknown;

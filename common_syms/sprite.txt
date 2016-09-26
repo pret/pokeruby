@@ -1,0 +1,12 @@
+gSpriteOrder
+gSpriteTileAllocBitmap
+gSpriteCoordOffsetX
+gOamLimit
+gReservedSpriteTileCount
+gSpriteCopyRequestCount
+gSpriteCopyRequests
+gSpriteCoordOffsetY
+gOamMatrices
+gShouldProcessSpriteCopyRequests
+gOamMatrixAllocBitmap
+gReservedSpritePaletteCount

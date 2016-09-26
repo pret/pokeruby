@@ -4961,4 +4961,4 @@ Text_1C6C62: @ 81C6C62
 	.string "$"
 
 	.include "data/text/save.s"
-	.include "data/text/intro.s"
+	.include "data/text/birch_speech.s"

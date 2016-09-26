@@ -1,6 +1,8 @@
 #ifndef GUARD_SPRITE_H
 #define GUARD_SPRITE_H
 
+#define MAX_SPRITES 64
+
 struct SpriteSheet
 {
     u8 *data;
@@ -182,6 +184,11 @@ struct Sprite
 
     u8 subpriority;
 };
+
+extern s16 gSpriteCoordOffsetX;
+extern s16 gSpriteCoordOffsetY;
+
+extern struct Sprite gSprites[];
 
 void ResetSpriteData(void);
 void AnimateSprites(void);
