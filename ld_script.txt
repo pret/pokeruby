@@ -55,6 +55,7 @@ SECTIONS {
         src/rng.o(.text);
         asm/rom_8040EB4.o(.text);
         src/play_time.o(.text);
+        src/new_game.o(.text);
         asm/rom4.o(.text);
         src/map_obj_80643A4.o(.text);
         src/field_message_box.o(.text);
