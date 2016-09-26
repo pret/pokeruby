@@ -2295,7 +2295,7 @@ sub_8069030: @ 8069030
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08069064: .4byte gUnknown_02026954
+_08069064: .4byte gSaveBlock1 + 0x1220
 _08069068: .4byte gUnknown_0202E8E2
 	thumb_func_end sub_8069030
 
@@ -2322,7 +2322,7 @@ sub_806906C: @ 806906C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080690A0: .4byte gUnknown_02026954
+_080690A0: .4byte gSaveBlock1 + 0x1220
 _080690A4: .4byte 0x0000084d
 _080690A8: .4byte 0x0000084e
 _080690AC: .4byte 0x00000829
@@ -2339,7 +2339,7 @@ sub_80690B4: @ 80690B4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080690C4: .4byte gUnknown_02026A6C
+_080690C4: .4byte gSaveBlock1 + 0x1338
 	thumb_func_end sub_80690B4
 
 	thumb_func_start sub_80690C8
@@ -2628,7 +2628,7 @@ _080692BC:
 	b _080692E0
 	.align 2, 0
 _080692C8: .4byte 0x00003fff
-_080692CC: .4byte gUnknown_02026954
+_080692CC: .4byte gSaveBlock1 + 0x1220
 _080692D0:
 	ldr r1, _080692E8
 	adds r0, r3, r1
@@ -4972,7 +4972,7 @@ _0806A43E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806A448: .4byte gUnknown_02024F44
+_0806A448: .4byte gSaveBlock2 + 0xA0
 	thumb_func_end sub_806A3F4
 
 	thumb_func_start sub_806A44C
@@ -14278,7 +14278,7 @@ _0806ECA0: .4byte gTasks
 _0806ECA4: .4byte TaskDummy
 _0806ECA8: .4byte 0x0201c000
 _0806ECAC: .4byte gUnknown_0202E8F4
-_0806ECB0: .4byte gUnknown_02028280
+_0806ECB0: .4byte gSaveBlock1 + 0x2B4C
 _0806ECB4: .4byte gOtherText_PokeHoldingItemCantMail
 _0806ECB8: .4byte party_menu_link_mon_held_item_object
 _0806ECBC:
@@ -16074,7 +16074,7 @@ sub_806FB7C: @ 806FB7C
 	ldr r0, _0806FB8C
 	b _0806FB9A
 	.align 2, 0
-_0806FB8C: .4byte gUnknown_02028DAA
+_0806FB8C: .4byte gSaveBlock1 + 0x3676
 _0806FB90:
 	ldr r1, _0806FBA8
 	subs r0, 0xD
@@ -17091,7 +17091,7 @@ dp05_ether: @ 80703F0
 	ldr r0, _0807040C
 	b _0807041C
 	.align 2, 0
-_0807040C: .4byte gUnknown_02028DAA
+_0807040C: .4byte gSaveBlock1 + 0x3676
 _08070410:
 	ldr r1, _08070464
 	adds r0, r5, 0
@@ -18293,7 +18293,7 @@ sub_8070E48: @ 8070E48
 	ldr r4, _08070E58
 	b _08070E66
 	.align 2, 0
-_08070E58: .4byte gUnknown_02028DAA
+_08070E58: .4byte gSaveBlock1 + 0x3676
 _08070E5C:
 	ldr r1, _08070E8C
 	subs r0, 0xD

@@ -6424,7 +6424,7 @@ _0800EACE:
 _0800EAF4: .4byte 0x02000004
 _0800EAF8: .4byte gSaveBlock1
 _0800EAFC: .4byte 0x00003160
-_0800EB00: .4byte gUnknown_02028DAA
+_0800EB00: .4byte gSaveBlock1 + 0x3676
 _0800EB04: .4byte 0x00003688
 	thumb_func_end sub_800EAAC
 
@@ -6500,7 +6500,7 @@ _0800EB88: .4byte gEnigmaBerries
 _0800EB8C: .4byte gSaveBlock1
 _0800EB90: .4byte 0x00003160
 _0800EB94: .4byte gUnknown_02024DF8
-_0800EB98: .4byte gUnknown_02028DAA
+_0800EB98: .4byte gSaveBlock1 + 0x3676
 _0800EB9C: .4byte 0x00003688
 _0800EBA0: .4byte 0x00003689
 _0800EBA4:
@@ -40414,7 +40414,7 @@ _08020138:
 	ldrb r4, [r3]
 	b _08020164
 	.align 2, 0
-_08020150: .4byte gUnknown_02028DBC
+_08020150: .4byte gSaveBlock1 + 0x3688
 _08020154: .4byte gPlayerParty
 _08020158: .4byte gBitTable
 _0802015C:
@@ -48231,7 +48231,7 @@ sub_8024014: @ 8024014
 _08024048: .4byte word_202FF5E
 _0802404C: .4byte 0x02017000
 _08024050: .4byte 0xfffff056
-_08024054: .4byte gUnknown_02025BC4
+_08024054: .4byte gSaveBlock1 + 0x490
 _08024058:
 	ldr r2, _08024074
 	ldrh r1, [r0]
@@ -48345,7 +48345,7 @@ _080240FE:
 _08024120: .4byte gTrainerMoney
 _08024124: .4byte 0x02000000
 _08024128: .4byte gUnknown_020239F8
-_0802412C: .4byte gUnknown_02025BC4
+_0802412C: .4byte gSaveBlock1 + 0x490
 _08024130: .4byte gTrainers
 _08024134: .4byte word_202FF5E
 _08024138: .4byte 0x00016056
@@ -53549,7 +53549,7 @@ atk91_givemoney: @ 8026A30
 	.align 2, 0
 _08026A8C: .4byte gUnknown_020239F8
 _08026A90: .4byte gUnknown_02024D1A
-_08026A94: .4byte gUnknown_02025BC4
+_08026A94: .4byte gSaveBlock1 + 0x490
 _08026A98: .4byte 0x02000000
 _08026A9C: .4byte 0x00016056
 _08026AA0: .4byte gUnknown_030041C0
@@ -86072,7 +86072,7 @@ _08037166:
 _08037170: .4byte gEnemyParty
 _08037174: .4byte 0x02016a00
 _08037178: .4byte gItemEffectTable
-_0803717C: .4byte gUnknown_02028DAA
+_0803717C: .4byte gSaveBlock1 + 0x3676
 _08037180: .4byte 0xfffe9600
 _08037184: .4byte gUnknown_02024A60
 _08037188: .4byte 0x000160d8

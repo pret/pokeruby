@@ -229,7 +229,7 @@ _0803E350:
 	str r2, [sp, 0x20]
 	b _0803E374
 	.align 2, 0
-_0803E358: .4byte gUnknown_02028DAA
+_0803E358: .4byte gSaveBlock1 + 0x3676
 _0803E35C:
 	mov r0, r8
 	movs r2, 0
@@ -2276,7 +2276,7 @@ _0803F3B8:
 	ldr r7, _0803F3BC
 	b _0803F3CA
 	.align 2, 0
-_0803F3BC: .4byte gUnknown_02028DAA
+_0803F3BC: .4byte gSaveBlock1 + 0x3676
 _0803F3C0:
 	ldr r1, _0803F404
 	subs r0, 0xD

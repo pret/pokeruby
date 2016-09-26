@@ -826,7 +826,7 @@ daycare_send: @ 804149C
 	.align 2, 0
 _080414B4: .4byte gUnknown_03005CE0
 _080414B8: .4byte gPlayerParty
-_080414BC: .4byte gUnknown_020286D0
+_080414BC: .4byte gSaveBlock1 + 0x2F9C
 	thumb_func_end daycare_send
 
 	thumb_func_start sub_80414C0
@@ -1030,7 +1030,7 @@ sub_8041648: @ 8041648
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0804165C: .4byte gUnknown_020286D0
+_0804165C: .4byte gSaveBlock1 + 0x2F9C
 _08041660: .4byte gUnknown_0202E8CC
 	thumb_func_end sub_8041648
 
@@ -1180,7 +1180,7 @@ sub_8041770: @ 8041770
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08041784: .4byte gUnknown_020286D0
+_08041784: .4byte gSaveBlock1 + 0x2F9C
 _08041788: .4byte gUnknown_0202E8CC
 _0804178C: .4byte gUnknown_0202E8CE
 	thumb_func_end sub_8041770
@@ -1225,7 +1225,7 @@ sub_80417B8: @ 80417B8
 	b _080417EC
 	.align 2, 0
 _080417D8: .4byte gUnknown_0202E8CC
-_080417DC: .4byte gUnknown_020286D0
+_080417DC: .4byte gSaveBlock1 + 0x2F9C
 _080417E0:
 	ldrb r1, [r5]
 	adds r0, r4, 0
@@ -1431,7 +1431,7 @@ sub_8041940: @ 8041940
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804194C: .4byte gUnknown_020286D0
+_0804194C: .4byte gSaveBlock1 + 0x2F9C
 	thumb_func_end sub_8041940
 
 	thumb_func_start sub_8041950
@@ -1442,7 +1442,7 @@ sub_8041950: @ 8041950
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804195C: .4byte gUnknown_020286D0
+_0804195C: .4byte gSaveBlock1 + 0x2F9C
 	thumb_func_end sub_8041950
 
 	thumb_func_start sub_8041960
@@ -2120,7 +2120,7 @@ sub_8041E7C: @ 8041E7C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08041E88: .4byte gUnknown_020286D0
+_08041E88: .4byte gSaveBlock1 + 0x2F9C
 	thumb_func_end sub_8041E7C
 
 	thumb_func_start incense_effects
@@ -2522,7 +2522,7 @@ sp0B8_daycare: @ 80421A0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080421AC: .4byte gUnknown_020286D0
+_080421AC: .4byte gSaveBlock1 + 0x2F9C
 	thumb_func_end sp0B8_daycare
 
 	thumb_func_start sub_80421B0
@@ -2657,7 +2657,7 @@ sub_80422A0: @ 80422A0
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080422B0: .4byte gUnknown_020286D0
+_080422B0: .4byte gSaveBlock1 + 0x2F9C
 	thumb_func_end sub_80422A0
 
 	thumb_func_start sub_80422B4
@@ -2753,7 +2753,7 @@ sp0B5_daycare: @ 8042360
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804236C: .4byte gUnknown_020286D0
+_0804236C: .4byte gSaveBlock1 + 0x2F9C
 	thumb_func_end sp0B5_daycare
 
 	thumb_func_start sp0B6_daycare
@@ -2768,7 +2768,7 @@ sp0B6_daycare: @ 8042370
 	movs r0, 0x1
 	b _080423A0
 	.align 2, 0
-_08042384: .4byte gUnknown_020286D0
+_08042384: .4byte gSaveBlock1 + 0x2F9C
 _08042388:
 	adds r0, r4, 0
 	bl daycare_count_pokemon
@@ -2980,7 +2980,7 @@ daycare_relationship_score_from_savegame: @ 80424F4
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08042504: .4byte gUnknown_020286D0
+_08042504: .4byte gSaveBlock1 + 0x2F9C
 	thumb_func_end daycare_relationship_score_from_savegame
 
 	thumb_func_start sp0B9_daycare_relationship_comment
@@ -3433,7 +3433,7 @@ sub_8042824: @ 8042824
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08042880: .4byte gUnknown_020286D0
+_08042880: .4byte gSaveBlock1 + 0x2F9C
 _08042884: .4byte sub_804272C
 	thumb_func_end sub_8042824
 
@@ -3780,7 +3780,7 @@ sub_8042B4C: @ 8042B4C
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08042B60: .4byte gUnknown_020286D0
+_08042B60: .4byte gSaveBlock1 + 0x2F9C
 _08042B64: .4byte gUnknown_0202E8CC
 	thumb_func_end sub_8042B4C
 
@@ -16312,7 +16312,7 @@ _08048F44:
 	b _08049006
 	.align 2, 0
 _08048F54: .4byte gBlockSendBuffer
-_08048F58: .4byte gUnknown_02028280
+_08048F58: .4byte gSaveBlock1 + 0x2B4C
 _08048F5C: .4byte gUnknown_03004824
 _08048F60:
 	cmp r7, 0
@@ -16360,7 +16360,7 @@ _08048FAC:
 	b _08049006
 	.align 2, 0
 _08048FBC: .4byte gBlockSendBuffer
-_08048FC0: .4byte gUnknown_02028844
+_08048FC0: .4byte gSaveBlock1 + 0x3110
 _08048FC4: .4byte gUnknown_03004824
 _08048FC8:
 	cmp r7, 0
@@ -20437,7 +20437,7 @@ _0804AFA2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804AFB0: .4byte gUnknown_02028844
+_0804AFB0: .4byte gSaveBlock1 + 0x3110
 _0804AFB4: .4byte gUnknown_03004824
 	thumb_func_end sub_804AF84
 
@@ -21843,7 +21843,7 @@ _0804BB50:
 	.align 2, 0
 _0804BB60: .4byte gPlayerParty
 _0804BB64: .4byte gEnemyParty
-_0804BB68: .4byte gUnknown_02028280
+_0804BB68: .4byte gSaveBlock1 + 0x2B4C
 _0804BB6C: .4byte gUnknown_03004828
 _0804BB70: .4byte gUnknown_02029700
 _0804BB74: .4byte gReceivedRemoteLinkPlayers

@@ -53,7 +53,7 @@ set_player_trainer_id: @ 8052D2C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08052D50: .4byte gUnknown_02024EAE
+_08052D50: .4byte gSaveBlock2 + 0xA
 	thumb_func_end set_player_trainer_id
 
 	thumb_func_start sub_8052D54
@@ -98,7 +98,7 @@ sub_8052D78: @ 8052D78
 	bx r0
 	.align 2, 0
 _08052DA0: .4byte gUnknown_03005CE8
-_08052DA4: .4byte gUnknown_02024ECC
+_08052DA4: .4byte gSaveBlock2 + 0x28
 	thumb_func_end sub_8052D78
 
 	thumb_func_start sub_8052DA8
@@ -146,7 +146,7 @@ sub_8052DE4: @ 8052DE4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08052DFC: .4byte gUnknown_02024F4C
+_08052DFC: .4byte gSaveBlock2 + 0xA8
 _08052E00: .4byte 0x050001fa
 	thumb_func_end sub_8052DE4
 
@@ -551,7 +551,7 @@ sub_8053154: @ 8053154
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805318C: .4byte gUnknown_02026354
+_0805318C: .4byte gSaveBlock1 + 0xC20
 _08053190: .4byte 0x05000180
 _08053194: .4byte gMapHeader
 	thumb_func_end sub_8053154
@@ -576,7 +576,7 @@ _080531A4:
 	bx r0
 	.align 2, 0
 _080531B8: .4byte gMapHeader
-_080531BC: .4byte gUnknown_02026354
+_080531BC: .4byte gSaveBlock1 + 0xC20
 	thumb_func_end sub_8053198
 
 	thumb_func_start update_saveblock1_field_object_coords
@@ -598,7 +598,7 @@ _080531D2:
 	strh r2, [r3, 0x6]
 	b _080531EC
 	.align 2, 0
-_080531E0: .4byte gUnknown_02026354
+_080531E0: .4byte gSaveBlock1 + 0xC20
 _080531E4:
 	adds r3, 0x18
 	adds r1, 0x1
@@ -626,7 +626,7 @@ _08053202:
 	strb r1, [r2, 0x9]
 	b _08053218
 	.align 2, 0
-_0805320C: .4byte gUnknown_02026354
+_0805320C: .4byte gSaveBlock1 + 0xC20
 _08053210:
 	adds r2, 0x18
 	adds r3, 0x1
@@ -1022,7 +1022,7 @@ saved_warp2_set: @ 80534B0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080534E8: .4byte gUnknown_02025748
+_080534E8: .4byte gSaveBlock1 + 0x14
 	thumb_func_end saved_warp2_set
 
 	thumb_func_start saved_warp2_set_2
@@ -1050,7 +1050,7 @@ saved_warp2_set_2: @ 80534EC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805351C: .4byte gUnknown_02025748
+_0805351C: .4byte gSaveBlock1 + 0x14
 	thumb_func_end saved_warp2_set_2
 
 	thumb_func_start copy_saved_warp2_bank_and_enter_x_to_warp1
@@ -1141,7 +1141,7 @@ _080535B8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080535C0: .4byte gUnknown_02025750
+_080535C0: .4byte gSaveBlock1 + 0x1C
 	thumb_func_end sub_8053588
 
 	thumb_func_start sub_80535C4
@@ -1232,7 +1232,7 @@ sub_805363C: @ 805363C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08053674: .4byte gUnknown_02025758
+_08053674: .4byte gSaveBlock1 + 0x24
 	thumb_func_end sub_805363C
 
 	thumb_func_start sub_8053678
@@ -1417,7 +1417,7 @@ unref_sub_8053790: @ 8053790
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080537C8: .4byte gUnknown_02025740
+_080537C8: .4byte gSaveBlock1 + 0xC
 	thumb_func_end unref_sub_8053790
 
 	thumb_func_start sub_80537CC
@@ -1450,7 +1450,7 @@ _080537FC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08053804: .4byte gUnknown_02025740
+_08053804: .4byte gSaveBlock1 + 0xC
 	thumb_func_end sub_80537CC
 
 	thumb_func_start gpu_sync_bg_hide
@@ -2268,7 +2268,7 @@ _08053E0C:
 	adds r0, r1, 0
 	b _08053E40
 	.align 2, 0
-_08053E24: .4byte gUnknown_02025738
+_08053E24: .4byte gSaveBlock1 + 0x4
 _08053E28: .4byte 0x00007fff
 _08053E2C:
 	subs r0, r4, 0x4
@@ -2808,7 +2808,7 @@ sav1_map_get_light_level: @ 80541D8
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080541E8: .4byte gUnknown_02025738
+_080541E8: .4byte gSaveBlock1 + 0x4
 	thumb_func_end sav1_map_get_light_level
 
 	thumb_func_start get_map_light_from_warp0
@@ -7578,7 +7578,7 @@ _080565FE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805660C: .4byte gUnknown_02025768
+_0805660C: .4byte gSaveBlock1 + 0x34
 _08056610: .4byte gUnknown_03004870
 _08056614: .4byte gUnknown_02029828
 	thumb_func_end save_serialize_map
@@ -7605,7 +7605,7 @@ _08056622:
 	movs r0, 0
 	b _08056646
 	.align 2, 0
-_0805663C: .4byte gUnknown_02025768
+_0805663C: .4byte gSaveBlock1 + 0x34
 _08056640: .4byte 0x000001ff
 _08056644:
 	movs r0, 0x1
@@ -7630,7 +7630,7 @@ sav2_mapdata_clear: @ 805664C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08056668: .4byte gUnknown_02025768
+_08056668: .4byte gSaveBlock1 + 0x34
 _0805666C: .4byte 0x01000100
 	thumb_func_end sav2_mapdata_clear
 
@@ -7697,7 +7697,7 @@ _080566D6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080566E4: .4byte gUnknown_02025768
+_080566E4: .4byte gSaveBlock1 + 0x34
 _080566E8: .4byte gUnknown_03004870
 _080566EC: .4byte gUnknown_02029828
 	thumb_func_end sub_8056670
@@ -7739,7 +7739,7 @@ sub_80566F0: @ 80566F0
 	beq _0805674E
 	b _08056766
 	.align 2, 0
-_08056734: .4byte gUnknown_02025768
+_08056734: .4byte gSaveBlock1 + 0x34
 _08056738: .4byte gUnknown_03004870
 _0805673C:
 	cmp r2, 0x3
@@ -18104,7 +18104,7 @@ _0805AE40:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0805AE4C: .4byte gUnknown_02026354
+_0805AE4C: .4byte gSaveBlock1 + 0xC20
 	thumb_func_end sub_805ADDC
 
 	thumb_func_start GetAvailableFieldObjectSlot
@@ -19142,7 +19142,7 @@ _0805B618:
 	.align 2, 0
 _0805B628: .4byte gMapHeader
 _0805B62C: .4byte gSaveBlock1
-_0805B630: .4byte gUnknown_02026354
+_0805B630: .4byte gSaveBlock1 + 0xC20
 	thumb_func_end sub_805B55C
 
 	thumb_func_start RemoveFieldObjectsOutsideView
