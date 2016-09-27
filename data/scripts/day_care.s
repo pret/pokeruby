@@ -114,7 +114,7 @@ Route117_PokemonDayCare_EventScript_1B236C:: @ 81B236C
 	msgbox Route117_PokemonDayCare_Text_1B296E, 4
 	waitpokecry
 	special 187
-	inccounter 47
+	inccounter GAME_STAT_USED_DAYCARE
 	specialval RESULT, 182
 	compare RESULT, 2
 	jumpeq Route117_PokemonDayCare_EventScript_1B23DA

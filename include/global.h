@@ -91,6 +91,9 @@ struct SecretBaseRecord
     u8 partyEVs[6];
 };
 
+#include "game_stat.h"
+#include "fieldmap.h"
+
 struct WarpData
 {
     s8 mapGroup;
@@ -127,7 +130,11 @@ struct SaveBlock1
     u32 money;
     u16 coins;
     u16 registeredItem; // registered for use with SELECT button
-    u8 filler_498[0x2A64];
+    u8 filler_498[0x788];
+    struct MapObjectTemplate mapObjectTemplates[64];
+    u8 filler_1220[0x320];
+    u32 gameStats[NUM_GAME_STATS];
+    u8 filler_1608[0x18F4];
     struct SB1_2EFC_Struct sb1_2EFC_struct[5];
     u8 filler_2F9C[0x6F4];
     struct RamScript ramScript;

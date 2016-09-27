@@ -24,10 +24,28 @@ struct MapData
     struct Tileset *secondaryTileset;
 };
 
+struct MapObjectTemplate
+{
+    u8 filler[0x18];
+};
+
+struct MapEvents
+{
+    u8 mapObjectCount;
+    u8 warpCount;
+    u8 coordEventCount;
+    u8 bgEventCount;
+
+    struct MapObjectTemplate *mapObjects;
+    void *warps;
+    void *coordEvents;
+    void *bgEvents;
+};
+
 struct MapHeader
 {
     struct MapData *mapData;
-    void *events;
+    struct MapEvents *events;
     u8 *mapScripts;
     // TODO: rest of struct
 };

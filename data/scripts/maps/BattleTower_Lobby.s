@@ -247,7 +247,7 @@ BattleTower_Lobby_EventScript_160587:: @ 8160587
 	hidebox 0, 0, 15, 10
 	compare RESULT, 0
 	jumpeq BattleTower_Lobby_EventScript_160642
-	inccounter 30
+	inccounter GAME_STAT_ENTERED_BATTLE_TOWER
 	special 39
 	special 239
 	setvar 0x40bc, 1

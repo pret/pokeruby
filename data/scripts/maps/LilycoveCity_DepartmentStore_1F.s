@@ -35,7 +35,7 @@ LilycoveCity_DepartmentStore_1F_EventScript_159D5E:: @ 8159D5E
 	waitmove 0
 	compare 0x8004, 0
 	jumpeq LilycoveCity_DepartmentStore_1F_EventScript_159E60
-	inccounter 46
+	inccounter GAME_STAT_WON_POKEMON_LOTTERY
 	compare 0x8006, 0
 	callif 1, LilycoveCity_DepartmentStore_1F_EventScript_159E3A
 	compare 0x8006, 1

@@ -26,3 +26,4 @@
 	.include "constants/battle_text.s"
 	.include "constants/battle_move_effects.s"
 	.include "constants/contest_move_effects.s"
+	.include "constants/game_stat.s"

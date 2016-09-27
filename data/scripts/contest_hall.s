@@ -1012,7 +1012,7 @@ LinkContestRoom1_EventScript_1A5BAB:: @ 81A5BAB
 	return
 
 LinkContestRoom1_EventScript_1A5BF6:: @ 81A5BF6
-	inccounter 37
+	inccounter GAME_STAT_WON_CONTEST
 	msgbox LinkContestRoom1_Text_1A6DF1, 3
 	pause 90
 	special 134
@@ -1070,7 +1070,7 @@ LinkContestRoom1_EventScript_1A5C6A:: @ 81A5C6A
 	return
 
 LinkContestRoom1_EventScript_1A5C7C:: @ 81A5C7C
-	inccounter 35
+	inccounter GAME_STAT_WON_LINK_CONTEST
 	return
 
 LinkContestRoom1_EventScript_1A5C7F:: @ 81A5C7F
@@ -1119,7 +1119,7 @@ LinkContestRoom1_EventScript_1A5CE5:: @ 81A5CE5
 LinkContestRoom1_EventScript_1A5CFC:: @ 81A5CFC
 	compare 0x4088, 2
 	callif 1, LinkContestRoom1_EventScript_1A5C42
-	inccounter 37
+	inccounter GAME_STAT_WON_CONTEST
 	specialval RESULT, 88
 	compare RESULT, 0
 	jumpeq LinkContestRoom1_EventScript_1A5D5B
@@ -1142,7 +1142,7 @@ LinkContestRoom1_EventScript_1A5D3B:: @ 81A5D3B
 
 LinkContestRoom1_EventScript_1A5D5B:: @ 81A5D5B
 	special 89
-	inccounter 42
+	inccounter GAME_STAT_RECEIVED_RIBBONS
 	setflag 2107
 	lockall
 	msgbox LinkContestRoom1_Text_1A6D6A, 4
