@@ -98,7 +98,7 @@ struct WarpData
 {
     s8 mapGroup;
     s8 mapNum;
-    u8 warpId;
+    s8 warpId;
     s16 x, y;
 };
 
@@ -126,7 +126,9 @@ struct SaveBlock1
 {
     struct Coords16 pos;
     struct WarpData location;
-    u8 filler_C[0x484];
+    u8 filler_C[0x26];
+    u16 mapDataId;
+    u8 filler_34[0x45C];
     u32 money;
     u16 coins;
     u16 registeredItem; // registered for use with SELECT button

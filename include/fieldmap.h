@@ -26,7 +26,15 @@ struct MapData
 
 struct MapObjectTemplate
 {
-    u8 filler[0x18];
+    u8 localId;
+    u8 filler_1[0x3];
+    s16 x;
+    s16 y;
+    u8 elevation;
+    u8 movementType;
+    u8 filler_A[0x6];
+    u8 *script;
+    u8 filler_14[0x4];
 };
 
 struct MapEvents
