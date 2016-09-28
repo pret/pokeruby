@@ -51,9 +51,90 @@ extern u8 gHoldEffectToType[][2];
 
 extern u8 battle_side_get_owner(u8);
 extern u8 battle_get_side_with_given_state(u8);
+extern u32 battle_get_per_side_status(u8);
 extern u8 FlagGet(u16);
 extern u8 sub_8018324(u8, u8, u8, u8, u16);
 extern u8 sub_803C348(u8);
+
+u8 sub_803C348(u8 a1)
+{
+    s32 i;
+    u8 retVal = 0;
+
+    switch (a1)
+    {
+    case 0:
+        for (i = 0; i < 4; i++)
+        {
+            if (i != gUnknown_02024A60 && !(gUnknown_02024C0C & gBitTable[i]))
+                retVal++;
+        }
+        break;
+    case 1:
+        for (i = 0; i < 4; i++)
+        {
+            if (battle_side_get_owner(i) == battle_side_get_owner(gUnknown_02024C07) && !(gUnknown_02024C0C & gBitTable[i]))
+                retVal++;
+        }
+        break;
+    case 2:
+        for (i = 0; i < 4; i++)
+        {
+            if (battle_side_get_owner(i) == battle_side_get_owner(gUnknown_02024C08) && !(gUnknown_02024C0C & gBitTable[i]))
+                retVal++;
+        }
+        break;
+    }
+
+    return retVal;
+}
+
+u8 sub_803C434(u8 a1)
+{
+    u32 status0 = battle_get_per_side_status(a1);
+    register u8 status_ asm("r4");
+    u8 status;
+    register u32 mask1 asm("r1") = 1;
+    register u32 mask2 asm("r6") = 1;
+
+    status_ = mask2;
+    status_ &= status0;
+    status = status_ ^ mask1;
+
+    {
+        register u16 val_ asm("r1") = gUnknown_020239F8;
+        u32 val = mask2;
+        val &= val_;
+        if (!val)
+        {
+            return battle_get_side_with_given_state(status);
+        }
+    }
+
+    if (sub_803C348(0) > 1)
+    {
+        u32 r = Random();
+        register u32 val asm("r1") = mask2;
+        val &= r;
+        if (!val)
+        {
+            u32 status2 = 2;
+            status2 ^= status;
+            return battle_get_side_with_given_state(status2);
+        }
+        else
+        {
+            return battle_get_side_with_given_state(status);
+        }
+    }
+    else
+    {
+        if (gUnknown_02024C0C & gBitTable[status])
+            return battle_get_side_with_given_state(status ^ 2);
+        else
+            return battle_get_side_with_given_state(status);
+    }
+}
 
 u8 GetMonGender(struct Pokemon *mon)
 {
