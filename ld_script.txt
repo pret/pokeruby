@@ -67,6 +67,7 @@ SECTIONS {
         src/menu.o(.text);
         asm/rom_8072DF8.o(.text);
         src/palette.o(.text);
+        src/sound.o(.text);
         asm/rom_8074BAC.o(.text);
         src/task.o(.text);
         asm/rom5.o(.text);
