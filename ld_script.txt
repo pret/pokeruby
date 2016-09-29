@@ -77,6 +77,7 @@ SECTIONS {
     {
         data/event_scripts.o(script_data);
         data/battle_anim_scripts.o(script_data);
+        . = ALIGN(4);
         data/battle_scripts_1.o(script_data);
         data/field_effect_scripts.o(script_data);
         data/battle_scripts_2.o(script_data);
