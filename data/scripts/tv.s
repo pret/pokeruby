@@ -1,6 +1,6 @@
 Event_TV:: @ 81A6E72
 	lockall
-	inccounter 44
+	inccounter GAME_STAT_WATCHED_TV
 	special 75
 	specialval RESULT, 73
 	compare RESULT, 2

@@ -47,7 +47,7 @@ Route112_CableCarStation_EventScript_15C0AD:: @ 815C0AD
 	waitmove 0
 	setvar 0x8004, 0
 	setvar 0x40a3, 1
-	inccounter 48
+	inccounter GAME_STAT_RODE_CABLE_CAR
 	special 151
 	special 152
 	waitstate

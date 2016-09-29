@@ -381,25 +381,25 @@ LinkContestRoom1_EventScript_15FB64:: @ 815FB64
 	return
 
 LinkContestRoom1_EventScript_15FBA1:: @ 815FBA1
-	inccounter 36
+	inccounter GAME_STAT_ENTERED_CONTEST
 	warp VerdanturfTown_ContestLobby, 255, 5, 4
 	waitstate
 	end
 
 LinkContestRoom1_EventScript_15FBAD:: @ 815FBAD
-	inccounter 36
+	inccounter GAME_STAT_ENTERED_CONTEST
 	warp FallarborTown_ContestLobby, 255, 5, 4
 	waitstate
 	end
 
 LinkContestRoom1_EventScript_15FBB9:: @ 815FBB9
-	inccounter 36
+	inccounter GAME_STAT_ENTERED_CONTEST
 	warp SlateportCity_ContestLobby, 255, 5, 4
 	waitstate
 	end
 
 LinkContestRoom1_EventScript_15FBC5:: @ 815FBC5
-	inccounter 36
+	inccounter GAME_STAT_ENTERED_CONTEST
 	warp LilycoveCity_ContestLobby, 255, 6, 4
 	waitstate
 	end

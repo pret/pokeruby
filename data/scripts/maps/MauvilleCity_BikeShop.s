@@ -88,7 +88,7 @@ MauvilleCity_BikeShop_EventScript_1568BF:: @ 81568BF
 	end
 
 MauvilleCity_BikeShop_EventScript_1568C9:: @ 81568C9
-	inccounter 4
+	inccounter GAME_STAT_TRADED_BIKES
 	msgbox MauvilleCity_BikeShop_Text_181439, 4
 	removeitem ITEM_ACRO_BIKE, 1
 	giveitem ITEM_MACH_BIKE
@@ -96,7 +96,7 @@ MauvilleCity_BikeShop_EventScript_1568C9:: @ 81568C9
 	end
 
 MauvilleCity_BikeShop_EventScript_1568EA:: @ 81568EA
-	inccounter 4
+	inccounter GAME_STAT_TRADED_BIKES
 	msgbox MauvilleCity_BikeShop_Text_181408, 4
 	removeitem ITEM_MACH_BIKE, 1
 	giveitem ITEM_ACRO_BIKE

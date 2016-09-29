@@ -1444,7 +1444,7 @@ VerdanturfTown_PokemonCenter_1F_EventScript_19FD5B:: @ 819FD5B
 	end
 
 OldaleTown_PokemonCenter_1F_EventScript_19FD7C:: @ 819FD7C
-	inccounter 15
+	inccounter GAME_STAT_USED_POKECENTER
 	message OldaleTown_PokemonCenter_1F_Text_1A1245
 	waittext
 	move 0x800b, OldaleTown_PokemonCenter_1F_Movement_1A083F
@@ -4379,7 +4379,7 @@ FallarborTown_ContestLobby_EventScript_1ADE46:: @ 81ADE46
 SlateportCity_OceanicMuseum_1F_EventScript_1ADE46:: @ 81ADE46
 SlateportCity_PokemonFanClub_EventScript_1ADE46:: @ 81ADE46
 	special 68
-	inccounter 6
+	inccounter GAME_STAT_GOT_INTERVIEWED
 	release
 	end
 

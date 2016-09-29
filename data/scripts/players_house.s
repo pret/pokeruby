@@ -105,7 +105,7 @@ LittlerootTown_BrendansHouse_2F_EventScript_1B6A61:: @ 81B6A61
 	return
 
 LittlerootTown_BrendansHouse_2F_EventScript_1B6A91:: @ 81B6A91
-	inccounter 45
+	inccounter GAME_STAT_CHECKED_CLOCK
 	fadescreen 1
 	special 155
 	waitstate
@@ -298,7 +298,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_1B6C80:: @ 81B6C80
 LittlerootTown_BrendansHouse_1F_EventScript_1B6C8A:: @ 81B6C8A
 	closebutton
 	call LittlerootTown_BrendansHouse_1F_EventScript_1A02CA
-	inccounter 16
+	inccounter GAME_STAT_RESTED_AT_HOME
 	msgbox LittlerootTown_BrendansHouse_1F_Text_17276B, 4
 	release
 	end

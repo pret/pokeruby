@@ -90,6 +90,7 @@ void ConvertSymFile(std::string filename, std::string sectionName, bool common, 
                 HandleCommonInclude(incFilename, sourcePath, commonSymPath);
             else
                 printf("%s(%s);\n", incFilename.c_str(), sectionName.c_str());
+            printf(". = ALIGN(4);\n");
             break;
         }
         case Directive::Space:
