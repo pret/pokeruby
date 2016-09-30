@@ -9,3 +9,5 @@
 	.include "sound/music_player_table.s"
 	.include "sound/song_table.s"
 	.include "sound/direct_sound_data.s"
+
+	.align 2
