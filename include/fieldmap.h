@@ -16,8 +16,8 @@ struct Tileset
 
 struct MapData
 {
-    u32 width;
-    u32 height;
+    s32 width;
+    s32 height;
     void *border;
     void *map;
     struct Tileset *primaryTileset;
@@ -37,6 +37,14 @@ struct MapObjectTemplate
     u8 filler_14[0x4];
 };
 
+struct WarpEvent
+{
+    s16 x, y;
+    s8 warpId;
+    s8 mapGroup;
+    s8 mapNum;
+};
+
 struct MapEvents
 {
     u8 mapObjectCount;
@@ -45,7 +53,7 @@ struct MapEvents
     u8 bgEventCount;
 
     struct MapObjectTemplate *mapObjects;
-    void *warps;
+    struct WarpEvent *warps;
     void *coordEvents;
     void *bgEvents;
 };
@@ -55,7 +63,10 @@ struct MapHeader
     struct MapData *mapData;
     struct MapEvents *events;
     u8 *mapScripts;
-    // TODO: rest of struct
+    void *connections;
+    u16 music;
+    u16 mapDataId;
+    u8 filler_14[0x8];
 };
 
 struct MapObject

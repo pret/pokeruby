@@ -73,7 +73,7 @@ static u16 LoadFixedWidthFont_Font1Latin(struct Window *, u16);
 static u16 LoadFixedWidthFont_Font4Latin(struct Window *, u16);
 static u16 LoadFixedWidthFont_Braille(struct Window *, u16);
 static void MultistepLoadFont_LoadGlyph(struct Window *, u16, u8);
-static u8 sub_8002FA0(struct Window *, u8 *);
+static u8 sub_8002FA0(struct Window *, const u8 *);
 static u8 InterpretText(struct Window *);
 static u8 HandleExtCtrlCode(struct Window *);
 static u8 UpdateWindowText(struct Window *);
@@ -111,17 +111,11 @@ static u16 GetBlankTileNum(struct Window *);
 static u8 WaitWithDownArrow(struct Window *);
 static void DrawInitialDownArrow(struct Window *);
 static void DrawMovingDownArrow(struct Window *);
-u8 *AlignInt2(struct Window *, u8 *, s32, u8, u8);
-u8 *AlignString(struct Window *, u8 *, u8 *, u8, u8);
-void sub_8004E3C(struct WindowConfig *, u8 *, u8 *);
-u8 GetStringWidthGivenWindowConfig(struct WindowConfig *, u8 *);
 static u16 GetCursorTileNum(struct Window *, u32, u32);
 static s32 DrawGlyphTiles(struct Window *, u32, u32);
 static void UpdateTilemap(struct Window *, u32);
 static u8 GetGlyphWidth(struct Window *, u32);
 static s32 DrawGlyphTile_ShadowedFont(struct GlyphTileInfo *);
-u8 GetStringWidth(struct Window *, u8 *);
-void SkipExtCtrlCodes(u8 *);
 
 static void PrintGlyph_TextMode0(struct Window *, u32);
 static void PrintGlyph_TextMode1(struct Window *, u32);
@@ -1954,7 +1948,7 @@ void InitWindowFromConfig(struct Window *win, struct WindowConfig *winConfig)
     SetForegroundColor(win, winConfig->foregroundColor);
 }
 
-void InitWindow(struct Window *win, u8 *text, u16 tileDataStartOffset, u8 left, u8 top)
+void InitWindow(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 left, u8 top)
 {
     struct WindowConfig *winConfig = win->config;
     win->textMode = winConfig->textMode;
@@ -1988,7 +1982,7 @@ void InitWindow(struct Window *win, u8 *text, u16 tileDataStartOffset, u8 left, 
     SetForegroundColor(win, winConfig->foregroundColor);
 }
 
-void sub_8002E4C(struct Window *win, u8 *text, u16 tileDataStartOffset, u8 left, u16 top, u32 a6)
+void sub_8002E4C(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 left, u16 top, u32 a6)
 {
     u8 val;
 
@@ -2003,7 +1997,7 @@ void sub_8002E4C(struct Window *win, u8 *text, u16 tileDataStartOffset, u8 left,
         ClipLeft(win);
 }
 
-void sub_8002E90(struct Window *win, u8 *text)
+void sub_8002E90(struct Window *win, const u8 *text)
 {
     win->state = WIN_STATE_NORMAL;
     win->text = text;
@@ -2014,7 +2008,7 @@ void sub_8002E90(struct Window *win, u8 *text)
     win->delayCounter = 0;
 }
 
-void sub_8002EB0(struct Window *win, u8 *text, u16 tileDataStartOffset, u8 left, u8 top)
+void sub_8002EB0(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 left, u8 top)
 {
     gMain.watchedKeysMask = A_BUTTON | B_BUTTON;
     gMain.watchedKeysPressed = 0;
@@ -2054,11 +2048,11 @@ u8 sub_8002F44(struct Window *win)
     return 1;
 }
 
-static u8 sub_8002FA0(struct Window *win, u8 *text)
+static u8 sub_8002FA0(struct Window *win, const u8 *text)
 {
     u8 retVal;
     u8 savedCharset = win->charset;
-    u8 *savedText = win->text;
+    const u8 *savedText = win->text;
     u16 savedTextIndex = win->textIndex;
     win->text = text;
     win->textIndex = 0;
@@ -2335,7 +2329,7 @@ u8 sub_8003418(struct Window *win)
     return retVal;
 }
 
-u8 sub_8003460(struct Window *win, u8 *text, u16 tileDataStartOffset, u8 left, u8 top)
+u8 sub_8003460(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 left, u8 top)
 {
     InitWindow(win, text, tileDataStartOffset, left, top);
     return sub_8002F44(win);
@@ -2370,7 +2364,7 @@ u8 *sub_8003504(u8 *dest, s32 value, u8 alignAmount, u8 alignType)
     return AlignInt2(&sTempWindow, dest, value, alignAmount, alignType);
 }
 
-u8 *sub_8003558(u8 *dest, u8 *src, u8 alignAmount, u8 alignType)
+u8 *sub_8003558(u8 *dest, const u8 *src, u8 alignAmount, u8 alignType)
 {
     sTempWindow.config = (struct WindowConfig *)&gWindowConfig_81E6C74;
     InitWindow(&sTempWindow, src, 0, 0, 0);
@@ -3500,7 +3494,7 @@ u8 *AlignInt2(struct Window *win, u8 *dest, s32 value, u8 alignAmount, u8 alignT
     return dest;
 }
 
-u8 *AlignString(struct Window *win, u8 *dest, u8 *src, u8 alignAmount, u8 alignType)
+u8 *AlignString(struct Window *win, u8 *dest, const u8 *src, u8 alignAmount, u8 alignType)
 {
     u8 width;
     switch (alignType)
@@ -3547,7 +3541,7 @@ u8 *AlignString(struct Window *win, u8 *dest, u8 *src, u8 alignAmount, u8 alignT
     return dest;
 }
 
-u8 GetStringWidth(struct Window *win, u8 *s)
+u8 GetStringWidth(struct Window *win, const u8 *s)
 {
     u8 width = 0;
     u8 savedFontNum = win->fontNum;
@@ -3614,13 +3608,13 @@ u8 GetStringWidth(struct Window *win, u8 *s)
     return width;
 }
 
-u8 sub_8004D04(struct Window *win, u8 *text, u16 tileDataStartOffset, u8 left, u16 top, u32 a6)
+u8 sub_8004D04(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 left, u16 top, u32 a6)
 {
     sub_8002E4C(win, text, tileDataStartOffset, left, top, a6);
     return sub_8002F44(win);
 }
 
-u8 sub_8004D38(struct Window *win, u8 *text, u16 tileDataStartOffset, u8 left, u8 top)
+u8 sub_8004D38(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 left, u8 top)
 {
     u8 width = GetStringWidth(win, text);
     InitWindow(win, text, tileDataStartOffset, left - ((u32)(width + 7) >> 3), top);
@@ -3632,7 +3626,7 @@ u8 sub_8004D38(struct Window *win, u8 *text, u16 tileDataStartOffset, u8 left, u
     return sub_8002F44(win);
 }
 
-u8 sub_8004DB0(struct Window *win, u8 *text, u16 tileDataStartOffset, u8 left, u8 top, u16 a6)
+u8 sub_8004DB0(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 left, u8 top, u16 a6)
 {
     register u32 val asm("r5") = (u8)((a6 >> 1) - (GetStringWidth(win, text) >> 1));
     left += (val >> 3);
@@ -3654,7 +3648,7 @@ void sub_8004E28(struct Window *win, u8 *foreground, u8 *background, u8 *shadow)
     *shadow = win->shadowColor;
 }
 
-void sub_8004E3C(struct WindowConfig *winConfig, u8 *tileData, u8 *text)
+void sub_8004E3C(struct WindowConfig *winConfig, u8 *tileData, const u8 *text)
 {
     sTempWindow.config = winConfig;
     InitWindow(&sTempWindow, text, 0, 0, 0);
@@ -3662,7 +3656,7 @@ void sub_8004E3C(struct WindowConfig *winConfig, u8 *tileData, u8 *text)
     sub_8002F44(&sTempWindow);
 }
 
-u8 GetStringWidthGivenWindowConfig(struct WindowConfig *winConfig, u8 *s)
+u8 GetStringWidthGivenWindowConfig(struct WindowConfig *winConfig, const u8 *s)
 {
     sTempWindow.config = winConfig;
     InitWindow(&sTempWindow, s, 0, 0, 0);
@@ -3714,7 +3708,7 @@ void SkipExtCtrlCodes(u8 *str)
     str[destIndex] = 0xFF;
 }
 
-static u8 *SkipExtCtrlCode(u8 *s)
+static const u8 *SkipExtCtrlCode(const u8 *s)
 {
     while (*s == 0xFC)
     {
@@ -3725,7 +3719,7 @@ static u8 *SkipExtCtrlCode(u8 *s)
     return s;
 }
 
-s32 StringCompareWithoutExtCtrlCodes(u8 *str1, u8 *str2)
+s32 StringCompareWithoutExtCtrlCodes(const u8 *str1, const u8 *str2)
 {
     s32 retVal = 0;
 
@@ -3759,7 +3753,7 @@ s32 StringCompareWithoutExtCtrlCodes(u8 *str1, u8 *str2)
     return retVal;
 }
 
-u8 sub_8004FD0(struct Window *win, u8 *dest, u8 *src, u16 tileDataStartOffset, u8 left, u16 top, u8 width, u32 a8)
+u8 sub_8004FD0(struct Window *win, u8 *dest, const u8 *src, u16 tileDataStartOffset, u8 left, u16 top, u8 width, u32 a8)
 {
     u8 newlineCount = 0;
     u8 extCtrlCodeLength;
