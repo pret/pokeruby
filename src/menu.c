@@ -1,4 +1,5 @@
 #include "global.h"
+#include "menu.h"
 #include "main.h"
 #include "text.h"
 #include "songs.h"
@@ -17,72 +18,13 @@ struct Menu
     u8 columnXCoords[8];
 };
 
-void InitMenuWindow(struct WindowConfig *);
-void MultistepInitMenuWindowBegin(struct WindowConfig *);
-void MultistepInitMenuWindowInternal(struct WindowConfig *, u16);
-bool32 MultistepInitMenuWindowContinue(void);
-void InitMenuWindowInternal(struct WindowConfig *, u16);
-void unref_sub_8071DA4(struct WindowConfig *, u16);
-void MenuLoadTextWindowGraphics_OverrideFrameType(u8);
-void MenuLoadTextWindowGraphics(void);
-void BasicInitMenuWindow(struct WindowConfig *);
-void MenuPrint(u8 *, u8, u8);
-void MenuZeroFillWindowRect(u8, u8, u8, u8);
-void MenuFillWindowRectWithBlankTile(u8, u8, u8, u8);
-void MenuZeroFillScreen(void);
-void MenuDrawTextWindow(u8, u8, u8, u8);
-void sub_8071F40(u8 *);
-void sub_8071F60(u8, u8, u8, u8);
-u16 unref_sub_8071F98(u8, u8);
-void unref_sub_8071FBC(u16, u8, u8, u8, u8);
-void MenuDisplayMessageBox(void);
-void MenuPrintMessage(u8 *, u8, u8);
-void sub_8072044(u8 *);
-void MenuSetText(u8 *);
-u8 MenuUpdateWindowText(void);
-u8 unref_sub_8072098(void);
-void sub_80720B0(void);
-u8 MoveMenuCursor(s8);
-u8 MoveMenuCursorNoWrap(s8);
-u8 GetMenuCursorPos(void);
-s8 ProcessMenuInput(void);
-s8 ProcessMenuInputNoWrap(void);
-u8 MoveMenuCursor3(s8);
-u8 MoveMenuCursor4(s8);
-bool8 sub_80723D4(void);
-u8 sub_8072484(u8, u8, u8, u8, u8, u8, u32);
-u8 sub_80724F4(u8, u8, u8, u8*[][2], u8);
-void sub_8072620(u8, u8, u8, u8*[][2], u8);
-void sub_807274C(u8, u8, u8, u8, u8*[][2], u8, u32);
-s8 sub_80727CC(void);
-u8 sub_807288C(u8);
-void PrintMenuItems(u8, u8, u8, u8*[][2]);
-void PrintMenuItemsReordered(u8, u8, u8, u8*[][2], u8*);
-void InitYesNoMenu(u8, u8, u8);
-void DisplayYesNoMenu(u8, u8, u32);
-s8 ProcessMenuInputNoWrap_(void);
-u8 sub_80729D8(u8 *, u8, u16, u8);
-u8 sub_8072A18(u8 *, u8, u16, u8, u32);
-u8 unref_sub_8072A5C(u8 *, u8 *, u8, u16, u8, u32);
-int sub_8072AB0(u8 *, u8, u16, u8, u8, u32);
-void sub_8072B4C(u8 *, u8, u8);
-void sub_8072B80(u8 *, u8, u8, u8 *);
-void sub_8072BD8(u8 *, u8, u8, u16);
-u8 *sub_8072C14(u8 *, s32, u8, u8);
-u8 *sub_8072C44(u8 *, s32, u8, u8);
-u8 *sub_8072C74(u8 *, u8 *, u8, u8);
-u8 sub_8072CA4(u8 *s);
-u8 sub_8072CBC(void);
-void sub_8072CD4(u8 *, u8 *, u8 *);
-u32 MenuUpdateWindowText_OverrideLineLength(u8);
-struct Window * unref_sub_8072D0C(void);
-void sub_8072D18(u8, u8);
-u8 InitMenu(u8, u8, u8, u8, u8, u8);
-void RedrawMenuCursor(u8, u8);
-void unref_sub_8072DC0(void);
-void sub_8072DCC(u8);
-void sub_8072DDC(u8);
-void sub_8072DEC(void);
+static void MultistepInitMenuWindowInternal(struct WindowConfig *, u16);
+static void InitMenuWindowInternal(struct WindowConfig *, u16);
+static bool8 sub_80723D4(void);
+static u8 sub_8072484(u8, u8, u8, u8, u8, u8, u32);
+static u8 sub_80724F4(u8, u8, u8, u8 * const [][2], u8);
+static void sub_8072620(u8, u8, u8, u8 * const [][2], u8);
+static void sub_8072D18(u8, u8);
 
 extern void sub_814A5C0(u8, u16, u8, u16, u8);
 extern void sub_814A880(u8, u8);
@@ -113,7 +55,7 @@ void MultistepInitMenuWindowBegin(struct WindowConfig *winConfig)
     MultistepInitMenuWindowInternal(winConfig, 1);
 }
 
-void MultistepInitMenuWindowInternal(struct WindowConfig *winConfig, u16 tileOffset)
+static void MultistepInitMenuWindowInternal(struct WindowConfig *winConfig, u16 tileOffset)
 {
     gMenuMultistepInitState = 0;
     gMenuTextTileOffset = tileOffset;
@@ -150,7 +92,7 @@ bool32 MultistepInitMenuWindowContinue(void)
     }
 }
 
-void InitMenuWindowInternal(struct WindowConfig *winConfig, u16 tileOffset)
+static void InitMenuWindowInternal(struct WindowConfig *winConfig, u16 tileOffset)
 {
     gMenuWindowPtr = &gMenuWindow;
     InitWindowFromConfig(&gMenuWindow, winConfig);
@@ -239,17 +181,17 @@ void MenuDisplayMessageBox(void)
     DisplayMessageBox(gMenuWindowPtr);
 }
 
-void MenuPrintMessage(u8 *str, u8 left, u8 top)
+void MenuPrintMessage(const u8 *str, u8 left, u8 top)
 {
     sub_8002EB0(gMenuWindowPtr, str, gMenuTextTileOffset, left, top);
 }
 
-void sub_8072044(u8 *str)
+void sub_8072044(const u8 *str)
 {
     sub_8002EB0(gMenuWindowPtr, str, gMenuTextTileOffset, 2, 15);
 }
 
-void MenuSetText(u8 *str)
+void MenuSetText(const u8 *str)
 {
     sub_8002E90(gMenuWindowPtr, str);
 }
@@ -418,7 +360,7 @@ u8 MoveMenuCursor4(s8 delta)
     return gMenu.cursorPos;
 }
 
-bool8 sub_80723D4(void)
+static bool8 sub_80723D4(void)
 {
     if ((gMain.newKeys & DPAD_UP) && gMenu.cursorPos < gMenu.width)
         return TRUE;
@@ -438,7 +380,7 @@ bool8 sub_80723D4(void)
     return FALSE;
 }
 
-u8 sub_8072484(u8 a1, u8 a2, u8 menuItemCount, u8 a4, u8 width, u8 a6, u32 a7)
+static u8 sub_8072484(u8 a1, u8 a2, u8 menuItemCount, u8 a4, u8 width, u8 a6, u32 a7)
 {
     u8 v7;
 
@@ -452,7 +394,7 @@ u8 sub_8072484(u8 a1, u8 a2, u8 menuItemCount, u8 a4, u8 width, u8 a6, u32 a7)
     return a4;
 }
 
-u8 sub_80724F4(u8 left, u8 top, u8 menuItemCount, u8 *menuItems[][2], u8 columnCount)
+static u8 sub_80724F4(u8 left, u8 top, u8 menuItemCount, u8 * const menuItems[][2], u8 columnCount)
 {
     u8 i;
     u8 maxWidth;
@@ -510,7 +452,7 @@ u8 sub_80724F4(u8 left, u8 top, u8 menuItemCount, u8 *menuItems[][2], u8 columnC
     return maxWidth;
 }
 
-void sub_8072620(u8 left, u8 top, u8 menuItemCount, u8 *menuItems[][2], u8 columnCount)
+static void sub_8072620(u8 left, u8 top, u8 menuItemCount, u8 * const menuItems[][2], u8 columnCount)
 {
     u8 i;
     u8 maxWidth;
@@ -544,7 +486,7 @@ void sub_8072620(u8 left, u8 top, u8 menuItemCount, u8 *menuItems[][2], u8 colum
     }
 }
 
-void sub_807274C(u8 left, u8 top, u8 menuItemCount, u8 a4, u8 *menuItems[][2], u8 columnCount, u32 a7)
+void sub_807274C(u8 left, u8 top, u8 menuItemCount, u8 a4, u8 * const menuItems[][2], u8 columnCount, u32 a7)
 {
     u8 maxWidth = sub_80724F4(left, top, menuItemCount, menuItems, columnCount);
 
@@ -602,7 +544,7 @@ u8 sub_807288C(u8 column)
     return gMenu.columnXCoords[column];
 }
 
-void PrintMenuItems(u8 left, u8 top, u8 menuItemCount, u8 *menuItems[][2])
+void PrintMenuItems(u8 left, u8 top, u8 menuItemCount, u8 * const menuItems[][2])
 {
     u8 i;
 
@@ -610,7 +552,7 @@ void PrintMenuItems(u8 left, u8 top, u8 menuItemCount, u8 *menuItems[][2])
         MenuPrint(menuItems[i][0], left, top + 2 * i);
 }
 
-void PrintMenuItemsReordered(u8 left, u8 top, u8 menuItemCount, u8 *menuItems[][2], u8 *order)
+void PrintMenuItemsReordered(u8 left, u8 top, u8 menuItemCount, u8 * const menuItems[][2], u8 *order)
 {
     u8 i;
 
@@ -722,7 +664,7 @@ struct Window *unref_sub_8072D0C(void)
     return gMenuWindowPtr;
 }
 
-void sub_8072D18(u8 a1, u8 a2)
+static void sub_8072D18(u8 a1, u8 a2)
 {
     sub_814A5C0(a1, 0xFFFF, 12, 11679, 8 * a2);
 }

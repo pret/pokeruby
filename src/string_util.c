@@ -77,7 +77,7 @@ extern u8 gExpandedPlaceholder_Groudon[];
 extern u8 gExpandedPlaceholder_Brendan[];
 extern u8 gExpandedPlaceholder_May[];
 
-u8 *StringCopy10(u8 *dest, u8 *src)
+u8 *StringCopy10(u8 *dest, const u8 *src)
 {
     u8 i;
     u32 limit = 10;
@@ -107,7 +107,7 @@ u8 *StringGetEnd10(u8 *str)
     return &str[i];
 }
 
-u8 *StringCopy8(u8 *dest, u8 *src)
+u8 *StringCopy8(u8 *dest, const u8 *src)
 {
     s32 i;
 
@@ -123,7 +123,7 @@ u8 *StringCopy8(u8 *dest, u8 *src)
     return &dest[i];
 }
 
-u8 *StringCopy(u8 *dest, u8 *src)
+u8 *StringCopy(u8 *dest, const u8 *src)
 {
     while (*src != EOS)
     {
@@ -136,7 +136,7 @@ u8 *StringCopy(u8 *dest, u8 *src)
     return dest;
 }
 
-u8 *StringAppend(u8 *dest, u8 *src)
+u8 *StringAppend(u8 *dest, const u8 *src)
 {
     while (*dest != EOS)
         dest++;
@@ -144,7 +144,7 @@ u8 *StringAppend(u8 *dest, u8 *src)
     return StringCopy(dest, src);
 }
 
-u8 *StringCopyN(u8 *dest, u8 *src, u8 n)
+u8 *StringCopyN(u8 *dest, const u8 *src, u8 n)
 {
     u16 i;
 
@@ -154,7 +154,7 @@ u8 *StringCopyN(u8 *dest, u8 *src, u8 n)
     return &dest[n];
 }
 
-u8 *StringAppendN(u8 *dest, u8 *src, u8 n)
+u8 *StringAppendN(u8 *dest, const u8 *src, u8 n)
 {
     while (*dest != EOS)
         dest++;
@@ -162,7 +162,7 @@ u8 *StringAppendN(u8 *dest, u8 *src, u8 n)
     return StringCopyN(dest, src, n);
 }
 
-u16 StringLength(u8 *str)
+u16 StringLength(const u8 *str)
 {
     u16 length = 0;
 
@@ -177,7 +177,7 @@ u16 StringLength(u8 *str)
     return length;
 }
 
-s32 StringCompare(u8 *str1, u8 *str2)
+s32 StringCompare(const u8 *str1, const u8 *str2)
 {
     while (*str1 == *str2)
     {
@@ -190,7 +190,7 @@ s32 StringCompare(u8 *str1, u8 *str2)
     return *str1 - *str2;
 }
 
-s32 StringCompareN(u8 *str1, u8 *str2, u32 n)
+s32 StringCompareN(const u8 *str1, const u8 *str2, u32 n)
 {
     while (*str1 == *str2)
     {
@@ -408,7 +408,7 @@ u8 *ConvertIntToDecimalString(u8 *dest, s32 value)
     return dest;
 }
 
-u8 *StringExpandPlaceholders(u8 *dest, u8 *src)
+u8 *StringExpandPlaceholders(u8 *dest, const u8 *src)
 {
     for (;;)
     {
@@ -443,7 +443,7 @@ u8 *StringExpandPlaceholders(u8 *dest, u8 *src)
     }
 }
 
-u8 *StringBraille(u8 *dest, u8 *src)
+u8 *StringBraille(u8 *dest, const u8 *src)
 {
     u8 setBrailleFont[4];
     u8 gotoLine2[5];
@@ -554,7 +554,7 @@ u8 *StringFill(u8 *dest, u8 c, u16 n)
     return dest;
 }
 
-u8 *StringCopyPadded(u8 *dest, u8 *src, u8 c, u16 n)
+u8 *StringCopyPadded(u8 *dest, const u8 *src, u8 c, u16 n)
 {
     while (*src != EOS)
     {

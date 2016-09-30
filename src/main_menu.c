@@ -9,42 +9,33 @@
 #include "string_util.h"
 #include "species.h"
 #include "pokemon.h"
+#include "menu.h"
 
-extern u8 MenuUpdateWindowText(void);
-extern void MenuPrint(u8 *, u8, u8);
+#define BirchSpeechUpdateWindowText() ((u8)MenuUpdateWindowText_OverrideLineLength(24))
+
 extern void CB2_ContinueSavedGame(void);
 extern void CB2_InitMysteryEventMenu(void);
 extern void CB2_InitOptionMenu(void);
 extern void CB2_InitTitleScreen(void);
 extern void FormatPlayTime(u8 *str, u16 hours, u16 minutes, bool16 colon);
-extern u8 *sub_8072C74(u8 *, u8 *, u8, u8);
 extern u16 GetPokedexSeenCount(void);
-extern u8 *sub_8072C14(u8 *, s32, u8, u8);
-extern u8 sub_80729D8(u8 *, u8, u16, u8);
 extern u8 GetBadgeCount(void);
 extern void Task_Birch1(u8);
-void MenuPrintMessage(const u8 *string, u8 a, u8 b);
-u8 MenuUpdateWindowText_OverrideLineLength(u8 a);
-void sub_8072DEC(void);
 u8 sub_8075374(void);
-void MenuSetText(u32);
 void cry_related(u16, u8);
 void audio_play(u8 a);
-void MenuZeroFillWindowRect(u8 a, u8 b, u8 c, u8 d);
 u8 GetMenuCursorPos(void);
 void DoNamingScreen(u8 r0, struct SaveBlock2 *r1, u16 r2, u16 r3, u8 s0, MainCallback s4);
 void DisplayYesNoMenu(u8 r0, u8 r1, u32 r2);
 s8 ProcessMenuInputNoWrap_(void);
 void CB2_NewGame(void);
 void LZ77UnCompVram(const void *src, void *dest);
-void InitMenuWindow(const struct WindowConfig *);
 void CB2_MainMenu(void);
 void VBlankCB_MainMenu(void);
 void DecompressPicFromTable_2(const struct SpriteSheet *, u8, u8, void *, void *, u32);
 void LoadCompressedObjectPalette(const struct SpritePalette *);
 u8 AddNewGameBirchObject(u8, u8, u8);
 u8 sub_80859BC(u8, u16, u16, u8, void *);
-void MenuDrawTextWindow(u8 a, u8 b, u8 c, u8 d);
 
 extern struct PaletteFadeControl gPaletteFade;
 extern u8 gSaveFileDeletedMessage[];
@@ -140,7 +131,7 @@ u32 InitMainMenu(u8 a1)
     ResetSpriteData();
     FreeAllSpritePalettes();
     SetUpWindowConfig(&gWindowConfig_81E6C3C);
-    InitMenuWindow(&gWindowConfig_81E6CE4);
+    InitMenuWindow((struct WindowConfig *)&gWindowConfig_81E6CE4);
 
     if (a1)
         BeginNormalPaletteFade(-1, 0, 0x10, 0, 0x0000); // fade to black
@@ -722,7 +713,7 @@ void set_default_player_name(u8 a);
 void Task_Birch1(u8 taskId)
 {
     SetUpWindowConfig(&gWindowConfig_81E6C3C);
-    InitMenuWindow(&gWindowConfig_81E6CE4);
+    InitMenuWindow((struct WindowConfig *)&gWindowConfig_81E6CE4);
     REG_WIN0H = 0;
     REG_WIN0V = 0;
     REG_WININ = 0;
@@ -791,7 +782,7 @@ void task_new_game_prof_birch_speech_3(u8 taskId)
 
 void task_new_game_prof_birch_speech_4(u8 taskId)
 {
-    if (!gPaletteFade.active && MenuUpdateWindowText_OverrideLineLength(24))
+    if (!gPaletteFade.active && BirchSpeechUpdateWindowText())
     {
         gTasks[taskId].func = task_new_game_prof_birch_speech_5;
         MenuPrintMessage(gBirchSpeech_ThisIsPokemon, 3, 14);
@@ -800,7 +791,7 @@ void task_new_game_prof_birch_speech_4(u8 taskId)
 
 void task_new_game_prof_birch_speech_5(u8 taskId)
 {
-    if (MenuUpdateWindowText_OverrideLineLength(24))
+    if (BirchSpeechUpdateWindowText())
         gTasks[taskId].func = task_new_game_prof_birch_speech_6;
 }
 
@@ -823,7 +814,7 @@ void task_new_game_prof_birch_speech_7(u8 taskId)
     {
         if (gTasks[taskId].data[7] > 95)
         {
-            MenuSetText((u32)&gSystemText_NewPara);
+            MenuSetText(gSystemText_NewPara);
             gTasks[taskId].func = task_new_game_prof_birch_speech_8;
         }
     }
@@ -840,7 +831,7 @@ void task_new_game_prof_birch_speech_7(u8 taskId)
 
 void task_new_game_prof_birch_speech_8(u8 taskId)
 {
-    if (MenuUpdateWindowText_OverrideLineLength(24))
+    if (BirchSpeechUpdateWindowText())
     {
         MenuPrintMessage(gBirchSpeech_WorldInhabitedByPokemon, 3, 14);
         gTasks[taskId].func = task_new_game_prof_birch_speech_9;
@@ -849,7 +840,7 @@ void task_new_game_prof_birch_speech_8(u8 taskId)
 
 void task_new_game_prof_birch_speech_9(u8 taskId)
 {
-    if (MenuUpdateWindowText_OverrideLineLength(24))
+    if (BirchSpeechUpdateWindowText())
     {
         MenuDrawTextWindow(2, 13, 27, 18);
         MenuPrintMessage(gBirchSpeech_AndYouAre, 3, 14);
@@ -859,7 +850,7 @@ void task_new_game_prof_birch_speech_9(u8 taskId)
 
 void task_new_game_prof_birch_speech_10(u8 taskId)
 {
-    if (MenuUpdateWindowText_OverrideLineLength(24))
+    if (BirchSpeechUpdateWindowText())
     {
         gSprites[gTasks[taskId].data[8]].oam.objMode = ST_OAM_OBJ_BLEND;
         gSprites[gTasks[taskId].data[9]].oam.objMode = ST_OAM_OBJ_BLEND;
@@ -930,7 +921,7 @@ void task_new_game_prof_birch_speech_14(u8 taskId)
 
 void task_new_game_prof_birch_speech_15(u8 taskId)
 {
-    if (MenuUpdateWindowText_OverrideLineLength(24))
+    if (BirchSpeechUpdateWindowText())
     {
         CreateGenderMenu(2, 4);
         gTasks[taskId].func = task_new_game_prof_birch_speech_16;
@@ -1028,7 +1019,7 @@ void sub_800A974(u8 taskId)
 
 void Task_800A9B4(u8 taskId)
 {
-    if (MenuUpdateWindowText_OverrideLineLength(24))
+    if (BirchSpeechUpdateWindowText())
     {
         CreateNameMenu(2, 1);
         gTasks[taskId].func = sub_800A9EC;
@@ -1084,7 +1075,7 @@ void task_new_game_prof_birch_speech_part2_1(u8 taskId)
 
 void sub_800AB38(u8 taskId)
 {
-    if (MenuUpdateWindowText_OverrideLineLength(24))
+    if (BirchSpeechUpdateWindowText())
     {
         DisplayYesNoMenu(2, 1, 1);
         gTasks[taskId].func = task_new_game_prof_birch_speech_part2_4;
@@ -1170,7 +1161,7 @@ void task_new_game_prof_birch_speech_part2_7(u8 taskId)
         spriteId = gTasks[taskId].data[9];
         gSprites[spriteId].oam.objMode = ST_OAM_OBJ_NORMAL;
 
-        if (MenuUpdateWindowText_OverrideLineLength(24))
+        if (BirchSpeechUpdateWindowText())
         {
             spriteId = gTasks[taskId].data[8];
             gSprites[spriteId].oam.objMode = ST_OAM_OBJ_BLEND;
@@ -1235,7 +1226,7 @@ void task_new_game_prof_birch_speech_part2_9(u8 taskId)
         spriteId = gTasks[taskId].data[2];
         gSprites[spriteId].oam.objMode = ST_OAM_OBJ_NORMAL;
 
-        if (MenuUpdateWindowText_OverrideLineLength(24))
+        if (BirchSpeechUpdateWindowText())
         {
             u8 spriteId;
 
@@ -1324,7 +1315,7 @@ void new_game_prof_birch_speech_part2_start()
     AddBirchSpeechObjects(taskId);
 
     SetUpWindowConfig(&gWindowConfig_81E6C3C);
-    InitMenuWindow(&gWindowConfig_81E6CE4);
+    InitMenuWindow((struct WindowConfig *)&gWindowConfig_81E6CE4);
 
     if (gSaveBlock2.playerGender != MALE)
     {
@@ -1591,14 +1582,14 @@ void CreateNameMenu(u8 left, u8 top)
 
     if (gSaveBlock2.playerGender == MALE)
     {
-        PrintMenuItems((u8)(left + 1), (u8)(top + 1), 5, gUnknown_081E79C0);
+        PrintMenuItems(left + 1, top + 1, 5, gUnknown_081E79C0);
     }
     else
     {
-        PrintMenuItems((u8)(left + 1), (u8)(top + 1), 5, gUnknown_081E79E8);
+        PrintMenuItems(left + 1, top + 1, 5, gUnknown_081E79E8);
     }
 
-    InitMenu(0, (u8)(left + 1), (u8)(top + 1), 5, 0, 9);
+    InitMenu(0, left + 1, top + 1, 5, 0, 9);
 }
 
 s8 NameMenuProcessInput(void)
