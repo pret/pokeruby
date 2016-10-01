@@ -71,6 +71,8 @@ SECTIONS {
         asm/rom_8074BAC.o(.text);
         src/task.o(.text);
         asm/rom5.o(.text);
+        src/wallclock.o(.text);
+        asm/rom6.o(.text);
     } =0
 
     script_data :

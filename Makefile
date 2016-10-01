@@ -4,7 +4,7 @@ AS      := $(DEVKITARM)/bin/arm-none-eabi-as
 ASFLAGS := -mcpu=arm7tdmi
 
 CC1    := tools/agbcc/bin/agbcc
-CFLAGS := -mthumb-interwork -O2 -g
+CFLAGS := -mthumb-interwork -O2 -g -fhex-asm
 
 CPP      := $(DEVKITARM)/bin/arm-none-eabi-cpp
 CPPFLAGS := -I tools/agbcc/include -iquote include -nostdinc -undef
@@ -46,7 +46,7 @@ compare_sapphire compare_sapphire_rev1 compare_sapphire_rev2
 C_SRCS := $(wildcard src/*.c)
 C_OBJS := $(C_SRCS:%.c=%.o)
 
-ASM_OBJS := asm/crt0.o asm/rom3.o asm/rom_8040EB4.o asm/rom4.o asm/rom_8074BAC.o asm/rom5.o \
+ASM_OBJS := asm/crt0.o asm/rom3.o asm/rom_8040EB4.o asm/rom4.o asm/rom_8074BAC.o asm/rom5.o asm/rom6.o\
 asm/libgcnmultiboot.o asm/m4a_1.o asm/m4a_3.o asm/libagbsyscall.o \
 asm/rom_8072DF8.o asm/rom_8065394.o asm/rom_803D1FC.o asm/rom_803BA2C.o
 
