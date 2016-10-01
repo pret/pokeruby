@@ -1,5 +1,5 @@
 LavaridgeTown_MapConnectionsList:: @ 8308670
-	connection right, -40, Route112, 0
+	connection right, -40, Route112
 
 LavaridgeTown_MapConnections:: @ 830867C
 	.4byte 0x1
