@@ -5137,12 +5137,12 @@ _080408B8: .4byte 0x000001c9
 	thumb_func_start sub_80408BC
 sub_80408BC: @ 80408BC
 	push {lr}
-	bl map_music_set_to_zero
+	bl ResetMapMusic
 	bl m4aMPlayAllStop
 	bl sub_8040728
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_8075474
+	bl PlayBGM
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80408BC
@@ -5152,18 +5152,18 @@ current_map_music_set__default_for_battle: @ 80408D8
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
-	bl map_music_set_to_zero
+	bl ResetMapMusic
 	bl m4aMPlayAllStop
 	cmp r4, 0
 	beq _080408F2
 	adds r0, r4, 0
-	bl current_map_music_set
+	bl PlayNewMapMusic
 	b _080408FE
 _080408F2:
 	bl sub_8040728
 	lsls r0, 16
 	lsrs r0, 16
-	bl current_map_music_set
+	bl PlayNewMapMusic
 _080408FE:
 	pop {r4}
 	pop {r0}

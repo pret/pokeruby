@@ -6,6 +6,7 @@
 #include "rtc.h"
 #include "link.h"
 #include "rng.h"
+#include "sound.h"
 
 extern struct SoundInfo gSoundInfo;
 extern u32 gUnknown_3004820;
@@ -68,9 +69,7 @@ extern void c2_copyright_1();
 extern u32 sub_80558AC(void);
 extern u32 sub_8055910(void);
 extern u32 sub_8055940(void);
-extern void sound_something(void);
 extern void CheckForFlashMemory(void);
-extern void sound_sources_off(void);
 
 void UpdateLinkAndCallCallbacks(void);
 void InitMainCallbacks(void);
@@ -99,7 +98,7 @@ void AgbMain()
     RtcInit();
     CheckForFlashMemory();
     InitMainCallbacks();
-    sound_sources_off();
+    InitMapMusic();
     SeedRngWithRtc();
 
     gUnknown_3001BB4 = 0;
@@ -142,7 +141,7 @@ void AgbMain()
         }
 
         PlayTimeCounter_Update();
-        sound_something();
+        MapMusicMain();
         WaitForVBlank();
     }
 }

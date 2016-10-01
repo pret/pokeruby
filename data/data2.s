@@ -8580,8 +8580,20 @@ gTilesetAnimTable_BikeShop:: @ 837DEDC
 gDummyPaletteStructTemplate:: @ 837DEE4
 	.incbin "baserom.gba", 0x0037dee4, 0x10
 
-gUnknown_0837DEF4:: @ 837DEF4
-	.incbin "baserom.gba", 0x0037def4, 0x30
+	.align 2
+gFanfares:: @ 837DEF4
+	.2byte BGM_FANFA1,      80
+	.2byte BGM_FANFA4,     160
+	.2byte BGM_FANFA5,     220
+	.2byte BGM_ME_WAZA,    220
+	.2byte BGM_ME_ASA,     160
+	.2byte BGM_ME_BACHI,   340
+	.2byte BGM_ME_WASURE,  180
+	.2byte BGM_ME_KINOMI,  120
+	.2byte BGM_ME_TAMA,    710
+	.2byte BGM_ME_B_BIG,   250
+	.2byte BGM_ME_B_SMALL, 150
+	.2byte BGM_ME_ZANNEN,  160
 
 	.align 2
 gOamData_837DF24:: @ 837DF24

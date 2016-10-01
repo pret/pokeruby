@@ -10,6 +10,7 @@
 #include "species.h"
 #include "pokemon.h"
 #include "menu.h"
+#include "sound.h"
 
 #define BirchSpeechUpdateWindowText() ((u8)MenuUpdateWindowText_OverrideLineLength(24))
 
@@ -20,18 +21,9 @@ extern void CB2_InitTitleScreen(void);
 extern void FormatPlayTime(u8 *str, u16 hours, u16 minutes, bool16 colon);
 extern u16 GetPokedexSeenCount(void);
 extern u8 GetBadgeCount(void);
-extern void Task_Birch1(u8);
-u8 sub_8075374(void);
-void cry_related(u16, u8);
-void audio_play(u8 a);
-u8 GetMenuCursorPos(void);
 void DoNamingScreen(u8 r0, struct SaveBlock2 *r1, u16 r2, u16 r3, u8 s0, MainCallback s4);
-void DisplayYesNoMenu(u8 r0, u8 r1, u32 r2);
-s8 ProcessMenuInputNoWrap_(void);
 void CB2_NewGame(void);
 void LZ77UnCompVram(const void *src, void *dest);
-void CB2_MainMenu(void);
-void VBlankCB_MainMenu(void);
 void DecompressPicFromTable_2(const struct SpriteSheet *, u8, u8, void *, void *, u32);
 void LoadCompressedObjectPalette(const struct SpritePalette *);
 u8 AddNewGameBirchObject(u8, u8, u8);
@@ -74,6 +66,7 @@ static void PrintPlayerName(void);
 static void PrintPlayTime(void);
 static void PrintPokedexCount(void);
 static void PrintBadgeCount(void);
+void Task_Birch1(u8);
 
 extern u16 gMainMenuPalette[];
 
@@ -349,13 +342,13 @@ bool8 MainMenuProcessKeyInput(u8 taskId)
 {
     if (gMain.newKeys & A_BUTTON)
     {
-        audio_play(SE_SELECT);
+        PlaySE(SE_SELECT);
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0x0000);
         gTasks[taskId].func = MainMenuPressedA;
     }
     else if (gMain.newKeys & B_BUTTON)
     {
-        audio_play(SE_SELECT);
+        PlaySE(SE_SELECT);
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0xFFFF);
         REG_WIN0H = WIN_RANGE(0, 240);
         REG_WIN0V = WIN_RANGE(0, 160);
@@ -738,7 +731,7 @@ void Task_Birch1(u8 taskId)
     gTasks[taskId].data[3] = 0xFF;
     gTasks[taskId].data[7] = 216;
 
-    sub_8075474(BGM_DOORO_X4);
+    PlayBGM(BGM_DOORO_X4);
 }
 
 void task_new_game_prof_birch_speech_2(u8 taskId)
@@ -750,7 +743,7 @@ void task_new_game_prof_birch_speech_2(u8 taskId)
     else
     {
         u8 spriteId = gTasks[taskId].data[8];
-        
+
         gSprites[spriteId].pos1.x = 136;
         gSprites[spriteId].pos1.y = 60;
         gSprites[spriteId].invisible = 0;
@@ -798,7 +791,7 @@ void task_new_game_prof_birch_speech_5(u8 taskId)
 void task_new_game_prof_birch_speech_6(u8 taskId)
 {
     u8 spriteId = gTasks[taskId].data[9];
-    
+
     gSprites[spriteId].pos1.x = 104;
     gSprites[spriteId].pos1.y = 72;
     gSprites[spriteId].invisible = 0;
@@ -810,7 +803,7 @@ void task_new_game_prof_birch_speech_6(u8 taskId)
 
 void task_new_game_prof_birch_speech_7(u8 taskId)
 {
-    if (sub_8075374())
+    if (IsCryFinished())
     {
         if (gTasks[taskId].data[7] > 95)
         {
@@ -818,13 +811,13 @@ void task_new_game_prof_birch_speech_7(u8 taskId)
             gTasks[taskId].func = task_new_game_prof_birch_speech_8;
         }
     }
-    
+
     if (gTasks[taskId].data[7] < 16384)
     {
         gTasks[taskId].data[7]++;
         if (gTasks[taskId].data[7] == 32)
         {
-            cry_related(SPECIES_AZURILL, 0);
+            PlayCry1(SPECIES_AZURILL, 0);
         }
     }
 }
@@ -936,14 +929,14 @@ void task_new_game_prof_birch_speech_16(u8 taskId)
     {
     case MALE:
         sub_8072DEC();
-        audio_play(SE_SELECT);
+        PlaySE(SE_SELECT);
         gSaveBlock2.playerGender = MALE;
         MenuZeroFillWindowRect(2, 4, 8, 9);
         gTasks[taskId].func = sub_800A974;
         break;
     case FEMALE:
         sub_8072DEC();
-        audio_play(SE_SELECT);
+        PlaySE(SE_SELECT);
         gSaveBlock2.playerGender = FEMALE;
         MenuZeroFillWindowRect(2, 4, 8, 9);
         gTasks[taskId].func = sub_800A974;
@@ -1037,19 +1030,19 @@ void sub_800A9EC(u8 taskId)
     case 3:
     case 4:
         sub_8072DEC();
-        audio_play(SE_SELECT);
+        PlaySE(SE_SELECT);
         MenuZeroFillWindowRect(2, 1, 22, 12);
         set_default_player_name(n);
         gTasks[taskId].func = task_new_game_prof_birch_speech_part2_1;
         break;
     case 0:
-        audio_play(SE_SELECT);
+        PlaySE(SE_SELECT);
         BeginNormalPaletteFade(-1, 0, 0, 16, 0);
         gTasks[taskId].func = sub_800AAAC;
         break;
     case -1:
         sub_8072DEC();
-        audio_play(SE_SELECT);
+        PlaySE(SE_SELECT);
         MenuZeroFillWindowRect(2, 1, 22, 12);
         gTasks[taskId].func = task_new_game_prof_birch_speech_14;
         break;
@@ -1087,7 +1080,7 @@ void task_new_game_prof_birch_speech_part2_4(u8 taskId)
     switch (ProcessMenuInputNoWrap_())
     {
     case 0:
-        audio_play(SE_SELECT);
+        PlaySE(SE_SELECT);
         MenuZeroFillWindowRect(2, 1, 8, 7);
         gSprites[gTasks[taskId].data[2]].oam.objMode = ST_OAM_OBJ_BLEND;
         sub_800B458(taskId, 2);
@@ -1096,7 +1089,7 @@ void task_new_game_prof_birch_speech_part2_4(u8 taskId)
         break;
     case -1:
     case 1:
-        audio_play(SE_SELECT);
+        PlaySE(SE_SELECT);
         MenuZeroFillWindowRect(2, 1, 8, 7);
         gTasks[taskId].func = task_new_game_prof_birch_speech_14;
         break;
@@ -1237,7 +1230,7 @@ void task_new_game_prof_birch_speech_part2_9(u8 taskId)
             StartSpriteAffineAnim(&gSprites[spriteId], 0);
             gSprites[spriteId].callback = sub_800B240;
             BeginNormalPaletteFade(0x0000FFFF, 0, 0, 0x10, 0);
-            play_sound_effect(4);
+            FadeOutBGM(4);
             gTasks[taskId].func = task_new_game_prof_birch_speech_part2_10;
         }
     }

@@ -327,7 +327,7 @@ _080758AE:
 	bx r0
 	.align 2, 0
 _080758D0: .4byte 0x0000ffff
-_080758D4: .4byte gUnknown_03007380
+_080758D4: .4byte gMPlay_BGM
 _080758D8: .4byte gUnknown_030042C4
 _080758DC: .4byte gUnknown_03004240
 _080758E0: .4byte gUnknown_03004200
@@ -879,7 +879,7 @@ _08075CE4: .4byte gUnknown_0202F7B3
 _08075CE8: .4byte gUnknown_0202F7C2
 _08075CEC: .4byte gUnknown_03004AF0
 _08075CF0:
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	beq _08075D28
@@ -960,13 +960,13 @@ _08075D8E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08075D98: .4byte gUnknown_030073C0
-_08075D9C: .4byte gUnknown_03007400
+_08075D98: .4byte gMPlay_SE1
+_08075D9C: .4byte gMPlay_SE2
 _08075DA0: .4byte gUnknown_03004AF0
 _08075DA4: .4byte 0x0000ffff
 _08075DA8: .4byte gBattleAnimPicTable
 _08075DAC: .4byte gUnknown_03004B10
-_08075DB0: .4byte gUnknown_03007380
+_08075DB0: .4byte gMPlay_BGM
 _08075DB4: .4byte gUnknown_0202F7B1
 	thumb_func_end sub_8075CB0
 
@@ -981,7 +981,7 @@ ma09_play_sound: @ 8075DB8
 	ldrb r1, [r1, 0x1]
 	lsls r1, 8
 	orrs r0, r1
-	bl audio_play
+	bl PlaySE
 	ldr r0, [r4]
 	adds r0, 0x2
 	str r0, [r4]
@@ -3546,7 +3546,7 @@ ma19_08073BC8: @ 807716C
 	lsls r1, 24
 	asrs r1, 24
 	adds r0, r4, 0
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 	ldr r0, [r5]
 	adds r0, 0x3
 	str r0, [r5]
@@ -3569,7 +3569,7 @@ ma1A_8073C00: @ 80771A4
 	bl sub_8076F98
 	lsls r0, 24
 	asrs r0, 24
-	bl sub_8075560
+	bl SE12PanpotControl
 	ldr r0, [r4]
 	adds r0, 0x1
 	str r0, [r4]
@@ -3649,7 +3649,7 @@ ma1B_8073C2C: @ 80771D0
 	strh r5, [r1, 0x10]
 	mov r0, r9
 	adds r1, r5, 0
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 	ldr r1, _0807728C
 	ldrb r0, [r1]
 	adds r0, 0x1
@@ -3741,7 +3741,7 @@ _080772FC:
 _0807730C:
 	lsls r0, r4, 24
 	asrs r0, 24
-	bl sub_8075560
+	bl SE12PanpotControl
 _08077314:
 	pop {r4-r7}
 	pop {r0}
@@ -3799,7 +3799,7 @@ sub_8077320: @ 8077320
 	strh r4, [r1, 0x10]
 	mov r0, r8
 	adds r1, r4, 0
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 	ldr r1, _080773B0
 	ldrb r0, [r1]
 	adds r0, 0x1
@@ -3891,7 +3891,7 @@ sub_80773B4: @ 80773B4
 	strh r6, [r1, 0x10]
 	mov r0, r9
 	adds r1, r6, 0
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 	ldr r1, _08077470
 	ldrb r0, [r1]
 	adds r0, 0x1
@@ -4010,7 +4010,7 @@ sub_80774FC: @ 80774FC
 	lsrs r4, 24
 	lsls r1, 24
 	asrs r1, 24
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 	cmp r4, 0
 	bne _0807754A
 	adds r0, r5, 0
@@ -4103,7 +4103,7 @@ sub_80775CC: @ 80775CC
 	ldrh r0, [r2, 0x8]
 	movs r1, 0xA
 	ldrsb r1, [r2, r1]
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 	adds r0, r4, 0
 	bl DestroyTask
 	ldr r1, _0807760C
@@ -4186,7 +4186,7 @@ ma20_wait_for_something: @ 8077684
 	ldrb r5, [r0]
 	cmp r5, 0
 	bne _080776CC
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
@@ -4208,8 +4208,8 @@ ma20_wait_for_something: @ 8077684
 	.align 2, 0
 _080776BC: .4byte gUnknown_0202F7B3
 _080776C0: .4byte gUnknown_03004AF0
-_080776C4: .4byte gUnknown_030073C0
-_080776C8: .4byte gUnknown_03007400
+_080776C4: .4byte gMPlay_SE1
+_080776C8: .4byte gMPlay_SE2
 _080776CC:
 	ldr r1, _080776DC
 	movs r0, 0
@@ -4721,8 +4721,8 @@ ma2F_stop_music: @ 8077A94
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08077AB0: .4byte gUnknown_030073C0
-_08077AB4: .4byte gUnknown_03007400
+_08077AB0: .4byte gMPlay_SE1
+_08077AB4: .4byte gMPlay_SE2
 _08077AB8: .4byte gUnknown_0202F7A4
 	thumb_func_end ma2F_stop_music
 

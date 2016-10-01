@@ -8,6 +8,7 @@
 #include "main.h"
 #include "decoration.h"
 #include "field_message_box.h"
+#include "sound.h"
 
 extern void ClearRamScript(void);
 extern u16 *GetVarPointer(u16);
@@ -50,16 +51,9 @@ extern void saved_warp2_set_2(s8, s8, s8, s8, s8, s8);
 extern void sub_8053690(s8, s8, s8, s8, s8);
 extern void sub_80536E4(s8, s8, s8, s8, s8);
 extern void sub_805363C(s8, s8, s8, s8, s8);
-extern void audio_play(u16);
-extern bool8 task_is_not_running_overworld_fanfare(void);
-extern bool8 mplay_has_finished_maybe(void);
-extern void fanfare_play(u16);
 extern void sav1_set_battle_music_maybe(u16);
 extern void sub_8053F84(void);
 extern void sub_8053FB0(u16);
-extern void sub_8074FB8(u8);
-extern bool8 sub_8074FD0(void);
-extern void sub_8074FF8(u8);
 extern u8 exec_movement(u8, u8, u8, void *);
 extern bool8 sub_80A212C(u8, u8, u8);
 extern void RemoveFieldObjectByLocalIdAndMap(u8, u8, u8);
@@ -128,8 +122,6 @@ extern void sub_80C4980(u8);
 extern u32 FieldEffectStart(u8);
 extern bool8 FieldEffectActiveListContains(u8);
 extern void sub_8053588(u8);
-extern void sub_8075178(u16, u8);
-extern bool8 sub_8075374(void);
 extern void MapGridSetMetatileIdAt(u32, u32, u16);
 extern u16 sub_8058790(u32, u32);
 extern bool8 task_overworld_door_add_if_role_69_for_opening_door_at(u32, u32);
@@ -904,13 +896,13 @@ bool8 ScrCmd_countpokemon(struct ScriptContext *ctx)
 
 bool8 ScrCmd_playsfx(struct ScriptContext *ctx)
 {
-    audio_play(ScriptReadHalfword(ctx));
+    PlaySE(ScriptReadHalfword(ctx));
     return FALSE;
 }
 
 bool8 s30_music_check_asm()
 {
-    if (!mplay_has_finished_maybe())
+    if (!IsSEPlaying())
         return TRUE;
     else
         return FALSE;
@@ -924,13 +916,13 @@ bool8 ScrCmd_checksound(struct ScriptContext *ctx)
 
 bool8 ScrCmd_fanfare(struct ScriptContext *ctx)
 {
-    fanfare_play(ScriptReadHalfword(ctx));
+    PlayFanfare(ScriptReadHalfword(ctx));
     return FALSE;
 }
 
 bool8 s32_fanfare_wait_asm()
 {
-    return task_is_not_running_overworld_fanfare();
+    return IsFanfareTaskInactive();
 }
 
 bool8 ScrCmd_waitfanfare(struct ScriptContext *ctx)
@@ -945,7 +937,7 @@ bool8 ScrCmd_playmusic(struct ScriptContext *ctx)
     bool8 val = *(ctx->scriptPtr++);
     if (val == TRUE)
         sav1_set_battle_music_maybe(songId);
-    current_map_music_set(songId);
+    PlayNewMapMusic(songId);
     return FALSE;
 }
 
@@ -971,10 +963,10 @@ bool8 ScrCmd_fadeout(struct ScriptContext *ctx)
 {
     u8 val = *(ctx->scriptPtr++);
     if (val)
-        sub_8074FB8(4 * val);
+        FadeOutBGMTemporarily(4 * val);
     else
-        sub_8074FB8(4);
-    SetupNativeScript(ctx, sub_8074FD0);
+        FadeOutBGMTemporarily(4);
+    SetupNativeScript(ctx, IsBGMPausedOrStopped);
     return TRUE;
 }
 
@@ -982,9 +974,9 @@ bool8 ScrCmd_fadein(struct ScriptContext *ctx)
 {
     u8 val = *(ctx->scriptPtr++);
     if (val)
-        sub_8074FF8(4 * val);
+        FadeInBGM(4 * val);
     else
-        sub_8074FF8(4);
+        FadeInBGM(4);
     return FALSE;
 }
 
@@ -1855,13 +1847,13 @@ bool8 ScrCmd_pokecry(struct ScriptContext *ctx)
 {
     u16 v3 = VarGet(ScriptReadHalfword(ctx));
     u16 v5 = VarGet(ScriptReadHalfword(ctx));
-    sub_8075178(v3, v5);
+    PlayCry5(v3, v5);
     return FALSE;
 }
 
 bool8 ScrCmd_waitpokecry(struct ScriptContext *ctx)
 {
-    SetupNativeScript(ctx, sub_8075374);
+    SetupNativeScript(ctx, IsCryFinished);
     return TRUE;
 }
 
@@ -1888,7 +1880,7 @@ bool8 ScrCmd_setdooropened(struct ScriptContext *ctx)
     v3 += 7;
     v4 += 7;
     v7 = sub_8058790(v3, v4);
-    audio_play(v7);
+    PlaySE(v7);
     task_overworld_door_add_if_role_69_for_opening_door_at(v3, v4);
     return FALSE;
 }

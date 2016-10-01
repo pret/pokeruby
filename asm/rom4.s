@@ -2044,7 +2044,7 @@ _08053E80:
 	thumb_func_start call_map_music_set_to_zero
 call_map_music_set_to_zero: @ 8053E84
 	push {lr}
-	bl map_music_set_to_zero
+	bl ResetMapMusic
 	pop {r0}
 	bx r0
 	thumb_func_end call_map_music_set_to_zero
@@ -2092,13 +2092,13 @@ _08053EC8:
 	beq _08053ED6
 	ldr r4, _08053EF0
 _08053ED6:
-	bl current_map_music_get
+	bl GetCurrentMapMusic
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r4, r0
 	beq _08053EE8
 	adds r0, r4, 0
-	bl current_map_music_set
+	bl PlayNewMapMusic
 _08053EE8:
 	pop {r4}
 	pop {r0}
@@ -2138,7 +2138,7 @@ sub_8053F0C: @ 8053F0C
 	bl warp1_target_get_music
 	lsls r0, 16
 	lsrs r5, r0, 16
-	bl current_map_music_get
+	bl GetCurrentMapMusic
 	lsls r0, 16
 	lsrs r4, r0, 16
 	.ifdef SAPPHIRE
@@ -2176,7 +2176,7 @@ _08053F4E:
 	adds r0, r5, 0
 	movs r1, 0x4
 	movs r2, 0x4
-	bl sub_8074D94
+	bl FadeOutAndFadeInNewMapMusic
 	b _08053F7C
 	.align 2, 0
 _08053F6C: .4byte 0x00004001
@@ -2187,7 +2187,7 @@ _08053F70: .4byte 0x0000016d
 _08053F74:
 	adds r0, r5, 0
 	movs r1, 0x8
-	bl sub_8074D60
+	bl FadeOutAndPlayNewMapMusic
 _08053F7C:
 	pop {r4-r6}
 	pop {r0}
@@ -2197,7 +2197,7 @@ _08053F7C:
 	thumb_func_start sub_8053F84
 sub_8053F84: @ 8053F84
 	push {r4,lr}
-	bl current_map_music_get
+	bl GetCurrentMapMusic
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -2210,7 +2210,7 @@ sub_8053F84: @ 8053F84
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x8
-	bl sub_8074D60
+	bl FadeOutAndPlayNewMapMusic
 _08053FAA:
 	pop {r4}
 	pop {r0}
@@ -2222,7 +2222,7 @@ sub_8053FB0: @ 8053FB0
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
-	bl current_map_music_get
+	bl GetCurrentMapMusic
 	lsls r0, 16
 	lsrs r1, r0, 16
 	cmp r1, r4
@@ -2237,7 +2237,7 @@ sub_8053FB0: @ 8053FB0
 	beq _08053FD2
 	adds r0, r4, 0
 	movs r1, 0x8
-	bl sub_8074D60
+	bl FadeOutAndPlayNewMapMusic
 _08053FD2:
 	pop {r4}
 	pop {r0}
@@ -2279,7 +2279,7 @@ sub_8053FF8: @ 8053FF8
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _08054028
-	bl current_map_music_get
+	bl GetCurrentMapMusic
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r4, r0
@@ -2287,7 +2287,7 @@ sub_8053FF8: @ 8053FF8
 	bl is_warp1_light_level_8_or_9
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8074D28
+	bl FadeOutMapMusic
 _08054028:
 	pop {r4}
 	pop {r0}
@@ -2299,7 +2299,7 @@ _08054030: .4byte 0x00004001
 	thumb_func_start sub_8054034
 sub_8054034: @ 8054034
 	push {lr}
-	bl sub_8074E14
+	bl IsNotWaitingForBGMStop
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -2310,7 +2310,7 @@ sub_8054034: @ 8054034
 sub_8054044: @ 8054044
 	push {lr}
 	movs r0, 0x4
-	bl sub_8074D28
+	bl FadeOutMapMusic
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8054044
@@ -2365,7 +2365,7 @@ _08054084:
 	asrs r2, 24
 	adds r1, r4, 0
 	movs r3, 0x1
-	bl sub_8075090
+	bl PlayCry2
 _080540C0:
 	add sp, 0x4
 	pop {r4}
@@ -2853,7 +2853,7 @@ _0805440C: .4byte gUnknown_0300485C
 CB2_NewGame: @ 8054410
 	push {lr}
 	bl FieldClearVBlankHBlankCallbacks
-	bl sub_8074D08
+	bl StopMapMusic
 	bl ResetSafariZoneFlag_
 	bl NewGameInitData
 	bl player_avatar_init_params_reset
@@ -2895,7 +2895,7 @@ c2_whiteout: @ 8054468
 	cmp r0, 0x77
 	bls _080544BE
 	bl FieldClearVBlankHBlankCallbacks
-	bl sub_8074D08
+	bl StopMapMusic
 	bl ResetSafariZoneFlag_
 	bl sub_8052F5C
 	bl player_avatar_init_params_reset
@@ -3107,7 +3107,7 @@ _08054658: .4byte c2_overworld
 sub_805465C: @ 805465C
 	push {lr}
 	bl FieldClearVBlankHBlankCallbacks
-	bl sub_8074D08
+	bl StopMapMusic
 	bl sub_8054F70
 	ldr r0, _0805468C
 	bl set_callback1
@@ -3213,7 +3213,7 @@ _08054730: .4byte gMapHeader
 CB2_ContinueSavedGame: @ 8054734
 	push {lr}
 	bl FieldClearVBlankHBlankCallbacks
-	bl sub_8074D08
+	bl StopMapMusic
 	bl ResetSafariZoneFlag_
 	bl sub_805338C
 	bl sub_8053198
@@ -5349,7 +5349,7 @@ sub_80557E8: @ 80557E8
 sub_80557F4: @ 80557F4
 	push {lr}
 	movs r0, 0x6
-	bl audio_play
+	bl PlaySE
 	bl sub_8071310
 	bl ScriptContext2_Enable
 	pop {r0}
@@ -5361,7 +5361,7 @@ sub_8055808: @ 8055808
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r0, r4, 0
 	bl ScriptContext1_SetupScript
 	bl ScriptContext2_Enable
@@ -5374,7 +5374,7 @@ sub_8055808: @ 8055808
 sub_8055824: @ 8055824
 	push {lr}
 	movs r0, 0x6
-	bl audio_play
+	bl PlaySE
 	ldr r0, _0805583C
 	bl ScriptContext1_SetupScript
 	bl ScriptContext2_Enable
@@ -5389,7 +5389,7 @@ sub_8055840: @ 8055840
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r0, r4, 0
 	bl ScriptContext1_SetupScript
 	bl ScriptContext2_Enable
@@ -14425,7 +14425,7 @@ PlayerJumpLedge: @ 805949C
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0xA
-	bl audio_play
+	bl PlaySE
 	adds r0, r4, 0
 	bl GetJumpLedgeAnimId
 	lsls r0, 24
@@ -14522,7 +14522,7 @@ sub_805954C: @ 805954C
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x22
-	bl audio_play
+	bl PlaySE
 	adds r0, r4, 0
 	bl sub_8060A5C
 	lsls r0, 24
@@ -14541,7 +14541,7 @@ sub_8059570: @ 8059570
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x22
-	bl audio_play
+	bl PlaySE
 	adds r0, r4, 0
 	bl sub_8060A88
 	lsls r0, 24
@@ -14560,7 +14560,7 @@ sub_8059594: @ 8059594
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x22
-	bl audio_play
+	bl PlaySE
 	adds r0, r4, 0
 	bl sub_8060AB4
 	lsls r0, 24
@@ -14579,7 +14579,7 @@ sub_80595B8: @ 80595B8
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x22
-	bl audio_play
+	bl PlaySE
 	adds r0, r4, 0
 	bl sub_8060878
 	lsls r0, 24
@@ -14598,7 +14598,7 @@ sub_80595DC: @ 80595DC
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x7
-	bl audio_play
+	bl PlaySE
 	adds r0, r4, 0
 	bl sub_8060AE0
 	lsls r0, 24
@@ -14700,7 +14700,7 @@ PlayCollisionSoundIfNotFacingWarp: @ 8059648
 	bne _080596B0
 _080596AA:
 	movs r0, 0x7
-	bl audio_play
+	bl PlaySE
 _080596B0:
 	add sp, 0x4
 	pop {r4}
@@ -15846,7 +15846,7 @@ sub_8059EA4: @ 8059EA4
 	movs r0, 0xA
 	bl FieldEffectStart
 	movs r0, 0xD6
-	bl audio_play
+	bl PlaySE
 	ldrh r0, [r6, 0x8]
 	adds r0, 0x1
 	strh r0, [r6, 0x8]
@@ -15968,7 +15968,7 @@ sub_805A000: @ 805A000
 	cmp r0, 0
 	beq _0805A05C
 	movs r0, 0xA
-	bl audio_play
+	bl PlaySE
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
@@ -16076,7 +16076,7 @@ sub_805A0D8: @ 805A0D8
 	strb r0, [r1, 0x6]
 	bl ScriptContext2_Enable
 	movs r0, 0x2D
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x1
 	pop {r1}
 	bx r1
