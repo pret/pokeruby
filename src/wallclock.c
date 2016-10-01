@@ -1,13 +1,13 @@
 #include "gba/io_reg.h"
 #include "gba/macro.h"
+#include "global.h"
 #include "main.h"
 #include "menu.h"
-#include "sprite.h"
-#include "task.h"
-#include "global.h"
-#include "text.h"
 #include "palette.h"
 #include "rtc.h"
+#include "sprite.h"
+#include "task.h"
+#include "text.h"
 
 extern u16 gUnknown_0202E8CC;
 extern u16 gMiscClockMale_Pal[];
@@ -20,28 +20,38 @@ extern u8 gUnknown_08E95774[];
 extern u8 gUnknown_08E954B0[];
 extern u8 gOtherText_CorrectTimePrompt[];
 extern u8 * const gUnknown_08376D74[][2];
+extern s8 gClockHandCoords[][2];
 
-extern const struct WindowConfig gWindowConfig_81E6C3C;
-extern const struct WindowConfig gWindowConfig_81E6CE4;
+extern struct WindowConfig gWindowConfig_81E6C3C;
+extern struct WindowConfig gWindowConfig_81E6CE4;
 extern struct SpriteTemplate gSpriteTemplate_83F7AD8;
 extern struct SpriteTemplate gSpriteTemplate_83F7AF0;
 extern struct SpriteTemplate gSpriteTemplate_83F7B28;
 extern struct SpriteTemplate gSpriteTemplate_83F7B40;
 
-extern void sub_810A704(void);
+void sub_810A704(void);
 void sub_810AB3C(void);
-extern void sub_810ADC0(u8 taskId);
+void sub_810ADC0(u8 taskId);
 void sub_810AB54(u8 taskId);
-extern void sub_810AB84(u8 taskId);
+void sub_810AB84(u8 taskId);
 void sub_810AC60(u8 taskId);
 u16 sub_810AEAC(u16 r0, u8 r1, u8 r2);
-extern void sub_810AEFC(u8 r0, u8 r1);
-extern void c3_80BF560(u8 taskId);
-extern void sub_810AD58(u8 taskId);
+u8 sub_810AEFC(u8 r0, u8 r1);
+void c3_80BF560(u8 taskId);
+void sub_810AD58(u8 taskId);
 void sub_810AD9C(u8 taskId);
 void sub_810ADF0(u8 taskId);
 void sub_810AE28(u8 taskId);
 void sub_810AE60(u8 taskId);
+void sub_810AF98(u8 taskId, u8 b);
+void sub_810AFE0(u8 taskId);
+
+void sub_810A704(void)
+{
+    LoadOam();
+    ProcessSpriteCopyRequests();
+    TransferPlttBuffer();
+}
 
 //ToDo: Figure out these damn DMA operations!
 void LoadWallClockGraphics(void)
@@ -339,15 +349,216 @@ u8 sub_810AE84(u8 n)
 
 u16 sub_810AEAC(u16 a, u8 b, u8 c)
 {
+    u8 n = sub_810AE84(c);
+    
     switch(b)
     {
         case 1:
-        {
-            
-        }
+            if(a)
+                a = a - n;
+            else
+                a = 360 - n;
+            break;
         case 2:
-        {
-            
-        }
+            if(a < 360 - n)
+                a = a + n;
+            else
+                a = 0;
+            break;
     }
+    return a;
+}
+
+u8 sub_810AEFC(u8 taskId, u8 b)
+{
+    switch(b)
+    {
+        case 1:
+            if(gTasks[taskId].data[3] > 0)
+                gTasks[taskId].data[3]--;
+            else
+            {
+                gTasks[taskId].data[3] = 59;
+                if(gTasks[taskId].data[2] > 0)
+                    gTasks[taskId].data[2]--;
+                else
+                    gTasks[taskId].data[2] = 23;
+                sub_810AF98(taskId, b);
+            }
+            break;
+        case 2:
+            if(gTasks[taskId].data[3] <= 58)
+                gTasks[taskId].data[3]++;
+            else
+            {
+                gTasks[taskId].data[3] = 0;
+                if(gTasks[taskId].data[2] <= 22)
+                    gTasks[taskId].data[2]++;
+                else
+                    gTasks[taskId].data[2] = 0;
+                sub_810AF98(taskId, b);
+            }
+            break;
+    }
+    return 0;
+}
+
+void sub_810AF98(u8 taskId, u8 b)
+{
+    u8 data2 = gTasks[taskId].data[2];
+    
+    switch(b)
+    {
+        case 1:
+            switch(data2)
+            {
+                case 11:
+                    gTasks[taskId].data[5] = 0;
+                    break;
+                case 23:
+                    gTasks[taskId].data[5] = b;
+                    break;
+            }
+            break;
+        case 2:
+            switch(data2)
+            {
+                case 0:
+                    gTasks[taskId].data[5] = 0;
+                    break;
+                case 12:
+                    gTasks[taskId].data[5] = 1;
+                    break;
+            }
+            break;
+    }
+}
+
+void sub_810AFE0(u8 taskId)
+{
+    RtcCalcLocalTime();
+    gTasks[taskId].data[2] = gLocalTime.hours;
+    gTasks[taskId].data[3] = gLocalTime.minutes;
+    gTasks[taskId].data[0] = gTasks[taskId].data[3] * 6;
+    gTasks[taskId].data[1] = (gTasks[taskId].data[2] % 12) * 30 + (gTasks[taskId].data[3] / 10) * 5;
+    if(gLocalTime.hours <= 11)
+        gTasks[taskId].data[5] = 0;
+    else
+        gTasks[taskId].data[5] = 1;
+}
+
+void sub_810B05C(struct Sprite *sprite)
+{
+    u16 angle;
+    s16 sin;
+    s16 cos;
+    u16 a;
+    u16 b;
+    u16 c;
+    u16 d;
+    u16 coord1;
+    u16 coord2;
+    
+    angle = gTasks[sprite->data0].data[0];
+    sin = Sin2(angle);
+    b = sin / 16;
+    cos = Cos2(angle);
+    a = cos / 16;
+    d = a;
+    c = -b;     //Hmm... can't get this right
+    SetOamMatrix(0, a, b, c, d);
+    coord1 = gClockHandCoords[angle][0];
+    coord2 = gClockHandCoords[angle][1];
+    
+    //Manual sign extension - why?
+    if(coord1 > 0x80)
+        coord1 |= 0xFF00;
+    if(coord2 > 0x80)
+        coord2 |= 0xFF00;
+    
+    sprite->pos2.x = coord1;
+    sprite->pos2.y = coord2;
+}
+
+void sub_810B0F4(struct Sprite *sprite)
+{
+    u16 angle;
+    s16 sin;
+    s16 cos;
+    u16 a;
+    u16 b;
+    u16 c;
+    u16 d;
+    u16 coord1;
+    u16 coord2;
+    
+    angle = gTasks[sprite->data0].data[1];
+    sin = Sin2(angle);
+    b = sin / 16;
+    cos = Cos2(angle);
+    a = cos / 16;
+    d = a;
+    c = -b;     //Hmm... can't get this right
+    SetOamMatrix(0, a, b, c, d);
+    coord1 = gClockHandCoords[angle][0];
+    coord2 = gClockHandCoords[angle][1];
+    
+    //Manual sign extension - why?
+    if(coord1 > 0x80)
+        coord1 |= 0xFF00;
+    if(coord2 > 0x80)
+        coord2 |= 0xFF00;
+    
+    sprite->pos2.x = coord1;
+    sprite->pos2.y = coord2;
+}
+
+void sub_810B18C(struct Sprite *sprite)
+{
+    s16 sin;
+    s16 cos;
+    
+    if(gTasks[sprite->data0].data[5] != 0)
+    {
+        if((u16)(sprite->data1 - 60) <= 29)
+            sprite->data1 += 5;
+        if(sprite->data1 <= 59)
+            sprite->data1++;
+    }
+    else
+    {
+        if((u16)(sprite->data1 - 46) <= 29)
+            sprite->data1 -= 5;
+        if(sprite->data1 > 75)
+            sprite->data1--;
+    }
+    cos = Cos2((u16)sprite->data1);
+    sprite->pos2.x =  cos * 30 / 4096;
+    sin = Sin2((u16)sprite->data1);
+    sprite->pos2.y = sin * 30 / 4096;
+}
+
+void sub_810B230(struct Sprite *sprite)
+{
+    s16 sin;
+    s16 cos;
+    
+    if(gTasks[sprite->data0].data[5] != 0)
+    {
+        if((u16)(sprite->data1 - 105) <= 29)
+            sprite->data1 += 5;
+        if(sprite->data1 <= 104)
+            sprite->data1++;
+    }
+    else
+    {
+        if((u16)(sprite->data1 - 91) <= 29)
+            sprite->data1 -= 5;
+        if(sprite->data1 > 120)
+            sprite->data1--;
+    }
+    cos = Cos2((u16)sprite->data1);
+    sprite->pos2.x =  cos * 30 / 4096;
+    sin = Sin2((u16)sprite->data1);
+    sprite->pos2.y = sin * 30 / 4096;
 }
