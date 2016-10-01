@@ -10,7 +10,7 @@ struct Fanfare
     u16 duration;
 };
 
-extern u32 speciesid_conv(u32);
+extern u32 SpeciesToCryId(u32);
 
 extern u16 gUnknown_020239F8;
 extern struct MusicPlayerInfo *gMPlay_PokemonCry;
@@ -420,7 +420,7 @@ static void PlayCryInternal(u16 species, s8 pan, s8 volume, u8 priority, u8 mode
     asm("");
     asm("");
 
-    cryId = speciesid_conv(cryId);
+    cryId = SpeciesToCryId(cryId);
     index = 0x7F;
     asm("" ::: "r0");
     index &= cryId;
@@ -485,8 +485,10 @@ static void Task_DuckBGMForPokemonCry(u8 taskId)
     if (gPokemonCryBGMDuckingCounter)
     {
         gPokemonCryBGMDuckingCounter--;
+        return;
     }
-    else if (!IsPokemonCryPlaying(gMPlay_PokemonCry))
+
+    if (!IsPokemonCryPlaying(gMPlay_PokemonCry))
     {
         m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 256);
         DestroyTask(taskId);
