@@ -427,7 +427,7 @@ _0805329C: .4byte gUnknown_020297F0
 _080532A0: .4byte gSaveBlock1
 _080532A4: .4byte gUnknown_020297F8
 _080532A8: .4byte gUnknown_02029800
-_080532AC: .4byte gUnknown_08216624
+_080532AC: .4byte gDummyWarpData
 _080532B0: .4byte gUnknown_02029808
 	thumb_func_end warp_shift
 

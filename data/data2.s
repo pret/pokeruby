@@ -3861,8 +3861,16 @@ gUnknown_08216604:: @ 8216604
 	.byte 0xFF
 	.space 9
 
-gUnknown_08216624:: @ 8216624
-	.incbin "baserom.gba", 0x00216624, 0x28
+	.align 2
+gDummyWarpData:: @ 8216624
+	.byte -1
+	.byte -1
+	.byte -1
+	.space 1
+	.2byte -1
+	.2byte -1
+
+	.incbin "baserom.gba", 0x0021662C, 0x20
 
 gUnknown_0821664C:: @ 821664C
 	.incbin "baserom.gba", 0x0021664c, 0x48
@@ -8578,7 +8586,10 @@ gTilesetAnimTable_BikeShop:: @ 837DEDC
 
 	.align 2
 gDummyPaletteStructTemplate:: @ 837DEE4
-	.incbin "baserom.gba", 0x0037dee4, 0x10
+	.2byte 0xFFFF
+	.space 9
+	.byte 0x20
+	.space 4
 
 	.align 2
 gFanfares:: @ 837DEF4
