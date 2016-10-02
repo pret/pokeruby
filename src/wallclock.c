@@ -1,5 +1,3 @@
-#include "gba/io_reg.h"
-#include "gba/macro.h"
 #include "global.h"
 #include "main.h"
 #include "menu.h"
