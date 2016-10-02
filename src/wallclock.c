@@ -189,12 +189,12 @@ void Cb2_StartWallClock(void)
     
     spriteId = CreateSprite(&gSpriteTemplate_83F7AD8, 0x78, 0x50, 1);
     gSprites[spriteId].data0 = taskId;
-    gSprites[spriteId].oam.affineMode = 1;
+    gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[spriteId].oam.matrixNum = 0;
     
     spriteId = CreateSprite(&gSpriteTemplate_83F7AF0, 0x78, 0x50, 0);
     gSprites[spriteId].data0 = taskId;
-    gSprites[spriteId].oam.affineMode = 1;
+    gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[spriteId].oam.matrixNum = 1;
     
     spriteId = CreateSprite(&gSpriteTemplate_83F7B28, 0x78, 0x50, 2);
@@ -234,12 +234,12 @@ void Cb2_ViewWallClock(void)
     
     spriteId = CreateSprite(&gSpriteTemplate_83F7AD8, 120, 80, 1);
     gSprites[spriteId].data0 = taskId;
-    gSprites[spriteId].oam.affineMode = 1;
+    gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[spriteId].oam.matrixNum = 0;
     
     spriteId = CreateSprite(&gSpriteTemplate_83F7AF0, 120, 80, 0);
     gSprites[spriteId].data0 = taskId;
-    gSprites[spriteId].oam.affineMode = 1;
+    gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[spriteId].oam.matrixNum = 1;
     
     spriteId = CreateSprite(&gSpriteTemplate_83F7B28, 120, 80, 2);
