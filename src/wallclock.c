@@ -5,13 +5,11 @@
 #include "menu.h"
 #include "palette.h"
 #include "rtc.h"
+#include "songs.h"
 #include "sprite.h"
 #include "task.h"
 #include "text.h"
-
-//ToDo: include trig.h after merging upstream
-s16 Sin2(u16 angle);
-s16 Cos2(u16 angle);
+#include "trig.h"
 
 //Functions that need to be put in headers
 void LZ77UnCompVram(const void *src, void *dest);
@@ -19,7 +17,7 @@ void SetMainCallback2(MainCallback callback);
 void SetVBlankCallback(IntrCallback callback);
 void remove_some_task(void);
 void LoadCompressedObjectPic(void *);
-void audio_play(u16);
+void PlaySE(u16);
 
 extern u16 gUnknown_0202E8CC;
 extern u16 gMiscClockMale_Pal[];
@@ -170,6 +168,7 @@ static void WallClockInit(void)
     REG_DISPCNT = 0x1940;
 }
 
+//Allow player to set the clock
 void Cb2_StartWallClock(void)
 {
     u8 taskId;
@@ -208,6 +207,7 @@ void Cb2_StartWallClock(void)
     WallClockInit();
 }
 
+//View, but don't set, the clock
 void Cb2_ViewWallClock(void)
 {
     u8 taskId;
@@ -327,13 +327,13 @@ static void Task_SetClock4(u8 taskId)
     switch(ProcessMenuInputNoWrap_())
     {
         case 0:     //YES
-            audio_play(5);
+            PlaySE(SE_SELECT);
             gTasks[taskId].func = Task_SetClock5;   //Move on
             return;
         case -1:    //B button
         case 1:     //NO
             sub_8072DEC();
-            audio_play(5);
+            PlaySE(SE_SELECT);
             MenuZeroFillWindowRect(23, 8, 29, 13);
             MenuZeroFillWindowRect(2, 16, 27, 19);
             gTasks[taskId].func = Task_SetClock2;   //Go back and let player adjust clock
@@ -395,7 +395,7 @@ static u8 CalcMinHandDelta(u16 speed)
 //Calculates the new position of the minute hand when setting the clock
 static u16 CalcNewMinHandAngle(u16 angle, u8 direction, u8 speed)
 {
-    u8 delta = GetMinHandDelta(speed);
+    u8 delta = CalcMinHandDelta(speed);
     
     switch(direction)
     {
