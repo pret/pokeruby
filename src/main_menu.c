@@ -478,7 +478,7 @@ void MainMenuPressedA(u8 taskId)
         DestroyTask(taskId);
         break;
     case OPTION:
-        gMain.field_8 = (u32)sub_80096FC;
+        gMain.field_8 = sub_80096FC;
         SetMainCallback2(CB2_InitOptionMenu);
         DestroyTask(taskId);
         break;

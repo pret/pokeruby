@@ -12,7 +12,7 @@ struct Main
     MainCallback callback1;
     MainCallback callback2;
 
-    u32 field_8;
+    MainCallback field_8;
 
     IntrCallback vblankCallback;
     IntrCallback hblankCallback;
