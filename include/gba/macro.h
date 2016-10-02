@@ -49,6 +49,11 @@
 #define DmaFill16(dmaNum, value, dest, size) DMA_FILL(dmaNum, value, dest, size, 16)
 #define DmaFill32(dmaNum, value, dest, size) DMA_FILL(dmaNum, value, dest, size, 32)
 
+// Note that the DMA clear macros cause the DMA control value to be calculated
+// at runtime rather than compile time. The size is divided by the DMA transfer
+// unit size (2 or 4 bytes) and then combined with the DMA control flags using a
+// bitwise OR operation.
+
 #define DMA_CLEAR(dmaNum, dest, size, bit)  \
 {                                           \
     vu##bit *_dest = (vu##bit *)(dest);     \
