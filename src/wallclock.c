@@ -119,18 +119,8 @@ static void LoadWallClockGraphics(void)
             break;
         }
     }
-    
-    {
-        void *oam = (void *)OAM;
-        u32 oamSize = OAM_SIZE;
-        DmaFill32(3, 0, oam, oamSize);
-    }
-    
-    {
-        void *pltt = (void *)PLTT;
-        u32 plttSize = PLTT_SIZE;
-        DmaFill16(3, 0, pltt, plttSize);
-    }
+    DmaClear32(3, OAM, OAM_SIZE);
+    DmaClear16(3, PLTT, PLTT_SIZE);
     
     LZ77UnCompVram(gMiscClock_Gfx, (void *)VRAM);
     if(gUnknown_0202E8CC == MALE)
