@@ -1,6 +1,16 @@
 #ifndef GUARD_FIELDMAP_H
 #define GUARD_FIELDMAP_H
 
+enum
+{
+    CONNECTION_DOWN = 1,
+    CONNECTION_UP,
+    CONNECTION_LEFT,
+    CONNECTION_RIGHT,
+    CONNECTION_DIVE,
+    CONNECTION_EMERGE
+};
+
 typedef void (*TilesetCB)(void);
 
 struct Tileset
@@ -58,15 +68,33 @@ struct MapEvents
     void *bgEvents;
 };
 
+struct MapConnection
+{
+    u8 direction;
+    u32 offset;
+    s8 mapGroup;
+    s8 mapNum;
+};
+
+struct MapConnections
+{
+    s32 count;
+    struct MapConnection *connections;
+};
+
 struct MapHeader
 {
     struct MapData *mapData;
     struct MapEvents *events;
     u8 *mapScripts;
-    void *connections;
+    struct MapConnections *connections;
     u16 music;
     u16 mapDataId;
-    u8 filler_14[0x8];
+    u8 name;
+    u8 cave;
+    u8 weather;
+    u8 light;
+    u8 filler_18[0x4];
 };
 
 struct MapObject

@@ -10924,9 +10924,11 @@ gUnknown_0839ACD8:: @ 839ACD8
 gUnknown_0839ACDC:: @ 839ACDC
 	.incbin "baserom.gba", 0x0039acdc, 0xc
 
+	.align 2
 gUnknown_0839ACE8:: @ 839ACE8
-	.incbin "baserom.gba", 0x0039ace8, 0x4
+	.byte 4
 
+	.align 2
 gUnknown_0839ACEC:: @ 839ACEC
 	.incbin "baserom.gba", 0x0039acec, 0xc
 
