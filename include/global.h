@@ -126,7 +126,14 @@ struct SaveBlock1
 {
     struct Coords16 pos;
     struct WarpData location;
-    u8 filler_C[0x26];
+    struct WarpData warp1;
+    struct WarpData warp2;
+    struct WarpData warp3;
+    struct WarpData warp4;
+    u16 battleMusic;
+    u8 weather;
+    u8 filler_2F;
+    u8 flashUsed;
     u16 mapDataId;
     u8 filler_34[0x45C];
     u32 money;

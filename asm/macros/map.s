@@ -101,5 +101,5 @@
 	.4byte connection_\direction
 	.4byte \offset
 	map \map
-	.2byte \filler
+	.space 2
 	.endm

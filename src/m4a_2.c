@@ -196,19 +196,19 @@ void m4aMPlayFadeOut(struct MusicPlayerInfo *mplayInfo, u16 speed)
     MPlayFadeOut(mplayInfo, speed);
 }
 
-void sub_81DE0D0(struct MusicPlayerInfo *mplayInfo, u16 speed)
+void m4aMPlayFadeOutTemporarily(struct MusicPlayerInfo *mplayInfo, u16 speed)
 {
     if (mplayInfo->ident == ID_NUMBER)
     {
         mplayInfo->ident++;
         mplayInfo->fadeOC = speed;
         mplayInfo->fadeOI = speed;
-        mplayInfo->fadeOV = (64 << FADE_VOL_SHIFT) | STOP_AFTER_FADE;
+        mplayInfo->fadeOV = (64 << FADE_VOL_SHIFT) | TEMPORARY_FADE;
         mplayInfo->ident = ID_NUMBER;
     }
 }
 
-void sub_81DE0F0(struct MusicPlayerInfo *mplayInfo, u16 speed)
+void m4aMPlayFadeIn(struct MusicPlayerInfo *mplayInfo, u16 speed)
 {
     if (mplayInfo->ident == ID_NUMBER)
     {
@@ -701,22 +701,22 @@ void FadeOutBody(struct MusicPlayerInfo *mplayInfo)
             while (i > 0)
             {
                 register u32 fadeOV asm("r7");
-                register u32 val asm("r0");
+                u32 val;
 
                 TrackStop(mplayInfo, track);
 
-                val = STOP_AFTER_FADE;
+                val = TEMPORARY_FADE;
                 fadeOV = mplayInfo->fadeOV;
                 val &= fadeOV;
 
                 if (!val)
-                    track->flags = val;
+                    track->flags = 0;
 
                 i--;
                 track++;
             }
 
-            if (mplayInfo->fadeOV & STOP_AFTER_FADE)
+            if (mplayInfo->fadeOV & TEMPORARY_FADE)
                 mplayInfo->status |= MUSICPLAYER_STATUS_PAUSE;
             else
                 mplayInfo->status = MUSICPLAYER_STATUS_PAUSE;

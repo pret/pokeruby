@@ -484,10 +484,10 @@ gUnknown_0202E9D8: @ 202E9D8
 	.include "src/palette.o"
 
 	.align 2
-gUnknown_0202F79C: @ 202F79C
+gMPlay_PokemonCry: @ 202F79C
 	.space 0x4
 
-gUnknown_0202F7A0: @ 202F7A0
+gPokemonCryBGMDuckingCounter: @ 202F7A0
 	.space 0x4
 
 gUnknown_0202F7A4: @ 202F7A4

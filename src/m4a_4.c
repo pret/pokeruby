@@ -415,7 +415,7 @@ void DummyFunc(void)
 {
 }
 
-struct MusicPlayerInfo *sub_81DF43C(u32 tone)
+struct MusicPlayerInfo *SetPokemonCryTone(struct ToneData *tone)
 {
     u32 maxClock = 0;
     s32 maxClockIndex = 0;
@@ -447,7 +447,7 @@ start_song:
 
     memcpy((void *)CRY, &gPokemonCrySong, sizeof(struct PokemonCrySong));
 
-    *(u32 *)(CRY + CRY_OFS(tone)) = tone;
+    *(u32 *)(CRY + CRY_OFS(tone)) = (u32)tone;
     *(u32 *)(CRY + CRY_OFS(part)) = CRY + CRY_OFS(part0);
     *(u32 *)(CRY + CRY_OFS(part) + 4) = CRY + CRY_OFS(part1);
     *(u32 *)(CRY + CRY_OFS(gotoTarget)) = CRY + CRY_OFS(cont);
@@ -462,17 +462,17 @@ start_song:
     return mplayInfo;
 }
 
-void sub_81DF50C(u8 val)
+void SetPokemonCryVolume(u8 val)
 {
     gPokemonCrySong.volumeValue = val & 0x7F;
 }
 
-void sub_81DF520(s8 val)
+void SetPokemonCryPanpot(s8 val)
 {
     gPokemonCrySong.panValue = (val + C_V) & 0x7F;
 }
 
-void sub_81DF538(s16 val)
+void SetPokemonCryPitch(s16 val)
 {
     s16 b = val + 0x80;
     u8 a = gPokemonCrySong.tuneValue2 - gPokemonCrySong.tuneValue;
@@ -481,22 +481,22 @@ void sub_81DF538(s16 val)
     gPokemonCrySong.tuneValue2 = (a + ((b >> 1) & 0x7F)) & 0x7F;
 }
 
-void sub_81DF570(u16 val)
+void SetPokemonCryLength(u16 val)
 {
     gPokemonCrySong.unkCmd0CParam = val;
 }
 
-void sub_81DF57C(u8 val)
+void SetPokemonCryRelease(u8 val)
 {
     gPokemonCrySong.releaseValue = val;
 }
 
-void sub_81DF588(u32 val)
+void SetPokemonCryProgress(u32 val)
 {
     gPokemonCrySong.unkCmd0DParam = val;
 }
 
-int sub_81DF594(struct MusicPlayerInfo *mplayInfo)
+int IsPokemonCryPlaying(struct MusicPlayerInfo *mplayInfo)
 {
     struct MusicPlayerTrack *track = mplayInfo->tracks;
 
@@ -506,7 +506,7 @@ int sub_81DF594(struct MusicPlayerInfo *mplayInfo)
         return 0;
 }
 
-void sub_81DF5AC(s8 val)
+void SetPokemonCryChorus(s8 val)
 {
     if (val)
     {
@@ -519,7 +519,7 @@ void sub_81DF5AC(s8 val)
     }
 }
 
-void sub_81DF5D8(u32 val)
+void SetPokemonCryStereo(u32 val)
 {
     struct SoundInfo *soundInfo = SOUND_INFO_PTR;
 
@@ -539,7 +539,7 @@ void sub_81DF5D8(u32 val)
     }
 }
 
-void sub_81DF618(u8 val)
+void SetPokemonCryPriority(u8 val)
 {
     gPokemonCrySong.priority = val;
 }
