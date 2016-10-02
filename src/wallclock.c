@@ -79,7 +79,7 @@ static void WallClockVblankCallback(void)
 void LoadWallClockGraphics(void)
 {
     u8 *addr;
-    u32 foo;
+    u32 size;
     
     SetVBlankCallback(0);
     REG_DISPCNT = 0;
@@ -97,12 +97,12 @@ void LoadWallClockGraphics(void)
     REG_BG0VOFS = 0;
     
     addr = VRAM;
-    for(foo = 0x18000; foo > 0x1000; foo -= 0x1000)
+    for(size = 0x18000; size > 0x1000; size -= 0x1000)
     {
         DmaFill16(3, 0, addr, 0x1000);
         addr += 0x1000;
     }
-    DmaFill16(3, 0, addr, 0x1000);
+    DmaFill16(3, 0, addr, size);
     DmaFill32(3, 0, OAM, OAM_SIZE);
     DmaFill16(3, 0, PLTT, PLTT_SIZE);
     
