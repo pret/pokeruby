@@ -1250,7 +1250,7 @@ void sub_800AFC0(u8 taskId)
     {
         u8 spriteId = gTasks[taskId].data[2];
         gSprites[spriteId].callback = nullsub_34;
-        REG_DISPCNT = 4160;
+        REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON;
         BeginNormalPaletteFade(0xFFFF0000, 0, 0, 0x10, 0xFFFF);
         gTasks[taskId].func = sub_800B034;
     }
@@ -1347,7 +1347,8 @@ void new_game_prof_birch_speech_part2_start()
     SetVBlankCallback(VBlankCB_MainMenu);
     SetMainCallback2(CB2_MainMenu);
     REG_BG1CNT = 1795;
-    REG_DISPCNT = 4928;
+    REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP |
+      DISPCNT_BG0_ON | DISPCNT_BG1_ON | DISPCNT_OBJ_ON;
 }
 
 void nullsub_34(struct Sprite *sprite)
