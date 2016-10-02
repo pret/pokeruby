@@ -563,14 +563,14 @@ void sub_810B230(struct Sprite *sprite)
     
     if(gTasks[sprite->data0].data[TD_PERIOD] != AM)
     {
-        if((u16)(sprite->data1 - 105) <= 29)
+        if(sprite->data1 >= 105 && sprite->data1 < 135)
             sprite->data1 += 5;
-        if(sprite->data1 <= 104)
+        if(sprite->data1 < 105)
             sprite->data1++;
     }
     else
     {
-        if((u16)(sprite->data1 - 91) <= 29)
+        if(sprite->data1 > 90 && sprite->data1 <= 120)
             sprite->data1 -= 5;
         if(sprite->data1 > 120)
             sprite->data1--;
