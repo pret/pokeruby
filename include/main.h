@@ -50,4 +50,14 @@ extern bool8 gLinkVSyncDisabled;
 extern const u8 gGameVersion;
 extern const u8 gGameLanguage;
 
+void SetMainCallback2(MainCallback callback);
+void InitKeys(void);
+void SetVBlankCallback(IntrCallback callback);
+void SetHBlankCallback(IntrCallback callback);
+void SetVCountCallback(IntrCallback callback);
+void SetSerialCallback(IntrCallback callback);
+void InitFlashTimer(void);
+void DoSoftReset(void);
+void ClearPokemonCrySongs(void);
+
 #endif // GUARD_MAIN_H

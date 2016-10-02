@@ -10,14 +10,12 @@
 #include "task.h"
 #include "text.h"
 #include "trig.h"
+#include "sound.h"
 
 //Functions that need to be put in headers
 void LZ77UnCompVram(const void *src, void *dest);
-void SetMainCallback2(MainCallback callback);
-void SetVBlankCallback(IntrCallback callback);
 void remove_some_task(void);
 void LoadCompressedObjectPic(void *);
-void PlaySE(u16);
 
 extern u16 gUnknown_0202E8CC;
 extern u16 gMiscClockMale_Pal[];
