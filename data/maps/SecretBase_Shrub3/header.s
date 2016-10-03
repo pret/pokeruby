@@ -3,7 +3,7 @@ SecretBase_Shrub3:: @ 83078B4
 	.4byte SecretBase_Shrub3_MapEvents
 	.4byte SecretBase_Shrub3_MapScripts
 	.4byte 0x0
-	.2byte 382
+	.2byte BGM_MACHI_S3
 	.2byte 215
 	.byte 86
 	.byte 0

@@ -3,7 +3,7 @@ MossdeepCity_House2:: @ 83067F8
 	.4byte MossdeepCity_House2_MapEvents
 	.4byte MossdeepCity_House2_MapScripts
 	.4byte 0x0
-	.2byte 399
+	.2byte BGM_GOTOWN
 	.2byte 59
 	.byte 13
 	.byte 0
