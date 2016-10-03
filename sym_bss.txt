@@ -119,20 +119,7 @@ gUnknown_030006CC: @ 30006CC
 gUnknown_030006D0: @ 30006D0
 	.space 0x4
 
-gUnknown_030006D4: @ 30006D4
-	.space 0x2
-
-gUnknown_030006D6: @ 30006D6
-	.space 0x2
-
-gUnknown_030006D8: @ 30006D8
-	.space 0x1
-
-gUnknown_030006D9: @ 30006D9
-	.space 0x1
-
-gUnknown_030006DA: @ 30006DA
-	.space 0x2
+	.include "src/sound.o"
 
 gUnknown_030006DC: @ 30006DC
 	.space 0x4

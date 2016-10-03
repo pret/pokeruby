@@ -56,6 +56,7 @@ SECTIONS {
         asm/rom_8040EB4.o(.text);
         src/play_time.o(.text);
         src/new_game.o(.text);
+        src/rom4.o(.text);
         asm/rom4.o(.text);
         src/map_obj_80643A4.o(.text);
         src/field_message_box.o(.text);
@@ -71,6 +72,8 @@ SECTIONS {
         asm/rom_8074BAC.o(.text);
         src/task.o(.text);
         asm/rom5.o(.text);
+        src/wallclock.o(.text);
+        asm/rom6.o(.text);
     } =0
 
     script_data :

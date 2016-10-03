@@ -312,7 +312,7 @@ bool8 mapheader_run_first_tag2_script_list_match(void)
     return 1;
 }
 
-void mapheader_run_first_tag4_script_list_match()
+void mapheader_run_first_tag4_script_list_match(void)
 {
     u8 *ptr = mapheader_get_first_match_from_tagged_ptr_list(4);
     if (ptr)

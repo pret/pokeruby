@@ -7,6 +7,8 @@
 #include "link.h"
 #include "palette.h"
 #include "rng.h"
+#include "menu.h"
+#include "sound.h"
 
 #define SIO_MULTI_CNT ((struct SioMultiCnt *)REG_ADDR_SIOCNT)
 
@@ -27,7 +29,6 @@ struct LinkTestBGInfo
     u32 dummy_C;
 };
 
-extern void InitMenuWindow(const struct WindowConfig *);
 extern void sub_80516C4(u8, u16);
 
 extern u8 unk_2000000[];
@@ -230,7 +231,7 @@ static void LinkTestScreen(void)
     ResetTasks();
     SetVBlankCallback(VBlankCB_LinkTest);
     SetUpWindowConfig(&gWindowConfig_81E6CE4);
-    InitMenuWindow(&gWindowConfig_81E6CE4);
+    InitMenuWindow((struct WindowConfig *)&gWindowConfig_81E6CE4);
     ResetBlockSend();
     gLinkType = 0x1111;
     OpenLink();
@@ -1217,15 +1218,15 @@ void CB2_LinkError(void)
     ResetTasks();
     SetVBlankCallback(VBlankCB_LinkTest);
     SetUpWindowConfig(&gWindowConfig_81E7198);
-    InitMenuWindow(&gWindowConfig_81E7198);
+    InitMenuWindow((struct WindowConfig *)&gWindowConfig_81E7198);
     MenuZeroFillScreen();
     REG_BLDALPHA = 0;
     REG_BG0VOFS = 0;
     REG_BG0HOFS = 0;
-    REG_DISPCNT = 320;
+    REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON;
     gUnknown_3001BB4 = 0;
     CreateTask(Task_DestroySelf, 0);
-    sub_8074D08();
+    StopMapMusic();
     RunTasks();
     AnimateSprites();
     BuildOamBuffer();
@@ -1244,10 +1245,10 @@ static void CB2_PrintErrorMessage(void)
         break;
     case 30:
     case 60:
-        audio_play(SE_BOO);
+        PlaySE(SE_BOO);
         break;
     case 90:
-        audio_play(SE_BOO);
+        PlaySE(SE_BOO);
         break;
     }
 

@@ -206,7 +206,7 @@ gUnknown_03004AE4: @ 3004AE4
 gUnknown_03004AE8: @ 3004AE8
 	.space 0x4
 
-gUnknown_03004AEC: @ 3004AEC
+gDisableMusic: @ 3004AEC
 	.space 0x4
 
 gUnknown_03004AF0: @ 3004AF0
@@ -419,19 +419,19 @@ gUnknown_03005FA0: @ 3005FA0
 	.include "m4a_2.o"
 
 	.align 4
-gUnknown_03007380: @ 3007380
+gMPlay_BGM: @ 3007380
 	.space 0x40
 
-gUnknown_030073C0: @ 30073C0
+gMPlay_SE1: @ 30073C0
 	.space 0x40
 
-gUnknown_03007400: @ 3007400
+gMPlay_SE2: @ 3007400
 	.space 0x40
 
 gMPlayMemAccArea: @ 3007440
 	.space 0x10
 
-gUnknown_03007450: @ 3007450
+gMPlay_SE3: @ 3007450
 	.space 0x40
 
 	.include "agb_flash.o"

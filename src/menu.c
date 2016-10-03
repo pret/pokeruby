@@ -4,6 +4,7 @@
 #include "text.h"
 #include "songs.h"
 #include "text_window.h"
+#include "sound.h"
 
 struct Menu
 {
@@ -250,7 +251,7 @@ s8 ProcessMenuInput(void)
 {
     if (gMain.newKeys & A_BUTTON)
     {
-        audio_play(SE_SELECT);
+        PlaySE(SE_SELECT);
         if (gMenu.menu_field_7)
             sub_8072DEC();
         return gMenu.cursorPos;
@@ -265,13 +266,13 @@ s8 ProcessMenuInput(void)
 
     if (gMain.newKeys & DPAD_UP)
     {
-        audio_play(SE_SELECT);
+        PlaySE(SE_SELECT);
         MoveMenuCursor(-1);
         return -2;
     }
     else if (gMain.newKeys & DPAD_DOWN)
     {
-        audio_play(SE_SELECT);
+        PlaySE(SE_SELECT);
         MoveMenuCursor(1);
         return -2;
     }
@@ -285,7 +286,7 @@ s8 ProcessMenuInputNoWrap(void)
 
     if (gMain.newKeys & A_BUTTON)
     {
-        audio_play(SE_SELECT);
+        PlaySE(SE_SELECT);
         if (gMenu.menu_field_7)
             sub_8072DEC();
         return gMenu.cursorPos;
@@ -301,13 +302,13 @@ s8 ProcessMenuInputNoWrap(void)
     if (gMain.newKeys & DPAD_UP)
     {
         if (cursorPos != MoveMenuCursorNoWrap(-1))
-            audio_play(SE_SELECT);
+            PlaySE(SE_SELECT);
         return -2;
     }
     else if (gMain.newKeys & DPAD_DOWN)
     {
         if (cursorPos != MoveMenuCursorNoWrap(1))
-            audio_play(SE_SELECT);
+            PlaySE(SE_SELECT);
         return -2;
     }
 
@@ -500,7 +501,7 @@ s8 sub_80727CC(void)
     {
         if (gMenu.menu_field_7)
             sub_8072DEC();
-        audio_play(SE_SELECT);
+        PlaySE(SE_SELECT);
         return GetMenuCursorPos();
     }
 
@@ -513,25 +514,25 @@ s8 sub_80727CC(void)
 
     if (gMain.newKeys & DPAD_UP)
     {
-        audio_play(SE_SELECT);
+        PlaySE(SE_SELECT);
         MoveMenuCursor4(-gMenu.width);
         return -2;
     }
     else if (gMain.newKeys & DPAD_DOWN)
     {
-        audio_play(SE_SELECT);
+        PlaySE(SE_SELECT);
         MoveMenuCursor4(gMenu.width);
         return -2;
     }
     else if (gMain.newKeys & DPAD_LEFT)
     {
-        audio_play(SE_SELECT);
+        PlaySE(SE_SELECT);
         MoveMenuCursor4(-1);
         return -2;
     }
     else if (gMain.newKeys & DPAD_RIGHT)
     {
-        audio_play(SE_SELECT);
+        PlaySE(SE_SELECT);
         MoveMenuCursor4(1);
         return -2;
     }

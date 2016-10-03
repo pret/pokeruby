@@ -4,6 +4,7 @@
 #include "string_util.h"
 #include "songs.h"
 #include "palette.h"
+#include "sound.h"
 
 enum
 {
@@ -62,10 +63,6 @@ struct ShiftAmount
     u32 left;
     u32 right;
 };
-
-extern void sub_8075474(u16);
-extern void audio_play(u16);
-extern u8 mplay_has_finished_maybe(void);
 
 static u16 InitVariableWidthFontTileData(struct Window *, u16);
 static u16 LoadFixedWidthFont(struct Window *, u16);
@@ -2178,7 +2175,7 @@ static u8 ExtCtrlCode_PlayBGM(struct Window *win)
 {
     u16 loByte = win->text[win->textIndex++];
     u16 hiByte = win->text[win->textIndex++] << 8;
-    sub_8075474(loByte | hiByte);
+    PlayBGM(loByte | hiByte);
     return 2;
 }
 
@@ -2210,7 +2207,7 @@ static u8 ExtCtrlCode_PlaySE(struct Window *win)
 {
     u16 loByte = win->text[win->textIndex++];
     u16 hiByte = win->text[win->textIndex++] << 8;
-    audio_play(loByte | hiByte);
+    PlaySE(loByte | hiByte);
     return 2;
 }
 
@@ -2386,7 +2383,7 @@ static u8 UpdateWindowText(struct Window *win)
         {
             if (gMain.newKeys & (A_BUTTON | B_BUTTON))
             {
-                audio_play(SE_SELECT);
+                PlaySE(SE_SELECT);
             }
             else
             {
@@ -2445,7 +2442,7 @@ static u8 UpdateWindowText(struct Window *win)
         ClearWindowTextLines(win);
         break;
     case WIN_STATE_WAIT_SOUND:
-        if (mplay_has_finished_maybe())
+        if (IsSEPlaying())
             return 0;
         win->state = WIN_STATE_NORMAL;
         break;
@@ -3192,7 +3189,7 @@ static u8 WaitWithDownArrow(struct Window *win)
     {
         if (gMain.newKeys & (A_BUTTON | B_BUTTON))
         {
-            audio_play(SE_SELECT);
+            PlaySE(SE_SELECT);
             TryEraseDownArrow(win);
         }
         else

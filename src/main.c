@@ -6,17 +6,17 @@
 #include "rtc.h"
 #include "link.h"
 #include "rng.h"
+#include "sound.h"
 
 extern struct SoundInfo gSoundInfo;
 extern u32 gUnknown_3004820;
 extern u32 IntrMain[];
 
-void VBlankIntr(void);
-void HBlankIntr(void);
-void VCountIntr(void);
-void SerialIntr(void);
-void IntrDummy(void);
-void Timer3Intr(void);
+static void VBlankIntr(void);
+static void HBlankIntr(void);
+static void VCountIntr(void);
+static void SerialIntr(void);
+static void IntrDummy(void);
 
 #ifdef SAPPHIRE
 #define GAME_VERSION VERSION_SAPPHIRE
@@ -68,24 +68,15 @@ extern void c2_copyright_1();
 extern u32 sub_80558AC(void);
 extern u32 sub_8055910(void);
 extern u32 sub_8055940(void);
-extern void sound_something(void);
 extern void CheckForFlashMemory(void);
-extern void sound_sources_off(void);
 
-void UpdateLinkAndCallCallbacks(void);
-void InitMainCallbacks(void);
-void CallCallbacks(void);
-void SetMainCallback2(MainCallback callback);
-void SeedRngWithRtc(void);
-void InitKeys(void);
-void ReadKeys(void);
-void InitIntrHandlers(void);
-void SetVBlankCallback(IntrCallback callback);
-void SetHBlankCallback(IntrCallback callback);
-void SetVCountCallback(IntrCallback callback);
-void SetSerialCallback(IntrCallback callback);
-void WaitForVBlank(void);
-void DoSoftReset(void);
+static void UpdateLinkAndCallCallbacks(void);
+static void InitMainCallbacks(void);
+static void CallCallbacks(void);
+static void SeedRngWithRtc(void);
+static void ReadKeys(void);
+static void InitIntrHandlers(void);
+static void WaitForVBlank(void);
 
 #define B_START_SELECT (B_BUTTON | START_BUTTON | SELECT_BUTTON)
 
@@ -99,7 +90,7 @@ void AgbMain()
     RtcInit();
     CheckForFlashMemory();
     InitMainCallbacks();
-    sound_sources_off();
+    InitMapMusic();
     SeedRngWithRtc();
 
     gUnknown_3001BB4 = 0;
@@ -142,12 +133,12 @@ void AgbMain()
         }
 
         PlayTimeCounter_Update();
-        sound_something();
+        MapMusicMain();
         WaitForVBlank();
     }
 }
 
-void UpdateLinkAndCallCallbacks(void)
+static void UpdateLinkAndCallCallbacks(void)
 {
     gLinkStatus = LinkMain1(&gShouldAdvanceLinkState, gSendCmd, gRecvCmds);
     LinkMain2(&gMain.heldKeys);
@@ -155,7 +146,7 @@ void UpdateLinkAndCallCallbacks(void)
         CallCallbacks();
 }
 
-void InitMainCallbacks(void)
+static void InitMainCallbacks(void)
 {
     gMain.vblankCounter1 = 0;
     gMain.vblankCounter2 = 0;
@@ -163,7 +154,7 @@ void InitMainCallbacks(void)
     SetMainCallback2(c2_copyright_1);
 }
 
-void CallCallbacks(void)
+static void CallCallbacks(void)
 {
     if (gMain.callback1)
         gMain.callback1();
@@ -178,7 +169,7 @@ void SetMainCallback2(MainCallback callback)
     gMain.state = 0;
 }
 
-void SeedRngWithRtc(void)
+static void SeedRngWithRtc(void)
 {
     u32 seed = RtcGetMinuteCount();
     seed = (seed >> 16) ^ (seed & 0xFFFF);
@@ -197,7 +188,7 @@ void InitKeys(void)
     gMain.newKeysRaw = 0;
 }
 
-void ReadKeys(void)
+static void ReadKeys(void)
 {
     u16 keyInput = REG_KEYINPUT ^ KEYS_MASK;
     gMain.newKeysRaw = keyInput & ~gMain.heldKeysRaw;
@@ -241,7 +232,7 @@ void ReadKeys(void)
         gMain.watchedKeysPressed = TRUE;
 }
 
-void InitIntrHandlers(void)
+static void InitIntrHandlers(void)
 {
     int i;
 
@@ -282,7 +273,7 @@ void SetSerialCallback(IntrCallback callback)
     gMain.serialCallback = callback;
 }
 
-void VBlankIntr(void)
+static void VBlankIntr(void)
 {
     u16 savedIme;
 
@@ -316,7 +307,7 @@ void InitFlashTimer(void)
     SetFlashTimerIntr(2, gFlashTimerIntrFunc);
 }
 
-void HBlankIntr(void)
+static void HBlankIntr(void)
 {
     if (gMain.hblankCallback)
         gMain.hblankCallback();
@@ -325,7 +316,7 @@ void HBlankIntr(void)
     gMain.intrCheck |= INTR_FLAG_HBLANK;
 }
 
-void VCountIntr(void)
+static void VCountIntr(void)
 {
     if (gMain.vcountCallback)
         gMain.vcountCallback();
@@ -334,7 +325,7 @@ void VCountIntr(void)
     gMain.intrCheck |= INTR_FLAG_VCOUNT;
 }
 
-void SerialIntr(void)
+static void SerialIntr(void)
 {
     if (gMain.serialCallback)
         gMain.serialCallback();
@@ -343,11 +334,11 @@ void SerialIntr(void)
     gMain.intrCheck |= INTR_FLAG_SERIAL;
 }
 
-void IntrDummy(void)
+static void IntrDummy(void)
 {
 }
 
-void WaitForVBlank(void)
+static void WaitForVBlank(void)
 {
     gMain.intrCheck &= ~INTR_FLAG_VBLANK;
     VBlankIntrWait();
