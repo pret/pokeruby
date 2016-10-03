@@ -1223,7 +1223,7 @@ void CB2_LinkError(void)
     REG_BLDALPHA = 0;
     REG_BG0VOFS = 0;
     REG_BG0HOFS = 0;
-    REG_DISPCNT = 320;
+    REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON;
     gUnknown_3001BB4 = 0;
     CreateTask(Task_DestroySelf, 0);
     StopMapMusic();

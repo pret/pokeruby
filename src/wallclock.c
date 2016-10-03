@@ -141,9 +141,9 @@ static void WallClockInit(void)
     BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
     ime = REG_IME;
     REG_IME = 0;
-    REG_IE |= 0x1;
+    REG_IE |= INTR_FLAG_VBLANK;
     REG_IME = ime;
-    REG_DISPSTAT |= 0x8;
+    REG_DISPSTAT |= DISPSTAT_VBLANK_INTR;
     SetVBlankCallback(WallClockVblankCallback);
     SetMainCallback2(WallClockMainCallback);
     REG_BLDCNT = 0;
@@ -151,7 +151,8 @@ static void WallClockInit(void)
     REG_BLDY = 0;
     REG_BG3CNT = 0x701;
     REG_BG0CNT = 0x1F08;
-    REG_DISPCNT = 0x1940;
+    REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON |
+      DISPCNT_BG3_ON | DISPCNT_OBJ_ON;
 }
 
 //Allow player to set the clock
@@ -174,12 +175,12 @@ void Cb2_StartWallClock(void)
     
     spriteId = CreateSprite(&gSpriteTemplate_83F7AD8, 0x78, 0x50, 1);
     gSprites[spriteId].data0 = taskId;
-    gSprites[spriteId].oam.affineMode = 1;
+    gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[spriteId].oam.matrixNum = 0;
     
     spriteId = CreateSprite(&gSpriteTemplate_83F7AF0, 0x78, 0x50, 0);
     gSprites[spriteId].data0 = taskId;
-    gSprites[spriteId].oam.affineMode = 1;
+    gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[spriteId].oam.matrixNum = 1;
     
     spriteId = CreateSprite(&gSpriteTemplate_83F7B28, 0x78, 0x50, 2);
@@ -219,12 +220,12 @@ void Cb2_ViewWallClock(void)
     
     spriteId = CreateSprite(&gSpriteTemplate_83F7AD8, 120, 80, 1);
     gSprites[spriteId].data0 = taskId;
-    gSprites[spriteId].oam.affineMode = 1;
+    gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[spriteId].oam.matrixNum = 0;
     
     spriteId = CreateSprite(&gSpriteTemplate_83F7AF0, 120, 80, 0);
     gSprites[spriteId].data0 = taskId;
-    gSprites[spriteId].oam.affineMode = 1;
+    gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[spriteId].oam.matrixNum = 1;
     
     spriteId = CreateSprite(&gSpriteTemplate_83F7B28, 120, 80, 2);
@@ -436,14 +437,14 @@ static u8 AdvanceClock(u8 taskId, u8 direction)
     return 0;
 }
 
-//Determines the clock period (AM/PM) based on the hour
+//Updates the clock period (AM/PM) if it needs to change
 static void UpdateClockPeriod(u8 taskId, u8 direction)
 {
     u8 hours = gTasks[taskId].data[TD_HOURS];
     
     switch(direction)
     {
-        case 1:
+        case BACKWARD:
             switch(hours)
             {
                 case 11:
@@ -454,7 +455,7 @@ static void UpdateClockPeriod(u8 taskId, u8 direction)
                     break;
             }
             break;
-        case 2:
+        case FORWARD:
             switch(hours)
             {
                 case 0:
