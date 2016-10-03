@@ -2443,8 +2443,8 @@ unref_sub_806917C: @ 806917C
 _08069188: .4byte 0x0000084c
 	thumb_func_end unref_sub_806917C
 
-	thumb_func_start sub_806918C
-sub_806918C: @ 806918C
+	thumb_func_start IsMysteryGiftAvailable
+IsMysteryGiftAvailable: @ 806918C
 	push {lr}
 	ldr r0, _0806919C
 	bl FlagGet
@@ -2454,7 +2454,7 @@ sub_806918C: @ 806918C
 	bx r1
 	.align 2, 0
 _0806919C: .4byte 0x0000084c
-	thumb_func_end sub_806918C
+	thumb_func_end IsMysteryGiftAvailable
 
 	thumb_func_start sub_80691A0
 sub_80691A0: @ 80691A0
