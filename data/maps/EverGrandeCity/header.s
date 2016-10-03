@@ -3,7 +3,7 @@ EverGrandeCity:: @ 8305528
 	.4byte EverGrandeCity_MapEvents
 	.4byte EverGrandeCity_MapScripts
 	.4byte EverGrandeCity_MapConnections
-	.2byte 422
+	.2byte BGM_RAINBOW
 	.2byte 9
 	.byte 15
 	.byte 0

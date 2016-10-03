@@ -3,7 +3,7 @@ SafariZone_Northwest:: @ 8307BA8
 	.4byte SafariZone_Northwest_MapEvents
 	.4byte SafariZone_Northwest_MapScripts
 	.4byte SafariZone_Northwest_MapConnections
-	.2byte 428
+	.2byte BGM_SAFARI
 	.2byte 239
 	.byte 57
 	.byte 0

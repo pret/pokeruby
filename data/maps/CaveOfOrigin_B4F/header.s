@@ -3,7 +3,7 @@ CaveOfOrigin_B4F:: @ 8307208
 	.4byte CaveOfOrigin_B4F_MapEvents
 	.4byte CaveOfOrigin_B4F_MapScripts
 	.4byte 0x0
-	.2byte 0
+	.2byte SE_STOP
 	.2byte 163
 	.byte 72
 	.byte 0

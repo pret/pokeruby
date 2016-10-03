@@ -3,7 +3,7 @@ Route107:: @ 83056B0
 	.4byte Route107_MapEvents
 	.4byte Route107_MapScripts
 	.4byte Route107_MapConnections
-	.2byte 401
+	.2byte BGM_NEXTROAD
 	.2byte 23
 	.byte 22
 	.byte 0

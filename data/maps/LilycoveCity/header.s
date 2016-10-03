@@ -3,7 +3,7 @@ LilycoveCity:: @ 83054D4
 	.4byte LilycoveCity_MapEvents
 	.4byte LilycoveCity_MapScripts
 	.4byte LilycoveCity_MapConnections
-	.2byte 408
+	.2byte BGM_MINAMO
 	.2byte 6
 	.byte 12
 	.byte 0

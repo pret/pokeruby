@@ -3,7 +3,7 @@ SeafloorCavern_Room3:: @ 83070B8
 	.4byte SeafloorCavern_Room3_MapEvents
 	.4byte SeafloorCavern_Room3_MapScripts
 	.4byte 0x0
-	.2byte 406
+	.2byte BGM_TOZAN
 	.2byte 151
 	.byte 68
 	.byte 0
