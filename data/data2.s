@@ -45,7 +45,7 @@ gUnknown_081E79B0:: @ 81E79B0
 	.4byte gBirchText_Girl, 0
 
 	.align 2
-gUnknown_081E79C0:: @ 81E79C0
+gMalePresetNames:: @ 81E79C0
 	.4byte gBirchText_NewName, 0
 	.4byte gDefaultBoyName1, 0
 	.4byte gDefaultBoyName2, 0
@@ -53,7 +53,7 @@ gUnknown_081E79C0:: @ 81E79C0
 	.4byte gDefaultBoyName4, 0
 
 	.align 2
-gUnknown_081E79E8:: @ 81E79E8
+gFemalePresetNames:: @ 81E79E8
 	.4byte gBirchText_NewName, 0
 	.4byte gDefaultGirlName1, 0
 	.4byte gDefaultGirlName2, 0
