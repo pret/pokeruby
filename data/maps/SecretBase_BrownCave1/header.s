@@ -3,7 +3,7 @@ SecretBase_BrownCave1:: @ 83076F4
 	.4byte SecretBase_BrownCave1_MapEvents
 	.4byte SecretBase_BrownCave1_MapScripts
 	.4byte 0x0
-	.2byte 382
+	.2byte BGM_MACHI_S3
 	.2byte 199
 	.byte 86
 	.byte 0

@@ -3,7 +3,7 @@ PacifidlogTown:: @ 83055EC
 	.4byte PacifidlogTown_MapEvents
 	.4byte PacifidlogTown_MapScripts
 	.4byte PacifidlogTown_MapConnections
-	.2byte 408
+	.2byte BGM_MINAMO
 	.2byte 16
 	.byte 6
 	.byte 0

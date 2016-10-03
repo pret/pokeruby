@@ -3,7 +3,7 @@ RustboroCity_PokemonSchool:: @ 830629C
 	.4byte RustboroCity_PokemonSchool_MapEvents
 	.4byte RustboroCity_PokemonSchool_MapScripts
 	.4byte 0x0
-	.2byte 435
+	.2byte BGM_P_SCHOOL
 	.2byte 95
 	.byte 10
 	.byte 0
