@@ -3875,8 +3875,11 @@ gDummyWarpData:: @ 8216624
 gUnknown_0821664C:: @ 821664C
 	.incbin "baserom.gba", 0x0021664c, 0x48
 
+	.align 2
 gUnknown_08216694:: @ 8216694
-	.incbin "baserom.gba", 0x00216694, 0xc
+	.4byte REG_WIN0H
+	.4byte ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_DEST_RELOAD) << 16) | 1
+	.4byte 1
 
 	.align 2
 gUnknown_082166A0:: @ 82166A0
