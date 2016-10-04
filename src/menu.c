@@ -670,12 +670,12 @@ static void sub_8072D18(u8 a1, u8 a2)
     sub_814A5C0(a1, 0xFFFF, 12, 11679, 8 * a2);
 }
 
-u8 InitMenu(u8 a1, u8 left, u8 top, u8 numChoices, u8 cursorPos, u8 a6)
+u8 InitMenu(u8 cursorSubpriority, u8 left, u8 top, u8 numChoices, u8 cursorPos, u8 cursorWidth)
 {
     s32 pos;
 
-    if (a6)
-        sub_8072D18(a1, a6);
+    if (cursorWidth)
+        sub_8072D18(cursorSubpriority, cursorWidth);
 
     gMenu.left = left - 1;
     gMenu.top = top;
