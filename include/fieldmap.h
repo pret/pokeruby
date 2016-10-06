@@ -55,6 +55,25 @@ struct WarpEvent
     s8 mapNum;
 };
 
+struct CoordEvent
+{
+	s16 x, y;
+	u8 filler_4[0x2];
+	u16 trigger;
+	u16 index;
+	u8 filler_A[0x2];
+	u8 *script;
+};
+
+struct BgEvent
+{
+	s16 x, y;
+	u8 filler_4;
+	u8 kind;
+	s16 filler_6;
+	u8 *script;
+};
+
 struct MapEvents
 {
     u8 mapObjectCount;
@@ -64,8 +83,8 @@ struct MapEvents
 
     struct MapObjectTemplate *mapObjects;
     struct WarpEvent *warps;
-    void *coordEvents;
-    void *bgEvents;
+    struct CoordEvent *coordEvents;
+    struct BgEvent *bgEvents;
 };
 
 struct MapConnection
