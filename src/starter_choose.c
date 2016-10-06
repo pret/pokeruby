@@ -3,6 +3,7 @@
 #include "menu.h"
 #include "palette.h"
 #include "pokemon.h"
+#include "songs.h"
 #include "sound.h"
 #include "sprite.h"
 #include "string_util.h"
@@ -71,7 +72,7 @@ extern u8 *sub_8090D3C(u16);
 //Task data
 enum {
     TD_STARTERSELECTION,
-}
+};
 
 u16 sub_8109E50(u16 a)
 {
