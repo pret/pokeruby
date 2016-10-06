@@ -64,7 +64,7 @@ static void Task_StarterChoose4(u8 taskId);
 static void Task_StarterChoose5(u8 taskId);
 static void Task_StarterChoose6(u8 taskId);
 
-static void sub_810A42C(u8, u8);
+void sub_810A42C(u8, u8);
 static u8 sub_810A580(u16, u8, u8);
 void sub_810A6C4(struct Sprite *);
 extern u8 *sub_8090D3C(u16);
@@ -81,7 +81,7 @@ u16 sub_8109E50(u16 a)
     return gStarterMons[a];
 }
 
-static void sub_8109E6C(void)
+void sub_8109E6C(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
@@ -172,7 +172,7 @@ void CB2_ChooseStarter(void)
     gSprites[spriteId].data1 = 2;
 }
 
-static void sub_810A11C(void)
+void sub_810A11C(void)
 {
     RunTasks();
     AnimateSprites();
@@ -180,7 +180,7 @@ static void sub_810A11C(void)
     UpdatePaletteFade();
 }
 
-static void Task_StarterChoose1(u8 taskId)
+void Task_StarterChoose1(u8 taskId)
 {
     sub_810A42C(0xFF, gTasks[taskId].data[TD_STARTERSELECTION]);
     MenuDrawTextWindow(2, 14, 27, 19);
@@ -292,15 +292,14 @@ static void sub_810A410(u8 *arr, u8 b, u8 c, u8 d)
     *(arr++) = d;
 }
 
-static void sub_810A42C(u8 a, u8 b)
+void sub_810A42C(u8 a, u8 b)
 {
     u8 arr[0x48];
     u8 *ptr;
     u8 d;
     u8 e;
+    u8 c;
     u16 species;
-    
-    u8 five;
     
     u8 x1;
     u8 x2;
@@ -318,7 +317,7 @@ static void sub_810A42C(u8 a, u8 b)
     }
     species = sub_8109E50(b);
     ptr = sub_8090D3C(SpeciesToNationalPokedexNum(species));
-    sub_810A410(arr, 0, 15, 5);
+    sub_810A410(arr, 0, 15, 8);
     e = 5;
     {
         u8 *p = arr;
@@ -337,15 +336,14 @@ static void sub_810A42C(u8 a, u8 b)
     }
     e = 8;
     d = 0;
-    
-    while(*ptr != 0xFF && d <= 0xA)
+    while(ptr[d] != 0xFF && d <= 0xA)
     {
         arr[e] = ptr[d];
         d++;
         e++;
     }
-    e++;
-    arr[e] = 0;
+    //c = e + 1;
+    arr[e++] = 0;
     StringCopy(arr + e, gOtherText_Poke);
     MenuPrint(arr, gUnknown_083F76BE[b][0], gUnknown_083F76BE[b][1]);
     sub_810A410(arr, 0, 15, 8);
