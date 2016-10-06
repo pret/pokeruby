@@ -300,6 +300,13 @@ static void sub_810A42C(u8 a, u8 b)
     u8 e;
     u16 species;
     
+    u8 five;
+    
+    u8 x1;
+    u8 x2;
+    u8 y1;
+    u8 y2;
+    
     if(a != 0xFF)
     {
         MenuZeroFillWindowRect(gUnknown_083F76BE[a][0],
@@ -312,9 +319,7 @@ static void sub_810A42C(u8 a, u8 b)
     species = sub_8109E50(b);
     ptr = sub_8090D3C(SpeciesToNationalPokedexNum(species));
     sub_810A410(arr, 0, 15, 5);
-
-    //FixMe: Compiler insists on optimizing the array indexes,
-    //and I can't stop it from doing so.
+    e = 5;
     {
         u8 *p = arr;
         p += 5;
@@ -328,19 +333,16 @@ static void sub_810A42C(u8 a, u8 b)
     {
         u8 *p = arr;
         p += 7;
-        *p = 5;
+        *p = e;
     }
     e = 8;
     d = 0;
-    while(*ptr != 0xFF)
+    
+    while(*ptr != 0xFF && d <= 0xA)
     {
         arr[e] = ptr[d];
         d++;
-        e++;        
-        if(ptr[d] == 0xFF)
-            break;
-        if(d > 0xA)
-            break;
+        e++;
     }
     e++;
     arr[e] = 0;
@@ -350,6 +352,13 @@ static void sub_810A42C(u8 a, u8 b)
     sub_8072C74(arr + 5, gSpeciesNames[species], 0x6B, 1);
     MenuPrint(arr, gUnknown_083F76BE[b][0], gUnknown_083F76BE[b][1] + 2);
     //ToDo: finish this
+    x1 = gUnknown_083F76BE[b][0] * 8 + 4;
+    x2 = (gUnknown_083F76BE[b][0] + 0xD) * 8 + 4;
+    y1 = gUnknown_083F76BE[b][1] * 8;
+    y2 = (gUnknown_083F76BE[b][1] + 4) * 8;
+    //y2 = gUnknown_083F76BE[b][1] + 32;
+    REG_WIN0H = (x1 << 8) | x2;
+    REG_WIN0V = (y1 << 8) | y2;
 }
 
 void nullsub_72(struct Sprite *sprite)
