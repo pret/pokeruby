@@ -24,7 +24,7 @@ struct MonCoords
 };
 
 extern void * const gUnknown_081FAF4C[];
-extern const u8 gUnknown_083F76B8[][2];
+extern const u8 gStarterChoose_PokeballCoords[][2];
 extern u8 gUnknown_083F66F0[];
 extern u8 gBirchBagTilemap[];
 extern u8 gBirchGrassTilemap[];
@@ -32,7 +32,7 @@ extern u8 gUnknown_083F7794[];
 extern u8 gUnknown_083F77A4[];
 extern u8 gUnknown_083F62EC[];
 extern const u8 gUnknown_083F76BE[][2];
-extern u16 gUnknown_083F76C4[];
+extern u16 gStarterMons[];
 extern union AffineAnimCmd *gUnknown_083F778C[];
 extern char gOtherText_DoYouChoosePoke[];
 extern u16 gScriptResult;
@@ -68,11 +68,16 @@ static u8 sub_810A580(u16, u8, u8);
 void sub_810A6C4(struct Sprite *);
 extern u8 *sub_8090D3C(u16);
 
+//Task data
+enum {
+    TD_STARTERSELECTION,
+}
+
 u16 sub_8109E50(u16 a)
 {
     if(a > 3)
         a = 0;
-    return gUnknown_083F76C4[a];
+    return gStarterMons[a];
 }
 
 static void sub_8109E6C(void)
@@ -146,22 +151,22 @@ void CB2_ChooseStarter(void)
     REG_DISPCNT = 0x3D40;
     
     taskId = CreateTask(Task_StarterChoose1, 0);
-    gTasks[taskId].data[0] = 1;
+    gTasks[taskId].data[TD_STARTERSELECTION] = 1;
     
     //Create hand sprite, maybe?
     spriteId = CreateSprite(&gSpriteTemplate_83F77CC, 120, 56, 2);
     gSprites[spriteId].data0 = taskId;
     
     //Create Pokeball sprites, maybe?
-    spriteId = CreateSprite(&gSpriteTemplate_83F77E4, gUnknown_083F76B8[0][0], gUnknown_083F76B8[0][1], 2);
+    spriteId = CreateSprite(&gSpriteTemplate_83F77E4, gStarterChoose_PokeballCoords[0][0], gStarterChoose_PokeballCoords[0][1], 2);
     gSprites[spriteId].data0 = taskId;
     gSprites[spriteId].data1 = 0;
     
-    spriteId = CreateSprite(&gSpriteTemplate_83F77E4, gUnknown_083F76B8[1][0], gUnknown_083F76B8[1][1], 2);
+    spriteId = CreateSprite(&gSpriteTemplate_83F77E4, gStarterChoose_PokeballCoords[1][0], gStarterChoose_PokeballCoords[1][1], 2);
     gSprites[spriteId].data0 = taskId;
     gSprites[spriteId].data1 = 1;
     
-    spriteId = CreateSprite(&gSpriteTemplate_83F77E4, gUnknown_083F76B8[2][0], gUnknown_083F76B8[2][1], 2);
+    spriteId = CreateSprite(&gSpriteTemplate_83F77E4, gStarterChoose_PokeballCoords[2][0], gStarterChoose_PokeballCoords[2][1], 2);
     gSprites[spriteId].data0 = taskId;
     gSprites[spriteId].data1 = 2;
 }
@@ -176,7 +181,7 @@ static void sub_810A11C(void)
 
 static void Task_StarterChoose1(u8 taskId)
 {
-    sub_810A42C(0xFF, gTasks[taskId].data[0]);
+    sub_810A42C(0xFF, gTasks[taskId].data[TD_STARTERSELECTION]);
     MenuDrawTextWindow(2, 14, 27, 19);
     MenuPrint(gOtherText_BirchInTrouble, 3, 15);
     gTasks[taskId].func = Task_StarterChoose2;
@@ -184,28 +189,28 @@ static void Task_StarterChoose1(u8 taskId)
 
 static void Task_StarterChoose2(u8 taskId)
 {
-    u8 data0 = gTasks[taskId].data[0];
+    u8 selection = gTasks[taskId].data[TD_STARTERSELECTION];
     
-    if(gMain.newKeys & 1)
+    if(gMain.newKeys & A_BUTTON)
     {
         u8 spriteId;
         
-        MenuZeroFillWindowRect(gUnknown_083F76BE[data0][0],
-          gUnknown_083F76BE[data0][1],
-          gUnknown_083F76BE[data0][0] + 13,
-          gUnknown_083F76BE[data0][1] + 3);
+        MenuZeroFillWindowRect(gUnknown_083F76BE[selection][0],
+          gUnknown_083F76BE[selection][1],
+          gUnknown_083F76BE[selection][0] + 13,
+          gUnknown_083F76BE[selection][1] + 3);
         
         REG_WIN0H = 0;
         REG_WIN0V = 0;
         
         spriteId = CreateSprite(&gSpriteTemplate_83F77FC,
-          gUnknown_083F76B8[data0][0],
-          gUnknown_083F76B8[data0][1],
+          gStarterChoose_PokeballCoords[selection][0],
+          gStarterChoose_PokeballCoords[selection][1],
           1);
         gTasks[taskId].data[2] = spriteId;
-        spriteId = sub_810A580(sub_8109E50(gTasks[taskId].data[0]),
-          gUnknown_083F76B8[data0][0],
-          gUnknown_083F76B8[data0][1]);
+        spriteId = sub_810A580(sub_8109E50(gTasks[taskId].data[TD_STARTERSELECTION]),
+          gStarterChoose_PokeballCoords[selection][0],
+          gStarterChoose_PokeballCoords[selection][1]);
           
         gSprites[spriteId].affineAnims = gUnknown_083F778C;
         gSprites[spriteId].callback = sub_810A6C4;
@@ -214,15 +219,15 @@ static void Task_StarterChoose2(u8 taskId)
     }
     else
     {
-        if((gMain.newKeys & 0x20) && data0 != 0)
+        if((gMain.newKeys & DPAD_LEFT) && selection != 0)
         {
-            gTasks[taskId].data[0]--;
-            sub_810A42C(data0, gTasks[taskId].data[0]);
+            gTasks[taskId].data[TD_STARTERSELECTION]--;
+            sub_810A42C(selection, gTasks[taskId].data[TD_STARTERSELECTION]);
         }
-        else if((gMain.newKeys & 0x10) && data0 <= 1)
+        else if((gMain.newKeys & DPAD_RIGHT) && selection <= 1)
         {
-            gTasks[taskId].data[0]++;
-            sub_810A42C(data0, gTasks[taskId].data[0]);
+            gTasks[taskId].data[TD_STARTERSELECTION]++;
+            sub_810A42C(selection, gTasks[taskId].data[TD_STARTERSELECTION]);
         }
     }
 }
@@ -239,7 +244,7 @@ static void Task_StarterChoose3(u8 taskId)
 
 static void Task_StarterChoose4(u8 taskId)
 {
-    PlayCry1(sub_8109E50(gTasks[taskId].data[0]), 0);
+    PlayCry1(sub_8109E50(gTasks[taskId].data[TD_STARTERSELECTION]), 0);
     MenuDrawTextWindow(2, 14, 27, 19);
     MenuPrint(gOtherText_DoYouChoosePoke, 3, 15);
     DisplayYesNoMenu(21, 7, 1);
@@ -253,12 +258,12 @@ static void Task_StarterChoose5(u8 taskId)
     switch(ProcessMenuInputNoWrap_())
     {
         case 0:
-            gScriptResult = gTasks[taskId].data[0];
+            gScriptResult = gTasks[taskId].data[TD_STARTERSELECTION];
             SetMainCallback2(gMain.field_8);
             break;
         case 1:
         case -1:
-            PlaySE(5);
+            PlaySE(SE_SELECT);
             MenuZeroFillWindowRect(21, 7, 27, 12);
             spriteId = gTasks[taskId].data[1];
             FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(gSprites[spriteId].oam.paletteNum));
@@ -368,8 +373,8 @@ static u8 sub_810A580(u16 a, u8 b, u8 c)
 void sub_810A62C(struct Sprite *sprite)
 {
     //Wow, the compiler is very stupid with optimization here!
-    sprite->pos1.x = gUnknown_083F76E4[gTasks[sprite->data0].data[0]][0];
-    sprite->pos1.y = gUnknown_083F76E4[gTasks[sprite->data0].data[0]][1];
+    sprite->pos1.x = gUnknown_083F76E4[gTasks[sprite->data0].data[TD_STARTERSELECTION]][0];
+    sprite->pos1.y = gUnknown_083F76E4[gTasks[sprite->data0].data[TD_STARTERSELECTION]][1];
     sprite->pos2.y = Sin(sprite->data1, 8);
     sprite->data1 = (u8)sprite->data1 + 4;
 }
@@ -377,7 +382,7 @@ void sub_810A62C(struct Sprite *sprite)
 //Sprite callback
 void sub_810A68C(struct Sprite *sprite)
 {
-    if(gTasks[sprite->data0].data[0] == sprite->data1)
+    if(gTasks[sprite->data0].data[TD_STARTERSELECTION] == sprite->data1)
         StartSpriteAnimIfDifferent(sprite, 1);
     else
         StartSpriteAnimIfDifferent(sprite, 0);

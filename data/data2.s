@@ -23919,15 +23919,22 @@ gBirchBallarrow_Gfx::
 gBirchCircle_Gfx::
 	.incbin "graphics/misc/birch_circle.4bpp.lz"
 
-gUnknown_083F76B8:: @ 83F76B8
-	.incbin "baserom.gba", 0x003f76b8, 0x6
+gStarterChoose_PokeballCoords:: @ 83F76B8
+	.byte 60, 64
+	.byte 120, 88
+	.byte 692, 64
 
 gUnknown_083F76BE:: @ 83F76BE
-	.incbin "baserom.gba", 0x003f76be, 0x6
+	.byte 0x00, 0x09
+	.byte 0x10, 0x0A
+	.byte 0x08, 0x04
 
-gUnknown_083F76C4:: @ 83F76C4
-	.incbin "baserom.gba", 0x003f76c4, 0x8
-
+gStarterMons:: @ 83F76C4
+	.2byte 277
+	.2byte 280
+	.2byte 283
+	.2byte 0
+	
 	.align 2
 gOamData_83F76CC:: @ 83F76CC
 	.2byte 0x00A0
