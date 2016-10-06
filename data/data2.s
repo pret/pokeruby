@@ -23930,9 +23930,9 @@ gUnknown_083F76BE:: @ 83F76BE
 	.byte 0x08, 0x04
 
 gStarterMons:: @ 83F76C4
-	.2byte 277
-	.2byte 280
-	.2byte 283
+	.2byte SPECIES_TREECKO
+	.2byte SPECIES_TORCHIC
+	.2byte SPECIES_MUDKIP
 	.2byte 0
 	
 	.align 2

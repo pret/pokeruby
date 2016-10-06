@@ -55,8 +55,8 @@ extern struct SpritePalette gUnknown_083F77B4[];
 extern struct SpriteTemplate gSpriteTemplate_83F77FC;
 extern struct SpriteTemplate gUnknown_02024E8C;
 
-u16 sub_8109E50(u16);   //This seems to be used in other modules
-static void sub_810A11C(void);
+u16 GetStarterPokemon(u16);   //This seems to be used in other modules
+static void MainCallback2(void);
 static void Task_StarterChoose1(u8 taskId);
 static void Task_StarterChoose2(u8 taskId);
 static void Task_StarterChoose3(u8 taskId);
@@ -64,24 +64,25 @@ static void Task_StarterChoose4(u8 taskId);
 static void Task_StarterChoose5(u8 taskId);
 static void Task_StarterChoose6(u8 taskId);
 
-void sub_810A42C(u8, u8);
+static void sub_810A42C(u8, u8);
 static u8 sub_810A580(u16, u8, u8);
 void sub_810A6C4(struct Sprite *);
-extern u8 *sub_8090D3C(u16);
+extern u8 *GetPokemonCategory(u16);
 
 //Task data
 enum {
     TD_STARTERSELECTION,
 };
 
-u16 sub_8109E50(u16 a)
+//Retrieves one of the available starter Pokemon
+u16 GetStarterPokemon(u16 n)
 {
-    if(a > 3)
-        a = 0;
-    return gStarterMons[a];
+    if(n > 3)
+        n = 0;
+    return gStarterMons[n];
 }
 
-void sub_8109E6C(void)
+static void VblankCallback(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
@@ -136,8 +137,8 @@ void CB2_ChooseStarter(void)
     REG_IME = savedIme;
     REG_DISPSTAT |= DISPSTAT_VBLANK_INTR;
     
-    SetVBlankCallback(sub_8109E6C);
-    SetMainCallback2(sub_810A11C);
+    SetVBlankCallback(VblankCallback);
+    SetMainCallback2(MainCallback2);
     
     REG_WININ = 0x3F;
     REG_WINOUT = 0x1F;
@@ -172,7 +173,7 @@ void CB2_ChooseStarter(void)
     gSprites[spriteId].data1 = 2;
 }
 
-void sub_810A11C(void)
+static void MainCallback2(void)
 {
     RunTasks();
     AnimateSprites();
@@ -180,7 +181,7 @@ void sub_810A11C(void)
     UpdatePaletteFade();
 }
 
-void Task_StarterChoose1(u8 taskId)
+static void Task_StarterChoose1(u8 taskId)
 {
     sub_810A42C(0xFF, gTasks[taskId].data[TD_STARTERSELECTION]);
     MenuDrawTextWindow(2, 14, 27, 19);
@@ -209,7 +210,7 @@ static void Task_StarterChoose2(u8 taskId)
           gStarterChoose_PokeballCoords[selection][1],
           1);
         gTasks[taskId].data[2] = spriteId;
-        spriteId = sub_810A580(sub_8109E50(gTasks[taskId].data[TD_STARTERSELECTION]),
+        spriteId = sub_810A580(GetStarterPokemon(gTasks[taskId].data[TD_STARTERSELECTION]),
           gStarterChoose_PokeballCoords[selection][0],
           gStarterChoose_PokeballCoords[selection][1]);
           
@@ -245,7 +246,7 @@ static void Task_StarterChoose3(u8 taskId)
 
 static void Task_StarterChoose4(u8 taskId)
 {
-    PlayCry1(sub_8109E50(gTasks[taskId].data[TD_STARTERSELECTION]), 0);
+    PlayCry1(GetStarterPokemon(gTasks[taskId].data[TD_STARTERSELECTION]), 0);
     MenuDrawTextWindow(2, 14, 27, 19);
     MenuPrint(gOtherText_DoYouChoosePoke, 3, 15);
     DisplayYesNoMenu(21, 7, 1);
@@ -258,12 +259,12 @@ static void Task_StarterChoose5(u8 taskId)
     
     switch(ProcessMenuInputNoWrap_())
     {
-        case 0:
+        case 0:		//YES
             gScriptResult = gTasks[taskId].data[TD_STARTERSELECTION];
             SetMainCallback2(gMain.field_8);
             break;
-        case 1:
-        case -1:
+        case 1:     //NO
+        case -1:	//B button
             PlaySE(SE_SELECT);
             MenuZeroFillWindowRect(21, 7, 27, 12);
             spriteId = gTasks[taskId].data[1];
@@ -283,22 +284,27 @@ static void Task_StarterChoose6(u8 taskId)
     gTasks[taskId].func = Task_StarterChoose1;
 }
 
-static void sub_810A410(u8 *arr, u8 b, u8 c, u8 d)
+static void sub_810A410(u8 *string, u8 b, u8 c, u8 d)
 {
-    *(arr++) = 0xFC;
-    *(arr++) = 4;
-    *(arr++) = c;
-    *(arr++) = b;
-    *(arr++) = d;
+    *(string++) = EXT_CTRL_CODE_BEGIN;
+    *(string++) = 4;
+    *(string++) = c;
+    *(string++) = b;
+    *(string++) = d;
 }
 
-void sub_810A42C(u8 a, u8 b)
+#define SET_CHAR(str, index, c) \
+{                               \
+    u8 *p = str + index;        \
+    *p = c;                     \
+}
+
+static void sub_810A42C(u8 a, u8 b)
 {
-    u8 arr[0x48];
-    u8 *ptr;
-    u8 d;
-    u8 e;
-    u8 c;
+    u8 text[0x48];
+    u8 *category;
+    u8 srcIndex;
+    u8 dstIndex;
     u16 species;
     
     u8 x1;
@@ -315,46 +321,32 @@ void sub_810A42C(u8 a, u8 b)
         REG_WIN0H = 0;
         REG_WIN0V = 0;
     }
-    species = sub_8109E50(b);
-    ptr = sub_8090D3C(SpeciesToNationalPokedexNum(species));
-    sub_810A410(arr, 0, 15, 8);
-    e = 5;
+    species = GetStarterPokemon(b);
+    category = GetPokemonCategory(SpeciesToNationalPokedexNum(species));
+    sub_810A410(text, 0, 15, 8);
+    dstIndex = 5;
+    SET_CHAR(text, 5, EXT_CTRL_CODE_BEGIN);
+    SET_CHAR(text, 6, 0x11);
+    SET_CHAR(text, 7, dstIndex);
+    dstIndex = 8;
+    srcIndex = 0;
+    while(category[srcIndex] != EOS && srcIndex <= 10)
     {
-        u8 *p = arr;
-        p += 5;
-        *p = 0xFC;
+        text[dstIndex] = category[srcIndex];
+        srcIndex++;
+        dstIndex++;
     }
-    {
-        u8 *p = arr;
-        p += 6;
-        *p = 0x11;
-    }
-    {
-        u8 *p = arr;
-        p += 7;
-        *p = e;
-    }
-    e = 8;
-    d = 0;
-    while(ptr[d] != 0xFF && d <= 0xA)
-    {
-        arr[e] = ptr[d];
-        d++;
-        e++;
-    }
-    //c = e + 1;
-    arr[e++] = 0;
-    StringCopy(arr + e, gOtherText_Poke);
-    MenuPrint(arr, gUnknown_083F76BE[b][0], gUnknown_083F76BE[b][1]);
-    sub_810A410(arr, 0, 15, 8);
-    sub_8072C74(arr + 5, gSpeciesNames[species], 0x6B, 1);
-    MenuPrint(arr, gUnknown_083F76BE[b][0], gUnknown_083F76BE[b][1] + 2);
-    //ToDo: finish this
+    text[dstIndex++] = CHAR_SPACE;
+    StringCopy(text + dstIndex, gOtherText_Poke);
+    MenuPrint(text, gUnknown_083F76BE[b][0], gUnknown_083F76BE[b][1]);
+    sub_810A410(text, 0, 15, 8);
+    sub_8072C74(text + 5, gSpeciesNames[species], 0x6B, 1);
+    MenuPrint(text, gUnknown_083F76BE[b][0], gUnknown_083F76BE[b][1] + 2);
+    
     x1 = gUnknown_083F76BE[b][0] * 8 + 4;
-    x2 = (gUnknown_083F76BE[b][0] + 0xD) * 8 + 4;
+    x2 = (gUnknown_083F76BE[b][0] + 13) * 8 + 4;
     y1 = gUnknown_083F76BE[b][1] * 8;
     y2 = (gUnknown_083F76BE[b][1] + 4) * 8;
-    //y2 = gUnknown_083F76BE[b][1] + 32;
     REG_WIN0H = (x1 << 8) | x2;
     REG_WIN0V = (y1 << 8) | y2;
 }
