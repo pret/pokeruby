@@ -45,7 +45,7 @@ gUnknown_081E79B0:: @ 81E79B0
 	.4byte gBirchText_Girl, 0
 
 	.align 2
-gUnknown_081E79C0:: @ 81E79C0
+gMalePresetNames:: @ 81E79C0
 	.4byte gBirchText_NewName, 0
 	.4byte gDefaultBoyName1, 0
 	.4byte gDefaultBoyName2, 0
@@ -53,7 +53,7 @@ gUnknown_081E79C0:: @ 81E79C0
 	.4byte gDefaultBoyName4, 0
 
 	.align 2
-gUnknown_081E79E8:: @ 81E79E8
+gFemalePresetNames:: @ 81E79E8
 	.4byte gBirchText_NewName, 0
 	.4byte gDefaultGirlName1, 0
 	.4byte gDefaultGirlName2, 0
@@ -3875,8 +3875,11 @@ gDummyWarpData:: @ 8216624
 gUnknown_0821664C:: @ 821664C
 	.incbin "baserom.gba", 0x0021664c, 0x48
 
+	.align 2
 gUnknown_08216694:: @ 8216694
-	.incbin "baserom.gba", 0x00216694, 0xc
+	.4byte REG_WIN0H
+	.4byte ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_DEST_RELOAD) << 16) | 1
+	.4byte 1
 
 	.align 2
 gUnknown_082166A0:: @ 82166A0

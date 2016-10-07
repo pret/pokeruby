@@ -5,27 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8054814
-sub_8054814: @ 8054814
-	push {lr}
-	bl sav1_get_flash_used_on_map
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0
-	beq _08054832
-	bl sub_80815E0
-	ldr r2, _08054838
-	ldr r0, [r2]
-	ldr r1, [r2, 0x4]
-	ldr r2, [r2, 0x8]
-	bl sub_80895F8
-_08054832:
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08054838: .4byte gUnknown_08216694
-	thumb_func_end sub_8054814
-
 	thumb_func_start sub_805483C
 sub_805483C: @ 805483C
 	push {r4,lr}

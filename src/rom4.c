@@ -61,6 +61,7 @@ extern struct MapData * const gMapAttributes[];
 extern struct MapHeader * const * const gMapGroups[];
 extern const struct WarpData gDummyWarpData;
 extern s32 gUnknown_0839ACE8;
+extern u32 gUnknown_08216694[];
 
 extern struct UnkWarpStruct *sub_80FA8CC(u8);
 extern u16 VarGet(u16);
@@ -701,7 +702,7 @@ void sub_8053CE4(s32 a1)
     gSaveBlock1.flashUsed = a1;
 }
 
-u8 sav1_get_flash_used_on_map()
+u8 sav1_get_flash_used_on_map(void)
 {
     return gSaveBlock1.flashUsed;
 }
@@ -1316,4 +1317,14 @@ void VBlankCB_Field(void)
     sub_8057A58();
     TransferPlttBuffer();
     sub_8072E74();
+}
+
+void sub_8054814(void)
+{
+    u8 val = sav1_get_flash_used_on_map();
+    if (val)
+    {
+        sub_80815E0(val);
+        sub_80895F8(gUnknown_08216694[0], gUnknown_08216694[1], gUnknown_08216694[2]);
+    }
 }
