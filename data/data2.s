@@ -23925,13 +23925,14 @@ gBirchCircle_Gfx::
 gStarterChoose_PokeballCoords:: @ 83F76B8
 	.byte 60, 64
 	.byte 120, 88
-	.byte 692, 64
+	.byte 180, 64
 
 gStarterChoose_LabelCoords:: @ 83F76BE
 	.byte 0, 9
 	.byte 16, 10
 	.byte 8, 4
 
+	.align 1
 gStarterMons:: @ 83F76C4
 	.2byte SPECIES_TREECKO
 	.2byte SPECIES_TORCHIC
