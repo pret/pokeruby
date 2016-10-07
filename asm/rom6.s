@@ -8694,7 +8694,7 @@ sub_810F694: @ 810F694
 	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_8109E50
+	bl GetStarterPokemon
 	lsls r0, 16
 	lsrs r6, r0, 16
 	bl CalculatePlayerPartyCount
@@ -118856,7 +118856,7 @@ sub_81458DC: @ 81458DC
 	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_8109E50
+	bl GetStarterPokemon
 	lsls r0, 16
 	lsrs r0, 16
 	bl SpeciesToNationalPokedexNum
