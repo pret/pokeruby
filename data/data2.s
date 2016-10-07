@@ -23938,7 +23938,7 @@ gStarterMons:: @ 83F76C4
 	.2byte SPECIES_TORCHIC
 	.2byte SPECIES_MUDKIP
 	.2byte 0
-	
+
 	.align 2
 gOamData_83F76CC:: @ 83F76CC
 	.2byte 0x00A0
