@@ -23922,14 +23922,22 @@ gBirchBallarrow_Gfx::
 gBirchCircle_Gfx::
 	.incbin "graphics/misc/birch_circle.4bpp.lz"
 
-gUnknown_083F76B8:: @ 83F76B8
-	.incbin "baserom.gba", 0x003f76b8, 0x6
+gStarterChoose_PokeballCoords:: @ 83F76B8
+	.byte 60, 64
+	.byte 120, 88
+	.byte 180, 64
 
-gUnknown_083F76BE:: @ 83F76BE
-	.incbin "baserom.gba", 0x003f76be, 0x6
+gStarterChoose_LabelCoords:: @ 83F76BE
+	.byte 0, 9
+	.byte 16, 10
+	.byte 8, 4
 
-gUnknown_083F76C4:: @ 83F76C4
-	.incbin "baserom.gba", 0x003f76c4, 0x8
+	.align 1
+gStarterMons:: @ 83F76C4
+	.2byte SPECIES_TREECKO
+	.2byte SPECIES_TORCHIC
+	.2byte SPECIES_MUDKIP
+	.2byte 0
 
 	.align 2
 gOamData_83F76CC:: @ 83F76CC
@@ -24042,7 +24050,7 @@ gSpriteTemplate_83F77E4:: @ 83F77E4
 
 	.align 2
 gSpriteTemplate_83F77FC:: @ 83F77FC
-	spr_template 4097, 4097, gOamData_83F76DC, gSpriteAnimTable_83F7758, NULL, gSpriteAffineAnimTable_83F7790, sub_810A6C4
+	spr_template 4097, 4097, gOamData_83F76DC, gSpriteAnimTable_83F7758, NULL, gSpriteAffineAnimTable_83F7790, StarterPokemonSpriteAnimCallback
 
 @ 83F7814
 ClockGfx_Misc:
