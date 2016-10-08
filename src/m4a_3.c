@@ -25,7 +25,7 @@ void CgbSound(void)
         vu8 *_s16;
         u32 r8;
         
-        if(chan->sf & 0xC7)
+        if(chan->sf & SOUND_CHANNEL_SF_ON)
         {
             switch(chanNum)
             {
@@ -62,11 +62,11 @@ void CgbSound(void)
             c15 = soundInfo->c15;
             r8 = *_s12;
             
-            if(chan->sf & 0x80)
+            if(chan->sf & SOUND_CHANNEL_SF_START)
             {
-                u8 chanSfAnd0x40 = (u32)(chan->sf) & 0x40;
+                u8 stop = (u32)(chan->sf) & SOUND_CHANNEL_SF_STOP;
                 
-                if(chanSfAnd0x40)
+                if(stop)
                     goto _081DEC4A;
                 
                 chan->sf = 3;
@@ -94,7 +94,7 @@ void CgbSound(void)
                             REG_WAVE_RAM3 = chan->wp[3];
                             chan->cp = chan->wp;
                         }
-                        *_s8 = chanSfAnd0x40;
+                        *_s8 = stop;
                         *_r7 = chan->le;
                         if(chan->le)
                             chan->n4 = 0xC0;
@@ -136,9 +136,9 @@ void CgbSound(void)
             
           _081DEC58:
             //_081DEC58
-            if((chan->sf & 0x40) && (chan->sf & 0x3))
+            if((chan->sf & SOUND_CHANNEL_SF_STOP) && (chan->sf & 0x3))
             {
-                chan->sf &= 0xFC;
+                chan->sf &= SOUND_CHANNEL_SF_ON;
                 if((chan->ec = chan->re) == 0)
                     goto _081DECAA;
                 chan->mo |= 1;
@@ -148,41 +148,40 @@ void CgbSound(void)
             }
             //_081DEC98
             
-             
+            
           _081DEC98:
+
             if(chan->ec == 0)
             {
                 if(chanNum == 3)
                     chan->mo |= 1;
               _081DECAA:
                 CgbModVol(chan);
-                //Perhaps this should become a switch(chan->sf & 3) statement
-                if(chan->sf & 3)
-                    goto _081DECFE;
-                if(--(s8)chan->ev > 0)
-                    goto _081DECFA;
-              _081DECCA:
-                chan->ev = (chan->eg * chan->echoVolume + 255) / 256;  //round up
-                if(chan->ev == 0)
-                    goto _081DEC4A;     //branch up
-                chan->sf |= 4;
-                chan->mo |= 1;
-                if(chanNum != 3)
-                    r8 = 2;
-                goto _081DED9E;
-              _081DECFA:
-                chan->ec = chan->re;
-                goto end;   //goto _081DED8A
-              _081DECFE:
-                if((chan->sf & 3) == 1)
+                if((chan->sf & 3) == 0)
+                {
+                    if(--(s8)chan->ev > 0)
+                        goto _081DECFA;
+                  _081DECCA:
+                    chan->ev = (chan->eg * chan->echoVolume + 255) / 256;  //round up
+                    if(chan->ev == 0)
+                        goto _081DEC4A;     //branch up
+                    chan->sf |= 4;
+                    chan->mo |= 1;
+                    if(chanNum != 3)
+                        r8 = 2;
+                    goto _081DED9E;
+                  _081DECFA:
+                    chan->ec = chan->re;
+                }
+                //_081DECFE
+                else if((chan->sf & 3) == 1)
                 {
                   _081DED02:
                     chan->ev = chan->sg;
                     chan->ec = 7;
-                    goto end;   //goto _081DED8A
                 }
                 //_081DED0A
-                if((chan->sf & 3) == 2)
+                else if((chan->sf & 3) == 2)
                 {
                     if((s8)--chan->ev <= (s8)chan->sg)
                     {
@@ -201,26 +200,27 @@ void CgbSound(void)
                     }
                     //_081DED4A
                     chan->ec = chan->de;
-                    goto end;   //goto _081DED8A
                 }
                 //_081DED4E
-                if(++chan->ev < chan->eg)
+                else
                 {
-                    chan->ec = chan->at;
-                    goto end;   //goto _081DED88
+                    if(++chan->ev < chan->eg)
+                    {
+                        chan->ec = chan->at;
+                        goto end;   //goto _081DED88
+                    }
+                  _081DED5E:
+                    chan->sf--;
+                    //chan->ec = chan->de;
+                    if((chan->ec = chan->de) == 0)
+                        goto _081DED22;
+                    chan->mo |= 1;
+                    chan->ev = chan->eg;
+                    if(chanNum != 3)
+                        r8 = chan->de;
                 }
-              _081DED5E:
-                chan->sf--;
-                //chan->ec = chan->de;
-                if((chan->ec = chan->de) == 0)
-                    goto _081DED22;
-                chan->mo |= 1;
-                chan->ev = chan->eg;
-                if(chanNum != 3)
-                    r8 = chan->de;
-                goto end;
             }
-          
+            
           end:
           _081DED8C:
             chan->ec--;
@@ -246,7 +246,6 @@ void CgbSound(void)
                 }
                 
                 //_081DEDDE
-                //ToDo: prevent the compiler from combining these two assignments
                 if(chanNum != 4)
                     *_s16 = chan->fr;
                 else

@@ -64,6 +64,17 @@ struct ToneData
     u8 release;
 };
 
+#define SOUND_CHANNEL_SF_START  0x80
+#define SOUND_CHANNEL_SF_STOP   0x40
+#define SOUND_CHANNEL_SF_LOOP   0x10
+#define SOUND_CHANNEL_SF_IEC    0x04
+#define SOUND_CHANNEL_SF_ENV    0x03
+#define SOUND_CHANNEL_SF_ENV_SB 0x01
+#define SOUND_CHANNEL_SF_ENV_AT 0x03
+#define SOUND_CHANNEL_SF_ENV_DE 0x02
+#define SOUND_CHANNEL_SF_ENV_SU 0x01
+#define SOUND_CHANNEL_SF_ON     0xC7
+
 struct CgbChannel
 {
     u8 sf;          //0x00
