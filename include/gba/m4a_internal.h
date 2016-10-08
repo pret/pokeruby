@@ -66,43 +66,43 @@ struct ToneData
 
 struct CgbChannel
 {
-    u8 sf;
-    u8 ty;
-    u8 rightVolume;
-    u8 leftVolume;
-    u8 at;
-    u8 de;
-    u8 su;
-    u8 re;
-    u8 ky;
-    u8 ev;
-    u8 eg;
-    u8 ec;
-    u8 echoVolume;
-    u8 echoLength;
-    u8 d1;
-    u8 d2;
-    u8 gt;
-    u8 mk;
-    u8 ve;
-    u8 pr;
-    u8 rp;
-    u8 d3[3];
-    u8 d5;
-    u8 sg;
-    u8 n4;
-    u8 pan;
-    u8 panMask;
-    u8 mo;
-    u8 le;
-    u8 sw;
-    u32 fr;
-    u32 wp;
-    u32 cp;
-    u32 tp;
-    u32 pp;
-    u32 np;
-    u8 d4[8];
+    u8 sf;          //0x00
+    u8 ty;          //0x01
+    u8 rightVolume; //0x02
+    u8 leftVolume;  //0x03
+    u8 at;          //0x04
+    u8 de;          //0x05
+    u8 su;          //0x06
+    u8 re;          //0x07
+    u8 ky;          //0x08
+    u8 ev;          //0x09
+    u8 eg;          //0x0A
+    u8 ec;          //0x0B
+    u8 echoVolume;  //0x0C
+    u8 echoLength;  //0x0D
+    u8 d1;          //0x0E
+    u8 d2;          //0x0F
+    u8 gt;          //0x10
+    u8 mk;          //0x11
+    u8 ve;          //0x12
+    u8 pr;          //0x13
+    u8 rp;          //0x14
+    u8 d3[3];       //0x15
+    u8 d5;          //0x18
+    u8 sg;          //0x19
+    u8 n4;          //0x1A
+    u8 pan;         //0x1B
+    u8 panMask;     //0x1C
+    u8 mo;          //0x1D
+    u8 le;          //0x1E
+    u8 sw;          //0x1F
+    u32 fr;         //0x20
+    u32 *wp;        //0x24
+    u32 *cp;        //0x28
+    u32 tp;         //0x2C
+    u32 pp;         //0x30
+    u32 np;         //0x34
+    u8 d4[8];       //0x38
 };
 
 struct MusicPlayerTrack;
