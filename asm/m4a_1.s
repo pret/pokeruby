@@ -1374,7 +1374,7 @@ _081DD9C8:
 	cmp r4, 0
 	beq _081DDA58
 _081DD9E6:
-	ldrb r1, [r4]
+	ldrb r1, [r4, o_SoundChannel_status]
 	movs r0, 0xC7
 	tst r0, r1
 	bne _081DD9F6
@@ -1382,7 +1382,7 @@ _081DD9E6:
 	bl ClearChain
 	b _081DDA52
 _081DD9F6:
-	ldrb r0, [r4, 0x1]
+	ldrb r0, [r4, o_SoundChannel_type]
 	movs r6, 0x7
 	ands r6, r0
 	ldrb r3, [r5, o_MusicPlayerTrack_flags]
@@ -1392,16 +1392,16 @@ _081DD9F6:
 	bl ChnVolSetAsm
 	cmp r6, 0
 	beq _081DDA14
-	ldrb r0, [r4, 0x1D]
+	ldrb r0, [r4, o_CgbChannel_mo]
 	movs r1, 0x1
 	orrs r0, r1
-	strb r0, [r4, 0x1D]
+	strb r0, [r4, o_CgbChannel_mo]
 _081DDA14:
-	ldrb r3, [r5]
+	ldrb r3, [r5, o_MusicPlayerTrack_flags]
 	movs r0, 0xC
 	tst r0, r3
 	beq _081DDA52
-	ldrb r1, [r4, 0x8]
+	ldrb r1, [r4, o_SoundChannel_ky]
 	movs r0, 0x8
 	ldrsb r0, [r5, r0]
 	adds r2, r1, r0
@@ -1416,20 +1416,20 @@ _081DDA28:
 	ldrb r2, [r5, o_MusicPlayerTrack_pitM]
 	adds r0, r6, 0
 	bl call_r3
-	str r0, [r4, 0x20]
-	ldrb r0, [r4, 0x1D]
+	str r0, [r4, o_CgbChannel_fr]
+	ldrb r0, [r4, o_CgbChannel_mo]
 	movs r1, 0x2
 	orrs r0, r1
-	strb r0, [r4, 0x1D]
+	strb r0, [r4, o_CgbChannel_mo]
 	b _081DDA52
 _081DDA46:
 	adds r1, r2, 0
 	ldrb r2, [r5, o_MusicPlayerTrack_pitM]
-	ldr r0, [r4, 0x24]
+	ldr r0, [r4, o_SoundChannel_wav]
 	bl MidiKeyToFreq
-	str r0, [r4, 0x20]
+	str r0, [r4, o_SoundChannel_freq]
 _081DDA52:
-	ldr r4, [r4, 0x34]
+	ldr r4, [r4, o_SoundChannel_np]
 	cmp r4, 0
 	bne _081DD9E6
 _081DDA58:
@@ -1467,35 +1467,35 @@ lt2_ID_NUMBER:      .word ID_NUMBER
 TrackStop:
 	push {r4-r6,lr}
 	adds r5, r1, 0
-	ldrb r1, [r5]
+	ldrb r1, [r5, o_MusicPlayerTrack_flags]
 	movs r0, 0x80
 	tst r0, r1
 	beq TrackStop_Done
-	ldr r4, [r5, 0x20]
+	ldr r4, [r5, o_MusicPlayerTrack_chan]
 	cmp r4, 0
 	beq TrackStop_3
 	movs r6, 0
 TrackStop_Loop:
-	ldrb r0, [r4]
+	ldrb r0, [r4, o_SoundChannel_status]
 	cmp r0, 0
 	beq TrackStop_2
-	ldrb r0, [r4, 0x1]
+	ldrb r0, [r4, o_SoundChannel_type]
 	movs r3, 0x7
 	ands r0, r3
 	beq TrackStop_1
 	ldr r3, =SOUND_INFO_PTR
 	ldr r3, [r3]
-	ldr r3, [r3, 0x2C]
+	ldr r3, [r3, o_SoundInfo_CgbOscOff]
 	bl call_r3
 TrackStop_1:
-	strb r6, [r4]
+	strb r6, [r4, o_SoundChannel_status]
 TrackStop_2:
-	str r6, [r4, 0x2C]
-	ldr r4, [r4, 0x34]
+	str r6, [r4, o_SoundChannel_track]
+	ldr r4, [r4, o_SoundChannel_np]
 	cmp r4, 0
 	bne TrackStop_Loop
 TrackStop_3:
-	str r4, [r5, 0x20]
+	str r4, [r5, o_MusicPlayerTrack_chan]
 TrackStop_Done:
 	pop {r4-r6}
 	pop {r0}
@@ -1833,20 +1833,20 @@ _081DDD18:
 	movs r4, 0x83
 	movs r5, 0x40
 _081DDD22:
-	ldrb r2, [r1]
+	ldrb r2, [r1, o_SoundChannel_status]
 	tst r2, r4
 	beq _081DDD3A
 	tst r2, r5
 	bne _081DDD3A
-	ldrb r0, [r1, 0x11]
+	ldrb r0, [r1, o_SoundChannel_mk]
 	cmp r0, r3
 	bne _081DDD3A
 	movs r0, 0x40
 	orrs r2, r0
-	strb r2, [r1]
+	strb r2, [r1, o_SoundChannel_status]
 	b _081DDD40
 _081DDD3A:
-	ldr r1, [r1, 0x34]
+	ldr r1, [r1, o_SoundChannel_np]
 	cmp r1, 0
 	bne _081DDD22
 _081DDD40:
@@ -1857,9 +1857,9 @@ _081DDD40:
 	thumb_func_start clear_modM
 clear_modM:
 	movs r2, 0
-	strb r2, [r1, 0x16]
-	strb r2, [r1, 0x1A]
-	ldrb r2, [r1, 0x18]
+	strb r2, [r1, o_MusicPlayerTrack_modM]
+	strb r2, [r1, o_MusicPlayerTrack_lfoSpeedC]
+	ldrb r2, [r1, o_MusicPlayerTrack_modT]
 	cmp r2, 0
 	bne _081DDD54
 	movs r2, 0xC
@@ -1867,17 +1867,17 @@ clear_modM:
 _081DDD54:
 	movs r2, 0x3
 _081DDD56:
-	ldrb r3, [r1]
+	ldrb r3, [r1, o_MusicPlayerTrack_flags]
 	orrs r3, r2
-	strb r3, [r1]
+	strb r3, [r1, o_MusicPlayerTrack_flags]
 	bx lr
 	thumb_func_end clear_modM
 
 	thumb_func_start ld_r3_tp_adr_i
 ld_r3_tp_adr_i_unchecked:
-	ldr r2, [r1, 0x40]
-	adds r3, r2, 0x1
-	str r3, [r1, 0x40]
+	ldr r2, [r1, o_MusicPlayerTrack_cmdPtr]
+	adds r3, r2, 1
+	str r3, [r1, o_MusicPlayerTrack_cmdPtr]
 	ldrb r3, [r2]
 	bx lr
 	thumb_func_end ld_r3_tp_adr_i
@@ -1886,7 +1886,7 @@ ld_r3_tp_adr_i_unchecked:
 ply_lfos:
 	mov r12, lr
 	bl ld_r3_tp_adr_i_unchecked
-	strb r3, [r1, 0x19]
+	strb r3, [r1, o_MusicPlayerTrack_lfoSpeed]
 	cmp r3, 0
 	bne _081DDD7C
 	bl clear_modM
@@ -1898,7 +1898,7 @@ _081DDD7C:
 ply_mod:
 	mov r12, lr
 	bl ld_r3_tp_adr_i_unchecked
-	strb r3, [r1, 0x17]
+	strb r3, [r1, o_MusicPlayerTrack_mod]
 	cmp r3, 0
 	bne _081DDD90
 	bl clear_modM
