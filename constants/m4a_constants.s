@@ -83,13 +83,13 @@
 
 	struct_begin
 	struct_field o_MusicPlayerTrack_flags, 1
-	struct_field o_MusicPlayerTrack_wai, 1
-	struct_field o_MusicPlayerTrack_patP, 1
+	struct_field o_MusicPlayerTrack_wait, 1
+	struct_field o_MusicPlayerTrack_patternLevel, 1
 	struct_field o_MusicPlayerTrack_repN, 1
 	struct_field o_MusicPlayerTrack_gateTime, 1
 	struct_field o_MusicPlayerTrack_key, 1
 	struct_field o_MusicPlayerTrack_velocity, 1
-	struct_field o_MusicPlayerTrack_run, 1
+	struct_field o_MusicPlayerTrack_runningStatus, 1
 	struct_field o_MusicPlayerTrack_keyM, 1
 	struct_field o_MusicPlayerTrack_pitM, 1
 	struct_field o_MusicPlayerTrack_keyShift, 1
@@ -128,7 +128,32 @@
 	struct_field o_MusicPlayerTrack_unk_3A, 2
 	struct_field o_MusicPlayerTrack_unk_3C, 4
 	struct_field o_MusicPlayerTrack_cmdPtr, 4
-	struct_field o_MusicPlayerTrack_patS, 12
+	struct_field o_MusicPlayerTrack_patternStack, 12
 	struct_field MusicPlayerTrack_size, 0
 
 	.equiv o_MusicPlayerTrack_ToneData_keySplitTable, o_MusicPlayerTrack_ToneData_attack
+
+	struct_begin
+	struct_field o_MusicPlayerInfo_songHeader, 4
+	struct_field o_MusicPlayerInfo_status, 4
+	struct_field o_MusicPlayerInfo_trackCount, 1
+	struct_field o_MusicPlayerInfo_priority, 1
+	struct_field o_MusicPlayerInfo_cmd, 1
+	struct_field o_MusicPlayerInfo_unk_B, 1
+	struct_field o_MusicPlayerInfo_clock, 4
+	struct_field o_MusicPlayerInfo_gap, 8
+	struct_field o_MusicPlayerInfo_memAccArea, 4
+	struct_field o_MusicPlayerInfo_tempoD, 2
+	struct_field o_MusicPlayerInfo_tempoU, 2
+	struct_field o_MusicPlayerInfo_tempoI, 2
+	struct_field o_MusicPlayerInfo_tempoC, 2
+	struct_field o_MusicPlayerInfo_fadeOI, 2
+	struct_field o_MusicPlayerInfo_fadeOC, 2
+	struct_field o_MusicPlayerInfo_fadeOV, 2
+	struct_field o_MusicPlayerInfo_padding, 2
+	struct_field o_MusicPlayerInfo_tracks, 4
+	struct_field o_MusicPlayerInfo_tone, 4
+	struct_field o_MusicPlayerInfo_ident, 4
+	struct_field o_MusicPlayerInfo_func, 4
+	struct_field o_MusicPlayerInfo_intp, 4
+	struct_field MusicPlayerInfo_size, 0
