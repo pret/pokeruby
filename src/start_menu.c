@@ -31,7 +31,7 @@ extern void play_some_sound(void);
 extern void sub_8093130(u8, void (*)(void));
 extern void sub_805469C(void);
 extern void sub_80C823C(void);
-extern u8 sub_80715A4(void);
+extern u8 SaveCallback1(void);
 extern void CB2_InitOptionMenu(void);
 extern void sub_8093110(void (*)(void));
 extern void sub_80EBA5C(void);
@@ -50,6 +50,20 @@ extern void sub_8070FB4(void);
 extern u8 *sub_8072C44(u8 *, s32, u8, u8);
 extern u8 FlagGet(u16);
 extern bool32 is_c1_link_related_active(void);
+
+//Menu actions
+enum {
+    MENU_ACTION_POKEDEX,
+    MENU_ACTION_POKEMON,
+    MENU_ACTION_BAG,
+    MENU_ACTION_POKENAV,
+    MENU_ACTION_PLAYER,
+    MENU_ACTION_SAVE,
+    MENU_ACTION_OPTION,
+    MENU_ACTION_EXIT,
+    MENU_ACTION_RETIRE,
+    MENU_ACTION_PLAYER2
+};
 
 struct MenuItem {
     u8 *text;
@@ -72,9 +86,9 @@ extern u8 gUnknown_030006AD;
 extern u8 (*gUnknown_03004AE8)(void);
 extern u8 gUnknown_03004860;
 extern struct MenuItem gStartMenuItems[];
-extern u8 gUnknown_0202E8FC;
-extern u8 gUnknown_0202E8FE[];
-extern u8 gUnknown_0202E8FD;
+extern u8 startMenuCursorPos;
+extern u8 currentStartMenuActions[];
+extern u8 numStartMenuActions;
 extern u8 gOtherText_SafariStock[];
 extern u8 gUnknown_02038808;
 
@@ -100,29 +114,29 @@ void sub_8071700(void);
 void sub_8071684(u8 *, u8 (*)(void));
 void task50_save_game(u8 a);
 u8 sub_8071794(void);
-u8 sub_80715C0(void);
+u8 SaveCallback2(void);
 u8 sub_8071630(void);
 void sub_807160C(void);
 void sub_8071C20(void);
-u8 StartMenu_Pokedex(void);
-u8 sub_80714FC(void);
-u8 sub_8071554(void);
-u8 sub_8071560(void);
+u8 StartMenu_PokedexCallback(void);
+u8 StartMenu_SaveCallback(void);
+u8 StartMenu_ExitCallback(void);
+u8 StartMenu_RetireCallback(void);
 void sub_80712B4(u8);
 void sub_8071284(void (*)(u8));
-void append_byte(u8 *a, u8 *b, u32 c);
+void AppendToList(u8 *, u8 *, u32);
 void sub_80710A0(void);
 void BuildStartMenuActions_Normal(void);
 void BuildStartMenuActions_SafariZone(void);
 
 void sub_8070FB4(void)
 {
-    gUnknown_0202E8FD = 0;
-    if(is_c1_link_related_active() == 1)
+    numStartMenuActions = 0;
+    if(is_c1_link_related_active() == TRUE)
         sub_80710A0();
     else
     {
-        if(GetSafariZoneFlag() == 1)
+        if(GetSafariZoneFlag() == TRUE)
             BuildStartMenuActions_SafariZone();
         else
             BuildStartMenuActions_Normal();
@@ -131,44 +145,44 @@ void sub_8070FB4(void)
 
 void AddStartMenuAction(u8 action)
 {
-    append_byte(gUnknown_0202E8FE, &gUnknown_0202E8FD, action);
+    AppendToList(currentStartMenuActions, &numStartMenuActions, action);
 }
 
 void BuildStartMenuActions_Normal(void)
 {
-    if(FlagGet(0x801) == 1)
-        AddStartMenuAction(0);
-    if(FlagGet(0x800) == 1)
-        AddStartMenuAction(1);
-    AddStartMenuAction(2);
-    if(FlagGet(0x802) == 1)
-        AddStartMenuAction(3);
-    AddStartMenuAction(4);
-    AddStartMenuAction(5);
-    AddStartMenuAction(6);
-    AddStartMenuAction(7);
+    if(FlagGet(0x801) == TRUE)
+        AddStartMenuAction(MENU_ACTION_POKEDEX);
+    if(FlagGet(0x800) == TRUE)
+        AddStartMenuAction(MENU_ACTION_POKEMON);
+    AddStartMenuAction(MENU_ACTION_BAG);
+    if(FlagGet(0x802) == TRUE)
+        AddStartMenuAction(MENU_ACTION_POKENAV);
+    AddStartMenuAction(MENU_ACTION_PLAYER);
+    AddStartMenuAction(MENU_ACTION_SAVE);
+    AddStartMenuAction(MENU_ACTION_OPTION);
+    AddStartMenuAction(MENU_ACTION_EXIT);
 }
 
 void BuildStartMenuActions_SafariZone(void)
 {
-    AddStartMenuAction(8);
-    AddStartMenuAction(0);
-    AddStartMenuAction(1);
-    AddStartMenuAction(2);
-    AddStartMenuAction(4);
-    AddStartMenuAction(6);
-    AddStartMenuAction(7);
+    AddStartMenuAction(MENU_ACTION_RETIRE);
+    AddStartMenuAction(MENU_ACTION_POKEDEX);
+    AddStartMenuAction(MENU_ACTION_POKEMON);
+    AddStartMenuAction(MENU_ACTION_BAG);
+    AddStartMenuAction(MENU_ACTION_PLAYER);
+    AddStartMenuAction(MENU_ACTION_OPTION);
+    AddStartMenuAction(MENU_ACTION_EXIT);
 }
 
 void sub_80710A0(void)
 {
-    AddStartMenuAction(1);
-    AddStartMenuAction(2);
-    if(FlagGet(0x802) == 1)
-        AddStartMenuAction(3);
-    AddStartMenuAction(9);
-    AddStartMenuAction(6);
-    AddStartMenuAction(7);    
+    AddStartMenuAction(MENU_ACTION_POKEMON);
+    AddStartMenuAction(MENU_ACTION_BAG);
+    if(FlagGet(0x802) == TRUE)
+        AddStartMenuAction(MENU_ACTION_POKENAV);
+    AddStartMenuAction(MENU_ACTION_PLAYER2);
+    AddStartMenuAction(MENU_ACTION_OPTION);
+    AddStartMenuAction(MENU_ACTION_EXIT);    
 }
 
 
@@ -185,10 +199,10 @@ bool32 sub_8071114(s16 *a, u32 b)
     
     do
     {
-        MenuPrint(gStartMenuItems[gUnknown_0202E8FE[var]].text,
+        MenuPrint(gStartMenuItems[currentStartMenuActions[var]].text,
                   0x17, (var * 2 + 2));
         var++;
-        if(var >= gUnknown_0202E8FD)
+        if(var >= numStartMenuActions)
         {
             *a = var;
             return 1;
@@ -208,7 +222,7 @@ bool32 sub_807117C(s16 *a, s16 *b)
             (*a)++;
             break;
         case 2:
-            MenuDrawTextWindow(22, 0, 29, ((gUnknown_0202E8FD << 25) + 0x3000000) >> 24);
+            MenuDrawTextWindow(22, 0, 29, numStartMenuActions * 2 + 3);
             *b = 0;
             (*a)++;
             break;
@@ -225,10 +239,10 @@ bool32 sub_807117C(s16 *a, s16 *b)
             (*a)++;
             break;
         case 5:
-            gUnknown_0202E8FC = InitMenu(0, 0x17, 2, gUnknown_0202E8FD, gUnknown_0202E8FC, 6);
-            return 1;
+            startMenuCursorPos = InitMenu(0, 0x17, 2, numStartMenuActions, startMenuCursorPos, 6);
+            return TRUE;
     }
-    return 0;
+    return FALSE;
 }
 
 void sub_8071230(void)
@@ -236,13 +250,13 @@ void sub_8071230(void)
     s16 a = 0;
     s16 b = 0;
     
-    while(!sub_807117C(&a, &b))
+    while(sub_807117C(&a, &b) == FALSE)
         ;
 }
 
 void task50_startmenu(u8 taskId)
 {
-    if(sub_807117C(gTasks[taskId].data, gTasks[taskId].data + 1) == 1)
+    if(sub_807117C(gTasks[taskId].data, gTasks[taskId].data + 1) == TRUE)
     {
         *gTasks[taskId].data = 0;
         SwitchTaskToFollowupFunc(taskId);
@@ -296,32 +310,32 @@ void sub_8071310(void)
 
 u8 sub_8071338(void)
 {
-    if(gMain.newKeys & 0x40)
+    if(gMain.newKeys & DPAD_UP)
     {
         PlaySE(SE_SELECT);
-        gUnknown_0202E8FC = MoveMenuCursor(-1);
+        startMenuCursorPos = MoveMenuCursor(-1);
     }
-    if(gMain.newKeys & 0x80)
+    if(gMain.newKeys & DPAD_DOWN)
     {
         PlaySE(SE_SELECT);
-        gUnknown_0202E8FC = MoveMenuCursor(1);
+        startMenuCursorPos = MoveMenuCursor(1);
     }
-    if(gMain.newKeys & 1)
+    if(gMain.newKeys & A_BUTTON)
     {
         PlaySE(SE_SELECT);
-        if(gStartMenuItems[gUnknown_0202E8FE[gUnknown_0202E8FC]].callback == StartMenu_Pokedex)
+        if(gStartMenuItems[currentStartMenuActions[startMenuCursorPos]].callback == StartMenu_PokedexCallback)
         {
             if(pokedex_count(0) == 0)
                 return 0;
         }
-        gUnknown_03004AE8 = gStartMenuItems[gUnknown_0202E8FE[gUnknown_0202E8FC]].callback;
-        if(sub_80714FC != gUnknown_03004AE8 &&
-           sub_8071554 != gUnknown_03004AE8 &&
-           sub_8071560 != gUnknown_03004AE8)
+        gUnknown_03004AE8 = gStartMenuItems[currentStartMenuActions[startMenuCursorPos]].callback;
+        if(StartMenu_SaveCallback != gUnknown_03004AE8 &&
+           StartMenu_ExitCallback != gUnknown_03004AE8 &&
+           StartMenu_RetireCallback != gUnknown_03004AE8)
             fade_screen(1, 0);
         return 0;
     }
-    if(gMain.newKeys & 0xA)
+    if(gMain.newKeys & (START_BUTTON | B_BUTTON))
     {
         sub_8071C20();
         return 1;
@@ -329,7 +343,7 @@ u8 sub_8071338(void)
     return 0;
 }
 
-u8 StartMenu_Pokedex(void)
+u8 StartMenu_PokedexCallback(void)
 {
     if(!gPaletteFade.active)
     {
@@ -341,7 +355,7 @@ u8 StartMenu_Pokedex(void)
     return 0;
 }
 
-u8 sub_807144C(void)
+u8 StartMenu_PokemonCallback(void)
 {
     if(!gPaletteFade.active)
     {
@@ -352,7 +366,7 @@ u8 sub_807144C(void)
     return 0;
 }
 
-u8 sub_8071478(void)
+u8 StartMenu_BagCallback(void)
 {
     if(!gPaletteFade.active)
     {
@@ -363,7 +377,7 @@ u8 sub_8071478(void)
     return 0;
 }
 
-u8 sub_80714A4(void)
+u8 StartMenu_PokenavCallback(void)
 {
     if(!gPaletteFade.active)
     {
@@ -374,7 +388,7 @@ u8 sub_80714A4(void)
     return 0;
 }
 
-u8 sub_80714D0(void)
+u8 StartMenu_PlayerCallback(void)
 {
     if(!gPaletteFade.active)
     {
@@ -385,15 +399,14 @@ u8 sub_80714D0(void)
     return 0;
 }
 
-
-u8 sub_80714FC(void)
+u8 StartMenu_SaveCallback(void)
 {
     sub_8072DEC();
-    gUnknown_03004AE8 = sub_80715A4;
+    gUnknown_03004AE8 = SaveCallback1;
     return 0;
 }
 
-u8 sub_8071518(void)
+u8 StartMenu_OptionCallback(void)
 {
     if(!gPaletteFade.active)
     {
@@ -405,20 +418,20 @@ u8 sub_8071518(void)
     return 0;
 }
 
-u8 sub_8071554(void)
+u8 StartMenu_ExitCallback(void)
 {
     sub_8071C20();
     return 1;
 }
 
-u8 sub_8071560(void)
+u8 StartMenu_RetireCallback(void)
 {
     sub_8071C20();
     sub_80C823C();
     return 1;
 }
 
-u8 sub_8071570(void)
+u8 StartMenu_Player2Callback(void)
 {
     if(!gPaletteFade.active)
     {
@@ -429,32 +442,32 @@ u8 sub_8071570(void)
     return 0;
 }
 
-u8 sub_80715A4(void)
+u8 SaveCallback1(void)
 {
     sub_807160C();
-    gUnknown_03004AE8 = sub_80715C0;
-    return 0;
+    gUnknown_03004AE8 = SaveCallback2;
+    return FALSE;
 }
 
-u8 sub_80715C0(void)
+u8 SaveCallback2(void)
 {
     switch(sub_8071630())
     {
         case 0:
-            return 0;
+            return FALSE;
         case 2:
             MenuZeroFillScreen();
             sub_8071230();
             gUnknown_03004AE8 = sub_8071338;
-            return 0;
+            return FALSE;
         case 1:
         case 3:
             MenuZeroFillScreen();
             sub_8064E2C();
             ScriptContext2_Disable();
-            return 1;
+            return TRUE;
     }
-    return 0;
+    return FALSE;
 } 
 
 void sub_807160C(void)
@@ -798,7 +811,6 @@ void sub_8071B64(u8 taskId)
                 sub_8125E2C();
                 (*val)++;
                 break;
-                //more stuff
             case 2:
                 if(!sub_8125E6C())
                     break;
@@ -826,8 +838,8 @@ void sub_8071C20(void)
     sub_8072DEC();
 }
 
-void append_byte(u8 *a, u8 *b, u32 c)
+void AppendToList(u8 *list, u8 *pindex, u32 value)
 {
-    *(*b + a) = c;
-    (*b)++;
+    list[*pindex] = value;
+    (*pindex)++;
 }
