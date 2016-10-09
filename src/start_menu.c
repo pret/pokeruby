@@ -45,10 +45,11 @@ extern void sub_80594C0(void);
 extern void sub_80597F4(void);
 extern void player_bitmagic(void);
 extern bool32 sub_807117C(s16 *, s16 *);
-extern bool32 sub_8071114(void *, u32);
 extern bool32 GetSafariZoneFlag(void);
-extern void sub_80710DC(void);
 extern void sub_8070FB4(void);
+extern u8 *sub_8072C44(u8 *, s32, u8, u8);
+extern u8 FlagGet(u16);
+extern bool32 is_c1_link_related_active(void);
 
 struct MenuItem {
     u8 *text;
@@ -74,6 +75,8 @@ extern struct MenuItem gStartMenuItems[];
 extern u8 gUnknown_0202E8FC;
 extern u8 gUnknown_0202E8FE[];
 extern u8 gUnknown_0202E8FD;
+extern u8 gOtherText_SafariStock[];
+extern u8 gUnknown_02038808;
 
 static void sub_8071B64(u8 taskId);
 static void sub_8071B54(void);
@@ -107,6 +110,94 @@ u8 sub_8071554(void);
 u8 sub_8071560(void);
 void sub_80712B4(u8);
 void sub_8071284(void (*)(u8));
+void append_byte(u8 *a, u8 *b, u32 c);
+void sub_80710A0(void);
+void BuildStartMenuActions_Normal(void);
+void BuildStartMenuActions_SafariZone(void);
+
+void sub_8070FB4(void)
+{
+    gUnknown_0202E8FD = 0;
+    if(is_c1_link_related_active() == 1)
+        sub_80710A0();
+    else
+    {
+        if(GetSafariZoneFlag() == 1)
+            BuildStartMenuActions_SafariZone();
+        else
+            BuildStartMenuActions_Normal();
+    }
+}
+
+void AddStartMenuAction(u8 action)
+{
+    append_byte(gUnknown_0202E8FE, &gUnknown_0202E8FD, action);
+}
+
+void BuildStartMenuActions_Normal(void)
+{
+    if(FlagGet(0x801) == 1)
+        AddStartMenuAction(0);
+    if(FlagGet(0x800) == 1)
+        AddStartMenuAction(1);
+    AddStartMenuAction(2);
+    if(FlagGet(0x802) == 1)
+        AddStartMenuAction(3);
+    AddStartMenuAction(4);
+    AddStartMenuAction(5);
+    AddStartMenuAction(6);
+    AddStartMenuAction(7);
+}
+
+void BuildStartMenuActions_SafariZone(void)
+{
+    AddStartMenuAction(8);
+    AddStartMenuAction(0);
+    AddStartMenuAction(1);
+    AddStartMenuAction(2);
+    AddStartMenuAction(4);
+    AddStartMenuAction(6);
+    AddStartMenuAction(7);
+}
+
+void sub_80710A0(void)
+{
+    AddStartMenuAction(1);
+    AddStartMenuAction(2);
+    if(FlagGet(0x802) == 1)
+        AddStartMenuAction(3);
+    AddStartMenuAction(9);
+    AddStartMenuAction(6);
+    AddStartMenuAction(7);    
+}
+
+
+void sub_80710DC(void)
+{
+    sub_8072C44(gStringVar1, gUnknown_02038808, 12, 1);
+    MenuDrawTextWindow(0, 0, 10, 5);
+    MenuPrint(gOtherText_SafariStock, 1, 1);
+}
+
+bool32 sub_8071114(s16 *a, u32 b)
+{
+    s32 var = *a;
+    
+    do
+    {
+        MenuPrint(gStartMenuItems[gUnknown_0202E8FE[var]].text,
+                  0x17, (var * 2 + 2));
+        var++;
+        if(var >= gUnknown_0202E8FD)
+        {
+            *a = var;
+            return 1;
+        }
+    }
+    while(--b != 0);
+    *a = var;
+    return 0;
+}
 
 bool32 sub_807117C(s16 *a, s16 *b)
 {
