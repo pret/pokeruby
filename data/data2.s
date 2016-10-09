@@ -7937,7 +7937,7 @@ gUnknown_08376D1C:: @ 8376D1C
 	.byte 0x3D @ Speed
 
 	.align 2
-gUnknown_08376D24:: @ 8376D24
+gStartMenuItems:: @ 8376D24
 	.4byte SystemText_Pokedex, StartMenu_Pokedex
 	.4byte SystemText_Pokemon, sub_807144C
 	.4byte SystemText_BAG, sub_8071478
