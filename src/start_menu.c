@@ -63,12 +63,13 @@ struct MenuItem {
     u8 (*callback)(void);
 };
 
-extern u8 (*saveDialogCallback)(void);
+static u8 (*saveDialogCallback)(void);
+static u8 gUnknown_030006AC;
+static bool8 gUnknown_030006AD;
+
 extern bool8 gUnknown_020297EC;
 extern u16 gSaveFileStatus;
-extern u8 gUnknown_030006AC;
 extern u16 gScriptResult;
-extern bool8 gUnknown_030006AD;
 extern u8 (*gCallback_03004AE8)(void);
 extern u8 gUnknown_03004860;
 extern struct MenuItem gStartMenuItems[];
