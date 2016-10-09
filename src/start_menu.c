@@ -72,10 +72,11 @@ extern bool8 gUnknown_030006AD;
 extern u8 (*gCallback_03004AE8)(void);
 extern u8 gUnknown_03004860;
 extern struct MenuItem gStartMenuItems[];
-extern u8 startMenuCursorPos;
-extern u8 currentStartMenuActions[];
-extern u8 numStartMenuActions;
 extern u8 gUnknown_02038808;
+
+EWRAM_DATA static u8 sStartMenuCursorPos = 0;
+EWRAM_DATA static u8 sNumStartMenuActions = 0;
+EWRAM_DATA static u8 sCurrentStartMenuActions[10] = {0};
 
 //Text strings
 extern u8 gSystemText_Saving[];
@@ -150,7 +151,7 @@ static void Task_8071B64(u8 taskId);
 
 static void BuildStartMenuActions(void)
 {
-    numStartMenuActions = 0;
+    sNumStartMenuActions = 0;
     if(is_c1_link_related_active() == TRUE)
         BuildStartMenuActions_Link();
     else
@@ -164,7 +165,7 @@ static void BuildStartMenuActions(void)
 
 static void AddStartMenuAction(u8 action)
 {
-    AppendToList(currentStartMenuActions, &numStartMenuActions, action);
+    AppendToList(sCurrentStartMenuActions, &sNumStartMenuActions, action);
 }
 
 static void BuildStartMenuActions_Normal(void)
@@ -218,10 +219,10 @@ static bool32 sub_8071114(s16 *a, u32 b)
     
     do
     {
-        MenuPrint(gStartMenuItems[currentStartMenuActions[var]].text,
+        MenuPrint(gStartMenuItems[sCurrentStartMenuActions[var]].text,
                   0x17, var * 2 + 2);
         var++;
-        if(var >= numStartMenuActions)
+        if(var >= sNumStartMenuActions)
         {
             *a = var;
             return 1;
@@ -241,7 +242,7 @@ static bool32 sub_807117C(s16 *a, s16 *b)
             (*a)++;
             break;
         case 2:
-            MenuDrawTextWindow(22, 0, 29, numStartMenuActions * 2 + 3);
+            MenuDrawTextWindow(22, 0, 29, sNumStartMenuActions * 2 + 3);
             *b = 0;
             (*a)++;
             break;
@@ -258,7 +259,7 @@ static bool32 sub_807117C(s16 *a, s16 *b)
             (*a)++;
             break;
         case 5:
-            startMenuCursorPos = InitMenu(0, 0x17, 2, numStartMenuActions, startMenuCursorPos, 6);
+            sStartMenuCursorPos = InitMenu(0, 0x17, 2, sNumStartMenuActions, sStartMenuCursorPos, 6);
             return TRUE;
     }
     return FALSE;
@@ -332,22 +333,22 @@ static u8 Callback_8071338(void)
     if(gMain.newKeys & DPAD_UP)
     {
         PlaySE(SE_SELECT);
-        startMenuCursorPos = MoveMenuCursor(-1);
+        sStartMenuCursorPos = MoveMenuCursor(-1);
     }
     if(gMain.newKeys & DPAD_DOWN)
     {
         PlaySE(SE_SELECT);
-        startMenuCursorPos = MoveMenuCursor(1);
+        sStartMenuCursorPos = MoveMenuCursor(1);
     }
     if(gMain.newKeys & A_BUTTON)
     {
         PlaySE(SE_SELECT);
-        if(gStartMenuItems[currentStartMenuActions[startMenuCursorPos]].callback == StartMenu_PokedexCallback)
+        if(gStartMenuItems[sCurrentStartMenuActions[sStartMenuCursorPos]].callback == StartMenu_PokedexCallback)
         {
             if(pokedex_count(0) == 0)
                 return 0;
         }
-        gCallback_03004AE8 = gStartMenuItems[currentStartMenuActions[startMenuCursorPos]].callback;
+        gCallback_03004AE8 = gStartMenuItems[sCurrentStartMenuActions[sStartMenuCursorPos]].callback;
         if(StartMenu_SaveCallback != gCallback_03004AE8 &&
            StartMenu_ExitCallback != gCallback_03004AE8 &&
            StartMenu_RetireCallback != gCallback_03004AE8)

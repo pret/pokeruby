@@ -466,15 +466,8 @@ gUnknown_0202E8F8: @ 202E8F8
 gUnknown_0202E8FA: @ 202E8FA
 	.space 0x2
 
-startMenuCursorPos: @ 202E8FC
-	.space 0x1
-
-numStartMenuActions: @ 202E8FD
-	.space 0x1
-
-currentStartMenuActions: @ 202E8FE
-	.space 0xA
-
+    .include "src/start_menu.o"
+    
 	.include "src/menu.o"
 
 	.align 2
