@@ -167,17 +167,22 @@ void sub_8071284(void (*func)(u8))
     SetTaskFuncWithFollowupFunc(taskId, task50_startmenu, func);
 }
 
+struct MyTask {
+    TaskFunc func;
+    bool8 isActive;
+    u8 prev;
+    u8 next;
+    u8 priority;
+    s16 var1;
+};
+
 void sub_80712B4(u8 taskId)
 {
-    s16 *asdf = gTasks[taskId].data;
-    //s16 asdf = *gTasks[taskId].data;
-    
-    switch(*asdf)
+    switch(((struct MyTask *)&gTasks[taskId])->var1)
     {
         case 0:
             gUnknown_03004AE8 = sub_8071338;
-            //gTasks[taskId].data[0]++;
-            (*gTasks[taskId].data)++;
+            ((struct MyTask *)&gTasks[taskId])->var1++;
             break;
         case 1:
             if(gUnknown_03004AE8() == 1)
