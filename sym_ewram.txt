@@ -466,14 +466,7 @@ gUnknown_0202E8F8: @ 202E8F8
 gUnknown_0202E8FA: @ 202E8FA
 	.space 0x2
 
-gUnknown_0202E8FC: @ 202E8FC
-	.space 0x1
-
-gUnknown_0202E8FD: @ 202E8FD
-	.space 0x1
-
-gUnknown_0202E8FE: @ 202E8FE
-	.space 0xA
+	.include "src/start_menu.o"
 
 	.include "src/menu.o"
 

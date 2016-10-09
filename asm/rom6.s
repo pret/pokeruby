@@ -128242,7 +128242,7 @@ unref_sub_814A414: @ 814A414
 	bx r1
 	.align 2, 0
 _0814A458: .4byte gUnknown_0842C29C
-_0814A45C: .4byte gUnknown_03004AE8
+_0814A45C: .4byte gCallback_03004AE8
 _0814A460: .4byte sub_814A464
 	thumb_func_end unref_sub_814A414
 
@@ -128279,7 +128279,7 @@ _0814A480:
 	b _0814A4B2
 	.align 2, 0
 _0814A4A0: .4byte gUnknown_02024D1E
-_0814A4A4: .4byte gUnknown_03004AE8
+_0814A4A4: .4byte gCallback_03004AE8
 _0814A4A8: .4byte gUnknown_0842C29C
 _0814A4AC:
 	bl sub_8071C20

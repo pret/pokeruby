@@ -7937,17 +7937,17 @@ gUnknown_08376D1C:: @ 8376D1C
 	.byte 0x3D @ Speed
 
 	.align 2
-gUnknown_08376D24:: @ 8376D24
-	.4byte SystemText_Pokedex, StartMenu_Pokedex
-	.4byte SystemText_Pokemon, sub_807144C
-	.4byte SystemText_BAG, sub_8071478
-	.4byte SystemText_Pokenav, sub_80714A4
-	.4byte SystemText_Player, sub_80714D0
-	.4byte SystemText_Save, sub_80714FC
-	.4byte SystemText_Option, sub_8071518
-	.4byte SystemText_Exit, sub_8071554
-	.4byte SystemText_Retire, sub_8071560
-	.4byte SystemText_Player, sub_8071570
+gStartMenuItems:: @ 8376D24
+	.4byte SystemText_Pokedex, StartMenu_PokedexCallback
+	.4byte SystemText_Pokemon, StartMenu_PokemonCallback
+	.4byte SystemText_BAG, StartMenu_BagCallback
+	.4byte SystemText_Pokenav, StartMenu_PokenavCallback
+	.4byte SystemText_Player, StartMenu_PlayerCallback
+	.4byte SystemText_Save, StartMenu_SaveCallback
+	.4byte SystemText_Option, StartMenu_OptionCallback
+	.4byte SystemText_Exit, StartMenu_ExitCallback
+	.4byte SystemText_Retire, StartMenu_RetireCallback
+	.4byte SystemText_Player, StartMenu_PlayerLinkCallback
 
 	.align 2
 gUnknown_08376D74:: @ 8376D74
