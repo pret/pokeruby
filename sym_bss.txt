@@ -86,7 +86,7 @@ gUnknown_030005A6: @ 30005A6
 	.include "src/script.o"
 
 	.align 2
-gUnknown_030006A8: @ 30006A8
+saveDialogCallback: @ 30006A8
 	.space 0x4
 
 gUnknown_030006AC: @ 30006AC

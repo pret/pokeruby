@@ -7947,7 +7947,7 @@ gStartMenuItems:: @ 8376D24
 	.4byte SystemText_Option, StartMenu_OptionCallback
 	.4byte SystemText_Exit, StartMenu_ExitCallback
 	.4byte SystemText_Retire, StartMenu_RetireCallback
-	.4byte SystemText_Player, StartMenu_Player2Callback
+	.4byte SystemText_Player, StartMenu_PlayerLinkCallback
 
 	.align 2
 gUnknown_08376D74:: @ 8376D74

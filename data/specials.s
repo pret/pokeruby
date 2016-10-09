@@ -93,7 +93,7 @@ gSpecials::
 	.4byte sub_80C5044
 	.4byte sub_80C4FBC
 	.4byte sub_808363C
-	.4byte sub_807166C
+	.4byte InitSaveDialog
 	.4byte sub_80C71C4
 	.4byte sub_80E60D8
 	.4byte sub_80EB7C4
