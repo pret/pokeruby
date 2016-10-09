@@ -154,7 +154,7 @@ gUnknown_02024C0B: @ 2024C0B
 gUnknown_02024C0C: @ 2024C0C
 	.space 0x1
 
-gXXX_CritRelated: @ 2024C0D
+gCritMultiplier: @ 2024C0D
 	.space 0x1
 
 gUnknown_02024C0E: @ 2024C0E

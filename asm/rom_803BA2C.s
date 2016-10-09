@@ -736,7 +736,7 @@ _0803BFE4: .4byte 0x00000175
 _0803BFE8: .4byte gBattleMovePower
 _0803BFEC: .4byte gBattleMoves
 _0803BFF0: .4byte gUnknown_02024BE6
-_0803BFF4: .4byte gXXX_CritRelated
+_0803BFF4: .4byte gCritMultiplier
 _0803BFF8: .4byte gStatStageRatios
 _0803BFFC:
 	adds r5, r6, 0
@@ -912,7 +912,7 @@ _0803C132:
 	.align 2, 0
 _0803C148: .4byte gUnknown_020239F8
 _0803C14C: .4byte gBattleMoves
-_0803C150: .4byte gXXX_CritRelated
+_0803C150: .4byte gCritMultiplier
 _0803C154: .4byte gStatStageRatios
 _0803C158:
 	mov r5, r8
