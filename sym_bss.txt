@@ -84,17 +84,7 @@ gUnknown_030005A6: @ 30005A6
 	.include "src/field_message_box.o"
 	.include "src/text_window.o"
 	.include "src/script.o"
-
-	.align 2
-gUnknown_030006A8: @ 30006A8
-	.space 0x4
-
-gUnknown_030006AC: @ 30006AC
-	.space 0x1
-
-gUnknown_030006AD: @ 30006AD
-	.space 0x3
-
+	.include "src/start_menu.o"
 	.include "src/menu.o"
 
 	.align 2

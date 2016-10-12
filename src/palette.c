@@ -42,11 +42,11 @@ extern void BlendPalette(u16, u16, u8, u16);
 
 EWRAM_DATA u16 gPlttBufferUnfaded[0x200] = {0};
 EWRAM_DATA u16 gPlttBufferFaded[0x200] = {0};
-EWRAM_DATA struct PaletteStruct gPaletteStructs[0x10] = {0};
+EWRAM_DATA static struct PaletteStruct sPaletteStructs[0x10] = {0};
 EWRAM_DATA struct PaletteFadeControl gPaletteFade = {0};
 EWRAM_DATA u32 gFiller_202F394 = 0;
-EWRAM_DATA u32 gPlttBufferTransferPending = 0;
-EWRAM_DATA u8 gPaletteDecompressionBuffer[0x400] = {0};
+EWRAM_DATA static u32 sPlttBufferTransferPending = 0;
+EWRAM_DATA static u8 sPaletteDecompressionBuffer[0x400] = {0};
 
 extern struct PaletteStructTemplate gDummyPaletteStructTemplate;
 
@@ -63,9 +63,9 @@ static bool8 IsSoftwarePaletteFadeFinishing(void);
 
 void LoadCompressedPalette(const void *src, u16 offset, u16 size)
 {
-    sub_800D238(src, gPaletteDecompressionBuffer);
-    CpuCopy16(gPaletteDecompressionBuffer, gPlttBufferUnfaded + offset, size);
-    CpuCopy16(gPaletteDecompressionBuffer, gPlttBufferFaded + offset, size);
+    sub_800D238(src, sPaletteDecompressionBuffer);
+    CpuCopy16(sPaletteDecompressionBuffer, gPlttBufferUnfaded + offset, size);
+    CpuCopy16(sPaletteDecompressionBuffer, gPlttBufferFaded + offset, size);
 }
 
 void LoadPalette(const void *src, u16 offset, u16 size)
@@ -87,7 +87,7 @@ void TransferPlttBuffer(void)
         void *src = gPlttBufferFaded;
         void *dest = (void *)PLTT;
         DmaCopy16(3, src, dest, PLTT_SIZE);
-        gPlttBufferTransferPending = 0;
+        sPlttBufferTransferPending = 0;
         if (gPaletteFade.mode == HARDWARE_FADE && gPaletteFade.active)
             UpdateBlendRegisters();
     }
@@ -98,7 +98,7 @@ u8 UpdatePaletteFade(void)
     u8 result;
     u8 dummy = 0;
 
-    if (gPlttBufferTransferPending)
+    if (sPlttBufferTransferPending)
         return -1;
 
     if (gPaletteFade.mode == NORMAL_FADE)
@@ -108,7 +108,7 @@ u8 UpdatePaletteFade(void)
     else
         result = UpdateHardwarePaletteFade();
 
-    gPlttBufferTransferPending = gPaletteFade.multipurpose1 | dummy;
+    sPlttBufferTransferPending = gPaletteFade.multipurpose1 | dummy;
 
     return result;
 }
@@ -173,7 +173,7 @@ bool8 BeginNormalPaletteFade(u32 selectedPalettes, s8 delay, u8 startY, u8 targe
         temp = gPaletteFade.bufferTransferDisabled;
         gPaletteFade.bufferTransferDisabled = 0;
         CpuCopy32(gPlttBufferFaded, (void *)PLTT, PLTT_SIZE);
-        gPlttBufferTransferPending = 0;
+        sPlttBufferTransferPending = 0;
         if (gPaletteFade.mode == HARDWARE_FADE && gPaletteFade.active)
             UpdateBlendRegisters();
         gPaletteFade.bufferTransferDisabled = temp;
@@ -193,7 +193,7 @@ void unref_sub_8073D84(u8 a1, u32 *a2)
 
     for (i = 0; i < 16; i++)
     {
-        struct PaletteStruct *palstruct = &gPaletteStructs[i];
+        struct PaletteStruct *palstruct = &sPaletteStructs[i];
         if (palstruct->ps_field_4_0)
         {
             if (palstruct->base->pst_field_8_0 == a1)
@@ -332,14 +332,14 @@ void ResetPaletteStructByUid(u16 a1)
 
 void ResetPaletteStruct(u8 paletteNum)
 {
-    gPaletteStructs[paletteNum].base = &gDummyPaletteStructTemplate;
-    gPaletteStructs[paletteNum].ps_field_4_0 = 0;
-    gPaletteStructs[paletteNum].baseDestOffset = 0;
-    gPaletteStructs[paletteNum].destOffset = 0;
-    gPaletteStructs[paletteNum].srcIndex = 0;
-    gPaletteStructs[paletteNum].ps_field_4_1 = 0;
-    gPaletteStructs[paletteNum].ps_field_8 = 0;
-    gPaletteStructs[paletteNum].ps_field_9 = 0;
+    sPaletteStructs[paletteNum].base = &gDummyPaletteStructTemplate;
+    sPaletteStructs[paletteNum].ps_field_4_0 = 0;
+    sPaletteStructs[paletteNum].baseDestOffset = 0;
+    sPaletteStructs[paletteNum].destOffset = 0;
+    sPaletteStructs[paletteNum].srcIndex = 0;
+    sPaletteStructs[paletteNum].ps_field_4_1 = 0;
+    sPaletteStructs[paletteNum].ps_field_8 = 0;
+    sPaletteStructs[paletteNum].ps_field_9 = 0;
 }
 
 void ResetPaletteFadeControl()
@@ -366,14 +366,14 @@ void unref_sub_8074168(u16 uid)
 {
     u8 paletteNum = GetPaletteNumByUid(uid);
     if (paletteNum != 16)
-        gPaletteStructs[paletteNum].ps_field_4_1 = 1;
+        sPaletteStructs[paletteNum].ps_field_4_1 = 1;
 }
 
 void unref_sub_8074194(u16 uid)
 {
     u8 paletteNum = GetPaletteNumByUid(uid);
     if (paletteNum != 16)
-        gPaletteStructs[paletteNum].ps_field_4_1 = 0;
+        sPaletteStructs[paletteNum].ps_field_4_1 = 0;
 }
 
 static u8 GetPaletteNumByUid(u16 uid)
@@ -381,7 +381,7 @@ static u8 GetPaletteNumByUid(u16 uid)
     u8 i;
 
     for (i = 0; i < 16; i++)
-        if (gPaletteStructs[i].base->uid == uid)
+        if (sPaletteStructs[i].base->uid == uid)
             return i;
 
     return 16;

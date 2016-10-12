@@ -65,6 +65,7 @@ SECTIONS {
         src/script.o(.text);
         src/scrcmd.o(.text);
         asm/rom_8065394.o(.text);
+        src/start_menu.o(.text);
         src/menu.o(.text);
         asm/rom_8072DF8.o(.text);
         src/palette.o(.text);
@@ -75,6 +76,8 @@ SECTIONS {
         src/starter_choose.o(.text);
         src/wallclock.o(.text);
         asm/rom6.o(.text);
+        src/intro.o(.text);
+        asm/rom_813BA94.o(.text);
     } =0
 
     script_data :

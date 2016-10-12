@@ -17005,7 +17005,7 @@ _08014044:
 	adds r1, r2
 	b _08014200
 	.align 2, 0
-_080140B8: .4byte gXXX_CritRelated
+_080140B8: .4byte gCritMultiplier
 _080140BC: .4byte 0x0001601f
 _080140C0: .4byte 0x000160e7
 _080140C4: .4byte gUnknown_02024C68
@@ -33547,7 +33547,7 @@ _0801C9BC: .4byte gUnknown_02024C08
 _0801C9C0: .4byte gUnknown_02024C98
 _0801C9C4: .4byte gUnknown_020239F8
 _0801C9C8: .4byte gCriticalHitChance
-_0801C9CC: .4byte gXXX_CritRelated
+_0801C9CC: .4byte gCritMultiplier
 _0801C9D0:
 	ldr r1, _0801C9E4
 	movs r0, 0x1
@@ -33561,7 +33561,7 @@ _0801C9D4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0801C9E4: .4byte gXXX_CritRelated
+_0801C9E4: .4byte gCritMultiplier
 _0801C9E8: .4byte gUnknown_02024C10
 	thumb_func_end atk04_critcalc
 
@@ -33679,7 +33679,7 @@ _0801CAD0: .4byte gUnknown_02024DEC
 _0801CAD4: .4byte 0x02000000
 _0801CAD8: .4byte 0x0001601c
 _0801CADC: .4byte gUnknown_02024BEC
-_0801CAE0: .4byte gXXX_CritRelated
+_0801CAE0: .4byte gCritMultiplier
 _0801CAE4: .4byte 0x0001601f
 _0801CAE8: .4byte gUnknown_02024C98
 _0801CAEC: .4byte gBattleMoves
@@ -33793,7 +33793,7 @@ _0801CBC8: .4byte gUnknown_02024DEC
 _0801CBCC: .4byte 0x02000000
 _0801CBD0: .4byte 0x0001601c
 _0801CBD4: .4byte gUnknown_02024BEC
-_0801CBD8: .4byte gXXX_CritRelated
+_0801CBD8: .4byte gCritMultiplier
 _0801CBDC: .4byte 0x0001601f
 _0801CBE0: .4byte gUnknown_02024C98
 _0801CBE4: .4byte gBattleMoves
@@ -36280,7 +36280,7 @@ _0801DF7E:
 	bx r0
 	.align 2, 0
 _0801DF84: .4byte gUnknown_02024A64
-_0801DF88: .4byte gXXX_CritRelated
+_0801DF88: .4byte gCritMultiplier
 _0801DF8C: .4byte gUnknown_02024C68
 _0801DF90: .4byte gUnknown_02024C07
 _0801DF94: .4byte gUnknown_02024D1E
@@ -41636,7 +41636,7 @@ sub_8020B54: @ 8020B54
 _08020B80: .4byte gUnknown_02024C68
 _08020B84: .4byte 0x02000000
 _08020B88: .4byte 0x0001601f
-_08020B8C: .4byte gXXX_CritRelated
+_08020B8C: .4byte gCritMultiplier
 _08020B90: .4byte gUnknown_02024D1E
 _08020B94: .4byte gUnknown_02024C6C
 _08020B98: .4byte 0xffffbfff
@@ -85882,7 +85882,7 @@ _08037004: .4byte 0x02000000
 _08037008: .4byte 0x0001601c
 _0803700C: .4byte 0x0001601f
 _08037010: .4byte gUnknown_02024C68
-_08037014: .4byte gXXX_CritRelated
+_08037014: .4byte gCritMultiplier
 _08037018: .4byte gEnemyParty
 _0803701C: .4byte gUnknown_02024A6A
 _08037020: .4byte 0x00016068

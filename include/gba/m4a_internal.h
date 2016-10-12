@@ -238,13 +238,13 @@ struct PokemonCrySong
 struct MusicPlayerTrack
 {
     u8 flags;
-    u8 wai;
-    u8 patP;
+    u8 wait;
+    u8 patternLevel;
     u8 repN;
     u8 gateTime;
     u8 key;
     u8 velocity;
-    u8 run;
+    u8 runningStatus;
     u8 keyM;
     u8 pitM;
     s8 keyShift;
@@ -275,7 +275,7 @@ struct MusicPlayerTrack
     u16 unk_3A;
     u32 unk_3C;
     u8 *cmdPtr;
-    u8 patS[12];
+    u8 *patternStack[3];
 };
 
 #define MUSICPLAYER_STATUS_TRACK 0x0000ffff

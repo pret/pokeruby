@@ -70,6 +70,10 @@ extern vu16 *const gBGControlRegs[];
 extern vu16 *const gBGHOffsetRegs[];
 extern vu16 *const gBGVOffsetRegs[];
 
+extern const u16 gUnknown_081E29D8[];
+extern const u16 gUnknown_081E29E0[];
+extern const u16 gUnknown_081E29E8[];
+
 extern const struct WindowConfig gWindowConfig_81E6C3C;
 extern const struct WindowConfig gWindowConfig_81E6C58;
 extern const struct WindowConfig gWindowConfig_81E6C74;

@@ -389,7 +389,7 @@ void ply_xcmd_0C(struct MusicPlayerInfo *mplayInfo, struct MusicPlayerTrack *tra
     {
         track->unk_3A++;
         track->cmdPtr -= 2;
-        track->wai = 1;
+        track->wait = 1;
     }
     else
     {

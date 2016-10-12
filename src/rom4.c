@@ -6,6 +6,7 @@
 #include "rng.h"
 #include "main.h"
 #include "palette.h"
+#include "text.h"
 
 #ifdef SAPPHIRE
 #define LEGENDARY_MUSIC BGM_OOAME  // Heavy Rain
@@ -53,6 +54,9 @@ extern void (*gUnknown_03000584)(void);
 extern void (*gUnknown_0300485C)(void);
 
 extern struct UnkTVStruct gUnknown_03004870;
+
+extern u16 gUnknown_03004898;
+extern u16 gUnknown_0300489C;
 
 extern u8 gUnknown_0819FC74[];
 extern u8 gUnknown_0819FC9F[];
@@ -122,6 +126,17 @@ void c2_exit_to_overworld_2_local(void);
 void FieldClearVBlankHBlankCallbacks(void);
 void SetFieldVBlankCallback(void);
 void VBlankCB_Field(void);
+bool32 sub_805483C(u8 *);
+bool32 sub_805493C(u8 *, u32);
+bool32 sub_8054A4C(u8 *);
+bool32 sub_8054A9C(u8 *a1);
+void do_load_map_stuff_loop(u8 *a1);
+void sub_8054BA8(void);
+void sub_8054C2C(void);
+void sub_8054C54(void);
+void sub_8054D4C(u32 a1);
+void sub_8054D90(void);
+void mli4_mapscripts_and_other(void);
 
 void sub_8052F5C(void)
 {
@@ -1327,4 +1342,348 @@ void sub_8054814(void)
         sub_80815E0(val);
         sub_80895F8(gUnknown_08216694[0], gUnknown_08216694[1], gUnknown_08216694[2]);
     }
+}
+
+bool32 sub_805483C(u8 *a1)
+{
+    switch (*a1)
+    {
+    case 0:
+        FieldClearVBlankHBlankCallbacks();
+        ScriptContext1_Init();
+        ScriptContext2_Disable();
+        sub_8054F70();
+        sub_8054BA8();
+        (*a1)++;
+        break;
+    case 1:
+        sub_8053994(1);
+        (*a1)++;
+        break;
+    case 2:
+        sub_8054D4C(1);
+        (*a1)++;
+        break;
+    case 3:
+        sub_8054E98();
+        sub_8054D90();
+        sub_8054EC8();
+        sub_8054E60();
+        (*a1)++;
+        break;
+    case 4:
+        sub_8054814();
+        sub_8054C54();
+        SetUpWindowConfig(&gWindowConfig_81E6C3C);
+        InitMenuWindow(&gWindowConfig_81E6CE4);
+        (*a1)++;
+        break;
+    case 5:
+        move_tilemap_camera_to_upper_left_corner();
+        (*a1)++;
+        break;
+    case 6:
+        sub_8056D28(gMapHeader.mapData);
+        (*a1)++;
+        break;
+    case 7:
+        sub_8056D38(gMapHeader.mapData);
+        (*a1)++;
+        break;
+    case 8:
+        apply_map_tileset1_tileset2_palette(gMapHeader.mapData);
+        (*a1)++;
+        break;
+    case 9:
+        DrawWholeMapView();
+        (*a1)++;
+        break;
+    case 10:
+        cur_mapheader_run_tileset_funcs_after_some_cpuset();
+        (*a1)++;
+        break;
+    case 12:
+        sub_80543E8();
+        (*a1)++;
+        break;
+    case 11:
+        (*a1)++;
+        break;
+    case 13:
+        return 1;
+    }
+    return 0;
+}
+
+bool32 sub_805493C(u8 *a1, u32 a2)
+{
+    switch (*a1)
+    {
+    case 0:
+        FieldClearVBlankHBlankCallbacks();
+        sub_8053994(a2);
+        (*a1)++;
+        break;
+    case 1:
+        sub_8054BA8();
+        (*a1)++;
+        break;
+    case 2:
+        sub_8054D4C(a2);
+        (*a1)++;
+        break;
+    case 3:
+        mli4_mapscripts_and_other();
+        sub_8054E34();
+        (*a1)++;
+        break;
+    case 4:
+        sub_8054814();
+        sub_8054C54();
+        SetUpWindowConfig(&gWindowConfig_81E6C3C);
+        InitMenuWindow((u8 *)&gWindowConfig_81E6CE4);
+        (*a1)++;
+        break;
+    case 5:
+        move_tilemap_camera_to_upper_left_corner();
+        (*a1)++;
+        break;
+    case 6:
+        sub_8056D28(gMapHeader.mapData);
+        (*a1)++;
+        break;
+    case 7:
+        sub_8056D38(gMapHeader.mapData);
+        (*a1)++;
+        break;
+    case 8:
+        apply_map_tileset1_tileset2_palette(gMapHeader.mapData);
+        (*a1)++;
+        break;
+    case 9:
+        DrawWholeMapView();
+        (*a1)++;
+        break;
+    case 10:
+        cur_mapheader_run_tileset_funcs_after_some_cpuset();
+        (*a1)++;
+        break;
+    case 11:
+        if (gMapHeader.flags == 1 && sub_80BBB24() == 1)
+            AddMapNamePopUpWindowTask();
+        (*a1)++;
+        break;
+    case 12:
+        sub_80543E8();
+        (*a1)++;
+        break;
+    case 13:
+        return 1;
+    }
+    return 0;
+}
+
+bool32 sub_8054A4C(u8 *a1)
+{
+    switch (*a1)
+    {
+    case 0:
+        sub_8054BA8();
+        sub_8054D4C(0);
+        sub_8054E20();
+        sub_8054E34();
+        (*a1)++;
+        break;
+    case 1:
+        sub_8054C2C();
+        (*a1)++;
+        break;
+    case 2:
+        sub_80543E8();
+        (*a1)++;
+        break;
+    case 3:
+        return 1;
+    }
+    return 0;
+}
+
+bool32 sub_8054A9C(u8 *a1)
+{
+    switch (*a1)
+    {
+    case 0:
+        FieldClearVBlankHBlankCallbacks();
+        sub_8054BA8();
+        (*a1)++;
+        break;
+    case 1:
+        sub_8054D4C(1);
+        (*a1)++;
+        break;
+    case 2:
+        sub_8054F48();
+        sub_8054E20();
+        sub_8054E7C();
+        (*a1)++;
+        break;
+    case 3:
+        sub_8054814();
+        sub_8054C54();
+        SetUpWindowConfig(&gWindowConfig_81E6C3C);
+        InitMenuWindow(&gWindowConfig_81E6CE4);
+        (*a1)++;
+        break;
+    case 4:
+        move_tilemap_camera_to_upper_left_corner();
+        (*a1)++;
+        break;
+    case 5:
+        sub_8056D28(gMapHeader.mapData);
+        (*a1)++;
+        break;
+    case 6:
+        sub_8056D38(gMapHeader.mapData);
+        (*a1)++;
+        break;
+    case 7:
+        apply_map_tileset1_tileset2_palette(gMapHeader.mapData);
+        (*a1)++;
+        break;
+    case 8:
+        DrawWholeMapView();
+        (*a1)++;
+        break;
+    case 9:
+        cur_mapheader_run_tileset_funcs_after_some_cpuset();
+        (*a1)++;
+        break;
+    case 12:
+        sub_80543E8();
+        (*a1)++;
+        break;
+    case 10:
+    case 11:
+        (*a1)++;
+        break;
+    case 13:
+        SetFieldVBlankCallback();
+        (*a1)++;
+        return 1;
+    }
+    return 0;
+}
+
+void do_load_map_stuff_loop(u8 *a1)
+{
+    while (!sub_805493C(a1, 0))
+        ;
+}
+
+void sub_8054BA8(void)
+{
+    u8 *addr;
+    u32 size;
+
+    REG_DISPCNT = 0;
+
+    remove_some_task();
+
+    DmaClear16(3, PLTT + 2, PLTT_SIZE - 2);
+
+    addr = (void *)VRAM;
+    size = 0x18000;
+    while(1)
+    {
+        DmaFill16(3, 0, addr, 0x1000);
+        addr += 0x1000;
+        size -= 0x1000;
+        if(size <= 0x1000)
+        {
+            DmaFill16(3, 0, addr, size);
+            break;
+        }
+    }
+
+    ResetOamRange(0, 128);
+    LoadOam();
+}
+
+void sub_8054C2C(void)
+{
+    sub_8054814();
+    sub_8054C54();
+    SetUpWindowConfig(&gWindowConfig_81E6C3C);
+    InitMenuWindow(&gWindowConfig_81E6CE4);
+    mapdata_load_assets_to_gpu_and_full_redraw();
+}
+
+void sub_8054C54(void)
+{
+    REG_MOSAIC = 0;
+    REG_WININ = 7967;
+    REG_WINOUT = 257;
+    REG_WIN0H = 255;
+    REG_WIN0V = 255;
+    REG_WIN1H = -1;
+    REG_WIN1V = -1;
+    REG_BLDCNT = gUnknown_081E29E0[1] | gUnknown_081E29E0[2] | gUnknown_081E29E0[3] | 0x1040;
+    REG_BLDALPHA = 1805;
+    *gBGHOffsetRegs[0] = 0;
+    *gBGVOffsetRegs[0] = 0;
+    *gBGControlRegs[0] = 0;
+    *gBGHOffsetRegs[1] = 0;
+    *gBGVOffsetRegs[1] = 0;
+    *gBGControlRegs[1] = 7489;
+    *gBGHOffsetRegs[2] = 0;
+    *gBGVOffsetRegs[2] = 0;
+    *gBGControlRegs[2] = 7234;
+    *gBGHOffsetRegs[3] = 0;
+    *gBGVOffsetRegs[3] = 0;
+    *gBGControlRegs[3] = 7747;
+    REG_DISPCNT = gUnknown_081E29D8[1] | 0x7060 | gUnknown_081E29D8[2] | gUnknown_081E29D8[0] | gUnknown_081E29D8[3];
+}
+
+void sub_8054D4C(u32 a1)
+{
+    ResetTasks();
+    ResetSpriteData();
+    ResetPaletteFade();
+    dp12_8087EA4();
+    ResetCameraUpdateInfo();
+    InstallCameraPanAheadCallback();
+    sub_805C7C4(0);
+    FieldEffectActiveListClear();
+    InitFieldMessageBox();
+    sub_807C828();
+    sub_8080750();
+    if (!a1)
+        overworld_ensure_per_step_coros_running();
+    mapheader_run_script_with_tag_x5();
+}
+
+void sub_8054D90(void)
+{
+    gUnknown_0300489C = 0;
+    gUnknown_03004898 = 0;
+    sub_805AA98();
+    sub_805B55C(0, 0);
+    mapheader_run_first_tag4_script_list_match();
+}
+
+void mli4_mapscripts_and_other(void)
+{
+    s16 x, y;
+    struct UnkPlayerStruct *player;
+    gUnknown_0300489C = 0;
+    gUnknown_03004898 = 0;
+    sub_805AA98();
+    sav1_camera_get_focus_coords(&x, &y);
+    player = sub_8053AA8();
+    InitPlayerAvatar(x, y, player->player_field_1, gSaveBlock2.playerGender);
+    SetPlayerAvatarTransitionFlags(player->player_field_0);
+    player_avatar_init_params_reset();
+    sub_805B55C(0, 0);
+    ResetBerryTreeSparkleFlags();
+    mapheader_run_first_tag4_script_list_match();
 }
