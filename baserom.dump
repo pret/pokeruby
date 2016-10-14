@@ -1,0 +1,21 @@
+
+baserom.gba:     file format binary
+
+
+Disassembly of section .data:
+
+0008c3e4 <.data+0x8c3e4>:
+   8c3e4:	2600      	movs	r6, #0
+   8c3e6:	8001      	strh	r1, [r0, #0]
+   8c3e8:	f7dc fea0 	bl	0x6912c
+   8c3ec:	1c01      	adds	r1, r0, #0
+   8c3ee:	2900      	cmp	r1, #0
+   8c3f0:	d103      	bne.n	0x8c3fa
+   8c3f2:	6820      	ldr	r0, [r4, #0]
+   8c3f4:	4a18      	ldr	r2, [pc, #96]	; (0x8c458)
+   8c3f6:	1880      	adds	r0, r0, r2
+   8c3f8:	8001      	strh	r1, [r0, #0]
+   8c3fa:	6821      	ldr	r1, [r4, #0]
+   8c3fc:	7e2a      	ldrb	r2, [r5, #24]
+   8c3fe:	4b17      	ldr	r3, [pc, #92]	; (0x8c45c)
+   8c400:	18c8      	adds	r0, r1, r3
