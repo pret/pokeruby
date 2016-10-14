@@ -9,17 +9,18 @@
 #include "text.h"
 
 struct UnknownStruct2 {
-    u8 unk1;
-    u8 unk2;
-    u8 unk3;
-    u8 unk4;
+    u16 a;
+    u8 b_1:1;
+    u8 b_2:1;
+    u8 c;
 };
 
 struct UnknownStruct {
-    u8 filler0[0xE];
-    u16 unkE;
-    u8 filler10[0x5FC];
-    //ToDo: figure out how to make the compiler not optimize these offsets
+    struct UnknownStruct2 unk0[0x182];
+    u16 unk608;
+    u8 unk60A_1:1;
+    u8 unk60A_2:1;
+    u8 unk60B;
     u16 unk60C;
     u16 unk60E;
     u16 unk610;
@@ -29,22 +30,24 @@ struct UnknownStruct {
     u16 unk618;
     u16 unk61A;
     u16 unk61C;
-    u8 filler61E[0x08];
+    u16 unk61E[4];
     u16 unk626;
-    u8 filler628[2];
+    u16 unk628;
     u16 unk62A;
     u8 unk62C;
     u8 unk62D;
     u8 unk62E;
     u8 unk62F;
-    u8 filler630[4];
-    u8 unk634;
-    u8 unk635;
-    u8 unk636;
-    u8 filler637[0x13];
+    u16 unk630;
+    u16 unk632;
+    u16 unk634;
+    u16 unk636;
+    u16 unk638;
+    u16 unk63A[4];
+    u8 filler642[8];
     u8 unk64A;
     u8 unk64B;
-    u8 unk1:1;
+    u8 unk64C_1:1;
     u8 unk64D;
     u8 unk64E;
     u8 unk64F;
@@ -52,6 +55,8 @@ struct UnknownStruct {
     u8 unk651;
     u16 unk652;
     s16 unk654;
+    u8 unk656[8];
+    u8 unk65E[8];
 };
 
 extern struct MusicPlayerInfo gMPlay_BGM;
@@ -67,7 +72,7 @@ extern bool32 sub_806912C(void);
 extern u16 pokedex_count(u8);
 extern u8 sub_8091E3C(void);
 
-void sub_808C0CC(void *);
+void sub_808C0CC(struct UnknownStruct *);
 void sub_808C608(u8 taskId);
 void sub_808C0B8(void);
 void sub_808C5F0(void);
@@ -94,6 +99,94 @@ bool8 sub_808E71C(void);
 void sub_808CCC4(u8 taskId);
 u16 sub_8090F68(u8);
 void sub_808D690(u8, u8);
+
+/*
+void sub_808C02C(void)
+{
+    
+}
+*/
+
+void sub_808C0A0(void)
+{
+    gUnknown_0202FFB8 = 0;
+    gUnknown_0202FFBA = 0x40;
+}
+
+void sub_808C0B8(void)
+{
+    LoadOam();
+    ProcessSpriteCopyRequests();
+    TransferPlttBuffer();
+}
+
+void sub_808C0CC(struct UnknownStruct *ptr)
+{
+    u16 i;
+    struct UnknownStruct3 *p;
+    
+    for(i = 0; i <= 0x181; i++)
+    {
+        ptr->unk0[i].a |= 0x0000FFFF;
+        
+        ptr->unk0[i].b_1 = 0;
+        ptr->unk0[i].b_2 = 0;
+    }
+    ptr->unk608 = 0;
+    ptr->unk60A_1 = 0;
+    ptr->unk60A_2 = 0;
+
+    ptr->unk60C = 0;
+    ptr->unk60E = 0;
+    ptr->unk610 = 0;
+    ptr->unk612 = 0;
+    ptr->unk614 = 0;
+    ptr->unk616 = 0;
+    ptr->unk618 = 0;
+    ptr->unk61A = 0;
+    ptr->unk61C = 0;
+    
+    for(i = 0; i <= 3; i++)
+    {
+        ptr->unk61E[i] |= 0xFFFF;
+    }
+    
+    ptr->unk628 = 0;
+    
+    ptr->unk62A = 0;
+    ptr->unk62C = 0;
+    ptr->unk62D = 0;
+    ptr->unk62E = 0;
+    ptr->unk62F = 0;
+    ptr->unk630 = 0;
+    ptr->unk632 = 0;
+    ptr->unk634 = 0;
+    ptr->unk636 = 0;
+    ptr->unk638 = 0;
+    
+    for(i = 0; i <= 3; i++)
+    {
+        ptr->unk63A[i] = 0;
+    }
+    
+    ptr->unk64A = 0;
+    ptr->unk64B = 0;
+    ptr->unk64C_1 = 0;
+    ptr->unk64D = 0;
+    ptr->unk64F = 0;
+    ptr->unk650 = 0;
+    ptr->unk652 = 0;
+    ptr->unk654 = 0;
+    
+    for(i = 0; i <= 7; i++)
+    {
+        ptr->unk656[i] = 0;
+    }
+    for(i = 0; i <= 7; i++)
+    {
+        ptr->unk65E[i] = 0;
+    }
+}
 
 void sub_808C27C(void)
 {
@@ -228,7 +321,7 @@ void sub_808C5F0(void)
 
 void sub_808C608(u8 taskId)
 {
-    gUnknown_0202FFB4->unk1 = 0;
+    gUnknown_0202FFB4->unk64C_1 = 0;
     if(sub_808D344(0))
     {
         gTasks[taskId].func = sub_808C650;
