@@ -27,7 +27,7 @@ struct PokedexView {
     u16 unk610;
     u16 unk612;
     u16 unk614;
-    u16 unk616;
+    u16 unk616;     //order
     u16 unk618;
     u16 unk61A;
     u16 unk61C;
@@ -74,6 +74,7 @@ extern bool32 sub_806912C(void);
 extern u16 pokedex_count(u8);
 extern u8 sub_8091E3C(void);
 extern void sub_80690C8(void);
+extern void sub_805469C(void);
 
 void sub_808C0CC(struct PokedexView *);
 void sub_808C608(u8 taskId);
@@ -86,7 +87,7 @@ void sub_808EDB8(struct Sprite *);
 void sub_808CA64(u8 taskId);
 void sub_808C8E8(u8 taskId);
 void sub_808CB8C(u8 taskId);
-u32 sub_808E48C(u16, u16);
+u16 sub_808E48C(u16, u16);
 void sub_808C898(u8 taskId);
 void sub_808CC50(u8 taskId);
 void sub_8091060(u16);
@@ -96,12 +97,18 @@ bool8 sub_808E208(u8, u8, u8);
 bool32 sub_808E82C(void); //Not sure about return type
 void sub_808E0CC(u16, u16);
 u8 sub_808F210(u32, u8);
-void sub_808F284(u32, u8);
+void sub_808F284(struct UnknownStruct2 *, u8);
 bool8 sub_808F250(u8);
 bool8 sub_808E71C(void);
 void sub_808CCC4(u8 taskId);
 u16 sub_8090F68(u8);
 void sub_808D690(u8, u8);
+void sub_808CD0C(u8 taskId);
+void sub_808D118(u8 taskId);
+void sub_808CF48(u8 taskId);
+void sub_808D214(u8 taskId);
+void sub_808CEF8(u8 taskId);
+void sub_808D2AC(u8 taskId);
 
 void sub_808C02C(void)
 {
@@ -125,7 +132,6 @@ void sub_808C02C(void)
         gSaveBlock1.unk938[i] = 0;
         gSaveBlock1.unk3A8C[i] = 0;
     }
-    
 }
 
 void sub_808C0A0(void)
@@ -149,14 +155,12 @@ void sub_808C0CC(struct PokedexView *ptr)
     for(i = 0; i <= 0x181; i++)
     {
         ptr->unk0[i].a |= 0x0000FFFF;
-        
         ptr->unk0[i].b_1 = 0;
         ptr->unk0[i].b_2 = 0;
     }
     ptr->unk608 = 0;
     ptr->unk60A_1 = 0;
     ptr->unk60A_2 = 0;
-
     ptr->unk60C = 0;
     ptr->unk60E = 0;
     ptr->unk610 = 0;
@@ -166,14 +170,9 @@ void sub_808C0CC(struct PokedexView *ptr)
     ptr->unk618 = 0;
     ptr->unk61A = 0;
     ptr->unk61C = 0;
-    
     for(i = 0; i <= 3; i++)
-    {
         ptr->unk61E[i] |= 0xFFFF;
-    }
-    
     ptr->unk628 = 0;
-    
     ptr->unk62A = 0;
     ptr->unk62C = 0;
     ptr->unk62D = 0;
@@ -184,12 +183,8 @@ void sub_808C0CC(struct PokedexView *ptr)
     ptr->unk634 = 0;
     ptr->unk636 = 0;
     ptr->unk638 = 0;
-    
     for(i = 0; i <= 3; i++)
-    {
         ptr->unk63A[i] = 0;
-    }
-    
     ptr->unk64A = 0;
     ptr->unk64B = 0;
     ptr->unk64C_1 = 0;
@@ -198,15 +193,10 @@ void sub_808C0CC(struct PokedexView *ptr)
     ptr->unk650 = 0;
     ptr->unk652 = 0;
     ptr->unk654 = 0;
-    
     for(i = 0; i <= 7; i++)
-    {
         ptr->unk656[i] = 0;
-    }
     for(i = 0; i <= 7; i++)
-    {
         ptr->unk65E[i] = 0;
-    }
 }
 
 void sub_808C27C(void)
@@ -497,7 +487,7 @@ void sub_808CAE4(u8 taskId)
         !sub_808F250(gTasks[taskId].data[0]) &&
         sub_808E71C())
         {
-            sub_808F284((u32)gUnknown_0202FFB4 + gUnknown_0202FFB4->unk60E * 4, gTasks[taskId].data[0]);
+            sub_808F284(&gUnknown_0202FFB4->unk0[gUnknown_0202FFB4->unk60E], gTasks[taskId].data[0]);
         }
     }
     else
@@ -532,5 +522,191 @@ void sub_808CB8C(u8 taskId)
             gUnknown_0202FFB4->unk616 = gUnknown_0202FFB4->unk618;
             gTasks[taskId].func = sub_808C608;
         }
+    }
+}
+
+void sub_808CC50(u8 taskId)
+{
+    if(!gPaletteFade.active)
+    {
+        gSaveBlock2.pokedex.unknown1 = gUnknown_0202FFB4->unk612;
+        if(!sub_806912C())
+            gSaveBlock2.pokedex.unknown1 = 0;
+        gSaveBlock2.pokedex.order = gUnknown_0202FFB4->unk616;
+        DestroyTask(taskId);
+        SetMainCallback2(sub_805469C);
+        m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 0x100);
+    }
+}
+
+void sub_808CCC4(u8 taskId)
+{
+    gUnknown_0202FFB4->unk64C_1 = 1;
+    if(sub_808D344(3))
+    {
+        gTasks[taskId].func = sub_808CD0C;
+    }
+}
+
+void sub_808CD0C(u8 taskId)
+{
+    REG_BG0VOFS = gUnknown_0202FFB4->unk654;
+    
+    if(gUnknown_0202FFB4->unk654)
+        gUnknown_0202FFB4->unk654 -= 8;
+    else
+    {
+        //_0808CD44
+        if((gMain.newKeys & 1) && gUnknown_0202FFB4->unk0[gUnknown_0202FFB4->unk60E].b_1)
+        {
+            u32 a;
+            
+            sub_808E6BC();
+            a = (1 << (gSprites[gUnknown_0202FFB4->unk626].oam.paletteNum + 16));
+            gSprites[gUnknown_0202FFB4->unk626].callback = sub_808EDB8;
+            BeginNormalPaletteFade(~a,
+             0, 0, 0x10, 0);
+            gTasks[taskId].func = sub_808D118;
+            PlaySE(0x15);
+        }
+        //_0808CDD0
+        else if(gMain.newKeys & 8)
+        {
+            gUnknown_0202FFB4->unk654 = 0;
+            gUnknown_0202FFB4->unk650 = 1;
+            gUnknown_0202FFB4->unk652 = 0;
+            gTasks[taskId].func = sub_808CF48;
+            PlaySE(SE_SELECT);
+        }
+        //_0808CE20
+        else if(gMain.newKeys & 4)
+        {
+            BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+            gTasks[taskId].data[0] = sub_8091E3C();
+            gUnknown_0202FFB4->unk64F = 0;
+            gTasks[taskId].func = sub_808CB8C;
+            PlaySE(2);
+        }
+        //_0808CE78
+        else if(gMain.newKeys & 2)
+        {
+            BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+            gTasks[taskId].func = sub_808D214;
+            PlaySE(3);
+        }
+        //_0808CEB0
+        else
+        {            
+            gUnknown_0202FFB4->unk60E = sub_808E48C(gUnknown_0202FFB4->unk60E, 0xE);
+            if(gUnknown_0202FFB4->unk62E)
+                gTasks[taskId].func = sub_808CEF8;
+        }
+    }
+    //_0808CEDC
+}
+
+void sub_808CEF8(u8 taskId)
+{
+    if(sub_808E208(gUnknown_0202FFB4->unk62F, gUnknown_0202FFB4->unk634, gUnknown_0202FFB4->unk636))
+        gTasks[taskId].func = sub_808CD0C;
+}
+
+void sub_808CF48(u8 taskId)
+{
+    REG_BG0VOFS = gUnknown_0202FFB4->unk654;
+    
+    if(gUnknown_0202FFB4->unk654 != 0x60)
+        gUnknown_0202FFB4->unk654 += 8;
+    else
+    {
+        //_0808CF80
+        if(gMain.newKeys & 1)
+        {
+            switch(gUnknown_0202FFB4->unk652)
+            {
+                case 0:
+                default:
+                    gMain.newKeys |= 8;
+                    break;
+                case 1:
+                    gUnknown_0202FFB4->unk60E = 0;
+                    gUnknown_0202FFB4->unk62C = 0x40;
+                    //goto _0808CFF8
+                    sub_808E82C();
+                    sub_808E0CC(gUnknown_0202FFB4->unk60E, 0xE);
+                    gMain.newKeys |= 8;
+                    break;
+                case 2:
+                    gUnknown_0202FFB4->unk60E = gUnknown_0202FFB4->unk60C - 1;
+                    gUnknown_0202FFB4->unk62C = gUnknown_0202FFB4->unk60C * 16 + 0x30;
+                    sub_808E82C();
+                    sub_808E0CC(gUnknown_0202FFB4->unk60E, 0xE);
+                    gMain.newKeys |= 8;
+                    break;
+                case 3:
+                    BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+                    gTasks[taskId].func = sub_808D214;
+                    PlaySE(0x34);
+                    break;
+                case 4:
+                    BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+                    gTasks[taskId].func = sub_808D2AC;
+                    PlaySE(3);
+                    break;
+            }
+        }
+        //_0808D078
+        if(gMain.newKeys & 0xA)
+        {
+            gUnknown_0202FFB4->unk650 = 0;
+            gTasks[taskId].func = sub_808CD0C;
+            PlaySE(SE_SELECT);
+        }
+        //_0808D0B8
+        else
+        {
+            if((gMain.newAndRepeatedKeys & 0x40) && gUnknown_0202FFB4->unk652)
+            {
+                gUnknown_0202FFB4->unk652--;
+                PlaySE(SE_SELECT);
+            }
+            else
+            {
+                if((gMain.newAndRepeatedKeys & 0x80) && gUnknown_0202FFB4->unk652 <= 3)
+                {
+                    gUnknown_0202FFB4->unk652++;
+                    PlaySE(SE_SELECT);
+                }
+            }
+        }
+    }
+    //_0808D106
+}
+
+void sub_808D118(u8 taskId)
+{
+    if(gSprites[gUnknown_0202FFB4->unk626].pos1.x == 0x30 &&
+    gSprites[gUnknown_0202FFB4->unk626].pos1.y == 0x38)
+    {
+        gUnknown_0202FFB4->unk64B = gUnknown_0202FFB4->unk64A;
+        gTasks[taskId].data[0] = sub_808F210(&gUnknown_0202FFB4->unk0[gUnknown_0202FFB4->unk60E].a, gUnknown_0202FFB4->unk626);
+        gTasks[taskId].func = sub_808D198;
+    }
+}
+
+void sub_808D198(u8 taskId)
+{
+    if(gTasks[gTasks[taskId].data[0]].isActive)
+    {
+        if(gUnknown_0202FFB4->unk64A == 1 &&
+        !sub_808F250(gTasks[taskId].data[0]) &&
+        sub_808E71C())
+        {
+            sub_808F284(&gUnknown_0202FFB4->unk0[gUnknown_0202FFB4->unk60E], gTasks[taskId].data[0]);
+        }
+    }
+    else
+    {
+        gTasks[taskId].func = sub_808CCC4;
     }
 }
