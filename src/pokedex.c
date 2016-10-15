@@ -16,8 +16,8 @@ struct UnknownStruct2 {
     u8 c;
 };
 
-struct UnknownStruct {
-    struct UnknownStruct2 unk0[386];
+struct PokedexView {
+    struct UnknownStruct2 unk0[386];    //data on the 386 different Pokemon
     u16 unk608;
     u8 unk60A_1:1;
     u8 unk60A_2:1;
@@ -32,7 +32,7 @@ struct UnknownStruct {
     u16 unk61A;
     u16 unk61C;
     u16 unk61E[4];
-    u16 unk626;
+    u16 unk626;     //some sprite id
     u16 unk628;
     u16 unk62A;
     u8 unk62C;
@@ -54,15 +54,15 @@ struct UnknownStruct {
     u8 unk64F;
     u8 unk650;
     u8 unk651;
-    u16 unk652;
-    s16 unk654;
+    u16 unk652;     //Menu selection
+    s16 unk654;     //Menu Y position (inverted because we use REG_BG0VOFS for this)
     u8 unk656[8];
     u8 unk65E[8];
 };
 
 extern struct MusicPlayerInfo gMPlay_BGM;
 extern u8 gReservedSpritePaletteCount;
-extern struct UnknownStruct *gUnknown_0202FFB4;
+extern struct PokedexView *gUnknown_0202FFB4;
 extern u16 gUnknown_0202FFB8;
 extern u8 gUnknown_0202FFBA;
 extern u8 gUnknown_03005CE8;
@@ -75,7 +75,7 @@ extern u16 pokedex_count(u8);
 extern u8 sub_8091E3C(void);
 extern void sub_80690C8(void);
 
-void sub_808C0CC(struct UnknownStruct *);
+void sub_808C0CC(struct PokedexView *);
 void sub_808C608(u8 taskId);
 void sub_808C0B8(void);
 void sub_808C5F0(void);
@@ -141,7 +141,7 @@ void sub_808C0B8(void)
     TransferPlttBuffer();
 }
 
-void sub_808C0CC(struct UnknownStruct *ptr)
+void sub_808C0CC(struct PokedexView *ptr)
 {
     u16 i;
     struct UnknownStruct3 *p;
@@ -255,16 +255,16 @@ void sub_808C27C(void)
             {
                 case 0:
                 default: //This useless "default" is needed to match the original ROM.
-                    gUnknown_0202FFB4 = (struct UnknownStruct *)0x02018000;
+                    gUnknown_0202FFB4 = (struct PokedexView *)0x02018000;
                     break;
                 case 1:
-                    gUnknown_0202FFB4 = (struct UnknownStruct *)0x02018800;
+                    gUnknown_0202FFB4 = (struct PokedexView *)0x02018800;
                     break;
                 case 2:
-                    gUnknown_0202FFB4 = (struct UnknownStruct *)0x02019000;
+                    gUnknown_0202FFB4 = (struct PokedexView *)0x02019000;
                     break;
                 case 3:
-                    gUnknown_0202FFB4 = (struct UnknownStruct *)0x02019800;
+                    gUnknown_0202FFB4 = (struct PokedexView *)0x02019800;
                     break;
             }
             sub_808C0CC(gUnknown_0202FFB4);
@@ -349,32 +349,29 @@ void sub_808C608(u8 taskId)
     }
 }
 
-/*
-//FixMe
+//Hide menu and process input on main screen
 void sub_808C650(u8 taskId)
 {
     REG_BG0VOFS = gUnknown_0202FFB4->unk654;
     
+    //Slide menu down
     if(gUnknown_0202FFB4->unk654)
     {
         gUnknown_0202FFB4->unk654 -= 8;
     }
     else
     {
-        //_0808C68C
-        if((gMain.newKeys & A_BUTTON) &&
-        (((struct UnknownStruct2 *)gUnknown_0202FFB4)[gUnknown_0202FFB4->unk60E].unk3 << 31))
+        if((gMain.newKeys & A_BUTTON) && gUnknown_0202FFB4->unk0[gUnknown_0202FFB4->unk60E].b_1)
         {
             sub_808E6BC();
             BeginNormalPaletteFade(
               ~(1 << (gSprites[gUnknown_0202FFB4->unk626].oam.paletteNum + 16)),
-              0, 0, 0x10, gUnknown_0202FFB4->unk654);
+              0, 0, 0x10, 0);
             gSprites[gUnknown_0202FFB4->unk626].callback = sub_808EDB8;
             gTasks[taskId].func = sub_808CA64;
             PlaySE(0x15);
         }
-        //_0808C724
-        else if(gMain.newKeys & 0x8)
+        else if(gMain.newKeys & START_BUTTON)
         {
             gUnknown_0202FFB4->unk654 = 0;
             gUnknown_0202FFB4->unk650 = 1;
@@ -382,8 +379,7 @@ void sub_808C650(u8 taskId)
             gTasks[taskId].func = sub_808C8E8;
             PlaySE(SE_SELECT);
         }
-        //_0808C774
-        else if(gMain.newKeys & 0x4)
+        else if(gMain.newKeys & SELECT_BUTTON)
         {
             PlaySE(SE_SELECT);
             BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
@@ -396,8 +392,7 @@ void sub_808C650(u8 taskId)
             gTasks[taskId].func = sub_808CB8C;
             PlaySE(2);
         }
-        //_0808C814
-        else if(gMain.newKeys & 0x2)
+        else if(gMain.newKeys & B_BUTTON)
         {
             BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
             gTasks[taskId].func = sub_808CC50;
@@ -405,7 +400,6 @@ void sub_808C650(u8 taskId)
         }
         else
         {
-            //_0808C84C
             gUnknown_0202FFB4->unk60E = sub_808E48C(gUnknown_0202FFB4->unk60E, 0xE);
             if(gUnknown_0202FFB4->unk62E)
                 gTasks[taskId].func = sub_808C898;
@@ -421,10 +415,12 @@ void sub_808C898(u8 taskId)
     }
 }
 
-//FixMe
+//Bring up menu and process menu input
 void sub_808C8E8(u8 taskId)
 {
     REG_BG0VOFS = gUnknown_0202FFB4->unk654;
+    
+    //Slide menu up
     if(gUnknown_0202FFB4->unk654 != 0x50)
     {
         gUnknown_0202FFB4->unk654 += 8;
@@ -435,54 +431,47 @@ void sub_808C8E8(u8 taskId)
     {
         switch(gUnknown_0202FFB4->unk652)
         {
-            case 1:
+            case 0: //BACK TO LIST
+            default:
+                gMain.newKeys |= START_BUTTON;
+                break;
+            case 1: //LIST TOP
                 gUnknown_0202FFB4->unk60E = 0;
-                //goto _0808C978
                 gUnknown_0202FFB4->unk62C = 0x40;
                 sub_808E82C();
                 sub_808E0CC(gUnknown_0202FFB4->unk60E, 0xE);
-                gMain.newKeys |= 0x8;
+                gMain.newKeys |= START_BUTTON;
                 break;
-            case 2:
+            case 2: //LIST BOTTOM
                 gUnknown_0202FFB4->unk60E = gUnknown_0202FFB4->unk60C - 1;
                 gUnknown_0202FFB4->unk62C = gUnknown_0202FFB4->unk60C * 16 + 0x30;
                 sub_808E82C();
                 sub_808E0CC(gUnknown_0202FFB4->unk60E, 0xE);
-                gMain.newKeys |= 0x8;
+                gMain.newKeys |= START_BUTTON;
                 break;
-            case 3:
+            case 3: //CLOSE POKEDEX
                 BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
                 gTasks[taskId].func = sub_808CC50;
                 PlaySE(3);
                 break;
-            case 0:
-            default:
-                gMain.newKeys |= 0x8;
-                break;
         }
     }
     //_0808C9C4
-    if(gMain.newKeys & 0xA)
+    if(gMain.newKeys & (START_BUTTON | B_BUTTON))
     {
         gUnknown_0202FFB4->unk650 = 0;
         gTasks[taskId].func = sub_808C650;
-        //goto _0808CA20
         PlaySE(SE_SELECT);
-        return;
         
     }
-    else
+    //_0808CA04
+    else if((gMain.newAndRepeatedKeys & DPAD_UP) && gUnknown_0202FFB4->unk652)
     {
-        //_0808CA04
-        if((gMain.newAndRepeatedKeys & 0x40) && gUnknown_0202FFB4->unk652)
-        {
-            gUnknown_0202FFB4->unk652--;
-            PlaySE(SE_SELECT);
-            return;
-        }
+        gUnknown_0202FFB4->unk652--;
+        PlaySE(SE_SELECT);
     }
     //_0808CA30
-    if((gMain.newAndRepeatedKeys & 0x80) && gUnknown_0202FFB4->unk652 <= 2)
+    else if((gMain.newAndRepeatedKeys & DPAD_DOWN) && gUnknown_0202FFB4->unk652 <= 2)
     {
         gUnknown_0202FFB4->unk652++;
         PlaySE(SE_SELECT);
@@ -508,7 +497,7 @@ void sub_808CAE4(u8 taskId)
         !sub_808F250(gTasks[taskId].data[0]) &&
         sub_808E71C())
         {
-            sub_808F284((u32)gUnknown_0202FFB4 + gUnknown_0202FFB4->unk60E * 4, gTasks[taskId].data[8]);
+            sub_808F284((u32)gUnknown_0202FFB4 + gUnknown_0202FFB4->unk60E * 4, gTasks[taskId].data[0]);
         }
     }
     else
@@ -520,7 +509,6 @@ void sub_808CAE4(u8 taskId)
     }
 }
 
-//FixMe
 void sub_808CB8C(u8 taskId)
 {
     bool8 isActive = gTasks[gTasks[taskId].data[0]].isActive;
@@ -529,7 +517,7 @@ void sub_808CB8C(u8 taskId)
     {
         if(gUnknown_0202FFB4->unk64F)
         {
-            *(u16 *)((u32)&gUnknown_0202FFB4->unk64F - 0x41) = isActive;
+            gUnknown_0202FFB4->unk60E = isActive;
             gUnknown_0202FFB4->unk62C = 0x40;
             gTasks[taskId].func = sub_808CCC4;
         }
@@ -537,13 +525,12 @@ void sub_808CB8C(u8 taskId)
         {
             //_0808CBE4
             gUnknown_0202FFB4->unk62C = gUnknown_0202FFB4->unk62A;
-            *(u16 *)((u32)&gUnknown_0202FFB4->unk62C - 0x1E) = gUnknown_0202FFB4->unk610;
-            
+            gUnknown_0202FFB4->unk60E = gUnknown_0202FFB4->unk610;
+            gUnknown_0202FFB4->unk612 = gUnknown_0202FFB4->unk614;
             if(!sub_806912C())
                 gUnknown_0202FFB4->unk612 = 0;
-            gUnknown_0202FFB4->unk618 = gUnknown_0202FFB4->unk616;
+            gUnknown_0202FFB4->unk616 = gUnknown_0202FFB4->unk618;
             gTasks[taskId].func = sub_808C608;
         }
     }
 }
-*/
