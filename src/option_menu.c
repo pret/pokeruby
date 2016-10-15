@@ -263,27 +263,27 @@ static void Task_OptionMenuProcessInput(u8 taskId)
     {
         switch(gTasks[taskId].data[TD_MENUSELECTION])
         {
-            case 0:
+            case MENUITEM_TEXTSPEED:
                 gTasks[taskId].data[TD_TEXTSPEED] = TextSpeed_ProcessInput(gTasks[taskId].data[TD_TEXTSPEED]);
                 TextSpeed_DrawChoices(gTasks[taskId].data[TD_TEXTSPEED]);
                 break;
-            case 1:
+            case MENUITEM_BATTLESCENE:
                 gTasks[taskId].data[TD_BATTLESCENE] = BattleScene_ProcessInput(gTasks[taskId].data[TD_BATTLESCENE]);
                 BattleScene_DrawChoices(gTasks[taskId].data[TD_BATTLESCENE]);
                 break;
-            case 2:
+            case MENUITEM_BATTLESTYLE:
                 gTasks[taskId].data[TD_BATTLESTYLE] = BattleStyle_ProcessInput(gTasks[taskId].data[TD_BATTLESTYLE]);
                 BattleStyle_DrawChoices(gTasks[taskId].data[TD_BATTLESTYLE]);
                 break;
-            case 3:
+            case MENUITEM_SOUND:
                 gTasks[taskId].data[TD_SOUND] = Sound_ProcessInput(gTasks[taskId].data[TD_SOUND]);
                 Sound_DrawChoices(gTasks[taskId].data[TD_SOUND]);
                 break;
-            case 4:
+            case MENUITEM_BUTTONMODE:
                 gTasks[taskId].data[TD_BUTTONMODE] = ButtonMode_ProcessInput(gTasks[taskId].data[TD_BUTTONMODE]);
                 ButtonMode_DrawChoices(gTasks[taskId].data[TD_BUTTONMODE]);
                 break;
-            case 5:
+            case MENUITEM_FRAMETYPE:
                 gTasks[taskId].data[TD_FRAMETYPE] = FrameType_ProcessInput(gTasks[taskId].data[TD_FRAMETYPE]);
                 FrameType_DrawChoices(gTasks[taskId].data[TD_FRAMETYPE]);
                 break;
