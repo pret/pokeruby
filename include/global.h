@@ -139,7 +139,9 @@ struct SaveBlock1
     u32 money;
     u16 coins;
     u16 registeredItem; // registered for use with SELECT button
-    u8 filler_498[0x788];
+    u8 filler_498[0x4A0];
+    u8 unk938[52];  // pokedex related
+    u8 filler_96C[0x2B4];
     struct MapObjectTemplate mapObjectTemplates[64];
     u8 filler_1220[0x320];
     u32 gameStats[NUM_GAME_STATS];
@@ -147,7 +149,8 @@ struct SaveBlock1
     struct SB1_2EFC_Struct sb1_2EFC_struct[5];
     u8 filler_2F9C[0x6F4];
     struct RamScript ramScript;
-    u8 filler_3A7C[0x44];
+    u8 filler_3A7C[0x10];
+    u8 unk3A8C[52]; //pokedex related
 };
 
 extern struct SaveBlock1 gSaveBlock1;
@@ -162,39 +165,39 @@ struct Time
 
 struct Pokedex
 {
-    u8 order;
-    u8 unknown1;
-    u8 nationalMagic; // must equal 0xDA in order to have National mode
-    u8 unknown2;
-    u32 unownPersonality; // set when you first see Unown
-    u32 spindaPersonality; // set when you first see Spinda
-    u32 unknown3;
-    u8 owned[52];
-    u8 seen[52];
+    /*0x00*/ u8 order;
+    /*0x01*/ u8 unknown1;
+    /*0x02*/ u8 nationalMagic; // must equal 0xDA in order to have National mode
+    /*0x03*/ u8 unknown2;
+    /*0x04*/ u32 unownPersonality; // set when you first see Unown
+    /*0x08*/ u32 spindaPersonality; // set when you first see Spinda
+    /*0x0C*/ u32 unknown3;
+    /*0x10*/ u8 owned[52];
+    /*0x44*/ u8 seen[52];
 };
 
 struct SaveBlock2
 {
-    u8 playerName[8];
-    u8 playerGender; // MALE, FEMALE
-    u8 sb2_field_9;
-    u8 playerTrainerId[4];
-    u16 playTimeHours;
-    u8 playTimeMinutes;
-    u8 playTimeSeconds;
-    u8 playTimeVBlanks;
-    u8 optionsButtonMode;  // OPTIONS_BUTTON_MODE_[NORMAL/LR/L_EQUALS_A]
-    u8 optionsTextSpeed:3; // OPTIONS_TEXT_SPEED_[SLOW/MID/FAST]
-    u8 optionsWindowFrameType:5; // Specifies one of the 20 decorative borders for text boxes
-    u8 optionsSound:1; // OPTIONS_SOUND_[MONO/STEREO]
-    u8 optionsBattleStyle:1; // OPTIONS_BATTLE_STYLE_[SHIFT/SET]
-    u8 optionsBattleSceneOff:1; // whether battle animations are disabled
-    u8 regionMapZoom:1; // whether the map is zoomed in
-    struct Pokedex pokedex;
-    u8 filler_90[0x8];
-    struct Time localTimeOffset;
-    struct Time lastBerryTreeUpdate;
-    u8 filler_A8[0x7E8];
+    /*0x00*/ u8 playerName[8];
+    /*0x08*/ u8 playerGender; // MALE, FEMALE
+    /*0x09*/ u8 sb2_field_9;
+    /*0x0A*/ u8 playerTrainerId[4];
+    /*0x0E*/ u16 playTimeHours;
+    /*0x10*/ u8 playTimeMinutes;
+    /*0x11*/ u8 playTimeSeconds;
+    /*0x12*/ u8 playTimeVBlanks;
+    /*0x13*/ u8 optionsButtonMode;  // OPTIONS_BUTTON_MODE_[NORMAL/LR/L_EQUALS_A]
+             u8 optionsTextSpeed:3; // OPTIONS_TEXT_SPEED_[SLOW/MID/FAST]
+             u8 optionsWindowFrameType:5; // Specifies one of the 20 decorative borders for text boxes
+             u8 optionsSound:1; // OPTIONS_SOUND_[MONO/STEREO]
+             u8 optionsBattleStyle:1; // OPTIONS_BATTLE_STYLE_[SHIFT/SET]
+             u8 optionsBattleSceneOff:1; // whether battle animations are disabled
+             u8 regionMapZoom:1; // whether the map is zoomed in
+    /*0x18*/ struct Pokedex pokedex;
+    /*0x90*/ u8 filler_90[0x8];
+    /*0x98*/ struct Time localTimeOffset;
+    /*0xA0*/ struct Time lastBerryTreeUpdate;
+    /*0xA8*/ u8 filler_A8[0x7E8];
 };
 
 extern struct SaveBlock2 gSaveBlock2;

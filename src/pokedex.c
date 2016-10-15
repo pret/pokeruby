@@ -8,6 +8,7 @@
 #include "task.h"
 #include "text.h"
 
+//Probably seen, own flags on Pokemon
 struct UnknownStruct2 {
     u16 a;
     u8 b_1:1;
@@ -16,7 +17,7 @@ struct UnknownStruct2 {
 };
 
 struct UnknownStruct {
-    struct UnknownStruct2 unk0[0x182];
+    struct UnknownStruct2 unk0[386];
     u16 unk608;
     u8 unk60A_1:1;
     u8 unk60A_2:1;
@@ -64,6 +65,7 @@ extern u8 gReservedSpritePaletteCount;
 extern struct UnknownStruct *gUnknown_0202FFB4;
 extern u16 gUnknown_0202FFB8;
 extern u8 gUnknown_0202FFBA;
+extern u8 gUnknown_03005CE8;
 
 extern void m4aMPlayVolumeControl(struct MusicPlayerInfo *mplayInfo, u16 trackBits, u16 volume);
 extern bool8 BeginNormalPaletteFade(u32, s8, u8, u8, u16);
@@ -71,6 +73,7 @@ extern void remove_some_task(void);
 extern bool32 sub_806912C(void);
 extern u16 pokedex_count(u8);
 extern u8 sub_8091E3C(void);
+extern void sub_80690C8(void);
 
 void sub_808C0CC(struct UnknownStruct *);
 void sub_808C608(u8 taskId);
@@ -100,12 +103,30 @@ void sub_808CCC4(u8 taskId);
 u16 sub_8090F68(u8);
 void sub_808D690(u8, u8);
 
-/*
 void sub_808C02C(void)
 {
+    u16 i;
+    
+    gUnknown_0202FFB8 = 0;
+    gUnknown_0202FFBA = 0x40;
+    gUnknown_03005CE8 = 0;
+    gSaveBlock2.pokedex.unknown1 = 0;
+    gSaveBlock2.pokedex.order = 0;
+    gSaveBlock2.pokedex.nationalMagic = 0;
+    gSaveBlock2.pokedex.unknown2 = 0;
+    gSaveBlock2.pokedex.unownPersonality = 0;
+    gSaveBlock2.pokedex.spindaPersonality = 0;
+    gSaveBlock2.pokedex.unknown3 = 0;
+    sub_80690C8();
+    for(i = 0; i <= 51; i++)
+    {
+        gSaveBlock2.pokedex.owned[i] = 0;
+        gSaveBlock2.pokedex.seen[i] = 0;
+        gSaveBlock1.unk938[i] = 0;
+        gSaveBlock1.unk3A8C[i] = 0;
+    }
     
 }
-*/
 
 void sub_808C0A0(void)
 {
