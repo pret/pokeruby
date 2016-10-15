@@ -41,570 +41,570 @@ BattleAIs:: @ 81DA01C
 
 AI_CheckBadMove: @ 81DA09C
 	is_most_powerful_move
-	if_equal 0, BattleAIScript_1DA108
-	if_damage_bonus 0, BattleAIScript_1DA85B
+	if_equal 0, AI_CheckBadMove_CheckSoundproof
+	if_damage_bonus 0, Score_Down10
 	get_ability TARGET
-	if_equal ABILITY_VOLT_ABSORB, BattleAIScript_1DA0CE
-	if_equal ABILITY_WATER_ABSORB, BattleAIScript_1DA0DB
-	if_equal ABILITY_FLASH_FIRE, BattleAIScript_1DA0E8
-	if_equal ABILITY_WONDER_GUARD, BattleAIScript_1DA0F5
-	if_equal ABILITY_LEVITATE, BattleAIScript_1DA100
-	jump BattleAIScript_1DA108
+	if_equal ABILITY_VOLT_ABSORB, CheckIfVoltAbsorbCancelsElectric
+	if_equal ABILITY_WATER_ABSORB, CheckIfWaterAbsorbCancelsWater
+	if_equal ABILITY_FLASH_FIRE, CheckIfFlashFireCancelsFire
+	if_equal ABILITY_WONDER_GUARD, CheckIfWonderGuardCancelsMove
+	if_equal ABILITY_LEVITATE, CheckIfLevitateCancelsGroundMove
+	jump AI_CheckBadMove_CheckSoundproof
 
-BattleAIScript_1DA0CE: @ 81DA0CE
+CheckIfVoltAbsorbCancelsElectric: @ 81DA0CE
 	get_type 4
-	if_type TYPE_ELECTRIC, BattleAIScript_1DA85E
-	jump BattleAIScript_1DA108
+	if_type TYPE_ELECTRIC, Score_Down12
+	jump AI_CheckBadMove_CheckSoundproof
 
-BattleAIScript_1DA0DB: @ 81DA0DB
+CheckIfWaterAbsorbCancelsWater: @ 81DA0DB
 	get_type 4
-	if_type TYPE_WATER, BattleAIScript_1DA85E
-	jump BattleAIScript_1DA108
+	if_type TYPE_WATER, Score_Down12
+	jump AI_CheckBadMove_CheckSoundproof
 
-BattleAIScript_1DA0E8: @ 81DA0E8
+CheckIfFlashFireCancelsFire: @ 81DA0E8
 	get_type 4
-	if_type TYPE_FIRE, BattleAIScript_1DA85E
-	jump BattleAIScript_1DA108
+	if_type TYPE_FIRE, Score_Down12
+	jump AI_CheckBadMove_CheckSoundproof
 
-BattleAIScript_1DA0F5: @ 81DA0F5
-	if_damage_bonus 80, BattleAIScript_1DA108
-	jump BattleAIScript_1DA85B
+CheckIfWonderGuardCancelsMove: @ 81DA0F5
+	if_damage_bonus 80, AI_CheckBadMove_CheckSoundproof
+	jump Score_Down10
 
-BattleAIScript_1DA100: @ 81DA100
+CheckIfLevitateCancelsGroundMove: @ 81DA100
 	get_type 4
-	if_type TYPE_GROUND, BattleAIScript_1DA85B
+	if_type TYPE_GROUND, Score_Down10
 
-BattleAIScript_1DA108: @ 81DA108
+AI_CheckBadMove_CheckSoundproof: @ 81DA108
 	get_ability TARGET
-	if_not_equal ABILITY_SOUNDPROOF, BattleAIScript_1DA14F
-	if_move MOVE_GROWL, BattleAIScript_1DA85B
-	if_move MOVE_ROAR, BattleAIScript_1DA85B
-	if_move MOVE_SING, BattleAIScript_1DA85B
-	if_move MOVE_SUPERSONIC, BattleAIScript_1DA85B
-	if_move MOVE_SCREECH, BattleAIScript_1DA85B
-	if_move MOVE_SNORE, BattleAIScript_1DA85B
-	if_move MOVE_UPROAR, BattleAIScript_1DA85B
-	if_move MOVE_METAL_SOUND, BattleAIScript_1DA85B
-	if_move MOVE_GRASS_WHISTLE, BattleAIScript_1DA85B
+	if_not_equal ABILITY_SOUNDPROOF, AI_CheckBadMove_CheckEffect
+	if_move MOVE_GROWL, Score_Down10
+	if_move MOVE_ROAR, Score_Down10
+	if_move MOVE_SING, Score_Down10
+	if_move MOVE_SUPERSONIC, Score_Down10
+	if_move MOVE_SCREECH, Score_Down10
+	if_move MOVE_SNORE, Score_Down10
+	if_move MOVE_UPROAR, Score_Down10
+	if_move MOVE_METAL_SOUND, Score_Down10
+	if_move MOVE_GRASS_WHISTLE, Score_Down10
 
-BattleAIScript_1DA14F: @ 81DA14F
-	if_effect EFFECT_SLEEP, BattleAIScript_1DA3DE
-	if_effect EFFECT_EXPLOSION, BattleAIScript_1DA3F7
-	if_effect EFFECT_DREAM_EATER, BattleAIScript_1DA430
-	if_effect EFFECT_ATTACK_UP, BattleAIScript_1DA448
-	if_effect EFFECT_DEFENSE_UP, BattleAIScript_1DA451
-	if_effect EFFECT_SPEED_UP, BattleAIScript_1DA45A
-	if_effect EFFECT_SPECIAL_ATTACK_UP, BattleAIScript_1DA463
-	if_effect EFFECT_SPECIAL_DEFENSE_UP, BattleAIScript_1DA46C
-	if_effect EFFECT_ACCURACY_UP, BattleAIScript_1DA475
-	if_effect EFFECT_EVASION_UP, BattleAIScript_1DA47E
-	if_effect EFFECT_ATTACK_DOWN, BattleAIScript_1DA487
-	if_effect EFFECT_DEFENSE_DOWN, BattleAIScript_1DA49C
-	if_effect EFFECT_SPEED_DOWN, BattleAIScript_1DA4A9
-	if_effect EFFECT_SPECIAL_ATTACK_DOWN, BattleAIScript_1DA4B6
-	if_effect EFFECT_SPECIAL_DEFENSE_DOWN, BattleAIScript_1DA4C3
-	if_effect EFFECT_ACCURACY_DOWN, BattleAIScript_1DA4D0
-	if_effect EFFECT_EVASION_DOWN, BattleAIScript_1DA4E5
-	if_effect EFFECT_HAZE, BattleAIScript_1DA4FC
-	if_effect EFFECT_BIDE, BattleAIScript_1DA5DA
-	if_effect EFFECT_ROAR, BattleAIScript_1DA572
-	if_effect EFFECT_TOXIC, BattleAIScript_1DA583
-	if_effect EFFECT_LIGHT_SCREEN, BattleAIScript_1DA5B2
-	if_effect EFFECT_OHKO, BattleAIScript_1DA5BD
-	if_effect EFFECT_RAZOR_WIND, BattleAIScript_1DA5DA
-	if_effect EFFECT_SUPER_FANG, BattleAIScript_1DA5DA
-	if_effect EFFECT_MIST, BattleAIScript_1DA5F4
-	if_effect EFFECT_FOCUS_ENERGY, BattleAIScript_1DA5FF
-	if_effect EFFECT_CONFUSE, BattleAIScript_1DA60A
-	if_effect EFFECT_ATTACK_UP_2, BattleAIScript_1DA448
-	if_effect EFFECT_DEFENSE_UP_2, BattleAIScript_1DA451
-	if_effect EFFECT_SPEED_UP_2, BattleAIScript_1DA45A
-	if_effect EFFECT_SPECIAL_ATTACK_UP_2, BattleAIScript_1DA463
-	if_effect EFFECT_SPECIAL_DEFENSE_UP_2, BattleAIScript_1DA46C
-	if_effect EFFECT_ACCURACY_UP_2, BattleAIScript_1DA475
-	if_effect EFFECT_EVASION_UP_2, BattleAIScript_1DA47E
-	if_effect EFFECT_ATTACK_DOWN_2, BattleAIScript_1DA487
-	if_effect EFFECT_DEFENSE_DOWN_2, BattleAIScript_1DA49C
-	if_effect EFFECT_SPEED_DOWN_2, BattleAIScript_1DA4A9
-	if_effect EFFECT_SPECIAL_ATTACK_DOWN_2, BattleAIScript_1DA4B6
-	if_effect EFFECT_SPECIAL_DEFENSE_DOWN_2, BattleAIScript_1DA4C3
-	if_effect EFFECT_ACCURACY_DOWN_2, BattleAIScript_1DA4D0
-	if_effect EFFECT_EVASION_DOWN_2, BattleAIScript_1DA4E5
-	if_effect EFFECT_REFLECT, BattleAIScript_1DA61D
-	if_effect EFFECT_POISON, BattleAIScript_1DA583
-	if_effect EFFECT_PARALYZE, BattleAIScript_1DA628
-	if_effect EFFECT_SUBSTITUTE, BattleAIScript_1DA641
-	if_effect EFFECT_RECHARGE, BattleAIScript_1DA5DA
-	if_effect EFFECT_LEECH_SEED, BattleAIScript_1DA653
-	if_effect EFFECT_DISABLE, BattleAIScript_1DA66E
-	if_effect EFFECT_LEVEL_DAMAGE, BattleAIScript_1DA5DA
-	if_effect EFFECT_PSYWAVE, BattleAIScript_1DA5DA
-	if_effect EFFECT_COUNTER, BattleAIScript_1DA5DA
-	if_effect EFFECT_ENCORE, BattleAIScript_1DA676
-	if_effect EFFECT_SNORE, BattleAIScript_1DA67E
-	if_effect EFFECT_SLEEP_TALK, BattleAIScript_1DA67E
-	if_effect EFFECT_FLAIL, BattleAIScript_1DA5DA
-	if_effect EFFECT_MEAN_LOOK, BattleAIScript_1DA689
-	if_effect EFFECT_NIGHTMARE, BattleAIScript_1DA41B
-	if_effect EFFECT_MINIMIZE, BattleAIScript_1DA47E
-	if_effect EFFECT_CURSE, BattleAIScript_1DA694
-	if_effect EFFECT_SPIKES, BattleAIScript_1DA6A5
-	if_effect EFFECT_FORESIGHT, BattleAIScript_1DA6B0
-	if_effect EFFECT_PERISH_SONG, BattleAIScript_1DA6BB
-	if_effect EFFECT_SANDSTORM, BattleAIScript_1DA6C6
-	if_effect EFFECT_SWAGGER, BattleAIScript_1DA60A
-	if_effect EFFECT_ATTRACT, BattleAIScript_1DA6CE
-	if_effect EFFECT_RETURN, BattleAIScript_1DA5DA
-	if_effect EFFECT_PRESENT, BattleAIScript_1DA5DA
-	if_effect EFFECT_FRUSTRATION, BattleAIScript_1DA5DA
-	if_effect EFFECT_SAFEGUARD, BattleAIScript_1DA70E
-	if_effect EFFECT_MAGNITUDE, BattleAIScript_1DA5D2
-	if_effect EFFECT_BATON_PASS, BattleAIScript_1DA729
-	if_effect EFFECT_SONICBOOM, BattleAIScript_1DA5DA
-	if_effect EFFECT_RAIN_DANCE, BattleAIScript_1DA732
-	if_effect EFFECT_SUNNY_DAY, BattleAIScript_1DA73A
-	if_effect EFFECT_BELLY_DRUM, BattleAIScript_1DA441
-	if_effect EFFECT_PSYCH_UP, BattleAIScript_1DA4FC
-	if_effect EFFECT_MIRROR_COAT, BattleAIScript_1DA5DA
-	if_effect EFFECT_SKULL_BASH, BattleAIScript_1DA5DA
-	if_effect EFFECT_FUTURE_SIGHT, BattleAIScript_1DA742
-	if_effect EFFECT_TELEPORT, BattleAIScript_1DA85B
-	if_effect EFFECT_DEFENSE_CURL, BattleAIScript_1DA451
-	if_effect EFFECT_FAKE_OUT, BattleAIScript_1DA74D
-	if_effect EFFECT_STOCKPILE, BattleAIScript_1DA756
-	if_effect EFFECT_SPIT_UP, BattleAIScript_1DA75F
-	if_effect EFFECT_SWALLOW, BattleAIScript_1DA75F
-	if_effect EFFECT_HAIL, BattleAIScript_1DA76E
-	if_effect EFFECT_TORMENT, BattleAIScript_1DA776
-	if_effect EFFECT_FLATTER, BattleAIScript_1DA60A
-	if_effect EFFECT_WILL_O_WISP, BattleAIScript_1DA781
-	if_effect EFFECT_MEMENTO, BattleAIScript_1DA719
-	if_effect EFFECT_FOCUS_PUNCH, BattleAIScript_1DA5DA
-	if_effect EFFECT_HELPING_HAND, BattleAIScript_1DA7A6
-	if_effect EFFECT_TRICK, BattleAIScript_1DA7AE
-	if_effect EFFECT_INGRAIN, BattleAIScript_1DA7B7
-	if_effect EFFECT_SUPERPOWER, BattleAIScript_1DA5DA
-	if_effect EFFECT_RECYCLE, BattleAIScript_1DA7C2
-	if_effect EFFECT_KNOCK_OFF, BattleAIScript_1DA7AE
-	if_effect EFFECT_ENDEAVOR, BattleAIScript_1DA5DA
-	if_effect EFFECT_IMPRISON, BattleAIScript_1DA7CB
-	if_effect EFFECT_REFRESH, BattleAIScript_1DA7D6
-	if_effect EFFECT_LOW_KICK, BattleAIScript_1DA5DA
-	if_effect EFFECT_MUD_SPORT, BattleAIScript_1DA7E1
-	if_effect EFFECT_TICKLE, BattleAIScript_1DA7EC
-	if_effect EFFECT_COSMIC_POWER, BattleAIScript_1DA7FD
-	if_effect EFFECT_BULK_UP, BattleAIScript_1DA80E
-	if_effect EFFECT_WATER_SPORT, BattleAIScript_1DA81F
-	if_effect EFFECT_CALM_MIND, BattleAIScript_1DA82A
-	if_effect EFFECT_DRAGON_DANCE, BattleAIScript_1DA83B
+AI_CheckBadMove_CheckEffect: @ 81DA14F
+	if_effect EFFECT_SLEEP, AI_CBM_Sleep
+	if_effect EFFECT_EXPLOSION, AI_CBM_Explosion
+	if_effect EFFECT_DREAM_EATER, AI_CBM_DreamEater
+	if_effect EFFECT_ATTACK_UP, AI_CBM_AttackUp
+	if_effect EFFECT_DEFENSE_UP, AI_CBM_DefenseUp
+	if_effect EFFECT_SPEED_UP, AI_CBM_SpeedUp
+	if_effect EFFECT_SPECIAL_ATTACK_UP, AI_CBM_SpAtkUp
+	if_effect EFFECT_SPECIAL_DEFENSE_UP, AI_CBM_SpDefUp
+	if_effect EFFECT_ACCURACY_UP, AI_CBM_AccUp
+	if_effect EFFECT_EVASION_UP, AI_CBM_EvasionUp
+	if_effect EFFECT_ATTACK_DOWN, AI_CBM_AttackDown
+	if_effect EFFECT_DEFENSE_DOWN, AI_CBM_DefenseDown
+	if_effect EFFECT_SPEED_DOWN, AI_CBM_SpeedDown
+	if_effect EFFECT_SPECIAL_ATTACK_DOWN, AI_CBM_SpAtkDown
+	if_effect EFFECT_SPECIAL_DEFENSE_DOWN, AI_CBM_SpDefDown
+	if_effect EFFECT_ACCURACY_DOWN, AI_CBM_AccDown
+	if_effect EFFECT_EVASION_DOWN, AI_CBM_EvasionDown
+	if_effect EFFECT_HAZE, AI_CBM_Haze
+	if_effect EFFECT_BIDE, AI_CBM_HighRiskForDamage
+	if_effect EFFECT_ROAR, AI_CBM_Roar
+	if_effect EFFECT_TOXIC, AI_CBM_Toxic
+	if_effect EFFECT_LIGHT_SCREEN, AI_CBM_LightScreen
+	if_effect EFFECT_OHKO, AI_CBM_OneHitKO
+	if_effect EFFECT_RAZOR_WIND, AI_CBM_HighRiskForDamage
+	if_effect EFFECT_SUPER_FANG, AI_CBM_HighRiskForDamage
+	if_effect EFFECT_MIST, AI_CBM_Mist
+	if_effect EFFECT_FOCUS_ENERGY, AI_CBM_FocusEnergy
+	if_effect EFFECT_CONFUSE, AI_CBM_Confuse
+	if_effect EFFECT_ATTACK_UP_2, AI_CBM_AttackUp
+	if_effect EFFECT_DEFENSE_UP_2, AI_CBM_DefenseUp
+	if_effect EFFECT_SPEED_UP_2, AI_CBM_SpeedUp
+	if_effect EFFECT_SPECIAL_ATTACK_UP_2, AI_CBM_SpAtkUp
+	if_effect EFFECT_SPECIAL_DEFENSE_UP_2, AI_CBM_SpDefUp
+	if_effect EFFECT_ACCURACY_UP_2, AI_CBM_AccUp
+	if_effect EFFECT_EVASION_UP_2, AI_CBM_EvasionUp
+	if_effect EFFECT_ATTACK_DOWN_2, AI_CBM_AttackDown
+	if_effect EFFECT_DEFENSE_DOWN_2, AI_CBM_DefenseDown
+	if_effect EFFECT_SPEED_DOWN_2, AI_CBM_SpeedDown
+	if_effect EFFECT_SPECIAL_ATTACK_DOWN_2, AI_CBM_SpAtkDown
+	if_effect EFFECT_SPECIAL_DEFENSE_DOWN_2, AI_CBM_SpDefDown
+	if_effect EFFECT_ACCURACY_DOWN_2, AI_CBM_AccDown
+	if_effect EFFECT_EVASION_DOWN_2, AI_CBM_EvasionDown
+	if_effect EFFECT_REFLECT, AI_CBM_Reflect
+	if_effect EFFECT_POISON, AI_CBM_Toxic
+	if_effect EFFECT_PARALYZE, AI_CBM_Paralyze
+	if_effect EFFECT_SUBSTITUTE, AI_CBM_Substitute
+	if_effect EFFECT_RECHARGE, AI_CBM_HighRiskForDamage
+	if_effect EFFECT_LEECH_SEED, AI_CBM_LeechSeed
+	if_effect EFFECT_DISABLE, AI_CBM_Disable
+	if_effect EFFECT_LEVEL_DAMAGE, AI_CBM_HighRiskForDamage
+	if_effect EFFECT_PSYWAVE, AI_CBM_HighRiskForDamage
+	if_effect EFFECT_COUNTER, AI_CBM_HighRiskForDamage
+	if_effect EFFECT_ENCORE, AI_CBM_Encore
+	if_effect EFFECT_SNORE, AI_CBM_DamageDuringSleep
+	if_effect EFFECT_SLEEP_TALK, AI_CBM_DamageDuringSleep
+	if_effect EFFECT_FLAIL, AI_CBM_HighRiskForDamage
+	if_effect EFFECT_MEAN_LOOK, AI_CBM_CantEscape
+	if_effect EFFECT_NIGHTMARE, AI_CBM_Nightmare
+	if_effect EFFECT_MINIMIZE, AI_CBM_EvasionUp
+	if_effect EFFECT_CURSE, AI_CBM_Curse
+	if_effect EFFECT_SPIKES, AI_CBM_Spikes
+	if_effect EFFECT_FORESIGHT, AI_CBM_Foresight
+	if_effect EFFECT_PERISH_SONG, AI_CBM_PerishSong
+	if_effect EFFECT_SANDSTORM, AI_CBM_Sandstorm
+	if_effect EFFECT_SWAGGER, AI_CBM_Confuse
+	if_effect EFFECT_ATTRACT, AI_CBM_Attract
+	if_effect EFFECT_RETURN, AI_CBM_HighRiskForDamage
+	if_effect EFFECT_PRESENT, AI_CBM_HighRiskForDamage
+	if_effect EFFECT_FRUSTRATION, AI_CBM_HighRiskForDamage
+	if_effect EFFECT_SAFEGUARD, AI_CBM_Safeguard
+	if_effect EFFECT_MAGNITUDE, AI_CBM_Magnitude
+	if_effect EFFECT_BATON_PASS, AI_CBM_BatonPass
+	if_effect EFFECT_SONICBOOM, AI_CBM_HighRiskForDamage
+	if_effect EFFECT_RAIN_DANCE, AI_CBM_RainDance
+	if_effect EFFECT_SUNNY_DAY, AI_CBM_SunnyDay
+	if_effect EFFECT_BELLY_DRUM, AI_CBM_BellyDrum
+	if_effect EFFECT_PSYCH_UP, AI_CBM_Haze
+	if_effect EFFECT_MIRROR_COAT, AI_CBM_HighRiskForDamage
+	if_effect EFFECT_SKULL_BASH, AI_CBM_HighRiskForDamage
+	if_effect EFFECT_FUTURE_SIGHT, AI_CBM_FutureSight
+	if_effect EFFECT_TELEPORT, Score_Down10
+	if_effect EFFECT_DEFENSE_CURL, AI_CBM_DefenseUp
+	if_effect EFFECT_FAKE_OUT, AI_CBM_FakeOut
+	if_effect EFFECT_STOCKPILE, AI_CBM_Stockpile
+	if_effect EFFECT_SPIT_UP, AI_CBM_SpitUpAndSwallow
+	if_effect EFFECT_SWALLOW, AI_CBM_SpitUpAndSwallow
+	if_effect EFFECT_HAIL, AI_CBM_Hail
+	if_effect EFFECT_TORMENT, AI_CBM_Torment
+	if_effect EFFECT_FLATTER, AI_CBM_Confuse
+	if_effect EFFECT_WILL_O_WISP, AI_CBM_WillOWisp
+	if_effect EFFECT_MEMENTO, AI_CBM_Memento
+	if_effect EFFECT_FOCUS_PUNCH, AI_CBM_HighRiskForDamage
+	if_effect EFFECT_HELPING_HAND, AI_CBM_HelpingHand
+	if_effect EFFECT_TRICK, AI_CBM_TrickAndKnockOff
+	if_effect EFFECT_INGRAIN, AI_CBM_Ingrain
+	if_effect EFFECT_SUPERPOWER, AI_CBM_HighRiskForDamage
+	if_effect EFFECT_RECYCLE, AI_CBM_Recycle
+	if_effect EFFECT_KNOCK_OFF, AI_CBM_TrickAndKnockOff
+	if_effect EFFECT_ENDEAVOR, AI_CBM_HighRiskForDamage
+	if_effect EFFECT_IMPRISON, AI_CBM_Imprison
+	if_effect EFFECT_REFRESH, AI_CBM_Refresh
+	if_effect EFFECT_LOW_KICK, AI_CBM_HighRiskForDamage
+	if_effect EFFECT_MUD_SPORT, AI_CBM_MudSport
+	if_effect EFFECT_TICKLE, AI_CBM_Tickle
+	if_effect EFFECT_COSMIC_POWER, AI_CBM_CosmicPower
+	if_effect EFFECT_BULK_UP, AI_CBM_BulkUp
+	if_effect EFFECT_WATER_SPORT, AI_CBM_WaterSport
+	if_effect EFFECT_CALM_MIND, AI_CBM_CalmMind
+	if_effect EFFECT_DRAGON_DANCE, AI_CBM_DragonDance
 	end
 
-BattleAIScript_1DA3DE: @ 81DA3DE
+AI_CBM_Sleep: @ 81DA3DE
 	get_ability TARGET
-	if_equal ABILITY_INSOMNIA, BattleAIScript_1DA85B
-	if_equal ABILITY_VITAL_SPIRIT, BattleAIScript_1DA85B
-	if_status TARGET, SLP | PSN | BRN | FRZ | PAR | TOX, BattleAIScript_1DA85B
+	if_equal ABILITY_INSOMNIA, Score_Down10
+	if_equal ABILITY_VITAL_SPIRIT, Score_Down10
+	if_status TARGET, SLP | PSN | BRN | FRZ | PAR | TOX, Score_Down10
 	end
 
-BattleAIScript_1DA3F7: @ 81DA3F7
-	if_damage_bonus 0, BattleAIScript_1DA85B
+AI_CBM_Explosion: @ 81DA3F7
+	if_damage_bonus 0, Score_Down10
 	get_ability TARGET
-	if_equal ABILITY_DAMP, BattleAIScript_1DA85B
+	if_equal ABILITY_DAMP, Score_Down10
 	count_alive_pokemon USER
-	if_not_equal 0, BattleAIScript_1DA41A
+	if_not_equal 0, AI_CBM_Explosion_End
 	count_alive_pokemon TARGET
-	if_not_equal 0, BattleAIScript_1DA85B
-	jump BattleAIScript_1DA84C
+	if_not_equal 0, Score_Down10
+	jump Score_Down1
 
-BattleAIScript_1DA41A: @ 81DA41A
+AI_CBM_Explosion_End: @ 81DA41A
 	end
 
-BattleAIScript_1DA41B: @ 81DA41B
-	if_status2 TARGET, S_NIGHTMARE, BattleAIScript_1DA85B
-	if_not_status TARGET, SLP, BattleAIScript_1DA858
+AI_CBM_Nightmare: @ 81DA41B
+	if_status2 TARGET, S_NIGHTMARE, Score_Down10
+	if_not_status TARGET, SLP, Score_Down8
 	end
 
-BattleAIScript_1DA430: @ 81DA430
-	if_not_status TARGET, SLP, BattleAIScript_1DA858
-	if_damage_bonus 0, BattleAIScript_1DA85B
+AI_CBM_DreamEater: @ 81DA430
+	if_not_status TARGET, SLP, Score_Down8
+	if_damage_bonus 0, Score_Down10
 	end
 
-BattleAIScript_1DA441: @ 81DA441
-	if_hp_less_than USER, 51, BattleAIScript_1DA85B
+AI_CBM_BellyDrum: @ 81DA441
+	if_hp_less_than USER, 51, Score_Down10
 
-BattleAIScript_1DA448: @ 81DA448
-	if_stat_level_equal USER, ATTACK, 12, BattleAIScript_1DA85B
+AI_CBM_AttackUp: @ 81DA448
+	if_stat_level_equal USER, ATTACK, 12, Score_Down10
 	end
 
-BattleAIScript_1DA451: @ 81DA451
-	if_stat_level_equal USER, DEFENSE, 12, BattleAIScript_1DA85B
+AI_CBM_DefenseUp: @ 81DA451
+	if_stat_level_equal USER, DEFENSE, 12, Score_Down10
 	end
 
-BattleAIScript_1DA45A: @ 81DA45A
-	if_stat_level_equal USER, SPEED, 12, BattleAIScript_1DA85B
+AI_CBM_SpeedUp: @ 81DA45A
+	if_stat_level_equal USER, SPEED, 12, Score_Down10
 	end
 
-BattleAIScript_1DA463: @ 81DA463
-	if_stat_level_equal USER, SP_ATTACK, 12, BattleAIScript_1DA85B
+AI_CBM_SpAtkUp: @ 81DA463
+	if_stat_level_equal USER, SP_ATTACK, 12, Score_Down10
 	end
 
-BattleAIScript_1DA46C: @ 81DA46C
-	if_stat_level_equal USER, SP_DEFENSE, 12, BattleAIScript_1DA85B
+AI_CBM_SpDefUp: @ 81DA46C
+	if_stat_level_equal USER, SP_DEFENSE, 12, Score_Down10
 	end
 
-BattleAIScript_1DA475: @ 81DA475
-	if_stat_level_equal USER, ACCURACY, 12, BattleAIScript_1DA85B
+AI_CBM_AccUp: @ 81DA475
+	if_stat_level_equal USER, ACCURACY, 12, Score_Down10
 	end
 
-BattleAIScript_1DA47E: @ 81DA47E
-	if_stat_level_equal USER, EVASION, 12, BattleAIScript_1DA85B
+AI_CBM_EvasionUp: @ 81DA47E
+	if_stat_level_equal USER, EVASION, 12, Score_Down10
 	end
 
-BattleAIScript_1DA487: @ 81DA487
-	if_stat_level_equal TARGET, ATTACK, 0, BattleAIScript_1DA85B
+AI_CBM_AttackDown: @ 81DA487
+	if_stat_level_equal TARGET, ATTACK, 0, Score_Down10
 	get_ability TARGET
-	if_equal ABILITY_HYPER_CUTTER, BattleAIScript_1DA85B
-	jump BattleAIScript_1DA4ED
+	if_equal ABILITY_HYPER_CUTTER, Score_Down10
+	jump CheckIfAbilityBlocksStatChange
 
-BattleAIScript_1DA49C: @ 81DA49C
-	if_stat_level_equal TARGET, DEFENSE, 0, BattleAIScript_1DA85B
-	jump BattleAIScript_1DA4ED
+AI_CBM_DefenseDown: @ 81DA49C
+	if_stat_level_equal TARGET, DEFENSE, 0, Score_Down10
+	jump CheckIfAbilityBlocksStatChange
 
-BattleAIScript_1DA4A9: @ 81DA4A9
-	if_stat_level_equal TARGET, SPEED, 0, BattleAIScript_1DA85B
-	jump BattleAIScript_1DA4ED
+AI_CBM_SpeedDown: @ 81DA4A9
+	if_stat_level_equal TARGET, SPEED, 0, Score_Down10
+	jump CheckIfAbilityBlocksStatChange
 
-BattleAIScript_1DA4B6: @ 81DA4B6
-	if_stat_level_equal TARGET, SP_ATTACK, 0, BattleAIScript_1DA85B
-	jump BattleAIScript_1DA4ED
+AI_CBM_SpAtkDown: @ 81DA4B6
+	if_stat_level_equal TARGET, SP_ATTACK, 0, Score_Down10
+	jump CheckIfAbilityBlocksStatChange
 
-BattleAIScript_1DA4C3: @ 81DA4C3
-	if_stat_level_equal TARGET, SP_DEFENSE, 0, BattleAIScript_1DA85B
-	jump BattleAIScript_1DA4ED
+AI_CBM_SpDefDown: @ 81DA4C3
+	if_stat_level_equal TARGET, SP_DEFENSE, 0, Score_Down10
+	jump CheckIfAbilityBlocksStatChange
 
-BattleAIScript_1DA4D0: @ 81DA4D0
-	if_stat_level_equal TARGET, ACCURACY, 0, BattleAIScript_1DA85B
+AI_CBM_AccDown: @ 81DA4D0
+	if_stat_level_equal TARGET, ACCURACY, 0, Score_Down10
 	get_ability TARGET
-	if_equal ABILITY_KEEN_EYE, BattleAIScript_1DA85B
-	jump BattleAIScript_1DA4ED
+	if_equal ABILITY_KEEN_EYE, Score_Down10
+	jump CheckIfAbilityBlocksStatChange
 
-BattleAIScript_1DA4E5: @ 81DA4E5
-	if_stat_level_equal TARGET, EVASION, 0, BattleAIScript_1DA85B
+AI_CBM_EvasionDown: @ 81DA4E5
+	if_stat_level_equal TARGET, EVASION, 0, Score_Down10
 
-BattleAIScript_1DA4ED: @ 81DA4ED
+CheckIfAbilityBlocksStatChange: @ 81DA4ED
 	get_ability TARGET
-	if_equal ABILITY_CLEAR_BODY, BattleAIScript_1DA85B
-	if_equal ABILITY_WHITE_SMOKE, BattleAIScript_1DA85B
+	if_equal ABILITY_CLEAR_BODY, Score_Down10
+	if_equal ABILITY_WHITE_SMOKE, Score_Down10
 	end
 
-BattleAIScript_1DA4FC: @ 81DA4FC
-	if_stat_level_less_than USER, ATTACK, 6, BattleAIScript_1DA571
-	if_stat_level_less_than USER, DEFENSE, 6, BattleAIScript_1DA571
-	if_stat_level_less_than USER, SPEED, 6, BattleAIScript_1DA571
-	if_stat_level_less_than USER, SP_ATTACK, 6, BattleAIScript_1DA571
-	if_stat_level_less_than USER, SP_DEFENSE, 6, BattleAIScript_1DA571
-	if_stat_level_less_than USER, ACCURACY, 6, BattleAIScript_1DA571
-	if_stat_level_less_than USER, EVASION, 6, BattleAIScript_1DA571
-	if_stat_level_more_than TARGET, ATTACK, 6, BattleAIScript_1DA571
-	if_stat_level_more_than TARGET, DEFENSE, 6, BattleAIScript_1DA571
-	if_stat_level_more_than TARGET, SPEED, 6, BattleAIScript_1DA571
-	if_stat_level_more_than TARGET, SP_ATTACK, 6, BattleAIScript_1DA571
-	if_stat_level_more_than TARGET, SP_DEFENSE, 6, BattleAIScript_1DA571
-	if_stat_level_more_than TARGET, ACCURACY, 6, BattleAIScript_1DA571
-	if_stat_level_more_than TARGET, EVASION, 6, BattleAIScript_1DA571
-	jump BattleAIScript_1DA85B
+AI_CBM_Haze: @ 81DA4FC
+	if_stat_level_less_than USER, ATTACK, 6, AI_CBM_Haze_End
+	if_stat_level_less_than USER, DEFENSE, 6, AI_CBM_Haze_End
+	if_stat_level_less_than USER, SPEED, 6, AI_CBM_Haze_End
+	if_stat_level_less_than USER, SP_ATTACK, 6, AI_CBM_Haze_End
+	if_stat_level_less_than USER, SP_DEFENSE, 6, AI_CBM_Haze_End
+	if_stat_level_less_than USER, ACCURACY, 6, AI_CBM_Haze_End
+	if_stat_level_less_than USER, EVASION, 6, AI_CBM_Haze_End
+	if_stat_level_more_than TARGET, ATTACK, 6, AI_CBM_Haze_End
+	if_stat_level_more_than TARGET, DEFENSE, 6, AI_CBM_Haze_End
+	if_stat_level_more_than TARGET, SPEED, 6, AI_CBM_Haze_End
+	if_stat_level_more_than TARGET, SP_ATTACK, 6, AI_CBM_Haze_End
+	if_stat_level_more_than TARGET, SP_DEFENSE, 6, AI_CBM_Haze_End
+	if_stat_level_more_than TARGET, ACCURACY, 6, AI_CBM_Haze_End
+	if_stat_level_more_than TARGET, EVASION, 6, AI_CBM_Haze_End
+	jump Score_Down10
 
-BattleAIScript_1DA571: @ 81DA571
+AI_CBM_Haze_End: @ 81DA571
 	end
 
-BattleAIScript_1DA572: @ 81DA572
+AI_CBM_Roar: @ 81DA572
 	count_alive_pokemon TARGET
-	if_equal 0, BattleAIScript_1DA85B
+	if_equal 0, Score_Down10
 	get_ability TARGET
-	if_equal ABILITY_SUCTION_CUPS, BattleAIScript_1DA85B
+	if_equal ABILITY_SUCTION_CUPS, Score_Down10
 	end
 
-BattleAIScript_1DA583: @ 81DA583
+AI_CBM_Toxic: @ 81DA583
 	get_type 0
-	if_equal TYPE_STEEL, BattleAIScript_1DA85B
-	if_equal TYPE_POISON, BattleAIScript_1DA85B
+	if_equal TYPE_STEEL, Score_Down10
+	if_equal TYPE_POISON, Score_Down10
 	get_type 2
-	if_equal TYPE_STEEL, BattleAIScript_1DA85B
-	if_equal TYPE_POISON, BattleAIScript_1DA85B
+	if_equal TYPE_STEEL, Score_Down10
+	if_equal TYPE_POISON, Score_Down10
 	get_ability TARGET
-	if_equal ABILITY_IMMUNITY, BattleAIScript_1DA85B
-	if_status TARGET, SLP | PSN | BRN | FRZ | PAR | TOX, BattleAIScript_1DA85B
+	if_equal ABILITY_IMMUNITY, Score_Down10
+	if_status TARGET, SLP | PSN | BRN | FRZ | PAR | TOX, Score_Down10
 	end
 
-BattleAIScript_1DA5B2: @ 81DA5B2
-	if_status4 USER, S_LIGHT_SCREEN, BattleAIScript_1DA858
+AI_CBM_LightScreen: @ 81DA5B2
+	if_status4 USER, S_LIGHT_SCREEN, Score_Down8
 	end
 
-BattleAIScript_1DA5BD: @ 81DA5BD
-	if_damage_bonus 0, BattleAIScript_1DA85B
+AI_CBM_OneHitKO: @ 81DA5BD
+	if_damage_bonus 0, Score_Down10
 	get_ability TARGET
-	if_equal ABILITY_STURDY, BattleAIScript_1DA85B
-	if_target_higher_level BattleAIScript_1DA85B
+	if_equal ABILITY_STURDY, Score_Down10
+	if_target_higher_level Score_Down10
 	end
 
-BattleAIScript_1DA5D2: @ 81DA5D2
+AI_CBM_Magnitude: @ 81DA5D2
 	get_ability TARGET
-	if_equal ABILITY_LEVITATE, BattleAIScript_1DA85B
+	if_equal ABILITY_LEVITATE, Score_Down10
 
-BattleAIScript_1DA5DA: @ 81DA5DA
-	if_damage_bonus 0, BattleAIScript_1DA85B
+AI_CBM_HighRiskForDamage: @ 81DA5DA
+	if_damage_bonus 0, Score_Down10
 	get_ability TARGET
-	if_not_equal ABILITY_WONDER_GUARD, BattleAIScript_1DA5F3
-	if_damage_bonus 80, BattleAIScript_1DA5F3
-	jump BattleAIScript_1DA85B
+	if_not_equal ABILITY_WONDER_GUARD, AI_CBM_HighRiskForDamage_End
+	if_damage_bonus 80, AI_CBM_HighRiskForDamage_End
+	jump Score_Down10
 
-BattleAIScript_1DA5F3: @ 81DA5F3
+AI_CBM_HighRiskForDamage_End: @ 81DA5F3
 	end
 
-BattleAIScript_1DA5F4: @ 81DA5F4
-	if_status4 USER, S_MIST, BattleAIScript_1DA858
+AI_CBM_Mist: @ 81DA5F4
+	if_status4 USER, S_MIST, Score_Down8
 	end
 
-BattleAIScript_1DA5FF: @ 81DA5FF
-	if_status2 USER, S_FOCUS_ENERGY, BattleAIScript_1DA85B
+AI_CBM_FocusEnergy: @ 81DA5FF
+	if_status2 USER, S_FOCUS_ENERGY, Score_Down10
 	end
 
-BattleAIScript_1DA60A: @ 81DA60A
-	if_status2 TARGET, S_CONFUSED, BattleAIScript_1DA855
+AI_CBM_Confuse: @ 81DA60A
+	if_status2 TARGET, S_CONFUSED, Score_Down5
 	get_ability TARGET
-	if_equal ABILITY_OWN_TEMPO, BattleAIScript_1DA85B
+	if_equal ABILITY_OWN_TEMPO, Score_Down10
 	end
 
-BattleAIScript_1DA61D: @ 81DA61D
-	if_status4 USER, S_REFLECT, BattleAIScript_1DA858
+AI_CBM_Reflect: @ 81DA61D
+	if_status4 USER, S_REFLECT, Score_Down8
 	end
 
-BattleAIScript_1DA628: @ 81DA628
-	if_damage_bonus 0, BattleAIScript_1DA85B
+AI_CBM_Paralyze: @ 81DA628
+	if_damage_bonus 0, Score_Down10
 	get_ability TARGET
-	if_equal ABILITY_LIMBER, BattleAIScript_1DA85B
-	if_status TARGET, SLP | PSN | BRN | FRZ | PAR | TOX, BattleAIScript_1DA85B
+	if_equal ABILITY_LIMBER, Score_Down10
+	if_status TARGET, SLP | PSN | BRN | FRZ | PAR | TOX, Score_Down10
 	end
 
-BattleAIScript_1DA641: @ 81DA641
-	if_status2 USER, S_SUBSTITUTE, BattleAIScript_1DA858
-	if_hp_less_than USER, 26, BattleAIScript_1DA85B
+AI_CBM_Substitute: @ 81DA641
+	if_status2 USER, S_SUBSTITUTE, Score_Down8
+	if_hp_less_than USER, 26, Score_Down10
 	end
 
-BattleAIScript_1DA653: @ 81DA653
-	if_status3 TARGET, S_LEECH_SEED, BattleAIScript_1DA85B
+AI_CBM_LeechSeed: @ 81DA653
+	if_status3 TARGET, S_LEECH_SEED, Score_Down10
 	get_type 0
-	if_equal TYPE_GRASS, BattleAIScript_1DA85B
+	if_equal TYPE_GRASS, Score_Down10
 	get_type 2
-	if_equal TYPE_GRASS, BattleAIScript_1DA85B
+	if_equal TYPE_GRASS, Score_Down10
 	end
 
-BattleAIScript_1DA66E: @ 81DA66E
-	if_last_move_did_damage TARGET, 0, BattleAIScript_1DA858
+AI_CBM_Disable: @ 81DA66E
+	if_last_move_did_damage TARGET, 0, Score_Down8
 	end
 
-BattleAIScript_1DA676: @ 81DA676
-	if_last_move_did_damage TARGET, 1, BattleAIScript_1DA858
+AI_CBM_Encore: @ 81DA676
+	if_last_move_did_damage TARGET, 1, Score_Down8
 	end
 
-BattleAIScript_1DA67E: @ 81DA67E
-	if_not_status USER, SLP, BattleAIScript_1DA858
+AI_CBM_DamageDuringSleep: @ 81DA67E
+	if_not_status USER, SLP, Score_Down8
 	end
 
-BattleAIScript_1DA689: @ 81DA689
-	if_status2 TARGET, S_MEAN_LOOK, BattleAIScript_1DA85B
+AI_CBM_CantEscape: @ 81DA689
+	if_status2 TARGET, S_MEAN_LOOK, Score_Down10
 	end
 
-BattleAIScript_1DA694: @ 81DA694
-	if_stat_level_equal USER, ATTACK, 12, BattleAIScript_1DA85B
-	if_stat_level_equal USER, DEFENSE, 12, BattleAIScript_1DA858
+AI_CBM_Curse: @ 81DA694
+	if_stat_level_equal USER, ATTACK, 12, Score_Down10
+	if_stat_level_equal USER, DEFENSE, 12, Score_Down8
 	end
 
-BattleAIScript_1DA6A5: @ 81DA6A5
-	if_status4 TARGET, S_SPIKES, BattleAIScript_1DA85B
+AI_CBM_Spikes: @ 81DA6A5
+	if_status4 TARGET, S_SPIKES, Score_Down10
 	end
 
-BattleAIScript_1DA6B0: @ 81DA6B0
-	if_status2 TARGET, S_FORESIGHT, BattleAIScript_1DA85B
+AI_CBM_Foresight: @ 81DA6B0
+	if_status2 TARGET, S_FORESIGHT, Score_Down10
 	end
 
-BattleAIScript_1DA6BB: @ 81DA6BB
-	if_status3 TARGET, S_PERISH_SONG, BattleAIScript_1DA85B
+AI_CBM_PerishSong: @ 81DA6BB
+	if_status3 TARGET, S_PERISH_SONG, Score_Down10
 	end
 
-BattleAIScript_1DA6C6: @ 81DA6C6
+AI_CBM_Sandstorm: @ 81DA6C6
 	get_weather
-	if_equal WEATHER_SANDSTORM, BattleAIScript_1DA858
+	if_equal WEATHER_SANDSTORM, Score_Down8
 	end
 
-BattleAIScript_1DA6CE: @ 81DA6CE
-	if_status2 TARGET, S_INFATUATED, BattleAIScript_1DA85B
+AI_CBM_Attract: @ 81DA6CE
+	if_status2 TARGET, S_INFATUATED, Score_Down10
 	get_ability TARGET
-	if_equal ABILITY_OBLIVIOUS, BattleAIScript_1DA85B
+	if_equal ABILITY_OBLIVIOUS, Score_Down10
 	get_gender USER
-	if_equal 0, BattleAIScript_1DA6F3
-	if_equal 254, BattleAIScript_1DA700
-	jump BattleAIScript_1DA85B
+	if_equal 0, AI_CBM_Attract_CheckIfTargetIsFemale
+	if_equal 254, AI_CBM_Attract_CheckIfTargetIsMale
+	jump Score_Down10
 
-BattleAIScript_1DA6F3: @ 81DA6F3
+AI_CBM_Attract_CheckIfTargetIsFemale: @ 81DA6F3
 	get_gender TARGET
-	if_equal 254, BattleAIScript_1DA70D
-	jump BattleAIScript_1DA85B
+	if_equal 254, AI_CBM_Attract_End
+	jump Score_Down10
 
-BattleAIScript_1DA700: @ 81DA700
+AI_CBM_Attract_CheckIfTargetIsMale: @ 81DA700
 	get_gender TARGET
-	if_equal 0, BattleAIScript_1DA70D
-	jump BattleAIScript_1DA85B
+	if_equal 0, AI_CBM_Attract_End
+	jump Score_Down10
 
-BattleAIScript_1DA70D: @ 81DA70D
+AI_CBM_Attract_End: @ 81DA70D
 	end
 
-BattleAIScript_1DA70E: @ 81DA70E
-	if_status4 USER, S_SAFEGUARD, BattleAIScript_1DA858
+AI_CBM_Safeguard: @ 81DA70E
+	if_status4 USER, S_SAFEGUARD, Score_Down8
 	end
 
-BattleAIScript_1DA719: @ 81DA719
-	if_stat_level_equal TARGET, ATTACK, 0, BattleAIScript_1DA85B
-	if_stat_level_equal TARGET, SP_ATTACK, 0, BattleAIScript_1DA858
+AI_CBM_Memento: @ 81DA719
+	if_stat_level_equal TARGET, ATTACK, 0, Score_Down10
+	if_stat_level_equal TARGET, SP_ATTACK, 0, Score_Down8
 
-BattleAIScript_1DA729: @ 81DA729
+AI_CBM_BatonPass: @ 81DA729
 	count_alive_pokemon USER
-	if_equal 0, BattleAIScript_1DA85B
+	if_equal 0, Score_Down10
 	end
 
-BattleAIScript_1DA732: @ 81DA732
+AI_CBM_RainDance: @ 81DA732
 	get_weather
-	if_equal WEATHER_RAIN, BattleAIScript_1DA858
+	if_equal WEATHER_RAIN, Score_Down8
 	end
 
-BattleAIScript_1DA73A: @ 81DA73A
+AI_CBM_SunnyDay: @ 81DA73A
 	get_weather
-	if_equal WEATHER_SUN, BattleAIScript_1DA858
+	if_equal WEATHER_SUN, Score_Down8
 	end
 
-BattleAIScript_1DA742: @ 81DA742
-	if_status4 TARGET, S_FUTURE_SIGHT, BattleAIScript_1DA85B
+AI_CBM_FutureSight: @ 81DA742
+	if_status4 TARGET, S_FUTURE_SIGHT, Score_Down10
 	end
 
-BattleAIScript_1DA74D: @ 81DA74D
+AI_CBM_FakeOut: @ 81DA74D
 	is_first_turn USER
-	if_equal 0, BattleAIScript_1DA85B
+	if_equal 0, Score_Down10
 	end
 
-BattleAIScript_1DA756: @ 81DA756
+AI_CBM_Stockpile: @ 81DA756
 	get_stockpile_count USER
-	if_equal 3, BattleAIScript_1DA85B
+	if_equal 3, Score_Down10
 	end
 
-BattleAIScript_1DA75F: @ 81DA75F
-	if_damage_bonus 0, BattleAIScript_1DA85B
+AI_CBM_SpitUpAndSwallow: @ 81DA75F
+	if_damage_bonus 0, Score_Down10
 	get_stockpile_count USER
-	if_equal 0, BattleAIScript_1DA85B
+	if_equal 0, Score_Down10
 	end
 
-BattleAIScript_1DA76E: @ 81DA76E
+AI_CBM_Hail: @ 81DA76E
 	get_weather
-	if_equal WEATHER_HAIL, BattleAIScript_1DA858
+	if_equal WEATHER_HAIL, Score_Down8
 	end
 
-BattleAIScript_1DA776: @ 81DA776
-	if_status2 TARGET, S_TORMENT, BattleAIScript_1DA85B
+AI_CBM_Torment: @ 81DA776
+	if_status2 TARGET, S_TORMENT, Score_Down10
 	end
 
-BattleAIScript_1DA781: @ 81DA781
+AI_CBM_WillOWisp: @ 81DA781
 	get_ability TARGET
-	if_equal ABILITY_WATER_VEIL, BattleAIScript_1DA85B
-	if_status TARGET, SLP | PSN | BRN | FRZ | PAR | TOX, BattleAIScript_1DA85B
-	if_damage_bonus 0, BattleAIScript_1DA85B
-	if_damage_bonus 20, BattleAIScript_1DA85B
-	if_damage_bonus 10, BattleAIScript_1DA85B
+	if_equal ABILITY_WATER_VEIL, Score_Down10
+	if_status TARGET, SLP | PSN | BRN | FRZ | PAR | TOX, Score_Down10
+	if_damage_bonus 0, Score_Down10
+	if_damage_bonus 20, Score_Down10
+	if_damage_bonus 10, Score_Down10
 	end
 
-BattleAIScript_1DA7A6: @ 81DA7A6
+AI_CBM_HelpingHand: @ 81DA7A6
 	is_double_battle
-	if_equal 0, BattleAIScript_1DA85B
+	if_equal 0, Score_Down10
 	end
 
-BattleAIScript_1DA7AE: @ 81DA7AE
+AI_CBM_TrickAndKnockOff: @ 81DA7AE
 	get_ability TARGET
-	if_equal ABILITY_STICKY_HOLD, BattleAIScript_1DA85B
+	if_equal ABILITY_STICKY_HOLD, Score_Down10
 	end
 
-BattleAIScript_1DA7B7: @ 81DA7B7
-	if_status3 USER, S_ROOTED, BattleAIScript_1DA85B
+AI_CBM_Ingrain: @ 81DA7B7
+	if_status3 USER, S_ROOTED, Score_Down10
 	end
 
-BattleAIScript_1DA7C2: @ 81DA7C2
+AI_CBM_Recycle: @ 81DA7C2
 	get_item USER
-	if_equal ITEM_NONE, BattleAIScript_1DA85B
+	if_equal ITEM_NONE, Score_Down10
 	end
 
-BattleAIScript_1DA7CB: @ 81DA7CB
-	if_status3 USER, S_IMPRISONED, BattleAIScript_1DA85B
+AI_CBM_Imprison: @ 81DA7CB
+	if_status3 USER, S_IMPRISONED, Score_Down10
 	end
 
-BattleAIScript_1DA7D6: @ 81DA7D6
-	if_not_status USER, PSN | BRN | PAR | TOX, BattleAIScript_1DA85B
+AI_CBM_Refresh: @ 81DA7D6
+	if_not_status USER, PSN | BRN | PAR | TOX, Score_Down10
 	end
 
-BattleAIScript_1DA7E1: @ 81DA7E1
-	if_status3 USER, S_MUD_SPORT, BattleAIScript_1DA85B
+AI_CBM_MudSport: @ 81DA7E1
+	if_status3 USER, S_MUD_SPORT, Score_Down10
 	end
 
-BattleAIScript_1DA7EC: @ 81DA7EC
-	if_stat_level_equal TARGET, ATTACK, 0, BattleAIScript_1DA85B
-	if_stat_level_equal TARGET, DEFENSE, 0, BattleAIScript_1DA858
+AI_CBM_Tickle: @ 81DA7EC
+	if_stat_level_equal TARGET, ATTACK, 0, Score_Down10
+	if_stat_level_equal TARGET, DEFENSE, 0, Score_Down8
 	end
 
-BattleAIScript_1DA7FD: @ 81DA7FD
-	if_stat_level_equal USER, DEFENSE, 12, BattleAIScript_1DA85B
-	if_stat_level_equal USER, SP_DEFENSE, 12, BattleAIScript_1DA858
+AI_CBM_CosmicPower: @ 81DA7FD
+	if_stat_level_equal USER, DEFENSE, 12, Score_Down10
+	if_stat_level_equal USER, SP_DEFENSE, 12, Score_Down8
 	end
 
-BattleAIScript_1DA80E: @ 81DA80E
-	if_stat_level_equal USER, ATTACK, 12, BattleAIScript_1DA85B
-	if_stat_level_equal USER, DEFENSE, 12, BattleAIScript_1DA858
+AI_CBM_BulkUp: @ 81DA80E
+	if_stat_level_equal USER, ATTACK, 12, Score_Down10
+	if_stat_level_equal USER, DEFENSE, 12, Score_Down8
 	end
 
-BattleAIScript_1DA81F: @ 81DA81F
-	if_status3 USER, S_WATER_SPORT, BattleAIScript_1DA85B
+AI_CBM_WaterSport: @ 81DA81F
+	if_status3 USER, S_WATER_SPORT, Score_Down10
 	end
 
-BattleAIScript_1DA82A: @ 81DA82A
-	if_stat_level_equal USER, SP_ATTACK, 12, BattleAIScript_1DA85B
-	if_stat_level_equal USER, SP_DEFENSE, 12, BattleAIScript_1DA858
+AI_CBM_CalmMind: @ 81DA82A
+	if_stat_level_equal USER, SP_ATTACK, 12, Score_Down10
+	if_stat_level_equal USER, SP_DEFENSE, 12, Score_Down8
 	end
 
-BattleAIScript_1DA83B: @ 81DA83B
-	if_stat_level_equal USER, ATTACK, 12, BattleAIScript_1DA85B
-	if_stat_level_equal USER, SPEED, 12, BattleAIScript_1DA858
+AI_CBM_DragonDance: @ 81DA83B
+	if_stat_level_equal USER, ATTACK, 12, Score_Down10
+	if_stat_level_equal USER, SPEED, 12, Score_Down8
 	end
 
-BattleAIScript_1DA84C: @ 81DA84C
+Score_Down1: @ 81DA84C
 	score -1
 	end
 
-BattleAIScript_1DA84F: @ 81DA84F
+Score_Down2: @ 81DA84F
 	score -2
 	end
 
-BattleAIScript_1DA852: @ 81DA852
+Score_Down3: @ 81DA852
 	score -3
 	end
 
-BattleAIScript_1DA855: @ 81DA855
+Score_Down5: @ 81DA855
 	score -5
 	end
 
-BattleAIScript_1DA858: @ 81DA858
+Score_Down8: @ 81DA858
 	score -8
 	end
 
-BattleAIScript_1DA85B: @ 81DA85B
+Score_Down10: @ 81DA85B
 	score -10
 	end
 
-BattleAIScript_1DA85E: @ 81DA85E
+Score_Down12: @ 81DA85E
 	score -12
 	end
 
@@ -783,7 +783,7 @@ BattleAIScript_1DAB94: @ 81DAB94
 	if_hp_less_than USER, 80, BattleAIScript_1DABAC
 	if_would_go_first USER, BattleAIScript_1DABAC
 	if_random 50, BattleAIScript_1DABD7
-	jump BattleAIScript_1DA852
+	jump Score_Down3
 
 BattleAIScript_1DABAC: @ 81DABAC
 	if_hp_more_than USER, 50, BattleAIScript_1DABCF
@@ -1348,7 +1348,7 @@ BattleAIScript_1DB17A: @ 81DB17A
 BattleAIScript_1DB183: @ 81DB183
 	get_turn_count
 	if_equal 0, BattleAIScript_1DB190
-	if_random 200, BattleAIScript_1DA84F
+	if_random 200, Score_Down2
 
 BattleAIScript_1DB190: @ 81DB190
 	end
@@ -2689,7 +2689,7 @@ BattleAIScript_1DBE96: @ 81DBE96
 AI_TryToFaint: @ 81DBE97
 	if_can_faint BattleAIScript_1DBEA4
 	is_most_powerful_move
-	if_equal 1, BattleAIScript_1DA84C
+	if_equal 1, Score_Down1
 	end
 
 BattleAIScript_1DBEA4: @ 81DBEA4
