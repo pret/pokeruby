@@ -710,3 +710,31 @@ void sub_808D198(u8 taskId)
         gTasks[taskId].func = sub_808CCC4;
     }
 }
+
+void sub_808D214(u8 taskId)
+{
+    if(!gPaletteFade.active)
+    {
+        gUnknown_0202FFB4->unk62C = gUnknown_0202FFB4->unk62A;
+        gUnknown_0202FFB4->unk60E = gUnknown_0202FFB4->unk610;
+        gUnknown_0202FFB4->unk612 = gUnknown_0202FFB4->unk614;
+        if(!sub_806912C())
+            gUnknown_0202FFB4->unk612 = 0;
+        gUnknown_0202FFB4->unk616 = gUnknown_0202FFB4->unk618;
+        gTasks[taskId].func = sub_808C608;
+    }
+}
+
+void sub_808D2AC(u8 taskId)
+{
+    if(!gPaletteFade.active)
+    {
+        gUnknown_0202FFB4->unk62C = gUnknown_0202FFB4->unk62A;
+        gUnknown_0202FFB4->unk60E = gUnknown_0202FFB4->unk610;
+        gUnknown_0202FFB4->unk612 = gUnknown_0202FFB4->unk614;
+        if(!sub_806912C())
+            gUnknown_0202FFB4->unk612 = 0;
+        gUnknown_0202FFB4->unk616 = gUnknown_0202FFB4->unk618;
+        gTasks[taskId].func = sub_808CC50;
+    }
+}
