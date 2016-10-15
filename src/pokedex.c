@@ -8,22 +8,21 @@
 #include "task.h"
 #include "text.h"
 
-//Probably seen, own flags on Pokemon
-struct UnknownStruct2 {
+struct PokedexListItem {
     u16 a;
-    u8 b_1:1;
-    u8 b_2:1;
+    u8 seen:1;
+    u8 owned:1;
     u8 c;
 };
 
 struct PokedexView {
-    struct UnknownStruct2 unk0[386];    //data on the 386 different Pokemon
+    struct PokedexListItem unk0[386];    //data on the 386 different Pokemon
     u16 unk608;
     u8 unk60A_1:1;
     u8 unk60A_2:1;
     u8 unk60B;
     u16 unk60C;
-    u16 unk60E;
+    u16 unk60E;     //selected Pokemon (index of unk0)
     u16 unk610;
     u16 unk612;
     u16 unk614;
@@ -52,9 +51,9 @@ struct PokedexView {
     u8 unk64D;
     u8 unk64E;
     u8 unk64F;
-    u8 unk650;
+    u8 unk650;      //menuIsOpen
     u8 unk651;
-    u16 unk652;     //Menu selection
+    u16 unk652;     //Menu cursor position
     s16 unk654;     //Menu Y position (inverted because we use REG_BG0VOFS for this)
     u8 unk656[8];
     u8 unk65E[8];
@@ -76,39 +75,39 @@ extern u8 sub_8091E3C(void);
 extern void sub_80690C8(void);
 extern void sub_805469C(void);
 
-void sub_808C0CC(struct PokedexView *);
-void sub_808C608(u8 taskId);
+void ClearPokedexView(struct PokedexView *);
+void Task_PokedexShowMainScreen(u8 taskId);
 void sub_808C0B8(void);
-void sub_808C5F0(void);
+void MainCB(void);
 bool8 sub_808D344(u8);
-void sub_808C650(u8 taskId);
+void Task_PokedexMainScreen(u8 taskId);
 void sub_808E6BC(void);
 void sub_808EDB8(struct Sprite *);
 void sub_808CA64(u8 taskId);
-void sub_808C8E8(u8 taskId);
+void Task_PokedexMainScreenMenu(u8 taskId);
 void sub_808CB8C(u8 taskId);
 u16 sub_808E48C(u16, u16);
 void sub_808C898(u8 taskId);
-void sub_808CC50(u8 taskId);
+void Task_ClosePokedex(u8 taskId);
 void sub_8091060(u16);
 void sub_808CAE4(u8 taskId);
 void sub_808D198(u8 taskId);
 bool8 sub_808E208(u8, u8, u8);
 bool32 sub_808E82C(void); //Not sure about return type
 void sub_808E0CC(u16, u16);
-u8 sub_808F210(u32, u8);
-void sub_808F284(struct UnknownStruct2 *, u8);
+u8 sub_808F210(struct PokedexListItem *, u8);
+void sub_808F284(struct PokedexListItem *, u8);
 bool8 sub_808F250(u8);
 bool8 sub_808E71C(void);
 void sub_808CCC4(u8 taskId);
 u16 sub_8090F68(u8);
 void sub_808D690(u8, u8);
-void sub_808CD0C(u8 taskId);
+void Task_PokedexResultsScreen(u8 taskId);
 void sub_808D118(u8 taskId);
-void sub_808CF48(u8 taskId);
-void sub_808D214(u8 taskId);
+void Task_PokedexResultsScreenMenu(u8 taskId);
+void Task_PokedexResultsScreenReturnToMainScreen(u8 taskId);
 void sub_808CEF8(u8 taskId);
-void sub_808D2AC(u8 taskId);
+void Task_PokedexResultsScreenExitPokedex(u8 taskId);
 
 void sub_808C02C(void)
 {
@@ -147,59 +146,59 @@ void sub_808C0B8(void)
     TransferPlttBuffer();
 }
 
-void sub_808C0CC(struct PokedexView *ptr)
+void ClearPokedexView(struct PokedexView *pokedexView)
 {
     u16 i;
     struct UnknownStruct3 *p;
     
-    for(i = 0; i <= 0x181; i++)
+    for(i = 0; i <= 385; i++)
     {
-        ptr->unk0[i].a |= 0x0000FFFF;
-        ptr->unk0[i].b_1 = 0;
-        ptr->unk0[i].b_2 = 0;
+        pokedexView->unk0[i].a |= 0x0000FFFF;
+        pokedexView->unk0[i].seen = 0;
+        pokedexView->unk0[i].owned = 0;
     }
-    ptr->unk608 = 0;
-    ptr->unk60A_1 = 0;
-    ptr->unk60A_2 = 0;
-    ptr->unk60C = 0;
-    ptr->unk60E = 0;
-    ptr->unk610 = 0;
-    ptr->unk612 = 0;
-    ptr->unk614 = 0;
-    ptr->unk616 = 0;
-    ptr->unk618 = 0;
-    ptr->unk61A = 0;
-    ptr->unk61C = 0;
+    pokedexView->unk608 = 0;
+    pokedexView->unk60A_1 = 0;
+    pokedexView->unk60A_2 = 0;
+    pokedexView->unk60C = 0;
+    pokedexView->unk60E = 0;
+    pokedexView->unk610 = 0;
+    pokedexView->unk612 = 0;
+    pokedexView->unk614 = 0;
+    pokedexView->unk616 = 0;
+    pokedexView->unk618 = 0;
+    pokedexView->unk61A = 0;
+    pokedexView->unk61C = 0;
     for(i = 0; i <= 3; i++)
-        ptr->unk61E[i] |= 0xFFFF;
-    ptr->unk628 = 0;
-    ptr->unk62A = 0;
-    ptr->unk62C = 0;
-    ptr->unk62D = 0;
-    ptr->unk62E = 0;
-    ptr->unk62F = 0;
-    ptr->unk630 = 0;
-    ptr->unk632 = 0;
-    ptr->unk634 = 0;
-    ptr->unk636 = 0;
-    ptr->unk638 = 0;
+        pokedexView->unk61E[i] |= 0xFFFF;
+    pokedexView->unk628 = 0;
+    pokedexView->unk62A = 0;
+    pokedexView->unk62C = 0;
+    pokedexView->unk62D = 0;
+    pokedexView->unk62E = 0;
+    pokedexView->unk62F = 0;
+    pokedexView->unk630 = 0;
+    pokedexView->unk632 = 0;
+    pokedexView->unk634 = 0;
+    pokedexView->unk636 = 0;
+    pokedexView->unk638 = 0;
     for(i = 0; i <= 3; i++)
-        ptr->unk63A[i] = 0;
-    ptr->unk64A = 0;
-    ptr->unk64B = 0;
-    ptr->unk64C_1 = 0;
-    ptr->unk64D = 0;
-    ptr->unk64F = 0;
-    ptr->unk650 = 0;
-    ptr->unk652 = 0;
-    ptr->unk654 = 0;
+        pokedexView->unk63A[i] = 0;
+    pokedexView->unk64A = 0;
+    pokedexView->unk64B = 0;
+    pokedexView->unk64C_1 = 0;
+    pokedexView->unk64D = 0;
+    pokedexView->unk64F = 0;
+    pokedexView->unk650 = 0;
+    pokedexView->unk652 = 0;
+    pokedexView->unk654 = 0;
     for(i = 0; i <= 7; i++)
-        ptr->unk656[i] = 0;
+        pokedexView->unk656[i] = 0;
     for(i = 0; i <= 7; i++)
-        ptr->unk65E[i] = 0;
+        pokedexView->unk65E[i] = 0;
 }
 
-void sub_808C27C(void)
+void CB2_InitPokedex(void)
 {
     switch(gMain.state)
     {
@@ -244,7 +243,7 @@ void sub_808C27C(void)
             switch(Random() & 3)
             {
                 case 0:
-                default: //This useless "default" is needed to match the original ROM.
+                default:
                     gUnknown_0202FFB4 = (struct PokedexView *)0x02018000;
                     break;
                 case 1:
@@ -257,8 +256,8 @@ void sub_808C27C(void)
                     gUnknown_0202FFB4 = (struct PokedexView *)0x02019800;
                     break;
             }
-            sub_808C0CC(gUnknown_0202FFB4);
-            CreateTask(sub_808C608, 0);
+            ClearPokedexView(gUnknown_0202FFB4);
+            CreateTask(Task_PokedexShowMainScreen, 0);
             gUnknown_0202FFB4->unk612 = gSaveBlock2.pokedex.unknown1;
             if(!sub_806912C())
                 gUnknown_0202FFB4->unk612 = 0;
@@ -290,7 +289,7 @@ void sub_808C27C(void)
             REG_IME = savedIme;
             REG_DISPSTAT |= 8;
             SetVBlankCallback(sub_808C0B8);
-            SetMainCallback2(sub_808C5F0);
+            SetMainCallback2(MainCB);
             sub_808D690(gUnknown_0202FFB4->unk612, gUnknown_0202FFB4->unk616);
             m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 0x80);
         }
@@ -313,7 +312,7 @@ u8 unref_sub_808C540(void (*func)(u8))
     REG_IME = savedIme;
     REG_DISPSTAT |= 0x8;
     SetVBlankCallback(sub_808C0B8);
-    SetMainCallback2(sub_808C5F0);
+    SetMainCallback2(MainCB);
     if(!gUnknown_0202FFB4->unk64B)
         taskId = CreateTask(sub_808CAE4, 0);
     else
@@ -322,7 +321,7 @@ u8 unref_sub_808C540(void (*func)(u8))
     return gTasks[taskId].data[0];
 }
 
-void sub_808C5F0(void)
+void MainCB(void)
 {
     RunTasks();
     AnimateSprites();
@@ -330,28 +329,26 @@ void sub_808C5F0(void)
     UpdatePaletteFade();
 }
 
-void sub_808C608(u8 taskId)
+void Task_PokedexShowMainScreen(u8 taskId)
 {
     gUnknown_0202FFB4->unk64C_1 = 0;
     if(sub_808D344(0))
     {
-        gTasks[taskId].func = sub_808C650;
+        gTasks[taskId].func = Task_PokedexMainScreen;
     }
 }
 
 //Hide menu and process input on main screen
-void sub_808C650(u8 taskId)
+void Task_PokedexMainScreen(u8 taskId)
 {
     REG_BG0VOFS = gUnknown_0202FFB4->unk654;
     
-    //Slide menu down
+    //If menu is open, slide it down, off screen
     if(gUnknown_0202FFB4->unk654)
-    {
         gUnknown_0202FFB4->unk654 -= 8;
-    }
     else
     {
-        if((gMain.newKeys & A_BUTTON) && gUnknown_0202FFB4->unk0[gUnknown_0202FFB4->unk60E].b_1)
+        if((gMain.newKeys & A_BUTTON) && gUnknown_0202FFB4->unk0[gUnknown_0202FFB4->unk60E].seen)
         {
             sub_808E6BC();
             BeginNormalPaletteFade(
@@ -359,14 +356,15 @@ void sub_808C650(u8 taskId)
               0, 0, 0x10, 0);
             gSprites[gUnknown_0202FFB4->unk626].callback = sub_808EDB8;
             gTasks[taskId].func = sub_808CA64;
-            PlaySE(0x15);
+            PlaySE(SE_PIN);
         }
         else if(gMain.newKeys & START_BUTTON)
         {
+            //Open menu
             gUnknown_0202FFB4->unk654 = 0;
             gUnknown_0202FFB4->unk650 = 1;
             gUnknown_0202FFB4->unk652 = 0;
-            gTasks[taskId].func = sub_808C8E8;
+            gTasks[taskId].func = Task_PokedexMainScreenMenu;
             PlaySE(SE_SELECT);
         }
         else if(gMain.newKeys & SELECT_BUTTON)
@@ -380,16 +378,17 @@ void sub_808C650(u8 taskId)
             gUnknown_0202FFB4->unk614 = gUnknown_0202FFB4->unk612;
             gUnknown_0202FFB4->unk618 = gUnknown_0202FFB4->unk616;
             gTasks[taskId].func = sub_808CB8C;
-            PlaySE(2);
+            PlaySE(SE_PC_LOGON);
         }
         else if(gMain.newKeys & B_BUTTON)
         {
             BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
-            gTasks[taskId].func = sub_808CC50;
-            PlaySE(3);
+            gTasks[taskId].func = Task_ClosePokedex;
+            PlaySE(SE_PC_OFF);
         }
         else
         {
+            //Handle D-pad
             gUnknown_0202FFB4->unk60E = sub_808E48C(gUnknown_0202FFB4->unk60E, 0xE);
             if(gUnknown_0202FFB4->unk62E)
                 gTasks[taskId].func = sub_808C898;
@@ -401,70 +400,67 @@ void sub_808C898(u8 taskId)
 {
     if(sub_808E208(gUnknown_0202FFB4->unk62F, gUnknown_0202FFB4->unk634, gUnknown_0202FFB4->unk636))
     {
-        gTasks[taskId].func = sub_808C650;
+        gTasks[taskId].func = Task_PokedexMainScreen;
     }
 }
 
 //Bring up menu and process menu input
-void sub_808C8E8(u8 taskId)
+void Task_PokedexMainScreenMenu(u8 taskId)
 {
     REG_BG0VOFS = gUnknown_0202FFB4->unk654;
     
-    //Slide menu up
-    if(gUnknown_0202FFB4->unk654 != 0x50)
-    {
+    //If menu is not open, slide it up, on screen
+    if(gUnknown_0202FFB4->unk654 != 80)
         gUnknown_0202FFB4->unk654 += 8;
-        return;
-    }
-    //_0808C91C
-    if(gMain.newKeys & A_BUTTON)
+    else
     {
-        switch(gUnknown_0202FFB4->unk652)
+        if(gMain.newKeys & A_BUTTON)
         {
-            case 0: //BACK TO LIST
-            default:
-                gMain.newKeys |= START_BUTTON;
-                break;
-            case 1: //LIST TOP
-                gUnknown_0202FFB4->unk60E = 0;
-                gUnknown_0202FFB4->unk62C = 0x40;
-                sub_808E82C();
-                sub_808E0CC(gUnknown_0202FFB4->unk60E, 0xE);
-                gMain.newKeys |= START_BUTTON;
-                break;
-            case 2: //LIST BOTTOM
-                gUnknown_0202FFB4->unk60E = gUnknown_0202FFB4->unk60C - 1;
-                gUnknown_0202FFB4->unk62C = gUnknown_0202FFB4->unk60C * 16 + 0x30;
-                sub_808E82C();
-                sub_808E0CC(gUnknown_0202FFB4->unk60E, 0xE);
-                gMain.newKeys |= START_BUTTON;
-                break;
-            case 3: //CLOSE POKEDEX
-                BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
-                gTasks[taskId].func = sub_808CC50;
-                PlaySE(3);
-                break;
+            switch(gUnknown_0202FFB4->unk652)
+            {
+                case 0: //BACK TO LIST
+                default:
+                    gMain.newKeys |= START_BUTTON;  //Exit menu
+                    break;
+                case 1: //LIST TOP
+                    gUnknown_0202FFB4->unk60E = 0;
+                    gUnknown_0202FFB4->unk62C = 0x40;
+                    sub_808E82C();
+                    sub_808E0CC(gUnknown_0202FFB4->unk60E, 0xE);
+                    gMain.newKeys |= START_BUTTON;  //Exit menu
+                    break;
+                case 2: //LIST BOTTOM
+                    gUnknown_0202FFB4->unk60E = gUnknown_0202FFB4->unk60C - 1;
+                    gUnknown_0202FFB4->unk62C = gUnknown_0202FFB4->unk60C * 16 + 0x30;
+                    sub_808E82C();
+                    sub_808E0CC(gUnknown_0202FFB4->unk60E, 0xE);
+                    gMain.newKeys |= START_BUTTON;  //Exit menu
+                    break;
+                case 3: //CLOSE POKEDEX
+                    BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+                    gTasks[taskId].func = Task_ClosePokedex;
+                    PlaySE(SE_PC_OFF);
+                    break;
+            }
         }
-    }
-    //_0808C9C4
-    if(gMain.newKeys & (START_BUTTON | B_BUTTON))
-    {
-        gUnknown_0202FFB4->unk650 = 0;
-        gTasks[taskId].func = sub_808C650;
-        PlaySE(SE_SELECT);
         
-    }
-    //_0808CA04
-    else if((gMain.newAndRepeatedKeys & DPAD_UP) && gUnknown_0202FFB4->unk652)
-    {
-        gUnknown_0202FFB4->unk652--;
-        PlaySE(SE_SELECT);
-    }
-    //_0808CA30
-    else if((gMain.newAndRepeatedKeys & DPAD_DOWN) && gUnknown_0202FFB4->unk652 <= 2)
-    {
-        gUnknown_0202FFB4->unk652++;
-        PlaySE(SE_SELECT);
+        //Exit menu when Start or B is pressed
+        if(gMain.newKeys & (START_BUTTON | B_BUTTON))
+        {
+            gUnknown_0202FFB4->unk650 = 0;
+            gTasks[taskId].func = Task_PokedexMainScreen;
+            PlaySE(SE_SELECT);
+        }
+        else if((gMain.newAndRepeatedKeys & DPAD_UP) && gUnknown_0202FFB4->unk652 != 0)
+        {
+            gUnknown_0202FFB4->unk652--;
+            PlaySE(SE_SELECT);
+        }
+        else if((gMain.newAndRepeatedKeys & DPAD_DOWN) && gUnknown_0202FFB4->unk652 <= 2)
+        {
+            gUnknown_0202FFB4->unk652++;
+            PlaySE(SE_SELECT);
+        }
     }
 }
 
@@ -474,7 +470,7 @@ void sub_808CA64(u8 taskId)
     gSprites[gUnknown_0202FFB4->unk626].pos1.y == 0x38)
     {
         gUnknown_0202FFB4->unk64B = gUnknown_0202FFB4->unk64A;
-        gTasks[taskId].data[0] = sub_808F210((u32)gUnknown_0202FFB4 + *(u16 *)((u32)&gUnknown_0202FFB4->unk64B - 0x3D) * 4, gUnknown_0202FFB4->unk626);
+        gTasks[taskId].data[0] = sub_808F210(&gUnknown_0202FFB4->unk0[gUnknown_0202FFB4->unk60E], gUnknown_0202FFB4->unk626);
         gTasks[taskId].func = sub_808CAE4;
     }
 }
@@ -492,10 +488,9 @@ void sub_808CAE4(u8 taskId)
     }
     else
     {
-        //_0808CB50
         gUnknown_0202FFB8 = gUnknown_0202FFB4->unk60E;
         gUnknown_0202FFBA = gUnknown_0202FFB4->unk62C;
-        gTasks[taskId].func = sub_808C608;
+        gTasks[taskId].func = Task_PokedexShowMainScreen;
     }
 }
 
@@ -513,19 +508,18 @@ void sub_808CB8C(u8 taskId)
         }
         else
         {
-            //_0808CBE4
             gUnknown_0202FFB4->unk62C = gUnknown_0202FFB4->unk62A;
             gUnknown_0202FFB4->unk60E = gUnknown_0202FFB4->unk610;
             gUnknown_0202FFB4->unk612 = gUnknown_0202FFB4->unk614;
             if(!sub_806912C())
                 gUnknown_0202FFB4->unk612 = 0;
             gUnknown_0202FFB4->unk616 = gUnknown_0202FFB4->unk618;
-            gTasks[taskId].func = sub_808C608;
+            gTasks[taskId].func = Task_PokedexShowMainScreen;
         }
     }
 }
 
-void sub_808CC50(u8 taskId)
+void Task_ClosePokedex(u8 taskId)
 {
     if(!gPaletteFade.active)
     {
@@ -543,12 +537,10 @@ void sub_808CCC4(u8 taskId)
 {
     gUnknown_0202FFB4->unk64C_1 = 1;
     if(sub_808D344(3))
-    {
-        gTasks[taskId].func = sub_808CD0C;
-    }
+        gTasks[taskId].func = Task_PokedexResultsScreen;
 }
 
-void sub_808CD0C(u8 taskId)
+void Task_PokedexResultsScreen(u8 taskId)
 {
     REG_BG0VOFS = gUnknown_0202FFB4->unk654;
     
@@ -556,62 +548,56 @@ void sub_808CD0C(u8 taskId)
         gUnknown_0202FFB4->unk654 -= 8;
     else
     {
-        //_0808CD44
-        if((gMain.newKeys & 1) && gUnknown_0202FFB4->unk0[gUnknown_0202FFB4->unk60E].b_1)
+        if((gMain.newKeys & A_BUTTON) && gUnknown_0202FFB4->unk0[gUnknown_0202FFB4->unk60E].seen)
         {
             u32 a;
             
             sub_808E6BC();
             a = (1 << (gSprites[gUnknown_0202FFB4->unk626].oam.paletteNum + 16));
             gSprites[gUnknown_0202FFB4->unk626].callback = sub_808EDB8;
-            BeginNormalPaletteFade(~a,
-             0, 0, 0x10, 0);
+            BeginNormalPaletteFade(~a, 0, 0, 0x10, 0);
             gTasks[taskId].func = sub_808D118;
-            PlaySE(0x15);
+            PlaySE(SE_PIN);
         }
-        //_0808CDD0
-        else if(gMain.newKeys & 8)
+        else if(gMain.newKeys & START_BUTTON)
         {
             gUnknown_0202FFB4->unk654 = 0;
             gUnknown_0202FFB4->unk650 = 1;
             gUnknown_0202FFB4->unk652 = 0;
-            gTasks[taskId].func = sub_808CF48;
+            gTasks[taskId].func = Task_PokedexResultsScreenMenu;
             PlaySE(SE_SELECT);
         }
-        //_0808CE20
-        else if(gMain.newKeys & 4)
+        else if(gMain.newKeys & SELECT_BUTTON)
         {
             BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
             gTasks[taskId].data[0] = sub_8091E3C();
             gUnknown_0202FFB4->unk64F = 0;
             gTasks[taskId].func = sub_808CB8C;
-            PlaySE(2);
+            PlaySE(SE_PC_LOGON);
         }
-        //_0808CE78
-        else if(gMain.newKeys & 2)
+        else if(gMain.newKeys & B_BUTTON)
         {
             BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
-            gTasks[taskId].func = sub_808D214;
-            PlaySE(3);
+            gTasks[taskId].func = Task_PokedexResultsScreenReturnToMainScreen;
+            PlaySE(SE_PC_OFF);
         }
-        //_0808CEB0
         else
-        {            
+        {
+            //Handle D-pad            
             gUnknown_0202FFB4->unk60E = sub_808E48C(gUnknown_0202FFB4->unk60E, 0xE);
             if(gUnknown_0202FFB4->unk62E)
                 gTasks[taskId].func = sub_808CEF8;
         }
     }
-    //_0808CEDC
 }
 
 void sub_808CEF8(u8 taskId)
 {
     if(sub_808E208(gUnknown_0202FFB4->unk62F, gUnknown_0202FFB4->unk634, gUnknown_0202FFB4->unk636))
-        gTasks[taskId].func = sub_808CD0C;
+        gTasks[taskId].func = Task_PokedexResultsScreen;
 }
 
-void sub_808CF48(u8 taskId)
+void Task_PokedexResultsScreenMenu(u8 taskId)
 {
     REG_BG0VOFS = gUnknown_0202FFB4->unk654;
     
@@ -619,68 +605,59 @@ void sub_808CF48(u8 taskId)
         gUnknown_0202FFB4->unk654 += 8;
     else
     {
-        //_0808CF80
-        if(gMain.newKeys & 1)
+        if(gMain.newKeys & A_BUTTON)
         {
             switch(gUnknown_0202FFB4->unk652)
             {
-                case 0:
+                case 0: //BACK TO LIST
                 default:
-                    gMain.newKeys |= 8;
+                    gMain.newKeys |= START_BUTTON;
                     break;
-                case 1:
+                case 1: //LIST TOP
                     gUnknown_0202FFB4->unk60E = 0;
                     gUnknown_0202FFB4->unk62C = 0x40;
-                    //goto _0808CFF8
                     sub_808E82C();
                     sub_808E0CC(gUnknown_0202FFB4->unk60E, 0xE);
-                    gMain.newKeys |= 8;
+                    gMain.newKeys |= START_BUTTON;
                     break;
-                case 2:
+                case 2: //LIST BOTTOM
                     gUnknown_0202FFB4->unk60E = gUnknown_0202FFB4->unk60C - 1;
                     gUnknown_0202FFB4->unk62C = gUnknown_0202FFB4->unk60C * 16 + 0x30;
                     sub_808E82C();
                     sub_808E0CC(gUnknown_0202FFB4->unk60E, 0xE);
-                    gMain.newKeys |= 8;
+                    gMain.newKeys |= START_BUTTON;
                     break;
-                case 3:
+                case 3: //BACK TO POKEDEX
                     BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
-                    gTasks[taskId].func = sub_808D214;
-                    PlaySE(0x34);
+                    gTasks[taskId].func = Task_PokedexResultsScreenReturnToMainScreen;
+                    PlaySE(SE_TRACK_DOOR);
                     break;
-                case 4:
+                case 4: //CLOSE POKEDEX
                     BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
-                    gTasks[taskId].func = sub_808D2AC;
-                    PlaySE(3);
+                    gTasks[taskId].func = Task_PokedexResultsScreenExitPokedex;
+                    PlaySE(SE_PC_OFF);
                     break;
             }
         }
-        //_0808D078
-        if(gMain.newKeys & 0xA)
+        
+        //Exit menu when Start or B is pressed
+        if(gMain.newKeys & (START_BUTTON | B_BUTTON))
         {
             gUnknown_0202FFB4->unk650 = 0;
-            gTasks[taskId].func = sub_808CD0C;
+            gTasks[taskId].func = Task_PokedexResultsScreen;
             PlaySE(SE_SELECT);
         }
-        //_0808D0B8
-        else
+        else if((gMain.newAndRepeatedKeys & DPAD_UP) && gUnknown_0202FFB4->unk652)
         {
-            if((gMain.newAndRepeatedKeys & 0x40) && gUnknown_0202FFB4->unk652)
-            {
-                gUnknown_0202FFB4->unk652--;
-                PlaySE(SE_SELECT);
-            }
-            else
-            {
-                if((gMain.newAndRepeatedKeys & 0x80) && gUnknown_0202FFB4->unk652 <= 3)
-                {
-                    gUnknown_0202FFB4->unk652++;
-                    PlaySE(SE_SELECT);
-                }
-            }
+            gUnknown_0202FFB4->unk652--;
+            PlaySE(SE_SELECT);
+        }
+        else if((gMain.newAndRepeatedKeys & DPAD_DOWN) && gUnknown_0202FFB4->unk652 <= 3)
+        {
+            gUnknown_0202FFB4->unk652++;
+            PlaySE(SE_SELECT);
         }
     }
-    //_0808D106
 }
 
 void sub_808D118(u8 taskId)
@@ -689,7 +666,7 @@ void sub_808D118(u8 taskId)
     gSprites[gUnknown_0202FFB4->unk626].pos1.y == 0x38)
     {
         gUnknown_0202FFB4->unk64B = gUnknown_0202FFB4->unk64A;
-        gTasks[taskId].data[0] = sub_808F210(&gUnknown_0202FFB4->unk0[gUnknown_0202FFB4->unk60E].a, gUnknown_0202FFB4->unk626);
+        gTasks[taskId].data[0] = sub_808F210(&gUnknown_0202FFB4->unk0[gUnknown_0202FFB4->unk60E], gUnknown_0202FFB4->unk626);
         gTasks[taskId].func = sub_808D198;
     }
 }
@@ -711,7 +688,7 @@ void sub_808D198(u8 taskId)
     }
 }
 
-void sub_808D214(u8 taskId)
+void Task_PokedexResultsScreenReturnToMainScreen(u8 taskId)
 {
     if(!gPaletteFade.active)
     {
@@ -721,11 +698,11 @@ void sub_808D214(u8 taskId)
         if(!sub_806912C())
             gUnknown_0202FFB4->unk612 = 0;
         gUnknown_0202FFB4->unk616 = gUnknown_0202FFB4->unk618;
-        gTasks[taskId].func = sub_808C608;
+        gTasks[taskId].func = Task_PokedexShowMainScreen;
     }
 }
 
-void sub_808D2AC(u8 taskId)
+void Task_PokedexResultsScreenExitPokedex(u8 taskId)
 {
     if(!gPaletteFade.active)
     {
@@ -735,6 +712,6 @@ void sub_808D2AC(u8 taskId)
         if(!sub_806912C())
             gUnknown_0202FFB4->unk612 = 0;
         gUnknown_0202FFB4->unk616 = gUnknown_0202FFB4->unk618;
-        gTasks[taskId].func = sub_808CC50;
+        gTasks[taskId].func = Task_ClosePokedex;
     }
 }
