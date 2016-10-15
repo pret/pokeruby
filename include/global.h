@@ -184,12 +184,12 @@ struct SaveBlock2
     u8 playTimeSeconds;
     u8 playTimeVBlanks;
     u8 optionsButtonMode;  // OPTIONS_BUTTON_MODE_[NORMAL/LR/L_EQUALS_A]
-    u8 optionsTextSpeed:3; // OPTIONS_TEXT_SPEED_[SLOW/MID/FAST]
-    u8 optionsWindowFrameType:5; // Specifies one of the 20 decorative borders for text boxes
-    u8 optionsSound:1; // OPTIONS_SOUND_[MONO/STEREO]
-    u8 optionsBattleStyle:1; // OPTIONS_BATTLE_STYLE_[SHIFT/SET]
-    u8 optionsBattleSceneOff:1; // whether battle animations are disabled
-    u8 regionMapZoom:1; // whether the map is zoomed in
+    u16 optionsTextSpeed:3; // OPTIONS_TEXT_SPEED_[SLOW/MID/FAST]
+    u16 optionsWindowFrameType:5; // Specifies one of the 20 decorative borders for text boxes
+    u16 optionsSound:1; // OPTIONS_SOUND_[MONO/STEREO]
+    u16 optionsBattleStyle:1; // OPTIONS_BATTLE_STYLE_[SHIFT/SET]
+    u16 optionsBattleSceneOff:1; // whether battle animations are disabled
+    u16 regionMapZoom:1; // whether the map is zoomed in
     struct Pokedex pokedex;
     u8 filler_90[0x8];
     struct Time localTimeOffset;
