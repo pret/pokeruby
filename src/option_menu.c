@@ -291,7 +291,6 @@ static void Task_OptionMenuProcessInput(u8 taskId)
     }
 }
 
-#ifdef NONMATCHING
 static void Task_OptionMenuSave(u8 taskId)
 {
     gSaveBlock2.optionsTextSpeed = gTasks[taskId].data[TD_TEXTSPEED];
@@ -304,78 +303,6 @@ static void Task_OptionMenuSave(u8 taskId)
     BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
     gTasks[taskId].func = Task_OptionMenuFadeOut;
 }
-#else
-__attribute__((naked))
-static void Task_OptionMenuSave(u8 taskId)
-{
-    asm("push {r4-r6,lr}            \n\
-    sub sp, #4                      \n\
-    lsl r0, #24                     \n\
-    lsr r0, #24                     \n\
-    ldr r5, =gSaveBlock2            \n\
-    ldr r1, =gTasks                 \n\
-    lsl r4, r0, #2                  \n\
-    add r4, r0                      \n\
-    lsl r4, #3                      \n\
-    add r4, r1                      \n\
-    mov r1, #7                      \n\
-    ldrb r0, [r4, #0xA]             \n\
-    and r0, r1                      \n\
-    ldrb r1, [r5, #0x14]            \n\
-    mov r3, #8                      \n\
-    neg r3, r3                      \n\
-    and r3, r1                      \n\
-    orr r3, r0                      \n\
-    strb r3, [r5, #0x14]            \n\
-    mov r6, #1                      \n\
-    ldrb r0, [r4, #0xC]             \n\
-    and r0, r6                      \n\
-    lsl r0, #2                      \n\
-    ldrb r1, [r5, #0x15]            \n\
-    mov r2, #5                      \n\
-    neg r2, r2                      \n\
-    and r2, r1                      \n\
-    orr r2, r0                      \n\
-    strb r2, [r5, #0x15]            \n\
-    ldrb r1, [r4, #0xE]             \n\
-    and r1, r6                      \n\
-    lsl r1, #1                      \n\
-    mov r0, #3                      \n\
-    neg r0, r0                      \n\
-    and r0, r2                      \n\
-    orr r0, r1                      \n\
-    strb r0, [r5, #0x15]            \n\
-    ldrb r1, [r4, #0x10]            \n\
-    and r1, r6                      \n\
-    mov r2, #2                      \n\
-    neg r2, r2                      \n\
-    and r0, r2                      \n\
-    orr r0, r1                      \n\
-    strb r0, [r5, #0x15]            \n\
-    ldrh r0, [r4, #0x12]            \n\
-    mov r2, #0                      \n\
-    strb r0, [r5, #0x13]            \n\
-    ldrb r0, [r4, #0x14]            \n\
-    lsl r0, #3                      \n\
-    mov r1, #7                      \n\
-    and r3, r1                      \n\
-    orr r3, r0                      \n\
-    strb r3, [r5, #0x14]            \n\
-    mov r0, #1                      \n\
-    neg r0, r0                      \n\
-    str r2, [sp]                    \n\
-    mov r1, #0                      \n\
-    mov r3, #16                     \n\
-    bl BeginNormalPaletteFade       \n\
-    ldr r0, =Task_OptionMenuFadeOut \n\
-    str r0, [r4]                    \n\
-    add sp, #4                      \n\
-    pop {r4-r6}                     \n\
-    pop {r0}                        \n\
-    bx r0                           \n\
-    .pool\n");
-}
-#endif
 
 static void Task_OptionMenuFadeOut(u8 taskId)
 {
