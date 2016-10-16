@@ -53665,9 +53665,9 @@ _08125CB6:
 	.align 2, 0
 _08125CC4: .4byte EraseFlashSector
 _08125CC8: .4byte 0x000003e6
-_08125CCC: .4byte gUnknown_08401E14
+_08125CCC: .4byte gHallOfFameSaveSectionLocations
 _08125CD0: .4byte 0x0000ffff
-_08125CD4: .4byte gUnknown_08401DA4
+_08125CD4: .4byte gSaveSectionLocations
 _08125CD8:
 	bl save_serialize_game
 	movs r4, 0
@@ -53682,7 +53682,7 @@ _08125CDE:
 	bls _08125CDE
 	b _08125D2E
 	.align 2, 0
-_08125CF4: .4byte gUnknown_08401DA4
+_08125CF4: .4byte gSaveSectionLocations
 _08125CF8:
 	bl save_serialize_game
 	ldr r1, _08125D08
@@ -53690,7 +53690,7 @@ _08125CF8:
 	bl save_write_to_flash
 	b _08125D2E
 	.align 2, 0
-_08125D08: .4byte gUnknown_08401DA4
+_08125D08: .4byte gSaveSectionLocations
 _08125D0C:
 	movs r4, 0x1C
 	ldr r5, _08125D38
@@ -53715,7 +53715,7 @@ _08125D2E:
 	.align 2, 0
 _08125D38: .4byte EraseFlashSector
 _08125D3C: .4byte 0x0000ffff
-_08125D40: .4byte gUnknown_08401DA4
+_08125D40: .4byte gSaveSectionLocations
 	thumb_func_end sub_8125C3C
 
 	thumb_func_start sub_8125D44
@@ -53766,7 +53766,7 @@ sub_8125D80: @ 8125D80
 	b _08125DA2
 	.align 2, 0
 _08125D98: .4byte gUnknown_3004820
-_08125D9C: .4byte gUnknown_08401DA4
+_08125D9C: .4byte gSaveSectionLocations
 _08125DA0:
 	movs r0, 0x1
 _08125DA2:
@@ -53794,7 +53794,7 @@ _08125DC4:
 	movs r0, 0
 	b _08125DD6
 	.align 2, 0
-_08125DCC: .4byte gUnknown_08401DA4
+_08125DCC: .4byte gSaveSectionLocations
 _08125DD0: .4byte gUnknown_03005EA8
 _08125DD4:
 	movs r0, 0x1
@@ -53821,7 +53821,7 @@ _08125DF4:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08125DFC: .4byte gUnknown_08401DA4
+_08125DFC: .4byte gSaveSectionLocations
 _08125E00: .4byte gUnknown_03005EA8
 	thumb_func_end sub_8125DDC
 
@@ -53842,7 +53842,7 @@ _08125E1C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08125E24: .4byte gUnknown_08401DA4
+_08125E24: .4byte gSaveSectionLocations
 _08125E28: .4byte gUnknown_03005EA8
 	thumb_func_end sub_8125E04
 
@@ -53868,7 +53868,7 @@ sub_8125E2C: @ 8125E2C
 	b _08125E66
 	.align 2, 0
 _08125E58: .4byte gUnknown_3004820
-_08125E5C: .4byte gUnknown_08401DA4
+_08125E5C: .4byte gSaveSectionLocations
 _08125E60: .4byte gUnknown_03005EB4
 _08125E64:
 	movs r0, 0x1
@@ -53902,7 +53902,7 @@ sub_8125E6C: @ 8125E6C
 	b _08125EAA
 	.align 2, 0
 _08125E98: .4byte gUnknown_03005EB4
-_08125E9C: .4byte gUnknown_08401DA4
+_08125E9C: .4byte gSaveSectionLocations
 _08125EA0:
 	ldr r1, _08125EC0
 	adds r0, r5, 0
@@ -53921,7 +53921,7 @@ _08125EB8:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08125EC0: .4byte gUnknown_08401DA4
+_08125EC0: .4byte gSaveSectionLocations
 _08125EC4: .4byte gUnknown_03005EA8
 	thumb_func_end sub_8125E6C
 
@@ -53962,7 +53962,7 @@ _08125EF0:
 	b _08125F3E
 	.align 2, 0
 _08125F0C: .4byte 0x0000ffff
-_08125F10: .4byte gUnknown_08401DA4
+_08125F10: .4byte gSaveSectionLocations
 _08125F14: .4byte gSaveFileStatus
 _08125F18: .4byte gUnknown_03005EBC
 _08125F1C:
@@ -53988,7 +53988,7 @@ _08125F40:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08125F48: .4byte gUnknown_08401E14
+_08125F48: .4byte gHallOfFameSaveSectionLocations
 	thumb_func_end sub_8125EC8
 
 	thumb_func_start unref_sub_8125F4C
