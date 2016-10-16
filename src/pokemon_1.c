@@ -148,7 +148,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     else
     {
         u32 iv;
-        value = (u16)Random();
+        value = Random();
 
         iv = value & 0x1F;
         SetBoxMonData(boxMon, MON_DATA_HP_IV, (u8 *)&iv);
@@ -157,7 +157,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
         iv = (value & 0x7C00) >> 10;
         SetBoxMonData(boxMon, MON_DATA_DEF_IV, (u8 *)&iv);
 
-        value = (u16)Random();
+        value = Random();
 
         iv = value & 0x1F;
         SetBoxMonData(boxMon, MON_DATA_SPD_IV, (u8 *)&iv);
@@ -624,7 +624,7 @@ void DeleteFirstMoveAndGiveMoveToMon(struct Pokemon *mon, u16 move)
     for (i = 0; i < 3; i++)
     {
         moves[i] = GetMonData(mon, MON_DATA_MOVE2 + i, NULL);
-        pp[i]= GetMonData(mon, MON_DATA_PP2 + i, NULL);
+        pp[i] = GetMonData(mon, MON_DATA_PP2 + i, NULL);
     }
 
     ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES, NULL);
@@ -651,7 +651,7 @@ void DeleteFirstMoveAndGiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move)
     for (i = 0; i < 3; i++)
     {
         moves[i] = GetBoxMonData(boxMon, MON_DATA_MOVE2 + i, NULL);
-        pp[i]= GetBoxMonData(boxMon, MON_DATA_PP2 + i, NULL);
+        pp[i] = GetBoxMonData(boxMon, MON_DATA_PP2 + i, NULL);
     }
 
     ppBonuses = GetBoxMonData(boxMon, MON_DATA_PP_BONUSES, NULL);
