@@ -363,7 +363,7 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
             }
             else if (boxMon->isEgg)
             {
-                StringCopy(data, gOtherText_EggNickname);
+                StringCopy(data, gEggNickname);
                 retVal = StringLength(data);
             }
             else
