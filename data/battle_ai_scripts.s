@@ -3122,7 +3122,7 @@ AI_Roaming_End: @ 81DC0FD
 
 AI_Safari: @ 81DC0FE
 	if_random_2 AI_Safari_Flee
-	flee2
+	watch
 
 AI_Safari_Flee: @ 81DC104
 	flee
