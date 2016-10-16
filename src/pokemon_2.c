@@ -32,7 +32,7 @@ extern u16 word_202FF5E;
 extern struct PokemonStorage gPokemonStorage;
 
 extern u8 gBadEggNickname[];
-extern u8 gOtherText_EggNickname[];
+extern u8 gEggNickname[];
 extern u32 gBitTable[];
 extern struct BaseStats gBaseStats[];
 extern u8 gSpeciesNames[][11];
