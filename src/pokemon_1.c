@@ -4,7 +4,14 @@
 #include "pokemon.h"
 #include "species.h"
 #include "main.h"
+#include "rng.h"
 #include "sprite.h"
+
+//Extracts the upper 16 bits of a 32-bit number
+#define HIHALF(n) (((n) & 0xFFFF0000) >> 16)
+
+//Extracts the lower 16 bits of a 32-bit number
+#define LOHALF(n) ((n) & 0xFFFF)
 
 extern u8 sav1_map_get_name();
 
@@ -81,33 +88,27 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     ZeroBoxMonData(boxMon);
 
     if (hasFixedPersonality)
-    {
         personality = fixedPersonality;
-    }
     else
-    {
-        u32 r = Random();
-        personality = (u16)r | (Random() << 16);
-    }
+        personality = Random32();
 
     SetBoxMonData(boxMon, MON_DATA_PERSONALITY, (u8 *)&personality);
 
-    if (otIdType == 2)
+    //Determine original trainer ID
+    if (otIdType == 2) //Pokemon cannot be shiny
     {
         u32 shinyValue;
         do
         {
-            u32 r = Random();
-            value = (u16)r | (Random() << 16);
-            asm(""); // needed to match for some reason
-            shinyValue = ((value & 0xFFFF0000) >> 16) ^ (value & 0x0000FFFF) ^ ((personality & 0xFFFF0000) >> 16) ^ (personality & 0x0000FFFF);
+            value = Random32();
+            shinyValue = HIHALF(value) ^ LOHALF(value) ^ HIHALF(personality) ^ LOHALF(personality);
         } while (shinyValue < 8);
     }
-    else if (otIdType == 1)
+    else if (otIdType == 1) //Pokemon has a preset OT ID
     {
         value = fixedOtId;
     }
-    else
+    else //Player is the OT
     {
         value = gSaveBlock2.playerTrainerId[0]
               | (gSaveBlock2.playerTrainerId[1] << 8)
@@ -181,8 +182,7 @@ void CreateMonWithNature(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV,
 
     do
     {
-        u32 r = Random();
-        personality = (u16)r | (Random() << 16);
+        personality = Random32();
     }
     while (nature != GetNatureFromPersonality(personality));
 
@@ -199,8 +199,7 @@ void CreateMonWithGenderNatureLetter(struct Pokemon *mon, u16 species, u8 level,
 
         do
         {
-            u32 r = Random();
-            personality = (u16)r | (Random() << 16);
+            personality = Random32();
             actualLetter = ((((personality & 0x3000000) >> 18) | ((personality & 0x30000) >> 12) | ((personality & 0x300) >> 6) | personality & 0x3) % 28);
         }
         while (nature != GetNatureFromPersonality(personality)
@@ -211,8 +210,7 @@ void CreateMonWithGenderNatureLetter(struct Pokemon *mon, u16 species, u8 level,
     {
         do
         {
-            u32 r = Random();
-            personality = (u16)r | (Random() << 16);
+            personality = Random32();
         }
         while (nature != GetNatureFromPersonality(personality)
             || gender != GetGenderFromSpeciesAndPersonality(species, personality));
@@ -229,11 +227,8 @@ void CreateMaleMon(struct Pokemon *mon, u16 species, u8 level)
 
     do
     {
-        u32 r1, r2;
-        r1 = Random();
-        otId = (u16)r1 | (Random() << 16);
-        r2 = Random();
-        personality = (u16)r2 | (Random() << 16);
+        otId = Random32();
+        personality = Random32();
     }
     while (GetGenderFromSpeciesAndPersonality(species, personality) != MON_MALE);
     CreateMon(mon, species, level, 32, 1, personality, 1, otId);
@@ -260,7 +255,7 @@ void CreateMonWithIVsOTID(struct Pokemon *mon, u16 species, u8 level, u8 *ivs, u
 
 void CreateMonWithEVSpread(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 evSpread)
 {
-    register s32 i asm("r5");
+    s32 i;
     register u32 temp asm("r4");
     s32 statCount = 0;
     u16 evAmount;
@@ -268,29 +263,23 @@ void CreateMonWithEVSpread(struct Pokemon *mon, u16 species, u8 level, u8 fixedI
     u8 mask2;
 
     CreateMon(mon, species, level, fixedIV, 0, 0, 0, 0);
-
     temp = evSpread;
     mask1 = 1;
-    i = 5;
-    do
+    for (i = 5; i >= 0; i--)
     {
         if (temp & mask1)
             statCount++;
         temp >>= 1;
-        i--;
-    } while (i >= 0);
-
+    }
 
     evAmount = 510 / statCount;
     mask2 = 1;
-    i = 0;
-    do
+    for (i = 0; i < 6; i++)
     {
         if (evSpread & mask2)
             SetMonData(mon, MON_DATA_HP_EV + i, (u8 *)&evAmount);
         mask2 <<= 1;
-        i++;
-    } while (i < 6);
+    }
 
     CalculateMonStats(mon);
 }

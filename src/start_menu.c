@@ -64,8 +64,8 @@ struct MenuItem {
 };
 
 static u8 (*saveDialogCallback)(void);
-static u8 gUnknown_030006AC;
-static bool8 gUnknown_030006AD;
+static u8 saveDialogTimer;    //Number of frames to keep the window on screen after save was completed
+static bool8 savingComplete;
 
 extern bool8 gUnknown_020297EC;
 extern u16 gSaveFileStatus;
@@ -115,11 +115,11 @@ static void BuildStartMenuActions_Normal(void);
 static void BuildStartMenuActions_SafariZone(void);
 static void BuildStartMenuActions_Link(void);
 static void DisplaySafariBallsWindow(void);
-static bool32 sub_8071114(s16 *a, u32 b);
-static bool32 sub_807117C(s16 *a, s16 *b);
+static bool32 PrintStartMenuItemsMultistep(s16 *a, u32 b);
+static bool32 InitStartMenuMultistep(s16 *a, s16 *b);
 static void sub_8071230(void);
 static void Task_StartMenu(u8 taskId);
-static u8 Callback_8071338(void);
+static u8 StartMenu_InputProcessCallback(void);
 static u8 SaveCallback1(void);
 static u8 SaveCallback2(void);
 static void sub_807160C(void);
@@ -127,23 +127,23 @@ static u8 RunSaveDialogCallback(void);
 static void DisplaySaveMessageWithCallback(u8 *ptr, u8 (*func)(void));
 static void Task_SaveDialog(u8 taskId);
 static void sub_8071700(void);
-static void EraseSaveDialog(void);
-static void sub_8071724(void);
-static u8 sub_8071730(void);
-static u8 sub_8071764(void);
-static u8 sub_8071764(void);
-static u8 SaveDialogCB_8071794(void);
-static u8 SaveDialogCB_80717B8(void);
-static u8 SaveDialogCB_80717D8(void);
+static void HideSaveDialog(void);
+static void SaveDialogStartTimeout(void);
+static u8 SaveDialogCheckForTimeoutOrKeypress(void);
+static u8 SaveDialogCheckForTimeoutAndKeypress(void);
+static u8 SaveDialogCheckForTimeoutAndKeypress(void);
+static u8 SaveDialogCB_DisplayConfirmMessage(void);
+static u8 SaveDialogCB_DisplayConfirmYesNoMenu(void);
+static u8 SaveDialogCB_ProcessConfirmYesNoMenu(void);
 static u8 SaveDialogCB_SaveFileExists(void);
 static u8 SaveDialogCB_DisplayOverwriteYesNoMenu(void);
 static u8 SaveDialogCB_ProcessOverwriteYesNoMenu(void);
-static u8 SaveDialogCB_SavingMessage(void);
+static u8 SaveDialogCB_DisplaySavingMessage(void);
 static u8 SaveDialogCB_DoSave(void);
 static u8 SaveDialogCB_SaveSuccess(void);
-static u8 SaveDialogCB_8071988(void);
-static u8 SaveDialogCB_80719AC(void);
-static u8 SaveDialogCB_80719D4(void);
+static u8 SaveDialogCB_ReturnSuccess(void);
+static u8 SaveDialogCB_SaveError(void);
+static u8 SaveDialogCB_ReturnError(void);
 static void sub_80719F0(void);
 static bool32 sub_80719FC(u8 *ptr);
 static void sub_8071B54(void);
@@ -214,50 +214,50 @@ static void DisplaySafariBallsWindow(void)
     MenuPrint(gOtherText_SafariStock, 1, 1);
 }
 
-static bool32 sub_8071114(s16 *a, u32 b)
+//Prints n menu items starting at *index
+static bool32 PrintStartMenuItemsMultistep(s16 *index, u32 n)
 {
-    s32 var = *a;
+    int _index = *index;
     
     do
     {
-        MenuPrint(gStartMenuItems[sCurrentStartMenuActions[var]].text,
-                  0x17, var * 2 + 2);
-        var++;
-        if(var >= sNumStartMenuActions)
+        MenuPrint(gStartMenuItems[sCurrentStartMenuActions[_index]].text, 23, 2 + _index * 2);
+        _index++;
+        if(_index >= sNumStartMenuActions)
         {
-            *a = var;
-            return 1;
+            *index = _index;
+            return TRUE;
         }
     }
-    while(--b != 0);
-    *a = var;
-    return 0;
+    while(--n != 0);
+    *index = _index;
+    return FALSE;
 }
 
-static bool32 sub_807117C(s16 *a, s16 *b)
+static bool32 InitStartMenuMultistep(s16 *step, s16 *index)
 {
-    switch(*a)
+    switch(*step)
     {
         case 1:
             BuildStartMenuActions();
-            (*a)++;
+            (*step)++;
             break;
         case 2:
             MenuDrawTextWindow(22, 0, 29, sNumStartMenuActions * 2 + 3);
-            *b = 0;
-            (*a)++;
+            *index = 0;
+            (*step)++;
             break;
         case 3:
             if(GetSafariZoneFlag())
                 DisplaySafariBallsWindow();
-            (*a)++;
+            (*step)++;
             break;
         case 4:
-            if(sub_8071114(b, 2))
-                (*a)++;
+            if(PrintStartMenuItemsMultistep(index, 2))
+                (*step)++;
             break;
         case 0:
-            (*a)++;
+            (*step)++;
             break;
         case 5:
             sStartMenuCursorPos = InitMenu(0, 0x17, 2, sNumStartMenuActions, sStartMenuCursorPos, 6);
@@ -266,18 +266,18 @@ static bool32 sub_807117C(s16 *a, s16 *b)
     return FALSE;
 }
 
-static void sub_8071230(void)
+static void InitStartMenu(void)
 {
-    s16 a = 0;
-    s16 b = 0;
+    s16 step = 0;
+    s16 index = 0;
     
-    while(sub_807117C(&a, &b) == FALSE)
+    while(InitStartMenuMultistep(&step, &index) == FALSE)
         ;
 }
 
 static void Task_StartMenu(u8 taskId)
 {
-    if(sub_807117C(gTasks[taskId].data, gTasks[taskId].data + 1) == TRUE)
+    if(InitStartMenuMultistep(gTasks[taskId].data, gTasks[taskId].data + 1) == TRUE)
     {
         *gTasks[taskId].data = 0;
         SwitchTaskToFollowupFunc(taskId);
@@ -307,7 +307,7 @@ void sub_80712B4(u8 taskId)
     switch(((struct MyTask *)&gTasks[taskId])->var1)
     {
         case 0:
-            gCallback_03004AE8 = Callback_8071338;
+            gCallback_03004AE8 = StartMenu_InputProcessCallback;
             ((struct MyTask *)&gTasks[taskId])->var1++;
             break;
         case 1:
@@ -329,7 +329,7 @@ void sub_8071310(void)
     ScriptContext2_Enable();
 }
 
-static u8 Callback_8071338(void)
+static u8 StartMenu_InputProcessCallback(void)
 {
     if(gMain.newKeys & DPAD_UP)
     {
@@ -350,9 +350,9 @@ static u8 Callback_8071338(void)
                 return 0;
         }
         gCallback_03004AE8 = gStartMenuItems[sCurrentStartMenuActions[sStartMenuCursorPos]].callback;
-        if(StartMenu_SaveCallback != gCallback_03004AE8 &&
-           StartMenu_ExitCallback != gCallback_03004AE8 &&
-           StartMenu_RetireCallback != gCallback_03004AE8)
+        if(gCallback_03004AE8 != StartMenu_SaveCallback &&
+           gCallback_03004AE8 != StartMenu_ExitCallback &&
+           gCallback_03004AE8 != StartMenu_RetireCallback)
             fade_screen(1, 0);
         return 0;
     }
@@ -473,6 +473,14 @@ u8 StartMenu_PlayerLinkCallback(void)
     return 0;
 }
 
+//Save dialog status
+enum {
+    SAVE_IN_PROGRESS,
+    SAVE_SUCCESS,
+    SAVE_CANCELED,
+    SAVE_ERROR,
+};
+
 static u8 SaveCallback1(void)
 {
     sub_807160C();
@@ -484,15 +492,16 @@ static u8 SaveCallback2(void)
 {
     switch(RunSaveDialogCallback())
     {
-        case 0:
+        case SAVE_IN_PROGRESS:
             return FALSE;
-        case 2:
+        case SAVE_CANCELED:
+            //Go back to start menu
             MenuZeroFillScreen();
-            sub_8071230();
-            gCallback_03004AE8 = Callback_8071338;
+            InitStartMenu();
+            gCallback_03004AE8 = StartMenu_InputProcessCallback;
             return FALSE;
-        case 1:
-        case 3:
+        case SAVE_SUCCESS:
+        case SAVE_ERROR:
             MenuZeroFillScreen();
             sub_8064E2C();
             ScriptContext2_Disable();
@@ -504,18 +513,18 @@ static u8 SaveCallback2(void)
 static void sub_807160C(void)
 {
     save_serialize_map();
-    saveDialogCallback = SaveDialogCB_8071794;
-    gUnknown_030006AD = FALSE;
+    saveDialogCallback = SaveDialogCB_DisplayConfirmMessage;
+    savingComplete = FALSE;
 }
 
 static u8 RunSaveDialogCallback(void)
 {
-    if(gUnknown_030006AD)
+    if(savingComplete)
     {
         if(!MenuUpdateWindowText())
             return 0;
     }
-    gUnknown_030006AD = FALSE;
+    savingComplete = FALSE;
     return saveDialogCallback();
 }
 
@@ -530,24 +539,24 @@ static void DisplaySaveMessageWithCallback(u8 *ptr, u8 (*func)(void))
     StringExpandPlaceholders(gStringVar4, ptr);
     MenuDisplayMessageBox();
     sub_8072044(gStringVar4);
-    gUnknown_030006AD = TRUE;
+    savingComplete = TRUE;
     saveDialogCallback = func;
 }
 
 static void Task_SaveDialog(u8 taskId)
 {
-    u8 b = RunSaveDialogCallback();
+    u8 status = RunSaveDialogCallback();
     
-    switch(b)
+    switch(status)
     {
-        case 2:
-        case 3:
+        case SAVE_CANCELED:
+        case SAVE_ERROR:
             gScriptResult = 0;
             break;        
-        case 1:
-            gScriptResult = b;
+        case SAVE_SUCCESS:
+            gScriptResult = status;
             break;
-        case 0:
+        case SAVE_IN_PROGRESS:
             return;
     }
     DestroyTask(taskId);
@@ -559,66 +568,60 @@ static void sub_8071700(void)
     sub_80946C8(0, 0);
 }
 
-static void EraseSaveDialog(void)
+static void HideSaveDialog(void)
 {
     MenuZeroFillWindowRect(20, 8, 26, 13);
 }
 
-static void sub_8071724(void)
+static void SaveDialogStartTimeout(void)
 {
-    gUnknown_030006AC = 0x3C;
+    saveDialogTimer = 60;
 }
 
-
-static u8 sub_8071730(void)
+static bool8 SaveDialogCheckForTimeoutOrKeypress(void)
 {
-    gUnknown_030006AC--;
-    if(!(gMain.heldKeys & 1))
+    saveDialogTimer--;
+    if(gMain.heldKeys & A_BUTTON)
     {
-        if(gUnknown_030006AC)
-            return 0;
-    }
-    else
         PlaySE(SE_SELECT);
-    return 1;
-}
-
-
-static u8 sub_8071764(void)
-{
-    if(gUnknown_030006AC == 0)
-    {
-        if(gMain.heldKeys & 1)
-            return 1;
+        return TRUE;
     }
-    else
-        gUnknown_030006AC--;
-    return 0;
-        
+    else if(saveDialogTimer == 0)
+        return TRUE;
+    return FALSE;
 }
 
-static u8 SaveDialogCB_8071794(void)
+static bool8 SaveDialogCheckForTimeoutAndKeypress(void)
+{
+    if(saveDialogTimer != 0)
+        saveDialogTimer--;
+    else if(gMain.heldKeys & A_BUTTON)
+        return TRUE;
+    return FALSE;
+}
+
+static u8 SaveDialogCB_DisplayConfirmMessage(void)
 {
     MenuZeroFillScreen();
     sub_80945C0(0, 0);
     //"Would you like to save the game?"
-    DisplaySaveMessageWithCallback(gSaveText_WouldYouLikeToSave, SaveDialogCB_80717B8);
-    return 0;
+    DisplaySaveMessageWithCallback(gSaveText_WouldYouLikeToSave, SaveDialogCB_DisplayConfirmYesNoMenu);
+    return SAVE_IN_PROGRESS;
 }
 
-static u8 SaveDialogCB_80717B8(void)
+static u8 SaveDialogCB_DisplayConfirmYesNoMenu(void)
 {
     DisplayYesNoMenu(20, 8, 1);
-    saveDialogCallback = SaveDialogCB_80717D8;
-    return 0;
+    saveDialogCallback = SaveDialogCB_ProcessConfirmYesNoMenu;
+    return SAVE_IN_PROGRESS;
 }
 
-static u8 SaveDialogCB_80717D8(void)
+static u8 SaveDialogCB_ProcessConfirmYesNoMenu(void)
 {
     switch(ProcessMenuInputNoWrap_())
     {
         case 0:     //YES
-            EraseSaveDialog();
+            HideSaveDialog();
             switch(gSaveFileStatus)
             {
                 case 0:
@@ -626,22 +629,22 @@ static u8 SaveDialogCB_80717D8(void)
                     if(gUnknown_020297EC == FALSE)
                     {
                         saveDialogCallback = SaveDialogCB_SaveFileExists;
-                        return 0;
+                        return SAVE_IN_PROGRESS;
                     }
-                    saveDialogCallback = SaveDialogCB_SavingMessage;
-                    return 0;
+                    saveDialogCallback = SaveDialogCB_DisplaySavingMessage;
+                    return SAVE_IN_PROGRESS;
                 default:
                     saveDialogCallback = SaveDialogCB_SaveFileExists;
-                    return 0;
+                    return SAVE_IN_PROGRESS;
             }
             break;
         case -1:    //B button
         case 1:     //NO
-            EraseSaveDialog();
+            HideSaveDialog();
             sub_8071700();
-            return 2;
+            return SAVE_CANCELED;
     }
-    return 0;
+    return SAVE_IN_PROGRESS;
 }
 
 static u8 SaveDialogCB_SaveFileExists(void)
@@ -649,14 +652,14 @@ static u8 SaveDialogCB_SaveFileExists(void)
     DisplaySaveMessageWithCallback(
       gUnknown_020297EC == TRUE ? gSaveText_ThereIsADifferentFile : gSaveText_ThereIsAlreadyAFile,
       SaveDialogCB_DisplayOverwriteYesNoMenu);
-    return 0;
+    return SAVE_IN_PROGRESS;
 }
 
 static u8 SaveDialogCB_DisplayOverwriteYesNoMenu(void)
 {
     DisplayYesNoMenu(20, 8, 1);
     saveDialogCallback = SaveDialogCB_ProcessOverwriteYesNoMenu;
-    return 0;
+    return SAVE_IN_PROGRESS;
 }
 
 static u8 SaveDialogCB_ProcessOverwriteYesNoMenu(void)
@@ -664,23 +667,23 @@ static u8 SaveDialogCB_ProcessOverwriteYesNoMenu(void)
     switch(ProcessMenuInputNoWrap_())
     {
         case 0:     //YES
-            EraseSaveDialog();
-            saveDialogCallback = SaveDialogCB_SavingMessage;
+            HideSaveDialog();
+            saveDialogCallback = SaveDialogCB_DisplaySavingMessage;
             break;
         case -1:    //B button
         case 1:     //NO
-            EraseSaveDialog();
+            HideSaveDialog();
             sub_8071700();
-            return 2;
+            return SAVE_CANCELED;
     }
-    return 0;
+    return SAVE_IN_PROGRESS;
 }
 
-static u8 SaveDialogCB_SavingMessage(void)
+static u8 SaveDialogCB_DisplaySavingMessage(void)
 {
     //"SAVING... DON'T TURN OFF THE POWER."
     DisplaySaveMessageWithCallback(gSaveText_DontTurnOff, SaveDialogCB_DoSave);
-    return 0;
+    return SAVE_IN_PROGRESS;
 }
 
 static u8 SaveDialogCB_DoSave(void)
@@ -706,11 +709,11 @@ static u8 SaveDialogCB_DoSave(void)
     else
     {
         //"Save error. Please exchange the backup memory."
-        DisplaySaveMessageWithCallback(gSystemText_SaveErrorExchangeBackup, SaveDialogCB_80719AC);
+        DisplaySaveMessageWithCallback(gSystemText_SaveErrorExchangeBackup, SaveDialogCB_SaveError);
     }
     
-    sub_8071724();
-    return 0;
+    SaveDialogStartTimeout();
+    return SAVE_IN_PROGRESS;
 }
 
 static u8 SaveDialogCB_SaveSuccess(void)
@@ -718,40 +721,40 @@ static u8 SaveDialogCB_SaveSuccess(void)
     if(MenuUpdateWindowText())
     {
         PlaySE(SE_SAVE);
-        saveDialogCallback = SaveDialogCB_8071988;
+        saveDialogCallback = SaveDialogCB_ReturnSuccess;
     }
-    return 0;
+    return SAVE_IN_PROGRESS;
 }
 
-static u8 SaveDialogCB_8071988(void)
+static u8 SaveDialogCB_ReturnSuccess(void)
 {
-    if(!IsSEPlaying() && sub_8071730())
+    if(!IsSEPlaying() && SaveDialogCheckForTimeoutOrKeypress())
     {
         sub_8071700();
-        return 1;
+        return SAVE_SUCCESS;
     }
     else
-        return 0;
+        return SAVE_IN_PROGRESS;
 }
 
-static u8 SaveDialogCB_80719AC(void)
+static u8 SaveDialogCB_SaveError(void)
 {
     if(MenuUpdateWindowText())
     {
         PlaySE(SE_BOO);
-        saveDialogCallback = SaveDialogCB_80719D4;
+        saveDialogCallback = SaveDialogCB_ReturnError;
     }
-    return 0;
+    return SAVE_IN_PROGRESS;
 }
 
-static u8 SaveDialogCB_80719D4(void)
+static u8 SaveDialogCB_ReturnError(void)
 {
-    if(!sub_8071764())
-        return 0;
+    if(!SaveDialogCheckForTimeoutAndKeypress())
+        return SAVE_IN_PROGRESS;
     else
     {
         sub_8071700();
-        return 3;
+        return SAVE_ERROR;
     }
 }
 
@@ -760,9 +763,9 @@ static void sub_80719F0(void)
     TransferPlttBuffer();
 }
 
-static bool32 sub_80719FC(u8 *ptr)
+static bool32 sub_80719FC(u8 *step)
 {
-    switch(*ptr)
+    switch(*step)
     {
         case 0:
         {
@@ -814,7 +817,7 @@ static bool32 sub_80719FC(u8 *ptr)
         case 4:
             return TRUE;
     }
-    (*ptr)++;
+    (*step)++;
     return FALSE;
 }
 
@@ -835,32 +838,32 @@ static void sub_8071B54(void)
 
 static void Task_8071B64(u8 taskId)
 {
-    s16 *val = gTasks[taskId].data;
+    s16 *step = gTasks[taskId].data;
     
     if(!gPaletteFade.active)
     {
-        switch(*val)
+        switch(*step)
         {
             case 0:
                 MenuDisplayMessageBox();
                 MenuPrint(gSystemText_Saving, 2, 15);
                 BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
-                (*val)++;
+                (*step)++;
                 break;
             case 1:
                 sub_8047A1C();
                 sub_8125E2C();
-                (*val)++;
+                (*step)++;
                 break;
             case 2:
                 if(!sub_8125E6C())
                     break;
                 sub_8047A34();
-                (*val)++;
+                (*step)++;
                 break;
             case 3:
                 BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
-                (*val)++;
+                (*step)++;
                 break;
             case 4:
                 SetMainCallback2(gMain.field_8);
