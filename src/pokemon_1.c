@@ -154,7 +154,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
         SetBoxMonData(boxMon, MON_DATA_HP_IV, (u8 *)&iv);
         iv = (value & 0x3E0) >> 5;
         SetBoxMonData(boxMon, MON_DATA_ATK_IV, (u8 *)&iv);
-        iv = (value &0x7C00) >> 10;
+        iv = (value & 0x7C00) >> 10;
         SetBoxMonData(boxMon, MON_DATA_DEF_IV, (u8 *)&iv);
 
         value = (u16)Random();
@@ -163,7 +163,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
         SetBoxMonData(boxMon, MON_DATA_SPD_IV, (u8 *)&iv);
         iv = (value & 0x3E0) >> 5;
         SetBoxMonData(boxMon, MON_DATA_SPATK_IV, (u8 *)&iv);
-        iv = (value &0x7C00) >> 10;
+        iv = (value & 0x7C00) >> 10;
         SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, (u8 *)&iv);
     }
 
