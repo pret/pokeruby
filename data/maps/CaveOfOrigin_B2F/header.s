@@ -3,7 +3,7 @@ CaveOfOrigin_B2F:: @ 83071D0
 	.4byte CaveOfOrigin_B2F_MapEvents
 	.4byte CaveOfOrigin_B2F_MapScripts
 	.4byte 0x0
-	.2byte 386
+	.2byte BGM_DAN03
 	.2byte 161
 	.byte 72
 	.byte 1

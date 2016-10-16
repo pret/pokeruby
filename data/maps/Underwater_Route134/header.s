@@ -3,7 +3,7 @@ Underwater_Route134:: @ 83074FC
 	.4byte Underwater_Route134_MapEvents
 	.4byte Underwater_Route134_MapScripts
 	.4byte 0x0
-	.2byte 411
+	.2byte BGM_DEEPDEEP
 	.2byte 283
 	.byte 79
 	.byte 0

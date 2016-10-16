@@ -3,7 +3,7 @@ SecretBase_BlueCave2:: @ 83077B8
 	.4byte SecretBase_BlueCave2_MapEvents
 	.4byte SecretBase_BlueCave2_MapScripts
 	.4byte 0x0
-	.2byte 382
+	.2byte BGM_MACHI_S3
 	.2byte 206
 	.byte 86
 	.byte 0

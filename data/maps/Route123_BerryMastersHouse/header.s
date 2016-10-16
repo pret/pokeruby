@@ -3,7 +3,7 @@ Route123_BerryMastersHouse:: @ 8307ED4
 	.4byte Route123_BerryMastersHouse_MapEvents
 	.4byte Route123_BerryMastersHouse_MapScripts
 	.4byte 0x0
-	.2byte 399
+	.2byte BGM_GOTOWN
 	.2byte 60
 	.byte 38
 	.byte 0

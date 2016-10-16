@@ -3,7 +3,7 @@ RustboroCity_DevonCorp_1F:: @ 830622C
 	.4byte RustboroCity_DevonCorp_1F_MapEvents
 	.4byte RustboroCity_DevonCorp_1F_MapScripts
 	.4byte 0x0
-	.2byte 399
+	.2byte BGM_GOTOWN
 	.2byte 92
 	.byte 10
 	.byte 0

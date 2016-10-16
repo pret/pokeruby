@@ -3,7 +3,7 @@ AbandonedShip_Corridors_B1F:: @ 83073AC
 	.4byte AbandonedShip_Corridors_B1F_MapEvents
 	.4byte AbandonedShip_Corridors_B1F_MapScripts
 	.4byte 0x0
-	.2byte 381
+	.2byte BGM_DAN02
 	.2byte 190
 	.byte 61
 	.byte 0

@@ -407,7 +407,7 @@
 	.4byte \address
 	.endm
 
-	.macro flee2
+	.macro watch
 	.byte 0x47
 	.endm
 

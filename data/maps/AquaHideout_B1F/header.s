@@ -3,7 +3,7 @@ AquaHideout_B1F:: @ 8307010
 	.4byte AquaHideout_B1F_MapEvents
 	.4byte AquaHideout_B1F_MapScripts
 	.4byte 0x0
-	.2byte 430
+	.2byte BGM_AJITO
 	.2byte 145
 	.byte 66
 	.byte 0
