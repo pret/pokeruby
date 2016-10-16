@@ -265,7 +265,7 @@ void CreateMonWithEVSpread(struct Pokemon *mon, u16 species, u8 level, u8 fixedI
     CreateMon(mon, species, level, fixedIV, 0, 0, 0, 0);
     temp = evSpread;
     mask1 = 1;
-    for(i = 5; i >= 0; i--)
+    for (i = 5; i >= 0; i--)
     {
         if (temp & mask1)
             statCount++;
@@ -274,7 +274,7 @@ void CreateMonWithEVSpread(struct Pokemon *mon, u16 species, u8 level, u8 fixedI
 
     evAmount = 510 / statCount;
     mask2 = 1;
-    for(i = 0; i < 6; i++)
+    for (i = 0; i < 6; i++)
     {
         if (evSpread & mask2)
             SetMonData(mon, MON_DATA_HP_EV + i, (u8 *)&evAmount);
