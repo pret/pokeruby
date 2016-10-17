@@ -79,6 +79,8 @@ SECTIONS {
         src/starter_choose.o(.text);
         src/wallclock.o(.text);
         asm/rom6.o(.text);
+        src/save.o(.text);
+        asm/rom_81258BC.o(.text);
         src/intro.o(.text);
         asm/rom_813BA94.o(.text);
     } =0
