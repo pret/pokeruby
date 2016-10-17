@@ -76,6 +76,8 @@ SECTIONS {
         src/option_menu.o(.text);
         src/pokedex.o(.text);
         asm/rom5_part2.o(.text);
+        asm/berry.o(.text);
+        asm/rom_80B5054.o(.text);
         src/starter_choose.o(.text);
         src/wallclock.o(.text);
         asm/rom6.o(.text);
