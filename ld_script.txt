@@ -65,6 +65,8 @@ SECTIONS {
         src/script.o(.text);
         src/scrcmd.o(.text);
         asm/rom_8065394.o(.text);
+        asm/party_menu.o(.text);
+        asm/rom_806D7F8.o(.text);
         src/start_menu.o(.text);
         src/menu.o(.text);
         asm/rom_8072DF8.o(.text);
