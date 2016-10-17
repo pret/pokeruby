@@ -82,6 +82,7 @@ SECTIONS {
         src/save.o(.text);
         asm/mystery_event_script.o(.text);
         asm/field_effect_helpers.o(.text);
+        asm/contest_ai.o(.text);
         asm/rom_81258BC.o(.text);
         src/intro.o(.text);
         asm/rom_813BA94.o(.text);
