@@ -6,3 +6,5 @@ unk_20160BC = 0x20160BC;
 gSecretBaseRecord = 0x2017000;
 
 dword_2017100 = 0x2017100;
+
+gHallOfFame = 0x201E000;
