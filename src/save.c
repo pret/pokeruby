@@ -16,10 +16,19 @@ struct SaveSection
     u32 counter;
 };
 
+struct UnkSaveSection
+{
+    u8 data[0xFF4];
+    u32 unknown;
+};
+
 extern u32 sub_8053108(u8);
 extern void sav12_xor_increment(u8);
+extern u32 ProgramFlashSectorAndVerifyNBytes(u16 sectorNum, u8 *src, u32 n);
 
 extern struct SaveSection unk_2000000;
+
+extern u32 gUnknown_02039284;
 
 extern u32 gUnknown_3004820;
 
@@ -35,6 +44,7 @@ extern u32 gUnknown_03005EBC;
 
 extern struct SaveSectionLocation gSaveSectionLocations[];
 extern struct SaveSectionLocation gHallOfFameSaveSectionLocations[];
+extern u8 gUnknown_08401E24[];
 
 u8 sub_81252D8(u16, struct SaveSectionLocation *);
 u8 sub_8125440(u8, u8 *);
@@ -700,4 +710,78 @@ u8 sub_8125EC8(u8 a1)
     }
 
     return result;
+}
+
+bool8 unref_sub_8125F4C(struct UnkSaveSection *a1)
+{
+    u16 i;
+    char *raw = (char *)a1;
+
+    for (i = 0; i < 0x1000; i++)
+        raw[i] = 0;
+
+    ReadFlash(gUnknown_08401E24[0], 0, a1, 4096);
+
+    if (a1->unknown != 0x8012025)
+        return FALSE;
+
+    return TRUE;
+}
+
+u8 unref_sub_8125FA0(void)
+{
+    u16 i;
+    u8 v0 = sub_8125D44(0);
+
+    for (i = 0; i < 2; i++)
+        EraseFlashSector(gUnknown_08401E24[i]);
+
+    if (v0 == 255)
+    {
+        return 3;
+    }
+    else if (v0 == 3)
+    {
+        return 2;
+    }
+    else
+    {
+        sub_8125EC8(0);
+        return 1;
+    }
+}
+
+u8 unref_sub_8125FF0(u8 *data, u16 size)
+{
+    u16 i;
+    struct UnkSaveSection *section = (struct UnkSaveSection *)&unk_2000000;
+
+    for (i = 0; i < 0x1000; i++)
+        ((char *)section)[i] = 0;
+
+    section->unknown = 0x8012025;
+
+    for (i = 0; i < size; i++)
+        section->data[i] = data[i];
+
+    gUnknown_02039284 = ProgramFlashSectorAndVerifyNBytes(gUnknown_08401E24[0], (u8 *)section, 0x1000);
+
+    if (gUnknown_02039284)
+        return 255;
+    else
+        return 1;
+}
+
+u8 unref_sub_8126068(u8 sector, u8 *data, u32 size)
+{
+    if (ProgramFlashSectorAndVerify(sector, data, size))
+        return 255;
+    else
+        return 1;
+}
+
+u8 unref_sub_8126080(u8 sector, u8 *data)
+{
+    ReadFlash(sector, 0, data, 0x1000);
+    return 1;
 }
