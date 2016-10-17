@@ -28,7 +28,9 @@ extern u16 gUnknown_03005EB4;
 
 u8 sub_81252D8(u16, struct SaveSectionLocation *);
 u8 sub_8125440(u8, u8 *);
-u8 sub_81255B8(u16 a1, struct SaveSectionLocation *a2);
+u8 sub_81255B8(u16, struct SaveSectionLocation *);
+u8 sub_81258BC(u16, struct SaveSectionLocation *);
+u8 sub_8125BF8(u8, u8 *);
 
 void calls_flash_erase_block(void)
 {
@@ -331,7 +333,7 @@ u8 sub_81257F0(u16 a1)
     }
 }
 
-u8 sub_812587C(u16 a1, int a2)
+u8 sub_812587C(u16 a1, struct SaveSectionLocation *a2)
 {
     u8 retVal;
     gUnknown_03005EB0 = &unk_2000000;
@@ -346,4 +348,30 @@ u8 sub_812587C(u16 a1, int a2)
     }
 
     return retVal;
+}
+
+u8 sub_81258BC(u16 a1, struct SaveSectionLocation *a2)
+{
+    u16 i;
+    u16 checksum;
+    u16 v3 = 14 * (gUnknown_03005EAC % 2);
+    u16 id;
+
+    for (i = 0; i < 14; i++)
+    {
+        sub_8125BF8(i + v3, gUnknown_03005EB0->data);
+        id = gUnknown_03005EB0->id;
+        if (id == 0)
+            gUnknown_03005E9C = i;
+        checksum = sub_8125C10(gUnknown_03005EB0->data, a2[id].size);
+        if (gUnknown_03005EB0->unknown == 0x8012025
+         && gUnknown_03005EB0->checksum == checksum)
+        {
+            u16 j;
+            for (j = 0; j < a2[id].size; j++)
+                ((u8 *)a2[id].data)[j] = gUnknown_03005EB0->data[j];
+        }
+    }
+
+    return 1;
 }
