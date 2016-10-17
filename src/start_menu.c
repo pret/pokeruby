@@ -32,7 +32,7 @@ extern void sub_8093110(void (*)(void));
 extern void sub_80EBA5C(void);
 extern void sub_80A53F8(void);
 extern void sub_8089A70(void);
-extern void sub_808C27C(void);
+extern void CB2_InitPokedex(void);
 extern u16 pokedex_count(u8);
 extern void fade_screen(u8, u8);
 extern bool32 is_c1_link_related_active();
@@ -371,7 +371,7 @@ u8 StartMenu_PokedexCallback(void)
     {
         sav12_xor_increment(0x29);
         play_some_sound();
-        SetMainCallback2(sub_808C27C);
+        SetMainCallback2(CB2_InitPokedex);
         return 1;
     }
     return 0;
