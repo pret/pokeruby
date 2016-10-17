@@ -16,7 +16,12 @@ struct SaveSection
     u32 counter;
 };
 
+extern u32 sub_8053108(u8);
+extern void sav12_xor_increment(u8);
+
 extern struct SaveSection unk_2000000;
+
+extern u32 gUnknown_3004820;
 
 extern u16 gUnknown_03005E9C;
 extern u32 gUnknown_03005EA0;
@@ -25,6 +30,11 @@ extern u32 gUnknown_03005EA8;
 extern u32 gUnknown_03005EAC;
 extern struct SaveSection *gUnknown_03005EB0;
 extern u16 gUnknown_03005EB4;
+extern u16 gSaveFileStatus;
+extern u32 gUnknown_03005EBC;
+
+extern struct SaveSectionLocation gSaveSectionLocations[];
+extern struct SaveSectionLocation gHallOfFameSaveSectionLocations[];
 
 u8 sub_81252D8(u16, struct SaveSectionLocation *);
 u8 sub_8125440(u8, u8 *);
@@ -32,6 +42,7 @@ u8 sub_81255B8(u16, struct SaveSectionLocation *);
 u8 sub_81258BC(u16, struct SaveSectionLocation *);
 u8 sub_8125BF8(u8, struct SaveSection *);
 u8 sub_8125974(struct SaveSectionLocation *);
+u16 sub_8125C10(void *, u16);
 
 void calls_flash_erase_block(void)
 {
@@ -159,7 +170,7 @@ u8 sub_8125440(u8 sector, u8 *data)
     }
 }
 
-u32 sub_812546C(void)
+u32 sub_812546C(struct SaveSectionLocation *a1)
 {
     gUnknown_03005EB0 = &unk_2000000;
     gUnknown_03005EA4 = gUnknown_03005E9C;
@@ -172,7 +183,7 @@ u32 sub_812546C(void)
     return 0;
 }
 
-u32 sub_81254C8(void)
+u32 sub_81254C8(struct SaveSectionLocation *a1)
 {
     gUnknown_03005EB0 = &unk_2000000;
     gUnknown_03005EA4 = gUnknown_03005E9C;
@@ -290,7 +301,7 @@ u8 sub_81255B8(u16 a1, struct SaveSectionLocation *a2)
     }
 }
 
-u8 sub_8125758(u16 a1)
+u8 sub_8125758(u16 a1, struct SaveSectionLocation *a2)
 {
     u16 sector;
 
@@ -312,7 +323,7 @@ u8 sub_8125758(u16 a1)
     }
 }
 
-u8 sub_81257F0(u16 a1)
+u8 sub_81257F0(u16 a1, struct SaveSectionLocation *a2)
 {
     u16 sector;
 
@@ -501,4 +512,192 @@ u8 sub_8125974(struct SaveSectionLocation *a1)
     gUnknown_03005EAC = 0;
     gUnknown_03005E9C = 0;
     return 2;
+}
+
+u8 sub_8125B88(u8 a1, u8 *data, u16 size)
+{
+    u16 i;
+    struct SaveSection *section = &unk_2000000;
+    sub_8125BF8(a1, section);
+    if (section->unknown == 0x8012025)
+    {
+        u16 checksum = sub_8125C10(section->data, size);
+        if (section->id == checksum)
+        {
+            for (i = 0; i < size; i++)
+                data[i] = section->data[i];
+            return 1;
+        }
+        else
+        {
+            return 2;
+        }
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+u8 sub_8125BF8(u8 sector, struct SaveSection *section)
+{
+    ReadFlash(sector, 0, section, 0x1000);
+    return 1;
+}
+
+u16 sub_8125C10(void *data, u16 size)
+{
+    u16 i;
+    u32 checksum = 0;
+
+    for (i = 0; i < (size / 4); i++)
+        checksum += *((u32 *)data)++;
+
+    return ((checksum >> 16) + checksum);
+}
+
+u8 sub_8125C3C(u8 a1)
+{
+    u8 i;
+    switch (a1)
+    {
+    case 5:
+        for (i = 28; i < 32; i++)
+            EraseFlashSector(i);
+    case 3:
+        if (sub_8053108(10) < 999)
+            sav12_xor_increment(10);
+        for (i = 0; i < 2; i++)
+            sub_81253C8(28 + i, gHallOfFameSaveSectionLocations[i].data, gHallOfFameSaveSectionLocations[i].size);
+        save_serialize_game();
+        save_write_to_flash(0xFFFF, gSaveSectionLocations);
+        break;
+    case 0:
+    default:
+        save_serialize_game();
+        save_write_to_flash(0xFFFF, gSaveSectionLocations);
+        break;
+    case 1:
+        save_serialize_game();
+        for (i = 0; i < 5; i++)
+            save_write_to_flash(i, gSaveSectionLocations);
+        break;
+    case 2:
+        save_serialize_game();
+        save_write_to_flash(0, gSaveSectionLocations);
+        break;
+    case 4:
+        for (i = 28; i < 32; i++)
+            EraseFlashSector(i);
+        save_serialize_game();
+        save_write_to_flash(0xFFFF, gSaveSectionLocations);
+        break;
+    }
+    return 0;
+}
+
+u8 sub_8125D44(u8 a1)
+{
+    if (gUnknown_3004820 != 1)
+        return 0xFF;
+    sub_8125C3C(a1);
+    if (!gUnknown_03005EA8)
+        return 1;
+    fullscreen_save_activate(a1);
+    return 0xFF;
+}
+
+u8 sub_8125D80(void)
+{
+    if (gUnknown_3004820 != 1)
+        return 1;
+    save_serialize_game();
+    sub_812546C(gSaveSectionLocations);
+    return 0;
+}
+
+bool8 sub_8125DA8(void)
+{
+    u8 v0 = sub_812550C(14, gSaveSectionLocations);
+    if (gUnknown_03005EA8)
+        fullscreen_save_activate(0);
+    if (v0 == 0xFF)
+        return 1;
+    else
+        return 0;
+}
+
+u8 sub_8125DDC(void)
+{
+    sub_812556C(14, gSaveSectionLocations);
+    if (gUnknown_03005EA8)
+        fullscreen_save_activate(0);
+    return 0;
+}
+
+u8 sub_8125E04(void)
+{
+    sub_8125758(14, gSaveSectionLocations);
+    if (gUnknown_03005EA8)
+        fullscreen_save_activate(0);
+    return 0;
+}
+
+u8 sub_8125E2C(void)
+{
+    if (gUnknown_3004820 != 1)
+        return 1;
+
+    save_serialize_game();
+    sub_81254C8(gSaveSectionLocations);
+    sub_812556C(gUnknown_03005EB4 + 1, gSaveSectionLocations);
+    return 0;
+}
+
+u8 sub_8125E6C(void)
+{
+    u8 retVal = 0;
+    u16 val = ++gUnknown_03005EB4;
+    if (val <= 4)
+    {
+        sub_812556C(gUnknown_03005EB4 + 1, gSaveSectionLocations);
+        sub_81257F0(val, gSaveSectionLocations);
+    }
+    else
+    {
+        sub_81257F0(val, gSaveSectionLocations);
+        retVal = 1;
+    }
+    if (gUnknown_03005EA8)
+        fullscreen_save_activate(1);
+    return retVal;
+}
+
+u8 sub_8125EC8(u8 a1)
+{
+    u8 result;
+
+    if (gUnknown_3004820 != 1)
+    {
+        gSaveFileStatus = 4;
+        return 0xFF;
+    }
+
+    switch (a1)
+    {
+    case 0:
+    default:
+        result = sub_812587C(0xFFFF, gSaveSectionLocations);
+        save_deserialize_game();
+        gSaveFileStatus = result;
+        gUnknown_03005EBC = 0;
+        break;
+    case 3:
+        result = sub_8125B88(28, gHallOfFameSaveSectionLocations[0].data, gHallOfFameSaveSectionLocations[0].size);
+        if (result == 1)
+            result = sub_8125B88(29, gHallOfFameSaveSectionLocations[1].data, gHallOfFameSaveSectionLocations[1].size);
+        break;
+    }
+
+    return result;
 }
