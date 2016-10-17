@@ -30,7 +30,8 @@ u8 sub_81252D8(u16, struct SaveSectionLocation *);
 u8 sub_8125440(u8, u8 *);
 u8 sub_81255B8(u16, struct SaveSectionLocation *);
 u8 sub_81258BC(u16, struct SaveSectionLocation *);
-u8 sub_8125BF8(u8, u8 *);
+u8 sub_8125BF8(u8, struct SaveSection *);
+u8 sub_8125974(struct SaveSectionLocation *);
 
 void calls_flash_erase_block(void)
 {
@@ -359,7 +360,7 @@ u8 sub_81258BC(u16 a1, struct SaveSectionLocation *a2)
 
     for (i = 0; i < 14; i++)
     {
-        sub_8125BF8(i + v3, gUnknown_03005EB0->data);
+        sub_8125BF8(i + v3, gUnknown_03005EB0);
         id = gUnknown_03005EB0->id;
         if (id == 0)
             gUnknown_03005E9C = i;
@@ -374,4 +375,130 @@ u8 sub_81258BC(u16 a1, struct SaveSectionLocation *a2)
     }
 
     return 1;
+}
+
+u8 sub_8125974(struct SaveSectionLocation *a1)
+{
+    u16 i;
+    u16 checksum;
+    u32 v2 = 0;
+    u32 v3 = 0;
+    u32 v4;
+    bool8 v5;
+    u8 v14;
+    u8 v10;
+
+    v4 = 0;
+    v5 = FALSE;
+
+    for (i = 0; i < 14; i++)
+    {
+        sub_8125BF8(i, gUnknown_03005EB0);
+        if (gUnknown_03005EB0->unknown == 0x8012025)
+        {
+            v5 = TRUE;
+            checksum = sub_8125C10(gUnknown_03005EB0->data, a1[gUnknown_03005EB0->id].size);
+            if (gUnknown_03005EB0->checksum == checksum)
+            {
+                v2 = gUnknown_03005EB0->counter;
+                v4 |= 1 << gUnknown_03005EB0->id;
+            }
+        }
+    }
+
+    if (v5)
+    {
+        if (v4 == 0x3FFF)
+            v14 = 1;
+        else
+            v14 = 255;
+    }
+    else
+    {
+        v14 = 0;
+    }
+
+    v4 = 0;
+    v5 = FALSE;
+
+    for (i = 0; i < 14; i++)
+    {
+        sub_8125BF8(i + 14, gUnknown_03005EB0);
+        if (gUnknown_03005EB0->unknown == 0x8012025)
+        {
+            v5 = TRUE;
+            checksum = sub_8125C10(gUnknown_03005EB0->data, a1[gUnknown_03005EB0->id].size);
+            if (gUnknown_03005EB0->checksum == checksum)
+            {
+                v3 = gUnknown_03005EB0->counter;
+                v4 |= 1 << gUnknown_03005EB0->id;
+            }
+        }
+    }
+
+    if (v5)
+    {
+        if (v4 == 0x3FFF)
+            v10 = 1;
+        else
+            v10 = 255;
+    }
+    else
+    {
+        v10 = 0;
+    }
+
+    if (v14 == 1 && v10 == 1)
+    {
+        if ((v2 == -1 && v3 == 0) || (v2 == 0 && v3 == -1))
+        {
+            if ((unsigned)(v2 + 1) < (unsigned)(v3 + 1))
+            {
+                gUnknown_03005EAC = v3;
+            }
+            else
+            {
+                gUnknown_03005EAC = v2;
+            }
+        }
+        else
+        {
+            if (v2 < v3)
+            {
+                gUnknown_03005EAC = v3;
+            }
+            else
+            {
+                gUnknown_03005EAC = v2;
+            }
+        }
+        return 1;
+    }
+
+    if (v14 == 1)
+    {
+        gUnknown_03005EAC = v2;
+        if (v10 == 255)
+            return 255;
+        return 1;
+    }
+
+    if (v10 == 1)
+    {
+        gUnknown_03005EAC = v3;
+        if (v14 == 255)
+            return 255;
+        return 1;
+    }
+
+    if (v14 == 0 && v10 == 0)
+    {
+        gUnknown_03005EAC = 0;
+        gUnknown_03005E9C = 0;
+        return 0;
+    }
+
+    gUnknown_03005EAC = 0;
+    gUnknown_03005E9C = 0;
+    return 2;
 }
