@@ -13526,7 +13526,7 @@ sub_8093EF8: @ 8093EF8
 	ldrb r0, [r0]
 	ldr r2, _08093F10
 	movs r1, 0x50
-	bl sub_8085A5C
+	bl LoadTrainerGfx_TrainerCard
 	pop {r0}
 	bx r0
 	.align 2, 0

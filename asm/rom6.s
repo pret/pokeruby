@@ -34917,7 +34917,7 @@ sub_811C7B0: @ 811C7B0
 	ldr r5, _0811C8F4
 	str r5, [sp]
 	movs r3, 0
-	bl sub_80859BC
+	bl CreateTrainerSprite_BirchSpeech
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x22]
@@ -34928,7 +34928,7 @@ sub_811C7B0: @ 811C7B0
 	str r5, [sp]
 	movs r2, 0x6A
 	movs r3, 0
-	bl sub_80859BC
+	bl CreateTrainerSprite_BirchSpeech
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x24]

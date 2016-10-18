@@ -1070,7 +1070,7 @@ _080B5882:
 	lsls r0, 2
 	ldr r1, _080B589C
 	adds r0, r1
-	bl sub_8085C44
+	bl FreeResourcesAndDestroySprite
 _080B5894:
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
@@ -1148,7 +1148,7 @@ sub_80B58C4: @ 80B58C4
 	asrs r2, 16
 	adds r0, r7, 0
 	movs r3, 0
-	bl sub_8085AD4
+	bl CreateMonSprite_PicBox
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0xC]
@@ -2718,7 +2718,7 @@ sub_80B64D4: @ 80B64D4
 	ldrb r3, [r4, 0xE]
 	adds r1, r3, 0
 	adds r2, r3, 0
-	bl sub_8085C7C
+	bl MultiplyInvertedPaletteRGBComponents
 	ldrh r1, [r4, 0x12]
 	movs r2, 0x12
 	ldrsh r0, [r4, r2]
@@ -3455,7 +3455,7 @@ _080B6A3E:
 	adds r1, r4, 0
 	adds r2, r5, 0
 	adds r3, r5, 0
-	bl sub_8085C7C
+	bl MultiplyInvertedPaletteRGBComponents
 _080B6A74:
 	pop {r4,r5}
 	pop {r0}
@@ -163084,7 +163084,7 @@ _08103F4E:
 	lsrs r3, 24
 	adds r1, r3, 0
 	adds r2, r3, 0
-	bl sub_8085D08
+	bl MultiplyPaletteRGBComponents
 _08103F66:
 	pop {r4-r7}
 	pop {r0}
@@ -166295,7 +166295,7 @@ sub_8105784: @ 8105784
 	ldrb r3, [r1]
 	adds r1, r3, 0
 	adds r2, r3, 0
-	bl sub_8085C7C
+	bl MultiplyInvertedPaletteRGBComponents
 	ldrh r0, [r4, 0x38]
 	adds r0, 0x1
 	movs r1, 0x1
@@ -166343,7 +166343,7 @@ sub_8105804: @ 8105804
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_8085C7C
+	bl MultiplyInvertedPaletteRGBComponents
 	movs r4, 0
 	ldr r5, _0810584C
 _08105824:

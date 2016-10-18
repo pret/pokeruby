@@ -11143,7 +11143,7 @@ gBirchPalette:: @ 839E414
 
 	.align 2
 gSpriteImage_839E434:: @ 839E434
-	.incbin "graphics/unknown_sprites/839E434.4bpp"
+	.incbin "graphics/misc/pokeball_glow.4bpp"
 
 	.align 2
 gFieldEffectObjectPalette4: @ 839E454
@@ -11159,11 +11159,11 @@ gSpriteImage_839E534:: @ 839E534
 
 	.align 2
 gSpriteImage_839E5F4:: @ 839E5F4
-	.incbin "graphics/unknown_sprites/839E5F4.4bpp"
+	.incbin "graphics/misc/big_hof_monitor.4bpp"
 
 	.align 2
 gSpriteImage_839E7F4:: @ 839E7F4
-	.incbin "graphics/unknown_sprites/839E7F4.4bpp"
+	.incbin "graphics/misc/small_hof_monitor.4bpp"
 
 	.align 2
 gFieldEffectObjectPalette5: @ 839E8F4
@@ -11322,44 +11322,44 @@ gSpriteAnimTable_839F204:: @ 839F204
 
 	.align 2
 gSpriteTemplate_839F208:: @ 839F208
-	spr_template 0xFFFF, 4103, gOamData_839F0FC, gSpriteAnimTable_839F1FC, gSpriteImageTable_839F158, gDummySpriteAffineAnimTable, sub_8086408
+	spr_template 0xFFFF, 4103, gOamData_839F0FC, gSpriteAnimTable_839F1FC, gSpriteImageTable_839F158, gDummySpriteAffineAnimTable, SpriteCB_PokeballGlow
 
 	.align 2
 gSpriteTemplate_839F220:: @ 839F220
-	spr_template 0xFFFF, 4100, gOamData_839F104, gSpriteAnimTable_839F1FC, gSpriteImageTable_839F160, gDummySpriteAffineAnimTable, sub_808648C
+	spr_template 0xFFFF, 4100, gOamData_839F104, gSpriteAnimTable_839F1FC, gSpriteImageTable_839F160, gDummySpriteAffineAnimTable, SpriteCB_PokecenterMonitor
 
 	.align 2
 gSpriteTemplate_839F238:: @ 839F238
-	spr_template 0xFFFF, 4112, gOamData_839F104, gSpriteAnimTable_839F204, gSpriteImageTable_839F170, gDummySpriteAffineAnimTable, sub_8086550
+	spr_template 0xFFFF, 4112, gOamData_839F104, gSpriteAnimTable_839F204, gSpriteImageTable_839F170, gDummySpriteAffineAnimTable, SpriteCB_HallOfFameMonitor
 
 	.align 2
 gSpriteTemplate_839F250:: @ 839F250
-	spr_template 0xFFFF, 4112, gOamData_839F150, gSpriteAnimTable_839F204, gSpriteImageTable_839F178, gDummySpriteAffineAnimTable, sub_8086550
+	spr_template 0xFFFF, 4112, gOamData_839F150, gSpriteAnimTable_839F204, gSpriteImageTable_839F178, gDummySpriteAffineAnimTable, SpriteCB_HallOfFameMonitor
 
 	.align 2
 gUnknown_0839F268:: @ 839F268
-	.4byte sub_8085DF4
-	.4byte sub_8085E30
-	.4byte sub_8085E6C
-	.4byte sub_8085E94
+	.4byte PokecenterHealEffect_0
+	.4byte PokecenterHealEffect_1
+	.4byte PokecenterHealEffect_2
+	.4byte PokecenterHealEffect_3
 
 	.align 2
 gUnknown_0839F278:: @ 839F278
-	.4byte sub_8085F40
-	.4byte sub_8085FB4
-	.4byte sub_8085FE4
-	.4byte sub_808600C
+	.4byte HallOfFameRecord_0
+	.4byte HallOfFameRecord_1
+	.4byte HallOfFameRecord_2
+	.4byte HallOfFameRecord_3
 
 	.align 2
 gUnknown_0839F288:: @ 839F288
-	.4byte sub_80860BC
-	.4byte sub_8086154
-	.4byte sub_8086188
-	.4byte sub_80862C8
-	.4byte sub_80863BC
-	.4byte sub_80863D8
-	.4byte sub_80863E0
-	.4byte nullsub_57
+	.4byte PokeballGlowEffect_0
+	.4byte PokeballGlowEffect_1
+	.4byte PokeballGlowEffect_2
+	.4byte PokeballGlowEffect_3
+	.4byte PokeballGlowEffect_4
+	.4byte PokeballGlowEffect_5
+	.4byte PokeballGlowEffect_6
+	.4byte PokeballGlowEffect_7
 
 gUnknown_0839F2A8:: @ 839F2A8
 	.incbin "baserom.gba", 0x0039f2a8, 0x18

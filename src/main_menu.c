@@ -29,8 +29,8 @@ extern void CB2_NewGame(void);
 extern void LZ77UnCompVram(const void *src, void *dest);
 extern void DecompressPicFromTable_2(const struct SpriteSheet *, u8, u8, void *, void *, u32);
 extern void LoadCompressedObjectPalette(const struct SpritePalette *);
-extern u8 AddNewGameBirchObject(u8, u8, u8);
-extern u8 sub_80859BC(u8, u16, u16, u8, void *);
+extern u8 CreateBirchSprite(u8, u8, u8);
+extern u8 CreateTrainerSprite_BirchSpeech(u8, u16, u16, u8, void *);
 
 extern struct PaletteFadeControl gPaletteFade;
 extern u8 gSaveFileDeletedMessage[];
@@ -1429,7 +1429,7 @@ void AddBirchSpeechObjects(u8 taskId)
 {
     u8 spriteId;
 
-    spriteId = AddNewGameBirchObject(136, 60, 1);
+    spriteId = CreateBirchSprite(136, 60, 1);
     gSprites[spriteId].callback = nullsub_34;
     gSprites[spriteId].oam.priority = 0;
     gSprites[spriteId].invisible = 1;
@@ -1442,14 +1442,14 @@ void AddBirchSpeechObjects(u8 taskId)
     gTasks[taskId].data[TD_AZURILL_SPRITE_ID] = spriteId;
 
     //Create Brendan sprite
-    spriteId = sub_80859BC(0, 120, 60, 0, unk_2000000);
+    spriteId = CreateTrainerSprite_BirchSpeech(0, 120, 60, 0, unk_2000000);
     gSprites[spriteId].callback = nullsub_34;
     gSprites[spriteId].invisible = 1;
     gSprites[spriteId].oam.priority = 0;
     gTasks[taskId].data[TD_BRENDAN_SPRITE_ID] = spriteId;
 
     //Create May sprite
-    spriteId = sub_80859BC(1, 120, 60, 0, unk_2000000 + 0x800);
+    spriteId = CreateTrainerSprite_BirchSpeech(1, 120, 60, 0, unk_2000000 + 0x800);
     gSprites[spriteId].callback = nullsub_34;
     gSprites[spriteId].invisible = 1;
     gSprites[spriteId].oam.priority = 0;
