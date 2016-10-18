@@ -8,3 +8,5 @@ gSecretBaseRecord = 0x2017000;
 dword_2017100 = 0x2017100;
 
 gHallOfFame = 0x201E000;
+
+gVars = 0x201EA74;

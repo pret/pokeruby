@@ -8,7 +8,7 @@
 	.include "data/script_cmd_table.s"
 
 	.align 2
-gUnknown_0814B14C::
+gSpecialVars::
 	.4byte 0x202e8c4
 	.4byte 0x202e8c6
 	.4byte 0x202e8c8
