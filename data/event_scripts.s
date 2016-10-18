@@ -1824,7 +1824,7 @@ UseSurfScript:: @ 81A0117
 	compare RESULT, 0
 	jumpeq UseSurfScript_No
 	msgbox UsedSurfText, 4
-	doanimation 0x9
+	doanimation 9
 UseSurfScript_No: @ 81A014C
 	releaseall
 UseSurfScript_NoMon: @ 81A014D

@@ -144,7 +144,7 @@ PushableBoulderScript:: @ 81B0FCB
 
 UseStrengthScript:: @ 81B100E
 	lockall
-	doanimation 0x28
+	doanimation 40
 	waitstate
 	jump UsedStrength
 	end
@@ -199,7 +199,7 @@ UseWaterfallScript:: @ 81B115A
 	compare RESULT, 0
 	jumpeq Waterfall_Done
 	msgbox UsedWaterfallText, 4
-	doanimation 0x2B
+	doanimation 43
 	jump Waterfall_Done
 
 CannotUseWaterfallScript:: @ 81B1194
