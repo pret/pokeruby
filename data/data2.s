@@ -11143,7 +11143,7 @@ gBirchPalette:: @ 839E414
 
 	.align 2
 gSpriteImage_839E434:: @ 839E434
-	.incbin "graphics/unknown_sprites/839E434.4bpp"
+	.incbin "graphics/misc/pokeball_glow.4bpp"
 
 	.align 2
 gFieldEffectObjectPalette4: @ 839E454
@@ -11159,11 +11159,11 @@ gSpriteImage_839E534:: @ 839E534
 
 	.align 2
 gSpriteImage_839E5F4:: @ 839E5F4
-	.incbin "graphics/unknown_sprites/839E5F4.4bpp"
+	.incbin "graphics/misc/big_hof_monitor.4bpp"
 
 	.align 2
 gSpriteImage_839E7F4:: @ 839E7F4
-	.incbin "graphics/unknown_sprites/839E7F4.4bpp"
+	.incbin "graphics/misc/small_hof_monitor.4bpp"
 
 	.align 2
 gFieldEffectObjectPalette5: @ 839E8F4
@@ -11322,44 +11322,44 @@ gSpriteAnimTable_839F204:: @ 839F204
 
 	.align 2
 gSpriteTemplate_839F208:: @ 839F208
-	spr_template 0xFFFF, 4103, gOamData_839F0FC, gSpriteAnimTable_839F1FC, gSpriteImageTable_839F158, gDummySpriteAffineAnimTable, sub_8086408
+	spr_template 0xFFFF, 4103, gOamData_839F0FC, gSpriteAnimTable_839F1FC, gSpriteImageTable_839F158, gDummySpriteAffineAnimTable, SpriteCB_PokeballGlow
 
 	.align 2
 gSpriteTemplate_839F220:: @ 839F220
-	spr_template 0xFFFF, 4100, gOamData_839F104, gSpriteAnimTable_839F1FC, gSpriteImageTable_839F160, gDummySpriteAffineAnimTable, sub_808648C
+	spr_template 0xFFFF, 4100, gOamData_839F104, gSpriteAnimTable_839F1FC, gSpriteImageTable_839F160, gDummySpriteAffineAnimTable, SpriteCB_PokecenterMonitor
 
 	.align 2
 gSpriteTemplate_839F238:: @ 839F238
-	spr_template 0xFFFF, 4112, gOamData_839F104, gSpriteAnimTable_839F204, gSpriteImageTable_839F170, gDummySpriteAffineAnimTable, sub_8086550
+	spr_template 0xFFFF, 4112, gOamData_839F104, gSpriteAnimTable_839F204, gSpriteImageTable_839F170, gDummySpriteAffineAnimTable, SpriteCB_HallOfFameMonitor
 
 	.align 2
 gSpriteTemplate_839F250:: @ 839F250
-	spr_template 0xFFFF, 4112, gOamData_839F150, gSpriteAnimTable_839F204, gSpriteImageTable_839F178, gDummySpriteAffineAnimTable, sub_8086550
+	spr_template 0xFFFF, 4112, gOamData_839F150, gSpriteAnimTable_839F204, gSpriteImageTable_839F178, gDummySpriteAffineAnimTable, SpriteCB_HallOfFameMonitor
 
 	.align 2
 gUnknown_0839F268:: @ 839F268
-	.4byte sub_8085DF4
-	.4byte sub_8085E30
-	.4byte sub_8085E6C
-	.4byte sub_8085E94
+	.4byte PokecenterHealEffect_0
+	.4byte PokecenterHealEffect_1
+	.4byte PokecenterHealEffect_2
+	.4byte PokecenterHealEffect_3
 
 	.align 2
 gUnknown_0839F278:: @ 839F278
-	.4byte sub_8085F40
-	.4byte sub_8085FB4
-	.4byte sub_8085FE4
-	.4byte sub_808600C
+	.4byte HallOfFameRecordEffect_0
+	.4byte HallOfFameRecordEffect_1
+	.4byte HallOfFameRecordEffect_2
+	.4byte HallOfFameRecordEffect_3
 
 	.align 2
 gUnknown_0839F288:: @ 839F288
-	.4byte sub_80860BC
-	.4byte sub_8086154
-	.4byte sub_8086188
-	.4byte sub_80862C8
-	.4byte sub_80863BC
-	.4byte sub_80863D8
-	.4byte sub_80863E0
-	.4byte nullsub_57
+	.4byte PokeballGlowEffect_0
+	.4byte PokeballGlowEffect_1
+	.4byte PokeballGlowEffect_2
+	.4byte PokeballGlowEffect_3
+	.4byte PokeballGlowEffect_4
+	.4byte PokeballGlowEffect_5
+	.4byte PokeballGlowEffect_6
+	.4byte PokeballGlowEffect_7
 
 gUnknown_0839F2A8:: @ 839F2A8
 	.incbin "baserom.gba", 0x0039f2a8, 0x18
@@ -11529,31 +11529,31 @@ gUnknown_0839F470:: @ 839F470
 	.incbin "baserom.gba", 0x0039f470, 0x24
 
 	.align 2
-gUnknown_0839F494:: @ 839F494
-	.4byte OtherText_Summary, sub_8089FCC
-	.4byte OtherText_Switch2, sub_808A02C
-	.4byte OtherText_Item, sub_808A140
-	.4byte gOtherText_CancelNoTerminator, sub_808A918
-	.4byte OtherText_Give2, sub_808A630
-	.4byte OtherText_Take2, sub_808A688
-	.4byte OtherText_Take, sub_808A6B8
-	.4byte OtherText_Mail, sub_808A6E8
-	.4byte OtherText_Read2, sub_808A810
-	.4byte gOtherText_CancelNoTerminator, sub_808A938
-	.4byte gMoveNames + 13 * MOVE_CUT, sub_808A984
-	.4byte gMoveNames + 13 * MOVE_FLASH, sub_808A984
-	.4byte gMoveNames + 13 * MOVE_ROCK_SMASH, sub_808A984
-	.4byte gMoveNames + 13 * MOVE_STRENGTH, sub_808A984
-	.4byte gMoveNames + 13 * MOVE_SURF, sub_808A984
-	.4byte gMoveNames + 13 * MOVE_FLY, sub_808A984
-	.4byte gMoveNames + 13 * MOVE_DIVE, sub_808A984
-	.4byte gMoveNames + 13 * MOVE_WATERFALL, sub_808A984
-	.4byte gMoveNames + 13 * MOVE_TELEPORT, sub_808A984
-	.4byte gMoveNames + 13 * MOVE_DIG, sub_808A984
-	.4byte gMoveNames + 13 * MOVE_SECRET_POWER, sub_808A984
-	.4byte gMoveNames + 13 * MOVE_MILK_DRINK, sub_808A984
-	.4byte gMoveNames + 13 * MOVE_SOFT_BOILED, sub_808A984
-	.4byte gMoveNames + 13 * MOVE_SWEET_SCENT, sub_808A984
+gPokemonMenuActions:: @ 839F494
+	.4byte OtherText_Summary, PokemonMenu_Summary
+	.4byte OtherText_Switch2, PokemonMenu_Switch
+	.4byte OtherText_Item, PokemonMenu_Item
+	.4byte gOtherText_CancelNoTerminator, PokemonMenu_Cancel
+	.4byte OtherText_Give2, PokemonMenu_GiveItem
+	.4byte OtherText_Take2, PokemonMenu_TakeItem
+	.4byte OtherText_Take, PokemonMenu_TakeMail
+	.4byte OtherText_Mail, PokemonMenu_Mail
+	.4byte OtherText_Read2, PokemonMenu_ReadMail
+	.4byte gOtherText_CancelNoTerminator, PokemonMenu_CancelSubmenu
+	.4byte gMoveNames + 13 * MOVE_CUT, PokemonMenu_FieldMove
+	.4byte gMoveNames + 13 * MOVE_FLASH, PokemonMenu_FieldMove
+	.4byte gMoveNames + 13 * MOVE_ROCK_SMASH, PokemonMenu_FieldMove
+	.4byte gMoveNames + 13 * MOVE_STRENGTH, PokemonMenu_FieldMove
+	.4byte gMoveNames + 13 * MOVE_SURF, PokemonMenu_FieldMove
+	.4byte gMoveNames + 13 * MOVE_FLY, PokemonMenu_FieldMove
+	.4byte gMoveNames + 13 * MOVE_DIVE, PokemonMenu_FieldMove
+	.4byte gMoveNames + 13 * MOVE_WATERFALL, PokemonMenu_FieldMove
+	.4byte gMoveNames + 13 * MOVE_TELEPORT, PokemonMenu_FieldMove
+	.4byte gMoveNames + 13 * MOVE_DIG, PokemonMenu_FieldMove
+	.4byte gMoveNames + 13 * MOVE_SECRET_POWER, PokemonMenu_FieldMove
+	.4byte gMoveNames + 13 * MOVE_MILK_DRINK, PokemonMenu_FieldMove
+	.4byte gMoveNames + 13 * MOVE_SOFT_BOILED, PokemonMenu_FieldMove
+	.4byte gMoveNames + 13 * MOVE_SWEET_SCENT, PokemonMenu_FieldMove
 
 gUnknown_0839F554:: @ 839F554
 	.incbin "baserom.gba", 0x39f554, 0x1e
@@ -25818,11 +25818,27 @@ gUnknown_08401D9C:: @ 8401D9C
 	.4byte sub_8123EB8
 	.4byte sub_8123F44
 
-gUnknown_08401DA4:: @ 8401DA4
-	.incbin "baserom.gba", 0x00401da4, 0x70
+	.align 2
+gSaveSectionLocations:: @ 8401DA4
+	.4byte gSaveBlock2,                 0x890
+	.4byte gSaveBlock1 + 0xF80 * 0,     0xF80
+	.4byte gSaveBlock1 + 0xF80 * 1,     0xF80
+	.4byte gSaveBlock1 + 0xF80 * 2,     0xF80
+	.4byte gSaveBlock1 + 0xF80 * 3,     0xC40
+	.4byte gPokemonStorage + 0xF80 * 0, 0xF80
+	.4byte gPokemonStorage + 0xF80 * 1, 0xF80
+	.4byte gPokemonStorage + 0xF80 * 2, 0xF80
+	.4byte gPokemonStorage + 0xF80 * 3, 0xF80
+	.4byte gPokemonStorage + 0xF80 * 4, 0xF80
+	.4byte gPokemonStorage + 0xF80 * 5, 0xF80
+	.4byte gPokemonStorage + 0xF80 * 6, 0xF80
+	.4byte gPokemonStorage + 0xF80 * 7, 0xF80
+	.4byte gPokemonStorage + 0xF80 * 8, 0x7D0
 
-gUnknown_08401E14:: @ 8401E14
-	.incbin "baserom.gba", 0x00401e14, 0x10
+	.align 2
+gHallOfFameSaveSectionLocations:: @ 8401E14
+	.4byte gHallOfFame + 0xF80 * 0, 0xF80
+	.4byte gHallOfFame + 0xF80 * 1, 0xF80
 
 gUnknown_08401E24:: @ 8401E24
 	.byte 0x1E, 0x1F @ flash sectors

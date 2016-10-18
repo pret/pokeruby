@@ -36,21 +36,21 @@ struct PlttData
 
 struct OamData
 {
-    u32 y:8;
-    u32 affineMode:2;
-    u32 objMode:2;
-    u32 mosaic:1;
-    u32 bpp:1;
-    u32 shape:2;
+    /*0x00*/ u32 y:8;
+    /*0x01*/ u32 affineMode:2;
+             u32 objMode:2;
+             u32 mosaic:1;
+             u32 bpp:1;
+             u32 shape:2;
 
-    u32 x:9;
-    u32 matrixNum:5; // bits 3/4 are h-flip/v-flip if not in affine mode
-    u32 size:2;
+    /*0x02*/ u32 x:9;
+             u32 matrixNum:5; // bits 3/4 are h-flip/v-flip if not in affine mode
+             u32 size:2;
 
-    u16 tileNum:10;
-    u16 priority:2;
-    u16 paletteNum:4;
-    u16 affineParam;
+    /*0x04*/ u16 tileNum:10;
+             u16 priority:2;
+             u16 paletteNum:4;
+    /*0x06*/ u16 affineParam;
 };
 
 #define ST_OAM_OBJ_NORMAL 0

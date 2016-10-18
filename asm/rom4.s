@@ -12924,7 +12924,7 @@ _0805A780:
 	ldrh r0, [r5, 0x26]
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_808541C
+	bl FishingWildEncounter
 	movs r0, 0x1
 	bl sub_80BE97C
 	ldr r0, _0805A7B8

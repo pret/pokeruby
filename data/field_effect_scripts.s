@@ -173,7 +173,7 @@ gFieldEffectScript_DeepSandFootprints: @ 81D9D00
 
 gFieldEffectScript_Unknown25: @ 81D9D0A
 	loadfadedpal gFieldEffectObjectPaletteInfo4
-	loadfadedpal_callnative gFieldEffectObjectPaletteInfo0, sub_8085D80
+	loadfadedpal_callnative gFieldEffectObjectPaletteInfo0, FldEff_PokecenterHeal
 	end
 
 gFieldEffectScript_Unknown26: @ 81D9D19
@@ -323,7 +323,7 @@ gFieldEffectScript_Unknown61: @ 81D9E2C
 
 gFieldEffectScript_Unknown62: @ 81D9E32
 	loadfadedpal gFieldEffectObjectPaletteInfo4
-	loadfadedpal_callnative gFieldEffectObjectPaletteInfo5, sub_8085ED4
+	loadfadedpal_callnative gFieldEffectObjectPaletteInfo5, FldEff_HallOfFameRecord
 	end
 
 gFieldEffectScript_Unknown63: @ 81D9E41

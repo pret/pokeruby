@@ -3,7 +3,7 @@ PetalburgCity:: @ 8305448
 	.4byte PetalburgCity_MapEvents
 	.4byte PetalburgCity_MapScripts
 	.4byte PetalburgCity_MapConnections
-	.2byte 362
+	.2byte BGM_MACHI_S2
 	.2byte 1
 	.byte 7
 	.byte 0

@@ -3,7 +3,7 @@ AbandonedShip_HiddenFloorCorridors:: @ 830748C
 	.4byte AbandonedShip_HiddenFloorCorridors_MapEvents
 	.4byte AbandonedShip_HiddenFloorCorridors_MapScripts
 	.4byte 0x0
-	.2byte 381
+	.2byte BGM_DAN02
 	.2byte 290
 	.byte 61
 	.byte 0

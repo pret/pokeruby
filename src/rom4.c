@@ -73,7 +73,7 @@ extern u8 FlagGet(u16);
 extern u8 sav1_get_weather_probably(void);
 extern void PlayerGetDestCoords(u16 *, u16 *);
 extern u8 sub_810D32C(void);
-extern u16 wild_pokemon_rand_for_map(u8 *);
+extern u16 GetLocalWildMon(u8 *);
 extern void sub_80C76A0(void);
 extern void sub_8080B60(void);
 extern void sub_810CC80(void);
@@ -114,8 +114,8 @@ void sav1_reset_battle_music_maybe(void);
 void sub_8053F0C(void);
 u8 is_light_level_8_or_9(u8);
 void sub_8054164(void);
-u16 sub_8085514();
-u16 wild_pokemon_rand_for_map(u8 *);
+u16 GetMirageIslandMon();
+u16 GetLocalWildMon(u8 *);
 void sub_8055354(void);
 void c2_overworld(void);
 void CB2_LoadMap2(void);
@@ -959,11 +959,11 @@ void sub_8054164(void)
     if ((gSaveBlock1.location.mapGroup == 0 && gSaveBlock1.location.mapNum == 45) && !sub_810D32C())
     {
         gUnknown_02029816 = 1;
-        gUnknown_02029814 = sub_8085514();
+        gUnknown_02029814 = GetMirageIslandMon();
     }
     else
     {
-        gUnknown_02029814 = wild_pokemon_rand_for_map(&gUnknown_02029816);
+        gUnknown_02029814 = GetLocalWildMon(&gUnknown_02029816);
     }
 }
 

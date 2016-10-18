@@ -3,7 +3,7 @@ Route104_Prototype:: @ 8307CF8
 	.4byte Route104_Prototype_MapEvents
 	.4byte Route104_Prototype_MapScripts
 	.4byte 0x0
-	.2byte 401
+	.2byte BGM_NEXTROAD
 	.2byte 288
 	.byte 19
 	.byte 0

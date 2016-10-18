@@ -3,7 +3,7 @@ BattleTower_Outside:: @ 8307C18
 	.4byte BattleTower_Outside_MapEvents
 	.4byte BattleTower_Outside_MapScripts
 	.4byte 0x0
-	.2byte 384
+	.2byte BGM_B_TOWER
 	.2byte 266
 	.byte 58
 	.byte 0

@@ -590,7 +590,7 @@ gUnknown_0202FF74: @ 202FF74
 gUnknown_0202FF78: @ 202FF78
 	.space 0x4
 
-gUnknown_0202FF7C: @ 202FF7C
+gWildEncountersDisabled: @ 202FF7C
 	.space 0x4
 
 gUnknown_0202FF80: @ 202FF80
