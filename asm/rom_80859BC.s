@@ -8667,7 +8667,7 @@ sub_8089C7C: @ 8089C7C
 	bx r0
 	.align 2, 0
 _08089CC8: .4byte gUnknown_0202FFA9
-_08089CCC: .4byte gUnknown_0839F494
+_08089CCC: .4byte gPokemonMenuActions
 _08089CD0: .4byte gUnknown_0202FFAA
 	thumb_func_end sub_8089C7C
 
@@ -8826,7 +8826,7 @@ _08089E1A:
 	bl sub_808B5B4
 	b _08089E44
 	.align 2, 0
-_08089E24: .4byte gUnknown_0839F494
+_08089E24: .4byte gPokemonMenuActions
 _08089E28: .4byte gUnknown_0202FFAA
 _08089E2C: .4byte gUnknown_0202FFA8
 _08089E30:
@@ -8835,7 +8835,7 @@ _08089E30:
 	cmp r0, 0
 	beq _08089E44
 	adds r0, r5, 0
-	bl sub_808A918
+	bl PokemonMenu_Cancel
 	adds r0, r5, 0
 	bl sub_808B5B4
 _08089E44:
@@ -9027,8 +9027,8 @@ _08089FC4: .4byte gPlayerPartyCount
 _08089FC8: .4byte sub_8089F14
 	thumb_func_end sub_8089F44
 
-	thumb_func_start sub_8089FCC
-sub_8089FCC: @ 8089FCC
+	thumb_func_start PokemonMenu_Summary
+PokemonMenu_Summary: @ 8089FCC
 	push {r4,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -9055,7 +9055,7 @@ sub_8089FCC: @ 8089FCC
 	.align 2, 0
 _08089FFC: .4byte gTasks
 _0808A000: .4byte sub_8089F44
-	thumb_func_end sub_8089FCC
+	thumb_func_end PokemonMenu_Summary
 
 	thumb_func_start sub_808A004
 sub_808A004: @ 808A004
@@ -9077,8 +9077,8 @@ _0808A024: .4byte sub_806CA60
 _0808A028: .4byte sub_8089CD4
 	thumb_func_end sub_808A004
 
-	thumb_func_start sub_808A02C
-sub_808A02C: @ 808A02C
+	thumb_func_start PokemonMenu_Switch
+PokemonMenu_Switch: @ 808A02C
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -9100,7 +9100,7 @@ sub_808A02C: @ 808A02C
 _0808A054: .4byte 0x02001000
 _0808A058: .4byte sub_806CD5C
 _0808A05C: .4byte 0x0001a272
-	thumb_func_end sub_808A02C
+	thumb_func_end PokemonMenu_Switch
 
 	thumb_func_start sub_808A060
 sub_808A060: @ 808A060
@@ -9158,7 +9158,7 @@ _0808A0A4:
 _0808A0D0: .4byte gMain
 _0808A0D4: .4byte gUnknown_0202FFA8
 _0808A0D8: .4byte gUnknown_0839F578
-_0808A0DC: .4byte gUnknown_0839F494
+_0808A0DC: .4byte gPokemonMenuActions
 _0808A0E0:
 	movs r0, 0x2
 	ands r0, r1
@@ -9168,7 +9168,7 @@ _0808A0E0:
 	movs r0, 0
 	bl sub_806E7D0
 	adds r0, r5, 0
-	bl sub_808A938
+	bl PokemonMenu_CancelSubmenu
 _0808A0F6:
 	pop {r4,r5}
 	pop {r0}
@@ -9203,13 +9203,13 @@ sub_808A100: @ 808A100
 	bx r0
 	.align 2, 0
 _0808A130: .4byte gUnknown_0839F578
-_0808A134: .4byte gUnknown_0839F494
+_0808A134: .4byte gPokemonMenuActions
 _0808A138: .4byte gTasks
 _0808A13C: .4byte sub_808A060
 	thumb_func_end sub_808A100
 
-	thumb_func_start sub_808A140
-sub_808A140: @ 808A140
+	thumb_func_start PokemonMenu_Item
+PokemonMenu_Item: @ 808A140
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -9237,7 +9237,7 @@ sub_808A140: @ 808A140
 _0808A174: .4byte gUnknown_0202FFA8
 _0808A178: .4byte gTasks
 _0808A17C: .4byte sub_808A100
-	thumb_func_end sub_808A140
+	thumb_func_end PokemonMenu_Item
 
 	thumb_func_start sub_808A180
 sub_808A180: @ 808A180
@@ -9811,8 +9811,8 @@ _0808A628: .4byte gPaletteFade
 _0808A62C: .4byte sub_80A61D0
 	thumb_func_end sub_808A604
 
-	thumb_func_start sub_808A630
-sub_808A630: @ 808A630
+	thumb_func_start PokemonMenu_GiveItem
+PokemonMenu_GiveItem: @ 808A630
 	push {r4,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -9844,7 +9844,7 @@ sub_808A630: @ 808A630
 _0808A66C: .4byte gUnknown_0202E8F5
 _0808A670: .4byte gTasks
 _0808A674: .4byte sub_808A604
-	thumb_func_end sub_808A630
+	thumb_func_end PokemonMenu_GiveItem
 
 	thumb_func_start sub_808A678
 sub_808A678: @ 808A678
@@ -9856,8 +9856,8 @@ sub_808A678: @ 808A678
 	bx r0
 	thumb_func_end sub_808A678
 
-	thumb_func_start sub_808A688
-sub_808A688: @ 808A688
+	thumb_func_start PokemonMenu_TakeItem
+PokemonMenu_TakeItem: @ 808A688
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -9877,10 +9877,10 @@ sub_808A688: @ 808A688
 	bx r0
 	.align 2, 0
 _0808A6B4: .4byte sub_808A678
-	thumb_func_end sub_808A688
+	thumb_func_end PokemonMenu_TakeItem
 
-	thumb_func_start sub_808A6B8
-sub_808A6B8: @ 808A6B8
+	thumb_func_start PokemonMenu_TakeMail
+PokemonMenu_TakeMail: @ 808A6B8
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -9900,10 +9900,10 @@ sub_808A6B8: @ 808A6B8
 	bx r0
 	.align 2, 0
 _0808A6E4: .4byte sub_808A678
-	thumb_func_end sub_808A6B8
+	thumb_func_end PokemonMenu_TakeMail
 
-	thumb_func_start sub_808A6E8
-sub_808A6E8: @ 808A6E8
+	thumb_func_start PokemonMenu_Mail
+PokemonMenu_Mail: @ 808A6E8
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -9935,10 +9935,10 @@ sub_808A6E8: @ 808A6E8
 	.align 2, 0
 _0808A728: .4byte gUnknown_0202FFA8
 _0808A72C: .4byte gUnknown_0839F584
-_0808A730: .4byte gUnknown_0839F494
+_0808A730: .4byte gPokemonMenuActions
 _0808A734: .4byte gTasks
 _0808A738: .4byte sub_808A73C
-	thumb_func_end sub_808A6E8
+	thumb_func_end PokemonMenu_Mail
 
 	thumb_func_start sub_808A73C
 sub_808A73C: @ 808A73C
@@ -10021,7 +10021,7 @@ _0808A7B4:
 	.align 2, 0
 _0808A7E0: .4byte gMain
 _0808A7E4: .4byte gUnknown_0839F584
-_0808A7E8: .4byte gUnknown_0839F494
+_0808A7E8: .4byte gPokemonMenuActions
 _0808A7EC: .4byte gUnknown_0202FFA8
 _0808A7F0:
 	movs r0, 0x2
@@ -10032,7 +10032,7 @@ _0808A7F0:
 	movs r0, 0
 	bl sub_806E7D0
 	adds r0, r5, 0
-	bl sub_808A918
+	bl PokemonMenu_Cancel
 _0808A806:
 	pop {r4,r5}
 	pop {r0}
@@ -10041,8 +10041,8 @@ _0808A806:
 _0808A80C: .4byte gUnknown_0839F584
 	thumb_func_end sub_808A73C
 
-	thumb_func_start sub_808A810
-sub_808A810: @ 808A810
+	thumb_func_start PokemonMenu_ReadMail
+PokemonMenu_ReadMail: @ 808A810
 	push {r4,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -10069,7 +10069,7 @@ sub_808A810: @ 808A810
 	.align 2, 0
 _0808A840: .4byte gTasks
 _0808A844: .4byte sub_808A848
-	thumb_func_end sub_808A810
+	thumb_func_end PokemonMenu_ReadMail
 
 	thumb_func_start sub_808A848
 sub_808A848: @ 808A848
@@ -10171,8 +10171,8 @@ _0808A910: .4byte gTasks
 _0808A914: .4byte sub_8089CD4
 	thumb_func_end sub_808A8D4
 
-	thumb_func_start sub_808A918
-sub_808A918: @ 808A918
+	thumb_func_start PokemonMenu_Cancel
+PokemonMenu_Cancel: @ 808A918
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -10185,10 +10185,10 @@ sub_808A918: @ 808A918
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_808A918
+	thumb_func_end PokemonMenu_Cancel
 
-	thumb_func_start sub_808A938
-sub_808A938: @ 808A938
+	thumb_func_start PokemonMenu_CancelSubmenu
+PokemonMenu_CancelSubmenu: @ 808A938
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -10219,10 +10219,10 @@ sub_808A938: @ 808A938
 _0808A978: .4byte gUnknown_0202FFA8
 _0808A97C: .4byte gTasks
 _0808A980: .4byte sub_8089D94
-	thumb_func_end sub_808A938
+	thumb_func_end PokemonMenu_CancelSubmenu
 
-	thumb_func_start sub_808A984
-sub_808A984: @ 808A984
+	thumb_func_start PokemonMenu_FieldMove
+PokemonMenu_FieldMove: @ 808A984
 	push {r4-r7,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -10387,7 +10387,7 @@ _0808AADA:
 _0808AAE4: .4byte gUnknown_0839F58C
 _0808AAE8: .4byte gTasks
 _0808AAEC: .4byte sub_808ABF4
-	thumb_func_end sub_808A984
+	thumb_func_end PokemonMenu_FieldMove
 
 	thumb_func_start sub_808AAF0
 sub_808AAF0: @ 808AAF0
@@ -10415,7 +10415,7 @@ _0808AB12:
 	movs r3, 0x13
 	bl MenuZeroFillWindowRect
 	adds r0, r4, 0
-	bl sub_808A918
+	bl PokemonMenu_Cancel
 _0808AB24:
 	pop {r4}
 	pop {r0}
@@ -10542,7 +10542,7 @@ _0808AC0E:
 	movs r3, 0x12
 	bl MenuZeroFillWindowRect
 	adds r0, r4, 0
-	bl sub_808A918
+	bl PokemonMenu_Cancel
 _0808AC20:
 	pop {r4}
 	pop {r0}
