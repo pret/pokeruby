@@ -11345,10 +11345,10 @@ gUnknown_0839F268:: @ 839F268
 
 	.align 2
 gUnknown_0839F278:: @ 839F278
-	.4byte HallOfFameRecord_0
-	.4byte HallOfFameRecord_1
-	.4byte HallOfFameRecord_2
-	.4byte HallOfFameRecord_3
+	.4byte HallOfFameRecordEffect_0
+	.4byte HallOfFameRecordEffect_1
+	.4byte HallOfFameRecordEffect_2
+	.4byte HallOfFameRecordEffect_3
 
 	.align 2
 gUnknown_0839F288:: @ 839F288

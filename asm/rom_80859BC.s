@@ -713,8 +713,8 @@ _08085F38: .4byte gTasks
 _08085F3C: .4byte gUnknown_0839F278
 	thumb_func_end Task_HallOfFameRecord
 
-	thumb_func_start HallOfFameRecord_0
-HallOfFameRecord_0: @ 8085F40
+	thumb_func_start HallOfFameRecordEffect_0
+HallOfFameRecordEffect_0: @ 8085F40
 	push {r4,lr}
 	adds r4, r0, 0
 	ldrh r0, [r4, 0x8]
@@ -766,10 +766,10 @@ HallOfFameRecord_0: @ 8085F40
 	bx r0
 	.align 2, 0
 _08085FB0: .4byte Task_HallOfFameRecord
-	thumb_func_end HallOfFameRecord_0
+	thumb_func_end HallOfFameRecordEffect_0
 
-	thumb_func_start HallOfFameRecord_1
-HallOfFameRecord_1: @ 8085FB4
+	thumb_func_start HallOfFameRecordEffect_1
+HallOfFameRecordEffect_1: @ 8085FB4
 	push {lr}
 	adds r3, r0, 0
 	ldr r2, _08085FE0
@@ -794,10 +794,10 @@ _08085FDA:
 	bx r0
 	.align 2, 0
 _08085FE0: .4byte gSprites
-	thumb_func_end HallOfFameRecord_1
+	thumb_func_end HallOfFameRecordEffect_1
 
-	thumb_func_start HallOfFameRecord_2
-HallOfFameRecord_2: @ 8085FE4
+	thumb_func_start HallOfFameRecordEffect_2
+HallOfFameRecordEffect_2: @ 8085FE4
 	push {lr}
 	adds r3, r0, 0
 	ldr r2, _08086008
@@ -819,10 +819,10 @@ _08086004:
 	bx r0
 	.align 2, 0
 _08086008: .4byte gSprites
-	thumb_func_end HallOfFameRecord_2
+	thumb_func_end HallOfFameRecordEffect_2
 
-	thumb_func_start HallOfFameRecord_3
-HallOfFameRecord_3: @ 808600C
+	thumb_func_start HallOfFameRecordEffect_3
+HallOfFameRecordEffect_3: @ 808600C
 	push {lr}
 	ldr r2, _08086044
 	movs r3, 0x14
@@ -850,7 +850,7 @@ _0808603E:
 	.align 2, 0
 _08086044: .4byte gSprites
 _08086048: .4byte Task_HallOfFameRecord
-	thumb_func_end HallOfFameRecord_3
+	thumb_func_end HallOfFameRecordEffect_3
 
 	thumb_func_start CreatePokeballGlowSprite
 CreatePokeballGlowSprite: @ 808604C
