@@ -1,7 +1,5 @@
 #include "global.h"
 
-extern u16 gVars[];
-
 extern u16 *gSpecialVars[];
 
 u16 *GetVarPointer(u16 id)
@@ -10,7 +8,7 @@ u16 *GetVarPointer(u16 id)
         return NULL;
 
     if ((s16)id >= 0)
-        return &gVars[id];
+        return &gSaveBlock1.vars[id - 0x4000];
 
     return gSpecialVars[id - 0x8000];
 }

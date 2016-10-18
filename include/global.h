@@ -143,7 +143,8 @@ struct SaveBlock1
     u8 unk938[52];  // pokedex related
     u8 filler_96C[0x2B4];
     struct MapObjectTemplate mapObjectTemplates[64];
-    u8 filler_1220[0x320];
+    u8 filler_1220[0x120];
+    u16 vars[0x100];
     u32 gameStats[NUM_GAME_STATS];
     u8 filler_1608[0x18F4];
     struct SB1_2EFC_Struct sb1_2EFC_struct[5];
