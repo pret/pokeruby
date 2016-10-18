@@ -130,15 +130,15 @@ struct SpriteTemplate
 
 struct Sprite
 {
-    struct OamData oam;
-    union AnimCmd **anims;
-    struct SpriteFrameImage *images;
-    union AffineAnimCmd **affineAnims;
-    struct SpriteTemplate *template;
-    struct SubspriteTable *subspriteTables;
-    void (*callback)(struct Sprite *);
+    /*0x00*/ struct OamData oam;
+    /*0x08*/ union AnimCmd **anims;
+    /*0x0C*/ struct SpriteFrameImage *images;
+    /*0x10*/ union AffineAnimCmd **affineAnims;
+    /*0x14*/ struct SpriteTemplate *template;
+    /*0x18*/ struct SubspriteTable *subspriteTables;
+    /*0x1C*/ void (*callback)(struct Sprite *);
 
-    struct Coords16 pos1;
+    /*0x20*/ struct Coords16 pos1;
     struct Coords16 pos2;
     s8 centerToCornerVecX;
     s8 centerToCornerVecY;

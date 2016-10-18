@@ -9,37 +9,37 @@ typedef void (*IntrFunc)(void);
 
 struct Main
 {
-    MainCallback callback1;
-    MainCallback callback2;
+    /*0x00*/ MainCallback callback1;
+    /*0x04*/ MainCallback callback2;
 
-    MainCallback field_8;
+    /*0x08*/ MainCallback field_8;
 
-    IntrCallback vblankCallback;
-    IntrCallback hblankCallback;
-    IntrCallback vcountCallback;
-    IntrCallback serialCallback;
+    /*0x0C*/ IntrCallback vblankCallback;
+    /*0x10*/ IntrCallback hblankCallback;
+    /*0x14*/ IntrCallback vcountCallback;
+    /*0x18*/ IntrCallback serialCallback;
 
-    vu16 intrCheck;
+    /*0x1C*/ vu16 intrCheck;
 
-    u32 vblankCounter1;
-    u32 vblankCounter2;
+    /*0x20*/ u32 vblankCounter1;
+    /*0x24*/ u32 vblankCounter2;
 
-    u16 heldKeysRaw;           // held keys without L=A remapping
-    u16 newKeysRaw;            // newly pressed keys without L=A remapping
-    u16 heldKeys;              // held keys with L=A remapping
-    u16 newKeys;               // newly pressed keys with L=A remapping
-    u16 newAndRepeatedKeys;    // newly pressed keys plus key repeat
-    u16 keyRepeatCounter;      // counts down to 0, triggering key repeat
-    bool16 watchedKeysPressed; // whether one of the watched keys was pressed
-    u16 watchedKeysMask;       // bit mask for watched keys
+    /*0x28*/ u16 heldKeysRaw;           // held keys without L=A remapping
+    /*0x2A*/ u16 newKeysRaw;            // newly pressed keys without L=A remapping
+    /*0x2C*/ u16 heldKeys;              // held keys with L=A remapping
+    /*0x2E*/ u16 newKeys;               // newly pressed keys with L=A remapping
+    /*0x30*/ u16 newAndRepeatedKeys;    // newly pressed keys plus key repeat
+    /*0x32*/ u16 keyRepeatCounter;      // counts down to 0, triggering key repeat
+    /*0x34*/ bool16 watchedKeysPressed; // whether one of the watched keys was pressed
+    /*0x36*/ u16 watchedKeysMask;       // bit mask for watched keys
 
     u8 objCount;
 
     struct OamData oamBuffer[128];
 
-    u8 state;
+    /*0x43C*/ u8 state;
 
-    u8 oamLoadDisabled:1;
+    /*0x43D*/ u8 oamLoadDisabled:1;
 };
 
 extern u8 gUnknown_3001764;
