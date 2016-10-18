@@ -51,7 +51,8 @@ asm/libgcnmultiboot.o asm/m4a_1.o asm/m4a_3.o asm/libagbsyscall.o \
 asm/tileset.o asm/rom_8065394.o asm/rom_803D1FC.o asm/calculate_base_damage.o \
 asm/rom_813BA94.o asm/rom_81258BC.o asm/mystery_event_script.o \
 asm/field_effect_helpers.o asm/contest_ai.o asm/berry.o asm/rom_80B5054.o \
-asm/party_menu.o asm/rom_806D7F8.o asm/wild_encounter.o asm/rom_8085668.o
+asm/party_menu.o asm/rom_806D7F8.o asm/wild_encounter.o asm/rom_80859BC.o \
+asm/field_effect.o
 
 DATA_ASM_OBJS := data/data2.o data/graphics.o data/sound_data.o \
 data/event_scripts.o data/battle_anim_scripts.o \

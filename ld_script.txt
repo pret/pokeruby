@@ -76,7 +76,8 @@ SECTIONS {
         src/task.o(.text);
         asm/rom5.o(.text);
         asm/wild_encounter.o(.text);
-        asm/rom_8085668.o(.text);
+        asm/field_effect.o(.text);
+        asm/rom_80859BC.o(.text);
         src/option_menu.o(.text);
         src/pokedex.o(.text);
         asm/rom5_part2.o(.text);
