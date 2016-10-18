@@ -2442,7 +2442,7 @@ _0806C1A4:
 	cmp r5, r0
 	beq _0806C1C8
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 _0806C1C8:
 	pop {r3,r4}
 	mov r8, r3
@@ -3327,7 +3327,7 @@ _0806C84A:
 	cmp r6, r0
 	beq _0806C878
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 _0806C878:
 	pop {r3}
 	mov r8, r3
@@ -3402,7 +3402,7 @@ _0806C8E2:
 	movs r1, 0x2
 	strb r1, [r0]
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 _0806C914:
 	pop {r4-r6}
 	pop {r0}
@@ -3776,7 +3776,7 @@ _0806CBDA:
 	cmp r0, 0
 	beq _0806CC10
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r1, _0806CC0C
 	lsls r0, r4, 2
 	adds r0, r4
@@ -3798,7 +3798,7 @@ _0806CC10:
 	cmp r0, 0x2
 	bne _0806CC24
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	adds r0, r4, 0
 	bl sub_806CD44
 _0806CC24:

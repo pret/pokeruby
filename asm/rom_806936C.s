@@ -865,7 +865,7 @@ _0806995E:
 	cmp r0, 0
 	beq _080699CE
 	movs r0, 0x46
-	bl PlaySE
+	bl PlaySoundEffect
 	b _080699CE
 _0806998C:
 	ldrh r0, [r4, 0xC]
@@ -1148,7 +1148,7 @@ _08069BA4:
 	bne _08069BB8
 _08069BB2:
 	movs r0, 0x47
-	bl PlaySE
+	bl PlaySoundEffect
 _08069BB8:
 	cmp r7, 0
 	beq _08069BF4
@@ -1558,7 +1558,7 @@ _08069EB6:
 	ldrh r0, [r5, 0xA]
 	strh r0, [r4]
 	movs r0, 0x2A
-	bl PlaySE
+	bl PlaySoundEffect
 	mov r0, sp
 	movs r1, 0
 	ldrsh r0, [r0, r1]
@@ -1604,7 +1604,7 @@ _08069F20:
 	ldrh r0, [r5, 0xA]
 	strh r0, [r4]
 	movs r0, 0x29
-	bl PlaySE
+	bl PlaySoundEffect
 	mov r0, sp
 	movs r1, 0
 	ldrsh r0, [r0, r1]
@@ -2978,7 +2978,7 @@ _0806A9BA:
 _0806A9CC:
 	strh r0, [r5, 0x4]
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	b _0806AA58
 _0806A9D6:
 	cmp r4, 0x5
@@ -3000,7 +3000,7 @@ _0806A9D6:
 	ldrh r0, [r5, 0xC]
 	strb r0, [r1, 0x4]
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r1, _0806AA1C
 	lsls r0, r6, 2
 	adds r0, r6
@@ -3030,7 +3030,7 @@ _0806AA24:
 	cmp r0, 0
 	beq _0806AA58
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	ldrh r2, [r5, 0x6]
 	ldrb r3, [r5, 0x8]
 	ldrb r0, [r5, 0xA]
@@ -3325,7 +3325,7 @@ _0806ACB0:
 	cmp r0, 0
 	beq _0806ACC4
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	adds r0, r5, 0
 	bl DestroyTask
 _0806ACC4:
@@ -3525,7 +3525,7 @@ _0806AE5C:
 	ldr r0, _0806AE78
 	bl sub_806ABDC
 	movs r0, 0x49
-	bl PlaySE
+	bl PlaySoundEffect
 	b _0806AE88
 	.align 2, 0
 _0806AE78: .4byte gSystemText_SaveCompleted
@@ -3533,7 +3533,7 @@ _0806AE7C:
 	ldr r0, _0806AECC
 	bl sub_806ABDC
 	movs r0, 0x16
-	bl PlaySE
+	bl PlaySoundEffect
 _0806AE88:
 	movs r0, 0x5
 	strh r0, [r5]

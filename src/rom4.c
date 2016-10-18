@@ -902,7 +902,7 @@ void sub_8053FF8(void)
 
 bool8 sub_8054034(void)
 {
-    return IsNotWaitingForBGMStop();
+    return IsNotWaitingForBkgndMusicStop();
 }
 
 void sub_8054044(void)

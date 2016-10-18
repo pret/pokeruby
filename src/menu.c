@@ -251,7 +251,7 @@ s8 ProcessMenuInput(void)
 {
     if (gMain.newKeys & A_BUTTON)
     {
-        PlaySE(SE_SELECT);
+        PlaySoundEffect(SE_SELECT);
         if (gMenu.menu_field_7)
             sub_8072DEC();
         return gMenu.cursorPos;
@@ -266,13 +266,13 @@ s8 ProcessMenuInput(void)
 
     if (gMain.newKeys & DPAD_UP)
     {
-        PlaySE(SE_SELECT);
+        PlaySoundEffect(SE_SELECT);
         MoveMenuCursor(-1);
         return -2;
     }
     else if (gMain.newKeys & DPAD_DOWN)
     {
-        PlaySE(SE_SELECT);
+        PlaySoundEffect(SE_SELECT);
         MoveMenuCursor(1);
         return -2;
     }
@@ -286,7 +286,7 @@ s8 ProcessMenuInputNoWrap(void)
 
     if (gMain.newKeys & A_BUTTON)
     {
-        PlaySE(SE_SELECT);
+        PlaySoundEffect(SE_SELECT);
         if (gMenu.menu_field_7)
             sub_8072DEC();
         return gMenu.cursorPos;
@@ -302,13 +302,13 @@ s8 ProcessMenuInputNoWrap(void)
     if (gMain.newKeys & DPAD_UP)
     {
         if (cursorPos != MoveMenuCursorNoWrap(-1))
-            PlaySE(SE_SELECT);
+            PlaySoundEffect(SE_SELECT);
         return -2;
     }
     else if (gMain.newKeys & DPAD_DOWN)
     {
         if (cursorPos != MoveMenuCursorNoWrap(1))
-            PlaySE(SE_SELECT);
+            PlaySoundEffect(SE_SELECT);
         return -2;
     }
 
@@ -501,7 +501,7 @@ s8 sub_80727CC(void)
     {
         if (gMenu.menu_field_7)
             sub_8072DEC();
-        PlaySE(SE_SELECT);
+        PlaySoundEffect(SE_SELECT);
         return GetMenuCursorPos();
     }
 
@@ -514,25 +514,25 @@ s8 sub_80727CC(void)
 
     if (gMain.newKeys & DPAD_UP)
     {
-        PlaySE(SE_SELECT);
+        PlaySoundEffect(SE_SELECT);
         MoveMenuCursor4(-gMenu.width);
         return -2;
     }
     else if (gMain.newKeys & DPAD_DOWN)
     {
-        PlaySE(SE_SELECT);
+        PlaySoundEffect(SE_SELECT);
         MoveMenuCursor4(gMenu.width);
         return -2;
     }
     else if (gMain.newKeys & DPAD_LEFT)
     {
-        PlaySE(SE_SELECT);
+        PlaySoundEffect(SE_SELECT);
         MoveMenuCursor4(-1);
         return -2;
     }
     else if (gMain.newKeys & DPAD_RIGHT)
     {
-        PlaySE(SE_SELECT);
+        PlaySoundEffect(SE_SELECT);
         MoveMenuCursor4(1);
         return -2;
     }
