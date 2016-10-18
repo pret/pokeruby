@@ -2221,8 +2221,8 @@ nullsub_78: @ 812BFB0
 	bx lr
 	thumb_func_end nullsub_78
 
-	thumb_func_start sub_812BFB4
-sub_812BFB4: @ 812BFB4
+	thumb_func_start SetUpFieldMove_SweetScent
+SetUpFieldMove_SweetScent: @ 812BFB4
 	ldr r1, _0812BFC4
 	ldr r0, _0812BFC8
 	str r0, [r1]
@@ -2236,7 +2236,7 @@ _0812BFC4: .4byte gUnknown_0300485C
 _0812BFC8: .4byte sub_808AB90
 _0812BFCC: .4byte gUnknown_03005CE4
 _0812BFD0: .4byte sub_812BFD4
-	thumb_func_end sub_812BFB4
+	thumb_func_end SetUpFieldMove_SweetScent
 
 	thumb_func_start sub_812BFD4
 sub_812BFD4: @ 812BFD4
@@ -18237,8 +18237,8 @@ sub_8133CA4: @ 8133CA4
 _08133CC8: .4byte gUnknown_030007B0
 	thumb_func_end sub_8133CA4
 
-	thumb_func_start sub_8133CCC
-sub_8133CCC: @ 8133CCC
+	thumb_func_start SetUpFieldMove_SoftBoiled
+SetUpFieldMove_SoftBoiled: @ 8133CCC
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -18283,7 +18283,7 @@ _08133D1E:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8133CCC
+	thumb_func_end SetUpFieldMove_SoftBoiled
 
 	thumb_func_start unref_sub_8133D28
 unref_sub_8133D28: @ 8133D28

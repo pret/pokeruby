@@ -10333,7 +10333,7 @@ _0808AA2C:
 	bl BeginNormalPaletteFade
 	b _0808AADA
 	.align 2, 0
-_0808AA78: .4byte gUnknown_0839F58C
+_0808AA78: .4byte gFieldMoveFuncs
 _0808AA7C: .4byte gUnknown_0202FFA8
 _0808AA80: .4byte gTasks
 _0808AA84: .4byte sub_808AB34
@@ -10384,7 +10384,7 @@ _0808AADA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0808AAE4: .4byte gUnknown_0839F58C
+_0808AAE4: .4byte gFieldMoveFuncs
 _0808AAE8: .4byte gTasks
 _0808AAEC: .4byte sub_808ABF4
 	thumb_func_end PokemonMenu_FieldMove
@@ -10567,8 +10567,8 @@ _0808AC40: .4byte gUnknown_0202FF84
 _0808AC44: .4byte gUnknown_03005CE0
 	thumb_func_end sub_808AC2C
 
-	thumb_func_start sub_808AC48
-sub_808AC48: @ 808AC48
+	thumb_func_start SetUpFieldMove_Surf
+SetUpFieldMove_Surf: @ 808AC48
 	push {lr}
 	bl PartyHasMonWithSurf
 	lsls r0, 24
@@ -10598,7 +10598,7 @@ _0808AC84:
 _0808AC86:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_808AC48
+	thumb_func_end SetUpFieldMove_Surf
 
 	thumb_func_start sub_808AC8C
 sub_808AC8C: @ 808AC8C
@@ -10616,8 +10616,8 @@ _0808ACA0: .4byte gUnknown_0202FF84
 _0808ACA4: .4byte gUnknown_03005CE0
 	thumb_func_end sub_808AC8C
 
-	thumb_func_start sub_808ACA8
-sub_808ACA8: @ 808ACA8
+	thumb_func_start SetUpFieldMove_Fly
+SetUpFieldMove_Fly: @ 808ACA8
 	push {lr}
 	bl sub_8147588
 	lsls r0, 24
@@ -10663,7 +10663,7 @@ _0808ACFC: .4byte gUnknown_0300485C
 _0808AD00: .4byte sub_808AB90
 _0808AD04: .4byte gUnknown_03005CE4
 _0808AD08: .4byte sub_808AC8C
-	thumb_func_end sub_808ACA8
+	thumb_func_end SetUpFieldMove_Fly
 
 	thumb_func_start sub_808AD0C
 sub_808AD0C: @ 808AD0C
@@ -10761,8 +10761,8 @@ _0808ADC0: .4byte gUnknown_0202FF84
 _0808ADC4: .4byte gUnknown_03005CE0
 	thumb_func_end sub_808ADAC
 
-	thumb_func_start sub_808ADC8
-sub_808ADC8: @ 808ADC8
+	thumb_func_start SetUpFieldMove_Dive
+SetUpFieldMove_Dive: @ 808ADC8
 	push {lr}
 	bl sub_8068F18
 	ldr r1, _0808ADE0
@@ -10791,7 +10791,7 @@ _0808ADF8: .4byte gUnknown_0300485C
 _0808ADFC: .4byte sub_808AB90
 _0808AE00: .4byte gUnknown_03005CE4
 _0808AE04: .4byte sub_808ADAC
-	thumb_func_end sub_808ADC8
+	thumb_func_end SetUpFieldMove_Dive
 
 	thumb_func_start sub_808AE08
 sub_808AE08: @ 808AE08
@@ -10809,8 +10809,8 @@ _0808AE1C: .4byte gUnknown_0202FF84
 _0808AE20: .4byte gUnknown_03005CE0
 	thumb_func_end sub_808AE08
 
-	thumb_func_start hm_prepare_waterfall
-hm_prepare_waterfall: @ 808AE24
+	thumb_func_start SetUpFieldMove_Waterfall
+SetUpFieldMove_Waterfall: @ 808AE24
 	push {r4,lr}
 	sub sp, 0x4
 	mov r4, sp
@@ -10856,7 +10856,7 @@ _0808AE82:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end hm_prepare_waterfall
+	thumb_func_end SetUpFieldMove_Waterfall
 
 	thumb_func_start sub_808AE8C
 sub_808AE8C: @ 808AE8C

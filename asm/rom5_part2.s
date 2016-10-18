@@ -42728,8 +42728,8 @@ _080A24FA:
 	bx r0
 	thumb_func_end sub_80A2490
 
-	thumb_func_start sub_80A2504
-sub_80A2504: @ 80A2504
+	thumb_func_start SetUpFieldMove_Cut
+SetUpFieldMove_Cut: @ 80A2504
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -42836,7 +42836,7 @@ _080A25DE:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80A2504
+	thumb_func_end SetUpFieldMove_Cut
 
 	thumb_func_start sub_80A25E8
 sub_80A25E8: @ 80A25E8

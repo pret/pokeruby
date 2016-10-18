@@ -280,8 +280,8 @@ _0810B4FC: .4byte gTasks
 _0810B500: .4byte gPlayerAvatar
 	thumb_func_end sub_810B4CC
 
-	thumb_func_start hm_prepare_rocksmash
-hm_prepare_rocksmash: @ 810B504
+	thumb_func_start SetUpFieldMove_RockSmash
+SetUpFieldMove_RockSmash: @ 810B504
 	push {lr}
 	movs r0, 0x56
 	bl npc_before_player_of_type
@@ -307,7 +307,7 @@ _0810B52C: .4byte gUnknown_0300485C
 _0810B530: .4byte sub_808AB90
 _0810B534: .4byte gUnknown_03005CE4
 _0810B538: .4byte sub_810B53C
-	thumb_func_end hm_prepare_rocksmash
+	thumb_func_end SetUpFieldMove_RockSmash
 
 	thumb_func_start sub_810B53C
 sub_810B53C: @ 810B53C
@@ -363,8 +363,8 @@ sub_810B58C: @ 810B58C
 	bx r0
 	thumb_func_end sub_810B58C
 
-	thumb_func_start sub_810B5A4
-sub_810B5A4: @ 810B5A4
+	thumb_func_start SetUpFieldMove_Dig
+SetUpFieldMove_Dig: @ 810B5A4
 	push {lr}
 	bl sub_80CA1C8
 	lsls r0, 24
@@ -389,7 +389,7 @@ _0810B5C8: .4byte gUnknown_0300485C
 _0810B5CC: .4byte sub_808AB90
 _0810B5D0: .4byte gUnknown_03005CE4
 _0810B5D4: .4byte sub_810B5D8
-	thumb_func_end sub_810B5A4
+	thumb_func_end SetUpFieldMove_Dig
 
 	thumb_func_start sub_810B5D8
 sub_810B5D8: @ 810B5D8
@@ -3137,8 +3137,8 @@ _0810CBAC:
 	bx r1
 	thumb_func_end sub_810CB68
 
-	thumb_func_start sub_810CBB4
-sub_810CBB4: @ 810CBB4
+	thumb_func_start SetUpFieldMove_Flash
+SetUpFieldMove_Flash: @ 810CBB4
 	push {lr}
 	ldr r0, _0810CBDC
 	ldrb r0, [r0, 0x15]
@@ -3169,7 +3169,7 @@ _0810CBF4:
 _0810CBF6:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_810CBB4
+	thumb_func_end SetUpFieldMove_Flash
 
 	thumb_func_start sub_810CBFC
 sub_810CBFC: @ 810CBFC
@@ -30999,8 +30999,8 @@ _0811A992:
 _0811A998: .4byte gLandmarkLists
 	thumb_func_end sub_811A920
 
-	thumb_func_start sub_811A99C
-sub_811A99C: @ 811A99C
+	thumb_func_start SetUpFieldMove_Strength
+SetUpFieldMove_Strength: @ 811A99C
 	push {lr}
 	bl sub_81474C8
 	lsls r0, 24
@@ -31055,7 +31055,7 @@ _0811AA08: .4byte gUnknown_0300485C
 _0811AA0C: .4byte sub_808AB90
 _0811AA10: .4byte gUnknown_03005CE4
 _0811AA14: .4byte sub_811AA18
-	thumb_func_end sub_811A99C
+	thumb_func_end SetUpFieldMove_Strength
 
 	thumb_func_start sub_811AA18
 sub_811AA18: @ 811AA18

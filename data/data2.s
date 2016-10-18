@@ -11575,21 +11575,21 @@ gUnknown_0839F584:: @ 839F584
 	.4byte Unknown_39F580
 
 	.align 2
-gUnknown_0839F58C:: @ 839F58C
-	.4byte sub_80A2504, 0x6
-	.4byte sub_810CBB4, 0x9
-	.4byte hm_prepare_rocksmash, 0x9
-	.4byte sub_811A99C, 0x9
-	.4byte sub_808AC48, 0x7
-	.4byte sub_808ACA8, 0x9
-	.4byte sub_808ADC8, 0x9
-	.4byte hm_prepare_waterfall, 0x9
-	.4byte sub_814A374, 0x9
-	.4byte sub_810B5A4, 0x9
-	.4byte sub_80C62C4, 0x9
-	.4byte sub_8133CCC, 0x10
-	.4byte sub_8133CCC, 0x10
-	.4byte sub_812BFB4, 0x9
+gFieldMoveFuncs:: @ 839F58C
+	.4byte SetUpFieldMove_Cut, 0x6
+	.4byte SetUpFieldMove_Flash, 0x9
+	.4byte SetUpFieldMove_RockSmash, 0x9
+	.4byte SetUpFieldMove_Strength, 0x9
+	.4byte SetUpFieldMove_Surf, 0x7
+	.4byte SetUpFieldMove_Fly, 0x9
+	.4byte SetUpFieldMove_Dive, 0x9
+	.4byte SetUpFieldMove_Waterfall, 0x9
+	.4byte SetUpFieldMove_Teleport, 0x9
+	.4byte SetUpFieldMove_Dig, 0x9
+	.4byte SetUpFieldMove_SecretPower, 0x9
+	.4byte SetUpFieldMove_SoftBoiled, 0x10
+	.4byte SetUpFieldMove_SoftBoiled, 0x10
+	.4byte SetUpFieldMove_SweetScent, 0x9
 
 	.align 2
 gUnknown_0839F5FC:: @ 839F5FC

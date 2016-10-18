@@ -35270,8 +35270,8 @@ _080C62BE:
 	bx r0
 	thumb_func_end sub_80C6280
 
-	thumb_func_start sub_80C62C4
-sub_80C62C4: @ 80C62C4
+	thumb_func_start SetUpFieldMove_SecretPower
+SetUpFieldMove_SecretPower: @ 80C62C4
 	push {r4,lr}
 	bl sub_80BB63C
 	ldr r0, _080C6318
@@ -35362,7 +35362,7 @@ _080C638C: .4byte gUnknown_0300485C
 _080C6390: .4byte sub_808AB90
 _080C6394: .4byte gUnknown_03005CE4
 _080C6398: .4byte sub_80C660C
-	thumb_func_end sub_80C62C4
+	thumb_func_end SetUpFieldMove_SecretPower
 
 	thumb_func_start sub_80C639C
 sub_80C639C: @ 80C639C

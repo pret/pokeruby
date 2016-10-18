@@ -29320,8 +29320,8 @@ _0814A33C:
 _0814A370: .4byte gUnknown_084170F4
 	thumb_func_end sub_814A2EC
 
-	thumb_func_start sub_814A374
-sub_814A374: @ 814A374
+	thumb_func_start SetUpFieldMove_Teleport
+SetUpFieldMove_Teleport: @ 814A374
 	push {lr}
 	ldr r0, _0814A38C
 	ldrb r0, [r0, 0x17]
@@ -29350,7 +29350,7 @@ _0814A3A4: .4byte gUnknown_0300485C
 _0814A3A8: .4byte sub_808AB90
 _0814A3AC: .4byte gUnknown_03005CE4
 _0814A3B0: .4byte hm_teleport_run_dp02scr
-	thumb_func_end sub_814A374
+	thumb_func_end SetUpFieldMove_Teleport
 
 	thumb_func_start hm_teleport_run_dp02scr
 hm_teleport_run_dp02scr: @ 814A3B4
