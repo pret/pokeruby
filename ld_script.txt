@@ -66,7 +66,7 @@ SECTIONS {
         src/scrcmd.o(.text);
         asm/rom_8065394.o(.text);
         src/var.o(.text);
-        asm/flag.o(.text);
+        src/flag.o(.text);
         asm/rom_806936C.o(.text);
         asm/party_menu.o(.text);
         asm/rom_806D7F8.o(.text);
