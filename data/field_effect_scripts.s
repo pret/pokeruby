@@ -31,7 +31,7 @@ gFieldEffectScriptPointers:: @ 81D9B34
 	.4byte gFieldEffectScript_Unknown22
 	.4byte gFieldEffectScript_BerryTreeGrowthSparkle
 	.4byte gFieldEffectScript_DeepSandFootprints
-	.4byte gFieldEffectScript_Unknown25
+	.4byte gFieldEffectScript_PokecenterHeal
 	.4byte gFieldEffectScript_Unknown26
 	.4byte gFieldEffectScript_Unknown27
 	.4byte gFieldEffectScript_TreeDisguise
@@ -68,7 +68,7 @@ gFieldEffectScriptPointers:: @ 81D9B34
 	.4byte gFieldEffectScript_FieldMoveShowMonInit
 	.4byte gFieldEffectScript_Unknown60
 	.4byte gFieldEffectScript_Unknown61
-	.4byte gFieldEffectScript_Unknown62
+	.4byte gFieldEffectScript_HallOfFameRecord
 	.4byte gFieldEffectScript_Unknown63
 
 gFieldEffectScript_ExclamationMarkIcon1: @ 81D9C34
@@ -171,7 +171,7 @@ gFieldEffectScript_DeepSandFootprints: @ 81D9D00
 	loadfadedpal_callnative gFieldEffectObjectPaletteInfo0, sub_812749C
 	end
 
-gFieldEffectScript_Unknown25: @ 81D9D0A
+gFieldEffectScript_PokecenterHeal: @ 81D9D0A
 	loadfadedpal gFieldEffectObjectPaletteInfo4
 	loadfadedpal_callnative gFieldEffectObjectPaletteInfo0, FldEff_PokecenterHeal
 	end
@@ -321,7 +321,7 @@ gFieldEffectScript_Unknown61: @ 81D9E2C
 	callnative sub_80C6718
 	end
 
-gFieldEffectScript_Unknown62: @ 81D9E32
+gFieldEffectScript_HallOfFameRecord: @ 81D9E32
 	loadfadedpal gFieldEffectObjectPaletteInfo4
 	loadfadedpal_callnative gFieldEffectObjectPaletteInfo5, FldEff_HallOfFameRecord
 	end
