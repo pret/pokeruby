@@ -171,7 +171,7 @@ gSpecials::
 	.4byte sub_810FF48
 	.4byte sub_810FAA0
 	.4byte sub_810FF60
-	.4byte rock_smash_wild_pokemon_encounter
+	.4byte RockSmashWildEncounter
 	.4byte GabbyAndTyGetBattleNum
 	.4byte sub_80BDC14
 	.4byte GabbyAndTyBeforeInterview

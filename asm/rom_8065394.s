@@ -1184,7 +1184,7 @@ sub_80687E4: @ 80687E4
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _08068834
-	bl sub_8085558
+	bl UpdateRepelCounter
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1428,7 +1428,7 @@ _080689D4:
 	ldr r5, _080689EC
 	ldrh r1, [r5]
 	adds r0, r4, 0
-	bl sub_8085104
+	bl StandardWildEncounter
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

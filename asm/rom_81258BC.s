@@ -2351,7 +2351,7 @@ sub_812C084: @ 812C084
 	cmp r0, 0x40
 	bne _0812C10C
 	strh r2, [r4, 0x8]
-	bl sub_80852FC
+	bl SweetScentWildEncounter
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

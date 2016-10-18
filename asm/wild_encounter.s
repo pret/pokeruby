@@ -6,14 +6,14 @@
 
 	.text
 
-	thumb_func_start unref_sub_8084978
-unref_sub_8084978: @ 8084978
+	thumb_func_start DisableWildEncounters
+DisableWildEncounters: @ 8084978
 	ldr r1, _08084980
 	strb r0, [r1]
 	bx lr
 	.align 2, 0
-_08084980: .4byte gUnknown_0202FF7C
-	thumb_func_end unref_sub_8084978
+_08084980: .4byte gWildEncountersDisabled
+	thumb_func_end DisableWildEncounters
 
 	thumb_func_start sub_8084984
 sub_8084984: @ 8084984
@@ -117,8 +117,8 @@ _08084A34:
 	bx r1
 	thumb_func_end sub_8084984
 
-	thumb_func_start check_feebas
-check_feebas: @ 8084A44
+	thumb_func_start CheckFeebas
+CheckFeebas: @ 8084A44
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -188,11 +188,11 @@ _08084AC8:
 	ldr r3, _08084B4C
 	adds r0, r3
 	ldrh r0, [r0]
-	bl sub_8084B74
+	bl FeebasSeedRng
 	movs r5, 0
 	ldr r6, _08084B50
 _08084AD8:
-	bl sub_8084B54
+	bl FeebasRandom
 	lsls r1, r5, 1
 	mov r2, sp
 	adds r4, r2, r1
@@ -254,10 +254,10 @@ _08084B3A:
 _08084B48: .4byte gSaveBlock1
 _08084B4C: .4byte 0x00002dd6
 _08084B50: .4byte 0x000001bf
-	thumb_func_end check_feebas
+	thumb_func_end CheckFeebas
 
-	thumb_func_start sub_8084B54
-sub_8084B54: @ 8084B54
+	thumb_func_start FeebasRandom
+FeebasRandom: @ 8084B54
 	ldr r2, _08084B68
 	ldr r1, [r2]
 	ldr r0, _08084B6C
@@ -271,10 +271,10 @@ sub_8084B54: @ 8084B54
 _08084B68: .4byte gUnknown_0202FF80
 _08084B6C: .4byte 0x41c64e6d
 _08084B70: .4byte 0x00003039
-	thumb_func_end sub_8084B54
+	thumb_func_end FeebasRandom
 
-	thumb_func_start sub_8084B74
-sub_8084B74: @ 8084B74
+	thumb_func_start FeebasSeedRng
+FeebasSeedRng: @ 8084B74
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r1, _08084B80
@@ -282,10 +282,10 @@ sub_8084B74: @ 8084B74
 	bx lr
 	.align 2, 0
 _08084B80: .4byte gUnknown_0202FF80
-	thumb_func_end sub_8084B74
+	thumb_func_end FeebasSeedRng
 
-	thumb_func_start wild_pokemon_rand_grass
-wild_pokemon_rand_grass: @ 8084B84
+	thumb_func_start PickWildMon_Grass
+PickWildMon_Grass: @ 8084B84
 	push {lr}
 	bl Random
 	lsls r0, 16
@@ -389,10 +389,10 @@ _08084C38:
 _08084C3A:
 	pop {r1}
 	bx r1
-	thumb_func_end wild_pokemon_rand_grass
+	thumb_func_end PickWildMon_Grass
 
-	thumb_func_start wild_pokemon_rand_water
-wild_pokemon_rand_water: @ 8084C40
+	thumb_func_start PickWildMon_Water
+PickWildMon_Water: @ 8084C40
 	push {lr}
 	bl Random
 	lsls r0, 16
@@ -438,10 +438,10 @@ _08084C8E:
 _08084C90:
 	pop {r1}
 	bx r1
-	thumb_func_end wild_pokemon_rand_water
+	thumb_func_end PickWildMon_Water
 
-	thumb_func_start sub_8084C94
-sub_8084C94: @ 8084C94
+	thumb_func_start PickWildMon_Fishing
+PickWildMon_Fishing: @ 8084C94
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -529,10 +529,10 @@ _08084D28:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8084C94
+	thumb_func_end PickWildMon_Fishing
 
-	thumb_func_start random_number_in_range
-random_number_in_range: @ 8084D30
+	thumb_func_start RandomInRange
+RandomInRange: @ 8084D30
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	ldrb r0, [r4, 0x1]
@@ -562,10 +562,10 @@ _08084D44:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end random_number_in_range
+	thumb_func_end RandomInRange
 
-	thumb_func_start sub_8084D6C
-sub_8084D6C: @ 8084D6C
+	thumb_func_start GetCurrentMapWildMonHeader
+GetCurrentMapWildMonHeader: @ 8084D6C
 	push {r4-r6,lr}
 	movs r3, 0
 	ldr r5, _08084D9C
@@ -613,10 +613,10 @@ _08084DBA:
 	bx r1
 	.align 2, 0
 _08084DC0: .4byte 0x0000ffff
-	thumb_func_end sub_8084D6C
+	thumb_func_end GetCurrentMapWildMonHeader
 
-	thumb_func_start sub_8084DC4
-sub_8084DC4: @ 8084DC4
+	thumb_func_start PickWildMonNature
+PickWildMonNature: @ 8084DC4
 	push {r4-r7,lr}
 	sub sp, 0x1C
 	bl GetSafariZoneFlag
@@ -708,10 +708,10 @@ _08084E70:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8084DC4
+	thumb_func_end PickWildMonNature
 
-	thumb_func_start sub_8084E78
-sub_8084E78: @ 8084E78
+	thumb_func_start CreateWildMon
+CreateWildMon: @ 8084E78
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -721,7 +721,7 @@ sub_8084E78: @ 8084E78
 	lsls r5, 24
 	lsrs r5, 24
 	bl ZeroEnemyPartyMons
-	bl sub_8084DC4
+	bl PickWildMonNature
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _08084EAC
@@ -737,10 +737,10 @@ sub_8084E78: @ 8084E78
 	bx r0
 	.align 2, 0
 _08084EAC: .4byte gEnemyParty
-	thumb_func_end sub_8084E78
+	thumb_func_end CreateWildMon
 
-	thumb_func_start sub_8084EB0
-sub_8084EB0: @ 8084EB0
+	thumb_func_start GenerateWildMon
+GenerateWildMon: @ 8084EB0
 	push {r4-r7,lr}
 	adds r6, r0, 0
 	lsls r1, 24
@@ -761,10 +761,10 @@ _08084ECE:
 	beq _08084EDA
 	b _08084EE2
 _08084ED4:
-	bl wild_pokemon_rand_grass
+	bl PickWildMon_Grass
 	b _08084EDE
 _08084EDA:
-	bl wild_pokemon_rand_water
+	bl PickWildMon_Water
 _08084EDE:
 	lsls r0, 24
 	lsrs r0, 24
@@ -772,13 +772,13 @@ _08084EE2:
 	lsls r4, r0, 2
 	ldr r0, [r6, 0x4]
 	adds r0, r4
-	bl random_number_in_range
+	bl RandomInRange
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r7, 0x1
 	bne _08084F04
 	adds r0, r5, 0
-	bl sub_8085598
+	bl RepelCheck
 	lsls r0, 24
 	cmp r0, 0
 	bne _08084F04
@@ -789,41 +789,41 @@ _08084F04:
 	adds r0, r4, r0
 	ldrh r0, [r0, 0x2]
 	adds r1, r5, 0
-	bl sub_8084E78
+	bl CreateWildMon
 	movs r0, 0x1
 _08084F12:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8084EB0
+	thumb_func_end GenerateWildMon
 
-	thumb_func_start sub_8084F18
-sub_8084F18: @ 8084F18
+	thumb_func_start GenerateFishingWildMon
+GenerateFishingWildMon: @ 8084F18
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	lsls r0, r1, 24
 	lsrs r0, 24
-	bl sub_8084C94
+	bl PickWildMon_Fishing
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 22
 	ldr r0, [r5, 0x4]
 	adds r0, r4
-	bl random_number_in_range
+	bl RandomInRange
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	ldr r0, [r5, 0x4]
 	adds r0, r4, r0
 	ldrh r0, [r0, 0x2]
-	bl sub_8084E78
+	bl CreateWildMon
 	ldr r0, [r5, 0x4]
 	adds r4, r0
 	ldrh r0, [r4, 0x2]
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8084F18
+	thumb_func_end GenerateFishingWildMon
 
 	thumb_func_start SetUpMassOutbreakEncounter
 SetUpMassOutbreakEncounter: @ 8084F50
@@ -837,7 +837,7 @@ SetUpMassOutbreakEncounter: @ 8084F50
 	lsls r1, 6
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_8085598
+	bl RepelCheck
 	lsls r0, 24
 	cmp r0, 0
 	bne _08084F78
@@ -853,7 +853,7 @@ _08084F78:
 	adds r2, 0x4
 	adds r1, r4, r2
 	ldrb r1, [r1]
-	bl sub_8084E78
+	bl CreateWildMon
 	movs r5, 0
 	ldr r0, _08084FBC
 	adds r4, r0
@@ -958,8 +958,8 @@ _0808504E:
 	bx r1
 	thumb_func_end DoWildEncounterRateDiceRoll
 
-	thumb_func_start sub_8085054
-sub_8085054: @ 8085054
+	thumb_func_start DoWildEncounterTest
+DoWildEncounterTest: @ 8085054
 	push {r4,lr}
 	sub sp, 0x4
 	str r0, [sp]
@@ -981,9 +981,9 @@ sub_8085054: @ 8085054
 	str r0, [sp]
 _0808507E:
 	mov r0, sp
-	bl affects_encounter_rate_based_on_flags
+	bl ApplyFluteEncounterRateMod
 	mov r0, sp
-	bl ApplyCleanseTagWildEncounterRateReduction
+	bl ApplyCleanseTagEncounterRateMod
 	cmp r4, 0
 	bne _080850BA
 	ldr r4, _080850DC
@@ -1027,7 +1027,7 @@ _080850C6:
 	bx r1
 	.align 2, 0
 _080850DC: .4byte gPlayerParty
-	thumb_func_end sub_8085054
+	thumb_func_end DoWildEncounterTest
 
 	thumb_func_start DoGlobalWildEncounterDiceRoll
 DoGlobalWildEncounterDiceRoll: @ 80850E0
@@ -1050,8 +1050,8 @@ _080850FE:
 	bx r1
 	thumb_func_end DoGlobalWildEncounterDiceRoll
 
-	thumb_func_start sub_8085104
-sub_8085104: @ 8085104
+	thumb_func_start StandardWildEncounter
+StandardWildEncounter: @ 8085104
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -1068,7 +1068,7 @@ sub_8085104: @ 8085104
 	bne _08085122
 	b _08085282
 _08085122:
-	bl sub_8084D6C
+	bl GetCurrentMapWildMonHeader
 	lsls r0, 16
 	lsrs r5, r0, 16
 	ldr r0, _080851D0
@@ -1112,7 +1112,7 @@ _0808516A:
 	ldr r0, [r0]
 	ldrb r0, [r0]
 	movs r1, 0
-	bl sub_8085054
+	bl DoWildEncounterTest
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1144,14 +1144,14 @@ _080851AE:
 	ldr r0, [r0]
 	movs r1, 0
 	movs r2, 0x1
-	bl sub_8084EB0
+	bl GenerateWildMon
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _0808527A
 	b _08085282
 	.align 2, 0
-_080851CC: .4byte gUnknown_0202FF7C
+_080851CC: .4byte gWildEncountersDisabled
 _080851D0: .4byte 0x0000ffff
 _080851D4: .4byte gWildMonHeaders
 _080851D8:
@@ -1198,7 +1198,7 @@ _08085222:
 	ldr r0, [r4]
 	ldrb r0, [r0]
 	movs r1, 0
-	bl sub_8085054
+	bl DoWildEncounterTest
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1211,7 +1211,7 @@ _08085222:
 _0808524A:
 	ldr r0, _08085264
 	ldrb r0, [r0, 0xC]
-	bl sub_8085598
+	bl RepelCheck
 	lsls r0, 24
 	cmp r0, 0
 	beq _08085282
@@ -1225,7 +1225,7 @@ _08085268:
 	ldr r0, [r4]
 	movs r1, 0x1
 	movs r2, 0x1
-	bl sub_8084EB0
+	bl GenerateWildMon
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1243,12 +1243,12 @@ _08085284:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8085104
+	thumb_func_end StandardWildEncounter
 
-	thumb_func_start rock_smash_wild_pokemon_encounter
-rock_smash_wild_pokemon_encounter: @ 8085290
+	thumb_func_start RockSmashWildEncounter
+RockSmashWildEncounter: @ 8085290
 	push {r4,lr}
-	bl sub_8084D6C
+	bl GetCurrentMapWildMonHeader
 	lsls r0, 16
 	lsrs r2, r0, 16
 	ldr r0, _080852E0
@@ -1265,7 +1265,7 @@ rock_smash_wild_pokemon_encounter: @ 8085290
 	beq _080852D8
 	ldrb r0, [r4]
 	movs r1, 0x1
-	bl sub_8085054
+	bl DoWildEncounterTest
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1273,7 +1273,7 @@ rock_smash_wild_pokemon_encounter: @ 8085290
 	adds r0, r4, 0
 	movs r1, 0x2
 	movs r2, 0x1
-	bl sub_8084EB0
+	bl GenerateWildMon
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0x1
@@ -1297,10 +1297,10 @@ _080852F2:
 	bx r0
 	.align 2, 0
 _080852F8: .4byte gScriptResult
-	thumb_func_end rock_smash_wild_pokemon_encounter
+	thumb_func_end RockSmashWildEncounter
 
-	thumb_func_start sub_80852FC
-sub_80852FC: @ 80852FC
+	thumb_func_start SweetScentWildEncounter
+SweetScentWildEncounter: @ 80852FC
 	push {r4,r5,lr}
 	sub sp, 0x4
 	mov r5, sp
@@ -1308,7 +1308,7 @@ sub_80852FC: @ 80852FC
 	mov r0, sp
 	adds r1, r5, 0
 	bl PlayerGetDestCoords
-	bl sub_8084D6C
+	bl GetCurrentMapWildMonHeader
 	lsls r0, 16
 	lsrs r4, r0, 16
 	ldr r0, _0808536C
@@ -1356,7 +1356,7 @@ _08085374:
 	adds r0, r4, 0
 	movs r1, 0
 	movs r2, 0
-	bl sub_8084EB0
+	bl GenerateWildMon
 	b _080853D2
 _08085380:
 	mov r0, sp
@@ -1396,7 +1396,7 @@ _080853C8:
 	adds r0, r4, 0
 	movs r1, 0x1
 	movs r2, 0
-	bl sub_8084EB0
+	bl GenerateWildMon
 _080853D2:
 	bl sub_8081A00
 	movs r0, 0x1
@@ -1408,12 +1408,12 @@ _080853DC:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80852FC
+	thumb_func_end SweetScentWildEncounter
 
 	thumb_func_start GetFishingWildMonListHeader
 GetFishingWildMonListHeader: @ 80853E4
 	push {lr}
-	bl sub_8084D6C
+	bl GetCurrentMapWildMonHeader
 	lsls r0, 16
 	lsrs r2, r0, 16
 	ldr r0, _0808540C
@@ -1440,31 +1440,31 @@ _08085416:
 	bx r1
 	thumb_func_end GetFishingWildMonListHeader
 
-	thumb_func_start sub_808541C
-sub_808541C: @ 808541C
+	thumb_func_start FishingWildEncounter
+FishingWildEncounter: @ 808541C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	bl check_feebas
+	bl CheckFeebas
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0808544C
 	ldr r4, _08085448
 	adds r0, r4, 0
-	bl random_number_in_range
+	bl RandomInRange
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	ldrh r4, [r4, 0x2]
 	adds r0, r4, 0
-	bl sub_8084E78
+	bl CreateWildMon
 	b _0808546C
 	.align 2, 0
 _08085448: .4byte gWildFeebasRoute119Data
 _0808544C:
 	ldr r4, _08085484
-	bl sub_8084D6C
+	bl GetCurrentMapWildMonHeader
 	lsls r0, 16
 	lsrs r0, 16
 	lsls r1, r0, 2
@@ -1474,7 +1474,7 @@ _0808544C:
 	adds r1, r4
 	ldr r0, [r1]
 	adds r1, r5, 0
-	bl sub_8084F18
+	bl GenerateFishingWildMon
 	lsls r0, 16
 	lsrs r4, r0, 16
 _0808546C:
@@ -1488,15 +1488,15 @@ _0808546C:
 	bx r0
 	.align 2, 0
 _08085484: .4byte gWildMonHeaders
-	thumb_func_end sub_808541C
+	thumb_func_end FishingWildEncounter
 
-	thumb_func_start wild_pokemon_rand_for_map
-wild_pokemon_rand_for_map: @ 8085488
+	thumb_func_start GetLocalWildMon
+GetLocalWildMon: @ 8085488
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	movs r0, 0
 	strb r0, [r6]
-	bl sub_8084D6C
+	bl GetCurrentMapWildMonHeader
 	lsls r0, 16
 	lsrs r3, r0, 16
 	ldr r0, _080854C0
@@ -1529,7 +1529,7 @@ _080854C8:
 _080854CE:
 	movs r0, 0x1
 	strb r0, [r6]
-	bl wild_pokemon_rand_water
+	bl PickWildMon_Water
 	lsls r0, 24
 	ldr r1, [r4, 0x4]
 	b _08085508
@@ -1545,12 +1545,12 @@ _080854DC:
 	bls _08085500
 	movs r0, 0x1
 	strb r0, [r6]
-	bl wild_pokemon_rand_water
+	bl PickWildMon_Water
 	lsls r0, 24
 	ldr r1, [r4, 0x4]
 	b _08085508
 _08085500:
-	bl wild_pokemon_rand_grass
+	bl PickWildMon_Grass
 	lsls r0, 24
 	ldr r1, [r5, 0x4]
 _08085508:
@@ -1561,12 +1561,12 @@ _0808550E:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end wild_pokemon_rand_for_map
+	thumb_func_end GetLocalWildMon
 
-	thumb_func_start sub_8085514
-sub_8085514: @ 8085514
+	thumb_func_start GetMirageIslandMon
+GetMirageIslandMon: @ 8085514
 	push {r4,lr}
-	bl sub_8084D6C
+	bl GetCurrentMapWildMonHeader
 	lsls r0, 16
 	lsrs r2, r0, 16
 	ldr r0, _08085548
@@ -1581,7 +1581,7 @@ sub_8085514: @ 8085514
 	ldr r4, [r0]
 	cmp r4, 0
 	beq _08085550
-	bl wild_pokemon_rand_water
+	bl PickWildMon_Water
 	lsls r0, 24
 	ldr r1, [r4, 0x4]
 	lsrs r0, 22
@@ -1597,10 +1597,10 @@ _08085552:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8085514
+	thumb_func_end GetMirageIslandMon
 
-	thumb_func_start sub_8085558
-sub_8085558: @ 8085558
+	thumb_func_start UpdateRepelCounter
+UpdateRepelCounter: @ 8085558
 	push {r4,r5,lr}
 	ldr r5, _08085588
 	adds r0, r5, 0
@@ -1630,10 +1630,10 @@ _08085592:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8085558
+	thumb_func_end UpdateRepelCounter
 
-	thumb_func_start sub_8085598
-sub_8085598: @ 8085598
+	thumb_func_start RepelCheck
+RepelCheck: @ 8085598
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -1684,10 +1684,10 @@ _080855F8:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8085598
+	thumb_func_end RepelCheck
 
-	thumb_func_start affects_encounter_rate_based_on_flags
-affects_encounter_rate_based_on_flags: @ 8085600
+	thumb_func_start ApplyFluteEncounterRateMod
+ApplyFluteEncounterRateMod: @ 8085600
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r0, _0808561C
@@ -1719,10 +1719,10 @@ _08085634:
 	bx r0
 	.align 2, 0
 _0808563C: .4byte 0x0000084e
-	thumb_func_end affects_encounter_rate_based_on_flags
+	thumb_func_end ApplyFluteEncounterRateMod
 
-	thumb_func_start ApplyCleanseTagWildEncounterRateReduction
-ApplyCleanseTagWildEncounterRateReduction: @ 8085640
+	thumb_func_start ApplyCleanseTagEncounterRateMod
+ApplyCleanseTagEncounterRateMod: @ 8085640
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r0, _08085664
@@ -1741,6 +1741,6 @@ _0808565C:
 	bx r0
 	.align 2, 0
 _08085664: .4byte gPlayerParty
-	thumb_func_end ApplyCleanseTagWildEncounterRateReduction
+	thumb_func_end ApplyCleanseTagEncounterRateMod
 
 	.align 2, 0 @ Don't pad with nop.
