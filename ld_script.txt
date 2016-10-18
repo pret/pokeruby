@@ -48,7 +48,7 @@ SECTIONS {
         src/main_menu.o(.text);
         asm/rom3.o(.text);
         src/pokemon_1.o(.text);
-        asm/rom_803BA2C.o(.text);
+        asm/calculate_base_damage.o(.text);
         src/pokemon_2.o(.text);
         asm/rom_803D1FC.o(.text);
         src/trig.o(.text);

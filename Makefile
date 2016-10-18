@@ -48,7 +48,7 @@ C_OBJS := $(C_SRCS:%.c=%.o)
 
 ASM_OBJS := asm/crt0.o asm/rom3.o asm/rom_8040EB4.o asm/rom4.o asm/rom_8074BAC.o asm/rom5.o asm/rom5_part2.o asm/rom6.o\
 asm/libgcnmultiboot.o asm/m4a_1.o asm/m4a_3.o asm/libagbsyscall.o \
-asm/tileset.o asm/rom_8065394.o asm/rom_803D1FC.o asm/rom_803BA2C.o \
+asm/tileset.o asm/rom_8065394.o asm/rom_803D1FC.o asm/calculate_base_damage.o \
 asm/rom_813BA94.o asm/rom_81258BC.o asm/mystery_event_script.o \
 asm/field_effect_helpers.o asm/contest_ai.o asm/berry.o asm/rom_80B5054.o \
 asm/party_menu.o asm/rom_806D7F8.o

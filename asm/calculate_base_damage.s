@@ -6,8 +6,8 @@
 
 	.text
 
-	thumb_func_start sub_803BA2C
-sub_803BA2C: @ 803BA2C
+	thumb_func_start CalculateBaseDamage
+CalculateBaseDamage: @ 803BA2C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1160,6 +1160,6 @@ _0803C330:
 	bx r1
 	.align 2, 0
 _0803C344: .4byte 0x02017100
-	thumb_func_end sub_803BA2C
+	thumb_func_end CalculateBaseDamage
 
 	.align 2, 0 @ Don't pad with nop.

@@ -24358,7 +24358,7 @@ _08017CB8:
 	adds r0, r1, 0
 	movs r2, 0x1
 	movs r3, 0
-	bl sub_803BA2C
+	bl CalculateBaseDamage
 	ldr r1, _08017D10
 	str r0, [r1]
 	ldr r0, _08017D14
@@ -31846,7 +31846,7 @@ _0801BBE0:
 	adds r0, r1, 0
 	movs r2, 0x1
 	movs r3, 0
-	bl sub_803BA2C
+	bl CalculateBaseDamage
 	ldr r1, _0801BC3C
 	str r0, [r1]
 	ldr r1, _0801BC40
@@ -33607,7 +33607,7 @@ atk05_cmd5: @ 801C9EC
 	str r4, [sp, 0x8]
 	ldrb r4, [r6]
 	str r4, [sp, 0xC]
-	bl sub_803BA2C
+	bl CalculateBaseDamage
 	ldr r4, _0801CADC
 	ldr r1, _0801CAE0
 	ldrb r1, [r1]
@@ -33727,7 +33727,7 @@ sub_801CAF8: @ 801CAF8
 	str r4, [sp, 0x4]
 	str r7, [sp, 0x8]
 	str r5, [sp, 0xC]
-	bl sub_803BA2C
+	bl CalculateBaseDamage
 	ldr r4, _0801CBD4
 	movs r1, 0
 	mov r2, r8
@@ -51767,7 +51767,7 @@ _08025C1C:
 	str r4, [sp, 0x8]
 	ldrb r4, [r5]
 	str r4, [sp, 0xC]
-	bl sub_803BA2C
+	bl CalculateBaseDamage
 	ldrb r2, [r6]
 	lsls r1, r2, 3
 	subs r1, r2
@@ -59477,7 +59477,7 @@ _08029964:
 	str r4, [sp, 0x8]
 	ldrb r4, [r7]
 	str r4, [sp, 0xC]
-	bl sub_803BA2C
+	bl CalculateBaseDamage
 	ldrb r1, [r7]
 	lsls r1, 2
 	mov r2, r8
