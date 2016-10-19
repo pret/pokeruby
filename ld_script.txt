@@ -98,6 +98,7 @@ SECTIONS {
         asm/rom_81258BC.o(.text);
         src/intro.o(.text);
         asm/rom_813BA94.o(.text);
+        asm/lottery_corner.o(.text);
         asm/diploma.o(.text);
         asm/berry_tag_screen.o(.text);
         asm/mystery_event_menu.o(.text);

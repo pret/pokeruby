@@ -55,7 +55,7 @@ asm/party_menu.o asm/rom_806D7F8.o asm/wild_encounter.o asm/rom_80859BC.o \
 asm/field_effect.o asm/title_screen.o asm/rom_807C828.o \
 asm/rom_806936C.o asm/clear_save_data_menu.o asm/rom_8148B8C.o \
 asm/mystery_event_menu.o asm/save_failed_screen.o asm/rom_81473B8.o \
-asm/diploma.o asm/berry_tag_screen.o
+asm/diploma.o asm/berry_tag_screen.o asm/lottery_corner.o
 
 DATA_ASM_OBJS := data/data2.o data/graphics.o data/sound_data.o \
 data/event_scripts.o data/battle_anim_scripts.o \
