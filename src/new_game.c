@@ -34,7 +34,7 @@ void set_player_trainer_id(void)
     write_word_to_mem((Random() << 16) | Random(), gSaveBlock2.playerTrainerId);
 }
 
-void sub_8052D54(void)
+void SetDefaultOptions(void)
 {
     gSaveBlock2.optionsTextSpeed = OPTIONS_TEXT_SPEED_MID;
     gSaveBlock2.optionsWindowFrameType = 0;
@@ -73,7 +73,7 @@ void sub_8052E04(void)
 void ClearSav2(void)
 {
     CpuFill16(0, &gSaveBlock2, sizeof(gSaveBlock2));
-    sub_8052D54();
+    SetDefaultOptions();
 }
 
 void sub_8052E4C(void)
