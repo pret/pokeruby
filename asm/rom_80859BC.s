@@ -2787,8 +2787,8 @@ _08086F24: .4byte gMapObjects
 _08086F28: .4byte sub_8086CBC
 	thumb_func_end sub_8086ED4
 
-	thumb_func_start sub_8086F2C
-sub_8086F2C: @ 8086F2C
+	thumb_func_start FldEff_UseWaterfall
+FldEff_UseWaterfall: @ 8086F2C
 	push {r4,lr}
 	ldr r4, _08086F58
 	adds r0, r4, 0
@@ -2813,7 +2813,7 @@ sub_8086F2C: @ 8086F2C
 _08086F58: .4byte sub_8086F64
 _08086F5C: .4byte gTasks
 _08086F60: .4byte gUnknown_0202FF84
-	thumb_func_end sub_8086F2C
+	thumb_func_end FldEff_UseWaterfall
 
 	thumb_func_start sub_8086F64
 sub_8086F64: @ 8086F64
@@ -2991,8 +2991,8 @@ _080870AA:
 	bx r1
 	thumb_func_end sub_8087058
 
-	thumb_func_start sub_80870B0
-sub_80870B0: @ 80870B0
+	thumb_func_start FldEff_UseDive
+FldEff_UseDive: @ 80870B0
 	push {r4,lr}
 	ldr r4, _080870E0
 	adds r0, r4, 0
@@ -3019,7 +3019,7 @@ sub_80870B0: @ 80870B0
 _080870E0: .4byte sub_80870EC
 _080870E4: .4byte gTasks
 _080870E8: .4byte gUnknown_0202FF84
-	thumb_func_end sub_80870B0
+	thumb_func_end FldEff_UseDive
 
 	thumb_func_start sub_80870EC
 sub_80870EC: @ 80870EC
@@ -3669,8 +3669,8 @@ _080875CC: .4byte gPlayerAvatar
 _080875D0: .4byte sub_8087470
 	thumb_func_end sub_808759C
 
-	thumb_func_start sub_80875D4
-sub_80875D4: @ 80875D4
+	thumb_func_start FldEff_LavaridgeGymWarp
+FldEff_LavaridgeGymWarp: @ 80875D4
 	push {r4,lr}
 	ldr r4, _0808762C
 	adds r1, r4, 0x4
@@ -3716,7 +3716,7 @@ sub_80875D4: @ 80875D4
 _0808762C: .4byte gUnknown_0202FF84
 _08087630: .4byte gFieldEffectObjectTemplatePointers
 _08087634: .4byte gSprites
-	thumb_func_end sub_80875D4
+	thumb_func_end FldEff_LavaridgeGymWarp
 
 	thumb_func_start sub_8087638
 sub_8087638: @ 8087638
@@ -3973,8 +3973,8 @@ _08087820: .4byte CB2_LoadMap
 _08087824: .4byte sub_808766C
 	thumb_func_end sub_80877D4
 
-	thumb_func_start sub_8087828
-sub_8087828: @ 8087828
+	thumb_func_start FldEff_PopOutOfAsh
+FldEff_PopOutOfAsh: @ 8087828
 	push {r4,lr}
 	ldr r4, _08087880
 	adds r1, r4, 0x4
@@ -4020,7 +4020,7 @@ sub_8087828: @ 8087828
 _08087880: .4byte gUnknown_0202FF84
 _08087884: .4byte gFieldEffectObjectTemplatePointers
 _08087888: .4byte gSprites
-	thumb_func_end sub_8087828
+	thumb_func_end FldEff_PopOutOfAsh
 
 	thumb_func_start sub_808788C
 sub_808788C: @ 808788C
@@ -5009,8 +5009,8 @@ _08088060: .4byte gMapObjects
 _08088064: .4byte sub_8087E1C
 	thumb_func_end sub_8087FDC
 
-	thumb_func_start sub_8088068
-sub_8088068: @ 8088068
+	thumb_func_start FldEff_FieldMoveShowMon
+FldEff_FieldMoveShowMon: @ 8088068
 	push {r4,lr}
 	bl sav1_map_get_light_level
 	lsls r0, 24
@@ -5052,10 +5052,10 @@ _0808808A:
 _080880B8: .4byte sub_808847C
 _080880BC: .4byte gUnknown_0202FF84
 _080880C0: .4byte gTasks
-	thumb_func_end sub_8088068
+	thumb_func_end FldEff_FieldMoveShowMon
 
-	thumb_func_start sub_80880C4
-sub_80880C4: @ 80880C4
+	thumb_func_start FldEff_FieldMoveShowMonInit
+FldEff_FieldMoveShowMonInit: @ 80880C4
 	push {r4-r6,lr}
 	ldr r5, _08088118
 	ldr r0, [r5]
@@ -5095,7 +5095,7 @@ sub_80880C4: @ 80880C4
 	.align 2, 0
 _08088118: .4byte gUnknown_0202FF84
 _0808811C: .4byte gPlayerParty
-	thumb_func_end sub_80880C4
+	thumb_func_end FldEff_FieldMoveShowMonInit
 
 	thumb_func_start sub_8088120
 sub_8088120: @ 8088120
@@ -6146,8 +6146,8 @@ _0808890E:
 	bx r0
 	thumb_func_end sub_80888F0
 
-	thumb_func_start sub_8088914
-sub_8088914: @ 8088914
+	thumb_func_start FldEff_UseSurf
+FldEff_UseSurf: @ 8088914
 	push {lr}
 	ldr r0, _08088944
 	movs r1, 0xFF
@@ -6173,7 +6173,7 @@ _08088944: .4byte sub_8088954
 _08088948: .4byte gTasks
 _0808894C: .4byte gUnknown_0202FF84
 _08088950: .4byte 0x0000016d
-	thumb_func_end sub_8088914
+	thumb_func_end FldEff_UseSurf
 
 	thumb_func_start sub_8088954
 sub_8088954: @ 8088954
@@ -6429,8 +6429,8 @@ _08088B60: .4byte gMapObjects
 _08088B64: .4byte sub_8088954
 	thumb_func_end sub_8088AF4
 
-	thumb_func_start sub_8088B68
-sub_8088B68: @ 8088B68
+	thumb_func_start FldEff_Unknown30
+FldEff_Unknown30: @ 8088B68
 	push {r4,lr}
 	ldr r0, _08088BB4
 	ldr r0, [r0, 0x68]
@@ -6471,7 +6471,7 @@ _08088BB4: .4byte gFieldEffectObjectTemplatePointers
 _08088BB8: .4byte gSprites
 _08088BBC: .4byte sub_8088BC4
 _08088BC0: .4byte gUnknown_0202FF84
-	thumb_func_end sub_8088B68
+	thumb_func_end FldEff_Unknown30
 
 	thumb_func_start sub_8088BC4
 sub_8088BC4: @ 8088BC4
@@ -6538,8 +6538,8 @@ _08088C36:
 _08088C3C: .4byte gSprites
 	thumb_func_end sub_8088BC4
 
-	thumb_func_start sub_8088C40
-sub_8088C40: @ 8088C40
+	thumb_func_start FldEff_UseFly
+FldEff_UseFly: @ 8088C40
 	push {lr}
 	ldr r0, _08088C64
 	movs r1, 0xFE
@@ -6561,7 +6561,7 @@ sub_8088C40: @ 8088C40
 _08088C64: .4byte sub_8088C70
 _08088C68: .4byte gTasks
 _08088C6C: .4byte gUnknown_0202FF84
-	thumb_func_end sub_8088C40
+	thumb_func_end FldEff_UseFly
 
 	thumb_func_start sub_8088C70
 sub_8088C70: @ 8088C70
@@ -7339,8 +7339,8 @@ _08089254: .4byte gSprites
 _08089258: .4byte sub_808914C
 	thumb_func_end sub_8089230
 
-	thumb_func_start sub_808925C
-sub_808925C: @ 808925C
+	thumb_func_start FldEff_FlyIn
+FldEff_FlyIn: @ 808925C
 	push {lr}
 	ldr r0, _0808926C
 	movs r1, 0xFE
@@ -7350,7 +7350,7 @@ sub_808925C: @ 808925C
 	bx r1
 	.align 2, 0
 _0808926C: .4byte sub_8089270
-	thumb_func_end sub_808925C
+	thumb_func_end FldEff_FlyIn
 
 	thumb_func_start sub_8089270
 sub_8089270: @ 8089270

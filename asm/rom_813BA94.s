@@ -23647,8 +23647,8 @@ _081475D8: .4byte gUnknown_0202FF84
 _081475DC: .4byte gUnknown_03005CE0
 	thumb_func_end sub_81475C4
 
-	thumb_func_start sub_81475E0
-sub_81475E0: @ 81475E0
+	thumb_func_start FldEff_UseFlyAncientTomb
+FldEff_UseFlyAncientTomb: @ 81475E0
 	push {lr}
 	bl oei_task_add
 	lsls r0, 24
@@ -23668,7 +23668,7 @@ sub_81475E0: @ 81475E0
 	.align 2, 0
 _08147604: .4byte gTasks
 _08147608: .4byte sub_814760C
-	thumb_func_end sub_81475E0
+	thumb_func_end FldEff_UseFlyAncientTomb
 
 	thumb_func_start sub_814760C
 sub_814760C: @ 814760C
@@ -29369,8 +29369,8 @@ _0814A3CC: .4byte gUnknown_0202FF84
 _0814A3D0: .4byte gUnknown_03005CE0
 	thumb_func_end hm_teleport_run_dp02scr
 
-	thumb_func_start sub_814A3D4
-sub_814A3D4: @ 814A3D4
+	thumb_func_start FldEff_UseTeleport
+FldEff_UseTeleport: @ 814A3D4
 	push {lr}
 	bl oei_task_add
 	lsls r0, 24
@@ -29392,7 +29392,7 @@ sub_814A3D4: @ 814A3D4
 	.align 2, 0
 _0814A3FC: .4byte gTasks
 _0814A400: .4byte sub_814A404
-	thumb_func_end sub_814A3D4
+	thumb_func_end FldEff_UseTeleport
 
 	thumb_func_start sub_814A404
 sub_814A404: @ 814A404

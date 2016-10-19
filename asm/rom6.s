@@ -326,8 +326,8 @@ _0810B554: .4byte gUnknown_03005CE0
 _0810B558: .4byte UseRockSmashScript
 	thumb_func_end sub_810B53C
 
-	thumb_func_start oei_rocksmash
-oei_rocksmash: @ 810B55C
+	thumb_func_start FldEff_RockSmash
+FldEff_RockSmash: @ 810B55C
 	push {lr}
 	bl oei_task_add
 	lsls r0, 24
@@ -349,7 +349,7 @@ oei_rocksmash: @ 810B55C
 	.align 2, 0
 _0810B584: .4byte gTasks
 _0810B588: .4byte sub_810B58C
-	thumb_func_end oei_rocksmash
+	thumb_func_end FldEff_RockSmash
 
 	thumb_func_start sub_810B58C
 sub_810B58C: @ 810B58C
@@ -408,8 +408,8 @@ _0810B5F0: .4byte gUnknown_0202FF84
 _0810B5F4: .4byte gUnknown_03005CE0
 	thumb_func_end sub_810B5D8
 
-	thumb_func_start sub_810B5F8
-sub_810B5F8: @ 810B5F8
+	thumb_func_start FldEff_UseDig
+FldEff_UseDig: @ 810B5F8
 	push {lr}
 	bl oei_task_add
 	lsls r0, 24
@@ -436,7 +436,7 @@ _0810B624:
 	.align 2, 0
 _0810B62C: .4byte gTasks
 _0810B630: .4byte sub_810B634
-	thumb_func_end sub_810B5F8
+	thumb_func_end FldEff_UseDig
 
 	thumb_func_start sub_810B634
 sub_810B634: @ 810B634
@@ -31090,8 +31090,8 @@ _0811AA4C: .4byte gUnknown_0202FF84
 _0811AA50: .4byte gUnknown_03005CE0
 	thumb_func_end sub_811AA38
 
-	thumb_func_start sub_811AA54
-sub_811AA54: @ 811AA54
+	thumb_func_start FldEff_UseStrength
+FldEff_UseStrength: @ 811AA54
 	push {lr}
 	bl oei_task_add
 	lsls r0, 24
@@ -31122,7 +31122,7 @@ _0811AA8C: .4byte sub_811AA9C
 _0811AA90: .4byte gUnknown_0202FF84
 _0811AA94: .4byte gPlayerParty
 _0811AA98: .4byte gStringVar1
-	thumb_func_end sub_811AA54
+	thumb_func_end FldEff_UseStrength
 
 	thumb_func_start sub_811AA9C
 sub_811AA9C: @ 811AA9C

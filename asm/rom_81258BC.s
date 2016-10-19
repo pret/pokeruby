@@ -2254,8 +2254,8 @@ _0812BFE8: .4byte gUnknown_0202FF84
 _0812BFEC: .4byte gUnknown_03005CE0
 	thumb_func_end sub_812BFD4
 
-	thumb_func_start sub_812BFF0
-sub_812BFF0: @ 812BFF0
+	thumb_func_start FldEff_SweetScent
+FldEff_SweetScent: @ 812BFF0
 	push {lr}
 	bl oei_task_add
 	lsls r0, 24
@@ -2275,7 +2275,7 @@ sub_812BFF0: @ 812BFF0
 	.align 2, 0
 _0812C014: .4byte gTasks
 _0812C018: .4byte sub_812C01C
-	thumb_func_end sub_812BFF0
+	thumb_func_end FldEff_SweetScent
 
 	thumb_func_start sub_812C01C
 sub_812C01C: @ 812C01C

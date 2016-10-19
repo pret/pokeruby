@@ -35381,8 +35381,8 @@ _080C63B4: .4byte gUnknown_03005CE0
 _080C63B8: .4byte gUnknown_081A2CE6
 	thumb_func_end sub_80C639C
 
-	thumb_func_start sub_80C63BC
-sub_80C63BC: @ 80C63BC
+	thumb_func_start FldEff_UseSecretPowerCave
+FldEff_UseSecretPowerCave: @ 80C63BC
 	push {lr}
 	bl oei_task_add
 	lsls r0, 24
@@ -35402,7 +35402,7 @@ sub_80C63BC: @ 80C63BC
 	.align 2, 0
 _080C63E0: .4byte gTasks
 _080C63E4: .4byte sub_80C63E8
-	thumb_func_end sub_80C63BC
+	thumb_func_end FldEff_UseSecretPowerCave
 
 	thumb_func_start sub_80C63E8
 sub_80C63E8: @ 80C63E8
@@ -35415,8 +35415,8 @@ sub_80C63E8: @ 80C63E8
 	bx r0
 	thumb_func_end sub_80C63E8
 
-	thumb_func_start sub_80C63FC
-sub_80C63FC: @ 80C63FC
+	thumb_func_start FldEff_SecretPowerCave
+FldEff_SecretPowerCave: @ 80C63FC
 	push {r4,lr}
 	bl sub_80C6280
 	ldr r0, _080C643C
@@ -35451,7 +35451,7 @@ _080C643C: .4byte gSpriteTemplate_83D2614
 _080C6440: .4byte gSprites
 _080C6444: .4byte gPlayerAvatar
 _080C6448: .4byte gUnknown_0202FF84
-	thumb_func_end sub_80C63FC
+	thumb_func_end FldEff_SecretPowerCave
 
 	thumb_func_start sub_80C644C
 sub_80C644C: @ 80C644C
@@ -35526,8 +35526,8 @@ _080C64C0: .4byte gUnknown_03005CE0
 _080C64C4: .4byte gUnknown_081A2D3E
 	thumb_func_end sub_80C64A8
 
-	thumb_func_start sub_80C64C8
-sub_80C64C8: @ 80C64C8
+	thumb_func_start FldEff_UseSecretPowerTree
+FldEff_UseSecretPowerTree: @ 80C64C8
 	push {lr}
 	bl oei_task_add
 	lsls r0, 24
@@ -35547,7 +35547,7 @@ sub_80C64C8: @ 80C64C8
 	.align 2, 0
 _080C64EC: .4byte gTasks
 _080C64F0: .4byte sub_80C64F4
-	thumb_func_end sub_80C64C8
+	thumb_func_end FldEff_UseSecretPowerTree
 
 	thumb_func_start sub_80C64F4
 sub_80C64F4: @ 80C64F4
@@ -35560,8 +35560,8 @@ sub_80C64F4: @ 80C64F4
 	bx r0
 	thumb_func_end sub_80C64F4
 
-	thumb_func_start sub_80C6508
-sub_80C6508: @ 80C6508
+	thumb_func_start FldEff_SecretPowerTree
+FldEff_SecretPowerTree: @ 80C6508
 	push {r4,lr}
 	ldr r1, _080C6580
 	movs r2, 0
@@ -35628,7 +35628,7 @@ _080C6588: .4byte gUnknown_0202FF84
 _080C658C: .4byte gSpriteTemplate_83D262C
 _080C6590: .4byte gSprites
 _080C6594: .4byte gPlayerAvatar
-	thumb_func_end sub_80C6508
+	thumb_func_end FldEff_SecretPowerTree
 
 	thumb_func_start sub_80C6598
 sub_80C6598: @ 80C6598
@@ -35713,8 +35713,8 @@ _080C6624: .4byte gUnknown_03005CE0
 _080C6628: .4byte gUnknown_081A2D96
 	thumb_func_end sub_80C660C
 
-	thumb_func_start sub_80C662C
-sub_80C662C: @ 80C662C
+	thumb_func_start FldEff_UseSecretPowerShrub
+FldEff_UseSecretPowerShrub: @ 80C662C
 	push {lr}
 	bl oei_task_add
 	lsls r0, 24
@@ -35734,7 +35734,7 @@ sub_80C662C: @ 80C662C
 	.align 2, 0
 _080C6650: .4byte gTasks
 _080C6654: .4byte sub_80C6658
-	thumb_func_end sub_80C662C
+	thumb_func_end FldEff_UseSecretPowerShrub
 
 	thumb_func_start sub_80C6658
 sub_80C6658: @ 80C6658
@@ -35747,8 +35747,8 @@ sub_80C6658: @ 80C6658
 	bx r0
 	thumb_func_end sub_80C6658
 
-	thumb_func_start sub_80C666C
-sub_80C666C: @ 80C666C
+	thumb_func_start FldEff_SecretPowerShrub
+FldEff_SecretPowerShrub: @ 80C666C
 	push {r4,lr}
 	bl sub_80C6280
 	ldr r0, _080C66AC
@@ -35783,7 +35783,7 @@ _080C66AC: .4byte gSpriteTemplate_83D2644
 _080C66B0: .4byte gSprites
 _080C66B4: .4byte gPlayerAvatar
 _080C66B8: .4byte gUnknown_0202FF84
-	thumb_func_end sub_80C666C
+	thumb_func_end FldEff_SecretPowerShrub
 
 	thumb_func_start sub_80C66BC
 sub_80C66BC: @ 80C66BC
@@ -35841,8 +35841,8 @@ sub_80C6708: @ 80C6708
 	bx r0
 	thumb_func_end sub_80C6708
 
-	thumb_func_start sub_80C6718
-sub_80C6718: @ 80C6718
+	thumb_func_start FldEff_PCTurnOn
+FldEff_PCTurnOn: @ 80C6718
 	push {r4,lr}
 	sub sp, 0x4
 	mov r4, sp
@@ -35875,7 +35875,7 @@ sub_80C6718: @ 80C6718
 	.align 2, 0
 _080C6758: .4byte sub_80C6760
 _080C675C: .4byte gTasks
-	thumb_func_end sub_80C6718
+	thumb_func_end FldEff_PCTurnOn
 
 	thumb_func_start sub_80C6760
 sub_80C6760: @ 80C6760
@@ -36171,17 +36171,17 @@ _080C69B6:
 	bx r0
 	thumb_func_end sub_80C696C
 
-	thumb_func_start sub_80C69BC
-sub_80C69BC: @ 80C69BC
+	thumb_func_start FldEff_Nop47
+FldEff_Nop47: @ 80C69BC
 	movs r0, 0
 	bx lr
-	thumb_func_end sub_80C69BC
+	thumb_func_end FldEff_Nop47
 
-	thumb_func_start sub_80C69C0
-sub_80C69C0: @ 80C69C0
+	thumb_func_start FldEff_Nop48
+FldEff_Nop48: @ 80C69C0
 	movs r0, 0
 	bx lr
-	thumb_func_end sub_80C69C0
+	thumb_func_end FldEff_Nop48
 
 	thumb_func_start sub_80C69C4
 sub_80C69C4: @ 80C69C4
@@ -36580,8 +36580,8 @@ _080C6D34: .4byte gSprites
 _080C6D38: .4byte sub_80C6C64
 	thumb_func_end sub_80C6C90
 
-	thumb_func_start sub_80C6D3C
-sub_80C6D3C: @ 80C6D3C
+	thumb_func_start FldEff_SandPillar
+FldEff_SandPillar: @ 80C6D3C
 	push {r4,lr}
 	sub sp, 0x4
 	bl ScriptContext2_Enable
@@ -36719,7 +36719,7 @@ _080C6E4C:
 _080C6E58: .4byte gSpriteTemplate_83D26A0
 _080C6E5C: .4byte gSprites
 _080C6E60: .4byte gPlayerAvatar
-	thumb_func_end sub_80C6D3C
+	thumb_func_end FldEff_SandPillar
 
 	thumb_func_start door_restore_tilemap
 door_restore_tilemap: @ 80C6E64

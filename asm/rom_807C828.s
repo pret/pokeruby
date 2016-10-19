@@ -16694,8 +16694,8 @@ sub_80847D8: @ 80847D8
 	bx r0
 	thumb_func_end sub_80847D8
 
-	thumb_func_start oei_exclamation_mark
-oei_exclamation_mark: @ 80847EC
+	thumb_func_start FldEff_ExclamationMarkIcon1
+FldEff_ExclamationMarkIcon1: @ 80847EC
 	push {lr}
 	ldr r0, _0808481C
 	movs r1, 0
@@ -16721,10 +16721,10 @@ _08084814:
 	.align 2, 0
 _0808481C: .4byte gSpriteTemplate_839B510
 _08084820: .4byte gSprites
-	thumb_func_end oei_exclamation_mark
+	thumb_func_end FldEff_ExclamationMarkIcon1
 
-	thumb_func_start sub_8084824
-sub_8084824: @ 8084824
+	thumb_func_start FldEff_ExclamationMarkIcon2
+FldEff_ExclamationMarkIcon2: @ 8084824
 	push {lr}
 	ldr r0, _08084854
 	movs r1, 0
@@ -16750,10 +16750,10 @@ _0808484C:
 	.align 2, 0
 _08084854: .4byte gSpriteTemplate_839B510
 _08084858: .4byte gSprites
-	thumb_func_end sub_8084824
+	thumb_func_end FldEff_ExclamationMarkIcon2
 
-	thumb_func_start sub_808485C
-sub_808485C: @ 808485C
+	thumb_func_start FldEff_HeartIcon
+FldEff_HeartIcon: @ 808485C
 	push {lr}
 	ldr r0, _0808488C
 	movs r1, 0
@@ -16779,7 +16779,7 @@ _08084884:
 	.align 2, 0
 _0808488C: .4byte gSpriteTemplate_839B528
 _08084890: .4byte gSprites
-	thumb_func_end sub_808485C
+	thumb_func_end FldEff_HeartIcon
 
 	thumb_func_start sub_8084894
 sub_8084894: @ 8084894

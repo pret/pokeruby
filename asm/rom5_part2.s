@@ -42854,8 +42854,8 @@ _080A25FC: .4byte gUnknown_0202FF84
 _080A2600: .4byte gUnknown_03005CE0
 	thumb_func_end sub_80A25E8
 
-	thumb_func_start sub_80A2604
-sub_80A2604: @ 80A2604
+	thumb_func_start FldEff_UseCutOnGrass
+FldEff_UseCutOnGrass: @ 80A2604
 	push {lr}
 	bl oei_task_add
 	lsls r0, 24
@@ -42877,7 +42877,7 @@ sub_80A2604: @ 80A2604
 	.align 2, 0
 _080A262C: .4byte gTasks
 _080A2630: .4byte sub_80A2684
-	thumb_func_end sub_80A2604
+	thumb_func_end FldEff_UseCutOnGrass
 
 	thumb_func_start sub_80A2634
 sub_80A2634: @ 80A2634
@@ -42896,8 +42896,8 @@ _080A264C: .4byte gUnknown_03005CE0
 _080A2650: .4byte UseCutScript
 	thumb_func_end sub_80A2634
 
-	thumb_func_start sub_80A2654
-sub_80A2654: @ 80A2654
+	thumb_func_start FldEff_UseCutOnTree
+FldEff_UseCutOnTree: @ 80A2654
 	push {lr}
 	bl oei_task_add
 	lsls r0, 24
@@ -42919,7 +42919,7 @@ sub_80A2654: @ 80A2654
 	.align 2, 0
 _080A267C: .4byte gTasks
 _080A2680: .4byte sub_80A2B00
-	thumb_func_end sub_80A2654
+	thumb_func_end FldEff_UseCutOnTree
 
 	thumb_func_start sub_80A2684
 sub_80A2684: @ 80A2684
@@ -42932,8 +42932,8 @@ sub_80A2684: @ 80A2684
 	bx r0
 	thumb_func_end sub_80A2684
 
-	thumb_func_start sub_80A2698
-sub_80A2698: @ 80A2698
+	thumb_func_start FldEff_CutGrass
+FldEff_CutGrass: @ 80A2698
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -43059,7 +43059,7 @@ _080A2798: .4byte gSprites
 _080A279C: .4byte gPlayerAvatar
 _080A27A0: .4byte gSpriteTemplate_CutGrass
 _080A27A4: .4byte 0x0201fff0
-	thumb_func_end sub_80A2698
+	thumb_func_end FldEff_CutGrass
 
 	thumb_func_start sub_80A27A8
 sub_80A27A8: @ 80A27A8

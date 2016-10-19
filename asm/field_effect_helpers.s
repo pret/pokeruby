@@ -578,8 +578,8 @@ _08126C5A:
 _08126C68: .4byte gSprites
 	thumb_func_end sub_8126BC4
 
-	thumb_func_start oei_shadow
-oei_shadow: @ 8126C6C
+	thumb_func_start FldEff_Shadow
+FldEff_Shadow: @ 8126C6C
 	push {r4,r5,lr}
 	ldr r5, _08126CF8
 	ldrb r0, [r5]
@@ -655,7 +655,7 @@ _08126D00: .4byte gFieldEffectObjectTemplatePointers
 _08126D04: .4byte gUnknown_08401E32
 _08126D08: .4byte gSprites
 _08126D0C: .4byte gUnknown_08401E36
-	thumb_func_end oei_shadow
+	thumb_func_end FldEff_Shadow
 
 	thumb_func_start oamc_shadow
 oamc_shadow: @ 8126D10
@@ -754,8 +754,8 @@ _08126DD0: .4byte gSprites
 _08126DD4: .4byte 0x00400001
 	thumb_func_end oamc_shadow
 
-	thumb_func_start oei_grass_normal
-oei_grass_normal: @ 8126DD8
+	thumb_func_start FldEff_TallGrass
+FldEff_TallGrass: @ 8126DD8
 	push {r4,r5,lr}
 	sub sp, 0x4
 	ldr r5, _08126E70
@@ -833,7 +833,7 @@ _08126E64:
 _08126E70: .4byte gUnknown_0202FF84
 _08126E74: .4byte gFieldEffectObjectTemplatePointers
 _08126E78: .4byte gSprites
-	thumb_func_end oei_grass_normal
+	thumb_func_end FldEff_TallGrass
 
 	thumb_func_start unc_grass_normal
 unc_grass_normal: @ 8126E7C
@@ -969,8 +969,8 @@ _08126F70:
 _08126F7C: .4byte gMapObjects
 	thumb_func_end unc_grass_normal
 
-	thumb_func_start sub_8126F80
-sub_8126F80: @ 8126F80
+	thumb_func_start FldEff_JumpTallGrass
+FldEff_JumpTallGrass: @ 8126F80
 	push {r4,lr}
 	ldr r4, _08126FE4
 	adds r1, r4, 0x4
@@ -1024,7 +1024,7 @@ _08126FDC:
 _08126FE4: .4byte gUnknown_0202FF84
 _08126FE8: .4byte gFieldEffectObjectTemplatePointers
 _08126FEC: .4byte gSprites
-	thumb_func_end sub_8126F80
+	thumb_func_end FldEff_JumpTallGrass
 
 	thumb_func_start sub_8126FF0
 sub_8126FF0: @ 8126FF0
@@ -1102,8 +1102,8 @@ _08127074:
 	bx r1
 	thumb_func_end sub_8126FF0
 
-	thumb_func_start sub_8127080
-sub_8127080: @ 8127080
+	thumb_func_start FldEff_LongGrass
+FldEff_LongGrass: @ 8127080
 	push {r4,r5,lr}
 	sub sp, 0x4
 	ldr r5, _0812711C
@@ -1182,7 +1182,7 @@ _08127110:
 _0812711C: .4byte gUnknown_0202FF84
 _08127120: .4byte gFieldEffectObjectTemplatePointers
 _08127124: .4byte gSprites
-	thumb_func_end sub_8127080
+	thumb_func_end FldEff_LongGrass
 
 	thumb_func_start unc_grass_tall
 unc_grass_tall: @ 8127128
@@ -1310,8 +1310,8 @@ _0812720E:
 _0812721C: .4byte gMapObjects
 	thumb_func_end unc_grass_tall
 
-	thumb_func_start sub_8127220
-sub_8127220: @ 8127220
+	thumb_func_start FldEff_JumpLongGrass
+FldEff_JumpLongGrass: @ 8127220
 	push {r4,lr}
 	ldr r4, _08127284
 	adds r1, r4, 0x4
@@ -1365,10 +1365,10 @@ _0812727C:
 _08127284: .4byte gUnknown_0202FF84
 _08127288: .4byte gFieldEffectObjectTemplatePointers
 _0812728C: .4byte gSprites
-	thumb_func_end sub_8127220
+	thumb_func_end FldEff_JumpLongGrass
 
-	thumb_func_start sub_8127290
-sub_8127290: @ 8127290
+	thumb_func_start FldEff_ShortGrass
+FldEff_ShortGrass: @ 8127290
 	push {r4-r6,lr}
 	ldr r6, _08127324
 	ldrb r0, [r6]
@@ -1447,7 +1447,7 @@ _08127324: .4byte gUnknown_0202FF84
 _08127328: .4byte gMapObjects
 _0812732C: .4byte gFieldEffectObjectTemplatePointers
 _08127330: .4byte gSprites
-	thumb_func_end sub_8127290
+	thumb_func_end FldEff_ShortGrass
 
 	thumb_func_start sub_8127334
 sub_8127334: @ 8127334
@@ -1574,8 +1574,8 @@ _08127416:
 _08127424: .4byte gSprites
 	thumb_func_end sub_8127334
 
-	thumb_func_start sub_8127428
-sub_8127428: @ 8127428
+	thumb_func_start FldEff_SandFootprints
+FldEff_SandFootprints: @ 8127428
 	push {r4,lr}
 	ldr r4, _08127490
 	adds r1, r4, 0x4
@@ -1629,10 +1629,10 @@ _08127486:
 _08127490: .4byte gUnknown_0202FF84
 _08127494: .4byte gFieldEffectObjectTemplatePointers
 _08127498: .4byte gSprites
-	thumb_func_end sub_8127428
+	thumb_func_end FldEff_SandFootprints
 
-	thumb_func_start sub_812749C
-sub_812749C: @ 812749C
+	thumb_func_start FldEff_DeepSandFootprints
+FldEff_DeepSandFootprints: @ 812749C
 	push {r4,r5,lr}
 	ldr r4, _08127504
 	adds r1, r4, 0x4
@@ -1687,10 +1687,10 @@ _081274FC:
 _08127504: .4byte gUnknown_0202FF84
 _08127508: .4byte gFieldEffectObjectTemplatePointers
 _0812750C: .4byte gSprites
-	thumb_func_end sub_812749C
+	thumb_func_end FldEff_DeepSandFootprints
 
-	thumb_func_start sub_8127510
-sub_8127510: @ 8127510
+	thumb_func_start FldEff_BikeTireTracks
+FldEff_BikeTireTracks: @ 8127510
 	push {r4,r5,lr}
 	ldr r4, _08127578
 	adds r1, r4, 0x4
@@ -1745,7 +1745,7 @@ _08127570:
 _08127578: .4byte gUnknown_0202FF84
 _0812757C: .4byte gFieldEffectObjectTemplatePointers
 _08127580: .4byte gSprites
-	thumb_func_end sub_8127510
+	thumb_func_end FldEff_BikeTireTracks
 
 	thumb_func_start sub_8127584
 sub_8127584: @ 8127584
@@ -1824,8 +1824,8 @@ _08127608:
 	bx r0
 	thumb_func_end sub_81275C4
 
-	thumb_func_start sub_8127610
-sub_8127610: @ 8127610
+	thumb_func_start FldEff_Splash
+FldEff_Splash: @ 8127610
 	push {r4-r6,lr}
 	ldr r6, _081276A4
 	ldrb r0, [r6]
@@ -1901,7 +1901,7 @@ _081276A4: .4byte gUnknown_0202FF84
 _081276A8: .4byte gMapObjects
 _081276AC: .4byte gFieldEffectObjectTemplatePointers
 _081276B0: .4byte gSprites
-	thumb_func_end sub_8127610
+	thumb_func_end FldEff_Splash
 
 	thumb_func_start sub_81276B4
 sub_81276B4: @ 81276B4
@@ -1975,8 +1975,8 @@ _08127738: .4byte gSprites
 _0812773C: .4byte gMapObjects
 	thumb_func_end sub_81276B4
 
-	thumb_func_start sub_8127740
-sub_8127740: @ 8127740
+	thumb_func_start FldEff_JumpSmallSplash
+FldEff_JumpSmallSplash: @ 8127740
 	push {r4,lr}
 	ldr r4, _081277A4
 	adds r1, r4, 0x4
@@ -2030,10 +2030,10 @@ _0812779C:
 _081277A4: .4byte gUnknown_0202FF84
 _081277A8: .4byte gFieldEffectObjectTemplatePointers
 _081277AC: .4byte gSprites
-	thumb_func_end sub_8127740
+	thumb_func_end FldEff_JumpSmallSplash
 
-	thumb_func_start oei_water_drop_tall
-oei_water_drop_tall: @ 81277B0
+	thumb_func_start FldEff_JumpBigSplash
+FldEff_JumpBigSplash: @ 81277B0
 	push {r4,lr}
 	ldr r4, _08127814
 	adds r1, r4, 0x4
@@ -2087,10 +2087,10 @@ _0812780C:
 _08127814: .4byte gUnknown_0202FF84
 _08127818: .4byte gFieldEffectObjectTemplatePointers
 _0812781C: .4byte gSprites
-	thumb_func_end oei_water_drop_tall
+	thumb_func_end FldEff_JumpBigSplash
 
-	thumb_func_start sub_8127820
-sub_8127820: @ 8127820
+	thumb_func_start FldEff_FeetInFlowingWater
+FldEff_FeetInFlowingWater: @ 8127820
 	push {r4-r7,lr}
 	ldr r7, _081278C0
 	ldrb r0, [r7]
@@ -2174,7 +2174,7 @@ _081278C8: .4byte gFieldEffectObjectTemplatePointers
 _081278CC: .4byte gSprites
 _081278D0: .4byte sub_81278D8
 _081278D4: .4byte 0x0000ffff
-	thumb_func_end sub_8127820
+	thumb_func_end FldEff_FeetInFlowingWater
 
 	thumb_func_start sub_81278D8
 sub_81278D8: @ 81278D8
@@ -2258,8 +2258,8 @@ _0812796A:
 _08127974: .4byte gSprites
 	thumb_func_end sub_81278D8
 
-	thumb_func_start oei_ripples
-oei_ripples: @ 8127978
+	thumb_func_start FldEff_Ripple
+FldEff_Ripple: @ 8127978
 	push {r4,lr}
 	ldr r0, _081279CC
 	ldr r0, [r0, 0x14]
@@ -2306,10 +2306,10 @@ _081279C4:
 _081279CC: .4byte gFieldEffectObjectTemplatePointers
 _081279D0: .4byte gUnknown_0202FF84
 _081279D4: .4byte gSprites
-	thumb_func_end oei_ripples
+	thumb_func_end FldEff_Ripple
 
-	thumb_func_start sub_81279D8
-sub_81279D8: @ 81279D8
+	thumb_func_start FldEff_HotSpringsWater
+FldEff_HotSpringsWater: @ 81279D8
 	push {r4-r6,lr}
 	ldr r6, _08127A6C
 	ldrb r0, [r6]
@@ -2388,7 +2388,7 @@ _08127A6C: .4byte gUnknown_0202FF84
 _08127A70: .4byte gMapObjects
 _08127A74: .4byte gFieldEffectObjectTemplatePointers
 _08127A78: .4byte gSprites
-	thumb_func_end sub_81279D8
+	thumb_func_end FldEff_HotSpringsWater
 
 	thumb_func_start sub_8127A7C
 sub_8127A7C: @ 8127A7C
@@ -2469,8 +2469,8 @@ _08127B08:
 _08127B10: .4byte gSprites
 	thumb_func_end sub_8127A7C
 
-	thumb_func_start sub_8127B14
-sub_8127B14: @ 8127B14
+	thumb_func_start FldEff_Unknown19
+FldEff_Unknown19: @ 8127B14
 	push {r4,lr}
 	ldr r4, _08127B74
 	adds r1, r4, 0x4
@@ -2522,10 +2522,10 @@ _08127B6C:
 _08127B74: .4byte gUnknown_0202FF84
 _08127B78: .4byte gFieldEffectObjectTemplatePointers
 _08127B7C: .4byte gSprites
-	thumb_func_end sub_8127B14
+	thumb_func_end FldEff_Unknown19
 
-	thumb_func_start sub_8127B80
-sub_8127B80: @ 8127B80
+	thumb_func_start FldEff_Unknown20
+FldEff_Unknown20: @ 8127B80
 	push {r4,lr}
 	ldr r4, _08127BE0
 	adds r1, r4, 0x4
@@ -2577,10 +2577,10 @@ _08127BD8:
 _08127BE0: .4byte gUnknown_0202FF84
 _08127BE4: .4byte gFieldEffectObjectTemplatePointers
 _08127BE8: .4byte gSprites
-	thumb_func_end sub_8127B80
+	thumb_func_end FldEff_Unknown20
 
-	thumb_func_start sub_8127BEC
-sub_8127BEC: @ 8127BEC
+	thumb_func_start FldEff_Unknown21
+FldEff_Unknown21: @ 8127BEC
 	push {r4,lr}
 	ldr r4, _08127C4C
 	adds r1, r4, 0x4
@@ -2632,10 +2632,10 @@ _08127C44:
 _08127C4C: .4byte gUnknown_0202FF84
 _08127C50: .4byte gFieldEffectObjectTemplatePointers
 _08127C54: .4byte gSprites
-	thumb_func_end sub_8127BEC
+	thumb_func_end FldEff_Unknown21
 
-	thumb_func_start sub_8127C58
-sub_8127C58: @ 8127C58
+	thumb_func_start FldEff_Unknown22
+FldEff_Unknown22: @ 8127C58
 	push {r4,lr}
 	ldr r4, _08127CB8
 	adds r1, r4, 0x4
@@ -2687,7 +2687,7 @@ _08127CB0:
 _08127CB8: .4byte gUnknown_0202FF84
 _08127CBC: .4byte gFieldEffectObjectTemplatePointers
 _08127CC0: .4byte gSprites
-	thumb_func_end sub_8127C58
+	thumb_func_end FldEff_Unknown22
 
 	thumb_func_start ash
 ash: @ 8127CC4
@@ -2718,8 +2718,8 @@ ash: @ 8127CC4
 _08127CF4: .4byte gUnknown_0202FF84
 	thumb_func_end ash
 
-	thumb_func_start oei_ash
-oei_ash: @ 8127CF8
+	thumb_func_start FldEff_Ash
+FldEff_Ash: @ 8127CF8
 	push {r4,r5,lr}
 	sub sp, 0x4
 	ldr r5, _08127D78
@@ -2787,7 +2787,7 @@ _08127D6E:
 _08127D78: .4byte gUnknown_0202FF84
 _08127D7C: .4byte gFieldEffectObjectTemplatePointers
 _08127D80: .4byte gSprites
-	thumb_func_end oei_ash
+	thumb_func_end FldEff_Ash
 
 	thumb_func_start sub_8127D84
 sub_8127D84: @ 8127D84
@@ -2904,8 +2904,8 @@ _08127E50:
 	bx r0
 	thumb_func_end sub_8127E30
 
-	thumb_func_start sub_8127E58
-sub_8127E58: @ 8127E58
+	thumb_func_start FldEff_SurfBlob
+FldEff_SurfBlob: @ 8127E58
 	push {r4,r5,lr}
 	ldr r4, _08127EC0
 	adds r1, r4, 0x4
@@ -2961,7 +2961,7 @@ _08127EC0: .4byte gUnknown_0202FF84
 _08127EC4: .4byte gFieldEffectObjectTemplatePointers
 _08127EC8: .4byte gSprites
 _08127ECC: .4byte 0x0000ffff
-	thumb_func_end sub_8127E58
+	thumb_func_end FldEff_SurfBlob
 
 	thumb_func_start sub_8127ED0
 sub_8127ED0: @ 8127ED0
@@ -3372,8 +3372,8 @@ _081281AC:
 _081281B0: .4byte gSprites
 	thumb_func_end sub_8128174
 
-	thumb_func_start sub_81281B4
-sub_81281B4: @ 81281B4
+	thumb_func_start FldEff_Dust
+FldEff_Dust: @ 81281B4
 	push {r4,lr}
 	ldr r4, _08128218
 	adds r1, r4, 0x4
@@ -3427,10 +3427,10 @@ _08128210:
 _08128218: .4byte gUnknown_0202FF84
 _0812821C: .4byte gFieldEffectObjectTemplatePointers
 _08128220: .4byte gSprites
-	thumb_func_end sub_81281B4
+	thumb_func_end FldEff_Dust
 
-	thumb_func_start sub_8128224
-sub_8128224: @ 8128224
+	thumb_func_start FldEff_SandPile
+FldEff_SandPile: @ 8128224
 	push {r4-r7,lr}
 	ldr r7, _081282D0
 	ldrb r0, [r7]
@@ -3519,7 +3519,7 @@ _081282D0: .4byte gUnknown_0202FF84
 _081282D4: .4byte gMapObjects
 _081282D8: .4byte gFieldEffectObjectTemplatePointers
 _081282DC: .4byte gSprites
-	thumb_func_end sub_8128224
+	thumb_func_end FldEff_SandPile
 
 	thumb_func_start sub_81282E0
 sub_81282E0: @ 81282E0
@@ -3626,8 +3626,8 @@ _081283A4: .4byte gSprites
 _081283A8: .4byte gMapObjects
 	thumb_func_end sub_81282E0
 
-	thumb_func_start sub_81283AC
-sub_81283AC: @ 81283AC
+	thumb_func_start FldEff_Bubbles
+FldEff_Bubbles: @ 81283AC
 	push {r4,lr}
 	ldr r4, _08128404
 	adds r1, r4, 0x4
@@ -3675,7 +3675,7 @@ _081283FC:
 _08128404: .4byte gUnknown_0202FF84
 _08128408: .4byte gFieldEffectObjectTemplatePointers
 _0812840C: .4byte gSprites
-	thumb_func_end sub_81283AC
+	thumb_func_end FldEff_Bubbles
 
 	thumb_func_start sub_8128410
 sub_8128410: @ 8128410
@@ -3711,8 +3711,8 @@ _08128444:
 _0812844C: .4byte 0x00001004
 	thumb_func_end sub_8128410
 
-	thumb_func_start sub_8128450
-sub_8128450: @ 8128450
+	thumb_func_start FldEff_BerryTreeGrowthSparkle
+FldEff_BerryTreeGrowthSparkle: @ 8128450
 	push {r4,lr}
 	ldr r4, _081284B8
 	adds r1, r4, 0x4
@@ -3768,10 +3768,10 @@ _081284B0:
 _081284B8: .4byte gUnknown_0202FF84
 _081284BC: .4byte gFieldEffectObjectTemplatePointers
 _081284C0: .4byte gSprites
-	thumb_func_end sub_8128450
+	thumb_func_end FldEff_BerryTreeGrowthSparkle
 
-	thumb_func_start ShowTreeDisguiseFieldEffect
-ShowTreeDisguiseFieldEffect: @ 81284C4
+	thumb_func_start FldEff_TreeDisguise
+FldEff_TreeDisguise: @ 81284C4
 	push {lr}
 	movs r0, 0x1C
 	movs r1, 0x18
@@ -3779,10 +3779,10 @@ ShowTreeDisguiseFieldEffect: @ 81284C4
 	bl ShowDisguiseFieldEffect
 	pop {r1}
 	bx r1
-	thumb_func_end ShowTreeDisguiseFieldEffect
+	thumb_func_end FldEff_TreeDisguise
 
-	thumb_func_start ShowMountainDisguiseFieldEffect
-ShowMountainDisguiseFieldEffect: @ 81284D4
+	thumb_func_start FldEff_MountainDisguise
+FldEff_MountainDisguise: @ 81284D4
 	push {lr}
 	movs r0, 0x1D
 	movs r1, 0x19
@@ -3790,10 +3790,10 @@ ShowMountainDisguiseFieldEffect: @ 81284D4
 	bl ShowDisguiseFieldEffect
 	pop {r1}
 	bx r1
-	thumb_func_end ShowMountainDisguiseFieldEffect
+	thumb_func_end FldEff_MountainDisguise
 
-	thumb_func_start ShowSandDisguiseFieldEffect
-ShowSandDisguiseFieldEffect: @ 81284E4
+	thumb_func_start FldEff_SandDisguise
+FldEff_SandDisguise: @ 81284E4
 	push {lr}
 	movs r0, 0x24
 	movs r1, 0x1C
@@ -3801,7 +3801,7 @@ ShowSandDisguiseFieldEffect: @ 81284E4
 	bl ShowDisguiseFieldEffect
 	pop {r1}
 	bx r1
-	thumb_func_end ShowSandDisguiseFieldEffect
+	thumb_func_end FldEff_SandDisguise
 
 	thumb_func_start ShowDisguiseFieldEffect
 ShowDisguiseFieldEffect: @ 81284F4
@@ -4081,8 +4081,8 @@ _081286FC:
 	bx r1
 	thumb_func_end sub_81286C4
 
-	thumb_func_start sub_8128700
-sub_8128700: @ 8128700
+	thumb_func_start FldEff_Sparkle
+FldEff_Sparkle: @ 8128700
 	push {r4,lr}
 	ldr r4, _08128768
 	ldr r0, [r4]
@@ -4138,7 +4138,7 @@ _08128760:
 _08128768: .4byte gUnknown_0202FF84
 _0812876C: .4byte gFieldEffectObjectTemplatePointers
 _08128770: .4byte gSprites
-	thumb_func_end sub_8128700
+	thumb_func_end FldEff_Sparkle
 
 	thumb_func_start sub_8128774
 sub_8128774: @ 8128774

@@ -34339,15 +34339,15 @@ GroundEffect_StepOnPuddle: @ 80640A8
 	bx r0
 	thumb_func_end GroundEffect_StepOnPuddle
 
-	thumb_func_start GroundEffect_SandHeap
-GroundEffect_SandHeap: @ 80640B8
+	thumb_func_start GroundEffect_SandPile
+GroundEffect_SandPile: @ 80640B8
 	push {lr}
 	adds r1, r0, 0
 	movs r0, 0x27
 	bl oe_exec_and_other_stuff
 	pop {r0}
 	bx r0
-	thumb_func_end GroundEffect_SandHeap
+	thumb_func_end GroundEffect_SandPile
 
 	thumb_func_start GroundEffect_JumpOnTallGrass
 GroundEffect_JumpOnTallGrass: @ 80640C8
