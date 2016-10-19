@@ -60,7 +60,7 @@ LittlerootTown_MaysHouse_2F_EventScript_1B69DF:: @ 81B69DF
 LittlerootTown_BrendansHouse_2F_EventScript_1B69EB:: @ 81B69EB
 LittlerootTown_MaysHouse_2F_EventScript_1B69EB:: @ 81B69EB
 	checkflag 81
-	jumpeq LittlerootTown_BrendansHouse_2F_EventScript_1B6A91
+	jumpif EQUAL, LittlerootTown_BrendansHouse_2F_EventScript_1B6A91
 	msgbox LittlerootTown_BrendansHouse_2F_Text_172E18, 4
 	call LittlerootTown_BrendansHouse_2F_EventScript_1B6A9B
 	pause 30
@@ -253,15 +253,15 @@ LittlerootTown_MaysHouse_1F_EventScript_1B6BE9:: @ 81B6BE9
 	lock
 	faceplayer
 	compare 0x4082, 4
-	jumpeq LittlerootTown_BrendansHouse_1F_EventScript_1B6C33
+	jumpif EQUAL, LittlerootTown_BrendansHouse_1F_EventScript_1B6C33
 	compare 0x408c, 4
-	jumpeq LittlerootTown_BrendansHouse_1F_EventScript_1B6C33
+	jumpif EQUAL, LittlerootTown_BrendansHouse_1F_EventScript_1B6C33
 	checkflag 2059
-	jumpeq LittlerootTown_BrendansHouse_1F_EventScript_1B6C3D
+	jumpif EQUAL, LittlerootTown_BrendansHouse_1F_EventScript_1B6C3D
 	checkflag 82
-	jumpeq LittlerootTown_BrendansHouse_1F_EventScript_1B6C72
+	jumpif EQUAL, LittlerootTown_BrendansHouse_1F_EventScript_1B6C72
 	compare 0x4001, 1
-	jumpeq LittlerootTown_BrendansHouse_1F_EventScript_1B6C80
+	jumpif EQUAL, LittlerootTown_BrendansHouse_1F_EventScript_1B6C80
 	compare 0x4092, 7
 	jumpif 4, LittlerootTown_BrendansHouse_1F_EventScript_1B6C9C
 	msgbox LittlerootTown_BrendansHouse_1F_Text_172429, 4
@@ -275,11 +275,11 @@ LittlerootTown_BrendansHouse_1F_EventScript_1B6C33:: @ 81B6C33
 
 LittlerootTown_BrendansHouse_1F_EventScript_1B6C3D:: @ 81B6C3D
 	checkflag 133
-	jumpeq LittlerootTown_BrendansHouse_1F_EventScript_1B6C72
+	jumpif EQUAL, LittlerootTown_BrendansHouse_1F_EventScript_1B6C72
 	msgbox LittlerootTown_BrendansHouse_1F_Text_172782, 4
 	giveitem ITEM_AMULET_COIN
 	compare RESULT, 0
-	jumpeq LittlerootTown_BrendansHouse_1F_EventScript_1A029B
+	jumpif EQUAL, LittlerootTown_BrendansHouse_1F_EventScript_1A029B
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1727CD, 4
 	setflag 133
 	release

@@ -43,7 +43,7 @@ EverGrandeCity_SidneysRoom_EventScript_15B596:: @ 815B596
 	lock
 	faceplayer
 	checkflag 1245
-	jumpeq EverGrandeCity_SidneysRoom_EventScript_15B5BD
+	jumpif EQUAL, EverGrandeCity_SidneysRoom_EventScript_15B5BD
 	playmusic 450, 0
 	msgbox EverGrandeCity_SidneysRoom_Text_190728, 4
 	trainerbattle 3, OPPONENT_SIDNEY, 0, EverGrandeCity_SidneysRoom_Text_190823

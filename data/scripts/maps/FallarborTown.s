@@ -13,7 +13,7 @@ FallarborTown_EventScript_14E7F5:: @ 814E7F5
 	lock
 	faceplayer
 	checkflag 139
-	jumpeq FallarborTown_EventScript_14E80A
+	jumpif EQUAL, FallarborTown_EventScript_14E80A
 	msgbox FallarborTown_Text_16C7FF, 4
 	release
 	end

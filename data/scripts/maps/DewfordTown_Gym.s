@@ -8,15 +8,15 @@ DewfordTown_Gym_MapScript1_15306B:: @ 815306B
 
 DewfordTown_Gym_EventScript_153071:: @ 8153071
 	checktrainerflag OPPONENT_BRAWLY
-	jumpeq DewfordTown_Gym_EventScript_1530AA
+	jumpif EQUAL, DewfordTown_Gym_EventScript_1530AA
 	call DewfordTown_Gym_EventScript_153122
 	copyvar 0x8001, 0x8000
 	compare 0x8000, 0
-	jumpeq DewfordTown_Gym_EventScript_1530BA
+	jumpif EQUAL, DewfordTown_Gym_EventScript_1530BA
 	compare 0x8000, 1
-	jumpeq DewfordTown_Gym_EventScript_1530B6
+	jumpif EQUAL, DewfordTown_Gym_EventScript_1530B6
 	compare 0x8000, 2
-	jumpeq DewfordTown_Gym_EventScript_1530B2
+	jumpif EQUAL, DewfordTown_Gym_EventScript_1530B2
 	jump DewfordTown_Gym_EventScript_1530AE
 
 DewfordTown_Gym_EventScript_1530AA:: @ 81530AA
@@ -43,14 +43,14 @@ DewfordTown_Gym_EventScript_1530BE:: @ 81530BE
 	call DewfordTown_Gym_EventScript_153122
 	snop1
 	comparevars 0x8000, 0x8001
-	jumpeq DewfordTown_Gym_EventScript_1530F5
+	jumpif EQUAL, DewfordTown_Gym_EventScript_1530F5
 	copyvar 0x8001, 0x8000
 	compare 0x8000, 1
-	jumpeq DewfordTown_Gym_EventScript_1530F6
+	jumpif EQUAL, DewfordTown_Gym_EventScript_1530F6
 	compare 0x8000, 2
-	jumpeq DewfordTown_Gym_EventScript_153101
+	jumpif EQUAL, DewfordTown_Gym_EventScript_153101
 	compare 0x8000, 3
-	jumpeq DewfordTown_Gym_EventScript_15310C
+	jumpif EQUAL, DewfordTown_Gym_EventScript_15310C
 
 DewfordTown_Gym_EventScript_1530F5:: @ 81530F5
 	return
@@ -125,7 +125,7 @@ DewfordTown_Gym_EventScript_153177:: @ 8153177
 DewfordTown_Gym_EventScript_1531B5:: @ 81531B5
 	giveitem ITEM_TM08
 	compare RESULT, 0
-	jumpeq DewfordTown_Gym_EventScript_1A029B
+	jumpif EQUAL, DewfordTown_Gym_EventScript_1A029B
 	msgbox DewfordTown_Gym_Text_1753BF, 4
 	setflag 166
 	release
@@ -165,7 +165,7 @@ DewfordTown_Gym_EventScript_15323F:: @ 815323F
 	lock
 	faceplayer
 	checkflag 1204
-	jumpeq DewfordTown_Gym_EventScript_153254
+	jumpif EQUAL, DewfordTown_Gym_EventScript_153254
 	msgbox DewfordTown_Gym_Text_174D98, 4
 	release
 	end
@@ -178,14 +178,14 @@ DewfordTown_Gym_EventScript_153254:: @ 8153254
 DewfordTown_Gym_EventScript_15325E:: @ 815325E
 	lockall
 	checkflag 2056
-	jumpeq DewfordTown_Gym_EventScript_15327E
+	jumpif EQUAL, DewfordTown_Gym_EventScript_15327E
 	jump DewfordTown_Gym_EventScript_153288
 	end
 
 DewfordTown_Gym_EventScript_15326E:: @ 815326E
 	lockall
 	checkflag 2056
-	jumpeq DewfordTown_Gym_EventScript_15327E
+	jumpif EQUAL, DewfordTown_Gym_EventScript_15327E
 	jump DewfordTown_Gym_EventScript_153288
 	end
 

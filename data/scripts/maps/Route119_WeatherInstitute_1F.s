@@ -18,7 +18,7 @@ Route119_WeatherInstitute_1F_EventScript_163C4D:: @ 8163C4D
 	faceplayer
 	special 148
 	compare 0x40b3, 0
-	jumpeq Route119_WeatherInstitute_1F_EventScript_163C67
+	jumpif EQUAL, Route119_WeatherInstitute_1F_EventScript_163C67
 	msgbox Route119_WeatherInstitute_1F_Text_19ED22, 4
 	release
 	end

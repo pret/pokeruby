@@ -415,9 +415,9 @@ SlateportCity_ContestLobby_EventScript_15FBDB:: @ 815FBDB
 VerdanturfTown_ContestLobby_EventScript_15FBDB:: @ 815FBDB
 	checkgender
 	compare RESULT, 0
-	jumpeq FallarborTown_ContestLobby_EventScript_15FBF3
+	jumpif EQUAL, FallarborTown_ContestLobby_EventScript_15FBF3
 	compare RESULT, 1
-	jumpeq FallarborTown_ContestLobby_EventScript_15FBF9
+	jumpif EQUAL, FallarborTown_ContestLobby_EventScript_15FBF9
 	return
 
 FallarborTown_ContestLobby_EventScript_15FBF3:: @ 815FBF3

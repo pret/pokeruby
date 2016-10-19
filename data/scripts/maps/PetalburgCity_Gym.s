@@ -7,7 +7,7 @@ PetalburgCity_Gym_MapScripts:: @ 8154477
 
 PetalburgCity_Gym_MapScript1_15448C:: @ 815448C
 	compare 0x4085, 6
-	jumpeq PetalburgCity_Gym_EventScript_1544A3
+	jumpif EQUAL, PetalburgCity_Gym_EventScript_1544A3
 	compare 0x4085, 7
 	callif 4, PetalburgCity_Gym_EventScript_1544ED
 	end
@@ -353,11 +353,11 @@ PetalburgCity_Gym_EventScript_15493C:: @ 815493C
 PetalburgCity_Gym_EventScript_15493D:: @ 815493D
 	call PetalburgCity_Gym_EventScript_154969
 	compare RESULT, 1
-	jumpeq PetalburgCity_Gym_EventScript_1549B8
+	jumpif EQUAL, PetalburgCity_Gym_EventScript_1549B8
 	checkflag 169
 	jumpif 0, PetalburgCity_Gym_EventScript_154A2C
 	checkflag 2052
-	jumpeq PetalburgCity_Gym_EventScript_154B69
+	jumpif EQUAL, PetalburgCity_Gym_EventScript_154B69
 	msgbox PetalburgCity_Gym_Text_17AA6B, 4
 	release
 	end
@@ -365,15 +365,15 @@ PetalburgCity_Gym_EventScript_15493D:: @ 815493D
 PetalburgCity_Gym_EventScript_154969:: @ 8154969
 	specialval RESULT, 50
 	compare RESULT, 0
-	jumpeq PetalburgCity_Gym_EventScript_1549B2
+	jumpif EQUAL, PetalburgCity_Gym_EventScript_1549B2
 	checkitem ITEM_ENIGMA_BERRY, 1
 	compare RESULT, 1
-	jumpeq PetalburgCity_Gym_EventScript_1549B2
+	jumpif EQUAL, PetalburgCity_Gym_EventScript_1549B2
 	checkpcitem ITEM_ENIGMA_BERRY, 1
 	compare RESULT, 1
-	jumpeq PetalburgCity_Gym_EventScript_1549B2
+	jumpif EQUAL, PetalburgCity_Gym_EventScript_1549B2
 	compare 0x402d, 0
-	jumpeq PetalburgCity_Gym_EventScript_1549B2
+	jumpif EQUAL, PetalburgCity_Gym_EventScript_1549B2
 	msgbox PetalburgCity_Gym_Text_1C5570, 4
 	setvar RESULT, 1
 	return
@@ -385,7 +385,7 @@ PetalburgCity_Gym_EventScript_1549B2:: @ 81549B2
 PetalburgCity_Gym_EventScript_1549B8:: @ 81549B8
 	giveitem ITEM_ENIGMA_BERRY
 	compare RESULT, 0
-	jumpeq PetalburgCity_Gym_EventScript_1A029B
+	jumpif EQUAL, PetalburgCity_Gym_EventScript_1A029B
 	setvar 0x402d, 0
 	release
 	end
@@ -414,7 +414,7 @@ PetalburgCity_Gym_EventScript_1549D6:: @ 81549D6
 PetalburgCity_Gym_EventScript_154A2C:: @ 8154A2C
 	giveitem ITEM_TM42
 	compare RESULT, 0
-	jumpeq PetalburgCity_Gym_EventScript_1A029B
+	jumpif EQUAL, PetalburgCity_Gym_EventScript_1A029B
 	setflag 169
 	msgbox PetalburgCity_Gym_Text_17A8CF, 4
 	msgbox PetalburgCity_Gym_Text_17A976, 4
@@ -598,9 +598,9 @@ PetalburgCity_Gym_EventScript_154B73:: @ 8154B73
 	setvar 0x8009, 85
 	msgbox PetalburgCity_Gym_Text_17B870, 5
 	compare RESULT, 1
-	jumpeq PetalburgCity_Gym_EventScript_154BA8
+	jumpif EQUAL, PetalburgCity_Gym_EventScript_154BA8
 	compare RESULT, 0
-	jumpeq PetalburgCity_Gym_EventScript_154BB7
+	jumpif EQUAL, PetalburgCity_Gym_EventScript_154BB7
 	end
 
 PetalburgCity_Gym_EventScript_154BA8:: @ 8154BA8
@@ -628,9 +628,9 @@ PetalburgCity_Gym_EventScript_154BC3:: @ 8154BC3
 	setvar 0x8009, 98
 	msgbox PetalburgCity_Gym_Text_17B8D4, 5
 	compare RESULT, 1
-	jumpeq PetalburgCity_Gym_EventScript_154BA8
+	jumpif EQUAL, PetalburgCity_Gym_EventScript_154BA8
 	compare RESULT, 0
-	jumpeq PetalburgCity_Gym_EventScript_154BB7
+	jumpif EQUAL, PetalburgCity_Gym_EventScript_154BB7
 	end
 
 PetalburgCity_Gym_EventScript_154BF8:: @ 8154BF8
@@ -641,9 +641,9 @@ PetalburgCity_Gym_EventScript_154BF8:: @ 8154BF8
 	setvar 0x8009, 46
 	msgbox PetalburgCity_Gym_Text_17B90F, 5
 	compare RESULT, 1
-	jumpeq PetalburgCity_Gym_EventScript_154BA8
+	jumpif EQUAL, PetalburgCity_Gym_EventScript_154BA8
 	compare RESULT, 0
-	jumpeq PetalburgCity_Gym_EventScript_154BB7
+	jumpif EQUAL, PetalburgCity_Gym_EventScript_154BB7
 	end
 
 PetalburgCity_Gym_EventScript_154C2B:: @ 8154C2B
@@ -654,9 +654,9 @@ PetalburgCity_Gym_EventScript_154C2B:: @ 8154C2B
 	setvar 0x8009, 59
 	msgbox PetalburgCity_Gym_Text_17B950, 5
 	compare RESULT, 1
-	jumpeq PetalburgCity_Gym_EventScript_154BA8
+	jumpif EQUAL, PetalburgCity_Gym_EventScript_154BA8
 	compare RESULT, 0
-	jumpeq PetalburgCity_Gym_EventScript_154BB7
+	jumpif EQUAL, PetalburgCity_Gym_EventScript_154BB7
 	end
 
 PetalburgCity_Gym_EventScript_154C5E:: @ 8154C5E
@@ -667,9 +667,9 @@ PetalburgCity_Gym_EventScript_154C5E:: @ 8154C5E
 	setvar 0x8009, 59
 	msgbox PetalburgCity_Gym_Text_17B950, 5
 	compare RESULT, 1
-	jumpeq PetalburgCity_Gym_EventScript_154BA8
+	jumpif EQUAL, PetalburgCity_Gym_EventScript_154BA8
 	compare RESULT, 0
-	jumpeq PetalburgCity_Gym_EventScript_154BB7
+	jumpif EQUAL, PetalburgCity_Gym_EventScript_154BB7
 	end
 
 PetalburgCity_Gym_EventScript_154C91:: @ 8154C91
@@ -680,9 +680,9 @@ PetalburgCity_Gym_EventScript_154C91:: @ 8154C91
 	setvar 0x8009, 72
 	msgbox PetalburgCity_Gym_Text_17B98A, 5
 	compare RESULT, 1
-	jumpeq PetalburgCity_Gym_EventScript_154BA8
+	jumpif EQUAL, PetalburgCity_Gym_EventScript_154BA8
 	compare RESULT, 0
-	jumpeq PetalburgCity_Gym_EventScript_154BB7
+	jumpif EQUAL, PetalburgCity_Gym_EventScript_154BB7
 	end
 
 PetalburgCity_Gym_EventScript_154CC4:: @ 8154CC4
@@ -693,9 +693,9 @@ PetalburgCity_Gym_EventScript_154CC4:: @ 8154CC4
 	setvar 0x8009, 20
 	msgbox PetalburgCity_Gym_Text_17B9C5, 5
 	compare RESULT, 1
-	jumpeq PetalburgCity_Gym_EventScript_154BA8
+	jumpif EQUAL, PetalburgCity_Gym_EventScript_154BA8
 	compare RESULT, 0
-	jumpeq PetalburgCity_Gym_EventScript_154BB7
+	jumpif EQUAL, PetalburgCity_Gym_EventScript_154BB7
 	end
 
 PetalburgCity_Gym_EventScript_154CF7:: @ 8154CF7
@@ -706,9 +706,9 @@ PetalburgCity_Gym_EventScript_154CF7:: @ 8154CF7
 	setvar 0x8009, 20
 	msgbox PetalburgCity_Gym_Text_17B9C5, 5
 	compare RESULT, 1
-	jumpeq PetalburgCity_Gym_EventScript_154BA8
+	jumpif EQUAL, PetalburgCity_Gym_EventScript_154BA8
 	compare RESULT, 0
-	jumpeq PetalburgCity_Gym_EventScript_154BB7
+	jumpif EQUAL, PetalburgCity_Gym_EventScript_154BB7
 	end
 
 PetalburgCity_Gym_EventScript_154D2A:: @ 8154D2A
@@ -719,9 +719,9 @@ PetalburgCity_Gym_EventScript_154D2A:: @ 8154D2A
 	setvar 0x8009, 33
 	msgbox PetalburgCity_Gym_Text_17BA00, 5
 	compare RESULT, 1
-	jumpeq PetalburgCity_Gym_EventScript_154BA8
+	jumpif EQUAL, PetalburgCity_Gym_EventScript_154BA8
 	compare RESULT, 0
-	jumpeq PetalburgCity_Gym_EventScript_154BB7
+	jumpif EQUAL, PetalburgCity_Gym_EventScript_154BB7
 	end
 
 PetalburgCity_Gym_EventScript_154D5D:: @ 8154D5D
@@ -732,9 +732,9 @@ PetalburgCity_Gym_EventScript_154D5D:: @ 8154D5D
 	setvar 0x8009, 33
 	msgbox PetalburgCity_Gym_Text_17BA00, 5
 	compare RESULT, 1
-	jumpeq PetalburgCity_Gym_EventScript_154BA8
+	jumpif EQUAL, PetalburgCity_Gym_EventScript_154BA8
 	compare RESULT, 0
-	jumpeq PetalburgCity_Gym_EventScript_154BB7
+	jumpif EQUAL, PetalburgCity_Gym_EventScript_154BB7
 	end
 
 PetalburgCity_Gym_EventScript_154D90:: @ 8154D90
@@ -745,9 +745,9 @@ PetalburgCity_Gym_EventScript_154D90:: @ 8154D90
 	setvar 0x8009, 7
 	msgbox PetalburgCity_Gym_Text_17BA3D, 5
 	compare RESULT, 1
-	jumpeq PetalburgCity_Gym_EventScript_154BA8
+	jumpif EQUAL, PetalburgCity_Gym_EventScript_154BA8
 	compare RESULT, 0
-	jumpeq PetalburgCity_Gym_EventScript_154BB7
+	jumpif EQUAL, PetalburgCity_Gym_EventScript_154BB7
 	end
 
 PetalburgCity_Gym_EventScript_154DC3:: @ 8154DC3
@@ -758,15 +758,15 @@ PetalburgCity_Gym_EventScript_154DC3:: @ 8154DC3
 	setvar 0x8009, 7
 	msgbox PetalburgCity_Gym_Text_17BA3D, 5
 	compare RESULT, 1
-	jumpeq PetalburgCity_Gym_EventScript_154BA8
+	jumpif EQUAL, PetalburgCity_Gym_EventScript_154BA8
 	compare RESULT, 0
-	jumpeq PetalburgCity_Gym_EventScript_154BB7
+	jumpif EQUAL, PetalburgCity_Gym_EventScript_154BB7
 	end
 
 PetalburgCity_Gym_EventScript_154DF6:: @ 8154DF6
 	trainerbattle 2, OPPONENT_RANDALL, 0, PetalburgCity_Gym_Text_17ADA5, PetalburgCity_Gym_Text_17AE11, PetalburgCity_Gym_EventScript_154E1A
 	checkflag 1217
-	jumpeq PetalburgCity_Gym_EventScript_154E29
+	jumpif EQUAL, PetalburgCity_Gym_EventScript_154E29
 	msgbox PetalburgCity_Gym_Text_17AE30, 6
 	end
 
@@ -784,7 +784,7 @@ PetalburgCity_Gym_EventScript_154E29:: @ 8154E29
 PetalburgCity_Gym_EventScript_154E32:: @ 8154E32
 	trainerbattle 2, OPPONENT_PARKER, 0, PetalburgCity_Gym_Text_17AF5A, PetalburgCity_Gym_Text_17AF98, PetalburgCity_Gym_EventScript_154E56
 	checkflag 1217
-	jumpeq PetalburgCity_Gym_EventScript_154E65
+	jumpif EQUAL, PetalburgCity_Gym_EventScript_154E65
 	msgbox PetalburgCity_Gym_Text_17AFD3, 6
 	end
 
@@ -802,7 +802,7 @@ PetalburgCity_Gym_EventScript_154E65:: @ 8154E65
 PetalburgCity_Gym_EventScript_154E6E:: @ 8154E6E
 	trainerbattle 2, OPPONENT_GEORGE, 0, PetalburgCity_Gym_Text_17B058, PetalburgCity_Gym_Text_17B0F7, PetalburgCity_Gym_EventScript_154E92
 	checkflag 1217
-	jumpeq PetalburgCity_Gym_EventScript_154EA1
+	jumpif EQUAL, PetalburgCity_Gym_EventScript_154EA1
 	msgbox PetalburgCity_Gym_Text_17B12C, 6
 	end
 
@@ -820,7 +820,7 @@ PetalburgCity_Gym_EventScript_154EA1:: @ 8154EA1
 PetalburgCity_Gym_EventScript_154EAA:: @ 8154EAA
 	trainerbattle 2, OPPONENT_BERKE, 0, PetalburgCity_Gym_Text_17B237, PetalburgCity_Gym_Text_17B2C0, PetalburgCity_Gym_EventScript_154ECE
 	checkflag 1217
-	jumpeq PetalburgCity_Gym_EventScript_154EDD
+	jumpif EQUAL, PetalburgCity_Gym_EventScript_154EDD
 	msgbox PetalburgCity_Gym_Text_17B2E4, 6
 	end
 
@@ -838,7 +838,7 @@ PetalburgCity_Gym_EventScript_154EDD:: @ 8154EDD
 PetalburgCity_Gym_EventScript_154EE6:: @ 8154EE6
 	trainerbattle 2, OPPONENT_MARY, 0, PetalburgCity_Gym_Text_17B3F7, PetalburgCity_Gym_Text_17B454, PetalburgCity_Gym_EventScript_154F0A
 	checkflag 1217
-	jumpeq PetalburgCity_Gym_EventScript_154F19
+	jumpif EQUAL, PetalburgCity_Gym_EventScript_154F19
 	msgbox PetalburgCity_Gym_Text_17B46F, 6
 	end
 
@@ -856,7 +856,7 @@ PetalburgCity_Gym_EventScript_154F19:: @ 8154F19
 PetalburgCity_Gym_EventScript_154F22:: @ 8154F22
 	trainerbattle 2, OPPONENT_LORI, 0, PetalburgCity_Gym_Text_17B58D, PetalburgCity_Gym_Text_17B5CB, PetalburgCity_Gym_EventScript_154F46
 	checkflag 1217
-	jumpeq PetalburgCity_Gym_EventScript_154F55
+	jumpif EQUAL, PetalburgCity_Gym_EventScript_154F55
 	msgbox PetalburgCity_Gym_Text_17B5EA, 6
 	end
 
@@ -874,7 +874,7 @@ PetalburgCity_Gym_EventScript_154F55:: @ 8154F55
 PetalburgCity_Gym_EventScript_154F5E:: @ 8154F5E
 	trainerbattle 2, OPPONENT_JODY, 0, PetalburgCity_Gym_Text_17B6D4, PetalburgCity_Gym_Text_17B732, PetalburgCity_Gym_EventScript_154F82
 	checkflag 1217
-	jumpeq PetalburgCity_Gym_EventScript_154F91
+	jumpif EQUAL, PetalburgCity_Gym_EventScript_154F91
 	msgbox PetalburgCity_Gym_Text_17B749, 6
 	end
 
@@ -1022,7 +1022,7 @@ PetalburgCity_Gym_EventScript_15518B:: @ 815518B
 	lock
 	faceplayer
 	checkflag 1217
-	jumpeq PetalburgCity_Gym_EventScript_1551A0
+	jumpif EQUAL, PetalburgCity_Gym_EventScript_1551A0
 	msgbox PetalburgCity_Gym_Text_17AB96, 4
 	release
 	end
@@ -1035,14 +1035,14 @@ PetalburgCity_Gym_EventScript_1551A0:: @ 81551A0
 PetalburgCity_Gym_EventScript_1551AA:: @ 81551AA
 	lockall
 	checkflag 2059
-	jumpeq PetalburgCity_Gym_EventScript_1551CA
+	jumpif EQUAL, PetalburgCity_Gym_EventScript_1551CA
 	jump PetalburgCity_Gym_EventScript_1551D4
 	end
 
 PetalburgCity_Gym_EventScript_1551BA:: @ 81551BA
 	lockall
 	checkflag 2059
-	jumpeq PetalburgCity_Gym_EventScript_1551CA
+	jumpif EQUAL, PetalburgCity_Gym_EventScript_1551CA
 	jump PetalburgCity_Gym_EventScript_1551D4
 	end
 

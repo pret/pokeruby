@@ -3,7 +3,7 @@ Route111_EventScript_1A3858:: @ 81A3858
 	faceplayer
 	msgbox Route111_Text_1A3520, 5
 	compare RESULT, 1
-	jumpeq Route111_EventScript_1A3877
+	jumpif EQUAL, Route111_EventScript_1A3877
 	msgbox Route111_Text_1A37B5, 4
 	release
 	end
@@ -11,7 +11,7 @@ Route111_EventScript_1A3858:: @ 81A3858
 Route111_EventScript_1A3877:: @ 81A3877
 	giveitem ITEM_TM43
 	compare RESULT, 0
-	jumpeq Route111_EventScript_1A38D9
+	jumpif EQUAL, Route111_EventScript_1A38D9
 	msgbox Route111_Text_1A35C5, 4
 	closebutton
 	setflag 96

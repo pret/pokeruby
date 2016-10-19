@@ -4,11 +4,11 @@ Route117_EventScript_1B222D:: @ 81B222D
 	special 181
 	specialval RESULT, 182
 	compare RESULT, 1
-	jumpeq Route117_EventScript_1B2262
+	jumpif EQUAL, Route117_EventScript_1B2262
 	compare RESULT, 2
-	jumpeq Route117_EventScript_1B22E7
+	jumpif EQUAL, Route117_EventScript_1B22E7
 	compare RESULT, 3
-	jumpeq Route117_EventScript_1B22FE
+	jumpif EQUAL, Route117_EventScript_1B22FE
 	msgbox Route117_Text_1B25CB, 4
 	release
 	end
@@ -16,10 +16,10 @@ Route117_EventScript_1B222D:: @ 81B222D
 Route117_EventScript_1B2262:: @ 81B2262
 	msgbox Route117_Text_1B2659, 5
 	compare RESULT, 1
-	jumpeq Route117_EventScript_1B2298
+	jumpif EQUAL, Route117_EventScript_1B2298
 	msgbox Route117_Text_1B28C4, 5
 	compare RESULT, 1
-	jumpeq Route117_EventScript_1B2298
+	jumpif EQUAL, Route117_EventScript_1B2298
 	msgbox Route117_Text_1B2745, 4
 	clearflag 134
 	special 183
@@ -83,14 +83,14 @@ Route117_PokemonDayCare_EventScript_1B2327:: @ 81B2327
 	faceplayer
 	specialval RESULT, 182
 	compare RESULT, 1
-	jumpeq Route117_PokemonDayCare_EventScript_1B2407
+	jumpif EQUAL, Route117_PokemonDayCare_EventScript_1B2407
 	compare RESULT, 2
-	jumpeq Route117_PokemonDayCare_EventScript_1B242B
+	jumpif EQUAL, Route117_PokemonDayCare_EventScript_1B242B
 	compare RESULT, 3
-	jumpeq Route117_PokemonDayCare_EventScript_1B2558
+	jumpif EQUAL, Route117_PokemonDayCare_EventScript_1B2558
 	msgbox Route117_PokemonDayCare_Text_1B28F2, 5
 	compare RESULT, 1
-	jumpeq Route117_PokemonDayCare_EventScript_1B236C
+	jumpif EQUAL, Route117_PokemonDayCare_EventScript_1B236C
 	msgbox Route117_PokemonDayCare_Text_1B2A14, 4
 	release
 	end
@@ -98,16 +98,16 @@ Route117_PokemonDayCare_EventScript_1B2327:: @ 81B2327
 Route117_PokemonDayCare_EventScript_1B236C:: @ 81B236C
 	specialval RESULT, 132
 	compare RESULT, 1
-	jumpeq Route117_PokemonDayCare_EventScript_1B23F3
+	jumpif EQUAL, Route117_PokemonDayCare_EventScript_1B23F3
 	msgbox Route117_PokemonDayCare_Text_1B2947, 4
 	fadescreen 1
 	special 188
 	waitstate
 	compare 0x8004, 255
-	jumpeq Route117_PokemonDayCare_EventScript_1B23D0
+	jumpif EQUAL, Route117_PokemonDayCare_EventScript_1B23D0
 	specialval RESULT, 133
 	compare RESULT, 0
-	jumpeq Route117_PokemonDayCare_EventScript_1B23FD
+	jumpif EQUAL, Route117_PokemonDayCare_EventScript_1B23FD
 	specialval 0x8005, 186
 	checksound
 	pokecry 0x8005, 0
@@ -117,7 +117,7 @@ Route117_PokemonDayCare_EventScript_1B236C:: @ 81B236C
 	inccounter GAME_STAT_USED_DAYCARE
 	specialval RESULT, 182
 	compare RESULT, 2
-	jumpeq Route117_PokemonDayCare_EventScript_1B23DA
+	jumpif EQUAL, Route117_PokemonDayCare_EventScript_1B23DA
 	release
 	end
 
@@ -129,7 +129,7 @@ Route117_PokemonDayCare_EventScript_1B23D0:: @ 81B23D0
 Route117_PokemonDayCare_EventScript_1B23DA:: @ 81B23DA
 	msgbox Route117_PokemonDayCare_Text_1B29AD, 5
 	compare RESULT, 1
-	jumpeq Route117_PokemonDayCare_EventScript_1B236C
+	jumpif EQUAL, Route117_PokemonDayCare_EventScript_1B236C
 	jump Route117_PokemonDayCare_EventScript_1B23D0
 	end
 
@@ -164,26 +164,26 @@ Route117_PokemonDayCare_EventScript_1B242B:: @ 81B242B
 	call Route117_PokemonDayCare_EventScript_1B241A
 	msgbox Route117_PokemonDayCare_Text_1B29AD, 5
 	compare RESULT, 1
-	jumpeq Route117_PokemonDayCare_EventScript_1B236C
+	jumpif EQUAL, Route117_PokemonDayCare_EventScript_1B236C
 	msgbox Route117_PokemonDayCare_Text_1B2BF6, 5
 	compare RESULT, 1
-	jumpeq Route117_PokemonDayCare_EventScript_1B2469
+	jumpif EQUAL, Route117_PokemonDayCare_EventScript_1B2469
 	jump Route117_PokemonDayCare_EventScript_1B23D0
 	end
 
 Route117_PokemonDayCare_EventScript_1B2469:: @ 81B2469
 	specialval RESULT, 131
 	compare RESULT, 6
-	jumpeq Route117_PokemonDayCare_EventScript_1B2539
+	jumpif EQUAL, Route117_PokemonDayCare_EventScript_1B2539
 	specialval RESULT, 182
 	setvar 0x8004, 0
 	compare RESULT, 2
-	jumpeq Route117_PokemonDayCare_EventScript_1B24A8
+	jumpif EQUAL, Route117_PokemonDayCare_EventScript_1B24A8
 	special 189
 	waitstate
 	copyvar 0x8004, RESULT
 	compare RESULT, 2
-	jumpeq Route117_PokemonDayCare_EventScript_1B23D0
+	jumpif EQUAL, Route117_PokemonDayCare_EventScript_1B23D0
 	jump Route117_PokemonDayCare_EventScript_1B24A8
 	end
 
@@ -191,14 +191,14 @@ Route117_PokemonDayCare_EventScript_1B24A8:: @ 81B24A8
 	special 191
 	msgbox Route117_PokemonDayCare_Text_1B2B49, 5
 	compare RESULT, 1
-	jumpeq Route117_PokemonDayCare_EventScript_1B24C4
+	jumpif EQUAL, Route117_PokemonDayCare_EventScript_1B24C4
 	jump Route117_PokemonDayCare_EventScript_1B23D0
 	end
 
 Route117_PokemonDayCare_EventScript_1B24C4:: @ 81B24C4
 	specialval RESULT, 197
 	compare RESULT, 1
-	jumpeq Route117_PokemonDayCare_EventScript_1B24DE
+	jumpif EQUAL, Route117_PokemonDayCare_EventScript_1B24DE
 	msgbox Route117_PokemonDayCare_Text_1B2A30, 4
 	release
 	end
@@ -216,14 +216,14 @@ Route117_PokemonDayCare_EventScript_1B24DE:: @ 81B24DE
 	waitpokecry
 	specialval RESULT, 182
 	compare RESULT, 2
-	jumpeq Route117_PokemonDayCare_EventScript_1B2520
+	jumpif EQUAL, Route117_PokemonDayCare_EventScript_1B2520
 	jump Route117_PokemonDayCare_EventScript_1B23D0
 	end
 
 Route117_PokemonDayCare_EventScript_1B2520:: @ 81B2520
 	msgbox Route117_PokemonDayCare_Text_1B2A4F, 5
 	compare RESULT, 1
-	jumpeq Route117_PokemonDayCare_EventScript_1B2469
+	jumpif EQUAL, Route117_PokemonDayCare_EventScript_1B2469
 	jump Route117_PokemonDayCare_EventScript_1B23D0
 	end
 
@@ -265,7 +265,7 @@ Route117_PokemonDayCare_EventScript_1B2558:: @ 81B2558
 	call Route117_PokemonDayCare_EventScript_1B241A
 	msgbox Route117_PokemonDayCare_Text_1B2BF6, 5
 	compare RESULT, 1
-	jumpeq Route117_PokemonDayCare_EventScript_1B2469
+	jumpif EQUAL, Route117_PokemonDayCare_EventScript_1B2469
 	msgbox Route117_PokemonDayCare_Text_1B2A76, 4
 	release
 	end
@@ -274,7 +274,7 @@ Route117_PokemonDayCare_EventScript_1B2558:: @ 81B2558
 	special 189
 	waitstate
 	compare RESULT, 2
-	jumpeq Route117_PokemonDayCare_EventScript_1B23D0
+	jumpif EQUAL, Route117_PokemonDayCare_EventScript_1B23D0
 	copyvar 0x8004, RESULT
 	specialval RESULT, 192
 	msgbox Route117_PokemonDayCare_Text_1B2B75, 4

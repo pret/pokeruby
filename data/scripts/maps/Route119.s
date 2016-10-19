@@ -73,9 +73,9 @@ Route119_EventScript_1511DB:: @ 81511DB
 	pause 30
 	checkgender
 	compare RESULT, 0
-	jumpeq Route119_EventScript_15125E
+	jumpif EQUAL, Route119_EventScript_15125E
 	compare RESULT, 1
-	jumpeq Route119_EventScript_1512D8
+	jumpif EQUAL, Route119_EventScript_1512D8
 	releaseall
 	end
 
@@ -298,7 +298,7 @@ Route119_EventScript_1514BF:: @ 81514BF
 	trainerbattle 0, OPPONENT_JACKSON_1, 0, Route119_Text_1BE8BB, Route119_Text_1BE90E
 	specialval RESULT, 57
 	compare RESULT, 1
-	jumpeq Route119_EventScript_1514E6
+	jumpif EQUAL, Route119_EventScript_1514E6
 	msgbox Route119_Text_1BE937, 6
 	end
 
@@ -311,7 +311,7 @@ Route119_EventScript_1514FD:: @ 81514FD
 	trainerbattle 0, OPPONENT_CATHERINE_1, 0, Route119_Text_1BEA3A, Route119_Text_1BEA88
 	specialval RESULT, 57
 	compare RESULT, 1
-	jumpeq Route119_EventScript_151524
+	jumpif EQUAL, Route119_EventScript_151524
 	msgbox Route119_Text_1BEAB3, 6
 	end
 

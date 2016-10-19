@@ -10,7 +10,7 @@ Route114_LanettesHouse_EventScript_15C262:: @ 815C262
 	lock
 	faceplayer
 	checkflag 131
-	jumpeq Route114_LanettesHouse_EventScript_15C28F
+	jumpif EQUAL, Route114_LanettesHouse_EventScript_15C28F
 	setflag 2123
 	msgbox Route114_LanettesHouse_Text_192A0D, 4
 	.ifdef SAPPHIRE
@@ -19,7 +19,7 @@ Route114_LanettesHouse_EventScript_15C262:: @ 815C262
 	givedecoration 100
 	.endif
 	compare RESULT, 0
-	jumpeq Route114_LanettesHouse_EventScript_1A02AE
+	jumpif EQUAL, Route114_LanettesHouse_EventScript_1A02AE
 	setflag 131
 	release
 	end
@@ -33,7 +33,7 @@ Route114_LanettesHouse_EventScript_15C299:: @ 815C299
 	lockall
 	msgbox Route114_LanettesHouse_Text_192B4A, 5
 	compare RESULT, 1
-	jumpeq Route114_LanettesHouse_EventScript_15C2B7
+	jumpif EQUAL, Route114_LanettesHouse_EventScript_15C2B7
 	msgbox Route114_LanettesHouse_Text_192DA9, 4
 	releaseall
 	end

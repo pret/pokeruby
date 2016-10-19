@@ -114,7 +114,7 @@ Route120_EventScript_151739:: @ 8151739
 	faceplayer
 	checkdailyflags
 	checkflag 2254
-	jumpeq Route120_EventScript_151837
+	jumpif EQUAL, Route120_EventScript_151837
 	msgbox Route120_Text_1C58F1, 5
 	compare RESULT, 1
 	callif 1, Route120_EventScript_151841
@@ -162,7 +162,7 @@ Route120_EventScript_151808:: @ 8151808
 Route120_EventScript_151813:: @ 8151813
 	giveitem 0x8004
 	compare RESULT, 0
-	jumpeq Route120_EventScript_1A029B
+	jumpif EQUAL, Route120_EventScript_1A029B
 	setflag 2254
 	msgbox Route120_Text_1C5A0B, 4
 	release
@@ -185,10 +185,10 @@ Route120_EventScript_151853:: @ 8151853
 	lock
 	faceplayer
 	checkflag 290
-	jumpeq Route120_EventScript_151884
+	jumpif EQUAL, Route120_EventScript_151884
 	msgbox Route120_Text_171827, 5
 	compare RESULT, 0
-	jumpeq Route120_EventScript_151877
+	jumpif EQUAL, Route120_EventScript_151877
 	jump Route120_EventScript_15189D
 	end
 
@@ -201,7 +201,7 @@ Route120_EventScript_151877:: @ 8151877
 Route120_EventScript_151884:: @ 8151884
 	msgbox Route120_Text_17196F, 5
 	compare RESULT, 0
-	jumpeq Route120_EventScript_151877
+	jumpif EQUAL, Route120_EventScript_151877
 	jump Route120_EventScript_15189D
 	end
 
@@ -294,7 +294,7 @@ Route120_EventScript_1519CA:: @ 81519CA
 	trainerbattle 0, OPPONENT_ROBERT_1, 0, Route120_Text_1BF07E, Route120_Text_1BF0A5
 	specialval RESULT, 57
 	compare RESULT, 1
-	jumpeq Route120_EventScript_1519F1
+	jumpif EQUAL, Route120_EventScript_1519F1
 	msgbox Route120_Text_1BF0C3, 6
 	end
 
@@ -317,7 +317,7 @@ Route120_EventScript_151A36:: @ 8151A36
 	trainerbattle 0, OPPONENT_BRANDON_1, 0, Route120_Text_1BF32B, Route120_Text_1BF36B
 	specialval RESULT, 57
 	compare RESULT, 1
-	jumpeq Route120_EventScript_151A5D
+	jumpif EQUAL, Route120_EventScript_151A5D
 	msgbox Route120_Text_1BF38D, 6
 	end
 

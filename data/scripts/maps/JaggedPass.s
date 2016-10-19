@@ -26,7 +26,7 @@ JaggedPass_EventScript_15D29C:: @ 815D29C
 	trainerbattle 0, OPPONENT_DIANA_1, 0, JaggedPass_Text_195E9E, JaggedPass_Text_195EDF
 	specialval RESULT, 57
 	compare RESULT, 1
-	jumpeq JaggedPass_EventScript_15D2C3
+	jumpif EQUAL, JaggedPass_EventScript_15D2C3
 	msgbox JaggedPass_Text_195F04, 6
 	end
 
@@ -39,7 +39,7 @@ JaggedPass_EventScript_15D2DA:: @ 815D2DA
 	trainerbattle 0, OPPONENT_ETHAN_1, 0, JaggedPass_Text_195FF2, JaggedPass_Text_196032
 	specialval RESULT, 57
 	compare RESULT, 1
-	jumpeq JaggedPass_EventScript_15D301
+	jumpif EQUAL, JaggedPass_EventScript_15D301
 	msgbox JaggedPass_Text_196077, 6
 	end
 

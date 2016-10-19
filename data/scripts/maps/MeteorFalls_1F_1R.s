@@ -216,7 +216,7 @@ MeteorFalls_1F_1R_EventScript_15C656:: @ 815C656
 	lock
 	faceplayer
 	checkflag 244
-	jumpeq MeteorFalls_1F_1R_EventScript_15C66E
+	jumpif EQUAL, MeteorFalls_1F_1R_EventScript_15C66E
 	setflag 244
 	msgbox MeteorFalls_1F_1R_Text_1937EB, 4
 	release

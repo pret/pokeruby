@@ -19,10 +19,10 @@ Route104_PrettyPetalFlowerShop_EventScript_15BE0B:: @ 815BE0B
 	lock
 	faceplayer
 	checkflag 1
-	jumpeq Route104_PrettyPetalFlowerShop_EventScript_15BE7C
+	jumpif EQUAL, Route104_PrettyPetalFlowerShop_EventScript_15BE7C
 	msgbox Route104_PrettyPetalFlowerShop_Text_1C5EC6, 4
 	checkflag 127
-	jumpeq Route104_PrettyPetalFlowerShop_EventScript_15BE4A
+	jumpif EQUAL, Route104_PrettyPetalFlowerShop_EventScript_15BE4A
 	setflag 127
 	msgbox Route104_PrettyPetalFlowerShop_Text_1C5F48, 5
 	compare RESULT, 1
@@ -91,13 +91,13 @@ Route104_PrettyPetalFlowerShop_EventScript_15BEDA:: @ 815BEDA
 	faceplayer
 	checkdailyflags
 	checkflag 2256
-	jumpeq Route104_PrettyPetalFlowerShop_EventScript_15BF1A
+	jumpif EQUAL, Route104_PrettyPetalFlowerShop_EventScript_15BF1A
 	msgbox Route104_PrettyPetalFlowerShop_Text_1C62DA, 4
 	random 8
 	addvar RESULT, 133
 	giveitem RESULT
 	compare RESULT, 0
-	jumpeq Route104_PrettyPetalFlowerShop_EventScript_1A029B
+	jumpif EQUAL, Route104_PrettyPetalFlowerShop_EventScript_1A029B
 	setflag 2256
 	msgbox Route104_PrettyPetalFlowerShop_Text_1C6335, 4
 	release

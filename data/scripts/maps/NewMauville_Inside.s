@@ -151,7 +151,7 @@ NewMauville_Inside_EventScript_15E88B:: @ 815E88B
 NewMauville_Inside_EventScript_15E8E0:: @ 815E8E0
 	lockall
 	compare 0x40ba, 2
-	jumpeq NewMauville_Inside_EventScript_15E8F6
+	jumpif EQUAL, NewMauville_Inside_EventScript_15E8F6
 	msgbox NewMauville_Inside_Text_198315, 4
 	releaseall
 	end

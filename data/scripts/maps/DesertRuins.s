@@ -34,7 +34,7 @@ DesertRuins_MapScript1_15CB52:: @ 815CB52
 DesertRuins_EventScript_15CB56:: @ 815CB56
 	lockall
 	checkflag 2128
-	jumpeq DesertRuins_EventScript_15CB6D
+	jumpif EQUAL, DesertRuins_EventScript_15CB6D
 	braillemsg DesertRuins_Braille_1C54C8
 	waitbutton
 	hidebox 0, 0, 29, 19

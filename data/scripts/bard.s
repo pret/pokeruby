@@ -13,9 +13,9 @@ MauvilleCity_PokemonCenter_1F_EventScript_1AE784:: @ 81AE784
 	faceplayer
 	msgbox MauvilleCity_PokemonCenter_1F_Text_1B0A91, 5
 	compare RESULT, 1
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1AE7A5
+	jumpif EQUAL, MauvilleCity_PokemonCenter_1F_EventScript_1AE7A5
 	compare RESULT, 0
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1AE7C8
+	jumpif EQUAL, MauvilleCity_PokemonCenter_1F_EventScript_1AE7C8
 	end
 
 MauvilleCity_PokemonCenter_1F_EventScript_1AE7A5:: @ 81AE7A5
@@ -24,7 +24,7 @@ MauvilleCity_PokemonCenter_1F_EventScript_1AE7A5:: @ 81AE7A5
 	pause 60
 	special 98
 	compare RESULT, 0
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1AE7D2
+	jumpif EQUAL, MauvilleCity_PokemonCenter_1F_EventScript_1AE7D2
 	msgbox MauvilleCity_PokemonCenter_1F_Text_1B0AED, 4
 	release
 	end
@@ -37,9 +37,9 @@ MauvilleCity_PokemonCenter_1F_EventScript_1AE7C8:: @ 81AE7C8
 MauvilleCity_PokemonCenter_1F_EventScript_1AE7D2:: @ 81AE7D2
 	msgbox MauvilleCity_PokemonCenter_1F_Text_1B0B2C, 5
 	compare RESULT, 1
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1AE7F1
+	jumpif EQUAL, MauvilleCity_PokemonCenter_1F_EventScript_1AE7F1
 	compare RESULT, 0
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1AE83B
+	jumpif EQUAL, MauvilleCity_PokemonCenter_1F_EventScript_1AE83B
 	end
 
 MauvilleCity_PokemonCenter_1F_EventScript_1AE7F1:: @ 81AE7F1
@@ -48,14 +48,14 @@ MauvilleCity_PokemonCenter_1F_EventScript_1AE7F1:: @ 81AE7F1
 	lock
 	faceplayer
 	compare RESULT, 0
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1AE83B
+	jumpif EQUAL, MauvilleCity_PokemonCenter_1F_EventScript_1AE83B
 	msgbox MauvilleCity_PokemonCenter_1F_Text_1B0BD0, 4
 	setvar 0x8004, 1
 	special 103
 	pause 60
 	msgbox MauvilleCity_PokemonCenter_1F_Text_1B0BFA, 5
 	compare RESULT, 0
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1AE7F1
+	jumpif EQUAL, MauvilleCity_PokemonCenter_1F_EventScript_1AE7F1
 	special 99
 	msgbox MauvilleCity_PokemonCenter_1F_Text_1B0C23, 4
 	release

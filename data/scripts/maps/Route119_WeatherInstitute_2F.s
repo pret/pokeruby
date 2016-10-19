@@ -57,7 +57,7 @@ Route119_WeatherInstitute_2F_EventScript_163D7A:: @ 8163D7A
 	msgbox Route119_WeatherInstitute_2F_Text_19F1CF, 4
 	countpokemon
 	compare RESULT, 6
-	jumpeq Route119_WeatherInstitute_2F_EventScript_163DB4
+	jumpif EQUAL, Route119_WeatherInstitute_2F_EventScript_163DB4
 	fanfare 370
 	message Route119_WeatherInstitute_2F_Text_19F267
 	waitfanfare
@@ -88,6 +88,6 @@ Route119_WeatherInstitute_2F_EventScript_163DCC:: @ 8163DCC
 	lock
 	faceplayer
 	checkflag 151
-	jumpeq Route119_WeatherInstitute_2F_EventScript_163DBE
+	jumpif EQUAL, Route119_WeatherInstitute_2F_EventScript_163DBE
 	jump Route119_WeatherInstitute_2F_EventScript_163D7A
 	end

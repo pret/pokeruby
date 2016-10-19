@@ -280,7 +280,7 @@ Route109_EventScript_14F691:: @ 814F691
 	message Route109_Text_16E0F9
 	msgbox Route109_Text_16E0F9, 5
 	compare RESULT, 0
-	jumpeq Route109_EventScript_14F6F1
+	jumpif EQUAL, Route109_EventScript_14F6F1
 	jump Route109_EventScript_14F6E2
 	end
 
@@ -329,11 +329,11 @@ Route109_EventScript_14F725:: @ 814F725
 	faceplayer
 	special 148
 	checkflag 280
-	jumpeq Route109_EventScript_14F762
+	jumpif EQUAL, Route109_EventScript_14F762
 	msgbox Route109_Text_16E433, 4
 	giveitem ITEM_SOFT_SAND
 	compare RESULT, 0
-	jumpeq Route109_EventScript_1A029B
+	jumpif EQUAL, Route109_EventScript_1A029B
 	closebutton
 	move LAST_TALKED, Route109_Movement_1A083D
 	waitmove 0
@@ -398,7 +398,7 @@ Route109_EventScript_14F809:: @ 814F809
 	trainerbattle 0, OPPONENT_RICKY_1, 0, Route109_Text_1B9C23, Route109_Text_1B9C65
 	specialval RESULT, 57
 	compare RESULT, 1
-	jumpeq Route109_EventScript_14F830
+	jumpif EQUAL, Route109_EventScript_14F830
 	msgbox Route109_Text_1B9C6E, 6
 	end
 
@@ -411,7 +411,7 @@ Route109_EventScript_14F847:: @ 814F847
 	trainerbattle 0, OPPONENT_LOLA_1, 0, Route109_Text_1B9D54, Route109_Text_1B9D87
 	specialval RESULT, 57
 	compare RESULT, 1
-	jumpeq Route109_EventScript_14F86E
+	jumpif EQUAL, Route109_EventScript_14F86E
 	msgbox Route109_Text_1B9D8E, 6
 	end
 

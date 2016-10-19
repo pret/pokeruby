@@ -110,7 +110,7 @@ SootopolisCity_Gym_1F_EventScript_15B02D:: @ 815B02D
 SootopolisCity_Gym_1F_EventScript_15B056:: @ 815B056
 	giveitem ITEM_TM03
 	compare RESULT, 0
-	jumpeq SootopolisCity_Gym_1F_EventScript_1A029B
+	jumpif EQUAL, SootopolisCity_Gym_1F_EventScript_1A029B
 	msgbox SootopolisCity_Gym_1F_Text_18F466, 4
 	setflag 172
 	release
@@ -125,7 +125,7 @@ SootopolisCity_Gym_1F_EventScript_15B084:: @ 815B084
 	lock
 	faceplayer
 	checkflag 1236
-	jumpeq SootopolisCity_Gym_1F_EventScript_15B099
+	jumpif EQUAL, SootopolisCity_Gym_1F_EventScript_15B099
 	msgbox SootopolisCity_Gym_1F_Text_18E8A5, 4
 	release
 	end
@@ -138,14 +138,14 @@ SootopolisCity_Gym_1F_EventScript_15B099:: @ 815B099
 SootopolisCity_Gym_1F_EventScript_15B0A3:: @ 815B0A3
 	lockall
 	checkflag 2062
-	jumpeq SootopolisCity_Gym_1F_EventScript_15B0C3
+	jumpif EQUAL, SootopolisCity_Gym_1F_EventScript_15B0C3
 	jump SootopolisCity_Gym_1F_EventScript_15B0CD
 	end
 
 SootopolisCity_Gym_1F_EventScript_15B0B3:: @ 815B0B3
 	lockall
 	checkflag 2062
-	jumpeq SootopolisCity_Gym_1F_EventScript_15B0C3
+	jumpif EQUAL, SootopolisCity_Gym_1F_EventScript_15B0C3
 	jump SootopolisCity_Gym_1F_EventScript_15B0CD
 	end
 

@@ -12,7 +12,7 @@ Route110_SeasideCyclingRoadSouthEntrance_EventScript_16348B:: @ 816348B
 	lockall
 	specialval RESULT, 227
 	compare RESULT, 0
-	jumpeq Route110_SeasideCyclingRoadSouthEntrance_EventScript_1634A6
+	jumpif EQUAL, Route110_SeasideCyclingRoadSouthEntrance_EventScript_1634A6
 	setflag 2091
 	setvar 0x4001, 1
 	releaseall

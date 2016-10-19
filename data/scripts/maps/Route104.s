@@ -32,11 +32,11 @@ Route104_EventScript_14EEC8:: @ 814EEC8
 	lock
 	faceplayer
 	checkflag 246
-	jumpeq Route104_EventScript_14EEFF
+	jumpif EQUAL, Route104_EventScript_14EEFF
 	msgbox Route104_Text_1C55B9, 4
 	giveitem ITEM_CHESTO_BERRY
 	compare RESULT, 0
-	jumpeq Route104_EventScript_1A029B
+	jumpif EQUAL, Route104_EventScript_1A029B
 	setflag 246
 	msgbox Route104_Text_1C5665, 4
 	release
@@ -51,11 +51,11 @@ Route104_EventScript_14EF09:: @ 814EF09
 	lock
 	faceplayer
 	checkflag 279
-	jumpeq Route104_EventScript_14EF38
+	jumpif EQUAL, Route104_EventScript_14EF38
 	msgbox Route104_Text_16DD91, 4
 	giveitem ITEM_WHITE_HERB
 	compare RESULT, 0
-	jumpeq Route104_EventScript_1A029B
+	jumpif EQUAL, Route104_EventScript_1A029B
 	setflag 279
 	release
 	end
@@ -105,11 +105,11 @@ Route104_EventScript_14EF93:: @ 814EF93
 	lock
 	faceplayer
 	checkflag 262
-	jumpeq Route104_EventScript_14EFC2
+	jumpif EQUAL, Route104_EventScript_14EFC2
 	msgbox Route104_Text_16DC5F, 4
 	giveitem ITEM_TM09
 	compare RESULT, 0
-	jumpeq Route104_EventScript_1A029B
+	jumpif EQUAL, Route104_EventScript_1A029B
 	setflag 262
 	release
 	end
@@ -161,7 +161,7 @@ Route104_EventScript_14EFD5:: @ 814EFD5
 	checkflag 189
 	jumpif 0, Route104_EventScript_14F08B
 	checkflag 189
-	jumpeq Route104_EventScript_14F095
+	jumpif EQUAL, Route104_EventScript_14F095
 	end
 
 Route104_EventScript_14F08B:: @ 814F08B
@@ -411,7 +411,7 @@ Route104_EventScript_14F1A0:: @ 814F1A0
 	trainerbattle 0, OPPONENT_HALEY_1, 0, Route104_Text_1B8770, Route104_Text_1B87A7
 	specialval RESULT, 57
 	compare RESULT, 1
-	jumpeq Route104_EventScript_14F1C7
+	jumpif EQUAL, Route104_EventScript_14F1C7
 	msgbox Route104_Text_1B87C3, 6
 	end
 
@@ -424,7 +424,7 @@ Route104_EventScript_14F1DE:: @ 814F1DE
 	trainerbattle 0, OPPONENT_WINSTON_1, 0, Route104_Text_1B88D4, Route104_Text_1B8911
 	specialval RESULT, 57
 	compare RESULT, 1
-	jumpeq Route104_EventScript_14F205
+	jumpif EQUAL, Route104_EventScript_14F205
 	msgbox Route104_Text_1B8925, 6
 	end
 
@@ -437,7 +437,7 @@ Route104_EventScript_14F21C:: @ 814F21C
 	trainerbattle 0, OPPONENT_CINDY_1, 0, Route104_Text_1B8A24, Route104_Text_1B8A61
 	specialval RESULT, 57
 	compare RESULT, 1
-	jumpeq Route104_EventScript_14F243
+	jumpif EQUAL, Route104_EventScript_14F243
 	msgbox Route104_Text_1B8A69, 6
 	end
 

@@ -61,9 +61,9 @@ EverGrandeCity_ChampionsRoom_EventScript_15B821:: @ 815B821
 	call EverGrandeCity_ChampionsRoom_EventScript_15B9BD
 	checkgender
 	compare RESULT, 0
-	jumpeq EverGrandeCity_ChampionsRoom_EventScript_15B886
+	jumpif EQUAL, EverGrandeCity_ChampionsRoom_EventScript_15B886
 	compare RESULT, 1
-	jumpeq EverGrandeCity_ChampionsRoom_EventScript_15B8BB
+	jumpif EQUAL, EverGrandeCity_ChampionsRoom_EventScript_15B8BB
 	end
 
 EverGrandeCity_ChampionsRoom_EventScript_15B87C:: @ 815B87C

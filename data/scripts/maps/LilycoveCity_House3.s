@@ -12,7 +12,7 @@ LilycoveCity_House3_EventScript_159BF3:: @ 8159BF3
 	faceplayer
 	msgbox LilycoveCity_House3_Text_18B8CC, 5
 	compare RESULT, 0
-	jumpeq LilycoveCity_House3_EventScript_159C1D
+	jumpif EQUAL, LilycoveCity_House3_EventScript_159C1D
 	msgbox LilycoveCity_House3_Text_18BA2B, 4
 	closebutton
 	move LAST_TALKED, LilycoveCity_House3_Movement_1A083D

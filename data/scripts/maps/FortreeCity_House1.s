@@ -5,19 +5,19 @@ FortreeCity_House1_EventScript_157E13:: @ 8157E13
 	lock
 	faceplayer
 	checkflag 155
-	jumpeq FortreeCity_House1_EventScript_157EAD
+	jumpif EQUAL, FortreeCity_House1_EventScript_157EAD
 	setvar 0x8008, 1
 	copyvar 0x8004, 0x8008
 	specialval RESULT, 252
 	copyvar 0x8009, RESULT
 	msgbox FortreeCity_House1_Text_18568C, 5
 	compare RESULT, 0
-	jumpeq FortreeCity_House1_EventScript_157E95
+	jumpif EQUAL, FortreeCity_House1_EventScript_157E95
 	special 159
 	waitstate
 	copyvar 0x800a, 0x8004
 	compare 0x8004, 255
-	jumpeq FortreeCity_House1_EventScript_157E95
+	jumpif EQUAL, FortreeCity_House1_EventScript_157E95
 	copyvar 0x8005, 0x800a
 	specialval RESULT, 255
 	copyvar 0x800b, RESULT

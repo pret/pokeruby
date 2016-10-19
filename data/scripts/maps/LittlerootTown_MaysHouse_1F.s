@@ -19,7 +19,7 @@ LittlerootTown_MaysHouse_1F_EventScript_15289E:: @ 815289E
 LittlerootTown_MaysHouse_1F_EventScript_1528B1:: @ 81528B1
 	checkgender
 	compare RESULT, 1
-	jumpeq LittlerootTown_MaysHouse_1F_EventScript_1528BE
+	jumpif EQUAL, LittlerootTown_MaysHouse_1F_EventScript_1528BE
 	return
 
 LittlerootTown_MaysHouse_1F_EventScript_1528BE:: @ 81528BE
@@ -136,11 +136,11 @@ LittlerootTown_MaysHouse_1F_EventScript_1529EB:: @ 81529EB
 	lock
 	faceplayer
 	checkflag 130
-	jumpeq LittlerootTown_BrendansHouse_1F_EventScript_152A21
+	jumpif EQUAL, LittlerootTown_BrendansHouse_1F_EventScript_152A21
 	checkflag 301
-	jumpeq LittlerootTown_BrendansHouse_1F_EventScript_152A17
+	jumpif EQUAL, LittlerootTown_BrendansHouse_1F_EventScript_152A17
 	compare 0x408d, 3
-	jumpeq LittlerootTown_BrendansHouse_1F_EventScript_152A2B
+	jumpif EQUAL, LittlerootTown_BrendansHouse_1F_EventScript_152A2B
 	special 149
 	msgbox LittlerootTown_BrendansHouse_1F_Text_1731C6, 4
 	release

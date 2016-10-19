@@ -4,9 +4,9 @@ LilycoveCity_CoveLilyMotel_1F_MapScripts:: @ 81582C4
 LilycoveCity_CoveLilyMotel_1F_EventScript_1582C5:: @ 81582C5
 	lockall
 	checkflag 2052
-	jumpeq LilycoveCity_CoveLilyMotel_1F_EventScript_158326
+	jumpif EQUAL, LilycoveCity_CoveLilyMotel_1F_EventScript_158326
 	checkflag 2061
-	jumpeq LilycoveCity_CoveLilyMotel_1F_EventScript_1582FF
+	jumpif EQUAL, LilycoveCity_CoveLilyMotel_1F_EventScript_1582FF
 	msgbox LilycoveCity_CoveLilyMotel_1F_Text_186B71, 4
 	move 1, LilycoveCity_CoveLilyMotel_1F_Movement_1A0839
 	waitmove 0

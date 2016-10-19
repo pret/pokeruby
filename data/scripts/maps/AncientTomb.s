@@ -34,7 +34,7 @@ AncientTomb_EventScript_15EFEA:: @ 815EFEA
 AncientTomb_EventScript_15F021:: @ 815F021
 	lockall
 	checkflag 2130
-	jumpeq AncientTomb_EventScript_15F038
+	jumpif EQUAL, AncientTomb_EventScript_15F038
 	braillemsg AncientTomb_Braille_1C552E
 	waitbutton
 	hidebox 0, 0, 29, 19

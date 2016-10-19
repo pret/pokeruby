@@ -36,7 +36,7 @@ SlateportCity_PokemonFanClub_EventScript_1557A8:: @ 81557A8
 	compare 0x4002, 5
 	callif 1, SlateportCity_PokemonFanClub_EventScript_15588D
 	compare 0x40b7, 2
-	jumpeq SlateportCity_PokemonFanClub_EventScript_1557FE
+	jumpif EQUAL, SlateportCity_PokemonFanClub_EventScript_1557FE
 	msgbox SlateportCity_PokemonFanClub_Text_17DA14, 4
 	jump SlateportCity_PokemonFanClub_EventScript_155808
 	end
@@ -86,7 +86,7 @@ SlateportCity_PokemonFanClub_EventScript_155899:: @ 8155899
 SlateportCity_PokemonFanClub_EventScript_1558A3:: @ 81558A3
 	checkitemspace ITEM_RED_SCARF, 1
 	compare RESULT, 0
-	jumpeq SlateportCity_PokemonFanClub_EventScript_155998
+	jumpif EQUAL, SlateportCity_PokemonFanClub_EventScript_155998
 	msgbox SlateportCity_PokemonFanClub_Text_17DB89, 4
 	setflag 200
 	giveitem ITEM_RED_SCARF
@@ -97,7 +97,7 @@ SlateportCity_PokemonFanClub_EventScript_1558A3:: @ 81558A3
 SlateportCity_PokemonFanClub_EventScript_1558D4:: @ 81558D4
 	checkitemspace ITEM_BLUE_SCARF, 1
 	compare RESULT, 0
-	jumpeq SlateportCity_PokemonFanClub_EventScript_155998
+	jumpif EQUAL, SlateportCity_PokemonFanClub_EventScript_155998
 	msgbox SlateportCity_PokemonFanClub_Text_17DB89, 4
 	setflag 201
 	giveitem ITEM_BLUE_SCARF
@@ -108,7 +108,7 @@ SlateportCity_PokemonFanClub_EventScript_1558D4:: @ 81558D4
 SlateportCity_PokemonFanClub_EventScript_155905:: @ 8155905
 	checkitemspace ITEM_PINK_SCARF, 1
 	compare RESULT, 0
-	jumpeq SlateportCity_PokemonFanClub_EventScript_155998
+	jumpif EQUAL, SlateportCity_PokemonFanClub_EventScript_155998
 	msgbox SlateportCity_PokemonFanClub_Text_17DB89, 4
 	setflag 202
 	giveitem ITEM_PINK_SCARF
@@ -119,7 +119,7 @@ SlateportCity_PokemonFanClub_EventScript_155905:: @ 8155905
 SlateportCity_PokemonFanClub_EventScript_155936:: @ 8155936
 	checkitemspace ITEM_GREEN_SCARF, 1
 	compare RESULT, 0
-	jumpeq SlateportCity_PokemonFanClub_EventScript_155998
+	jumpif EQUAL, SlateportCity_PokemonFanClub_EventScript_155998
 	msgbox SlateportCity_PokemonFanClub_Text_17DB89, 4
 	setflag 203
 	giveitem ITEM_GREEN_SCARF
@@ -130,7 +130,7 @@ SlateportCity_PokemonFanClub_EventScript_155936:: @ 8155936
 SlateportCity_PokemonFanClub_EventScript_155967:: @ 8155967
 	checkitemspace ITEM_YELLOW_SCARF, 1
 	compare RESULT, 0
-	jumpeq SlateportCity_PokemonFanClub_EventScript_155998
+	jumpif EQUAL, SlateportCity_PokemonFanClub_EventScript_155998
 	msgbox SlateportCity_PokemonFanClub_Text_17DB89, 4
 	setflag 204
 	giveitem ITEM_YELLOW_SCARF
@@ -197,7 +197,7 @@ SlateportCity_PokemonFanClub_EventScript_155A15:: @ 8155A15
 	lock
 	faceplayer
 	checkflag 278
-	jumpeq SlateportCity_PokemonFanClub_EventScript_155A75
+	jumpif EQUAL, SlateportCity_PokemonFanClub_EventScript_155A75
 	msgbox SlateportCity_PokemonFanClub_Text_17DE6B, 4
 	specialval RESULT, 230
 	compare RESULT, 4
@@ -214,7 +214,7 @@ SlateportCity_PokemonFanClub_EventScript_155A3A:: @ 8155A3A
 	msgbox SlateportCity_PokemonFanClub_Text_17DF57, 4
 	giveitem ITEM_SOOTHE_BELL
 	compare RESULT, 0
-	jumpeq SlateportCity_PokemonFanClub_EventScript_1A029B
+	jumpif EQUAL, SlateportCity_PokemonFanClub_EventScript_1A029B
 	setflag 278
 	release
 	end

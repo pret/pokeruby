@@ -27,7 +27,7 @@ Route110_SeasideCyclingRoadNorthEntrance_EventScript_1634F7:: @ 81634F7
 	compare RESULT, 2
 	callif 1, Route110_SeasideCyclingRoadNorthEntrance_EventScript_16351D
 	compare RESULT, 0
-	jumpeq Route110_SeasideCyclingRoadNorthEntrance_EventScript_163523
+	jumpif EQUAL, Route110_SeasideCyclingRoadNorthEntrance_EventScript_163523
 	setflag 2091
 	setvar 0x4001, 1
 	releaseall

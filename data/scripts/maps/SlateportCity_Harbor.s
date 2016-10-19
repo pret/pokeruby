@@ -160,7 +160,7 @@ SlateportCity_Harbor_EventScript_1560C4:: @ 81560C4
 	lock
 	faceplayer
 	checkflag 2052
-	jumpeq SlateportCity_Harbor_EventScript_1560D9
+	jumpif EQUAL, SlateportCity_Harbor_EventScript_1560D9
 	msgbox SlateportCity_Harbor_Text_17FA0A, 4
 	release
 	end
@@ -169,7 +169,7 @@ SlateportCity_Harbor_EventScript_1560D9:: @ 81560D9
 	msgbox SlateportCity_Harbor_Text_17FA73, 4
 	checkitem ITEM_SS_TICKET, 1
 	compare RESULT, 0
-	jumpeq SlateportCity_Harbor_EventScript_156135
+	jumpif EQUAL, SlateportCity_Harbor_EventScript_156135
 	message SlateportCity_Harbor_Text_17FB0A
 	waittext
 	jump SlateportCity_Harbor_EventScript_1560FD
@@ -192,7 +192,7 @@ SlateportCity_Harbor_EventScript_156135:: @ 8156135
 SlateportCity_Harbor_EventScript_15613F:: @ 815613F
 	msgbox SlateportCity_Harbor_Text_17FB81, 5
 	compare RESULT, 0
-	jumpeq SlateportCity_Harbor_EventScript_15618A
+	jumpif EQUAL, SlateportCity_Harbor_EventScript_15618A
 	setvar 0x40b4, 1
 	call SlateportCity_Harbor_EventScript_156196
 	warp SSTidalCorridor, 255, 1, 10
@@ -203,7 +203,7 @@ SlateportCity_Harbor_EventScript_15613F:: @ 815613F
 SlateportCity_Harbor_EventScript_156167:: @ 8156167
 	msgbox SlateportCity_Harbor_Text_17FB9C, 5
 	compare RESULT, 0
-	jumpeq SlateportCity_Harbor_EventScript_15618A
+	jumpif EQUAL, SlateportCity_Harbor_EventScript_15618A
 	call SlateportCity_Harbor_EventScript_156196
 	warp BattleTower_Outside, 255, 19, 23
 	waitstate
@@ -269,13 +269,13 @@ SlateportCity_Harbor_EventScript_156211:: @ 8156211
 	lock
 	faceplayer
 	checkflag 2061
-	jumpeq SlateportCity_Harbor_EventScript_15626F
+	jumpif EQUAL, SlateportCity_Harbor_EventScript_15626F
 	checkflag 271
-	jumpeq SlateportCity_Harbor_EventScript_156265
+	jumpif EQUAL, SlateportCity_Harbor_EventScript_156265
 	checkflag 112
-	jumpeq SlateportCity_Harbor_EventScript_156258
+	jumpif EQUAL, SlateportCity_Harbor_EventScript_156258
 	compare 0x40a0, 2
-	jumpeq SlateportCity_Harbor_EventScript_15624E
+	jumpif EQUAL, SlateportCity_Harbor_EventScript_15624E
 	msgbox SlateportCity_Harbor_Text_17FD1C, 4
 	closebutton
 	move LAST_TALKED, SlateportCity_Harbor_Movement_1A083D
@@ -301,12 +301,12 @@ SlateportCity_Harbor_EventScript_156265:: @ 8156265
 
 SlateportCity_Harbor_EventScript_15626F:: @ 815626F
 	compare 0x4001, 1
-	jumpeq SlateportCity_Harbor_EventScript_156380
+	jumpif EQUAL, SlateportCity_Harbor_EventScript_156380
 	checkitem ITEM_SCANNER, 1
 	compare RESULT, 1
-	jumpeq SlateportCity_Harbor_EventScript_1562A7
+	jumpif EQUAL, SlateportCity_Harbor_EventScript_1562A7
 	checkflag 2052
-	jumpeq SlateportCity_Harbor_EventScript_15629D
+	jumpif EQUAL, SlateportCity_Harbor_EventScript_15629D
 	msgbox SlateportCity_Harbor_Text_18017B, 4
 	release
 	end
@@ -334,10 +334,10 @@ SlateportCity_Harbor_EventScript_1562B3:: @ 81562B3
 SlateportCity_Harbor_EventScript_1562EA:: @ 81562EA
 	msgbox SlateportCity_Harbor_Text_1803DD, 5
 	compare RESULT, 0
-	jumpeq SlateportCity_Harbor_EventScript_156374
+	jumpif EQUAL, SlateportCity_Harbor_EventScript_156374
 	giveitem ITEM_DEEP_SEA_TOOTH
 	compare RESULT, 0
-	jumpeq SlateportCity_Harbor_EventScript_1A029B
+	jumpif EQUAL, SlateportCity_Harbor_EventScript_1A029B
 	removeitem ITEM_SCANNER, 1
 	msgbox SlateportCity_Harbor_Text_18046B, 4
 	setflag 294
@@ -347,10 +347,10 @@ SlateportCity_Harbor_EventScript_1562EA:: @ 81562EA
 SlateportCity_Harbor_EventScript_15632A:: @ 815632A
 	msgbox SlateportCity_Harbor_Text_180412, 5
 	compare RESULT, 0
-	jumpeq SlateportCity_Harbor_EventScript_156374
+	jumpif EQUAL, SlateportCity_Harbor_EventScript_156374
 	giveitem ITEM_DEEP_SEA_SCALE
 	compare RESULT, 0
-	jumpeq SlateportCity_Harbor_EventScript_1A029B
+	jumpif EQUAL, SlateportCity_Harbor_EventScript_1A029B
 	removeitem ITEM_SCANNER, 1
 	msgbox SlateportCity_Harbor_Text_18046B, 4
 	setflag 294

@@ -56,7 +56,7 @@ AbandonedShip_HiddenFloorRooms_EventScript_15EDC4:: @ 815EDC4
 AbandonedShip_HiddenFloorRooms_EventScript_15EDC5:: @ 815EDC5
 	specialval RESULT, 288
 	compare RESULT, 1
-	jumpeq AbandonedShip_HiddenFloorRooms_EventScript_15EDEA
+	jumpif EQUAL, AbandonedShip_HiddenFloorRooms_EventScript_15EDEA
 	pause 20
 	compare RESULT, 0
 	callif 1, AbandonedShip_HiddenFloorRooms_EventScript_15EE6B

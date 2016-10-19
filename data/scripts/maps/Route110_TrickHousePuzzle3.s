@@ -353,9 +353,9 @@ Route110_TrickHousePuzzle3_EventScript_1626AD:: @ 81626AD
 	callif 1, Route110_TrickHousePuzzle3_EventScript_1622C8
 	special 142
 	compare 0x4009, 1
-	jumpeq Route110_TrickHousePuzzle3_EventScript_1626DD
+	jumpif EQUAL, Route110_TrickHousePuzzle3_EventScript_1626DD
 	compare 0x4009, 0
-	jumpeq Route110_TrickHousePuzzle3_EventScript_1626E4
+	jumpif EQUAL, Route110_TrickHousePuzzle3_EventScript_1626E4
 	end
 
 Route110_TrickHousePuzzle3_EventScript_1626DD:: @ 81626DD
@@ -371,7 +371,7 @@ Route110_TrickHousePuzzle3_EventScript_1626E4:: @ 81626E4
 Route110_TrickHousePuzzle3_EventScript_1626EB:: @ 81626EB
 	lockall
 	compare 0x40ad, 0
-	jumpeq Route110_TrickHousePuzzle3_EventScript_1626FD
+	jumpif EQUAL, Route110_TrickHousePuzzle3_EventScript_1626FD
 	jump Route110_TrickHousePuzzle3_EventScript_161892
 	end
 

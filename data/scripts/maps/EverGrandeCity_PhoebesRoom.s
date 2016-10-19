@@ -42,7 +42,7 @@ EverGrandeCity_PhoebesRoom_EventScript_15B630:: @ 815B630
 	lock
 	faceplayer
 	checkflag 1246
-	jumpeq EverGrandeCity_PhoebesRoom_EventScript_15B657
+	jumpif EQUAL, EverGrandeCity_PhoebesRoom_EventScript_15B657
 	playmusic 450, 0
 	msgbox EverGrandeCity_PhoebesRoom_Text_1908F5, 4
 	trainerbattle 3, OPPONENT_PHOEBE, 0, EverGrandeCity_PhoebesRoom_Text_190A0C

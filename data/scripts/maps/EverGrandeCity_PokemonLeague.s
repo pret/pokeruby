@@ -48,7 +48,7 @@ EverGrandeCity_PokemonLeague_Items:: @ 815BAC0
 EverGrandeCity_PokemonLeague_EventScript_15BAD2:: @ 815BAD2
 	lockall
 	checkflag 263
-	jumpeq EverGrandeCity_PokemonLeague_EventScript_15BB57
+	jumpif EQUAL, EverGrandeCity_PokemonLeague_EventScript_15BB57
 	getplayerxy 0x4000, 0x4001
 	compare 0x4000, 11
 	callif 4, EverGrandeCity_PokemonLeague_EventScript_15BB34

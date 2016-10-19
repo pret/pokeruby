@@ -62,7 +62,7 @@ Route113_EventScript_150669:: @ 8150669
 	trainerbattle 0, OPPONENT_MADELINE_1, 0, Route113_Text_1BBB27, Route113_Text_1BBB7A
 	specialval RESULT, 57
 	compare RESULT, 1
-	jumpeq Route113_EventScript_150690
+	jumpif EQUAL, Route113_EventScript_150690
 	msgbox Route113_Text_1BBB9A, 6
 	end
 
@@ -75,7 +75,7 @@ Route113_EventScript_1506A7:: @ 81506A7
 	trainerbattle 0, OPPONENT_LAO_1, 0, Route113_Text_1BBC59, Route113_Text_1BBC90
 	specialval RESULT, 57
 	compare RESULT, 1
-	jumpeq Route113_EventScript_1506CE
+	jumpif EQUAL, Route113_EventScript_1506CE
 	msgbox Route113_Text_1BBCAB, 6
 	end
 

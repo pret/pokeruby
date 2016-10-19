@@ -12,10 +12,10 @@ LilycoveCity_DepartmentStore_1F_EventScript_159D5E:: @ 8159D5E
 	compare 0x4045, 0
 	jumpif 5, LilycoveCity_DepartmentStore_1F_EventScript_159EB1
 	checkflag 2250
-	jumpeq LilycoveCity_DepartmentStore_1F_EventScript_159E4C
+	jumpif EQUAL, LilycoveCity_DepartmentStore_1F_EventScript_159E4C
 	msgbox LilycoveCity_DepartmentStore_1F_Text_1C4B5E, 5
 	compare RESULT, 0
-	jumpeq LilycoveCity_DepartmentStore_1F_EventScript_159E56
+	jumpif EQUAL, LilycoveCity_DepartmentStore_1F_EventScript_159E56
 	setflag 2250
 	message LilycoveCity_DepartmentStore_1F_Text_1C4CC6
 	waittext
@@ -34,7 +34,7 @@ LilycoveCity_DepartmentStore_1F_EventScript_159D5E:: @ 8159D5E
 	move 2, LilycoveCity_DepartmentStore_1F_Movement_1A0839
 	waitmove 0
 	compare 0x8004, 0
-	jumpeq LilycoveCity_DepartmentStore_1F_EventScript_159E60
+	jumpif EQUAL, LilycoveCity_DepartmentStore_1F_EventScript_159E60
 	inccounter GAME_STAT_WON_POKEMON_LOTTERY
 	compare 0x8006, 0
 	callif 1, LilycoveCity_DepartmentStore_1F_EventScript_159E3A
@@ -51,7 +51,7 @@ LilycoveCity_DepartmentStore_1F_EventScript_159D5E:: @ 8159D5E
 	callif 1, LilycoveCity_DepartmentStore_1F_EventScript_159E93
 	giveitem 0x8005
 	compare RESULT, 0
-	jumpeq LilycoveCity_DepartmentStore_1F_EventScript_159E9C
+	jumpif EQUAL, LilycoveCity_DepartmentStore_1F_EventScript_159E9C
 	jump LilycoveCity_DepartmentStore_1F_EventScript_159E6E
 	end
 
@@ -113,7 +113,7 @@ LilycoveCity_DepartmentStore_1F_EventScript_159EB1:: @ 8159EB1
 	msgbox LilycoveCity_DepartmentStore_1F_Text_1C4FCC, 4
 	giveitem 0x4045
 	compare RESULT, 0
-	jumpeq LilycoveCity_DepartmentStore_1F_EventScript_159EA7
+	jumpif EQUAL, LilycoveCity_DepartmentStore_1F_EventScript_159EA7
 	setvar 0x4045, 0
 	release
 	end

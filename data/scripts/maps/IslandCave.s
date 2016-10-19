@@ -46,7 +46,7 @@ gUnknown_0815EF19:: @ 815EF19
 IslandCave_EventScript_15EF59:: @ 815EF59
 	lockall
 	checkflag 2129
-	jumpeq IslandCave_EventScript_15EF72
+	jumpif EQUAL, IslandCave_EventScript_15EF72
 	braillemsg IslandCave_Braille_1C54FC
 	special 280
 	waitstate
@@ -62,7 +62,7 @@ IslandCave_EventScript_15EF7C:: @ 815EF7C
 	lockall
 	braillemsg IslandCave_Braille_1C54FC
 	checkflag 2129
-	jumpeq IslandCave_EventScript_15EF95
+	jumpif EQUAL, IslandCave_EventScript_15EF95
 	special 280
 	waitstate
 	jump IslandCave_EventScript_15EF95

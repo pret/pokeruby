@@ -38,7 +38,7 @@ FortreeCity_Gym_EventScript_157F15:: @ 8157F15
 FortreeCity_Gym_EventScript_157F3E:: @ 8157F3E
 	giveitem ITEM_TM40
 	compare RESULT, 0
-	jumpeq FortreeCity_Gym_EventScript_1A029B
+	jumpif EQUAL, FortreeCity_Gym_EventScript_1A029B
 	msgbox FortreeCity_Gym_Text_185F4A, 4
 	setflag 170
 	release
@@ -68,7 +68,7 @@ FortreeCity_Gym_EventScript_157FBE:: @ 8157FBE
 	lock
 	faceplayer
 	checkflag 1225
-	jumpeq FortreeCity_Gym_EventScript_157FD3
+	jumpif EQUAL, FortreeCity_Gym_EventScript_157FD3
 	msgbox FortreeCity_Gym_Text_18589C, 4
 	release
 	end
@@ -81,14 +81,14 @@ FortreeCity_Gym_EventScript_157FD3:: @ 8157FD3
 FortreeCity_Gym_EventScript_157FDD:: @ 8157FDD
 	lockall
 	checkflag 2060
-	jumpeq FortreeCity_Gym_EventScript_157FFD
+	jumpif EQUAL, FortreeCity_Gym_EventScript_157FFD
 	jump FortreeCity_Gym_EventScript_158007
 	end
 
 FortreeCity_Gym_EventScript_157FED:: @ 8157FED
 	lockall
 	checkflag 2060
-	jumpeq FortreeCity_Gym_EventScript_157FFD
+	jumpif EQUAL, FortreeCity_Gym_EventScript_157FFD
 	jump FortreeCity_Gym_EventScript_158007
 	end
 

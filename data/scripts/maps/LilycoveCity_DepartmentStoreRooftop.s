@@ -134,10 +134,10 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A267:: @ 815A267
 	compare 0x4001, 2
 	callif 1, LilycoveCity_DepartmentStoreRooftop_EventScript_15A24B
 	compare RESULT, 0
-	jumpeq LilycoveCity_DepartmentStoreRooftop_EventScript_15A37A
+	jumpif EQUAL, LilycoveCity_DepartmentStoreRooftop_EventScript_15A37A
 	checkitemspace 0x4000, 1
 	compare RESULT, 0
-	jumpeq LilycoveCity_DepartmentStoreRooftop_EventScript_15A388
+	jumpif EQUAL, LilycoveCity_DepartmentStoreRooftop_EventScript_15A388
 	compare 0x4001, 0
 	callif 1, LilycoveCity_DepartmentStoreRooftop_EventScript_15A252
 	compare 0x4001, 1
@@ -158,7 +158,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A267:: @ 815A267
 	jumpif 5, LilycoveCity_DepartmentStoreRooftop_EventScript_15A36E
 	checkitemspace 0x4000, 1
 	compare RESULT, 0
-	jumpeq LilycoveCity_DepartmentStoreRooftop_EventScript_15A388
+	jumpif EQUAL, LilycoveCity_DepartmentStoreRooftop_EventScript_15A388
 	playsfx 106
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_18C780, 4
 	additem 0x4000, 1
@@ -170,7 +170,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A267:: @ 815A267
 	jumpif 5, LilycoveCity_DepartmentStoreRooftop_EventScript_15A36E
 	checkitemspace 0x4000, 1
 	compare RESULT, 0
-	jumpeq LilycoveCity_DepartmentStoreRooftop_EventScript_15A388
+	jumpif EQUAL, LilycoveCity_DepartmentStoreRooftop_EventScript_15A388
 	playsfx 106
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_18C780, 4
 	additem 0x4000, 1

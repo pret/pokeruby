@@ -110,7 +110,7 @@ SealedChamber_OuterRoom_EventScript_15F1AA:: @ 815F1AA
 SealedChamber_OuterRoom_EventScript_15F1B8:: @ 815F1B8
 	lockall
 	checkflag 2127
-	jumpeq SealedChamber_OuterRoom_EventScript_15F1CF
+	jumpif EQUAL, SealedChamber_OuterRoom_EventScript_15F1CF
 	braillemsg SealedChamber_OuterRoom_Braille_1C53B1
 	waitbutton
 	hidebox 0, 0, 29, 19

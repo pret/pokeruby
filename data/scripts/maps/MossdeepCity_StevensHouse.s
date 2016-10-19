@@ -73,10 +73,10 @@ MossdeepCity_StevensHouse_EventScript_15AA7C:: @ 815AA7C
 	lockall
 	msgbox MossdeepCity_StevensHouse_Text_18DD12, 5
 	compare RESULT, 0
-	jumpeq MossdeepCity_StevensHouse_EventScript_15AAE6
+	jumpif EQUAL, MossdeepCity_StevensHouse_EventScript_15AAE6
 	countpokemon
 	compare RESULT, 6
-	jumpeq MossdeepCity_StevensHouse_EventScript_15AADC
+	jumpif EQUAL, MossdeepCity_StevensHouse_EventScript_15AADC
 	copyvar 0x8004, RESULT
 	disappear 2
 	fanfare 370
@@ -114,7 +114,7 @@ MossdeepCity_StevensHouse_EventScript_15AAF9:: @ 815AAF9
 MossdeepCity_StevensHouse_EventScript_15AB02:: @ 815AB02
 	lockall
 	checkflag 302
-	jumpeq MossdeepCity_StevensHouse_EventScript_15AB16
+	jumpif EQUAL, MossdeepCity_StevensHouse_EventScript_15AB16
 	msgbox MossdeepCity_StevensHouse_Text_18DF1A, 4
 	releaseall
 	end

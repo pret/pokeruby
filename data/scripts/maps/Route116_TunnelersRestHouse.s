@@ -18,7 +18,7 @@ Route116_TunnelersRestHouse_EventScript_15C2FA:: @ 815C2FA
 	lock
 	faceplayer
 	checkflag 199
-	jumpeq Route116_TunnelersRestHouse_EventScript_15C30F
+	jumpif EQUAL, Route116_TunnelersRestHouse_EventScript_15C30F
 	msgbox Route116_TunnelersRestHouse_Text_193135, 4
 	release
 	end

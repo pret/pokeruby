@@ -29,7 +29,7 @@ PetalburgCity_PokemonCenter_1F_EventScript_155233:: @ 8155233
 	msgbox PetalburgCity_PokemonCenter_1F_Text_17BDC5, 4
 	specialval RESULT, 302
 	compare RESULT, 1
-	jumpeq PetalburgCity_PokemonCenter_1F_EventScript_15524F
+	jumpif EQUAL, PetalburgCity_PokemonCenter_1F_EventScript_15524F
 	release
 	end
 

@@ -15,9 +15,9 @@ Route116_EventScript_150A49:: @ 8150A49
 	lock
 	faceplayer
 	checkflag 143
-	jumpeq Route116_EventScript_150A67
+	jumpif EQUAL, Route116_EventScript_150A67
 	checkflag 142
-	jumpeq Route116_EventScript_150A71
+	jumpif EQUAL, Route116_EventScript_150A71
 	msgbox Route116_Text_1703CF, 4
 	release
 	end
@@ -36,7 +36,7 @@ Route116_EventScript_150A7B:: @ 8150A7B
 	lock
 	faceplayer
 	checkflag 287
-	jumpeq Route116_EventScript_150B04
+	jumpif EQUAL, Route116_EventScript_150B04
 	msgbox Route116_Text_1705AE, 4
 	jump Route116_EventScript_150A94
 	end
@@ -45,7 +45,7 @@ Route116_EventScript_150A94:: @ 8150A94
 	setflag 287
 	giveitem ITEM_REPEAT_BALL
 	compare RESULT, 0
-	jumpeq Route116_EventScript_150B12
+	jumpif EQUAL, Route116_EventScript_150B12
 	msgbox Route116_Text_1707B8, 4
 	closebutton
 	compare FACING, 2
@@ -149,10 +149,10 @@ Route116_EventScript_150B8F:: @ 8150B8F
 	faceplayer
 	checkitem ITEM_BLACK_GLASSES, 1
 	compare RESULT, 1
-	jumpeq Route116_EventScript_150BCA
+	jumpif EQUAL, Route116_EventScript_150BCA
 	specialval RESULT, 316
 	compare RESULT, 1
-	jumpeq Route116_EventScript_150BBB
+	jumpif EQUAL, Route116_EventScript_150BBB
 	msgbox Route116_Text_1708EE, 4
 	release
 	end
@@ -168,7 +168,7 @@ Route116_EventScript_150BCA:: @ 8150BCA
 	msgbox Route116_Text_170921, 4
 	specialval RESULT, 316
 	compare RESULT, 1
-	jumpeq Route116_EventScript_150BF4
+	jumpif EQUAL, Route116_EventScript_150BF4
 	msgbox Route116_Text_170A03, 4
 	release
 	end
@@ -242,7 +242,7 @@ Route116_EventScript_150C90:: @ 8150C90
 	trainerbattle 0, OPPONENT_JERRY_1, 0, Route116_Text_1BD1C0, Route116_Text_1BD21A
 	specialval RESULT, 57
 	compare RESULT, 1
-	jumpeq Route116_EventScript_150CB7
+	jumpif EQUAL, Route116_EventScript_150CB7
 	msgbox Route116_Text_1BD248, 6
 	end
 
@@ -265,7 +265,7 @@ Route116_EventScript_150CFC:: @ 8150CFC
 	trainerbattle 0, OPPONENT_KAREN_1, 0, Route116_Text_1BD377, Route116_Text_1BD3AC
 	specialval RESULT, 57
 	compare RESULT, 1
-	jumpeq Route116_EventScript_150D23
+	jumpif EQUAL, Route116_EventScript_150D23
 	msgbox Route116_Text_1BD3C3, 6
 	end
 

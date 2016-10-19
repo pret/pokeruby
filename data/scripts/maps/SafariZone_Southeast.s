@@ -53,10 +53,10 @@ SafariZone_Southeast_EventScript_1600A7:: @ 81600A7
 	lock
 	faceplayer
 	compare 0x4001, 0
-	jumpeq SafariZone_Southeast_EventScript_1600D1
+	jumpif EQUAL, SafariZone_Southeast_EventScript_1600D1
 	msgbox SafariZone_Southeast_Text_1C3A56, 5
 	compare RESULT, 1
-	jumpeq SafariZone_Southeast_EventScript_1600E0
+	jumpif EQUAL, SafariZone_Southeast_EventScript_1600E0
 	msgbox SafariZone_Southeast_Text_1C3A9C, 4
 	release
 	end

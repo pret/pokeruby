@@ -24,7 +24,7 @@ Route110_TrickHousePuzzle2_MapScript1_161DAE:: @ 8161DAE
 Route110_TrickHousePuzzle2_EventScript_161DC3:: @ 8161DC3
 	lockall
 	compare 0x40ac, 0
-	jumpeq Route110_TrickHousePuzzle2_EventScript_161DD5
+	jumpif EQUAL, Route110_TrickHousePuzzle2_EventScript_161DD5
 	jump Route110_TrickHousePuzzle2_EventScript_161892
 	end
 

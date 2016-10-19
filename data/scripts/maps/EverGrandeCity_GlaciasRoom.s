@@ -42,7 +42,7 @@ EverGrandeCity_GlaciasRoom_EventScript_15B6CA:: @ 815B6CA
 	lock
 	faceplayer
 	checkflag 1247
-	jumpeq EverGrandeCity_GlaciasRoom_EventScript_15B6F1
+	jumpif EQUAL, EverGrandeCity_GlaciasRoom_EventScript_15B6F1
 	playmusic 450, 0
 	msgbox EverGrandeCity_GlaciasRoom_Text_190AF9, 4
 	trainerbattle 3, OPPONENT_GLACIA, 0, EverGrandeCity_GlaciasRoom_Text_190C01

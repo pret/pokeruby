@@ -65,13 +65,13 @@ LilycoveCity_EventScript_14CB74:: @ 814CB74
 	faceplayer
 	checkdailyflags
 	checkflag 2255
-	jumpeq LilycoveCity_EventScript_14CBB4
+	jumpif EQUAL, LilycoveCity_EventScript_14CBB4
 	msgbox LilycoveCity_Text_1C5A7A, 4
 	random 10
 	addvar RESULT, 133
 	giveitem RESULT
 	compare RESULT, 0
-	jumpeq LilycoveCity_EventScript_1A029B
+	jumpif EQUAL, LilycoveCity_EventScript_1A029B
 	setflag 2255
 	msgbox LilycoveCity_Text_1C5B1D, 4
 	release
@@ -90,7 +90,7 @@ LilycoveCity_EventScript_14CBC7:: @ 814CBC7
 	lock
 	faceplayer
 	checkflag 2061
-	jumpeq LilycoveCity_EventScript_14CBDC
+	jumpif EQUAL, LilycoveCity_EventScript_14CBDC
 	msgbox LilycoveCity_Text_168750, 4
 	release
 	end
@@ -108,7 +108,7 @@ LilycoveCity_EventScript_14CBEF:: @ 814CBEF
 	lock
 	faceplayer
 	checkflag 112
-	jumpeq LilycoveCity_EventScript_14CC04
+	jumpif EQUAL, LilycoveCity_EventScript_14CC04
 	msgbox LilycoveCity_Text_1688C1, 4
 	release
 	end
@@ -122,7 +122,7 @@ LilycoveCity_EventScript_14CC0E:: @ 814CC0E
 	lock
 	faceplayer
 	checkflag 112
-	jumpeq LilycoveCity_EventScript_14CC23
+	jumpif EQUAL, LilycoveCity_EventScript_14CC23
 	msgbox LilycoveCity_Text_1689BF, 4
 	release
 	end
@@ -148,7 +148,7 @@ LilycoveCity_EventScript_14CC48:: @ 814CC48
 	lock
 	faceplayer
 	checkflag 2061
-	jumpeq LilycoveCity_EventScript_14CC5D
+	jumpif EQUAL, LilycoveCity_EventScript_14CC5D
 	msgbox LilycoveCity_Text_168C16, 4
 	release
 	end
@@ -187,7 +187,7 @@ LilycoveCity_EventScript_14CCA2:: @ 814CCA2
 LilycoveCity_EventScript_14CCAC:: @ 814CCAC
 	lockall
 	checkflag 2052
-	jumpeq LilycoveCity_EventScript_14CCC0
+	jumpif EQUAL, LilycoveCity_EventScript_14CCC0
 	msgbox LilycoveCity_Text_168EDA, 4
 	releaseall
 	end
@@ -212,7 +212,7 @@ LilycoveCity_EventScript_14CCDC:: @ 814CCDC
 LilycoveCity_EventScript_14CCE5:: @ 814CCE5
 	lockall
 	checkflag 218
-	jumpeq LilycoveCity_EventScript_14CD18
+	jumpif EQUAL, LilycoveCity_EventScript_14CD18
 	msgbox LilycoveCity_Text_16864A, 4
 	move LAST_TALKED, LilycoveCity_Movement_1A0839
 	waitmove 0
@@ -249,9 +249,9 @@ LilycoveCity_EventScript_14CD46:: @ 814CD46
 	faceplayer
 	checkgender
 	compare RESULT, 0
-	jumpeq LilycoveCity_EventScript_14CD60
+	jumpif EQUAL, LilycoveCity_EventScript_14CD60
 	compare RESULT, 1
-	jumpeq LilycoveCity_EventScript_14CDD3
+	jumpif EQUAL, LilycoveCity_EventScript_14CDD3
 	end
 
 LilycoveCity_EventScript_14CD60:: @ 814CD60
@@ -261,7 +261,7 @@ LilycoveCity_EventScript_14CD60:: @ 814CD60
 	checkflag 286
 	callif 0, LilycoveCity_EventScript_14CDB9
 	compare RESULT, 0
-	jumpeq LilycoveCity_EventScript_14CDC2
+	jumpif EQUAL, LilycoveCity_EventScript_14CDC2
 	msgbox LilycoveCity_Text_167B94, 4
 	switch 0x4023
 	case 0, LilycoveCity_EventScript_14CE46
@@ -292,7 +292,7 @@ LilycoveCity_EventScript_14CDD3:: @ 814CDD3
 	checkflag 286
 	callif 0, LilycoveCity_EventScript_14CE2C
 	compare RESULT, 0
-	jumpeq LilycoveCity_EventScript_14CE35
+	jumpif EQUAL, LilycoveCity_EventScript_14CE35
 	msgbox LilycoveCity_Text_1680A9, 4
 	switch 0x4023
 	case 0, LilycoveCity_EventScript_14CE76
@@ -362,7 +362,7 @@ LilycoveCity_EventScript_14CEA6:: @ 814CEA6
 
 LilycoveCity_EventScript_14CEDE:: @ 814CEDE
 	checkflag 2062
-	jumpeq LilycoveCity_EventScript_14CEE8
+	jumpif EQUAL, LilycoveCity_EventScript_14CEE8
 	return
 
 LilycoveCity_EventScript_14CEE8:: @ 814CEE8
@@ -375,7 +375,7 @@ LilycoveCity_EventScript_14CEEE:: @ 814CEEE
 
 LilycoveCity_EventScript_14CEF7:: @ 814CEF7
 	checkflag 2052
-	jumpeq LilycoveCity_EventScript_14CF09
+	jumpif EQUAL, LilycoveCity_EventScript_14CF09
 	msgbox LilycoveCity_Text_167DDD, 4
 	return
 
@@ -402,7 +402,7 @@ LilycoveCity_EventScript_14CF47:: @ 814CF47
 
 LilycoveCity_EventScript_14CF50:: @ 814CF50
 	checkflag 2052
-	jumpeq LilycoveCity_EventScript_14CF62
+	jumpif EQUAL, LilycoveCity_EventScript_14CF62
 	msgbox LilycoveCity_Text_168282, 4
 	return
 

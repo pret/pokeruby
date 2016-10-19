@@ -34,9 +34,9 @@ Route112_CableCarStation_EventScript_15C08C:: @ 815C08C
 	faceplayer
 	msgbox Route112_CableCarStation_Text_1924F5, 5
 	compare RESULT, 1
-	jumpeq Route112_CableCarStation_EventScript_15C0AD
+	jumpif EQUAL, Route112_CableCarStation_EventScript_15C0AD
 	compare RESULT, 0
-	jumpeq Route112_CableCarStation_EventScript_15C0DC
+	jumpif EQUAL, Route112_CableCarStation_EventScript_15C0DC
 	end
 
 Route112_CableCarStation_EventScript_15C0AD:: @ 815C0AD

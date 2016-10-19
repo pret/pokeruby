@@ -33,9 +33,9 @@ MtChimney_CableCarStation_EventScript_15C14B:: @ 815C14B
 	faceplayer
 	msgbox MtChimney_CableCarStation_Text_19256A, 5
 	compare RESULT, 1
-	jumpeq MtChimney_CableCarStation_EventScript_15C16C
+	jumpif EQUAL, MtChimney_CableCarStation_EventScript_15C16C
 	compare RESULT, 0
-	jumpeq MtChimney_CableCarStation_EventScript_15C19B
+	jumpif EQUAL, MtChimney_CableCarStation_EventScript_15C19B
 	end
 
 MtChimney_CableCarStation_EventScript_15C16C:: @ 815C16C

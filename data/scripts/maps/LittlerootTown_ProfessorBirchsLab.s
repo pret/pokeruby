@@ -31,9 +31,9 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152CBE:: @ 8152CBE
 	waitfanfare
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_173EF8, 5
 	compare RESULT, 1
-	jumpeq LittlerootTown_ProfessorBirchsLab_EventScript_152CEA
+	jumpif EQUAL, LittlerootTown_ProfessorBirchsLab_EventScript_152CEA
 	compare RESULT, 0
-	jumpeq LittlerootTown_ProfessorBirchsLab_EventScript_152CFA
+	jumpif EQUAL, LittlerootTown_ProfessorBirchsLab_EventScript_152CFA
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_152CEA:: @ 8152CEA
@@ -45,9 +45,9 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152CEA:: @ 8152CEA
 LittlerootTown_ProfessorBirchsLab_EventScript_152CFA:: @ 8152CFA
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_173F3D, 5
 	compare RESULT, 1
-	jumpeq LittlerootTown_ProfessorBirchsLab_EventScript_152D19
+	jumpif EQUAL, LittlerootTown_ProfessorBirchsLab_EventScript_152D19
 	compare RESULT, 0
-	jumpeq LittlerootTown_ProfessorBirchsLab_EventScript_152D2B
+	jumpif EQUAL, LittlerootTown_ProfessorBirchsLab_EventScript_152D2B
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_152D19:: @ 8152D19
@@ -60,9 +60,9 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152D19:: @ 8152D19
 LittlerootTown_ProfessorBirchsLab_EventScript_152D2B:: @ 8152D2B
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_174075, 5
 	compare RESULT, 1
-	jumpeq LittlerootTown_ProfessorBirchsLab_EventScript_152D19
+	jumpif EQUAL, LittlerootTown_ProfessorBirchsLab_EventScript_152D19
 	compare RESULT, 0
-	jumpeq LittlerootTown_ProfessorBirchsLab_EventScript_152D2B
+	jumpif EQUAL, LittlerootTown_ProfessorBirchsLab_EventScript_152D2B
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_152D4A:: @ 8152D4A
@@ -88,7 +88,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152D63:: @ 8152D63
 	compare 0x4084, 3
 	jumpif 4, LittlerootTown_ProfessorBirchsLab_EventScript_152D90
 	checkflag 88
-	jumpeq LittlerootTown_ProfessorBirchsLab_EventScript_152D86
+	jumpif EQUAL, LittlerootTown_ProfessorBirchsLab_EventScript_152D86
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_173B29, 4
 	setflag 88
 	release
@@ -110,7 +110,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152D9A:: @ 8152D9A
 	checkflag 896
 	jumpif 0, LittlerootTown_ProfessorBirchsLab_EventScript_1A037F
 	compare 0x4084, 5
-	jumpeq LittlerootTown_ProfessorBirchsLab_EventScript_152E7B
+	jumpif EQUAL, LittlerootTown_ProfessorBirchsLab_EventScript_152E7B
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_1740B4, 4
 	release
 	end

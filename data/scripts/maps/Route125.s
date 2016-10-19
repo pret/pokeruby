@@ -31,7 +31,7 @@ Route125_EventScript_151F8A:: @ 8151F8A
 	trainerbattle 0, OPPONENT_ERNEST_1, 0, Route125_Text_1C11AF, Route125_Text_1C11ED
 	specialval RESULT, 57
 	compare RESULT, 1
-	jumpeq Route125_EventScript_151FB1
+	jumpif EQUAL, Route125_EventScript_151FB1
 	msgbox Route125_Text_1C1208, 6
 	end
 

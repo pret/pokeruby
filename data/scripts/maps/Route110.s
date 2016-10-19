@@ -133,7 +133,7 @@ Route110_EventScript_14FA2E:: @ 814FA2E
 	lockall
 	specialval RESULT, 225
 	compare RESULT, 0
-	jumpeq Route110_EventScript_14FA49
+	jumpif EQUAL, Route110_EventScript_14FA49
 	msgbox Route110_Text_16F53A, 4
 	releaseall
 	end
@@ -148,9 +148,9 @@ Route110_EventScript_14FA53:: @ 814FA53
 	faceplayer
 	specialval RESULT, 227
 	compare RESULT, 1
-	jumpeq Route110_EventScript_14FA84
+	jumpif EQUAL, Route110_EventScript_14FA84
 	compare 0x40a9, 0
-	jumpeq Route110_EventScript_14FA7A
+	jumpif EQUAL, Route110_EventScript_14FA7A
 	msgbox Route110_Text_16F26A, 4
 	release
 	end
@@ -179,7 +179,7 @@ Route110_EventScript_14FABC:: @ 814FABC
 	trainerbattle 0, OPPONENT_EDWIN_1, 0, Route110_Text_1BA7D2, Route110_Text_1BA803
 	specialval RESULT, 57
 	compare RESULT, 1
-	jumpeq Route110_EventScript_14FAE3
+	jumpif EQUAL, Route110_EventScript_14FAE3
 	msgbox Route110_Text_1BA829, 6
 	end
 
@@ -207,7 +207,7 @@ Route110_EventScript_14FB3F:: @ 814FB3F
 	trainerbattle 0, OPPONENT_BENJAMIN_1, 0, Route110_Text_1BA352, Route110_Text_1BA379
 	specialval RESULT, 57
 	compare RESULT, 1
-	jumpeq Route110_EventScript_14FB66
+	jumpif EQUAL, Route110_EventScript_14FB66
 	msgbox Route110_Text_1BA3A5, 6
 	end
 
@@ -225,7 +225,7 @@ Route110_EventScript_14FB94:: @ 814FB94
 	trainerbattle 0, OPPONENT_ABIGAIL_1, 0, Route110_Text_1BA4A0, Route110_Text_1BA50F
 	specialval RESULT, 57
 	compare RESULT, 1
-	jumpeq Route110_EventScript_14FBBB
+	jumpif EQUAL, Route110_EventScript_14FBBB
 	msgbox Route110_Text_1BA52E, 6
 	end
 
@@ -238,7 +238,7 @@ Route110_EventScript_14FBD2:: @ 814FBD2
 	trainerbattle 0, OPPONENT_ISABEL_1, 0, Route110_Text_1BA990, Route110_Text_1BA9D0
 	specialval RESULT, 57
 	compare RESULT, 1
-	jumpeq Route110_EventScript_14FBF9
+	jumpif EQUAL, Route110_EventScript_14FBF9
 	msgbox Route110_Text_1BA9E9, 6
 	end
 
@@ -345,9 +345,9 @@ Route110_EventScript_14FD34:: @ 814FD34
 	callif 1, Route110_EventScript_14FF2A
 	checkgender
 	compare RESULT, 0
-	jumpeq Route110_EventScript_14FDB1
+	jumpif EQUAL, Route110_EventScript_14FDB1
 	compare RESULT, 1
-	jumpeq Route110_EventScript_14FE2B
+	jumpif EQUAL, Route110_EventScript_14FE2B
 	releaseall
 	end
 

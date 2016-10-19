@@ -14,7 +14,7 @@ Route110_TrickHousePuzzle5_MapScript1_1627B6:: @ 81627B6
 Route110_TrickHousePuzzle5_EventScript_1627D5:: @ 81627D5
 	lockall
 	compare 0x40af, 0
-	jumpeq Route110_TrickHousePuzzle5_EventScript_1627E7
+	jumpif EQUAL, Route110_TrickHousePuzzle5_EventScript_1627E7
 	jump Route110_TrickHousePuzzle5_EventScript_161892
 	end
 
@@ -28,7 +28,7 @@ Route110_TrickHousePuzzle5_EventScript_1627F2:: @ 81627F2
 	move 1, Route110_TrickHousePuzzle5_Movement_1A0839
 	waitmove 0
 	compare 0x4001, 1
-	jumpeq Route110_TrickHousePuzzle5_EventScript_162DE9
+	jumpif EQUAL, Route110_TrickHousePuzzle5_EventScript_162DE9
 	setvar 0x4009, 0
 	jump Route110_TrickHousePuzzle5_EventScript_16293F
 	end
@@ -38,7 +38,7 @@ Route110_TrickHousePuzzle5_EventScript_162813:: @ 8162813
 	move 2, Route110_TrickHousePuzzle5_Movement_1A0839
 	waitmove 0
 	compare 0x4002, 1
-	jumpeq Route110_TrickHousePuzzle5_EventScript_162DE9
+	jumpif EQUAL, Route110_TrickHousePuzzle5_EventScript_162DE9
 	setvar 0x4009, 0
 	jump Route110_TrickHousePuzzle5_EventScript_1629B3
 	end
@@ -48,7 +48,7 @@ Route110_TrickHousePuzzle5_EventScript_162834:: @ 8162834
 	move 3, Route110_TrickHousePuzzle5_Movement_1A0839
 	waitmove 0
 	compare 0x4003, 1
-	jumpeq Route110_TrickHousePuzzle5_EventScript_162DE9
+	jumpif EQUAL, Route110_TrickHousePuzzle5_EventScript_162DE9
 	setvar 0x4009, 0
 	jump Route110_TrickHousePuzzle5_EventScript_162A27
 	end
@@ -58,7 +58,7 @@ Route110_TrickHousePuzzle5_EventScript_162855:: @ 8162855
 	move 4, Route110_TrickHousePuzzle5_Movement_1A0839
 	waitmove 0
 	compare 0x4004, 1
-	jumpeq Route110_TrickHousePuzzle5_EventScript_162DE9
+	jumpif EQUAL, Route110_TrickHousePuzzle5_EventScript_162DE9
 	setvar 0x4009, 0
 	jump Route110_TrickHousePuzzle5_EventScript_162A9B
 	end
@@ -68,7 +68,7 @@ Route110_TrickHousePuzzle5_EventScript_162876:: @ 8162876
 	move 5, Route110_TrickHousePuzzle5_Movement_1A0839
 	waitmove 0
 	compare 0x4005, 1
-	jumpeq Route110_TrickHousePuzzle5_EventScript_162DE9
+	jumpif EQUAL, Route110_TrickHousePuzzle5_EventScript_162DE9
 	setvar 0x4009, 0
 	jump Route110_TrickHousePuzzle5_EventScript_162B0F
 	end

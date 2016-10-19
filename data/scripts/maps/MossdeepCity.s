@@ -69,14 +69,14 @@ MossdeepCity_EventScript_14D027:: @ 814D027
 	lock
 	faceplayer
 	checkflag 276
-	jumpeq MossdeepCity_EventScript_14D069
+	jumpif EQUAL, MossdeepCity_EventScript_14D069
 	msgbox MossdeepCity_Text_1690A9, 5
 	compare RESULT, 0
-	jumpeq MossdeepCity_EventScript_14D073
+	jumpif EQUAL, MossdeepCity_EventScript_14D073
 	msgbox MossdeepCity_Text_169117, 4
 	giveitem ITEM_KINGS_ROCK
 	compare RESULT, 0
-	jumpeq MossdeepCity_EventScript_1A029B
+	jumpif EQUAL, MossdeepCity_EventScript_1A029B
 	setflag 276
 	release
 	end

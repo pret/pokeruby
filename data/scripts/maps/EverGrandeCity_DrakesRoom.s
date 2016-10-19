@@ -42,7 +42,7 @@ EverGrandeCity_DrakesRoom_EventScript_15B764:: @ 815B764
 	lock
 	faceplayer
 	checkflag 1248
-	jumpeq EverGrandeCity_DrakesRoom_EventScript_15B78B
+	jumpif EQUAL, EverGrandeCity_DrakesRoom_EventScript_15B78B
 	playmusic 450, 0
 	msgbox EverGrandeCity_DrakesRoom_Text_190CEB, 4
 	trainerbattle 3, OPPONENT_DRAKE, 0, EverGrandeCity_DrakesRoom_Text_190E42

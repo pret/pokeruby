@@ -4,7 +4,7 @@ Route110_TrickHousePuzzle1_MapScripts:: @ 8161CF8
 
 Route110_TrickHousePuzzle1_MapScript1_161CFE:: @ 8161CFE
 	compare 0x40ab, 2
-	jumpeq Route110_TrickHousePuzzle1_EventScript_161D0A
+	jumpif EQUAL, Route110_TrickHousePuzzle1_EventScript_161D0A
 	end
 
 Route110_TrickHousePuzzle1_EventScript_161D0A:: @ 8161D0A
@@ -14,7 +14,7 @@ Route110_TrickHousePuzzle1_EventScript_161D0A:: @ 8161D0A
 Route110_TrickHousePuzzle1_EventScript_161D14:: @ 8161D14
 	lockall
 	compare 0x40ab, 0
-	jumpeq Route110_TrickHousePuzzle1_EventScript_161D26
+	jumpif EQUAL, Route110_TrickHousePuzzle1_EventScript_161D26
 	jump Route110_TrickHousePuzzle1_EventScript_161892
 	end
 

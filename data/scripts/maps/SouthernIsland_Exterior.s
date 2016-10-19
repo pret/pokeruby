@@ -11,7 +11,7 @@ SouthernIsland_Exterior_EventScript_160AE0:: @ 8160AE0
 	faceplayer
 	msgbox SouthernIsland_Exterior_Text_1C5215, 5
 	compare RESULT, 0
-	jumpeq SouthernIsland_Exterior_EventScript_160B25
+	jumpif EQUAL, SouthernIsland_Exterior_EventScript_160B25
 	msgbox SouthernIsland_Exterior_Text_1C5281, 4
 	closebutton
 	move LAST_TALKED, SouthernIsland_Exterior_Movement_1A0845

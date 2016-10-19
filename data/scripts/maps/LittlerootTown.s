@@ -41,7 +41,7 @@ LittlerootTown_EventScript_14D57B:: @ 814D57B
 
 LittlerootTown_EventScript_14D583:: @ 814D583
 	compare 0x4050, 0
-	jumpeq LittlerootTown_EventScript_14D59A
+	jumpif EQUAL, LittlerootTown_EventScript_14D59A
 	movespriteperm 1, 10, 1
 	spritebehave 1, 7
 	return
@@ -188,9 +188,9 @@ LittlerootTown_EventScript_14D6DF:: @ 814D6DF
 	lock
 	faceplayer
 	checkflag 116
-	jumpeq LittlerootTown_EventScript_14D72F
+	jumpif EQUAL, LittlerootTown_EventScript_14D72F
 	checkflag 82
-	jumpeq LittlerootTown_EventScript_14D722
+	jumpif EQUAL, LittlerootTown_EventScript_14D722
 	compare 0x4050, 0
 	jumpif 5, LittlerootTown_EventScript_14D708
 	msgbox LittlerootTown_Text_16ACEB, 4

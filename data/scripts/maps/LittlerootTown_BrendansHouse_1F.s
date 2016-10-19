@@ -19,7 +19,7 @@ LittlerootTown_BrendansHouse_1F_EventScript_152660:: @ 8152660
 LittlerootTown_BrendansHouse_1F_EventScript_152673:: @ 8152673
 	checkgender
 	compare RESULT, 0
-	jumpeq LittlerootTown_BrendansHouse_1F_EventScript_152680
+	jumpif EQUAL, LittlerootTown_BrendansHouse_1F_EventScript_152680
 	return
 
 LittlerootTown_BrendansHouse_1F_EventScript_152680:: @ 8152680

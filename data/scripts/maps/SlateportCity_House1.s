@@ -6,9 +6,9 @@ SlateportCity_House1_EventScript_15567B:: @ 815567B
 	faceplayer
 	msgbox SlateportCity_House1_Text_17D46A, 5
 	compare RESULT, 1
-	jumpeq SlateportCity_House1_EventScript_15569C
+	jumpif EQUAL, SlateportCity_House1_EventScript_15569C
 	compare RESULT, 0
-	jumpeq SlateportCity_House1_EventScript_1556BF
+	jumpif EQUAL, SlateportCity_House1_EventScript_1556BF
 	end
 
 SlateportCity_House1_EventScript_15569C:: @ 815569C
@@ -18,7 +18,7 @@ SlateportCity_House1_EventScript_15569C:: @ 815569C
 	compare 0x8004, 255
 	jumpif 5, SlateportCity_House1_EventScript_1556C9
 	compare 0x8004, 255
-	jumpeq SlateportCity_House1_EventScript_1556BF
+	jumpif EQUAL, SlateportCity_House1_EventScript_1556BF
 	end
 
 SlateportCity_House1_EventScript_1556BF:: @ 81556BF
@@ -29,20 +29,20 @@ SlateportCity_House1_EventScript_1556BF:: @ 81556BF
 SlateportCity_House1_EventScript_1556C9:: @ 81556C9
 	specialval RESULT, 327
 	compare RESULT, 412
-	jumpeq SlateportCity_House1_EventScript_15571C
+	jumpif EQUAL, SlateportCity_House1_EventScript_15571C
 	special 124
 	special 125
 	compare RESULT, 1
-	jumpeq SlateportCity_House1_EventScript_155726
+	jumpif EQUAL, SlateportCity_House1_EventScript_155726
 	specialval RESULT, 336
 	special 124
 	compare RESULT, 1
-	jumpeq SlateportCity_House1_EventScript_155726
+	jumpif EQUAL, SlateportCity_House1_EventScript_155726
 	msgbox SlateportCity_House1_Text_17D505, 5
 	compare RESULT, 1
-	jumpeq SlateportCity_House1_EventScript_155730
+	jumpif EQUAL, SlateportCity_House1_EventScript_155730
 	compare RESULT, 0
-	jumpeq SlateportCity_House1_EventScript_1556BF
+	jumpif EQUAL, SlateportCity_House1_EventScript_1556BF
 	end
 
 SlateportCity_House1_EventScript_15571C:: @ 815571C
@@ -61,7 +61,7 @@ SlateportCity_House1_EventScript_155730:: @ 8155730
 	specialval RESULT, 123
 	special 124
 	compare RESULT, 1
-	jumpeq SlateportCity_House1_EventScript_15575A
+	jumpif EQUAL, SlateportCity_House1_EventScript_15575A
 	msgbox SlateportCity_House1_Text_17D63A, 4
 	release
 	end

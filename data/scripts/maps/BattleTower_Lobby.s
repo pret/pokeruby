@@ -14,9 +14,9 @@ BattleTower_Lobby_EventScript_16029C:: @ 816029C
 	setvar 0x8004, 10
 	special 237
 	checkflag 238
-	jumpeq BattleTower_Lobby_EventScript_1602E4
+	jumpif EQUAL, BattleTower_Lobby_EventScript_1602E4
 	checkflag 237
-	jumpeq BattleTower_Lobby_EventScript_1602CD
+	jumpif EQUAL, BattleTower_Lobby_EventScript_1602CD
 	specialval 0x8007, 247
 	compare 0x8007, 50
 	jumpif 0, BattleTower_Lobby_EventScript_1602E4
@@ -78,10 +78,10 @@ BattleTower_Lobby_EventScript_160342:: @ 8160342
 	setvar 0x8004, 0
 	special 238
 	compare RESULT, 6
-	jumpeq BattleTower_Lobby_EventScript_16037D
+	jumpif EQUAL, BattleTower_Lobby_EventScript_16037D
 	special 244
 	compare RESULT, 0
-	jumpeq BattleTower_Lobby_EventScript_16037D
+	jumpif EQUAL, BattleTower_Lobby_EventScript_16037D
 	message BattleTower_Lobby_Text_19A6BE
 	waittext
 	fanfare 370
@@ -92,7 +92,7 @@ BattleTower_Lobby_EventScript_16037D:: @ 816037D
 	setvar 0x8004, 8
 	special 238
 	compare RESULT, 1
-	jumpeq BattleTower_Lobby_EventScript_1603AD
+	jumpif EQUAL, BattleTower_Lobby_EventScript_1603AD
 	message BattleTower_Lobby_Text_19A589
 	waittext
 	setvar 0x8004, 13
@@ -187,7 +187,7 @@ BattleTower_Lobby_EventScript_16049E:: @ 816049E
 	setvar 0x8004, 0
 	special 238
 	compare RESULT, 6
-	jumpeq BattleTower_Lobby_EventScript_160342
+	jumpif EQUAL, BattleTower_Lobby_EventScript_160342
 	special 39
 	msgbox BattleTower_Lobby_Text_199F2C, 4
 
@@ -210,7 +210,7 @@ BattleTower_Lobby_EventScript_1604FA:: @ 81604FA
 	case 127, BattleTower_Lobby_EventScript_160652
 	special 233
 	compare 0x8004, 1
-	jumpeq BattleTower_Lobby_EventScript_16060D
+	jumpif EQUAL, BattleTower_Lobby_EventScript_16060D
 	setvar 0x8004, 1
 	copyvar 0x8005, RESULT
 	copyvar 0x8006, RESULT
@@ -220,7 +220,7 @@ BattleTower_Lobby_EventScript_1604FA:: @ 81604FA
 	special 245
 	waitstate
 	compare RESULT, 0
-	jumpeq BattleTower_Lobby_EventScript_16064F
+	jumpif EQUAL, BattleTower_Lobby_EventScript_16064F
 	msgbox BattleTower_Lobby_Text_199FDA, 5
 	switch RESULT
 	case 0, BattleTower_Lobby_EventScript_16064F
@@ -246,7 +246,7 @@ BattleTower_Lobby_EventScript_160587:: @ 8160587
 	setvar 0x4000, 5
 	hidebox 0, 0, 15, 10
 	compare RESULT, 0
-	jumpeq BattleTower_Lobby_EventScript_160642
+	jumpif EQUAL, BattleTower_Lobby_EventScript_160642
 	inccounter GAME_STAT_ENTERED_BATTLE_TOWER
 	special 39
 	special 239
@@ -348,9 +348,9 @@ BattleTower_Lobby_EventScript_1606CC:: @ 81606CC
 	lock
 	faceplayer
 	compare RESULT, 0
-	jumpeq BattleTower_Lobby_EventScript_160701
+	jumpif EQUAL, BattleTower_Lobby_EventScript_160701
 	compare RESULT, 1
-	jumpeq BattleTower_Lobby_EventScript_16070B
+	jumpif EQUAL, BattleTower_Lobby_EventScript_16070B
 	end
 
 BattleTower_Lobby_EventScript_1606F7:: @ 81606F7
@@ -388,14 +388,14 @@ BattleTower_Lobby_EventScript_160733:: @ 8160733
 	lock
 	faceplayer
 	checkflag 238
-	jumpeq BattleTower_Lobby_EventScript_1607C5
+	jumpif EQUAL, BattleTower_Lobby_EventScript_1607C5
 	checkflag 237
-	jumpeq BattleTower_Lobby_EventScript_160773
+	jumpif EQUAL, BattleTower_Lobby_EventScript_160773
 	msgbox BattleTower_Lobby_Text_19A9EE, 4
 	setvar 0x8008, 42
 	givedecoration 42
 	compare RESULT, 0
-	jumpeq BattleTower_Lobby_EventScript_1607AF
+	jumpif EQUAL, BattleTower_Lobby_EventScript_1607AF
 	setflag 237
 	msgbox BattleTower_Lobby_Text_19ABAA, 4
 	release
@@ -409,7 +409,7 @@ BattleTower_Lobby_EventScript_160773:: @ 8160773
 	setvar 0x8008, 43
 	givedecoration 43
 	compare RESULT, 0
-	jumpeq BattleTower_Lobby_EventScript_1607AF
+	jumpif EQUAL, BattleTower_Lobby_EventScript_1607AF
 	setflag 238
 	msgbox BattleTower_Lobby_Text_19ABAA, 4
 	release

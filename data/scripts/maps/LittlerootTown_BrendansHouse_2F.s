@@ -24,16 +24,16 @@ LittlerootTown_BrendansHouse_2F_MapScript2_1527DA:: @ 81527DA
 LittlerootTown_BrendansHouse_2F_EventScript_1527E4:: @ 81527E4
 	checkgender
 	compare RESULT, 0
-	jumpeq LittlerootTown_BrendansHouse_2F_EventScript_1A2F68
+	jumpif EQUAL, LittlerootTown_BrendansHouse_2F_EventScript_1A2F68
 	end
 
 @ 81527F1
 	lockall
 	checkgender
 	compare RESULT, 0
-	jumpeq LittlerootTown_BrendansHouse_2F_EventScript_15280A
+	jumpif EQUAL, LittlerootTown_BrendansHouse_2F_EventScript_15280A
 	compare RESULT, 1
-	jumpeq LittlerootTown_BrendansHouse_2F_EventScript_152814
+	jumpif EQUAL, LittlerootTown_BrendansHouse_2F_EventScript_152814
 	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_15280A:: @ 815280A
@@ -52,9 +52,9 @@ LittlerootTown_BrendansHouse_2F_EventScript_15281E:: @ 815281E
 	lockall
 	checkgender
 	compare RESULT, 0
-	jumpeq LittlerootTown_BrendansHouse_2F_EventScript_152837
+	jumpif EQUAL, LittlerootTown_BrendansHouse_2F_EventScript_152837
 	compare RESULT, 1
-	jumpeq LittlerootTown_BrendansHouse_2F_EventScript_15285D
+	jumpif EQUAL, LittlerootTown_BrendansHouse_2F_EventScript_15285D
 	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_152837:: @ 8152837

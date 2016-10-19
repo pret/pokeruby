@@ -7,7 +7,7 @@ PacifidlogTown_House2_EventScript_154168:: @ 8154168
 	checkdailyflags
 	call PacifidlogTown_House2_EventScript_1541B4
 	checkflag 299
-	jumpeq PacifidlogTown_House2_EventScript_154254
+	jumpif EQUAL, PacifidlogTown_House2_EventScript_154254
 	checkflag 300
 	callif 1, PacifidlogTown_House2_EventScript_1541CE
 	checkflag 300
@@ -47,7 +47,7 @@ PacifidlogTown_House2_EventScript_1541EC:: @ 81541EC
 	msgbox PacifidlogTown_House2_Text_179169, 4
 	giveitem ITEM_TM27
 	compare RESULT, 0
-	jumpeq PacifidlogTown_House2_EventScript_1A029B
+	jumpif EQUAL, PacifidlogTown_House2_EventScript_1A029B
 	setflag 299
 	special 333
 	msgbox PacifidlogTown_House2_Text_179283, 4
@@ -63,7 +63,7 @@ PacifidlogTown_House2_EventScript_154225:: @ 8154225
 	msgbox PacifidlogTown_House2_Text_17922D, 4
 	giveitem ITEM_TM21
 	compare RESULT, 0
-	jumpeq PacifidlogTown_House2_EventScript_1A029B
+	jumpif EQUAL, PacifidlogTown_House2_EventScript_1A029B
 	setflag 299
 	special 333
 	msgbox PacifidlogTown_House2_Text_179283, 4

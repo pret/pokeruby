@@ -21,7 +21,7 @@ Route102_EventScript_14EAFE:: @ 814EAFE
 	trainerbattle 0, OPPONENT_CALVIN_1, 0, Route102_Text_1B79C3, Route102_Text_1B7A2C
 	specialval RESULT, 57
 	compare RESULT, 1
-	jumpeq Route102_EventScript_14EB25
+	jumpif EQUAL, Route102_EventScript_14EB25
 	msgbox Route102_Text_1B7A60, 6
 	end
 

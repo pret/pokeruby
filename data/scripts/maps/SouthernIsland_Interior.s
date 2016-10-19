@@ -24,9 +24,9 @@ SouthernIsland_Interior_MapScript1_160B6C:: @ 8160B6C
 SouthernIsland_Interior_EventScript_160B77:: @ 8160B77
 	checkgender
 	compare RESULT, 0
-	jumpeq SouthernIsland_Interior_EventScript_160B8F
+	jumpif EQUAL, SouthernIsland_Interior_EventScript_160B8F
 	compare RESULT, 1
-	jumpeq SouthernIsland_Interior_EventScript_160B95
+	jumpif EQUAL, SouthernIsland_Interior_EventScript_160B95
 	end
 
 SouthernIsland_Interior_EventScript_160B8F:: @ 8160B8F
@@ -45,7 +45,7 @@ SouthernIsland_Interior_EventScript_160B9B:: @ 8160B9B
 
 SouthernIsland_Interior_EventScript_160BA7:: @ 8160BA7
 	checkflag 206
-	jumpeq SouthernIsland_Interior_EventScript_160C08
+	jumpif EQUAL, SouthernIsland_Interior_EventScript_160C08
 	checkflag 2131
 	jumpif 0, SouthernIsland_Interior_EventScript_160C08
 	setflag 206

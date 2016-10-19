@@ -74,7 +74,7 @@ Route110_TrickHousePuzzle7_EventScript_163240:: @ 8163240
 
 Route110_TrickHousePuzzle7_MapScript1_163253:: @ 8163253
 	compare 0x40b6, 1
-	jumpeq Route110_TrickHousePuzzle7_EventScript_16326E
+	jumpif EQUAL, Route110_TrickHousePuzzle7_EventScript_16326E
 	clearflag 194
 	clearflag 195
 	clearflag 196
@@ -101,7 +101,7 @@ Route110_TrickHousePuzzle7_EventScript_163285:: @ 8163285
 Route110_TrickHousePuzzle7_EventScript_16328B:: @ 816328B
 	lockall
 	compare 0x40b1, 0
-	jumpeq Route110_TrickHousePuzzle7_EventScript_16329D
+	jumpif EQUAL, Route110_TrickHousePuzzle7_EventScript_16329D
 	jump Route110_TrickHousePuzzle7_EventScript_161892
 	end
 
@@ -130,7 +130,7 @@ Route110_TrickHousePuzzle7_EventScript_1632B9:: @ 81632B9
 	checkflag 194
 	jumpif 0, Route110_TrickHousePuzzle7_EventScript_1633A4
 	checkflag 194
-	jumpeq Route110_TrickHousePuzzle7_EventScript_1633A9
+	jumpif EQUAL, Route110_TrickHousePuzzle7_EventScript_1633A9
 	end
 
 Route110_TrickHousePuzzle7_EventScript_1632E8:: @ 81632E8
@@ -145,7 +145,7 @@ Route110_TrickHousePuzzle7_EventScript_1632E8:: @ 81632E8
 	checkflag 195
 	jumpif 0, Route110_TrickHousePuzzle7_EventScript_1633AE
 	checkflag 195
-	jumpeq Route110_TrickHousePuzzle7_EventScript_1633B3
+	jumpif EQUAL, Route110_TrickHousePuzzle7_EventScript_1633B3
 	end
 
 Route110_TrickHousePuzzle7_EventScript_163317:: @ 8163317
@@ -160,7 +160,7 @@ Route110_TrickHousePuzzle7_EventScript_163317:: @ 8163317
 	checkflag 196
 	jumpif 0, Route110_TrickHousePuzzle7_EventScript_1633B8
 	checkflag 196
-	jumpeq Route110_TrickHousePuzzle7_EventScript_1633BD
+	jumpif EQUAL, Route110_TrickHousePuzzle7_EventScript_1633BD
 	end
 
 Route110_TrickHousePuzzle7_EventScript_163346:: @ 8163346
@@ -175,7 +175,7 @@ Route110_TrickHousePuzzle7_EventScript_163346:: @ 8163346
 	checkflag 197
 	jumpif 0, Route110_TrickHousePuzzle7_EventScript_1633C2
 	checkflag 197
-	jumpeq Route110_TrickHousePuzzle7_EventScript_1633C7
+	jumpif EQUAL, Route110_TrickHousePuzzle7_EventScript_1633C7
 	end
 
 Route110_TrickHousePuzzle7_EventScript_163375:: @ 8163375
@@ -190,7 +190,7 @@ Route110_TrickHousePuzzle7_EventScript_163375:: @ 8163375
 	checkflag 198
 	jumpif 0, Route110_TrickHousePuzzle7_EventScript_1633CC
 	checkflag 198
-	jumpeq Route110_TrickHousePuzzle7_EventScript_1633D1
+	jumpif EQUAL, Route110_TrickHousePuzzle7_EventScript_1633D1
 	end
 
 Route110_TrickHousePuzzle7_EventScript_1633A4:: @ 81633A4

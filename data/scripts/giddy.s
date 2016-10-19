@@ -3,25 +3,25 @@ MauvilleCity_PokemonCenter_1F_EventScript_1B09EB:: @ 81B09EB
 	faceplayer
 	msgbox MauvilleCity_PokemonCenter_1F_Text_1B092A, 5
 	compare RESULT, 1
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1B0A0C
+	jumpif EQUAL, MauvilleCity_PokemonCenter_1F_EventScript_1B0A0C
 	compare RESULT, 0
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1B0A6F
+	jumpif EQUAL, MauvilleCity_PokemonCenter_1F_EventScript_1B0A6F
 	end
 
 MauvilleCity_PokemonCenter_1F_EventScript_1B0A0C:: @ 81B0A0C
 	special 106
 	compare RESULT, 1
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1B0A4E
+	jumpif EQUAL, MauvilleCity_PokemonCenter_1F_EventScript_1B0A4E
 	compare RESULT, 0
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1B0A79
+	jumpif EQUAL, MauvilleCity_PokemonCenter_1F_EventScript_1B0A79
 	end
 
 MauvilleCity_PokemonCenter_1F_EventScript_1B0A26:: @ 81B0A26
 	special 106
 	compare RESULT, 1
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1B0A40
+	jumpif EQUAL, MauvilleCity_PokemonCenter_1F_EventScript_1B0A40
 	compare RESULT, 0
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1B0A79
+	jumpif EQUAL, MauvilleCity_PokemonCenter_1F_EventScript_1B0A79
 	end
 
 MauvilleCity_PokemonCenter_1F_EventScript_1B0A40:: @ 81B0A40
@@ -35,9 +35,9 @@ MauvilleCity_PokemonCenter_1F_EventScript_1B0A4E:: @ 81B0A4E
 	waittext
 	yesnobox 20, 8
 	compare RESULT, 1
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1B0A26
+	jumpif EQUAL, MauvilleCity_PokemonCenter_1F_EventScript_1B0A26
 	compare RESULT, 0
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1B0A26
+	jumpif EQUAL, MauvilleCity_PokemonCenter_1F_EventScript_1B0A26
 	end
 
 MauvilleCity_PokemonCenter_1F_EventScript_1B0A6F:: @ 81B0A6F

@@ -7,7 +7,7 @@ Underwater_SeafloorCavern_MapScripts:: @ 815D99E
 Underwater_SeafloorCavern_MapScript1_15D9AE:: @ 815D9AE
 	setflag 2119
 	checkflag 129
-	jumpeq Underwater_SeafloorCavern_EventScript_15D9BB
+	jumpif EQUAL, Underwater_SeafloorCavern_EventScript_15D9BB
 	end
 
 Underwater_SeafloorCavern_EventScript_15D9BB:: @ 815D9BB

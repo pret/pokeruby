@@ -24,14 +24,14 @@ LittlerootTown_MaysHouse_2F_MapScript2_152A86:: @ 8152A86
 LittlerootTown_MaysHouse_2F_EventScript_152A90:: @ 8152A90
 	checkgender
 	compare RESULT, 1
-	jumpeq LittlerootTown_MaysHouse_2F_EventScript_1A2F68
+	jumpif EQUAL, LittlerootTown_MaysHouse_2F_EventScript_1A2F68
 	end
 
 LittlerootTown_BrendansHouse_2F_EventScript_152A9D:: @ 8152A9D
 LittlerootTown_MaysHouse_2F_EventScript_152A9D:: @ 8152A9D
 	lockall
 	checkflag 292
-	jumpeq LittlerootTown_BrendansHouse_2F_EventScript_152BB5
+	jumpif EQUAL, LittlerootTown_BrendansHouse_2F_EventScript_152BB5
 	checkgender
 	compare RESULT, 0
 	callif 1, LittlerootTown_BrendansHouse_2F_EventScript_152AD4
@@ -123,13 +123,13 @@ LittlerootTown_BrendansHouse_2F_EventScript_152BB5:: @ 8152BB5
 
 LittlerootTown_BrendansHouse_2F_EventScript_152BDB:: @ 8152BDB
 	checkflag 293
-	jumpeq LittlerootTown_BrendansHouse_2F_EventScript_152BFF
+	jumpif EQUAL, LittlerootTown_BrendansHouse_2F_EventScript_152BFF
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1737AE, 4
 	return
 
 LittlerootTown_BrendansHouse_2F_EventScript_152BED:: @ 8152BED
 	checkflag 293
-	jumpeq LittlerootTown_BrendansHouse_2F_EventScript_152C08
+	jumpif EQUAL, LittlerootTown_BrendansHouse_2F_EventScript_152C08
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1738F2, 4
 	return
 
@@ -195,9 +195,9 @@ LittlerootTown_MaysHouse_2F_EventScript_152C39:: @ 8152C39
 	lockall
 	checkgender
 	compare RESULT, 0
-	jumpeq LittlerootTown_MaysHouse_2F_EventScript_152C52
+	jumpif EQUAL, LittlerootTown_MaysHouse_2F_EventScript_152C52
 	compare RESULT, 1
-	jumpeq LittlerootTown_MaysHouse_2F_EventScript_152C5C
+	jumpif EQUAL, LittlerootTown_MaysHouse_2F_EventScript_152C5C
 	end
 
 LittlerootTown_MaysHouse_2F_EventScript_152C52:: @ 8152C52

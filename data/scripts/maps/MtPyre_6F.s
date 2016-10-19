@@ -5,7 +5,7 @@ MtPyre_6F_EventScript_15D448:: @ 815D448
 	trainerbattle 0, OPPONENT_VALERIE_1, 0, MtPyre_6F_Text_1969FE, MtPyre_6F_Text_196A30
 	specialval RESULT, 57
 	compare RESULT, 1
-	jumpeq MtPyre_6F_EventScript_15D46F
+	jumpif EQUAL, MtPyre_6F_EventScript_15D46F
 	msgbox MtPyre_6F_Text_196A4C, 6
 	end
 

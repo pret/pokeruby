@@ -1,16 +1,16 @@
 CuttableTreeScript:: @ 81B0DCC
 	lockall
 	checkflag 2055
-	jumpif 0, CannotUseCut
+	jumpif FLAG_NOT_SET, CannotUseCut
 	checkattack MOVE_CUT
 	compare RESULT, 6
-	jumpeq CannotUseCut
+	jumpif EQUAL, CannotUseCut
 	setanimation 0, RESULT
 	bufferpartypoke 0, RESULT
 	bufferattack 1, MOVE_CUT
 	msgbox UseCutPromptText, 5
 	compare RESULT, 0
-	jumpeq Cut_ChoseNo
+	jumpif EQUAL, Cut_ChoseNo
 	msgbox UsedCutRockSmashText, 4
 	closebutton
 	doanimation 2
@@ -62,13 +62,13 @@ BreakableRockScript:: @ 81B0EB7
 	jumpif 0, CannotUseRockSmash
 	checkattack MOVE_ROCK_SMASH
 	compare RESULT, 6
-	jumpeq CannotUseRockSmash
+	jumpif EQUAL, CannotUseRockSmash
 	setanimation 0, RESULT
 	bufferpartypoke 0, RESULT
 	bufferattack 1, MOVE_ROCK_SMASH
 	msgbox UseRockSmashPromptText, 5
 	compare RESULT, 0
-	jumpeq RockSmash_ChoseNo
+	jumpif EQUAL, RockSmash_ChoseNo
 	msgbox UsedCutRockSmashText, 4
 	closebutton
 	doanimation 37
@@ -89,10 +89,10 @@ DoRockSmashMovement: @ 81B0F0C
 	disappear LAST_TALKED
 	specialval RESULT, 298
 	compare RESULT, 1
-	jumpeq DoRockSmashMovement_Done
+	jumpif EQUAL, DoRockSmashMovement_Done
 	special 171
 	compare RESULT, 0
-	jumpeq DoRockSmashMovement_Done
+	jumpif EQUAL, DoRockSmashMovement_Done
 	waitstate
 	releaseall
 	end
@@ -128,14 +128,14 @@ PushableBoulderScript:: @ 81B0FCB
 	checkflag 2058
 	jumpif 0, CannotUseStrength
 	checkflag 2089
-	jumpeq AlreadyUsedStrength
+	jumpif EQUAL, AlreadyUsedStrength
 	checkattack 70
 	compare RESULT, 6
-	jumpeq CannotUseStrength
+	jumpif EQUAL, CannotUseStrength
 	setanimation 0, RESULT
 	msgbox UseStrengthPromptText, 5
 	compare RESULT, 0
-	jumpeq Strength_ChoseNo
+	jumpif EQUAL, Strength_ChoseNo
 	closebutton
 	doanimation 40
 	waitstate
@@ -192,12 +192,12 @@ UseWaterfallScript:: @ 81B115A
 	lockall
 	checkattack MOVE_WATERFALL
 	compare RESULT, 6
-	jumpeq Waterfall_NoMonKnows
+	jumpif EQUAL, Waterfall_NoMonKnows
 	bufferpartypoke 0, RESULT
 	setanimation 0, RESULT
 	msgbox UseWaterfallPromptText, 5
 	compare RESULT, 0
-	jumpeq Waterfall_Done
+	jumpif EQUAL, Waterfall_Done
 	msgbox UsedWaterfallText, 4
 	doanimation 0x2B
 	jump Waterfall_Done
@@ -225,13 +225,13 @@ UseDiveScript:: @ 81B1220
 	lockall
 	checkattack MOVE_DIVE
 	compare RESULT, 6
-	jumpeq CannotUseDive
+	jumpif EQUAL, CannotUseDive
 	bufferpartypoke 0, RESULT
 	setanimation 0, RESULT
 	setanimation 1, 1
 	msgbox UseDivePromptText, 5
 	compare RESULT, 0
-	jumpeq Dive_Done
+	jumpif EQUAL, Dive_Done
 	msgbox UsedDiveText, 4
 	doanimation 44
 	jump Dive_Done
@@ -248,13 +248,13 @@ UnderwaterUseDiveScript:: @ 81B1269
 	lockall
 	checkattack MOVE_DIVE
 	compare RESULT, 6
-	jumpeq UnderwaterCannotUseDive
+	jumpif EQUAL, UnderwaterCannotUseDive
 	bufferpartypoke 0, RESULT
 	setanimation 0, RESULT
 	setanimation 1, 1
 	msgbox UnderwaterUseDivePromptText, 5
 	compare RESULT, 0
-	jumpeq UnderwaterDive_Done
+	jumpif EQUAL, UnderwaterDive_Done
 	msgbox UsedDiveText, 4
 	doanimation 44
 	jump UnderwaterDive_Done

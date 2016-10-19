@@ -5,19 +5,19 @@ RustboroCity_House1_EventScript_157C7D:: @ 8157C7D
 	lock
 	faceplayer
 	checkflag 153
-	jumpeq RustboroCity_House1_EventScript_157D13
+	jumpif EQUAL, RustboroCity_House1_EventScript_157D13
 	setvar 0x8008, 0
 	copyvar 0x8004, 0x8008
 	specialval RESULT, 252
 	copyvar 0x8009, RESULT
 	msgbox RustboroCity_House1_Text_184EBA, 5
 	compare RESULT, 0
-	jumpeq RustboroCity_House1_EventScript_157CFB
+	jumpif EQUAL, RustboroCity_House1_EventScript_157CFB
 	special 159
 	waitstate
 	copyvar 0x800a, 0x8004
 	compare 0x8004, 255
-	jumpeq RustboroCity_House1_EventScript_157CFB
+	jumpif EQUAL, RustboroCity_House1_EventScript_157CFB
 	copyvar 0x8005, 0x800a
 	specialval RESULT, 255
 	copyvar 0x800b, RESULT

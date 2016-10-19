@@ -126,7 +126,7 @@ SlateportCity_EventScript_14BB81:: @ 814BB81
 	compare 0x4058, 1
 	callif 1, SlateportCity_EventScript_14BBA1
 	checkflag 96
-	jumpeq SlateportCity_EventScript_14BBAB
+	jumpif EQUAL, SlateportCity_EventScript_14BBAB
 	msgbox SlateportCity_Text_164937, 4
 	release
 	end
@@ -157,7 +157,7 @@ SlateportCity_EventScript_14BBCC:: @ 814BBCC
 
 SlateportCity_EventScript_14BBD6:: @ 814BBD6
 	compare 0x4058, 1
-	jumpeq SlateportCity_EventScript_14BBEA
+	jumpif EQUAL, SlateportCity_EventScript_14BBEA
 	msgbox SlateportCity_Text_164AA9, 2
 	end
 
@@ -183,7 +183,7 @@ SlateportCity_EventScript_14BC14:: @ 814BC14
 	lock
 	faceplayer
 	checkflag 148
-	jumpeq SlateportCity_EventScript_14BC29
+	jumpif EQUAL, SlateportCity_EventScript_14BC29
 	msgbox SlateportCity_Text_164BBF, 4
 	release
 	end
@@ -200,9 +200,9 @@ SlateportCity_EventScript_14BC33:: @ 814BC33
 SlateportCity_EventScript_14BC3C:: @ 814BC3C
 	lockall
 	checkflag 2052
-	jumpeq SlateportCity_EventScript_14BC63
+	jumpif EQUAL, SlateportCity_EventScript_14BC63
 	checkflag 2061
-	jumpeq SlateportCity_EventScript_14BC59
+	jumpif EQUAL, SlateportCity_EventScript_14BC59
 	msgbox SlateportCity_Text_1658A0, 4
 	releaseall
 	end
@@ -236,7 +236,7 @@ SlateportCity_EventScript_14BC88:: @ 814BC88
 SlateportCity_EventScript_14BC91:: @ 814BC91
 	lockall
 	checkflag 2052
-	jumpeq SlateportCity_EventScript_14BCA5
+	jumpif EQUAL, SlateportCity_EventScript_14BCA5
 	msgbox SlateportCity_Text_165A8B, 4
 	releaseall
 	end

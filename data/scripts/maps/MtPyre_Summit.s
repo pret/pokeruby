@@ -170,11 +170,11 @@ MtPyre_Summit_EventScript_15D623:: @ 815D623
 	lock
 	faceplayer
 	checkflag 259
-	jumpeq MtPyre_Summit_EventScript_15D6C4
+	jumpif EQUAL, MtPyre_Summit_EventScript_15D6C4
 	checkflag 113
-	jumpeq MtPyre_Summit_EventScript_15D64A
+	jumpif EQUAL, MtPyre_Summit_EventScript_15D64A
 	checkflag 129
-	jumpeq MtPyre_Summit_EventScript_15D6BA
+	jumpif EQUAL, MtPyre_Summit_EventScript_15D6BA
 	.ifdef SAPPHIRE
 	msgbox UnknownString_81B54BE, 4
 	.else
@@ -190,9 +190,9 @@ MtPyre_Summit_EventScript_15D64A:: @ 815D64A
 	msgbox MtPyre_Summit_Text_1B6283, 5
 	.endif
 	compare RESULT, 1
-	jumpeq MtPyre_Summit_EventScript_15D669
+	jumpif EQUAL, MtPyre_Summit_EventScript_15D669
 	compare RESULT, 0
-	jumpeq MtPyre_Summit_EventScript_15D69B
+	jumpif EQUAL, MtPyre_Summit_EventScript_15D69B
 	end
 
 MtPyre_Summit_EventScript_15D669:: @ 815D669
@@ -221,9 +221,9 @@ MtPyre_Summit_EventScript_15D69B:: @ 815D69B
 	msgbox MtPyre_Summit_Text_1B62E7, 5
 	.endif
 	compare RESULT, 1
-	jumpeq MtPyre_Summit_EventScript_15D669
+	jumpif EQUAL, MtPyre_Summit_EventScript_15D669
 	compare RESULT, 0
-	jumpeq MtPyre_Summit_EventScript_15D69B
+	jumpif EQUAL, MtPyre_Summit_EventScript_15D69B
 	end
 
 MtPyre_Summit_EventScript_15D6BA:: @ 815D6BA

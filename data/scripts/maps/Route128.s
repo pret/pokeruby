@@ -184,7 +184,7 @@ Route128_EventScript_1522A4:: @ 81522A4
 	trainerbattle 0, OPPONENT_ISAIAH_1, 0, Route128_Text_1C1C67, Route128_Text_1C1C95
 	specialval RESULT, 57
 	compare RESULT, 1
-	jumpeq Route128_EventScript_1522CB
+	jumpif EQUAL, Route128_EventScript_1522CB
 	msgbox Route128_Text_1C1CC3, 6
 	end
 
@@ -197,7 +197,7 @@ Route128_EventScript_1522E2:: @ 81522E2
 	trainerbattle 0, OPPONENT_KATELYN_1, 0, Route128_Text_1C1DB0, Route128_Text_1C1E25
 	specialval RESULT, 57
 	compare RESULT, 1
-	jumpeq Route128_EventScript_152309
+	jumpif EQUAL, Route128_EventScript_152309
 	msgbox Route128_Text_1C1E4A, 6
 	end
 

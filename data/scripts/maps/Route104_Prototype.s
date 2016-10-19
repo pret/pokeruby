@@ -19,7 +19,7 @@ Route104_Prototype_EventScript_160C4B:: @ 8160C4B
 	setflag 215
 	msgbox Route104_Prototype_Text_19B267, 4
 	checkflag 216
-	jumpeq Route104_Prototype_EventScript_160CFB
+	jumpif EQUAL, Route104_Prototype_EventScript_160CFB
 	release
 	end
 
@@ -46,7 +46,7 @@ Route104_Prototype_EventScript_160CA3:: @ 8160CA3
 	setflag 216
 	msgbox Route104_Prototype_Text_19B2E9, 4
 	checkflag 215
-	jumpeq Route104_Prototype_EventScript_160CFB
+	jumpif EQUAL, Route104_Prototype_EventScript_160CFB
 	release
 	end
 

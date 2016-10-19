@@ -85,7 +85,7 @@ MossdeepCity_GameCorner_1F_EventScript_15AD42:: @ 815AD42
 	lock
 	faceplayer
 	compare 0x4001, 1
-	jumpeq MossdeepCity_GameCorner_1F_EventScript_15AD59
+	jumpif EQUAL, MossdeepCity_GameCorner_1F_EventScript_15AD59
 	msgbox MossdeepCity_GameCorner_1F_Text_18E59A, 4
 	release
 	end
@@ -95,17 +95,17 @@ MossdeepCity_GameCorner_1F_EventScript_15AD59:: @ 815AD59
 	special 285
 	msgbox MossdeepCity_GameCorner_1F_Text_18E650, 5
 	compare RESULT, 0
-	jumpeq MossdeepCity_GameCorner_1F_EventScript_15ADE8
+	jumpif EQUAL, MossdeepCity_GameCorner_1F_EventScript_15ADE8
 	call MossdeepCity_GameCorner_1F_EventScript_15ADF5
 	compare RESULT, 0
-	jumpeq MossdeepCity_GameCorner_1F_EventScript_15ADE8
+	jumpif EQUAL, MossdeepCity_GameCorner_1F_EventScript_15ADE8
 	msgbox MossdeepCity_GameCorner_1F_Text_18E741, 5
 	compare RESULT, 0
 	callif 1, MossdeepCity_GameCorner_1F_EventScript_15ADE8
 	special 40
 	call MossdeepCity_GameCorner_1F_EventScript_19F806
 	compare RESULT, 0
-	jumpeq MossdeepCity_GameCorner_1F_EventScript_15ADE8
+	jumpif EQUAL, MossdeepCity_GameCorner_1F_EventScript_15ADE8
 	hidebox 0, 0, 15, 10
 	special 39
 	special 248

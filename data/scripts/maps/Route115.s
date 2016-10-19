@@ -17,7 +17,7 @@ Route115_EventScript_150949:: @ 8150949
 	trainerbattle 0, OPPONENT_TIMOTHY_1, 0, Route115_Text_1BC9AC, Route115_Text_1BC9E6
 	specialval RESULT, 57
 	compare RESULT, 1
-	jumpeq Route115_EventScript_150970
+	jumpif EQUAL, Route115_EventScript_150970
 	msgbox Route115_Text_1BCA0E, 6
 	end
 
@@ -35,7 +35,7 @@ Route115_EventScript_15099E:: @ 815099E
 	trainerbattle 0, OPPONENT_NOB_1, 0, Route115_Text_1BCB8A, Route115_Text_1BCBC1
 	specialval RESULT, 57
 	compare RESULT, 1
-	jumpeq Route115_EventScript_1509C5
+	jumpif EQUAL, Route115_EventScript_1509C5
 	msgbox Route115_Text_1BCBDE, 6
 	end
 
@@ -48,7 +48,7 @@ Route115_EventScript_1509DC:: @ 81509DC
 	trainerbattle 0, OPPONENT_CYNDY_1, 0, Route115_Text_1BCCF4, Route115_Text_1BCD32
 	specialval RESULT, 57
 	compare RESULT, 1
-	jumpeq Route115_EventScript_150A03
+	jumpif EQUAL, Route115_EventScript_150A03
 	msgbox Route115_Text_1BCD4C, 6
 	end
 

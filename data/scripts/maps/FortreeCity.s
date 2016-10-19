@@ -19,7 +19,7 @@ FortreeCity_EventScript_14C95E:: @ 814C95E
 	lock
 	faceplayer
 	checkflag 295
-	jumpeq FortreeCity_EventScript_14C973
+	jumpif EQUAL, FortreeCity_EventScript_14C973
 	msgbox FortreeCity_Text_1675C2, 4
 	release
 	end
@@ -58,7 +58,7 @@ FortreeCity_EventScript_14C9B3:: @ 814C9B3
 	faceplayer
 	checkitem ITEM_DEVON_SCOPE, 1
 	compare RESULT, 1
-	jumpeq FortreeCity_EventScript_14C9CF
+	jumpif EQUAL, FortreeCity_EventScript_14C9CF
 	msgbox FortreeCity_Text_167868, 4
 	release
 	end
@@ -66,7 +66,7 @@ FortreeCity_EventScript_14C9B3:: @ 814C9B3
 FortreeCity_EventScript_14C9CF:: @ 814C9CF
 	msgbox FortreeCity_Text_16788B, 5
 	compare RESULT, 1
-	jumpeq FortreeCity_EventScript_14C9E4
+	jumpif EQUAL, FortreeCity_EventScript_14C9E4
 	release
 	end
 

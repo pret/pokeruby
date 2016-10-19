@@ -52,9 +52,9 @@ LavaridgeTown_EventScript_14E4ED:: @ 814E4ED
 	callif 1, LavaridgeTown_EventScript_14E68F
 	checkgender
 	compare RESULT, 0
-	jumpeq LavaridgeTown_EventScript_14E5AB
+	jumpif EQUAL, LavaridgeTown_EventScript_14E5AB
 	compare RESULT, 1
-	jumpeq LavaridgeTown_EventScript_14E5D0
+	jumpif EQUAL, LavaridgeTown_EventScript_14E5D0
 	end
 
 LavaridgeTown_EventScript_14E56B:: @ 814E56B
@@ -76,9 +76,9 @@ LavaridgeTown_EventScript_14E575:: @ 814E575
 	callif 1, LavaridgeTown_EventScript_14E570
 	checkgender
 	compare RESULT, 0
-	jumpeq LavaridgeTown_EventScript_14E5AB
+	jumpif EQUAL, LavaridgeTown_EventScript_14E5AB
 	compare RESULT, 1
-	jumpeq LavaridgeTown_EventScript_14E5D0
+	jumpif EQUAL, LavaridgeTown_EventScript_14E5D0
 	end
 
 LavaridgeTown_EventScript_14E5AB:: @ 814E5AB
@@ -115,7 +115,7 @@ LavaridgeTown_EventScript_14E5F5:: @ 814E5F5
 	playmusicbattle 0
 	fadedefault
 	compare 0x8008, 0
-	jumpeq LavaridgeTown_EventScript_14E644
+	jumpif EQUAL, LavaridgeTown_EventScript_14E644
 	releaseall
 	end
 
@@ -238,7 +238,7 @@ LavaridgeTown_Movement_14E70E:: @ 814E70E
 LavaridgeTown_EventScript_14E710:: @ 814E710
 	specialval RESULT, 287
 	compare RESULT, 1
-	jumpeq LavaridgeTown_EventScript_14E721
+	jumpif EQUAL, LavaridgeTown_EventScript_14E721
 	end
 
 LavaridgeTown_EventScript_14E721:: @ 814E721
@@ -273,13 +273,13 @@ LavaridgeTown_EventScript_14E75A:: @ 814E75A
 	lock
 	faceplayer
 	checkflag 266
-	jumpeq LavaridgeTown_EventScript_14E79E
+	jumpif EQUAL, LavaridgeTown_EventScript_14E79E
 	msgbox LavaridgeTown_Text_16C174, 5
 	compare RESULT, 0
-	jumpeq LavaridgeTown_EventScript_14E7B2
+	jumpif EQUAL, LavaridgeTown_EventScript_14E7B2
 	countpokemon
 	compare RESULT, 6
-	jumpeq LavaridgeTown_EventScript_14E7A8
+	jumpif EQUAL, LavaridgeTown_EventScript_14E7A8
 	msgbox LavaridgeTown_Text_16C2B6, 4
 	setflag 266
 	fanfare 370

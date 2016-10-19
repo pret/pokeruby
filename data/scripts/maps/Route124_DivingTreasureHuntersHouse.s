@@ -10,7 +10,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_163E04:: @ 8163E04
 	lock
 	faceplayer
 	checkflag 217
-	jumpeq Route124_DivingTreasureHuntersHouse_EventScript_163E20
+	jumpif EQUAL, Route124_DivingTreasureHuntersHouse_EventScript_163E20
 	msgbox Route124_DivingTreasureHuntersHouse_Text_19F416, 4
 	setflag 217
 	jump Route124_DivingTreasureHuntersHouse_EventScript_163E2E
@@ -24,7 +24,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_163E20:: @ 8163E20
 Route124_DivingTreasureHuntersHouse_EventScript_163E2E:: @ 8163E2E
 	call Route124_DivingTreasureHuntersHouse_EventScript_163E44
 	compare 0x4001, 0
-	jumpeq Route124_DivingTreasureHuntersHouse_EventScript_164329
+	jumpif EQUAL, Route124_DivingTreasureHuntersHouse_EventScript_164329
 	jump Route124_DivingTreasureHuntersHouse_EventScript_163EA2
 	end
 
@@ -248,13 +248,13 @@ Route124_DivingTreasureHuntersHouse_EventScript_164292:: @ 8164292
 	bufferitem 1, 0x8009
 	msgbox Route124_DivingTreasureHuntersHouse_Text_19F5E0, 5
 	compare RESULT, 0
-	jumpeq Route124_DivingTreasureHuntersHouse_EventScript_16431F
+	jumpif EQUAL, Route124_DivingTreasureHuntersHouse_EventScript_16431F
 	checkitemspace 0x8009, 1
 	compare RESULT, 1
-	jumpeq Route124_DivingTreasureHuntersHouse_EventScript_1642D3
+	jumpif EQUAL, Route124_DivingTreasureHuntersHouse_EventScript_1642D3
 	checkitem 0x8008, 2
 	compare RESULT, 0
-	jumpeq Route124_DivingTreasureHuntersHouse_EventScript_1642D3
+	jumpif EQUAL, Route124_DivingTreasureHuntersHouse_EventScript_1642D3
 	jump Route124_DivingTreasureHuntersHouse_EventScript_164315
 	end
 
@@ -264,10 +264,10 @@ Route124_DivingTreasureHuntersHouse_EventScript_1642D3:: @ 81642D3
 	msgbox Route124_DivingTreasureHuntersHouse_Text_19F606, 4
 	call Route124_DivingTreasureHuntersHouse_EventScript_163E44
 	compare 0x4001, 0
-	jumpeq Route124_DivingTreasureHuntersHouse_EventScript_164333
+	jumpif EQUAL, Route124_DivingTreasureHuntersHouse_EventScript_164333
 	msgbox Route124_DivingTreasureHuntersHouse_Text_19F629, 5
 	compare RESULT, 1
-	jumpeq Route124_DivingTreasureHuntersHouse_EventScript_163EB0
+	jumpif EQUAL, Route124_DivingTreasureHuntersHouse_EventScript_163EB0
 	jump Route124_DivingTreasureHuntersHouse_EventScript_16431F
 	end
 

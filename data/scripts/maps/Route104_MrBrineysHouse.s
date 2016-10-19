@@ -38,7 +38,7 @@ Route104_MrBrineysHouse_EventScript_15BD0E:: @ 815BD0E
 	msgbox Route104_MrBrineysHouse_Text_191A82, 4
 	msgbox Route104_MrBrineysHouse_Text_191AAD, 5
 	compare RESULT, 0
-	jumpeq Route104_MrBrineysHouse_EventScript_15BD97
+	jumpif EQUAL, Route104_MrBrineysHouse_EventScript_15BD97
 	jump Route104_MrBrineysHouse_EventScript_15BDAB
 	end
 
@@ -55,14 +55,14 @@ Route104_MrBrineysHouse_EventScript_15BD32:: @ 815BD32
 Route104_MrBrineysHouse_EventScript_15BD65:: @ 815BD65
 	msgbox Route104_MrBrineysHouse_Text_191CC3, 5
 	compare RESULT, 0
-	jumpeq Route104_MrBrineysHouse_EventScript_15BD97
+	jumpif EQUAL, Route104_MrBrineysHouse_EventScript_15BD97
 	jump Route104_MrBrineysHouse_EventScript_15BDAB
 	end
 
 Route104_MrBrineysHouse_EventScript_15BD7E:: @ 815BD7E
 	msgbox Route104_MrBrineysHouse_Text_191DA6, 5
 	compare RESULT, 0
-	jumpeq Route104_MrBrineysHouse_EventScript_15BD97
+	jumpif EQUAL, Route104_MrBrineysHouse_EventScript_15BD97
 	jump Route104_MrBrineysHouse_EventScript_15BDAB
 	end
 
