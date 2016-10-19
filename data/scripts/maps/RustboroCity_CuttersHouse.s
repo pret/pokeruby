@@ -5,7 +5,7 @@ RustboroCity_CuttersHouse_EventScript_157D27:: @ 8157D27
 	lock
 	faceplayer
 	checkflag 137
-	jumpif EQUAL, RustboroCity_CuttersHouse_EventScript_157D53
+	jumpif FLAG_IS_SET, RustboroCity_CuttersHouse_EventScript_157D53
 	msgbox RustboroCity_CuttersHouse_Text_18509C, 4
 	giveitem ITEM_HM01
 	setflag 137

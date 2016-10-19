@@ -102,7 +102,7 @@ VerdanturfTown_ContestLobby_EventScript_153E47:: @ 8153E47
 	lock
 	faceplayer
 	checkflag 235
-	jumpif EQUAL, VerdanturfTown_ContestLobby_EventScript_153E76
+	jumpif FLAG_IS_SET, VerdanturfTown_ContestLobby_EventScript_153E76
 	msgbox VerdanturfTown_ContestLobby_Text_177DEC, 4
 	giveitem ITEM_TM45
 	compare RESULT, 0

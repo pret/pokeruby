@@ -9,7 +9,7 @@ MauvilleCity_MapScript1_14C038:: @ 814C038
 	clearflag 99
 	setvar 0x4093, 0
 	checkflag 209
-	callif 1, MauvilleCity_EventScript_14C053
+	callif FLAG_IS_SET, MauvilleCity_EventScript_14C053
 	end
 
 MauvilleCity_EventScript_14C053:: @ 814C053
@@ -53,7 +53,7 @@ MauvilleCity_EventScript_14C0A2:: @ 814C0A2
 	lock
 	faceplayer
 	checkflag 98
-	jumpif EQUAL, MauvilleCity_EventScript_14C0BA
+	jumpif FLAG_IS_SET, MauvilleCity_EventScript_14C0BA
 	msgbox MauvilleCity_Text_16674A, 4
 	setflag 98
 	release
@@ -68,7 +68,7 @@ MauvilleCity_EventScript_14C0C4:: @ 814C0C4
 	lock
 	faceplayer
 	checkflag 284
-	jumpif EQUAL, MauvilleCity_EventScript_14C0E4
+	jumpif FLAG_IS_SET, MauvilleCity_EventScript_14C0E4
 	msgbox MauvilleCity_Text_165B76, 4
 	closebutton
 	move 7, MauvilleCity_Movement_1A083D
@@ -87,7 +87,7 @@ MauvilleCity_EventScript_14C0E4:: @ 814C0E4
 MauvilleCity_EventScript_14C0F9:: @ 814C0F9
 	lockall
 	checkflag 284
-	jumpif EQUAL, MauvilleCity_EventScript_14C292
+	jumpif FLAG_IS_SET, MauvilleCity_EventScript_14C292
 	move 6, MauvilleCity_Movement_1A0843
 	waitmove 0
 	msgbox MauvilleCity_Text_165BE3, 4
@@ -285,11 +285,11 @@ MauvilleCity_EventScript_14C2F2:: @ 814C2F2
 	lock
 	faceplayer
 	checkflag 209
-	jumpif EQUAL, MauvilleCity_EventScript_14C368
+	jumpif FLAG_IS_SET, MauvilleCity_EventScript_14C368
 	compare 0x40ba, 2
 	jumpif EQUAL, MauvilleCity_EventScript_14C33C
 	checkflag 208
-	jumpif EQUAL, MauvilleCity_EventScript_14C332
+	jumpif FLAG_IS_SET, MauvilleCity_EventScript_14C332
 	msgbox MauvilleCity_Text_1661C1, 4
 	giveitem ITEM_BASEMENT_KEY
 	setflag 208

@@ -170,11 +170,11 @@ MtPyre_Summit_EventScript_15D623:: @ 815D623
 	lock
 	faceplayer
 	checkflag 259
-	jumpif EQUAL, MtPyre_Summit_EventScript_15D6C4
+	jumpif FLAG_IS_SET, MtPyre_Summit_EventScript_15D6C4
 	checkflag 113
-	jumpif EQUAL, MtPyre_Summit_EventScript_15D64A
+	jumpif FLAG_IS_SET, MtPyre_Summit_EventScript_15D64A
 	checkflag 129
-	jumpif EQUAL, MtPyre_Summit_EventScript_15D6BA
+	jumpif FLAG_IS_SET, MtPyre_Summit_EventScript_15D6BA
 	.ifdef SAPPHIRE
 	msgbox UnknownString_81B54BE, 4
 	.else

@@ -5,7 +5,7 @@ RustboroCity_House1_EventScript_157C7D:: @ 8157C7D
 	lock
 	faceplayer
 	checkflag 153
-	jumpif EQUAL, RustboroCity_House1_EventScript_157D13
+	jumpif FLAG_IS_SET, RustboroCity_House1_EventScript_157D13
 	setvar 0x8008, 0
 	copyvar 0x8004, 0x8008
 	specialval RESULT, 252

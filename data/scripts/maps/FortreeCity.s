@@ -19,7 +19,7 @@ FortreeCity_EventScript_14C95E:: @ 814C95E
 	lock
 	faceplayer
 	checkflag 295
-	jumpif EQUAL, FortreeCity_EventScript_14C973
+	jumpif FLAG_IS_SET, FortreeCity_EventScript_14C973
 	msgbox FortreeCity_Text_1675C2, 4
 	release
 	end

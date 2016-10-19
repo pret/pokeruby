@@ -58,7 +58,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_155B2D:: @ 8155B2D
 
 SlateportCity_OceanicMuseum_1F_EventScript_155B5A:: @ 8155B5A
 	checkflag 149
-	jumpif 0, SlateportCity_OceanicMuseum_1F_EventScript_155B7B
+	jumpif FLAG_NOT_SET, SlateportCity_OceanicMuseum_1F_EventScript_155B7B
 	msgbox SlateportCity_OceanicMuseum_1F_Text_17E1F5, 4
 	closebutton
 	hidemoney 0, 0

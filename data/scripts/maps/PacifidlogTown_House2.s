@@ -7,11 +7,11 @@ PacifidlogTown_House2_EventScript_154168:: @ 8154168
 	checkdailyflags
 	call PacifidlogTown_House2_EventScript_1541B4
 	checkflag 299
-	jumpif EQUAL, PacifidlogTown_House2_EventScript_154254
+	jumpif FLAG_IS_SET, PacifidlogTown_House2_EventScript_154254
 	checkflag 300
-	callif 1, PacifidlogTown_House2_EventScript_1541CE
+	callif FLAG_IS_SET, PacifidlogTown_House2_EventScript_1541CE
 	checkflag 300
-	callif 0, PacifidlogTown_House2_EventScript_1541D7
+	callif FLAG_NOT_SET, PacifidlogTown_House2_EventScript_1541D7
 	setflag 300
 	specialval RESULT, 230
 	compare RESULT, 4
@@ -24,7 +24,7 @@ PacifidlogTown_House2_EventScript_154168:: @ 8154168
 
 PacifidlogTown_House2_EventScript_1541B4:: @ 81541B4
 	checkflag 299
-	jumpif 0, PacifidlogTown_House2_EventScript_1A14DC
+	jumpif FLAG_NOT_SET, PacifidlogTown_House2_EventScript_1A14DC
 	specialval RESULT, 334
 	compare RESULT, 0
 	callif 1, PacifidlogTown_House2_EventScript_1541E8

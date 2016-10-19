@@ -6,7 +6,7 @@ FallarborTown_House2_EventScript_153C91:: @ 8153C91
 	move 1, FallarborTown_House2_Movement_1A0839
 	waitmove 0
 	checkflag 1
-	jumpif EQUAL, FallarborTown_House2_EventScript_153CB6
+	jumpif FLAG_IS_SET, FallarborTown_House2_EventScript_153CB6
 	msgbox FallarborTown_House2_Text_177AF4, 4
 	setflag 1
 	jump FallarborTown_House2_EventScript_153CB6

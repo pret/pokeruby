@@ -209,7 +209,7 @@ Route111_EventScript_1AE5A2:: @ 81AE5A2
 	compare FACING, 4
 	callif 1, Route111_EventScript_1AE5FD
 	checkflag 1
-	jumpif EQUAL, Route111_EventScript_1AE73A
+	jumpif FLAG_IS_SET, Route111_EventScript_1AE73A
 	msgbox Route111_Text_1AC015, 5
 	jump Route111_EventScript_1AE6F3
 	end
@@ -243,7 +243,7 @@ Route120_EventScript_1AE60F:: @ 81AE60F
 	compare FACING, 4
 	callif 1, Route111_EventScript_1AE5FD
 	checkflag 1
-	jumpif EQUAL, Route111_EventScript_1AE73A
+	jumpif FLAG_IS_SET, Route111_EventScript_1AE73A
 	specialval RESULT, 177
 	compare RESULT, 0
 	jumpif EQUAL, Route111_EventScript_1AE69F

@@ -5,7 +5,7 @@ SSTidalRooms_EventScript_15FF06:: @ 815FF06
 	lock
 	faceplayer
 	checkflag 260
-	jumpif EQUAL, SSTidalRooms_EventScript_15FF3D
+	jumpif FLAG_IS_SET, SSTidalRooms_EventScript_15FF3D
 	msgbox SSTidalRooms_Text_199B65, 4
 	giveitem ITEM_TM49
 	compare RESULT, 0

@@ -10,7 +10,7 @@ Route124_DivingTreasureHuntersHouse_EventScript_163E04:: @ 8163E04
 	lock
 	faceplayer
 	checkflag 217
-	jumpif EQUAL, Route124_DivingTreasureHuntersHouse_EventScript_163E20
+	jumpif FLAG_IS_SET, Route124_DivingTreasureHuntersHouse_EventScript_163E20
 	msgbox Route124_DivingTreasureHuntersHouse_Text_19F416, 4
 	setflag 217
 	jump Route124_DivingTreasureHuntersHouse_EventScript_163E2E

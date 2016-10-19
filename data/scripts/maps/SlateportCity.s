@@ -126,7 +126,7 @@ SlateportCity_EventScript_14BB81:: @ 814BB81
 	compare 0x4058, 1
 	callif 1, SlateportCity_EventScript_14BBA1
 	checkflag 96
-	jumpif EQUAL, SlateportCity_EventScript_14BBAB
+	jumpif FLAG_IS_SET, SlateportCity_EventScript_14BBAB
 	msgbox SlateportCity_Text_164937, 4
 	release
 	end
@@ -183,7 +183,7 @@ SlateportCity_EventScript_14BC14:: @ 814BC14
 	lock
 	faceplayer
 	checkflag 148
-	jumpif EQUAL, SlateportCity_EventScript_14BC29
+	jumpif FLAG_IS_SET, SlateportCity_EventScript_14BC29
 	msgbox SlateportCity_Text_164BBF, 4
 	release
 	end
@@ -200,9 +200,9 @@ SlateportCity_EventScript_14BC33:: @ 814BC33
 SlateportCity_EventScript_14BC3C:: @ 814BC3C
 	lockall
 	checkflag 2052
-	jumpif EQUAL, SlateportCity_EventScript_14BC63
+	jumpif FLAG_IS_SET, SlateportCity_EventScript_14BC63
 	checkflag 2061
-	jumpif EQUAL, SlateportCity_EventScript_14BC59
+	jumpif FLAG_IS_SET, SlateportCity_EventScript_14BC59
 	msgbox SlateportCity_Text_1658A0, 4
 	releaseall
 	end
@@ -236,7 +236,7 @@ SlateportCity_EventScript_14BC88:: @ 814BC88
 SlateportCity_EventScript_14BC91:: @ 814BC91
 	lockall
 	checkflag 2052
-	jumpif EQUAL, SlateportCity_EventScript_14BCA5
+	jumpif FLAG_IS_SET, SlateportCity_EventScript_14BCA5
 	msgbox SlateportCity_Text_165A8B, 4
 	releaseall
 	end
@@ -411,7 +411,7 @@ SlateportCity_EventScript_14BE20:: @ 814BE20
 	lock
 	faceplayer
 	checkflag 96
-	jumpif 0, SlateportCity_EventScript_14BE16
+	jumpif FLAG_NOT_SET, SlateportCity_EventScript_14BE16
 	message SlateportCity_Text_1A0BE4
 	waittext
 	pokemartdecor SlateportCity_Decorations2
@@ -443,7 +443,7 @@ SlateportCity_Decorations2:: @ 814BE40
 	lock
 	faceplayer
 	checkflag 96
-	jumpif 0, SlateportCity_EventScript_14BE16
+	jumpif FLAG_NOT_SET, SlateportCity_EventScript_14BE16
 	message SlateportCity_Text_1A0BE4
 	waittext
 	pokemartdecor SlateportCity_Decorations3

@@ -5,7 +5,7 @@ ShoalCave_LowTideInnerRoom_MapScripts:: @ 815E192
 
 ShoalCave_LowTideInnerRoom_MapScript1_15E19D:: @ 815E19D
 	checkflag 2106
-	jumpif EQUAL, ShoalCave_LowTideInnerRoom_EventScript_15E1AB
+	jumpif FLAG_IS_SET, ShoalCave_LowTideInnerRoom_EventScript_15E1AB
 	jump ShoalCave_LowTideInnerRoom_EventScript_15E1AF
 
 ShoalCave_LowTideInnerRoom_EventScript_15E1AB:: @ 815E1AB
@@ -22,46 +22,46 @@ ShoalCave_LowTideInnerRoom_MapScript1_15E1B3:: @ 815E1B3
 
 ShoalCave_LowTideInnerRoom_EventScript_15E1B9:: @ 815E1B9
 	checkflag 952
-	jumpif EQUAL, ShoalCave_LowTideInnerRoom_EventScript_15E1DA
+	jumpif FLAG_IS_SET, ShoalCave_LowTideInnerRoom_EventScript_15E1DA
 	checkflag 2106
-	jumpif EQUAL, ShoalCave_LowTideInnerRoom_EventScript_15E1DA
+	jumpif FLAG_IS_SET, ShoalCave_LowTideInnerRoom_EventScript_15E1DA
 	setmaptile 31, 8, 856, 1
 	jump ShoalCave_LowTideInnerRoom_EventScript_15E1DA
 	end
 
 ShoalCave_LowTideInnerRoom_EventScript_15E1DA:: @ 815E1DA
 	checkflag 953
-	jumpif EQUAL, ShoalCave_LowTideInnerRoom_EventScript_15E1FB
+	jumpif FLAG_IS_SET, ShoalCave_LowTideInnerRoom_EventScript_15E1FB
 	checkflag 2106
-	jumpif EQUAL, ShoalCave_LowTideInnerRoom_EventScript_15E1FB
+	jumpif FLAG_IS_SET, ShoalCave_LowTideInnerRoom_EventScript_15E1FB
 	setmaptile 14, 26, 856, 1
 	jump ShoalCave_LowTideInnerRoom_EventScript_15E1FB
 	end
 
 ShoalCave_LowTideInnerRoom_EventScript_15E1FB:: @ 815E1FB
 	checkflag 956
-	jumpif EQUAL, ShoalCave_LowTideInnerRoom_EventScript_15E213
+	jumpif FLAG_IS_SET, ShoalCave_LowTideInnerRoom_EventScript_15E213
 	setmaptile 41, 20, 857, 1
 	jump ShoalCave_LowTideInnerRoom_EventScript_15E213
 	end
 
 ShoalCave_LowTideInnerRoom_EventScript_15E213:: @ 815E213
 	checkflag 957
-	jumpif EQUAL, ShoalCave_LowTideInnerRoom_EventScript_15E22B
+	jumpif FLAG_IS_SET, ShoalCave_LowTideInnerRoom_EventScript_15E22B
 	setmaptile 41, 10, 857, 1
 	jump ShoalCave_LowTideInnerRoom_EventScript_15E22B
 	end
 
 ShoalCave_LowTideInnerRoom_EventScript_15E22B:: @ 815E22B
 	checkflag 958
-	jumpif EQUAL, ShoalCave_LowTideInnerRoom_EventScript_15E243
+	jumpif FLAG_IS_SET, ShoalCave_LowTideInnerRoom_EventScript_15E243
 	setmaptile 6, 9, 857, 1
 	jump ShoalCave_LowTideInnerRoom_EventScript_15E243
 	end
 
 ShoalCave_LowTideInnerRoom_EventScript_15E243:: @ 815E243
 	checkflag 959
-	jumpif EQUAL, ShoalCave_LowTideInnerRoom_EventScript_15E256
+	jumpif FLAG_IS_SET, ShoalCave_LowTideInnerRoom_EventScript_15E256
 	setmaptile 16, 13, 857, 1
 	return
 
@@ -71,7 +71,7 @@ ShoalCave_LowTideInnerRoom_EventScript_15E256:: @ 815E256
 ShoalCave_LowTideInnerRoom_EventScript_15E257:: @ 815E257
 	lockall
 	checkflag 956
-	jumpif EQUAL, ShoalCave_LowTideInnerRoom_EventScript_15E289
+	jumpif FLAG_IS_SET, ShoalCave_LowTideInnerRoom_EventScript_15E289
 	giveitem ITEM_SHOAL_SHELL
 	compare RESULT, 0
 	jumpif EQUAL, ShoalCave_LowTideInnerRoom_EventScript_1A029B
@@ -89,7 +89,7 @@ ShoalCave_LowTideInnerRoom_EventScript_15E289:: @ 815E289
 ShoalCave_LowTideInnerRoom_EventScript_15E293:: @ 815E293
 	lockall
 	checkflag 957
-	jumpif EQUAL, ShoalCave_LowTideInnerRoom_EventScript_15E289
+	jumpif FLAG_IS_SET, ShoalCave_LowTideInnerRoom_EventScript_15E289
 	giveitem ITEM_SHOAL_SHELL
 	compare RESULT, 0
 	jumpif EQUAL, ShoalCave_LowTideInnerRoom_EventScript_1A029B
@@ -102,7 +102,7 @@ ShoalCave_LowTideInnerRoom_EventScript_15E293:: @ 815E293
 ShoalCave_LowTideInnerRoom_EventScript_15E2C5:: @ 815E2C5
 	lockall
 	checkflag 958
-	jumpif EQUAL, ShoalCave_LowTideInnerRoom_EventScript_15E289
+	jumpif FLAG_IS_SET, ShoalCave_LowTideInnerRoom_EventScript_15E289
 	giveitem ITEM_SHOAL_SHELL
 	compare RESULT, 0
 	jumpif EQUAL, ShoalCave_LowTideInnerRoom_EventScript_1A029B
@@ -115,7 +115,7 @@ ShoalCave_LowTideInnerRoom_EventScript_15E2C5:: @ 815E2C5
 ShoalCave_LowTideInnerRoom_EventScript_15E2F7:: @ 815E2F7
 	lockall
 	checkflag 959
-	jumpif EQUAL, ShoalCave_LowTideInnerRoom_EventScript_15E289
+	jumpif FLAG_IS_SET, ShoalCave_LowTideInnerRoom_EventScript_15E289
 	giveitem ITEM_SHOAL_SHELL
 	compare RESULT, 0
 	jumpif EQUAL, ShoalCave_LowTideInnerRoom_EventScript_1A029B
@@ -128,7 +128,7 @@ ShoalCave_LowTideInnerRoom_EventScript_15E2F7:: @ 815E2F7
 ShoalCave_LowTideInnerRoom_EventScript_15E329:: @ 815E329
 	lockall
 	checkflag 952
-	jumpif EQUAL, ShoalCave_LowTideInnerRoom_EventScript_15E35B
+	jumpif FLAG_IS_SET, ShoalCave_LowTideInnerRoom_EventScript_15E35B
 	giveitem ITEM_SHOAL_SALT
 	compare RESULT, 0
 	jumpif EQUAL, ShoalCave_LowTideInnerRoom_EventScript_1A029B
@@ -146,7 +146,7 @@ ShoalCave_LowTideInnerRoom_EventScript_15E35B:: @ 815E35B
 ShoalCave_LowTideInnerRoom_EventScript_15E365:: @ 815E365
 	lockall
 	checkflag 953
-	jumpif EQUAL, ShoalCave_LowTideInnerRoom_EventScript_15E35B
+	jumpif FLAG_IS_SET, ShoalCave_LowTideInnerRoom_EventScript_15E35B
 	giveitem ITEM_SHOAL_SALT
 	compare RESULT, 0
 	jumpif EQUAL, ShoalCave_LowTideInnerRoom_EventScript_1A029B

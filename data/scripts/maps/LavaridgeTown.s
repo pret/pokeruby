@@ -6,7 +6,7 @@ LavaridgeTown_MapScripts:: @ 814E4A3
 LavaridgeTown_MapScript1_14E4AE:: @ 814E4AE
 	setflag 2066
 	checkflag 139
-	callif 1, LavaridgeTown_EventScript_14E4DF
+	callif FLAG_IS_SET, LavaridgeTown_EventScript_14E4DF
 	call LavaridgeTown_EventScript_1A014E
 	call LavaridgeTown_EventScript_1A0172
 	compare 0x4053, 2
@@ -273,7 +273,7 @@ LavaridgeTown_EventScript_14E75A:: @ 814E75A
 	lock
 	faceplayer
 	checkflag 266
-	jumpif EQUAL, LavaridgeTown_EventScript_14E79E
+	jumpif FLAG_IS_SET, LavaridgeTown_EventScript_14E79E
 	msgbox LavaridgeTown_Text_16C174, 5
 	compare RESULT, 0
 	jumpif EQUAL, LavaridgeTown_EventScript_14E7B2

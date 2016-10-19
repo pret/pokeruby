@@ -10,7 +10,7 @@ NewMauville_Inside_MapScript1_15E56F:: @ 815E56F
 	compare 0x4002, 1
 	callif 1, NewMauville_Inside_EventScript_15E728
 	checkflag 2145
-	callif 1, NewMauville_Inside_EventScript_15E58F
+	callif FLAG_IS_SET, NewMauville_Inside_EventScript_15E58F
 	end
 
 NewMauville_Inside_EventScript_15E58F:: @ 815E58F

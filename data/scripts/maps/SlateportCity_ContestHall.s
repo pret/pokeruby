@@ -13,7 +13,7 @@ SlateportCity_ContestHall_EventScript_15555E:: @ 815555E
 	lock
 	faceplayer
 	checkflag 265
-	jumpif EQUAL, SlateportCity_ContestHall_EventScript_155595
+	jumpif FLAG_IS_SET, SlateportCity_ContestHall_EventScript_155595
 	msgbox SlateportCity_ContestHall_Text_17CCE2, 4
 	giveitem ITEM_TM41
 	compare RESULT, 0

@@ -272,7 +272,7 @@ Route109_EventScript_14F680:: @ 814F680
 	lock
 	faceplayer
 	checkflag 149
-	jumpif 0, Route109_EventScript_14F691
+	jumpif FLAG_NOT_SET, Route109_EventScript_14F691
 	jump Route109_EventScript_14F6AF
 	end
 
@@ -329,7 +329,7 @@ Route109_EventScript_14F725:: @ 814F725
 	faceplayer
 	special 148
 	checkflag 280
-	jumpif EQUAL, Route109_EventScript_14F762
+	jumpif FLAG_IS_SET, Route109_EventScript_14F762
 	msgbox Route109_Text_16E433, 4
 	giveitem ITEM_SOFT_SAND
 	compare RESULT, 0

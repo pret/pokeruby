@@ -5,7 +5,7 @@ FortreeCity_House1_EventScript_157E13:: @ 8157E13
 	lock
 	faceplayer
 	checkflag 155
-	jumpif EQUAL, FortreeCity_House1_EventScript_157EAD
+	jumpif FLAG_IS_SET, FortreeCity_House1_EventScript_157EAD
 	setvar 0x8008, 1
 	copyvar 0x8004, 0x8008
 	specialval RESULT, 252

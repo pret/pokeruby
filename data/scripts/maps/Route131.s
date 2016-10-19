@@ -4,7 +4,7 @@ Route131_MapScripts:: @ 815243E
 
 Route131_MapScript1_152444:: @ 8152444
 	checkflag 2052
-	callif 1, Route131_EventScript_15244E
+	callif FLAG_IS_SET, Route131_EventScript_15244E
 	end
 
 Route131_EventScript_15244E:: @ 815244E

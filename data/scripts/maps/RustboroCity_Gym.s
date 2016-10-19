@@ -4,7 +4,7 @@ RustboroCity_Gym_MapScripts:: @ 81578D8
 RustboroCity_Gym_EventScript_1578D9:: @ 81578D9
 	trainerbattle 1, OPPONENT_ROXANNE, 0, RustboroCity_Gym_Text_183EE5, RustboroCity_Gym_Text_183FC4, RustboroCity_Gym_EventScript_1578FE
 	checkflag 165
-	jumpif 0, RustboroCity_Gym_EventScript_15793C
+	jumpif FLAG_NOT_SET, RustboroCity_Gym_EventScript_15793C
 	msgbox RustboroCity_Gym_Text_184252, 4
 	release
 	end
@@ -48,7 +48,7 @@ RustboroCity_Gym_EventScript_15798E:: @ 815798E
 	lock
 	faceplayer
 	checkflag 1201
-	jumpif EQUAL, RustboroCity_Gym_EventScript_1579A3
+	jumpif FLAG_IS_SET, RustboroCity_Gym_EventScript_1579A3
 	msgbox RustboroCity_Gym_Text_183A4B, 4
 	release
 	end
@@ -61,14 +61,14 @@ RustboroCity_Gym_EventScript_1579A3:: @ 81579A3
 RustboroCity_Gym_EventScript_1579AD:: @ 81579AD
 	lockall
 	checkflag 2055
-	jumpif EQUAL, RustboroCity_Gym_EventScript_1579CD
+	jumpif FLAG_IS_SET, RustboroCity_Gym_EventScript_1579CD
 	jump RustboroCity_Gym_EventScript_1579D7
 	end
 
 RustboroCity_Gym_EventScript_1579BD:: @ 81579BD
 	lockall
 	checkflag 2055
-	jumpif EQUAL, RustboroCity_Gym_EventScript_1579CD
+	jumpif FLAG_IS_SET, RustboroCity_Gym_EventScript_1579CD
 	jump RustboroCity_Gym_EventScript_1579D7
 	end
 

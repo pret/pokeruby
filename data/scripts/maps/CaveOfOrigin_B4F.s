@@ -5,7 +5,7 @@ CaveOfOrigin_B4F_MapScripts:: @ 815DDAC
 
 CaveOfOrigin_B4F_MapScript1_15DDB7:: @ 815DDB7
 	checkflag 2145
-	callif 1, CaveOfOrigin_B4F_EventScript_15DDC1
+	callif FLAG_IS_SET, CaveOfOrigin_B4F_EventScript_15DDC1
 	end
 
 CaveOfOrigin_B4F_EventScript_15DDC1:: @ 815DDC1
@@ -20,7 +20,7 @@ CaveOfOrigin_B4F_MapScript1_15DDC5:: @ 815DDC5
 	.endif
 	call CaveOfOrigin_B4F_EventScript_1A01B5
 	checkflag 113
-	callif 1, CaveOfOrigin_B4F_EventScript_1A04E3
+	callif FLAG_IS_SET, CaveOfOrigin_B4F_EventScript_1A04E3
 	end
 
 CaveOfOrigin_B4F_EventScript_15DDD7:: @ 815DDD7

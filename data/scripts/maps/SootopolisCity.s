@@ -6,9 +6,9 @@ SootopolisCity_MapScripts:: @ 814D07D
 
 SootopolisCity_MapScript1_14D08D:: @ 814D08D
 	checkflag 129
-	callif 0, SootopolisCity_EventScript_14D0A0
+	callif FLAG_NOT_SET, SootopolisCity_EventScript_14D0A0
 	checkflag 129
-	callif 1, SootopolisCity_EventScript_14D0B1
+	callif FLAG_IS_SET, SootopolisCity_EventScript_14D0B1
 	end
 
 SootopolisCity_EventScript_14D0A0:: @ 814D0A0
@@ -18,7 +18,7 @@ SootopolisCity_EventScript_14D0A0:: @ 814D0A0
 
 SootopolisCity_EventScript_14D0B1:: @ 814D0B1
 	checkflag 113
-	callif 0, SootopolisCity_EventScript_14D0BB
+	callif FLAG_NOT_SET, SootopolisCity_EventScript_14D0BB
 	return
 
 SootopolisCity_EventScript_14D0BB:: @ 814D0BB
@@ -36,9 +36,9 @@ SootopolisCity_EventScript_14D0BB:: @ 814D0BB
 SootopolisCity_MapScript1_14D10D:: @ 814D10D
 	setflag 2077
 	checkflag 113
-	callif 1, SootopolisCity_EventScript_14D159
+	callif FLAG_IS_SET, SootopolisCity_EventScript_14D159
 	checkflag 2090
-	callif 1, SootopolisCity_EventScript_14D123
+	callif FLAG_IS_SET, SootopolisCity_EventScript_14D123
 	end
 
 SootopolisCity_EventScript_14D123:: @ 814D123
@@ -69,7 +69,7 @@ SootopolisCity_EventScript_14D16E:: @ 814D16E
 	lock
 	faceplayer
 	checkflag 113
-	jumpif EQUAL, SootopolisCity_EventScript_14D183
+	jumpif FLAG_IS_SET, SootopolisCity_EventScript_14D183
 	msgbox SootopolisCity_Text_1696A4, 4
 	release
 	end
@@ -93,7 +93,7 @@ SootopolisCity_EventScript_14D19F:: @ 814D19F
 	checkdailyflags
 	special 148
 	checkflag 2258
-	jumpif EQUAL, SootopolisCity_EventScript_14D241
+	jumpif FLAG_IS_SET, SootopolisCity_EventScript_14D241
 	msgbox SootopolisCity_Text_1C63F2, 4
 	random 10
 	addvar RESULT, 20
@@ -143,7 +143,7 @@ SootopolisCity_EventScript_14D268:: @ 814D268
 	lock
 	faceplayer
 	checkflag 1236
-	jumpif EQUAL, SootopolisCity_EventScript_14D27D
+	jumpif FLAG_IS_SET, SootopolisCity_EventScript_14D27D
 	msgbox SootopolisCity_Text_16A4D6, 4
 	release
 	end
@@ -157,7 +157,7 @@ SootopolisCity_EventScript_14D287:: @ 814D287
 	lock
 	faceplayer
 	checkflag 113
-	jumpif EQUAL, SootopolisCity_EventScript_14D29C
+	jumpif FLAG_IS_SET, SootopolisCity_EventScript_14D29C
 	msgbox SootopolisCity_Text_169813, 4
 	release
 	end
@@ -171,7 +171,7 @@ SootopolisCity_EventScript_14D2A6:: @ 814D2A6
 	lock
 	faceplayer
 	checkflag 113
-	jumpif EQUAL, SootopolisCity_EventScript_14D2BB
+	jumpif FLAG_IS_SET, SootopolisCity_EventScript_14D2BB
 	msgbox SootopolisCity_Text_1698A0, 4
 	release
 	end
@@ -185,7 +185,7 @@ SootopolisCity_EventScript_14D2C5:: @ 814D2C5
 	lock
 	faceplayer
 	checkflag 113
-	jumpif EQUAL, SootopolisCity_EventScript_14D2DA
+	jumpif FLAG_IS_SET, SootopolisCity_EventScript_14D2DA
 	msgbox SootopolisCity_Text_1697A7, 4
 	release
 	end
@@ -446,7 +446,7 @@ SootopolisCity_EventScript_14D498:: @ 814D498
 	lock
 	faceplayer
 	checkflag 113
-	jumpif EQUAL, SootopolisCity_EventScript_14D4AD
+	jumpif FLAG_IS_SET, SootopolisCity_EventScript_14D4AD
 	.ifdef SAPPHIRE
 	msgbox SootopolisCity_Text_169DA6, 4
 	.else

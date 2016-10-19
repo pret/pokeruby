@@ -399,7 +399,7 @@ EventScript_15F384:
 	message UnknownString_81A3A87
 	waittext
 	checkflag 268
-	jumpif EQUAL, EventScript_15F3A0
+	jumpif FLAG_IS_SET, EventScript_15F3A0
 	jump EventScript_15F3E2
 	end
 
@@ -1296,13 +1296,13 @@ EverGrandeCity_HallOfFame_EventScript_19FC13:: @ 819FC13
 	clearflag 861
 	special 169
 	checkflag 291
-	callif 0, EverGrandeCity_HallOfFame_EventScript_19FC62
+	callif FLAG_NOT_SET, EverGrandeCity_HallOfFame_EventScript_19FC62
 	checkflag 255
-	callif 0, EverGrandeCity_HallOfFame_EventScript_19FC70
+	callif FLAG_NOT_SET, EverGrandeCity_HallOfFame_EventScript_19FC70
 	checkflag 298
-	callif 0, EverGrandeCity_HallOfFame_EventScript_19FC5A
+	callif FLAG_NOT_SET, EverGrandeCity_HallOfFame_EventScript_19FC5A
 	checkflag 123
-	callif 0, EverGrandeCity_HallOfFame_EventScript_19FC5E
+	callif FLAG_NOT_SET, EverGrandeCity_HallOfFame_EventScript_19FC5E
 	return
 
 EverGrandeCity_HallOfFame_EventScript_19FC5A:: @ 819FC5A
@@ -1331,9 +1331,9 @@ gUnknown_0819FC74:: @ 819FC74
 
 EventScript_19FC84:
 	checkflag 221
-	jumpif EQUAL, Route101_EventScript_1A14DC
+	jumpif FLAG_IS_SET, Route101_EventScript_1A14DC
 	checkflag 1213
-	jumpif 0, Route101_EventScript_1A14DC
+	jumpif FLAG_NOT_SET, Route101_EventScript_1A14DC
 	clearflag 929
 	setvar 0x4053, 2
 	return
@@ -1397,15 +1397,15 @@ RustboroCity_PokemonCenter_1F_EventScript_19FD1B:: @ 819FD1B
 SlateportCity_PokemonCenter_1F_EventScript_19FD1B:: @ 819FD1B
 VerdanturfTown_PokemonCenter_1F_EventScript_19FD1B:: @ 819FD1B
 	checkflag 188
-	jumpif 0, OldaleTown_PokemonCenter_1F_EventScript_1A14DC
+	jumpif FLAG_NOT_SET, OldaleTown_PokemonCenter_1F_EventScript_1A14DC
 	checkflag 1217
-	jumpif EQUAL, OldaleTown_PokemonCenter_1F_EventScript_1A14DC
+	jumpif FLAG_IS_SET, OldaleTown_PokemonCenter_1F_EventScript_1A14DC
 	checkflag 742
-	jumpif 0, OldaleTown_PokemonCenter_1F_EventScript_19FD49
+	jumpif FLAG_NOT_SET, OldaleTown_PokemonCenter_1F_EventScript_19FD49
 	checkflag 740
-	jumpif 0, OldaleTown_PokemonCenter_1F_EventScript_19FD4F
+	jumpif FLAG_NOT_SET, OldaleTown_PokemonCenter_1F_EventScript_19FD4F
 	checkflag 741
-	jumpif 0, OldaleTown_PokemonCenter_1F_EventScript_19FD55
+	jumpif FLAG_NOT_SET, OldaleTown_PokemonCenter_1F_EventScript_19FD55
 	return
 
 OldaleTown_PokemonCenter_1F_EventScript_19FD49:: @ 819FD49
@@ -1455,7 +1455,7 @@ OldaleTown_PokemonCenter_1F_EventScript_19FD7C:: @ 819FD7C
 	waitmove 0
 	special 0
 	checkflag 273
-	jumpif 0, OldaleTown_PokemonCenter_1F_EventScript_19FDCE
+	jumpif FLAG_NOT_SET, OldaleTown_PokemonCenter_1F_EventScript_19FDCE
 	jump OldaleTown_PokemonCenter_1F_EventScript_19FDB0
 	end
 
@@ -1712,9 +1712,9 @@ EventScript_1A0070:
 EventScript_1A0085:
 	playsfx 2
 	checkflag 2123
-	callif 0, EventScript_1A00AC
+	callif FLAG_NOT_SET, EventScript_1A00AC
 	checkflag 2123
-	callif 1, EventScript_1A00B5
+	callif FLAG_IS_SET, EventScript_1A00B5
 	msgbox UnknownString_81A0A35, 4
 	special 60
 	waitstate
@@ -1738,7 +1738,7 @@ EventScript_1A00BE:
 
 EventScript_1A00CB:
 	checkflag 2052
-	jumpif 0, EventScript_1A00BE
+	jumpif FLAG_NOT_SET, EventScript_1A00BE
 	playsfx 2
 	special 263
 	waitstate
@@ -3939,7 +3939,7 @@ SecretBase_YellowCave4_EventScript_1A2FC0:: @ 81A2FC0
 
 SecretBase_RedCave1_EventScript_1A3032:: @ 81A3032
 	checkflag 2052
-	jumpif 0, SecretBase_RedCave1_EventScript_1A3086
+	jumpif FLAG_NOT_SET, SecretBase_RedCave1_EventScript_1A3086
 	compare RESULT, 1
 	jumpif EQUAL, SecretBase_RedCave1_EventScript_1A30A5
 	lock
@@ -3974,7 +3974,7 @@ SecretBase_RedCave1_EventScript_1A30A5:: @ 81A30A5
 
 SecretBase_RedCave1_EventScript_1A30AE:: @ 81A30AE
 	checkflag 2052
-	jumpif 0, SecretBase_RedCave1_EventScript_1A3102
+	jumpif FLAG_NOT_SET, SecretBase_RedCave1_EventScript_1A3102
 	compare RESULT, 1
 	jumpif EQUAL, SecretBase_RedCave1_EventScript_1A3121
 	lock
@@ -4009,7 +4009,7 @@ SecretBase_RedCave1_EventScript_1A3121:: @ 81A3121
 
 SecretBase_RedCave1_EventScript_1A312A:: @ 81A312A
 	checkflag 2052
-	jumpif 0, SecretBase_RedCave1_EventScript_1A317E
+	jumpif FLAG_NOT_SET, SecretBase_RedCave1_EventScript_1A317E
 	compare RESULT, 1
 	jumpif EQUAL, SecretBase_RedCave1_EventScript_1A319D
 	lock
@@ -4044,7 +4044,7 @@ SecretBase_RedCave1_EventScript_1A319D:: @ 81A319D
 
 SecretBase_RedCave1_EventScript_1A31A6:: @ 81A31A6
 	checkflag 2052
-	jumpif 0, SecretBase_RedCave1_EventScript_1A31FA
+	jumpif FLAG_NOT_SET, SecretBase_RedCave1_EventScript_1A31FA
 	compare RESULT, 1
 	jumpif EQUAL, SecretBase_RedCave1_EventScript_1A3219
 	lock
@@ -4079,7 +4079,7 @@ SecretBase_RedCave1_EventScript_1A3219:: @ 81A3219
 
 SecretBase_RedCave1_EventScript_1A3222:: @ 81A3222
 	checkflag 2052
-	jumpif 0, SecretBase_RedCave1_EventScript_1A3276
+	jumpif FLAG_NOT_SET, SecretBase_RedCave1_EventScript_1A3276
 	compare RESULT, 1
 	jumpif EQUAL, SecretBase_RedCave1_EventScript_1A3295
 	lock
@@ -4114,7 +4114,7 @@ SecretBase_RedCave1_EventScript_1A3295:: @ 81A3295
 
 SecretBase_RedCave1_EventScript_1A329E:: @ 81A329E
 	checkflag 2052
-	jumpif 0, SecretBase_RedCave1_EventScript_1A32F2
+	jumpif FLAG_NOT_SET, SecretBase_RedCave1_EventScript_1A32F2
 	compare RESULT, 1
 	jumpif EQUAL, SecretBase_RedCave1_EventScript_1A3311
 	lock
@@ -4149,7 +4149,7 @@ SecretBase_RedCave1_EventScript_1A3311:: @ 81A3311
 
 SecretBase_RedCave1_EventScript_1A331A:: @ 81A331A
 	checkflag 2052
-	jumpif 0, SecretBase_RedCave1_EventScript_1A336E
+	jumpif FLAG_NOT_SET, SecretBase_RedCave1_EventScript_1A336E
 	compare RESULT, 1
 	jumpif EQUAL, SecretBase_RedCave1_EventScript_1A338D
 	lock
@@ -4184,7 +4184,7 @@ SecretBase_RedCave1_EventScript_1A338D:: @ 81A338D
 
 SecretBase_RedCave1_EventScript_1A3396:: @ 81A3396
 	checkflag 2052
-	jumpif 0, SecretBase_RedCave1_EventScript_1A33EA
+	jumpif FLAG_NOT_SET, SecretBase_RedCave1_EventScript_1A33EA
 	compare RESULT, 1
 	jumpif EQUAL, SecretBase_RedCave1_EventScript_1A3409
 	lock
@@ -4219,7 +4219,7 @@ SecretBase_RedCave1_EventScript_1A3409:: @ 81A3409
 
 SecretBase_RedCave1_EventScript_1A3412:: @ 81A3412
 	checkflag 2052
-	jumpif 0, SecretBase_RedCave1_EventScript_1A3466
+	jumpif FLAG_NOT_SET, SecretBase_RedCave1_EventScript_1A3466
 	compare RESULT, 1
 	jumpif EQUAL, SecretBase_RedCave1_EventScript_1A3485
 	lock
@@ -4254,7 +4254,7 @@ SecretBase_RedCave1_EventScript_1A3485:: @ 81A3485
 
 SecretBase_RedCave1_EventScript_1A348E:: @ 81A348E
 	checkflag 2052
-	jumpif 0, SecretBase_RedCave1_EventScript_1A34E2
+	jumpif FLAG_NOT_SET, SecretBase_RedCave1_EventScript_1A34E2
 	compare RESULT, 1
 	jumpif EQUAL, SecretBase_RedCave1_EventScript_1A3501
 	lock
@@ -4435,7 +4435,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_1ADEE0:: @ 81ADEE0
 	jumpif EQUAL, SlateportCity_OceanicMuseum_1F_EventScript_1ADF96
 	copyvar 0x8009, 0x8006
 	checkflag 105
-	jumpif EQUAL, SlateportCity_OceanicMuseum_1F_EventScript_1ADF25
+	jumpif FLAG_IS_SET, SlateportCity_OceanicMuseum_1F_EventScript_1ADF25
 	setflag 105
 	msgbox SlateportCity_OceanicMuseum_1F_Text_1A927F, 5
 	compare RESULT, 1
@@ -4564,7 +4564,7 @@ VerdanturfTown_ContestLobby_EventScript_1AE0B6:: @ 81AE0B6
 	lock
 	faceplayer
 	checkflag 2
-	jumpif EQUAL, FallarborTown_ContestLobby_EventScript_1AE17E
+	jumpif FLAG_IS_SET, FallarborTown_ContestLobby_EventScript_1AE17E
 	setvar 0x8005, 6
 	special 67
 	compare RESULT, 1
@@ -4661,7 +4661,7 @@ BattleTower_Lobby_EventScript_1AE1FF:: @ 81AE1FF
 	lock
 	faceplayer
 	checkflag 2
-	jumpif EQUAL, BattleTower_Lobby_EventScript_1AE2E3
+	jumpif FLAG_IS_SET, BattleTower_Lobby_EventScript_1AE2E3
 	setvar 0x8005, 7
 	special 67
 	compare RESULT, 1

@@ -5,7 +5,7 @@ MauvilleCity_House2_EventScript_1572C0:: @ 81572C0
 	lock
 	faceplayer
 	checkflag 258
-	jumpif EQUAL, MauvilleCity_House2_EventScript_15733D
+	jumpif FLAG_IS_SET, MauvilleCity_House2_EventScript_15733D
 	msgbox MauvilleCity_House2_Text_18244E, 4
 	checkitem ITEM_HARBOR_MAIL, 1
 	compare RESULT, 1

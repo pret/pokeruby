@@ -125,7 +125,7 @@ SSTidalCorridor_EventScript_15FDF8:: @ 815FDF8
 	sethealplace 8
 	msgbox SSTidalCorridor_Text_1991F4, 4
 	checkflag 260
-	callif 1, SSTidalCorridor_EventScript_15FE36
+	callif FLAG_IS_SET, SSTidalCorridor_EventScript_15FE36
 	warp LilycoveCity_Harbor, 255, 8, 11
 	waitstate
 	release
@@ -135,7 +135,7 @@ SSTidalCorridor_EventScript_15FE17:: @ 815FE17
 	sethealplace 4
 	msgbox SSTidalCorridor_Text_1991F4, 4
 	checkflag 260
-	callif 1, SSTidalCorridor_EventScript_15FE36
+	callif FLAG_IS_SET, SSTidalCorridor_EventScript_15FE36
 	warp SlateportCity_Harbor, 255, 8, 11
 	waitstate
 	release
@@ -164,7 +164,7 @@ SSTidalCorridor_EventScript_15FE60:: @ 815FE60
 	lock
 	faceplayer
 	checkflag 247
-	jumpif EQUAL, SSTidalCorridor_EventScript_15FE7A
+	jumpif FLAG_IS_SET, SSTidalCorridor_EventScript_15FE7A
 	call SSTidalCorridor_EventScript_15FE84
 	msgbox SSTidalCorridor_Text_199203, 4
 	release
@@ -177,21 +177,21 @@ SSTidalCorridor_EventScript_15FE7A:: @ 815FE7A
 
 SSTidalCorridor_EventScript_15FE84:: @ 815FE84
 	checktrainerflag OPPONENT_PHILLIP
-	jumpif 0, SSTidalCorridor_EventScript_15FED5
+	jumpif FLAG_NOT_SET, SSTidalCorridor_EventScript_15FED5
 	checktrainerflag OPPONENT_LEONARD
-	jumpif 0, SSTidalCorridor_EventScript_15FED5
+	jumpif FLAG_NOT_SET, SSTidalCorridor_EventScript_15FED5
 	checktrainerflag OPPONENT_COLTON
-	jumpif 0, SSTidalCorridor_EventScript_15FED5
+	jumpif FLAG_NOT_SET, SSTidalCorridor_EventScript_15FED5
 	checktrainerflag OPPONENT_TUCKER
-	jumpif 0, SSTidalCorridor_EventScript_15FED5
+	jumpif FLAG_NOT_SET, SSTidalCorridor_EventScript_15FED5
 	checktrainerflag OPPONENT_THOMAS
-	jumpif 0, SSTidalCorridor_EventScript_15FED5
+	jumpif FLAG_NOT_SET, SSTidalCorridor_EventScript_15FED5
 	checktrainerflag OPPONENT_LEA_AND_JED
-	jumpif 0, SSTidalCorridor_EventScript_15FED5
+	jumpif FLAG_NOT_SET, SSTidalCorridor_EventScript_15FED5
 	checktrainerflag OPPONENT_GARRET
-	jumpif 0, SSTidalCorridor_EventScript_15FED5
+	jumpif FLAG_NOT_SET, SSTidalCorridor_EventScript_15FED5
 	checktrainerflag OPPONENT_ANETTE
-	jumpif 0, SSTidalCorridor_EventScript_15FED5
+	jumpif FLAG_NOT_SET, SSTidalCorridor_EventScript_15FED5
 	setflag 247
 	jump SSTidalCorridor_EventScript_15FE7A
 	return

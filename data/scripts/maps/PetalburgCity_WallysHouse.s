@@ -5,13 +5,13 @@ PetalburgCity_WallysHouse_EventScript_1543C4:: @ 81543C4
 	lock
 	faceplayer
 	checkflag 126
-	jumpif EQUAL, PetalburgCity_WallysHouse_EventScript_1543F7
+	jumpif FLAG_IS_SET, PetalburgCity_WallysHouse_EventScript_1543F7
 	checkflag 122
-	jumpif EQUAL, PetalburgCity_WallysHouse_EventScript_154427
+	jumpif FLAG_IS_SET, PetalburgCity_WallysHouse_EventScript_154427
 	checkflag 1217
-	jumpif EQUAL, PetalburgCity_WallysHouse_EventScript_154406
+	jumpif FLAG_IS_SET, PetalburgCity_WallysHouse_EventScript_154406
 	checkflag 135
-	jumpif EQUAL, PetalburgCity_WallysHouse_EventScript_15443B
+	jumpif FLAG_IS_SET, PetalburgCity_WallysHouse_EventScript_15443B
 	msgbox PetalburgCity_WallysHouse_Text_179805, 4
 	setflag 135
 	release
@@ -19,7 +19,7 @@ PetalburgCity_WallysHouse_EventScript_1543C4:: @ 81543C4
 
 PetalburgCity_WallysHouse_EventScript_1543F7:: @ 81543F7
 	checkflag 122
-	jumpif EQUAL, PetalburgCity_WallysHouse_EventScript_154431
+	jumpif FLAG_IS_SET, PetalburgCity_WallysHouse_EventScript_154431
 	jump PetalburgCity_WallysHouse_EventScript_154406
 	end
 
@@ -50,9 +50,9 @@ PetalburgCity_WallysHouse_EventScript_154445:: @ 8154445
 	lock
 	faceplayer
 	checkflag 122
-	jumpif EQUAL, PetalburgCity_WallysHouse_EventScript_15446D
+	jumpif FLAG_IS_SET, PetalburgCity_WallysHouse_EventScript_15446D
 	checkflag 1217
-	jumpif EQUAL, PetalburgCity_WallysHouse_EventScript_154463
+	jumpif FLAG_IS_SET, PetalburgCity_WallysHouse_EventScript_154463
 	msgbox PetalburgCity_WallysHouse_Text_179C2C, 4
 	release
 	end

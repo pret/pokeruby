@@ -242,7 +242,7 @@ PetalburgWoods_EventScript_15CEDC:: @ 815CEDC
 	lock
 	faceplayer
 	checkflag 297
-	jumpif EQUAL, PetalburgWoods_EventScript_15CF0B
+	jumpif FLAG_IS_SET, PetalburgWoods_EventScript_15CF0B
 	msgbox PetalburgWoods_Text_19549E, 4
 	giveitem ITEM_MIRACLE_SEED
 	compare RESULT, 0

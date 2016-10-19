@@ -147,9 +147,9 @@ RustboroCity_DevonCorp_3F_EventScript_15783B:: @ 815783B
 	lock
 	faceplayer
 	checkflag 272
-	jumpif EQUAL, RustboroCity_DevonCorp_3F_EventScript_15789B
+	jumpif FLAG_IS_SET, RustboroCity_DevonCorp_3F_EventScript_15789B
 	checkflag 189
-	jumpif EQUAL, RustboroCity_DevonCorp_3F_EventScript_157864
+	jumpif FLAG_IS_SET, RustboroCity_DevonCorp_3F_EventScript_157864
 	msgbox RustboroCity_DevonCorp_3F_Text_18351E, 4
 	closebutton
 	move LAST_TALKED, RustboroCity_DevonCorp_3F_Movement_1A083D
@@ -182,7 +182,7 @@ RustboroCity_DevonCorp_3F_EventScript_1578B0:: @ 81578B0
 	lock
 	faceplayer
 	checkflag 256
-	jumpif EQUAL, RustboroCity_DevonCorp_3F_EventScript_1578C5
+	jumpif FLAG_IS_SET, RustboroCity_DevonCorp_3F_EventScript_1578C5
 	msgbox RustboroCity_DevonCorp_3F_Text_18395C, 4
 	release
 	end

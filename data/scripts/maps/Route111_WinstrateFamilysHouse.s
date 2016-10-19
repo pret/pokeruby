@@ -14,7 +14,7 @@ Route111_WinstrateFamilysHouse_EventScript_15BF3A:: @ 815BF3A
 	faceplayer
 	setvar 0x8008, 3
 	checkflag 277
-	jumpif EQUAL, Route111_WinstrateFamilysHouse_EventScript_15BF72
+	jumpif FLAG_IS_SET, Route111_WinstrateFamilysHouse_EventScript_15BF72
 	msgbox Route111_WinstrateFamilysHouse_Text_19208A, 4
 	giveitem ITEM_MACHO_BRACE
 	compare RESULT, 0
@@ -41,7 +41,7 @@ Route111_WinstrateFamilysHouse_EventScript_15BF95:: @ 815BF95
 	faceplayer
 	setvar 0x8008, 4
 	checkflag 4
-	jumpif EQUAL, Route111_WinstrateFamilysHouse_EventScript_15BFB6
+	jumpif FLAG_IS_SET, Route111_WinstrateFamilysHouse_EventScript_15BFB6
 	msgbox Route111_WinstrateFamilysHouse_Text_192219, 4
 	setflag 4
 	jump Route111_WinstrateFamilysHouse_EventScript_15BFC4

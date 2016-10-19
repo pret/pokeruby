@@ -12,7 +12,7 @@ LilycoveCity_DepartmentStore_1F_EventScript_159D5E:: @ 8159D5E
 	compare 0x4045, 0
 	jumpif 5, LilycoveCity_DepartmentStore_1F_EventScript_159EB1
 	checkflag 2250
-	jumpif EQUAL, LilycoveCity_DepartmentStore_1F_EventScript_159E4C
+	jumpif FLAG_IS_SET, LilycoveCity_DepartmentStore_1F_EventScript_159E4C
 	msgbox LilycoveCity_DepartmentStore_1F_Text_1C4B5E, 5
 	compare RESULT, 0
 	jumpif EQUAL, LilycoveCity_DepartmentStore_1F_EventScript_159E56

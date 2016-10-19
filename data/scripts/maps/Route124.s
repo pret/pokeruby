@@ -4,7 +4,7 @@ Route124_MapScripts:: @ 8151DDF
 
 Route124_MapScript1_151DE5:: @ 8151DE5
 	checkflag 2090
-	callif 1, Route124_EventScript_1A02C1
+	callif FLAG_IS_SET, Route124_EventScript_1A02C1
 	end
 
 Route124_EventScript_151DEF:: @ 8151DEF

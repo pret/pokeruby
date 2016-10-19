@@ -6,7 +6,7 @@ IslandCave_MapScripts:: @ 815EEB6
 
 IslandCave_MapScript1_15EEC6:: @ 815EEC6
 	checkflag 2145
-	callif 1, IslandCave_EventScript_15EED0
+	callif FLAG_IS_SET, IslandCave_EventScript_15EED0
 	end
 
 IslandCave_EventScript_15EED0:: @ 815EED0
@@ -15,7 +15,7 @@ IslandCave_EventScript_15EED0:: @ 815EED0
 
 IslandCave_MapScript1_15EED4:: @ 815EED4
 	checkflag 2129
-	callif 0, IslandCave_EventScript_15EEDE
+	callif FLAG_NOT_SET, IslandCave_EventScript_15EEDE
 	end
 
 IslandCave_EventScript_15EEDE:: @ 815EEDE
@@ -46,7 +46,7 @@ gUnknown_0815EF19:: @ 815EF19
 IslandCave_EventScript_15EF59:: @ 815EF59
 	lockall
 	checkflag 2129
-	jumpif EQUAL, IslandCave_EventScript_15EF72
+	jumpif FLAG_IS_SET, IslandCave_EventScript_15EF72
 	braillemsg IslandCave_Braille_1C54FC
 	special 280
 	waitstate
@@ -62,7 +62,7 @@ IslandCave_EventScript_15EF7C:: @ 815EF7C
 	lockall
 	braillemsg IslandCave_Braille_1C54FC
 	checkflag 2129
-	jumpif EQUAL, IslandCave_EventScript_15EF95
+	jumpif FLAG_IS_SET, IslandCave_EventScript_15EF95
 	special 280
 	waitstate
 	jump IslandCave_EventScript_15EF95

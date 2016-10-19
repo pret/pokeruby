@@ -82,17 +82,17 @@ DewfordTown_Gym_EventScript_153117:: @ 8153117
 DewfordTown_Gym_EventScript_153122:: @ 8153122
 	setvar 0x8000, 0
 	checktrainerflag OPPONENT_HIDEKI
-	jumpif 0, DewfordTown_Gym_EventScript_153135
+	jumpif FLAG_NOT_SET, DewfordTown_Gym_EventScript_153135
 	addvar 0x8000, 1
 
 DewfordTown_Gym_EventScript_153135:: @ 8153135
 	checktrainerflag OPPONENT_TESSA
-	jumpif 0, DewfordTown_Gym_EventScript_153143
+	jumpif FLAG_NOT_SET, DewfordTown_Gym_EventScript_153143
 	addvar 0x8000, 1
 
 DewfordTown_Gym_EventScript_153143:: @ 8153143
 	checktrainerflag OPPONENT_LAURA
-	jumpif 0, DewfordTown_Gym_EventScript_153151
+	jumpif FLAG_NOT_SET, DewfordTown_Gym_EventScript_153151
 	addvar 0x8000, 1
 
 DewfordTown_Gym_EventScript_153151:: @ 8153151
@@ -101,7 +101,7 @@ DewfordTown_Gym_EventScript_153151:: @ 8153151
 DewfordTown_Gym_EventScript_153152:: @ 8153152
 	trainerbattle 1, OPPONENT_BRAWLY, 0, DewfordTown_Gym_Text_175182, DewfordTown_Gym_Text_175246, DewfordTown_Gym_EventScript_153177
 	checkflag 166
-	jumpif 0, DewfordTown_Gym_EventScript_1531B5
+	jumpif FLAG_NOT_SET, DewfordTown_Gym_EventScript_1531B5
 	msgbox DewfordTown_Gym_Text_175412, 4
 	release
 	end
@@ -165,7 +165,7 @@ DewfordTown_Gym_EventScript_15323F:: @ 815323F
 	lock
 	faceplayer
 	checkflag 1204
-	jumpif EQUAL, DewfordTown_Gym_EventScript_153254
+	jumpif FLAG_IS_SET, DewfordTown_Gym_EventScript_153254
 	msgbox DewfordTown_Gym_Text_174D98, 4
 	release
 	end
@@ -178,14 +178,14 @@ DewfordTown_Gym_EventScript_153254:: @ 8153254
 DewfordTown_Gym_EventScript_15325E:: @ 815325E
 	lockall
 	checkflag 2056
-	jumpif EQUAL, DewfordTown_Gym_EventScript_15327E
+	jumpif FLAG_IS_SET, DewfordTown_Gym_EventScript_15327E
 	jump DewfordTown_Gym_EventScript_153288
 	end
 
 DewfordTown_Gym_EventScript_15326E:: @ 815326E
 	lockall
 	checkflag 2056
-	jumpif EQUAL, DewfordTown_Gym_EventScript_15327E
+	jumpif FLAG_IS_SET, DewfordTown_Gym_EventScript_15327E
 	jump DewfordTown_Gym_EventScript_153288
 	end
 

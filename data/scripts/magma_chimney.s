@@ -2,9 +2,9 @@ MtChimney_EventScript_1B2C95:: @ 81B2C95
 	lock
 	faceplayer
 	checkflag 219
-	callif 0, MtChimney_EventScript_1B2CB9
+	callif FLAG_NOT_SET, MtChimney_EventScript_1B2CB9
 	checkflag 219
-	callif 1, MtChimney_EventScript_1B2CC2
+	callif FLAG_IS_SET, MtChimney_EventScript_1B2CC2
 	closebutton
 	move 1, MtChimney_Movement_1A083D
 	waitmove 0

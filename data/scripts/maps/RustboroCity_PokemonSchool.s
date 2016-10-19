@@ -78,7 +78,7 @@ RustboroCity_PokemonSchool_EventScript_157ACE:: @ 8157ACE
 	lock
 	faceplayer
 	checkflag 275
-	jumpif EQUAL, RustboroCity_PokemonSchool_EventScript_157B34
+	jumpif FLAG_IS_SET, RustboroCity_PokemonSchool_EventScript_157B34
 	compare FACING, 4
 	callif 1, RustboroCity_PokemonSchool_EventScript_157B1E
 	compare FACING, 3

@@ -8,11 +8,11 @@ FortreeCity_House4_EventScript_15817F:: @ 815817F
 FortreeCity_House4_EventScript_158188:: @ 8158188
 	lockall
 	checkflag 223
-	jumpif EQUAL, FortreeCity_House4_EventScript_158204
+	jumpif FLAG_IS_SET, FortreeCity_House4_EventScript_158204
 	checkflag 224
-	jumpif EQUAL, FortreeCity_House4_EventScript_1581D6
+	jumpif FLAG_IS_SET, FortreeCity_House4_EventScript_1581D6
 	checkflag 222
-	jumpif EQUAL, FortreeCity_House4_EventScript_1581C2
+	jumpif FLAG_IS_SET, FortreeCity_House4_EventScript_1581C2
 	msgbox FortreeCity_House4_Text_186835, 4
 	closebutton
 	setflag 222

@@ -17,7 +17,7 @@ LilycoveCity_Harbor_EventScript_1598A2:: @ 81598A2
 
 LilycoveCity_Harbor_EventScript_1598BA:: @ 81598BA
 	checkflag 2052
-	jumpif EQUAL, LilycoveCity_Harbor_EventScript_1598CD
+	jumpif FLAG_IS_SET, LilycoveCity_Harbor_EventScript_1598CD
 	msgbox LilycoveCity_Harbor_Text_18B306, 4
 	release
 	end
@@ -107,11 +107,11 @@ LilycoveCity_Harbor_EventScript_1599E4:: @ 81599E4
 
 LilycoveCity_Harbor_EventScript_1599EE:: @ 81599EE
 	checkflag 2052
-	jumpif 0, LilycoveCity_Harbor_EventScript_1598BA
+	jumpif FLAG_NOT_SET, LilycoveCity_Harbor_EventScript_1598BA
 	checkflag 206
-	jumpif EQUAL, LilycoveCity_Harbor_EventScript_1598BA
+	jumpif FLAG_IS_SET, LilycoveCity_Harbor_EventScript_1598BA
 	checkflag 2131
-	jumpif 0, LilycoveCity_Harbor_EventScript_1598BA
+	jumpif FLAG_NOT_SET, LilycoveCity_Harbor_EventScript_1598BA
 	msgbox LilycoveCity_Harbor_Text_1C50F2, 4
 	closebutton
 	move LAST_TALKED, LilycoveCity_Harbor_Movement_1A0841
@@ -160,7 +160,7 @@ LilycoveCity_Harbor_EventScript_159A8D:: @ 8159A8D
 	lock
 	faceplayer
 	checkflag 2052
-	jumpif EQUAL, LilycoveCity_Harbor_EventScript_159AA2
+	jumpif FLAG_IS_SET, LilycoveCity_Harbor_EventScript_159AA2
 	msgbox LilycoveCity_Harbor_Text_18B504, 4
 	release
 	end

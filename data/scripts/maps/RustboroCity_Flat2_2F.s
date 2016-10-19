@@ -9,7 +9,7 @@ RustboroCity_Flat2_2F_EventScript_157DA0:: @ 8157DA0
 	lock
 	faceplayer
 	checkflag 213
-	jumpif EQUAL, RustboroCity_Flat2_2F_EventScript_157DCF
+	jumpif FLAG_IS_SET, RustboroCity_Flat2_2F_EventScript_157DCF
 	msgbox RustboroCity_Flat2_2F_Text_185461, 4
 	giveitem ITEM_PREMIER_BALL
 	compare RESULT, 0

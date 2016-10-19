@@ -8,7 +8,7 @@ LittlerootTown_MapScript1_14D514:: @ 814D514
 	compare 0x4092, 2
 	callif 1, LittlerootTown_EventScript_14D57B
 	checkflag 82
-	callif 0, LittlerootTown_EventScript_14D583
+	callif FLAG_NOT_SET, LittlerootTown_EventScript_14D583
 	compare 0x4050, 3
 	callif 1, LittlerootTown_EventScript_14D5A6
 	compare 0x4082, 4
@@ -188,9 +188,9 @@ LittlerootTown_EventScript_14D6DF:: @ 814D6DF
 	lock
 	faceplayer
 	checkflag 116
-	jumpif EQUAL, LittlerootTown_EventScript_14D72F
+	jumpif FLAG_IS_SET, LittlerootTown_EventScript_14D72F
 	checkflag 82
-	jumpif EQUAL, LittlerootTown_EventScript_14D722
+	jumpif FLAG_IS_SET, LittlerootTown_EventScript_14D722
 	compare 0x4050, 0
 	jumpif 5, LittlerootTown_EventScript_14D708
 	msgbox LittlerootTown_Text_16ACEB, 4

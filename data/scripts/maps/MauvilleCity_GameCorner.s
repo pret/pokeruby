@@ -390,7 +390,7 @@ MauvilleCity_GameCorner_EventScript_156F96:: @ 8156F96
 	lock
 	faceplayer
 	checkflag 226
-	jumpif EQUAL, MauvilleCity_GameCorner_EventScript_157072
+	jumpif FLAG_IS_SET, MauvilleCity_GameCorner_EventScript_157072
 	msgbox MauvilleCity_GameCorner_Text_181F3D, 5
 	compare RESULT, 0
 	jumpif EQUAL, MauvilleCity_GameCorner_EventScript_157068
@@ -461,7 +461,7 @@ MauvilleCity_GameCorner_EventScript_15707C:: @ 815707C
 
 MauvilleCity_GameCorner_EventScript_15709C:: @ 815709C
 	checkflag 225
-	jumpif EQUAL, MauvilleCity_GameCorner_EventScript_1570CA
+	jumpif FLAG_IS_SET, MauvilleCity_GameCorner_EventScript_1570CA
 	checkcoins 16385
 	compare 0x4001, 1
 	jumpif 4, MauvilleCity_GameCorner_EventScript_1570CA

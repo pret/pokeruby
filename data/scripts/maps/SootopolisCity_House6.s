@@ -5,7 +5,7 @@ SootopolisCity_House6_EventScript_15B386:: @ 815B386
 	lock
 	faceplayer
 	checkflag 245
-	jumpif EQUAL, SootopolisCity_House6_EventScript_15B3CD
+	jumpif FLAG_IS_SET, SootopolisCity_House6_EventScript_15B3CD
 	msgbox SootopolisCity_House6_Text_18FEA1, 5
 	compare RESULT, 0
 	callif 1, SootopolisCity_House6_EventScript_15B3C3

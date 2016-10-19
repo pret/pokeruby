@@ -4,7 +4,7 @@ Route116_MapScripts:: @ 8150A31
 
 Route116_MapScript1_150A37:: @ 8150A37
 	checkflag 143
-	callif 1, Route116_EventScript_150A41
+	callif FLAG_IS_SET, Route116_EventScript_150A41
 	end
 
 Route116_EventScript_150A41:: @ 8150A41
@@ -15,9 +15,9 @@ Route116_EventScript_150A49:: @ 8150A49
 	lock
 	faceplayer
 	checkflag 143
-	jumpif EQUAL, Route116_EventScript_150A67
+	jumpif FLAG_IS_SET, Route116_EventScript_150A67
 	checkflag 142
-	jumpif EQUAL, Route116_EventScript_150A71
+	jumpif FLAG_IS_SET, Route116_EventScript_150A71
 	msgbox Route116_Text_1703CF, 4
 	release
 	end
@@ -36,7 +36,7 @@ Route116_EventScript_150A7B:: @ 8150A7B
 	lock
 	faceplayer
 	checkflag 287
-	jumpif EQUAL, Route116_EventScript_150B04
+	jumpif FLAG_IS_SET, Route116_EventScript_150B04
 	msgbox Route116_Text_1705AE, 4
 	jump Route116_EventScript_150A94
 	end

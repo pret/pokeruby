@@ -12,7 +12,7 @@ RustboroCity_EventScript_14C386:: @ 814C386
 	lock
 	faceplayer
 	checkflag 142
-	jumpif EQUAL, RustboroCity_EventScript_14C39B
+	jumpif FLAG_IS_SET, RustboroCity_EventScript_14C39B
 	msgbox RustboroCity_Text_16689D, 4
 	release
 	end
@@ -37,7 +37,7 @@ RustboroCity_EventScript_14C3BA:: @ 814C3BA
 	lock
 	faceplayer
 	checkflag 2055
-	jumpif EQUAL, RustboroCity_EventScript_14C3CF
+	jumpif FLAG_IS_SET, RustboroCity_EventScript_14C3CF
 	msgbox RustboroCity_Text_16696D, 4
 	release
 	end
@@ -51,7 +51,7 @@ RustboroCity_EventScript_14C3D9:: @ 814C3D9
 	lock
 	faceplayer
 	checkflag 188
-	jumpif EQUAL, RustboroCity_EventScript_14C3EE
+	jumpif FLAG_IS_SET, RustboroCity_EventScript_14C3EE
 	msgbox RustboroCity_Text_166B86, 4
 	release
 	end
@@ -327,7 +327,7 @@ RustboroCity_EventScript_14C5FF:: @ 814C5FF
 	lock
 	faceplayer
 	checkflag 143
-	jumpif EQUAL, RustboroCity_EventScript_14C614
+	jumpif FLAG_IS_SET, RustboroCity_EventScript_14C614
 	msgbox RustboroCity_Text_166F6B, 4
 	release
 	end
@@ -550,7 +550,7 @@ RustboroCity_EventScript_14C8DA:: @ 814C8DA
 	lock
 	faceplayer
 	checkflag 288
-	jumpif EQUAL, RustboroCity_EventScript_14C917
+	jumpif FLAG_IS_SET, RustboroCity_EventScript_14C917
 	checkgender
 	compare RESULT, 0
 	jumpif EQUAL, RustboroCity_EventScript_14C8FD

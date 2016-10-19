@@ -24,15 +24,15 @@ SlateportCity_PokemonFanClub_EventScript_155795:: @ 8155795
 SlateportCity_PokemonFanClub_EventScript_1557A8:: @ 81557A8
 	setvar 0x4002, 0
 	checkflag 204
-	callif 1, SlateportCity_PokemonFanClub_EventScript_155893
+	callif FLAG_IS_SET, SlateportCity_PokemonFanClub_EventScript_155893
 	checkflag 203
-	callif 1, SlateportCity_PokemonFanClub_EventScript_155893
+	callif FLAG_IS_SET, SlateportCity_PokemonFanClub_EventScript_155893
 	checkflag 202
-	callif 1, SlateportCity_PokemonFanClub_EventScript_155893
+	callif FLAG_IS_SET, SlateportCity_PokemonFanClub_EventScript_155893
 	checkflag 201
-	callif 1, SlateportCity_PokemonFanClub_EventScript_155893
+	callif FLAG_IS_SET, SlateportCity_PokemonFanClub_EventScript_155893
 	checkflag 200
-	callif 1, SlateportCity_PokemonFanClub_EventScript_155893
+	callif FLAG_IS_SET, SlateportCity_PokemonFanClub_EventScript_155893
 	compare 0x4002, 5
 	callif 1, SlateportCity_PokemonFanClub_EventScript_15588D
 	compare 0x40b7, 2
@@ -50,15 +50,15 @@ SlateportCity_PokemonFanClub_EventScript_155808:: @ 8155808
 	msgbox SlateportCity_PokemonFanClub_Text_17DA49, 4
 	setvar 0x4001, 0
 	checkflag 204
-	callif 0, SlateportCity_PokemonFanClub_EventScript_1559FE
+	callif FLAG_NOT_SET, SlateportCity_PokemonFanClub_EventScript_1559FE
 	checkflag 203
-	callif 0, SlateportCity_PokemonFanClub_EventScript_1559E7
+	callif FLAG_NOT_SET, SlateportCity_PokemonFanClub_EventScript_1559E7
 	checkflag 202
-	callif 0, SlateportCity_PokemonFanClub_EventScript_1559D0
+	callif FLAG_NOT_SET, SlateportCity_PokemonFanClub_EventScript_1559D0
 	checkflag 201
-	callif 0, SlateportCity_PokemonFanClub_EventScript_1559B9
+	callif FLAG_NOT_SET, SlateportCity_PokemonFanClub_EventScript_1559B9
 	checkflag 200
-	callif 0, SlateportCity_PokemonFanClub_EventScript_1559A2
+	callif FLAG_NOT_SET, SlateportCity_PokemonFanClub_EventScript_1559A2
 	bufferfirstpoke 0
 	switch 0x4001
 	case 0, SlateportCity_PokemonFanClub_EventScript_155899
@@ -197,7 +197,7 @@ SlateportCity_PokemonFanClub_EventScript_155A15:: @ 8155A15
 	lock
 	faceplayer
 	checkflag 278
-	jumpif EQUAL, SlateportCity_PokemonFanClub_EventScript_155A75
+	jumpif FLAG_IS_SET, SlateportCity_PokemonFanClub_EventScript_155A75
 	msgbox SlateportCity_PokemonFanClub_Text_17DE6B, 4
 	specialval RESULT, 230
 	compare RESULT, 4

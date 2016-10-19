@@ -5,7 +5,7 @@ Route111_MapScripts:: @ 814FF91
 
 Route111_MapScript1_14FF9C:: @ 814FF9C
 	checkflag 228
-	callif 0, Route111_EventScript_14FFA6
+	callif FLAG_NOT_SET, Route111_EventScript_14FFA6
 	end
 
 Route111_EventScript_14FFA6:: @ 814FFA6
@@ -17,7 +17,7 @@ Route111_MapScript1_14FFB9:: @ 814FFB9
 	call Route111_EventScript_14FFCD
 	call Route111_EventScript_1AE313
 	checktrainerflag OPPONENT_VICKY
-	jumpif 0, Route111_EventScript_15000D
+	jumpif FLAG_NOT_SET, Route111_EventScript_15000D
 	end
 
 Route111_EventScript_14FFCD:: @ 814FFCD
@@ -122,7 +122,7 @@ Route111_EventScript_1500C5:: @ 81500C5
 	faceplayer
 	checkdailyflags
 	checkflag 2252
-	jumpif EQUAL, Route111_EventScript_150100
+	jumpif FLAG_IS_SET, Route111_EventScript_150100
 	msgbox Route111_Text_1C56F0, 4
 	giveitem ITEM_RAZZ_BERRY
 	compare RESULT, 0

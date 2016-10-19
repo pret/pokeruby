@@ -4,7 +4,7 @@ VictoryRoad_1F_MapScripts:: @ 815DE83
 
 VictoryRoad_1F_MapScript1_15DE89:: @ 815DE89
 	checkflag 126
-	callif 1, VictoryRoad_1F_EventScript_15DE93
+	callif FLAG_IS_SET, VictoryRoad_1F_EventScript_15DE93
 	end
 
 VictoryRoad_1F_EventScript_15DE93:: @ 815DE93

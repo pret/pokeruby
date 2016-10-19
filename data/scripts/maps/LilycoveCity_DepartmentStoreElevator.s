@@ -5,7 +5,7 @@ LilycoveCity_DepartmentStoreElevator_EventScript_15A39C:: @ 815A39C
 	lock
 	faceplayer
 	checkflag 2
-	callif 0, LilycoveCity_DepartmentStoreElevator_EventScript_15A4CF
+	callif FLAG_NOT_SET, LilycoveCity_DepartmentStoreElevator_EventScript_15A4CF
 	copyvar 0x8005, 0x4043
 	special 306
 	message LilycoveCity_DepartmentStoreElevator_Text_1A0EF6

@@ -8,7 +8,7 @@ LittlerootTown_BrendansHouse_1F_MapScript1_15264B:: @ 815264B
 	compare 0x4092, 6
 	callif 0, LittlerootTown_BrendansHouse_1F_EventScript_152660
 	checkflag 274
-	callif 1, LittlerootTown_BrendansHouse_1F_EventScript_152673
+	callif FLAG_IS_SET, LittlerootTown_BrendansHouse_1F_EventScript_152673
 	end
 
 LittlerootTown_BrendansHouse_1F_EventScript_152660:: @ 8152660

@@ -5,7 +5,7 @@ Route128_MapScripts:: @ 815211B
 
 Route128_MapScript1_152126:: @ 8152126
 	checkflag 2090
-	callif 1, Route128_EventScript_1A02C1
+	callif FLAG_IS_SET, Route128_EventScript_1A02C1
 	call Route128_EventScript_1A0196
 	end
 

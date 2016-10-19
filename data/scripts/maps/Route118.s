@@ -10,7 +10,7 @@ Route118_EventScript_150F34:: @ 8150F34
 	lock
 	faceplayer
 	checkflag 227
-	jumpif EQUAL, Route118_EventScript_150F89
+	jumpif FLAG_IS_SET, Route118_EventScript_150F89
 	msgbox Route118_Text_170F12, 5
 	compare RESULT, 1
 	jumpif EQUAL, Route118_EventScript_150F5E

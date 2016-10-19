@@ -9,21 +9,21 @@ AbandonedShip_HiddenFloorCorridors_MapScript1_15EB51:: @ 815EB51
 
 AbandonedShip_HiddenFloorCorridors_MapScript1_15EB5A:: @ 815EB5A
 	checkflag 240
-	callif 0, AbandonedShip_HiddenFloorCorridors_EventScript_15EBCB
+	callif FLAG_NOT_SET, AbandonedShip_HiddenFloorCorridors_EventScript_15EBCB
 	checkflag 241
-	callif 0, AbandonedShip_HiddenFloorCorridors_EventScript_15EBD5
+	callif FLAG_NOT_SET, AbandonedShip_HiddenFloorCorridors_EventScript_15EBD5
 	checkflag 242
-	callif 0, AbandonedShip_HiddenFloorCorridors_EventScript_15EBDF
+	callif FLAG_NOT_SET, AbandonedShip_HiddenFloorCorridors_EventScript_15EBDF
 	checkflag 243
-	callif 0, AbandonedShip_HiddenFloorCorridors_EventScript_15EBE9
+	callif FLAG_NOT_SET, AbandonedShip_HiddenFloorCorridors_EventScript_15EBE9
 	checkflag 240
-	callif 1, AbandonedShip_HiddenFloorCorridors_EventScript_15EBA3
+	callif FLAG_IS_SET, AbandonedShip_HiddenFloorCorridors_EventScript_15EBA3
 	checkflag 241
-	callif 1, AbandonedShip_HiddenFloorCorridors_EventScript_15EBAD
+	callif FLAG_IS_SET, AbandonedShip_HiddenFloorCorridors_EventScript_15EBAD
 	checkflag 242
-	callif 1, AbandonedShip_HiddenFloorCorridors_EventScript_15EBB7
+	callif FLAG_IS_SET, AbandonedShip_HiddenFloorCorridors_EventScript_15EBB7
 	checkflag 243
-	callif 1, AbandonedShip_HiddenFloorCorridors_EventScript_15EBC1
+	callif FLAG_IS_SET, AbandonedShip_HiddenFloorCorridors_EventScript_15EBC1
 	end
 
 AbandonedShip_HiddenFloorCorridors_EventScript_15EBA3:: @ 815EBA3
@@ -61,7 +61,7 @@ AbandonedShip_HiddenFloorCorridors_EventScript_15EBE9:: @ 815EBE9
 AbandonedShip_HiddenFloorCorridors_EventScript_15EBF3:: @ 815EBF3
 	lockall
 	checkflag 240
-	jumpif EQUAL, AbandonedShip_HiddenFloorCorridors_EventScript_15ECF7
+	jumpif FLAG_IS_SET, AbandonedShip_HiddenFloorCorridors_EventScript_15ECF7
 	checkitem ITEM_ROOM_1_KEY, 1
 	compare RESULT, 0
 	jumpif EQUAL, AbandonedShip_HiddenFloorCorridors_EventScript_15ECCF
@@ -77,7 +77,7 @@ AbandonedShip_HiddenFloorCorridors_EventScript_15EBF3:: @ 815EBF3
 AbandonedShip_HiddenFloorCorridors_EventScript_15EC2A:: @ 815EC2A
 	lockall
 	checkflag 241
-	jumpif EQUAL, AbandonedShip_HiddenFloorCorridors_EventScript_15ECF7
+	jumpif FLAG_IS_SET, AbandonedShip_HiddenFloorCorridors_EventScript_15ECF7
 	checkitem ITEM_ROOM_2_KEY, 1
 	compare RESULT, 0
 	jumpif EQUAL, AbandonedShip_HiddenFloorCorridors_EventScript_15ECD9
@@ -93,7 +93,7 @@ AbandonedShip_HiddenFloorCorridors_EventScript_15EC2A:: @ 815EC2A
 AbandonedShip_HiddenFloorCorridors_EventScript_15EC61:: @ 815EC61
 	lockall
 	checkflag 242
-	jumpif EQUAL, AbandonedShip_HiddenFloorCorridors_EventScript_15ECF7
+	jumpif FLAG_IS_SET, AbandonedShip_HiddenFloorCorridors_EventScript_15ECF7
 	checkitem ITEM_ROOM_4_KEY, 1
 	compare RESULT, 0
 	jumpif EQUAL, AbandonedShip_HiddenFloorCorridors_EventScript_15ECE3
@@ -109,7 +109,7 @@ AbandonedShip_HiddenFloorCorridors_EventScript_15EC61:: @ 815EC61
 AbandonedShip_HiddenFloorCorridors_EventScript_15EC98:: @ 815EC98
 	lockall
 	checkflag 243
-	jumpif EQUAL, AbandonedShip_HiddenFloorCorridors_EventScript_15ECF7
+	jumpif FLAG_IS_SET, AbandonedShip_HiddenFloorCorridors_EventScript_15ECF7
 	checkitem ITEM_ROOM_6_KEY, 1
 	compare RESULT, 0
 	jumpif EQUAL, AbandonedShip_HiddenFloorCorridors_EventScript_15ECED

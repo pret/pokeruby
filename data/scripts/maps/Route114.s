@@ -6,7 +6,7 @@ Route114_EventScript_150733:: @ 8150733
 	faceplayer
 	checkdailyflags
 	checkflag 2251
-	jumpif EQUAL, Route114_EventScript_150778
+	jumpif FLAG_IS_SET, Route114_EventScript_150778
 	msgbox Route114_Text_1C5803, 4
 	random 5
 	addvar RESULT, 15
@@ -28,7 +28,7 @@ Route114_EventScript_150782:: @ 8150782
 	lock
 	faceplayer
 	checkflag 231
-	jumpif EQUAL, Route114_EventScript_1507B9
+	jumpif FLAG_IS_SET, Route114_EventScript_1507B9
 	msgbox Route114_Text_170154, 4
 	giveitem ITEM_TM05
 	compare RESULT, 0

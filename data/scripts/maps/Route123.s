@@ -10,7 +10,7 @@ Route123_EventScript_151C5D:: @ 8151C5D
 	lock
 	faceplayer
 	checkflag 232
-	jumpif EQUAL, Route123_EventScript_151CAC
+	jumpif FLAG_IS_SET, Route123_EventScript_151CAC
 	msgbox Route123_Text_171D83, 4
 	special 299
 	compare RESULT, 0

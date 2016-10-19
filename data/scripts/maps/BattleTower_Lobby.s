@@ -14,9 +14,9 @@ BattleTower_Lobby_EventScript_16029C:: @ 816029C
 	setvar 0x8004, 10
 	special 237
 	checkflag 238
-	jumpif EQUAL, BattleTower_Lobby_EventScript_1602E4
+	jumpif FLAG_IS_SET, BattleTower_Lobby_EventScript_1602E4
 	checkflag 237
-	jumpif EQUAL, BattleTower_Lobby_EventScript_1602CD
+	jumpif FLAG_IS_SET, BattleTower_Lobby_EventScript_1602CD
 	specialval 0x8007, 247
 	compare 0x8007, 50
 	jumpif 0, BattleTower_Lobby_EventScript_1602E4
@@ -388,9 +388,9 @@ BattleTower_Lobby_EventScript_160733:: @ 8160733
 	lock
 	faceplayer
 	checkflag 238
-	jumpif EQUAL, BattleTower_Lobby_EventScript_1607C5
+	jumpif FLAG_IS_SET, BattleTower_Lobby_EventScript_1607C5
 	checkflag 237
-	jumpif EQUAL, BattleTower_Lobby_EventScript_160773
+	jumpif FLAG_IS_SET, BattleTower_Lobby_EventScript_160773
 	msgbox BattleTower_Lobby_Text_19A9EE, 4
 	setvar 0x8008, 42
 	givedecoration 42

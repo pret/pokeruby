@@ -59,7 +59,7 @@ CannotUseCutText: @ 81B0E8E
 BreakableRockScript:: @ 81B0EB7
 	lockall
 	checkflag 2057
-	jumpif 0, CannotUseRockSmash
+	jumpif FLAG_NOT_SET, CannotUseRockSmash
 	checkattack MOVE_ROCK_SMASH
 	compare RESULT, 6
 	jumpif EQUAL, CannotUseRockSmash
@@ -126,9 +126,9 @@ CannotUseRockSmashText: @ 81B0F90
 PushableBoulderScript:: @ 81B0FCB
 	lockall
 	checkflag 2058
-	jumpif 0, CannotUseStrength
+	jumpif FLAG_NOT_SET, CannotUseStrength
 	checkflag 2089
-	jumpif EQUAL, AlreadyUsedStrength
+	jumpif FLAG_IS_SET, AlreadyUsedStrength
 	checkattack 70
 	compare RESULT, 6
 	jumpif EQUAL, CannotUseStrength

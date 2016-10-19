@@ -8,9 +8,9 @@ Event_TV:: @ 81A6E72
 	compare RESULT, 1
 	jumpif EQUAL, EventScript_1A6F0B
 	checkflag 2098
-	jumpif 0, EventScript_1A6EF1
+	jumpif FLAG_NOT_SET, EventScript_1A6EF1
 	checkflag 2097
-	jumpif EQUAL, EventScript_1A6EF1
+	jumpif FLAG_IS_SET, EventScript_1A6EF1
 	specialval RESULT, 176
 	compare RESULT, 1
 	jumpif EQUAL, EventScript_1A6F66

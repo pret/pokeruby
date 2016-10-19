@@ -5,7 +5,7 @@ PacifidlogTown_House3_EventScript_15429E:: @ 815429E
 	lock
 	faceplayer
 	checkflag 154
-	jumpif EQUAL, PacifidlogTown_House3_EventScript_154338
+	jumpif FLAG_IS_SET, PacifidlogTown_House3_EventScript_154338
 	setvar 0x8008, 2
 	copyvar 0x8004, 0x8008
 	specialval RESULT, 252

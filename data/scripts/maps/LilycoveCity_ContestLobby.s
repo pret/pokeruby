@@ -14,7 +14,7 @@ LilycoveCity_ContestLobby_MapScript2_158877:: @ 8158877
 
 LilycoveCity_ContestLobby_EventScript_158889:: @ 8158889
 	checkflag 775
-	jumpif EQUAL, LilycoveCity_ContestLobby_EventScript_158898
+	jumpif FLAG_IS_SET, LilycoveCity_ContestLobby_EventScript_158898
 	setvar 0x4099, 0
 	end
 
@@ -189,7 +189,7 @@ LilycoveCity_ContestLobby_Movement_158A52:: @ 8158A52
 
 LilycoveCity_ContestLobby_EventScript_158A5B:: @ 8158A5B
 	checkflag 775
-	jumpif EQUAL, LilycoveCity_ContestLobby_EventScript_158A6A
+	jumpif FLAG_IS_SET, LilycoveCity_ContestLobby_EventScript_158A6A
 	setvar 0x4099, 0
 	end
 
@@ -308,7 +308,7 @@ LilycoveCity_ContestLobby_EventScript_158B85:: @ 8158B85
 	compare RESULT, 0
 	jumpif EQUAL, LilycoveCity_ContestLobby_EventScript_158BBA
 	checkflag 2
-	jumpif EQUAL, LilycoveCity_ContestLobby_EventScript_158BAE
+	jumpif FLAG_IS_SET, LilycoveCity_ContestLobby_EventScript_158BAE
 	message LilycoveCity_ContestLobby_Text_18848C
 	waittext
 	setflag 2
@@ -403,7 +403,7 @@ LilycoveCity_ContestLobby_EventScript_158CC0:: @ 8158CC0
 
 LilycoveCity_ContestLobby_EventScript_158CEA:: @ 8158CEA
 	checkflag 3
-	callif 0, LilycoveCity_ContestLobby_EventScript_158BC4
+	callif FLAG_NOT_SET, LilycoveCity_ContestLobby_EventScript_158BC4
 	message LilycoveCity_ContestLobby_Text_1886DC
 	waittext
 	multichoice 0, 0, 4, 0
@@ -708,7 +708,7 @@ LilycoveCity_ContestLobby_EventScript_15901E:: @ 815901E
 
 LilycoveCity_ContestLobby_EventScript_159027:: @ 8159027
 	checkflag 150
-	jumpif 0, LilycoveCity_ContestLobby_EventScript_159039
+	jumpif FLAG_NOT_SET, LilycoveCity_ContestLobby_EventScript_159039
 	msgbox LilycoveCity_ContestLobby_Text_188DDA, 2
 	end
 

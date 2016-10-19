@@ -64,37 +64,37 @@ Route110_TrickHouseEntrance_EventScript_160FDE:: @ 8160FDE
 
 Route110_TrickHouseEntrance_EventScript_16103C:: @ 816103C
 	checkflag 2057
-	callif 0, Route110_TrickHouseEntrance_EventScript_161088
+	callif FLAG_NOT_SET, Route110_TrickHouseEntrance_EventScript_161088
 	return
 
 Route110_TrickHouseEntrance_EventScript_161046:: @ 8161046
 	checkflag 2058
-	callif 0, Route110_TrickHouseEntrance_EventScript_161088
+	callif FLAG_NOT_SET, Route110_TrickHouseEntrance_EventScript_161088
 	return
 
 Route110_TrickHouseEntrance_EventScript_161050:: @ 8161050
 	checkflag 2059
-	callif 0, Route110_TrickHouseEntrance_EventScript_161088
+	callif FLAG_NOT_SET, Route110_TrickHouseEntrance_EventScript_161088
 	return
 
 Route110_TrickHouseEntrance_EventScript_16105A:: @ 816105A
 	checkflag 2060
-	callif 0, Route110_TrickHouseEntrance_EventScript_161088
+	callif FLAG_NOT_SET, Route110_TrickHouseEntrance_EventScript_161088
 	return
 
 Route110_TrickHouseEntrance_EventScript_161064:: @ 8161064
 	checkflag 2061
-	callif 0, Route110_TrickHouseEntrance_EventScript_161088
+	callif FLAG_NOT_SET, Route110_TrickHouseEntrance_EventScript_161088
 	return
 
 Route110_TrickHouseEntrance_EventScript_16106E:: @ 816106E
 	checkflag 2062
-	callif 0, Route110_TrickHouseEntrance_EventScript_161088
+	callif FLAG_NOT_SET, Route110_TrickHouseEntrance_EventScript_161088
 	return
 
 Route110_TrickHouseEntrance_EventScript_161078:: @ 8161078
 	checkflag 2052
-	callif 0, Route110_TrickHouseEntrance_EventScript_161088
+	callif FLAG_NOT_SET, Route110_TrickHouseEntrance_EventScript_161088
 	return
 
 Route110_TrickHouseEntrance_EventScript_161082:: @ 8161082

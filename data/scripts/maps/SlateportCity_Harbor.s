@@ -8,7 +8,7 @@ SlateportCity_Harbor_MapScript1_155F63:: @ 8155F63
 	compare 0x40a0, 1
 	callif 1, SlateportCity_Harbor_EventScript_155F89
 	checkflag 2052
-	callif 1, SlateportCity_Harbor_EventScript_155F85
+	callif FLAG_IS_SET, SlateportCity_Harbor_EventScript_155F85
 	end
 
 SlateportCity_Harbor_EventScript_155F85:: @ 8155F85
@@ -160,7 +160,7 @@ SlateportCity_Harbor_EventScript_1560C4:: @ 81560C4
 	lock
 	faceplayer
 	checkflag 2052
-	jumpif EQUAL, SlateportCity_Harbor_EventScript_1560D9
+	jumpif FLAG_IS_SET, SlateportCity_Harbor_EventScript_1560D9
 	msgbox SlateportCity_Harbor_Text_17FA0A, 4
 	release
 	end
@@ -269,11 +269,11 @@ SlateportCity_Harbor_EventScript_156211:: @ 8156211
 	lock
 	faceplayer
 	checkflag 2061
-	jumpif EQUAL, SlateportCity_Harbor_EventScript_15626F
+	jumpif FLAG_IS_SET, SlateportCity_Harbor_EventScript_15626F
 	checkflag 271
-	jumpif EQUAL, SlateportCity_Harbor_EventScript_156265
+	jumpif FLAG_IS_SET, SlateportCity_Harbor_EventScript_156265
 	checkflag 112
-	jumpif EQUAL, SlateportCity_Harbor_EventScript_156258
+	jumpif FLAG_IS_SET, SlateportCity_Harbor_EventScript_156258
 	compare 0x40a0, 2
 	jumpif EQUAL, SlateportCity_Harbor_EventScript_15624E
 	msgbox SlateportCity_Harbor_Text_17FD1C, 4
@@ -306,7 +306,7 @@ SlateportCity_Harbor_EventScript_15626F:: @ 815626F
 	compare RESULT, 1
 	jumpif EQUAL, SlateportCity_Harbor_EventScript_1562A7
 	checkflag 2052
-	jumpif EQUAL, SlateportCity_Harbor_EventScript_15629D
+	jumpif FLAG_IS_SET, SlateportCity_Harbor_EventScript_15629D
 	msgbox SlateportCity_Harbor_Text_18017B, 4
 	release
 	end

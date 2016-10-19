@@ -33,7 +33,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_15ABD5:: @ 815ABD5
 	lock
 	faceplayer
 	checkflag 192
-	jumpif EQUAL, MossdeepCity_SpaceCenter_1F_EventScript_15AC0C
+	jumpif FLAG_IS_SET, MossdeepCity_SpaceCenter_1F_EventScript_15AC0C
 	msgbox MossdeepCity_SpaceCenter_1F_Text_18E335, 4
 	giveitem ITEM_SUN_STONE
 	compare RESULT, 0

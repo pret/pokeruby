@@ -10,7 +10,7 @@ VerdanturfTown_ContestLobby_EventScript_1A4E92:: @ 81A4E92
 	compare 0x408a, 0
 	jumpif 5, FallarborTown_ContestLobby_EventScript_1A4F4E
 	checkflag 1
-	jumpif EQUAL, FallarborTown_ContestLobby_EventScript_1A4F8F
+	jumpif FLAG_IS_SET, FallarborTown_ContestLobby_EventScript_1A4F8F
 	bufferstd 0, 0x800b
 	msgbox FallarborTown_ContestLobby_Text_1A5DFC, 4
 	checkitem ITEM_CONTEST_PASS, 1
@@ -41,7 +41,7 @@ FallarborTown_ContestLobby_EventScript_1A4EF6:: @ 81A4EF6
 
 FallarborTown_ContestLobby_EventScript_1A4F13:: @ 81A4F13
 	checkflag 150
-	jumpif EQUAL, FallarborTown_ContestLobby_EventScript_1A4F44
+	jumpif FLAG_IS_SET, FallarborTown_ContestLobby_EventScript_1A4F44
 	msgbox FallarborTown_ContestLobby_Text_1A6583, 4
 	giveitem ITEM_CONTEST_PASS
 	setflag 150
@@ -997,7 +997,7 @@ LinkContestRoom1_EventScript_1A5BAB:: @ 81A5BAB
 	jumpif EQUAL, LinkContestRoom1_EventScript_1A5C4C
 	call LinkContestRoom1_EventScript_1A5C12
 	checkflag 2
-	jumpif EQUAL, LinkContestRoom1_EventScript_1A5BF6
+	jumpif FLAG_IS_SET, LinkContestRoom1_EventScript_1A5BF6
 	msgbox LinkContestRoom1_Text_1A6DC5, 3
 	waittext
 	call LinkContestRoom1_EventScript_1A5C7F

@@ -7,7 +7,7 @@ SealedChamber_InnerRoom_EventScript_15F1E8:: @ 815F1E8
 	waitbutton
 	hidebox 0, 0, 29, 19
 	checkflag 228
-	jumpif EQUAL, SealedChamber_InnerRoom_EventScript_15F247
+	jumpif FLAG_IS_SET, SealedChamber_InnerRoom_EventScript_15F247
 	specialval RESULT, 279
 	compare RESULT, 0
 	jumpif EQUAL, SealedChamber_InnerRoom_EventScript_15F247

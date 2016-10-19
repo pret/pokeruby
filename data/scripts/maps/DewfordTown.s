@@ -10,7 +10,7 @@ DewfordTown_EventScript_14E002:: @ 814E002
 	lock
 	faceplayer
 	checkflag 189
-	jumpif 0, DewfordTown_EventScript_14E076
+	jumpif FLAG_NOT_SET, DewfordTown_EventScript_14E076
 	message DewfordTown_Text_16B522
 	waittext
 	multichoicedef 21, 6, 0, 2, 0
@@ -75,7 +75,7 @@ DewfordTown_EventScript_14E0C6:: @ 814E0C6
 	lock
 	faceplayer
 	checkflag 257
-	jumpif EQUAL, DewfordTown_EventScript_14E11B
+	jumpif FLAG_IS_SET, DewfordTown_EventScript_14E11B
 	msgbox DewfordTown_Text_16B665, 5
 	compare RESULT, 1
 	jumpif EQUAL, DewfordTown_EventScript_14E0F0
@@ -177,9 +177,9 @@ DewfordTown_EventScript_14E1D8:: @ 814E1D8
 	setflag 743
 	spriteinvisible 4, 0, 11
 	checkflag 149
-	callif 0, DewfordTown_EventScript_14E281
+	callif FLAG_NOT_SET, DewfordTown_EventScript_14E281
 	checkflag 149
-	callif 1, DewfordTown_EventScript_14E28A
+	callif FLAG_IS_SET, DewfordTown_EventScript_14E28A
 	closebutton
 	copyvar 0x4096, 0x8008
 	restorespritelevel 255, 0, 11

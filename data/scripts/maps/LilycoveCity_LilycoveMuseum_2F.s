@@ -5,31 +5,31 @@ LilycoveCity_LilycoveMuseum_2F_MapScripts:: @ 81585AC
 
 LilycoveCity_LilycoveMuseum_2F_MapScript1_1585B7:: @ 81585B7
 	checkflag 160
-	jumpif EQUAL, LilycoveCity_LilycoveMuseum_2F_EventScript_1585FD
+	jumpif FLAG_IS_SET, LilycoveCity_LilycoveMuseum_2F_EventScript_1585FD
 	jump LilycoveCity_LilycoveMuseum_2F_EventScript_1585C6
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_1585C6:: @ 81585C6
 	checkflag 161
-	jumpif EQUAL, LilycoveCity_LilycoveMuseum_2F_EventScript_158615
+	jumpif FLAG_IS_SET, LilycoveCity_LilycoveMuseum_2F_EventScript_158615
 	jump LilycoveCity_LilycoveMuseum_2F_EventScript_1585D5
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_1585D5:: @ 81585D5
 	checkflag 162
-	jumpif EQUAL, LilycoveCity_LilycoveMuseum_2F_EventScript_15862D
+	jumpif FLAG_IS_SET, LilycoveCity_LilycoveMuseum_2F_EventScript_15862D
 	jump LilycoveCity_LilycoveMuseum_2F_EventScript_1585E4
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_1585E4:: @ 81585E4
 	checkflag 163
-	jumpif EQUAL, LilycoveCity_LilycoveMuseum_2F_EventScript_158645
+	jumpif FLAG_IS_SET, LilycoveCity_LilycoveMuseum_2F_EventScript_158645
 	jump LilycoveCity_LilycoveMuseum_2F_EventScript_1585F3
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_1585F3:: @ 81585F3
 	checkflag 164
-	jumpif EQUAL, LilycoveCity_LilycoveMuseum_2F_EventScript_15865D
+	jumpif FLAG_IS_SET, LilycoveCity_LilycoveMuseum_2F_EventScript_15865D
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_1585FD:: @ 81585FD
@@ -97,7 +97,7 @@ LilycoveCity_LilycoveMuseum_2F_Movement_1586D5:: @ 81586D5
 LilycoveCity_LilycoveMuseum_2F_EventScript_1586D8:: @ 81586D8
 	lockall
 	checkflag 236
-	jumpif EQUAL, LilycoveCity_LilycoveMuseum_2F_EventScript_158793
+	jumpif FLAG_IS_SET, LilycoveCity_LilycoveMuseum_2F_EventScript_158793
 	specialval 0x8004, 137
 	switch 0x8004
 	case 1, LilycoveCity_LilycoveMuseum_2F_EventScript_15872C
@@ -147,35 +147,35 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_158793:: @ 8158793
 LilycoveCity_LilycoveMuseum_2F_EventScript_15879D:: @ 815879D
 	lockall
 	checkflag 162
-	jumpif EQUAL, LilycoveCity_LilycoveMuseum_2F_EventScript_15883C
+	jumpif FLAG_IS_SET, LilycoveCity_LilycoveMuseum_2F_EventScript_15883C
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_188219, 3
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_1587B0:: @ 81587B0
 	lockall
 	checkflag 164
-	jumpif EQUAL, LilycoveCity_LilycoveMuseum_2F_EventScript_158858
+	jumpif FLAG_IS_SET, LilycoveCity_LilycoveMuseum_2F_EventScript_158858
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_18824C, 3
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_1587C3:: @ 81587C3
 	lockall
 	checkflag 160
-	jumpif EQUAL, LilycoveCity_LilycoveMuseum_2F_EventScript_158820
+	jumpif FLAG_IS_SET, LilycoveCity_LilycoveMuseum_2F_EventScript_158820
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_1882B4, 3
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_1587D6:: @ 81587D6
 	lockall
 	checkflag 161
-	jumpif EQUAL, LilycoveCity_LilycoveMuseum_2F_EventScript_15882E
+	jumpif FLAG_IS_SET, LilycoveCity_LilycoveMuseum_2F_EventScript_15882E
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_188281, 3
 	end
 
 LilycoveCity_LilycoveMuseum_2F_EventScript_1587E9:: @ 81587E9
 	lockall
 	checkflag 163
-	jumpif EQUAL, LilycoveCity_LilycoveMuseum_2F_EventScript_15884A
+	jumpif FLAG_IS_SET, LilycoveCity_LilycoveMuseum_2F_EventScript_15884A
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_1882E6, 3
 	end
 

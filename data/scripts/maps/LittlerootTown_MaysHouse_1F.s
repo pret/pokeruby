@@ -8,7 +8,7 @@ LittlerootTown_MaysHouse_1F_MapScript1_152889:: @ 8152889
 	compare 0x4092, 6
 	callif 0, LittlerootTown_MaysHouse_1F_EventScript_15289E
 	checkflag 274
-	callif 1, LittlerootTown_MaysHouse_1F_EventScript_1528B1
+	callif FLAG_IS_SET, LittlerootTown_MaysHouse_1F_EventScript_1528B1
 	end
 
 LittlerootTown_MaysHouse_1F_EventScript_15289E:: @ 815289E
@@ -136,9 +136,9 @@ LittlerootTown_MaysHouse_1F_EventScript_1529EB:: @ 81529EB
 	lock
 	faceplayer
 	checkflag 130
-	jumpif EQUAL, LittlerootTown_BrendansHouse_1F_EventScript_152A21
+	jumpif FLAG_IS_SET, LittlerootTown_BrendansHouse_1F_EventScript_152A21
 	checkflag 301
-	jumpif EQUAL, LittlerootTown_BrendansHouse_1F_EventScript_152A17
+	jumpif FLAG_IS_SET, LittlerootTown_BrendansHouse_1F_EventScript_152A17
 	compare 0x408d, 3
 	jumpif EQUAL, LittlerootTown_BrendansHouse_1F_EventScript_152A2B
 	special 149

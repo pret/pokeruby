@@ -18,9 +18,9 @@ Route104_MapScript1_14EEA8:: @ 814EEA8
 
 Route104_EventScript_14EEAE:: @ 814EEAE
 	checkflag 127
-	jumpif 0, Route104_EventScript_14EEC4
+	jumpif FLAG_NOT_SET, Route104_EventScript_14EEC4
 	checkflag 2057
-	jumpif 0, Route104_EventScript_14EEC4
+	jumpif FLAG_NOT_SET, Route104_EventScript_14EEC4
 	clearflag 906
 	return
 
@@ -32,7 +32,7 @@ Route104_EventScript_14EEC8:: @ 814EEC8
 	lock
 	faceplayer
 	checkflag 246
-	jumpif EQUAL, Route104_EventScript_14EEFF
+	jumpif FLAG_IS_SET, Route104_EventScript_14EEFF
 	msgbox Route104_Text_1C55B9, 4
 	giveitem ITEM_CHESTO_BERRY
 	compare RESULT, 0
@@ -51,7 +51,7 @@ Route104_EventScript_14EF09:: @ 814EF09
 	lock
 	faceplayer
 	checkflag 279
-	jumpif EQUAL, Route104_EventScript_14EF38
+	jumpif FLAG_IS_SET, Route104_EventScript_14EF38
 	msgbox Route104_Text_16DD91, 4
 	giveitem ITEM_WHITE_HERB
 	compare RESULT, 0
@@ -105,7 +105,7 @@ Route104_EventScript_14EF93:: @ 814EF93
 	lock
 	faceplayer
 	checkflag 262
-	jumpif EQUAL, Route104_EventScript_14EFC2
+	jumpif FLAG_IS_SET, Route104_EventScript_14EFC2
 	msgbox Route104_Text_16DC5F, 4
 	giveitem ITEM_TM09
 	compare RESULT, 0
@@ -159,9 +159,9 @@ Route104_EventScript_14EFD5:: @ 814EFD5
 	moveoffscreen 2
 	setvar 0x408e, 0
 	checkflag 189
-	jumpif 0, Route104_EventScript_14F08B
+	jumpif FLAG_NOT_SET, Route104_EventScript_14F08B
 	checkflag 189
-	jumpif EQUAL, Route104_EventScript_14F095
+	jumpif FLAG_IS_SET, Route104_EventScript_14F095
 	end
 
 Route104_EventScript_14F08B:: @ 814F08B

@@ -5,7 +5,7 @@ LilycoveCity_House2_EventScript_159BA3:: @ 8159BA3
 	lock
 	faceplayer
 	checkflag 234
-	jumpif EQUAL, LilycoveCity_House2_EventScript_159BDA
+	jumpif FLAG_IS_SET, LilycoveCity_House2_EventScript_159BDA
 	msgbox LilycoveCity_House2_Text_18B83C, 4
 	giveitem ITEM_TM44
 	compare RESULT, 0

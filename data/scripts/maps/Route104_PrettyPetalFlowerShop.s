@@ -5,9 +5,9 @@ Route104_PrettyPetalFlowerShop_MapScripts:: @ 815BDE4
 Route104_PrettyPetalFlowerShop_MapScript1_15BDEA:: @ 815BDEA
 	setflag 2108
 	checkflag 127
-	jumpif 0, Route104_PrettyPetalFlowerShop_EventScript_15BE03
+	jumpif FLAG_NOT_SET, Route104_PrettyPetalFlowerShop_EventScript_15BE03
 	checkflag 2057
-	jumpif 0, Route104_PrettyPetalFlowerShop_EventScript_15BE03
+	jumpif FLAG_NOT_SET, Route104_PrettyPetalFlowerShop_EventScript_15BE03
 	setflag 1
 	end
 
@@ -19,10 +19,10 @@ Route104_PrettyPetalFlowerShop_EventScript_15BE0B:: @ 815BE0B
 	lock
 	faceplayer
 	checkflag 1
-	jumpif EQUAL, Route104_PrettyPetalFlowerShop_EventScript_15BE7C
+	jumpif FLAG_IS_SET, Route104_PrettyPetalFlowerShop_EventScript_15BE7C
 	msgbox Route104_PrettyPetalFlowerShop_Text_1C5EC6, 4
 	checkflag 127
-	jumpif EQUAL, Route104_PrettyPetalFlowerShop_EventScript_15BE4A
+	jumpif FLAG_IS_SET, Route104_PrettyPetalFlowerShop_EventScript_15BE4A
 	setflag 127
 	msgbox Route104_PrettyPetalFlowerShop_Text_1C5F48, 5
 	compare RESULT, 1
@@ -73,7 +73,7 @@ Route104_PrettyPetalFlowerShop_EventScript_15BEA4:: @ 815BEA4
 	lock
 	faceplayer
 	checkflag 94
-	jumpif 0, Route104_PrettyPetalFlowerShop_EventScript_15BEB9
+	jumpif FLAG_NOT_SET, Route104_PrettyPetalFlowerShop_EventScript_15BEB9
 	msgbox Route104_PrettyPetalFlowerShop_Text_1C61E8, 4
 	release
 	end
@@ -91,7 +91,7 @@ Route104_PrettyPetalFlowerShop_EventScript_15BEDA:: @ 815BEDA
 	faceplayer
 	checkdailyflags
 	checkflag 2256
-	jumpif EQUAL, Route104_PrettyPetalFlowerShop_EventScript_15BF1A
+	jumpif FLAG_IS_SET, Route104_PrettyPetalFlowerShop_EventScript_15BF1A
 	msgbox Route104_PrettyPetalFlowerShop_Text_1C62DA, 4
 	random 8
 	addvar RESULT, 133

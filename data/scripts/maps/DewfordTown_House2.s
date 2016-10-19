@@ -5,7 +5,7 @@ DewfordTown_House2_EventScript_1535DC:: @ 81535DC
 	lock
 	faceplayer
 	checkflag 289
-	jumpif EQUAL, DewfordTown_House2_EventScript_153615
+	jumpif FLAG_IS_SET, DewfordTown_House2_EventScript_153615
 	msgbox DewfordTown_House2_Text_175EFE, 4
 	giveitem ITEM_SILK_SCARF
 	compare RESULT, 0

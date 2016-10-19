@@ -5,7 +5,7 @@ Route114_FossilManiacsTunnel_EventScript_15C20F:: @ 815C20F
 	lock
 	faceplayer
 	checkflag 267
-	jumpif EQUAL, Route114_FossilManiacsTunnel_EventScript_15C24E
+	jumpif FLAG_IS_SET, Route114_FossilManiacsTunnel_EventScript_15C24E
 	checkitem ITEM_ROOT_FOSSIL, 1
 	compare RESULT, 1
 	jumpif EQUAL, Route114_FossilManiacsTunnel_EventScript_15C244

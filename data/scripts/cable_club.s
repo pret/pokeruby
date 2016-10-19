@@ -175,7 +175,7 @@ SlateportCity_PokemonCenter_2F_EventScript_1A3EA6:: @ 81A3EA6
 SootopolisCity_PokemonCenter_2F_EventScript_1A3EA6:: @ 81A3EA6
 VerdanturfTown_PokemonCenter_2F_EventScript_1A3EA6:: @ 81A3EA6
 	checkflag 2049
-	jumpif 0, OldaleTown_PokemonCenter_2F_EventScript_1A4342
+	jumpif FLAG_NOT_SET, OldaleTown_PokemonCenter_2F_EventScript_1A4342
 	copyvar 0x8007, LAST_TALKED
 	lock
 	faceplayer
@@ -347,7 +347,7 @@ SlateportCity_PokemonCenter_2F_EventScript_1A40CC:: @ 81A40CC
 SootopolisCity_PokemonCenter_2F_EventScript_1A40CC:: @ 81A40CC
 VerdanturfTown_PokemonCenter_2F_EventScript_1A40CC:: @ 81A40CC
 	checkflag 2049
-	jumpif 0, OldaleTown_PokemonCenter_2F_EventScript_1A4339
+	jumpif FLAG_NOT_SET, OldaleTown_PokemonCenter_2F_EventScript_1A4339
 	copyvar 0x8007, LAST_TALKED
 	lock
 	faceplayer
@@ -444,7 +444,7 @@ SlateportCity_PokemonCenter_2F_EventScript_1A41FB:: @ 81A41FB
 SootopolisCity_PokemonCenter_2F_EventScript_1A41FB:: @ 81A41FB
 VerdanturfTown_PokemonCenter_2F_EventScript_1A41FB:: @ 81A41FB
 	checkflag 2072
-	jumpif 0, OldaleTown_PokemonCenter_2F_EventScript_1A434B
+	jumpif FLAG_NOT_SET, OldaleTown_PokemonCenter_2F_EventScript_1A434B
 	copyvar 0x8007, LAST_TALKED
 	lock
 	faceplayer

@@ -5,12 +5,12 @@ AbandonedShip_CaptainsOffice_EventScript_15EAF5:: @ 815EAF5
 	lock
 	faceplayer
 	checkflag 294
-	jumpif EQUAL, AbandonedShip_CaptainsOffice_EventScript_15EB2D
+	jumpif FLAG_IS_SET, AbandonedShip_CaptainsOffice_EventScript_15EB2D
 	checkitem ITEM_SCANNER, 1
 	compare RESULT, 1
 	jumpif EQUAL, AbandonedShip_CaptainsOffice_EventScript_15EB23
 	checkflag 1078
-	jumpif EQUAL, AbandonedShip_CaptainsOffice_EventScript_15EB2D
+	jumpif FLAG_IS_SET, AbandonedShip_CaptainsOffice_EventScript_15EB2D
 	msgbox AbandonedShip_CaptainsOffice_Text_198C85, 4
 	release
 	end

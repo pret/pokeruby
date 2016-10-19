@@ -5,9 +5,9 @@ MauvilleCity_BikeShop_EventScript_156796:: @ 8156796
 	lock
 	faceplayer
 	checkflag 90
-	jumpif EQUAL, MauvilleCity_BikeShop_EventScript_15686E
+	jumpif FLAG_IS_SET, MauvilleCity_BikeShop_EventScript_15686E
 	checkflag 89
-	jumpif EQUAL, MauvilleCity_BikeShop_EventScript_1567D1
+	jumpif FLAG_IS_SET, MauvilleCity_BikeShop_EventScript_1567D1
 	msgbox MauvilleCity_BikeShop_Text_180F9F, 4
 	msgbox MauvilleCity_BikeShop_Text_181016, 5
 	compare RESULT, 1

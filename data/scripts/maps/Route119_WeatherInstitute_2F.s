@@ -88,6 +88,6 @@ Route119_WeatherInstitute_2F_EventScript_163DCC:: @ 8163DCC
 	lock
 	faceplayer
 	checkflag 151
-	jumpif EQUAL, Route119_WeatherInstitute_2F_EventScript_163DBE
+	jumpif FLAG_IS_SET, Route119_WeatherInstitute_2F_EventScript_163DBE
 	jump Route119_WeatherInstitute_2F_EventScript_163D7A
 	end

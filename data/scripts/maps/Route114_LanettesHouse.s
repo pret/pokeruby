@@ -10,7 +10,7 @@ Route114_LanettesHouse_EventScript_15C262:: @ 815C262
 	lock
 	faceplayer
 	checkflag 131
-	jumpif EQUAL, Route114_LanettesHouse_EventScript_15C28F
+	jumpif FLAG_IS_SET, Route114_LanettesHouse_EventScript_15C28F
 	setflag 2123
 	msgbox Route114_LanettesHouse_Text_192A0D, 4
 	.ifdef SAPPHIRE

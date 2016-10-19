@@ -6,7 +6,7 @@ MossdeepCity_StevensHouse_MapScripts:: @ 815A9C5
 
 MossdeepCity_StevensHouse_MapScript1_15A9D5:: @ 815A9D5
 	checkflag 2052
-	callif 0, MossdeepCity_StevensHouse_EventScript_15A9DF
+	callif FLAG_NOT_SET, MossdeepCity_StevensHouse_EventScript_15A9DF
 	end
 
 MossdeepCity_StevensHouse_EventScript_15A9DF:: @ 815A9DF
@@ -114,7 +114,7 @@ MossdeepCity_StevensHouse_EventScript_15AAF9:: @ 815AAF9
 MossdeepCity_StevensHouse_EventScript_15AB02:: @ 815AB02
 	lockall
 	checkflag 302
-	jumpif EQUAL, MossdeepCity_StevensHouse_EventScript_15AB16
+	jumpif FLAG_IS_SET, MossdeepCity_StevensHouse_EventScript_15AB16
 	msgbox MossdeepCity_StevensHouse_Text_18DF1A, 4
 	releaseall
 	end

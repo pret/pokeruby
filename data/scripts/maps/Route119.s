@@ -5,7 +5,7 @@ Route119_MapScripts:: @ 8151167
 
 Route119_MapScript1_151172:: @ 8151172
 	checkflag 2145
-	callif 1, Route119_EventScript_15117C
+	callif FLAG_IS_SET, Route119_EventScript_15117C
 	end
 
 Route119_EventScript_15117C:: @ 815117C

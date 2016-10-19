@@ -88,9 +88,9 @@ SootopolisCity_Gym_1F_Movement_15AFFD:: @ 815AFFD
 SootopolisCity_Gym_1F_EventScript_15AFFF:: @ 815AFFF
 	trainerbattle 1, OPPONENT_WALLACE, 0, SootopolisCity_Gym_1F_Text_18F0CA, SootopolisCity_Gym_1F_Text_18F282, SootopolisCity_Gym_1F_EventScript_15B02D
 	checkflag 172
-	jumpif 0, SootopolisCity_Gym_1F_EventScript_15B056
+	jumpif FLAG_NOT_SET, SootopolisCity_Gym_1F_EventScript_15B056
 	checkflag 2060
-	jumpif 0, SootopolisCity_Gym_1F_EventScript_15B07A
+	jumpif FLAG_NOT_SET, SootopolisCity_Gym_1F_EventScript_15B07A
 	msgbox SootopolisCity_Gym_1F_Text_18F4D7, 4
 	release
 	end
@@ -125,7 +125,7 @@ SootopolisCity_Gym_1F_EventScript_15B084:: @ 815B084
 	lock
 	faceplayer
 	checkflag 1236
-	jumpif EQUAL, SootopolisCity_Gym_1F_EventScript_15B099
+	jumpif FLAG_IS_SET, SootopolisCity_Gym_1F_EventScript_15B099
 	msgbox SootopolisCity_Gym_1F_Text_18E8A5, 4
 	release
 	end
@@ -138,14 +138,14 @@ SootopolisCity_Gym_1F_EventScript_15B099:: @ 815B099
 SootopolisCity_Gym_1F_EventScript_15B0A3:: @ 815B0A3
 	lockall
 	checkflag 2062
-	jumpif EQUAL, SootopolisCity_Gym_1F_EventScript_15B0C3
+	jumpif FLAG_IS_SET, SootopolisCity_Gym_1F_EventScript_15B0C3
 	jump SootopolisCity_Gym_1F_EventScript_15B0CD
 	end
 
 SootopolisCity_Gym_1F_EventScript_15B0B3:: @ 815B0B3
 	lockall
 	checkflag 2062
-	jumpif EQUAL, SootopolisCity_Gym_1F_EventScript_15B0C3
+	jumpif FLAG_IS_SET, SootopolisCity_Gym_1F_EventScript_15B0C3
 	jump SootopolisCity_Gym_1F_EventScript_15B0CD
 	end
 

@@ -5,7 +5,7 @@ MossdeepCity_House4_EventScript_15AB31:: @ 815AB31
 	lock
 	faceplayer
 	checkflag 2052
-	jumpif EQUAL, MossdeepCity_House4_EventScript_15AB46
+	jumpif FLAG_IS_SET, MossdeepCity_House4_EventScript_15AB46
 	msgbox MossdeepCity_House4_Text_18E0E3, 4
 	release
 	end

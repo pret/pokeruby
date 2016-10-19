@@ -6,7 +6,7 @@ Route120_MapScripts:: @ 815160E
 
 Route120_MapScript1_15161E:: @ 815161E
 	checkflag 2145
-	callif 1, Route120_EventScript_151628
+	callif FLAG_IS_SET, Route120_EventScript_151628
 	end
 
 Route120_EventScript_151628:: @ 8151628
@@ -51,11 +51,11 @@ Route120_EventScript_151682:: @ 8151682
 
 Route120_MapScript1_151686:: @ 8151686
 	checkflag 228
-	callif 0, Route120_EventScript_1516A2
+	callif FLAG_NOT_SET, Route120_EventScript_1516A2
 	checkflag 285
-	callif 1, Route120_EventScript_1516B5
+	callif FLAG_IS_SET, Route120_EventScript_1516B5
 	checkflag 285
-	callif 0, Route120_EventScript_1516DA
+	callif FLAG_NOT_SET, Route120_EventScript_1516DA
 	end
 
 Route120_EventScript_1516A2:: @ 81516A2
@@ -114,7 +114,7 @@ Route120_EventScript_151739:: @ 8151739
 	faceplayer
 	checkdailyflags
 	checkflag 2254
-	jumpif EQUAL, Route120_EventScript_151837
+	jumpif FLAG_IS_SET, Route120_EventScript_151837
 	msgbox Route120_Text_1C58F1, 5
 	compare RESULT, 1
 	callif 1, Route120_EventScript_151841
@@ -185,7 +185,7 @@ Route120_EventScript_151853:: @ 8151853
 	lock
 	faceplayer
 	checkflag 290
-	jumpif EQUAL, Route120_EventScript_151884
+	jumpif FLAG_IS_SET, Route120_EventScript_151884
 	msgbox Route120_Text_171827, 5
 	compare RESULT, 0
 	jumpif EQUAL, Route120_EventScript_151877

@@ -33,7 +33,7 @@ RusturfTunnel_EventScript_15C799:: @ 815C799
 	lock
 	faceplayer
 	checkflag 1
-	jumpif EQUAL, RusturfTunnel_EventScript_15C7BC
+	jumpif FLAG_IS_SET, RusturfTunnel_EventScript_15C7BC
 	setflag 1
 	msgbox RusturfTunnel_Text_1944C5, 4
 	closebutton

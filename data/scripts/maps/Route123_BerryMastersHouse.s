@@ -11,7 +11,7 @@ Route123_BerryMastersHouse_EventScript_1639E9:: @ 81639E9
 	faceplayer
 	checkdailyflags
 	checkflag 2253
-	jumpif EQUAL, Route123_BerryMastersHouse_EventScript_163A5A
+	jumpif FLAG_IS_SET, Route123_BerryMastersHouse_EventScript_163A5A
 	msgbox Route123_BerryMastersHouse_Text_1C5BC4, 4
 	random 10
 	addvar RESULT, 20
@@ -41,7 +41,7 @@ Route123_BerryMastersHouse_EventScript_163A64:: @ 8163A64
 	faceplayer
 	checkdailyflags
 	checkflag 2257
-	jumpif EQUAL, Route123_BerryMastersHouse_EventScript_163C13
+	jumpif FLAG_IS_SET, Route123_BerryMastersHouse_EventScript_163C13
 	msgbox Route123_BerryMastersHouse_Text_1C5D24, 4
 	setvar 0x8004, 13
 	call Route123_BerryMastersHouse_EventScript_1A00F3
@@ -87,7 +87,7 @@ Route123_BerryMastersHouse_EventScript_163AF0:: @ 8163AF0
 
 Route123_BerryMastersHouse_EventScript_163B1E:: @ 8163B1E
 	checkflag 248
-	jumpif EQUAL, Route123_BerryMastersHouse_EventScript_163AF0
+	jumpif FLAG_IS_SET, Route123_BerryMastersHouse_EventScript_163AF0
 	msgbox Route123_BerryMastersHouse_Text_1C5DC1, 4
 	giveitem ITEM_SPELON_BERRY
 	compare RESULT, 0
@@ -98,7 +98,7 @@ Route123_BerryMastersHouse_EventScript_163B1E:: @ 8163B1E
 
 Route123_BerryMastersHouse_EventScript_163B4F:: @ 8163B4F
 	checkflag 249
-	jumpif EQUAL, Route123_BerryMastersHouse_EventScript_163AF0
+	jumpif FLAG_IS_SET, Route123_BerryMastersHouse_EventScript_163AF0
 	msgbox Route123_BerryMastersHouse_Text_1C5DC1, 4
 	giveitem ITEM_PAMTRE_BERRY
 	compare RESULT, 0
@@ -109,7 +109,7 @@ Route123_BerryMastersHouse_EventScript_163B4F:: @ 8163B4F
 
 Route123_BerryMastersHouse_EventScript_163B80:: @ 8163B80
 	checkflag 250
-	jumpif EQUAL, Route123_BerryMastersHouse_EventScript_163AF0
+	jumpif FLAG_IS_SET, Route123_BerryMastersHouse_EventScript_163AF0
 	msgbox Route123_BerryMastersHouse_Text_1C5DC1, 4
 	giveitem ITEM_WATMEL_BERRY
 	compare RESULT, 0
@@ -120,7 +120,7 @@ Route123_BerryMastersHouse_EventScript_163B80:: @ 8163B80
 
 Route123_BerryMastersHouse_EventScript_163BB1:: @ 8163BB1
 	checkflag 251
-	jumpif EQUAL, Route123_BerryMastersHouse_EventScript_163AF0
+	jumpif FLAG_IS_SET, Route123_BerryMastersHouse_EventScript_163AF0
 	msgbox Route123_BerryMastersHouse_Text_1C5DC1, 4
 	giveitem ITEM_DURIN_BERRY
 	compare RESULT, 0
@@ -131,7 +131,7 @@ Route123_BerryMastersHouse_EventScript_163BB1:: @ 8163BB1
 
 Route123_BerryMastersHouse_EventScript_163BE2:: @ 8163BE2
 	checkflag 252
-	jumpif EQUAL, Route123_BerryMastersHouse_EventScript_163AF0
+	jumpif FLAG_IS_SET, Route123_BerryMastersHouse_EventScript_163AF0
 	msgbox Route123_BerryMastersHouse_Text_1C5DC1, 4
 	giveitem ITEM_BELUE_BERRY
 	compare RESULT, 0

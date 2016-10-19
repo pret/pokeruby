@@ -8,7 +8,7 @@ ShoalCave_LowTideLowerRoom_MapScript1_15E3F9:: @ 815E3F9
 
 ShoalCave_LowTideLowerRoom_EventScript_15E3FF:: @ 815E3FF
 	checkflag 955
-	jumpif EQUAL, ShoalCave_LowTideLowerRoom_EventScript_15E412
+	jumpif FLAG_IS_SET, ShoalCave_LowTideLowerRoom_EventScript_15E412
 	setmaptile 18, 2, 856, 1
 	return
 
@@ -18,7 +18,7 @@ ShoalCave_LowTideLowerRoom_EventScript_15E412:: @ 815E412
 ShoalCave_LowTideLowerRoom_EventScript_15E413:: @ 815E413
 	lockall
 	checkflag 955
-	jumpif EQUAL, ShoalCave_LowTideLowerRoom_EventScript_15E445
+	jumpif FLAG_IS_SET, ShoalCave_LowTideLowerRoom_EventScript_15E445
 	giveitem ITEM_SHOAL_SALT
 	compare RESULT, 0
 	jumpif EQUAL, ShoalCave_LowTideLowerRoom_EventScript_1A029B
@@ -37,7 +37,7 @@ ShoalCave_LowTideLowerRoom_EventScript_15E44F:: @ 815E44F
 	lock
 	faceplayer
 	checkflag 283
-	jumpif EQUAL, ShoalCave_LowTideLowerRoom_EventScript_15E47E
+	jumpif FLAG_IS_SET, ShoalCave_LowTideLowerRoom_EventScript_15E47E
 	msgbox ShoalCave_LowTideLowerRoom_Text_198200, 4
 	giveitem ITEM_FOCUS_BAND
 	compare RESULT, 0

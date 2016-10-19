@@ -5,7 +5,7 @@ MtPyre_1F_EventScript_15D323:: @ 815D323
 	lock
 	faceplayer
 	checkflag 282
-	jumpif EQUAL, MtPyre_1F_EventScript_15D352
+	jumpif FLAG_IS_SET, MtPyre_1F_EventScript_15D352
 	msgbox MtPyre_1F_Text_196151, 4
 	giveitem ITEM_CLEANSE_TAG
 	compare RESULT, 0

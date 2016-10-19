@@ -10,11 +10,11 @@ Route109_SeashoreHouse_EventScript_160DD4:: @ 8160DD4
 	lock
 	faceplayer
 	checkflag 140
-	jumpif EQUAL, Route109_SeashoreHouse_EventScript_160E36
+	jumpif FLAG_IS_SET, Route109_SeashoreHouse_EventScript_160E36
 	checkflag 141
-	jumpif EQUAL, Route109_SeashoreHouse_EventScript_160E08
+	jumpif FLAG_IS_SET, Route109_SeashoreHouse_EventScript_160E08
 	checkflag 2
-	jumpif EQUAL, Route109_SeashoreHouse_EventScript_160DFE
+	jumpif FLAG_IS_SET, Route109_SeashoreHouse_EventScript_160DFE
 	msgbox Route109_SeashoreHouse_Text_19B4D9, 4
 	setflag 2
 	release
@@ -95,11 +95,11 @@ Route109_SeashoreHouse_EventScript_160EEE:: @ 8160EEE
 
 Route109_SeashoreHouse_EventScript_160F09:: @ 8160F09
 	checktrainerflag OPPONENT_DWAYNE
-	jumpif 0, Route109_SeashoreHouse_EventScript_160F29
+	jumpif FLAG_NOT_SET, Route109_SeashoreHouse_EventScript_160F29
 	checktrainerflag OPPONENT_JOHANNA
-	jumpif 0, Route109_SeashoreHouse_EventScript_160F29
+	jumpif FLAG_NOT_SET, Route109_SeashoreHouse_EventScript_160F29
 	checktrainerflag OPPONENT_SIMON
-	jumpif 0, Route109_SeashoreHouse_EventScript_160F29
+	jumpif FLAG_NOT_SET, Route109_SeashoreHouse_EventScript_160F29
 	setflag 141
 	release
 	end

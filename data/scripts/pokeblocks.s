@@ -77,7 +77,7 @@ FallarborTown_ContestLobby_EventScript_1B770E:: @ 81B770E
 	msgbox FallarborTown_ContestLobby_Text_1B6FF0, 4
 	checkdailyflags
 	checkflag 2241
-	jumpif EQUAL, FallarborTown_ContestLobby_EventScript_1B774F
+	jumpif FLAG_IS_SET, FallarborTown_ContestLobby_EventScript_1B774F
 	jump FallarborTown_ContestLobby_EventScript_1B7759
 	end
 
@@ -163,7 +163,7 @@ FallarborTown_ContestLobby_EventScript_1B77DC:: @ 81B77DC
 FallarborTown_ContestLobby_EventScript_1B77E6:: @ 81B77E6
 	checkdailyflags
 	checkflag 2241
-	jumpif EQUAL, FallarborTown_ContestLobby_EventScript_1B77F6
+	jumpif FLAG_IS_SET, FallarborTown_ContestLobby_EventScript_1B77F6
 	jump FallarborTown_ContestLobby_EventScript_1B7800
 	end
 

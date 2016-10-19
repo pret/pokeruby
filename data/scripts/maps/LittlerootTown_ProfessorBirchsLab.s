@@ -88,7 +88,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152D63:: @ 8152D63
 	compare 0x4084, 3
 	jumpif 4, LittlerootTown_ProfessorBirchsLab_EventScript_152D90
 	checkflag 88
-	jumpif EQUAL, LittlerootTown_ProfessorBirchsLab_EventScript_152D86
+	jumpif FLAG_IS_SET, LittlerootTown_ProfessorBirchsLab_EventScript_152D86
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_173B29, 4
 	setflag 88
 	release
@@ -108,7 +108,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152D9A:: @ 8152D9A
 	lock
 	faceplayer
 	checkflag 896
-	jumpif 0, LittlerootTown_ProfessorBirchsLab_EventScript_1A037F
+	jumpif FLAG_NOT_SET, LittlerootTown_ProfessorBirchsLab_EventScript_1A037F
 	compare 0x4084, 5
 	jumpif EQUAL, LittlerootTown_ProfessorBirchsLab_EventScript_152E7B
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_1740B4, 4

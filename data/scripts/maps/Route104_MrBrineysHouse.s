@@ -7,7 +7,7 @@ Route104_MrBrineysHouse_MapScript1_15BCB8:: @ 815BCB8
 	compare 0x4090, 1
 	callif 1, Route104_MrBrineysHouse_EventScript_15BCD4
 	checkflag 188
-	callif 1, Route104_MrBrineysHouse_EventScript_15BCD0
+	callif FLAG_IS_SET, Route104_MrBrineysHouse_EventScript_15BCD0
 	end
 
 Route104_MrBrineysHouse_EventScript_15BCD0:: @ 815BCD0
@@ -25,11 +25,11 @@ Route104_MrBrineysHouse_EventScript_15BCEB:: @ 815BCEB
 	lock
 	faceplayer
 	checkflag 147
-	callif 0, Route104_MrBrineysHouse_EventScript_15BD0E
+	callif FLAG_NOT_SET, Route104_MrBrineysHouse_EventScript_15BD0E
 	checkflag 189
-	jumpif 0, Route104_MrBrineysHouse_EventScript_15BD65
+	jumpif FLAG_NOT_SET, Route104_MrBrineysHouse_EventScript_15BD65
 	checkflag 149
-	jumpif 0, Route104_MrBrineysHouse_EventScript_15BD7E
+	jumpif FLAG_NOT_SET, Route104_MrBrineysHouse_EventScript_15BD7E
 	jump Route104_MrBrineysHouse_EventScript_15BD32
 	end
 

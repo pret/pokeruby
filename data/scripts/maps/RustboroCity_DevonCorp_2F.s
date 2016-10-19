@@ -26,7 +26,7 @@ RustboroCity_DevonCorp_2F_EventScript_1574F9:: @ 81574F9
 	compare 0x40c4, 1
 	callif 1, RustboroCity_DevonCorp_2F_EventScript_1574DC
 	checkflag 287
-	jumpif EQUAL, RustboroCity_DevonCorp_2F_EventScript_157519
+	jumpif FLAG_IS_SET, RustboroCity_DevonCorp_2F_EventScript_157519
 	msgbox RustboroCity_DevonCorp_2F_Text_182BD8, 4
 	release
 	end
@@ -42,7 +42,7 @@ RustboroCity_DevonCorp_2F_EventScript_157523:: @ 8157523
 	compare 0x40c4, 1
 	callif 1, RustboroCity_DevonCorp_2F_EventScript_1574DC
 	checkflag 188
-	jumpif EQUAL, RustboroCity_DevonCorp_2F_EventScript_157543
+	jumpif FLAG_IS_SET, RustboroCity_DevonCorp_2F_EventScript_157543
 	msgbox RustboroCity_DevonCorp_2F_Text_182D2A, 4
 	release
 	end

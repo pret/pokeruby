@@ -5,7 +5,7 @@ ShoalCave_LowTideEntranceRoom_MapScripts:: @ 815E057
 ShoalCave_LowTideEntranceRoom_MapScript1_15E05D:: @ 815E05D
 	special 210
 	checkflag 2106
-	jumpif EQUAL, ShoalCave_LowTideEntranceRoom_EventScript_15E06E
+	jumpif FLAG_IS_SET, ShoalCave_LowTideEntranceRoom_EventScript_15E06E
 	jump ShoalCave_LowTideEntranceRoom_EventScript_15E072
 
 ShoalCave_LowTideEntranceRoom_EventScript_15E06E:: @ 815E06E
@@ -21,7 +21,7 @@ ShoalCave_LowTideEntranceRoom_EventScript_15E076:: @ 815E076
 	faceplayer
 	checkdailyflags
 	checkflag 2143
-	callif 1, ShoalCave_LowTideEntranceRoom_EventScript_15E176
+	callif FLAG_IS_SET, ShoalCave_LowTideEntranceRoom_EventScript_15E176
 	checkitem ITEM_SHOAL_SALT, 4
 	compare RESULT, 0
 	jumpif EQUAL, ShoalCave_LowTideEntranceRoom_EventScript_15E138

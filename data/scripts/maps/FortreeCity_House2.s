@@ -5,9 +5,9 @@ FortreeCity_House2_EventScript_1580B4:: @ 81580B4
 	lock
 	faceplayer
 	checkflag 264
-	jumpif EQUAL, FortreeCity_House2_EventScript_158157
+	jumpif FLAG_IS_SET, FortreeCity_House2_EventScript_158157
 	checkflag 118
-	callif 0, FortreeCity_House2_EventScript_15814B
+	callif FLAG_NOT_SET, FortreeCity_House2_EventScript_15814B
 	msgbox FortreeCity_House2_Text_186360, 4
 	multichoice 21, 8, 54, 1
 	switch RESULT

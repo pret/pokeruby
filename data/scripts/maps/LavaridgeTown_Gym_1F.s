@@ -71,7 +71,7 @@ LavaridgeTown_Gym_1F_EventScript_153740:: @ 8153740
 LavaridgeTown_Gym_1F_EventScript_153741:: @ 8153741
 	trainerbattle 1, OPPONENT_FLANNERY, 0, LavaridgeTown_Gym_1F_Text_176801, LavaridgeTown_Gym_1F_Text_176960, LavaridgeTown_Gym_1F_EventScript_153766
 	checkflag 168
-	jumpif 0, LavaridgeTown_Gym_1F_EventScript_1537A7
+	jumpif FLAG_NOT_SET, LavaridgeTown_Gym_1F_EventScript_1537A7
 	msgbox LavaridgeTown_Gym_1F_Text_176C4A, 4
 	release
 	end
@@ -136,7 +136,7 @@ LavaridgeTown_Gym_1F_EventScript_153859:: @ 8153859
 	lock
 	faceplayer
 	checkflag 1213
-	jumpif EQUAL, LavaridgeTown_Gym_1F_EventScript_15386E
+	jumpif FLAG_IS_SET, LavaridgeTown_Gym_1F_EventScript_15386E
 	msgbox LavaridgeTown_Gym_1F_Text_176312, 4
 	release
 	end
@@ -149,14 +149,14 @@ LavaridgeTown_Gym_1F_EventScript_15386E:: @ 815386E
 LavaridgeTown_Gym_1F_EventScript_153878:: @ 8153878
 	lockall
 	checkflag 2058
-	jumpif EQUAL, LavaridgeTown_Gym_1F_EventScript_153898
+	jumpif FLAG_IS_SET, LavaridgeTown_Gym_1F_EventScript_153898
 	jump LavaridgeTown_Gym_1F_EventScript_1538A2
 	end
 
 LavaridgeTown_Gym_1F_EventScript_153888:: @ 8153888
 	lockall
 	checkflag 2058
-	jumpif EQUAL, LavaridgeTown_Gym_1F_EventScript_153898
+	jumpif FLAG_IS_SET, LavaridgeTown_Gym_1F_EventScript_153898
 	jump LavaridgeTown_Gym_1F_EventScript_1538A2
 	end
 

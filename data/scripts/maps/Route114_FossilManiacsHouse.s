@@ -10,7 +10,7 @@ Route114_FossilManiacsHouse_EventScript_15C1C3:: @ 815C1C3
 	lock
 	faceplayer
 	checkflag 261
-	jumpif EQUAL, Route114_FossilManiacsHouse_EventScript_15C1F2
+	jumpif FLAG_IS_SET, Route114_FossilManiacsHouse_EventScript_15C1F2
 	msgbox Route114_FossilManiacsHouse_Text_1925E1, 4
 	giveitem ITEM_TM28
 	compare RESULT, 0

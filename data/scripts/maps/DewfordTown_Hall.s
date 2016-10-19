@@ -253,7 +253,7 @@ DewfordTown_Hall_EventScript_15359D:: @ 815359D
 	faceplayer
 	call DewfordTown_Hall_EventScript_1A0102
 	checkflag 230
-	jumpif EQUAL, DewfordTown_Hall_EventScript_1535D1
+	jumpif FLAG_IS_SET, DewfordTown_Hall_EventScript_1535D1
 	msgbox DewfordTown_Hall_Text_175E13, 4
 	giveitem ITEM_TM36
 	compare RESULT, 0

@@ -407,9 +407,9 @@ MtChimney_EventScript_15D174:: @ 815D174
 MtChimney_EventScript_15D17D:: @ 815D17D
 	lockall
 	checkflag 139
-	jumpif 0, MtChimney_EventScript_15D1D0
+	jumpif FLAG_NOT_SET, MtChimney_EventScript_15D1D0
 	checkflag 115
-	jumpif EQUAL, MtChimney_EventScript_15D1C6
+	jumpif FLAG_IS_SET, MtChimney_EventScript_15D1C6
 	msgbox MtChimney_Text_195870, 5
 	compare RESULT, 0
 	jumpif EQUAL, MtChimney_EventScript_15D1BC
