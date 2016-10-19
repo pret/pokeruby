@@ -171,7 +171,7 @@ extern u8 *gStdScripts_End[];
 extern u8 gSpeciesNames[][11];
 extern u8 gMoveNames[][13];
 
-extern u8 gUnknown_083762DC[6][3];
+extern u8 gScriptConditionTable[6][3];
 extern u8 * const gUnknown_083762F0[];
 extern u8 * const gUnknown_083CE048[];
 extern struct Decoration gDecorations[];
@@ -251,7 +251,7 @@ bool8 ScrCmd_jumpif(struct ScriptContext *ctx)
 {
     u8 condition = *(ctx->scriptPtr++);
     u8 *ptr = (u8 *)ScriptReadWord(ctx);
-    if (gUnknown_083762DC[condition][ctx->comparisonResult] == 1)
+    if (gScriptConditionTable[condition][ctx->comparisonResult] == 1)
         ScriptJump(ctx, ptr);
     return FALSE;
 }
@@ -260,7 +260,7 @@ bool8 ScrCmd_callif(struct ScriptContext *ctx)
 {
     u8 condition = *(ctx->scriptPtr++);
     u8 *ptr = (u8 *)ScriptReadWord(ctx);
-    if (gUnknown_083762DC[condition][ctx->comparisonResult] == 1)
+    if (gScriptConditionTable[condition][ctx->comparisonResult] == 1)
         ScriptCall(ctx, ptr);
     return FALSE;
 }
@@ -291,7 +291,7 @@ bool8 ScrCmd_if5(struct ScriptContext *ctx)
 {
     u8 condition = *(ctx->scriptPtr++);
     u8 *ptr = (u8 *)(ScriptReadWord(ctx) - gUnknown_0202E8B0);
-    if (gUnknown_083762DC[condition][ctx->comparisonResult] == 1)
+    if (gScriptConditionTable[condition][ctx->comparisonResult] == 1)
         ScriptJump(ctx, ptr);
     return FALSE;
 }
@@ -300,7 +300,7 @@ bool8 ScrCmd_if6(struct ScriptContext *ctx)
 {
     u8 condition = *(ctx->scriptPtr++);
     u8 *ptr = (u8 *)(ScriptReadWord(ctx) - gUnknown_0202E8B0);
-    if (gUnknown_083762DC[condition][ctx->comparisonResult] == 1)
+    if (gScriptConditionTable[condition][ctx->comparisonResult] == 1)
         ScriptCall(ctx, ptr);
     return FALSE;
 }
@@ -327,7 +327,7 @@ bool8 ScrCmd_jumpstdif(struct ScriptContext *ctx)
 {
     u8 condition = *(ctx->scriptPtr++);
     u8 index = *(ctx->scriptPtr++);
-    if (gUnknown_083762DC[condition][ctx->comparisonResult] == 1)
+    if (gScriptConditionTable[condition][ctx->comparisonResult] == 1)
     {
         u8 **ptr = &gStdScripts[index];
         if (ptr < gStdScripts_End)
@@ -340,7 +340,7 @@ bool8 ScrCmd_callstdif(struct ScriptContext *ctx)
 {
     u8 condition = *(ctx->scriptPtr++);
     u8 index = *(ctx->scriptPtr++);
-    if (gUnknown_083762DC[condition][ctx->comparisonResult] == 1)
+    if (gScriptConditionTable[condition][ctx->comparisonResult] == 1)
     {
         u8 **ptr = &gStdScripts[index];
         if (ptr < gStdScripts_End)

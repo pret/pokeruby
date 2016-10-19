@@ -22,7 +22,7 @@ gSpecialVars::
 	.4byte 0x202e8d8
 	.4byte 0x202e8da
 	.4byte 0x202e8e0
-	.4byte 0x202e8dc
+	.4byte gScriptResult
 	.4byte 0x203855e
 	.4byte 0x202e8de
 	.4byte 0x203869e

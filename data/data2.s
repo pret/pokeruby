@@ -7077,8 +7077,14 @@ gMessageBoxTilemap:: @ 8376290
 gUnknown_083762D8:: @ 83762D8
 	.4byte NULL
 
-gUnknown_083762DC:: @ 83762DC
-	.incbin "baserom.gba", 0x003762dc, 0x14
+gScriptConditionTable:: @ 83762DC
+	@     <  =  >
+	.byte 1, 0, 0 @ <
+	.byte 0, 1, 0 @ =
+	.byte 0, 0, 1 @ >
+	.byte 1, 1, 0 @ <=
+	.byte 0, 1, 1 @ >=
+	.byte 1, 0, 1 @ !=
 
 	.align 2
 gUnknown_083762F0:: @ 83762F0
