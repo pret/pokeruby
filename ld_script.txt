@@ -88,6 +88,8 @@ SECTIONS {
         asm/rom5_part2.o(.text);
         asm/berry.o(.text);
         asm/rom_80B5054.o(.text);
+        asm/battle_ai.o(.text);
+        asm/trader.o(.text);
         src/starter_choose.o(.text);
         src/wallclock.o(.text);
         asm/rom6.o(.text);
