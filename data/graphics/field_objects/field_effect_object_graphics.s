@@ -309,15 +309,15 @@ gFieldEffectPic_Unknown19_3: @ 836ADC8
 
 	.align 2
 gFieldEffectPic_SandPile_0: @ 836AE48
-	.incbin "graphics/field_effect_objects/pics/unknown_29/0.4bpp"
+	.incbin "graphics/field_effect_objects/pics/sand_pile/0.4bpp"
 
 	.align 2
 gFieldEffectPic_SandPile_1: @ 836AE88
-	.incbin "graphics/field_effect_objects/pics/unknown_29/1.4bpp"
+	.incbin "graphics/field_effect_objects/pics/sand_pile/1.4bpp"
 
 	.align 2
 gFieldEffectPic_SandPile_2: @ 836AEC8
-	.incbin "graphics/field_effect_objects/pics/unknown_29/2.4bpp"
+	.incbin "graphics/field_effect_objects/pics/sand_pile/2.4bpp"
 
 	.align 2
 gFieldEffectPic_JumpBigSplash_0: @ 836AF08
@@ -489,23 +489,23 @@ gFieldEffectPic_PopOutOfAsh_4: @ 836CC68
 
 	.align 2
 gFieldEffectPic_LavaridgeGymWarp_0: @ 836CCE8
-	.incbin "graphics/field_effect_objects/pics/unknown_33/0.4bpp"
+	.incbin "graphics/field_effect_objects/pics/lavaridge_gym_warp/0.4bpp"
 
 	.align 2
 gFieldEffectPic_LavaridgeGymWarp_1: @ 836CD68
-	.incbin "graphics/field_effect_objects/pics/unknown_33/1.4bpp"
+	.incbin "graphics/field_effect_objects/pics/lavaridge_gym_warp/1.4bpp"
 
 	.align 2
 gFieldEffectPic_LavaridgeGymWarp_2: @ 836CDE8
-	.incbin "graphics/field_effect_objects/pics/unknown_33/2.4bpp"
+	.incbin "graphics/field_effect_objects/pics/lavaridge_gym_warp/2.4bpp"
 
 	.align 2
 gFieldEffectPic_LavaridgeGymWarp_3: @ 836CE68
-	.incbin "graphics/field_effect_objects/pics/unknown_33/3.4bpp"
+	.incbin "graphics/field_effect_objects/pics/lavaridge_gym_warp/3.4bpp"
 
 	.align 2
 gFieldEffectPic_LavaridgeGymWarp_4: @ 836CEE8
-	.incbin "graphics/field_effect_objects/pics/unknown_33/4.4bpp"
+	.incbin "graphics/field_effect_objects/pics/lavaridge_gym_warp/4.4bpp"
 
 	.align 2
 gFieldEffectPic_Bubbles_0: @ 836CF68
@@ -541,11 +541,11 @@ gFieldEffectPic_Bubbles_7: @ 836D668
 
 	.align 2
 gFieldEffectPic_Sparkle_0: @ 836D768
-	.incbin "graphics/field_effect_objects/pics/unknown_35/0.4bpp"
+	.incbin "graphics/field_effect_objects/pics/sparkle/0.4bpp"
 
 	.align 2
 gFieldEffectPic_Sparkle_1: @ 836D7E8
-	.incbin "graphics/field_effect_objects/pics/unknown_35/1.4bpp"
+	.incbin "graphics/field_effect_objects/pics/sparkle/1.4bpp"
 
 	.align 2
 gFieldEffectObjectPalette3: @ 836D868
