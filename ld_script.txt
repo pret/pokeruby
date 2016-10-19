@@ -98,6 +98,8 @@ SECTIONS {
         asm/rom_81258BC.o(.text);
         src/intro.o(.text);
         asm/rom_813BA94.o(.text);
+        asm/clear_save_data_menu.o(.text);
+        asm/rom_8148B8C.o(.text);
     } =0
 
     script_data :
