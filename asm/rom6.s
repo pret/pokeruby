@@ -32692,8 +32692,8 @@ _0811B6A8:
 _0811B6B0: .4byte sub_811B578
 	thumb_func_end sub_811B688
 
-	thumb_func_start sub_811B6B4
-sub_811B6B4: @ 811B6B4
+	thumb_func_start FldEff_Pokeball
+FldEff_Pokeball: @ 811B6B4
 	push {r4,r5,lr}
 	ldr r0, _0811B710
 	ldr r5, _0811B714
@@ -32742,7 +32742,7 @@ _0811B710: .4byte gSpriteTemplate_83FD98C
 _0811B714: .4byte gUnknown_0202FF84
 _0811B718: .4byte gSprites
 _0811B71C: .4byte 0x0000ffff
-	thumb_func_end sub_811B6B4
+	thumb_func_end FldEff_Pokeball
 
 	thumb_func_start sub_811B720
 sub_811B720: @ 811B720

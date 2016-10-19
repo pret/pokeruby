@@ -254,7 +254,7 @@ gFieldEffectScript_UseDive: @ 81D9D99
 
 gFieldEffectScript_Pokeball: @ 81D9D9F
 	loadpal gFieldEffectObjectPaletteInfo10
-	callnative sub_811B6B4
+	callnative FldEff_Pokeball
 	end
 
 gFieldEffectScript_HeartIcon: @ 81D9DAA
