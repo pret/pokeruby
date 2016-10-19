@@ -36,7 +36,7 @@ gFieldEffectScriptPointers:: @ 81D9B34
 	.4byte gFieldEffectScript_UseSecretPowerShrub
 	.4byte gFieldEffectScript_TreeDisguise
 	.4byte gFieldEffectScript_MountainDisguise
-	.4byte gFieldEffectScript_Unknown30
+	.4byte gFieldEffectScript_NPCFlyOut
 	.4byte gFieldEffectScript_UseFly
 	.4byte gFieldEffectScript_FlyIn
 	.4byte gFieldEffectScript_ExclamationMarkIcon2
@@ -192,8 +192,8 @@ gFieldEffectScript_MountainDisguise: @ 81D9D2B
 	callnative FldEff_MountainDisguise
 	end
 
-gFieldEffectScript_Unknown30: @ 81D9D31
-	callnative FldEff_Unknown30
+gFieldEffectScript_NPCFlyOut: @ 81D9D31
+	callnative FldEff_NPCFlyOut
 	end
 
 gFieldEffectScript_UseFly: @ 81D9D37

@@ -6429,8 +6429,8 @@ _08088B60: .4byte gMapObjects
 _08088B64: .4byte sub_8088954
 	thumb_func_end sub_8088AF4
 
-	thumb_func_start FldEff_Unknown30
-FldEff_Unknown30: @ 8088B68
+	thumb_func_start FldEff_NPCFlyOut
+FldEff_NPCFlyOut: @ 8088B68
 	push {r4,lr}
 	ldr r0, _08088BB4
 	ldr r0, [r0, 0x68]
@@ -6471,7 +6471,7 @@ _08088BB4: .4byte gFieldEffectObjectTemplatePointers
 _08088BB8: .4byte gSprites
 _08088BBC: .4byte sub_8088BC4
 _08088BC0: .4byte gUnknown_0202FF84
-	thumb_func_end FldEff_Unknown30
+	thumb_func_end FldEff_NPCFlyOut
 
 	thumb_func_start sub_8088BC4
 sub_8088BC4: @ 8088BC4
