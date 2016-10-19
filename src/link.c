@@ -1245,10 +1245,10 @@ static void CB2_PrintErrorMessage(void)
         break;
     case 30:
     case 60:
-        PlaySE(SE_BOO);
+        PlaySoundEffect(SE_BOO);
         break;
     case 90:
-        PlaySE(SE_BOO);
+        PlaySoundEffect(SE_BOO);
         break;
     }
 

@@ -59,7 +59,7 @@ struct PokedexView {
     u8 unk65E[8];
 };
 
-extern struct MusicPlayerInfo gMPlay_BGM;
+extern struct MusicPlayerInfo gMPlay_BkgndMusic;
 extern u8 gReservedSpritePaletteCount;
 extern struct PokedexView *gUnknown_0202FFB4;
 extern u16 gUnknown_0202FFB8;
@@ -291,7 +291,7 @@ void CB2_InitPokedex(void)
             SetVBlankCallback(sub_808C0B8);
             SetMainCallback2(MainCB);
             sub_808D690(gUnknown_0202FFB4->unk612, gUnknown_0202FFB4->unk616);
-            m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 0x80);
+            m4aMPlayVolumeControl(&gMPlay_BkgndMusic, 0xFFFF, 0x80);
         }
     }
 }
@@ -356,7 +356,7 @@ void Task_PokedexMainScreen(u8 taskId)
               0, 0, 0x10, 0);
             gSprites[gUnknown_0202FFB4->unk626].callback = sub_808EDB8;
             gTasks[taskId].func = sub_808CA64;
-            PlaySE(SE_PIN);
+            PlaySoundEffect(SE_PIN);
         }
         else if(gMain.newKeys & START_BUTTON)
         {
@@ -365,11 +365,11 @@ void Task_PokedexMainScreen(u8 taskId)
             gUnknown_0202FFB4->unk650 = 1;
             gUnknown_0202FFB4->unk652 = 0;
             gTasks[taskId].func = Task_PokedexMainScreenMenu;
-            PlaySE(SE_SELECT);
+            PlaySoundEffect(SE_SELECT);
         }
         else if(gMain.newKeys & SELECT_BUTTON)
         {
-            PlaySE(SE_SELECT);
+            PlaySoundEffect(SE_SELECT);
             BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
             gTasks[taskId].data[0] = sub_8091E3C();
             gUnknown_0202FFB4->unk64F = 0;
@@ -378,13 +378,13 @@ void Task_PokedexMainScreen(u8 taskId)
             gUnknown_0202FFB4->unk614 = gUnknown_0202FFB4->unk612;
             gUnknown_0202FFB4->unk618 = gUnknown_0202FFB4->unk616;
             gTasks[taskId].func = sub_808CB8C;
-            PlaySE(SE_PC_LOGON);
+            PlaySoundEffect(SE_PC_LOGON);
         }
         else if(gMain.newKeys & B_BUTTON)
         {
             BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
             gTasks[taskId].func = Task_ClosePokedex;
-            PlaySE(SE_PC_OFF);
+            PlaySoundEffect(SE_PC_OFF);
         }
         else
         {
@@ -439,7 +439,7 @@ void Task_PokedexMainScreenMenu(u8 taskId)
                 case 3: //CLOSE POKEDEX
                     BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
                     gTasks[taskId].func = Task_ClosePokedex;
-                    PlaySE(SE_PC_OFF);
+                    PlaySoundEffect(SE_PC_OFF);
                     break;
             }
         }
@@ -449,17 +449,17 @@ void Task_PokedexMainScreenMenu(u8 taskId)
         {
             gUnknown_0202FFB4->unk650 = 0;
             gTasks[taskId].func = Task_PokedexMainScreen;
-            PlaySE(SE_SELECT);
+            PlaySoundEffect(SE_SELECT);
         }
         else if((gMain.newAndRepeatedKeys & DPAD_UP) && gUnknown_0202FFB4->unk652 != 0)
         {
             gUnknown_0202FFB4->unk652--;
-            PlaySE(SE_SELECT);
+            PlaySoundEffect(SE_SELECT);
         }
         else if((gMain.newAndRepeatedKeys & DPAD_DOWN) && gUnknown_0202FFB4->unk652 <= 2)
         {
             gUnknown_0202FFB4->unk652++;
-            PlaySE(SE_SELECT);
+            PlaySoundEffect(SE_SELECT);
         }
     }
 }
@@ -529,7 +529,7 @@ void Task_ClosePokedex(u8 taskId)
         gSaveBlock2.pokedex.order = gUnknown_0202FFB4->unk616;
         DestroyTask(taskId);
         SetMainCallback2(sub_805469C);
-        m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 0x100);
+        m4aMPlayVolumeControl(&gMPlay_BkgndMusic, 0xFFFF, 0x100);
     }
 }
 
@@ -557,7 +557,7 @@ void Task_PokedexResultsScreen(u8 taskId)
             gSprites[gUnknown_0202FFB4->unk626].callback = sub_808EDB8;
             BeginNormalPaletteFade(~a, 0, 0, 0x10, 0);
             gTasks[taskId].func = sub_808D118;
-            PlaySE(SE_PIN);
+            PlaySoundEffect(SE_PIN);
         }
         else if(gMain.newKeys & START_BUTTON)
         {
@@ -565,7 +565,7 @@ void Task_PokedexResultsScreen(u8 taskId)
             gUnknown_0202FFB4->unk650 = 1;
             gUnknown_0202FFB4->unk652 = 0;
             gTasks[taskId].func = Task_PokedexResultsScreenMenu;
-            PlaySE(SE_SELECT);
+            PlaySoundEffect(SE_SELECT);
         }
         else if(gMain.newKeys & SELECT_BUTTON)
         {
@@ -573,13 +573,13 @@ void Task_PokedexResultsScreen(u8 taskId)
             gTasks[taskId].data[0] = sub_8091E3C();
             gUnknown_0202FFB4->unk64F = 0;
             gTasks[taskId].func = sub_808CB8C;
-            PlaySE(SE_PC_LOGON);
+            PlaySoundEffect(SE_PC_LOGON);
         }
         else if(gMain.newKeys & B_BUTTON)
         {
             BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
             gTasks[taskId].func = Task_PokedexResultsScreenReturnToMainScreen;
-            PlaySE(SE_PC_OFF);
+            PlaySoundEffect(SE_PC_OFF);
         }
         else
         {
@@ -630,12 +630,12 @@ void Task_PokedexResultsScreenMenu(u8 taskId)
                 case 3: //BACK TO POKEDEX
                     BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
                     gTasks[taskId].func = Task_PokedexResultsScreenReturnToMainScreen;
-                    PlaySE(SE_TRACK_DOOR);
+                    PlaySoundEffect(SE_TRACK_DOOR);
                     break;
                 case 4: //CLOSE POKEDEX
                     BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
                     gTasks[taskId].func = Task_PokedexResultsScreenExitPokedex;
-                    PlaySE(SE_PC_OFF);
+                    PlaySoundEffect(SE_PC_OFF);
                     break;
             }
         }
@@ -645,17 +645,17 @@ void Task_PokedexResultsScreenMenu(u8 taskId)
         {
             gUnknown_0202FFB4->unk650 = 0;
             gTasks[taskId].func = Task_PokedexResultsScreen;
-            PlaySE(SE_SELECT);
+            PlaySoundEffect(SE_SELECT);
         }
         else if((gMain.newAndRepeatedKeys & DPAD_UP) && gUnknown_0202FFB4->unk652)
         {
             gUnknown_0202FFB4->unk652--;
-            PlaySE(SE_SELECT);
+            PlaySoundEffect(SE_SELECT);
         }
         else if((gMain.newAndRepeatedKeys & DPAD_DOWN) && gUnknown_0202FFB4->unk652 <= 3)
         {
             gUnknown_0202FFB4->unk652++;
-            PlaySE(SE_SELECT);
+            PlaySoundEffect(SE_SELECT);
         }
     }
 }

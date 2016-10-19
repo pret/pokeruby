@@ -5142,7 +5142,7 @@ sub_80408BC: @ 80408BC
 	bl sub_8040728
 	lsls r0, 16
 	lsrs r0, 16
-	bl PlayBGM
+	bl PlayBkgndMusic
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80408BC

@@ -314,13 +314,13 @@ static void Task_SetClock4(u8 taskId)
     switch(ProcessMenuInputNoWrap_())
     {
         case 0:     //YES
-            PlaySE(SE_SELECT);
+            PlaySoundEffect(SE_SELECT);
             gTasks[taskId].func = Task_SetClock5;   //Move on
             return;
         case -1:    //B button
         case 1:     //NO
             sub_8072DEC();
-            PlaySE(SE_SELECT);
+            PlaySoundEffect(SE_SELECT);
             MenuZeroFillWindowRect(23, 8, 29, 13);
             MenuZeroFillWindowRect(2, 16, 27, 19);
             gTasks[taskId].func = Task_SetClock2;   //Go back and let player adjust clock

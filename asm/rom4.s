@@ -1346,7 +1346,7 @@ sub_80557E8: @ 80557E8
 sub_80557F4: @ 80557F4
 	push {lr}
 	movs r0, 0x6
-	bl PlaySE
+	bl PlaySoundEffect
 	bl sub_8071310
 	bl ScriptContext2_Enable
 	pop {r0}
@@ -1358,7 +1358,7 @@ sub_8055808: @ 8055808
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	adds r0, r4, 0
 	bl ScriptContext1_SetupScript
 	bl ScriptContext2_Enable
@@ -1371,7 +1371,7 @@ sub_8055808: @ 8055808
 sub_8055824: @ 8055824
 	push {lr}
 	movs r0, 0x6
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r0, _0805583C
 	bl ScriptContext1_SetupScript
 	bl ScriptContext2_Enable
@@ -1386,7 +1386,7 @@ sub_8055840: @ 8055840
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	adds r0, r4, 0
 	bl ScriptContext1_SetupScript
 	bl ScriptContext2_Enable
@@ -10422,7 +10422,7 @@ PlayerJumpLedge: @ 805949C
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0xA
-	bl PlaySE
+	bl PlaySoundEffect
 	adds r0, r4, 0
 	bl GetJumpLedgeAnimId
 	lsls r0, 24
@@ -10519,7 +10519,7 @@ sub_805954C: @ 805954C
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x22
-	bl PlaySE
+	bl PlaySoundEffect
 	adds r0, r4, 0
 	bl sub_8060A5C
 	lsls r0, 24
@@ -10538,7 +10538,7 @@ sub_8059570: @ 8059570
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x22
-	bl PlaySE
+	bl PlaySoundEffect
 	adds r0, r4, 0
 	bl sub_8060A88
 	lsls r0, 24
@@ -10557,7 +10557,7 @@ sub_8059594: @ 8059594
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x22
-	bl PlaySE
+	bl PlaySoundEffect
 	adds r0, r4, 0
 	bl sub_8060AB4
 	lsls r0, 24
@@ -10576,7 +10576,7 @@ sub_80595B8: @ 80595B8
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x22
-	bl PlaySE
+	bl PlaySoundEffect
 	adds r0, r4, 0
 	bl sub_8060878
 	lsls r0, 24
@@ -10595,7 +10595,7 @@ sub_80595DC: @ 80595DC
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x7
-	bl PlaySE
+	bl PlaySoundEffect
 	adds r0, r4, 0
 	bl sub_8060AE0
 	lsls r0, 24
@@ -10697,7 +10697,7 @@ PlayCollisionSoundIfNotFacingWarp: @ 8059648
 	bne _080596B0
 _080596AA:
 	movs r0, 0x7
-	bl PlaySE
+	bl PlaySoundEffect
 _080596B0:
 	add sp, 0x4
 	pop {r4}
@@ -11843,7 +11843,7 @@ sub_8059EA4: @ 8059EA4
 	movs r0, 0xA
 	bl FieldEffectStart
 	movs r0, 0xD6
-	bl PlaySE
+	bl PlaySoundEffect
 	ldrh r0, [r6, 0x8]
 	adds r0, 0x1
 	strh r0, [r6, 0x8]
@@ -11965,7 +11965,7 @@ sub_805A000: @ 805A000
 	cmp r0, 0
 	beq _0805A05C
 	movs r0, 0xA
-	bl PlaySE
+	bl PlaySoundEffect
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
@@ -12073,7 +12073,7 @@ sub_805A0D8: @ 805A0D8
 	strb r0, [r1, 0x6]
 	bl ScriptContext2_Enable
 	movs r0, 0x2D
-	bl PlaySE
+	bl PlaySoundEffect
 	movs r0, 0x1
 	pop {r1}
 	bx r1

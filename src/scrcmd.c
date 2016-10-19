@@ -896,13 +896,13 @@ bool8 ScrCmd_countpokemon(struct ScriptContext *ctx)
 
 bool8 ScrCmd_playsfx(struct ScriptContext *ctx)
 {
-    PlaySE(ScriptReadHalfword(ctx));
+    PlaySoundEffect(ScriptReadHalfword(ctx));
     return FALSE;
 }
 
 bool8 s30_music_check_asm()
 {
-    if (!IsSEPlaying())
+    if (!IsSoundEffectPlaying())
         return TRUE;
     else
         return FALSE;
@@ -963,10 +963,10 @@ bool8 ScrCmd_fadeout(struct ScriptContext *ctx)
 {
     u8 val = *(ctx->scriptPtr++);
     if (val)
-        FadeOutBGMTemporarily(4 * val);
+        FadeOutBkgndMusicTemporarily(4 * val);
     else
-        FadeOutBGMTemporarily(4);
-    SetupNativeScript(ctx, IsBGMPausedOrStopped);
+        FadeOutBkgndMusicTemporarily(4);
+    SetupNativeScript(ctx, IsBkgndMusicPausedOrStopped);
     return TRUE;
 }
 
@@ -974,9 +974,9 @@ bool8 ScrCmd_fadein(struct ScriptContext *ctx)
 {
     u8 val = *(ctx->scriptPtr++);
     if (val)
-        FadeInBGM(4 * val);
+        FadeInBkgndMusic(4 * val);
     else
-        FadeInBGM(4);
+        FadeInBkgndMusic(4);
     return FALSE;
 }
 
@@ -1880,7 +1880,7 @@ bool8 ScrCmd_setdooropened(struct ScriptContext *ctx)
     v3 += 7;
     v4 += 7;
     v7 = sub_8058790(v3, v4);
-    PlaySE(v7);
+    PlaySoundEffect(v7);
     task_overworld_door_add_if_role_69_for_opening_door_at(v3, v4);
     return FALSE;
 }

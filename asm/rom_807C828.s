@@ -2826,7 +2826,7 @@ _0807DDA0:
 _0807DDA6:
 	strb r0, [r1]
 	adds r0, r2, 0
-	bl PlaySE
+	bl PlaySoundEffect
 _0807DDAE:
 	pop {r0}
 	bx r0
@@ -2837,7 +2837,7 @@ _0807DDB4: .4byte 0x000006dd
 	thumb_func_start PlayRainSoundEffect
 PlayRainSoundEffect: @ 807DDB8
 	push {lr}
-	bl IsSpecialSEPlaying
+	bl IsSpecialSoundEffectPlaying
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807DDF6
@@ -2852,18 +2852,18 @@ PlayRainSoundEffect: @ 807DDB8
 	cmp r0, 0
 	bne _0807DDF0
 	movs r0, 0x56
-	bl PlaySE
+	bl PlaySoundEffect
 	b _0807DDF6
 	.align 2, 0
 _0807DDE0: .4byte gUnknown_0202F7E8
 _0807DDE4: .4byte 0x000006dd
 _0807DDE8:
 	movs r0, 0x54
-	bl PlaySE
+	bl PlaySoundEffect
 	b _0807DDF6
 _0807DDF0:
 	movs r0, 0x52
-	bl PlaySE
+	bl PlaySoundEffect
 _0807DDF6:
 	pop {r0}
 	bx r0
@@ -5769,7 +5769,7 @@ sub_807F434: @ 807F434
 	ldrh r0, [r1]
 	cmp r0, 0
 	bne _0807F490
-	bl IsSEPlaying
+	bl IsSoundEffectPlaying
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807F494
@@ -5778,14 +5778,14 @@ sub_807F434: @ 807F434
 	cmp r4, 0
 	beq _0807F474
 	movs r0, 0x57
-	bl PlaySE
+	bl PlaySoundEffect
 	b _0807F47A
 	.align 2, 0
 _0807F46C: .4byte gUnknown_08396FC4
 _0807F470: .4byte 0x000006ed
 _0807F474:
 	movs r0, 0x58
-	bl PlaySE
+	bl PlaySoundEffect
 _0807F47A:
 	ldr r0, _0807F488
 	ldr r0, [r0]
@@ -8823,7 +8823,7 @@ sub_8080B78: @ 8080B78
 	bl sub_8053E90
 	bl pal_fill_for_maplights
 	movs r0, 0x2E
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r0, _08080B98
 	movs r1, 0xA
 	bl CreateTask
@@ -9213,7 +9213,7 @@ sub_8080E88: @ 8080E88
 	bl sub_8080918
 	bl PlayRainSoundEffect
 	movs r0, 0x9
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r0, _08080EB4
 	ldr r1, _08080EB8
 	str r1, [r0]
@@ -9323,7 +9323,7 @@ sub_8080F68: @ 8080F68
 	bl sub_8053FF8
 	bl sub_8080918
 	movs r0, 0x2D
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r0, _08080F90
 	movs r1, 0xA
 	bl CreateTask
@@ -9419,7 +9419,7 @@ sub_808102C: @ 808102C
 	bl sub_8053FF8
 	bl sub_8080918
 	movs r0, 0x9
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r0, _0808104C
 	movs r1, 0xA
 	bl CreateTask
@@ -9461,7 +9461,7 @@ _0808107E:
 	bl fade_screen
 	bl sub_8053FF8
 	movs r0, 0x9
-	bl PlaySE
+	bl PlaySoundEffect
 	b _080810AC
 _08081096:
 	bl sub_8080E64
@@ -9613,7 +9613,7 @@ _080811A8:
 	bl sub_8058790
 	lsls r0, 16
 	lsrs r0, 16
-	bl PlaySE
+	bl PlaySoundEffect
 	movs r1, 0
 	ldrsh r0, [r4, r1]
 	movs r2, 0
@@ -9800,7 +9800,7 @@ sub_8081334: @ 8081334
 	bl sub_8080918
 	bl PlayRainSoundEffect
 	movs r0, 0x9
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r0, _08081360
 	ldr r1, _08081364
 	str r1, [r0]
@@ -13559,7 +13559,7 @@ sub_8082F68: @ 8082F68
 	cmp r0, 0x1
 	bne _08082FCC
 	movs r0, 0x15
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r0, _08082FC4
 	bl ShowFieldAutoScrollMessage
 	ldr r0, _08082FC8
@@ -13570,7 +13570,7 @@ _08082FC4: .4byte gUnknown_081A4932
 _08082FC8: .4byte sub_8082FEC
 _08082FCC:
 	movs r0, 0x16
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r0, _08082FE4
 	bl ShowFieldAutoScrollMessage
 	ldr r0, _08082FE8
@@ -13756,7 +13756,7 @@ _08083158:
 	cmp r0, 0
 	beq _08083178
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	bl sub_8007F4C
 	ldr r0, _08083180
 	lsls r1, r6, 2

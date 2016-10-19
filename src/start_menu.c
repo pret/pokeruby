@@ -333,17 +333,17 @@ static u8 StartMenu_InputProcessCallback(void)
 {
     if(gMain.newKeys & DPAD_UP)
     {
-        PlaySE(SE_SELECT);
+        PlaySoundEffect(SE_SELECT);
         sStartMenuCursorPos = MoveMenuCursor(-1);
     }
     if(gMain.newKeys & DPAD_DOWN)
     {
-        PlaySE(SE_SELECT);
+        PlaySoundEffect(SE_SELECT);
         sStartMenuCursorPos = MoveMenuCursor(1);
     }
     if(gMain.newKeys & A_BUTTON)
     {
-        PlaySE(SE_SELECT);
+        PlaySoundEffect(SE_SELECT);
         if(gStartMenuItems[sCurrentStartMenuActions[sStartMenuCursorPos]].callback == StartMenu_PokedexCallback)
         {
             if(pokedex_count(0) == 0)
@@ -583,7 +583,7 @@ static bool8 SaveDialogCheckForTimeoutOrKeypress(void)
     saveDialogTimer--;
     if(gMain.heldKeys & A_BUTTON)
     {
-        PlaySE(SE_SELECT);
+        PlaySoundEffect(SE_SELECT);
         return TRUE;
     }
     else if(saveDialogTimer == 0)
@@ -720,7 +720,7 @@ static u8 SaveDialogCB_SaveSuccess(void)
 {
     if(MenuUpdateWindowText())
     {
-        PlaySE(SE_SAVE);
+        PlaySoundEffect(SE_SAVE);
         saveDialogCallback = SaveDialogCB_ReturnSuccess;
     }
     return SAVE_IN_PROGRESS;
@@ -728,7 +728,7 @@ static u8 SaveDialogCB_SaveSuccess(void)
 
 static u8 SaveDialogCB_ReturnSuccess(void)
 {
-    if(!IsSEPlaying() && SaveDialogCheckForTimeoutOrKeypress())
+    if(!IsSoundEffectPlaying() && SaveDialogCheckForTimeoutOrKeypress())
     {
         sub_8071700();
         return SAVE_SUCCESS;
@@ -741,7 +741,7 @@ static u8 SaveDialogCB_SaveError(void)
 {
     if(MenuUpdateWindowText())
     {
-        PlaySE(SE_BOO);
+        PlaySoundEffect(SE_BOO);
         saveDialogCallback = SaveDialogCB_ReturnError;
     }
     return SAVE_IN_PROGRESS;
@@ -875,7 +875,7 @@ static void Task_8071B64(u8 taskId)
 
 void sub_8071C20(void)
 {
-    PlaySE(SE_SELECT);
+    PlaySoundEffect(SE_SELECT);
     MenuZeroFillScreen();
     sub_8064E2C();
     ScriptContext2_Disable();

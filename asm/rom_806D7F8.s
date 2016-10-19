@@ -2557,7 +2557,7 @@ _0806EB80:
 	cmp r1, r0
 	bne _0806EB8E
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 _0806EB8E:
 	movs r0, 0x17
 	movs r1, 0x8
@@ -2940,7 +2940,7 @@ _0806EEBC:
 	cmp r1, r0
 	bne _0806EECA
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 _0806EECA:
 	movs r0, 0x17
 	movs r1, 0x8
@@ -3058,7 +3058,7 @@ _0806EFA8:
 	cmp r1, r0
 	bne _0806EFB6
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 _0806EFB6:
 	movs r0, 0x17
 	movs r1, 0x8
@@ -3170,7 +3170,7 @@ sub_806F06C: @ 806F06C
 	lsls r5, 16
 	lsrs r5, 16
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r1, _0806F0A8
 	lsls r0, r4, 2
 	adds r0, r4
@@ -3581,7 +3581,7 @@ _0806F3E0:
 	cmp r1, r0
 	bne _0806F3EE
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 _0806F3EE:
 	adds r0, r5, 0
 	bl sub_806F614
@@ -3972,7 +3972,7 @@ _0806F73C:
 	cmp r1, r0
 	bne _0806F74A
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 _0806F74A:
 	movs r0, 0x17
 	movs r1, 0x8
@@ -4334,7 +4334,7 @@ sub_806FA18: @ 806FA18
 	cmp r0, r1
 	bne _0806FAE4
 	movs r0, 0x1
-	bl PlaySE
+	bl PlaySoundEffect
 	movs r0, 0x80
 	lsls r0, 5
 	adds r4, r6, r0
@@ -4893,7 +4893,7 @@ _0806FEE6:
 	movs r0, 0
 	strb r0, [r1]
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r0, _0806FF0C
 	movs r1, 0x1
 	bl sub_806E834
@@ -4915,13 +4915,13 @@ _0806FF14:
 	cmp r0, 0
 	bne _0806FF34
 	movs r0, 0x1
-	bl PlaySE
+	bl PlaySoundEffect
 	b _0806FF3A
 	.align 2, 0
 _0806FF30: .4byte gUnknown_0202E8F4
 _0806FF34:
 	movs r0, 0x75
-	bl PlaySE
+	bl PlaySoundEffect
 _0806FF3A:
 	ldr r4, _0806FF88
 	ldr r0, [r4]
@@ -5175,7 +5175,7 @@ _08070134:
 	movs r3, 0x13
 	bl MenuZeroFillWindowRect
 	movs r0, 0x1
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r0, [r4]
 	ldrb r1, [r4, 0x5]
 	bl sub_806FBB4
@@ -5447,7 +5447,7 @@ sub_8070374: @ 8070374
 	cmp r0, 0
 	beq _0807039C
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	movs r0, 0x1
 	negs r0, r0
 	bl MoveMenuCursor
@@ -5460,7 +5460,7 @@ _0807039C:
 	cmp r0, 0
 	beq _080703B2
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	movs r0, 0x1
 	bl MoveMenuCursor
 	b _080703E4
@@ -5482,7 +5482,7 @@ _080703CC:
 	cmp r0, 0
 	beq _080703E4
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r0, _080703EC
 	ldr r1, [r0, 0x4]
 	adds r0, r4, 0
@@ -5558,7 +5558,7 @@ _08070468: .4byte gTasks
 _0807046C: .4byte TaskDummy
 _08070470:
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	movs r0, 0xA
 	movs r1, 0x3
 	bl sub_806D538
@@ -5699,7 +5699,7 @@ ether_effect_related: @ 8070570
 	ldr r0, _080705B0
 	strb r5, [r0]
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r0, _080705B4
 	movs r1, 0x1
 	bl sub_806E834
@@ -5714,7 +5714,7 @@ _080705B8:
 	movs r0, 0x1
 	strb r0, [r1]
 	movs r0, 0x1
-	bl PlaySE
+	bl PlaySoundEffect
 	ldrh r0, [r6, 0x6]
 	movs r1, 0x1
 	bl sub_80A9538
@@ -5772,7 +5772,7 @@ dp05_pp_up: @ 8070624
 	str r4, [r3]
 	bl sub_806E8D0
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	movs r0, 0xB
 	movs r1, 0x3
 	bl sub_806D538
@@ -5858,7 +5858,7 @@ _080706F6:
 	movs r0, 0
 	strb r0, [r1]
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r0, _0807071C
 	movs r1, 0x1
 	bl sub_806E834
@@ -5946,7 +5946,7 @@ sub_80707A0: @ 80707A0
 	beq _080707E8
 _080707CE:
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	adds r0, r4, 0
 	bl sub_8070848
 	ldr r0, _080707F8
@@ -5984,7 +5984,7 @@ sub_8070800: @ 8070800
 	beq _08070834
 _0807081A:
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	adds r0, r4, 0
 	bl sub_8070968
 	ldr r0, _08070840
@@ -6651,7 +6651,7 @@ sub_8070DBC: @ 8070DBC
 	lsls r1, 16
 	lsrs r6, r1, 16
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 	ldr r1, _08070E18
 	lsls r0, r4, 2
 	adds r0, r4

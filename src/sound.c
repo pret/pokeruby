@@ -23,10 +23,10 @@ static u8 sMapMusicFadeInSpeed;
 static u16 sFanfareCounter;
 
 extern bool8 gDisableMusic;
-extern struct MusicPlayerInfo gMPlay_BGM;
-extern struct MusicPlayerInfo gMPlay_SE1;
-extern struct MusicPlayerInfo gMPlay_SE2;
-extern struct MusicPlayerInfo gMPlay_SE3;
+extern struct MusicPlayerInfo gMPlay_BkgndMusic;
+extern struct MusicPlayerInfo gMPlay_SoundEffect1;
+extern struct MusicPlayerInfo gMPlay_SoundEffect2;
+extern struct MusicPlayerInfo gMPlay_SoundEffect3;
 
 extern struct Fanfare gFanfares[];
 
@@ -43,8 +43,8 @@ extern struct ToneData voicegroup_84549C0[];
 static void Task_Fanfare(u8 taskId);
 static void CreateFanfareTask(void);
 static void PlayCryInternal(u16 species, s8 pan, s8 volume, u8 priority, u8 mode);
-static void Task_DuckBGMForPokemonCry(u8 taskId);
-static void RestoreBGMVolumeAfterPokemonCry(void);
+static void Task_DuckBkgndMusicForPokemonCry(u8 taskId);
+static void RestoreBkgndMusicVolumeAfterCry(void);
 
 void InitMapMusic(void)
 {
@@ -60,32 +60,32 @@ void MapMusicMain(void)
         break;
     case 1:
         sMapMusicState = 2;
-        PlayBGM(sCurrentMapMusic);
+        PlayBkgndMusic(sCurrentMapMusic);
         break;
     case 2:
     case 3:
     case 4:
         break;
     case 5:
-        if (IsBGMStopped())
+        if (IsBkgndMusicStopped())
         {
             sNextMapMusic = 0;
             sMapMusicState = 0;
         }
         break;
     case 6:
-        if (IsBGMStopped() && IsFanfareTaskInactive())
+        if (IsBkgndMusicStopped() && IsFanfareTaskInactive())
         {
             sCurrentMapMusic = sNextMapMusic;
             sNextMapMusic = 0;
             sMapMusicState = 2;
-            PlayBGM(sCurrentMapMusic);
+            PlayBkgndMusic(sCurrentMapMusic);
         }
         break;
     case 7:
-        if (IsBGMStopped() && IsFanfareTaskInactive())
+        if (IsBkgndMusicStopped() && IsFanfareTaskInactive())
         {
-            FadeInNewBGM(sNextMapMusic, sMapMusicFadeInSpeed);
+            FadeInNewBkgndMusic(sNextMapMusic, sMapMusicFadeInSpeed);
             sCurrentMapMusic = sNextMapMusic;
             sNextMapMusic = 0;
             sMapMusicState = 2;
@@ -124,8 +124,8 @@ void StopMapMusic(void)
 
 void FadeOutMapMusic(u8 speed)
 {
-    if (IsNotWaitingForBGMStop())
-        FadeOutBGM(speed);
+    if (IsNotWaitingForBkgndMusicStop())
+        FadeOutBkgndMusic(speed);
     sCurrentMapMusic = 0;
     sNextMapMusic = 0;
     sMapMusicState = 5;
@@ -150,14 +150,14 @@ void FadeOutAndFadeInNewMapMusic(u16 songNum, u8 fadeOutSpeed, u8 fadeInSpeed)
 
 void FadeInNewMapMusic(u16 songNum, u8 speed)
 {
-    FadeInNewBGM(songNum, speed);
+    FadeInNewBkgndMusic(songNum, speed);
     sCurrentMapMusic = songNum;
     sNextMapMusic = 0;
     sMapMusicState = 2;
     sMapMusicFadeInSpeed = 0;
 }
 
-bool8 IsNotWaitingForBGMStop(void)
+bool8 IsNotWaitingForBkgndMusicStop(void)
 {
     if (sMapMusicState == 6)
         return FALSE;
@@ -173,7 +173,7 @@ void PlayFanfareByFanfareNum(u8 fanfareNum)
     struct Fanfare *fanfares;
     struct Fanfare *fanfare;
     u16 songNum;
-    m4aMPlayStop(&gMPlay_BGM);
+    m4aMPlayStop(&gMPlay_BkgndMusic);
     fanfares = gFanfares;
     fanfare = &fanfares[fanfareNum];
     songNum = fanfare->songNum;
@@ -191,7 +191,7 @@ bool8 WaitFanfare(bool8 stop)
     else
     {
         if (!stop)
-            m4aMPlayContinue(&gMPlay_BGM);
+            m4aMPlayContinue(&gMPlay_BkgndMusic);
         else
             m4aSongNumStart(SE_STOP);
 
@@ -237,7 +237,7 @@ static void Task_Fanfare(u8 taskId)
     }
     else
     {
-        m4aMPlayContinue(&gMPlay_BGM);
+        m4aMPlayContinue(&gMPlay_BkgndMusic);
         DestroyTask(taskId);
     }
 }
@@ -248,54 +248,54 @@ static void CreateFanfareTask(void)
         CreateTask(Task_Fanfare, 80);
 }
 
-void FadeInNewBGM(u16 songNum, u8 speed)
+void FadeInNewBkgndMusic(u16 songNum, u8 speed)
 {
     if (gDisableMusic)
         songNum = 0;
     m4aSongNumStart(songNum);
-    m4aMPlayImmInit(&gMPlay_BGM);
-    m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 0);
+    m4aMPlayImmInit(&gMPlay_BkgndMusic);
+    m4aMPlayVolumeControl(&gMPlay_BkgndMusic, 0xFFFF, 0);
     m4aSongNumStop(songNum);
-    m4aMPlayFadeIn(&gMPlay_BGM, speed);
+    m4aMPlayFadeIn(&gMPlay_BkgndMusic, speed);
 }
 
-void FadeOutBGMTemporarily(u8 speed)
+void FadeOutBkgndMusicTemporarily(u8 speed)
 {
-    m4aMPlayFadeOutTemporarily(&gMPlay_BGM, speed);
+    m4aMPlayFadeOutTemporarily(&gMPlay_BkgndMusic, speed);
 }
 
-bool8 IsBGMPausedOrStopped(void)
+bool8 IsBkgndMusicPausedOrStopped(void)
 {
-    if (gMPlay_BGM.status & MUSICPLAYER_STATUS_PAUSE)
+    if (gMPlay_BkgndMusic.status & MUSICPLAYER_STATUS_PAUSE)
         return TRUE;
-    if (!(gMPlay_BGM.status & MUSICPLAYER_STATUS_TRACK))
+    if (!(gMPlay_BkgndMusic.status & MUSICPLAYER_STATUS_TRACK))
         return TRUE;
     return FALSE;
 }
 
-void FadeInBGM(u8 speed)
+void FadeInBkgndMusic(u8 speed)
 {
-    m4aMPlayFadeIn(&gMPlay_BGM, speed);
+    m4aMPlayFadeIn(&gMPlay_BkgndMusic, speed);
 }
 
-void FadeOutBGM(u8 speed)
+void FadeOutBkgndMusic(u8 speed)
 {
-    m4aMPlayFadeOut(&gMPlay_BGM, speed);
+    m4aMPlayFadeOut(&gMPlay_BkgndMusic, speed);
 }
 
-bool8 IsBGMStopped(void)
+bool8 IsBkgndMusicStopped(void)
 {
-    if (!(gMPlay_BGM.status & MUSICPLAYER_STATUS_TRACK))
+    if (!(gMPlay_BkgndMusic.status & MUSICPLAYER_STATUS_TRACK))
         return TRUE;
     return FALSE;
 }
 
 void PlayCry1(u16 species, s8 pan)
 {
-    m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 85);
+    m4aMPlayVolumeControl(&gMPlay_BkgndMusic, 0xFFFF, 85);
     PlayCryInternal(species, pan, 125, 10, 0);
     gPokemonCryBGMDuckingCounter = 2;
-    RestoreBGMVolumeAfterPokemonCry();
+    RestoreBkgndMusicVolumeAfterCry();
 }
 
 void PlayCry2(u16 species, s8 pan, s8 volume, u8 priority)
@@ -311,10 +311,10 @@ void PlayCry3(u16 species, s8 pan, u8 mode)
     }
     else
     {
-        m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 85);
+        m4aMPlayVolumeControl(&gMPlay_BkgndMusic, 0xFFFF, 85);
         PlayCryInternal(species, pan, 125, 10, mode);
         gPokemonCryBGMDuckingCounter = 2;
-        RestoreBGMVolumeAfterPokemonCry();
+        RestoreBkgndMusicVolumeAfterCry();
     }
 }
 
@@ -327,17 +327,17 @@ void PlayCry4(u16 species, s8 pan, u8 mode)
     else
     {
         if (!(gUnknown_020239F8 & 0x40))
-            m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 85);
+            m4aMPlayVolumeControl(&gMPlay_BkgndMusic, 0xFFFF, 85);
         PlayCryInternal(species, pan, 125, 10, mode);
     }
 }
 
 void PlayCry5(u16 species, u8 mode)
 {
-    m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 85);
+    m4aMPlayVolumeControl(&gMPlay_BkgndMusic, 0xFFFF, 85);
     PlayCryInternal(species, 0, 125, 10, mode);
     gPokemonCryBGMDuckingCounter = 2;
-    RestoreBGMVolumeAfterPokemonCry();
+    RestoreBkgndMusicVolumeAfterCry();
 }
 
 #define GET_CRY_PTR(a, b)\
@@ -437,7 +437,7 @@ static void PlayCryInternal(u16 species, s8 pan, s8 volume, u8 priority, u8 mode
 
 bool8 IsCryFinished(void)
 {
-    if (FuncIsActiveTask(Task_DuckBGMForPokemonCry) == TRUE)
+    if (FuncIsActiveTask(Task_DuckBkgndMusicForPokemonCry) == TRUE)
     {
         return FALSE;
     }
@@ -480,7 +480,7 @@ bool8 IsCryPlaying(void)
         return FALSE;
 }
 
-static void Task_DuckBGMForPokemonCry(u8 taskId)
+static void Task_DuckBkgndMusicForPokemonCry(u8 taskId)
 {
     if (gPokemonCryBGMDuckingCounter)
     {
@@ -490,81 +490,81 @@ static void Task_DuckBGMForPokemonCry(u8 taskId)
 
     if (!IsPokemonCryPlaying(gMPlay_PokemonCry))
     {
-        m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 256);
+        m4aMPlayVolumeControl(&gMPlay_BkgndMusic, 0xFFFF, 256);
         DestroyTask(taskId);
     }
 }
 
-static void RestoreBGMVolumeAfterPokemonCry(void)
+static void RestoreBkgndMusicVolumeAfterCry(void)
 {
-    if (FuncIsActiveTask(Task_DuckBGMForPokemonCry) != TRUE)
-        CreateTask(Task_DuckBGMForPokemonCry, 80);
+    if (FuncIsActiveTask(Task_DuckBkgndMusicForPokemonCry) != TRUE)
+        CreateTask(Task_DuckBkgndMusicForPokemonCry, 80);
 }
 
-void PlayBGM(u16 songNum)
+void PlayBkgndMusic(u16 songNum)
 {
     if (gDisableMusic)
         songNum = 0;
     m4aSongNumStart(songNum);
 }
 
-void PlaySE(u16 songNum)
+void PlaySoundEffect(u16 songNum)
 {
     m4aSongNumStart(songNum);
 }
 
-void PlaySE12WithPanning(u16 songNum, u8 pan)
+void PlaySoundEffect12WithPanning(u16 songNum, u8 pan)
 {
     m4aSongNumStart(songNum);
-    m4aMPlayImmInit(&gMPlay_SE1);
-    m4aMPlayImmInit(&gMPlay_SE2);
-    m4aMPlayPanpotControl(&gMPlay_SE1, 0xFFFF, pan);
-    m4aMPlayPanpotControl(&gMPlay_SE2, 0xFFFF, pan);
+    m4aMPlayImmInit(&gMPlay_SoundEffect1);
+    m4aMPlayImmInit(&gMPlay_SoundEffect2);
+    m4aMPlayPanpotControl(&gMPlay_SoundEffect1, 0xFFFF, pan);
+    m4aMPlayPanpotControl(&gMPlay_SoundEffect2, 0xFFFF, pan);
 }
 
-void PlaySE1WithPanning(u16 songNum, u8 pan)
+void PlaySoundEffect1WithPanning(u16 songNum, u8 pan)
 {
     m4aSongNumStart(songNum);
-    m4aMPlayImmInit(&gMPlay_SE1);
-    m4aMPlayPanpotControl(&gMPlay_SE1, 0xFFFF, pan);
+    m4aMPlayImmInit(&gMPlay_SoundEffect1);
+    m4aMPlayPanpotControl(&gMPlay_SoundEffect1, 0xFFFF, pan);
 }
 
-void PlaySE2WithPanning(u16 songNum, u8 pan)
+void PlaySoundEffect2WithPanning(u16 songNum, u8 pan)
 {
     m4aSongNumStart(songNum);
-    m4aMPlayImmInit(&gMPlay_SE2);
-    m4aMPlayPanpotControl(&gMPlay_SE2, 0xFFFF, pan);
+    m4aMPlayImmInit(&gMPlay_SoundEffect2);
+    m4aMPlayPanpotControl(&gMPlay_SoundEffect2, 0xFFFF, pan);
 }
 
-void SE12PanpotControl(u8 pan)
+void SoundEffect12PanpotControl(u8 pan)
 {
-    m4aMPlayPanpotControl(&gMPlay_SE1, 0xFFFF, pan);
-    m4aMPlayPanpotControl(&gMPlay_SE2, 0xFFFF, pan);
+    m4aMPlayPanpotControl(&gMPlay_SoundEffect1, 0xFFFF, pan);
+    m4aMPlayPanpotControl(&gMPlay_SoundEffect2, 0xFFFF, pan);
 }
 
-bool8 IsSEPlaying(void)
+bool8 IsSoundEffectPlaying(void)
 {
-    if ((gMPlay_SE1.status & MUSICPLAYER_STATUS_PAUSE) && (gMPlay_SE2.status & MUSICPLAYER_STATUS_PAUSE))
+    if ((gMPlay_SoundEffect1.status & MUSICPLAYER_STATUS_PAUSE) && (gMPlay_SoundEffect2.status & MUSICPLAYER_STATUS_PAUSE))
         return FALSE;
-    if (!(gMPlay_SE1.status & MUSICPLAYER_STATUS_TRACK) && !(gMPlay_SE2.status & MUSICPLAYER_STATUS_TRACK))
+    if (!(gMPlay_SoundEffect1.status & MUSICPLAYER_STATUS_TRACK) && !(gMPlay_SoundEffect2.status & MUSICPLAYER_STATUS_TRACK))
         return FALSE;
     return TRUE;
 }
 
-bool8 IsBGMPlaying(void)
+bool8 IsBkgndMusicPlaying(void)
 {
-    if (gMPlay_BGM.status & MUSICPLAYER_STATUS_PAUSE)
+    if (gMPlay_BkgndMusic.status & MUSICPLAYER_STATUS_PAUSE)
         return FALSE;
-    if (!(gMPlay_BGM.status & MUSICPLAYER_STATUS_TRACK))
+    if (!(gMPlay_BkgndMusic.status & MUSICPLAYER_STATUS_TRACK))
         return FALSE;
     return TRUE;
 }
 
-bool8 IsSpecialSEPlaying(void)
+bool8 IsSpecialSoundEffectPlaying(void)
 {
-    if (gMPlay_SE3.status & MUSICPLAYER_STATUS_PAUSE)
+    if (gMPlay_SoundEffect3.status & MUSICPLAYER_STATUS_PAUSE)
         return FALSE;
-    if (!(gMPlay_SE3.status & MUSICPLAYER_STATUS_TRACK))
+    if (!(gMPlay_SoundEffect3.status & MUSICPLAYER_STATUS_TRACK))
         return FALSE;
     return TRUE;
 }

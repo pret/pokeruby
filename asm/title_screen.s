@@ -1051,7 +1051,7 @@ sub_807C644: @ 807C644
 	beq _0807C6B4
 _0807C67A:
 	movs r0, 0x4
-	bl FadeOutBGM
+	bl FadeOutBkgndMusic
 	movs r0, 0x1
 	negs r0, r0
 	ldr r1, _0807C6AC
@@ -1088,7 +1088,7 @@ _0807C6C4:
 	cmp r0, 0x1
 	bne _0807C6FC
 	movs r0, 0x4
-	bl FadeOutBGM
+	bl FadeOutBkgndMusic
 	movs r0, 0x1
 	negs r0, r0
 	str r5, [sp]
@@ -1152,7 +1152,7 @@ _0807C758: .4byte REG_BG2Y_L
 _0807C75C: .4byte gTasks
 _0807C760: .4byte gUnknown_030041B4
 _0807C764: .4byte gUnknown_030042C0
-_0807C768: .4byte gMPlay_BGM
+_0807C768: .4byte gMPlay_BkgndMusic
 _0807C76C: .4byte 0x0000ffff
 _0807C770: .4byte sub_807C790
 	thumb_func_end sub_807C644

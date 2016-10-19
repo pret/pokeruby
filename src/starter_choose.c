@@ -279,7 +279,7 @@ static void Task_StarterChoose5(u8 taskId)
             break;
         case 1:     //NO
         case -1:    //B button
-            PlaySE(SE_SELECT);
+            PlaySoundEffect(SE_SELECT);
             MenuZeroFillWindowRect(21, 7, 27, 12);
             
             spriteId = gTasks[taskId].data[TD_PKMN_SPRITE_ID];

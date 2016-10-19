@@ -318,7 +318,7 @@ _0806813C:
 	cmp r0, 0
 	beq _08068154
 	movs r0, 0x6
-	bl PlaySE
+	bl PlaySoundEffect
 	bl sub_8071310
 _08068150:
 	movs r0, 0x1
@@ -437,7 +437,7 @@ _08068208:
 	cmp r4, r0
 	beq _0806822C
 	movs r0, 0x5
-	bl PlaySE
+	bl PlaySoundEffect
 _0806822C:
 	adds r0, r4, 0
 	bl ScriptContext1_SetupScript
@@ -2121,7 +2121,7 @@ _08068EF8:
 	bl walkrun_find_lowest_active_bit_in_bitfield
 	bl sp13E_warp_to_last_warp
 	movs r0, 0xE9
-	bl PlaySE
+	bl PlaySoundEffect
 	movs r0, 0x1
 	b _08068F12
 _08068F10:
