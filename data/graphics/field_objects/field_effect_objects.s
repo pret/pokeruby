@@ -600,10 +600,10 @@ gFieldEffectSpriteTemplate_Unknown19: @ 8374C94
 	spr_template 0xFFFF, 0x1004, gFieldOamData_16x16, gFieldEffectAnimTable_Unknown19, gFieldEffectPicTable_Unknown19, gDummySpriteAffineAnimTable, sub_8128800
 
 	.align 2
-gFieldEffectPicTable_Unknown29: @ 8374CAC
-	obj_frame_tiles gFieldEffectPic_Unknown29_0, 0x40
-	obj_frame_tiles gFieldEffectPic_Unknown29_1, 0x40
-	obj_frame_tiles gFieldEffectPic_Unknown29_2, 0x40
+gFieldEffectPicTable_SandPile: @ 8374CAC
+	obj_frame_tiles gFieldEffectPic_SandPile_0, 0x40
+	obj_frame_tiles gFieldEffectPic_SandPile_1, 0x40
+	obj_frame_tiles gFieldEffectPic_SandPile_2, 0x40
 
 	.align 2
 gFieldEffectAnim_8374CC4: @ 8374CC4
@@ -613,12 +613,12 @@ gFieldEffectAnim_8374CC4: @ 8374CC4
 	obj_image_anim_end
 
 	.align 2
-gFieldEffectAnimTable_Unknown29: @ 8374CD4
+gFieldEffectAnimTable_SandPile: @ 8374CD4
 	.4byte gFieldEffectAnim_8374CC4
 
 	.align 2
-gFieldEffectSpriteTemplate_Unknown29: @ 8374CD8
-	spr_template 0xFFFF, 0x1004, gFieldOamData_16x8, gFieldEffectAnimTable_Unknown29, gFieldEffectPicTable_Unknown29, gDummySpriteAffineAnimTable, sub_81282E0
+gFieldEffectSpriteTemplate_SandPile: @ 8374CD8
+	spr_template 0xFFFF, 0x1004, gFieldOamData_16x8, gFieldEffectAnimTable_SandPile, gFieldEffectPicTable_SandPile, gDummySpriteAffineAnimTable, sub_81282E0
 
 	.align 2
 gFieldEffectPicTable_Unknown20: @ 8374CF0
@@ -888,12 +888,12 @@ gFieldEffectObjectPaletteInfo2:: @ 83750E4
 	obj_pal gFieldEffectObjectPalette2, 0x100D
 
 	.align 2
-gFieldEffectPicTable_Unknown33: @ 83750EC
-	obj_frame_tiles gFieldEffectPic_Unknown33_0, 0x80
-	obj_frame_tiles gFieldEffectPic_Unknown33_1, 0x80
-	obj_frame_tiles gFieldEffectPic_Unknown33_2, 0x80
-	obj_frame_tiles gFieldEffectPic_Unknown33_3, 0x80
-	obj_frame_tiles gFieldEffectPic_Unknown33_4, 0x80
+gFieldEffectPicTable_LavaridgeGymWarp: @ 83750EC
+	obj_frame_tiles gFieldEffectPic_LavaridgeGymWarp_0, 0x80
+	obj_frame_tiles gFieldEffectPic_LavaridgeGymWarp_1, 0x80
+	obj_frame_tiles gFieldEffectPic_LavaridgeGymWarp_2, 0x80
+	obj_frame_tiles gFieldEffectPic_LavaridgeGymWarp_3, 0x80
+	obj_frame_tiles gFieldEffectPic_LavaridgeGymWarp_4, 0x80
 
 	.align 2
 gFieldEffectAnim_8375114: @ 8375114
@@ -905,12 +905,12 @@ gFieldEffectAnim_8375114: @ 8375114
 	obj_image_anim_end
 
 	.align 2
-gFieldEffectAnimTable_Unknown33: @ 837512C
+gFieldEffectAnimTable_LavaridgeGymWarp: @ 837512C
 	.4byte gFieldEffectAnim_8375114
 
 	.align 2
-gFieldEffectSpriteTemplate_Unknown33: @ 8375130
-	spr_template 0xFFFF, 0x100D, gFieldOamData_16x16, gFieldEffectAnimTable_Unknown33, gFieldEffectPicTable_Unknown33, gDummySpriteAffineAnimTable, sub_8087638
+gFieldEffectSpriteTemplate_LavaridgeGymWarp: @ 8375130
+	spr_template 0xFFFF, 0x100D, gFieldOamData_16x16, gFieldEffectAnimTable_LavaridgeGymWarp, gFieldEffectPicTable_LavaridgeGymWarp, gDummySpriteAffineAnimTable, sub_8087638
 
 	.align 2
 gFieldEffectPicTable_Bubbles: @ 8375148
@@ -944,9 +944,9 @@ gFieldEffectSpriteTemplate_Bubbles: @ 83751B0
 	spr_template 0xFFFF, 0x1004, gFieldOamData_16x32, gFieldEffectAnimTable_Bubbles, gFieldEffectPicTable_Bubbles, gDummySpriteAffineAnimTable, sub_8128410
 
 	.align 2
-gFieldEffectPicTable_Unknown35: @ 83751C8
-	obj_frame_tiles gFieldEffectPic_Unknown35_0, 0x80
-	obj_frame_tiles gFieldEffectPic_Unknown35_1, 0x80
+gFieldEffectPicTable_Sparkle: @ 83751C8
+	obj_frame_tiles gFieldEffectPic_Sparkle_0, 0x80
+	obj_frame_tiles gFieldEffectPic_Sparkle_1, 0x80
 
 	.align 2
 gFieldEffectAnim_83751D8: @ 83751D8
@@ -956,12 +956,12 @@ gFieldEffectAnim_83751D8: @ 83751D8
 	obj_image_anim_end
 
 	.align 2
-gFieldEffectAnimTable_Unknown35: @ 83751E8
+gFieldEffectAnimTable_Sparkle: @ 83751E8
 	.4byte gFieldEffectAnim_83751D8
 
 	.align 2
-gFieldEffectSpriteTemplate_Unknown35: @ 83751EC
-	spr_template 0xFFFF, 0x100F, gFieldOamData_16x16, gFieldEffectAnimTable_Unknown35, gFieldEffectPicTable_Unknown35, gDummySpriteAffineAnimTable, sub_8128774
+gFieldEffectSpriteTemplate_Sparkle: @ 83751EC
+	spr_template 0xFFFF, 0x100F, gFieldOamData_16x16, gFieldEffectAnimTable_Sparkle, gFieldEffectPicTable_Sparkle, gDummySpriteAffineAnimTable, sub_8128774
 
 	.align 2
 gFieldEffectObjectPaletteInfo3:: @ 8375204

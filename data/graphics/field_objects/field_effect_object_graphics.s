@@ -308,15 +308,15 @@ gFieldEffectPic_Unknown19_3: @ 836ADC8
 	.incbin "graphics/field_effect_objects/pics/unknown_19/3.4bpp"
 
 	.align 2
-gFieldEffectPic_Unknown29_0: @ 836AE48
+gFieldEffectPic_SandPile_0: @ 836AE48
 	.incbin "graphics/field_effect_objects/pics/unknown_29/0.4bpp"
 
 	.align 2
-gFieldEffectPic_Unknown29_1: @ 836AE88
+gFieldEffectPic_SandPile_1: @ 836AE88
 	.incbin "graphics/field_effect_objects/pics/unknown_29/1.4bpp"
 
 	.align 2
-gFieldEffectPic_Unknown29_2: @ 836AEC8
+gFieldEffectPic_SandPile_2: @ 836AEC8
 	.incbin "graphics/field_effect_objects/pics/unknown_29/2.4bpp"
 
 	.align 2
@@ -488,23 +488,23 @@ gFieldEffectPic_PopOutOfAsh_4: @ 836CC68
 	.incbin "graphics/field_effect_objects/pics/pop_out_of_ash/4.4bpp"
 
 	.align 2
-gFieldEffectPic_Unknown33_0: @ 836CCE8
+gFieldEffectPic_LavaridgeGymWarp_0: @ 836CCE8
 	.incbin "graphics/field_effect_objects/pics/unknown_33/0.4bpp"
 
 	.align 2
-gFieldEffectPic_Unknown33_1: @ 836CD68
+gFieldEffectPic_LavaridgeGymWarp_1: @ 836CD68
 	.incbin "graphics/field_effect_objects/pics/unknown_33/1.4bpp"
 
 	.align 2
-gFieldEffectPic_Unknown33_2: @ 836CDE8
+gFieldEffectPic_LavaridgeGymWarp_2: @ 836CDE8
 	.incbin "graphics/field_effect_objects/pics/unknown_33/2.4bpp"
 
 	.align 2
-gFieldEffectPic_Unknown33_3: @ 836CE68
+gFieldEffectPic_LavaridgeGymWarp_3: @ 836CE68
 	.incbin "graphics/field_effect_objects/pics/unknown_33/3.4bpp"
 
 	.align 2
-gFieldEffectPic_Unknown33_4: @ 836CEE8
+gFieldEffectPic_LavaridgeGymWarp_4: @ 836CEE8
 	.incbin "graphics/field_effect_objects/pics/unknown_33/4.4bpp"
 
 	.align 2
@@ -540,11 +540,11 @@ gFieldEffectPic_Bubbles_7: @ 836D668
 	.incbin "graphics/field_effect_objects/pics/bubbles/7.4bpp"
 
 	.align 2
-gFieldEffectPic_Unknown35_0: @ 836D768
+gFieldEffectPic_Sparkle_0: @ 836D768
 	.incbin "graphics/field_effect_objects/pics/unknown_35/0.4bpp"
 
 	.align 2
-gFieldEffectPic_Unknown35_1: @ 836D7E8
+gFieldEffectPic_Sparkle_1: @ 836D7E8
 	.incbin "graphics/field_effect_objects/pics/unknown_35/1.4bpp"
 
 	.align 2

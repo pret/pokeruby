@@ -29,10 +29,10 @@ gFieldEffectObjectTemplatePointers:: @ 836DFC0
 	.4byte gFieldEffectSpriteTemplate_Bird
 	.4byte gFieldEffectSpriteTemplate_BikeTireTracks
 	.4byte gFieldEffectSpriteTemplate_SandDisguise
-	.4byte gFieldEffectSpriteTemplate_Unknown29
+	.4byte gFieldEffectSpriteTemplate_SandPile
 	.4byte gFieldEffectSpriteTemplate_ShortGrass
 	.4byte gFieldEffectSpriteTemplate_HotSpringsWater
 	.4byte gFieldEffectSpriteTemplate_PopOutOfAsh
-	.4byte gFieldEffectSpriteTemplate_Unknown33
+	.4byte gFieldEffectSpriteTemplate_LavaridgeGymWarp
 	.4byte gFieldEffectSpriteTemplate_Bubbles
-	.4byte gFieldEffectSpriteTemplate_Unknown35
+	.4byte gFieldEffectSpriteTemplate_Sparkle
