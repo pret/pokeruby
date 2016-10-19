@@ -3791,7 +3791,7 @@ _0803FE56:
 	.align 2, 0
 _0803FE60: .4byte gUnknown_020239F8
 _0803FE64: .4byte gTrainers
-_0803FE68: .4byte word_202FF5E
+_0803FE68: .4byte gTrainerBattleOpponent
 _0803FE6C: .4byte gUnknown_082082FE
 	thumb_func_end sub_803FCD4
 
@@ -5027,7 +5027,7 @@ _08040780:
 	mov pc, r0
 	.align 2, 0
 _0804078C: .4byte gTrainers
-_08040790: .4byte word_202FF5E
+_08040790: .4byte gTrainerBattleOpponent
 _08040794: .4byte _08040798
 	.align 2, 0
 _08040798:

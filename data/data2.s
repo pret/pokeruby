@@ -10939,28 +10939,75 @@ gUnknown_0839ACE8:: @ 839ACE8
 
 	.align 2
 gUnknown_0839ACEC:: @ 839ACEC
-	.incbin "baserom.gba", 0x0039acec, 0xc
+	.4byte REG_WIN0H
+	.4byte ((DMA_ENABLE | DMA_START_HBLANK | DMA_REPEAT | DMA_DEST_RELOAD) << 16) | 1
+	.4byte 1
 
-gUnknown_0839ACF8:: @ 839ACF8
-	.incbin "baserom.gba", 0x0039acf8, 0x8
+gBattleTransitionTable_Wild:: @ 839ACF8
+	.byte  8,  9,  5, 10,  0, 10,  7,  6
 
-gUnknown_0839AD00:: @ 839AD00
-	.incbin "baserom.gba", 0x0039ad00, 0x8
+gBattleTransitionTable_Trainer:: @ 839AD00
+	.byte  4, 11,  2,  3,  0, 10,  1,  6
 
-gUnknown_0839AD08:: @ 839AD08
-	.incbin "baserom.gba", 0x0039ad08, 0x48
+	.align 2
+gTrainerBattleSpecs_0:: @ 839AD08
+	.4byte gTrainerBattleMode, 0
+	.4byte gTrainerBattleOpponent, 1
+	.4byte gTrainerMapObjectLocalId, 1
+	.4byte gTrainerIntroSpeech, 2
+	.4byte gTrainerDefeatSpeech, 2
+	.4byte gTrainerVictorySpeech, 5
+	.4byte gTrainerCannotBattleSpeech, 5
+	.4byte gTrainerBattleEndScript, 5
+	.4byte gTrainerBattleScriptReturnAddress, 6
 
-gUnknown_0839AD50:: @ 839AD50
-	.incbin "baserom.gba", 0x0039ad50, 0x48
+	.align 2
+gTrainerBattleSpecs_1:: @ 839AD50
+	.4byte gTrainerBattleMode, 0
+	.4byte gTrainerBattleOpponent, 1
+	.4byte gTrainerMapObjectLocalId, 1
+	.4byte gTrainerIntroSpeech, 2
+	.4byte gTrainerDefeatSpeech, 2
+	.4byte gTrainerVictorySpeech, 5
+	.4byte gTrainerCannotBattleSpeech, 5
+	.4byte gTrainerBattleEndScript, 2
+	.4byte gTrainerBattleScriptReturnAddress, 6
 
-gUnknown_0839AD98:: @ 839AD98
-	.incbin "baserom.gba", 0x0039ad98, 0x48
+	.align 2
+gTrainerBattleSpecs_2:: @ 839AD98
+	.4byte gTrainerBattleMode, 0
+	.4byte gTrainerBattleOpponent, 1
+	.4byte gTrainerMapObjectLocalId, 1
+	.4byte gTrainerIntroSpeech, 2
+	.4byte gTrainerDefeatSpeech, 2
+	.4byte gTrainerVictorySpeech, 5
+	.4byte gTrainerCannotBattleSpeech, 2
+	.4byte gTrainerBattleEndScript, 5
+	.4byte gTrainerBattleScriptReturnAddress, 6
 
-gUnknown_0839ADE0:: @ 839ADE0
-	.incbin "baserom.gba", 0x0039ade0, 0x48
+	.align 2
+gTrainerBattleSpecs_3:: @ 839ADE0
+	.4byte gTrainerBattleMode, 0
+	.4byte gTrainerBattleOpponent, 1
+	.4byte gTrainerMapObjectLocalId, 1
+	.4byte gTrainerIntroSpeech, 5
+	.4byte gTrainerDefeatSpeech, 2
+	.4byte gTrainerVictorySpeech, 5
+	.4byte gTrainerCannotBattleSpeech, 5
+	.4byte gTrainerBattleEndScript, 5
+	.4byte gTrainerBattleScriptReturnAddress, 6
 
-gUnknown_0839AE28:: @ 839AE28
-	.incbin "baserom.gba", 0x0039ae28, 0x48
+	.align 2
+gTrainerBattleSpecs_4:: @ 839AE28
+	.4byte gTrainerBattleMode, 0
+	.4byte gTrainerBattleOpponent, 1
+	.4byte gTrainerMapObjectLocalId, 1
+	.4byte gTrainerIntroSpeech, 2
+	.4byte gTrainerDefeatSpeech, 2
+	.4byte gTrainerVictorySpeech, 5
+	.4byte gTrainerCannotBattleSpeech, 2
+	.4byte gTrainerBattleEndScript, 2
+	.4byte gTrainerBattleScriptReturnAddress, 6
 
 @ 839AE70
 	.include "data/trainer_eye_trainers.s"

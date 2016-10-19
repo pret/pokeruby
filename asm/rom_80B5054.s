@@ -169611,7 +169611,7 @@ _08107138:
 	.align 2, 0
 _08107144: .4byte 0x02016a00
 _08107148: .4byte gUnknown_020239F8
-_0810714C: .4byte word_202FF5E
+_0810714C: .4byte gTrainerBattleOpponent
 _08107150: .4byte 0x00000982
 _08107154: .4byte gTrainers + 0x10
 _08107158: .4byte 0x02016a2c
@@ -169777,7 +169777,7 @@ _08107296:
 	.align 2, 0
 _0810729C: .4byte 0x02016800
 _081072A0: .4byte gTrainers
-_081072A4: .4byte word_202FF5E
+_081072A4: .4byte gTrainerBattleOpponent
 	thumb_func_end sub_810715C
 
 	thumb_func_start sub_81072A8

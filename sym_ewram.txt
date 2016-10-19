@@ -563,31 +563,31 @@ gUnknown_0202FF38: @ 202FF38
 gUnknown_0202FF58: @ 202FF58
 	.space 0x4
 
-gUnknown_0202FF5C: @ 202FF5C
+gTrainerBattleMode: @ 202FF5C
 	.space 0x2
 
-word_202FF5E: @ 202FF5E
+gTrainerBattleOpponent: @ 202FF5E
 	.space 0x2
 
-gUnknown_0202FF60: @ 202FF60
+gTrainerMapObjectLocalId: @ 202FF60
 	.space 0x4
 
-gUnknown_0202FF64: @ 202FF64
+gTrainerIntroSpeech: @ 202FF64
 	.space 0x4
 
-gUnknown_0202FF68: @ 202FF68
+gTrainerDefeatSpeech: @ 202FF68
 	.space 0x4
 
-gUnknown_0202FF6C: @ 202FF6C
+gTrainerVictorySpeech: @ 202FF6C
 	.space 0x4
 
-gUnknown_0202FF70: @ 202FF70
+gTrainerCannotBattleSpeech: @ 202FF70
 	.space 0x4
 
-gUnknown_0202FF74: @ 202FF74
+gTrainerBattleScriptReturnAddress: @ 202FF74
 	.space 0x4
 
-gUnknown_0202FF78: @ 202FF78
+gTrainerBattleEndScript: @ 202FF78
 	.space 0x4
 
 gWildEncountersDisabled: @ 202FF7C

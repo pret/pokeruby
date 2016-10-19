@@ -332,7 +332,7 @@ _0803BC9E:
 	.align 2, 0
 _0803BCB8: .4byte gUnknown_020239F8
 _0803BCBC: .4byte 0x00000902
-_0803BCC0: .4byte word_202FF5E
+_0803BCC0: .4byte gTrainerBattleOpponent
 _0803BCC4: .4byte 0x00000807
 _0803BCC8: .4byte 0x0000080b
 _0803BCCC: .4byte 0x0000080d

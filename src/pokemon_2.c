@@ -28,7 +28,7 @@ extern u16 word_2024DB8;
 extern struct EnigmaBerry gEnigmaBerries[];
 extern u16 gBattleMovePower;
 extern struct SpriteTemplate gUnknown_02024E8C;
-extern u16 word_202FF5E;
+extern u16 gTrainerBattleOpponent;
 extern struct PokemonStorage gPokemonStorage;
 
 extern u8 gBadEggNickname[];
@@ -1117,7 +1117,7 @@ void CreateSecretBaseEnemyParty(struct SecretBaseRecord *secretBaseRecord)
     }
 
     gUnknown_020239F8 = 8;
-    word_202FF5E = 1024;
+    gTrainerBattleOpponent = 1024;
 }
 
 u8 GetSecretBaseTrainerPicIndex(void)

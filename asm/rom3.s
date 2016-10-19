@@ -4260,7 +4260,7 @@ _0800D860:
 	b _0800DA66
 	.align 2, 0
 _0800D890: .4byte gTrainers
-_0800D894: .4byte word_202FF5E
+_0800D894: .4byte gTrainerBattleOpponent
 _0800D898: .4byte gBattleTerrainTiles_Building
 _0800D89C: .4byte 0x06008000
 _0800D8A0: .4byte gBattleTerrainTilemap_Building
@@ -5519,7 +5519,7 @@ _0800E348:
 	b _0800E3D2
 	.align 2, 0
 _0800E370: .4byte gTrainers
-_0800E374: .4byte word_202FF5E
+_0800E374: .4byte gTrainerBattleOpponent
 _0800E378: .4byte gBattleTerrainAnimTiles_Building
 _0800E37C: .4byte 0x06004000
 _0800E380: .4byte gBattleTerrainAnimTilemap_Building
@@ -5689,7 +5689,7 @@ _0800E4C0:
 	b _0800E57E
 	.align 2, 0
 _0800E4E4: .4byte gTrainers
-_0800E4E8: .4byte word_202FF5E
+_0800E4E8: .4byte gTrainerBattleOpponent
 _0800E4EC: .4byte gBattleTerrainTiles_Stadium
 _0800E4F0:
 	bl sav1_map_get_battletype
@@ -5820,7 +5820,7 @@ _0800E5CC:
 	b _0800E68A
 	.align 2, 0
 _0800E5F0: .4byte gTrainers
-_0800E5F4: .4byte word_202FF5E
+_0800E5F4: .4byte gTrainerBattleOpponent
 _0800E5F8: .4byte gBattleTerrainTilemap_Stadium
 _0800E5FC:
 	bl sav1_map_get_battletype
@@ -5950,7 +5950,7 @@ _0800E6D8:
 	b _0800E7A6
 	.align 2, 0
 _0800E6F8: .4byte gTrainers
-_0800E6FC: .4byte word_202FF5E
+_0800E6FC: .4byte gTrainerBattleOpponent
 _0800E700: .4byte gBattleTerrainPalette_BuildingLeader
 _0800E704:
 	cmp r0, 0x20
@@ -6274,7 +6274,7 @@ _0800E9AE:
 _0800E9CC: .4byte sub_800EC9C
 _0800E9D0: .4byte gUnknown_020239F8
 _0800E9D4: .4byte gEnemyParty
-_0800E9D8: .4byte word_202FF5E
+_0800E9D8: .4byte gTrainerBattleOpponent
 _0800E9DC: .4byte gMain
 _0800E9E0: .4byte 0x0000043d
 _0800E9E4: .4byte gPlayerParty
@@ -7041,7 +7041,7 @@ _0800F018: .4byte gMain
 _0800F01C: .4byte sub_8010824
 _0800F020: .4byte sub_800F808
 _0800F024: .4byte gUnknown_020239F8
-_0800F028: .4byte word_202FF5E
+_0800F028: .4byte gTrainerBattleOpponent
 	thumb_func_end sub_800EC9C
 
 	thumb_func_start sub_800F02C
@@ -8019,7 +8019,7 @@ _0800F7F4: .4byte gMain
 _0800F7F8: .4byte sub_8010824
 _0800F7FC: .4byte sub_800F808
 _0800F800: .4byte gUnknown_020239F8
-_0800F804: .4byte word_202FF5E
+_0800F804: .4byte gTrainerBattleOpponent
 	thumb_func_end sub_800F298
 
 	thumb_func_start sub_800F808
@@ -16256,7 +16256,7 @@ _08013A30:
 _08013A3C: .4byte gUnknown_02024C10
 _08013A40: .4byte gUnknown_081D8DBE
 _08013A44: .4byte gTrainers
-_08013A48: .4byte word_202FF5E
+_08013A48: .4byte gTrainerBattleOpponent
 _08013A4C: .4byte _08013A50
 	.align 2, 0
 _08013A50:
@@ -38593,7 +38593,7 @@ _0801F214:
 _0801F254: .4byte gUnknown_02024C07
 _0801F258: .4byte gUnknown_020239F8
 _0801F25C: .4byte 0x00000902
-_0801F260: .4byte word_202FF5E
+_0801F260: .4byte gTrainerBattleOpponent
 _0801F264: .4byte gUnknown_02024DBC
 _0801F268: .4byte gBitTable
 _0801F26C: .4byte gUnknown_02024A6A
@@ -48228,7 +48228,7 @@ sub_8024014: @ 8024014
 	mov r8, r0
 	b _08024140
 	.align 2, 0
-_08024048: .4byte word_202FF5E
+_08024048: .4byte gTrainerBattleOpponent
 _0802404C: .4byte 0x02017000
 _08024050: .4byte 0xfffff056
 _08024054: .4byte gSaveBlock1 + 0x490
@@ -48347,7 +48347,7 @@ _08024124: .4byte 0x02000000
 _08024128: .4byte gUnknown_020239F8
 _0802412C: .4byte gSaveBlock1 + 0x490
 _08024130: .4byte gTrainers
-_08024134: .4byte word_202FF5E
+_08024134: .4byte gTrainerBattleOpponent
 _08024138: .4byte 0x00016056
 _0802413C:
 	adds r4, r3, 0
@@ -60663,7 +60663,7 @@ _0802A2EE:
 _0802A30C: .4byte gUnknown_02024C07
 _0802A310: .4byte gUnknown_020239F8
 _0802A314: .4byte 0x00000902
-_0802A318: .4byte word_202FF5E
+_0802A318: .4byte gTrainerBattleOpponent
 _0802A31C: .4byte gUnknown_02024DBC
 _0802A320: .4byte gBitTable
 _0802A324: .4byte gUnknown_02024A6A
@@ -81385,7 +81385,7 @@ c2_8123744: @ 8034BFC
 	bl GetSecretBaseTrainerPicIndex
 	b _08034C42
 	.align 2, 0
-_08034C18: .4byte word_202FF5E
+_08034C18: .4byte gTrainerBattleOpponent
 _08034C1C:
 	ldr r0, _08034C30
 	ldrh r1, [r0]
@@ -81596,7 +81596,7 @@ sub_8034DC0: @ 8034DC0
 	bl GetSecretBaseTrainerPicIndex
 	b _08034E06
 	.align 2, 0
-_08034DDC: .4byte word_202FF5E
+_08034DDC: .4byte gTrainerBattleOpponent
 _08034DE0:
 	ldr r0, _08034DF4
 	ldrh r1, [r0]

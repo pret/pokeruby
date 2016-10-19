@@ -43594,7 +43594,7 @@ _08120D40:
 	ldr r6, _08120D50
 	b _08120F70
 	.align 2, 0
-_08120D44: .4byte word_202FF5E
+_08120D44: .4byte gTrainerBattleOpponent
 _08120D48: .4byte gUnknown_020239F8
 _08120D4C: .4byte gUnknown_08400771
 _08120D50: .4byte gUnknown_08400781
@@ -44803,7 +44803,7 @@ _0812174C:
 	movs r1, 0xD
 	b _081217AE
 	.align 2, 0
-_08121764: .4byte word_202FF5E
+_08121764: .4byte gTrainerBattleOpponent
 _08121768:
 	ldr r0, _08121784
 	ldrh r1, [r0]
@@ -44865,7 +44865,7 @@ _081217C0:
 	mov r4, sp
 	b _081219E6
 	.align 2, 0
-_081217E4: .4byte word_202FF5E
+_081217E4: .4byte gTrainerBattleOpponent
 _081217E8: .4byte 0x02017002
 _081217EC:
 	ldr r0, _08121804

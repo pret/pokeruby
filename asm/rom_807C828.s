@@ -11471,7 +11471,7 @@ sub_8082034: @ 8082034
 	b _08082070
 	.align 2, 0
 _08082064: .4byte gEnemyParty
-_08082068: .4byte gUnknown_0839ACF8
+_08082068: .4byte gBattleTransitionTable_Wild
 _0808206C:
 	ldr r0, _0808207C
 	lsls r1, r5, 1
@@ -11482,7 +11482,7 @@ _08082070:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0808207C: .4byte gUnknown_0839ACF8
+_0808207C: .4byte gBattleTransitionTable_Wild
 	thumb_func_end sub_8082034
 
 	thumb_func_start sub_8082080
@@ -11510,7 +11510,7 @@ sub_8082080: @ 8082080
 	movs r0, 0xC
 	b _0808212C
 	.align 2, 0
-_080820AC: .4byte word_202FF5E
+_080820AC: .4byte gTrainerBattleOpponent
 _080820B0: .4byte gTrainers
 _080820B4: .4byte 0x00000105
 _080820B8:
@@ -11568,7 +11568,7 @@ _080820F2:
 	adds r0, 0x1
 	b _08082128
 	.align 2, 0
-_08082120: .4byte gUnknown_0839AD00
+_08082120: .4byte gBattleTransitionTable_Trainer
 _08082124:
 	ldr r0, _08082134
 	lsls r1, r6, 1
@@ -11580,7 +11580,7 @@ _0808212C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08082134: .4byte gUnknown_0839AD00
+_08082134: .4byte gBattleTransitionTable_Trainer
 	thumb_func_end sub_8082080
 
 	thumb_func_start sub_8082138
@@ -11751,7 +11751,7 @@ trainerflag_opponent: @ 8082264
 	lsrs r0, 16
 	bx lr
 	.align 2, 0
-_08082278: .4byte word_202FF5E
+_08082278: .4byte gTrainerBattleOpponent
 	thumb_func_end trainerflag_opponent
 
 	thumb_func_start battle_exit_is_player_defeat
@@ -11810,15 +11810,15 @@ sub_80822BC: @ 80822BC
 	str r1, [r0]
 	bx lr
 	.align 2, 0
-_080822E8: .4byte gUnknown_0202FF5C
-_080822EC: .4byte word_202FF5E
-_080822F0: .4byte gUnknown_0202FF60
-_080822F4: .4byte gUnknown_0202FF64
-_080822F8: .4byte gUnknown_0202FF68
-_080822FC: .4byte gUnknown_0202FF6C
-_08082300: .4byte gUnknown_0202FF70
-_08082304: .4byte gUnknown_0202FF74
-_08082308: .4byte gUnknown_0202FF78
+_080822E8: .4byte gTrainerBattleMode
+_080822EC: .4byte gTrainerBattleOpponent
+_080822F0: .4byte gTrainerMapObjectLocalId
+_080822F4: .4byte gTrainerIntroSpeech
+_080822F8: .4byte gTrainerDefeatSpeech
+_080822FC: .4byte gTrainerVictorySpeech
+_08082300: .4byte gTrainerCannotBattleSpeech
+_08082304: .4byte gTrainerBattleScriptReturnAddress
+_08082308: .4byte gTrainerBattleEndScript
 	thumb_func_end sub_80822BC
 
 	thumb_func_start TrainerBattleLoadArgs
@@ -11913,7 +11913,7 @@ _080823B4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080823B8: .4byte gUnknown_0202FF60
+_080823B8: .4byte gTrainerMapObjectLocalId
 _080823BC: .4byte gUnknown_0202E8DE
 _080823C0: .4byte gSaveBlock1
 _080823C4: .4byte gSelectedMapObject
@@ -11940,7 +11940,7 @@ sub_80823C8: @ 80823C8
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_080823F0: .4byte gUnknown_0202FF5C
+_080823F0: .4byte gTrainerBattleMode
 _080823F4: .4byte _080823F8
 	.align 2, 0
 _080823F8:
@@ -11959,18 +11959,18 @@ _08082418:
 	ldr r0, _08082428
 	b _080824B2
 	.align 2, 0
-_08082424: .4byte gUnknown_0839ADE0
+_08082424: .4byte gTrainerBattleSpecs_3
 _08082428: .4byte gUnknown_0819F878
 _0808242C:
 	ldr r0, _08082430
 	b _0808243E
 	.align 2, 0
-_08082430: .4byte gUnknown_0839AD98
+_08082430: .4byte gTrainerBattleSpecs_2
 _08082434:
 	ldr r0, _08082438
 	b _080824A6
 	.align 2, 0
-_08082438: .4byte gUnknown_0839AD50
+_08082438: .4byte gTrainerBattleSpecs_1
 _0808243C:
 	ldr r0, _0808244C
 _0808243E:
@@ -11980,7 +11980,7 @@ _0808243E:
 	ldr r0, _08082450
 	b _080824B2
 	.align 2, 0
-_0808244C: .4byte gUnknown_0839AE28
+_0808244C: .4byte gTrainerBattleSpecs_4
 _08082450: .4byte gUnknown_0819F840
 _08082454:
 	ldr r0, _08082470
@@ -11994,8 +11994,8 @@ _08082454:
 	ldr r0, _08082478
 	b _080824B2
 	.align 2, 0
-_08082470: .4byte gUnknown_0839AD98
-_08082474: .4byte word_202FF5E
+_08082470: .4byte gTrainerBattleSpecs_2
+_08082474: .4byte gTrainerBattleOpponent
 _08082478: .4byte gUnknown_0819F8AE
 _0808247C:
 	ldr r0, _08082498
@@ -12009,8 +12009,8 @@ _0808247C:
 	ldr r0, _080824A0
 	b _080824B2
 	.align 2, 0
-_08082498: .4byte gUnknown_0839AD08
-_0808249C: .4byte word_202FF5E
+_08082498: .4byte gTrainerBattleSpecs_0
+_0808249C: .4byte gTrainerBattleOpponent
 _080824A0: .4byte gUnknown_0819F887
 _080824A4:
 	ldr r0, _080824B8
@@ -12024,7 +12024,7 @@ _080824B2:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080824B8: .4byte gUnknown_0839AD08
+_080824B8: .4byte gTrainerBattleSpecs_0
 _080824BC: .4byte gUnknown_0819F818
 	thumb_func_end sub_80823C8
 
@@ -12109,7 +12109,7 @@ sub_8082558: @ 8082558
 	ldrb r0, [r0]
 	bx lr
 	.align 2, 0
-_08082560: .4byte gUnknown_0202FF5C
+_08082560: .4byte gTrainerBattleMode
 	thumb_func_end sub_8082558
 
 	thumb_func_start sub_8082564
@@ -12220,7 +12220,7 @@ sub_808260C: @ 808260C
 	bl SetMainCallback2
 	b _08082652
 	.align 2, 0
-_08082624: .4byte word_202FF5E
+_08082624: .4byte gTrainerBattleOpponent
 _08082628: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
 _0808262C:
 	ldr r0, _08082640
@@ -12258,7 +12258,7 @@ do_choose_name_or_words_screen: @ 808265C
 	bl SetMainCallback2
 	b _080826A6
 	.align 2, 0
-_08082674: .4byte word_202FF5E
+_08082674: .4byte gTrainerBattleOpponent
 _08082678: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
 _0808267C:
 	ldr r0, _08082690
@@ -12324,7 +12324,7 @@ _080826F4:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080826F8: .4byte gUnknown_0202FF74
+_080826F8: .4byte gTrainerBattleScriptReturnAddress
 _080826FC: .4byte gUnknown_081C6C02
 	thumb_func_end sub_80826E8
 
@@ -12340,7 +12340,7 @@ _0808270C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08082710: .4byte gUnknown_0202FF78
+_08082710: .4byte gTrainerBattleEndScript
 _08082714: .4byte gUnknown_081C6C02
 	thumb_func_end sub_8082700
 
@@ -12375,8 +12375,8 @@ sub_8082728: @ 8082728
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_08082750: .4byte gUnknown_0202FF5C
-_08082754: .4byte word_202FF5E
+_08082750: .4byte gTrainerBattleMode
+_08082754: .4byte gTrainerBattleOpponent
 _08082758: .4byte _0808275C
 	.align 2, 0
 _0808275C:
@@ -12489,7 +12489,7 @@ sub_808281C: @ 808281C
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0808282C: .4byte gUnknown_0202FF64
+_0808282C: .4byte gTrainerIntroSpeech
 	thumb_func_end sub_808281C
 
 	thumb_func_start sub_8082830
@@ -12504,7 +12504,7 @@ sub_8082830: @ 8082830
 	bl sub_80BCCE8
 	b _0808284C
 	.align 2, 0
-_08082844: .4byte word_202FF5E
+_08082844: .4byte gTrainerBattleOpponent
 _08082848:
 	ldr r0, _08082864
 	ldr r0, [r0]
@@ -12519,7 +12519,7 @@ _0808284C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08082864: .4byte gUnknown_0202FF68
+_08082864: .4byte gTrainerDefeatSpeech
 _08082868: .4byte gStringVar4
 	thumb_func_end sub_8082830
 
@@ -12532,7 +12532,7 @@ unref_sub_808286C: @ 808286C
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0808287C: .4byte gUnknown_0202FF6C
+_0808287C: .4byte gTrainerVictorySpeech
 	thumb_func_end unref_sub_808286C
 
 	thumb_func_start sub_8082880
@@ -12544,7 +12544,7 @@ sub_8082880: @ 8082880
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08082890: .4byte gUnknown_0202FF70
+_08082890: .4byte gTrainerCannotBattleSpeech
 	thumb_func_end sub_8082880
 
 	thumb_func_start sub_8082894
@@ -13126,7 +13126,7 @@ sub_8082C68: @ 8082C68
 	b _08082C96
 	.align 2, 0
 _08082C8C: .4byte gTrainerEyeTrainers
-_08082C90: .4byte word_202FF5E
+_08082C90: .4byte gTrainerBattleOpponent
 _08082C94:
 	movs r0, 0x1
 _08082C96:
@@ -13148,7 +13148,7 @@ sub_8082C9C: @ 8082C9C
 	bx r1
 	.align 2, 0
 _08082CB0: .4byte gTrainerEyeTrainers
-_08082CB4: .4byte word_202FF5E
+_08082CB4: .4byte gTrainerBattleOpponent
 	thumb_func_end sub_8082C9C
 
 	thumb_func_start sub_8082CB8
@@ -13163,7 +13163,7 @@ sub_8082CB8: @ 8082CB8
 	bx r0
 	.align 2, 0
 _08082CCC: .4byte gTrainerEyeTrainers
-_08082CD0: .4byte word_202FF5E
+_08082CD0: .4byte gTrainerBattleOpponent
 	thumb_func_end sub_8082CB8
 
 	thumb_func_start sub_8082CD4

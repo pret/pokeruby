@@ -21512,7 +21512,7 @@ _0813558E:
 	b _081355D6
 	.align 2, 0
 _081355A4: .4byte gUnknown_020239F8
-_081355A8: .4byte word_202FF5E
+_081355A8: .4byte gTrainerBattleOpponent
 _081355AC:
 	movs r5, 0
 _081355AE:
@@ -21591,7 +21591,7 @@ _08135650: .4byte gEnemyParty
 _08135654: .4byte gSaveBlock2 + 0x4CC
 _08135658: .4byte gUnknown_020239F8
 _0813565C: .4byte 0x00000808
-_08135660: .4byte word_202FF5E
+_08135660: .4byte gTrainerBattleOpponent
 _08135664: .4byte sub_8135534
 	thumb_func_end sub_813556C
 
