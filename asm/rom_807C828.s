@@ -114,8 +114,8 @@ _0807C914: .4byte sub_807C9E4
 _0807C918: .4byte 0x000006c9
 	thumb_func_end sub_807C828
 
-	thumb_func_start sub_807C91C
-sub_807C91C: @ 807C91C
+	thumb_func_start DoWeatherEffect
+DoWeatherEffect: @ 807C91C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -125,7 +125,7 @@ sub_807C91C: @ 807C91C
 	beq _0807C932
 	cmp r4, 0xD
 	beq _0807C932
-	bl play_some_sound
+	bl PlayRainSoundEffect
 _0807C932:
 	ldr r1, _0807C974
 	ldr r2, _0807C978
@@ -165,7 +165,7 @@ _0807C978: .4byte 0x000006d1
 _0807C97C: .4byte gUnknown_08396FC8
 _0807C980: .4byte 0x000006d3
 _0807C984: .4byte 0x000006ce
-	thumb_func_end sub_807C91C
+	thumb_func_end DoWeatherEffect
 
 	thumb_func_start sub_807C988
 sub_807C988: @ 807C988
@@ -173,7 +173,7 @@ sub_807C988: @ 807C988
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl play_some_sound
+	bl PlayRainSoundEffect
 	ldr r0, _0807C9AC
 	movs r2, 0xDA
 	lsls r2, 3
@@ -196,7 +196,7 @@ sub_807C9B4: @ 807C9B4
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl play_some_sound
+	bl PlayRainSoundEffect
 	ldr r1, _0807C9E0
 	movs r2, 0xDA
 	lsls r2, 3
@@ -2834,8 +2834,8 @@ _0807DDAE:
 _0807DDB4: .4byte 0x000006dd
 	thumb_func_end sub_807DD5C
 
-	thumb_func_start play_some_sound
-play_some_sound: @ 807DDB8
+	thumb_func_start PlayRainSoundEffect
+PlayRainSoundEffect: @ 807DDB8
 	push {lr}
 	bl IsSpecialSEPlaying
 	lsls r0, 24
@@ -2867,7 +2867,7 @@ _0807DDF0:
 _0807DDF6:
 	pop {r0}
 	bx r0
-	thumb_func_end play_some_sound
+	thumb_func_end PlayRainSoundEffect
 
 	thumb_func_start sub_807DDFC
 sub_807DDFC: @ 807DDFC
@@ -8184,35 +8184,35 @@ _080806AE:
 	bx r0
 	thumb_func_end unc_0807DAB4
 
-	thumb_func_start sub_80806B4
-sub_80806B4: @ 80806B4
+	thumb_func_start SetSav1Weather
+SetSav1Weather: @ 80806B4
 	push {r4,r5,lr}
 	ldr r4, _080806D4
 	adds r4, 0x2E
 	ldrb r5, [r4]
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8080764
+	bl TranslateWeatherNum
 	strb r0, [r4]
 	ldrb r0, [r4]
 	adds r1, r5, 0
-	bl sub_8080854
+	bl UpdateRainCounter
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080806D4: .4byte gSaveBlock1
-	thumb_func_end sub_80806B4
+	thumb_func_end SetSav1Weather
 
-	thumb_func_start sav1_get_weather_probably
-sav1_get_weather_probably: @ 80806D8
+	thumb_func_start GetSav1Weather
+GetSav1Weather: @ 80806D8
 	ldr r0, _080806E0
 	adds r0, 0x2E
 	ldrb r0, [r0]
 	bx lr
 	.align 2, 0
 _080806E0: .4byte gSaveBlock1
-	thumb_func_end sav1_get_weather_probably
+	thumb_func_end GetSav1Weather
 
 	thumb_func_start sub_80806E4
 sub_80806E4: @ 80806E4
@@ -8222,11 +8222,11 @@ sub_80806E4: @ 80806E4
 	ldrb r5, [r4]
 	ldr r0, _08080708
 	ldrb r0, [r0, 0x16]
-	bl sub_8080764
+	bl TranslateWeatherNum
 	strb r0, [r4]
 	ldrb r0, [r4]
 	adds r1, r5, 0
-	bl sub_8080854
+	bl UpdateRainCounter
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -8238,11 +8238,11 @@ _08080708: .4byte gMapHeader
 	thumb_func_start sub_808070C
 sub_808070C: @ 808070C
 	push {lr}
-	bl sub_80806B4
-	bl sav1_get_weather_probably
+	bl SetSav1Weather
+	bl GetSav1Weather
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_807C91C
+	bl DoWeatherEffect
 	pop {r0}
 	bx r0
 	thumb_func_end sub_808070C
@@ -8250,8 +8250,8 @@ sub_808070C: @ 808070C
 	thumb_func_start sub_8080724
 sub_8080724: @ 8080724
 	push {lr}
-	bl sub_80806B4
-	bl sav1_get_weather_probably
+	bl SetSav1Weather
+	bl GetSav1Weather
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_807C988
@@ -8262,10 +8262,10 @@ sub_8080724: @ 8080724
 	thumb_func_start sub_808073C
 sub_808073C: @ 808073C
 	push {lr}
-	bl sav1_get_weather_probably
+	bl GetSav1Weather
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_807C91C
+	bl DoWeatherEffect
 	pop {r0}
 	bx r0
 	thumb_func_end sub_808073C
@@ -8273,7 +8273,7 @@ sub_808073C: @ 808073C
 	thumb_func_start sub_8080750
 sub_8080750: @ 8080750
 	push {lr}
-	bl sav1_get_weather_probably
+	bl GetSav1Weather
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_807C988
@@ -8281,8 +8281,8 @@ sub_8080750: @ 8080750
 	bx r0
 	thumb_func_end sub_8080750
 
-	thumb_func_start sub_8080764
-sub_8080764: @ 8080764
+	thumb_func_start TranslateWeatherNum
+TranslateWeatherNum: @ 8080764
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -8383,7 +8383,7 @@ _0808082C:
 _0808082E:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8080764
+	thumb_func_end TranslateWeatherNum
 
 	thumb_func_start sub_8080834
 sub_8080834: @ 8080834
@@ -8404,8 +8404,8 @@ sub_8080834: @ 8080834
 _08080850: .4byte gSaveBlock1
 	thumb_func_end sub_8080834
 
-	thumb_func_start sub_8080854
-sub_8080854: @ 8080854
+	thumb_func_start UpdateRainCounter
+UpdateRainCounter: @ 8080854
 	push {lr}
 	lsls r0, 24
 	lsls r1, 24
@@ -8422,7 +8422,7 @@ _08080868:
 _0808086E:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8080854
+	thumb_func_end UpdateRainCounter
 
 	thumb_func_start palette_bg_faded_fill_black
 palette_bg_faded_fill_black: @ 8080874
@@ -9211,7 +9211,7 @@ sub_8080E88: @ 8080E88
 	bl ScriptContext2_Enable
 	bl sub_8053FF8
 	bl sub_8080918
-	bl play_some_sound
+	bl PlayRainSoundEffect
 	movs r0, 0x9
 	bl PlaySE
 	ldr r0, _08080EB4
@@ -9234,7 +9234,7 @@ sp13E_warp_to_last_warp: @ 8080EC0
 	bl ScriptContext2_Enable
 	bl sub_8053FF8
 	bl sub_8080918
-	bl play_some_sound
+	bl PlayRainSoundEffect
 	ldr r0, _08080EE4
 	ldr r1, _08080EE8
 	str r1, [r0]
@@ -9723,7 +9723,7 @@ _080812A2:
 _080812A8:
 	bl sub_8053FF8
 	bl sub_8080918
-	bl play_some_sound
+	bl PlayRainSoundEffect
 	movs r0, 0
 	strh r0, [r5, 0x8]
 	ldr r0, _080812C4
@@ -9798,7 +9798,7 @@ sub_8081334: @ 8081334
 	bl ScriptContext2_Enable
 	bl sub_8053FF8
 	bl sub_8080918
-	bl play_some_sound
+	bl PlayRainSoundEffect
 	movs r0, 0x9
 	bl PlaySE
 	ldr r0, _08081360
@@ -11198,7 +11198,7 @@ _08081E62:
 	lsls r0, 5
 	cmp r1, r0
 	beq _08081E84
-	bl sav1_get_weather_probably
+	bl GetSav1Weather
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x8

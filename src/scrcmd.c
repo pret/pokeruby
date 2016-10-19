@@ -33,7 +33,7 @@ extern void sub_8081594(u8);
 extern void sub_8053CE4(u32);
 extern void fade_screen(u8, u8);
 extern void DoTimeBasedEvents(void);
-extern void sub_80806B4(u32);
+extern void SetSav1Weather(u32);
 extern void sub_80806E4(void);
 extern void sub_808073C(void);
 extern void activate_per_step_callback(u8);
@@ -724,7 +724,7 @@ bool8 ScrCmd_resetvars(struct ScriptContext *ctx)
 bool8 ScrCmd_setweather(struct ScriptContext *ctx)
 {
     u16 value = VarGet(ScriptReadHalfword(ctx));
-    sub_80806B4(value);
+    SetSav1Weather(value);
     return FALSE;
 }
 

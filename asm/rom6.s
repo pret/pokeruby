@@ -8924,7 +8924,7 @@ sub_810F83C: @ 810F83C
 	cmp r0, 0x1
 	beq _0810F858
 	movs r0, 0x14
-	bl sub_80806B4
+	bl SetSav1Weather
 _0810F858:
 	pop {r0}
 	bx r0
@@ -8942,7 +8942,7 @@ sub_810F85C: @ 810F85C
 	cmp r0, 0x1
 	beq _0810F878
 	movs r0, 0x15
-	bl sub_80806B4
+	bl SetSav1Weather
 _0810F878:
 	pop {r0}
 	bx r0
@@ -48964,7 +48964,7 @@ _081238B6:
 	b _081239D6
 _081238C2:
 	ldrb r0, [r3, 0x2]
-	bl sub_807C91C
+	bl DoWeatherEffect
 	ldr r1, [r5]
 	movs r0, 0x1
 	strb r0, [r1, 0x1]

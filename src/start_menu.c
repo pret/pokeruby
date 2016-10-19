@@ -23,7 +23,7 @@ extern bool8 sub_8125D44(u8);  //Saving related
 extern void sub_80945C0(u8, u8);
 extern void sub_80946C8(u8, u8);
 extern void save_serialize_map(void);
-extern void play_some_sound(void);
+extern void PlayRainSoundEffect(void);
 extern void sub_8093130(u8, void (*)(void));
 extern void sub_805469C(void);
 extern void sub_80C823C(void);
@@ -370,7 +370,7 @@ u8 StartMenu_PokedexCallback(void)
     if(!gPaletteFade.active)
     {
         sav12_xor_increment(0x29);
-        play_some_sound();
+        PlayRainSoundEffect();
         SetMainCallback2(CB2_InitPokedex);
         return 1;
     }
@@ -382,7 +382,7 @@ u8 StartMenu_PokemonCallback(void)
 {
     if(!gPaletteFade.active)
     {
-        play_some_sound();
+        PlayRainSoundEffect();
         SetMainCallback2(sub_8089A70);
         return 1;
     }
@@ -394,7 +394,7 @@ u8 StartMenu_BagCallback(void)
 {
     if(!gPaletteFade.active)
     {
-        play_some_sound();
+        PlayRainSoundEffect();
         SetMainCallback2(sub_80A53F8);
         return 1;
     }
@@ -406,7 +406,7 @@ u8 StartMenu_PokenavCallback(void)
 {
     if(!gPaletteFade.active)
     {
-        play_some_sound();
+        PlayRainSoundEffect();
         SetMainCallback2(sub_80EBA5C);
         return 1;
     }
@@ -418,7 +418,7 @@ u8 StartMenu_PlayerCallback(void)
 {
     if(!gPaletteFade.active)
     {
-        play_some_sound();
+        PlayRainSoundEffect();
         sub_8093110(sub_805469C);
         return 1;
     }
@@ -438,7 +438,7 @@ u8 StartMenu_OptionCallback(void)
 {
     if(!gPaletteFade.active)
     {
-        play_some_sound();
+        PlayRainSoundEffect();
         SetMainCallback2(CB2_InitOptionMenu);
         gMain.field_8 = sub_805469C;
         return 1;
@@ -466,7 +466,7 @@ u8 StartMenu_PlayerLinkCallback(void)
 {
     if(!gPaletteFade.active)
     {
-        play_some_sound();
+        PlayRainSoundEffect();
         sub_8093130(gUnknown_03004860, sub_805469C);
         return 1;
     }

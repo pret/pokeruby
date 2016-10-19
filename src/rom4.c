@@ -70,7 +70,7 @@ extern u32 gUnknown_08216694[];
 extern struct UnkWarpStruct *sub_80FA8CC(u8);
 extern u16 VarGet(u16);
 extern u8 FlagGet(u16);
-extern u8 sav1_get_weather_probably(void);
+extern u8 GetSav1Weather(void);
 extern void PlayerGetDestCoords(u16 *, u16 *);
 extern u8 sub_810D32C(void);
 extern u16 GetLocalWildMon(u8 *);
@@ -778,7 +778,7 @@ u16 sav1_map_get_music(void)
 
     if (gSaveBlock1.location.mapGroup == 0
      && gSaveBlock1.location.mapNum == 26
-     && sav1_get_weather_probably() == 8)
+     && GetSav1Weather() == 8)
         return BGM_ASHROAD;
 
     music = sub_8053D9C(&gSaveBlock1.location);
