@@ -6,6 +6,34 @@
 
 	.text
 
+	thumb_func_start sub_8146900
+sub_8146900: @ 8146900
+	push {lr}
+	bl LoadOam
+	bl ProcessSpriteCopyRequests
+	bl TransferPlttBuffer
+	pop {r0}
+	bx r0
+	thumb_func_end sub_8146900
+
+	thumb_func_start sub_8146914
+sub_8146914: @ 8146914
+	push {lr}
+	movs r2, 0
+	ldr r1, _0814692C
+	ldrh r0, [r1, 0x1A]
+	ldrh r1, [r1, 0x36]
+	cmp r0, r1
+	bne _08146924
+	movs r2, 0x1
+_08146924:
+	adds r0, r2, 0
+	pop {r1}
+	bx r1
+	.align 2, 0
+_0814692C: .4byte gLinkPlayers
+	thumb_func_end sub_8146914
+
 	thumb_func_start CB2_InitMysteryEventMenu
 CB2_InitMysteryEventMenu: @ 8146930
 	push {r4,lr}
