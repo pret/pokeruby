@@ -197,7 +197,7 @@ sub_8068024: @ 8068024
 	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 16
 	lsrs r4, r0, 16
-	bl sub_8083FBC
+	bl CheckTrainers
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

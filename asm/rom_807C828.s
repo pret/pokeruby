@@ -11919,8 +11919,8 @@ _080823C0: .4byte gSaveBlock1
 _080823C4: .4byte gSelectedMapObject
 	thumb_func_end battle_80801F0
 
-	thumb_func_start sub_80823C8
-sub_80823C8: @ 80823C8
+	thumb_func_start TrainerBattleConfigure
+TrainerBattleConfigure: @ 80823C8
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	bl sub_80822BC
@@ -12026,10 +12026,10 @@ _080824B2:
 	.align 2, 0
 _080824B8: .4byte gTrainerBattleSpecs_0
 _080824BC: .4byte gUnknown_0819F818
-	thumb_func_end sub_80823C8
+	thumb_func_end TrainerBattleConfigure
 
-	thumb_func_start SingleTrainerWantsBattle
-SingleTrainerWantsBattle: @ 80824C0
+	thumb_func_start TrainerWantsBattle
+TrainerWantsBattle: @ 80824C0
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -12045,7 +12045,7 @@ SingleTrainerWantsBattle: @ 80824C0
 	strh r0, [r4]
 	adds r1, 0x1
 	adds r0, r1, 0
-	bl sub_80823C8
+	bl TrainerBattleConfigure
 	ldr r0, _08082500
 	bl ScriptContext1_SetupScript
 	bl ScriptContext2_Enable
@@ -12057,7 +12057,7 @@ _080824F4: .4byte gSelectedMapObject
 _080824F8: .4byte gUnknown_0202E8DE
 _080824FC: .4byte gMapObjects
 _08082500: .4byte gUnknown_0819F80B
-	thumb_func_end SingleTrainerWantsBattle
+	thumb_func_end TrainerWantsBattle
 
 	thumb_func_start GetTrainerFlagFromScriptPointer
 GetTrainerFlagFromScriptPointer: @ 8082504
@@ -15292,8 +15292,8 @@ _08083D6A:
 	bx r1
 	thumb_func_end sub_8083D4C
 
-	thumb_func_start sub_8083D70
-sub_8083D70: @ 8083D70
+	thumb_func_start MoriDebugMenu_SearchChild
+MoriDebugMenu_SearchChild: @ 8083D70
 	push {r4-r6,lr}
 	sub sp, 0x34
 	ldr r0, _08083DE4
@@ -15350,10 +15350,10 @@ _08083DEC: .4byte gUnknown_0839B24D
 _08083DF0: .4byte gUnknown_0839B255
 _08083DF4: .4byte gCallback_03004AE8
 _08083DF8: .4byte sub_8083D4C
-	thumb_func_end sub_8083D70
+	thumb_func_end MoriDebugMenu_SearchChild
 
-	thumb_func_start sub_8083DFC
-sub_8083DFC: @ 8083DFC
+	thumb_func_start MoriDebugMenu_Egg
+MoriDebugMenu_Egg: @ 8083DFC
 	push {lr}
 	ldr r0, _08083E24
 	bl daycare_count_pokemon
@@ -15373,10 +15373,10 @@ _08083E1A:
 	bx r1
 	.align 2, 0
 _08083E24: .4byte gSaveBlock1 + 0x2F9C
-	thumb_func_end sub_8083DFC
+	thumb_func_end MoriDebugMenu_Egg
 
-	thumb_func_start sub_8083E28
-sub_8083E28: @ 8083E28
+	thumb_func_start MoriDebugMenu_MaleEgg
+MoriDebugMenu_MaleEgg: @ 8083E28
 	push {lr}
 	ldr r0, _08083E50
 	bl daycare_count_pokemon
@@ -15396,10 +15396,10 @@ _08083E46:
 	bx r1
 	.align 2, 0
 _08083E50: .4byte gSaveBlock1 + 0x2F9C
-	thumb_func_end sub_8083E28
+	thumb_func_end MoriDebugMenu_MaleEgg
 
-	thumb_func_start sub_8083E54
-sub_8083E54: @ 8083E54
+	thumb_func_start MoriDebugMenu_1000Steps
+MoriDebugMenu_1000Steps: @ 8083E54
 	push {lr}
 	movs r0, 0xFA
 	lsls r0, 2
@@ -15408,10 +15408,10 @@ sub_8083E54: @ 8083E54
 	movs r0, 0x1
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8083E54
+	thumb_func_end MoriDebugMenu_1000Steps
 
-	thumb_func_start sub_8083E68
-sub_8083E68: @ 8083E68
+	thumb_func_start MoriDebugMenu_10000Steps
+MoriDebugMenu_10000Steps: @ 8083E68
 	push {lr}
 	ldr r0, _08083E7C
 	bl sub_8041790
@@ -15421,20 +15421,20 @@ sub_8083E68: @ 8083E68
 	bx r1
 	.align 2, 0
 _08083E7C: .4byte 0x00002710
-	thumb_func_end sub_8083E68
+	thumb_func_end MoriDebugMenu_10000Steps
 
-	thumb_func_start sub_8083E80
-sub_8083E80: @ 8083E80
+	thumb_func_start MoriDebugMenu_MoveTutor
+MoriDebugMenu_MoveTutor: @ 8083E80
 	push {lr}
 	bl sub_8132670
 	bl sub_8071C20
 	movs r0, 0x1
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8083E80
+	thumb_func_end MoriDebugMenu_MoveTutor
 
-	thumb_func_start sub_8083E90
-sub_8083E90: @ 8083E90
+	thumb_func_start MoriDebugMenu_BreedEgg
+MoriDebugMenu_BreedEgg: @ 8083E90
 	push {r4-r6,lr}
 	sub sp, 0x4
 	movs r5, 0
@@ -15477,10 +15477,10 @@ _08083EBC:
 _08083EE0: .4byte gPlayerParty
 _08083EE4: .4byte gSaveBlock1
 _08083EE8: .4byte 0x000030b6
-	thumb_func_end sub_8083E90
+	thumb_func_end MoriDebugMenu_BreedEgg
 
-	thumb_func_start sub_8083EEC
-sub_8083EEC: @ 8083EEC
+	thumb_func_start MoriDebugMenu_LongName
+MoriDebugMenu_LongName: @ 8083EEC
 	push {lr}
 	ldr r0, _08083F04
 	ldr r2, _08083F08
@@ -15493,10 +15493,10 @@ sub_8083EEC: @ 8083EEC
 	.align 2, 0
 _08083F04: .4byte gPlayerParty
 _08083F08: .4byte gUnknown_0839B257
-	thumb_func_end sub_8083EEC
+	thumb_func_end MoriDebugMenu_LongName
 
-	thumb_func_start sub_8083F0C
-sub_8083F0C: @ 8083F0C
+	thumb_func_start MoriDebugMenu_PokeblockCase
+MoriDebugMenu_PokeblockCase: @ 8083F0C
 	push {r4,lr}
 	movs r4, 0
 _08083F10:
@@ -15511,10 +15511,10 @@ _08083F10:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8083F0C
+	thumb_func_end MoriDebugMenu_PokeblockCase
 
-	thumb_func_start sub_8083F2C
-sub_8083F2C: @ 8083F2C
+	thumb_func_start MoriDebugMenuProcessInput
+MoriDebugMenuProcessInput: @ 8083F2C
 	push {lr}
 	bl ProcessMenuInput
 	lsls r0, 24
@@ -15538,17 +15538,17 @@ _08083F52:
 	b _08083F66
 	.align 2, 0
 _08083F58: .4byte gCallback_03004AE8
-_08083F5C: .4byte gUnknown_0839B2C0
+_08083F5C: .4byte gMoriDebugMenuActions
 _08083F60:
 	bl sub_8071C20
 	movs r0, 0x1
 _08083F66:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8083F2C
+	thumb_func_end MoriDebugMenuProcessInput
 
-	thumb_func_start unref_sub_8083F6C
-unref_sub_8083F6C: @ 8083F6C
+	thumb_func_start InitMoriDebugMenu
+InitMoriDebugMenu: @ 8083F6C
 	push {lr}
 	sub sp, 0x8
 	bl MenuZeroFillScreen
@@ -15579,13 +15579,13 @@ unref_sub_8083F6C: @ 8083F6C
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08083FB0: .4byte gUnknown_0839B2C0
+_08083FB0: .4byte gMoriDebugMenuActions
 _08083FB4: .4byte gCallback_03004AE8
-_08083FB8: .4byte sub_8083F2C
-	thumb_func_end unref_sub_8083F6C
+_08083FB8: .4byte MoriDebugMenuProcessInput
+	thumb_func_end InitMoriDebugMenu
 
-	thumb_func_start sub_8083FBC
-sub_8083FBC: @ 8083FBC
+	thumb_func_start CheckTrainers
+CheckTrainers: @ 8083FBC
 	push {r4,r5,lr}
 	movs r4, 0
 	ldr r5, _08083FEC
@@ -15605,7 +15605,7 @@ _08083FC2:
 	bne _08083FF0
 _08083FDC:
 	adds r0, r4, 0
-	bl sub_8084004
+	bl CheckTrainer
 	lsls r0, 24
 	cmp r0, 0
 	beq _08083FF0
@@ -15624,10 +15624,10 @@ _08083FFC:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8083FBC
+	thumb_func_end CheckTrainers
 
-	thumb_func_start sub_8084004
-sub_8084004: @ 8084004
+	thumb_func_start CheckTrainer
+CheckTrainer: @ 8084004
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -15644,7 +15644,7 @@ sub_8084004: @ 8084004
 	ldr r1, _08084038
 	adds r5, r0, r1
 	adds r0, r5, 0
-	bl CheckIfTrainerCanApproachPlayer
+	bl TrainerCanApproachPlayer
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0
@@ -15657,7 +15657,7 @@ _08084038: .4byte gMapObjects
 _0808403C:
 	adds r0, r7, 0
 	adds r1, r6, 0
-	bl SingleTrainerWantsBattle
+	bl TrainerWantsBattle
 	subs r1, r4, 0x1
 	lsls r1, 24
 	lsrs r1, 24
@@ -15668,10 +15668,10 @@ _08084052:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8084004
+	thumb_func_end CheckTrainer
 
-	thumb_func_start CheckIfTrainerCanApproachPlayer
-CheckIfTrainerCanApproachPlayer: @ 8084058
+	thumb_func_start TrainerCanApproachPlayer
+TrainerCanApproachPlayer: @ 8084058
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -15758,7 +15758,7 @@ _080840F8:
 	bx r1
 	.align 2, 0
 _08084104: .4byte gUnknown_0839B488
-	thumb_func_end CheckIfTrainerCanApproachPlayer
+	thumb_func_end TrainerCanApproachPlayer
 
 	thumb_func_start IsTrainerInRangeSouth
 IsTrainerInRangeSouth: @ 8084108

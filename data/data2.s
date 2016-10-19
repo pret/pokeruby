@@ -11085,16 +11085,16 @@ Text_39B2B9: @ 839B2B9
 	.string "ポロックけす$" @ "{POKEBLOCK} CASE$"
 
 	.align 2
-gUnknown_0839B2C0:: @ 839B2C0
-	.4byte Text_39B262, sub_8083D70
-	.4byte Text_39B271, sub_8083DFC
-	.4byte Text_39B275, sub_8083E28
-	.4byte Text_39B280, sub_8083E54
-	.4byte Text_39B28B, sub_8083E68
-	.4byte Text_39B297, sub_8083E80
-	.4byte Text_39B2A2, sub_8083E90
-	.4byte Text_39B2AF, sub_8083EEC
-	.4byte Text_39B2B9, sub_8083F0C
+gMoriDebugMenuActions:: @ 839B2C0
+	.4byte Text_39B262, MoriDebugMenu_SearchChild
+	.4byte Text_39B271, MoriDebugMenu_Egg
+	.4byte Text_39B275, MoriDebugMenu_MaleEgg
+	.4byte Text_39B280, MoriDebugMenu_1000Steps
+	.4byte Text_39B28B, MoriDebugMenu_10000Steps
+	.4byte Text_39B297, MoriDebugMenu_MoveTutor
+	.4byte Text_39B2A2, MoriDebugMenu_BreedEgg
+	.4byte Text_39B2AF, MoriDebugMenu_LongName
+	.4byte Text_39B2B9, MoriDebugMenu_PokeblockCase
 
 	.align 2
 gSpriteImage_839B308:: @ 839B308

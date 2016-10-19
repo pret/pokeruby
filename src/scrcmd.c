@@ -100,7 +100,7 @@ extern void sub_80B7BEC(u32, u8, u8);
 extern void sub_811A72C(u32, u8, u8);
 extern void sub_811A770(u8, u8);
 extern void sub_811A704(u32, u8, u8);
-extern void *sub_80823C8(u8 *);
+extern void *TrainerBattleConfigure(u8 *);
 extern void sub_80825E4(void);
 extern u8 *sub_80826E8(void);
 extern u8 *sub_8082700(void);
@@ -1662,7 +1662,7 @@ bool8 ScrCmd_updatecoins(struct ScriptContext *ctx)
 
 bool8 ScrCmd_trainerbattle(struct ScriptContext *ctx)
 {
-    ctx->scriptPtr = sub_80823C8(ctx->scriptPtr);
+    ctx->scriptPtr = TrainerBattleConfigure(ctx->scriptPtr);
     return FALSE;
 }
 
