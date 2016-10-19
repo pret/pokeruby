@@ -198,7 +198,7 @@ _0806947A:
 	ands r0, r1
 	cmp r0, 0
 	beq _080694AC
-	bl DoDailyEvents
+	bl DoTimeBasedEvents
 	ldrh r0, [r4]
 	adds r0, 0x1
 	b _080694AA
@@ -2143,8 +2143,8 @@ _0806A358: .4byte gLocalTime
 _0806A35C: .4byte 0x00004040
 	thumb_func_end sub_806A328
 
-	thumb_func_start DoDailyEvents
-DoDailyEvents: @ 806A360
+	thumb_func_start DoTimeBasedEvents
+DoTimeBasedEvents: @ 806A360
 	push {r4,lr}
 	ldr r0, _0806A388
 	bl FlagGet
@@ -2164,7 +2164,7 @@ _0806A380:
 	.align 2, 0
 _0806A388: .4byte 0x00000835
 _0806A38C: .4byte gLocalTime
-	thumb_func_end DoDailyEvents
+	thumb_func_end DoTimeBasedEvents
 
 	thumb_func_start sub_806A390
 sub_806A390: @ 806A390

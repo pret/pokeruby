@@ -551,7 +551,7 @@ void sub_80538F0(u8 mapGroup, u8 mapNum)
     wild_pokemon_reroll();
     prev_quest_postbuffer_cursor_backup_reset();
     sub_8082BD0(mapGroup, mapNum);
-    DoDailyEvents();
+    DoTimeBasedEvents();
     sub_80806E4();
     sub_8054164();
     sub_8053C98();
@@ -585,7 +585,7 @@ void sub_8053994(u32 a1)
     prev_quest_postbuffer_cursor_backup_reset();
     sub_8082BD0(gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum);
     if (a1 != 1)
-        DoDailyEvents();
+        DoTimeBasedEvents();
     sub_80806E4();
     sub_8054164();
     if (v2)
@@ -1287,7 +1287,7 @@ void CB2_ContinueSavedGame(void)
     sub_805338C();
     sub_8053198();
     sub_806451C();
-    DoDailyEvents();
+    DoTimeBasedEvents();
     sub_805308C();
     sub_8055FC0();
     PlayTimeCounter_Start();

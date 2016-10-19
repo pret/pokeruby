@@ -32,7 +32,7 @@ extern void sav12_xor_increment(u8);
 extern void sub_8081594(u8);
 extern void sub_8053CE4(u32);
 extern void fade_screen(u8, u8);
-extern void DoDailyEvents(void);
+extern void DoTimeBasedEvents(void);
 extern void sub_80806B4(u32);
 extern void sub_80806E4(void);
 extern void sub_808073C(void);
@@ -708,7 +708,7 @@ bool8 ScrCmd_compareflags(struct ScriptContext *ctx)
 
 bool8 ScrCmd_checkdailyflags(struct ScriptContext *ctx)
 {
-    DoDailyEvents();
+    DoTimeBasedEvents();
     return FALSE;
 }
 
