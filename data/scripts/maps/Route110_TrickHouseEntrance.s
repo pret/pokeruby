@@ -13,11 +13,11 @@ Route110_TrickHouseEntrance_MapScript1_160F3B:: @ 8160F3B
 	compare 0x40a6, 1
 	jumpif EQUAL, Route110_TrickHouseEntrance_EventScript_16108E
 	compare 0x40a7, 5
-	callif 1, Route110_TrickHouseEntrance_EventScript_160FDE
+	callif EQUAL, Route110_TrickHouseEntrance_EventScript_160FDE
 	compare 0x40a7, 3
-	callif 1, Route110_TrickHouseEntrance_EventScript_160FDE
+	callif EQUAL, Route110_TrickHouseEntrance_EventScript_160FDE
 	compare 0x40a7, 0
-	callif 1, Route110_TrickHouseEntrance_EventScript_160FDE
+	callif EQUAL, Route110_TrickHouseEntrance_EventScript_160FDE
 	switch 0x40a7
 	case 0, Route110_TrickHouseEntrance_EventScript_16109A
 	case 1, Route110_TrickHouseEntrance_EventScript_1610A0
@@ -45,21 +45,21 @@ Route110_TrickHouseEntrance_EventScript_160FCE:: @ 8160FCE
 Route110_TrickHouseEntrance_EventScript_160FDE:: @ 8160FDE
 	setvar 0x40a7, 0
 	compare 0x4044, 1
-	callif 1, Route110_TrickHouseEntrance_EventScript_16103C
+	callif EQUAL, Route110_TrickHouseEntrance_EventScript_16103C
 	compare 0x4044, 2
-	callif 1, Route110_TrickHouseEntrance_EventScript_161046
+	callif EQUAL, Route110_TrickHouseEntrance_EventScript_161046
 	compare 0x4044, 3
-	callif 1, Route110_TrickHouseEntrance_EventScript_161050
+	callif EQUAL, Route110_TrickHouseEntrance_EventScript_161050
 	compare 0x4044, 4
-	callif 1, Route110_TrickHouseEntrance_EventScript_16105A
+	callif EQUAL, Route110_TrickHouseEntrance_EventScript_16105A
 	compare 0x4044, 5
-	callif 1, Route110_TrickHouseEntrance_EventScript_161064
+	callif EQUAL, Route110_TrickHouseEntrance_EventScript_161064
 	compare 0x4044, 6
-	callif 1, Route110_TrickHouseEntrance_EventScript_16106E
+	callif EQUAL, Route110_TrickHouseEntrance_EventScript_16106E
 	compare 0x4044, 7
-	callif 1, Route110_TrickHouseEntrance_EventScript_161078
+	callif EQUAL, Route110_TrickHouseEntrance_EventScript_161078
 	compare 0x4044, 8
-	callif 1, Route110_TrickHouseEntrance_EventScript_161082
+	callif EQUAL, Route110_TrickHouseEntrance_EventScript_161082
 	return
 
 Route110_TrickHouseEntrance_EventScript_16103C:: @ 816103C
@@ -214,7 +214,7 @@ Route110_TrickHouseEntrance_EventScript_1611D7:: @ 81611D7
 	lockall
 	pause 20
 	compare 0x4044, 0
-	callif 1, Route110_TrickHouseEntrance_EventScript_161327
+	callif EQUAL, Route110_TrickHouseEntrance_EventScript_161327
 	msgbox Route110_TrickHouseEntrance_Text_19BD82, 4
 	closebutton
 	pause 20
@@ -249,21 +249,21 @@ Route110_TrickHouseEntrance_EventScript_16124D:: @ 816124D
 	move 255, Route110_TrickHouseEntrance_Movement_1A0835
 	waitmove 0
 	compare 0x4044, 0
-	callif 1, Route110_TrickHouseEntrance_EventScript_1612CD
+	callif EQUAL, Route110_TrickHouseEntrance_EventScript_1612CD
 	compare 0x4044, 1
-	callif 1, Route110_TrickHouseEntrance_EventScript_1612D6
+	callif EQUAL, Route110_TrickHouseEntrance_EventScript_1612D6
 	compare 0x4044, 2
-	callif 1, Route110_TrickHouseEntrance_EventScript_1612DF
+	callif EQUAL, Route110_TrickHouseEntrance_EventScript_1612DF
 	compare 0x4044, 3
-	callif 1, Route110_TrickHouseEntrance_EventScript_1612E8
+	callif EQUAL, Route110_TrickHouseEntrance_EventScript_1612E8
 	compare 0x4044, 4
-	callif 1, Route110_TrickHouseEntrance_EventScript_1612F1
+	callif EQUAL, Route110_TrickHouseEntrance_EventScript_1612F1
 	compare 0x4044, 5
-	callif 1, Route110_TrickHouseEntrance_EventScript_1612FA
+	callif EQUAL, Route110_TrickHouseEntrance_EventScript_1612FA
 	compare 0x4044, 6
-	callif 1, Route110_TrickHouseEntrance_EventScript_161303
+	callif EQUAL, Route110_TrickHouseEntrance_EventScript_161303
 	compare 0x4044, 7
-	callif 1, Route110_TrickHouseEntrance_EventScript_16130C
+	callif EQUAL, Route110_TrickHouseEntrance_EventScript_16130C
 	closebutton
 	setvar 0x40a6, 1
 	warp Route110_TrickHouseEntrance, 255, 6, 2
@@ -372,7 +372,7 @@ Route110_TrickHouseEntrance_EventScript_1613CE:: @ 81613CE
 	compare RESULT, 1
 	jumpif EQUAL, Route110_TrickHouseEntrance_EventScript_161502
 	compare RESULT, 0
-	callif 1, Route110_TrickHouseEntrance_EventScript_1A02A5
+	callif EQUAL, Route110_TrickHouseEntrance_EventScript_1A02A5
 	msgbox Route110_TrickHouseEntrance_Text_19C0FC, 4
 	releaseall
 	end
@@ -382,7 +382,7 @@ Route110_TrickHouseEntrance_EventScript_1613FA:: @ 81613FA
 	compare RESULT, 1
 	jumpif EQUAL, Route110_TrickHouseEntrance_EventScript_161502
 	compare RESULT, 0
-	callif 1, Route110_TrickHouseEntrance_EventScript_1A02A5
+	callif EQUAL, Route110_TrickHouseEntrance_EventScript_1A02A5
 	msgbox Route110_TrickHouseEntrance_Text_19C0FC, 4
 	releaseall
 	end
@@ -392,7 +392,7 @@ Route110_TrickHouseEntrance_EventScript_161426:: @ 8161426
 	compare RESULT, 1
 	jumpif EQUAL, Route110_TrickHouseEntrance_EventScript_161502
 	compare RESULT, 0
-	callif 1, Route110_TrickHouseEntrance_EventScript_1A02A5
+	callif EQUAL, Route110_TrickHouseEntrance_EventScript_1A02A5
 	msgbox Route110_TrickHouseEntrance_Text_19C0FC, 4
 	releaseall
 	end
@@ -402,7 +402,7 @@ Route110_TrickHouseEntrance_EventScript_161452:: @ 8161452
 	compare RESULT, 1
 	jumpif EQUAL, Route110_TrickHouseEntrance_EventScript_161502
 	compare RESULT, 0
-	callif 1, Route110_TrickHouseEntrance_EventScript_1A02A5
+	callif EQUAL, Route110_TrickHouseEntrance_EventScript_1A02A5
 	msgbox Route110_TrickHouseEntrance_Text_19C0FC, 4
 	releaseall
 	end
@@ -412,7 +412,7 @@ Route110_TrickHouseEntrance_EventScript_16147E:: @ 816147E
 	compare RESULT, 1
 	jumpif EQUAL, Route110_TrickHouseEntrance_EventScript_161502
 	compare RESULT, 0
-	callif 1, Route110_TrickHouseEntrance_EventScript_1A02A5
+	callif EQUAL, Route110_TrickHouseEntrance_EventScript_1A02A5
 	msgbox Route110_TrickHouseEntrance_Text_19C0FC, 4
 	releaseall
 	end
@@ -422,7 +422,7 @@ Route110_TrickHouseEntrance_EventScript_1614AA:: @ 81614AA
 	compare RESULT, 1
 	jumpif EQUAL, Route110_TrickHouseEntrance_EventScript_161502
 	compare RESULT, 0
-	callif 1, Route110_TrickHouseEntrance_EventScript_1A02A5
+	callif EQUAL, Route110_TrickHouseEntrance_EventScript_1A02A5
 	msgbox Route110_TrickHouseEntrance_Text_19C0FC, 4
 	releaseall
 	end
@@ -432,7 +432,7 @@ Route110_TrickHouseEntrance_EventScript_1614D6:: @ 81614D6
 	compare RESULT, 1
 	jumpif EQUAL, Route110_TrickHouseEntrance_EventScript_161502
 	compare RESULT, 0
-	callif 1, Route110_TrickHouseEntrance_EventScript_1A02A5
+	callif EQUAL, Route110_TrickHouseEntrance_EventScript_1A02A5
 	msgbox Route110_TrickHouseEntrance_Text_19C0FC, 4
 	releaseall
 	end
@@ -457,7 +457,7 @@ Route110_TrickHouseEntrance_EventScript_161518:: @ 8161518
 	compare RESULT, 1
 	jumpif EQUAL, Route110_TrickHouseEntrance_EventScript_161551
 	compare RESULT, 0
-	callif 1, Route110_TrickHouseEntrance_EventScript_1A02B8
+	callif EQUAL, Route110_TrickHouseEntrance_EventScript_1A02B8
 	msgbox Route110_TrickHouseEntrance_Text_19C18D, 4
 	releaseall
 	end
@@ -727,11 +727,11 @@ Route110_TrickHouseEntrance_EventScript_1618B0:: @ 81618B0
 	msgbox Route110_TrickHouseEntrance_Text_19BA56, 4
 	releaseall
 	compare 0x4044, 0
-	callif 1, Route110_TrickHouseEntrance_EventScript_1618E1
+	callif EQUAL, Route110_TrickHouseEntrance_EventScript_1618E1
 	compare 0x4044, 1
-	callif 1, Route110_TrickHouseEntrance_EventScript_1618F6
+	callif EQUAL, Route110_TrickHouseEntrance_EventScript_1618F6
 	compare 0x4044, 2
-	callif 1, Route110_TrickHouseEntrance_EventScript_16190B
+	callif EQUAL, Route110_TrickHouseEntrance_EventScript_16190B
 	setvar 0x40a5, 1
 	end
 

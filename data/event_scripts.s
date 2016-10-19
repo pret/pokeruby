@@ -941,7 +941,7 @@ gUnknown_0819F818:: @ 819F818
 	waitmove 0
 	specialval RESULT, 54
 	compare RESULT, 0
-	jumpif 5, EventScript_19F83F
+	jumpif NOT_EQUAL, EventScript_19F83F
 	special 56
 	special 314
 	jump EventScript_19F8F2
@@ -955,10 +955,10 @@ gUnknown_0819F840:: @ 819F840
 	call EventScript_19F8E5
 	specialval RESULT, 54
 	compare RESULT, 0
-	jumpif 5, EventScript_19F877
+	jumpif NOT_EQUAL, EventScript_19F877
 	special 61
 	compare RESULT, 0
-	jumpif 5, EventScript_19F870
+	jumpif NOT_EQUAL, EventScript_19F870
 	special 56
 	special 314
 	jump EventScript_19F8F2
@@ -1004,7 +1004,7 @@ gUnknown_0819F8AE:: @ 819F8AE
 	jumpif EQUAL, EventScript_19F8DD
 	special 61
 	compare RESULT, 0
-	jumpif 5, EventScript_19F8DE
+	jumpif NOT_EQUAL, EventScript_19F8DE
 	special 56
 	special 314
 	special 52
@@ -1503,9 +1503,9 @@ Std_ObtainItem_: @ 819FE07
 	checkitemtype 0x8000
 	call GetItem_HandlePocket
 	compare 0x8007, 0x1
-	callif 1, Std_ObtainItem_Success
+	callif EQUAL, Std_ObtainItem_Success
 	compare 0x8007, 0x0
-	callif 1, Std_ObtainItem_Fail
+	callif EQUAL, Std_ObtainItem_Fail
 	return
 
 GetItem_HandlePocket:
@@ -1520,31 +1520,31 @@ GetItem_HandlePocket:
 GetItem_HandlePocket_Items:
 	bufferstd 2, 0xE
 	compare 0x8007, 1
-	callif 1, PlayGetItemFanfare
+	callif EQUAL, PlayGetItemFanfare
 	return
 
 GetItem_HandlePocket_KeyItems:
 	bufferstd 2, 0xF
 	compare 0x8007, 1
-	callif 1, PlayGetItemFanfare
+	callif EQUAL, PlayGetItemFanfare
 	return
 
 GetItem_HandlePocket_PokeBalls:
 	bufferstd 2, 0x10
 	compare 0x8007, 1
-	callif 1, PlayGetItemFanfare
+	callif EQUAL, PlayGetItemFanfare
 	return
 
 GetItem_HandlePocket_TMsHMs:
 	bufferstd 2, 0x11
 	compare 0x8007, 1
-	callif 1, PlayGetTMHMFanfare
+	callif EQUAL, PlayGetTMHMFanfare
 	return
 
 GetItem_HandlePocket_Berries:
 	bufferstd 2, 0x12
 	compare 0x8007, 1
-	callif 1, PlayGetItemFanfare
+	callif EQUAL, PlayGetItemFanfare
 	return
 
 Std_ObtainItem_Success: @ 819FEB7
@@ -1576,9 +1576,9 @@ Std_ObtainDecoration: @ 819FEDA
 Std_ObtainDecoration_: @ 819FEE8
 	bufferdecor 1, 0x8000
 	compare 0x8007, 1
-	callif 1, Std_ObtainDecoration_Success
+	callif EQUAL, Std_ObtainDecoration_Success
 	compare 0x8007, 0
-	callif 1, Std_ObtainDecoration_Fail
+	callif EQUAL, Std_ObtainDecoration_Fail
 	return
 
 Std_ObtainDecoration_Success: @ 819FF03
@@ -1604,9 +1604,9 @@ Std_FindItem: @ 819FF21
 	checkitemtype 0x8000
 	call GetItem_HandlePocket
 	compare 0x8007, 1
-	callif 1, Std_FindItem_Success
+	callif EQUAL, Std_FindItem_Success
 	compare 0x8007, 0
-	callif 1, Std_FindItem_Fail
+	callif EQUAL, Std_FindItem_Fail
 	release
 	return
 
@@ -2143,21 +2143,21 @@ Route103_EventScript_1A02F4:: @ 81A02F4
 	compare 0x4085, 0
 	jumpif EQUAL, Route101_EventScript_1A14DC
 	compare 0x4049, 0
-	callif 1, Route101_EventScript_1A0358
+	callif EQUAL, Route101_EventScript_1A0358
 	compare 0x4049, 1
-	callif 1, Route101_EventScript_1A0358
+	callif EQUAL, Route101_EventScript_1A0358
 	compare 0x4049, 2
-	callif 1, Route101_EventScript_1A0365
+	callif EQUAL, Route101_EventScript_1A0365
 	compare 0x4049, 3
-	callif 1, Route101_EventScript_1A0365
+	callif EQUAL, Route101_EventScript_1A0365
 	compare 0x4049, 4
-	callif 1, Route101_EventScript_1A0372
+	callif EQUAL, Route101_EventScript_1A0372
 	compare 0x4049, 5
-	callif 1, Route101_EventScript_1A0372
+	callif EQUAL, Route101_EventScript_1A0372
 	compare 0x4049, 6
-	callif 1, Route101_EventScript_1A0358
+	callif EQUAL, Route101_EventScript_1A0358
 	compare 0x4049, 7
-	callif 1, Route101_EventScript_1A0358
+	callif EQUAL, Route101_EventScript_1A0358
 	return
 
 Route101_EventScript_1A0358:: @ 81A0358
@@ -2284,9 +2284,9 @@ Movement_1A047A:
 BattleTower_Outside_EventScript_1A047C:: @ 81A047C
 SouthernIsland_Exterior_EventScript_1A047C:: @ 81A047C
 	compare FACING, 1
-	callif 1, BattleTower_Outside_EventScript_160B2F
+	callif EQUAL, BattleTower_Outside_EventScript_160B2F
 	compare FACING, 3
-	callif 1, BattleTower_Outside_EventScript_160B3A
+	callif EQUAL, BattleTower_Outside_EventScript_160B3A
 	pause 30
 	spriteinvisible 255, 0, 0
 	call BattleTower_Outside_EventScript_1A040E
@@ -2454,19 +2454,19 @@ Route119_EventScript_1A05C3:: @ 81A05C3
 	waitpokecry
 	setwildbattle SPECIES_KECLEON, 30, ITEM_NONE
 	compare 0x8004, 1
-	callif 1, Route119_EventScript_1A0646
+	callif EQUAL, Route119_EventScript_1A0646
 	compare 0x8004, 2
-	callif 1, Route119_EventScript_1A064A
+	callif EQUAL, Route119_EventScript_1A064A
 	compare 0x8004, 3
-	callif 1, Route119_EventScript_1A064E
+	callif EQUAL, Route119_EventScript_1A064E
 	compare 0x8004, 4
-	callif 1, Route119_EventScript_1A0652
+	callif EQUAL, Route119_EventScript_1A0652
 	compare 0x8004, 5
-	callif 1, Route119_EventScript_1A0656
+	callif EQUAL, Route119_EventScript_1A0656
 	compare 0x8004, 6
-	callif 1, Route119_EventScript_1A065A
+	callif EQUAL, Route119_EventScript_1A065A
 	compare 0x8004, 7
-	callif 1, Route119_EventScript_1A065E
+	callif EQUAL, Route119_EventScript_1A065E
 	setflag 2145
 	dowildbattle
 	clearflag 2145
@@ -4624,7 +4624,7 @@ LilycoveCity_ContestLobby_EventScript_1AE188:: @ 81AE188
 SlateportCity_ContestLobby_EventScript_1AE188:: @ 81AE188
 VerdanturfTown_ContestLobby_EventScript_1AE188:: @ 81AE188
 	compare 0x4086, 2
-	jumpif 5, FallarborTown_ContestLobby_EventScript_1AE1FE
+	jumpif NOT_EQUAL, FallarborTown_ContestLobby_EventScript_1AE1FE
 	setvar 0x8005, 6
 	special 67
 	compare RESULT, 1
@@ -4680,9 +4680,9 @@ BattleTower_Lobby_EventScript_1AE241:: @ 81AE241
 	multichoice 19, 8, 45, 1
 	copyvar 0x8008, RESULT
 	compare RESULT, 0
-	callif 1, BattleTower_Lobby_EventScript_1AE2A1
+	callif EQUAL, BattleTower_Lobby_EventScript_1AE2A1
 	compare RESULT, 1
-	callif 1, BattleTower_Lobby_EventScript_1AE2AA
+	callif EQUAL, BattleTower_Lobby_EventScript_1AE2AA
 	msgbox BattleTower_Lobby_Text_1A79EB, 4
 	setvar 0x8004, 12
 	copyvar 0x8005, 0x8009

@@ -29,7 +29,7 @@ Route117_EventScript_1B2262:: @ 81B2262
 Route117_EventScript_1B2298:: @ 81B2298
 	specialval RESULT, 131
 	compare RESULT, 6
-	jumpif 5, Route117_EventScript_1B22B2
+	jumpif NOT_EQUAL, Route117_EventScript_1B22B2
 	msgbox Route117_Text_1B2766, 4
 	release
 	end
@@ -49,7 +49,7 @@ Route117_EventScript_1B22B2:: @ 81B22B2
 Route117_EventScript_1B22CD:: @ 81B22CD
 	specialval RESULT, 195
 	compare RESULT, 1
-	callif 1, Route117_EventScript_1B22DE
+	callif EQUAL, Route117_EventScript_1B22DE
 	return
 
 Route117_EventScript_1B22DE:: @ 81B22DE
@@ -155,7 +155,7 @@ Route117_PokemonDayCare_EventScript_1B2411:: @ 81B2411
 Route117_PokemonDayCare_EventScript_1B241A:: @ 81B241A
 	specialval RESULT, 190
 	compare RESULT, 0
-	callif 5, Route117_PokemonDayCare_EventScript_1B2411
+	callif NOT_EQUAL, Route117_PokemonDayCare_EventScript_1B2411
 	return
 
 Route117_PokemonDayCare_EventScript_1B242B:: @ 81B242B

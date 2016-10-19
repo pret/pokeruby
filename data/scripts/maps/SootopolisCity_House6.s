@@ -8,7 +8,7 @@ SootopolisCity_House6_EventScript_15B386:: @ 815B386
 	jumpif FLAG_IS_SET, SootopolisCity_House6_EventScript_15B3CD
 	msgbox SootopolisCity_House6_Text_18FEA1, 5
 	compare RESULT, 0
-	callif 1, SootopolisCity_House6_EventScript_15B3C3
+	callif EQUAL, SootopolisCity_House6_EventScript_15B3C3
 	msgbox SootopolisCity_House6_Text_18FF12, 4
 	givedecoration 117
 	compare RESULT, 0

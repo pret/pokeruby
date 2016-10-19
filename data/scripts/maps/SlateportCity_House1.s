@@ -16,7 +16,7 @@ SlateportCity_House1_EventScript_15569C:: @ 815569C
 	special 159
 	waitstate
 	compare 0x8004, 255
-	jumpif 5, SlateportCity_House1_EventScript_1556C9
+	jumpif NOT_EQUAL, SlateportCity_House1_EventScript_1556C9
 	compare 0x8004, 255
 	jumpif EQUAL, SlateportCity_House1_EventScript_1556BF
 	end

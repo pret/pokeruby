@@ -31,11 +31,11 @@ MtPyre_Summit_EventScript_15D4E1:: @ 815D4E1
 	waitmove 0
 	pause 50
 	compare 0x8008, 0
-	callif 1, MtPyre_Summit_EventScript_15D593
+	callif EQUAL, MtPyre_Summit_EventScript_15D593
 	compare 0x8008, 1
-	callif 1, MtPyre_Summit_EventScript_15D59E
+	callif EQUAL, MtPyre_Summit_EventScript_15D59E
 	compare 0x8008, 2
-	callif 1, MtPyre_Summit_EventScript_15D59F
+	callif EQUAL, MtPyre_Summit_EventScript_15D59F
 	.ifdef SAPPHIRE
 	msgbox UnknownString_81B52B0, 4
 	.else
@@ -53,11 +53,11 @@ MtPyre_Summit_EventScript_15D4E1:: @ 815D4E1
 	pause 20
 	call MtPyre_Summit_EventScript_15D57A
 	compare 0x8008, 0
-	callif 1, MtPyre_Summit_EventScript_15D5AA
+	callif EQUAL, MtPyre_Summit_EventScript_15D5AA
 	compare 0x8008, 1
-	callif 1, MtPyre_Summit_EventScript_15D5BF
+	callif EQUAL, MtPyre_Summit_EventScript_15D5BF
 	compare 0x8008, 2
-	callif 1, MtPyre_Summit_EventScript_15D5CA
+	callif EQUAL, MtPyre_Summit_EventScript_15D5CA
 	.ifdef SAPPHIRE
 	msgbox UnknownString_81B53AB, 4
 	.else
@@ -144,9 +144,9 @@ MtPyre_Summit_EventScript_15D5EF:: @ 815D5EF
 	msgbox MtPyre_Summit_Text_1B64B3, 5
 	.endif
 	compare RESULT, 1
-	callif 1, MtPyre_Summit_EventScript_15D611
+	callif EQUAL, MtPyre_Summit_EventScript_15D611
 	compare RESULT, 0
-	callif 1, MtPyre_Summit_EventScript_15D61A
+	callif EQUAL, MtPyre_Summit_EventScript_15D61A
 	release
 	end
 
@@ -269,11 +269,11 @@ MtPyre_Summit_EventScript_15D6F2:: @ 815D6F2
 	waitmove 0
 	pause 50
 	compare 0x8008, 0
-	callif 1, MtPyre_Summit_EventScript_15D75E
+	callif EQUAL, MtPyre_Summit_EventScript_15D75E
 	compare 0x8008, 1
-	callif 1, MtPyre_Summit_EventScript_15D769
+	callif EQUAL, MtPyre_Summit_EventScript_15D769
 	compare 0x8008, 2
-	callif 1, MtPyre_Summit_EventScript_15D774
+	callif EQUAL, MtPyre_Summit_EventScript_15D774
 	.ifdef SAPPHIRE
 	msgbox UnknownString_81B5BFC, 4
 	.else
@@ -281,11 +281,11 @@ MtPyre_Summit_EventScript_15D6F2:: @ 815D6F2
 	.endif
 	closebutton
 	compare 0x8008, 0
-	callif 1, MtPyre_Summit_EventScript_15D77F
+	callif EQUAL, MtPyre_Summit_EventScript_15D77F
 	compare 0x8008, 1
-	callif 1, MtPyre_Summit_EventScript_15D78A
+	callif EQUAL, MtPyre_Summit_EventScript_15D78A
 	compare 0x8008, 2
-	callif 1, MtPyre_Summit_EventScript_15D795
+	callif EQUAL, MtPyre_Summit_EventScript_15D795
 	disappear 2
 	setvar 0x40b9, 3
 	releaseall

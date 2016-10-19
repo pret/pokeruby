@@ -5,9 +5,9 @@ LilycoveCity_DepartmentStoreRooftop_MapScripts:: @ 815A13F
 LilycoveCity_DepartmentStoreRooftop_MapScript1_15A145:: @ 815A145
 	event_96 3
 	compare RESULT, 1
-	callif 1, LilycoveCity_DepartmentStoreRooftop_EventScript_15A15F
+	callif EQUAL, LilycoveCity_DepartmentStoreRooftop_EventScript_15A15F
 	compare RESULT, 0
-	callif 1, LilycoveCity_DepartmentStoreRooftop_EventScript_15A163
+	callif EQUAL, LilycoveCity_DepartmentStoreRooftop_EventScript_15A163
 	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_15A15F:: @ 815A15F
@@ -53,7 +53,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A1A0:: @ 815A1A0
 	faceplayer
 	event_96 3
 	compare RESULT, 1
-	callif 1, LilycoveCity_DepartmentStoreRooftop_EventScript_15A1BA
+	callif EQUAL, LilycoveCity_DepartmentStoreRooftop_EventScript_15A1BA
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_18C61F, 4
 	release
 	end
@@ -128,22 +128,22 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A260:: @ 815A260
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_15A267:: @ 815A267
 	compare 0x4001, 0
-	callif 1, LilycoveCity_DepartmentStoreRooftop_EventScript_15A23D
+	callif EQUAL, LilycoveCity_DepartmentStoreRooftop_EventScript_15A23D
 	compare 0x4001, 1
-	callif 1, LilycoveCity_DepartmentStoreRooftop_EventScript_15A244
+	callif EQUAL, LilycoveCity_DepartmentStoreRooftop_EventScript_15A244
 	compare 0x4001, 2
-	callif 1, LilycoveCity_DepartmentStoreRooftop_EventScript_15A24B
+	callif EQUAL, LilycoveCity_DepartmentStoreRooftop_EventScript_15A24B
 	compare RESULT, 0
 	jumpif EQUAL, LilycoveCity_DepartmentStoreRooftop_EventScript_15A37A
 	checkitemspace 0x4000, 1
 	compare RESULT, 0
 	jumpif EQUAL, LilycoveCity_DepartmentStoreRooftop_EventScript_15A388
 	compare 0x4001, 0
-	callif 1, LilycoveCity_DepartmentStoreRooftop_EventScript_15A252
+	callif EQUAL, LilycoveCity_DepartmentStoreRooftop_EventScript_15A252
 	compare 0x4001, 1
-	callif 1, LilycoveCity_DepartmentStoreRooftop_EventScript_15A259
+	callif EQUAL, LilycoveCity_DepartmentStoreRooftop_EventScript_15A259
 	compare 0x4001, 2
-	callif 1, LilycoveCity_DepartmentStoreRooftop_EventScript_15A260
+	callif EQUAL, LilycoveCity_DepartmentStoreRooftop_EventScript_15A260
 	updatemoney 0, 0
 	snop
 	bufferitem 0, 0x4000
@@ -155,7 +155,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A267:: @ 815A267
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_1A0C8C, 4
 	random 64
 	compare RESULT, 0
-	jumpif 5, LilycoveCity_DepartmentStoreRooftop_EventScript_15A36E
+	jumpif NOT_EQUAL, LilycoveCity_DepartmentStoreRooftop_EventScript_15A36E
 	checkitemspace 0x4000, 1
 	compare RESULT, 0
 	jumpif EQUAL, LilycoveCity_DepartmentStoreRooftop_EventScript_15A388
@@ -167,7 +167,7 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_15A267:: @ 815A267
 	msgbox LilycoveCity_DepartmentStoreRooftop_Text_1A0C8C, 4
 	random 64
 	compare RESULT, 0
-	jumpif 5, LilycoveCity_DepartmentStoreRooftop_EventScript_15A36E
+	jumpif NOT_EQUAL, LilycoveCity_DepartmentStoreRooftop_EventScript_15A36E
 	checkitemspace 0x4000, 1
 	compare RESULT, 0
 	jumpif EQUAL, LilycoveCity_DepartmentStoreRooftop_EventScript_15A388

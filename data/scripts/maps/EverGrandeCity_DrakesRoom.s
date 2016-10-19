@@ -27,7 +27,7 @@ EverGrandeCity_DrakesRoom_MapScript1_15B743:: @ 815B743
 	checkflag 1248
 	callif FLAG_IS_SET, EverGrandeCity_DrakesRoom_EventScript_15B758
 	compare 0x409c, 4
-	callif 1, EverGrandeCity_DrakesRoom_EventScript_15B75E
+	callif EQUAL, EverGrandeCity_DrakesRoom_EventScript_15B75E
 	end
 
 EverGrandeCity_DrakesRoom_EventScript_15B758:: @ 815B758

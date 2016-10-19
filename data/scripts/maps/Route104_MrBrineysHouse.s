@@ -5,7 +5,7 @@ Route104_MrBrineysHouse_MapScripts:: @ 815BCB2
 Route104_MrBrineysHouse_MapScript1_15BCB8:: @ 815BCB8
 	setflag 2109
 	compare 0x4090, 1
-	callif 1, Route104_MrBrineysHouse_EventScript_15BCD4
+	callif EQUAL, Route104_MrBrineysHouse_EventScript_15BCD4
 	checkflag 188
 	callif FLAG_IS_SET, Route104_MrBrineysHouse_EventScript_15BCD0
 	end

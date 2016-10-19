@@ -54,9 +54,9 @@ EverGrandeCity_ChampionsRoom_EventScript_15B821:: @ 815B821
 	playsfx 8
 	checkgender
 	compare RESULT, 0
-	callif 1, EverGrandeCity_ChampionsRoom_EventScript_15B87C
+	callif EQUAL, EverGrandeCity_ChampionsRoom_EventScript_15B87C
 	compare RESULT, 1
-	callif 1, EverGrandeCity_ChampionsRoom_EventScript_15B881
+	callif EQUAL, EverGrandeCity_ChampionsRoom_EventScript_15B881
 	reappear 2
 	call EverGrandeCity_ChampionsRoom_EventScript_15B9BD
 	checkgender
@@ -129,9 +129,9 @@ EverGrandeCity_ChampionsRoom_EventScript_15B8F0:: @ 815B8F0
 	msgbox EverGrandeCity_ChampionsRoom_Text_191546, 4
 	checkgender
 	compare RESULT, 0
-	callif 1, EverGrandeCity_ChampionsRoom_EventScript_15B9AB
+	callif EQUAL, EverGrandeCity_ChampionsRoom_EventScript_15B9AB
 	compare RESULT, 1
-	callif 1, EverGrandeCity_ChampionsRoom_EventScript_15B9B4
+	callif EQUAL, EverGrandeCity_ChampionsRoom_EventScript_15B9B4
 	closebutton
 	move 1, EverGrandeCity_ChampionsRoom_Movement_15B9FF
 	move 255, EverGrandeCity_ChampionsRoom_Movement_15B9E0

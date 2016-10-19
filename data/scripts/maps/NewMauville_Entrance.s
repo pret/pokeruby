@@ -5,7 +5,7 @@ NewMauville_Entrance_MapScripts:: @ 815E48A
 
 NewMauville_Entrance_MapScript1_15E495:: @ 815E495
 	compare 0x40ba, 0
-	callif 1, NewMauville_Entrance_EventScript_15E4A1
+	callif EQUAL, NewMauville_Entrance_EventScript_15E4A1
 	end
 
 NewMauville_Entrance_EventScript_15E4A1:: @ 815E4A1

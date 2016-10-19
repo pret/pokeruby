@@ -116,7 +116,7 @@ DewfordTown_Gym_EventScript_153177:: @ 8153177
 	setflag 2056
 	addvar 0x4085, 1
 	compare 0x4085, 6
-	callif 1, DewfordTown_Gym_EventScript_1A00FB
+	callif EQUAL, DewfordTown_Gym_EventScript_1A00FB
 	setvar 0x8008, 2
 	call DewfordTown_Gym_EventScript_1A01C0
 	jump DewfordTown_Gym_EventScript_1531B5

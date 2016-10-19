@@ -6,7 +6,7 @@ SlateportCity_Harbor_MapScript1_155F63:: @ 8155F63
 	warp6 SlateportCity, 255, 28, 13
 	setvar 0x4001, 0
 	compare 0x40a0, 1
-	callif 1, SlateportCity_Harbor_EventScript_155F89
+	callif EQUAL, SlateportCity_Harbor_EventScript_155F89
 	checkflag 2052
 	callif FLAG_IS_SET, SlateportCity_Harbor_EventScript_155F85
 	end
@@ -64,13 +64,13 @@ SlateportCity_Harbor_EventScript_155FD5:: @ 8155FD5
 	disappear 8
 	setvar 0x40a0, 2
 	compare 0x8008, 0
-	callif 1, SlateportCity_Harbor_EventScript_15605C
+	callif EQUAL, SlateportCity_Harbor_EventScript_15605C
 	compare 0x8008, 1
-	callif 1, SlateportCity_Harbor_EventScript_156071
+	callif EQUAL, SlateportCity_Harbor_EventScript_156071
 	compare 0x8008, 2
-	callif 1, SlateportCity_Harbor_EventScript_156086
+	callif EQUAL, SlateportCity_Harbor_EventScript_156086
 	compare 0x8008, 3
-	callif 1, SlateportCity_Harbor_EventScript_156086
+	callif EQUAL, SlateportCity_Harbor_EventScript_156086
 	msgbox SlateportCity_Harbor_Text_17FE60, 4
 	closebutton
 	setflag 821
@@ -224,9 +224,9 @@ SlateportCity_Harbor_EventScript_156196:: @ 8156196
 	pause 30
 	spriteinvisible LAST_TALKED, 9, 8
 	compare FACING, 2
-	callif 1, SlateportCity_Harbor_EventScript_1561EF
+	callif EQUAL, SlateportCity_Harbor_EventScript_1561EF
 	compare FACING, 4
-	callif 1, SlateportCity_Harbor_EventScript_1561E4
+	callif EQUAL, SlateportCity_Harbor_EventScript_1561E4
 	pause 30
 	spriteinvisible 255, 0, 0
 	setvar 0x8004, 5

@@ -44,7 +44,7 @@ gUnknown_081C346A:: @ 81C346A
 	lockall
 	special 207
 	compare RESULT, -1
-	jumpif 5, EventScript_1C34A9
+	jumpif NOT_EQUAL, EventScript_1C34A9
 	msgbox UnknownString_81C354E, 5
 	compare RESULT, 1
 	jumpif EQUAL, EventScript_1C348E
@@ -56,7 +56,7 @@ EventScript_1C348E:
 	special 208
 	waitstate
 	compare RESULT, -1
-	jumpif 5, EventScript_1C34A0
+	jumpif NOT_EQUAL, EventScript_1C34A0
 	end
 
 EventScript_1C34A0:

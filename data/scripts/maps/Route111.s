@@ -23,7 +23,7 @@ Route111_MapScript1_14FFB9:: @ 814FFB9
 Route111_EventScript_14FFCD:: @ 814FFCD
 	getplayerxy 0x4000, 0x4001
 	compare 0x4001, 34
-	jumpif 0, Route111_EventScript_15000C
+	jumpif LESS_THAN, Route111_EventScript_15000C
 	compare 0x4001, 107
 	jumpif 2, Route111_EventScript_15000C
 	compare 0x4001, 72
@@ -31,7 +31,7 @@ Route111_EventScript_14FFCD:: @ 814FFCD
 	compare 0x4000, 2000
 	jumpif 2, Route111_EventScript_15000C
 	compare 0x4000, 8
-	jumpif 0, Route111_EventScript_15000C
+	jumpif LESS_THAN, Route111_EventScript_15000C
 
 Route111_EventScript_150009:: @ 8150009
 	setweather 8
@@ -174,13 +174,13 @@ Route111_EventScript_150151:: @ 8150151
 	msgbox Route111_Text_1A0F93, 4
 	closebutton
 	compare 0x8004, 0
-	callif 1, Route111_EventScript_150188
+	callif EQUAL, Route111_EventScript_150188
 	compare 0x8004, 1
-	callif 1, Route111_EventScript_150193
+	callif EQUAL, Route111_EventScript_150193
 	compare 0x8004, 2
-	callif 1, Route111_EventScript_15019E
+	callif EQUAL, Route111_EventScript_15019E
 	compare 0x8004, 3
-	callif 1, Route111_EventScript_1501A9
+	callif EQUAL, Route111_EventScript_1501A9
 	releaseall
 	end
 

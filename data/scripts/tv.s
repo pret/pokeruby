@@ -27,7 +27,7 @@ EventScript_1A6EBB:
 	copyvar 0x8004, RESULT
 	specialval RESULT, 66
 	compare RESULT, 0
-	jumpif 5, EventScript_1A6F21
+	jumpif NOT_EQUAL, EventScript_1A6F21
 	end
 
 EventScript_1A6EF1:
@@ -60,7 +60,7 @@ EventScript_1A6F21:
 	waittext
 	waitbutton
 	compare RESULT, 1
-	jumpif 5, EventScript_1A6F21
+	jumpif NOT_EQUAL, EventScript_1A6F21
 	jump EventScript_1A6F37
 	end
 

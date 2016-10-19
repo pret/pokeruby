@@ -5,9 +5,9 @@ Route119_WeatherInstitute_2F_MapScripts:: @ 8163CC2
 Route119_WeatherInstitute_2F_MapScript1_163CC8:: @ 8163CC8
 	call Route119_WeatherInstitute_2F_EventScript_1A0196
 	compare 0x40b3, 0
-	callif 1, Route119_WeatherInstitute_2F_EventScript_163CE4
+	callif EQUAL, Route119_WeatherInstitute_2F_EventScript_163CE4
 	compare 0x40b3, 1
-	callif 1, Route119_WeatherInstitute_2F_EventScript_163CF0
+	callif EQUAL, Route119_WeatherInstitute_2F_EventScript_163CF0
 	end
 
 Route119_WeatherInstitute_2F_EventScript_163CE4:: @ 8163CE4

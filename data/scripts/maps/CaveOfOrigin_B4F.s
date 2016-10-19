@@ -67,7 +67,7 @@ CaveOfOrigin_B4F_EventScript_15DDD7:: @ 815DDD7
 	clearflag 2145
 	specialval RESULT, 180
 	compare RESULT, 1
-	callif 1, CaveOfOrigin_B4F_EventScript_15DE73
+	callif EQUAL, CaveOfOrigin_B4F_EventScript_15DE73
 	setflag 816
 	setflag 855
 	setflag 856

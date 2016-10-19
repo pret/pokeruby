@@ -81,9 +81,9 @@ LilycoveCity_Harbor_EventScript_15998A:: @ 815998A
 	pause 30
 	spriteinvisible LAST_TALKED, 13, 10
 	compare FACING, 2
-	callif 1, LilycoveCity_Harbor_EventScript_1599D9
+	callif EQUAL, LilycoveCity_Harbor_EventScript_1599D9
 	compare FACING, 4
-	callif 1, LilycoveCity_Harbor_EventScript_1599CE
+	callif EQUAL, LilycoveCity_Harbor_EventScript_1599CE
 	pause 30
 	spriteinvisible 255, 0, 0
 	setvar 0x8004, 2
@@ -130,9 +130,9 @@ LilycoveCity_Harbor_EventScript_1599EE:: @ 81599EE
 	pause 30
 	disappear 4
 	compare FACING, 2
-	callif 1, LilycoveCity_Harbor_EventScript_1599D9
+	callif EQUAL, LilycoveCity_Harbor_EventScript_1599D9
 	compare FACING, 4
-	callif 1, LilycoveCity_Harbor_EventScript_1599CE
+	callif EQUAL, LilycoveCity_Harbor_EventScript_1599CE
 	pause 30
 	spriteinvisible 255, 0, 0
 	special 0

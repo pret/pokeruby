@@ -87,7 +87,7 @@ Route110_TrickHousePuzzle7_EventScript_16326E:: @ 816326E
 
 Route110_TrickHousePuzzle7_MapScript1_16326F:: @ 816326F
 	compare 0x40b6, 1
-	callif 1, Route110_TrickHousePuzzle7_EventScript_163167
+	callif EQUAL, Route110_TrickHousePuzzle7_EventScript_163167
 	end
 
 Route110_TrickHousePuzzle7_MapScript2_16327B:: @ 816327B

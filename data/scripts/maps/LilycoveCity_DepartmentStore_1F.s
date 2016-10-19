@@ -10,7 +10,7 @@ LilycoveCity_DepartmentStore_1F_EventScript_159D5E:: @ 8159D5E
 	faceplayer
 	checkdailyflags
 	compare 0x4045, 0
-	jumpif 5, LilycoveCity_DepartmentStore_1F_EventScript_159EB1
+	jumpif NOT_EQUAL, LilycoveCity_DepartmentStore_1F_EventScript_159EB1
 	checkflag 2250
 	jumpif FLAG_IS_SET, LilycoveCity_DepartmentStore_1F_EventScript_159E4C
 	msgbox LilycoveCity_DepartmentStore_1F_Text_1C4B5E, 5
@@ -37,18 +37,18 @@ LilycoveCity_DepartmentStore_1F_EventScript_159D5E:: @ 8159D5E
 	jumpif EQUAL, LilycoveCity_DepartmentStore_1F_EventScript_159E60
 	inccounter GAME_STAT_WON_POKEMON_LOTTERY
 	compare 0x8006, 0
-	callif 1, LilycoveCity_DepartmentStore_1F_EventScript_159E3A
+	callif EQUAL, LilycoveCity_DepartmentStore_1F_EventScript_159E3A
 	compare 0x8006, 1
-	callif 1, LilycoveCity_DepartmentStore_1F_EventScript_159E43
+	callif EQUAL, LilycoveCity_DepartmentStore_1F_EventScript_159E43
 	bufferitem 0, 0x8005
 	compare 0x8004, 1
-	callif 1, LilycoveCity_DepartmentStore_1F_EventScript_159E78
+	callif EQUAL, LilycoveCity_DepartmentStore_1F_EventScript_159E78
 	compare 0x8004, 2
-	callif 1, LilycoveCity_DepartmentStore_1F_EventScript_159E81
+	callif EQUAL, LilycoveCity_DepartmentStore_1F_EventScript_159E81
 	compare 0x8004, 3
-	callif 1, LilycoveCity_DepartmentStore_1F_EventScript_159E8A
+	callif EQUAL, LilycoveCity_DepartmentStore_1F_EventScript_159E8A
 	compare 0x8004, 4
-	callif 1, LilycoveCity_DepartmentStore_1F_EventScript_159E93
+	callif EQUAL, LilycoveCity_DepartmentStore_1F_EventScript_159E93
 	giveitem 0x8005
 	compare RESULT, 0
 	jumpif EQUAL, LilycoveCity_DepartmentStore_1F_EventScript_159E9C

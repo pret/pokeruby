@@ -15,7 +15,7 @@ MossdeepCity_StevensHouse_EventScript_15A9DF:: @ 815A9DF
 
 MossdeepCity_StevensHouse_MapScript1_15A9E9:: @ 815A9E9
 	compare 0x40c6, 1
-	callif 1, MossdeepCity_StevensHouse_EventScript_15A9F5
+	callif EQUAL, MossdeepCity_StevensHouse_EventScript_15A9F5
 	end
 
 MossdeepCity_StevensHouse_EventScript_15A9F5:: @ 815A9F5
@@ -87,7 +87,7 @@ MossdeepCity_StevensHouse_EventScript_15AA7C:: @ 815AA7C
 	bufferpoke 1, SPECIES_BELDUM
 	msgbox MossdeepCity_StevensHouse_Text_1A1102, 5
 	compare RESULT, 1
-	callif 1, MossdeepCity_StevensHouse_EventScript_1A0678
+	callif EQUAL, MossdeepCity_StevensHouse_EventScript_1A0678
 	setflag 968
 	setflag 298
 	releaseall

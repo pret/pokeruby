@@ -6,9 +6,9 @@ VerdanturfTown_ContestLobby_EventScript_1A4E92:: @ 81A4E92
 	faceplayer
 	checkitem ITEM_CONTEST_PASS, 1
 	compare RESULT, 0
-	callif 1, FallarborTown_ContestLobby_EventScript_1A4EDD
+	callif EQUAL, FallarborTown_ContestLobby_EventScript_1A4EDD
 	compare 0x408a, 0
-	jumpif 5, FallarborTown_ContestLobby_EventScript_1A4F4E
+	jumpif NOT_EQUAL, FallarborTown_ContestLobby_EventScript_1A4F4E
 	checkflag 1
 	jumpif FLAG_IS_SET, FallarborTown_ContestLobby_EventScript_1A4F8F
 	bufferstd 0, 0x800b
@@ -288,7 +288,7 @@ LinkContestRoom1_EventScript_1A527A:: @ 81A527A
 	call LinkContestRoom1_EventScript_1A5880
 	addvar 0x8006, 1
 	compare 0x8006, 4
-	jumpif 5, LinkContestRoom1_EventScript_1A527A
+	jumpif NOT_EQUAL, LinkContestRoom1_EventScript_1A527A
 	call LinkContestRoom1_EventScript_1A5377
 	setvar 0x4001, 6
 	return
@@ -432,15 +432,15 @@ LinkContestRoom1_EventScript_1A53E5:: @ 81A53E5
 LinkContestRoom1_EventScript_1A5455:: @ 81A5455
 	special 87
 	compare 0x4088, 1
-	callif 1, LinkContestRoom1_EventScript_1A555A
+	callif EQUAL, LinkContestRoom1_EventScript_1A555A
 	compare 0x4088, 2
-	callif 1, LinkContestRoom1_EventScript_1A55B8
+	callif EQUAL, LinkContestRoom1_EventScript_1A55B8
 	compare 0x4088, 3
-	callif 1, LinkContestRoom1_EventScript_1A5616
+	callif EQUAL, LinkContestRoom1_EventScript_1A5616
 	compare 0x4088, 4
-	callif 1, LinkContestRoom1_EventScript_1A5674
+	callif EQUAL, LinkContestRoom1_EventScript_1A5674
 	compare 0x4088, 5
-	callif 1, LinkContestRoom1_EventScript_1A56D2
+	callif EQUAL, LinkContestRoom1_EventScript_1A56D2
 	setvar 0x4001, 9
 	setvar 0x4002, 9
 	setvar 0x4003, 9
@@ -465,21 +465,21 @@ LinkContestRoom1_EventScript_1A54EB:: @ 81A54EB
 	setvar RESULT, 8
 	special 340
 	compare RESULT, 0
-	callif 1, LinkContestRoom1_EventScript_1A5760
+	callif EQUAL, LinkContestRoom1_EventScript_1A5760
 	compare RESULT, 1
-	callif 1, LinkContestRoom1_EventScript_1A5784
+	callif EQUAL, LinkContestRoom1_EventScript_1A5784
 	compare RESULT, 2
-	callif 1, LinkContestRoom1_EventScript_1A57A8
+	callif EQUAL, LinkContestRoom1_EventScript_1A57A8
 	compare RESULT, 3
-	callif 1, LinkContestRoom1_EventScript_1A57CC
+	callif EQUAL, LinkContestRoom1_EventScript_1A57CC
 	compare RESULT, 4
-	callif 1, LinkContestRoom1_EventScript_1A57F0
+	callif EQUAL, LinkContestRoom1_EventScript_1A57F0
 	compare RESULT, 5
-	callif 1, LinkContestRoom1_EventScript_1A5814
+	callif EQUAL, LinkContestRoom1_EventScript_1A5814
 	compare RESULT, 6
-	callif 1, LinkContestRoom1_EventScript_1A5838
+	callif EQUAL, LinkContestRoom1_EventScript_1A5838
 	compare RESULT, 7
-	callif 1, LinkContestRoom1_EventScript_1A585C
+	callif EQUAL, LinkContestRoom1_EventScript_1A585C
 	compare 0x4000, 0
 	jumpif 2, LinkContestRoom1_EventScript_1A54EB
 	waitmove 0
@@ -919,7 +919,7 @@ LinkContestRoom1_EventScript_1A5A90:: @ 81A5A90
 	move 6, LinkContestRoom1_Movement_1A5DB3
 	move 8, LinkContestRoom1_Movement_1A5DAF
 	compare 0x4001, 4
-	jumpif 5, LinkContestRoom1_EventScript_1A5A90
+	jumpif NOT_EQUAL, LinkContestRoom1_EventScript_1A5A90
 	pause 30
 	return
 
@@ -1118,7 +1118,7 @@ LinkContestRoom1_EventScript_1A5CE5:: @ 81A5CE5
 
 LinkContestRoom1_EventScript_1A5CFC:: @ 81A5CFC
 	compare 0x4088, 2
-	callif 1, LinkContestRoom1_EventScript_1A5C42
+	callif EQUAL, LinkContestRoom1_EventScript_1A5C42
 	inccounter GAME_STAT_WON_CONTEST
 	specialval RESULT, 88
 	compare RESULT, 0

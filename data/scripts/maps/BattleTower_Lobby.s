@@ -19,7 +19,7 @@ BattleTower_Lobby_EventScript_16029C:: @ 816029C
 	jumpif FLAG_IS_SET, BattleTower_Lobby_EventScript_1602CD
 	specialval 0x8007, 247
 	compare 0x8007, 50
-	jumpif 0, BattleTower_Lobby_EventScript_1602E4
+	jumpif LESS_THAN, BattleTower_Lobby_EventScript_1602E4
 	clearflag 941
 	special 329
 	return
@@ -27,7 +27,7 @@ BattleTower_Lobby_EventScript_16029C:: @ 816029C
 BattleTower_Lobby_EventScript_1602CD:: @ 81602CD
 	specialval 0x8007, 247
 	compare 0x8007, 100
-	jumpif 0, BattleTower_Lobby_EventScript_1602E4
+	jumpif LESS_THAN, BattleTower_Lobby_EventScript_1602E4
 	clearflag 941
 	special 329
 	return
@@ -119,7 +119,7 @@ BattleTower_Lobby_EventScript_1603AD:: @ 81603AD
 	setvar 0x8004, 9
 	special 238
 	compare RESULT, 49
-	jumpif 5, BattleTower_Lobby_EventScript_1603F8
+	jumpif NOT_EQUAL, BattleTower_Lobby_EventScript_1603F8
 	msgbox BattleTower_Lobby_Text_19A617, 4
 
 BattleTower_Lobby_EventScript_1603F8:: @ 81603F8
@@ -404,7 +404,7 @@ BattleTower_Lobby_EventScript_160733:: @ 8160733
 BattleTower_Lobby_EventScript_160773:: @ 8160773
 	specialval RESULT, 247
 	compare RESULT, 100
-	jumpif 0, BattleTower_Lobby_EventScript_1607C5
+	jumpif LESS_THAN, BattleTower_Lobby_EventScript_1607C5
 	msgbox BattleTower_Lobby_Text_19AAC4, 4
 	setvar 0x8008, 43
 	givedecoration 43

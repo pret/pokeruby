@@ -45,7 +45,7 @@ LilycoveCity_ContestLobby_EventScript_1588DE:: @ 81588DE
 	setvar 0x4099, 0
 	specialval RESULT, 91
 	compare RESULT, 1
-	callif 1, LilycoveCity_ContestLobby_EventScript_158948
+	callif EQUAL, LilycoveCity_ContestLobby_EventScript_158948
 	move 4, LilycoveCity_ContestLobby_Movement_158A43
 	waitmove 0
 	disappear 4
@@ -218,7 +218,7 @@ LilycoveCity_ContestLobby_EventScript_158AAE:: @ 8158AAE
 	setvar 0x4099, 0
 	specialval RESULT, 91
 	compare RESULT, 1
-	callif 1, LilycoveCity_ContestLobby_EventScript_158B18
+	callif EQUAL, LilycoveCity_ContestLobby_EventScript_158B18
 	move 11, LilycoveCity_ContestLobby_Movement_158B6D
 	waitmove 0
 	disappear 11

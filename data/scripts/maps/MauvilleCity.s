@@ -106,7 +106,7 @@ MauvilleCity_EventScript_14C0F9:: @ 814C0F9
 
 MauvilleCity_EventScript_14C154:: @ 814C154
 	compare RESULT, 1
-	callif 1, MauvilleCity_EventScript_14C23C
+	callif EQUAL, MauvilleCity_EventScript_14C23C
 	compare RESULT, 0
 	jumpif EQUAL, MauvilleCity_EventScript_14C285
 	closebutton

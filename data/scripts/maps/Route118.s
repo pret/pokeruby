@@ -84,11 +84,11 @@ Route118_EventScript_151004:: @ 8151004
 	msgbox Route118_Text_170D66, 4
 	closebutton
 	compare 0x8008, 0
-	callif 1, Route118_EventScript_151048
+	callif EQUAL, Route118_EventScript_151048
 	compare 0x8008, 1
-	callif 1, Route118_EventScript_151053
+	callif EQUAL, Route118_EventScript_151053
 	compare 0x8008, 2
-	callif 1, Route118_EventScript_15105E
+	callif EQUAL, Route118_EventScript_15105E
 	setvar 0x4071, 1
 	disappear 19
 	releaseall

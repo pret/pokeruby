@@ -30,7 +30,7 @@ PetalburgCity_PokemonCenter_1F_EventScript_1B1B7A:: @ 81B1B7A
 	lock
 	faceplayer
 	compare 0x8004, 1
-	callif 1, PetalburgCity_PokemonCenter_1F_EventScript_1B1C77
+	callif EQUAL, PetalburgCity_PokemonCenter_1F_EventScript_1B1C77
 	compare RESULT, 0
 	jumpif EQUAL, PetalburgCity_PokemonCenter_1F_EventScript_1B1BB1
 	compare RESULT, 1
@@ -84,7 +84,7 @@ PetalburgCity_PokemonCenter_1F_EventScript_1B1C36:: @ 81B1C36
 	lock
 	faceplayer
 	compare 0x8004, 1
-	callif 1, PetalburgCity_PokemonCenter_1F_EventScript_1B1C77
+	callif EQUAL, PetalburgCity_PokemonCenter_1F_EventScript_1B1C77
 	compare RESULT, 0
 	jumpif EQUAL, PetalburgCity_PokemonCenter_1F_EventScript_1B1BB1
 	compare RESULT, 1

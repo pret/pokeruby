@@ -173,7 +173,7 @@ SlateportCity_OceanicMuseum_1F_EventScript_155C3A:: @ 8155C3A
 	compare FACING, 2
 	jumpif EQUAL, SlateportCity_OceanicMuseum_1F_EventScript_155C98
 	compare FACING, 2
-	jumpif 5, SlateportCity_OceanicMuseum_1F_EventScript_155CAD
+	jumpif NOT_EQUAL, SlateportCity_OceanicMuseum_1F_EventScript_155CAD
 	end
 
 SlateportCity_OceanicMuseum_1F_EventScript_155C98:: @ 8155C98

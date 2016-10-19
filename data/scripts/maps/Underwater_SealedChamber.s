@@ -5,9 +5,9 @@ Underwater_SealedChamber_MapScripts:: @ 815F080
 Underwater_SealedChamber_MapScript1_15F086:: @ 815F086
 	getplayerxy 0x8004, 0x8005
 	compare 0x8004, 12
-	jumpif 5, Underwater_SealedChamber_EventScript_15F0A6
+	jumpif NOT_EQUAL, Underwater_SealedChamber_EventScript_15F0A6
 	compare 0x8005, 44
-	jumpif 5, Underwater_SealedChamber_EventScript_15F0A6
+	jumpif NOT_EQUAL, Underwater_SealedChamber_EventScript_15F0A6
 	jump Underwater_SealedChamber_EventScript_15F0AF
 
 Underwater_SealedChamber_EventScript_15F0A6:: @ 815F0A6

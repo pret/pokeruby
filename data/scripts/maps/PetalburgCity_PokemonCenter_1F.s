@@ -35,11 +35,11 @@ PetalburgCity_PokemonCenter_1F_EventScript_155233:: @ 8155233
 
 PetalburgCity_PokemonCenter_1F_EventScript_15524F:: @ 815524F
 	compare 0x4023, 0
-	callif 1, PetalburgCity_PokemonCenter_1F_EventScript_155272
+	callif EQUAL, PetalburgCity_PokemonCenter_1F_EventScript_155272
 	compare 0x4023, 1
-	callif 1, PetalburgCity_PokemonCenter_1F_EventScript_15527B
+	callif EQUAL, PetalburgCity_PokemonCenter_1F_EventScript_15527B
 	compare 0x4023, 2
-	callif 1, PetalburgCity_PokemonCenter_1F_EventScript_155284
+	callif EQUAL, PetalburgCity_PokemonCenter_1F_EventScript_155284
 	release
 	end
 

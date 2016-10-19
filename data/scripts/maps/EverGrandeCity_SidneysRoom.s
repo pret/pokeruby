@@ -8,7 +8,7 @@ EverGrandeCity_SidneysRoom_MapScript1_15B54F:: @ 815B54F
 	checkflag 1245
 	callif FLAG_IS_SET, EverGrandeCity_SidneysRoom_EventScript_15B564
 	compare 0x409c, 1
-	callif 1, EverGrandeCity_SidneysRoom_EventScript_15B56A
+	callif EQUAL, EverGrandeCity_SidneysRoom_EventScript_15B56A
 	end
 
 EverGrandeCity_SidneysRoom_EventScript_15B564:: @ 815B564

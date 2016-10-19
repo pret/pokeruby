@@ -27,7 +27,7 @@ EverGrandeCity_PhoebesRoom_MapScript1_15B60F:: @ 815B60F
 	checkflag 1246
 	callif FLAG_IS_SET, EverGrandeCity_PhoebesRoom_EventScript_15B624
 	compare 0x409c, 2
-	callif 1, EverGrandeCity_PhoebesRoom_EventScript_15B62A
+	callif EQUAL, EverGrandeCity_PhoebesRoom_EventScript_15B62A
 	end
 
 EverGrandeCity_PhoebesRoom_EventScript_15B624:: @ 815B624

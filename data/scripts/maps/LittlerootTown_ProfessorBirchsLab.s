@@ -86,7 +86,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152D63:: @ 8152D63
 	lock
 	faceplayer
 	compare 0x4084, 3
-	jumpif 4, LittlerootTown_ProfessorBirchsLab_EventScript_152D90
+	jumpif GREATER_THAN_OR_EQUAL, LittlerootTown_ProfessorBirchsLab_EventScript_152D90
 	checkflag 88
 	jumpif FLAG_IS_SET, LittlerootTown_ProfessorBirchsLab_EventScript_152D86
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_173B29, 4
@@ -125,9 +125,9 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152DBA:: @ 8152DBA
 	waitmove 0
 	checkgender
 	compare RESULT, 0
-	callif 1, LittlerootTown_ProfessorBirchsLab_EventScript_152E13
+	callif EQUAL, LittlerootTown_ProfessorBirchsLab_EventScript_152E13
 	compare RESULT, 1
-	callif 1, LittlerootTown_ProfessorBirchsLab_EventScript_152E40
+	callif EQUAL, LittlerootTown_ProfessorBirchsLab_EventScript_152E40
 	setvar 0x4084, 5
 	setflag 116
 	setvar 0x4051, 1
@@ -140,7 +140,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152E13:: @ 8152E13
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_1743D4, 4
 	giveitem ITEM_POKE_BALL, 5
 	compare RESULT, 0
-	callif 1, LittlerootTown_ProfessorBirchsLab_EventScript_152E85
+	callif EQUAL, LittlerootTown_ProfessorBirchsLab_EventScript_152E85
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_17443D, 4
 	setvar RESULT, 0
 	return
@@ -149,7 +149,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152E40:: @ 8152E40
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_17453C, 4
 	giveitem ITEM_POKE_BALL, 5
 	compare RESULT, 0
-	callif 1, LittlerootTown_ProfessorBirchsLab_EventScript_152E8E
+	callif EQUAL, LittlerootTown_ProfessorBirchsLab_EventScript_152E8E
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_17458C, 4
 	setvar RESULT, 1
 	return
@@ -189,9 +189,9 @@ LittlerootTown_ProfessorBirchsLab_EventScript_152EA3:: @ 8152EA3
 	faceplayer
 	checkgender
 	compare RESULT, 0
-	callif 1, LittlerootTown_ProfessorBirchsLab_EventScript_152EBE
+	callif EQUAL, LittlerootTown_ProfessorBirchsLab_EventScript_152EBE
 	compare RESULT, 1
-	callif 1, LittlerootTown_ProfessorBirchsLab_EventScript_152EC7
+	callif EQUAL, LittlerootTown_ProfessorBirchsLab_EventScript_152EC7
 	release
 	end
 

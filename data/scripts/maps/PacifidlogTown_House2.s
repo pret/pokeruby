@@ -15,10 +15,10 @@ PacifidlogTown_House2_EventScript_154168:: @ 8154168
 	setflag 300
 	specialval RESULT, 230
 	compare RESULT, 4
-	jumpif 4, PacifidlogTown_House2_EventScript_1541EC
+	jumpif GREATER_THAN_OR_EQUAL, PacifidlogTown_House2_EventScript_1541EC
 	specialval RESULT, 230
 	compare RESULT, 2
-	jumpif 4, PacifidlogTown_House2_EventScript_15421B
+	jumpif GREATER_THAN_OR_EQUAL, PacifidlogTown_House2_EventScript_15421B
 	jump PacifidlogTown_House2_EventScript_154225
 	end
 
@@ -27,7 +27,7 @@ PacifidlogTown_House2_EventScript_1541B4:: @ 81541B4
 	jumpif FLAG_NOT_SET, PacifidlogTown_House2_EventScript_1A14DC
 	specialval RESULT, 334
 	compare RESULT, 0
-	callif 1, PacifidlogTown_House2_EventScript_1541E8
+	callif EQUAL, PacifidlogTown_House2_EventScript_1541E8
 	return
 
 PacifidlogTown_House2_EventScript_1541CE:: @ 81541CE

@@ -364,13 +364,13 @@ RustboroCity_EventScript_14C644:: @ 814C644
 
 RustboroCity_EventScript_14C650:: @ 814C650
 	compare 0x4001, 0
-	callif 1, RustboroCity_EventScript_14C691
+	callif EQUAL, RustboroCity_EventScript_14C691
 	compare 0x4001, 1
-	callif 1, RustboroCity_EventScript_14C6BD
+	callif EQUAL, RustboroCity_EventScript_14C6BD
 	compare 0x4001, 2
-	callif 1, RustboroCity_EventScript_14C6E9
+	callif EQUAL, RustboroCity_EventScript_14C6E9
 	compare 0x4001, 3
-	callif 1, RustboroCity_EventScript_14C715
+	callif EQUAL, RustboroCity_EventScript_14C715
 	setflag 159
 	setvar 0x405a, 3
 	moveoffscreen 9
@@ -458,19 +458,19 @@ RustboroCity_EventScript_14C771:: @ 814C771
 
 RustboroCity_EventScript_14C77D:: @ 814C77D
 	compare 0x4001, 0
-	callif 1, RustboroCity_EventScript_14C7FE
+	callif EQUAL, RustboroCity_EventScript_14C7FE
 	compare 0x4001, 1
-	callif 1, RustboroCity_EventScript_14C82A
+	callif EQUAL, RustboroCity_EventScript_14C82A
 	compare 0x4001, 2
-	callif 1, RustboroCity_EventScript_14C856
+	callif EQUAL, RustboroCity_EventScript_14C856
 	compare 0x4001, 3
-	callif 1, RustboroCity_EventScript_14C882
+	callif EQUAL, RustboroCity_EventScript_14C882
 	compare 0x4001, 4
-	callif 1, RustboroCity_EventScript_14C8B8
+	callif EQUAL, RustboroCity_EventScript_14C8B8
 	msgbox RustboroCity_Text_166FB4, 4
 	giveitem ITEM_GREAT_BALL
 	compare RESULT, 0
-	callif 1, RustboroCity_EventScript_14C7F5
+	callif EQUAL, RustboroCity_EventScript_14C7F5
 	msgbox RustboroCity_Text_16707F, 4
 	closebutton
 	setflag 144

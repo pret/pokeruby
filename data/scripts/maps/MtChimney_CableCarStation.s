@@ -5,7 +5,7 @@ MtChimney_CableCarStation_MapScripts:: @ 815C0FA
 
 MtChimney_CableCarStation_MapScript1_15C105:: @ 815C105
 	compare 0x40a3, 1
-	callif 1, MtChimney_CableCarStation_EventScript_15C111
+	callif EQUAL, MtChimney_CableCarStation_EventScript_15C111
 	end
 
 MtChimney_CableCarStation_EventScript_15C111:: @ 815C111

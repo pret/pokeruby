@@ -7,7 +7,7 @@ LittlerootTown_BrendansHouse_2F_MapScript1_1527AF:: @ 81527AF
 	checkflag 130
 	callif FLAG_NOT_SET, LittlerootTown_BrendansHouse_2F_EventScript_1527CE
 	compare 0x4092, 4
-	callif 1, LittlerootTown_BrendansHouse_2F_EventScript_1B6950
+	callif EQUAL, LittlerootTown_BrendansHouse_2F_EventScript_1B6950
 	call LittlerootTown_BrendansHouse_2F_EventScript_1A2F3D
 	setvar 0x4089, 0
 	end

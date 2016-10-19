@@ -20,11 +20,11 @@ SootopolisCity_Gym_1F_MapScript1_15AF25:: @ 815AF25
 
 SootopolisCity_Gym_1F_EventScript_15AF2E:: @ 815AF2E
 	compare 0x4022, 8
-	jumpif 0, SootopolisCity_Gym_1F_EventScript_15AF85
+	jumpif LESS_THAN, SootopolisCity_Gym_1F_EventScript_15AF85
 	compare 0x4022, 28
-	jumpif 0, SootopolisCity_Gym_1F_EventScript_15AF73
+	jumpif LESS_THAN, SootopolisCity_Gym_1F_EventScript_15AF73
 	compare 0x4022, 69
-	jumpif 0, SootopolisCity_Gym_1F_EventScript_15AF61
+	jumpif LESS_THAN, SootopolisCity_Gym_1F_EventScript_15AF61
 	setmaptile 8, 4, 519, 0
 	setmaptile 8, 5, 519, 0
 

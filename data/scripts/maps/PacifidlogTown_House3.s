@@ -22,7 +22,7 @@ PacifidlogTown_House3_EventScript_15429E:: @ 815429E
 	specialval RESULT, 255
 	copyvar 0x800b, RESULT
 	comparevars RESULT, 0x8009
-	jumpif 5, PacifidlogTown_House3_EventScript_15432A
+	jumpif NOT_EQUAL, PacifidlogTown_House3_EventScript_15432A
 	copyvar 0x8004, 0x8008
 	copyvar 0x8005, 0x800a
 	special 253

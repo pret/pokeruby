@@ -15,7 +15,7 @@ Route113_MapScript1_1505DA:: @ 81505DA
 Route113_EventScript_1505E5:: @ 81505E5
 	getplayerxy 0x4000, 0x4001
 	compare 0x4000, 19
-	jumpif 0, Route113_EventScript_150604
+	jumpif LESS_THAN, Route113_EventScript_150604
 	compare 0x4000, 84
 	jumpif 2, Route113_EventScript_150604
 	setweather 7

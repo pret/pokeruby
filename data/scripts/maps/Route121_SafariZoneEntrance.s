@@ -89,7 +89,7 @@ Route121_SafariZoneEntrance_EventScript_15C3B3:: @ 815C3B3
 Route121_SafariZoneEntrance_EventScript_15C425:: @ 815C425
 	countpokemon
 	compare RESULT, 6
-	jumpif 5, Route121_SafariZoneEntrance_EventScript_15C44F
+	jumpif NOT_EQUAL, Route121_SafariZoneEntrance_EventScript_15C44F
 	specialval RESULT, 304
 	compare RESULT, 1
 	jumpif EQUAL, Route121_SafariZoneEntrance_EventScript_15C44F

@@ -21,7 +21,7 @@ SafariZone_Southeast_EventScript_16004B:: @ 816004B
 
 SafariZone_Southeast_MapScript1_160073:: @ 8160073
 	compare 0x40a4, 2
-	callif 1, SafariZone_Southeast_EventScript_16007F
+	callif EQUAL, SafariZone_Southeast_EventScript_16007F
 	end
 
 SafariZone_Southeast_EventScript_16007F:: @ 816007F

@@ -13,7 +13,7 @@ Route110_MapScript1_14F914:: @ 814F914
 	call Route110_EventScript_1A014E
 	call Route110_EventScript_1A0172
 	compare 0x40a9, 1
-	callif 1, Route110_EventScript_14F92F
+	callif EQUAL, Route110_EventScript_14F92F
 	end
 
 Route110_EventScript_14F92F:: @ 814F92F
@@ -327,9 +327,9 @@ Route110_EventScript_14FD34:: @ 814FD34
 	lockall
 	checkgender
 	compare RESULT, 0
-	callif 1, Route110_EventScript_14FDA7
+	callif EQUAL, Route110_EventScript_14FDA7
 	compare RESULT, 1
-	callif 1, Route110_EventScript_14FDAC
+	callif EQUAL, Route110_EventScript_14FDAC
 	move 28, Route110_Movement_1A0845
 	waitmove 0
 	move 28, Route110_Movement_1A0833
@@ -338,11 +338,11 @@ Route110_EventScript_14FD34:: @ 814FD34
 	waitmove 0
 	pause 30
 	compare 0x8008, 1
-	callif 1, Route110_EventScript_14FF14
+	callif EQUAL, Route110_EventScript_14FF14
 	compare 0x8008, 2
-	callif 1, Route110_EventScript_14FF1F
+	callif EQUAL, Route110_EventScript_14FF1F
 	compare 0x8008, 3
-	callif 1, Route110_EventScript_14FF2A
+	callif EQUAL, Route110_EventScript_14FF2A
 	checkgender
 	compare RESULT, 0
 	jumpif EQUAL, Route110_EventScript_14FDB1
@@ -426,22 +426,22 @@ Route110_EventScript_14FEA5:: @ 814FEA5
 Route110_EventScript_14FEB2:: @ 814FEB2
 	closebutton
 	compare 0x8008, 1
-	callif 1, Route110_EventScript_14FF56
+	callif EQUAL, Route110_EventScript_14FF56
 	compare 0x8008, 2
-	callif 1, Route110_EventScript_14FF5E
+	callif EQUAL, Route110_EventScript_14FF5E
 	compare 0x8008, 3
-	callif 1, Route110_EventScript_14FF66
+	callif EQUAL, Route110_EventScript_14FF66
 	spritebehave 28, 10
 	spritebehave 29, 10
 	disappear 28
 	reappear 29
 	pause 45
 	compare 0x8008, 1
-	callif 1, Route110_EventScript_14FF35
+	callif EQUAL, Route110_EventScript_14FF35
 	compare 0x8008, 2
-	callif 1, Route110_EventScript_14FF40
+	callif EQUAL, Route110_EventScript_14FF40
 	compare 0x8008, 3
-	callif 1, Route110_EventScript_14FF4B
+	callif EQUAL, Route110_EventScript_14FF4B
 	disappear 29
 	setvar 0x4069, 1
 	playmusicbattle 0

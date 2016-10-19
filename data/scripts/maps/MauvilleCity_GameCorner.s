@@ -34,7 +34,7 @@ MauvilleCity_GameCorner_EventScript_156A60:: @ 8156A60
 MauvilleCity_GameCorner_EventScript_156AAE:: @ 8156AAE
 	checkcoins 16385
 	compare 0x4001, 9950
-	jumpif 4, MauvilleCity_GameCorner_EventScript_156B5C
+	jumpif GREATER_THAN_OR_EQUAL, MauvilleCity_GameCorner_EventScript_156B5C
 	checkmoney 0x3e8, 0
 	compare RESULT, 0
 	jumpif EQUAL, MauvilleCity_GameCorner_EventScript_156B3C
@@ -53,7 +53,7 @@ MauvilleCity_GameCorner_EventScript_156AAE:: @ 8156AAE
 MauvilleCity_GameCorner_EventScript_156AF0:: @ 8156AF0
 	checkcoins 16385
 	compare 0x4001, 9500
-	jumpif 4, MauvilleCity_GameCorner_EventScript_156B5C
+	jumpif GREATER_THAN_OR_EQUAL, MauvilleCity_GameCorner_EventScript_156B5C
 	checkmoney 0x2710, 0
 	compare RESULT, 0
 	jumpif EQUAL, MauvilleCity_GameCorner_EventScript_156B3C
@@ -155,7 +155,7 @@ MauvilleCity_GameCorner_EventScript_156C0C:: @ 8156C0C
 MauvilleCity_GameCorner_EventScript_156C46:: @ 8156C46
 	checkcoins 16386
 	compare 0x4002, 1000
-	jumpif 0, MauvilleCity_GameCorner_EventScript_156CF4
+	jumpif LESS_THAN, MauvilleCity_GameCorner_EventScript_156CF4
 	bufferdecor 1, 88
 	checkdecor 88
 	compare RESULT, 0
@@ -171,7 +171,7 @@ MauvilleCity_GameCorner_EventScript_156C46:: @ 8156C46
 MauvilleCity_GameCorner_EventScript_156C80:: @ 8156C80
 	checkcoins 16386
 	compare 0x4002, 1000
-	jumpif 0, MauvilleCity_GameCorner_EventScript_156CF4
+	jumpif LESS_THAN, MauvilleCity_GameCorner_EventScript_156CF4
 	bufferdecor 1, 89
 	checkdecor 89
 	compare RESULT, 0
@@ -187,7 +187,7 @@ MauvilleCity_GameCorner_EventScript_156C80:: @ 8156C80
 MauvilleCity_GameCorner_EventScript_156CBA:: @ 8156CBA
 	checkcoins 16386
 	compare 0x4002, 1000
-	jumpif 0, MauvilleCity_GameCorner_EventScript_156CF4
+	jumpif LESS_THAN, MauvilleCity_GameCorner_EventScript_156CF4
 	bufferdecor 1, 90
 	checkdecor 90
 	compare RESULT, 0
@@ -290,7 +290,7 @@ MauvilleCity_GameCorner_EventScript_156DEC:: @ 8156DEC
 MauvilleCity_GameCorner_EventScript_156E3C:: @ 8156E3C
 	checkcoins 16386
 	compare 0x4002, 1500
-	jumpif 0, MauvilleCity_GameCorner_EventScript_156F5E
+	jumpif LESS_THAN, MauvilleCity_GameCorner_EventScript_156F5E
 	checkitemspace ITEM_TM32, 1
 	compare RESULT, 0
 	jumpif EQUAL, MauvilleCity_GameCorner_EventScript_156F6C
@@ -305,7 +305,7 @@ MauvilleCity_GameCorner_EventScript_156E3C:: @ 8156E3C
 MauvilleCity_GameCorner_EventScript_156E76:: @ 8156E76
 	checkcoins 16386
 	compare 0x4002, 3500
-	jumpif 0, MauvilleCity_GameCorner_EventScript_156F5E
+	jumpif LESS_THAN, MauvilleCity_GameCorner_EventScript_156F5E
 	checkitemspace ITEM_TM29, 1
 	compare RESULT, 0
 	jumpif EQUAL, MauvilleCity_GameCorner_EventScript_156F6C
@@ -320,7 +320,7 @@ MauvilleCity_GameCorner_EventScript_156E76:: @ 8156E76
 MauvilleCity_GameCorner_EventScript_156EB0:: @ 8156EB0
 	checkcoins 16386
 	compare 0x4002, 4000
-	jumpif 0, MauvilleCity_GameCorner_EventScript_156F5E
+	jumpif LESS_THAN, MauvilleCity_GameCorner_EventScript_156F5E
 	checkitemspace ITEM_TM35, 1
 	compare RESULT, 0
 	jumpif EQUAL, MauvilleCity_GameCorner_EventScript_156F6C
@@ -335,7 +335,7 @@ MauvilleCity_GameCorner_EventScript_156EB0:: @ 8156EB0
 MauvilleCity_GameCorner_EventScript_156EEA:: @ 8156EEA
 	checkcoins 16386
 	compare 0x4002, 4000
-	jumpif 0, MauvilleCity_GameCorner_EventScript_156F5E
+	jumpif LESS_THAN, MauvilleCity_GameCorner_EventScript_156F5E
 	checkitemspace ITEM_TM24, 1
 	compare RESULT, 0
 	jumpif EQUAL, MauvilleCity_GameCorner_EventScript_156F6C
@@ -350,7 +350,7 @@ MauvilleCity_GameCorner_EventScript_156EEA:: @ 8156EEA
 MauvilleCity_GameCorner_EventScript_156F24:: @ 8156F24
 	checkcoins 16386
 	compare 0x4002, 4000
-	jumpif 0, MauvilleCity_GameCorner_EventScript_156F5E
+	jumpif LESS_THAN, MauvilleCity_GameCorner_EventScript_156F5E
 	checkitemspace ITEM_TM13, 1
 	compare RESULT, 0
 	jumpif EQUAL, MauvilleCity_GameCorner_EventScript_156F6C
@@ -464,7 +464,7 @@ MauvilleCity_GameCorner_EventScript_15709C:: @ 815709C
 	jumpif FLAG_IS_SET, MauvilleCity_GameCorner_EventScript_1570CA
 	checkcoins 16385
 	compare 0x4001, 1
-	jumpif 4, MauvilleCity_GameCorner_EventScript_1570CA
+	jumpif GREATER_THAN_OR_EQUAL, MauvilleCity_GameCorner_EventScript_1570CA
 	setflag 225
 	givecoins 20
 	msgbox MauvilleCity_GameCorner_Text_18208E, 4

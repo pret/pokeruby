@@ -33,7 +33,7 @@ ShoalCave_LowTideEntranceRoom_EventScript_15E076:: @ 815E076
 	jumpif EQUAL, ShoalCave_LowTideEntranceRoom_EventScript_15E16C
 	checkitemspace ITEM_SHELL_BELL, 1
 	compare RESULT, 0
-	callif 1, ShoalCave_LowTideEntranceRoom_EventScript_15E106
+	callif EQUAL, ShoalCave_LowTideEntranceRoom_EventScript_15E106
 	compare RESULT, 2
 	jumpif EQUAL, ShoalCave_LowTideEntranceRoom_EventScript_15E12E
 	msgbox ShoalCave_LowTideEntranceRoom_Text_1C6808, 4

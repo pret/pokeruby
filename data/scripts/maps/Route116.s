@@ -49,13 +49,13 @@ Route116_EventScript_150A94:: @ 8150A94
 	msgbox Route116_Text_1707B8, 4
 	closebutton
 	compare FACING, 2
-	callif 1, Route116_EventScript_150AEE
+	callif EQUAL, Route116_EventScript_150AEE
 	compare FACING, 1
-	callif 1, Route116_EventScript_150AEE
+	callif EQUAL, Route116_EventScript_150AEE
 	compare FACING, 3
-	callif 1, Route116_EventScript_150AEE
+	callif EQUAL, Route116_EventScript_150AEE
 	compare FACING, 4
-	callif 1, Route116_EventScript_150AF9
+	callif EQUAL, Route116_EventScript_150AF9
 	disappear LAST_TALKED
 	clearflag 949
 	setflag 256
@@ -182,13 +182,13 @@ Route116_EventScript_150BF4:: @ 8150BF4
 Route116_EventScript_150C03:: @ 8150C03
 	pause 20
 	compare FACING, 2
-	callif 1, Route116_EventScript_150C37
+	callif EQUAL, Route116_EventScript_150C37
 	compare FACING, 1
-	callif 1, Route116_EventScript_150C37
+	callif EQUAL, Route116_EventScript_150C37
 	compare FACING, 3
-	callif 1, Route116_EventScript_150C37
+	callif EQUAL, Route116_EventScript_150C37
 	compare FACING, 4
-	callif 1, Route116_EventScript_150C42
+	callif EQUAL, Route116_EventScript_150C42
 	disappear LAST_TALKED
 	release
 	end

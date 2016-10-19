@@ -11,17 +11,17 @@ GraniteCave_StevensRoom_EventScript_15CBFA:: @ 815CBFA
 	msgbox GraniteCave_StevensRoom_Text_194BDD, 4
 	giveitem ITEM_TM47
 	compare RESULT, 0
-	callif 1, GraniteCave_StevensRoom_EventScript_15CC83
+	callif EQUAL, GraniteCave_StevensRoom_EventScript_15CC83
 	msgbox GraniteCave_StevensRoom_Text_194C8D, 4
 	closebutton
 	compare FACING, 2
-	callif 1, GraniteCave_StevensRoom_EventScript_15CC6D
+	callif EQUAL, GraniteCave_StevensRoom_EventScript_15CC6D
 	compare FACING, 1
-	callif 1, GraniteCave_StevensRoom_EventScript_15CC78
+	callif EQUAL, GraniteCave_StevensRoom_EventScript_15CC78
 	compare FACING, 3
-	callif 1, GraniteCave_StevensRoom_EventScript_15CC6D
+	callif EQUAL, GraniteCave_StevensRoom_EventScript_15CC6D
 	compare FACING, 4
-	callif 1, GraniteCave_StevensRoom_EventScript_15CC6D
+	callif EQUAL, GraniteCave_StevensRoom_EventScript_15CC6D
 	playsfx 9
 	disappear 1
 	release

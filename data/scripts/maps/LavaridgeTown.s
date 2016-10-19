@@ -10,7 +10,7 @@ LavaridgeTown_MapScript1_14E4AE:: @ 814E4AE
 	call LavaridgeTown_EventScript_1A014E
 	call LavaridgeTown_EventScript_1A0172
 	compare 0x4053, 2
-	callif 1, LavaridgeTown_EventScript_14E4D0
+	callif EQUAL, LavaridgeTown_EventScript_14E4D0
 	end
 
 LavaridgeTown_EventScript_14E4D0:: @ 814E4D0
@@ -45,11 +45,11 @@ LavaridgeTown_EventScript_14E4ED:: @ 814E4ED
 	waitmove 0
 	checkgender
 	compare RESULT, 0
-	callif 1, LavaridgeTown_EventScript_14E56B
+	callif EQUAL, LavaridgeTown_EventScript_14E56B
 	compare RESULT, 1
-	callif 1, LavaridgeTown_EventScript_14E570
+	callif EQUAL, LavaridgeTown_EventScript_14E570
 	compare 0x8008, 1
-	callif 1, LavaridgeTown_EventScript_14E68F
+	callif EQUAL, LavaridgeTown_EventScript_14E68F
 	checkgender
 	compare RESULT, 0
 	jumpif EQUAL, LavaridgeTown_EventScript_14E5AB
@@ -71,9 +71,9 @@ LavaridgeTown_EventScript_14E575:: @ 814E575
 	setvar 0x8008, 0
 	checkgender
 	compare RESULT, 0
-	callif 1, LavaridgeTown_EventScript_14E56B
+	callif EQUAL, LavaridgeTown_EventScript_14E56B
 	compare RESULT, 1
-	callif 1, LavaridgeTown_EventScript_14E570
+	callif EQUAL, LavaridgeTown_EventScript_14E570
 	checkgender
 	compare RESULT, 0
 	jumpif EQUAL, LavaridgeTown_EventScript_14E5AB
@@ -100,16 +100,16 @@ LavaridgeTown_EventScript_14E5D0:: @ 814E5D0
 LavaridgeTown_EventScript_14E5F5:: @ 814E5F5
 	closebutton
 	compare 0x8008, 1
-	callif 1, LavaridgeTown_EventScript_14E646
+	callif EQUAL, LavaridgeTown_EventScript_14E646
 	compare 0x8008, 0
-	callif 1, LavaridgeTown_EventScript_14E64E
+	callif EQUAL, LavaridgeTown_EventScript_14E64E
 	disappear 8
 	reappear 7
 	pause 30
 	compare 0x8008, 1
-	callif 1, LavaridgeTown_EventScript_14E69A
+	callif EQUAL, LavaridgeTown_EventScript_14E69A
 	compare 0x8008, 0
-	callif 1, LavaridgeTown_EventScript_14E6A5
+	callif EQUAL, LavaridgeTown_EventScript_14E6A5
 	disappear 7
 	setvar 0x4053, 2
 	playmusicbattle 0
@@ -129,13 +129,13 @@ LavaridgeTown_EventScript_14E646:: @ 814E646
 
 LavaridgeTown_EventScript_14E64E:: @ 814E64E
 	compare FACING, 2
-	callif 1, LavaridgeTown_EventScript_14E67B
+	callif EQUAL, LavaridgeTown_EventScript_14E67B
 	compare FACING, 1
-	callif 1, LavaridgeTown_EventScript_14E680
+	callif EQUAL, LavaridgeTown_EventScript_14E680
 	compare FACING, 3
-	callif 1, LavaridgeTown_EventScript_14E685
+	callif EQUAL, LavaridgeTown_EventScript_14E685
 	compare FACING, 4
-	callif 1, LavaridgeTown_EventScript_14E68A
+	callif EQUAL, LavaridgeTown_EventScript_14E68A
 	return
 
 LavaridgeTown_EventScript_14E67B:: @ 814E67B
@@ -166,13 +166,13 @@ LavaridgeTown_EventScript_14E69A:: @ 814E69A
 
 LavaridgeTown_EventScript_14E6A5:: @ 814E6A5
 	compare FACING, 2
-	callif 1, LavaridgeTown_EventScript_14E6D2
+	callif EQUAL, LavaridgeTown_EventScript_14E6D2
 	compare FACING, 1
-	callif 1, LavaridgeTown_EventScript_14E6D2
+	callif EQUAL, LavaridgeTown_EventScript_14E6D2
 	compare FACING, 3
-	callif 1, LavaridgeTown_EventScript_14E6DD
+	callif EQUAL, LavaridgeTown_EventScript_14E6DD
 	compare FACING, 4
-	callif 1, LavaridgeTown_EventScript_14E6D2
+	callif EQUAL, LavaridgeTown_EventScript_14E6D2
 	return
 
 LavaridgeTown_EventScript_14E6D2:: @ 814E6D2

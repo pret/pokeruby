@@ -26,7 +26,7 @@ MtChimney_EventScript_15CF95:: @ 815CF95
 	msgbox MtChimney_Text_1957A9, 4
 	checkitemspace ITEM_LAVA_COOKIE, 1
 	compare RESULT, 1
-	callif 1, MtChimney_EventScript_15D000
+	callif EQUAL, MtChimney_EventScript_15D000
 	giveitem ITEM_LAVA_COOKIE
 	compare RESULT, 0
 	jumpif EQUAL, MtChimney_EventScript_15CFF3

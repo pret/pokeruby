@@ -352,9 +352,9 @@ LilycoveCity_EventScript_14CEA6:: @ 814CEA6
 	checkflag 2060
 	callif FLAG_IS_SET, LilycoveCity_EventScript_14CEDE
 	compare RESULT, 0
-	callif 1, LilycoveCity_EventScript_14CEEE
+	callif EQUAL, LilycoveCity_EventScript_14CEEE
 	compare RESULT, 1
-	callif 1, LilycoveCity_EventScript_14CEF7
+	callif EQUAL, LilycoveCity_EventScript_14CEF7
 	clearflag 722
 	clearflag 849
 	jump LilycoveCity_EventScript_14CF6B
@@ -389,9 +389,9 @@ LilycoveCity_EventScript_14CF12:: @ 814CF12
 	checkflag 2060
 	callif FLAG_IS_SET, LilycoveCity_EventScript_14CEDE
 	compare RESULT, 0
-	callif 1, LilycoveCity_EventScript_14CF47
+	callif EQUAL, LilycoveCity_EventScript_14CF47
 	compare RESULT, 1
-	callif 1, LilycoveCity_EventScript_14CF50
+	callif EQUAL, LilycoveCity_EventScript_14CF50
 	clearflag 760
 	jump LilycoveCity_EventScript_14CF6B
 	end

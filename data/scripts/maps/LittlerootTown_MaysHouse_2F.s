@@ -7,7 +7,7 @@ LittlerootTown_MaysHouse_2F_MapScript1_152A5B:: @ 8152A5B
 	checkflag 130
 	callif FLAG_NOT_SET, LittlerootTown_MaysHouse_2F_EventScript_152A7A
 	compare 0x4092, 4
-	callif 1, LittlerootTown_MaysHouse_2F_EventScript_1B6950
+	callif EQUAL, LittlerootTown_MaysHouse_2F_EventScript_1B6950
 	call LittlerootTown_MaysHouse_2F_EventScript_1A2F3D
 	setvar 0x4089, 0
 	end
@@ -34,9 +34,9 @@ LittlerootTown_MaysHouse_2F_EventScript_152A9D:: @ 8152A9D
 	jumpif FLAG_IS_SET, LittlerootTown_BrendansHouse_2F_EventScript_152BB5
 	checkgender
 	compare RESULT, 0
-	callif 1, LittlerootTown_BrendansHouse_2F_EventScript_152AD4
+	callif EQUAL, LittlerootTown_BrendansHouse_2F_EventScript_152AD4
 	compare RESULT, 1
-	callif 1, LittlerootTown_BrendansHouse_2F_EventScript_152B4A
+	callif EQUAL, LittlerootTown_BrendansHouse_2F_EventScript_152B4A
 	playsfx 9
 	disappear LAST_TALKED
 	setvar 0x408d, 3
@@ -58,11 +58,11 @@ LittlerootTown_BrendansHouse_2F_EventScript_152AD4:: @ 8152AD4
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1733AF, 4
 	closebutton
 	compare FACING, 4
-	callif 1, LittlerootTown_BrendansHouse_2F_EventScript_152B29
+	callif EQUAL, LittlerootTown_BrendansHouse_2F_EventScript_152B29
 	compare FACING, 2
-	callif 1, LittlerootTown_BrendansHouse_2F_EventScript_152B34
+	callif EQUAL, LittlerootTown_BrendansHouse_2F_EventScript_152B34
 	compare FACING, 3
-	callif 1, LittlerootTown_BrendansHouse_2F_EventScript_152B3F
+	callif EQUAL, LittlerootTown_BrendansHouse_2F_EventScript_152B3F
 	return
 
 LittlerootTown_BrendansHouse_2F_EventScript_152B29:: @ 8152B29
@@ -92,11 +92,11 @@ LittlerootTown_BrendansHouse_2F_EventScript_152B4A:: @ 8152B4A
 	msgbox LittlerootTown_BrendansHouse_2F_Text_1735FC, 4
 	closebutton
 	compare FACING, 4
-	callif 1, LittlerootTown_BrendansHouse_2F_EventScript_152B9F
+	callif EQUAL, LittlerootTown_BrendansHouse_2F_EventScript_152B9F
 	compare FACING, 2
-	callif 1, LittlerootTown_BrendansHouse_2F_EventScript_152B9F
+	callif EQUAL, LittlerootTown_BrendansHouse_2F_EventScript_152B9F
 	compare FACING, 3
-	callif 1, LittlerootTown_BrendansHouse_2F_EventScript_152BAA
+	callif EQUAL, LittlerootTown_BrendansHouse_2F_EventScript_152BAA
 	return
 
 LittlerootTown_BrendansHouse_2F_EventScript_152B9F:: @ 8152B9F
@@ -114,9 +114,9 @@ LittlerootTown_BrendansHouse_2F_EventScript_152BB5:: @ 8152BB5
 	waitmove 0
 	checkgender
 	compare RESULT, 0
-	callif 1, LittlerootTown_BrendansHouse_2F_EventScript_152BDB
+	callif EQUAL, LittlerootTown_BrendansHouse_2F_EventScript_152BDB
 	compare RESULT, 1
-	callif 1, LittlerootTown_BrendansHouse_2F_EventScript_152BED
+	callif EQUAL, LittlerootTown_BrendansHouse_2F_EventScript_152BED
 	setflag 293
 	releaseall
 	end

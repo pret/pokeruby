@@ -23,11 +23,11 @@ MossdeepCity_GameCorner_B1F_EventScript_15AE6E:: @ 815AE6E
 	special 236
 	waitstate
 	compare RESULT, 3
-	callif 1, MossdeepCity_GameCorner_B1F_EventScript_15AED5
+	callif EQUAL, MossdeepCity_GameCorner_B1F_EventScript_15AED5
 	compare RESULT, 1
-	callif 1, MossdeepCity_GameCorner_B1F_EventScript_15AEE3
+	callif EQUAL, MossdeepCity_GameCorner_B1F_EventScript_15AEE3
 	compare RESULT, 2
-	callif 1, MossdeepCity_GameCorner_B1F_EventScript_15AEEE
+	callif EQUAL, MossdeepCity_GameCorner_B1F_EventScript_15AEEE
 	closebutton
 	special 0
 	move 255, MossdeepCity_GameCorner_B1F_Movement_15AEFF

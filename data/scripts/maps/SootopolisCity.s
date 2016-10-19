@@ -46,7 +46,7 @@ SootopolisCity_EventScript_14D123:: @ 814D123
 	movespriteperm 1, 29, 19
 	movespriteperm 2, 33, 19
 	compare 0x405e, 1
-	callif 1, SootopolisCity_EventScript_14D142
+	callif EQUAL, SootopolisCity_EventScript_14D142
 	return
 
 SootopolisCity_EventScript_14D142:: @ 814D142

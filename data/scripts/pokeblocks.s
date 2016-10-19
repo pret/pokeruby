@@ -55,7 +55,7 @@ FallarborTown_ContestLobby_EventScript_1B76A1:: @ 81B76A1
 	msgbox FallarborTown_ContestLobby_Text_1B6E9D, 4
 	specialval RESULT, 160
 	compare RESULT, 65535
-	jumpif 5, FallarborTown_ContestLobby_EventScript_1B76EF
+	jumpif NOT_EQUAL, FallarborTown_ContestLobby_EventScript_1B76EF
 	compare RESULT, 65535
 	jumpif EQUAL, FallarborTown_ContestLobby_EventScript_1B7776
 	end
@@ -216,7 +216,7 @@ VerdanturfTown_ContestLobby_EventScript_1B783B:: @ 81B783B
 	jumpif EQUAL, FallarborTown_ContestLobby_EventScript_1B7942
 	specialval RESULT, 160
 	compare RESULT, 65535
-	jumpif 5, FallarborTown_ContestLobby_EventScript_1B7878
+	jumpif NOT_EQUAL, FallarborTown_ContestLobby_EventScript_1B7878
 	compare RESULT, 65535
 	jumpif EQUAL, FallarborTown_ContestLobby_EventScript_1B7938
 	end

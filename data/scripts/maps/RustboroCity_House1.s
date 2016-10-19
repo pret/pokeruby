@@ -22,7 +22,7 @@ RustboroCity_House1_EventScript_157C7D:: @ 8157C7D
 	specialval RESULT, 255
 	copyvar 0x800b, RESULT
 	comparevars RESULT, 0x8009
-	jumpif 5, RustboroCity_House1_EventScript_157D05
+	jumpif NOT_EQUAL, RustboroCity_House1_EventScript_157D05
 	copyvar 0x8004, 0x8008
 	copyvar 0x8005, 0x800a
 	special 253

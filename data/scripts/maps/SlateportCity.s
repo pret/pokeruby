@@ -13,7 +13,7 @@ SlateportCity_MapScript1_14BA3C:: @ 814BA3C
 	setvar 0x40aa, 0
 	call SlateportCity_EventScript_14BA5C
 	compare 0x4058, 1
-	callif 1, SlateportCity_EventScript_14BA68
+	callif EQUAL, SlateportCity_EventScript_14BA68
 	end
 
 SlateportCity_EventScript_14BA5C:: @ 814BA5C
@@ -68,10 +68,10 @@ SlateportCity_EventScript_14BAE0:: @ 814BAE0
 	msgbox SlateportCity_Text_164682, 4
 	specialval RESULT, 292
 	compare RESULT, 1
-	callif 1, SlateportCity_EventScript_14BB35
+	callif EQUAL, SlateportCity_EventScript_14BB35
 	specialval RESULT, 294
 	compare RESULT, 0
-	callif 1, SlateportCity_EventScript_14BB2B
+	callif EQUAL, SlateportCity_EventScript_14BB2B
 	msgbox SlateportCity_Text_164691, 4
 	fanfare 370
 	message SlateportCity_Text_1646DD
@@ -96,7 +96,7 @@ SlateportCity_EventScript_14BB3F:: @ 814BB3F
 	lock
 	faceplayer
 	compare 0x4058, 1
-	callif 1, SlateportCity_EventScript_14BB56
+	callif EQUAL, SlateportCity_EventScript_14BB56
 	msgbox SlateportCity_Text_164814, 4
 	release
 	end
@@ -110,7 +110,7 @@ SlateportCity_EventScript_14BB60:: @ 814BB60
 	lock
 	faceplayer
 	compare 0x4058, 1
-	callif 1, SlateportCity_EventScript_14BB77
+	callif EQUAL, SlateportCity_EventScript_14BB77
 	msgbox SlateportCity_Text_1648A0, 4
 	release
 	end
@@ -124,7 +124,7 @@ SlateportCity_EventScript_14BB81:: @ 814BB81
 	lock
 	faceplayer
 	compare 0x4058, 1
-	callif 1, SlateportCity_EventScript_14BBA1
+	callif EQUAL, SlateportCity_EventScript_14BBA1
 	checkflag 96
 	jumpif FLAG_IS_SET, SlateportCity_EventScript_14BBAB
 	msgbox SlateportCity_Text_164937, 4
@@ -145,7 +145,7 @@ SlateportCity_EventScript_14BBB5:: @ 814BBB5
 	lock
 	faceplayer
 	compare 0x4058, 1
-	callif 1, SlateportCity_EventScript_14BBCC
+	callif EQUAL, SlateportCity_EventScript_14BBCC
 	msgbox SlateportCity_Text_164A30, 4
 	release
 	end
@@ -169,7 +169,7 @@ SlateportCity_EventScript_14BBF3:: @ 814BBF3
 	lock
 	faceplayer
 	compare 0x4058, 1
-	callif 1, SlateportCity_EventScript_14BC0A
+	callif EQUAL, SlateportCity_EventScript_14BC0A
 	msgbox SlateportCity_Text_164B34, 4
 	release
 	end
@@ -254,7 +254,7 @@ SlateportCity_EventScript_14BCB8:: @ 814BCB8
 	lock
 	faceplayer
 	compare 0x4058, 1
-	callif 1, SlateportCity_EventScript_14BCCF
+	callif EQUAL, SlateportCity_EventScript_14BCCF
 	msgbox SlateportCity_Text_164F9E, 4
 	release
 	end
@@ -289,9 +289,9 @@ SlateportCity_EventScript_14BD06:: @ 814BD06
 	faceplayer
 	msgbox SlateportCity_Text_1650F1, 5
 	compare RESULT, 1
-	callif 1, SlateportCity_EventScript_14BD28
+	callif EQUAL, SlateportCity_EventScript_14BD28
 	compare RESULT, 0
-	callif 1, SlateportCity_EventScript_14BD31
+	callif EQUAL, SlateportCity_EventScript_14BD31
 	release
 	end
 

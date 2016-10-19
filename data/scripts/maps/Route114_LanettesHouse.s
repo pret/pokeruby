@@ -41,7 +41,7 @@ Route114_LanettesHouse_EventScript_15C299:: @ 815C299
 Route114_LanettesHouse_EventScript_15C2B7:: @ 815C2B7
 	msgbox Route114_LanettesHouse_Text_192C01, 5
 	compare RESULT, 1
-	callif 1, Route114_LanettesHouse_EventScript_15C2CC
+	callif EQUAL, Route114_LanettesHouse_EventScript_15C2CC
 	releaseall
 	end
 

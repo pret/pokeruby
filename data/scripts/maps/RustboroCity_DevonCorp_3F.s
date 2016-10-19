@@ -6,7 +6,7 @@ RustboroCity_DevonCorp_3F_MapScripts:: @ 8157711
 
 RustboroCity_DevonCorp_3F_MapScript1_157721:: @ 8157721
 	compare 0x408f, 0
-	callif 1, RustboroCity_DevonCorp_3F_EventScript_15772D
+	callif EQUAL, RustboroCity_DevonCorp_3F_EventScript_15772D
 	end
 
 RustboroCity_DevonCorp_3F_EventScript_15772D:: @ 815772D

@@ -218,9 +218,9 @@ DewfordTown_Hall_EventScript_153535:: @ 8153535
 
 DewfordTown_Hall_EventScript_153556:: @ 8153556
 	compare FACING, 2
-	callif 1, DewfordTown_Hall_EventScript_15356D
+	callif EQUAL, DewfordTown_Hall_EventScript_15356D
 	compare FACING, 1
-	callif 1, DewfordTown_Hall_EventScript_153578
+	callif EQUAL, DewfordTown_Hall_EventScript_153578
 	return
 
 DewfordTown_Hall_EventScript_15356D:: @ 815356D

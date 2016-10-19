@@ -17,11 +17,11 @@ Route111_EventScript_1A3877:: @ 81A3877
 	setflag 96
 	clearflag 948
 	compare FACING, 3
-	callif 1, Route111_EventScript_1A38C3
+	callif EQUAL, Route111_EventScript_1A38C3
 	compare FACING, 4
-	callif 1, Route111_EventScript_1A38C3
+	callif EQUAL, Route111_EventScript_1A38C3
 	compare FACING, 2
-	callif 1, Route111_EventScript_1A38CE
+	callif EQUAL, Route111_EventScript_1A38CE
 	disappear LAST_TALKED
 	release
 	end

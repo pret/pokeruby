@@ -72,35 +72,35 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_159429:: @ 8159429
 	setvar 0x8004, 8
 	specialval RESULT, 163
 	compare RESULT, 0
-	callif 1, LilycoveCity_PokemonTrainerFanClub_EventScript_1594D5
+	callif EQUAL, LilycoveCity_PokemonTrainerFanClub_EventScript_1594D5
 	setvar 0x8004, 9
 	specialval RESULT, 163
 	compare RESULT, 0
-	callif 1, LilycoveCity_PokemonTrainerFanClub_EventScript_1594DD
+	callif EQUAL, LilycoveCity_PokemonTrainerFanClub_EventScript_1594DD
 	setvar 0x8004, 10
 	specialval RESULT, 163
 	compare RESULT, 0
-	callif 1, LilycoveCity_PokemonTrainerFanClub_EventScript_1594E5
+	callif EQUAL, LilycoveCity_PokemonTrainerFanClub_EventScript_1594E5
 	setvar 0x8004, 11
 	specialval RESULT, 163
 	compare RESULT, 0
-	callif 1, LilycoveCity_PokemonTrainerFanClub_EventScript_1594ED
+	callif EQUAL, LilycoveCity_PokemonTrainerFanClub_EventScript_1594ED
 	setvar 0x8004, 12
 	specialval RESULT, 163
 	compare RESULT, 0
-	callif 1, LilycoveCity_PokemonTrainerFanClub_EventScript_1594F5
+	callif EQUAL, LilycoveCity_PokemonTrainerFanClub_EventScript_1594F5
 	setvar 0x8004, 13
 	specialval RESULT, 163
 	compare RESULT, 0
-	callif 1, LilycoveCity_PokemonTrainerFanClub_EventScript_1594FD
+	callif EQUAL, LilycoveCity_PokemonTrainerFanClub_EventScript_1594FD
 	setvar 0x8004, 14
 	specialval RESULT, 163
 	compare RESULT, 0
-	callif 1, LilycoveCity_PokemonTrainerFanClub_EventScript_159505
+	callif EQUAL, LilycoveCity_PokemonTrainerFanClub_EventScript_159505
 	setvar 0x8004, 15
 	specialval RESULT, 163
 	compare RESULT, 0
-	callif 1, LilycoveCity_PokemonTrainerFanClub_EventScript_15950D
+	callif EQUAL, LilycoveCity_PokemonTrainerFanClub_EventScript_15950D
 	end
 
 LilycoveCity_PokemonTrainerFanClub_EventScript_1594D5:: @ 81594D5

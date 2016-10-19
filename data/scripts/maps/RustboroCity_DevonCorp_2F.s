@@ -4,7 +4,7 @@ RustboroCity_DevonCorp_2F_MapScripts:: @ 81574CA
 
 RustboroCity_DevonCorp_2F_MapScript1_1574D0:: @ 81574D0
 	compare 0x40c4, 1
-	callif 1, RustboroCity_DevonCorp_2F_EventScript_1574DC
+	callif EQUAL, RustboroCity_DevonCorp_2F_EventScript_1574DC
 	end
 
 RustboroCity_DevonCorp_2F_EventScript_1574DC:: @ 81574DC
@@ -15,7 +15,7 @@ RustboroCity_DevonCorp_2F_EventScript_1574E2:: @ 81574E2
 	lock
 	faceplayer
 	compare 0x40c4, 1
-	callif 1, RustboroCity_DevonCorp_2F_EventScript_1574DC
+	callif EQUAL, RustboroCity_DevonCorp_2F_EventScript_1574DC
 	msgbox RustboroCity_DevonCorp_2F_Text_182B81, 4
 	release
 	end
@@ -24,7 +24,7 @@ RustboroCity_DevonCorp_2F_EventScript_1574F9:: @ 81574F9
 	lock
 	faceplayer
 	compare 0x40c4, 1
-	callif 1, RustboroCity_DevonCorp_2F_EventScript_1574DC
+	callif EQUAL, RustboroCity_DevonCorp_2F_EventScript_1574DC
 	checkflag 287
 	jumpif FLAG_IS_SET, RustboroCity_DevonCorp_2F_EventScript_157519
 	msgbox RustboroCity_DevonCorp_2F_Text_182BD8, 4
@@ -40,7 +40,7 @@ RustboroCity_DevonCorp_2F_EventScript_157523:: @ 8157523
 	lock
 	faceplayer
 	compare 0x40c4, 1
-	callif 1, RustboroCity_DevonCorp_2F_EventScript_1574DC
+	callif EQUAL, RustboroCity_DevonCorp_2F_EventScript_1574DC
 	checkflag 188
 	jumpif FLAG_IS_SET, RustboroCity_DevonCorp_2F_EventScript_157543
 	msgbox RustboroCity_DevonCorp_2F_Text_182D2A, 4
@@ -56,7 +56,7 @@ RustboroCity_DevonCorp_2F_EventScript_15754D:: @ 815754D
 	lock
 	faceplayer
 	compare 0x40c4, 1
-	callif 1, RustboroCity_DevonCorp_2F_EventScript_1574DC
+	callif EQUAL, RustboroCity_DevonCorp_2F_EventScript_1574DC
 	msgbox RustboroCity_DevonCorp_2F_Text_182E6B, 4
 	release
 	end
@@ -147,7 +147,7 @@ RustboroCity_DevonCorp_2F_EventScript_157661:: @ 8157661
 	givepokemon SPECIES_LILEEP, 20, ITEM_NONE, 0x0, 0x0, 0
 	msgbox RustboroCity_DevonCorp_2F_Text_1A1102, 5
 	compare RESULT, 1
-	callif 1, RustboroCity_DevonCorp_2F_EventScript_1A0678
+	callif EQUAL, RustboroCity_DevonCorp_2F_EventScript_1A0678
 	release
 	end
 
@@ -167,7 +167,7 @@ RustboroCity_DevonCorp_2F_EventScript_1576B4:: @ 81576B4
 	givepokemon SPECIES_ANORITH, 20, ITEM_NONE, 0x0, 0x0, 0
 	msgbox RustboroCity_DevonCorp_2F_Text_1A1102, 5
 	compare RESULT, 1
-	callif 1, RustboroCity_DevonCorp_2F_EventScript_1A0678
+	callif EQUAL, RustboroCity_DevonCorp_2F_EventScript_1A0678
 	release
 	end
 

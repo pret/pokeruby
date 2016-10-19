@@ -22,7 +22,7 @@ FortreeCity_House1_EventScript_157E13:: @ 8157E13
 	specialval RESULT, 255
 	copyvar 0x800b, RESULT
 	comparevars RESULT, 0x8009
-	jumpif 5, FortreeCity_House1_EventScript_157E9F
+	jumpif NOT_EQUAL, FortreeCity_House1_EventScript_157E9F
 	copyvar 0x8004, 0x8008
 	copyvar 0x8005, 0x800a
 	special 253

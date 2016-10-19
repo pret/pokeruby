@@ -6,7 +6,7 @@ Route112_CableCarStation_MapScripts:: @ 815C033
 Route112_CableCarStation_MapScript1_15C03E:: @ 815C03E
 	warp6 Route112, 255, 28, 28
 	compare 0x40a3, 2
-	callif 1, Route112_CableCarStation_EventScript_15C052
+	callif EQUAL, Route112_CableCarStation_EventScript_15C052
 	end
 
 Route112_CableCarStation_EventScript_15C052:: @ 815C052

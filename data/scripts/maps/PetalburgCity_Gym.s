@@ -9,7 +9,7 @@ PetalburgCity_Gym_MapScript1_15448C:: @ 815448C
 	compare 0x4085, 6
 	jumpif EQUAL, PetalburgCity_Gym_EventScript_1544A3
 	compare 0x4085, 7
-	callif 4, PetalburgCity_Gym_EventScript_1544ED
+	callif GREATER_THAN_OR_EQUAL, PetalburgCity_Gym_EventScript_1544ED
 	end
 
 PetalburgCity_Gym_EventScript_1544A3:: @ 81544A3
@@ -45,9 +45,9 @@ PetalburgCity_Gym_EventScript_1544ED:: @ 81544ED
 
 PetalburgCity_Gym_MapScript1_15451B:: @ 815451B
 	compare 0x4085, 1
-	callif 1, PetalburgCity_Gym_EventScript_15453B
+	callif EQUAL, PetalburgCity_Gym_EventScript_15453B
 	compare 0x4085, 6
-	callif 0, PetalburgCity_Gym_EventScript_154543
+	callif LESS_THAN, PetalburgCity_Gym_EventScript_154543
 	checkflag 2052
 	callif FLAG_IS_SET, PetalburgCity_Gym_EventScript_15454B
 	end
@@ -145,65 +145,65 @@ PetalburgCity_Gym_EventScript_154669:: @ 8154669
 	reappear 10
 	playsfx 8
 	compare 0x8008, 0
-	callif 1, PetalburgCity_Gym_EventScript_1547EE
+	callif EQUAL, PetalburgCity_Gym_EventScript_1547EE
 	compare 0x8008, 1
-	callif 1, PetalburgCity_Gym_EventScript_154800
+	callif EQUAL, PetalburgCity_Gym_EventScript_154800
 	compare 0x8008, 2
-	callif 1, PetalburgCity_Gym_EventScript_15481C
+	callif EQUAL, PetalburgCity_Gym_EventScript_15481C
 	compare 0x8008, 3
-	callif 1, PetalburgCity_Gym_EventScript_15481C
+	callif EQUAL, PetalburgCity_Gym_EventScript_15481C
 	msgbox PetalburgCity_Gym_Text_179F07, 4
 	msgbox PetalburgCity_Gym_Text_179F37, 4
 	msgbox PetalburgCity_Gym_Text_179F70, 4
 	msgbox PetalburgCity_Gym_Text_17A03A, 4
 	compare 0x8008, 0
-	callif 1, PetalburgCity_Gym_EventScript_154884
+	callif EQUAL, PetalburgCity_Gym_EventScript_154884
 	compare 0x8008, 1
-	callif 1, PetalburgCity_Gym_EventScript_15488F
+	callif EQUAL, PetalburgCity_Gym_EventScript_15488F
 	compare 0x8008, 2
-	callif 1, PetalburgCity_Gym_EventScript_1548A1
+	callif EQUAL, PetalburgCity_Gym_EventScript_1548A1
 	compare 0x8008, 3
-	callif 1, PetalburgCity_Gym_EventScript_1548B3
+	callif EQUAL, PetalburgCity_Gym_EventScript_1548B3
 	msgbox PetalburgCity_Gym_Text_17A04A, 4
 	compare 0x8008, 0
-	callif 1, PetalburgCity_Gym_EventScript_1548C5
+	callif EQUAL, PetalburgCity_Gym_EventScript_1548C5
 	compare 0x8008, 1
-	callif 1, PetalburgCity_Gym_EventScript_1548D0
+	callif EQUAL, PetalburgCity_Gym_EventScript_1548D0
 	compare 0x8008, 2
-	callif 1, PetalburgCity_Gym_EventScript_1548DB
+	callif EQUAL, PetalburgCity_Gym_EventScript_1548DB
 	compare 0x8008, 3
-	callif 1, PetalburgCity_Gym_EventScript_1548E6
+	callif EQUAL, PetalburgCity_Gym_EventScript_1548E6
 	msgbox PetalburgCity_Gym_Text_17A0A8, 4
 	msgbox PetalburgCity_Gym_Text_17A0EB, 4
 	msgbox PetalburgCity_Gym_Text_17A156, 4
 	compare 0x8008, 0
-	callif 1, PetalburgCity_Gym_EventScript_15492F
+	callif EQUAL, PetalburgCity_Gym_EventScript_15492F
 	compare 0x8008, 1
-	callif 1, PetalburgCity_Gym_EventScript_154930
+	callif EQUAL, PetalburgCity_Gym_EventScript_154930
 	compare 0x8008, 2
-	callif 1, PetalburgCity_Gym_EventScript_15493B
+	callif EQUAL, PetalburgCity_Gym_EventScript_15493B
 	compare 0x8008, 3
-	callif 1, PetalburgCity_Gym_EventScript_15493C
+	callif EQUAL, PetalburgCity_Gym_EventScript_15493C
 	compare 0x8008, 0
-	callif 1, PetalburgCity_Gym_EventScript_1548F1
+	callif EQUAL, PetalburgCity_Gym_EventScript_1548F1
 	compare 0x8008, 1
-	callif 1, PetalburgCity_Gym_EventScript_1548FC
+	callif EQUAL, PetalburgCity_Gym_EventScript_1548FC
 	compare 0x8008, 2
-	callif 1, PetalburgCity_Gym_EventScript_1548F1
+	callif EQUAL, PetalburgCity_Gym_EventScript_1548F1
 	compare 0x8008, 3
-	callif 1, PetalburgCity_Gym_EventScript_1548F1
+	callif EQUAL, PetalburgCity_Gym_EventScript_1548F1
 	msgbox PetalburgCity_Gym_Text_17A171, 4
 	closebutton
 	setflag 0x4001
 	playmusic 420, 0
 	compare 0x8008, 0
-	callif 1, PetalburgCity_Gym_EventScript_154835
+	callif EQUAL, PetalburgCity_Gym_EventScript_154835
 	compare 0x8008, 1
-	callif 1, PetalburgCity_Gym_EventScript_15484E
+	callif EQUAL, PetalburgCity_Gym_EventScript_15484E
 	compare 0x8008, 2
-	callif 1, PetalburgCity_Gym_EventScript_154860
+	callif EQUAL, PetalburgCity_Gym_EventScript_154860
 	compare 0x8008, 3
-	callif 1, PetalburgCity_Gym_EventScript_154872
+	callif EQUAL, PetalburgCity_Gym_EventScript_154872
 	disappear 10
 	setflag 728
 	setvar 0x4085, 1
@@ -420,22 +420,22 @@ PetalburgCity_Gym_EventScript_154A2C:: @ 8154A2C
 	msgbox PetalburgCity_Gym_Text_17A976, 4
 	closebutton
 	compare FACING, 2
-	callif 1, PetalburgCity_Gym_EventScript_154ABC
+	callif EQUAL, PetalburgCity_Gym_EventScript_154ABC
 	compare FACING, 1
-	callif 1, PetalburgCity_Gym_EventScript_154AC7
+	callif EQUAL, PetalburgCity_Gym_EventScript_154AC7
 	compare FACING, 3
-	callif 1, PetalburgCity_Gym_EventScript_154AD2
+	callif EQUAL, PetalburgCity_Gym_EventScript_154AD2
 	compare FACING, 4
-	callif 1, PetalburgCity_Gym_EventScript_154ADD
+	callif EQUAL, PetalburgCity_Gym_EventScript_154ADD
 	pause 70
 	compare FACING, 2
-	callif 1, PetalburgCity_Gym_EventScript_154AE8
+	callif EQUAL, PetalburgCity_Gym_EventScript_154AE8
 	compare FACING, 1
-	callif 1, PetalburgCity_Gym_EventScript_154AF3
+	callif EQUAL, PetalburgCity_Gym_EventScript_154AF3
 	compare FACING, 3
-	callif 1, PetalburgCity_Gym_EventScript_154AFE
+	callif EQUAL, PetalburgCity_Gym_EventScript_154AFE
 	compare FACING, 4
-	callif 1, PetalburgCity_Gym_EventScript_154B09
+	callif EQUAL, PetalburgCity_Gym_EventScript_154B09
 	msgbox PetalburgCity_Gym_Text_17A9F6, 4
 	release
 	end
@@ -593,7 +593,7 @@ PetalburgCity_Gym_EventScript_154B69:: @ 8154B69
 PetalburgCity_Gym_EventScript_154B73:: @ 8154B73
 	lockall
 	compare 0x4085, 6
-	jumpif 0, PetalburgCity_Gym_EventScript_154BB9
+	jumpif LESS_THAN, PetalburgCity_Gym_EventScript_154BB9
 	setvar 0x8008, 7
 	setvar 0x8009, 85
 	msgbox PetalburgCity_Gym_Text_17B870, 5
@@ -623,7 +623,7 @@ PetalburgCity_Gym_EventScript_154BB9:: @ 8154BB9
 PetalburgCity_Gym_EventScript_154BC3:: @ 8154BC3
 	lockall
 	compare 0x4085, 6
-	jumpif 0, PetalburgCity_Gym_EventScript_154BB9
+	jumpif LESS_THAN, PetalburgCity_Gym_EventScript_154BB9
 	setvar 0x8008, 1
 	setvar 0x8009, 98
 	msgbox PetalburgCity_Gym_Text_17B8D4, 5
@@ -892,72 +892,72 @@ PetalburgCity_Gym_EventScript_154F91:: @ 8154F91
 PetalburgCity_Gym_EventScript_154F9A:: @ 8154F9A
 	setvar 0x8004, 1
 	compare 0x8005, 0
-	callif 1, PetalburgCity_Gym_EventScript_155182
+	callif EQUAL, PetalburgCity_Gym_EventScript_155182
 	compare 0x8005, 1
-	callif 1, PetalburgCity_Gym_EventScript_155187
+	callif EQUAL, PetalburgCity_Gym_EventScript_155187
 	call PetalburgCity_Gym_EventScript_1550A2
 	return
 
 PetalburgCity_Gym_EventScript_154FBB:: @ 8154FBB
 	setvar 0x8004, 2
 	compare 0x8005, 0
-	callif 1, PetalburgCity_Gym_EventScript_155182
+	callif EQUAL, PetalburgCity_Gym_EventScript_155182
 	compare 0x8005, 1
-	callif 1, PetalburgCity_Gym_EventScript_155187
+	callif EQUAL, PetalburgCity_Gym_EventScript_155187
 	call PetalburgCity_Gym_EventScript_1550C7
 	return
 
 PetalburgCity_Gym_EventScript_154FDC:: @ 8154FDC
 	setvar 0x8004, 3
 	compare 0x8005, 0
-	callif 1, PetalburgCity_Gym_EventScript_155182
+	callif EQUAL, PetalburgCity_Gym_EventScript_155182
 	compare 0x8005, 1
-	callif 1, PetalburgCity_Gym_EventScript_155187
+	callif EQUAL, PetalburgCity_Gym_EventScript_155187
 	call PetalburgCity_Gym_EventScript_1550EC
 	return
 
 PetalburgCity_Gym_EventScript_154FFD:: @ 8154FFD
 	setvar 0x8004, 4
 	compare 0x8005, 0
-	callif 1, PetalburgCity_Gym_EventScript_155182
+	callif EQUAL, PetalburgCity_Gym_EventScript_155182
 	compare 0x8005, 1
-	callif 1, PetalburgCity_Gym_EventScript_155187
+	callif EQUAL, PetalburgCity_Gym_EventScript_155187
 	call PetalburgCity_Gym_EventScript_155111
 	return
 
 PetalburgCity_Gym_EventScript_15501E:: @ 815501E
 	setvar 0x8004, 5
 	compare 0x8005, 0
-	callif 1, PetalburgCity_Gym_EventScript_155182
+	callif EQUAL, PetalburgCity_Gym_EventScript_155182
 	compare 0x8005, 1
-	callif 1, PetalburgCity_Gym_EventScript_155187
+	callif EQUAL, PetalburgCity_Gym_EventScript_155187
 	call PetalburgCity_Gym_EventScript_155124
 	return
 
 PetalburgCity_Gym_EventScript_15503F:: @ 815503F
 	setvar 0x8004, 6
 	compare 0x8005, 0
-	callif 1, PetalburgCity_Gym_EventScript_155182
+	callif EQUAL, PetalburgCity_Gym_EventScript_155182
 	compare 0x8005, 1
-	callif 1, PetalburgCity_Gym_EventScript_155187
+	callif EQUAL, PetalburgCity_Gym_EventScript_155187
 	call PetalburgCity_Gym_EventScript_155149
 	return
 
 PetalburgCity_Gym_EventScript_155060:: @ 8155060
 	setvar 0x8004, 7
 	compare 0x8005, 0
-	callif 1, PetalburgCity_Gym_EventScript_155182
+	callif EQUAL, PetalburgCity_Gym_EventScript_155182
 	compare 0x8005, 1
-	callif 1, PetalburgCity_Gym_EventScript_155187
+	callif EQUAL, PetalburgCity_Gym_EventScript_155187
 	call PetalburgCity_Gym_EventScript_15515C
 	return
 
 PetalburgCity_Gym_EventScript_155081:: @ 8155081
 	setvar 0x8004, 8
 	compare 0x8005, 0
-	callif 1, PetalburgCity_Gym_EventScript_155182
+	callif EQUAL, PetalburgCity_Gym_EventScript_155182
 	compare 0x8005, 1
-	callif 1, PetalburgCity_Gym_EventScript_155187
+	callif EQUAL, PetalburgCity_Gym_EventScript_155187
 	call PetalburgCity_Gym_EventScript_15516F
 	return
 

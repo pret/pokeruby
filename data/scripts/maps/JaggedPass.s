@@ -9,7 +9,7 @@ JaggedPass_MapScript1_15D271:: @ 815D271
 
 JaggedPass_MapScript1_15D274:: @ 815D274
 	compare 0x40bd, 1
-	callif 1, JaggedPass_EventScript_15D280
+	callif EQUAL, JaggedPass_EventScript_15D280
 	end
 
 JaggedPass_EventScript_15D280:: @ 815D280

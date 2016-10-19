@@ -27,7 +27,7 @@ EverGrandeCity_GlaciasRoom_MapScript1_15B6A9:: @ 815B6A9
 	checkflag 1247
 	callif FLAG_IS_SET, EverGrandeCity_GlaciasRoom_EventScript_15B6BE
 	compare 0x409c, 3
-	callif 1, EverGrandeCity_GlaciasRoom_EventScript_15B6C4
+	callif EQUAL, EverGrandeCity_GlaciasRoom_EventScript_15B6C4
 	end
 
 EverGrandeCity_GlaciasRoom_EventScript_15B6BE:: @ 815B6BE

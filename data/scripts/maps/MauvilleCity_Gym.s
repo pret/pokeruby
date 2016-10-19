@@ -86,7 +86,7 @@ MauvilleCity_Gym_EventScript_1565DB:: @ 81565DB
 	setflag 2057
 	addvar 0x4085, 1
 	compare 0x4085, 6
-	callif 1, MauvilleCity_Gym_EventScript_1A00FB
+	callif EQUAL, MauvilleCity_Gym_EventScript_1A00FB
 	setvar 0x8008, 3
 	call MauvilleCity_Gym_EventScript_1A01C0
 	special 144

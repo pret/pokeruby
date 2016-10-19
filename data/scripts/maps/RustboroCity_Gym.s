@@ -21,7 +21,7 @@ RustboroCity_Gym_EventScript_1578FE:: @ 81578FE
 	setvar 0x8008, 1
 	call RustboroCity_Gym_EventScript_1A01C0
 	compare 0x4085, 6
-	callif 1, RustboroCity_Gym_EventScript_1A00FB
+	callif EQUAL, RustboroCity_Gym_EventScript_1A00FB
 	jump RustboroCity_Gym_EventScript_15793C
 	end
 

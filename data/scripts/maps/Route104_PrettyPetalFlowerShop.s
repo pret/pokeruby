@@ -26,18 +26,18 @@ Route104_PrettyPetalFlowerShop_EventScript_15BE0B:: @ 815BE0B
 	setflag 127
 	msgbox Route104_PrettyPetalFlowerShop_Text_1C5F48, 5
 	compare RESULT, 1
-	callif 1, Route104_PrettyPetalFlowerShop_EventScript_15BE6A
+	callif EQUAL, Route104_PrettyPetalFlowerShop_EventScript_15BE6A
 	compare RESULT, 0
-	callif 1, Route104_PrettyPetalFlowerShop_EventScript_15BE73
+	callif EQUAL, Route104_PrettyPetalFlowerShop_EventScript_15BE73
 	release
 	end
 
 Route104_PrettyPetalFlowerShop_EventScript_15BE4A:: @ 815BE4A
 	msgbox Route104_PrettyPetalFlowerShop_Text_1C5F1B, 5
 	compare RESULT, 1
-	callif 1, Route104_PrettyPetalFlowerShop_EventScript_15BE6A
+	callif EQUAL, Route104_PrettyPetalFlowerShop_EventScript_15BE6A
 	compare RESULT, 0
-	callif 1, Route104_PrettyPetalFlowerShop_EventScript_15BE73
+	callif EQUAL, Route104_PrettyPetalFlowerShop_EventScript_15BE73
 	release
 	end
 

@@ -203,11 +203,11 @@ Route111_EventScript_1AE5A2:: @ 81AE5A2
 	special 174
 	special 179
 	compare FACING, 2
-	callif 1, Route111_EventScript_1AE5E0
+	callif EQUAL, Route111_EventScript_1AE5E0
 	compare FACING, 1
-	callif 1, Route111_EventScript_1AE5EB
+	callif EQUAL, Route111_EventScript_1AE5EB
 	compare FACING, 4
-	callif 1, Route111_EventScript_1AE5FD
+	callif EQUAL, Route111_EventScript_1AE5FD
 	checkflag 1
 	jumpif FLAG_IS_SET, Route111_EventScript_1AE73A
 	msgbox Route111_Text_1AC015, 5
@@ -237,11 +237,11 @@ Route120_EventScript_1AE60F:: @ 81AE60F
 	special 174
 	special 179
 	compare FACING, 2
-	callif 1, Route111_EventScript_1AE5E0
+	callif EQUAL, Route111_EventScript_1AE5E0
 	compare FACING, 1
-	callif 1, Route111_EventScript_1AE5EB
+	callif EQUAL, Route111_EventScript_1AE5EB
 	compare FACING, 4
-	callif 1, Route111_EventScript_1AE5FD
+	callif EQUAL, Route111_EventScript_1AE5FD
 	checkflag 1
 	jumpif FLAG_IS_SET, Route111_EventScript_1AE73A
 	specialval RESULT, 177

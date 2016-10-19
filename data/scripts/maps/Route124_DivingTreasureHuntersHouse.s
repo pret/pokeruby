@@ -32,16 +32,16 @@ Route124_DivingTreasureHuntersHouse_EventScript_163E44:: @ 8163E44
 	setvar 0x4001, 0
 	checkitem ITEM_RED_SHARD, 1
 	compare RESULT, 1
-	callif 1, Route124_DivingTreasureHuntersHouse_EventScript_163E8A
+	callif EQUAL, Route124_DivingTreasureHuntersHouse_EventScript_163E8A
 	checkitem ITEM_YELLOW_SHARD, 1
 	compare RESULT, 1
-	callif 1, Route124_DivingTreasureHuntersHouse_EventScript_163E90
+	callif EQUAL, Route124_DivingTreasureHuntersHouse_EventScript_163E90
 	checkitem ITEM_BLUE_SHARD, 1
 	compare RESULT, 1
-	callif 1, Route124_DivingTreasureHuntersHouse_EventScript_163E96
+	callif EQUAL, Route124_DivingTreasureHuntersHouse_EventScript_163E96
 	checkitem ITEM_GREEN_SHARD, 1
 	compare RESULT, 1
-	callif 1, Route124_DivingTreasureHuntersHouse_EventScript_163E9C
+	callif EQUAL, Route124_DivingTreasureHuntersHouse_EventScript_163E9C
 	return
 
 Route124_DivingTreasureHuntersHouse_EventScript_163E8A:: @ 8163E8A

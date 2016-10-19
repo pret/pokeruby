@@ -9,9 +9,9 @@ LittlerootTown_MaysHouse_1F_EventScript_1B6956:: @ 81B6956
 	move 0x8004, LittlerootTown_BrendansHouse_1F_Movement_1A0839
 	waitmove 0
 	compare 0x8005, 0
-	callif 1, LittlerootTown_BrendansHouse_1F_EventScript_1B699F
+	callif EQUAL, LittlerootTown_BrendansHouse_1F_EventScript_1B699F
 	compare 0x8005, 1
-	callif 1, LittlerootTown_BrendansHouse_1F_EventScript_1B69AA
+	callif EQUAL, LittlerootTown_BrendansHouse_1F_EventScript_1B69AA
 	msgbox LittlerootTown_BrendansHouse_1F_Text_172453, 4
 	closebutton
 	setvar 0x4092, 4
@@ -70,9 +70,9 @@ LittlerootTown_MaysHouse_2F_EventScript_1B69EB:: @ 81B69EB
 	setflag 755
 	checkgender
 	compare RESULT, 0
-	callif 1, LittlerootTown_BrendansHouse_2F_EventScript_1B6A31
+	callif EQUAL, LittlerootTown_BrendansHouse_2F_EventScript_1B6A31
 	compare RESULT, 1
-	callif 1, LittlerootTown_BrendansHouse_2F_EventScript_1B6A61
+	callif EQUAL, LittlerootTown_BrendansHouse_2F_EventScript_1B6A61
 	playsfx 9
 	disappear 0x8008
 	releaseall
@@ -263,7 +263,7 @@ LittlerootTown_MaysHouse_1F_EventScript_1B6BE9:: @ 81B6BE9
 	compare 0x4001, 1
 	jumpif EQUAL, LittlerootTown_BrendansHouse_1F_EventScript_1B6C80
 	compare 0x4092, 7
-	jumpif 4, LittlerootTown_BrendansHouse_1F_EventScript_1B6C9C
+	jumpif GREATER_THAN_OR_EQUAL, LittlerootTown_BrendansHouse_1F_EventScript_1B6C9C
 	msgbox LittlerootTown_BrendansHouse_1F_Text_172429, 4
 	release
 	end
@@ -363,13 +363,13 @@ LittlerootTown_MaysHouse_1F_EventScript_1B6CDE:: @ 81B6CDE
 	lockall
 	checkgender
 	compare RESULT, 0
-	callif 1, LittlerootTown_BrendansHouse_1F_EventScript_1B6DAD
+	callif EQUAL, LittlerootTown_BrendansHouse_1F_EventScript_1B6DAD
 	compare RESULT, 1
-	callif 1, LittlerootTown_BrendansHouse_1F_EventScript_1B6DBD
+	callif EQUAL, LittlerootTown_BrendansHouse_1F_EventScript_1B6DBD
 	compare 0x8008, 0
-	callif 1, LittlerootTown_BrendansHouse_1F_EventScript_1B6E1D
+	callif EQUAL, LittlerootTown_BrendansHouse_1F_EventScript_1B6E1D
 	compare 0x8008, 1
-	callif 1, LittlerootTown_BrendansHouse_1F_EventScript_1B6E28
+	callif EQUAL, LittlerootTown_BrendansHouse_1F_EventScript_1B6E28
 	move 0x8009, LittlerootTown_BrendansHouse_1F_Movement_1A0839
 	waitmove 0
 	playsfx 21
@@ -379,23 +379,23 @@ LittlerootTown_MaysHouse_1F_EventScript_1B6CDE:: @ 81B6CDE
 	waitmove 0
 	pause 20
 	compare 0x8008, 0
-	callif 1, LittlerootTown_BrendansHouse_1F_EventScript_1B6DCD
+	callif EQUAL, LittlerootTown_BrendansHouse_1F_EventScript_1B6DCD
 	compare 0x8008, 1
-	callif 1, LittlerootTown_BrendansHouse_1F_EventScript_1B6DD8
+	callif EQUAL, LittlerootTown_BrendansHouse_1F_EventScript_1B6DD8
 	msgbox LittlerootTown_BrendansHouse_1F_Text_17298B, 4
 	giveitem ITEM_SS_TICKET
 	msgbox LittlerootTown_BrendansHouse_1F_Text_172A7D, 4
 	closebutton
 	compare 0x8008, 0
-	callif 1, LittlerootTown_BrendansHouse_1F_EventScript_1B6DE3
+	callif EQUAL, LittlerootTown_BrendansHouse_1F_EventScript_1B6DE3
 	compare 0x8008, 1
-	callif 1, LittlerootTown_BrendansHouse_1F_EventScript_1B6DEE
+	callif EQUAL, LittlerootTown_BrendansHouse_1F_EventScript_1B6DEE
 	msgbox LittlerootTown_BrendansHouse_1F_Text_172B5E, 4
 	closebutton
 	compare 0x8008, 0
-	callif 1, LittlerootTown_BrendansHouse_1F_EventScript_1B6DF9
+	callif EQUAL, LittlerootTown_BrendansHouse_1F_EventScript_1B6DF9
 	compare 0x8008, 1
-	callif 1, LittlerootTown_BrendansHouse_1F_EventScript_1B6E0B
+	callif EQUAL, LittlerootTown_BrendansHouse_1F_EventScript_1B6E0B
 	playsfx 8
 	disappear 0x8009
 	setflag 291

@@ -20,9 +20,9 @@ MossdeepCity_House2_EventScript_15A87B:: @ 815A87B
 	setflag 224
 	clearflag 933
 	compare FACING, 2
-	callif 1, MossdeepCity_House2_EventScript_15A8AE
+	callif EQUAL, MossdeepCity_House2_EventScript_15A8AE
 	compare FACING, 3
-	callif 1, MossdeepCity_House2_EventScript_15A8B9
+	callif EQUAL, MossdeepCity_House2_EventScript_15A8B9
 	disappear 3
 	release
 	end

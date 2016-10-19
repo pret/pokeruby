@@ -51,9 +51,9 @@ EverGrandeCity_PokemonLeague_EventScript_15BAD2:: @ 815BAD2
 	jumpif FLAG_IS_SET, EverGrandeCity_PokemonLeague_EventScript_15BB57
 	getplayerxy 0x4000, 0x4001
 	compare 0x4000, 11
-	callif 4, EverGrandeCity_PokemonLeague_EventScript_15BB34
+	callif GREATER_THAN_OR_EQUAL, EverGrandeCity_PokemonLeague_EventScript_15BB34
 	compare 0x4000, 8
-	callif 3, EverGrandeCity_PokemonLeague_EventScript_15BB3F
+	callif LESS_THAN_OR_EQUAL, EverGrandeCity_PokemonLeague_EventScript_15BB3F
 	message EverGrandeCity_PokemonLeague_Text_1916FD
 	waittext
 	pause 75

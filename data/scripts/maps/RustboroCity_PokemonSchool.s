@@ -80,9 +80,9 @@ RustboroCity_PokemonSchool_EventScript_157ACE:: @ 8157ACE
 	checkflag 275
 	jumpif FLAG_IS_SET, RustboroCity_PokemonSchool_EventScript_157B34
 	compare FACING, 4
-	callif 1, RustboroCity_PokemonSchool_EventScript_157B1E
+	callif EQUAL, RustboroCity_PokemonSchool_EventScript_157B1E
 	compare FACING, 3
-	callif 1, RustboroCity_PokemonSchool_EventScript_157B29
+	callif EQUAL, RustboroCity_PokemonSchool_EventScript_157B29
 	msgbox RustboroCity_PokemonSchool_Text_1846A2, 4
 	giveitem ITEM_QUICK_CLAW
 	compare RESULT, 0

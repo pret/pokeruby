@@ -5,13 +5,13 @@ Route110_TrickHousePuzzle2_MapScripts:: @ 8161D76
 
 Route110_TrickHousePuzzle2_MapScript1_161D81:: @ 8161D81
 	compare 0x4001, 1
-	callif 1, Route110_TrickHousePuzzle2_EventScript_161E2C
+	callif EQUAL, Route110_TrickHousePuzzle2_EventScript_161E2C
 	compare 0x4002, 1
-	callif 1, Route110_TrickHousePuzzle2_EventScript_161E3F
+	callif EQUAL, Route110_TrickHousePuzzle2_EventScript_161E3F
 	compare 0x4003, 1
-	callif 1, Route110_TrickHousePuzzle2_EventScript_161E52
+	callif EQUAL, Route110_TrickHousePuzzle2_EventScript_161E52
 	compare 0x4004, 1
-	callif 1, Route110_TrickHousePuzzle2_EventScript_161E65
+	callif EQUAL, Route110_TrickHousePuzzle2_EventScript_161E65
 	end
 
 Route110_TrickHousePuzzle2_MapScript1_161DAE:: @ 8161DAE

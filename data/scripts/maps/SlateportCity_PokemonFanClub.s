@@ -34,7 +34,7 @@ SlateportCity_PokemonFanClub_EventScript_1557A8:: @ 81557A8
 	checkflag 200
 	callif FLAG_IS_SET, SlateportCity_PokemonFanClub_EventScript_155893
 	compare 0x4002, 5
-	callif 1, SlateportCity_PokemonFanClub_EventScript_15588D
+	callif EQUAL, SlateportCity_PokemonFanClub_EventScript_15588D
 	compare 0x40b7, 2
 	jumpif EQUAL, SlateportCity_PokemonFanClub_EventScript_1557FE
 	msgbox SlateportCity_PokemonFanClub_Text_17DA14, 4
@@ -146,7 +146,7 @@ SlateportCity_PokemonFanClub_EventScript_155998:: @ 8155998
 SlateportCity_PokemonFanClub_EventScript_1559A2:: @ 81559A2
 	specialval RESULT, 265
 	compare RESULT, 1
-	callif 1, SlateportCity_PokemonFanClub_EventScript_1559B3
+	callif EQUAL, SlateportCity_PokemonFanClub_EventScript_1559B3
 	return
 
 SlateportCity_PokemonFanClub_EventScript_1559B3:: @ 81559B3
@@ -156,7 +156,7 @@ SlateportCity_PokemonFanClub_EventScript_1559B3:: @ 81559B3
 SlateportCity_PokemonFanClub_EventScript_1559B9:: @ 81559B9
 	specialval RESULT, 266
 	compare RESULT, 1
-	callif 1, SlateportCity_PokemonFanClub_EventScript_1559CA
+	callif EQUAL, SlateportCity_PokemonFanClub_EventScript_1559CA
 	return
 
 SlateportCity_PokemonFanClub_EventScript_1559CA:: @ 81559CA
@@ -166,7 +166,7 @@ SlateportCity_PokemonFanClub_EventScript_1559CA:: @ 81559CA
 SlateportCity_PokemonFanClub_EventScript_1559D0:: @ 81559D0
 	specialval RESULT, 267
 	compare RESULT, 1
-	callif 1, SlateportCity_PokemonFanClub_EventScript_1559E1
+	callif EQUAL, SlateportCity_PokemonFanClub_EventScript_1559E1
 	return
 
 SlateportCity_PokemonFanClub_EventScript_1559E1:: @ 81559E1
@@ -176,7 +176,7 @@ SlateportCity_PokemonFanClub_EventScript_1559E1:: @ 81559E1
 SlateportCity_PokemonFanClub_EventScript_1559E7:: @ 81559E7
 	specialval RESULT, 268
 	compare RESULT, 1
-	callif 1, SlateportCity_PokemonFanClub_EventScript_1559F8
+	callif EQUAL, SlateportCity_PokemonFanClub_EventScript_1559F8
 	return
 
 SlateportCity_PokemonFanClub_EventScript_1559F8:: @ 81559F8
@@ -186,7 +186,7 @@ SlateportCity_PokemonFanClub_EventScript_1559F8:: @ 81559F8
 SlateportCity_PokemonFanClub_EventScript_1559FE:: @ 81559FE
 	specialval RESULT, 269
 	compare RESULT, 1
-	callif 1, SlateportCity_PokemonFanClub_EventScript_155A0F
+	callif EQUAL, SlateportCity_PokemonFanClub_EventScript_155A0F
 	return
 
 SlateportCity_PokemonFanClub_EventScript_155A0F:: @ 8155A0F
@@ -201,7 +201,7 @@ SlateportCity_PokemonFanClub_EventScript_155A15:: @ 8155A15
 	msgbox SlateportCity_PokemonFanClub_Text_17DE6B, 4
 	specialval RESULT, 230
 	compare RESULT, 4
-	jumpif 4, SlateportCity_PokemonFanClub_EventScript_155A3A
+	jumpif GREATER_THAN_OR_EQUAL, SlateportCity_PokemonFanClub_EventScript_155A3A
 	release
 	end
 

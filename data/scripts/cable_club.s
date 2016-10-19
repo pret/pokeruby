@@ -282,7 +282,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A403C:: @ 81A403C
 OldaleTown_PokemonCenter_2F_EventScript_1A4042:: @ 81A4042
 	special 61
 	compare RESULT, 0
-	jumpif 5, OldaleTown_PokemonCenter_2F_EventScript_1A4056
+	jumpif NOT_EQUAL, OldaleTown_PokemonCenter_2F_EventScript_1A4056
 	setvar 0x8004, 2
 	return
 
@@ -407,7 +407,7 @@ OldaleTown_PokemonCenter_2F_EventScript_1A4166:: @ 81A4166
 OldaleTown_PokemonCenter_2F_EventScript_1A41BB:: @ 81A41BB
 	specialval RESULT, 131
 	compare RESULT, 2
-	jumpif 0, OldaleTown_PokemonCenter_2F_EventScript_1A41E1
+	jumpif LESS_THAN, OldaleTown_PokemonCenter_2F_EventScript_1A41E1
 	specialval RESULT, 339
 	compare RESULT, 1
 	jumpif EQUAL, OldaleTown_PokemonCenter_2F_EventScript_1A41EE
@@ -700,7 +700,7 @@ RecordCorner_EventScript_1A4418:: @ 81A4418
 	special 27
 	waitstate
 	compare 0x4001, 0
-	jumpif 5, RecordCorner_EventScript_1A446C
+	jumpif NOT_EQUAL, RecordCorner_EventScript_1A446C
 	end
 
 gUnknown_081A442D:: @ 81A442D
@@ -709,7 +709,7 @@ RecordCorner_EventScript_1A442D:: @ 81A442D
 	special 27
 	waitstate
 	compare 0x4001, 0
-	jumpif 5, RecordCorner_EventScript_1A446C
+	jumpif NOT_EQUAL, RecordCorner_EventScript_1A446C
 	end
 
 gUnknown_081A4442:: @ 81A4442
@@ -718,7 +718,7 @@ RecordCorner_EventScript_1A4442:: @ 81A4442
 	special 27
 	waitstate
 	compare 0x4001, 0
-	jumpif 5, RecordCorner_EventScript_1A446C
+	jumpif NOT_EQUAL, RecordCorner_EventScript_1A446C
 	end
 
 gUnknown_081A4457:: @ 81A4457
@@ -727,7 +727,7 @@ RecordCorner_EventScript_1A4457:: @ 81A4457
 	special 27
 	waitstate
 	compare 0x4001, 0
-	jumpif 5, RecordCorner_EventScript_1A446C
+	jumpif NOT_EQUAL, RecordCorner_EventScript_1A446C
 	end
 
 RecordCorner_EventScript_1A446C:: @ 81A446C
@@ -783,7 +783,7 @@ TradeCenter_EventScript_1A44AD:: @ 81A44AD
 
 RecordCorner_EventScript_1A44BC:: @ 81A44BC
 	compare 0x4000, 0
-	jumpif 5, RecordCorner_EventScript_1A44D6
+	jumpif NOT_EQUAL, RecordCorner_EventScript_1A44D6
 	special 295
 	message RecordCorner_Text_1A4DD7
 	waittext
