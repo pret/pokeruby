@@ -151,14 +151,14 @@ struct Sprite
     u8 animLoopCounter;
 
     // general purpose data fields
-    s16 data0;
-    s16 data1;
-    s16 data2;
-    s16 data3;
-    s16 data4;
-    s16 data5;
-    s16 data6;
-    s16 data7;
+    /*0x2E*/ s16 data0;
+    /*0x30*/ s16 data1;
+    /*0x32*/ s16 data2;
+    /*0x34*/ s16 data3;
+    /*0x36*/ s16 data4;
+    /*0x38*/ s16 data5;
+    /*0x3A*/ s16 data6;
+    /*0x3C*/ s16 data7;
 
     u16 inUse:1;
     u16 coordOffsetEnabled:1;
