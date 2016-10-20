@@ -11,9 +11,9 @@
 
 struct PokedexListItem {
     u16 a;
-    u8 seen:1;
-    u8 owned:1;
-    u8 c;
+    u16 seen:1;
+    u16 owned:1;
+    //u8 c;
 };
 
 struct PokedexView {
@@ -130,7 +130,7 @@ void sub_808CEF8(u8 taskId);
 void Task_PokedexResultsScreenExitPokedex(u8 taskId);
 void sub_808D640(void);
 void sub_808E978(u8);
-u8 sub_8090D90(u16, u8);
+bool8 sub_8090D90(u16, u8);
 void sub_808E090(u8, u8, u16);
 void sub_808DEB0(u16, u8, u8, u16);
 void sub_808DF88(u16, u8, u8, u16);
@@ -894,13 +894,16 @@ void sub_808D690(u8 a, u8 b)
     switch(b)
     {
         case 0:
+        {
             if(sp2)
             {
-
+                //u16 r10;
                 //_0808D714
                 //_0808D728
                 for(i = 0; i < sp0; i++)
                 {
+                   // r10 = i + 1;
+                    
                     sp4 = HoennToNationalOrder(i + 1);
                     gUnknown_0202FFB4->unk0[i].a = sp4;
                     gUnknown_0202FFB4->unk0[i].seen = sub_8090D90(sp4, 0);
@@ -914,11 +917,14 @@ void sub_808D690(u8 a, u8 b)
             //_0808D7BC
             else
             {
-                u32 r10 = 0;
+                //register u32 r10 asm("r10") = 0;
+                
+                s16 r5;
+                u32 r10;
                 
                 //_0808D7CC
                 //_0808D7D6
-                for(i = 0; i < sp0; i++)
+                for(r10 = r5 = i = 0; i < sp0; i++)
                 {
                     sp4 = i + 1;
                     if(sub_8090D90(sp4, 0))
@@ -926,20 +932,19 @@ void sub_808D690(u8 a, u8 b)
                     //_0808D7F2
                     if(r10)
                     {
-                        gUnknown_0202FFB4->unk0[i].a = sp4;
-                        gUnknown_0202FFB4->unk0[i].seen = sub_8090D90(sp4, 0);
-                        gUnknown_0202FFB4->unk0[i].owned = sub_8090D90(sp4, 1);
-                        if(gUnknown_0202FFB4->unk0[i].seen)
-                            gUnknown_0202FFB4->unk60C = i + 1;
+                        gUnknown_0202FFB4->unk0[r5].a = sp4;
+                        gUnknown_0202FFB4->unk0[r5].seen = sub_8090D90(sp4, 0);
+                        gUnknown_0202FFB4->unk0[r5].owned = sub_8090D90(sp4, 1);
+                        if(gUnknown_0202FFB4->unk0[r5].seen)
+                            gUnknown_0202FFB4->unk60C = r5 + 1;
+                        r5++;
                     }
                     //_0808D86E
                 }
             }
             break;
-        case 1:    
-        {
-            u16 i;    //Not sure why this one is unsigned
-            
+        }
+        case 1:
             for(i = 0; i < 0x19B; i++)
             {
                 sp4 = gPokedexOrder_Alphabetical[(s16)i];
@@ -954,7 +959,6 @@ void sub_808D690(u8 a, u8 b)
                 //_0808D914
             }
             break;
-        }
         case 2:
             for(i = 385; i >= 0; i--)
             {
@@ -996,8 +1000,9 @@ void sub_808D690(u8 a, u8 b)
                     gUnknown_0202FFB4->unk60C++;
                 }
             }
+            break;
         case 5:
-            for(i = 0; i < 0x19A; i++)
+            for(i = 0; i < 386; i++)
             {
                 sp4 = gPokedexOrder_Height[i];
                 
@@ -1014,9 +1019,9 @@ void sub_808D690(u8 a, u8 b)
     //_0808DB70
     for(i = gUnknown_0202FFB4->unk60C; i < 386; i++)
     {
-        u16 mask = 0xFFFF;
+        //u16 mask = 0xFFFF;
         
-        gUnknown_0202FFB4->unk0[i].a |= mask;
+        gUnknown_0202FFB4->unk0[i].a |= 0xFFFF;
         gUnknown_0202FFB4->unk0[i].seen = 0;
         gUnknown_0202FFB4->unk0[i].owned = 0;
     }
@@ -1700,6 +1705,7 @@ _0808DBE4: .4byte 0x0000ffff\n\
     .syntax divided\n");
 }
 #endif
+
 
 void sub_808DBE8(u8 a, u16 b, u16 c)
 {
