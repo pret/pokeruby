@@ -85,7 +85,7 @@ SECTIONS {
         asm/rom_80859BC.o(.text);
         src/option_menu.o(.text);
         src/pokedex.o(.text);
-        asm/rom5_part2.o(.text);
+        asm/pokedex.o(.text);
         asm/trainer_card.o(.text);
         asm/save_menu_util.o(.text);
         asm/rom_8094928.o(.text);
