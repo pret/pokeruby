@@ -138,6 +138,7 @@ u8 sub_808DFE4(u16, u8, u8);
 u16 sub_808E888(u16);
 u32 sub_808E8C8(u16, u16, u16);
 void sub_808EE28(struct Sprite *sprite);
+u16 sub_8091818(u8, u16, u16, u16);
 
 void sub_808C02C(void)
 {
@@ -1284,50 +1285,36 @@ void sub_808E0CC(u16 a, u16 b)
     gUnknown_0202FFB4->unk632 = 0;
 }
 
-/*
-//FixMe
 bool8 sub_808E208(u8 a, u8 b, u8 c)
 {
     u16 i;
-    
+    u8 foo;
+ 
     if(gUnknown_0202FFB4->unk62E)
     {
         gUnknown_0202FFB4->unk62E--;
         switch(a)
         {
             case 1:
-            {
-                u16 foo;
-                u8 bar;
-                
                 for(i = 0; i < 4; i++)
                 {
                     if(gUnknown_0202FFB4->unk61E[i] != 0xFFFF)
                         gSprites[gUnknown_0202FFB4->unk61E[i]].data5 += b;
                 }
-                
-                REG_BG2VOFS = 16 * (gUnknown_0202FFB4->unk62E - c) / c;
-                //REG_BG2VOFS = -16 * (gUnknown_0202FFB4->unk62E - c) / c + gUnknown_0202FFB4->unk632 * 16 + gUnknown_0202FFB4->unk62D;
-                REG_BG2VOFS = -foo + gUnknown_0202FFB4->unk632 * 16 + gUnknown_0202FFB4->unk62D;
+                foo = 16 * (c - gUnknown_0202FFB4->unk62E) / c;
+                REG_BG2VOFS = gUnknown_0202FFB4->unk62D + gUnknown_0202FFB4->unk632 * 16 - foo;
                 gUnknown_0202FFB4->unk62C -= gUnknown_0202FFB4->unk628;
-                return 0;
-            }
+                break;
             case 2:
-            {
-                u8 foo;
-                
                 for(i = 0; i < 4; i++)
                 {
                     if(gUnknown_0202FFB4->unk61E[i] != 0xFFFF)
                         gSprites[gUnknown_0202FFB4->unk61E[i]].data5 -= b;
                 }
-                foo = (gUnknown_0202FFB4->unk62E - c) * 16 / c;
-                REG_BG2VOFS = gUnknown_0202FFB4->unk62D + foo + gUnknown_0202FFB4->unk632 * 16;
+                foo = 16 * (c - gUnknown_0202FFB4->unk62E) / c;
+                REG_BG2VOFS = gUnknown_0202FFB4->unk62D + gUnknown_0202FFB4->unk632 * 16 + foo;
                 gUnknown_0202FFB4->unk62C += gUnknown_0202FFB4->unk628;
-                return 0;
-            }
-            default:
-                return 0;
+                break;
         }
         return 0;
     }
@@ -1337,5 +1324,69 @@ bool8 sub_808E208(u8 a, u8 b, u8 c)
         REG_BG2VOFS = gUnknown_0202FFB4->unk62D + gUnknown_0202FFB4->unk630 * 16;
         return 1;
     }
+}
+
+void sub_808E398(u8 a, u16 b)
+{
+    u16 unk;
+    u8 spriteId;
+    
+    gUnknown_0202FFB4->unk632 = gUnknown_0202FFB4->unk630;
+    switch(a)
+    {
+        case 1:
+        {
+            unk = sub_808E888(b - 1);
+            if(unk != 0xFFFF)
+            {
+                spriteId = sub_808E8C8(unk, 0x60, 0x50);
+                gSprites[spriteId].callback = sub_808EE28;
+                gSprites[spriteId].data5 = 0xFFC0;
+            }
+            if(gUnknown_0202FFB4->unk630 > 0)
+                gUnknown_0202FFB4->unk630--;
+            else
+                gUnknown_0202FFB4->unk630 = 0xF;
+            break;
+        }
+        case 2:
+        {
+            unk = sub_808E888(b + 1);
+            if(unk != 0xFFFF)
+            {
+                spriteId = sub_808E8C8(unk, 0x60, 0x50);
+                gSprites[spriteId].callback = sub_808EE28;
+                gSprites[spriteId].data5 = 0x40;
+            }
+            if(gUnknown_0202FFB4->unk630 <= 0xE)
+                gUnknown_0202FFB4->unk630++;
+            else
+                gUnknown_0202FFB4->unk630 = 0;
+            break;
+        }
+    }
+}
+
+/*
+u16 sub_808E48C(u16 a, u16 b)
+{
+    if((gMain.heldKeys & 0x40) || a == 0)
+    {
+        //_0808E4B6
+        if(gMain.heldKeys & 0x80)
+        {
+            
+        }
+        //_0808E4CE
+    }
+    //_0808E5E4
+    else
+    {
+        sub_8091818(1, a, 0, gUnknown_0202FFB4->unk60C - 1);
+        sub_808E398(1, a);
+        sub_808DBE8(1, a, b);
+        PlaySE(0x6C);
+    }
+    
 }
 */
