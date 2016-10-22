@@ -42,11 +42,26 @@ struct UnkInputStruct
     u8 input_field_3;
 };
 
+struct UnkStruct_8054FF8_Substruct
+{
+    u16 field_4;
+    u16 field_6;
+    u8 field_8;
+};
+
 struct UnkStruct_8054FF8
 {
     u8 a;
     u8 b;
-    u8 filler[14];
+    u8 c;
+    u8 d;
+    struct UnkStruct_8054FF8_Substruct sub;
+    u16 field_C;
+};
+
+struct UnkMapObjStruct
+{
+    u8 a, b, c, d;
 };
 
 extern struct WarpData gUnknown_020297F0;
@@ -56,6 +71,7 @@ extern struct WarpData gUnknown_02029808;
 extern struct UnkPlayerStruct gUnknown_02029810;
 extern u16 gUnknown_02029814;
 extern u8 gUnknown_02029816;
+extern struct UnkMapObjStruct gUnknown_02029818[];
 
 extern u8 gUnknown_0202E85C;
 extern u8 gUnknown_0202E85D;
@@ -75,6 +91,7 @@ extern u16 gUnknown_0300489C;
 
 extern u8 gUnknown_0819FC74[];
 extern u8 gUnknown_0819FC9F[];
+extern u8 gUnknown_081A4508[];
 
 extern struct MapData * const gMapAttributes[];
 extern struct MapHeader * const * const gMapGroups[];
@@ -98,6 +115,7 @@ extern void atk17_seteffectuser(void);
 extern void sub_80809B0(void);
 extern void sub_8080990(void);
 extern u8 sub_80BBB24(void);
+extern u16 MapGridGetMetatileBehaviorAt(int, int);
 
 void sub_8053050(void);
 void warp_in(void);
@@ -165,8 +183,14 @@ u16 sub_8055390(u32);
 u16 sub_80553E4(u32);
 u16 sub_8055408(u32);
 u16 sub_8055438(u32);
+bool32 sub_8055618(struct UnkStruct_8054FF8 *);
+bool32 sub_8055630(struct UnkStruct_8054FF8 *);
+u32 sub_8055648(struct UnkStruct_8054FF8 *);
+bool32 sub_8055660(struct UnkStruct_8054FF8 *);
 void sub_8055980(u8, s16, s16, u8);
+void sub_80555B0(int, int, struct UnkStruct_8054FF8 *);
 u8 sub_8055AE8(u8);
+u8 sub_8055B30(u8);
 void sub_8055BFC(u8, u8);
 void sub_8055E5C(u8);
 void sub_8056C50(u16, u16);
@@ -2063,7 +2087,134 @@ u16 sub_8055438(u32 a1)
     return retVal;
 }
 
-u16 sub_8055468(u16 a1)
+u16 sub_8055468(u32 a1)
 {
     return 17;
+}
+
+u16 sub_805546C(u32 a1)
+{
+    if (gUnknown_03000580[a1] == 0x82 && (gMain.newKeys & B_BUTTON))
+    {
+        sub_80543DC(sub_8055468);
+        return 29;
+    }
+    else
+    {
+        return 17;
+    }
+}
+
+u16 sub_80554A4(u32 a1)
+{
+    sub_80543DC(sub_805546C);
+    return 22;
+}
+
+u16 sub_80554B8(u32 a1)
+{
+    return 17;
+}
+
+u16 sub_80554BC(u32 a1)
+{
+    if (sub_8054F88(0x83) == TRUE)
+    {
+        ScriptContext1_SetupScript(gUnknown_081A4508);
+        sub_80543DC(sub_80554B8);
+    }
+    return 17;
+}
+
+u16 sub_80554E4(u32 a1)
+{
+    sub_80543DC(sub_80554BC);
+    return 23;
+}
+
+u32 sub_80554F8(void)
+{
+    if (sub_8054FC0(0x83) == TRUE)
+        return 2;
+    if (gUnknown_03000584 == sub_805546C && gUnknown_03000580[gUnknown_03004860] != 0x82)
+        return 0;
+    if (gUnknown_03000584 == sub_8055468 && gUnknown_03000580[gUnknown_03004860] == 0x81)
+        return 2;
+    return sub_8054F88(0x82);
+}
+
+bool32 unref_sub_8055568(void)
+{
+    return sub_8054FC0(0x83);
+}
+
+u16 sub_8055574(void)
+{
+    sub_80543DC(sub_80554A4);
+    return 0;
+}
+
+u16 sub_8055588(void)
+{
+    sub_80543DC(sub_80553E4);
+    return 0;
+}
+
+u16 sub_805559C(void)
+{
+    sub_80543DC(sub_80554E4);
+    return 0;
+}
+
+void sub_80555B0(int a1, int a2, struct UnkStruct_8054FF8 *a3)
+{
+    s16 x, y;
+    u8 val;
+
+    a3->a = a1;
+    a3->b = (a1 == a2) ? 1 : 0;
+    a3->c = gUnknown_02029818[a1].d;
+    val = a1;
+    a3->d = sub_8055B30(val);
+    sub_8055B08(val, &x, &y);
+    a3->sub.field_4 = x;
+    a3->sub.field_6 = y;
+    a3->sub.field_8 = sub_8055B50(val);
+    a3->field_C = MapGridGetMetatileBehaviorAt(x, y);
+}
+
+bool32 sub_8055618(struct UnkStruct_8054FF8 *a1)
+{
+    u8 v1 = a1->c;
+    if (v1 == 2 || v1 == 0)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool32 sub_8055630(struct UnkStruct_8054FF8 *a1)
+{
+    u8 v1 = a1->c;
+    if (v1 == 2 || v1 == 0)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+u32 sub_8055648(struct UnkStruct_8054FF8 *a1)
+{
+    if (a1->c != 2)
+        return 0;
+    return sub_8068E24(&a1->sub);
+}
+
+bool32 sub_8055660(struct UnkStruct_8054FF8 *a1)
+{
+    if (a1->c != 2 && a1->c != 0)
+        return FALSE;
+    if (!MetatileBehavior_IsSouthArrowWarp(a1->field_C))
+        return FALSE;
+    if (a1->d != 1)
+        return FALSE;
+    return TRUE;
 }
