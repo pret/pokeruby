@@ -1567,11 +1567,11 @@ bool8 ScrCmd_checkattack(struct ScriptContext *ctx)
     gScriptResult = 6;
     for (i = 0; i < 6; i++)
     {
-        register u8 *dummy asm("r2"); // UB: use of uninitialized variable
         u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL);
         if (!species)
             break;
-        if (!GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG, dummy) && pokemon_has_move(&gPlayerParty[i], moveId) == TRUE)
+        // UB: GetMonData() arguments don't match function definition
+        if (!GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG) && pokemon_has_move(&gPlayerParty[i], moveId) == TRUE)
         {
             gScriptResult = i;
             gUnknown_0202E8CC = species;
