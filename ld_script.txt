@@ -80,6 +80,7 @@ SECTIONS {
         asm/rom5.o(.text);
         asm/title_screen.o(.text);
         asm/rom_807C828.o(.text);
+        asm/fldeff_emotion.o(.text);
         asm/wild_encounter.o(.text);
         asm/field_effect.o(.text);
         asm/rom_80859BC.o(.text);
