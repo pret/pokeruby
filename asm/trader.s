@@ -14,7 +14,7 @@ sub_810993C: @ 810993C
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0x10
-	ldr r0, _081099C8
+	ldr r0, _081099C8 @ =gSaveBlock1 + 0x2D94
 	mov r9, r0
 	movs r2, 0
 _0810994E:
@@ -85,7 +85,7 @@ _081099C8: .4byte gSaveBlock1 + 0x2D94
 	thumb_func_start sub_81099CC
 sub_81099CC: @ 81099CC
 	push {r4-r6,lr}
-	ldr r5, _08109A14
+	ldr r5, _08109A14 @ =gSaveBlock1 + 0x2D94
 	movs r1, 0
 	movs r0, 0x2
 	strb r0, [r5]
@@ -93,7 +93,7 @@ sub_81099CC: @ 81099CC
 	adds r0, 0x31
 	strb r1, [r0]
 	movs r4, 0
-	ldr r6, _08109A18
+	ldr r6, _08109A18 @ =gUnknown_083F62D8
 _081099E0:
 	movs r0, 0xB
 	muls r0, r4
@@ -105,7 +105,7 @@ _081099E0:
 	bl StringCopy
 	adds r1, r5, 0x1
 	adds r1, r4
-	ldr r0, _08109A1C
+	ldr r0, _08109A1C @ =gTraderDecorations
 	adds r0, r4, r0
 	ldrb r0, [r0]
 	strb r0, [r1]
@@ -126,7 +126,7 @@ _08109A1C: .4byte gTraderDecorations
 
 	thumb_func_start sub_8109A20
 sub_8109A20: @ 8109A20
-	ldr r0, _08109A2C
+	ldr r0, _08109A2C @ =gSaveBlock1 + 0x2D94
 	adds r0, 0x31
 	movs r1, 0
 	strb r1, [r0]
@@ -141,7 +141,7 @@ sub_8109A30: @ 8109A30
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r0, _08109A44
+	ldr r0, _08109A44 @ =0x00004020
 	bl VarSet
 	pop {r0}
 	bx r0
@@ -161,7 +161,7 @@ sub_8109A48: @ 8109A48
 	mov r9, r0
 	movs r6, 0x1
 	movs r5, 0
-	ldr r0, _08109AB8
+	ldr r0, _08109AB8 @ =gSaveBlock1 + 0x2D94
 	movs r4, 0
 	adds r7, r0, 0x1
 	adds r1, r7, 0
@@ -204,7 +204,7 @@ _08109A98:
 	lsls r0, 18
 	adds r2, r0
 	lsrs r2, 24
-	ldr r0, _08109ABC
+	ldr r0, _08109ABC @ =gOtherText_FiveQuestionsAndSlash
 	movs r1, 0x1
 	bl MenuPrint
 	b _08109AD8
@@ -214,7 +214,7 @@ _08109ABC: .4byte gOtherText_FiveQuestionsAndSlash
 _08109AC0:
 	ldrb r0, [r1]
 	lsls r0, 5
-	ldr r1, _08109B28
+	ldr r1, _08109B28 @ =gDecorations + 0x1
 	adds r0, r1
 	lsls r2, r5, 25
 	movs r1, 0x80
@@ -233,7 +233,7 @@ _08109ADE:
 	lsrs r4, r0, 24
 	cmp r4, 0x3
 	bls _08109A98
-	ldr r0, _08109B2C
+	ldr r0, _08109B2C @ =gOtherText_CancelNoTerminator
 	lsls r2, r5, 25
 	movs r1, 0x80
 	lsls r1, 18
@@ -250,7 +250,7 @@ _08109ADE:
 	movs r2, 0x2
 	adds r3, r6, 0
 	bl InitMenu
-	ldr r1, _08109B30
+	ldr r1, _08109B30 @ =gTasks
 	mov r0, r8
 	add r0, r9
 	lsls r0, 3
@@ -278,8 +278,8 @@ sub_8109B34: @ 8109B34
 	lsrs r1, 24
 	cmp r1, 0x78
 	bls _08109B54
-	ldr r1, _08109B4C
-	ldr r2, _08109B50
+	ldr r1, _08109B4C @ =gUnknown_0202E8CC
+	ldr r2, _08109B50 @ =0x0000ffff
 	adds r0, r2, 0
 	strh r0, [r1]
 	b _08109B58
@@ -287,7 +287,7 @@ sub_8109B34: @ 8109B34
 _08109B4C: .4byte gUnknown_0202E8CC
 _08109B50: .4byte 0x0000ffff
 _08109B54:
-	ldr r0, _08109B78
+	ldr r0, _08109B78 @ =gUnknown_0202E8CC
 	strh r1, [r0]
 _08109B58:
 	bl sub_8072DEC
@@ -312,8 +312,8 @@ sub_8109B7C: @ 8109B7C
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r5, r4, 0
-	ldr r6, _08109BA4
-	ldr r0, _08109BA8
+	ldr r6, _08109BA4 @ =gSaveBlock1 + 0x2D94
+	ldr r0, _08109BA8 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x40
 	ands r0, r1
@@ -345,12 +345,12 @@ _08109BC2:
 	beq _08109C28
 	movs r0, 0x5
 	bl PlaySE
-	ldr r5, _08109BFC
+	ldr r5, _08109BFC @ =gUnknown_0202E8CE
 	bl GetMenuCursorPos
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5]
-	ldr r1, _08109C00
+	ldr r1, _08109C00 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -368,7 +368,7 @@ _08109BC2:
 _08109BFC: .4byte gUnknown_0202E8CE
 _08109C00: .4byte gTasks
 _08109C04:
-	ldr r0, _08109C24
+	ldr r0, _08109C24 @ =gStringVar1
 	movs r1, 0xB
 	muls r1, r2
 	adds r1, 0x5
@@ -401,8 +401,8 @@ _08109C3E:
 
 	thumb_func_start sub_8109C44
 sub_8109C44: @ 8109C44
-	ldr r0, _08109C50
-	ldr r1, _08109C54
+	ldr r0, _08109C50 @ =gSaveBlock1 + 0x2D94
+	ldr r1, _08109C54 @ =gScriptResult
 	adds r0, 0x31
 	ldrb r0, [r0]
 	strh r0, [r1]
@@ -416,7 +416,7 @@ _08109C54: .4byte gScriptResult
 sub_8109C58: @ 8109C58
 	push {r4,r5,lr}
 	movs r4, 0
-	ldr r5, _08109C70
+	ldr r5, _08109C70 @ =gScriptResult
 _08109C5E:
 	adds r0, r4, 0
 	bl sub_8134194
@@ -434,7 +434,7 @@ _08109C74:
 	lsrs r4, r0, 24
 	cmp r4, 0x7
 	bls _08109C5E
-	ldr r1, _08109C8C
+	ldr r1, _08109C8C @ =gScriptResult
 	movs r0, 0x1
 	strh r0, [r1]
 _08109C84:
@@ -448,15 +448,15 @@ _08109C8C: .4byte gScriptResult
 	thumb_func_start sub_8109C90
 sub_8109C90: @ 8109C90
 	push {r4-r6,lr}
-	ldr r6, _08109CDC
+	ldr r6, _08109CDC @ =gScriptResult
 	movs r0, 0
 	strh r0, [r6]
-	ldr r4, _08109CE0
-	ldr r5, _08109CE4
+	ldr r4, _08109CE0 @ =gDecorations
+	ldr r5, _08109CE4 @ =gUnknown_0202E8CC
 	ldrh r0, [r5]
 	lsls r0, 5
 	adds r2, r0, r4
-	ldr r0, _08109CE8
+	ldr r0, _08109CE8 @ =gUnknown_0202E8D0
 	ldrh r0, [r0]
 	lsls r0, 5
 	adds r0, r4
@@ -472,7 +472,7 @@ sub_8109C90: @ 8109C90
 	negs r1, r1
 	cmp r0, r1
 	bne _08109CD6
-	ldr r0, _08109CEC
+	ldr r0, _08109CEC @ =gStringVar2
 	ldrh r1, [r5]
 	lsls r1, 5
 	adds r1, r4
@@ -495,7 +495,7 @@ _08109CEC: .4byte gStringVar2
 	thumb_func_start sub_8109CF0
 sub_8109CF0: @ 8109CF0
 	push {lr}
-	ldr r0, _08109D00
+	ldr r0, _08109D00 @ =sub_80FE7A8
 	movs r1, 0
 	bl CreateTask
 	pop {r0}
@@ -519,7 +519,7 @@ sub_8109D04: @ 8109D04
 	bl SetBgTilemapBuffer
 	movs r0, 0x1
 	bl SetBgTilemapBuffer
-	ldr r0, _08109D6C
+	ldr r0, _08109D6C @ =gUnknown_020388F7
 	movs r1, 0x8
 	bl sub_80F9520
 	bl BuyMenuFreeMemory
@@ -528,22 +528,22 @@ sub_8109D04: @ 8109D04
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _08109D8C
-	ldr r5, _08109D70
-	ldr r0, _08109D74
+	ldr r5, _08109D70 @ =gUnknown_0202E8D0
+	ldr r0, _08109D74 @ =gUnknown_020388F5
 	ldrb r1, [r0]
-	ldr r0, _08109D78
+	ldr r0, _08109D78 @ =gUnknown_020388D0
 	ldr r0, [r0]
 	adds r0, r1
 	ldrb r0, [r0]
 	strh r0, [r5]
-	ldr r0, _08109D7C
-	ldr r1, _08109D80
+	ldr r0, _08109D7C @ =gStringVar3
+	ldr r1, _08109D80 @ =gUnknown_0202E8CC
 	ldrh r1, [r1]
 	lsls r1, 5
-	ldr r4, _08109D84
+	ldr r4, _08109D84 @ =gDecorations + 0x1
 	adds r1, r4
 	bl StringCopy
-	ldr r0, _08109D88
+	ldr r0, _08109D88 @ =gStringVar2
 	ldrh r1, [r5]
 	lsls r1, 5
 	adds r1, r4
@@ -559,8 +559,8 @@ _08109D80: .4byte gUnknown_0202E8CC
 _08109D84: .4byte gDecorations + 0x1
 _08109D88: .4byte gStringVar2
 _08109D8C:
-	ldr r1, _08109DA4
-	ldr r2, _08109DA8
+	ldr r1, _08109DA4 @ =gUnknown_0202E8D0
+	ldr r2, _08109DA8 @ =0x0000ffff
 	adds r0, r2, 0
 	strh r0, [r1]
 _08109D94:
@@ -587,7 +587,7 @@ sub_8109DAC: @ 8109DAC
 	movs r2, 0x1D
 	movs r3, 0x13
 	bl MenuZeroFillWindowRect
-	ldr r1, _08109DDC
+	ldr r1, _08109DDC @ =gUnknown_0202E8D0
 	movs r0, 0
 	strh r0, [r1]
 	adds r0, r4, 0
@@ -603,20 +603,20 @@ _08109DDC: .4byte gUnknown_0202E8D0
 	thumb_func_start sub_8109DE0
 sub_8109DE0: @ 8109DE0
 	push {r4-r6,lr}
-	ldr r4, _08109E20
-	ldr r6, _08109E24
+	ldr r4, _08109E20 @ =gSaveBlock1 + 0x2D94
+	ldr r6, _08109E24 @ =gUnknown_0202E8D0
 	ldrb r0, [r6]
 	bl sub_81340A8
-	ldr r0, _08109E28
+	ldr r0, _08109E28 @ =gUnknown_0202E8CC
 	ldrb r0, [r0]
 	bl IsThereStorageSpaceForDecoration
-	ldr r5, _08109E2C
+	ldr r5, _08109E2C @ =gUnknown_0202E8CE
 	ldrh r1, [r5]
 	movs r0, 0xB
 	muls r0, r1
 	adds r0, 0x5
 	adds r0, r4
-	ldr r1, _08109E30
+	ldr r1, _08109E30 @ =gSaveBlock2
 	bl StringCopy
 	adds r0, r4, 0x1
 	ldrh r5, [r5]
@@ -641,7 +641,7 @@ _08109E30: .4byte gSaveBlock2
 	thumb_func_start sub_8109E34
 sub_8109E34: @ 8109E34
 	push {lr}
-	ldr r0, _08109E4C
+	ldr r0, _08109E4C @ =sub_8109B7C
 	movs r1, 0
 	bl CreateTask
 	lsls r0, 24

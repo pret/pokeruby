@@ -11,7 +11,7 @@ sub_81288F4: @ 81288F4
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r4, _0812893C
+	ldr r4, _0812893C @ =0x020192e4
 	adds r0, r4, 0
 	movs r1, 0
 	movs r2, 0x44
@@ -34,7 +34,7 @@ _08128910:
 	adds r0, r2, 0
 	adds r0, 0x40
 	strb r1, [r0]
-	ldr r1, _08128940
+	ldr r1, _08128940 @ =gUnknown_02038570
 	ldrb r0, [r3]
 	lsls r0, 6
 	adds r1, 0x18
@@ -52,7 +52,7 @@ _08128940: .4byte gUnknown_02038570
 	thumb_func_start sub_8128944
 sub_8128944: @ 8128944
 	push {r4-r6,lr}
-	ldr r1, _081289A8
+	ldr r1, _081289A8 @ =0x020192e4
 	ldr r0, [r1, 0x14]
 	cmp r0, 0
 	beq _08128974
@@ -78,7 +78,7 @@ _08128962:
 	bne _08128952
 _08128974:
 	movs r6, 0x3
-	ldr r5, _081289A8
+	ldr r5, _081289A8 @ =0x020192e4
 _08128978:
 	bl Random
 	adds r4, r0, 0
@@ -112,14 +112,14 @@ _081289A8: .4byte 0x020192e4
 	thumb_func_start sub_81289AC
 sub_81289AC: @ 81289AC
 	push {r4-r6,lr}
-	ldr r1, _081289F4
+	ldr r1, _081289F4 @ =0x020192e4
 	ldrb r0, [r1]
 	adds r2, r1, 0
 	cmp r0, 0x2
 	beq _08128A76
 	adds r4, r1, 0
-	ldr r5, _081289F8
-	ldr r6, _081289FC
+	ldr r5, _081289F8 @ =gUnknown_02039238
+	ldr r6, _081289FC @ =gUnknown_0203858E
 _081289BE:
 	ldrb r0, [r4]
 	cmp r0, 0x1
@@ -128,7 +128,7 @@ _081289BE:
 	bgt _08128A6E
 	cmp r0, 0
 	bne _08128A6E
-	ldr r1, _08128A00
+	ldr r1, _08128A00 @ =gContestAIs
 	ldrb r0, [r4, 0x10]
 	lsls r0, 2
 	adds r0, r1
@@ -164,7 +164,7 @@ _08128A0E:
 	ldrh r1, [r1, 0x2]
 	cmp r1, 0
 	beq _08128A2C
-	ldr r1, _08128A28
+	ldr r1, _08128A28 @ =gUnknown_08401E60
 	ldr r0, [r5]
 	ldrb r0, [r0]
 	lsls r0, 2
@@ -184,7 +184,7 @@ _08128A2C:
 	orrs r0, r1
 	strb r0, [r4, 0x9]
 _08128A3C:
-	ldr r2, _08128A5C
+	ldr r2, _08128A5C @ =0x020192e4
 	ldrb r1, [r2, 0x9]
 	movs r0, 0x1
 	ands r0, r1
@@ -228,7 +228,7 @@ sub_8128A7C: @ 8128A7C
 	lsls r0, 24
 	lsrs r2, r0, 24
 	movs r1, 0
-	ldr r3, _08128AA4
+	ldr r3, _08128AA4 @ =0x020192d0
 	ldrb r0, [r3]
 	cmp r0, r2
 	beq _08128A9A
@@ -252,11 +252,11 @@ _08128AA4: .4byte 0x020192d0
 	thumb_func_start sub_8128AA8
 sub_8128AA8: @ 8128AA8
 	push {lr}
-	ldr r2, _08128AD0
+	ldr r2, _08128AD0 @ =0x020192e4
 	adds r1, r2, 0x5
 	ldrb r0, [r2, 0x4]
 	adds r1, r0
-	ldr r3, _08128AD4
+	ldr r3, _08128AD4 @ =gUnknown_02039238
 	ldr r0, [r3]
 	ldrb r0, [r0, 0x1]
 	lsls r0, 24
@@ -291,12 +291,12 @@ _08128ADE:
 
 	thumb_func_start contest_ai_get_turn
 contest_ai_get_turn: @ 8128AF0
-	ldr r1, _08128B04
+	ldr r1, _08128B04 @ =0x020192e4
 	adds r0, r1, 0
 	subs r0, 0xE0
 	ldrb r0, [r0, 0x1]
 	strh r0, [r1, 0x18]
-	ldr r1, _08128B08
+	ldr r1, _08128B08 @ =gUnknown_02039238
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -310,10 +310,10 @@ _08128B08: .4byte gUnknown_02039238
 sub_8128B0C: @ 8128B0C
 	push {lr}
 	bl contest_ai_get_turn
-	ldr r0, _08128B3C
+	ldr r0, _08128B3C @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _08128B40
+	ldr r3, _08128B40 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -345,10 +345,10 @@ _08128B48:
 sub_8128B4C: @ 8128B4C
 	push {lr}
 	bl contest_ai_get_turn
-	ldr r0, _08128B7C
+	ldr r0, _08128B7C @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _08128B80
+	ldr r3, _08128B80 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -380,10 +380,10 @@ _08128B88:
 sub_8128B8C: @ 8128B8C
 	push {lr}
 	bl contest_ai_get_turn
-	ldr r0, _08128BBC
+	ldr r0, _08128BBC @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _08128BC0
+	ldr r3, _08128BC0 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -415,10 +415,10 @@ _08128BC8:
 sub_8128BCC: @ 8128BCC
 	push {lr}
 	bl contest_ai_get_turn
-	ldr r0, _08128BFC
+	ldr r0, _08128BFC @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _08128C00
+	ldr r3, _08128C00 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -448,14 +448,14 @@ _08128C08:
 
 	thumb_func_start contest_ai_get_excitement
 contest_ai_get_excitement: @ 8128C0C
-	ldr r1, _08128C24
+	ldr r1, _08128C24 @ =0x020192e4
 	adds r0, r1, 0
 	subs r0, 0xE0
 	ldrb r0, [r0, 0x13]
 	lsls r0, 24
 	asrs r0, 24
 	strh r0, [r1, 0x18]
-	ldr r1, _08128C28
+	ldr r1, _08128C28 @ =gUnknown_02039238
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -469,10 +469,10 @@ _08128C28: .4byte gUnknown_02039238
 sub_8128C2C: @ 8128C2C
 	push {lr}
 	bl contest_ai_get_excitement
-	ldr r0, _08128C5C
+	ldr r0, _08128C5C @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _08128C60
+	ldr r3, _08128C60 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -504,10 +504,10 @@ _08128C68:
 sub_8128C6C: @ 8128C6C
 	push {lr}
 	bl contest_ai_get_excitement
-	ldr r0, _08128C9C
+	ldr r0, _08128C9C @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _08128CA0
+	ldr r3, _08128CA0 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -539,10 +539,10 @@ _08128CA8:
 sub_8128CAC: @ 8128CAC
 	push {lr}
 	bl contest_ai_get_excitement
-	ldr r0, _08128CDC
+	ldr r0, _08128CDC @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _08128CE0
+	ldr r3, _08128CE0 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -574,10 +574,10 @@ _08128CE8:
 sub_8128CEC: @ 8128CEC
 	push {lr}
 	bl contest_ai_get_excitement
-	ldr r0, _08128D1C
+	ldr r0, _08128D1C @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _08128D20
+	ldr r3, _08128D20 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -607,7 +607,7 @@ _08128D28:
 
 	thumb_func_start contest_ai_get_user_order
 contest_ai_get_user_order: @ 8128D2C
-	ldr r1, _08128D48
+	ldr r1, _08128D48 @ =0x020192e4
 	adds r2, r1, 0
 	adds r2, 0x41
 	adds r0, r1, 0
@@ -616,7 +616,7 @@ contest_ai_get_user_order: @ 8128D2C
 	adds r0, r2
 	ldrb r0, [r0]
 	strh r0, [r1, 0x18]
-	ldr r1, _08128D4C
+	ldr r1, _08128D4C @ =gUnknown_02039238
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -630,10 +630,10 @@ _08128D4C: .4byte gUnknown_02039238
 sub_8128D50: @ 8128D50
 	push {lr}
 	bl contest_ai_get_user_order
-	ldr r0, _08128D80
+	ldr r0, _08128D80 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _08128D84
+	ldr r3, _08128D84 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -665,10 +665,10 @@ _08128D8C:
 sub_8128D90: @ 8128D90
 	push {lr}
 	bl contest_ai_get_user_order
-	ldr r0, _08128DC0
+	ldr r0, _08128DC0 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _08128DC4
+	ldr r3, _08128DC4 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -700,10 +700,10 @@ _08128DCC:
 sub_8128DD0: @ 8128DD0
 	push {lr}
 	bl contest_ai_get_user_order
-	ldr r0, _08128E00
+	ldr r0, _08128E00 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _08128E04
+	ldr r3, _08128E04 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -735,10 +735,10 @@ _08128E0C:
 sub_8128E10: @ 8128E10
 	push {lr}
 	bl contest_ai_get_user_order
-	ldr r0, _08128E40
+	ldr r0, _08128E40 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _08128E44
+	ldr r3, _08128E44 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -769,7 +769,7 @@ _08128E4C:
 	thumb_func_start contest_ai_get_user_condition_maybe
 contest_ai_get_user_condition_maybe: @ 8128E50
 	push {r4,lr}
-	ldr r4, _08128E88
+	ldr r4, _08128E88 @ =0x020192e4
 	adds r0, r4, 0
 	adds r0, 0x41
 	ldrb r1, [r0]
@@ -787,7 +787,7 @@ contest_ai_get_user_condition_maybe: @ 8128E50
 	lsls r0, 24
 	asrs r0, 24
 	strh r0, [r4, 0x18]
-	ldr r1, _08128E8C
+	ldr r1, _08128E8C @ =gUnknown_02039238
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -803,10 +803,10 @@ _08128E8C: .4byte gUnknown_02039238
 sub_8128E90: @ 8128E90
 	push {lr}
 	bl contest_ai_get_user_condition_maybe
-	ldr r0, _08128EC0
+	ldr r0, _08128EC0 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _08128EC4
+	ldr r3, _08128EC4 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -838,10 +838,10 @@ _08128ECC:
 sub_8128ED0: @ 8128ED0
 	push {lr}
 	bl contest_ai_get_user_condition_maybe
-	ldr r0, _08128F00
+	ldr r0, _08128F00 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _08128F04
+	ldr r3, _08128F04 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -873,10 +873,10 @@ _08128F0C:
 sub_8128F10: @ 8128F10
 	push {lr}
 	bl contest_ai_get_user_condition_maybe
-	ldr r0, _08128F40
+	ldr r0, _08128F40 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _08128F44
+	ldr r3, _08128F44 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -908,10 +908,10 @@ _08128F4C:
 sub_8128F50: @ 8128F50
 	push {lr}
 	bl contest_ai_get_user_condition_maybe
-	ldr r0, _08128F80
+	ldr r0, _08128F80 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _08128F84
+	ldr r3, _08128F84 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -941,7 +941,7 @@ _08128F8C:
 
 	thumb_func_start sub_8128F90
 sub_8128F90: @ 8128F90
-	ldr r2, _08128FB4
+	ldr r2, _08128FB4 @ =0x020192e4
 	adds r0, r2, 0
 	adds r0, 0x41
 	ldrb r1, [r0]
@@ -953,7 +953,7 @@ sub_8128F90: @ 8128F90
 	adds r0, r1
 	ldrh r0, [r0, 0x4]
 	strh r0, [r2, 0x18]
-	ldr r1, _08128FB8
+	ldr r1, _08128FB8 @ =gUnknown_02039238
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -967,8 +967,8 @@ _08128FB8: .4byte gUnknown_02039238
 sub_8128FBC: @ 8128FBC
 	push {r4,r5,lr}
 	bl sub_8128F90
-	ldr r2, _08128FF4
-	ldr r4, _08128FF8
+	ldr r2, _08128FF4 @ =0x020192e4
+	ldr r4, _08128FF8 @ =gUnknown_02039238
 	ldr r3, [r4]
 	ldrb r1, [r3]
 	ldrb r0, [r3, 0x1]
@@ -1008,8 +1008,8 @@ _08129000:
 sub_8129008: @ 8129008
 	push {r4,r5,lr}
 	bl sub_8128F90
-	ldr r2, _08129040
-	ldr r4, _08129044
+	ldr r2, _08129040 @ =0x020192e4
+	ldr r4, _08129044 @ =gUnknown_02039238
 	ldr r3, [r4]
 	ldrb r1, [r3]
 	ldrb r0, [r3, 0x1]
@@ -1049,8 +1049,8 @@ _0812904C:
 sub_8129054: @ 8129054
 	push {r4,r5,lr}
 	bl sub_8128F90
-	ldr r2, _0812908C
-	ldr r4, _08129090
+	ldr r2, _0812908C @ =0x020192e4
+	ldr r4, _08129090 @ =gUnknown_02039238
 	ldr r3, [r4]
 	ldrb r1, [r3]
 	ldrb r0, [r3, 0x1]
@@ -1090,8 +1090,8 @@ _08129098:
 sub_81290A0: @ 81290A0
 	push {r4,r5,lr}
 	bl sub_8128F90
-	ldr r2, _081290D8
-	ldr r4, _081290DC
+	ldr r2, _081290D8 @ =0x020192e4
+	ldr r4, _081290DC @ =gUnknown_02039238
 	ldr r3, [r4]
 	ldrb r1, [r3]
 	ldrb r0, [r3, 0x1]
@@ -1129,8 +1129,8 @@ _081290E4:
 
 	thumb_func_start sub_81290EC
 sub_81290EC: @ 81290EC
-	ldr r2, _08129108
-	ldr r1, _0812910C
+	ldr r2, _08129108 @ =0x020192e4
+	ldr r1, _0812910C @ =gUnknown_02038670
 	adds r0, r2, 0
 	adds r0, 0x41
 	ldrb r0, [r0]
@@ -1138,7 +1138,7 @@ sub_81290EC: @ 81290EC
 	adds r0, r1
 	ldrh r0, [r0]
 	strh r0, [r2, 0x18]
-	ldr r1, _08129110
+	ldr r1, _08129110 @ =gUnknown_02039238
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -1153,8 +1153,8 @@ _08129110: .4byte gUnknown_02039238
 sub_8129114: @ 8129114
 	push {r4,r5,lr}
 	bl sub_81290EC
-	ldr r2, _0812914C
-	ldr r4, _08129150
+	ldr r2, _0812914C @ =0x020192e4
+	ldr r4, _08129150 @ =gUnknown_02039238
 	ldr r3, [r4]
 	ldrb r1, [r3]
 	ldrb r0, [r3, 0x1]
@@ -1194,8 +1194,8 @@ _08129158:
 sub_8129160: @ 8129160
 	push {r4,r5,lr}
 	bl sub_81290EC
-	ldr r2, _08129198
-	ldr r4, _0812919C
+	ldr r2, _08129198 @ =0x020192e4
+	ldr r4, _0812919C @ =gUnknown_02039238
 	ldr r3, [r4]
 	ldrb r1, [r3]
 	ldrb r0, [r3, 0x1]
@@ -1235,8 +1235,8 @@ _081291A4:
 sub_81291AC: @ 81291AC
 	push {r4,r5,lr}
 	bl sub_81290EC
-	ldr r2, _081291E4
-	ldr r4, _081291E8
+	ldr r2, _081291E4 @ =0x020192e4
+	ldr r4, _081291E8 @ =gUnknown_02039238
 	ldr r3, [r4]
 	ldrb r1, [r3]
 	ldrb r0, [r3, 0x1]
@@ -1276,8 +1276,8 @@ _081291F0:
 sub_81291F8: @ 81291F8
 	push {r4,r5,lr}
 	bl sub_81290EC
-	ldr r2, _08129230
-	ldr r4, _08129234
+	ldr r2, _08129230 @ =0x020192e4
+	ldr r4, _08129234 @ =gUnknown_02039238
 	ldr r3, [r4]
 	ldrb r1, [r3]
 	ldrb r0, [r3, 0x1]
@@ -1315,11 +1315,11 @@ _0812923C:
 
 	thumb_func_start contest_ai_get_contest_type
 contest_ai_get_contest_type: @ 8129244
-	ldr r1, _08129258
-	ldr r0, _0812925C
+	ldr r1, _08129258 @ =0x020192e4
+	ldr r0, _0812925C @ =gUnknown_0203869C
 	ldrh r0, [r0]
 	strh r0, [r1, 0x18]
-	ldr r1, _08129260
+	ldr r1, _08129260 @ =gUnknown_02039238
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -1334,10 +1334,10 @@ _08129260: .4byte gUnknown_02039238
 sub_8129264: @ 8129264
 	push {lr}
 	bl contest_ai_get_contest_type
-	ldr r0, _08129294
+	ldr r0, _08129294 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _08129298
+	ldr r3, _08129298 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -1369,10 +1369,10 @@ _081292A0:
 sub_81292A4: @ 81292A4
 	push {lr}
 	bl contest_ai_get_contest_type
-	ldr r0, _081292D4
+	ldr r0, _081292D4 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _081292D8
+	ldr r3, _081292D8 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -1403,8 +1403,8 @@ _081292E0:
 	thumb_func_start contest_ai_get_move_excitement
 contest_ai_get_move_excitement: @ 81292E4
 	push {r4,lr}
-	ldr r2, _08129318
-	ldr r4, _0812931C
+	ldr r2, _08129318 @ =gUnknown_02038570
+	ldr r4, _0812931C @ =0x020192e4
 	ldrb r1, [r4, 0x4]
 	lsls r1, 1
 	adds r0, r4, 0
@@ -1419,7 +1419,7 @@ contest_ai_get_move_excitement: @ 81292E4
 	lsls r0, 24
 	asrs r0, 24
 	strh r0, [r4, 0x18]
-	ldr r1, _08129320
+	ldr r1, _08129320 @ =gUnknown_02039238
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -1436,8 +1436,8 @@ _08129320: .4byte gUnknown_02039238
 sub_8129324: @ 8129324
 	push {r4,lr}
 	bl contest_ai_get_move_excitement
-	ldr r0, _08129354
-	ldr r3, _08129358
+	ldr r0, _08129354 @ =0x020192e4
+	ldr r3, _08129358 @ =gUnknown_02039238
 	ldr r2, [r3]
 	movs r4, 0x18
 	ldrsh r1, [r0, r4]
@@ -1473,8 +1473,8 @@ _08129360:
 sub_8129368: @ 8129368
 	push {r4,lr}
 	bl contest_ai_get_move_excitement
-	ldr r0, _08129398
-	ldr r3, _0812939C
+	ldr r0, _08129398 @ =0x020192e4
+	ldr r3, _0812939C @ =gUnknown_02039238
 	ldr r2, [r3]
 	movs r4, 0x18
 	ldrsh r1, [r0, r4]
@@ -1510,8 +1510,8 @@ _081293A4:
 sub_81293AC: @ 81293AC
 	push {r4,lr}
 	bl contest_ai_get_move_excitement
-	ldr r0, _081293DC
-	ldr r3, _081293E0
+	ldr r0, _081293DC @ =0x020192e4
+	ldr r3, _081293E0 @ =gUnknown_02039238
 	ldr r2, [r3]
 	movs r4, 0x18
 	ldrsh r1, [r0, r4]
@@ -1547,8 +1547,8 @@ _081293E8:
 sub_81293F0: @ 81293F0
 	push {r4,lr}
 	bl contest_ai_get_move_excitement
-	ldr r0, _08129420
-	ldr r3, _08129424
+	ldr r0, _08129420 @ =0x020192e4
+	ldr r3, _08129424 @ =gUnknown_02039238
 	ldr r2, [r3]
 	movs r4, 0x18
 	ldrsh r1, [r0, r4]
@@ -1582,8 +1582,8 @@ _0812942C:
 
 	thumb_func_start contest_ai_get_move_effect
 contest_ai_get_move_effect: @ 8129434
-	ldr r2, _08129460
-	ldr r3, _08129464
+	ldr r2, _08129460 @ =gUnknown_02038570
+	ldr r3, _08129464 @ =0x020192e4
 	ldrb r1, [r3, 0x4]
 	lsls r1, 1
 	adds r0, r3, 0
@@ -1594,12 +1594,12 @@ contest_ai_get_move_effect: @ 8129434
 	adds r2, 0x1E
 	adds r1, r2
 	ldrh r0, [r1]
-	ldr r1, _08129468
+	ldr r1, _08129468 @ =gContestMoves
 	lsls r0, 3
 	adds r0, r1
 	ldrb r0, [r0]
 	strh r0, [r3, 0x18]
-	ldr r1, _0812946C
+	ldr r1, _0812946C @ =gUnknown_02039238
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -1615,10 +1615,10 @@ _0812946C: .4byte gUnknown_02039238
 sub_8129470: @ 8129470
 	push {lr}
 	bl contest_ai_get_move_effect
-	ldr r0, _081294A0
+	ldr r0, _081294A0 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _081294A4
+	ldr r3, _081294A4 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -1650,10 +1650,10 @@ _081294AC:
 sub_81294B0: @ 81294B0
 	push {lr}
 	bl contest_ai_get_move_effect
-	ldr r0, _081294E0
+	ldr r0, _081294E0 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _081294E4
+	ldr r3, _081294E4 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -1683,8 +1683,8 @@ _081294EC:
 
 	thumb_func_start contest_ai_get_move_effect_type
 contest_ai_get_move_effect_type: @ 81294F0
-	ldr r2, _08129524
-	ldr r3, _08129528
+	ldr r2, _08129524 @ =gUnknown_02038570
+	ldr r3, _08129528 @ =0x020192e4
 	ldrb r1, [r3, 0x4]
 	lsls r1, 1
 	adds r0, r3, 0
@@ -1695,8 +1695,8 @@ contest_ai_get_move_effect_type: @ 81294F0
 	adds r2, 0x1E
 	adds r1, r2
 	ldrh r0, [r1]
-	ldr r2, _0812952C
-	ldr r1, _08129530
+	ldr r2, _0812952C @ =gContestEffects
+	ldr r1, _08129530 @ =gContestMoves
 	lsls r0, 3
 	adds r0, r1
 	ldrb r0, [r0]
@@ -1704,7 +1704,7 @@ contest_ai_get_move_effect_type: @ 81294F0
 	adds r0, r2
 	ldrb r0, [r0]
 	strh r0, [r3, 0x18]
-	ldr r1, _08129534
+	ldr r1, _08129534 @ =gUnknown_02039238
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -1721,10 +1721,10 @@ _08129534: .4byte gUnknown_02039238
 sub_8129538: @ 8129538
 	push {lr}
 	bl contest_ai_get_move_effect_type
-	ldr r0, _08129568
+	ldr r0, _08129568 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _0812956C
+	ldr r3, _0812956C @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -1756,10 +1756,10 @@ _08129574:
 sub_8129578: @ 8129578
 	push {lr}
 	bl contest_ai_get_move_effect_type
-	ldr r0, _081295A8
+	ldr r0, _081295A8 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _081295AC
+	ldr r3, _081295AC @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -1790,8 +1790,8 @@ _081295B4:
 	thumb_func_start contest_ai_check_move_has_highest_appeal
 contest_ai_check_move_has_highest_appeal: @ 81295B8
 	push {r4-r7,lr}
-	ldr r2, _08129610
-	ldr r3, _08129614
+	ldr r2, _08129610 @ =gUnknown_02038570
+	ldr r3, _08129614 @ =0x020192e4
 	ldrb r0, [r3, 0x4]
 	lsls r0, 1
 	adds r1, r3, 0
@@ -1802,8 +1802,8 @@ contest_ai_check_move_has_highest_appeal: @ 81295B8
 	adds r2, 0x1E
 	adds r0, r2
 	ldrh r0, [r0]
-	ldr r4, _08129618
-	ldr r5, _0812961C
+	ldr r4, _08129618 @ =gContestEffects
+	ldr r5, _0812961C @ =gContestMoves
 	lsls r0, 3
 	adds r0, r5
 	ldrb r0, [r0]
@@ -1811,7 +1811,7 @@ contest_ai_check_move_has_highest_appeal: @ 81295B8
 	adds r0, r4
 	ldrb r7, [r0, 0x1]
 	movs r6, 0
-	ldr r0, _08129620
+	ldr r0, _08129620 @ =gUnknown_02039238
 	mov r12, r0
 	adds r1, r2
 _081295EA:
@@ -1859,12 +1859,12 @@ _08129626:
 sub_8129638: @ 8129638
 	push {lr}
 	bl contest_ai_check_move_has_highest_appeal
-	ldr r0, _08129664
+	ldr r0, _08129664 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	beq _0812966C
-	ldr r3, _08129668
+	ldr r3, _08129668 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	ldrb r0, [r2, 0x1]
@@ -1882,7 +1882,7 @@ sub_8129638: @ 8129638
 _08129664: .4byte 0x020192e4
 _08129668: .4byte gUnknown_02039238
 _0812966C:
-	ldr r1, _08129678
+	ldr r1, _08129678 @ =gUnknown_02039238
 	ldr r0, [r1]
 	adds r0, 0x4
 	str r0, [r1]
@@ -1896,8 +1896,8 @@ _08129678: .4byte gUnknown_02039238
 	thumb_func_start sub_812967C
 sub_812967C: @ 812967C
 	push {r4-r7,lr}
-	ldr r2, _081296D4
-	ldr r3, _081296D8
+	ldr r2, _081296D4 @ =gUnknown_02038570
+	ldr r3, _081296D8 @ =0x020192e4
 	ldrb r0, [r3, 0x4]
 	lsls r0, 1
 	adds r1, r3, 0
@@ -1908,8 +1908,8 @@ sub_812967C: @ 812967C
 	adds r2, 0x1E
 	adds r0, r2
 	ldrh r0, [r0]
-	ldr r4, _081296DC
-	ldr r5, _081296E0
+	ldr r4, _081296DC @ =gContestEffects
+	ldr r5, _081296E0 @ =gContestMoves
 	lsls r0, 3
 	adds r0, r5
 	ldrb r0, [r0]
@@ -1917,7 +1917,7 @@ sub_812967C: @ 812967C
 	adds r0, r4
 	ldrb r7, [r0, 0x2]
 	movs r6, 0
-	ldr r0, _081296E4
+	ldr r0, _081296E4 @ =gUnknown_02039238
 	mov r12, r0
 	adds r1, r2
 _081296AE:
@@ -1965,12 +1965,12 @@ _081296EA:
 sub_81296FC: @ 81296FC
 	push {lr}
 	bl sub_812967C
-	ldr r0, _08129728
+	ldr r0, _08129728 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	beq _08129730
-	ldr r3, _0812972C
+	ldr r3, _0812972C @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2, 0x1]
 	ldrb r0, [r2, 0x2]
@@ -1988,7 +1988,7 @@ sub_81296FC: @ 81296FC
 _08129728: .4byte 0x020192e4
 _0812972C: .4byte gUnknown_02039238
 _08129730:
-	ldr r1, _0812973C
+	ldr r1, _0812973C @ =gUnknown_02039238
 	ldr r0, [r1]
 	adds r0, 0x5
 	str r0, [r1]
@@ -2002,8 +2002,8 @@ _0812973C: .4byte gUnknown_02039238
 	thumb_func_start sub_8129740
 sub_8129740: @ 8129740
 	push {r4,lr}
-	ldr r2, _08129784
-	ldr r4, _08129788
+	ldr r2, _08129784 @ =gUnknown_02038570
+	ldr r4, _08129788 @ =0x020192e4
 	ldrb r1, [r4, 0x4]
 	lsls r1, 1
 	adds r0, r4, 0
@@ -2014,8 +2014,8 @@ sub_8129740: @ 8129740
 	adds r2, 0x1E
 	adds r1, r2
 	ldrh r0, [r1]
-	ldr r2, _0812978C
-	ldr r1, _08129790
+	ldr r2, _0812978C @ =gContestEffects
+	ldr r1, _08129790 @ =gContestMoves
 	lsls r0, 3
 	adds r0, r1
 	ldrb r0, [r0]
@@ -2027,7 +2027,7 @@ sub_8129740: @ 8129740
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x18]
-	ldr r1, _08129794
+	ldr r1, _08129794 @ =gUnknown_02039238
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -2046,10 +2046,10 @@ _08129794: .4byte gUnknown_02039238
 sub_8129798: @ 8129798
 	push {lr}
 	bl sub_8129740
-	ldr r0, _081297C8
+	ldr r0, _081297C8 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _081297CC
+	ldr r3, _081297CC @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -2081,10 +2081,10 @@ _081297D4:
 sub_81297D8: @ 81297D8
 	push {lr}
 	bl sub_8129740
-	ldr r0, _08129808
+	ldr r0, _08129808 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _0812980C
+	ldr r3, _0812980C @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -2116,10 +2116,10 @@ _08129814:
 sub_8129818: @ 8129818
 	push {lr}
 	bl sub_8129740
-	ldr r0, _08129848
+	ldr r0, _08129848 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _0812984C
+	ldr r3, _0812984C @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -2151,10 +2151,10 @@ _08129854:
 sub_8129858: @ 8129858
 	push {lr}
 	bl sub_8129740
-	ldr r0, _08129888
+	ldr r0, _08129888 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _0812988C
+	ldr r3, _0812988C @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -2185,8 +2185,8 @@ _08129894:
 	thumb_func_start sub_8129898
 sub_8129898: @ 8129898
 	push {r4,lr}
-	ldr r2, _081298DC
-	ldr r4, _081298E0
+	ldr r2, _081298DC @ =gUnknown_02038570
+	ldr r4, _081298E0 @ =0x020192e4
 	ldrb r1, [r4, 0x4]
 	lsls r1, 1
 	adds r0, r4, 0
@@ -2197,8 +2197,8 @@ sub_8129898: @ 8129898
 	adds r2, 0x1E
 	adds r1, r2
 	ldrh r0, [r1]
-	ldr r2, _081298E4
-	ldr r1, _081298E8
+	ldr r2, _081298E4 @ =gContestEffects
+	ldr r1, _081298E8 @ =gContestMoves
 	lsls r0, 3
 	adds r0, r1
 	ldrb r0, [r0]
@@ -2210,7 +2210,7 @@ sub_8129898: @ 8129898
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x18]
-	ldr r1, _081298EC
+	ldr r1, _081298EC @ =gUnknown_02039238
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -2229,10 +2229,10 @@ _081298EC: .4byte gUnknown_02039238
 sub_81298F0: @ 81298F0
 	push {lr}
 	bl sub_8129898
-	ldr r0, _08129920
+	ldr r0, _08129920 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _08129924
+	ldr r3, _08129924 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -2264,10 +2264,10 @@ _0812992C:
 sub_8129930: @ 8129930
 	push {lr}
 	bl sub_8129898
-	ldr r0, _08129960
+	ldr r0, _08129960 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _08129964
+	ldr r3, _08129964 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -2299,10 +2299,10 @@ _0812996C:
 sub_8129970: @ 8129970
 	push {lr}
 	bl sub_8129898
-	ldr r0, _081299A0
+	ldr r0, _081299A0 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _081299A4
+	ldr r3, _081299A4 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -2334,10 +2334,10 @@ _081299AC:
 sub_81299B0: @ 81299B0
 	push {lr}
 	bl sub_8129898
-	ldr r0, _081299E0
+	ldr r0, _081299E0 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _081299E4
+	ldr r3, _081299E4 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -2368,8 +2368,8 @@ _081299EC:
 	thumb_func_start contest_ai_get_move_used_count
 contest_ai_get_move_used_count: @ 81299F0
 	push {r4,lr}
-	ldr r3, _08129A20
-	ldr r4, _08129A24
+	ldr r3, _08129A20 @ =gUnknown_02038570
+	ldr r4, _08129A24 @ =0x020192e4
 	ldrb r0, [r4, 0x4]
 	lsls r0, 1
 	adds r1, r4, 0
@@ -2401,7 +2401,7 @@ _08129A28:
 	adds r0, 0x1
 _08129A30:
 	strh r0, [r4, 0x18]
-	ldr r1, _08129A40
+	ldr r1, _08129A40 @ =gUnknown_02039238
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -2416,10 +2416,10 @@ _08129A40: .4byte gUnknown_02039238
 sub_8129A44: @ 8129A44
 	push {lr}
 	bl contest_ai_get_move_used_count
-	ldr r0, _08129A74
+	ldr r0, _08129A74 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _08129A78
+	ldr r3, _08129A78 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -2451,10 +2451,10 @@ _08129A80:
 sub_8129A84: @ 8129A84
 	push {lr}
 	bl contest_ai_get_move_used_count
-	ldr r0, _08129AB4
+	ldr r0, _08129AB4 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _08129AB8
+	ldr r3, _08129AB8 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -2486,10 +2486,10 @@ _08129AC0:
 sub_8129AC4: @ 8129AC4
 	push {lr}
 	bl contest_ai_get_move_used_count
-	ldr r0, _08129AF4
+	ldr r0, _08129AF4 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _08129AF8
+	ldr r3, _08129AF8 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -2521,10 +2521,10 @@ _08129B00:
 sub_8129B04: @ 8129B04
 	push {lr}
 	bl contest_ai_get_move_used_count
-	ldr r0, _08129B34
+	ldr r0, _08129B34 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _08129B38
+	ldr r3, _08129B38 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -2558,8 +2558,8 @@ contest_ai_check_combo_starter: @ 8129B44
 	mov r7, r8
 	push {r7}
 	movs r5, 0
-	ldr r3, _08129BAC
-	ldr r2, _08129BB0
+	ldr r3, _08129BAC @ =gUnknown_02038570
+	ldr r2, _08129BB0 @ =0x020192e4
 	ldrb r1, [r2, 0x4]
 	lsls r1, 1
 	adds r2, 0x41
@@ -2598,9 +2598,9 @@ _08129B8A:
 _08129B94:
 	movs r5, 0x1
 _08129B96:
-	ldr r0, _08129BB0
+	ldr r0, _08129BB0 @ =0x020192e4
 	strh r5, [r0, 0x18]
-	ldr r1, _08129BB4
+	ldr r1, _08129BB4 @ =gUnknown_02039238
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -2619,12 +2619,12 @@ _08129BB4: .4byte gUnknown_02039238
 sub_8129BB8: @ 8129BB8
 	push {lr}
 	bl contest_ai_check_combo_starter
-	ldr r0, _08129BE4
+	ldr r0, _08129BE4 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	beq _08129BEC
-	ldr r3, _08129BE8
+	ldr r3, _08129BE8 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	ldrb r0, [r2, 0x1]
@@ -2642,7 +2642,7 @@ sub_8129BB8: @ 8129BB8
 _08129BE4: .4byte 0x020192e4
 _08129BE8: .4byte gUnknown_02039238
 _08129BEC:
-	ldr r1, _08129BF8
+	ldr r1, _08129BF8 @ =gUnknown_02039238
 	ldr r0, [r1]
 	adds r0, 0x4
 	str r0, [r1]
@@ -2657,12 +2657,12 @@ _08129BF8: .4byte gUnknown_02039238
 sub_8129BFC: @ 8129BFC
 	push {lr}
 	bl contest_ai_check_combo_starter
-	ldr r0, _08129C28
+	ldr r0, _08129C28 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	bne _08129C30
-	ldr r3, _08129C2C
+	ldr r3, _08129C2C @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	ldrb r0, [r2, 0x1]
@@ -2680,7 +2680,7 @@ sub_8129BFC: @ 8129BFC
 _08129C28: .4byte 0x020192e4
 _08129C2C: .4byte gUnknown_02039238
 _08129C30:
-	ldr r1, _08129C3C
+	ldr r1, _08129C3C @ =gUnknown_02039238
 	ldr r0, [r1]
 	adds r0, 0x4
 	str r0, [r1]
@@ -2697,8 +2697,8 @@ contest_ai_check_combo_finisher: @ 8129C40
 	mov r7, r8
 	push {r7}
 	movs r5, 0
-	ldr r3, _08129CA8
-	ldr r2, _08129CAC
+	ldr r3, _08129CA8 @ =gUnknown_02038570
+	ldr r2, _08129CAC @ =0x020192e4
 	ldrb r1, [r2, 0x4]
 	lsls r1, 1
 	adds r2, 0x41
@@ -2736,9 +2736,9 @@ _08129C84:
 _08129C8E:
 	movs r5, 0x1
 _08129C90:
-	ldr r0, _08129CAC
+	ldr r0, _08129CAC @ =0x020192e4
 	strh r5, [r0, 0x18]
-	ldr r1, _08129CB0
+	ldr r1, _08129CB0 @ =gUnknown_02039238
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -2757,12 +2757,12 @@ _08129CB0: .4byte gUnknown_02039238
 sub_8129CB4: @ 8129CB4
 	push {lr}
 	bl contest_ai_check_combo_finisher
-	ldr r0, _08129CE0
+	ldr r0, _08129CE0 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	beq _08129CE8
-	ldr r3, _08129CE4
+	ldr r3, _08129CE4 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	ldrb r0, [r2, 0x1]
@@ -2780,7 +2780,7 @@ sub_8129CB4: @ 8129CB4
 _08129CE0: .4byte 0x020192e4
 _08129CE4: .4byte gUnknown_02039238
 _08129CE8:
-	ldr r1, _08129CF4
+	ldr r1, _08129CF4 @ =gUnknown_02039238
 	ldr r0, [r1]
 	adds r0, 0x4
 	str r0, [r1]
@@ -2795,12 +2795,12 @@ _08129CF4: .4byte gUnknown_02039238
 sub_8129CF8: @ 8129CF8
 	push {lr}
 	bl contest_ai_check_combo_finisher
-	ldr r0, _08129D24
+	ldr r0, _08129D24 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	bne _08129D2C
-	ldr r3, _08129D28
+	ldr r3, _08129D28 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	ldrb r0, [r2, 0x1]
@@ -2818,7 +2818,7 @@ sub_8129CF8: @ 8129CF8
 _08129D24: .4byte 0x020192e4
 _08129D28: .4byte gUnknown_02039238
 _08129D2C:
-	ldr r1, _08129D38
+	ldr r1, _08129D38 @ =gUnknown_02039238
 	ldr r0, [r1]
 	adds r0, 0x4
 	str r0, [r1]
@@ -2833,8 +2833,8 @@ _08129D38: .4byte gUnknown_02039238
 contest_ai_check_would_finish_combo: @ 8129D3C
 	push {r4,r5,lr}
 	movs r5, 0
-	ldr r3, _08129D8C
-	ldr r4, _08129D90
+	ldr r3, _08129D8C @ =gUnknown_02038570
+	ldr r4, _08129D90 @ =0x020192e4
 	ldrb r0, [r4, 0x4]
 	lsls r0, 1
 	adds r1, r4, 0
@@ -2864,7 +2864,7 @@ _08129D74:
 	movs r5, 0x1
 _08129D7A:
 	strh r5, [r4, 0x18]
-	ldr r1, _08129D94
+	ldr r1, _08129D94 @ =gUnknown_02039238
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -2881,12 +2881,12 @@ _08129D94: .4byte gUnknown_02039238
 sub_8129D98: @ 8129D98
 	push {lr}
 	bl contest_ai_check_would_finish_combo
-	ldr r0, _08129DC4
+	ldr r0, _08129DC4 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	beq _08129DCC
-	ldr r3, _08129DC8
+	ldr r3, _08129DC8 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	ldrb r0, [r2, 0x1]
@@ -2904,7 +2904,7 @@ sub_8129D98: @ 8129D98
 _08129DC4: .4byte 0x020192e4
 _08129DC8: .4byte gUnknown_02039238
 _08129DCC:
-	ldr r1, _08129DD8
+	ldr r1, _08129DD8 @ =gUnknown_02039238
 	ldr r0, [r1]
 	adds r0, 0x4
 	str r0, [r1]
@@ -2919,12 +2919,12 @@ _08129DD8: .4byte gUnknown_02039238
 sub_8129DDC: @ 8129DDC
 	push {lr}
 	bl contest_ai_check_would_finish_combo
-	ldr r0, _08129E08
+	ldr r0, _08129E08 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	bne _08129E10
-	ldr r3, _08129E0C
+	ldr r3, _08129E0C @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	ldrb r0, [r2, 0x1]
@@ -2942,7 +2942,7 @@ sub_8129DDC: @ 8129DDC
 _08129E08: .4byte 0x020192e4
 _08129E0C: .4byte gUnknown_02039238
 _08129E10:
-	ldr r1, _08129E1C
+	ldr r1, _08129E1C @ =gUnknown_02039238
 	ldr r0, [r1]
 	adds r0, 0x4
 	str r0, [r1]
@@ -2956,13 +2956,13 @@ _08129E1C: .4byte gUnknown_02039238
 	thumb_func_start contest_ai_get_condition
 contest_ai_get_condition: @ 8129E20
 	push {r4,r5,lr}
-	ldr r4, _08129E5C
+	ldr r4, _08129E5C @ =gUnknown_02039238
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x1]
 	bl sub_8128A7C
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r5, _08129E60
+	ldr r5, _08129E60 @ =0x020192e4
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
@@ -2991,10 +2991,10 @@ _08129E60: .4byte 0x020192e4
 sub_8129E64: @ 8129E64
 	push {lr}
 	bl contest_ai_get_condition
-	ldr r0, _08129E94
+	ldr r0, _08129E94 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _08129E98
+	ldr r3, _08129E98 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -3026,10 +3026,10 @@ _08129EA0:
 sub_8129EA4: @ 8129EA4
 	push {lr}
 	bl contest_ai_get_condition
-	ldr r0, _08129ED4
+	ldr r0, _08129ED4 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _08129ED8
+	ldr r3, _08129ED8 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -3061,10 +3061,10 @@ _08129EE0:
 sub_8129EE4: @ 8129EE4
 	push {lr}
 	bl contest_ai_get_condition
-	ldr r0, _08129F14
+	ldr r0, _08129F14 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _08129F18
+	ldr r3, _08129F18 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -3096,10 +3096,10 @@ _08129F20:
 sub_8129F24: @ 8129F24
 	push {lr}
 	bl contest_ai_get_condition
-	ldr r0, _08129F54
+	ldr r0, _08129F54 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _08129F58
+	ldr r3, _08129F58 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -3131,7 +3131,7 @@ _08129F60:
 contest_ai_get_used_combo_starter: @ 8129F64
 	push {r4-r6,lr}
 	movs r6, 0
-	ldr r5, _08129FAC
+	ldr r5, _08129FAC @ =gUnknown_02039238
 	ldr r0, [r5]
 	ldrb r0, [r0, 0x1]
 	bl sub_8128A7C
@@ -3142,11 +3142,11 @@ contest_ai_get_used_combo_starter: @ 8129F64
 	lsls r0, 24
 	cmp r0, 0
 	beq _08129F9C
-	ldr r2, _08129FB0
+	ldr r2, _08129FB0 @ =gContestMoves
 	lsls r0, r4, 3
 	subs r0, r4
 	lsls r0, 2
-	ldr r1, _08129FB4
+	ldr r1, _08129FB4 @ =0x02019260
 	adds r0, r1
 	ldrh r0, [r0, 0x8]
 	lsls r0, 3
@@ -3156,7 +3156,7 @@ contest_ai_get_used_combo_starter: @ 8129F64
 	orrs r0, r1
 	lsrs r6, r0, 31
 _08129F9C:
-	ldr r0, _08129FB8
+	ldr r0, _08129FB8 @ =0x020192e4
 	strh r6, [r0, 0x18]
 	ldr r0, [r5]
 	adds r0, 0x2
@@ -3175,10 +3175,10 @@ _08129FB8: .4byte 0x020192e4
 sub_8129FBC: @ 8129FBC
 	push {lr}
 	bl contest_ai_get_used_combo_starter
-	ldr r0, _08129FEC
+	ldr r0, _08129FEC @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _08129FF0
+	ldr r3, _08129FF0 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -3210,10 +3210,10 @@ _08129FF8:
 sub_8129FFC: @ 8129FFC
 	push {lr}
 	bl contest_ai_get_used_combo_starter
-	ldr r0, _0812A02C
+	ldr r0, _0812A02C @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _0812A030
+	ldr r3, _0812A030 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -3245,10 +3245,10 @@ _0812A038:
 sub_812A03C: @ 812A03C
 	push {lr}
 	bl contest_ai_get_used_combo_starter
-	ldr r0, _0812A06C
+	ldr r0, _0812A06C @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _0812A070
+	ldr r3, _0812A070 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -3280,10 +3280,10 @@ _0812A078:
 sub_812A07C: @ 812A07C
 	push {lr}
 	bl contest_ai_get_used_combo_starter
-	ldr r0, _0812A0AC
+	ldr r0, _0812A0AC @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _0812A0B0
+	ldr r3, _0812A0B0 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -3314,7 +3314,7 @@ _0812A0B8:
 	thumb_func_start contest_ai_check_can_participate
 contest_ai_check_can_participate: @ 812A0BC
 	push {lr}
-	ldr r0, _0812A0DC
+	ldr r0, _0812A0DC @ =gUnknown_02039238
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x1]
 	bl sub_8128A7C
@@ -3324,18 +3324,18 @@ contest_ai_check_can_participate: @ 812A0BC
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812A0E4
-	ldr r1, _0812A0E0
+	ldr r1, _0812A0E0 @ =0x020192e4
 	movs r0, 0
 	b _0812A0E8
 	.align 2, 0
 _0812A0DC: .4byte gUnknown_02039238
 _0812A0E0: .4byte 0x020192e4
 _0812A0E4:
-	ldr r1, _0812A0F8
+	ldr r1, _0812A0F8 @ =0x020192e4
 	movs r0, 0x1
 _0812A0E8:
 	strh r0, [r1, 0x18]
-	ldr r1, _0812A0FC
+	ldr r1, _0812A0FC @ =gUnknown_02039238
 	ldr r0, [r1]
 	adds r0, 0x2
 	str r0, [r1]
@@ -3350,12 +3350,12 @@ _0812A0FC: .4byte gUnknown_02039238
 sub_812A100: @ 812A100
 	push {lr}
 	bl contest_ai_check_can_participate
-	ldr r0, _0812A12C
+	ldr r0, _0812A12C @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	beq _0812A134
-	ldr r3, _0812A130
+	ldr r3, _0812A130 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	ldrb r0, [r2, 0x1]
@@ -3373,7 +3373,7 @@ sub_812A100: @ 812A100
 _0812A12C: .4byte 0x020192e4
 _0812A130: .4byte gUnknown_02039238
 _0812A134:
-	ldr r1, _0812A140
+	ldr r1, _0812A140 @ =gUnknown_02039238
 	ldr r0, [r1]
 	adds r0, 0x4
 	str r0, [r1]
@@ -3388,12 +3388,12 @@ _0812A140: .4byte gUnknown_02039238
 sub_812A144: @ 812A144
 	push {lr}
 	bl contest_ai_check_can_participate
-	ldr r0, _0812A170
+	ldr r0, _0812A170 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	bne _0812A178
-	ldr r3, _0812A174
+	ldr r3, _0812A174 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	ldrb r0, [r2, 0x1]
@@ -3411,7 +3411,7 @@ sub_812A144: @ 812A144
 _0812A170: .4byte 0x020192e4
 _0812A174: .4byte gUnknown_02039238
 _0812A178:
-	ldr r1, _0812A184
+	ldr r1, _0812A184 @ =gUnknown_02039238
 	ldr r0, [r1]
 	adds r0, 0x4
 	str r0, [r1]
@@ -3425,13 +3425,13 @@ _0812A184: .4byte gUnknown_02039238
 	thumb_func_start contest_ai_get_val_812A188
 contest_ai_get_val_812A188: @ 812A188
 	push {r4,lr}
-	ldr r4, _0812A1BC
+	ldr r4, _0812A1BC @ =gUnknown_02039238
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x1]
 	bl sub_8128A7C
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _0812A1C0
+	ldr r2, _0812A1C0 @ =0x020192e4
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
@@ -3457,12 +3457,12 @@ _0812A1C0: .4byte 0x020192e4
 sub_812A1C4: @ 812A1C4
 	push {lr}
 	bl contest_ai_get_val_812A188
-	ldr r0, _0812A1F0
+	ldr r0, _0812A1F0 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	beq _0812A1F8
-	ldr r3, _0812A1F4
+	ldr r3, _0812A1F4 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	ldrb r0, [r2, 0x1]
@@ -3480,7 +3480,7 @@ sub_812A1C4: @ 812A1C4
 _0812A1F0: .4byte 0x020192e4
 _0812A1F4: .4byte gUnknown_02039238
 _0812A1F8:
-	ldr r1, _0812A204
+	ldr r1, _0812A204 @ =gUnknown_02039238
 	ldr r0, [r1]
 	adds r0, 0x4
 	str r0, [r1]
@@ -3495,12 +3495,12 @@ _0812A204: .4byte gUnknown_02039238
 sub_812A208: @ 812A208
 	push {lr}
 	bl contest_ai_get_val_812A188
-	ldr r0, _0812A234
+	ldr r0, _0812A234 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	bne _0812A23C
-	ldr r3, _0812A238
+	ldr r3, _0812A238 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	ldrb r0, [r2, 0x1]
@@ -3518,7 +3518,7 @@ sub_812A208: @ 812A208
 _0812A234: .4byte 0x020192e4
 _0812A238: .4byte gUnknown_02039238
 _0812A23C:
-	ldr r1, _0812A248
+	ldr r1, _0812A248 @ =gUnknown_02039238
 	ldr r0, [r1]
 	adds r0, 0x4
 	str r0, [r1]
@@ -3532,13 +3532,13 @@ _0812A248: .4byte gUnknown_02039238
 	thumb_func_start sub_812A24C
 sub_812A24C: @ 812A24C
 	push {r4,r5,lr}
-	ldr r5, _0812A28C
+	ldr r5, _0812A28C @ =gUnknown_02039238
 	ldr r0, [r5]
 	ldrb r0, [r0, 0x1]
 	bl sub_8128A7C
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r3, _0812A290
+	ldr r3, _0812A290 @ =0x020192e4
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
@@ -3571,12 +3571,12 @@ _0812A290: .4byte 0x020192e4
 sub_812A294: @ 812A294
 	push {lr}
 	bl sub_812A24C
-	ldr r0, _0812A2C0
+	ldr r0, _0812A2C0 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	bge _0812A2C8
-	ldr r3, _0812A2C4
+	ldr r3, _0812A2C4 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	ldrb r0, [r2, 0x1]
@@ -3594,7 +3594,7 @@ sub_812A294: @ 812A294
 _0812A2C0: .4byte 0x020192e4
 _0812A2C4: .4byte gUnknown_02039238
 _0812A2C8:
-	ldr r1, _0812A2D4
+	ldr r1, _0812A2D4 @ =gUnknown_02039238
 	ldr r0, [r1]
 	adds r0, 0x4
 	str r0, [r1]
@@ -3609,12 +3609,12 @@ _0812A2D4: .4byte gUnknown_02039238
 sub_812A2D8: @ 812A2D8
 	push {lr}
 	bl sub_812A24C
-	ldr r0, _0812A304
+	ldr r0, _0812A304 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	ble _0812A30C
-	ldr r3, _0812A308
+	ldr r3, _0812A308 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	ldrb r0, [r2, 0x1]
@@ -3632,7 +3632,7 @@ sub_812A2D8: @ 812A2D8
 _0812A304: .4byte 0x020192e4
 _0812A308: .4byte gUnknown_02039238
 _0812A30C:
-	ldr r1, _0812A318
+	ldr r1, _0812A318 @ =gUnknown_02039238
 	ldr r0, [r1]
 	adds r0, 0x4
 	str r0, [r1]
@@ -3647,12 +3647,12 @@ _0812A318: .4byte gUnknown_02039238
 sub_812A31C: @ 812A31C
 	push {lr}
 	bl sub_812A24C
-	ldr r0, _0812A348
+	ldr r0, _0812A348 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	bne _0812A350
-	ldr r3, _0812A34C
+	ldr r3, _0812A34C @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	ldrb r0, [r2, 0x1]
@@ -3670,7 +3670,7 @@ sub_812A31C: @ 812A31C
 _0812A348: .4byte 0x020192e4
 _0812A34C: .4byte gUnknown_02039238
 _0812A350:
-	ldr r1, _0812A35C
+	ldr r1, _0812A35C @ =gUnknown_02039238
 	ldr r0, [r1]
 	adds r0, 0x4
 	str r0, [r1]
@@ -3685,12 +3685,12 @@ _0812A35C: .4byte gUnknown_02039238
 sub_812A360: @ 812A360
 	push {lr}
 	bl sub_812A24C
-	ldr r0, _0812A38C
+	ldr r0, _0812A38C @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	beq _0812A394
-	ldr r3, _0812A390
+	ldr r3, _0812A390 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	ldrb r0, [r2, 0x1]
@@ -3708,7 +3708,7 @@ sub_812A360: @ 812A360
 _0812A38C: .4byte 0x020192e4
 _0812A390: .4byte gUnknown_02039238
 _0812A394:
-	ldr r1, _0812A3A0
+	ldr r1, _0812A3A0 @ =gUnknown_02039238
 	ldr r0, [r1]
 	adds r0, 0x4
 	str r0, [r1]
@@ -3722,13 +3722,13 @@ _0812A3A0: .4byte gUnknown_02039238
 	thumb_func_start sub_812A3A4
 sub_812A3A4: @ 812A3A4
 	push {r4,lr}
-	ldr r4, _0812A3D8
+	ldr r4, _0812A3D8 @ =gUnknown_02039238
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x1]
 	bl sub_8128A7C
 	lsls r0, 24
-	ldr r3, _0812A3DC
-	ldr r2, _0812A3E0
+	ldr r3, _0812A3DC @ =0x020192e4
+	ldr r2, _0812A3E0 @ =gUnknown_02038670
 	lsrs r0, 23
 	adds r0, r2
 	adds r1, r3, 0
@@ -3756,12 +3756,12 @@ _0812A3E0: .4byte gUnknown_02038670
 sub_812A3E4: @ 812A3E4
 	push {lr}
 	bl sub_812A3A4
-	ldr r0, _0812A410
+	ldr r0, _0812A410 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	bge _0812A418
-	ldr r3, _0812A414
+	ldr r3, _0812A414 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	ldrb r0, [r2, 0x1]
@@ -3779,7 +3779,7 @@ sub_812A3E4: @ 812A3E4
 _0812A410: .4byte 0x020192e4
 _0812A414: .4byte gUnknown_02039238
 _0812A418:
-	ldr r1, _0812A424
+	ldr r1, _0812A424 @ =gUnknown_02039238
 	ldr r0, [r1]
 	adds r0, 0x4
 	str r0, [r1]
@@ -3794,12 +3794,12 @@ _0812A424: .4byte gUnknown_02039238
 sub_812A428: @ 812A428
 	push {lr}
 	bl sub_812A3A4
-	ldr r0, _0812A454
+	ldr r0, _0812A454 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	ble _0812A45C
-	ldr r3, _0812A458
+	ldr r3, _0812A458 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	ldrb r0, [r2, 0x1]
@@ -3817,7 +3817,7 @@ sub_812A428: @ 812A428
 _0812A454: .4byte 0x020192e4
 _0812A458: .4byte gUnknown_02039238
 _0812A45C:
-	ldr r1, _0812A468
+	ldr r1, _0812A468 @ =gUnknown_02039238
 	ldr r0, [r1]
 	adds r0, 0x4
 	str r0, [r1]
@@ -3832,12 +3832,12 @@ _0812A468: .4byte gUnknown_02039238
 sub_812A46C: @ 812A46C
 	push {lr}
 	bl sub_812A3A4
-	ldr r0, _0812A498
+	ldr r0, _0812A498 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	bne _0812A4A0
-	ldr r3, _0812A49C
+	ldr r3, _0812A49C @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	ldrb r0, [r2, 0x1]
@@ -3855,7 +3855,7 @@ sub_812A46C: @ 812A46C
 _0812A498: .4byte 0x020192e4
 _0812A49C: .4byte gUnknown_02039238
 _0812A4A0:
-	ldr r1, _0812A4AC
+	ldr r1, _0812A4AC @ =gUnknown_02039238
 	ldr r0, [r1]
 	adds r0, 0x4
 	str r0, [r1]
@@ -3870,12 +3870,12 @@ _0812A4AC: .4byte gUnknown_02039238
 sub_812A4B0: @ 812A4B0
 	push {lr}
 	bl sub_812A3A4
-	ldr r0, _0812A4DC
+	ldr r0, _0812A4DC @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	beq _0812A4E4
-	ldr r3, _0812A4E0
+	ldr r3, _0812A4E0 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	ldrb r0, [r2, 0x1]
@@ -3893,7 +3893,7 @@ sub_812A4B0: @ 812A4B0
 _0812A4DC: .4byte 0x020192e4
 _0812A4E0: .4byte gUnknown_02039238
 _0812A4E4:
-	ldr r1, _0812A4F0
+	ldr r1, _0812A4F0 @ =gUnknown_02039238
 	ldr r0, [r1]
 	adds r0, 0x4
 	str r0, [r1]
@@ -3907,14 +3907,14 @@ _0812A4F0: .4byte gUnknown_02039238
 	thumb_func_start sub_812A4F4
 sub_812A4F4: @ 812A4F4
 	push {r4,lr}
-	ldr r4, _0812A52C
+	ldr r4, _0812A52C @ =gUnknown_02039238
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x1]
 	bl sub_8128A7C
 	lsls r0, 24
 	ldr r3, [r4]
 	ldrb r1, [r3, 0x2]
-	ldr r2, _0812A530
+	ldr r2, _0812A530 @ =0x02019204
 	lsrs r0, 23
 	lsls r1, 3
 	adds r0, r1
@@ -3923,7 +3923,7 @@ sub_812A4F4: @ 812A4F4
 	adds r0, r1
 	ldrh r0, [r0]
 	adds r2, 0xE0
-	ldr r1, _0812A534
+	ldr r1, _0812A534 @ =gContestMoves
 	lsls r0, 3
 	adds r0, r1
 	ldrb r0, [r0]
@@ -3943,10 +3943,10 @@ _0812A534: .4byte gContestMoves
 sub_812A538: @ 812A538
 	push {lr}
 	bl sub_812A4F4
-	ldr r0, _0812A568
+	ldr r0, _0812A568 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _0812A56C
+	ldr r3, _0812A56C @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -3978,10 +3978,10 @@ _0812A574:
 sub_812A578: @ 812A578
 	push {lr}
 	bl sub_812A4F4
-	ldr r0, _0812A5A8
+	ldr r0, _0812A5A8 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _0812A5AC
+	ldr r3, _0812A5AC @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -4013,10 +4013,10 @@ _0812A5B4:
 sub_812A5B8: @ 812A5B8
 	push {lr}
 	bl sub_812A4F4
-	ldr r0, _0812A5E8
+	ldr r0, _0812A5E8 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _0812A5EC
+	ldr r3, _0812A5EC @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -4048,10 +4048,10 @@ _0812A5F4:
 sub_812A5F8: @ 812A5F8
 	push {lr}
 	bl sub_812A4F4
-	ldr r0, _0812A628
+	ldr r0, _0812A628 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _0812A62C
+	ldr r3, _0812A62C @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -4082,7 +4082,7 @@ _0812A634:
 	thumb_func_start sub_812A638
 sub_812A638: @ 812A638
 	push {r4,lr}
-	ldr r4, _0812A66C
+	ldr r4, _0812A66C @ =gUnknown_02039238
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x1]
 	bl sub_8128A7C
@@ -4090,7 +4090,7 @@ sub_812A638: @ 812A638
 	lsrs r0, 24
 	ldr r3, [r4]
 	ldrb r1, [r3, 0x2]
-	ldr r2, _0812A670
+	ldr r2, _0812A670 @ =0x02019204
 	lsls r1, 2
 	adds r0, r1
 	adds r1, r2, 0
@@ -4115,10 +4115,10 @@ _0812A670: .4byte 0x02019204
 sub_812A674: @ 812A674
 	push {lr}
 	bl sub_812A638
-	ldr r0, _0812A6A4
+	ldr r0, _0812A6A4 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _0812A6A8
+	ldr r3, _0812A6A8 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -4150,10 +4150,10 @@ _0812A6B0:
 sub_812A6B4: @ 812A6B4
 	push {lr}
 	bl sub_812A638
-	ldr r0, _0812A6E4
+	ldr r0, _0812A6E4 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _0812A6E8
+	ldr r3, _0812A6E8 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -4185,10 +4185,10 @@ _0812A6F0:
 sub_812A6F4: @ 812A6F4
 	push {lr}
 	bl sub_812A638
-	ldr r0, _0812A724
+	ldr r0, _0812A724 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _0812A728
+	ldr r3, _0812A728 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -4220,10 +4220,10 @@ _0812A730:
 sub_812A734: @ 812A734
 	push {lr}
 	bl sub_812A638
-	ldr r0, _0812A764
+	ldr r0, _0812A764 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _0812A768
+	ldr r3, _0812A768 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -4254,14 +4254,14 @@ _0812A770:
 	thumb_func_start sub_812A774
 sub_812A774: @ 812A774
 	push {r4,r5,lr}
-	ldr r5, _0812A7B4
+	ldr r5, _0812A7B4 @ =gUnknown_02039238
 	ldr r0, [r5]
 	ldrb r0, [r0, 0x1]
 	bl sub_8128A7C
 	lsls r0, 24
 	ldr r3, [r5]
 	ldrb r1, [r3, 0x2]
-	ldr r2, _0812A7B8
+	ldr r2, _0812A7B8 @ =0x02019204
 	lsrs r0, 23
 	lsls r1, 3
 	adds r0, r1
@@ -4270,8 +4270,8 @@ sub_812A774: @ 812A774
 	adds r0, r1
 	ldrh r0, [r0]
 	adds r2, 0xE0
-	ldr r4, _0812A7BC
-	ldr r1, _0812A7C0
+	ldr r4, _0812A7BC @ =gContestEffects
+	ldr r1, _0812A7C0 @ =gContestMoves
 	lsls r0, 3
 	adds r0, r1
 	ldrb r0, [r0]
@@ -4295,10 +4295,10 @@ _0812A7C0: .4byte gContestMoves
 sub_812A7C4: @ 812A7C4
 	push {lr}
 	bl sub_812A774
-	ldr r0, _0812A7F4
+	ldr r0, _0812A7F4 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _0812A7F8
+	ldr r3, _0812A7F8 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -4330,10 +4330,10 @@ _0812A800:
 sub_812A804: @ 812A804
 	push {lr}
 	bl sub_812A774
-	ldr r0, _0812A834
+	ldr r0, _0812A834 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, _0812A838
+	ldr r3, _0812A838 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -4364,8 +4364,8 @@ _0812A840:
 	thumb_func_start sub_812A844
 sub_812A844: @ 812A844
 	push {r4,lr}
-	ldr r3, _0812A864
-	ldr r4, _0812A868
+	ldr r3, _0812A864 @ =0x020192e4
+	ldr r4, _0812A868 @ =gUnknown_02039238
 	ldr r2, [r4]
 	ldrb r0, [r2, 0x1]
 	lsls r0, 1
@@ -4387,8 +4387,8 @@ _0812A868: .4byte gUnknown_02039238
 	thumb_func_start sub_812A86C
 sub_812A86C: @ 812A86C
 	push {r4,lr}
-	ldr r0, _0812A890
-	ldr r4, _0812A894
+	ldr r0, _0812A890 @ =0x020192e4
+	ldr r4, _0812A894 @ =gUnknown_02039238
 	ldr r3, [r4]
 	ldrb r2, [r3, 0x1]
 	lsls r2, 1
@@ -4412,8 +4412,8 @@ _0812A894: .4byte gUnknown_02039238
 	thumb_func_start sub_812A898
 sub_812A898: @ 812A898
 	push {r4,lr}
-	ldr r0, _0812A8C4
-	ldr r4, _0812A8C8
+	ldr r0, _0812A8C4 @ =0x020192e4
+	ldr r4, _0812A8C8 @ =gUnknown_02039238
 	ldr r3, [r4]
 	ldrb r2, [r3, 0x1]
 	lsls r2, 1
@@ -4440,8 +4440,8 @@ _0812A8C8: .4byte gUnknown_02039238
 	thumb_func_start sub_812A8CC
 sub_812A8CC: @ 812A8CC
 	push {r4,lr}
-	ldr r2, _0812A8F4
-	ldr r4, _0812A8F8
+	ldr r2, _0812A8F4 @ =0x020192e4
+	ldr r4, _0812A8F8 @ =gUnknown_02039238
 	ldr r3, [r4]
 	ldrb r1, [r3, 0x1]
 	lsls r1, 1
@@ -4467,8 +4467,8 @@ _0812A8F8: .4byte gUnknown_02039238
 	thumb_func_start sub_812A8FC
 sub_812A8FC: @ 812A8FC
 	push {r4,lr}
-	ldr r2, _0812A924
-	ldr r4, _0812A928
+	ldr r2, _0812A924 @ =0x020192e4
+	ldr r4, _0812A928 @ =gUnknown_02039238
 	ldr r3, [r4]
 	ldrb r1, [r3, 0x1]
 	lsls r1, 1
@@ -4494,8 +4494,8 @@ _0812A928: .4byte gUnknown_02039238
 	thumb_func_start sub_812A92C
 sub_812A92C: @ 812A92C
 	push {r4,lr}
-	ldr r1, _0812A964
-	ldr r4, _0812A968
+	ldr r1, _0812A964 @ =0x020192e4
+	ldr r4, _0812A968 @ =gUnknown_02039238
 	ldr r3, [r4]
 	ldrb r0, [r3, 0x1]
 	lsls r0, 1
@@ -4537,8 +4537,8 @@ _0812A972:
 	thumb_func_start sub_812A978
 sub_812A978: @ 812A978
 	push {r4,lr}
-	ldr r1, _0812A9B0
-	ldr r4, _0812A9B4
+	ldr r1, _0812A9B0 @ =0x020192e4
+	ldr r4, _0812A9B4 @ =gUnknown_02039238
 	ldr r3, [r4]
 	ldrb r0, [r3, 0x1]
 	lsls r0, 1
@@ -4580,8 +4580,8 @@ _0812A9BE:
 	thumb_func_start sub_812A9C4
 sub_812A9C4: @ 812A9C4
 	push {r4,lr}
-	ldr r1, _0812A9FC
-	ldr r4, _0812AA00
+	ldr r1, _0812A9FC @ =0x020192e4
+	ldr r4, _0812AA00 @ =gUnknown_02039238
 	ldr r3, [r4]
 	ldrb r0, [r3, 0x1]
 	lsls r0, 1
@@ -4623,8 +4623,8 @@ _0812AA0A:
 	thumb_func_start sub_812AA10
 sub_812AA10: @ 812AA10
 	push {r4,lr}
-	ldr r1, _0812AA48
-	ldr r4, _0812AA4C
+	ldr r1, _0812AA48 @ =0x020192e4
+	ldr r4, _0812AA4C @ =gUnknown_02039238
 	ldr r3, [r4]
 	ldrb r0, [r3, 0x1]
 	lsls r0, 1
@@ -4666,8 +4666,8 @@ _0812AA56:
 	thumb_func_start sub_812AA5C
 sub_812AA5C: @ 812AA5C
 	push {r4,lr}
-	ldr r2, _0812AA98
-	ldr r4, _0812AA9C
+	ldr r2, _0812AA98 @ =0x020192e4
+	ldr r4, _0812AA9C @ =gUnknown_02039238
 	ldr r3, [r4]
 	ldrb r1, [r3, 0x1]
 	lsls r1, 1
@@ -4709,8 +4709,8 @@ _0812AAA4:
 	thumb_func_start sub_812AAAC
 sub_812AAAC: @ 812AAAC
 	push {r4,lr}
-	ldr r2, _0812AAE8
-	ldr r4, _0812AAEC
+	ldr r2, _0812AAE8 @ =0x020192e4
+	ldr r4, _0812AAEC @ =gUnknown_02039238
 	ldr r3, [r4]
 	ldrb r1, [r3, 0x1]
 	lsls r1, 1
@@ -4752,8 +4752,8 @@ _0812AAF4:
 	thumb_func_start sub_812AAFC
 sub_812AAFC: @ 812AAFC
 	push {r4,lr}
-	ldr r2, _0812AB38
-	ldr r4, _0812AB3C
+	ldr r2, _0812AB38 @ =0x020192e4
+	ldr r4, _0812AB3C @ =gUnknown_02039238
 	ldr r3, [r4]
 	ldrb r1, [r3, 0x1]
 	lsls r1, 1
@@ -4795,8 +4795,8 @@ _0812AB44:
 	thumb_func_start sub_812AB4C
 sub_812AB4C: @ 812AB4C
 	push {r4,lr}
-	ldr r2, _0812AB88
-	ldr r4, _0812AB8C
+	ldr r2, _0812AB88 @ =0x020192e4
+	ldr r4, _0812AB8C @ =gUnknown_02039238
 	ldr r3, [r4]
 	ldrb r1, [r3, 0x1]
 	lsls r1, 1
@@ -4841,8 +4841,8 @@ sub_812AB9C: @ 812AB9C
 	bl Random
 	movs r2, 0xFF
 	ands r2, r0
-	ldr r1, _0812ABD4
-	ldr r4, _0812ABD8
+	ldr r1, _0812ABD4 @ =0x020192e4
+	ldr r4, _0812ABD8 @ =gUnknown_02039238
 	ldr r3, [r4]
 	ldrb r0, [r3, 0x1]
 	lsls r0, 1
@@ -4882,8 +4882,8 @@ sub_812ABE8: @ 812ABE8
 	bl Random
 	movs r2, 0xFF
 	ands r2, r0
-	ldr r1, _0812AC20
-	ldr r4, _0812AC24
+	ldr r1, _0812AC20 @ =0x020192e4
+	ldr r4, _0812AC24 @ =gUnknown_02039238
 	ldr r3, [r4]
 	ldrb r0, [r3, 0x1]
 	lsls r0, 1
@@ -4919,7 +4919,7 @@ _0812AC2C:
 
 	thumb_func_start sub_812AC34
 sub_812AC34: @ 812AC34
-	ldr r3, _0812AC50
+	ldr r3, _0812AC50 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2, 0x1]
 	ldrb r0, [r2, 0x2]
@@ -4940,7 +4940,7 @@ _0812AC50: .4byte gUnknown_02039238
 	thumb_func_start sub_812AC54
 sub_812AC54: @ 812AC54
 	push {r4,lr}
-	ldr r4, _0812AC80
+	ldr r4, _0812AC80 @ =gUnknown_02039238
 	ldr r0, [r4]
 	adds r0, 0x5
 	bl sub_812ACA4
@@ -4970,7 +4970,7 @@ sub_812AC84: @ 812AC84
 	lsls r0, 24
 	cmp r0, 0
 	bne _0812AC9A
-	ldr r2, _0812ACA0
+	ldr r2, _0812ACA0 @ =0x020192e4
 	ldrb r1, [r2, 0x9]
 	movs r0, 0x1
 	orrs r0, r1
@@ -4985,7 +4985,7 @@ _0812ACA0: .4byte 0x020192e4
 	thumb_func_start sub_812ACA4
 sub_812ACA4: @ 812ACA4
 	push {r4,lr}
-	ldr r3, _0812ACC4
+	ldr r3, _0812ACC4 @ =0x020192e4
 	adds r4, r3, 0
 	adds r4, 0x40
 	ldrb r1, [r4]
@@ -5006,7 +5006,7 @@ _0812ACC4: .4byte 0x020192e4
 	thumb_func_start sub_812ACC8
 sub_812ACC8: @ 812ACC8
 	push {lr}
-	ldr r1, _0812ACDC
+	ldr r1, _0812ACDC @ =0x020192e4
 	adds r3, r1, 0
 	adds r3, 0x40
 	ldrb r0, [r3]
@@ -5019,7 +5019,7 @@ _0812ACDC: .4byte 0x020192e4
 _0812ACE0:
 	subs r0, 0x1
 	strb r0, [r3]
-	ldr r2, _0812ACF8
+	ldr r2, _0812ACF8 @ =gUnknown_02039238
 	ldrb r0, [r3]
 	lsls r0, 2
 	adds r1, 0x20
@@ -5039,8 +5039,8 @@ contest_ai_check_for_exciting_move: @ 812ACFC
 	push {r4-r7,lr}
 	movs r5, 0
 	movs r4, 0
-	ldr r7, _0812AD28
-	ldr r6, _0812AD2C
+	ldr r7, _0812AD28 @ =0x02019325
+	ldr r6, _0812AD2C @ =gUnknown_0203858E
 _0812AD06:
 	lsls r0, r4, 1
 	ldrb r1, [r7]
@@ -5065,9 +5065,9 @@ _0812AD30:
 	cmp r4, 0x3
 	ble _0812AD06
 _0812AD36:
-	ldr r0, _0812AD48
+	ldr r0, _0812AD48 @ =0x020192e4
 	strh r5, [r0, 0x18]
-	ldr r1, _0812AD4C
+	ldr r1, _0812AD4C @ =gUnknown_02039238
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -5083,12 +5083,12 @@ _0812AD4C: .4byte gUnknown_02039238
 sub_812AD50: @ 812AD50
 	push {lr}
 	bl contest_ai_check_for_exciting_move
-	ldr r0, _0812AD7C
+	ldr r0, _0812AD7C @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	beq _0812AD84
-	ldr r3, _0812AD80
+	ldr r3, _0812AD80 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	ldrb r0, [r2, 0x1]
@@ -5106,7 +5106,7 @@ sub_812AD50: @ 812AD50
 _0812AD7C: .4byte 0x020192e4
 _0812AD80: .4byte gUnknown_02039238
 _0812AD84:
-	ldr r1, _0812AD90
+	ldr r1, _0812AD90 @ =gUnknown_02039238
 	ldr r0, [r1]
 	adds r0, 0x4
 	str r0, [r1]
@@ -5121,12 +5121,12 @@ _0812AD90: .4byte gUnknown_02039238
 sub_812AD94: @ 812AD94
 	push {lr}
 	bl contest_ai_check_for_exciting_move
-	ldr r0, _0812ADC0
+	ldr r0, _0812ADC0 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	bne _0812ADC8
-	ldr r3, _0812ADC4
+	ldr r3, _0812ADC4 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	ldrb r0, [r2, 0x1]
@@ -5144,7 +5144,7 @@ sub_812AD94: @ 812AD94
 _0812ADC0: .4byte 0x020192e4
 _0812ADC4: .4byte gUnknown_02039238
 _0812ADC8:
-	ldr r1, _0812ADD4
+	ldr r1, _0812ADD4 @ =gUnknown_02039238
 	ldr r0, [r1]
 	adds r0, 0x4
 	str r0, [r1]
@@ -5159,16 +5159,16 @@ _0812ADD4: .4byte gUnknown_02039238
 sub_812ADD8: @ 812ADD8
 	push {r4-r7,lr}
 	movs r6, 0
-	ldr r2, _0812AE08
+	ldr r2, _0812AE08 @ =gUnknown_02039238
 	ldr r0, [r2]
 	ldrb r4, [r0, 0x1]
 	ldrb r0, [r0, 0x2]
 	lsls r0, 8
 	orrs r4, r0
 	movs r3, 0
-	ldr r0, _0812AE0C
+	ldr r0, _0812AE0C @ =gUnknown_02038570
 	mov r12, r0
-	ldr r5, _0812AE10
+	ldr r5, _0812AE10 @ =0x020192e4
 	adds r0, r5, 0
 	adds r0, 0x41
 	ldrb r0, [r0]
@@ -5218,12 +5218,12 @@ _0812AE34:
 sub_812AE44: @ 812AE44
 	push {lr}
 	bl sub_812ADD8
-	ldr r0, _0812AE70
+	ldr r0, _0812AE70 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	beq _0812AE78
-	ldr r3, _0812AE74
+	ldr r3, _0812AE74 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	ldrb r0, [r2, 0x1]
@@ -5241,7 +5241,7 @@ sub_812AE44: @ 812AE44
 _0812AE70: .4byte 0x020192e4
 _0812AE74: .4byte gUnknown_02039238
 _0812AE78:
-	ldr r1, _0812AE84
+	ldr r1, _0812AE84 @ =gUnknown_02039238
 	ldr r0, [r1]
 	adds r0, 0x4
 	str r0, [r1]
@@ -5256,12 +5256,12 @@ _0812AE84: .4byte gUnknown_02039238
 sub_812AE88: @ 812AE88
 	push {lr}
 	bl sub_812ADD8
-	ldr r0, _0812AEB4
+	ldr r0, _0812AEB4 @ =0x020192e4
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	bne _0812AEBC
-	ldr r3, _0812AEB8
+	ldr r3, _0812AEB8 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	ldrb r0, [r2, 0x1]
@@ -5279,7 +5279,7 @@ sub_812AE88: @ 812AE88
 _0812AEB4: .4byte 0x020192e4
 _0812AEB8: .4byte gUnknown_02039238
 _0812AEBC:
-	ldr r1, _0812AEC8
+	ldr r1, _0812AEC8 @ =gUnknown_02039238
 	ldr r0, [r1]
 	adds r0, 0x4
 	str r0, [r1]

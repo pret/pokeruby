@@ -129,7 +129,7 @@ sub_8069408: @ 8069408
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r2, 0
-	ldr r3, _08069428
+	ldr r3, _08069428 @ =gUnknown_083762FC
 _08069412:
 	lsls r1, r2, 3
 	adds r0, r1, r3
@@ -160,14 +160,14 @@ task_per_step_callback_manager: @ 806943C
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _08069460
+	ldr r2, _08069460 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
 	adds r1, r2
 	movs r2, 0x8
 	ldrsh r1, [r1, r2]
-	ldr r2, _08069464
+	ldr r2, _08069464 @ =gUnknown_08376364
 	lsls r1, 2
 	adds r1, r2
 	ldr r1, [r1]
@@ -191,7 +191,7 @@ sub_8069468: @ 8069468
 	beq _08069498
 	b _080694AC
 _0806947A:
-	ldr r0, _08069494
+	ldr r0, _08069494 @ =gMain
 	ldr r0, [r0, 0x20]
 	movs r1, 0x80
 	lsls r1, 5
@@ -205,7 +205,7 @@ _0806947A:
 	.align 2, 0
 _08069494: .4byte gMain
 _08069498:
-	ldr r0, _080694B4
+	ldr r0, _080694B4 @ =gMain
 	ldr r0, [r0, 0x20]
 	movs r1, 0x80
 	lsls r1, 5
@@ -232,7 +232,7 @@ sub_80694B8: @ 80694B8
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _080694E8
+	ldr r0, _080694E8 @ =gUnknown_03004B28
 	adds r4, r1, r0
 	bl ScriptContext2_IsEnabled
 	lsls r0, 24
@@ -254,7 +254,7 @@ _080694E8: .4byte gUnknown_03004B28
 	thumb_func_start overworld_ensure_per_step_coros_running
 overworld_ensure_per_step_coros_running: @ 80694EC
 	push {r4,r5,lr}
-	ldr r5, _08069548
+	ldr r5, _08069548 @ =task_per_step_callback_manager
 	adds r0, r5, 0
 	bl FuncIsActiveTask
 	lsls r0, 24
@@ -266,14 +266,14 @@ overworld_ensure_per_step_coros_running: @ 80694EC
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _0806954C
+	ldr r2, _0806954C @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
 	adds r1, r2
 	strh r4, [r1, 0x8]
 _08069516:
-	ldr r4, _08069550
+	ldr r4, _08069550 @ =sub_806A1E8
 	adds r0, r4, 0
 	bl FuncIsActiveTask
 	lsls r0, 24
@@ -283,7 +283,7 @@ _08069516:
 	movs r1, 0x50
 	bl CreateTask
 _0806952C:
-	ldr r4, _08069554
+	ldr r4, _08069554 @ =sub_80694B8
 	adds r0, r4, 0
 	bl FuncIsActiveTask
 	lsls r0, 24
@@ -308,7 +308,7 @@ activate_per_step_callback: @ 8069558
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _08069590
+	ldr r0, _08069590 @ =task_per_step_callback_manager
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r1, r0, 24
@@ -317,7 +317,7 @@ activate_per_step_callback: @ 8069558
 	lsls r0, r1, 2
 	adds r0, r1
 	lsls r0, 3
-	ldr r1, _08069594
+	ldr r1, _08069594 @ =gUnknown_03004B28
 	adds r1, r0, r1
 	movs r2, 0
 	adds r0, r1, 0
@@ -346,11 +346,11 @@ _0806959A:
 	thumb_func_start wild_encounter_reset_coro_args
 wild_encounter_reset_coro_args: @ 80695A0
 	push {lr}
-	ldr r0, _080695D0
+	ldr r0, _080695D0 @ =task_per_step_callback_manager
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r1, r0, 24
-	ldr r0, _080695D4
+	ldr r0, _080695D4 @ =sub_80694B8
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r1, r0, 24
@@ -359,7 +359,7 @@ wild_encounter_reset_coro_args: @ 80695A0
 	lsls r0, r1, 2
 	adds r0, r1
 	lsls r0, 3
-	ldr r1, _080695D8
+	ldr r1, _080695D8 @ =gUnknown_03004B28
 	adds r0, r1
 	movs r1, 0
 	strh r1, [r0, 0x2]
@@ -500,7 +500,7 @@ sub_80696C0: @ 80696C0
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r3, r2, 0
-	ldr r0, _080696E0
+	ldr r0, _080696E0 @ =gUnknown_08376384
 	lsls r4, 16
 	asrs r4, 16
 	lsls r5, 16
@@ -521,7 +521,7 @@ sub_80696E4: @ 80696E4
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r3, r2, 0
-	ldr r0, _08069704
+	ldr r0, _08069704 @ =gUnknown_083763A4
 	lsls r4, 16
 	asrs r4, 16
 	lsls r5, 16
@@ -542,7 +542,7 @@ sub_8069708: @ 8069708
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r3, r2, 0
-	ldr r0, _08069728
+	ldr r0, _08069728 @ =gUnknown_083763C4
 	lsls r4, 16
 	asrs r4, 16
 	lsls r5, 16
@@ -730,7 +730,7 @@ sub_8069864: @ 8069864
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _08069898
+	ldr r0, _08069898 @ =gUnknown_03004B28
 	adds r4, r1, r0
 	mov r5, sp
 	adds r5, 0x2
@@ -929,7 +929,7 @@ sub_80699D8: @ 80699D8
 	adds r1, r5, 0
 	bl MapGridGetMetatileIdAt
 	adds r1, r0, 0
-	ldr r0, _08069A14
+	ldr r0, _08069A14 @ =0x0000024e
 	cmp r1, r0
 	beq _08069A18
 	adds r0, 0x8
@@ -939,7 +939,7 @@ sub_80699D8: @ 80699D8
 	.align 2, 0
 _08069A14: .4byte 0x0000024e
 _08069A18:
-	ldr r2, _08069A24
+	ldr r2, _08069A24 @ =0x0000024f
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl MapGridSetMetatileIdAt
@@ -947,7 +947,7 @@ _08069A18:
 	.align 2, 0
 _08069A24: .4byte 0x0000024f
 _08069A28:
-	ldr r2, _08069A38
+	ldr r2, _08069A38 @ =0x00000257
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl MapGridSetMetatileIdAt
@@ -981,7 +981,7 @@ sub_8069A3C: @ 8069A3C
 	adds r1, r5, 0
 	bl MapGridGetMetatileIdAt
 	adds r1, r0, 0
-	ldr r0, _08069A78
+	ldr r0, _08069A78 @ =0x0000024f
 	cmp r1, r0
 	beq _08069A7C
 	adds r0, 0x8
@@ -991,7 +991,7 @@ sub_8069A3C: @ 8069A3C
 	.align 2, 0
 _08069A78: .4byte 0x0000024f
 _08069A7C:
-	ldr r2, _08069A88
+	ldr r2, _08069A88 @ =0x0000024e
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl MapGridSetMetatileIdAt
@@ -999,7 +999,7 @@ _08069A7C:
 	.align 2, 0
 _08069A88: .4byte 0x0000024e
 _08069A8C:
-	ldr r2, _08069A9C
+	ldr r2, _08069A9C @ =0x00000256
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl MapGridSetMetatileIdAt
@@ -1024,7 +1024,7 @@ sub_8069AA0: @ 8069AA0
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _08069ADC
+	ldr r0, _08069ADC @ =gUnknown_03004B28
 	adds r6, r1, r0
 	mov r4, sp
 	adds r4, 0x2
@@ -1210,7 +1210,7 @@ _08069C14:
 	cmp r0, 0x7
 	bhi _08069C9A
 	lsls r0, 2
-	ldr r1, _08069C40
+	ldr r1, _08069C40 @ =_08069C44
 	adds r0, r1
 	ldr r0, [r0]
 	mov pc, r0
@@ -1276,19 +1276,19 @@ sub_8069CB8: @ 8069CB8
 	lsls r1, 16
 	lsrs r1, 16
 	lsls r0, 16
-	ldr r2, _08069CE8
+	ldr r2, _08069CE8 @ =0xfffd0000
 	adds r0, r2
 	lsrs r0, 16
 	cmp r0, 0xA
 	bhi _08069CF4
 	lsls r0, r1, 16
 	asrs r1, r0, 16
-	ldr r2, _08069CEC
+	ldr r2, _08069CEC @ =0xfffa0000
 	adds r0, r2
 	lsrs r0, 16
 	cmp r0, 0xD
 	bhi _08069CF4
-	ldr r0, _08069CF0
+	ldr r0, _08069CF0 @ =gUnknown_083763E4
 	lsls r1, 1
 	adds r1, r0
 	ldrh r0, [r1]
@@ -1319,7 +1319,7 @@ sub_8069CFC: @ 8069CFC
 	bl sub_8069CB8
 	cmp r0, 0
 	beq _08069D2A
-	ldr r1, _08069D30
+	ldr r1, _08069D30 @ =gUnknown_083763E4
 	lsls r0, r4, 1
 	adds r0, r1
 	ldrh r0, [r0]
@@ -1350,7 +1350,7 @@ sub_8069D34: @ 8069D34
 	bl sub_8069CB8
 	cmp r0, 0
 	beq _08069D66
-	ldr r1, _08069D6C
+	ldr r1, _08069D6C @ =gUnknown_083763E4
 	lsls r0, r4, 1
 	adds r0, r1
 	ldrh r0, [r0]
@@ -1382,7 +1382,7 @@ sub_8069D78: @ 8069D78
 	mov r7, r9
 	mov r6, r8
 	push {r6,r7}
-	ldr r0, _08069DCC
+	ldr r0, _08069DCC @ =gMapHeader
 	ldr r0, [r0]
 	ldr r1, [r0]
 	mov r9, r1
@@ -1406,7 +1406,7 @@ _08069D9C:
 	bne _08069DB4
 	adds r1, r4, 0x7
 	adds r0, r5, 0x7
-	ldr r2, _08069DD0
+	ldr r2, _08069DD0 @ =0x0000020e
 	bl MapGridSetMetatileIdAt
 _08069DB4:
 	adds r4, 0x1
@@ -1437,7 +1437,7 @@ sub_8069DD4: @ 8069DD4
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _08069DF8
+	ldr r0, _08069DF8 @ =gUnknown_03004B28
 	adds r5, r1, r0
 	movs r1, 0x2
 	ldrsh r0, [r5, r1]
@@ -1504,7 +1504,7 @@ _08069E4A:
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
-	ldr r0, _08069E8C
+	ldr r0, _08069E8C @ =0x00004022
 	bl GetVarPointer
 	adds r6, r0, 0
 	lsls r4, 24
@@ -1564,7 +1564,7 @@ _08069EB6:
 	ldrsh r0, [r0, r1]
 	movs r2, 0
 	ldrsh r1, [r4, r2]
-	ldr r2, _08069F0C
+	ldr r2, _08069F0C @ =0x0000020e
 	bl MapGridSetMetatileIdAt
 	mov r0, sp
 	movs r3, 0
@@ -1610,7 +1610,7 @@ _08069F20:
 	ldrsh r0, [r0, r1]
 	movs r2, 0
 	ldrsh r1, [r4, r2]
-	ldr r2, _08069F60
+	ldr r2, _08069F60 @ =0x00000206
 	bl MapGridSetMetatileIdAt
 	mov r0, sp
 	movs r3, 0
@@ -1639,7 +1639,7 @@ sub_8069F64: @ 8069F64
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _08069FE8
+	ldr r0, _08069FE8 @ =gUnknown_03004B28
 	adds r5, r1, r0
 	mov r4, sp
 	adds r4, 0x2
@@ -1682,7 +1682,7 @@ _08069F9E:
 	movs r2, 0
 	ldrsh r1, [r4, r2]
 	bl MapGridGetMetatileIdAt
-	ldr r1, _08069FEC
+	ldr r1, _08069FEC @ =0x0000020a
 	cmp r0, r1
 	bne _08069FF4
 	mov r0, sp
@@ -1690,7 +1690,7 @@ _08069F9E:
 	ldrsh r0, [r0, r3]
 	movs r2, 0
 	ldrsh r1, [r4, r2]
-	ldr r2, _08069FF0
+	ldr r2, _08069FF0 @ =0x00000212
 	movs r3, 0x4
 	bl ash
 	b _0806A006
@@ -1704,7 +1704,7 @@ _08069FF4:
 	ldrsh r0, [r0, r3]
 	movs r2, 0
 	ldrsh r1, [r4, r2]
-	ldr r2, _0806A034
+	ldr r2, _0806A034 @ =0x00000206
 	movs r3, 0x4
 	bl ash
 _0806A006:
@@ -1715,11 +1715,11 @@ _0806A006:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806A02A
-	ldr r0, _0806A038
+	ldr r0, _0806A038 @ =0x00004048
 	bl GetVarPointer
 	adds r2, r0, 0
 	ldrh r1, [r2]
-	ldr r0, _0806A03C
+	ldr r0, _0806A03C @ =0x0000270e
 	cmp r1, r0
 	bhi _0806A02A
 	adds r0, r1, 0x1
@@ -1745,8 +1745,8 @@ sub_806A040: @ 806A040
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl MapGridGetMetatileIdAt
-	ldr r1, _0806A074
-	ldr r2, _0806A078
+	ldr r1, _0806A074 @ =0x0000022f
+	ldr r2, _0806A078 @ =0x00000237
 	cmp r0, r1
 	bne _0806A05C
 	subs r2, 0x31
@@ -1774,7 +1774,7 @@ sub_806A07C: @ 806A07C
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _0806A164
+	ldr r0, _0806A164 @ =gUnknown_03004B28
 	adds r5, r1, r0
 	mov r4, sp
 	adds r4, 0x2
@@ -1829,7 +1829,7 @@ _0806A0EE:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806A106
-	ldr r0, _0806A168
+	ldr r0, _0806A168 @ =0x00004022
 	movs r1, 0
 	bl VarSet
 _0806A106:
@@ -1862,7 +1862,7 @@ _0806A122:
 	asrs r0, 16
 	cmp r0, 0x4
 	beq _0806A14A
-	ldr r0, _0806A168
+	ldr r0, _0806A168 @ =0x00004022
 	movs r1, 0
 	bl VarSet
 _0806A14A:
@@ -1917,7 +1917,7 @@ sub_806A18C: @ 806A18C
 	movs r2, 0xE8
 	b _0806A1BC
 _0806A1A8:
-	ldr r1, _0806A1E4
+	ldr r1, _0806A1E4 @ =gUnknown_08376418
 	movs r2, 0
 	ldrsh r0, [r3, r2]
 	cmp r0, 0
@@ -1961,14 +1961,14 @@ sub_806A1E8: @ 806A1E8
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _0806A230
+	ldr r0, _0806A230 @ =gUnknown_03004B28
 	adds r4, r1, r0
 	mov r5, sp
 	adds r5, 0x2
 	mov r0, sp
 	adds r1, r5, 0
 	bl PlayerGetDestCoords
-	ldr r0, _0806A234
+	ldr r0, _0806A234 @ =gSaveBlock1
 	movs r1, 0x4
 	ldrsb r1, [r0, r1]
 	lsls r1, 8
@@ -2057,7 +2057,7 @@ _0806A2A8:
 	cmp r6, 0xD
 	ble _0806A2A8
 _0806A2B8:
-	ldr r2, _0806A2D4
+	ldr r2, _0806A2D4 @ =gUnknown_0202E844
 	ldrb r1, [r2]
 	movs r0, 0x1
 	ands r0, r1
@@ -2121,17 +2121,17 @@ _0806A312:
 	thumb_func_start sub_806A328
 sub_806A328: @ 806A328
 	push {lr}
-	ldr r0, _0806A350
+	ldr r0, _0806A350 @ =0x00000835
 	bl FlagSet
 	bl RtcCalcLocalTime
-	ldr r2, _0806A354
+	ldr r2, _0806A354 @ =gSaveBlock2
 	adds r2, 0xA0
-	ldr r3, _0806A358
+	ldr r3, _0806A358 @ =gLocalTime
 	ldr r0, [r3]
 	ldr r1, [r3, 0x4]
 	str r0, [r2]
 	str r1, [r2, 0x4]
-	ldr r0, _0806A35C
+	ldr r0, _0806A35C @ =0x00004040
 	ldrh r1, [r3]
 	bl VarSet
 	pop {r0}
@@ -2146,13 +2146,13 @@ _0806A35C: .4byte 0x00004040
 	thumb_func_start DoTimeBasedEvents
 DoTimeBasedEvents: @ 806A360
 	push {r4,lr}
-	ldr r0, _0806A388
+	ldr r0, _0806A388 @ =0x00000835
 	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806A380
 	bl RtcCalcLocalTime
-	ldr r4, _0806A38C
+	ldr r4, _0806A38C @ =gLocalTime
 	adds r0, r4, 0
 	bl sub_806A390
 	adds r0, r4, 0
@@ -2170,7 +2170,7 @@ _0806A38C: .4byte gLocalTime
 sub_806A390: @ 806A390
 	push {r4-r6,lr}
 	adds r5, r0, 0
-	ldr r0, _0806A3F0
+	ldr r0, _0806A3F0 @ =0x00004040
 	bl GetVarPointer
 	adds r6, r0, 0
 	ldrh r0, [r6]
@@ -2217,7 +2217,7 @@ sub_806A3F4: @ 806A3F4
 	sub sp, 0x8
 	adds r5, r0, 0
 	mov r4, sp
-	ldr r6, _0806A448
+	ldr r6, _0806A448 @ =gSaveBlock2 + 0xA0
 	mov r0, sp
 	adds r1, r6, 0
 	adds r2, r5, 0
@@ -2261,7 +2261,7 @@ _0806A448: .4byte gSaveBlock2 + 0xA0
 sub_806A44C: @ 806A44C
 	push {lr}
 	bl sub_806A328
-	ldr r0, _0806A45C
+	ldr r0, _0806A45C @ =c2_exit_to_overworld_1_continue_scripts_restart_music
 	bl SetMainCallback2
 	pop {r0}
 	bx r0
@@ -2272,10 +2272,10 @@ _0806A45C: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
 	thumb_func_start sub_806A460
 sub_806A460: @ 806A460
 	push {lr}
-	ldr r0, _0806A474
+	ldr r0, _0806A474 @ =Cb2_StartWallClock
 	bl SetMainCallback2
-	ldr r1, _0806A478
-	ldr r0, _0806A47C
+	ldr r1, _0806A478 @ =gMain
+	ldr r0, _0806A47C @ =sub_806A44C
 	str r0, [r1, 0x8]
 	pop {r0}
 	bx r0
@@ -2289,7 +2289,7 @@ _0806A47C: .4byte sub_806A44C
 sub_806A480: @ 806A480
 	push {lr}
 	adds r3, r0, 0
-	ldr r2, _0806A4B0
+	ldr r2, _0806A4B0 @ =gTasks
 	movs r0, 0x2E
 	ldrsh r1, [r3, r0]
 	lsls r0, r1, 2
@@ -2307,7 +2307,7 @@ sub_806A480: @ 806A480
 	cmp r0, 0x5
 	bhi _0806A596
 	lsls r0, 2
-	ldr r1, _0806A4B4
+	ldr r1, _0806A4B4 @ =_0806A4B8
 	adds r0, r1
 	ldr r0, [r0]
 	mov pc, r0
@@ -2436,7 +2436,7 @@ _0806A596:
 sub_806A59C: @ 806A59C
 	push {lr}
 	adds r3, r0, 0
-	ldr r2, _0806A5CC
+	ldr r2, _0806A5CC @ =gTasks
 	movs r0, 0x2E
 	ldrsh r1, [r3, r0]
 	lsls r0, r1, 2
@@ -2454,7 +2454,7 @@ sub_806A59C: @ 806A59C
 	cmp r0, 0x5
 	bhi _0806A696
 	lsls r0, 2
-	ldr r1, _0806A5D0
+	ldr r1, _0806A5D0 @ =_0806A5D4
 	adds r0, r1
 	ldr r0, [r0]
 	mov pc, r0
@@ -2573,9 +2573,9 @@ sub_806A69C: @ 806A69C
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r0, _0806A70C
+	ldr r0, _0806A70C @ =gUnknown_083764BC
 	bl LoadSpritePalette
-	ldr r0, _0806A710
+	ldr r0, _0806A710 @ =gSpriteTemplate_83764E8
 	mov r8, r0
 	movs r1, 0x35
 	movs r2, 0x44
@@ -2583,18 +2583,18 @@ sub_806A69C: @ 806A69C
 	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r1, r0, 24
-	ldr r6, _0806A714
+	ldr r6, _0806A714 @ =gSprites
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
 	adds r4, r6, 0
 	adds r4, 0x1C
 	adds r2, r0, r4
-	ldr r1, _0806A718
+	ldr r1, _0806A718 @ =sub_806A480
 	str r1, [r2]
 	adds r0, r6
 	strh r5, [r0, 0x2E]
-	ldr r1, _0806A71C
+	ldr r1, _0806A71C @ =0x0000ffff
 	strh r1, [r0, 0x30]
 	mov r0, r8
 	movs r1, 0x35
@@ -2607,7 +2607,7 @@ sub_806A69C: @ 806A69C
 	adds r0, r1
 	lsls r0, 2
 	adds r4, r0, r4
-	ldr r1, _0806A720
+	ldr r1, _0806A720 @ =sub_806A59C
 	str r1, [r4]
 	adds r0, r6
 	strh r5, [r0, 0x2E]
@@ -2631,7 +2631,7 @@ _0806A720: .4byte sub_806A59C
 	thumb_func_start sub_806A724
 sub_806A724: @ 806A724
 	push {lr}
-	ldr r0, _0806A734
+	ldr r0, _0806A734 @ =gUnknown_083764BC
 	ldrh r0, [r0, 0x4]
 	bl FreeSpritePaletteByTag
 	pop {r0}
@@ -2683,8 +2683,8 @@ sub_806A74C: @ 806A74C
 	lsls r1, 24
 	lsrs r1, 24
 	mov r9, r1
-	ldr r7, _0806A83C
-	ldr r1, _0806A840
+	ldr r7, _0806A83C @ =gStringVar4
+	ldr r1, _0806A840 @ =0x00002710
 	bl __umodsi3
 	adds r5, r0, 0
 	lsls r5, 16
@@ -2710,7 +2710,7 @@ sub_806A74C: @ 806A74C
 	lsls r0, 24
 	lsrs r0, 24
 	mov r9, r0
-	ldr r4, _0806A844
+	ldr r4, _0806A844 @ =gStringVar1
 	adds r0, r4, 0
 	adds r1, r5, 0
 	movs r2, 0x18
@@ -2720,7 +2720,7 @@ sub_806A74C: @ 806A74C
 	adds r1, r4, 0
 	bl StringCopy
 	adds r7, r0, 0
-	ldr r1, _0806A848
+	ldr r1, _0806A848 @ =gOtherText_Day
 	bl StringCopy
 	adds r7, r0, 0
 	adds r0, r4, 0
@@ -2732,7 +2732,7 @@ sub_806A74C: @ 806A74C
 	adds r1, r4, 0
 	bl StringCopy
 	adds r7, r0, 0
-	ldr r4, _0806A84C
+	ldr r4, _0806A84C @ =gUnknown_08376500
 	adds r1, r4, 0
 	bl StringCopy
 	adds r7, r0, 0
@@ -2748,7 +2748,7 @@ sub_806A74C: @ 806A74C
 	movs r2, 0x2
 	movs r3, 0x2
 	bl ConvertIntToDecimalStringN
-	ldr r0, _0806A83C
+	ldr r0, _0806A83C @ =gStringVar4
 	mov r1, r10
 	ldr r2, [sp]
 	bl MenuPrint
@@ -2793,7 +2793,7 @@ sub_806A850: @ 806A850
 	movs r2, 0x19
 	movs r3, 0xB
 	bl MenuDrawTextWindow
-	ldr r0, _0806A8A8
+	ldr r0, _0806A8A8 @ =gOtherText_OK
 	movs r1, 0x14
 	movs r2, 0x9
 	bl MenuPrint
@@ -2881,7 +2881,7 @@ _0806A90C:
 sub_806A914: @ 806A914
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _0806A928
+	ldr r2, _0806A928 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -2901,12 +2901,12 @@ sub_806A92C: @ 806A92C
 	lsrs r4, 24
 	bl sub_806A738
 	bl sub_806A724
-	ldr r1, _0806A950
+	ldr r1, _0806A950 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, _0806A954
+	ldr r1, _0806A954 @ =sub_806A914
 	str r1, [r0]
 	pop {r4}
 	pop {r0}
@@ -2927,16 +2927,16 @@ sub_806A958: @ 806A958
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r7, r0, 3
-	ldr r0, _0806A99C
+	ldr r0, _0806A99C @ =gUnknown_03004B28
 	mov r8, r0
 	adds r5, r7, r0
 	ldrb r4, [r5, 0x4]
 	lsls r0, r4, 1
 	adds r0, r4
 	lsls r0, 2
-	ldr r1, _0806A9A0
+	ldr r1, _0806A9A0 @ =gUnknown_08376414
 	adds r2, r0, r1
-	ldr r1, _0806A9A4
+	ldr r1, _0806A9A4 @ =gMain
 	ldrh r3, [r1, 0x2E]
 	movs r0, 0x2
 	ands r0, r3
@@ -2946,7 +2946,7 @@ sub_806A958: @ 806A958
 	mov r0, r8
 	subs r0, 0x8
 	adds r0, r7, r0
-	ldr r1, _0806A9A8
+	ldr r1, _0806A9A8 @ =sub_806A92C
 	str r1, [r0]
 	movs r0, 0
 	strh r0, [r5, 0x2]
@@ -2990,7 +2990,7 @@ _0806A9D6:
 	ands r0, r1
 	cmp r0, 0
 	beq _0806AA58
-	ldr r1, _0806AA18
+	ldr r1, _0806AA18 @ =gLocalTime
 	ldrh r0, [r5, 0x6]
 	strh r0, [r1]
 	ldrh r0, [r5, 0x8]
@@ -3001,12 +3001,12 @@ _0806A9D6:
 	strb r0, [r1, 0x4]
 	movs r0, 0x5
 	bl PlaySE
-	ldr r1, _0806AA1C
+	ldr r1, _0806AA1C @ =gTasks
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, _0806AA20
+	ldr r1, _0806AA20 @ =sub_806A92C
 	str r1, [r0]
 	strh r4, [r5, 0x2]
 	movs r0, 0x6
@@ -3060,12 +3060,12 @@ sub_806AA64: @ 806AA64
 	lsls r6, r5, 2
 	adds r6, r5
 	lsls r6, 3
-	ldr r0, _0806AACC
+	ldr r0, _0806AACC @ =gUnknown_03004B28
 	mov r8, r0
 	adds r4, r6, r0
 	movs r0, 0
 	strh r0, [r4]
-	ldr r3, _0806AAD0
+	ldr r3, _0806AAD0 @ =gLocalTime
 	ldrh r0, [r3]
 	strh r0, [r4, 0x6]
 	movs r1, 0x2
@@ -3094,7 +3094,7 @@ sub_806AA64: @ 806AA64
 	negs r0, r0
 	add r8, r0
 	add r6, r8
-	ldr r0, _0806AAD4
+	ldr r0, _0806AAD4 @ =sub_806A958
 	str r0, [r6]
 	pop {r3}
 	mov r8, r3
@@ -3121,10 +3121,10 @@ sub_806AAD8: @ 806AAD8
 	lsls r2, 19
 	mov r0, sp
 	strh r4, [r0]
-	ldr r1, _0806AB94
+	ldr r1, _0806AB94 @ =0x040000d4
 	str r0, [r1]
 	str r2, [r1, 0x4]
-	ldr r0, _0806AB98
+	ldr r0, _0806AB98 @ =0x81000200
 	str r0, [r1, 0x8]
 	ldr r0, [r1, 0x8]
 	movs r2, 0xC0
@@ -3135,7 +3135,7 @@ sub_806AAD8: @ 806AAD8
 	movs r6, 0
 	movs r5, 0x80
 	lsls r5, 5
-	ldr r7, _0806AB9C
+	ldr r7, _0806AB9C @ =0x81000800
 	movs r0, 0x81
 	lsls r0, 24
 	mov r12, r0
@@ -3168,7 +3168,7 @@ _0806AB16:
 	bl ResetSpriteData
 	bl ResetTasks
 	bl ResetPaletteFade
-	ldr r4, _0806ABA0
+	ldr r4, _0806ABA0 @ =gWindowConfig_81E6CE4
 	adds r0, r4, 0
 	bl SetUpWindowConfig
 	adds r0, r4, 0
@@ -3179,11 +3179,11 @@ _0806AB16:
 	lsls r2, 5
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r0, _0806ABA4
+	ldr r0, _0806ABA4 @ =sub_806ABC8
 	bl SetVBlankCallback
-	ldr r0, _0806ABA8
+	ldr r0, _0806ABA8 @ =sub_806ABB0
 	bl SetMainCallback2
-	ldr r0, _0806ABAC
+	ldr r0, _0806ABAC @ =sub_806ACCC
 	movs r1, 0x50
 	bl CreateTask
 	add sp, 0x4
@@ -3244,7 +3244,7 @@ sub_806ABF4: @ 806ABF4
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, _0806AC14
+	ldr r1, _0806AC14 @ =gUnknown_03004B28
 	adds r4, r0, r1
 	movs r1, 0
 	ldrsh r0, [r4, r1]
@@ -3262,11 +3262,11 @@ _0806AC18:
 	movs r2, 0x14
 	movs r3, 0xA
 	bl MenuDrawTextWindow
-	ldr r0, _0806AC98
+	ldr r0, _0806AC98 @ =gSystemText_PresentTime
 	movs r1, 0x1
 	movs r2, 0x1
 	bl MenuPrint
-	ldr r0, _0806AC9C
+	ldr r0, _0806AC9C @ =gLocalTime
 	ldrh r2, [r0]
 	ldrb r3, [r0, 0x2]
 	ldrb r1, [r0, 0x3]
@@ -3276,11 +3276,11 @@ _0806AC18:
 	movs r0, 0x1
 	movs r1, 0x3
 	bl sub_806A74C
-	ldr r0, _0806ACA0
+	ldr r0, _0806ACA0 @ =gSystemText_PreviousTime
 	movs r1, 0x1
 	movs r2, 0x5
 	bl MenuPrint
-	ldr r1, _0806ACA4
+	ldr r1, _0806ACA4 @ =gSaveBlock2
 	adds r0, r1, 0
 	adds r0, 0xA0
 	ldrh r2, [r0]
@@ -3296,13 +3296,13 @@ _0806AC18:
 	movs r0, 0x1
 	movs r1, 0x7
 	bl sub_806A74C
-	ldr r0, _0806ACA8
+	ldr r0, _0806ACA8 @ =gSystemText_ResetRTCPrompt
 	bl sub_806ABDC
 	ldrh r0, [r4]
 	adds r0, 0x1
 	strh r0, [r4]
 _0806AC80:
-	ldr r0, _0806ACAC
+	ldr r0, _0806ACAC @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x2
 	ands r0, r1
@@ -3344,7 +3344,7 @@ sub_806ACCC: @ 806ACCC
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
-	ldr r1, _0806ACF4
+	ldr r1, _0806ACF4 @ =gUnknown_03004B28
 	adds r5, r0, r1
 	movs r1, 0
 	ldrsh r0, [r5, r1]
@@ -3353,7 +3353,7 @@ sub_806ACCC: @ 806ACCC
 	b _0806AEC4
 _0806ACE8:
 	lsls r0, 2
-	ldr r1, _0806ACF8
+	ldr r1, _0806ACF8 @ =_0806ACFC
 	adds r0, r1
 	ldr r0, [r0]
 	mov pc, r0
@@ -3372,7 +3372,7 @@ _0806ACFC:
 _0806AD18:
 	movs r0, 0x1
 	negs r0, r0
-	ldr r1, _0806AD30
+	ldr r1, _0806AD30 @ =0x0000ffff
 	str r1, [sp]
 	movs r1, 0x1
 	movs r2, 0x10
@@ -3384,7 +3384,7 @@ _0806AD18:
 	.align 2, 0
 _0806AD30: .4byte 0x0000ffff
 _0806AD34:
-	ldr r0, _0806AD5C
+	ldr r0, _0806AD5C @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -3392,14 +3392,14 @@ _0806AD34:
 	beq _0806AD42
 	b _0806AEC4
 _0806AD42:
-	ldr r0, _0806AD60
+	ldr r0, _0806AD60 @ =gSaveFileStatus
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _0806AD4E
 	cmp r0, 0x2
 	bne _0806AD68
 _0806AD4E:
-	ldr r0, _0806AD64
+	ldr r0, _0806AD64 @ =gSystemText_NoSaveFileNoTime
 	bl sub_806ABDC
 	movs r0, 0x5
 	strh r0, [r5]
@@ -3410,7 +3410,7 @@ _0806AD60: .4byte gSaveFileStatus
 _0806AD64: .4byte gSystemText_NoSaveFileNoTime
 _0806AD68:
 	bl RtcCalcLocalTime
-	ldr r0, _0806AD7C
+	ldr r0, _0806AD7C @ =sub_806ABF4
 	movs r1, 0x50
 	bl CreateTask
 	lsls r0, 24
@@ -3420,7 +3420,7 @@ _0806AD68:
 	.align 2, 0
 _0806AD7C: .4byte sub_806ABF4
 _0806AD80:
-	ldr r2, _0806ADC4
+	ldr r2, _0806ADC4 @ =gTasks
 	movs r0, 0x2
 	ldrsh r1, [r5, r0]
 	lsls r0, r1, 2
@@ -3433,16 +3433,16 @@ _0806AD80:
 	b _0806AEC4
 _0806AD96:
 	bl MenuZeroFillScreen
-	ldr r0, _0806ADC8
+	ldr r0, _0806ADC8 @ =gSystemText_PleaseResetTime
 	bl sub_806ABDC
-	ldr r2, _0806ADCC
-	ldr r0, _0806ADD0
+	ldr r2, _0806ADCC @ =gLocalTime
+	ldr r0, _0806ADD0 @ =gSaveBlock2
 	adds r0, 0xA0
 	ldr r1, [r0, 0x4]
 	ldr r0, [r0]
 	str r0, [r2]
 	str r1, [r2, 0x4]
-	ldr r0, _0806ADD4
+	ldr r0, _0806ADD4 @ =sub_806AA64
 	movs r1, 0x50
 	bl CreateTask
 	lsls r0, 24
@@ -3458,7 +3458,7 @@ _0806ADCC: .4byte gLocalTime
 _0806ADD0: .4byte gSaveBlock2
 _0806ADD4: .4byte sub_806AA64
 _0806ADD8:
-	ldr r2, _0806AE04
+	ldr r2, _0806AE04 @ =gTasks
 	movs r0, 0x2
 	ldrsh r1, [r5, r0]
 	lsls r0, r1, 2
@@ -3485,7 +3485,7 @@ _0806AE08:
 	ldrb r0, [r5, 0x2]
 	bl DestroyTask
 	bl RtcReset
-	ldr r4, _0806AE4C
+	ldr r4, _0806AE4C @ =gLocalTime
 	movs r1, 0
 	ldrsh r0, [r4, r1]
 	movs r1, 0x2
@@ -3495,17 +3495,17 @@ _0806AE08:
 	movs r3, 0x4
 	ldrsb r3, [r4, r3]
 	bl RtcCalcLocalTimeOffset
-	ldr r2, _0806AE50
+	ldr r2, _0806AE50 @ =gSaveBlock2
 	adds r2, 0xA0
 	ldr r0, [r4]
 	ldr r1, [r4, 0x4]
 	str r0, [r2]
 	str r1, [r2, 0x4]
-	ldr r0, _0806AE54
+	ldr r0, _0806AE54 @ =0x00004040
 	ldrh r1, [r4]
 	bl VarSet
 	bl sub_80691A0
-	ldr r0, _0806AE58
+	ldr r0, _0806AE58 @ =gSystemText_ClockResetDataSave
 	bl sub_806ABDC
 	movs r0, 0x4
 	strh r0, [r5]
@@ -3522,7 +3522,7 @@ _0806AE5C:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0806AE7C
-	ldr r0, _0806AE78
+	ldr r0, _0806AE78 @ =gSystemText_SaveCompleted
 	bl sub_806ABDC
 	movs r0, 0x49
 	bl PlaySE
@@ -3530,7 +3530,7 @@ _0806AE5C:
 	.align 2, 0
 _0806AE78: .4byte gSystemText_SaveCompleted
 _0806AE7C:
-	ldr r0, _0806AECC
+	ldr r0, _0806AECC @ =gSystemText_SaveFailed
 	bl sub_806ABDC
 	movs r0, 0x16
 	bl PlaySE
@@ -3538,7 +3538,7 @@ _0806AE88:
 	movs r0, 0x5
 	strh r0, [r5]
 _0806AE8C:
-	ldr r0, _0806AED0
+	ldr r0, _0806AED0 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -3546,7 +3546,7 @@ _0806AE8C:
 	beq _0806AEC4
 	movs r0, 0x1
 	negs r0, r0
-	ldr r1, _0806AED4
+	ldr r1, _0806AED4 @ =0x0000ffff
 	str r1, [sp]
 	movs r1, 0x1
 	movs r2, 0
@@ -3555,7 +3555,7 @@ _0806AE8C:
 	movs r0, 0x6
 	strh r0, [r5]
 _0806AEAE:
-	ldr r0, _0806AED8
+	ldr r0, _0806AED8 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1

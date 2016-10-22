@@ -9,7 +9,7 @@
 	thumb_func_start FldEff_ExclamationMarkIcon1
 FldEff_ExclamationMarkIcon1: @ 80847EC
 	push {lr}
-	ldr r0, _0808481C
+	ldr r0, _0808481C @ =gSpriteTemplate_839B510
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x53
@@ -21,7 +21,7 @@ FldEff_ExclamationMarkIcon1: @ 80847EC
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08084820
+	ldr r1, _08084820 @ =gSprites
 	adds r0, r1
 	movs r1, 0
 	movs r2, 0
@@ -38,7 +38,7 @@ _08084820: .4byte gSprites
 	thumb_func_start FldEff_ExclamationMarkIcon2
 FldEff_ExclamationMarkIcon2: @ 8084824
 	push {lr}
-	ldr r0, _08084854
+	ldr r0, _08084854 @ =gSpriteTemplate_839B510
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x52
@@ -50,7 +50,7 @@ FldEff_ExclamationMarkIcon2: @ 8084824
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08084858
+	ldr r1, _08084858 @ =gSprites
 	adds r0, r1
 	movs r1, 0x21
 	movs r2, 0x1
@@ -67,7 +67,7 @@ _08084858: .4byte gSprites
 	thumb_func_start FldEff_HeartIcon
 FldEff_HeartIcon: @ 808485C
 	push {lr}
-	ldr r0, _0808488C
+	ldr r0, _0808488C @ =gSpriteTemplate_839B528
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x52
@@ -79,7 +79,7 @@ FldEff_HeartIcon: @ 808485C
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08084890
+	ldr r1, _08084890 @ =gSprites
 	adds r0, r1
 	movs r1, 0x2E
 	movs r2, 0
@@ -113,14 +113,14 @@ sub_8084894: @ 8084894
 	orrs r3, r4
 	mov r4, r12
 	strb r3, [r4]
-	ldr r4, _080848D8
+	ldr r4, _080848D8 @ =gUnknown_0202FF84
 	ldr r3, [r4]
 	strh r3, [r0, 0x2E]
 	ldr r3, [r4, 0x4]
 	strh r3, [r0, 0x30]
 	ldr r3, [r4, 0x8]
 	strh r3, [r0, 0x32]
-	ldr r3, _080848DC
+	ldr r3, _080848DC @ =0x0000fffb
 	strh r3, [r0, 0x34]
 	strh r1, [r0, 0x3C]
 	adds r1, r2, 0
@@ -167,7 +167,7 @@ _08084912:
 	bl FieldEffectStop
 	b _0808496E
 _08084920:
-	ldr r2, _08084964
+	ldr r2, _08084964 @ =gMapObjects
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 3
@@ -178,7 +178,7 @@ _08084920:
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, _08084968
+	ldr r0, _08084968 @ =gSprites
 	adds r1, r0
 	ldrh r3, [r4, 0x34]
 	ldrh r0, [r4, 0x36]

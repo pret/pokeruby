@@ -28,13 +28,13 @@ CreateTrainerSprite_BirchSpeech: @ 80859BC
 	lsrs r0, 24
 	mov r9, r0
 	lsrs r4, 21
-	ldr r3, _08085A44
+	ldr r3, _08085A44 @ =gTrainerFrontPicPaletteTable
 	mov r8, r3
 	add r8, r4
 	mov r0, r8
 	adds r1, r7, 0
 	bl LoadCompressedObjectPaletteOverrideBuffer
-	ldr r0, _08085A48
+	ldr r0, _08085A48 @ =gTrainerFrontPicTable
 	adds r4, r0
 	adds r0, r4, 0
 	adds r1, r7, 0
@@ -46,14 +46,14 @@ CreateTrainerSprite_BirchSpeech: @ 80859BC
 	mov r3, r8
 	ldrh r0, [r3, 0x4]
 	strh r0, [r1, 0x2]
-	ldr r0, _08085A4C
+	ldr r0, _08085A4C @ =gOamData_839F0F4
 	str r0, [sp, 0x4]
-	ldr r0, _08085A50
+	ldr r0, _08085A50 @ =gDummySpriteAnimTable
 	str r0, [sp, 0x8]
 	str r2, [sp, 0xC]
-	ldr r0, _08085A54
+	ldr r0, _08085A54 @ =gDummySpriteAffineAnimTable
 	str r0, [sp, 0x10]
-	ldr r0, _08085A58
+	ldr r0, _08085A58 @ =SpriteCallbackDummy
 	str r0, [sp, 0x14]
 	lsls r5, 16
 	asrs r5, 16
@@ -91,12 +91,12 @@ LoadTrainerGfx_TrainerCard: @ 8085A5C
 	lsls r4, 24
 	lsls r5, 16
 	lsrs r5, 16
-	ldr r0, _08085A8C
+	ldr r0, _08085A8C @ =gTrainerFrontPicTable
 	lsrs r4, 21
 	adds r0, r4, r0
 	ldr r0, [r0]
 	bl LZDecompressVram
-	ldr r0, _08085A90
+	ldr r0, _08085A90 @ =gTrainerFrontPicPaletteTable
 	adds r4, r0
 	ldr r0, [r4]
 	adds r1, r5, 0
@@ -122,9 +122,9 @@ CreateBirchSprite: @ 8085A94
 	lsrs r5, 16
 	lsls r6, 24
 	lsrs r6, 24
-	ldr r0, _08085ACC
+	ldr r0, _08085ACC @ =gUnknown_0839F114
 	bl LoadSpritePalette
-	ldr r0, _08085AD0
+	ldr r0, _08085AD0 @ =gSpriteTemplate_839F128
 	lsls r4, 16
 	asrs r4, 16
 	lsls r5, 16
@@ -169,26 +169,26 @@ CreateMonSprite_PicBox: @ 8085AD4
 	mov r10, r0
 	lsls r0, r4, 3
 	mov r9, r0
-	ldr r0, _08085B74
+	ldr r0, _08085B74 @ =gMonFrontPicTable
 	add r0, r9
-	ldr r1, _08085B78
+	ldr r1, _08085B78 @ =gMonFrontPicCoords
 	lsls r2, r4, 2
 	adds r2, r1
 	ldrb r1, [r2]
 	ldrb r2, [r2, 0x1]
-	ldr r3, _08085B7C
+	ldr r3, _08085B7C @ =gUnknown_081FAF4C
 	ldr r3, [r3, 0xC]
 	str r3, [sp]
 	str r4, [sp, 0x4]
 	bl DecompressPicFromTable_2
-	ldr r5, _08085B80
+	ldr r5, _08085B80 @ =gMonPaletteTable
 	add r9, r5
 	mov r0, r9
 	bl LoadCompressedObjectPalette
 	adds r0, r4, 0
 	movs r1, 0x3
 	bl GetMonSpriteTemplate_803C56C
-	ldr r4, _08085B84
+	ldr r4, _08085B84 @ =gUnknown_02024E8C
 	ldrh r0, [r5, 0x4]
 	strh r0, [r4, 0x2]
 	ldrh r0, [r5, 0x4]
@@ -255,14 +255,14 @@ CreateMonSprite_FieldMove: @ 8085B88
 	lsrs r0, 24
 	mov r9, r0
 	lsls r0, r5, 3
-	ldr r1, _08085C34
+	ldr r1, _08085C34 @ =gMonFrontPicTable
 	adds r0, r1
-	ldr r1, _08085C38
+	ldr r1, _08085C38 @ =gMonFrontPicCoords
 	lsls r2, r5, 2
 	adds r2, r1
 	ldrb r1, [r2]
 	ldrb r2, [r2, 0x1]
-	ldr r3, _08085C3C
+	ldr r3, _08085C3C @ =gUnknown_081FAF4C
 	ldr r3, [r3, 0xC]
 	str r3, [sp]
 	str r5, [sp, 0x4]
@@ -277,7 +277,7 @@ CreateMonSprite_FieldMove: @ 8085B88
 	adds r0, r5, 0
 	movs r1, 0x3
 	bl GetMonSpriteTemplate_803C56C
-	ldr r5, _08085C40
+	ldr r5, _08085C40 @ =gUnknown_02024E8C
 	ldrh r0, [r4, 0x4]
 	strh r0, [r5, 0x2]
 	ldrh r0, [r4, 0x4]
@@ -354,7 +354,7 @@ MultiplyInvertedPaletteRGBComponents: @ 8085C7C
 	lsrs r2, 24
 	lsls r3, 24
 	lsrs r3, 24
-	ldr r4, _08085D00
+	ldr r4, _08085D00 @ =gPlttBufferUnfaded
 	lsrs r0, 15
 	adds r4, r0, r4
 	ldrh r4, [r4]
@@ -399,7 +399,7 @@ MultiplyInvertedPaletteRGBComponents: @ 8085C7C
 	lsls r4, 26
 	orrs r4, r6
 	lsrs r4, 16
-	ldr r1, _08085D04
+	ldr r1, _08085D04 @ =gPlttBufferFaded
 	adds r0, r1
 	strh r4, [r0]
 	pop {r3,r4}
@@ -425,7 +425,7 @@ MultiplyPaletteRGBComponents: @ 8085D08
 	lsrs r2, 24
 	lsls r3, 24
 	lsrs r3, 24
-	ldr r4, _08085D78
+	ldr r4, _08085D78 @ =gPlttBufferUnfaded
 	lsrs r0, 15
 	adds r4, r0, r4
 	ldrh r4, [r4]
@@ -462,7 +462,7 @@ MultiplyPaletteRGBComponents: @ 8085D08
 	lsls r4, 26
 	orrs r4, r5
 	lsrs r4, 16
-	ldr r1, _08085D7C
+	ldr r1, _08085D7C @ =gPlttBufferFaded
 	adds r0, r1
 	strh r4, [r0]
 	pop {r3}
@@ -482,7 +482,7 @@ FldEff_PokecenterHeal: @ 8085D80
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, _08085DBC
+	ldr r0, _08085DBC @ =Task_PokecenterHeal
 	movs r1, 0xFF
 	bl CreateTask
 	lsls r0, 24
@@ -490,7 +490,7 @@ FldEff_PokecenterHeal: @ 8085D80
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _08085DC0
+	ldr r0, _08085DC0 @ =gTasks
 	adds r1, r0
 	strh r4, [r1, 0xA]
 	movs r0, 0x5D
@@ -518,9 +518,9 @@ Task_PokecenterHeal: @ 8085DC4
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _08085DEC
+	ldr r0, _08085DEC @ =gTasks
 	adds r1, r0
-	ldr r2, _08085DF0
+	ldr r2, _08085DF0 @ =gUnknown_0839F268
 	movs r3, 0x8
 	ldrsh r0, [r1, r3]
 	lsls r0, 2
@@ -570,7 +570,7 @@ PokecenterHealEffect_0: @ 8085DF4
 PokecenterHealEffect_1: @ 8085E30
 	push {r4,lr}
 	adds r2, r0, 0
-	ldr r3, _08085E68
+	ldr r3, _08085E68 @ =gSprites
 	movs r1, 0x14
 	ldrsh r0, [r2, r1]
 	lsls r1, r0, 4
@@ -605,7 +605,7 @@ _08085E68: .4byte gSprites
 PokecenterHealEffect_2: @ 8085E6C
 	push {lr}
 	adds r3, r0, 0
-	ldr r2, _08085E90
+	ldr r2, _08085E90 @ =gSprites
 	movs r0, 0x14
 	ldrsh r1, [r3, r0]
 	lsls r0, r1, 4
@@ -629,7 +629,7 @@ _08085E90: .4byte gSprites
 	thumb_func_start PokecenterHealEffect_3
 PokecenterHealEffect_3: @ 8085E94
 	push {lr}
-	ldr r2, _08085ECC
+	ldr r2, _08085ECC @ =gSprites
 	movs r3, 0x14
 	ldrsh r1, [r0, r3]
 	lsls r0, r1, 4
@@ -644,7 +644,7 @@ PokecenterHealEffect_3: @ 8085E94
 	bl DestroySprite
 	movs r0, 0x19
 	bl FieldEffectActiveListRemove
-	ldr r0, _08085ED0
+	ldr r0, _08085ED0 @ =Task_PokecenterHeal
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -664,7 +664,7 @@ FldEff_HallOfFameRecord: @ 8085ED4
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, _08085F08
+	ldr r0, _08085F08 @ =Task_HallOfFameRecord
 	movs r1, 0xFF
 	bl CreateTask
 	lsls r0, 24
@@ -672,7 +672,7 @@ FldEff_HallOfFameRecord: @ 8085ED4
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _08085F0C
+	ldr r0, _08085F0C @ =gTasks
 	adds r1, r0
 	strh r4, [r1, 0xA]
 	movs r0, 0x75
@@ -696,9 +696,9 @@ Task_HallOfFameRecord: @ 8085F10
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _08085F38
+	ldr r0, _08085F38 @ =gTasks
 	adds r1, r0
-	ldr r2, _08085F3C
+	ldr r2, _08085F3C @ =gUnknown_0839F278
 	movs r3, 0x8
 	ldrsh r0, [r1, r3]
 	lsls r0, 2
@@ -731,7 +731,7 @@ HallOfFameRecordEffect_0: @ 8085F40
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x14]
-	ldr r0, _08085FB0
+	ldr r0, _08085FB0 @ =Task_HallOfFameRecord
 	bl FindTaskIdByFunc
 	adds r4, r0, 0
 	lsls r4, 24
@@ -772,7 +772,7 @@ _08085FB0: .4byte Task_HallOfFameRecord
 HallOfFameRecordEffect_1: @ 8085FB4
 	push {lr}
 	adds r3, r0, 0
-	ldr r2, _08085FE0
+	ldr r2, _08085FE0 @ =gSprites
 	movs r0, 0x14
 	ldrsh r1, [r3, r0]
 	lsls r0, r1, 4
@@ -800,7 +800,7 @@ _08085FE0: .4byte gSprites
 HallOfFameRecordEffect_2: @ 8085FE4
 	push {lr}
 	adds r3, r0, 0
-	ldr r2, _08086008
+	ldr r2, _08086008 @ =gSprites
 	movs r0, 0x14
 	ldrsh r1, [r3, r0]
 	lsls r0, r1, 4
@@ -824,7 +824,7 @@ _08086008: .4byte gSprites
 	thumb_func_start HallOfFameRecordEffect_3
 HallOfFameRecordEffect_3: @ 808600C
 	push {lr}
-	ldr r2, _08086044
+	ldr r2, _08086044 @ =gSprites
 	movs r3, 0x14
 	ldrsh r1, [r0, r3]
 	lsls r0, r1, 4
@@ -839,7 +839,7 @@ HallOfFameRecordEffect_3: @ 808600C
 	bl DestroySprite
 	movs r0, 0x3E
 	bl FieldEffectActiveListRemove
-	ldr r0, _08086048
+	ldr r0, _08086048 @ =Task_HallOfFameRecord
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -870,14 +870,14 @@ CreatePokeballGlowSprite: @ 808604C
 	lsrs r5, 16
 	lsls r6, 16
 	lsrs r6, 16
-	ldr r0, _08086098
+	ldr r0, _08086098 @ =SpriteCB_PokeballGlowEffect
 	bl CreateInvisibleSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r2, _0808609C
+	ldr r2, _0808609C @ =gSprites
 	adds r1, r2
 	strh r4, [r1, 0x24]
 	strh r5, [r1, 0x26]
@@ -898,7 +898,7 @@ _0808609C: .4byte gSprites
 	thumb_func_start SpriteCB_PokeballGlowEffect
 SpriteCB_PokeballGlowEffect: @ 80860A0
 	push {lr}
-	ldr r2, _080860B8
+	ldr r2, _080860B8 @ =gUnknown_0839F288
 	movs r3, 0x2E
 	ldrsh r1, [r0, r3]
 	lsls r1, 2
@@ -928,8 +928,8 @@ PokeballGlowEffect_0: @ 80860BC
 _080860D4:
 	movs r0, 0x19
 	strh r0, [r4, 0x30]
-	ldr r0, _08086148
-	ldr r1, _0808614C
+	ldr r0, _08086148 @ =gSpriteTemplate_839F208
+	ldr r1, _0808614C @ =gUnknown_0839F2A8
 	movs r2, 0x32
 	ldrsh r3, [r4, r2]
 	lsls r3, 2
@@ -948,7 +948,7 @@ _080860D4:
 	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _08086150
+	ldr r2, _08086150 @ =gSprites
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
@@ -1053,7 +1053,7 @@ _080861B8:
 	mov r8, r0
 	mov r1, r8
 	ands r4, r1
-	ldr r3, _080862B0
+	ldr r3, _080862B0 @ =0x00001007
 	mov r10, r3
 	mov r0, r10
 	bl IndexOfSpritePaletteTag
@@ -1063,13 +1063,13 @@ _080861B8:
 	lsls r1, 17
 	adds r0, r1
 	lsrs r0, 16
-	ldr r6, _080862B4
+	ldr r6, _080862B4 @ =gUnknown_0839F2C0
 	adds r1, r4, r6
 	ldrb r1, [r1]
-	ldr r5, _080862B8
+	ldr r5, _080862B8 @ =gUnknown_0839F2C4
 	adds r2, r4, r5
 	ldrb r2, [r2]
-	ldr r3, _080862BC
+	ldr r3, _080862BC @ =gUnknown_0839F2C8
 	mov r9, r3
 	add r4, r9
 	ldrb r3, [r4]
@@ -1119,7 +1119,7 @@ _080861B8:
 	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 4
-	ldr r3, _080862C0
+	ldr r3, _080862C0 @ =0x01050000
 	adds r0, r3
 	lsrs r0, 16
 	adds r6, r4, r6
@@ -1136,7 +1136,7 @@ _080861B8:
 	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 4
-	ldr r1, _080862C4
+	ldr r1, _080862C4 @ =0x01030000
 	adds r0, r1
 	lsrs r0, 16
 	adds r1, r6, 0
@@ -1201,7 +1201,7 @@ _080862F8:
 	ldrh r4, [r2, 0x32]
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, _080863A4
+	ldr r0, _080863A4 @ =0x00001007
 	mov r8, r0
 	bl IndexOfSpritePaletteTag
 	lsls r0, 24
@@ -1210,13 +1210,13 @@ _080862F8:
 	lsls r1, 17
 	adds r0, r1
 	lsrs r0, 16
-	ldr r1, _080863A8
+	ldr r1, _080863A8 @ =gUnknown_0839F2C0
 	adds r1, r4, r1
 	ldrb r6, [r1]
-	ldr r1, _080863AC
+	ldr r1, _080863AC @ =gUnknown_0839F2C4
 	adds r1, r4, r1
 	ldrb r5, [r1]
-	ldr r1, _080863B0
+	ldr r1, _080863B0 @ =gUnknown_0839F2C8
 	adds r4, r1
 	ldrb r4, [r4]
 	adds r1, r6, 0
@@ -1251,7 +1251,7 @@ _080862F8:
 	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 4
-	ldr r1, _080863B4
+	ldr r1, _080863B4 @ =0x01050000
 	adds r0, r1
 	lsrs r0, 16
 	adds r1, r6, 0
@@ -1262,7 +1262,7 @@ _080862F8:
 	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 4
-	ldr r1, _080863B8
+	ldr r1, _080863B8 @ =0x01030000
 	adds r0, r1
 	lsrs r0, 16
 	adds r1, r6, 0
@@ -1340,7 +1340,7 @@ PokeballGlowEffect_7: @ 8086404
 SpriteCB_PokeballGlow: @ 8086408
 	push {lr}
 	adds r3, r0, 0
-	ldr r2, _0808642C
+	ldr r2, _0808642C @ =gSprites
 	movs r0, 0x2E
 	ldrsh r1, [r3, r0]
 	lsls r0, r1, 4
@@ -1365,7 +1365,7 @@ PokecenterHealEffectHelper: @ 8086430
 	push {r4,lr}
 	adds r3, r0, 0
 	adds r2, r1, 0
-	ldr r0, _08086480
+	ldr r0, _08086480 @ =gSpriteTemplate_839F220
 	lsls r3, 16
 	asrs r3, 16
 	lsls r2, 16
@@ -1379,7 +1379,7 @@ PokecenterHealEffectHelper: @ 8086430
 	lsls r0, r4, 4
 	adds r0, r4
 	lsls r0, 2
-	ldr r1, _08086484
+	ldr r1, _08086484 @ =gSprites
 	adds r0, r1
 	ldrb r2, [r0, 0x5]
 	movs r1, 0xD
@@ -1394,7 +1394,7 @@ PokecenterHealEffectHelper: @ 8086430
 	movs r2, 0x4
 	orrs r1, r2
 	strb r1, [r3]
-	ldr r1, _08086488
+	ldr r1, _08086488 @ =gUnknown_0839F1A0
 	bl SetSubspriteTables
 	adds r0, r4, 0
 	pop {r4}
@@ -1453,7 +1453,7 @@ HallOfFameRecordEffectHelper: @ 80864CC
 	lsls r3, 24
 	cmp r3, 0
 	bne _08086514
-	ldr r0, _08086508
+	ldr r0, _08086508 @ =gSpriteTemplate_839F238
 	lsls r1, 16
 	asrs r1, 16
 	lsls r2, 16
@@ -1465,9 +1465,9 @@ HallOfFameRecordEffectHelper: @ 80864CC
 	lsls r0, r4, 4
 	adds r0, r4
 	lsls r0, 2
-	ldr r1, _0808650C
+	ldr r1, _0808650C @ =gSprites
 	adds r0, r1
-	ldr r1, _08086510
+	ldr r1, _08086510 @ =gUnknown_0839F1C8
 	bl SetSubspriteTables
 	b _08086528
 	.align 2, 0
@@ -1475,7 +1475,7 @@ _08086508: .4byte gSpriteTemplate_839F238
 _0808650C: .4byte gSprites
 _08086510: .4byte gUnknown_0839F1C8
 _08086514:
-	ldr r0, _08086548
+	ldr r0, _08086548 @ =gSpriteTemplate_839F250
 	lsls r1, 16
 	asrs r1, 16
 	lsls r2, 16
@@ -1485,7 +1485,7 @@ _08086514:
 	lsls r0, 24
 	lsrs r4, r0, 24
 _08086528:
-	ldr r1, _0808654C
+	ldr r1, _0808654C @ =gSprites
 	lsls r0, r4, 4
 	adds r0, r4
 	lsls r0, 2
@@ -1509,7 +1509,7 @@ _0808654C: .4byte gSprites
 SpriteCB_HallOfFameMonitor: @ 8086550
 	push {lr}
 	adds r3, r0, 0
-	ldr r2, _080865B8
+	ldr r2, _080865B8 @ =gTasks
 	movs r0, 0x2E
 	ldrsh r1, [r3, r0]
 	lsls r0, r1, 2
@@ -1569,10 +1569,10 @@ _080865B8: .4byte gTasks
 	thumb_func_start sub_80865BC
 sub_80865BC: @ 80865BC
 	push {lr}
-	ldr r0, _080865D0
+	ldr r0, _080865D0 @ =c2_exit_to_overworld_2_switch
 	bl SetMainCallback2
-	ldr r1, _080865D4
-	ldr r0, _080865D8
+	ldr r1, _080865D4 @ =gUnknown_0300485C
+	ldr r0, _080865D8 @ =mapldr_080842E8
 	str r0, [r1]
 	pop {r0}
 	bx r0
@@ -1586,12 +1586,12 @@ _080865D8: .4byte mapldr_080842E8
 mapldr_080842E8: @ 80865DC
 	push {lr}
 	bl pal_fill_black
-	ldr r0, _080865FC
+	ldr r0, _080865FC @ =task00_8084310
 	movs r1, 0
 	bl CreateTask
 	bl ScriptContext2_Enable
 	bl player_bitmagic
-	ldr r1, _08086600
+	ldr r1, _08086600 @ =gUnknown_0300485C
 	movs r0, 0
 	str r0, [r1]
 	pop {r0}
@@ -1609,7 +1609,7 @@ task00_8084310: @ 8086604
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
-	ldr r1, _0808666C
+	ldr r1, _0808666C @ =gTasks
 	adds r4, r0, r1
 	movs r0, 0x8
 	ldrsh r5, [r4, r0]
@@ -1619,8 +1619,8 @@ task00_8084310: @ 8086604
 	lsls r0, 24
 	cmp r0, 0
 	beq _08086666
-	ldr r1, _08086670
-	ldr r0, _08086674
+	ldr r1, _08086670 @ =gUnknown_0202FF84
+	ldr r0, _08086674 @ =gUnknown_03005CE0
 	ldrb r0, [r0]
 	str r0, [r1]
 	cmp r0, 0x5
@@ -1640,10 +1640,10 @@ _08086640:
 	bne _08086666
 	bl flag_var_implications_of_teleport_
 	bl warp_in
-	ldr r0, _08086678
+	ldr r0, _08086678 @ =CB2_LoadMap
 	bl SetMainCallback2
-	ldr r1, _0808667C
-	ldr r0, _08086680
+	ldr r1, _0808667C @ =gUnknown_0300485C
+	ldr r0, _08086680 @ =mapldr_08084390
 	str r0, [r1]
 	adds r0, r6, 0
 	bl DestroyTask
@@ -1665,11 +1665,11 @@ mapldr_08084390: @ 8086684
 	push {r4,lr}
 	bl sub_8053E90
 	bl pal_fill_black
-	ldr r0, _080866DC
+	ldr r0, _080866DC @ =c3_080843F8
 	movs r1, 0
 	bl CreateTask
-	ldr r4, _080866E0
-	ldr r3, _080866E4
+	ldr r4, _080866E0 @ =gMapObjects
+	ldr r3, _080866E4 @ =gPlayerAvatar
 	ldrb r1, [r3, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -1694,7 +1694,7 @@ mapldr_08084390: @ 8086684
 _080866C6:
 	bl ScriptContext2_Enable
 	bl player_bitmagic
-	ldr r1, _080866E8
+	ldr r1, _080866E8 @ =gUnknown_0300485C
 	movs r0, 0
 	str r0, [r1]
 	pop {r4}
@@ -1716,13 +1716,13 @@ c3_080843F8: @ 80866EC
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, _08086740
+	ldr r1, _08086740 @ =gTasks
 	adds r4, r0, r1
 	movs r1, 0x8
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
 	bne _0808671E
-	ldr r0, _08086744
+	ldr r0, _08086744 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1759,10 +1759,10 @@ sub_8086748: @ 8086748
 	bl pal_fill_for_maplights
 	bl ScriptContext2_Enable
 	bl player_bitmagic
-	ldr r0, _0808676C
+	ldr r0, _0808676C @ =sub_8086774
 	movs r1, 0
 	bl CreateTask
-	ldr r1, _08086770
+	ldr r1, _08086770 @ =gUnknown_0300485C
 	movs r0, 0
 	str r0, [r1]
 	pop {r0}
@@ -1780,9 +1780,9 @@ sub_8086774: @ 8086774
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _080867A4
+	ldr r0, _080867A4 @ =gTasks
 	adds r4, r1, r0
-	ldr r5, _080867A8
+	ldr r5, _080867A8 @ =gUnknown_0839F2CC
 _08086786:
 	movs r1, 0x8
 	ldrsh r0, [r4, r1]
@@ -1809,19 +1809,19 @@ sub_80867AC: @ 80867AC
 	mov r5, r8
 	push {r5,r6}
 	mov r9, r0
-	ldr r6, _08086848
+	ldr r6, _08086848 @ =gPlayerAvatar
 	ldrb r0, [r6, 0x5]
 	lsls r5, r0, 3
 	adds r5, r0
 	lsls r5, 2
-	ldr r0, _0808684C
+	ldr r0, _0808684C @ =gMapObjects
 	mov r8, r0
 	add r5, r8
 	ldrb r0, [r6, 0x4]
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, _08086850
+	ldr r0, _08086850 @ =gSprites
 	adds r4, r0
 	bl CameraObjectReset2
 	ldrb r1, [r6, 0x5]
@@ -1905,12 +1905,12 @@ _08086868:
 sub_8086870: @ 8086870
 	push {r4-r6,lr}
 	adds r5, r0, 0
-	ldr r6, _080868D4
+	ldr r6, _080868D4 @ =gPlayerAvatar
 	ldrb r0, [r6, 0x4]
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, _080868D8
+	ldr r0, _080868D8 @ =gSprites
 	adds r2, r0
 	adds r0, r2, 0
 	adds r0, 0x29
@@ -1919,7 +1919,7 @@ sub_8086870: @ 8086870
 	lsls r0, r4, 17
 	negs r0, r0
 	ldrh r1, [r2, 0x22]
-	ldr r3, _080868DC
+	ldr r3, _080868DC @ =gSpriteCoordOffsetY
 	adds r1, r4
 	ldrh r3, [r3]
 	adds r1, r3
@@ -1931,7 +1931,7 @@ sub_8086870: @ 8086870
 	movs r0, 0x1
 	strh r0, [r5, 0xA]
 	strh r1, [r5, 0xC]
-	ldr r2, _080868E0
+	ldr r2, _080868E0 @ =gMapObjects
 	ldrb r0, [r6, 0x5]
 	lsls r1, r0, 3
 	adds r1, r0
@@ -1962,18 +1962,18 @@ _080868E0: .4byte gMapObjects
 sub_80868E4: @ 80868E4
 	push {r4-r6,lr}
 	adds r4, r0, 0
-	ldr r2, _08086990
+	ldr r2, _08086990 @ =gPlayerAvatar
 	ldrb r1, [r2, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08086994
+	ldr r1, _08086994 @ =gMapObjects
 	adds r6, r0, r1
 	ldrb r1, [r2, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08086998
+	ldr r1, _08086998 @ =gSprites
 	adds r5, r0, r1
 	ldrh r0, [r4, 0xA]
 	ldrh r1, [r5, 0x26]
@@ -2110,14 +2110,14 @@ _080869EE:
 	thumb_func_start sub_80869F8
 sub_80869F8: @ 80869F8
 	push {lr}
-	ldr r1, _08086A24
+	ldr r1, _08086A24 @ =gPlayerAvatar
 	movs r0, 0
 	strb r0, [r1, 0x6]
 	bl ScriptContext2_Disable
 	bl CameraObjectReset1
 	bl sub_806451C
 	bl InstallCameraPanAheadCallback
-	ldr r0, _08086A28
+	ldr r0, _08086A28 @ =sub_8086774
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -2138,11 +2138,11 @@ sub_8086A2C: @ 8086A2C
 	lsrs r4, 24
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r0, _08086A60
+	ldr r0, _08086A60 @ =sub_8086A68
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _08086A64
+	ldr r2, _08086A64 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -2170,9 +2170,9 @@ sub_8086A68: @ 8086A68
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _08086A98
+	ldr r0, _08086A98 @ =gTasks
 	adds r4, r1, r0
-	ldr r5, _08086A9C
+	ldr r5, _08086A9C @ =gUnknown_0839F2E8
 _08086A7A:
 	movs r1, 0x8
 	ldrsh r0, [r4, r1]
@@ -2213,12 +2213,12 @@ sub_8086AA0: @ 8086AA0
 sub_8086AC0: @ 8086AC0
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	ldr r0, _08086B28
+	ldr r0, _08086B28 @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08086B2C
+	ldr r1, _08086B2C @ =gMapObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
 	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
@@ -2328,12 +2328,12 @@ sub_8086B88: @ 8086B88
 sub_8086B98: @ 8086B98
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	ldr r0, _08086BDC
+	ldr r0, _08086BDC @ =gPlayerAvatar
 	ldrb r0, [r0, 0x4]
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, _08086BE0
+	ldr r0, _08086BE0 @ =gSprites
 	adds r4, r0
 	movs r0, 0xC
 	ldrsh r1, [r5, r0]
@@ -2368,12 +2368,12 @@ _08086BE0: .4byte gSprites
 sub_8086BE4: @ 8086BE4
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	ldr r0, _08086C28
+	ldr r0, _08086C28 @ =gPlayerAvatar
 	ldrb r0, [r0, 0x4]
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, _08086C2C
+	ldr r0, _08086C2C @ =gSprites
 	adds r4, r0
 	movs r0, 0xC
 	ldrsh r1, [r5, r0]
@@ -2416,7 +2416,7 @@ sub_8086C30: @ 8086C30
 	thumb_func_start sub_8086C40
 sub_8086C40: @ 8086C40
 	push {lr}
-	ldr r0, _08086C80
+	ldr r0, _08086C80 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -2429,12 +2429,12 @@ sub_8086C40: @ 8086C40
 	bne _08086C7C
 	bl sub_80B483C
 	bl warp_in
-	ldr r1, _08086C84
-	ldr r0, _08086C88
+	ldr r1, _08086C84 @ =gUnknown_0300485C
+	ldr r0, _08086C88 @ =sub_8086C94
 	str r0, [r1]
-	ldr r0, _08086C8C
+	ldr r0, _08086C8C @ =CB2_LoadMap
 	bl SetMainCallback2
-	ldr r0, _08086C90
+	ldr r0, _08086C90 @ =sub_8086A68
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -2456,10 +2456,10 @@ sub_8086C94: @ 8086C94
 	bl sub_8053E90
 	bl pal_fill_for_maplights
 	bl ScriptContext2_Enable
-	ldr r0, _08086CB4
+	ldr r0, _08086CB4 @ =sub_8086CBC
 	movs r1, 0
 	bl CreateTask
-	ldr r1, _08086CB8
+	ldr r1, _08086CB8 @ =gUnknown_0300485C
 	movs r0, 0
 	str r0, [r1]
 	pop {r0}
@@ -2477,9 +2477,9 @@ sub_8086CBC: @ 8086CBC
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _08086CEC
+	ldr r0, _08086CEC @ =gTasks
 	adds r4, r1, r0
-	ldr r5, _08086CF0
+	ldr r5, _08086CF0 @ =gUnknown_0839F300
 _08086CCE:
 	movs r1, 0x8
 	ldrsh r0, [r4, r1]
@@ -2505,12 +2505,12 @@ sub_8086CF4: @ 8086CF4
 	sub sp, 0x4
 	adds r5, r0, 0
 	bl CameraObjectReset2
-	ldr r0, _08086D54
+	ldr r0, _08086D54 @ =gPlayerAvatar
 	ldrb r0, [r0, 0x5]
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, _08086D58
+	ldr r0, _08086D58 @ =gMapObjects
 	adds r4, r0
 	movs r0, 0x4
 	bl GetFaceDirectionAnimId
@@ -2562,12 +2562,12 @@ _08086D5E:
 sub_8086D70: @ 8086D70
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	ldr r0, _08086DA8
+	ldr r0, _08086DA8 @ =gPlayerAvatar
 	ldrb r0, [r0, 0x4]
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, _08086DAC
+	ldr r0, _08086DAC @ =gSprites
 	adds r4, r0
 	movs r0, 0xA
 	ldrsh r1, [r5, r0]
@@ -2595,12 +2595,12 @@ _08086DAC: .4byte gSprites
 sub_8086DB0: @ 8086DB0
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	ldr r0, _08086E08
+	ldr r0, _08086E08 @ =gPlayerAvatar
 	ldrb r1, [r0, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08086E0C
+	ldr r1, _08086E0C @ =gSprites
 	adds r5, r0, r1
 	movs r0, 0xA
 	ldrsh r1, [r4, r0]
@@ -2645,12 +2645,12 @@ _08086E0C: .4byte gSprites
 sub_8086E10: @ 8086E10
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	ldr r0, _08086E48
+	ldr r0, _08086E48 @ =gPlayerAvatar
 	ldrb r0, [r0, 0x4]
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, _08086E4C
+	ldr r0, _08086E4C @ =gSprites
 	adds r4, r0
 	movs r0, 0xA
 	ldrsh r1, [r5, r0]
@@ -2678,12 +2678,12 @@ _08086E4C: .4byte gSprites
 sub_8086E50: @ 8086E50
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	ldr r0, _08086EA8
+	ldr r0, _08086EA8 @ =gPlayerAvatar
 	ldrb r1, [r0, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08086EAC
+	ldr r1, _08086EAC @ =gSprites
 	adds r5, r0, r1
 	movs r0, 0xA
 	ldrsh r1, [r4, r0]
@@ -2750,12 +2750,12 @@ _08086ECE:
 	thumb_func_start sub_8086ED4
 sub_8086ED4: @ 8086ED4
 	push {r4,lr}
-	ldr r0, _08086F20
+	ldr r0, _08086F20 @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08086F24
+	ldr r1, _08086F24 @ =gMapObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
 	bl FieldObjectClearAnimIfSpecialAnimFinished
@@ -2771,7 +2771,7 @@ sub_8086ED4: @ 8086ED4
 	lsrs r1, 24
 	adds r0, r4, 0
 	bl FieldObjectSetSpecialAnim
-	ldr r0, _08086F28
+	ldr r0, _08086F28 @ =sub_8086CBC
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -2790,18 +2790,18 @@ _08086F28: .4byte sub_8086CBC
 	thumb_func_start FldEff_UseWaterfall
 FldEff_UseWaterfall: @ 8086F2C
 	push {r4,lr}
-	ldr r4, _08086F58
+	ldr r4, _08086F58 @ =sub_8086F64
 	adds r0, r4, 0
 	movs r1, 0xFF
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _08086F5C
+	ldr r2, _08086F5C @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
 	adds r1, r2
-	ldr r2, _08086F60
+	ldr r2, _08086F60 @ =gUnknown_0202FF84
 	ldr r2, [r2]
 	strh r2, [r1, 0xA]
 	bl _call_via_r4
@@ -2820,8 +2820,8 @@ sub_8086F64: @ 8086F64
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r5, _08086FA0
-	ldr r2, _08086FA4
+	ldr r5, _08086FA0 @ =gUnknown_0839F31C
+	ldr r2, _08086FA4 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -2831,12 +2831,12 @@ _08086F76:
 	ldrsh r2, [r4, r0]
 	lsls r2, 2
 	adds r2, r5
-	ldr r0, _08086FA8
+	ldr r0, _08086FA8 @ =gPlayerAvatar
 	ldrb r0, [r0, 0x5]
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, _08086FAC
+	ldr r0, _08086FAC @ =gMapObjects
 	adds r1, r0
 	ldr r2, [r2]
 	adds r0, r4, 0
@@ -2859,7 +2859,7 @@ sub_8086FB0: @ 8086FB0
 	push {r4,lr}
 	adds r4, r0, 0
 	bl ScriptContext2_Enable
-	ldr r1, _08086FCC
+	ldr r1, _08086FCC @ =gPlayerAvatar
 	movs r0, 0x1
 	strb r0, [r1, 0x6]
 	ldrh r0, [r4, 0x8]
@@ -2886,7 +2886,7 @@ waterfall_1_do_anim_probably: @ 8086FD0
 	bne _08087000
 	adds r0, r5, 0
 	bl FieldObjectClearAnimIfSpecialAnimFinished
-	ldr r1, _08087008
+	ldr r1, _08087008 @ =gUnknown_0202FF84
 	movs r2, 0xA
 	ldrsh r0, [r4, r2]
 	str r0, [r1]
@@ -2967,9 +2967,9 @@ _0808706E:
 	cmp r4, 0
 	bne _080870A4
 	bl ScriptContext2_Disable
-	ldr r0, _0808709C
+	ldr r0, _0808709C @ =gPlayerAvatar
 	strb r4, [r0, 0x6]
-	ldr r0, _080870A0
+	ldr r0, _080870A0 @ =sub_8086F64
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -2994,18 +2994,18 @@ _080870AA:
 	thumb_func_start FldEff_UseDive
 FldEff_UseDive: @ 80870B0
 	push {r4,lr}
-	ldr r4, _080870E0
+	ldr r4, _080870E0 @ =sub_80870EC
 	adds r0, r4, 0
 	movs r1, 0xFF
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _080870E4
+	ldr r2, _080870E4 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
 	adds r1, r2
-	ldr r3, _080870E8
+	ldr r3, _080870E8 @ =gUnknown_0202FF84
 	ldr r2, [r3]
 	strh r2, [r1, 0x26]
 	ldr r2, [r3, 0x4]
@@ -3026,8 +3026,8 @@ sub_80870EC: @ 80870EC
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r5, _0808711C
-	ldr r2, _08087120
+	ldr r5, _0808711C @ =gUnknown_0839F330
+	ldr r2, _08087120 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -3053,7 +3053,7 @@ _08087120: .4byte gTasks
 
 	thumb_func_start sub_8087124
 sub_8087124: @ 8087124
-	ldr r2, _08087134
+	ldr r2, _08087134 @ =gPlayerAvatar
 	movs r1, 0x1
 	strb r1, [r2, 0x6]
 	ldrh r1, [r0, 0x8]
@@ -3070,7 +3070,7 @@ dive_2_unknown: @ 8087138
 	push {r4,lr}
 	adds r4, r0, 0
 	bl ScriptContext2_Enable
-	ldr r1, _0808715C
+	ldr r1, _0808715C @ =gUnknown_0202FF84
 	movs r2, 0x26
 	ldrsh r0, [r4, r2]
 	str r0, [r1]
@@ -3100,8 +3100,8 @@ dive_3_unknown: @ 8087160
 	lsls r0, 24
 	cmp r0, 0
 	bne _080871A4
-	ldr r2, _080871AC
-	ldr r0, _080871B0
+	ldr r2, _080871AC @ =gMapObjects
+	ldr r0, _080871B0 @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -3110,7 +3110,7 @@ dive_3_unknown: @ 8087160
 	ldrb r1, [r0, 0x1E]
 	mov r0, sp
 	bl dive_warp
-	ldr r0, _080871B4
+	ldr r0, _080871B4 @ =sub_80870EC
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -3134,7 +3134,7 @@ sub_80871B8: @ 80871B8
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r0, _080871CC
+	ldr r0, _080871CC @ =sub_80871D0
 	bl CreateTask
 	pop {r0}
 	bx r0
@@ -3147,9 +3147,9 @@ sub_80871D0: @ 80871D0
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r6, _08087218
-	ldr r2, _0808721C
-	ldr r5, _08087220
+	ldr r6, _08087218 @ =gUnknown_0839F33C
+	ldr r2, _0808721C @ =gTasks
+	ldr r5, _08087220 @ =gPlayerAvatar
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -3163,13 +3163,13 @@ _080871E4:
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, _08087224
+	ldr r0, _08087224 @ =gMapObjects
 	adds r1, r0
 	ldrb r0, [r5, 0x4]
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, _08087228
+	ldr r0, _08087228 @ =gSprites
 	adds r2, r0
 	ldr r3, [r3]
 	adds r0, r4, 0
@@ -3197,7 +3197,7 @@ sub_808722C: @ 808722C
 	bl CameraObjectReset2
 	movs r0, 0
 	bl SetCameraPanningCallback
-	ldr r0, _08087260
+	ldr r0, _08087260 @ =gPlayerAvatar
 	movs r2, 0x1
 	strb r2, [r0, 0x6]
 	ldrb r0, [r5, 0x3]
@@ -3254,7 +3254,7 @@ sub_8087298: @ 8087298
 	strh r0, [r2, 0x26]
 	movs r0, 0x1
 	strh r0, [r4, 0xE]
-	ldr r3, _080872E0
+	ldr r3, _080872E0 @ =gUnknown_0202FF84
 	movs r5, 0x10
 	ldrsh r0, [r1, r5]
 	str r0, [r3]
@@ -3342,7 +3342,7 @@ _08087330:
 	movs r7, 0x22
 	ldrsh r0, [r5, r7]
 	adds r0, r1
-	ldr r1, _08087374
+	ldr r1, _08087374 @ =gSpriteCoordOffsetY
 	movs r7, 0
 	ldrsh r1, [r1, r7]
 	adds r0, r1
@@ -3435,7 +3435,7 @@ sub_80873D8: @ 80873D8
 	thumb_func_start sub_80873F4
 sub_80873F4: @ 80873F4
 	push {lr}
-	ldr r0, _08087434
+	ldr r0, _08087434 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -3447,12 +3447,12 @@ sub_80873F4: @ 80873F4
 	cmp r0, 0x1
 	bne _0808742C
 	bl warp_in
-	ldr r1, _08087438
-	ldr r0, _0808743C
+	ldr r1, _08087438 @ =gUnknown_0300485C
+	ldr r0, _0808743C @ =mapldr_080851BC
 	str r0, [r1]
-	ldr r0, _08087440
+	ldr r0, _08087440 @ =CB2_LoadMap
 	bl SetMainCallback2
-	ldr r0, _08087444
+	ldr r0, _08087444 @ =sub_80871D0
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -3475,10 +3475,10 @@ mapldr_080851BC: @ 8087448
 	bl sub_8053E90
 	bl pal_fill_for_maplights
 	bl ScriptContext2_Enable
-	ldr r0, _08087468
+	ldr r0, _08087468 @ =gUnknown_0300485C
 	movs r1, 0
 	str r1, [r0]
-	ldr r0, _0808746C
+	ldr r0, _0808746C @ =sub_8087470
 	bl CreateTask
 	pop {r0}
 	bx r0
@@ -3492,9 +3492,9 @@ sub_8087470: @ 8087470
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r6, _080874B8
-	ldr r2, _080874BC
-	ldr r5, _080874C0
+	ldr r6, _080874B8 @ =gUnknown_0839F354
+	ldr r2, _080874BC @ =gTasks
+	ldr r5, _080874C0 @ =gPlayerAvatar
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -3508,13 +3508,13 @@ _08087484:
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, _080874C4
+	ldr r0, _080874C4 @ =gMapObjects
 	adds r1, r0
 	ldrb r0, [r5, 0x4]
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, _080874C8
+	ldr r0, _080874C8 @ =gSprites
 	adds r2, r0
 	ldr r3, [r3]
 	adds r0, r4, 0
@@ -3540,7 +3540,7 @@ sub_80874CC: @ 80874CC
 	adds r4, r1, 0
 	bl CameraObjectReset2
 	bl player_bitmagic
-	ldr r1, _080874F8
+	ldr r1, _080874F8 @ =gPlayerAvatar
 	movs r0, 0x1
 	strb r0, [r1, 0x6]
 	ldrb r0, [r4, 0x1]
@@ -3568,7 +3568,7 @@ sub_80874FC: @ 80874FC
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808753C
-	ldr r1, _08087544
+	ldr r1, _08087544 @ =gUnknown_0202FF84
 	movs r2, 0x10
 	ldrsh r0, [r5, r2]
 	str r0, [r1]
@@ -3609,7 +3609,7 @@ sub_8087548: @ 8087548
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08087598
+	ldr r1, _08087598 @ =gSprites
 	adds r0, r1
 	adds r0, 0x2B
 	ldrb r0, [r0]
@@ -3650,12 +3650,12 @@ sub_808759C: @ 808759C
 	lsls r0, 24
 	cmp r0, 0
 	beq _080875C6
-	ldr r1, _080875CC
+	ldr r1, _080875CC @ =gPlayerAvatar
 	movs r0, 0
 	strb r0, [r1, 0x6]
 	bl ScriptContext2_Disable
 	bl sub_806451C
-	ldr r0, _080875D0
+	ldr r0, _080875D0 @ =sub_8087470
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -3672,13 +3672,13 @@ _080875D0: .4byte sub_8087470
 	thumb_func_start FldEff_LavaridgeGymWarp
 FldEff_LavaridgeGymWarp: @ 80875D4
 	push {r4,lr}
-	ldr r4, _0808762C
+	ldr r4, _0808762C @ =gUnknown_0202FF84
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
 	movs r3, 0x8
 	bl sub_8060470
-	ldr r0, _08087630
+	ldr r0, _08087630 @ =gFieldEffectObjectTemplatePointers
 	adds r0, 0x84
 	ldr r0, [r0]
 	movs r2, 0
@@ -3689,7 +3689,7 @@ FldEff_LavaridgeGymWarp: @ 80875D4
 	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _08087634
+	ldr r1, _08087634 @ =gSprites
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
@@ -3742,7 +3742,7 @@ sub_8087654: @ 8087654
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r0, _08087668
+	ldr r0, _08087668 @ =sub_808766C
 	bl CreateTask
 	pop {r0}
 	bx r0
@@ -3755,9 +3755,9 @@ sub_808766C: @ 808766C
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r6, _080876B4
-	ldr r2, _080876B8
-	ldr r5, _080876BC
+	ldr r6, _080876B4 @ =gUnknown_0839F364
+	ldr r2, _080876B8 @ =gTasks
+	ldr r5, _080876BC @ =gPlayerAvatar
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -3771,13 +3771,13 @@ _08087680:
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, _080876C0
+	ldr r0, _080876C0 @ =gMapObjects
 	adds r1, r0
 	ldrb r0, [r5, 0x4]
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, _080876C4
+	ldr r0, _080876C4 @ =gSprites
 	adds r2, r0
 	ldr r3, [r3]
 	adds r0, r4, 0
@@ -3803,7 +3803,7 @@ sub_80876C8: @ 80876C8
 	adds r4, r1, 0
 	bl player_bitmagic
 	bl CameraObjectReset2
-	ldr r1, _080876F4
+	ldr r1, _080876F4 @ =gPlayerAvatar
 	movs r0, 0x1
 	strb r0, [r1, 0x6]
 	ldrb r0, [r4, 0x3]
@@ -3837,7 +3837,7 @@ sub_80876F8: @ 80876F8
 	ldrsh r0, [r5, r2]
 	cmp r0, 0x3
 	ble _0808774C
-	ldr r1, _08087748
+	ldr r1, _08087748 @ =gUnknown_0202FF84
 	movs r2, 0x10
 	ldrsh r0, [r4, r2]
 	str r0, [r1]
@@ -3888,7 +3888,7 @@ sub_8087774: @ 8087774
 	push {r4,lr}
 	adds r3, r0, 0
 	adds r4, r1, 0
-	ldr r2, _080877A8
+	ldr r2, _080877A8 @ =gSprites
 	movs r0, 0xA
 	ldrsh r1, [r3, r0]
 	lsls r0, r1, 4
@@ -3939,7 +3939,7 @@ _080877CA:
 	thumb_func_start sub_80877D4
 sub_80877D4: @ 80877D4
 	push {lr}
-	ldr r0, _08087814
+	ldr r0, _08087814 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -3951,12 +3951,12 @@ sub_80877D4: @ 80877D4
 	cmp r0, 0x1
 	bne _0808780C
 	bl warp_in
-	ldr r1, _08087818
-	ldr r0, _0808781C
+	ldr r1, _08087818 @ =gUnknown_0300485C
+	ldr r0, _0808781C @ =sub_8086748
 	str r0, [r1]
-	ldr r0, _08087820
+	ldr r0, _08087820 @ =CB2_LoadMap
 	bl SetMainCallback2
-	ldr r0, _08087824
+	ldr r0, _08087824 @ =sub_808766C
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -3976,13 +3976,13 @@ _08087824: .4byte sub_808766C
 	thumb_func_start FldEff_PopOutOfAsh
 FldEff_PopOutOfAsh: @ 8087828
 	push {r4,lr}
-	ldr r4, _08087880
+	ldr r4, _08087880 @ =gUnknown_0202FF84
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
 	movs r3, 0x8
 	bl sub_8060470
-	ldr r0, _08087884
+	ldr r0, _08087884 @ =gFieldEffectObjectTemplatePointers
 	adds r0, 0x80
 	ldr r0, [r0]
 	movs r2, 0
@@ -3993,7 +3993,7 @@ FldEff_PopOutOfAsh: @ 8087828
 	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _08087888
+	ldr r1, _08087888 @ =gSprites
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
@@ -4045,7 +4045,7 @@ sub_80878A8: @ 80878A8
 	push {lr}
 	bl ScriptContext2_Enable
 	bl player_bitmagic
-	ldr r0, _080878C0
+	ldr r0, _080878C0 @ =sub_80878C4
 	movs r1, 0x50
 	bl CreateTask
 	pop {r0}
@@ -4060,8 +4060,8 @@ sub_80878C4: @ 80878C4
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r3, _080878EC
-	ldr r2, _080878F0
+	ldr r3, _080878EC @ =gUnknown_0839F378
+	ldr r2, _080878F0 @ =gTasks
 	lsls r0, r1, 2
 	adds r0, r1
 	lsls r0, 3
@@ -4102,7 +4102,7 @@ sub_8087914: @ 8087914
 	push {r4,r5,lr}
 	sub sp, 0x8
 	adds r4, r0, 0
-	ldr r1, _080879B8
+	ldr r1, _080879B8 @ =gUnknown_0839F380
 	mov r0, sp
 	movs r2, 0x5
 	bl memcpy
@@ -4119,12 +4119,12 @@ sub_8087914: @ 8087914
 	bl sub_8053FF8
 	bl sub_8080918
 _08087940:
-	ldr r0, _080879BC
+	ldr r0, _080879BC @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _080879C0
+	ldr r1, _080879C0 @ =gMapObjects
 	adds r5, r0, r1
 	adds r0, r5, 0
 	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
@@ -4141,7 +4141,7 @@ _08087966:
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
 	bne _080879D8
-	ldr r0, _080879C4
+	ldr r0, _080879C4 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -4159,12 +4159,12 @@ _08087966:
 	bl FieldObjectSetDirection
 	bl sub_8053678
 	bl warp_in
-	ldr r1, _080879C8
-	ldr r0, _080879CC
+	ldr r1, _080879C8 @ =gUnknown_0300485C
+	ldr r0, _080879CC @ =mapldr_080859D4
 	str r0, [r1]
-	ldr r0, _080879D0
+	ldr r0, _080879D0 @ =CB2_LoadMap
 	bl SetMainCallback2
-	ldr r0, _080879D4
+	ldr r0, _080879D4 @ =sub_80878C4
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -4230,11 +4230,11 @@ mapldr_080859D4: @ 8087A28
 	bl pal_fill_for_maplights
 	bl ScriptContext2_Enable
 	bl player_bitmagic
-	ldr r1, _08087A64
+	ldr r1, _08087A64 @ =gUnknown_0300485C
 	movs r0, 0
 	str r0, [r1]
-	ldr r2, _08087A68
-	ldr r0, _08087A6C
+	ldr r2, _08087A68 @ =gMapObjects
+	ldr r0, _08087A6C @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -4244,7 +4244,7 @@ mapldr_080859D4: @ 8087A28
 	movs r2, 0x20
 	orrs r1, r2
 	strb r1, [r0, 0x1]
-	ldr r0, _08087A70
+	ldr r0, _08087A70 @ =sub_8087A74
 	movs r1, 0
 	bl CreateTask
 	pop {r0}
@@ -4262,8 +4262,8 @@ sub_8087A74: @ 8087A74
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r3, _08087A9C
-	ldr r2, _08087AA0
+	ldr r3, _08087A9C @ =gUnknown_0839F388
+	ldr r2, _08087AA0 @ =gTasks
 	lsls r0, r1, 2
 	adds r0, r1
 	lsls r0, 3
@@ -4307,16 +4307,16 @@ sub_8087AC8: @ 8087AC8
 	push {r4-r6,lr}
 	sub sp, 0x8
 	adds r5, r0, 0
-	ldr r1, _08087B4C
+	ldr r1, _08087B4C @ =gUnknown_0839F380
 	mov r0, sp
 	movs r2, 0x5
 	bl memcpy
-	ldr r0, _08087B50
+	ldr r0, _08087B50 @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08087B54
+	ldr r1, _08087B54 @ =gMapObjects
 	adds r6, r0, r1
 	ldrh r1, [r5, 0xA]
 	movs r2, 0xA
@@ -4358,7 +4358,7 @@ _08087B12:
 	strb r0, [r6, 0x1]
 	bl ScriptContext2_Disable
 	bl sub_806451C
-	ldr r0, _08087B58
+	ldr r0, _08087B58 @ =sub_8087A74
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -4414,7 +4414,7 @@ _08087BA0:
 	thumb_func_start sub_8087BA8
 sub_8087BA8: @ 8087BA8
 	push {lr}
-	ldr r0, _08087BB8
+	ldr r0, _08087BB8 @ =sub_8087BBC
 	movs r1, 0
 	bl CreateTask
 	pop {r0}
@@ -4429,8 +4429,8 @@ sub_8087BBC: @ 8087BBC
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r3, _08087BE4
-	ldr r2, _08087BE8
+	ldr r3, _08087BE4 @ =gUnknown_0839F390
+	ldr r2, _08087BE8 @ =gTasks
 	lsls r0, r1, 2
 	adds r0, r1
 	lsls r0, 3
@@ -4472,16 +4472,16 @@ sub_8087C14: @ 8087C14
 	push {r4,r5,lr}
 	sub sp, 0x8
 	adds r4, r0, 0
-	ldr r1, _08087C98
+	ldr r1, _08087C98 @ =gUnknown_0839F380
 	mov r0, sp
 	movs r2, 0x5
 	bl memcpy
-	ldr r0, _08087C9C
+	ldr r0, _08087C9C @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08087CA0
+	ldr r1, _08087CA0 @ =gMapObjects
 	adds r5, r0, r1
 	ldrh r1, [r4, 0xA]
 	movs r2, 0xA
@@ -4545,22 +4545,22 @@ sub_8087CA4: @ 8087CA4
 	push {r4,r5,lr}
 	sub sp, 0x8
 	adds r4, r0, 0
-	ldr r1, _08087D68
+	ldr r1, _08087D68 @ =gUnknown_0839F380
 	mov r0, sp
 	movs r2, 0x5
 	bl memcpy
-	ldr r2, _08087D6C
+	ldr r2, _08087D6C @ =gPlayerAvatar
 	ldrb r1, [r2, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08087D70
+	ldr r1, _08087D70 @ =gMapObjects
 	adds r3, r0, r1
 	ldrb r1, [r2, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08087D74
+	ldr r1, _08087D74 @ =gSprites
 	adds r5, r0, r1
 	ldrh r0, [r4, 0xA]
 	subs r0, 0x1
@@ -4649,7 +4649,7 @@ _08087D74: .4byte gSprites
 	thumb_func_start sub_8087D78
 sub_8087D78: @ 8087D78
 	push {lr}
-	ldr r0, _08087DB8
+	ldr r0, _08087DB8 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -4662,12 +4662,12 @@ sub_8087D78: @ 8087D78
 	bne _08087DB4
 	bl sub_8053570
 	bl warp_in
-	ldr r0, _08087DBC
+	ldr r0, _08087DBC @ =CB2_LoadMap
 	bl SetMainCallback2
-	ldr r1, _08087DC0
-	ldr r0, _08087DC4
+	ldr r1, _08087DC0 @ =gUnknown_0300485C
+	ldr r0, _08087DC4 @ =mapldr_08085D88
 	str r0, [r1]
-	ldr r0, _08087DC8
+	ldr r0, _08087DC8 @ =sub_8087BBC
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -4690,11 +4690,11 @@ mapldr_08085D88: @ 8087DCC
 	bl pal_fill_for_maplights
 	bl ScriptContext2_Enable
 	bl player_bitmagic
-	ldr r1, _08087E0C
+	ldr r1, _08087E0C @ =gUnknown_0300485C
 	movs r0, 0
 	str r0, [r1]
-	ldr r2, _08087E10
-	ldr r0, _08087E14
+	ldr r2, _08087E10 @ =gMapObjects
+	ldr r0, _08087E14 @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -4705,7 +4705,7 @@ mapldr_08085D88: @ 8087DCC
 	orrs r1, r2
 	strb r1, [r0, 0x1]
 	bl CameraObjectReset2
-	ldr r0, _08087E18
+	ldr r0, _08087E18 @ =sub_8087E1C
 	movs r1, 0
 	bl CreateTask
 	pop {r0}
@@ -4723,8 +4723,8 @@ sub_8087E1C: @ 8087E1C
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r3, _08087E44
-	ldr r2, _08087E48
+	ldr r3, _08087E44 @ =gUnknown_0839F3A0
+	ldr r2, _08087E48 @ =gTasks
 	lsls r0, r1, 2
 	adds r0, r1
 	lsls r0, 3
@@ -4750,12 +4750,12 @@ sub_8087E4C: @ 8087E4C
 	lsls r0, 24
 	cmp r0, 0
 	beq _08087EC2
-	ldr r5, _08087EC8
+	ldr r5, _08087EC8 @ =gPlayerAvatar
 	ldrb r0, [r5, 0x4]
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, _08087ECC
+	ldr r0, _08087ECC @ =gSprites
 	adds r2, r0
 	adds r0, r2, 0
 	adds r0, 0x29
@@ -4764,7 +4764,7 @@ sub_8087E4C: @ 8087E4C
 	lsls r0, r4, 17
 	negs r0, r0
 	ldrh r1, [r2, 0x22]
-	ldr r3, _08087ED0
+	ldr r3, _08087ED0 @ =gSpriteCoordOffsetY
 	adds r1, r4
 	ldrh r3, [r3]
 	adds r1, r3
@@ -4772,7 +4772,7 @@ sub_8087E4C: @ 8087E4C
 	adds r0, r1
 	negs r0, r0
 	strh r0, [r2, 0x26]
-	ldr r3, _08087ED4
+	ldr r3, _08087ED4 @ =gMapObjects
 	ldrb r0, [r5, 0x5]
 	lsls r1, r0, 3
 	adds r1, r0
@@ -4816,22 +4816,22 @@ sub_8087ED8: @ 8087ED8
 	push {r4-r7,lr}
 	sub sp, 0x8
 	adds r4, r0, 0
-	ldr r1, _08087F40
+	ldr r1, _08087F40 @ =gUnknown_0839F380
 	mov r0, sp
 	movs r2, 0x5
 	bl memcpy
-	ldr r2, _08087F44
+	ldr r2, _08087F44 @ =gPlayerAvatar
 	ldrb r1, [r2, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08087F48
+	ldr r1, _08087F48 @ =gMapObjects
 	adds r6, r0, r1
 	ldrb r1, [r2, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08087F4C
+	ldr r1, _08087F4C @ =gSprites
 	adds r5, r0, r1
 	ldrh r0, [r4, 0xA]
 	ldrh r1, [r5, 0x26]
@@ -4949,16 +4949,16 @@ sub_8087FDC: @ 8087FDC
 	push {r4,r5,lr}
 	sub sp, 0x8
 	adds r4, r0, 0
-	ldr r1, _08088058
+	ldr r1, _08088058 @ =gUnknown_0839F380
 	mov r0, sp
 	movs r2, 0x5
 	bl memcpy
-	ldr r0, _0808805C
+	ldr r0, _0808805C @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08088060
+	ldr r1, _08088060 @ =gMapObjects
 	adds r5, r0, r1
 	ldrh r0, [r4, 0xA]
 	subs r0, 0x1
@@ -4992,7 +4992,7 @@ sub_8087FDC: @ 8087FDC
 	bl ScriptContext2_Disable
 	bl CameraObjectReset1
 	bl sub_806451C
-	ldr r0, _08088064
+	ldr r0, _08088064 @ =sub_8087E1C
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -5020,23 +5020,23 @@ FldEff_FieldMoveShowMon: @ 8088068
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _08088088
-	ldr r0, _08088084
+	ldr r0, _08088084 @ =sub_8088120
 	b _0808808A
 	.align 2, 0
 _08088084: .4byte sub_8088120
 _08088088:
-	ldr r0, _080880B8
+	ldr r0, _080880B8 @ =sub_808847C
 _0808808A:
 	movs r1, 0xFF
 	bl CreateTask
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r2, _080880BC
+	ldr r2, _080880BC @ =gUnknown_0202FF84
 	ldr r0, [r2]
 	ldr r1, [r2, 0x4]
 	ldr r2, [r2, 0x8]
 	bl sub_8088830
-	ldr r2, _080880C0
+	ldr r2, _080880C0 @ =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
@@ -5057,7 +5057,7 @@ _080880C0: .4byte gTasks
 	thumb_func_start FldEff_FieldMoveShowMonInit
 FldEff_FieldMoveShowMonInit: @ 80880C4
 	push {r4-r6,lr}
-	ldr r5, _08088118
+	ldr r5, _08088118 @ =gUnknown_0202FF84
 	ldr r0, [r5]
 	movs r6, 0x80
 	lsls r6, 24
@@ -5067,7 +5067,7 @@ FldEff_FieldMoveShowMonInit: @ 80880C4
 	movs r1, 0x64
 	adds r4, r0, 0
 	muls r4, r1
-	ldr r0, _0808811C
+	ldr r0, _0808811C @ =gPlayerParty
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0xB
@@ -5103,8 +5103,8 @@ sub_8088120: @ 8088120
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r3, _08088148
-	ldr r2, _0808814C
+	ldr r3, _08088148 @ =gUnknown_0839F3AC
+	ldr r2, _0808814C @ =gTasks
 	lsls r0, r1, 2
 	adds r0, r1
 	lsls r0, 3
@@ -5126,35 +5126,35 @@ _0808814C: .4byte gTasks
 sub_8088150: @ 8088150
 	push {r4-r6,lr}
 	adds r4, r0, 0
-	ldr r6, _080881A0
+	ldr r6, _080881A0 @ =REG_WININ
 	ldrh r0, [r6]
 	strh r0, [r4, 0x1E]
-	ldr r5, _080881A4
+	ldr r5, _080881A4 @ =REG_WINOUT
 	ldrh r0, [r5]
 	strh r0, [r4, 0x20]
 	adds r0, r4, 0
 	adds r0, 0x22
-	ldr r1, _080881A8
+	ldr r1, _080881A8 @ =gMain
 	ldr r1, [r1, 0xC]
 	bl StoreWordInTwoHalfwords
-	ldr r1, _080881AC
+	ldr r1, _080881AC @ =0x0000f0f1
 	strh r1, [r4, 0xA]
-	ldr r0, _080881B0
+	ldr r0, _080881B0 @ =0x00005051
 	strh r0, [r4, 0xC]
 	movs r0, 0x3F
 	strh r0, [r4, 0xE]
 	movs r0, 0x3E
 	strh r0, [r4, 0x10]
-	ldr r0, _080881B4
+	ldr r0, _080881B4 @ =REG_WIN0H
 	strh r1, [r0]
-	ldr r1, _080881B8
+	ldr r1, _080881B8 @ =REG_WIN0V
 	ldrh r0, [r4, 0xC]
 	strh r0, [r1]
 	ldrh r0, [r4, 0xE]
 	strh r0, [r6]
 	ldrh r0, [r4, 0x10]
 	strh r0, [r5]
-	ldr r0, _080881BC
+	ldr r0, _080881BC @ =sub_80883DC
 	bl SetVBlankCallback
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
@@ -5178,7 +5178,7 @@ sub_80881C0: @ 80881C0
 	push {r4-r6,lr}
 	sub sp, 0x4
 	adds r6, r0, 0
-	ldr r0, _08088218
+	ldr r0, _08088218 @ =REG_BG0CNT
 	ldrh r1, [r0]
 	lsrs r1, 2
 	lsls r1, 30
@@ -5187,7 +5187,7 @@ sub_80881C0: @ 80881C0
 	lsrs r4, 8
 	lsls r4, 27
 	lsrs r4, 16
-	ldr r0, _0808821C
+	ldr r0, _0808821C @ =gFieldMoveStreaksTiles
 	movs r5, 0xC0
 	lsls r5, 19
 	adds r1, r5
@@ -5197,11 +5197,11 @@ sub_80881C0: @ 80881C0
 	movs r0, 0
 	str r0, [sp]
 	adds r5, r4, r5
-	ldr r2, _08088220
+	ldr r2, _08088220 @ =0x05000200
 	mov r0, sp
 	adds r1, r5, 0
 	bl CpuSet
-	ldr r0, _08088224
+	ldr r0, _08088224 @ =gFieldMoveStreaksPalette
 	movs r1, 0xF0
 	movs r2, 0x20
 	bl LoadPalette
@@ -5275,7 +5275,7 @@ _08088264:
 	bne _080882A4
 	cmp r1, 0x78
 	bne _080882A4
-	ldr r2, _080882AC
+	ldr r2, _080882AC @ =gSprites
 	movs r0, 0x26
 	ldrsh r1, [r3, r0]
 	lsls r0, r1, 4
@@ -5283,7 +5283,7 @@ _08088264:
 	lsls r0, 2
 	adds r2, 0x1C
 	adds r0, r2
-	ldr r1, _080882B0
+	ldr r1, _080882B0 @ =sub_8088890
 	str r1, [r0]
 	ldrh r0, [r3, 0x8]
 	adds r0, 0x1
@@ -5304,7 +5304,7 @@ sub_80882B4: @ 80882B4
 	ldrh r0, [r3, 0x12]
 	subs r0, 0x10
 	strh r0, [r3, 0x12]
-	ldr r2, _080882E0
+	ldr r2, _080882E0 @ =gSprites
 	movs r0, 0x26
 	ldrsh r1, [r3, r0]
 	lsls r0, r1, 4
@@ -5379,7 +5379,7 @@ sub_8088338: @ 8088338
 	push {r4,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
-	ldr r0, _08088378
+	ldr r0, _08088378 @ =REG_BG0CNT
 	ldrh r1, [r0]
 	lsrs r1, 8
 	lsls r1, 27
@@ -5389,7 +5389,7 @@ sub_8088338: @ 8088338
 	movs r0, 0xC0
 	lsls r0, 19
 	adds r1, r0
-	ldr r2, _0808837C
+	ldr r2, _0808837C @ =0x05000200
 	mov r0, sp
 	bl CpuSet
 	movs r0, 0xF1
@@ -5422,7 +5422,7 @@ sub_8088380: @ 8088380
 	bl LoadWordFromTwoHalfwords
 	ldr r0, [sp]
 	bl SetVBlankCallback
-	ldr r4, _080883D0
+	ldr r4, _080883D0 @ =gWindowConfig_81E6CE4
 	adds r0, r4, 0
 	bl SetUpWindowConfig
 	adds r0, r4, 0
@@ -5432,12 +5432,12 @@ sub_8088380: @ 8088380
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _080883D4
+	ldr r1, _080883D4 @ =gSprites
 	adds r0, r1
 	bl FreeResourcesAndDestroySprite
 	movs r0, 0x6
 	bl FieldEffectActiveListRemove
-	ldr r0, _080883D8
+	ldr r0, _080883D8 @ =sub_8088120
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -5456,14 +5456,14 @@ _080883D8: .4byte sub_8088120
 sub_80883DC: @ 80883DC
 	push {r4,lr}
 	sub sp, 0x4
-	ldr r0, _08088430
+	ldr r0, _08088430 @ =sub_8088120
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r4, r0, 2
 	adds r4, r0
 	lsls r4, 3
-	ldr r0, _08088434
+	ldr r0, _08088434 @ =gTasks
 	adds r4, r0
 	adds r0, r4, 0
 	adds r0, 0x22
@@ -5471,7 +5471,7 @@ sub_80883DC: @ 80883DC
 	bl LoadWordFromTwoHalfwords
 	ldr r0, [sp]
 	bl _call_via_r0
-	ldr r1, _08088438
+	ldr r1, _08088438 @ =REG_WIN0H
 	ldrh r0, [r4, 0xA]
 	strh r0, [r1]
 	adds r1, 0x4
@@ -5504,14 +5504,14 @@ sub_808843C: @ 808843C
 	push {r4,r5,lr}
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r1, _08088470
+	ldr r1, _08088470 @ =0x06000140
 	adds r2, r0, r1
 	movs r1, 0
-	ldr r5, _08088474
+	ldr r5, _08088474 @ =gFieldMoveStreaksTilemap
 	movs r0, 0xF0
 	lsls r0, 8
 	adds r4, r0, 0
-	ldr r3, _08088478
+	ldr r3, _08088478 @ =0x0000013f
 _08088452:
 	lsls r0, r1, 1
 	adds r0, r5
@@ -5539,8 +5539,8 @@ sub_808847C: @ 808847C
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r3, _080884A4
-	ldr r2, _080884A8
+	ldr r3, _080884A4 @ =gUnknown_0839F3C8
+	ldr r2, _080884A8 @ =gTasks
 	lsls r0, r1, 2
 	adds r0, r1
 	lsls r0, 3
@@ -5562,7 +5562,7 @@ _080884A8: .4byte gTasks
 sub_80884AC: @ 80884AC
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r1, _080884DC
+	ldr r1, _080884DC @ =REG_BG0HOFS
 	ldrh r0, [r4, 0xA]
 	strh r0, [r1]
 	adds r1, 0x2
@@ -5570,10 +5570,10 @@ sub_80884AC: @ 80884AC
 	strh r0, [r1]
 	adds r0, r4, 0
 	adds r0, 0x22
-	ldr r1, _080884E0
+	ldr r1, _080884E0 @ =gMain
 	ldr r1, [r1, 0xC]
 	bl StoreWordInTwoHalfwords
-	ldr r0, _080884E4
+	ldr r0, _080884E4 @ =sub_80886B0
 	bl SetVBlankCallback
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
@@ -5594,7 +5594,7 @@ sub_80884E8: @ 80884E8
 	push {r6}
 	sub sp, 0x4
 	adds r6, r0, 0
-	ldr r0, _08088544
+	ldr r0, _08088544 @ =REG_BG0CNT
 	ldrh r1, [r0]
 	lsrs r1, 2
 	lsls r1, 30
@@ -5606,7 +5606,7 @@ sub_80884E8: @ 80884E8
 	movs r0, 0
 	mov r8, r0
 	strh r4, [r6, 0x20]
-	ldr r0, _08088548
+	ldr r0, _08088548 @ =gDarknessFieldMoveStreaksTiles
 	movs r5, 0xC0
 	lsls r5, 19
 	adds r1, r5
@@ -5615,11 +5615,11 @@ sub_80884E8: @ 80884E8
 	mov r0, r8
 	str r0, [sp]
 	adds r4, r5
-	ldr r2, _0808854C
+	ldr r2, _0808854C @ =0x05000200
 	mov r0, sp
 	adds r1, r4, 0
 	bl CpuSet
-	ldr r0, _08088550
+	ldr r0, _08088550 @ =gDarknessFieldMoveStreaksPalette
 	movs r1, 0xF0
 	movs r2, 0x20
 	bl LoadPalette
@@ -5647,14 +5647,14 @@ sub_8088554: @ 8088554
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808858A
-	ldr r1, _08088598
+	ldr r1, _08088598 @ =REG_WIN1H
 	movs r0, 0xF0
 	strh r0, [r1]
 	adds r1, 0x4
-	ldr r2, _0808859C
+	ldr r2, _0808859C @ =0x00002878
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r2, _080885A0
+	ldr r2, _080885A0 @ =gSprites
 	movs r0, 0x26
 	ldrsh r1, [r4, r0]
 	lsls r0, r1, 4
@@ -5662,7 +5662,7 @@ sub_8088554: @ 8088554
 	lsls r0, 2
 	adds r2, 0x1C
 	adds r0, r2
-	ldr r1, _080885A4
+	ldr r1, _080885A4 @ =sub_8088890
 	str r1, [r0]
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
@@ -5685,7 +5685,7 @@ sub_80885A8: @ 80885A8
 	push {r4,lr}
 	adds r4, r0, 0
 	bl sub_80886F8
-	ldr r2, _080885D4
+	ldr r2, _080885D4 @ =gSprites
 	movs r0, 0x26
 	ldrsh r1, [r4, r0]
 	lsls r0, r1, 4
@@ -5718,8 +5718,8 @@ sub_80885D8: @ 80885D8
 	movs r1, 0
 	strh r0, [r4, 0xE]
 	strh r1, [r4, 0x10]
-	ldr r0, _08088604
-	ldr r2, _08088608
+	ldr r0, _08088604 @ =REG_WIN1H
+	ldr r2, _08088608 @ =0x0000ffff
 	adds r1, r2, 0
 	strh r1, [r0]
 	adds r0, 0x4
@@ -5759,7 +5759,7 @@ sub_808862C: @ 808862C
 	push {r4,r5,lr}
 	sub sp, 0x8
 	adds r5, r0, 0
-	ldr r0, _0808869C
+	ldr r0, _0808869C @ =REG_BG0CNT
 	ldrh r1, [r0]
 	lsrs r1, 8
 	lsls r1, 27
@@ -5769,7 +5769,7 @@ sub_808862C: @ 808862C
 	movs r0, 0xC0
 	lsls r0, 19
 	adds r1, r0
-	ldr r2, _080886A0
+	ldr r2, _080886A0 @ =0x05000200
 	mov r0, sp
 	bl CpuSet
 	adds r0, r5, 0
@@ -5778,7 +5778,7 @@ sub_808862C: @ 808862C
 	bl LoadWordFromTwoHalfwords
 	ldr r0, [sp, 0x4]
 	bl SetVBlankCallback
-	ldr r4, _080886A4
+	ldr r4, _080886A4 @ =gWindowConfig_81E6CE4
 	adds r0, r4, 0
 	bl SetUpWindowConfig
 	adds r0, r4, 0
@@ -5788,12 +5788,12 @@ sub_808862C: @ 808862C
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _080886A8
+	ldr r1, _080886A8 @ =gSprites
 	adds r0, r1
 	bl FreeResourcesAndDestroySprite
 	movs r0, 0x6
 	bl FieldEffectActiveListRemove
-	ldr r0, _080886AC
+	ldr r0, _080886AC @ =sub_808847C
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -5814,14 +5814,14 @@ _080886AC: .4byte sub_808847C
 sub_80886B0: @ 80886B0
 	push {r4,lr}
 	sub sp, 0x4
-	ldr r0, _080886EC
+	ldr r0, _080886EC @ =sub_808847C
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r4, r0, 2
 	adds r4, r0
 	lsls r4, 3
-	ldr r0, _080886F0
+	ldr r0, _080886F0 @ =gTasks
 	adds r4, r0
 	adds r0, r4, 0
 	adds r0, 0x22
@@ -5829,7 +5829,7 @@ sub_80886B0: @ 80886B0
 	bl LoadWordFromTwoHalfwords
 	ldr r0, [sp]
 	bl _call_via_r0
-	ldr r1, _080886F4
+	ldr r1, _080886F4 @ =REG_BG0HOFS
 	ldrh r0, [r4, 0xA]
 	strh r0, [r1]
 	adds r1, 0x2
@@ -5891,11 +5891,11 @@ _08088724:
 	ands r7, r1
 	mov r12, r7
 	ldrh r0, [r5, 0x20]
-	ldr r1, _080887B8
+	ldr r1, _080887B8 @ =0x06000140
 	adds r1, r0
 	mov r8, r1
 	movs r4, 0
-	ldr r7, _080887BC
+	ldr r7, _080887BC @ =gDarknessFieldMoveStreaksTilemap
 	mov r10, r7
 	movs r0, 0xF0
 	lsls r0, 8
@@ -5981,7 +5981,7 @@ _080887D0:
 	movs r0, 0x1F
 	ands r2, r0
 	ldrh r0, [r5, 0x20]
-	ldr r1, _0808882C
+	ldr r1, _0808882C @ =0x06000140
 	adds r6, r0, r1
 	movs r3, 0
 	movs r0, 0xF0
@@ -6029,7 +6029,7 @@ sub_8088830: @ 8088830
 	lsrs r5, 16
 	lsls r5, 16
 	lsrs r5, 16
-	ldr r0, _08088884
+	ldr r0, _08088884 @ =0x7fffffff
 	ands r6, r0
 	lsls r0, r6, 16
 	lsrs r0, 16
@@ -6045,9 +6045,9 @@ sub_8088830: @ 8088830
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r1, _08088888
+	ldr r1, _08088888 @ =gSprites
 	adds r2, r1
-	ldr r1, _0808888C
+	ldr r1, _0808888C @ =SpriteCallbackDummy
 	str r1, [r2, 0x1C]
 	ldrb r3, [r2, 0x5]
 	movs r1, 0xD
@@ -6081,7 +6081,7 @@ sub_8088890: @ 8088890
 	strh r0, [r1, 0x20]
 	movs r0, 0x1E
 	strh r0, [r1, 0x30]
-	ldr r0, _080888C4
+	ldr r0, _080888C4 @ =sub_80888D4
 	str r0, [r1, 0x1C]
 	movs r2, 0x3A
 	ldrsh r0, [r1, r2]
@@ -6114,7 +6114,7 @@ sub_80888D4: @ 80888D4
 	lsls r0, 16
 	cmp r0, 0
 	bne _080888E8
-	ldr r0, _080888EC
+	ldr r0, _080888EC @ =sub_80888F0
 	str r0, [r1, 0x1C]
 _080888E8:
 	pop {r0}
@@ -6149,21 +6149,21 @@ _0808890E:
 	thumb_func_start FldEff_UseSurf
 FldEff_UseSurf: @ 8088914
 	push {lr}
-	ldr r0, _08088944
+	ldr r0, _08088944 @ =sub_8088954
 	movs r1, 0xFF
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _08088948
+	ldr r2, _08088948 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
 	adds r1, r2
-	ldr r0, _0808894C
+	ldr r0, _0808894C @ =gUnknown_0202FF84
 	ldr r0, [r0]
 	strh r0, [r1, 0x26]
 	bl sav1_reset_battle_music_maybe
-	ldr r0, _08088950
+	ldr r0, _08088950 @ =0x0000016d
 	bl sub_8053FB0
 	movs r0, 0
 	pop {r1}
@@ -6181,8 +6181,8 @@ sub_8088954: @ 8088954
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r3, _0808897C
-	ldr r2, _08088980
+	ldr r3, _0808897C @ =gUnknown_0839F3E4
+	ldr r2, _08088980 @ =gTasks
 	lsls r0, r1, 2
 	adds r0, r1
 	lsls r0, 3
@@ -6208,7 +6208,7 @@ sub_8088984: @ 8088984
 	adds r4, r0, 0
 	bl ScriptContext2_Enable
 	bl player_bitmagic
-	ldr r5, _080889DC
+	ldr r5, _080889DC @ =gPlayerAvatar
 	movs r0, 0x1
 	strb r0, [r5, 0x6]
 	movs r0, 0x8
@@ -6221,7 +6221,7 @@ sub_8088984: @ 8088984
 	adds r0, r6, 0
 	mov r1, r8
 	bl PlayerGetDestCoords
-	ldr r2, _080889E0
+	ldr r2, _080889E0 @ =gMapObjects
 	ldrb r1, [r5, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -6249,12 +6249,12 @@ _080889E0: .4byte gMapObjects
 sub_80889E4: @ 80889E4
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	ldr r0, _08088A28
+	ldr r0, _08088A28 @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08088A2C
+	ldr r1, _08088A2C @ =gMapObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
 	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
@@ -6287,18 +6287,18 @@ _08088A2C: .4byte gMapObjects
 sub_8088A30: @ 8088A30
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, _08088A6C
+	ldr r0, _08088A6C @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08088A70
+	ldr r1, _08088A70 @ =gMapObjects
 	adds r0, r1
 	bl FieldObjectCheckIfSpecialAnimFinishedOrInactive
 	lsls r0, 24
 	cmp r0, 0
 	beq _08088A66
-	ldr r2, _08088A74
+	ldr r2, _08088A74 @ =gUnknown_0202FF84
 	movs r1, 0x26
 	ldrsh r0, [r4, r1]
 	movs r1, 0x80
@@ -6329,12 +6329,12 @@ sub_8088A78: @ 8088A78
 	lsls r0, 24
 	cmp r0, 0
 	bne _08088AE2
-	ldr r5, _08088AE8
+	ldr r5, _08088AE8 @ =gPlayerAvatar
 	ldrb r0, [r5, 0x5]
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, _08088AEC
+	ldr r0, _08088AEC @ =gMapObjects
 	adds r4, r0
 	movs r0, 0x3
 	bl GetPlayerAvatarGraphicsIdByStateId
@@ -6353,7 +6353,7 @@ sub_8088A78: @ 8088A78
 	lsrs r1, 24
 	adds r0, r4, 0
 	bl FieldObjectSetSpecialAnim
-	ldr r1, _08088AF0
+	ldr r1, _08088AF0 @ =gUnknown_0202FF84
 	movs r2, 0xA
 	ldrsh r0, [r6, r2]
 	str r0, [r1]
@@ -6381,12 +6381,12 @@ _08088AF0: .4byte gUnknown_0202FF84
 	thumb_func_start sub_8088AF4
 sub_8088AF4: @ 8088AF4
 	push {r4,r5,lr}
-	ldr r5, _08088B5C
+	ldr r5, _08088B5C @ =gPlayerAvatar
 	ldrb r1, [r5, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08088B60
+	ldr r1, _08088B60 @ =gMapObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
 	bl FieldObjectClearAnimIfSpecialAnimFinished
@@ -6414,7 +6414,7 @@ sub_8088AF4: @ 8088AF4
 	bl ScriptContext2_Disable
 	movs r0, 0x9
 	bl FieldEffectActiveListRemove
-	ldr r0, _08088B64
+	ldr r0, _08088B64 @ =sub_8088954
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -6432,7 +6432,7 @@ _08088B64: .4byte sub_8088954
 	thumb_func_start FldEff_NPCFlyOut
 FldEff_NPCFlyOut: @ 8088B68
 	push {r4,lr}
-	ldr r0, _08088BB4
+	ldr r0, _08088BB4 @ =gFieldEffectObjectTemplatePointers
 	ldr r0, [r0, 0x68]
 	movs r1, 0x78
 	movs r2, 0
@@ -6444,7 +6444,7 @@ FldEff_NPCFlyOut: @ 8088B68
 	lsls r2, r4, 4
 	adds r2, r4
 	lsls r2, 2
-	ldr r0, _08088BB8
+	ldr r0, _08088BB8 @ =gSprites
 	adds r2, r0
 	ldrb r1, [r2, 0x5]
 	movs r0, 0xF
@@ -6455,9 +6455,9 @@ FldEff_NPCFlyOut: @ 8088B68
 	movs r1, 0x4
 	orrs r0, r1
 	strb r0, [r2, 0x5]
-	ldr r0, _08088BBC
+	ldr r0, _08088BBC @ =sub_8088BC4
 	str r0, [r2, 0x1C]
-	ldr r0, _08088BC0
+	ldr r0, _08088BC0 @ =gUnknown_0202FF84
 	ldr r0, [r0]
 	strh r0, [r2, 0x30]
 	movs r0, 0x9E
@@ -6502,7 +6502,7 @@ sub_8088BC4: @ 8088BC4
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, _08088C3C
+	ldr r0, _08088C3C @ =gSprites
 	adds r1, r0
 	adds r3, r1, 0
 	adds r3, 0x3E
@@ -6541,17 +6541,17 @@ _08088C3C: .4byte gSprites
 	thumb_func_start FldEff_UseFly
 FldEff_UseFly: @ 8088C40
 	push {lr}
-	ldr r0, _08088C64
+	ldr r0, _08088C64 @ =sub_8088C70
 	movs r1, 0xFE
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _08088C68
+	ldr r2, _08088C68 @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
 	adds r1, r2
-	ldr r0, _08088C6C
+	ldr r0, _08088C6C @ =gUnknown_0202FF84
 	ldr r0, [r0]
 	strh r0, [r1, 0xA]
 	movs r0, 0
@@ -6569,8 +6569,8 @@ sub_8088C70: @ 8088C70
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r3, _08088C98
-	ldr r2, _08088C9C
+	ldr r3, _08088C98 @ =gUnknown_0839F3F8
+	ldr r2, _08088C9C @ =gTasks
 	lsls r0, r1, 2
 	adds r0, r1
 	lsls r0, 3
@@ -6592,12 +6592,12 @@ _08088C9C: .4byte gTasks
 sub_8088CA0: @ 8088CA0
 	push {r4-r6,lr}
 	adds r5, r0, 0
-	ldr r6, _08088CF0
+	ldr r6, _08088CF0 @ =gPlayerAvatar
 	ldrb r1, [r6, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08088CF4
+	ldr r1, _08088CF4 @ =gMapObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
 	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
@@ -6635,12 +6635,12 @@ _08088CF4: .4byte gMapObjects
 sub_8088CF8: @ 8088CF8
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, _08088D30
+	ldr r0, _08088D30 @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08088D34
+	ldr r1, _08088D34 @ =gMapObjects
 	adds r0, r1
 	bl FieldObjectClearAnimIfSpecialAnimFinished
 	lsls r0, 24
@@ -6649,7 +6649,7 @@ sub_8088CF8: @ 8088CF8
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
-	ldr r1, _08088D38
+	ldr r1, _08088D38 @ =gUnknown_0202FF84
 	movs r2, 0xA
 	ldrsh r0, [r4, r2]
 	str r0, [r1]
@@ -6674,12 +6674,12 @@ sub_8088D3C: @ 8088D3C
 	lsls r0, 24
 	cmp r0, 0
 	bne _08088D84
-	ldr r0, _08088D8C
+	ldr r0, _08088D8C @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08088D90
+	ldr r1, _08088D90 @ =gMapObjects
 	adds r5, r0, r1
 	ldrh r1, [r4, 0x26]
 	movs r0, 0x8
@@ -6725,12 +6725,12 @@ sub_8088D94: @ 8088D94
 	strh r0, [r4, 0xC]
 	movs r0, 0x1
 	bl SetPlayerAvatarTransitionFlags
-	ldr r0, _08088DD0
+	ldr r0, _08088DD0 @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08088DD4
+	ldr r1, _08088DD4 @ =gMapObjects
 	adds r0, r1
 	movs r1, 0x2
 	bl FieldObjectSetSpecialAnim
@@ -6747,12 +6747,12 @@ _08088DD4: .4byte gMapObjects
 sub_8088DD8: @ 8088DD8
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, _08088E24
+	ldr r0, _08088E24 @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08088E28
+	ldr r1, _08088E28 @ =gMapObjects
 	adds r2, r0, r1
 	ldrh r1, [r4, 0xC]
 	movs r3, 0xC
@@ -6797,12 +6797,12 @@ sub_8088E2C: @ 8088E2C
 	asrs r0, 16
 	cmp r0, 0x7
 	ble _08088EA2
-	ldr r0, _08088EA8
+	ldr r0, _08088EA8 @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08088EAC
+	ldr r1, _08088EAC @ =gMapObjects
 	adds r4, r0, r1
 	movs r0, 0x3
 	bl GetPlayerAvatarGraphicsIdByStateId
@@ -6815,7 +6815,7 @@ sub_8088E2C: @ 8088E2C
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r6, _08088EB0
+	ldr r6, _08088EB0 @ =gSprites
 	adds r0, r6
 	movs r1, 0x16
 	bl StartSpriteAnim
@@ -6864,12 +6864,12 @@ sub_8088EB4: @ 8088EB4
 	asrs r0, 16
 	cmp r0, 0x9
 	ble _08088F00
-	ldr r0, _08088F08
+	ldr r0, _08088F08 @ =gPlayerAvatar
 	ldrb r0, [r0, 0x5]
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, _08088F0C
+	ldr r0, _08088F0C @ =gMapObjects
 	adds r4, r0
 	adds r0, r4, 0
 	bl FieldObjectClearAnimIfSpecialAnimActive
@@ -6921,7 +6921,7 @@ _08088F2A:
 	thumb_func_start sub_8088F30
 sub_8088F30: @ 8088F30
 	push {lr}
-	ldr r0, _08088F58
+	ldr r0, _08088F58 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -6929,7 +6929,7 @@ sub_8088F30: @ 8088F30
 	bne _08088F52
 	movs r0, 0x1F
 	bl FieldEffectActiveListRemove
-	ldr r0, _08088F5C
+	ldr r0, _08088F5C @ =sub_8088C70
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -6945,7 +6945,7 @@ _08088F5C: .4byte sub_8088C70
 	thumb_func_start sub_8088F60
 sub_8088F60: @ 8088F60
 	push {lr}
-	ldr r0, _08088F98
+	ldr r0, _08088F98 @ =gFieldEffectObjectTemplatePointers
 	ldr r0, [r0, 0x68]
 	movs r1, 0xFF
 	movs r2, 0xB4
@@ -6956,7 +6956,7 @@ sub_8088F60: @ 8088F60
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r1, _08088F9C
+	ldr r1, _08088F9C @ =gSprites
 	adds r2, r1
 	ldrb r3, [r2, 0x5]
 	movs r1, 0xF
@@ -6967,7 +6967,7 @@ sub_8088F60: @ 8088F60
 	movs r3, 0x4
 	orrs r1, r3
 	strb r1, [r2, 0x5]
-	ldr r1, _08088FA0
+	ldr r1, _08088FA0 @ =sub_8089018
 	str r1, [r2, 0x1C]
 	pop {r1}
 	bx r1
@@ -6981,7 +6981,7 @@ _08088FA0: .4byte sub_8089018
 sub_8088FA4: @ 8088FA4
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _08088FBC
+	ldr r2, _08088FBC @ =gSprites
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
@@ -7002,9 +7002,9 @@ sub_8088FC0: @ 8088FC0
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, _08088FF4
+	ldr r0, _08088FF4 @ =gSprites
 	adds r4, r0
-	ldr r0, _08088FF8
+	ldr r0, _08088FF8 @ =sub_80890D8
 	str r0, [r4, 0x1C]
 	movs r1, 0
 	movs r0, 0x78
@@ -7032,7 +7032,7 @@ sub_8088FFC: @ 8088FFC
 	lsrs r0, 24
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r3, _08089014
+	ldr r3, _08089014 @ =gSprites
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
@@ -7059,7 +7059,7 @@ sub_8089018: @ 8089018
 	movs r1, 0x3
 	orrs r0, r1
 	strb r0, [r4, 0x1]
-	ldr r0, _080890CC
+	ldr r0, _080890CC @ =gUnknown_0839F44C
 	str r0, [r4, 0x10]
 	adds r0, r4, 0
 	bl InitSpriteAffineAnim
@@ -7068,7 +7068,7 @@ sub_8089018: @ 8089018
 	bl StartSpriteAffineAnim
 	movs r0, 0x76
 	strh r0, [r4, 0x20]
-	ldr r0, _080890D0
+	ldr r0, _080890D0 @ =0x0000ffd0
 	strh r0, [r4, 0x22]
 	ldrh r0, [r4, 0x2E]
 	adds r0, 0x1
@@ -7097,7 +7097,7 @@ _0808905C:
 	ldrh r2, [r4, 0x32]
 	movs r0, 0x32
 	ldrsh r1, [r4, r0]
-	ldr r0, _080890D4
+	ldr r0, _080890D4 @ =0x000007ff
 	cmp r1, r0
 	bgt _08089092
 	adds r0, r2, 0
@@ -7164,7 +7164,7 @@ sub_80890D8: @ 80890D8
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, _08089148
+	ldr r0, _08089148 @ =gSprites
 	adds r1, r0
 	adds r3, r1, 0
 	adds r3, 0x3E
@@ -7215,7 +7215,7 @@ sub_808914C: @ 808914C
 	movs r1, 0x3
 	orrs r0, r1
 	strb r0, [r4, 0x1]
-	ldr r0, _08089228
+	ldr r0, _08089228 @ =gUnknown_0839F44C
 	str r0, [r4, 0x10]
 	adds r0, r4, 0
 	bl InitSpriteAffineAnim
@@ -7224,7 +7224,7 @@ sub_808914C: @ 808914C
 	bl StartSpriteAffineAnim
 	movs r0, 0x5E
 	strh r0, [r4, 0x20]
-	ldr r0, _0808922C
+	ldr r0, _0808922C @ =0x0000ffe0
 	strh r0, [r4, 0x22]
 	ldrh r0, [r4, 0x2E]
 	adds r0, 0x1
@@ -7323,13 +7323,13 @@ sub_8089230: @ 8089230
 	lsrs r4, 24
 	adds r0, r4, 0
 	bl sub_8088FC0
-	ldr r1, _08089254
+	ldr r1, _08089254 @ =gSprites
 	lsls r0, r4, 4
 	adds r0, r4
 	lsls r0, 2
 	adds r1, 0x1C
 	adds r0, r1
-	ldr r1, _08089258
+	ldr r1, _08089258 @ =sub_808914C
 	str r1, [r0]
 	pop {r4}
 	pop {r0}
@@ -7342,7 +7342,7 @@ _08089258: .4byte sub_808914C
 	thumb_func_start FldEff_FlyIn
 FldEff_FlyIn: @ 808925C
 	push {lr}
-	ldr r0, _0808926C
+	ldr r0, _0808926C @ =sub_8089270
 	movs r1, 0xFE
 	bl CreateTask
 	movs r0, 0
@@ -7358,8 +7358,8 @@ sub_8089270: @ 8089270
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r3, _08089298
-	ldr r2, _0808929C
+	ldr r3, _08089298 @ =gUnknown_0839F454
+	ldr r2, _0808929C @ =gTasks
 	lsls r0, r1, 2
 	adds r0, r1
 	lsls r0, 3
@@ -7381,12 +7381,12 @@ _0808929C: .4byte gTasks
 sub_80892A0: @ 80892A0
 	push {r4-r6,lr}
 	adds r5, r0, 0
-	ldr r6, _08089348
+	ldr r6, _08089348 @ =gPlayerAvatar
 	ldrb r1, [r6, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _0808934C
+	ldr r1, _0808934C @ =gMapObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
 	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
@@ -7433,7 +7433,7 @@ _080892F2:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08089350
+	ldr r1, _08089350 @ =gSprites
 	adds r0, r1
 	movs r1, 0x16
 	bl StartSpriteAnim
@@ -7475,18 +7475,18 @@ sub_8089354: @ 8089354
 	cmp r0, 0
 	bne _080893AC
 _0808936C:
-	ldr r0, _080893B4
+	ldr r0, _080893B4 @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _080893B8
+	ldr r1, _080893B8 @ =gMapObjects
 	adds r0, r1
 	ldrb r0, [r0, 0x4]
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, _080893BC
+	ldr r0, _080893BC @ =gSprites
 	adds r4, r0
 	ldrb r0, [r5, 0xA]
 	movs r1, 0x40
@@ -7521,16 +7521,16 @@ sub_80893C0: @ 80893C0
 	push {r4,lr}
 	sub sp, 0x24
 	adds r4, r0, 0
-	ldr r1, _08089408
+	ldr r1, _08089408 @ =gUnknown_0839F470
 	mov r0, sp
 	movs r2, 0x24
 	bl memcpy
-	ldr r0, _0808940C
+	ldr r0, _0808940C @ =gPlayerAvatar
 	ldrb r0, [r0, 0x4]
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, _08089410
+	ldr r0, _08089410 @ =gSprites
 	adds r1, r0
 	movs r2, 0xC
 	ldrsh r0, [r4, r2]
@@ -7568,18 +7568,18 @@ sub_8089414: @ 8089414
 	lsls r0, 24
 	cmp r0, 0
 	beq _08089478
-	ldr r0, _08089480
+	ldr r0, _08089480 @ =gPlayerAvatar
 	ldrb r0, [r0, 0x5]
 	lsls r5, r0, 3
 	adds r5, r0
 	lsls r5, 2
-	ldr r0, _08089484
+	ldr r0, _08089484 @ =gMapObjects
 	adds r5, r0
 	ldrb r0, [r5, 0x4]
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, _08089488
+	ldr r0, _08089488 @ =gSprites
 	adds r4, r0
 	ldrb r1, [r5, 0x1]
 	movs r0, 0x11
@@ -7621,12 +7621,12 @@ _08089488: .4byte gSprites
 sub_808948C: @ 808948C
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, _080894BC
+	ldr r0, _080894BC @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _080894C0
+	ldr r1, _080894C0 @ =gMapObjects
 	adds r0, r1
 	bl FieldObjectClearAnimIfSpecialAnimFinished
 	lsls r0, 24
@@ -7660,7 +7660,7 @@ sub_80894C4: @ 80894C4
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _080894F8
+	ldr r1, _080894F8 @ =gSprites
 	adds r0, r1
 	bl DestroySprite
 	ldrh r0, [r4, 0x8]
@@ -7686,12 +7686,12 @@ fishE: @ 80894FC
 	lsls r0, 16
 	cmp r0, 0
 	bne _08089566
-	ldr r6, _0808956C
+	ldr r6, _0808956C @ =gPlayerAvatar
 	ldrb r1, [r6, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, _08089570
+	ldr r1, _08089570 @ =gMapObjects
 	adds r4, r0, r1
 	movs r7, 0
 	ldrh r1, [r5, 0x26]
@@ -7720,7 +7720,7 @@ _08089530:
 	strb r0, [r6, 0x6]
 	movs r0, 0x20
 	bl FieldEffectActiveListRemove
-	ldr r0, _08089574
+	ldr r0, _08089574 @ =sub_8089270
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -7738,16 +7738,16 @@ _08089574: .4byte sub_8089270
 	thumb_func_start remove_some_task
 remove_some_task: @ 8089578
 	push {r4,lr}
-	ldr r4, _080895A8
+	ldr r4, _080895A8 @ =gUnknown_03004DC0
 	movs r0, 0
 	strb r0, [r4, 0x15]
-	ldr r1, _080895AC
+	ldr r1, _080895AC @ =0x040000b0
 	ldrh r2, [r1, 0xA]
-	ldr r0, _080895B0
+	ldr r0, _080895B0 @ =0x0000c5ff
 	ands r0, r2
 	strh r0, [r1, 0xA]
 	ldrh r2, [r1, 0xA]
-	ldr r0, _080895B4
+	ldr r0, _080895B4 @ =0x00007fff
 	ands r0, r2
 	strh r0, [r1, 0xA]
 	ldrh r0, [r1, 0xA]
@@ -7775,10 +7775,10 @@ dp12_8087EA4: @ 80895B8
 	mov r0, sp
 	movs r4, 0
 	strh r4, [r0]
-	ldr r1, _080895EC
-	ldr r2, _080895F0
+	ldr r1, _080895EC @ =gUnknown_03004DE0
+	ldr r2, _080895F0 @ =0x01000780
 	bl CpuSet
-	ldr r0, _080895F4
+	ldr r0, _080895F4 @ =gUnknown_03004DC0
 	movs r1, 0
 	str r1, [r0]
 	str r1, [r0, 0x4]
@@ -7807,17 +7807,17 @@ sub_80895F8: @ 80895F8
 	str r0, [sp]
 	str r1, [sp, 0x4]
 	str r2, [sp, 0x8]
-	ldr r0, _0808961C
+	ldr r0, _0808961C @ =0xa2600001
 	cmp r1, r0
 	bne _0808962C
-	ldr r0, _08089620
-	ldr r1, _08089624
+	ldr r0, _08089620 @ =gUnknown_03004DC0
+	ldr r1, _08089624 @ =gUnknown_03004DE2
 	str r1, [r0]
 	movs r2, 0xF0
 	lsls r2, 3
 	adds r1, r2
 	str r1, [r0, 0x4]
-	ldr r1, _08089628
+	ldr r1, _08089628 @ =sub_80896F4
 	b _0808963C
 	.align 2, 0
 _0808961C: .4byte 0xa2600001
@@ -7825,14 +7825,14 @@ _08089620: .4byte gUnknown_03004DC0
 _08089624: .4byte gUnknown_03004DE2
 _08089628: .4byte sub_80896F4
 _0808962C:
-	ldr r0, _0808965C
-	ldr r1, _08089660
+	ldr r0, _0808965C @ =gUnknown_03004DC0
+	ldr r1, _08089660 @ =gUnknown_03004DE4
 	str r1, [r0]
 	movs r2, 0xF0
 	lsls r2, 3
 	adds r1, r2
 	str r1, [r0, 0x4]
-	ldr r1, _08089664
+	ldr r1, _08089664 @ =sub_8089714
 _0808963C:
 	str r1, [r0, 0x10]
 	adds r1, r0, 0
@@ -7859,7 +7859,7 @@ _08089664: .4byte sub_8089714
 	thumb_func_start sub_8089668
 sub_8089668: @ 8089668
 	push {r4,lr}
-	ldr r4, _08089698
+	ldr r4, _08089698 @ =gUnknown_03004DC0
 	ldrb r0, [r4, 0x15]
 	cmp r0, 0
 	beq _080896E2
@@ -7867,17 +7867,17 @@ sub_8089668: @ 8089668
 	bne _080896AC
 	movs r0, 0
 	strb r0, [r4, 0x15]
-	ldr r1, _0808969C
+	ldr r1, _0808969C @ =0x040000b0
 	ldrh r2, [r1, 0xA]
-	ldr r0, _080896A0
+	ldr r0, _080896A0 @ =0x0000c5ff
 	ands r0, r2
 	strh r0, [r1, 0xA]
 	ldrh r2, [r1, 0xA]
-	ldr r0, _080896A4
+	ldr r0, _080896A4 @ =0x00007fff
 	ands r0, r2
 	strh r0, [r1, 0xA]
 	ldrh r0, [r1, 0xA]
-	ldr r1, _080896A8
+	ldr r1, _080896A8 @ =gUnknown_0202FFA4
 	movs r0, 0x1
 	strb r0, [r1]
 	b _080896E2
@@ -7888,13 +7888,13 @@ _080896A0: .4byte 0x0000c5ff
 _080896A4: .4byte 0x00007fff
 _080896A8: .4byte gUnknown_0202FFA4
 _080896AC:
-	ldr r1, _080896E8
+	ldr r1, _080896E8 @ =0x040000b0
 	ldrh r2, [r1, 0xA]
-	ldr r0, _080896EC
+	ldr r0, _080896EC @ =0x0000c5ff
 	ands r0, r2
 	strh r0, [r1, 0xA]
 	ldrh r2, [r1, 0xA]
-	ldr r0, _080896F0
+	ldr r0, _080896F0 @ =0x00007fff
 	ands r0, r2
 	strh r0, [r1, 0xA]
 	ldrh r0, [r1, 0xA]
@@ -7926,13 +7926,13 @@ _080896F0: .4byte 0x00007fff
 
 	thumb_func_start sub_80896F4
 sub_80896F4: @ 80896F4
-	ldr r0, _0808970C
+	ldr r0, _0808970C @ =gUnknown_03004DC0
 	ldr r2, [r0, 0x8]
 	ldrb r1, [r0, 0x14]
 	lsls r0, r1, 4
 	subs r0, r1
 	lsls r0, 7
-	ldr r1, _08089710
+	ldr r1, _08089710 @ =gUnknown_03004DE0
 	adds r0, r1
 	ldrh r0, [r0]
 	strh r0, [r2]
@@ -7944,13 +7944,13 @@ _08089710: .4byte gUnknown_03004DE0
 
 	thumb_func_start sub_8089714
 sub_8089714: @ 8089714
-	ldr r0, _0808972C
+	ldr r0, _0808972C @ =gUnknown_03004DC0
 	ldr r2, [r0, 0x8]
 	ldrb r1, [r0, 0x14]
 	lsls r0, r1, 4
 	subs r0, r1
 	lsls r0, 7
-	ldr r1, _08089730
+	ldr r1, _08089730 @ =gUnknown_03004DE0
 	adds r0, r1
 	ldr r0, [r0]
 	str r0, [r2]
@@ -7971,13 +7971,13 @@ task00_for_dp12: @ 8089734
 	lsrs r0, 24
 	mov r12, r0
 	movs r6, 0
-	ldr r0, _0808975C
+	ldr r0, _0808975C @ =gUnknown_0202FFA4
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08089764
 	mov r0, r12
 	bl DestroyTask
-	ldr r1, _08089760
+	ldr r1, _08089760 @ =gUnknown_03004DC0
 	movs r0, 0xFF
 	strb r0, [r1, 0x18]
 	b _080898E4
@@ -7985,7 +7985,7 @@ task00_for_dp12: @ 8089734
 _0808975C: .4byte gUnknown_0202FFA4
 _08089760: .4byte gUnknown_03004DC0
 _08089764:
-	ldr r1, _08089790
+	ldr r1, _08089790 @ =gTasks
 	mov r0, r12
 	lsls r2, r0, 2
 	adds r0, r2, r0
@@ -8002,7 +8002,7 @@ _08089764:
 	cmp r0, 0xE
 	bhi _08089810
 	lsls r0, 2
-	ldr r1, _08089794
+	ldr r1, _08089794 @ =_08089798
 	adds r0, r1
 	ldr r0, [r0]
 	mov pc, r0
@@ -8027,42 +8027,42 @@ _08089798:
 	.4byte _08089810
 	.4byte _0808980C
 _080897D4:
-	ldr r0, _080897D8
+	ldr r0, _080897D8 @ =gUnknown_030042A4
 	b _0808980E
 	.align 2, 0
 _080897D8: .4byte gUnknown_030042A4
 _080897DC:
-	ldr r0, _080897E0
+	ldr r0, _080897E0 @ =gUnknown_030042A0
 	b _0808980E
 	.align 2, 0
 _080897E0: .4byte gUnknown_030042A0
 _080897E4:
-	ldr r0, _080897E8
+	ldr r0, _080897E8 @ =gUnknown_030042C0
 	b _0808980E
 	.align 2, 0
 _080897E8: .4byte gUnknown_030042C0
 _080897EC:
-	ldr r0, _080897F0
+	ldr r0, _080897F0 @ =gUnknown_030041B4
 	b _0808980E
 	.align 2, 0
 _080897F0: .4byte gUnknown_030041B4
 _080897F4:
-	ldr r0, _080897F8
+	ldr r0, _080897F8 @ =gUnknown_03004288
 	b _0808980E
 	.align 2, 0
 _080897F8: .4byte gUnknown_03004288
 _080897FC:
-	ldr r0, _08089800
+	ldr r0, _08089800 @ =gUnknown_03004280
 	b _0808980E
 	.align 2, 0
 _08089800: .4byte gUnknown_03004280
 _08089804:
-	ldr r0, _08089808
+	ldr r0, _08089808 @ =gUnknown_030041B0
 	b _0808980E
 	.align 2, 0
 _08089808: .4byte gUnknown_030041B0
 _0808980C:
-	ldr r0, _08089870
+	ldr r0, _08089870 @ =gUnknown_030041B8
 _0808980E:
 	ldrh r6, [r0]
 _08089810:
@@ -8089,8 +8089,8 @@ _08089810:
 	ldrsh r0, [r1, r4]
 	cmp r3, r0
 	bge _080898E4
-	ldr r5, _08089874
-	ldr r0, _08089878
+	ldr r5, _08089874 @ =gUnknown_03004DE0
+	ldr r0, _08089878 @ =gUnknown_03004DC0
 	mov r8, r0
 	adds r7, r1, 0
 	lsls r0, r2, 1
@@ -8132,11 +8132,11 @@ _0808987C:
 	ldrsh r0, [r1, r4]
 	cmp r3, r0
 	bge _080898C4
-	ldr r5, _080898F4
+	ldr r5, _080898F4 @ =gUnknown_03004DE0
 	adds r7, r1, 0
 	lsls r0, r2, 1
 	adds r4, r0, r5
-	ldr r0, _080898F8
+	ldr r0, _080898F8 @ =gUnknown_03004DC0
 	mov r8, r0
 _080898A2:
 	lsls r2, r3, 1
@@ -8196,7 +8196,7 @@ sub_80898FC: @ 80898FC
 	lsrs r4, r2, 24
 	movs r1, 0
 	movs r2, 0
-	ldr r0, _08089940
+	ldr r0, _08089940 @ =gSineTable
 	mov r12, r0
 _08089910:
 	lsls r0, r1, 1
@@ -8269,10 +8269,10 @@ sub_8089944: @ 8089944
 	lsrs r0, 24
 	mov r10, r0
 	bl dp12_8087EA4
-	ldr r0, _08089A50
+	ldr r0, _08089A50 @ =REG_BG0HOFS
 	add r0, r9
 	str r0, [sp]
-	ldr r0, _08089A54
+	ldr r0, _08089A54 @ =0xa2600001
 	str r0, [sp, 0x4]
 	mov r1, sp
 	movs r0, 0x1
@@ -8284,12 +8284,12 @@ sub_8089944: @ 8089944
 	ldr r1, [sp, 0x4]
 	ldr r2, [sp, 0x8]
 	bl sub_80895F8
-	ldr r0, _08089A58
+	ldr r0, _08089A58 @ =task00_for_dp12
 	movs r1, 0
 	bl CreateTask
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r0, _08089A5C
+	ldr r0, _08089A5C @ =gTasks
 	lsls r4, r7, 2
 	adds r4, r7
 	lsls r4, 3
@@ -8312,12 +8312,12 @@ sub_8089944: @ 8089944
 	strh r3, [r4, 0x14]
 	mov r0, r10
 	strh r0, [r4, 0x16]
-	ldr r0, _08089A60
+	ldr r0, _08089A60 @ =gUnknown_03004DC0
 	strb r7, [r0, 0x18]
-	ldr r0, _08089A64
+	ldr r0, _08089A64 @ =gUnknown_0202FFA4
 	movs r1, 0
 	strb r1, [r0]
-	ldr r4, _08089A68
+	ldr r4, _08089A68 @ =gUnknown_03005060
 	ldr r3, [sp, 0xC]
 	subs r6, r3, r5
 	lsls r3, r6, 24
@@ -8329,7 +8329,7 @@ sub_8089944: @ 8089944
 	ldr r0, [sp, 0xC]
 	cmp r5, r0
 	bge _08089A3E
-	ldr r1, _08089A6C
+	ldr r1, _08089A6C @ =0xfffffd80
 	adds r2, r4, r1
 	lsls r1, r5, 1
 	movs r3, 0xF0
@@ -8374,7 +8374,7 @@ _08089A6C: .4byte 0xfffffd80
 	thumb_func_start sub_8089A70
 sub_8089A70: @ 8089A70
 	push {lr}
-	ldr r0, _08089A88
+	ldr r0, _08089A88 @ =gPaletteFade
 	ldrb r1, [r0, 0x8]
 	movs r2, 0x80
 	orrs r1, r2
@@ -8393,20 +8393,20 @@ sub_8089A8C: @ 8089A8C
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
-	ldr r5, _08089AD0
+	ldr r5, _08089AD0 @ =gUnknown_0202FFA9
 	movs r0, 0
 	strb r0, [r5]
-	ldr r0, _08089AD4
+	ldr r0, _08089AD4 @ =gUnknown_03005CE0
 	ldrb r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, _08089AD8
+	ldr r1, _08089AD8 @ =gPlayerParty
 	adds r0, r1
 	movs r1, 0x2D
 	bl GetMonData
 	cmp r0, 0
 	beq _08089AE0
-	ldr r4, _08089ADC
+	ldr r4, _08089ADC @ =gUnknown_0202FFAA
 	adds r0, r4, 0
 	adds r1, r5, 0
 	movs r2, 0
@@ -8427,7 +8427,7 @@ _08089AD8: .4byte gPlayerParty
 _08089ADC: .4byte gUnknown_0202FFAA
 _08089AE0:
 	movs r6, 0
-	ldr r0, _08089B24
+	ldr r0, _08089B24 @ =gUnknown_0839F554
 	ldrh r0, [r0]
 	mov r8, r0
 _08089AE8:
@@ -8436,13 +8436,13 @@ _08089AE8:
 	mov r0, r8
 	cmp r0, 0xFF
 	beq _08089B48
-	ldr r5, _08089B24
+	ldr r5, _08089B24 @ =gUnknown_0839F554
 _08089AF4:
-	ldr r0, _08089B28
+	ldr r0, _08089B28 @ =gUnknown_03005CE0
 	ldrb r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, _08089B2C
+	ldr r1, _08089B2C @ =gPlayerParty
 	adds r0, r1
 	adds r1, r6, 0
 	adds r1, 0xD
@@ -8456,8 +8456,8 @@ _08089AF4:
 	adds r2, 0xA
 	lsls r2, 24
 	lsrs r2, 24
-	ldr r0, _08089B30
-	ldr r1, _08089B34
+	ldr r0, _08089B30 @ =gUnknown_0202FFAA
+	ldr r1, _08089B34 @ =gUnknown_0202FFA9
 	bl AppendToList
 	b _08089B48
 	.align 2, 0
@@ -8480,13 +8480,13 @@ _08089B48:
 	lsrs r6, r0, 16
 	cmp r6, 0x3
 	bls _08089AE8
-	ldr r4, _08089BA4
-	ldr r5, _08089BA8
+	ldr r4, _08089BA4 @ =gUnknown_0202FFAA
+	ldr r5, _08089BA8 @ =gUnknown_0202FFA9
 	adds r0, r4, 0
 	adds r1, r5, 0
 	movs r2, 0
 	bl AppendToList
-	ldr r6, _08089BAC
+	ldr r6, _08089BAC @ =gUnknown_030043C4
 	adds r0, r6, 0
 	movs r1, 0xB
 	bl GetMonData
@@ -8497,7 +8497,7 @@ _08089B48:
 	movs r2, 0x1
 	bl AppendToList
 _08089B76:
-	ldr r0, _08089BB0
+	ldr r0, _08089BB0 @ =gUnknown_03005CE0
 	ldrb r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
@@ -8528,8 +8528,8 @@ _08089BB4:
 	movs r2, 0x2
 	bl AppendToList
 _08089BBE:
-	ldr r0, _08089BD4
-	ldr r1, _08089BD8
+	ldr r0, _08089BD4 @ =gUnknown_0202FFAA
+	ldr r1, _08089BD8 @ =gUnknown_0202FFA9
 	movs r2, 0x3
 	bl AppendToList
 _08089BC8:
@@ -8634,7 +8634,7 @@ sub_8089C7C: @ 8089C7C
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r6, _08089CC8
+	ldr r6, _08089CC8 @ =gUnknown_0202FFA9
 	ldrb r0, [r6]
 	lsls r0, 1
 	movs r4, 0x12
@@ -8642,9 +8642,9 @@ sub_8089C7C: @ 8089C7C
 	lsls r4, 24
 	lsrs r4, 24
 	ldrb r3, [r6]
-	ldr r0, _08089CCC
+	ldr r0, _08089CCC @ =gPokemonMenuActions
 	str r0, [sp]
-	ldr r0, _08089CD0
+	ldr r0, _08089CD0 @ =gUnknown_0202FFAA
 	str r0, [sp, 0x4]
 	movs r0, 0x3
 	str r0, [sp, 0x8]
@@ -8677,7 +8677,7 @@ sub_8089CD4: @ 8089CD4
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _08089D00
+	ldr r0, _08089D00 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -8701,26 +8701,26 @@ _08089D04:
 	bl PlaySE
 	adds r0, r4, 0
 	bl sub_806CA38
-	ldr r1, _08089D48
+	ldr r1, _08089D48 @ =gUnknown_03005CE0
 	strb r0, [r1]
 	ldrb r1, [r1]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, _08089D4C
+	ldr r1, _08089D4C @ =gPlayerParty
 	adds r0, r1
-	ldr r1, _08089D50
+	ldr r1, _08089D50 @ =gStringVar1
 	bl GetMonNickname
 	bl sub_8089A8C
-	ldr r0, _08089D54
+	ldr r0, _08089D54 @ =gUnknown_0202FFA8
 	strb r5, [r0]
 	movs r0, 0
 	bl sub_8089C7C
-	ldr r1, _08089D58
+	ldr r1, _08089D58 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, _08089D5C
+	ldr r1, _08089D5C @ =sub_8089D94
 	str r1, [r0]
 	adds r0, r4, 0
 	bl sub_808B5B4
@@ -8742,12 +8742,12 @@ _08089D60:
 	movs r2, 0
 	movs r3, 0x10
 	bl BeginNormalPaletteFade
-	ldr r1, _08089D8C
+	ldr r1, _08089D8C @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, _08089D90
+	ldr r1, _08089D90 @ =sub_8089E4C
 	str r1, [r0]
 _08089D84:
 	add sp, 0x4
@@ -8765,13 +8765,13 @@ sub_8089D94: @ 8089D94
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r5, r4, 0
-	ldr r0, _08089DC8
+	ldr r0, _08089DC8 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
 	bne _08089E44
-	ldr r2, _08089DCC
+	ldr r2, _08089DCC @ =gMain
 	ldrh r0, [r2, 0x30]
 	movs r1, 0xF0
 	ands r1, r0
@@ -8782,7 +8782,7 @@ sub_8089D94: @ 8089D94
 	movs r0, 0x1
 	negs r0, r0
 	bl MoveMenuCursor
-	ldr r1, _08089DD0
+	ldr r1, _08089DD0 @ =gUnknown_0202FFA8
 	strb r0, [r1]
 	b _08089E1A
 	.align 2, 0
@@ -8796,7 +8796,7 @@ _08089DD4:
 	bl PlaySE
 	movs r0, 0x1
 	bl MoveMenuCursor
-	ldr r1, _08089DEC
+	ldr r1, _08089DEC @ =gUnknown_0202FFA8
 	strb r0, [r1]
 	b _08089E1A
 	.align 2, 0
@@ -8809,9 +8809,9 @@ _08089DF0:
 	beq _08089E30
 	movs r0, 0x5
 	bl PlaySE
-	ldr r1, _08089E24
-	ldr r2, _08089E28
-	ldr r0, _08089E2C
+	ldr r1, _08089E24 @ =gPokemonMenuActions
+	ldr r2, _08089E28 @ =gUnknown_0202FFAA
+	ldr r0, _08089E2C @ =gUnknown_0202FFA8
 	ldrb r0, [r0]
 	adds r0, r2
 	ldrb r0, [r0]
@@ -8849,7 +8849,7 @@ sub_8089E4C: @ 8089E4C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _08089E78
+	ldr r0, _08089E78 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -8857,9 +8857,9 @@ sub_8089E4C: @ 8089E4C
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _08089E72
-	ldr r0, _08089E7C
+	ldr r0, _08089E7C @ =gUnknown_03005CE0
 	strb r1, [r0]
-	ldr r0, _08089E80
+	ldr r0, _08089E80 @ =sub_805469C
 	bl SetMainCallback2
 	adds r0, r4, 0
 	bl DestroyTask
@@ -8876,16 +8876,16 @@ _08089E80: .4byte sub_805469C
 	thumb_func_start sub_8089E84
 sub_8089E84: @ 8089E84
 	push {lr}
-	ldr r0, _08089EAC
+	ldr r0, _08089EAC @ =gUnknown_03005CE0
 	ldrb r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, _08089EB0
+	ldr r1, _08089EB0 @ =gPlayerParty
 	adds r0, r1
-	ldr r1, _08089EB4
+	ldr r1, _08089EB4 @ =gStringVar1
 	bl GetMonNickname
 	bl sub_8089A8C
-	ldr r1, _08089EB8
+	ldr r1, _08089EB8 @ =gUnknown_0202FFA8
 	movs r0, 0
 	strb r0, [r1]
 	movs r0, 0
@@ -8902,8 +8902,8 @@ _08089EB8: .4byte gUnknown_0202FFA8
 	thumb_func_start sub_8089EBC
 sub_8089EBC: @ 8089EBC
 	push {r4,r5,lr}
-	ldr r4, _08089EC4
-	ldr r5, _08089EC8
+	ldr r4, _08089EC4 @ =0x0201b260
+	ldr r5, _08089EC8 @ =gUnknown_020384F0
 	b _08089ED8
 	.align 2, 0
 _08089EC4: .4byte 0x0201b260
@@ -8926,11 +8926,11 @@ _08089ED8:
 	ldrb r0, [r4]
 	movs r1, 0
 	bl sub_806BF74
-	ldr r1, _08089F0C
+	ldr r1, _08089F0C @ =gUnknown_03005CE0
 	ldrb r0, [r5]
 	strb r0, [r1]
 	bl sub_8089E84
-	ldr r0, _08089F10
+	ldr r0, _08089F10 @ =sub_806AEDC
 	bl SetMainCallback2
 _08089F04:
 	pop {r4,r5}
@@ -8944,17 +8944,17 @@ _08089F10: .4byte sub_806AEDC
 	thumb_func_start sub_8089F14
 sub_8089F14: @ 8089F14
 	push {lr}
-	ldr r2, _08089F38
+	ldr r2, _08089F38 @ =gPaletteFade
 	ldrb r0, [r2, 0x8]
 	movs r1, 0x80
 	orrs r0, r1
 	strb r0, [r2, 0x8]
-	ldr r2, _08089F3C
+	ldr r2, _08089F3C @ =sub_8089D94
 	movs r0, 0
 	movs r1, 0xFF
 	movs r3, 0x5
 	bl sub_806AF4C
-	ldr r0, _08089F40
+	ldr r0, _08089F40 @ =sub_8089EBC
 	bl SetMainCallback2
 	pop {r0}
 	bx r0
@@ -8970,7 +8970,7 @@ sub_8089F44: @ 8089F44
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r3, r0, 24
-	ldr r0, _08089FAC
+	ldr r0, _08089FAC @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -8978,8 +8978,8 @@ sub_8089F44: @ 8089F44
 	lsrs r5, r0, 24
 	cmp r5, 0
 	bne _08089FA2
-	ldr r2, _08089FB0
-	ldr r1, _08089FB4
+	ldr r2, _08089FB0 @ =gSprites
+	ldr r1, _08089FB4 @ =gTasks
 	lsls r0, r3, 2
 	adds r0, r3
 	lsls r0, 3
@@ -8996,18 +8996,18 @@ sub_8089F44: @ 8089F44
 	lsrs r4, 24
 	adds r0, r3, 0
 	bl DestroyTask
-	ldr r0, _08089FB8
-	ldr r1, _08089FBC
+	ldr r0, _08089FB8 @ =0x0201b000
+	ldr r1, _08089FBC @ =0x00000262
 	adds r0, r1
 	movs r1, 0x1
 	strb r1, [r0]
-	ldr r0, _08089FC0
-	ldr r1, _08089FC4
+	ldr r0, _08089FC0 @ =gPlayerParty
+	ldr r1, _08089FC4 @ =gPlayerPartyCount
 	ldrb r2, [r1]
 	subs r2, 0x1
 	lsls r2, 24
 	lsrs r2, 24
-	ldr r3, _08089FC8
+	ldr r3, _08089FC8 @ =sub_8089F14
 	str r5, [sp]
 	adds r1, r4, 0
 	bl sub_809D8BC
@@ -9041,12 +9041,12 @@ PokemonMenu_Summary: @ 8089FCC
 	movs r2, 0
 	movs r3, 0x10
 	bl BeginNormalPaletteFade
-	ldr r1, _08089FFC
+	ldr r1, _08089FFC @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, _0808A000
+	ldr r1, _0808A000 @ =sub_8089F44
 	str r1, [r0]
 	add sp, 0x4
 	pop {r4}
@@ -9062,8 +9062,8 @@ sub_808A004: @ 808A004
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _0808A024
-	ldr r2, _0808A028
+	ldr r1, _0808A024 @ =sub_806CA60
+	ldr r2, _0808A028 @ =sub_8089CD4
 	bl SetTaskFuncWithFollowupFunc
 	movs r0, 0x13
 	movs r1, 0
@@ -9084,10 +9084,10 @@ PokemonMenu_Switch: @ 808A02C
 	lsls r4, 24
 	lsrs r4, 24
 	bl sub_8072DEC
-	ldr r0, _0808A054
-	ldr r1, _0808A058
+	ldr r0, _0808A054 @ =0x02001000
+	ldr r1, _0808A058 @ =sub_806CD5C
 	str r1, [r0, 0xC]
-	ldr r1, _0808A05C
+	ldr r1, _0808A05C @ =0x0001a272
 	adds r0, r1
 	movs r1, 0x1
 	strh r1, [r0]
@@ -9107,11 +9107,11 @@ sub_808A060: @ 808A060
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, _0808A0D0
+	ldr r0, _0808A0D0 @ =gMain
 	ldrh r0, [r0, 0x2E]
 	cmp r0, 0x40
 	bne _0808A086
-	ldr r4, _0808A0D4
+	ldr r4, _0808A0D4 @ =gUnknown_0202FFA8
 	ldrb r0, [r4]
 	cmp r0, 0
 	beq _0808A086
@@ -9122,11 +9122,11 @@ sub_808A060: @ 808A060
 	movs r0, 0x5
 	bl PlaySE
 _0808A086:
-	ldr r0, _0808A0D0
+	ldr r0, _0808A0D0 @ =gMain
 	ldrh r0, [r0, 0x2E]
 	cmp r0, 0x80
 	bne _0808A0A4
-	ldr r4, _0808A0D4
+	ldr r4, _0808A0D4 @ =gUnknown_0202FFA8
 	ldrb r0, [r4]
 	cmp r0, 0x2
 	beq _0808A0A4
@@ -9136,7 +9136,7 @@ _0808A086:
 	movs r0, 0x5
 	bl PlaySE
 _0808A0A4:
-	ldr r0, _0808A0D0
+	ldr r0, _0808A0D0 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -9144,9 +9144,9 @@ _0808A0A4:
 	beq _0808A0E0
 	movs r0, 0x5
 	bl PlaySE
-	ldr r1, _0808A0D8
-	ldr r2, _0808A0DC
-	ldr r0, _0808A0D4
+	ldr r1, _0808A0D8 @ =gUnknown_0839F578
+	ldr r2, _0808A0DC @ =gPokemonMenuActions
+	ldr r0, _0808A0D4 @ =gUnknown_0202FFA8
 	ldrb r3, [r0]
 	movs r0, 0
 	bl sub_806E81C
@@ -9164,7 +9164,7 @@ _0808A0E0:
 	ands r0, r1
 	cmp r0, 0
 	beq _0808A0F6
-	ldr r1, _0808A0FC
+	ldr r1, _0808A0FC @ =gUnknown_0839F578
 	movs r0, 0
 	bl sub_806E7D0
 	adds r0, r5, 0
@@ -9183,20 +9183,20 @@ sub_808A100: @ 808A100
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r1, _0808A130
-	ldr r2, _0808A134
+	ldr r1, _0808A130 @ =gUnknown_0839F578
+	ldr r2, _0808A134 @ =gPokemonMenuActions
 	movs r0, 0
 	movs r3, 0
 	bl sub_806E750
 	movs r0, 0xD
 	movs r1, 0x2
 	bl sub_806D538
-	ldr r1, _0808A138
+	ldr r1, _0808A138 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, _0808A13C
+	ldr r1, _0808A13C @ =sub_808A060
 	str r1, [r0]
 	pop {r4}
 	pop {r0}
@@ -9215,7 +9215,7 @@ PokemonMenu_Item: @ 808A140
 	lsls r4, 24
 	lsrs r4, 24
 	bl sub_8072DEC
-	ldr r1, _0808A174
+	ldr r1, _0808A174 @ =gUnknown_0202FFA8
 	movs r0, 0
 	strb r0, [r1]
 	movs r0, 0x13
@@ -9223,12 +9223,12 @@ PokemonMenu_Item: @ 808A140
 	movs r2, 0x1D
 	movs r3, 0x13
 	bl MenuZeroFillWindowRect
-	ldr r1, _0808A178
+	ldr r1, _0808A178 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, _0808A17C
+	ldr r1, _0808A17C @ =sub_808A100
 	str r1, [r0]
 	pop {r4}
 	pop {r0}
@@ -9244,7 +9244,7 @@ sub_808A180: @ 808A180
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, _0808A1D0
+	ldr r0, _0808A1D0 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -9256,7 +9256,7 @@ sub_808A180: @ 808A180
 	lsrs r0, 24
 	movs r1, 0x64
 	muls r0, r1
-	ldr r1, _0808A1D4
+	ldr r1, _0808A1D4 @ =gPlayerParty
 	adds r0, r1
 	movs r1, 0x40
 	bl GetMonData
@@ -9268,9 +9268,9 @@ sub_808A180: @ 808A180
 	lsls r1, r4, 3
 	adds r1, r4
 	lsls r1, 2
-	ldr r0, _0808A1D8
+	ldr r0, _0808A1D8 @ =gSaveBlock1 + 0x2B4C
 	adds r1, r0
-	ldr r2, _0808A1DC
+	ldr r2, _0808A1DC @ =sub_808A520
 	movs r0, 0x4
 	movs r3, 0x3
 	bl sub_80E62A0
@@ -9290,7 +9290,7 @@ sub_808A1E0: @ 808A1E0
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _0808A21C
+	ldr r0, _0808A21C @ =gUnknown_0202E8F6
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	beq _0808A216
@@ -9304,12 +9304,12 @@ sub_808A1E0: @ 808A1E0
 	movs r0, 0
 	movs r1, 0
 	bl sub_806D538
-	ldr r1, _0808A220
+	ldr r1, _0808A220 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, _0808A224
+	ldr r1, _0808A224 @ =sub_8089CD4
 	str r1, [r0]
 _0808A216:
 	pop {r4}
@@ -9327,13 +9327,13 @@ sub_808A228: @ 808A228
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _0808A268
+	ldr r0, _0808A268 @ =word_203855E
 	ldrh r0, [r0]
 	bl itemid_is_mail
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808A278
-	ldr r0, _0808A26C
+	ldr r0, _0808A26C @ =gUnknown_0202E8F4
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0808A278
@@ -9344,12 +9344,12 @@ sub_808A228: @ 808A228
 	movs r2, 0
 	movs r3, 0x10
 	bl BeginNormalPaletteFade
-	ldr r1, _0808A270
+	ldr r1, _0808A270 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, _0808A274
+	ldr r1, _0808A274 @ =sub_808A180
 	str r1, [r0]
 	b _0808A29A
 	.align 2, 0
@@ -9366,12 +9366,12 @@ _0808A278:
 	movs r0, 0
 	movs r1, 0
 	bl sub_806D538
-	ldr r0, _0808A2A4
+	ldr r0, _0808A2A4 @ =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
 	adds r1, r0
-	ldr r0, _0808A2A8
+	ldr r0, _0808A2A8 @ =sub_8089CD4
 	str r0, [r1]
 _0808A29A:
 	add sp, 0x4
@@ -9388,15 +9388,15 @@ sub_808A2AC: @ 808A2AC
 	push {lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
-	ldr r0, _0808A2D0
+	ldr r0, _0808A2D0 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
 	bne _0808A2CA
-	ldr r0, _0808A2D4
+	ldr r0, _0808A2D4 @ =word_203855E
 	ldrh r1, [r0]
-	ldr r2, _0808A2D8
+	ldr r2, _0808A2D8 @ =sub_808A228
 	adds r0, r3, 0
 	bl sub_806E964
 _0808A2CA:
@@ -9420,7 +9420,7 @@ sub_808A2DC: @ 808A2DC
 	lsrs r0, 24
 	movs r1, 0x64
 	muls r0, r1
-	ldr r1, _0808A324
+	ldr r1, _0808A324 @ =gPlayerParty
 	adds r0, r1
 	movs r1, 0x40
 	bl GetMonData
@@ -9432,9 +9432,9 @@ sub_808A2DC: @ 808A2DC
 	lsls r1, r4, 3
 	adds r1, r4
 	lsls r1, 2
-	ldr r0, _0808A328
+	ldr r0, _0808A328 @ =gSaveBlock1 + 0x2B4C
 	adds r1, r0
-	ldr r2, _0808A32C
+	ldr r2, _0808A32C @ =sub_808A520
 	movs r0, 0x4
 	movs r3, 0x3
 	bl sub_80E62A0
@@ -9452,9 +9452,9 @@ sub_808A330: @ 808A330
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _0808A344
+	ldr r1, _0808A344 @ =word_203855E
 	ldrh r1, [r1]
-	ldr r2, _0808A348
+	ldr r2, _0808A348 @ =sub_808A2DC
 	bl sub_806E964
 	pop {r0}
 	bx r0
@@ -9474,7 +9474,7 @@ sub_808A34C: @ 808A34C
 	thumb_func_start sub_808A358
 sub_808A358: @ 808A358
 	push {r4,lr}
-	ldr r4, _0808A360
+	ldr r4, _0808A360 @ =0x0201b260
 	b _0808A370
 	.align 2, 0
 _0808A360: .4byte 0x0201b260
@@ -9491,13 +9491,13 @@ _0808A370:
 	cmp r0, 0x1
 	bne _0808A364
 	ldrb r0, [r4]
-	ldr r1, _0808A39C
+	ldr r1, _0808A39C @ =gUnknown_03005CE0
 	ldrb r1, [r1]
 	bl sub_806C994
 	ldrb r0, [r4]
 	movs r1, 0
 	bl sub_806BF74
-	ldr r0, _0808A3A0
+	ldr r0, _0808A3A0 @ =sub_806AEDC
 	bl SetMainCallback2
 _0808A394:
 	pop {r4}
@@ -9511,7 +9511,7 @@ _0808A3A0: .4byte sub_806AEDC
 	thumb_func_start sub_808A3A4
 sub_808A3A4: @ 808A3A4
 	push {r4,r5,lr}
-	ldr r4, _0808A3D8
+	ldr r4, _0808A3D8 @ =0x0201b260
 	adds r5, r4, 0x2
 _0808A3AA:
 	bl sub_806B124
@@ -9520,7 +9520,7 @@ _0808A3AA:
 	cmp r0, 0x1
 	bne _0808A3E4
 	ldrb r0, [r4]
-	ldr r1, _0808A3DC
+	ldr r1, _0808A3DC @ =gUnknown_03005CE0
 	ldrb r1, [r1]
 	bl sub_806C994
 	ldrb r0, [r4]
@@ -9529,7 +9529,7 @@ _0808A3AA:
 	movs r0, 0x3
 	strb r0, [r5]
 	bl sub_8089E84
-	ldr r0, _0808A3E0
+	ldr r0, _0808A3E0 @ =sub_806AEDC
 	bl SetMainCallback2
 	b _0808A3F0
 	.align 2, 0
@@ -9551,18 +9551,18 @@ _0808A3F0:
 	thumb_func_start sub_808A3F8
 sub_808A3F8: @ 808A3F8
 	push {r4,lr}
-	ldr r0, _0808A460
+	ldr r0, _0808A460 @ =word_203855E
 	ldrh r0, [r0]
 	bl itemid_is_mail
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808A47E
-	ldr r0, _0808A464
+	ldr r0, _0808A464 @ =sub_808A330
 	movs r1, 0
 	bl CreateTask
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r2, _0808A468
+	ldr r2, _0808A468 @ =gPaletteFade
 	ldrb r0, [r2, 0x8]
 	movs r1, 0x80
 	orrs r0, r1
@@ -9570,7 +9570,7 @@ sub_808A3F8: @ 808A3F8
 	adds r0, r4, 0
 	movs r1, 0
 	bl sub_806BD58
-	ldr r0, _0808A46C
+	ldr r0, _0808A46C @ =gUnknown_03005CE0
 	ldrb r1, [r0]
 	adds r0, r4, 0
 	bl sub_806C994
@@ -9583,14 +9583,14 @@ sub_808A3F8: @ 808A3F8
 	lsrs r0, 24
 	movs r1, 0x64
 	muls r0, r1
-	ldr r1, _0808A470
+	ldr r1, _0808A470 @ =gPlayerParty
 	adds r0, r1
 	movs r1, 0xC
 	bl GetMonData
 	lsls r0, 24
 	cmp r0, 0
 	bne _0808A478
-	ldr r0, _0808A474
+	ldr r0, _0808A474 @ =sub_808A34C
 	bl SetMainCallback2
 	b _0808A4C6
 	.align 2, 0
@@ -9604,21 +9604,21 @@ _0808A478:
 	adds r0, r4, 0
 	bl DestroyTask
 _0808A47E:
-	ldr r2, _0808A4A4
+	ldr r2, _0808A4A4 @ =gPaletteFade
 	ldrb r0, [r2, 0x8]
 	movs r1, 0x80
 	orrs r0, r1
 	strb r0, [r2, 0x8]
-	ldr r0, _0808A4A8
+	ldr r0, _0808A4A8 @ =word_203855E
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _0808A4B4
-	ldr r2, _0808A4AC
+	ldr r2, _0808A4AC @ =sub_808A2AC
 	movs r0, 0
 	movs r1, 0xFF
 	movs r3, 0xFF
 	bl sub_806AF4C
-	ldr r0, _0808A4B0
+	ldr r0, _0808A4B0 @ =sub_808A358
 	bl SetMainCallback2
 	b _0808A4C6
 	.align 2, 0
@@ -9627,12 +9627,12 @@ _0808A4A8: .4byte word_203855E
 _0808A4AC: .4byte sub_808A2AC
 _0808A4B0: .4byte sub_808A358
 _0808A4B4:
-	ldr r2, _0808A4CC
+	ldr r2, _0808A4CC @ =sub_8089D94
 	movs r0, 0
 	movs r1, 0xFF
 	movs r3, 0x5
 	bl sub_806AF4C
-	ldr r0, _0808A4D0
+	ldr r0, _0808A4D0 @ =sub_808A3A4
 	bl SetMainCallback2
 _0808A4C6:
 	pop {r4}
@@ -9646,7 +9646,7 @@ _0808A4D0: .4byte sub_808A3A4
 	thumb_func_start sub_808A4D4
 sub_808A4D4: @ 808A4D4
 	push {r4,lr}
-	ldr r4, _0808A4DC
+	ldr r4, _0808A4DC @ =0x0201b260
 	b _0808A4EC
 	.align 2, 0
 _0808A4DC: .4byte 0x0201b260
@@ -9663,13 +9663,13 @@ _0808A4EC:
 	cmp r0, 0x1
 	bne _0808A4E0
 	ldrb r0, [r4]
-	ldr r1, _0808A518
+	ldr r1, _0808A518 @ =gUnknown_03005CE0
 	ldrb r1, [r1]
 	bl sub_806C994
 	ldrb r0, [r4]
 	movs r1, 0
 	bl sub_806BF74
-	ldr r0, _0808A51C
+	ldr r0, _0808A51C @ =sub_806AEDC
 	bl SetMainCallback2
 _0808A510:
 	pop {r4}
@@ -9683,27 +9683,27 @@ _0808A51C: .4byte sub_806AEDC
 	thumb_func_start sub_808A520
 sub_808A520: @ 808A520
 	push {r4-r7,lr}
-	ldr r2, _0808A584
+	ldr r2, _0808A584 @ =gPaletteFade
 	ldrb r0, [r2, 0x8]
 	movs r1, 0x80
 	orrs r0, r1
 	strb r0, [r2, 0x8]
-	ldr r0, _0808A588
+	ldr r0, _0808A588 @ =gScriptResult
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _0808A59C
-	ldr r7, _0808A58C
+	ldr r7, _0808A58C @ =gUnknown_0202E8F8
 	ldrh r0, [r7]
 	cmp r0, 0
 	beq _0808A542
 	movs r1, 0x1
 	bl sub_80A9538
 _0808A542:
-	ldr r6, _0808A590
+	ldr r6, _0808A590 @ =gUnknown_03005CE0
 	ldrb r0, [r6]
 	movs r5, 0x64
 	muls r0, r5
-	ldr r4, _0808A594
+	ldr r4, _0808A594 @ =gPlayerParty
 	adds r0, r4
 	movs r1, 0xC
 	bl GetMonData
@@ -9721,7 +9721,7 @@ _0808A542:
 	movs r1, 0xC
 	adds r2, r7, 0
 	bl SetMonData
-	ldr r2, _0808A598
+	ldr r2, _0808A598 @ =sub_8089CD4
 	movs r0, 0
 	movs r1, 0xFF
 	movs r3, 0
@@ -9735,13 +9735,13 @@ _0808A590: .4byte gUnknown_03005CE0
 _0808A594: .4byte gPlayerParty
 _0808A598: .4byte sub_8089CD4
 _0808A59C:
-	ldr r2, _0808A5B4
+	ldr r2, _0808A5B4 @ =sub_808A5BC
 	movs r0, 0
 	movs r1, 0xFF
 	movs r3, 0xFF
 	bl sub_806AF4C
 _0808A5A8:
-	ldr r0, _0808A5B8
+	ldr r0, _0808A5B8 @ =sub_808A4D4
 	bl SetMainCallback2
 	pop {r4-r7}
 	pop {r0}
@@ -9756,24 +9756,24 @@ sub_808A5BC: @ 808A5BC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _0808A5F0
+	ldr r0, _0808A5F0 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
 	bne _0808A5EA
-	ldr r0, _0808A5F4
+	ldr r0, _0808A5F4 @ =gUnknown_03005CE0
 	ldrb r0, [r0]
-	ldr r1, _0808A5F8
+	ldr r1, _0808A5F8 @ =word_203855E
 	ldrh r1, [r1]
 	movs r2, 0
 	bl sub_806EBF0
-	ldr r1, _0808A5FC
+	ldr r1, _0808A5FC @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, _0808A600
+	ldr r1, _0808A600 @ =sub_808A1E0
 	str r1, [r0]
 _0808A5EA:
 	pop {r4}
@@ -9792,13 +9792,13 @@ sub_808A604: @ 808A604
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _0808A628
+	ldr r0, _0808A628 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
 	bne _0808A622
-	ldr r0, _0808A62C
+	ldr r0, _0808A62C @ =sub_80A61D0
 	bl SetMainCallback2
 	adds r0, r4, 0
 	bl DestroyTask
@@ -9820,7 +9820,7 @@ PokemonMenu_GiveItem: @ 808A630
 	lsrs r4, 24
 	adds r0, r4, 0
 	bl sub_806CA38
-	ldr r1, _0808A66C
+	ldr r1, _0808A66C @ =gUnknown_0202E8F5
 	strb r0, [r1]
 	movs r0, 0x1
 	negs r0, r0
@@ -9829,12 +9829,12 @@ PokemonMenu_GiveItem: @ 808A630
 	movs r2, 0
 	movs r3, 0x10
 	bl BeginNormalPaletteFade
-	ldr r1, _0808A670
+	ldr r1, _0808A670 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, _0808A674
+	ldr r1, _0808A674 @ =sub_808A604
 	str r1, [r0]
 	add sp, 0x4
 	pop {r4}
@@ -9869,7 +9869,7 @@ PokemonMenu_TakeItem: @ 808A688
 	movs r3, 0x13
 	bl MenuZeroFillWindowRect
 	bl sub_806D5A4
-	ldr r1, _0808A6B4
+	ldr r1, _0808A6B4 @ =sub_808A678
 	adds r0, r4, 0
 	bl sub_806ECE8
 	pop {r4}
@@ -9892,7 +9892,7 @@ PokemonMenu_TakeMail: @ 808A6B8
 	movs r3, 0x13
 	bl MenuZeroFillWindowRect
 	bl sub_806D5A4
-	ldr r1, _0808A6E4
+	ldr r1, _0808A6E4 @ =sub_808A678
 	adds r0, r4, 0
 	bl sub_806EE08
 	pop {r4}
@@ -9909,7 +9909,7 @@ PokemonMenu_Mail: @ 808A6E8
 	lsls r4, 24
 	lsrs r4, 24
 	bl sub_8072DEC
-	ldr r1, _0808A728
+	ldr r1, _0808A728 @ =gUnknown_0202FFA8
 	movs r0, 0
 	strb r0, [r1]
 	movs r0, 0x13
@@ -9917,17 +9917,17 @@ PokemonMenu_Mail: @ 808A6E8
 	movs r2, 0x1D
 	movs r3, 0x13
 	bl MenuZeroFillWindowRect
-	ldr r1, _0808A72C
-	ldr r2, _0808A730
+	ldr r1, _0808A72C @ =gUnknown_0839F584
+	ldr r2, _0808A730 @ =gPokemonMenuActions
 	movs r0, 0
 	movs r3, 0
 	bl sub_806E750
-	ldr r1, _0808A734
+	ldr r1, _0808A734 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, _0808A738
+	ldr r1, _0808A738 @ =sub_808A73C
 	str r1, [r0]
 	pop {r4}
 	pop {r0}
@@ -9945,17 +9945,17 @@ sub_808A73C: @ 808A73C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, _0808A764
+	ldr r0, _0808A764 @ =gMain
 	ldrh r0, [r0, 0x30]
 	cmp r0, 0x40
 	bne _0808A77A
 	movs r0, 0x5
 	bl PlaySE
-	ldr r4, _0808A768
+	ldr r4, _0808A768 @ =gUnknown_0202FFA8
 	ldrb r0, [r4]
 	cmp r0, 0
 	bne _0808A770
-	ldr r0, _0808A76C
+	ldr r0, _0808A76C @ =gUnknown_0839F584
 	ldrb r0, [r0]
 	subs r0, 0x1
 	lsls r0, 24
@@ -9972,15 +9972,15 @@ _0808A774:
 	bl MoveMenuCursor
 	strb r0, [r4]
 _0808A77A:
-	ldr r0, _0808A7A0
+	ldr r0, _0808A7A0 @ =gMain
 	ldrh r0, [r0, 0x30]
 	cmp r0, 0x80
 	bne _0808A7B4
 	movs r0, 0x5
 	bl PlaySE
-	ldr r4, _0808A7A4
+	ldr r4, _0808A7A4 @ =gUnknown_0202FFA8
 	ldrb r0, [r4]
-	ldr r1, _0808A7A8
+	ldr r1, _0808A7A8 @ =gUnknown_0839F584
 	ldrb r2, [r1]
 	subs r1, r2, 0x1
 	cmp r0, r1
@@ -10000,7 +10000,7 @@ _0808A7AE:
 	bl MoveMenuCursor
 	strb r0, [r4]
 _0808A7B4:
-	ldr r0, _0808A7E0
+	ldr r0, _0808A7E0 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -10008,9 +10008,9 @@ _0808A7B4:
 	beq _0808A7F0
 	movs r0, 0x5
 	bl PlaySE
-	ldr r1, _0808A7E4
-	ldr r2, _0808A7E8
-	ldr r0, _0808A7EC
+	ldr r1, _0808A7E4 @ =gUnknown_0839F584
+	ldr r2, _0808A7E8 @ =gPokemonMenuActions
+	ldr r0, _0808A7EC @ =gUnknown_0202FFA8
 	ldrb r3, [r0]
 	movs r0, 0
 	bl sub_806E81C
@@ -10028,7 +10028,7 @@ _0808A7F0:
 	ands r0, r1
 	cmp r0, 0
 	beq _0808A806
-	ldr r1, _0808A80C
+	ldr r1, _0808A80C @ =gUnknown_0839F584
 	movs r0, 0
 	bl sub_806E7D0
 	adds r0, r5, 0
@@ -10055,12 +10055,12 @@ PokemonMenu_ReadMail: @ 808A810
 	movs r2, 0
 	movs r3, 0x10
 	bl BeginNormalPaletteFade
-	ldr r1, _0808A840
+	ldr r1, _0808A840 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, _0808A844
+	ldr r1, _0808A844 @ =sub_808A848
 	str r1, [r0]
 	add sp, 0x4
 	pop {r4}
@@ -10076,7 +10076,7 @@ sub_808A848: @ 808A848
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, _0808A898
+	ldr r0, _0808A898 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -10088,7 +10088,7 @@ sub_808A848: @ 808A848
 	lsrs r0, 24
 	movs r1, 0x64
 	muls r0, r1
-	ldr r1, _0808A89C
+	ldr r1, _0808A89C @ =gPlayerParty
 	adds r0, r1
 	movs r1, 0x40
 	bl GetMonData
@@ -10100,9 +10100,9 @@ sub_808A848: @ 808A848
 	lsls r0, r4, 3
 	adds r0, r4
 	lsls r0, 2
-	ldr r1, _0808A8A0
+	ldr r1, _0808A8A0 @ =gSaveBlock1 + 0x2B4C
 	adds r0, r1
-	ldr r1, _0808A8A4
+	ldr r1, _0808A8A4 @ =sub_808A8A8
 	movs r2, 0x1
 	bl sub_80F890C
 _0808A890:
@@ -10119,12 +10119,12 @@ _0808A8A4: .4byte sub_808A8A8
 	thumb_func_start sub_808A8A8
 sub_808A8A8: @ 808A8A8
 	push {lr}
-	ldr r1, _0808A8C4
-	ldr r0, _0808A8C8
+	ldr r1, _0808A8C4 @ =gUnknown_020384F0
+	ldr r0, _0808A8C8 @ =gUnknown_03005CE0
 	ldrb r0, [r0]
 	strb r0, [r1]
-	ldr r0, _0808A8CC
-	ldr r1, _0808A8D0
+	ldr r0, _0808A8CC @ =0x0201b000
+	ldr r1, _0808A8D0 @ =0x00000262
 	adds r0, r1
 	movs r1, 0x4
 	strb r1, [r0]
@@ -10144,7 +10144,7 @@ sub_808A8D4: @ 808A8D4
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r1, _0808A90C
+	ldr r1, _0808A90C @ =gUnknown_0202FFA8
 	movs r0, 0
 	strb r0, [r1]
 	movs r0, 0x13
@@ -10155,12 +10155,12 @@ sub_808A8D4: @ 808A8D4
 	movs r0, 0
 	movs r1, 0
 	bl sub_806D538
-	ldr r1, _0808A910
+	ldr r1, _0808A910 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, _0808A914
+	ldr r1, _0808A914 @ =sub_8089CD4
 	str r1, [r0]
 	pop {r4}
 	pop {r0}
@@ -10202,15 +10202,15 @@ PokemonMenu_CancelSubmenu: @ 808A938
 	movs r3, 0x13
 	bl MenuZeroFillWindowRect
 	bl sub_806D5A4
-	ldr r0, _0808A978
+	ldr r0, _0808A978 @ =gUnknown_0202FFA8
 	ldrb r0, [r0]
 	bl sub_8089C7C
-	ldr r1, _0808A97C
+	ldr r1, _0808A97C @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, _0808A980
+	ldr r1, _0808A980 @ =sub_8089D94
 	str r1, [r0]
 	pop {r4}
 	pop {r0}
@@ -10230,11 +10230,11 @@ PokemonMenu_FieldMove: @ 808A984
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r6, r0, 3
-	ldr r7, _0808A9D0
+	ldr r7, _0808A9D0 @ =gUnknown_03004B28
 	adds r4, r6, r7
 	bl sub_8072DEC
-	ldr r1, _0808A9D4
-	ldr r0, _0808A9D8
+	ldr r1, _0808A9D4 @ =gUnknown_0202FFAA
+	ldr r0, _0808A9D8 @ =gUnknown_0202FFA8
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -10268,7 +10268,7 @@ _0808A9DC:
 	ldrsh r0, [r4, r2]
 	cmp r0, 0x7
 	bgt _0808AA2C
-	ldr r2, _0808AA20
+	ldr r2, _0808AA20 @ =0x00000807
 	adds r0, r1, r2
 	lsls r0, 16
 	lsrs r0, 16
@@ -10283,13 +10283,13 @@ _0808A9DC:
 	movs r3, 0x13
 	bl MenuZeroFillWindowRect
 	bl sub_806D5A4
-	ldr r0, _0808AA24
+	ldr r0, _0808AA24 @ =gOtherText_CantBeUsedBadge
 	movs r1, 0x1
 	bl sub_806E834
 	adds r0, r7, 0
 	subs r0, 0x8
 	adds r0, r6, r0
-	ldr r1, _0808AA28
+	ldr r1, _0808AA28 @ =sub_808AAF0
 	str r1, [r0]
 	b _0808AADA
 	.align 2, 0
@@ -10297,7 +10297,7 @@ _0808AA20: .4byte 0x00000807
 _0808AA24: .4byte gOtherText_CantBeUsedBadge
 _0808AA28: .4byte sub_808AAF0
 _0808AA2C:
-	ldr r1, _0808AA78
+	ldr r1, _0808AA78 @ =gFieldMoveFuncs
 	movs r2, 0x16
 	ldrsh r0, [r4, r2]
 	lsls r0, 3
@@ -10308,7 +10308,7 @@ _0808AA2C:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0808AA90
-	ldr r1, _0808AA7C
+	ldr r1, _0808AA7C @ =gUnknown_0202FFA8
 	movs r0, 0
 	strb r0, [r1]
 	ldrh r0, [r4, 0x16]
@@ -10317,12 +10317,12 @@ _0808AA2C:
 	lsrs r0, 16
 	cmp r0, 0x1
 	bls _0808AA88
-	ldr r1, _0808AA80
+	ldr r1, _0808AA80 @ =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, _0808AA84
+	ldr r1, _0808AA84 @ =sub_808AB34
 	str r1, [r0]
 	movs r0, 0x1
 	negs r0, r0
@@ -10362,7 +10362,7 @@ _0808AAB2:
 	bl sub_806D538
 	b _0808AACC
 _0808AABA:
-	ldr r0, _0808AAE4
+	ldr r0, _0808AAE4 @ =gFieldMoveFuncs
 	movs r2, 0x16
 	ldrsh r1, [r4, r2]
 	lsls r1, 3
@@ -10371,12 +10371,12 @@ _0808AABA:
 	movs r1, 0
 	bl sub_806D538
 _0808AACC:
-	ldr r0, _0808AAE8
+	ldr r0, _0808AAE8 @ =gTasks
 	lsls r1, r5, 2
 	adds r1, r5
 	lsls r1, 3
 	adds r1, r0
-	ldr r0, _0808AAEC
+	ldr r0, _0808AAEC @ =sub_808ABF4
 	str r0, [r1]
 _0808AADA:
 	add sp, 0x4
@@ -10394,11 +10394,11 @@ sub_808AAF0: @ 808AAF0
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _0808AB2C
+	ldr r0, _0808AB2C @ =gUnknown_0202E8F6
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	beq _0808AB24
-	ldr r0, _0808AB30
+	ldr r0, _0808AB30 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -10430,13 +10430,13 @@ sub_808AB34: @ 808AB34
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _0808AB6C
+	ldr r0, _0808AB6C @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
 	bne _0808AB84
-	ldr r0, _0808AB70
+	ldr r0, _0808AB70 @ =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
@@ -10450,7 +10450,7 @@ sub_808AB34: @ 808AB34
 	cmp r0, 0
 	beq _0808AB78
 _0808AB62:
-	ldr r0, _0808AB74
+	ldr r0, _0808AB74 @ =c2_exit_to_overworld_2_switch
 	bl SetMainCallback2
 	b _0808AB7E
 	.align 2, 0
@@ -10458,7 +10458,7 @@ _0808AB6C: .4byte gPaletteFade
 _0808AB70: .4byte gTasks
 _0808AB74: .4byte c2_exit_to_overworld_2_switch
 _0808AB78:
-	ldr r0, _0808AB8C
+	ldr r0, _0808AB8C @ =sub_80FC074
 	bl SetMainCallback2
 _0808AB7E:
 	adds r0, r4, 0
@@ -10475,7 +10475,7 @@ _0808AB8C: .4byte sub_80FC074
 sub_808AB90: @ 808AB90
 	push {lr}
 	bl pal_fill_black
-	ldr r0, _0808ABA4
+	ldr r0, _0808ABA4 @ =sub_808ABA8
 	movs r1, 0x8
 	bl CreateTask
 	pop {r0}
@@ -10494,17 +10494,17 @@ sub_808ABA8: @ 808ABA8
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0808ABDE
-	ldr r0, _0808ABE4
+	ldr r0, _0808ABE4 @ =gUnknown_03005CE0
 	ldrb r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, _0808ABE8
+	ldr r1, _0808ABE8 @ =gPlayerParty
 	adds r0, r1
 	movs r1, 0xB
 	bl GetMonData
-	ldr r1, _0808ABEC
+	ldr r1, _0808ABEC @ =gUnknown_0202FF84
 	str r0, [r1]
-	ldr r0, _0808ABF0
+	ldr r0, _0808ABF0 @ =gUnknown_03005CE4
 	ldr r0, [r0]
 	bl _call_via_r0
 	adds r0, r4, 0
@@ -10525,7 +10525,7 @@ sub_808ABF4: @ 808ABF4
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _0808AC28
+	ldr r0, _0808AC28 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -10554,8 +10554,8 @@ _0808AC28: .4byte gMain
 	thumb_func_start sub_808AC2C
 sub_808AC2C: @ 808AC2C
 	push {lr}
-	ldr r0, _0808AC40
-	ldr r1, _0808AC44
+	ldr r0, _0808AC40 @ =gUnknown_0202FF84
+	ldr r1, _0808AC44 @ =gUnknown_03005CE0
 	ldrb r1, [r1]
 	str r1, [r0]
 	movs r0, 0x9
@@ -10580,11 +10580,11 @@ SetUpFieldMove_Surf: @ 808AC48
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0808AC84
-	ldr r1, _0808AC74
-	ldr r0, _0808AC78
+	ldr r1, _0808AC74 @ =gUnknown_0300485C
+	ldr r0, _0808AC78 @ =sub_808AB90
 	str r0, [r1]
-	ldr r1, _0808AC7C
-	ldr r0, _0808AC80
+	ldr r1, _0808AC7C @ =gUnknown_03005CE4
+	ldr r0, _0808AC80 @ =sub_808AC2C
 	str r0, [r1]
 	movs r0, 0x1
 	b _0808AC86
@@ -10603,8 +10603,8 @@ _0808AC86:
 	thumb_func_start sub_808AC8C
 sub_808AC8C: @ 808AC8C
 	push {lr}
-	ldr r0, _0808ACA0
-	ldr r1, _0808ACA4
+	ldr r0, _0808ACA0 @ =gUnknown_0202FF84
+	ldr r1, _0808ACA4 @ =gUnknown_03005CE0
 	ldrb r1, [r1]
 	str r1, [r0]
 	movs r0, 0x1F
@@ -10623,11 +10623,11 @@ SetUpFieldMove_Fly: @ 808ACA8
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808ACD0
-	ldr r1, _0808ACC0
-	ldr r0, _0808ACC4
+	ldr r1, _0808ACC0 @ =gUnknown_0300485C
+	ldr r0, _0808ACC4 @ =sub_808AB90
 	str r0, [r1]
-	ldr r1, _0808ACC8
-	ldr r0, _0808ACCC
+	ldr r1, _0808ACC8 @ =gUnknown_03005CE4
+	ldr r0, _0808ACCC @ =sub_81475C4
 	b _0808ACF2
 	.align 2, 0
 _0808ACC0: .4byte gUnknown_0300485C
@@ -10635,7 +10635,7 @@ _0808ACC4: .4byte sub_808AB90
 _0808ACC8: .4byte gUnknown_03005CE4
 _0808ACCC: .4byte sub_81475C4
 _0808ACD0:
-	ldr r0, _0808ACE4
+	ldr r0, _0808ACE4 @ =gMapHeader
 	ldrb r0, [r0, 0x17]
 	bl is_light_level_1_2_3_or_6
 	lsls r0, 24
@@ -10647,11 +10647,11 @@ _0808ACD0:
 	.align 2, 0
 _0808ACE4: .4byte gMapHeader
 _0808ACE8:
-	ldr r1, _0808ACFC
-	ldr r0, _0808AD00
+	ldr r1, _0808ACFC @ =gUnknown_0300485C
+	ldr r0, _0808AD00 @ =sub_808AB90
 	str r0, [r1]
-	ldr r1, _0808AD04
-	ldr r0, _0808AD08
+	ldr r1, _0808AD04 @ =gUnknown_03005CE4
+	ldr r0, _0808AD08 @ =sub_808AC8C
 _0808ACF2:
 	str r0, [r1]
 	movs r0, 0x1
@@ -10668,7 +10668,7 @@ _0808AD08: .4byte sub_808AC8C
 	thumb_func_start sub_808AD0C
 sub_808AD0C: @ 808AD0C
 	push {r4,lr}
-	ldr r4, _0808AD14
+	ldr r4, _0808AD14 @ =0x0201b260
 	b _0808AD24
 	.align 2, 0
 _0808AD14: .4byte 0x0201b260
@@ -10685,13 +10685,13 @@ _0808AD24:
 	cmp r0, 0x1
 	bne _0808AD18
 	ldrb r0, [r4]
-	ldr r1, _0808AD50
+	ldr r1, _0808AD50 @ =gUnknown_03005CE0
 	ldrb r1, [r1]
 	bl sub_806C994
 	ldrb r0, [r4]
 	movs r1, 0
 	bl sub_806BF74
-	ldr r0, _0808AD54
+	ldr r0, _0808AD54 @ =sub_806AEDC
 	bl SetMainCallback2
 _0808AD48:
 	pop {r4}
@@ -10705,17 +10705,17 @@ _0808AD54: .4byte sub_806AEDC
 	thumb_func_start sub_808AD58
 sub_808AD58: @ 808AD58
 	push {lr}
-	ldr r2, _0808AD7C
+	ldr r2, _0808AD7C @ =gPaletteFade
 	ldrb r0, [r2, 0x8]
 	movs r1, 0x80
 	orrs r0, r1
 	strb r0, [r2, 0x8]
-	ldr r2, _0808AD80
+	ldr r2, _0808AD80 @ =sub_8089CD4
 	movs r0, 0
 	movs r1, 0xFF
 	movs r3, 0
 	bl sub_806AF4C
-	ldr r0, _0808AD84
+	ldr r0, _0808AD84 @ =sub_808AD0C
 	bl SetMainCallback2
 	pop {r0}
 	bx r0
@@ -10728,11 +10728,11 @@ _0808AD84: .4byte sub_808AD0C
 	thumb_func_start unref_sub_808AD88
 unref_sub_808AD88: @ 808AD88
 	push {lr}
-	ldr r0, _0808ADA4
+	ldr r0, _0808ADA4 @ =gUnknown_03005CE0
 	ldrb r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, _0808ADA8
+	ldr r1, _0808ADA8 @ =gPlayerParty
 	adds r0, r1
 	movs r1, 0xB
 	bl GetMonData
@@ -10748,8 +10748,8 @@ _0808ADA8: .4byte gPlayerParty
 	thumb_func_start sub_808ADAC
 sub_808ADAC: @ 808ADAC
 	push {lr}
-	ldr r0, _0808ADC0
-	ldr r1, _0808ADC4
+	ldr r0, _0808ADC0 @ =gUnknown_0202FF84
+	ldr r1, _0808ADC4 @ =gUnknown_03005CE0
 	ldrb r1, [r1]
 	str r1, [r0]
 	movs r0, 0x2C
@@ -10765,7 +10765,7 @@ _0808ADC4: .4byte gUnknown_03005CE0
 SetUpFieldMove_Dive: @ 808ADC8
 	push {lr}
 	bl sub_8068F18
-	ldr r1, _0808ADE0
+	ldr r1, _0808ADE0 @ =gUnknown_0202FF84
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1, 0x4]
@@ -10776,11 +10776,11 @@ SetUpFieldMove_Dive: @ 808ADC8
 	.align 2, 0
 _0808ADE0: .4byte gUnknown_0202FF84
 _0808ADE4:
-	ldr r1, _0808ADF8
-	ldr r0, _0808ADFC
+	ldr r1, _0808ADF8 @ =gUnknown_0300485C
+	ldr r0, _0808ADFC @ =sub_808AB90
 	str r0, [r1]
-	ldr r1, _0808AE00
-	ldr r0, _0808AE04
+	ldr r1, _0808AE00 @ =gUnknown_03005CE4
+	ldr r0, _0808AE04 @ =sub_808ADAC
 	str r0, [r1]
 	movs r0, 0x1
 _0808ADF2:
@@ -10796,8 +10796,8 @@ _0808AE04: .4byte sub_808ADAC
 	thumb_func_start sub_808AE08
 sub_808AE08: @ 808AE08
 	push {lr}
-	ldr r0, _0808AE1C
-	ldr r1, _0808AE20
+	ldr r0, _0808AE1C @ =gUnknown_0202FF84
+	ldr r1, _0808AE20 @ =gUnknown_03005CE0
 	ldrb r1, [r1]
 	str r1, [r0]
 	movs r0, 0x2B
@@ -10836,11 +10836,11 @@ SetUpFieldMove_Waterfall: @ 808AE24
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0808AE80
-	ldr r1, _0808AE70
-	ldr r0, _0808AE74
+	ldr r1, _0808AE70 @ =gUnknown_0300485C
+	ldr r0, _0808AE74 @ =sub_808AB90
 	str r0, [r1]
-	ldr r1, _0808AE78
-	ldr r0, _0808AE7C
+	ldr r1, _0808AE78 @ =gUnknown_03005CE4
+	ldr r0, _0808AE7C @ =sub_808AE08
 	str r0, [r1]
 	movs r0, 0x1
 	b _0808AE82
@@ -10861,7 +10861,7 @@ _0808AE82:
 	thumb_func_start sub_808AE8C
 sub_808AE8C: @ 808AE8C
 	push {r4-r6,lr}
-	ldr r0, _0808AED8
+	ldr r0, _0808AED8 @ =word_203855E
 	ldrb r0, [r0]
 	subs r0, 0x21
 	lsls r0, 24
@@ -10871,7 +10871,7 @@ _0808AE9A:
 	movs r0, 0x64
 	adds r1, r5, 0
 	muls r1, r0
-	ldr r0, _0808AEDC
+	ldr r0, _0808AEDC @ =gPlayerParty
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0xB
@@ -10899,7 +10899,7 @@ _0808AECE:
 _0808AED8: .4byte word_203855E
 _0808AEDC: .4byte gPlayerParty
 _0808AEE0:
-	ldr r0, _0808AF04
+	ldr r0, _0808AF04 @ =word_203855E
 	ldrh r0, [r0]
 	bl ItemIdToBattleMoveId
 	adds r1, r0, 0
@@ -10939,7 +10939,7 @@ _0808AF24:
 	movs r0, 0x64
 	adds r1, r5, 0
 	muls r1, r0
-	ldr r0, _0808AF78
+	ldr r0, _0808AF78 @ =gPlayerParty
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0xB
@@ -10951,7 +10951,7 @@ _0808AF24:
 	bl GetMonData
 	cmp r0, 0
 	bne _0808AF58
-	ldr r0, _0808AF7C
+	ldr r0, _0808AF7C @ =word_203855E
 	ldrh r2, [r0]
 	adds r0, r4, 0
 	movs r1, 0x3
@@ -10982,18 +10982,18 @@ _0808AF7C: .4byte word_203855E
 	thumb_func_start sub_808AF80
 sub_808AF80: @ 808AF80
 	push {r4,r5,lr}
-	ldr r5, _0808AFB0
+	ldr r5, _0808AFB0 @ =0x0201b260
 _0808AF84:
 	bl sub_806B124
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0808B00C
-	ldr r0, _0808AFB4
+	ldr r0, _0808AFB4 @ =gUnknown_02038561
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0808AFC6
-	ldr r0, _0808AFB8
+	ldr r0, _0808AFB8 @ =word_203855E
 	ldrh r0, [r0]
 	bl CheckIfItemIsTMHMOrEvolutionStone
 	lsls r0, 24
@@ -11013,14 +11013,14 @@ _0808AFBC:
 _0808AFC2:
 	bl sub_808AF20
 _0808AFC6:
-	ldr r4, _0808B000
+	ldr r4, _0808B000 @ =gUnknown_03005CE0
 	ldrb r0, [r4]
 	cmp r0, 0x5
 	bhi _0808AFE2
 	adds r1, r0, 0
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, _0808B004
+	ldr r1, _0808B004 @ =gPlayerParty
 	adds r0, r1
 	movs r1, 0xB
 	bl GetMonData
@@ -11031,13 +11031,13 @@ _0808AFE2:
 	strb r0, [r4]
 _0808AFE6:
 	ldrb r0, [r5]
-	ldr r1, _0808B000
+	ldr r1, _0808B000 @ =gUnknown_03005CE0
 	ldrb r1, [r1]
 	bl sub_806C994
 	ldrb r0, [r5]
 	movs r1, 0
 	bl sub_806BF74
-	ldr r0, _0808B008
+	ldr r0, _0808B008 @ =sub_806AEDC
 	bl SetMainCallback2
 	b _0808B018
 	.align 2, 0
@@ -11059,12 +11059,12 @@ _0808B018:
 	thumb_func_start sub_808B020
 sub_808B020: @ 808B020
 	push {lr}
-	ldr r2, _0808B040
+	ldr r2, _0808B040 @ =gPaletteFade
 	ldrb r0, [r2, 0x8]
 	movs r1, 0x80
 	orrs r0, r1
 	strb r0, [r2, 0x8]
-	ldr r0, _0808B044
+	ldr r0, _0808B044 @ =gUnknown_02038561
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	beq _0808B0A0
@@ -11083,14 +11083,14 @@ _0808B048:
 	beq _0808B08C
 	b _0808B0AC
 _0808B052:
-	ldr r0, _0808B070
+	ldr r0, _0808B070 @ =word_203855E
 	ldrh r0, [r0]
 	bl CheckIfItemIsTMHMOrEvolutionStone
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0808B078
-	ldr r2, _0808B074
+	ldr r2, _0808B074 @ =sub_808B0C0
 	movs r0, 0
 	movs r1, 0
 	movs r3, 0x14
@@ -11100,7 +11100,7 @@ _0808B052:
 _0808B070: .4byte word_203855E
 _0808B074: .4byte sub_808B0C0
 _0808B078:
-	ldr r2, _0808B088
+	ldr r2, _0808B088 @ =sub_808B0C0
 	movs r0, 0
 	movs r1, 0
 	movs r3, 0x3
@@ -11109,7 +11109,7 @@ _0808B078:
 	.align 2, 0
 _0808B088: .4byte sub_808B0C0
 _0808B08C:
-	ldr r2, _0808B09C
+	ldr r2, _0808B09C @ =sub_808B1EC
 	movs r0, 0
 	movs r1, 0
 	movs r3, 0xFF
@@ -11118,13 +11118,13 @@ _0808B08C:
 	.align 2, 0
 _0808B09C: .4byte sub_808B1EC
 _0808B0A0:
-	ldr r2, _0808B0B8
+	ldr r2, _0808B0B8 @ =sub_808B0C0
 	movs r0, 0
 	movs r1, 0
 	movs r3, 0x4
 	bl sub_806AF4C
 _0808B0AC:
-	ldr r0, _0808B0BC
+	ldr r0, _0808B0BC @ =sub_808AF80
 	bl SetMainCallback2
 	pop {r0}
 	bx r0
@@ -11139,7 +11139,7 @@ sub_808B0C0: @ 808B0C0
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _0808B0EC
+	ldr r0, _0808B0EC @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -11161,12 +11161,12 @@ _0808B0EC: .4byte gPaletteFade
 _0808B0F0:
 	adds r0, r4, 0
 	bl sub_806CA38
-	ldr r1, _0808B118
+	ldr r1, _0808B118 @ =gUnknown_03005CE0
 	strb r0, [r1]
 	ldrb r1, [r1]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, _0808B11C
+	ldr r1, _0808B11C @ =gPlayerParty
 	adds r0, r1
 	movs r1, 0x2D
 	bl GetMonData
@@ -11180,14 +11180,14 @@ _0808B118: .4byte gUnknown_03005CE0
 _0808B11C: .4byte gPlayerParty
 _0808B120:
 	bl sub_806D5A4
-	ldr r5, _0808B16C
+	ldr r5, _0808B16C @ =gUnknown_02038561
 	ldrb r0, [r5]
 	cmp r0, 0
 	bne _0808B13C
-	ldr r3, _0808B170
-	ldr r0, _0808B174
+	ldr r3, _0808B170 @ =gUnknown_03004AE4
+	ldr r0, _0808B174 @ =word_203855E
 	ldrh r1, [r0]
-	ldr r2, _0808B178
+	ldr r2, _0808B178 @ =sub_808B224
 	ldr r3, [r3]
 	adds r0, r4, 0
 	bl _call_via_r3
@@ -11197,9 +11197,9 @@ _0808B13C:
 	bne _0808B154
 	movs r0, 0x5
 	bl PlaySE
-	ldr r0, _0808B174
+	ldr r0, _0808B174 @ =word_203855E
 	ldrh r1, [r0]
-	ldr r2, _0808B17C
+	ldr r2, _0808B17C @ =sub_808B2EC
 	adds r0, r4, 0
 	bl sub_806E964
 _0808B154:
@@ -11208,7 +11208,7 @@ _0808B154:
 	bne _0808B1CE
 	movs r0, 0x5
 	bl PlaySE
-	ldr r1, _0808B180
+	ldr r1, _0808B180 @ =sub_808B2B4
 	adds r0, r4, 0
 	bl sub_806EC44
 	b _0808B1CE
@@ -11222,7 +11222,7 @@ _0808B180: .4byte sub_808B2B4
 _0808B184:
 	adds r0, r4, 0
 	bl sub_806CA38
-	ldr r1, _0808B1D8
+	ldr r1, _0808B1D8 @ =gUnknown_03005CE0
 	strb r0, [r1]
 	movs r0, 0x5
 	bl PlaySE
@@ -11233,27 +11233,27 @@ _0808B184:
 	movs r2, 0
 	movs r3, 0x10
 	bl BeginNormalPaletteFade
-	ldr r2, _0808B1DC
+	ldr r2, _0808B1DC @ =gUnknown_02038561
 	ldrb r0, [r2]
 	cmp r0, 0x1
 	bhi _0808B1BA
-	ldr r0, _0808B1E0
+	ldr r0, _0808B1E0 @ =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
 	adds r1, r0
-	ldr r0, _0808B1E4
+	ldr r0, _0808B1E4 @ =sub_808B25C
 	str r0, [r1]
 _0808B1BA:
 	ldrb r0, [r2]
 	cmp r0, 0x3
 	bne _0808B1CE
-	ldr r0, _0808B1E0
+	ldr r0, _0808B1E0 @ =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
 	adds r1, r0
-	ldr r0, _0808B1E8
+	ldr r0, _0808B1E8 @ =sub_808B2B4
 	str r0, [r1]
 _0808B1CE:
 	add sp, 0x4
@@ -11273,16 +11273,16 @@ sub_808B1EC: @ 808B1EC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _0808B214
+	ldr r0, _0808B214 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
 	bne _0808B20E
-	ldr r3, _0808B218
-	ldr r0, _0808B21C
+	ldr r3, _0808B218 @ =gUnknown_03004AE4
+	ldr r0, _0808B21C @ =word_203855E
 	ldrh r1, [r0]
-	ldr r2, _0808B220
+	ldr r2, _0808B220 @ =sub_808B224
 	ldr r3, [r3]
 	adds r0, r4, 0
 	bl _call_via_r3
@@ -11311,12 +11311,12 @@ sub_808B224: @ 808B224
 	movs r2, 0
 	movs r3, 0x10
 	bl BeginNormalPaletteFade
-	ldr r1, _0808B254
+	ldr r1, _0808B254 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, _0808B258
+	ldr r1, _0808B258 @ =sub_808B25C
 	str r1, [r0]
 	add sp, 0x4
 	pop {r4}
@@ -11332,13 +11332,13 @@ sub_808B25C: @ 808B25C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _0808B280
+	ldr r0, _0808B280 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
 	bne _0808B27A
-	ldr r0, _0808B284
+	ldr r0, _0808B284 @ =sub_80A5B40
 	bl SetMainCallback2
 	adds r0, r4, 0
 	bl DestroyTask
@@ -11356,13 +11356,13 @@ sub_808B288: @ 808B288
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _0808B2AC
+	ldr r0, _0808B2AC @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
 	bne _0808B2A6
-	ldr r0, _0808B2B0
+	ldr r0, _0808B2B0 @ =sub_813B6F8
 	bl SetMainCallback2
 	adds r0, r4, 0
 	bl DestroyTask
@@ -11389,12 +11389,12 @@ sub_808B2B4: @ 808B2B4
 	movs r2, 0
 	movs r3, 0x10
 	bl BeginNormalPaletteFade
-	ldr r1, _0808B2E4
+	ldr r1, _0808B2E4 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, _0808B2E8
+	ldr r1, _0808B2E8 @ =sub_808B288
 	str r1, [r0]
 	add sp, 0x4
 	pop {r4}
@@ -11411,7 +11411,7 @@ sub_808B2EC: @ 808B2EC
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _0808B31C
+	ldr r0, _0808B31C @ =gUnknown_0202E8F4
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	bne _0808B328
@@ -11422,12 +11422,12 @@ sub_808B2EC: @ 808B2EC
 	movs r2, 0
 	movs r3, 0x10
 	bl BeginNormalPaletteFade
-	ldr r1, _0808B320
+	ldr r1, _0808B320 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, _0808B324
+	ldr r1, _0808B324 @ =sub_808B338
 	str r1, [r0]
 	b _0808B32E
 	.align 2, 0
@@ -11449,7 +11449,7 @@ sub_808B338: @ 808B338
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, _0808B38C
+	ldr r0, _0808B38C @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -11457,12 +11457,12 @@ sub_808B338: @ 808B338
 	bne _0808B384
 	adds r0, r5, 0
 	bl sub_806CA38
-	ldr r1, _0808B390
+	ldr r1, _0808B390 @ =gUnknown_03005CE0
 	strb r0, [r1]
 	ldrb r1, [r1]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, _0808B394
+	ldr r1, _0808B394 @ =gPlayerParty
 	adds r0, r1
 	movs r1, 0x40
 	bl GetMonData
@@ -11474,9 +11474,9 @@ sub_808B338: @ 808B338
 	lsls r1, r4, 3
 	adds r1, r4
 	lsls r1, 2
-	ldr r0, _0808B398
+	ldr r0, _0808B398 @ =gSaveBlock1 + 0x2B4C
 	adds r1, r0
-	ldr r2, _0808B39C
+	ldr r2, _0808B39C @ =sub_808B3EC
 	movs r0, 0x4
 	movs r3, 0x3
 	bl sub_80E62A0
@@ -11495,7 +11495,7 @@ _0808B39C: .4byte sub_808B3EC
 	thumb_func_start sub_808B3A0
 sub_808B3A0: @ 808B3A0
 	push {r4,lr}
-	ldr r4, _0808B3A8
+	ldr r4, _0808B3A8 @ =0x0201b260
 	b _0808B3B8
 	.align 2, 0
 _0808B3A8: .4byte 0x0201b260
@@ -11512,13 +11512,13 @@ _0808B3B8:
 	cmp r0, 0x1
 	bne _0808B3AC
 	ldrb r0, [r4]
-	ldr r1, _0808B3E4
+	ldr r1, _0808B3E4 @ =gUnknown_03005CE0
 	ldrb r1, [r1]
 	bl sub_806C994
 	ldrb r0, [r4]
 	movs r1, 0
 	bl sub_806BF74
-	ldr r0, _0808B3E8
+	ldr r0, _0808B3E8 @ =sub_806AEDC
 	bl SetMainCallback2
 _0808B3DC:
 	pop {r4}
@@ -11534,29 +11534,29 @@ sub_808B3EC: @ 808B3EC
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
-	ldr r0, _0808B464
+	ldr r0, _0808B464 @ =gPaletteFade
 	mov r8, r0
 	ldrb r0, [r0, 0x8]
 	movs r1, 0x80
 	orrs r0, r1
 	mov r1, r8
 	strb r0, [r1, 0x8]
-	ldr r0, _0808B468
+	ldr r0, _0808B468 @ =gScriptResult
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _0808B480
-	ldr r7, _0808B46C
+	ldr r7, _0808B46C @ =gUnknown_0202E8F8
 	ldrh r0, [r7]
 	cmp r0, 0
 	beq _0808B416
 	movs r1, 0x1
 	bl sub_80A9538
 _0808B416:
-	ldr r6, _0808B470
+	ldr r6, _0808B470 @ =gUnknown_03005CE0
 	ldrb r0, [r6]
 	movs r5, 0x64
 	muls r0, r5
-	ldr r4, _0808B474
+	ldr r4, _0808B474 @ =gPlayerParty
 	adds r0, r4
 	movs r1, 0xC
 	bl GetMonData
@@ -11574,7 +11574,7 @@ _0808B416:
 	movs r1, 0xC
 	adds r2, r7, 0
 	bl SetMonData
-	ldr r0, _0808B478
+	ldr r0, _0808B478 @ =sub_808B25C
 	movs r1, 0x5
 	bl CreateTask
 	mov r0, r8
@@ -11583,7 +11583,7 @@ _0808B416:
 	ands r0, r1
 	mov r1, r8
 	strb r0, [r1, 0x8]
-	ldr r0, _0808B47C
+	ldr r0, _0808B47C @ =sub_806AEDC
 	b _0808B48E
 	.align 2, 0
 _0808B464: .4byte gPaletteFade
@@ -11594,12 +11594,12 @@ _0808B474: .4byte gPlayerParty
 _0808B478: .4byte sub_808B25C
 _0808B47C: .4byte sub_806AEDC
 _0808B480:
-	ldr r2, _0808B49C
+	ldr r2, _0808B49C @ =sub_808B4A4
 	movs r0, 0
 	movs r1, 0
 	movs r3, 0xFF
 	bl sub_806AF4C
-	ldr r0, _0808B4A0
+	ldr r0, _0808B4A0 @ =sub_808B3A0
 _0808B48E:
 	bl SetMainCallback2
 	pop {r3}
@@ -11617,24 +11617,24 @@ sub_808B4A4: @ 808B4A4
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _0808B4D8
+	ldr r0, _0808B4D8 @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
 	bne _0808B4D2
-	ldr r0, _0808B4DC
+	ldr r0, _0808B4DC @ =gUnknown_03005CE0
 	ldrb r0, [r0]
-	ldr r1, _0808B4E0
+	ldr r1, _0808B4E0 @ =word_203855E
 	ldrh r1, [r1]
 	movs r2, 0x1
 	bl sub_806EBF0
-	ldr r1, _0808B4E4
+	ldr r1, _0808B4E4 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, _0808B4E8
+	ldr r1, _0808B4E8 @ =sub_808B4EC
 	str r1, [r0]
 _0808B4D2:
 	pop {r4}
@@ -11653,7 +11653,7 @@ sub_808B4EC: @ 808B4EC
 	push {lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
-	ldr r0, _0808B504
+	ldr r0, _0808B504 @ =gUnknown_0202E8F6
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	beq _0808B500
@@ -11679,7 +11679,7 @@ sub_808B508: @ 808B508
 	thumb_func_start sub_808B518
 sub_808B518: @ 808B518
 	push {r4,lr}
-	ldr r4, _0808B520
+	ldr r4, _0808B520 @ =0x0201b260
 	b _0808B530
 	.align 2, 0
 _0808B520: .4byte 0x0201b260
@@ -11696,13 +11696,13 @@ _0808B530:
 	cmp r0, 0x1
 	bne _0808B524
 	ldrb r0, [r4]
-	ldr r1, _0808B55C
+	ldr r1, _0808B55C @ =gUnknown_020384F0
 	ldrb r1, [r1]
 	bl sub_806C994
 	ldrb r0, [r4]
 	movs r1, 0
 	bl sub_806BF74
-	ldr r0, _0808B560
+	ldr r0, _0808B560 @ =sub_806AEDC
 	bl SetMainCallback2
 _0808B554:
 	pop {r4}
@@ -11716,7 +11716,7 @@ _0808B560: .4byte sub_806AEDC
 	thumb_func_start sub_808B564
 sub_808B564: @ 808B564
 	push {lr}
-	ldr r2, _0808B58C
+	ldr r2, _0808B58C @ =gPaletteFade
 	ldrb r0, [r2, 0x8]
 	movs r1, 0x80
 	orrs r0, r1
@@ -11726,7 +11726,7 @@ sub_808B564: @ 808B564
 	lsrs r0, 24
 	cmp r0, 0x4
 	beq _0808B594
-	ldr r2, _0808B590
+	ldr r2, _0808B590 @ =sub_806F490
 	movs r0, 0
 	movs r1, 0
 	movs r3, 0xFF
@@ -11736,13 +11736,13 @@ sub_808B564: @ 808B564
 _0808B58C: .4byte gPaletteFade
 _0808B590: .4byte sub_806F490
 _0808B594:
-	ldr r2, _0808B5AC
+	ldr r2, _0808B5AC @ =sub_806F588
 	movs r0, 0
 	movs r1, 0
 	movs r3, 0xFF
 	bl sub_806AF4C
 _0808B5A0:
-	ldr r0, _0808B5B0
+	ldr r0, _0808B5B0 @ =sub_808B518
 	bl SetMainCallback2
 	pop {r0}
 	bx r0
@@ -11754,15 +11754,15 @@ _0808B5B0: .4byte sub_808B518
 	thumb_func_start sub_808B5B4
 sub_808B5B4: @ 808B5B4
 	push {lr}
-	ldr r3, _0808B5D8
-	ldr r2, _0808B5DC
+	ldr r3, _0808B5D8 @ =gUnknown_03005CF0
+	ldr r2, _0808B5DC @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
 	adds r1, r2
 	ldr r2, [r1]
 	str r2, [r3]
-	ldr r2, _0808B5E0
+	ldr r2, _0808B5E0 @ =sub_808B5E4
 	str r2, [r1]
 	lsls r0, 24
 	lsrs r0, 24
@@ -11783,12 +11783,12 @@ sub_808B5E4: @ 808B5E4
 	bl sub_8055870
 	cmp r0, 0x1
 	beq _0808B602
-	ldr r1, _0808B608
+	ldr r1, _0808B608 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, _0808B60C
+	ldr r1, _0808B60C @ =gUnknown_03005CF0
 	ldr r1, [r1]
 	str r1, [r0]
 _0808B602:

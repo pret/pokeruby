@@ -20,7 +20,7 @@ sub_80945C0: @ 80945C0
 	beq _080945D8
 	movs r6, 0xD
 _080945D8:
-	ldr r0, _08094658
+	ldr r0, _08094658 @ =0x00000801
 	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
@@ -150,7 +150,7 @@ sub_80946C8: @ 80946C8
 	beq _080946E8
 	movs r6, 0xD
 _080946E8:
-	ldr r0, _08094710
+	ldr r0, _08094710 @ =0x00000801
 	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
@@ -205,14 +205,14 @@ sub_8094740: @ 8094740
 	adds r5, r1, 0
 	lsls r4, 16
 	lsrs r4, 16
-	ldr r0, _08094770
+	ldr r0, _08094770 @ =gOtherText_Player
 	lsls r1, r4, 24
 	lsrs r1, 24
 	lsls r5, 24
 	lsrs r5, 24
 	adds r2, r5, 0
 	bl MenuPrint
-	ldr r0, _08094774
+	ldr r0, _08094774 @ =gSaveBlock2
 	adds r4, 0xC
 	lsls r4, 24
 	lsrs r4, 24
@@ -237,7 +237,7 @@ sub_8094778: @ 8094778
 	lsrs r4, 16
 	lsls r5, 16
 	lsrs r5, 16
-	ldr r0, _080947AC
+	ldr r0, _080947AC @ =gMapHeader
 	ldrb r1, [r0, 0x14]
 	mov r0, sp
 	bl sub_80FBFF8
@@ -265,7 +265,7 @@ sub_80947B0: @ 80947B0
 	adds r5, r1, 0
 	lsls r4, 16
 	lsrs r4, 16
-	ldr r0, _080947F4
+	ldr r0, _080947F4 @ =gOtherText_Badges
 	lsls r1, r4, 24
 	lsrs r1, 24
 	lsls r5, 24
@@ -301,7 +301,7 @@ sub_80947F8: @ 80947F8
 	adds r5, r1, 0
 	lsls r4, 16
 	lsrs r4, 16
-	ldr r0, _08094840
+	ldr r0, _08094840 @ =gOtherText_Pokedex
 	lsls r1, r4, 24
 	lsrs r1, 24
 	lsls r5, 24
@@ -339,14 +339,14 @@ sub_8094844: @ 8094844
 	adds r5, r1, 0
 	lsls r4, 16
 	lsrs r4, 16
-	ldr r0, _08094888
+	ldr r0, _08094888 @ =gOtherText_PlayTime
 	lsls r1, r4, 24
 	lsrs r1, 24
 	lsls r5, 24
 	lsrs r5, 24
 	adds r2, r5, 0
 	bl MenuPrint
-	ldr r0, _0809488C
+	ldr r0, _0809488C @ =gSaveBlock2
 	ldrh r1, [r0, 0xE]
 	ldrb r2, [r0, 0x10]
 	mov r0, sp
@@ -372,7 +372,7 @@ _0809488C: .4byte gSaveBlock2
 GetBadgeCount: @ 8094890
 	push {r4,r5,lr}
 	movs r5, 0
-	ldr r4, _080948BC
+	ldr r4, _080948BC @ =0x00000807
 _08094896:
 	lsls r0, r4, 16
 	lsrs r0, 16
@@ -385,7 +385,7 @@ _08094896:
 	lsrs r5, r0, 24
 _080948AA:
 	adds r4, 0x1
-	ldr r0, _080948C0
+	ldr r0, _080948C0 @ =0x0000080e
 	cmp r4, r0
 	ble _08094896
 	adds r0, r5, 0

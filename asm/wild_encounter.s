@@ -8,7 +8,7 @@
 
 	thumb_func_start DisableWildEncounters
 DisableWildEncounters: @ 8084978
-	ldr r1, _08084980
+	ldr r1, _08084980 @ =gWildEncountersDisabled
 	strb r0, [r1]
 	bx lr
 	.align 2, 0
@@ -31,7 +31,7 @@ sub_8084984: @ 8084984
 	str r1, [sp, 0x4]
 	lsls r2, 24
 	lsrs r2, 24
-	ldr r3, _08084A0C
+	ldr r3, _08084A0C @ =gUnknown_0839DC00
 	lsls r1, r2, 1
 	adds r1, r2
 	lsls r2, r1, 1
@@ -48,7 +48,7 @@ sub_8084984: @ 8084984
 	ldrh r5, [r2]
 	cmp r5, r9
 	bhi _08084A2E
-	ldr r0, _08084A10
+	ldr r0, _08084A10 @ =gMapHeader
 	mov r10, r0
 _080849C6:
 	movs r4, 0
@@ -125,7 +125,7 @@ CheckFeebas: @ 8084A44
 	push {r6,r7}
 	sub sp, 0x10
 	movs r7, 0
-	ldr r0, _08084ABC
+	ldr r0, _08084ABC @ =gSaveBlock1
 	ldrh r1, [r0, 0x4]
 	movs r0, 0x88
 	lsls r0, 6
@@ -145,7 +145,7 @@ CheckFeebas: @ 8084A44
 	strh r0, [r4]
 	movs r0, 0
 	ldrsh r1, [r4, r0]
-	ldr r0, _08084AC0
+	ldr r0, _08084AC0 @ =gUnknown_0839DC00
 	mov r9, r5
 	mov r8, r4
 	ldrh r2, [r0, 0x6]
@@ -184,13 +184,13 @@ _08084AC4:
 	movs r0, 0x1
 	b _08084B3A
 _08084AC8:
-	ldr r0, _08084B48
-	ldr r3, _08084B4C
+	ldr r0, _08084B48 @ =gSaveBlock1
+	ldr r3, _08084B4C @ =0x00002dd6
 	adds r0, r3
 	ldrh r0, [r0]
 	bl FeebasSeedRng
 	movs r5, 0
-	ldr r6, _08084B50
+	ldr r6, _08084B50 @ =0x000001bf
 _08084AD8:
 	bl FeebasRandom
 	lsls r1, r5, 1
@@ -258,11 +258,11 @@ _08084B50: .4byte 0x000001bf
 
 	thumb_func_start FeebasRandom
 FeebasRandom: @ 8084B54
-	ldr r2, _08084B68
+	ldr r2, _08084B68 @ =gUnknown_0202FF80
 	ldr r1, [r2]
-	ldr r0, _08084B6C
+	ldr r0, _08084B6C @ =0x41c64e6d
 	muls r0, r1
-	ldr r1, _08084B70
+	ldr r1, _08084B70 @ =0x00003039
 	adds r0, r1
 	str r0, [r2]
 	lsrs r0, 16
@@ -277,7 +277,7 @@ _08084B70: .4byte 0x00003039
 FeebasSeedRng: @ 8084B74
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r1, _08084B80
+	ldr r1, _08084B80 @ =gUnknown_0202FF80
 	str r0, [r1]
 	bx lr
 	.align 2, 0
@@ -568,12 +568,12 @@ _08084D44:
 GetCurrentMapWildMonHeader: @ 8084D6C
 	push {r4-r6,lr}
 	movs r3, 0
-	ldr r5, _08084D9C
+	ldr r5, _08084D9C @ =gWildMonHeaders
 	ldrb r0, [r5]
 	cmp r0, 0xFF
 	beq _08084DB8
 	adds r6, r5, 0
-	ldr r4, _08084DA0
+	ldr r4, _08084DA0 @ =gSaveBlock1
 _08084D7C:
 	lsls r0, r3, 2
 	adds r0, r3
@@ -606,7 +606,7 @@ _08084DA4:
 	cmp r0, 0xFF
 	bne _08084D7C
 _08084DB8:
-	ldr r0, _08084DC0
+	ldr r0, _08084DC0 @ =0x0000ffff
 _08084DBA:
 	pop {r4-r6}
 	pop {r1}
@@ -724,7 +724,7 @@ CreateWildMon: @ 8084E78
 	bl PickWildMonNature
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _08084EAC
+	ldr r1, _08084EAC @ =gEnemyParty
 	str r0, [sp]
 	adds r0, r1, 0
 	adds r1, r4, 0
@@ -832,7 +832,7 @@ SetUpMassOutbreakEncounter: @ 8084F50
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _08084F78
-	ldr r0, _08084F74
+	ldr r0, _08084F74 @ =gSaveBlock1
 	movs r1, 0xAC
 	lsls r1, 6
 	adds r0, r1
@@ -846,8 +846,8 @@ SetUpMassOutbreakEncounter: @ 8084F50
 	.align 2, 0
 _08084F74: .4byte gSaveBlock1
 _08084F78:
-	ldr r4, _08084FB4
-	ldr r2, _08084FB8
+	ldr r4, _08084FB4 @ =gSaveBlock1
+	ldr r2, _08084FB8 @ =0x00002afc
 	adds r0, r4, r2
 	ldrh r0, [r0]
 	adds r2, 0x4
@@ -855,7 +855,7 @@ _08084F78:
 	ldrb r1, [r1]
 	bl CreateWildMon
 	movs r5, 0
-	ldr r0, _08084FBC
+	ldr r0, _08084FBC @ =0x00002b04
 	adds r4, r0
 _08084F90:
 	lsls r0, r5, 1
@@ -863,7 +863,7 @@ _08084F90:
 	ldrh r1, [r0]
 	lsls r2, r5, 24
 	lsrs r2, 24
-	ldr r0, _08084FC0
+	ldr r0, _08084FC0 @ =gEnemyParty
 	bl SetMonMoveSlot
 	adds r0, r5, 0x1
 	lsls r0, 16
@@ -885,15 +885,15 @@ _08084FC0: .4byte gEnemyParty
 	thumb_func_start DoMassOutbreakEncounterTest
 DoMassOutbreakEncounterTest: @ 8084FC4
 	push {r4,lr}
-	ldr r4, _08085010
-	ldr r1, _08085014
+	ldr r4, _08085010 @ =gSaveBlock1
+	ldr r1, _08085014 @ =0x00002afc
 	adds r0, r4, r1
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _08085020
 	movs r1, 0x5
 	ldrsb r1, [r4, r1]
-	ldr r2, _08085018
+	ldr r2, _08085018 @ =0x00002afe
 	adds r0, r4, r2
 	ldrb r0, [r0]
 	cmp r1, r0
@@ -910,7 +910,7 @@ DoMassOutbreakEncounterTest: @ 8084FC4
 	lsrs r0, 16
 	movs r1, 0x64
 	bl __umodsi3
-	ldr r2, _0808501C
+	ldr r2, _0808501C @ =0x00002b0d
 	adds r1, r4, r2
 	lsls r0, 16
 	lsrs r0, 16
@@ -986,7 +986,7 @@ _0808507E:
 	bl ApplyCleanseTagEncounterRateMod
 	cmp r4, 0
 	bne _080850BA
-	ldr r4, _080850DC
+	ldr r4, _080850DC @ =gPlayerParty
 	adds r0, r4, 0
 	movs r1, 0x6
 	bl GetMonData
@@ -1062,7 +1062,7 @@ StandardWildEncounter: @ 8085104
 	lsls r1, 16
 	lsrs r7, r1, 16
 	mov r8, r7
-	ldr r0, _080851CC
+	ldr r0, _080851CC @ =gWildEncountersDisabled
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _08085122
@@ -1071,7 +1071,7 @@ _08085122:
 	bl GetCurrentMapWildMonHeader
 	lsls r0, 16
 	lsrs r5, r0, 16
-	ldr r0, _080851D0
+	ldr r0, _080851D0 @ =0x0000ffff
 	cmp r5, r0
 	bne _08085132
 	b _08085282
@@ -1084,7 +1084,7 @@ _08085132:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080851D8
-	ldr r1, _080851D4
+	ldr r1, _080851D4 @ =gWildMonHeaders
 	lsls r2, r5, 2
 	adds r0, r2, r5
 	lsls r0, 2
@@ -1104,7 +1104,7 @@ _0808515A:
 	bne _0808516A
 	b _08085282
 _0808516A:
-	ldr r1, _080851D4
+	ldr r1, _080851D4 @ =gWildMonHeaders
 	adds r0, r4, r5
 	lsls r0, 2
 	adds r1, 0x4
@@ -1136,7 +1136,7 @@ _08085188:
 	cmp r0, 0x1
 	beq _0808527A
 _080851AE:
-	ldr r1, _080851D4
+	ldr r1, _080851D4 @ =gWildMonHeaders
 	adds r0, r4, r5
 	lsls r0, 2
 	adds r1, 0x4
@@ -1173,7 +1173,7 @@ _080851D8:
 	cmp r0, 0x1
 	bne _08085282
 _08085200:
-	ldr r1, _08085260
+	ldr r1, _08085260 @ =gWildMonHeaders
 	lsls r2, r5, 2
 	adds r0, r2, r5
 	lsls r0, 2
@@ -1190,7 +1190,7 @@ _08085200:
 	cmp r0, 0
 	beq _08085282
 _08085222:
-	ldr r1, _08085260
+	ldr r1, _08085260 @ =gWildMonHeaders
 	adds r0, r4, r5
 	lsls r0, 2
 	adds r1, 0x8
@@ -1209,7 +1209,7 @@ _08085222:
 	cmp r0, 0x1
 	bne _08085268
 _0808524A:
-	ldr r0, _08085264
+	ldr r0, _08085264 @ =gSaveBlock1 + 0x3144
 	ldrb r0, [r0, 0xC]
 	bl RepelCheck
 	lsls r0, 24
@@ -1251,10 +1251,10 @@ RockSmashWildEncounter: @ 8085290
 	bl GetCurrentMapWildMonHeader
 	lsls r0, 16
 	lsrs r2, r0, 16
-	ldr r0, _080852E0
+	ldr r0, _080852E0 @ =0x0000ffff
 	cmp r2, r0
 	beq _080852EC
-	ldr r1, _080852E4
+	ldr r1, _080852E4 @ =gWildMonHeaders
 	lsls r0, r2, 2
 	adds r0, r2
 	lsls r0, 2
@@ -1280,7 +1280,7 @@ RockSmashWildEncounter: @ 8085290
 	bne _080852EC
 	bl sub_8081A00
 _080852D8:
-	ldr r0, _080852E8
+	ldr r0, _080852E8 @ =gScriptResult
 	strh r4, [r0]
 	b _080852F2
 	.align 2, 0
@@ -1288,7 +1288,7 @@ _080852E0: .4byte 0x0000ffff
 _080852E4: .4byte gWildMonHeaders
 _080852E8: .4byte gScriptResult
 _080852EC:
-	ldr r1, _080852F8
+	ldr r1, _080852F8 @ =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
 _080852F2:
@@ -1311,7 +1311,7 @@ SweetScentWildEncounter: @ 80852FC
 	bl GetCurrentMapWildMonHeader
 	lsls r0, 16
 	lsrs r4, r0, 16
-	ldr r0, _0808536C
+	ldr r0, _0808536C @ =0x0000ffff
 	cmp r4, r0
 	beq _080853DA
 	mov r0, sp
@@ -1327,7 +1327,7 @@ SweetScentWildEncounter: @ 80852FC
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _08085380
-	ldr r1, _08085370
+	ldr r1, _08085370 @ =gWildMonHeaders
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 2
@@ -1372,7 +1372,7 @@ _08085380:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080853DA
-	ldr r1, _080853C4
+	ldr r1, _080853C4 @ =gWildMonHeaders
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 2
@@ -1416,10 +1416,10 @@ GetFishingWildMonListHeader: @ 80853E4
 	bl GetCurrentMapWildMonHeader
 	lsls r0, 16
 	lsrs r2, r0, 16
-	ldr r0, _0808540C
+	ldr r0, _0808540C @ =0x0000ffff
 	cmp r2, r0
 	beq _08085414
-	ldr r0, _08085410
+	ldr r0, _08085410 @ =gWildMonHeaders
 	lsls r1, r2, 2
 	adds r1, r2
 	lsls r1, 2
@@ -1450,7 +1450,7 @@ FishingWildEncounter: @ 808541C
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0808544C
-	ldr r4, _08085448
+	ldr r4, _08085448 @ =gWildFeebasRoute119Data
 	adds r0, r4, 0
 	bl RandomInRange
 	adds r1, r0, 0
@@ -1463,7 +1463,7 @@ FishingWildEncounter: @ 808541C
 	.align 2, 0
 _08085448: .4byte gWildFeebasRoute119Data
 _0808544C:
-	ldr r4, _08085484
+	ldr r4, _08085484 @ =gWildMonHeaders
 	bl GetCurrentMapWildMonHeader
 	lsls r0, 16
 	lsrs r0, 16
@@ -1499,10 +1499,10 @@ GetLocalWildMon: @ 8085488
 	bl GetCurrentMapWildMonHeader
 	lsls r0, 16
 	lsrs r3, r0, 16
-	ldr r0, _080854C0
+	ldr r0, _080854C0 @ =0x0000ffff
 	cmp r3, r0
 	beq _080854BA
-	ldr r2, _080854C4
+	ldr r2, _080854C4 @ =gWildMonHeaders
 	lsls r1, r3, 2
 	adds r1, r3
 	lsls r1, 2
@@ -1569,10 +1569,10 @@ GetMirageIslandMon: @ 8085514
 	bl GetCurrentMapWildMonHeader
 	lsls r0, 16
 	lsrs r2, r0, 16
-	ldr r0, _08085548
+	ldr r0, _08085548 @ =0x0000ffff
 	cmp r2, r0
 	beq _08085550
-	ldr r1, _0808554C
+	ldr r1, _0808554C @ =gWildMonHeaders
 	lsls r0, r2, 2
 	adds r0, r2
 	lsls r0, 2
@@ -1602,7 +1602,7 @@ _08085552:
 	thumb_func_start UpdateRepelCounter
 UpdateRepelCounter: @ 8085558
 	push {r4,r5,lr}
-	ldr r5, _08085588
+	ldr r5, _08085588 @ =0x00004021
 	adds r0, r5, 0
 	bl VarGet
 	lsls r0, 16
@@ -1617,7 +1617,7 @@ UpdateRepelCounter: @ 8085558
 	bl VarSet
 	cmp r4, 0
 	bne _08085590
-	ldr r0, _0808558C
+	ldr r0, _0808558C @ =Event_RepelWoreOff
 	bl ScriptContext1_SetupScript
 	movs r0, 0x1
 	b _08085592
@@ -1637,7 +1637,7 @@ RepelCheck: @ 8085598
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r0, _080855E4
+	ldr r0, _080855E4 @ =0x00004021
 	bl VarGet
 	lsls r0, 16
 	cmp r0, 0
@@ -1647,7 +1647,7 @@ _080855AC:
 	movs r0, 0x64
 	adds r1, r5, 0
 	muls r1, r0
-	ldr r0, _080855E8
+	ldr r0, _080855E8 @ =gPlayerParty
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x39
@@ -1690,7 +1690,7 @@ _080855F8:
 ApplyFluteEncounterRateMod: @ 8085600
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, _0808561C
+	ldr r0, _0808561C @ =0x0000084d
 	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
@@ -1703,7 +1703,7 @@ ApplyFluteEncounterRateMod: @ 8085600
 	.align 2, 0
 _0808561C: .4byte 0x0000084d
 _08085620:
-	ldr r0, _0808563C
+	ldr r0, _0808563C @ =0x0000084e
 	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
@@ -1725,7 +1725,7 @@ _0808563C: .4byte 0x0000084e
 ApplyCleanseTagEncounterRateMod: @ 8085640
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, _08085664
+	ldr r0, _08085664 @ =gPlayerParty
 	movs r1, 0xC
 	bl GetMonData
 	cmp r0, 0xBE
