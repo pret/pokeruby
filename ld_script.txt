@@ -85,7 +85,10 @@ SECTIONS {
         asm/rom_80859BC.o(.text);
         src/option_menu.o(.text);
         src/pokedex.o(.text);
-        asm/rom5_part2.o(.text);
+        asm/pokedex.o(.text);
+        asm/trainer_card.o(.text);
+        asm/save_menu_util.o(.text);
+        asm/rom_8094928.o(.text);
         asm/berry.o(.text);
         asm/rom_80B5054.o(.text);
         asm/battle_ai.o(.text);
@@ -101,7 +104,7 @@ SECTIONS {
         src/intro.o(.text);
         asm/rom_813BA94.o(.text);
         asm/lottery_corner.o(.text);
-		src/diploma.o(.text);
+        src/diploma.o(.text);
         asm/berry_tag_screen.o(.text);
         asm/mystery_event_menu.o(.text);
         asm/save_failed_screen.o(.text);

@@ -46,7 +46,7 @@ compare_sapphire compare_sapphire_rev1 compare_sapphire_rev2
 C_SRCS := $(wildcard src/*.c)
 C_OBJS := $(C_SRCS:%.c=%.o)
 
-ASM_OBJS := asm/crt0.o asm/rom3.o asm/rom_8040EB4.o asm/rom4.o asm/rom_8074BAC.o asm/rom5.o asm/rom5_part2.o asm/rom6.o\
+ASM_OBJS := asm/crt0.o asm/rom3.o asm/rom_8040EB4.o asm/rom4.o asm/rom_8074BAC.o asm/rom5.o asm/pokedex.o asm/rom6.o\
 asm/libgcnmultiboot.o asm/m4a_1.o asm/m4a_3.o asm/libagbsyscall.o \
 asm/tileset.o asm/rom_8065394.o asm/rom_803D1FC.o asm/calculate_base_damage.o \
 asm/rom_813BA94.o asm/rom_81258BC.o asm/mystery_event_script.o \
@@ -56,7 +56,8 @@ asm/field_effect.o asm/title_screen.o asm/rom_807C828.o \
 asm/rom_806936C.o asm/clear_save_data_menu.o asm/rom_8148B8C.o \
 asm/mystery_event_menu.o asm/save_failed_screen.o asm/rom_81473B8.o \
 asm/berry_tag_screen.o asm/lottery_corner.o \
-asm/battle_ai.o asm/trader.o
+asm/battle_ai.o asm/trader.o asm/trainer_card.o asm/save_menu_util.o \
+asm/rom_8094928.o
 
 DATA_ASM_OBJS := data/data2.o data/graphics.o data/sound_data.o \
 data/event_scripts.o data/battle_anim_scripts.o \

@@ -30800,8 +30800,8 @@ _0811A838: .4byte gSaveBlock1
 _0811A83C: .4byte 0x00000494
 	thumb_func_end GetCoins
 
-	thumb_func_start sub_811A840
-sub_811A840: @ 811A840
+	thumb_func_start GiveCoins
+GiveCoins: @ 811A840
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -30845,10 +30845,10 @@ _0811A88C:
 	bx r1
 	.align 2, 0
 _0811A894: .4byte 0x0000270f
-	thumb_func_end sub_811A840
+	thumb_func_end GiveCoins
 
-	thumb_func_start sub_811A898
-sub_811A898: @ 811A898
+	thumb_func_start TakeCoins
+TakeCoins: @ 811A898
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -30874,7 +30874,7 @@ _0811A8BC:
 	.align 2, 0
 _0811A8C4: .4byte gSaveBlock1
 _0811A8C8: .4byte 0x00000494
-	thumb_func_end sub_811A898
+	thumb_func_end TakeCoins
 
 	thumb_func_start sub_811A8CC
 sub_811A8CC: @ 811A8CC

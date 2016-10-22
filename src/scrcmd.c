@@ -132,8 +132,8 @@ extern void sub_80586E0(u32, u32);
 extern void sub_810E7AC(u8, u8, u8, u8);
 extern void sub_810E824(void);
 extern u16 GetCoins(void);
-extern bool8 sub_811A840(u16);
-extern bool8 sub_811A898(u16);
+extern bool8 GiveCoins(u16);
+extern bool8 TakeCoins(u16);
 extern u8 sub_80C5374(u16, u8, u16, u32, u32, u8);
 extern u8 sub_80C53F8(u16);
 extern void sub_80C5530(u8, u16, u8);
@@ -1956,7 +1956,7 @@ bool8 ScrCmd_checkcoins(struct ScriptContext *ctx)
 bool8 ScrCmd_givecoins(struct ScriptContext *ctx)
 {
     u16 v2 = VarGet(ScriptReadHalfword(ctx));
-    if (sub_811A840(v2) == TRUE)
+    if (GiveCoins(v2) == TRUE)
         gScriptResult = 0;
     else
         gScriptResult = 1;
@@ -1967,7 +1967,7 @@ bool8 ScrCmd_givecoins(struct ScriptContext *ctx)
 bool8 ScrCmd_removecoins(struct ScriptContext *ctx)
 {
     u16 v2 = VarGet(ScriptReadHalfword(ctx));
-    if (sub_811A898(v2) == TRUE)
+    if (TakeCoins(v2) == TRUE)
         gScriptResult = 0;
     else
         gScriptResult = 1;

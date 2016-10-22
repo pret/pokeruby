@@ -30201,8 +30201,8 @@ nullsub_80: @ 8139C14
 	bx lr
 	thumb_func_end nullsub_80
 
-	thumb_func_start sub_8139C18
-sub_8139C18: @ 8139C18
+	thumb_func_start NewGameInitPCItems
+NewGameInitPCItems: @ 8139C18
 	push {r4-r6,lr}
 	movs r4, 0
 	ldr r0, _08139C6C
@@ -30246,8 +30246,8 @@ _08139C64:
 	bx r0
 	.align 2, 0
 _08139C6C: .4byte gSaveBlock1 + 0x498
-_08139C70: .4byte gUnknown_084062F0
-	thumb_func_end sub_8139C18
+_08139C70: .4byte gNewGamePCItems
+	thumb_func_end NewGameInitPCItems
 
 	thumb_func_start sub_8139C74
 sub_8139C74: @ 8139C74

@@ -27066,8 +27066,10 @@ gUnknown_084062E8:: @ 84062E8
 	.4byte sub_813B578
 	.4byte sub_813B610
 
-gUnknown_084062F0:: @ 84062F0
-	.incbin "baserom.gba", 0x004062f0, 0x8
+	.align 2
+gNewGamePCItems:: @ 84062F0
+	.2byte ITEM_POTION, 1
+	.2byte 0, 0
 
 	.align 2
 gUnknown_084062F8:: @ 84062F8

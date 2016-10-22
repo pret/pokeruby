@@ -119,7 +119,7 @@ void NewGameInitData(void)
     sub_813420C();
     gSaveBlock1.registeredItem = 0;
     sub_80A3714();
-    sub_8139C18();
+    NewGameInitPCItems();
     sub_810C994();
     sub_8133F80();
     sub_80E6764();
