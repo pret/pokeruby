@@ -1443,7 +1443,7 @@ bool8 ScrCmd_bufferpoke(struct ScriptContext *ctx)
 {
     u8 stringVarIndex = ScriptReadByte(ctx);
     u16 species = VarGet(ScriptReadHalfword(ctx));
-    StringCopy(gUnknown_083762F0[stringVarIndex], &gSpeciesNames[species]);
+    StringCopy(gUnknown_083762F0[stringVarIndex], gSpeciesNames[species]);
     return FALSE;
 }
 
@@ -1453,7 +1453,7 @@ bool8 ScrCmd_bufferfirstpoke(struct ScriptContext *ctx)
     u8 *dest = gUnknown_083762F0[stringVarIndex];
     u8 partyIndex = sub_810F87C();
     u32 species = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPECIES, NULL);
-    StringCopy(dest, &gSpeciesNames[species]);
+    StringCopy(dest, gSpeciesNames[species]);
     return FALSE;
 }
 
@@ -1486,7 +1486,7 @@ bool8 ScrCmd_bufferattack(struct ScriptContext *ctx)
 {
     u8 stringVarIndex = ScriptReadByte(ctx);
     u16 moveId = VarGet(ScriptReadHalfword(ctx));
-    StringCopy(gUnknown_083762F0[stringVarIndex], &gMoveNames[moveId]);
+    StringCopy(gUnknown_083762F0[stringVarIndex], gMoveNames[moveId]);
     return FALSE;
 }
 
