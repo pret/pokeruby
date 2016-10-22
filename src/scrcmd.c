@@ -1129,12 +1129,10 @@ bool8 ScrCmd_restorespritelevel(struct ScriptContext *ctx)
 
 bool8 ScrCmd_faceplayer(struct ScriptContext *ctx)
 {
-    struct MapObject *objects = gMapObjects;
-    struct MapObject *object = &objects[gSelectedMapObject];
-    if (object->active)
+    if (gMapObjects[gSelectedMapObject].active)
     {
-        u8 dir = player_get_direction_lower_nybble();
-        FieldObjectFaceOppositeDirection(object, dir);
+        FieldObjectFaceOppositeDirection(&gMapObjects[gSelectedMapObject],
+          player_get_direction_lower_nybble());
     }
     return FALSE;
 }
@@ -1876,11 +1874,9 @@ bool8 ScrCmd_setdooropened(struct ScriptContext *ctx)
 {
     u16 v3 = VarGet(ScriptReadHalfword(ctx));
     u16 v4 = VarGet(ScriptReadHalfword(ctx));
-    u16 v7;
     v3 += 7;
     v4 += 7;
-    v7 = sub_8058790(v3, v4);
-    PlaySE(v7);
+    PlaySE(sub_8058790(v3, v4));
     task_overworld_door_add_if_role_69_for_opening_door_at(v3, v4);
     return FALSE;
 }
