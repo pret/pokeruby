@@ -6,9 +6,11 @@
 #include "pokemon.h"
 #include "fieldmap.h"
 #include "main.h"
+#include "menu.h"
 #include "decoration.h"
 #include "field_message_box.h"
 #include "sound.h"
+#include "string_util.h"
 
 extern void ClearRamScript(void);
 extern u16 *GetVarPointer(u16);
@@ -92,7 +94,7 @@ extern u8 sub_810F87C(void);
 extern void itemid_copy_name(u16, u8 *);
 extern u8 sub_80BF0B8(u32);
 extern void sub_80B79B8(u32 *, u32);
-extern sub_80B79E0(u32 *, u32);
+extern void sub_80B79E0(u32 *, u32);
 extern bool8 IsEnoughMoney(u32, u32);
 extern void sub_80B7C14(u32, u8, u8);
 extern void RemoveMoneyLabelObject(u8, u8);
