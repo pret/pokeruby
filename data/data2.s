@@ -28070,16 +28070,16 @@ gUnknown_0840CB04:: @ 840CB04
 	.incbin "baserom.gba", 0x0040cb04, 0x8
 
 	.align 2
-gUnknown_0840CB0C:: @ 840CB0C
+gDiplomaPalettes:: @ 840CB0C
 	.incbin "graphics/misc/diploma_national.gbapal"
 	.incbin "graphics/misc/diploma_hoenn.gbapal"
 
 	.align 2
-gUnknown_0840CB4C:: @ 840CB4C
+gDiplomaTilemap:: @ 840CB4C
 	.incbin "graphics/misc/diploma_map.bin.lz"
 
 	.align 2
-gUnknown_0840D288:: @ 840D288
+gDiplomaTiles:: @ 840D288
 	.incbin "graphics/misc/diploma.4bpp.lz"
 
 gExpandedPlaceholder_Empty:: @ 840DC80

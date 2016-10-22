@@ -12,9 +12,9 @@ extern void remove_some_task(void);
 extern void sub_80546F0(void);
 extern u16 sub_8090FF4(void);
 
-extern u8 gUnknown_0840D288[];
-extern u8 gUnknown_0840CB4C[];
-extern u8 gUnknown_0840CB0C[];
+extern u8 gDiplomaTiles[];
+extern u8 gDiplomaTilemap[];
+extern u8 gDiplomaPalettes[];
 extern u8 gStringVar1[];
 extern u8 gOtherText_NationalDex[];
 extern u8 gOtherText_HoennDex[];
@@ -58,15 +58,15 @@ void sub_8145D88(void)
     DmaFill32(3, 0, OAM, OAM_SIZE);
     DmaFill16(3, 0, PLTT, PLTT_SIZE);
     
-    LZ77UnCompVram(gUnknown_0840D288, (void *)VRAM);
-    LZ77UnCompVram(gUnknown_0840CB4C, (void *)(VRAM + 0x3000));
+    LZ77UnCompVram(gDiplomaTiles, (void *)VRAM);
+    LZ77UnCompVram(gDiplomaTilemap, (void *)(VRAM + 0x3000));
     
     remove_some_task();
     ResetTasks();
     ResetSpriteData();
     ResetPaletteFade();
     FreeAllSpritePalettes();
-    LoadPalette(gUnknown_0840CB0C, 0, 64);
+    LoadPalette(gDiplomaPalettes, 0, 64);
     SetUpWindowConfig(&gWindowConfig_81E6C3C);
     InitMenuWindow(&gWindowConfig_81E6CE4);
     DisplayDiplomaText();
