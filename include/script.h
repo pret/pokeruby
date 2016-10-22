@@ -18,6 +18,8 @@ struct ScriptContext
     u32 data[4];
 };
 
+#define ScriptReadByte(ctx) (*(ctx->scriptPtr++))
+
 void InitScriptContext(struct ScriptContext *ctx, void *cmdTable, void *cmdTableEnd);
 u8 SetupBytecodeScript(struct ScriptContext *ctx, void *ptr);
 void SetupNativeScript(struct ScriptContext *ctx, void *ptr);
