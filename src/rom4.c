@@ -44,8 +44,8 @@ struct UnkInputStruct
 
 struct UnkStruct_8054FF8_Substruct
 {
-    u16 field_4;
-    u16 field_6;
+    s16 x;
+    s16 y;
     u8 field_8;
 };
 
@@ -62,6 +62,11 @@ struct UnkStruct_8054FF8
 struct UnkMapObjStruct
 {
     u8 a, b, c, d;
+};
+
+struct UCoords32
+{
+    u32 x, y;
 };
 
 extern struct WarpData gUnknown_020297F0;
@@ -91,7 +96,12 @@ extern u16 gUnknown_0300489C;
 
 extern u8 gUnknown_0819FC74[];
 extern u8 gUnknown_0819FC9F[];
+extern u8 gUnknown_081A4479[];
+extern u8 gUnknown_081A4487[];
+extern u8 gUnknown_081A4495[];
 extern u8 gUnknown_081A4508[];
+
+extern struct UCoords32 gUnknown_0821664C[];
 
 extern struct MapData * const gMapAttributes[];
 extern struct MapHeader * const * const gMapGroups[];
@@ -116,6 +126,7 @@ extern void sub_80809B0(void);
 extern void sub_8080990(void);
 extern u8 sub_80BBB24(void);
 extern u16 MapGridGetMetatileBehaviorAt(int, int);
+extern u8 *sub_80682A8(void *, u8, u8);
 
 void sub_8053050(void);
 void warp_in(void);
@@ -187,6 +198,7 @@ bool32 sub_8055618(struct UnkStruct_8054FF8 *);
 bool32 sub_8055630(struct UnkStruct_8054FF8 *);
 u32 sub_8055648(struct UnkStruct_8054FF8 *);
 bool32 sub_8055660(struct UnkStruct_8054FF8 *);
+u8 *sub_805568C(struct UnkStruct_8054FF8 *);
 void sub_8055980(u8, s16, s16, u8);
 void sub_80555B0(int, int, struct UnkStruct_8054FF8 *);
 u8 sub_8055AE8(u8);
@@ -2177,8 +2189,8 @@ void sub_80555B0(int a1, int a2, struct UnkStruct_8054FF8 *a3)
     val = a1;
     a3->d = sub_8055B30(val);
     sub_8055B08(val, &x, &y);
-    a3->sub.field_4 = x;
-    a3->sub.field_6 = y;
+    a3->sub.x = x;
+    a3->sub.y = y;
     a3->sub.field_8 = sub_8055B50(val);
     a3->field_C = MapGridGetMetatileBehaviorAt(x, y);
 }
@@ -2217,4 +2229,32 @@ bool32 sub_8055660(struct UnkStruct_8054FF8 *a1)
     if (a1->d != 1)
         return FALSE;
     return TRUE;
+}
+
+u8 *sub_805568C(struct UnkStruct_8054FF8 *a1)
+{
+    struct UnkStruct_8054FF8_Substruct unkStruct;
+    u8 v5;
+    register int v6 asm("r2");
+
+    if (a1->c && a1->c != 2)
+        return 0;
+
+    unkStruct = a1->sub;
+    unkStruct.x += gUnknown_0821664C[a1->d].x;
+    unkStruct.y += gUnknown_0821664C[a1->d].y;
+    unkStruct.field_8 = 0;
+    v5 = sub_8055B9C(unkStruct.x, unkStruct.y);
+    v6 = v5;
+
+    if (v5 != 4)
+    {
+        if (!a1->b || gUnknown_03000580[v5] != 0x80)
+            return gUnknown_081A4495;
+        if (!sub_8083BF4(v6))
+            return gUnknown_081A4479;
+        return gUnknown_081A4487;
+    }
+
+    return sub_80682A8(&unkStruct, a1->field_C, a1->d);
 }
