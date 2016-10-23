@@ -28,6 +28,7 @@ struct EnigmaBerry
     u8 description2[45];
     u8 itemEffect[18];
     u8 holdEffect;
+    u8 holdEffectParam;
     u32 checksum;
 };
 
