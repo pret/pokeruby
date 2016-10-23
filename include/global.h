@@ -94,6 +94,7 @@ struct SecretBaseRecord
 #include "game_stat.h"
 #include "fieldmap.h"
 #include "berry.h"
+#include "pokemon.h"
 
 struct WarpData
 {
@@ -136,7 +137,9 @@ struct SaveBlock1
     u8 filler_2F;
     u8 flashUsed;
     u16 mapDataId;
-    u8 filler_34[0x45C];
+    u8 filler_34[0x200];
+    u8 playerPartyCount;
+    struct Pokemon playerParty[6];
     u32 money;
     u16 coins;
     u16 registeredItem; // registered for use with SELECT button
