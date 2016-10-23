@@ -6,95 +6,113 @@
 
 	.text
 
-	thumb_func_start c2_clear_save_data_screen_2
-c2_clear_save_data_screen_2: @ 8148800
-	push {lr}
-	bl sub_8148970
-	lsls r0, 24
-	cmp r0, 0
-	beq _08148814
-	ldr r0, _08148818
-	movs r1, 0
-	bl CreateTask
-_08148814:
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08148818: .4byte sub_8148830
-	thumb_func_end c2_clear_save_data_screen_2
+@	thumb_func_start c2_clear_save_data_screen_2
+@c2_clear_save_data_screen_2: @ 8148800
+@	push {lr}
+@	bl sub_8148970
+@	lsls r0, 24
+@	cmp r0, 0
+@	beq _08148814
+@	ldr r0, _08148818
+@	movs r1, 0
+@	bl CreateTask
+@_08148814:
+@	pop {r0}
+@	bx r0
+@	.align 2, 0
+@_08148818: .4byte sub_8148830
+@	thumb_func_end c2_clear_save_data_screen_2
 
-	thumb_func_start sub_814881C
-sub_814881C: @ 814881C
-	push {lr}
-	bl LoadOam
-	bl ProcessSpriteCopyRequests
-	bl TransferPlttBuffer
-	pop {r0}
-	bx r0
-	thumb_func_end sub_814881C
 
-	thumb_func_start sub_8148830
-sub_8148830: @ 8148830
-	push {r4,lr}
-	sub sp, 0x8
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	bl ResetSpriteData
-	movs r1, 0x80
-	lsls r1, 19
-	movs r2, 0xCA
-	lsls r2, 5
-	adds r0, r2, 0
-	strh r0, [r1]
-	ldr r0, _081488A8
-	bl SetVBlankCallback
-	movs r0, 0x2
-	movs r1, 0xE
-	movs r2, 0x1B
-	movs r3, 0x13
-	bl MenuDrawTextWindow
-	ldr r0, _081488AC
-	movs r1, 0x3
-	movs r2, 0xF
-	bl MenuPrint
-	movs r0, 0x2
-	movs r1, 0x1
-	movs r2, 0x8
-	movs r3, 0x6
-	bl MenuDrawTextWindow
-	ldr r3, _081488B0
-	movs r0, 0x3
-	movs r1, 0x2
-	movs r2, 0x2
-	bl PrintMenuItems
-	movs r0, 0x1
-	str r0, [sp]
-	movs r0, 0x5
-	str r0, [sp, 0x4]
-	movs r0, 0
-	movs r1, 0x3
-	movs r2, 0x2
-	movs r3, 0x2
-	bl InitMenu
-	ldr r1, _081488B4
-	lsls r0, r4, 2
-	adds r0, r4
-	lsls r0, 3
-	adds r0, r1
-	ldr r1, _081488B8
-	str r1, [r0]
-	add sp, 0x8
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_081488A8: .4byte sub_814881C
-_081488AC: .4byte gSystemText_ClearAllSaveDataPrompt
-_081488B0: .4byte gUnknown_08376D74
-_081488B4: .4byte gTasks
-_081488B8: .4byte sub_81488BC
-	thumb_func_end sub_8148830
+
+@	thumb_func_start sub_814881C
+@sub_814881C: @ 814881C
+@	push {lr}
+@	bl LoadOam
+@	bl ProcessSpriteCopyRequests
+@	bl TransferPlttBuffer
+@	pop {r0}
+@	bx r0
+@	thumb_func_end sub_814881C
+
+
+
+@	thumb_func_start sub_8148830
+@sub_8148830: @ 8148830
+@	push {r4,lr}
+@
+@	sub sp, 0x8
+@
+@	adds r4, r0, 0
+@	lsls r4, 24
+@	lsrs r4, 24
+@
+@	bl ResetSpriteData
+@
+@	movs r1, 0x80
+@	lsls r1, 19
+@	movs r2, 0xCA
+@	lsls r2, 5
+@	adds r0, r2, 0
+@	strh r0, [r1]
+@
+@	ldr r0, _081488A8
+@	bl SetVBlankCallback
+@
+@	movs r0, 0x2
+@	movs r1, 0xE
+@	movs r2, 0x1B
+@	movs r3, 0x13
+@	bl MenuDrawTextWindow
+@
+@	ldr r0, _081488AC
+@	movs r1, 0x3
+@	movs r2, 0xF
+@	bl MenuPrint
+@
+@	movs r0, 0x2
+@	movs r1, 0x1
+@	movs r2, 0x8
+@	movs r3, 0x6
+@	bl MenuDrawTextWindow
+@
+@	ldr r3, _081488B0
+@	movs r0, 0x3
+@	movs r1, 0x2
+@	movs r2, 0x2
+@	bl PrintMenuItems
+@
+@	movs r0, 0x1
+@	str r0, [sp]
+@	movs r0, 0x5
+@	str r0, [sp, 0x4]
+@	movs r0, 0
+@	movs r1, 0x3
+@	movs r2, 0x2
+@	movs r3, 0x2
+@	bl InitMenu
+@
+@	ldr r1, _081488B4
+@	lsls r0, r4, 2
+@	adds r0, r4
+@	lsls r0, 3
+@	adds r0, r1
+@	ldr r1, _081488B8
+@	str r1, [r0]
+@
+@	add sp, 0x8
+@	pop {r4}
+@	pop {r0}
+@	bx r0
+@	.align 2, 0
+@_081488A8: .4byte sub_814881C
+@_081488AC: .4byte gSystemText_ClearAllSaveDataPrompt
+@_081488B0: .4byte gUnknown_08376D74
+@_081488B4: .4byte gTasks
+@_081488B8: .4byte sub_81488BC
+@	thumb_func_end sub_8148830
+
+
 
 	thumb_func_start sub_81488BC
 sub_81488BC: @ 81488BC
