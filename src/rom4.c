@@ -96,9 +96,23 @@ extern u16 gUnknown_0300489C;
 
 extern u8 gUnknown_0819FC74[];
 extern u8 gUnknown_0819FC9F[];
+extern u8 gUnknown_081A436F[];
+extern u8 gUnknown_081A4379[];
+extern u8 gUnknown_081A4383[];
+extern u8 gUnknown_081A439E[];
+extern u8 gUnknown_081A43B9[];
+extern u8 gUnknown_081A43D4[];
+extern u8 gUnknown_081A43F0[];
+extern u8 gUnknown_081A43FA[];
+extern u8 gUnknown_081A4418[];
+extern u8 gUnknown_081A442D[];
+extern u8 gUnknown_081A4442[];
+extern u8 gUnknown_081A4457[];
 extern u8 gUnknown_081A4479[];
 extern u8 gUnknown_081A4487[];
 extern u8 gUnknown_081A4495[];
+extern u8 gUnknown_081A44E5[];
+extern u8 gUnknown_081A44FE[];
 extern u8 gUnknown_081A4508[];
 
 extern struct UCoords32 gUnknown_0821664C[];
@@ -127,6 +141,7 @@ extern void sub_8080990(void);
 extern u8 sub_80BBB24(void);
 extern u16 MapGridGetMetatileBehaviorAt(int, int);
 extern u8 *sub_80682A8(void *, u8, u8);
+extern u8 *sub_8068E24(struct UnkStruct_8054FF8_Substruct *);
 
 void sub_8053050(void);
 void warp_in(void);
@@ -196,9 +211,15 @@ u16 sub_8055408(u32);
 u16 sub_8055438(u32);
 bool32 sub_8055618(struct UnkStruct_8054FF8 *);
 bool32 sub_8055630(struct UnkStruct_8054FF8 *);
-u32 sub_8055648(struct UnkStruct_8054FF8 *);
+u8 *sub_8055648(struct UnkStruct_8054FF8 *);
 bool32 sub_8055660(struct UnkStruct_8054FF8 *);
 u8 *sub_805568C(struct UnkStruct_8054FF8 *);
+u16 sub_8055758(u8 *);
+void sub_80557E8(void);
+void sub_80557F4(void);
+void sub_8055808(u8 *);
+void sub_8055824(void);
+void sub_8055840(u8 *);
 void sub_8055980(u8, s16, s16, u8);
 void sub_80555B0(int, int, struct UnkStruct_8054FF8 *);
 u8 sub_8055AE8(u8);
@@ -2213,7 +2234,7 @@ bool32 sub_8055630(struct UnkStruct_8054FF8 *a1)
         return FALSE;
 }
 
-u32 sub_8055648(struct UnkStruct_8054FF8 *a1)
+u8 *sub_8055648(struct UnkStruct_8054FF8 *a1)
 {
     if (a1->c != 2)
         return 0;
@@ -2257,4 +2278,72 @@ u8 *sub_805568C(struct UnkStruct_8054FF8 *a1)
     }
 
     return sub_80682A8(&unkStruct, a1->field_C, a1->d);
+}
+
+u16 sub_8055758(u8 *script)
+{
+    if (script == gUnknown_081A4383)
+        return 10;
+    if (script == gUnknown_081A439E)
+        return 9;
+    if (script == gUnknown_081A43B9)
+        return 10;
+    if (script == gUnknown_081A43D4)
+        return 9;
+    if (script == gUnknown_081A4418)
+        return 10;
+    if (script == gUnknown_081A442D)
+        return 9;
+    if (script == gUnknown_081A4442)
+        return 10;
+    if (script == gUnknown_081A4457)
+        return 9;
+    if (script == gUnknown_081A436F)
+        return 10;
+    if (script == gUnknown_081A4379)
+        return 9;
+    if (script == gUnknown_081A43F0)
+        return 10;
+    if (script == gUnknown_081A43FA)
+        return 9;
+    return 0;
+}
+
+void sub_80557E8(void)
+{
+    ScriptContext2_Enable();
+}
+
+void sub_80557F4(void)
+{
+    PlaySE(SE_WIN_OPEN);
+    sub_8071310();
+    ScriptContext2_Enable();
+}
+
+void sub_8055808(u8 *script)
+{
+    PlaySE(SE_SELECT);
+    ScriptContext1_SetupScript(script);
+    ScriptContext2_Enable();
+}
+
+void sub_8055824(void)
+{
+    PlaySE(SE_WIN_OPEN);
+    ScriptContext1_SetupScript(gUnknown_081A44E5);
+    ScriptContext2_Enable();
+}
+
+void sub_8055840(u8 *script)
+{
+    PlaySE(SE_SELECT);
+    ScriptContext1_SetupScript(script);
+    ScriptContext2_Enable();
+}
+
+void sub_805585C(void)
+{
+    ScriptContext1_SetupScript(gUnknown_081A44FE);
+    ScriptContext2_Enable();
 }
