@@ -40,4 +40,12 @@ struct BattleEnigmaBerry
     u8 holdEffectParam;
 };
 
+struct BerryTree
+{
+    u8 berry;
+    u8 stage;
+    u16 secondsUntilNextStage;
+    u8 wateredFlags;
+};
+
 #endif // GUARD_BERRY_H

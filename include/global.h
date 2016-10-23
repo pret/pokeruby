@@ -147,7 +147,8 @@ struct SaveBlock1
     u8 flags[0x120];
     u16 vars[0x100];
     u32 gameStats[NUM_GAME_STATS];
-    u8 filler_1608[0x18F4];
+    struct BerryTree berryTrees[128];
+    u8 filler_1A08[0x14F4];
     struct SB1_2EFC_Struct sb1_2EFC_struct[5];
     u8 filler_2F9C[0x1C4];
     struct EnigmaBerry enigmaBerry;
