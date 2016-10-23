@@ -6,61 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_81488BC
-sub_81488BC: @ 81488BC
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	bl ProcessMenuInputNoWrap_
-	lsls r0, 24
-	asrs r1, r0, 24
-	cmp r1, 0
-	beq _081488E2
-	cmp r1, 0
-	bgt _081488DC
-	movs r0, 0x1
-	negs r0, r0
-	cmp r1, r0
-	beq _0814890C
-	b _0814891E
-_081488DC:
-	cmp r1, 0x1
-	beq _0814890C
-	b _0814891E
-_081488E2:
-	movs r0, 0x5
-	bl PlaySE
-	ldr r0, _08148900 @ =gSystemText_ClearingData
-	bl sub_8071F40
-	ldr r1, _08148904 @ =gTasks
-	lsls r0, r4, 2
-	adds r0, r4
-	lsls r0, 3
-	adds r0, r1
-	ldr r1, _08148908 @ =sub_8148930
-	str r1, [r0]
-	b _0814891E
-	.align 2, 0
-_08148900: .4byte gSystemText_ClearingData
-_08148904: .4byte gTasks
-_08148908: .4byte sub_8148930
-_0814890C:
-	movs r0, 0x5
-	bl PlaySE
-	adds r0, r4, 0
-	bl DestroyTask
-	ldr r0, _0814892C @ =sub_8148B34
-	bl SetMainCallback2
-_0814891E:
-	bl AnimateSprites
-	bl BuildOamBuffer
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0814892C: .4byte sub_8148B34
-	thumb_func_end sub_81488BC
-
 	thumb_func_start sub_8148930
 sub_8148930: @ 8148930
 	push {r4,lr}
