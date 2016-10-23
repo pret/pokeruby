@@ -104,6 +104,12 @@ struct WarpData
     s16 x, y;
 };
 
+struct ItemSlot
+{
+    u16 itemId;
+    u8 quantity;
+};
+
 struct RamScriptData
 {
     u8 magic;
@@ -143,7 +149,13 @@ struct SaveBlock1
     u32 money;
     u16 coins;
     u16 registeredItem; // registered for use with SELECT button
-    u8 filler_498[0x4A0];
+    struct ItemSlot pcItems[50];
+    struct ItemSlot bagPocket_Items[20];
+    struct ItemSlot bagPocket_KeyItems[20];
+    struct ItemSlot bagPocket_PokeBalls[16];
+    struct ItemSlot bagPocket_TMHM[64];
+    struct ItemSlot bagPocket_Berries[46];
+    u8 filler_7F8[0x140];
     u8 unk938[52];  // pokedex related
     u8 filler_96C[0x2B4];
     struct MapObjectTemplate mapObjectTemplates[64];

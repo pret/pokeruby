@@ -13476,8 +13476,14 @@ gFieldEffectObjectPaletteInfo6:: @ 83C15F8
 gSpriteTemplate_CutGrass:: @ 83C1600
 	spr_template 0xFFFF, 0x1000, gOamData_CutGrass, gSpriteAnimTable_CutGrass, gSpriteImageTable_CutGrass, gDummySpriteAffineAnimTable, sub_80A2A48
 
-gUnknown_083C1618:: @ 83C1618
-	.incbin "baserom.gba", 0x003c1618, 0x28
+@ pointer to items, capacity
+	.align 2
+gBagPockets:: @ 83C1618
+	.4byte gSaveBlock1 + 0x560, 20 @ Items
+	.4byte gSaveBlock1 + 0x600, 16 @ Poké Balls
+	.4byte gSaveBlock1 + 0x640, 64 @ TMs & HMs
+	.4byte gSaveBlock1 + 0x740, 46 @ Berries
+	.4byte gSaveBlock1 + 0x5B0, 20 @ Key Items
 
 	.align 2
 gUnknown_083C1640:: @ 83C1640

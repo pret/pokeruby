@@ -29692,7 +29692,7 @@ _080A3328:
 	adds r0, r4, 0
 	bl sub_80A3AC0
 	bl sub_80A3D08
-	ldr r4, _080A3384 @ =gUnknown_083C1618
+	ldr r4, _080A3384 @ =gBagPockets
 	ldr r0, [r4, 0x10]
 	ldr r1, [r4, 0x14]
 	bl sub_80A3C34
@@ -29713,7 +29713,7 @@ _080A3328:
 _080A3378: .4byte gUnknown_0203855A
 _080A337C: .4byte gBG2TilemapBuffer
 _080A3380: .4byte gUnknown_02038559
-_080A3384: .4byte gUnknown_083C1618
+_080A3384: .4byte gBagPockets
 _080A3388: .4byte gUnknown_03005D24
 _080A338C:
 	ldr r0, _080A33D4 @ =0x0000ffff
@@ -30163,7 +30163,7 @@ _080A370A:
 sub_80A3714: @ 80A3714
 	push {r4,r5,lr}
 	movs r4, 0
-	ldr r5, _080A373C @ =gUnknown_083C1618
+	ldr r5, _080A373C @ =gBagPockets
 _080A371A:
 	lsls r1, r4, 3
 	adds r1, r5
@@ -30180,7 +30180,7 @@ _080A371A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A373C: .4byte gUnknown_083C1618
+_080A373C: .4byte gBagPockets
 	thumb_func_end sub_80A3714
 
 	thumb_func_start sub_80A3740
@@ -30695,7 +30695,7 @@ _080A3B2C:
 	bl sub_80A76A0
 	bl sub_80A7590
 	ldr r2, _080A3BA8 @ =gUnknown_03005D24
-	ldr r1, _080A3BAC @ =gUnknown_083C1618
+	ldr r1, _080A3BAC @ =gBagPockets
 	movs r0, 0
 	ldrsb r0, [r4, r0]
 	lsls r0, 3
@@ -30747,7 +30747,7 @@ _080A3B90:
 	.align 2, 0
 _080A3BA4: .4byte gUnknown_02038559
 _080A3BA8: .4byte gUnknown_03005D24
-_080A3BAC: .4byte gUnknown_083C1618
+_080A3BAC: .4byte gBagPockets
 _080A3BB0: .4byte gUnknown_0203855A
 _080A3BB4: .4byte gUnknown_0203855B
 _080A3BB8: .4byte gUnknown_02038562
@@ -30898,7 +30898,7 @@ sub_80A3CA8: @ 80A3CA8
 	movs r0, 0
 	strb r0, [r3, 0x2]
 	movs r4, 0
-	ldr r0, _080A3D04 @ =gUnknown_083C1618
+	ldr r0, _080A3D04 @ =gBagPockets
 	lsls r2, r6, 3
 	adds r1, r2, r0
 	mov r12, r0
@@ -30936,7 +30936,7 @@ _080A3CEC:
 	bx r0
 	.align 2, 0
 _080A3D00: .4byte gUnknown_03005D10
-_080A3D04: .4byte gUnknown_083C1618
+_080A3D04: .4byte gBagPockets
 	thumb_func_end sub_80A3CA8
 
 	thumb_func_start sub_80A3D08
@@ -41931,7 +41931,7 @@ unref_sub_80A9260: @ 80A9260
 	push {lr}
 	lsls r0, 24
 	movs r2, 0
-	ldr r1, _080A9284 @ =gUnknown_083C1618
+	ldr r1, _080A9284 @ =gBagPockets
 	lsrs r0, 21
 	adds r0, r1
 	ldrb r1, [r0, 0x4]
@@ -41948,7 +41948,7 @@ _080A9274:
 	asrs r0, 24
 	b _080A9296
 	.align 2, 0
-_080A9284: .4byte gUnknown_083C1618
+_080A9284: .4byte gBagPockets
 _080A9288:
 	adds r0, r2, 0x1
 	lsls r0, 24
@@ -41968,7 +41968,7 @@ IsBagPocketNonEmpty: @ 80A929C
 	push {lr}
 	lsls r0, 24
 	movs r2, 0
-	ldr r1, _080A92C0 @ =gUnknown_083C1618
+	ldr r1, _080A92C0 @ =gBagPockets
 	lsrs r0, 21
 	subs r0, 0x8
 	adds r0, r1
@@ -41985,7 +41985,7 @@ _080A92B2:
 	movs r0, 0x1
 	b _080A92D0
 	.align 2, 0
-_080A92C0: .4byte gUnknown_083C1618
+_080A92C0: .4byte gBagPockets
 _080A92C4:
 	adds r0, r2, 0x1
 	lsls r0, 24
@@ -42021,7 +42021,7 @@ _080A92F0:
 	subs r0, 0x1
 	lsls r0, 24
 	movs r3, 0
-	ldr r6, _080A9340 @ =gUnknown_083C1618
+	ldr r6, _080A9340 @ =gBagPockets
 	lsrs r2, r0, 21
 	adds r0, r2, r6
 	ldrb r0, [r0, 0x4]
@@ -42059,7 +42059,7 @@ _080A9338:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080A9340: .4byte gUnknown_083C1618
+_080A9340: .4byte gBagPockets
 	thumb_func_end sub_80A92D4
 
 	thumb_func_start sub_80A9344
@@ -42089,7 +42089,7 @@ sub_80A9344: @ 80A9344
 	movs r5, 0x63
 _080A9376:
 	movs r3, 0
-	ldr r0, _080A9410 @ =gUnknown_083C1618
+	ldr r0, _080A9410 @ =gBagPockets
 	mov r8, r0
 	lsls r2, r1, 3
 	adds r0, r2, r0
@@ -42172,7 +42172,7 @@ _080A9408:
 	b _080A9416
 	.align 2, 0
 _080A940C: .4byte 0x000003e7
-_080A9410: .4byte gUnknown_083C1618
+_080A9410: .4byte gBagPockets
 _080A9414:
 	movs r0, 0x1
 _080A9416:
@@ -42206,7 +42206,7 @@ sub_80A9424: @ 80A9424
 	subs r0, 0x1
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r1, _080A94F8 @ =gUnknown_083C1618
+	ldr r1, _080A94F8 @ =gBagPockets
 	lsls r0, r6, 3
 	adds r5, r0, r1
 	ldr r1, [r5]
@@ -42246,7 +42246,7 @@ _080A9478:
 	lsls r0, 16
 	lsrs r4, r0, 16
 	strh r7, [r3, 0x2]
-	ldr r2, _080A94F8 @ =gUnknown_083C1618
+	ldr r2, _080A94F8 @ =gBagPockets
 	mov r9, r2
 	lsls r3, r6, 3
 	cmp r4, 0
@@ -42259,7 +42259,7 @@ _080A94A6:
 	cmp r1, r0
 	bcc _080A9478
 _080A94B2:
-	ldr r2, _080A94F8 @ =gUnknown_083C1618
+	ldr r2, _080A94F8 @ =gBagPockets
 	mov r9, r2
 	lsls r3, r6, 3
 	cmp r4, 0
@@ -42298,16 +42298,16 @@ _080A94F2:
 	beq _080A9516
 	b _080A9510
 	.align 2, 0
-_080A94F8: .4byte gUnknown_083C1618
+_080A94F8: .4byte gBagPockets
 _080A94FC: .4byte 0x000003e7
 _080A9500:
 	strh r0, [r3, 0x2]
-	ldr r0, _080A950C @ =gUnknown_083C1618
+	ldr r0, _080A950C @ =gBagPockets
 	lsls r1, r6, 3
 	adds r1, r0
 	b _080A951A
 	.align 2, 0
-_080A950C: .4byte gUnknown_083C1618
+_080A950C: .4byte gBagPockets
 _080A9510:
 	movs r0, 0
 	b _080A9528
@@ -42357,7 +42357,7 @@ sub_80A9538: @ 80A9538
 	lsrs r0, 24
 	mov r12, r0
 	movs r5, 0
-	ldr r1, _080A95A4 @ =gUnknown_083C1618
+	ldr r1, _080A95A4 @ =gBagPockets
 	lsls r2, r0, 3
 	adds r0, r2, r1
 	ldrb r0, [r0, 0x4]
@@ -42391,9 +42391,9 @@ _080A959E:
 	movs r0, 0
 	b _080A9664
 	.align 2, 0
-_080A95A4: .4byte gUnknown_083C1618
+_080A95A4: .4byte gBagPockets
 _080A95A8:
-	ldr r0, _080A95DC @ =gUnknown_083C1618
+	ldr r0, _080A95DC @ =gBagPockets
 	mov r2, r12
 	lsls r1, r2, 3
 	adds r5, r1, r0
@@ -42419,7 +42419,7 @@ _080A95A8:
 	movs r4, 0
 	b _080A95EE
 	.align 2, 0
-_080A95DC: .4byte gUnknown_083C1618
+_080A95DC: .4byte gBagPockets
 _080A95E0: .4byte gUnknown_02038560
 _080A95E4:
 	subs r0, r4, r0
