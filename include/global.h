@@ -113,6 +113,17 @@ struct ItemSlot
     u8 quantity;
 };
 
+struct Pokeblock
+{
+    u8 color;
+    u8 spicy;
+    u8 dry;
+    u8 sweet;
+    u8 bitter;
+    u8 sour;
+    u8 feel;
+};
+
 struct RamScriptData
 {
     u8 magic;
@@ -158,7 +169,7 @@ struct SaveBlock1
     struct ItemSlot bagPocket_PokeBalls[16];
     struct ItemSlot bagPocket_TMHM[64];
     struct ItemSlot bagPocket_Berries[46];
-    u8 filler_7F8[0x140];
+    struct Pokeblock pokeblocks[40];
     u8 unk938[52];  // pokedex related
     u8 filler_96C[0x2B4];
     struct MapObjectTemplate mapObjectTemplates[64];
