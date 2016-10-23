@@ -39,6 +39,7 @@ extern struct Pokemon gEnemyParty[6];
 
 u16 FeebasRandom(void);
 void FeebasSeedRng(u16 a);
+u8 RepelCheck(u8);
 
 void DisableWildEncounters(u8 a)
 {
@@ -47,6 +48,7 @@ void DisableWildEncounters(u8 a)
 
 u16 sub_8084984(s16 a, s16 b, u8 c)
 {
+    //odd, but needed to match
     u16 *arr = gUnknown_0839DC00;
     u16 *ptr = &arr[c * 3];
     u16 r9 = gUnknown_0839DC00[c * 3 + 1];
@@ -98,16 +100,16 @@ bool32 CheckFeebas(void)
         }
         //_08084A8E
  
-        if(Random() % 100 > 0x31)
-            return 0;
+        if(Random() % 100 > 49) //Why not just do (Random() & 1) to get a 50% chance?
+            return FALSE;
         //_08084AC8
         FeebasSeedRng(gSaveBlock1.feebasLocationSeed);
         for(i = 0; i != 6;)
         {
-            feebasSpots[i] = FeebasRandom() % 0x1BF;
+            feebasSpots[i] = FeebasRandom() % 447;
             if(feebasSpots[i] == 0)
-                feebasSpots[i] = 0x1BF;
-            if((u16)(feebasSpots[i] - 1) > 2)
+                feebasSpots[i] = 447;
+            if(feebasSpots[i] < 1 || feebasSpots[i] >= 4)
                 i++;
         }
         foo = sub_8084984(x, y, r7);
@@ -123,7 +125,7 @@ bool32 CheckFeebas(void)
 
 u16 FeebasRandom(void)
 {
-    gUnknown_0202FF80 = 0x3039 + 0x41c64e6d * gUnknown_0202FF80;
+    gUnknown_0202FF80 = 12345 + 0x41C64E6D * gUnknown_0202FF80;
     return gUnknown_0202FF80 >> 16;
 }
 
@@ -132,7 +134,7 @@ void FeebasSeedRng(u16 seed)
     gUnknown_0202FF80 = seed;
 }
 
-u16 PickWildMon_Grass(void)
+u8 PickWildMon_Grass(void)
 {
     u8 val = Random() % 100;
     
@@ -162,7 +164,7 @@ u16 PickWildMon_Grass(void)
         return 11;
 }
 
-u16 PickWildMon_Water(void)
+u8 PickWildMon_Water(void)
 {
     u8 val = Random() % 100;
     
@@ -178,20 +180,20 @@ u16 PickWildMon_Water(void)
         return 4;
 }
 
-
-u16 PickWildMon_Fishing(u8 rod)
+u8 PickWildMon_Fishing(u8 rod)
 {
     u32 r5 = 0;
     u8 val = Random() % 100;
     
     switch(rod)
     {
-        case 0:
-            r5 = 1;
+        case 0: //old rod?
             if(val < 70)
                 r5 = 0;
+            else
+                r5 = 1;
             return r5;
-        case 1:
+        case 1: //good rod?
             if(val < 60)
                 r5 = 2;
             if(val >= 60 && val < 80)
@@ -199,41 +201,42 @@ u16 PickWildMon_Fishing(u8 rod)
             if(val >= 80 && val < 100)
                 r5 = 4;
             return r5;
-        case 2:
-            break;
+        case 2: //super rod?
+            if(val < 40)
+                r5 = 5;
+            if(val >= 40 && val < 80)
+                r5 = 6;
+            if(val >= 80 && val < 95)
+                r5 = 7;
+            if(val >= 95 && val < 99)
+                r5 = 8;
+            if(val == 99)
+                r5 = 9;
+            return r5;
         default:
             return r5;
     }
     
-    if(val < 40)
-        r5 = 5;
-    if(val >= 40 && val < 80)
-        r5 = 6;
-    if(val >= 80 && val < 95)
-        r5 = 7;
-    if(val >= 95 && val < 99)
-        r5 = 8;
-    if(val == 99)
-        r5 = 9;
-    
     return r5;
 }
 
-u8 RandomInRange(u8 *a)
+//Chooses level of wild Pokemon
+u8 RandomInRange(struct WildPokemon *a)
 {
     u8 min, max;
     u8 foo;
     u8 bar;
     
-    if(a[1] >= a[0])
+    if(a->maxLevel >= a->minLevel)
     {
-        min = a[0];
-        max = a[1];
+        min = a->minLevel;
+        max = a->maxLevel;
     }
     else
     {
-        min = a[1];
-        max = a[0];
+        //handle the case where minLevel > maxLevel
+        min = a->maxLevel;
+        max = a->minLevel;
     }
     foo = max - min + 1;
     bar = Random() % foo;
@@ -304,4 +307,45 @@ void CreateWildMon(u16 a, u8 b)
 {
     ZeroEnemyPartyMons();
     CreateMonWithNature(&gEnemyParty[0], a, b, 0x20, PickWildMonNature());
+}
+
+bool32 GenerateWildMon(struct WildPokemon **a, u8 b, u8 c)
+{
+    u8 mon = 0;
+    u8 level;
+    
+    switch(b)
+    {
+        case 0:
+            mon = PickWildMon_Grass();
+            break;
+        case 1:
+            mon = PickWildMon_Water();
+            break;
+        case 2:
+            mon = PickWildMon_Water();
+            break;
+        default:
+            break;
+    }
+    
+    level = RandomInRange(&a[1][mon]);
+    if(c == 1 && RepelCheck(level) == 0)
+    {
+        return 0;
+    }
+    else
+    {
+        CreateWildMon(a[1][mon].species, level);
+        return 1;
+    }
+}
+
+bool32 GenerateFishingWildMon(struct WildPokemon **a, u8 rod)
+{
+    u8 mon = PickWildMon_Fishing(rod);
+    u8 level = RandomInRange(&a[1][mon]);
+    
+    CreateWildMon(a[1][mon].species, level);
+    return a[1][mon].species;
 }
