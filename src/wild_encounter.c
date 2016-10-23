@@ -1,14 +1,41 @@
 #include "gba/gba.h"
 #include "fieldmap.h"
 #include "global.h"
+#include "pokemon.h"
 #include "rng.h"
+
+struct WildPokemon {
+    u8 minLevel;
+    u8 maxLevel;
+    u16 species;
+};
+
+struct WildPokemonInfo {
+    u32 encounterRate;
+    struct WildPokemon *wildPokemon;
+};
+
+struct WildPokemonHeader {
+    u8 mapGroup;
+    u8 mapNum;
+    struct WildPokemonInfo *landMonsInfo;
+    struct WildPokemonInfo *waterMonsInfo;
+    struct WildPokemonInfo *rockSmashMonsInfo;
+    struct WildPokemonInfo *fishingMonsInfo;
+};
 
 extern bool8 sub_805759C(u8);
 extern void GetXYCoordsOneStepInFrontOfPlayer(void *, void *);
+extern u32 sub_80C8448(void);
+extern s16 sub_810CAE4(u8, u32);
+extern bool32 GetSafariZoneFlag(void);
 
 extern u8 gWildEncountersDisabled;
 extern u16 gUnknown_0839DC00[];
 extern u32 gUnknown_0202FF80;   //Feebas rng value
+extern struct WildPokemonHeader gWildMonHeaders[];
+extern struct Pokemon gEnemyParty[6];
+
 
 u16 FeebasRandom(void);
 void FeebasSeedRng(u16 a);
@@ -188,7 +215,93 @@ u16 PickWildMon_Fishing(u8 rod)
         r5 = 8;
     if(val == 99)
         r5 = 9;
-        
     
     return r5;
+}
+
+u8 RandomInRange(u8 *a)
+{
+    u8 min, max;
+    u8 foo;
+    u8 bar;
+    
+    if(a[1] >= a[0])
+    {
+        min = a[0];
+        max = a[1];
+    }
+    else
+    {
+        min = a[1];
+        max = a[0];
+    }
+    foo = max - min + 1;
+    bar = Random() % foo;
+    return min + bar;
+}
+
+u16 GetCurrentMapWildMonHeader(void)
+{
+    u16 i;
+    
+    for(i = 0; gWildMonHeaders[i].mapGroup != 0xFF; i++)
+    {
+        if(gWildMonHeaders[i].mapGroup == gSaveBlock1.location.mapGroup &&
+        gWildMonHeaders[i].mapNum == gSaveBlock1.location.mapNum)
+            return i;
+    }
+    return -1;
+}
+
+u8 PickWildMonNature(void)
+{
+    u16 foo;
+    u32 r7;
+    u8 arr[0x19];
+    
+    if(GetSafariZoneFlag() == TRUE && (Random() % 100) <= 0x4F)
+    {
+        r7 = sub_80C8448();
+        
+        if(r7)
+        {
+            u8 i;
+            
+            for(i = 0; i < 0x19; i++)
+                arr[i] = i;
+            
+            //_08084E04
+            for(i = 0; i < 0x18; i++)
+            {
+                u8 r4 = i + 1;
+
+                while(r4 <= 0x18)
+                {
+                    if(Random() & 1)
+                    {
+                        u8 r2 = arr[i];
+                        
+                        arr[i] = arr[r4];
+                        arr[r4] = r2;
+                    }
+                    //_08084E2A
+                    r4++;
+                }
+            }
+            //_08084E3E
+            for(i = 0; i <= 0x18; i++)
+            {
+                if(sub_810CAE4(arr[i], r7) > 0)
+                    return arr[i];
+            }
+        }
+    }
+    //_08084E5E
+    return Random() % 0x19;
+}
+
+void CreateWildMon(u16 a, u8 b)
+{
+    ZeroEnemyPartyMons();
+    CreateMonWithNature(&gEnemyParty[0], a, b, 0x20, PickWildMonNature());
 }
