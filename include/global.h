@@ -146,8 +146,11 @@ struct SaveBlock1
     u8 flags[0x120];
     u16 vars[0x100];
     u32 gameStats[NUM_GAME_STATS];
-    u8 filler_1608[0x18F4];
-    struct SB1_2EFC_Struct sb1_2EFC_struct[5];
+    //u8 filler_1608[0x18F4];
+    u8 filler_1608[0x17CE];
+	u16 feebasLocationSeed;
+	u8 filler_17D0[0x172C];
+	struct SB1_2EFC_Struct sb1_2EFC_struct[5];
     u8 filler_2F9C[0x6F4];
     struct RamScript ramScript;
     u8 filler_3A7C[0x10];
