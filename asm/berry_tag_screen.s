@@ -847,7 +847,7 @@ sub_81466E8: @ 81466E8
 	lsls r0, r7, 2
 	adds r0, r7
 	lsls r0, 3
-	ldr r1, _08146748 @ =gUnknown_03004B28
+	ldr r1, _08146748 @ =gTasks + 0x8
 	adds r6, r0, r1
 	ldr r4, _0814674C @ =gUnknown_03005D10
 	movs r0, 0xC
@@ -886,7 +886,7 @@ _08146728:
 	strh r0, [r6, 0x2]
 	b _08146766
 	.align 2, 0
-_08146748: .4byte gUnknown_03004B28
+_08146748: .4byte gTasks + 0x8
 _0814674C: .4byte gUnknown_03005D10
 _08146750:
 	mov r4, r8
@@ -938,7 +938,7 @@ sub_8146798: @ 8146798
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
-	ldr r1, _08146800 @ =gUnknown_03004B28
+	ldr r1, _08146800 @ =gTasks + 0x8
 	adds r0, r1
 	ldr r2, _08146804 @ =gUnknown_030041B4
 	ldrh r1, [r0]
@@ -987,7 +987,7 @@ _081467FA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08146800: .4byte gUnknown_03004B28
+_08146800: .4byte gTasks + 0x8
 _08146804: .4byte gUnknown_030041B4
 _08146808: .4byte gTasks
 _0814680C: .4byte sub_8146480

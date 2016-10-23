@@ -370,7 +370,7 @@ sub_81476B0: @ 81476B0
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, _081476D4 @ =gUnknown_03004B28
+	ldr r1, _081476D4 @ =gTasks + 0x8
 	adds r4, r0, r1
 	movs r1, 0
 	ldrsh r0, [r4, r1]
@@ -382,7 +382,7 @@ sub_81476B0: @ 81476B0
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_081476D4: .4byte gUnknown_03004B28
+_081476D4: .4byte gTasks + 0x8
 _081476D8: .4byte _081476DC
 	.align 2, 0
 _081476DC:

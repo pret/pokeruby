@@ -14,7 +14,7 @@ task01_battle_start: @ 8081960
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, _08081980 @ =gUnknown_03004B28
+	ldr r1, _08081980 @ =gTasks + 0x8
 	adds r4, r0, r1
 	movs r1, 0
 	ldrsh r0, [r4, r1]
@@ -24,7 +24,7 @@ task01_battle_start: @ 8081960
 	beq _0808199A
 	b _080819BA
 	.align 2, 0
-_08081980: .4byte gUnknown_03004B28
+_08081980: .4byte gTasks + 0x8
 _08081984:
 	bl c3_80A0DD8_is_running
 	cmp r0, 0

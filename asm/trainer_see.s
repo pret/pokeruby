@@ -1081,7 +1081,7 @@ sub_8084794: @ 8084794
 	lsls r0, r1, 2
 	adds r0, r1
 	lsls r0, 3
-	ldr r1, _080847C4 @ =gUnknown_03004B28
+	ldr r1, _080847C4 @ =gTasks + 0x8
 	adds r0, r1
 	adds r0, 0x2
 	adds r1, r4, 0
@@ -1091,7 +1091,7 @@ sub_8084794: @ 8084794
 	bx r0
 	.align 2, 0
 _080847C0: .4byte sub_80846E4
-_080847C4: .4byte gUnknown_03004B28
+_080847C4: .4byte gTasks + 0x8
 	thumb_func_end sub_8084794
 
 	thumb_func_start sub_80847C8

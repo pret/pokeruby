@@ -4060,7 +4060,7 @@ sub_806F7E8: @ 806F7E8
 	lsls r3, r0, 2
 	adds r3, r0
 	lsls r3, 3
-	ldr r0, _0806F898 @ =gUnknown_03004B28
+	ldr r0, _0806F898 @ =gTasks + 0x8
 	adds r3, r0
 	movs r0, 0x14
 	ldrsh r1, [r3, r0]
@@ -4142,7 +4142,7 @@ _0806F862:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0806F898: .4byte gUnknown_03004B28
+_0806F898: .4byte gTasks + 0x8
 _0806F89C: .4byte 0x0201b000
 _0806F8A0: .4byte 0x00000282
 _0806F8A4: .4byte gUnknown_08376858

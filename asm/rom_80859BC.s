@@ -10230,7 +10230,7 @@ PokemonMenu_FieldMove: @ 808A984
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r6, r0, 3
-	ldr r7, _0808A9D0 @ =gUnknown_03004B28
+	ldr r7, _0808A9D0 @ =gTasks + 0x8
 	adds r4, r6, r7
 	bl sub_8072DEC
 	ldr r1, _0808A9D4 @ =gUnknown_0202FFAA
@@ -10259,7 +10259,7 @@ PokemonMenu_FieldMove: @ 808A984
 	movs r0, 0x9
 	b _0808AAB2
 	.align 2, 0
-_0808A9D0: .4byte gUnknown_03004B28
+_0808A9D0: .4byte gTasks + 0x8
 _0808A9D4: .4byte gUnknown_0202FFAA
 _0808A9D8: .4byte gUnknown_0202FFA8
 _0808A9DC:

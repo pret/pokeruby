@@ -21071,7 +21071,7 @@ sub_8115B58: @ 8115B58
 	lsls r0, r7, 2
 	adds r0, r7
 	lsls r0, 3
-	ldr r1, _08115D34 @ =gUnknown_03004B28
+	ldr r1, _08115D34 @ =gTasks + 0x8
 	adds r0, r1
 	adds r0, 0x8
 	movs r1, 0
@@ -21090,7 +21090,7 @@ _08115B94:
 	lsls r0, r7, 2
 	adds r0, r7
 	lsls r0, 3
-	ldr r1, _08115D34 @ =gUnknown_03004B28
+	ldr r1, _08115D34 @ =gTasks + 0x8
 	adds r0, r1
 	adds r0, 0x8
 	movs r1, 0x1
@@ -21109,7 +21109,7 @@ _08115BBA:
 	lsls r0, r7, 2
 	adds r0, r7
 	lsls r0, 3
-	ldr r1, _08115D34 @ =gUnknown_03004B28
+	ldr r1, _08115D34 @ =gTasks + 0x8
 	adds r0, r1
 	adds r0, 0x8
 	movs r1, 0x2
@@ -21128,7 +21128,7 @@ _08115BE0:
 	lsls r0, r7, 2
 	adds r0, r7
 	lsls r0, 3
-	ldr r1, _08115D34 @ =gUnknown_03004B28
+	ldr r1, _08115D34 @ =gTasks + 0x8
 	adds r0, r1
 	adds r0, 0x8
 	movs r1, 0x3
@@ -21286,7 +21286,7 @@ _08115D20:
 	bx r0
 	.align 2, 0
 _08115D30: .4byte gMain
-_08115D34: .4byte gUnknown_03004B28
+_08115D34: .4byte gTasks + 0x8
 _08115D38: .4byte gTasks
 _08115D3C: .4byte 0x020190b8
 _08115D40: .4byte 0x0000ffff

@@ -13617,7 +13617,7 @@ sub_8142570: @ 8142570
 	lsls r1, r4, 2
 	adds r0, r1, r4
 	lsls r5, r0, 3
-	ldr r0, _08142608 @ =gUnknown_03004B28
+	ldr r0, _08142608 @ =gTasks + 0x8
 	mov r12, r0
 	mov r8, r1
 	ldr r6, _0814260C @ =gSprites
@@ -13675,7 +13675,7 @@ _081425C0:
 	bx r0
 	.align 2, 0
 _08142604: .4byte 0xffff0000
-_08142608: .4byte gUnknown_03004B28
+_08142608: .4byte gTasks + 0x8
 _0814260C: .4byte gSprites
 _08142610: .4byte gTasks
 _08142614: .4byte sub_8142618
@@ -14546,7 +14546,7 @@ _08142CFE:
 	lsls r6, r4, 2
 	adds r0, r6, r4
 	lsls r5, r0, 3
-	ldr r1, _08142DD8 @ =gUnknown_03004B28
+	ldr r1, _08142DD8 @ =gTasks + 0x8
 	mov r10, r1
 	ldr r2, _08142DDC @ =gSprites
 	mov r12, r2
@@ -14648,7 +14648,7 @@ _08142DB2:
 	.align 2, 0
 _08142DD0: .4byte 0x0201e000
 _08142DD4: .4byte gTasks
-_08142DD8: .4byte gUnknown_03004B28
+_08142DD8: .4byte gTasks + 0x8
 _08142DDC: .4byte gSprites
 _08142DE0: .4byte 0xffff0000
 _08142DE4: .4byte gUnknown_0203931C
