@@ -19053,7 +19053,7 @@ sub_8134240: @ 8134240
 	mov r0, r8
 	strb r0, [r4]
 	bl Random
-	ldr r5, _08134308 @ =gUnknown_08402E80
+	ldr r5, _08134308 @ =gRoamerLocations
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x14
@@ -19079,7 +19079,7 @@ _sub_8134240_Latias: .4byte 407
 	.endif
 _08134300: .4byte gSaveBlock1 + 0x3144
 _08134304: .4byte gRoamerLocation
-_08134308: .4byte gUnknown_08402E80
+_08134308: .4byte gRoamerLocations
 	thumb_func_end sub_8134240
 
 	thumb_func_start sub_813430C
@@ -19124,7 +19124,7 @@ sub_8134348: @ 8134348
 	beq _08134380
 	ldr r0, _0813438C @ =gRoamerLocation
 	strb r1, [r0]
-	ldr r5, _08134390 @ =gUnknown_08402E80
+	ldr r5, _08134390 @ =gRoamerLocations
 	adds r4, r0, 0
 _0813435C:
 	bl Random
@@ -19150,7 +19150,7 @@ _08134380:
 	.align 2, 0
 _08134388: .4byte gSaveBlock1 + 0x3144
 _0813438C: .4byte gRoamerLocation
-_08134390: .4byte gUnknown_08402E80
+_08134390: .4byte gRoamerLocations
 	thumb_func_end sub_8134348
 
 	thumb_func_start sub_8134394
@@ -19172,7 +19172,7 @@ _081343AE:
 	cmp r0, 0
 	beq _08134416
 	ldr r7, _08134400 @ =gRoamerLocation
-	ldr r3, _08134404 @ =gUnknown_08402E80
+	ldr r3, _08134404 @ =gRoamerLocations
 _081343BA:
 	lsls r0, r4, 1
 	adds r0, r4
@@ -19182,7 +19182,7 @@ _081343BA:
 	ldrb r1, [r1]
 	cmp r0, r1
 	bne _0813440C
-	ldr r6, _08134404 @ =gUnknown_08402E80
+	ldr r6, _08134404 @ =gRoamerLocations
 	adds r5, r2, 0x1
 	ldr r4, _08134408 @ =gUnknown_020392FC
 _081343D0:
@@ -19210,7 +19210,7 @@ _081343F4:
 	.align 2, 0
 _081343FC: .4byte gSaveBlock1 + 0x3144
 _08134400: .4byte gRoamerLocation
-_08134404: .4byte gUnknown_08402E80
+_08134404: .4byte gRoamerLocations
 _08134408: .4byte gUnknown_020392FC
 _0813440C:
 	adds r0, r4, 0x1
