@@ -3303,7 +3303,7 @@ sub_814A518: @ 814A518
 	adds r4, r0, 0
 	lsls r1, 24
 	lsrs r5, r1, 24
-	bl SkipExtCtrlCodes
+	bl StripExtCtrlCodes
 	adds r0, r4, 0
 	bl StringLength
 	lsls r0, 24
@@ -3357,7 +3357,7 @@ sub_814A568: @ 814A568
 	b _0814A588
 _0814A582:
 	adds r0, r4, 0
-	bl SkipExtCtrlCodes
+	bl StripExtCtrlCodes
 _0814A588:
 	pop {r4}
 	pop {r0}

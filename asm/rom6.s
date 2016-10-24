@@ -45672,7 +45672,7 @@ sub_8121E10: @ 8121E10
 	movs r1, 0
 	strb r1, [r0]
 	movs r0, 0x4
-	bl sub_806AFAC
+	bl OpenPartyMenu
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -45691,7 +45691,7 @@ sub_8121E34: @ 8121E34
 	strb r1, [r0]
 	movs r0, 0x4
 	movs r1, 0
-	bl sub_806AFAC
+	bl OpenPartyMenu
 	pop {r0}
 	bx r0
 	.align 2, 0

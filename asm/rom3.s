@@ -7107,7 +7107,7 @@ _0800F03E:
 	bl GetMonGender
 	strb r0, [r5, 0x1C]
 	adds r0, r7, 0
-	bl SkipExtCtrlCodes
+	bl StripExtCtrlCodes
 	adds r0, r4, 0
 	movs r1, 0x3
 	bl GetMonData
@@ -7281,7 +7281,7 @@ _0800F1FA:
 	str r0, [r1, 0x8]
 	movs r0, 0x5
 	movs r1, 0
-	bl sub_806AFAC
+	bl OpenPartyMenu
 	b _0800F27A
 	.align 2, 0
 _0800F228: .4byte gBlockRecvBuffer

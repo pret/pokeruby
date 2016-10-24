@@ -705,7 +705,7 @@ sub_8094E20: @ 8094E20
 	bl pokemon_change_order
 	movs r0, 0x1
 	movs r1, 0xFF
-	bl sub_806AFAC
+	bl OpenPartyMenu
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -23151,7 +23151,7 @@ _0809FF6A:
 	movs r1, 0x7E
 	movs r2, 0x38
 	movs r3, 0x1
-	bl sub_80729D8
+	bl MenuPrint_PixelCoords
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -23923,7 +23923,7 @@ sub_80A0664: @ 80A0664
 	adds r0, r4, 0
 	bl StringCopy
 	adds r0, r4, 0
-	bl SkipExtCtrlCodes
+	bl StripExtCtrlCodes
 	b _080A06C2
 	.align 2, 0
 _080A06A0: .4byte 0x02018000
@@ -27057,7 +27057,7 @@ sub_80A1EF8: @ 80A1EF8
 	mov r0, r8
 	adds r1, r5, 0
 	adds r2, r6, 0
-	bl sub_80729D8
+	bl MenuPrint_PixelCoords
 	add sp, 0x4
 	pop {r3,r4}
 	mov r8, r3
@@ -32634,7 +32634,7 @@ _080A49F4:
 	movs r2, 0x78
 _080A4A08:
 	movs r3, 0
-	bl sub_80729D8
+	bl MenuPrint_PixelCoords
 	b _080A4A4C
 	.align 2, 0
 _080A4A10: .4byte gUnknown_0840E740
@@ -32663,7 +32663,7 @@ _080A4A28:
 	mov r0, sp
 	movs r1, 0x4
 	movs r3, 0
-	bl sub_80729D8
+	bl MenuPrint_PixelCoords
 _080A4A4C:
 	add sp, 0x64
 	pop {r4,r5}
@@ -32742,7 +32742,7 @@ _080A4AB0:
 	mov r0, sp
 	movs r1, 0x4
 	movs r3, 0
-	bl sub_80729D8
+	bl MenuPrint_PixelCoords
 _080A4AD2:
 	add sp, 0x64
 	pop {r4,r5}
@@ -51750,7 +51750,7 @@ sub_80AE098: @ 80AE098
 	adds r1, r6, 0
 	bl StringCopy
 	mov r0, sp
-	bl SkipExtCtrlCodes
+	bl StripExtCtrlCodes
 	ldr r0, _080AE0F4 @ =gUnknown_0203869A
 	ldrb r1, [r0]
 	movs r0, 0x1
@@ -51832,7 +51832,7 @@ _080AE108:
 	cmp r0, 0
 	beq _080AE19A
 	mov r0, sp
-	bl SkipExtCtrlCodes
+	bl StripExtCtrlCodes
 	adds r0, r6, 0
 	movs r1, 0x3
 	bl GetMonData
@@ -63280,7 +63280,7 @@ _080B38EE:
 	movs r1, 0xCA
 	adds r2, r7, 0
 	movs r3, 0x1
-	bl sub_80729D8
+	bl MenuPrint_PixelCoords
 	add sp, 0x4
 	pop {r3,r4}
 	mov r8, r3
@@ -63362,7 +63362,7 @@ _080B39AC:
 	movs r1, 0xCA
 	adds r2, r7, 0
 	movs r3, 0x1
-	bl sub_80729D8
+	bl MenuPrint_PixelCoords
 _080B39C2:
 	add sp, 0x4
 	pop {r3,r4}

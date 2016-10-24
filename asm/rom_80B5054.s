@@ -5735,7 +5735,7 @@ _080B7ACE:
 	lsls r2, r7, 3
 	mov r0, sp
 	movs r3, 0x1
-	bl sub_80729D8
+	bl MenuPrint_PixelCoords
 _080B7AE4:
 	add sp, 0x10
 	pop {r4-r7}
@@ -18847,7 +18847,7 @@ _080BDFDE:
 	bl sub_80BDEAC
 	strb r0, [r5, 0x3]
 	adds r0, r6, 0
-	bl SkipExtCtrlCodes
+	bl StripExtCtrlCodes
 _080BE012:
 	pop {r3}
 	mov r8, r3
@@ -19110,7 +19110,7 @@ sub_80BE188: @ 80BE188
 	bl sub_80BDEAC
 	strb r0, [r4, 0x1F]
 	adds r0, r5, 0
-	bl SkipExtCtrlCodes
+	bl StripExtCtrlCodes
 _080BE224:
 	pop {r4-r6}
 	pop {r0}
@@ -19482,7 +19482,7 @@ sub_80BE478: @ 80BE478
 	bl sub_80BDEAC
 	strb r0, [r4, 0x1F]
 	adds r0, r5, 0
-	bl SkipExtCtrlCodes
+	bl StripExtCtrlCodes
 _080BE548:
 	pop {r3,r4}
 	mov r8, r3
@@ -19731,7 +19731,7 @@ sub_80BE6A0: @ 80BE6A0
 	bl sub_80BDEAC
 	strb r0, [r4, 0xE]
 	adds r0, r5, 0
-	bl SkipExtCtrlCodes
+	bl StripExtCtrlCodes
 	pop {r3}
 	mov r8, r3
 	pop {r4-r6}
@@ -122775,7 +122775,7 @@ sub_80F0A74: @ 80F0A74
 	adds r0, r4, 0
 	movs r1, 0x61
 	movs r3, 0
-	bl sub_80729D8
+	bl MenuPrint_PixelCoords
 	ldr r1, _080F0AE8 @ =0x0000d158
 	adds r0, r5, r1
 	ldrh r0, [r0]
@@ -123240,7 +123240,7 @@ _080F0E42:
 _080F0E54:
 	movs r1, 0x61
 	movs r3, 0
-	bl sub_80729D8
+	bl MenuPrint_PixelCoords
 	b _080F0EA0
 	.align 2, 0
 _080F0E60: .4byte gUnknown_083DFEC4
@@ -123262,7 +123262,7 @@ _080F0E6C:
 	adds r0, r4, 0
 	movs r1, 0x61
 	movs r3, 0
-	bl sub_80729D8
+	bl MenuPrint_PixelCoords
 	b _080F0D6C
 	.align 2, 0
 _080F0E94: .4byte gUnknown_083DFEC4
@@ -124630,7 +124630,7 @@ _080F19B8:
 	movs r1, 0x1
 	movs r2, 0x70
 	movs r3, 0x1
-	bl sub_80729D8
+	bl MenuPrint_PixelCoords
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -141428,7 +141428,7 @@ sub_80F9A8C: @ 80F9A8C
 	adds r0, r1
 	ldrb r0, [r0, 0x8]
 	movs r1, 0
-	bl sub_806AFAC
+	bl OpenPartyMenu
 	adds r0, r4, 0
 	bl DestroyTask
 _080F9ABE:
@@ -146483,7 +146483,7 @@ _080FC184:
 	movs r1, 0x1
 	movs r2, 0x90
 	movs r3, 0x1
-	bl sub_80729D8
+	bl MenuPrint_PixelCoords
 	b _080FC1E6
 	.align 2, 0
 _080FC19C: .4byte gUnknown_083E771C
@@ -164709,7 +164709,7 @@ sub_8104B80: @ 8104B80
 	movs r1, 0xA
 	movs r2, 0x20
 	movs r3, 0x1
-	bl sub_80729D8
+	bl MenuPrint_PixelCoords
 	movs r0, 0x1
 	negs r0, r0
 	movs r1, 0
@@ -168695,7 +168695,7 @@ _081069AE:
 	adds r1, 0x1
 	lsls r2, 3
 	movs r3, 0x1
-	bl sub_80729D8
+	bl MenuPrint_PixelCoords
 _081069BE:
 	pop {r4-r6}
 	pop {r0}

@@ -307,7 +307,7 @@ void sub_803ADE8(struct Pokemon *mon, struct UnknownPokemonStruct *src)
         language = 2;
 
     SetMonData(mon, MON_DATA_LANGUAGE, &language);
-    SkipExtCtrlCodes(nickname);
+    StripExtCtrlCodes(nickname);
     SetMonData(mon, MON_DATA_NICKNAME, nickname);
     SetMonData(mon, MON_DATA_FRIENDSHIP, (u8 *)&src->friendship);
     SetMonData(mon, MON_DATA_HP_EV, (u8 *)&src->hpEV);

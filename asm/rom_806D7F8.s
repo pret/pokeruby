@@ -6065,7 +6065,7 @@ _08070864:
 	lsls r5, r2, 3
 	adds r2, r5, 0
 	movs r3, 0x1
-	bl sub_80729D8
+	bl MenuPrint_PixelCoords
 	mov r8, r4
 	cmp r7, 0x2
 	bne _080708FC
@@ -6077,7 +6077,7 @@ _08070864:
 	ldr r0, _080708F8 @ =gOtherText_TallPlusAndRightArrow
 	adds r2, r5, 0
 	movs r3, 0
-	bl sub_80729D8
+	bl MenuPrint_PixelCoords
 	b _08070910
 	.align 2, 0
 _080708E4: .4byte gStringVar1
@@ -6095,7 +6095,7 @@ _080708FC:
 	ldr r0, _08070960 @ =gOtherText_TallPlusAndRightArrow
 	adds r2, r5, 0
 	movs r3, 0x1
-	bl sub_80729D8
+	bl MenuPrint_PixelCoords
 _08070910:
 	movs r0, 0xFC
 	mov r1, r10
@@ -6122,7 +6122,7 @@ _08070910:
 	lsls r2, r0, 3
 	mov r0, r10
 	movs r3, 0
-	bl sub_80729D8
+	bl MenuPrint_PixelCoords
 	adds r0, r7, 0x1
 	lsls r0, 24
 	lsrs r7, r0, 24
@@ -6208,7 +6208,7 @@ _08070982:
 	adds r1, r4, 0
 	adds r2, r5, 0
 	movs r3, 0
-	bl sub_80729D8
+	bl MenuPrint_PixelCoords
 	adds r0, r7, 0x1
 	lsls r0, 24
 	lsrs r7, r0, 24

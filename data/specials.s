@@ -188,13 +188,13 @@ gSpecials::
 	.4byte sp0B9_daycare_relationship_comment
 	.4byte sub_8042328
 	.4byte daycare_send
-	.4byte sub_8042888
-	.4byte sub_8042824
+	.4byte ChooseSendDaycareMon
+	.4byte ShowDaycareLevelMenu
 	.4byte sub_80417B8
 	.4byte sub_8041770
 	.4byte sub_8041648
-	.4byte sub_8042AA8
-	.4byte sub_8042C80
+	.4byte ScriptHatchMon
+	.4byte EggHatch
 	.4byte sub_8042B4C
 	.4byte sub_811043C
 	.4byte sub_80B7CE8

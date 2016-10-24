@@ -2563,7 +2563,7 @@ sub_8094448: @ 8094448
 	movs r1, 0x70
 	movs r2, 0x78
 	movs r3, 0
-	bl sub_80729D8
+	bl MenuPrint_PixelCoords
 	adds r0, r4, 0
 	adds r0, 0x7E
 	ldrh r1, [r0]
@@ -2575,7 +2575,7 @@ sub_8094448: @ 8094448
 	movs r1, 0x95
 	movs r2, 0x78
 	movs r3, 0
-	bl sub_80729D8
+	bl MenuPrint_PixelCoords
 _0809448C:
 	add sp, 0x10
 	pop {r4}

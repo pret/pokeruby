@@ -8381,7 +8381,7 @@ sub_8089A70: @ 8089A70
 	strb r1, [r0, 0x8]
 	movs r0, 0
 	movs r1, 0
-	bl sub_806AFAC
+	bl OpenPartyMenu
 	pop {r0}
 	bx r0
 	.align 2, 0

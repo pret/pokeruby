@@ -2167,7 +2167,7 @@ gSpriteAnimTable_820A408:: @ 820A408
 
 	.align 2
 gSpriteTemplate_820A418:: @ 820A418
-	spr_template 23456, 54321, gOamData_820A3E0, gSpriteAnimTable_820A408, NULL, gDummySpriteAffineAnimTable, sub_80435A4
+	spr_template 23456, 54321, gOamData_820A3E0, gSpriteAnimTable_820A408, NULL, gDummySpriteAffineAnimTable, SpriteCB_EggShard
 
 @ The values are Q8.8 fixed-point numbers.
 	.align 1

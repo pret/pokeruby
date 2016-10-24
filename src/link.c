@@ -1241,7 +1241,7 @@ static void CB2_PrintErrorMessage(void)
     switch (gMain.state)
     {
     case 0:
-        sub_80729D8(gMultiText_LinkError, 20, 56, 1);
+        MenuPrint_PixelCoords(gMultiText_LinkError, 20, 56, 1);
         break;
     case 30:
     case 60:

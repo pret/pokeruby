@@ -2467,8 +2467,8 @@ _08042540: .4byte gStringVar4
 _08042544: .4byte gUnknown_08209AC4
 	thumb_func_end sp0B9_daycare_relationship_comment
 
-	thumb_func_start sub_8042548
-sub_8042548: @ 8042548
+	thumb_func_start NameHasGenderSymbol
+NameHasGenderSymbol: @ 8042548
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -2538,10 +2538,10 @@ _080425BA:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8042548
+	thumb_func_end NameHasGenderSymbol
 
-	thumb_func_start sub_80425C4
-sub_80425C4: @ 80425C4
+	thumb_func_start AppendGenderSymbol
+AppendGenderSymbol: @ 80425C4
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r1, 24
@@ -2549,7 +2549,7 @@ sub_80425C4: @ 80425C4
 	cmp r1, 0
 	bne _080425E4
 	movs r1, 0
-	bl sub_8042548
+	bl NameHasGenderSymbol
 	lsls r0, 24
 	cmp r0, 0
 	bne _08042600
@@ -2562,7 +2562,7 @@ _080425E4:
 	bne _08042600
 	adds r0, r4, 0
 	movs r1, 0xFE
-	bl sub_8042548
+	bl NameHasGenderSymbol
 	lsls r0, 24
 	cmp r0, 0
 	bne _08042600
@@ -2580,10 +2580,10 @@ _08042602:
 	bx r1
 	.align 2, 0
 _08042610: .4byte gOtherText_GenderlessSymbol
-	thumb_func_end sub_80425C4
+	thumb_func_end AppendGenderSymbol
 
-	thumb_func_start sub_8042614
-sub_8042614: @ 8042614
+	thumb_func_start MonAppendGenderSymbol
+MonAppendGenderSymbol: @ 8042614
 	push {r4,lr}
 	adds r4, r0, 0
 	adds r0, r1, 0
@@ -2592,14 +2592,14 @@ sub_8042614: @ 8042614
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_80425C4
+	bl AppendGenderSymbol
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8042614
+	thumb_func_end MonAppendGenderSymbol
 
-	thumb_func_start sub_8042630
-sub_8042630: @ 8042630
+	thumb_func_start DaycareLevelMenuGetText
+DaycareLevelMenuGetText: @ 8042630
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -2625,7 +2625,7 @@ _08042648:
 	bl pokemon_get_nick_
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8042614
+	bl MonAppendGenderSymbol
 	adds r0, r6, 0x1
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -2657,10 +2657,10 @@ _08042648:
 	.align 2, 0
 _080426A8: .4byte gOtherText_NewLine2
 _080426AC: .4byte gOtherText_CancelAndLv
-	thumb_func_end sub_8042630
+	thumb_func_end DaycareLevelMenuGetText
 
-	thumb_func_start sub_80426B0
-sub_80426B0: @ 80426B0
+	thumb_func_start DaycareLevelMenuGetLevelText
+DaycareLevelMenuGetLevelText: @ 80426B0
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -2721,10 +2721,10 @@ _080426C6:
 	bx r0
 	.align 2, 0
 _08042728: .4byte gOtherText_NewLine2
-	thumb_func_end sub_80426B0
+	thumb_func_end DaycareLevelMenuGetLevelText
 
-	thumb_func_start sub_804272C
-sub_804272C: @ 804272C
+	thumb_func_start DaycareLevelMenuProcessKeyInput
+DaycareLevelMenuProcessKeyInput: @ 804272C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -2836,10 +2836,10 @@ _08042816:
 	.align 2, 0
 _0804281C: .4byte gUnknown_03005CE0
 _08042820: .4byte gScriptResult
-	thumb_func_end sub_804272C
+	thumb_func_end DaycareLevelMenuProcessKeyInput
 
-	thumb_func_start sub_8042824
-sub_8042824: @ 8042824
+	thumb_func_start ShowDaycareLevelMenu
+ShowDaycareLevelMenu: @ 8042824
 	push {r4,lr}
 	sub sp, 0x6C
 	movs r0, 0xF
@@ -2850,19 +2850,19 @@ sub_8042824: @ 8042824
 	ldr r4, _08042880 @ =gSaveBlock1 + 0x2F9C
 	adds r0, r4, 0
 	add r1, sp, 0x8
-	bl sub_8042630
+	bl DaycareLevelMenuGetText
 	add r0, sp, 0x8
 	movs r1, 0x10
 	movs r2, 0x7
 	bl MenuPrint
 	adds r0, r4, 0
 	add r1, sp, 0x8
-	bl sub_80426B0
+	bl DaycareLevelMenuGetLevelText
 	add r0, sp, 0x8
 	movs r1, 0xCE
 	movs r2, 0x38
 	movs r3, 0x1
-	bl sub_80729D8
+	bl MenuPrint_PixelCoords
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0xD
@@ -2881,15 +2881,15 @@ sub_8042824: @ 8042824
 	bx r0
 	.align 2, 0
 _08042880: .4byte gSaveBlock1 + 0x2F9C
-_08042884: .4byte sub_804272C
-	thumb_func_end sub_8042824
+_08042884: .4byte DaycareLevelMenuProcessKeyInput
+	thumb_func_end ShowDaycareLevelMenu
 
-	thumb_func_start sub_8042888
-sub_8042888: @ 8042888
+	thumb_func_start ChooseSendDaycareMon
+ChooseSendDaycareMon: @ 8042888
 	push {lr}
 	movs r0, 0x6
 	movs r1, 0
-	bl sub_806AFAC
+	bl OpenPartyMenu
 	ldr r1, _0804289C @ =gMain
 	ldr r0, _080428A0 @ =c2_exit_to_overworld_2_switch
 	str r0, [r1, 0x8]
@@ -2898,10 +2898,10 @@ sub_8042888: @ 8042888
 	.align 2, 0
 _0804289C: .4byte gMain
 _080428A0: .4byte c2_exit_to_overworld_2_switch
-	thumb_func_end sub_8042888
+	thumb_func_end ChooseSendDaycareMon
 
-	thumb_func_start sub_80428A4
-sub_80428A4: @ 80428A4
+	thumb_func_start CreatedHatchedMon
+CreatedHatchedMon: @ 80428A4
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -3054,10 +3054,10 @@ _0804297C:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80428A4
+	thumb_func_end CreatedHatchedMon
 
-	thumb_func_start sub_80429EC
-sub_80429EC: @ 80429EC
+	thumb_func_start AddHatchedMonToParty
+AddHatchedMonToParty: @ 80429EC
 	push {r4-r6,lr}
 	sub sp, 0x14
 	lsls r0, 24
@@ -3069,7 +3069,7 @@ sub_80429EC: @ 80429EC
 	adds r5, r0
 	ldr r1, _08042AA0 @ =gEnemyParty
 	adds r0, r5, 0
-	bl sub_80428A4
+	bl CreatedHatchedMon
 	add r2, sp, 0xC
 	movs r6, 0
 	strb r6, [r2]
@@ -3134,19 +3134,19 @@ sub_80429EC: @ 80429EC
 _08042A9C: .4byte gPlayerParty
 _08042AA0: .4byte gEnemyParty
 _08042AA4: .4byte gStringVar1
-	thumb_func_end sub_80429EC
+	thumb_func_end AddHatchedMonToParty
 
-	thumb_func_start sub_8042AA8
-sub_8042AA8: @ 8042AA8
+	thumb_func_start ScriptHatchMon
+ScriptHatchMon: @ 8042AA8
 	push {lr}
 	ldr r0, _08042AB8 @ =gUnknown_0202E8CC
 	ldrb r0, [r0]
-	bl sub_80429EC
+	bl AddHatchedMonToParty
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08042AB8: .4byte gUnknown_0202E8CC
-	thumb_func_end sub_8042AA8
+	thumb_func_end ScriptHatchMon
 
 	thumb_func_start sub_8042ABC
 sub_8042ABC: @ 8042ABC
@@ -3231,8 +3231,8 @@ _08042B60: .4byte gSaveBlock1 + 0x2F9C
 _08042B64: .4byte gUnknown_0202E8CC
 	thumb_func_end sub_8042B4C
 
-	thumb_func_start sub_8042B68
-sub_8042B68: @ 8042B68
+	thumb_func_start EggHatchCreateMonSprite
+EggHatchCreateMonSprite: @ 8042B68
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -3354,20 +3354,20 @@ _08042C50:
 _08042C60: .4byte gUnknown_02024E8C
 _08042C64: .4byte gSprites
 _08042C68: .4byte SpriteCallbackDummy
-	thumb_func_end sub_8042B68
+	thumb_func_end EggHatchCreateMonSprite
 
-	thumb_func_start sub_8042C6C
-sub_8042C6C: @ 8042C6C
+	thumb_func_start VBlankCB_EggHatch
+VBlankCB_EggHatch: @ 8042C6C
 	push {lr}
 	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8042C6C
+	thumb_func_end VBlankCB_EggHatch
 
-	thumb_func_start sub_8042C80
-sub_8042C80: @ 8042C80
+	thumb_func_start EggHatch
+EggHatch: @ 8042C80
 	push {lr}
 	sub sp, 0x4
 	bl ScriptContext2_Enable
@@ -3385,11 +3385,11 @@ sub_8042C80: @ 8042C80
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08042CA8: .4byte sub_8042CAC
-	thumb_func_end sub_8042C80
+_08042CA8: .4byte Task_EggHatch
+	thumb_func_end EggHatch
 
-	thumb_func_start sub_8042CAC
-sub_8042CAC: @ 8042CAC
+	thumb_func_start Task_EggHatch
+Task_EggHatch: @ 8042CAC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -3412,13 +3412,13 @@ _08042CD0:
 	bx r0
 	.align 2, 0
 _08042CD8: .4byte gPaletteFade
-_08042CDC: .4byte sub_8042CE8
+_08042CDC: .4byte CB2_EggHatch_0
 _08042CE0: .4byte gUnknown_0300485C
 _08042CE4: .4byte sub_8080990
-	thumb_func_end sub_8042CAC
+	thumb_func_end Task_EggHatch
 
-	thumb_func_start sub_8042CE8
-sub_8042CE8: @ 8042CE8
+	thumb_func_start CB2_EggHatch_0
+CB2_EggHatch_0: @ 8042CE8
 	push {r4-r7,lr}
 	ldr r0, _08042D04 @ =gMain
 	ldr r1, _08042D08 @ =0x0000043c
@@ -3480,7 +3480,7 @@ _08042D34:
 _08042D74: .4byte gUnknown_0300481C
 _08042D78: .4byte 0x02018000
 _08042D7C: .4byte gUnknown_0202E8CC
-_08042D80: .4byte sub_8042C6C
+_08042D80: .4byte VBlankCB_EggHatch
 _08042D84: .4byte gMain
 _08042D88: .4byte 0x0000043c
 _08042D8C: .4byte gUnknown_0202E8CE
@@ -3564,7 +3564,7 @@ _08042E40:
 	strb r0, [r1]
 	ldr r0, [r2]
 	ldrb r0, [r0, 0x4]
-	bl sub_80429EC
+	bl AddHatchedMonToParty
 	ldr r1, _08042E6C @ =gMain
 	ldr r2, _08042E70 @ =0x0000043c
 	adds r1, r2
@@ -3580,7 +3580,7 @@ _08042E74:
 	ldrb r2, [r0, 0x4]
 	movs r0, 0
 	movs r1, 0
-	bl sub_8042B68
+	bl EggHatchCreateMonSprite
 	b _08042F04
 	.align 2, 0
 _08042E84: .4byte gUnknown_0300481C
@@ -3590,7 +3590,7 @@ _08042E88:
 	ldrb r2, [r0, 0x4]
 	movs r0, 0
 	movs r1, 0x1
-	bl sub_8042B68
+	bl EggHatchCreateMonSprite
 	ldr r1, [r4]
 	strb r0, [r1, 0x1]
 	ldr r1, _08042EA8 @ =gMain
@@ -3696,12 +3696,12 @@ _08042F6E:
 _08042F74: .4byte REG_BG1CNT
 _08042F78: .4byte 0x00000501
 _08042F7C: .4byte REG_BG0HOFS
-_08042F80: .4byte sub_804300C
+_08042F80: .4byte CB2_EggHatch_1
 _08042F84: .4byte gUnknown_0300481C
-	thumb_func_end sub_8042CE8
+	thumb_func_end CB2_EggHatch_0
 
-	thumb_func_start sub_8042F88
-sub_8042F88: @ 8042F88
+	thumb_func_start EggHatchSetMonNickname
+EggHatchSetMonNickname: @ 8042F88
 	push {lr}
 	ldr r0, _08042FA8 @ =gUnknown_0202E8CC
 	ldrh r1, [r0]
@@ -3721,10 +3721,10 @@ _08042FA8: .4byte gUnknown_0202E8CC
 _08042FAC: .4byte gPlayerParty
 _08042FB0: .4byte gStringVar3
 _08042FB4: .4byte c2_exit_to_overworld_2_switch
-	thumb_func_end sub_8042F88
+	thumb_func_end EggHatchSetMonNickname
 
-	thumb_func_start c3_080472E4
-c3_080472E4: @ 8042FB8
+	thumb_func_start Task_EggHatchPlayBGM
+Task_EggHatchPlayBGM: @ 8042FB8
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -3765,10 +3765,10 @@ _08042FF8:
 	.align 2, 0
 _08043004: .4byte gTasks
 _08043008: .4byte 0x00000179
-	thumb_func_end c3_080472E4
+	thumb_func_end Task_EggHatchPlayBGM
 
-	thumb_func_start sub_804300C
-sub_804300C: @ 804300C
+	thumb_func_start CB2_EggHatch_1
+CB2_EggHatch_1: @ 804300C
 	push {r4-r6,lr}
 	mov r6, r10
 	mov r5, r9
@@ -3830,7 +3830,7 @@ _08043068:
 	b _080432BA
 	.align 2, 0
 _08043098: .4byte gUnknown_0300481C
-_0804309C: .4byte c3_080472E4
+_0804309C: .4byte Task_EggHatchPlayBGM
 _080430A0:
 	ldr r0, _080430BC @ =gPaletteFade
 	ldrb r1, [r0, 0x7]
@@ -3876,7 +3876,7 @@ _080430D2:
 	b _080432BA
 	.align 2, 0
 _080430F0: .4byte gSprites
-_080430F4: .4byte sub_80432E4
+_080430F4: .4byte SpriteCB_Egg_0
 _080430F8:
 	ldr r2, _0804311C @ =gSprites
 	ldr r3, [r5]
@@ -3913,7 +3913,7 @@ _08043124:
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
-	bl sub_80436FC
+	bl EggHatchPrintMessage2
 	ldr r0, _08043160 @ =0x00000173
 	bl PlayFanfare
 	ldr r1, [r5]
@@ -3954,7 +3954,7 @@ _08043180:
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
-	bl sub_80436D4
+	bl EggHatchPrintMessage1
 	ldr r1, [r5]
 	b _0804329C
 	.align 2, 0
@@ -3963,7 +3963,7 @@ _080431AC: .4byte gStringVar1
 _080431B0: .4byte gStringVar4
 _080431B4: .4byte gOtherText_NickHatchPrompt
 _080431B8:
-	bl sub_8043724
+	bl EggHatchUpdateWindowText
 	lsls r0, 24
 	cmp r0, 0
 	beq _080432BA
@@ -4054,7 +4054,7 @@ _080431DA:
 _08043278: .4byte gUnknown_0300481C
 _0804327C: .4byte gPlayerParty
 _08043280: .4byte gStringVar3
-_08043284: .4byte sub_8042F88
+_08043284: .4byte EggHatchSetMonNickname
 _08043288:
 	movs r0, 0x1
 	negs r0, r0
@@ -4098,10 +4098,10 @@ _080432BA:
 	.align 2, 0
 _080432DC: .4byte gPaletteFade
 _080432E0: .4byte c2_exit_to_overworld_2_switch
-	thumb_func_end sub_804300C
+	thumb_func_end CB2_EggHatch_1
 
-	thumb_func_start sub_80432E4
-sub_80432E4: @ 80432E4
+	thumb_func_start SpriteCB_Egg_0
+SpriteCB_Egg_0: @ 80432E4
 	push {r4,lr}
 	adds r4, r0, 0
 	ldrh r0, [r4, 0x2E]
@@ -4117,7 +4117,7 @@ sub_80432E4: @ 80432E4
 	strh r0, [r4, 0x2E]
 	b _08043334
 	.align 2, 0
-_08043300: .4byte sub_804333C
+_08043300: .4byte SpriteCB_Egg_1
 _08043304:
 	ldrh r0, [r4, 0x30]
 	adds r0, 0x14
@@ -4138,15 +4138,15 @@ _08043304:
 	adds r0, r4, 0
 	movs r1, 0x1
 	bl StartSpriteAnim
-	bl sub_80435FC
+	bl CreateRandomEggShardSprite
 _08043334:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80432E4
+	thumb_func_end SpriteCB_Egg_0
 
-	thumb_func_start sub_804333C
-sub_804333C: @ 804333C
+	thumb_func_start SpriteCB_Egg_1
+SpriteCB_Egg_1: @ 804333C
 	push {r4,lr}
 	adds r4, r0, 0
 	ldrh r0, [r4, 0x32]
@@ -4170,7 +4170,7 @@ sub_804333C: @ 804333C
 	strh r1, [r4, 0x32]
 	b _08043398
 	.align 2, 0
-_08043368: .4byte sub_80433A0
+_08043368: .4byte SpriteCB_Egg_2
 _0804336C:
 	ldrh r0, [r4, 0x30]
 	adds r0, 0x14
@@ -4195,10 +4195,10 @@ _08043398:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_804333C
+	thumb_func_end SpriteCB_Egg_1
 
-	thumb_func_start sub_80433A0
-sub_80433A0: @ 80433A0
+	thumb_func_start SpriteCB_Egg_2
+SpriteCB_Egg_2: @ 80433A0
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	ldrh r0, [r4, 0x32]
@@ -4249,7 +4249,7 @@ sub_80433A0: @ 80433A0
 	strh r0, [r1, 0x26]
 	b _0804345A
 	.align 2, 0
-_08043404: .4byte sub_8043460
+_08043404: .4byte SpriteCB_Egg_3
 _08043408: .4byte gUnknown_0300481C
 _0804340C: .4byte gPlayerParty
 _08043410: .4byte gSprites
@@ -4274,8 +4274,8 @@ _08043418:
 	adds r0, r4, 0
 	movs r1, 0x2
 	bl StartSpriteAnim
-	bl sub_80435FC
-	bl sub_80435FC
+	bl CreateRandomEggShardSprite
+	bl CreateRandomEggShardSprite
 _0804344C:
 	movs r1, 0x2E
 	ldrsh r0, [r4, r1]
@@ -4287,10 +4287,10 @@ _0804345A:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80433A0
+	thumb_func_end SpriteCB_Egg_2
 
-	thumb_func_start sub_8043460
-sub_8043460: @ 8043460
+	thumb_func_start SpriteCB_Egg_3
+SpriteCB_Egg_3: @ 8043460
 	push {lr}
 	adds r1, r0, 0
 	ldrh r0, [r1, 0x2E]
@@ -4308,11 +4308,11 @@ _0804347A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08043480: .4byte sub_8043484
-	thumb_func_end sub_8043460
+_08043480: .4byte SpriteCB_Egg_4
+	thumb_func_end SpriteCB_Egg_3
 
-	thumb_func_start sub_8043484
-sub_8043484: @ 8043484
+	thumb_func_start SpriteCB_Egg_4
+SpriteCB_Egg_4: @ 8043484
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r5, r0, 0
@@ -4334,7 +4334,7 @@ _080434A4:
 	bhi _080434C0
 	movs r4, 0
 _080434AC:
-	bl sub_80435FC
+	bl CreateRandomEggShardSprite
 	lsls r0, r4, 16
 	movs r1, 0x80
 	lsls r1, 9
@@ -4374,11 +4374,11 @@ _080434EE:
 	.align 2, 0
 _080434F8: .4byte 0x0000ffff
 _080434FC: .4byte gPaletteFade
-_08043500: .4byte sub_8043504
-	thumb_func_end sub_8043484
+_08043500: .4byte SpriteCB_Egg_5
+	thumb_func_end SpriteCB_Egg_4
 
-	thumb_func_start sub_8043504
-sub_8043504: @ 8043504
+	thumb_func_start SpriteCB_Egg_5
+SpriteCB_Egg_5: @ 8043504
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r5, r0, 0
@@ -4457,10 +4457,10 @@ _08043594: .4byte gSprites
 _08043598: .4byte gUnknown_0300481C
 _0804359C: .4byte 0x0000ffff
 _080435A0: .4byte SpriteCallbackDummy
-	thumb_func_end sub_8043504
+	thumb_func_end SpriteCB_Egg_5
 
-	thumb_func_start sub_80435A4
-sub_80435A4: @ 80435A4
+	thumb_func_start SpriteCB_EggShard
+SpriteCB_EggShard: @ 80435A4
 	push {r4,lr}
 	adds r2, r0, 0
 	ldrh r0, [r2, 0x30]
@@ -4507,10 +4507,10 @@ _080435F6:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80435A4
+	thumb_func_end SpriteCB_EggShard
 
-	thumb_func_start sub_80435FC
-sub_80435FC: @ 80435FC
+	thumb_func_start CreateRandomEggShardSprite
+CreateRandomEggShardSprite: @ 80435FC
 	push {r4-r6,lr}
 	sub sp, 0x8
 	ldr r3, _0804364C @ =gEggShardVelocities
@@ -4543,7 +4543,7 @@ sub_80435FC: @ 80435FC
 	movs r1, 0x3C
 	adds r2, r6, 0
 	adds r3, r5, 0
-	bl sub_8043654
+	bl CreateEggShardSprite
 	add sp, 0x8
 	pop {r4-r6}
 	pop {r0}
@@ -4551,10 +4551,10 @@ sub_80435FC: @ 80435FC
 	.align 2, 0
 _0804364C: .4byte gEggShardVelocities
 _08043650: .4byte gUnknown_0300481C
-	thumb_func_end sub_80435FC
+	thumb_func_end CreateRandomEggShardSprite
 
-	thumb_func_start sub_8043654
-sub_8043654: @ 8043654
+	thumb_func_start CreateEggShardSprite
+CreateEggShardSprite: @ 8043654
 	push {r4-r6,lr}
 	mov r6, r10
 	mov r5, r9
@@ -4616,10 +4616,10 @@ sub_8043654: @ 8043654
 	.align 2, 0
 _080436CC: .4byte gSpriteTemplate_820A418
 _080436D0: .4byte gSprites
-	thumb_func_end sub_8043654
+	thumb_func_end CreateEggShardSprite
 
-	thumb_func_start sub_80436D4
-sub_80436D4: @ 80436D4
+	thumb_func_start EggHatchPrintMessage1
+EggHatchPrintMessage1: @ 80436D4
 	push {lr}
 	sub sp, 0x4
 	adds r1, r0, 0
@@ -4638,10 +4638,10 @@ sub_80436D4: @ 80436D4
 	bx r0
 	.align 2, 0
 _080436F8: .4byte gUnknown_0300481C
-	thumb_func_end sub_80436D4
+	thumb_func_end EggHatchPrintMessage1
 
-	thumb_func_start sub_80436FC
-sub_80436FC: @ 80436FC
+	thumb_func_start EggHatchPrintMessage2
+EggHatchPrintMessage2: @ 80436FC
 	push {lr}
 	sub sp, 0x4
 	adds r1, r0, 0
@@ -4660,10 +4660,10 @@ sub_80436FC: @ 80436FC
 	bx r0
 	.align 2, 0
 _08043720: .4byte gUnknown_0300481C
-	thumb_func_end sub_80436FC
+	thumb_func_end EggHatchPrintMessage2
 
-	thumb_func_start sub_8043724
-sub_8043724: @ 8043724
+	thumb_func_start EggHatchUpdateWindowText
+EggHatchUpdateWindowText: @ 8043724
 	push {lr}
 	ldr r0, _08043738 @ =gUnknown_0300481C
 	ldr r0, [r0]
@@ -4675,7 +4675,7 @@ sub_8043724: @ 8043724
 	bx r1
 	.align 2, 0
 _08043738: .4byte gUnknown_0300481C
-	thumb_func_end sub_8043724
+	thumb_func_end EggHatchUpdateWindowText
 
 	thumb_func_start sub_804373C
 sub_804373C: @ 804373C
@@ -18643,7 +18643,7 @@ _0804A614:
 	bne _0804A664
 	add r0, sp, 0xC
 	movs r1, 0
-	bl sub_8042548
+	bl NameHasGenderSymbol
 	lsls r0, 24
 	cmp r0, 0
 	bne _0804A6CC
@@ -18665,7 +18665,7 @@ _0804A664:
 	bne _0804A6CC
 	add r0, sp, 0xC
 	movs r1, 0xFE
-	bl sub_8042548
+	bl NameHasGenderSymbol
 	lsls r0, 24
 	cmp r0, 0
 	bne _0804A6CC
@@ -27718,7 +27718,7 @@ _0804F31A:
 	lsls r2, 3
 	ldr r0, _0804F368 @ =gStringVar1
 	movs r3, 0x1
-	bl sub_80729D8
+	bl MenuPrint_PixelCoords
 _0804F34A:
 	movs r0, 0x2
 	add r8, r0

@@ -8828,7 +8828,7 @@ sub_8092B68: @ 8092B68
 	movs r1, 0x2D
 	movs r2, 0x10
 	movs r3, 0x1
-	bl sub_80729D8
+	bl MenuPrint_PixelCoords
 	ldrh r0, [r6, 0x1A]
 	ldrh r1, [r6, 0x18]
 	adds r0, r1
@@ -8844,7 +8844,7 @@ sub_8092B68: @ 8092B68
 	movs r1, 0x2D
 	movs r2, 0x20
 	movs r3, 0x1
-	bl sub_80729D8
+	bl MenuPrint_PixelCoords
 	ldrh r0, [r6, 0x1E]
 	ldrh r1, [r6, 0x1C]
 	adds r0, r1
@@ -8861,7 +8861,7 @@ sub_8092B68: @ 8092B68
 	movs r1, 0x2D
 	movs r2, 0x30
 	movs r3, 0x1
-	bl sub_80729D8
+	bl MenuPrint_PixelCoords
 	ldrh r0, [r6, 0x22]
 	ldrh r1, [r6, 0x20]
 	adds r0, r1
@@ -8875,7 +8875,7 @@ sub_8092B68: @ 8092B68
 	movs r1, 0x5D
 	movs r2, 0x30
 	movs r3, 0x1
-	bl sub_80729D8
+	bl MenuPrint_PixelCoords
 	ldrh r0, [r6, 0x12]
 	ldrh r1, [r6, 0x10]
 	adds r0, r1
@@ -8891,7 +8891,7 @@ sub_8092B68: @ 8092B68
 	movs r1, 0x2D
 	movs r2, 0x40
 	movs r3, 0x1
-	bl sub_80729D8
+	bl MenuPrint_PixelCoords
 	bl sub_806912C
 	cmp r0, 0
 	beq _08092C5E
@@ -8910,7 +8910,7 @@ sub_8092B68: @ 8092B68
 	movs r1, 0x2D
 	movs r2, 0x50
 	movs r3, 0x1
-	bl sub_80729D8
+	bl MenuPrint_PixelCoords
 _08092C5E:
 	pop {r3}
 	mov r8, r3
