@@ -6828,7 +6828,7 @@ task50_overworld_door: @ 80584C8
 	lsls r2, r4, 2
 	adds r2, r4
 	lsls r2, 3
-	ldr r0, _080584FC @ =gUnknown_03004B28
+	ldr r0, _080584FC @ =gTasks + 0x8
 	adds r2, r0
 	ldrh r1, [r2]
 	lsls r1, 16
@@ -6848,7 +6848,7 @@ _080584F6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080584FC: .4byte gUnknown_03004B28
+_080584FC: .4byte gTasks + 0x8
 	thumb_func_end task50_overworld_door
 
 	thumb_func_start door_frame_last
@@ -6916,7 +6916,7 @@ task_overworld_door_add_if_inactive: @ 8058538
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r2, _08058588 @ =gUnknown_03004B28
+	ldr r2, _08058588 @ =gTasks + 0x8
 	adds r1, r2
 	strh r7, [r1, 0xC]
 	mov r2, r8
@@ -6932,7 +6932,7 @@ task_overworld_door_add_if_inactive: @ 8058538
 	b _08058590
 	.align 2, 0
 _08058584: .4byte task50_overworld_door
-_08058588: .4byte gUnknown_03004B28
+_08058588: .4byte gTasks + 0x8
 _0805858C:
 	movs r0, 0x1
 	negs r0, r0

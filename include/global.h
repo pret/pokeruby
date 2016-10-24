@@ -10,6 +10,9 @@
 // Prevent cross-jump optimization.
 #define BLOCK_CROSS_JUMP asm("");
 
+// to help in decompiling
+#define asm_comment(x) asm volatile("@ -- " x " -- ")
+
 #define ARRAY_COUNT(array) (sizeof(array) / sizeof((array)[0]))
 
 #define POKEMON_NAME_LENGTH 10
@@ -93,6 +96,8 @@ struct SecretBaseRecord
 
 #include "game_stat.h"
 #include "fieldmap.h"
+#include "berry.h"
+#include "pokemon.h"
 
 struct WarpData
 {
@@ -100,6 +105,23 @@ struct WarpData
     s8 mapNum;
     s8 warpId;
     s16 x, y;
+};
+
+struct ItemSlot
+{
+    u16 itemId;
+    u8 quantity;
+};
+
+struct Pokeblock
+{
+    u8 color;
+    u8 spicy;
+    u8 dry;
+    u8 sweet;
+    u8 bitter;
+    u8 sour;
+    u8 feel;
 };
 
 struct RamScriptData
@@ -135,20 +157,30 @@ struct SaveBlock1
     u8 filler_2F;
     u8 flashUsed;
     u16 mapDataId;
-    u8 filler_34[0x45C];
+    u8 filler_34[0x200];
+    u8 playerPartyCount;
+    struct Pokemon playerParty[6];
     u32 money;
     u16 coins;
     u16 registeredItem; // registered for use with SELECT button
-    u8 filler_498[0x4A0];
+    struct ItemSlot pcItems[50];
+    struct ItemSlot bagPocket_Items[20];
+    struct ItemSlot bagPocket_KeyItems[20];
+    struct ItemSlot bagPocket_PokeBalls[16];
+    struct ItemSlot bagPocket_TMHM[64];
+    struct ItemSlot bagPocket_Berries[46];
+    struct Pokeblock pokeblocks[40];
     u8 unk938[52];  // pokedex related
     u8 filler_96C[0x2B4];
     struct MapObjectTemplate mapObjectTemplates[64];
     u8 flags[0x120];
     u16 vars[0x100];
     u32 gameStats[NUM_GAME_STATS];
-    u8 filler_1608[0x18F4];
+    struct BerryTree berryTrees[128];
+    u8 filler_1A08[0x14F4];
     struct SB1_2EFC_Struct sb1_2EFC_struct[5];
-    u8 filler_2F9C[0x6F4];
+    u8 filler_2F9C[0x1C4];
+    struct EnigmaBerry enigmaBerry;
     struct RamScript ramScript;
     u8 filler_3A7C[0x10];
     u8 unk3A8C[52]; //pokedex related

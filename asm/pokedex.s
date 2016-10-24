@@ -7330,7 +7330,7 @@ _08091F50:
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r1, r0, 3
-	ldr r3, _08091FB4 @ =gUnknown_03004B28
+	ldr r3, _08091FB4 @ =gTasks + 0x8
 	movs r2, 0
 _08091F7C:
 	lsls r0, r4, 1
@@ -7356,7 +7356,7 @@ _08091F7C:
 _08091FA8: .4byte gWindowConfig_81E7064
 _08091FAC: .4byte gUnknown_083A05CC
 _08091FB0: .4byte gUnknown_083A05DC
-_08091FB4: .4byte gUnknown_03004B28
+_08091FB4: .4byte gTasks + 0x8
 _08091FB8: .4byte gMain
 _08091FBC: .4byte 0x0000043c
 _08091FC0:
@@ -9137,7 +9137,7 @@ sub_8092E10: @ 8092E10
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _08092E50 @ =gUnknown_03004B28
+	ldr r0, _08092E50 @ =gTasks + 0x8
 	adds r1, r0
 	ldr r2, _08092E54 @ =gUnknown_083B5A7C
 	lsls r0, r3, 3
@@ -9161,7 +9161,7 @@ sub_8092E10: @ 8092E10
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_08092E50: .4byte gUnknown_03004B28
+_08092E50: .4byte gTasks + 0x8
 _08092E54: .4byte gUnknown_083B5A7C
 _08092E58: .4byte _08092E5C
 	.align 2, 0

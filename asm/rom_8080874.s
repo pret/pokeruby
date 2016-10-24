@@ -1019,7 +1019,7 @@ sub_8081050: @ 8081050
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, _08081074 @ =gUnknown_03004B28
+	ldr r1, _08081074 @ =gTasks + 0x8
 	adds r4, r0, r1
 	movs r1, 0
 	ldrsh r0, [r4, r1]
@@ -1031,7 +1031,7 @@ sub_8081050: @ 8081050
 	beq _0808107E
 	b _080810CC
 	.align 2, 0
-_08081074: .4byte gUnknown_03004B28
+_08081074: .4byte gTasks + 0x8
 _08081078:
 	cmp r0, 0x2
 	beq _080810B4
@@ -1509,7 +1509,7 @@ sub_8081424: @ 8081424
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, _08081448 @ =gUnknown_03004B28
+	ldr r1, _08081448 @ =gTasks + 0x8
 	adds r4, r0, r1
 	movs r1, 0
 	ldrsh r0, [r4, r1]
@@ -1521,7 +1521,7 @@ sub_8081424: @ 8081424
 	beq _08081452
 	b _080814E2
 	.align 2, 0
-_08081448: .4byte gUnknown_03004B28
+_08081448: .4byte gTasks + 0x8
 _0808144C:
 	cmp r0, 0x2
 	beq _080814D8
@@ -1662,7 +1662,7 @@ sub_8081534: @ 8081534
 	lsls r0, r2, 2
 	adds r0, r2
 	lsls r0, 3
-	ldr r1, _0808157C @ =gUnknown_03004B28
+	ldr r1, _0808157C @ =gTasks + 0x8
 	adds r1, r0, r1
 	strh r5, [r1, 0x6]
 	strh r4, [r1, 0x8]
@@ -1677,7 +1677,7 @@ sub_8081534: @ 8081534
 	b _08081584
 	.align 2, 0
 _08081578: .4byte sub_8081424
-_0808157C: .4byte gUnknown_03004B28
+_0808157C: .4byte gTasks + 0x8
 _08081580:
 	negs r0, r7
 	strh r0, [r1, 0xA]
@@ -1852,7 +1852,7 @@ sub_80816A8: @ 80816A8
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
-	ldr r1, _080816D0 @ =gUnknown_03004B28
+	ldr r1, _080816D0 @ =gTasks + 0x8
 	adds r7, r0, r1
 	movs r1, 0
 	ldrsh r0, [r7, r1]
@@ -1866,7 +1866,7 @@ _080816C4:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_080816D0: .4byte gUnknown_03004B28
+_080816D0: .4byte gTasks + 0x8
 _080816D4: .4byte _080816D8
 	.align 2, 0
 _080816D8:
@@ -2087,7 +2087,7 @@ sub_80818A4: @ 80818A4
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, _080818D0 @ =gUnknown_03004B28
+	ldr r0, _080818D0 @ =gTasks + 0x8
 	adds r1, r0
 	ldr r0, _080818D4 @ =gScriptResult
 	ldrh r0, [r0]
@@ -2098,7 +2098,7 @@ sub_80818A4: @ 80818A4
 	b _080818F0
 	.align 2, 0
 _080818CC: .4byte sub_80816A8
-_080818D0: .4byte gUnknown_03004B28
+_080818D0: .4byte gTasks + 0x8
 _080818D4: .4byte gScriptResult
 _080818D8:
 	cmp r0, 0x1
