@@ -157,7 +157,7 @@ struct SaveBlock1
     u8 filler_2F;
     u8 flashUsed;
     u16 mapDataId;
-    u8 filler_34[0x200];
+    u16 mapView[0x100];
     u8 playerPartyCount;
     struct Pokemon playerParty[6];
     u32 money;
@@ -171,7 +171,11 @@ struct SaveBlock1
     struct ItemSlot bagPocket_Berries[46];
     struct Pokeblock pokeblocks[40];
     u8 unk938[52];  // pokedex related
-    u8 filler_96C[0x2B4];
+    u16 berryBlenderRecords[3];
+    u8 filler_972[0x6];
+    u16 trainerRematchStepCounter;
+    u8 trainerRematches[100];
+    struct MapObject mapObjects[16];
     struct MapObjectTemplate mapObjectTemplates[64];
     u8 flags[0x120];
     u16 vars[0x100];
