@@ -61,7 +61,7 @@ void objc_exclamation_mark_probably(struct Sprite *sprite)
 {
     u8 mapObjId;
 
-    if (TryGetFieldObjectIdByLocalIdAndMap(sprite->data0, sprite->data1, sprite->data2, &mapObjId) << 24
+    if (TryGetFieldObjectIdByLocalIdAndMap(sprite->data0, sprite->data1, sprite->data2, &mapObjId)
      || sprite->animEnded)
     {
         FieldEffectStop(sprite, (u8)sprite->data7);
