@@ -11183,9 +11183,10 @@ gWildFeebasRoute119Data:: @ 839DBFC
 	.byte 20, 25  @ Min/Max level
 	.2byte SPECIES_FEEBAS
 
+@ Some Feebas tile related data
 gUnknown_0839DC00:: @ 839DC00
-	.incbin "baserom.gba", 0x0039dc00, 0x14
-
+	.2byte 0, 0x2D, 0, 0x2E, 0x5B, 0x83, 0x5C, 0x8B, 0x12A, 0
+	
 	.align 2
 gSpriteImage_839DC14:: @ 839DC14
 	.incbin "graphics/birch_speech/birch.4bpp"

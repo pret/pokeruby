@@ -29,12 +29,15 @@ extern void GetXYCoordsOneStepInFrontOfPlayer(void *, void *);
 extern u32 sub_80C8448(void);
 extern s16 sub_810CAE4(u8, u32);
 extern bool32 GetSafariZoneFlag(void);
+extern u8 TestPlayerAvatarFlags(u8);
 
 extern u8 gWildEncountersDisabled;
 extern u16 gUnknown_0839DC00[];
+//extern u16 gUnknown_0839DC00[3][3];
 extern u32 gUnknown_0202FF80;   //Feebas rng value
 extern struct WildPokemonHeader gWildMonHeaders[];
 extern struct Pokemon gEnemyParty[6];
+extern struct Pokemon gPlayerParty[6];
 
 
 u16 FeebasRandom(void);
@@ -46,7 +49,7 @@ void DisableWildEncounters(u8 a)
     gWildEncountersDisabled = a;
 }
 
-u16 sub_8084984(s16 a, s16 b, u8 c)
+u16 sub_8084984(s16 x, s16 y, u8 c)
 {
     //odd, but needed to match
     u16 *arr = gUnknown_0839DC00;
@@ -64,7 +67,7 @@ u16 sub_8084984(s16 a, s16 b, u8 c)
             if(sub_805759C(MapGridGetMetatileBehaviorAt(i + 7, r5 + 7)) == TRUE)
             {
                 r6++;
-                if(a == i && b == r5)
+                if(x == i && y == r5)
                     return r6;
             }
             //_08084A14
@@ -221,26 +224,27 @@ u8 PickWildMon_Fishing(u8 rod)
 }
 
 //Chooses level of wild Pokemon
-u8 RandomInRange(struct WildPokemon *a)
+u8 RandomInRange(struct WildPokemon *wildPokemon)
 {
-    u8 min, max;
-    u8 foo;
-    u8 bar;
+    u8 min;
+    u8 max;
+    u8 range;
+    u8 rand;
     
-    if(a->maxLevel >= a->minLevel)
+    //Make sure minimum level is less than maximum level
+    if(wildPokemon->maxLevel >= wildPokemon->minLevel)
     {
-        min = a->minLevel;
-        max = a->maxLevel;
+        min = wildPokemon->minLevel;
+        max = wildPokemon->maxLevel;
     }
     else
     {
-        //handle the case where minLevel > maxLevel
-        min = a->maxLevel;
-        max = a->minLevel;
+        min = wildPokemon->maxLevel;
+        max = wildPokemon->minLevel;
     }
-    foo = max - min + 1;
-    bar = Random() % foo;
-    return min + bar;
+    range = max - min + 1;
+    rand = Random() % range;
+    return min + rand;
 }
 
 u16 GetCurrentMapWildMonHeader(void)
@@ -260,9 +264,9 @@ u8 PickWildMonNature(void)
 {
     u16 foo;
     u32 r7;
-    u8 arr[0x19];
+    u8 arr[25];
     
-    if(GetSafariZoneFlag() == TRUE && (Random() % 100) <= 0x4F)
+    if(GetSafariZoneFlag() == TRUE && Random() % 100 < 80)
     {
         r7 = sub_80C8448();
         
@@ -270,29 +274,26 @@ u8 PickWildMonNature(void)
         {
             u8 i;
             
-            for(i = 0; i < 0x19; i++)
+            for(i = 0; i < 25; i++)
                 arr[i] = i;
-            
             //_08084E04
-            for(i = 0; i < 0x18; i++)
+            for(i = 0; i < 24; i++)
             {
-                u8 r4 = i + 1;
-
-                while(r4 <= 0x18)
+                u8 j;
+                
+                for(j = i + 1; j < 25; j++)
                 {
                     if(Random() & 1)
                     {
-                        u8 r2 = arr[i];
+                        u8 temp = arr[i];
                         
-                        arr[i] = arr[r4];
-                        arr[r4] = r2;
+                        arr[i] = arr[j];
+                        arr[j] = temp;
                     }
-                    //_08084E2A
-                    r4++;
                 }
             }
             //_08084E3E
-            for(i = 0; i <= 0x18; i++)
+            for(i = 0; i < 25; i++)
             {
                 if(sub_810CAE4(arr[i], r7) > 0)
                     return arr[i];
@@ -300,7 +301,7 @@ u8 PickWildMonNature(void)
         }
     }
     //_08084E5E
-    return Random() % 0x19;
+    return Random() % 25;
 }
 
 void CreateWildMon(u16 a, u8 b)
@@ -348,4 +349,79 @@ bool32 GenerateFishingWildMon(struct WildPokemon **a, u8 rod)
     
     CreateWildMon(a[1][mon].species, level);
     return a[1][mon].species;
+}
+
+bool32 SetUpMassOutbreakEncounter(u8 a)
+{
+    u16 i;
+    
+    if(a == 1 && RepelCheck(gSaveBlock1.outbreak2B00) == 0)
+    {
+        return 0;
+    }
+    //_08084F78
+    CreateWildMon(gSaveBlock1.outbreak2AFC, gSaveBlock1.outbreak2B00);
+    for(i = 0; i < 4; i++)
+    {
+        SetMonMoveSlot(&gEnemyParty[0], gSaveBlock1.outbreak2B04[i], i);
+    }
+    return 1;
+}
+
+bool8 DoMassOutbreakEncounterTest(void)
+{
+    if(gSaveBlock1.outbreak2AFC &&
+    gSaveBlock1.location.mapNum == gSaveBlock1.outbreak2AFE &&
+    gSaveBlock1.location.mapGroup == gSaveBlock1.outbreak2AFF)
+    {
+        if(Random() % 100 < gSaveBlock1.outbreak2B0D)
+            return 1;
+    }
+    return 0;
+}
+
+bool8 DoWildEncounterRateDiceRoll(u16 a)
+{
+    if(Random() % 2880 < a)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool8 DoWildEncounterTest(u32 a, u8 b)
+{
+    a *= 16;
+    
+    if(TestPlayerAvatarFlags(6))
+    {
+        a = a * 80 / 100;
+    }
+    //_0808507E
+    ApplyFluteEncounterRateMod(&a);
+    ApplyCleanseTagEncounterRateMod(&a);
+    
+    if(b == 0)
+    {
+        // UB: Too few arguments for function GetMonData
+        if(!GetMonData(&gPlayerParty[0], MON_DATA_SANITY_BIT3))
+        {
+            u32 ability = GetMonAbility(&gPlayerParty[0]);
+            if(ability == 1)
+                a /= 2;
+            if(ability == 0x23)
+                a *= 2;
+        }
+    }
+    //_080850BA
+    if(a > 2880)
+        a = 2880;
+    return DoWildEncounterRateDiceRoll(a);
+}
+
+bool8 DoGlobalWildEncounterDiceRoll(void)
+{
+    if(Random() % 100 >= 60)
+        return FALSE;
+    else
+        return TRUE;
 }

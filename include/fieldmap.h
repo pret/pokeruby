@@ -36,16 +36,16 @@ struct MapData
 
 struct MapObjectTemplate
 {
-    u8 localId;
-    u8 filler_1[0x3];
-    s16 x;
-    s16 y;
-    u8 elevation;
-    u8 movementType;
-    u8 filler_A[0x6];
-    u8 *script;
-    u8 filler_14[0x4];
-};
+    /*0x00*/ u8 localId;
+    /*0x01*/ u8 filler_1[0x3];
+    /*0x04*/ s16 x;
+    /*0x06*/ s16 y;
+    /*0x08*/ u8 elevation;
+    /*0x09*/ u8 movementType;
+    /*0x0A*/ u8 filler_A[0x6];
+    /*0x10*/ u8 *script;
+    /*0x14*/ u8 filler_14[0x4];
+};  /*size = 0x18*/
 
 struct WarpEvent
 {

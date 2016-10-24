@@ -124,38 +124,54 @@ struct SB1_2EFC_Struct
 
 struct SaveBlock1
 {
-    struct Coords16 pos;
-    struct WarpData location;
-    struct WarpData warp1;
-    struct WarpData warp2;
-    struct WarpData warp3;
-    struct WarpData warp4;
-    u16 battleMusic;
-    u8 weather;
-    u8 filler_2F;
-    u8 flashUsed;
-    u16 mapDataId;
-    u8 filler_34[0x45C];
-    u32 money;
-    u16 coins;
-    u16 registeredItem; // registered for use with SELECT button
-    u8 filler_498[0x4A0];
-    u8 unk938[52];  // pokedex related
-    u8 filler_96C[0x2B4];
-    struct MapObjectTemplate mapObjectTemplates[64];
-    u8 flags[0x120];
-    u16 vars[0x100];
-    u32 gameStats[NUM_GAME_STATS];
-    //u8 filler_1608[0x18F4];
-    u8 filler_1608[0x17CE];
-	u16 feebasLocationSeed;
-	u8 filler_17D0[0x172C];
-	struct SB1_2EFC_Struct sb1_2EFC_struct[5];
-    u8 filler_2F9C[0x6F4];
-    struct RamScript ramScript;
-    u8 filler_3A7C[0x10];
-    u8 unk3A8C[52]; //pokedex related
-};
+    /*0x00*/ struct Coords16 pos;
+    /*0x04*/ struct WarpData location;
+    /*0x0C*/ struct WarpData warp1;
+    /*0x14*/ struct WarpData warp2;
+    /*0x1C*/ struct WarpData warp3;
+    /*0x24*/ struct WarpData warp4;
+    /*0x2C*/ u16 battleMusic;
+    /*0x2E*/ u8 weather;
+    /*0x2F*/ u8 filler_2F;
+    /*0x30*/ u8 flashUsed;
+    /*0x32*/ u16 mapDataId;
+    /*0x34*/ u8 filler_34[0x45C];
+    /*0x490*/ u32 money;
+    /*0x494*/ u16 coins;
+    /*0x496*/ u16 registeredItem; // registered for use with SELECT button
+    /*0x498*/ u8 filler_498[0x4A0];
+    /*0x938*/ u8 unk938[52]; // pokedex related
+    /*0x96C*/ u8 filler_96C[0x2B4];
+    /*0xC20*/ struct MapObjectTemplate mapObjectTemplates[64];
+    /*0x1220*/ u8 flags[0x120];
+    /*0x1340*/ u16 vars[0x100];
+    /*0x1540*/ u32 gameStats[NUM_GAME_STATS];
+    ///*0x1608*/ u8 filler_1608[0x14F8];
+    /*0x1608*/ u8 filler_1608[0x14F4];
+    /*0x2AFC*/ u16 outbreak2AFC;
+    /*0x2AFE*/ u8 outbreak2AFE;
+    
+    /*0x2AFF*/ u8 outbreak2AFF;
+    
+    /*0x2B00*/ u8 outbreak2B00;
+    ///*0x2B01*/ u8 filler_2B01[0x2D5];
+    /*0x2B01*/ u8 filler_2B01[3];
+    
+    /*0x2B04*/ u16 outbreak2B04[4];
+    
+    ///*0x2B0C*/ u8 filler_2B0C[0x2CA];
+    /*0x2B0C*/ u8 unk2B0C;
+    /*0x2B0D*/ u8 outbreak2B0D;
+    /*0x2B0E*/ u8 filler_2B0E[0x2C8];
+    
+    /*0x2DD6*/ u16 feebasLocationSeed;
+    /*0x2DD8*/ u8 filler_2DD8[0x124];
+    /*0x2EFC*/ struct SB1_2EFC_Struct sb1_2EFC_struct[5];
+    /*0x2F9C*/ u8 filler_2F9C[0x6F4];
+    /*0x3690*/ struct RamScript ramScript;
+    /*0x3A7C*/ u8 filler_3A7C[0x10];
+    /*0x3A8C*/ u8 unk3A8C[52]; //pokedex related
+};  /*size = 0x3AC0*/
 
 extern struct SaveBlock1 gSaveBlock1;
 
