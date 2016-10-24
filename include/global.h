@@ -124,6 +124,22 @@ struct Pokeblock
     u8 feel;
 };
 
+struct Roamer
+{
+    /*0x00*/ u32 ivs;
+    /*0x04*/ u32 personality;
+    /*0x08*/ u16 species;
+    /*0x0A*/ u16 hp;
+    /*0x0C*/ u8 level;
+    /*0x0D*/ u8 unk_D;
+    /*0x0E*/ u8 cool;
+    /*0x0F*/ u8 beauty;
+    /*0x10*/ u8 cute;
+    /*0x11*/ u8 smart;
+    /*0x12*/ u8 tough;
+    /*0x13*/ u8 active;
+};
+
 struct RamScriptData
 {
     u8 magic;
@@ -195,7 +211,9 @@ struct SaveBlock1
     u8 tvShows[24][36]; // TODO: TV show struct
     u8 filler_2A98[0x464];
     struct SB1_2EFC_Struct sb1_2EFC_struct[5];
-    u8 filler_2F9C[0x1C4];
+    u8 filler_2F9C[0x1A8];
+    /*0x3144*/ struct Roamer roamer;
+    /*0x3158*/ u8 filler_3158[0x8];
     struct EnigmaBerry enigmaBerry;
     struct RamScript ramScript;
     u8 filler_3A7C[0x10];
