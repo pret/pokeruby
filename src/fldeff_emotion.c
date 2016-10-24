@@ -46,13 +46,13 @@ u8 FldEff_HeartIcon(void)
 void sub_8084894(struct Sprite *sprite, u16 a2, u8 a3)
 {
 	sprite->oam.priority = 1;
-    sprite->coordOffsetEnabled = 1;
+	sprite->coordOffsetEnabled = 1;
 	
 	sprite->data0 = gUnknown_0202FF84[0];
 	sprite->data1 = gUnknown_0202FF84[1];
 	sprite->data2 = gUnknown_0202FF84[2];
-    sprite->data3 = -5;
-    sprite->data7 = a2;
+	sprite->data3 = -5;
+	sprite->data7 = a2;
 	
 	StartSpriteAnim(sprite, a3);
 }
