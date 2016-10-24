@@ -33741,7 +33741,7 @@ sub_80C56DC: @ 80C56DC
 	str r0, [sp]
 	adds r0, r4, 0
 	movs r1, 0x7
-	bl sub_803FCD4
+	bl AdjustFriendship
 	adds r0, r4, 0
 	movs r1, 0x37
 	mov r2, sp

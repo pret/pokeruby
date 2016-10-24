@@ -1090,9 +1090,9 @@ gUnknown_081FA73C:: @ 81FA73C
 	.4byte atk02_attackstring
 	.4byte atk03_ppreduce
 	.4byte atk04_critcalc
-	.4byte atk05_cmd5
-	.4byte sub_801CCC4
-	.4byte atk07_cmd7
+	.4byte atk05_damagecalc1
+	.4byte atk06_damagecalc2
+	.4byte atk07_damagecalc3
 	.4byte atk08_cmd8
 	.4byte sub_801D8EC
 	.4byte sub_801DA60
@@ -1122,7 +1122,7 @@ gUnknown_081FA73C:: @ 81FA73C
 	.4byte sub_801FFA8
 	.4byte sub_8020004
 	.4byte sub_80209B4
-	.4byte atk25_cmd25
+	.4byte atk25_resetflags
 	.4byte sub_8020BB4
 	.4byte atk27_cmd27
 	.4byte sub_8020C14
@@ -1159,7 +1159,7 @@ gUnknown_081FA73C:: @ 81FA73C
 	.4byte atk47
 	.4byte atk48_playstatchangeanimation
 	.4byte sub_80217F8
-	.4byte atk4A_damagecalc2
+	.4byte atk4A_damageflags
 	.4byte atk4B_cmd4b
 	.4byte atk4C_switch1
 	.4byte sub_80225F0

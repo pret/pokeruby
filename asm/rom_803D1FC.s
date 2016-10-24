@@ -3589,8 +3589,8 @@ _0803FCCE:
 	bx r1
 	thumb_func_end nature_stat_mod
 
-	thumb_func_start sub_803FCD4
-sub_803FCD4: @ 803FCD4
+	thumb_func_start AdjustFriendship
+AdjustFriendship: @ 803FCD4
 	push {r4-r7,lr}
 	sub sp, 0x4
 	adds r7, r0, 0
@@ -3793,7 +3793,7 @@ _0803FE60: .4byte gUnknown_020239F8
 _0803FE64: .4byte gTrainers
 _0803FE68: .4byte gTrainerBattleOpponent
 _0803FE6C: .4byte gUnknown_082082FE
-	thumb_func_end sub_803FCD4
+	thumb_func_end AdjustFriendship
 
 	thumb_func_start sub_803FE70
 sub_803FE70: @ 803FE70

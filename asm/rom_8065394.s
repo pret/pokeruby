@@ -1332,7 +1332,7 @@ happiness_algorithm_step: @ 806890C
 _0806892A:
 	adds r0, r5, 0
 	movs r1, 0x5
-	bl sub_803FCD4
+	bl AdjustFriendship
 	adds r5, 0x64
 	subs r4, 0x1
 	cmp r4, 0

@@ -3338,7 +3338,7 @@ sub_806F1D0: @ 806F1D0
 	bl sub_806E834
 	ldr r0, [r5]
 	movs r1, 0x4
-	bl sub_803FCD4
+	bl AdjustFriendship
 	ldr r1, _0806F248 @ =0xfffff282
 	adds r0, r5, r1
 	movs r1, 0

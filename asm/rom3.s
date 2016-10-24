@@ -6259,7 +6259,7 @@ _0800E998:
 _0800E9AE:
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl sub_803FCD4
+	bl AdjustFriendship
 	adds r4, 0x64
 	cmp r4, r5
 	ble _0800E9AE
@@ -33565,8 +33565,8 @@ _0801C9E4: .4byte gCritMultiplier
 _0801C9E8: .4byte gUnknown_02024C10
 	thumb_func_end atk04_critcalc
 
-	thumb_func_start atk05_cmd5
-atk05_cmd5: @ 801C9EC
+	thumb_func_start atk05_damagecalc1
+atk05_damagecalc1: @ 801C9EC
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -33685,7 +33685,7 @@ _0801CAE8: .4byte gUnknown_02024C98
 _0801CAEC: .4byte gBattleMoves
 _0801CAF0: .4byte gUnknown_02024D28
 _0801CAF4: .4byte gUnknown_02024C10
-	thumb_func_end atk05_cmd5
+	thumb_func_end atk05_damagecalc1
 
 	thumb_func_start sub_801CAF8
 sub_801CAF8: @ 801CAF8
@@ -33914,8 +33914,8 @@ _0801CCBE:
 	bx r0
 	thumb_func_end battle_attack_damage_modulate_by_effectivity
 
-	thumb_func_start sub_801CCC4
-sub_801CCC4: @ 801CCC4
+	thumb_func_start atk06_damagecalc2
+atk06_damagecalc2: @ 801CCC4
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -34217,7 +34217,7 @@ _0801CF2C: .4byte gUnknown_02024C44
 _0801CF30: .4byte gUnknown_02024D1E
 _0801CF34: .4byte gUnknown_02024D28
 _0801CF38: .4byte gUnknown_02024C10
-	thumb_func_end sub_801CCC4
+	thumb_func_end atk06_damagecalc2
 
 	thumb_func_start b_wonderguard_and_levitate
 b_wonderguard_and_levitate: @ 801CF3C
@@ -35076,8 +35076,8 @@ _0801D5A6:
 _0801D5AC: .4byte gUnknown_02024BEC
 	thumb_func_end unref_sub_801D574
 
-	thumb_func_start atk07_cmd7
-atk07_cmd7: @ 801D5B0
+	thumb_func_start atk07_damagecalc3
+atk07_damagecalc3: @ 801D5B0
 	push {r4-r7,lr}
 	bl Random
 	lsls r0, 16
@@ -35278,7 +35278,7 @@ _0801D750: .4byte gUnknown_02024D68
 _0801D754: .4byte gUnknown_02024C68
 _0801D758: .4byte gUnknown_02024C04
 _0801D75C: .4byte gUnknown_02024C10
-	thumb_func_end atk07_cmd7
+	thumb_func_end atk07_damagecalc3
 
 	thumb_func_start atk08_cmd8
 atk08_cmd8: @ 801D760
@@ -39425,7 +39425,7 @@ _0801F914:
 	ldr r1, _0801F98C @ =gPlayerParty
 	adds r0, r1
 	movs r1, 0x8
-	bl sub_803FCD4
+	bl AdjustFriendship
 	b _0801F9CC
 	.align 2, 0
 _0801F954: .4byte gUnknown_02024A60
@@ -39453,7 +39453,7 @@ _0801F990:
 	ldr r1, _0801F9AC @ =gPlayerParty
 	adds r0, r1
 	movs r1, 0x6
-	bl sub_803FCD4
+	bl AdjustFriendship
 	b _0801F9CC
 	.align 2, 0
 _0801F9A8: .4byte gUnknown_02024A6A
@@ -41110,7 +41110,7 @@ _080206A8:
 	adds r0, r3, 0
 	adds r0, r7
 	movs r1, 0
-	bl sub_803FCD4
+	bl AdjustFriendship
 	ldr r0, _080208C4 @ =gUnknown_02024A6A
 	ldrb r1, [r6]
 	ldrh r0, [r0]
@@ -41642,8 +41642,8 @@ _08020B94: .4byte gUnknown_02024C6C
 _08020B98: .4byte 0xffffbfff
 	thumb_func_end sub_8020B54
 
-	thumb_func_start atk25_cmd25
-atk25_cmd25: @ 8020B9C
+	thumb_func_start atk25_resetflags
+atk25_resetflags: @ 8020B9C
 	push {lr}
 	bl sub_8020B54
 	ldr r1, _08020BB0 @ =gUnknown_02024C10
@@ -41654,7 +41654,7 @@ atk25_cmd25: @ 8020B9C
 	bx r0
 	.align 2, 0
 _08020BB0: .4byte gUnknown_02024C10
-	thumb_func_end atk25_cmd25
+	thumb_func_end atk25_resetflags
 
 	thumb_func_start sub_8020BB4
 sub_8020BB4: @ 8020BB4
@@ -44656,8 +44656,8 @@ _080222D4: .4byte 0x0001600c
 _080222D8: .4byte gUnknown_02024C10
 	thumb_func_end sub_80217F8
 
-	thumb_func_start atk4A_damagecalc2
-atk4A_damagecalc2: @ 80222DC
+	thumb_func_start atk4A_damageflags
+atk4A_damageflags: @ 80222DC
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -44944,7 +44944,7 @@ _0802251C: .4byte gUnknown_02024C3C
 _08022520: .4byte gUnknown_02024D1E
 _08022524: .4byte gUnknown_02024D28
 _08022528: .4byte gUnknown_02024C10
-	thumb_func_end atk4A_damagecalc2
+	thumb_func_end atk4A_damageflags
 
 	thumb_func_start atk4B_cmd4b
 atk4B_cmd4b: @ 802252C
