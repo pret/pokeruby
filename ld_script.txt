@@ -104,6 +104,8 @@ SECTIONS {
         asm/rom_8094928.o(.text);
         asm/berry.o(.text);
         asm/rom_80B5054.o(.text);
+        asm/naming_screen.o(.text);
+        asm/rom_80B79A8.o(.text);
         asm/battle_ai.o(.text);
         asm/trader.o(.text);
         src/starter_choose.o(.text);

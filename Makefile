@@ -59,7 +59,8 @@ asm/berry_tag_screen.o asm/lottery_corner.o \
 asm/battle_ai.o asm/trader.o asm/trainer_card.o asm/save_menu_util.o \
 asm/rom_8094928.o asm/mori_debug_menu.o asm/trainer_see.o asm/rom_8080874.o \
 asm/battle_setup.o asm/cable_club.o asm/daycare.o asm/egg_hatch.o \
-asm/rom_804373C.o asm/load_save.o asm/trade.o asm/berry_blender.o
+asm/rom_804373C.o asm/load_save.o asm/trade.o asm/berry_blender.o \
+asm/naming_screen.o asm/rom_80B79A8.o
 
 DATA_ASM_OBJS := data/data2.o data/graphics.o data/sound_data.o \
 data/event_scripts.o data/battle_anim_scripts.o \
