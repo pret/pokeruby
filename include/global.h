@@ -198,7 +198,8 @@ struct SaveBlock1
     u32 gameStats[NUM_GAME_STATS];
     struct BerryTree berryTrees[128];
     /*0x1A08*/ struct SecretBaseRecord secretBases[20];
-    u8 filler_2688[0x18];
+    /*0x2688*/ u8 playerRoomDecor[12];
+    /*0x2694*/ u8 playerRoomDecorPos[12];
     u8 decorDesk[10];
     u8 decorChair[10];
     u8 decorPlant[10];
