@@ -3,6 +3,7 @@
 #include "global.h"
 #include "pokemon.h"
 #include "rng.h"
+#include "script.h"
 
 struct WildPokemon {
     u8 minLevel;
@@ -11,7 +12,7 @@ struct WildPokemon {
 };
 
 struct WildPokemonInfo {
-    u32 encounterRate;
+    u8 encounterRate;
     struct WildPokemon *wildPokemon;
 };
 
@@ -30,6 +31,10 @@ extern u32 sub_80C8448(void);
 extern s16 sub_810CAE4(u8, u32);
 extern bool32 GetSafariZoneFlag(void);
 extern u8 TestPlayerAvatarFlags(u8);
+extern u8 sub_8057468(u8);
+extern u8 sub_81344CC(void);
+extern u8 sub_8057494(u8);
+extern void sub_8081A00(void);
 
 extern u8 gWildEncountersDisabled;
 extern u16 gUnknown_0839DC00[];
@@ -38,7 +43,7 @@ extern u32 gUnknown_0202FF80;   //Feebas rng value
 extern struct WildPokemonHeader gWildMonHeaders[];
 extern struct Pokemon gEnemyParty[6];
 extern struct Pokemon gPlayerParty[6];
-
+extern u16 gScriptResult;
 
 u16 FeebasRandom(void);
 void FeebasSeedRng(u16 a);
@@ -310,7 +315,7 @@ void CreateWildMon(u16 a, u8 b)
     CreateMonWithNature(&gEnemyParty[0], a, b, 0x20, PickWildMonNature());
 }
 
-bool32 GenerateWildMon(struct WildPokemon **a, u8 b, u8 c)
+bool8 GenerateWildMon(struct WildPokemon **a, u8 b, u8 c)
 {
     u8 mon = 0;
     u8 level;
@@ -351,7 +356,7 @@ bool32 GenerateFishingWildMon(struct WildPokemon **a, u8 rod)
     return a[1][mon].species;
 }
 
-bool32 SetUpMassOutbreakEncounter(u8 a)
+bool8 SetUpMassOutbreakEncounter(u8 a)
 {
     u16 i;
     
@@ -402,7 +407,7 @@ bool8 DoWildEncounterTest(u32 a, u8 b)
     
     if(b == 0)
     {
-        // UB: Too few arguments for function GetMonData
+        // UB: Too few arguments to function 'GetMonData'
         if(!GetMonData(&gPlayerParty[0], MON_DATA_SANITY_BIT3))
         {
             u32 ability = GetMonAbility(&gPlayerParty[0]);
@@ -424,4 +429,193 @@ bool8 DoGlobalWildEncounterDiceRoll(void)
         return FALSE;
     else
         return TRUE;
+}
+
+
+bool8 StandardWildEncounter(u16 a, u16 b)
+{
+    u16 unk;
+    
+    if(gWildEncountersDisabled != TRUE)
+    {
+        unk = GetCurrentMapWildMonHeader();
+        
+        if(unk != 0xFFFF)
+        {
+            if(sub_8057468(a) == 1)
+            {
+                if(gWildMonHeaders[unk].landMonsInfo)
+                {
+                    if(a == b || DoGlobalWildEncounterDiceRoll())
+                    {
+                        if(DoWildEncounterTest(gWildMonHeaders[unk].landMonsInfo->encounterRate, 0) == TRUE)
+                        {
+                            if(sub_81344CC() == TRUE)
+                            {
+                                if(RepelCheck(gSaveBlock1.roamer.level))
+                                {
+                                    sub_8081A5C();
+                                    return 1;
+                                }
+                                else
+                                    return 0;
+                            }
+                            
+                            if(DoMassOutbreakEncounterTest() == TRUE && SetUpMassOutbreakEncounter(1) == TRUE)
+                            {
+                                sub_8081A00();
+                                return 1;
+                            }
+                            
+                            if(GenerateWildMon(gWildMonHeaders[unk].landMonsInfo, 0, 1) == 1)
+                            {
+                                sub_8081A00();
+                                return 1;
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                //_080851D8
+                if(sub_8057494(a) == TRUE || TestPlayerAvatarFlags(8) || sub_8057434(a) == TRUE)
+                {
+                    if(gWildMonHeaders[unk].landMonsInfo)
+                    {
+                        if(a == b || DoGlobalWildEncounterDiceRoll())
+                        {
+                            if(DoWildEncounterTest(gWildMonHeaders[unk].waterMonsInfo->encounterRate, 0) == TRUE)
+                            {
+                                if(sub_81344CC() == TRUE)
+                                {
+                                    //_0808524A
+                                    if(RepelCheck(gSaveBlock1.roamer.level))
+                                    {
+                                        sub_8081A5C();
+                                        return 1;
+                                    }
+                                    else
+                                        return 0;
+                                }
+                                else
+                                {
+                                    //_08085268
+                                    if(GenerateWildMon(gWildMonHeaders[unk].waterMonsInfo, 1, 1) == 1)
+                                    {
+                                        sub_8081A00();
+                                        return 1;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                }
+            }
+        }
+    }
+    return 0;
+}
+
+/*
+bool8 StandardWildEncounter(u16 a, u16 b)
+{
+    u16 unk;
+    
+    if(gWildEncountersDisabled == TRUE)
+        return 0;
+    unk = GetCurrentMapWildMonHeader();
+    if(unk == 0xFFFF)
+        return 0;
+    if(sub_8057468(a) == 1)
+    {
+        if(gWildMonHeaders[unk].landMonsInfo == NULL)
+            return 0;
+        if(a != b && !DoGlobalWildEncounterDiceRoll())
+            return 0;
+        if(DoWildEncounterTest(gWildMonHeaders[unk].landMonsInfo->encounterRate, 0) != TRUE)
+            return 0;
+        if(sub_81344CC() == TRUE)
+            goto _0808524A;
+        if(DoMassOutbreakEncounterTest() == TRUE)
+        {
+            if(SetUpMassOutbreakEncounter(1) == TRUE)
+                goto _0808527A;
+        }
+        //_080851AE
+        if(GenerateWildMon(gWildMonHeaders[unk].landMonsInfo, 0, 1) == 1)
+            goto _0808527A;
+        return 0;
+    }
+    //_080851D8
+    else
+    {
+        if(sub_8057494(a) != 1)
+        {
+            if(!TestPlayerAvatarFlags(8))
+                return 0;
+            if(sub_8057434(a) != 1)
+                return 0;
+        }
+        //_08085200
+        if(gWildMonHeaders[unk].waterMonsInfo == NULL)
+            return 0;
+        if(b != a && !DoGlobalWildEncounterDiceRoll())
+            return 0;
+        //_08085222
+        if(DoWildEncounterTest(gWildMonHeaders[unk].waterMonsInfo->encounterRate, 0) != TRUE)
+            return 0;
+        if(sub_81344CC() == TRUE)
+            goto _08085268;
+    }
+  _0808524A: //0x3144
+    if(!RepelCheck(gSaveBlock1.roamer.level))
+        return 0;
+    sub_8081A5C();
+    return 1;
+    
+  _08085268:
+    if(!GenerateWildMon(gWildMonHeaders[unk].waterMonsInfo, 1, 1))
+        return 0;
+    
+  _0808527A:
+    sub_8081A00();
+    return 1;
+}
+*/
+
+void RockSmashWildEncounter(void)
+{
+    u16 headerNum = GetCurrentMapWildMonHeader();
+    
+    if(headerNum != 0xFFFF)
+    {
+        struct WildPokemonInfo *wildPokemonInfo = gWildMonHeaders[headerNum].rockSmashMonsInfo;
+        
+        if(wildPokemonInfo != NULL)
+        {
+            if(DoWildEncounterTest(wildPokemonInfo->encounterRate, 1) == TRUE)
+            {
+                if(GenerateWildMon(wildPokemonInfo, 2, 1) == 1)
+                {
+                    sub_8081A00();
+                    gScriptResult = 1;
+                    return;
+                }
+            }
+        }
+    }
+    gScriptResult = 0;
+    return;
 }

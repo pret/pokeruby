@@ -102,6 +102,22 @@ struct WarpData
     s16 x, y;
 };
 
+struct Roamer
+{
+	/*0x00*/ u32 ivs;
+	/*0x04*/ u32 personality;
+	/*0x08*/ u16 species;
+	/*0x0A*/ u16 hp;
+	/*0x0C*/ u8 level;
+	/*0x0D*/ u8 unk_D;
+	/*0x0E*/ u8 cool;
+	/*0x0F*/ u8 beauty;
+	/*0x10*/ u8 cute;
+	/*0x11*/ u8 smart;
+	/*0x12*/ u8 tough;
+	/*0x13*/ u8 active;
+};
+
 struct RamScriptData
 {
     u8 magic;
@@ -146,28 +162,22 @@ struct SaveBlock1
     /*0x1220*/ u8 flags[0x120];
     /*0x1340*/ u16 vars[0x100];
     /*0x1540*/ u32 gameStats[NUM_GAME_STATS];
-    ///*0x1608*/ u8 filler_1608[0x14F8];
     /*0x1608*/ u8 filler_1608[0x14F4];
     /*0x2AFC*/ u16 outbreak2AFC;
     /*0x2AFE*/ u8 outbreak2AFE;
-    
     /*0x2AFF*/ u8 outbreak2AFF;
-    
     /*0x2B00*/ u8 outbreak2B00;
-    ///*0x2B01*/ u8 filler_2B01[0x2D5];
     /*0x2B01*/ u8 filler_2B01[3];
-    
     /*0x2B04*/ u16 outbreak2B04[4];
-    
-    ///*0x2B0C*/ u8 filler_2B0C[0x2CA];
     /*0x2B0C*/ u8 unk2B0C;
     /*0x2B0D*/ u8 outbreak2B0D;
     /*0x2B0E*/ u8 filler_2B0E[0x2C8];
-    
     /*0x2DD6*/ u16 feebasLocationSeed;
     /*0x2DD8*/ u8 filler_2DD8[0x124];
     /*0x2EFC*/ struct SB1_2EFC_Struct sb1_2EFC_struct[5];
-    /*0x2F9C*/ u8 filler_2F9C[0x6F4];
+    /*0x2F9C*/ u8 filler_2F9C[0x1A8];
+	/*0x3144*/ struct Roamer roamer;
+	/*0x3158*/ u8 filler_3158[0x538];
     /*0x3690*/ struct RamScript ramScript;
     /*0x3A7C*/ u8 filler_3A7C[0x10];
     /*0x3A8C*/ u8 unk3A8C[52]; //pokedex related
