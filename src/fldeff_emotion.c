@@ -15,46 +15,46 @@ void objc_exclamation_mark_probably(struct Sprite *sprite);
 
 u8 FldEff_ExclamationMarkIcon1(void)
 {
-	u8 spriteId = CreateSpriteAtEnd(&gSpriteTemplate_839B510, 0, 0, 0x53);
+    u8 spriteId = CreateSpriteAtEnd(&gSpriteTemplate_839B510, 0, 0, 0x53);
 
-	if (spriteId != 64)
-		sub_8084894(&gSprites[spriteId], 0, 0);
-	
-	return 0;
+    if (spriteId != 64)
+        sub_8084894(&gSprites[spriteId], 0, 0);
+    
+    return 0;
 }
 
 u8 FldEff_ExclamationMarkIcon2(void)
 {
-	u8 spriteId = CreateSpriteAtEnd(&gSpriteTemplate_839B510, 0, 0, 0x52);
+    u8 spriteId = CreateSpriteAtEnd(&gSpriteTemplate_839B510, 0, 0, 0x52);
 
-	if (spriteId != 64)
-		sub_8084894(&gSprites[spriteId], 33, 1);
-	
-	return 0;
+    if (spriteId != 64)
+        sub_8084894(&gSprites[spriteId], 33, 1);
+    
+    return 0;
 }
 
 u8 FldEff_HeartIcon(void)
 {
-	u8 spriteId = CreateSpriteAtEnd(&gSpriteTemplate_839B528, 0, 0, 0x52);
+    u8 spriteId = CreateSpriteAtEnd(&gSpriteTemplate_839B528, 0, 0, 0x52);
 
-	if (spriteId != 64)
-		sub_8084894(&gSprites[spriteId], 46, 0);
-	
-	return 0;
+    if (spriteId != 64)
+        sub_8084894(&gSprites[spriteId], 46, 0);
+    
+    return 0;
 }
 
 void sub_8084894(struct Sprite *sprite, u16 a2, u8 a3)
 {
-	sprite->oam.priority = 1;
-	sprite->coordOffsetEnabled = 1;
-	
-	sprite->data0 = gUnknown_0202FF84[0];
-	sprite->data1 = gUnknown_0202FF84[1];
-	sprite->data2 = gUnknown_0202FF84[2];
-	sprite->data3 = -5;
-	sprite->data7 = a2;
-	
-	StartSpriteAnim(sprite, a3);
+    sprite->oam.priority = 1;
+    sprite->coordOffsetEnabled = 1;
+    
+    sprite->data0 = gUnknown_0202FF84[0];
+    sprite->data1 = gUnknown_0202FF84[1];
+    sprite->data2 = gUnknown_0202FF84[2];
+    sprite->data3 = -5;
+    sprite->data7 = a2;
+    
+    StartSpriteAnim(sprite, a3);
 }
 
 void objc_exclamation_mark_probably(struct Sprite *sprite)

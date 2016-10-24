@@ -85,7 +85,7 @@ SECTIONS {
         asm/cable_club.o(.text);
         asm/mori_debug_menu.o(.text);
         asm/trainer_see.o(.text);
-		src/fldeff_emotion.o(.text);
+        src/fldeff_emotion.o(.text);
         asm/wild_encounter.o(.text);
         asm/field_effect.o(.text);
         asm/rom_80859BC.o(.text);
