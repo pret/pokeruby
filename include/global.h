@@ -181,7 +181,19 @@ struct SaveBlock1
     u16 vars[0x100];
     u32 gameStats[NUM_GAME_STATS];
     struct BerryTree berryTrees[128];
-    u8 filler_1A08[0x14F4];
+    u8 secretBases[20][160]; // TODO: secret base struct
+    u8 filler_2688[0x18];
+    u8 decorDesk[10];
+    u8 decorChair[10];
+    u8 decorPlant[10];
+    u8 decorOrnament[30];
+    u8 decorMat[30];
+    u8 decorPoster[10];
+    u8 decorDoll[40];
+    u8 decorCushion[10];
+    u8 padding_2736[2];
+    u8 tvShows[24][36]; // TODO: TV show struct
+    u8 filler_2A98[0x464];
     struct SB1_2EFC_Struct sb1_2EFC_struct[5];
     u8 filler_2F9C[0x1C4];
     struct EnigmaBerry enigmaBerry;

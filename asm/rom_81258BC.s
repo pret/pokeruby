@@ -18551,7 +18551,7 @@ sub_8133F4C: @ 8133F4C
 	push {r4,r5,lr}
 	lsls r0, 24
 	movs r3, 0
-	ldr r1, _08133F7C @ =gUnknown_08402E40
+	ldr r1, _08133F7C @ =gDecorationInventories
 	lsrs r2, r0, 21
 	adds r0, r2, r1
 	ldrb r0, [r0, 0x4]
@@ -18575,7 +18575,7 @@ _08133F76:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08133F7C: .4byte gUnknown_08402E40
+_08133F7C: .4byte gDecorationInventories
 	thumb_func_end sub_8133F4C
 
 	thumb_func_start sub_8133F80
@@ -18600,7 +18600,7 @@ sub_8133F9C: @ 8133F9C
 	push {r4,lr}
 	lsls r0, 24
 	movs r2, 0
-	ldr r1, _08133FC8 @ =gUnknown_08402E40
+	ldr r1, _08133FC8 @ =gDecorationInventories
 	lsrs r0, 21
 	adds r0, r1
 	movs r1, 0x4
@@ -18620,7 +18620,7 @@ _08133FB4:
 	adds r0, r1, 0
 	b _08133FDC
 	.align 2, 0
-_08133FC8: .4byte gUnknown_08402E40
+_08133FC8: .4byte gDecorationInventories
 _08133FCC:
 	adds r0, r1, 0x1
 	lsls r0, 24
@@ -18647,7 +18647,7 @@ sub_8133FE4: @ 8133FE4
 	adds r0, r1
 	ldrb r0, [r0, 0x13]
 	movs r2, 0
-	ldr r1, _08134014 @ =gUnknown_08402E40
+	ldr r1, _08134014 @ =gDecorationInventories
 	lsls r0, 3
 	adds r0, r1
 	ldrb r1, [r0, 0x4]
@@ -18663,7 +18663,7 @@ _08134002:
 	b _08134024
 	.align 2, 0
 _08134010: .4byte gDecorations
-_08134014: .4byte gUnknown_08402E40
+_08134014: .4byte gDecorationInventories
 _08134018:
 	adds r0, r2, 0x1
 	lsls r0, 24
@@ -18698,7 +18698,7 @@ IsThereStorageSpaceForDecoration: @ 813402C
 	negs r0, r0
 	cmp r2, r0
 	beq _0813406C
-	ldr r0, _08134068 @ =gUnknown_08402E40
+	ldr r0, _08134068 @ =gDecorationInventories
 	lsls r1, r5, 3
 	adds r1, r0
 	ldr r0, [r1]
@@ -18708,7 +18708,7 @@ IsThereStorageSpaceForDecoration: @ 813402C
 	b _0813406E
 	.align 2, 0
 _08134064: .4byte gDecorations
-_08134068: .4byte gUnknown_08402E40
+_08134068: .4byte gDecorationInventories
 _0813406C:
 	movs r0, 0
 _0813406E:
@@ -18763,7 +18763,7 @@ _081340B6:
 	movs r0, 0x1
 	b _081340F4
 _081340C4:
-	ldr r2, _081340FC @ =gUnknown_08402E40
+	ldr r2, _081340FC @ =gDecorationInventories
 	ldr r1, _08134100 @ =gDecorations
 	lsls r0, r5, 5
 	adds r0, r1
@@ -18794,7 +18794,7 @@ _081340F4:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_081340FC: .4byte gUnknown_08402E40
+_081340FC: .4byte gDecorationInventories
 _08134100: .4byte gDecorations
 	thumb_func_end sub_81340A8
 
@@ -18808,7 +18808,7 @@ sub_8134104: @ 8134104
 	sub sp, 0x4
 	lsls r0, 24
 	movs r6, 0
-	ldr r2, _08134190 @ =gUnknown_08402E40
+	ldr r2, _08134190 @ =gDecorationInventories
 	lsrs r1, r0, 21
 	adds r0, r1, r2
 	ldrb r0, [r0, 0x4]
@@ -18825,7 +18825,7 @@ _08134126:
 	mov r12, r1
 	cmp r3, r8
 	bcs _08134174
-	ldr r1, _08134190 @ =gUnknown_08402E40
+	ldr r1, _08134190 @ =gDecorationInventories
 	mov r10, r1
 	adds r0, r1, 0
 	mov r9, r0
@@ -18877,7 +18877,7 @@ _08134180:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08134190: .4byte gUnknown_08402E40
+_08134190: .4byte gDecorationInventories
 	thumb_func_end sub_8134104
 
 	thumb_func_start sub_8134194
@@ -18886,7 +18886,7 @@ sub_8134194: @ 8134194
 	lsls r0, 24
 	movs r4, 0
 	movs r3, 0
-	ldr r2, _081341D0 @ =gUnknown_08402E40
+	ldr r2, _081341D0 @ =gDecorationInventories
 	lsrs r1, r0, 21
 	adds r0, r1, r2
 	ldrb r0, [r0, 0x4]
@@ -18916,7 +18916,7 @@ _081341C8:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_081341D0: .4byte gUnknown_08402E40
+_081341D0: .4byte gDecorationInventories
 	thumb_func_end sub_8134194
 
 	thumb_func_start sub_81341D4
@@ -18958,7 +18958,7 @@ _08134208: .4byte gSaveBlock1 + 0x3144
 sub_813420C: @ 813420C
 	push {r4-r6,lr}
 	movs r2, 0
-	ldr r6, _08134238 @ =gUnknown_02039302
+	ldr r6, _08134238 @ =gRoamerLocation
 	ldr r4, _0813423C @ =gUnknown_020392FC
 	movs r3, 0
 	adds r5, r4, 0x1
@@ -18980,7 +18980,7 @@ _08134218:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08134238: .4byte gUnknown_02039302
+_08134238: .4byte gRoamerLocation
 _0813423C: .4byte gUnknown_020392FC
 	thumb_func_end sub_813420C
 
@@ -19049,7 +19049,7 @@ sub_8134240: @ 8134240
 	movs r1, 0x2F
 	bl GetMonData
 	strb r0, [r4, 0x12]
-	ldr r4, _08134304 @ =gUnknown_02039302
+	ldr r4, _08134304 @ =gRoamerLocation
 	mov r0, r8
 	strb r0, [r4]
 	bl Random
@@ -19078,7 +19078,7 @@ _081342FC: .4byte gEnemyParty
 _sub_8134240_Latias: .4byte 407
 	.endif
 _08134300: .4byte gSaveBlock1 + 0x3144
-_08134304: .4byte gUnknown_02039302
+_08134304: .4byte gRoamerLocation
 _08134308: .4byte gUnknown_08402E80
 	thumb_func_end sub_8134240
 
@@ -19122,7 +19122,7 @@ sub_8134348: @ 8134348
 	ldrb r0, [r0, 0x13]
 	cmp r0, 0
 	beq _08134380
-	ldr r0, _0813438C @ =gUnknown_02039302
+	ldr r0, _0813438C @ =gRoamerLocation
 	strb r1, [r0]
 	ldr r5, _08134390 @ =gUnknown_08402E80
 	adds r4, r0, 0
@@ -19149,7 +19149,7 @@ _08134380:
 	bx r0
 	.align 2, 0
 _08134388: .4byte gSaveBlock1 + 0x3144
-_0813438C: .4byte gUnknown_02039302
+_0813438C: .4byte gRoamerLocation
 _08134390: .4byte gUnknown_08402E80
 	thumb_func_end sub_8134348
 
@@ -19171,7 +19171,7 @@ _081343AE:
 	ldrb r0, [r0, 0x13]
 	cmp r0, 0
 	beq _08134416
-	ldr r7, _08134400 @ =gUnknown_02039302
+	ldr r7, _08134400 @ =gRoamerLocation
 	ldr r3, _08134404 @ =gUnknown_08402E80
 _081343BA:
 	lsls r0, r4, 1
@@ -19209,7 +19209,7 @@ _081343F4:
 	b _08134416
 	.align 2, 0
 _081343FC: .4byte gSaveBlock1 + 0x3144
-_08134400: .4byte gUnknown_02039302
+_08134400: .4byte gRoamerLocation
 _08134404: .4byte gUnknown_08402E80
 _08134408: .4byte gUnknown_020392FC
 _0813440C:
@@ -19235,7 +19235,7 @@ sub_813441C: @ 813441C
 	ldrb r0, [r0, 0x13]
 	cmp r0, 0
 	beq _08134448
-	ldr r0, _08134444 @ =gUnknown_02039302
+	ldr r0, _08134444 @ =gRoamerLocation
 	ldrb r3, [r0]
 	cmp r2, r3
 	bne _08134448
@@ -19246,7 +19246,7 @@ sub_813441C: @ 813441C
 	b _0813444A
 	.align 2, 0
 _08134440: .4byte gSaveBlock1 + 0x3144
-_08134444: .4byte gUnknown_02039302
+_08134444: .4byte gRoamerLocation
 _08134448:
 	movs r0, 0
 _0813444A:
@@ -19373,14 +19373,14 @@ _08134534: .4byte gSaveBlock1 + 0x3144
 
 	thumb_func_start sub_8134538
 sub_8134538: @ 8134538
-	ldr r3, _08134544 @ =gUnknown_02039302
+	ldr r3, _08134544 @ =gRoamerLocation
 	ldrb r2, [r3]
 	strb r2, [r0]
 	ldrb r0, [r3, 0x1]
 	strb r0, [r1]
 	bx lr
 	.align 2, 0
-_08134544: .4byte gUnknown_02039302
+_08134544: .4byte gRoamerLocation
 	thumb_func_end sub_8134538
 
 	thumb_func_start sub_8134548

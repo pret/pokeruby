@@ -151110,7 +151110,7 @@ sub_80FE470: @ 80FE470
 	movs r0, 0xBA
 	strb r0, [r7]
 	adds r7, 0x1
-	ldr r0, _080FE524 @ =gUnknown_08402E40
+	ldr r0, _080FE524 @ =gDecorationInventories
 	lsls r4, 3
 	adds r4, r0
 	ldrb r1, [r4, 0x4]
@@ -151140,7 +151140,7 @@ sub_80FE470: @ 80FE470
 	.align 2, 0
 _080FE51C: .4byte gStringVar4
 _080FE520: .4byte gUnknown_083EC5E4
-_080FE524: .4byte gUnknown_08402E40
+_080FE524: .4byte gDecorationInventories
 	thumb_func_end sub_80FE470
 
 	thumb_func_start sub_80FE528
@@ -151318,7 +151318,7 @@ _080FE656:
 	ldrb r0, [r4]
 	bl sub_8134104
 	ldr r2, _080FE6C8 @ =gUnknown_020388D0
-	ldr r1, _080FE6CC @ =gUnknown_08402E40
+	ldr r1, _080FE6CC @ =gDecorationInventories
 	ldrb r0, [r4]
 	lsls r0, 3
 	adds r0, r1
@@ -151343,7 +151343,7 @@ _080FE656:
 _080FE6C0: .4byte gUnknown_020388F6
 _080FE6C4: .4byte gUnknown_020388D5
 _080FE6C8: .4byte gUnknown_020388D0
-_080FE6CC: .4byte gUnknown_08402E40
+_080FE6CC: .4byte gDecorationInventories
 _080FE6D0: .4byte gUnknown_020388F7
 _080FE6D4: .4byte gTasks
 _080FE6D8: .4byte sub_80FE868
@@ -152224,7 +152224,7 @@ _080FEDB0:
 	movs r3, 0
 	ldr r0, _080FEE38 @ =gSaveBlock1 + 0x1A1A
 	mov r10, r0
-	ldr r1, _080FEE3C @ =gUnknown_08402E40
+	ldr r1, _080FEE3C @ =gDecorationInventories
 	mov r9, r1
 	ldr r2, _080FEE40 @ =gUnknown_020388F6
 	mov r8, r2
@@ -152287,7 +152287,7 @@ _080FEE1E:
 _080FEE30: .4byte gUnknown_020388D6
 _080FEE34: .4byte gUnknown_020388E6
 _080FEE38: .4byte gSaveBlock1 + 0x1A1A
-_080FEE3C: .4byte gUnknown_08402E40
+_080FEE3C: .4byte gDecorationInventories
 _080FEE40: .4byte gUnknown_020388F6
 _080FEE44: .4byte gUnknown_020388D0
 _080FEE48:
@@ -152308,7 +152308,7 @@ _080FEE5A:
 	bls _080FEDC8
 	movs r6, 0
 	movs r3, 0
-	ldr r0, _080FEEE4 @ =gUnknown_08402E40
+	ldr r0, _080FEEE4 @ =gDecorationInventories
 	mov r8, r0
 _080FEE6C:
 	ldr r0, _080FEEE8 @ =gSaveBlock1
@@ -152373,7 +152373,7 @@ _080FEED0:
 	lsrs r6, r0, 16
 	b _080FEF0E
 	.align 2, 0
-_080FEEE4: .4byte gUnknown_08402E40
+_080FEEE4: .4byte gDecorationInventories
 _080FEEE8: .4byte gSaveBlock1
 _080FEEEC: .4byte 0x00002688
 _080FEEF0: .4byte gUnknown_020388F6

@@ -26875,8 +26875,17 @@ gUnknown_08402E39:: @ 8402E39
 gUnknown_08402E3D:: @ 8402E3D
 	.byte 4, 5, 6
 
-gUnknown_08402E40:: @ 8402E40
-	.incbin "baserom.gba", 0x00402e40, 0x40
+@ pointer to decorations, capacity
+	.align 2
+gDecorationInventories:: @ 8402E40
+	.4byte gSaveBlock1 + 0x26A0, 10 @ DESK
+	.4byte gSaveBlock1 + 0x26AA, 10 @ CHAIR
+	.4byte gSaveBlock1 + 0x26B4, 10 @ PLANT
+	.4byte gSaveBlock1 + 0x26BE, 30 @ ORNAMENT
+	.4byte gSaveBlock1 + 0x26DC, 30 @ MAT
+	.4byte gSaveBlock1 + 0x26FA, 10 @ POSTER
+	.4byte gSaveBlock1 + 0x2704, 40 @ DOLL
+	.4byte gSaveBlock1 + 0x272C, 10 @ CUSHION
 
 gUnknown_08402E80:: @ 8402E80
 	.incbin "baserom.gba", 0x00402e80, 0x80
