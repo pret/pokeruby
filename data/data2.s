@@ -31741,17 +31741,25 @@ gUnknown_0842F6C0:: @ 842F6C0
 	.4byte 0x6, Unknown_842F4F0
 	.4byte 0x7, Unknown_842F520
 
+	.align 2
 gUnknown_0842F758:: @ 842F758
-	.incbin "baserom.gba", 0x0042f758, 0x28
+	.4byte 3, gSubspriteTable_203A380
+	.4byte 0, 2
+	.4byte 0, 66
+	.4byte 0, 105
+	.4byte 0, 34
 
+	.align 2
 gUnknown_0842F780:: @ 842F780
-	.incbin "baserom.gba", 0x0042f780, 0x8
+	.4byte 0, 105
 
+	.align 2
 gUnknown_0842F788:: @ 842F788
-	.incbin "baserom.gba", 0x0042f788, 0x8
+	.4byte 0, 34
 
+	.align 2
 gUnknown_0842F790:: @ 842F790
-	.incbin "baserom.gba", 0x0042f790, 0x8
+	.4byte 0, 66
 
 gOtherText_BerryObtainedDadHasIt:: @ 842F798
 	.string "Obtained a {STR_VAR_2} BERRY!\nDad has it at PETALBURG GYM.$"
