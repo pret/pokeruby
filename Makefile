@@ -80,6 +80,12 @@ asm/pokedex.o \
 asm/trainer_card.o \
 asm/save_menu_util.o \
 asm/rom_8094928.o \
+asm/item_menu.o \
+asm/battle_anim_80A7E7C.o \
+asm/item.o \
+asm/matuda_debug_menu.o \
+asm/contest.o \
+asm/shop.o \
 asm/berry.o \
 asm/script_menu.o \
 asm/naming_screen.o \
