@@ -48,111 +48,111 @@ void HandleDrawSaveWindowInfo(s16 left, s16 top)
 
 void sub_80946C8(u16 left, u16 top)
 {
-	u32 width = 12;
+    u32 width = 12;
 
     if (sub_809473C())
         width = 13;
 
-	if (FlagGet(2049)) // player has Pokédex?
-		MenuZeroFillWindowRect(left, top, left + width, top + 11);
-	else
-		MenuZeroFillWindowRect(left, top, left + width, top + 9);
+    if (FlagGet(2049)) // player has Pokédex?
+        MenuZeroFillWindowRect(left, top, left + width, top + 11);
+    else
+        MenuZeroFillWindowRect(left, top, left + width, top + 9);
 }
 
 u8 sub_809473C()
 {
-	return 1;
+    return 1;
 }
 
 void PrintSavePlayerName(s16 x, s16 y)
 {
-	MenuPrint(gOtherText_Player, x, y);
-	MenuPrint_RightAligned(gSaveBlock2.playerName, x + 12, y);
+    MenuPrint(gOtherText_Player, x, y);
+    MenuPrint_RightAligned(gSaveBlock2.playerName, x + 12, y);
 }
 
 void PrintSaveMapName(s16 x, s16 y)
 {
-	char name[32];
-	
-	CopyMapName(name, gMapHeader.name);
-	MenuPrint(name, x, y);
+    char name[32];
+    
+    CopyMapName(name, gMapHeader.name);
+    MenuPrint(name, x, y);
 }
 
 void PrintSaveBadges(s16 x, s16 y)
 {
-	char badges[16];
-	u8 badgeCount;
-	
-	MenuPrint(gOtherText_Badges, x, y);
-	badgeCount = GetBadgeCount();
-	ConvertIntToDecimalString(badges, badgeCount);
-	MenuPrint_RightAligned(badges, x + 12, y);
+    char badges[16];
+    u8 badgeCount;
+    
+    MenuPrint(gOtherText_Badges, x, y);
+    badgeCount = GetBadgeCount();
+    ConvertIntToDecimalString(badges, badgeCount);
+    MenuPrint_RightAligned(badges, x + 12, y);
 }
 
 void PrintSavePokedexCount(s16 x, s16 y)
 {
-	char pokedex[16];
-	u16 pokedexCount;
-	
-	MenuPrint(gOtherText_Pokedex, x, y);
-	pokedexCount = GetPokedexSeenCount();
-	ConvertIntToDecimalStringN(pokedex, pokedexCount, 1, 3);
-	MenuPrint_RightAligned(pokedex, x + 12, y);
+    char pokedex[16];
+    u16 pokedexCount;
+    
+    MenuPrint(gOtherText_Pokedex, x, y);
+    pokedexCount = GetPokedexSeenCount();
+    ConvertIntToDecimalStringN(pokedex, pokedexCount, 1, 3);
+    MenuPrint_RightAligned(pokedex, x + 12, y);
 }
 
 void PrintSavePlayTime(s16 x, s16 y)
 {
-	char playtime[16];
-	
-	MenuPrint(gOtherText_PlayTime, x, y);
-	FormatPlayTime(playtime, gSaveBlock2.playTimeHours, gSaveBlock2.playTimeMinutes, 1);
-	MenuPrint_RightAligned(playtime, x + 12, y);
+    char playtime[16];
+    
+    MenuPrint(gOtherText_PlayTime, x, y);
+    FormatPlayTime(playtime, gSaveBlock2.playTimeHours, gSaveBlock2.playTimeMinutes, 1);
+    MenuPrint_RightAligned(playtime, x + 12, y);
 }
 
 u8 GetBadgeCount(void)
 {
-	u8 badgeCount = 0;
-	int badgeFlag = 0x807; // first badge flag is located here.
-	
-	for(;badgeFlag <= 0x80E; badgeFlag++)
-	{
-		if ( FlagGet(badgeFlag) )
-			badgeCount++;
-	}
-	
-	return badgeCount;
+    u8 badgeCount = 0;
+    int badgeFlag = 0x807; // first badge flag is located here.
+    
+    for(;badgeFlag <= 0x80E; badgeFlag++)
+    {
+        if ( FlagGet(badgeFlag) )
+            badgeCount++;
+    }
+    
+    return badgeCount;
 }
 
 u16 GetPokedexSeenCount()
 {
-	u16 pokedexSeenCount;
-	
-	if ( sub_806912C() ) // national dex check?
-		pokedexSeenCount = pokedex_count(1);
-	else
-		pokedexSeenCount = sub_8090F68(1);
-	
-	return pokedexSeenCount;
+    u16 pokedexSeenCount;
+    
+    if ( sub_806912C() ) // national dex check?
+        pokedexSeenCount = pokedex_count(1);
+    else
+        pokedexSeenCount = sub_8090F68(1);
+    
+    return pokedexSeenCount;
 }
 
 void FormatPlayTime(char *playtime, u16 hours, u16 minutes, u16 unk)
 {
     s16 colon = unk;
-	playtime = ConvertIntToDecimalString(playtime, hours);
-	
-	// playtime[0] is hours.
-	// playtime[1] is the character to render between hours and minutes.
-	// playtime[2] is minutes.
-	
+    playtime = ConvertIntToDecimalString(playtime, hours);
+    
+    // playtime[0] is hours.
+    // playtime[1] is the character to render between hours and minutes.
+    // playtime[2] is minutes.
+    
     playtime[0] = 0;
     
-	if (colon)
-		playtime[1] = 0xF0; // set middle character to ":"
-	else
-		playtime[1] = 0;
-	
-	playtime[2] = 0;
+    if (colon)
+        playtime[1] = 0xF0; // set middle character to ":"
+    else
+        playtime[1] = 0;
+    
+    playtime[2] = 0;
     playtime += 3;
 
-	ConvertIntToDecimalStringN(playtime, minutes, 2, 2);
+    ConvertIntToDecimalStringN(playtime, minutes, 2, 2);
 }
