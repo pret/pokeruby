@@ -90,7 +90,7 @@ asm/sound_check_menu.o \
 asm/secret_base.o \
 asm/tv.o \
 asm/contest_link_80C2020.o \
-asm/scipt_pokemon_util_80C4BF0.o \
+asm/script_pokemon_util_80C4BF0.o \
 asm/field_poison.o \
 asm/big_shroomish_barboach.o \
 asm/fldeff_80C5CD4.o \
