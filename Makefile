@@ -81,9 +81,9 @@ asm/trainer_card.o \
 asm/save_menu_util.o \
 asm/rom_8094928.o \
 asm/berry.o \
-asm/rom_80B5054.o \
-asm/naming_screen.o \
 asm/script_menu.o \
+asm/naming_screen.o \
+asm/money.o \
 asm/contest_effect.o \
 asm/record_mixing.o \
 asm/sound_check_menu.o \
@@ -130,7 +130,11 @@ asm/mystery_event_menu.o \
 asm/save_failed_screen.o \
 asm/rom_81473B8.o \
 asm/clear_save_data_menu.o \
-asm/rom_8148B8C.o
+asm/rom_8148B8C.o \
+asm/libgcnmultiboot.o \
+asm/m4a_1.o \
+asm/m4a_3.o \
+asm/libagbsyscall.o
 
 DATA_ASM_OBJS := data/data2.o data/graphics.o data/sound_data.o \
 data/event_scripts.o data/battle_anim_scripts.o \
