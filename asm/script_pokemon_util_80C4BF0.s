@@ -429,8 +429,8 @@ _080C4EEA:
 _080C4EFC: .4byte gUnknown_0202E8D0
 	thumb_func_end sub_80C4D80
 
-	thumb_func_start sub_80C4F00
-sub_80C4F00: @ 80C4F00
+	thumb_func_start ShowContestWinnerCleanup
+ShowContestWinnerCleanup: @ 80C4F00
 	push {lr}
 	ldr r0, _080C4F0C @ =c2_exit_to_overworld_1_continue_scripts_restart_music
 	bl SetMainCallback2
@@ -438,10 +438,10 @@ sub_80C4F00: @ 80C4F00
 	bx r0
 	.align 2, 0
 _080C4F0C: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
-	thumb_func_end sub_80C4F00
+	thumb_func_end ShowContestWinnerCleanup
 
-	thumb_func_start sub_80C4F10
-sub_80C4F10: @ 80C4F10
+	thumb_func_start ShowContestWinner
+ShowContestWinner: @ 80C4F10
 	push {r4-r6,lr}
 	ldr r6, _080C4F54 @ =gUnknown_0203856C
 	ldrb r0, [r6]
@@ -477,10 +477,10 @@ _080C4F54: .4byte gUnknown_0203856C
 _080C4F58: .4byte 0x02000000
 _080C4F5C: .4byte 0x00015ddf
 _080C4F60: .4byte 0x00015dde
-_080C4F64: .4byte sub_8106668
+_080C4F64: .4byte CB2_ContestPainting
 _080C4F68: .4byte gMain
-_080C4F6C: .4byte sub_80C4F00
-	thumb_func_end sub_80C4F10
+_080C4F6C: .4byte ShowContestWinnerCleanup
+	thumb_func_end ShowContestWinner
 
 	thumb_func_start sub_80C4F70
 sub_80C4F70: @ 80C4F70
@@ -515,8 +515,8 @@ _080C4FB4: .4byte 0x00004012
 _080C4FB8: .4byte 0x00004013
 	thumb_func_end sub_80C4F70
 
-	thumb_func_start sub_80C4FBC
-sub_80C4FBC: @ 80C4FBC
+	thumb_func_start GiveMonArtistRibbon
+GiveMonArtistRibbon: @ 80C4FBC
 	push {r4-r6,lr}
 	sub sp, 0x4
 	ldr r6, _080C501C @ =gUnknown_02038694
@@ -578,7 +578,7 @@ _080C503A:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80C4FBC
+	thumb_func_end GiveMonArtistRibbon
 
 	thumb_func_start sub_80C5044
 sub_80C5044: @ 80C5044
@@ -589,8 +589,8 @@ sub_80C5044: @ 80C5044
 _080C504C: .4byte gUnknown_0203856C
 	thumb_func_end sub_80C5044
 
-	thumb_func_start sub_80C5050
-sub_80C5050: @ 80C5050
+	thumb_func_start ShowContestEntryMonPic
+ShowContestEntryMonPic: @ 80C5050
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -712,7 +712,7 @@ _080C5154: .4byte gUnknown_081FAF4C
 _080C5158: .4byte gUnknown_02024E8C
 _080C515C: .4byte gSprites
 _080C5160: .4byte SpriteCallbackDummy
-	thumb_func_end sub_80C5050
+	thumb_func_end ShowContestEntryMonPic
 
 	thumb_func_start sub_80C5164
 sub_80C5164: @ 80C5164
@@ -818,8 +818,8 @@ _080C5222:
 	bx r0
 	thumb_func_end sub_80C5190
 
-	thumb_func_start sub_80C5228
-sub_80C5228: @ 80C5228
+	thumb_func_start ScriptGetMultiplayerId
+ScriptGetMultiplayerId: @ 80C5228
 	push {r4,lr}
 	ldr r0, _080C5244 @ =gUnknown_0203869A
 	ldrb r1, [r0]
@@ -846,10 +846,10 @@ _080C5252:
 	bx r0
 	.align 2, 0
 _080C5258: .4byte gScriptResult
-	thumb_func_end sub_80C5228
+	thumb_func_end ScriptGetMultiplayerId
 
-	thumb_func_start sub_80C525C
-sub_80C525C: @ 80C525C
+	thumb_func_start ScriptRandom
+ScriptRandom: @ 80C525C
 	push {r4,lr}
 	ldr r0, _080C5280 @ =gUnknown_0203869A
 	ldrb r1, [r0]
@@ -887,10 +887,10 @@ _080C529E:
 	bx r0
 	.align 2, 0
 _080C52AC: .4byte gScriptResult
-	thumb_func_end sub_80C525C
+	thumb_func_end ScriptRandom
 
-	thumb_func_start sp000_heal_pokemon
-sp000_heal_pokemon: @ 80C52B0
+	thumb_func_start HealPlayerParty
+HealPlayerParty: @ 80C52B0
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -984,10 +984,10 @@ _080C535C:
 	.align 2, 0
 _080C536C: .4byte gPlayerPartyCount
 _080C5370: .4byte gPlayerParty
-	thumb_func_end sp000_heal_pokemon
+	thumb_func_end HealPlayerParty
 
-	thumb_func_start sub_80C5374
-sub_80C5374: @ 80C5374
+	thumb_func_start ScriptGiveMon
+ScriptGiveMon: @ 80C5374
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -1048,10 +1048,10 @@ _080C53E8:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80C5374
+	thumb_func_end ScriptGiveMon
 
-	thumb_func_start sub_80C53F8
-sub_80C53F8: @ 80C53F8
+	thumb_func_start ScriptGiveEgg
+ScriptGiveEgg: @ 80C53F8
 	push {lr}
 	sub sp, 0x68
 	adds r1, r0, 0
@@ -1073,10 +1073,10 @@ sub_80C53F8: @ 80C53F8
 	add sp, 0x68
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80C53F8
+	thumb_func_end ScriptGiveEgg
 
-	thumb_func_start sub_80C5428
-sub_80C5428: @ 80C5428
+	thumb_func_start CheckForAlivePartyMons
+CheckForAlivePartyMons: @ 80C5428
 	push {lr}
 	bl sub_803DAA0
 	lsls r0, 24
@@ -1099,10 +1099,10 @@ _080C5448:
 	bx r0
 	.align 2, 0
 _080C544C: .4byte gScriptResult
-	thumb_func_end sub_80C5428
+	thumb_func_end CheckForAlivePartyMons
 
-	thumb_func_start sub_80C5450
-sub_80C5450: @ 80C5450
+	thumb_func_start CheckPartyMonHasHeldItem
+CheckPartyMonHasHeldItem: @ 80C5450
 	push {r4-r7,lr}
 	lsls r0, 16
 	lsrs r6, r0, 16
@@ -1142,13 +1142,13 @@ _080C5498:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80C5450
+	thumb_func_end CheckPartyMonHasHeldItem
 
-	thumb_func_start sub_80C54A0
-sub_80C54A0: @ 80C54A0
+	thumb_func_start GetNameOfEnigmaBerryInPlayerParty
+GetNameOfEnigmaBerryInPlayerParty: @ 80C54A0
 	push {r4,lr}
 	movs r0, 0xAF
-	bl sub_80C5450
+	bl CheckPartyMonHasHeldItem
 	lsls r0, 24
 	lsrs r0, 24
 	adds r4, r0, 0
@@ -1167,10 +1167,10 @@ _080C54C2:
 	bx r1
 	.align 2, 0
 _080C54CC: .4byte gStringVar1
-	thumb_func_end sub_80C54A0
+	thumb_func_end GetNameOfEnigmaBerryInPlayerParty
 
-	thumb_func_start sub_80C54D0
-sub_80C54D0: @ 80C54D0
+	thumb_func_start ScriptWildBattle
+ScriptWildBattle: @ 80C54D0
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -1216,10 +1216,10 @@ _080C551E:
 	bx r0
 	.align 2, 0
 _080C552C: .4byte gEnemyParty
-	thumb_func_end sub_80C54D0
+	thumb_func_end ScriptWildBattle
 
-	thumb_func_start sub_80C5530
-sub_80C5530: @ 80C5530
+	thumb_func_start ScriptSetMonMoveSlot
+ScriptSetMonMoveSlot: @ 80C5530
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
@@ -1247,7 +1247,7 @@ _080C554C:
 	.align 2, 0
 _080C5560: .4byte gPlayerPartyCount
 _080C5564: .4byte gPlayerParty
-	thumb_func_end sub_80C5530
+	thumb_func_end ScriptSetMonMoveSlot
 
 	thumb_func_start sub_80C5568
 sub_80C5568: @ 80C5568
@@ -1290,8 +1290,8 @@ _080C55A8: .4byte gScriptResult
 _080C55AC: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
 	thumb_func_end sub_80C5580
 
-	thumb_func_start sub_80C55B0
-sub_80C55B0: @ 80C55B0
+	thumb_func_start ChooseBattleTowerPlayerParty
+ChooseBattleTowerPlayerParty: @ 80C55B0
 	push {lr}
 	ldr r1, _080C55C0 @ =gMain
 	ldr r0, _080C55C4 @ =sub_80C55C8
@@ -1301,11 +1301,11 @@ sub_80C55B0: @ 80C55B0
 	bx r0
 	.align 2, 0
 _080C55C0: .4byte gMain
-_080C55C4: .4byte sub_80C55C8
-	thumb_func_end sub_80C55B0
+_080C55C4: .4byte SetBattleTowerPlayerParty
+	thumb_func_end ChooseBattleTowerPlayerParty
 
-	thumb_func_start sub_80C55C8
-sub_80C55C8: @ 80C55C8
+	thumb_func_start SetBattleTowerPlayerParty
+SetBattleTowerPlayerParty: @ 80C55C8
 	push {r4,lr}
 	ldr r0, _080C55DC @ =gUnknown_02039270
 	ldrb r4, [r0]
@@ -1319,7 +1319,7 @@ sub_80C55C8: @ 80C55C8
 _080C55DC: .4byte gUnknown_02039270
 _080C55E0: .4byte gScriptResult
 _080C55E4:
-	bl sub_80C5604
+	bl ReducePlayerPartyToThree
 	ldr r1, _080C55FC @ =gScriptResult
 	movs r0, 0x1
 	strh r0, [r1]
@@ -1332,10 +1332,10 @@ _080C55EE:
 	.align 2, 0
 _080C55FC: .4byte gScriptResult
 _080C5600: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
-	thumb_func_end sub_80C55C8
+	thumb_func_end SetBattleTowerPlayerParty
 
-	thumb_func_start sub_80C5604
-sub_80C5604: @ 80C5604
+	thumb_func_start ReducePlayerPartyToThree
+ReducePlayerPartyToThree: @ 80C5604
 	push {r4-r7,lr}
 	sub sp, 0x134
 	add r0, sp, 0x12C
@@ -1394,6 +1394,6 @@ _080C5674: .4byte 0x0500004b
 _080C5678: .4byte gPlayerParty
 _080C567C: .4byte gUnknown_02039270
 _080C5680: .4byte 0x05000096
-	thumb_func_end sub_80C5604
+	thumb_func_end ReducePlayerPartyToThree
 
 	.align 2, 0 @ Don't pad with nop.

@@ -123,7 +123,7 @@ extern const struct WarpData gDummyWarpData;
 extern s32 gUnknown_0839ACE8;
 extern u32 gUnknown_08216694[];
 
-extern struct UnkWarpStruct *sub_80FA8CC(u8);
+extern struct UnkWarpStruct *GetHealLocation(u8);
 extern u16 VarGet(u16);
 extern u8 FlagGet(u16);
 extern u8 GetSav1Weather(void);
@@ -232,7 +232,7 @@ void sub_8052F5C(void)
 {
     ScriptContext2_RunNewScript(gUnknown_0819FC74);
     gSaveBlock1.money /= 2;
-    sp000_heal_pokemon();
+    HealPlayerParty();
     sub_8053050();
     sub_8053570();
     warp_in();
@@ -496,7 +496,7 @@ void copy_saved_warp2_bank_and_enter_x_to_warp1(void)
 
 void sub_8053538(u8 a1)
 {
-    struct UnkWarpStruct *warp = sub_80FA8CC(a1);
+    struct UnkWarpStruct *warp = GetHealLocation(a1);
     if (warp)
         warp1_set(warp->mapGroup, warp->mapNum, -1, warp->x, warp->y);
 }
@@ -508,7 +508,7 @@ void sub_8053570(void)
 
 void sub_8053588(u8 a1)
 {
-    struct UnkWarpStruct *warp = sub_80FA8CC(a1);
+    struct UnkWarpStruct *warp = GetHealLocation(a1);
     if (warp)
         warp_set(&gSaveBlock1.warp3, warp->mapGroup, warp->mapNum, -1, warp->x, warp->y);
 }
@@ -570,7 +570,7 @@ void unref_sub_8053790(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
 
 void sub_80537CC(u8 a1)
 {
-    struct UnkWarpStruct *warp = sub_80FA8CC(a1);
+    struct UnkWarpStruct *warp = GetHealLocation(a1);
     if (warp)
         warp_set(&gSaveBlock1.warp1, warp->mapGroup, warp->mapNum, -1, warp->x, warp->y);
 }

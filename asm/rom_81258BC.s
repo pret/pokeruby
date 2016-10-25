@@ -17288,7 +17288,7 @@ _08133500:
 	str r0, [sp]
 	movs r0, 0x10
 	movs r2, 0xC
-	bl sub_814AC58
+	bl CreateBlendedOutlineCursor
 	add sp, 0x4
 	pop {r3,r4}
 	mov r8, r3
@@ -22052,7 +22052,7 @@ _08135A1C:
 	adds r2, 0x1
 	cmp r2, 0x2
 	ble _08135A1C
-	bl sub_80C5604
+	bl ReducePlayerPartyToThree
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -22556,14 +22556,14 @@ sub_8135DEC: @ 8135DEC
 	adds r6, r5, r0
 	ldrh r0, [r6]
 	movs r1, 0x1
-	bl sub_80A9424
+	bl AddBagItem
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0x1
 	bne _08135E30
 	ldrh r0, [r6]
 	ldr r1, _08135E28 @ =gStringVar1
-	bl itemid_copy_name
+	bl CopyItemName
 	ldr r0, _08135E2C @ =gScriptResult
 	strh r4, [r0]
 	b _08135E40
@@ -30207,7 +30207,7 @@ NewGameInitPCItems: @ 8139C18
 	movs r4, 0
 	ldr r0, _08139C6C @ =gSaveBlock1 + 0x498
 	movs r1, 0x32
-	bl sub_80A9684
+	bl ClearItemSlots
 	ldr r1, _08139C70 @ =gNewGamePCItems
 	ldrh r0, [r1]
 	cmp r0, 0
@@ -30223,7 +30223,7 @@ _08139C36:
 	ldrh r0, [r0]
 	adds r1, r6
 	ldrh r1, [r1]
-	bl sub_80A9760
+	bl AddPCItem
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -30846,7 +30846,7 @@ sub_813A118: @ 813A118
 	movs r2, 0xB
 	movs r3, 0x9
 	bl MenuZeroFillWindowRect
-	bl sub_80A96E4
+	bl CountUsedPCItemSlots
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x4]
@@ -30906,7 +30906,7 @@ sub_813A198: @ 813A198
 	movs r2, 0xB
 	movs r3, 0x9
 	bl MenuZeroFillWindowRect
-	bl sub_80A96E4
+	bl CountUsedPCItemSlots
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x4]
@@ -31587,14 +31587,14 @@ sub_813A6FC: @ 813A6FC
 	adds r5, r0, r2
 	ldrh r0, [r5]
 	ldrh r1, [r4, 0x6]
-	bl sub_80A9424
+	bl AddBagItem
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0813A770
 	ldrh r0, [r5]
 	ldr r1, _0813A760 @ =gStringVar1
-	bl itemid_copy_name
+	bl CopyItemName
 	ldr r0, _0813A764 @ =gStringVar2
 	movs r2, 0x6
 	ldrsh r1, [r4, r2]
@@ -31658,13 +31658,13 @@ sub_813A794: @ 813A794
 	lsls r2, 3
 	adds r5, r0, r2
 	ldrh r0, [r5]
-	bl itemid_is_unique
+	bl ItemId_GetImportance
 	lsls r0, 24
 	cmp r0, 0
 	bne _0813A814
 	ldrh r0, [r5]
 	ldr r1, _0813A804 @ =gStringVar1
-	bl itemid_copy_name
+	bl CopyItemName
 	ldr r0, _0813A808 @ =gStringVar2
 	movs r2, 0x6
 	ldrsh r1, [r4, r2]
@@ -31820,9 +31820,9 @@ _0813A912:
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r1, [r5, 0x6]
-	bl sub_80A97F4
+	bl RemovePCItem
 	ldrh r4, [r5, 0x4]
-	bl sub_80A96E4
+	bl CountUsedPCItemSlots
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x4]
@@ -32092,7 +32092,7 @@ sub_813AB28: @ 813AB28
 	lsrs r5, r1, 24
 	ldrh r0, [r0]
 	ldr r1, _0813AB48 @ =gStringVar1
-	bl itemid_copy_name
+	bl CopyItemName
 	cmp r4, 0
 	beq _0813AB50
 	ldr r0, _0813AB4C @ =gUnknown_0840631E
@@ -32234,7 +32234,7 @@ _0813AC34:
 	lsls r2, 3
 	adds r0, r2
 	ldrh r0, [r0]
-	bl sub_80A9670
+	bl GetPocketByItemId
 	lsls r0, 24
 	lsrs r0, 24
 	subs r0, 0x1
@@ -32322,7 +32322,7 @@ _0813ACEA:
 	movs r0, 0
 	movs r1, 0xB8
 	movs r2, 0x8
-	bl sub_80F953C
+	bl CreateVerticalScrollIndicators
 	b _0813AD26
 	.align 2, 0
 _0813AD00: .4byte gSaveBlock1 + 0x498
@@ -32356,7 +32356,7 @@ _0813AD26:
 	movs r0, 0x1
 	movs r1, 0xB8
 	movs r2, 0x98
-	bl sub_80F953C
+	bl CreateVerticalScrollIndicators
 	b _0813AD4A
 _0813AD44:
 	movs r0, 0x1
@@ -32446,7 +32446,7 @@ _0813ADE0:
 _0813ADE4: .4byte gOtherText_SwitchWhichItem
 _0813ADE8:
 	adds r0, r1, 0
-	bl itemid_get_description
+	bl ItemId_GetDescription
 	adds r1, r0, 0
 _0813ADF0:
 	movs r0, 0x30
@@ -32528,7 +32528,7 @@ sub_813AE6C: @ 813AE6C
 	ldr r0, _0813AEF8 @ =gTasks + 0x8
 	adds r5, r0
 	bl sub_80F944C
-	bl InitMenuInUpperLeftCornerPlaySoundWhenAPressed
+	bl LoadScrollIndicatorPalette
 	bl sub_813AF04
 	movs r0, 0xF
 	movs r1, 0
@@ -32802,7 +32802,7 @@ _0813B0A4:
 	movs r0, 0
 	movs r1, 0xC8
 	movs r2, 0x8
-	bl sub_80F953C
+	bl CreateVerticalScrollIndicators
 	b _0813B0DA
 	.align 2, 0
 _0813B0B8: .4byte 0x0201fe00
@@ -32830,7 +32830,7 @@ _0813B0DA:
 	movs r0, 0x1
 	movs r1, 0xC8
 	movs r2, 0x98
-	bl sub_80F953C
+	bl CreateVerticalScrollIndicators
 	b _0813B0FE
 	.align 2, 0
 _0813B0F4: .4byte 0x0201fe00
@@ -32853,7 +32853,7 @@ sub_813B108: @ 813B108
 	lsls r4, 24
 	lsrs r4, 24
 	bl sub_80F944C
-	bl InitMenuInUpperLeftCornerPlaySoundWhenAPressed
+	bl LoadScrollIndicatorPalette
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0x1D
@@ -33418,7 +33418,7 @@ sub_813B578: @ 813B578
 	bl MenuZeroFillWindowRect
 	ldrh r0, [r6, 0x20]
 	movs r1, 0x1
-	bl sub_80A9424
+	bl AddBagItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _0813B5CC

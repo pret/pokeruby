@@ -9697,7 +9697,7 @@ sub_808A520: @ 808A520
 	cmp r0, 0
 	beq _0808A542
 	movs r1, 0x1
-	bl sub_80A9538
+	bl RemoveBagItem
 _0808A542:
 	ldr r6, _0808A590 @ =gUnknown_03005CE0
 	ldrb r0, [r6]
@@ -9710,7 +9710,7 @@ _0808A542:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
-	bl sub_80A9424
+	bl AddBagItem
 	ldrb r0, [r6]
 	muls r0, r5
 	adds r0, r4
@@ -11550,7 +11550,7 @@ sub_808B3EC: @ 808B3EC
 	cmp r0, 0
 	beq _0808B416
 	movs r1, 0x1
-	bl sub_80A9538
+	bl RemoveBagItem
 _0808B416:
 	ldr r6, _0808B470 @ =gUnknown_03005CE0
 	ldrb r0, [r6]
@@ -11563,7 +11563,7 @@ _0808B416:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
-	bl sub_80A9424
+	bl AddBagItem
 	ldrb r0, [r6]
 	muls r0, r5
 	adds r0, r4

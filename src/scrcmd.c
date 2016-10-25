@@ -16,13 +16,13 @@ extern void ClearRamScript(void);
 extern u16 *GetVarPointer(u16);
 extern u16 VarGet(u16);
 extern void sub_8126160(u8);
-extern u8 sub_80A9424(u16, u16);
-extern u8 sub_80A9538(u16, u16);
-extern u8 sub_80A9344(u16, u16);
-extern u8 sub_80A92D4(u16, u16);
-extern u8 sub_80A9670(u16);
-extern u8 sub_80A9760(u16, u16);
-extern u8 sub_80A9718(u16, u16);
+extern u8 AddBagItem(u16, u16);
+extern u8 RemoveBagItem(u16, u16);
+extern u8 CheckBagHasSpace(u16, u16);
+extern u8 CheckBagHasItem(u16, u16);
+extern u8 GetPocketByItemId(u16);
+extern u8 AddPCItem(u16, u16);
+extern u8 CheckPCHasItem(u16, u16);
 extern u8 IsThereStorageSpaceForDecoration(u8);
 extern s8 sub_81340A8(u8);
 extern u8 sub_8134074(u8);
@@ -89,9 +89,9 @@ extern bool8 Multichoice(u8, u8, u8, u8);
 extern bool8 sub_80B58C4(u16, u8, u8);
 extern void *picbox_close(void);
 extern void sub_8106630(u32);
-extern void sub_80C4F10(void);
+extern void ShowContestWinner(void);
 extern u8 sub_810F87C(void);
-extern void itemid_copy_name(u16, u8 *);
+extern void CopyItemName(u16, u8 *);
 extern u8 sub_80BF0B8(u32);
 extern void sub_80B79B8(u32 *, u32);
 extern void sub_80B79E0(u32 *, u32);
@@ -109,12 +109,12 @@ extern u8 *sub_8082700(void);
 extern u8 trainer_flag_check(u16);
 extern void trainer_flag_set(u16);
 extern void trainer_flag_clear(u16);
-extern void sub_80C54D0(u16, u8, u16);
+extern void ScriptWildBattle(u16, u8, u16);
 extern void sub_8081B3C(void);
 extern void CreatePokemartMenu(void *);
 extern void CreateDecorationShop1Menu(void *);
 extern void CreateDecorationShop2Menu(void *);
-extern void sub_81018A0(u8, void *);
+extern void PlaySlotMachine(u8, void *);
 extern void PlantBerryTree(u8, u8, u8, u8);
 extern bool8 GetPriceReduction(u8);
 extern void sub_80F99CC(void);
@@ -136,9 +136,9 @@ extern void sub_810E824(void);
 extern u16 GetCoins(void);
 extern bool8 GiveCoins(u16);
 extern bool8 TakeCoins(u16);
-extern u8 sub_80C5374(u16, u8, u16, u32, u32, u8);
-extern u8 sub_80C53F8(u16);
-extern void sub_80C5530(u8, u16, u8);
+extern u8 ScriptGiveMon(u16, u8, u16, u32, u32, u8);
+extern u8 ScriptGiveEgg(u16);
+extern void ScriptSetMonMoveSlot(u8, u16, u8);
 extern bool8 pokemon_has_move(struct Pokemon *, u16);
 extern void c2_exit_to_overworld_1_continue_scripts_restart_music(void);
 
@@ -542,7 +542,7 @@ bool8 ScrCmd_additem(struct ScriptContext *ctx)
 {
     u16 itemId = VarGet(ScriptReadHalfword(ctx));
     u32 quantity = VarGet(ScriptReadHalfword(ctx));
-    gScriptResult = sub_80A9424(itemId, (u8)quantity);
+    gScriptResult = AddBagItem(itemId, (u8)quantity);
     return FALSE;
 }
 
@@ -550,7 +550,7 @@ bool8 ScrCmd_removeitem(struct ScriptContext *ctx)
 {
     u16 itemId = VarGet(ScriptReadHalfword(ctx));
     u32 quantity = VarGet(ScriptReadHalfword(ctx));
-    gScriptResult = sub_80A9538(itemId, (u8)quantity);
+    gScriptResult = RemoveBagItem(itemId, (u8)quantity);
     return FALSE;
 }
 
@@ -558,7 +558,7 @@ bool8 ScrCmd_checkitemspace(struct ScriptContext *ctx)
 {
     u16 itemId = VarGet(ScriptReadHalfword(ctx));
     u32 quantity = VarGet(ScriptReadHalfword(ctx));
-    gScriptResult = sub_80A9344(itemId, (u8)quantity);
+    gScriptResult = CheckBagHasSpace(itemId, (u8)quantity);
     return FALSE;
 }
 
@@ -566,14 +566,14 @@ bool8 ScrCmd_checkitem(struct ScriptContext *ctx)
 {
     u16 itemId = VarGet(ScriptReadHalfword(ctx));
     u32 quantity = VarGet(ScriptReadHalfword(ctx));
-    gScriptResult = sub_80A92D4(itemId, (u8)quantity);
+    gScriptResult = CheckBagHasItem(itemId, (u8)quantity);
     return FALSE;
 }
 
 bool8 ScrCmd_checkitemtype(struct ScriptContext *ctx)
 {
     u16 itemId = VarGet(ScriptReadHalfword(ctx));
-    gScriptResult = sub_80A9670(itemId);
+    gScriptResult = GetPocketByItemId(itemId);
     return FALSE;
 }
 
@@ -581,7 +581,7 @@ bool8 ScrCmd_addpcitem(struct ScriptContext *ctx)
 {
     u16 itemId = VarGet(ScriptReadHalfword(ctx));
     u16 quantity = VarGet(ScriptReadHalfword(ctx));
-    gScriptResult = sub_80A9760(itemId, quantity);
+    gScriptResult = AddPCItem(itemId, quantity);
     return FALSE;
 }
 
@@ -589,7 +589,7 @@ bool8 ScrCmd_checkpcitem(struct ScriptContext *ctx)
 {
     u16 itemId = VarGet(ScriptReadHalfword(ctx));
     u16 quantity = VarGet(ScriptReadHalfword(ctx));
-    gScriptResult = sub_80A9718(itemId, quantity);
+    gScriptResult = CheckPCHasItem(itemId, quantity);
     return FALSE;
 }
 
@@ -1412,7 +1412,7 @@ bool8 ScrCmd_showcontestwinner(struct ScriptContext *ctx)
     u8 v1 = ScriptReadByte(ctx);
     if (v1)
         sub_8106630(v1);
-    sub_80C4F10();
+    ShowContestWinner();
     ScriptContext1_Stop();
     return TRUE;
 }
@@ -1470,7 +1470,7 @@ bool8 ScrCmd_bufferitem(struct ScriptContext *ctx)
 {
     u8 stringVarIndex = ScriptReadByte(ctx);
     u16 itemId = VarGet(ScriptReadHalfword(ctx));
-    itemid_copy_name(itemId, gUnknown_083762F0[stringVarIndex]);
+    CopyItemName(itemId, gUnknown_083762F0[stringVarIndex]);
     return FALSE;
 }
 
@@ -1540,14 +1540,14 @@ bool8 ScrCmd_givepokemon(struct ScriptContext *ctx)
     u32 v8 = ScriptReadWord(ctx);
     u32 v9 = ScriptReadWord(ctx);
     u8 v10 = ScriptReadByte(ctx);
-    gScriptResult = sub_80C5374(v3, v5, v7, v8, v9, v10);
+    gScriptResult = ScriptGiveMon(v3, v5, v7, v8, v9, v10);
     return FALSE;
 }
 
 bool8 ScrCmd_giveegg(struct ScriptContext *ctx)
 {
     u16 value = VarGet(ScriptReadHalfword(ctx));
-    gScriptResult = sub_80C53F8(value);
+    gScriptResult = ScriptGiveEgg(value);
     return FALSE;
 }
 
@@ -1556,7 +1556,7 @@ bool8 ScrCmd_setpokemove(struct ScriptContext *ctx)
     u8 v2 = ScriptReadByte(ctx);
     u8 v3 = ScriptReadByte(ctx);
     u16 v4 = ScriptReadHalfword(ctx);
-    sub_80C5530(v2, v4, v3);
+    ScriptSetMonMoveSlot(v2, v4, v3);
     return FALSE;
 }
 
@@ -1710,7 +1710,7 @@ bool8 ScrCmd_setwildbattle(struct ScriptContext *ctx)
     u16 v2 = ScriptReadHalfword(ctx);
     u8 v4 = ScriptReadByte(ctx);
     u16 v5 = ScriptReadHalfword(ctx);
-    sub_80C54D0(v2, v4, v5);
+    ScriptWildBattle(v2, v4, v5);
     return FALSE;
 }
 
@@ -1748,7 +1748,7 @@ bool8 ScrCmd_pokemartbp(struct ScriptContext *ctx)
 bool8 ScrCmd_pokecasino(struct ScriptContext *ctx)
 {
     u8 v2 = VarGet(ScriptReadHalfword(ctx));
-    sub_81018A0(v2, c2_exit_to_overworld_1_continue_scripts_restart_music);
+    PlaySlotMachine(v2, c2_exit_to_overworld_1_continue_scripts_restart_music);
     ScriptContext1_Stop();
     return TRUE;
 }

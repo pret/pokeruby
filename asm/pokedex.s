@@ -8139,7 +8139,7 @@ sub_80925CC: @ 80925CC
 	str r0, [sp]
 	movs r0, 0x10
 	movs r2, 0xC
-	bl sub_814AC58
+	bl CreateBlendedOutlineCursor
 	ldrh r0, [r5]
 	movs r1, 0x1
 	bl sub_80925B4

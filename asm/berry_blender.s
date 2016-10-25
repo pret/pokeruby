@@ -7650,7 +7650,7 @@ _08051F86:
 	ldr r0, _08051FF4 @ =word_203855E
 	ldrh r0, [r0]
 	movs r1, 0x1
-	bl sub_80A9538
+	bl RemoveBagItem
 	adds r0, r5, 0
 	bl sub_810CA34
 	ldr r1, [r4]
@@ -8383,7 +8383,7 @@ _0805259E:
 	lsrs r0, 16
 	mov r1, sp
 	adds r1, 0x1
-	bl itemid_copy_name
+	bl CopyItemName
 	b _080525F8
 	.align 2, 0
 _080525C8: .4byte gOtherText_BPMAndDash
@@ -8401,7 +8401,7 @@ _080525D8:
 	lsls r0, 16
 	lsrs r0, 16
 	mov r1, sp
-	bl itemid_copy_name
+	bl CopyItemName
 	movs r0, 0
 	strb r0, [r7, 0x6]
 	movs r0, 0xFF

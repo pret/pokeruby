@@ -675,15 +675,15 @@ _0810B844: .4byte gMain
 _0810B848: .4byte 0x0000043c
 _0810B84C:
 	bl sub_80F944C
-	bl InitMenuInUpperLeftCornerPlaySoundWhenAPressed
+	bl LoadScrollIndicatorPalette
 	movs r0, 0
 	movs r1, 0xB0
 	movs r2, 0x8
-	bl sub_80F953C
+	bl CreateVerticalScrollIndicators
 	movs r0, 0x1
 	movs r1, 0xB0
 	movs r2, 0x98
-	bl sub_80F953C
+	bl CreateVerticalScrollIndicators
 	b _0810B91C
 _0810B86A:
 	movs r0, 0x38
@@ -1018,7 +1018,7 @@ sub_810BB0C: @ 810BB0C
 	ldr r0, _0810BB28 @ =gWindowConfig_81E6E34
 	bl BasicInitMenuWindow
 	ldr r0, _0810BB2C @ =0x00000111
-	bl itemid_get_item
+	bl ItemId_GetItem
 	movs r1, 0x2
 	movs r2, 0x1
 	movs r3, 0x48
@@ -3885,7 +3885,7 @@ _0810D17C: .4byte gMain
 sub_810D180: @ 810D180
 	push {r4-r7,lr}
 	sub sp, 0x4
-	bl sp000_heal_pokemon
+	bl HealPlayerParty
 	ldr r4, _0810D1A0 @ =0x00000804
 	adds r0, r4, 0
 	bl FlagGet
@@ -6906,7 +6906,7 @@ sub_810E874: @ 810E874
 	ldr r0, _0810E8BC @ =gUnknown_0203925C
 	strb r4, [r0]
 	bl sub_80F944C
-	bl InitMenuInUpperLeftCornerPlaySoundWhenAPressed
+	bl LoadScrollIndicatorPalette
 	bl sub_810ECD4
 	b _0810E8E8
 	.align 2, 0
@@ -7416,7 +7416,7 @@ sub_810ECB0: @ 810ECB0
 	movs r0, 0
 	movs r1, 0x24
 	movs r2, 0x8
-	bl sub_80F953C
+	bl CreateVerticalScrollIndicators
 _0810ECCC:
 	pop {r0}
 	bx r0
@@ -7439,7 +7439,7 @@ sub_810ECD4: @ 810ECD4
 	movs r0, 0x1
 	movs r1, 0x24
 	movs r2, 0x48
-	bl sub_80F953C
+	bl CreateVerticalScrollIndicators
 _0810ECF2:
 	pop {r0}
 	bx r0
@@ -7923,7 +7923,7 @@ sub_810F090: @ 810F090
 	ldr r0, _0810F104 @ =gUnknown_0203925C
 	strb r4, [r0]
 	bl sub_80F944C
-	bl InitMenuInUpperLeftCornerPlaySoundWhenAPressed
+	bl LoadScrollIndicatorPalette
 	bl sub_810F2B4
 	ldr r5, _0810F108 @ =gUnknown_083F83C0
 _0810F0CA:
@@ -8159,7 +8159,7 @@ sub_810F290: @ 810F290
 	movs r0, 0
 	movs r1, 0x2C
 	movs r2, 0x8
-	bl sub_80F953C
+	bl CreateVerticalScrollIndicators
 _0810F2AC:
 	pop {r0}
 	bx r0
@@ -8182,7 +8182,7 @@ sub_810F2B4: @ 810F2B4
 	movs r0, 0x1
 	movs r1, 0x2C
 	movs r2, 0x58
-	bl sub_80F953C
+	bl CreateVerticalScrollIndicators
 _0810F2D2:
 	pop {r0}
 	bx r0
@@ -24499,8 +24499,8 @@ _081176A0: .4byte gTasks
 _081176A4: .4byte sub_81174F8
 	thumb_func_end sub_8117630
 
-	thumb_func_start sub_81176A8
-sub_81176A8: @ 81176A8
+	thumb_func_start Task_Roulette_0
+Task_Roulette_0: @ 81176A8
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -24533,7 +24533,7 @@ sub_81176A8: @ 81176A8
 	adds r0, r5, 0
 	movs r1, 0x9
 	movs r2, 0x1
-	bl sub_8072B4C
+	bl MenuPrint_RightAligned
 	ldr r2, _08117768 @ =gUnknown_083F8DF0
 	ldr r1, _0811776C @ =gUnknown_0202E8CC
 	mov r8, r1
@@ -24646,10 +24646,10 @@ _081177E4:
 	.align 2, 0
 _081177F4: .4byte gUnknown_081C411C
 _081177F8: .4byte sub_81175DC
-	thumb_func_end sub_81176A8
+	thumb_func_end Task_Roulette_0
 
-	thumb_func_start sub_81177FC
-sub_81177FC: @ 81177FC
+	thumb_func_start PlayRoulette
+PlayRoulette: @ 81177FC
 	push {lr}
 	bl ScriptContext2_Enable
 	ldr r0, _08117828 @ =sub_81176A8
@@ -24670,11 +24670,11 @@ sub_81177FC: @ 81177FC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08117828: .4byte sub_81176A8
+_08117828: .4byte Task_Roulette_0
 _0811782C: .4byte gTasks
 _08117830: .4byte gSaveBlock1
 _08117834: .4byte 0x00000494
-	thumb_func_end sub_81177FC
+	thumb_func_end PlayRoulette
 
 	thumb_func_start sub_8117838
 sub_8117838: @ 8117838
@@ -44739,7 +44739,7 @@ _081216D8:
 	ldrh r0, [r0]
 _081216DC:
 	mov r1, sp
-	bl itemid_copy_name
+	bl CopyItemName
 	mov r4, sp
 	b _081219E6
 	.align 2, 0
@@ -45508,12 +45508,12 @@ _08121CEC: .4byte gUnknown_08400A78
 _08121CF0:
 	adds r0, r2, 0
 	adds r1, r6, 0
-	bl itemid_copy_name
+	bl CopyItemName
 	b _08121D02
 _08121CFA:
 	adds r0, r2, 0
 	adds r1, r6, 0
-	bl itemid_copy_name
+	bl CopyItemName
 _08121D02:
 	adds r5, 0x3
 _08121D04:

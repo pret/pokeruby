@@ -9539,7 +9539,7 @@ _080F0854:
 	ldr r0, _080F08CC @ =gOtherText_NumberRegistered
 	movs r1, 0xA
 	movs r2, 0x9
-	bl sub_8072B4C
+	bl MenuPrint_RightAligned
 	cmp r5, 0
 	bne _080F08C6
 _080F0862:
@@ -9559,14 +9559,14 @@ _080F0862:
 	adds r0, r4, 0
 	movs r1, 0xA
 	movs r2, 0xB
-	bl sub_8072B4C
+	bl MenuPrint_RightAligned
 	cmp r5, 0
 	bne _080F08C6
 _080F088C:
 	ldr r0, _080F08DC @ =gOtherText_NumberBattles
 	movs r1, 0xA
 	movs r2, 0xD
-	bl sub_8072B4C
+	bl MenuPrint_RightAligned
 	cmp r5, 0
 	bne _080F08C6
 _080F089A:
@@ -9589,7 +9589,7 @@ _080F08AA:
 	adds r0, r4, 0
 	movs r1, 0xA
 	movs r2, 0xF
-	bl sub_8072B4C
+	bl MenuPrint_RightAligned
 _080F08C6:
 	pop {r4,r5}
 	pop {r0}

@@ -13095,7 +13095,7 @@ _08012050: .4byte gUnknown_02024A60
 _08012054: .4byte gEnigmaBerries
 _08012058:
 	ldrh r0, [r1, 0x2E]
-	bl itemid_get_x12
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r2, r0, 24
 _08012062:
@@ -15101,11 +15101,11 @@ _08013104: .4byte gStatStageRatios
 _08013108: .4byte gEnigmaBerries
 _0801310C:
 	ldrh r0, [r4, 0x2E]
-	bl itemid_get_x12
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldrh r0, [r4, 0x2E]
-	bl itemid_get_quality
+	bl ItemId_GetHoldEffectParam
 	lsls r0, 24
 	lsrs r5, r0, 24
 _08013120:
@@ -15211,11 +15211,11 @@ _080131EC: .4byte gStatStageRatios
 _080131F0: .4byte gEnigmaBerries
 _080131F4:
 	ldrh r0, [r4, 0x2E]
-	bl itemid_get_x12
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldrh r0, [r4, 0x2E]
-	bl itemid_get_quality
+	bl ItemId_GetHoldEffectParam
 	lsls r0, 24
 	lsrs r5, r0, 24
 _08013208:
@@ -18202,7 +18202,7 @@ _08014ADC: .4byte gBattleMons
 _08014AE0: .4byte gEnigmaBerries
 _08014AE4:
 	ldrh r0, [r1, 0x2E]
-	bl itemid_get_x12
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r1, r0, 24
 _08014AEE:
@@ -20093,7 +20093,7 @@ _080159DC: .4byte gUnknown_081D9464
 _080159E0: .4byte gEnigmaBerries
 _080159E4:
 	ldrh r0, [r1, 0x2E]
-	bl itemid_get_x12
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r3, r0, 24
 _080159EE:
@@ -20217,7 +20217,7 @@ _08015AE0: .4byte gEnigmaBerries
 _08015AE4:
 	ldrh r0, [r1, 0x2E]
 	str r3, [sp, 0x14]
-	bl itemid_get_x12
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp]
@@ -28581,11 +28581,11 @@ _0801A07C: .4byte gBattleMons
 _0801A080: .4byte gEnigmaBerries
 _0801A084:
 	ldrh r0, [r4]
-	bl itemid_get_x12
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldrh r0, [r4]
-	bl itemid_get_quality
+	bl ItemId_GetHoldEffectParam
 	lsls r0, 24
 	lsrs r0, 24
 _0801A098:
@@ -28615,12 +28615,12 @@ _0801A0C4: .4byte gUnknown_02024C07
 _0801A0C8: .4byte gEnigmaBerries
 _0801A0CC:
 	ldr r0, [sp, 0x14]
-	bl itemid_get_x12
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
 	ldr r0, [sp, 0x14]
-	bl itemid_get_quality
+	bl ItemId_GetHoldEffectParam
 	lsls r0, 24
 	lsrs r0, 24
 _0801A0E2:
@@ -28635,9 +28635,9 @@ _0801A0E2:
 	cmp r4, 0xAF
 	beq _0801A102
 	adds r0, r4, 0
-	bl itemid_get_x12
+	bl ItemId_GetHoldEffect
 	adds r0, r4, 0
-	bl itemid_get_quality
+	bl ItemId_GetHoldEffectParam
 _0801A102:
 	ldr r4, [sp, 0x8]
 	cmp r4, 0x4
@@ -30258,11 +30258,11 @@ _0801AE44: .4byte gBattleMons
 _0801AE48: .4byte gEnigmaBerries
 _0801AE4C:
 	ldrh r0, [r4]
-	bl itemid_get_x12
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldrh r0, [r4]
-	bl itemid_get_quality
+	bl ItemId_GetHoldEffectParam
 _0801AE5C:
 	subs r0, r5, 0x2
 	cmp r0, 0x1A
@@ -33012,7 +33012,7 @@ _0801C580: .4byte gUnknown_02024C08
 _0801C584: .4byte gEnigmaBerries
 _0801C588:
 	ldrh r0, [r1, 0x2E]
-	bl itemid_get_x12
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r5, r0, 24
 	mov r1, r8
@@ -33020,7 +33020,7 @@ _0801C588:
 	muls r0, r7
 	add r0, r9
 	ldrh r0, [r0, 0x2E]
-	bl itemid_get_quality
+	bl ItemId_GetHoldEffectParam
 	lsls r0, 24
 	lsrs r2, r0, 24
 _0801C5A4:
@@ -33402,7 +33402,7 @@ _0801C89C: .4byte gBattleMons
 _0801C8A0: .4byte gUnknown_02024C07
 _0801C8A4: .4byte gEnigmaBerries
 _0801C8A8:
-	bl itemid_get_x12
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r6, r0, 24
 _0801C8B0:
@@ -35127,14 +35127,14 @@ _0801D610: .4byte gUnknown_02024C08
 _0801D614: .4byte gEnigmaBerries
 _0801D618:
 	ldrh r0, [r1, 0x2E]
-	bl itemid_get_x12
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r4, r0, 24
 	ldrb r0, [r6]
 	muls r0, r5
 	adds r0, r7
 	ldrh r0, [r0, 0x2E]
-	bl itemid_get_quality
+	bl ItemId_GetHoldEffectParam
 	lsls r0, 24
 	lsrs r6, r0, 24
 _0801D632:
@@ -35331,14 +35331,14 @@ _0801D7C0: .4byte gUnknown_02024C08
 _0801D7C4: .4byte gEnigmaBerries
 _0801D7C8:
 	ldrh r0, [r1, 0x2E]
-	bl itemid_get_x12
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r4, r0, 24
 	ldrb r0, [r6]
 	muls r0, r5
 	adds r0, r7
 	ldrh r0, [r0, 0x2E]
-	bl itemid_get_quality
+	bl ItemId_GetHoldEffectParam
 	lsls r0, 24
 	lsrs r6, r0, 24
 _0801D7E2:
@@ -40418,7 +40418,7 @@ _08020150: .4byte gSaveBlock1 + 0x3688
 _08020154: .4byte gPlayerParty
 _08020158: .4byte gBitTable
 _0802015C:
-	bl itemid_get_x12
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r4, r0, 24
 _08020164:
@@ -40545,7 +40545,7 @@ _08020260: .4byte gPlayerParty
 _08020264: .4byte gSaveBlock1
 _08020268: .4byte 0x00003688
 _0802026C:
-	bl itemid_get_x12
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r4, r0, 24
 _08020274:
@@ -43388,7 +43388,7 @@ _0802183C: .4byte gUnknown_02024C07
 _08021840: .4byte gEnigmaBerries
 _08021844:
 	ldrh r0, [r1, 0x2E]
-	bl itemid_get_x12
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r0, 24
 _0802184E:
@@ -49084,14 +49084,14 @@ _08024704: .4byte gUnknown_02024C08
 _08024708: .4byte gEnigmaBerries
 _0802470C:
 	ldrh r0, [r1, 0x2E]
-	bl itemid_get_x12
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r4, r0, 24
 	ldrb r0, [r6]
 	muls r0, r5
 	adds r0, r7
 	ldrh r0, [r0, 0x2E]
-	bl itemid_get_quality
+	bl ItemId_GetHoldEffectParam
 	lsls r0, 24
 	lsrs r6, r0, 24
 _08024726:
@@ -53687,14 +53687,14 @@ _08026BAC: .4byte gUnknown_02024C08
 _08026BB0: .4byte gEnigmaBerries
 _08026BB4:
 	ldrh r0, [r1, 0x2E]
-	bl itemid_get_x12
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r4, r0, 24
 	ldrb r0, [r6]
 	muls r0, r5
 	adds r0, r7
 	ldrh r0, [r0, 0x2E]
-	bl itemid_get_quality
+	bl ItemId_GetHoldEffectParam
 	lsls r0, 24
 	lsrs r6, r0, 24
 _08026BCE:
@@ -64606,7 +64606,7 @@ _0802C218:
 	bhi _0802C2AC
 	adds r0, r5, 0
 	movs r1, 0x1
-	bl sub_80A9424
+	bl AddBagItem
 _0802C278:
 	movs r0, 0x5
 	bl PlaySE

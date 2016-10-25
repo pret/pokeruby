@@ -6,8 +6,8 @@
 
 	.text
 
-	thumb_func_start sub_80C5684
-sub_80C5684: @ 80C5684
+	thumb_func_start CheckMonIsValid
+CheckMonIsValid: @ 80C5684
 	push {lr}
 	movs r1, 0x41
 	bl GetMonData
@@ -27,16 +27,16 @@ _080C56A0:
 _080C56A2:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80C5684
+	thumb_func_end CheckMonIsValid
 
-	thumb_func_start sub_80C56A8
-sub_80C56A8: @ 80C56A8
+	thumb_func_start CheckMonFainted
+CheckMonFainted: @ 80C56A8
 	push {r4,r5,lr}
 	ldr r4, _080C56C8 @ =gPlayerParty
 	movs r5, 0
 _080C56AE:
 	adds r0, r4, 0
-	bl sub_80C5684
+	bl CheckMonIsValid
 	cmp r0, 0
 	beq _080C56CC
 	adds r0, r4, 0
@@ -58,10 +58,10 @@ _080C56D6:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80C56A8
+	thumb_func_end CheckMonFainted
 
-	thumb_func_start sub_80C56DC
-sub_80C56DC: @ 80C56DC
+	thumb_func_start MonFaintFromPoisonOnField
+MonFaintFromPoisonOnField: @ 80C56DC
 	push {r4,r5,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -94,10 +94,10 @@ sub_80C56DC: @ 80C56DC
 	.align 2, 0
 _080C5720: .4byte gPlayerParty
 _080C5724: .4byte gStringVar1
-	thumb_func_end sub_80C56DC
+	thumb_func_end MonFaintFromPoisonOnField
 
-	thumb_func_start sub_80C5728
-sub_80C5728: @ 80C5728
+	thumb_func_start CheckMonFaintedFromPoison
+CheckMonFaintedFromPoison: @ 80C5728
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -106,7 +106,7 @@ sub_80C5728: @ 80C5728
 	ldr r0, _080C5764 @ =gPlayerParty
 	adds r4, r1, r0
 	adds r0, r4, 0
-	bl sub_80C5684
+	bl CheckMonIsValid
 	cmp r0, 0
 	beq _080C5768
 	adds r0, r4, 0
@@ -132,10 +132,10 @@ _080C576A:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80C5728
+	thumb_func_end CheckMonFaintedFromPoison
 
-	thumb_func_start sub_80C5770
-sub_80C5770: @ 80C5770
+	thumb_func_start Task_WhiteOut
+Task_WhiteOut: @ 80C5770
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -168,7 +168,7 @@ _080C579E:
 _080C57A8:
 	lsls r0, r1, 24
 	lsrs r0, 24
-	bl sub_80C5728
+	bl CheckMonFaintedFromPoison
 	cmp r0, 0
 	bne _080C57F4
 	ldrh r0, [r4, 0x2]
@@ -193,7 +193,7 @@ _080C57CA:
 	strh r0, [r4]
 	b _080C581A
 _080C57DC:
-	bl sub_80C56A8
+	bl CheckMonFainted
 	adds r1, r0, 0
 	cmp r1, 0
 	beq _080C580C
@@ -205,7 +205,7 @@ _080C57DC:
 _080C57F0: .4byte gScriptResult
 _080C57F4:
 	ldrb r0, [r4, 0x2]
-	bl sub_80C56DC
+	bl MonFaintFromPoisonOnField
 	ldr r0, _080C5808 @ =UnknownString_81A1132
 	bl ShowFieldMessage
 	ldrh r0, [r4]
@@ -227,10 +227,10 @@ _080C581A:
 	bx r0
 	.align 2, 0
 _080C5820: .4byte gScriptResult
-	thumb_func_end sub_80C5770
+	thumb_func_end Task_WhiteOut
 
-	thumb_func_start sub_80C5824
-sub_80C5824: @ 80C5824
+	thumb_func_start DoWhiteOut
+DoWhiteOut: @ 80C5824
 	push {lr}
 	ldr r0, _080C5838 @ =sub_80C5770
 	movs r1, 0x50
@@ -239,8 +239,8 @@ sub_80C5824: @ 80C5824
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080C5838: .4byte sub_80C5770
-	thumb_func_end sub_80C5824
+_080C5838: .4byte Task_WhiteOut
+	thumb_func_end DoWhiteOut
 
 	thumb_func_start overworld_poison
 overworld_poison: @ 80C583C
@@ -292,7 +292,7 @@ _080C588C:
 	cmp r7, 0
 	beq _080C58A0
 _080C589C:
-	bl overworld_posion_effect
+	bl DoFieldPoisonEffect
 _080C58A0:
 	cmp r6, 0
 	beq _080C58AC

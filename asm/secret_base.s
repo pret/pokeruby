@@ -2304,7 +2304,7 @@ sub_80BC62C: @ 80BC62C
 	lsrs r5, r0, 24
 	bl ScriptContext2_Enable
 	bl sub_80F944C
-	bl InitMenuInUpperLeftCornerPlaySoundWhenAPressed
+	bl LoadScrollIndicatorPalette
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -2485,7 +2485,7 @@ _080BC7A8:
 	movs r0, 0x1
 	movs r1, 0xBC
 	movs r2, 0x98
-	bl sub_80F953C
+	bl CreateVerticalScrollIndicators
 _080BC7B2:
 	mov r1, r8
 	movs r2, 0x4
@@ -2499,7 +2499,7 @@ _080BC7C4:
 	movs r0, 0
 	movs r1, 0xBC
 	movs r2, 0x8
-	bl sub_80F953C
+	bl CreateVerticalScrollIndicators
 _080BC7CE:
 	pop {r3}
 	mov r8, r3
@@ -3492,7 +3492,7 @@ _080BCF7C:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080BCFA8
-	bl sub_80C6C90
+	bl DoYellowCave4Sparkle
 	b _080BD02C
 _080BCFA8:
 	adds r0, r4, 0
@@ -3545,7 +3545,7 @@ _080BCFF6:
 	bl MapGridGetMetatileIdAt
 	lsls r0, 16
 	asrs r0, 16
-	bl sub_80C6C30
+	bl DoDecorationSoundEffect
 	b _080BD02C
 _080BD01C:
 	ldrb r0, [r4, 0x8]

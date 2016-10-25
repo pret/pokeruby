@@ -218,7 +218,7 @@ sub_8094740: @ 8094740
 	lsrs r4, 24
 	adds r1, r4, 0
 	adds r2, r5, 0
-	bl sub_8072B4C
+	bl MenuPrint_RightAligned
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -284,7 +284,7 @@ sub_80947B0: @ 80947B0
 	mov r0, sp
 	adds r1, r4, 0
 	adds r2, r5, 0
-	bl sub_8072B4C
+	bl MenuPrint_RightAligned
 	add sp, 0x10
 	pop {r4,r5}
 	pop {r0}
@@ -322,7 +322,7 @@ sub_80947F8: @ 80947F8
 	mov r0, sp
 	adds r1, r4, 0
 	adds r2, r5, 0
-	bl sub_8072B4C
+	bl MenuPrint_RightAligned
 	add sp, 0x10
 	pop {r4,r5}
 	pop {r0}
@@ -358,7 +358,7 @@ sub_8094844: @ 8094844
 	mov r0, sp
 	adds r1, r4, 0
 	adds r2, r5, 0
-	bl sub_8072B4C
+	bl MenuPrint_RightAligned
 	add sp, 0x10
 	pop {r4,r5}
 	pop {r0}

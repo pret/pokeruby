@@ -609,7 +609,7 @@ _080FE656:
 	ldr r0, _080FE6D0 @ =gUnknown_020388F7
 	movs r1, 0x8
 	bl sub_80F9480
-	bl InitMenuInUpperLeftCornerPlaySoundWhenAPressed
+	bl LoadScrollIndicatorPalette
 	ldr r1, _080FE6D4 @ =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
@@ -1126,7 +1126,7 @@ _080FEADE:
 	movs r0, 0
 	movs r1, 0x3C
 	movs r2, 0x8
-	bl sub_80F953C
+	bl CreateVerticalScrollIndicators
 _080FEAE8:
 	ldr r5, _080FEB58 @ =gUnknown_020388F4
 	ldrb r0, [r5]
@@ -1146,7 +1146,7 @@ _080FEAFC:
 	movs r0, 0x1
 	movs r1, 0x3C
 	movs r2, 0x98
-	bl sub_80F953C
+	bl CreateVerticalScrollIndicators
 _080FEB10:
 	ldrb r4, [r5]
 	adds r0, r4, 0
@@ -1431,7 +1431,7 @@ sub_80FED3C: @ 80FED3C
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl InitMenuInUpperLeftCornerPlaySoundWhenAPressed
+	bl LoadScrollIndicatorPalette
 	ldr r1, _080FED5C @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
@@ -1809,7 +1809,7 @@ sub_80FEFF4: @ 80FEFF4
 	cmp r0, 0
 	beq _080FF020
 _080FF00E:
-	bl InitMenuInUpperLeftCornerPlaySoundWhenAPressed
+	bl LoadScrollIndicatorPalette
 	ldr r0, _080FF02C @ =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
@@ -4277,7 +4277,7 @@ _08100360: .4byte sub_80FE948
 sub_8100364: @ 8100364
 	push {lr}
 	bl ScriptContext2_Enable
-	bl InitMenuInUpperLeftCornerPlaySoundWhenAPressed
+	bl LoadScrollIndicatorPalette
 	bl pal_fill_black
 	ldr r0, _08100388 @ =sub_8100334
 	movs r1, 0x8

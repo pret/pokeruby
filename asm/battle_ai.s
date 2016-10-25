@@ -4844,7 +4844,7 @@ _08109488:
 	muls r0, r4
 	adds r0, r1
 	ldrh r0, [r0, 0x2E]
-	bl itemid_get_x12
+	bl ItemId_GetHoldEffect
 	ldr r1, _081094B0 @ =0x02016800
 	lsls r0, 24
 	lsrs r0, 24

@@ -6,8 +6,8 @@
 
 	.text
 
-	thumb_func_start sub_81018A0
-sub_81018A0: @ 81018A0
+	thumb_func_start PlaySlotMachine
+PlaySlotMachine: @ 81018A0
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -18,7 +18,7 @@ sub_81018A0: @ 81018A0
 	bx r0
 	.align 2, 0
 _081018B4: .4byte sub_81018B8
-	thumb_func_end sub_81018A0
+	thumb_func_end PlaySlotMachine
 
 	thumb_func_start sub_81018B8
 sub_81018B8: @ 81018B8

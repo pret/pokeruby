@@ -6,8 +6,8 @@
 
 	.text
 
-	thumb_func_start sub_80C58C0
-sub_80C58C0: @ 80C58C0
+	thumb_func_start GetBigMonSizeParams
+GetBigMonSizeParams: @ 80C58C0
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -83,10 +83,10 @@ sub_80C58C0: @ 80C58C0
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80C58C0
+	thumb_func_end GetBigMonSizeParams
 
-	thumb_func_start sub_80C5964
-sub_80C5964: @ 80C5964
+	thumb_func_start TranslateBigMonSizeTableIndex
+TranslateBigMonSizeTableIndex: @ 80C5964
 	push {lr}
 	lsls r0, 16
 	lsrs r2, r0, 16
@@ -114,10 +114,10 @@ _080C5984:
 _080C5990:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80C5964
+	thumb_func_end TranslateBigMonSizeTableIndex
 
-	thumb_func_start sub_80C5994
-sub_80C5994: @ 80C5994
+	thumb_func_start GetBigMonSize
+GetBigMonSize: @ 80C5994
 	push {r4-r7,lr}
 	sub sp, 0x8
 	adds r6, r1, 0
@@ -133,7 +133,7 @@ sub_80C5994: @ 80C5994
 	lsls r0, 16
 	lsrs r7, r0, 16
 	adds r0, r6, 0
-	bl sub_80C5964
+	bl TranslateBigMonSizeTableIndex
 	lsls r0, 24
 	ldr r1, _080C5A04 @ =gUnknown_083D180C
 	lsrs r0, 21
@@ -169,10 +169,10 @@ sub_80C5994: @ 80C5994
 	bx r1
 	.align 2, 0
 _080C5A04: .4byte gUnknown_083D180C
-	thumb_func_end sub_80C5994
+	thumb_func_end GetBigMonSize
 
-	thumb_func_start sub_80C5A08
-sub_80C5A08: @ 80C5A08
+	thumb_func_start FormatBigMonSize
+FormatBigMonSize: @ 80C5A08
 	push {r4-r6,lr}
 	sub sp, 0x4
 	adds r6, r0, 0
@@ -226,10 +226,10 @@ _080C5A7C: .4byte 0x41f00000
 _080C5A80: .4byte 0x00000000
 _080C5A84: .4byte 0x40396666
 _080C5A88: .4byte 0x66666666
-	thumb_func_end sub_80C5A08
+	thumb_func_end FormatBigMonSize
 
-	thumb_func_start sub_80C5A8C
-sub_80C5A8C: @ 80C5A8C
+	thumb_func_start CompareMonSize
+CompareMonSize: @ 80C5A8C
 	push {r4-r7,lr}
 	sub sp, 0x4
 	adds r7, r1, 0
@@ -267,20 +267,20 @@ _080C5AD0: .4byte gPlayerParty
 _080C5AD4:
 	mov r4, sp
 	adds r0, r5, 0
-	bl sub_80C58C0
+	bl GetBigMonSizeParams
 	strh r0, [r4]
 	mov r0, sp
 	ldrh r1, [r0]
 	adds r0, r6, 0
-	bl sub_80C5994
+	bl GetBigMonSize
 	adds r5, r0, 0
 	ldrh r1, [r7]
 	adds r0, r6, 0
-	bl sub_80C5994
+	bl GetBigMonSize
 	adds r4, r0, 0
 	ldr r0, _080C5B0C @ =gStringVar2
 	adds r1, r5, 0
-	bl sub_80C5A08
+	bl FormatBigMonSize
 	cmp r5, r4
 	bls _080C5B10
 	mov r0, sp
@@ -297,10 +297,10 @@ _080C5B12:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80C5A8C
+	thumb_func_end CompareMonSize
 
-	thumb_func_start sub_80C5B1C
-sub_80C5B1C: @ 80C5B1C
+	thumb_func_start GetBigMonInfo
+GetBigMonInfo: @ 80C5B1C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -308,10 +308,10 @@ sub_80C5B1C: @ 80C5B1C
 	lsrs r4, 16
 	ldrh r1, [r5]
 	adds r0, r4, 0
-	bl sub_80C5994
+	bl GetBigMonSize
 	adds r1, r0, 0
 	ldr r0, _080C5B58 @ =gStringVar3
-	bl sub_80C5A08
+	bl FormatBigMonSize
 	ldr r0, _080C5B5C @ =gStringVar1
 	movs r1, 0xB
 	muls r1, r4
@@ -344,10 +344,10 @@ _080C5B74:
 	.align 2, 0
 _080C5B7C: .4byte gStringVar2
 _080C5B80: .4byte gSaveBlock2
-	thumb_func_end sub_80C5B1C
+	thumb_func_end GetBigMonInfo
 
-	thumb_func_start sub_80C5B84
-sub_80C5B84: @ 80C5B84
+	thumb_func_start InitShroomishSizeRecord
+InitShroomishSizeRecord: @ 80C5B84
 	push {lr}
 	ldr r0, _080C5B94 @ =0x00004047
 	movs r1, 0x81
@@ -357,25 +357,25 @@ sub_80C5B84: @ 80C5B84
 	bx r0
 	.align 2, 0
 _080C5B94: .4byte 0x00004047
-	thumb_func_end sub_80C5B84
+	thumb_func_end InitShroomishSizeRecord
 
-	thumb_func_start sub_80C5B98
-sub_80C5B98: @ 80C5B98
+	thumb_func_start GetBigShroomishInfo
+GetBigShroomishInfo: @ 80C5B98
 	push {lr}
 	ldr r0, _080C5BB0 @ =0x00004047
 	bl GetVarPointer
 	adds r1, r0, 0
 	movs r0, 0x99
 	lsls r0, 1
-	bl sub_80C5B1C
+	bl GetBigMonInfo
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080C5BB0: .4byte 0x00004047
-	thumb_func_end sub_80C5B98
+	thumb_func_end GetBigShroomishInfo
 
-	thumb_func_start sub_80C5BB4
-sub_80C5BB4: @ 80C5BB4
+	thumb_func_start CompareShroomishSize
+CompareShroomishSize: @ 80C5BB4
 	push {r4,lr}
 	ldr r0, _080C5BD4 @ =0x00004047
 	bl GetVarPointer
@@ -383,7 +383,7 @@ sub_80C5BB4: @ 80C5BB4
 	ldr r4, _080C5BD8 @ =gScriptResult
 	movs r0, 0x99
 	lsls r0, 1
-	bl sub_80C5A8C
+	bl CompareMonSize
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4]
@@ -393,10 +393,10 @@ sub_80C5BB4: @ 80C5BB4
 	.align 2, 0
 _080C5BD4: .4byte 0x00004047
 _080C5BD8: .4byte gScriptResult
-	thumb_func_end sub_80C5BB4
+	thumb_func_end CompareShroomishSize
 
-	thumb_func_start sub_80C5BDC
-sub_80C5BDC: @ 80C5BDC
+	thumb_func_start InitBarboachSizeRecord
+InitBarboachSizeRecord: @ 80C5BDC
 	push {lr}
 	ldr r0, _080C5BEC @ =0x0000404f
 	movs r1, 0x81
@@ -406,32 +406,32 @@ sub_80C5BDC: @ 80C5BDC
 	bx r0
 	.align 2, 0
 _080C5BEC: .4byte 0x0000404f
-	thumb_func_end sub_80C5BDC
+	thumb_func_end InitBarboachSizeRecord
 
-	thumb_func_start sub_80C5BF0
-sub_80C5BF0: @ 80C5BF0
+	thumb_func_start GetBigBarboachInfo
+GetBigBarboachInfo: @ 80C5BF0
 	push {lr}
 	ldr r0, _080C5C04 @ =0x0000404f
 	bl GetVarPointer
 	adds r1, r0, 0
 	ldr r0, _080C5C08 @ =0x00000143
-	bl sub_80C5B1C
+	bl GetBigMonInfo
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080C5C04: .4byte 0x0000404f
 _080C5C08: .4byte 0x00000143
-	thumb_func_end sub_80C5BF0
+	thumb_func_end GetBigBarboachInfo
 
-	thumb_func_start sub_80C5C0C
-sub_80C5C0C: @ 80C5C0C
+	thumb_func_start CompareBarboachSize
+CompareBarboachSize: @ 80C5C0C
 	push {r4,lr}
 	ldr r0, _080C5C2C @ =0x0000404f
 	bl GetVarPointer
 	adds r1, r0, 0
 	ldr r4, _080C5C30 @ =gScriptResult
 	ldr r0, _080C5C34 @ =0x00000143
-	bl sub_80C5A8C
+	bl CompareMonSize
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4]
@@ -442,10 +442,10 @@ sub_80C5C0C: @ 80C5C0C
 _080C5C2C: .4byte 0x0000404f
 _080C5C30: .4byte gScriptResult
 _080C5C34: .4byte 0x00000143
-	thumb_func_end sub_80C5C0C
+	thumb_func_end CompareBarboachSize
 
-	thumb_func_start sub_80C5C38
-sub_80C5C38: @ 80C5C38
+	thumb_func_start GiveSpecialRibbonToParty
+GiveSpecialRibbonToParty: @ 80C5C38
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -517,6 +517,6 @@ _080C5CC4: .4byte gSaveBlock1
 _080C5CC8: .4byte 0x00003110
 _080C5CCC: .4byte gPlayerParty
 _080C5CD0: .4byte 0x0000083b
-	thumb_func_end sub_80C5C38
+	thumb_func_end GiveSpecialRibbonToParty
 
 	.align 2, 0 @ Don't pad with nop.

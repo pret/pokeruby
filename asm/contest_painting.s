@@ -36,16 +36,16 @@ _08106660: .4byte gSaveBlock1
 _08106664: .4byte 0x00002dfc
 	thumb_func_end sub_8106630
 
-	thumb_func_start sub_8106668
-sub_8106668: @ 8106668
+	thumb_func_start CB2_ContestPainting
+CB2_ContestPainting: @ 8106668
 	push {lr}
-	bl sub_8106674
+	bl ShowContestPainting
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8106668
+	thumb_func_end CB2_ContestPainting
 
-	thumb_func_start sub_8106674
-sub_8106674: @ 8106674
+	thumb_func_start ShowContestPainting
+ShowContestPainting: @ 8106674
 	push {r4-r7,lr}
 	sub sp, 0x4
 	ldr r1, _08106694 @ =gMain
@@ -81,8 +81,8 @@ _081066B4:
 	ldr r0, _081066D4 @ =0x02015de0
 	str r0, [r1]
 	movs r0, 0x1
-	bl sub_8106A10
-	bl sub_81069CC
+	bl ContestPaintingInitVars
+	bl ContestPaintingInitBG
 	b _0810676E
 	.align 2, 0
 _081066D0: .4byte gUnknown_03005E8C
@@ -137,7 +137,7 @@ _08106734:
 	ldr r1, _08106754 @ =0x00015ddf
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_81068FC
+	bl ContestPaintingInitWindow
 	ldr r2, _08106758 @ =0x0000043c
 	adds r1, r4, r2
 	b _08106774
@@ -176,7 +176,7 @@ _0810678C:
 	adds r2, 0x1
 	adds r1, r2
 	ldrb r1, [r1]
-	bl sub_8106918
+	bl ContestPaintingPrintCaption
 	ldr r0, _081067F0 @ =gUnknown_083F6140
 	movs r1, 0
 	movs r2, 0x2
@@ -217,22 +217,22 @@ _081067EC: .4byte 0x00015dde
 _081067F0: .4byte gUnknown_083F6140
 _081067F4: .4byte 0x040000d4
 _081067F8: .4byte 0x85000100
-_081067FC: .4byte sub_8106AAC
+_081067FC: .4byte VBlankCB_ContestPainting
 _08106800: .4byte gUnknown_03000750
-_08106804: .4byte sub_8106808
-	thumb_func_end sub_8106674
+_08106804: .4byte CB2_HoldContestPainting
+	thumb_func_end ShowContestPainting
 
-	thumb_func_start sub_8106808
-sub_8106808: @ 8106808
+	thumb_func_start CB2_HoldContestPainting
+CB2_HoldContestPainting: @ 8106808
 	push {lr}
-	bl sub_810682C
+	bl HoldContestPainting
 	bl UpdatePaletteFade
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8106808
+	thumb_func_end CB2_HoldContestPainting
 
-	thumb_func_start sub_8106818
-sub_8106818: @ 8106818
+	thumb_func_start CB2_QuitContestPainting
+CB2_QuitContestPainting: @ 8106818
 	push {lr}
 	ldr r0, _08106828 @ =gMain
 	ldr r0, [r0, 0x8]
@@ -241,10 +241,10 @@ sub_8106818: @ 8106818
 	bx r0
 	.align 2, 0
 _08106828: .4byte gMain
-	thumb_func_end sub_8106818
+	thumb_func_end CB2_QuitContestPainting
 
-	thumb_func_start sub_810682C
-sub_810682C: @ 810682C
+	thumb_func_start HoldContestPainting
+HoldContestPainting: @ 810682C
 	push {lr}
 	sub sp, 0x4
 	ldr r3, _08106844 @ =gUnknown_03000750
@@ -344,13 +344,13 @@ _081068E6:
 	bx r0
 	.align 2, 0
 _081068EC: .4byte gPaletteFade
-_081068F0: .4byte sub_8106818
+_081068F0: .4byte CB2_QuitContestPainting
 _081068F4: .4byte gUnknown_03000756
 _081068F8: .4byte gUnknown_03000754
-	thumb_func_end sub_810682C
+	thumb_func_end HoldContestPainting
 
-	thumb_func_start sub_81068FC
-sub_81068FC: @ 81068FC
+	thumb_func_start ContestPaintingInitWindow
+ContestPaintingInitWindow: @ 81068FC
 	push {r4,lr}
 	ldr r4, _08106914 @ =gWindowConfig_81E7160
 	adds r0, r4, 0
@@ -362,10 +362,10 @@ sub_81068FC: @ 81068FC
 	bx r0
 	.align 2, 0
 _08106914: .4byte gWindowConfig_81E7160
-	thumb_func_end sub_81068FC
+	thumb_func_end ContestPaintingInitWindow
 
-	thumb_func_start sub_8106918
-sub_8106918: @ 8106918
+	thumb_func_start ContestPaintingPrintCaption
+ContestPaintingPrintCaption: @ 8106918
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
@@ -445,10 +445,10 @@ _081069BE:
 	.align 2, 0
 _081069C4: .4byte gUnknown_083F60C0
 _081069C8: .4byte gUnknown_03005E40
-	thumb_func_end sub_8106918
+	thumb_func_end ContestPaintingPrintCaption
 
-	thumb_func_start sub_81069CC
-sub_81069CC: @ 81069CC
+	thumb_func_start ContestPaintingInitBG
+ContestPaintingInitBG: @ 81069CC
 	movs r0, 0x80
 	lsls r0, 19
 	movs r3, 0
@@ -479,10 +479,10 @@ _08106A00: .4byte REG_BG0CNT
 _08106A04: .4byte 0x00000c42
 _08106A08: .4byte 0x00000a45
 _08106A0C: .4byte REG_BLDCNT
-	thumb_func_end sub_81069CC
+	thumb_func_end ContestPaintingInitBG
 
-	thumb_func_start sub_8106A10
-sub_8106A10: @ 8106A10
+	thumb_func_start ContestPaintingInitVars
+ContestPaintingInitVars: @ 8106A10
 	push {lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
@@ -516,10 +516,10 @@ _08106A46:
 _08106A4C: .4byte gUnknown_03000756
 _08106A50: .4byte gUnknown_03000752
 _08106A54: .4byte gUnknown_03000754
-	thumb_func_end sub_8106A10
+	thumb_func_end ContestPaintingInitVars
 
-	thumb_func_start sub_8106A58
-sub_8106A58: @ 8106A58
+	thumb_func_start ContestPaintingMosaic
+ContestPaintingMosaic: @ 8106A58
 	push {lr}
 	ldr r0, _08106A68 @ =gUnknown_03000756
 	ldrb r1, [r0]
@@ -558,18 +558,18 @@ _08106A9C: .4byte 0x00000a45
 _08106AA0: .4byte gUnknown_03000752
 _08106AA4: .4byte gUnknown_03000754
 _08106AA8: .4byte REG_MOSAIC
-	thumb_func_end sub_8106A58
+	thumb_func_end ContestPaintingMosaic
 
-	thumb_func_start sub_8106AAC
-sub_8106AAC: @ 8106AAC
+	thumb_func_start VBlankCB_ContestPainting
+VBlankCB_ContestPainting: @ 8106AAC
 	push {lr}
-	bl sub_8106A58
+	bl ContestPaintingMosaic
 	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8106AAC
+	thumb_func_end VBlankCB_ContestPainting
 
 	thumb_func_start sub_8106AC4
 sub_8106AC4: @ 8106AC4

@@ -96,7 +96,7 @@ _0803E22C:
 _0803E238: .4byte gSaveBlock1
 _0803E23C: .4byte 0x00003688
 _0803E240:
-	bl itemid_get_x12
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r0, 24
 _0803E248:
@@ -2436,7 +2436,7 @@ GetEvolutionTargetSpecies: @ 803F48C
 _0803F4F8: .4byte gSaveBlock1
 _0803F4FC: .4byte 0x00003688
 _0803F500:
-	bl itemid_get_x12
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r0, 24
 _0803F508:
@@ -3634,7 +3634,7 @@ _0803FD20:
 _0803FD2C: .4byte gSaveBlock1
 _0803FD30: .4byte 0x00003688
 _0803FD34:
-	bl itemid_get_x12
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r4, r0, 24
 _0803FD3C:
@@ -3955,7 +3955,7 @@ _0803FF94:
 _0803FFA0: .4byte gSaveBlock1
 _0803FFA4: .4byte 0x00003688
 _0803FFA8:
-	bl itemid_get_x12
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r0, 24
 _0803FFB0:

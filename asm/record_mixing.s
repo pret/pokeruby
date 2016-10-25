@@ -260,7 +260,7 @@ _080B94C8:
 	movs r0, 0
 	strb r0, [r1]
 	bl sub_80B92AC
-	bl sub_80C71D8
+	bl CreateRecordMixingSprite
 	movs r0, 0x1
 	strh r0, [r4]
 	ldr r0, _080B9514 @ =sub_80B95F0
@@ -296,7 +296,7 @@ _080B951C:
 	strh r0, [r4]
 	ldr r0, _080B954C @ =0x00000834
 	bl FlagSet
-	bl sub_80C7240
+	bl DestroyRecordMixingSprite
 	ldrb r0, [r4, 0x1E]
 	bl DestroyTask
 	b _080B95E6
@@ -1622,26 +1622,26 @@ sub_80B9F3C: @ 80B9F3C
 	ldrh r0, [r4]
 	cmp r0, 0
 	beq _080BA000
-	bl sub_80A9670
+	bl GetPocketByItemId
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x5
 	bne _080B9FC8
 	ldrh r0, [r4]
 	movs r1, 0x1
-	bl sub_80A92D4
+	bl CheckBagHasItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B9FB8
 	ldrh r0, [r4]
 	movs r1, 0x1
-	bl sub_80A9718
+	bl CheckPCHasItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B9FB8
 	ldrh r0, [r4]
 	movs r1, 0x1
-	bl sub_80A9424
+	bl AddBagItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B9FB8
@@ -1674,7 +1674,7 @@ _080B9FC4: .4byte 0x00004001
 _080B9FC8:
 	ldrh r0, [r4]
 	movs r1, 0x1
-	bl sub_80A9424
+	bl AddBagItem
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

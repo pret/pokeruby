@@ -215,7 +215,7 @@ sub_80B7AEC: @ 80B7AEC
 	mov r0, sp
 	adds r1, r4, 0
 	adds r2, r5, 0
-	bl sub_8072B4C
+	bl MenuPrint_RightAligned
 	movs r0, 0xFC
 	strb r0, [r6]
 	movs r0, 0x14

@@ -2378,7 +2378,7 @@ _0806E9F0:
 	bl GetMonNickname
 	ldr r1, _0806EA34 @ =gStringVar2
 	adds r0, r7, 0
-	bl itemid_copy_name
+	bl CopyItemName
 	ldr r4, _0806EA38 @ =gStringVar4
 	ldr r1, _0806EA3C @ =gOtherText_AlreadyHolding
 	adds r0, r4, 0
@@ -2410,7 +2410,7 @@ _0806EA44:
 	bl sub_806E904
 	adds r0, r5, 0
 	movs r1, 0x1
-	bl sub_80A9538
+	bl RemoveBagItem
 	adds r0, r5, 0
 	bl itemid_is_mail
 	lsls r0, 24
@@ -2495,10 +2495,10 @@ sub_806EACC: @ 806EACC
 	lsrs r5, r0, 16
 	ldrh r0, [r4, 0x6]
 	movs r1, 0x1
-	bl sub_80A9538
+	bl RemoveBagItem
 	adds r0, r5, 0
 	movs r1, 0x1
-	bl sub_80A9424
+	bl AddBagItem
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2521,7 +2521,7 @@ _0806EB30: .4byte 0x0201c000
 _0806EB34:
 	ldrh r0, [r4, 0x6]
 	ldr r1, _0806EB50 @ =gStringVar1
-	bl itemid_copy_name
+	bl CopyItemName
 	ldr r4, _0806EB54 @ =gStringVar4
 	ldr r1, _0806EB58 @ =gOtherText_TakenAndReplaced
 	adds r0, r4, 0
@@ -2540,7 +2540,7 @@ _0806EB5C:
 	bl sub_806E834
 	ldrh r0, [r4, 0x6]
 	movs r1, 0x1
-	bl sub_80A9424
+	bl AddBagItem
 	b _0806EB9A
 	.align 2, 0
 _0806EB70: .4byte gOtherText_BagFullCannotRemoveItem
@@ -2630,7 +2630,7 @@ sub_806EBF0: @ 806EBF0
 	bl GetMonNickname
 	ldr r1, _0806EC38 @ =gStringVar2
 	adds r0, r4, 0
-	bl itemid_copy_name
+	bl CopyItemName
 	ldr r4, _0806EC3C @ =gStringVar4
 	ldr r1, _0806EC40 @ =gOtherText_WasGivenToHold
 	adds r0, r4, 0
@@ -2772,7 +2772,7 @@ _0806ED50:
 	strb r1, [r0, 0x1]
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_80A9424
+	bl AddBagItem
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2832,7 +2832,7 @@ sub_806EDB4: @ 806EDB4
 	bl GetMonNickname
 	ldr r1, _0806EDFC @ =gStringVar2
 	adds r0, r4, 0
-	bl itemid_copy_name
+	bl CopyItemName
 	ldr r4, _0806EE00 @ =gStringVar4
 	ldr r1, _0806EE04 @ =gOtherText_ReceivedTheThingFrom
 	adds r0, r4, 0
@@ -2901,7 +2901,7 @@ sub_806EE5C: @ 806EE5C
 	ldr r5, _0806EE90 @ =0x0201c000
 	ldrh r0, [r5, 0x6]
 	movs r1, 0x1
-	bl sub_80A9424
+	bl AddBagItem
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3352,7 +3352,7 @@ sub_806F1D0: @ 806F1D0
 	bhi _0806F220
 	adds r0, r1, 0
 	movs r1, 0x1
-	bl sub_80A9538
+	bl RemoveBagItem
 _0806F220:
 	ldr r0, _0806F24C @ =gTasks
 	lsls r1, r6, 2
@@ -4274,7 +4274,7 @@ _0806F964:
 	bl SetMonData
 	ldrh r0, [r4, 0x6]
 	movs r1, 0x1
-	bl sub_80A9538
+	bl RemoveBagItem
 	bl sub_8032638
 	ldr r1, _0806F9E8 @ =gTasks
 	adds r0, r7, r6
@@ -5001,7 +5001,7 @@ _0806FFC8:
 	bne _0806FFE6
 	adds r0, r6, 0
 	movs r1, 0x1
-	bl sub_80A9538
+	bl RemoveBagItem
 _0806FFE6:
 	adds r0, r6, 0
 	bl GetMedicineItemEffectMessage
@@ -5258,7 +5258,7 @@ sub_80701DC: @ 80701DC
 	adds r4, r6, r0
 	ldrh r0, [r4, 0x6]
 	movs r1, 0x1
-	bl sub_80A9424
+	bl AddBagItem
 	ldrb r1, [r4, 0x5]
 	movs r0, 0x64
 	muls r0, r1
@@ -5337,7 +5337,7 @@ _080702AC: .4byte sub_806FB0C
 _080702B0:
 	ldrh r0, [r4, 0x6]
 	movs r1, 0x1
-	bl sub_80A9538
+	bl RemoveBagItem
 	ldr r1, _080702D0 @ =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
@@ -5717,7 +5717,7 @@ _080705B8:
 	bl PlaySE
 	ldrh r0, [r6, 0x6]
 	movs r1, 0x1
-	bl sub_80A9538
+	bl RemoveBagItem
 	ldr r0, [r6]
 	movs r2, 0x1E
 	ldrsh r1, [r7, r2]
@@ -5882,7 +5882,7 @@ _08070724:
 	bl sub_8070A20
 	adds r0, r6, 0
 	movs r1, 0x1
-	bl sub_80A9538
+	bl RemoveBagItem
 	ldr r0, [r4]
 	ldr r1, _0807078C @ =gStringVar1
 	bl GetMonNickname
@@ -6696,7 +6696,7 @@ _08070E34: .4byte sub_806FB0C
 _08070E38:
 	adds r0, r6, 0
 	movs r1, 0x1
-	bl sub_80A9538
+	bl RemoveBagItem
 _08070E40:
 	pop {r4-r6}
 	pop {r0}

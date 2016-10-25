@@ -45,7 +45,7 @@ u8 MenuPrint_PixelCoords(u8 *, u8, u16, u8);
 u8 sub_8072A18(u8 *, u8, u16, u8, u32);
 u8 unref_sub_8072A5C(u8 *, u8 *, u8, u16, u8, u32);
 int sub_8072AB0(u8 *, u8, u16, u8, u8, u32);
-void sub_8072B4C(u8 *, u8, u8);
+void MenuPrint_RightAligned(u8 *, u8, u8);
 void sub_8072B80(u8 *, u8, u8, u8 *);
 void sub_8072BD8(u8 *, u8, u8, u16);
 u8 *sub_8072C14(u8 *, s32, u8, u8);

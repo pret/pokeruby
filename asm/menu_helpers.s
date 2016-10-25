@@ -714,8 +714,8 @@ _080F9526:
 	bx r0
 	thumb_func_end sub_80F9520
 
-	thumb_func_start sub_80F953C
-sub_80F953C: @ 80F953C
+	thumb_func_start CreateVerticalScrollIndicators
+CreateVerticalScrollIndicators: @ 80F953C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -1019,7 +1019,7 @@ _080F9790:
 	bx r0
 	.align 2, 0
 _080F9798: .4byte gSprites
-	thumb_func_end sub_80F953C
+	thumb_func_end CreateVerticalScrollIndicators
 
 	thumb_func_start sub_80F979C
 sub_80F979C: @ 80F979C
@@ -1089,8 +1089,8 @@ _080F9810: .4byte gUnknown_020388C0
 _080F9814: .4byte gSprites
 	thumb_func_end SetBgTilemapBuffer
 
-	thumb_func_start InitMenuInUpperLeftCornerPlaySoundWhenAPressed
-InitMenuInUpperLeftCornerPlaySoundWhenAPressed: @ 80F9818
+	thumb_func_start LoadScrollIndicatorPalette
+LoadScrollIndicatorPalette: @ 80F9818
 	push {lr}
 	ldr r0, _080F9824 @ =gUnknown_083E5968
 	bl LoadSpritePalette
@@ -1098,7 +1098,7 @@ InitMenuInUpperLeftCornerPlaySoundWhenAPressed: @ 80F9818
 	bx r0
 	.align 2, 0
 _080F9824: .4byte gUnknown_083E5968
-	thumb_func_end InitMenuInUpperLeftCornerPlaySoundWhenAPressed
+	thumb_func_end LoadScrollIndicatorPalette
 
 	thumb_func_start BuyMenuFreeMemory
 BuyMenuFreeMemory: @ 80F9828

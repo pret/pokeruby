@@ -30,7 +30,7 @@ _080C8FD0: .4byte word_203855E
 _080C8FD4: .4byte gTasks
 _080C8FD8:
 	ldrh r0, [r1]
-	bl itemid_get_type
+	bl ItemId_GetType
 	subs r0, 0x1
 	lsls r0, 24
 	lsrs r3, r0, 24
@@ -204,7 +204,7 @@ CheckIfItemIsTMHMOrEvolutionStone: @ 80C911C
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r0, r4, 0
-	bl itemid_get_overworld_function
+	bl ItemId_GetFieldFunc
 	ldr r1, _080C9134 @ =ItemUseOutOfBattle_TMHM
 	cmp r0, r1
 	bne _080C9138
@@ -214,7 +214,7 @@ CheckIfItemIsTMHMOrEvolutionStone: @ 80C911C
 _080C9134: .4byte ItemUseOutOfBattle_TMHM
 _080C9138:
 	adds r0, r4, 0
-	bl itemid_get_overworld_function
+	bl ItemId_GetFieldFunc
 	ldr r1, _080C9148 @ =ItemUseOutOfBattle_EvolutionStone
 	cmp r0, r1
 	beq _080C914C
@@ -397,7 +397,7 @@ ItemUseOnFieldCB_Bike: @ 80C929C
 	lsrs r5, r0, 24
 	ldr r4, _080C92E0 @ =word_203855E
 	ldrh r0, [r4]
-	bl itemid_get_x28
+	bl ItemId_GetSecondaryId
 	lsls r0, 24
 	cmp r0, 0
 	bne _080C92B6
@@ -405,7 +405,7 @@ ItemUseOnFieldCB_Bike: @ 80C929C
 	bl GetOnOffBike
 _080C92B6:
 	ldrh r0, [r4]
-	bl itemid_get_x28
+	bl ItemId_GetSecondaryId
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -539,7 +539,7 @@ ItemUseOnFieldCB_Rod: @ 80C93B8
 	lsrs r4, 24
 	ldr r0, _080C93DC @ =word_203855E
 	ldrh r0, [r0]
-	bl itemid_get_x28
+	bl ItemId_GetSecondaryId
 	lsls r0, 24
 	lsrs r0, 24
 	bl StartFishing
@@ -1668,7 +1668,7 @@ unref_sub_80C9BF8: @ 80C9BF8
 	ldr r4, _080C9C40 @ =gUnknown_083D61DC
 	ldr r0, _080C9C44 @ =word_203855E
 	ldrh r0, [r0]
-	bl itemid_get_x28
+	bl ItemId_GetSecondaryId
 	lsls r0, 24
 	lsrs r0, 22
 	adds r0, r4
@@ -1687,7 +1687,7 @@ _080C9C4C:
 	ldr r4, _080C9C70 @ =gUnknown_083D61DC
 	ldr r0, _080C9C74 @ =word_203855E
 	ldrh r0, [r0]
-	bl itemid_get_x28
+	bl ItemId_GetSecondaryId
 	lsls r0, 24
 	lsrs r0, 22
 	adds r0, r4
@@ -1754,7 +1754,7 @@ _080C9CE0: .4byte sub_80A5B00
 _080C9CE4:
 	ldr r0, _080C9CFC @ =word_203855E
 	ldrh r0, [r0]
-	bl itemid_get_overworld_function
+	bl ItemId_GetFieldFunc
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl _call_via_r1
@@ -1776,7 +1776,7 @@ sub_80C9D00: @ 80C9D00
 	ldr r0, _080C9D28 @ =word_203855E
 	ldrh r0, [r0]
 	movs r1, 0x1
-	bl sub_80A9538
+	bl RemoveBagItem
 	bl ScriptContext2_Enable
 	ldr r0, _080C9D2C @ =gUnknown_081A1654
 	bl ScriptContext1_SetupScript
@@ -2148,11 +2148,11 @@ sub_80C9FDC: @ 80C9FDC
 	ldr r4, _080CA004 @ =word_203855E
 	ldrh r0, [r4]
 	movs r1, 0x1
-	bl sub_80A9538
+	bl RemoveBagItem
 	bl sub_80A3E0C
 	ldrh r0, [r4]
 	ldr r1, _080CA008 @ =gStringVar2
-	bl itemid_copy_name
+	bl CopyItemName
 	ldr r0, _080CA00C @ =gStringVar4
 	ldr r1, _080CA010 @ =gOtherText_UsedItem
 	bl StringExpandPlaceholders
@@ -2179,7 +2179,7 @@ ItemUseOutOfBattle_Repel: @ 80CA014
 	bne _080CA060
 	ldr r0, _080CA054 @ =word_203855E
 	ldrh r0, [r0]
-	bl itemid_get_quality
+	bl ItemId_GetHoldEffectParam
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -2219,7 +2219,7 @@ sub_80CA07C: @ 80CA07C
 	ldr r0, _080CA090 @ =word_203855E
 	ldrh r0, [r0]
 	ldr r1, _080CA094 @ =gStringVar2
-	bl itemid_copy_name
+	bl CopyItemName
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -2450,7 +2450,7 @@ ItemUseInBattle_PokeBall: @ 80CA244
 	ldr r0, _080CA268 @ =word_203855E
 	ldrh r0, [r0]
 	movs r1, 0x1
-	bl sub_80A9538
+	bl RemoveBagItem
 	adds r0, r4, 0
 	bl sub_80A7094
 	b _080CA284
@@ -2523,7 +2523,7 @@ sub_80CA2BC: @ 80CA2BC
 	ldr r4, _080CA308 @ =word_203855E
 	ldrh r0, [r4]
 	movs r1, 0x1
-	bl sub_80A9538
+	bl RemoveBagItem
 	ldrh r0, [r4]
 	bl sub_803F378
 	adds r1, r0, 0
@@ -2722,7 +2722,7 @@ unref_sub_80CA448: @ 80CA448
 	bne _080CA4AC
 	ldrh r0, [r4]
 	movs r1, 0x1
-	bl sub_80A9538
+	bl RemoveBagItem
 	ldr r0, _080CA498 @ =gPlayerParty
 	ldr r1, _080CA49C @ =gStringVar1
 	bl GetMonNickname

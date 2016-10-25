@@ -373,7 +373,7 @@ _080BA3EC: .4byte gTasks
 _080BA3F0: .4byte 0x0000015d
 _080BA3F4: .4byte gBGMNames
 _080BA3F8: .4byte gSENames
-_080BA3FC: .4byte Task_HandleMainMenuInput
+_080BA3FC: .4byte sub_80BA65C
 	thumb_func_end sub_80BA384
 
 	thumb_func_start sub_80BA400
@@ -690,8 +690,8 @@ _080BA64E:
 _080BA658: .4byte gUnknown_020387B0
 	thumb_func_end sub_80BA400
 
-	thumb_func_start Task_HandleMainMenuInput
-Task_HandleMainMenuInput: @ 80BA65C
+	thumb_func_start sub_80BA65C
+sub_80BA65C: @ 80BA65C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -714,7 +714,7 @@ _080BA67C:
 	.align 2, 0
 _080BA684: .4byte gTasks
 _080BA688: .4byte sub_80BA384
-	thumb_func_end Task_HandleMainMenuInput
+	thumb_func_end sub_80BA65C
 
 	thumb_func_start sub_80BA68C
 sub_80BA68C: @ 80BA68C

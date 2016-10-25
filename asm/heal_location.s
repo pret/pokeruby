@@ -6,8 +6,8 @@
 
 	.text
 
-	thumb_func_start sub_80FA86C
-sub_80FA86C: @ 80FA86C
+	thumb_func_start GetHealLocationIndexByMap
+GetHealLocationIndexByMap: @ 80FA86C
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -38,16 +38,16 @@ _080FA89E:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80FA86C
+	thumb_func_end GetHealLocationIndexByMap
 
-	thumb_func_start unref_sub_80FA8A4
-unref_sub_80FA8A4: @ 80FA8A4
+	thumb_func_start GetHealLocationByMap
+GetHealLocationByMap: @ 80FA8A4
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
 	lsls r1, 16
 	lsrs r1, 16
-	bl sub_80FA86C
+	bl GetHealLocationIndexByMap
 	cmp r0, 0
 	beq _080FA8C4
 	lsls r0, 3
@@ -61,10 +61,10 @@ _080FA8C4:
 _080FA8C6:
 	pop {r1}
 	bx r1
-	thumb_func_end unref_sub_80FA8A4
+	thumb_func_end GetHealLocationByMap
 
-	thumb_func_start sub_80FA8CC
-sub_80FA8CC: @ 80FA8CC
+	thumb_func_start GetHealLocation
+GetHealLocation: @ 80FA8CC
 	push {lr}
 	cmp r0, 0
 	beq _080FA8E4
@@ -81,6 +81,6 @@ _080FA8E4:
 _080FA8E6:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80FA8CC
+	thumb_func_end GetHealLocation
 
 	.align 2, 0 @ Don't pad with nop.

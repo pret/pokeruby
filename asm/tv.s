@@ -3327,7 +3327,7 @@ _080BF166:
 	ldrh r0, [r1]
 	cmp r0, 0
 	beq _080BF186
-	bl itemid_get_market_price
+	bl ItemId_GetPrice
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r6, 0
@@ -6286,8 +6286,8 @@ _080C07BC: .4byte gSaveBlock1
 _080C07C0: .4byte 0x00002abd
 	thumb_func_end sub_80C0788
 
-	thumb_func_start sub_80C07C4
-sub_80C07C4: @ 80C07C4
+	thumb_func_start DoTVShow
+DoTVShow: @ 80C07C4
 	push {lr}
 	ldr r2, _080C07F8 @ =gSaveBlock1
 	ldr r0, _080C07FC @ =gUnknown_0202E8CC
@@ -6383,7 +6383,7 @@ _080C08CA:
 	bl DoTVShowBravoTrainerPokemonProfile
 	b _080C08F8
 _080C08D0:
-	bl sub_80C0B9C
+	bl DoTVShowBravoTrainerBattleTowerProfile
 	b _080C08F8
 _080C08D6:
 	bl DoTVShowPokemonTodaySuccessfulCapture
@@ -6405,10 +6405,10 @@ _080C08F4:
 _080C08F8:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80C07C4
+	thumb_func_end DoTVShow
 
-	thumb_func_start sub_80C08FC
-sub_80C08FC: @ 80C08FC
+	thumb_func_start TVShowConvertInternationalString
+TVShowConvertInternationalString: @ 80C08FC
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	lsls r4, r2, 24
@@ -6423,7 +6423,7 @@ _080C0914:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80C08FC
+	thumb_func_end TVShowConvertInternationalString
 
 	thumb_func_start DoTVShowBravoTrainerPokemonProfile
 DoTVShowBravoTrainerPokemonProfile: @ 80C091C
@@ -6471,7 +6471,7 @@ _080C0980:
 	adds r1, r4, 0
 	adds r1, 0x16
 	ldrb r2, [r4, 0x1E]
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	ldrb r1, [r4, 0x13]
 	lsls r1, 29
 	lsrs r1, 29
@@ -6517,7 +6517,7 @@ _080C09D8:
 	adds r1, r4, 0
 	adds r1, 0x8
 	ldrb r2, [r4, 0x1F]
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	ldrb r1, [r4, 0x13]
 	lsls r1, 29
 	lsrs r1, 29
@@ -6533,7 +6533,7 @@ _080C0A10:
 	adds r1, r4, 0
 	adds r1, 0x16
 	ldrb r2, [r4, 0x1E]
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	ldrb r1, [r4, 0x13]
 	movs r0, 0x60
 	ands r0, r1
@@ -6556,7 +6556,7 @@ _080C0A40:
 	adds r1, r4, 0
 	adds r1, 0x16
 	ldrb r2, [r4, 0x1E]
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	ldr r0, _080C0A6C @ =gStringVar2
 	ldrh r1, [r4, 0x4]
 	bl sub_80EB3FC
@@ -6578,7 +6578,7 @@ _080C0A74:
 	adds r1, r4, 0
 	adds r1, 0x16
 	ldrb r2, [r4, 0x1E]
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	ldr r0, _080C0AA0 @ =gStringVar2
 	ldrh r1, [r4, 0x4]
 	bl sub_80EB3FC
@@ -6600,7 +6600,7 @@ _080C0AA8:
 	adds r1, r4, 0
 	adds r1, 0x16
 	ldrb r2, [r4, 0x1E]
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	ldrb r1, [r4, 0x13]
 	lsls r1, 29
 	lsrs r1, 29
@@ -6658,7 +6658,7 @@ _080C0B34:
 	adds r1, r4, 0
 	adds r1, 0x16
 	ldrb r2, [r4, 0x1E]
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	ldr r0, _080C0B5C @ =gStringVar2
 	ldrh r2, [r4, 0x2]
 	movs r1, 0xB
@@ -6701,8 +6701,8 @@ _080C0B94: .4byte gUnknown_020387E8
 _080C0B98: .4byte gUnknown_083D1524
 	thumb_func_end DoTVShowBravoTrainerPokemonProfile
 
-	thumb_func_start sub_80C0B9C
-sub_80C0B9C: @ 80C0B9C
+	thumb_func_start DoTVShowBravoTrainerBattleTowerProfile
+DoTVShowBravoTrainerBattleTowerProfile: @ 80C0B9C
 	push {r4,r5,lr}
 	ldr r0, _080C0BC8 @ =gUnknown_0202E8CC
 	ldrh r1, [r0]
@@ -6753,7 +6753,7 @@ _080C0C18:
 	ldr r0, _080C0C40 @ =gStringVar1
 	adds r1, r4, 0x2
 	ldrb r2, [r4, 0x1D]
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	ldr r0, _080C0C44 @ =gStringVar2
 	ldrh r2, [r4, 0xA]
 	movs r1, 0xB
@@ -6808,7 +6808,7 @@ _080C0C8C:
 	adds r1, r4, 0
 	adds r1, 0xC
 	ldrb r2, [r4, 0x1D]
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	ldrh r1, [r4, 0x16]
 	adds r1, 0x1
 	movs r0, 0x1
@@ -6825,7 +6825,7 @@ _080C0CB0:
 	adds r1, r4, 0
 	adds r1, 0xC
 	ldrb r2, [r4, 0x1D]
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	ldr r0, _080C0CD4 @ =gStringVar2
 	ldrh r2, [r4, 0x14]
 	movs r1, 0xB
@@ -6843,7 +6843,7 @@ _080C0CDC:
 	adds r1, r4, 0
 	adds r1, 0xC
 	ldrb r2, [r4, 0x1D]
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	ldr r0, _080C0D0C @ =gStringVar2
 	ldrh r2, [r4, 0x14]
 	movs r1, 0xB
@@ -6894,7 +6894,7 @@ _080C0D42:
 	adds r1, r4, 0x2
 _080C0D46:
 	ldrb r2, [r4, 0x1D]
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	ldr r1, _080C0D58 @ =gUnknown_020387E8
 	movs r0, 0xB
 	strb r0, [r1]
@@ -6930,12 +6930,12 @@ _080C0D88:
 	ldr r0, _080C0DB4 @ =gStringVar2
 	adds r1, r4, 0x2
 	ldrb r2, [r4, 0x1D]
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	ldr r0, _080C0DB8 @ =gStringVar3
 	adds r1, r4, 0
 	adds r1, 0xC
 	ldrb r2, [r4, 0x1D]
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	ldr r1, _080C0DBC @ =gUnknown_020387E8
 	movs r0, 0xE
 	strb r0, [r1]
@@ -6949,7 +6949,7 @@ _080C0DC0:
 	ldr r0, _080C0DF0 @ =gStringVar1
 	adds r1, r4, 0x2
 	ldrb r2, [r4, 0x1D]
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	ldr r0, _080C0DF4 @ =gStringVar2
 	ldrh r2, [r4, 0xA]
 	movs r1, 0xB
@@ -6972,7 +6972,7 @@ _080C0DF0: .4byte gStringVar1
 _080C0DF4: .4byte gStringVar2
 _080C0DF8: .4byte gSpeciesNames
 _080C0DFC: .4byte gUnknown_083D1548
-	thumb_func_end sub_80C0B9C
+	thumb_func_end DoTVShowBravoTrainerBattleTowerProfile
 
 	thumb_func_start DoTVShowTodaysSmartShopper
 DoTVShowTodaysSmartShopper: @ 80C0E00
@@ -7025,7 +7025,7 @@ _080C0E74:
 	adds r1, r5, 0
 	adds r1, 0x13
 	ldrb r2, [r5, 0x3]
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	ldr r0, _080C0E9C @ =gStringVar2
 	ldrb r1, [r5, 0x12]
 	movs r2, 0
@@ -7053,10 +7053,10 @@ _080C0EB0:
 	adds r1, r5, 0
 	adds r1, 0x13
 	ldrb r2, [r5, 0x3]
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	ldr r4, _080C0EF0 @ =gStringVar2
 	ldrh r0, [r5, 0x6]
-	bl itemid_get_item
+	bl ItemId_GetItem
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl StringCopy
@@ -7113,7 +7113,7 @@ _080C0F30: .4byte gUnknown_020387E8
 _080C0F34:
 	ldr r4, _080C0F5C @ =gStringVar2
 	ldrh r0, [r5, 0x8]
-	bl itemid_get_item
+	bl ItemId_GetItem
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl StringCopy
@@ -7133,7 +7133,7 @@ _080C0F60: .4byte gUnknown_020387E8
 _080C0F64:
 	ldr r4, _080C0F8C @ =gStringVar2
 	ldrh r0, [r5, 0xA]
-	bl itemid_get_item
+	bl ItemId_GetItem
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl StringCopy
@@ -7180,10 +7180,10 @@ _080C0FC0:
 	adds r1, r5, 0
 	adds r1, 0x13
 	ldrb r2, [r5, 0x3]
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	ldr r4, _080C0FF0 @ =gStringVar2
 	ldrh r0, [r5, 0x6]
-	bl itemid_get_item
+	bl ItemId_GetItem
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl StringCopy
@@ -7211,7 +7211,7 @@ _080C1004:
 	adds r1, r5, 0
 	adds r1, 0x13
 	ldrb r2, [r5, 0x3]
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	bl TVShowDone
 _080C1014:
 	ldr r0, _080C102C @ =gUnknown_083D14F0
@@ -7285,7 +7285,7 @@ _080C10C0:
 	adds r1, r6, 0
 	adds r1, 0xF
 	ldrb r2, [r6, 0x1E]
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	ldr r0, _080C10F8 @ =gStringVar2
 	ldrh r2, [r6, 0x2]
 	movs r1, 0xB
@@ -7296,7 +7296,7 @@ _080C10C0:
 	ldr r0, _080C1100 @ =gStringVar3
 	adds r1, r6, 0x4
 	ldrb r2, [r6, 0x1F]
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	ldr r4, _080C1104 @ =gUnknown_020387E8
 	adds r0, r6, 0
 	bl sub_80BF7E8
@@ -7335,7 +7335,7 @@ _080C112A:
 	adds r1, r6, 0
 	adds r1, 0xF
 	ldrb r2, [r6, 0x1E]
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	ldrb r0, [r6, 0x1A]
 	cmp r0, 0
 	bne _080C114C
@@ -7379,7 +7379,7 @@ _080C1170:
 	ldr r4, _080C11C0 @ =gStringVar1
 	ldrb r2, [r6, 0x1F]
 	adds r1, r4, 0
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	str r5, [sp]
 	str r6, [sp, 0x4]
 	movs r0, 0
@@ -7390,11 +7390,11 @@ _080C1170:
 	ldr r0, _080C11C4 @ =gStringVar2
 	ldrb r2, [r6, 0x1F]
 	adds r1, r4, 0
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	adds r1, r6, 0x4
 	ldrb r2, [r6, 0x1F]
 	adds r0, r4, 0
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	ldr r1, _080C11C8 @ =gUnknown_020387E8
 	movs r0, 0xC
 	strb r0, [r1]
@@ -7417,7 +7417,7 @@ _080C11CC:
 	ldr r4, _080C121C @ =gStringVar1
 	ldrb r2, [r6, 0x1F]
 	adds r1, r4, 0
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	str r5, [sp]
 	str r6, [sp, 0x4]
 	movs r0, 0
@@ -7428,12 +7428,12 @@ _080C11CC:
 	ldr r0, _080C1220 @ =gStringVar2
 	ldrb r2, [r6, 0x1E]
 	adds r1, r4, 0
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	adds r1, r6, 0
 	adds r1, 0xF
 	ldrb r2, [r6, 0x1E]
 	adds r0, r4, 0
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	ldr r1, _080C1224 @ =gUnknown_020387E8
 	movs r0, 0xE
 	strb r0, [r1]
@@ -7456,7 +7456,7 @@ _080C1228:
 	ldr r4, _080C1274 @ =gStringVar1
 	ldrb r2, [r6, 0x1E]
 	adds r1, r4, 0
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	str r5, [sp]
 	str r6, [sp, 0x4]
 	movs r0, 0
@@ -7467,12 +7467,12 @@ _080C1228:
 	ldr r0, _080C1278 @ =gStringVar2
 	ldrb r2, [r6, 0x1F]
 	adds r1, r4, 0
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	adds r1, r6, 0
 	adds r1, 0xF
 	ldrb r2, [r6, 0x1E]
 	adds r0, r4, 0
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	b _080C1354
 	.align 2, 0
 _080C1270: .4byte gStringVar3
@@ -7491,7 +7491,7 @@ _080C127C:
 	ldr r4, _080C12C8 @ =gStringVar2
 	ldrb r2, [r6, 0x1F]
 	adds r1, r4, 0
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	ldrh r1, [r6, 0x2]
 	movs r0, 0xB
 	muls r1, r0
@@ -7527,7 +7527,7 @@ _080C12D4:
 	ldr r0, _080C1308 @ =gStringVar3
 	ldr r1, _080C130C @ =gStringVar1
 	ldrb r2, [r6, 0x1F]
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	ldrh r0, [r6, 0x2]
 	str r0, [sp]
 	str r6, [sp, 0x4]
@@ -7557,7 +7557,7 @@ _080C1314:
 	ldr r4, _080C1360 @ =gStringVar2
 	ldrb r2, [r6, 0x1F]
 	adds r1, r4, 0
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	ldrh r0, [r6, 0x1C]
 	str r0, [sp]
 	str r6, [sp, 0x4]
@@ -7590,12 +7590,12 @@ _080C1370:
 	ldr r0, _080C13A0 @ =gStringVar1
 	adds r1, r6, 0x4
 	ldrb r2, [r6, 0x1F]
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	ldr r0, _080C13A4 @ =gStringVar2
 	adds r1, r6, 0
 	adds r1, 0xF
 	ldrb r2, [r6, 0x1E]
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	bl TVShowDone
 _080C138A:
 	ldr r0, _080C13A8 @ =gUnknown_083D1584
@@ -7663,7 +7663,7 @@ _080C141C:
 	adds r1, r5, 0
 	adds r1, 0x13
 	ldrb r2, [r5, 0x2]
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	ldr r0, _080C1454 @ =gStringVar2
 	ldrh r2, [r5, 0x10]
 	movs r1, 0xB
@@ -7674,7 +7674,7 @@ _080C141C:
 	ldr r0, _080C145C @ =gStringVar3
 	adds r1, r5, 0x4
 	ldrb r2, [r5, 0x3]
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	ldrb r0, [r5, 0xF]
 	cmp r0, 0x1
 	bne _080C1464
@@ -7702,7 +7702,7 @@ _080C1470:
 _080C1476:
 	ldr r4, _080C149C @ =gStringVar2
 	ldrb r0, [r5, 0xF]
-	bl itemid_get_item
+	bl ItemId_GetItem
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl StringCopy
@@ -7731,7 +7731,7 @@ _080C14B0:
 	adds r1, r5, 0
 	adds r1, 0x13
 	ldrb r2, [r5, 0x2]
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	ldr r0, _080C14DC @ =gStringVar2
 	ldrh r2, [r5, 0x10]
 	movs r1, 0xB
@@ -7742,7 +7742,7 @@ _080C14B0:
 	ldr r0, _080C14E4 @ =gStringVar3
 	adds r1, r5, 0x4
 	ldrb r2, [r5, 0x3]
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	b _080C150A
 	.align 2, 0
 _080C14D8: .4byte gStringVar1
@@ -7758,7 +7758,7 @@ _080C14EE:
 	adds r1, r5, 0
 	adds r1, 0x13
 	ldrb r2, [r5, 0x2]
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	ldr r0, _080C1518 @ =gStringVar2
 	ldrh r2, [r5, 0x10]
 	movs r1, 0xB
@@ -7781,7 +7781,7 @@ _080C1524:
 	adds r1, r5, 0
 	adds r1, 0x13
 	ldrb r2, [r5, 0x2]
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	ldr r0, _080C1568 @ =gStringVar2
 	ldrh r2, [r5, 0x10]
 	movs r1, 0xB
@@ -7792,7 +7792,7 @@ _080C1524:
 	ldr r0, _080C1570 @ =gStringVar3
 	adds r1, r5, 0x4
 	ldrb r2, [r5, 0x3]
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	ldr r4, _080C1574 @ =gUnknown_020387E8
 	bl Random
 	ldrb r2, [r4]
@@ -7821,7 +7821,7 @@ _080C1578:
 	ldr r0, _080C15A4 @ =gStringVar2
 	adds r1, r5, 0x4
 	ldrb r2, [r5, 0x3]
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	ldrh r1, [r5, 0x10]
 	movs r0, 0x2
 	bl sub_80BF638
@@ -7841,7 +7841,7 @@ _080C15A8:
 	ldr r0, _080C15D0 @ =gStringVar2
 	adds r1, r5, 0x4
 	ldrb r2, [r5, 0x3]
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 _080C15C2:
 	ldr r0, _080C15D4 @ =gUnknown_020387E8
 	strb r4, [r0]
@@ -7910,7 +7910,7 @@ _080C1650:
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0x2]
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	ldr r0, _080C1678 @ =gStringVar2
 	ldrh r2, [r4, 0xC]
 	movs r1, 0xB
@@ -7932,7 +7932,7 @@ _080C1684:
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0x2]
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	ldr r0, _080C16BC @ =gStringVar2
 	ldrb r1, [r4, 0x12]
 	movs r2, 0
@@ -7969,7 +7969,7 @@ _080C16D8:
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0x2]
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	ldrb r1, [r4, 0x10]
 	movs r0, 0x1
 	bl sub_80BF088
@@ -8000,7 +8000,7 @@ _080C171C:
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0x2]
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	ldr r1, _080C1734 @ =gUnknown_020387E8
 	movs r0, 0x6
 	strb r0, [r1]
@@ -8113,7 +8113,7 @@ _080C1864:
 	adds r1, r5, 0
 	adds r1, 0x10
 	ldrb r2, [r5, 0x18]
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	ldr r0, _080C188C @ =gStringVar2
 	ldrh r2, [r5, 0x2]
 	movs r1, 0xB
@@ -8325,7 +8325,7 @@ _080C1A84:
 	adds r1, r5, 0
 	adds r1, 0x10
 	ldrb r2, [r5, 0x18]
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	adds r0, r5, 0
 	bl sub_80BF79C
 	ldr r1, _080C1AA4 @ =gUnknown_020387E8
@@ -8418,7 +8418,7 @@ _080C1B46:
 	ldr r0, _080C1B78 @ =gStringVar1
 	adds r1, r4, 0x5
 	ldrb r2, [r4, 0xD]
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	ldr r0, _080C1B7C @ =gStringVar2
 	ldrh r2, [r4, 0x2]
 	movs r1, 0xB
@@ -8430,7 +8430,7 @@ _080C1B46:
 	adds r1, r4, 0
 	adds r1, 0x10
 	ldrb r2, [r4, 0xE]
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	ldrb r0, [r4, 0x4]
 	lsrs r0, 4
 	adds r0, 0x1
@@ -8445,7 +8445,7 @@ _080C1B88:
 	ldr r0, _080C1BB0 @ =gStringVar1
 	adds r1, r4, 0x5
 	ldrb r2, [r4, 0xD]
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	ldr r0, _080C1BB4 @ =gStringVar2
 	ldrh r2, [r4, 0x2]
 	movs r1, 0xB
@@ -8468,7 +8468,7 @@ _080C1BC0:
 	ldr r0, _080C1BE8 @ =gStringVar1
 	adds r1, r4, 0x5
 	ldrb r2, [r4, 0xD]
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	ldr r0, _080C1BEC @ =gStringVar3
 	ldrh r1, [r4, 0x1E]
 	bl sub_80EB3FC
@@ -8789,7 +8789,7 @@ _080C1E84:
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0x6]
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	ldr r0, _080C1EB4 @ =gStringVar2
 	ldrh r2, [r4, 0x4]
 	movs r1, 0xB
@@ -8811,7 +8811,7 @@ _080C1EBC:
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0x6]
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	ldr r0, _080C1EFC @ =gStringVar2
 	ldrh r2, [r4, 0x4]
 	movs r1, 0xB
@@ -8875,7 +8875,7 @@ _080C1F46:
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0xB]
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	ldrh r1, [r4, 0x6]
 	movs r0, 0x1
 	bl sub_80BF088
@@ -8906,7 +8906,7 @@ _080C1F8C:
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0xB]
-	bl sub_80C08FC
+	bl TVShowConvertInternationalString
 	ldr r0, _080C1FCC @ =gStringVar2
 	ldrb r1, [r4, 0xA]
 	movs r2, 0

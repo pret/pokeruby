@@ -1605,7 +1605,7 @@ _080C6912:
 	bne _080C692C
 	movs r2, 0
 	ldrsh r0, [r4, r2]
-	bl sub_80C696C
+	bl DoBalloonSoundEffect
 _080C692C:
 	movs r3, 0x2
 	ldrsh r0, [r4, r3]
@@ -1639,8 +1639,8 @@ _080C6964:
 	bx r0
 	thumb_func_end sub_80C68EC
 
-	thumb_func_start sub_80C696C
-sub_80C696C: @ 80C696C
+	thumb_func_start DoBalloonSoundEffect
+DoBalloonSoundEffect: @ 80C696C
 	push {lr}
 	lsls r0, 16
 	asrs r1, r0, 16
@@ -1682,7 +1682,7 @@ _080C69B0:
 _080C69B6:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80C696C
+	thumb_func_end DoBalloonSoundEffect
 
 	thumb_func_start FldEff_Nop47
 FldEff_Nop47: @ 80C69BC
@@ -1814,8 +1814,8 @@ _080C6AA4: .4byte sub_80C6A14
 _080C6AA8: .4byte gTasks
 	thumb_func_end sub_80C6A54
 
-	thumb_func_start sub_80C6AAC
-sub_80C6AAC: @ 80C6AAC
+	thumb_func_start Task_DecorationSoundEffect
+Task_DecorationSoundEffect: @ 80C6AAC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -1954,10 +1954,10 @@ _080C6C2A:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80C6AAC
+	thumb_func_end Task_DecorationSoundEffect
 
-	thumb_func_start sub_80C6C30
-sub_80C6C30: @ 80C6C30
+	thumb_func_start DoDecorationSoundEffect
+DoDecorationSoundEffect: @ 80C6C30
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 16
@@ -1979,12 +1979,12 @@ sub_80C6C30: @ 80C6C30
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080C6C5C: .4byte sub_80C6AAC
+_080C6C5C: .4byte Task_DecorationSoundEffect
 _080C6C60: .4byte gTasks
-	thumb_func_end sub_80C6C30
+	thumb_func_end DoDecorationSoundEffect
 
-	thumb_func_start sub_80C6C64
-sub_80C6C64: @ 80C6C64
+	thumb_func_start SpriteCB_YellowCave4Sparkle
+SpriteCB_YellowCave4Sparkle: @ 80C6C64
 	push {r4,lr}
 	adds r4, r0, 0
 	ldrh r0, [r4, 0x2E]
@@ -2007,10 +2007,10 @@ _080C6C8A:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80C6C64
+	thumb_func_end SpriteCB_YellowCave4Sparkle
 
-	thumb_func_start sub_80C6C90
-sub_80C6C90: @ 80C6C90
+	thumb_func_start DoYellowCave4Sparkle
+DoYellowCave4Sparkle: @ 80C6C90
 	push {r4,lr}
 	sub sp, 0x4
 	ldr r3, _080C6D28 @ =gMapObjects
@@ -2090,8 +2090,8 @@ _080C6D28: .4byte gMapObjects
 _080C6D2C: .4byte gPlayerAvatar
 _080C6D30: .4byte gFieldEffectObjectTemplatePointers
 _080C6D34: .4byte gSprites
-_080C6D38: .4byte sub_80C6C64
-	thumb_func_end sub_80C6C90
+_080C6D38: .4byte SpriteCB_YellowCave4Sparkle
+	thumb_func_end DoYellowCave4Sparkle
 
 	thumb_func_start FldEff_SandPillar
 FldEff_SandPillar: @ 80C6D3C
@@ -2234,8 +2234,8 @@ _080C6E5C: .4byte gSprites
 _080C6E60: .4byte gPlayerAvatar
 	thumb_func_end FldEff_SandPillar
 
-	thumb_func_start door_restore_tilemap
-door_restore_tilemap: @ 80C6E64
+	thumb_func_start SpriteCB_SandPillar_0
+SpriteCB_SandPillar_0: @ 80C6E64
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	movs r0, 0x83
@@ -2288,11 +2288,11 @@ _080C6EAA:
 	.align 2, 0
 _080C6ED8: .4byte gUnknown_0202FF84
 _080C6EDC: .4byte 0x0000020a
-_080C6EE0: .4byte sub_80C6EE4
-	thumb_func_end door_restore_tilemap
+_080C6EE0: .4byte SpriteCB_SandPillar_1
+	thumb_func_end SpriteCB_SandPillar_0
 
-	thumb_func_start sub_80C6EE4
-sub_80C6EE4: @ 80C6EE4
+	thumb_func_start SpriteCB_SandPillar_1
+SpriteCB_SandPillar_1: @ 80C6EE4
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	ldrh r1, [r5, 0x2E]
@@ -2323,21 +2323,21 @@ _080C6F14:
 	.align 2, 0
 _080C6F1C: .4byte gUnknown_0202FF84
 _080C6F20: .4byte 0x00000e8c
-_080C6F24: .4byte sub_80C6F28
-	thumb_func_end sub_80C6EE4
+_080C6F24: .4byte SpriteCB_SandPillar_2
+	thumb_func_end SpriteCB_SandPillar_1
 
-	thumb_func_start sub_80C6F28
-sub_80C6F28: @ 80C6F28
+	thumb_func_start SpriteCB_SandPillar_2
+SpriteCB_SandPillar_2: @ 80C6F28
 	push {lr}
 	movs r1, 0x34
 	bl FieldEffectStop
 	bl EnableBothScriptContexts
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80C6F28
+	thumb_func_end SpriteCB_SandPillar_2
 
-	thumb_func_start sub_80C6F38
-sub_80C6F38: @ 80C6F38
+	thumb_func_start GetShieldToyTVDecorationInfo
+GetShieldToyTVDecorationInfo: @ 80C6F38
 	push {r4,lr}
 	sub sp, 0x4
 	mov r4, sp
@@ -2431,10 +2431,10 @@ _080C6FFA:
 	bx r0
 	.align 2, 0
 _080C7004: .4byte gScriptResult
-	thumb_func_end sub_80C6F38
+	thumb_func_end GetShieldToyTVDecorationInfo
 
-	thumb_func_start task50_overworld_posion_effect
-task50_overworld_posion_effect: @ 80C7008
+	thumb_func_start Task_FieldPoisonEffect
+Task_FieldPoisonEffect: @ 80C7008
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
@@ -2494,10 +2494,10 @@ _080C706C:
 	bx r0
 	.align 2, 0
 _080C7070: .4byte REG_MOSAIC
-	thumb_func_end task50_overworld_posion_effect
+	thumb_func_end Task_FieldPoisonEffect
 
-	thumb_func_start overworld_posion_effect
-overworld_posion_effect: @ 80C7074
+	thumb_func_start DoFieldPoisonEffect
+DoFieldPoisonEffect: @ 80C7074
 	push {lr}
 	movs r0, 0x4F
 	bl PlaySE
@@ -2507,11 +2507,11 @@ overworld_posion_effect: @ 80C7074
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080C7088: .4byte task50_overworld_posion_effect
-	thumb_func_end overworld_posion_effect
+_080C7088: .4byte Task_FieldPoisonEffect
+	thumb_func_end DoFieldPoisonEffect
 
-	thumb_func_start c3_80A0DD8_is_running
-c3_80A0DD8_is_running: @ 80C708C
+	thumb_func_start FieldPoisonEffectIsRunning
+FieldPoisonEffectIsRunning: @ 80C708C
 	push {lr}
 	ldr r0, _080C709C @ =task50_overworld_posion_effect
 	bl FuncIsActiveTask
@@ -2520,11 +2520,11 @@ c3_80A0DD8_is_running: @ 80C708C
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080C709C: .4byte task50_overworld_posion_effect
-	thumb_func_end c3_80A0DD8_is_running
+_080C709C: .4byte Task_FieldPoisonEffect
+	thumb_func_end FieldPoisonEffectIsRunning
 
-	thumb_func_start sub_80C70A0
-sub_80C70A0: @ 80C70A0
+	thumb_func_start Task_WateringBerryTreeAnim_0
+Task_WateringBerryTreeAnim_0: @ 80C70A0
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080C70B4 @ =gTasks
@@ -2537,11 +2537,11 @@ sub_80C70A0: @ 80C70A0
 	bx lr
 	.align 2, 0
 _080C70B4: .4byte gTasks
-_080C70B8: .4byte sub_80C70BC
-	thumb_func_end sub_80C70A0
+_080C70B8: .4byte Task_WateringBerryTreeAnim_1
+	thumb_func_end Task_WateringBerryTreeAnim_0
 
-	thumb_func_start sub_80C70BC
-sub_80C70BC: @ 80C70BC
+	thumb_func_start Task_WateringBerryTreeAnim_1
+Task_WateringBerryTreeAnim_1: @ 80C70BC
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -2591,11 +2591,11 @@ _080C711A:
 _080C7120: .4byte gPlayerAvatar
 _080C7124: .4byte gMapObjects
 _080C7128: .4byte gTasks
-_080C712C: .4byte sub_80C7130
-	thumb_func_end sub_80C70BC
+_080C712C: .4byte Task_WateringBerryTreeAnim_2
+	thumb_func_end Task_WateringBerryTreeAnim_1
 
-	thumb_func_start sub_80C7130
-sub_80C7130: @ 80C7130
+	thumb_func_start Task_WateringBerryTreeAnim_2
+Task_WateringBerryTreeAnim_2: @ 80C7130
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -2645,11 +2645,11 @@ _080C7194:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080C719C: .4byte sub_80C71A0
-	thumb_func_end sub_80C7130
+_080C719C: .4byte Task_WateringBerryTreeAnim_3
+	thumb_func_end Task_WateringBerryTreeAnim_2
 
-	thumb_func_start sub_80C71A0
-sub_80C71A0: @ 80C71A0
+	thumb_func_start Task_WateringBerryTreeAnim_3
+Task_WateringBerryTreeAnim_3: @ 80C71A0
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -2664,10 +2664,10 @@ sub_80C71A0: @ 80C71A0
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80C71A0
+	thumb_func_end Task_WateringBerryTreeAnim_3
 
-	thumb_func_start sub_80C71C4
-sub_80C71C4: @ 80C71C4
+	thumb_func_start DoWateringBerryTreeAnim
+DoWateringBerryTreeAnim: @ 80C71C4
 	push {lr}
 	ldr r0, _080C71D4 @ =sub_80C70A0
 	movs r1, 0x50
@@ -2675,11 +2675,11 @@ sub_80C71C4: @ 80C71C4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080C71D4: .4byte sub_80C70A0
-	thumb_func_end sub_80C71C4
+_080C71D4: .4byte Task_WateringBerryTreeAnim_0
+	thumb_func_end DoWateringBerryTreeAnim
 
-	thumb_func_start sub_80C71D8
-sub_80C71D8: @ 80C71D8
+	thumb_func_start CreateRecordMixingSprite
+CreateRecordMixingSprite: @ 80C71D8
 	push {r4,r5,lr}
 	ldr r0, _080C722C @ =gUnknown_083D2878
 	bl LoadSpritePalette
@@ -2728,10 +2728,10 @@ _080C723A:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80C71D8
+	thumb_func_end CreateRecordMixingSprite
 
-	thumb_func_start sub_80C7240
-sub_80C7240: @ 80C7240
+	thumb_func_start DestroyRecordMixingSprite
+DestroyRecordMixingSprite: @ 80C7240
 	push {r4-r7,lr}
 	ldr r4, _080C7274 @ =gSprites
 	adds r7, r4, 0
@@ -2761,6 +2761,6 @@ _080C7264:
 	.align 2, 0
 _080C7274: .4byte gSprites
 _080C7278: .4byte gSpriteTemplate_83D2894
-	thumb_func_end sub_80C7240
+	thumb_func_end DestroyRecordMixingSprite
 
 	.align 2, 0 @ Don't pad with nop.

@@ -12171,7 +12171,7 @@ gBadgesTiles:: @ 83B5AB8
 gUnknown_083B5EBC:: @ 83B5EBC
 	.4byte sub_8093864
 	.4byte sub_80938A8
-	.4byte rfu_NI_stopReceivingData
+	.4byte sub_80938CC
 	.4byte sub_8093918
 	.4byte sub_8093938
 	.4byte sub_8093954
@@ -15479,7 +15479,7 @@ gSpriteImageTable_83D2688:: @ 83D2688
 
 	.align 2
 gSpriteTemplate_83D26A0:: @ 83D26A0
-	spr_template 0xFFFF, 4110, gOamData_83D266C, gSpriteAnimTable_83D2684, gSpriteImageTable_83D2688, gDummySpriteAffineAnimTable, door_restore_tilemap
+	spr_template 0xFFFF, 4110, gOamData_83D266C, gSpriteAnimTable_83D2684, gSpriteImageTable_83D2688, gDummySpriteAffineAnimTable, SpriteCB_SandPillar_0
 
 @ This uses one of the secret base palettes, so there is no "09.pal" file.
 	.align 2

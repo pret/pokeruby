@@ -15494,7 +15494,7 @@ _0809C3EA:
 	ldr r1, _0809C460 @ =0x00001282
 	adds r7, r2, r1
 	ldrh r0, [r3]
-	bl itemid_get_item
+	bl ItemId_GetItem
 	adds r1, r0, 0
 	adds r0, r7, 0
 	bl StringCopy
@@ -20083,7 +20083,7 @@ sub_809E7F0: @ 809E7F0
 	ldr r1, _0809E838 @ =sub_809E3FC
 	str r1, [r0]
 	adds r0, r4, 0
-	bl BgFrame_FillTileMap
+	bl sub_80A2078
 _0809E828:
 	pop {r4}
 	pop {r0}
@@ -20169,7 +20169,7 @@ _0809E8CA:
 	ldr r0, _0809E8EC @ =sub_809E3FC
 	str r0, [r1]
 	adds r0, r5, 0
-	bl BgFrame_FillTileMap
+	bl sub_80A2078
 _0809E8DE:
 	pop {r4,r5}
 	pop {r0}
@@ -20344,7 +20344,7 @@ _0809EA26:
 	bl sub_80A0428
 _0809EA34:
 	mov r0, r8
-	bl BgFrame_FillTileMap
+	bl sub_80A2078
 	add sp, 0x8
 	pop {r3-r5}
 	mov r8, r3
@@ -20401,7 +20401,7 @@ _0809EA8C:
 	ldr r1, _0809EAC4 @ =sub_809E3FC
 	str r1, [r0]
 	adds r0, r5, 0
-	bl BgFrame_FillTileMap
+	bl sub_80A2078
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -23067,7 +23067,7 @@ _0809FF6A:
 	adds r0, r4, 0
 	movs r1, 0x1D
 	movs r2, 0xE
-	bl sub_8072B4C
+	bl MenuPrint_RightAligned
 	adds r0, r5, 0
 	movs r1, 0x17
 	movs r2, 0x10
@@ -24590,7 +24590,7 @@ sub_80A0BF4: @ 80A0BF4
 _080A0C2E:
 	ldr r4, _080A0C44 @ =gStringVar1
 	adds r0, r5, 0
-	bl itemid_get_item
+	bl ItemId_GetItem
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl StringCopy
@@ -24611,7 +24611,7 @@ _080A0C5C: .4byte gOtherText_None
 _080A0C60:
 	ldr r1, _080A0C78 @ =gStringVar1
 	adds r0, r5, 0
-	bl itemid_copy_name
+	bl CopyItemName
 _080A0C68:
 	ldr r0, _080A0C7C @ =gUnknown_083C15B4
 	adds r1, r7, 0
@@ -24708,7 +24708,7 @@ _080A0D14:
 	lsrs r1, 24
 	adds r0, r4, 0
 	ldr r2, [sp]
-	bl sub_8072B4C
+	bl MenuPrint_RightAligned
 	ldr r0, _080A0D58 @ =0x06004caa
 	mov r9, r0
 	movs r2, 0
@@ -27228,8 +27228,8 @@ _080A2052:
 _080A2074: .4byte gOtherText_Comma
 	thumb_func_end sub_80A203C
 
-	thumb_func_start BgFrame_FillTileMap
-BgFrame_FillTileMap: @ 80A2078
+	thumb_func_start sub_80A2078
+sub_80A2078: @ 80A2078
 	push {lr}
 	ldr r3, _080A209C @ =gUnknown_03005CF0
 	ldr r2, _080A20A0 @ =gTasks
@@ -27250,7 +27250,7 @@ BgFrame_FillTileMap: @ 80A2078
 _080A209C: .4byte gUnknown_03005CF0
 _080A20A0: .4byte gTasks
 _080A20A4: .4byte sub_80A20A8
-	thumb_func_end BgFrame_FillTileMap
+	thumb_func_end sub_80A2078
 
 	thumb_func_start sub_80A20A8
 sub_80A20A8: @ 80A20A8
@@ -29625,23 +29625,23 @@ _080A32A2:
 	b _080A3464
 _080A32A4:
 	bl sub_80F944C
-	bl InitMenuInUpperLeftCornerPlaySoundWhenAPressed
+	bl LoadScrollIndicatorPalette
 	movs r0, 0
 	movs r1, 0xAC
 	movs r2, 0xC
-	bl sub_80F953C
+	bl CreateVerticalScrollIndicators
 	movs r0, 0x1
 	movs r1, 0xAC
 	movs r2, 0x94
-	bl sub_80F953C
+	bl CreateVerticalScrollIndicators
 	movs r0, 0x2
 	movs r1, 0x1C
 	movs r2, 0x58
-	bl sub_80F953C
+	bl CreateVerticalScrollIndicators
 	movs r0, 0x3
 	movs r1, 0x64
 	movs r2, 0x58
-	bl sub_80F953C
+	bl CreateVerticalScrollIndicators
 	movs r0, 0
 	movs r1, 0x2
 	bl sub_80F9988
@@ -29735,8 +29735,8 @@ _080A338C:
 	adds r1, r0
 	movs r2, 0
 	ldrsh r0, [r1, r2]
-	bl sub_80A490C
-	bl sub_80A736C
+	bl ItemListMenu_InitDescription
+	bl ItemListMenu_InitMenu
 	ldr r1, _080A33E4 @ =gUnknown_0203855B
 	ldrb r0, [r4]
 	adds r0, 0x1
@@ -29758,9 +29758,9 @@ _080A33E8: .4byte gUnknown_0203855C
 _080A33EC: .4byte gMain
 _080A33F0: .4byte 0x0000043c
 _080A33F4:
-	bl sub_80A7B10
+	bl CreateBagSprite
 	movs r0, 0
-	bl sub_80A7C20
+	bl CreateBagPokeballSprite
 	bl sub_80A3740
 	b _080A3464
 _080A3404:
@@ -30169,7 +30169,7 @@ _080A371A:
 	adds r1, r5
 	ldr r0, [r1]
 	ldrb r1, [r1, 0x4]
-	bl sub_80A9684
+	bl ClearItemSlots
 	adds r0, r4, 0x1
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -30350,7 +30350,7 @@ _080A3868:
 	ldrsh r0, [r1, r2]
 	ldr r4, _080A38B0 @ =gUnknown_02038562
 	ldrb r1, [r4]
-	bl sub_80A49AC
+	bl ItemListMenu_ChangeDescription
 	ldrb r0, [r4]
 	adds r0, 0x1
 	strb r0, [r4]
@@ -30385,7 +30385,7 @@ _080A38C0:
 	movs r2, 0
 	ldrsh r0, [r1, r2]
 	ldrb r1, [r4]
-	bl sub_80A49AC
+	bl ItemListMenu_ChangeDescription
 	ldrb r0, [r4]
 	adds r0, 0x1
 	strb r0, [r4]
@@ -30413,7 +30413,7 @@ _080A38F2:
 	bl sub_80A37C0
 	adds r0, r7, 0
 	bl DestroyTask
-	bl sub_80A736C
+	bl ItemListMenu_InitMenu
 	movs r0, 0x2
 	movs r1, 0
 	bl sub_80F979C
@@ -31187,7 +31187,7 @@ sub_80A3E90: @ 80A3E90
 	bl sub_80A763C
 	movs r0, 0
 	bl sub_80A7528
-	bl sub_80A736C
+	bl ItemListMenu_InitMenu
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -31861,7 +31861,7 @@ _080A43A4:
 	lsls r4, 2
 	adds r0, r4, r0
 	ldrh r0, [r0]
-	bl itemid_get_item
+	bl ItemId_GetItem
 	adds r1, r0, 0
 	adds r0, r6, 0
 	movs r2, 0x66
@@ -31963,7 +31963,7 @@ _080A4470:
 	lsls r4, 2
 	adds r0, r4, r0
 	ldrh r0, [r0]
-	bl itemid_get_item
+	bl ItemId_GetItem
 	adds r1, r0, 0
 	adds r0, r7, 0
 	movs r2, 0x60
@@ -32312,7 +32312,7 @@ _080A4730:
 	adds r0, r4, r0
 	ldrh r0, [r0]
 	mov r1, r9
-	bl itemid_copy_name
+	bl CopyItemName
 	mov r1, r8
 	ldr r0, [r1]
 	adds r4, r0
@@ -32509,8 +32509,8 @@ sub_80A48F8: @ 80A48F8
 	bx r0
 	thumb_func_end sub_80A48F8
 
-	thumb_func_start sub_80A490C
-sub_80A490C: @ 80A490C
+	thumb_func_start ItemListMenu_InitDescription
+ItemListMenu_InitDescription: @ 80A490C
 	push {r4,r5,lr}
 	sub sp, 0x4
 	lsls r0, 16
@@ -32558,7 +32558,7 @@ _080A496C: .4byte gUnknown_0840E740
 _080A4970: .4byte gUnknown_03000701
 _080A4974:
 	adds r0, r3, 0
-	bl itemid_get_description
+	bl ItemId_GetDescription
 	movs r1, 0x1
 	str r1, [sp]
 	movs r1, 0x4
@@ -32584,10 +32584,10 @@ _080A49A4:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80A490C
+	thumb_func_end ItemListMenu_InitDescription
 
-	thumb_func_start sub_80A49AC
-sub_80A49AC: @ 80A49AC
+	thumb_func_start ItemListMenu_ChangeDescription
+ItemListMenu_ChangeDescription: @ 80A49AC
 	push {r4,r5,lr}
 	sub sp, 0x64
 	adds r4, r1, 0
@@ -32652,7 +32652,7 @@ _080A4A28:
 	asrs r1, 16
 	mov r0, sp
 	adds r2, r4, 0
-	bl sub_80A99A8
+	bl ItemId_CopyDescription
 	cmp r0, 0
 	beq _080A4A4C
 	lsls r2, r4, 20
@@ -32669,7 +32669,7 @@ _080A4A4C:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80A49AC
+	thumb_func_end ItemListMenu_ChangeDescription
 
 	thumb_func_start sub_80A4A54
 sub_80A4A54: @ 80A4A54
@@ -33254,7 +33254,7 @@ sub_80A4E8C: @ 80A4E8C
 	bl sub_80A3770
 	bl sub_80A7C64
 	adds r0, r6, 0
-	bl sub_80A7C20
+	bl CreateBagPokeballSprite
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -33909,7 +33909,7 @@ sub_80A5414: @ 80A5414
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r5, 0
-	bl rfu_lacks_rfufunc
+	bl sub_80A78A0
 	cmp r0, 0
 	bne _080A5426
 	b _080A5552
@@ -34444,7 +34444,7 @@ sub_80A5888: @ 80A5888
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r5, r4, 0
-	bl rfu_lacks_rfufunc
+	bl sub_80A78A0
 	cmp r0, 0
 	beq _080A5988
 	ldr r2, _080A58B8 @ =gMain
@@ -34807,7 +34807,7 @@ sub_80A5B78: @ 80A5B78
 	lsrs r4, r0, 24
 	ldr r5, _080A5BB0 @ =word_203855E
 	ldrh r0, [r5]
-	bl itemid_get_overworld_function
+	bl ItemId_GetFieldFunc
 	cmp r0, 0
 	beq _080A5BF2
 	movs r0, 0x5
@@ -34817,7 +34817,7 @@ sub_80A5B78: @ 80A5B78
 	cmp r0, 0
 	bne _080A5BB4
 	ldrh r0, [r5]
-	bl itemid_get_type
+	bl ItemId_GetType
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -34843,7 +34843,7 @@ _080A5BB4:
 	beq _080A5BEC
 	ldr r0, _080A5BE8 @ =word_203855E
 	ldrh r0, [r0]
-	bl itemid_get_overworld_function
+	bl ItemId_GetFieldFunc
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl _call_via_r1
@@ -34892,7 +34892,7 @@ sub_80A5C24: @ 80A5C24
 	bl sub_80A7528
 	adds r0, r4, 0
 	bl sub_80A41D4
-	bl sub_80A736C
+	bl ItemListMenu_InitMenu
 	adds r0, r4, 0
 	bl sub_80A37C0
 	pop {r4}
@@ -35044,7 +35044,7 @@ sub_80A5D38: @ 80A5D38
 	bl sub_80A7528
 	adds r0, r4, 0
 	bl sub_80A41D4
-	bl sub_80A736C
+	bl ItemListMenu_InitMenu
 	adds r0, r4, 0
 	bl sub_80A37C0
 	pop {r4}
@@ -35085,7 +35085,7 @@ sub_80A5DA0: @ 80A5DA0
 	lsls r1, 16
 	lsrs r4, r1, 16
 	ldr r1, _080A5DC4 @ =gStringVar1
-	bl itemid_copy_name
+	bl CopyItemName
 	cmp r4, 0x63
 	bls _080A5DCC
 	ldr r0, _080A5DC8 @ =gStringVar2
@@ -35323,7 +35323,7 @@ sub_80A5F80: @ 80A5F80
 	bl sub_80A7528
 	adds r0, r4, 0
 	bl sub_80A41D4
-	bl sub_80A736C
+	bl ItemListMenu_InitMenu
 	adds r0, r4, 0
 	bl sub_80A37C0
 	pop {r4}
@@ -35362,7 +35362,7 @@ _080A5FE2:
 	bl sub_80A7528
 	adds r0, r6, 0
 	bl sub_80A41D4
-	bl sub_80A736C
+	bl ItemListMenu_InitMenu
 	adds r0, r6, 0
 	bl sub_80A37C0
 	pop {r4-r6}
@@ -35380,7 +35380,7 @@ sub_80A6000: @ 80A6000
 	bl sub_80A7528
 	adds r0, r4, 0
 	bl sub_80A41D4
-	bl sub_80A736C
+	bl ItemListMenu_InitMenu
 	adds r0, r4, 0
 	bl sub_80A37C0
 	pop {r4}
@@ -35431,8 +35431,8 @@ _080A6074: .4byte gTasks
 _080A6078: .4byte sub_80A6000
 	thumb_func_end sub_80A6024
 
-	thumb_func_start DisplayCannotDismountBikeMessage
-DisplayCannotDismountBikeMessage: @ 80A607C
+	thumb_func_start DisplayCannotBeHeldMessage
+DisplayCannotBeHeldMessage: @ 80A607C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -35441,7 +35441,7 @@ DisplayCannotDismountBikeMessage: @ 80A607C
 	ldr r0, _080A60B4 @ =word_203855E
 	ldrh r0, [r0]
 	ldr r1, _080A60B8 @ =gStringVar1
-	bl itemid_copy_name
+	bl CopyItemName
 	ldr r5, _080A60BC @ =gStringVar4
 	ldr r1, _080A60C0 @ =gOtherText_CantBeHeld
 	adds r0, r5, 0
@@ -35461,7 +35461,7 @@ _080A60B8: .4byte gStringVar1
 _080A60BC: .4byte gStringVar4
 _080A60C0: .4byte gOtherText_CantBeHeld
 _080A60C4: .4byte sub_80A6024
-	thumb_func_end DisplayCannotDismountBikeMessage
+	thumb_func_end DisplayCannotBeHeldMessage
 
 	thumb_func_start ItemMenu_Give
 ItemMenu_Give: @ 80A60C8
@@ -35492,7 +35492,7 @@ _080A6100: .4byte gOtherText_CantWriteMail
 _080A6104: .4byte sub_80A6024
 _080A6108:
 	ldrh r0, [r5]
-	bl itemid_is_unique
+	bl ItemId_GetImportance
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0
@@ -35534,7 +35534,7 @@ _080A6160: .4byte sub_80A5B00
 _080A6164: .4byte gUnknown_02038561
 _080A6168:
 	adds r0, r6, 0
-	bl DisplayCannotDismountBikeMessage
+	bl DisplayCannotBeHeldMessage
 _080A616E:
 	add sp, 0x4
 	pop {r4-r6}
@@ -35661,7 +35661,7 @@ _080A6254:
 	bl sub_80A73FC
 	ldrh r0, [r4]
 	ldr r1, _080A6288 @ =gStringVar1
-	bl itemid_copy_name
+	bl CopyItemName
 	ldr r4, _080A628C @ =gStringVar4
 	ldr r1, _080A6290 @ =gOtherText_CantBeHeldHere
 	adds r0, r4, 0
@@ -35683,7 +35683,7 @@ _080A6298:
 	cmp r6, 0x5
 	beq _080A62CC
 	ldrh r0, [r4]
-	bl itemid_is_unique
+	bl ItemId_GetImportance
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A62CC
@@ -35704,7 +35704,7 @@ _080A62C4: .4byte gTasks
 _080A62C8: .4byte sub_808A3F8
 _080A62CC:
 	adds r0, r5, 0
-	bl DisplayCannotDismountBikeMessage
+	bl DisplayCannotBeHeldMessage
 _080A62D2:
 	pop {r4-r6}
 	pop {r0}
@@ -35808,9 +35808,9 @@ sub_80A6354: @ 80A6354
 	ldr r4, _080A63D0 @ =word_203855E
 	ldrh r0, [r4]
 	ldr r1, _080A63D4 @ =gStringVar2
-	bl itemid_copy_name
+	bl CopyItemName
 	ldrh r0, [r4]
-	bl itemid_get_market_price
+	bl ItemId_GetPrice
 	lsls r0, 16
 	cmp r0, 0
 	bne _080A63E4
@@ -35870,7 +35870,7 @@ sub_80A640C: @ 80A640C
 	bl sub_80A7528
 	adds r0, r4, 0
 	bl sub_80A41D4
-	bl sub_80A736C
+	bl ItemListMenu_InitMenu
 	adds r0, r4, 0
 	bl sub_80A37C0
 	pop {r4}
@@ -36082,7 +36082,7 @@ sub_80A65AC: @ 80A65AC
 	ldr r0, _080A6604 @ =word_203855E
 	ldrh r0, [r0]
 	ldr r1, _080A6608 @ =gStringVar2
-	bl itemid_copy_name
+	bl CopyItemName
 	ldr r4, _080A660C @ =gStringVar4
 	ldr r1, _080A6610 @ =gOtherText_SoldItem
 	adds r0, r4, 0
@@ -36208,7 +36208,7 @@ _080A66B4:
 	ldr r4, _080A672C @ =gStringVar1
 	ldr r0, _080A6730 @ =word_203855E
 	ldrh r0, [r0]
-	bl itemid_get_market_price
+	bl ItemId_GetPrice
 	lsls r0, 16
 	lsrs r0, 17
 	ldr r2, _080A6734 @ =gTasks
@@ -36275,7 +36275,7 @@ sub_80A6760: @ 80A6760
 	bl sub_80A7528
 	adds r0, r4, 0
 	bl sub_80A41D4
-	bl sub_80A736C
+	bl ItemListMenu_InitMenu
 	adds r0, r4, 0
 	bl sub_80A37C0
 	pop {r4}
@@ -36339,7 +36339,7 @@ BuyMenuDisplayMessage: @ 80A67F4
 	lsls r5, 16
 	lsrs r5, 16
 	adds r0, r4, 0
-	bl itemid_get_market_price
+	bl ItemId_GetPrice
 	lsls r0, 16
 	lsrs r0, 17
 	muls r0, r5
@@ -36349,7 +36349,7 @@ BuyMenuDisplayMessage: @ 80A67F4
 	bl sub_80B7A94
 	ldr r6, _080A6838 @ =gStringVar1
 	adds r0, r4, 0
-	bl itemid_get_market_price
+	bl ItemId_GetPrice
 	lsls r0, 16
 	lsrs r0, 17
 	adds r1, r0, 0
@@ -36401,7 +36401,7 @@ sub_80A6870: @ 80A6870
 	lsls r4, 24
 	lsrs r4, 24
 	ldr r5, _080A68A0 @ =gSaveBlock1 + 0x490
-	bl itemid_get_market_price
+	bl ItemId_GetPrice
 	lsls r0, 16
 	lsrs r0, 17
 	adds r1, r0, 0
@@ -36693,7 +36693,7 @@ sub_80A6A84: @ 80A6A84
 	ldr r0, _080A6AF0 @ =word_203855E
 	ldrh r0, [r0]
 	ldr r1, _080A6AF4 @ =gStringVar1
-	bl itemid_copy_name
+	bl CopyItemName
 	ldr r0, _080A6AF8 @ =gStringVar2
 	mov r2, r8
 	movs r3, 0x2
@@ -36792,7 +36792,7 @@ sub_80A6B64: @ 80A6B64
 	ldr r0, _080A6BA0 @ =word_203855E
 	mov r8, r0
 	ldrh r0, [r0]
-	bl itemid_is_unique
+	bl ItemId_GetImportance
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -36813,7 +36813,7 @@ _080A6BA8:
 	mov r1, r8
 	ldrh r0, [r1]
 	ldrh r1, [r7, 0x2]
-	bl sub_80A9760
+	bl AddPCItem
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -36997,7 +36997,7 @@ sub_80A6D1C: @ 80A6D1C
 	cmp r0, 0
 	beq _080A6D84
 	movs r1, 0x1
-	bl sub_80A92D4
+	bl CheckBagHasItem
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0x1
@@ -37010,7 +37010,7 @@ sub_80A6D1C: @ 80A6D1C
 	ldrh r0, [r4]
 	strh r0, [r1]
 	ldrh r0, [r4]
-	bl itemid_get_overworld_function
+	bl ItemId_GetFieldFunc
 	movs r1, 0x8
 	bl CreateTask
 	lsls r0, 24
@@ -37320,7 +37320,7 @@ sub_80A6FDC: @ 80A6FDC
 	push {lr}
 	ldr r0, _080A6FF8 @ =word_203855E
 	ldrh r0, [r0]
-	bl itemid_get_usage
+	bl ItemId_GetBattleUsage
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A7008
@@ -37458,13 +37458,13 @@ ItemMenu_UseInBattle: @ 80A70F4
 	lsrs r5, r0, 24
 	ldr r4, _080A7120 @ =word_203855E
 	ldrh r0, [r4]
-	bl itemid_get_battle_function
+	bl ItemId_GetBattleFunc
 	cmp r0, 0
 	beq _080A711A
 	movs r0, 0x5
 	bl PlaySE
 	ldrh r0, [r4]
-	bl itemid_get_battle_function
+	bl ItemId_GetBattleFunc
 	adds r1, r0, 0
 	adds r0, r5, 0
 	bl _call_via_r1
@@ -37488,7 +37488,7 @@ sub_80A7124: @ 80A7124
 	bl sub_80A7528
 	adds r0, r4, 0
 	bl sub_80A41D4
-	bl sub_80A736C
+	bl ItemListMenu_InitMenu
 	adds r0, r4, 0
 	bl sub_80A37C0
 	pop {r4}
@@ -37573,16 +37573,16 @@ _080A71B2:
 	bl memcpy
 	adds r0, r5, 0
 	movs r1, 0x14
-	bl sub_80A9684
+	bl ClearItemSlots
 	adds r0, r4, 0
 	movs r1, 0x10
-	bl sub_80A9684
+	bl ClearItemSlots
 	movs r0, 0xD
 	movs r1, 0x1
-	bl sub_80A9424
+	bl AddBagItem
 	movs r0, 0x4
 	movs r1, 0x1
-	bl sub_80A9424
+	bl AddBagItem
 	ldr r1, _080A7228 @ =gUnknown_03000701
 	movs r0, 0x7
 	strb r0, [r1]
@@ -37743,8 +37743,8 @@ _080A735E:
 	bx r0
 	thumb_func_end sub_80A7230
 
-	thumb_func_start sub_80A736C
-sub_80A736C: @ 80A736C
+	thumb_func_start ItemListMenu_InitMenu
+ItemListMenu_InitMenu: @ 80A736C
 	push {lr}
 	sub sp, 0x8
 	ldr r1, _080A73B0 @ =gUnknown_03005D10
@@ -37771,7 +37771,7 @@ sub_80A736C: @ 80A736C
 	str r0, [sp]
 	movs r0, 0x10
 	movs r2, 0xC
-	bl sub_814AC58
+	bl CreateBlendedOutlineCursor
 	bl sub_80A73C0
 	add sp, 0x8
 	pop {r0}
@@ -37781,7 +37781,7 @@ _080A73B0: .4byte gUnknown_03005D10
 _080A73B4: .4byte gUnknown_02038559
 _080A73B8: .4byte 0x0000ffff
 _080A73BC: .4byte 0x00002d9f
-	thumb_func_end sub_80A736C
+	thumb_func_end ItemListMenu_InitMenu
 
 	thumb_func_start sub_80A73C0
 sub_80A73C0: @ 80A73C0
@@ -37892,7 +37892,7 @@ _080A7478:
 	movs r2, 0
 	ldrsh r0, [r1, r2]
 	ldrb r1, [r4, 0x1]
-	bl sub_80A49AC
+	bl ItemListMenu_ChangeDescription
 	b _080A74FC
 	.align 2, 0
 _080A74A0: .4byte gUnknown_03005D10
@@ -38499,8 +38499,8 @@ _080A789C:
 	bx r0
 	thumb_func_end sub_80A7880
 
-	thumb_func_start rfu_lacks_rfufunc
-rfu_lacks_rfufunc: @ 80A78A0
+	thumb_func_start sub_80A78A0
+sub_80A78A0: @ 80A78A0
 	push {lr}
 	ldr r0, _080A78B4 @ =gUnknown_02038550
 	movs r1, 0
@@ -38514,7 +38514,7 @@ _080A78AE:
 	bx r1
 	.align 2, 0
 _080A78B4: .4byte gUnknown_02038550
-	thumb_func_end rfu_lacks_rfufunc
+	thumb_func_end sub_80A78A0
 
 	thumb_func_start sub_80A78B8
 sub_80A78B8: @ 80A78B8
@@ -38866,8 +38866,8 @@ sub_80A7AE4: @ 80A7AE4
 _080A7B0C: .4byte gUnknown_0203855C
 	thumb_func_end sub_80A7AE4
 
-	thumb_func_start sub_80A7B10
-sub_80A7B10: @ 80A7B10
+	thumb_func_start CreateBagSprite
+CreateBagSprite: @ 80A7B10
 	push {lr}
 	ldr r0, _080A7B24 @ =gSpriteTemplate_83C1CE0
 	movs r1, 0x3A
@@ -38878,7 +38878,7 @@ sub_80A7B10: @ 80A7B10
 	bx r0
 	.align 2, 0
 _080A7B24: .4byte gSpriteTemplate_83C1CE0
-	thumb_func_end sub_80A7B10
+	thumb_func_end CreateBagSprite
 
 	thumb_func_start sub_80A7B28
 sub_80A7B28: @ 80A7B28
@@ -39013,8 +39013,8 @@ _080A7C16:
 _080A7C1C: .4byte SpriteCallbackDummy
 	thumb_func_end sub_80A7B6C
 
-	thumb_func_start sub_80A7C20
-sub_80A7C20: @ 80A7C20
+	thumb_func_start CreateBagPokeballSprite
+CreateBagPokeballSprite: @ 80A7C20
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -39043,7 +39043,7 @@ _080A7C54: .4byte gUnknown_083C1D30
 _080A7C58: .4byte gSpriteTemplate_83C1D38
 _080A7C5C: .4byte gUnknown_02038568
 _080A7C60: .4byte gSprites
-	thumb_func_end sub_80A7C20
+	thumb_func_end CreateBagPokeballSprite
 
 	thumb_func_start sub_80A7C64
 sub_80A7C64: @ 80A7C64
@@ -41896,8 +41896,8 @@ _080A921A:
 _080A9220: .4byte gSprites
 	thumb_func_end sub_80A913C
 
-	thumb_func_start itemid_copy_name
-itemid_copy_name: @ 80A9224
+	thumb_func_start CopyItemName
+CopyItemName: @ 80A9224
 	push {r4,lr}
 	adds r4, r1, 0
 	lsls r0, 16
@@ -41916,7 +41916,7 @@ itemid_copy_name: @ 80A9224
 	.align 2, 0
 _080A9248: .4byte gOtherText_Berry2
 _080A924C:
-	bl itemid_get_item
+	bl ItemId_GetItem
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl StringCopy
@@ -41924,10 +41924,10 @@ _080A9258:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end itemid_copy_name
+	thumb_func_end CopyItemName
 
-	thumb_func_start unref_sub_80A9260
-unref_sub_80A9260: @ 80A9260
+	thumb_func_start CountUsedBagPocketSlots
+CountUsedBagPocketSlots: @ 80A9260
 	push {lr}
 	lsls r0, 24
 	movs r2, 0
@@ -41961,7 +41961,7 @@ _080A9292:
 _080A9296:
 	pop {r1}
 	bx r1
-	thumb_func_end unref_sub_80A9260
+	thumb_func_end CountUsedBagPocketSlots
 
 	thumb_func_start IsBagPocketNonEmpty
 IsBagPocketNonEmpty: @ 80A929C
@@ -41999,15 +41999,15 @@ _080A92D0:
 	bx r1
 	thumb_func_end IsBagPocketNonEmpty
 
-	thumb_func_start sub_80A92D4
-sub_80A92D4: @ 80A92D4
+	thumb_func_start CheckBagHasItem
+CheckBagHasItem: @ 80A92D4
 	push {r4-r7,lr}
 	lsls r0, 16
 	lsrs r5, r0, 16
 	lsls r1, 16
 	lsrs r4, r1, 16
 	adds r0, r5, 0
-	bl itemid_get_pocket_number
+	bl ItemId_GetPocket
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A92F0
@@ -42017,7 +42017,7 @@ _080A92EC:
 	b _080A9338
 _080A92F0:
 	adds r0, r5, 0
-	bl itemid_get_pocket_number
+	bl ItemId_GetPocket
 	subs r0, 0x1
 	lsls r0, 24
 	movs r3, 0
@@ -42060,10 +42060,10 @@ _080A9338:
 	bx r1
 	.align 2, 0
 _080A9340: .4byte gBagPockets
-	thumb_func_end sub_80A92D4
+	thumb_func_end CheckBagHasItem
 
-	thumb_func_start sub_80A9344
-sub_80A9344: @ 80A9344
+	thumb_func_start CheckBagHasSpace
+CheckBagHasSpace: @ 80A9344
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -42074,12 +42074,12 @@ sub_80A9344: @ 80A9344
 	lsls r1, 16
 	lsrs r4, r1, 16
 	adds r0, r6, 0
-	bl itemid_get_pocket_number
+	bl ItemId_GetPocket
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A9408
 	adds r0, r6, 0
-	bl itemid_get_pocket_number
+	bl ItemId_GetPocket
 	subs r0, 0x1
 	lsls r0, 24
 	lsrs r1, r0, 24
@@ -42183,10 +42183,10 @@ _080A9416:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80A9344
+	thumb_func_end CheckBagHasSpace
 
-	thumb_func_start sub_80A9424
-sub_80A9424: @ 80A9424
+	thumb_func_start AddBagItem
+AddBagItem: @ 80A9424
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -42197,12 +42197,12 @@ sub_80A9424: @ 80A9424
 	mov r8, r0
 	lsls r1, 16
 	lsrs r4, r1, 16
-	bl itemid_get_pocket_number
+	bl ItemId_GetPocket
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A9510
 	mov r0, r8
-	bl itemid_get_pocket_number
+	bl ItemId_GetPocket
 	subs r0, 0x1
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -42331,10 +42331,10 @@ _080A9528:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80A9424
+	thumb_func_end AddBagItem
 
-	thumb_func_start sub_80A9538
-sub_80A9538: @ 80A9538
+	thumb_func_start RemoveBagItem
+RemoveBagItem: @ 80A9538
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -42344,14 +42344,14 @@ sub_80A9538: @ 80A9538
 	lsrs r4, r1, 16
 	movs r7, 0
 	adds r0, r6, 0
-	bl itemid_get_pocket_number
+	bl ItemId_GetPocket
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A959E
 	cmp r6, 0
 	beq _080A959E
 	adds r0, r6, 0
-	bl itemid_get_pocket_number
+	bl ItemId_GetPocket
 	subs r0, 0x1
 	lsls r0, 24
 	lsrs r0, 24
@@ -42501,22 +42501,22 @@ _080A9664:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80A9538
+	thumb_func_end RemoveBagItem
 
-	thumb_func_start sub_80A9670
-sub_80A9670: @ 80A9670
+	thumb_func_start GetPocketByItemId
+GetPocketByItemId: @ 80A9670
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
-	bl itemid_get_pocket_number
+	bl ItemId_GetPocket
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80A9670
+	thumb_func_end GetPocketByItemId
 
-	thumb_func_start sub_80A9684
-sub_80A9684: @ 80A9684
+	thumb_func_start ClearItemSlots
+ClearItemSlots: @ 80A9684
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r1, 24
@@ -42539,10 +42539,10 @@ _080A96A6:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80A9684
+	thumb_func_end ClearItemSlots
 
-	thumb_func_start sub_80A96AC
-sub_80A96AC: @ 80A96AC
+	thumb_func_start FindFreePCItemSlot
+FindFreePCItemSlot: @ 80A96AC
 	push {lr}
 	movs r1, 0
 	ldr r3, _080A96CC @ =gSaveBlock1
@@ -42573,10 +42573,10 @@ _080A96D0:
 _080A96E0:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80A96AC
+	thumb_func_end FindFreePCItemSlot
 
-	thumb_func_start sub_80A96E4
-sub_80A96E4: @ 80A96E4
+	thumb_func_start CountUsedPCItemSlots
+CountUsedPCItemSlots: @ 80A96E4
 	push {r4,lr}
 	movs r2, 0
 	movs r1, 0
@@ -42605,10 +42605,10 @@ _080A9702:
 	bx r1
 	.align 2, 0
 _080A9714: .4byte gSaveBlock1
-	thumb_func_end sub_80A96E4
+	thumb_func_end CountUsedPCItemSlots
 
-	thumb_func_start sub_80A9718
-sub_80A9718: @ 80A9718
+	thumb_func_start CheckPCHasItem
+CheckPCHasItem: @ 80A9718
 	push {r4-r7,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -42646,10 +42646,10 @@ _080A9758:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80A9718
+	thumb_func_end CheckPCHasItem
 
-	thumb_func_start sub_80A9760
-sub_80A9760: @ 80A9760
+	thumb_func_start AddPCItem
+AddPCItem: @ 80A9760
 	push {r4-r7,lr}
 	sub sp, 0xC8
 	lsls r0, 16
@@ -42690,7 +42690,7 @@ _080A97A0:
 	bls _080A977C
 	cmp r4, 0
 	beq _080A97DC
-	bl sub_80A96AC
+	bl FindFreePCItemSlot
 	lsls r0, 24
 	asrs r1, r0, 24
 	movs r0, 0x1
@@ -42724,10 +42724,10 @@ _080A97E8:
 	bx r1
 	.align 2, 0
 _080A97F0: .4byte gSaveBlock1 + 0x498
-	thumb_func_end sub_80A9760
+	thumb_func_end AddPCItem
 
-	thumb_func_start sub_80A97F4
-sub_80A97F4: @ 80A97F4
+	thumb_func_start RemovePCItem
+RemovePCItem: @ 80A97F4
 	push {lr}
 	lsls r0, 24
 	lsls r1, 16
@@ -42748,17 +42748,17 @@ sub_80A97F4: @ 80A97F4
 	lsls r2, 3
 	adds r0, r3, r2
 	strh r1, [r0]
-	bl sub_80A982C
+	bl CompactPCItems
 _080A9820:
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080A9824: .4byte gSaveBlock1
 _080A9828: .4byte 0x0000049a
-	thumb_func_end sub_80A97F4
+	thumb_func_end RemovePCItem
 
-	thumb_func_start sub_80A982C
-sub_80A982C: @ 80A982C
+	thumb_func_start CompactPCItems
+CompactPCItems: @ 80A982C
 	push {r4-r7,lr}
 	movs r2, 0
 	ldr r0, _080A987C @ =gSaveBlock1
@@ -42805,10 +42805,10 @@ _080A986C:
 	.align 2, 0
 _080A987C: .4byte gSaveBlock1
 _080A9880: .4byte gSaveBlock1 + 0x498
-	thumb_func_end sub_80A982C
+	thumb_func_end CompactPCItems
 
-	thumb_func_start sub_80A9884
-sub_80A9884: @ 80A9884
+	thumb_func_start SwapRegisteredBike
+SwapRegisteredBike: @ 80A9884
 	push {lr}
 	ldr r0, _080A98A0 @ =gSaveBlock1
 	ldr r1, _080A98A4 @ =0x00000496
@@ -42836,10 +42836,10 @@ _080A98B4:
 _080A98B6:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80A9884
+	thumb_func_end SwapRegisteredBike
 
-	thumb_func_start itemid_sanitize
-itemid_sanitize: @ 80A98BC
+	thumb_func_start SanitizeItemId
+SanitizeItemId: @ 80A98BC
 	push {lr}
 	lsls r0, 16
 	lsrs r1, r0, 16
@@ -42854,14 +42854,14 @@ _080A98CE:
 _080A98D0:
 	pop {r1}
 	bx r1
-	thumb_func_end itemid_sanitize
+	thumb_func_end SanitizeItemId
 
-	thumb_func_start itemid_get_item
-itemid_get_item: @ 80A98D4
+	thumb_func_start ItemId_GetItem
+ItemId_GetItem: @ 80A98D4
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
-	bl itemid_sanitize
+	bl SanitizeItemId
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2C
@@ -42872,15 +42872,15 @@ itemid_get_item: @ 80A98D4
 	bx r1
 	.align 2, 0
 _080A98F0: .4byte gItems
-	thumb_func_end itemid_get_item
+	thumb_func_end ItemId_GetItem
 
-	thumb_func_start itemid_get_number
-itemid_get_number: @ 80A98F4
+	thumb_func_start ItemId_GetId
+ItemId_GetId: @ 80A98F4
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r4, _080A9914 @ =gItems
-	bl itemid_sanitize
+	bl SanitizeItemId
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2C
@@ -42892,15 +42892,15 @@ itemid_get_number: @ 80A98F4
 	bx r1
 	.align 2, 0
 _080A9914: .4byte gItems
-	thumb_func_end itemid_get_number
+	thumb_func_end ItemId_GetId
 
-	thumb_func_start itemid_get_market_price
-itemid_get_market_price: @ 80A9918
+	thumb_func_start ItemId_GetPrice
+ItemId_GetPrice: @ 80A9918
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r4, _080A9938 @ =gItems
-	bl itemid_sanitize
+	bl SanitizeItemId
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2C
@@ -42912,15 +42912,15 @@ itemid_get_market_price: @ 80A9918
 	bx r1
 	.align 2, 0
 _080A9938: .4byte gItems
-	thumb_func_end itemid_get_market_price
+	thumb_func_end ItemId_GetPrice
 
-	thumb_func_start itemid_get_x12
-itemid_get_x12: @ 80A993C
+	thumb_func_start ItemId_GetHoldEffect
+ItemId_GetHoldEffect: @ 80A993C
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r4, _080A995C @ =gItems
-	bl itemid_sanitize
+	bl SanitizeItemId
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2C
@@ -42932,15 +42932,15 @@ itemid_get_x12: @ 80A993C
 	bx r1
 	.align 2, 0
 _080A995C: .4byte gItems
-	thumb_func_end itemid_get_x12
+	thumb_func_end ItemId_GetHoldEffect
 
-	thumb_func_start itemid_get_quality
-itemid_get_quality: @ 80A9960
+	thumb_func_start ItemId_GetHoldEffectParam
+ItemId_GetHoldEffectParam: @ 80A9960
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r4, _080A9980 @ =gItems
-	bl itemid_sanitize
+	bl SanitizeItemId
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2C
@@ -42952,15 +42952,15 @@ itemid_get_quality: @ 80A9960
 	bx r1
 	.align 2, 0
 _080A9980: .4byte gItems
-	thumb_func_end itemid_get_quality
+	thumb_func_end ItemId_GetHoldEffectParam
 
-	thumb_func_start itemid_get_description
-itemid_get_description: @ 80A9984
+	thumb_func_start ItemId_GetDescription
+ItemId_GetDescription: @ 80A9984
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r4, _080A99A4 @ =gItems
-	bl itemid_sanitize
+	bl SanitizeItemId
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2C
@@ -42973,10 +42973,10 @@ itemid_get_description: @ 80A9984
 	bx r1
 	.align 2, 0
 _080A99A4: .4byte gItems
-	thumb_func_end itemid_get_description
+	thumb_func_end ItemId_GetDescription
 
-	thumb_func_start sub_80A99A8
-sub_80A99A8: @ 80A99A8
+	thumb_func_start ItemId_CopyDescription
+ItemId_CopyDescription: @ 80A99A8
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	adds r0, r1, 0
@@ -42984,7 +42984,7 @@ sub_80A99A8: @ 80A99A8
 	ldr r4, _080A99E4 @ =gItems
 	lsls r0, 16
 	lsrs r0, 16
-	bl itemid_sanitize
+	bl SanitizeItemId
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2C
@@ -43029,15 +43029,15 @@ _080A9A02:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80A99A8
+	thumb_func_end ItemId_CopyDescription
 
-	thumb_func_start itemid_is_unique
-itemid_is_unique: @ 80A9A08
+	thumb_func_start ItemId_GetImportance
+ItemId_GetImportance: @ 80A9A08
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r4, _080A9A28 @ =gItems
-	bl itemid_sanitize
+	bl SanitizeItemId
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2C
@@ -43049,15 +43049,15 @@ itemid_is_unique: @ 80A9A08
 	bx r1
 	.align 2, 0
 _080A9A28: .4byte gItems
-	thumb_func_end itemid_is_unique
+	thumb_func_end ItemId_GetImportance
 
-	thumb_func_start itemid_get_x19
-itemid_get_x19: @ 80A9A2C
+	thumb_func_start ItemId_GetUnknownValue
+ItemId_GetUnknownValue: @ 80A9A2C
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r4, _080A9A4C @ =gItems
-	bl itemid_sanitize
+	bl SanitizeItemId
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2C
@@ -43069,15 +43069,15 @@ itemid_get_x19: @ 80A9A2C
 	bx r1
 	.align 2, 0
 _080A9A4C: .4byte gItems
-	thumb_func_end itemid_get_x19
+	thumb_func_end ItemId_GetUnknownValue
 
-	thumb_func_start itemid_get_pocket_number
-itemid_get_pocket_number: @ 80A9A50
+	thumb_func_start ItemId_GetPocket
+ItemId_GetPocket: @ 80A9A50
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r4, _080A9A70 @ =gItems
-	bl itemid_sanitize
+	bl SanitizeItemId
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2C
@@ -43089,15 +43089,15 @@ itemid_get_pocket_number: @ 80A9A50
 	bx r1
 	.align 2, 0
 _080A9A70: .4byte gItems
-	thumb_func_end itemid_get_pocket_number
+	thumb_func_end ItemId_GetPocket
 
-	thumb_func_start itemid_get_type
-itemid_get_type: @ 80A9A74
+	thumb_func_start ItemId_GetType
+ItemId_GetType: @ 80A9A74
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r4, _080A9A94 @ =gItems
-	bl itemid_sanitize
+	bl SanitizeItemId
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2C
@@ -43109,15 +43109,15 @@ itemid_get_type: @ 80A9A74
 	bx r1
 	.align 2, 0
 _080A9A94: .4byte gItems
-	thumb_func_end itemid_get_type
+	thumb_func_end ItemId_GetType
 
-	thumb_func_start itemid_get_overworld_function
-itemid_get_overworld_function: @ 80A9A98
+	thumb_func_start ItemId_GetFieldFunc
+ItemId_GetFieldFunc: @ 80A9A98
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r4, _080A9AB8 @ =gItems
-	bl itemid_sanitize
+	bl SanitizeItemId
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2C
@@ -43130,15 +43130,15 @@ itemid_get_overworld_function: @ 80A9A98
 	bx r1
 	.align 2, 0
 _080A9AB8: .4byte gItems
-	thumb_func_end itemid_get_overworld_function
+	thumb_func_end ItemId_GetFieldFunc
 
-	thumb_func_start itemid_get_usage
-itemid_get_usage: @ 80A9ABC
+	thumb_func_start ItemId_GetBattleUsage
+ItemId_GetBattleUsage: @ 80A9ABC
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r4, _080A9ADC @ =gItems
-	bl itemid_sanitize
+	bl SanitizeItemId
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2C
@@ -43151,15 +43151,15 @@ itemid_get_usage: @ 80A9ABC
 	bx r1
 	.align 2, 0
 _080A9ADC: .4byte gItems
-	thumb_func_end itemid_get_usage
+	thumb_func_end ItemId_GetBattleUsage
 
-	thumb_func_start itemid_get_battle_function
-itemid_get_battle_function: @ 80A9AE0
+	thumb_func_start ItemId_GetBattleFunc
+ItemId_GetBattleFunc: @ 80A9AE0
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r4, _080A9B00 @ =gItems
-	bl itemid_sanitize
+	bl SanitizeItemId
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2C
@@ -43172,15 +43172,15 @@ itemid_get_battle_function: @ 80A9AE0
 	bx r1
 	.align 2, 0
 _080A9B00: .4byte gItems
-	thumb_func_end itemid_get_battle_function
+	thumb_func_end ItemId_GetBattleFunc
 
-	thumb_func_start itemid_get_x28
-itemid_get_x28: @ 80A9B04
+	thumb_func_start ItemId_GetSecondaryId
+ItemId_GetSecondaryId: @ 80A9B04
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r4, _080A9B24 @ =gItems
-	bl itemid_sanitize
+	bl SanitizeItemId
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2C
@@ -43193,7 +43193,7 @@ itemid_get_x28: @ 80A9B04
 	bx r1
 	.align 2, 0
 _080A9B24: .4byte gItems
-	thumb_func_end itemid_get_x28
+	thumb_func_end ItemId_GetSecondaryId
 
 	thumb_func_start unref_sub_80A9B28
 unref_sub_80A9B28: @ 80A9B28
@@ -52373,8 +52373,8 @@ _080AE590: .4byte gUnknown_02038696
 _080AE594: .4byte gUnknown_03004210
 	thumb_func_end sub_80AE514
 
-	thumb_func_start PutWindowTilemap
-PutWindowTilemap: @ 80AE598
+	thumb_func_start sub_80AE598
+sub_80AE598: @ 80AE598
 	push {r4,r5,lr}
 	adds r5, r1, 0
 	lsls r4, r2, 24
@@ -52390,7 +52390,7 @@ PutWindowTilemap: @ 80AE598
 	bx r1
 	.align 2, 0
 _080AE5B8: .4byte gUnknown_083CC59C
-	thumb_func_end PutWindowTilemap
+	thumb_func_end sub_80AE598
 
 	thumb_func_start sub_80AE5BC
 sub_80AE5BC: @ 80AE5BC
@@ -52419,7 +52419,7 @@ sub_80AE5D4: @ 80AE5D4
 	ldr r3, _080AE660 @ =gUnknown_020238CC
 	ldr r1, _080AE664 @ =gEmptyString_81E72B0
 	adds r0, r3, 0
-	bl PutWindowTilemap
+	bl sub_80AE598
 	adds r3, r0, 0
 	movs r0, 0xFC
 	strb r0, [r3]
@@ -52559,7 +52559,7 @@ sub_80AE6E4: @ 80AE6E4
 	ldr r0, _080AE760 @ =gUnknown_02038572
 	adds r1, r0
 	adds r0, r3, 0
-	bl PutWindowTilemap
+	bl sub_80AE598
 	adds r3, r0, 0
 	movs r0, 0xFF
 	strb r0, [r3]
@@ -54001,7 +54001,7 @@ _080AF1FE:
 	ldr r0, _080AF220 @ =gUnknown_020238CC
 	ldr r1, _080AF224 @ =gUnknownText_MissedTurn
 	adds r2, r3, 0
-	bl PutWindowTilemap
+	bl sub_80AE598
 	b _080AF23A
 	.align 2, 0
 _080AF21C: .4byte 0x02019260
@@ -54015,7 +54015,7 @@ _080AF228:
 	ldr r2, _080AF274 @ =gMoveNames
 	adds r1, r2
 	adds r2, r3, 0
-	bl PutWindowTilemap
+	bl sub_80AE598
 _080AF23A:
 	adds r0, r5, 0
 	bl sub_80AF2A0
@@ -56112,7 +56112,7 @@ _080B01BA:
 	.align 2, 0
 _080B01D4: .4byte 0x0201920d
 _080B01D8: .4byte gSprites + 0x1C
-_080B01DC: .4byte ObjectCB_SwitchPocketRotatingBallInit
+_080B01DC: .4byte sub_80B0238
 	thumb_func_end unref_sub_80B01B0
 
 	thumb_func_start unref_sub_80B01E0
@@ -56164,8 +56164,8 @@ _080B0232:
 	bx r1
 	thumb_func_end unref_sub_80B01E0
 
-	thumb_func_start ObjectCB_SwitchPocketRotatingBallInit
-ObjectCB_SwitchPocketRotatingBallInit: @ 80B0238
+	thumb_func_start sub_80B0238
+sub_80B0238: @ 80B0238
 	push {r4,lr}
 	adds r4, r0, 0
 	ldrb r1, [r4, 0x1]
@@ -56200,7 +56200,7 @@ _080B0272:
 	bx r0
 	.align 2, 0
 _080B027C: .4byte sub_80B0280
-	thumb_func_end ObjectCB_SwitchPocketRotatingBallInit
+	thumb_func_end sub_80B0238
 
 	thumb_func_start sub_80B0280
 sub_80B0280: @ 80B0280
@@ -62421,11 +62421,11 @@ sub_80B3270: @ 80B3270
 	movs r0, 0
 	movs r1, 0xAC
 	movs r2, 0xC
-	bl sub_80F953C
+	bl CreateVerticalScrollIndicators
 	movs r0, 0x1
 	movs r1, 0xAC
 	movs r2, 0x94
-	bl sub_80F953C
+	bl CreateVerticalScrollIndicators
 	movs r0, 0
 	movs r1, 0x1
 	bl sub_80F979C
@@ -63159,7 +63159,7 @@ sub_80B37F8: @ 80B37F8
 	lsls r0, 1
 	adds r0, r1
 	ldrh r0, [r0]
-	bl itemid_get_market_price
+	bl ItemId_GetPrice
 	adds r4, r0, 0
 	movs r0, 0x1
 	bl GetPriceReduction
@@ -63246,7 +63246,7 @@ sub_80B389C: @ 80B389C
 _080B38C8:
 	adds r0, r2, 0
 	adds r1, r5, 0
-	bl itemid_copy_name
+	bl CopyItemName
 	ldr r6, _080B392C @ =gStringVar1
 	lsls r7, r4, 3
 	movs r0, 0x1
@@ -63263,7 +63263,7 @@ _080B38C8:
 	adds r5, r6, 0x3
 _080B38EE:
 	mov r0, r9
-	bl itemid_get_market_price
+	bl ItemId_GetPrice
 	adds r4, r0, 0
 	movs r0, 0x1
 	bl GetPriceReduction
@@ -63475,7 +63475,7 @@ sub_80B3A70: @ 80B3A70
 	lsls r0, 1
 	adds r0, r1
 	ldrh r0, [r0]
-	bl itemid_get_description
+	bl ItemId_GetDescription
 	movs r1, 0x30
 	str r1, [sp]
 	str r4, [sp, 0x4]
@@ -63566,7 +63566,7 @@ _080B3B06:
 	ble _080B3B74
 	movs r0, 0xC
 	movs r1, 0x1
-	bl sub_80A9424
+	bl AddBagItem
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -63699,7 +63699,7 @@ sub_80B3BF4: @ 80B3BF4
 	lsls r1, 3
 	adds r1, r2
 	ldrh r1, [r1, 0xA]
-	bl sub_80A9424
+	bl AddBagItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B3C9C
@@ -63897,7 +63897,7 @@ _080B3DEE:
 	lsls r0, 1
 	adds r0, r1
 	ldrh r0, [r0]
-	bl itemid_get_market_price
+	bl ItemId_GetPrice
 	adds r4, r0, 0
 	movs r0, 0x1
 	bl GetPriceReduction
@@ -63940,7 +63940,7 @@ _080B3DEE:
 	adds r0, r1
 	ldrh r0, [r0]
 	ldr r1, _080B3EBC @ =gStringVar1
-	bl itemid_copy_name
+	bl CopyItemName
 	ldr r0, _080B3EC0 @ =gStringVar2
 	movs r2, 0xA
 	ldrsh r1, [r5, r2]
@@ -64023,7 +64023,7 @@ sub_80B3EFC: @ 80B3EFC
 	lsls r0, 1
 	adds r0, r1
 	ldrh r0, [r0]
-	bl itemid_get_market_price
+	bl ItemId_GetPrice
 	adds r4, r0, 0
 	movs r0, 0x1
 	bl GetPriceReduction
@@ -64386,7 +64386,7 @@ _080B41CE:
 	lsls r0, 1
 	adds r0, r1
 	ldrh r0, [r0]
-	bl itemid_get_market_price
+	bl ItemId_GetPrice
 	adds r4, r0, 0
 	movs r0, 0x1
 	bl GetPriceReduction
@@ -64414,7 +64414,7 @@ _080B41CE:
 	adds r0, r1
 	ldrh r0, [r0]
 	ldr r1, _080B4278 @ =gStringVar1
-	bl itemid_copy_name
+	bl CopyItemName
 	ldr r4, _080B427C @ =gStringVar4
 	ldr r1, _080B4280 @ =gOtherText_HowManyYouWant
 	adds r0, r4, 0
@@ -64764,7 +64764,7 @@ ClearItemPurchases: @ 80B4534
 	strb r1, [r0]
 	ldr r0, _080B454C @ =gUnknown_02038724
 	movs r1, 0x3
-	bl sub_80A9684
+	bl ClearItemSlots
 	pop {r0}
 	bx r0
 	.align 2, 0
