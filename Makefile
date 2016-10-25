@@ -83,7 +83,7 @@ asm/rom_8094928.o \
 asm/berry.o \
 asm/rom_80B5054.o \
 asm/naming_screen.o \
-asm/rom_80B79A8.o \
+asm/script_menu.o \
 asm/contest_effect.o \
 asm/record_mixing.o \
 asm/sound_check_menu.o \

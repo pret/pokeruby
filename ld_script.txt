@@ -105,7 +105,7 @@ SECTIONS {
         asm/berry.o(.text);
         asm/rom_80B5054.o(.text);
         asm/naming_screen.o(.text);
-        asm/rom_80B79A8.o(.text);
+        asm/script_menu.o(.text);
         asm/contest_effect.o(.text);
         asm/record_mixing.o(.text);
         asm/sound_check_menu.o(.text);
