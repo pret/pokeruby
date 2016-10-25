@@ -93,7 +93,7 @@ SECTIONS {
         src/pokedex.o(.text);
         asm/pokedex.o(.text);
         asm/trainer_card.o(.text);
-        asm/save_menu_util.o(.text);
+        src/save_menu_util.o(.text);
         asm/rom_8094928.o(.text);
         asm/berry.o(.text);
         asm/rom_80B5054.o(.text);

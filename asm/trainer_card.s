@@ -2283,7 +2283,7 @@ _08094230:
 	mov r0, sp
 	movs r1, 0x10
 	movs r2, 0xA
-	bl sub_8072B4C
+	bl MenuPrintRightAligned
 _0809424A:
 	add sp, 0x10
 	pop {r0}
@@ -2390,7 +2390,7 @@ sub_80942F8: @ 80942F8
 	adds r0, r4, 0
 	movs r1, 0x1C
 	movs r2, 0x2
-	bl sub_8072B4C
+	bl MenuPrintRightAligned
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -2460,7 +2460,7 @@ sub_8094354: @ 8094354
 	ldr r0, _080943BC @ =gStringVar1
 	movs r1, 0x1C
 	movs r2, 0x5
-	bl sub_8072B4C
+	bl MenuPrintRightAligned
 _080943B0:
 	pop {r4,r5}
 	pop {r0}
@@ -2506,7 +2506,7 @@ sub_80943E4: @ 80943E4
 	mov r0, sp
 	movs r1, 0x16
 	movs r2, 0x7
-	bl sub_8072B4C
+	bl MenuPrintRightAligned
 	adds r0, r4, 0
 	adds r0, 0x7A
 	ldrh r1, [r0]
@@ -2515,7 +2515,7 @@ sub_80943E4: @ 80943E4
 	mov r0, sp
 	movs r1, 0x1C
 	movs r2, 0x7
-	bl sub_8072B4C
+	bl MenuPrintRightAligned
 _0809441C:
 	add sp, 0x10
 	pop {r4}
@@ -2622,7 +2622,7 @@ sub_80944B8: @ 80944B8
 	mov r0, sp
 	movs r1, 0x1C
 	movs r2, 0xD
-	bl sub_8072B4C
+	bl MenuPrintRightAligned
 _080944DE:
 	add sp, 0x8
 	pop {r0}
@@ -2668,7 +2668,7 @@ sub_8094508: @ 8094508
 	mov r0, sp
 	movs r1, 0x1C
 	movs r2, 0xB
-	bl sub_8072B4C
+	bl MenuPrintRightAligned
 _0809452E:
 	add sp, 0x8
 	pop {r0}
@@ -2714,7 +2714,7 @@ sub_8094558: @ 8094558
 	mov r0, sp
 	movs r1, 0x1C
 	movs r2, 0x9
-	bl sub_8072B4C
+	bl MenuPrintRightAligned
 _0809457E:
 	add sp, 0x8
 	pop {r0}

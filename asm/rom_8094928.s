@@ -23067,7 +23067,7 @@ _0809FF6A:
 	adds r0, r4, 0
 	movs r1, 0x1D
 	movs r2, 0xE
-	bl sub_8072B4C
+	bl MenuPrintRightAligned
 	adds r0, r5, 0
 	movs r1, 0x17
 	movs r2, 0x10
@@ -24708,7 +24708,7 @@ _080A0D14:
 	lsrs r1, 24
 	adds r0, r4, 0
 	ldr r2, [sp]
-	bl sub_8072B4C
+	bl MenuPrintRightAligned
 	ldr r0, _080A0D58 @ =0x06004caa
 	mov r9, r0
 	movs r2, 0

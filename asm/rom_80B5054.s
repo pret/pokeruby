@@ -5765,7 +5765,7 @@ sub_80B7AEC: @ 80B7AEC
 	mov r0, sp
 	adds r1, r4, 0
 	adds r2, r5, 0
-	bl sub_8072B4C
+	bl MenuPrintRightAligned
 	movs r0, 0xFC
 	strb r0, [r6]
 	movs r0, 0x14
@@ -122483,7 +122483,7 @@ _080F0854:
 	ldr r0, _080F08CC @ =gOtherText_NumberRegistered
 	movs r1, 0xA
 	movs r2, 0x9
-	bl sub_8072B4C
+	bl MenuPrintRightAligned
 	cmp r5, 0
 	bne _080F08C6
 _080F0862:
@@ -122503,14 +122503,14 @@ _080F0862:
 	adds r0, r4, 0
 	movs r1, 0xA
 	movs r2, 0xB
-	bl sub_8072B4C
+	bl MenuPrintRightAligned
 	cmp r5, 0
 	bne _080F08C6
 _080F088C:
 	ldr r0, _080F08DC @ =gOtherText_NumberBattles
 	movs r1, 0xA
 	movs r2, 0xD
-	bl sub_8072B4C
+	bl MenuPrintRightAligned
 	cmp r5, 0
 	bne _080F08C6
 _080F089A:
@@ -122533,7 +122533,7 @@ _080F08AA:
 	adds r0, r4, 0
 	movs r1, 0xA
 	movs r2, 0xF
-	bl sub_8072B4C
+	bl MenuPrintRightAligned
 _080F08C6:
 	pop {r4,r5}
 	pop {r0}
@@ -146289,8 +146289,8 @@ _080FBFF2:
 	bx r1
 	thumb_func_end sub_80FBFB4
 
-	thumb_func_start sub_80FBFF8
-sub_80FBFF8: @ 80FBFF8
+	thumb_func_start CopyMapName
+CopyMapName: @ 80FBFF8
 	push {lr}
 	lsls r1, 16
 	lsrs r1, 16
@@ -146315,7 +146315,7 @@ _080FC020:
 _080FC026:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80FBFF8
+	thumb_func_end CopyMapName
 
 	thumb_func_start sub_80FC02C
 sub_80FC02C: @ 80FC02C
@@ -146324,7 +146324,7 @@ sub_80FC02C: @ 80FC02C
 	lsrs r1, 16
 	cmp r1, 0x42
 	beq _080FC03C
-	bl sub_80FBFF8
+	bl CopyMapName
 	b _080FC042
 _080FC03C:
 	ldr r1, _080FC048 @ =gOtherText_Hideout
@@ -146616,7 +146616,7 @@ _080FC268:
 	ldr r0, [r0]
 	movs r1, 0x1D
 	movs r2, 0x11
-	bl sub_8072B4C
+	bl MenuPrintRightAligned
 	b _080FC310
 	.align 2, 0
 _080FC2AC: .4byte 0x02000000
