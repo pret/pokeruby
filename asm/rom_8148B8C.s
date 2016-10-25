@@ -3303,7 +3303,7 @@ sub_814A518: @ 814A518
 	adds r4, r0, 0
 	lsls r1, 24
 	lsrs r5, r1, 24
-	bl SkipExtCtrlCodes
+	bl StripExtCtrlCodes
 	adds r0, r4, 0
 	bl StringLength
 	lsls r0, 24
@@ -3357,7 +3357,7 @@ sub_814A568: @ 814A568
 	b _0814A588
 _0814A582:
 	adds r0, r4, 0
-	bl SkipExtCtrlCodes
+	bl StripExtCtrlCodes
 _0814A588:
 	pop {r4}
 	pop {r0}
@@ -4233,8 +4233,8 @@ _0814AC50: .4byte gUnknown_0842F758
 _0814AC54: .4byte gUnknown_0203A3D1
 	thumb_func_end unref_sub_814ABE4
 
-	thumb_func_start sub_814AC58
-sub_814AC58: @ 814AC58
+	thumb_func_start CreateBlendedOutlineCursor
+CreateBlendedOutlineCursor: @ 814AC58
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -4344,7 +4344,7 @@ _0814AD2A:
 	bx r1
 	.align 2, 0
 _0814AD40: .4byte gUnknown_0203A3D2
-	thumb_func_end sub_814AC58
+	thumb_func_end CreateBlendedOutlineCursor
 
 	thumb_func_start sub_814AD44
 sub_814AD44: @ 814AD44

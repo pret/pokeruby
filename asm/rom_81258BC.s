@@ -17288,7 +17288,7 @@ _08133500:
 	str r0, [sp]
 	movs r0, 0x10
 	movs r2, 0xC
-	bl sub_814AC58
+	bl CreateBlendedOutlineCursor
 	add sp, 0x4
 	pop {r3,r4}
 	mov r8, r3
@@ -18551,7 +18551,7 @@ sub_8133F4C: @ 8133F4C
 	push {r4,r5,lr}
 	lsls r0, 24
 	movs r3, 0
-	ldr r1, _08133F7C @ =gUnknown_08402E40
+	ldr r1, _08133F7C @ =gDecorationInventories
 	lsrs r2, r0, 21
 	adds r0, r2, r1
 	ldrb r0, [r0, 0x4]
@@ -18575,7 +18575,7 @@ _08133F76:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08133F7C: .4byte gUnknown_08402E40
+_08133F7C: .4byte gDecorationInventories
 	thumb_func_end sub_8133F4C
 
 	thumb_func_start sub_8133F80
@@ -18600,7 +18600,7 @@ sub_8133F9C: @ 8133F9C
 	push {r4,lr}
 	lsls r0, 24
 	movs r2, 0
-	ldr r1, _08133FC8 @ =gUnknown_08402E40
+	ldr r1, _08133FC8 @ =gDecorationInventories
 	lsrs r0, 21
 	adds r0, r1
 	movs r1, 0x4
@@ -18620,7 +18620,7 @@ _08133FB4:
 	adds r0, r1, 0
 	b _08133FDC
 	.align 2, 0
-_08133FC8: .4byte gUnknown_08402E40
+_08133FC8: .4byte gDecorationInventories
 _08133FCC:
 	adds r0, r1, 0x1
 	lsls r0, 24
@@ -18647,7 +18647,7 @@ sub_8133FE4: @ 8133FE4
 	adds r0, r1
 	ldrb r0, [r0, 0x13]
 	movs r2, 0
-	ldr r1, _08134014 @ =gUnknown_08402E40
+	ldr r1, _08134014 @ =gDecorationInventories
 	lsls r0, 3
 	adds r0, r1
 	ldrb r1, [r0, 0x4]
@@ -18663,7 +18663,7 @@ _08134002:
 	b _08134024
 	.align 2, 0
 _08134010: .4byte gDecorations
-_08134014: .4byte gUnknown_08402E40
+_08134014: .4byte gDecorationInventories
 _08134018:
 	adds r0, r2, 0x1
 	lsls r0, 24
@@ -18698,7 +18698,7 @@ IsThereStorageSpaceForDecoration: @ 813402C
 	negs r0, r0
 	cmp r2, r0
 	beq _0813406C
-	ldr r0, _08134068 @ =gUnknown_08402E40
+	ldr r0, _08134068 @ =gDecorationInventories
 	lsls r1, r5, 3
 	adds r1, r0
 	ldr r0, [r1]
@@ -18708,7 +18708,7 @@ IsThereStorageSpaceForDecoration: @ 813402C
 	b _0813406E
 	.align 2, 0
 _08134064: .4byte gDecorations
-_08134068: .4byte gUnknown_08402E40
+_08134068: .4byte gDecorationInventories
 _0813406C:
 	movs r0, 0
 _0813406E:
@@ -18763,7 +18763,7 @@ _081340B6:
 	movs r0, 0x1
 	b _081340F4
 _081340C4:
-	ldr r2, _081340FC @ =gUnknown_08402E40
+	ldr r2, _081340FC @ =gDecorationInventories
 	ldr r1, _08134100 @ =gDecorations
 	lsls r0, r5, 5
 	adds r0, r1
@@ -18794,7 +18794,7 @@ _081340F4:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_081340FC: .4byte gUnknown_08402E40
+_081340FC: .4byte gDecorationInventories
 _08134100: .4byte gDecorations
 	thumb_func_end sub_81340A8
 
@@ -18808,7 +18808,7 @@ sub_8134104: @ 8134104
 	sub sp, 0x4
 	lsls r0, 24
 	movs r6, 0
-	ldr r2, _08134190 @ =gUnknown_08402E40
+	ldr r2, _08134190 @ =gDecorationInventories
 	lsrs r1, r0, 21
 	adds r0, r1, r2
 	ldrb r0, [r0, 0x4]
@@ -18825,7 +18825,7 @@ _08134126:
 	mov r12, r1
 	cmp r3, r8
 	bcs _08134174
-	ldr r1, _08134190 @ =gUnknown_08402E40
+	ldr r1, _08134190 @ =gDecorationInventories
 	mov r10, r1
 	adds r0, r1, 0
 	mov r9, r0
@@ -18877,7 +18877,7 @@ _08134180:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08134190: .4byte gUnknown_08402E40
+_08134190: .4byte gDecorationInventories
 	thumb_func_end sub_8134104
 
 	thumb_func_start sub_8134194
@@ -18886,7 +18886,7 @@ sub_8134194: @ 8134194
 	lsls r0, 24
 	movs r4, 0
 	movs r3, 0
-	ldr r2, _081341D0 @ =gUnknown_08402E40
+	ldr r2, _081341D0 @ =gDecorationInventories
 	lsrs r1, r0, 21
 	adds r0, r1, r2
 	ldrb r0, [r0, 0x4]
@@ -18916,7 +18916,7 @@ _081341C8:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_081341D0: .4byte gUnknown_08402E40
+_081341D0: .4byte gDecorationInventories
 	thumb_func_end sub_8134194
 
 	thumb_func_start sub_81341D4
@@ -18958,7 +18958,7 @@ _08134208: .4byte gSaveBlock1 + 0x3144
 sub_813420C: @ 813420C
 	push {r4-r6,lr}
 	movs r2, 0
-	ldr r6, _08134238 @ =gUnknown_02039302
+	ldr r6, _08134238 @ =gRoamerLocation
 	ldr r4, _0813423C @ =gUnknown_020392FC
 	movs r3, 0
 	adds r5, r4, 0x1
@@ -18980,7 +18980,7 @@ _08134218:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08134238: .4byte gUnknown_02039302
+_08134238: .4byte gRoamerLocation
 _0813423C: .4byte gUnknown_020392FC
 	thumb_func_end sub_813420C
 
@@ -19049,11 +19049,11 @@ sub_8134240: @ 8134240
 	movs r1, 0x2F
 	bl GetMonData
 	strb r0, [r4, 0x12]
-	ldr r4, _08134304 @ =gUnknown_02039302
+	ldr r4, _08134304 @ =gRoamerLocation
 	mov r0, r8
 	strb r0, [r4]
 	bl Random
-	ldr r5, _08134308 @ =gUnknown_08402E80
+	ldr r5, _08134308 @ =gRoamerLocations
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x14
@@ -19078,8 +19078,8 @@ _081342FC: .4byte gEnemyParty
 _sub_8134240_Latias: .4byte 407
 	.endif
 _08134300: .4byte gSaveBlock1 + 0x3144
-_08134304: .4byte gUnknown_02039302
-_08134308: .4byte gUnknown_08402E80
+_08134304: .4byte gRoamerLocation
+_08134308: .4byte gRoamerLocations
 	thumb_func_end sub_8134240
 
 	thumb_func_start sub_813430C
@@ -19122,9 +19122,9 @@ sub_8134348: @ 8134348
 	ldrb r0, [r0, 0x13]
 	cmp r0, 0
 	beq _08134380
-	ldr r0, _0813438C @ =gUnknown_02039302
+	ldr r0, _0813438C @ =gRoamerLocation
 	strb r1, [r0]
-	ldr r5, _08134390 @ =gUnknown_08402E80
+	ldr r5, _08134390 @ =gRoamerLocations
 	adds r4, r0, 0
 _0813435C:
 	bl Random
@@ -19149,8 +19149,8 @@ _08134380:
 	bx r0
 	.align 2, 0
 _08134388: .4byte gSaveBlock1 + 0x3144
-_0813438C: .4byte gUnknown_02039302
-_08134390: .4byte gUnknown_08402E80
+_0813438C: .4byte gRoamerLocation
+_08134390: .4byte gRoamerLocations
 	thumb_func_end sub_8134348
 
 	thumb_func_start sub_8134394
@@ -19171,8 +19171,8 @@ _081343AE:
 	ldrb r0, [r0, 0x13]
 	cmp r0, 0
 	beq _08134416
-	ldr r7, _08134400 @ =gUnknown_02039302
-	ldr r3, _08134404 @ =gUnknown_08402E80
+	ldr r7, _08134400 @ =gRoamerLocation
+	ldr r3, _08134404 @ =gRoamerLocations
 _081343BA:
 	lsls r0, r4, 1
 	adds r0, r4
@@ -19182,7 +19182,7 @@ _081343BA:
 	ldrb r1, [r1]
 	cmp r0, r1
 	bne _0813440C
-	ldr r6, _08134404 @ =gUnknown_08402E80
+	ldr r6, _08134404 @ =gRoamerLocations
 	adds r5, r2, 0x1
 	ldr r4, _08134408 @ =gUnknown_020392FC
 _081343D0:
@@ -19209,8 +19209,8 @@ _081343F4:
 	b _08134416
 	.align 2, 0
 _081343FC: .4byte gSaveBlock1 + 0x3144
-_08134400: .4byte gUnknown_02039302
-_08134404: .4byte gUnknown_08402E80
+_08134400: .4byte gRoamerLocation
+_08134404: .4byte gRoamerLocations
 _08134408: .4byte gUnknown_020392FC
 _0813440C:
 	adds r0, r4, 0x1
@@ -19235,7 +19235,7 @@ sub_813441C: @ 813441C
 	ldrb r0, [r0, 0x13]
 	cmp r0, 0
 	beq _08134448
-	ldr r0, _08134444 @ =gUnknown_02039302
+	ldr r0, _08134444 @ =gRoamerLocation
 	ldrb r3, [r0]
 	cmp r2, r3
 	bne _08134448
@@ -19246,7 +19246,7 @@ sub_813441C: @ 813441C
 	b _0813444A
 	.align 2, 0
 _08134440: .4byte gSaveBlock1 + 0x3144
-_08134444: .4byte gUnknown_02039302
+_08134444: .4byte gRoamerLocation
 _08134448:
 	movs r0, 0
 _0813444A:
@@ -19373,14 +19373,14 @@ _08134534: .4byte gSaveBlock1 + 0x3144
 
 	thumb_func_start sub_8134538
 sub_8134538: @ 8134538
-	ldr r3, _08134544 @ =gUnknown_02039302
+	ldr r3, _08134544 @ =gRoamerLocation
 	ldrb r2, [r3]
 	strb r2, [r0]
 	ldrb r0, [r3, 0x1]
 	strb r0, [r1]
 	bx lr
 	.align 2, 0
-_08134544: .4byte gUnknown_02039302
+_08134544: .4byte gRoamerLocation
 	thumb_func_end sub_8134538
 
 	thumb_func_start sub_8134548
@@ -22052,7 +22052,7 @@ _08135A1C:
 	adds r2, 0x1
 	cmp r2, 0x2
 	ble _08135A1C
-	bl sub_80C5604
+	bl ReducePlayerPartyToThree
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -22556,14 +22556,14 @@ sub_8135DEC: @ 8135DEC
 	adds r6, r5, r0
 	ldrh r0, [r6]
 	movs r1, 0x1
-	bl sub_80A9424
+	bl AddBagItem
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0x1
 	bne _08135E30
 	ldrh r0, [r6]
 	ldr r1, _08135E28 @ =gStringVar1
-	bl itemid_copy_name
+	bl CopyItemName
 	ldr r0, _08135E2C @ =gScriptResult
 	strh r4, [r0]
 	b _08135E40
@@ -30207,7 +30207,7 @@ NewGameInitPCItems: @ 8139C18
 	movs r4, 0
 	ldr r0, _08139C6C @ =gSaveBlock1 + 0x498
 	movs r1, 0x32
-	bl sub_80A9684
+	bl ClearItemSlots
 	ldr r1, _08139C70 @ =gNewGamePCItems
 	ldrh r0, [r1]
 	cmp r0, 0
@@ -30223,7 +30223,7 @@ _08139C36:
 	ldrh r0, [r0]
 	adds r1, r6
 	ldrh r1, [r1]
-	bl sub_80A9760
+	bl AddPCItem
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -30846,7 +30846,7 @@ sub_813A118: @ 813A118
 	movs r2, 0xB
 	movs r3, 0x9
 	bl MenuZeroFillWindowRect
-	bl sub_80A96E4
+	bl CountUsedPCItemSlots
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x4]
@@ -30906,7 +30906,7 @@ sub_813A198: @ 813A198
 	movs r2, 0xB
 	movs r3, 0x9
 	bl MenuZeroFillWindowRect
-	bl sub_80A96E4
+	bl CountUsedPCItemSlots
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x4]
@@ -31587,14 +31587,14 @@ sub_813A6FC: @ 813A6FC
 	adds r5, r0, r2
 	ldrh r0, [r5]
 	ldrh r1, [r4, 0x6]
-	bl sub_80A9424
+	bl AddBagItem
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0813A770
 	ldrh r0, [r5]
 	ldr r1, _0813A760 @ =gStringVar1
-	bl itemid_copy_name
+	bl CopyItemName
 	ldr r0, _0813A764 @ =gStringVar2
 	movs r2, 0x6
 	ldrsh r1, [r4, r2]
@@ -31658,13 +31658,13 @@ sub_813A794: @ 813A794
 	lsls r2, 3
 	adds r5, r0, r2
 	ldrh r0, [r5]
-	bl itemid_is_unique
+	bl ItemId_GetImportance
 	lsls r0, 24
 	cmp r0, 0
 	bne _0813A814
 	ldrh r0, [r5]
 	ldr r1, _0813A804 @ =gStringVar1
-	bl itemid_copy_name
+	bl CopyItemName
 	ldr r0, _0813A808 @ =gStringVar2
 	movs r2, 0x6
 	ldrsh r1, [r4, r2]
@@ -31820,9 +31820,9 @@ _0813A912:
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r1, [r5, 0x6]
-	bl sub_80A97F4
+	bl RemovePCItem
 	ldrh r4, [r5, 0x4]
-	bl sub_80A96E4
+	bl CountUsedPCItemSlots
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x4]
@@ -32092,7 +32092,7 @@ sub_813AB28: @ 813AB28
 	lsrs r5, r1, 24
 	ldrh r0, [r0]
 	ldr r1, _0813AB48 @ =gStringVar1
-	bl itemid_copy_name
+	bl CopyItemName
 	cmp r4, 0
 	beq _0813AB50
 	ldr r0, _0813AB4C @ =gUnknown_0840631E
@@ -32234,7 +32234,7 @@ _0813AC34:
 	lsls r2, 3
 	adds r0, r2
 	ldrh r0, [r0]
-	bl sub_80A9670
+	bl GetPocketByItemId
 	lsls r0, 24
 	lsrs r0, 24
 	subs r0, 0x1
@@ -32322,7 +32322,7 @@ _0813ACEA:
 	movs r0, 0
 	movs r1, 0xB8
 	movs r2, 0x8
-	bl sub_80F953C
+	bl CreateVerticalScrollIndicators
 	b _0813AD26
 	.align 2, 0
 _0813AD00: .4byte gSaveBlock1 + 0x498
@@ -32356,7 +32356,7 @@ _0813AD26:
 	movs r0, 0x1
 	movs r1, 0xB8
 	movs r2, 0x98
-	bl sub_80F953C
+	bl CreateVerticalScrollIndicators
 	b _0813AD4A
 _0813AD44:
 	movs r0, 0x1
@@ -32446,7 +32446,7 @@ _0813ADE0:
 _0813ADE4: .4byte gOtherText_SwitchWhichItem
 _0813ADE8:
 	adds r0, r1, 0
-	bl itemid_get_description
+	bl ItemId_GetDescription
 	adds r1, r0, 0
 _0813ADF0:
 	movs r0, 0x30
@@ -32528,7 +32528,7 @@ sub_813AE6C: @ 813AE6C
 	ldr r0, _0813AEF8 @ =gTasks + 0x8
 	adds r5, r0
 	bl sub_80F944C
-	bl InitMenuInUpperLeftCornerPlaySoundWhenAPressed
+	bl LoadScrollIndicatorPalette
 	bl sub_813AF04
 	movs r0, 0xF
 	movs r1, 0
@@ -32802,7 +32802,7 @@ _0813B0A4:
 	movs r0, 0
 	movs r1, 0xC8
 	movs r2, 0x8
-	bl sub_80F953C
+	bl CreateVerticalScrollIndicators
 	b _0813B0DA
 	.align 2, 0
 _0813B0B8: .4byte 0x0201fe00
@@ -32830,7 +32830,7 @@ _0813B0DA:
 	movs r0, 0x1
 	movs r1, 0xC8
 	movs r2, 0x98
-	bl sub_80F953C
+	bl CreateVerticalScrollIndicators
 	b _0813B0FE
 	.align 2, 0
 _0813B0F4: .4byte 0x0201fe00
@@ -32853,7 +32853,7 @@ sub_813B108: @ 813B108
 	lsls r4, 24
 	lsrs r4, 24
 	bl sub_80F944C
-	bl InitMenuInUpperLeftCornerPlaySoundWhenAPressed
+	bl LoadScrollIndicatorPalette
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0x1D
@@ -33418,7 +33418,7 @@ sub_813B578: @ 813B578
 	bl MenuZeroFillWindowRect
 	ldrh r0, [r6, 0x20]
 	movs r1, 0x1
-	bl sub_80A9424
+	bl AddBagItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _0813B5CC

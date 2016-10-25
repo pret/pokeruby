@@ -1139,7 +1139,7 @@ u8 sub_808DFE4(u16 a, u8 b, u8 c)
         for(i = 0; i < 10; i++)
             text[i] = 0xAE;
     }
-    sub_80729D8(text, (b - 0x11) * 8 + 0xFC, c * 8, 0);
+    MenuPrint_PixelCoords(text, (b - 0x11) * 8 + 0xFC, c * 8, 0);
 }
 #else
 __attribute__((naked))
@@ -1228,7 +1228,7 @@ _0808E070:\n\
     lsrs r2, r6, 16\n\
     mov r0, sp\n\
     movs r3, 0\n\
-    bl sub_80729D8\n\
+    bl MenuPrint_PixelCoords\n\
     adds r0, r4, 0\n\
     add sp, 0xC\n\
     pop {r4-r6}\n\

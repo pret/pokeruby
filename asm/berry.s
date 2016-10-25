@@ -958,7 +958,7 @@ FieldObjectInteractionPickBerryTree: @ 80B4F2C
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_80A9424
+	bl AddBagItem
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6]

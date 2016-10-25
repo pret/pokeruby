@@ -26,7 +26,7 @@ task01_battle_start: @ 8081960
 	.align 2, 0
 _08081980: .4byte gTasks + 0x8
 _08081984:
-	bl c3_80A0DD8_is_running
+	bl FieldPoisonEffectIsRunning
 	cmp r0, 0
 	bne _080819BA
 	ldrb r0, [r4, 0x2]
@@ -1056,7 +1056,7 @@ sub_8082188: @ 8082188
 	movs r1, 0x5
 	movs r2, 0
 	movs r3, 0
-	bl sub_80C5374
+	bl ScriptGiveMon
 	bl ResetTasks
 	bl sub_80408BC
 	ldr r0, _080821D4 @ =sub_80821D8

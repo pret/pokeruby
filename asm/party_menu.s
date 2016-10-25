@@ -112,8 +112,8 @@ sub_806AF8C: @ 806AF8C
 _0806AFA8: .4byte sub_806B460
 	thumb_func_end sub_806AF8C
 
-	thumb_func_start sub_806AFAC
-sub_806AFAC: @ 806AFAC
+	thumb_func_start OpenPartyMenu
+OpenPartyMenu: @ 806AFAC
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -131,7 +131,7 @@ sub_806AFAC: @ 806AFAC
 	bx r0
 	.align 2, 0
 _0806AFCC: .4byte gUnknown_08376C74
-	thumb_func_end sub_806AFAC
+	thumb_func_end OpenPartyMenu
 
 	thumb_func_start sub_806AFD0
 sub_806AFD0: @ 806AFD0

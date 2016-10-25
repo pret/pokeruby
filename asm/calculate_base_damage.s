@@ -100,12 +100,12 @@ _0803BAAE:
 _0803BADC: .4byte gEnigmaBerries
 _0803BAE0:
 	ldrh r0, [r7, 0x2E]
-	bl itemid_get_x12
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r0
 	ldrh r0, [r7, 0x2E]
-	bl itemid_get_quality
+	bl ItemId_GetHoldEffectParam
 	lsls r0, 24
 	lsrs r0, 24
 _0803BAF6:
@@ -136,13 +136,13 @@ _0803BB14:
 _0803BB26:
 	ldr r2, [sp, 0x4]
 	ldrh r0, [r2, 0x2E]
-	bl itemid_get_x12
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x1C]
 	ldr r3, [sp, 0x4]
 	ldrh r0, [r3, 0x2E]
-	bl itemid_get_quality
+	bl ItemId_GetHoldEffectParam
 _0803BB3C:
 	adds r0, r7, 0
 	adds r0, 0x20

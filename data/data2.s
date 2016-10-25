@@ -1090,9 +1090,9 @@ gUnknown_081FA73C:: @ 81FA73C
 	.4byte atk02_attackstring
 	.4byte atk03_ppreduce
 	.4byte atk04_critcalc
-	.4byte atk05_cmd5
-	.4byte sub_801CCC4
-	.4byte atk07_cmd7
+	.4byte atk05_damagecalc1
+	.4byte atk06_damagecalc2
+	.4byte atk07_damagecalc3
 	.4byte atk08_cmd8
 	.4byte sub_801D8EC
 	.4byte sub_801DA60
@@ -1122,7 +1122,7 @@ gUnknown_081FA73C:: @ 81FA73C
 	.4byte sub_801FFA8
 	.4byte sub_8020004
 	.4byte sub_80209B4
-	.4byte atk25_cmd25
+	.4byte atk25_resetflags
 	.4byte sub_8020BB4
 	.4byte atk27_cmd27
 	.4byte sub_8020C14
@@ -1159,7 +1159,7 @@ gUnknown_081FA73C:: @ 81FA73C
 	.4byte atk47
 	.4byte atk48_playstatchangeanimation
 	.4byte sub_80217F8
-	.4byte atk4A_damagecalc2
+	.4byte atk4A_damageflags
 	.4byte atk4B_cmd4b
 	.4byte atk4C_switch1
 	.4byte sub_80225F0
@@ -2167,7 +2167,7 @@ gSpriteAnimTable_820A408:: @ 820A408
 
 	.align 2
 gSpriteTemplate_820A418:: @ 820A418
-	spr_template 23456, 54321, gOamData_820A3E0, gSpriteAnimTable_820A408, NULL, gDummySpriteAffineAnimTable, sub_80435A4
+	spr_template 23456, 54321, gOamData_820A3E0, gSpriteAnimTable_820A408, NULL, gDummySpriteAffineAnimTable, SpriteCB_EggShard
 
 @ The values are Q8.8 fixed-point numbers.
 	.align 1
@@ -12171,7 +12171,7 @@ gBadgesTiles:: @ 83B5AB8
 gUnknown_083B5EBC:: @ 83B5EBC
 	.4byte sub_8093864
 	.4byte sub_80938A8
-	.4byte rfu_NI_stopReceivingData
+	.4byte sub_80938CC
 	.4byte sub_8093918
 	.4byte sub_8093938
 	.4byte sub_8093954
@@ -15479,7 +15479,7 @@ gSpriteImageTable_83D2688:: @ 83D2688
 
 	.align 2
 gSpriteTemplate_83D26A0:: @ 83D26A0
-	spr_template 0xFFFF, 4110, gOamData_83D266C, gSpriteAnimTable_83D2684, gSpriteImageTable_83D2688, gDummySpriteAffineAnimTable, door_restore_tilemap
+	spr_template 0xFFFF, 4110, gOamData_83D266C, gSpriteAnimTable_83D2684, gSpriteImageTable_83D2688, gDummySpriteAffineAnimTable, SpriteCB_SandPillar_0
 
 @ This uses one of the secret base palettes, so there is no "09.pal" file.
 	.align 2
@@ -26875,11 +26875,40 @@ gUnknown_08402E39:: @ 8402E39
 gUnknown_08402E3D:: @ 8402E3D
 	.byte 4, 5, 6
 
-gUnknown_08402E40:: @ 8402E40
-	.incbin "baserom.gba", 0x00402e40, 0x40
+@ pointer to decorations, capacity
+	.align 2
+gDecorationInventories:: @ 8402E40
+	.4byte gSaveBlock1 + 0x26A0, 10 @ DESK
+	.4byte gSaveBlock1 + 0x26AA, 10 @ CHAIR
+	.4byte gSaveBlock1 + 0x26B4, 10 @ PLANT
+	.4byte gSaveBlock1 + 0x26BE, 30 @ ORNAMENT
+	.4byte gSaveBlock1 + 0x26DC, 30 @ MAT
+	.4byte gSaveBlock1 + 0x26FA, 10 @ POSTER
+	.4byte gSaveBlock1 + 0x2704, 40 @ DOLL
+	.4byte gSaveBlock1 + 0x272C, 10 @ CUSHION
 
-gUnknown_08402E80:: @ 8402E80
-	.incbin "baserom.gba", 0x00402e80, 0x80
+gRoamerLocations:: @ 8402E80
+	.byte 0x19,0x1A,0x20,0x21,0x31,0xFF
+	.byte 0x1A,0x19,0x20,0x21,0xFF,0xFF
+	.byte 0x20,0x1A,0x19,0x21,0xFF,0xFF
+	.byte 0x21,0x20,0x19,0x1A,0x22,0x26
+	.byte 0x22,0x21,0x23,0xFF,0xFF,0xFF
+	.byte 0x23,0x22,0x24,0xFF,0xFF,0xFF
+	.byte 0x24,0x23,0x25,0x26,0xFF,0xFF
+	.byte 0x25,0x24,0x26,0xFF,0xFF,0xFF
+	.byte 0x26,0x25,0x21,0xFF,0xFF,0xFF
+	.byte 0x27,0x24,0x28,0x29,0xFF,0xFF
+	.byte 0x28,0x27,0x2A,0xFF,0xFF,0xFF
+	.byte 0x29,0x27,0x2A,0xFF,0xFF,0xFF
+	.byte 0x2A,0x28,0x29,0x2B,0xFF,0xFF
+	.byte 0x2B,0x2A,0x2C,0xFF,0xFF,0xFF
+	.byte 0x2C,0x2B,0x2D,0xFF,0xFF,0xFF
+	.byte 0x2D,0x2C,0x2E,0xFF,0xFF,0xFF
+	.byte 0x2E,0x2D,0x2F,0xFF,0xFF,0xFF
+	.byte 0x2F,0x2E,0x30,0xFF,0xFF,0xFF
+	.byte 0x30,0x2F,0x31,0xFF,0xFF,0xFF
+	.byte 0x31,0x30,0x19,0xFF,0xFF,0xFF
+	.byte 0xFF,0xFF,0xFF,0xFF,0xFF,0xFF
 
 @ 8402F00
 	.include "data/battle_tower/trainers.s"
@@ -31712,17 +31741,25 @@ gUnknown_0842F6C0:: @ 842F6C0
 	.4byte 0x6, Unknown_842F4F0
 	.4byte 0x7, Unknown_842F520
 
+	.align 2
 gUnknown_0842F758:: @ 842F758
-	.incbin "baserom.gba", 0x0042f758, 0x28
+	.4byte 3, gSubspriteTable_203A380
+	.4byte 0, 2
+	.4byte 0, 66
+	.4byte 0, 105
+	.4byte 0, 34
 
+	.align 2
 gUnknown_0842F780:: @ 842F780
-	.incbin "baserom.gba", 0x0042f780, 0x8
+	.4byte 0, 105
 
+	.align 2
 gUnknown_0842F788:: @ 842F788
-	.incbin "baserom.gba", 0x0042f788, 0x8
+	.4byte 0, 34
 
+	.align 2
 gUnknown_0842F790:: @ 842F790
-	.incbin "baserom.gba", 0x0042f790, 0x8
+	.4byte 0, 66
 
 gOtherText_BerryObtainedDadHasIt:: @ 842F798
 	.string "Obtained a {STR_VAR_2} BERRY!\nDad has it at PETALBURG GYM.$"

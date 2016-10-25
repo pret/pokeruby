@@ -1019,8 +1019,8 @@ _080938C4: .4byte gPaletteFade
 _080938C8: .4byte 0x02000000
 	thumb_func_end sub_80938A8
 
-	thumb_func_start rfu_NI_stopReceivingData
-rfu_NI_stopReceivingData: @ 80938CC
+	thumb_func_start sub_80938CC
+sub_80938CC: @ 80938CC
 	push {lr}
 	ldr r0, _080938E4 @ =gMain
 	ldrh r1, [r0, 0x2E]
@@ -1063,7 +1063,7 @@ _08093912:
 _08093914:
 	pop {r1}
 	bx r1
-	thumb_func_end rfu_NI_stopReceivingData
+	thumb_func_end sub_80938CC
 
 	thumb_func_start sub_8093918
 sub_8093918: @ 8093918
@@ -2563,7 +2563,7 @@ sub_8094448: @ 8094448
 	movs r1, 0x70
 	movs r2, 0x78
 	movs r3, 0
-	bl sub_80729D8
+	bl MenuPrint_PixelCoords
 	adds r0, r4, 0
 	adds r0, 0x7E
 	ldrh r1, [r0]
@@ -2575,7 +2575,7 @@ sub_8094448: @ 8094448
 	movs r1, 0x95
 	movs r2, 0x78
 	movs r3, 0
-	bl sub_80729D8
+	bl MenuPrint_PixelCoords
 _0809448C:
 	add sp, 0x10
 	pop {r4}

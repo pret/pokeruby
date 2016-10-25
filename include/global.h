@@ -124,6 +124,22 @@ struct Pokeblock
     u8 feel;
 };
 
+struct Roamer
+{
+    /*0x00*/ u32 ivs;
+    /*0x04*/ u32 personality;
+    /*0x08*/ u16 species;
+    /*0x0A*/ u16 hp;
+    /*0x0C*/ u8 level;
+    /*0x0D*/ u8 status;
+    /*0x0E*/ u8 cool;
+    /*0x0F*/ u8 beauty;
+    /*0x10*/ u8 cute;
+    /*0x11*/ u8 smart;
+    /*0x12*/ u8 tough;
+    /*0x13*/ u8 active;
+};
+
 struct RamScriptData
 {
     u8 magic;
@@ -157,7 +173,7 @@ struct SaveBlock1
     u8 filler_2F;
     u8 flashUsed;
     u16 mapDataId;
-    u8 filler_34[0x200];
+    u16 mapView[0x100];
     u8 playerPartyCount;
     struct Pokemon playerParty[6];
     u32 money;
@@ -171,15 +187,34 @@ struct SaveBlock1
     struct ItemSlot bagPocket_Berries[46];
     struct Pokeblock pokeblocks[40];
     u8 unk938[52];  // pokedex related
-    u8 filler_96C[0x2B4];
+    u16 berryBlenderRecords[3];
+    u8 filler_972[0x6];
+    u16 trainerRematchStepCounter;
+    u8 trainerRematches[100];
+    struct MapObject mapObjects[16];
     struct MapObjectTemplate mapObjectTemplates[64];
     u8 flags[0x120];
     u16 vars[0x100];
     u32 gameStats[NUM_GAME_STATS];
     struct BerryTree berryTrees[128];
-    u8 filler_1A08[0x14F4];
+    /*0x1A08*/ struct SecretBaseRecord secretBases[20];
+    /*0x2688*/ u8 playerRoomDecor[12];
+    /*0x2694*/ u8 playerRoomDecorPos[12];
+    u8 decorDesk[10];
+    u8 decorChair[10];
+    u8 decorPlant[10];
+    u8 decorOrnament[30];
+    u8 decorMat[30];
+    u8 decorPoster[10];
+    u8 decorDoll[40];
+    u8 decorCushion[10];
+    u8 padding_2736[2];
+    u8 tvShows[24][36]; // TODO: TV show struct
+    u8 filler_2A98[0x464];
     struct SB1_2EFC_Struct sb1_2EFC_struct[5];
-    u8 filler_2F9C[0x1C4];
+    u8 filler_2F9C[0x1A8];
+    /*0x3144*/ struct Roamer roamer;
+    /*0x3158*/ u8 filler_3158[0x8];
     struct EnigmaBerry enigmaBerry;
     struct RamScript ramScript;
     u8 filler_3A7C[0x10];

@@ -579,7 +579,7 @@ s8 ProcessMenuInputNoWrap_(void)
     return ProcessMenuInputNoWrap();
 }
 
-u8 sub_80729D8(u8 *text, u8 left, u16 top, u8 a4)
+u8 MenuPrint_PixelCoords(u8 *text, u8 left, u16 top, u8 a4)
 {
     return sub_8004D04(gMenuWindowPtr, text, gMenuTextTileOffset, left, top, a4);
 }
@@ -608,6 +608,7 @@ int sub_8072AB0(u8 *str, u8 left, u16 top, u8 width, u8 height, u32 a6)
 }
 
 void MenuPrintRightAligned(u8 *str, u8 left, u8 top)
+
 {
     sub_8004D38(gMenuWindowPtr, str, gMenuTextTileOffset, left, top);
 }

@@ -1574,7 +1574,7 @@ _08083918:
 	.align 2, 0
 _08083920: .4byte gUnknown_020239F8
 _08083924:
-	bl sub_80C5604
+	bl ReducePlayerPartyToThree
 	ldr r1, _08083948 @ =gUnknown_020239F8
 	movs r0, 0x4B
 _0808392C:

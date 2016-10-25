@@ -1711,7 +1711,7 @@ _0806A006:
 	movs r0, 0x87
 	lsls r0, 1
 	movs r1, 0x1
-	bl sub_80A92D4
+	bl CheckBagHasItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806A02A
