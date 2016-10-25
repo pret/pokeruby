@@ -47,7 +47,11 @@ struct BerryTree
     u8 growthSparkle:1;
     u16 secondsUntilNextStage;
     u8 berryYield;
-    u8 wateredFlags; // 1 bit for each stage
+    u8 regrowthCount:4;
+    u8 watered1:1;
+    u8 watered2:1;
+    u8 watered3:1;
+    u8 watered4:1;
 };
 
 #endif // GUARD_BERRY_H
