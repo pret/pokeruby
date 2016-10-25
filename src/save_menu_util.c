@@ -67,7 +67,7 @@ u8 sub_809473C()
 void PrintSavePlayerName(s16 x, s16 y)
 {
 	MenuPrint(gOtherText_Player, x, y);
-	MenuPrintRightAligned(gSaveBlock2.playerName, x + 12, y);
+	MenuPrint_RightAligned(gSaveBlock2.playerName, x + 12, y);
 }
 
 void PrintSaveMapName(s16 x, s16 y)
@@ -86,7 +86,7 @@ void PrintSaveBadges(s16 x, s16 y)
 	MenuPrint(gOtherText_Badges, x, y);
 	badgeCount = GetBadgeCount();
 	ConvertIntToDecimalString(badges, badgeCount);
-	MenuPrintRightAligned(badges, x + 12, y);
+	MenuPrint_RightAligned(badges, x + 12, y);
 }
 
 void PrintSavePokedexCount(s16 x, s16 y)
@@ -97,7 +97,7 @@ void PrintSavePokedexCount(s16 x, s16 y)
 	MenuPrint(gOtherText_Pokedex, x, y);
 	pokedexCount = GetPokedexSeenCount();
 	ConvertIntToDecimalStringN(pokedex, pokedexCount, 1, 3);
-	MenuPrintRightAligned(pokedex, x + 12, y);
+	MenuPrint_RightAligned(pokedex, x + 12, y);
 }
 
 void PrintSavePlayTime(s16 x, s16 y)
@@ -106,7 +106,7 @@ void PrintSavePlayTime(s16 x, s16 y)
 	
 	MenuPrint(gOtherText_PlayTime, x, y);
 	FormatPlayTime(playtime, gSaveBlock2.playTimeHours, gSaveBlock2.playTimeMinutes, 1);
-	MenuPrintRightAligned(playtime, x + 12, y);
+	MenuPrint_RightAligned(playtime, x + 12, y);
 }
 
 u8 GetBadgeCount(void)

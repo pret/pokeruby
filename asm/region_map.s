@@ -3333,7 +3333,7 @@ _080FC268:
 	ldr r0, [r0]
 	movs r1, 0x1D
 	movs r2, 0x11
-	bl MenuPrintRightAligned
+	bl MenuPrint_RightAligned
 	b _080FC310
 	.align 2, 0
 _080FC2AC: .4byte 0x02000000

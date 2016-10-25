@@ -607,7 +607,7 @@ int sub_8072AB0(u8 *str, u8 left, u16 top, u8 width, u8 height, u32 a6)
         MenuFillWindowRectWithBlankTile(left, top + 2 * newlineCount, left + width - 1, height + top - 1);
 }
 
-void MenuPrintRightAligned(u8 *str, u8 left, u8 top)
+void MenuPrint_RightAligned(u8 *str, u8 left, u8 top)
 
 {
     sub_8004D38(gMenuWindowPtr, str, gMenuTextTileOffset, left, top);

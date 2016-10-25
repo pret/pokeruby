@@ -24533,7 +24533,7 @@ Task_Roulette_0: @ 81176A8
 	adds r0, r5, 0
 	movs r1, 0x9
 	movs r2, 0x1
-	bl MenuPrintRightAligned
+	bl MenuPrint_RightAligned
 	ldr r2, _08117768 @ =gUnknown_083F8DF0
 	ldr r1, _0811776C @ =gUnknown_0202E8CC
 	mov r8, r1

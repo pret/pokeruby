@@ -15324,7 +15324,7 @@ sub_8143300: @ 8143300
 	mov r8, r2
 	mov r1, r8
 	adds r2, r4, 0
-	bl MenuPrintRightAligned
+	bl MenuPrint_RightAligned
 	ldr r0, _081433D4 @ =gOtherText_IDNumber2
 	adds r4, r6, 0x3
 	lsls r4, 24
@@ -15346,7 +15346,7 @@ sub_8143300: @ 8143300
 	mov r0, r9
 	mov r1, r8
 	adds r2, r4, 0
-	bl MenuPrintRightAligned
+	bl MenuPrint_RightAligned
 	ldr r0, _081433DC @ =gMainMenuString_Time
 	adds r6, 0x5
 	lsls r6, 24
@@ -15377,7 +15377,7 @@ sub_8143300: @ 8143300
 	mov r0, r9
 	mov r1, r8
 	adds r2, r6, 0
-	bl MenuPrintRightAligned
+	bl MenuPrint_RightAligned
 	pop {r3-r5}
 	mov r8, r3
 	mov r9, r4
