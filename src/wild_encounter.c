@@ -35,6 +35,7 @@ extern u8 sub_8057468(u8);
 extern u8 sub_81344CC(void);
 extern u8 sub_8057494(u8);
 extern void sub_8081A00(void);
+extern u8 sub_8057434(u8);
 
 extern u8 gWildEncountersDisabled;
 extern u16 gUnknown_0839DC00[];
@@ -446,21 +447,13 @@ bool8 StandardWildEncounter(u16 a, u16 b)
             {
                 if(gWildMonHeaders[unk].landMonsInfo)
                 {
-                    if(a == b || DoGlobalWildEncounterDiceRoll())
+                    if(a != b && !DoGlobalWildEncounterDiceRoll())
+                        return 0;
+                    
+                    if(DoWildEncounterTest(gWildMonHeaders[unk].landMonsInfo->encounterRate, 0) == TRUE)
                     {
-                        if(DoWildEncounterTest(gWildMonHeaders[unk].landMonsInfo->encounterRate, 0) == TRUE)
+                        if(sub_81344CC() != TRUE)
                         {
-                            if(sub_81344CC() == TRUE)
-                            {
-                                if(RepelCheck(gSaveBlock1.roamer.level))
-                                {
-                                    sub_8081A5C();
-                                    return 1;
-                                }
-                                else
-                                    return 0;
-                            }
-                            
                             if(DoMassOutbreakEncounterTest() == TRUE && SetUpMassOutbreakEncounter(1) == TRUE)
                             {
                                 sub_8081A00();
@@ -479,7 +472,7 @@ bool8 StandardWildEncounter(u16 a, u16 b)
             else
             {
                 //_080851D8
-                if(sub_8057494(a) == TRUE || TestPlayerAvatarFlags(8) || sub_8057434(a) == TRUE)
+                if(sub_8057494(a) == TRUE && TestPlayerAvatarFlags(8) || sub_8057434(a) == TRUE)
                 {
                     if(gWildMonHeaders[unk].landMonsInfo)
                     {
@@ -510,17 +503,6 @@ bool8 StandardWildEncounter(u16 a, u16 b)
                             }
                         }
                     }
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
                 }
             }
         }
@@ -619,3 +601,18 @@ void RockSmashWildEncounter(void)
     gScriptResult = 0;
     return;
 }
+
+/*
+void FishingWildEncounter(u8 a)
+{
+    if(CheckFeebas(a) == TRUE)
+    {
+        CreateWildMon()
+    }
+    else
+    {
+        
+    }
+    sav12_xor_increment();
+}
+*/
