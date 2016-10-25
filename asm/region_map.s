@@ -3006,8 +3006,8 @@ _080FBFF2:
 	bx r1
 	thumb_func_end sub_80FBFB4
 
-	thumb_func_start sub_80FBFF8
-sub_80FBFF8: @ 80FBFF8
+	thumb_func_start CopyMapName
+CopyMapName: @ 80FBFF8
 	push {lr}
 	lsls r1, 16
 	lsrs r1, 16
@@ -3032,7 +3032,7 @@ _080FC020:
 _080FC026:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80FBFF8
+	thumb_func_end CopyMapName
 
 	thumb_func_start sub_80FC02C
 sub_80FC02C: @ 80FC02C
@@ -3041,7 +3041,7 @@ sub_80FC02C: @ 80FC02C
 	lsrs r1, 16
 	cmp r1, 0x42
 	beq _080FC03C
-	bl sub_80FBFF8
+	bl CopyMapName
 	b _080FC042
 _080FC03C:
 	ldr r1, _080FC048 @ =gOtherText_Hideout

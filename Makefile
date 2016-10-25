@@ -78,7 +78,6 @@ asm/field_effect.o \
 asm/rom_80859BC.o \
 asm/pokedex.o \
 asm/trainer_card.o \
-asm/save_menu_util.o \
 asm/rom_8094928.o \
 asm/item_menu.o \
 asm/battle_anim_80A7E7C.o \

@@ -20,7 +20,7 @@ extern void remove_some_task(void);
 extern void dp12_8087EA4(void);
 extern void sav12_xor_increment(u8 index);
 extern bool8 sub_8125D44(u8);  //Saving related
-extern void sub_80945C0(u8, u8);
+extern void HandleDrawSaveWindowInfo(u8, u8);
 extern void sub_80946C8(u8, u8);
 extern void save_serialize_map(void);
 extern void PlayRainSoundEffect(void);
@@ -603,7 +603,7 @@ static bool8 SaveDialogCheckForTimeoutAndKeypress(void)
 static u8 SaveDialogCB_DisplayConfirmMessage(void)
 {
     MenuZeroFillScreen();
-    sub_80945C0(0, 0);
+    HandleDrawSaveWindowInfo(0, 0);
     //"Would you like to save the game?"
     DisplaySaveMessageWithCallback(gSaveText_WouldYouLikeToSave, SaveDialogCB_DisplayConfirmYesNoMenu);
     return SAVE_IN_PROGRESS;
