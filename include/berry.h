@@ -43,9 +43,11 @@ struct BattleEnigmaBerry
 struct BerryTree
 {
     u8 berry;
-    u8 stage;
+    u8 stage:7;
+    u8 growthSparkle:1;
     u16 secondsUntilNextStage;
-    u8 wateredFlags;
+    u8 berryYield;
+    u8 wateredFlags; // 1 bit for each stage
 };
 
 #endif // GUARD_BERRY_H
