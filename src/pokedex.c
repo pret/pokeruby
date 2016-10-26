@@ -79,6 +79,14 @@ extern u8 gPokedexMenu_Pal[];
 extern u8 gUnknown_0839F73C[];
 extern u8 gUnknown_083A05EC[];
 extern u8 gUnknown_083A05F1[];
+extern struct SpriteTemplate gSpriteTemplate_83A053C;
+extern struct SpriteTemplate gSpriteTemplate_83A0524;
+extern struct SpriteTemplate gSpriteTemplate_83A0554;
+extern struct SpriteTemplate gSpriteTemplate_83A056C;
+extern struct SpriteTemplate gSpriteTemplate_83A0584;
+extern struct SpriteTemplate gSpriteTemplate_83A059C;
+extern struct SpriteTemplate gSpriteTemplate_83A05B4;
+
 
 extern void m4aMPlayVolumeControl(struct MusicPlayerInfo *mplayInfo, u16 trackBits, u16 volume);
 extern bool8 BeginNormalPaletteFade(u32, s8, u8, u8, u16);
@@ -1847,4 +1855,100 @@ u32 sub_808E8C8(u16 a, u16 b, u16 c)
         }
     }
     return 0xFFFF;
+}
+
+void sub_808E978(u8 a)
+{
+    u8 spriteId;
+    u16 r5;
+    
+    spriteId = CreateSprite(&gSpriteTemplate_83A053C, 0xB8, 4, 0);
+    gSprites[spriteId].data1 = 0;
+    
+    spriteId = CreateSprite(&gSpriteTemplate_83A053C, 0xB8, 0x9C, 0);
+    gSprites[spriteId].data1 = 1;
+    gSprites[spriteId].vFlip = 1;
+    
+    CreateSprite(&gSpriteTemplate_83A0524, 0xEA, 0x14, 0);
+    CreateSprite(&gSpriteTemplate_83A0554, 0x10, 0x8A, 0);
+    
+    spriteId = CreateSprite(&gSpriteTemplate_83A0554, 0x30, 0x8A, 0);
+    StartSpriteAnim(&gSprites[spriteId], 3);
+    
+    spriteId = CreateSprite(&gSpriteTemplate_83A0554, 0x10, 0x9E, 0);
+    StartSpriteAnim(&gSprites[spriteId], 2);
+    gSprites[spriteId].data2 = 0x80;
+    
+    spriteId = CreateSprite(&gSpriteTemplate_83A0554, 0x30, 0x9E, 0);
+    StartSpriteAnim(&gSprites[spriteId], 1);
+    
+    spriteId = CreateSprite(&gSpriteTemplate_83A056C, 0, 0x50, 2);
+    gSprites[spriteId].oam.affineMode = 1;
+    gSprites[spriteId].oam.matrixNum = 30;
+    gSprites[spriteId].data0 = 0x1E;
+    gSprites[spriteId].data1 = 0;
+    
+    spriteId = CreateSprite(&gSpriteTemplate_83A056C, 0, 0x50, 2);
+    gSprites[spriteId].oam.affineMode = 1;
+    gSprites[spriteId].oam.matrixNum = 31;
+    gSprites[spriteId].data0 = 0x1F;
+    gSprites[spriteId].data1 = 0x80;
+    
+    if(a == 0)
+    {
+        u32 _a;
+        
+        CreateSprite(&gSpriteTemplate_83A0584, 0x20, 0x28, 1);
+        
+        spriteId = CreateSprite(&gSpriteTemplate_83A0584, 0x20, 0x48, 1);
+        StartSpriteAnim(&gSprites[spriteId], 1);
+        _a = 0;
+        
+        spriteId = CreateSprite(&gSpriteTemplate_83A059C, 0x1C, 0x30, 1);
+        r5 = gUnknown_0202FFB4->unk61A / 100;
+        StartSpriteAnim(&gSprites[spriteId], r5);
+        if(r5 != 0)
+            _a = 1;
+        else
+            gSprites[spriteId].invisible = 1;
+        
+        spriteId = CreateSprite(&gSpriteTemplate_83A059C, 0x22, 0x30, 1);
+        r5 = (gUnknown_0202FFB4->unk61A % 100) / 10;
+        if(r5 != 0 || _a != 0)
+            StartSpriteAnim(&gSprites[spriteId], r5);
+        else
+            gSprites[spriteId].invisible = 1;
+        
+        spriteId = CreateSprite(&gSpriteTemplate_83A059C, 0x28, 0x30, 1);
+        r5 = (gUnknown_0202FFB4->unk61A % 100) % 10;
+        StartSpriteAnim(&gSprites[spriteId], r5);
+        _a = 0;
+        
+        spriteId = CreateSprite(&gSpriteTemplate_83A059C, 0x1C, 0x50, 1);
+        r5 = gUnknown_0202FFB4->unk61C / 100;
+        StartSpriteAnim(&gSprites[spriteId], r5);
+        if(r5 != 0)
+            _a = 1;
+        else
+            gSprites[spriteId].invisible = 1;
+        
+        spriteId = CreateSprite(&gSpriteTemplate_83A059C, 0x22, 0x50, 1);
+        r5 = (gUnknown_0202FFB4->unk61C % 100) / 10;
+        if(r5 != 0 || _a != 0)
+            StartSpriteAnim(&gSprites[spriteId], r5);
+        else
+            gSprites[spriteId].invisible = 1;
+        
+        spriteId = CreateSprite(&gSpriteTemplate_83A059C, 0x28, 0x50, 1);
+        r5 = (gUnknown_0202FFB4->unk61C % 100) % 10;
+        StartSpriteAnim(&gSprites[spriteId], r5);
+        
+        spriteId = CreateSprite(&gSpriteTemplate_83A05B4, 0x8C, 0x60, 1);
+        gSprites[spriteId].invisible = 1;
+    }
+    else
+    {
+        spriteId = CreateSprite(&gSpriteTemplate_83A05B4, 0x8C, 0x50, 1);
+        gSprites[spriteId].invisible = 1;
+    }
 }
