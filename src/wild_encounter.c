@@ -100,11 +100,11 @@ u16 sub_8084984(s16 x, s16 y, u8 c)
     u16 r9 = gUnknown_0839DC00[c * 3 + 1];
     u16 r6 = gUnknown_0839DC00[c * 3 + 2];
     u16 r5 = *ptr;
-   
+
     while(r5 <= r9)
     {
         u16 i;
-       
+
         for(i = 0; i < gMapHeader.mapData->width; i++)
         {
             if(sub_805759C(MapGridGetMetatileBehaviorAt(i + 7, r5 + 7)) == TRUE)
@@ -117,7 +117,7 @@ u16 sub_8084984(s16 x, s16 y, u8 c)
         }
         r5++;
     }
- 
+
     return r6 + 1;
 }
 
@@ -129,13 +129,13 @@ bool8 CheckFeebas(void)
     u8 r7 = 0;
     u8 i;
     u16 foo;
-   
+
     if(gSaveBlock1.location.mapGroup == 0 && gSaveBlock1.location.mapNum == 0x22)
     {
         GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
         x -= 7;
         y -= 7;
-        
+
         // *sigh* whatever gets the code to match!
         {
         register u16 *arr asm("r0");
@@ -145,7 +145,7 @@ bool8 CheckFeebas(void)
             r7 = 2;
         }
         //_08084A8E
- 
+
         if(Random() % 100 > 49) //Why not just do (Random() & 1) to get a 50% chance?
             return FALSE;
         //_08084AC8
@@ -163,7 +163,7 @@ bool8 CheckFeebas(void)
         {
             if(foo == feebasSpots[i])
                 return TRUE;
-        }        
+        }
     }
     //_08084B38
     return FALSE;
@@ -183,7 +183,7 @@ void FeebasSeedRng(u16 seed)
 u8 PickWildMon_Grass(void)
 {
     u8 val = Random() % 100;
-    
+
     if(val < 20)
         return 0;
     if(val >= 20 && val < 40)
@@ -213,7 +213,7 @@ u8 PickWildMon_Grass(void)
 u8 PickWildMon_Water(void)
 {
     u8 val = Random() % 100;
-    
+
     if(val < 60)
         return 0;
     if(val >= 60 && val < 90)
@@ -230,7 +230,7 @@ u8 PickWildMon_Fishing(u8 rod)
 {
     u32 r5 = 0;
     u8 val = Random() % 100;
-    
+
     switch(rod)
     {
         case 0: //old rod?
@@ -262,7 +262,7 @@ u8 PickWildMon_Fishing(u8 rod)
         default:
             return r5;
     }
-    
+
     return r5;
 }
 
@@ -273,7 +273,7 @@ u8 RandomInRange(struct WildPokemon *wildPokemon)
     u8 max;
     u8 range;
     u8 rand;
-    
+
     //Make sure minimum level is less than maximum level
     if(wildPokemon->maxLevel >= wildPokemon->minLevel)
     {
@@ -293,7 +293,7 @@ u8 RandomInRange(struct WildPokemon *wildPokemon)
 u16 GetCurrentMapWildMonHeader(void)
 {
     u16 i;
-    
+
     for(i = 0; gWildMonHeaders[i].mapGroup != 0xFF; i++)
     {
         if(gWildMonHeaders[i].mapGroup == gSaveBlock1.location.mapGroup &&
@@ -308,28 +308,28 @@ u8 PickWildMonNature(void)
     u16 foo;
     u32 r7;
     u8 arr[25];
-    
+
     if(GetSafariZoneFlag() == TRUE && Random() % 100 < 80)
     {
         r7 = sub_80C8448();
-        
+
         if(r7)
         {
             u8 i;
-            
+
             for(i = 0; i < 25; i++)
                 arr[i] = i;
             //_08084E04
             for(i = 0; i < 24; i++)
             {
                 u8 j;
-                
+
                 for(j = i + 1; j < 25; j++)
                 {
                     if(Random() & 1)
                     {
                         u8 temp = arr[i];
-                        
+
                         arr[i] = arr[j];
                         arr[j] = temp;
                     }
@@ -357,7 +357,7 @@ bool8 GenerateWildMon(struct WildPokemonInfo *a, u8 b, u8 c)
 {
     u8 mon = 0;
     u8 level;
-    
+
     switch(b)
     {
         case 0:
@@ -372,7 +372,7 @@ bool8 GenerateWildMon(struct WildPokemonInfo *a, u8 b, u8 c)
         default:
             break;
     }
-    
+
     level = RandomInRange(&a->wildPokemon[mon]);
     if(c == 1 && RepelCheck(level) == 0)
     {
@@ -389,7 +389,7 @@ u16 GenerateFishingWildMon(struct WildPokemonInfo *a, u8 rod)
 {
     u8 mon = PickWildMon_Fishing(rod);
     u8 level = RandomInRange(&a->wildPokemon[mon]);
-    
+
     CreateWildMon(a->wildPokemon[mon].species, level);
     return a->wildPokemon[mon].species;
 }
@@ -397,7 +397,7 @@ u16 GenerateFishingWildMon(struct WildPokemonInfo *a, u8 rod)
 bool8 SetUpMassOutbreakEncounter(u8 a)
 {
     u16 i;
-    
+
     if(a == 1 && RepelCheck(gSaveBlock1.outbreakPokemonLevel) == 0)
     {
         return 0;
@@ -434,7 +434,7 @@ bool8 DoWildEncounterRateDiceRoll(u16 a)
 bool8 DoWildEncounterTest(u32 encounterRate, u8 b)
 {
     encounterRate *= 16;
-    
+
     if(TestPlayerAvatarFlags(6))
     {
         encounterRate = encounterRate * 80 / 100;
@@ -442,7 +442,7 @@ bool8 DoWildEncounterTest(u32 encounterRate, u8 b)
     //_0808507E
     ApplyFluteEncounterRateMod(&encounterRate);
     ApplyCleanseTagEncounterRateMod(&encounterRate);
-    
+
     if(b == 0)
     {
         // UB: Too few arguments for function 'GetMonData'
@@ -474,11 +474,11 @@ bool8 DoGlobalWildEncounterDiceRoll(void)
 bool8 StandardWildEncounter(u16 a, u16 b)
 {
     u16 unk;
-    
+
     if(gWildEncountersDisabled != TRUE)
     {
         unk = GetCurrentMapWildMonHeader();
-        
+
         if(unk != 0xFFFF)
         {
             if(sub_8057468(a) == 1)
@@ -487,7 +487,7 @@ bool8 StandardWildEncounter(u16 a, u16 b)
                 {
                     if(b != a && !DoGlobalWildEncounterDiceRoll())
                         return 0;
-                    
+
                     if(DoWildEncounterTest(gWildMonHeaders[unk].landMonsInfo->encounterRate, 0) == TRUE)
                     {
                         if(sub_81344CC() == TRUE)
@@ -522,7 +522,7 @@ bool8 StandardWildEncounter(u16 a, u16 b)
                     {
                         if(b != a && !DoGlobalWildEncounterDiceRoll())
                             return 0;
-                        
+
                         if(DoWildEncounterTest(gWildMonHeaders[unk].waterMonsInfo->encounterRate, 0) == TRUE)
                         {
                             if(sub_81344CC() == TRUE)
@@ -755,11 +755,11 @@ _08085284:\n\
 void RockSmashWildEncounter(void)
 {
     u16 headerNum = GetCurrentMapWildMonHeader();
-    
+
     if(headerNum != 0xFFFF)
     {
         struct WildPokemonInfo *wildPokemonInfo = gWildMonHeaders[headerNum].rockSmashMonsInfo;
-        
+
         if(wildPokemonInfo == NULL)
         {
             gScriptResult = 0;
@@ -783,7 +783,7 @@ u8 SweetScentWildEncounter(void)
     s16 y;
     u16 headerNum;
     struct WildPokemonInfo *wildPokemonInfo;
-    
+
     PlayerGetDestCoords(&x, &y);
     //headerNum = GetCurrentMapWildMonHeader();
     if((headerNum = GetCurrentMapWildMonHeader()) != 0xFFFF)
@@ -791,17 +791,17 @@ u8 SweetScentWildEncounter(void)
         if(sub_8057468(MapGridGetMetatileBehaviorAt(x, y)) == 1)
         {
             wildPokemonInfo = gWildMonHeaders[headerNum].landMonsInfo;
-            
+
             if(wildPokemonInfo == NULL)
                 return 0;
-            
+
             if(sub_81344CC() == 1)
             {
                 //_080853BC
                 sub_8081A5C();
                 return 1;
             }
-            
+
             if(DoMassOutbreakEncounterTest() == 1)
                 SetUpMassOutbreakEncounter(0);
             else
@@ -817,10 +817,10 @@ u8 SweetScentWildEncounter(void)
             if(sub_8057494(MapGridGetMetatileBehaviorAt(x, y)) == 1)
             {
                 wildPokemonInfo = gWildMonHeaders[headerNum].waterMonsInfo;
-                
+
                 if(wildPokemonInfo == NULL)
                     return 0;
-                
+
                 if(sub_81344CC() == 1)
                 {
                     sub_8081A5C();
@@ -840,7 +840,7 @@ u8 SweetScentWildEncounter(void)
 u8 GetFishingWildMonListHeader(void)
 {
     u16 headerNum = GetCurrentMapWildMonHeader();
-    
+
     if(headerNum != 0xFFFF && gWildMonHeaders[headerNum].fishingMonsInfo != NULL)
         return 1;
     else
@@ -850,11 +850,11 @@ u8 GetFishingWildMonListHeader(void)
 void FishingWildEncounter(u8 rod)
 {
     u16 species;
-    
+
     if(CheckFeebas() == TRUE)
     {
         u8 level = RandomInRange(&gWildFeebasRoute119Data);
-        
+
         species = gWildFeebasRoute119Data.species;
         CreateWildMon(species, level);
     }
@@ -911,11 +911,11 @@ u16 GetLocalWildMon(bool8 *isWaterMon)
 u16 GetMirageIslandMon(void)
 {
     u16 headerNum = GetCurrentMapWildMonHeader();
-    
+
     if(headerNum != 0xFFFF)
     {
         struct WildPokemonInfo *waterMonsInfo = gWildMonHeaders[headerNum].waterMonsInfo;
-        
+
         if(waterMonsInfo)
             return waterMonsInfo->wildPokemon[PickWildMon_Water()].species;
     }
@@ -925,7 +925,7 @@ u16 GetMirageIslandMon(void)
 bool8 UpdateRepelCounter(void)
 {
     u16 steps = VarGet(0x4021);
-    
+
     if(steps != 0)
     {
         steps--;
@@ -943,7 +943,7 @@ bool8 UpdateRepelCounter(void)
 bool8 RepelCheck(bool8 level)
 {
     u8 i;
-    
+
     if(!VarGet(0x4021))
         return TRUE;
     else
