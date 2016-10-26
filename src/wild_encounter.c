@@ -469,11 +469,10 @@ bool8 DoGlobalWildEncounterDiceRoll(void)
         return TRUE;
 }
 
-#ifdef NONMATCHING
-//ToDo: fix control flow
 bool8 StandardWildEncounter(u16 a, u16 b)
 {
     u16 unk;
+    struct Roamer *roamer;
 
     if(gWildEncountersDisabled != TRUE)
     {
@@ -492,22 +491,18 @@ bool8 StandardWildEncounter(u16 a, u16 b)
                     {
                         if(sub_81344CC() == TRUE)
                         {
-                            //_0808524A
-                            if(RepelCheck(gSaveBlock1.roamer.level))
-                            {
-                                sub_8081A5C();
-                                return 1;
-                            }
+                            goto repel_check;
                         }
                         else
                         {
-                            if(DoMassOutbreakEncounterTest() == TRUE && SetUpMassOutbreakEncounter(1) == TRUE
-                            || GenerateWildMon(gWildMonHeaders[unk].landMonsInfo, 0, 1) == 1)
+                            if(DoMassOutbreakEncounterTest() == TRUE && SetUpMassOutbreakEncounter(1) == TRUE)
                             {
-                                //_0808527A
-                                asm("");
                                 sub_8081A00();
                                 return 1;
+                            }
+                            if (GenerateWildMon(gWildMonHeaders[unk].landMonsInfo, 0, 1) == 1)
+                            {
+                                goto label;
                             }
                         }
                     }
@@ -527,8 +522,10 @@ bool8 StandardWildEncounter(u16 a, u16 b)
                         {
                             if(sub_81344CC() == TRUE)
                             {
+                            repel_check:
                                 //_0808524A
-                                if(RepelCheck(gSaveBlock1.roamer.level))
+                                roamer = &gSaveBlock1.roamer;
+                                if(RepelCheck(roamer->level))
                                 {
                                     sub_8081A5C();
                                     return 1;
@@ -540,6 +537,7 @@ bool8 StandardWildEncounter(u16 a, u16 b)
                                 if(GenerateWildMon(gWildMonHeaders[unk].waterMonsInfo, 1, 1) == 1)
                                 {
                                     //_0808527A
+                                    label:
                                     sub_8081A00();
                                     return 1;
                                 }
@@ -552,205 +550,6 @@ bool8 StandardWildEncounter(u16 a, u16 b)
     }
     return 0;
 }
-#else
-__attribute__((naked))
-bool8 StandardWildEncounter(u16 a, u16 b)
-{
-    asm(".syntax unified\n\
-	push {r4-r7,lr}\n\
-	mov r7, r9\n\
-	mov r6, r8\n\
-	push {r6,r7}\n\
-	lsls r0, 16\n\
-	lsrs r6, r0, 16\n\
-	mov r9, r6\n\
-	lsls r1, 16\n\
-	lsrs r7, r1, 16\n\
-	mov r8, r7\n\
-	ldr r0, _080851CC\n\
-	ldrb r0, [r0]\n\
-	cmp r0, 0x1\n\
-	bne _08085122\n\
-	b _08085282\n\
-_08085122:\n\
-	bl GetCurrentMapWildMonHeader\n\
-	lsls r0, 16\n\
-	lsrs r5, r0, 16\n\
-	ldr r0, _080851D0\n\
-	cmp r5, r0\n\
-	bne _08085132\n\
-	b _08085282\n\
-_08085132:\n\
-	lsls r0, r6, 24\n\
-	lsrs r4, r0, 24\n\
-	adds r0, r4, 0\n\
-	bl sub_8057468\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, 0x1\n\
-	bne _080851D8\n\
-	ldr r1, _080851D4\n\
-	lsls r2, r5, 2\n\
-	adds r0, r2, r5\n\
-	lsls r0, 2\n\
-	adds r1, 0x4\n\
-	adds r0, r1\n\
-	ldr r0, [r0]\n\
-	adds r4, r2, 0\n\
-	cmp r0, 0\n\
-	bne _0808515A\n\
-	b _08085282\n\
-_0808515A:\n\
-	cmp r7, r6\n\
-	beq _0808516A\n\
-	bl DoGlobalWildEncounterDiceRoll\n\
-	lsls r0, 24\n\
-	cmp r0, 0\n\
-	bne _0808516A\n\
-	b _08085282\n\
-_0808516A:\n\
-	ldr r1, _080851D4\n\
-	adds r0, r4, r5\n\
-	lsls r0, 2\n\
-	adds r1, 0x4\n\
-	adds r0, r1\n\
-	ldr r0, [r0]\n\
-	ldrb r0, [r0]\n\
-	movs r1, 0\n\
-	bl DoWildEncounterTest\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, 0x1\n\
-	beq _08085188\n\
-	b _08085282\n\
-_08085188:\n\
-	bl sub_81344CC\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, 0x1\n\
-	beq _0808524A\n\
-	bl DoMassOutbreakEncounterTest\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, 0x1\n\
-	bne _080851AE\n\
-	movs r0, 0x1\n\
-	bl SetUpMassOutbreakEncounter\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, 0x1\n\
-	beq _0808527A\n\
-_080851AE:\n\
-	ldr r1, _080851D4\n\
-	adds r0, r4, r5\n\
-	lsls r0, 2\n\
-	adds r1, 0x4\n\
-	adds r0, r1\n\
-	ldr r0, [r0]\n\
-	movs r1, 0\n\
-	movs r2, 0x1\n\
-	bl GenerateWildMon\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, 0x1\n\
-	beq _0808527A\n\
-	b _08085282\n\
-	.align 2, 0\n\
-_080851CC: .4byte gWildEncountersDisabled\n\
-_080851D0: .4byte 0x0000ffff\n\
-_080851D4: .4byte gWildMonHeaders\n\
-_080851D8:\n\
-	adds r0, r4, 0\n\
-	bl sub_8057494\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, 0x1\n\
-	beq _08085200\n\
-	movs r0, 0x8\n\
-	bl TestPlayerAvatarFlags\n\
-	lsls r0, 24\n\
-	cmp r0, 0\n\
-	beq _08085282\n\
-	adds r0, r4, 0\n\
-	bl sub_8057434\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, 0x1\n\
-	bne _08085282\n\
-_08085200:\n\
-	ldr r1, _08085260\n\
-	lsls r2, r5, 2\n\
-	adds r0, r2, r5\n\
-	lsls r0, 2\n\
-	adds r1, 0x8\n\
-	adds r0, r1\n\
-	ldr r0, [r0]\n\
-	adds r4, r2, 0\n\
-	cmp r0, 0\n\
-	beq _08085282\n\
-	cmp r8, r9\n\
-	beq _08085222\n\
-	bl DoGlobalWildEncounterDiceRoll\n\
-	lsls r0, 24\n\
-	cmp r0, 0\n\
-	beq _08085282\n\
-_08085222:\n\
-	ldr r1, _08085260\n\
-	adds r0, r4, r5\n\
-	lsls r0, 2\n\
-	adds r1, 0x8\n\
-	adds r4, r0, r1\n\
-	ldr r0, [r4]\n\
-	ldrb r0, [r0]\n\
-	movs r1, 0\n\
-	bl DoWildEncounterTest\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, 0x1\n\
-	bne _08085282\n\
-	bl sub_81344CC\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, 0x1\n\
-	bne _08085268\n\
-_0808524A:\n\
-	ldr r0, _08085264\n\
-	ldrb r0, [r0, 0xC]\n\
-	bl RepelCheck\n\
-	lsls r0, 24\n\
-	cmp r0, 0\n\
-	beq _08085282\n\
-	bl sub_8081A5C\n\
-	movs r0, 0x1\n\
-	b _08085284\n\
-	.align 2, 0\n\
-_08085260: .4byte gWildMonHeaders\n\
-_08085264: .4byte gSaveBlock1 + 0x3144\n\
-_08085268:\n\
-	ldr r0, [r4]\n\
-	movs r1, 0x1\n\
-	movs r2, 0x1\n\
-	bl GenerateWildMon\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, 0x1\n\
-	bne _08085282\n\
-_0808527A:\n\
-	bl sub_8081A00\n\
-	movs r0, 0x1\n\
-	b _08085284\n\
-_08085282:\n\
-	movs r0, 0\n\
-_08085284:\n\
-	pop {r3,r4}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	pop {r4-r7}\n\
-	pop {r1}\n\
-	bx r1\n\
-    .syntax divided\n");
-}
-#endif
 
 void RockSmashWildEncounter(void)
 {
