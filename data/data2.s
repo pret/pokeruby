@@ -11193,8 +11193,11 @@ gWildFeebasRoute119Data:: @ 839DBFC
 	.2byte SPECIES_FEEBAS
 
 @ Some Feebas tile related data
+	.align 2
 gUnknown_0839DC00:: @ 839DC00
-	.2byte 0, 0x2D, 0, 0x2E, 0x5B, 0x83, 0x5C, 0x8B, 0x12A, 0
+	.2byte  0x0, 0x2D,   0x0
+	.2byte 0x2E, 0x5B,  0x83
+	.2byte 0x5C, 0x8B, 0x12A
 
 	.align 2
 gSpriteImage_839DC14:: @ 839DC14
