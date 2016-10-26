@@ -2604,14 +2604,14 @@ sub_80FBCF0: @ 80FBCF0
 	lsls r0, 16
 	lsls r1, 16
 	lsrs r1, 16
-	ldr r2, _080FBD98 @ =gUnknown_083E5C40
+	ldr r2, _080FBD98 @ =gRegionMapBrendanIconTiles
 	str r2, [sp, 0x18]
 	movs r2, 0x80
 	add r5, sp, 0x18
 	lsrs r3, r0, 16
 	orrs r0, r2
 	str r0, [r5, 0x4]
-	ldr r0, _080FBD9C @ =gUnknown_083E5C20
+	ldr r0, _080FBD9C @ =gRegionMapBrendanIconPalette
 	str r0, [sp, 0x20]
 	ldr r2, _080FBDA0 @ =0xffff0000
 	add r4, sp, 0x20
@@ -2636,9 +2636,9 @@ sub_80FBCF0: @ 80FBCF0
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0x1
 	bne _080FBD42
-	ldr r0, _080FBDB8 @ =gUnknown_083E5CE0
+	ldr r0, _080FBDB8 @ =gRegionMapMayIconTiles
 	str r0, [sp, 0x18]
-	ldr r0, _080FBDBC @ =gUnknown_083E5CC0
+	ldr r0, _080FBDBC @ =gRegionMapMayIconPalette
 	str r0, [sp, 0x20]
 _080FBD42:
 	adds r0, r5, 0
@@ -2682,16 +2682,16 @@ _080FBD42:
 	ldr r0, _080FBDC8 @ =sub_80FBF34
 	b _080FBDEA
 	.align 2, 0
-_080FBD98: .4byte gUnknown_083E5C40
-_080FBD9C: .4byte gUnknown_083E5C20
+_080FBD98: .4byte gRegionMapBrendanIconTiles
+_080FBD9C: .4byte gRegionMapBrendanIconPalette
 _080FBDA0: .4byte 0xffff0000
 _080FBDA4: .4byte gUnknown_083E7708
 _080FBDA8: .4byte gUnknown_083E7718
 _080FBDAC: .4byte gDummySpriteAffineAnimTable
 _080FBDB0: .4byte SpriteCallbackDummy
 _080FBDB4: .4byte gSaveBlock2
-_080FBDB8: .4byte gUnknown_083E5CE0
-_080FBDBC: .4byte gUnknown_083E5CC0
+_080FBDB8: .4byte gRegionMapMayIconTiles
+_080FBDBC: .4byte gRegionMapMayIconPalette
 _080FBDC0: .4byte gUnknown_020388CC
 _080FBDC4: .4byte gSprites
 _080FBDC8: .4byte sub_80FBF34

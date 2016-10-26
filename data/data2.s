@@ -22150,7 +22150,7 @@ gUnknown_083E5A1C:: @ 83E5A1C
 	.string "▶$"
 
 	.align 2
-gUnknown_083E5A20:: @ 83E5A20
+gHealLocations:: @ 83E5A20
 	heal_location LittlerootTown_BrendansHouse_2F, 4, 2
 	heal_location LittlerootTown_MaysHouse_2F, 4, 2
 	heal_location PetalburgCity, 20, 17
@@ -22187,19 +22187,19 @@ gUnknown_083E5B34:: @ 83E5B34
 	.incbin "graphics/pokenav/cursor_large.4bpp.lz"
 
 	.align 2
-gUnknown_083E5C20:: @ 83E5C20
+gRegionMapBrendanIconPalette:: @ 83E5C20
 	.incbin "graphics/pokenav/brendan_icon.gbapal"
 
 	.align 2
-gUnknown_083E5C40:: @ 83E5C40
+gRegionMapBrendanIconTiles:: @ 83E5C40
 	.incbin "graphics/pokenav/brendan_icon.4bpp"
 
 	.align 2
-gUnknown_083E5CC0:: @ 83E5CC0
+gRegionMapMayIconPalette:: @ 83E5CC0
 	.incbin "graphics/pokenav/may_icon.gbapal"
 
 	.align 2
-gUnknown_083E5CE0:: @ 83E5CE0
+gRegionMapMayIconTiles:: @ 83E5CE0
 	.incbin "graphics/pokenav/may_icon.4bpp"
 
 	.align 2

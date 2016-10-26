@@ -14,7 +14,7 @@ GetHealLocationIndexByMap: @ 80FA86C
 	lsls r1, 16
 	lsrs r1, 16
 	movs r3, 0
-	ldr r2, _080FA890 @ =gUnknown_083E5A20
+	ldr r2, _080FA890 @ =gHealLocations
 _080FA87A:
 	movs r0, 0
 	ldrsb r0, [r2, r0]
@@ -27,7 +27,7 @@ _080FA87A:
 	adds r0, r3, 0x1
 	b _080FA89E
 	.align 2, 0
-_080FA890: .4byte gUnknown_083E5A20
+_080FA890: .4byte gHealLocations
 _080FA894:
 	adds r2, 0x8
 	adds r3, 0x1
@@ -51,11 +51,11 @@ GetHealLocationByMap: @ 80FA8A4
 	cmp r0, 0
 	beq _080FA8C4
 	lsls r0, 3
-	ldr r1, _080FA8C0 @ =gUnknown_083E5A18
+	ldr r1, _080FA8C0 @ =gHealLocations - 0x8
 	adds r0, r1
 	b _080FA8C6
 	.align 2, 0
-_080FA8C0: .4byte gUnknown_083E5A18
+_080FA8C0: .4byte gHealLocations - 0x8
 _080FA8C4:
 	movs r0, 0
 _080FA8C6:
@@ -71,11 +71,11 @@ GetHealLocation: @ 80FA8CC
 	cmp r0, 0x16
 	bhi _080FA8E4
 	lsls r0, 3
-	ldr r1, _080FA8E0 @ =gUnknown_083E5A18
+	ldr r1, _080FA8E0 @ =gHealLocations - 0x8
 	adds r0, r1
 	b _080FA8E6
 	.align 2, 0
-_080FA8E0: .4byte gUnknown_083E5A18
+_080FA8E0: .4byte gHealLocations - 0x8
 _080FA8E4:
 	movs r0, 0
 _080FA8E6:
