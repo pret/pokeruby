@@ -491,7 +491,12 @@ bool8 StandardWildEncounter(u16 a, u16 b)
                     {
                         if(sub_81344CC() == TRUE)
                         {
-                            goto repel_check;
+                            roamer = &gSaveBlock1.roamer;
+                            if(RepelCheck(roamer->level))
+                            {
+                                sub_8081A5C();
+                                return 1;
+                            }
                         }
                         else
                         {
@@ -522,8 +527,6 @@ bool8 StandardWildEncounter(u16 a, u16 b)
                         {
                             if(sub_81344CC() == TRUE)
                             {
-                            repel_check:
-                                //_0808524A
                                 roamer = &gSaveBlock1.roamer;
                                 if(RepelCheck(roamer->level))
                                 {
