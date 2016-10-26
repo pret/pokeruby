@@ -43,7 +43,7 @@ process_overworld_input: @ 8067F18
 	lsls r2, 16
 	lsrs r2, 16
 	mov r8, r2
-	ldr r0, _08067FE8
+	ldr r0, _08067FE8 @ =gPlayerAvatar
 	ldrb r6, [r0, 0x3]
 	ldrb r0, [r0, 0x2]
 	mov r9, r0
@@ -421,19 +421,19 @@ sub_80681F0: @ 80681F0
 	movs r0, 0
 	b _08068234
 _08068208:
-	ldr r0, _0806823C
+	ldr r0, _0806823C @ =gUnknown_0815281E
 	cmp r4, r0
 	beq _0806822C
-	ldr r0, _08068240
+	ldr r0, _08068240 @ =gUnknown_08152C39
 	cmp r4, r0
 	beq _0806822C
-	ldr r0, _08068244
+	ldr r0, _08068244 @ =gUnknown_0815F36C
 	cmp r4, r0
 	beq _0806822C
-	ldr r0, _08068248
+	ldr r0, _08068248 @ =gUnknown_0815F43A
 	cmp r4, r0
 	beq _0806822C
-	ldr r0, _0806824C
+	ldr r0, _0806824C @ =gUnknown_081A0009
 	cmp r4, r0
 	beq _0806822C
 	movs r0, 0x5
@@ -519,7 +519,7 @@ sub_80682A8: @ 80682A8
 	ldrh r1, [r4, 0x2]
 	b _080682EE
 _080682D0:
-	ldr r1, _08068314
+	ldr r1, _08068314 @ =gUnknown_0821664C
 	lsls r2, r6, 3
 	adds r0, r2, r1
 	ldr r3, [r0]
@@ -541,7 +541,7 @@ _080682EE:
 	lsrs r3, r0, 24
 	cmp r3, 0x10
 	beq _0806830E
-	ldr r1, _08068318
+	ldr r1, _08068318 @ =gMapObjects
 	lsls r2, r3, 3
 	adds r0, r2, r3
 	lsls r0, 2
@@ -558,7 +558,7 @@ _08068314: .4byte gUnknown_0821664C
 _08068318: .4byte gMapObjects
 _0806831C:
 	movs r4, 0
-	ldr r1, _08068354
+	ldr r1, _08068354 @ =gUnknown_02029818
 _08068320:
 	ldrb r0, [r1]
 	cmp r0, 0x1
@@ -571,15 +571,15 @@ _0806832C:
 	adds r4, 0x1
 	cmp r4, 0x3
 	ble _08068320
-	ldr r0, _08068358
+	ldr r0, _08068358 @ =gSelectedMapObject
 	strb r3, [r0]
-	ldr r1, _0806835C
+	ldr r1, _0806835C @ =gUnknown_0202E8DE
 	adds r0, r2, r3
 	lsls r0, 2
 	adds r0, r5
 	ldrb r0, [r0, 0x8]
 	strh r0, [r1]
-	ldr r0, _08068360
+	ldr r0, _08068360 @ =gUnknown_0202E8E0
 	strh r6, [r0]
 	adds r0, r3, 0
 	bl GetFieldObjectScriptPointerByFieldObjectId
@@ -610,7 +610,7 @@ sub_8068364: @ 8068364
 	lsrs r3, r0, 24
 	cmp r3, 0x10
 	beq _08068392
-	ldr r1, _080683E0
+	ldr r1, _080683E0 @ =gMapObjects
 	lsls r2, r3, 3
 	adds r0, r2, r3
 	lsls r0, 2
@@ -625,7 +625,7 @@ _08068392:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080683DC
-	ldr r1, _080683E4
+	ldr r1, _080683E4 @ =gUnknown_0821664C
 	lsls r2, r6, 3
 	adds r0, r2, r1
 	ldr r3, [r0]
@@ -646,7 +646,7 @@ _08068392:
 	lsrs r3, r0, 24
 	cmp r3, 0x10
 	beq _080683DC
-	ldr r1, _080683E0
+	ldr r1, _080683E0 @ =gMapObjects
 	lsls r2, r3, 3
 	adds r0, r2, r3
 	lsls r0, 2
@@ -661,15 +661,15 @@ _080683DC:
 _080683E0: .4byte gMapObjects
 _080683E4: .4byte gUnknown_0821664C
 _080683E8:
-	ldr r0, _08068414
+	ldr r0, _08068414 @ =gSelectedMapObject
 	strb r3, [r0]
-	ldr r4, _08068418
+	ldr r4, _08068418 @ =gUnknown_0202E8DE
 	adds r0, r2, r3
 	lsls r0, 2
 	adds r0, r1
 	ldrb r0, [r0, 0x8]
 	strh r0, [r4]
-	ldr r0, _0806841C
+	ldr r0, _0806841C @ =gUnknown_0202E8E0
 	strh r6, [r0]
 	adds r0, r3, 0
 	bl GetFieldObjectScriptPointerByFieldObjectId
@@ -692,7 +692,7 @@ TryGetInvisibleMapObjectScript: @ 8068420
 	push {r4,r5,lr}
 	lsls r2, 24
 	lsrs r5, r2, 24
-	ldr r4, _08068450
+	ldr r4, _08068450 @ =gMapHeader
 	ldrh r1, [r0]
 	subs r1, 0x7
 	lsls r1, 16
@@ -709,7 +709,7 @@ TryGetInvisibleMapObjectScript: @ 8068420
 	ldr r2, [r0, 0x8]
 	cmp r2, 0
 	bne _08068458
-	ldr r0, _08068454
+	ldr r0, _08068454 @ =gUnknown_081C6C02
 	b _080684FA
 	.align 2, 0
 _08068450: .4byte gMapHeader
@@ -719,7 +719,7 @@ _08068458:
 	cmp r0, 0x8
 	bhi _080684F8
 	lsls r0, 2
-	ldr r1, _08068468
+	ldr r1, _08068468 @ =_0806846C
 	adds r0, r1
 	ldr r0, [r0]
 	mov pc, r0
@@ -755,13 +755,13 @@ _080684A4:
 	beq _080684F8
 	b _08068494
 _080684AA:
-	ldr r1, _080684CC
+	ldr r1, _080684CC @ =gUnknown_0202E8CC
 	lsrs r0, r2, 16
 	movs r3, 0x96
 	lsls r3, 2
 	adds r0, r3
 	strh r0, [r1]
-	ldr r0, _080684D0
+	ldr r0, _080684D0 @ =gUnknown_0202E8CE
 	strh r2, [r0]
 	ldrh r0, [r1]
 	bl FlagGet
@@ -769,7 +769,7 @@ _080684AA:
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _08068494
-	ldr r0, _080684D4
+	ldr r0, _080684D4 @ =HiddenItemScript
 	b _080684FA
 	.align 2, 0
 _080684CC: .4byte gUnknown_0202E8CC
@@ -778,13 +778,13 @@ _080684D4: .4byte HiddenItemScript
 _080684D8:
 	cmp r5, 0x2
 	bne _08068494
-	ldr r0, _080684F0
+	ldr r0, _080684F0 @ =gUnknown_0202E8CC
 	strh r2, [r0]
 	bl sub_80BC050
 	lsls r0, 24
 	cmp r0, 0
 	beq _08068494
-	ldr r0, _080684F4
+	ldr r0, _080684F4 @ =gUnknown_081A2C51
 	b _080684FA
 	.align 2, 0
 _080684F0: .4byte gUnknown_0202E8CC
@@ -812,7 +812,7 @@ sub_8068500: @ 8068500
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _08068524
-	ldr r0, _08068520
+	ldr r0, _08068520 @ =Event_TV
 	b _080686EE
 	.align 2, 0
 _08068520: .4byte Event_TV
@@ -823,7 +823,7 @@ _08068524:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0806853C
-	ldr r0, _08068538
+	ldr r0, _08068538 @ =gUnknown_081A0009
 	b _080686EE
 	.align 2, 0
 _08068538: .4byte gUnknown_081A0009
@@ -834,7 +834,7 @@ _0806853C:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _08068554
-	ldr r0, _08068550
+	ldr r0, _08068550 @ =ClosedSootopolisGymDoorScript
 	b _080686EE
 	.align 2, 0
 _08068550: .4byte ClosedSootopolisGymDoorScript
@@ -845,7 +845,7 @@ _08068554:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0806856C
-	ldr r0, _08068568
+	ldr r0, _08068568 @ =gUnknown_081A4363
 	b _080686EE
 	.align 2, 0
 _08068568: .4byte gUnknown_081A4363
@@ -856,7 +856,7 @@ _0806856C:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _08068584
-	ldr r0, _08068580
+	ldr r0, _08068580 @ =gUnknown_081C346A
 	b _080686EE
 	.align 2, 0
 _08068580: .4byte gUnknown_081C346A
@@ -867,7 +867,7 @@ _08068584:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0806859C
-	ldr r0, _08068598
+	ldr r0, _08068598 @ =gUnknown_081616E1
 	b _080686EE
 	.align 2, 0
 _08068598: .4byte gUnknown_081616E1
@@ -878,7 +878,7 @@ _0806859C:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080685B4
-	ldr r0, _080685B0
+	ldr r0, _080685B0 @ =Event_WorldMap
 	b _080686EE
 	.align 2, 0
 _080685B0: .4byte Event_WorldMap
@@ -889,7 +889,7 @@ _080685B4:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080685CC
-	ldr r0, _080685C8
+	ldr r0, _080685C8 @ =Event_RunningShoesManual
 	b _080686EE
 	.align 2, 0
 _080685C8: .4byte Event_RunningShoesManual
@@ -900,7 +900,7 @@ _080685CC:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080685E4
-	ldr r0, _080685E0
+	ldr r0, _080685E0 @ =PictureBookShelfScript
 	b _080686EE
 	.align 2, 0
 _080685E0: .4byte PictureBookShelfScript
@@ -911,7 +911,7 @@ _080685E4:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080685FC
-	ldr r0, _080685F8
+	ldr r0, _080685F8 @ =BookshelfScript
 	b _080686EE
 	.align 2, 0
 _080685F8: .4byte BookshelfScript
@@ -922,7 +922,7 @@ _080685FC:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _08068614
-	ldr r0, _08068610
+	ldr r0, _08068610 @ =PokemonCenterBookshelfScript
 	b _080686EE
 	.align 2, 0
 _08068610: .4byte PokemonCenterBookshelfScript
@@ -933,7 +933,7 @@ _08068614:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0806862C
-	ldr r0, _08068628
+	ldr r0, _08068628 @ =VaseScript
 	b _080686EE
 	.align 2, 0
 _08068628: .4byte VaseScript
@@ -944,7 +944,7 @@ _0806862C:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _08068644
-	ldr r0, _08068640
+	ldr r0, _08068640 @ =TrashCanScript
 	b _080686EE
 	.align 2, 0
 _08068640: .4byte TrashCanScript
@@ -955,7 +955,7 @@ _08068644:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0806865C
-	ldr r0, _08068658
+	ldr r0, _08068658 @ =ShopShelfScript
 	b _080686EE
 	.align 2, 0
 _08068658: .4byte ShopShelfScript
@@ -966,7 +966,7 @@ _0806865C:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _08068674
-	ldr r0, _08068670
+	ldr r0, _08068670 @ =BlueprintScript
 	b _080686EE
 	.align 2, 0
 _08068670: .4byte BlueprintScript
@@ -988,7 +988,7 @@ _08068674:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080686A4
-	ldr r0, _080686A0
+	ldr r0, _080686A0 @ =gUnknown_0815F36C
 	b _080686EE
 	.align 2, 0
 _080686A0: .4byte gUnknown_0815F36C
@@ -999,7 +999,7 @@ _080686A4:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080686BC
-	ldr r0, _080686B8
+	ldr r0, _080686B8 @ =gUnknown_0815F43A
 	b _080686EE
 	.align 2, 0
 _080686B8: .4byte gUnknown_0815F43A
@@ -1010,7 +1010,7 @@ _080686BC:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080686D4
-	ldr r0, _080686D0
+	ldr r0, _080686D0 @ =gUnknown_0815F523
 	b _080686EE
 	.align 2, 0
 _080686D0: .4byte gUnknown_0815F523
@@ -1021,7 +1021,7 @@ _080686D4:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080686EC
-	ldr r0, _080686E8
+	ldr r0, _080686E8 @ =gUnknown_0815F528
 	b _080686EE
 	.align 2, 0
 _080686E8: .4byte gUnknown_0815F528
@@ -1038,7 +1038,7 @@ TryGetFieldMoveScript: @ 80686F4
 	push {r4,lr}
 	lsls r1, 24
 	lsrs r4, r1, 24
-	ldr r0, _08068724
+	ldr r0, _08068724 @ =0x0000080b
 	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
@@ -1054,7 +1054,7 @@ TryGetFieldMoveScript: @ 80686F4
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0806872C
-	ldr r0, _08068728
+	ldr r0, _08068728 @ =UseSurfScript
 	b _0806876A
 	.align 2, 0
 _08068724: .4byte 0x0000080b
@@ -1066,7 +1066,7 @@ _0806872C:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _08068768
-	ldr r0, _08068758
+	ldr r0, _08068758 @ =0x0000080e
 	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
@@ -1077,13 +1077,13 @@ _0806872C:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _08068760
-	ldr r0, _0806875C
+	ldr r0, _0806875C @ =UseWaterfallScript
 	b _0806876A
 	.align 2, 0
 _08068758: .4byte 0x0000080e
 _0806875C: .4byte UseWaterfallScript
 _08068760:
-	ldr r0, _08068764
+	ldr r0, _08068764 @ =CannotUseWaterfallScript
 	b _0806876A
 	.align 2, 0
 _08068764: .4byte CannotUseWaterfallScript
@@ -1098,7 +1098,7 @@ _0806876A:
 	thumb_func_start sub_8068770
 sub_8068770: @ 8068770
 	push {lr}
-	ldr r0, _08068794
+	ldr r0, _08068794 @ =0x0000080d
 	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
@@ -1108,7 +1108,7 @@ sub_8068770: @ 8068770
 	lsrs r0, 24
 	cmp r0, 0x2
 	bne _0806879C
-	ldr r0, _08068798
+	ldr r0, _08068798 @ =UseDiveScript
 	bl ScriptContext1_SetupScript
 	movs r0, 0x1
 	b _0806879E
@@ -1125,12 +1125,12 @@ _0806879E:
 	thumb_func_start sub_80687A4
 sub_80687A4: @ 80687A4
 	push {lr}
-	ldr r0, _080687D0
+	ldr r0, _080687D0 @ =0x0000080d
 	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	beq _080687DC
-	ldr r0, _080687D4
+	ldr r0, _080687D4 @ =gMapHeader
 	ldrb r0, [r0, 0x17]
 	cmp r0, 0x5
 	bne _080687DC
@@ -1139,7 +1139,7 @@ sub_80687A4: @ 80687A4
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080687DC
-	ldr r0, _080687D8
+	ldr r0, _080687D8 @ =UnderwaterUseDiveScript
 	bl ScriptContext1_SetupScript
 	movs r0, 0x1
 	b _080687DE
@@ -1202,7 +1202,7 @@ _08068836:
 	thumb_func_start mapheader_trigger_activate_at__run_now
 mapheader_trigger_activate_at__run_now: @ 806883C
 	push {r4,lr}
-	ldr r4, _08068864
+	ldr r4, _08068864 @ =gMapHeader
 	ldrh r1, [r0]
 	subs r1, 0x7
 	lsls r1, 16
@@ -1241,7 +1241,7 @@ sub_8068870: @ 8068870
 	movs r0, 0
 	b _0806888C
 _08068884:
-	ldr r0, _08068890
+	ldr r0, _08068890 @ =GraniteCave_B1F_EventScript_1C6BC5
 	bl ScriptContext1_SetupScript
 	movs r0, 0x1
 _0806888C:
@@ -1261,7 +1261,7 @@ sub_8068894: @ 8068894
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080688B4
-	ldr r0, _080688B0
+	ldr r0, _080688B0 @ =gUnknown_081A14B8
 	b _080688E8
 	.align 2, 0
 _080688B0: .4byte gUnknown_081A14B8
@@ -1272,7 +1272,7 @@ _080688B4:
 	beq _080688CC
 	movs r0, 0xD
 	bl sav12_xor_increment
-	ldr r0, _080688C8
+	ldr r0, _080688C8 @ =Event_EggHatch
 	b _080688E8
 	.align 2, 0
 _080688C8: .4byte Event_EggHatch
@@ -1289,7 +1289,7 @@ _080688CC:
 	movs r0, 0
 	b _080688EE
 _080688E6:
-	ldr r0, _080688F4
+	ldr r0, _080688F4 @ =gUnknown_0815FD0D
 _080688E8:
 	bl ScriptContext1_SetupScript
 _080688EC:
@@ -1304,7 +1304,7 @@ _080688F4: .4byte gUnknown_0815FD0D
 	thumb_func_start unref_sub_80688F8
 unref_sub_80688F8: @ 80688F8
 	push {lr}
-	ldr r0, _08068908
+	ldr r0, _08068908 @ =0x0000402a
 	movs r1, 0
 	bl VarSet
 	pop {r0}
@@ -1316,7 +1316,7 @@ _08068908: .4byte 0x0000402a
 	thumb_func_start happiness_algorithm_step
 happiness_algorithm_step: @ 806890C
 	push {r4,r5,lr}
-	ldr r0, _08068940
+	ldr r0, _08068940 @ =0x0000402a
 	bl GetVarPointer
 	ldrh r1, [r0]
 	adds r1, 0x1
@@ -1327,12 +1327,12 @@ happiness_algorithm_step: @ 806890C
 	strh r1, [r0]
 	cmp r1, 0
 	bne _0806893A
-	ldr r5, _08068944
+	ldr r5, _08068944 @ =gPlayerParty
 	movs r4, 0x5
 _0806892A:
 	adds r0, r5, 0
 	movs r1, 0x5
-	bl sub_803FCD4
+	bl AdjustFriendship
 	adds r5, 0x64
 	subs r4, 0x1
 	cmp r4, 0
@@ -1349,7 +1349,7 @@ _08068944: .4byte gPlayerParty
 	thumb_func_start overworld_poison_timer_set
 overworld_poison_timer_set: @ 8068948
 	push {lr}
-	ldr r0, _08068958
+	ldr r0, _08068958 @ =0x0000402b
 	movs r1, 0
 	bl VarSet
 	pop {r0}
@@ -1361,11 +1361,11 @@ _08068958: .4byte 0x0000402b
 	thumb_func_start overworld_poison_step
 overworld_poison_step: @ 806895C
 	push {lr}
-	ldr r0, _08068994
+	ldr r0, _08068994 @ =gMapHeader
 	ldrb r0, [r0, 0x17]
 	cmp r0, 0x9
 	beq _0806899C
-	ldr r0, _08068998
+	ldr r0, _08068998 @ =0x0000402b
 	bl GetVarPointer
 	ldrh r1, [r0]
 	adds r1, 0x1
@@ -1397,7 +1397,7 @@ _0806899E:
 
 	thumb_func_start prev_quest_postbuffer_cursor_backup_reset
 prev_quest_postbuffer_cursor_backup_reset: @ 80689A4
-	ldr r1, _080689AC
+	ldr r1, _080689AC @ =gUnknown_0202E8C0
 	movs r0, 0
 	strb r0, [r1]
 	bx lr
@@ -1411,13 +1411,13 @@ is_it_battle_time_3: @ 80689B0
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r7, r4, 0
-	ldr r6, _080689CC
+	ldr r6, _080689CC @ =gUnknown_0202E8C0
 	ldrb r0, [r6]
 	cmp r0, 0x3
 	bhi _080689D4
 	adds r0, 0x1
 	strb r0, [r6]
-	ldr r0, _080689D0
+	ldr r0, _080689D0 @ =gUnknown_0202E8C2
 	strh r4, [r0]
 	movs r0, 0
 	b _080689F8
@@ -1425,7 +1425,7 @@ is_it_battle_time_3: @ 80689B0
 _080689CC: .4byte gUnknown_0202E8C0
 _080689D0: .4byte gUnknown_0202E8C2
 _080689D4:
-	ldr r5, _080689EC
+	ldr r5, _080689EC @ =gUnknown_0202E8C2
 	ldrh r1, [r5]
 	adds r0, r4, 0
 	bl StandardWildEncounter
@@ -1461,7 +1461,7 @@ mapheader_run_first_tag2_script_list_match_conditionally: @ 8068A00
 	lsrs r4, 16
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r0, _08068A54
+	ldr r0, _08068A54 @ =gMapHeader
 	mov r8, r0
 	adds r1, r7, 0
 	bl map_warp_check_packed
@@ -1506,7 +1506,7 @@ sub_8068A64: @ 8068A64
 	adds r6, r0, 0
 	lsls r1, 16
 	lsrs r5, r1, 16
-	ldr r7, _08068ABC
+	ldr r7, _08068ABC @ =gMapHeader
 	adds r0, r7, 0
 	adds r1, r6, 0
 	bl map_warp_check_packed
@@ -1578,7 +1578,7 @@ _08068B02:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _08068B20
-	ldr r0, _08068B1C
+	ldr r0, _08068B1C @ =gUnknown_081C6BDE
 	bl ScriptContext1_SetupScript
 	movs r0, 0x1
 	b _08068B2A
@@ -1734,7 +1734,7 @@ map_warp_check_packed: @ 8068C0C
 sub_8068C30: @ 8068C30
 	push {r4-r7,lr}
 	adds r5, r2, 0
-	ldr r0, _08068C50
+	ldr r0, _08068C50 @ =gMapHeader
 	ldr r0, [r0, 0x4]
 	lsls r1, 24
 	asrs r7, r1, 24
@@ -1775,7 +1775,7 @@ _08068C54:
 	bne _08068C9E
 	adds r0, r6, r1
 	ldrb r0, [r0, 0x5]
-	ldr r2, _08068CA4
+	ldr r2, _08068CA4 @ =gSaveBlock1
 	movs r1, 0x4
 	ldrsb r1, [r2, r1]
 	ldrb r2, [r2, 0x5]
@@ -1810,7 +1810,7 @@ map_warp_consider_2_to_inside: @ 8068CA8
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _08068CE0
-	ldr r0, _08068CDC
+	ldr r0, _08068CDC @ =gMapHeader
 	ldr r1, [r0, 0x4]
 	adds r0, r5, 0
 	bl sub_80BC038
@@ -1825,7 +1825,7 @@ _08068CE0:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _08068D2C
-	ldr r6, _08068D28
+	ldr r6, _08068D28 @ =gMapHeader
 	adds r0, r6, 0
 	adds r1, r5, 0
 	bl map_warp_check_packed
@@ -2002,7 +2002,7 @@ _08068E14:
 	thumb_func_start sub_8068E24
 sub_8068E24: @ 8068E24
 	push {r4,lr}
-	ldr r4, _08068E48
+	ldr r4, _08068E48 @ =gMapHeader
 	ldrh r1, [r0]
 	subs r1, 0x7
 	lsls r1, 16
@@ -2075,7 +2075,7 @@ dive_warp: @ 8068E9C
 	adds r4, r0, 0
 	lsls r1, 16
 	lsrs r5, r1, 16
-	ldr r0, _08068ED0
+	ldr r0, _08068ED0 @ =gMapHeader
 	ldrb r0, [r0, 0x17]
 	cmp r0, 0x5
 	bne _08068ED4
@@ -2149,7 +2149,7 @@ sub_8068F18: @ 8068F18
 	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, _08068F70
+	ldr r0, _08068F70 @ =gMapHeader
 	ldrb r0, [r0, 0x17]
 	cmp r0, 0x5
 	bne _08068F74
@@ -2251,7 +2251,7 @@ sub_8068FEC: @ 8068FEC
 	movs r2, 0x2
 	ldrsh r1, [r4, r2]
 	bl MapGridGetMetatileBehaviorAt
-	ldr r4, _0806902C
+	ldr r4, _0806902C @ =gMapHeader
 	adds r0, r4, 0
 	mov r1, sp
 	bl map_warp_check_packed
@@ -2273,7 +2273,7 @@ _0806902C: .4byte gMapHeader
 	thumb_func_start sub_8069030
 sub_8069030: @ 8069030
 	push {r4,lr}
-	ldr r4, _08069064
+	ldr r4, _08069064 @ =gSaveBlock1 + 0x1220
 	movs r2, 0x90
 	lsls r2, 1
 	adds r0, r4, 0
@@ -2287,7 +2287,7 @@ sub_8069030: @ 8069030
 	adds r0, r4, 0
 	movs r1, 0
 	bl memset
-	ldr r0, _08069068
+	ldr r0, _08069068 @ =gUnknown_0202E8E2
 	movs r1, 0
 	movs r2, 0x10
 	bl memset
@@ -2302,7 +2302,7 @@ _08069068: .4byte gUnknown_0202E8E2
 	thumb_func_start sub_806906C
 sub_806906C: @ 806906C
 	push {lr}
-	ldr r0, _080690A0
+	ldr r0, _080690A0 @ =gSaveBlock1 + 0x1220
 	movs r1, 0
 	str r1, [r0]
 	movs r1, 0x90
@@ -2311,13 +2311,13 @@ sub_806906C: @ 806906C
 	movs r1, 0
 	movs r2, 0x20
 	bl memset
-	ldr r0, _080690A4
+	ldr r0, _080690A4 @ =0x0000084d
 	bl FlagReset
-	ldr r0, _080690A8
+	ldr r0, _080690A8 @ =0x0000084e
 	bl FlagReset
-	ldr r0, _080690AC
+	ldr r0, _080690AC @ =0x00000829
 	bl FlagReset
-	ldr r0, _080690B0
+	ldr r0, _080690B0 @ =0x00000861
 	bl FlagReset
 	pop {r0}
 	bx r0
@@ -2332,7 +2332,7 @@ _080690B0: .4byte 0x00000861
 	thumb_func_start sub_80690B4
 sub_80690B4: @ 80690B4
 	push {lr}
-	ldr r0, _080690C4
+	ldr r0, _080690C4 @ =gSaveBlock1 + 0x1338
 	movs r1, 0
 	movs r2, 0x8
 	bl memset
@@ -2345,13 +2345,13 @@ _080690C4: .4byte gSaveBlock1 + 0x1338
 	thumb_func_start sub_80690C8
 sub_80690C8: @ 80690C8
 	push {lr}
-	ldr r0, _080690E4
+	ldr r0, _080690E4 @ =0x00004046
 	bl GetVarPointer
-	ldr r2, _080690E8
+	ldr r2, _080690E8 @ =gSaveBlock2
 	movs r1, 0
 	strb r1, [r2, 0x1A]
 	strh r1, [r0]
-	ldr r0, _080690EC
+	ldr r0, _080690EC @ =0x00000836
 	bl FlagReset
 	pop {r0}
 	bx r0
@@ -2364,16 +2364,16 @@ _080690EC: .4byte 0x00000836
 	thumb_func_start sub_80690F0
 sub_80690F0: @ 80690F0
 	push {r4,r5,lr}
-	ldr r0, _0806911C
+	ldr r0, _0806911C @ =0x00004046
 	bl GetVarPointer
-	ldr r4, _08069120
+	ldr r4, _08069120 @ =gSaveBlock2
 	movs r5, 0
 	movs r1, 0xDA
 	strb r1, [r4, 0x1A]
-	ldr r2, _08069124
+	ldr r2, _08069124 @ =0x00000302
 	adds r1, r2, 0
 	strh r1, [r0]
-	ldr r0, _08069128
+	ldr r0, _08069128 @ =0x00000836
 	bl FlagSet
 	movs r0, 0x1
 	strb r0, [r4, 0x19]
@@ -2389,20 +2389,20 @@ _08069124: .4byte 0x00000302
 _08069128: .4byte 0x00000836
 	thumb_func_end sub_80690F0
 
-	thumb_func_start sub_806912C
-sub_806912C: @ 806912C
+	thumb_func_start IsNationalPokedex
+IsNationalPokedex: @ 806912C
 	push {lr}
-	ldr r0, _08069154
+	ldr r0, _08069154 @ =gSaveBlock2
 	ldrb r0, [r0, 0x1A]
 	cmp r0, 0xDA
 	bne _08069164
-	ldr r0, _08069158
+	ldr r0, _08069158 @ =0x00004046
 	bl VarGet
 	lsls r0, 16
-	ldr r1, _0806915C
+	ldr r1, _0806915C @ =0x03020000
 	cmp r0, r1
 	bne _08069164
-	ldr r0, _08069160
+	ldr r0, _08069160 @ =0x00000836
 	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
@@ -2419,12 +2419,12 @@ _08069164:
 _08069166:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806912C
+	thumb_func_end IsNationalPokedex
 
 	thumb_func_start unref_sub_806916C
 unref_sub_806916C: @ 806916C
 	push {lr}
-	ldr r0, _08069178
+	ldr r0, _08069178 @ =0x0000084c
 	bl FlagReset
 	pop {r0}
 	bx r0
@@ -2435,7 +2435,7 @@ _08069178: .4byte 0x0000084c
 	thumb_func_start unref_sub_806917C
 unref_sub_806917C: @ 806917C
 	push {lr}
-	ldr r0, _08069188
+	ldr r0, _08069188 @ =0x0000084c
 	bl FlagSet
 	pop {r0}
 	bx r0
@@ -2446,7 +2446,7 @@ _08069188: .4byte 0x0000084c
 	thumb_func_start IsMysteryGiftAvailable
 IsMysteryGiftAvailable: @ 806918C
 	push {lr}
-	ldr r0, _0806919C
+	ldr r0, _0806919C @ =0x0000084c
 	bl FlagGet
 	lsls r0, 24
 	lsrs r0, 24
@@ -2459,10 +2459,10 @@ _0806919C: .4byte 0x0000084c
 	thumb_func_start sub_80691A0
 sub_80691A0: @ 80691A0
 	push {lr}
-	ldr r0, _080691B4
+	ldr r0, _080691B4 @ =0x0000402c
 	movs r1, 0
 	bl VarSet
-	ldr r0, _080691B8
+	ldr r0, _080691B8 @ =0x00000862
 	bl FlagReset
 	pop {r0}
 	bx r0
@@ -2474,11 +2474,11 @@ _080691B8: .4byte 0x00000862
 	thumb_func_start sub_80691BC
 sub_80691BC: @ 80691BC
 	push {lr}
-	ldr r0, _080691D4
+	ldr r0, _080691D4 @ =0x0000402c
 	movs r1, 0x92
 	lsls r1, 4
 	bl VarSet
-	ldr r0, _080691D8
+	ldr r0, _080691D8 @ =0x00000862
 	bl FlagSet
 	pop {r0}
 	bx r0
@@ -2490,12 +2490,12 @@ _080691D8: .4byte 0x00000862
 	thumb_func_start sub_80691DC
 sub_80691DC: @ 80691DC
 	push {lr}
-	ldr r0, _08069200
+	ldr r0, _08069200 @ =0x00000862
 	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	beq _08069208
-	ldr r0, _08069204
+	ldr r0, _08069204 @ =0x0000402c
 	bl VarGet
 	lsls r0, 16
 	movs r1, 0x92

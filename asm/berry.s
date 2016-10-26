@@ -13,8 +13,8 @@ unref_sub_80B4884: @ 80B4884
 	mov r1, sp
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, _080B48A0
-	ldr r2, _080B48A4
+	ldr r1, _080B48A0 @ =gSaveBlock1 + 0x3160
+	ldr r2, _080B48A4 @ =0x01000298
 	mov r0, sp
 	bl CpuSet
 	add sp, 0x4
@@ -29,10 +29,10 @@ _080B48A4: .4byte 0x01000298
 sub_80B48A8: @ 80B48A8
 	push {r4-r6,lr}
 	adds r5, r0, 0
-	ldr r3, _080B48E0
+	ldr r3, _080B48E0 @ =gSaveBlock1 + 0x3160
 	movs r2, 0
-	ldr r6, _080B48E4
-	ldr r0, _080B48E8
+	ldr r6, _080B48E4 @ =0x0000052f
+	ldr r0, _080B48E8 @ =0xffffcea0
 	adds r4, r3, r0
 _080B48B6:
 	adds r0, r3, r2
@@ -42,12 +42,12 @@ _080B48B6:
 	adds r2, 0x1
 	cmp r2, r6
 	bls _080B48B6
-	ldr r2, _080B48EC
+	ldr r2, _080B48EC @ =0x0000316c
 	adds r1, r4, r2
-	ldr r2, _080B48F0
+	ldr r2, _080B48F0 @ =0x0000361c
 	adds r0, r4, r2
 	str r0, [r1]
-	ldr r0, _080B48F4
+	ldr r0, _080B48F4 @ =0x00003170
 	adds r1, r4, r0
 	adds r2, 0x2D
 	adds r0, r4, r2
@@ -67,8 +67,8 @@ _080B48F4: .4byte 0x00003170
 	thumb_func_start sub_80B48F8
 sub_80B48F8: @ 80B48F8
 	push {r4-r7,lr}
-	ldr r3, _080B4934
-	ldr r1, _080B4938
+	ldr r3, _080B4934 @ =gSaveBlock1
+	ldr r1, _080B4938 @ =0x0000316c
 	adds r4, r3, r1
 	ldr r6, [r4]
 	adds r1, 0x4
@@ -79,7 +79,7 @@ sub_80B48F8: @ 80B48F8
 	str r1, [r2]
 	adds r4, r0, 0
 	movs r2, 0
-	ldr r5, _080B493C
+	ldr r5, _080B493C @ =0x0000052b
 _080B4914:
 	adds r0, r4, r1
 	ldrb r0, [r0]
@@ -87,7 +87,7 @@ _080B4914:
 	adds r1, 0x1
 	cmp r1, r5
 	bls _080B4914
-	ldr r1, _080B4938
+	ldr r1, _080B4938 @ =0x0000316c
 	adds r0, r3, r1
 	str r6, [r0]
 	adds r1, 0x4
@@ -106,21 +106,21 @@ _080B493C: .4byte 0x0000052b
 	thumb_func_start sub_80B4940
 sub_80B4940: @ 80B4940
 	push {r4,lr}
-	ldr r4, _080B4970
-	ldr r1, _080B4974
+	ldr r4, _080B4970 @ =gSaveBlock1
+	ldr r1, _080B4974 @ =0x00003174
 	adds r0, r4, r1
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080B4984
-	ldr r2, _080B4978
+	ldr r2, _080B4978 @ =0x0000316a
 	adds r0, r4, r2
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080B4984
-	ldr r1, _080B497C
+	ldr r1, _080B497C @ =0x00003160
 	adds r0, r4, r1
 	bl sub_80B48F8
-	ldr r2, _080B4980
+	ldr r2, _080B4980 @ =0x0000368c
 	adds r1, r4, r2
 	ldr r1, [r1]
 	cmp r0, r1
@@ -151,7 +151,7 @@ GetBerryInfo: @ 80B498C
 	bl sub_80B4940
 	cmp r0, 0
 	beq _080B49A8
-	ldr r0, _080B49A4
+	ldr r0, _080B49A4 @ =gSaveBlock1 + 0x3160
 	b _080B49BE
 	.align 2, 0
 _080B49A4: .4byte gSaveBlock1 + 0x3160
@@ -166,7 +166,7 @@ _080B49B4:
 	lsls r0, r4, 3
 	subs r0, r4
 	lsls r0, 2
-	ldr r1, _080B49C4
+	ldr r1, _080B49C4 @ =gBerries - 0x1C
 	adds r0, r1
 _080B49BE:
 	pop {r4}
@@ -180,7 +180,7 @@ _080B49C4: .4byte gBerries - 0x1C
 GetBerryTreeInfo: @ 80B49C8
 	lsls r0, 24
 	lsrs r0, 21
-	ldr r1, _080B49D4
+	ldr r1, _080B49D4 @ =gSaveBlock1 + 0x1608
 	adds r0, r1
 	bx lr
 	.align 2, 0
@@ -190,7 +190,7 @@ _080B49D4: .4byte gSaveBlock1 + 0x1608
 	thumb_func_start FieldObjectInteractionWaterBerryTree
 FieldObjectInteractionWaterBerryTree: @ 80B49D8
 	push {lr}
-	ldr r0, _080B4A00
+	ldr r0, _080B4A00 @ =gSelectedMapObject
 	ldrb r0, [r0]
 	bl FieldObjectGetBerryTreeId
 	lsls r0, 24
@@ -248,10 +248,10 @@ _080B4A30:
 IsPlayerFacingPlantedBerryTree: @ 80B4A34
 	push {lr}
 	bl GetFieldObjectScriptPointerForComparison
-	ldr r1, _080B4A5C
+	ldr r1, _080B4A5C @ =BerryTreeScript
 	cmp r0, r1
 	bne _080B4A64
-	ldr r0, _080B4A60
+	ldr r0, _080B4A60 @ =gSelectedMapObject
 	ldrb r0, [r0]
 	bl FieldObjectGetBerryTreeId
 	lsls r0, 24
@@ -276,7 +276,7 @@ _080B4A66:
 WaterBerryTree: @ 80B4A6C
 	push {lr}
 	bl GetFieldObjectScriptPointerForComparison
-	ldr r1, _080B4A84
+	ldr r1, _080B4A84 @ =BerryTreeScript
 	cmp r0, r1
 	bne _080B4A88
 	bl FieldObjectInteractionWaterBerryTree
@@ -295,8 +295,8 @@ _080B4A8A:
 	thumb_func_start sub_80B4A90
 sub_80B4A90: @ 80B4A90
 	push {r4,lr}
-	ldr r1, _080B4AB4
-	ldr r0, _080B4AB8
+	ldr r1, _080B4AB4 @ =gSaveBlock1
+	ldr r0, _080B4AB8 @ =gUnknown_083CD780
 	ldr r3, [r0]
 	ldr r4, [r0, 0x4]
 	movs r2, 0x7F
@@ -336,7 +336,7 @@ _080B4ACE:
 	cmp r0, 0x5
 	bhi _080B4B58
 	lsls r0, 2
-	ldr r1, _080B4AE0
+	ldr r1, _080B4AE0 @ =_080B4AE4
 	adds r0, r1
 	ldr r0, [r0]
 	mov pc, r0
@@ -393,7 +393,7 @@ _080B4B1C:
 	strb r1, [r4, 0x5]
 	cmp r1, 0xA
 	bne _080B4B58
-	ldr r0, _080B4B60
+	ldr r0, _080B4B60 @ =gUnknown_083CD780
 	ldr r1, [r0, 0x4]
 	ldr r0, [r0]
 	str r0, [r4]
@@ -415,7 +415,7 @@ BerryTreeTimeUpdate: @ 80B4B64
 	movs r2, 0
 _080B4B6A:
 	lsls r0, r2, 3
-	ldr r1, _080B4BAC
+	ldr r1, _080B4BAC @ =gSaveBlock1 + 0x1608
 	adds r4, r0, r1
 	ldrb r0, [r4]
 	adds r7, r2, 0x1
@@ -440,7 +440,7 @@ _080B4B6A:
 	subs r1, r0
 	cmp r6, r1
 	blt _080B4BB4
-	ldr r0, _080B4BB0
+	ldr r0, _080B4BB0 @ =gUnknown_083CD780
 	ldr r1, [r0, 0x4]
 	ldr r0, [r0]
 	str r0, [r4]
@@ -509,7 +509,7 @@ PlantBerryTree: @ 80B4C04
 	lsrs r7, r3, 24
 	bl GetBerryTreeInfo
 	adds r6, r0, 0
-	ldr r0, _080B4C68
+	ldr r0, _080B4C68 @ =gUnknown_083CD780
 	ldr r1, [r0, 0x4]
 	ldr r0, [r0]
 	str r0, [r6]
@@ -552,12 +552,12 @@ _080B4C68: .4byte gUnknown_083CD780
 	thumb_func_start RemoveBerryTree
 RemoveBerryTree: @ 80B4C6C
 	lsls r0, 24
-	ldr r1, _080B4C84
+	ldr r1, _080B4C84 @ =gSaveBlock1
 	lsrs r0, 21
-	ldr r2, _080B4C88
+	ldr r2, _080B4C88 @ =0x00001608
 	adds r1, r2
 	adds r0, r1
-	ldr r1, _080B4C8C
+	ldr r1, _080B4C8C @ =gUnknown_083CD780
 	ldr r2, [r1, 0x4]
 	ldr r1, [r1]
 	str r1, [r0]
@@ -572,10 +572,10 @@ _080B4C8C: .4byte gUnknown_083CD780
 	thumb_func_start GetBerryTypeByBerryTreeId
 GetBerryTypeByBerryTreeId: @ 80B4C90
 	lsls r0, 24
-	ldr r1, _080B4CA0
+	ldr r1, _080B4CA0 @ =gSaveBlock1
 	lsrs r0, 21
 	adds r0, r1
-	ldr r1, _080B4CA4
+	ldr r1, _080B4CA4 @ =0x00001608
 	adds r0, r1
 	ldrb r0, [r0]
 	bx lr
@@ -587,10 +587,10 @@ _080B4CA4: .4byte 0x00001608
 	thumb_func_start GetStageByBerryTreeId
 GetStageByBerryTreeId: @ 80B4CA8
 	lsls r0, 24
-	ldr r1, _080B4CBC
+	ldr r1, _080B4CBC @ =gSaveBlock1
 	lsrs r0, 21
 	adds r0, r1
-	ldr r1, _080B4CC0
+	ldr r1, _080B4CC0 @ =0x00001609
 	adds r0, r1
 	ldrb r0, [r0]
 	lsls r0, 25
@@ -606,7 +606,7 @@ ItemIdToBerryType: @ 80B4CC4
 	push {lr}
 	lsls r0, 16
 	lsrs r1, r0, 16
-	ldr r2, _080B4CE0
+	ldr r2, _080B4CE0 @ =0xff7b0000
 	adds r0, r2
 	lsrs r0, 16
 	cmp r0, 0x2A
@@ -630,7 +630,7 @@ BerryTypeToItemId: @ 80B4CEC
 	push {lr}
 	lsls r0, 16
 	lsrs r1, r0, 16
-	ldr r2, _080B4D08
+	ldr r2, _080B4D08 @ =0xffff0000
 	adds r0, r2
 	lsrs r0, 16
 	cmp r0, 0x2A
@@ -804,10 +804,10 @@ CalcBerryYield: @ 80B4DF4
 	thumb_func_start GetBerryCountByBerryTreeId
 GetBerryCountByBerryTreeId: @ 80B4E20
 	lsls r0, 24
-	ldr r1, _080B4E30
+	ldr r1, _080B4E30 @ =gSaveBlock1
 	lsrs r0, 21
 	adds r0, r1
-	ldr r1, _080B4E34
+	ldr r1, _080B4E34 @ =0x0000160c
 	adds r0, r1
 	ldrb r0, [r0]
 	bx lr
@@ -834,7 +834,7 @@ GetStageDurationByBerryType: @ 80B4E38
 	thumb_func_start FieldObjectInteractionGetBerryTreeData
 FieldObjectInteractionGetBerryTreeData: @ 80B4E50
 	push {r4-r6,lr}
-	ldr r0, _080B4E8C
+	ldr r0, _080B4E8C @ =gSelectedMapObject
 	ldrb r0, [r0]
 	bl FieldObjectGetBerryTreeId
 	lsls r0, 24
@@ -845,16 +845,16 @@ FieldObjectInteractionGetBerryTreeData: @ 80B4E50
 	lsrs r6, r0, 24
 	adds r0, r5, 0
 	bl ResetBerryTreeSparkleFlag
-	ldr r0, _080B4E90
+	ldr r0, _080B4E90 @ =gUnknown_0202E8DE
 	ldrb r0, [r0]
-	ldr r2, _080B4E94
+	ldr r2, _080B4E94 @ =gSaveBlock1
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
 	bl sub_8060234
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B4E9C
-	ldr r1, _080B4E98
+	ldr r1, _080B4E98 @ =gUnknown_0202E8CC
 	movs r0, 0xFF
 	strh r0, [r1]
 	b _080B4EAA
@@ -864,26 +864,26 @@ _080B4E90: .4byte gUnknown_0202E8DE
 _080B4E94: .4byte gSaveBlock1
 _080B4E98: .4byte gUnknown_0202E8CC
 _080B4E9C:
-	ldr r4, _080B4ED4
+	ldr r4, _080B4ED4 @ =gUnknown_0202E8CC
 	adds r0, r5, 0
 	bl GetStageByBerryTreeId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4]
 _080B4EAA:
-	ldr r4, _080B4ED8
+	ldr r4, _080B4ED8 @ =gUnknown_0202E8CE
 	adds r0, r5, 0
 	bl GetNumStagesWateredByBerryTreeId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4]
-	ldr r4, _080B4EDC
+	ldr r4, _080B4EDC @ =gUnknown_0202E8D0
 	adds r0, r5, 0
 	bl GetBerryCountByBerryTreeId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4]
-	ldr r1, _080B4EE0
+	ldr r1, _080B4EE0 @ =gStringVar1
 	adds r0, r6, 0
 	bl GetBerryNameByBerryType
 	pop {r4-r6}
@@ -899,7 +899,7 @@ _080B4EE0: .4byte gStringVar1
 	thumb_func_start sub_80B4EE4
 sub_80B4EE4: @ 80B4EE4
 	push {lr}
-	ldr r0, _080B4EF0
+	ldr r0, _080B4EF0 @ =sub_80A68CC
 	bl SetMainCallback2
 	pop {r0}
 	bx r0
@@ -910,13 +910,13 @@ _080B4EF0: .4byte sub_80A68CC
 	thumb_func_start FieldObjectInteractionPlantBerryTree
 FieldObjectInteractionPlantBerryTree: @ 80B4EF4
 	push {r4,lr}
-	ldr r0, _080B4F24
+	ldr r0, _080B4F24 @ =word_203855E
 	ldrh r0, [r0]
 	bl ItemIdToBerryType
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, _080B4F28
+	ldr r0, _080B4F28 @ =gSelectedMapObject
 	ldrb r0, [r0]
 	bl FieldObjectGetBerryTreeId
 	lsls r0, 24
@@ -937,7 +937,7 @@ _080B4F28: .4byte gSelectedMapObject
 	thumb_func_start FieldObjectInteractionPickBerryTree
 FieldObjectInteractionPickBerryTree: @ 80B4F2C
 	push {r4-r6,lr}
-	ldr r0, _080B4F70
+	ldr r0, _080B4F70 @ =gSelectedMapObject
 	ldrb r0, [r0]
 	bl FieldObjectGetBerryTreeId
 	adds r5, r0, 0
@@ -947,7 +947,7 @@ FieldObjectInteractionPickBerryTree: @ 80B4F2C
 	bl GetBerryTypeByBerryTreeId
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r6, _080B4F74
+	ldr r6, _080B4F74 @ =gUnknown_0202E8CC
 	bl BerryTypeToItemId
 	adds r4, r0, 0
 	lsls r4, 16
@@ -958,7 +958,7 @@ FieldObjectInteractionPickBerryTree: @ 80B4F2C
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_80A9424
+	bl AddBagItem
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6]
@@ -973,15 +973,15 @@ _080B4F74: .4byte gUnknown_0202E8CC
 	thumb_func_start FieldObjectInteractionRemoveBerryTree
 FieldObjectInteractionRemoveBerryTree: @ 80B4F78
 	push {lr}
-	ldr r0, _080B4F9C
+	ldr r0, _080B4F9C @ =gSelectedMapObject
 	ldrb r0, [r0]
 	bl FieldObjectGetBerryTreeId
 	lsls r0, 24
 	lsrs r0, 24
 	bl RemoveBerryTree
-	ldr r0, _080B4FA0
+	ldr r0, _080B4FA0 @ =gUnknown_0202E8DE
 	ldrb r0, [r0]
-	ldr r2, _080B4FA4
+	ldr r2, _080B4FA4 @ =gSaveBlock1
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
 	bl sub_8060288
@@ -1033,7 +1033,7 @@ ResetBerryTreeSparkleFlags: @ 80B4FB8
 	lsls r2, 16
 	asrs r2, 16
 	mov r9, r2
-	ldr r4, _080B5050
+	ldr r4, _080B5050 @ =gMapObjects
 	lsls r3, 16
 	asrs r3, 16
 	mov r8, r3

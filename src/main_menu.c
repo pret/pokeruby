@@ -626,7 +626,7 @@ void PrintBadgeCount(void)
 
     MenuPrint(gMainMenuString_Badges, 16, 5);
     ConvertIntToDecimalString(buffer, GetBadgeCount());
-    sub_80729D8(buffer, 205, 40, 1);
+    MenuPrint_PixelCoords(buffer, 205, 40, 1);
 }
 
 //Text Strings

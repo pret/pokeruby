@@ -10,6 +10,9 @@
 // Prevent cross-jump optimization.
 #define BLOCK_CROSS_JUMP asm("");
 
+// to help in decompiling
+#define asm_comment(x) asm volatile("@ -- " x " -- ")
+
 #define ARRAY_COUNT(array) (sizeof(array) / sizeof((array)[0]))
 
 #define POKEMON_NAME_LENGTH 10
@@ -93,6 +96,8 @@ struct SecretBaseRecord
 
 #include "game_stat.h"
 #include "fieldmap.h"
+#include "berry.h"
+#include "pokemon.h"
 
 struct WarpData
 {
@@ -102,20 +107,37 @@ struct WarpData
     s16 x, y;
 };
 
+struct ItemSlot
+{
+    u16 itemId;
+    u8 quantity;
+};
+
+struct Pokeblock
+{
+    u8 color;
+    u8 spicy;
+    u8 dry;
+    u8 sweet;
+    u8 bitter;
+    u8 sour;
+    u8 feel;
+};
+
 struct Roamer
 {
-	/*0x00*/ u32 ivs;
-	/*0x04*/ u32 personality;
-	/*0x08*/ u16 species;
-	/*0x0A*/ u16 hp;
-	/*0x0C*/ u8 level;
-	/*0x0D*/ u8 unk_D;
-	/*0x0E*/ u8 cool;
-	/*0x0F*/ u8 beauty;
-	/*0x10*/ u8 cute;
-	/*0x11*/ u8 smart;
-	/*0x12*/ u8 tough;
-	/*0x13*/ u8 active;
+    /*0x00*/ u32 ivs;
+    /*0x04*/ u32 personality;
+    /*0x08*/ u16 species;
+    /*0x0A*/ u16 hp;
+    /*0x0C*/ u8 level;
+    /*0x0D*/ u8 status;
+    /*0x0E*/ u8 cool;
+    /*0x0F*/ u8 beauty;
+    /*0x10*/ u8 cute;
+    /*0x11*/ u8 smart;
+    /*0x12*/ u8 tough;
+    /*0x13*/ u8 active;
 };
 
 struct RamScriptData
@@ -151,37 +173,64 @@ struct SaveBlock1
     /*0x2F*/ u8 filler_2F;
     /*0x30*/ u8 flashUsed;
     /*0x32*/ u16 mapDataId;
-    /*0x34*/ u8 filler_34[0x45C];
-    /*0x490*/ u32 money;
-    /*0x494*/ u16 coins;
-    /*0x496*/ u16 registeredItem; // registered for use with SELECT button
-    /*0x498*/ u8 filler_498[0x4A0];
-    /*0x938*/ u8 unk938[52]; // pokedex related
-    /*0x96C*/ u8 filler_96C[0x2B4];
+    u16 mapView[0x100];
+    u8 playerPartyCount;
+    struct Pokemon playerParty[6];
+    u32 money;
+    u16 coins;
+    u16 registeredItem; // registered for use with SELECT button
+    struct ItemSlot pcItems[50];
+    struct ItemSlot bagPocket_Items[20];
+    struct ItemSlot bagPocket_KeyItems[20];
+    struct ItemSlot bagPocket_PokeBalls[16];
+    struct ItemSlot bagPocket_TMHM[64];
+    struct ItemSlot bagPocket_Berries[46];
+    struct Pokeblock pokeblocks[40];
+    u8 unk938[52];  // pokedex related
+    u16 berryBlenderRecords[3];
+    u8 filler_972[0x6];
+    u16 trainerRematchStepCounter;
+    u8 trainerRematches[100];
+    struct MapObject mapObjects[16];
     /*0xC20*/ struct MapObjectTemplate mapObjectTemplates[64];
     /*0x1220*/ u8 flags[0x120];
     /*0x1340*/ u16 vars[0x100];
     /*0x1540*/ u32 gameStats[NUM_GAME_STATS];
-    /*0x1608*/ u8 filler_1608[0x14F4];
-    /*0x2AFC*/ u16 outbreak2AFC;
-    /*0x2AFE*/ u8 outbreak2AFE;
-    /*0x2AFF*/ u8 outbreak2AFF;
-    /*0x2B00*/ u8 outbreak2B00;
+    /*0x1608*/ struct BerryTree berryTrees[128];
+    /*0x1A08*/ struct SecretBaseRecord secretBases[20];
+    /*0x2688*/ u8 playerRoomDecor[12];
+    /*0x2694*/ u8 playerRoomDecorPos[12];
+    u8 decorDesk[10];
+    u8 decorChair[10];
+    u8 decorPlant[10];
+    u8 decorOrnament[30];
+    u8 decorMat[30];
+    u8 decorPoster[10];
+    u8 decorDoll[40];
+    u8 decorCushion[10];
+    u8 padding_2736[2];
+    u8 tvShows[24][36]; // TODO: TV show struct
+    /*0x2A98*/ u8 filler_2A98[0x64];
+	/*0x2AFC*/ u16 outbreakPokemonSpecies;
+	/*0x2AFE*/ u8 outbreakLocationMapNum;
+    /*0x2AFF*/ u8 outbreakLocationMapGroup;
+    /*0x2B00*/ u8 outbreakPokemonLevel;
     /*0x2B01*/ u8 filler_2B01[3];
-    /*0x2B04*/ u16 outbreak2B04[4];
+    /*0x2B04*/ u16 outbreakPokemonMoves[4];
     /*0x2B0C*/ u8 unk2B0C;
-    /*0x2B0D*/ u8 outbreak2B0D;
+    /*0x2B0D*/ u8 outbreakPokemonProbability;
     /*0x2B0E*/ u8 filler_2B0E[0x2C8];
     /*0x2DD6*/ u16 feebasLocationSeed;
     /*0x2DD8*/ u8 filler_2DD8[0x124];
-    /*0x2EFC*/ struct SB1_2EFC_Struct sb1_2EFC_struct[5];
-    /*0x2F9C*/ u8 filler_2F9C[0x1A8];
-	/*0x3144*/ struct Roamer roamer;
-	/*0x3158*/ u8 filler_3158[0x538];
-    /*0x3690*/ struct RamScript ramScript;
-    /*0x3A7C*/ u8 filler_3A7C[0x10];
-    /*0x3A8C*/ u8 unk3A8C[52]; //pokedex related
-};  /*size = 0x3AC0*/
+    struct SB1_2EFC_Struct sb1_2EFC_struct[5];
+    u8 filler_2F9C[0x1A8];
+    /*0x3144*/ struct Roamer roamer;
+    /*0x3158*/ u8 filler_3158[0x8];
+    struct EnigmaBerry enigmaBerry;
+    struct RamScript ramScript;
+    u8 filler_3A7C[0x10];
+    u8 unk3A8C[52]; //pokedex related
+};
 
 extern struct SaveBlock1 gSaveBlock1;
 

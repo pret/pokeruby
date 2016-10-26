@@ -55,10 +55,36 @@ extern u8 Event_RepelWoreOff[];
 
 #define NUM_FEEBAS_SPOTS 6
 
+u16 sub_8084984(s16 x, s16 y, u8 c);
+bool8 CheckFeebas(void);
 u16 FeebasRandom(void);
-void FeebasSeedRng(u16 a);
-u8 RepelCheck(u8);
-//void ApplyFluteEncounterRateMod(u32 *a1)
+void FeebasSeedRng(u16 seed);
+u8 PickWildMon_Grass(void);
+u8 PickWildMon_Water(void);
+u8 PickWildMon_Fishing(u8 rod);
+u8 RandomInRange(struct WildPokemon *wildPokemon);
+u16 GetCurrentMapWildMonHeader(void);
+u8 PickWildMonNature(void);
+void CreateWildMon(u16 species, u8 b);
+bool8 GenerateWildMon(struct WildPokemonInfo *a, u8 b, u8 c);
+u16 GenerateFishingWildMon(struct WildPokemonInfo *a, u8 rod);
+bool8 SetUpMassOutbreakEncounter(u8 a);
+bool8 DoMassOutbreakEncounterTest(void);
+bool8 DoWildEncounterRateDiceRoll(u16 a);
+bool8 DoWildEncounterTest(u32 a, u8 b);
+bool8 DoGlobalWildEncounterDiceRoll(void);
+bool8 StandardWildEncounter(u16 a, u16 b);
+void RockSmashWildEncounter(void);
+u8 SweetScentWildEncounter(void);
+u8 GetFishingWildMonListHeader(void);
+void FishingWildEncounter(u8 rod);
+u16 GetLocalWildMon(u8 *a1);
+u16 GetMirageIslandMon(void);
+u8 UpdateRepelCounter(void);
+u8 RepelCheck(u8 level);
+void ApplyFluteEncounterRateMod(u32 *a1);
+void ApplyCleanseTagEncounterRateMod(u32 *a1);
+
 
 void DisableWildEncounters(u8 a)
 {
@@ -320,10 +346,10 @@ u8 PickWildMonNature(void)
     return Random() % 25;
 }
 
-void CreateWildMon(u16 a, u8 b)
+void CreateWildMon(u16 species, u8 b)
 {
     ZeroEnemyPartyMons();
-    CreateMonWithNature(&gEnemyParty[0], a, b, 0x20, PickWildMonNature());
+    CreateMonWithNature(&gEnemyParty[0], species, b, 0x20, PickWildMonNature());
 }
 
 bool8 GenerateWildMon(struct WildPokemonInfo *a, u8 b, u8 c)
@@ -358,39 +384,39 @@ bool8 GenerateWildMon(struct WildPokemonInfo *a, u8 b, u8 c)
     }
 }
 
-u16 GenerateFishingWildMon(struct WildPokemon **a, u8 rod)
+u16 GenerateFishingWildMon(struct WildPokemonInfo *a, u8 rod)
 {
     u8 mon = PickWildMon_Fishing(rod);
-    u8 level = RandomInRange(&a[1][mon]);
+    u8 level = RandomInRange(&a->wildPokemon[mon]);
     
-    CreateWildMon(a[1][mon].species, level);
-    return a[1][mon].species;
+    CreateWildMon(a->wildPokemon[mon].species, level);
+    return a->wildPokemon[mon].species;
 }
 
 bool8 SetUpMassOutbreakEncounter(u8 a)
 {
     u16 i;
     
-    if(a == 1 && RepelCheck(gSaveBlock1.outbreak2B00) == 0)
+    if(a == 1 && RepelCheck(gSaveBlock1.outbreakPokemonLevel) == 0)
     {
         return 0;
     }
     //_08084F78
-    CreateWildMon(gSaveBlock1.outbreak2AFC, gSaveBlock1.outbreak2B00);
+    CreateWildMon(gSaveBlock1.outbreakPokemonSpecies, gSaveBlock1.outbreakPokemonLevel);
     for(i = 0; i < 4; i++)
     {
-        SetMonMoveSlot(&gEnemyParty[0], gSaveBlock1.outbreak2B04[i], i);
+        SetMonMoveSlot(&gEnemyParty[0], gSaveBlock1.outbreakPokemonMoves[i], i);
     }
     return 1;
 }
 
 bool8 DoMassOutbreakEncounterTest(void)
 {
-    if(gSaveBlock1.outbreak2AFC &&
-    gSaveBlock1.location.mapNum == gSaveBlock1.outbreak2AFE &&
-    gSaveBlock1.location.mapGroup == gSaveBlock1.outbreak2AFF)
+    if(gSaveBlock1.outbreakPokemonSpecies &&
+    gSaveBlock1.location.mapNum == gSaveBlock1.outbreakLocationMapNum &&
+    gSaveBlock1.location.mapGroup == gSaveBlock1.outbreakLocationMapGroup)
     {
-        if(Random() % 100 < gSaveBlock1.outbreak2B0D)
+        if(Random() % 100 < gSaveBlock1.outbreakPokemonProbability)
             return 1;
     }
     return 0;

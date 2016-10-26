@@ -46,19 +46,115 @@ compare_sapphire compare_sapphire_rev1 compare_sapphire_rev2
 C_SRCS := $(wildcard src/*.c)
 C_OBJS := $(C_SRCS:%.c=%.o)
 
-ASM_OBJS := asm/crt0.o asm/rom3.o asm/rom_8040EB4.o asm/rom4.o asm/rom_8074BAC.o asm/rom5.o asm/pokedex.o asm/rom6.o\
-asm/libgcnmultiboot.o asm/m4a_1.o asm/m4a_3.o asm/libagbsyscall.o \
-asm/tileset.o asm/rom_8065394.o asm/rom_803D1FC.o asm/calculate_base_damage.o \
-asm/rom_813BA94.o asm/rom_81258BC.o asm/mystery_event_script.o \
-asm/field_effect_helpers.o asm/contest_ai.o asm/berry.o asm/rom_80B5054.o \
-asm/party_menu.o asm/rom_806D7F8.o asm/rom_80859BC.o \
-asm/field_effect.o asm/title_screen.o asm/weather.o asm/fldeff_emotion.o \
-asm/rom_806936C.o asm/clear_save_data_menu.o asm/rom_8148B8C.o \
-asm/mystery_event_menu.o asm/save_failed_screen.o asm/rom_81473B8.o \
-asm/berry_tag_screen.o asm/lottery_corner.o \
-asm/battle_ai.o asm/trader.o asm/trainer_card.o asm/save_menu_util.o \
-asm/rom_8094928.o asm/mori_debug_menu.o asm/trainer_see.o asm/rom_8080874.o \
-asm/battle_setup.o asm/cable_club.o
+ASM_OBJS := \
+asm/crt0.o \
+asm/rom3.o \
+asm/calculate_base_damage.o \
+asm/rom_803D1FC.o \
+asm/rom_8040EB4.o \
+asm/daycare.o \
+asm/egg_hatch.o \
+asm/rom_804373C.o \
+asm/load_save.o \
+asm/trade.o \
+asm/berry_blender.o \
+asm/rom4.o \
+asm/rom_8065394.o \
+asm/rom_806936C.o \
+asm/party_menu.o \
+asm/rom_806D7F8.o \
+asm/tileset.o \
+asm/rom_8074BAC.o \
+asm/rom5.o \
+asm/title_screen.o \
+asm/weather.o \
+asm/rom_8080874.o \
+asm/battle_setup.o \
+asm/cable_club.o \
+asm/mori_debug_menu.o \
+asm/trainer_see.o \
+asm/field_effect.o \
+asm/rom_80859BC.o \
+asm/pokedex.o \
+asm/trainer_card.o \
+asm/rom_8094928.o \
+asm/item_menu.o \
+asm/battle_anim_80A7E7C.o \
+asm/item.o \
+asm/matuda_debug_menu.o \
+asm/contest.o \
+asm/shop.o \
+asm/berry.o \
+asm/script_menu.o \
+asm/naming_screen.o \
+asm/money.o \
+asm/contest_effect.o \
+asm/record_mixing.o \
+asm/sound_check_menu.o \
+asm/secret_base.o \
+asm/tv.o \
+asm/contest_link_80C2020.o \
+asm/script_pokemon_util_80C4BF0.o \
+asm/field_poison.o \
+asm/big_shroomish_barboach.o \
+asm/fldeff_80C5CD4.o \
+asm/truck_scene.o \
+asm/porthole.o \
+asm/rotating_gate.o \
+asm/safari_zone.o \
+asm/contest_link_80C857C.o \
+asm/item_use.o \
+asm/battle_anim_80CA710.o \
+asm/bike.o \
+asm/easy_chat.o \
+asm/pokenav.o \
+asm/mon_markings.o \
+asm/mauville_old_man.o \
+asm/mail.o \
+asm/menu_helpers.o \
+asm/script_pokemon_util_80F99CC.o \
+asm/dewford_trend.o \
+asm/heal_location.o \
+asm/region_map.o \
+asm/cute_sketch.o \
+asm/decoration.o \
+asm/slot_machine.o \
+asm/contest_painting.o \
+asm/battle_ai.o \
+asm/trader.o \
+asm/rom6.o \
+asm/battle_records.o \
+asm/pokedex_area_screen.o \
+asm/evolution_scene.o \
+asm/roulette.o \
+asm/pokedex_cry_screen.o \
+asm/coins.o \
+asm/landmark.o \
+asm/fldeff_strength.o \
+asm/battle_transition.o \
+asm/battle_811DA74.o \
+asm/battle_message.o \
+asm/choose_party.o \
+asm/cable_car.o \
+asm/roulette_util.o \
+asm/cable_car_util.o \
+asm/unused_8124F94.o \
+asm/mystery_event_script.o \
+asm/field_effect_helpers.o \
+asm/contest_ai.o \
+asm/rom_81258BC.o \
+asm/rom_813BA94.o \
+asm/lottery_corner.o \
+asm/berry_tag_screen.o \
+asm/mystery_event_menu.o \
+asm/save_failed_screen.o \
+asm/rom_81473B8.o \
+asm/clear_save_data_menu.o \
+asm/rom_8148B8C.o \
+asm/libgcnmultiboot.o \
+asm/m4a_1.o \
+asm/m4a_3.o \
+asm/libagbsyscall.o
 
 DATA_ASM_OBJS := data/data2.o data/graphics.o data/sound_data.o \
 data/event_scripts.o data/battle_anim_scripts.o \

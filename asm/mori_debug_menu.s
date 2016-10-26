@@ -9,7 +9,7 @@
 	thumb_func_start sub_8083D4C
 sub_8083D4C: @ 8083D4C
 	push {lr}
-	ldr r0, _08083D60
+	ldr r0, _08083D60 @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -31,7 +31,7 @@ _08083D6A:
 MoriDebugMenu_SearchChild: @ 8083D70
 	push {r4-r6,lr}
 	sub sp, 0x34
-	ldr r0, _08083DE4
+	ldr r0, _08083DE4 @ =gPlayerParty
 	movs r1, 0xB
 	bl GetMonData
 	adds r4, r0, 0
@@ -45,11 +45,11 @@ MoriDebugMenu_SearchChild: @ 8083D70
 	movs r6, 0xB
 	adds r1, r4, 0
 	muls r1, r6
-	ldr r4, _08083DE8
+	ldr r4, _08083DE8 @ =gSpeciesNames
 	adds r1, r4
 	mov r0, sp
 	bl StringCopy
-	ldr r1, _08083DEC
+	ldr r1, _08083DEC @ =gUnknown_0839B24D
 	mov r0, sp
 	bl StringAppend
 	adds r1, r5, 0
@@ -57,7 +57,7 @@ MoriDebugMenu_SearchChild: @ 8083D70
 	adds r1, r4
 	mov r0, sp
 	bl StringAppend
-	ldr r1, _08083DF0
+	ldr r1, _08083DF0 @ =gUnknown_0839B255
 	mov r0, sp
 	bl StringAppend
 	bl MenuZeroFillScreen
@@ -70,8 +70,8 @@ MoriDebugMenu_SearchChild: @ 8083D70
 	movs r1, 0x1
 	movs r2, 0xF
 	bl MenuPrint
-	ldr r1, _08083DF4
-	ldr r0, _08083DF8
+	ldr r1, _08083DF4 @ =gCallback_03004AE8
+	ldr r0, _08083DF8 @ =sub_8083D4C
 	str r0, [r1]
 	movs r0, 0
 	add sp, 0x34
@@ -90,7 +90,7 @@ _08083DF8: .4byte sub_8083D4C
 	thumb_func_start MoriDebugMenu_Egg
 MoriDebugMenu_Egg: @ 8083DFC
 	push {lr}
-	ldr r0, _08083E24
+	ldr r0, _08083E24 @ =gSaveBlock1 + 0x2F9C
 	bl daycare_count_pokemon
 	lsls r0, 24
 	lsrs r0, 24
@@ -113,7 +113,7 @@ _08083E24: .4byte gSaveBlock1 + 0x2F9C
 	thumb_func_start MoriDebugMenu_MaleEgg
 MoriDebugMenu_MaleEgg: @ 8083E28
 	push {lr}
-	ldr r0, _08083E50
+	ldr r0, _08083E50 @ =gSaveBlock1 + 0x2F9C
 	bl daycare_count_pokemon
 	lsls r0, 24
 	lsrs r0, 24
@@ -148,7 +148,7 @@ MoriDebugMenu_1000Steps: @ 8083E54
 	thumb_func_start MoriDebugMenu_10000Steps
 MoriDebugMenu_10000Steps: @ 8083E68
 	push {lr}
-	ldr r0, _08083E7C
+	ldr r0, _08083E7C @ =0x00002710
 	bl sub_8041790
 	bl sub_8071C20
 	movs r0, 0x1
@@ -178,7 +178,7 @@ _08083E98:
 	movs r0, 0x64
 	adds r1, r5, 0
 	muls r1, r0
-	ldr r0, _08083EE0
+	ldr r0, _08083EE0 @ =gPlayerParty
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x2D
@@ -197,8 +197,8 @@ _08083EBC:
 	lsrs r5, r0, 24
 	cmp r5, 0x5
 	bls _08083E98
-	ldr r0, _08083EE4
-	ldr r1, _08083EE8
+	ldr r0, _08083EE4 @ =gSaveBlock1
+	ldr r1, _08083EE8 @ =0x000030b6
 	adds r0, r1
 	movs r1, 0xFD
 	strb r1, [r0]
@@ -217,8 +217,8 @@ _08083EE8: .4byte 0x000030b6
 	thumb_func_start MoriDebugMenu_LongName
 MoriDebugMenu_LongName: @ 8083EEC
 	push {lr}
-	ldr r0, _08083F04
-	ldr r2, _08083F08
+	ldr r0, _08083F04 @ =gPlayerParty
+	ldr r2, _08083F08 @ =gUnknown_0839B257
 	movs r1, 0x2
 	bl SetMonData
 	bl sub_8071C20
@@ -261,8 +261,8 @@ MoriDebugMenuProcessInput: @ 8083F2C
 	adds r0, 0x1
 	cmp r1, r0
 	beq _08083F60
-	ldr r2, _08083F58
-	ldr r0, _08083F5C
+	ldr r2, _08083F58 @ =gCallback_03004AE8
+	ldr r0, _08083F5C @ =gMoriDebugMenuActions
 	lsls r1, 3
 	adds r0, 0x4
 	adds r1, r0
@@ -292,7 +292,7 @@ InitMoriDebugMenu: @ 8083F6C
 	movs r2, 0xA
 	movs r3, 0x13
 	bl MenuDrawTextWindow
-	ldr r3, _08083FB0
+	ldr r3, _08083FB0 @ =gMoriDebugMenuActions
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0x9
@@ -306,8 +306,8 @@ InitMoriDebugMenu: @ 8083F6C
 	movs r2, 0x1
 	movs r3, 0x9
 	bl InitMenu
-	ldr r1, _08083FB4
-	ldr r0, _08083FB8
+	ldr r1, _08083FB4 @ =gCallback_03004AE8
+	ldr r0, _08083FB8 @ =MoriDebugMenuProcessInput
 	str r0, [r1]
 	movs r0, 0
 	add sp, 0x8
