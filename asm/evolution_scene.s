@@ -6,17 +6,17 @@
 
 	.text
 
-	thumb_func_start sub_8111894
-sub_8111894: @ 8111894
+	thumb_func_start CB2_BeginEvolutionScene
+CB2_BeginEvolutionScene: @ 8111894
 	push {lr}
 	bl UpdatePaletteFade
 	bl RunTasks
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8111894
+	thumb_func_end CB2_BeginEvolutionScene
 
-	thumb_func_start sub_81118A4
-sub_81118A4: @ 81118A4
+	thumb_func_start Task_BeginEvolutionScene
+Task_BeginEvolutionScene: @ 81118A4
 	push {r4-r7,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -72,7 +72,7 @@ _081118E4:
 	adds r1, r5, 0
 	adds r2, r6, 0
 	adds r3, r4, 0
-	bl evolution_cutscene
+	bl EvolutionScene
 _08111918:
 	add sp, 0x4
 	pop {r4-r7}
@@ -80,10 +80,10 @@ _08111918:
 	bx r0
 	.align 2, 0
 _08111920: .4byte gPaletteFade
-	thumb_func_end sub_81118A4
+	thumb_func_end Task_BeginEvolutionScene
 
-	thumb_func_start sub_8111924
-sub_8111924: @ 8111924
+	thumb_func_start BeginEvolutionScene
+BeginEvolutionScene: @ 8111924
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -125,13 +125,13 @@ sub_8111924: @ 8111924
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08111978: .4byte sub_81118A4
+_08111978: .4byte Task_BeginEvolutionScene
 _0811197C: .4byte gTasks
-_08111980: .4byte sub_8111894
-	thumb_func_end sub_8111924
+_08111980: .4byte CB2_BeginEvolutionScene
+	thumb_func_end BeginEvolutionScene
 
-	thumb_func_start evolution_cutscene
-evolution_cutscene: @ 8111984
+	thumb_func_start EvolutionScene
+EvolutionScene: @ 8111984
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -448,17 +448,17 @@ _08111C64: .4byte gDummySpriteAffineAnimTable
 _08111C68: .4byte 0x02014800
 _08111C6C: .4byte gSprites
 _08111C70: .4byte nullsub_37
-_08111C74: .4byte sub_811240C
+_08111C74: .4byte Task_EvolutionScene
 _08111C78: .4byte gTasks
 _08111C7C: .4byte 0x02009000
 _08111C80: .4byte gPlttBufferUnfaded + 0x40
-_08111C84: .4byte nullsub_73
-_08111C88: .4byte sub_8114FD4
-_08111C8C: .4byte sub_8112270
-	thumb_func_end evolution_cutscene
+_08111C84: .4byte HBlankCB_EvolutionScene
+_08111C88: .4byte VBlankCB_EvolutionScene
+_08111C8C: .4byte CB2_EvolutionSceneUpdate_0
+	thumb_func_end EvolutionScene
 
-	thumb_func_start sub_8111C90
-sub_8111C90: @ 8111C90
+	thumb_func_start CB2_EvolutionSceneLoadGraphics
+CB2_EvolutionSceneLoadGraphics: @ 8111C90
 	push {r4-r6,lr}
 	mov r6, r10
 	mov r5, r9
@@ -656,13 +656,13 @@ _08111E64: .4byte gUnknown_02024E8C
 _08111E68: .4byte gDummySpriteAffineAnimTable
 _08111E6C: .4byte gSprites
 _08111E70: .4byte nullsub_37
-_08111E74: .4byte nullsub_73
-_08111E78: .4byte sub_8114FD4
-_08111E7C: .4byte sub_8112270
-	thumb_func_end sub_8111C90
+_08111E74: .4byte HBlankCB_EvolutionScene
+_08111E78: .4byte VBlankCB_EvolutionScene
+_08111E7C: .4byte CB2_EvolutionSceneUpdate_0
+	thumb_func_end CB2_EvolutionSceneLoadGraphics
 
-	thumb_func_start sub_8111E80
-sub_8111E80: @ 8111E80
+	thumb_func_start CB2_TradeEvolutionSceneLoadGraphics
+CB2_TradeEvolutionSceneLoadGraphics: @ 8111E80
 	push {r4-r7,lr}
 	sub sp, 0x8
 	ldr r2, _08111EB8 @ =gTasks
@@ -800,8 +800,8 @@ _08111F88:
 _08111FC8: .4byte gUnknown_03004828
 _08111FCC: .4byte gMain
 _08111FD0: .4byte 0x0000043c
-_08111FD4: .4byte nullsub_73
-_08111FD8: .4byte sub_811505C
+_08111FD4: .4byte HBlankCB_EvolutionScene
+_08111FD8: .4byte VBlankCB_TradeEvolutionScene
 _08111FDC:
 	bl sub_804E22C
 	b _08112088
@@ -918,11 +918,11 @@ _081120D6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081120E0: .4byte sub_8112290
-	thumb_func_end sub_8111E80
+_081120E0: .4byte CB2_EvolutionSceneUpdate_1
+	thumb_func_end CB2_TradeEvolutionSceneLoadGraphics
 
-	thumb_func_start sub_81120E4
-sub_81120E4: @ 81120E4
+	thumb_func_start TradeEvolutionScene
+TradeEvolutionScene: @ 81120E4
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1089,13 +1089,13 @@ _08112254: .4byte gUnknown_02024E8C
 _08112258: .4byte gDummySpriteAffineAnimTable
 _0811225C: .4byte gSprites
 _08112260: .4byte nullsub_37
-_08112264: .4byte sub_8112FE8
+_08112264: .4byte Task_TradeEvolutionScene
 _08112268: .4byte gTasks
-_0811226C: .4byte sub_8112290
-	thumb_func_end sub_81120E4
+_0811226C: .4byte CB2_EvolutionSceneUpdate_1
+	thumb_func_end TradeEvolutionScene
 
-	thumb_func_start sub_8112270
-sub_8112270: @ 8112270
+	thumb_func_start CB2_EvolutionSceneUpdate_0
+CB2_EvolutionSceneUpdate_0: @ 8112270
 	push {lr}
 	bl AnimateSprites
 	bl BuildOamBuffer
@@ -1107,10 +1107,10 @@ sub_8112270: @ 8112270
 	bx r0
 	.align 2, 0
 _0811228C: .4byte gUnknown_03004210
-	thumb_func_end sub_8112270
+	thumb_func_end CB2_EvolutionSceneUpdate_0
 
-	thumb_func_start sub_8112290
-sub_8112290: @ 8112290
+	thumb_func_start CB2_EvolutionSceneUpdate_1
+CB2_EvolutionSceneUpdate_1: @ 8112290
 	push {lr}
 	bl AnimateSprites
 	bl BuildOamBuffer
@@ -1124,10 +1124,10 @@ sub_8112290: @ 8112290
 	bx r0
 	.align 2, 0
 _081122B0: .4byte gUnknown_03004828
-	thumb_func_end sub_8112290
+	thumb_func_end CB2_EvolutionSceneUpdate_1
 
-	thumb_func_start sub_81122B4
-sub_81122B4: @ 81122B4
+	thumb_func_start CreateShedinja
+CreateShedinja: @ 81122B4
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1278,10 +1278,10 @@ _081123FC: .4byte gPlayerParty
 _08112400: .4byte gSpeciesNames
 _08112404: .4byte 0x0000012f
 _08112408: .4byte gUnknown_083F868C
-	thumb_func_end sub_81122B4
+	thumb_func_end CreateShedinja
 
-	thumb_func_start sub_811240C
-sub_811240C: @ 811240C
+	thumb_func_start Task_EvolutionScene
+Task_EvolutionScene: @ 811240C
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -1856,7 +1856,7 @@ _0811290A:
 	bne _0811291A
 	ldrh r0, [r4, 0xE]
 	mov r1, r9
-	bl sub_81122B4
+	bl CreateShedinja
 _0811291A:
 	adds r0, r7, 0
 	bl DestroyTask
@@ -2367,7 +2367,7 @@ _08112D4A:
 _08112D78: .4byte gPaletteFade
 _08112D7C: .4byte gPlayerParty
 _08112D80: .4byte gPlayerPartyCount
-_08112D84: .4byte sub_8111C90
+_08112D84: .4byte CB2_EvolutionSceneLoadGraphics
 _08112D88: .4byte word_2024E82
 _08112D8C:
 	ldr r0, _08112DC0 @ =gPaletteFade
@@ -2398,7 +2398,7 @@ _08112DA4:
 	b _08112FCE
 	.align 2, 0
 _08112DC0: .4byte gPaletteFade
-_08112DC4: .4byte sub_8112270
+_08112DC4: .4byte CB2_EvolutionSceneUpdate_0
 _08112DC8: .4byte gTasks
 _08112DCC:
 	adds r1, r6, 0
@@ -2638,10 +2638,10 @@ _08112FD0:
 	.align 2, 0
 _08112FE0: .4byte gUnknown_03004210
 _08112FE4: .4byte gTasks
-	thumb_func_end sub_811240C
+	thumb_func_end Task_EvolutionScene
 
-	thumb_func_start sub_8112FE8
-sub_8112FE8: @ 8112FE8
+	thumb_func_start Task_TradeEvolutionScene
+Task_TradeEvolutionScene: @ 8112FE8
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -3480,7 +3480,7 @@ _0811371C:
 	beq _08113742
 	movs r0, 0x5
 	bl PlaySE
-	bl nullsub_24
+	bl HBlankCB_TradeEvolutionScene
 	movs r0, 0
 	strb r0, [r4, 0x1]
 	bl sub_81150D8
@@ -3497,7 +3497,7 @@ _08113742:
 	bne _08113768
 	movs r0, 0x5
 	bl PlaySE
-	bl nullsub_24
+	bl HBlankCB_TradeEvolutionScene
 	movs r0, 0x1
 	strb r0, [r4, 0x1]
 	bl sub_81150D8
@@ -3658,7 +3658,7 @@ _0811388A:
 _081138B8: .4byte gPaletteFade
 _081138BC: .4byte gPlayerParty
 _081138C0: .4byte gPlayerPartyCount
-_081138C4: .4byte sub_8111E80
+_081138C4: .4byte CB2_TradeEvolutionSceneLoadGraphics
 _081138C8: .4byte word_2024E82
 _081138CC:
 	ldr r0, _08113900 @ =gPaletteFade
@@ -3691,7 +3691,7 @@ _081138E6:
 	.align 2, 0
 _08113900: .4byte gPaletteFade
 _08113904: .4byte gMain
-_08113908: .4byte sub_8112290
+_08113908: .4byte CB2_EvolutionSceneUpdate_1
 _0811390C: .4byte gTasks
 _08113910:
 	adds r1, r6, 0
@@ -3948,7 +3948,7 @@ _08113B3A:
 	.align 2, 0
 _08113B48: .4byte gUnknown_03004828
 _08113B4C: .4byte gTasks
-	thumb_func_end sub_8112FE8
+	thumb_func_end Task_TradeEvolutionScene
 
 	thumb_func_start unref_sub_8113B50
 unref_sub_8113B50: @ 8113B50
@@ -6575,13 +6575,13 @@ _08114FCA:
 	bx r1
 	thumb_func_end sub_8114E48
 
-	thumb_func_start nullsub_73
-nullsub_73: @ 8114FD0
+	thumb_func_start HBlankCB_EvolutionScene
+HBlankCB_EvolutionScene: @ 8114FD0
 	bx lr
-	thumb_func_end nullsub_73
+	thumb_func_end HBlankCB_EvolutionScene
 
-	thumb_func_start sub_8114FD4
-sub_8114FD4: @ 8114FD4
+	thumb_func_start VBlankCB_EvolutionScene
+VBlankCB_EvolutionScene: @ 8114FD4
 	push {lr}
 	ldr r1, _08115034 @ =REG_BG0CNT
 	ldr r2, _08115038 @ =0x00009803
@@ -6636,10 +6636,10 @@ _0811504C: .4byte gUnknown_03004288
 _08115050: .4byte gUnknown_03004280
 _08115054: .4byte gUnknown_030041B0
 _08115058: .4byte gUnknown_030041B8
-	thumb_func_end sub_8114FD4
+	thumb_func_end VBlankCB_EvolutionScene
 
-	thumb_func_start sub_811505C
-sub_811505C: @ 811505C
+	thumb_func_start VBlankCB_TradeEvolutionScene
+VBlankCB_TradeEvolutionScene: @ 811505C
 	push {lr}
 	ldr r1, _081150B4 @ =REG_BG0HOFS
 	ldr r0, _081150B8 @ =gUnknown_030042A4
@@ -6689,7 +6689,7 @@ _081150C8: .4byte gUnknown_03004288
 _081150CC: .4byte gUnknown_03004280
 _081150D0: .4byte gUnknown_030041B0
 _081150D4: .4byte gUnknown_030041B8
-	thumb_func_end sub_811505C
+	thumb_func_end VBlankCB_TradeEvolutionScene
 
 	thumb_func_start sub_81150D8
 sub_81150D8: @ 81150D8
@@ -6709,9 +6709,9 @@ sub_81150D8: @ 81150D8
 _081150F4: .4byte gUnknown_02024D1E
 	thumb_func_end sub_81150D8
 
-	thumb_func_start nullsub_24
-nullsub_24: @ 81150F8
+	thumb_func_start HBlankCB_TradeEvolutionScene
+HBlankCB_TradeEvolutionScene: @ 81150F8
 	bx lr
-	thumb_func_end nullsub_24
+	thumb_func_end HBlankCB_TradeEvolutionScene
 
 	.align 2, 0 @ Don't pad with nop.

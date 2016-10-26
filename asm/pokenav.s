@@ -7864,7 +7864,7 @@ _080EFA92:
 	ldrb r1, [r1]
 	lsls r2, r4, 24
 	lsrs r2, 24
-	bl sub_811A8CC
+	bl GetLandmarkName
 	adds r1, r0, 0
 	cmp r1, 0
 	bne _080EFA74
@@ -11736,7 +11736,7 @@ sub_80F19FC: @ 80F19FC
 	adds r1, r2
 	ldrb r1, [r1]
 	ldrb r2, [r5, 0x1]
-	bl sub_811A8CC
+	bl GetLandmarkName
 	cmp r0, 0
 	beq _080F1A46
 	ldrb r2, [r5, 0x1]

@@ -1854,7 +1854,7 @@ sub_80BE5FC: @ 80BE5FC
 	adds r0, 0x10
 	ldr r1, _080BE654 @ =gSaveBlock2
 	bl StringCopy
-	bl sub_810F87C
+	bl GetLeadMonIndex
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -1931,7 +1931,7 @@ sub_80BE6A0: @ 80BE6A0
 	strb r0, [r4]
 	movs r0, 0x1
 	strb r0, [r4, 0x1]
-	bl sub_810F87C
+	bl GetLeadMonIndex
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -1963,7 +1963,7 @@ sub_80BE6A0: @ 80BE6A0
 	adds r0, r4, 0x5
 	ldr r1, _080BE770 @ =gSaveBlock2
 	bl StringCopy
-	bl sub_810F87C
+	bl GetLeadMonIndex
 	lsls r0, 24
 	lsrs r0, 24
 	mov r1, r8
@@ -1975,7 +1975,7 @@ sub_80BE6A0: @ 80BE6A0
 	movs r1, 0x2
 	adds r2, r5, 0
 	bl GetMonData
-	bl sub_810F87C
+	bl GetLeadMonIndex
 	lsls r0, 24
 	lsrs r0, 24
 	mov r1, r8
@@ -3572,7 +3572,7 @@ sub_80BF334: @ 80BF334
 	cmp r0, 0
 	bne _080BF384
 	ldr r4, _080BF390 @ =gStringVar1
-	bl sub_810F87C
+	bl GetLeadMonIndex
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -3651,7 +3651,7 @@ sub_80BF3DC: @ 80BF3DC
 	cmp r0, 0
 	bne _080BF448
 	ldr r6, _080BF454 @ =gStringVar1
-	bl sub_810F87C
+	bl GetLeadMonIndex
 	lsls r0, 24
 	lsrs r0, 24
 	movs r5, 0x64
@@ -3667,7 +3667,7 @@ sub_80BF3DC: @ 80BF3DC
 	adds r1, r0
 	adds r0, r6, 0
 	bl StringCopy
-	bl sub_810F87C
+	bl GetLeadMonIndex
 	lsls r0, 24
 	lsrs r0, 24
 	muls r0, r5
@@ -3824,7 +3824,7 @@ _080BF53E:
 	thumb_func_start sub_80BF544
 sub_80BF544: @ 80BF544
 	push {lr}
-	bl sub_810F87C
+	bl GetLeadMonIndex
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_80BF4F4

@@ -1059,8 +1059,8 @@ _080F97D8: .4byte gUnknown_020388C0
 _080F97DC: .4byte gSprites
 	thumb_func_end sub_80F979C
 
-	thumb_func_start SetBgTilemapBuffer
-SetBgTilemapBuffer: @ 80F97E0
+	thumb_func_start DestroyVerticalScrollIndicator
+DestroyVerticalScrollIndicator: @ 80F97E0
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
@@ -1087,7 +1087,7 @@ _080F9808:
 	.align 2, 0
 _080F9810: .4byte gUnknown_020388C0
 _080F9814: .4byte gSprites
-	thumb_func_end SetBgTilemapBuffer
+	thumb_func_end DestroyVerticalScrollIndicator
 
 	thumb_func_start LoadScrollIndicatorPalette
 LoadScrollIndicatorPalette: @ 80F9818

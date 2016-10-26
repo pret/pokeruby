@@ -516,9 +516,9 @@ sub_8109D04: @ 8109D04
 	movs r3, 0x13
 	bl MenuZeroFillWindowRect
 	movs r0, 0
-	bl SetBgTilemapBuffer
+	bl DestroyVerticalScrollIndicator
 	movs r0, 0x1
-	bl SetBgTilemapBuffer
+	bl DestroyVerticalScrollIndicator
 	ldr r0, _08109D6C @ =gUnknown_020388F7
 	movs r1, 0x8
 	bl sub_80F9520

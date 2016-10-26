@@ -16701,7 +16701,7 @@ _08013E06:
 	adds r0, r4, 0
 	adds r1, r2, 0
 	movs r2, 0x81
-	bl evolution_cutscene
+	bl EvolutionScene
 	b _08013E74
 	.align 2, 0
 _08013E4C: .4byte gUnknown_03004324

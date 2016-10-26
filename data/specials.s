@@ -37,7 +37,7 @@ gSpecials::
 	.4byte sub_8083B80
 	.4byte sub_8083820
 	.4byte sub_8083614
-	.4byte sub_810DAC8
+	.4byte GetLinkPartnerNames
 	.4byte sub_810DB28
 	.4byte sub_8047A40
 	.4byte copy_player_party_from_sav1
@@ -141,17 +141,17 @@ gSpecials::
 	.4byte ShowContestWinner
 	.4byte sub_810DCCC
 	.4byte sub_810DC7C
-	.4byte sub_810E24C
+	.4byte ShowFieldMessageStringVar4
 	.4byte DrawWholeMapView
-	.4byte sub_810E25C
+	.4byte StorePlayerCoordsInVars
 	.4byte sub_810DEDC
 	.4byte sub_810E070
 	.4byte sub_810E230
-	.4byte sub_810E278
-	.4byte sub_810E298
-	.4byte sub_810E2CC
-	.4byte sub_810E348
-	.4byte sub_810E30C
+	.4byte GetPlayerTrainerIdOnesDigit
+	.4byte GetPlayerBigGuyGirlString
+	.4byte GetRivalSonDaughterString
+	.4byte SetFlagInVar
+	.4byte CableCarWarp
 	.4byte sub_8123218
 	.4byte sub_8053E90
 	.4byte sub_806A460
@@ -196,15 +196,15 @@ gSpecials::
 	.4byte ScriptHatchMon
 	.4byte EggHatch
 	.4byte sub_8042B4C
-	.4byte sub_811043C
+	.4byte ShowLinkBattleRecords
 	.4byte sub_80B7CE8
 	.4byte sub_80B7D0C
 	.4byte DoWhiteOut
 	.4byte sp0C8_whiteout_maybe
 	.4byte sub_80C8040
 	.4byte sub_80C8080
-	.4byte sub_810D980
-	.4byte sub_810D9A0
+	.4byte SetSSTidalFlag
+	.4byte ResetSSTidalFlag
 	.4byte sub_80C81B8
 	.4byte sub_80C81E4
 	.4byte sub_80C82EC
@@ -212,25 +212,25 @@ gSpecials::
 	.4byte sub_810D32C
 	.4byte sub_810D378
 	.4byte sub_810D3FC
-	.4byte sub_810D43C
-	.4byte sub_810D600
-	.4byte sub_810E424
-	.4byte sub_810E59C
-	.4byte sub_810E74C
-	.4byte sub_810E638
-	.4byte sub_810E724
+	.4byte ScriptGetPokedexInfo
+	.4byte ShowPokedexRatingMessage
+	.4byte DoPCTurnOnEffect
+	.4byte DoPCTurnOffEffect
+	.4byte SetDepartmentStoreFloorVar
+	.4byte DoLotteryCornerComputerEffect
+	.4byte EndLotteryCornerComputerEffect
 	.4byte sub_80F9A4C
 	.4byte sub_80F9EEC
 	.4byte sub_80FA0DC
 	.4byte sub_80F9F84
 	.4byte sub_80F9F3C
 	.4byte sub_8132670
-	.4byte sub_810D8EC
-	.4byte sub_810D6FC
-	.4byte sp0E3_walkrun_bitfield_interpretation
-	.4byte sub_810D85C
-	.4byte sub_810D934
-	.4byte sub_810E384
+	.4byte GetRecordedCyclingRoadResults
+	.4byte BeginCyclingRoadChallenge
+	.4byte GetPlayerAvatarBike
+	.4byte FinishCyclingRoadChallenge
+	.4byte UpdateCyclingRoadState
+	.4byte GetLeadMonFriendshipScore
 	.4byte sub_8134548
 	.4byte sub_81347F8
 	.4byte sub_81352E4
@@ -251,39 +251,39 @@ gSpecials::
 	.4byte ReducePlayerPartyToThree
 	.4byte sub_8139C74
 	.4byte sub_8139CB4
-	.4byte sub_810E414
+	.4byte FieldShowRegionMap
 	.4byte sub_804D89C
 	.4byte sub_804DB68
 	.4byte sub_804E174
 	.4byte sub_804DB2C
-	.4byte sub_810E35C
+	.4byte GetWeekCount
 	.4byte sub_8145AEC
 	.4byte sub_8145B00
 	.4byte ShowBerryBlenderRecordWindow
-	.4byte sub_810EF24
-	.4byte sub_810EF0C
+	.4byte ResetTrickHouseEndRoomFlag
+	.4byte SetTrickHouseEndRoomFlag
 	.4byte sp109_CreatePCMenu
-	.4byte sub_810D618
+	.4byte AccessHallOfFamePC
 	.4byte sub_810D6A4
-	.4byte sub_810EF3C
-	.4byte sub_810EF68
-	.4byte sub_810EF94
-	.4byte sub_810EFC0
-	.4byte sub_810EFEC
+	.4byte CheckLeadMonCool
+	.4byte CheckLeadMonBeauty
+	.4byte CheckLeadMonCute
+	.4byte CheckLeadMonSmart
+	.4byte CheckLeadMonTough
 	.4byte sub_80C7958
 	.4byte DoSoftReset
 	.4byte sub_810D180
 	.4byte sub_810EBEC
-	.4byte sub_810F090
-	.4byte SpawnScriptFieldObject
-	.4byte sub_810F388
-	.4byte sub_810F3AC
-	.4byte sub_810F3DC
+	.4byte ShowGlassWorkshopMenu
+	.4byte SpawnCameraDummy
+	.4byte RemoveCameraDummy
+	.4byte GetPokeblockNameByMonNature
+	.4byte GetSecretBaseNearbyMapName
 	.4byte sub_8147478
 	.4byte sub_814768C
 	.4byte sub_80818A4
 	.4byte sub_80818FC
-	.4byte sub_81105E4
+	.4byte ShowBattleTowerRecords
 	.4byte sub_810D3E8
 	.4byte sub_810F414
 	.4byte sub_810F424
@@ -292,23 +292,23 @@ gSpecials::
 	.4byte sub_810F4B0
 	.4byte sub_810F4D4
 	.4byte sub_810F4FC
-	.4byte sub_810F524
-	.4byte sub_810F54C
-	.4byte sub_810F588
+	.4byte LeadMonHasEffortRibbon
+	.4byte GivLeadMonEffortRibbon
+	.4byte GetLeadMonEVCount
 	.4byte sub_8064EAC
 	.4byte sub_8064ED4
 	.4byte sub_813430C
 	.4byte sub_810F5BC
-	.4byte sub_810F018
+	.4byte IsGrassTypeInParty
 	.4byte sub_8081334
-	.4byte sub_810F628
-	.4byte sub_810F694
+	.4byte PutZigzagoonInPlayerParty
+	.4byte IsStarterInParty
 	.4byte sub_80BC224
-	.4byte sub_810F6EC
+	.4byte CheckFreePokemonStorageSpace
 	.4byte sub_81477B4
 	.4byte sub_810E944
 	.4byte GetShieldToyTVDecorationInfo
-	.4byte sub_810F738
+	.4byte IsPokerusInParty
 	.4byte sub_8069D78
 	.4byte sub_810F758
 	.4byte sub_8081BF8
@@ -324,10 +324,10 @@ gSpecials::
 	.4byte sub_80C5164
 	.4byte sub_8134AB4
 	.4byte sub_8081B78
-	.4byte sub_810F83C
-	.4byte sub_810F85C
+	.4byte SetRoute119Weather
+	.4byte SetRoute123Weather
 	.4byte ScriptGetMultiplayerId
-	.4byte sub_810F8D4
+	.4byte ScriptGetPartyMonSpecies
 	.4byte sub_80FA148
 	.4byte sub_810F8FC
 	.4byte sub_80BC50C

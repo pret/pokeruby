@@ -737,8 +737,8 @@ _0811A3C4:
 _0811A3C8: .4byte REG_BG3HOFS
 	thumb_func_end sub_811A350
 
-	thumb_func_start sub_811A3CC
-sub_811A3CC: @ 811A3CC
+	thumb_func_start ShowPokedexCryScreen
+ShowPokedexCryScreen: @ 811A3CC
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -884,10 +884,10 @@ _0811A4E8: .4byte gCryMeterNeedleSpriteSheets
 _0811A4EC: .4byte gCryMeterNeedleSpritePalettes
 _0811A4F0: .4byte gSpriteTemplate_83FB774
 _0811A4F4: .4byte 0x0201c800
-	thumb_func_end sub_811A3CC
+	thumb_func_end ShowPokedexCryScreen
 
-	thumb_func_start sub_811A4F8
-sub_811A4F8: @ 811A4F8
+	thumb_func_start DestroyCryMeterNeedleSprite
+DestroyCryMeterNeedleSprite: @ 811A4F8
 	push {r4,r5,lr}
 	ldr r5, _0811A52C @ =gSprites
 	ldr r4, _0811A530 @ =0x0201c800
@@ -914,7 +914,7 @@ sub_811A4F8: @ 811A4F8
 	.align 2, 0
 _0811A52C: .4byte gSprites
 _0811A530: .4byte 0x0201c800
-	thumb_func_end sub_811A4F8
+	thumb_func_end DestroyCryMeterNeedleSprite
 
 	thumb_func_start sub_811A534
 sub_811A534: @ 811A534

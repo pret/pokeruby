@@ -1118,7 +1118,7 @@ sub_80FEABC: @ 80FEABC
 	cmp r0, 0
 	bne _080FEADE
 	movs r0, 0
-	bl SetBgTilemapBuffer
+	bl DestroyVerticalScrollIndicator
 	ldrb r0, [r4]
 	cmp r0, 0
 	beq _080FEAE8
@@ -1136,7 +1136,7 @@ _080FEAE8:
 	cmp r0, r1
 	bne _080FEAFC
 	movs r0, 0x1
-	bl SetBgTilemapBuffer
+	bl DestroyVerticalScrollIndicator
 _080FEAFC:
 	ldrb r0, [r5]
 	adds r0, 0x7
@@ -1734,9 +1734,9 @@ sub_80FEF74: @ 80FEF74
 	movs r1, 0x8
 	bl sub_80F9520
 	movs r0, 0
-	bl SetBgTilemapBuffer
+	bl DestroyVerticalScrollIndicator
 	movs r0, 0x1
-	bl SetBgTilemapBuffer
+	bl DestroyVerticalScrollIndicator
 	bl sub_8072DEC
 	movs r0, 0
 	movs r1, 0
@@ -1856,9 +1856,9 @@ sub_80FF058: @ 80FF058
 	movs r1, 0x8
 	bl sub_80F9520
 	movs r0, 0
-	bl SetBgTilemapBuffer
+	bl DestroyVerticalScrollIndicator
 	movs r0, 0x1
-	bl SetBgTilemapBuffer
+	bl DestroyVerticalScrollIndicator
 	bl BuyMenuFreeMemory
 	ldr r1, _080FF090 @ =gTasks
 	lsls r0, r4, 2
@@ -2690,9 +2690,9 @@ _080FF6DA:
 	adds r0, r6, 0
 	bl sub_80FF0E0
 	movs r0, 0
-	bl SetBgTilemapBuffer
+	bl DestroyVerticalScrollIndicator
 	movs r0, 0x1
-	bl SetBgTilemapBuffer
+	bl DestroyVerticalScrollIndicator
 	ldr r0, _080FF710 @ =gUnknown_020388F7
 	movs r1, 0x8
 	bl sub_80F9520

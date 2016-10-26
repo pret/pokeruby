@@ -234,7 +234,7 @@ _0803E35C:
 	mov r0, r8
 	movs r2, 0
 	ldr r3, [sp, 0xC]
-	bl sub_8111924
+	bl BeginEvolutionScene
 	movs r0, 0
 	bl _0803F15C
 _0803E36C:
@@ -888,7 +888,7 @@ _0803E88C:
 	.4byte _0803EDF4
 _0803E8AC:
 	mov r0, r8
-	bl sub_8040020
+	bl GetMonEVCount
 	lsls r0, 16
 	lsrs r5, r0, 16
 	ldr r0, _0803E8EC @ =0x000001fd
@@ -1593,7 +1593,7 @@ _0803EE54:
 	.4byte _0803F07C
 _0803EE74:
 	mov r0, r8
-	bl sub_8040020
+	bl GetMonEVCount
 	lsls r0, 16
 	lsrs r5, r0, 16
 	ldr r0, _0803EEBC @ =0x000001fd
@@ -4020,8 +4020,8 @@ _0804000E:
 _0804001C: .4byte 0x000001fd
 	thumb_func_end sub_803FE70
 
-	thumb_func_start sub_8040020
-sub_8040020: @ 8040020
+	thumb_func_start GetMonEVCount
+GetMonEVCount: @ 8040020
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	movs r5, 0
@@ -4042,7 +4042,7 @@ _08040028:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8040020
+	thumb_func_end GetMonEVCount
 
 	thumb_func_start sub_8040048
 sub_8040048: @ 8040048
@@ -4144,8 +4144,8 @@ _08040104:
 _0804010C: .4byte gBitTable
 	thumb_func_end sub_8040048
 
-	thumb_func_start sub_8040110
-sub_8040110: @ 8040110
+	thumb_func_start CheckPartyPokerus
+CheckPartyPokerus: @ 8040110
 	push {r4-r7,lr}
 	sub sp, 0x4
 	adds r7, r0, 0
@@ -4199,7 +4199,7 @@ _0804016C:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8040110
+	thumb_func_end CheckPartyPokerus
 
 	thumb_func_start sub_8040178
 sub_8040178: @ 8040178
@@ -4927,7 +4927,7 @@ sub_80406D8: @ 80406D8
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
-	bl sub_806912C
+	bl IsNationalPokedex
 	cmp r0, 0
 	beq _080406F2
 	adds r0, r4, 0

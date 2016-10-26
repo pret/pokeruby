@@ -109,7 +109,7 @@ void NewGameInitData(void)
     sub_80AB1B0();
     sub_80530AC();
     sub_8052DA8();
-    GameFreakRTC_Reset();
+    InitLinkBattleRecords();
     InitShroomishSizeRecord();
     InitBarboachSizeRecord();
     gPlayerPartyCount = 0;

@@ -19371,8 +19371,8 @@ sub_813452C: @ 813452C
 _08134534: .4byte gSaveBlock1 + 0x3144
 	thumb_func_end sub_813452C
 
-	thumb_func_start sub_8134538
-sub_8134538: @ 8134538
+	thumb_func_start GetRoamerLocation
+GetRoamerLocation: @ 8134538
 	ldr r3, _08134544 @ =gRoamerLocation
 	ldrb r2, [r3]
 	strb r2, [r0]
@@ -19381,7 +19381,7 @@ sub_8134538: @ 8134538
 	bx lr
 	.align 2, 0
 _08134544: .4byte gRoamerLocation
-	thumb_func_end sub_8134538
+	thumb_func_end GetRoamerLocation
 
 	thumb_func_start sub_8134548
 sub_8134548: @ 8134548
@@ -31256,9 +31256,9 @@ sub_813A468: @ 813A468
 	lsrs r5, 24
 	bl BuyMenuFreeMemory
 	movs r0, 0
-	bl SetBgTilemapBuffer
+	bl DestroyVerticalScrollIndicator
 	movs r0, 0x1
-	bl SetBgTilemapBuffer
+	bl DestroyVerticalScrollIndicator
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0x1D
@@ -32342,7 +32342,7 @@ _0813AD04:
 _0813AD1C: .4byte gOtherText_CancelNoTerminator
 _0813AD20:
 	movs r0, 0
-	bl SetBgTilemapBuffer
+	bl DestroyVerticalScrollIndicator
 _0813AD26:
 	movs r1, 0x2
 	ldrsh r0, [r6, r1]
@@ -32360,7 +32360,7 @@ _0813AD26:
 	b _0813AD4A
 _0813AD44:
 	movs r0, 0x1
-	bl SetBgTilemapBuffer
+	bl DestroyVerticalScrollIndicator
 _0813AD4A:
 	add sp, 0x4
 	pop {r3}
@@ -32818,7 +32818,7 @@ _0813B0C4:
 _0813B0D0: .4byte gOtherText_CancelNoTerminator
 _0813B0D4:
 	movs r0, 0
-	bl SetBgTilemapBuffer
+	bl DestroyVerticalScrollIndicator
 _0813B0DA:
 	ldr r0, _0813B0F4 @ =0x0201fe00
 	ldrb r1, [r0, 0x2]
@@ -32836,7 +32836,7 @@ _0813B0DA:
 _0813B0F4: .4byte 0x0201fe00
 _0813B0F8:
 	movs r0, 0x1
-	bl SetBgTilemapBuffer
+	bl DestroyVerticalScrollIndicator
 _0813B0FE:
 	pop {r3}
 	mov r8, r3
@@ -33025,9 +33025,9 @@ sub_813B27C: @ 813B27C
 	push {lr}
 	bl BuyMenuFreeMemory
 	movs r0, 0
-	bl SetBgTilemapBuffer
+	bl DestroyVerticalScrollIndicator
 	movs r0, 0x1
-	bl SetBgTilemapBuffer
+	bl DestroyVerticalScrollIndicator
 	pop {r0}
 	bx r0
 	thumb_func_end sub_813B27C

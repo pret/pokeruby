@@ -10596,7 +10596,7 @@ _0804D4CC:
 	adds r1, 0xB9
 	ldrb r2, [r1]
 	adds r1, r4, 0
-	bl sub_81120E4
+	bl TradeEvolutionScene
 	b _0804D538
 	.align 2, 0
 _0804D510: .4byte gUnknown_0202E8CE
@@ -10708,7 +10708,7 @@ _0804D5B8:
 	adds r1, 0xB9
 	ldrb r2, [r1]
 	adds r1, r4, 0
-	bl sub_81120E4
+	bl TradeEvolutionScene
 	b _0804D60E
 	.align 2, 0
 _0804D5F4: .4byte gUnknown_03005E94

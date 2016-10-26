@@ -24895,7 +24895,7 @@ sub_80A0EA4: @ 80A0EA4
 	ldr r5, _080A0ECC @ =0x0600e444
 	ldr r6, _080A0ED0 @ =0x0600ec44
 	movs r1, 0
-	bl sub_8040110
+	bl CheckPartyPokerus
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A0ED4
@@ -26767,7 +26767,7 @@ _080A1CEA:
 	bne _080A1D12
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_8040110
+	bl CheckPartyPokerus
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A1D10

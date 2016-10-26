@@ -283,7 +283,7 @@ void sub_805308C(void)
 {
     FlagReset(2092);
     sub_8054164();
-    wild_pokemon_reroll();
+    ResetCyclingRoadChallengeData();
     mapnumbers_history_shift_sav1_0_2_4_out();
     sub_8134348();
 }
@@ -638,7 +638,7 @@ void sub_80538F0(u8 mapGroup, u8 mapNum)
     set_current_map_header_from_sav1_save_old_name();
     sub_8053154();
     sub_806906C();
-    wild_pokemon_reroll();
+    ResetCyclingRoadChallengeData();
     prev_quest_postbuffer_cursor_backup_reset();
     sub_8082BD0(mapGroup, mapNum);
     DoTimeBasedEvents();
@@ -671,7 +671,7 @@ void sub_8053994(u32 a1)
     v2 = is_light_level_1_2_3_5_or_6(gMapHeader.light);
     v3 = is_light_level_8_or_9(gMapHeader.light);
     sub_806906C();
-    wild_pokemon_reroll();
+    ResetCyclingRoadChallengeData();
     prev_quest_postbuffer_cursor_backup_reset();
     sub_8082BD0(gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum);
     if (a1 != 1)

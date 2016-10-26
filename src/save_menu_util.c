@@ -127,10 +127,10 @@ u16 GetPokedexSeenCount()
 {
     u16 pokedexSeenCount;
     
-    if ( sub_806912C() ) // national dex check?
-        pokedexSeenCount = pokedex_count(1);
+    if ( IsNationalPokedex() ) // national dex check?
+        pokedexSeenCount = GetNationalPokedexCount(1);
     else
-        pokedexSeenCount = sub_8090F68(1);
+        pokedexSeenCount = GetHoennPokedexCount(1);
     
     return pokedexSeenCount;
 }

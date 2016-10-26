@@ -33,7 +33,7 @@ extern void sub_80EBA5C(void);
 extern void sub_80A53F8(void);
 extern void sub_8089A70(void);
 extern void CB2_InitPokedex(void);
-extern u16 pokedex_count(u8);
+extern u16 GetNationalPokedexCount(u8);
 extern void fade_screen(u8, u8);
 extern bool32 is_c1_link_related_active();
 extern void sub_80594C0(void);
@@ -346,7 +346,7 @@ static u8 StartMenu_InputProcessCallback(void)
         PlaySE(SE_SELECT);
         if(gStartMenuItems[sCurrentStartMenuActions[sStartMenuCursorPos]].callback == StartMenu_PokedexCallback)
         {
-            if(pokedex_count(0) == 0)
+            if(GetNationalPokedexCount(0) == 0)
                 return 0;
         }
         gCallback_03004AE8 = gStartMenuItems[sCurrentStartMenuActions[sStartMenuCursorPos]].callback;

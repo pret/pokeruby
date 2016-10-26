@@ -6,8 +6,8 @@
 
 	.text
 
-	thumb_func_start sub_811A8CC
-sub_811A8CC: @ 811A8CC
+	thumb_func_start GetLandmarkName
+GetLandmarkName: @ 811A8CC
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -15,7 +15,7 @@ sub_811A8CC: @ 811A8CC
 	lsrs r1, 24
 	lsls r2, 24
 	lsrs r5, r2, 24
-	bl sub_811A920
+	bl GetLandmarkList
 	adds r4, r0, 0
 	cmp r4, 0
 	bne _0811A8E8
@@ -55,10 +55,10 @@ _0811A91A:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_811A8CC
+	thumb_func_end GetLandmarkName
 
-	thumb_func_start sub_811A920
-sub_811A920: @ 811A920
+	thumb_func_start GetLandmarkList
+GetLandmarkList: @ 811A920
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
@@ -127,6 +127,6 @@ _0811A992:
 	bx r1
 	.align 2, 0
 _0811A998: .4byte gLandmarkLists
-	thumb_func_end sub_811A920
+	thumb_func_end GetLandmarkList
 
 	.align 2, 0 @ Don't pad with nop.

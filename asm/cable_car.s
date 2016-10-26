@@ -578,7 +578,7 @@ _081236B0:
 _081236E4: .4byte 0x04000208
 _081236E8: .4byte 0x04000200
 _081236EC: .4byte sub_8123C40
-_081236F0: .4byte mainloop
+_081236F0: .4byte sub_8123724
 _081236F4: .4byte sub_8123878
 _081236F8: .4byte gUnknown_0202E8CC
 _081236FC: .4byte sub_81239E4
@@ -604,8 +604,8 @@ _0812371C: .4byte sub_8123AF8
 _08123720: .4byte gUnknown_02039274
 	thumb_func_end sub_8123244
 
-	thumb_func_start mainloop
-mainloop: @ 8123724
+	thumb_func_start sub_8123724
+sub_8123724: @ 8123724
 	push {lr}
 	bl RunTasks
 	bl AnimateSprites
@@ -614,7 +614,7 @@ mainloop: @ 8123724
 	bl MapMusicMain
 	pop {r0}
 	bx r0
-	thumb_func_end mainloop
+	thumb_func_end sub_8123724
 
 	thumb_func_start sub_8123740
 sub_8123740: @ 8123740

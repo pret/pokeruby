@@ -10021,7 +10021,7 @@ sub_80EAE88: @ 80EAE88
 	b _080EAEC2
 _080EAEA6:
 	movs r0, 0
-	bl sub_8090F68
+	bl GetHoennPokedexCount
 	lsls r0, 16
 	lsrs r0, 16
 	b _080EAEC2
@@ -11563,7 +11563,7 @@ _080EB9C4: .4byte 0x0000ffff
 	thumb_func_start sub_80EB9C8
 sub_80EB9C8: @ 80EB9C8
 	push {lr}
-	bl sub_806912C
+	bl IsNationalPokedex
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}

@@ -6694,8 +6694,8 @@ _0813EE7A:
 _0813EEB0: .4byte gSineTable
 	thumb_func_end sub_813EDFC
 
-	thumb_func_start sub_813EEB4
-sub_813EEB4: @ 813EEB4
+	thumb_func_start FieldInitRegionMap
+FieldInitRegionMap: @ 813EEB4
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0
@@ -6714,11 +6714,11 @@ sub_813EEB4: @ 813EEB4
 	.align 2, 0
 _0813EED8: .4byte 0x02000000
 _0813EEDC: .4byte 0x00000888
-_0813EEE0: .4byte sub_813EEE4
-	thumb_func_end sub_813EEB4
+_0813EEE0: .4byte CB2_FieldInitRegionMap
+	thumb_func_end FieldInitRegionMap
 
-	thumb_func_start sub_813EEE4
-sub_813EEE4: @ 813EEE4
+	thumb_func_start CB2_FieldInitRegionMap
+CB2_FieldInitRegionMap: @ 813EEE4
 	push {r4,lr}
 	sub sp, 0x4
 	movs r0, 0x80
@@ -6799,22 +6799,22 @@ _0813EF98: .4byte 0x02000008
 _0813EF9C: .4byte gWindowConfig_81E709C
 _0813EFA0: .4byte REG_BG0CNT
 _0813EFA4: .4byte gOtherText_Hoenn
-_0813EFA8: .4byte sub_813EFC4
-_0813EFAC: .4byte sub_813EFB0
-	thumb_func_end sub_813EEE4
+_0813EFA8: .4byte CB2_FieldRegionMap
+_0813EFAC: .4byte VBlankCB_FieldRegionMap
+	thumb_func_end CB2_FieldInitRegionMap
 
-	thumb_func_start sub_813EFB0
-sub_813EFB0: @ 813EFB0
+	thumb_func_start VBlankCB_FieldRegionMap
+VBlankCB_FieldRegionMap: @ 813EFB0
 	push {lr}
 	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
-	thumb_func_end sub_813EFB0
+	thumb_func_end VBlankCB_FieldRegionMap
 
-	thumb_func_start sub_813EFC4
-sub_813EFC4: @ 813EFC4
+	thumb_func_start CB2_FieldRegionMap
+CB2_FieldRegionMap: @ 813EFC4
 	push {lr}
 	bl sub_813EFDC
 	bl AnimateSprites
@@ -6822,7 +6822,7 @@ sub_813EFC4: @ 813EFC4
 	bl UpdatePaletteFade
 	pop {r0}
 	bx r0
-	thumb_func_end sub_813EFC4
+	thumb_func_end CB2_FieldRegionMap
 
 	thumb_func_start sub_813EFDC
 sub_813EFDC: @ 813EFDC
@@ -14892,7 +14892,7 @@ sub_8142FCC: @ 8142FCC
 	beq _08142FE6
 	adds r0, r4, 0
 	bl DestroyTask
-	bl sub_810D62C
+	bl ReturnFromHallOfFamePC
 _08142FE6:
 	pop {r4}
 	pop {r0}

@@ -2196,7 +2196,7 @@ sub_806A390: @ 806A390
 	adds r0, r4, 0
 	bl sub_810D2F4
 	adds r0, r4, 0
-	bl sub_810D410
+	bl UpdateBirchState
 	adds r0, r4, 0
 	bl sub_810F618
 	adds r0, r4, 0

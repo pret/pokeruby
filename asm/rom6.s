@@ -1981,9 +1981,9 @@ _0810C2AC: .4byte gTasks
 sub_810C2B0: @ 810C2B0
 	push {lr}
 	movs r0, 0
-	bl SetBgTilemapBuffer
+	bl DestroyVerticalScrollIndicator
 	movs r0, 0x1
-	bl SetBgTilemapBuffer
+	bl DestroyVerticalScrollIndicator
 	bl BuyMenuFreeMemory
 	pop {r0}
 	bx r0
@@ -4214,8 +4214,8 @@ sub_810D3FC: @ 810D3FC
 _0810D40C: .4byte 0x00004049
 	thumb_func_end sub_810D3FC
 
-	thumb_func_start sub_810D410
-sub_810D410: @ 810D410
+	thumb_func_start UpdateBirchState
+UpdateBirchState: @ 810D410
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	lsls r4, 16
@@ -4235,36 +4235,36 @@ sub_810D410: @ 810D410
 	bx r0
 	.align 2, 0
 _0810D438: .4byte 0x00004049
-	thumb_func_end sub_810D410
+	thumb_func_end UpdateBirchState
 
-	thumb_func_start sub_810D43C
-sub_810D43C: @ 810D43C
+	thumb_func_start ScriptGetPokedexInfo
+ScriptGetPokedexInfo: @ 810D43C
 	push {lr}
 	ldr r0, _0810D458 @ =gUnknown_0202E8CC
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _0810D460
 	movs r0, 0
-	bl sub_8090F68
+	bl GetHoennPokedexCount
 	ldr r1, _0810D45C @ =gUnknown_0202E8CE
 	strh r0, [r1]
 	movs r0, 0x1
-	bl sub_8090F68
+	bl GetHoennPokedexCount
 	b _0810D470
 	.align 2, 0
 _0810D458: .4byte gUnknown_0202E8CC
 _0810D45C: .4byte gUnknown_0202E8CE
 _0810D460:
 	movs r0, 0
-	bl pokedex_count
+	bl GetNationalPokedexCount
 	ldr r1, _0810D480 @ =gUnknown_0202E8CE
 	strh r0, [r1]
 	movs r0, 0x1
-	bl pokedex_count
+	bl GetNationalPokedexCount
 _0810D470:
 	ldr r1, _0810D484 @ =gUnknown_0202E8D0
 	strh r0, [r1]
-	bl sub_806912C
+	bl IsNationalPokedex
 	lsls r0, 16
 	lsrs r0, 16
 	pop {r1}
@@ -4272,10 +4272,10 @@ _0810D470:
 	.align 2, 0
 _0810D480: .4byte gUnknown_0202E8CE
 _0810D484: .4byte gUnknown_0202E8D0
-	thumb_func_end sub_810D43C
+	thumb_func_end ScriptGetPokedexInfo
 
-	thumb_func_start sub_810D488
-sub_810D488: @ 810D488
+	thumb_func_start GetPokedexRatingText
+GetPokedexRatingText: @ 810D488
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -4478,23 +4478,23 @@ _0810D5F6:
 	bx r1
 	.align 2, 0
 _0810D5FC: .4byte gUnknown_081C4ADA
-	thumb_func_end sub_810D488
+	thumb_func_end GetPokedexRatingText
 
-	thumb_func_start sub_810D600
-sub_810D600: @ 810D600
+	thumb_func_start ShowPokedexRatingMessage
+ShowPokedexRatingMessage: @ 810D600
 	push {lr}
 	ldr r0, _0810D614 @ =gUnknown_0202E8CC
 	ldrh r0, [r0]
-	bl sub_810D488
+	bl GetPokedexRatingText
 	bl ShowFieldMessage
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0810D614: .4byte gUnknown_0202E8CC
-	thumb_func_end sub_810D600
+	thumb_func_end ShowPokedexRatingMessage
 
-	thumb_func_start sub_810D618
-sub_810D618: @ 810D618
+	thumb_func_start AccessHallOfFamePC
+AccessHallOfFamePC: @ 810D618
 	push {lr}
 	ldr r0, _0810D628 @ =sub_81428CC
 	bl SetMainCallback2
@@ -4503,10 +4503,10 @@ sub_810D618: @ 810D618
 	bx r0
 	.align 2, 0
 _0810D628: .4byte sub_81428CC
-	thumb_func_end sub_810D618
+	thumb_func_end AccessHallOfFamePC
 
-	thumb_func_start sub_810D62C
-sub_810D62C: @ 810D62C
+	thumb_func_start ReturnFromHallOfFamePC
+ReturnFromHallOfFamePC: @ 810D62C
 	push {lr}
 	ldr r0, _0810D640 @ =c2_exit_to_overworld_2_switch
 	bl SetMainCallback2
@@ -4518,11 +4518,11 @@ sub_810D62C: @ 810D62C
 	.align 2, 0
 _0810D640: .4byte c2_exit_to_overworld_2_switch
 _0810D644: .4byte gUnknown_0300485C
-_0810D648: .4byte mapldr_080CA5C0
-	thumb_func_end sub_810D62C
+_0810D648: .4byte ReshowPCMenuAfterHallOfFamePC
+	thumb_func_end ReturnFromHallOfFamePC
 
-	thumb_func_start mapldr_080CA5C0
-mapldr_080CA5C0: @ 810D64C
+	thumb_func_start ReshowPCMenuAfterHallOfFamePC
+ReshowPCMenuAfterHallOfFamePC: @ 810D64C
 	push {lr}
 	sub sp, 0x4
 	bl ScriptContext2_Enable
@@ -4544,7 +4544,7 @@ mapldr_080CA5C0: @ 810D64C
 	bx r0
 	.align 2, 0
 _0810D680: .4byte sub_810D684
-	thumb_func_end mapldr_080CA5C0
+	thumb_func_end ReshowPCMenuAfterHallOfFamePC
 
 	thumb_func_start sub_810D684
 sub_810D684: @ 810D684
@@ -4595,8 +4595,8 @@ _0810D6D4: .4byte c2_exit_to_overworld_2_switch
 _0810D6D8: .4byte Cb2_ViewWallClock
 	thumb_func_end sub_810D6B8
 
-	thumb_func_start wild_pokemon_reroll
-wild_pokemon_reroll: @ 810D6DC
+	thumb_func_start ResetCyclingRoadChallengeData
+ResetCyclingRoadChallengeData: @ 810D6DC
 	ldr r0, _0810D6F0 @ =gUnknown_02039250
 	movs r1, 0
 	strb r1, [r0]
@@ -4610,10 +4610,10 @@ wild_pokemon_reroll: @ 810D6DC
 _0810D6F0: .4byte gUnknown_02039250
 _0810D6F4: .4byte gUnknown_02039251
 _0810D6F8: .4byte gUnknown_02039254
-	thumb_func_end wild_pokemon_reroll
+	thumb_func_end ResetCyclingRoadChallengeData
 
-	thumb_func_start sub_810D6FC
-sub_810D6FC: @ 810D6FC
+	thumb_func_start BeginCyclingRoadChallenge
+BeginCyclingRoadChallenge: @ 810D6FC
 	ldr r1, _0810D714 @ =gUnknown_02039250
 	movs r0, 0x1
 	strb r0, [r1]
@@ -4630,10 +4630,10 @@ _0810D714: .4byte gUnknown_02039250
 _0810D718: .4byte gUnknown_02039251
 _0810D71C: .4byte gUnknown_02039254
 _0810D720: .4byte gMain
-	thumb_func_end sub_810D6FC
+	thumb_func_end BeginCyclingRoadChallenge
 
-	thumb_func_start sp0E3_walkrun_bitfield_interpretation
-sp0E3_walkrun_bitfield_interpretation: @ 810D724
+	thumb_func_start GetPlayerAvatarBike
+GetPlayerAvatarBike: @ 810D724
 	push {lr}
 	movs r0, 0x4
 	bl TestPlayerAvatarFlags
@@ -4655,10 +4655,10 @@ _0810D746:
 _0810D748:
 	pop {r1}
 	bx r1
-	thumb_func_end sp0E3_walkrun_bitfield_interpretation
+	thumb_func_end GetPlayerAvatarBike
 
-	thumb_func_start sub_810D74C
-sub_810D74C: @ 810D74C
+	thumb_func_start DetermineCyclingRoadResults
+DetermineCyclingRoadResults: @ 810D74C
 	push {r4-r7,lr}
 	adds r7, r0, 0
 	lsls r1, 24
@@ -4790,10 +4790,10 @@ _0810D84C:
 	bx r0
 	.align 2, 0
 _0810D858: .4byte gScriptResult
-	thumb_func_end sub_810D74C
+	thumb_func_end DetermineCyclingRoadResults
 
-	thumb_func_start sub_810D85C
-sub_810D85C: @ 810D85C
+	thumb_func_start FinishCyclingRoadChallenge
+FinishCyclingRoadChallenge: @ 810D85C
 	push {r4,r5,lr}
 	ldr r0, _0810D880 @ =gMain
 	ldr r1, _0810D884 @ =gUnknown_02039254
@@ -4803,10 +4803,10 @@ sub_810D85C: @ 810D85C
 	ldr r5, _0810D888 @ =gUnknown_02039251
 	ldrb r1, [r5]
 	adds r0, r4, 0
-	bl sub_810D74C
+	bl DetermineCyclingRoadResults
 	ldrb r1, [r5]
 	adds r0, r4, 0
-	bl sub_810D88C
+	bl RecordCyclingRoadResults
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -4814,10 +4814,10 @@ sub_810D85C: @ 810D85C
 _0810D880: .4byte gMain
 _0810D884: .4byte gUnknown_02039254
 _0810D888: .4byte gUnknown_02039251
-	thumb_func_end sub_810D85C
+	thumb_func_end FinishCyclingRoadChallenge
 
-	thumb_func_start sub_810D88C
-sub_810D88C: @ 810D88C
+	thumb_func_start RecordCyclingRoadResults
+RecordCyclingRoadResults: @ 810D88C
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -4861,10 +4861,10 @@ _0810D8D6:
 _0810D8E0: .4byte 0x00004028
 _0810D8E4: .4byte 0x00004029
 _0810D8E8: .4byte 0x00004027
-	thumb_func_end sub_810D88C
+	thumb_func_end RecordCyclingRoadResults
 
-	thumb_func_start sub_810D8EC
-sub_810D8EC: @ 810D8EC
+	thumb_func_start GetRecordedCyclingRoadResults
+GetRecordedCyclingRoadResults: @ 810D8EC
 	push {r4,lr}
 	ldr r0, _0810D920 @ =0x00004028
 	bl VarGet
@@ -4883,7 +4883,7 @@ sub_810D8EC: @ 810D8EC
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_810D74C
+	bl DetermineCyclingRoadResults
 	movs r0, 0x1
 	b _0810D92E
 	.align 2, 0
@@ -4896,10 +4896,10 @@ _0810D92E:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_810D8EC
+	thumb_func_end GetRecordedCyclingRoadResults
 
-	thumb_func_start sub_810D934
-sub_810D934: @ 810D934
+	thumb_func_start UpdateCyclingRoadState
+UpdateCyclingRoadState: @ 810D934
 	push {r4,lr}
 	ldr r0, _0810D974 @ =gUnknown_020297F0
 	ldrh r1, [r0]
@@ -4933,10 +4933,10 @@ _0810D96C:
 _0810D974: .4byte gUnknown_020297F0
 _0810D978: .4byte 0x00000c1d
 _0810D97C: .4byte 0x000040a9
-	thumb_func_end sub_810D934
+	thumb_func_end UpdateCyclingRoadState
 
-	thumb_func_start sub_810D980
-sub_810D980: @ 810D980
+	thumb_func_start SetSSTidalFlag
+SetSSTidalFlag: @ 810D980
 	push {lr}
 	ldr r0, _0810D998 @ =0x0000082d
 	bl FlagSet
@@ -4949,10 +4949,10 @@ sub_810D980: @ 810D980
 	.align 2, 0
 _0810D998: .4byte 0x0000082d
 _0810D99C: .4byte 0x0000404a
-	thumb_func_end sub_810D980
+	thumb_func_end SetSSTidalFlag
 
-	thumb_func_start sub_810D9A0
-sub_810D9A0: @ 810D9A0
+	thumb_func_start ResetSSTidalFlag
+ResetSSTidalFlag: @ 810D9A0
 	push {lr}
 	ldr r0, _0810D9AC @ =0x0000082d
 	bl FlagReset
@@ -4960,7 +4960,7 @@ sub_810D9A0: @ 810D9A0
 	bx r0
 	.align 2, 0
 _0810D9AC: .4byte 0x0000082d
-	thumb_func_end sub_810D9A0
+	thumb_func_end ResetSSTidalFlag
 
 	thumb_func_start sub_810D9B0
 sub_810D9B0: @ 810D9B0
@@ -5110,8 +5110,8 @@ _0810DABE:
 	bx r1
 	thumb_func_end sub_810D9EC
 
-	thumb_func_start sub_810DAC8
-sub_810DAC8: @ 810DAC8
+	thumb_func_start GetLinkPartnerNames
+GetLinkPartnerNames: @ 810DAC8
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -5158,7 +5158,7 @@ _0810DB12:
 	.align 2, 0
 _0810DB20: .4byte gUnknown_083D1464
 _0810DB24: .4byte gLinkPlayers + 0x8
-	thumb_func_end sub_810DAC8
+	thumb_func_end GetLinkPartnerNames
 
 	thumb_func_start sub_810DB28
 sub_810DB28: @ 810DB28
@@ -6024,8 +6024,8 @@ _0810E244: .4byte gUnknown_0202E8CC
 _0810E248: .4byte gUnknown_083F8376
 	thumb_func_end sub_810E230
 
-	thumb_func_start sub_810E24C
-sub_810E24C: @ 810E24C
+	thumb_func_start ShowFieldMessageStringVar4
+ShowFieldMessageStringVar4: @ 810E24C
 	push {lr}
 	ldr r0, _0810E258 @ =gStringVar4
 	bl ShowFieldMessage
@@ -6033,10 +6033,10 @@ sub_810E24C: @ 810E24C
 	bx r0
 	.align 2, 0
 _0810E258: .4byte gStringVar4
-	thumb_func_end sub_810E24C
+	thumb_func_end ShowFieldMessageStringVar4
 
-	thumb_func_start sub_810E25C
-sub_810E25C: @ 810E25C
+	thumb_func_start StorePlayerCoordsInVars
+StorePlayerCoordsInVars: @ 810E25C
 	ldr r1, _0810E26C @ =gUnknown_0202E8CC
 	ldr r2, _0810E270 @ =gSaveBlock1
 	ldrh r0, [r2]
@@ -6049,10 +6049,10 @@ sub_810E25C: @ 810E25C
 _0810E26C: .4byte gUnknown_0202E8CC
 _0810E270: .4byte gSaveBlock1
 _0810E274: .4byte gUnknown_0202E8CE
-	thumb_func_end sub_810E25C
+	thumb_func_end StorePlayerCoordsInVars
 
-	thumb_func_start sub_810E278
-sub_810E278: @ 810E278
+	thumb_func_start GetPlayerTrainerIdOnesDigit
+GetPlayerTrainerIdOnesDigit: @ 810E278
 	push {lr}
 	ldr r0, _0810E294 @ =gSaveBlock2
 	ldrb r1, [r0, 0xB]
@@ -6067,10 +6067,10 @@ sub_810E278: @ 810E278
 	bx r1
 	.align 2, 0
 _0810E294: .4byte gSaveBlock2
-	thumb_func_end sub_810E278
+	thumb_func_end GetPlayerTrainerIdOnesDigit
 
-	thumb_func_start sub_810E298
-sub_810E298: @ 810E298
+	thumb_func_start GetPlayerBigGuyGirlString
+GetPlayerBigGuyGirlString: @ 810E298
 	push {lr}
 	ldr r0, _0810E2AC @ =gSaveBlock2
 	ldrb r0, [r0, 0x8]
@@ -6094,10 +6094,10 @@ _0810E2C0:
 	.align 2, 0
 _0810E2C4: .4byte gStringVar1
 _0810E2C8: .4byte gOtherText_BigGirl
-	thumb_func_end sub_810E298
+	thumb_func_end GetPlayerBigGuyGirlString
 
-	thumb_func_start sub_810E2CC
-sub_810E2CC: @ 810E2CC
+	thumb_func_start GetRivalSonDaughterString
+GetRivalSonDaughterString: @ 810E2CC
 	push {lr}
 	ldr r0, _0810E2E0 @ =gSaveBlock2
 	ldrb r0, [r0, 0x8]
@@ -6121,7 +6121,7 @@ _0810E2F4:
 	.align 2, 0
 _0810E2F8: .4byte gStringVar1
 _0810E2FC: .4byte gOtherText_Son
-	thumb_func_end sub_810E2CC
+	thumb_func_end GetRivalSonDaughterString
 
 	thumb_func_start sub_810E300
 sub_810E300: @ 810E300
@@ -6132,8 +6132,8 @@ sub_810E300: @ 810E300
 _0810E308: .4byte gUnknown_02024D26
 	thumb_func_end sub_810E300
 
-	thumb_func_start sub_810E30C
-sub_810E30C: @ 810E30C
+	thumb_func_start CableCarWarp
+CableCarWarp: @ 810E30C
 	push {lr}
 	sub sp, 0x4
 	ldr r0, _0810E32C @ =gUnknown_0202E8CC
@@ -6164,10 +6164,10 @@ _0810E342:
 	add sp, 0x4
 	pop {r0}
 	bx r0
-	thumb_func_end sub_810E30C
+	thumb_func_end CableCarWarp
 
-	thumb_func_start sub_810E348
-sub_810E348: @ 810E348
+	thumb_func_start SetFlagInVar
+SetFlagInVar: @ 810E348
 	push {lr}
 	ldr r0, _0810E358 @ =gUnknown_0202E8CC
 	ldrh r0, [r0]
@@ -6176,10 +6176,10 @@ sub_810E348: @ 810E348
 	bx r0
 	.align 2, 0
 _0810E358: .4byte gUnknown_0202E8CC
-	thumb_func_end sub_810E348
+	thumb_func_end SetFlagInVar
 
-	thumb_func_start sub_810E35C
-sub_810E35C: @ 810E35C
+	thumb_func_start GetWeekCount
+GetWeekCount: @ 810E35C
 	push {lr}
 	ldr r0, _0810E37C @ =gLocalTime
 	movs r1, 0
@@ -6198,12 +6198,12 @@ _0810E376:
 	.align 2, 0
 _0810E37C: .4byte gLocalTime
 _0810E380: .4byte 0x0000270f
-	thumb_func_end sub_810E35C
+	thumb_func_end GetWeekCount
 
-	thumb_func_start sub_810E384
-sub_810E384: @ 810E384
+	thumb_func_start GetLeadMonFriendshipScore
+GetLeadMonFriendshipScore: @ 810E384
 	push {r4,lr}
-	bl sub_810F87C
+	bl GetLeadMonIndex
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -6265,32 +6265,32 @@ _0810E3FE:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_810E384
+	thumb_func_end GetLeadMonFriendshipScore
 
-	thumb_func_start sub_810E404
-sub_810E404: @ 810E404
+	thumb_func_start CB2_FieldShowRegionMap
+CB2_FieldShowRegionMap: @ 810E404
 	push {lr}
 	ldr r0, _0810E410 @ =c2_exit_to_overworld_1_continue_scripts_restart_music
-	bl sub_813EEB4
+	bl FieldInitRegionMap
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0810E410: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
-	thumb_func_end sub_810E404
+	thumb_func_end CB2_FieldShowRegionMap
 
-	thumb_func_start sub_810E414
-sub_810E414: @ 810E414
+	thumb_func_start FieldShowRegionMap
+FieldShowRegionMap: @ 810E414
 	push {lr}
 	ldr r0, _0810E420 @ =sub_810E404
 	bl SetMainCallback2
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0810E420: .4byte sub_810E404
-	thumb_func_end sub_810E414
+_0810E420: .4byte CB2_FieldShowRegionMap
+	thumb_func_end FieldShowRegionMap
 
-	thumb_func_start sub_810E424
-sub_810E424: @ 810E424
+	thumb_func_start DoPCTurnOnEffect
+DoPCTurnOnEffect: @ 810E424
 	push {r4,lr}
 	ldr r4, _0810E460 @ =sub_810E468
 	adds r0, r4, 0
@@ -6320,12 +6320,12 @@ _0810E458:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0810E460: .4byte sub_810E468
+_0810E460: .4byte Task_PCTurnOnEffect
 _0810E464: .4byte gTasks
-	thumb_func_end sub_810E424
+	thumb_func_end DoPCTurnOnEffect
 
-	thumb_func_start sub_810E468
-sub_810E468: @ 810E468
+	thumb_func_start Task_PCTurnOnEffect
+Task_PCTurnOnEffect: @ 810E468
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -6339,16 +6339,16 @@ sub_810E468: @ 810E468
 	cmp r0, 0
 	bne _0810E486
 	adds r0, r1, 0
-	bl sub_810E490
+	bl PCTurnOffEffect_0
 _0810E486:
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0810E48C: .4byte gTasks
-	thumb_func_end sub_810E468
+	thumb_func_end Task_PCTurnOnEffect
 
-	thumb_func_start sub_810E490
-sub_810E490: @ 810E490
+	thumb_func_start PCTurnOffEffect_0
+PCTurnOffEffect_0: @ 810E490
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	movs r6, 0
@@ -6390,7 +6390,7 @@ _0810E4CC:
 	asrs r1, 24
 	lsls r2, r5, 24
 	asrs r2, 24
-	bl sub_810E508
+	bl PCTurnOffEffect_1
 	bl DrawWholeMapView
 	ldrh r0, [r4, 0x10]
 	movs r1, 0x1
@@ -6412,10 +6412,10 @@ _0810E4FC:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_810E490
+	thumb_func_end PCTurnOffEffect_0
 
-	thumb_func_start sub_810E508
-sub_810E508: @ 810E508
+	thumb_func_start PCTurnOffEffect_1
+PCTurnOffEffect_1: @ 810E508
 	push {r4,r5,lr}
 	lsls r1, 24
 	lsrs r1, 24
@@ -6493,18 +6493,18 @@ _0810E566:
 	.align 2, 0
 _0810E594: .4byte 0x0000027e
 _0810E598: .4byte gSaveBlock1
-	thumb_func_end sub_810E508
+	thumb_func_end PCTurnOffEffect_1
 
-	thumb_func_start sub_810E59C
-sub_810E59C: @ 810E59C
+	thumb_func_start DoPCTurnOffEffect
+DoPCTurnOffEffect: @ 810E59C
 	push {lr}
-	bl sub_810E5A8
+	bl PCTurnOffEffect
 	pop {r0}
 	bx r0
-	thumb_func_end sub_810E59C
+	thumb_func_end DoPCTurnOffEffect
 
-	thumb_func_start sub_810E5A8
-sub_810E5A8: @ 810E5A8
+	thumb_func_start PCTurnOffEffect
+PCTurnOffEffect: @ 810E5A8
 	push {r4-r6,lr}
 	movs r6, 0
 	movs r5, 0
@@ -6581,10 +6581,10 @@ _0810E5FE:
 	.align 2, 0
 _0810E630: .4byte 0x00000259
 _0810E634: .4byte gSaveBlock1
-	thumb_func_end sub_810E5A8
+	thumb_func_end PCTurnOffEffect
 
-	thumb_func_start sub_810E638
-sub_810E638: @ 810E638
+	thumb_func_start DoLotteryCornerComputerEffect
+DoLotteryCornerComputerEffect: @ 810E638
 	push {r4,lr}
 	ldr r4, _0810E674 @ =sub_810E67C
 	adds r0, r4, 0
@@ -6614,12 +6614,12 @@ _0810E66C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0810E674: .4byte sub_810E67C
+_0810E674: .4byte Task_LotteryCornerComputerEffect
 _0810E678: .4byte gTasks
-	thumb_func_end sub_810E638
+	thumb_func_end DoLotteryCornerComputerEffect
 
-	thumb_func_start sub_810E67C
-sub_810E67C: @ 810E67C
+	thumb_func_start Task_LotteryCornerComputerEffect
+Task_LotteryCornerComputerEffect: @ 810E67C
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -6633,16 +6633,16 @@ sub_810E67C: @ 810E67C
 	cmp r0, 0
 	bne _0810E69A
 	adds r0, r1, 0
-	bl sub_810E6A4
+	bl LotteryCornerComputerEffect
 _0810E69A:
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0810E6A0: .4byte gTasks
-	thumb_func_end sub_810E67C
+	thumb_func_end Task_LotteryCornerComputerEffect
 
-	thumb_func_start sub_810E6A4
-sub_810E6A4: @ 810E6A4
+	thumb_func_start LotteryCornerComputerEffect
+LotteryCornerComputerEffect: @ 810E6A4
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r1, 0xE
@@ -6701,10 +6701,10 @@ _0810E712:
 	bx r0
 	.align 2, 0
 _0810E720: .4byte 0x00000e58
-	thumb_func_end sub_810E6A4
+	thumb_func_end LotteryCornerComputerEffect
 
-	thumb_func_start sub_810E724
-sub_810E724: @ 810E724
+	thumb_func_start EndLotteryCornerComputerEffect
+EndLotteryCornerComputerEffect: @ 810E724
 	push {lr}
 	ldr r2, _0810E744 @ =0x00000e9d
 	movs r0, 0x12
@@ -6720,10 +6720,10 @@ sub_810E724: @ 810E724
 	.align 2, 0
 _0810E744: .4byte 0x00000e9d
 _0810E748: .4byte 0x00000ea5
-	thumb_func_end sub_810E724
+	thumb_func_end EndLotteryCornerComputerEffect
 
-	thumb_func_start sub_810E74C
-sub_810E74C: @ 810E74C
+	thumb_func_start SetDepartmentStoreFloorVar
+SetDepartmentStoreFloorVar: @ 810E74C
 	push {lr}
 	ldr r0, _0810E768 @ =gSaveBlock1
 	ldrb r0, [r0, 0x15]
@@ -6772,10 +6772,10 @@ _0810E79E:
 	bx r0
 	.align 2, 0
 _0810E7A8: .4byte 0x00004043
-	thumb_func_end sub_810E74C
+	thumb_func_end SetDepartmentStoreFloorVar
 
-	thumb_func_start sub_810E7AC
-sub_810E7AC: @ 810E7AC
+	thumb_func_start ScriptAddElevatorMenuItem
+ScriptAddElevatorMenuItem: @ 810E7AC
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -6837,10 +6837,10 @@ _0810E7E8:
 	.align 2, 0
 _0810E81C: .4byte gUnknown_0202E8CC
 _0810E820: .4byte gUnknown_03000760
-	thumb_func_end sub_810E7AC
+	thumb_func_end ScriptAddElevatorMenuItem
 
-	thumb_func_start sub_810E824
-sub_810E824: @ 810E824
+	thumb_func_start ScriptShowElevatorMenu
+ScriptShowElevatorMenu: @ 810E824
 	push {r4,r5,lr}
 	movs r4, 0
 	ldr r5, _0810E868 @ =gUnknown_0203925A
@@ -6851,7 +6851,7 @@ sub_810E824: @ 810E824
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_810E7AC
+	bl ScriptAddElevatorMenuItem
 	ldr r2, _0810E870 @ =gUnknown_03000760
 	ldrb r0, [r2]
 	cmp r0, 0x10
@@ -6878,7 +6878,7 @@ _0810E85C:
 _0810E868: .4byte gUnknown_0203925A
 _0810E86C: .4byte gUnknown_0203925B
 _0810E870: .4byte gUnknown_03000760
-	thumb_func_end sub_810E824
+	thumb_func_end ScriptShowElevatorMenu
 
 	thumb_func_start sub_810E874
 sub_810E874: @ 810E874
@@ -7271,7 +7271,7 @@ sub_810EB90: @ 810EB90
 	eors r1, r2
 	strb r1, [r0]
 	movs r0, 0
-	bl SetBgTilemapBuffer
+	bl DestroyVerticalScrollIndicator
 	b _0810EBB8
 	.align 2, 0
 _0810EBB0: .4byte gUnknown_0203925C
@@ -7296,7 +7296,7 @@ _0810EBCC:
 	eors r1, r2
 	strb r1, [r0]
 	movs r0, 0x1
-	bl SetBgTilemapBuffer
+	bl DestroyVerticalScrollIndicator
 _0810EBE0:
 	pop {r4,r5}
 	pop {r0}
@@ -7670,14 +7670,14 @@ sub_810EEDC: @ 810EEDC
 	cmp r0, 0
 	beq _0810EEF0
 	movs r0, 0x1
-	bl SetBgTilemapBuffer
+	bl DestroyVerticalScrollIndicator
 _0810EEF0:
 	ldrb r0, [r4]
 	lsrs r0, 1
 	cmp r0, 0x1
 	bne _0810EEFE
 	movs r0, 0
-	bl SetBgTilemapBuffer
+	bl DestroyVerticalScrollIndicator
 _0810EEFE:
 	bl BuyMenuFreeMemory
 	pop {r4}
@@ -7687,8 +7687,8 @@ _0810EEFE:
 _0810EF08: .4byte gUnknown_0203925C
 	thumb_func_end sub_810EEDC
 
-	thumb_func_start sub_810EF0C
-sub_810EF0C: @ 810EF0C
+	thumb_func_start SetTrickHouseEndRoomFlag
+SetTrickHouseEndRoomFlag: @ 810EF0C
 	push {lr}
 	ldr r1, _0810EF1C @ =gUnknown_0202E8CC
 	ldr r0, _0810EF20 @ =0x00000259
@@ -7699,10 +7699,10 @@ sub_810EF0C: @ 810EF0C
 	.align 2, 0
 _0810EF1C: .4byte gUnknown_0202E8CC
 _0810EF20: .4byte 0x00000259
-	thumb_func_end sub_810EF0C
+	thumb_func_end SetTrickHouseEndRoomFlag
 
-	thumb_func_start sub_810EF24
-sub_810EF24: @ 810EF24
+	thumb_func_start ResetTrickHouseEndRoomFlag
+ResetTrickHouseEndRoomFlag: @ 810EF24
 	push {lr}
 	ldr r1, _0810EF34 @ =gUnknown_0202E8CC
 	ldr r0, _0810EF38 @ =0x00000259
@@ -7713,12 +7713,12 @@ sub_810EF24: @ 810EF24
 	.align 2, 0
 _0810EF34: .4byte gUnknown_0202E8CC
 _0810EF38: .4byte 0x00000259
-	thumb_func_end sub_810EF24
+	thumb_func_end ResetTrickHouseEndRoomFlag
 
-	thumb_func_start sub_810EF3C
-sub_810EF3C: @ 810EF3C
+	thumb_func_start CheckLeadMonCool
+CheckLeadMonCool: @ 810EF3C
 	push {lr}
-	bl sub_810F87C
+	bl GetLeadMonIndex
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -7738,12 +7738,12 @@ _0810EF60:
 _0810EF62:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_810EF3C
+	thumb_func_end CheckLeadMonCool
 
-	thumb_func_start sub_810EF68
-sub_810EF68: @ 810EF68
+	thumb_func_start CheckLeadMonBeauty
+CheckLeadMonBeauty: @ 810EF68
 	push {lr}
-	bl sub_810F87C
+	bl GetLeadMonIndex
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -7763,12 +7763,12 @@ _0810EF8C:
 _0810EF8E:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_810EF68
+	thumb_func_end CheckLeadMonBeauty
 
-	thumb_func_start sub_810EF94
-sub_810EF94: @ 810EF94
+	thumb_func_start CheckLeadMonCute
+CheckLeadMonCute: @ 810EF94
 	push {lr}
-	bl sub_810F87C
+	bl GetLeadMonIndex
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -7788,12 +7788,12 @@ _0810EFB8:
 _0810EFBA:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_810EF94
+	thumb_func_end CheckLeadMonCute
 
-	thumb_func_start sub_810EFC0
-sub_810EFC0: @ 810EFC0
+	thumb_func_start CheckLeadMonSmart
+CheckLeadMonSmart: @ 810EFC0
 	push {lr}
-	bl sub_810F87C
+	bl GetLeadMonIndex
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -7813,12 +7813,12 @@ _0810EFE4:
 _0810EFE6:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_810EFC0
+	thumb_func_end CheckLeadMonSmart
 
-	thumb_func_start sub_810EFEC
-sub_810EFEC: @ 810EFEC
+	thumb_func_start CheckLeadMonTough
+CheckLeadMonTough: @ 810EFEC
 	push {lr}
-	bl sub_810F87C
+	bl GetLeadMonIndex
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -7838,10 +7838,10 @@ _0810F010:
 _0810F012:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_810EFEC
+	thumb_func_end CheckLeadMonTough
 
-	thumb_func_start sub_810F018
-sub_810F018: @ 810F018
+	thumb_func_start IsGrassTypeInParty
+IsGrassTypeInParty: @ 810F018
 	push {r4-r6,lr}
 	movs r5, 0
 	ldr r6, _0810F068 @ =gBaseStats
@@ -7899,10 +7899,10 @@ _0810F082:
 	bx r0
 	.align 2, 0
 _0810F08C: .4byte gScriptResult
-	thumb_func_end sub_810F018
+	thumb_func_end IsGrassTypeInParty
 
-	thumb_func_start sub_810F090
-sub_810F090: @ 810F090
+	thumb_func_start ShowGlassWorkshopMenu
+ShowGlassWorkshopMenu: @ 810F090
 	push {r4,r5,lr}
 	sub sp, 0x8
 	bl ScriptContext2_Enable
@@ -7960,7 +7960,7 @@ _0810F108: .4byte gUnknown_083F83C0
 _0810F10C: .4byte gUnknown_0203925B
 _0810F110: .4byte gUnknown_0203925A
 _0810F114: .4byte sub_810F118
-	thumb_func_end sub_810F090
+	thumb_func_end ShowGlassWorkshopMenu
 
 	thumb_func_start sub_810F118
 sub_810F118: @ 810F118
@@ -8108,7 +8108,7 @@ _0810F240:
 _0810F244:
 	adds r0, r4, 0
 	movs r1, 0x5
-	bl sub_810F2DC
+	bl GlassWorkshopUpdateScrollIndicators
 	movs r0, 0x2
 	movs r1, 0x1
 	movs r2, 0x9
@@ -8190,8 +8190,8 @@ _0810F2D2:
 _0810F2D8: .4byte gUnknown_0203925C
 	thumb_func_end sub_810F2B4
 
-	thumb_func_start sub_810F2DC
-sub_810F2DC: @ 810F2DC
+	thumb_func_start GlassWorkshopUpdateScrollIndicators
+GlassWorkshopUpdateScrollIndicators: @ 810F2DC
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -8205,7 +8205,7 @@ sub_810F2DC: @ 810F2DC
 	eors r1, r2
 	strb r1, [r0]
 	movs r0, 0
-	bl SetBgTilemapBuffer
+	bl DestroyVerticalScrollIndicator
 	b _0810F304
 	.align 2, 0
 _0810F2FC: .4byte gUnknown_0203925C
@@ -8230,17 +8230,17 @@ _0810F318:
 	eors r1, r2
 	strb r1, [r0]
 	movs r0, 0x1
-	bl SetBgTilemapBuffer
+	bl DestroyVerticalScrollIndicator
 _0810F32C:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _0810F334: .4byte gUnknown_0203925C
-	thumb_func_end sub_810F2DC
+	thumb_func_end GlassWorkshopUpdateScrollIndicators
 
-	thumb_func_start SpawnScriptFieldObject
-SpawnScriptFieldObject: @ 810F338
+	thumb_func_start SpawnCameraDummy
+SpawnCameraDummy: @ 810F338
 	push {lr}
 	sub sp, 0x8
 	ldr r0, _0810F380 @ =gSaveBlock1
@@ -8278,10 +8278,10 @@ SpawnScriptFieldObject: @ 810F338
 	.align 2, 0
 _0810F380: .4byte gSaveBlock1
 _0810F384: .4byte gMapObjects
-	thumb_func_end SpawnScriptFieldObject
+	thumb_func_end SpawnCameraDummy
 
-	thumb_func_start sub_810F388
-sub_810F388: @ 810F388
+	thumb_func_start RemoveCameraDummy
+RemoveCameraDummy: @ 810F388
 	push {lr}
 	bl GetPlayerAvatarObjectId
 	lsls r0, 24
@@ -8296,12 +8296,12 @@ sub_810F388: @ 810F388
 	bx r0
 	.align 2, 0
 _0810F3A8: .4byte gSaveBlock1
-	thumb_func_end sub_810F388
+	thumb_func_end RemoveCameraDummy
 
-	thumb_func_start sub_810F3AC
-sub_810F3AC: @ 810F3AC
+	thumb_func_start GetPokeblockNameByMonNature
+GetPokeblockNameByMonNature: @ 810F3AC
 	push {lr}
-	bl sub_810F87C
+	bl GetLeadMonIndex
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -8320,10 +8320,10 @@ sub_810F3AC: @ 810F3AC
 	.align 2, 0
 _0810F3D4: .4byte gPlayerParty
 _0810F3D8: .4byte gStringVar1
-	thumb_func_end sub_810F3AC
+	thumb_func_end GetPokeblockNameByMonNature
 
-	thumb_func_start sub_810F3DC
-sub_810F3DC: @ 810F3DC
+	thumb_func_start GetSecretBaseNearbyMapName
+GetSecretBaseNearbyMapName: @ 810F3DC
 	push {r4,lr}
 	ldr r4, _0810F3FC @ =gStringVar1
 	ldr r0, _0810F400 @ =0x00004026
@@ -8340,7 +8340,7 @@ sub_810F3DC: @ 810F3DC
 	.align 2, 0
 _0810F3FC: .4byte gStringVar1
 _0810F400: .4byte 0x00004026
-	thumb_func_end sub_810F3DC
+	thumb_func_end GetSecretBaseNearbyMapName
 
 	thumb_func_start sub_810F404
 sub_810F404: @ 810F404
@@ -8500,10 +8500,10 @@ _0810F51E:
 	bx r1
 	thumb_func_end sub_810F4FC
 
-	thumb_func_start sub_810F524
-sub_810F524: @ 810F524
+	thumb_func_start LeadMonHasEffortRibbon
+LeadMonHasEffortRibbon: @ 810F524
 	push {lr}
-	bl sub_810F87C
+	bl GetLeadMonIndex
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -8519,10 +8519,10 @@ sub_810F524: @ 810F524
 	bx r1
 	.align 2, 0
 _0810F548: .4byte gPlayerParty
-	thumb_func_end sub_810F524
+	thumb_func_end LeadMonHasEffortRibbon
 
-	thumb_func_start sub_810F54C
-sub_810F54C: @ 810F54C
+	thumb_func_start GivLeadMonEffortRibbon
+GivLeadMonEffortRibbon: @ 810F54C
 	push {lr}
 	sub sp, 0x4
 	movs r0, 0x2A
@@ -8532,7 +8532,7 @@ sub_810F54C: @ 810F54C
 	movs r1, 0x1
 	mov r0, sp
 	strb r1, [r0]
-	bl sub_810F87C
+	bl GetLeadMonIndex
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
@@ -8548,19 +8548,19 @@ sub_810F54C: @ 810F54C
 	.align 2, 0
 _0810F580: .4byte 0x0000083b
 _0810F584: .4byte gPlayerParty
-	thumb_func_end sub_810F54C
+	thumb_func_end GivLeadMonEffortRibbon
 
-	thumb_func_start sub_810F588
-sub_810F588: @ 810F588
+	thumb_func_start GetLeadMonEVCount
+GetLeadMonEVCount: @ 810F588
 	push {lr}
-	bl sub_810F87C
+	bl GetLeadMonIndex
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
 	muls r0, r1
 	ldr r1, _0810F5AC @ =gPlayerParty
 	adds r0, r1
-	bl sub_8040020
+	bl GetMonEVCount
 	lsls r0, 16
 	ldr r1, _0810F5B0 @ =0x01fd0000
 	cmp r0, r1
@@ -8575,7 +8575,7 @@ _0810F5B4:
 _0810F5B6:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_810F588
+	thumb_func_end GetLeadMonEVCount
 
 	thumb_func_start sub_810F5BC
 sub_810F5BC: @ 810F5BC
@@ -8635,8 +8635,8 @@ sub_810F618: @ 810F618
 _0810F624: .4byte 0x0000085f
 	thumb_func_end sub_810F618
 
-	thumb_func_start sub_810F628
-sub_810F628: @ 810F628
+	thumb_func_start PutZigzagoonInPlayerParty
+PutZigzagoonInPlayerParty: @ 810F628
 	push {r4,r5,lr}
 	sub sp, 0x14
 	ldr r5, _0810F690 @ =gPlayerParty
@@ -8685,10 +8685,10 @@ sub_810F628: @ 810F628
 	bx r0
 	.align 2, 0
 _0810F690: .4byte gPlayerParty
-	thumb_func_end sub_810F628
+	thumb_func_end PutZigzagoonInPlayerParty
 
-	thumb_func_start sub_810F694
-sub_810F694: @ 810F694
+	thumb_func_start IsStarterInParty
+IsStarterInParty: @ 810F694
 	push {r4-r6,lr}
 	ldr r0, _0810F6D0 @ =0x00004023
 	bl VarGet
@@ -8730,10 +8730,10 @@ _0810F6E4:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_810F694
+	thumb_func_end IsStarterInParty
 
-	thumb_func_start sub_810F6EC
-sub_810F6EC: @ 810F6EC
+	thumb_func_start CheckFreePokemonStorageSpace
+CheckFreePokemonStorageSpace: @ 810F6EC
 	push {r4-r6,lr}
 	movs r5, 0
 _0810F6F0:
@@ -8775,14 +8775,14 @@ _0810F732:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_810F6EC
+	thumb_func_end CheckFreePokemonStorageSpace
 
-	thumb_func_start sub_810F738
-sub_810F738: @ 810F738
+	thumb_func_start IsPokerusInParty
+IsPokerusInParty: @ 810F738
 	push {lr}
 	ldr r0, _0810F74C @ =gPlayerParty
 	movs r1, 0x3F
-	bl sub_8040110
+	bl CheckPartyPokerus
 	lsls r0, 24
 	cmp r0, 0
 	beq _0810F750
@@ -8795,7 +8795,7 @@ _0810F750:
 _0810F752:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_810F738
+	thumb_func_end IsPokerusInParty
 
 	thumb_func_start sub_810F758
 sub_810F758: @ 810F758
@@ -8912,8 +8912,8 @@ sub_810F828: @ 810F828
 	bx r1
 	thumb_func_end sub_810F828
 
-	thumb_func_start sub_810F83C
-sub_810F83C: @ 810F83C
+	thumb_func_start SetRoute119Weather
+SetRoute119Weather: @ 810F83C
 	push {lr}
 	bl get_map_light_from_warp0
 	lsls r0, 24
@@ -8928,10 +8928,10 @@ sub_810F83C: @ 810F83C
 _0810F858:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_810F83C
+	thumb_func_end SetRoute119Weather
 
-	thumb_func_start sub_810F85C
-sub_810F85C: @ 810F85C
+	thumb_func_start SetRoute123Weather
+SetRoute123Weather: @ 810F85C
 	push {lr}
 	bl get_map_light_from_warp0
 	lsls r0, 24
@@ -8946,10 +8946,10 @@ sub_810F85C: @ 810F85C
 _0810F878:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_810F85C
+	thumb_func_end SetRoute123Weather
 
-	thumb_func_start sub_810F87C
-sub_810F87C: @ 810F87C
+	thumb_func_start GetLeadMonIndex
+GetLeadMonIndex: @ 810F87C
 	push {r4-r6,lr}
 	bl CalculatePlayerPartyCount
 	lsls r0, 24
@@ -8993,10 +8993,10 @@ _0810F8CC:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_810F87C
+	thumb_func_end GetLeadMonIndex
 
-	thumb_func_start sub_810F8D4
-sub_810F8D4: @ 810F8D4
+	thumb_func_start ScriptGetPartyMonSpecies
+ScriptGetPartyMonSpecies: @ 810F8D4
 	push {lr}
 	ldr r0, _0810F8F4 @ =gUnknown_0202E8CC
 	ldrh r1, [r0]
@@ -9014,7 +9014,7 @@ sub_810F8D4: @ 810F8D4
 	.align 2, 0
 _0810F8F4: .4byte gUnknown_0202E8CC
 _0810F8F8: .4byte gPlayerParty
-	thumb_func_end sub_810F8D4
+	thumb_func_end ScriptGetPartyMonSpecies
 
 	thumb_func_start sub_810F8FC
 sub_810F8FC: @ 810F8FC

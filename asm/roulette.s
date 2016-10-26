@@ -7523,8 +7523,8 @@ _08118D20:
 _08118D28: .4byte sub_8118CAC
 	thumb_func_end sub_8118CEC
 
-	thumb_func_start prev_quest_read_x24_hm_usage
-prev_quest_read_x24_hm_usage: @ 8118D2C
+	thumb_func_start sub_8118D2C
+sub_8118D2C: @ 8118D2C
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	bl sub_8118724
@@ -7608,7 +7608,7 @@ _08118DDC:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end prev_quest_read_x24_hm_usage
+	thumb_func_end sub_8118D2C
 
 	thumb_func_start sub_8118DE4
 sub_8118DE4: @ 8118DE4
@@ -7810,7 +7810,7 @@ _08118F74:
 	.align 2, 0
 _08118F80: .4byte 0xbfc00000
 _08118F84: .4byte 0x3dae147b
-_08118F88: .4byte prev_quest_read_x24_hm_usage
+_08118F88: .4byte sub_8118D2C
 	thumb_func_end sub_8118DE4
 
 	thumb_func_start sub_8118F8C

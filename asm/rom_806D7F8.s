@@ -6379,7 +6379,7 @@ _08070B40:
 	ldrb r3, [r7, 0x5]
 	adds r1, r2, 0
 	movs r2, 0x1
-	bl sub_8111924
+	bl BeginEvolutionScene
 	adds r0, r6, 0
 	bl DestroyTask
 	b _08070C2C
@@ -6525,7 +6525,7 @@ _08070C8C:
 	ldrb r3, [r7, 0x5]
 	adds r1, r2, 0
 	movs r2, 0x1
-	bl sub_8111924
+	bl BeginEvolutionScene
 	adds r0, r6, 0
 	bl DestroyTask
 	b _08070D68

@@ -2624,7 +2624,7 @@ _0808F970:
 	ldr r1, [r5]
 	ldr r4, _0808F9B8 @ =0x0000064f
 	adds r1, r4
-	bl sub_81113AC
+	bl ShowPokedexAreaScreen
 	ldr r0, _0808F9BC @ =gUnknown_03005CEC
 	ldr r0, [r0]
 	bl SetVBlankCallback
@@ -3021,7 +3021,7 @@ _0808FCD4:
 	orrs r1, r2
 	str r1, [r0, 0x4]
 	movs r1, 0x1
-	bl sub_811A3CC
+	bl ShowPokedexCryScreen
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808FDDC
@@ -3337,7 +3337,7 @@ sub_808FFBC: @ 808FFBC
 	ands r0, r1
 	cmp r0, 0
 	bne _08090032
-	bl sub_811A4F8
+	bl DestroyCryMeterNeedleSprite
 	ldr r0, _0808FFFC @ =gUnknown_0202FFB4
 	ldr r0, [r0]
 	ldr r1, _08090000 @ =0x0000064f
@@ -4403,7 +4403,7 @@ _080908A0:
 	movs r2, 0
 	movs r3, 0xD0
 	bl sub_8072BD8
-	bl sub_806912C
+	bl IsNationalPokedex
 	cmp r0, 0
 	bne _080908CC
 	adds r0, r6, 0
@@ -5198,8 +5198,8 @@ _08090F0A:
 _08090F14: .4byte gSaveBlock2
 	thumb_func_end sub_8090D90
 
-	thumb_func_start pokedex_count
-pokedex_count: @ 8090F18
+	thumb_func_start GetNationalPokedexCount
+GetNationalPokedexCount: @ 8090F18
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -5243,10 +5243,10 @@ _08090F56:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end pokedex_count
+	thumb_func_end GetNationalPokedexCount
 
-	thumb_func_start sub_8090F68
-sub_8090F68: @ 8090F68
+	thumb_func_start GetHoennPokedexCount
+GetHoennPokedexCount: @ 8090F68
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -5293,7 +5293,7 @@ _08090FB0:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8090F68
+	thumb_func_end GetHoennPokedexCount
 
 	thumb_func_start sub_8090FC0
 sub_8090FC0: @ 8090FC0
@@ -7263,7 +7263,7 @@ _08091EA6:
 	movs r1, 0x1
 	movs r2, 0x7E
 	bl LoadPalette
-	bl sub_806912C
+	bl IsNationalPokedex
 	cmp r0, 0
 	bne _08091F10
 	movs r4, 0
@@ -7622,7 +7622,7 @@ sub_80921B0: @ 80921B0
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	beq _080921E4
-	bl sub_806912C
+	bl IsNationalPokedex
 	ldr r6, _080921DC @ =gUnknown_083B586C
 	cmp r0, 0
 	bne _080921F0
@@ -7633,7 +7633,7 @@ _080921D8: .4byte gTasks
 _080921DC: .4byte gUnknown_083B586C
 _080921E0: .4byte gUnknown_083B58A4
 _080921E4:
-	bl sub_806912C
+	bl IsNationalPokedex
 	ldr r6, _0809221C @ =gUnknown_083B5850
 	cmp r0, 0
 	bne _080921F0
@@ -7703,7 +7703,7 @@ _08092230:
 	bl sub_8092E10
 	ldr r4, _080922C8 @ =gSaveBlock2
 	strb r0, [r4, 0x19]
-	bl sub_806912C
+	bl IsNationalPokedex
 	cmp r0, 0
 	bne _08092288
 	movs r0, 0
@@ -8514,7 +8514,7 @@ _08092904:
 	.align 2, 0
 _08092910: .4byte gUnknown_083B57FC
 _08092914:
-	bl sub_806912C
+	bl IsNationalPokedex
 	cmp r0, 0
 	bne _08092940
 	ldr r2, _0809293C @ =gUnknown_083B57FC
@@ -8892,7 +8892,7 @@ sub_8092B68: @ 8092B68
 	movs r2, 0x40
 	movs r3, 0x1
 	bl MenuPrint_PixelCoords
-	bl sub_806912C
+	bl IsNationalPokedex
 	cmp r0, 0
 	beq _08092C5E
 	ldrh r0, [r6, 0xE]

@@ -2250,7 +2250,7 @@ _080BB2BE:
 _080BB306:
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_811A3CC
+	bl ShowPokedexCryScreen
 	lsls r0, 24
 	cmp r0, 0
 	beq _080BB306
@@ -2411,7 +2411,7 @@ _080BB42E:
 	adds r0, r1
 	ldr r1, _080BB490 @ =sub_80BA258
 	str r1, [r0]
-	bl sub_811A4F8
+	bl DestroyCryMeterNeedleSprite
 _080BB472:
 	pop {r4,r5}
 	pop {r0}

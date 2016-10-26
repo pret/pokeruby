@@ -90,7 +90,7 @@ extern bool8 sub_80B58C4(u16, u8, u8);
 extern void *picbox_close(void);
 extern void sub_8106630(u32);
 extern void ShowContestWinner(void);
-extern u8 sub_810F87C(void);
+extern u8 GetLeadMonIndex(void);
 extern void CopyItemName(u16, u8 *);
 extern u8 sub_80BF0B8(u32);
 extern void sub_80B79B8(u32 *, u32);
@@ -99,9 +99,9 @@ extern bool8 IsEnoughMoney(u32, u32);
 extern void sub_80B7C14(u32, u8, u8);
 extern void RemoveMoneyLabelObject(u8, u8);
 extern void sub_80B7BEC(u32, u8, u8);
-extern void sub_811A72C(u32, u8, u8);
-extern void sub_811A770(u8, u8);
-extern void sub_811A704(u32, u8, u8);
+extern void ShowCoinsWindow(u32, u8, u8);
+extern void HideCoinsWindow(u8, u8);
+extern void UpdateCoinsWindow(u32, u8, u8);
 extern void *TrainerBattleConfigure(u8 *);
 extern void sub_80825E4(void);
 extern u8 *sub_80826E8(void);
@@ -131,8 +131,8 @@ extern bool8 sub_805870C(u32, u32);
 extern bool8 sub_805877C(void);
 extern void sub_80586B4(u32, u32);
 extern void sub_80586E0(u32, u32);
-extern void sub_810E7AC(u8, u8, u8, u8);
-extern void sub_810E824(void);
+extern void ScriptAddElevatorMenuItem(u8, u8, u8, u8);
+extern void ScriptShowElevatorMenu(void);
 extern u16 GetCoins(void);
 extern bool8 GiveCoins(u16);
 extern bool8 TakeCoins(u16);
@@ -1451,7 +1451,7 @@ bool8 ScrCmd_bufferfirstpoke(struct ScriptContext *ctx)
 {
     u8 stringVarIndex = ScriptReadByte(ctx);
     u8 *dest = gUnknown_083762F0[stringVarIndex];
-    u8 partyIndex = sub_810F87C();
+    u8 partyIndex = GetLeadMonIndex();
     u32 species = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPECIES, NULL);
     StringCopy(dest, gSpeciesNames[species]);
     return FALSE;
@@ -1640,7 +1640,7 @@ bool8 ScrCmd_showcoins(struct ScriptContext *ctx)
 {
     u8 v2 = ScriptReadByte(ctx);
     u8 v3 = ScriptReadByte(ctx);
-    sub_811A72C(gSaveBlock1.coins, v2, v3);
+    ShowCoinsWindow(gSaveBlock1.coins, v2, v3);
     return FALSE;
 }
 
@@ -1648,7 +1648,7 @@ bool8 ScrCmd_hidecoins(struct ScriptContext *ctx)
 {
     u8 v2 = ScriptReadByte(ctx);
     u8 v3 = ScriptReadByte(ctx);
-    sub_811A770(v2, v3);
+    HideCoinsWindow(v2, v3);
     return FALSE;
 }
 
@@ -1656,7 +1656,7 @@ bool8 ScrCmd_updatecoins(struct ScriptContext *ctx)
 {
     u8 v2 = ScriptReadByte(ctx);
     u8 v3 = ScriptReadByte(ctx);
-    sub_811A704(gSaveBlock1.coins, v2, v3);
+    UpdateCoinsWindow(gSaveBlock1.coins, v2, v3);
     return FALSE;
 }
 
@@ -1933,13 +1933,13 @@ bool8 ScrCmd_event_b1(struct ScriptContext *ctx)
     u16 v5 = VarGet(ScriptReadHalfword(ctx));
     u16 v7 = VarGet(ScriptReadHalfword(ctx));
     u16 v9 = VarGet(ScriptReadHalfword(ctx));
-    sub_810E7AC(v3, v5, v7, v9);
+    ScriptAddElevatorMenuItem(v3, v5, v7, v9);
     return FALSE;
 }
 
 bool8 ScrCmd_event_b2(struct ScriptContext *ctx)
 {
-    sub_810E824();
+    ScriptShowElevatorMenu();
     ScriptContext1_Stop();
     return TRUE;
 }

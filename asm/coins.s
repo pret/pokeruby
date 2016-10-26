@@ -6,8 +6,8 @@
 
 	.text
 
-	thumb_func_start sub_811A704
-sub_811A704: @ 811A704
+	thumb_func_start UpdateCoinsWindow
+UpdateCoinsWindow: @ 811A704
 	push {r4,lr}
 	adds r4, r1, 0
 	adds r3, r2, 0
@@ -23,14 +23,14 @@ sub_811A704: @ 811A704
 	lsrs r3, 24
 	movs r1, 0x4
 	adds r2, r4, 0
-	bl sub_811A798
+	bl PrintCoins
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_811A704
+	thumb_func_end UpdateCoinsWindow
 
-	thumb_func_start sub_811A72C
-sub_811A72C: @ 811A72C
+	thumb_func_start ShowCoinsWindow
+ShowCoinsWindow: @ 811A72C
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -56,16 +56,16 @@ sub_811A72C: @ 811A72C
 	mov r0, r8
 	adds r1, r6, 0
 	adds r2, r5, 0
-	bl sub_811A704
+	bl UpdateCoinsWindow
 	pop {r3}
 	mov r8, r3
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_811A72C
+	thumb_func_end ShowCoinsWindow
 
-	thumb_func_start sub_811A770
-sub_811A770: @ 811A770
+	thumb_func_start HideCoinsWindow
+HideCoinsWindow: @ 811A770
 	push {r4,lr}
 	adds r2, r0, 0
 	adds r3, r1, 0
@@ -85,10 +85,10 @@ sub_811A770: @ 811A770
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_811A770
+	thumb_func_end HideCoinsWindow
 
-	thumb_func_start sub_811A798
-sub_811A798: @ 811A798
+	thumb_func_start PrintCoins
+PrintCoins: @ 811A798
 	push {r4-r7,lr}
 	sub sp, 0x10
 	adds r4, r0, 0
@@ -158,7 +158,7 @@ _0811A7EA:
 	.align 2, 0
 _0811A824: .4byte gStringVar1
 _0811A828: .4byte gOtherText_Coins2
-	thumb_func_end sub_811A798
+	thumb_func_end PrintCoins
 
 	thumb_func_start GetCoins
 GetCoins: @ 811A82C

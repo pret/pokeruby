@@ -509,7 +509,7 @@ _080FACBE:
 	ldrh r0, [r0]
 	adds r1, 0x56
 	ldrh r1, [r1]
-	bl sub_80FB2EC
+	bl GetRegionMapSectionAt
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r0, r4, 0
@@ -735,7 +735,7 @@ _080FAE72:
 	strh r3, [r4]
 	strh r1, [r0]
 	adds r0, r3, 0
-	bl sub_80FB2EC
+	bl GetRegionMapSectionAt
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r0, r4, 0
@@ -1339,8 +1339,8 @@ _080FB2E0:
 _080FB2E8: .4byte gUnknown_020388CC
 	thumb_func_end sub_80FB2A4
 
-	thumb_func_start sub_80FB2EC
-sub_80FB2EC: @ 80FB2EC
+	thumb_func_start GetRegionMapSectionAt
+GetRegionMapSectionAt: @ 80FB2EC
 	push {lr}
 	lsls r0, 16
 	lsrs r3, r0, 16
@@ -1375,7 +1375,7 @@ _080FB324:
 	bx r1
 	.align 2, 0
 _080FB328: .4byte gRegionMapSections
-	thumb_func_end sub_80FB2EC
+	thumb_func_end GetRegionMapSectionAt
 
 	thumb_func_start sub_80FB32C
 sub_80FB32C: @ 80FB32C
@@ -2140,19 +2140,19 @@ _080FB9A2:
 	bx r1
 	thumb_func_end sub_80FB758
 
-	thumb_func_start sub_80FB9A8
-sub_80FB9A8: @ 80FB9A8
+	thumb_func_start GetRegionMapSectionAt_
+GetRegionMapSectionAt_: @ 80FB9A8
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
 	lsls r1, 16
 	lsrs r1, 16
-	bl sub_80FB2EC
+	bl GetRegionMapSectionAt
 	lsls r0, 16
 	lsrs r0, 16
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80FB9A8
+	thumb_func_end GetRegionMapSectionAt_
 
 	thumb_func_start sub_80FB9C0
 sub_80FB9C0: @ 80FB9C0
@@ -2244,7 +2244,7 @@ _080FBA4E:
 	lsrs r4, r0, 16
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80FB2EC
+	bl GetRegionMapSectionAt
 	ldr r1, _080FBA8C @ =gUnknown_020388CC
 	ldr r1, [r1]
 	lsls r0, 16
@@ -2304,7 +2304,7 @@ _080FBAC0:
 _080FBAC2:
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80FB2EC
+	bl GetRegionMapSectionAt
 	ldr r1, _080FBAEC @ =gUnknown_020388CC
 	ldr r1, [r1]
 	lsls r0, 16

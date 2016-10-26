@@ -6,8 +6,8 @@
 
 	.text
 
-	thumb_func_start unref_sub_8110664
-unref_sub_8110664: @ 8110664
+	thumb_func_start UnusedPokedexAreaScreen
+UnusedPokedexAreaScreen: @ 8110664
 	push {lr}
 	ldr r3, _08110678 @ =0x02000000
 	str r1, [r3, 0x4]
@@ -19,11 +19,11 @@ unref_sub_8110664: @ 8110664
 	bx r0
 	.align 2, 0
 _08110678: .4byte 0x02000000
-_0811067C: .4byte sub_8110680
-	thumb_func_end unref_sub_8110664
+_0811067C: .4byte CB2_UnusedPokedexAreaScreen
+	thumb_func_end UnusedPokedexAreaScreen
 
-	thumb_func_start sub_8110680
-sub_8110680: @ 8110680
+	thumb_func_start CB2_UnusedPokedexAreaScreen
+CB2_UnusedPokedexAreaScreen: @ 8110680
 	push {r4,lr}
 	sub sp, 0x4
 	ldr r0, _0811069C @ =gMain
@@ -107,7 +107,7 @@ _08110740:
 	bl sub_8110824
 	b _081107C0
 _08110746:
-	bl sub_8110838
+	bl DrawAreaGlow
 	lsls r0, 24
 	cmp r0, 0
 	bne _081107CC
@@ -174,7 +174,7 @@ _081107CC:
 	.align 2, 0
 _081107D4: .4byte gMain
 _081107D8: .4byte 0x0000043c
-	thumb_func_end sub_8110680
+	thumb_func_end CB2_UnusedPokedexAreaScreen
 
 	thumb_func_start sub_81107DC
 sub_81107DC: @ 81107DC
@@ -226,8 +226,8 @@ sub_8110824: @ 8110824
 _08110834: .4byte 0x02000000
 	thumb_func_end sub_8110824
 
-	thumb_func_start sub_8110838
-sub_8110838: @ 8110838
+	thumb_func_start DrawAreaGlow
+DrawAreaGlow: @ 8110838
 	push {lr}
 	ldr r1, _08110854 @ =0x02000000
 	movs r2, 0x8A
@@ -256,12 +256,12 @@ _0811085C:
 _08110874:
 	ldr r0, _08110880 @ =0x02000000
 	ldrh r0, [r0, 0xE]
-	bl sub_8110908
+	bl FindMapsWithMon
 	b _081108F0
 	.align 2, 0
 _08110880: .4byte 0x02000000
 _08110884:
-	bl sub_8110C34
+	bl BuildAreaGlowTilemap
 	b _081108F0
 _0811088A:
 	ldr r0, _08110894 @ =gUnknown_083F8438
@@ -325,10 +325,10 @@ _08110900:
 	bx r1
 	.align 2, 0
 _08110904: .4byte 0x02000000
-	thumb_func_end sub_8110838
+	thumb_func_end DrawAreaGlow
 
-	thumb_func_start sub_8110908
-sub_8110908: @ 8110908
+	thumb_func_start FindMapsWithMon
+FindMapsWithMon: @ 8110908
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -416,7 +416,7 @@ _0811099A:
 	adds r0, r2, r5
 	ldrh r1, [r0]
 	movs r0, 0
-	bl sub_8110A98
+	bl SetAreaHasMon
 	b _081109BA
 _081109A6:
 	adds r1, r3, r6
@@ -427,7 +427,7 @@ _081109A6:
 	ldrh r0, [r0]
 	adds r1, r5
 	ldrh r1, [r1]
-	bl sub_8110AE4
+	bl SetSpecialMapHasMon
 _081109BA:
 	adds r0, r6, 0x1
 	lsls r0, 16
@@ -453,7 +453,7 @@ _081109DA:
 	adds r5, r0, r1
 	adds r0, r5, 0
 	adds r1, r7, 0
-	bl sub_8110BA4
+	bl MapHasMon
 	lsls r0, 24
 	cmp r0, 0
 	beq _08110A28
@@ -475,7 +475,7 @@ _08110A08:
 _08110A0E:
 	ldrb r1, [r5, 0x1]
 	movs r0, 0
-	bl sub_8110A98
+	bl SetAreaHasMon
 	b _08110A28
 _08110A18:
 	ldr r0, _08110A40 @ =gWildMonHeaders
@@ -484,7 +484,7 @@ _08110A18:
 	adds r1, r0
 	ldrb r0, [r1]
 	ldrb r1, [r1, 0x1]
-	bl sub_8110AE4
+	bl SetSpecialMapHasMon
 _08110A28:
 	adds r0, r6, 0x1
 	lsls r0, 16
@@ -515,7 +515,7 @@ _08110A44:
 	adds r0, 0x10
 	adds r1, r4, 0
 	adds r1, 0x11
-	bl sub_8134538
+	bl GetRoamerLocation
 	ldrb r0, [r4, 0x10]
 	ldrb r1, [r4, 0x11]
 	bl get_mapheader_by_bank_and_number
@@ -542,10 +542,10 @@ _08110A8C:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8110908
+	thumb_func_end FindMapsWithMon
 
-	thumb_func_start sub_8110A98
-sub_8110A98: @ 8110A98
+	thumb_func_start SetAreaHasMon
+SetAreaHasMon: @ 8110A98
 	push {r4,r5,lr}
 	lsls r0, 16
 	lsrs r2, r0, 16
@@ -582,10 +582,10 @@ _08110AD8:
 	bx r0
 	.align 2, 0
 _08110AE0: .4byte 0x02000000
-	thumb_func_end sub_8110A98
+	thumb_func_end SetAreaHasMon
 
-	thumb_func_start sub_8110AE4
-sub_8110AE4: @ 8110AE4
+	thumb_func_start SetSpecialMapHasMon
+SetSpecialMapHasMon: @ 8110AE4
 	push {r4-r6,lr}
 	lsls r0, 16
 	lsrs r2, r0, 16
@@ -685,10 +685,10 @@ _08110B96:
 	.align 2, 0
 _08110B9C: .4byte 0x02000000
 _08110BA0: .4byte gUnknown_083F857A
-	thumb_func_end sub_8110AE4
+	thumb_func_end SetSpecialMapHasMon
 
-	thumb_func_start sub_8110BA4
-sub_8110BA4: @ 8110BA4
+	thumb_func_start MapHasMon
+MapHasMon: @ 8110BA4
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	lsls r1, 16
@@ -697,28 +697,28 @@ sub_8110BA4: @ 8110BA4
 	ldr r0, [r5, 0x4]
 	adds r1, r4, 0
 	movs r2, 0xC
-	bl sub_8110BFC
+	bl MonListHasMon
 	lsls r0, 24
 	cmp r0, 0
 	bne _08110BF2
 	ldr r0, [r5, 0x8]
 	adds r1, r4, 0
 	movs r2, 0x5
-	bl sub_8110BFC
+	bl MonListHasMon
 	lsls r0, 24
 	cmp r0, 0
 	bne _08110BF2
 	ldr r0, [r5, 0x10]
 	adds r1, r4, 0
 	movs r2, 0xC
-	bl sub_8110BFC
+	bl MonListHasMon
 	lsls r0, 24
 	cmp r0, 0
 	bne _08110BF2
 	ldr r0, [r5, 0xC]
 	adds r1, r6, 0
 	movs r2, 0x5
-	bl sub_8110BFC
+	bl MonListHasMon
 	lsls r0, 24
 	cmp r0, 0
 	bne _08110BF2
@@ -730,10 +730,10 @@ _08110BF4:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8110BA4
+	thumb_func_end MapHasMon
 
-	thumb_func_start sub_8110BFC
-sub_8110BFC: @ 8110BFC
+	thumb_func_start MonListHasMon
+MonListHasMon: @ 8110BFC
 	push {r4,lr}
 	lsls r1, 16
 	lsrs r4, r1, 16
@@ -765,10 +765,10 @@ _08110C2C:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8110BFC
+	thumb_func_end MonListHasMon
 
-	thumb_func_start sub_8110C34
-sub_8110C34: @ 8110C34
+	thumb_func_start BuildAreaGlowTilemap
+BuildAreaGlowTilemap: @ 8110C34
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -832,7 +832,7 @@ _08110CA4:
 	ldrh r0, [r5]
 	ldrh r1, [r6]
 	str r2, [sp]
-	bl sub_80FB9A8
+	bl GetRegionMapSectionAt_
 	ldrh r1, [r7]
 	lsls r1, 2
 	ldr r3, [sp, 0x8]
@@ -1336,7 +1336,7 @@ _08111070:
 	bx r0
 	.align 2, 0
 _08111080: .4byte 0x027f0000
-	thumb_func_end sub_8110C34
+	thumb_func_end BuildAreaGlowTilemap
 
 	thumb_func_start sub_8111084
 sub_8111084: @ 8111084
@@ -1750,8 +1750,8 @@ _081113A4:
 	bx r0
 	thumb_func_end sub_8111360
 
-	thumb_func_start sub_81113AC
-sub_81113AC: @ 81113AC
+	thumb_func_start ShowPokedexAreaScreen
+ShowPokedexAreaScreen: @ 81113AC
 	push {r4,lr}
 	ldr r2, _081113DC @ =0x02000000
 	movs r3, 0
@@ -1778,12 +1778,12 @@ sub_81113AC: @ 81113AC
 	.align 2, 0
 _081113DC: .4byte 0x02000000
 _081113E0: .4byte 0x000006e4
-_081113E4: .4byte sub_81113EC
+_081113E4: .4byte Task_PokedexAreaScreen_0
 _081113E8: .4byte gTasks
-	thumb_func_end sub_81113AC
+	thumb_func_end ShowPokedexAreaScreen
 
-	thumb_func_start sub_81113EC
-sub_81113EC: @ 81113EC
+	thumb_func_start Task_PokedexAreaScreen_0
+Task_PokedexAreaScreen_0: @ 81113EC
 	push {r4,r5,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -1874,7 +1874,7 @@ _081114B8:
 	bl sub_8110824
 	b _08111540
 _081114BE:
-	bl sub_8110838
+	bl DrawAreaGlow
 	lsls r0, 24
 	cmp r0, 0
 	bne _08111550
@@ -1889,13 +1889,13 @@ _081114CA:
 	bl sub_80FB2A4
 	b _08111540
 _081114DE:
-	bl sub_8111658
+	bl CreateAreaMarkerSprites
 	b _08111540
 _081114E4:
-	bl sub_81117AC
+	bl LoadAreaUnknownGraphics
 	b _08111540
 _081114EA:
-	bl sub_81117E4
+	bl CreateAreaUnknownSprites
 	b _08111540
 _081114F0:
 	movs r0, 0x15
@@ -1933,7 +1933,7 @@ _08111528:
 	strh r1, [r0, 0x8]
 	b _08111550
 	.align 2, 0
-_0811153C: .4byte sub_811155C
+_0811153C: .4byte Task_PokedexAreaScreen_1
 _08111540:
 	ldr r0, _08111558 @ =gTasks
 	lsls r1, r5, 2
@@ -1950,10 +1950,10 @@ _08111550:
 	bx r0
 	.align 2, 0
 _08111558: .4byte gTasks
-	thumb_func_end sub_81113EC
+	thumb_func_end Task_PokedexAreaScreen_0
 
-	thumb_func_start sub_811155C
-sub_811155C: @ 811155C
+	thumb_func_start Task_PokedexAreaScreen_1
+Task_PokedexAreaScreen_1: @ 811155C
 	push {r4,r5,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -2050,7 +2050,7 @@ _0811160A:
 	ands r0, r1
 	cmp r0, 0
 	bne _0811164C
-	bl sub_8111738
+	bl DestroyAreaSprites
 	ldr r0, _08111634 @ =0x02000000
 	ldr r1, _08111638 @ =0x000006e4
 	adds r0, r1
@@ -2080,10 +2080,10 @@ _0811164C:
 	bx r0
 	.align 2, 0
 _08111654: .4byte gTasks
-	thumb_func_end sub_811155C
+	thumb_func_end Task_PokedexAreaScreen_1
 
-	thumb_func_start sub_8111658
-sub_8111658: @ 8111658
+	thumb_func_start CreateAreaMarkerSprites
+CreateAreaMarkerSprites: @ 8111658
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -2191,10 +2191,10 @@ _08111728: .4byte 0x02000000
 _0811172C: .4byte gRegionMapLocations
 _08111730: .4byte gSpriteTemplate_83F85A4
 _08111734: .4byte gSprites
-	thumb_func_end sub_8111658
+	thumb_func_end CreateAreaMarkerSprites
 
-	thumb_func_start sub_8111738
-sub_8111738: @ 8111738
+	thumb_func_start DestroyAreaSprites
+DestroyAreaSprites: @ 8111738
 	push {r4-r6,lr}
 	movs r0, 0x2
 	bl FreeSpriteTilesByTag
@@ -2250,10 +2250,10 @@ _08111794:
 	.align 2, 0
 _081117A4: .4byte 0x02000000
 _081117A8: .4byte 0x02000fa8
-	thumb_func_end sub_8111738
+	thumb_func_end DestroyAreaSprites
 
-	thumb_func_start sub_81117AC
-sub_81117AC: @ 81117AC
+	thumb_func_start LoadAreaUnknownGraphics
+LoadAreaUnknownGraphics: @ 81117AC
 	push {lr}
 	sub sp, 0x8
 	ldr r0, _081117D4 @ =gUnknown_083F8664
@@ -2276,10 +2276,10 @@ _081117D4: .4byte gUnknown_083F8664
 _081117D8: .4byte gAreaUnknownTiles
 _081117DC: .4byte 0x02000fb4
 _081117E0: .4byte gUnknown_083F865C
-	thumb_func_end sub_81117AC
+	thumb_func_end LoadAreaUnknownGraphics
 
-	thumb_func_start sub_81117E4
-sub_81117E4: @ 81117E4
+	thumb_func_start CreateAreaUnknownSprites
+CreateAreaUnknownSprites: @ 81117E4
 	push {r4-r7,lr}
 	ldr r1, _08111810 @ =0x02000000
 	movs r2, 0x88
@@ -2366,6 +2366,6 @@ _0811188E:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81117E4
+	thumb_func_end CreateAreaUnknownSprites
 
 	.align 2, 0 @ Don't pad with nop.
