@@ -536,8 +536,8 @@ bool8 StandardWildEncounter(u16 a, u16 b)
                                 //_08085268
                                 if(GenerateWildMon(gWildMonHeaders[unk].waterMonsInfo, 1, 1) == 1)
                                 {
+                                label:
                                     //_0808527A
-                                    label:
                                     sub_8081A00();
                                     return 1;
                                 }
