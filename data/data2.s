@@ -22144,11 +22144,12 @@ gSpriteTemplate_83E5A00:: @ 83E5A00
 	spr_template 0xFFFF, 6, gOamData_83E5970, gSpriteAnimTable_83E5998, gSpriteImageTable_83E59C0, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 gUnknown_083E5A18:: @ 83E5A18
-	.incbin "baserom.gba", 0x003e5a18, 0x4
+	.string "{PALETTE 0}$"
 
 gUnknown_083E5A1C:: @ 83E5A1C
-	.incbin "baserom.gba", 0x003e5a1c, 0x4
+	.string "▶$"
 
+	.align 2
 gUnknown_083E5A20:: @ 83E5A20
 	.incbin "baserom.gba", 0x003E5A20, 0xB0
 
@@ -22156,23 +22157,29 @@ gUnknown_083E5A20:: @ 83E5A20
 gPokenavCursor_Pal::
 	.incbin "graphics/pokenav/cursor.gbapal"
 
+	.align 2
 gUnknown_083E5AF0:: @ 83E5AF0
 	.incbin "graphics/pokenav/cursor_small.4bpp.lz"
 
+	.align 2
 gUnknown_083E5B34:: @ 83E5B34
 	.incbin "graphics/pokenav/cursor_large.4bpp.lz"
 
+	.align 2
 gUnknown_083E5C20:: @ 83E5C20
-	.incbin "baserom.gba", 0x003e5c20, 0x20
+	.incbin "graphics/pokenav/brendan_icon.gbapal"
 
+	.align 2
 gUnknown_083E5C40:: @ 83E5C40
-	.incbin "baserom.gba", 0x003e5c40, 0x80
+	.incbin "graphics/pokenav/brendan_icon.4bpp"
 
+	.align 2
 gUnknown_083E5CC0:: @ 83E5CC0
-	.incbin "baserom.gba", 0x003e5cc0, 0x20
+	.incbin "graphics/pokenav/may_icon.gbapal"
 
+	.align 2
 gUnknown_083E5CE0:: @ 83E5CE0
-	.incbin "baserom.gba", 0x003e5ce0, 0x80
+	.incbin "graphics/pokenav/may_icon.4bpp"
 
 	.align 2
 gUnknown_083E5D60:: @ 83E5D60
