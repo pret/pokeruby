@@ -138,10 +138,10 @@ struct Sprite
     struct SubspriteTable *subspriteTables;
     void (*callback)(struct Sprite *);
 
-    struct Coords16 pos1;
-    struct Coords16 pos2;
-    s8 centerToCornerVecX;
-    s8 centerToCornerVecY;
+    /*0x20*/ struct Coords16 pos1;
+    /*0x24*/ struct Coords16 pos2;
+    /*0x28*/ s8 centerToCornerVecX;
+    /*0x29*/ s8 centerToCornerVecY;
 
     u8 animNum;
     u8 animCmdIndex;
