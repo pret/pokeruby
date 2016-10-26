@@ -41,6 +41,7 @@ extern void sub_80BEA50(u16);
 extern void sav12_xor_increment(u8);
 extern u8 FlagGet(u16);
 extern u16 VarGet(u16);
+extern int MapGridGetMetatileBehaviorAt(int x, int y);
 
 extern u8 gWildEncountersDisabled;
 extern u16 gUnknown_0839DC00[];
@@ -80,15 +81,15 @@ u8 GetFishingWildMonListHeader(void);
 void FishingWildEncounter(u8 rod);
 u16 GetLocalWildMon(u8 *a1);
 u16 GetMirageIslandMon(void);
-u8 UpdateRepelCounter(void);
-u8 RepelCheck(u8 level);
+bool8 UpdateRepelCounter(void);
+bool8 RepelCheck(bool8 level);
 void ApplyFluteEncounterRateMod(u32 *a1);
 void ApplyCleanseTagEncounterRateMod(u32 *a1);
 
 
-void DisableWildEncounters(u8 a)
+void DisableWildEncounters(bool8 disable)
 {
-    gWildEncountersDisabled = a;
+    gWildEncountersDisabled = disable;
 }
 
 u16 sub_8084984(s16 x, s16 y, u8 c)
@@ -430,17 +431,17 @@ bool8 DoWildEncounterRateDiceRoll(u16 a)
         return FALSE;
 }
 
-bool8 DoWildEncounterTest(u32 a, u8 b)
+bool8 DoWildEncounterTest(u32 encounterRate, u8 b)
 {
-    a *= 16;
+    encounterRate *= 16;
     
     if(TestPlayerAvatarFlags(6))
     {
-        a = a * 80 / 100;
+        encounterRate = encounterRate * 80 / 100;
     }
     //_0808507E
-    ApplyFluteEncounterRateMod(&a);
-    ApplyCleanseTagEncounterRateMod(&a);
+    ApplyFluteEncounterRateMod(&encounterRate);
+    ApplyCleanseTagEncounterRateMod(&encounterRate);
     
     if(b == 0)
     {
@@ -449,15 +450,15 @@ bool8 DoWildEncounterTest(u32 a, u8 b)
         {
             u32 ability = GetMonAbility(&gPlayerParty[0]);
             if(ability == 1)
-                a /= 2;
+                encounterRate /= 2;
             if(ability == 0x23)
-                a *= 2;
+                encounterRate *= 2;
         }
     }
     //_080850BA
-    if(a > 2880)
-        a = 2880;
-    return DoWildEncounterRateDiceRoll(a);
+    if(encounterRate > 2880)
+        encounterRate = 2880;
+    return DoWildEncounterRateDiceRoll(encounterRate);
 }
 
 bool8 DoGlobalWildEncounterDiceRoll(void)
@@ -1001,42 +1002,45 @@ u16 GetMirageIslandMon(void)
     return 0;
 }
 
-u8 UpdateRepelCounter(void)
+bool8 UpdateRepelCounter(void)
 {
-    u16 var = VarGet(0x4021);
+    u16 steps = VarGet(0x4021);
     
-    if(var != 0)
+    if(steps != 0)
     {
-        var--;
-        VarSet(0x4021, var);
-        if(var == 0)
+        steps--;
+        VarSet(0x4021, steps);
+        if(steps == 0)
         {
             ScriptContext1_SetupScript(Event_RepelWoreOff);
-            return 1;
+            return TRUE;
         }
     }
-    return 0;
+    return FALSE;
 }
 
-u8 RepelCheck(u8 level)
+//Returns FALSE if Repel prevents wild Pokemon at the specified level from appearing
+bool8 RepelCheck(bool8 level)
 {
     u8 i;
     
-    if((u16)VarGet(0x4021) == 0)
-        return 1;
-    
-    for(i = 0; i < 6; i++)
+    if(!VarGet(0x4021))
+        return TRUE;
+    else
     {
-        // UB: Too few arguments for function 'GetMonData'
-        if(GetMonData(&gPlayerParty[i], MON_DATA_HP) && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
+        for(i = 0; i < 6; i++)
         {
-            if(level < (u8)GetMonData(&gPlayerParty[i], MON_DATA_LEVEL))
-                return 0;
-            else
-                return 1;
+            // UB: Too few arguments for function 'GetMonData'
+            if(GetMonData(&gPlayerParty[i], MON_DATA_HP) && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
+            {
+                if(level < (u8)GetMonData(&gPlayerParty[i], MON_DATA_LEVEL))
+                    return FALSE;
+                else
+                    return TRUE;
+            }
         }
+        return FALSE;
     }
-    return 0;
 }
 
 void ApplyFluteEncounterRateMod(u32 *a1)

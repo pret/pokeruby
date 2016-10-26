@@ -211,7 +211,7 @@ struct SaveBlock1
     u8 padding_2736[2];
     u8 tvShows[24][36]; // TODO: TV show struct
     /*0x2A98*/ u8 filler_2A98[0x64];
-	/*0x2AFC*/ u16 outbreakPokemonSpecies;
+    /*0x2AFC*/ u16 outbreakPokemonSpecies;
 	/*0x2AFE*/ u8 outbreakLocationMapNum;
     /*0x2AFF*/ u8 outbreakLocationMapGroup;
     /*0x2B00*/ u8 outbreakPokemonLevel;
