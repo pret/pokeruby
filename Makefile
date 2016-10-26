@@ -73,7 +73,6 @@ asm/battle_setup.o \
 asm/cable_club.o \
 asm/mori_debug_menu.o \
 asm/trainer_see.o \
-asm/wild_encounter.o \
 asm/field_effect.o \
 asm/rom_80859BC.o \
 asm/pokedex.o \

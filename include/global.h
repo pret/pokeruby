@@ -162,17 +162,17 @@ struct SB1_2EFC_Struct
 
 struct SaveBlock1
 {
-    struct Coords16 pos;
-    struct WarpData location;
-    struct WarpData warp1;
-    struct WarpData warp2;
-    struct WarpData warp3;
-    struct WarpData warp4;
-    u16 battleMusic;
-    u8 weather;
-    u8 filler_2F;
-    u8 flashUsed;
-    u16 mapDataId;
+    /*0x00*/ struct Coords16 pos;
+    /*0x04*/ struct WarpData location;
+    /*0x0C*/ struct WarpData warp1;
+    /*0x14*/ struct WarpData warp2;
+    /*0x1C*/ struct WarpData warp3;
+    /*0x24*/ struct WarpData warp4;
+    /*0x2C*/ u16 battleMusic;
+    /*0x2E*/ u8 weather;
+    /*0x2F*/ u8 filler_2F;
+    /*0x30*/ u8 flashUsed;
+    /*0x32*/ u16 mapDataId;
     u16 mapView[0x100];
     u8 playerPartyCount;
     struct Pokemon playerParty[6];
@@ -192,11 +192,11 @@ struct SaveBlock1
     u16 trainerRematchStepCounter;
     u8 trainerRematches[100];
     struct MapObject mapObjects[16];
-    struct MapObjectTemplate mapObjectTemplates[64];
-    u8 flags[0x120];
-    u16 vars[0x100];
-    u32 gameStats[NUM_GAME_STATS];
-    struct BerryTree berryTrees[128];
+    /*0xC20*/ struct MapObjectTemplate mapObjectTemplates[64];
+    /*0x1220*/ u8 flags[0x120];
+    /*0x1340*/ u16 vars[0x100];
+    /*0x1540*/ u32 gameStats[NUM_GAME_STATS];
+    /*0x1608*/ struct BerryTree berryTrees[128];
     /*0x1A08*/ struct SecretBaseRecord secretBases[20];
     /*0x2688*/ u8 playerRoomDecor[12];
     /*0x2694*/ u8 playerRoomDecorPos[12];
@@ -210,7 +210,18 @@ struct SaveBlock1
     u8 decorCushion[10];
     u8 padding_2736[2];
     u8 tvShows[24][36]; // TODO: TV show struct
-    u8 filler_2A98[0x464];
+    /*0x2A98*/ u8 filler_2A98[0x64];
+    /*0x2AFC*/ u16 outbreakPokemonSpecies;
+    /*0x2AFE*/ u8 outbreakLocationMapNum;
+    /*0x2AFF*/ u8 outbreakLocationMapGroup;
+    /*0x2B00*/ u8 outbreakPokemonLevel;
+    /*0x2B01*/ u8 filler_2B01[3];
+    /*0x2B04*/ u16 outbreakPokemonMoves[4];
+    /*0x2B0C*/ u8 unk2B0C;
+    /*0x2B0D*/ u8 outbreakPokemonProbability;
+    /*0x2B0E*/ u8 filler_2B0E[0x2C8];
+    /*0x2DD6*/ u16 feebasLocationSeed;
+    /*0x2DD8*/ u8 filler_2DD8[0x124];
     struct SB1_2EFC_Struct sb1_2EFC_struct[5];
     u8 filler_2F9C[0x1A8];
     /*0x3144*/ struct Roamer roamer;
