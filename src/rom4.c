@@ -75,7 +75,7 @@ extern struct WarpData gUnknown_02029800;
 extern struct WarpData gUnknown_02029808;
 extern struct UnkPlayerStruct gUnknown_02029810;
 extern u16 gUnknown_02029814;
-extern u8 gUnknown_02029816;
+extern bool8 gUnknown_02029816;
 extern struct UnkMapObjStruct gUnknown_02029818[];
 
 extern u8 gUnknown_0202E85C;
@@ -129,7 +129,8 @@ extern u8 FlagGet(u16);
 extern u8 GetSav1Weather(void);
 extern void PlayerGetDestCoords(u16 *, u16 *);
 extern u8 sub_810D32C(void);
-extern u16 GetLocalWildMon(u8 *);
+extern u16 GetLocalWildMon(bool8 *);
+extern u16 GetMirageIslandMon(void);
 extern void sub_80C76A0(void);
 extern void sub_8080B60(void);
 extern void sub_810CC80(void);
@@ -173,8 +174,6 @@ void sav1_reset_battle_music_maybe(void);
 void sub_8053F0C(void);
 u8 is_light_level_8_or_9(u8);
 void sub_8054164(void);
-u16 GetMirageIslandMon();
-u16 GetLocalWildMon(u8 *);
 void sub_8055354(void);
 void c2_overworld(void);
 void CB2_LoadMap2(void);
@@ -1004,7 +1003,7 @@ void sub_8054050(void)
 {
     s16 x, y;
     PlayerGetDestCoords((u16 *)&x, (u16 *)&y);
-    if (gUnknown_02029816 != 1
+    if (gUnknown_02029816 != TRUE
      || MetatileBehavior_IsSurfableWaterOrUnderwater(MapGridGetMetatileBehaviorAt(x, y)))
     {
         s8 pan = (Random() % 88) + 212;
@@ -1048,7 +1047,7 @@ void sub_8054164(void)
 {
     if ((gSaveBlock1.location.mapGroup == 0 && gSaveBlock1.location.mapNum == 45) && !sub_810D32C())
     {
-        gUnknown_02029816 = 1;
+        gUnknown_02029816 = TRUE;
         gUnknown_02029814 = GetMirageIslandMon();
     }
     else

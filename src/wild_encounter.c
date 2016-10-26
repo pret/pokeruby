@@ -869,124 +869,44 @@ void FishingWildEncounter(u8 rod)
     sub_8081A00();
 }
 
-#ifdef NONMATCHING
-u16 GetLocalWildMon(u8 *a1)
+u16 GetLocalWildMon(bool8 *isWaterMon)
 {
     u16 headerNum;
-    
-    *a1 = 0;
+    struct WildPokemonInfo *landMonsInfo;
+    struct WildPokemonInfo *waterMonsInfo;
+
+    *isWaterMon = FALSE;
     headerNum = GetCurrentMapWildMonHeader();
-    if(headerNum != 0xFFFF)
+    if(headerNum == 0xFFFF)
+        return 0;
+
+    landMonsInfo = gWildMonHeaders[headerNum].landMonsInfo;
+    waterMonsInfo = gWildMonHeaders[headerNum].waterMonsInfo;
+
+    if (!landMonsInfo && !waterMonsInfo)
+        return 0;
+
+    if (landMonsInfo && !waterMonsInfo)
     {
-        struct WildPokemonInfo *landMonsInfo = gWildMonHeaders[headerNum].landMonsInfo;
-        struct WildPokemonInfo *waterMonsInfo = gWildMonHeaders[headerNum].waterMonsInfo;
-        
-        if(landMonsInfo || waterMonsInfo)
-        {
-            if(waterMonsInfo && landMonsInfo == NULL)
-            {
-                //_080854CE
-                *a1 = 1;
-                return waterMonsInfo->wildPokemon[PickWildMon_Water()].species;
-            }
-            else if(landMonsInfo && waterMonsInfo)
-            {
-                //_080854DC
-                if(Random() % 100 < 80)
-                    //jump to _08085500
-                    return landMonsInfo->wildPokemon[PickWildMon_Grass()].species;
-                else
-                {
-                    *a1 = 1;
-                    return waterMonsInfo->wildPokemon[PickWildMon_Water()].species;
-                }
-            }
-            else if(landMonsInfo && waterMonsInfo == NULL)
-            {
-                //_08085500:
-                return landMonsInfo->wildPokemon[PickWildMon_Grass()].species;
-            }
-        }
+        return landMonsInfo->wildPokemon[PickWildMon_Grass()].species;
     }
-    return 0;
+
+    if (!landMonsInfo && waterMonsInfo)
+    {
+        *isWaterMon = TRUE;
+        return waterMonsInfo->wildPokemon[PickWildMon_Water()].species;
+    }
+
+    if ((Random() % 100) < 80)
+    {
+        return landMonsInfo->wildPokemon[PickWildMon_Grass()].species;
+    }
+    else
+    {
+        *isWaterMon = TRUE;
+        return waterMonsInfo->wildPokemon[PickWildMon_Water()].species;
+    }
 }
-#else
-__attribute__((naked))
-u16 GetLocalWildMon(u8 *a1)
-{
-    asm(".syntax unified\n\
-	push {r4-r6,lr}\n\
-	adds r6, r0, 0\n\
-	movs r0, 0\n\
-	strb r0, [r6]\n\
-	bl GetCurrentMapWildMonHeader\n\
-	lsls r0, 16\n\
-	lsrs r3, r0, 16\n\
-	ldr r0, _080854C0\n\
-	cmp r3, r0\n\
-	beq _080854BA\n\
-	ldr r2, _080854C4\n\
-	lsls r1, r3, 2\n\
-	adds r1, r3\n\
-	lsls r1, 2\n\
-	adds r0, r2, 0x4\n\
-	adds r0, r1, r0\n\
-	ldr r5, [r0]\n\
-	adds r2, 0x8\n\
-	adds r1, r2\n\
-	ldr r4, [r1]\n\
-	cmp r5, 0\n\
-	bne _080854C8\n\
-	cmp r4, 0\n\
-	bne _080854CE\n\
-_080854BA:\n\
-	movs r0, 0\n\
-	b _0808550E\n\
-	.align 2, 0\n\
-_080854C0: .4byte 0x0000ffff\n\
-_080854C4: .4byte gWildMonHeaders\n\
-_080854C8:\n\
-	cmp r4, 0\n\
-	bne _080854DC\n\
-	b _08085500\n\
-_080854CE:\n\
-	movs r0, 0x1\n\
-	strb r0, [r6]\n\
-	bl PickWildMon_Water\n\
-	lsls r0, 24\n\
-	ldr r1, [r4, 0x4]\n\
-	b _08085508\n\
-_080854DC:\n\
-	bl Random\n\
-	lsls r0, 16\n\
-	lsrs r0, 16\n\
-	movs r1, 0x64\n\
-	bl __umodsi3\n\
-	lsls r0, 16\n\
-	lsrs r0, 16\n\
-	cmp r0, 0x4F\n\
-	bls _08085500\n\
-	movs r0, 0x1\n\
-	strb r0, [r6]\n\
-	bl PickWildMon_Water\n\
-	lsls r0, 24\n\
-	ldr r1, [r4, 0x4]\n\
-	b _08085508\n\
-_08085500:\n\
-	bl PickWildMon_Grass\n\
-	lsls r0, 24\n\
-	ldr r1, [r5, 0x4]\n\
-_08085508:\n\
-	lsrs r0, 22\n\
-	adds r0, r1\n\
-	ldrh r0, [r0, 0x2]\n\
-_0808550E:\n\
-	pop {r4-r6}\n\
-	pop {r1}\n\
-	bx r1\n\
-    .syntax divided\n");
-}
-#endif
 
 u16 GetMirageIslandMon(void)
 {
