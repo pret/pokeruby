@@ -1126,11 +1126,7 @@ gUnknown_02039324: @ 2039324
 gUnknown_02039325: @ 2039325
 	.space 0x3
 
-gUnknown_02039328: @ 2039328
-	.space 0x2
-
-gUnknown_0203932A: @ 203932A
-	.space 0x2
+	.include "src/lottery_corner.o"
 
 gUnknown_0203932C: @ 203932C
 	.space 0x2

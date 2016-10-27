@@ -258,7 +258,7 @@ gSpecials::
 	.4byte sub_804DB2C
 	.4byte GetWeekCount
 	.4byte sub_8145AEC
-	.4byte sub_8145B00
+	.4byte PickLotteryCornerTicket
 	.4byte ShowBerryBlenderRecordWindow
 	.4byte ResetTrickHouseEndRoomFlag
 	.4byte SetTrickHouseEndRoomFlag

@@ -14,12 +14,12 @@ extern struct PokemonStorage gPokemonStorage;
 extern u16 gUnknown_0202E8CE;
 extern u16 gUnknown_0840CB04[];
 extern u16 gUnknown_0202E8D0;
-extern u16 gUnknown_02039328;
-extern u16 gUnknown_0203932A;
+static EWRAM_DATA u16 sWinNumberDigit = 0;
+static EWRAM_DATA u16 sOtIdDigit = 0;
 
 void sub_8145D14(u32);
 u32 sub_8145D3C(void);
-static u8 sub_8145C8C(u16, u16);
+static u8 GetMatchingDigits(u16, u16);
 
 void sub_8145A78(void)
 {
@@ -35,7 +35,7 @@ void sub_8145AA4(u16 a)
     
     while(--a != 0xFFFF)
     {
-        var = 0x41c64e6d * var + 0x3039;
+        var = var * 1103515245 + 12345;
     }
     sub_8145D14(var);    
 }
@@ -46,7 +46,8 @@ void sub_8145AEC(void)
     gScriptResult = a;
 }
 
-void sub_8145B00(void)
+//Script special function
+void PickLotteryCornerTicket(void)
 {
     u16 i;
     u16 j;
@@ -66,7 +67,7 @@ void sub_8145B00(void)
             if(!GetMonData(pkmn, MON_DATA_IS_EGG))
             {
                 u32 otId = GetMonData(pkmn, MON_DATA_OT_ID);
-                u8 a = sub_8145C8C(gScriptResult, otId);
+                u8 a = GetMatchingDigits(gScriptResult, otId);
                 
                 if(a > gUnknown_0202E8CC && a > 1)
                 {
@@ -91,7 +92,7 @@ void sub_8145B00(void)
             !GetBoxMonData(pkmn, MON_DATA_IS_EGG))
             {
                 u32 otId = GetBoxMonData(pkmn, MON_DATA_OT_ID);
-                u8 a = sub_8145C8C(gScriptResult, otId);
+                u8 a = GetMatchingDigits(gScriptResult, otId);
                 
                 if(a > gUnknown_0202E8CC && a > 1)
                 {
@@ -121,26 +122,26 @@ void sub_8145B00(void)
     }
 }
 
-static u8 sub_8145C8C(u16 a, u16 b)
+static u8 GetMatchingDigits(u16 winNumber, u16 otId)
 {
     u8 i;
-    u8 j = 0;  //Why not just use i?
+    u8 matchingDigits = 0;  //Why not just use i?
     
     for(i = 0; i < 5; i++)
     {
-        gUnknown_02039328 = a % 10;
-        gUnknown_0203932A = b % 10;
+        sWinNumberDigit = winNumber % 10;
+        sOtIdDigit = otId % 10;
         
-        if(gUnknown_02039328 == gUnknown_0203932A)
+        if(sWinNumberDigit == sOtIdDigit)
         {
-            a = a / 10;
-            b = b / 10;
-            j++;
+            winNumber = winNumber / 10;
+            otId = otId / 10;
+            matchingDigits++;
         }
         else
             break;
     }
-    return j;
+    return matchingDigits;
 }
 
 void sub_8145D14(u32 a)
