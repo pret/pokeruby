@@ -173,7 +173,6 @@ SECTIONS {
         src/intro.o(.text);
         asm/rom_813BA94.o(.text);
         src/lottery_corner.o(.text);
-        asm/lottery_corner.o(.text);
         src/diploma.o(.text);
         asm/berry_tag_screen.o(.text);
         asm/mystery_event_menu.o(.text);
