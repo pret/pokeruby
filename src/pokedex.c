@@ -86,7 +86,7 @@ extern struct SpriteTemplate gSpriteTemplate_83A056C;
 extern struct SpriteTemplate gSpriteTemplate_83A0584;
 extern struct SpriteTemplate gSpriteTemplate_83A059C;
 extern struct SpriteTemplate gSpriteTemplate_83A05B4;
-
+extern s16 gSineTable[];
 
 extern void m4aMPlayVolumeControl(struct MusicPlayerInfo *mplayInfo, u16 trackBits, u16 volume);
 extern bool8 BeginNormalPaletteFade(u32, s8, u8, u8, u16);
@@ -1952,3 +1952,146 @@ void sub_808E978(u8 a)
         gSprites[spriteId].invisible = 1;
     }
 }
+
+void nullsub_58(struct Sprite *sprite)
+{
+}
+
+void sub_808ED94(struct Sprite *sprite)
+{
+    if(gUnknown_0202FFB4->unk64A != 0)
+        DestroySprite(sprite);
+}
+
+void sub_808EDB8(struct Sprite *sprite)
+{
+    sprite->oam.priority = 0;
+    sprite->oam.affineMode = 0;
+    sprite->pos2.x = 0;
+    sprite->pos2.y = 0;
+    if(sprite->pos1.x != 0x30 || sprite->pos1.y != 0x38)
+    {
+        if(sprite->pos1.x > 0x30)
+            sprite->pos1.x--;
+        if(sprite->pos1.x < 0x30)
+            sprite->pos1.x++;
+        if(sprite->pos1.y > 0x38)
+            sprite->pos1.y--;
+        if(sprite->pos1.y <0x38)
+            sprite->pos1.y++;
+    }
+    //_0808EE1C
+    else
+        sprite->callback = nullsub_58;
+}
+
+void sub_808EE28(struct Sprite *sprite)
+{
+    u8 data1 = sprite->data1;
+    
+    if(gUnknown_0202FFB4->unk64A != 0 && gUnknown_0202FFB4->unk64A != 3)
+    {
+        DestroySprite(sprite);
+        gUnknown_0202FFB4->unk61E[data1] = 0xFFFF;
+    }
+    else
+    {
+        //_0808EE58
+        s32 var;
+        
+        sprite->pos2.y = gSineTable[(u8)sprite->data5] * 76 / 256;
+        var = 0x10000 / gSineTable[sprite->data5 + 0x40];
+        if((u32)var > 0xFFFF)
+            var = 0xFFFF;
+        SetOamMatrix(sprite->data1 + 1, 0x100, 0, 0, var);
+        sprite->oam.matrixNum = data1 + 1;
+        
+        //ToDo: clean up these inequalities
+        if((u16)(sprite->data5 + 0x3F) <= 0x7E)
+        {
+            sprite->invisible = 0;
+            sprite->data0 = 1;
+        }
+        else
+        {
+            sprite->invisible = 1;
+        }
+        //_0808EEF8
+        if((u16)(sprite->data5 + 0x3F) > 0x7E && sprite->data0 != 0)
+        {
+            DestroySprite(sprite);
+            gUnknown_0202FFB4->unk61E[data1] = 0xFFFF;
+        }
+    }
+    //_0808EF16
+}
+
+void sub_808EF38(struct Sprite *sprite)
+{
+    if(gUnknown_0202FFB4->unk64A != 0 && gUnknown_0202FFB4->unk64A != 3)
+        DestroySprite(sprite);
+    else
+        sprite->pos2.y = gUnknown_0202FFB4->unk60E * 120 / (gUnknown_0202FFB4->unk60C - 1);
+}
+
+void sub_808EF8C(struct Sprite *sprite)
+{
+    if(gUnknown_0202FFB4->unk64A != 0 && gUnknown_0202FFB4->unk64A != 3)
+        DestroySprite(sprite);
+    else
+    {
+        u8 r0;
+        
+        if(sprite->data1 != 0)
+        {            
+            if(gUnknown_0202FFB4->unk60E == gUnknown_0202FFB4->unk60C - 1)
+                sprite->invisible = 1;
+            else
+                sprite->invisible = 0;
+            r0 = sprite->data2;
+        }
+        else
+        {
+            if(gUnknown_0202FFB4->unk60E == 0)
+                sprite->invisible = 1;
+            else
+                sprite->invisible = 0;
+            r0 = sprite->data2 - 0x80;
+        }
+        sprite->pos2.y = gSineTable[r0] / 64;
+        sprite->data2 = sprite->data2 + 8;
+        if(gUnknown_0202FFB4->unk650 == 0 && gUnknown_0202FFB4->unk654 == 0 && sprite->invisible == 0)
+            sprite->invisible = 0;
+        else
+            sprite->invisible = 1;
+    }
+}
+
+void sub_808F08C(struct Sprite *sprite)
+{
+    if(gUnknown_0202FFB4->unk64A != 0 && gUnknown_0202FFB4->unk64A != 3)
+        DestroySprite(sprite);
+}
+
+/*
+//FixMe
+void sub_808F0B4(struct Sprite *sprite)
+{
+    if(gUnknown_0202FFB4->unk64A != 0 && gUnknown_0202FFB4->unk64A != 3)
+        DestroySprite(sprite);
+    else
+    {
+        s16 r3;
+        u8 unk = gUnknown_0202FFB4->unk62C + sprite->data1;
+        u16 foo = gSineTable[unk];
+        u16 bar = gSineTable[unk + 0x40];
+        u8 unk2 = sprite->data0;
+        
+        SetOamMatrix(unk2, foo, bar, -foo, bar);
+        
+        r3 = gSineTable[sprite->data1 + gUnknown_0202FFB4->unk62C];
+        sprite->pos2.x = gSineTable[sprite->data1 + gUnknown_0202FFB4->unk62C + 0x40] * 5 / 256;
+        sprite->pos2.y = r3 / 8;
+    }
+}
+*/
