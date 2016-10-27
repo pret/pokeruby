@@ -1082,7 +1082,9 @@ gUnknown_02039288: @ 2039288
 gUnknown_020392FC: @ 20392FC
 	.space 0x6
 
-gUnknown_02039302: @ 2039302
+@ Latios/Latias location
+@ map group, map num.
+gRoamerLocation: @ 2039302
 	.space 0x2
 
 gUnknown_02039304: @ 2039304

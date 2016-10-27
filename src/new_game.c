@@ -109,9 +109,9 @@ void NewGameInitData(void)
     sub_80AB1B0();
     sub_80530AC();
     sub_8052DA8();
-    GameFreakRTC_Reset();
-    sub_80C5B84();
-    sub_80C5BDC();
+    InitLinkBattleRecords();
+    InitShroomishSizeRecord();
+    InitBarboachSizeRecord();
     gPlayerPartyCount = 0;
     ZeroPlayerPartyMons();
     sub_80961D8();
@@ -119,7 +119,7 @@ void NewGameInitData(void)
     sub_813420C();
     gSaveBlock1.registeredItem = 0;
     sub_80A3714();
-    sub_8139C18();
+    NewGameInitPCItems();
     sub_810C994();
     sub_8133F80();
     sub_80E6764();

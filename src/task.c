@@ -6,7 +6,7 @@
 #define HEAD_SENTINEL 0xFE
 #define TAIL_SENTINEL 0xFF
 
-extern struct Task gTasks[];
+struct Task gTasks[NUM_TASKS];
 
 static void InsertTask(u8 newTaskId);
 static u8 FindFirstActiveTask();

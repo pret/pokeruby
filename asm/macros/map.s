@@ -19,6 +19,14 @@
 	.byte GROUP_\map_name
 	.endm
 
+	.macro heal_location map_name, x, y
+	.byte GROUP_\map_name
+	.byte MAP_\map_name
+	.2byte \x
+	.2byte \y
+	.space 2
+	.endm
+
 	.equiv GROUP_NONE, 0x7f
 	.equiv MAP_NONE, 0x7f
 
