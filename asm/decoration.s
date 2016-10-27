@@ -54,8 +54,8 @@ sub_80FE220: @ 80FE220
 _080FE238: .4byte gUnknown_020388D4
 	thumb_func_end sub_80FE220
 
-	thumb_func_start sub_80FE23C
-sub_80FE23C: @ 80FE23C
+	thumb_func_start DecorationPC
+DecorationPC: @ 80FE23C
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -73,15 +73,15 @@ sub_80FE23C: @ 80FE23C
 	bx r0
 	.align 2, 0
 _080FE25C: .4byte gTasks
-_080FE260: .4byte sub_80FE2EC
-	thumb_func_end sub_80FE23C
+_080FE260: .4byte Task_DecorationPCProcessMenuInput
+	thumb_func_end DecorationPC
 
-	thumb_func_start sub_80FE264
-sub_80FE264: @ 80FE264
+	thumb_func_start Task_SecretBasePC_Decoration
+Task_SecretBasePC_Decoration: @ 80FE264
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80FE23C
+	bl DecorationPC
 	ldr r1, _080FE284 @ =0x0201f000
 	ldr r0, _080FE288 @ =gSaveBlock1 + 0x1A1A
 	str r0, [r1]
@@ -96,14 +96,14 @@ sub_80FE264: @ 80FE264
 	.align 2, 0
 _080FE284: .4byte 0x0201f000
 _080FE288: .4byte gSaveBlock1 + 0x1A1A
-	thumb_func_end sub_80FE264
+	thumb_func_end Task_SecretBasePC_Decoration
 
-	thumb_func_start sub_80FE28C
-sub_80FE28C: @ 80FE28C
+	thumb_func_start DoPlayerPCDecoration
+DoPlayerPCDecoration: @ 80FE28C
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80FE23C
+	bl DecorationPC
 	ldr r1, _080FE2AC @ =0x0201f000
 	ldr r0, _080FE2B0 @ =gSaveBlock1 + 0x2688
 	str r0, [r1]
@@ -118,7 +118,7 @@ sub_80FE28C: @ 80FE28C
 	.align 2, 0
 _080FE2AC: .4byte 0x0201f000
 _080FE2B0: .4byte gSaveBlock1 + 0x2688
-	thumb_func_end sub_80FE28C
+	thumb_func_end DoPlayerPCDecoration
 
 	thumb_func_start sub_80FE2B4
 sub_80FE2B4: @ 80FE2B4
@@ -148,8 +148,8 @@ sub_80FE2B4: @ 80FE2B4
 _080FE2E8: .4byte gUnknown_083EC654
 	thumb_func_end sub_80FE2B4
 
-	thumb_func_start sub_80FE2EC
-sub_80FE2EC: @ 80FE2EC
+	thumb_func_start Task_DecorationPCProcessMenuInput
+Task_DecorationPCProcessMenuInput: @ 80FE2EC
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -224,7 +224,7 @@ _080FE38C:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80FE2EC
+	thumb_func_end Task_DecorationPCProcessMenuInput
 
 	thumb_func_start sub_80FE394
 sub_80FE394: @ 80FE394
@@ -282,7 +282,7 @@ _080FE404: .4byte 0x0201f000
 _080FE408: .4byte gUnknown_0815F399
 _080FE40C:
 	adds r0, r4, 0
-	bl sub_8139E24
+	bl ReshowPlayerPC
 _080FE412:
 	pop {r4}
 	pop {r0}
@@ -331,7 +331,7 @@ sub_80FE428: @ 80FE428
 	.align 2, 0
 _080FE464: .4byte gUnknown_020388D4
 _080FE468: .4byte gTasks
-_080FE46C: .4byte sub_80FE2EC
+_080FE46C: .4byte Task_DecorationPCProcessMenuInput
 	thumb_func_end sub_80FE428
 
 	thumb_func_start sub_80FE470
@@ -716,7 +716,7 @@ sub_80FE758: @ 80FE758
 	b _080FE7A2
 	.align 2, 0
 _080FE794: .4byte gTasks
-_080FE798: .4byte sub_80FE2EC
+_080FE798: .4byte Task_DecorationPCProcessMenuInput
 _080FE79C:
 	adds r0, r4, 0
 	bl sub_80B3068
@@ -6807,7 +6807,7 @@ _08101668:
 	bx r0
 	.align 2, 0
 _08101670: .4byte gTasks
-_08101674: .4byte sub_80FE2EC
+_08101674: .4byte Task_DecorationPCProcessMenuInput
 	thumb_func_end sub_8101648
 
 	thumb_func_start sub_8101678

@@ -4103,8 +4103,8 @@ _08057430:
 	bx r1
 	thumb_func_end MetatileBehavior_IsUnusedFootprintMetatile
 
-	thumb_func_start sub_8057434
-sub_8057434: @ 8057434
+	thumb_func_start MetatileBehavior_IsBridge
+MetatileBehavior_IsBridge: @ 8057434
 	push {lr}
 	lsls r0, 24
 	movs r1, 0x90
@@ -4120,7 +4120,7 @@ _08057448:
 _0805744A:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8057434
+	thumb_func_end MetatileBehavior_IsBridge
 
 	thumb_func_start sub_8057450
 sub_8057450: @ 8057450
@@ -4138,8 +4138,8 @@ _08057462:
 	bx r1
 	thumb_func_end sub_8057450
 
-	thumb_func_start sub_8057468
-sub_8057468: @ 8057468
+	thumb_func_start MetatileBehavior_IsLandWildEncounter
+MetatileBehavior_IsLandWildEncounter: @ 8057468
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -4162,10 +4162,10 @@ _0805748E:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8057468
+	thumb_func_end MetatileBehavior_IsLandWildEncounter
 
-	thumb_func_start sub_8057494
-sub_8057494: @ 8057494
+	thumb_func_start MetatileBehavior_IsWaterWildEncounter
+MetatileBehavior_IsWaterWildEncounter: @ 8057494
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -4189,7 +4189,7 @@ _080574BC:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8057494
+	thumb_func_end MetatileBehavior_IsWaterWildEncounter
 
 	thumb_func_start sub_80574C4
 sub_80574C4: @ 80574C4

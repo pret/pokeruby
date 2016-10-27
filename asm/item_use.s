@@ -483,7 +483,7 @@ _080C933C:
 _080C935C:
 	lsls r0, r6, 24
 	lsrs r0, 24
-	bl sub_8057434
+	bl MetatileBehavior_IsBridge
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

@@ -54,8 +54,8 @@ _08139C6C: .4byte gSaveBlock1 + 0x498
 _08139C70: .4byte gNewGamePCItems
 	thumb_func_end NewGameInitPCItems
 
-	thumb_func_start sub_8139C74
-sub_8139C74: @ 8139C74
+	thumb_func_start BedroomPC
+BedroomPC: @ 8139C74
 	push {lr}
 	ldr r1, _08139C9C @ =gUnknown_02039314
 	ldr r0, _08139CA0 @ =gUnknown_084062B8
@@ -80,11 +80,11 @@ _08139CA0: .4byte gUnknown_084062B8
 _08139CA4: .4byte gUnknown_030007B4
 _08139CA8: .4byte TaskDummy
 _08139CAC: .4byte gOtherText_WhatWillYouDo
-_08139CB0: .4byte sub_8139CF4
-	thumb_func_end sub_8139C74
+_08139CB0: .4byte InitPlayerPCMenu
+	thumb_func_end BedroomPC
 
-	thumb_func_start sub_8139CB4
-sub_8139CB4: @ 8139CB4
+	thumb_func_start PlayerPC
+PlayerPC: @ 8139CB4
 	push {lr}
 	ldr r1, _08139CDC @ =gUnknown_02039314
 	ldr r0, _08139CE0 @ =gUnknown_084062BC
@@ -109,11 +109,11 @@ _08139CE0: .4byte gUnknown_084062BC
 _08139CE4: .4byte gUnknown_030007B4
 _08139CE8: .4byte TaskDummy
 _08139CEC: .4byte gOtherText_WhatWillYouDo
-_08139CF0: .4byte sub_8139CF4
-	thumb_func_end sub_8139CB4
+_08139CF0: .4byte InitPlayerPCMenu
+	thumb_func_end PlayerPC
 
-	thumb_func_start sub_8139CF4
-sub_8139CF4: @ 8139CF4
+	thumb_func_start InitPlayerPCMenu
+InitPlayerPCMenu: @ 8139CF4
 	push {r4,r5,lr}
 	sub sp, 0x8
 	adds r4, r0, 0
@@ -162,11 +162,11 @@ _08139D50: .4byte gUnknown_030007B4
 _08139D54: .4byte gUnknown_08406298
 _08139D58: .4byte gUnknown_02039314
 _08139D5C: .4byte gTasks
-_08139D60: .4byte sub_8139D64
-	thumb_func_end sub_8139CF4
+_08139D60: .4byte PlayerPCProcessMenuInput
+	thumb_func_end InitPlayerPCMenu
 
-	thumb_func_start sub_8139D64
-sub_8139D64: @ 8139D64
+	thumb_func_start PlayerPCProcessMenuInput
+PlayerPCProcessMenuInput: @ 8139D64
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -252,10 +252,10 @@ _08139E10:
 _08139E18: .4byte gUnknown_08406298
 _08139E1C: .4byte gUnknown_030007B4
 _08139E20: .4byte gUnknown_02039314
-	thumb_func_end sub_8139D64
+	thumb_func_end PlayerPCProcessMenuInput
 
-	thumb_func_start sub_8139E24
-sub_8139E24: @ 8139E24
+	thumb_func_start ReshowPlayerPC
+ReshowPlayerPC: @ 8139E24
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -267,17 +267,17 @@ sub_8139E24: @ 8139E24
 	bx r0
 	.align 2, 0
 _08139E38: .4byte gOtherText_WhatWillYouDo
-_08139E3C: .4byte sub_8139CF4
-	thumb_func_end sub_8139E24
+_08139E3C: .4byte InitPlayerPCMenu
+	thumb_func_end ReshowPlayerPC
 
-	thumb_func_start sub_8139E40
-sub_8139E40: @ 8139E40
+	thumb_func_start PlayerPC_ItemStorage
+PlayerPC_ItemStorage: @ 8139E40
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0
-	bl sub_8139F58
+	bl InitItemStorageMenu
 	ldr r1, _08139E64 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
@@ -290,11 +290,11 @@ sub_8139E40: @ 8139E40
 	bx r0
 	.align 2, 0
 _08139E64: .4byte gTasks
-_08139E68: .4byte sub_8139FD4
-	thumb_func_end sub_8139E40
+_08139E68: .4byte ItemStorageMenuProcessInput
+	thumb_func_end PlayerPC_ItemStorage
 
-	thumb_func_start sub_8139E6C
-sub_8139E6C: @ 8139E6C
+	thumb_func_start PlayerPC_Mailbox
+PlayerPC_Mailbox: @ 8139E6C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -319,7 +319,7 @@ sub_8139E6C: @ 8139E6C
 	.align 2, 0
 _08139E9C: .4byte 0x0201fe00
 _08139EA0: .4byte gOtherText_NoMailHere
-_08139EA4: .4byte sub_8139E24
+_08139EA4: .4byte ReshowPlayerPC
 _08139EA8:
 	strb r2, [r1]
 	strb r2, [r1, 0x2]
@@ -342,10 +342,10 @@ _08139ECA:
 	.align 2, 0
 _08139ED0: .4byte gTasks
 _08139ED4: .4byte sub_813B174
-	thumb_func_end sub_8139E6C
+	thumb_func_end PlayerPC_Mailbox
 
-	thumb_func_start sub_8139ED8
-sub_8139ED8: @ 8139ED8
+	thumb_func_start PlayerPC_Decoration
+PlayerPC_Decoration: @ 8139ED8
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -356,14 +356,14 @@ sub_8139ED8: @ 8139ED8
 	movs r3, 0x9
 	bl MenuZeroFillWindowRect
 	adds r0, r4, 0
-	bl sub_80FE28C
+	bl DoPlayerPCDecoration
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8139ED8
+	thumb_func_end PlayerPC_Decoration
 
-	thumb_func_start sub_8139EF8
-sub_8139EF8: @ 8139EF8
+	thumb_func_start PlayerPC_TurnOff
+PlayerPC_TurnOff: @ 8139EF8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -406,10 +406,10 @@ _08139F4C:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8139EF8
+	thumb_func_end PlayerPC_TurnOff
 
-	thumb_func_start sub_8139F58
-sub_8139F58: @ 8139F58
+	thumb_func_start InitItemStorageMenu
+InitItemStorageMenu: @ 8139F58
 	push {r4,lr}
 	sub sp, 0x8
 	adds r4, r0, 0
@@ -442,7 +442,7 @@ sub_8139F58: @ 8139F58
 	lsls r4, 2
 	adds r4, r0
 	ldr r0, [r4]
-	bl sub_8139FB4
+	bl ItemStorageMenuPrint
 	add sp, 0x8
 	pop {r4}
 	pop {r0}
@@ -450,10 +450,10 @@ sub_8139F58: @ 8139F58
 	.align 2, 0
 _08139FAC: .4byte gUnknown_084062C0
 _08139FB0: .4byte gUnknown_08406288
-	thumb_func_end sub_8139F58
+	thumb_func_end InitItemStorageMenu
 
-	thumb_func_start sub_8139FB4
-sub_8139FB4: @ 8139FB4
+	thumb_func_start ItemStorageMenuPrint
+ItemStorageMenuPrint: @ 8139FB4
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0x2
@@ -468,10 +468,10 @@ sub_8139FB4: @ 8139FB4
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8139FB4
+	thumb_func_end ItemStorageMenuPrint
 
-	thumb_func_start sub_8139FD4
-sub_8139FD4: @ 8139FD4
+	thumb_func_start ItemStorageMenuProcessInput
+ItemStorageMenuProcessInput: @ 8139FD4
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -505,7 +505,7 @@ _0813A008:
 	lsrs r0, 22
 	adds r0, r4
 	ldr r0, [r0]
-	bl sub_8139FB4
+	bl ItemStorageMenuPrint
 	b _0813A06C
 	.align 2, 0
 _0813A020: .4byte gUnknown_08406288
@@ -547,10 +547,10 @@ _0813A06C:
 	bx r0
 	.align 2, 0
 _0813A074: .4byte gUnknown_084062C0
-	thumb_func_end sub_8139FD4
+	thumb_func_end ItemStorageMenuProcessInput
 
-	thumb_func_start sub_813A078
-sub_813A078: @ 813A078
+	thumb_func_start Task_ItemStorage_Deposit
+Task_ItemStorage_Deposit: @ 813A078
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -569,10 +569,10 @@ _0813A094:
 	bx r0
 	.align 2, 0
 _0813A09C: .4byte gPaletteFade
-	thumb_func_end sub_813A078
+	thumb_func_end Task_ItemStorage_Deposit
 
-	thumb_func_start sub_813A0A0
-sub_813A0A0: @ 813A0A0
+	thumb_func_start ItemStorage_Deposit
+ItemStorage_Deposit: @ 813A0A0
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -590,8 +590,8 @@ sub_813A0A0: @ 813A0A0
 	bx r0
 	.align 2, 0
 _0813A0C0: .4byte gTasks
-_0813A0C4: .4byte sub_813A078
-	thumb_func_end sub_813A0A0
+_0813A0C4: .4byte Task_ItemStorage_Deposit
+	thumb_func_end ItemStorage_Deposit
 
 	thumb_func_start sub_813A0C8
 sub_813A0C8: @ 813A0C8
@@ -616,7 +616,7 @@ _0813A0E8:
 	bx r0
 	.align 2, 0
 _0813A0F0: .4byte gTasks
-_0813A0F4: .4byte sub_8139FD4
+_0813A0F4: .4byte ItemStorageMenuProcessInput
 	thumb_func_end sub_813A0C8
 
 	thumb_func_start sub_813A0F8
@@ -624,7 +624,7 @@ sub_813A0F8: @ 813A0F8
 	push {lr}
 	bl MenuDisplayMessageBox
 	movs r0, 0x1
-	bl sub_8139F58
+	bl InitItemStorageMenu
 	ldr r0, _0813A114 @ =sub_813A0C8
 	movs r1, 0
 	bl CreateTask
@@ -635,8 +635,8 @@ sub_813A0F8: @ 813A0F8
 _0813A114: .4byte sub_813A0C8
 	thumb_func_end sub_813A0F8
 
-	thumb_func_start sub_813A118
-sub_813A118: @ 813A118
+	thumb_func_start ItemStorage_Withdraw
+ItemStorage_Withdraw: @ 813A118
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -692,11 +692,11 @@ _0813A188:
 	bx r0
 	.align 2, 0
 _0813A190: .4byte gOtherText_NoItems
-_0813A194: .4byte sub_8139E40
-	thumb_func_end sub_813A118
+_0813A194: .4byte PlayerPC_ItemStorage
+	thumb_func_end ItemStorage_Withdraw
 
-	thumb_func_start sub_813A198
-sub_813A198: @ 813A198
+	thumb_func_start ItemStorage_Toss
+ItemStorage_Toss: @ 813A198
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -753,11 +753,11 @@ _0813A20C:
 	bx r0
 	.align 2, 0
 _0813A214: .4byte gOtherText_NoItems
-_0813A218: .4byte sub_8139E40
-	thumb_func_end sub_813A198
+_0813A218: .4byte PlayerPC_ItemStorage
+	thumb_func_end ItemStorage_Toss
 
-	thumb_func_start sub_813A21C
-sub_813A21C: @ 813A21C
+	thumb_func_start ItemStorage_Exit
+ItemStorage_Exit: @ 813A21C
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -769,11 +769,11 @@ sub_813A21C: @ 813A21C
 	movs r3, 0x9
 	bl MenuZeroFillWindowRect
 	adds r0, r4, 0
-	bl sub_8139E24
+	bl ReshowPlayerPC
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_813A21C
+	thumb_func_end ItemStorage_Exit
 
 	thumb_func_start sub_813A240
 sub_813A240: @ 813A240
@@ -1076,7 +1076,7 @@ sub_813A468: @ 813A468
 	lsls r4, 3
 	adds r4, r0
 	ldrb r0, [r4, 0x14]
-	bl sub_8139F58
+	bl InitItemStorageMenu
 	ldr r0, _0813A4B0 @ =sub_8139FD4
 	str r0, [r4]
 	pop {r4,r5}
@@ -1084,7 +1084,7 @@ sub_813A468: @ 813A468
 	bx r0
 	.align 2, 0
 _0813A4AC: .4byte gTasks
-_0813A4B0: .4byte sub_8139FD4
+_0813A4B0: .4byte ItemStorageMenuProcessInput
 	thumb_func_end sub_813A468
 
 	thumb_func_start sub_813A4B4
@@ -2896,7 +2896,7 @@ sub_813B300: @ 813B300
 	movs r3, 0x13
 	bl MenuZeroFillWindowRect
 	adds r0, r4, 0
-	bl sub_8139E24
+	bl ReshowPlayerPC
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -3025,15 +3025,15 @@ _0813B40C:
 	movs r0, 0x5
 	bl PlaySE
 	adds r0, r4, 0
-	bl sub_813B734
+	bl Mailbox_Cancel
 _0813B420:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	thumb_func_end sub_813B3A0
 
-	thumb_func_start sub_813B428
-sub_813B428: @ 813B428
+	thumb_func_start Mailbox_Read
+Mailbox_Read: @ 813B428
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -3054,7 +3054,7 @@ sub_813B428: @ 813B428
 	.align 2, 0
 _0813B44C: .4byte gTasks
 _0813B450: .4byte sub_813B454
-	thumb_func_end sub_813B428
+	thumb_func_end Mailbox_Read
 
 	thumb_func_start sub_813B454
 sub_813B454: @ 813B454
@@ -3151,8 +3151,8 @@ _0813B508: .4byte sub_813B4D0
 _0813B50C: .4byte c2_exit_to_overworld_2_switch
 	thumb_func_end sub_813B4F0
 
-	thumb_func_start sub_813B510
-sub_813B510: @ 813B510
+	thumb_func_start Mailbox_MoveToBag
+Mailbox_MoveToBag: @ 813B510
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -3179,7 +3179,7 @@ _0813B544: .4byte gOtherText_MoveToBag
 _0813B548: .4byte gUnknown_0840633A
 _0813B54C: .4byte gOtherText_MessageWillBeLost
 _0813B550: .4byte sub_813B554
-	thumb_func_end sub_813B510
+	thumb_func_end Mailbox_MoveToBag
 
 	thumb_func_start sub_813B554
 sub_813B554: @ 813B554
@@ -3290,8 +3290,8 @@ sub_813B610: @ 813B610
 	bx r0
 	thumb_func_end sub_813B610
 
-	thumb_func_start sub_813B630
-sub_813B630: @ 813B630
+	thumb_func_start Mailbox_Give
+Mailbox_Give: @ 813B630
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -3320,7 +3320,7 @@ _0813B65E:
 	.align 2, 0
 _0813B664: .4byte gTasks
 _0813B668: .4byte sub_813B66C
-	thumb_func_end sub_813B630
+	thumb_func_end Mailbox_Give
 
 	thumb_func_start sub_813B66C
 sub_813B66C: @ 813B66C
@@ -3422,8 +3422,8 @@ _0813B72C: .4byte gOtherText_NoPokemon
 _0813B730: .4byte sub_813B758
 	thumb_func_end sub_813B718
 
-	thumb_func_start sub_813B734
-sub_813B734: @ 813B734
+	thumb_func_start Mailbox_Cancel
+Mailbox_Cancel: @ 813B734
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -3439,7 +3439,7 @@ sub_813B734: @ 813B734
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_813B734
+	thumb_func_end Mailbox_Cancel
 
 	thumb_func_start sub_813B758
 sub_813B758: @ 813B758
