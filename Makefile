@@ -144,7 +144,6 @@ asm/field_effect_helpers.o \
 asm/contest_ai.o \
 asm/rom_81258BC.o \
 asm/rom_813BA94.o \
-asm/lottery_corner.o \
 asm/berry_tag_screen.o \
 asm/mystery_event_menu.o \
 asm/save_failed_screen.o \
