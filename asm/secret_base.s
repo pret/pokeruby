@@ -2054,15 +2054,15 @@ _080BC45C: .4byte gSaveBlock1
 _080BC460: .4byte 0x00001a16
 	thumb_func_end sub_80BC440
 
-	thumb_func_start sub_80BC464
-sub_80BC464: @ 80BC464
+	thumb_func_start SecretBasePC_PackUp
+SecretBasePC_PackUp: @ 80BC464
 	push {lr}
 	movs r0, 0x14
 	bl sav12_xor_increment
 	bl sub_80BC440
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80BC464
+	thumb_func_end SecretBasePC_PackUp
 
 	thumb_func_start sub_80BC474
 sub_80BC474: @ 80BC474
@@ -2273,8 +2273,8 @@ _080BC5FC: .4byte gSaveBlock1
 _080BC600: .4byte 0x00001a09
 	thumb_func_end sub_80BC5BC
 
-	thumb_func_start sub_80BC604
-sub_80BC604: @ 80BC604
+	thumb_func_start SecretBasePC_Decoration
+SecretBasePC_Decoration: @ 80BC604
 	push {lr}
 	ldr r0, _080BC614 @ =sub_80FE264
 	movs r1, 0
@@ -2282,11 +2282,11 @@ sub_80BC604: @ 80BC604
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080BC614: .4byte sub_80FE264
-	thumb_func_end sub_80BC604
+_080BC614: .4byte Task_SecretBasePC_Decoration
+	thumb_func_end SecretBasePC_Decoration
 
-	thumb_func_start sub_80BC618
-sub_80BC618: @ 80BC618
+	thumb_func_start SecretBasePC_Registry
+SecretBasePC_Registry: @ 80BC618
 	push {lr}
 	ldr r0, _080BC628 @ =sub_80BC62C
 	movs r1, 0
@@ -2294,11 +2294,11 @@ sub_80BC618: @ 80BC618
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080BC628: .4byte sub_80BC62C
-	thumb_func_end sub_80BC618
+_080BC628: .4byte Task_SecretBasePC_Registry
+	thumb_func_end SecretBasePC_Registry
 
-	thumb_func_start sub_80BC62C
-sub_80BC62C: @ 80BC62C
+	thumb_func_start Task_SecretBasePC_Registry
+Task_SecretBasePC_Registry: @ 80BC62C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -2357,7 +2357,7 @@ _080BC6A0:
 	.align 2, 0
 _080BC6A8: .4byte gSecretBaseText_NoRegistry
 _080BC6AC: .4byte sub_80BCC54
-	thumb_func_end sub_80BC62C
+	thumb_func_end Task_SecretBasePC_Registry
 
 	thumb_func_start sub_80BC6B0
 sub_80BC6B0: @ 80BC6B0

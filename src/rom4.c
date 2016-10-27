@@ -83,6 +83,7 @@ extern u8 gUnknown_0202E85D;
 
 extern u8 gUnknown_03000580[];
 extern u16 (*gUnknown_03000584)(u32);
+extern u8 gUnknown_03000588;
 
 extern u16 word_3004858;
 extern void (*gUnknown_0300485C)(void);
@@ -219,6 +220,8 @@ void sub_80557F4(void);
 void sub_8055808(u8 *);
 void sub_8055824(void);
 void sub_8055840(u8 *);
+void sub_805585C(void);
+bool32 sub_8055870(void);
 void sub_8055980(u8, s16, s16, u8);
 void sub_80555B0(int, int, struct UnkStruct_8054FF8 *);
 u8 sub_8055AE8(u8);
@@ -2345,4 +2348,79 @@ void sub_805585C(void)
 {
     ScriptContext1_SetupScript(gUnknown_081A44FE);
     ScriptContext2_Enable();
+}
+
+bool32 sub_8055870(void)
+{
+    if (!is_c1_link_related_active())
+        return 0;
+    if (gLink.recvQueue.count >= 3)
+        gUnknown_03000588 = 1;
+    else
+        gUnknown_03000588 = 0;
+    return gUnknown_03000588;
+}
+
+bool32 sub_80558AC(void)
+{
+    u8 temp;
+
+    if (is_c1_link_related_active() != TRUE)
+        return FALSE;
+
+    if (sub_8007B24() != TRUE)
+        return FALSE;
+
+    if (gUnknown_03000584 == sub_8055408)
+        return TRUE;
+
+    if (gUnknown_03000584 != sub_80553E4)
+        return FALSE;
+
+    temp = gUnknown_03000588;
+    gUnknown_03000588 = 0;
+
+    if (temp == TRUE)
+        return TRUE;
+
+    if (gPaletteFade.active && gPaletteFade.softwareFadeFinishing)
+        return TRUE;
+
+    return FALSE;
+}
+
+bool32 sub_8055910(void)
+{
+    if (is_c1_link_related_active() != TRUE)
+        return FALSE;
+
+    if (sub_8007B24() != TRUE)
+        return FALSE;
+
+    if (gUnknown_03000584 == sub_8055438)
+        return TRUE;
+
+    return FALSE;
+}
+
+bool32 sub_8055940(void)
+{
+    if (!sub_8007B24())
+        return FALSE;
+    return TRUE;
+}
+
+void sub_8055954(u32 *a1)
+{
+    *a1 = 0;
+}
+
+void strange_npc_table_clear(void)
+{
+    memset(gUnknown_02029818, 0, 16);
+}
+
+void sub_8055970(void *a1)
+{
+    memset(a1, 0, 36);
 }

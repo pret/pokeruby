@@ -1733,7 +1733,7 @@ gUnknown_081FAF5C:: @ 81FAF5C
 	.4byte sub_80347B8
 	.4byte sub_8034910
 	.4byte sub_8034AE0
-	.4byte c2_8123744
+	.4byte sub_8034BFC
 	.4byte sub_8034DC0
 	.4byte sub_8034F84
 	.4byte sub_8035030
@@ -27114,10 +27114,10 @@ gUnknown_08406288:: @ 8406288
 
 	.align 2
 gUnknown_08406298:: @ 8406298
-	.4byte SecretBaseText_ItemStorage, sub_8139E40
-	.4byte gPCText_Mailbox, sub_8139E6C
-	.4byte SecretBaseText_Decoration, sub_8139ED8
-	.4byte SecretBaseText_TurnOff, sub_8139EF8
+	.4byte SecretBaseText_ItemStorage, PlayerPC_ItemStorage
+	.4byte gPCText_Mailbox, PlayerPC_Mailbox
+	.4byte SecretBaseText_Decoration, PlayerPC_Decoration
+	.4byte SecretBaseText_TurnOff, PlayerPC_TurnOff
 
 gUnknown_084062B8:: @ 84062B8
 	.incbin "baserom.gba", 0x004062b8, 0x4
@@ -27127,10 +27127,10 @@ gUnknown_084062BC:: @ 84062BC
 
 	.align 2
 gUnknown_084062C0:: @ 84062C0
-	.4byte PCText_WithdrawItem, sub_813A118
-	.4byte PCText_DepositItem, sub_813A0A0
-	.4byte PCText_TossItem, sub_813A198
-	.4byte gUnknownText_Exit, sub_813A21C
+	.4byte PCText_WithdrawItem, ItemStorage_Withdraw
+	.4byte PCText_DepositItem, ItemStorage_Deposit
+	.4byte PCText_TossItem, ItemStorage_Toss
+	.4byte gUnknownText_Exit, ItemStorage_Exit
 
 	.align 2
 gUnknown_084062E0:: @ 84062E0
@@ -27149,10 +27149,10 @@ gNewGamePCItems:: @ 84062F0
 
 	.align 2
 gUnknown_084062F8:: @ 84062F8
-	.4byte OtherText_Read, sub_813B428
-	.4byte gOtherText_MoveToBag, sub_813B510
-	.4byte OtherText_Give, sub_813B630
-	.4byte gOtherText_CancelNoTerminator, sub_813B734
+	.4byte OtherText_Read, Mailbox_Read
+	.4byte gOtherText_MoveToBag, Mailbox_MoveToBag
+	.4byte OtherText_Give, Mailbox_Give
+	.4byte gOtherText_CancelNoTerminator, Mailbox_Cancel
 
 gUnknown_08406318:: @ 8406318
 	.string "{STR_VAR_1}{CLEAR_TO 80}$"

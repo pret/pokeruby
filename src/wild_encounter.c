@@ -31,11 +31,11 @@ extern u32 sub_80C8448(void);
 extern s16 sub_810CAE4(u8, u32);
 extern bool32 GetSafariZoneFlag(void);
 extern u8 TestPlayerAvatarFlags(u8);
-extern u8 sub_8057468(u8);
+extern u8 MetatileBehavior_IsLandWildEncounter(u8);
 extern u8 sub_81344CC(void);
-extern u8 sub_8057494(u8);
+extern u8 MetatileBehavior_IsWaterWildEncounter(u8);
 extern void sub_8081A00(void);
-extern u8 sub_8057434(u8);
+extern u8 MetatileBehavior_IsBridge(u8);
 extern void PlayerGetDestCoords(u16 *x, u16 *y);
 extern void sub_80BEA50(u16);
 extern void sav12_xor_increment(u8);
@@ -480,7 +480,7 @@ bool8 StandardWildEncounter(u16 a, u16 b)
 
         if(unk != 0xFFFF)
         {
-            if(sub_8057468(a) == 1)
+            if(MetatileBehavior_IsLandWildEncounter(a) == 1)
             {
                 if(gWildMonHeaders[unk].landMonsInfo)
                 {
@@ -516,7 +516,7 @@ bool8 StandardWildEncounter(u16 a, u16 b)
             else
             {
                 //_080851D8
-                if(sub_8057494(a) == TRUE || TestPlayerAvatarFlags(8) && sub_8057434(a) == TRUE)
+                if(MetatileBehavior_IsWaterWildEncounter(a) == TRUE || TestPlayerAvatarFlags(8) && MetatileBehavior_IsBridge(a) == TRUE)
                 {
                     if(gWildMonHeaders[unk].waterMonsInfo)
                     {
@@ -590,7 +590,7 @@ u8 SweetScentWildEncounter(void)
     //headerNum = GetCurrentMapWildMonHeader();
     if((headerNum = GetCurrentMapWildMonHeader()) != 0xFFFF)
     {
-        if(sub_8057468(MapGridGetMetatileBehaviorAt(x, y)) == 1)
+        if(MetatileBehavior_IsLandWildEncounter(MapGridGetMetatileBehaviorAt(x, y)) == 1)
         {
             wildPokemonInfo = gWildMonHeaders[headerNum].landMonsInfo;
 
@@ -616,7 +616,7 @@ u8 SweetScentWildEncounter(void)
         //_08085380
         else
         {
-            if(sub_8057494(MapGridGetMetatileBehaviorAt(x, y)) == 1)
+            if(MetatileBehavior_IsWaterWildEncounter(MapGridGetMetatileBehaviorAt(x, y)) == 1)
             {
                 wildPokemonInfo = gWildMonHeaders[headerNum].waterMonsInfo;
 

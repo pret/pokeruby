@@ -10339,7 +10339,7 @@ _0808AA80: .4byte gTasks
 _0808AA84: .4byte sub_808AB34
 _0808AA88:
 	adds r0, r5, 0
-	bl unref_sub_8133D28
+	bl sub_8133D28
 	b _0808AADA
 _0808AA90:
 	movs r0, 0x13

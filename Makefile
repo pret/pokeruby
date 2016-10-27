@@ -3,8 +3,8 @@ SHELL := /bin/bash -o pipefail
 AS      := $(DEVKITARM)/bin/arm-none-eabi-as
 ASFLAGS := -mcpu=arm7tdmi
 
-CC1    := tools/agbcc/bin/agbcc
-CFLAGS := -mthumb-interwork -Wimplicit -O2 -g -fhex-asm
+CC1             := tools/agbcc/bin/agbcc
+override CFLAGS += -mthumb-interwork -Wimplicit -O2 -fhex-asm
 
 CPP      := $(DEVKITARM)/bin/arm-none-eabi-cpp
 CPPFLAGS := -I tools/agbcc/include -iquote include -nostdinc -undef
@@ -143,8 +143,8 @@ asm/mystery_event_script.o \
 asm/field_effect_helpers.o \
 asm/contest_ai.o \
 asm/rom_81258BC.o \
+asm/player_pc.o \
 asm/rom_813BA94.o \
-asm/lottery_corner.o \
 asm/berry_tag_screen.o \
 asm/mystery_event_menu.o \
 asm/save_failed_screen.o \

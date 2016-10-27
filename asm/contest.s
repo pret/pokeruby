@@ -2554,7 +2554,7 @@ _080AC77C:
 	bl _080AD8CA
 _080AC790:
 	adds r0, r7, 0
-	bl unref_sub_80B28CC
+	bl sub_80B28CC
 	ldr r1, _080AC7C0 @ =0x02019204
 	adds r0, r1, 0
 	adds r0, 0x5A
@@ -2590,7 +2590,7 @@ _080AC7C8:
 	adds r0, r7, 0
 	bl sub_80B03A8
 _080AC7E2:
-	bl unref_sub_80B20C4
+	bl sub_80B20C4
 	ldr r0, _080AC7F0 @ =gTasks
 	mov r2, r8
 	lsls r1, r2, 2
@@ -14127,8 +14127,8 @@ _080B20BA:
 _080B20C0: .4byte gContestNextTurnRandomGfx
 	thumb_func_end sub_80B208C
 
-	thumb_func_start unref_sub_80B20C4
-unref_sub_80B20C4: @ 80B20C4
+	thumb_func_start sub_80B20C4
+sub_80B20C4: @ 80B20C4
 	push {r4-r7,lr}
 	movs r6, 0
 	ldr r7, _080B2134 @ =0x020192dd
@@ -14190,7 +14190,7 @@ _080B213C: .4byte 0x0600c028
 _080B2140: .4byte 0x0600c02a
 _080B2144: .4byte 0x0600c068
 _080B2148: .4byte 0x0600c06a
-	thumb_func_end unref_sub_80B20C4
+	thumb_func_end sub_80B20C4
 
 	thumb_func_start sub_80B214C
 sub_80B214C: @ 80B214C
@@ -15166,8 +15166,8 @@ _080B28BE:
 _080B28C8: .4byte gUnknown_0202F7C4
 	thumb_func_end sub_80B2790
 
-	thumb_func_start unref_sub_80B28CC
-unref_sub_80B28CC: @ 80B28CC
+	thumb_func_start sub_80B28CC
+sub_80B28CC: @ 80B28CC
 	push {r4,lr}
 	ldr r4, _080B28EC @ =0x02019348
 	adds r0, r4, 0
@@ -15186,7 +15186,7 @@ _080B28E6:
 	bx r0
 	.align 2, 0
 _080B28EC: .4byte 0x02019348
-	thumb_func_end unref_sub_80B28CC
+	thumb_func_end sub_80B28CC
 
 	thumb_func_start sub_80B28F0
 sub_80B28F0: @ 80B28F0

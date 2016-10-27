@@ -81370,8 +81370,8 @@ _08034BF4: .4byte gUnknown_03004330
 _08034BF8: .4byte sub_8033160
 	thumb_func_end sub_8034B74
 
-	thumb_func_start c2_8123744
-c2_8123744: @ 8034BFC
+	thumb_func_start sub_8034BFC
+sub_8034BFC: @ 8034BFC
 	push {r4-r6,lr}
 	mov r6, r9
 	mov r5, r8
@@ -81579,7 +81579,7 @@ _08034DB0: .4byte 0xfffffc00
 _08034DB4: .4byte sub_80313A0
 _08034DB8: .4byte gUnknown_03004330
 _08034DBC: .4byte sub_8032B4C
-	thumb_func_end c2_8123744
+	thumb_func_end sub_8034BFC
 
 	thumb_func_start sub_8034DC0
 sub_8034DC0: @ 8034DC0
