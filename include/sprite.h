@@ -138,46 +138,46 @@ struct Sprite
     struct SubspriteTable *subspriteTables;
     void (*callback)(struct Sprite *);
 
-    struct Coords16 pos1;
-    struct Coords16 pos2;
-    s8 centerToCornerVecX;
-    s8 centerToCornerVecY;
+    /*0x20*/ struct Coords16 pos1;
+    /*0x24*/ struct Coords16 pos2;
+    /*0x28*/ s8 centerToCornerVecX;
+    /*0x29*/ s8 centerToCornerVecY;
 
-    u8 animNum;
-    u8 animCmdIndex;
-    u8 animDelayCounter:6;
-    u8 animPaused:1;
-    u8 affineAnimPaused:1;
-    u8 animLoopCounter;
+    /*0x2A*/ u8 animNum;
+    /*0x2B*/ u8 animCmdIndex;
+    /*0x2C*/ u8 animDelayCounter:6;
+             u8 animPaused:1;
+             u8 affineAnimPaused:1;
+    /*0x2D*/ u8 animLoopCounter;
 
     // general purpose data fields
-    s16 data0;
-    s16 data1;
-    s16 data2;
-    s16 data3;
-    s16 data4;
-    s16 data5;
-    s16 data6;
-    s16 data7;
+    /*0x2E*/ s16 data0;
+    /*0x30*/ s16 data1;
+    /*0x32*/ s16 data2;
+    /*0x34*/ s16 data3;
+    /*0x36*/ s16 data4;
+    /*0x38*/ s16 data5;
+    /*0x3A*/ s16 data6;
+    /*0x3C*/ s16 data7;
 
-    u16 inUse:1;
-    u16 coordOffsetEnabled:1;
-    u16 invisible:1;
-    u16 flags_3:1;
-    u16 flags_4:1;
-    u16 flags_5:1;
-    u16 flags_6:1;
-    u16 flags_7:1;
-    u16 hFlip:1;
-    u16 vFlip:1;
-    u16 animBeginning:1;
-    u16 affineAnimBeginning:1;
-    u16 animEnded:1;
-    u16 affineAnimEnded:1;
-    u16 usingSheet:1;
-    u16 flags_f:1;
+    /*0x3E*/ u16 inUse:1;
+             u16 coordOffsetEnabled:1;
+             u16 invisible:1;
+             u16 flags_3:1;
+             u16 flags_4:1;
+             u16 flags_5:1;
+             u16 flags_6:1;
+             u16 flags_7:1;
+    /*0x3F*/ u16 hFlip:1;
+             u16 vFlip:1;
+             u16 animBeginning:1;
+             u16 affineAnimBeginning:1;
+             u16 animEnded:1;
+             u16 affineAnimEnded:1;
+             u16 usingSheet:1;
+             u16 flags_f:1;
 
-    u16 sheetTileStart;
+    /*0x40*/ u16 sheetTileStart;
 
     u8 subspriteTableNum:6;
     u8 subspriteMode:2;
