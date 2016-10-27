@@ -6,33 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_80C727C
-sub_80C727C: @ 80C727C
-	push {r4,lr}
-	adds r4, r0, 0
-	movs r1, 0x78
-	bl __modsi3
-	cmp r0, 0
-	bne _080C7290
-	movs r0, 0x1
-	negs r0, r0
-	b _080C72A2
-_080C7290:
-	adds r0, r4, 0
-	movs r1, 0xA
-	bl __modsi3
-	cmp r0, 0x4
-	ble _080C72A0
-	movs r0, 0
-	b _080C72A2
-_080C72A0:
-	movs r0, 0x1
-_080C72A2:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80C727C
-
 	thumb_func_start sub_80C72A8
 sub_80C72A8: @ 80C72A8
 	push {lr}
@@ -115,7 +88,7 @@ sub_80C72C4: @ 80C72C4
 _080C7346:
 	movs r3, 0
 	ldrsh r0, [r5, r3]
-	bl sub_80C727C
+	bl GetTruckCameraBobbingY
 	adds r1, r0, 0
 	lsls r1, 16
 	asrs r1, 16
@@ -192,7 +165,7 @@ _080C73D4:
 	lsrs r5, 16
 	movs r1, 0x4
 	ldrsh r0, [r7, r1]
-	bl sub_80C727C
+	bl GetTruckCameraBobbingY
 	adds r1, r0, 0
 	lsls r5, 16
 	asrs r5, 16
