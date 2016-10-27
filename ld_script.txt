@@ -170,6 +170,7 @@ SECTIONS {
         asm/field_effect_helpers.o(.text);
         asm/contest_ai.o(.text);
         asm/rom_81258BC.o(.text);
+        asm/player_pc.o(.text);
         src/intro.o(.text);
         asm/rom_813BA94.o(.text);
         src/lottery_corner.o(.text);

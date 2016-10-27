@@ -143,6 +143,7 @@ asm/mystery_event_script.o \
 asm/field_effect_helpers.o \
 asm/contest_ai.o \
 asm/rom_81258BC.o \
+asm/player_pc.o \
 asm/rom_813BA94.o \
 asm/berry_tag_screen.o \
 asm/mystery_event_menu.o \
