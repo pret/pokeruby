@@ -6,262 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_80C727C
-sub_80C727C: @ 80C727C
-	push {r4,lr}
-	adds r4, r0, 0
-	movs r1, 0x78
-	bl __modsi3
-	cmp r0, 0
-	bne _080C7290
-	movs r0, 0x1
-	negs r0, r0
-	b _080C72A2
-_080C7290:
-	adds r0, r4, 0
-	movs r1, 0xA
-	bl __modsi3
-	cmp r0, 0x4
-	ble _080C72A0
-	movs r0, 0
-	b _080C72A2
-_080C72A0:
-	movs r0, 0x1
-_080C72A2:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80C727C
-
-	thumb_func_start sub_80C72A8
-sub_80C72A8: @ 80C72A8
-	push {lr}
-	adds r0, 0x78
-	movs r1, 0xB4
-	bl __modsi3
-	cmp r0, 0
-	beq _080C72BA
-	movs r0, 0
-	b _080C72BE
-_080C72BA:
-	movs r0, 0x1
-	negs r0, r0
-_080C72BE:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80C72A8
-
-	thumb_func_start sub_80C72C4
-sub_80C72C4: @ 80C72C4
-	push {r4,r5,lr}
-	sub sp, 0x4
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	ldr r0, _080C7364 @ =gTasks + 0x8
-	adds r5, r1, r0
-	movs r1, 0
-	ldrsh r0, [r5, r1]
-	adds r0, 0x1E
-	bl sub_80C72A8
-	ldr r4, _080C7368 @ =gSaveBlock1
-	ldrb r1, [r4, 0x5]
-	ldrb r2, [r4, 0x4]
-	lsls r0, 18
-	movs r3, 0xC0
-	lsls r3, 10
-	orrs r0, r3
-	asrs r0, 16
-	str r0, [sp]
-	movs r0, 0x1
-	movs r3, 0x3
-	bl sub_805BD90
-	movs r3, 0
-	ldrsh r0, [r5, r3]
-	bl sub_80C72A8
-	ldrb r1, [r4, 0x5]
-	ldrb r2, [r4, 0x4]
-	lsls r0, 17
-	ldr r3, _080C736C @ =0xfffd0000
-	adds r0, r3
-	asrs r0, 16
-	str r0, [sp]
-	movs r0, 0x2
-	movs r3, 0
-	bl sub_805BD90
-	movs r1, 0
-	ldrsh r0, [r5, r1]
-	bl sub_80C72A8
-	ldrb r1, [r4, 0x5]
-	ldrb r2, [r4, 0x4]
-	movs r4, 0
-	movs r3, 0x3
-	negs r3, r3
-	lsls r0, 18
-	asrs r0, 16
-	str r0, [sp]
-	movs r0, 0x3
-	bl sub_805BD90
-	ldrh r0, [r5]
-	adds r0, 0x1
-	strh r0, [r5]
-	lsls r0, 16
-	ldr r1, _080C7370 @ =0x75300000
-	cmp r0, r1
-	bne _080C7346
-	strh r4, [r5]
-_080C7346:
-	movs r3, 0
-	ldrsh r0, [r5, r3]
-	bl sub_80C727C
-	adds r1, r0, 0
-	lsls r1, 16
-	asrs r1, 16
-	movs r0, 0
-	bl SetCameraPanning
-	add sp, 0x4
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080C7364: .4byte gTasks + 0x8
-_080C7368: .4byte gSaveBlock1
-_080C736C: .4byte 0xfffd0000
-_080C7370: .4byte 0x75300000
-	thumb_func_end sub_80C72C4
-
-	thumb_func_start sub_80C7374
-sub_80C7374: @ 80C7374
-	push {r4-r7,lr}
-	sub sp, 0x4
-	lsls r0, 24
-	lsrs r2, r0, 24
-	lsls r0, r2, 2
-	adds r0, r2
-	lsls r3, r0, 3
-	ldr r4, _080C73B4 @ =gTasks + 0x8
-	adds r7, r3, r4
-	ldrh r1, [r7]
-	adds r1, 0x1
-	strh r1, [r7]
-	ldrh r0, [r7, 0x4]
-	adds r0, 0x1
-	strh r0, [r7, 0x4]
-	lsls r1, 16
-	asrs r1, 16
-	cmp r1, 0x5
-	ble _080C73A4
-	movs r0, 0
-	strh r0, [r7]
-	ldrh r0, [r7, 0x2]
-	adds r0, 0x1
-	strh r0, [r7, 0x2]
-_080C73A4:
-	ldrh r0, [r7, 0x2]
-	cmp r0, 0x13
-	bne _080C73B8
-	adds r0, r2, 0
-	bl DestroyTask
-	b _080C746A
-	.align 2, 0
-_080C73B4: .4byte gTasks + 0x8
-_080C73B8:
-	ldr r2, _080C7474 @ =gUnknown_083D294C
-	movs r1, 0x2
-	ldrsh r0, [r7, r1]
-	adds r0, r2
-	ldrb r0, [r0]
-	lsls r0, 24
-	asrs r0, 24
-	cmp r0, 0x2
-	bne _080C73D4
-	adds r0, r4, 0
-	subs r0, 0x8
-	adds r0, r3, r0
-	ldr r1, _080C7478 @ =sub_80C7484
-	str r1, [r0]
-_080C73D4:
-	movs r4, 0x2
-	ldrsh r0, [r7, r4]
-	adds r0, r2
-	movs r5, 0
-	ldrsb r5, [r0, r5]
-	lsls r5, 16
-	lsrs r5, 16
-	movs r1, 0x4
-	ldrsh r0, [r7, r1]
-	bl sub_80C727C
-	adds r1, r0, 0
-	lsls r5, 16
-	asrs r5, 16
-	lsls r1, 16
-	asrs r1, 16
-	adds r0, r5, 0
-	bl SetCameraPanning
-	movs r4, 0x4
-	ldrsh r0, [r7, r4]
-	adds r0, 0x1E
-	bl sub_80C72A8
-	ldr r6, _080C747C @ =gSaveBlock1
-	ldrb r1, [r6, 0x5]
-	ldrb r2, [r6, 0x4]
-	movs r3, 0x3
-	subs r3, r5
-	lsls r3, 16
-	asrs r3, 16
-	lsls r0, 18
-	movs r4, 0xC0
-	lsls r4, 10
-	orrs r0, r4
-	asrs r0, 16
-	str r0, [sp]
-	movs r0, 0x1
-	bl sub_805BD90
-	movs r1, 0x4
-	ldrsh r0, [r7, r1]
-	bl sub_80C72A8
-	ldrb r1, [r6, 0x5]
-	ldrb r2, [r6, 0x4]
-	negs r3, r5
-	lsls r3, 16
-	asrs r3, 16
-	lsls r0, 17
-	ldr r4, _080C7480 @ =0xfffd0000
-	adds r0, r4
-	asrs r0, 16
-	str r0, [sp]
-	movs r0, 0x2
-	bl sub_805BD90
-	movs r1, 0x4
-	ldrsh r0, [r7, r1]
-	bl sub_80C72A8
-	ldrb r1, [r6, 0x5]
-	ldrb r2, [r6, 0x4]
-	movs r4, 0x3
-	negs r4, r4
-	adds r3, r4, 0
-	subs r3, r5
-	lsls r3, 16
-	asrs r3, 16
-	lsls r0, 18
-	asrs r0, 16
-	str r0, [sp]
-	movs r0, 0x3
-	bl sub_805BD90
-_080C746A:
-	add sp, 0x4
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080C7474: .4byte gUnknown_083D294C
-_080C7478: .4byte sub_80C7484
-_080C747C: .4byte gSaveBlock1
-_080C7480: .4byte 0xfffd0000
-	thumb_func_end sub_80C7374
-
 	thumb_func_start sub_80C7484
 sub_80C7484: @ 80C7484
 	push {r4-r6,lr}
@@ -298,7 +42,7 @@ _080C74B4:
 	.align 2, 0
 _080C74C4: .4byte gTasks + 0x8
 _080C74C8:
-	ldr r1, _080C7524 @ =gUnknown_083D294C
+	ldr r1, _080C7524 @ =gTruckCamera_HorizontalTable
 	movs r3, 0x2
 	ldrsh r0, [r2, r3]
 	adds r0, r1
@@ -341,7 +85,7 @@ _080C7516:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080C7524: .4byte gUnknown_083D294C
+_080C7524: .4byte gTruckCamera_HorizontalTable
 _080C7528: .4byte gSaveBlock1
 	thumb_func_end sub_80C7484
 
@@ -391,7 +135,7 @@ _080C7580:
 	bl SetCameraPanningCallback
 	movs r0, 0
 	strh r0, [r4, 0x2]
-	ldr r0, _080C75A4 @ =sub_80C72C4
+	ldr r0, _080C75A4 @ =Task_Truck1
 	movs r1, 0xA
 	bl CreateTask
 	lsls r0, 24
@@ -403,7 +147,7 @@ _080C7580:
 	bl PlaySE
 	b _080C7698
 	.align 2, 0
-_080C75A4: .4byte sub_80C72C4
+_080C75A4: .4byte Task_Truck1
 _080C75A8:
 	ldrh r0, [r4, 0x2]
 	adds r0, 0x1
@@ -438,7 +182,7 @@ _080C75C4:
 	strh r2, [r4, 0x2]
 	ldrb r0, [r4, 0x4]
 	bl DestroyTask
-	ldr r0, _080C760C @ =sub_80C7374
+	ldr r0, _080C760C @ =Task_Truck2
 	movs r1, 0xA
 	bl CreateTask
 	lsls r0, 24
@@ -451,7 +195,7 @@ _080C75C4:
 	b _080C7698
 	.align 2, 0
 _080C7608: .4byte gPaletteFade
-_080C760C: .4byte sub_80C7374
+_080C760C: .4byte Task_Truck2
 _080C7610:
 	ldr r2, _080C7630 @ =gTasks
 	movs r0, 0x6
