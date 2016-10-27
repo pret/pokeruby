@@ -3,8 +3,8 @@ SHELL := /bin/bash -o pipefail
 AS      := $(DEVKITARM)/bin/arm-none-eabi-as
 ASFLAGS := -mcpu=arm7tdmi
 
-CC1    := tools/agbcc/bin/agbcc
-CFLAGS := -mthumb-interwork -Wimplicit -O2 -g -fhex-asm
+CC1             := tools/agbcc/bin/agbcc
+override CFLAGS += -mthumb-interwork -Wimplicit -O2 -fhex-asm
 
 CPP      := $(DEVKITARM)/bin/arm-none-eabi-cpp
 CPPFLAGS := -I tools/agbcc/include -iquote include -nostdinc -undef
