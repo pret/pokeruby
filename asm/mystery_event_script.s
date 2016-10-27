@@ -45,8 +45,8 @@ _081260C8:
 	thumb_func_start sub_81260D0
 sub_81260D0: @ 81260D0
 	push {lr}
-	ldr r0, _081260E4
-	ldr r1, _081260E8
+	ldr r0, _081260E4 @ =gStringVar4
+	ldr r1, _081260E8 @ =gOtherText_DataCannotUseVersion
 	bl StringExpandPlaceholders
 	movs r0, 0x3
 	bl sub_8126160
@@ -62,8 +62,8 @@ sub_81260EC: @ 81260EC
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
-	ldr r1, _08126114
-	ldr r2, _08126118
+	ldr r1, _08126114 @ =gScriptFuncs
+	ldr r2, _08126118 @ =gScriptFuncs_End
 	bl InitScriptContext
 	adds r0, r4, 0
 	adds r1, r5, 0
@@ -106,7 +106,7 @@ _08126136:
 sub_812613C: @ 812613C
 	push {r4,lr}
 	adds r1, r0, 0
-	ldr r4, _0812615C
+	ldr r4, _0812615C @ =gUnknown_02039288
 	adds r0, r4, 0
 	bl sub_81260EC
 _08126148:
@@ -124,7 +124,7 @@ _0812615C: .4byte gUnknown_02039288
 
 	thumb_func_start sub_8126160
 sub_8126160: @ 8126160
-	ldr r1, _08126168
+	ldr r1, _08126168 @ =gUnknown_02039288
 	str r0, [r1, 0x6C]
 	bx lr
 	.align 2, 0
@@ -277,7 +277,7 @@ _08126262:
 sub_8126268: @ 8126268
 	push {lr}
 	movs r2, 0
-	ldr r3, _08126284
+	ldr r3, _08126284 @ =gSaveBlock1 + 0x3A80
 	movs r1, 0
 _08126270:
 	adds r0, r3, r1
@@ -296,7 +296,7 @@ _08126284: .4byte gSaveBlock1 + 0x3A80
 	thumb_func_start sub_8126288
 sub_8126288: @ 8126288
 	push {r4,lr}
-	ldr r4, _081262B4
+	ldr r4, _081262B4 @ =gSaveBlock1 + 0x3A80
 	bl sub_8126268
 	adds r1, r0, 0
 	ldrb r0, [r4]
@@ -334,8 +334,8 @@ sub_81262C0: @ 81262C0
 	mov r1, sp
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, _081262DC
-	ldr r2, _081262E0
+	ldr r1, _081262DC @ =gSaveBlock1 + 0x3A7C
+	ldr r2, _081262E0 @ =0x01000008
 	mov r0, sp
 	bl CpuSet
 	add sp, 0x4
@@ -368,7 +368,7 @@ _08126304:
 	bl sub_81262C0
 	b _0812632A
 _0812630A:
-	ldr r4, _08126330
+	ldr r4, _08126330 @ =gSaveBlock1
 	movs r1, 0xEA
 	lsls r1, 6
 	adds r0, r4, r1
@@ -380,7 +380,7 @@ _0812630A:
 	adds r0, r4, r1
 	strh r6, [r0]
 	bl sub_8126268
-	ldr r1, _08126334
+	ldr r1, _08126334 @ =0x00003a7c
 	adds r4, r1
 	str r0, [r4]
 _0812632A:
@@ -395,7 +395,7 @@ _08126334: .4byte 0x00003a7c
 	thumb_func_start sub_8126338
 sub_8126338: @ 8126338
 	push {r4,r5,lr}
-	ldr r4, _0812634C
+	ldr r4, _0812634C @ =gSaveBlock1 + 0x3A80
 	bl sub_8126288
 	cmp r0, 0
 	bne _08126350
@@ -511,7 +511,7 @@ sub_81263E4: @ 81263E4
 	cmp r5, r0
 	bne _0812640E
 _08126408:
-	ldr r0, _08126418
+	ldr r0, _08126418 @ =gStringVar4
 	bl StringExpandPlaceholders
 _0812640E:
 	movs r0, 0
@@ -553,15 +553,15 @@ sub_8126438: @ 8126438
 	subs r4, r0
 	ldr r0, [r7, 0x64]
 	adds r4, r0
-	ldr r6, _08126484
-	ldr r5, _08126488
+	ldr r6, _08126484 @ =gStringVar1
+	ldr r5, _08126488 @ =gSaveBlock1 + 0x3160
 	adds r0, r6, 0
 	adds r1, r5, 0
 	movs r2, 0x7
 	bl StringCopyN
 	adds r0, r4, 0
 	bl sub_80B48A8
-	ldr r4, _0812648C
+	ldr r4, _0812648C @ =gStringVar2
 	adds r0, r4, 0
 	adds r1, r5, 0
 	movs r2, 0x7
@@ -569,8 +569,8 @@ sub_8126438: @ 8126438
 	mov r0, r8
 	cmp r0, 0
 	bne _08126498
-	ldr r0, _08126490
-	ldr r1, _08126494
+	ldr r0, _08126490 @ =gStringVar4
+	ldr r1, _08126494 @ =gOtherText_BerryObtainedDadHasIt
 	b _081264B8
 	.align 2, 0
 _08126484: .4byte gStringVar1
@@ -584,15 +584,15 @@ _08126498:
 	bl StringCompare
 	cmp r0, 0
 	beq _081264B4
-	ldr r0, _081264AC
-	ldr r1, _081264B0
+	ldr r0, _081264AC @ =gStringVar4
+	ldr r1, _081264B0 @ =gOtherText_BerryTransformed
 	b _081264B8
 	.align 2, 0
 _081264AC: .4byte gStringVar4
 _081264B0: .4byte gOtherText_BerryTransformed
 _081264B4:
-	ldr r0, _081264D4
-	ldr r1, _081264D8
+	ldr r0, _081264D4 @ =gStringVar4
+	ldr r1, _081264D8 @ =gOtherText_BerryAlreadyObtained
 _081264B8:
 	bl StringExpandPlaceholders
 	movs r0, 0x2
@@ -600,7 +600,7 @@ _081264B8:
 	bl sub_80B4940
 	cmp r0, 0x1
 	bne _081264E0
-	ldr r0, _081264DC
+	ldr r0, _081264DC @ =0x0000402d
 	movs r1, 0x1
 	bl VarSet
 	b _081264E4
@@ -631,9 +631,9 @@ sub_81264F0: @ 81264F0
 	ldrb r1, [r2]
 	adds r2, 0x1
 	str r2, [r4, 0x8]
-	bl sub_80C5C38
-	ldr r0, _0812651C
-	ldr r1, _08126520
+	bl GiveSpecialRibbonToParty
+	ldr r0, _0812651C @ =gStringVar4
+	ldr r1, _08126520 @ =gOtherText_SpecialRibbonReceived
 	bl StringExpandPlaceholders
 	movs r0, 0x2
 	str r0, [r4, 0x6C]
@@ -703,8 +703,8 @@ sub_812658C: @ 812658C
 	push {r4,lr}
 	adds r4, r0, 0
 	bl sub_80690F0
-	ldr r0, _081265A8
-	ldr r1, _081265AC
+	ldr r0, _081265A8 @ =gStringVar4
+	ldr r1, _081265AC @ =gOtherText_DexUpgraded
 	bl StringExpandPlaceholders
 	movs r0, 0x2
 	str r0, [r4, 0x6C]
@@ -726,8 +726,8 @@ sub_81265B0: @ 81265B0
 	adds r1, 0x1
 	str r1, [r4, 0x8]
 	bl sub_80EB890
-	ldr r0, _081265D4
-	ldr r1, _081265D8
+	ldr r0, _081265D4 @ =gStringVar4
+	ldr r1, _081265D8 @ =gOtherText_RareWordAdded
 	bl StringExpandPlaceholders
 	movs r0, 0x2
 	str r0, [r4, 0x6C]
@@ -792,8 +792,8 @@ sub_8126608: @ 8126608
 	lsls r0, 1
 	cmp r4, r0
 	bne _08126658
-	ldr r0, _08126650
-	ldr r1, _08126654
+	ldr r0, _08126650 @ =gStringVar1
+	ldr r1, _08126654 @ =gSystemText_Egg
 	movs r2, 0xB
 	bl StringCopyN
 	b _08126662
@@ -801,17 +801,17 @@ sub_8126608: @ 8126608
 _08126650: .4byte gStringVar1
 _08126654: .4byte gSystemText_Egg
 _08126658:
-	ldr r0, _08126678
-	ldr r1, _0812667C
+	ldr r0, _08126678 @ =gStringVar1
+	ldr r1, _0812667C @ =gSystemText_Pokemon2
 	movs r2, 0xB
 	bl StringCopyN
 _08126662:
-	ldr r0, _08126680
+	ldr r0, _08126680 @ =gPlayerPartyCount
 	ldrb r0, [r0]
 	cmp r0, 0x6
 	bne _0812668C
-	ldr r0, _08126684
-	ldr r1, _08126688
+	ldr r0, _08126684 @ =gStringVar4
+	ldr r1, _08126688 @ =gOtherText_PartyIsFull
 	bl StringExpandPlaceholders
 	movs r0, 0x3
 	b _081266F6
@@ -822,7 +822,7 @@ _08126680: .4byte gPlayerPartyCount
 _08126684: .4byte gStringVar4
 _08126688: .4byte gOtherText_PartyIsFull
 _0812668C:
-	ldr r7, _08126708
+	ldr r7, _08126708 @ =gUnknown_03004554
 	adds r0, r7, 0
 	adds r1, r5, 0
 	movs r2, 0x64
@@ -862,8 +862,8 @@ _081266C6:
 _081266E4:
 	bl party_compaction
 	bl CalculatePlayerPartyCount
-	ldr r0, _0812670C
-	ldr r1, _08126710
+	ldr r0, _0812670C @ =gStringVar4
+	ldr r1, _08126710 @ =gOtherText_PokeWasSentOver
 	bl StringExpandPlaceholders
 	movs r0, 0x2
 _081266F6:
@@ -891,12 +891,12 @@ sub_8126714: @ 8126714
 	subs r1, r0
 	ldr r0, [r4, 0x64]
 	adds r1, r0
-	ldr r0, _08126748
+	ldr r0, _08126748 @ =gSaveBlock2 + 0x498
 	movs r2, 0xBC
 	bl memcpy
 	bl sub_813601C
-	ldr r0, _0812674C
-	ldr r1, _08126750
+	ldr r0, _0812674C @ =gStringVar4
+	ldr r1, _08126750 @ =gOtherText_NewTrainerInHoenn
 	bl StringExpandPlaceholders
 	movs r0, 0x2
 	str r0, [r4, 0x6C]
@@ -915,8 +915,8 @@ sub_8126754: @ 8126754
 	push {r4,lr}
 	adds r4, r0, 0
 	bl sub_80691BC
-	ldr r0, _08126770
-	ldr r1, _08126774
+	ldr r0, _08126770 @ =gStringVar4
+	ldr r1, _08126774 @ =gSystemText_ClockAdjustmentUsable
 	bl StringExpandPlaceholders
 	movs r0, 0x2
 	str r0, [r4, 0x6C]

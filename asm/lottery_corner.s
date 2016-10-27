@@ -13,7 +13,7 @@ sub_8145B00: @ 8145B00
 	mov r6, r9
 	mov r5, r8
 	push {r5-r7}
-	ldr r1, _08145C24
+	ldr r1, _08145C24 @ =gUnknown_0202E8CC
 	movs r0, 0
 	strh r0, [r1]
 	movs r0, 0
@@ -24,7 +24,7 @@ _08145B18:
 	movs r0, 0x64
 	adds r1, r6, 0
 	muls r1, r0
-	ldr r0, _08145C28
+	ldr r0, _08145C28 @ =gPlayerParty
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0xB
@@ -40,14 +40,14 @@ _08145B18:
 	movs r1, 0x1
 	bl GetMonData
 	adds r1, r0, 0
-	ldr r0, _08145C2C
+	ldr r0, _08145C2C @ =gScriptResult
 	ldrh r0, [r0]
 	lsls r1, 16
 	lsrs r1, 16
 	bl sub_8145C8C
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _08145C24
+	ldr r1, _08145C24 @ =gUnknown_0202E8CC
 	ldrh r2, [r1]
 	cmp r0, r2
 	bls _08145B6A
@@ -79,7 +79,7 @@ _08145B80:
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 4
-	ldr r1, _08145C30
+	ldr r1, _08145C30 @ =gUnknown_020300A4
 	adds r0, r1
 	adds r4, r2, r0
 	adds r0, r4, 0
@@ -96,14 +96,14 @@ _08145B80:
 	movs r1, 0x1
 	bl GetBoxMonData
 	adds r1, r0, 0
-	ldr r0, _08145C2C
+	ldr r0, _08145C2C @ =gScriptResult
 	ldrh r0, [r0]
 	lsls r1, 16
 	lsrs r1, 16
 	bl sub_8145C8C
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _08145C24
+	ldr r1, _08145C24 @ =gUnknown_0202E8CC
 	ldrh r2, [r1]
 	cmp r0, r2
 	bls _08145BD8
@@ -124,12 +124,12 @@ _08145BD8:
 	lsrs r6, r0, 16
 	cmp r6, 0xD
 	bls _08145B76
-	ldr r3, _08145C24
+	ldr r3, _08145C24 @ =gUnknown_0202E8CC
 	ldrh r0, [r3]
 	cmp r0, 0
 	beq _08145C72
-	ldr r2, _08145C34
-	ldr r1, _08145C38
+	ldr r2, _08145C34 @ =gUnknown_0202E8CE
+	ldr r1, _08145C38 @ =gUnknown_0840CB04
 	subs r0, 0x1
 	lsls r0, 1
 	adds r0, r1
@@ -138,16 +138,16 @@ _08145BD8:
 	mov r2, r9
 	cmp r2, 0xE
 	bne _08145C44
-	ldr r1, _08145C3C
+	ldr r1, _08145C3C @ =gUnknown_0202E8D0
 	movs r0, 0
 	strh r0, [r1]
 	movs r0, 0x64
 	mov r1, r10
 	muls r1, r0
 	adds r0, r1, 0
-	ldr r1, _08145C28
+	ldr r1, _08145C28 @ =gPlayerParty
 	adds r0, r1
-	ldr r2, _08145C40
+	ldr r2, _08145C40 @ =gStringVar1
 	movs r1, 0x2
 	bl GetMonData
 	b _08145C6C
@@ -161,7 +161,7 @@ _08145C38: .4byte gUnknown_0840CB04
 _08145C3C: .4byte gUnknown_0202E8D0
 _08145C40: .4byte gStringVar1
 _08145C44:
-	ldr r1, _08145C80
+	ldr r1, _08145C80 @ =gUnknown_0202E8D0
 	movs r0, 0x1
 	strh r0, [r1]
 	mov r2, r9
@@ -174,14 +174,14 @@ _08145C44:
 	lsls r1, r2, 2
 	add r1, r10
 	lsls r1, 4
-	ldr r2, _08145C84
+	ldr r2, _08145C84 @ =gUnknown_020300A4
 	adds r1, r2
 	adds r0, r1
-	ldr r2, _08145C88
+	ldr r2, _08145C88 @ =gStringVar1
 	movs r1, 0x2
 	bl GetBoxMonData
 _08145C6C:
-	ldr r0, _08145C88
+	ldr r0, _08145C88 @ =gStringVar1
 	bl StringGetEnd10
 _08145C72:
 	pop {r3-r5}
@@ -211,9 +211,9 @@ sub_8145C8C: @ 8145C8C
 	movs r0, 0
 	mov r8, r0
 	movs r7, 0
-	ldr r1, _08145D0C
+	ldr r1, _08145D0C @ =gUnknown_02039328
 	mov r10, r1
-	ldr r0, _08145D10
+	ldr r0, _08145D10 @ =gUnknown_0203932A
 	mov r9, r0
 _08145CAC:
 	adds r0, r6, 0
@@ -272,9 +272,9 @@ sub_8145D14: @ 8145D14
 	lsrs r4, r1, 16
 	lsls r1, 16
 	lsrs r1, 16
-	ldr r0, _08145D34
+	ldr r0, _08145D34 @ =0x0000404b
 	bl VarSet
-	ldr r0, _08145D38
+	ldr r0, _08145D38 @ =0x0000404c
 	adds r1, r4, 0
 	bl VarSet
 	pop {r4}
@@ -288,12 +288,12 @@ _08145D38: .4byte 0x0000404c
 	thumb_func_start sub_8145D3C
 sub_8145D3C: @ 8145D3C
 	push {r4,lr}
-	ldr r0, _08145D5C
+	ldr r0, _08145D5C @ =0x0000404b
 	bl VarGet
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
-	ldr r0, _08145D60
+	ldr r0, _08145D60 @ =0x0000404c
 	bl VarGet
 	lsls r0, 16
 	orrs r0, r4

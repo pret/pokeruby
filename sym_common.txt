@@ -218,11 +218,7 @@ gUnknown_03004B00: @ 3004B00
 gUnknown_03004B10: @ 3004B10
 	.space 0x10
 
-gTasks: @ 3004B20
-	.space 0x8
-
-gUnknown_03004B28: @ 3004B28
-	.space 0x278
+	.include "task.o"
 
 gUnknown_03004DA0: @ 3004DA0
 	.space 0x20

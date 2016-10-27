@@ -81,8 +81,8 @@ extern u8 gUnknown_0839F73C[];
 extern void m4aMPlayVolumeControl(struct MusicPlayerInfo *mplayInfo, u16 trackBits, u16 volume);
 extern bool8 BeginNormalPaletteFade(u32, s8, u8, u8, u16);
 extern void remove_some_task(void);
-extern bool32 sub_806912C(void);
-extern u16 pokedex_count(u8);
+extern bool32 IsNationalPokedex(void);
+extern u16 GetNationalPokedexCount(u8);
 extern u8 sub_8091E3C(void);
 extern void sub_80690C8(void);
 extern void sub_805469C(void);
@@ -120,7 +120,7 @@ void sub_808F284(struct PokedexListItem *, u8);
 bool8 sub_808F250(u8);
 bool8 sub_808E71C(void);
 void sub_808CCC4(u8 taskId);
-u16 sub_8090F68(u8);
+u16 GetHoennPokedexCount(u8);
 void sub_808D690(u8, u8);
 void Task_PokedexResultsScreen(u8 taskId);
 void sub_808D118(u8 taskId);
@@ -290,22 +290,22 @@ void CB2_InitPokedex(void)
             ClearPokedexView(gUnknown_0202FFB4);
             CreateTask(Task_PokedexShowMainScreen, 0);
             gUnknown_0202FFB4->unk612 = gSaveBlock2.pokedex.unknown1;
-            if(!sub_806912C())
+            if(!IsNationalPokedex())
                 gUnknown_0202FFB4->unk612 = 0;
             gUnknown_0202FFB4->unk616 = gSaveBlock2.pokedex.order;
             gUnknown_0202FFB4->unk60E = gUnknown_0202FFB8;
             gUnknown_0202FFB4->unk62C = gUnknown_0202FFBA;
             gUnknown_0202FFB4->unk64D = 0;
             gUnknown_0202FFB4->unk64E = 0;
-            if(!sub_806912C())
+            if(!IsNationalPokedex())
             {
-                gUnknown_0202FFB4->unk61A = sub_8090F68(0);
-                gUnknown_0202FFB4->unk61C = sub_8090F68(1);
+                gUnknown_0202FFB4->unk61A = GetHoennPokedexCount(0);
+                gUnknown_0202FFB4->unk61C = GetHoennPokedexCount(1);
             }
             else
             {
-                gUnknown_0202FFB4->unk61A = pokedex_count(0);
-                gUnknown_0202FFB4->unk61C = pokedex_count(1);
+                gUnknown_0202FFB4->unk61A = GetNationalPokedexCount(0);
+                gUnknown_0202FFB4->unk61C = GetNationalPokedexCount(1);
             }
             gUnknown_0202FFB4->unk62D = 8;
             gMain.state++;
@@ -542,7 +542,7 @@ void sub_808CB8C(u8 taskId)
             gUnknown_0202FFB4->unk62C = gUnknown_0202FFB4->unk62A;
             gUnknown_0202FFB4->unk60E = gUnknown_0202FFB4->unk610;
             gUnknown_0202FFB4->unk612 = gUnknown_0202FFB4->unk614;
-            if(!sub_806912C())
+            if(!IsNationalPokedex())
                 gUnknown_0202FFB4->unk612 = 0;
             gUnknown_0202FFB4->unk616 = gUnknown_0202FFB4->unk618;
             gTasks[taskId].func = Task_PokedexShowMainScreen;
@@ -555,7 +555,7 @@ void Task_ClosePokedex(u8 taskId)
     if(!gPaletteFade.active)
     {
         gSaveBlock2.pokedex.unknown1 = gUnknown_0202FFB4->unk612;
-        if(!sub_806912C())
+        if(!IsNationalPokedex())
             gSaveBlock2.pokedex.unknown1 = 0;
         gSaveBlock2.pokedex.order = gUnknown_0202FFB4->unk616;
         DestroyTask(taskId);
@@ -726,7 +726,7 @@ void Task_PokedexResultsScreenReturnToMainScreen(u8 taskId)
         gUnknown_0202FFB4->unk62C = gUnknown_0202FFB4->unk62A;
         gUnknown_0202FFB4->unk60E = gUnknown_0202FFB4->unk610;
         gUnknown_0202FFB4->unk612 = gUnknown_0202FFB4->unk614;
-        if(!sub_806912C())
+        if(!IsNationalPokedex())
             gUnknown_0202FFB4->unk612 = 0;
         gUnknown_0202FFB4->unk616 = gUnknown_0202FFB4->unk618;
         gTasks[taskId].func = Task_PokedexShowMainScreen;
@@ -740,7 +740,7 @@ void Task_PokedexResultsScreenExitPokedex(u8 taskId)
         gUnknown_0202FFB4->unk62C = gUnknown_0202FFB4->unk62A;
         gUnknown_0202FFB4->unk60E = gUnknown_0202FFB4->unk610;
         gUnknown_0202FFB4->unk612 = gUnknown_0202FFB4->unk614;
-        if(!sub_806912C())
+        if(!IsNationalPokedex())
             gUnknown_0202FFB4->unk612 = 0;
         gUnknown_0202FFB4->unk616 = gUnknown_0202FFB4->unk618;
         gTasks[taskId].func = Task_ClosePokedex;
@@ -837,7 +837,7 @@ void sub_808D640(void)
 {
     if(gUnknown_0202FFB4->unk64C_1)
         LoadPalette(gUnknown_0839F67C + 0x2, 1, 0xBE);
-    else if(!sub_806912C())
+    else if(!IsNationalPokedex())
         LoadPalette(gPokedexMenu_Pal + 0x2, 1, 0xBE);
     else
         LoadPalette(gUnknown_0839F73C + 0x2, 1, 0xBE);
@@ -859,7 +859,7 @@ void sub_808D690(u8 a, u8 mode)
             vars[1] = 1;
             break;
         case 1:
-            if(sub_806912C())
+            if(IsNationalPokedex())
             {
                 vars[0] = 386;
                 vars[1] = 0;
@@ -1139,7 +1139,7 @@ u8 sub_808DFE4(u16 a, u8 b, u8 c)
         for(i = 0; i < 10; i++)
             text[i] = 0xAE;
     }
-    sub_80729D8(text, (b - 0x11) * 8 + 0xFC, c * 8, 0);
+    MenuPrint_PixelCoords(text, (b - 0x11) * 8 + 0xFC, c * 8, 0);
 }
 #else
 __attribute__((naked))
@@ -1228,7 +1228,7 @@ _0808E070:\n\
     lsrs r2, r6, 16\n\
     mov r0, sp\n\
     movs r3, 0\n\
-    bl sub_80729D8\n\
+    bl MenuPrint_PixelCoords\n\
     adds r0, r4, 0\n\
     add sp, 0xC\n\
     pop {r4-r6}\n\
