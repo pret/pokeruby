@@ -18285,8 +18285,8 @@ _08133D1E:
 	bx r1
 	thumb_func_end SetUpFieldMove_SoftBoiled
 
-	thumb_func_start unref_sub_8133D28
-unref_sub_8133D28: @ 8133D28
+	thumb_func_start sub_8133D28
+sub_8133D28: @ 8133D28
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -18304,7 +18304,7 @@ unref_sub_8133D28: @ 8133D28
 _08133D44: .4byte 0x02001000
 _08133D48: .4byte sub_8133D50
 _08133D4C: .4byte 0x0001a272
-	thumb_func_end unref_sub_8133D28
+	thumb_func_end sub_8133D28
 
 	thumb_func_start sub_8133D50
 sub_8133D50: @ 8133D50
