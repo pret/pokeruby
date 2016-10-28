@@ -18,13 +18,10 @@ LIBGCC := tools/agbcc/lib/libgcc.a
 SHA1 := sha1sum -c
 
 GFX := tools/gbagfx/gbagfx
-
 AIF := tools/aif2pcm/aif2pcm
-
+MID := tools/mid2agb/mid2agb
 SCANINC := tools/scaninc/scaninc
-
 PREPROC := tools/preproc/preproc
-
 RAMSCRGEN := tools/ramscrgen/ramscrgen
 
 REVISION := 0
@@ -90,7 +87,6 @@ asm/item.o \
 asm/matuda_debug_menu.o \
 asm/contest.o \
 asm/shop.o \
-asm/berry.o \
 asm/script_menu.o \
 asm/naming_screen.o \
 asm/money.o \
@@ -248,6 +244,7 @@ include misc.mk
 %.png: ;
 %.pal: ;
 %.aif: ;
+
 %.1bpp: %.png  ; $(GFX) $< $@
 %.4bpp: %.png  ; $(GFX) $< $@
 %.8bpp: %.png  ; $(GFX) $< $@
@@ -256,6 +253,8 @@ include misc.mk
 %.rl: % ; $(GFX) $< $@
 %.pcm: %.aif  ; $(AIF) $< $@
 %.bin: %.aif  ; $(AIF) $< $@
+sound/songs/%.s: sound/songs/%.mid
+	cd $(@D) && ../../$(MID) $(<F)
 
 src/libc.o: CC1 := tools/agbcc/bin/old_agbcc
 src/libc.o: CFLAGS := -O2
@@ -278,7 +277,11 @@ $(C_OBJS): %.o : %.c
 	@printf ".text\n\t.align\t2, 0\n" >> $*.s
 	$(AS) $(ASFLAGS) -o $@ $*.s
 
+ifeq ($(NODEP),)
 %.o: dep = $(shell $(SCANINC) $*.s)
+else
+%.o: dep :=
+endif
 
 $(ASM_OBJS): %.o: %.s $$(dep)
 	$(AS) $(ASFLAGS) --defsym $(VERSION)=1 --defsym REVISION=$(REVISION) -o $@ $<
