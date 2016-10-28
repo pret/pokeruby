@@ -15539,7 +15539,7 @@ gMapObjectPic_MovingBox: @ 83D28AC
 gMapObjectPalette19: @ 83D292C
 	.incbin "graphics/map_objects/palettes/19.gbapal"
 
-gUnknown_083D294C:: @ 83D294C
+gTruckCamera_HorizontalTable:: @ 83D294C
 	.byte  0
 	.byte  0
 	.byte  0

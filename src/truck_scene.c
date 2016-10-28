@@ -1,8 +1,11 @@
 #include "global.h"
 #include "task.h"
 
+extern s8 gTruckCamera_HorizontalTable[];
+
 extern void SetCameraPanning(u8 a1, u8 a2);
 extern void sub_805BD90(u8 localId, u8 mapNum, u8 mapGroup, s16 x, s16 y);
+extern void sub_80C7484(u8 taskId);
 
 void Task_Truck1(u8 taskId);
 
@@ -33,7 +36,7 @@ void Task_Truck1(u8 taskId)
 {
 	// WIP
 	s16 *data = gTasks[taskId].data;
-	s32 cameraYpan;
+	s16 cameraYpan;
 	s16 box1 = 0;
 	s16 box2 = 0;
 	s16 box3 = 0;
@@ -137,7 +140,181 @@ _080C7370: .4byte 0x75300000\n");
 }
 #endif
 
-//original:
+void Task_Truck2(u8 taskId)
+{
+	s16 *data = gTasks[taskId].data;
+	s16 cameraYpan;
+	s16 localData;
+	s16 cameraXpan;
+	s16 box1;
+	s16 box2;
+	s16 box3;
+	
+	localData = data[0] + 1;
+	
+	data[0]++;
+	data[2]++;
+	
+	if ( localData > 5 )
+	{
+		data[0] = 0;
+		data[1]++;
+	}
+	if ( data[1] == 19 )
+	{
+		DestroyTask(taskId);
+	}
+	else
+	{
+		if ( gTruckCamera_HorizontalTable[data[1]] == 2 )
+			gTasks[taskId].func = sub_80C7484;
+		
+		cameraXpan = gTruckCamera_HorizontalTable[data[1]];
+		cameraYpan = GetTruckCameraBobbingY(data[1]);
+		SetCameraPanning(cameraXpan, cameraYpan);
+		box1 = GetTruckBoxMovement(data[1] + 30) * 4;
+		sub_805BD90(1, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, 3 - cameraXpan, box1 | 3);
+		box2 = GetTruckBoxMovement(data[1]) * 2;
+		sub_805BD90(1, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, -cameraXpan, box2 - 3);
+		box3 = GetTruckBoxMovement(data[1]);
+		sub_805BD90(1, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, -3 - cameraXpan, ((u16)box3 * 4));
+	}
+}
+
+/*
+	thumb_func_start Task_Truck2
+Task_Truck2: @ 80C7374
+	push {r4-r7,lr}
+	sub sp, 0x4
+	lsls r0, 24
+	lsrs r2, r0, 24
+	lsls r0, r2, 2
+	adds r0, r2
+	lsls r3, r0, 3
+	ldr r4, _080C73B4 @ =gTasks + 0x8
+	adds r7, r3, r4
+	ldrh r1, [r7]
+	adds r1, 0x1
+	strh r1, [r7]
+	ldrh r0, [r7, 0x4]
+	adds r0, 0x1
+	strh r0, [r7, 0x4]
+	lsls r1, 16
+	asrs r1, 16
+	cmp r1, 0x5
+	ble _080C73A4
+	movs r0, 0
+	strh r0, [r7]
+	ldrh r0, [r7, 0x2]
+	adds r0, 0x1
+	strh r0, [r7, 0x2]
+_080C73A4:
+	ldrh r0, [r7, 0x2]
+	cmp r0, 0x13
+	bne _080C73B8
+	adds r0, r2, 0
+	bl DestroyTask
+	b _080C746A
+	.align 2, 0
+_080C73B4: .4byte gTasks + 0x8
+_080C73B8:
+	ldr r2, _080C7474 @ =gTruckCamera_HorizontalTable
+	movs r1, 0x2
+	ldrsh r0, [r7, r1]
+	adds r0, r2
+	ldrb r0, [r0]
+	lsls r0, 24
+	asrs r0, 24
+	cmp r0, 0x2
+	bne _080C73D4
+	adds r0, r4, 0
+	subs r0, 0x8
+	adds r0, r3, r0
+	ldr r1, _080C7478 @ =sub_80C7484
+	str r1, [r0]
+_080C73D4:
+	movs r4, 0x2
+	ldrsh r0, [r7, r4]
+	adds r0, r2
+	movs r5, 0
+	ldrsb r5, [r0, r5]
+	lsls r5, 16
+	lsrs r5, 16
+	movs r1, 0x4
+	ldrsh r0, [r7, r1]
+	bl GetTruckCameraBobbingY
+	adds r1, r0, 0
+	lsls r5, 16
+	asrs r5, 16
+	lsls r1, 16
+	asrs r1, 16
+	adds r0, r5, 0
+	bl SetCameraPanning
+	movs r4, 0x4
+	ldrsh r0, [r7, r4]
+	adds r0, 0x1E
+	bl GetTruckBoxMovement
+	ldr r6, _080C747C @ =gSaveBlock1
+	ldrb r1, [r6, 0x5]
+	ldrb r2, [r6, 0x4]
+	movs r3, 0x3
+	subs r3, r5
+	lsls r3, 16
+	asrs r3, 16
+	lsls r0, 18
+	movs r4, 0xC0
+	lsls r4, 10
+	orrs r0, r4
+	asrs r0, 16
+	str r0, [sp]
+	movs r0, 0x1
+	bl sub_805BD90
+	movs r1, 0x4
+	ldrsh r0, [r7, r1]
+	bl GetTruckBoxMovement
+	ldrb r1, [r6, 0x5]
+	ldrb r2, [r6, 0x4]
+	negs r3, r5
+	lsls r3, 16
+	asrs r3, 16
+	lsls r0, 17
+	ldr r4, _080C7480 @ =0xfffd0000
+	adds r0, r4
+	asrs r0, 16
+	str r0, [sp]
+	movs r0, 0x2
+	bl sub_805BD90
+	movs r1, 0x4
+	ldrsh r0, [r7, r1]
+	bl GetTruckBoxMovement
+	ldrb r1, [r6, 0x5]
+	ldrb r2, [r6, 0x4]
+	movs r4, 0x3
+	negs r4, r4
+	adds r3, r4, 0
+	subs r3, r5
+	lsls r3, 16
+	asrs r3, 16
+	lsls r0, 18
+	asrs r0, 16
+	str r0, [sp]
+	movs r0, 0x3
+	bl sub_805BD90
+_080C746A:
+	add sp, 0x4
+	pop {r4-r7}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_080C7474: .4byte gTruckCamera_HorizontalTable
+_080C7478: .4byte sub_80C7484
+_080C747C: .4byte gSaveBlock1
+_080C7480: .4byte 0xfffd0000
+	thumb_func_end Task_Truck2
+*/
+
+
+
 /*
 	thumb_func_start Task_Truck1
 Task_Truck1: @ 80C72C4
