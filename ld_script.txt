@@ -64,7 +64,13 @@ SECTIONS {
         src/play_time.o(.text);
         src/new_game.o(.text);
         src/rom4.o(.text);
-        asm/rom4.o(.text);
+        asm/fieldmap.o(.text);
+        asm/metatile_behavior.o(.text);
+        asm/field_camera.o(.text);
+        asm/field_door.o(.text);
+        asm/field_player_avatar.o(.text);
+        asm/field_map_obj.o(.text);
+        asm/field_ground_effect.o(.text);
         src/map_obj_80643A4.o(.text);
         src/field_message_box.o(.text);
         src/map_obj_lock.o(.text);

@@ -58,7 +58,13 @@ asm/rom_804373C.o \
 asm/load_save.o \
 asm/trade.o \
 asm/berry_blender.o \
-asm/rom4.o \
+asm/fieldmap.o \
+asm/metatile_behavior.o \
+asm/field_camera.o \
+asm/field_door.o \
+asm/field_player_avatar.o \
+asm/field_map_obj.o \
+asm/field_ground_effect.o \
 asm/rom_8065394.o \
 asm/rom_806936C.o \
 asm/party_menu.o \
