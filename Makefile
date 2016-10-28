@@ -271,7 +271,11 @@ $(C_OBJS): %.o : %.c
 	@printf ".text\n\t.align\t2, 0\n" >> $*.s
 	$(AS) $(ASFLAGS) -o $@ $*.s
 
+ifeq ($(NODEP),)
 %.o: dep = $(shell $(SCANINC) $*.s)
+else
+%.o: dep :=
+endif
 
 $(ASM_OBJS): %.o: %.s $$(dep)
 	$(AS) $(ASFLAGS) --defsym $(VERSION)=1 --defsym REVISION=$(REVISION) -o $@ $<
