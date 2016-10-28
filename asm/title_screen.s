@@ -1069,7 +1069,7 @@ _0807C6A0: .4byte 0x00002142
 _0807C6A4: .4byte 0x00001f0f
 _0807C6A8: .4byte gMain
 _0807C6AC: .4byte 0x0000ffff
-_0807C6B0: .4byte sub_807C774
+_0807C6B0: .4byte CB2_GoToMainMenu
 _0807C6B4:
 	ldrh r1, [r4, 0x2C]
 	movs r0, 0x46
@@ -1100,7 +1100,7 @@ _0807C6C4:
 	bl SetMainCallback2
 	b _0807C74E
 	.align 2, 0
-_0807C6F4: .4byte sub_807C7AC
+_0807C6F4: .4byte CB2_GoToClearSaveDataScreen
 _0807C6F8: .4byte sub_807C7C8
 _0807C6FC:
 	ldr r0, _0807C758 @ =REG_BG2Y_L
@@ -1157,8 +1157,8 @@ _0807C76C: .4byte 0x0000ffff
 _0807C770: .4byte sub_807C790
 	thumb_func_end sub_807C644
 
-	thumb_func_start sub_807C774
-sub_807C774: @ 807C774
+	thumb_func_start CB2_GoToMainMenu
+CB2_GoToMainMenu: @ 807C774
 	push {lr}
 	bl UpdatePaletteFade
 	lsls r0, 24
@@ -1171,7 +1171,7 @@ _0807C786:
 	bx r0
 	.align 2, 0
 _0807C78C: .4byte CB2_InitMainMenu
-	thumb_func_end sub_807C774
+	thumb_func_end CB2_GoToMainMenu
 
 	thumb_func_start sub_807C790
 sub_807C790: @ 807C790
@@ -1189,8 +1189,8 @@ _0807C7A2:
 _0807C7A8: .4byte sub_813BA88
 	thumb_func_end sub_807C790
 
-	thumb_func_start sub_807C7AC
-sub_807C7AC: @ 807C7AC
+	thumb_func_start CB2_GoToClearSaveDataScreen
+CB2_GoToClearSaveDataScreen: @ 807C7AC
 	push {lr}
 	bl UpdatePaletteFade
 	lsls r0, 24
@@ -1202,8 +1202,8 @@ _0807C7BE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807C7C4: .4byte c2_clear_save_data_screen_2
-	thumb_func_end sub_807C7AC
+_0807C7C4: .4byte CB2_InitClearSaveDataScreen
+	thumb_func_end CB2_GoToClearSaveDataScreen
 
 	thumb_func_start sub_807C7C8
 sub_807C7C8: @ 807C7C8

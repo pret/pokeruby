@@ -21,7 +21,7 @@ static void VBlankCB_InitClearSaveDataScreen(void);
 static u8 InitClearSaveDataScreen(void);
 static void CB2_SoftReset(void);
 
-void c2_clear_save_data_screen_2(void)
+void CB2_InitClearSaveDataScreen(void)
 {
     if (InitClearSaveDataScreen())
     {
@@ -75,7 +75,7 @@ static void Task_ProcessMenuInput(u8 taskId)
 
 static void Task_ClearSaveData(u8 taskId)
 {
-    calls_flash_erase_block();
+    ClearSaveData();
     DestroyTask(taskId);
     SetMainCallback2(CB2_SoftReset);
 }

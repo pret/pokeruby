@@ -2192,7 +2192,7 @@ sub_806A390: @ 806A390
 	adds r0, r4, 0
 	bl sub_8080834
 	adds r0, r4, 0
-	bl sub_80401D8
+	bl UpdatePartyPokerusTime
 	adds r0, r4, 0
 	bl sub_810D2F4
 	adds r0, r4, 0
