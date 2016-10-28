@@ -361,7 +361,7 @@ gUnknown_02029814: @ 2029814
 gUnknown_02029816: @ 2029816
 	.space 0x2
 
-gUnknown_02029818: @ 2029818
+gLinkPlayerMapObjects: @ 2029818
 	.space 0x10
 
 gUnknown_02029828: @ 2029828

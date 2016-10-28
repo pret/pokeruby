@@ -179,7 +179,7 @@ gUnknown_0300485C: @ 300485C
 gUnknown_03004860: @ 3004860
 	.space 0x4
 
-gUnknown_03004864: @ 3004864
+gFieldLinkPlayerCount: @ 3004864
 	.space 0xC
 
 gUnknown_03004870: @ 3004870

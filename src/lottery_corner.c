@@ -1,4 +1,3 @@
-#include "gba/gba.h"
 #include "global.h"
 #include "pokemon.h"
 #include "rng.h"

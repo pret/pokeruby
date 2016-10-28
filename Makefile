@@ -18,13 +18,10 @@ LIBGCC := tools/agbcc/lib/libgcc.a
 SHA1 := sha1sum -c
 
 GFX := tools/gbagfx/gbagfx
-
 AIF := tools/aif2pcm/aif2pcm
-
+MID := tools/mid2agb/mid2agb
 SCANINC := tools/scaninc/scaninc
-
 PREPROC := tools/preproc/preproc
-
 RAMSCRGEN := tools/ramscrgen/ramscrgen
 
 REVISION := 0
@@ -58,7 +55,13 @@ asm/rom_804373C.o \
 asm/load_save.o \
 asm/trade.o \
 asm/berry_blender.o \
-asm/rom4.o \
+asm/fieldmap.o \
+asm/metatile_behavior.o \
+asm/field_camera.o \
+asm/field_door.o \
+asm/field_player_avatar.o \
+asm/field_map_obj.o \
+asm/field_ground_effect.o \
 asm/rom_8065394.o \
 asm/rom_806936C.o \
 asm/party_menu.o \
@@ -84,7 +87,6 @@ asm/item.o \
 asm/matuda_debug_menu.o \
 asm/contest.o \
 asm/shop.o \
-asm/berry.o \
 asm/script_menu.o \
 asm/naming_screen.o \
 asm/money.o \
@@ -149,8 +151,8 @@ asm/berry_tag_screen.o \
 asm/mystery_event_menu.o \
 asm/save_failed_screen.o \
 asm/rom_81473B8.o \
-asm/clear_save_data_menu.o \
 asm/rom_8148B8C.o \
+asm/menu_cursor.o \
 asm/libgcnmultiboot.o \
 asm/m4a_1.o \
 asm/m4a_3.o \
@@ -242,6 +244,7 @@ include misc.mk
 %.png: ;
 %.pal: ;
 %.aif: ;
+
 %.1bpp: %.png  ; $(GFX) $< $@
 %.4bpp: %.png  ; $(GFX) $< $@
 %.8bpp: %.png  ; $(GFX) $< $@
@@ -250,6 +253,8 @@ include misc.mk
 %.rl: % ; $(GFX) $< $@
 %.pcm: %.aif  ; $(AIF) $< $@
 %.bin: %.aif  ; $(AIF) $< $@
+sound/songs/%.s: sound/songs/%.mid
+	cd $(@D) && ../../$(MID) $(<F)
 
 src/libc.o: CC1 := tools/agbcc/bin/old_agbcc
 src/libc.o: CFLAGS := -O2
@@ -272,7 +277,11 @@ $(C_OBJS): %.o : %.c
 	@printf ".text\n\t.align\t2, 0\n" >> $*.s
 	$(AS) $(ASFLAGS) -o $@ $*.s
 
+ifeq ($(NODEP),)
 %.o: dep = $(shell $(SCANINC) $*.s)
+else
+%.o: dep :=
+endif
 
 $(ASM_OBJS): %.o: %.s $$(dep)
 	$(AS) $(ASFLAGS) --defsym $(VERSION)=1 --defsym REVISION=$(REVISION) -o $@ $<
