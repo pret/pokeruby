@@ -1082,7 +1082,9 @@ gUnknown_02039288: @ 2039288
 gUnknown_020392FC: @ 20392FC
 	.space 0x6
 
-gUnknown_02039302: @ 2039302
+@ Latios/Latias location
+@ map group, map num.
+gRoamerLocation: @ 2039302
 	.space 0x2
 
 gUnknown_02039304: @ 2039304
@@ -1124,11 +1126,7 @@ gUnknown_02039324: @ 2039324
 gUnknown_02039325: @ 2039325
 	.space 0x3
 
-gUnknown_02039328: @ 2039328
-	.space 0x2
-
-gUnknown_0203932A: @ 203932A
-	.space 0x2
+	.include "src/lottery_corner.o"
 
 gUnknown_0203932C: @ 203932C
 	.space 0x2

@@ -1090,9 +1090,9 @@ gUnknown_081FA73C:: @ 81FA73C
 	.4byte atk02_attackstring
 	.4byte atk03_ppreduce
 	.4byte atk04_critcalc
-	.4byte atk05_cmd5
-	.4byte sub_801CCC4
-	.4byte atk07_cmd7
+	.4byte atk05_damagecalc1
+	.4byte atk06_damagecalc2
+	.4byte atk07_damagecalc3
 	.4byte atk08_cmd8
 	.4byte sub_801D8EC
 	.4byte sub_801DA60
@@ -1122,7 +1122,7 @@ gUnknown_081FA73C:: @ 81FA73C
 	.4byte sub_801FFA8
 	.4byte sub_8020004
 	.4byte sub_80209B4
-	.4byte atk25_cmd25
+	.4byte atk25_resetflags
 	.4byte sub_8020BB4
 	.4byte atk27_cmd27
 	.4byte sub_8020C14
@@ -1159,7 +1159,7 @@ gUnknown_081FA73C:: @ 81FA73C
 	.4byte atk47
 	.4byte atk48_playstatchangeanimation
 	.4byte sub_80217F8
-	.4byte atk4A_damagecalc2
+	.4byte atk4A_damageflags
 	.4byte atk4B_cmd4b
 	.4byte atk4C_switch1
 	.4byte sub_80225F0
@@ -1733,7 +1733,7 @@ gUnknown_081FAF5C:: @ 81FAF5C
 	.4byte sub_80347B8
 	.4byte sub_8034910
 	.4byte sub_8034AE0
-	.4byte c2_8123744
+	.4byte sub_8034BFC
 	.4byte sub_8034DC0
 	.4byte sub_8034F84
 	.4byte sub_8035030
@@ -2167,7 +2167,7 @@ gSpriteAnimTable_820A408:: @ 820A408
 
 	.align 2
 gSpriteTemplate_820A418:: @ 820A418
-	spr_template 23456, 54321, gOamData_820A3E0, gSpriteAnimTable_820A408, NULL, gDummySpriteAffineAnimTable, sub_80435A4
+	spr_template 23456, 54321, gOamData_820A3E0, gSpriteAnimTable_820A408, NULL, gDummySpriteAffineAnimTable, SpriteCB_EggShard
 
 @ The values are Q8.8 fixed-point numbers.
 	.align 1
@@ -11192,8 +11192,12 @@ gWildFeebasRoute119Data:: @ 839DBFC
 	.byte 20, 25  @ Min/Max level
 	.2byte SPECIES_FEEBAS
 
+@ Some Feebas tile related data
+	.align 2
 gUnknown_0839DC00:: @ 839DC00
-	.incbin "baserom.gba", 0x0039dc00, 0x14
+	.2byte  0x0, 0x2D,   0x0
+	.2byte 0x2E, 0x5B,  0x83
+	.2byte 0x5C, 0x8B, 0x12A
 
 	.align 2
 gSpriteImage_839DC14:: @ 839DC14
@@ -12171,7 +12175,7 @@ gBadgesTiles:: @ 83B5AB8
 gUnknown_083B5EBC:: @ 83B5EBC
 	.4byte sub_8093864
 	.4byte sub_80938A8
-	.4byte rfu_NI_stopReceivingData
+	.4byte sub_80938CC
 	.4byte sub_8093918
 	.4byte sub_8093938
 	.4byte sub_8093954
@@ -13476,8 +13480,14 @@ gFieldEffectObjectPaletteInfo6:: @ 83C15F8
 gSpriteTemplate_CutGrass:: @ 83C1600
 	spr_template 0xFFFF, 0x1000, gOamData_CutGrass, gSpriteAnimTable_CutGrass, gSpriteImageTable_CutGrass, gDummySpriteAffineAnimTable, sub_80A2A48
 
-gUnknown_083C1618:: @ 83C1618
-	.incbin "baserom.gba", 0x003c1618, 0x28
+@ pointer to items, capacity
+	.align 2
+gBagPockets:: @ 83C1618
+	.4byte gSaveBlock1 + 0x560, 20 @ Items
+	.4byte gSaveBlock1 + 0x600, 16 @ Poké Balls
+	.4byte gSaveBlock1 + 0x640, 64 @ TMs & HMs
+	.4byte gSaveBlock1 + 0x740, 46 @ Berries
+	.4byte gSaveBlock1 + 0x5B0, 20 @ Key Items
 
 	.align 2
 gUnknown_083C1640:: @ 83C1640
@@ -15473,7 +15483,7 @@ gSpriteImageTable_83D2688:: @ 83D2688
 
 	.align 2
 gSpriteTemplate_83D26A0:: @ 83D26A0
-	spr_template 0xFFFF, 4110, gOamData_83D266C, gSpriteAnimTable_83D2684, gSpriteImageTable_83D2688, gDummySpriteAffineAnimTable, door_restore_tilemap
+	spr_template 0xFFFF, 4110, gOamData_83D266C, gSpriteAnimTable_83D2684, gSpriteImageTable_83D2688, gDummySpriteAffineAnimTable, SpriteCB_SandPillar_0
 
 @ This uses one of the secret base palettes, so there is no "09.pal" file.
 	.align 2
@@ -22138,35 +22148,63 @@ gSpriteTemplate_83E5A00:: @ 83E5A00
 	spr_template 0xFFFF, 6, gOamData_83E5970, gSpriteAnimTable_83E5998, gSpriteImageTable_83E59C0, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 gUnknown_083E5A18:: @ 83E5A18
-	.incbin "baserom.gba", 0x003e5a18, 0x4
+	.string "{PALETTE 0}$"
 
 gUnknown_083E5A1C:: @ 83E5A1C
-	.incbin "baserom.gba", 0x003e5a1c, 0x4
+	.string "▶$"
 
-gUnknown_083E5A20:: @ 83E5A20
-	.incbin "baserom.gba", 0x003E5A20, 0xB0
+	.align 2
+gHealLocations:: @ 83E5A20
+	heal_location LittlerootTown_BrendansHouse_2F, 4, 2
+	heal_location LittlerootTown_MaysHouse_2F, 4, 2
+	heal_location PetalburgCity, 20, 17
+	heal_location SlateportCity, 19, 20
+	heal_location MauvilleCity, 22, 6
+	heal_location RustboroCity, 16, 39
+	heal_location FortreeCity, 5, 7
+	heal_location LilycoveCity, 24, 15
+	heal_location MossdeepCity, 28, 17
+	heal_location SootopolisCity, 43, 32
+	heal_location EverGrandeCity, 27, 49
+	heal_location LittlerootTown, 5, 9
+	heal_location LittlerootTown, 14, 9
+	heal_location OldaleTown, 6, 17
+	heal_location DewfordTown, 2, 11
+	heal_location LavaridgeTown, 9, 7
+	heal_location FallarborTown, 14, 8
+	heal_location VerdanturfTown, 16, 4
+	heal_location PacifidlogTown, 8, 16
+	heal_location EverGrandeCity, 18, 6
+	heal_location BattleTower_Outside, 14, 9
+	heal_location SouthernIsland_Exterior, 15, 20
 
 	.align 2
 gPokenavCursor_Pal::
 	.incbin "graphics/pokenav/cursor.gbapal"
 
+	.align 2
 gUnknown_083E5AF0:: @ 83E5AF0
 	.incbin "graphics/pokenav/cursor_small.4bpp.lz"
 
+	.align 2
 gUnknown_083E5B34:: @ 83E5B34
 	.incbin "graphics/pokenav/cursor_large.4bpp.lz"
 
-gUnknown_083E5C20:: @ 83E5C20
-	.incbin "baserom.gba", 0x003e5c20, 0x20
+	.align 2
+gRegionMapBrendanIconPalette:: @ 83E5C20
+	.incbin "graphics/pokenav/brendan_icon.gbapal"
 
-gUnknown_083E5C40:: @ 83E5C40
-	.incbin "baserom.gba", 0x003e5c40, 0x80
+	.align 2
+gRegionMapBrendanIconTiles:: @ 83E5C40
+	.incbin "graphics/pokenav/brendan_icon.4bpp"
 
-gUnknown_083E5CC0:: @ 83E5CC0
-	.incbin "baserom.gba", 0x003e5cc0, 0x20
+	.align 2
+gRegionMapMayIconPalette:: @ 83E5CC0
+	.incbin "graphics/pokenav/may_icon.gbapal"
 
-gUnknown_083E5CE0:: @ 83E5CE0
-	.incbin "baserom.gba", 0x003e5ce0, 0x80
+	.align 2
+gRegionMapMayIconTiles:: @ 83E5CE0
+	.incbin "graphics/pokenav/may_icon.4bpp"
 
 	.align 2
 gUnknown_083E5D60:: @ 83E5D60
@@ -26869,11 +26907,40 @@ gUnknown_08402E39:: @ 8402E39
 gUnknown_08402E3D:: @ 8402E3D
 	.byte 4, 5, 6
 
-gUnknown_08402E40:: @ 8402E40
-	.incbin "baserom.gba", 0x00402e40, 0x40
+@ pointer to decorations, capacity
+	.align 2
+gDecorationInventories:: @ 8402E40
+	.4byte gSaveBlock1 + 0x26A0, 10 @ DESK
+	.4byte gSaveBlock1 + 0x26AA, 10 @ CHAIR
+	.4byte gSaveBlock1 + 0x26B4, 10 @ PLANT
+	.4byte gSaveBlock1 + 0x26BE, 30 @ ORNAMENT
+	.4byte gSaveBlock1 + 0x26DC, 30 @ MAT
+	.4byte gSaveBlock1 + 0x26FA, 10 @ POSTER
+	.4byte gSaveBlock1 + 0x2704, 40 @ DOLL
+	.4byte gSaveBlock1 + 0x272C, 10 @ CUSHION
 
-gUnknown_08402E80:: @ 8402E80
-	.incbin "baserom.gba", 0x00402e80, 0x80
+gRoamerLocations:: @ 8402E80
+	.byte 0x19,0x1A,0x20,0x21,0x31,0xFF
+	.byte 0x1A,0x19,0x20,0x21,0xFF,0xFF
+	.byte 0x20,0x1A,0x19,0x21,0xFF,0xFF
+	.byte 0x21,0x20,0x19,0x1A,0x22,0x26
+	.byte 0x22,0x21,0x23,0xFF,0xFF,0xFF
+	.byte 0x23,0x22,0x24,0xFF,0xFF,0xFF
+	.byte 0x24,0x23,0x25,0x26,0xFF,0xFF
+	.byte 0x25,0x24,0x26,0xFF,0xFF,0xFF
+	.byte 0x26,0x25,0x21,0xFF,0xFF,0xFF
+	.byte 0x27,0x24,0x28,0x29,0xFF,0xFF
+	.byte 0x28,0x27,0x2A,0xFF,0xFF,0xFF
+	.byte 0x29,0x27,0x2A,0xFF,0xFF,0xFF
+	.byte 0x2A,0x28,0x29,0x2B,0xFF,0xFF
+	.byte 0x2B,0x2A,0x2C,0xFF,0xFF,0xFF
+	.byte 0x2C,0x2B,0x2D,0xFF,0xFF,0xFF
+	.byte 0x2D,0x2C,0x2E,0xFF,0xFF,0xFF
+	.byte 0x2E,0x2D,0x2F,0xFF,0xFF,0xFF
+	.byte 0x2F,0x2E,0x30,0xFF,0xFF,0xFF
+	.byte 0x30,0x2F,0x31,0xFF,0xFF,0xFF
+	.byte 0x31,0x30,0x19,0xFF,0xFF,0xFF
+	.byte 0xFF,0xFF,0xFF,0xFF,0xFF,0xFF
 
 @ 8402F00
 	.include "data/battle_tower/trainers.s"
@@ -27047,10 +27114,10 @@ gUnknown_08406288:: @ 8406288
 
 	.align 2
 gUnknown_08406298:: @ 8406298
-	.4byte SecretBaseText_ItemStorage, sub_8139E40
-	.4byte gPCText_Mailbox, sub_8139E6C
-	.4byte SecretBaseText_Decoration, sub_8139ED8
-	.4byte SecretBaseText_TurnOff, sub_8139EF8
+	.4byte SecretBaseText_ItemStorage, PlayerPC_ItemStorage
+	.4byte gPCText_Mailbox, PlayerPC_Mailbox
+	.4byte SecretBaseText_Decoration, PlayerPC_Decoration
+	.4byte SecretBaseText_TurnOff, PlayerPC_TurnOff
 
 gUnknown_084062B8:: @ 84062B8
 	.incbin "baserom.gba", 0x004062b8, 0x4
@@ -27060,10 +27127,10 @@ gUnknown_084062BC:: @ 84062BC
 
 	.align 2
 gUnknown_084062C0:: @ 84062C0
-	.4byte PCText_WithdrawItem, sub_813A118
-	.4byte PCText_DepositItem, sub_813A0A0
-	.4byte PCText_TossItem, sub_813A198
-	.4byte gUnknownText_Exit, sub_813A21C
+	.4byte PCText_WithdrawItem, ItemStorage_Withdraw
+	.4byte PCText_DepositItem, ItemStorage_Deposit
+	.4byte PCText_TossItem, ItemStorage_Toss
+	.4byte gUnknownText_Exit, ItemStorage_Exit
 
 	.align 2
 gUnknown_084062E0:: @ 84062E0
@@ -27082,10 +27149,10 @@ gNewGamePCItems:: @ 84062F0
 
 	.align 2
 gUnknown_084062F8:: @ 84062F8
-	.4byte OtherText_Read, sub_813B428
-	.4byte gOtherText_MoveToBag, sub_813B510
-	.4byte OtherText_Give, sub_813B630
-	.4byte gOtherText_CancelNoTerminator, sub_813B734
+	.4byte OtherText_Read, Mailbox_Read
+	.4byte gOtherText_MoveToBag, Mailbox_MoveToBag
+	.4byte OtherText_Give, Mailbox_Give
+	.4byte gOtherText_CancelNoTerminator, Mailbox_Cancel
 
 gUnknown_08406318:: @ 8406318
 	.string "{STR_VAR_1}{CLEAR_TO 80}$"
@@ -31706,17 +31773,25 @@ gUnknown_0842F6C0:: @ 842F6C0
 	.4byte 0x6, Unknown_842F4F0
 	.4byte 0x7, Unknown_842F520
 
+	.align 2
 gUnknown_0842F758:: @ 842F758
-	.incbin "baserom.gba", 0x0042f758, 0x28
+	.4byte 3, gSubspriteTable_203A380
+	.4byte 0, 2
+	.4byte 0, 66
+	.4byte 0, 105
+	.4byte 0, 34
 
+	.align 2
 gUnknown_0842F780:: @ 842F780
-	.incbin "baserom.gba", 0x0042f780, 0x8
+	.4byte 0, 105
 
+	.align 2
 gUnknown_0842F788:: @ 842F788
-	.incbin "baserom.gba", 0x0042f788, 0x8
+	.4byte 0, 34
 
+	.align 2
 gUnknown_0842F790:: @ 842F790
-	.incbin "baserom.gba", 0x0042f790, 0x8
+	.4byte 0, 66
 
 gOtherText_BerryObtainedDadHasIt:: @ 842F798
 	.string "Obtained a {STR_VAR_2} BERRY!\nDad has it at PETALBURG GYM.$"

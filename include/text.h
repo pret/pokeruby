@@ -178,7 +178,7 @@ void sub_8004E28(struct Window *win, u8 *foreground, u8 *background, u8 *shadow)
 void sub_8004E3C(struct WindowConfig *winConfig, u8 *tileData, const u8 *text);
 u8 GetStringWidthGivenWindowConfig(struct WindowConfig *winConfig, const u8 *s);
 void ConvertInternationalString(u8 *s, u8 language);
-void SkipExtCtrlCodes(u8 *str);
+void StripExtCtrlCodes(u8 *str);
 s32 StringCompareWithoutExtCtrlCodes(const u8 *str1, const u8 *str2);
 u8 sub_8004FD0(struct Window *win, u8 *dest, const u8 *src, u16 tileDataStartOffset, u8 left, u16 top, u8 width, u32 a8);
 

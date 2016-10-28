@@ -15,13 +15,13 @@ FieldEffectStart: @ 8085668
 	lsrs r4, 24
 	adds r0, r4, 0
 	bl FieldEffectActiveListAdd
-	ldr r0, _080856A8
+	ldr r0, _080856A8 @ =gFieldEffectScriptPointers
 	lsls r4, 2
 	adds r4, r0
 	ldr r0, [r4]
 	str r0, [sp]
 	add r4, sp, 0x4
-	ldr r5, _080856AC
+	ldr r5, _080856AC @ =gUnknown_0839F0D4
 _08085686:
 	ldr r0, [sp]
 	ldrb r0, [r0]
@@ -182,7 +182,7 @@ FieldEffectScript_LoadTiles: @ 808578C
 	ldrh r0, [r5, 0x6]
 	bl GetSpriteTileStartByTag
 	lsls r0, 16
-	ldr r1, _080857B8
+	ldr r1, _080857B8 @ =0xffff0000
 	cmp r0, r1
 	bne _080857AA
 	adds r0, r5, 0
@@ -288,11 +288,11 @@ FieldEffectFreeTilesIfUnused: @ 8085854
 	bl GetSpriteTileTagByTileStart
 	lsls r0, 16
 	lsrs r3, r0, 16
-	ldr r0, _080858B0
+	ldr r0, _080858B0 @ =0x0000ffff
 	cmp r3, r0
 	beq _080858A8
 	movs r2, 0
-	ldr r5, _080858B4
+	ldr r5, _080858B4 @ =gSprites
 _0808586E:
 	lsls r0, r2, 4
 	adds r0, r2
@@ -341,11 +341,11 @@ FieldEffectFreePaletteIfUnused: @ 80858B8
 	bl GetSpritePaletteTagByPaletteNum
 	lsls r0, 16
 	lsrs r5, r0, 16
-	ldr r0, _08085908
+	ldr r0, _08085908 @ =0x0000ffff
 	cmp r5, r0
 	beq _08085900
 	movs r2, 0
-	ldr r6, _0808590C
+	ldr r6, _0808590C @ =gSprites
 	adds r3, r4, 0
 _080858D4:
 	lsls r0, r2, 4
@@ -383,7 +383,7 @@ _0808590C: .4byte gSprites
 FieldEffectActiveListClear: @ 8085910
 	push {r4,lr}
 	movs r2, 0
-	ldr r4, _08085930
+	ldr r4, _08085930 @ =gUnknown_030006E0
 	movs r3, 0xFF
 _08085918:
 	adds r0, r2, r4
@@ -408,7 +408,7 @@ FieldEffectActiveListAdd: @ 8085934
 	lsls r0, 24
 	lsrs r3, r0, 24
 	movs r2, 0
-	ldr r4, _0808594C
+	ldr r4, _0808594C @ =gUnknown_030006E0
 _0808593E:
 	adds r1, r2, r4
 	ldrb r0, [r1]
@@ -436,7 +436,7 @@ FieldEffectActiveListRemove: @ 8085960
 	lsls r0, 24
 	lsrs r3, r0, 24
 	movs r2, 0
-	ldr r4, _0808597C
+	ldr r4, _0808597C @ =gUnknown_030006E0
 	movs r5, 0xFF
 _0808596C:
 	adds r1, r2, r4
@@ -466,7 +466,7 @@ FieldEffectActiveListContains: @ 8085990
 	lsls r0, 24
 	lsrs r2, r0, 24
 	movs r1, 0
-	ldr r3, _080859A8
+	ldr r3, _080859A8 @ =gUnknown_030006E0
 _0808599A:
 	adds r0, r1, r3
 	ldrb r0, [r0]

@@ -1,249 +1,179 @@
 #include "global.h"
-#include "gba/gba.h"
 #include "task.h"
+#include "songs.h"
 #include "menu.h"
+#include "main.h"
 #include "sprite.h"
 #include "palette.h"
-#include "main.h"
 #include "sound.h"
+#include "clear_save_data_menu.h"
 
+extern u8 gSystemText_ClearAllSaveDataPrompt[];
+extern u8 gSystemText_ClearingData[];
+extern u8 *gUnknown_08376D74[][2];
 
-#define asm_comment(x) asm volatile("@ -- " x " -- ")
+static void VBlankCB_ClearSaveDataScreen(void);
+static void Task_InitMenu(u8);
+static void Task_ProcessMenuInput(u8);
+static void Task_ClearSaveData(u8);
+static void CB2_ClearSaveDataScreen(void);
+static void VBlankCB_InitClearSaveDataScreen(void);
+static u8 InitClearSaveDataScreen(void);
+static void CB2_SoftReset(void);
 
-
-//u32 sub_8148970(void);
-//void sub_8148830(u8);
-//void sub_81488BC(u8);
-//void sub_8148930(u8);
-extern void sub_8148B34(void);
-
-extern void calls_flash_erase_block(void);
-
-
-extern u8 gSystemText_ClearAllSaveDataPrompt;
-extern u8 gSystemText_ClearingData;
-extern u8 * const gUnknown_08376D74[][2];
-
-
-// 8148800
-void c2_clear_save_data_screen_2(void)
+void CB2_InitClearSaveDataScreen(void)
 {
-	u32 temp = sub_8148970();
-	
-	if ((temp << 24) != 0x0)
-	{
-		CreateTask(sub_8148830, 0);
-	}
-	
-	// _08148814:
-	// ...
-	// _08148818: .4byte sub_8148830
+    if (InitClearSaveDataScreen())
+    {
+        CreateTask(Task_InitMenu, 0);
+    }
 }
 
-// 814881C
-void sub_814881C(void)
+static void VBlankCB_ClearSaveDataScreen(void)
 {
-	LoadOam();
-	ProcessSpriteCopyRequests();
-	TransferPlttBuffer();
+    LoadOam();
+    ProcessSpriteCopyRequests();
+    TransferPlttBuffer();
 }
 
-// 8148830
-void sub_8148830(u8 r0_in)
+static void Task_InitMenu(u8 taskId)
 {
-	ResetSpriteData();
-	
-	// FL4SHK Note:  I don't feel like figuring out what flags of
-	// REG_DISPCNT are being set or cleared.
-	REG_DISPCNT = (0xCA << 5);
-	
-	SetVBlankCallback(sub_814881C);
-	MenuDrawTextWindow(0x2, 0xE, 0x1B, 0x13);
-	MenuPrint(&gSystemText_ClearAllSaveDataPrompt, 0x3, 0xF);
-	
-	MenuDrawTextWindow(0x2, 0x1, 0x8, 0x6);
-	PrintMenuItems(0x3, 0x2, 0x2, gUnknown_08376D74);
-	InitMenu(0x0, 0x3, 0x2, 0x2, 0x1, 0x5);
-	
-	gTasks[r0_in].func = sub_81488BC;
+    ResetSpriteData();
+
+    REG_DISPCNT = DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG3_ON | DISPCNT_OBJ_ON;
+
+    SetVBlankCallback(VBlankCB_ClearSaveDataScreen);
+    MenuDrawTextWindow(2, 14, 27, 19);
+    MenuPrint(gSystemText_ClearAllSaveDataPrompt, 3, 15);
+
+    MenuDrawTextWindow(2, 1, 8, 6);
+    PrintMenuItems(3, 2, 2, gUnknown_08376D74);
+    InitMenu(0, 3, 2, 2, 1, 5);
+
+    gTasks[taskId].func = Task_ProcessMenuInput;
 }
 
-
-void sub_81488BC(u8 r0_in)
+static void Task_ProcessMenuInput(u8 taskId)
 {
-	switch (ProcessMenuInputNoWrap_())
-	{
-		case 0:
-			PlaySE(0x5);
-			sub_8071F40(&gSystemText_ClearingData);
-			gTasks[r0_in].func = sub_8148930;
-			break;
-		
-		case 1:
-		case -1:
-			PlaySE(0x5);
-			DestroyTask(r0_in);
-			SetMainCallback2(sub_8148B34);
-			break;
-	}
-	
-	AnimateSprites();
-	BuildOamBuffer();
+    switch (ProcessMenuInputNoWrap_())
+    {
+    case 0:
+        PlaySE(SE_SELECT);
+        sub_8071F40(gSystemText_ClearingData);
+        gTasks[taskId].func = Task_ClearSaveData;
+        break;
+    case -1:
+    case 1:
+        PlaySE(SE_SELECT);
+        DestroyTask(taskId);
+        SetMainCallback2(CB2_SoftReset);
+        break;
+    }
+    AnimateSprites();
+    BuildOamBuffer();
 }
 
-
-void sub_8148930(u8 r0_in)
+static void Task_ClearSaveData(u8 taskId)
 {
-	calls_flash_erase_block();
-	DestroyTask(r0_in);
-	SetMainCallback2(sub_8148B34);
+    ClearSaveData();
+    DestroyTask(taskId);
+    SetMainCallback2(CB2_SoftReset);
 }
 
-
-void sub_8148954(void)
+static void CB2_ClearSaveDataScreen(void)
 {
-	RunTasks();
-	UpdatePaletteFade();
+    RunTasks();
+    UpdatePaletteFade();
 }
 
-// Why is this even a function?  It's literally just a wrapper calling
-// another function.  At least it's only a small amount of wasted ROM.
-void TransferPlttBuffer_(void)
+static void VBlankCB_InitClearSaveDataScreen(void)
 {
-	TransferPlttBuffer();
+    TransferPlttBuffer();
 }
 
-
-u32 sub_8148970(void)
+static u8 InitClearSaveDataScreen(void)
 {
-	u16 i;
-	u16 old_reg_ime;
-	
-	switch (gMain.state)
-	{
-		case 0:
-		default:
-			asm_comment("case not 1");
-			SetVBlankCallback(0x0);
-			
-			REG_DISPCNT = 0x0;
-			REG_BG0HOFS = 0x0;
-			REG_BG0VOFS = 0x0;
-			REG_BG3HOFS = 0x0;
-			REG_BG3VOFS = 0x0;
-			REG_WIN0H = 0x0;
-			REG_WIN0V = 0x0;
-			REG_WININ = 0x0;
-			REG_WINOUT = 0x0;
-			REG_BLDCNT = 0x0;
-			REG_BLDALPHA = 0x0;
-			REG_BLDY = 0x0;
-			
-			// Clear all of VRAM (0xc000 halfwords, 0x18000 bytes) via DMA3
-			// (halfword write mode)
-			asm_comment("VRAM DMA_FILL");
-			DmaFill16(3, 0, (vu16 *)VRAM, 0x18000);
-			
-			
-			// Clear all of OAM (0x0100 words, 0x0400 bytes) via DMA3 (word
-			// write mode)
-			asm_comment("OAM DMA_FILL");
-			DmaFill32(3, 0, (vu32 *)OAM, 0x400);
-			
-			
-			
-			// Clear MOST of Palette RAM (0x01ff halfwords, 0x3fe bytes)
-			// via DMA3 (halfword write mode)
-			asm_comment("PLTT DMA_FILL");
-			DmaFill16(3, 0, (vu16 *)(PLTT + 0x2), 0x3fe);
-			
-			ResetPaletteFade();
-			
-			gPlttBufferUnfaded[0] = 0x7fff;
-			gPlttBufferFaded[0] = 0x7fff;
-			gPlttBufferUnfaded[1] = 0x3945;
-			gPlttBufferFaded[1] = 0x3945;
-			
-			asm_comment("Unsure if correct");
-			
-			i = 0;
-			do
-			{
-				((vu16 *)(VRAM + 0x20))[i] = 0x1111;
-				i++;
-			} while (i <= 0xf);
-			
-			i = 0;
-			do
-			{
-				((vu16 *)(VRAM + 0x3800))[i] = 0x0001; 
-				i++;
-			} while (i <= 0x04ff);
-			
-			ResetTasks();
-			ResetSpriteData();
-			
-			SetUpWindowConfig(&gWindowConfig_81E6C3C);
-			InitMenuWindow(&gWindowConfig_81E6CE4);
-			BeginNormalPaletteFade(-1, 0, 0x10, 0, 0xffff);
-			
-			asm_comment("old_reg_ime = REG_IME");
-			old_reg_ime = REG_IME;
-			REG_IME = 0;
-			REG_IE |= 1;
-			REG_IME = old_reg_ime;
-			REG_DISPSTAT |= 0x8;
-			
-			SetVBlankCallback(TransferPlttBuffer_);
-			
-			REG_BG3CNT = 0x0703;
-			REG_DISPCNT = 0x0900;
-			gMain.state = 1;
-			
-			return 0;
-			
-			break;
-		
-		case 1:
-			asm_comment("case 1");
-			UpdatePaletteFade();
-			
-			if (gPaletteFade.active)
-			{
-				return 0;
-			}
-			
-			SetMainCallback2(sub_8148954);
-			
-			
-			return 1;
-			
-			break;
-		
-	}
+    u16 i;
+    u16 ime;
+
+    switch (gMain.state)
+    {
+        case 0:
+        default:
+            SetVBlankCallback(NULL);
+
+            REG_DISPCNT = 0;
+            REG_BG0HOFS = 0;
+            REG_BG0VOFS = 0;
+            REG_BG3HOFS = 0;
+            REG_BG3VOFS = 0;
+            REG_WIN0H = 0;
+            REG_WIN0V = 0;
+            REG_WININ = 0;
+            REG_WINOUT = 0;
+            REG_BLDCNT = 0;
+            REG_BLDALPHA = 0;
+            REG_BLDY = 0;
+
+            DmaFill16(3, 0, (void *)VRAM, VRAM_SIZE);
+            DmaFill32(3, 0, (void *)OAM, OAM_SIZE);
+            DmaFill16(3, 0, (void *)(PLTT + 2), PLTT_SIZE - 2);
+
+            ResetPaletteFade();
+
+            gPlttBufferUnfaded[0] = 0x7fff;
+            gPlttBufferFaded[0] = 0x7fff;
+            gPlttBufferUnfaded[1] = 0x3945;
+            gPlttBufferFaded[1] = 0x3945;
+
+            for (i = 0; i < 0x10; i++)
+                ((u16 *)(VRAM + 0x20))[i] = 0x1111;
+
+            for (i = 0; i < 0x500; i++)
+                ((u16 *)(VRAM + 0x3800))[i] = 0x0001;
+
+            ResetTasks();
+            ResetSpriteData();
+
+            SetUpWindowConfig(&gWindowConfig_81E6C3C);
+            InitMenuWindow(&gWindowConfig_81E6CE4);
+            BeginNormalPaletteFade(-1, 0, 0x10, 0, 0xffff);
+
+            ime = REG_IME;
+            REG_IME = 0;
+            REG_IE |= INTR_FLAG_VBLANK;
+            REG_IME = ime;
+            REG_DISPSTAT |= DISPSTAT_VBLANK_INTR;
+
+            SetVBlankCallback(VBlankCB_InitClearSaveDataScreen);
+
+            REG_BG3CNT = 0x0703;
+            REG_DISPCNT = 0x0900;
+            gMain.state = 1;
+            return 0;
+        case 1:
+            UpdatePaletteFade();
+            if (gPaletteFade.active)
+                return 0;
+            SetMainCallback2(CB2_ClearSaveDataScreen);
+            return 1;
+    }
 }
 
-void sub_8148B34(void)
+static void CB2_SoftReset(void)
 {
-	switch (gMain.state)
-	{
-		case 0:
-		default:
-			BeginNormalPaletteFade(-1, 0, 0, 0x10, 0xffff);
-			
-			gMain.state = 1;
-			break;
-		
-		case 1:
-			UpdatePaletteFade();
-			
-			if (gPaletteFade.active)
-			{
-				return;
-			}
-			DoSoftReset();
-			
-			break;
-	}
+    switch (gMain.state)
+    {
+        case 0:
+        default:
+            BeginNormalPaletteFade(-1, 0, 0, 0x10, 0xffff);
+            gMain.state = 1;
+            break;
+        case 1:
+            UpdatePaletteFade();
+            if (gPaletteFade.active)
+                return;
+            DoSoftReset();
+            break;
+    }
 }
-
