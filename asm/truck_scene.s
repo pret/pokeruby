@@ -6,105 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_80C72A8
-sub_80C72A8: @ 80C72A8
-	push {lr}
-	adds r0, 0x78
-	movs r1, 0xB4
-	bl __modsi3
-	cmp r0, 0
-	beq _080C72BA
-	movs r0, 0
-	b _080C72BE
-_080C72BA:
-	movs r0, 0x1
-	negs r0, r0
-_080C72BE:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80C72A8
-
-	thumb_func_start sub_80C72C4
-sub_80C72C4: @ 80C72C4
-	push {r4,r5,lr}
-	sub sp, 0x4
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	ldr r0, _080C7364 @ =gTasks + 0x8
-	adds r5, r1, r0
-	movs r1, 0
-	ldrsh r0, [r5, r1]
-	adds r0, 0x1E
-	bl sub_80C72A8
-	ldr r4, _080C7368 @ =gSaveBlock1
-	ldrb r1, [r4, 0x5]
-	ldrb r2, [r4, 0x4]
-	lsls r0, 18
-	movs r3, 0xC0
-	lsls r3, 10
-	orrs r0, r3
-	asrs r0, 16
-	str r0, [sp]
-	movs r0, 0x1
-	movs r3, 0x3
-	bl sub_805BD90
-	movs r3, 0
-	ldrsh r0, [r5, r3]
-	bl sub_80C72A8
-	ldrb r1, [r4, 0x5]
-	ldrb r2, [r4, 0x4]
-	lsls r0, 17
-	ldr r3, _080C736C @ =0xfffd0000
-	adds r0, r3
-	asrs r0, 16
-	str r0, [sp]
-	movs r0, 0x2
-	movs r3, 0
-	bl sub_805BD90
-	movs r1, 0
-	ldrsh r0, [r5, r1]
-	bl sub_80C72A8
-	ldrb r1, [r4, 0x5]
-	ldrb r2, [r4, 0x4]
-	movs r4, 0
-	movs r3, 0x3
-	negs r3, r3
-	lsls r0, 18
-	asrs r0, 16
-	str r0, [sp]
-	movs r0, 0x3
-	bl sub_805BD90
-	ldrh r0, [r5]
-	adds r0, 0x1
-	strh r0, [r5]
-	lsls r0, 16
-	ldr r1, _080C7370 @ =0x75300000
-	cmp r0, r1
-	bne _080C7346
-	strh r4, [r5]
-_080C7346:
-	movs r3, 0
-	ldrsh r0, [r5, r3]
-	bl GetTruckCameraBobbingY
-	adds r1, r0, 0
-	lsls r1, 16
-	asrs r1, 16
-	movs r0, 0
-	bl SetCameraPanning
-	add sp, 0x4
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080C7364: .4byte gTasks + 0x8
-_080C7368: .4byte gSaveBlock1
-_080C736C: .4byte 0xfffd0000
-_080C7370: .4byte 0x75300000
-	thumb_func_end sub_80C72C4
-
 	thumb_func_start sub_80C7374
 sub_80C7374: @ 80C7374
 	push {r4-r7,lr}
@@ -176,7 +77,7 @@ _080C73D4:
 	movs r4, 0x4
 	ldrsh r0, [r7, r4]
 	adds r0, 0x1E
-	bl sub_80C72A8
+	bl GetTruckBoxMovement
 	ldr r6, _080C747C @ =gSaveBlock1
 	ldrb r1, [r6, 0x5]
 	ldrb r2, [r6, 0x4]
@@ -194,7 +95,7 @@ _080C73D4:
 	bl sub_805BD90
 	movs r1, 0x4
 	ldrsh r0, [r7, r1]
-	bl sub_80C72A8
+	bl GetTruckBoxMovement
 	ldrb r1, [r6, 0x5]
 	ldrb r2, [r6, 0x4]
 	negs r3, r5
@@ -209,7 +110,7 @@ _080C73D4:
 	bl sub_805BD90
 	movs r1, 0x4
 	ldrsh r0, [r7, r1]
-	bl sub_80C72A8
+	bl GetTruckBoxMovement
 	ldrb r1, [r6, 0x5]
 	ldrb r2, [r6, 0x4]
 	movs r4, 0x3
@@ -364,7 +265,7 @@ _080C7580:
 	bl SetCameraPanningCallback
 	movs r0, 0
 	strh r0, [r4, 0x2]
-	ldr r0, _080C75A4 @ =sub_80C72C4
+	ldr r0, _080C75A4 @ =Task_Truck1
 	movs r1, 0xA
 	bl CreateTask
 	lsls r0, 24
@@ -376,7 +277,7 @@ _080C7580:
 	bl PlaySE
 	b _080C7698
 	.align 2, 0
-_080C75A4: .4byte sub_80C72C4
+_080C75A4: .4byte Task_Truck1
 _080C75A8:
 	ldrh r0, [r4, 0x2]
 	adds r0, 0x1
