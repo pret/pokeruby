@@ -13,7 +13,7 @@ s32 GetTruckCameraBobbingY(int a1)
 {
     s32 result;
 
-    if ( !(a1 % 120) )
+    if (!(a1 % 120))
         return -1;
     else if ( (a1 % 10) <= 4 )
         return 1;
@@ -25,7 +25,7 @@ s32 GetTruckBoxMovement(int a1) // for the box movement?
 {
     s32 result;
     
-    if ( !((a1 + 120) % 180) )
+    if (!((a1 + 120) % 180))
         return -1;
 
     return 0;
@@ -54,7 +54,7 @@ void Task_Truck1(u8 taskId)
 
     data[0]++;
 
-    if ( data[0] == 0x7530 ) // timer?
+    if (data[0] == 0x7530) // timer?
         data[0] = zero;
 
     cameraYpan = GetTruckCameraBobbingY(data[0]);
@@ -78,13 +78,13 @@ void Task_Truck2(u8 taskId)
         data[0] = 0;
         data[1]++;
     }
-    if ((u16)data[1] == 19 )
+    if ((u16)data[1] == 19)
     {
         DestroyTask(taskId);
     }
     else
     {
-        if ( gTruckCamera_HorizontalTable[data[1]] == 2 )
+        if (gTruckCamera_HorizontalTable[data[1]] == 2)
             gTasks[taskId].func = sub_80C7484;
         
         cameraXpan = gTruckCamera_HorizontalTable[data[1]];
