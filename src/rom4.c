@@ -8,6 +8,7 @@
 #include "palette.h"
 #include "text.h"
 #include "link.h"
+#include "sprite.h"
 
 #ifdef SAPPHIRE
 #define LEGENDARY_MUSIC BGM_OOAME  // Heavy Rain
@@ -118,6 +119,10 @@ extern u8 gUnknown_081A4508[];
 
 extern struct UCoords32 gUnknown_0821664C[];
 
+extern u8 (*gUnknown_082166A0[])(struct UnkMapObjStruct *, struct MapObject *, u8);
+extern u8 (*gUnknown_082166AC[])(struct UnkMapObjStruct *, struct MapObject *, u8);
+extern void (*gUnknown_082166D8[])(struct UnkMapObjStruct *, struct MapObject *);
+
 extern struct MapData * const gMapAttributes[];
 extern struct MapHeader * const * const gMapGroups[];
 extern const struct WarpData gDummyWarpData;
@@ -144,6 +149,8 @@ extern u8 sub_80BBB24(void);
 extern u16 MapGridGetMetatileBehaviorAt(int, int);
 extern u8 *sub_80682A8(void *, u8, u8);
 extern u8 *sub_8068E24(struct UnkStruct_8054FF8_Substruct *);
+extern bool8 MapGridIsImpassableAt(s16, s16);
+extern u8 ZCoordToPriority(u8);
 
 void sub_8053050(void);
 void warp_in(void);
@@ -223,11 +230,18 @@ void sub_8055840(u8 *);
 void sub_805585C(void);
 bool32 sub_8055870(void);
 void sub_8055980(u8, s16, s16, u8);
+void sub_8055A2C(struct MapObject *, s16, s16);
 void sub_80555B0(int, int, struct UnkStruct_8054FF8 *);
 u8 sub_8055AE8(u8);
+void sub_8055B08(u8, u16 *, u16 *);
 u8 sub_8055B30(u8);
+u8 sub_8055B50(u8);
+u8 sub_8055B9C(s16, s16);
 void sub_8055BFC(u8, u8);
+u8 npc_something3(u8, u8);
+u8 npc_080587EC(u8, u8, s16, s16);
 void sub_8055E5C(u8);
+void sub_8055ED8(struct Sprite *);
 void sub_8056C50(u16, u16);
 
 void sub_8052F5C(void)
@@ -2410,9 +2424,9 @@ bool32 sub_8055940(void)
     return TRUE;
 }
 
-void sub_8055954(u32 *a1)
+void sub_8055954(struct UnkMapObjStruct *a1)
 {
-    *a1 = 0;
+    memset(a1, 0, sizeof(struct UnkMapObjStruct));
 }
 
 void strange_npc_table_clear(void)
@@ -2423,4 +2437,263 @@ void strange_npc_table_clear(void)
 void sub_8055970(void *a1)
 {
     memset(a1, 0, 36);
+}
+
+void sub_8055980(u8 a1, s16 x, s16 y, u8 a4)
+{
+    u8 mapObjId = sub_805AB54();
+    struct UnkMapObjStruct *unkMapObjStruct = &gUnknown_02029818[a1];
+    struct MapObject *mapObj = &gMapObjects[mapObjId];
+
+    sub_8055954(unkMapObjStruct);
+    sub_8055970(mapObj);
+
+    unkMapObjStruct->a = 1;
+    unkMapObjStruct->b = a1;
+    unkMapObjStruct->c = mapObjId;
+    unkMapObjStruct->d = 0;
+
+    mapObj->active = 1;
+    mapObj->mapobj_bit_1 = a4;
+    mapObj->mapobj_unk_19 = 2;
+    mapObj->spriteId = 64;
+
+    sub_8055A2C(mapObj, x, y);
+}
+
+void sub_8055A2C(struct MapObject *mapObj, s16 x, s16 y)
+{
+    mapObj->coords2.x = x;
+    mapObj->coords2.y = y;
+    mapObj->coords3.x = x;
+    mapObj->coords3.y = y;
+    sub_80603CC(x, y, &mapObj->coords1.x, &mapObj->coords1.y);
+    mapObj->coords1.x += 8;
+    FieldObjectUpdateZCoord(mapObj);
+}
+
+void unref_sub_8055A6C(u8 a1, u8 a2)
+{
+    if (gUnknown_02029818[a1].a)
+    {
+        u8 mapObjId = gUnknown_02029818[a1].c;
+        struct MapObject *mapObj = &gMapObjects[mapObjId];
+        mapObj->mapobj_unk_19 = a2;
+    }
+}
+
+void unref_sub_8055A9C(u8 a1)
+{
+    struct UnkMapObjStruct *unkMapObjStruct = &gUnknown_02029818[a1];
+    u8 mapObjId = unkMapObjStruct->c;
+    struct MapObject *mapObj = &gMapObjects[mapObjId];
+    if (mapObj->spriteId != 64 )
+        DestroySprite(&gSprites[mapObj->spriteId]);
+    unkMapObjStruct->a = 0;
+    mapObj->active = 0;
+}
+
+u8 sub_8055AE8(u8 a1)
+{
+    u8 mapObjId = gUnknown_02029818[a1].c;
+    struct MapObject *mapObj = &gMapObjects[mapObjId];
+    return mapObj->spriteId;
+}
+
+void sub_8055B08(u8 a1, u16 *x, u16 *y)
+{
+    u8 mapObjId = gUnknown_02029818[a1].c;
+    struct MapObject *mapObj = &gMapObjects[mapObjId];
+    *x = mapObj->coords2.x;
+    *y = mapObj->coords2.y;
+}
+
+u8 sub_8055B30(u8 a1)
+{
+    u8 mapObjId = gUnknown_02029818[a1].c;
+    struct MapObject *mapObj = &gMapObjects[mapObjId];
+    return mapObj->mapobj_unk_19;
+}
+
+u8 sub_8055B50(u8 a1)
+{
+    u8 mapObjId = gUnknown_02029818[a1].c;
+    struct MapObject *mapObj = &gMapObjects[mapObjId];
+    return mapObj->mapobj_unk_0B_0;
+}
+
+s32 unref_sub_8055B74(u8 a1)
+{
+    u8 mapObjId = gUnknown_02029818[a1].c;
+    struct MapObject *mapObj = &gMapObjects[mapObjId];
+    return 16 - (s8)mapObj->mapobj_unk_21;
+}
+
+u8 sub_8055B9C(s16 x, s16 y)
+{
+    u8 i;
+    for (i = 0; i < 4; i++)
+    {
+        if (gUnknown_02029818[i].a
+         && (gUnknown_02029818[i].d == 0 || gUnknown_02029818[i].d == 2))
+        {
+            struct MapObject *mapObj = &gMapObjects[gUnknown_02029818[i].c];
+            if (mapObj->coords2.x == x && mapObj->coords2.y == y)
+                return i;
+        }
+    }
+    return 4;
+}
+
+void sub_8055BFC(u8 a1, u8 a2)
+{
+    struct UnkMapObjStruct *unkMapObjStruct = &gUnknown_02029818[a1];
+    u8 mapObjId = unkMapObjStruct->c;
+    struct MapObject *mapObj = &gMapObjects[mapObjId];
+
+    if (unkMapObjStruct->a)
+    {
+        if (a2 > 10)
+            mapObj->mapobj_bit_2 = 1;
+        else
+            gUnknown_082166D8[gUnknown_082166A0[unkMapObjStruct->d](unkMapObjStruct, mapObj, a2)](unkMapObjStruct, mapObj);
+    }
+}
+
+u8 sub_8055C68(struct UnkMapObjStruct *unkMapObjStruct, struct MapObject *mapObj, u8 a3)
+{
+    return gUnknown_082166AC[a3](unkMapObjStruct, mapObj, a3);
+}
+
+u8 sub_8055C88(struct UnkMapObjStruct *unkMapObjStruct, struct MapObject *mapObj, u8 a3)
+{
+    return 1;
+}
+
+u8 sub_8055C8C(struct UnkMapObjStruct *unkMapObjStruct, struct MapObject *mapObj, u8 a3)
+{
+    return gUnknown_082166AC[a3](unkMapObjStruct, mapObj, a3);
+}
+
+u8 sub_8055CAC(struct UnkMapObjStruct *unkMapObjStruct, struct MapObject *mapObj, u8 a3)
+{
+    return 0;
+}
+
+u8 sub_8055CB0(struct UnkMapObjStruct *unkMapObjStruct, struct MapObject *mapObj, u8 a3)
+{
+    s16 x, y;
+
+    mapObj->mapobj_unk_19 = npc_something3(a3, mapObj->mapobj_unk_19);
+    FieldObjectMoveDestCoords(mapObj, mapObj->mapobj_unk_19, &x, &y);
+
+    if (npc_080587EC(unkMapObjStruct->c, mapObj->mapobj_unk_19, x, y))
+    {
+        return 0;
+    }
+    else
+    {
+        mapObj->mapobj_unk_21 = 16;
+        npc_coords_shift(mapObj, x, y);
+        FieldObjectUpdateZCoord(mapObj);
+        return 1;
+    }
+}
+
+u8 sub_8055D18(struct UnkMapObjStruct *unkMapObjStruct, struct MapObject *mapObj, u8 a3)
+{
+    mapObj->mapobj_unk_19 = npc_something3(a3, mapObj->mapobj_unk_19);
+    return 0;
+}
+
+void sub_8055D30(struct UnkMapObjStruct *unkMapObjStruct, struct MapObject *mapObj)
+{
+    unkMapObjStruct->d = 0;
+}
+
+void sub_8055D38(struct UnkMapObjStruct *unkMapObjStruct, struct MapObject *mapObj)
+{
+    mapObj->mapobj_unk_21--;
+    unkMapObjStruct->d = 1;
+    MoveCoords(mapObj->mapobj_unk_19, &mapObj->coords1.x, &mapObj->coords1.y);
+    if (!mapObj->mapobj_unk_21)
+    {
+        npc_coords_shift_still(mapObj);
+        unkMapObjStruct->d = 2;
+    }
+}
+
+u8 npc_something3(u8 a1, u8 a2)
+{
+    switch (a1 - 1)
+    {
+    case 0:
+    case 6:
+        return 2;
+    case 1:
+    case 7:
+        return 1;
+    case 2:
+    case 8:
+        return 3;
+    case 3:
+    case 9:
+        return 4;
+    }
+    return a2;
+}
+
+u8 npc_080587EC(u8 a1, u8 a2, s16 x, s16 y)
+{
+    u8 i;
+    for (i = 0; i < 16; i++)
+    {
+        if (i != a1)
+        {
+            if ((gMapObjects[i].coords2.x == x && gMapObjects[i].coords2.y == y)
+             || (gMapObjects[i].coords3.x == x && gMapObjects[i].coords3.y == y))
+            {
+                return 1;
+            }
+        }
+    }
+    return MapGridIsImpassableAt(x, y);
+}
+
+void sub_8055E5C(u8 a1)
+{
+    struct UnkMapObjStruct *unkMapObjStruct = &gUnknown_02029818[a1];
+    u8 mapObjId = unkMapObjStruct->c;
+    struct MapObject *mapObj = &gMapObjects[mapObjId];
+    struct Sprite *sprite;
+
+    if (unkMapObjStruct->a)
+    {
+        u8 val = sub_805983C(0, mapObj->mapobj_bit_1);
+        mapObj->spriteId = AddPseudoFieldObject(val, sub_8055ED8, 0, 0, 0);
+        sprite = &gSprites[mapObj->spriteId];
+        sprite->coordOffsetEnabled = TRUE;
+        sprite->data0 = a1;
+        mapObj->mapobj_bit_2 = 0;
+    }
+}
+
+void sub_8055ED8(struct Sprite *sprite)
+{
+    struct UnkMapObjStruct *unkMapObjStruct = &gUnknown_02029818[sprite->data0];
+    struct MapObject *mapObj = &gMapObjects[unkMapObjStruct->c];
+    sprite->pos1.x = mapObj->coords1.x;
+    sprite->pos1.y = mapObj->coords1.y;
+    SetObjectSubpriorityByZCoord(mapObj->elevation, sprite, 1);
+    sprite->oam.priority = ZCoordToPriority(mapObj->elevation);
+    if (!unkMapObjStruct->d)
+        StartSpriteAnim(sprite, FieldObjectDirectionToImageAnimId(mapObj->mapobj_unk_19));
+    else
+        StartSpriteAnimIfDifferent(sprite, get_go_image_anim_num(mapObj->mapobj_unk_19));
+    sub_806487C(sprite, 0);
+    if (mapObj->mapobj_bit_2)
+    {
+        sprite->invisible = ((sprite->data7 & 4) >> 2);
+        sprite->data7++;
+    }
 }
