@@ -84,7 +84,6 @@ asm/item.o \
 asm/matuda_debug_menu.o \
 asm/contest.o \
 asm/shop.o \
-asm/berry.o \
 asm/script_menu.o \
 asm/naming_screen.o \
 asm/money.o \
