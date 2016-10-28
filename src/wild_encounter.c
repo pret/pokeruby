@@ -150,7 +150,7 @@ bool8 CheckFeebas(void)
             return FALSE;
         //_08084AC8
         //FeebasSeedRng(gSaveBlock1.feebasLocationSeed);
-        FeebasSeedRng(gSaveBlock1.unk2DD4.unk1);
+        FeebasSeedRng(gSaveBlock1.unk2DD4[0].unk1);
         for(i = 0; i != NUM_FEEBAS_SPOTS;)
         {
             feebasSpots[i] = FeebasRandom() % 447;
