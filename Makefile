@@ -46,6 +46,8 @@ C_OBJS := $(C_SRCS:%.c=%.o)
 ASM_OBJS := \
 asm/crt0.o \
 asm/rom3.o \
+asm/decompress.o \
+asm/rom_800D42C.o \
 asm/calculate_base_damage.o \
 asm/rom_803D1FC.o \
 asm/rom_8040EB4.o \
