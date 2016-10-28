@@ -18,13 +18,10 @@ LIBGCC := tools/agbcc/lib/libgcc.a
 SHA1 := sha1sum -c
 
 GFX := tools/gbagfx/gbagfx
-
 AIF := tools/aif2pcm/aif2pcm
-
+MID := tools/mid2agb/mid2agb
 SCANINC := tools/scaninc/scaninc
-
 PREPROC := tools/preproc/preproc
-
 RAMSCRGEN := tools/ramscrgen/ramscrgen
 
 REVISION := 0
@@ -241,6 +238,7 @@ include misc.mk
 %.png: ;
 %.pal: ;
 %.aif: ;
+
 %.1bpp: %.png  ; $(GFX) $< $@
 %.4bpp: %.png  ; $(GFX) $< $@
 %.8bpp: %.png  ; $(GFX) $< $@
@@ -249,6 +247,8 @@ include misc.mk
 %.rl: % ; $(GFX) $< $@
 %.pcm: %.aif  ; $(AIF) $< $@
 %.bin: %.aif  ; $(AIF) $< $@
+sound/songs/%.s: sound/songs/%.mid
+	cd $(@D) && ../../$(MID) $(<F)
 
 src/libc.o: CC1 := tools/agbcc/bin/old_agbcc
 src/libc.o: CFLAGS := -O2
