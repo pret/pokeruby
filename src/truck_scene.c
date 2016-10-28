@@ -94,7 +94,7 @@ void Task_Truck2(u8 taskId)
         sub_805BD90(1, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, 3 - cameraXpan, box1 + 3);
         box2 = GetTruckBoxMovement(data[2]) * 2;
         sub_805BD90(2, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, -cameraXpan, box2 - 3);
-        box3 = GetTruckBoxMovement(data[2]);
-        sub_805BD90(3, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, -3 - cameraXpan, ((u16)box3 * 4));
+        box3 = GetTruckBoxMovement(data[2]) * 4;
+        sub_805BD90(3, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, -3 - cameraXpan, box3);
     }
 }
