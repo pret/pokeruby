@@ -12480,7 +12480,7 @@ _0805B630: .4byte gSaveBlock1 + 0xC20
 RemoveFieldObjectsOutsideView: @ 805B634
 	push {r4-r6,lr}
 	movs r3, 0
-	ldr r6, _0805B688 @ =gUnknown_02029818
+	ldr r6, _0805B688 @ =gLinkPlayerMapObjects
 _0805B63A:
 	movs r2, 0
 	movs r4, 0
@@ -12524,7 +12524,7 @@ _0805B67A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805B688: .4byte gUnknown_02029818
+_0805B688: .4byte gLinkPlayerMapObjects
 _0805B68C: .4byte gMapObjects
 _0805B690: .4byte 0x00010001
 	thumb_func_end RemoveFieldObjectsOutsideView
@@ -12656,7 +12656,7 @@ sub_805B75C: @ 805B75C
 	lsrs r2, 16
 	mov r10, r2
 	movs r7, 0
-	ldr r2, _0805B900 @ =gUnknown_02029818
+	ldr r2, _0805B900 @ =gLinkPlayerMapObjects
 _0805B77E:
 	lsls r0, r7, 2
 	adds r1, r0, r2
@@ -12845,7 +12845,7 @@ _0805B8EE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0805B900: .4byte gUnknown_02029818
+_0805B900: .4byte gLinkPlayerMapObjects
 _0805B904: .4byte gMapObjects
 _0805B908: .4byte 0xffff0000
 _0805B90C: .4byte 0x0000ffff
