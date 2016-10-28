@@ -150,6 +150,7 @@ asm/mystery_event_menu.o \
 asm/save_failed_screen.o \
 asm/rom_81473B8.o \
 asm/rom_8148B8C.o \
+asm/menu_cursor.o \
 asm/libgcnmultiboot.o \
 asm/m4a_1.o \
 asm/m4a_3.o \
