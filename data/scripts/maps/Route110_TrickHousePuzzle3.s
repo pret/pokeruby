@@ -6,9 +6,9 @@ Route110_TrickHousePuzzle3_MapScripts:: @ 8161EBD
 Route110_TrickHousePuzzle3_MapScript1_161EC8:: @ 8161EC8
 	call Route110_TrickHousePuzzle3_EventScript_161F12
 	compare 0x4009, 0
-	callif 1, Route110_TrickHousePuzzle3_EventScript_161FE5
+	callif EQUAL, Route110_TrickHousePuzzle3_EventScript_161FE5
 	compare 0x4009, 1
-	callif 1, Route110_TrickHousePuzzle3_EventScript_1622C8
+	callif EQUAL, Route110_TrickHousePuzzle3_EventScript_1622C8
 	end
 
 Route110_TrickHousePuzzle3_MapScript1_161EE4:: @ 8161EE4
@@ -32,19 +32,19 @@ Route110_TrickHousePuzzle3_EventScript_161F12:: @ 8161F12
 	setmaptile 1, 3, 600, 0
 	setmaptile 10, 2, 600, 0
 	compare 0x4008, 1
-	callif 1, Route110_TrickHousePuzzle3_EventScript_161F9F
+	callif EQUAL, Route110_TrickHousePuzzle3_EventScript_161F9F
 	compare 0x4008, 2
-	callif 1, Route110_TrickHousePuzzle3_EventScript_161FA9
+	callif EQUAL, Route110_TrickHousePuzzle3_EventScript_161FA9
 	compare 0x4008, 3
-	callif 1, Route110_TrickHousePuzzle3_EventScript_161FB3
+	callif EQUAL, Route110_TrickHousePuzzle3_EventScript_161FB3
 	compare 0x4008, 4
-	callif 1, Route110_TrickHousePuzzle3_EventScript_161FBD
+	callif EQUAL, Route110_TrickHousePuzzle3_EventScript_161FBD
 	compare 0x4008, 5
-	callif 1, Route110_TrickHousePuzzle3_EventScript_161FC7
+	callif EQUAL, Route110_TrickHousePuzzle3_EventScript_161FC7
 	compare 0x4008, 6
-	callif 1, Route110_TrickHousePuzzle3_EventScript_161FD1
+	callif EQUAL, Route110_TrickHousePuzzle3_EventScript_161FD1
 	compare 0x4008, 7
-	callif 1, Route110_TrickHousePuzzle3_EventScript_161FDB
+	callif EQUAL, Route110_TrickHousePuzzle3_EventScript_161FDB
 	return
 
 Route110_TrickHousePuzzle3_EventScript_161F9F:: @ 8161F9F
@@ -303,19 +303,19 @@ Route110_TrickHousePuzzle3_EventScript_162612:: @ 8162612
 	setvar 0x4006, 0
 	setvar 0x4007, 0
 	compare 0x4008, 1
-	callif 1, Route110_TrickHousePuzzle3_EventScript_162683
+	callif EQUAL, Route110_TrickHousePuzzle3_EventScript_162683
 	compare 0x4008, 2
-	callif 1, Route110_TrickHousePuzzle3_EventScript_162689
+	callif EQUAL, Route110_TrickHousePuzzle3_EventScript_162689
 	compare 0x4008, 3
-	callif 1, Route110_TrickHousePuzzle3_EventScript_16268F
+	callif EQUAL, Route110_TrickHousePuzzle3_EventScript_16268F
 	compare 0x4008, 4
-	callif 1, Route110_TrickHousePuzzle3_EventScript_162695
+	callif EQUAL, Route110_TrickHousePuzzle3_EventScript_162695
 	compare 0x4008, 5
-	callif 1, Route110_TrickHousePuzzle3_EventScript_16269B
+	callif EQUAL, Route110_TrickHousePuzzle3_EventScript_16269B
 	compare 0x4008, 6
-	callif 1, Route110_TrickHousePuzzle3_EventScript_1626A1
+	callif EQUAL, Route110_TrickHousePuzzle3_EventScript_1626A1
 	compare 0x4008, 7
-	callif 1, Route110_TrickHousePuzzle3_EventScript_1626A7
+	callif EQUAL, Route110_TrickHousePuzzle3_EventScript_1626A7
 	return
 
 Route110_TrickHousePuzzle3_EventScript_162683:: @ 8162683
@@ -348,14 +348,14 @@ Route110_TrickHousePuzzle3_EventScript_1626A7:: @ 81626A7
 
 Route110_TrickHousePuzzle3_EventScript_1626AD:: @ 81626AD
 	compare 0x4009, 1
-	callif 1, Route110_TrickHousePuzzle3_EventScript_161FE5
+	callif EQUAL, Route110_TrickHousePuzzle3_EventScript_161FE5
 	compare 0x4009, 0
-	callif 1, Route110_TrickHousePuzzle3_EventScript_1622C8
+	callif EQUAL, Route110_TrickHousePuzzle3_EventScript_1622C8
 	special 142
 	compare 0x4009, 1
-	jumpeq Route110_TrickHousePuzzle3_EventScript_1626DD
+	jumpif EQUAL, Route110_TrickHousePuzzle3_EventScript_1626DD
 	compare 0x4009, 0
-	jumpeq Route110_TrickHousePuzzle3_EventScript_1626E4
+	jumpif EQUAL, Route110_TrickHousePuzzle3_EventScript_1626E4
 	end
 
 Route110_TrickHousePuzzle3_EventScript_1626DD:: @ 81626DD
@@ -371,7 +371,7 @@ Route110_TrickHousePuzzle3_EventScript_1626E4:: @ 81626E4
 Route110_TrickHousePuzzle3_EventScript_1626EB:: @ 81626EB
 	lockall
 	compare 0x40ad, 0
-	jumpeq Route110_TrickHousePuzzle3_EventScript_1626FD
+	jumpif EQUAL, Route110_TrickHousePuzzle3_EventScript_1626FD
 	jump Route110_TrickHousePuzzle3_EventScript_161892
 	end
 

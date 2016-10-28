@@ -4,25 +4,25 @@ MossdeepCity_Gym_MapScripts:: @ 815A4D3
 
 MossdeepCity_Gym_MapScript1_15A4D9:: @ 815A4D9
 	checkflag 100
-	jumpeq MossdeepCity_Gym_EventScript_15A510
+	jumpif FLAG_IS_SET, MossdeepCity_Gym_EventScript_15A510
 	jump MossdeepCity_Gym_EventScript_15A4E8
 	end
 
 MossdeepCity_Gym_EventScript_15A4E8:: @ 815A4E8
 	checkflag 101
-	jumpeq MossdeepCity_Gym_EventScript_15A528
+	jumpif FLAG_IS_SET, MossdeepCity_Gym_EventScript_15A528
 	jump MossdeepCity_Gym_EventScript_15A4F7
 	end
 
 MossdeepCity_Gym_EventScript_15A4F7:: @ 815A4F7
 	checkflag 102
-	jumpeq MossdeepCity_Gym_EventScript_15A540
+	jumpif FLAG_IS_SET, MossdeepCity_Gym_EventScript_15A540
 	jump MossdeepCity_Gym_EventScript_15A506
 	end
 
 MossdeepCity_Gym_EventScript_15A506:: @ 815A506
 	checkflag 103
-	jumpeq MossdeepCity_Gym_EventScript_15A558
+	jumpif FLAG_IS_SET, MossdeepCity_Gym_EventScript_15A558
 	end
 
 MossdeepCity_Gym_EventScript_15A510:: @ 815A510
@@ -51,7 +51,7 @@ MossdeepCity_Gym_EventScript_15A558:: @ 815A558
 MossdeepCity_Gym_EventScript_15A56B:: @ 815A56B
 	trainerbattle 8, OPPONENT_TATE_AND_LIZA, 0, MossdeepCity_Gym_Text_18CF02, MossdeepCity_Gym_Text_18D077, MossdeepCity_Gym_Text_18D324, MossdeepCity_Gym_EventScript_15A594
 	checkflag 171
-	jumpif 0, MossdeepCity_Gym_EventScript_15A5C6
+	jumpif FLAG_NOT_SET, MossdeepCity_Gym_EventScript_15A5C6
 	msgbox MossdeepCity_Gym_Text_18D273, 4
 	release
 	end
@@ -74,7 +74,7 @@ MossdeepCity_Gym_EventScript_15A594:: @ 815A594
 MossdeepCity_Gym_EventScript_15A5C6:: @ 815A5C6
 	giveitem ITEM_TM04
 	compare RESULT, 0
-	jumpeq MossdeepCity_Gym_EventScript_1A029B
+	jumpif EQUAL, MossdeepCity_Gym_EventScript_1A029B
 	msgbox MossdeepCity_Gym_Text_18D1CF, 4
 	setflag 171
 	release
@@ -83,7 +83,7 @@ MossdeepCity_Gym_EventScript_15A5C6:: @ 815A5C6
 MossdeepCity_Gym_EventScript_15A5EA:: @ 815A5EA
 	lockall
 	checkflag 100
-	jumpeq MossdeepCity_Gym_EventScript_15A621
+	jumpif FLAG_IS_SET, MossdeepCity_Gym_EventScript_15A621
 	setflag 100
 	move 255, MossdeepCity_Gym_Movement_15A7F7
 	waitmove 0
@@ -110,7 +110,7 @@ MossdeepCity_Gym_EventScript_15A621:: @ 815A621
 MossdeepCity_Gym_EventScript_15A646:: @ 815A646
 	lockall
 	checkflag 101
-	jumpeq MossdeepCity_Gym_EventScript_15A675
+	jumpif FLAG_IS_SET, MossdeepCity_Gym_EventScript_15A675
 	setflag 101
 	move 255, MossdeepCity_Gym_Movement_15A7F7
 	waitmove 0
@@ -131,7 +131,7 @@ MossdeepCity_Gym_EventScript_15A675:: @ 815A675
 MossdeepCity_Gym_EventScript_15A69A:: @ 815A69A
 	lockall
 	checkflag 102
-	jumpeq MossdeepCity_Gym_EventScript_15A6C9
+	jumpif FLAG_IS_SET, MossdeepCity_Gym_EventScript_15A6C9
 	setflag 102
 	move 255, MossdeepCity_Gym_Movement_15A7F7
 	waitmove 0
@@ -152,7 +152,7 @@ MossdeepCity_Gym_EventScript_15A6C9:: @ 815A6C9
 MossdeepCity_Gym_EventScript_15A6EE:: @ 815A6EE
 	lockall
 	checkflag 103
-	jumpeq MossdeepCity_Gym_EventScript_15A71D
+	jumpif FLAG_IS_SET, MossdeepCity_Gym_EventScript_15A71D
 	setflag 103
 	move 255, MossdeepCity_Gym_Movement_15A7F7
 	waitmove 0
@@ -211,7 +211,7 @@ MossdeepCity_Gym_EventScript_15A7D8:: @ 815A7D8
 	lock
 	faceplayer
 	checkflag 1229
-	jumpeq MossdeepCity_Gym_EventScript_15A7ED
+	jumpif FLAG_IS_SET, MossdeepCity_Gym_EventScript_15A7ED
 	msgbox MossdeepCity_Gym_Text_18C7E3, 4
 	release
 	end
@@ -229,14 +229,14 @@ MossdeepCity_Gym_Movement_15A7F7:: @ 815A7F7
 MossdeepCity_Gym_EventScript_15A7FA:: @ 815A7FA
 	lockall
 	checkflag 2061
-	jumpeq MossdeepCity_Gym_EventScript_15A81A
+	jumpif FLAG_IS_SET, MossdeepCity_Gym_EventScript_15A81A
 	jump MossdeepCity_Gym_EventScript_15A824
 	end
 
 MossdeepCity_Gym_EventScript_15A80A:: @ 815A80A
 	lockall
 	checkflag 2061
-	jumpeq MossdeepCity_Gym_EventScript_15A81A
+	jumpif FLAG_IS_SET, MossdeepCity_Gym_EventScript_15A81A
 	jump MossdeepCity_Gym_EventScript_15A824
 	end
 

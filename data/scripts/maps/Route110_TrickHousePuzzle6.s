@@ -18,7 +18,7 @@ Route110_TrickHousePuzzle6_EventScript_1630E6:: @ 81630E6
 Route110_TrickHousePuzzle6_EventScript_1630EA:: @ 81630EA
 	lockall
 	compare 0x40b0, 0
-	jumpeq Route110_TrickHousePuzzle6_EventScript_1630FC
+	jumpif EQUAL, Route110_TrickHousePuzzle6_EventScript_1630FC
 	jump Route110_TrickHousePuzzle6_EventScript_161892
 	end
 

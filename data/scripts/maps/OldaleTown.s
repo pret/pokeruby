@@ -6,11 +6,11 @@ OldaleTown_MapScript1_14DD68:: @ 814DD68
 	call OldaleTown_EventScript_1A014E
 	setflag 2064
 	checkflag 116
-	callif 0, OldaleTown_EventScript_14DD92
+	callif FLAG_NOT_SET, OldaleTown_EventScript_14DD92
 	checkflag 132
-	callif 0, OldaleTown_EventScript_14DD9E
+	callif FLAG_NOT_SET, OldaleTown_EventScript_14DD9E
 	checkflag 116
-	callif 1, OldaleTown_EventScript_14DD8C
+	callif FLAG_IS_SET, OldaleTown_EventScript_14DD8C
 	end
 
 OldaleTown_EventScript_14DD8C:: @ 814DD8C
@@ -39,9 +39,9 @@ OldaleTown_EventScript_14DDBC:: @ 814DDBC
 	lock
 	faceplayer
 	checkflag 132
-	jumpeq OldaleTown_EventScript_14DE79
+	jumpif FLAG_IS_SET, OldaleTown_EventScript_14DE79
 	checkflag 1
-	jumpeq OldaleTown_EventScript_14DE79
+	jumpif FLAG_IS_SET, OldaleTown_EventScript_14DE79
 	setflag 1
 	playmusic 420, 0
 	msgbox OldaleTown_Text_16AEF2, 4
@@ -77,7 +77,7 @@ OldaleTown_EventScript_14DE4C:: @ 814DE4C
 	msgbox OldaleTown_Text_16AF2F, 4
 	giveitem ITEM_POTION
 	compare RESULT, 0
-	jumpeq OldaleTown_EventScript_14DE83
+	jumpif EQUAL, OldaleTown_EventScript_14DE83
 	msgbox OldaleTown_Text_16AFE1, 4
 	setflag 132
 	fadedefault
@@ -196,7 +196,7 @@ OldaleTown_EventScript_14DEDF:: @ 814DEDF
 	lock
 	faceplayer
 	checkflag 116
-	jumpeq OldaleTown_EventScript_14DF26
+	jumpif FLAG_IS_SET, OldaleTown_EventScript_14DF26
 	msgbox OldaleTown_Text_16B0CC, 4
 	closebutton
 	move 3, OldaleTown_Movement_1A083D
@@ -258,9 +258,9 @@ OldaleTown_EventScript_14DF77:: @ 814DF77
 OldaleTown_EventScript_14DF92:: @ 814DF92
 	checkgender
 	compare RESULT, 0
-	jumpeq OldaleTown_EventScript_14DFAA
+	jumpif EQUAL, OldaleTown_EventScript_14DFAA
 	compare RESULT, 1
-	jumpeq OldaleTown_EventScript_14DFB8
+	jumpif EQUAL, OldaleTown_EventScript_14DFB8
 	end
 
 OldaleTown_EventScript_14DFAA:: @ 814DFAA

@@ -15,7 +15,7 @@ SealedChamber_OuterRoom_MapScript1_15F0E7:: @ 815F0E7
 
 SealedChamber_OuterRoom_MapScript1_15F0EB:: @ 815F0EB
 	checkflag 2127
-	callif 0, SealedChamber_OuterRoom_EventScript_15F0F5
+	callif FLAG_NOT_SET, SealedChamber_OuterRoom_EventScript_15F0F5
 	end
 
 SealedChamber_OuterRoom_EventScript_15F0F5:: @ 815F0F5
@@ -110,7 +110,7 @@ SealedChamber_OuterRoom_EventScript_15F1AA:: @ 815F1AA
 SealedChamber_OuterRoom_EventScript_15F1B8:: @ 815F1B8
 	lockall
 	checkflag 2127
-	jumpeq SealedChamber_OuterRoom_EventScript_15F1CF
+	jumpif FLAG_IS_SET, SealedChamber_OuterRoom_EventScript_15F1CF
 	braillemsg SealedChamber_OuterRoom_Braille_1C53B1
 	waitbutton
 	hidebox 0, 0, 29, 19

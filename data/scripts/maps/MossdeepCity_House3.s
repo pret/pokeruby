@@ -5,10 +5,10 @@ MossdeepCity_House3_EventScript_15A972:: @ 815A972
 	lock
 	faceplayer
 	checkflag 152
-	jumpeq MossdeepCity_House3_EventScript_15A9B1
+	jumpif FLAG_IS_SET, MossdeepCity_House3_EventScript_15A9B1
 	msgbox MossdeepCity_House3_Text_18D909, 5
 	compare RESULT, 0
-	jumpeq MossdeepCity_House3_EventScript_15A9BB
+	jumpif EQUAL, MossdeepCity_House3_EventScript_15A9BB
 	msgbox MossdeepCity_House3_Text_18D9A9, 4
 	giveitem ITEM_SUPER_ROD
 	setflag 152

@@ -42,9 +42,9 @@ SSTidalRooms_EventScript_15FCF9:: @ 815FCF9
 
 gUnknown_0815FD0D:: @ 815FD0D
 	compare 0x40B4, 2
-	jumpeq SSTidalCorridor_EventScript_15FD24
+	jumpif EQUAL, SSTidalCorridor_EventScript_15FD24
 	compare 0x40B4, 7
-	jumpeq SSTidalCorridor_EventScript_15FD3A
+	jumpif EQUAL, SSTidalCorridor_EventScript_15FD3A
 	end
 
 SSTidalCorridor_EventScript_15FD24:: @ 815FD24
@@ -114,9 +114,9 @@ SSTidalCorridor_EventScript_15FDD6:: @ 815FDD6
 	lock
 	faceplayer
 	compare 0x40b4, 4
-	jumpeq SSTidalCorridor_EventScript_15FDF8
+	jumpif EQUAL, SSTidalCorridor_EventScript_15FDF8
 	compare 0x40b4, 8
-	jumpeq SSTidalCorridor_EventScript_15FE17
+	jumpif EQUAL, SSTidalCorridor_EventScript_15FE17
 	msgbox SSTidalCorridor_Text_19913B, 4
 	release
 	end
@@ -125,7 +125,7 @@ SSTidalCorridor_EventScript_15FDF8:: @ 815FDF8
 	sethealplace 8
 	msgbox SSTidalCorridor_Text_1991F4, 4
 	checkflag 260
-	callif 1, SSTidalCorridor_EventScript_15FE36
+	callif FLAG_IS_SET, SSTidalCorridor_EventScript_15FE36
 	warp LilycoveCity_Harbor, 255, 8, 11
 	waitstate
 	release
@@ -135,7 +135,7 @@ SSTidalCorridor_EventScript_15FE17:: @ 815FE17
 	sethealplace 4
 	msgbox SSTidalCorridor_Text_1991F4, 4
 	checkflag 260
-	callif 1, SSTidalCorridor_EventScript_15FE36
+	callif FLAG_IS_SET, SSTidalCorridor_EventScript_15FE36
 	warp SlateportCity_Harbor, 255, 8, 11
 	waitstate
 	release
@@ -148,9 +148,9 @@ SSTidalCorridor_EventScript_15FE36:: @ 815FE36
 SSTidalCorridor_EventScript_15FE3A:: @ 815FE3A
 	lockall
 	compare 0x40b4, 2
-	jumpeq SSTidalCorridor_EventScript_15FE5B
+	jumpif EQUAL, SSTidalCorridor_EventScript_15FE5B
 	compare 0x40b4, 7
-	jumpeq SSTidalCorridor_EventScript_15FE5B
+	jumpif EQUAL, SSTidalCorridor_EventScript_15FE5B
 	msgbox SSTidalCorridor_Text_199268, 4
 	releaseall
 	end
@@ -164,7 +164,7 @@ SSTidalCorridor_EventScript_15FE60:: @ 815FE60
 	lock
 	faceplayer
 	checkflag 247
-	jumpeq SSTidalCorridor_EventScript_15FE7A
+	jumpif FLAG_IS_SET, SSTidalCorridor_EventScript_15FE7A
 	call SSTidalCorridor_EventScript_15FE84
 	msgbox SSTidalCorridor_Text_199203, 4
 	release
@@ -177,21 +177,21 @@ SSTidalCorridor_EventScript_15FE7A:: @ 815FE7A
 
 SSTidalCorridor_EventScript_15FE84:: @ 815FE84
 	checktrainerflag OPPONENT_PHILLIP
-	jumpif 0, SSTidalCorridor_EventScript_15FED5
+	jumpif FLAG_NOT_SET, SSTidalCorridor_EventScript_15FED5
 	checktrainerflag OPPONENT_LEONARD
-	jumpif 0, SSTidalCorridor_EventScript_15FED5
+	jumpif FLAG_NOT_SET, SSTidalCorridor_EventScript_15FED5
 	checktrainerflag OPPONENT_COLTON
-	jumpif 0, SSTidalCorridor_EventScript_15FED5
+	jumpif FLAG_NOT_SET, SSTidalCorridor_EventScript_15FED5
 	checktrainerflag OPPONENT_TUCKER
-	jumpif 0, SSTidalCorridor_EventScript_15FED5
+	jumpif FLAG_NOT_SET, SSTidalCorridor_EventScript_15FED5
 	checktrainerflag OPPONENT_THOMAS
-	jumpif 0, SSTidalCorridor_EventScript_15FED5
+	jumpif FLAG_NOT_SET, SSTidalCorridor_EventScript_15FED5
 	checktrainerflag OPPONENT_LEA_AND_JED
-	jumpif 0, SSTidalCorridor_EventScript_15FED5
+	jumpif FLAG_NOT_SET, SSTidalCorridor_EventScript_15FED5
 	checktrainerflag OPPONENT_GARRET
-	jumpif 0, SSTidalCorridor_EventScript_15FED5
+	jumpif FLAG_NOT_SET, SSTidalCorridor_EventScript_15FED5
 	checktrainerflag OPPONENT_ANETTE
-	jumpif 0, SSTidalCorridor_EventScript_15FED5
+	jumpif FLAG_NOT_SET, SSTidalCorridor_EventScript_15FED5
 	setflag 247
 	jump SSTidalCorridor_EventScript_15FE7A
 	return

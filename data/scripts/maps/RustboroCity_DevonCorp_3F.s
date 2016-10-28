@@ -6,7 +6,7 @@ RustboroCity_DevonCorp_3F_MapScripts:: @ 8157711
 
 RustboroCity_DevonCorp_3F_MapScript1_157721:: @ 8157721
 	compare 0x408f, 0
-	callif 1, RustboroCity_DevonCorp_3F_EventScript_15772D
+	callif EQUAL, RustboroCity_DevonCorp_3F_EventScript_15772D
 	end
 
 RustboroCity_DevonCorp_3F_EventScript_15772D:: @ 815772D
@@ -147,9 +147,9 @@ RustboroCity_DevonCorp_3F_EventScript_15783B:: @ 815783B
 	lock
 	faceplayer
 	checkflag 272
-	jumpeq RustboroCity_DevonCorp_3F_EventScript_15789B
+	jumpif FLAG_IS_SET, RustboroCity_DevonCorp_3F_EventScript_15789B
 	checkflag 189
-	jumpeq RustboroCity_DevonCorp_3F_EventScript_157864
+	jumpif FLAG_IS_SET, RustboroCity_DevonCorp_3F_EventScript_157864
 	msgbox RustboroCity_DevonCorp_3F_Text_18351E, 4
 	closebutton
 	move LAST_TALKED, RustboroCity_DevonCorp_3F_Movement_1A083D
@@ -161,7 +161,7 @@ RustboroCity_DevonCorp_3F_EventScript_157864:: @ 8157864
 	msgbox RustboroCity_DevonCorp_3F_Text_18353E, 4
 	giveitem ITEM_EXP_SHARE
 	compare RESULT, 0
-	jumpeq RustboroCity_DevonCorp_3F_EventScript_1A029B
+	jumpif EQUAL, RustboroCity_DevonCorp_3F_EventScript_1A029B
 	setflag 272
 	msgbox RustboroCity_DevonCorp_3F_Text_1835B3, 4
 	closebutton
@@ -182,7 +182,7 @@ RustboroCity_DevonCorp_3F_EventScript_1578B0:: @ 81578B0
 	lock
 	faceplayer
 	checkflag 256
-	jumpeq RustboroCity_DevonCorp_3F_EventScript_1578C5
+	jumpif FLAG_IS_SET, RustboroCity_DevonCorp_3F_EventScript_1578C5
 	msgbox RustboroCity_DevonCorp_3F_Text_18395C, 4
 	release
 	end

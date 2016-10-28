@@ -3,10 +3,10 @@ MauvilleCity_PokemonCenter_1F_EventScript_1AEBAB:: @ 81AEBAB
 	faceplayer
 	msgbox MauvilleCity_PokemonCenter_1F_Text_1AE88F, 5
 	compare RESULT, 0
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1AEBDA
+	jumpif EQUAL, MauvilleCity_PokemonCenter_1F_EventScript_1AEBDA
 	special 114
 	compare RESULT, 1
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1AEBE3
+	jumpif EQUAL, MauvilleCity_PokemonCenter_1F_EventScript_1AEBE3
 	message MauvilleCity_PokemonCenter_1F_Text_1AE910
 	waittext
 	jump MauvilleCity_PokemonCenter_1F_EventScript_1AEBEC
@@ -24,15 +24,15 @@ MauvilleCity_PokemonCenter_1F_EventScript_1AEBEC:: @ 81AEBEC
 	special 113
 	waitstate
 	compare 0x8004, 0
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1AEC2D
+	jumpif EQUAL, MauvilleCity_PokemonCenter_1F_EventScript_1AEC2D
 	compare 0x8004, 65535
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1AEC36
+	jumpif EQUAL, MauvilleCity_PokemonCenter_1F_EventScript_1AEC36
 	msgbox MauvilleCity_PokemonCenter_1F_Text_1AE97C, 5
 	compare RESULT, 0
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1AEC42
+	jumpif EQUAL, MauvilleCity_PokemonCenter_1F_EventScript_1AEC42
 	special 115
 	compare RESULT, 1
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1AEC4E
+	jumpif EQUAL, MauvilleCity_PokemonCenter_1F_EventScript_1AEC4E
 	jump MauvilleCity_PokemonCenter_1F_EventScript_1AEC57
 	end
 
@@ -61,15 +61,15 @@ MauvilleCity_PokemonCenter_1F_EventScript_1AEC57:: @ 81AEC57
 	special 117
 	waitstate
 	compare 0x8006, 0
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1AECA6
+	jumpif EQUAL, MauvilleCity_PokemonCenter_1F_EventScript_1AECA6
 	compare 0x8006, 65535
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1AECAF
+	jumpif EQUAL, MauvilleCity_PokemonCenter_1F_EventScript_1AECAF
 	special 116
 	compare RESULT, 1
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1AECBD
+	jumpif EQUAL, MauvilleCity_PokemonCenter_1F_EventScript_1AECBD
 	msgbox MauvilleCity_PokemonCenter_1F_Text_1AEA9B, 5
 	compare RESULT, 0
-	jumpeq MauvilleCity_PokemonCenter_1F_EventScript_1AEC57
+	jumpif EQUAL, MauvilleCity_PokemonCenter_1F_EventScript_1AEC57
 	special 118
 	msgbox MauvilleCity_PokemonCenter_1F_Text_1AEAFB, 2
 	end

@@ -6,7 +6,7 @@ EverGrandeCity_PokemonLeague_MapScript1_15BA7B:: @ 815BA7B
 	sethealplace 20
 	setflag 2132
 	checkflag 263
-	callif 0, EverGrandeCity_PokemonLeague_EventScript_15BA8B
+	callif FLAG_NOT_SET, EverGrandeCity_PokemonLeague_EventScript_15BA8B
 	end
 
 EverGrandeCity_PokemonLeague_EventScript_15BA8B:: @ 815BA8B
@@ -48,17 +48,17 @@ EverGrandeCity_PokemonLeague_Items:: @ 815BAC0
 EverGrandeCity_PokemonLeague_EventScript_15BAD2:: @ 815BAD2
 	lockall
 	checkflag 263
-	jumpeq EverGrandeCity_PokemonLeague_EventScript_15BB57
+	jumpif FLAG_IS_SET, EverGrandeCity_PokemonLeague_EventScript_15BB57
 	getplayerxy 0x4000, 0x4001
 	compare 0x4000, 11
-	callif 4, EverGrandeCity_PokemonLeague_EventScript_15BB34
+	callif GREATER_THAN_OR_EQUAL, EverGrandeCity_PokemonLeague_EventScript_15BB34
 	compare 0x4000, 8
-	callif 3, EverGrandeCity_PokemonLeague_EventScript_15BB3F
+	callif LESS_THAN_OR_EQUAL, EverGrandeCity_PokemonLeague_EventScript_15BB3F
 	message EverGrandeCity_PokemonLeague_Text_1916FD
 	waittext
 	pause 75
 	checkflag 2060
-	jumpif 0, EverGrandeCity_PokemonLeague_EventScript_15BB4A
+	jumpif FLAG_NOT_SET, EverGrandeCity_PokemonLeague_EventScript_15BB4A
 	closebutton
 	move 3, EverGrandeCity_PokemonLeague_Movement_15BB7E
 	move 4, EverGrandeCity_PokemonLeague_Movement_15BB81

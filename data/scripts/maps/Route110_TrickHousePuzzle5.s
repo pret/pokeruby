@@ -14,7 +14,7 @@ Route110_TrickHousePuzzle5_MapScript1_1627B6:: @ 81627B6
 Route110_TrickHousePuzzle5_EventScript_1627D5:: @ 81627D5
 	lockall
 	compare 0x40af, 0
-	jumpeq Route110_TrickHousePuzzle5_EventScript_1627E7
+	jumpif EQUAL, Route110_TrickHousePuzzle5_EventScript_1627E7
 	jump Route110_TrickHousePuzzle5_EventScript_161892
 	end
 
@@ -28,7 +28,7 @@ Route110_TrickHousePuzzle5_EventScript_1627F2:: @ 81627F2
 	move 1, Route110_TrickHousePuzzle5_Movement_1A0839
 	waitmove 0
 	compare 0x4001, 1
-	jumpeq Route110_TrickHousePuzzle5_EventScript_162DE9
+	jumpif EQUAL, Route110_TrickHousePuzzle5_EventScript_162DE9
 	setvar 0x4009, 0
 	jump Route110_TrickHousePuzzle5_EventScript_16293F
 	end
@@ -38,7 +38,7 @@ Route110_TrickHousePuzzle5_EventScript_162813:: @ 8162813
 	move 2, Route110_TrickHousePuzzle5_Movement_1A0839
 	waitmove 0
 	compare 0x4002, 1
-	jumpeq Route110_TrickHousePuzzle5_EventScript_162DE9
+	jumpif EQUAL, Route110_TrickHousePuzzle5_EventScript_162DE9
 	setvar 0x4009, 0
 	jump Route110_TrickHousePuzzle5_EventScript_1629B3
 	end
@@ -48,7 +48,7 @@ Route110_TrickHousePuzzle5_EventScript_162834:: @ 8162834
 	move 3, Route110_TrickHousePuzzle5_Movement_1A0839
 	waitmove 0
 	compare 0x4003, 1
-	jumpeq Route110_TrickHousePuzzle5_EventScript_162DE9
+	jumpif EQUAL, Route110_TrickHousePuzzle5_EventScript_162DE9
 	setvar 0x4009, 0
 	jump Route110_TrickHousePuzzle5_EventScript_162A27
 	end
@@ -58,7 +58,7 @@ Route110_TrickHousePuzzle5_EventScript_162855:: @ 8162855
 	move 4, Route110_TrickHousePuzzle5_Movement_1A0839
 	waitmove 0
 	compare 0x4004, 1
-	jumpeq Route110_TrickHousePuzzle5_EventScript_162DE9
+	jumpif EQUAL, Route110_TrickHousePuzzle5_EventScript_162DE9
 	setvar 0x4009, 0
 	jump Route110_TrickHousePuzzle5_EventScript_162A9B
 	end
@@ -68,7 +68,7 @@ Route110_TrickHousePuzzle5_EventScript_162876:: @ 8162876
 	move 5, Route110_TrickHousePuzzle5_Movement_1A0839
 	waitmove 0
 	compare 0x4005, 1
-	jumpeq Route110_TrickHousePuzzle5_EventScript_162DE9
+	jumpif EQUAL, Route110_TrickHousePuzzle5_EventScript_162DE9
 	setvar 0x4009, 0
 	jump Route110_TrickHousePuzzle5_EventScript_162B0F
 	end
@@ -166,11 +166,11 @@ Route110_TrickHousePuzzle5_EventScript_16293F:: @ 816293F
 	move 1, Route110_TrickHousePuzzle5_Movement_1A0835
 	waitmove 0
 	compare 0x4009, 1
-	callif 1, Route110_TrickHousePuzzle5_EventScript_162DF3
+	callif EQUAL, Route110_TrickHousePuzzle5_EventScript_162DF3
 	compare 0x4009, 2
-	callif 1, Route110_TrickHousePuzzle5_EventScript_162E2B
+	callif EQUAL, Route110_TrickHousePuzzle5_EventScript_162E2B
 	compare 0x4009, 3
-	callif 1, Route110_TrickHousePuzzle5_EventScript_162E63
+	callif EQUAL, Route110_TrickHousePuzzle5_EventScript_162E63
 	msgbox Route110_TrickHousePuzzle5_Text_19D423, 4
 	random 3
 	switch RESULT
@@ -188,11 +188,11 @@ Route110_TrickHousePuzzle5_EventScript_1629B3:: @ 81629B3
 	move 2, Route110_TrickHousePuzzle5_Movement_1A0835
 	waitmove 0
 	compare 0x4009, 1
-	callif 1, Route110_TrickHousePuzzle5_EventScript_162E9B
+	callif EQUAL, Route110_TrickHousePuzzle5_EventScript_162E9B
 	compare 0x4009, 2
-	callif 1, Route110_TrickHousePuzzle5_EventScript_162ED3
+	callif EQUAL, Route110_TrickHousePuzzle5_EventScript_162ED3
 	compare 0x4009, 3
-	callif 1, Route110_TrickHousePuzzle5_EventScript_162F0B
+	callif EQUAL, Route110_TrickHousePuzzle5_EventScript_162F0B
 	msgbox Route110_TrickHousePuzzle5_Text_19D636, 4
 	random 3
 	switch RESULT
@@ -210,11 +210,11 @@ Route110_TrickHousePuzzle5_EventScript_162A27:: @ 8162A27
 	move 3, Route110_TrickHousePuzzle5_Movement_1A0835
 	waitmove 0
 	compare 0x4009, 1
-	callif 1, Route110_TrickHousePuzzle5_EventScript_162DF3
+	callif EQUAL, Route110_TrickHousePuzzle5_EventScript_162DF3
 	compare 0x4009, 2
-	callif 1, Route110_TrickHousePuzzle5_EventScript_162E2B
+	callif EQUAL, Route110_TrickHousePuzzle5_EventScript_162E2B
 	compare 0x4009, 3
-	callif 1, Route110_TrickHousePuzzle5_EventScript_162E63
+	callif EQUAL, Route110_TrickHousePuzzle5_EventScript_162E63
 	msgbox Route110_TrickHousePuzzle5_Text_19D7D3, 4
 	random 3
 	switch RESULT
@@ -232,11 +232,11 @@ Route110_TrickHousePuzzle5_EventScript_162A9B:: @ 8162A9B
 	move 4, Route110_TrickHousePuzzle5_Movement_1A0835
 	waitmove 0
 	compare 0x4009, 1
-	callif 1, Route110_TrickHousePuzzle5_EventScript_162DF3
+	callif EQUAL, Route110_TrickHousePuzzle5_EventScript_162DF3
 	compare 0x4009, 2
-	callif 1, Route110_TrickHousePuzzle5_EventScript_162E2B
+	callif EQUAL, Route110_TrickHousePuzzle5_EventScript_162E2B
 	compare 0x4009, 3
-	callif 1, Route110_TrickHousePuzzle5_EventScript_162E63
+	callif EQUAL, Route110_TrickHousePuzzle5_EventScript_162E63
 	msgbox Route110_TrickHousePuzzle5_Text_19D93D, 4
 	random 3
 	switch RESULT
@@ -254,11 +254,11 @@ Route110_TrickHousePuzzle5_EventScript_162B0F:: @ 8162B0F
 	move 5, Route110_TrickHousePuzzle5_Movement_1A0835
 	waitmove 0
 	compare 0x4009, 1
-	callif 1, Route110_TrickHousePuzzle5_EventScript_162E9B
+	callif EQUAL, Route110_TrickHousePuzzle5_EventScript_162E9B
 	compare 0x4009, 2
-	callif 1, Route110_TrickHousePuzzle5_EventScript_162ED3
+	callif EQUAL, Route110_TrickHousePuzzle5_EventScript_162ED3
 	compare 0x4009, 3
-	callif 1, Route110_TrickHousePuzzle5_EventScript_162F0B
+	callif EQUAL, Route110_TrickHousePuzzle5_EventScript_162F0B
 	msgbox Route110_TrickHousePuzzle5_Text_19DA9A, 4
 	random 3
 	switch RESULT
@@ -419,80 +419,80 @@ Route110_TrickHousePuzzle5_EventScript_162DE9:: @ 8162DE9
 
 Route110_TrickHousePuzzle5_EventScript_162DF3:: @ 8162DF3
 	compare 0x4008, 1
-	callif 1, Route110_TrickHousePuzzle5_EventScript_162F43
+	callif EQUAL, Route110_TrickHousePuzzle5_EventScript_162F43
 	compare 0x4008, 2
-	callif 1, Route110_TrickHousePuzzle5_EventScript_162F4E
+	callif EQUAL, Route110_TrickHousePuzzle5_EventScript_162F4E
 	compare 0x4008, 3
-	callif 1, Route110_TrickHousePuzzle5_EventScript_162F59
+	callif EQUAL, Route110_TrickHousePuzzle5_EventScript_162F59
 	compare 0x4008, 4
-	callif 1, Route110_TrickHousePuzzle5_EventScript_162F64
+	callif EQUAL, Route110_TrickHousePuzzle5_EventScript_162F64
 	compare 0x4008, 5
-	callif 1, Route110_TrickHousePuzzle5_EventScript_162F6F
+	callif EQUAL, Route110_TrickHousePuzzle5_EventScript_162F6F
 	return
 
 Route110_TrickHousePuzzle5_EventScript_162E2B:: @ 8162E2B
 	compare 0x4008, 1
-	callif 1, Route110_TrickHousePuzzle5_EventScript_162F7A
+	callif EQUAL, Route110_TrickHousePuzzle5_EventScript_162F7A
 	compare 0x4008, 2
-	callif 1, Route110_TrickHousePuzzle5_EventScript_162F85
+	callif EQUAL, Route110_TrickHousePuzzle5_EventScript_162F85
 	compare 0x4008, 3
-	callif 1, Route110_TrickHousePuzzle5_EventScript_162F90
+	callif EQUAL, Route110_TrickHousePuzzle5_EventScript_162F90
 	compare 0x4008, 4
-	callif 1, Route110_TrickHousePuzzle5_EventScript_162F9B
+	callif EQUAL, Route110_TrickHousePuzzle5_EventScript_162F9B
 	compare 0x4008, 5
-	callif 1, Route110_TrickHousePuzzle5_EventScript_162FA6
+	callif EQUAL, Route110_TrickHousePuzzle5_EventScript_162FA6
 	return
 
 Route110_TrickHousePuzzle5_EventScript_162E63:: @ 8162E63
 	compare 0x4008, 1
-	callif 1, Route110_TrickHousePuzzle5_EventScript_162FB1
+	callif EQUAL, Route110_TrickHousePuzzle5_EventScript_162FB1
 	compare 0x4008, 2
-	callif 1, Route110_TrickHousePuzzle5_EventScript_162FBC
+	callif EQUAL, Route110_TrickHousePuzzle5_EventScript_162FBC
 	compare 0x4008, 3
-	callif 1, Route110_TrickHousePuzzle5_EventScript_162FC7
+	callif EQUAL, Route110_TrickHousePuzzle5_EventScript_162FC7
 	compare 0x4009, 4
-	callif 1, Route110_TrickHousePuzzle5_EventScript_162FD2
+	callif EQUAL, Route110_TrickHousePuzzle5_EventScript_162FD2
 	compare 0x4009, 5
-	callif 1, Route110_TrickHousePuzzle5_EventScript_162FDD
+	callif EQUAL, Route110_TrickHousePuzzle5_EventScript_162FDD
 	return
 
 Route110_TrickHousePuzzle5_EventScript_162E9B:: @ 8162E9B
 	compare 0x4008, 1
-	callif 1, Route110_TrickHousePuzzle5_EventScript_162FE8
+	callif EQUAL, Route110_TrickHousePuzzle5_EventScript_162FE8
 	compare 0x4008, 2
-	callif 1, Route110_TrickHousePuzzle5_EventScript_162FF3
+	callif EQUAL, Route110_TrickHousePuzzle5_EventScript_162FF3
 	compare 0x4008, 3
-	callif 1, Route110_TrickHousePuzzle5_EventScript_162FFE
+	callif EQUAL, Route110_TrickHousePuzzle5_EventScript_162FFE
 	compare 0x4008, 4
-	callif 1, Route110_TrickHousePuzzle5_EventScript_163009
+	callif EQUAL, Route110_TrickHousePuzzle5_EventScript_163009
 	compare 0x4008, 5
-	callif 1, Route110_TrickHousePuzzle5_EventScript_163014
+	callif EQUAL, Route110_TrickHousePuzzle5_EventScript_163014
 	return
 
 Route110_TrickHousePuzzle5_EventScript_162ED3:: @ 8162ED3
 	compare 0x4008, 1
-	callif 1, Route110_TrickHousePuzzle5_EventScript_16301F
+	callif EQUAL, Route110_TrickHousePuzzle5_EventScript_16301F
 	compare 0x4008, 2
-	callif 1, Route110_TrickHousePuzzle5_EventScript_16302A
+	callif EQUAL, Route110_TrickHousePuzzle5_EventScript_16302A
 	compare 0x4008, 3
-	callif 1, Route110_TrickHousePuzzle5_EventScript_163035
+	callif EQUAL, Route110_TrickHousePuzzle5_EventScript_163035
 	compare 0x4008, 4
-	callif 1, Route110_TrickHousePuzzle5_EventScript_163040
+	callif EQUAL, Route110_TrickHousePuzzle5_EventScript_163040
 	compare 0x4008, 5
-	callif 1, Route110_TrickHousePuzzle5_EventScript_16304B
+	callif EQUAL, Route110_TrickHousePuzzle5_EventScript_16304B
 	return
 
 Route110_TrickHousePuzzle5_EventScript_162F0B:: @ 8162F0B
 	compare 0x4008, 1
-	callif 1, Route110_TrickHousePuzzle5_EventScript_163056
+	callif EQUAL, Route110_TrickHousePuzzle5_EventScript_163056
 	compare 0x4008, 2
-	callif 1, Route110_TrickHousePuzzle5_EventScript_163061
+	callif EQUAL, Route110_TrickHousePuzzle5_EventScript_163061
 	compare 0x4008, 3
-	callif 1, Route110_TrickHousePuzzle5_EventScript_16306C
+	callif EQUAL, Route110_TrickHousePuzzle5_EventScript_16306C
 	compare 0x4008, 4
-	callif 1, Route110_TrickHousePuzzle5_EventScript_163077
+	callif EQUAL, Route110_TrickHousePuzzle5_EventScript_163077
 	compare 0x4008, 5
-	callif 1, Route110_TrickHousePuzzle5_EventScript_163082
+	callif EQUAL, Route110_TrickHousePuzzle5_EventScript_163082
 	return
 
 Route110_TrickHousePuzzle5_EventScript_162F43:: @ 8162F43

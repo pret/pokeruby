@@ -5,7 +5,7 @@ SouthernIsland_Interior_MapScripts:: @ 8160B53
 
 SouthernIsland_Interior_MapScript1_160B5E:: @ 8160B5E
 	checkflag 2145
-	callif 1, SouthernIsland_Interior_EventScript_160B68
+	callif FLAG_IS_SET, SouthernIsland_Interior_EventScript_160B68
 	end
 
 SouthernIsland_Interior_EventScript_160B68:: @ 8160B68
@@ -24,9 +24,9 @@ SouthernIsland_Interior_MapScript1_160B6C:: @ 8160B6C
 SouthernIsland_Interior_EventScript_160B77:: @ 8160B77
 	checkgender
 	compare RESULT, 0
-	jumpeq SouthernIsland_Interior_EventScript_160B8F
+	jumpif EQUAL, SouthernIsland_Interior_EventScript_160B8F
 	compare RESULT, 1
-	jumpeq SouthernIsland_Interior_EventScript_160B95
+	jumpif EQUAL, SouthernIsland_Interior_EventScript_160B95
 	end
 
 SouthernIsland_Interior_EventScript_160B8F:: @ 8160B8F
@@ -45,9 +45,9 @@ SouthernIsland_Interior_EventScript_160B9B:: @ 8160B9B
 
 SouthernIsland_Interior_EventScript_160BA7:: @ 8160BA7
 	checkflag 206
-	jumpeq SouthernIsland_Interior_EventScript_160C08
+	jumpif FLAG_IS_SET, SouthernIsland_Interior_EventScript_160C08
 	checkflag 2131
-	jumpif 0, SouthernIsland_Interior_EventScript_160C08
+	jumpif FLAG_NOT_SET, SouthernIsland_Interior_EventScript_160C08
 	setflag 206
 	special 275
 	move 127, SouthernIsland_Interior_Movement_160C12

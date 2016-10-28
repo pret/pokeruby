@@ -5,7 +5,7 @@ NewMauville_Entrance_MapScripts:: @ 815E48A
 
 NewMauville_Entrance_MapScript1_15E495:: @ 815E495
 	compare 0x40ba, 0
-	callif 1, NewMauville_Entrance_EventScript_15E4A1
+	callif EQUAL, NewMauville_Entrance_EventScript_15E4A1
 	end
 
 NewMauville_Entrance_EventScript_15E4A1:: @ 815E4A1
@@ -28,10 +28,10 @@ NewMauville_Entrance_EventScript_15E4DC:: @ 815E4DC
 	msgbox NewMauville_Entrance_Text_1982C0, 4
 	checkitem ITEM_BASEMENT_KEY, 1
 	compare RESULT, 0
-	jumpeq NewMauville_Entrance_EventScript_15E55D
+	jumpif EQUAL, NewMauville_Entrance_EventScript_15E55D
 	msgbox NewMauville_Entrance_Text_1982D4, 5
 	compare RESULT, 0
-	jumpeq NewMauville_Entrance_EventScript_15E55D
+	jumpif EQUAL, NewMauville_Entrance_EventScript_15E55D
 	msgbox NewMauville_Entrance_Text_1982EA, 4
 	setmaptile 3, 0, 707, 0
 	setmaptile 4, 0, 708, 0

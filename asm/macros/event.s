@@ -1,3 +1,15 @@
+@ condition codes
+	@ Numerical comparison
+	.set LESS_THAN,				0
+	.set EQUAL,					1
+	.set GREATER_THAN,			2
+	.set LESS_THAN_OR_EQUAL,	3
+	.set GREATER_THAN_OR_EQUAL,	4
+	.set NOT_EQUAL,				5
+	@ Flag comparison (compares to 1)
+	.set FLAG_IS_SET,			EQUAL
+	.set FLAG_NOT_SET,			LESS_THAN
+	
 	@ Does nothing.
 	.macro snop
 	.byte 0x00

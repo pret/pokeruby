@@ -10,7 +10,7 @@ DewfordTown_EventScript_14E002:: @ 814E002
 	lock
 	faceplayer
 	checkflag 189
-	jumpif 0, DewfordTown_EventScript_14E076
+	jumpif FLAG_NOT_SET, DewfordTown_EventScript_14E076
 	message DewfordTown_Text_16B522
 	waittext
 	multichoicedef 21, 6, 0, 2, 0
@@ -44,7 +44,7 @@ DewfordTown_EventScript_14E06B:: @ 814E06B
 DewfordTown_EventScript_14E076:: @ 814E076
 	msgbox DewfordTown_Text_16B3BC, 5
 	compare RESULT, 1
-	jumpeq DewfordTown_EventScript_14E093
+	jumpif EQUAL, DewfordTown_EventScript_14E093
 	msgbox DewfordTown_Text_16B471, 4
 	release
 	end
@@ -75,12 +75,12 @@ DewfordTown_EventScript_14E0C6:: @ 814E0C6
 	lock
 	faceplayer
 	checkflag 257
-	jumpeq DewfordTown_EventScript_14E11B
+	jumpif FLAG_IS_SET, DewfordTown_EventScript_14E11B
 	msgbox DewfordTown_Text_16B665, 5
 	compare RESULT, 1
-	jumpeq DewfordTown_EventScript_14E0F0
+	jumpif EQUAL, DewfordTown_EventScript_14E0F0
 	compare RESULT, 0
-	jumpeq DewfordTown_EventScript_14E111
+	jumpif EQUAL, DewfordTown_EventScript_14E111
 	end
 
 DewfordTown_EventScript_14E0F0:: @ 814E0F0
@@ -101,9 +101,9 @@ DewfordTown_EventScript_14E11B:: @ 814E11B
 	waittext
 	multichoice 20, 8, 50, 1
 	compare RESULT, 0
-	jumpeq DewfordTown_EventScript_14E13D
+	jumpif EQUAL, DewfordTown_EventScript_14E13D
 	compare RESULT, 1
-	jumpeq DewfordTown_EventScript_14E147
+	jumpif EQUAL, DewfordTown_EventScript_14E147
 	end
 
 DewfordTown_EventScript_14E13D:: @ 814E13D
@@ -177,9 +177,9 @@ DewfordTown_EventScript_14E1D8:: @ 814E1D8
 	setflag 743
 	spriteinvisible 4, 0, 11
 	checkflag 149
-	callif 0, DewfordTown_EventScript_14E281
+	callif FLAG_NOT_SET, DewfordTown_EventScript_14E281
 	checkflag 149
-	callif 1, DewfordTown_EventScript_14E28A
+	callif FLAG_IS_SET, DewfordTown_EventScript_14E28A
 	closebutton
 	copyvar 0x4096, 0x8008
 	restorespritelevel 255, 0, 11
@@ -600,9 +600,9 @@ DewfordTown_EventScript_14E413:: @ 814E413
 	call DewfordTown_EventScript_1A0102
 	msgbox DewfordTown_Text_16B9CE, 5
 	compare RESULT, 1
-	jumpeq DewfordTown_EventScript_14E439
+	jumpif EQUAL, DewfordTown_EventScript_14E439
 	compare RESULT, 0
-	jumpeq DewfordTown_EventScript_14E443
+	jumpif EQUAL, DewfordTown_EventScript_14E443
 	end
 
 DewfordTown_EventScript_14E439:: @ 814E439
@@ -617,15 +617,15 @@ DewfordTown_EventScript_14E443:: @ 814E443
 	lock
 	faceplayer
 	compare RESULT, 1
-	jumpeq DewfordTown_EventScript_14E46E
+	jumpif EQUAL, DewfordTown_EventScript_14E46E
 	compare RESULT, 0
-	jumpeq DewfordTown_EventScript_14E485
+	jumpif EQUAL, DewfordTown_EventScript_14E485
 	end
 
 DewfordTown_EventScript_14E46E:: @ 814E46E
 	inccounter GAME_STAT_STARTED_TRENDS
 	compare 0x8004, 0
-	jumpeq DewfordTown_EventScript_14E48F
+	jumpif EQUAL, DewfordTown_EventScript_14E48F
 	msgbox DewfordTown_Text_16BB44, 4
 	release
 	end

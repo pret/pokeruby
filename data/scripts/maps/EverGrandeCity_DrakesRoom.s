@@ -25,9 +25,9 @@ EverGrandeCity_DrakesRoom_EventScript_15B736:: @ 815B736
 
 EverGrandeCity_DrakesRoom_MapScript1_15B743:: @ 815B743
 	checkflag 1248
-	callif 1, EverGrandeCity_DrakesRoom_EventScript_15B758
+	callif FLAG_IS_SET, EverGrandeCity_DrakesRoom_EventScript_15B758
 	compare 0x409c, 4
-	callif 1, EverGrandeCity_DrakesRoom_EventScript_15B75E
+	callif EQUAL, EverGrandeCity_DrakesRoom_EventScript_15B75E
 	end
 
 EverGrandeCity_DrakesRoom_EventScript_15B758:: @ 815B758
@@ -42,7 +42,7 @@ EverGrandeCity_DrakesRoom_EventScript_15B764:: @ 815B764
 	lock
 	faceplayer
 	checkflag 1248
-	jumpeq EverGrandeCity_DrakesRoom_EventScript_15B78B
+	jumpif FLAG_IS_SET, EverGrandeCity_DrakesRoom_EventScript_15B78B
 	playmusic 450, 0
 	msgbox EverGrandeCity_DrakesRoom_Text_190CEB, 4
 	trainerbattle 3, OPPONENT_DRAKE, 0, EverGrandeCity_DrakesRoom_Text_190E42

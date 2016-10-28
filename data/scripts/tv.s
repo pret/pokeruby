@@ -4,30 +4,30 @@ Event_TV:: @ 81A6E72
 	special 75
 	specialval RESULT, 73
 	compare RESULT, 2
-	jumpeq EventScript_1A6F01
+	jumpif EQUAL, EventScript_1A6F01
 	compare RESULT, 1
-	jumpeq EventScript_1A6F0B
+	jumpif EQUAL, EventScript_1A6F0B
 	checkflag 2098
-	jumpif 0, EventScript_1A6EF1
+	jumpif FLAG_NOT_SET, EventScript_1A6EF1
 	checkflag 2097
-	jumpeq EventScript_1A6EF1
+	jumpif FLAG_IS_SET, EventScript_1A6EF1
 	specialval RESULT, 176
 	compare RESULT, 1
-	jumpeq EventScript_1A6F66
+	jumpif EQUAL, EventScript_1A6F66
 	jump EventScript_1A6F50
 	end
 
 EventScript_1A6EBB:
 	specialval 0x8004, 65
 	compare 0x8004, 255
-	jumpeq EventScript_1A6F3F
+	jumpif EQUAL, EventScript_1A6F3F
 	specialval RESULT, 71
 	compare RESULT, 255
-	jumpeq EventScript_1A6F3F
+	jumpif EQUAL, EventScript_1A6F3F
 	copyvar 0x8004, RESULT
 	specialval RESULT, 66
 	compare RESULT, 0
-	jumpif 5, EventScript_1A6F21
+	jumpif NOT_EQUAL, EventScript_1A6F21
 	end
 
 EventScript_1A6EF1:
@@ -60,7 +60,7 @@ EventScript_1A6F21:
 	waittext
 	waitbutton
 	compare RESULT, 1
-	jumpif 5, EventScript_1A6F21
+	jumpif NOT_EQUAL, EventScript_1A6F21
 	jump EventScript_1A6F37
 	end
 
@@ -79,7 +79,7 @@ EventScript_1A6F3F:
 EventScript_1A6F50:
 	special 64
 	compare RESULT, 0
-	jumpeq EventScript_1A6EBB
+	jumpif EQUAL, EventScript_1A6EBB
 	waittext
 	waitbutton
 	jump EventScript_1A6F37
@@ -90,6 +90,6 @@ EventScript_1A6F66:
 	waittext
 	waitbutton
 	compare RESULT, 0
-	jumpeq EventScript_1A6F66
+	jumpif EQUAL, EventScript_1A6F66
 	jump EventScript_1A6F37
 	end

@@ -7,7 +7,7 @@ OldaleTown_Mart_EventScript_152F79:: @ 8152F79
 	message OldaleTown_Mart_Text_1A0BE4
 	waittext
 	checkflag 116
-	jumpeq OldaleTown_Mart_EventScript_152FA8
+	jumpif FLAG_IS_SET, OldaleTown_Mart_EventScript_152FA8
 	pokemart OldaleTown_Mart_Items1
 	msgbox OldaleTown_Mart_Text_1A0C02, 4
 	release
@@ -44,7 +44,7 @@ OldaleTown_Mart_EventScript_152FC6:: @ 8152FC6
 	lock
 	faceplayer
 	checkflag 116
-	jumpeq OldaleTown_Mart_EventScript_152FDB
+	jumpif FLAG_IS_SET, OldaleTown_Mart_EventScript_152FDB
 	msgbox OldaleTown_Mart_Text_174A8A, 4
 	release
 	end

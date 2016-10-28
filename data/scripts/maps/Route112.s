@@ -40,7 +40,7 @@ Route112_EventScript_150560:: @ 8150560
 	trainerbattle 0, OPPONENT_TRENT_1, 0, Route112_Text_1BB6A0, Route112_Text_1BB707
 	specialval RESULT, 57
 	compare RESULT, 1
-	jumpeq Route112_EventScript_150587
+	jumpif EQUAL, Route112_EventScript_150587
 	msgbox Route112_Text_1BB721, 6
 	end
 

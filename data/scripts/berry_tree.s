@@ -23,7 +23,7 @@ Route102_EventScript_1A153D:: @ 81A153D
 	faceplayer
 	specialval RESULT, 49
 	compare RESULT, 1
-	jumpeq Route102_EventScript_1A1558
+	jumpif EQUAL, Route102_EventScript_1A1558
 	message Route102_Text_1A16B6
 	waittext
 	waitbutton
@@ -33,9 +33,9 @@ Route102_EventScript_1A153D:: @ 81A153D
 Route102_EventScript_1A1558:: @ 81A1558
 	msgbox Route102_Text_1A16CD, 5
 	compare RESULT, 1
-	jumpeq Route102_EventScript_1A1577
+	jumpif EQUAL, Route102_EventScript_1A1577
 	compare RESULT, 0
-	jumpeq Route102_EventScript_1A1593
+	jumpif EQUAL, Route102_EventScript_1A1593
 	end
 
 Route102_EventScript_1A1577:: @ 81A1577
@@ -44,7 +44,7 @@ Route102_EventScript_1A1577:: @ 81A1577
 	special 44
 	waitstate
 	compare 0x800e, 0
-	jumpeq Route102_EventScript_1A1593
+	jumpif EQUAL, Route102_EventScript_1A1593
 	removeitem 0x800e, 1
 	call Route102_EventScript_1A16A9
 
@@ -83,9 +83,9 @@ Route102_EventScript_1A15BC:: @ 81A15BC
 
 Route102_EventScript_1A15CE:: @ 81A15CE
 	compare 0x8005, 0
-	jumpeq Route102_EventScript_1A15F2
+	jumpif EQUAL, Route102_EventScript_1A15F2
 	compare 0x8005, 4
-	jumpeq Route102_EventScript_1A15EB
+	jumpif EQUAL, Route102_EventScript_1A15EB
 	buffertext 1, Route102_Text_1A17B7
 	return
 
@@ -103,14 +103,14 @@ Route102_EventScript_1A15F9:: @ 81A15F9
 	faceplayer
 	msgbox Route102_Text_1A17C0, 5
 	compare RESULT, 1
-	jumpeq Route102_EventScript_1A161D
+	jumpif EQUAL, Route102_EventScript_1A161D
 	compare RESULT, 0
-	jumpeq Route102_EventScript_1A164B
+	jumpif EQUAL, Route102_EventScript_1A164B
 
 Route102_EventScript_1A161D:: @ 81A161D
 	special 46
 	compare 0x8004, 0
-	jumpeq Route102_EventScript_1A1642
+	jumpif EQUAL, Route102_EventScript_1A1642
 	special 47
 	message Route102_Text_1A17FD
 	fanfare 387
@@ -147,12 +147,12 @@ gUnknown_081A1654:: @ 81A1654
 Route102_EventScript_1A165F:: @ 81A165F
 	checkitem ITEM_WAILMER_PAIL, 1
 	compare RESULT, 0
-	jumpeq Route102_EventScript_1A168D
+	jumpif EQUAL, Route102_EventScript_1A168D
 	msgbox Route102_Text_1A18E6, 5
 	compare RESULT, 1
-	jumpeq Route102_EventScript_1A1693
+	jumpif EQUAL, Route102_EventScript_1A1693
 	compare RESULT, 0
-	jumpeq Route102_EventScript_1A168D
+	jumpif EQUAL, Route102_EventScript_1A168D
 
 Route102_EventScript_1A168D:: @ 81A168D
 	releaseall

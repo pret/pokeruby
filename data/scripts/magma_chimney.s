@@ -2,9 +2,9 @@ MtChimney_EventScript_1B2C95:: @ 81B2C95
 	lock
 	faceplayer
 	checkflag 219
-	callif 0, MtChimney_EventScript_1B2CB9
+	callif FLAG_NOT_SET, MtChimney_EventScript_1B2CB9
 	checkflag 219
-	callif 1, MtChimney_EventScript_1B2CC2
+	callif FLAG_IS_SET, MtChimney_EventScript_1B2CC2
 	closebutton
 	move 1, MtChimney_Movement_1A083D
 	waitmove 0
@@ -68,9 +68,9 @@ MtChimney_EventScript_1B2CCB:: @ 81B2CCB
 	movespriteperm 1, 10, 12
 	reappear 1
 	compare FACING, 4
-	callif 1, MtChimney_EventScript_1B2D7D
+	callif EQUAL, MtChimney_EventScript_1B2D7D
 	compare FACING, 2
-	callif 1, MtChimney_EventScript_1B2D88
+	callif EQUAL, MtChimney_EventScript_1B2D88
 	move 255, MtChimney_Movement_1A083F
 	waitmove 0
 	.ifdef SAPPHIRE
@@ -80,9 +80,9 @@ MtChimney_EventScript_1B2CCB:: @ 81B2CCB
 	.endif
 	closebutton
 	compare FACING, 4
-	callif 1, MtChimney_EventScript_1B2D93
+	callif EQUAL, MtChimney_EventScript_1B2D93
 	compare FACING, 2
-	callif 1, MtChimney_EventScript_1B2D9E
+	callif EQUAL, MtChimney_EventScript_1B2D9E
 	disappear 1
 	setflag 927
 	setflag 139

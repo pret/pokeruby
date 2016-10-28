@@ -8,9 +8,9 @@ MossdeepCity_SpaceCenter_1F_EventScript_15AB8B:: @ 815AB8B
 	specialval RESULT, 256
 	buffernum 0, RESULT
 	compare RESULT, 0
-	callif 1, MossdeepCity_SpaceCenter_1F_EventScript_15ABBA
+	callif EQUAL, MossdeepCity_SpaceCenter_1F_EventScript_15ABBA
 	compare RESULT, 1
-	callif 4, MossdeepCity_SpaceCenter_1F_EventScript_15ABC3
+	callif GREATER_THAN_OR_EQUAL, MossdeepCity_SpaceCenter_1F_EventScript_15ABC3
 	closebutton
 	move LAST_TALKED, MossdeepCity_SpaceCenter_1F_Movement_1A083D
 	waitmove 0
@@ -33,11 +33,11 @@ MossdeepCity_SpaceCenter_1F_EventScript_15ABD5:: @ 815ABD5
 	lock
 	faceplayer
 	checkflag 192
-	jumpeq MossdeepCity_SpaceCenter_1F_EventScript_15AC0C
+	jumpif FLAG_IS_SET, MossdeepCity_SpaceCenter_1F_EventScript_15AC0C
 	msgbox MossdeepCity_SpaceCenter_1F_Text_18E335, 4
 	giveitem ITEM_SUN_STONE
 	compare RESULT, 0
-	jumpeq MossdeepCity_SpaceCenter_1F_EventScript_1A029B
+	jumpif EQUAL, MossdeepCity_SpaceCenter_1F_EventScript_1A029B
 	setflag 192
 	msgbox MossdeepCity_SpaceCenter_1F_Text_18E39B, 4
 	release

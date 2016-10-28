@@ -6,9 +6,9 @@ SootopolisCity_House2_EventScript_15B2E5:: @ 815B2E5
 	faceplayer
 	msgbox SootopolisCity_House2_Text_18FA66, 5
 	compare RESULT, 1
-	callif 1, SootopolisCity_House2_EventScript_15B307
+	callif EQUAL, SootopolisCity_House2_EventScript_15B307
 	compare RESULT, 0
-	callif 1, SootopolisCity_House2_EventScript_15B310
+	callif EQUAL, SootopolisCity_House2_EventScript_15B310
 	release
 	end
 

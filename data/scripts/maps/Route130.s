@@ -5,7 +5,7 @@ Route130_MapScripts:: @ 81523C2
 Route130_MapScript1_1523C8:: @ 81523C8
 	specialval RESULT, 209
 	compare RESULT, 1
-	jumpeq Route130_EventScript_15240C
+	jumpif EQUAL, Route130_EventScript_15240C
 	setflag 17
 	setflag 18
 	setflag 19

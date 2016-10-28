@@ -6,11 +6,11 @@ NewMauville_Inside_MapScripts:: @ 815E55F
 
 NewMauville_Inside_MapScript1_15E56F:: @ 815E56F
 	compare 0x4001, 1
-	callif 1, NewMauville_Inside_EventScript_15E5DA
+	callif EQUAL, NewMauville_Inside_EventScript_15E5DA
 	compare 0x4002, 1
-	callif 1, NewMauville_Inside_EventScript_15E728
+	callif EQUAL, NewMauville_Inside_EventScript_15E728
 	checkflag 2145
-	callif 1, NewMauville_Inside_EventScript_15E58F
+	callif FLAG_IS_SET, NewMauville_Inside_EventScript_15E58F
 	end
 
 NewMauville_Inside_EventScript_15E58F:: @ 815E58F
@@ -24,7 +24,7 @@ NewMauville_Inside_MapScript1_15E593:: @ 815E593
 
 NewMauville_Inside_MapScript1_15E59E:: @ 815E59E
 	compare 0x40ba, 2
-	callif 1, NewMauville_Inside_EventScript_15E88B
+	callif EQUAL, NewMauville_Inside_EventScript_15E88B
 	end
 
 NewMauville_Inside_EventScript_15E5AA:: @ 815E5AA
@@ -151,7 +151,7 @@ NewMauville_Inside_EventScript_15E88B:: @ 815E88B
 NewMauville_Inside_EventScript_15E8E0:: @ 815E8E0
 	lockall
 	compare 0x40ba, 2
-	jumpeq NewMauville_Inside_EventScript_15E8F6
+	jumpif EQUAL, NewMauville_Inside_EventScript_15E8F6
 	msgbox NewMauville_Inside_Text_198315, 4
 	releaseall
 	end

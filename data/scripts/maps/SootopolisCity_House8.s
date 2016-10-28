@@ -10,14 +10,14 @@ SootopolisCity_House8_EventScript_15B401:: @ 815B401
 	waitstate
 	copyvar RESULT, 0x8004
 	compare RESULT, 255
-	jumpeq SootopolisCity_House8_EventScript_15B448
+	jumpif EQUAL, SootopolisCity_House8_EventScript_15B448
 	special 120
 	compare RESULT, 1
-	jumpeq SootopolisCity_House8_EventScript_15B452
+	jumpif EQUAL, SootopolisCity_House8_EventScript_15B452
 	compare RESULT, 2
-	jumpeq SootopolisCity_House8_EventScript_15B45C
+	jumpif EQUAL, SootopolisCity_House8_EventScript_15B45C
 	compare RESULT, 3
-	jumpeq SootopolisCity_House8_EventScript_15B466
+	jumpif EQUAL, SootopolisCity_House8_EventScript_15B466
 	release
 	end
 
@@ -40,7 +40,7 @@ SootopolisCity_House8_EventScript_15B466:: @ 815B466
 	msgbox SootopolisCity_House8_Text_19021D, 4
 	giveitem ITEM_ELIXIR
 	compare RESULT, 0
-	jumpeq SootopolisCity_House8_EventScript_15B488
+	jumpif EQUAL, SootopolisCity_House8_EventScript_15B488
 	closebutton
 	release
 	end
@@ -59,14 +59,14 @@ SootopolisCity_House8_EventScript_15B492:: @ 815B492
 	waitstate
 	copyvar RESULT, 0x8004
 	compare RESULT, 255
-	jumpeq SootopolisCity_House8_EventScript_15B4D9
+	jumpif EQUAL, SootopolisCity_House8_EventScript_15B4D9
 	special 122
 	compare RESULT, 1
-	jumpeq SootopolisCity_House8_EventScript_15B4E3
+	jumpif EQUAL, SootopolisCity_House8_EventScript_15B4E3
 	compare RESULT, 2
-	jumpeq SootopolisCity_House8_EventScript_15B4ED
+	jumpif EQUAL, SootopolisCity_House8_EventScript_15B4ED
 	compare RESULT, 3
-	jumpeq SootopolisCity_House8_EventScript_15B4F7
+	jumpif EQUAL, SootopolisCity_House8_EventScript_15B4F7
 	release
 	end
 
@@ -89,7 +89,7 @@ SootopolisCity_House8_EventScript_15B4F7:: @ 815B4F7
 	msgbox SootopolisCity_House8_Text_190536, 4
 	giveitem ITEM_ELIXIR
 	compare RESULT, 0
-	jumpeq SootopolisCity_House8_EventScript_15B519
+	jumpif EQUAL, SootopolisCity_House8_EventScript_15B519
 	closebutton
 	release
 	end

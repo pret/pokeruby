@@ -93,7 +93,7 @@ FallarborTown_ContestLobby_EventScript_153A8E:: @ 8153A8E
 
 FallarborTown_ContestLobby_EventScript_153A97:: @ 8153A97
 	checkflag 270
-	jumpeq FallarborTown_ContestLobby_EventScript_153AA9
+	jumpif FLAG_IS_SET, FallarborTown_ContestLobby_EventScript_153AA9
 	msgbox FallarborTown_ContestLobby_Text_177246, 2
 	end
 

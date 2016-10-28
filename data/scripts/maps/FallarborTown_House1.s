@@ -9,25 +9,25 @@ FallarborTown_House1_EventScript_153BB5:: @ 8153BB5
 	lock
 	faceplayer
 	checkflag 229
-	jumpeq FallarborTown_House1_EventScript_153C54
+	jumpif FLAG_IS_SET, FallarborTown_House1_EventScript_153C54
 	checkitem ITEM_METEORITE, 1
 	compare RESULT, 1
-	jumpeq FallarborTown_House1_EventScript_153BDA
+	jumpif EQUAL, FallarborTown_House1_EventScript_153BDA
 	msgbox FallarborTown_House1_Text_177755, 4
 	release
 	end
 
 FallarborTown_House1_EventScript_153BDA:: @ 8153BDA
 	checkflag 2
-	callif 0, FallarborTown_House1_EventScript_153C2D
+	callif FLAG_NOT_SET, FallarborTown_House1_EventScript_153C2D
 	checkflag 2
-	callif 1, FallarborTown_House1_EventScript_153C3E
+	callif FLAG_IS_SET, FallarborTown_House1_EventScript_153C3E
 	compare RESULT, 0
-	jumpeq FallarborTown_House1_EventScript_153C47
+	jumpif EQUAL, FallarborTown_House1_EventScript_153C47
 	msgbox FallarborTown_House1_Text_1778C4, 4
 	giveitem ITEM_TM27
 	compare RESULT, 0
-	jumpeq FallarborTown_House1_EventScript_1A029B
+	jumpif EQUAL, FallarborTown_House1_EventScript_1A029B
 	setvar 0x8004, 280
 	call FallarborTown_House1_EventScript_1A067F
 	setflag 229
@@ -59,9 +59,9 @@ FallarborTown_House1_EventScript_153C5E:: @ 8153C5E
 	lock
 	faceplayer
 	checkflag 229
-	jumpeq FallarborTown_House1_EventScript_153C86
+	jumpif FLAG_IS_SET, FallarborTown_House1_EventScript_153C86
 	checkflag 139
-	jumpeq FallarborTown_House1_EventScript_153C7C
+	jumpif FLAG_IS_SET, FallarborTown_House1_EventScript_153C7C
 	msgbox FallarborTown_House1_Text_177A2B, 4
 	release
 	end

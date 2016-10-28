@@ -8,7 +8,7 @@ MossdeepCity_MapScript1_14CF98:: @ 814CF98
 	clearflag 102
 	clearflag 103
 	checkflag 2090
-	callif 1, MossdeepCity_EventScript_1A02C1
+	callif FLAG_IS_SET, MossdeepCity_EventScript_1A02C1
 	end
 
 MossdeepCity_EventScript_14CFAE:: @ 814CFAE
@@ -69,14 +69,14 @@ MossdeepCity_EventScript_14D027:: @ 814D027
 	lock
 	faceplayer
 	checkflag 276
-	jumpeq MossdeepCity_EventScript_14D069
+	jumpif FLAG_IS_SET, MossdeepCity_EventScript_14D069
 	msgbox MossdeepCity_Text_1690A9, 5
 	compare RESULT, 0
-	jumpeq MossdeepCity_EventScript_14D073
+	jumpif EQUAL, MossdeepCity_EventScript_14D073
 	msgbox MossdeepCity_Text_169117, 4
 	giveitem ITEM_KINGS_ROCK
 	compare RESULT, 0
-	jumpeq MossdeepCity_EventScript_1A029B
+	jumpif EQUAL, MossdeepCity_EventScript_1A029B
 	setflag 276
 	release
 	end

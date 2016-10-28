@@ -7,7 +7,7 @@ MossdeepCity_GameCorner_1F_MapScripts:: @ 815AC52
 MossdeepCity_GameCorner_1F_MapScript1_15AC62:: @ 815AC62
 	special 246
 	compare RESULT, 1
-	callif 1, MossdeepCity_GameCorner_1F_EventScript_15AC71
+	callif EQUAL, MossdeepCity_GameCorner_1F_EventScript_15AC71
 	end
 
 MossdeepCity_GameCorner_1F_EventScript_15AC71:: @ 815AC71
@@ -18,9 +18,9 @@ MossdeepCity_GameCorner_1F_EventScript_15AC71:: @ 815AC71
 MossdeepCity_GameCorner_1F_MapScript1_15AC84:: @ 815AC84
 	special 246
 	compare RESULT, 0
-	callif 1, MossdeepCity_GameCorner_1F_EventScript_15AC9E
+	callif EQUAL, MossdeepCity_GameCorner_1F_EventScript_15AC9E
 	compare 0x40c0, 0
-	callif 5, MossdeepCity_GameCorner_1F_EventScript_15ACAF
+	callif NOT_EQUAL, MossdeepCity_GameCorner_1F_EventScript_15ACAF
 	end
 
 MossdeepCity_GameCorner_1F_EventScript_15AC9E:: @ 815AC9E
@@ -50,11 +50,11 @@ MossdeepCity_GameCorner_1F_EventScript_15ACD5:: @ 815ACD5
 	move 255, MossdeepCity_GameCorner_1F_Movement_1A0841
 	waitmove 0
 	compare 0x40c0, 1
-	callif 1, MossdeepCity_GameCorner_1F_EventScript_15AD22
+	callif EQUAL, MossdeepCity_GameCorner_1F_EventScript_15AD22
 	compare 0x40c0, 2
-	callif 1, MossdeepCity_GameCorner_1F_EventScript_15AD2B
+	callif EQUAL, MossdeepCity_GameCorner_1F_EventScript_15AD2B
 	compare 0x40c0, 3
-	callif 1, MossdeepCity_GameCorner_1F_EventScript_15AD34
+	callif EQUAL, MossdeepCity_GameCorner_1F_EventScript_15AD34
 	special 40
 	setvar 0x40c0, 0
 	releaseall
@@ -85,7 +85,7 @@ MossdeepCity_GameCorner_1F_EventScript_15AD42:: @ 815AD42
 	lock
 	faceplayer
 	compare 0x4001, 1
-	jumpeq MossdeepCity_GameCorner_1F_EventScript_15AD59
+	jumpif EQUAL, MossdeepCity_GameCorner_1F_EventScript_15AD59
 	msgbox MossdeepCity_GameCorner_1F_Text_18E59A, 4
 	release
 	end
@@ -95,28 +95,28 @@ MossdeepCity_GameCorner_1F_EventScript_15AD59:: @ 815AD59
 	special 285
 	msgbox MossdeepCity_GameCorner_1F_Text_18E650, 5
 	compare RESULT, 0
-	jumpeq MossdeepCity_GameCorner_1F_EventScript_15ADE8
+	jumpif EQUAL, MossdeepCity_GameCorner_1F_EventScript_15ADE8
 	call MossdeepCity_GameCorner_1F_EventScript_15ADF5
 	compare RESULT, 0
-	jumpeq MossdeepCity_GameCorner_1F_EventScript_15ADE8
+	jumpif EQUAL, MossdeepCity_GameCorner_1F_EventScript_15ADE8
 	msgbox MossdeepCity_GameCorner_1F_Text_18E741, 5
 	compare RESULT, 0
-	callif 1, MossdeepCity_GameCorner_1F_EventScript_15ADE8
+	callif EQUAL, MossdeepCity_GameCorner_1F_EventScript_15ADE8
 	special 40
 	call MossdeepCity_GameCorner_1F_EventScript_19F806
 	compare RESULT, 0
-	jumpeq MossdeepCity_GameCorner_1F_EventScript_15ADE8
+	jumpif EQUAL, MossdeepCity_GameCorner_1F_EventScript_15ADE8
 	hidebox 0, 0, 15, 10
 	special 39
 	special 248
 	msgbox MossdeepCity_GameCorner_1F_Text_18E777, 4
 	closebutton
 	compare FACING, 2
-	callif 1, MossdeepCity_GameCorner_1F_EventScript_15AE04
+	callif EQUAL, MossdeepCity_GameCorner_1F_EventScript_15AE04
 	compare FACING, 4
-	callif 1, MossdeepCity_GameCorner_1F_EventScript_15AE16
+	callif EQUAL, MossdeepCity_GameCorner_1F_EventScript_15AE16
 	compare FACING, 3
-	callif 1, MossdeepCity_GameCorner_1F_EventScript_15AE28
+	callif EQUAL, MossdeepCity_GameCorner_1F_EventScript_15AE28
 	warp MossdeepCity_GameCorner_B1F, 255, 3, 1
 	waitstate
 	release

@@ -7,27 +7,27 @@ PacifidlogTown_House2_EventScript_154168:: @ 8154168
 	checkdailyflags
 	call PacifidlogTown_House2_EventScript_1541B4
 	checkflag 299
-	jumpeq PacifidlogTown_House2_EventScript_154254
+	jumpif FLAG_IS_SET, PacifidlogTown_House2_EventScript_154254
 	checkflag 300
-	callif 1, PacifidlogTown_House2_EventScript_1541CE
+	callif FLAG_IS_SET, PacifidlogTown_House2_EventScript_1541CE
 	checkflag 300
-	callif 0, PacifidlogTown_House2_EventScript_1541D7
+	callif FLAG_NOT_SET, PacifidlogTown_House2_EventScript_1541D7
 	setflag 300
 	specialval RESULT, 230
 	compare RESULT, 4
-	jumpif 4, PacifidlogTown_House2_EventScript_1541EC
+	jumpif GREATER_THAN_OR_EQUAL, PacifidlogTown_House2_EventScript_1541EC
 	specialval RESULT, 230
 	compare RESULT, 2
-	jumpif 4, PacifidlogTown_House2_EventScript_15421B
+	jumpif GREATER_THAN_OR_EQUAL, PacifidlogTown_House2_EventScript_15421B
 	jump PacifidlogTown_House2_EventScript_154225
 	end
 
 PacifidlogTown_House2_EventScript_1541B4:: @ 81541B4
 	checkflag 299
-	jumpif 0, PacifidlogTown_House2_EventScript_1A14DC
+	jumpif FLAG_NOT_SET, PacifidlogTown_House2_EventScript_1A14DC
 	specialval RESULT, 334
 	compare RESULT, 0
-	callif 1, PacifidlogTown_House2_EventScript_1541E8
+	callif EQUAL, PacifidlogTown_House2_EventScript_1541E8
 	return
 
 PacifidlogTown_House2_EventScript_1541CE:: @ 81541CE
@@ -47,7 +47,7 @@ PacifidlogTown_House2_EventScript_1541EC:: @ 81541EC
 	msgbox PacifidlogTown_House2_Text_179169, 4
 	giveitem ITEM_TM27
 	compare RESULT, 0
-	jumpeq PacifidlogTown_House2_EventScript_1A029B
+	jumpif EQUAL, PacifidlogTown_House2_EventScript_1A029B
 	setflag 299
 	special 333
 	msgbox PacifidlogTown_House2_Text_179283, 4
@@ -63,7 +63,7 @@ PacifidlogTown_House2_EventScript_154225:: @ 8154225
 	msgbox PacifidlogTown_House2_Text_17922D, 4
 	giveitem ITEM_TM21
 	compare RESULT, 0
-	jumpeq PacifidlogTown_House2_EventScript_1A029B
+	jumpif EQUAL, PacifidlogTown_House2_EventScript_1A029B
 	setflag 299
 	special 333
 	msgbox PacifidlogTown_House2_Text_179283, 4

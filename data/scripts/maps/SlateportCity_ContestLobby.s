@@ -102,7 +102,7 @@ SlateportCity_ContestLobby_EventScript_1554F0:: @ 81554F0
 SlateportCity_ContestLobby_EventScript_1554F9:: @ 81554F9
 	lockall
 	checkflag 95
-	jumpeq SlateportCity_ContestLobby_EventScript_155526
+	jumpif FLAG_IS_SET, SlateportCity_ContestLobby_EventScript_155526
 	move 7, SlateportCity_ContestLobby_Movement_1A0839
 	waitmove 0
 	msgbox SlateportCity_ContestLobby_Text_17CA67, 4

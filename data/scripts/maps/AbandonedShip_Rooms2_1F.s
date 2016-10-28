@@ -5,7 +5,7 @@ AbandonedShip_Rooms2_1F_EventScript_15EA68:: @ 815EA68
 	trainerbattle 4, OPPONENT_LOIS_AND_HAL_1, 0, AbandonedShip_Rooms2_1F_Text_1987C1, AbandonedShip_Rooms2_1F_Text_1987FE, AbandonedShip_Rooms2_1F_Text_19887F
 	specialval RESULT, 57
 	compare RESULT, 1
-	jumpeq AbandonedShip_Rooms2_1F_EventScript_15EA93
+	jumpif EQUAL, AbandonedShip_Rooms2_1F_EventScript_15EA93
 	msgbox AbandonedShip_Rooms2_1F_Text_198835, 6
 	end
 
@@ -18,7 +18,7 @@ AbandonedShip_Rooms2_1F_EventScript_15EAAE:: @ 815EAAE
 	trainerbattle 4, OPPONENT_LOIS_AND_HAL_1, 0, AbandonedShip_Rooms2_1F_Text_1988CC, AbandonedShip_Rooms2_1F_Text_198916, AbandonedShip_Rooms2_1F_Text_19899A
 	specialval RESULT, 57
 	compare RESULT, 1
-	jumpeq AbandonedShip_Rooms2_1F_EventScript_15EAD9
+	jumpif EQUAL, AbandonedShip_Rooms2_1F_EventScript_15EAD9
 	msgbox AbandonedShip_Rooms2_1F_Text_198934, 6
 	end
 

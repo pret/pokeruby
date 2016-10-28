@@ -6,9 +6,9 @@ EverGrandeCity_SidneysRoom_MapScripts:: @ 815B53F
 
 EverGrandeCity_SidneysRoom_MapScript1_15B54F:: @ 815B54F
 	checkflag 1245
-	callif 1, EverGrandeCity_SidneysRoom_EventScript_15B564
+	callif FLAG_IS_SET, EverGrandeCity_SidneysRoom_EventScript_15B564
 	compare 0x409c, 1
-	callif 1, EverGrandeCity_SidneysRoom_EventScript_15B56A
+	callif EQUAL, EverGrandeCity_SidneysRoom_EventScript_15B56A
 	end
 
 EverGrandeCity_SidneysRoom_EventScript_15B564:: @ 815B564
@@ -43,7 +43,7 @@ EverGrandeCity_SidneysRoom_EventScript_15B596:: @ 815B596
 	lock
 	faceplayer
 	checkflag 1245
-	jumpeq EverGrandeCity_SidneysRoom_EventScript_15B5BD
+	jumpif FLAG_IS_SET, EverGrandeCity_SidneysRoom_EventScript_15B5BD
 	playmusic 450, 0
 	msgbox EverGrandeCity_SidneysRoom_Text_190728, 4
 	trainerbattle 3, OPPONENT_SIDNEY, 0, EverGrandeCity_SidneysRoom_Text_190823

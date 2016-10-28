@@ -4,9 +4,9 @@ Route110_SeasideCyclingRoadNorthEntrance_MapScripts:: @ 81634C8
 
 Route110_SeasideCyclingRoadNorthEntrance_MapScript1_1634CE:: @ 81634CE
 	compare 0x40a9, 3
-	callif 1, Route110_SeasideCyclingRoadNorthEntrance_EventScript_1634E5
+	callif EQUAL, Route110_SeasideCyclingRoadNorthEntrance_EventScript_1634E5
 	compare 0x40a9, 2
-	callif 1, Route110_SeasideCyclingRoadNorthEntrance_EventScript_1634E5
+	callif EQUAL, Route110_SeasideCyclingRoadNorthEntrance_EventScript_1634E5
 	end
 
 Route110_SeasideCyclingRoadNorthEntrance_EventScript_1634E5:: @ 81634E5
@@ -25,9 +25,9 @@ Route110_SeasideCyclingRoadNorthEntrance_EventScript_1634F7:: @ 81634F7
 	lockall
 	specialval RESULT, 227 @ player state?
 	compare RESULT, 2
-	callif 1, Route110_SeasideCyclingRoadNorthEntrance_EventScript_16351D
+	callif EQUAL, Route110_SeasideCyclingRoadNorthEntrance_EventScript_16351D
 	compare RESULT, 0
-	jumpeq Route110_SeasideCyclingRoadNorthEntrance_EventScript_163523
+	jumpif EQUAL, Route110_SeasideCyclingRoadNorthEntrance_EventScript_163523
 	setflag 2091
 	setvar 0x4001, 1
 	releaseall

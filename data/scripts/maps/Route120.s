@@ -6,22 +6,22 @@ Route120_MapScripts:: @ 815160E
 
 Route120_MapScript1_15161E:: @ 815161E
 	checkflag 2145
-	callif 1, Route120_EventScript_151628
+	callif FLAG_IS_SET, Route120_EventScript_151628
 	end
 
 Route120_EventScript_151628:: @ 8151628
 	compare 0x8004, 0
-	callif 1, Route120_EventScript_15166B
+	callif EQUAL, Route120_EventScript_15166B
 	compare 0x8004, 1
-	callif 1, Route120_EventScript_151672
+	callif EQUAL, Route120_EventScript_151672
 	compare 0x8004, 2
-	callif 1, Route120_EventScript_151676
+	callif EQUAL, Route120_EventScript_151676
 	compare 0x8004, 3
-	callif 1, Route120_EventScript_15167A
+	callif EQUAL, Route120_EventScript_15167A
 	compare 0x8004, 4
-	callif 1, Route120_EventScript_15167E
+	callif EQUAL, Route120_EventScript_15167E
 	compare 0x8004, 5
-	callif 1, Route120_EventScript_151682
+	callif EQUAL, Route120_EventScript_151682
 	return
 
 Route120_EventScript_15166B:: @ 815166B
@@ -51,11 +51,11 @@ Route120_EventScript_151682:: @ 8151682
 
 Route120_MapScript1_151686:: @ 8151686
 	checkflag 228
-	callif 0, Route120_EventScript_1516A2
+	callif FLAG_NOT_SET, Route120_EventScript_1516A2
 	checkflag 285
-	callif 1, Route120_EventScript_1516B5
+	callif FLAG_IS_SET, Route120_EventScript_1516B5
 	checkflag 285
-	callif 0, Route120_EventScript_1516DA
+	callif FLAG_NOT_SET, Route120_EventScript_1516DA
 	end
 
 Route120_EventScript_1516A2:: @ 81516A2
@@ -82,11 +82,11 @@ Route120_MapScript1_1516DF:: @ 81516DF
 Route120_EventScript_1516EA:: @ 81516EA
 	getplayerxy 0x4000, 0x4001
 	compare 0x4001, 14
-	jumpif 3, Route120_EventScript_151715
+	jumpif LESS_THAN_OR_EQUAL, Route120_EventScript_151715
 	compare 0x4001, 60
-	jumpif 3, Route120_EventScript_151719
+	jumpif LESS_THAN_OR_EQUAL, Route120_EventScript_151719
 	compare 0x4001, 61
-	jumpif 4, Route120_EventScript_151711
+	jumpif GREATER_THAN_OR_EQUAL, Route120_EventScript_151711
 	return
 
 Route120_EventScript_151711:: @ 8151711
@@ -99,9 +99,9 @@ Route120_EventScript_151715:: @ 8151715
 
 Route120_EventScript_151719:: @ 8151719
 	compare 0x4000, 7
-	jumpif 3, Route120_EventScript_151735
+	jumpif LESS_THAN_OR_EQUAL, Route120_EventScript_151735
 	compare 0x4000, 19
-	jumpif 3, Route120_EventScript_151715
+	jumpif LESS_THAN_OR_EQUAL, Route120_EventScript_151715
 	jump Route120_EventScript_151735
 	end
 
@@ -114,12 +114,12 @@ Route120_EventScript_151739:: @ 8151739
 	faceplayer
 	checkdailyflags
 	checkflag 2254
-	jumpeq Route120_EventScript_151837
+	jumpif FLAG_IS_SET, Route120_EventScript_151837
 	msgbox Route120_Text_1C58F1, 5
 	compare RESULT, 1
-	callif 1, Route120_EventScript_151841
+	callif EQUAL, Route120_EventScript_151841
 	compare RESULT, 0
-	callif 1, Route120_EventScript_15184A
+	callif EQUAL, Route120_EventScript_15184A
 	specialval RESULT, 147
 	switch RESULT
 	case 0, Route120_EventScript_1517DC
@@ -162,7 +162,7 @@ Route120_EventScript_151808:: @ 8151808
 Route120_EventScript_151813:: @ 8151813
 	giveitem 0x8004
 	compare RESULT, 0
-	jumpeq Route120_EventScript_1A029B
+	jumpif EQUAL, Route120_EventScript_1A029B
 	setflag 2254
 	msgbox Route120_Text_1C5A0B, 4
 	release
@@ -185,10 +185,10 @@ Route120_EventScript_151853:: @ 8151853
 	lock
 	faceplayer
 	checkflag 290
-	jumpeq Route120_EventScript_151884
+	jumpif FLAG_IS_SET, Route120_EventScript_151884
 	msgbox Route120_Text_171827, 5
 	compare RESULT, 0
-	jumpeq Route120_EventScript_151877
+	jumpif EQUAL, Route120_EventScript_151877
 	jump Route120_EventScript_15189D
 	end
 
@@ -201,7 +201,7 @@ Route120_EventScript_151877:: @ 8151877
 Route120_EventScript_151884:: @ 8151884
 	msgbox Route120_Text_17196F, 5
 	compare RESULT, 0
-	jumpeq Route120_EventScript_151877
+	jumpif EQUAL, Route120_EventScript_151877
 	jump Route120_EventScript_15189D
 	end
 
@@ -209,9 +209,9 @@ Route120_EventScript_15189D:: @ 815189D
 	msgbox Route120_Text_1719A0, 4
 	closebutton
 	compare FACING, 2
-	callif 1, Route120_EventScript_15197F
+	callif EQUAL, Route120_EventScript_15197F
 	compare FACING, 3
-	callif 1, Route120_EventScript_15198A
+	callif EQUAL, Route120_EventScript_15198A
 	move 31, Route120_Movement_1A083F
 	waitmove 0
 	pause 20
@@ -294,7 +294,7 @@ Route120_EventScript_1519CA:: @ 81519CA
 	trainerbattle 0, OPPONENT_ROBERT_1, 0, Route120_Text_1BF07E, Route120_Text_1BF0A5
 	specialval RESULT, 57
 	compare RESULT, 1
-	jumpeq Route120_EventScript_1519F1
+	jumpif EQUAL, Route120_EventScript_1519F1
 	msgbox Route120_Text_1BF0C3, 6
 	end
 
@@ -317,7 +317,7 @@ Route120_EventScript_151A36:: @ 8151A36
 	trainerbattle 0, OPPONENT_BRANDON_1, 0, Route120_Text_1BF32B, Route120_Text_1BF36B
 	specialval RESULT, 57
 	compare RESULT, 1
-	jumpeq Route120_EventScript_151A5D
+	jumpif EQUAL, Route120_EventScript_151A5D
 	msgbox Route120_Text_1BF38D, 6
 	end
 

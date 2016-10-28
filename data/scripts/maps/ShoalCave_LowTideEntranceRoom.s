@@ -5,7 +5,7 @@ ShoalCave_LowTideEntranceRoom_MapScripts:: @ 815E057
 ShoalCave_LowTideEntranceRoom_MapScript1_15E05D:: @ 815E05D
 	special 210
 	checkflag 2106
-	jumpeq ShoalCave_LowTideEntranceRoom_EventScript_15E06E
+	jumpif FLAG_IS_SET, ShoalCave_LowTideEntranceRoom_EventScript_15E06E
 	jump ShoalCave_LowTideEntranceRoom_EventScript_15E072
 
 ShoalCave_LowTideEntranceRoom_EventScript_15E06E:: @ 815E06E
@@ -21,27 +21,27 @@ ShoalCave_LowTideEntranceRoom_EventScript_15E076:: @ 815E076
 	faceplayer
 	checkdailyflags
 	checkflag 2143
-	callif 1, ShoalCave_LowTideEntranceRoom_EventScript_15E176
+	callif FLAG_IS_SET, ShoalCave_LowTideEntranceRoom_EventScript_15E176
 	checkitem ITEM_SHOAL_SALT, 4
 	compare RESULT, 0
-	jumpeq ShoalCave_LowTideEntranceRoom_EventScript_15E138
+	jumpif EQUAL, ShoalCave_LowTideEntranceRoom_EventScript_15E138
 	checkitem ITEM_SHOAL_SHELL, 4
 	compare RESULT, 0
-	jumpeq ShoalCave_LowTideEntranceRoom_EventScript_15E138
+	jumpif EQUAL, ShoalCave_LowTideEntranceRoom_EventScript_15E138
 	msgbox ShoalCave_LowTideEntranceRoom_Text_1C6793, 5
 	compare RESULT, 0
-	jumpeq ShoalCave_LowTideEntranceRoom_EventScript_15E16C
+	jumpif EQUAL, ShoalCave_LowTideEntranceRoom_EventScript_15E16C
 	checkitemspace ITEM_SHELL_BELL, 1
 	compare RESULT, 0
-	callif 1, ShoalCave_LowTideEntranceRoom_EventScript_15E106
+	callif EQUAL, ShoalCave_LowTideEntranceRoom_EventScript_15E106
 	compare RESULT, 2
-	jumpeq ShoalCave_LowTideEntranceRoom_EventScript_15E12E
+	jumpif EQUAL, ShoalCave_LowTideEntranceRoom_EventScript_15E12E
 	msgbox ShoalCave_LowTideEntranceRoom_Text_1C6808, 4
 	removeitem ITEM_SHOAL_SALT, 4
 	removeitem ITEM_SHOAL_SHELL, 4
 	giveitem ITEM_SHELL_BELL
 	compare RESULT, 0
-	jumpeq ShoalCave_LowTideEntranceRoom_EventScript_1A029B
+	jumpif EQUAL, ShoalCave_LowTideEntranceRoom_EventScript_1A029B
 	msgbox ShoalCave_LowTideEntranceRoom_Text_1C688E, 4
 	setflag 2
 	release
@@ -50,13 +50,13 @@ ShoalCave_LowTideEntranceRoom_EventScript_15E076:: @ 815E076
 ShoalCave_LowTideEntranceRoom_EventScript_15E106:: @ 815E106
 	checkitem ITEM_SHOAL_SALT, 5
 	compare RESULT, 1
-	jumpeq ShoalCave_LowTideEntranceRoom_EventScript_15E117
+	jumpif EQUAL, ShoalCave_LowTideEntranceRoom_EventScript_15E117
 	return
 
 ShoalCave_LowTideEntranceRoom_EventScript_15E117:: @ 815E117
 	checkitem ITEM_SHOAL_SHELL, 5
 	compare RESULT, 1
-	jumpeq ShoalCave_LowTideEntranceRoom_EventScript_15E128
+	jumpif EQUAL, ShoalCave_LowTideEntranceRoom_EventScript_15E128
 	return
 
 ShoalCave_LowTideEntranceRoom_EventScript_15E128:: @ 815E128
@@ -71,10 +71,10 @@ ShoalCave_LowTideEntranceRoom_EventScript_15E12E:: @ 815E12E
 ShoalCave_LowTideEntranceRoom_EventScript_15E138:: @ 815E138
 	checkitem ITEM_SHOAL_SALT, 1
 	compare RESULT, 1
-	jumpeq ShoalCave_LowTideEntranceRoom_EventScript_15E162
+	jumpif EQUAL, ShoalCave_LowTideEntranceRoom_EventScript_15E162
 	checkitem ITEM_SHOAL_SHELL, 1
 	compare RESULT, 1
-	jumpeq ShoalCave_LowTideEntranceRoom_EventScript_15E162
+	jumpif EQUAL, ShoalCave_LowTideEntranceRoom_EventScript_15E162
 	msgbox ShoalCave_LowTideEntranceRoom_Text_1C6668, 4
 	release
 	end

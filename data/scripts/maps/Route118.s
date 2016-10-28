@@ -10,12 +10,12 @@ Route118_EventScript_150F34:: @ 8150F34
 	lock
 	faceplayer
 	checkflag 227
-	jumpeq Route118_EventScript_150F89
+	jumpif FLAG_IS_SET, Route118_EventScript_150F89
 	msgbox Route118_Text_170F12, 5
 	compare RESULT, 1
-	jumpeq Route118_EventScript_150F5E
+	jumpif EQUAL, Route118_EventScript_150F5E
 	compare RESULT, 0
-	jumpeq Route118_EventScript_150F7F
+	jumpif EQUAL, Route118_EventScript_150F7F
 	end
 
 Route118_EventScript_150F5E:: @ 8150F5E
@@ -84,11 +84,11 @@ Route118_EventScript_151004:: @ 8151004
 	msgbox Route118_Text_170D66, 4
 	closebutton
 	compare 0x8008, 0
-	callif 1, Route118_EventScript_151048
+	callif EQUAL, Route118_EventScript_151048
 	compare 0x8008, 1
-	callif 1, Route118_EventScript_151053
+	callif EQUAL, Route118_EventScript_151053
 	compare 0x8008, 2
-	callif 1, Route118_EventScript_15105E
+	callif EQUAL, Route118_EventScript_15105E
 	setvar 0x4071, 1
 	disappear 19
 	releaseall
@@ -163,7 +163,7 @@ Route118_EventScript_15108F:: @ 815108F
 	trainerbattle 0, OPPONENT_ROSE_1, 0, Route118_Text_1BDFF4, Route118_Text_1BE03C
 	specialval RESULT, 57
 	compare RESULT, 1
-	jumpeq Route118_EventScript_1510B6
+	jumpif EQUAL, Route118_EventScript_1510B6
 	msgbox Route118_Text_1BE05E, 6
 	end
 
@@ -186,7 +186,7 @@ Route118_EventScript_1510FB:: @ 81510FB
 	trainerbattle 0, OPPONENT_DALTON_1, 0, Route118_Text_1BE3E8, Route118_Text_1BE406
 	specialval RESULT, 57
 	compare RESULT, 1
-	jumpeq Route118_EventScript_151122
+	jumpif EQUAL, Route118_EventScript_151122
 	msgbox Route118_Text_1BE413, 6
 	end
 

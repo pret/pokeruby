@@ -14,7 +14,7 @@ LilycoveCity_ContestLobby_MapScript2_158877:: @ 8158877
 
 LilycoveCity_ContestLobby_EventScript_158889:: @ 8158889
 	checkflag 775
-	jumpeq LilycoveCity_ContestLobby_EventScript_158898
+	jumpif FLAG_IS_SET, LilycoveCity_ContestLobby_EventScript_158898
 	setvar 0x4099, 0
 	end
 
@@ -32,9 +32,9 @@ LilycoveCity_ContestLobby_EventScript_158898:: @ 8158898
 	lockall
 	msgbox LilycoveCity_ContestLobby_Text_1889FD, 5
 	compare RESULT, 1
-	jumpeq LilycoveCity_ContestLobby_EventScript_1588DE
+	jumpif EQUAL, LilycoveCity_ContestLobby_EventScript_1588DE
 	compare RESULT, 0
-	jumpeq LilycoveCity_ContestLobby_EventScript_158918
+	jumpif EQUAL, LilycoveCity_ContestLobby_EventScript_158918
 	releaseall
 	end
 
@@ -45,7 +45,7 @@ LilycoveCity_ContestLobby_EventScript_1588DE:: @ 81588DE
 	setvar 0x4099, 0
 	specialval RESULT, 91
 	compare RESULT, 1
-	callif 1, LilycoveCity_ContestLobby_EventScript_158948
+	callif EQUAL, LilycoveCity_ContestLobby_EventScript_158948
 	move 4, LilycoveCity_ContestLobby_Movement_158A43
 	waitmove 0
 	disappear 4
@@ -57,7 +57,7 @@ LilycoveCity_ContestLobby_EventScript_1588DE:: @ 81588DE
 LilycoveCity_ContestLobby_EventScript_158918:: @ 8158918
 	msgbox LilycoveCity_ContestLobby_Text_188C41, 5
 	compare RESULT, 1
-	jumpeq LilycoveCity_ContestLobby_EventScript_1588DE
+	jumpif EQUAL, LilycoveCity_ContestLobby_EventScript_1588DE
 	msgbox LilycoveCity_ContestLobby_Text_188CBD, 4
 	closebutton
 	move 4, LilycoveCity_ContestLobby_Movement_158A43
@@ -189,7 +189,7 @@ LilycoveCity_ContestLobby_Movement_158A52:: @ 8158A52
 
 LilycoveCity_ContestLobby_EventScript_158A5B:: @ 8158A5B
 	checkflag 775
-	jumpeq LilycoveCity_ContestLobby_EventScript_158A6A
+	jumpif FLAG_IS_SET, LilycoveCity_ContestLobby_EventScript_158A6A
 	setvar 0x4099, 0
 	end
 
@@ -206,9 +206,9 @@ LilycoveCity_ContestLobby_EventScript_158A6A:: @ 8158A6A
 	showcontestwinner 0
 	msgbox LilycoveCity_ContestLobby_Text_1889FD, 5
 	compare RESULT, 1
-	jumpeq LilycoveCity_ContestLobby_EventScript_158AAE
+	jumpif EQUAL, LilycoveCity_ContestLobby_EventScript_158AAE
 	compare RESULT, 0
-	jumpeq LilycoveCity_ContestLobby_EventScript_158AE8
+	jumpif EQUAL, LilycoveCity_ContestLobby_EventScript_158AE8
 	end
 
 LilycoveCity_ContestLobby_EventScript_158AAE:: @ 8158AAE
@@ -218,7 +218,7 @@ LilycoveCity_ContestLobby_EventScript_158AAE:: @ 8158AAE
 	setvar 0x4099, 0
 	specialval RESULT, 91
 	compare RESULT, 1
-	callif 1, LilycoveCity_ContestLobby_EventScript_158B18
+	callif EQUAL, LilycoveCity_ContestLobby_EventScript_158B18
 	move 11, LilycoveCity_ContestLobby_Movement_158B6D
 	waitmove 0
 	disappear 11
@@ -230,7 +230,7 @@ LilycoveCity_ContestLobby_EventScript_158AAE:: @ 8158AAE
 LilycoveCity_ContestLobby_EventScript_158AE8:: @ 8158AE8
 	msgbox LilycoveCity_ContestLobby_Text_188C41, 5
 	compare RESULT, 1
-	jumpeq LilycoveCity_ContestLobby_EventScript_158AAE
+	jumpif EQUAL, LilycoveCity_ContestLobby_EventScript_158AAE
 	msgbox LilycoveCity_ContestLobby_Text_188CBD, 4
 	closebutton
 	move 11, LilycoveCity_ContestLobby_Movement_158B6D
@@ -306,9 +306,9 @@ LilycoveCity_ContestLobby_EventScript_158B85:: @ 8158B85
 	lockall
 	checkitem ITEM_CONTEST_PASS, 1
 	compare RESULT, 0
-	jumpeq LilycoveCity_ContestLobby_EventScript_158BBA
+	jumpif EQUAL, LilycoveCity_ContestLobby_EventScript_158BBA
 	checkflag 2
-	jumpeq LilycoveCity_ContestLobby_EventScript_158BAE
+	jumpif FLAG_IS_SET, LilycoveCity_ContestLobby_EventScript_158BAE
 	message LilycoveCity_ContestLobby_Text_18848C
 	waittext
 	setflag 2
@@ -329,11 +329,11 @@ LilycoveCity_ContestLobby_EventScript_158BBA:: @ 8158BBA
 LilycoveCity_ContestLobby_EventScript_158BC4:: @ 8158BC4
 	msgbox LilycoveCity_ContestLobby_Text_188521, 5
 	compare RESULT, 0
-	jumpeq LilycoveCity_ContestLobby_EventScript_158C35
+	jumpif EQUAL, LilycoveCity_ContestLobby_EventScript_158C35
 	call LilycoveCity_ContestLobby_EventScript_19F806
 	hidebox 0, 0, 15, 9
 	compare RESULT, 0
-	jumpeq LilycoveCity_ContestLobby_EventScript_158C35
+	jumpif EQUAL, LilycoveCity_ContestLobby_EventScript_158C35
 	setflag 3
 	return
 
@@ -362,18 +362,18 @@ LilycoveCity_ContestLobby_EventScript_158C42:: @ 8158C42
 	setvar 0x8010, 0
 	choosecontestpkmn
 	compare 0x8004, 255
-	jumpeq LilycoveCity_ContestLobby_EventScript_158CEA
+	jumpif EQUAL, LilycoveCity_ContestLobby_EventScript_158CEA
 	special 84
 	compare RESULT, 0
-	jumpeq LilycoveCity_ContestLobby_EventScript_158C96
+	jumpif EQUAL, LilycoveCity_ContestLobby_EventScript_158C96
 	compare RESULT, 1
-	jumpeq LilycoveCity_ContestLobby_EventScript_158CC0
+	jumpif EQUAL, LilycoveCity_ContestLobby_EventScript_158CC0
 	compare RESULT, 2
-	jumpeq LilycoveCity_ContestLobby_EventScript_158CC0
+	jumpif EQUAL, LilycoveCity_ContestLobby_EventScript_158CC0
 	compare RESULT, 3
-	jumpeq LilycoveCity_ContestLobby_EventScript_158CA4
+	jumpif EQUAL, LilycoveCity_ContestLobby_EventScript_158CA4
 	compare RESULT, 4
-	jumpeq LilycoveCity_ContestLobby_EventScript_158CB2
+	jumpif EQUAL, LilycoveCity_ContestLobby_EventScript_158CB2
 	end
 
 LilycoveCity_ContestLobby_EventScript_158C96:: @ 8158C96
@@ -403,7 +403,7 @@ LilycoveCity_ContestLobby_EventScript_158CC0:: @ 8158CC0
 
 LilycoveCity_ContestLobby_EventScript_158CEA:: @ 8158CEA
 	checkflag 3
-	callif 0, LilycoveCity_ContestLobby_EventScript_158BC4
+	callif FLAG_NOT_SET, LilycoveCity_ContestLobby_EventScript_158BC4
 	message LilycoveCity_ContestLobby_Text_1886DC
 	waittext
 	multichoice 0, 0, 4, 0
@@ -421,11 +421,11 @@ LilycoveCity_ContestLobby_EventScript_158D24:: @ 8158D24
 	special 92
 	waitstate
 	compare RESULT, 3
-	jumpeq LilycoveCity_ContestLobby_EventScript_158D90
+	jumpif EQUAL, LilycoveCity_ContestLobby_EventScript_158D90
 	compare RESULT, 5
-	jumpeq LilycoveCity_ContestLobby_EventScript_158DA1
+	jumpif EQUAL, LilycoveCity_ContestLobby_EventScript_158DA1
 	compare RESULT, 6
-	jumpeq LilycoveCity_ContestLobby_EventScript_158DB2
+	jumpif EQUAL, LilycoveCity_ContestLobby_EventScript_158DB2
 	message2 LilycoveCity_ContestLobby_Text_18872A
 	waittext
 	contestlinktransfer
@@ -570,7 +570,7 @@ LilycoveCity_ContestLobby_Movement_158EAE:: @ 8158EAE
 LilycoveCity_ContestLobby_EventScript_158EB0:: @ 8158EB0
 	specialval RESULT, 90
 	compare RESULT, 1
-	jumpeq LilycoveCity_ContestLobby_EventScript_158EE8
+	jumpif EQUAL, LilycoveCity_ContestLobby_EventScript_158EE8
 	setvar 0x800b, 8
 	setvar 0x8010, 3
 	call LilycoveCity_ContestLobby_EventScript_1A4E92
@@ -708,7 +708,7 @@ LilycoveCity_ContestLobby_EventScript_15901E:: @ 815901E
 
 LilycoveCity_ContestLobby_EventScript_159027:: @ 8159027
 	checkflag 150
-	jumpif 0, LilycoveCity_ContestLobby_EventScript_159039
+	jumpif FLAG_NOT_SET, LilycoveCity_ContestLobby_EventScript_159039
 	msgbox LilycoveCity_ContestLobby_Text_188DDA, 2
 	end
 

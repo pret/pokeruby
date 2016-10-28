@@ -9,7 +9,7 @@ MtPyre_Exterior_MapScript1_15D48C:: @ 815D48C
 MtPyre_Exterior_EventScript_15D492:: @ 815D492
 	getplayerxy 0x4000, 0x4001
 	compare 0x4001, 12
-	jumpif 0, MtPyre_Exterior_EventScript_15D4A3
+	jumpif LESS_THAN, MtPyre_Exterior_EventScript_15D4A3
 	return
 
 MtPyre_Exterior_EventScript_15D4A3:: @ 815D4A3

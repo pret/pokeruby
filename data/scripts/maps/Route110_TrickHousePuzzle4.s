@@ -4,7 +4,7 @@ Route110_TrickHousePuzzle4_MapScripts:: @ 816274D
 Route110_TrickHousePuzzle4_EventScript_16274E:: @ 816274E
 	lockall
 	compare 0x40ae, 0
-	jumpeq Route110_TrickHousePuzzle4_EventScript_162760
+	jumpif EQUAL, Route110_TrickHousePuzzle4_EventScript_162760
 	jump Route110_TrickHousePuzzle4_EventScript_161892
 	end
 

@@ -35,7 +35,7 @@ Route121_SafariZoneEntrance_EventScript_15C35A:: @ 815C35A
 	faceplayer
 	msgbox Route121_SafariZoneEntrance_Text_1C3704, 5
 	compare RESULT, 1
-	jumpeq Route121_SafariZoneEntrance_EventScript_15C379
+	jumpif EQUAL, Route121_SafariZoneEntrance_EventScript_15C379
 	msgbox Route121_SafariZoneEntrance_Text_1C373C, 4
 	release
 	end
@@ -53,7 +53,7 @@ Route121_SafariZoneEntrance_EventScript_15C383:: @ 815C383
 	snop
 	msgbox Route121_SafariZoneEntrance_Text_1C3832, 5
 	compare RESULT, 1
-	jumpeq Route121_SafariZoneEntrance_EventScript_15C3B3
+	jumpif EQUAL, Route121_SafariZoneEntrance_EventScript_15C3B3
 	msgbox Route121_SafariZoneEntrance_Text_1C3895, 4
 	jump Route121_SafariZoneEntrance_EventScript_15C46C
 	end
@@ -61,11 +61,11 @@ Route121_SafariZoneEntrance_EventScript_15C383:: @ 815C383
 Route121_SafariZoneEntrance_EventScript_15C3B3:: @ 815C3B3
 	checkitem ITEM_POKEBLOCK_CASE, 1
 	compare RESULT, 0
-	jumpeq Route121_SafariZoneEntrance_EventScript_15C450
+	jumpif EQUAL, Route121_SafariZoneEntrance_EventScript_15C450
 	call Route121_SafariZoneEntrance_EventScript_15C425
 	checkmoney 0x1f4, 0
 	compare RESULT, 0
-	jumpeq Route121_SafariZoneEntrance_EventScript_15C45E
+	jumpif EQUAL, Route121_SafariZoneEntrance_EventScript_15C45E
 	msgbox Route121_SafariZoneEntrance_Text_1C38D9, 4
 	paymoney 0x1f4, 0
 	updatemoney 0, 0
@@ -89,10 +89,10 @@ Route121_SafariZoneEntrance_EventScript_15C3B3:: @ 815C3B3
 Route121_SafariZoneEntrance_EventScript_15C425:: @ 815C425
 	countpokemon
 	compare RESULT, 6
-	jumpif 5, Route121_SafariZoneEntrance_EventScript_15C44F
+	jumpif NOT_EQUAL, Route121_SafariZoneEntrance_EventScript_15C44F
 	specialval RESULT, 304
 	compare RESULT, 1
-	jumpeq Route121_SafariZoneEntrance_EventScript_15C44F
+	jumpif EQUAL, Route121_SafariZoneEntrance_EventScript_15C44F
 	msgbox Route121_SafariZoneEntrance_Text_1C39A3, 4
 	jump Route121_SafariZoneEntrance_EventScript_15C46C
 	end

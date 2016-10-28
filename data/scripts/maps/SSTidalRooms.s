@@ -5,11 +5,11 @@ SSTidalRooms_EventScript_15FF06:: @ 815FF06
 	lock
 	faceplayer
 	checkflag 260
-	jumpeq SSTidalRooms_EventScript_15FF3D
+	jumpif FLAG_IS_SET, SSTidalRooms_EventScript_15FF3D
 	msgbox SSTidalRooms_Text_199B65, 4
 	giveitem ITEM_TM49
 	compare RESULT, 0
-	jumpeq SSTidalRooms_EventScript_1A029B
+	jumpif EQUAL, SSTidalRooms_EventScript_1A029B
 	setflag 260
 	msgbox SSTidalRooms_Text_199C1A, 4
 	release

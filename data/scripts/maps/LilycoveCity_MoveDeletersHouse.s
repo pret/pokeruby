@@ -17,19 +17,19 @@ LilycoveCity_MoveDeletersHouse_EventScript_159ADE:: @ 8159ADE
 	special 159
 	waitstate
 	compare 0x8004, 255
-	jumpeq LilycoveCity_MoveDeletersHouse_EventScript_159B7B
+	jumpif EQUAL, LilycoveCity_MoveDeletersHouse_EventScript_159B7B
 	special 328
 	compare RESULT, 1
-	jumpeq LilycoveCity_MoveDeletersHouse_EventScript_159B71
+	jumpif EQUAL, LilycoveCity_MoveDeletersHouse_EventScript_159B71
 	special 223
 	compare RESULT, 1
-	jumpeq LilycoveCity_MoveDeletersHouse_EventScript_159B64
+	jumpif EQUAL, LilycoveCity_MoveDeletersHouse_EventScript_159B64
 	msgbox LilycoveCity_MoveDeletersHouse_Text_18B6B0, 4
 	fadescreen 1
 	special 220
 	fadescreen 0
 	compare 0x8005, 4
-	jumpeq LilycoveCity_MoveDeletersHouse_EventScript_159ADE
+	jumpif EQUAL, LilycoveCity_MoveDeletersHouse_EventScript_159ADE
 	special 222
 	msgbox LilycoveCity_MoveDeletersHouse_Text_18B6F2, 5
 	switch RESULT

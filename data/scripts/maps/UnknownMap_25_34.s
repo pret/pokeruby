@@ -14,15 +14,15 @@ LinkContestRoom1_MapScript1_15F595:: @ 815F595
 LinkContestRoom1_EventScript_15F5A5:: @ 815F5A5
 	special 326
 	compare RESULT, 0
-	callif 1, LinkContestRoom1_EventScript_15F5E0
+	callif EQUAL, LinkContestRoom1_EventScript_15F5E0
 	compare RESULT, 1
-	callif 1, LinkContestRoom1_EventScript_15F5E4
+	callif EQUAL, LinkContestRoom1_EventScript_15F5E4
 	compare RESULT, 2
-	callif 1, LinkContestRoom1_EventScript_15F5E8
+	callif EQUAL, LinkContestRoom1_EventScript_15F5E8
 	compare RESULT, 3
-	callif 1, LinkContestRoom1_EventScript_15F5EC
+	callif EQUAL, LinkContestRoom1_EventScript_15F5EC
 	compare RESULT, 4
-	callif 1, LinkContestRoom1_EventScript_15F5F0
+	callif EQUAL, LinkContestRoom1_EventScript_15F5F0
 	return
 
 LinkContestRoom1_EventScript_15F5E0:: @ 815F5E0
@@ -47,7 +47,7 @@ LinkContestRoom1_EventScript_15F5F0:: @ 815F5F0
 
 LinkContestRoom1_MapScript1_15F5F4:: @ 815F5F4
 	compare 0x4009, 1
-	callif 1, LinkContestRoom1_EventScript_15F600
+	callif EQUAL, LinkContestRoom1_EventScript_15F600
 	end
 
 LinkContestRoom1_EventScript_15F600:: @ 815F600
@@ -76,7 +76,7 @@ LinkContestRoom1_EventScript_15F630:: @ 815F630
 	call LinkContestRoom1_EventScript_15F6E6
 	call LinkContestRoom1_EventScript_15F646
 	compare 0x4000, 8
-	jumpif 0, LinkContestRoom1_EventScript_15F630
+	jumpif LESS_THAN, LinkContestRoom1_EventScript_15F630
 	return
 
 LinkContestRoom1_EventScript_15F646:: @ 815F646
@@ -415,9 +415,9 @@ SlateportCity_ContestLobby_EventScript_15FBDB:: @ 815FBDB
 VerdanturfTown_ContestLobby_EventScript_15FBDB:: @ 815FBDB
 	checkgender
 	compare RESULT, 0
-	jumpeq FallarborTown_ContestLobby_EventScript_15FBF3
+	jumpif EQUAL, FallarborTown_ContestLobby_EventScript_15FBF3
 	compare RESULT, 1
-	jumpeq FallarborTown_ContestLobby_EventScript_15FBF9
+	jumpif EQUAL, FallarborTown_ContestLobby_EventScript_15FBF9
 	return
 
 FallarborTown_ContestLobby_EventScript_15FBF3:: @ 815FBF3

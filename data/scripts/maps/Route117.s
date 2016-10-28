@@ -8,7 +8,7 @@ Route117_MapScript1_150D40:: @ 8150D40
 
 Route117_EventScript_150D46:: @ 8150D46
 	checkflag 134
-	jumpif 0, Route117_EventScript_150D56
+	jumpif FLAG_NOT_SET, Route117_EventScript_150D56
 	movespriteperm 3, 47, 6
 
 Route117_EventScript_150D56:: @ 8150D56
@@ -42,7 +42,7 @@ Route117_EventScript_150D8D:: @ 8150D8D
 	trainerbattle 0, OPPONENT_ISAAC_1, 0, Route117_Text_1BD49E, Route117_Text_1BD4D9
 	specialval RESULT, 57
 	compare RESULT, 1
-	jumpeq Route117_EventScript_150DB4
+	jumpif EQUAL, Route117_EventScript_150DB4
 	msgbox Route117_Text_1BD4F9, 6
 	end
 
@@ -55,7 +55,7 @@ Route117_EventScript_150DCB:: @ 8150DCB
 	trainerbattle 0, OPPONENT_LYDIA_1, 0, Route117_Text_1BD634, Route117_Text_1BD67B
 	specialval RESULT, 57
 	compare RESULT, 1
-	jumpeq Route117_EventScript_150DF2
+	jumpif EQUAL, Route117_EventScript_150DF2
 	msgbox Route117_Text_1BD69B, 6
 	end
 
@@ -68,7 +68,7 @@ Route117_EventScript_150E09:: @ 8150E09
 	trainerbattle 0, OPPONENT_DYLAN_1, 0, Route117_Text_1BD79A, Route117_Text_1BD7E0
 	specialval RESULT, 57
 	compare RESULT, 1
-	jumpeq Route117_EventScript_150E30
+	jumpif EQUAL, Route117_EventScript_150E30
 	msgbox Route117_Text_1BD7F5, 6
 	end
 
@@ -81,7 +81,7 @@ Route117_EventScript_150E47:: @ 8150E47
 	trainerbattle 0, OPPONENT_MARIA_1, 0, Route117_Text_1BD914, Route117_Text_1BD965
 	specialval RESULT, 57
 	compare RESULT, 1
-	jumpeq Route117_EventScript_150E6E
+	jumpif EQUAL, Route117_EventScript_150E6E
 	msgbox Route117_Text_1BD98F, 6
 	end
 
@@ -99,7 +99,7 @@ Route117_EventScript_150E9C:: @ 8150E9C
 	trainerbattle 4, OPPONENT_ANNA_AND_MEG_1, 0, Route117_Text_1BDBC3, Route117_Text_1BDC07, Route117_Text_1BDC96
 	specialval RESULT, 57
 	compare RESULT, 1
-	jumpeq Route117_EventScript_150EC7
+	jumpif EQUAL, Route117_EventScript_150EC7
 	msgbox Route117_Text_1BDC44, 6
 	end
 
@@ -112,7 +112,7 @@ Route117_EventScript_150EE2:: @ 8150EE2
 	trainerbattle 4, OPPONENT_ANNA_AND_MEG_1, 0, Route117_Text_1BDCD2, Route117_Text_1BDD1E, Route117_Text_1BDD8B
 	specialval RESULT, 57
 	compare RESULT, 1
-	jumpeq Route117_EventScript_150F0D
+	jumpif EQUAL, Route117_EventScript_150F0D
 	msgbox Route117_Text_1BDD4E, 6
 	end
 
