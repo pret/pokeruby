@@ -16764,9 +16764,9 @@ c4_overworld: @ 8013EB0
 	bne _08013ECE
 	ldr r4, _08013F34 @ =gPlayerParty
 	adds r0, r4, 0
-	bl sub_8040048
+	bl RandomlyGivePartyPokerus
 	adds r0, r4, 0
-	bl atkE5_pickupitemcalculation
+	bl PartySpreadPokerus
 _08013ECE:
 	ldrh r4, [r5]
 	adds r0, r6, 0
@@ -40864,7 +40864,7 @@ _08020490:
 	muls r1, r2
 	adds r1, r3
 	ldrh r1, [r1]
-	bl sub_803FE70
+	bl MonGainEVs
 _0802051E:
 	ldr r1, _08020530 @ =0x02000000
 	ldr r3, _08020554 @ =0x0001605f

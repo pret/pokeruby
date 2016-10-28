@@ -460,7 +460,7 @@ sub_8110290: @ 8110290
 	ldr r3, _081102DC @ =gUnknown_02024D26
 	ldrb r3, [r3]
 	ldr r6, _081102E0 @ =gLinkPlayers
-	ldr r5, _081102E4 @ =gUnknown_02029818
+	ldr r5, _081102E4 @ =gLinkPlayerMapObjects
 	lsls r4, 2
 	adds r4, r5
 	ldrb r5, [r4, 0x1]
@@ -480,7 +480,7 @@ _081102D4: .4byte gSaveBlock1 + 0x30B8
 _081102D8: .4byte gUnknown_0202FFF0
 _081102DC: .4byte gUnknown_02024D26
 _081102E0: .4byte gLinkPlayers
-_081102E4: .4byte gUnknown_02029818
+_081102E4: .4byte gLinkPlayerMapObjects
 	thumb_func_end sub_8110290
 
 	thumb_func_start PrintLinkBattleWinsLossesDraws
