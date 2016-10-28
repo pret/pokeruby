@@ -6,43 +6,43 @@
 #include "sprite.h"
 #include "palette.h"
 #include "sound.h"
+#include "clear_save_data_menu.h"
 
 extern u8 gSystemText_ClearAllSaveDataPrompt[];
 extern u8 gSystemText_ClearingData[];
 extern u8 *gUnknown_08376D74[][2];
 
-void c2_clear_save_data_screen_2(void);
-void sub_814881C(void);
-void sub_8148830(u8);
-void sub_81488BC(u8);
-void sub_8148930(u8);
-void sub_8148954(void);
-static void VBlankCB_InitMenu(void);
-u8 sub_8148970(void);
-void sub_8148B34(void);
+static void VBlankCB_ClearSaveDataScreen(void);
+static void Task_InitMenu(u8);
+static void Task_ProcessMenuInput(u8);
+static void Task_ClearSaveData(u8);
+static void CB2_ClearSaveDataScreen(void);
+static void VBlankCB_InitClearSaveDataScreen(void);
+static u8 InitClearSaveDataScreen(void);
+static void CB2_SoftReset(void);
 
 void c2_clear_save_data_screen_2(void)
 {
-    if (sub_8148970())
+    if (InitClearSaveDataScreen())
     {
-        CreateTask(sub_8148830, 0);
+        CreateTask(Task_InitMenu, 0);
     }
 }
 
-void sub_814881C(void)
+static void VBlankCB_ClearSaveDataScreen(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
 }
 
-void sub_8148830(u8 taskId)
+static void Task_InitMenu(u8 taskId)
 {
     ResetSpriteData();
 
     REG_DISPCNT = DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG3_ON | DISPCNT_OBJ_ON;
 
-    SetVBlankCallback(sub_814881C);
+    SetVBlankCallback(VBlankCB_ClearSaveDataScreen);
     MenuDrawTextWindow(2, 14, 27, 19);
     MenuPrint(gSystemText_ClearAllSaveDataPrompt, 3, 15);
 
@@ -50,48 +50,48 @@ void sub_8148830(u8 taskId)
     PrintMenuItems(3, 2, 2, gUnknown_08376D74);
     InitMenu(0, 3, 2, 2, 1, 5);
 
-    gTasks[taskId].func = sub_81488BC;
+    gTasks[taskId].func = Task_ProcessMenuInput;
 }
 
-void sub_81488BC(u8 taskId)
+static void Task_ProcessMenuInput(u8 taskId)
 {
     switch (ProcessMenuInputNoWrap_())
     {
     case 0:
         PlaySE(SE_SELECT);
         sub_8071F40(gSystemText_ClearingData);
-        gTasks[taskId].func = sub_8148930;
+        gTasks[taskId].func = Task_ClearSaveData;
         break;
     case -1:
     case 1:
         PlaySE(SE_SELECT);
         DestroyTask(taskId);
-        SetMainCallback2(sub_8148B34);
+        SetMainCallback2(CB2_SoftReset);
         break;
     }
     AnimateSprites();
     BuildOamBuffer();
 }
 
-void sub_8148930(u8 r0_in)
+static void Task_ClearSaveData(u8 taskId)
 {
     calls_flash_erase_block();
-    DestroyTask(r0_in);
-    SetMainCallback2(sub_8148B34);
+    DestroyTask(taskId);
+    SetMainCallback2(CB2_SoftReset);
 }
 
-void sub_8148954(void)
+static void CB2_ClearSaveDataScreen(void)
 {
     RunTasks();
     UpdatePaletteFade();
 }
 
-static void VBlankCB_InitMenu(void)
+static void VBlankCB_InitClearSaveDataScreen(void)
 {
     TransferPlttBuffer();
 }
 
-u8 sub_8148970(void)
+static u8 InitClearSaveDataScreen(void)
 {
     u16 i;
     u16 ime;
@@ -126,19 +126,11 @@ u8 sub_8148970(void)
             gPlttBufferUnfaded[1] = 0x3945;
             gPlttBufferFaded[1] = 0x3945;
 
-            i = 0;
-            do
-            {
-                ((vu16 *)(VRAM + 0x20))[i] = 0x1111;
-                i++;
-            } while (i < 0x10);
+            for (i = 0; i < 0x10; i++)
+                ((u16 *)(VRAM + 0x20))[i] = 0x1111;
 
-            i = 0;
-            do
-            {
-                ((vu16 *)(VRAM + 0x3800))[i] = 0x0001;
-                i++;
-            } while (i < 0x500);
+            for (i = 0; i < 0x500; i++)
+                ((u16 *)(VRAM + 0x3800))[i] = 0x0001;
 
             ResetTasks();
             ResetSpriteData();
@@ -153,7 +145,7 @@ u8 sub_8148970(void)
             REG_IME = ime;
             REG_DISPSTAT |= DISPSTAT_VBLANK_INTR;
 
-            SetVBlankCallback(VBlankCB_InitMenu);
+            SetVBlankCallback(VBlankCB_InitClearSaveDataScreen);
 
             REG_BG3CNT = 0x0703;
             REG_DISPCNT = 0x0900;
@@ -163,12 +155,12 @@ u8 sub_8148970(void)
             UpdatePaletteFade();
             if (gPaletteFade.active)
                 return 0;
-            SetMainCallback2(sub_8148954);
+            SetMainCallback2(CB2_ClearSaveDataScreen);
             return 1;
     }
 }
 
-void sub_8148B34(void)
+static void CB2_SoftReset(void)
 {
     switch (gMain.state)
     {
