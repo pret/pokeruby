@@ -14397,11 +14397,11 @@ gUnknown_083CE048:: @ 83CE048
 
 	.align 2
 gSpriteImage_83CE094:: @ 83CE094
-	.incbin "graphics/unknown_sprites/83CE588/0.4bpp"
+	.incbin "graphics/naming_screen/pc_icon/0.4bpp"
 
 	.align 2
 gSpriteImage_83CE154:: @ 83CE154
-	.incbin "graphics/unknown_sprites/83CE588/1.4bpp"
+	.incbin "graphics/naming_screen/pc_icon/1.4bpp"
 
 	.align 2
 	.incbin "baserom.gba", 0x003ce214, 0x4
