@@ -47,6 +47,8 @@ SECTIONS {
         src/rtc.o(.text);
         src/main_menu.o(.text);
         asm/rom3.o(.text);
+        asm/decompress.o(.text);
+        asm/rom_800D42C.o(.text);
         src/pokemon_1.o(.text);
         asm/calculate_base_damage.o(.text);
         src/pokemon_2.o(.text);
