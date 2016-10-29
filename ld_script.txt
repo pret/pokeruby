@@ -130,7 +130,7 @@ SECTIONS {
         asm/field_poison.o(.text);
         asm/big_shroomish_barboach.o(.text);
         asm/fldeff_80C5CD4.o(.text);
-        asm/truck_scene.o(.text);
+        src/truck_scene.o(.text);
         asm/porthole.o(.text);
         asm/rotating_gate.o(.text);
         asm/safari_zone.o(.text);

@@ -7124,7 +7124,7 @@ gUnknown_08376364:: @ 8376364
 	.4byte sub_8069AA0
 	.4byte sub_8069864
 	.4byte sub_8069DD4
-	.4byte sub_80C7700
+	.4byte EndTruckSequence
 	.4byte sub_80BCF1C
 	.4byte sub_806A07C
 
@@ -15539,7 +15539,7 @@ gMapObjectPic_MovingBox: @ 83D28AC
 gMapObjectPalette19: @ 83D292C
 	.incbin "graphics/map_objects/palettes/19.gbapal"
 
-gUnknown_083D294C:: @ 83D294C
+gTruckCamera_HorizontalTable:: @ 83D294C
 	.byte  0
 	.byte  0
 	.byte  0

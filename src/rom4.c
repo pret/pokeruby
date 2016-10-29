@@ -140,7 +140,7 @@ extern void PlayerGetDestCoords(u16 *, u16 *);
 extern u8 sub_810D32C(void);
 extern u16 GetLocalWildMon(bool8 *);
 extern u16 GetMirageIslandMon(void);
-extern void sub_80C76A0(void);
+extern void ExecuteTruckSequence(void);
 extern void sub_8080B60(void);
 extern void sub_810CC80(void);
 extern void sub_8080AC4(void);
@@ -1230,7 +1230,7 @@ void CB2_NewGame(void)
     PlayTimeCounter_Start();
     ScriptContext1_Init();
     ScriptContext2_Disable();
-    gUnknown_0300485C = sub_80C76A0;
+    gUnknown_0300485C = ExecuteTruckSequence;
     do_load_map_stuff_loop(&gMain.state);
     SetFieldVBlankCallback();
     set_callback1(c1_overworld);
