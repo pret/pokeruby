@@ -19581,7 +19581,7 @@ _0813469C:
 	str r7, [sp, 0xC]
 	movs r2, 0x1
 	adds r3, r5, 0
-	bl sub_8135200
+	bl CheckMonBattleTowerBanlist
 	adds r4, 0x1
 	cmp r4, 0x2
 	ble _0813469C
@@ -20882,8 +20882,8 @@ _08135094: .4byte gEnemyParty
 _08135098: .4byte gBattleTowerHeldItems
 	thumb_func_end sub_8134DD4
 
-	thumb_func_start sub_813509C
-sub_813509C: @ 813509C
+	thumb_func_start CalcBattleTowerBanlistSeenCount
+CalcBattleTowerBanlistSeenCount: @ 813509C
 	push {r4-r6,lr}
 	movs r5, 0
 	ldr r2, _081350D8 @ =gBattleTowerBanlist
@@ -20917,10 +20917,10 @@ _081350CE:
 	.align 2, 0
 _081350D8: .4byte gBattleTowerBanlist
 _081350DC: .4byte 0x0000ffff
-	thumb_func_end sub_813509C
+	thumb_func_end CalcBattleTowerBanlistSeenCount
 
-	thumb_func_start sub_81350E0
-sub_81350E0: @ 81350E0
+	thumb_func_start AppendBattleTowerBannedSpeciesName
+AppendBattleTowerBannedSpeciesName: @ 81350E0
 	push {r4-r6,lr}
 	adds r5, r2, 0
 	lsls r0, 16
@@ -21040,10 +21040,10 @@ _081351F0: .4byte gStringVar1
 _081351F4: .4byte gUnknown_08400E29
 _081351F8: .4byte gUnknown_08400E2E
 _081351FC: .4byte gSpeciesNames
-	thumb_func_end sub_81350E0
+	thumb_func_end AppendBattleTowerBannedSpeciesName
 
-	thumb_func_start sub_8135200
-sub_8135200: @ 8135200
+	thumb_func_start CheckMonBattleTowerBanlist
+CheckMonBattleTowerBanlist: @ 8135200
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -21167,10 +21167,10 @@ _081352CE:
 	.align 2, 0
 _081352DC: .4byte gBattleTowerBanlist
 _081352E0: .4byte 0x0000ffff
-	thumb_func_end sub_8135200
+	thumb_func_end CheckMonBattleTowerBanlist
 
-	thumb_func_start sub_81352E4
-sub_81352E4: @ 81352E4
+	thumb_func_start CheckPartyBattleTowerBanlist
+CheckPartyBattleTowerBanlist: @ 81352E4
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -21227,7 +21227,7 @@ _081352FE:
 	str r0, [sp, 0xC]
 	mov r0, r8
 	adds r1, r6, 0
-	bl sub_8135200
+	bl CheckMonBattleTowerBanlist
 	adds r7, 0x1
 	cmp r7, 0x5
 	ble _081352FE
@@ -21244,7 +21244,7 @@ _081352FE:
 	movs r0, 0
 	mov r1, r9
 	strb r0, [r1]
-	bl sub_813509C
+	bl CalcBattleTowerBanlistSeenCount
 	adds r6, r0, 0
 	ldr r2, _081353D4 @ =gBattleTowerBanlist
 	ldrh r0, [r2]
@@ -21258,7 +21258,7 @@ _08135394:
 	ldrh r0, [r4]
 	ldrb r1, [r5]
 	adds r2, r6, 0
-	bl sub_81350E0
+	bl AppendBattleTowerBannedSpeciesName
 	strb r0, [r5]
 	adds r4, 0x2
 	ldrh r0, [r4]
@@ -21340,7 +21340,7 @@ _0813543E:
 _08135450: .4byte gUnknown_0202E8CC
 _08135454: .4byte gSaveBlock2
 _08135458: .4byte 0x00000554
-	thumb_func_end sub_81352E4
+	thumb_func_end CheckPartyBattleTowerBanlist
 
 	thumb_func_start sub_813545C
 sub_813545C: @ 813545C

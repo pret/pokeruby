@@ -408,7 +408,7 @@ _081073E4:
 	ldrh r1, [r1, 0x2]
 	cmp r1, 0
 	beq _08107400
-	ldr r1, _081073FC @ =gUnknown_083F6144
+	ldr r1, _081073FC @ =gBattleAICmdTable
 	ldr r0, [r7]
 	ldrb r0, [r0]
 	lsls r0, 2
@@ -417,7 +417,7 @@ _081073E4:
 	bl _call_via_r0
 	b _08107410
 	.align 2, 0
-_081073FC: .4byte gUnknown_083F6144
+_081073FC: .4byte gBattleAICmdTable
 _08107400:
 	adds r0, r4, 0x4
 	ldrb r2, [r4, 0x1]
@@ -589,8 +589,8 @@ _08107520:
 _08107528: .4byte 0x02016a00
 	thumb_func_end sub_81074F8
 
-	thumb_func_start sub_810752C
-sub_810752C: @ 810752C
+	thumb_func_start BattleAICmd_if_random
+BattleAICmd_if_random: @ 810752C
 	push {lr}
 	bl Random
 	lsls r0, 16
@@ -623,10 +623,10 @@ _08107564:
 _08107568:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_810752C
+	thumb_func_end BattleAICmd_if_random
 
-	thumb_func_start sub_810756C
-sub_810756C: @ 810756C
+	thumb_func_start BattleAICmd_if_not_random
+BattleAICmd_if_not_random: @ 810756C
 	push {lr}
 	bl Random
 	lsls r0, 16
@@ -659,10 +659,10 @@ _081075A4:
 _081075A8:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_810756C
+	thumb_func_end BattleAICmd_if_not_random
 
-	thumb_func_start sub_81075AC
-sub_81075AC: @ 81075AC
+	thumb_func_start BattleAICmd_if_random_1
+BattleAICmd_if_random_1: @ 81075AC
 	push {lr}
 	bl Random
 	lsls r0, 16
@@ -695,10 +695,10 @@ _081075E4:
 _081075E8:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81075AC
+	thumb_func_end BattleAICmd_if_random_1
 
-	thumb_func_start sub_81075EC
-sub_81075EC: @ 81075EC
+	thumb_func_start BattleAICmd_if_not_random_1
+BattleAICmd_if_not_random_1: @ 81075EC
 	push {lr}
 	bl Random
 	lsls r0, 16
@@ -731,10 +731,10 @@ _08107624:
 _08107628:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81075EC
+	thumb_func_end BattleAICmd_if_not_random_1
 
-	thumb_func_start sub_810762C
-sub_810762C: @ 810762C
+	thumb_func_start BattleAICmd_score
+BattleAICmd_score: @ 810762C
 	push {r4,r5,lr}
 	ldr r2, _08107660 @ =0x02016800
 	ldrb r1, [r2, 0x1]
@@ -764,10 +764,10 @@ _08107652:
 	.align 2, 0
 _08107660: .4byte 0x02016800
 _08107664: .4byte gUnknown_02039238
-	thumb_func_end sub_810762C
+	thumb_func_end BattleAICmd_score
 
-	thumb_func_start sub_8107668
-sub_8107668: @ 8107668
+	thumb_func_start BattleAICmd_if_hp_less_than
+BattleAICmd_if_hp_less_than: @ 8107668
 	push {r4,lr}
 	ldr r0, _0810767C @ =gUnknown_02039238
 	ldr r1, [r0]
@@ -819,10 +819,10 @@ _081076C8:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8107668
+	thumb_func_end BattleAICmd_if_hp_less_than
 
-	thumb_func_start sub_81076D0
-sub_81076D0: @ 81076D0
+	thumb_func_start BattleAICmd_if_hp_more_than
+BattleAICmd_if_hp_more_than: @ 81076D0
 	push {r4,lr}
 	ldr r0, _081076E4 @ =gUnknown_02039238
 	ldr r1, [r0]
@@ -874,10 +874,10 @@ _08107730:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81076D0
+	thumb_func_end BattleAICmd_if_hp_more_than
 
-	thumb_func_start sub_8107738
-sub_8107738: @ 8107738
+	thumb_func_start BattleAICmd_if_hp_equal
+BattleAICmd_if_hp_equal: @ 8107738
 	push {r4,lr}
 	ldr r0, _0810774C @ =gUnknown_02039238
 	ldr r1, [r0]
@@ -929,10 +929,10 @@ _08107798:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8107738
+	thumb_func_end BattleAICmd_if_hp_equal
 
-	thumb_func_start sub_81077A0
-sub_81077A0: @ 81077A0
+	thumb_func_start BattleAICmd_if_hp_not_equal
+BattleAICmd_if_hp_not_equal: @ 81077A0
 	push {r4,lr}
 	ldr r0, _081077B4 @ =gUnknown_02039238
 	ldr r1, [r0]
@@ -984,10 +984,10 @@ _08107800:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81077A0
+	thumb_func_end BattleAICmd_if_hp_not_equal
 
-	thumb_func_start sub_8107808
-sub_8107808: @ 8107808
+	thumb_func_start BattleAICmd_if_status
+BattleAICmd_if_status: @ 8107808
 	push {r4,r5,lr}
 	ldr r0, _0810781C @ =gUnknown_02039238
 	ldr r1, [r0]
@@ -1047,10 +1047,10 @@ _08107876:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8107808
+	thumb_func_end BattleAICmd_if_status
 
-	thumb_func_start sub_810787C
-sub_810787C: @ 810787C
+	thumb_func_start BattleAICmd_if_not_status
+BattleAICmd_if_not_status: @ 810787C
 	push {r4,r5,lr}
 	ldr r0, _08107890 @ =gUnknown_02039238
 	ldr r1, [r0]
@@ -1110,10 +1110,10 @@ _081078EA:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_810787C
+	thumb_func_end BattleAICmd_if_not_status
 
-	thumb_func_start sub_81078F0
-sub_81078F0: @ 81078F0
+	thumb_func_start BattleAICmd_if_status2
+BattleAICmd_if_status2: @ 81078F0
 	push {r4,r5,lr}
 	ldr r0, _08107904 @ =gUnknown_02039238
 	ldr r1, [r0]
@@ -1173,10 +1173,10 @@ _0810795E:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81078F0
+	thumb_func_end BattleAICmd_if_status2
 
-	thumb_func_start sub_8107964
-sub_8107964: @ 8107964
+	thumb_func_start BattleAICmd_if_not_status2
+BattleAICmd_if_not_status2: @ 8107964
 	push {r4,r5,lr}
 	ldr r0, _08107978 @ =gUnknown_02039238
 	ldr r1, [r0]
@@ -1236,10 +1236,10 @@ _081079D2:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8107964
+	thumb_func_end BattleAICmd_if_not_status2
 
-	thumb_func_start sub_81079D8
-sub_81079D8: @ 81079D8
+	thumb_func_start BattleAICmd_if_status3
+BattleAICmd_if_status3: @ 81079D8
 	push {r4,r5,lr}
 	ldr r0, _081079EC @ =gUnknown_02039238
 	ldr r1, [r0]
@@ -1297,10 +1297,10 @@ _08107A42:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81079D8
+	thumb_func_end BattleAICmd_if_status3
 
-	thumb_func_start sub_8107A48
-sub_8107A48: @ 8107A48
+	thumb_func_start BattleAICmd_if_not_status3
+BattleAICmd_if_not_status3: @ 8107A48
 	push {r4,r5,lr}
 	ldr r0, _08107A5C @ =gUnknown_02039238
 	ldr r1, [r0]
@@ -1358,10 +1358,10 @@ _08107AB2:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8107A48
+	thumb_func_end BattleAICmd_if_not_status3
 
-	thumb_func_start sub_8107AB8
-sub_8107AB8: @ 8107AB8
+	thumb_func_start BattleAICmd_if_status4
+BattleAICmd_if_status4: @ 8107AB8
 	push {r4,lr}
 	ldr r0, _08107AC8 @ =gUnknown_02039238
 	ldr r0, [r0]
@@ -1423,10 +1423,10 @@ _08107B2E:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8107AB8
+	thumb_func_end BattleAICmd_if_status4
 
-	thumb_func_start sub_8107B34
-sub_8107B34: @ 8107B34
+	thumb_func_start BattleAICmd_if_not_status4
+BattleAICmd_if_not_status4: @ 8107B34
 	push {r4,lr}
 	ldr r0, _08107B44 @ =gUnknown_02039238
 	ldr r0, [r0]
@@ -1488,10 +1488,10 @@ _08107BAA:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8107B34
+	thumb_func_end BattleAICmd_if_not_status4
 
-	thumb_func_start sub_8107BB0
-sub_8107BB0: @ 8107BB0
+	thumb_func_start BattleAICmd_if_less_than
+BattleAICmd_if_less_than: @ 8107BB0
 	push {lr}
 	ldr r0, _08107BD8 @ =0x02016800
 	ldr r3, _08107BDC @ =gUnknown_02039238
@@ -1521,10 +1521,10 @@ _08107BE0:
 _08107BE4:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8107BB0
+	thumb_func_end BattleAICmd_if_less_than
 
-	thumb_func_start sub_8107BE8
-sub_8107BE8: @ 8107BE8
+	thumb_func_start BattleAICmd_if_more_than
+BattleAICmd_if_more_than: @ 8107BE8
 	push {lr}
 	ldr r0, _08107C10 @ =0x02016800
 	ldr r3, _08107C14 @ =gUnknown_02039238
@@ -1554,10 +1554,10 @@ _08107C18:
 _08107C1C:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8107BE8
+	thumb_func_end BattleAICmd_if_more_than
 
-	thumb_func_start sub_8107C20
-sub_8107C20: @ 8107C20
+	thumb_func_start BattleAICmd_if_equal
+BattleAICmd_if_equal: @ 8107C20
 	push {lr}
 	ldr r0, _08107C48 @ =0x02016800
 	ldr r3, _08107C4C @ =gUnknown_02039238
@@ -1587,10 +1587,10 @@ _08107C50:
 _08107C54:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8107C20
+	thumb_func_end BattleAICmd_if_equal
 
-	thumb_func_start sub_8107C58
-sub_8107C58: @ 8107C58
+	thumb_func_start BattleAICmd_if_not_equal
+BattleAICmd_if_not_equal: @ 8107C58
 	push {lr}
 	ldr r0, _08107C80 @ =0x02016800
 	ldr r3, _08107C84 @ =gUnknown_02039238
@@ -1620,10 +1620,10 @@ _08107C88:
 _08107C8C:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8107C58
+	thumb_func_end BattleAICmd_if_not_equal
 
-	thumb_func_start sub_8107C90
-sub_8107C90: @ 8107C90
+	thumb_func_start BattleAICmd_if_less_than_32
+BattleAICmd_if_less_than_32: @ 8107C90
 	push {lr}
 	ldr r3, _08107CCC @ =gUnknown_02039238
 	ldr r2, [r3]
@@ -1664,10 +1664,10 @@ _08107CD4:
 _08107CDA:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8107C90
+	thumb_func_end BattleAICmd_if_less_than_32
 
-	thumb_func_start sub_8107CE0
-sub_8107CE0: @ 8107CE0
+	thumb_func_start BattleAICmd_if_more_than_32
+BattleAICmd_if_more_than_32: @ 8107CE0
 	push {lr}
 	ldr r3, _08107D1C @ =gUnknown_02039238
 	ldr r2, [r3]
@@ -1708,10 +1708,10 @@ _08107D24:
 _08107D2A:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8107CE0
+	thumb_func_end BattleAICmd_if_more_than_32
 
-	thumb_func_start sub_8107D30
-sub_8107D30: @ 8107D30
+	thumb_func_start BattleAICmd_if_equal_32
+BattleAICmd_if_equal_32: @ 8107D30
 	push {lr}
 	ldr r3, _08107D6C @ =gUnknown_02039238
 	ldr r2, [r3]
@@ -1752,10 +1752,10 @@ _08107D74:
 _08107D7A:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8107D30
+	thumb_func_end BattleAICmd_if_equal_32
 
-	thumb_func_start sub_8107D80
-sub_8107D80: @ 8107D80
+	thumb_func_start BattleAICmd_if_not_equal_32
+BattleAICmd_if_not_equal_32: @ 8107D80
 	push {lr}
 	ldr r3, _08107DBC @ =gUnknown_02039238
 	ldr r2, [r3]
@@ -1796,10 +1796,10 @@ _08107DC4:
 _08107DCA:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8107D80
+	thumb_func_end BattleAICmd_if_not_equal_32
 
-	thumb_func_start sub_8107DD0
-sub_8107DD0: @ 8107DD0
+	thumb_func_start BattleAICmd_if_move
+BattleAICmd_if_move: @ 8107DD0
 	push {lr}
 	ldr r3, _08107E00 @ =gUnknown_02039238
 	ldr r2, [r3]
@@ -1832,10 +1832,10 @@ _08107E08:
 _08107E0C:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8107DD0
+	thumb_func_end BattleAICmd_if_move
 
-	thumb_func_start sub_8107E10
-sub_8107E10: @ 8107E10
+	thumb_func_start BattleAICmd_if_not_move
+BattleAICmd_if_not_move: @ 8107E10
 	push {lr}
 	ldr r3, _08107E40 @ =gUnknown_02039238
 	ldr r2, [r3]
@@ -1868,10 +1868,10 @@ _08107E48:
 _08107E4C:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8107E10
+	thumb_func_end BattleAICmd_if_not_move
 
-	thumb_func_start sub_8107E50
-sub_8107E50: @ 8107E50
+	thumb_func_start BattleAICmd_if_in_bytes
+BattleAICmd_if_in_bytes: @ 8107E50
 	push {r4,lr}
 	ldr r2, _08107E98 @ =gUnknown_02039238
 	ldr r1, [r2]
@@ -1924,10 +1924,10 @@ _08107EAE:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8107E50
+	thumb_func_end BattleAICmd_if_in_bytes
 
-	thumb_func_start sub_8107EB4
-sub_8107EB4: @ 8107EB4
+	thumb_func_start BattleAICmd_if_not_in_bytes
+BattleAICmd_if_not_in_bytes: @ 8107EB4
 	push {r4,lr}
 	ldr r2, _08107EEC @ =gUnknown_02039238
 	ldr r1, [r2]
@@ -1981,10 +1981,10 @@ _08107F14:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8107EB4
+	thumb_func_end BattleAICmd_if_not_in_bytes
 
-	thumb_func_start sub_8107F1C
-sub_8107F1C: @ 8107F1C
+	thumb_func_start BattleAICmd_if_in_words
+BattleAICmd_if_in_words: @ 8107F1C
 	push {r4,r5,lr}
 	ldr r2, _08107F64 @ =gUnknown_02039238
 	ldr r1, [r2]
@@ -2039,10 +2039,10 @@ _08107F7E:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8107F1C
+	thumb_func_end BattleAICmd_if_in_words
 
-	thumb_func_start sub_8107F84
-sub_8107F84: @ 8107F84
+	thumb_func_start BattleAICmd_if_not_in_words
+BattleAICmd_if_not_in_words: @ 8107F84
 	push {r4,r5,lr}
 	ldr r2, _08107FBC @ =gUnknown_02039238
 	ldr r1, [r2]
@@ -2098,10 +2098,10 @@ _08107FE8:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8107F84
+	thumb_func_end BattleAICmd_if_not_in_words
 
-	thumb_func_start sub_8107FF0
-sub_8107FF0: @ 8107FF0
+	thumb_func_start BattleAICmd_if_user_can_damage
+BattleAICmd_if_user_can_damage: @ 8107FF0
 	push {r4,r5,lr}
 	movs r3, 0
 	ldr r4, _08108030 @ =gUnknown_02039238
@@ -2158,10 +2158,10 @@ _08108058:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8107FF0
+	thumb_func_end BattleAICmd_if_user_can_damage
 
-	thumb_func_start sub_8108060
-sub_8108060: @ 8108060
+	thumb_func_start BattleAICmd_if_user_cant_damage
+BattleAICmd_if_user_cant_damage: @ 8108060
 	push {r4,r5,lr}
 	movs r3, 0
 	ldr r4, _081080A0 @ =gUnknown_02039238
@@ -2218,10 +2218,10 @@ _081080C8:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8108060
+	thumb_func_end BattleAICmd_if_user_cant_damage
 
-	thumb_func_start sub_81080D0
-sub_81080D0: @ 81080D0
+	thumb_func_start BattleAICmd_unk_21
+BattleAICmd_unk_21: @ 81080D0
 	ldr r1, _081080E4 @ =0x02016800
 	ldr r0, _081080E8 @ =gUnknown_030042E0
 	ldrb r0, [r0, 0x13]
@@ -2235,10 +2235,10 @@ sub_81080D0: @ 81080D0
 _081080E4: .4byte 0x02016800
 _081080E8: .4byte gUnknown_030042E0
 _081080EC: .4byte gUnknown_02039238
-	thumb_func_end sub_81080D0
+	thumb_func_end BattleAICmd_unk_21
 
-	thumb_func_start sub_81080F0
-sub_81080F0: @ 81080F0
+	thumb_func_start BattleAICmd_get_type
+BattleAICmd_get_type: @ 81080F0
 	push {r4,lr}
 	ldr r1, _08108108 @ =gUnknown_02039238
 	ldr r0, [r1]
@@ -2342,10 +2342,10 @@ _081081B6:
 	.align 2, 0
 _081081C4: .4byte 0x02016800
 _081081C8: .4byte gBattleMoves
-	thumb_func_end sub_81080F0
+	thumb_func_end BattleAICmd_get_type
 
-	thumb_func_start sub_81081CC
-sub_81081CC: @ 81081CC
+	thumb_func_start BattleAICmd_unk_23
+BattleAICmd_unk_23: @ 81081CC
 	ldr r3, _081081E8 @ =0x02016800
 	ldr r2, _081081EC @ =gBattleMoves
 	ldrh r1, [r3, 0x2]
@@ -2364,10 +2364,10 @@ sub_81081CC: @ 81081CC
 _081081E8: .4byte 0x02016800
 _081081EC: .4byte gBattleMoves
 _081081F0: .4byte gUnknown_02039238
-	thumb_func_end sub_81081CC
+	thumb_func_end BattleAICmd_unk_23
 
-	thumb_func_start sub_81081F4
-sub_81081F4: @ 81081F4
+	thumb_func_start BattleAICmd_unk_24
+BattleAICmd_unk_24: @ 81081F4
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2605,10 +2605,10 @@ _081083B8:
 	bx r0
 	.align 2, 0
 _081083D0: .4byte gUnknown_02039238
-	thumb_func_end sub_81081F4
+	thumb_func_end BattleAICmd_unk_24
 
-	thumb_func_start sub_81083D4
-sub_81083D4: @ 81083D4
+	thumb_func_start BattleAICmd_get_move
+BattleAICmd_get_move: @ 81083D4
 	push {lr}
 	ldr r0, _081083EC @ =gUnknown_02039238
 	ldr r1, [r0]
@@ -2644,10 +2644,10 @@ _08108402:
 _08108418: .4byte 0x02016800
 _0810841C: .4byte gUnknown_02024C34
 _08108420: .4byte gUnknown_02024C08
-	thumb_func_end sub_81083D4
+	thumb_func_end BattleAICmd_get_move
 
-	thumb_func_start sub_8108424
-sub_8108424: @ 8108424
+	thumb_func_start BattleAICmd_if_type
+BattleAICmd_if_type: @ 8108424
 	push {lr}
 	ldr r3, _0810844C @ =gUnknown_02039238
 	ldr r2, [r3]
@@ -2677,10 +2677,10 @@ _08108454:
 _08108458:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8108424
+	thumb_func_end BattleAICmd_if_type
 
-	thumb_func_start sub_810845C
-sub_810845C: @ 810845C
+	thumb_func_start BattleAICmd_unk_27
+BattleAICmd_unk_27: @ 810845C
 	push {lr}
 	ldr r3, _08108484 @ =gUnknown_02039238
 	ldr r2, [r3]
@@ -2710,10 +2710,10 @@ _0810848C:
 _08108490:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_810845C
+	thumb_func_end BattleAICmd_unk_27
 
-	thumb_func_start tai28_unk
-tai28_unk: @ 8108494
+	thumb_func_start BattleAICmd_if_would_go_first
+BattleAICmd_if_would_go_first: @ 8108494
 	push {lr}
 	ldr r0, _081084CC @ =gUnknown_02024C07
 	ldrb r0, [r0]
@@ -2750,10 +2750,10 @@ _081084D8:
 _081084DC:
 	pop {r0}
 	bx r0
-	thumb_func_end tai28_unk
+	thumb_func_end BattleAICmd_if_would_go_first
 
-	thumb_func_start tai29_unk
-tai29_unk: @ 81084E0
+	thumb_func_start BattleAICmd_if_would_not_go_first
+BattleAICmd_if_would_not_go_first: @ 81084E0
 	push {lr}
 	ldr r0, _08108518 @ =gUnknown_02024C07
 	ldrb r0, [r0]
@@ -2790,20 +2790,20 @@ _08108524:
 _08108528:
 	pop {r0}
 	bx r0
-	thumb_func_end tai29_unk
+	thumb_func_end BattleAICmd_if_would_not_go_first
 
-	thumb_func_start nullsub_25
-nullsub_25: @ 810852C
+	thumb_func_start BattleAICmd_unk_2A
+BattleAICmd_unk_2A: @ 810852C
 	bx lr
-	thumb_func_end nullsub_25
+	thumb_func_end BattleAICmd_unk_2A
 
-	thumb_func_start nullsub_26
-nullsub_26: @ 8108530
+	thumb_func_start BattleAICmd_unk_2B
+BattleAICmd_unk_2B: @ 8108530
 	bx lr
-	thumb_func_end nullsub_26
+	thumb_func_end BattleAICmd_unk_2B
 
-	thumb_func_start tai2C_unk
-tai2C_unk: @ 8108534
+	thumb_func_start BattleAICmd_count_alive_pokemon
+BattleAICmd_count_alive_pokemon: @ 8108534
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -2921,10 +2921,10 @@ _08108608:
 _08108624: .4byte gUnknown_02024A6A
 _08108628: .4byte 0x02016800
 _0810862C: .4byte gUnknown_02039238
-	thumb_func_end tai2C_unk
+	thumb_func_end BattleAICmd_count_alive_pokemon
 
-	thumb_func_start sub_8108630
-sub_8108630: @ 8108630
+	thumb_func_start BattleAICmd_unk_2D
+BattleAICmd_unk_2D: @ 8108630
 	ldr r1, _08108640 @ =0x02016800
 	ldrh r0, [r1, 0x2]
 	str r0, [r1, 0x8]
@@ -2936,10 +2936,10 @@ sub_8108630: @ 8108630
 	.align 2, 0
 _08108640: .4byte 0x02016800
 _08108644: .4byte gUnknown_02039238
-	thumb_func_end sub_8108630
+	thumb_func_end BattleAICmd_unk_2D
 
-	thumb_func_start sub_8108648
-sub_8108648: @ 8108648
+	thumb_func_start BattleAICmd_unk_2E
+BattleAICmd_unk_2E: @ 8108648
 	ldr r3, _08108664 @ =0x02016800
 	ldr r2, _08108668 @ =gBattleMoves
 	ldrh r1, [r3, 0x2]
@@ -2958,10 +2958,10 @@ sub_8108648: @ 8108648
 _08108664: .4byte 0x02016800
 _08108668: .4byte gBattleMoves
 _0810866C: .4byte gUnknown_02039238
-	thumb_func_end sub_8108648
+	thumb_func_end BattleAICmd_unk_2E
 
-	thumb_func_start sub_8108670
-sub_8108670: @ 8108670
+	thumb_func_start BattleAICmd_get_ability
+BattleAICmd_get_ability: @ 8108670
 	push {r4-r7,lr}
 	ldr r0, _08108680 @ =gUnknown_02039238
 	ldr r0, [r0]
@@ -3110,10 +3110,10 @@ _08108784:
 _08108794: .4byte 0x02016800
 _08108798: .4byte gBattleMons
 _0810879C: .4byte gUnknown_02039238
-	thumb_func_end sub_8108670
+	thumb_func_end BattleAICmd_get_ability
 
-	thumb_func_start tai30_unk
-tai30_unk: @ 81087A0
+	thumb_func_start BattleAICmd_unk_30
+BattleAICmd_unk_30: @ 81087A0
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -3227,10 +3227,10 @@ _0810887C: .4byte gUnknown_02024C07
 _08108880: .4byte gUnknown_02024C08
 _08108884: .4byte 0x02016800
 _08108888: .4byte gUnknown_02039238
-	thumb_func_end tai30_unk
+	thumb_func_end BattleAICmd_unk_30
 
-	thumb_func_start dp15_simulate_damage_bonus_jump_if_eq
-dp15_simulate_damage_bonus_jump_if_eq: @ 810888C
+	thumb_func_start BattleAICmd_if_damage_bonus
+BattleAICmd_if_damage_bonus: @ 810888C
 	push {r4,r5,lr}
 	ldr r0, _08108928 @ =gUnknown_02024DEC
 	movs r1, 0
@@ -3330,20 +3330,20 @@ _08108954:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end dp15_simulate_damage_bonus_jump_if_eq
+	thumb_func_end BattleAICmd_if_damage_bonus
 
-	thumb_func_start nullsub_71
-nullsub_71: @ 810895C
+	thumb_func_start BattleAICmd_unk_32
+BattleAICmd_unk_32: @ 810895C
 	bx lr
-	thumb_func_end nullsub_71
+	thumb_func_end BattleAICmd_unk_32
 
-	thumb_func_start nullsub_90
-nullsub_90: @ 8108960
+	thumb_func_start BattleAICmd_unk_33
+BattleAICmd_unk_33: @ 8108960
 	bx lr
-	thumb_func_end nullsub_90
+	thumb_func_end BattleAICmd_unk_33
 
-	thumb_func_start sub_8108964
-sub_8108964: @ 8108964
+	thumb_func_start BattleAICmd_if_status_in_party
+BattleAICmd_if_status_in_party: @ 8108964
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -3443,10 +3443,10 @@ _08108A12:
 	.align 2, 0
 _08108A20: .4byte gPlayerParty
 _08108A24: .4byte gUnknown_02039238
-	thumb_func_end sub_8108964
+	thumb_func_end BattleAICmd_if_status_in_party
 
-	thumb_func_start sub_8108A28
-sub_8108A28: @ 8108A28
+	thumb_func_start BattleAICmd_if_status_not_in_party
+BattleAICmd_if_status_not_in_party: @ 8108A28
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -3543,10 +3543,10 @@ _08108AB0:
 	.align 2, 0
 _08108AE4: .4byte gPlayerParty
 _08108AE8: .4byte gUnknown_02039238
-	thumb_func_end sub_8108A28
+	thumb_func_end BattleAICmd_if_status_not_in_party
 
-	thumb_func_start sub_8108AEC
-sub_8108AEC: @ 8108AEC
+	thumb_func_start BattleAICmd_unk_36
+BattleAICmd_unk_36: @ 8108AEC
 	push {lr}
 	ldr r2, _08108B3C @ =word_2024DB8
 	ldrh r1, [r2]
@@ -3594,10 +3594,10 @@ _08108B2E:
 _08108B3C: .4byte word_2024DB8
 _08108B40: .4byte 0x02016800
 _08108B44: .4byte gUnknown_02039238
-	thumb_func_end sub_8108AEC
+	thumb_func_end BattleAICmd_unk_36
 
-	thumb_func_start sub_8108B48
-sub_8108B48: @ 8108B48
+	thumb_func_start BattleAICmd_if_effect
+BattleAICmd_if_effect: @ 8108B48
 	push {lr}
 	ldr r2, _08108B7C @ =gBattleMoves
 	ldr r0, _08108B80 @ =0x02016800
@@ -3634,10 +3634,10 @@ _08108B88:
 _08108B8C:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8108B48
+	thumb_func_end BattleAICmd_if_effect
 
-	thumb_func_start sub_8108B90
-sub_8108B90: @ 8108B90
+	thumb_func_start BattleAICmd_if_not_effect
+BattleAICmd_if_not_effect: @ 8108B90
 	push {lr}
 	ldr r2, _08108BC4 @ =gBattleMoves
 	ldr r0, _08108BC8 @ =0x02016800
@@ -3674,10 +3674,10 @@ _08108BD0:
 _08108BD4:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8108B90
+	thumb_func_end BattleAICmd_if_not_effect
 
-	thumb_func_start sub_8108BD8
-sub_8108BD8: @ 8108BD8
+	thumb_func_start BattleAICmd_if_stat_level_less_than
+BattleAICmd_if_stat_level_less_than: @ 8108BD8
 	push {r4,lr}
 	ldr r0, _08108BEC @ =gUnknown_02039238
 	ldr r1, [r0]
@@ -3731,10 +3731,10 @@ _08108C3A:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8108BD8
+	thumb_func_end BattleAICmd_if_stat_level_less_than
 
-	thumb_func_start sub_8108C40
-sub_8108C40: @ 8108C40
+	thumb_func_start BattleAICmd_if_stat_level_more_than
+BattleAICmd_if_stat_level_more_than: @ 8108C40
 	push {r4,lr}
 	ldr r0, _08108C54 @ =gUnknown_02039238
 	ldr r1, [r0]
@@ -3788,10 +3788,10 @@ _08108CA2:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8108C40
+	thumb_func_end BattleAICmd_if_stat_level_more_than
 
-	thumb_func_start sub_8108CA8
-sub_8108CA8: @ 8108CA8
+	thumb_func_start BattleAICmd_if_stat_level_equal
+BattleAICmd_if_stat_level_equal: @ 8108CA8
 	push {r4,lr}
 	ldr r0, _08108CBC @ =gUnknown_02039238
 	ldr r1, [r0]
@@ -3845,10 +3845,10 @@ _08108D0A:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8108CA8
+	thumb_func_end BattleAICmd_if_stat_level_equal
 
-	thumb_func_start sub_8108D10
-sub_8108D10: @ 8108D10
+	thumb_func_start BattleAICmd_if_stat_level_not_equal
+BattleAICmd_if_stat_level_not_equal: @ 8108D10
 	push {r4,lr}
 	ldr r0, _08108D24 @ =gUnknown_02039238
 	ldr r1, [r0]
@@ -3902,10 +3902,10 @@ _08108D72:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8108D10
+	thumb_func_end BattleAICmd_if_stat_level_not_equal
 
-	thumb_func_start tai3D_unk
-tai3D_unk: @ 8108D78
+	thumb_func_start BattleAICmd_if_can_faint
+BattleAICmd_if_can_faint: @ 8108D78
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -4012,10 +4012,10 @@ _08108E54:
 	bx r0
 	.align 2, 0
 _08108E60: .4byte gUnknown_02039238
-	thumb_func_end tai3D_unk
+	thumb_func_end BattleAICmd_if_can_faint
 
-	thumb_func_start dp15_determine_move_damage_jump_if_not_fatal
-dp15_determine_move_damage_jump_if_not_fatal: @ 8108E64
+	thumb_func_start BattleAICmd_if_cant_faint
+BattleAICmd_if_cant_faint: @ 8108E64
 	push {r4-r7,lr}
 	ldr r2, _08108EF8 @ =gBattleMoves
 	ldr r7, _08108EFC @ =0x02016800
@@ -4110,10 +4110,10 @@ _08108F30:
 	bx r0
 	.align 2, 0
 _08108F38: .4byte gUnknown_02039238
-	thumb_func_end dp15_determine_move_damage_jump_if_not_fatal
+	thumb_func_end BattleAICmd_if_cant_faint
 
-	thumb_func_start tai40_unk
-tai40_unk: @ 8108F3C
+	thumb_func_start BattleAICmd_unk_3F
+BattleAICmd_unk_3F: @ 8108F3C
 	push {r4-r7,lr}
 	ldr r1, _08108F58 @ =gUnknown_02039238
 	ldr r0, [r1]
@@ -4225,10 +4225,10 @@ _08109008:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end tai40_unk
+	thumb_func_end BattleAICmd_unk_3F
 
-	thumb_func_start sub_8109010
-sub_8109010: @ 8109010
+	thumb_func_start BattleAICmd_unk_40
+BattleAICmd_unk_40: @ 8109010
 	push {r4-r7,lr}
 	ldr r1, _0810902C @ =gUnknown_02039238
 	ldr r0, [r1]
@@ -4340,10 +4340,10 @@ _081090DC:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8109010
+	thumb_func_end BattleAICmd_unk_40
 
-	thumb_func_start sub_81090E4
-sub_81090E4: @ 81090E4
+	thumb_func_start BattleAICmd_if_move_effect
+BattleAICmd_if_move_effect: @ 81090E4
 	push {r4-r7,lr}
 	ldr r1, _081090FC @ =gUnknown_02039238
 	ldr r0, [r1]
@@ -4465,10 +4465,10 @@ _081091C4: .4byte gUnknown_02024C07
 _081091C8: .4byte gBattleMoves
 _081091CC: .4byte 0x02016a00
 _081091D0: .4byte gUnknown_02024C08
-	thumb_func_end sub_81090E4
+	thumb_func_end BattleAICmd_if_move_effect
 
-	thumb_func_start sub_81091D4
-sub_81091D4: @ 81091D4
+	thumb_func_start BattleAICmd_if_not_move_effect
+BattleAICmd_if_not_move_effect: @ 81091D4
 	push {r4-r6,lr}
 	ldr r1, _081091EC @ =gUnknown_02039238
 	ldr r0, [r1]
@@ -4579,10 +4579,10 @@ _08109294:
 _0810929C: .4byte 0x02016a00
 _081092A0: .4byte gUnknown_02024C08
 _081092A4: .4byte gBattleMoves
-	thumb_func_end sub_81091D4
+	thumb_func_end BattleAICmd_if_not_move_effect
 
-	thumb_func_start tai43_unk
-tai43_unk: @ 81092A8
+	thumb_func_start BattleAICmd_if_last_move_did_damage
+BattleAICmd_if_last_move_did_damage: @ 81092A8
 	push {r4,r5,lr}
 	ldr r0, _081092BC @ =gUnknown_02039238
 	ldr r1, [r0]
@@ -4654,10 +4654,10 @@ _08109328:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end tai43_unk
+	thumb_func_end BattleAICmd_if_last_move_did_damage
 
-	thumb_func_start sub_8109330
-sub_8109330: @ 8109330
+	thumb_func_start BattleAICmd_if_encored
+BattleAICmd_if_encored: @ 8109330
 	push {r4,lr}
 	ldr r4, _08109344 @ =gUnknown_02039238
 	ldr r3, [r4]
@@ -4724,10 +4724,10 @@ _081093B0:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8109330
+	thumb_func_end BattleAICmd_if_encored
 
-	thumb_func_start sub_81093B8
-sub_81093B8: @ 81093B8
+	thumb_func_start BattleAICmd_unk_45
+BattleAICmd_unk_45: @ 81093B8
 	ldr r2, _081093C4 @ =0x02016800
 	ldrb r1, [r2, 0x10]
 	movs r0, 0xB
@@ -4736,10 +4736,10 @@ sub_81093B8: @ 81093B8
 	bx lr
 	.align 2, 0
 _081093C4: .4byte 0x02016800
-	thumb_func_end sub_81093B8
+	thumb_func_end BattleAICmd_unk_45
 
-	thumb_func_start sub_81093C8
-sub_81093C8: @ 81093C8
+	thumb_func_start BattleAICmd_if_random_2
+BattleAICmd_if_random_2: @ 81093C8
 	push {r4,lr}
 	ldr r0, _0810940C @ =0x02000000
 	ldr r1, _08109410 @ =0x00016088
@@ -4787,10 +4787,10 @@ _08109420:
 	bx r0
 	.align 2, 0
 _08109428: .4byte gUnknown_02039238
-	thumb_func_end sub_81093C8
+	thumb_func_end BattleAICmd_if_random_2
 
-	thumb_func_start sub_810942C
-sub_810942C: @ 810942C
+	thumb_func_start BattleAICmd_unk_47
+BattleAICmd_unk_47: @ 810942C
 	ldr r2, _08109438 @ =0x02016800
 	ldrb r1, [r2, 0x10]
 	movs r0, 0xD
@@ -4799,10 +4799,10 @@ sub_810942C: @ 810942C
 	bx lr
 	.align 2, 0
 _08109438: .4byte 0x02016800
-	thumb_func_end sub_810942C
+	thumb_func_end BattleAICmd_unk_47
 
-	thumb_func_start dp15_get_held_item_x12__8
-dp15_get_held_item_x12__8: @ 810943C
+	thumb_func_start BattleAICmd_get_hold_effect
+BattleAICmd_get_hold_effect: @ 810943C
 	push {r4,lr}
 	ldr r0, _0810944C @ =gUnknown_02039238
 	ldr r0, [r0]
@@ -4861,10 +4861,10 @@ _0810949E:
 _081094AC: .4byte gBattleMons
 _081094B0: .4byte 0x02016800
 _081094B4: .4byte gUnknown_02039238
-	thumb_func_end dp15_get_held_item_x12__8
+	thumb_func_end BattleAICmd_get_hold_effect
 
-	thumb_func_start tai49_unk
-tai49_unk: @ 81094B8
+	thumb_func_start BattleAICmd_get_gender
+BattleAICmd_get_gender: @ 81094B8
 	push {lr}
 	ldr r0, _081094C8 @ =gUnknown_02039238
 	ldr r0, [r0]
@@ -4904,10 +4904,10 @@ _081094FC: .4byte gUnknown_02024C08
 _08109500: .4byte gBattleMons
 _08109504: .4byte 0x02016800
 _08109508: .4byte gUnknown_02039238
-	thumb_func_end tai49_unk
+	thumb_func_end BattleAICmd_get_gender
 
-	thumb_func_start sub_810950C
-sub_810950C: @ 810950C
+	thumb_func_start BattleAICmd_is_first_turn
+BattleAICmd_is_first_turn: @ 810950C
 	push {r4,lr}
 	ldr r0, _08109520 @ =gUnknown_02039238
 	ldr r1, [r0]
@@ -4942,10 +4942,10 @@ _0810952A:
 _08109548: .4byte gUnknown_02024C08
 _0810954C: .4byte 0x02016800
 _08109550: .4byte gUnknown_02024CA8
-	thumb_func_end sub_810950C
+	thumb_func_end BattleAICmd_is_first_turn
 
-	thumb_func_start sub_8109554
-sub_8109554: @ 8109554
+	thumb_func_start BattleAICmd_get_stockpile_count
+BattleAICmd_get_stockpile_count: @ 8109554
 	push {r4,lr}
 	ldr r0, _08109568 @ =gUnknown_02039238
 	ldr r1, [r0]
@@ -4980,10 +4980,10 @@ _08109572:
 _08109590: .4byte gUnknown_02024C08
 _08109594: .4byte 0x02016800
 _08109598: .4byte gUnknown_02024CA8
-	thumb_func_end sub_8109554
+	thumb_func_end BattleAICmd_get_stockpile_count
 
-	thumb_func_start sub_810959C
-sub_810959C: @ 810959C
+	thumb_func_start BattleAICmd_unk_4C
+BattleAICmd_unk_4C: @ 810959C
 	ldr r2, _081095B4 @ =0x02016800
 	ldr r0, _081095B8 @ =gUnknown_020239F8
 	ldrh r1, [r0]
@@ -4999,10 +4999,10 @@ sub_810959C: @ 810959C
 _081095B4: .4byte 0x02016800
 _081095B8: .4byte gUnknown_020239F8
 _081095BC: .4byte gUnknown_02039238
-	thumb_func_end sub_810959C
+	thumb_func_end BattleAICmd_unk_4C
 
-	thumb_func_start sub_81095C0
-sub_81095C0: @ 81095C0
+	thumb_func_start BattleAICmd_get_item
+BattleAICmd_get_item: @ 81095C0
 	push {lr}
 	ldr r0, _081095D4 @ =gUnknown_02039238
 	ldr r1, [r0]
@@ -5035,10 +5035,10 @@ _081095DE:
 _081095F8: .4byte gUnknown_02024C08
 _081095FC: .4byte 0x02016800
 _08109600: .4byte 0xfffff8cc
-	thumb_func_end sub_81095C0
+	thumb_func_end BattleAICmd_get_item
 
-	thumb_func_start sub_8109604
-sub_8109604: @ 8109604
+	thumb_func_start BattleAICmd_unk_4E
+BattleAICmd_unk_4E: @ 8109604
 	ldr r3, _08109620 @ =0x02016800
 	ldr r2, _08109624 @ =gBattleMoves
 	ldr r1, [r3, 0x8]
@@ -5057,10 +5057,10 @@ sub_8109604: @ 8109604
 _08109620: .4byte 0x02016800
 _08109624: .4byte gBattleMoves
 _08109628: .4byte gUnknown_02039238
-	thumb_func_end sub_8109604
+	thumb_func_end BattleAICmd_unk_4E
 
-	thumb_func_start sub_810962C
-sub_810962C: @ 810962C
+	thumb_func_start BattleAICmd_unk_4F
+BattleAICmd_unk_4F: @ 810962C
 	ldr r3, _08109648 @ =0x02016800
 	ldr r2, _0810964C @ =gBattleMoves
 	ldr r1, [r3, 0x8]
@@ -5079,10 +5079,10 @@ sub_810962C: @ 810962C
 _08109648: .4byte 0x02016800
 _0810964C: .4byte gBattleMoves
 _08109650: .4byte gUnknown_02039238
-	thumb_func_end sub_810962C
+	thumb_func_end BattleAICmd_unk_4F
 
-	thumb_func_start sub_8109654
-sub_8109654: @ 8109654
+	thumb_func_start BattleAICmd_unk_50
+BattleAICmd_unk_50: @ 8109654
 	ldr r3, _08109670 @ =0x02016800
 	ldr r2, _08109674 @ =gBattleMoves
 	ldr r1, [r3, 0x8]
@@ -5101,10 +5101,10 @@ sub_8109654: @ 8109654
 _08109670: .4byte 0x02016800
 _08109674: .4byte gBattleMoves
 _08109678: .4byte gUnknown_02039238
-	thumb_func_end sub_8109654
+	thumb_func_end BattleAICmd_unk_50
 
-	thumb_func_start sub_810967C
-sub_810967C: @ 810967C
+	thumb_func_start BattleAICmd_get_protect_count
+BattleAICmd_get_protect_count: @ 810967C
 	push {r4,lr}
 	ldr r0, _08109690 @ =gUnknown_02039238
 	ldr r1, [r0]
@@ -5139,40 +5139,40 @@ _0810969A:
 _081096B8: .4byte gUnknown_02024C08
 _081096BC: .4byte 0x02016800
 _081096C0: .4byte gUnknown_02024CA8
-	thumb_func_end sub_810967C
+	thumb_func_end BattleAICmd_get_protect_count
 
-	thumb_func_start nullsub_27
-nullsub_27: @ 81096C4
+	thumb_func_start BattleAICmd_unk_52
+BattleAICmd_unk_52: @ 81096C4
 	bx lr
-	thumb_func_end nullsub_27
+	thumb_func_end BattleAICmd_unk_52
 
-	thumb_func_start nullsub_28
-nullsub_28: @ 81096C8
+	thumb_func_start BattleAICmd_unk_53
+BattleAICmd_unk_53: @ 81096C8
 	bx lr
-	thumb_func_end nullsub_28
+	thumb_func_end BattleAICmd_unk_53
 
-	thumb_func_start nullsub_29
-nullsub_29: @ 81096CC
+	thumb_func_start BattleAICmd_unk_54
+BattleAICmd_unk_54: @ 81096CC
 	bx lr
-	thumb_func_end nullsub_29
+	thumb_func_end BattleAICmd_unk_54
 
-	thumb_func_start nullsub_30
-nullsub_30: @ 81096D0
+	thumb_func_start BattleAICmd_unk_55
+BattleAICmd_unk_55: @ 81096D0
 	bx lr
-	thumb_func_end nullsub_30
+	thumb_func_end BattleAICmd_unk_55
 
-	thumb_func_start nullsub_31
-nullsub_31: @ 81096D4
+	thumb_func_start BattleAICmd_unk_56
+BattleAICmd_unk_56: @ 81096D4
 	bx lr
-	thumb_func_end nullsub_31
+	thumb_func_end BattleAICmd_unk_56
 
-	thumb_func_start nullsub_32
-nullsub_32: @ 81096D8
+	thumb_func_start BattleAICmd_unk_57
+BattleAICmd_unk_57: @ 81096D8
 	bx lr
-	thumb_func_end nullsub_32
+	thumb_func_end BattleAICmd_unk_57
 
-	thumb_func_start sub_81096DC
-sub_81096DC: @ 81096DC
+	thumb_func_start BattleAICmd_call
+BattleAICmd_call: @ 81096DC
 	push {r4,lr}
 	ldr r4, _08109708 @ =gUnknown_02039238
 	ldr r0, [r4]
@@ -5195,10 +5195,10 @@ sub_81096DC: @ 81096DC
 	bx r0
 	.align 2, 0
 _08109708: .4byte gUnknown_02039238
-	thumb_func_end sub_81096DC
+	thumb_func_end BattleAICmd_call
 
-	thumb_func_start sub_810970C
-sub_810970C: @ 810970C
+	thumb_func_start BattleAICmd_jump
+BattleAICmd_jump: @ 810970C
 	ldr r3, _08109728 @ =gUnknown_02039238
 	ldr r2, [r3]
 	ldrb r1, [r2, 0x1]
@@ -5215,10 +5215,10 @@ sub_810970C: @ 810970C
 	bx lr
 	.align 2, 0
 _08109728: .4byte gUnknown_02039238
-	thumb_func_end sub_810970C
+	thumb_func_end BattleAICmd_jump
 
-	thumb_func_start sub_810972C
-sub_810972C: @ 810972C
+	thumb_func_start BattleAICmd_unk_5A
+BattleAICmd_unk_5A: @ 810972C
 	push {lr}
 	bl sub_8109908
 	lsls r0, 24
@@ -5234,10 +5234,10 @@ _08109742:
 	bx r0
 	.align 2, 0
 _08109748: .4byte 0x02016800
-	thumb_func_end sub_810972C
+	thumb_func_end BattleAICmd_unk_5A
 
-	thumb_func_start dp15_compare_attacker_defender_levels
-dp15_compare_attacker_defender_levels: @ 810974C
+	thumb_func_start BattleAICmd_if_level_cond
+BattleAICmd_if_level_cond: @ 810974C
 	push {r4,r5,lr}
 	ldr r5, _08109764 @ =gUnknown_02039238
 	ldr r4, [r5]
@@ -5343,10 +5343,10 @@ _0810981C:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end dp15_compare_attacker_defender_levels
+	thumb_func_end BattleAICmd_if_level_cond
 
-	thumb_func_start sub_8109824
-sub_8109824: @ 8109824
+	thumb_func_start BattleAICmd_if_taunted
+BattleAICmd_if_taunted: @ 8109824
 	push {lr}
 	ldr r2, _08109858 @ =gUnknown_02024CA8
 	ldr r0, _0810985C @ =gUnknown_02024C08
@@ -5387,10 +5387,10 @@ _0810986C:
 	bx r0
 	.align 2, 0
 _08109870: .4byte gUnknown_02039238
-	thumb_func_end sub_8109824
+	thumb_func_end BattleAICmd_if_taunted
 
-	thumb_func_start sub_8109874
-sub_8109874: @ 8109874
+	thumb_func_start BattleAICmd_if_not_taunted
+BattleAICmd_if_not_taunted: @ 8109874
 	push {lr}
 	ldr r2, _081098A8 @ =gUnknown_02024CA8
 	ldr r0, _081098AC @ =gUnknown_02024C08
@@ -5431,7 +5431,7 @@ _081098BC:
 	bx r0
 	.align 2, 0
 _081098C0: .4byte gUnknown_02039238
-	thumb_func_end sub_8109874
+	thumb_func_end BattleAICmd_if_not_taunted
 
 	thumb_func_start sub_81098C4
 sub_81098C4: @ 81098C4
