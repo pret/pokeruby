@@ -83,6 +83,7 @@ SECTIONS {
         src/var.o(.text);
         src/flag.o(.text);
         asm/rom_806936C.o(.text);
+        asm/reset_rtc_screen.o(.text);
         asm/party_menu.o(.text);
         asm/rom_806D7F8.o(.text);
         src/start_menu.o(.text);
