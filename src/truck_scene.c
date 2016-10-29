@@ -1,13 +1,16 @@
 #include "global.h"
+#include "palette.h"
 #include "task.h"
 
 extern s8 gTruckCamera_HorizontalTable[];
 
 extern void SetCameraPanning(s16 a1, s16 a2);
 extern void sub_805BD90(u8 localId, u8 mapNum, u8 mapGroup, s16 x, s16 y);
-extern void sub_80C7484(u8 taskId);
 
 void Task_Truck1(u8 taskId);
+void Task_Truck2(u8 taskId);
+void Task_Truck3(u8 taskId);
+void ExecuteTruckSequence(void);
 
 s32 GetTruckCameraBobbingY(int a1)
 {
@@ -85,7 +88,7 @@ void Task_Truck2(u8 taskId)
     else
     {
         if (gTruckCamera_HorizontalTable[data[1]] == 2)
-            gTasks[taskId].func = sub_80C7484;
+            gTasks[taskId].func = Task_Truck3;
         
         cameraXpan = gTruckCamera_HorizontalTable[data[1]];
         cameraYpan = GetTruckCameraBobbingY(data[2]);
@@ -97,4 +100,128 @@ void Task_Truck2(u8 taskId)
         box3 = GetTruckBoxMovement(data[2]) * 4;
         sub_805BD90(3, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, -3 - cameraXpan, box3);
     }
+}
+
+void Task_Truck3(u8 taskId)
+{
+   s16 *data = gTasks[taskId].data;
+   s16 cameraXpan;
+   s16 cameraYpan;
+
+   data[0]++;
+
+   if (data[0] > 5)
+   {
+       data[0] = 0;
+       data[1]++;
+   }
+
+   if ((u16)data[1] == 19)
+   {
+       DestroyTask(taskId);
+   }
+   else
+   {
+       cameraXpan = gTruckCamera_HorizontalTable[data[1]];
+       cameraYpan = 0;
+       SetCameraPanning(cameraXpan, 0);
+       sub_805BD90(1, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, 3 - cameraXpan, cameraYpan + 3);
+       sub_805BD90(2, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, -cameraXpan, cameraYpan - 3);
+       sub_805BD90(3, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, -3 - cameraXpan, cameraYpan);
+   }
+}
+
+void Task_HandleTruckSequence(u8 taskId)
+{
+   s16 *data = gTasks[taskId].data;
+
+   switch(data[0])
+   {
+       /*
+       Each case has a timer which is handled with data[1], incrementing
+       until it reaches the if function's condition, which sets the next task up.
+       */
+   case 0:
+       data[1]++;
+       if ( data[1] == 90 )
+       {
+           SetCameraPanningCallback(0);
+           data[1] = 0; // reset the timer.
+           data[2] = CreateTask(Task_Truck1, 0xA);
+           data[0] = 1; // run the next case.
+           PlaySE(0x31);
+       }
+       break;
+   case 1:
+       data[1]++;
+       if ( data[1] == 150 )
+       {
+           pal_fill_black();
+           data[1] = 0;
+           data[0] = 2;
+       }
+       break;
+   case 2:
+       data[1]++;
+       if(!gPaletteFade.active && data[1] > 300)
+       {
+           data[1] = 0;
+           DestroyTask(data[2]);
+           data[3] = CreateTask(Task_Truck2, 0xA);
+           data[0] = 3;
+           PlaySE(0x32);
+       }
+       break;
+   case 3:
+       if (!gTasks[data[3]].isActive) // is Truck2 no longer active (is Truck3 active?)
+       {
+           InstallCameraPanAheadCallback();
+           data[1] = 0;
+           data[0] = 4;
+       }
+       break;
+   case 4:
+       data[1]++;
+       if (data[1] == 90)
+       {
+           PlaySE(0x33);
+           data[1] = 0;
+           data[0] = 5;
+       }
+       break;
+   case 5:
+       data[1]++;
+       if (data[1] == 120)
+       {
+            MapGridSetMetatileIdAt(11, 8, 520);
+            MapGridSetMetatileIdAt(11, 9, 528);
+            MapGridSetMetatileIdAt(11, 10, 536);
+            DrawWholeMapView();
+            PlaySE(0x34);
+            DestroyTask(taskId);
+            ScriptContext2_Disable();
+       }
+       break;
+   }
+}
+
+void ExecuteTruckSequence(void)
+{
+	MapGridSetMetatileIdAt(11, 8, 525);
+	MapGridSetMetatileIdAt(11, 9, 533);
+	MapGridSetMetatileIdAt(11, 10, 541);
+	DrawWholeMapView();
+	ScriptContext2_Enable();
+	CpuFastFill(0, gPlttBufferFaded, 0x400);
+	CreateTask(Task_HandleTruckSequence, 0xA);
+}
+
+void EndTruckSequence(void)
+{
+	if(!FuncIsActiveTask(Task_HandleTruckSequence))
+	{
+		sub_805BD90(1, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, 3, 3);
+		sub_805BD90(2, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, 0, -3);
+		sub_805BD90(3, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, -3, 0);
+	}
 }

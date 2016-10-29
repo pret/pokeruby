@@ -100,7 +100,6 @@ asm/script_pokemon_util_80C4BF0.o \
 asm/field_poison.o \
 asm/big_shroomish_barboach.o \
 asm/fldeff_80C5CD4.o \
-asm/truck_scene.o \
 asm/porthole.o \
 asm/rotating_gate.o \
 asm/safari_zone.o \
