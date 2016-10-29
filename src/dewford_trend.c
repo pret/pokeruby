@@ -2,10 +2,6 @@
 #include "link.h"
 #include "rng.h"
 
-struct RecordsRelatedStruct
-{
-    struct SB1_2DD4_Struct unk0[5];
-};
 
 extern u8 GetLinkPlayerCount(void);
 extern u16 sub_80EB72C(u16);
@@ -346,45 +342,63 @@ void sub_80FA46C(struct SB1_2DD4_Struct *s, u16 b, u8 c)
     }
 }
 
-/*
-s16 sub_80FA828(struct RecordsRelatedStruct *, u16);
+#ifdef NONMATCHING
+extern struct SB1_2DD4_Struct unk_2007800[5];
+//#define unk_2007800 ((struct SB1_2DD4_Struct *)0x2007800)
+extern struct SB1_2DD4_Struct unk_2007900[5];
+//#define unk_2007900 ((struct SB1_2DD4_Struct *)0x2007900)
 
-#define someRecordsStructs ((struct RecordsRelatedStruct *)0x02007800)
-#define someSB1_2DD4_Structs ((struct SB1_2DD4_Struct *)0x02007900)
-
-void sub_80FA4E4(struct RecordsRelatedStruct *s, u32 b)
+void sub_80FA4E4(u8 *a, u32 b)
 {
     u16 i;
     u16 j;
-    u8 players = GetLinkPlayerCount();
+    u16 r7;
+    struct SB1_2DD4_Struct *src;
+    struct SB1_2DD4_Struct *dst;
+    u16 players = GetLinkPlayerCount();
     
     for(i = 0; i < players; i++)
-        memcpy(&someRecordsStructs[i], &s[i], sizeof(struct RecordsRelatedStruct));
+        memcpy(&unk_2007800[i * 5], a + i * b, 40);
+    
     //_080FA520
+    
+    src = unk_2007800;
+    dst = unk_2007900;   //ToDo: Get this to match
+    
+    r7 = 0;
+    //_080FA530
     for(i = 0; i < players; i++)
     {
-        struct SB1_2DD4_Struct *r3 = someSB1_2DD4_Structs;
-        
         for(j = 0; j < 5; j++)
         {
-            if(sub_80FA828(someRecordsStructs) < 0)
+            s16 foo = sub_80FA828(src, r7);
+            if(foo < 0)
             {
-                *(r3++) = someRecordsStructs[0].unk0[j];
+                *(dst++) = *src;
+                r7++;
             }
             //_080FA558
             else
             {
-                
+                if(unk_2007900[foo].unk0_0 < src->unk0_0)
+                {
+                    unk_2007900[foo] = *src;
+                }
             }
             //_080FA572
+            src++;
         }
     }
     //_080FA588
+    sub_80FA46C(unk_2007900, r7, 2);
+    src = unk_2007900;
+    dst = gSaveBlock1.unk2DD4;
+    for(i = 0; i < 5; i++)
+        *(dst++) = *(src++);
 }
-*/
-
+#else
 __attribute__((naked))
-void sub_80FA4E4(struct RecordsRelatedStruct *s, u32 b)
+void sub_80FA4E4(u8 *a, u32 b)
 {
     asm(".syntax unified\n\
 	push {r4-r7,lr}\n\
@@ -500,6 +514,7 @@ _080FA5B4: .4byte 0x02007900\n\
 _080FA5B8: .4byte gSaveBlock1 + 0x2DD4\n\
     .syntax divided\n");
 }
+#endif
 
 void sub_80FA5BC(void)
 {
