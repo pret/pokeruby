@@ -1,6 +1,6 @@
-	.include "constants/gba_constants.s"
-	.include "constants/species_constants.s"
-	.include "asm/macros.s"
+	.include "constants/gba_constants.inc"
+	.include "constants/species_constants.inc"
+	.include "asm/macros.inc"
 
 	.syntax unified
 
@@ -1101,7 +1101,7 @@ _0807C6C4:
 	b _0807C74E
 	.align 2, 0
 _0807C6F4: .4byte CB2_GoToClearSaveDataScreen
-_0807C6F8: .4byte sub_807C7C8
+_0807C6F8: .4byte CB2_GoToResetRtcScreen
 _0807C6FC:
 	ldr r0, _0807C758 @ =REG_BG2Y_L
 	movs r3, 0
@@ -1205,8 +1205,8 @@ _0807C7BE:
 _0807C7C4: .4byte CB2_InitClearSaveDataScreen
 	thumb_func_end CB2_GoToClearSaveDataScreen
 
-	thumb_func_start sub_807C7C8
-sub_807C7C8: @ 807C7C8
+	thumb_func_start CB2_GoToResetRtcScreen
+CB2_GoToResetRtcScreen: @ 807C7C8
 	push {lr}
 	bl UpdatePaletteFade
 	lsls r0, 24
@@ -1218,8 +1218,8 @@ _0807C7DA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807C7E0: .4byte sub_806AAD8
-	thumb_func_end sub_807C7C8
+_0807C7E0: .4byte CB2_InitResetRtcScreen
+	thumb_func_end CB2_GoToResetRtcScreen
 
 	thumb_func_start sub_807C7E4
 sub_807C7E4: @ 807C7E4
