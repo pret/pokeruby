@@ -232,7 +232,13 @@ struct SaveBlock1
     /*0x2DD4*/ struct SB1_2DD4_Struct unk2DD4[5];
     /*0x2DFC*/ u8 filler_2DFC[0x100];
     /*0x2EFC*/ struct SB1_2EFC_Struct sb1_2EFC_struct[5];
-    /*0x2F9C*/ u8 filler_2F9C[0x1A8];
+    ///*0x2F9C*/ u8 filler_2F9C[0x1A8];
+    /*0x2F9C*/ u8 filler_2F9C[0xA0];
+    
+    /*0x303C*/ u8 filler_303C[0x38];
+    
+    /*0x3074*/ u8 filler_3074[0xD0];
+    
     /*0x3144*/ struct Roamer roamer;
     /*0x3158*/ u8 filler_3158[0x8];
     struct EnigmaBerry enigmaBerry;

@@ -122,6 +122,7 @@ SECTIONS {
         asm/naming_screen.o(.text);
         asm/money.o(.text);
         asm/contest_effect.o(.text);
+		src/record_mixing.o(.text);
         asm/record_mixing.o(.text);
         asm/sound_check_menu.o(.text);
         asm/secret_base.o(.text);
