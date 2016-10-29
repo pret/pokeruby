@@ -365,3 +365,5 @@
 	.equiv BGM_BATTLE35,   464
 	.equiv BGM_BATTLE38,   465
 	.equiv BGM_BATTLE30,   466
+
+	.equiv BGM_ROUTE_118, 0x7fff

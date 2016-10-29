@@ -47,6 +47,8 @@ SECTIONS {
         src/rtc.o(.text);
         src/main_menu.o(.text);
         asm/rom3.o(.text);
+        asm/decompress.o(.text);
+        asm/rom_800D42C.o(.text);
         src/pokemon_1.o(.text);
         asm/calculate_base_damage.o(.text);
         src/pokemon_2.o(.text);
@@ -64,7 +66,13 @@ SECTIONS {
         src/play_time.o(.text);
         src/new_game.o(.text);
         src/rom4.o(.text);
-        asm/rom4.o(.text);
+        asm/fieldmap.o(.text);
+        asm/metatile_behavior.o(.text);
+        asm/field_camera.o(.text);
+        asm/field_door.o(.text);
+        asm/field_player_avatar.o(.text);
+        asm/field_map_obj.o(.text);
+        asm/field_ground_effect.o(.text);
         src/map_obj_80643A4.o(.text);
         src/field_message_box.o(.text);
         src/map_obj_lock.o(.text);
@@ -75,6 +83,7 @@ SECTIONS {
         src/var.o(.text);
         src/flag.o(.text);
         asm/rom_806936C.o(.text);
+        asm/reset_rtc_screen.o(.text);
         asm/party_menu.o(.text);
         asm/rom_806D7F8.o(.text);
         src/start_menu.o(.text);
@@ -108,7 +117,7 @@ SECTIONS {
         asm/matuda_debug_menu.o(.text);
         asm/contest.o(.text);
         asm/shop.o(.text);
-        asm/berry.o(.text);
+        src/berry.o(.text);
         asm/script_menu.o(.text);
         asm/naming_screen.o(.text);
         asm/money.o(.text);
@@ -122,7 +131,7 @@ SECTIONS {
         asm/field_poison.o(.text);
         asm/big_shroomish_barboach.o(.text);
         asm/fldeff_80C5CD4.o(.text);
-        asm/truck_scene.o(.text);
+        src/truck_scene.o(.text);
         asm/porthole.o(.text);
         asm/rotating_gate.o(.text);
         asm/safari_zone.o(.text);
@@ -180,8 +189,8 @@ SECTIONS {
         asm/save_failed_screen.o(.text);
         asm/rom_81473B8.o(.text);
         src/clear_save_data_menu.o(.text);
-        asm/clear_save_data_menu.o(.text);
         asm/rom_8148B8C.o(.text);
+        asm/menu_cursor.o(.text);
     } =0
 
     script_data :

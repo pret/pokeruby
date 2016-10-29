@@ -1,6 +1,6 @@
-	.include "constants/gba_constants.s"
-	.include "constants/species_constants.s"
-	.include "asm/macros.s"
+	.include "constants/gba_constants.inc"
+	.include "constants/species_constants.inc"
+	.include "asm/macros.inc"
 
 	.syntax unified
 
@@ -15014,7 +15014,7 @@ sub_8143088: @ 8143088
 	beq _081430EA
 	lsls r0, r2, 23
 	lsrs r0, 23
-	bl sub_80406D8
+	bl SpeciesToPokedexNum
 	lsls r0, 16
 	lsrs r6, r0, 16
 	ldr r0, _08143190 @ =0x0000ffff

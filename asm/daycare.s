@@ -1,6 +1,6 @@
-	.include "constants/gba_constants.s"
-	.include "constants/species_constants.s"
-	.include "asm/macros.s"
+	.include "constants/gba_constants.inc"
+	.include "constants/species_constants.inc"
+	.include "asm/macros.inc"
 
 	.syntax unified
 
@@ -329,7 +329,7 @@ sub_804151C: @ 804151C
 	ldr r7, _08041538 @ =0x0000ffff
 _08041524:
 	adds r0, r4, 0
-	bl sub_8040300
+	bl TryIncrementMonLevel
 	lsls r0, 24
 	cmp r0, 0
 	beq _08041560
@@ -1387,7 +1387,7 @@ _08041D16:
 	lsls r1, r5, 24
 	lsrs r1, 24
 	adds r0, r7, 0
-	bl sub_8040374
+	bl CanMonLearnTMHM
 	cmp r0, 0
 	beq _08041D52
 	ldrh r1, [r4]

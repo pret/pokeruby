@@ -8,6 +8,7 @@
 #include "palette.h"
 #include "text.h"
 #include "link.h"
+#include "sprite.h"
 
 #ifdef SAPPHIRE
 #define LEGENDARY_MUSIC BGM_OOAME  // Heavy Rain
@@ -59,9 +60,12 @@ struct UnkStruct_8054FF8
     u16 field_C;
 };
 
-struct UnkMapObjStruct
+struct LinkPlayerMapObject
 {
-    u8 a, b, c, d;
+    u8 active;
+    u8 linkPlayerId;
+    u8 mapObjId;
+    u8 mode;
 };
 
 struct UCoords32
@@ -76,7 +80,7 @@ extern struct WarpData gUnknown_02029808;
 extern struct UnkPlayerStruct gUnknown_02029810;
 extern u16 gUnknown_02029814;
 extern bool8 gUnknown_02029816;
-extern struct UnkMapObjStruct gUnknown_02029818[];
+extern struct LinkPlayerMapObject gLinkPlayerMapObjects[];
 
 extern u8 gUnknown_0202E85C;
 extern u8 gUnknown_0202E85D;
@@ -88,7 +92,7 @@ extern u8 gUnknown_03000588;
 extern u16 word_3004858;
 extern void (*gUnknown_0300485C)(void);
 extern u8 gUnknown_03004860;
-extern u8 gUnknown_03004864;
+extern u8 gFieldLinkPlayerCount;
 
 extern struct UnkTVStruct gUnknown_03004870;
 
@@ -118,6 +122,10 @@ extern u8 gUnknown_081A4508[];
 
 extern struct UCoords32 gUnknown_0821664C[];
 
+extern u8 (*gUnknown_082166A0[])(struct LinkPlayerMapObject *, struct MapObject *, u8);
+extern u8 (*gUnknown_082166AC[])(struct LinkPlayerMapObject *, struct MapObject *, u8);
+extern void (*gUnknown_082166D8[])(struct LinkPlayerMapObject *, struct MapObject *);
+
 extern struct MapData * const gMapAttributes[];
 extern struct MapHeader * const * const gMapGroups[];
 extern const struct WarpData gDummyWarpData;
@@ -132,7 +140,7 @@ extern void PlayerGetDestCoords(u16 *, u16 *);
 extern u8 sub_810D32C(void);
 extern u16 GetLocalWildMon(bool8 *);
 extern u16 GetMirageIslandMon(void);
-extern void sub_80C76A0(void);
+extern void ExecuteTruckSequence(void);
 extern void sub_8080B60(void);
 extern void sub_810CC80(void);
 extern void sub_8080AC4(void);
@@ -144,6 +152,8 @@ extern u8 sub_80BBB24(void);
 extern u16 MapGridGetMetatileBehaviorAt(int, int);
 extern u8 *sub_80682A8(void *, u8, u8);
 extern u8 *sub_8068E24(struct UnkStruct_8054FF8_Substruct *);
+extern bool8 MapGridIsImpassableAt(s16, s16);
+extern u8 ZCoordToPriority(u8);
 
 void sub_8053050(void);
 void warp_in(void);
@@ -222,12 +232,19 @@ void sub_8055824(void);
 void sub_8055840(u8 *);
 void sub_805585C(void);
 bool32 sub_8055870(void);
-void sub_8055980(u8, s16, s16, u8);
+void SpawnLinkPlayerMapObject(u8, s16, s16, u8);
+void InitLinkPlayerMapObjectPos(struct MapObject *, s16, s16);
 void sub_80555B0(int, int, struct UnkStruct_8054FF8 *);
 u8 sub_8055AE8(u8);
+void sub_8055B08(u8, u16 *, u16 *);
 u8 sub_8055B30(u8);
+u8 sub_8055B50(u8);
+u8 GetLinkPlayerIdAt(s16, s16);
 void sub_8055BFC(u8, u8);
-void sub_8055E5C(u8);
+u8 npc_something3(u8, u8);
+u8 LinkPlayerDetectCollision(u8, u8, s16, s16);
+void CreateLinkPlayerSprite(u8);
+void SpriteCB_LinkPlayer(struct Sprite *);
 void sub_8056C50(u16, u16);
 
 void sub_8052F5C(void)
@@ -1213,7 +1230,7 @@ void CB2_NewGame(void)
     PlayTimeCounter_Start();
     ScriptContext1_Init();
     ScriptContext2_Disable();
-    gUnknown_0300485C = sub_80C76A0;
+    gUnknown_0300485C = ExecuteTruckSequence;
     do_load_map_stuff_loop(&gMain.state);
     SetFieldVBlankCallback();
     set_callback1(c1_overworld);
@@ -1817,10 +1834,10 @@ void sub_8054EC8(void)
     sav1_camera_get_focus_coords(&x, &y);
     x -= gUnknown_03004860;
 
-    for (i = 0; i < gUnknown_03004864; i++)
+    for (i = 0; i < gFieldLinkPlayerCount; i++)
     {
-        sub_8055980(i, i + x, y, gLinkPlayers[i].gender);
-        sub_8055E5C(i);
+        SpawnLinkPlayerMapObject(i, i + x, y, gLinkPlayers[i].gender);
+        CreateLinkPlayerSprite(i);
     }
 
     sub_8055340(word_3002910);
@@ -1829,8 +1846,8 @@ void sub_8054EC8(void)
 void sub_8054F48(void)
 {
     u16 i;
-    for (i = 0; i < gUnknown_03004864; i++)
-        sub_8055E5C(i);
+    for (i = 0; i < gFieldLinkPlayerCount; i++)
+        CreateLinkPlayerSprite(i);
 }
 
 void sub_8054F70(void)
@@ -1843,7 +1860,7 @@ void sub_8054F70(void)
 bool32 sub_8054F88(u16 a1)
 {
     int i;
-    int count = gUnknown_03004864;
+    int count = gFieldLinkPlayerCount;
 
     for (i = 0; i < count; i++)
         if (gUnknown_03000580[i] != a1)
@@ -1854,7 +1871,7 @@ bool32 sub_8054F88(u16 a1)
 bool32 sub_8054FC0(u16 a1)
 {
     int i;
-    int count = gUnknown_03004864;
+    int count = gFieldLinkPlayerCount;
 
     for (i = 0; i < count; i++)
         if (gUnknown_03000580[i] == a1)
@@ -2127,9 +2144,9 @@ u16 sub_8055468(u32 a1)
     return 17;
 }
 
-u16 sub_805546C(u32 a1)
+u16 sub_805546C(u32 linkPlayerId)
 {
-    if (gUnknown_03000580[a1] == 0x82 && (gMain.newKeys & B_BUTTON))
+    if (gUnknown_03000580[linkPlayerId] == 0x82 && (gMain.newKeys & B_BUTTON))
     {
         sub_80543DC(sub_8055468);
         return 29;
@@ -2201,20 +2218,18 @@ u16 sub_805559C(void)
     return 0;
 }
 
-void sub_80555B0(int a1, int a2, struct UnkStruct_8054FF8 *a3)
+void sub_80555B0(int linkPlayerId, int a2, struct UnkStruct_8054FF8 *a3)
 {
     s16 x, y;
-    u8 val;
 
-    a3->a = a1;
-    a3->b = (a1 == a2) ? 1 : 0;
-    a3->c = gUnknown_02029818[a1].d;
-    val = a1;
-    a3->d = sub_8055B30(val);
-    sub_8055B08(val, &x, &y);
+    a3->a = linkPlayerId;
+    a3->b = (linkPlayerId == a2) ? 1 : 0;
+    a3->c = gLinkPlayerMapObjects[linkPlayerId].mode;
+    a3->d = sub_8055B30(linkPlayerId);
+    sub_8055B08(linkPlayerId, &x, &y);
     a3->sub.x = x;
     a3->sub.y = y;
-    a3->sub.field_8 = sub_8055B50(val);
+    a3->sub.field_8 = sub_8055B50(linkPlayerId);
     a3->field_C = MapGridGetMetatileBehaviorAt(x, y);
 }
 
@@ -2257,8 +2272,7 @@ bool32 sub_8055660(struct UnkStruct_8054FF8 *a1)
 u8 *sub_805568C(struct UnkStruct_8054FF8 *a1)
 {
     struct UnkStruct_8054FF8_Substruct unkStruct;
-    u8 v5;
-    register int v6 asm("r2");
+    u8 linkPlayerId;
 
     if (a1->c && a1->c != 2)
         return 0;
@@ -2267,14 +2281,15 @@ u8 *sub_805568C(struct UnkStruct_8054FF8 *a1)
     unkStruct.x += gUnknown_0821664C[a1->d].x;
     unkStruct.y += gUnknown_0821664C[a1->d].y;
     unkStruct.field_8 = 0;
-    v5 = sub_8055B9C(unkStruct.x, unkStruct.y);
-    v6 = v5;
+    linkPlayerId = GetLinkPlayerIdAt(unkStruct.x, unkStruct.y);
 
-    if (v5 != 4)
+    if (linkPlayerId != 4)
     {
-        if (!a1->b || gUnknown_03000580[v5] != 0x80)
+        if (!a1->b)
             return gUnknown_081A4495;
-        if (!sub_8083BF4(v6))
+        if (gUnknown_03000580[linkPlayerId] != 0x80)
+            return gUnknown_081A4495;
+        if (!sub_8083BF4(linkPlayerId))
             return gUnknown_081A4479;
         return gUnknown_081A4487;
     }
@@ -2410,17 +2425,276 @@ bool32 sub_8055940(void)
     return TRUE;
 }
 
-void sub_8055954(u32 *a1)
+void ZeroLinkPlayerMapObject(struct LinkPlayerMapObject *linkPlayerMapObj)
 {
-    *a1 = 0;
+    memset(linkPlayerMapObj, 0, sizeof(struct LinkPlayerMapObject));
 }
 
 void strange_npc_table_clear(void)
 {
-    memset(gUnknown_02029818, 0, 16);
+    memset(gLinkPlayerMapObjects, 0, 16);
 }
 
-void sub_8055970(void *a1)
+void ZeroMapObject(struct MapObject *mapObj)
 {
-    memset(a1, 0, 36);
+    memset(mapObj, 0, sizeof(struct MapObject));
+}
+
+void SpawnLinkPlayerMapObject(u8 linkPlayerId, s16 x, s16 y, u8 a4)
+{
+    u8 mapObjId = sub_805AB54();
+    struct LinkPlayerMapObject *linkPlayerMapObj = &gLinkPlayerMapObjects[linkPlayerId];
+    struct MapObject *mapObj = &gMapObjects[mapObjId];
+
+    ZeroLinkPlayerMapObject(linkPlayerMapObj);
+    ZeroMapObject(mapObj);
+
+    linkPlayerMapObj->active = 1;
+    linkPlayerMapObj->linkPlayerId = linkPlayerId;
+    linkPlayerMapObj->mapObjId = mapObjId;
+    linkPlayerMapObj->mode = 0;
+
+    mapObj->active = 1;
+    mapObj->mapobj_bit_1 = a4;
+    mapObj->mapobj_unk_19 = 2;
+    mapObj->spriteId = 64;
+
+    InitLinkPlayerMapObjectPos(mapObj, x, y);
+}
+
+void InitLinkPlayerMapObjectPos(struct MapObject *mapObj, s16 x, s16 y)
+{
+    mapObj->coords2.x = x;
+    mapObj->coords2.y = y;
+    mapObj->coords3.x = x;
+    mapObj->coords3.y = y;
+    sub_80603CC(x, y, &mapObj->coords1.x, &mapObj->coords1.y);
+    mapObj->coords1.x += 8;
+    FieldObjectUpdateZCoord(mapObj);
+}
+
+void unref_sub_8055A6C(u8 linkPlayerId, u8 a2)
+{
+    if (gLinkPlayerMapObjects[linkPlayerId].active)
+    {
+        u8 mapObjId = gLinkPlayerMapObjects[linkPlayerId].mapObjId;
+        struct MapObject *mapObj = &gMapObjects[mapObjId];
+        mapObj->mapobj_unk_19 = a2;
+    }
+}
+
+void unref_sub_8055A9C(u8 linkPlayerId)
+{
+    struct LinkPlayerMapObject *linkPlayerMapObj = &gLinkPlayerMapObjects[linkPlayerId];
+    u8 mapObjId = linkPlayerMapObj->mapObjId;
+    struct MapObject *mapObj = &gMapObjects[mapObjId];
+    if (mapObj->spriteId != 64 )
+        DestroySprite(&gSprites[mapObj->spriteId]);
+    linkPlayerMapObj->active = 0;
+    mapObj->active = 0;
+}
+
+u8 sub_8055AE8(u8 linkPlayerId)
+{
+    u8 mapObjId = gLinkPlayerMapObjects[linkPlayerId].mapObjId;
+    struct MapObject *mapObj = &gMapObjects[mapObjId];
+    return mapObj->spriteId;
+}
+
+void sub_8055B08(u8 linkPlayerId, u16 *x, u16 *y)
+{
+    u8 mapObjId = gLinkPlayerMapObjects[linkPlayerId].mapObjId;
+    struct MapObject *mapObj = &gMapObjects[mapObjId];
+    *x = mapObj->coords2.x;
+    *y = mapObj->coords2.y;
+}
+
+u8 sub_8055B30(u8 linkPlayerId)
+{
+    u8 mapObjId = gLinkPlayerMapObjects[linkPlayerId].mapObjId;
+    struct MapObject *mapObj = &gMapObjects[mapObjId];
+    return mapObj->mapobj_unk_19;
+}
+
+u8 sub_8055B50(u8 linkPlayerId)
+{
+    u8 mapObjId = gLinkPlayerMapObjects[linkPlayerId].mapObjId;
+    struct MapObject *mapObj = &gMapObjects[mapObjId];
+    return mapObj->mapobj_unk_0B_0;
+}
+
+s32 unref_sub_8055B74(u8 linkPlayerId)
+{
+    u8 mapObjId = gLinkPlayerMapObjects[linkPlayerId].mapObjId;
+    struct MapObject *mapObj = &gMapObjects[mapObjId];
+    return 16 - (s8)mapObj->mapobj_unk_21;
+}
+
+u8 GetLinkPlayerIdAt(s16 x, s16 y)
+{
+    u8 i;
+    for (i = 0; i < 4; i++)
+    {
+        if (gLinkPlayerMapObjects[i].active
+         && (gLinkPlayerMapObjects[i].mode == 0 || gLinkPlayerMapObjects[i].mode == 2))
+        {
+            struct MapObject *mapObj = &gMapObjects[gLinkPlayerMapObjects[i].mapObjId];
+            if (mapObj->coords2.x == x && mapObj->coords2.y == y)
+                return i;
+        }
+    }
+    return 4;
+}
+
+void sub_8055BFC(u8 linkPlayerId, u8 a2)
+{
+    struct LinkPlayerMapObject *linkPlayerMapObj = &gLinkPlayerMapObjects[linkPlayerId];
+    u8 mapObjId = linkPlayerMapObj->mapObjId;
+    struct MapObject *mapObj = &gMapObjects[mapObjId];
+
+    if (linkPlayerMapObj->active)
+    {
+        if (a2 > 10)
+            mapObj->mapobj_bit_2 = 1;
+        else
+            gUnknown_082166D8[gUnknown_082166A0[linkPlayerMapObj->mode](linkPlayerMapObj, mapObj, a2)](linkPlayerMapObj, mapObj);
+    }
+}
+
+u8 sub_8055C68(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapObject *mapObj, u8 a3)
+{
+    return gUnknown_082166AC[a3](linkPlayerMapObj, mapObj, a3);
+}
+
+u8 sub_8055C88(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapObject *mapObj, u8 a3)
+{
+    return 1;
+}
+
+u8 sub_8055C8C(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapObject *mapObj, u8 a3)
+{
+    return gUnknown_082166AC[a3](linkPlayerMapObj, mapObj, a3);
+}
+
+u8 sub_8055CAC(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapObject *mapObj, u8 a3)
+{
+    return 0;
+}
+
+u8 sub_8055CB0(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapObject *mapObj, u8 a3)
+{
+    s16 x, y;
+
+    mapObj->mapobj_unk_19 = npc_something3(a3, mapObj->mapobj_unk_19);
+    FieldObjectMoveDestCoords(mapObj, mapObj->mapobj_unk_19, &x, &y);
+
+    if (LinkPlayerDetectCollision(linkPlayerMapObj->mapObjId, mapObj->mapobj_unk_19, x, y))
+    {
+        return 0;
+    }
+    else
+    {
+        mapObj->mapobj_unk_21 = 16;
+        npc_coords_shift(mapObj, x, y);
+        FieldObjectUpdateZCoord(mapObj);
+        return 1;
+    }
+}
+
+u8 sub_8055D18(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapObject *mapObj, u8 a3)
+{
+    mapObj->mapobj_unk_19 = npc_something3(a3, mapObj->mapobj_unk_19);
+    return 0;
+}
+
+void sub_8055D30(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapObject *mapObj)
+{
+    linkPlayerMapObj->mode = 0;
+}
+
+void sub_8055D38(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapObject *mapObj)
+{
+    mapObj->mapobj_unk_21--;
+    linkPlayerMapObj->mode = 1;
+    MoveCoords(mapObj->mapobj_unk_19, &mapObj->coords1.x, &mapObj->coords1.y);
+    if (!mapObj->mapobj_unk_21)
+    {
+        npc_coords_shift_still(mapObj);
+        linkPlayerMapObj->mode = 2;
+    }
+}
+
+u8 npc_something3(u8 a1, u8 a2)
+{
+    switch (a1 - 1)
+    {
+    case 0:
+    case 6:
+        return 2;
+    case 1:
+    case 7:
+        return 1;
+    case 2:
+    case 8:
+        return 3;
+    case 3:
+    case 9:
+        return 4;
+    }
+    return a2;
+}
+
+u8 LinkPlayerDetectCollision(u8 selfMapObjId, u8 a2, s16 x, s16 y)
+{
+    u8 i;
+    for (i = 0; i < 16; i++)
+    {
+        if (i != selfMapObjId)
+        {
+            if ((gMapObjects[i].coords2.x == x && gMapObjects[i].coords2.y == y)
+             || (gMapObjects[i].coords3.x == x && gMapObjects[i].coords3.y == y))
+            {
+                return 1;
+            }
+        }
+    }
+    return MapGridIsImpassableAt(x, y);
+}
+
+void CreateLinkPlayerSprite(u8 linkPlayerId)
+{
+    struct LinkPlayerMapObject *linkPlayerMapObj = &gLinkPlayerMapObjects[linkPlayerId];
+    u8 mapObjId = linkPlayerMapObj->mapObjId;
+    struct MapObject *mapObj = &gMapObjects[mapObjId];
+    struct Sprite *sprite;
+
+    if (linkPlayerMapObj->active)
+    {
+        u8 val = sub_805983C(0, mapObj->mapobj_bit_1);
+        mapObj->spriteId = AddPseudoFieldObject(val, SpriteCB_LinkPlayer, 0, 0, 0);
+        sprite = &gSprites[mapObj->spriteId];
+        sprite->coordOffsetEnabled = TRUE;
+        sprite->data0 = linkPlayerId;
+        mapObj->mapobj_bit_2 = 0;
+    }
+}
+
+void SpriteCB_LinkPlayer(struct Sprite *sprite)
+{
+    struct LinkPlayerMapObject *linkPlayerMapObj = &gLinkPlayerMapObjects[sprite->data0];
+    struct MapObject *mapObj = &gMapObjects[linkPlayerMapObj->mapObjId];
+    sprite->pos1.x = mapObj->coords1.x;
+    sprite->pos1.y = mapObj->coords1.y;
+    SetObjectSubpriorityByZCoord(mapObj->elevation, sprite, 1);
+    sprite->oam.priority = ZCoordToPriority(mapObj->elevation);
+    if (!linkPlayerMapObj->mode)
+        StartSpriteAnim(sprite, FieldObjectDirectionToImageAnimId(mapObj->mapobj_unk_19));
+    else
+        StartSpriteAnimIfDifferent(sprite, get_go_image_anim_num(mapObj->mapobj_unk_19));
+    sub_806487C(sprite, 0);
+    if (mapObj->mapobj_bit_2)
+    {
+        sprite->invisible = ((sprite->data7 & 4) >> 2);
+        sprite->data7++;
+    }
 }

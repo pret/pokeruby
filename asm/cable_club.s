@@ -1,6 +1,6 @@
-	.include "constants/gba_constants.s"
-	.include "constants/species_constants.s"
-	.include "asm/macros.s"
+	.include "constants/gba_constants.inc"
+	.include "constants/species_constants.inc"
+	.include "asm/macros.inc"
 
 	.syntax unified
 
@@ -710,7 +710,7 @@ _08083248: .4byte gScriptResult
 _0808324C: .4byte sub_80833C4
 _08083250:
 	bl GetLinkPlayerCount_2
-	ldr r4, _08083278 @ =gUnknown_03004864
+	ldr r4, _08083278 @ =gFieldLinkPlayerCount
 	strb r0, [r4]
 	bl GetMultiplayerId
 	ldr r1, _0808327C @ =gUnknown_03004860
@@ -727,7 +727,7 @@ _08083270:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08083278: .4byte gUnknown_03004864
+_08083278: .4byte gFieldLinkPlayerCount
 _0808327C: .4byte gUnknown_03004860
 _08083280: .4byte gBlockSendBuffer
 _08083284: .4byte sub_8083314
@@ -763,7 +763,7 @@ _080832C0: .4byte gTasks
 _080832C4: .4byte sub_80833C4
 _080832C8:
 	bl GetLinkPlayerCount_2
-	ldr r4, _08083300 @ =gUnknown_03004864
+	ldr r4, _08083300 @ =gFieldLinkPlayerCount
 	strb r0, [r4]
 	bl GetMultiplayerId
 	ldr r1, _08083304 @ =gUnknown_03004860
@@ -786,7 +786,7 @@ _080832F8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08083300: .4byte gUnknown_03004864
+_08083300: .4byte gFieldLinkPlayerCount
 _08083304: .4byte gUnknown_03004860
 _08083308: .4byte gBlockSendBuffer
 _0808330C: .4byte gTasks

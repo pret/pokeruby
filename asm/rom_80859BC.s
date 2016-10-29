@@ -1,6 +1,6 @@
-	.include "constants/gba_constants.s"
-	.include "constants/species_constants.s"
-	.include "asm/macros.s"
+	.include "constants/gba_constants.inc"
+	.include "constants/species_constants.inc"
+	.include "asm/macros.inc"
 
 	.syntax unified
 
@@ -10887,7 +10887,7 @@ _0808AE9A:
 	bne _0808AECE
 	adds r0, r4, 0
 	adds r1, r6, 0
-	bl sub_8040374
+	bl CanMonLearnTMHM
 	cmp r0, 0
 	bne _0808AEE0
 _0808AECE:

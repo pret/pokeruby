@@ -1,6 +1,5 @@
-#include "gba/gba.h"
-#include "fieldmap.h"
 #include "global.h"
+#include "fieldmap.h"
 #include "pokemon.h"
 #include "rng.h"
 #include "script.h"

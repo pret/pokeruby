@@ -1,13 +1,13 @@
 	.section .rodata
 
-	.include "asm/macros/m4a.s"
-	.include "asm/macros/music_voice.s"
+	.include "asm/macros/m4a.inc"
+	.include "asm/macros/music_voice.inc"
 
-	.include "sound/voice_groups.s"
-	.include "sound/keysplit_tables.s"
-	.include "sound/programmable_wave_data.s"
-	.include "sound/music_player_table.s"
-	.include "sound/song_table.s"
-	.include "sound/direct_sound_data.s"
+	.include "sound/voice_groups.inc"
+	.include "sound/keysplit_tables.inc"
+	.include "sound/programmable_wave_data.inc"
+	.include "sound/music_player_table.inc"
+	.include "sound/song_table.inc"
+	.include "sound/direct_sound_data.inc"
 
 	.align 2
