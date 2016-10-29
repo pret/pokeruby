@@ -1,6 +1,9 @@
 #include "global.h"
 #include "palette.h"
 #include "task.h"
+#include "script.h"
+#include "songs.h"
+#include "sound.h"
 
 extern s8 gTruckCamera_HorizontalTable[];
 
@@ -18,7 +21,7 @@ s32 GetTruckCameraBobbingY(int a1)
 
     if (!(a1 % 120))
         return -1;
-    else if ( (a1 % 10) <= 4 )
+    else if ((a1 % 10) <= 4)
         return 1;
 
     return 0;
@@ -36,7 +39,6 @@ s32 GetTruckBoxMovement(int a1) // for the box movement?
 
 void Task_Truck1(u8 taskId)
 {
-    // WIP
     s16 *data = gTasks[taskId].data;
     s16 cameraYpan;
     s16 box1 = 0;
@@ -135,7 +137,7 @@ void Task_HandleTruckSequence(u8 taskId)
 {
    s16 *data = gTasks[taskId].data;
 
-   switch(data[0])
+   switch (data[0])
    {
        /*
        Each case has a timer which is handled with data[1], incrementing
@@ -143,18 +145,18 @@ void Task_HandleTruckSequence(u8 taskId)
        */
    case 0:
        data[1]++;
-       if ( data[1] == 90 )
+       if (data[1] == 90)
        {
            SetCameraPanningCallback(0);
            data[1] = 0; // reset the timer.
            data[2] = CreateTask(Task_Truck1, 0xA);
            data[0] = 1; // run the next case.
-           PlaySE(0x31);
+           PlaySE(SE_TRACK_MOVE);
        }
        break;
    case 1:
        data[1]++;
-       if ( data[1] == 150 )
+       if (data[1] == 150)
        {
            pal_fill_black();
            data[1] = 0;
@@ -169,7 +171,7 @@ void Task_HandleTruckSequence(u8 taskId)
            DestroyTask(data[2]);
            data[3] = CreateTask(Task_Truck2, 0xA);
            data[0] = 3;
-           PlaySE(0x32);
+           PlaySE(SE_TRACK_STOP);
        }
        break;
    case 3:
@@ -184,7 +186,7 @@ void Task_HandleTruckSequence(u8 taskId)
        data[1]++;
        if (data[1] == 90)
        {
-           PlaySE(0x33);
+           PlaySE(SE_TRACK_HAIK);
            data[1] = 0;
            data[0] = 5;
        }
@@ -197,7 +199,7 @@ void Task_HandleTruckSequence(u8 taskId)
             MapGridSetMetatileIdAt(11, 9, 528);
             MapGridSetMetatileIdAt(11, 10, 536);
             DrawWholeMapView();
-            PlaySE(0x34);
+            PlaySE(SE_TRACK_DOOR);
             DestroyTask(taskId);
             ScriptContext2_Disable();
        }
@@ -218,7 +220,7 @@ void ExecuteTruckSequence(void)
 
 void EndTruckSequence(void)
 {
-    if(!FuncIsActiveTask(Task_HandleTruckSequence))
+    if (!FuncIsActiveTask(Task_HandleTruckSequence))
     {
         sub_805BD90(1, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, 3, 3);
         sub_805BD90(2, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, 0, -3);
