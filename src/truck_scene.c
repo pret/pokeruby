@@ -207,21 +207,21 @@ void Task_HandleTruckSequence(u8 taskId)
 
 void ExecuteTruckSequence(void)
 {
-	MapGridSetMetatileIdAt(11, 8, 525);
-	MapGridSetMetatileIdAt(11, 9, 533);
-	MapGridSetMetatileIdAt(11, 10, 541);
-	DrawWholeMapView();
-	ScriptContext2_Enable();
-	CpuFastFill(0, gPlttBufferFaded, 0x400);
-	CreateTask(Task_HandleTruckSequence, 0xA);
+    MapGridSetMetatileIdAt(11, 8, 525);
+    MapGridSetMetatileIdAt(11, 9, 533);
+    MapGridSetMetatileIdAt(11, 10, 541);
+    DrawWholeMapView();
+    ScriptContext2_Enable();
+    CpuFastFill(0, gPlttBufferFaded, 0x400);
+    CreateTask(Task_HandleTruckSequence, 0xA);
 }
 
 void EndTruckSequence(void)
 {
-	if(!FuncIsActiveTask(Task_HandleTruckSequence))
-	{
-		sub_805BD90(1, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, 3, 3);
-		sub_805BD90(2, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, 0, -3);
-		sub_805BD90(3, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, -3, 0);
-	}
+    if(!FuncIsActiveTask(Task_HandleTruckSequence))
+    {
+        sub_805BD90(1, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, 3, 3);
+        sub_805BD90(2, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, 0, -3);
+        sub_805BD90(3, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, -3, 0);
+    }
 }
