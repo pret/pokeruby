@@ -162,17 +162,11 @@ struct SB1_2EFC_Struct
 
 struct SB1_2DD4_Struct
 {
-    u8 unk0;
-    u8 unk1_0:1;
-    u8 unk1_1:1;
-    u8 unk1_2:1;
-    u8 unk1_3:1;
-    u8 unk1_4:1;
-    u8 unk1_5:1;
-    u8 unk1_6:1;
+    u16 unk0_0:7;
+    u16 unk0_7:7;
+    u16 unk1_6:1;
     u16 unk2;
-    u16 unk4;
-    u16 unk6;
+    u16 words[2];
 }; /*size = 0x8*/
 
 struct SaveBlock1
@@ -235,8 +229,8 @@ struct SaveBlock1
     /*0x2B0C*/ u8 unk2B0C;
     /*0x2B0D*/ u8 outbreakPokemonProbability;
     /*0x2B0E*/ u8 filler_2B0E[0x2C6];
-    /*0x2DD4*/ struct SB1_2DD4_Struct unk2DD4[4];
-    /*0x2DF4*/ u8 filler_2DFC[0x108];
+    /*0x2DD4*/ struct SB1_2DD4_Struct unk2DD4[5];
+    /*0x2DFC*/ u8 filler_2DFC[0x100];
     /*0x2EFC*/ struct SB1_2EFC_Struct sb1_2EFC_struct[5];
     /*0x2F9C*/ u8 filler_2F9C[0x1A8];
     /*0x3144*/ struct Roamer roamer;

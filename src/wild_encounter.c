@@ -149,8 +149,7 @@ bool8 CheckFeebas(void)
         if(Random() % 100 > 49) //Why not just do (Random() & 1) to get a 50% chance?
             return FALSE;
         //_08084AC8
-        //FeebasSeedRng(gSaveBlock1.feebasLocationSeed);
-        FeebasSeedRng(gSaveBlock1.unk2DD4[0].unk1);
+        FeebasSeedRng(gSaveBlock1.unk2DD4[0].unk2);
         for(i = 0; i != NUM_FEEBAS_SPOTS;)
         {
             feebasSpots[i] = FeebasRandom() % 447;

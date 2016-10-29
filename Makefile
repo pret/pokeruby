@@ -113,7 +113,6 @@ asm/mauville_old_man.o \
 asm/mail.o \
 asm/menu_helpers.o \
 asm/script_pokemon_util_80F99CC.o \
-asm/dewford_trend.o \
 asm/heal_location.o \
 asm/region_map.o \
 asm/cute_sketch.o \
