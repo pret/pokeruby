@@ -730,7 +730,7 @@ sub_80B9890: @ 80B9890
 	ldr r1, _080B98D0 @ =gTasks
 	adds r0, r1
 	mov r10, r0
-	bl GetBlockRecievedStatus
+	bl GetBlockReceivedStatus
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x4]
