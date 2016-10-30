@@ -432,7 +432,7 @@ void sub_80B97DC(u8 taskId)
 void Task_CopyRecvBuffer(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    s32 recvStatus = GetBlockRecievedStatus();
+    s32 recvStatus = GetBlockReceivedStatus();
     u32 sp8 = 0;
     
     if(recvStatus == sub_8008198())

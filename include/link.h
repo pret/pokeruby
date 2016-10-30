@@ -154,7 +154,7 @@ u8 bitmask_all_link_players_but_self(void);
 bool8 SendBlock(u8, void *, u16);
 bool8 sub_8007E9C(u8);
 bool8 sub_8007ECC(void);
-u8 GetBlockRecievedStatus(void);
+u8 GetBlockReceivedStatus(void);
 void ResetBlockReceivedFlags(void);
 void ResetBlockReceivedFlag(u8);
 void sub_8007F4C(void);

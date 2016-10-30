@@ -3046,7 +3046,7 @@ _0800ED64:
 	.align 2, 0
 _0800ED78: .4byte gUnknown_02024D1E
 _0800ED7C:
-	bl GetBlockRecievedStatus
+	bl GetBlockReceivedStatus
 	movs r1, 0x3
 	ands r1, r0
 	cmp r1, 0x3
@@ -3199,7 +3199,7 @@ _0800EE94:
 	.align 2, 0
 _0800EEA8: .4byte gPlayerParty
 _0800EEAC:
-	bl GetBlockRecievedStatus
+	bl GetBlockReceivedStatus
 	movs r1, 0x3
 	ands r1, r0
 	cmp r1, 0x3
@@ -3234,7 +3234,7 @@ _0800EEE4:
 	.align 2, 0
 _0800EEF8: .4byte gUnknown_03004428
 _0800EEFC:
-	bl GetBlockRecievedStatus
+	bl GetBlockReceivedStatus
 	movs r1, 0x3
 	ands r1, r0
 	cmp r1, 0x3
@@ -3267,7 +3267,7 @@ _0800EF28:
 	.align 2, 0
 _0800EF44: .4byte gUnknown_030044F0
 _0800EF48:
-	bl GetBlockRecievedStatus
+	bl GetBlockReceivedStatus
 	movs r1, 0x3
 	ands r1, r0
 	cmp r1, 0x3
@@ -3535,7 +3535,7 @@ _0800F17E:
 	.align 2, 0
 _0800F19C: .4byte gReceivedRemoteLinkPlayers
 _0800F1A0:
-	bl GetBlockRecievedStatus
+	bl GetBlockReceivedStatus
 	movs r1, 0xF
 	ands r1, r0
 	cmp r1, 0xF
@@ -3723,7 +3723,7 @@ _0800F316:
 _0800F338: .4byte gReceivedRemoteLinkPlayers
 _0800F33C: .4byte 0x02000000
 _0800F340:
-	bl GetBlockRecievedStatus
+	bl GetBlockReceivedStatus
 	movs r1, 0xF
 	ands r1, r0
 	cmp r1, 0xF
@@ -3956,7 +3956,7 @@ _0800F4EA:
 _0800F4FC: .4byte gUnknown_02024D1E
 _0800F500: .4byte 0x0201d000
 _0800F504:
-	bl GetBlockRecievedStatus
+	bl GetBlockReceivedStatus
 	movs r1, 0xF
 	ands r1, r0
 	cmp r1, 0xF
@@ -4105,7 +4105,7 @@ _0800F604:
 	.align 2, 0
 _0800F618: .4byte 0x0201d0c8
 _0800F61C:
-	bl GetBlockRecievedStatus
+	bl GetBlockReceivedStatus
 	movs r1, 0xF
 	ands r1, r0
 	cmp r1, 0xF
