@@ -18,6 +18,9 @@ extern u8 gUnknown_02038738[];  //Don't know what type this is
 extern u16 gUnknown_0202E8CE;
 extern u8 gUnknown_03000718;
 extern u8 gOtherText_MixingComplete[];
+extern u8 gOtherText_MixingRecordsWithFriend[];
+extern bool8 gReceivedRemoteLinkPlayers;
+extern u8 gBlockSendBuffer[];
 
 extern void sub_8041324(struct BoxPokemon *, void *);
 extern void sub_80BD674(void *, u32, u8);
@@ -37,6 +40,12 @@ extern void sub_80720B0(void);
 void sub_80B9484(u8);
 void sub_80B95F0(u8);
 void sub_80BA00C(u8);
+void sub_80B97DC(u8);
+void sub_80B9890(u8);
+void sub_80B9A1C(u8);
+u8 sub_80B9A58(void);
+void sub_80B9A50(void *, u16 *);
+void *sub_80B9A44(void *);
 
 void sub_80B929C(void)
 {
@@ -268,14 +277,141 @@ void sub_80B9484(u8 taskId)
     }
 }
 
-/*
 void sub_80B95F0(u8 taskId)
 {
-    s16 taskData = gTasks[taskId].data;
+    struct Task *task = &gTasks[taskId];
     
-    switch(taskData[0])
+    switch(task->data[0])
     {
-        
+        case 0:
+            sub_80B9A78();
+            MenuDisplayMessageBox();
+            MenuPrint(gOtherText_MixingRecordsWithFriend, 2, 15);
+            task->data[8] = 0x708;
+            task->data[0] = 0x190;
+            ClearLinkCallback_2();
+            break;
+        case 100:
+            task->data[12]++;
+            if(task->data[12] > 0x14)
+            {
+                task->data[12] = 0;
+                task->data[0] = 0x65;
+            }
+            break;
+        case 0x65:
+        {
+            u8 players = GetLinkPlayerCount_2();
+            
+            if(IsLinkMaster() == 1)
+            {
+                if(players == sub_800820C())
+                {
+                    PlaySE(0x15);
+                    task->data[0] = 0xC9;
+                    task->data[12] = 0;
+                }
+            }
+            else
+            {
+                //_080B96C2
+                PlaySE(0x16);
+                task->data[0] = 0x12D;
+            }
+            break;
+        }
+        case 0xC9:
+        {
+            //u8 r4 = sub_800820C();
+            
+            if(sub_800820C() == GetLinkPlayerCount_2())
+            {
+                //task->data[12]++;
+                
+                if(++task->data[12] > GetLinkPlayerCount_2() * 30)
+                {
+                    sub_8007F4C();
+                    task->data[0] = 1;
+                }
+            }
+            break;
+        }
+        case 0x12D:
+            if(sub_800820C() == GetLinkPlayerCount_2())
+                task->data[0] = 1;
+            break;
+        case 0x190:
+            task->data[12]++;
+            if(task->data[12] > 0x14)
+            {
+                task->data[0] = 1;
+                task->data[12] = 0;
+            }
+            break;
+        case 1:
+            if(gReceivedRemoteLinkPlayers)
+            {
+                ConvertIntToDecimalStringN(gStringVar1, sub_80B9A58(), 2, 2);
+                task->data[0] = 5;
+            }
+            break;
+        case 2:
+        {
+            u8 subTaskId;
+            
+            task->data[6] = GetLinkPlayerCount_2();
+            task->data[0] = 0;
+            task->data[5] = sub_80B9A58();
+            task->func = sub_80B97DC;
+            sub_80B9A50(unk_2018000.filler0, &task->data[2]);
+            subTaskId = CreateTask(sub_80B9890, 0x50);
+            task->data[10] = subTaskId;
+            gTasks[subTaskId].data[0] = taskId;
+            //sub_80B9A50(unk_2008000.filler0, &gTasks[subTaskId].data[5]);
+            sub_80B9A50(unk_2018000.filler0 - 0x10000, &gTasks[subTaskId].data[5]);
+            break;
+        }
+        case 5:
+            task->data[10]++;
+            if(task->data[10] > 0x3C)
+            {
+                task->data[10] = 0;
+                task->data[0] = 2;
+            }
+            break;
     }
 }
-*/
+
+void sub_80B97DC(u8 taskId)
+{
+    struct Task *task = &gTasks[taskId];
+    
+    switch(task->data[0])
+    {
+        case 0:
+        {
+            void *src = (u8 *)sub_80B9A44(&task->data[2]) + 0xC8 * task->data[4];
+            
+            memcpy(gBlockSendBuffer, src, 0xC8);
+            task->data[0]++;
+            break;
+        }
+        case 1:
+            if(GetMultiplayerId() == 0)
+                sub_8007E9C(1);
+            task->data[0]++;
+            break;
+        case 2:
+            break;
+        case 3:
+            task->data[4]++;
+            if((u16)task->data[4] == 0x18)
+                task->data[0]++;
+            else
+                task->data[0] = 0;
+            break;
+        case 4:
+            if(!gTasks[task->data[10]].isActive)
+                task->func = sub_80B9A1C;
+    }
+}
