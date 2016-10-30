@@ -9,14 +9,16 @@ extern u8 ConvertEasyChatWordsToString(u8 *dst, u16 *words, u16, u16);
 extern u8 FlagGet(u16);
 extern u8 FlagSet(u16);
 
+extern struct EasyChatPair unk_2007800[5];
+extern struct EasyChatPair unk_2007900[5];
 extern u16 gScriptResult;
 extern u16 gUnknown_0202E8CC;
 
-void sub_80FA740(struct SB1_2DD4_Struct *);
-void sub_80FA46C(struct SB1_2DD4_Struct *, u16, u8);
-bool8 atk90_changetypestoenemyattacktype(struct SB1_2DD4_Struct *, struct SB1_2DD4_Struct *, u8);
-bool8 sub_80FA7FC(u16 *a, u16 *b);
-bool8 sub_80FA7C8(u16 *a);
+void sub_80FA740(struct EasyChatPair *);
+void sub_80FA46C(struct EasyChatPair *, u16, u8);
+bool8 sub_80FA670(struct EasyChatPair *, struct EasyChatPair *, u8);
+bool8 IsEasyChatPairEqual(u16 *, u16 *);
+bool8 SB1ContainsWords(u16 *);
 
 void sub_80FA17C(void)
 {
@@ -24,17 +26,17 @@ void sub_80FA17C(void)
     
     for(i = 0; i < 5; i++)
     {
-        gSaveBlock1.unk2DD4[i].words[0] = sub_80EB72C(10);
+        gSaveBlock1.easyChatPairs[i].words[0] = sub_80EB72C(10);
         
         if(Random() & 1)
-            gSaveBlock1.unk2DD4[i].words[1] = sub_80EB72C(12);
+            gSaveBlock1.easyChatPairs[i].words[1] = sub_80EB72C(12);
         else
-            gSaveBlock1.unk2DD4[i].words[1] = sub_80EB72C(13);
+            gSaveBlock1.easyChatPairs[i].words[1] = sub_80EB72C(13);
         
-        gSaveBlock1.unk2DD4[i].unk1_6 = Random() & 1;
-        sub_80FA740(&gSaveBlock1.unk2DD4[i]);
+        gSaveBlock1.easyChatPairs[i].unk1_6 = Random() & 1;
+        sub_80FA740(&gSaveBlock1.easyChatPairs[i]);
     }
-    sub_80FA46C(gSaveBlock1.unk2DD4, 5, 0);
+    sub_80FA46C(gSaveBlock1.easyChatPairs, 5, 0);
 }
 
 #ifdef NONMATCHING
@@ -54,48 +56,48 @@ void sub_80FA220(u16 a)
             u32 r2 = sp0;
             u32 r4;
             
-            if(gSaveBlock1.unk2DD4[i].unk1_6 == 0)
+            if(gSaveBlock1.easyChatPairs[i].unk1_6 == 0)
             {
-                if(gSaveBlock1.unk2DD4[i].unk0_0 >= r2)
+                if(gSaveBlock1.easyChatPairs[i].unk0_0 >= r2)
                 {
-                    gSaveBlock1.unk2DD4[i].unk0_0 -= r2;
-                    if(gSaveBlock1.unk2DD4[i].unk0_0 == 0)
-                        gSaveBlock1.unk2DD4[i].unk1_6 = 1;
+                    gSaveBlock1.easyChatPairs[i].unk0_0 -= r2;
+                    if(gSaveBlock1.easyChatPairs[i].unk0_0 == 0)
+                        gSaveBlock1.easyChatPairs[i].unk1_6 = 1;
                     continue;
                 }
                 //_080FA290
-                r2 -= gSaveBlock1.unk2DD4[i].unk0_0;
-                gSaveBlock1.unk2DD4[i].unk1_6 = 1;
+                r2 -= gSaveBlock1.easyChatPairs[i].unk0_0;
+                gSaveBlock1.easyChatPairs[i].unk1_6 = 1;
             }
             //_080FA2A0
-            r4 = gSaveBlock1.unk2DD4[i].unk0_0 + r2;
-            if(r4 > gSaveBlock1.unk2DD4[i].unk0_7)
+            r4 = gSaveBlock1.easyChatPairs[i].unk0_0 + r2;
+            if(r4 > gSaveBlock1.easyChatPairs[i].unk0_7)
             {
-                sp4 = r4 % gSaveBlock1.unk2DD4[i].unk0_7;
-                r4 = r4 / gSaveBlock1.unk2DD4[i].unk0_7;
+                sp4 = r4 % gSaveBlock1.easyChatPairs[i].unk0_7;
+                r4 = r4 / gSaveBlock1.easyChatPairs[i].unk0_7;
                 
                 if(r4 == 0)
-                    gSaveBlock1.unk2DD4[i].unk1_6 = 1;
+                    gSaveBlock1.easyChatPairs[i].unk1_6 = 1;
                 else
-                    gSaveBlock1.unk2DD4[i].unk1_6 = 0;
+                    gSaveBlock1.easyChatPairs[i].unk1_6 = 0;
                 
                 
-                if(gSaveBlock1.unk2DD4[i].unk1_6)
+                if(gSaveBlock1.easyChatPairs[i].unk1_6)
                 {
-                    gSaveBlock1.unk2DD4[i].unk0_0 += sp4;
+                    gSaveBlock1.easyChatPairs[i].unk0_0 += sp4;
                     continue;
                 }
                 //_080FA2FA
-                gSaveBlock1.unk2DD4[i].unk0_7 -= sp4;
+                gSaveBlock1.easyChatPairs[i].unk0_7 -= sp4;
                 continue;
             }
             //_080FA310
-            gSaveBlock1.unk2DD4[i].unk0_0 = r4;
+            gSaveBlock1.easyChatPairs[i].unk0_0 = r4;
             
-            if(gSaveBlock1.unk2DD4[i].unk0_0 == gSaveBlock1.unk2DD4[i].unk0_7)
-                gSaveBlock1.unk2DD4[i].unk1_6 = 0;
+            if(gSaveBlock1.easyChatPairs[i].unk0_0 == gSaveBlock1.easyChatPairs[i].unk0_7)
+                gSaveBlock1.easyChatPairs[i].unk1_6 = 0;
         }
-        sub_80FA46C(gSaveBlock1.unk2DD4, 5, 0);
+        sub_80FA46C(gSaveBlock1.easyChatPairs, 5, 0);
     }
     //_080FA34E
 }
@@ -277,18 +279,18 @@ _080FA360: .4byte gSaveBlock1 + 0x2DD4\n\
 
 bool8 sub_80FA364(u16 *a)
 {
-    struct SB1_2DD4_Struct s = {0};
+    struct EasyChatPair s = {0};
     u16 i;
     
-    if(!sub_80FA7C8(a))
+    if(!SB1ContainsWords(a))
     {
         if(!FlagGet(0x833))
         {
             FlagSet(0x833);
             if(!FlagGet(0x834))
             {
-                gSaveBlock1.unk2DD4[0].words[0] = a[0];
-                gSaveBlock1.unk2DD4[0].words[1] = a[1];
+                gSaveBlock1.easyChatPairs[0].words[0] = a[0];
+                gSaveBlock1.easyChatPairs[0].words[1] = a[1];
                 return 1;
             }
         }
@@ -301,26 +303,26 @@ bool8 sub_80FA364(u16 *a)
         
         for(i = 0; i < 5; i++)
         {
-            if(atk90_changetypestoenemyattacktype(&s, &gSaveBlock1.unk2DD4[i], 0))
+            if(sub_80FA670(&s, &gSaveBlock1.easyChatPairs[i], 0))
             {
                 u16 r3 = 4;
                 
                 while(r3 > i)
                 {
-                    gSaveBlock1.unk2DD4[r3] = gSaveBlock1.unk2DD4[r3 - 1];
+                    gSaveBlock1.easyChatPairs[r3] = gSaveBlock1.easyChatPairs[r3 - 1];
                     r3--;
                 }
-                gSaveBlock1.unk2DD4[i] = s;
+                gSaveBlock1.easyChatPairs[i] = s;
                 return (i == 0);
             }
             //_080FA450
         }
-        gSaveBlock1.unk2DD4[4] = s;
+        gSaveBlock1.easyChatPairs[4] = s;
     }
     return 0;
 }
 
-void sub_80FA46C(struct SB1_2DD4_Struct *s, u16 b, u8 c)
+void sub_80FA46C(struct EasyChatPair *s, u16 b, u8 c)
 {
     u16 h;
     
@@ -330,9 +332,9 @@ void sub_80FA46C(struct SB1_2DD4_Struct *s, u16 b, u8 c)
         
         for(i = h + 1; i < b; i++)
         {
-            if(atk90_changetypestoenemyattacktype(&s[i], &s[h], c))
+            if(sub_80FA670(&s[i], &s[h], c))
             {
-                struct SB1_2DD4_Struct temp;
+                struct EasyChatPair temp;
                 
                 temp = s[i];
                 s[i] = s[h];
@@ -343,18 +345,13 @@ void sub_80FA46C(struct SB1_2DD4_Struct *s, u16 b, u8 c)
 }
 
 #ifdef NONMATCHING
-extern struct SB1_2DD4_Struct unk_2007800[5];
-//#define unk_2007800 ((struct SB1_2DD4_Struct *)0x2007800)
-extern struct SB1_2DD4_Struct unk_2007900[5];
-//#define unk_2007900 ((struct SB1_2DD4_Struct *)0x2007900)
-
 void sub_80FA4E4(u8 *a, u32 b)
 {
     u16 i;
     u16 j;
     u16 r7;
-    struct SB1_2DD4_Struct *src;
-    struct SB1_2DD4_Struct *dst;
+    struct EasyChatPair *src;
+    struct EasyChatPair *dst;
     u16 players = GetLinkPlayerCount();
     
     for(i = 0; i < players; i++)
@@ -363,7 +360,8 @@ void sub_80FA4E4(u8 *a, u32 b)
     //_080FA520
     
     src = unk_2007800;
-    dst = unk_2007900;   //ToDo: Get this to match
+    //dst = unk_2007900
+    dst = (u8 *)src + 0x100;   //ToDo: Get this part to match
     
     r7 = 0;
     //_080FA530
@@ -392,7 +390,7 @@ void sub_80FA4E4(u8 *a, u32 b)
     //_080FA588
     sub_80FA46C(unk_2007900, r7, 2);
     src = unk_2007900;
-    dst = gSaveBlock1.unk2DD4;
+    dst = gSaveBlock1.easyChatPairs;
     for(i = 0; i < 5; i++)
         *(dst++) = *(src++);
 }
@@ -518,139 +516,80 @@ _080FA5B8: .4byte gSaveBlock1 + 0x2DD4\n\
 
 void sub_80FA5BC(void)
 {
-    struct SB1_2DD4_Struct *s = &gSaveBlock1.unk2DD4[gUnknown_0202E8CC];
+    struct EasyChatPair *s = &gSaveBlock1.easyChatPairs[gUnknown_0202E8CC];
     
     ConvertEasyChatWordsToString(gStringVar1, s->words, 2, 1);
 }
 
-//Fix register allocation
-#ifdef NONMATCHING
 void sub_80FA5E4(void)
 {
     u16 result = 0;
     
-    if((gSaveBlock1.unk2DD4[0].unk0_0 - gSaveBlock1.unk2DD4[1].unk0_0 <= 1) &&
-    !gSaveBlock1.unk2DD4[0].unk1_6)
+    if (gSaveBlock1.easyChatPairs[0].unk0_0 - gSaveBlock1.easyChatPairs[1].unk0_0 < 2)
     {
-        if(gSaveBlock1.unk2DD4[1].unk1_6)
+        asm("":::"r2"); //Force the compiler to store address of gSaveBlock1 in r3 instead of r2
+        if (!gSaveBlock1.easyChatPairs[0].unk1_6 && gSaveBlock1.easyChatPairs[1].unk1_6)
             result = 1;
-        else
-            result = 0;
     }
     gScriptResult = result;
 }
-#else
-__attribute__((naked))
-void sub_80FA5E4(void)
-{
-    asm(".syntax unified\n\
-	push {r4,lr}\n\
-	movs r4, 0\n\
-	ldr r3, _080FA630 @ =gSaveBlock1\n\
-	ldr r1, _080FA634 @ =0x00002dd4\n\
-	adds r0, r3, r1\n\
-	ldrb r1, [r0]\n\
-	lsls r1, 25\n\
-	lsrs r1, 25\n\
-	ldr r2, _080FA638 @ =0x00002ddc\n\
-	adds r0, r3, r2\n\
-	ldrb r0, [r0]\n\
-	lsls r0, 25\n\
-	lsrs r0, 25\n\
-	subs r1, r0\n\
-	cmp r1, 0x1\n\
-	bgt _080FA626\n\
-	ldr r1, _080FA63C @ =0x00002dd5\n\
-	adds r0, r3, r1\n\
-	ldrb r1, [r0]\n\
-	movs r2, 0x40\n\
-	adds r0, r2, 0\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	bne _080FA626\n\
-	ldr r1, _080FA640 @ =0x00002ddd\n\
-	adds r0, r3, r1\n\
-	ldrb r1, [r0]\n\
-	adds r0, r2, 0\n\
-	ands r0, r1\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	negs r0, r0\n\
-	lsrs r4, r0, 31\n\
-_080FA626:\n\
-	ldr r0, _080FA644 @ =gScriptResult\n\
-	strh r4, [r0]\n\
-	pop {r4}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_080FA630: .4byte gSaveBlock1\n\
-_080FA634: .4byte 0x00002dd4\n\
-_080FA638: .4byte 0x00002ddc\n\
-_080FA63C: .4byte 0x00002dd5\n\
-_080FA640: .4byte 0x00002ddd\n\
-_080FA644: .4byte gScriptResult\n\
-    .syntax divided\n");
-}
-#endif
-
 
 void sub_80FA648(void)
 {
-    gScriptResult = (gSaveBlock1.unk2DD4[0].words[0] + gSaveBlock1.unk2DD4[0].words[1]) & 7;
+    gScriptResult = (gSaveBlock1.easyChatPairs[0].words[0] + gSaveBlock1.easyChatPairs[0].words[1]) & 7;
 }
 
-bool8 atk90_changetypestoenemyattacktype(struct SB1_2DD4_Struct *a, struct SB1_2DD4_Struct *b, u8 c)
+bool8 sub_80FA670(struct EasyChatPair *a, struct EasyChatPair *b, u8 c)
 {
     switch(c)
     {
-        case 0:
-            if(a->unk0_0 > b->unk0_0)
-                return 1;
-            if(a->unk0_0 < b->unk0_0)
-                return 0;
-            if(a->unk0_7 > b->unk0_7)
-                return 1;
-            if(a->unk0_7 < b->unk0_7)
-                return 0;
-            break;
-        case 1:
-            if(a->unk0_7 > b->unk0_7)
-                return 1;
-            if(a->unk0_7 < b->unk0_7)
-                return 0;
-            if(a->unk0_0 > b->unk0_0)
-                return 1;
-            if(a->unk0_0 < b->unk0_0)
-                return 0;
-            break;
-        case 2:
-            if(a->unk0_0 > b->unk0_0)
-                return 1;
-            if(a->unk0_0 < b->unk0_0)
-                return 0;
-            if(a->unk0_7 > b->unk0_7)
-                return 1;
-            if(a->unk0_7 < b->unk0_7)
-                return 0;
-            if(a->unk2 > b->unk2)
-                return 1;
-            if(a->unk2 < b->unk2)
-                return 0;
-            if(a->words[0] > b->words[0])
-                return 1;
-            if(a->words[0] < b->words[0])
-                return 0;
-            if(a->words[1] > b->words[1])
-                return 1;
-            if(a->words[1] < b->words[1])
-                return 0;
+    case 0:
+        if(a->unk0_0 > b->unk0_0)
             return 1;
+        if(a->unk0_0 < b->unk0_0)
+            return 0;
+        if(a->unk0_7 > b->unk0_7)
+            return 1;
+        if(a->unk0_7 < b->unk0_7)
+            return 0;
+        break;
+    case 1:
+        if(a->unk0_7 > b->unk0_7)
+            return 1;
+        if(a->unk0_7 < b->unk0_7)
+            return 0;
+        if(a->unk0_0 > b->unk0_0)
+            return 1;
+        if(a->unk0_0 < b->unk0_0)
+            return 0;
+        break;
+    case 2:
+        if(a->unk0_0 > b->unk0_0)
+            return 1;
+        if(a->unk0_0 < b->unk0_0)
+            return 0;
+        if(a->unk0_7 > b->unk0_7)
+            return 1;
+        if(a->unk0_7 < b->unk0_7)
+            return 0;
+        if(a->unk2 > b->unk2)
+            return 1;
+        if(a->unk2 < b->unk2)
+            return 0;
+        if(a->words[0] > b->words[0])
+            return 1;
+        if(a->words[0] < b->words[0])
+            return 0;
+        if(a->words[1] > b->words[1])
+            return 1;
+        if(a->words[1] < b->words[1])
+            return 0;
+        return 1;
     }
     return Random() & 1;
 }
 
-void sub_80FA740(struct SB1_2DD4_Struct *s)
+void sub_80FA740(struct EasyChatPair *s)
 {
     u16 r4;
     
@@ -666,38 +605,38 @@ void sub_80FA740(struct SB1_2DD4_Struct *s)
     s->unk2 = Random();
 }
 
-bool8 sub_80FA7C8(u16 *a)
+bool8 SB1ContainsWords(u16 *a)
 {
     u16 i;
     
     for(i = 0; i < 5; i++)
     {
-        if(sub_80FA7FC(a, gSaveBlock1.unk2DD4[i].words) != 0)
+        if(IsEasyChatPairEqual(a, gSaveBlock1.easyChatPairs[i].words) != 0)
             return TRUE;
     }
     return FALSE;
 }
 
-bool8 sub_80FA7FC(u16 *a, u16 *b)
+bool8 IsEasyChatPairEqual(u16 *words1, u16 *words2)
 {
     u16 i;
     
     for(i = 0; i < 2; i++)
     {
-        if(*(a++) != *(b++))
+        if(*(words1++) != *(words2++))
             return FALSE;
     }
     return TRUE;
 }
 
-s16 sub_80FA828(struct SB1_2DD4_Struct *a, u16 b)
+s16 sub_80FA828(struct EasyChatPair *a, u16 b)
 {
     s16 i;
-    struct SB1_2DD4_Struct *s = (struct SB1_2DD4_Struct *)0x2007900;
+    struct EasyChatPair *s = unk_2007900;
     
     for(i = 0; i < b; i++)
     {
-        if(sub_80FA7FC(a->words, s->words))
+        if(IsEasyChatPairEqual(a->words, s->words))
             return i;
         s++;
     }

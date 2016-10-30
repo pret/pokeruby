@@ -160,7 +160,7 @@ struct SB1_2EFC_Struct
     u8 unknown[0x20];
 };
 
-struct SB1_2DD4_Struct
+struct EasyChatPair
 {
     u16 unk0_0:7;
     u16 unk0_7:7;
@@ -182,25 +182,25 @@ struct SaveBlock1
     /*0x2F*/ u8 filler_2F;
     /*0x30*/ u8 flashUsed;
     /*0x32*/ u16 mapDataId;
-    u16 mapView[0x100];
-    u8 playerPartyCount;
-    struct Pokemon playerParty[6];
-    u32 money;
-    u16 coins;
-    u16 registeredItem; // registered for use with SELECT button
-    struct ItemSlot pcItems[50];
-    struct ItemSlot bagPocket_Items[20];
-    struct ItemSlot bagPocket_KeyItems[20];
-    struct ItemSlot bagPocket_PokeBalls[16];
-    struct ItemSlot bagPocket_TMHM[64];
-    struct ItemSlot bagPocket_Berries[46];
-    struct Pokeblock pokeblocks[40];
-    u8 unk938[52];  // pokedex related
-    u16 berryBlenderRecords[3];
-    u8 filler_972[0x6];
-    u16 trainerRematchStepCounter;
-    u8 trainerRematches[100];
-    struct MapObject mapObjects[16];
+    /*0x34*/ u16 mapView[0x100];
+    /*0x234*/ u8 playerPartyCount;
+    /*0x238*/ struct Pokemon playerParty[6];
+    /*0x490*/ u32 money;
+    /*0x494*/ u16 coins;
+    /*0x496*/ u16 registeredItem; // registered for use with SELECT button
+    /*0x498*/ struct ItemSlot pcItems[50];
+    /*0x560*/ struct ItemSlot bagPocket_Items[20];
+    /*0x5B0*/ struct ItemSlot bagPocket_KeyItems[20];
+    /*0x600*/ struct ItemSlot bagPocket_PokeBalls[16];
+    /*0x640*/ struct ItemSlot bagPocket_TMHM[64];
+    /*0x740*/ struct ItemSlot bagPocket_Berries[46];
+    /*0x7F8*/ struct Pokeblock pokeblocks[40];
+    /*0x938*/ u8 unk938[52];  // pokedex related
+    /*0x96C*/ u16 berryBlenderRecords[3];
+    /*0x972*/ u8 filler_972[0x6];
+    /*0x978*/ u16 trainerRematchStepCounter;
+    /*0x97A*/ u8 trainerRematches[100];
+    /*0x9E0*/ struct MapObject mapObjects[16];
     /*0xC20*/ struct MapObjectTemplate mapObjectTemplates[64];
     /*0x1220*/ u8 flags[0x120];
     /*0x1340*/ u16 vars[0x100];
@@ -209,16 +209,16 @@ struct SaveBlock1
     /*0x1A08*/ struct SecretBaseRecord secretBases[20];
     /*0x2688*/ u8 playerRoomDecor[12];
     /*0x2694*/ u8 playerRoomDecorPos[12];
-    u8 decorDesk[10];
-    u8 decorChair[10];
-    u8 decorPlant[10];
-    u8 decorOrnament[30];
-    u8 decorMat[30];
-    u8 decorPoster[10];
-    u8 decorDoll[40];
-    u8 decorCushion[10];
-    u8 padding_2736[2];
-    u8 tvShows[24][36]; // TODO: TV show struct
+    /*0x26A0*/ u8 decorDesk[10];
+    /*0x26AA*/ u8 decorChair[10];
+    /*0x26B4*/ u8 decorPlant[10];
+    /*0x26BE*/ u8 decorOrnament[30];
+    /*0x26DC*/ u8 decorMat[30];
+    /*0x26FA*/ u8 decorPoster[10];
+    /*0x2704*/ u8 decorDoll[40];
+    /*0x272C*/ u8 decorCushion[10];
+    /*0x2736*/ u8 padding_2736[2];
+    /*0x2738*/ u8 tvShows[24][36]; // TODO: TV show struct
     /*0x2A98*/ u8 filler_2A98[0x64];
     /*0x2AFC*/ u16 outbreakPokemonSpecies;
     /*0x2AFE*/ u8 outbreakLocationMapNum;
@@ -229,22 +229,18 @@ struct SaveBlock1
     /*0x2B0C*/ u8 unk2B0C;
     /*0x2B0D*/ u8 outbreakPokemonProbability;
     /*0x2B0E*/ u8 filler_2B0E[0x2C6];
-    /*0x2DD4*/ struct SB1_2DD4_Struct unk2DD4[5];
+    /*0x2DD4*/ struct EasyChatPair easyChatPairs[5]; //Dewford trend [0] and some other stuff
     /*0x2DFC*/ u8 filler_2DFC[0x100];
     /*0x2EFC*/ struct SB1_2EFC_Struct sb1_2EFC_struct[5];
-    ///*0x2F9C*/ u8 filler_2F9C[0x1A8];
     /*0x2F9C*/ u8 filler_2F9C[0xA0];
-    
     /*0x303C*/ u8 filler_303C[0x38];
-    
     /*0x3074*/ u8 filler_3074[0xD0];
-    
     /*0x3144*/ struct Roamer roamer;
     /*0x3158*/ u8 filler_3158[0x8];
-    struct EnigmaBerry enigmaBerry;
-    struct RamScript ramScript;
-    u8 filler_3A7C[0x10];
-    u8 unk3A8C[52]; //pokedex related
+    /*0x3160*/ struct EnigmaBerry enigmaBerry;
+    /*0x3690*/ struct RamScript ramScript;
+    /*0x3A7C*/ u8 filler_3A7C[0x10];
+    /*0x3A8C*/ u8 unk3A8C[52]; //pokedex related
 };
 
 extern struct SaveBlock1 gSaveBlock1;

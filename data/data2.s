@@ -14782,24 +14782,27 @@ gComboStarterLookupTable:: @ 83D016C
 	.include "data/contest_effect_funcs.inc"
 
 	.align 2
-gUnknown_083D026C:: @ 83D026C
-	.4byte 0x0202713c
+recordMixingSecretBases:: @ 83D026C
+	@ gSaveBlock1.secretBases
+	.4byte gSaveBlock1 + 0x1A08
 
 	.align 2
-gUnknown_083D0270:: @ 83D0270
-	.4byte 0x02027e6c
+recordMixingTvShows:: @ 83D0270
+	@ gSaveBlock1.tvShows
+	.4byte gSaveBlock1 + 0x2738
 
 	.align 2
 gUnknown_083D0274:: @ 83D0274
-	.4byte 0x020281f0
+	.4byte gSaveBlock1 + 0x2ABC
 
 	.align 2
 gUnknown_083D0278:: @ 83D0278
-	.4byte 0x020284c8
+	.4byte gSaveBlock1 + 0x2D94
 
 	.align 2
-gUnknown_083D027C:: @ 83D027C
-	.4byte 0x02028508
+recordMixingEasyChatPairs:: @ 83D027C
+	@ gSaveBlock1.easyChatPairs
+	.4byte gSaveBlock1 + 0x2DD4
 
 	.align 2
 gUnknown_083D0280:: @ 83D0280
