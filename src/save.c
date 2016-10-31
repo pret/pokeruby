@@ -54,7 +54,7 @@ u8 sub_8125BF8(u8, struct SaveSection *);
 u8 sub_8125974(struct SaveSectionLocation *);
 u16 sub_8125C10(void *, u16);
 
-void calls_flash_erase_block(void)
+void ClearSaveData(void)
 {
     u16 i;
     for (i = 0; i < 32; i++)

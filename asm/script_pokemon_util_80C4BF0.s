@@ -1,6 +1,6 @@
-	.include "constants/gba_constants.s"
-	.include "constants/species_constants.s"
-	.include "asm/macros.s"
+	.include "constants/gba_constants.inc"
+	.include "constants/species_constants.inc"
+	.include "asm/macros.inc"
 
 	.syntax unified
 
@@ -464,10 +464,10 @@ ShowContestWinner: @ 80C4F10
 	bl sub_80B2A7C
 	strb r5, [r6]
 _080C4F40:
-	ldr r0, _080C4F64 @ =sub_8106668
+	ldr r0, _080C4F64 @ =CB2_ContestPainting
 	bl SetMainCallback2
 	ldr r1, _080C4F68 @ =gMain
-	ldr r0, _080C4F6C @ =sub_80C4F00
+	ldr r0, _080C4F6C @ =ShowContestWinnerCleanup
 	str r0, [r1, 0x8]
 	pop {r4-r6}
 	pop {r0}
@@ -1294,7 +1294,7 @@ _080C55AC: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
 ChooseBattleTowerPlayerParty: @ 80C55B0
 	push {lr}
 	ldr r1, _080C55C0 @ =gMain
-	ldr r0, _080C55C4 @ =sub_80C55C8
+	ldr r0, _080C55C4 @ =SetBattleTowerPlayerParty
 	str r0, [r1, 0x8]
 	bl sub_8121E34
 	pop {r0}

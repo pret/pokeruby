@@ -1,6 +1,6 @@
-	.include "constants/gba_constants.s"
-	.include "constants/species_constants.s"
-	.include "asm/macros.s"
+	.include "constants/gba_constants.inc"
+	.include "constants/species_constants.inc"
+	.include "asm/macros.inc"
 
 	.syntax unified
 
@@ -1962,7 +1962,7 @@ DoDecorationSoundEffect: @ 80C6C30
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
-	ldr r0, _080C6C5C @ =sub_80C6AAC
+	ldr r0, _080C6C5C @ =Task_DecorationSoundEffect
 	movs r1, 0x5
 	bl CreateTask
 	lsls r0, 24
@@ -2076,7 +2076,7 @@ DoYellowCave4Sparkle: @ 80C6C90
 	strb r0, [r4, 0x5]
 	adds r3, 0x1C
 	adds r2, r3
-	ldr r0, _080C6D38 @ =sub_80C6C64
+	ldr r0, _080C6D38 @ =SpriteCB_YellowCave4Sparkle
 	str r0, [r2]
 	movs r0, 0
 	strh r0, [r4, 0x2E]
@@ -2280,7 +2280,7 @@ _080C6EAA:
 	bl CurrentMapDrawMetatileAt
 	movs r0, 0
 	strh r0, [r5, 0x2E]
-	ldr r0, _080C6EE0 @ =sub_80C6EE4
+	ldr r0, _080C6EE0 @ =SpriteCB_SandPillar_1
 	str r0, [r5, 0x1C]
 	pop {r4,r5}
 	pop {r0}
@@ -2314,7 +2314,7 @@ _080C6EF8:
 	bl CurrentMapDrawMetatileAt
 	movs r0, 0
 	strh r0, [r5, 0x2E]
-	ldr r0, _080C6F24 @ =sub_80C6F28
+	ldr r0, _080C6F24 @ =SpriteCB_SandPillar_2
 	str r0, [r5, 0x1C]
 _080C6F14:
 	pop {r4,r5}
@@ -2501,7 +2501,7 @@ DoFieldPoisonEffect: @ 80C7074
 	push {lr}
 	movs r0, 0x4F
 	bl PlaySE
-	ldr r0, _080C7088 @ =task50_overworld_posion_effect
+	ldr r0, _080C7088 @ =Task_FieldPoisonEffect
 	movs r1, 0x50
 	bl CreateTask
 	pop {r0}
@@ -2513,7 +2513,7 @@ _080C7088: .4byte Task_FieldPoisonEffect
 	thumb_func_start FieldPoisonEffectIsRunning
 FieldPoisonEffectIsRunning: @ 80C708C
 	push {lr}
-	ldr r0, _080C709C @ =task50_overworld_posion_effect
+	ldr r0, _080C709C @ =Task_FieldPoisonEffect
 	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r0, 24
@@ -2532,7 +2532,7 @@ Task_WateringBerryTreeAnim_0: @ 80C70A0
 	adds r1, r0
 	lsls r1, 3
 	adds r1, r2
-	ldr r0, _080C70B8 @ =sub_80C70BC
+	ldr r0, _080C70B8 @ =Task_WateringBerryTreeAnim_1
 	str r0, [r1]
 	bx lr
 	.align 2, 0
@@ -2581,7 +2581,7 @@ _080C70E8:
 	adds r0, r5
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, _080C712C @ =sub_80C7130
+	ldr r1, _080C712C @ =Task_WateringBerryTreeAnim_2
 	str r1, [r0]
 _080C711A:
 	pop {r4,r5}
@@ -2638,7 +2638,7 @@ _080C7184: .4byte gPlayerAvatar
 _080C7188: .4byte gMapObjects
 _080C718C: .4byte gTasks
 _080C7190:
-	ldr r0, _080C719C @ =sub_80C71A0
+	ldr r0, _080C719C @ =Task_WateringBerryTreeAnim_3
 	str r0, [r2]
 _080C7194:
 	pop {r4,r5}
@@ -2669,7 +2669,7 @@ Task_WateringBerryTreeAnim_3: @ 80C71A0
 	thumb_func_start DoWateringBerryTreeAnim
 DoWateringBerryTreeAnim: @ 80C71C4
 	push {lr}
-	ldr r0, _080C71D4 @ =sub_80C70A0
+	ldr r0, _080C71D4 @ =Task_WateringBerryTreeAnim_0
 	movs r1, 0x50
 	bl CreateTask
 	pop {r0}

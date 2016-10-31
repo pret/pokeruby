@@ -1,4 +1,4 @@
-#include "gba/gba.h"
+#include "global.h"
 #include "main.h"
 #include "menu.h"
 #include "palette.h"

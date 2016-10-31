@@ -1,6 +1,5 @@
-#include "gba/gba.h"
-#include "fieldmap.h"
 #include "global.h"
+#include "fieldmap.h"
 #include "pokemon.h"
 #include "rng.h"
 #include "script.h"
@@ -31,11 +30,11 @@ extern u32 sub_80C8448(void);
 extern s16 sub_810CAE4(u8, u32);
 extern bool32 GetSafariZoneFlag(void);
 extern u8 TestPlayerAvatarFlags(u8);
-extern u8 sub_8057468(u8);
+extern u8 MetatileBehavior_IsLandWildEncounter(u8);
 extern u8 sub_81344CC(void);
-extern u8 sub_8057494(u8);
+extern u8 MetatileBehavior_IsWaterWildEncounter(u8);
 extern void sub_8081A00(void);
-extern u8 sub_8057434(u8);
+extern u8 MetatileBehavior_IsBridge(u8);
 extern void PlayerGetDestCoords(u16 *x, u16 *y);
 extern void sub_80BEA50(u16);
 extern void sav12_xor_increment(u8);
@@ -100,11 +99,11 @@ u16 sub_8084984(s16 x, s16 y, u8 c)
     u16 r9 = gUnknown_0839DC00[c * 3 + 1];
     u16 r6 = gUnknown_0839DC00[c * 3 + 2];
     u16 r5 = *ptr;
-   
+
     while(r5 <= r9)
     {
         u16 i;
-       
+
         for(i = 0; i < gMapHeader.mapData->width; i++)
         {
             if(sub_805759C(MapGridGetMetatileBehaviorAt(i + 7, r5 + 7)) == TRUE)
@@ -117,7 +116,7 @@ u16 sub_8084984(s16 x, s16 y, u8 c)
         }
         r5++;
     }
- 
+
     return r6 + 1;
 }
 
@@ -129,13 +128,13 @@ bool8 CheckFeebas(void)
     u8 r7 = 0;
     u8 i;
     u16 foo;
-   
+
     if(gSaveBlock1.location.mapGroup == 0 && gSaveBlock1.location.mapNum == 0x22)
     {
         GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
         x -= 7;
         y -= 7;
-        
+
         // *sigh* whatever gets the code to match!
         {
         register u16 *arr asm("r0");
@@ -145,11 +144,11 @@ bool8 CheckFeebas(void)
             r7 = 2;
         }
         //_08084A8E
- 
+
         if(Random() % 100 > 49) //Why not just do (Random() & 1) to get a 50% chance?
             return FALSE;
         //_08084AC8
-        FeebasSeedRng(gSaveBlock1.feebasLocationSeed);
+        FeebasSeedRng(gSaveBlock1.easyChatPairs[0].unk2);
         for(i = 0; i != NUM_FEEBAS_SPOTS;)
         {
             feebasSpots[i] = FeebasRandom() % 447;
@@ -163,7 +162,7 @@ bool8 CheckFeebas(void)
         {
             if(foo == feebasSpots[i])
                 return TRUE;
-        }        
+        }
     }
     //_08084B38
     return FALSE;
@@ -183,7 +182,7 @@ void FeebasSeedRng(u16 seed)
 u8 PickWildMon_Grass(void)
 {
     u8 val = Random() % 100;
-    
+
     if(val < 20)
         return 0;
     if(val >= 20 && val < 40)
@@ -213,7 +212,7 @@ u8 PickWildMon_Grass(void)
 u8 PickWildMon_Water(void)
 {
     u8 val = Random() % 100;
-    
+
     if(val < 60)
         return 0;
     if(val >= 60 && val < 90)
@@ -230,7 +229,7 @@ u8 PickWildMon_Fishing(u8 rod)
 {
     u32 r5 = 0;
     u8 val = Random() % 100;
-    
+
     switch(rod)
     {
         case 0: //old rod?
@@ -262,7 +261,7 @@ u8 PickWildMon_Fishing(u8 rod)
         default:
             return r5;
     }
-    
+
     return r5;
 }
 
@@ -273,7 +272,7 @@ u8 RandomInRange(struct WildPokemon *wildPokemon)
     u8 max;
     u8 range;
     u8 rand;
-    
+
     //Make sure minimum level is less than maximum level
     if(wildPokemon->maxLevel >= wildPokemon->minLevel)
     {
@@ -293,7 +292,7 @@ u8 RandomInRange(struct WildPokemon *wildPokemon)
 u16 GetCurrentMapWildMonHeader(void)
 {
     u16 i;
-    
+
     for(i = 0; gWildMonHeaders[i].mapGroup != 0xFF; i++)
     {
         if(gWildMonHeaders[i].mapGroup == gSaveBlock1.location.mapGroup &&
@@ -308,28 +307,28 @@ u8 PickWildMonNature(void)
     u16 foo;
     u32 r7;
     u8 arr[25];
-    
+
     if(GetSafariZoneFlag() == TRUE && Random() % 100 < 80)
     {
         r7 = sub_80C8448();
-        
+
         if(r7)
         {
             u8 i;
-            
+
             for(i = 0; i < 25; i++)
                 arr[i] = i;
             //_08084E04
             for(i = 0; i < 24; i++)
             {
                 u8 j;
-                
+
                 for(j = i + 1; j < 25; j++)
                 {
                     if(Random() & 1)
                     {
                         u8 temp = arr[i];
-                        
+
                         arr[i] = arr[j];
                         arr[j] = temp;
                     }
@@ -357,7 +356,7 @@ bool8 GenerateWildMon(struct WildPokemonInfo *a, u8 b, u8 c)
 {
     u8 mon = 0;
     u8 level;
-    
+
     switch(b)
     {
         case 0:
@@ -372,7 +371,7 @@ bool8 GenerateWildMon(struct WildPokemonInfo *a, u8 b, u8 c)
         default:
             break;
     }
-    
+
     level = RandomInRange(&a->wildPokemon[mon]);
     if(c == 1 && RepelCheck(level) == 0)
     {
@@ -389,7 +388,7 @@ u16 GenerateFishingWildMon(struct WildPokemonInfo *a, u8 rod)
 {
     u8 mon = PickWildMon_Fishing(rod);
     u8 level = RandomInRange(&a->wildPokemon[mon]);
-    
+
     CreateWildMon(a->wildPokemon[mon].species, level);
     return a->wildPokemon[mon].species;
 }
@@ -397,7 +396,7 @@ u16 GenerateFishingWildMon(struct WildPokemonInfo *a, u8 rod)
 bool8 SetUpMassOutbreakEncounter(u8 a)
 {
     u16 i;
-    
+
     if(a == 1 && RepelCheck(gSaveBlock1.outbreakPokemonLevel) == 0)
     {
         return 0;
@@ -434,7 +433,7 @@ bool8 DoWildEncounterRateDiceRoll(u16 a)
 bool8 DoWildEncounterTest(u32 encounterRate, u8 b)
 {
     encounterRate *= 16;
-    
+
     if(TestPlayerAvatarFlags(6))
     {
         encounterRate = encounterRate * 80 / 100;
@@ -442,7 +441,7 @@ bool8 DoWildEncounterTest(u32 encounterRate, u8 b)
     //_0808507E
     ApplyFluteEncounterRateMod(&encounterRate);
     ApplyCleanseTagEncounterRateMod(&encounterRate);
-    
+
     if(b == 0)
     {
         // UB: Too few arguments for function 'GetMonData'
@@ -469,31 +468,30 @@ bool8 DoGlobalWildEncounterDiceRoll(void)
         return TRUE;
 }
 
-#ifdef NONMATCHING
-//ToDo: fix control flow
 bool8 StandardWildEncounter(u16 a, u16 b)
 {
     u16 unk;
-    
+    struct Roamer *roamer;
+
     if(gWildEncountersDisabled != TRUE)
     {
         unk = GetCurrentMapWildMonHeader();
-        
+
         if(unk != 0xFFFF)
         {
-            if(sub_8057468(a) == 1)
+            if(MetatileBehavior_IsLandWildEncounter(a) == 1)
             {
                 if(gWildMonHeaders[unk].landMonsInfo)
                 {
                     if(b != a && !DoGlobalWildEncounterDiceRoll())
                         return 0;
-                    
+
                     if(DoWildEncounterTest(gWildMonHeaders[unk].landMonsInfo->encounterRate, 0) == TRUE)
                     {
                         if(sub_81344CC() == TRUE)
                         {
-                            //_0808524A
-                            if(RepelCheck(gSaveBlock1.roamer.level))
+                            roamer = &gSaveBlock1.roamer;
+                            if(RepelCheck(roamer->level))
                             {
                                 sub_8081A5C();
                                 return 1;
@@ -501,13 +499,14 @@ bool8 StandardWildEncounter(u16 a, u16 b)
                         }
                         else
                         {
-                            if(DoMassOutbreakEncounterTest() == TRUE && SetUpMassOutbreakEncounter(1) == TRUE
-                            || GenerateWildMon(gWildMonHeaders[unk].landMonsInfo, 0, 1) == 1)
+                            if(DoMassOutbreakEncounterTest() == TRUE && SetUpMassOutbreakEncounter(1) == TRUE)
                             {
-                                //_0808527A
-                                asm("");
                                 sub_8081A00();
                                 return 1;
+                            }
+                            if (GenerateWildMon(gWildMonHeaders[unk].landMonsInfo, 0, 1) == 1)
+                            {
+                                goto label;
                             }
                         }
                     }
@@ -516,19 +515,19 @@ bool8 StandardWildEncounter(u16 a, u16 b)
             else
             {
                 //_080851D8
-                if(sub_8057494(a) == TRUE || TestPlayerAvatarFlags(8) && sub_8057434(a) == TRUE)
+                if(MetatileBehavior_IsWaterWildEncounter(a) == TRUE || TestPlayerAvatarFlags(8) && MetatileBehavior_IsBridge(a) == TRUE)
                 {
                     if(gWildMonHeaders[unk].waterMonsInfo)
                     {
                         if(b != a && !DoGlobalWildEncounterDiceRoll())
                             return 0;
-                        
+
                         if(DoWildEncounterTest(gWildMonHeaders[unk].waterMonsInfo->encounterRate, 0) == TRUE)
                         {
                             if(sub_81344CC() == TRUE)
                             {
-                                //_0808524A
-                                if(RepelCheck(gSaveBlock1.roamer.level))
+                                roamer = &gSaveBlock1.roamer;
+                                if(RepelCheck(roamer->level))
                                 {
                                     sub_8081A5C();
                                     return 1;
@@ -539,6 +538,7 @@ bool8 StandardWildEncounter(u16 a, u16 b)
                                 //_08085268
                                 if(GenerateWildMon(gWildMonHeaders[unk].waterMonsInfo, 1, 1) == 1)
                                 {
+                                label:
                                     //_0808527A
                                     sub_8081A00();
                                     return 1;
@@ -552,214 +552,15 @@ bool8 StandardWildEncounter(u16 a, u16 b)
     }
     return 0;
 }
-#else
-__attribute__((naked))
-bool8 StandardWildEncounter(u16 a, u16 b)
-{
-    asm(".syntax unified\n\
-	push {r4-r7,lr}\n\
-	mov r7, r9\n\
-	mov r6, r8\n\
-	push {r6,r7}\n\
-	lsls r0, 16\n\
-	lsrs r6, r0, 16\n\
-	mov r9, r6\n\
-	lsls r1, 16\n\
-	lsrs r7, r1, 16\n\
-	mov r8, r7\n\
-	ldr r0, _080851CC\n\
-	ldrb r0, [r0]\n\
-	cmp r0, 0x1\n\
-	bne _08085122\n\
-	b _08085282\n\
-_08085122:\n\
-	bl GetCurrentMapWildMonHeader\n\
-	lsls r0, 16\n\
-	lsrs r5, r0, 16\n\
-	ldr r0, _080851D0\n\
-	cmp r5, r0\n\
-	bne _08085132\n\
-	b _08085282\n\
-_08085132:\n\
-	lsls r0, r6, 24\n\
-	lsrs r4, r0, 24\n\
-	adds r0, r4, 0\n\
-	bl sub_8057468\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, 0x1\n\
-	bne _080851D8\n\
-	ldr r1, _080851D4\n\
-	lsls r2, r5, 2\n\
-	adds r0, r2, r5\n\
-	lsls r0, 2\n\
-	adds r1, 0x4\n\
-	adds r0, r1\n\
-	ldr r0, [r0]\n\
-	adds r4, r2, 0\n\
-	cmp r0, 0\n\
-	bne _0808515A\n\
-	b _08085282\n\
-_0808515A:\n\
-	cmp r7, r6\n\
-	beq _0808516A\n\
-	bl DoGlobalWildEncounterDiceRoll\n\
-	lsls r0, 24\n\
-	cmp r0, 0\n\
-	bne _0808516A\n\
-	b _08085282\n\
-_0808516A:\n\
-	ldr r1, _080851D4\n\
-	adds r0, r4, r5\n\
-	lsls r0, 2\n\
-	adds r1, 0x4\n\
-	adds r0, r1\n\
-	ldr r0, [r0]\n\
-	ldrb r0, [r0]\n\
-	movs r1, 0\n\
-	bl DoWildEncounterTest\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, 0x1\n\
-	beq _08085188\n\
-	b _08085282\n\
-_08085188:\n\
-	bl sub_81344CC\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, 0x1\n\
-	beq _0808524A\n\
-	bl DoMassOutbreakEncounterTest\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, 0x1\n\
-	bne _080851AE\n\
-	movs r0, 0x1\n\
-	bl SetUpMassOutbreakEncounter\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, 0x1\n\
-	beq _0808527A\n\
-_080851AE:\n\
-	ldr r1, _080851D4\n\
-	adds r0, r4, r5\n\
-	lsls r0, 2\n\
-	adds r1, 0x4\n\
-	adds r0, r1\n\
-	ldr r0, [r0]\n\
-	movs r1, 0\n\
-	movs r2, 0x1\n\
-	bl GenerateWildMon\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, 0x1\n\
-	beq _0808527A\n\
-	b _08085282\n\
-	.align 2, 0\n\
-_080851CC: .4byte gWildEncountersDisabled\n\
-_080851D0: .4byte 0x0000ffff\n\
-_080851D4: .4byte gWildMonHeaders\n\
-_080851D8:\n\
-	adds r0, r4, 0\n\
-	bl sub_8057494\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, 0x1\n\
-	beq _08085200\n\
-	movs r0, 0x8\n\
-	bl TestPlayerAvatarFlags\n\
-	lsls r0, 24\n\
-	cmp r0, 0\n\
-	beq _08085282\n\
-	adds r0, r4, 0\n\
-	bl sub_8057434\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, 0x1\n\
-	bne _08085282\n\
-_08085200:\n\
-	ldr r1, _08085260\n\
-	lsls r2, r5, 2\n\
-	adds r0, r2, r5\n\
-	lsls r0, 2\n\
-	adds r1, 0x8\n\
-	adds r0, r1\n\
-	ldr r0, [r0]\n\
-	adds r4, r2, 0\n\
-	cmp r0, 0\n\
-	beq _08085282\n\
-	cmp r8, r9\n\
-	beq _08085222\n\
-	bl DoGlobalWildEncounterDiceRoll\n\
-	lsls r0, 24\n\
-	cmp r0, 0\n\
-	beq _08085282\n\
-_08085222:\n\
-	ldr r1, _08085260\n\
-	adds r0, r4, r5\n\
-	lsls r0, 2\n\
-	adds r1, 0x8\n\
-	adds r4, r0, r1\n\
-	ldr r0, [r4]\n\
-	ldrb r0, [r0]\n\
-	movs r1, 0\n\
-	bl DoWildEncounterTest\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, 0x1\n\
-	bne _08085282\n\
-	bl sub_81344CC\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, 0x1\n\
-	bne _08085268\n\
-_0808524A:\n\
-	ldr r0, _08085264\n\
-	ldrb r0, [r0, 0xC]\n\
-	bl RepelCheck\n\
-	lsls r0, 24\n\
-	cmp r0, 0\n\
-	beq _08085282\n\
-	bl sub_8081A5C\n\
-	movs r0, 0x1\n\
-	b _08085284\n\
-	.align 2, 0\n\
-_08085260: .4byte gWildMonHeaders\n\
-_08085264: .4byte gSaveBlock1 + 0x3144\n\
-_08085268:\n\
-	ldr r0, [r4]\n\
-	movs r1, 0x1\n\
-	movs r2, 0x1\n\
-	bl GenerateWildMon\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, 0x1\n\
-	bne _08085282\n\
-_0808527A:\n\
-	bl sub_8081A00\n\
-	movs r0, 0x1\n\
-	b _08085284\n\
-_08085282:\n\
-	movs r0, 0\n\
-_08085284:\n\
-	pop {r3,r4}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	pop {r4-r7}\n\
-	pop {r1}\n\
-	bx r1\n\
-    .syntax divided\n");
-}
-#endif
 
 void RockSmashWildEncounter(void)
 {
     u16 headerNum = GetCurrentMapWildMonHeader();
-    
+
     if(headerNum != 0xFFFF)
     {
         struct WildPokemonInfo *wildPokemonInfo = gWildMonHeaders[headerNum].rockSmashMonsInfo;
-        
+
         if(wildPokemonInfo == NULL)
         {
             gScriptResult = 0;
@@ -783,25 +584,25 @@ u8 SweetScentWildEncounter(void)
     s16 y;
     u16 headerNum;
     struct WildPokemonInfo *wildPokemonInfo;
-    
+
     PlayerGetDestCoords(&x, &y);
     //headerNum = GetCurrentMapWildMonHeader();
     if((headerNum = GetCurrentMapWildMonHeader()) != 0xFFFF)
     {
-        if(sub_8057468(MapGridGetMetatileBehaviorAt(x, y)) == 1)
+        if(MetatileBehavior_IsLandWildEncounter(MapGridGetMetatileBehaviorAt(x, y)) == 1)
         {
             wildPokemonInfo = gWildMonHeaders[headerNum].landMonsInfo;
-            
+
             if(wildPokemonInfo == NULL)
                 return 0;
-            
+
             if(sub_81344CC() == 1)
             {
                 //_080853BC
                 sub_8081A5C();
                 return 1;
             }
-            
+
             if(DoMassOutbreakEncounterTest() == 1)
                 SetUpMassOutbreakEncounter(0);
             else
@@ -814,13 +615,13 @@ u8 SweetScentWildEncounter(void)
         //_08085380
         else
         {
-            if(sub_8057494(MapGridGetMetatileBehaviorAt(x, y)) == 1)
+            if(MetatileBehavior_IsWaterWildEncounter(MapGridGetMetatileBehaviorAt(x, y)) == 1)
             {
                 wildPokemonInfo = gWildMonHeaders[headerNum].waterMonsInfo;
-                
+
                 if(wildPokemonInfo == NULL)
                     return 0;
-                
+
                 if(sub_81344CC() == 1)
                 {
                     sub_8081A5C();
@@ -840,7 +641,7 @@ u8 SweetScentWildEncounter(void)
 u8 GetFishingWildMonListHeader(void)
 {
     u16 headerNum = GetCurrentMapWildMonHeader();
-    
+
     if(headerNum != 0xFFFF && gWildMonHeaders[headerNum].fishingMonsInfo != NULL)
         return 1;
     else
@@ -850,11 +651,11 @@ u8 GetFishingWildMonListHeader(void)
 void FishingWildEncounter(u8 rod)
 {
     u16 species;
-    
+
     if(CheckFeebas() == TRUE)
     {
         u8 level = RandomInRange(&gWildFeebasRoute119Data);
-        
+
         species = gWildFeebasRoute119Data.species;
         CreateWildMon(species, level);
     }
@@ -869,133 +670,53 @@ void FishingWildEncounter(u8 rod)
     sub_8081A00();
 }
 
-#ifdef NONMATCHING
-u16 GetLocalWildMon(u8 *a1)
+u16 GetLocalWildMon(bool8 *isWaterMon)
 {
     u16 headerNum;
-    
-    *a1 = 0;
+    struct WildPokemonInfo *landMonsInfo;
+    struct WildPokemonInfo *waterMonsInfo;
+
+    *isWaterMon = FALSE;
     headerNum = GetCurrentMapWildMonHeader();
-    if(headerNum != 0xFFFF)
+    if(headerNum == 0xFFFF)
+        return 0;
+
+    landMonsInfo = gWildMonHeaders[headerNum].landMonsInfo;
+    waterMonsInfo = gWildMonHeaders[headerNum].waterMonsInfo;
+
+    if (!landMonsInfo && !waterMonsInfo)
+        return 0;
+
+    if (landMonsInfo && !waterMonsInfo)
     {
-        struct WildPokemonInfo *landMonsInfo = gWildMonHeaders[headerNum].landMonsInfo;
-        struct WildPokemonInfo *waterMonsInfo = gWildMonHeaders[headerNum].waterMonsInfo;
-        
-        if(landMonsInfo || waterMonsInfo)
-        {
-            if(waterMonsInfo && landMonsInfo == NULL)
-            {
-                //_080854CE
-                *a1 = 1;
-                return waterMonsInfo->wildPokemon[PickWildMon_Water()].species;
-            }
-            else if(landMonsInfo && waterMonsInfo)
-            {
-                //_080854DC
-                if(Random() % 100 < 80)
-                    //jump to _08085500
-                    return landMonsInfo->wildPokemon[PickWildMon_Grass()].species;
-                else
-                {
-                    *a1 = 1;
-                    return waterMonsInfo->wildPokemon[PickWildMon_Water()].species;
-                }
-            }
-            else if(landMonsInfo && waterMonsInfo == NULL)
-            {
-                //_08085500:
-                return landMonsInfo->wildPokemon[PickWildMon_Grass()].species;
-            }
-        }
+        return landMonsInfo->wildPokemon[PickWildMon_Grass()].species;
     }
-    return 0;
+
+    if (!landMonsInfo && waterMonsInfo)
+    {
+        *isWaterMon = TRUE;
+        return waterMonsInfo->wildPokemon[PickWildMon_Water()].species;
+    }
+
+    if ((Random() % 100) < 80)
+    {
+        return landMonsInfo->wildPokemon[PickWildMon_Grass()].species;
+    }
+    else
+    {
+        *isWaterMon = TRUE;
+        return waterMonsInfo->wildPokemon[PickWildMon_Water()].species;
+    }
 }
-#else
-__attribute__((naked))
-u16 GetLocalWildMon(u8 *a1)
-{
-    asm(".syntax unified\n\
-	push {r4-r6,lr}\n\
-	adds r6, r0, 0\n\
-	movs r0, 0\n\
-	strb r0, [r6]\n\
-	bl GetCurrentMapWildMonHeader\n\
-	lsls r0, 16\n\
-	lsrs r3, r0, 16\n\
-	ldr r0, _080854C0\n\
-	cmp r3, r0\n\
-	beq _080854BA\n\
-	ldr r2, _080854C4\n\
-	lsls r1, r3, 2\n\
-	adds r1, r3\n\
-	lsls r1, 2\n\
-	adds r0, r2, 0x4\n\
-	adds r0, r1, r0\n\
-	ldr r5, [r0]\n\
-	adds r2, 0x8\n\
-	adds r1, r2\n\
-	ldr r4, [r1]\n\
-	cmp r5, 0\n\
-	bne _080854C8\n\
-	cmp r4, 0\n\
-	bne _080854CE\n\
-_080854BA:\n\
-	movs r0, 0\n\
-	b _0808550E\n\
-	.align 2, 0\n\
-_080854C0: .4byte 0x0000ffff\n\
-_080854C4: .4byte gWildMonHeaders\n\
-_080854C8:\n\
-	cmp r4, 0\n\
-	bne _080854DC\n\
-	b _08085500\n\
-_080854CE:\n\
-	movs r0, 0x1\n\
-	strb r0, [r6]\n\
-	bl PickWildMon_Water\n\
-	lsls r0, 24\n\
-	ldr r1, [r4, 0x4]\n\
-	b _08085508\n\
-_080854DC:\n\
-	bl Random\n\
-	lsls r0, 16\n\
-	lsrs r0, 16\n\
-	movs r1, 0x64\n\
-	bl __umodsi3\n\
-	lsls r0, 16\n\
-	lsrs r0, 16\n\
-	cmp r0, 0x4F\n\
-	bls _08085500\n\
-	movs r0, 0x1\n\
-	strb r0, [r6]\n\
-	bl PickWildMon_Water\n\
-	lsls r0, 24\n\
-	ldr r1, [r4, 0x4]\n\
-	b _08085508\n\
-_08085500:\n\
-	bl PickWildMon_Grass\n\
-	lsls r0, 24\n\
-	ldr r1, [r5, 0x4]\n\
-_08085508:\n\
-	lsrs r0, 22\n\
-	adds r0, r1\n\
-	ldrh r0, [r0, 0x2]\n\
-_0808550E:\n\
-	pop {r4-r6}\n\
-	pop {r1}\n\
-	bx r1\n\
-    .syntax divided\n");
-}
-#endif
 
 u16 GetMirageIslandMon(void)
 {
     u16 headerNum = GetCurrentMapWildMonHeader();
-    
+
     if(headerNum != 0xFFFF)
     {
         struct WildPokemonInfo *waterMonsInfo = gWildMonHeaders[headerNum].waterMonsInfo;
-        
+
         if(waterMonsInfo)
             return waterMonsInfo->wildPokemon[PickWildMon_Water()].species;
     }
@@ -1005,7 +726,7 @@ u16 GetMirageIslandMon(void)
 bool8 UpdateRepelCounter(void)
 {
     u16 steps = VarGet(0x4021);
-    
+
     if(steps != 0)
     {
         steps--;
@@ -1023,7 +744,7 @@ bool8 UpdateRepelCounter(void)
 bool8 RepelCheck(bool8 level)
 {
     u8 i;
-    
+
     if(!VarGet(0x4021))
         return TRUE;
     else

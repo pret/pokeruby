@@ -1,6 +1,6 @@
-	.include "constants/gba_constants.s"
-	.include "constants/species_constants.s"
-	.include "asm/macros.s"
+	.include "constants/gba_constants.inc"
+	.include "constants/species_constants.inc"
+	.include "asm/macros.inc"
 
 	.syntax unified
 
@@ -563,7 +563,7 @@ _081236B0:
 	strh r2, [r3]
 	ldr r0, _081236EC @ =sub_8123C40
 	bl SetVBlankCallback
-	ldr r0, _081236F0 @ =mainloop
+	ldr r0, _081236F0 @ =sub_8123724
 	bl SetMainCallback2
 	ldr r0, _081236F4 @ =sub_8123878
 	movs r1, 0

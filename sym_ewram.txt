@@ -361,7 +361,7 @@ gUnknown_02029814: @ 2029814
 gUnknown_02029816: @ 2029816
 	.space 0x2
 
-gUnknown_02029818: @ 2029818
+gLinkPlayerMapObjects: @ 2029818
 	.space 0x10
 
 gUnknown_02029828: @ 2029828
@@ -1126,11 +1126,7 @@ gUnknown_02039324: @ 2039324
 gUnknown_02039325: @ 2039325
 	.space 0x3
 
-gUnknown_02039328: @ 2039328
-	.space 0x2
-
-gUnknown_0203932A: @ 203932A
-	.space 0x2
+	.include "src/lottery_corner.o"
 
 gUnknown_0203932C: @ 203932C
 	.space 0x2
@@ -1171,7 +1167,7 @@ gUnknown_02039760: @ 2039760
 gUnknown_0203A360: @ 203A360
 	.space 0x20
 
-gSubspriteTable_203A380: @ 203A380
+gMenuCursorSubsprites: @ 203A380
 	.space 0x50
 
 gUnknown_0203A3D0: @ 203A3D0

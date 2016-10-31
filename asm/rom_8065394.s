@@ -1,5 +1,5 @@
-	.include "constants/gba_constants.s"
-	.include "asm/macros.s"
+	.include "constants/gba_constants.inc"
+	.include "asm/macros.inc"
 
 	.syntax unified
 
@@ -558,7 +558,7 @@ _08068314: .4byte gUnknown_0821664C
 _08068318: .4byte gMapObjects
 _0806831C:
 	movs r4, 0
-	ldr r1, _08068354 @ =gUnknown_02029818
+	ldr r1, _08068354 @ =gLinkPlayerMapObjects
 _08068320:
 	ldrb r0, [r1]
 	cmp r0, 0x1
@@ -588,7 +588,7 @@ _0806834E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08068354: .4byte gUnknown_02029818
+_08068354: .4byte gLinkPlayerMapObjects
 _08068358: .4byte gSelectedMapObject
 _0806835C: .4byte gUnknown_0202E8DE
 _08068360: .4byte gUnknown_0202E8E0

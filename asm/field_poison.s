@@ -1,6 +1,6 @@
-	.include "constants/gba_constants.s"
-	.include "constants/species_constants.s"
-	.include "asm/macros.s"
+	.include "constants/gba_constants.inc"
+	.include "constants/species_constants.inc"
+	.include "asm/macros.inc"
 
 	.syntax unified
 
@@ -232,7 +232,7 @@ _080C5820: .4byte gScriptResult
 	thumb_func_start DoWhiteOut
 DoWhiteOut: @ 80C5824
 	push {lr}
-	ldr r0, _080C5838 @ =sub_80C5770
+	ldr r0, _080C5838 @ =Task_WhiteOut
 	movs r1, 0x50
 	bl CreateTask
 	bl ScriptContext1_Stop

@@ -1,6 +1,6 @@
-	.include "constants/gba_constants.s"
-	.include "constants/species_constants.s"
-	.include "asm/macros.s"
+	.include "constants/gba_constants.inc"
+	.include "constants/species_constants.inc"
+	.include "asm/macros.inc"
 
 	.syntax unified
 
@@ -35,7 +35,7 @@ sub_8093130: @ 8093130
 	bl SetMainCallback2
 	ldr r2, _08093168 @ =0x02000000
 	ldr r3, _0809316C @ =gLinkPlayers
-	ldr r0, _08093170 @ =gUnknown_02029818
+	ldr r0, _08093170 @ =gLinkPlayerMapObjects
 	lsls r4, 2
 	adds r4, r0
 	ldrb r1, [r4, 0x1]
@@ -53,7 +53,7 @@ sub_8093130: @ 8093130
 _08093164: .4byte sub_8093174
 _08093168: .4byte 0x02000000
 _0809316C: .4byte gLinkPlayers
-_08093170: .4byte gUnknown_02029818
+_08093170: .4byte gLinkPlayerMapObjects
 	thumb_func_end sub_8093130
 
 	thumb_func_start sub_8093174

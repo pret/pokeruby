@@ -1,6 +1,6 @@
-	.include "constants/gba_constants.s"
-	.include "constants/species_constants.s"
-	.include "asm/macros.s"
+	.include "constants/gba_constants.inc"
+	.include "constants/species_constants.inc"
+	.include "asm/macros.inc"
 
 	.syntax unified
 
@@ -194,7 +194,7 @@ _0810678C:
 	ldr r0, [r0, 0x8]
 	movs r0, 0x2
 	bl BeginFastPaletteFade
-	ldr r0, _081067FC @ =sub_8106AAC
+	ldr r0, _081067FC @ =VBlankCB_ContestPainting
 	bl SetVBlankCallback
 	ldr r0, _08106800 @ =gUnknown_03000750
 	strb r4, [r0]
@@ -204,7 +204,7 @@ _0810678C:
 	lsls r2, 5
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r0, _08106804 @ =sub_8106808
+	ldr r0, _08106804 @ =CB2_HoldContestPainting
 	bl SetMainCallback2
 _081067E0:
 	add sp, 0x4
@@ -324,7 +324,7 @@ _081068C0:
 	ands r0, r1
 	cmp r0, 0
 	bne _081068D2
-	ldr r0, _081068F0 @ =sub_8106818
+	ldr r0, _081068F0 @ =CB2_QuitContestPainting
 	bl SetMainCallback2
 _081068D2:
 	ldr r0, _081068F4 @ =gUnknown_03000756

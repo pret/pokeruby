@@ -1,6 +1,6 @@
-	.include "constants/gba_constants.s"
-	.include "constants/species_constants.s"
-	.include "asm/macros.s"
+	.include "constants/gba_constants.inc"
+	.include "constants/species_constants.inc"
+	.include "asm/macros.inc"
 
 	.syntax unified
 
@@ -39,7 +39,7 @@ sub_80C85AC: @ 80C85AC
 	lsls r1, 17
 	lsls r1, r0
 	lsrs r4, r1, 24
-	bl GetBlockRecievedStatus
+	bl GetBlockReceivedStatus
 	adds r1, r4, 0
 	ands r1, r0
 	cmp r1, 0
@@ -61,7 +61,7 @@ sub_80C85D8: @ 80C85D8
 	push {r4,lr}
 	movs r4, 0
 _080C85DC:
-	bl GetBlockRecievedStatus
+	bl GetBlockReceivedStatus
 	lsls r0, 24
 	lsrs r0, 24
 	asrs r0, r4

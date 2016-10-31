@@ -1,6 +1,6 @@
-	.include "constants/gba_constants.s"
-	.include "constants/species_constants.s"
-	.include "asm/macros.s"
+	.include "constants/gba_constants.inc"
+	.include "constants/species_constants.inc"
+	.include "asm/macros.inc"
 
 	.syntax unified
 
@@ -2994,7 +2994,7 @@ _080870AA:
 	thumb_func_start FldEff_UseDive
 FldEff_UseDive: @ 80870B0
 	push {r4,lr}
-	ldr r4, _080870E0 @ =sub_80870EC
+	ldr r4, _080870E0 @ =Task_Dive
 	adds r0, r4, 0
 	movs r1, 0xFF
 	bl CreateTask
@@ -3016,13 +3016,13 @@ FldEff_UseDive: @ 80870B0
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080870E0: .4byte sub_80870EC
+_080870E0: .4byte Task_Dive
 _080870E4: .4byte gTasks
 _080870E8: .4byte gUnknown_0202FF84
 	thumb_func_end FldEff_UseDive
 
-	thumb_func_start sub_80870EC
-sub_80870EC: @ 80870EC
+	thumb_func_start Task_Dive
+Task_Dive: @ 80870EC
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3049,7 +3049,7 @@ _080870FE:
 	.align 2, 0
 _0808711C: .4byte gUnknown_0839F330
 _08087120: .4byte gTasks
-	thumb_func_end sub_80870EC
+	thumb_func_end Task_Dive
 
 	thumb_func_start sub_8087124
 sub_8087124: @ 8087124
@@ -3110,7 +3110,7 @@ dive_3_unknown: @ 8087160
 	ldrb r1, [r0, 0x1E]
 	mov r0, sp
 	bl dive_warp
-	ldr r0, _080871B4 @ =sub_80870EC
+	ldr r0, _080871B4 @ =Task_Dive
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
@@ -3125,7 +3125,7 @@ _080871A4:
 	.align 2, 0
 _080871AC: .4byte gMapObjects
 _080871B0: .4byte gPlayerAvatar
-_080871B4: .4byte sub_80870EC
+_080871B4: .4byte Task_Dive
 	thumb_func_end dive_3_unknown
 
 	thumb_func_start sub_80871B8
@@ -10339,7 +10339,7 @@ _0808AA80: .4byte gTasks
 _0808AA84: .4byte sub_808AB34
 _0808AA88:
 	adds r0, r5, 0
-	bl unref_sub_8133D28
+	bl sub_8133D28
 	b _0808AADA
 _0808AA90:
 	movs r0, 0x13
@@ -10887,7 +10887,7 @@ _0808AE9A:
 	bne _0808AECE
 	adds r0, r4, 0
 	adds r1, r6, 0
-	bl sub_8040374
+	bl CanMonLearnTMHM
 	cmp r0, 0
 	bne _0808AEE0
 _0808AECE:
