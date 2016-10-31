@@ -47,6 +47,8 @@ SECTIONS {
         src/rtc.o(.text);
         src/main_menu.o(.text);
         asm/rom3.o(.text);
+        asm/decompress.o(.text);
+        asm/rom_800D42C.o(.text);
         src/pokemon_1.o(.text);
         asm/calculate_base_damage.o(.text);
         src/pokemon_2.o(.text);
@@ -64,7 +66,13 @@ SECTIONS {
         src/play_time.o(.text);
         src/new_game.o(.text);
         src/rom4.o(.text);
-        asm/rom4.o(.text);
+        asm/fieldmap.o(.text);
+        asm/metatile_behavior.o(.text);
+        asm/field_camera.o(.text);
+        asm/field_door.o(.text);
+        asm/field_player_avatar.o(.text);
+        asm/field_map_obj.o(.text);
+        asm/field_ground_effect.o(.text);
         src/map_obj_80643A4.o(.text);
         src/field_message_box.o(.text);
         src/map_obj_lock.o(.text);
@@ -75,6 +83,7 @@ SECTIONS {
         src/var.o(.text);
         src/flag.o(.text);
         asm/rom_806936C.o(.text);
+        asm/reset_rtc_screen.o(.text);
         asm/party_menu.o(.text);
         asm/rom_806D7F8.o(.text);
         src/start_menu.o(.text);
@@ -108,21 +117,22 @@ SECTIONS {
         asm/matuda_debug_menu.o(.text);
         asm/contest.o(.text);
         asm/shop.o(.text);
-        asm/berry.o(.text);
+        src/berry.o(.text);
         asm/script_menu.o(.text);
         asm/naming_screen.o(.text);
         asm/money.o(.text);
         asm/contest_effect.o(.text);
+        src/record_mixing.o(.text);
         asm/record_mixing.o(.text);
         asm/sound_check_menu.o(.text);
         asm/secret_base.o(.text);
         asm/tv.o(.text);
         asm/contest_link_80C2020.o(.text);
         asm/script_pokemon_util_80C4BF0.o(.text);
-        asm/field_poison.o(.text);
+        src/field_poison.o(.text);
         asm/big_shroomish_barboach.o(.text);
         asm/fldeff_80C5CD4.o(.text);
-        asm/truck_scene.o(.text);
+        src/truck_scene.o(.text);
         asm/porthole.o(.text);
         asm/rotating_gate.o(.text);
         asm/safari_zone.o(.text);
@@ -137,7 +147,7 @@ SECTIONS {
         asm/mail.o(.text);
         asm/menu_helpers.o(.text);
         asm/script_pokemon_util_80F99CC.o(.text);
-        asm/dewford_trend.o(.text);
+        src/dewford_trend.o(.text);
         asm/heal_location.o(.text);
         asm/region_map.o(.text);
         asm/cute_sketch.o(.text);
@@ -181,7 +191,7 @@ SECTIONS {
         asm/rom_81473B8.o(.text);
         src/clear_save_data_menu.o(.text);
         asm/rom_8148B8C.o(.text);
-        asm/menu_cursor.o(.text);
+        src/menu_cursor.o(.text);
     } =0
 
     script_data :

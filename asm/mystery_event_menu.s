@@ -1,6 +1,6 @@
-	.include "constants/gba_constants.s"
-	.include "constants/species_constants.s"
-	.include "asm/macros.s"
+	.include "constants/gba_constants.inc"
+	.include "constants/species_constants.inc"
+	.include "asm/macros.inc"
 
 	.syntax unified
 
@@ -397,7 +397,7 @@ _08146C64:
 _08146C70:
 	b _08146D7C
 _08146C72:
-	bl GetBlockRecievedStatus
+	bl GetBlockReceivedStatus
 	lsls r0, 24
 	cmp r0, 0
 	bne _08146C7E

@@ -1,6 +1,6 @@
-	.include "asm/macros.s"
-	.include "asm/macros/field_effect_script.s"
-	.include "constants/constants.s"
+	.include "asm/macros.inc"
+	.include "asm/macros/field_effect_script.inc"
+	.include "constants/constants.inc"
 
 	.section script_data, "aw", %progbits
 

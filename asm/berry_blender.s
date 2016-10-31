@@ -1,6 +1,6 @@
-	.include "constants/gba_constants.s"
-	.include "constants/species_constants.s"
-	.include "asm/macros.s"
+	.include "constants/gba_constants.inc"
+	.include "constants/species_constants.inc"
+	.include "asm/macros.inc"
 
 	.syntax unified
 
@@ -1277,7 +1277,7 @@ _0804EDB8:
 	b _0804F0CE
 _0804EDCE:
 	bl MenuZeroFillScreen
-	bl GetBlockRecievedStatus
+	bl GetBlockReceivedStatus
 	adds r4, r0, 0
 	bl sub_8008198
 	lsls r4, 24
@@ -4950,7 +4950,7 @@ _08050A64:
 	.align 2, 0
 _08050A90: .4byte gUnknown_03004854
 _08050A94:
-	bl GetBlockRecievedStatus
+	bl GetBlockReceivedStatus
 	lsls r0, 24
 	cmp r0, 0
 	bne _08050AA0

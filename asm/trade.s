@@ -1,6 +1,6 @@
-	.include "constants/gba_constants.s"
-	.include "constants/species_constants.s"
-	.include "asm/macros.s"
+	.include "constants/gba_constants.inc"
+	.include "constants/species_constants.inc"
+	.include "asm/macros.inc"
 
 	.syntax unified
 
@@ -2009,7 +2009,7 @@ _08048DF8:
 	bne _08048E04
 	b _0804907C
 _08048E04:
-	bl GetBlockRecievedStatus
+	bl GetBlockReceivedStatus
 	lsls r0, 24
 	cmp r0, 0
 	bne _08048E18
@@ -2037,7 +2037,7 @@ _08048E32:
 	.align 2, 0
 _08048E38: .4byte gUnknown_03004824
 _08048E3C:
-	bl GetBlockRecievedStatus
+	bl GetBlockReceivedStatus
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
@@ -2085,7 +2085,7 @@ _08048E9A:
 	.align 2, 0
 _08048EA0: .4byte gUnknown_03004824
 _08048EA4:
-	bl GetBlockRecievedStatus
+	bl GetBlockReceivedStatus
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
@@ -2133,7 +2133,7 @@ _08048F02:
 	.align 2, 0
 _08048F08: .4byte gUnknown_03004824
 _08048F0C:
-	bl GetBlockRecievedStatus
+	bl GetBlockReceivedStatus
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
@@ -2181,7 +2181,7 @@ _08048F6A:
 	.align 2, 0
 _08048F70: .4byte gUnknown_03004824
 _08048F74:
-	bl GetBlockRecievedStatus
+	bl GetBlockReceivedStatus
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
@@ -2229,7 +2229,7 @@ _08048FD2:
 	.align 2, 0
 _08048FD8: .4byte gUnknown_03004824
 _08048FDC:
-	bl GetBlockRecievedStatus
+	bl GetBlockReceivedStatus
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
@@ -2868,7 +2868,7 @@ sub_80494D8: @ 80494D8
 	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl GetBlockRecievedStatus
+	bl GetBlockReceivedStatus
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
@@ -10747,7 +10747,7 @@ _0804D638: .4byte gUnknown_020297D8
 sub_804D63C: @ 804D63C
 	push {r4-r6,lr}
 	bl sub_804B2B0
-	bl GetBlockRecievedStatus
+	bl GetBlockReceivedStatus
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r6, 0x1

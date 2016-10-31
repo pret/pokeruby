@@ -1,6 +1,6 @@
-	.include "constants/gba_constants.s"
-	.include "constants/species_constants.s"
-	.include "asm/macros.s"
+	.include "constants/gba_constants.inc"
+	.include "constants/species_constants.inc"
+	.include "asm/macros.inc"
 
 	.syntax unified
 
@@ -2872,7 +2872,7 @@ ShowDaycareLevelMenu: @ 8042824
 	movs r2, 0x7
 	movs r3, 0x3
 	bl InitMenu
-	ldr r0, _08042884 @ =sub_804272C
+	ldr r0, _08042884 @ =DaycareLevelMenuProcessKeyInput
 	movs r1, 0x3
 	bl CreateTask
 	add sp, 0x6C

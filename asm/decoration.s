@@ -1,6 +1,6 @@
-	.include "constants/gba_constants.s"
-	.include "constants/species_constants.s"
-	.include "asm/macros.s"
+	.include "constants/gba_constants.inc"
+	.include "constants/species_constants.inc"
+	.include "asm/macros.inc"
 
 	.syntax unified
 
@@ -66,7 +66,7 @@ DecorationPC: @ 80FE23C
 	adds r0, r4
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, _080FE260 @ =sub_80FE2EC
+	ldr r1, _080FE260 @ =Task_DecorationPCProcessMenuInput
 	str r1, [r0]
 	pop {r4}
 	pop {r0}
@@ -322,7 +322,7 @@ sub_80FE428: @ 80FE428
 	adds r0, r4
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, _080FE46C @ =sub_80FE2EC
+	ldr r1, _080FE46C @ =Task_DecorationPCProcessMenuInput
 	str r1, [r0]
 	add sp, 0x8
 	pop {r4}
@@ -711,7 +711,7 @@ sub_80FE758: @ 80FE758
 	bl sub_80FE1DC
 	bl MenuDisplayMessageBox
 	bl sub_80FE394
-	ldr r0, _080FE798 @ =sub_80FE2EC
+	ldr r0, _080FE798 @ =Task_DecorationPCProcessMenuInput
 	str r0, [r5]
 	b _080FE7A2
 	.align 2, 0
@@ -6799,7 +6799,7 @@ sub_8101648: @ 8101648
 	adds r1, r4
 	lsls r1, 3
 	adds r1, r0
-	ldr r0, _08101674 @ =sub_80FE2EC
+	ldr r0, _08101674 @ =Task_DecorationPCProcessMenuInput
 	str r0, [r1]
 _08101668:
 	pop {r4}

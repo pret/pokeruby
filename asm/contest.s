@@ -1,6 +1,6 @@
-	.include "constants/gba_constants.s"
-	.include "constants/species_constants.s"
-	.include "asm/macros.s"
+	.include "constants/gba_constants.inc"
+	.include "constants/species_constants.inc"
+	.include "asm/macros.inc"
 
 	.syntax unified
 
@@ -10037,7 +10037,7 @@ unref_sub_80B01B0: @ 80B01B0
 	movs r2, 0
 	ldr r5, _080B01D4 @ =0x0201920d
 	ldr r4, _080B01D8 @ =gSprites + 0x1C
-	ldr r3, _080B01DC @ =ObjectCB_SwitchPocketRotatingBallInit
+	ldr r3, _080B01DC @ =sub_80B0238
 _080B01BA:
 	adds r0, r2, r5
 	ldrb r1, [r0]

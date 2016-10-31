@@ -1,6 +1,6 @@
-	.include "constants/gba_constants.s"
-	.include "constants/species_constants.s"
-	.include "asm/macros.s"
+	.include "constants/gba_constants.inc"
+	.include "constants/species_constants.inc"
+	.include "asm/macros.inc"
 
 	.syntax unified
 
@@ -363,7 +363,7 @@ sub_80BA384: @ 80BA384
 	movs r1, 0xB
 	movs r2, 0xF
 	bl sub_80BA79C
-	ldr r0, _080BA3FC @ =Task_HandleMainMenuInput
+	ldr r0, _080BA3FC @ =sub_80BA65C
 	str r0, [r4]
 	pop {r4}
 	pop {r0}

@@ -1,6 +1,6 @@
-	.include "constants/gba_constants.s"
-	.include "constants/species_constants.s"
-	.include "asm/macros.s"
+	.include "constants/gba_constants.inc"
+	.include "constants/species_constants.inc"
+	.include "asm/macros.inc"
 
 	.syntax unified
 
@@ -2276,7 +2276,7 @@ _080BC600: .4byte 0x00001a09
 	thumb_func_start SecretBasePC_Decoration
 SecretBasePC_Decoration: @ 80BC604
 	push {lr}
-	ldr r0, _080BC614 @ =sub_80FE264
+	ldr r0, _080BC614 @ =Task_SecretBasePC_Decoration
 	movs r1, 0
 	bl CreateTask
 	pop {r0}
@@ -2288,7 +2288,7 @@ _080BC614: .4byte Task_SecretBasePC_Decoration
 	thumb_func_start SecretBasePC_Registry
 SecretBasePC_Registry: @ 80BC618
 	push {lr}
-	ldr r0, _080BC628 @ =sub_80BC62C
+	ldr r0, _080BC628 @ =Task_SecretBasePC_Registry
 	movs r1, 0
 	bl CreateTask
 	pop {r0}

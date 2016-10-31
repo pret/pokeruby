@@ -1,6 +1,6 @@
-	.include "constants/gba_constants.s"
-	.include "constants/species_constants.s"
-	.include "asm/macros.s"
+	.include "constants/gba_constants.inc"
+	.include "constants/species_constants.inc"
+	.include "asm/macros.inc"
 
 	.syntax unified
 
@@ -13,7 +13,7 @@ UnusedPokedexAreaScreen: @ 8110664
 	str r1, [r3, 0x4]
 	str r2, [r3, 0x8]
 	strh r0, [r3, 0xE]
-	ldr r0, _0811067C @ =sub_8110680
+	ldr r0, _0811067C @ =CB2_UnusedPokedexAreaScreen
 	bl SetMainCallback2
 	pop {r0}
 	bx r0
@@ -1761,7 +1761,7 @@ ShowPokedexAreaScreen: @ 81113AC
 	adds r2, r0
 	str r1, [r2]
 	strb r3, [r1]
-	ldr r0, _081113E4 @ =sub_81113EC
+	ldr r0, _081113E4 @ =Task_PokedexAreaScreen_0
 	movs r1, 0
 	bl CreateTask
 	lsls r0, 24
@@ -1927,7 +1927,7 @@ _08111528:
 	adds r0, r5
 	lsls r0, 3
 	adds r0, r2
-	ldr r1, _0811153C @ =sub_811155C
+	ldr r1, _0811153C @ =Task_PokedexAreaScreen_1
 	str r1, [r0]
 	movs r1, 0
 	strh r1, [r0, 0x8]

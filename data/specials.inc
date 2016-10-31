@@ -233,7 +233,7 @@ gSpecials::
 	.4byte GetLeadMonFriendshipScore
 	.4byte sub_8134548
 	.4byte sub_81347F8
-	.4byte sub_81352E4
+	.4byte CheckPartyBattleTowerBanlist
 	.4byte sub_8135474
 	.4byte sub_81360C0
 	.4byte sub_813556C
