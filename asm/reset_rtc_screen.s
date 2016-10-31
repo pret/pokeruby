@@ -311,7 +311,7 @@ ResetRtcScreen_CreateCursor: @ 806A69C
 	adds r4, r6, 0
 	adds r4, 0x1C
 	adds r2, r0, r4
-	ldr r1, _0806A718 @ =sub_806A480
+	ldr r1, _0806A718 @ =SpriteCB_ResetRtcCusor0
 	str r1, [r2]
 	adds r0, r6
 	strh r5, [r0, 0x2E]
@@ -328,7 +328,7 @@ ResetRtcScreen_CreateCursor: @ 806A69C
 	adds r0, r1
 	lsls r0, 2
 	adds r4, r0, r4
-	ldr r1, _0806A720 @ =sub_806A59C
+	ldr r1, _0806A720 @ =SpriteCB_ResetRtcCusor1
 	str r1, [r4]
 	adds r0, r6
 	strh r5, [r0, 0x2E]
@@ -627,7 +627,7 @@ Task_ResetRtc_2: @ 806A92C
 	adds r0, r4
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, _0806A954 @ =sub_806A914
+	ldr r1, _0806A954 @ =Task_ResetRtc_3
 	str r1, [r0]
 	pop {r4}
 	pop {r0}
@@ -667,7 +667,7 @@ Task_ResetRtc_1: @ 806A958
 	mov r0, r8
 	subs r0, 0x8
 	adds r0, r7, r0
-	ldr r1, _0806A9A8 @ =sub_806A92C
+	ldr r1, _0806A9A8 @ =Task_ResetRtc_2
 	str r1, [r0]
 	movs r0, 0
 	strh r0, [r5, 0x2]
@@ -727,7 +727,7 @@ _0806A9D6:
 	adds r0, r6
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, _0806AA20 @ =sub_806A92C
+	ldr r1, _0806AA20 @ =Task_ResetRtc_2
 	str r1, [r0]
 	strh r4, [r5, 0x2]
 	movs r0, 0x6
@@ -815,7 +815,7 @@ Task_ResetRtc_0: @ 806AA64
 	negs r0, r0
 	add r8, r0
 	add r6, r8
-	ldr r0, _0806AAD4 @ =sub_806A958
+	ldr r0, _0806AAD4 @ =Task_ResetRtc_1
 	str r0, [r6]
 	pop {r3}
 	mov r8, r3
@@ -900,11 +900,11 @@ _0806AB16:
 	lsls r2, 5
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r0, _0806ABA4 @ =sub_806ABC8
+	ldr r0, _0806ABA4 @ =VBlankCB_ResetRtcScreen
 	bl SetVBlankCallback
-	ldr r0, _0806ABA8 @ =sub_806ABB0
+	ldr r0, _0806ABA8 @ =CB2_ResetRtcScreen
 	bl SetMainCallback2
-	ldr r0, _0806ABAC @ =sub_806ACCC
+	ldr r0, _0806ABAC @ =Task_ResetRtcScreen
 	movs r1, 0x50
 	bl CreateTask
 	add sp, 0x4
@@ -1131,7 +1131,7 @@ _0806AD60: .4byte gSaveFileStatus
 _0806AD64: .4byte gSystemText_NoSaveFileNoTime
 _0806AD68:
 	bl RtcCalcLocalTime
-	ldr r0, _0806AD7C @ =sub_806ABF4
+	ldr r0, _0806AD7C @ =Task_ShowResetRtcPrompt
 	movs r1, 0x50
 	bl CreateTask
 	lsls r0, 24
@@ -1163,7 +1163,7 @@ _0806AD96:
 	ldr r0, [r0]
 	str r0, [r2]
 	str r1, [r2, 0x4]
-	ldr r0, _0806ADD4 @ =sub_806AA64
+	ldr r0, _0806ADD4 @ =Task_ResetRtc_0
 	movs r1, 0x50
 	bl CreateTask
 	lsls r0, 24
