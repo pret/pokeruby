@@ -4511,7 +4511,7 @@ ReturnFromHallOfFamePC: @ 810D62C
 	ldr r0, _0810D640 @ =c2_exit_to_overworld_2_switch
 	bl SetMainCallback2
 	ldr r1, _0810D644 @ =gUnknown_0300485C
-	ldr r0, _0810D648 @ =mapldr_080CA5C0
+	ldr r0, _0810D648 @ =ReshowPCMenuAfterHallOfFamePC
 	str r0, [r1]
 	pop {r0}
 	bx r0
@@ -6281,7 +6281,7 @@ _0810E410: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
 	thumb_func_start FieldShowRegionMap
 FieldShowRegionMap: @ 810E414
 	push {lr}
-	ldr r0, _0810E420 @ =sub_810E404
+	ldr r0, _0810E420 @ =CB2_FieldShowRegionMap
 	bl SetMainCallback2
 	pop {r0}
 	bx r0
@@ -6292,7 +6292,7 @@ _0810E420: .4byte CB2_FieldShowRegionMap
 	thumb_func_start DoPCTurnOnEffect
 DoPCTurnOnEffect: @ 810E424
 	push {r4,lr}
-	ldr r4, _0810E460 @ =sub_810E468
+	ldr r4, _0810E460 @ =Task_PCTurnOnEffect
 	adds r0, r4, 0
 	bl FuncIsActiveTask
 	lsls r0, 24
@@ -6586,7 +6586,7 @@ _0810E634: .4byte gSaveBlock1
 	thumb_func_start DoLotteryCornerComputerEffect
 DoLotteryCornerComputerEffect: @ 810E638
 	push {r4,lr}
-	ldr r4, _0810E674 @ =sub_810E67C
+	ldr r4, _0810E674 @ =Task_LotteryCornerComputerEffect
 	adds r0, r4, 0
 	bl FuncIsActiveTask
 	lsls r0, 24

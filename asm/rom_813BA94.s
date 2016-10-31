@@ -6706,7 +6706,7 @@ FieldInitRegionMap: @ 813EEB4
 	movs r0, 0
 	strh r0, [r1]
 	str r4, [r2]
-	ldr r0, _0813EEE0 @ =sub_813EEE4
+	ldr r0, _0813EEE0 @ =CB2_FieldInitRegionMap
 	bl SetMainCallback2
 	pop {r4}
 	pop {r0}
@@ -6779,9 +6779,9 @@ CB2_FieldInitRegionMap: @ 813EEE4
 	movs r3, 0x13
 	bl MenuDrawTextWindow
 	bl sub_813F0C8
-	ldr r0, _0813EFA8 @ =sub_813EFC4
+	ldr r0, _0813EFA8 @ =CB2_FieldRegionMap
 	bl SetMainCallback2
-	ldr r0, _0813EFAC @ =sub_813EFB0
+	ldr r0, _0813EFAC @ =VBlankCB_FieldRegionMap
 	bl SetVBlankCallback
 	movs r0, 0x1
 	negs r0, r0

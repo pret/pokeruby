@@ -1415,7 +1415,7 @@ _0800C394: .4byte gLinkPlayers
 _0800C398: .4byte 0x00002211
 _0800C39C: .4byte gBlockRecvBuffer
 _0800C3A0:
-	bl GetBlockRecievedStatus
+	bl GetBlockReceivedStatus
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _0800C468 @ =gBitTable
