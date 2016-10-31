@@ -175,6 +175,11 @@ u16 sub_8091818(u8, u16, u16, u16);
 u16 sub_80918EC(u16 a, s16 b, s16 c, u16 d);    //Not sure of return type
 void sub_808F2B0(u8 taskId);
 void sub_808F6CC(u8 taskId);
+void sub_808FA64(u8 taskId);
+void sub_808F8D8(u8 taskId);
+void sub_808F8B8(u8 taskId);
+void sub_808F888(u8 taskId);
+void sub_8090070(u8 taskId);
 
 void sub_808C02C(void)
 {
@@ -2398,4 +2403,75 @@ void sub_808F2B0(u8 taskId)
             gMain.state = 0;
             break;
     }
+}
+
+void sub_808F6CC(u8 taskId)
+{
+    if(gTasks[taskId].data[0] != 0)
+    {
+        BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+        gTasks[taskId].func = sub_808F888;
+        PlaySE(0x6C);
+    }
+    else if(gMain.newKeys & 2)
+    {
+        BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+        gTasks[taskId].func = sub_808F8B8;
+        PlaySE(3);
+    }
+    else if(gMain.newKeys & 1)
+    {
+        switch(gUnknown_0202FFB4->unk64D)
+        {
+        case 0:
+            sub_8090C68();
+            break;
+        case 1:
+            BeginNormalPaletteFade(-0x15, 0, 0, 0x10, 0);
+            gTasks[taskId].func = sub_808F8D8;
+            PlaySE(0x15);
+            break;
+        case 2:
+            BeginNormalPaletteFade(-0x15, 0, 0, 0x10, 0);
+            gTasks[taskId].func = sub_808FA64;
+            PlaySE(0x15);
+            break;
+        case 3:
+            if(!gUnknown_0202FFBC->owned)
+                PlaySE(0x20);
+            else
+            {
+                BeginNormalPaletteFade(-0x15, 0, 0, 0x10, 0);
+                gTasks[taskId].func = sub_8090070;
+                PlaySE(0x15);
+            }
+            break;
+        }
+    }
+    else if (((gMain.newKeys & 0x20) || ((gMain.newKeys & 0x200) && gSaveBlock2.optionsButtonMode == 1))
+     && gUnknown_0202FFB4->unk64D != 0)
+    {
+        gUnknown_0202FFB4->unk64D--;
+        sub_8090584(gUnknown_0202FFB4->unk64D, 0xD);
+        PlaySE(0x6D);
+    }
+    else if(((gMain.newKeys & 0x10) || ((gMain.newKeys & 0x100) && gSaveBlock2.optionsButtonMode == 1))
+     && gUnknown_0202FFB4->unk64D <= 2)
+    {
+        gUnknown_0202FFB4->unk64D++;
+        sub_8090584(gUnknown_0202FFB4->unk64D, 0xD);
+        PlaySE(0x6D);
+    }
+}
+
+void sub_808F888(u8 taskId)
+{
+    if(!gPaletteFade.active)
+        gTasks[taskId].func = sub_808F2B0;
+}
+
+void sub_808F8B8(u8 taskId)
+{
+    if(!gPaletteFade.active)
+        DestroyTask(taskId);
 }
