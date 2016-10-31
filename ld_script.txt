@@ -128,7 +128,7 @@ SECTIONS {
         asm/tv.o(.text);
         asm/contest_link_80C2020.o(.text);
         asm/script_pokemon_util_80C4BF0.o(.text);
-        asm/field_poison.o(.text);
+        src/field_poison.o(.text);
         asm/big_shroomish_barboach.o(.text);
         asm/fldeff_80C5CD4.o(.text);
         src/truck_scene.o(.text);
