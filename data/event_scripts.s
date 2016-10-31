@@ -3193,7 +3193,7 @@ RustboroCity_DevonCorp_2F_Text_1A1102:: @ 81A1102
 	.string "Want to give a nickname to the\n"
 	.string "{STR_VAR_2} you received?$"
 
-UnknownString_81A1132:: @ 81A1132
+fieldPoisonText_PokemonFainted:: @ 81A1132
 	.string "{STR_VAR_1} fainted...\p$"
 
 UnknownString_81A1141: @ 81A1141
