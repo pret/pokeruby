@@ -361,7 +361,7 @@ gUnknown_02029814: @ 2029814
 gUnknown_02029816: @ 2029816
 	.space 0x2
 
-gUnknown_02029818: @ 2029818
+gLinkPlayerMapObjects: @ 2029818
 	.space 0x10
 
 gUnknown_02029828: @ 2029828
@@ -563,34 +563,34 @@ gUnknown_0202FF38: @ 202FF38
 gUnknown_0202FF58: @ 202FF58
 	.space 0x4
 
-gUnknown_0202FF5C: @ 202FF5C
+gTrainerBattleMode: @ 202FF5C
 	.space 0x2
 
-word_202FF5E: @ 202FF5E
+gTrainerBattleOpponent: @ 202FF5E
 	.space 0x2
 
-gUnknown_0202FF60: @ 202FF60
+gTrainerMapObjectLocalId: @ 202FF60
 	.space 0x4
 
-gUnknown_0202FF64: @ 202FF64
+gTrainerIntroSpeech: @ 202FF64
 	.space 0x4
 
-gUnknown_0202FF68: @ 202FF68
+gTrainerDefeatSpeech: @ 202FF68
 	.space 0x4
 
-gUnknown_0202FF6C: @ 202FF6C
+gTrainerVictorySpeech: @ 202FF6C
 	.space 0x4
 
-gUnknown_0202FF70: @ 202FF70
+gTrainerCannotBattleSpeech: @ 202FF70
 	.space 0x4
 
-gUnknown_0202FF74: @ 202FF74
+gTrainerBattleScriptReturnAddress: @ 202FF74
 	.space 0x4
 
-gUnknown_0202FF78: @ 202FF78
+gTrainerBattleEndScript: @ 202FF78
 	.space 0x4
 
-gUnknown_0202FF7C: @ 202FF7C
+gWildEncountersDisabled: @ 202FF7C
 	.space 0x4
 
 gUnknown_0202FF80: @ 202FF80
@@ -1082,7 +1082,9 @@ gUnknown_02039288: @ 2039288
 gUnknown_020392FC: @ 20392FC
 	.space 0x6
 
-gUnknown_02039302: @ 2039302
+@ Latios/Latias location
+@ map group, map num.
+gRoamerLocation: @ 2039302
 	.space 0x2
 
 gUnknown_02039304: @ 2039304
@@ -1124,11 +1126,7 @@ gUnknown_02039324: @ 2039324
 gUnknown_02039325: @ 2039325
 	.space 0x3
 
-gUnknown_02039328: @ 2039328
-	.space 0x2
-
-gUnknown_0203932A: @ 203932A
-	.space 0x2
+	.include "src/lottery_corner.o"
 
 gUnknown_0203932C: @ 203932C
 	.space 0x2

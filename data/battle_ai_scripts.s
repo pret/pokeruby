@@ -1,6 +1,6 @@
-	.include "asm/macros.s"
-	.include "constants/constants.s"
-	.include "asm/macros/battle_ai_script.s"
+	.include "asm/macros.inc"
+	.include "constants/constants.inc"
+	.include "asm/macros/battle_ai_script.inc"
 
 	.section script_data, "aw", %progbits
 

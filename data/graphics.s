@@ -15,7 +15,7 @@ gUnknown_08D00524:: @ 8D00524
 	.incbin "graphics/interface/menu_map.bin"
 
 @ 8D01524
-	.include "data/graphics/pokemon/circled_question_mark_graphics.s"
+	.include "data/graphics/pokemon/circled_question_mark_graphics.inc"
 
 @ 8D019E4
 	.incbin "graphics/unused/old_charmap.4bpp.lz" @ japanese table and bunch of stuff
@@ -2512,10 +2512,10 @@ gBattleAnimSpritePalette_257:: @ 8D2FD6C
 	.incbin "graphics/battle_anims/sprites/257.gbapal.lz"
 
 @ 8D2FD8C
-	.include "data/graphics/pokemon/graphics.s"
+	.include "data/graphics/pokemon/graphics.inc"
 
 @ 8E48D38
-	.include "data/graphics/trainers/graphics.s"
+	.include "data/graphics/trainers/graphics.inc"
 
 	.align 2
 gMonIcon_QuestionMark:: @ 8E5D5F0
@@ -3346,7 +3346,7 @@ gBerryCheckCircle_Gfx:: @ 8E78BB4
 	.incbin "graphics/interface/check_berry_circle.4bpp.lz"
 
 @ 8E78D00
-	.include "data/graphics/berries/graphics.s"
+	.include "data/graphics/berries/graphics.inc"
 
 	.align 2
 gBattleAnimSpritePalette_282:: @ 8E7E7D0

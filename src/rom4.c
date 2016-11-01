@@ -7,6 +7,8 @@
 #include "main.h"
 #include "palette.h"
 #include "text.h"
+#include "link.h"
+#include "sprite.h"
 
 #ifdef SAPPHIRE
 #define LEGENDARY_MUSIC BGM_OOAME  // Heavy Rain
@@ -41,17 +43,56 @@ struct UnkInputStruct
     u8 input_field_3;
 };
 
+struct UnkStruct_8054FF8_Substruct
+{
+    s16 x;
+    s16 y;
+    u8 field_8;
+};
+
+struct UnkStruct_8054FF8
+{
+    u8 a;
+    u8 b;
+    u8 c;
+    u8 d;
+    struct UnkStruct_8054FF8_Substruct sub;
+    u16 field_C;
+};
+
+struct LinkPlayerMapObject
+{
+    u8 active;
+    u8 linkPlayerId;
+    u8 mapObjId;
+    u8 mode;
+};
+
+struct UCoords32
+{
+    u32 x, y;
+};
+
 extern struct WarpData gUnknown_020297F0;
 extern struct WarpData gUnknown_020297F8;
 extern struct WarpData gUnknown_02029800;
 extern struct WarpData gUnknown_02029808;
 extern struct UnkPlayerStruct gUnknown_02029810;
 extern u16 gUnknown_02029814;
-extern u8 gUnknown_02029816;
+extern bool8 gUnknown_02029816;
+extern struct LinkPlayerMapObject gLinkPlayerMapObjects[];
 
-extern void (*gUnknown_03000584)(void);
+extern u8 gUnknown_0202E85C;
+extern u8 gUnknown_0202E85D;
 
+extern u8 gUnknown_03000580[];
+extern u16 (*gUnknown_03000584)(u32);
+extern u8 gUnknown_03000588;
+
+extern u16 word_3004858;
 extern void (*gUnknown_0300485C)(void);
+extern u8 gUnknown_03004860;
+extern u8 gFieldLinkPlayerCount;
 
 extern struct UnkTVStruct gUnknown_03004870;
 
@@ -60,6 +101,30 @@ extern u16 gUnknown_0300489C;
 
 extern u8 gUnknown_0819FC74[];
 extern u8 gUnknown_0819FC9F[];
+extern u8 gUnknown_081A436F[];
+extern u8 gUnknown_081A4379[];
+extern u8 gUnknown_081A4383[];
+extern u8 gUnknown_081A439E[];
+extern u8 gUnknown_081A43B9[];
+extern u8 gUnknown_081A43D4[];
+extern u8 gUnknown_081A43F0[];
+extern u8 gUnknown_081A43FA[];
+extern u8 gUnknown_081A4418[];
+extern u8 gUnknown_081A442D[];
+extern u8 gUnknown_081A4442[];
+extern u8 gUnknown_081A4457[];
+extern u8 gUnknown_081A4479[];
+extern u8 gUnknown_081A4487[];
+extern u8 gUnknown_081A4495[];
+extern u8 gUnknown_081A44E5[];
+extern u8 gUnknown_081A44FE[];
+extern u8 gUnknown_081A4508[];
+
+extern struct UCoords32 gUnknown_0821664C[];
+
+extern u8 (*gUnknown_082166A0[])(struct LinkPlayerMapObject *, struct MapObject *, u8);
+extern u8 (*gUnknown_082166AC[])(struct LinkPlayerMapObject *, struct MapObject *, u8);
+extern void (*gUnknown_082166D8[])(struct LinkPlayerMapObject *, struct MapObject *);
 
 extern struct MapData * const gMapAttributes[];
 extern struct MapHeader * const * const gMapGroups[];
@@ -67,14 +132,15 @@ extern const struct WarpData gDummyWarpData;
 extern s32 gUnknown_0839ACE8;
 extern u32 gUnknown_08216694[];
 
-extern struct UnkWarpStruct *sub_80FA8CC(u8);
+extern struct UnkWarpStruct *GetHealLocation(u8);
 extern u16 VarGet(u16);
 extern u8 FlagGet(u16);
-extern u8 sav1_get_weather_probably(void);
+extern u8 GetSav1Weather(void);
 extern void PlayerGetDestCoords(u16 *, u16 *);
 extern u8 sub_810D32C(void);
-extern u16 wild_pokemon_rand_for_map(u8 *);
-extern void sub_80C76A0(void);
+extern u16 GetLocalWildMon(bool8 *);
+extern u16 GetMirageIslandMon(void);
+extern void ExecuteTruckSequence(void);
 extern void sub_8080B60(void);
 extern void sub_810CC80(void);
 extern void sub_8080AC4(void);
@@ -83,6 +149,11 @@ extern void atk17_seteffectuser(void);
 extern void sub_80809B0(void);
 extern void sub_8080990(void);
 extern u8 sub_80BBB24(void);
+extern u16 MapGridGetMetatileBehaviorAt(int, int);
+extern u8 *sub_80682A8(void *, u8, u8);
+extern u8 *sub_8068E24(struct UnkStruct_8054FF8_Substruct *);
+extern bool8 MapGridIsImpassableAt(s16, s16);
+extern u8 ZCoordToPriority(u8);
 
 void sub_8053050(void);
 void warp_in(void);
@@ -114,13 +185,10 @@ void sav1_reset_battle_music_maybe(void);
 void sub_8053F0C(void);
 u8 is_light_level_8_or_9(u8);
 void sub_8054164(void);
-u16 sub_8085514();
-u16 wild_pokemon_rand_for_map(u8 *);
 void sub_8055354(void);
 void c2_overworld(void);
 void CB2_LoadMap2(void);
 void c2_80567AC(void);
-void sub_8055390(void);
 void c2_exit_to_overworld_2_link(void);
 void c2_exit_to_overworld_2_local(void);
 void FieldClearVBlankHBlankCallbacks(void);
@@ -137,12 +205,53 @@ void sub_8054C54(void);
 void sub_8054D4C(u32 a1);
 void sub_8054D90(void);
 void mli4_mapscripts_and_other(void);
+void sub_8054E20(void);
+void sub_8054E34(void);
+void sub_8054E60(void);
+void sub_8054E7C(void);
+void sub_8054E98(void);
+void sub_8054EC8(void);
+void sub_8054F48(void);
+void sub_8054F70(void);
+u16 sub_805530C(u16);
+void sub_8055340(u16 *);
+u16 sub_8055390(u32);
+u16 sub_80553E4(u32);
+u16 sub_8055408(u32);
+u16 sub_8055438(u32);
+bool32 sub_8055618(struct UnkStruct_8054FF8 *);
+bool32 sub_8055630(struct UnkStruct_8054FF8 *);
+u8 *sub_8055648(struct UnkStruct_8054FF8 *);
+bool32 sub_8055660(struct UnkStruct_8054FF8 *);
+u8 *sub_805568C(struct UnkStruct_8054FF8 *);
+u16 sub_8055758(u8 *);
+void sub_80557E8(void);
+void sub_80557F4(void);
+void sub_8055808(u8 *);
+void sub_8055824(void);
+void sub_8055840(u8 *);
+void sub_805585C(void);
+bool32 sub_8055870(void);
+void SpawnLinkPlayerMapObject(u8, s16, s16, u8);
+void InitLinkPlayerMapObjectPos(struct MapObject *, s16, s16);
+void sub_80555B0(int, int, struct UnkStruct_8054FF8 *);
+u8 sub_8055AE8(u8);
+void sub_8055B08(u8, u16 *, u16 *);
+u8 sub_8055B30(u8);
+u8 sub_8055B50(u8);
+u8 GetLinkPlayerIdAt(s16, s16);
+void sub_8055BFC(u8, u8);
+u8 npc_something3(u8, u8);
+u8 LinkPlayerDetectCollision(u8, u8, s16, s16);
+void CreateLinkPlayerSprite(u8);
+void SpriteCB_LinkPlayer(struct Sprite *);
+void sub_8056C50(u16, u16);
 
 void sub_8052F5C(void)
 {
     ScriptContext2_RunNewScript(gUnknown_0819FC74);
     gSaveBlock1.money /= 2;
-    sp000_heal_pokemon();
+    HealPlayerParty();
     sub_8053050();
     sub_8053570();
     warp_in();
@@ -193,7 +302,7 @@ void sub_805308C(void)
 {
     FlagReset(2092);
     sub_8054164();
-    wild_pokemon_reroll();
+    ResetCyclingRoadChallengeData();
     mapnumbers_history_shift_sav1_0_2_4_out();
     sub_8134348();
 }
@@ -406,7 +515,7 @@ void copy_saved_warp2_bank_and_enter_x_to_warp1(void)
 
 void sub_8053538(u8 a1)
 {
-    struct UnkWarpStruct *warp = sub_80FA8CC(a1);
+    struct UnkWarpStruct *warp = GetHealLocation(a1);
     if (warp)
         warp1_set(warp->mapGroup, warp->mapNum, -1, warp->x, warp->y);
 }
@@ -418,7 +527,7 @@ void sub_8053570(void)
 
 void sub_8053588(u8 a1)
 {
-    struct UnkWarpStruct *warp = sub_80FA8CC(a1);
+    struct UnkWarpStruct *warp = GetHealLocation(a1);
     if (warp)
         warp_set(&gSaveBlock1.warp3, warp->mapGroup, warp->mapNum, -1, warp->x, warp->y);
 }
@@ -480,7 +589,7 @@ void unref_sub_8053790(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
 
 void sub_80537CC(u8 a1)
 {
-    struct UnkWarpStruct *warp = sub_80FA8CC(a1);
+    struct UnkWarpStruct *warp = GetHealLocation(a1);
     if (warp)
         warp_set(&gSaveBlock1.warp1, warp->mapGroup, warp->mapNum, -1, warp->x, warp->y);
 }
@@ -548,10 +657,10 @@ void sub_80538F0(u8 mapGroup, u8 mapNum)
     set_current_map_header_from_sav1_save_old_name();
     sub_8053154();
     sub_806906C();
-    wild_pokemon_reroll();
+    ResetCyclingRoadChallengeData();
     prev_quest_postbuffer_cursor_backup_reset();
     sub_8082BD0(mapGroup, mapNum);
-    InTrainerHill();
+    DoTimeBasedEvents();
     sub_80806E4();
     sub_8054164();
     sub_8053C98();
@@ -581,11 +690,11 @@ void sub_8053994(u32 a1)
     v2 = is_light_level_1_2_3_5_or_6(gMapHeader.light);
     v3 = is_light_level_8_or_9(gMapHeader.light);
     sub_806906C();
-    wild_pokemon_reroll();
+    ResetCyclingRoadChallengeData();
     prev_quest_postbuffer_cursor_backup_reset();
     sub_8082BD0(gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum);
     if (a1 != 1)
-        InTrainerHill();
+        DoTimeBasedEvents();
     sub_80806E4();
     sub_8054164();
     if (v2)
@@ -778,7 +887,7 @@ u16 sav1_map_get_music(void)
 
     if (gSaveBlock1.location.mapGroup == 0
      && gSaveBlock1.location.mapNum == 26
-     && sav1_get_weather_probably() == 8)
+     && GetSav1Weather() == 8)
         return BGM_ASHROAD;
 
     music = sub_8053D9C(&gSaveBlock1.location);
@@ -914,7 +1023,7 @@ void sub_8054050(void)
 {
     s16 x, y;
     PlayerGetDestCoords((u16 *)&x, (u16 *)&y);
-    if (gUnknown_02029816 != 1
+    if (gUnknown_02029816 != TRUE
      || MetatileBehavior_IsSurfableWaterOrUnderwater(MapGridGetMetatileBehaviorAt(x, y)))
     {
         s8 pan = (Random() % 88) + 212;
@@ -958,12 +1067,12 @@ void sub_8054164(void)
 {
     if ((gSaveBlock1.location.mapGroup == 0 && gSaveBlock1.location.mapNum == 45) && !sub_810D32C())
     {
-        gUnknown_02029816 = 1;
-        gUnknown_02029814 = sub_8085514();
+        gUnknown_02029816 = TRUE;
+        gUnknown_02029814 = GetMirageIslandMon();
     }
     else
     {
-        gUnknown_02029814 = wild_pokemon_rand_for_map(&gUnknown_02029816);
+        gUnknown_02029814 = GetLocalWildMon(&gUnknown_02029816);
     }
 }
 
@@ -1097,7 +1206,7 @@ void set_callback1(MainCallback cb)
     gMain.callback1 = cb;
 }
 
-void sub_80543DC(void (*a1)(void))
+void sub_80543DC(u16 (*a1)(u32))
 {
     gUnknown_03000584 = a1;
 }
@@ -1121,7 +1230,7 @@ void CB2_NewGame(void)
     PlayTimeCounter_Start();
     ScriptContext1_Init();
     ScriptContext2_Disable();
-    gUnknown_0300485C = sub_80C76A0;
+    gUnknown_0300485C = ExecuteTruckSequence;
     do_load_map_stuff_loop(&gMain.state);
     SetFieldVBlankCallback();
     set_callback1(c1_overworld);
@@ -1287,7 +1396,7 @@ void CB2_ContinueSavedGame(void)
     sub_805338C();
     sub_8053198();
     sub_806451C();
-    InTrainerHill();
+    DoTimeBasedEvents();
     sub_805308C();
     sub_8055FC0();
     PlayTimeCounter_Start();
@@ -1686,4 +1795,906 @@ void mli4_mapscripts_and_other(void)
     sub_805B55C(0, 0);
     ResetBerryTreeSparkleFlags();
     mapheader_run_first_tag4_script_list_match();
+}
+
+void sub_8054E20(void)
+{
+    sub_805B710(0, 0);
+    sub_80C8080();
+}
+
+void sub_8054E34(void)
+{
+    gMapObjects[gPlayerAvatar.mapObjectId].mapobj_bit_15 = 1;
+    InitCameraUpdateCallback(gPlayerAvatar.spriteId);
+}
+
+void sub_8054E60(void)
+{
+    InitCameraUpdateCallback(sub_8055AE8(gUnknown_03004860));
+}
+
+void sub_8054E7C(void)
+{
+    InitCameraUpdateCallback(sub_8055AE8(gUnknown_03004860));
+}
+
+void sub_8054E98(void)
+{
+    u16 x, y;
+    sav1_camera_get_focus_coords(&x, &y);
+    sub_8056C50(x + gUnknown_03004860, y);
+}
+
+void sub_8054EC8(void)
+{
+    u16 i;
+    u16 x, y;
+
+    sav1_camera_get_focus_coords(&x, &y);
+    x -= gUnknown_03004860;
+
+    for (i = 0; i < gFieldLinkPlayerCount; i++)
+    {
+        SpawnLinkPlayerMapObject(i, i + x, y, gLinkPlayers[i].gender);
+        CreateLinkPlayerSprite(i);
+    }
+
+    sub_8055340(word_3002910);
+}
+
+void sub_8054F48(void)
+{
+    u16 i;
+    for (i = 0; i < gFieldLinkPlayerCount; i++)
+        CreateLinkPlayerSprite(i);
+}
+
+void sub_8054F70(void)
+{
+    int i;
+    for (i = 0; i < 4; i++)
+        gUnknown_03000580[i] = 0x80;
+}
+
+bool32 sub_8054F88(u16 a1)
+{
+    int i;
+    int count = gFieldLinkPlayerCount;
+
+    for (i = 0; i < count; i++)
+        if (gUnknown_03000580[i] != a1)
+            return FALSE;
+    return TRUE;
+}
+
+bool32 sub_8054FC0(u16 a1)
+{
+    int i;
+    int count = gFieldLinkPlayerCount;
+
+    for (i = 0; i < count; i++)
+        if (gUnknown_03000580[i] == a1)
+            return TRUE;
+    return FALSE;
+}
+
+void sub_8054FF8(u32 a1, u16 a2, struct UnkStruct_8054FF8 *a3, u16 *a4)
+{
+    u8 *script;
+
+    if (gUnknown_03000580[a1] == 0x80)
+    {
+        script = sub_8055648(a3);
+        if (script)
+        {
+            *a4 = sub_8055758(script);
+            gUnknown_03000580[a1] = 0x81;
+            if (a3->b)
+            {
+                sub_80543DC(sub_80553E4);
+                sub_8055808(script);
+            }
+            return;
+        }
+        if (sub_8054FC0(0x83) == 1)
+        {
+            gUnknown_03000580[a1] = 0x81;
+            if (a3->b)
+            {
+                sub_80543DC(sub_80553E4);
+                sub_805585C();
+            }
+            return;
+        }
+        switch (a2)
+        {
+        case 24:
+            if (sub_8055630(a3))
+            {
+                gUnknown_03000580[a1] = 0x81;
+                if (a3->b)
+                {
+                    sub_80543DC(sub_80553E4);
+                    sub_80557F4();
+                }
+            }
+            break;
+        case 18:
+            if (sub_8055660(a3) == 1)
+            {
+                gUnknown_03000580[a1] = 0x81;
+                if (a3->b)
+                {
+                    sub_80543DC(sub_80553E4);
+                    sub_8055824();
+                }
+            }
+            break;
+        case 25:
+            script = sub_805568C(a3);
+            if (script)
+            {
+                gUnknown_03000580[a1] = 0x81;
+                if (a3->b)
+                {
+                    sub_80543DC(sub_80553E4);
+                    sub_8055840(script);
+                }
+            }
+            break;
+        case 27:
+            if (sub_8055618(a3))
+            {
+                gUnknown_03000580[a1] = 0x81;
+                if (a3->b)
+                {
+                    sub_80543DC(sub_8055408);
+                    sub_80557E8();
+                }
+            }
+            break;
+        case 28:
+            if (sub_8055618(a3))
+            {
+                gUnknown_03000580[a1] = 0x81;
+                if (a3->b)
+                {
+                    sub_80543DC(sub_8055438);
+                    sub_80557E8();
+                }
+            }
+            break;
+        }
+    }
+
+    switch (a2)
+    {
+    case 23:
+        gUnknown_03000580[a1] = 0x83;
+        break;
+    case 22:
+        gUnknown_03000580[a1] = 0x82;
+        break;
+    case 26:
+        gUnknown_03000580[a1] = 0x80;
+        if (a3->b)
+            sub_80543DC(sub_8055390);
+        break;
+    case 29:
+        if (gUnknown_03000580[a1] == 0x82)
+            gUnknown_03000580[a1] = 0x81;
+        break;
+    }
+}
+
+void sub_8055218(u16 *a1, int a2)
+{
+    struct UnkStruct_8054FF8 st;
+    int i;
+    for (i = 0; i < 4; i++)
+    {
+        u16 v5 = a1[i];
+        u16 v8 = 0;
+        sub_80555B0(i, a2, &st);
+        sub_8054FF8(i, v5, &st, &v8);
+        if (gUnknown_03000580[i] == 0x80)
+            v8 = sub_805530C(v5);
+        sub_8055BFC(i, v8);
+    }
+}
+
+void sub_8055280(u16 a1)
+{
+    if (a1 >= 17 && a1 < 30)
+        word_3004858 = a1;
+    else
+        word_3004858 = 17;
+}
+
+u16 sub_80552B0(u32 a1)
+{
+    if (gMain.heldKeys & 0x40)
+    {
+        return 19;
+    }
+    else if (gMain.heldKeys & 0x80)
+    {
+        return 18;
+    }
+    else if (gMain.heldKeys & 0x20)
+    {
+        return 20;
+    }
+    else if (gMain.heldKeys & 0x10)
+    {
+        return 21;
+    }
+    else if (gMain.newKeys & 8)
+    {
+        return 24;
+    }
+    else if (gMain.newKeys & 1)
+    {
+        return 25;
+    }
+    else
+    {
+        return 17;
+    }
+}
+
+u16 sub_805530C(u16 a1)
+{
+    switch (a1)
+    {
+    case 21:
+        return 4;
+    case 20:
+        return 3;
+    case 19:
+        return 1;
+    case 18:
+        return 2;
+    default:
+        return 0;
+    }
+}
+
+void sub_8055340(u16 *a1)
+{
+    int i;
+    for (i = 0; i < 4; i++)
+        a1[i] = 17;
+}
+
+void sub_8055354(void)
+{
+    u8 val = gUnknown_03004860;
+    sub_8055218(word_3002910, val);
+    sub_8055280(gUnknown_03000584(val));
+    sub_8055340(word_3002910);
+}
+
+u16 sub_8055390(u32 a1)
+{
+    if (ScriptContext2_IsEnabled() == 1)
+        return 17;
+    if (gLink.recvQueue.count > 4)
+        return 27;
+    if (gLink.sendQueue.count <= 4)
+        return sub_80552B0(a1);
+    return 28;
+}
+
+u16 sub_80553E0(u32 a1)
+{
+    return 17;
+}
+
+u16 sub_80553E4(u32 a1)
+{
+    u16 retVal;
+    if (ScriptContext2_IsEnabled() == 1)
+    {
+        retVal = 17;
+    }
+    else
+    {
+        retVal = 26;
+        sub_80543DC(sub_80553E0);
+    }
+    return retVal;
+}
+
+u16 sub_8055408(u32 a1)
+{
+    u16 retVal;
+    if (gLink.recvQueue.count > 2)
+    {
+        retVal = 17;
+    }
+    else
+    {
+        retVal = 26;
+        ScriptContext2_Disable();
+        sub_80543DC(sub_80553E0);
+    }
+    return retVal;
+}
+
+u16 sub_8055438(u32 a1)
+{
+    u16 retVal;
+    if (gLink.sendQueue.count > 2)
+    {
+        retVal = 17;
+    }
+    else
+    {
+        retVal = 26;
+        ScriptContext2_Disable();
+        sub_80543DC(sub_80553E0);
+    }
+    return retVal;
+}
+
+u16 sub_8055468(u32 a1)
+{
+    return 17;
+}
+
+u16 sub_805546C(u32 linkPlayerId)
+{
+    if (gUnknown_03000580[linkPlayerId] == 0x82 && (gMain.newKeys & B_BUTTON))
+    {
+        sub_80543DC(sub_8055468);
+        return 29;
+    }
+    else
+    {
+        return 17;
+    }
+}
+
+u16 sub_80554A4(u32 a1)
+{
+    sub_80543DC(sub_805546C);
+    return 22;
+}
+
+u16 sub_80554B8(u32 a1)
+{
+    return 17;
+}
+
+u16 sub_80554BC(u32 a1)
+{
+    if (sub_8054F88(0x83) == TRUE)
+    {
+        ScriptContext1_SetupScript(gUnknown_081A4508);
+        sub_80543DC(sub_80554B8);
+    }
+    return 17;
+}
+
+u16 sub_80554E4(u32 a1)
+{
+    sub_80543DC(sub_80554BC);
+    return 23;
+}
+
+u32 sub_80554F8(void)
+{
+    if (sub_8054FC0(0x83) == TRUE)
+        return 2;
+    if (gUnknown_03000584 == sub_805546C && gUnknown_03000580[gUnknown_03004860] != 0x82)
+        return 0;
+    if (gUnknown_03000584 == sub_8055468 && gUnknown_03000580[gUnknown_03004860] == 0x81)
+        return 2;
+    return sub_8054F88(0x82);
+}
+
+bool32 unref_sub_8055568(void)
+{
+    return sub_8054FC0(0x83);
+}
+
+u16 sub_8055574(void)
+{
+    sub_80543DC(sub_80554A4);
+    return 0;
+}
+
+u16 sub_8055588(void)
+{
+    sub_80543DC(sub_80553E4);
+    return 0;
+}
+
+u16 sub_805559C(void)
+{
+    sub_80543DC(sub_80554E4);
+    return 0;
+}
+
+void sub_80555B0(int linkPlayerId, int a2, struct UnkStruct_8054FF8 *a3)
+{
+    s16 x, y;
+
+    a3->a = linkPlayerId;
+    a3->b = (linkPlayerId == a2) ? 1 : 0;
+    a3->c = gLinkPlayerMapObjects[linkPlayerId].mode;
+    a3->d = sub_8055B30(linkPlayerId);
+    sub_8055B08(linkPlayerId, &x, &y);
+    a3->sub.x = x;
+    a3->sub.y = y;
+    a3->sub.field_8 = sub_8055B50(linkPlayerId);
+    a3->field_C = MapGridGetMetatileBehaviorAt(x, y);
+}
+
+bool32 sub_8055618(struct UnkStruct_8054FF8 *a1)
+{
+    u8 v1 = a1->c;
+    if (v1 == 2 || v1 == 0)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+bool32 sub_8055630(struct UnkStruct_8054FF8 *a1)
+{
+    u8 v1 = a1->c;
+    if (v1 == 2 || v1 == 0)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+u8 *sub_8055648(struct UnkStruct_8054FF8 *a1)
+{
+    if (a1->c != 2)
+        return 0;
+    return sub_8068E24(&a1->sub);
+}
+
+bool32 sub_8055660(struct UnkStruct_8054FF8 *a1)
+{
+    if (a1->c != 2 && a1->c != 0)
+        return FALSE;
+    if (!MetatileBehavior_IsSouthArrowWarp(a1->field_C))
+        return FALSE;
+    if (a1->d != 1)
+        return FALSE;
+    return TRUE;
+}
+
+u8 *sub_805568C(struct UnkStruct_8054FF8 *a1)
+{
+    struct UnkStruct_8054FF8_Substruct unkStruct;
+    u8 linkPlayerId;
+
+    if (a1->c && a1->c != 2)
+        return 0;
+
+    unkStruct = a1->sub;
+    unkStruct.x += gUnknown_0821664C[a1->d].x;
+    unkStruct.y += gUnknown_0821664C[a1->d].y;
+    unkStruct.field_8 = 0;
+    linkPlayerId = GetLinkPlayerIdAt(unkStruct.x, unkStruct.y);
+
+    if (linkPlayerId != 4)
+    {
+        if (!a1->b)
+            return gUnknown_081A4495;
+        if (gUnknown_03000580[linkPlayerId] != 0x80)
+            return gUnknown_081A4495;
+        if (!sub_8083BF4(linkPlayerId))
+            return gUnknown_081A4479;
+        return gUnknown_081A4487;
+    }
+
+    return sub_80682A8(&unkStruct, a1->field_C, a1->d);
+}
+
+u16 sub_8055758(u8 *script)
+{
+    if (script == gUnknown_081A4383)
+        return 10;
+    if (script == gUnknown_081A439E)
+        return 9;
+    if (script == gUnknown_081A43B9)
+        return 10;
+    if (script == gUnknown_081A43D4)
+        return 9;
+    if (script == gUnknown_081A4418)
+        return 10;
+    if (script == gUnknown_081A442D)
+        return 9;
+    if (script == gUnknown_081A4442)
+        return 10;
+    if (script == gUnknown_081A4457)
+        return 9;
+    if (script == gUnknown_081A436F)
+        return 10;
+    if (script == gUnknown_081A4379)
+        return 9;
+    if (script == gUnknown_081A43F0)
+        return 10;
+    if (script == gUnknown_081A43FA)
+        return 9;
+    return 0;
+}
+
+void sub_80557E8(void)
+{
+    ScriptContext2_Enable();
+}
+
+void sub_80557F4(void)
+{
+    PlaySE(SE_WIN_OPEN);
+    sub_8071310();
+    ScriptContext2_Enable();
+}
+
+void sub_8055808(u8 *script)
+{
+    PlaySE(SE_SELECT);
+    ScriptContext1_SetupScript(script);
+    ScriptContext2_Enable();
+}
+
+void sub_8055824(void)
+{
+    PlaySE(SE_WIN_OPEN);
+    ScriptContext1_SetupScript(gUnknown_081A44E5);
+    ScriptContext2_Enable();
+}
+
+void sub_8055840(u8 *script)
+{
+    PlaySE(SE_SELECT);
+    ScriptContext1_SetupScript(script);
+    ScriptContext2_Enable();
+}
+
+void sub_805585C(void)
+{
+    ScriptContext1_SetupScript(gUnknown_081A44FE);
+    ScriptContext2_Enable();
+}
+
+bool32 sub_8055870(void)
+{
+    if (!is_c1_link_related_active())
+        return 0;
+    if (gLink.recvQueue.count >= 3)
+        gUnknown_03000588 = 1;
+    else
+        gUnknown_03000588 = 0;
+    return gUnknown_03000588;
+}
+
+bool32 sub_80558AC(void)
+{
+    u8 temp;
+
+    if (is_c1_link_related_active() != TRUE)
+        return FALSE;
+
+    if (sub_8007B24() != TRUE)
+        return FALSE;
+
+    if (gUnknown_03000584 == sub_8055408)
+        return TRUE;
+
+    if (gUnknown_03000584 != sub_80553E4)
+        return FALSE;
+
+    temp = gUnknown_03000588;
+    gUnknown_03000588 = 0;
+
+    if (temp == TRUE)
+        return TRUE;
+
+    if (gPaletteFade.active && gPaletteFade.softwareFadeFinishing)
+        return TRUE;
+
+    return FALSE;
+}
+
+bool32 sub_8055910(void)
+{
+    if (is_c1_link_related_active() != TRUE)
+        return FALSE;
+
+    if (sub_8007B24() != TRUE)
+        return FALSE;
+
+    if (gUnknown_03000584 == sub_8055438)
+        return TRUE;
+
+    return FALSE;
+}
+
+bool32 sub_8055940(void)
+{
+    if (!sub_8007B24())
+        return FALSE;
+    return TRUE;
+}
+
+void ZeroLinkPlayerMapObject(struct LinkPlayerMapObject *linkPlayerMapObj)
+{
+    memset(linkPlayerMapObj, 0, sizeof(struct LinkPlayerMapObject));
+}
+
+void strange_npc_table_clear(void)
+{
+    memset(gLinkPlayerMapObjects, 0, 16);
+}
+
+void ZeroMapObject(struct MapObject *mapObj)
+{
+    memset(mapObj, 0, sizeof(struct MapObject));
+}
+
+void SpawnLinkPlayerMapObject(u8 linkPlayerId, s16 x, s16 y, u8 a4)
+{
+    u8 mapObjId = sub_805AB54();
+    struct LinkPlayerMapObject *linkPlayerMapObj = &gLinkPlayerMapObjects[linkPlayerId];
+    struct MapObject *mapObj = &gMapObjects[mapObjId];
+
+    ZeroLinkPlayerMapObject(linkPlayerMapObj);
+    ZeroMapObject(mapObj);
+
+    linkPlayerMapObj->active = 1;
+    linkPlayerMapObj->linkPlayerId = linkPlayerId;
+    linkPlayerMapObj->mapObjId = mapObjId;
+    linkPlayerMapObj->mode = 0;
+
+    mapObj->active = 1;
+    mapObj->mapobj_bit_1 = a4;
+    mapObj->mapobj_unk_19 = 2;
+    mapObj->spriteId = 64;
+
+    InitLinkPlayerMapObjectPos(mapObj, x, y);
+}
+
+void InitLinkPlayerMapObjectPos(struct MapObject *mapObj, s16 x, s16 y)
+{
+    mapObj->coords2.x = x;
+    mapObj->coords2.y = y;
+    mapObj->coords3.x = x;
+    mapObj->coords3.y = y;
+    sub_80603CC(x, y, &mapObj->coords1.x, &mapObj->coords1.y);
+    mapObj->coords1.x += 8;
+    FieldObjectUpdateZCoord(mapObj);
+}
+
+void unref_sub_8055A6C(u8 linkPlayerId, u8 a2)
+{
+    if (gLinkPlayerMapObjects[linkPlayerId].active)
+    {
+        u8 mapObjId = gLinkPlayerMapObjects[linkPlayerId].mapObjId;
+        struct MapObject *mapObj = &gMapObjects[mapObjId];
+        mapObj->mapobj_unk_19 = a2;
+    }
+}
+
+void unref_sub_8055A9C(u8 linkPlayerId)
+{
+    struct LinkPlayerMapObject *linkPlayerMapObj = &gLinkPlayerMapObjects[linkPlayerId];
+    u8 mapObjId = linkPlayerMapObj->mapObjId;
+    struct MapObject *mapObj = &gMapObjects[mapObjId];
+    if (mapObj->spriteId != 64 )
+        DestroySprite(&gSprites[mapObj->spriteId]);
+    linkPlayerMapObj->active = 0;
+    mapObj->active = 0;
+}
+
+u8 sub_8055AE8(u8 linkPlayerId)
+{
+    u8 mapObjId = gLinkPlayerMapObjects[linkPlayerId].mapObjId;
+    struct MapObject *mapObj = &gMapObjects[mapObjId];
+    return mapObj->spriteId;
+}
+
+void sub_8055B08(u8 linkPlayerId, u16 *x, u16 *y)
+{
+    u8 mapObjId = gLinkPlayerMapObjects[linkPlayerId].mapObjId;
+    struct MapObject *mapObj = &gMapObjects[mapObjId];
+    *x = mapObj->coords2.x;
+    *y = mapObj->coords2.y;
+}
+
+u8 sub_8055B30(u8 linkPlayerId)
+{
+    u8 mapObjId = gLinkPlayerMapObjects[linkPlayerId].mapObjId;
+    struct MapObject *mapObj = &gMapObjects[mapObjId];
+    return mapObj->mapobj_unk_19;
+}
+
+u8 sub_8055B50(u8 linkPlayerId)
+{
+    u8 mapObjId = gLinkPlayerMapObjects[linkPlayerId].mapObjId;
+    struct MapObject *mapObj = &gMapObjects[mapObjId];
+    return mapObj->mapobj_unk_0B_0;
+}
+
+s32 unref_sub_8055B74(u8 linkPlayerId)
+{
+    u8 mapObjId = gLinkPlayerMapObjects[linkPlayerId].mapObjId;
+    struct MapObject *mapObj = &gMapObjects[mapObjId];
+    return 16 - (s8)mapObj->mapobj_unk_21;
+}
+
+u8 GetLinkPlayerIdAt(s16 x, s16 y)
+{
+    u8 i;
+    for (i = 0; i < 4; i++)
+    {
+        if (gLinkPlayerMapObjects[i].active
+         && (gLinkPlayerMapObjects[i].mode == 0 || gLinkPlayerMapObjects[i].mode == 2))
+        {
+            struct MapObject *mapObj = &gMapObjects[gLinkPlayerMapObjects[i].mapObjId];
+            if (mapObj->coords2.x == x && mapObj->coords2.y == y)
+                return i;
+        }
+    }
+    return 4;
+}
+
+void sub_8055BFC(u8 linkPlayerId, u8 a2)
+{
+    struct LinkPlayerMapObject *linkPlayerMapObj = &gLinkPlayerMapObjects[linkPlayerId];
+    u8 mapObjId = linkPlayerMapObj->mapObjId;
+    struct MapObject *mapObj = &gMapObjects[mapObjId];
+
+    if (linkPlayerMapObj->active)
+    {
+        if (a2 > 10)
+            mapObj->mapobj_bit_2 = 1;
+        else
+            gUnknown_082166D8[gUnknown_082166A0[linkPlayerMapObj->mode](linkPlayerMapObj, mapObj, a2)](linkPlayerMapObj, mapObj);
+    }
+}
+
+u8 sub_8055C68(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapObject *mapObj, u8 a3)
+{
+    return gUnknown_082166AC[a3](linkPlayerMapObj, mapObj, a3);
+}
+
+u8 sub_8055C88(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapObject *mapObj, u8 a3)
+{
+    return 1;
+}
+
+u8 sub_8055C8C(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapObject *mapObj, u8 a3)
+{
+    return gUnknown_082166AC[a3](linkPlayerMapObj, mapObj, a3);
+}
+
+u8 sub_8055CAC(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapObject *mapObj, u8 a3)
+{
+    return 0;
+}
+
+u8 sub_8055CB0(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapObject *mapObj, u8 a3)
+{
+    s16 x, y;
+
+    mapObj->mapobj_unk_19 = npc_something3(a3, mapObj->mapobj_unk_19);
+    FieldObjectMoveDestCoords(mapObj, mapObj->mapobj_unk_19, &x, &y);
+
+    if (LinkPlayerDetectCollision(linkPlayerMapObj->mapObjId, mapObj->mapobj_unk_19, x, y))
+    {
+        return 0;
+    }
+    else
+    {
+        mapObj->mapobj_unk_21 = 16;
+        npc_coords_shift(mapObj, x, y);
+        FieldObjectUpdateZCoord(mapObj);
+        return 1;
+    }
+}
+
+u8 sub_8055D18(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapObject *mapObj, u8 a3)
+{
+    mapObj->mapobj_unk_19 = npc_something3(a3, mapObj->mapobj_unk_19);
+    return 0;
+}
+
+void sub_8055D30(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapObject *mapObj)
+{
+    linkPlayerMapObj->mode = 0;
+}
+
+void sub_8055D38(struct LinkPlayerMapObject *linkPlayerMapObj, struct MapObject *mapObj)
+{
+    mapObj->mapobj_unk_21--;
+    linkPlayerMapObj->mode = 1;
+    MoveCoords(mapObj->mapobj_unk_19, &mapObj->coords1.x, &mapObj->coords1.y);
+    if (!mapObj->mapobj_unk_21)
+    {
+        npc_coords_shift_still(mapObj);
+        linkPlayerMapObj->mode = 2;
+    }
+}
+
+u8 npc_something3(u8 a1, u8 a2)
+{
+    switch (a1 - 1)
+    {
+    case 0:
+    case 6:
+        return 2;
+    case 1:
+    case 7:
+        return 1;
+    case 2:
+    case 8:
+        return 3;
+    case 3:
+    case 9:
+        return 4;
+    }
+    return a2;
+}
+
+u8 LinkPlayerDetectCollision(u8 selfMapObjId, u8 a2, s16 x, s16 y)
+{
+    u8 i;
+    for (i = 0; i < 16; i++)
+    {
+        if (i != selfMapObjId)
+        {
+            if ((gMapObjects[i].coords2.x == x && gMapObjects[i].coords2.y == y)
+             || (gMapObjects[i].coords3.x == x && gMapObjects[i].coords3.y == y))
+            {
+                return 1;
+            }
+        }
+    }
+    return MapGridIsImpassableAt(x, y);
+}
+
+void CreateLinkPlayerSprite(u8 linkPlayerId)
+{
+    struct LinkPlayerMapObject *linkPlayerMapObj = &gLinkPlayerMapObjects[linkPlayerId];
+    u8 mapObjId = linkPlayerMapObj->mapObjId;
+    struct MapObject *mapObj = &gMapObjects[mapObjId];
+    struct Sprite *sprite;
+
+    if (linkPlayerMapObj->active)
+    {
+        u8 val = sub_805983C(0, mapObj->mapobj_bit_1);
+        mapObj->spriteId = AddPseudoFieldObject(val, SpriteCB_LinkPlayer, 0, 0, 0);
+        sprite = &gSprites[mapObj->spriteId];
+        sprite->coordOffsetEnabled = TRUE;
+        sprite->data0 = linkPlayerId;
+        mapObj->mapobj_bit_2 = 0;
+    }
+}
+
+void SpriteCB_LinkPlayer(struct Sprite *sprite)
+{
+    struct LinkPlayerMapObject *linkPlayerMapObj = &gLinkPlayerMapObjects[sprite->data0];
+    struct MapObject *mapObj = &gMapObjects[linkPlayerMapObj->mapObjId];
+    sprite->pos1.x = mapObj->coords1.x;
+    sprite->pos1.y = mapObj->coords1.y;
+    SetObjectSubpriorityByZCoord(mapObj->elevation, sprite, 1);
+    sprite->oam.priority = ZCoordToPriority(mapObj->elevation);
+    if (!linkPlayerMapObj->mode)
+        StartSpriteAnim(sprite, FieldObjectDirectionToImageAnimId(mapObj->mapobj_unk_19));
+    else
+        StartSpriteAnimIfDifferent(sprite, get_go_image_anim_num(mapObj->mapobj_unk_19));
+    sub_806487C(sprite, 0);
+    if (mapObj->mapobj_bit_2)
+    {
+        sprite->invisible = ((sprite->data7 & 4) >> 2);
+        sprite->data7++;
+    }
 }

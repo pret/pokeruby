@@ -1,4 +1,4 @@
-	.include "constants/gba_constants.s"
+	.include "constants/gba_constants.inc"
 
 	.syntax unified
 
@@ -11,7 +11,7 @@
 Start: @ 8000000
 	b Init
 
-	.include "asm/rom_header.s"
+	.include "asm/rom_header.inc"
 
 @ 80000C0
 	.word 0
@@ -119,7 +119,7 @@ IntrMain_FoundIntr:
 	bic r3, r3, PSR_I_BIT | PSR_F_BIT | PSR_MODE_MASK
 	orr r3, r3, PSR_SYS_MODE
 	msr cpsr_cf, r3
-	ldr r1, =0x03001BC0
+	ldr r1, =gIntrTable
 	add r1, r1, r12
 	ldr r0, [r1]
 	stmdb sp!, {lr}

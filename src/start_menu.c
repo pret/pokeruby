@@ -1,4 +1,3 @@
-#include "gba/gba.h"
 #include "global.h"
 #include "main.h"
 #include "menu.h"
@@ -20,10 +19,10 @@ extern void remove_some_task(void);
 extern void dp12_8087EA4(void);
 extern void sav12_xor_increment(u8 index);
 extern bool8 sub_8125D44(u8);  //Saving related
-extern void sub_80945C0(u8, u8);
+extern void HandleDrawSaveWindowInfo(u8, u8);
 extern void sub_80946C8(u8, u8);
 extern void save_serialize_map(void);
-extern void play_some_sound(void);
+extern void PlayRainSoundEffect(void);
 extern void sub_8093130(u8, void (*)(void));
 extern void sub_805469C(void);
 extern void sub_80C823C(void);
@@ -33,7 +32,7 @@ extern void sub_80EBA5C(void);
 extern void sub_80A53F8(void);
 extern void sub_8089A70(void);
 extern void CB2_InitPokedex(void);
-extern u16 pokedex_count(u8);
+extern u16 GetNationalPokedexCount(u8);
 extern void fade_screen(u8, u8);
 extern bool32 is_c1_link_related_active();
 extern void sub_80594C0(void);
@@ -346,7 +345,7 @@ static u8 StartMenu_InputProcessCallback(void)
         PlaySE(SE_SELECT);
         if(gStartMenuItems[sCurrentStartMenuActions[sStartMenuCursorPos]].callback == StartMenu_PokedexCallback)
         {
-            if(pokedex_count(0) == 0)
+            if(GetNationalPokedexCount(0) == 0)
                 return 0;
         }
         gCallback_03004AE8 = gStartMenuItems[sCurrentStartMenuActions[sStartMenuCursorPos]].callback;
@@ -370,7 +369,7 @@ u8 StartMenu_PokedexCallback(void)
     if(!gPaletteFade.active)
     {
         sav12_xor_increment(0x29);
-        play_some_sound();
+        PlayRainSoundEffect();
         SetMainCallback2(CB2_InitPokedex);
         return 1;
     }
@@ -382,7 +381,7 @@ u8 StartMenu_PokemonCallback(void)
 {
     if(!gPaletteFade.active)
     {
-        play_some_sound();
+        PlayRainSoundEffect();
         SetMainCallback2(sub_8089A70);
         return 1;
     }
@@ -394,7 +393,7 @@ u8 StartMenu_BagCallback(void)
 {
     if(!gPaletteFade.active)
     {
-        play_some_sound();
+        PlayRainSoundEffect();
         SetMainCallback2(sub_80A53F8);
         return 1;
     }
@@ -406,7 +405,7 @@ u8 StartMenu_PokenavCallback(void)
 {
     if(!gPaletteFade.active)
     {
-        play_some_sound();
+        PlayRainSoundEffect();
         SetMainCallback2(sub_80EBA5C);
         return 1;
     }
@@ -418,7 +417,7 @@ u8 StartMenu_PlayerCallback(void)
 {
     if(!gPaletteFade.active)
     {
-        play_some_sound();
+        PlayRainSoundEffect();
         sub_8093110(sub_805469C);
         return 1;
     }
@@ -438,7 +437,7 @@ u8 StartMenu_OptionCallback(void)
 {
     if(!gPaletteFade.active)
     {
-        play_some_sound();
+        PlayRainSoundEffect();
         SetMainCallback2(CB2_InitOptionMenu);
         gMain.field_8 = sub_805469C;
         return 1;
@@ -466,7 +465,7 @@ u8 StartMenu_PlayerLinkCallback(void)
 {
     if(!gPaletteFade.active)
     {
-        play_some_sound();
+        PlayRainSoundEffect();
         sub_8093130(gUnknown_03004860, sub_805469C);
         return 1;
     }
@@ -603,7 +602,7 @@ static bool8 SaveDialogCheckForTimeoutAndKeypress(void)
 static u8 SaveDialogCB_DisplayConfirmMessage(void)
 {
     MenuZeroFillScreen();
-    sub_80945C0(0, 0);
+    HandleDrawSaveWindowInfo(0, 0);
     //"Would you like to save the game?"
     DisplaySaveMessageWithCallback(gSaveText_WouldYouLikeToSave, SaveDialogCB_DisplayConfirmYesNoMenu);
     return SAVE_IN_PROGRESS;

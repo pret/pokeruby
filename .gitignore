@@ -26,3 +26,9 @@ ld_script_sapphire.txt
 *.nam
 *.til
 *.ld
+tags
+types_*.taghl
+*.swp
+*.swo
+*.s.old
+*.dump
