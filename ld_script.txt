@@ -96,6 +96,7 @@ SECTIONS {
         asm/title_screen.o(.text);
         asm/weather.o(.text);
         asm/rom_8080874.o(.text);
+		src/battle_setup.o(.text);
         asm/battle_setup.o(.text);
         asm/cable_club.o(.text);
         asm/mori_debug_menu.o(.text);
