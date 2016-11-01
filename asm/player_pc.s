@@ -69,7 +69,7 @@ BedroomPC: @ 8139C74
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _08139CAC @ =gOtherText_WhatWillYouDo
-	ldr r2, _08139CB0 @ =sub_8139CF4
+	ldr r2, _08139CB0 @ =InitPlayerPCMenu
 	movs r3, 0
 	bl DisplayItemMessageOnField
 	pop {r0}
@@ -98,7 +98,7 @@ PlayerPC: @ 8139CB4
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _08139CEC @ =gOtherText_WhatWillYouDo
-	ldr r2, _08139CF0 @ =sub_8139CF4
+	ldr r2, _08139CF0 @ =InitPlayerPCMenu
 	movs r3, 0
 	bl DisplayItemMessageOnField
 	pop {r0}
@@ -151,7 +151,7 @@ InitPlayerPCMenu: @ 8139CF4
 	adds r0, r4
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, _08139D60 @ =sub_8139D64
+	ldr r1, _08139D60 @ =PlayerPCProcessMenuInput
 	str r1, [r0]
 	add sp, 0x8
 	pop {r4,r5}
@@ -260,7 +260,7 @@ ReshowPlayerPC: @ 8139E24
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _08139E38 @ =gOtherText_WhatWillYouDo
-	ldr r2, _08139E3C @ =sub_8139CF4
+	ldr r2, _08139E3C @ =InitPlayerPCMenu
 	movs r3, 0
 	bl DisplayItemMessageOnField
 	pop {r0}
@@ -283,7 +283,7 @@ PlayerPC_ItemStorage: @ 8139E40
 	adds r0, r4
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, _08139E68 @ =sub_8139FD4
+	ldr r1, _08139E68 @ =ItemStorageMenuProcessInput
 	str r1, [r0]
 	pop {r4}
 	pop {r0}
@@ -311,7 +311,7 @@ PlayerPC_Mailbox: @ 8139E6C
 	cmp r0, 0
 	bne _08139EA8
 	ldr r1, _08139EA0 @ =gOtherText_NoMailHere
-	ldr r2, _08139EA4 @ =sub_8139E24
+	ldr r2, _08139EA4 @ =ReshowPlayerPC
 	adds r0, r4, 0
 	movs r3, 0
 	bl DisplayItemMessageOnField
@@ -581,7 +581,7 @@ ItemStorage_Deposit: @ 813A0A0
 	adds r1, r0
 	lsls r1, 3
 	adds r1, r2
-	ldr r0, _0813A0C4 @ =sub_813A078
+	ldr r0, _0813A0C4 @ =Task_ItemStorage_Deposit
 	str r0, [r1]
 	movs r0, 0x1
 	movs r1, 0
@@ -608,7 +608,7 @@ sub_813A0C8: @ 813A0C8
 	adds r1, r4
 	lsls r1, 3
 	adds r1, r0
-	ldr r0, _0813A0F4 @ =sub_8139FD4
+	ldr r0, _0813A0F4 @ =ItemStorageMenuProcessInput
 	str r0, [r1]
 _0813A0E8:
 	pop {r4}
@@ -682,7 +682,7 @@ _0813A174: .4byte gTasks + 0x8
 _0813A178: .4byte sub_813A280
 _0813A17C:
 	ldr r1, _0813A190 @ =gOtherText_NoItems
-	ldr r2, _0813A194 @ =sub_8139E40
+	ldr r2, _0813A194 @ =PlayerPC_ItemStorage
 	adds r0, r5, 0
 	movs r3, 0
 	bl DisplayItemMessageOnField
@@ -743,7 +743,7 @@ _0813A1F8: .4byte gTasks + 0x8
 _0813A1FC: .4byte sub_813A280
 _0813A200:
 	ldr r1, _0813A214 @ =gOtherText_NoItems
-	ldr r2, _0813A218 @ =sub_8139E40
+	ldr r2, _0813A218 @ =PlayerPC_ItemStorage
 	adds r0, r5, 0
 	movs r3, 0
 	bl DisplayItemMessageOnField
@@ -1077,7 +1077,7 @@ sub_813A468: @ 813A468
 	adds r4, r0
 	ldrb r0, [r4, 0x14]
 	bl InitItemStorageMenu
-	ldr r0, _0813A4B0 @ =sub_8139FD4
+	ldr r0, _0813A4B0 @ =ItemStorageMenuProcessInput
 	str r0, [r4]
 	pop {r4,r5}
 	pop {r0}
