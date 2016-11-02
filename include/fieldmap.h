@@ -112,7 +112,7 @@ struct MapHeader
     u8 name;
     u8 cave;
     u8 weather;
-    u8 light;
+    /* 0x17 */ u8 light;
     u8 filler_18;
     u8 escapeRope;
     u8 flags;

@@ -1060,7 +1060,7 @@ _0807C67A:
 	movs r2, 0
 	movs r3, 0x10
 	bl BeginNormalPaletteFade
-	ldr r0, _0807C6B0 @ =sub_807C774
+	ldr r0, _0807C6B0 @ =CB2_GoToMainMenu
 	bl SetMainCallback2
 	b _0807C74E
 	.align 2, 0
@@ -1076,7 +1076,7 @@ _0807C6B4:
 	ands r0, r1
 	cmp r0, 0x46
 	bne _0807C6C4
-	ldr r0, _0807C6F4 @ =sub_807C7AC
+	ldr r0, _0807C6F4 @ =CB2_GoToClearSaveDataScreen
 	bl SetMainCallback2
 _0807C6C4:
 	ldrh r1, [r4, 0x2C]
@@ -1096,12 +1096,12 @@ _0807C6C4:
 	movs r2, 0
 	movs r3, 0x10
 	bl BeginNormalPaletteFade
-	ldr r0, _0807C6F8 @ =sub_807C7C8
+	ldr r0, _0807C6F8 @ =CB2_GoToResetRtcScreen
 	bl SetMainCallback2
 	b _0807C74E
 	.align 2, 0
 _0807C6F4: .4byte CB2_GoToClearSaveDataScreen
-_0807C6F8: .4byte sub_807C7C8
+_0807C6F8: .4byte CB2_GoToResetRtcScreen
 _0807C6FC:
 	ldr r0, _0807C758 @ =REG_BG2Y_L
 	movs r3, 0
@@ -1196,7 +1196,7 @@ CB2_GoToClearSaveDataScreen: @ 807C7AC
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807C7BE
-	ldr r0, _0807C7C4 @ =c2_clear_save_data_screen_2
+	ldr r0, _0807C7C4 @ =CB2_InitClearSaveDataScreen
 	bl SetMainCallback2
 _0807C7BE:
 	pop {r0}
@@ -1205,21 +1205,21 @@ _0807C7BE:
 _0807C7C4: .4byte CB2_InitClearSaveDataScreen
 	thumb_func_end CB2_GoToClearSaveDataScreen
 
-	thumb_func_start sub_807C7C8
-sub_807C7C8: @ 807C7C8
+	thumb_func_start CB2_GoToResetRtcScreen
+CB2_GoToResetRtcScreen: @ 807C7C8
 	push {lr}
 	bl UpdatePaletteFade
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807C7DA
-	ldr r0, _0807C7E0 @ =sub_806AAD8
+	ldr r0, _0807C7E0 @ =CB2_InitResetRtcScreen
 	bl SetMainCallback2
 _0807C7DA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807C7E0: .4byte sub_806AAD8
-	thumb_func_end sub_807C7C8
+_0807C7E0: .4byte CB2_InitResetRtcScreen
+	thumb_func_end CB2_GoToResetRtcScreen
 
 	thumb_func_start sub_807C7E4
 sub_807C7E4: @ 807C7E4

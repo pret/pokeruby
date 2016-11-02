@@ -802,7 +802,7 @@ sub_8083314: @ 8083314
 	bl sub_8082DF4
 	cmp r0, 0x1
 	beq _080833B6
-	bl GetBlockRecievedStatus
+	bl GetBlockReceivedStatus
 	adds r4, r0, 0
 	bl sub_8008198
 	lsls r4, 24
