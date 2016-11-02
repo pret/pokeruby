@@ -32,3 +32,4 @@ types_*.taghl
 *.swo
 *.s.old
 *.dump
+*.sa*
