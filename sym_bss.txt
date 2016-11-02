@@ -184,7 +184,10 @@ gUnknown_030007B0: @ 30007B0
 	.space 0x4
 
 gUnknown_030007B4: @ 30007B4
-	.space 0x774
+  .space 0x4
+
+gUnknown_030007B8: @ 30007B8
+	.space 0x770
 
 	.include "src/agb_flash.o"
 	.include "src/siirtc.o"
