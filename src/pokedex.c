@@ -60,6 +60,29 @@ struct PokedexView {
     u8 unk65E[8];
 };
 
+struct PokedexEntry
+{
+    /*0x00*/ u8 categoryName[12];
+    /*0x0C*/ u16 height; //in decimeters
+    /*0x0E*/ u16 weight; //in hectograms
+    /*0x10*/ u8 *descriptionPage1;
+    /*0x14*/ u8 *descriptionPage2;
+    /*0x18*/ u16 unused;
+    /*0x1A*/ u16 pokemonScale;
+    /*0x1C*/ u16 pokemonOffset;
+    /*0x1E*/ u16 trainerScale;
+    /*0x20*/ u16 trainerOffset;
+};  /*size = 0x24*/
+
+struct CryRelatedStruct
+{
+    u16 unk0;
+    u8 unk2;
+    u8 unk3;
+    u8 unk4;
+    u8 unk5;
+};
+
 extern struct MusicPlayerInfo gMPlay_BGM;
 extern u8 gReservedSpritePaletteCount;
 extern struct PokedexView *gUnknown_0202FFB4;
@@ -87,6 +110,21 @@ extern struct SpriteTemplate gSpriteTemplate_83A0584;
 extern struct SpriteTemplate gSpriteTemplate_83A059C;
 extern struct SpriteTemplate gSpriteTemplate_83A05B4;
 extern s16 gSineTable[];
+extern struct PokedexListItem *gUnknown_0202FFBC;
+extern IntrCallback gUnknown_03005CEC;
+extern u8 gUnknown_08E96BD4[];
+extern u8 gUnknown_083A05F8[];
+extern u8 gUnknown_0839F8A0[];
+extern u8 gUnknown_0839F988[];
+extern u8 gUnknown_03005E98;
+extern u8 gUnknown_083B4EC4[];
+
+extern struct PokedexEntry gPokedexEntries[];
+extern u8 gDexText_UnknownPoke[];
+extern u8 gDexText_UnknownHeight[];
+extern u8 gDexText_UnknownWeight[];
+extern u8 gDexText_CryOf[];
+extern u8 gDexText_SizeComparedTo[];
 
 extern void m4aMPlayVolumeControl(struct MusicPlayerInfo *mplayInfo, u16 trackBits, u16 volume);
 extern bool8 BeginNormalPaletteFade(u32, s8, u8, u8, u16);
@@ -126,7 +164,7 @@ bool8 sub_808E208(u8, u8, u8);
 u8 sub_808E82C(void);
 void sub_808E0CC(u16, u16);
 u8 sub_808F210(struct PokedexListItem *, u8);
-void sub_808F284(struct PokedexListItem *, u8);
+u8 sub_808F284(struct PokedexListItem *, u8);
 bool8 sub_808F250(u8);
 bool8 sub_808E71C(void);
 void sub_808CCC4(u8 taskId);
@@ -149,7 +187,23 @@ u16 sub_808E888(u16);
 u32 sub_808E8C8(u16, u16, u16);
 void sub_808EE28(struct Sprite *sprite);
 u16 sub_8091818(u8, u16, u16, u16);
-u8 sub_80918EC(u16 a, s16 b, s16 c, u16 d);
+u16 sub_80918EC(u16 a, s16 b, s16 c, u16 d);    //Not sure of return type
+void sub_808F2B0(u8 taskId);
+void sub_808F6CC(u8 taskId);
+void sub_808FA64(u8 taskId);
+void sub_808F8D8(u8 taskId);
+void sub_808F8B8(u8 taskId);
+void sub_808F888(u8 taskId);
+void sub_8090070(u8 taskId);
+void sub_808F9C8(u8 taskId);
+void sub_808FA00(u8 taskId);
+void sub_808FDF8(u8 taskId);
+void sub_808FFBC(u8 taskId);
+void sub_80903D0(u8 taskId);
+void sub_8090040(u8);
+u16 NationalPokedexNumToSpecies(u16);
+u8 sub_8119E3C(struct CryRelatedStruct *, u8);
+u8 ShowPokedexCryScreen(struct CryRelatedStruct *, u8);
 
 void sub_808C02C(void)
 {
@@ -1473,260 +1527,260 @@ __attribute__((naked))
 u16 sub_808E48C(u16 a, u16 b)
 {
     asm(".syntax unified\n\
-	push {r4-r7,lr}\n\
-	mov r7, r10\n\
-	mov r6, r9\n\
-	mov r5, r8\n\
-	push {r5-r7}\n\
-	lsls r0, 16\n\
-	lsrs r7, r0, 16\n\
-	lsls r1, 16\n\
-	lsrs r4, r1, 16\n\
-	movs r0, 0\n\
-	mov r10, r0\n\
-	ldr r1, _0808E52C\n\
-	ldrh r2, [r1, 0x2C]\n\
-	movs r0, 0x40\n\
-	ands r0, r2\n\
-	adds r3, r1, 0\n\
-	cmp r0, 0\n\
-	beq _0808E4B6\n\
-	cmp r7, 0\n\
-	beq _0808E4B6\n\
-	b _0808E5E4\n\
+    push {r4-r7,lr}\n\
+    mov r7, r10\n\
+    mov r6, r9\n\
+    mov r5, r8\n\
+    push {r5-r7}\n\
+    lsls r0, 16\n\
+    lsrs r7, r0, 16\n\
+    lsls r1, 16\n\
+    lsrs r4, r1, 16\n\
+    movs r0, 0\n\
+    mov r10, r0\n\
+    ldr r1, _0808E52C\n\
+    ldrh r2, [r1, 0x2C]\n\
+    movs r0, 0x40\n\
+    ands r0, r2\n\
+    adds r3, r1, 0\n\
+    cmp r0, 0\n\
+    beq _0808E4B6\n\
+    cmp r7, 0\n\
+    beq _0808E4B6\n\
+    b _0808E5E4\n\
 _0808E4B6:\n\
-	movs r0, 0x80\n\
-	ands r0, r2\n\
-	cmp r0, 0\n\
-	beq _0808E4CE\n\
-	ldr r0, _0808E530\n\
-	ldr r0, [r0]\n\
-	ldr r1, _0808E534\n\
-	adds r0, r1\n\
-	ldrh r0, [r0]\n\
-	subs r0, 0x1\n\
-	cmp r7, r0\n\
-	blt _0808E5C4\n\
+    movs r0, 0x80\n\
+    ands r0, r2\n\
+    cmp r0, 0\n\
+    beq _0808E4CE\n\
+    ldr r0, _0808E530\n\
+    ldr r0, [r0]\n\
+    ldr r1, _0808E534\n\
+    adds r0, r1\n\
+    ldrh r0, [r0]\n\
+    subs r0, 0x1\n\
+    cmp r7, r0\n\
+    blt _0808E5C4\n\
 _0808E4CE:\n\
-	ldrh r1, [r3, 0x2E]\n\
-	movs r0, 0x20\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _0808E53C\n\
-	cmp r7, 0\n\
-	beq _0808E53C\n\
-	adds r6, r7, 0\n\
-	movs r4, 0\n\
+    ldrh r1, [r3, 0x2E]\n\
+    movs r0, 0x20\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _0808E53C\n\
+    cmp r7, 0\n\
+    beq _0808E53C\n\
+    adds r6, r7, 0\n\
+    movs r4, 0\n\
 _0808E4E0:\n\
-	ldr r5, _0808E530\n\
-	ldr r0, [r5]\n\
-	ldr r2, _0808E534\n\
-	adds r0, r2\n\
-	ldrh r3, [r0]\n\
-	subs r3, 0x1\n\
-	lsls r3, 16\n\
-	lsrs r3, 16\n\
-	movs r0, 0x1\n\
-	adds r1, r7, 0\n\
-	movs r2, 0\n\
-	bl sub_8091818\n\
-	adds r7, r0, 0\n\
-	adds r0, r4, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r4, r0, 24\n\
-	cmp r4, 0x6\n\
-	bls _0808E4E0\n\
-	ldr r1, [r5]\n\
-	ldr r3, _0808E538\n\
-	adds r1, r3\n\
-	subs r0, r7, r6\n\
-	lsls r0, 4\n\
-	ldrb r2, [r1]\n\
-	adds r0, r2\n\
-	strb r0, [r1]\n\
-	bl sub_808E82C\n\
-	adds r0, r7, 0\n\
-	movs r1, 0xE\n\
-	bl sub_808E0CC\n\
-	movs r0, 0x6D\n\
-	bl PlaySE\n\
-	b _0808E5A2\n\
-	.align 2, 0\n\
+    ldr r5, _0808E530\n\
+    ldr r0, [r5]\n\
+    ldr r2, _0808E534\n\
+    adds r0, r2\n\
+    ldrh r3, [r0]\n\
+    subs r3, 0x1\n\
+    lsls r3, 16\n\
+    lsrs r3, 16\n\
+    movs r0, 0x1\n\
+    adds r1, r7, 0\n\
+    movs r2, 0\n\
+    bl sub_8091818\n\
+    adds r7, r0, 0\n\
+    adds r0, r4, 0x1\n\
+    lsls r0, 24\n\
+    lsrs r4, r0, 24\n\
+    cmp r4, 0x6\n\
+    bls _0808E4E0\n\
+    ldr r1, [r5]\n\
+    ldr r3, _0808E538\n\
+    adds r1, r3\n\
+    subs r0, r7, r6\n\
+    lsls r0, 4\n\
+    ldrb r2, [r1]\n\
+    adds r0, r2\n\
+    strb r0, [r1]\n\
+    bl sub_808E82C\n\
+    adds r0, r7, 0\n\
+    movs r1, 0xE\n\
+    bl sub_808E0CC\n\
+    movs r0, 0x6D\n\
+    bl PlaySE\n\
+    b _0808E5A2\n\
+    .align 2, 0\n\
 _0808E52C: .4byte gMain\n\
 _0808E530: .4byte gUnknown_0202FFB4\n\
 _0808E534: .4byte 0x0000060c\n\
 _0808E538: .4byte 0x0000062c\n\
 _0808E53C:\n\
-	ldrh r1, [r3, 0x2E]\n\
-	movs r0, 0x10\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _0808E5A2\n\
-	ldr r0, _0808E5B8\n\
-	ldr r0, [r0]\n\
-	ldr r3, _0808E5BC\n\
-	adds r0, r3\n\
-	ldrh r0, [r0]\n\
-	subs r0, 0x1\n\
-	cmp r7, r0\n\
-	bge _0808E5A2\n\
-	adds r6, r7, 0\n\
-	movs r4, 0\n\
+    ldrh r1, [r3, 0x2E]\n\
+    movs r0, 0x10\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _0808E5A2\n\
+    ldr r0, _0808E5B8\n\
+    ldr r0, [r0]\n\
+    ldr r3, _0808E5BC\n\
+    adds r0, r3\n\
+    ldrh r0, [r0]\n\
+    subs r0, 0x1\n\
+    cmp r7, r0\n\
+    bge _0808E5A2\n\
+    adds r6, r7, 0\n\
+    movs r4, 0\n\
 _0808E55A:\n\
-	ldr r5, _0808E5B8\n\
-	ldr r0, [r5]\n\
-	ldr r1, _0808E5BC\n\
-	adds r0, r1\n\
-	ldrh r3, [r0]\n\
-	subs r3, 0x1\n\
-	lsls r3, 16\n\
-	lsrs r3, 16\n\
-	movs r0, 0\n\
-	adds r1, r7, 0\n\
-	movs r2, 0\n\
-	bl sub_8091818\n\
-	adds r7, r0, 0\n\
-	adds r0, r4, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r4, r0, 24\n\
-	cmp r4, 0x6\n\
-	bls _0808E55A\n\
-	ldr r1, [r5]\n\
-	ldr r2, _0808E5C0\n\
-	adds r1, r2\n\
-	subs r0, r7, r6\n\
-	lsls r0, 4\n\
-	ldrb r3, [r1]\n\
-	adds r0, r3\n\
-	strb r0, [r1]\n\
-	bl sub_808E82C\n\
-	adds r0, r7, 0\n\
-	movs r1, 0xE\n\
-	bl sub_808E0CC\n\
-	movs r0, 0x6D\n\
-	bl PlaySE\n\
+    ldr r5, _0808E5B8\n\
+    ldr r0, [r5]\n\
+    ldr r1, _0808E5BC\n\
+    adds r0, r1\n\
+    ldrh r3, [r0]\n\
+    subs r3, 0x1\n\
+    lsls r3, 16\n\
+    lsrs r3, 16\n\
+    movs r0, 0\n\
+    adds r1, r7, 0\n\
+    movs r2, 0\n\
+    bl sub_8091818\n\
+    adds r7, r0, 0\n\
+    adds r0, r4, 0x1\n\
+    lsls r0, 24\n\
+    lsrs r4, r0, 24\n\
+    cmp r4, 0x6\n\
+    bls _0808E55A\n\
+    ldr r1, [r5]\n\
+    ldr r2, _0808E5C0\n\
+    adds r1, r2\n\
+    subs r0, r7, r6\n\
+    lsls r0, 4\n\
+    ldrb r3, [r1]\n\
+    adds r0, r3\n\
+    strb r0, [r1]\n\
+    bl sub_808E82C\n\
+    adds r0, r7, 0\n\
+    movs r1, 0xE\n\
+    bl sub_808E0CC\n\
+    movs r0, 0x6D\n\
+    bl PlaySE\n\
 _0808E5A2:\n\
-	mov r0, r10\n\
-	cmp r0, 0\n\
-	bne _0808E628\n\
-	ldr r0, _0808E5B8\n\
-	ldr r0, [r0]\n\
-	movs r1, 0xC7\n\
-	lsls r1, 3\n\
-	adds r0, r1\n\
-	mov r2, r10\n\
-	strh r2, [r0]\n\
-	b _0808E68E\n\
-	.align 2, 0\n\
+    mov r0, r10\n\
+    cmp r0, 0\n\
+    bne _0808E628\n\
+    ldr r0, _0808E5B8\n\
+    ldr r0, [r0]\n\
+    movs r1, 0xC7\n\
+    lsls r1, 3\n\
+    adds r0, r1\n\
+    mov r2, r10\n\
+    strh r2, [r0]\n\
+    b _0808E68E\n\
+    .align 2, 0\n\
 _0808E5B8: .4byte gUnknown_0202FFB4\n\
 _0808E5BC: .4byte 0x0000060c\n\
 _0808E5C0: .4byte 0x0000062c\n\
 _0808E5C4:\n\
-	movs r3, 0x2\n\
-	mov r10, r3\n\
-	lsls r3, r0, 16\n\
-	lsrs r3, 16\n\
-	movs r0, 0\n\
-	adds r1, r7, 0\n\
-	movs r2, 0\n\
-	bl sub_8091818\n\
-	adds r7, r0, 0\n\
-	movs r0, 0x2\n\
-	adds r1, r7, 0\n\
-	bl sub_808E398\n\
-	movs r0, 0x2\n\
-	b _0808E60E\n\
+    movs r3, 0x2\n\
+    mov r10, r3\n\
+    lsls r3, r0, 16\n\
+    lsrs r3, 16\n\
+    movs r0, 0\n\
+    adds r1, r7, 0\n\
+    movs r2, 0\n\
+    bl sub_8091818\n\
+    adds r7, r0, 0\n\
+    movs r0, 0x2\n\
+    adds r1, r7, 0\n\
+    bl sub_808E398\n\
+    movs r0, 0x2\n\
+    b _0808E60E\n\
 _0808E5E4:\n\
-	movs r0, 0x1\n\
-	mov r10, r0\n\
-	ldr r0, _0808E620\n\
-	ldr r0, [r0]\n\
-	ldr r1, _0808E624\n\
-	adds r0, r1\n\
-	ldrh r3, [r0]\n\
-	subs r3, 0x1\n\
-	lsls r3, 16\n\
-	lsrs r3, 16\n\
-	movs r0, 0x1\n\
-	adds r1, r7, 0\n\
-	movs r2, 0\n\
-	bl sub_8091818\n\
-	adds r7, r0, 0\n\
-	movs r0, 0x1\n\
-	adds r1, r7, 0\n\
-	bl sub_808E398\n\
-	movs r0, 0x1\n\
+    movs r0, 0x1\n\
+    mov r10, r0\n\
+    ldr r0, _0808E620\n\
+    ldr r0, [r0]\n\
+    ldr r1, _0808E624\n\
+    adds r0, r1\n\
+    ldrh r3, [r0]\n\
+    subs r3, 0x1\n\
+    lsls r3, 16\n\
+    lsrs r3, 16\n\
+    movs r0, 0x1\n\
+    adds r1, r7, 0\n\
+    movs r2, 0\n\
+    bl sub_8091818\n\
+    adds r7, r0, 0\n\
+    movs r0, 0x1\n\
+    adds r1, r7, 0\n\
+    bl sub_808E398\n\
+    movs r0, 0x1\n\
 _0808E60E:\n\
-	adds r1, r7, 0\n\
-	adds r2, r4, 0\n\
-	bl sub_808DBE8\n\
-	movs r0, 0x6C\n\
-	bl PlaySE\n\
-	b _0808E5A2\n\
-	.align 2, 0\n\
+    adds r1, r7, 0\n\
+    adds r2, r4, 0\n\
+    bl sub_808DBE8\n\
+    movs r0, 0x6C\n\
+    bl PlaySE\n\
+    b _0808E5A2\n\
+    .align 2, 0\n\
 _0808E620: .4byte gUnknown_0202FFB4\n\
 _0808E624: .4byte 0x0000060c\n\
 _0808E628:\n\
-	ldr r1, _0808E6A0\n\
-	ldr r6, _0808E6A4\n\
-	ldr r2, [r6]\n\
-	movs r3, 0xC7\n\
-	lsls r3, 3\n\
-	mov r9, r3\n\
-	adds r0, r2, r3\n\
-	ldrh r0, [r0]\n\
-	lsrs r0, 2\n\
-	adds r1, r0, r1\n\
-	ldrb r5, [r1]\n\
-	ldr r1, _0808E6A8\n\
-	adds r0, r1\n\
-	ldrb r3, [r0]\n\
-	ldr r0, _0808E6AC\n\
-	adds r2, r0\n\
-	strb r3, [r2]\n\
-	ldr r1, [r6]\n\
-	ldr r2, _0808E6B0\n\
-	mov r8, r2\n\
-	adds r0, r1, r2\n\
-	strh r3, [r0]\n\
-	ldr r4, _0808E6B4\n\
-	adds r0, r1, r4\n\
-	strh r5, [r0]\n\
-	ldr r3, _0808E6B8\n\
-	adds r1, r3\n\
-	mov r0, r10\n\
-	strb r0, [r1]\n\
-	ldr r2, [r6]\n\
-	lsrs r5, 1\n\
-	movs r1, 0xC5\n\
-	lsls r1, 3\n\
-	adds r0, r2, r1\n\
-	strh r5, [r0]\n\
-	adds r3, r2, r3\n\
-	ldrb r0, [r3]\n\
-	adds r4, r2, r4\n\
-	ldrb r1, [r4]\n\
-	add r2, r8\n\
-	ldrb r2, [r2]\n\
-	bl sub_808E208\n\
-	ldr r0, [r6]\n\
-	mov r2, r9\n\
-	adds r1, r0, r2\n\
-	ldrh r0, [r1]\n\
-	cmp r0, 0xB\n\
-	bhi _0808E68E\n\
-	adds r0, 0x1\n\
-	strh r0, [r1]\n\
+    ldr r1, _0808E6A0\n\
+    ldr r6, _0808E6A4\n\
+    ldr r2, [r6]\n\
+    movs r3, 0xC7\n\
+    lsls r3, 3\n\
+    mov r9, r3\n\
+    adds r0, r2, r3\n\
+    ldrh r0, [r0]\n\
+    lsrs r0, 2\n\
+    adds r1, r0, r1\n\
+    ldrb r5, [r1]\n\
+    ldr r1, _0808E6A8\n\
+    adds r0, r1\n\
+    ldrb r3, [r0]\n\
+    ldr r0, _0808E6AC\n\
+    adds r2, r0\n\
+    strb r3, [r2]\n\
+    ldr r1, [r6]\n\
+    ldr r2, _0808E6B0\n\
+    mov r8, r2\n\
+    adds r0, r1, r2\n\
+    strh r3, [r0]\n\
+    ldr r4, _0808E6B4\n\
+    adds r0, r1, r4\n\
+    strh r5, [r0]\n\
+    ldr r3, _0808E6B8\n\
+    adds r1, r3\n\
+    mov r0, r10\n\
+    strb r0, [r1]\n\
+    ldr r2, [r6]\n\
+    lsrs r5, 1\n\
+    movs r1, 0xC5\n\
+    lsls r1, 3\n\
+    adds r0, r2, r1\n\
+    strh r5, [r0]\n\
+    adds r3, r2, r3\n\
+    ldrb r0, [r3]\n\
+    adds r4, r2, r4\n\
+    ldrb r1, [r4]\n\
+    add r2, r8\n\
+    ldrb r2, [r2]\n\
+    bl sub_808E208\n\
+    ldr r0, [r6]\n\
+    mov r2, r9\n\
+    adds r1, r0, r2\n\
+    ldrh r0, [r1]\n\
+    cmp r0, 0xB\n\
+    bhi _0808E68E\n\
+    adds r0, 0x1\n\
+    strh r0, [r1]\n\
 _0808E68E:\n\
-	adds r0, r7, 0\n\
-	pop {r3-r5}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	mov r10, r5\n\
-	pop {r4-r7}\n\
-	pop {r1}\n\
-	bx r1\n\
-	.align 2, 0\n\
+    adds r0, r7, 0\n\
+    pop {r3-r5}\n\
+    mov r8, r3\n\
+    mov r9, r4\n\
+    mov r10, r5\n\
+    pop {r4-r7}\n\
+    pop {r1}\n\
+    bx r1\n\
+    .align 2, 0\n\
 _0808E6A0: .4byte gUnknown_083A05EC\n\
 _0808E6A4: .4byte gUnknown_0202FFB4\n\
 _0808E6A8: .4byte gUnknown_083A05F1\n\
@@ -2072,8 +2126,7 @@ void sub_808F08C(struct Sprite *sprite)
         DestroySprite(sprite);
 }
 
-/*
-//FixMe
+#ifdef NONMATCHING
 void sub_808F0B4(struct Sprite *sprite)
 {
     if(gUnknown_0202FFB4->unk64A != 0 && gUnknown_0202FFB4->unk64A != 3)
@@ -2081,16 +2134,694 @@ void sub_808F0B4(struct Sprite *sprite)
     else
     {
         s16 r3;
+        
         u8 unk = gUnknown_0202FFB4->unk62C + sprite->data1;
         u16 foo = gSineTable[unk];
-        u16 bar = gSineTable[unk + 0x40];
-        u8 unk2 = sprite->data0;
+        //u8 unk2 = sprite->data0;
+        //u16 bar = gSineTable[unk + 0x40];
         
-        SetOamMatrix(unk2, foo, bar, -foo, bar);
+        SetOamMatrix(sprite->data0, foo, gSineTable[unk + 0x40], (-(u16)foo) >> 16, gSineTable[unk + 0x40]);
         
         r3 = gSineTable[sprite->data1 + gUnknown_0202FFB4->unk62C];
         sprite->pos2.x = gSineTable[sprite->data1 + gUnknown_0202FFB4->unk62C + 0x40] * 5 / 256;
-        sprite->pos2.y = r3 / 8;
+        sprite->pos2.y = r3 * 40 / 256;
     }
 }
-*/
+#else
+__attribute__((naked))
+void sub_808F0B4(struct Sprite *sprite)
+{
+    asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+    sub sp, 0x4\n\
+    adds r6, r0, 0\n\
+    ldr r1, _0808F0D8 @ =gUnknown_0202FFB4\n\
+    ldr r0, [r1]\n\
+    ldr r2, _0808F0DC @ =0x0000064a\n\
+    adds r0, r2\n\
+    ldrb r0, [r0]\n\
+    adds r7, r1, 0\n\
+    cmp r0, 0\n\
+    beq _0808F0E0\n\
+    cmp r0, 0x3\n\
+    beq _0808F0E0\n\
+    adds r0, r6, 0\n\
+    bl DestroySprite\n\
+    b _0808F158\n\
+    .align 2, 0\n\
+_0808F0D8: .4byte gUnknown_0202FFB4\n\
+_0808F0DC: .4byte 0x0000064a\n\
+_0808F0E0:\n\
+    ldr r0, [r7]\n\
+    ldr r5, _0808F160 @ =0x0000062c\n\
+    adds r0, r5\n\
+    ldrb r1, [r0]\n\
+    ldrh r0, [r6, 0x30]\n\
+    adds r1, r0\n\
+    lsls r1, 24\n\
+    lsrs r1, 24\n\
+    ldr r4, _0808F164 @ =gSineTable\n\
+    lsls r0, r1, 1\n\
+    adds r0, r4\n\
+    ldrh r3, [r0]\n\
+    adds r1, 0x40\n\
+    lsls r1, 1\n\
+    adds r1, r4\n\
+    ldrh r0, [r6, 0x2E]\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    ldrh r1, [r1]\n\
+    lsls r3, 16\n\
+    lsrs r2, r3, 16\n\
+    negs r3, r3\n\
+    lsrs r3, 16\n\
+    str r1, [sp]\n\
+    bl SetOamMatrix\n\
+    ldr r1, [r7]\n\
+    adds r1, r5\n\
+    ldrh r0, [r6, 0x30]\n\
+    adds r0, 0x40\n\
+    ldrb r1, [r1]\n\
+    adds r0, r1\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    lsls r1, r0, 1\n\
+    adds r1, r4\n\
+    ldrh r3, [r1]\n\
+    adds r0, 0x40\n\
+    lsls r0, 1\n\
+    adds r0, r4\n\
+    movs r2, 0\n\
+    ldrsh r1, [r0, r2]\n\
+    lsls r0, r1, 2\n\
+    adds r0, r1\n\
+    lsls r0, 3\n\
+    cmp r0, 0\n\
+    bge _0808F140\n\
+    adds r0, 0xFF\n\
+_0808F140:\n\
+    asrs r0, 8\n\
+    strh r0, [r6, 0x24]\n\
+    lsls r1, r3, 16\n\
+    asrs r1, 16\n\
+    lsls r0, r1, 2\n\
+    adds r0, r1\n\
+    lsls r0, 3\n\
+    cmp r0, 0\n\
+    bge _0808F154\n\
+    adds r0, 0xFF\n\
+_0808F154:\n\
+    asrs r0, 8\n\
+    strh r0, [r6, 0x26]\n\
+_0808F158:\n\
+    add sp, 0x4\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
+_0808F160: .4byte 0x0000062c\n\
+_0808F164: .4byte gSineTable\n\
+    .syntax divided\n");
+}
+#endif
+
+void sub_808F168(struct Sprite *sprite)
+{
+    if(gUnknown_0202FFB4->unk64A != 0 && gUnknown_0202FFB4->unk64A != 3)
+        DestroySprite(sprite);
+    else
+    {
+        u16 r1 = gUnknown_0202FFB4->unk64A == 0 ? 0x50 : 0x60;
+        
+        if(gUnknown_0202FFB4->unk650 != 0 && gUnknown_0202FFB4->unk654 == r1)
+        {
+            u8 data2;
+            
+            sprite->invisible = 0;
+            sprite->pos2.y = gUnknown_0202FFB4->unk652 * 16;
+            sprite->pos2.x = gSineTable[(u8)sprite->data2] / 64;
+            sprite->data2 += 8;
+        }
+        else
+            sprite->invisible = 1;
+    }
+}
+
+u8 sub_808F210(struct PokedexListItem *item, u8 b)
+{
+    u8 taskId;
+    
+    gUnknown_0202FFBC = item;
+    taskId = CreateTask(sub_808F2B0, 0);
+    gTasks[taskId].data[0] = 0;
+    gTasks[taskId].data[1] = 1;
+    gTasks[taskId].data[2] = 0;
+    gTasks[taskId].data[3] = 0;
+    gTasks[taskId].data[4] = b;
+    return taskId;
+}
+
+bool8 sub_808F250(u8 taskId)
+{
+    if(gTasks[taskId].data[0] == 0 && gTasks[taskId].func == sub_808F6CC)
+        return 0;
+    else
+        return 1;
+}
+
+u8 sub_808F284(struct PokedexListItem *item, u8 b)
+{
+    gUnknown_0202FFBC = item;
+    gTasks[b].data[0] = 1;
+    gTasks[b].data[1] = 0;
+    gTasks[b].data[2] = 0;
+    gTasks[b].data[3] = 0;
+    return b;
+}
+
+void sub_808F2B0(u8 taskId)
+{
+    switch(gMain.state)
+    {
+        case 0:
+        default:
+            if(!gPaletteFade.active)
+            {
+                u16 r2;
+                
+                gUnknown_0202FFB4->unk64A = 1;
+                gUnknown_0202FFB4->unk64E = 0;
+                gUnknown_03005CEC = gMain.vblankCallback;
+                SetVBlankCallback(NULL);
+                r2 = 0;
+                if(gTasks[taskId].data[1] != 0)
+                    r2 += 0x1000;
+                
+                if(gTasks[taskId].data[2] != 0)
+                    r2 |= 0x200;
+                
+                sub_8091060(r2);
+                
+                gMain.state = 1;
+            }
+            break;
+        case 1:
+            LZ77UnCompVram(gPokedexMenu_Gfx, (void *)VRAM);
+            LZ77UnCompVram(gUnknown_08E96BD4, (void *)(VRAM + 0x7800));
+            sub_8091738(gUnknown_0202FFBC->a, 2, 0x3FC);
+            gMain.state++;
+            break;
+        case 2:
+            sub_80904FC(0xD);
+            sub_8090584(gUnknown_0202FFB4->unk64D, 0xD);
+            sub_808D640();
+            gMain.state++;
+            break;
+        case 3:
+            SetUpWindowConfig(&gWindowConfig_81E7064);
+            InitMenuWindow(&gWindowConfig_81E7064);
+            gMain.state++;
+            break;
+        case 4:
+            if(gUnknown_0202FFB4->unk612 == 0)
+                sub_8091154(NationalToHoennOrder(gUnknown_0202FFBC->a), 0xD, 3);
+            else
+                sub_8091154(gUnknown_0202FFBC->a, 0xD, 3);
+            //_0808F45A
+            sub_80911C8(gUnknown_0202FFBC->a, 0x10, 3);
+            MenuPrint(gDexText_UnknownPoke, 11, 5);
+            MenuPrint(gDexText_UnknownHeight, 16, 7);
+            MenuPrint(gDexText_UnknownWeight, 16, 9);
+            if(gUnknown_0202FFBC->owned)
+            {
+                sub_8091304(gPokedexEntries[gUnknown_0202FFBC->a].categoryName, 11, 5);
+                sub_8091458(gPokedexEntries[gUnknown_0202FFBC->a].height, 16, 7);
+                sub_8091564(gPokedexEntries[gUnknown_0202FFBC->a].weight, 16, 9);
+                MenuPrint(gPokedexEntries[gUnknown_0202FFBC->a].descriptionPage1, 2, 13);
+                sub_80917CC(14, 0x3FC);
+            }
+            //_0808F50C
+            else
+            {
+                MenuPrint(gUnknown_083A05F8, 2, 13);
+                LoadPalette(gPlttBufferUnfaded + 1, 0x31, 0x1E);
+            }
+            gMain.state++;
+            break;
+        case 5:
+            if(gTasks[taskId].data[1] == 0)
+            {
+                //_0808F540
+                gTasks[taskId].data[4] = (u16)sub_80918EC(gUnknown_0202FFBC->a, 0x30, 0x38, 0);
+                gSprites[gTasks[taskId].data[4]].oam.priority = 0;
+            }
+            gMain.state++;
+            break;
+        case 6:
+        {
+            u32 r3 = 0;
+            
+            if(gTasks[taskId].data[2] != 0)
+                r3 = 0x14;
+            if(gTasks[taskId].data[1] != 0)
+            {
+                r3 |= (1 << (gSprites[gTasks[taskId].data[4]].oam.paletteNum + 0x10));
+            }
+            BeginNormalPaletteFade(~r3, 0, 0x10, 0, 0);
+            SetVBlankCallback(gUnknown_03005CEC);
+            gMain.state++;
+            break;
+        }
+        case 7:
+            REG_BLDCNT = 0;
+            REG_BLDALPHA = 0;
+            REG_BLDY = 0;
+            REG_BG3CNT = 0xF03;
+            REG_BG1CNT = 0xD00;
+            REG_DISPCNT = 0x1E40;
+            gMain.state++;
+            break;
+        case 8:
+            if(!gPaletteFade.active)
+            {
+                gMain.state++;
+                if(gTasks[taskId].data[3] == 0)
+                {
+                    StopCryAndClearCrySongs();
+                    PlayCry2(NationalPokedexNumToSpecies(gUnknown_0202FFBC->a), 0, 0x7D, 0xA);
+                }
+                else
+                    gMain.state++;
+            }
+            break;
+        case 9:
+            if(!IsCryPlayingOrClearCrySongs())
+                gMain.state++;
+            break;
+        case 10:
+            gTasks[taskId].data[0] = 0;
+            gTasks[taskId].data[1] = 0;
+            gTasks[taskId].data[2] = 1;
+            gTasks[taskId].data[3] = 1;
+            gTasks[taskId].func = sub_808F6CC;
+            gMain.state = 0;
+            break;
+    }
+}
+
+void sub_808F6CC(u8 taskId)
+{
+    if(gTasks[taskId].data[0] != 0)
+    {
+        BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+        gTasks[taskId].func = sub_808F888;
+        PlaySE(0x6C);
+    }
+    else if(gMain.newKeys & 2)
+    {
+        BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);
+        gTasks[taskId].func = sub_808F8B8;
+        PlaySE(3);
+    }
+    else if(gMain.newKeys & 1)
+    {
+        switch(gUnknown_0202FFB4->unk64D)
+        {
+        case 0:
+            sub_8090C68();
+            break;
+        case 1:
+            BeginNormalPaletteFade(-0x15, 0, 0, 0x10, 0);
+            gTasks[taskId].func = sub_808F8D8;
+            PlaySE(0x15);
+            break;
+        case 2:
+            BeginNormalPaletteFade(-0x15, 0, 0, 0x10, 0);
+            gTasks[taskId].func = sub_808FA64;
+            PlaySE(0x15);
+            break;
+        case 3:
+            if(!gUnknown_0202FFBC->owned)
+                PlaySE(0x20);
+            else
+            {
+                BeginNormalPaletteFade(-0x15, 0, 0, 0x10, 0);
+                gTasks[taskId].func = sub_8090070;
+                PlaySE(0x15);
+            }
+            break;
+        }
+    }
+    else if (((gMain.newKeys & 0x20) || ((gMain.newKeys & 0x200) && gSaveBlock2.optionsButtonMode == 1))
+     && gUnknown_0202FFB4->unk64D != 0)
+    {
+        gUnknown_0202FFB4->unk64D--;
+        sub_8090584(gUnknown_0202FFB4->unk64D, 0xD);
+        PlaySE(0x6D);
+    }
+    else if(((gMain.newKeys & 0x10) || ((gMain.newKeys & 0x100) && gSaveBlock2.optionsButtonMode == 1))
+     && gUnknown_0202FFB4->unk64D <= 2)
+    {
+        gUnknown_0202FFB4->unk64D++;
+        sub_8090584(gUnknown_0202FFB4->unk64D, 0xD);
+        PlaySE(0x6D);
+    }
+}
+
+void sub_808F888(u8 taskId)
+{
+    if(!gPaletteFade.active)
+        gTasks[taskId].func = sub_808F2B0;
+}
+
+void sub_808F8B8(u8 taskId)
+{
+    if(!gPaletteFade.active)
+        DestroyTask(taskId);
+}
+
+void sub_808F8D8(u8 taskId)
+{
+    switch (gMain.state)
+    {
+    case 0:
+    default:
+        if (!gPaletteFade.active)
+        {
+            gUnknown_0202FFB4->unk64A = 5;
+            gUnknown_03005CEC = gMain.vblankCallback;
+            SetVBlankCallback(NULL);
+            sub_8091060(0x200);
+            gUnknown_0202FFB4->unk64D = 1;
+            gMain.state = 1;
+        }
+        break;
+    case 1:
+        sub_8090540(0xD);
+        sub_8090644(1, 0xD);
+        sub_808D640();
+        REG_BG1CNT = 0xD00;
+        gMain.state++;
+        break;
+    case 2:
+        ShowPokedexAreaScreen(NationalPokedexNumToSpecies(gUnknown_0202FFBC->a), &gUnknown_0202FFB4->unk64F);
+        SetVBlankCallback(gUnknown_03005CEC);
+        gUnknown_0202FFB4->unk64F = 0;
+        gMain.state = 0;
+        gTasks[taskId].func = sub_808F9C8;
+        break;
+    }
+}
+
+void sub_808F9C8(u8 taskId)
+{
+    if(gUnknown_0202FFB4->unk64F != 0)
+        gTasks[taskId].func = sub_808FA00;
+}
+
+void sub_808FA00(u8 taskId)
+{
+    if(!gPaletteFade.active)
+    {
+        switch(gUnknown_0202FFB4->unk64F)
+        {
+        case 1:
+        default:
+            gTasks[taskId].func = sub_808F2B0;
+            break;
+        case 2:
+            gTasks[taskId].func = sub_808FA64;
+            break;
+        }
+    }
+}
+
+void sub_808FA64(u8 taskId)
+{
+    switch(gMain.state)
+    {
+        case 0:
+        default:
+            if(!gPaletteFade.active)
+            {
+                m4aMPlayStop(&gMPlay_BGM);
+                gUnknown_0202FFB4->unk64A = 6;
+                gUnknown_03005CEC = gMain.vblankCallback;
+                SetVBlankCallback(NULL);
+                sub_8091060(0x200);
+                gUnknown_0202FFB4->unk64D = 2;
+                gMain.state = 1;
+            }
+            break;
+        case 1:
+            LZ77UnCompVram(gPokedexMenu_Gfx, (void *)VRAM);
+            LZ77UnCompVram(gUnknown_0839F8A0, (void *)(VRAM + 0x7000));
+            gMain.state++;
+            break;
+        case 2:
+            sub_8090540(0xD);
+            sub_8090644(2, 0xD);
+            sub_808D640();
+            DmaClear16(3, (void *)(VRAM + 0xF800), 0x500);
+            gMain.state++;
+            break;
+        case 3:
+            SetUpWindowConfig(&gWindowConfig_81E702C);
+            InitMenuWindow(&gWindowConfig_81E702C);
+            ResetPaletteFade();
+            gMain.state++;
+            break;
+        case 4:
+            MenuPrint(gDexText_CryOf, 10, 4);
+            sub_8091260(gUnknown_0202FFBC->a, 10, 6, 2);
+            gMain.state++;
+            break;
+        case 5:
+            gTasks[taskId].data[4] = sub_80918EC(gUnknown_0202FFBC->a, 0x30, 0x38, 0);
+            gSprites[gTasks[taskId].data[4]].oam.priority = 0;
+            gUnknown_03005E98 = 0;
+            gMain.state++;
+            break;
+        case 6:
+        {
+            struct CryRelatedStruct sp8;
+            
+            sp8.unk0 = 0x4020;
+            sp8.unk2 = 0x1F;
+            sp8.unk3 = 8;
+            sp8.unk5 = 0x1E;
+            sp8.unk4 = 0xC;
+            if(sub_8119E3C(&sp8, 0) != 0)
+            {
+                gMain.state++;
+                gUnknown_03005E98 = 0;
+            }
+            break;
+        }     
+        case 7:
+        {
+            struct CryRelatedStruct sp10;
+            
+            sp10.unk0 = 0x3000;
+            sp10.unk2 = 0xE;
+            sp10.unk3 = 9;
+            sp10.unk4 = 0x12;
+            sp10.unk5 = 3;
+            if(ShowPokedexCryScreen(&sp10, 1) != 0)
+            {
+                gMain.state++;
+            }
+            break;
+        }
+        case 8:
+            BeginNormalPaletteFade(-0x15, 0, 0x10, 0, 0);
+            SetVBlankCallback(gUnknown_03005CEC);
+            gMain.state++;
+            break;
+        case 9:
+            REG_BLDCNT = 0;
+            REG_BLDALPHA = 0;
+            REG_BLDY = 0;
+            REG_BG2CNT = 0xE02;
+            REG_BG0CNT = 0x1F07;
+            REG_BG1CNT = 0xD00;
+            REG_DISPCNT = 0x1F07 + 0x39;
+            gMain.state++;
+            break;
+        case 10:
+            gUnknown_0202FFB4->unk64F = 0;
+            gMain.state = 0;
+            gTasks[taskId].func = sub_808FDF8;
+            break;
+    }
+}
+
+void sub_808FDF8(u8 taskId)
+{
+    sub_8119F88(0);
+    
+    if (IsCryPlaying())
+        sub_8090040(1);
+    else
+        sub_8090040(0);
+    
+    if (gMain.newKeys & 1)
+    {
+        sub_8090040(1);
+        sub_811A050(NationalPokedexNumToSpecies(gUnknown_0202FFBC->a));
+        return;
+    }
+    else if (!gPaletteFade.active)
+    {
+        if (gMain.newKeys & 2)
+        {
+            BeginNormalPaletteFade(-0x15, 0, 0, 0x10, 0);
+            m4aMPlayContinue(&gMPlay_BGM);
+            gUnknown_0202FFB4->unk64F = 1;
+            gTasks[taskId].func = sub_808FFBC;
+            PlaySE(3);
+        }
+        else if ((gMain.newKeys & 0x20) || ((gMain.newKeys & 0x200) && gSaveBlock2.optionsButtonMode == 1))
+        {
+            BeginNormalPaletteFade(-0x15, 0, 0, 0x10, 0);
+            m4aMPlayContinue(&gMPlay_BGM);
+            gUnknown_0202FFB4->unk64F = 2;
+            gTasks[taskId].func = sub_808FFBC;
+            PlaySE(0x6D);
+        }
+        else if ((gMain.newKeys & 0x10) || ((gMain.newKeys & 0x100) && gSaveBlock2.optionsButtonMode == 1))
+        {
+            if (!gUnknown_0202FFBC->owned)
+                PlaySE(0x20);
+            else
+            {
+                BeginNormalPaletteFade(-0x15, 0, 0, 0x10, 0);
+                m4aMPlayContinue(&gMPlay_BGM);
+                gUnknown_0202FFB4->unk64F = 3;
+                gTasks[taskId].func = sub_808FFBC;
+                PlaySE(0x6D);
+            }
+        }
+    }
+}
+
+void sub_808FFBC(u8 taskId)
+{
+    if(!gPaletteFade.active)
+    {
+        DestroyCryMeterNeedleSprite();
+        switch(gUnknown_0202FFB4->unk64F)
+        {
+            default:
+            case 1:
+                gTasks[taskId].func = sub_808F2B0;
+                break;
+            case 2:
+                gTasks[taskId].func = sub_808F8D8;
+                break;
+            case 3:
+                gTasks[taskId].func = sub_8090070;
+        }
+    }
+}
+
+void sub_8090040(u8 a)
+{
+    u16 unk;
+    
+    if(a != 0)
+        unk = 0x392;
+    else
+        unk = 0x2AF;
+    LoadPalette(&unk, 0x5D, 2);
+}
+
+void sub_8090070(u8 taskId)
+{
+    u8 spriteId;
+    
+    switch(gMain.state)
+    {
+        default:
+        case 0:
+            if(!gPaletteFade.active)
+            {
+                gUnknown_0202FFB4->unk64A = 7;
+                gUnknown_03005CEC = gMain.vblankCallback;
+                SetVBlankCallback(NULL);
+                sub_8091060(0x200);
+                gUnknown_0202FFB4->unk64D = 3;
+                gMain.state = 1;
+            }
+            break;
+        case 1:
+            LZ77UnCompVram(gPokedexMenu_Gfx, (void *)VRAM);
+            LZ77UnCompVram(gUnknown_0839F988, (void *)(VRAM + 0x7000));
+            gMain.state++;
+            break;
+        case 2:
+            sub_8090540(0xD);
+            sub_8090644(3, 0xD);
+            sub_808D640();
+            gMain.state++;
+            break;
+        case 3:
+        {
+            u8 string[40];  //I hope this is the correct size
+            
+            SetUpWindowConfig(&gWindowConfig_81E702C);
+            InitMenuWindow(&gWindowConfig_81E702C);
+            string[0] = EOS;
+            StringAppend(string, gDexText_SizeComparedTo);
+            StringAppend(string, gSaveBlock2.playerName);
+            sub_8072BD8(string, 3, 15, 0xC0);
+            gMain.state++;
+            break;
+        }
+        case 4:
+            ResetPaletteFade();
+            gMain.state++;
+            break;
+        case 5:
+            spriteId = sub_8091A4C(gSaveBlock2.playerGender, 0x98, 0x38, 0);
+            gSprites[spriteId].oam.affineMode = 1;
+            gSprites[spriteId].oam.matrixNum = 1;
+            gSprites[spriteId].oam.priority = 0;
+            gSprites[spriteId].pos2.y = gPokedexEntries[gUnknown_0202FFBC->a].trainerOffset;
+            SetOamMatrix(1, gPokedexEntries[gUnknown_0202FFBC->a].trainerScale, 0, 0, gPokedexEntries[gUnknown_0202FFBC->a].trainerScale);
+            LoadPalette(gUnknown_083B4EC4, (gSprites[spriteId].oam.paletteNum + 16) * 16, 0x20);
+            gMain.state++;
+            break;
+        case 6:
+            spriteId = sub_80918EC(gUnknown_0202FFBC->a, 0x58, 0x38, 1);
+            gSprites[spriteId].oam.affineMode = 1;
+            gSprites[spriteId].oam.matrixNum = 2;
+            gSprites[spriteId].oam.priority = 0;
+            gSprites[spriteId].pos2.y = gPokedexEntries[gUnknown_0202FFBC->a].pokemonOffset;
+            SetOamMatrix(2, gPokedexEntries[gUnknown_0202FFBC->a].pokemonScale, 0, 0, gPokedexEntries[gUnknown_0202FFBC->a].pokemonScale);
+            LoadPalette(gUnknown_083B4EC4, (gSprites[spriteId].oam.paletteNum + 16) * 16, 0x20);
+            gMain.state++;
+            break;
+        case 7:
+            BeginNormalPaletteFade(-0x15, 0, 0x10, 0, 0);
+            SetVBlankCallback(gUnknown_03005CEC);
+            gMain.state++;
+            break;
+        case 8:
+            REG_BLDCNT = 0;
+            REG_BLDALPHA = 0;
+            REG_BLDY = 0;
+            REG_BG2CNT = 0xE03;
+            REG_DISPCNT = 0x1E40;
+            gMain.state++;
+            break;
+        case 9:
+            if(!gPaletteFade.active)
+            {
+                gUnknown_0202FFB4->unk64F = 0;
+                gMain.state = 0;
+                gTasks[taskId].func = sub_80903D0;
+            }
+            break;
+    }
+}
