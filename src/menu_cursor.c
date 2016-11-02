@@ -50,7 +50,7 @@ u8 sub_814A5C0(u8 a1, u16 a2, u8 a3, u16 a4, u8 a5)
 
     if (gUnknown_0203A3D0 != 0x40 || gUnknown_0203A3D1 != 0x40)
         sub_814A7FC();
-    
+
     v9 = 1;
     if (a2 == 0xFFFF)
     {
@@ -61,7 +61,7 @@ u8 sub_814A5C0(u8 a1, u16 a2, u8 a3, u16 a4, u8 a5)
             v9 = 0;
         }
     }
-    
+
     LoadSpriteSheetDeferred(&gUnknown_0842F140[a3 & 0xF]);
     gUnknown_0203A3D0 = CreateSprite(&gSpriteTemplate_842F250[v9], 0, 0xA0, a1);
     gUnknown_0203A3D1 = CreateSprite(&gSpriteTemplate_842F250[2], 0, 0xA0, a1);
@@ -80,7 +80,7 @@ u8 sub_814A5C0(u8 a1, u16 a2, u8 a3, u16 a4, u8 a5)
             v10->oam.paletteNum = 0;
         else
             v10->oam.paletteNum = IndexOfSpritePaletteTag(a2);
-        
+
         if (!(REG_DISPCNT & (DISPCNT_WIN0_ON | DISPCNT_WIN1_ON)))
             *(u8 *)(REG_ADDR_WINOUT) |= 0x1F;
         gUnknown_0203A3D3 = REG_DISPCNT >> 0xF;
@@ -111,7 +111,7 @@ u8 unref_sub_814A7AC(u8 a1, u16 a2, u8 a3)
     u16 i;
     u8 val1 = 0;
     u16 val2 = 0xF;
-    
+
     for (i = 0; i <= 0xFF; i++)
     {
         if (gPlttBufferUnfaded[i] == a2)
@@ -120,7 +120,7 @@ u8 unref_sub_814A7AC(u8 a1, u16 a2, u8 a3)
             val2 = i & 0xF;
         }
     }
-    
+
     return sub_814A758(a1, val1, val2, a3);
 }
 
@@ -132,7 +132,7 @@ void sub_814A7FC(void)
         DestroySpriteAndFreeResources(&gSprites[gUnknown_0203A3D0]);
         gUnknown_0203A3D0 = 0x40;
     }
-    
+
     if (gUnknown_0203A3D1 != 0x40)
     {
         DestroySpriteAndFreeResources(&gSprites[gUnknown_0203A3D1]);
@@ -141,14 +141,14 @@ void sub_814A7FC(void)
             REG_DISPCNT &= ~DISPCNT_OBJWIN_ON;
         *(u8 *)(REG_BASE + REG_OFFSET_WINOUT + 1) = gUnknown_0203A3D4;
     }
-    
+
     return;
 }
 
 void sub_814A880(u8 a1, u8 a2)
 {
     struct Sprite *spr;
-    
+
     if (gUnknown_0203A3D0 != 0x40)
     {
         spr = &gSprites[gUnknown_0203A3D0];
@@ -158,7 +158,7 @@ void sub_814A880(u8 a1, u8 a2)
         spr->pos1.x = a1;
         spr->pos1.y = a2;
     }
-    
+
     if (gUnknown_0203A3D1 != 0x40)
     {
         spr = &gSprites[gUnknown_0203A3D1];
@@ -168,26 +168,26 @@ void sub_814A880(u8 a1, u8 a2)
         spr->pos1.x = a1;
         spr->pos1.y = a2;
     }
-    
+
     return;
 }
 
 void sub_814A904(void)
 {
     struct Sprite *spr;
-    
+
     if (gUnknown_0203A3D0 != 0x40)
     {
         spr = &gSprites[gUnknown_0203A3D0];
         spr->invisible = 1;
     }
-    
+
     if (gUnknown_0203A3D1 != 0x40)
     {
         spr = &gSprites[gUnknown_0203A3D1];
         spr->invisible = 1;
     }
-    
+
     return;
 }
 
@@ -209,7 +209,7 @@ void sub_814A958(u8 a1)
     cursub = (struct Subsprite){0,2};
     cursub->x = negone;
     cursub++;
-    
+
     v2 = 1;
     v3 = 1;
     v5 = (a1 - 1) << 0x10;
@@ -241,7 +241,7 @@ void sub_814A958(u8 a1)
                     v3 = (v3 + (v6 & 0x18)) & negone;
                 }
             }
-            
+
             cursub++;
             v2 = v2 + 1;
             v6 = ((v7 >> 16) - v3) & 0xFFFF;
@@ -444,19 +444,19 @@ _0814AAB8: .4byte gUnknown_0203A3D1\n\
 void sub_814AABC(void (*callback)(struct Sprite *))
 {
     struct Sprite *spr;
-    
+
     if (gUnknown_0203A3D0 != 0x40)
     {
         spr = &gSprites[gUnknown_0203A3D0];
         spr->callback = callback;
     }
-    
+
     if (gUnknown_0203A3D1 != 0x40)
     {
         spr = &gSprites[gUnknown_0203A3D1];
         spr->callback = callback;
     }
-    
+
     return;
 }
 
@@ -497,7 +497,7 @@ void sub_814AB84(void)
         FreeSpriteOamMatrix(spr);
         DestroySprite(spr);
         gUnknown_0203A3D1 = 0x40;
-        
+
         if (!gUnknown_0203A3D3)
             REG_DISPCNT &= ~DISPCNT_OBJWIN_ON;
         *(u8 *)(REG_ADDR_WINOUT + 1) = gUnknown_0203A3D4;
@@ -510,7 +510,7 @@ void unref_sub_814ABE4(int a1)
     struct Sprite *spr;
 
     CpuSet(gUnknown_0842F5BC[a1], &gMenuCursorSubsprites, 0x28);
-    
+
     if (gUnknown_0203A3D0 != 0x40)
     {
         spr = &gSprites[gUnknown_0203A3D0];
@@ -532,9 +532,9 @@ u8 CreateBlendedOutlineCursor(u8 a1, u16 a2, u8 a3, u16 a4, u8 a5)
 
     if (var1 != 0x40)
         sub_814AD44();
-    
+
     v8 = 1;
-    
+
     if (a2 == 0xFFFF)
     {
         gUnknown_0203A360[a3 & 0xF] = a4;
@@ -544,21 +544,21 @@ u8 CreateBlendedOutlineCursor(u8 a1, u16 a2, u8 a3, u16 a4, u8 a5)
             v8 = 0;
         }
     }
-    
+
     LoadSpriteSheetDeferred(&gUnknown_0842F1C0[a3 & 0xF]);
     gUnknown_0203A3D2 = CreateSprite(&gSpriteTemplate_842F298[v8], 0, 0xA0, a1);
-    
+
     if (gUnknown_0203A3D2 != 0x40)
     {
         spr = &gSprites[gUnknown_0203A3D2];
-        
+
         if (a2 == 0xFFFF)
             spr->oam.paletteNum = 0;
         else
             spr->oam.paletteNum = IndexOfSpritePaletteTag(a2);
     }
     sub_814ADF4(a5);
-    
+
     return gUnknown_0203A3D2;
 }
 
@@ -603,7 +603,7 @@ void sub_814ADF4(u8 a1)
 {
     if (a1 > 0x12)
         a1 = 0;
-    
+
     if (gUnknown_0203A3D2 != 0x40)
         SetSubspriteTables(&gSprites[gUnknown_0203A3D2], &gUnknown_0842F6C0[a1]);
     return;

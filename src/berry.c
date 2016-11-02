@@ -20,9 +20,9 @@ extern struct Berry gBerries[];
 extern u8 BerryTreeScript;
 extern struct BerryTree gUnknown_083CD780;
 extern u16 gUnknown_0202E8DE;
-extern u16 gUnknown_0202E8CC; 
+extern u16 gUnknown_0202E8CC;
 extern u16 gUnknown_0202E8CE;
-extern u16 gUnknown_0202E8D0; 
+extern u16 gUnknown_0202E8D0;
 
 u8 CalcBerryYield(struct BerryTree *tree);
 
