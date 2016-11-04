@@ -146,24 +146,24 @@ void task01_battle_start(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
-    switch(data[0])
+    switch (data[0])
     {
-        case 0:
-            if (!FieldPoisonEffectIsRunning()) // is poison not active?
-            {
-                sub_811AABC(data[1]);
-                ++data[0]; // go to case 1.
-            }
-            break;
-        case 1:
-            if (sub_811AAE8() == 1)
-            {
-                SetMainCallback2(sub_800E7C4);
-                prev_quest_postbuffer_cursor_backup_reset();
-                overworld_poison_timer_set();
-                DestroyTask(taskId);
-            }
-            break;
+    case 0:
+        if (!FieldPoisonEffectIsRunning()) // is poison not active?
+        {
+            sub_811AABC(data[1]);
+            ++data[0]; // go to case 1.
+        }
+        break;
+    case 1:
+        if (sub_811AAE8() == 1)
+        {
+            SetMainCallback2(sub_800E7C4);
+            prev_quest_postbuffer_cursor_backup_reset();
+            overworld_poison_timer_set();
+            DestroyTask(taskId);
+        }
+        break;
     }
 }
 
@@ -345,27 +345,27 @@ s8 sub_8081D3C(void)
         return 1;
     if (MetatileBehavior_IsSandOrDeepSand(tileBehavior))
         return 2;
-    switch(gMapHeader.light)
+    switch (gMapHeader.light)
     {
-        case 1:
-        case 2:
-        case 3:
-            break;
-        case 4:
-            if (sub_80574C4(tileBehavior))
-                return 8;
-            if (MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior))
-                return 5;
-            return 7;
-        case 8:
-        case 9:
+    case 1:
+    case 2:
+    case 3:
+        break;
+    case 4:
+        if (sub_80574C4(tileBehavior))
             return 8;
-        case 5:
-            return 3;
-        case 6:
-            if (MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior))
-                return 4;
-            return 9;
+        if (MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior))
+            return 5;
+        return 7;
+    case 8:
+    case 9:
+        return 8;
+    case 5:
+        return 3;
+    case 6:
+        if (MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior))
+            return 4;
+        return 9;
     }
     if (sub_8057568(tileBehavior))
         return 4;
@@ -404,12 +404,12 @@ s8 sub_8081E90(void)
     {
         switch (gMapHeader.light)
         {
-            case 4:
-                return 1;
-            case 5:
-                return 3;
-            default:
-                return 0;
+        case 4:
+            return 1;
+        case 5:
+            return 3;
+        default:
+            return 0;
         }
     }
     return 3;
@@ -452,28 +452,28 @@ u8 GetSumOfEnemyPartyLevel(u16 trainerNum, u8 partyCount)
         _partyCount = gTrainers[trainerNum].partySize; // if so, set the specified size to the actual size. seems to be error correction?
    
     returnThis = 0;
-    switch(gTrainers[trainerNum].partyFlags)
+    switch (gTrainers[trainerNum].partyFlags)
     {
-        case 0:
-            party = gTrainers[trainerNum].party;
-            for(i = 0; i < _partyCount; i++)
-                returnThis += party[i].level;
-            break;
-        case 1:
-            party = gTrainers[trainerNum].party;
-            for(i = 0; i < _partyCount; i++)
-                returnThis += party[i * 2].level;
-            break;
-        case 2:
-            party = gTrainers[trainerNum].party;
-            for(i = 0; i < _partyCount; i++)
-                returnThis += party[i].level;
-            break;
-        case 3:
-            party = gTrainers[trainerNum].party;
-            for(i = 0; i < _partyCount; i++)
-                returnThis += party[i * 2].level;
-            break;
+    case 0:
+        party = gTrainers[trainerNum].party;
+        for(i = 0; i < _partyCount; i++)
+            returnThis += party[i].level;
+        break;
+    case 1:
+        party = gTrainers[trainerNum].party;
+        for(i = 0; i < _partyCount; i++)
+            returnThis += party[i * 2].level;
+        break;
+    case 2:
+        party = gTrainers[trainerNum].party;
+        for(i = 0; i < _partyCount; i++)
+            returnThis += party[i].level;
+        break;
+    case 3:
+        party = gTrainers[trainerNum].party;
+        for(i = 0; i < _partyCount; i++)
+            returnThis += party[i * 2].level;
+        break;
     }
     return returnThis;
 }
@@ -613,15 +613,15 @@ bool32 battle_exit_is_player_defeat(u32 a1)
 
     switch(a1)
     {
-        case 1:
-        case 2:
-            return 1;
-        case 0:
-        case 3:
-        case 4:
-        case 5:
-        case 6:
-            return 0;
+    case 1:
+    case 2:
+        return 1;
+    case 0:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+        return 0;
     }
 }
 
@@ -871,61 +871,55 @@ void sub_8082718()
 void sub_8082728(void) // sets the music to be played after a battle
 {
     u16 music;
-    u8 val;
-    
+
     if (gTrainerBattleMode != 1 && gTrainerBattleMode != 8)
     {
-        val = sub_803FC58(gTrainerBattleOpponent);
-        if (val > 13)
-            music = 423;
-        else
+        switch (sub_803FC58(gTrainerBattleOpponent))
         {
-            switch (val)
-            {
-                // TODO: Replace with music constants.
-                case 0:
-                    music = 380;
-                    break;
-                case 1:
-                    music = 407;
-                    break;
-                case 2:
-                    music = 379;
-                    break;
-                case 4:
-                    music = 416;
-                    break;
-                case 5:
-                    music = 417;
-                    break;
-                case 6:
-                    music = 419;
-                    break;
-                case 7:
-                    music = 441;
-                    break;
-                case 8:
-                    music = 385;
-                    break;
-                case 9:
-                    music = 449;
-                    break;
-                case 10:
-                    music = 450;
-                    break;
-                case 11:
-                    music = 451;
-                    break;
-                case 12:
-                    music = 453;
-                    break;
-                case 13:
-                    music = 397;
-                    break;
-                default:
-                    music = 423;
-            }
+        // TODO: Replace with music constants.
+        case 0:
+            music = 380;
+            break;
+        case 1:
+            music = 407;
+            break;
+        case 2:
+            music = 379;
+            break;
+        case 4:
+            music = 416;
+            break;
+        case 5:
+            music = 417;
+            break;
+        case 6:
+            music = 419;
+            break;
+        case 7:
+            music = 441;
+            break;
+        case 8:
+            music = 385;
+            break;
+        case 9:
+            music = 449;
+            break;
+        case 10:
+            music = 450;
+            break;
+        case 11:
+            music = 451;
+            break;
+        case 12:
+            music = 453;
+            break;
+        case 13:
+            music = 397;
+            break;
+        default:
+            music = 423;
         }
+
         PlayNewMapMusic(music);
     }
 }
