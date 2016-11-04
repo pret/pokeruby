@@ -69,9 +69,11 @@ struct TrainerBattleSpec
     u8 ptrType;
 };
 
-struct MyStruct
+struct TrainerEyeTrainer
 {
-   u16 arr[8];
+   u16 trainerNums[5];
+   u16 mapGroup;
+   u16 mapNum;
 };
 
 extern u16 MapGridGetMetatileBehaviorAt(s16, s16);
@@ -976,7 +978,7 @@ s32 sub_8082894(u16 *ptr, u16 var)
     return -1;
 }
 
-s32 sub_80828B8(struct MyStruct *a, u16 b)
+s32 sub_80828B8(struct TrainerEyeTrainer *a, u16 b)
 {
    s32 i;
    
@@ -984,34 +986,34 @@ s32 sub_80828B8(struct MyStruct *a, u16 b)
    {
        s32 j;
        
-       for(j = 0; j < 5 && a[i].arr[j] != 0; j++)
+       for(j = 0; j < 5 && a[i].trainerNums[j] != 0; j++)
        {
-           if(a[i].arr[j] == b)
+           if(a[i].trainerNums[j] == b)
                return i;
        }
    }
    return -1;
 }
 
-u32 sub_80828FC(struct MyStruct *a, u16 b, u16 c)
+u32 sub_80828FC(struct TrainerEyeTrainer *a, u16 b, u16 c)
 {
    s32 i;
    s32 ret = 0;
    
    for (i = 0; i < 56; i++)
    {
-       if (a[i].arr[5] == b && a[i].arr[6] == c)
+       if (a[i].mapGroup == b && a[i].mapNum == c)
        {
            if (gSaveBlock1.trainerRematches[i] != 0)
            {
                ret = 1;
                continue;
            }
-           if (trainer_flag_check(a[i].arr[0]) == TRUE && (Random() % 100) <= 0x1E)
+           if (trainer_flag_check(a[i].trainerNums[0]) == TRUE && (Random() % 100) <= 0x1E)
            {
                ret = 1;
                
-               while(ret <= 4 && a[i].arr[ret] != 0 && trainer_flag_check(a[i].arr[ret]))
+               while(ret <= 4 && a[i].trainerNums[ret] != 0 && trainer_flag_check(a[i].trainerNums[ret]))
                    ret++;
                gSaveBlock1.trainerRematches[i] = ret;
                ret = 1;
@@ -1021,25 +1023,25 @@ u32 sub_80828FC(struct MyStruct *a, u16 b, u16 c)
    return ret;
 }
 
-s32 sub_80829A8(struct MyStruct *a1, u16 a2, u16 a3)
+s32 sub_80829A8(struct TrainerEyeTrainer *a1, u16 a2, u16 a3)
 {
    s32 i;
    
    for (i = 0; i <= 55; i++)
    {
-       if (a1[i].arr[5] == a2 && a1[i].arr[6] == a3 && gSaveBlock1.trainerRematches[i])
+       if (a1[i].mapGroup == a2 && a1[i].mapNum == a3 && gSaveBlock1.trainerRematches[i])
            return 1;
    }
    return 0;
 }
 
-s32 sub_80829E8(struct MyStruct *a1, u16 a2, u16 a3)
+s32 sub_80829E8(struct TrainerEyeTrainer *a1, u16 a2, u16 a3)
 {
     s32 i;
     
     for (i = 0; i <= 55; i++)
     {
-        if (a1[i].arr[5] == a2 && a1[i].arr[6] == a3 )
+        if (a1[i].mapGroup == a2 && a1[i].mapNum == a3 )
             return 1;
     }
     return 0;
@@ -1065,55 +1067,26 @@ bool8 sub_8082A54(u16 *a1, u16 a2)
         return FALSE;
 }
 
-__attribute__((naked))
-u16 sub_8082A90(struct MyStruct *a1, u16 a2)
+u16 sub_8082A90(struct TrainerEyeTrainer *trainers, u16 trainerNum)
 {
-    // TODO: decompile.
-    asm("push {r4-r7,lr}\n\
-    add r4, r0, #0\n\
-    lsl r1, #16\n\
-    lsr r1, #16\n\
-    bl sub_8082894\n\
-    add r1, r0, #0\n\
-    mov r0, #0x1\n\
-    neg r0, r0\n\
-    cmp r1, r0\n\
-    bne _08082AB8\n\
-    mov r0, #0\n\
-    b _08082ADE\n\
-_08082AAA:\n\
-    sub r0, r6, #0x1\n\
-    lsl r0, #1\n\
-    add r0, r7, r0\n\
-    ldrh r0, [r0]\n\
-    b _08082ADE\n\
-_08082AB4:\n\
-    ldrh r0, [r5]\n\
-    b _08082ADE\n\
-_08082AB8:\n\
-    lsl r0, r1, #4\n\
-    add r7, r4, r0\n\
-    mov r6, #0x1\n\
-    add r5, r7, #0x2\n\
-    add r4, r5, #0\n\
-_08082AC2:\n\
-    ldrh r0, [r4]\n\
-    cmp r0, #0\n\
-    beq _08082AAA\n\
-    bl trainer_flag_check\n\
-    lsl r0, #24\n\
-    cmp r0, #0\n\
-    beq _08082AB4\n\
-    add r4, #0x2\n\
-    add r5, #0x2\n\
-    add r6, #0x1\n\
-    cmp r6, #0x4\n\
-    ble _08082AC2\n\
-    ldrh r0, [r7, #0x8]\n\
-_08082ADE:\n\
-    pop {r4-r7}\n\
-    pop {r1}\n\
-    bx r1\n");
+    int i;
+    struct TrainerEyeTrainer *trainer;
+    s32 trainerEyeIndex = sub_8082894(trainers, trainerNum);
+
+    if (trainerEyeIndex == -1)
+        return 0;
+
+    trainer = &trainers[trainerEyeIndex];
+
+    for (i = 1; i < 5; i++)
+    {
+        if (!trainer->trainerNums[i])
+            return trainer->trainerNums[i - 1];
+        if (!trainer_flag_check(trainer->trainerNums[i]))
+            return trainer->trainerNums[i];
+    }
+
+    return trainer->trainerNums[4];
 }
 
 void sub_8082AE4(u16 *a1, u16 a2)
@@ -1124,11 +1097,11 @@ void sub_8082AE4(u16 *a1, u16 a2)
         gSaveBlock1.trainerRematches[var] = 0;
 }
 
-bool8 sub_8082B10(struct MyStruct *a1, u16 a2)
+bool8 sub_8082B10(struct TrainerEyeTrainer *a1, u16 a2)
 {
     s32 var = sub_8082894(a1, a2);
 
-    if ( var != -1 && trainer_flag_check(a1[var].arr[1]) )
+    if ( var != -1 && trainer_flag_check(a1[var].trainerNums[1]) )
         return TRUE;
     else
         return FALSE;
@@ -1205,54 +1178,3 @@ void sub_8082CB8(void)
     sub_8082AE4(gTrainerEyeTrainers, gTrainerBattleOpponent);
     sub_808257C();
 }
-
-/*
-    thumb_func_start sub_8082A90
-sub_8082A90: @ 8082A90
-    push {r4-r7,lr}
-    adds r4, r0, 0
-    lsls r1, 16
-    lsrs r1, 16
-    bl sub_8082894
-    adds r1, r0, 0
-    movs r0, 0x1
-    negs r0, r0
-    cmp r1, r0
-    bne _08082AB8
-    movs r0, 0
-    b _08082ADE
-_08082AAA:
-    subs r0, r6, 0x1
-    lsls r0, 1
-    adds r0, r7, r0
-    ldrh r0, [r0]
-    b _08082ADE
-_08082AB4:
-    ldrh r0, [r5]
-    b _08082ADE
-_08082AB8:
-    lsls r0, r1, 4
-    adds r7, r4, r0
-    movs r6, 0x1
-    adds r5, r7, 0x2
-    adds r4, r5, 0
-_08082AC2:
-    ldrh r0, [r4]
-    cmp r0, 0
-    beq _08082AAA
-    bl trainer_flag_check
-    lsls r0, 24
-    cmp r0, 0
-    beq _08082AB4
-    adds r4, 0x2
-    adds r5, 0x2
-    adds r6, 0x1
-    cmp r6, 0x4
-    ble _08082AC2
-    ldrh r0, [r7, 0x8]
-_08082ADE:
-    pop {r4-r7}
-    pop {r1}
-    bx r1
-    thumb_func_end sub_8082A90
-*/
