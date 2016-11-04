@@ -162,7 +162,6 @@ extern u8 sub_8091E3C(void);
 extern void sub_80690C8(void);
 extern void sub_805469C(void);
 extern void LoadCompressedObjectPic(void *);
-extern void LZ77UnCompVram(const void *, void *);
 extern u16 HoennToNationalOrder(u16);
 extern u16 NationalToHoennOrder(u16);
 extern u16 gPokedexOrder_Alphabetical[];

@@ -8,8 +8,6 @@ extern struct SpriteSheet gMonFrontPicTable[];
 extern struct SpriteSheet gMonBackPicTable[];
 extern void *gUnknown_081FAF4C[];
 
-extern void LZ77UnCompVram(const void *src, void *dest);
-extern void LZ77UnCompWram(const void *src, void *dest);
 extern void DrawSpindaSpots(u16, u32, void *, u8);
 
 void sub_800D378(struct SpriteSheet *a, u32 b, u32 c, u32 d, void *e, s32 f, u32 g, u32 h);
