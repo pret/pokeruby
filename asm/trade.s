@@ -2063,7 +2063,7 @@ _08048E6C: .4byte gBlockRecvBuffer
 _08048E70: .4byte gUnknown_03004824
 _08048E74:
 	ldr r0, _08048E84 @ =gBlockSendBuffer
-	ldr r1, _08048E88 @ =gUnknown_03004428
+	ldr r1, _08048E88 @ =gPlayerParty + 2 * 0x64
 	movs r2, 0xC8
 	bl sub_8048D24
 	ldr r0, _08048E8C @ =gUnknown_03004824
@@ -2071,7 +2071,7 @@ _08048E74:
 	b _08049006
 	.align 2, 0
 _08048E84: .4byte gBlockSendBuffer
-_08048E88: .4byte gUnknown_03004428
+_08048E88: .4byte gPlayerParty + 2 * 0x64
 _08048E8C: .4byte gUnknown_03004824
 _08048E90:
 	cmp r7, 0
@@ -2092,7 +2092,7 @@ _08048EA4:
 	beq _08048EB2
 	b _0804907C
 _08048EB2:
-	ldr r0, _08048ED0 @ =gUnknown_03004688
+	ldr r0, _08048ED0 @ =gEnemyParty + 2 * 0x64
 	movs r2, 0x1
 	adds r1, r7, 0
 	eors r1, r2
@@ -2106,12 +2106,12 @@ _08048EB2:
 	ldr r1, [r0]
 	b _08049006
 	.align 2, 0
-_08048ED0: .4byte gUnknown_03004688
+_08048ED0: .4byte gEnemyParty + 2 * 0x64
 _08048ED4: .4byte gBlockRecvBuffer
 _08048ED8: .4byte gUnknown_03004824
 _08048EDC:
 	ldr r0, _08048EEC @ =gBlockSendBuffer
-	ldr r1, _08048EF0 @ =gUnknown_030044F0
+	ldr r1, _08048EF0 @ =gPlayerParty + 4 * 0x64
 	movs r2, 0xC8
 	bl sub_8048D24
 	ldr r0, _08048EF4 @ =gUnknown_03004824
@@ -2119,7 +2119,7 @@ _08048EDC:
 	b _08049006
 	.align 2, 0
 _08048EEC: .4byte gBlockSendBuffer
-_08048EF0: .4byte gUnknown_030044F0
+_08048EF0: .4byte gPlayerParty + 4 * 0x64
 _08048EF4: .4byte gUnknown_03004824
 _08048EF8:
 	cmp r7, 0
@@ -2140,7 +2140,7 @@ _08048F0C:
 	beq _08048F1A
 	b _0804907C
 _08048F1A:
-	ldr r0, _08048F38 @ =gUnknown_03004750
+	ldr r0, _08048F38 @ =gEnemyParty + 4 * 0x64
 	movs r2, 0x1
 	adds r1, r7, 0
 	eors r1, r2
@@ -2154,7 +2154,7 @@ _08048F1A:
 	ldr r1, [r0]
 	b _08049006
 	.align 2, 0
-_08048F38: .4byte gUnknown_03004750
+_08048F38: .4byte gEnemyParty + 4 * 0x64
 _08048F3C: .4byte gBlockRecvBuffer
 _08048F40: .4byte gUnknown_03004824
 _08048F44:

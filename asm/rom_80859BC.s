@@ -8486,7 +8486,7 @@ _08089B48:
 	adds r1, r5, 0
 	movs r2, 0
 	bl AppendToList
-	ldr r6, _08089BAC @ =gUnknown_030043C4
+	ldr r6, _08089BAC @ =gPlayerParty + 1 * 0x64
 	adds r0, r6, 0
 	movs r1, 0xB
 	bl GetMonData
@@ -8520,7 +8520,7 @@ _08089B76:
 	.align 2, 0
 _08089BA4: .4byte gUnknown_0202FFAA
 _08089BA8: .4byte gUnknown_0202FFA9
-_08089BAC: .4byte gUnknown_030043C4
+_08089BAC: .4byte gPlayerParty + 1 * 0x64
 _08089BB0: .4byte gUnknown_03005CE0
 _08089BB4:
 	adds r0, r4, 0

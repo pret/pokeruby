@@ -982,7 +982,7 @@ _0806B6C2:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0806B6F6
-	ldr r0, _0806B6EC @ =gUnknown_03004428
+	ldr r0, _0806B6EC @ =gPlayerParty + 2 * 0x64
 	movs r1, 0xB
 	bl GetMonData
 	cmp r0, 0
@@ -996,7 +996,7 @@ _0806B6C2:
 	movs r1, 0x2
 	b _0806B8A8
 	.align 2, 0
-_0806B6EC: .4byte gUnknown_03004428
+_0806B6EC: .4byte gPlayerParty + 2 * 0x64
 _0806B6F0:
 	ldrb r0, [r4, 0x4]
 	ldrb r1, [r4, 0x5]
@@ -1049,7 +1049,7 @@ _0806B74A:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0806B77E
-	ldr r0, _0806B774 @ =gUnknown_0300448C
+	ldr r0, _0806B774 @ =gPlayerParty + 3 * 0x64
 	movs r1, 0xB
 	bl GetMonData
 	cmp r0, 0
@@ -1063,7 +1063,7 @@ _0806B74A:
 	movs r1, 0x3
 	b _0806B8A8
 	.align 2, 0
-_0806B774: .4byte gUnknown_0300448C
+_0806B774: .4byte gPlayerParty + 3 * 0x64
 _0806B778:
 	ldrb r0, [r4, 0x6]
 	ldrb r1, [r4, 0x7]
@@ -1117,7 +1117,7 @@ _0806B7D2:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0806B80A
-	ldr r0, _0806B800 @ =gUnknown_030044F0
+	ldr r0, _0806B800 @ =gPlayerParty + 4 * 0x64
 	movs r1, 0xB
 	bl GetMonData
 	cmp r0, 0
@@ -1133,7 +1133,7 @@ _0806B7D2:
 	movs r2, 0x4
 	b _0806B8AA
 	.align 2, 0
-_0806B800: .4byte gUnknown_030044F0
+_0806B800: .4byte gPlayerParty + 4 * 0x64
 _0806B804:
 	ldrb r0, [r4, 0x8]
 	ldrb r1, [r4, 0x9]
@@ -1176,7 +1176,7 @@ _0806B84C:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0806B88E
-	ldr r0, _0806B87C @ =gUnknown_03004554
+	ldr r0, _0806B87C @ =gPlayerParty + 5 * 0x64
 	movs r1, 0xB
 	bl GetMonData
 	cmp r0, 0
@@ -1192,7 +1192,7 @@ _0806B84C:
 	movs r2, 0x4
 	b _0806B8AA
 	.align 2, 0
-_0806B87C: .4byte gUnknown_03004554
+_0806B87C: .4byte gPlayerParty + 5 * 0x64
 _0806B880:
 	ldrb r0, [r4, 0xA]
 	ldrb r1, [r4, 0xB]
@@ -1280,7 +1280,7 @@ sub_806B908: @ 806B908
 	ldr r0, _0806B950 @ =gUnknown_083769A8
 	adds r4, r0, 0
 	adds r4, 0x24
-	ldr r5, _0806B954 @ =gUnknown_030043C4
+	ldr r5, _0806B954 @ =gPlayerParty + 1 * 0x64
 	ldrb r0, [r4]
 	ldrb r1, [r4, 0x1]
 	movs r2, 0x3
@@ -1300,7 +1300,7 @@ sub_806B908: @ 806B908
 _0806B948: .4byte gBG2TilemapBuffer
 _0806B94C: .4byte gUnknown_0202E8FA
 _0806B950: .4byte gUnknown_083769A8
-_0806B954: .4byte gUnknown_030043C4
+_0806B954: .4byte gPlayerParty + 1 * 0x64
 _0806B958:
 	ldrb r0, [r4, 0x4]
 	ldrb r1, [r4, 0x5]
@@ -2957,7 +2957,7 @@ _0806C57C:
 	lsrs r0, 16
 	cmp r0, 0x1
 	bls _0806C5E2
-	ldr r5, _0806C5B0 @ =gUnknown_03004428
+	ldr r5, _0806C5B0 @ =gPlayerParty + 2 * 0x64
 	adds r0, r5, 0
 	movs r1, 0xB
 	bl GetMonData
@@ -2968,7 +2968,7 @@ _0806C57C:
 	b _0806C64E
 	.align 2, 0
 _0806C5AC: .4byte gSprites
-_0806C5B0: .4byte gUnknown_03004428
+_0806C5B0: .4byte gPlayerParty + 2 * 0x64
 _0806C5B4:
 	adds r0, r5, 0
 	adds r0, 0x64
@@ -2999,7 +2999,7 @@ _0806C5E2:
 	.align 2, 0
 _0806C5E8: .4byte gSprites
 _0806C5EC:
-	ldr r5, _0806C600 @ =gUnknown_030044F0
+	ldr r5, _0806C600 @ =gPlayerParty + 4 * 0x64
 	adds r0, r5, 0
 	movs r1, 0xB
 	bl GetMonData
@@ -3009,7 +3009,7 @@ _0806C5EC:
 	strh r0, [r4, 0x2E]
 	b _0806C64E
 	.align 2, 0
-_0806C600: .4byte gUnknown_030044F0
+_0806C600: .4byte gPlayerParty + 4 * 0x64
 _0806C604:
 	adds r0, r5, 0
 	adds r0, 0x64

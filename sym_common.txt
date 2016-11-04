@@ -108,40 +108,13 @@ gPlayerPartyCount: @ 3004350
 	.space 0x10
 
 gPlayerParty: @ 3004360
-	.space 0x64
-
-gUnknown_030043C4: @ 30043C4
-	.space 0x64
-
-gUnknown_03004428: @ 3004428
-	.space 0x64
-
-gUnknown_0300448C: @ 300448C
-	.space 0x64
-
-gUnknown_030044F0: @ 30044F0
-	.space 0x64
-
-gUnknown_03004554: @ 3004554
-	.space 0x64
+	.space 0x258
 
 gEnemyPartyCount: @ 30045B8
 	.space 0x8
 
 gEnemyParty: @ 30045C0
-	.space 0xC8
-
-gUnknown_03004688: @ 3004688
-	.space 0x64
-
-gUnknown_030046EC: @ 30046EC
-	.space 0x64
-
-gUnknown_03004750: @ 3004750
-	.space 0x64
-
-gUnknown_030047B4: @ 30047B4
-	.space 0x64
+	.space 0x258
 
 	.include "rng.o"
 

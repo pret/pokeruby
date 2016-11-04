@@ -822,7 +822,7 @@ _08126680: .4byte gPlayerPartyCount
 _08126684: .4byte gStringVar4
 _08126688: .4byte gOtherText_PartyIsFull
 _0812668C:
-	ldr r7, _08126708 @ =gUnknown_03004554
+	ldr r7, _08126708 @ =gPlayerParty + 5 * 0x64
 	adds r0, r7, 0
 	adds r1, r5, 0
 	movs r2, 0x64
@@ -876,7 +876,7 @@ _081266F6:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08126708: .4byte gUnknown_03004554
+_08126708: .4byte gPlayerParty + 5 * 0x64
 _0812670C: .4byte gStringVar4
 _08126710: .4byte gOtherText_PokeWasSentOver
 	thumb_func_end sub_8126608
