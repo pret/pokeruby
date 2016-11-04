@@ -149,14 +149,14 @@ void task01_battle_start(u8 taskId)
     switch(data[0])
     {
         case 0:
-            if ( !FieldPoisonEffectIsRunning() ) // is poison not active?
+            if (!FieldPoisonEffectIsRunning()) // is poison not active?
             {
                 sub_811AABC(data[1]);
                 ++data[0]; // go to case 1.
             }
             break;
         case 1:
-            if ( sub_811AAE8() == 1 )
+            if (sub_811AAE8() == 1)
             {
                 SetMainCallback2(sub_800E7C4);
                 prev_quest_postbuffer_cursor_backup_reset();
@@ -177,7 +177,7 @@ void task_add_01_battle_start(u8 transition, u16 song)
 
 void CheckForSafariZoneAndProceed(void)
 {
-    if ( GetSafariZoneFlag() )
+    if (GetSafariZoneFlag())
         sub_8081AA4();
     else
         sub_8081A18();
@@ -286,7 +286,7 @@ void sub_8081BF8(void)
     ScriptContext2_Enable();
     gMain.field_8 = sub_8081CEC;
     gUnknown_020239F8 = 12288;
-    if ( gGameVersion == 2 )
+    if (gGameVersion == 2)
         task_add_01_battle_start(0xB, BGM_BATTLE34); // KYOGRE
     else
         task_add_01_battle_start(0x6, BGM_BATTLE34); // GROUDON
@@ -309,7 +309,7 @@ void sub_8081C8C(void)
     CpuFill16(0, 0x5000000, 0x1000200);
     ResetOamRange(0, 0x80);
 
-    if ( battle_exit_is_player_defeat(gUnknown_02024D26) == 1 )
+    if (battle_exit_is_player_defeat(gUnknown_02024D26) == 1)
     {
         SetMainCallback2(c2_whiteout);
     }
@@ -325,7 +325,7 @@ void sub_8081CEC(void)
     CpuFill16(0, 0x5000000, 0x1000200);
     ResetOamRange(0, 0x80);
     
-    if ( battle_exit_is_player_defeat(gUnknown_02024D26) == 1 )
+    if (battle_exit_is_player_defeat(gUnknown_02024D26) == 1)
         SetMainCallback2(c2_whiteout);
     else
         SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
@@ -339,11 +339,11 @@ s8 sub_8081D3C(void)
     PlayerGetDestCoords(&x, &y);
     tileBehavior = MapGridGetMetatileBehaviorAt(x, y);
     
-    if ( MetatileBehavior_IsTallGrass(tileBehavior) )
+    if (MetatileBehavior_IsTallGrass(tileBehavior))
         return 0;
-    if ( MetatileBehavior_IsLongGrass(tileBehavior) )
+    if (MetatileBehavior_IsLongGrass(tileBehavior))
         return 1;
-    if ( MetatileBehavior_IsSandOrDeepSand(tileBehavior) )
+    if (MetatileBehavior_IsSandOrDeepSand(tileBehavior))
         return 2;
     switch(gMapHeader.light)
     {
@@ -352,9 +352,9 @@ s8 sub_8081D3C(void)
         case 3:
             break;
         case 4:
-            if ( sub_80574C4(tileBehavior) )
+            if (sub_80574C4(tileBehavior))
                 return 8;
-            if ( MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior) )
+            if (MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior))
                 return 5;
             return 7;
         case 8:
@@ -363,24 +363,24 @@ s8 sub_8081D3C(void)
         case 5:
             return 3;
         case 6:
-            if ( MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior) )
+            if (MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior))
                 return 4;
             return 9;
     }
-    if ( sub_8057568(tileBehavior) )
+    if (sub_8057568(tileBehavior))
         return 4;
-    if ( MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior) )
+    if (MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior))
         return 5;
-    if ( sub_80574D8(tileBehavior) )
+    if (sub_80574D8(tileBehavior))
         return 6;
-    if ( TestPlayerAvatarFlags(8) )
+    if (TestPlayerAvatarFlags(8))
     {
-        if ( sub_8057450(tileBehavior) )
+        if (sub_8057450(tileBehavior))
             return 5;
-        if ( MetatileBehavior_IsBridge(tileBehavior) == 1 )
+        if (MetatileBehavior_IsBridge(tileBehavior) == 1)
             return 4;
     }
-    if ( !(gSaveBlock1.location.mapGroup == 0 && gSaveBlock1.location.mapNum == 28) && GetSav1Weather() != 8 )
+    if (!(gSaveBlock1.location.mapGroup == 0 && gSaveBlock1.location.mapNum == 28) && GetSav1Weather() != 8)
         return 9;
     else
         return 2;
@@ -400,7 +400,7 @@ s8 sub_8081E90(void)
     if(flashUsed)
         return 2;
     
-    if( !(MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior)) )
+    if(!(MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior)))
     {
         switch (gMapHeader.light)
         {
@@ -424,15 +424,15 @@ u16 GetSumOfPartyMonLevel(u8 fixCount)
     for (loopCounter = 0; loopCounter <= 5; loopCounter++)
     {
         monData = GetMonData(&gPlayerParty[loopCounter], MON_DATA_SPECIES2);
-        if ( monData != 412 && monData ) // if the pokemon in question is either NOT Ten question marks or an egg, proceed
+        if (monData != 412 && monData) // if the pokemon in question is either NOT Ten question marks or an egg, proceed
         // note that it actually considers the 26 glitch mons to be "valid".
         {
-            if ( GetMonData(&gPlayerParty[loopCounter], MON_DATA_HP))
+            if (GetMonData(&gPlayerParty[loopCounter], MON_DATA_HP))
             {
                 returnThis += GetMonData(&gPlayerParty[loopCounter], MON_DATA_LEVEL);
 
                 fixCount--;
-                if ( !fixCount ) // has it reached 0?
+                if (!fixCount) // has it reached 0?
                     break;
             }
         }
@@ -448,7 +448,7 @@ u8 GetSumOfEnemyPartyLevel(u16 trainerNum, u8 partyCount)
     u32 _partyCount = partyCount;
     struct TrainerPartyMember *party;
    
-    if ( gTrainers[trainerNum].partySize < _partyCount ) // is the actual party size smaller than the specified size?
+    if (gTrainers[trainerNum].partySize < _partyCount) // is the actual party size smaller than the specified size?
         _partyCount = gTrainers[trainerNum].partySize; // if so, set the specified size to the actual size. seems to be error correction?
    
     returnThis = 0;
@@ -483,7 +483,7 @@ u8 GetHigherOrLowerLevelTransitionForWild(void)
     u8 flashVar = sub_8081E90();
     u8 level = GetMonData(&gEnemyParty, MON_DATA_LEVEL);
    
-    if ( level < (u8)GetSumOfPartyMonLevel(1) ) // is wild mon level than the player's mon level?
+    if (level < (u8)GetSumOfPartyMonLevel(1)) // is wild mon level than the player's mon level?
         return gBattleTransitionTable_Wild[flashVar][0];
     else
         return gBattleTransitionTable_Wild[flashVar][1]; // use a white fade in instead of normal transition.
@@ -497,28 +497,28 @@ u8 sub_8082080(void)
     u8 flashVar;
     u8 level;
     
-    if ( gTrainerBattleOpponent == 1024 ) // link battle?
+    if (gTrainerBattleOpponent == 1024) // link battle?
         return 16;
         
     trainer = gTrainers;
     
-    if ( trainer[gTrainerBattleOpponent].trainerClass == 24 ) // league?
+    if (trainer[gTrainerBattleOpponent].trainerClass == 24) // league?
     {
-        if ( gTrainerBattleOpponent == 261 )
+        if (gTrainerBattleOpponent == 261)
             return 12;
-        if ( gTrainerBattleOpponent == 262 )
+        if (gTrainerBattleOpponent == 262)
             return 13;
-        if ( gTrainerBattleOpponent == 263 )
+        if (gTrainerBattleOpponent == 263)
             return 14;
-        if ( gTrainerBattleOpponent == 264 )
+        if (gTrainerBattleOpponent == 264)
             return 15;
         return 16;
     }
     
-    if ( trainer[gTrainerBattleOpponent].trainerClass == 32 ) // team leader?
+    if (trainer[gTrainerBattleOpponent].trainerClass == 32) // team leader?
         return 16;
     
-    if ( trainer[gTrainerBattleOpponent].doubleBattle == TRUE )
+    if (trainer[gTrainerBattleOpponent].doubleBattle == TRUE)
         partyCount = 2; // double battles always at least have 2 pokemon.
     else
         partyCount = 1;
@@ -526,7 +526,7 @@ u8 sub_8082080(void)
     flashVar = sub_8081E90();
     level = GetSumOfEnemyPartyLevel(gTrainerBattleOpponent, partyCount);
     
-    if ( level < (u8)GetSumOfPartyMonLevel(partyCount) ) // is wild mon level than the player's mon level?
+    if (level < (u8)GetSumOfPartyMonLevel(partyCount)) // is wild mon level than the player's mon level?
         return gBattleTransitionTable_Trainer[flashVar][0];
     else
         return gBattleTransitionTable_Trainer[flashVar][1];
@@ -536,7 +536,7 @@ s8 sub_8082138(void)
 {
     u8 monData = GetMonData(&gEnemyParty, MON_DATA_LEVEL);
     
-    if ( monData < (u8)GetSumOfPartyMonLevel(1) )
+    if (monData < (u8)GetSumOfPartyMonLevel(1))
         return 4;
     else
         return 3;
@@ -566,7 +566,7 @@ void sub_80821D8(void)
     UpdatePaletteFade();
     RunTasks();
     
-    if ( sub_811AAE8() == 1 )
+    if (sub_811AAE8() == 1)
     {
         gUnknown_020239F8 = 16;
         gMain.field_8 = sub_8082228;
@@ -679,7 +679,7 @@ void TrainerBattleLoadArgs(struct TrainerBattleSpec *specs, u8 *data)
 
 void battle_80801F0(void)
 {
-    if ( gTrainerMapObjectLocalId )
+    if (gTrainerMapObjectLocalId)
     {
         gUnknown_0202E8DE = gTrainerMapObjectLocalId;
         gSelectedMapObject = GetFieldObjectIdByLocalIdAndMap(gTrainerMapObjectLocalId, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
@@ -796,11 +796,11 @@ void sub_80825E4(void)
 
 void sub_808260C(void)
 {
-    if ( gTrainerBattleOpponent == 1024 )
+    if (gTrainerBattleOpponent == 1024)
     {
         SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music); // link battle?
     }
-    else if ( battle_exit_is_player_defeat(gUnknown_02024D26) == 1 )
+    else if (battle_exit_is_player_defeat(gUnknown_02024D26) == 1)
     {
         SetMainCallback2(c2_whiteout);
     }
@@ -813,11 +813,11 @@ void sub_808260C(void)
 
 void do_choose_name_or_words_screen(void)
 {
-    if ( gTrainerBattleOpponent == 1024 )
+    if (gTrainerBattleOpponent == 1024)
     {
         SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music); // link battle?
     }
-    else if ( battle_exit_is_player_defeat(gUnknown_02024D26) == 1 )
+    else if (battle_exit_is_player_defeat(gUnknown_02024D26) == 1)
     {
         SetMainCallback2(c2_whiteout);
     }
@@ -847,7 +847,7 @@ u32 sub_80826E8(void)
 {
     u32 *result = gTrainerBattleScriptReturnAddress;
     
-    if ( !gTrainerBattleScriptReturnAddress )
+    if (!gTrainerBattleScriptReturnAddress)
         return gUnknown_081C6C02;
     
     return result;
@@ -857,7 +857,7 @@ u32 sub_8082700(void)
 {
     u32 *result = gTrainerBattleEndScript;
     
-    if ( !gTrainerBattleEndScript )
+    if (!gTrainerBattleEndScript)
         return gUnknown_081C6C02;
     
     return result;
@@ -873,14 +873,14 @@ void sub_8082728(void) // sets the music to be played after a battle
     u16 music;
     u8 val;
     
-    if ( gTrainerBattleMode != 1 && gTrainerBattleMode != 8 )
+    if (gTrainerBattleMode != 1 && gTrainerBattleMode != 8)
     {
         val = sub_803FC58(gTrainerBattleOpponent);
-        if ( val > 13 )
+        if (val > 13)
             music = 423;
         else
         {
-            switch ( val )
+            switch (val)
             {
                 // TODO: Replace with music constants.
                 case 0:
@@ -932,7 +932,7 @@ void sub_8082728(void) // sets the music to be played after a battle
 
 u32 ReturnEmptyStringIfNull(u32 *result)
 {
-    if ( result )
+    if (result)
         return result;
     else
         return gOtherText_CancelWithTerminator;
@@ -947,7 +947,7 @@ u8 *sub_8082830(void)
 {
     u32 *var;
     
-    if ( gTrainerBattleOpponent == 1024 )
+    if (gTrainerBattleOpponent == 1024)
         var = sub_80BCCE8();
     else
         var = gTrainerDefeatSpeech;
@@ -1041,7 +1041,7 @@ s32 sub_80829E8(struct TrainerEyeTrainer *a1, u16 a2, u16 a3)
     
     for (i = 0; i <= 55; i++)
     {
-        if (a1[i].mapGroup == a2 && a1[i].mapNum == a3 )
+        if (a1[i].mapGroup == a2 && a1[i].mapNum == a3)
             return 1;
     }
     return 0;
@@ -1093,7 +1093,7 @@ void sub_8082AE4(u16 *a1, u16 a2)
 {
     s32 var = sub_80828B8(a1, a2);
     
-    if ( var != -1 )
+    if (var != -1)
         gSaveBlock1.trainerRematches[var] = 0;
 }
 
@@ -1101,7 +1101,7 @@ bool8 sub_8082B10(struct TrainerEyeTrainer *a1, u16 a2)
 {
     s32 var = sub_8082894(a1, a2);
 
-    if ( var != -1 && trainer_flag_check(a1[var].trainerNums[1]) )
+    if (var != -1 && trainer_flag_check(a1[var].trainerNums[1]))
         return TRUE;
     else
         return FALSE;
@@ -1114,7 +1114,7 @@ bool32 sub_8082B44(void)
     
     for(i = 0; i < 8; ++i)
     {
-        if ( FlagGet(gUnknown_0839B1F0[i]) == 1 && ++j > 4 )
+        if (FlagGet(gUnknown_0839B1F0[i]) == 1 && ++j > 4)
             return 1;
     }
     return 0;
@@ -1141,7 +1141,7 @@ bool32 sub_8082BA4(void)
 
 void sub_8082BD0(u16 a1, u16 a2)
 {
-    if ( sub_8082BA4() && sub_80828FC(gTrainerEyeTrainers, a1, a2) == 1 )
+    if (sub_8082BA4() && sub_80828FC(gTrainerEyeTrainers, a1, a2) == 1)
         gSaveBlock1.trainerRematchStepCounter = 0;
 }
 
@@ -1162,7 +1162,7 @@ u16 sub_8082C4C(u16 a1)
 
 s32 sub_8082C68(void)
 {
-    if ( sub_8082A18(gTrainerEyeTrainers, gTrainerBattleOpponent) )
+    if (sub_8082A18(gTrainerEyeTrainers, gTrainerBattleOpponent))
         return 1;
     else
         return sub_8082B10(gTrainerEyeTrainers, gTrainerBattleOpponent);
