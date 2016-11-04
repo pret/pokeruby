@@ -33,7 +33,7 @@ extern u8 TestPlayerAvatarFlags(u8);
 extern u8 MetatileBehavior_IsLandWildEncounter(u8);
 extern u8 sub_81344CC(void);
 extern u8 MetatileBehavior_IsWaterWildEncounter(u8);
-extern void CheckForSafariZoneAndProceed (void);
+extern void CheckForSafariZoneAndProceed(void);
 extern u8 MetatileBehavior_IsBridge(u8);
 extern void PlayerGetDestCoords(u16 *x, u16 *y);
 extern void sub_80BEA50(u16);
@@ -569,7 +569,7 @@ void RockSmashWildEncounter(void)
         else if(DoWildEncounterTest(wildPokemonInfo->encounterRate, 1) == TRUE &&
         GenerateWildMon(wildPokemonInfo, 2, 1) == 1)
         {
-            CheckForSafariZoneAndProceed ();
+            CheckForSafariZoneAndProceed();
             gScriptResult = 1;
             return;
         }
@@ -609,7 +609,7 @@ u8 SweetScentWildEncounter(void)
             //_08085374
                 GenerateWildMon(wildPokemonInfo, 0, 0);
             //_080853D2
-            CheckForSafariZoneAndProceed ();
+            CheckForSafariZoneAndProceed();
             return 1;
         }
         //_08085380
@@ -630,7 +630,7 @@ u8 SweetScentWildEncounter(void)
                 else
                 //_080853C8
                 GenerateWildMon(wildPokemonInfo, 1, 0);
-                CheckForSafariZoneAndProceed ();
+                CheckForSafariZoneAndProceed();
                 return 1;
             }
         }
@@ -667,7 +667,7 @@ void FishingWildEncounter(u8 rod)
     }
     sav12_xor_increment(12);
     sub_80BEA50(species);
-    CheckForSafariZoneAndProceed ();
+    CheckForSafariZoneAndProceed();
 }
 
 u16 GetLocalWildMon(bool8 *isWaterMon)
