@@ -31281,7 +31281,7 @@ gOtherText_CancelAndLv:: @ 842CC2A
 	.string "CANCEL$"
 	.string "LV$"
 
-gOtherText_EggNickname:: @ 842CC34
+gEggNickname:: @ 842CC34
 	.string "EGG$"
 
 gOtherText_HatchedFromEgg:: @ 842CC38
