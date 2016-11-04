@@ -156,7 +156,7 @@ void task01_battle_start(u8 taskId)
         }
         break;
     case 1:
-        if (sub_811AAE8() == 1)
+        if (sub_811AAE8() == TRUE)
         {
             SetMainCallback2(sub_800E7C4);
             prev_quest_postbuffer_cursor_backup_reset();
@@ -309,7 +309,7 @@ void sub_8081C8C(void)
     CpuFill16(0, 0x5000000, 0x1000200);
     ResetOamRange(0, 0x80);
 
-    if (battle_exit_is_player_defeat(gUnknown_02024D26) == 1)
+    if (battle_exit_is_player_defeat(gUnknown_02024D26) == TRUE)
     {
         SetMainCallback2(c2_whiteout);
     }
@@ -325,7 +325,7 @@ void sub_8081CEC(void)
     CpuFill16(0, 0x5000000, 0x1000200);
     ResetOamRange(0, 0x80);
 
-    if (battle_exit_is_player_defeat(gUnknown_02024D26) == 1)
+    if (battle_exit_is_player_defeat(gUnknown_02024D26) == TRUE)
         SetMainCallback2(c2_whiteout);
     else
         SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
@@ -377,7 +377,7 @@ s8 sub_8081D3C(void)
     {
         if (sub_8057450(tileBehavior))
             return 5;
-        if (MetatileBehavior_IsBridge(tileBehavior) == 1)
+        if (MetatileBehavior_IsBridge(tileBehavior) == TRUE)
             return 4;
     }
     if (!(gSaveBlock1.location.mapGroup == 0 && gSaveBlock1.location.mapNum == 28) && GetSav1Weather() != 8)
@@ -566,7 +566,7 @@ void sub_80821D8(void)
     UpdatePaletteFade();
     RunTasks();
 
-    if (sub_811AAE8() == 1)
+    if (sub_811AAE8() == TRUE)
     {
         gUnknown_020239F8 = 16;
         gMain.field_8 = sub_8082228;
@@ -609,19 +609,19 @@ bool32 battle_exit_is_player_defeat(u32 a1)
     a1--;
 
     if (a1 > 6)
-        return 0;
+        return FALSE;
 
     switch(a1)
     {
     case 1:
     case 2:
-        return 1;
+        return TRUE;
     case 0:
     case 3:
     case 4:
     case 5:
     case 6:
-        return 0;
+        return FALSE;
     }
 }
 
@@ -800,7 +800,7 @@ void sub_808260C(void)
     {
         SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music); // link battle?
     }
-    else if (battle_exit_is_player_defeat(gUnknown_02024D26) == 1)
+    else if (battle_exit_is_player_defeat(gUnknown_02024D26) == TRUE)
     {
         SetMainCallback2(c2_whiteout);
     }
@@ -817,7 +817,7 @@ void do_choose_name_or_words_screen(void)
     {
         SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music); // link battle?
     }
-    else if (battle_exit_is_player_defeat(gUnknown_02024D26) == 1)
+    else if (battle_exit_is_player_defeat(gUnknown_02024D26) == TRUE)
     {
         SetMainCallback2(c2_whiteout);
     }
@@ -989,10 +989,10 @@ s32 sub_80828B8(struct TrainerEyeTrainer *a, u16 b)
    return -1;
 }
 
-u32 sub_80828FC(struct TrainerEyeTrainer *a, u16 b, u16 c)
+bool32 sub_80828FC(struct TrainerEyeTrainer *a, u16 b, u16 c)
 {
-   s32 i;
-   s32 ret = 0;
+   int i;
+   bool32 ret = FALSE;
 
    for (i = 0; i < 56; i++)
    {
@@ -1000,20 +1000,22 @@ u32 sub_80828FC(struct TrainerEyeTrainer *a, u16 b, u16 c)
        {
            if (gSaveBlock1.trainerRematches[i] != 0)
            {
-               ret = 1;
+               ret = TRUE;
                continue;
            }
            if (trainer_flag_check(a[i].trainerNums[0]) == TRUE && (Random() % 100) <= 30)
            {
-               ret = 1;
+               int j = 1;
 
-               while(ret <= 4 && a[i].trainerNums[ret] != 0 && trainer_flag_check(a[i].trainerNums[ret]))
-                   ret++;
-               gSaveBlock1.trainerRematches[i] = ret;
-               ret = 1;
+               while (j < 5 && a[i].trainerNums[j] != 0 && trainer_flag_check(a[i].trainerNums[j]))
+                   j++;
+               gSaveBlock1.trainerRematches[i] = j;
+
+               ret = TRUE;
            }
        }
    }
+
    return ret;
 }
 
@@ -1140,7 +1142,7 @@ bool32 sub_8082BA4(void)
 
 void sub_8082BD0(u16 a1, u16 a2)
 {
-    if (sub_8082BA4() && sub_80828FC(gTrainerEyeTrainers, a1, a2) == 1)
+    if (sub_8082BA4() && sub_80828FC(gTrainerEyeTrainers, a1, a2) == TRUE)
         gSaveBlock1.trainerRematchStepCounter = 0;
 }
 
