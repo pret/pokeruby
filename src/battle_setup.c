@@ -186,7 +186,7 @@ void CheckForSafariZoneAndProceed(void)
 void sub_8081A18(void)
 {
     u8 transition;
-    
+
     ScriptContext2_Enable();
     player_bitmagic();
     sub_80597F4();
@@ -201,7 +201,7 @@ void sub_8081A18(void)
 void sub_8081A5C(void)
 {
     u8 transition;
-    
+
     ScriptContext2_Enable();
     player_bitmagic();
     sub_80597F4();
@@ -216,7 +216,7 @@ void sub_8081A5C(void)
 void sub_8081AA4(void)
 {
     u8 transition;
-    
+
     ScriptContext2_Enable();
     player_bitmagic();
     sub_80597F4();
@@ -229,7 +229,7 @@ void sub_8081AA4(void)
 void task_add_01_battle_start_with_music_and_stats(void)
 {
     u8 transition;
-    
+
     transition = sub_8082080();
     task_add_01_battle_start(transition, 0);
     sav12_xor_increment(7);
@@ -248,7 +248,7 @@ void sub_8081AFC(void)
 void sub_8081B3C(void)
 {
     u8 transition;
-    
+
     ScriptContext2_Enable();
     gMain.field_8 = sub_8081CEC;
     gUnknown_020239F8 = 0;
@@ -324,7 +324,7 @@ void sub_8081CEC(void)
 {
     CpuFill16(0, 0x5000000, 0x1000200);
     ResetOamRange(0, 0x80);
-    
+
     if (battle_exit_is_player_defeat(gUnknown_02024D26) == 1)
         SetMainCallback2(c2_whiteout);
     else
@@ -335,10 +335,10 @@ s8 sub_8081D3C(void)
 {
     u16 tileBehavior;
     s16 x, y;
-    
+
     PlayerGetDestCoords(&x, &y);
     tileBehavior = MapGridGetMetatileBehaviorAt(x, y);
-    
+
     if (MetatileBehavior_IsTallGrass(tileBehavior))
         return 0;
     if (MetatileBehavior_IsLongGrass(tileBehavior))
@@ -391,15 +391,15 @@ s8 sub_8081E90(void)
     u8 flashUsed;
     u16 tileBehavior;
     s16 x, y;
-    
+
     PlayerGetDestCoords(&x, &y);
     tileBehavior = MapGridGetMetatileBehaviorAt(x, y);
-    
+
     flashUsed = sav1_get_flash_used_on_map();
-    
+
     if(flashUsed)
         return 2;
-    
+
     if(!(MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior)))
     {
         switch (gMapHeader.light)
@@ -420,7 +420,7 @@ u16 GetSumOfPartyMonLevel(u8 fixCount)
     u32 monData;
     u8 returnThis = 0;
     int loopCounter;
-    
+
     for (loopCounter = 0; loopCounter <= 5; loopCounter++)
     {
         monData = GetMonData(&gPlayerParty[loopCounter], MON_DATA_SPECIES2);
@@ -447,10 +447,10 @@ u8 GetSumOfEnemyPartyLevel(u16 trainerNum, u8 partyCount)
     u8 returnThis; // v4
     u32 _partyCount = partyCount;
     struct TrainerPartyMember *party;
-   
+
     if (gTrainers[trainerNum].partySize < _partyCount) // is the actual party size smaller than the specified size?
         _partyCount = gTrainers[trainerNum].partySize; // if so, set the specified size to the actual size. seems to be error correction?
-   
+
     returnThis = 0;
     switch (gTrainers[trainerNum].partyFlags)
     {
@@ -482,7 +482,7 @@ u8 GetHigherOrLowerLevelTransitionForWild(void)
 {
     u8 flashVar = sub_8081E90();
     u8 level = GetMonData(&gEnemyParty, MON_DATA_LEVEL);
-   
+
     if (level < (u8)GetSumOfPartyMonLevel(1)) // is wild mon level than the player's mon level?
         return gBattleTransitionTable_Wild[flashVar][0];
     else
@@ -496,12 +496,12 @@ u8 sub_8082080(void)
     u8 partyCount;
     u8 flashVar;
     u8 level;
-    
+
     if (gTrainerBattleOpponent == 1024) // link battle?
         return 16;
-        
+
     trainer = gTrainers;
-    
+
     if (trainer[gTrainerBattleOpponent].trainerClass == 24) // league?
     {
         if (gTrainerBattleOpponent == 261)
@@ -514,18 +514,18 @@ u8 sub_8082080(void)
             return 15;
         return 16;
     }
-    
+
     if (trainer[gTrainerBattleOpponent].trainerClass == 32) // team leader?
         return 16;
-    
+
     if (trainer[gTrainerBattleOpponent].doubleBattle == TRUE)
         partyCount = 2; // double battles always at least have 2 pokemon.
     else
         partyCount = 1;
-    
+
     flashVar = sub_8081E90();
     level = GetSumOfEnemyPartyLevel(gTrainerBattleOpponent, partyCount);
-    
+
     if (level < (u8)GetSumOfPartyMonLevel(partyCount)) // is wild mon level than the player's mon level?
         return gBattleTransitionTable_Trainer[flashVar][0];
     else
@@ -535,7 +535,7 @@ u8 sub_8082080(void)
 s8 sub_8082138(void)
 {
     u8 monData = GetMonData(&gEnemyParty, MON_DATA_LEVEL);
-    
+
     if (monData < (u8)GetSumOfPartyMonLevel(1))
         return 4;
     else
@@ -551,7 +551,7 @@ void sub_8082168(void)
 void sub_8082188(void)
 {
     u16 starterPoke;
-    
+
     *GetVarPointer(0x4023) = gScriptResult;
     starterPoke = GetStarterPokemon(gScriptResult);
     ScriptGiveMon(starterPoke, 5, 0, 0, 0, 0);
@@ -565,7 +565,7 @@ void sub_80821D8(void)
 {
     UpdatePaletteFade();
     RunTasks();
-    
+
     if (sub_811AAE8() == 1)
     {
         gUnknown_020239F8 = 16;
@@ -628,7 +628,7 @@ bool32 battle_exit_is_player_defeat(u32 a1)
 u32 sub_80822BC(void)
 {
     u32 *pointer;
-    
+
     gTrainerBattleMode = 0;
     gTrainerBattleOpponent = 0;
     gTrainerMapObjectLocalId = 0;
@@ -639,7 +639,7 @@ u32 sub_80822BC(void)
     gTrainerBattleScriptReturnAddress = 0;
     pointer = &gTrainerBattleEndScript;
     gTrainerBattleEndScript = 0;
-    return pointer;  
+    return pointer;
 }
 
 void TrainerBattleLoadArgs(struct TrainerBattleSpec *specs, u8 *data)
@@ -690,7 +690,7 @@ u8 *TrainerBattleConfigure(u8 *a1)
 {
     sub_80822BC();
     gTrainerBattleMode = TrainerBattleLoadArg8(a1);
-    
+
     switch (gTrainerBattleMode)
     {
     case 3:
@@ -739,7 +739,7 @@ void TrainerWantsBattle(u8 ptr, int a2)
 u8 GetTrainerFlagFromScriptPointer(int a1)
 {
     u32 localFlag;
- 
+
     localFlag = TrainerBattleLoadArg16(a1 + 2);
     return FlagGet(localFlag + 0x500);
 }
@@ -747,7 +747,7 @@ u8 GetTrainerFlagFromScriptPointer(int a1)
 void sub_8082524(void)
 {
     struct MapObject *mapObject = &gMapObjects[gSelectedMapObject];
- 
+
     npc_set_running_behaviour_etc(mapObject, npc_running_behaviour_by_direction(mapObject->mapobj_unk_18));
 }
 
@@ -846,20 +846,20 @@ void sub_80826D8(void)
 u32 sub_80826E8(void)
 {
     u32 *result = gTrainerBattleScriptReturnAddress;
-    
+
     if (!gTrainerBattleScriptReturnAddress)
         return gUnknown_081C6C02;
-    
+
     return result;
 }
 
 u32 sub_8082700(void)
 {
     u32 *result = gTrainerBattleEndScript;
-    
+
     if (!gTrainerBattleEndScript)
         return gUnknown_081C6C02;
-    
+
     return result;
 }
 
@@ -940,12 +940,12 @@ u32 sub_808281C(void)
 u8 *sub_8082830(void)
 {
     u32 *var;
-    
+
     if (gTrainerBattleOpponent == 1024)
         var = sub_80BCCE8();
     else
         var = gTrainerDefeatSpeech;
-    
+
     StringExpandPlaceholders(gStringVar4, ReturnEmptyStringIfNull(var));
     return gStringVar4;
 }
@@ -963,7 +963,7 @@ u32 sub_8082880(void)
 s32 sub_8082894(u16 *ptr, u16 var)
 {
     s32 i;
-    
+
     for(i = 0; i <= 55; i++)
     {
         if(ptr[i * 8] == var)
@@ -975,11 +975,11 @@ s32 sub_8082894(u16 *ptr, u16 var)
 s32 sub_80828B8(struct TrainerEyeTrainer *a, u16 b)
 {
    s32 i;
-   
+
    for(i = 0; i < 56; i++)
    {
        s32 j;
-       
+
        for(j = 0; j < 5 && a[i].trainerNums[j] != 0; j++)
        {
            if(a[i].trainerNums[j] == b)
@@ -993,7 +993,7 @@ u32 sub_80828FC(struct TrainerEyeTrainer *a, u16 b, u16 c)
 {
    s32 i;
    s32 ret = 0;
-   
+
    for (i = 0; i < 56; i++)
    {
        if (a[i].mapGroup == b && a[i].mapNum == c)
@@ -1003,10 +1003,10 @@ u32 sub_80828FC(struct TrainerEyeTrainer *a, u16 b, u16 c)
                ret = 1;
                continue;
            }
-           if (trainer_flag_check(a[i].trainerNums[0]) == TRUE && (Random() % 100) <= 0x1E)
+           if (trainer_flag_check(a[i].trainerNums[0]) == TRUE && (Random() % 100) <= 30)
            {
                ret = 1;
-               
+
                while(ret <= 4 && a[i].trainerNums[ret] != 0 && trainer_flag_check(a[i].trainerNums[ret]))
                    ret++;
                gSaveBlock1.trainerRematches[i] = ret;
@@ -1020,8 +1020,8 @@ u32 sub_80828FC(struct TrainerEyeTrainer *a, u16 b, u16 c)
 s32 sub_80829A8(struct TrainerEyeTrainer *a1, u16 a2, u16 a3)
 {
    s32 i;
-   
-   for (i = 0; i <= 55; i++)
+
+   for (i = 0; i < 56; i++)
    {
        if (a1[i].mapGroup == a2 && a1[i].mapNum == a3 && gSaveBlock1.trainerRematches[i])
            return 1;
@@ -1032,8 +1032,8 @@ s32 sub_80829A8(struct TrainerEyeTrainer *a1, u16 a2, u16 a3)
 s32 sub_80829E8(struct TrainerEyeTrainer *a1, u16 a2, u16 a3)
 {
     s32 i;
-    
-    for (i = 0; i <= 55; i++)
+
+    for (i = 0; i < 56; i++)
     {
         if (a1[i].mapGroup == a2 && a1[i].mapNum == a3)
             return 1;
@@ -1044,8 +1044,8 @@ s32 sub_80829E8(struct TrainerEyeTrainer *a1, u16 a2, u16 a3)
 bool8 sub_8082A18(u16 *a1, u16 a2)
 {
     s32 v2 = sub_8082894(a1, a2);
-    
-    if (v2 != -1 && v2 <= 99 && gSaveBlock1.trainerRematches[v2])
+
+    if (v2 != -1 && v2 < 100 && gSaveBlock1.trainerRematches[v2])
         return TRUE;
     else
         return FALSE;
@@ -1054,8 +1054,8 @@ bool8 sub_8082A18(u16 *a1, u16 a2)
 bool8 sub_8082A54(u16 *a1, u16 a2)
 {
     s32 v2 = sub_80828B8(a1, a2);
-    
-    if (v2 != -1 && v2 <= 99 && gSaveBlock1.trainerRematches[v2])
+
+    if (v2 != -1 && v2 < 100 && gSaveBlock1.trainerRematches[v2])
         return TRUE;
     else
         return FALSE;
@@ -1086,7 +1086,7 @@ u16 sub_8082A90(struct TrainerEyeTrainer *trainers, u16 trainerNum)
 void sub_8082AE4(u16 *a1, u16 a2)
 {
     s32 var = sub_80828B8(a1, a2);
-    
+
     if (var != -1)
         gSaveBlock1.trainerRematches[var] = 0;
 }
@@ -1132,7 +1132,7 @@ void sub_8082B78(void)
 
 bool32 sub_8082BA4(void)
 {
-    if (sub_8082B44() && gSaveBlock1.trainerRematchStepCounter > 0xFE)
+    if (sub_8082B44() && gSaveBlock1.trainerRematchStepCounter >= 255)
         return TRUE;
     else
         return FALSE;
