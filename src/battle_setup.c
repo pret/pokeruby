@@ -4,12 +4,17 @@
 #include "pokemon.h"
 #include "songs.h"
 #include "task.h"
+#include "fieldmap.h"
+#include "string_util.h"
 
 extern void prev_quest_postbuffer_cursor_backup_reset(void);
 extern void overworld_poison_timer_set(void);
 extern void current_map_music_set__default_for_battle(u16);
 extern void c2_exit_to_overworld_1_continue_scripts_restart_music(void);
 extern void c2_exit_to_overworld_2_switch(void);
+extern void npc_set_running_behaviour_etc(struct MapObject *, u8);
+extern u8 FlagGet(u16);
+extern u8 FlagSet(u16);
 extern void c2_whiteout(void);
 extern void sub_800E7C4(void);
 extern void sub_8081AA4(void);
@@ -20,10 +25,17 @@ extern void sub_8081CEC(void);
 extern void sub_8080E44(void);
 extern void sub_80821D8(void);
 extern void sub_8082228(void);
+extern void sub_808260C(void);
+extern void sub_8082CB8(void);
+extern u8 * sub_80BCCE8(void);
+extern void ShowFieldMessage();
 extern void CB2_ChooseStarter(void);
 extern void sub_811AABC(u8);
 extern u8 sub_811AAE8(void);
 extern u32 GetMonData(struct Pokemon *mon, s32 field);
+extern u8 GetFieldObjectIdByLocalIdAndMap(u8, u8, u8);
+extern u32 sub_8082880(void);
+extern u8 sub_803FC58(u16);
 
 extern u16 gScriptResult;
 
@@ -67,6 +79,7 @@ extern bool8 sub_8057568(char);
 extern u8 TestPlayerAvatarFlags(u8);
 extern u8 sub_8057450(u8);
 extern u8 GetSav1Weather(void);
+extern void PlayNewMapMusic(u16);
 
 extern u8 ScriptGiveMon(u16, u8, u16, u32, u32, u8);
 
@@ -87,8 +100,30 @@ extern u32 gTrainerCannotBattleSpeech;
 extern u32 gTrainerBattleScriptReturnAddress;
 extern u32 gTrainerBattleEndScript;
 
+extern u32 gOtherText_CancelWithTerminator[];
+
 extern u16 gUnknown_020239F8;
+extern u16 gUnknown_0202E8DE;
 extern u8 gUnknown_02024D26;
+
+extern struct MapObject gMapObjects[];
+
+extern u8 gUnknown_0819F818[];
+extern u8 gUnknown_0819F840[];
+extern u8 gUnknown_0819F878[];
+extern u8 gUnknown_0819F887[];
+extern u8 gUnknown_0819F8AE[];
+
+extern u8 gUnknown_0819F80B[];
+extern u8 gUnknown_081C6C02[];
+
+extern u8 gTrainerBattleSpecs_0[];
+extern u8 gTrainerBattleSpecs_1[];
+extern u8 gTrainerBattleSpecs_2[];
+extern u8 gTrainerBattleSpecs_3[];
+extern u8 gTrainerBattleSpecs_4[];
+
+extern u8 gStringVar4[];
 
 extern u8 gBattleTransitionTable_Wild[][2];
 extern u8 gBattleTransitionTable_Trainer[][2];
@@ -630,75 +665,307 @@ void TrainerBattleLoadArgs(struct TrainerBattleSpec *specs, u8 *data)
     }
 }
 
+void battle_80801F0(void)
+{
+	if ( gTrainerMapObjectLocalId )
+	{
+		gUnknown_0202E8DE = gTrainerMapObjectLocalId;
+		gSelectedMapObject = GetFieldObjectIdByLocalIdAndMap(gTrainerMapObjectLocalId, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
+	}
+}
+
+u8 *TrainerBattleConfigure(u8 *a1)
+{
+    sub_80822BC();
+    gTrainerBattleMode = TrainerBattleLoadArg8(a1);
+    
+    switch (gTrainerBattleMode)
+    {
+    case 3:
+        TrainerBattleLoadArgs(gTrainerBattleSpecs_3, a1);
+        return gUnknown_0819F878;
+    case 4:
+        TrainerBattleLoadArgs(gTrainerBattleSpecs_2, a1);
+        battle_80801F0();
+        return gUnknown_0819F840;
+    case 1:
+    case 2:
+        TrainerBattleLoadArgs(gTrainerBattleSpecs_1, a1);
+        battle_80801F0();
+        return gUnknown_0819F818;
+    case 6:
+    case 8:
+        TrainerBattleLoadArgs(gTrainerBattleSpecs_4, a1);
+        battle_80801F0();
+        return gUnknown_0819F840;
+    case 7:
+        TrainerBattleLoadArgs(gTrainerBattleSpecs_2, a1);
+        battle_80801F0();
+        gTrainerBattleOpponent = sub_8082C4C(gTrainerBattleOpponent);
+        return gUnknown_0819F8AE;
+    case 5:
+        TrainerBattleLoadArgs(gTrainerBattleSpecs_0, a1);
+        battle_80801F0();
+        gTrainerBattleOpponent = sub_8082C4C(gTrainerBattleOpponent);
+        return gUnknown_0819F887;
+    default:
+        TrainerBattleLoadArgs(gTrainerBattleSpecs_0, a1);
+        battle_80801F0();
+        return gUnknown_0819F818;
+    }
+}
+
+void TrainerWantsBattle(u8 ptr, int a2)
+{
+	gSelectedMapObject = ptr;
+	gUnknown_0202E8DE = gMapObjects[ptr].localId;
+	TrainerBattleConfigure(a2 + 1);
+	ScriptContext1_SetupScript(gUnknown_0819F80B);
+	ScriptContext2_Enable();
+}
+
+u8 GetTrainerFlagFromScriptPointer(int a1)
+{
+	u32 localFlag;
+	
+	localFlag = TrainerBattleLoadArg16(a1 + 2);
+	return FlagGet(((localFlag << 16) + 0x5000000) >> 16);
+}
+
+void sub_8082524(void)
+{
+    struct MapObject *mapObject = &gMapObjects[gSelectedMapObject];
+ 
+    npc_set_running_behaviour_etc(mapObject, npc_running_behaviour_by_direction(mapObject->mapobj_unk_18));
+}
+
+u8 sub_8082558(void)
+{
+	return gTrainerBattleMode;
+}
+
+u8 sub_8082564(void)
+{
+	return FlagGet(trainerflag_opponent());
+}
+
+void sub_808257C(void)
+{
+	FlagSet(trainerflag_opponent());
+}
+
+void unref_sub_8082590(void)
+{
+	FlagSet(trainerflag_opponent()); // duplicate function
+}
+
+u32 trainer_flag_check(u32 flag)
+{
+	return FlagGet(((flag << 16) + 0x5000000) >> 16);
+}
+
+void trainer_flag_set(u32 flag)
+{
+	FlagSet(((flag << 16) + 0x5000000) >> 16);
+}
+
+void trainer_flag_clear(u32 flag)
+{
+	FlagReset(((flag << 16) + 0x5000000) >> 16);
+}
+
+void sub_80825E4(void)
+{
+	gUnknown_020239F8 = 8;
+	gMain.field_8 = sub_808260C;
+	task_add_01_battle_start_with_music_and_stats();
+	ScriptContext1_Stop();
+}
+
+void sub_808260C(void)
+{
+	if ( gTrainerBattleOpponent == 1024 )
+	{
+		SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music); // link battle?
+	}
+	else if ( battle_exit_is_player_defeat(gUnknown_02024D26) == 1 )
+	{
+		SetMainCallback2(c2_whiteout);
+	}
+	else
+	{
+		SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
+		sub_808257C();
+	}
+}
+
+void do_choose_name_or_words_screen(void)
+{
+	if ( gTrainerBattleOpponent == 1024 )
+	{
+		SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music); // link battle?
+	}
+	else if ( battle_exit_is_player_defeat(gUnknown_02024D26) == 1 )
+	{
+		SetMainCallback2(c2_whiteout);
+	}
+	else
+	{
+		SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
+		sub_808257C();
+		sub_8082CB8();
+	}
+}
+
+void sub_80826B0(void)
+{
+	gUnknown_020239F8 = 8;
+	gMain.field_8 = do_choose_name_or_words_screen;
+	task_add_01_battle_start_with_music_and_stats();
+	ScriptContext1_Stop();
+}
+
+void sub_80826D8(void)
+{
+	sub_808281C();
+	ShowFieldMessage();
+}
+
+u32 sub_80826E8(void)
+{
+	u32 *result = gTrainerBattleScriptReturnAddress;
+	
+	if ( !gTrainerBattleScriptReturnAddress )
+		return gUnknown_081C6C02;
+	
+	return result;
+}
+
+u32 sub_8082700(void)
+{
+	u32 *result = gTrainerBattleEndScript;
+	
+	if ( !gTrainerBattleEndScript )
+		return gUnknown_081C6C02;
+	
+	return result;
+}
+
+void sub_8082718()
+{
+	ShowFieldMessage(sub_8082880());
+}
+
+void sub_8082728(void) // sets the music to be played after a battle
+{
+	u16 music;
+	u8 val;
+	
+	if ( gTrainerBattleMode != 1 && gTrainerBattleMode != 8 )
+	{
+		val = sub_803FC58(gTrainerBattleOpponent);
+		if ( val > 13 )
+			music = 423;
+		else
+		{
+			switch ( val )
+			{
+				// TODO: Replace with music constants.
+				case 0:
+					music = 380;
+					break;
+				case 1:
+					music = 407;
+					break;
+				case 2:
+					music = 379;
+					break;
+				case 4:
+					music = 416;
+					break;
+				case 5:
+					music = 417;
+					break;
+				case 6:
+					music = 419;
+					break;
+				case 7:
+					music = 441;
+					break;
+				case 8:
+					music = 385;
+					break;
+				case 9:
+					music = 449;
+					break;
+				case 10:
+					music = 450;
+					break;
+				case 11:
+					music = 451;
+					break;
+				case 12:
+					music = 453;
+					break;
+				case 13:
+					music = 397;
+					break;
+				default:
+					music = 423;
+			}
+		}
+		PlayNewMapMusic(music);
+	}
+}
+
+u32 ReturnEmptyStringIfNull(u32 *result)
+{
+	if ( result )
+		return result;
+	else
+		return gOtherText_CancelWithTerminator;
+}
+
+u32 sub_808281C(void)
+{
+	return ReturnEmptyStringIfNull(gTrainerIntroSpeech);
+}
+
+u8 *sub_8082830(void)
+{
+	u32 *var;
+	
+	if ( gTrainerBattleOpponent == 1024 )
+		var = sub_80BCCE8();
+	else
+		var = gTrainerDefeatSpeech;
+	
+	StringExpandPlaceholders(gStringVar4, ReturnEmptyStringIfNull(var));
+	return gStringVar4;
+}
+
+u32 unref_sub_808286C(void)
+{
+	return ReturnEmptyStringIfNull(gTrainerVictorySpeech);
+}
+
+u32 sub_8082880(void)
+{
+	return ReturnEmptyStringIfNull(gTrainerCannotBattleSpeech);
+}
+
+s32 sub_8082894(u16 *ptr, u16 var)
+{
+	s32 i;
+	
+	for(i = 0; i <= 55; i++)
+	{
+		if(ptr[i * 8] == var)
+			return i;
+	}
+	return -1;
+}
+
 /*
-	thumb_func_start TrainerBattleLoadArgs
-TrainerBattleLoadArgs: @ 808230C
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	adds r5, r1, 0
-_08082312:
-	ldrb r0, [r4, 0x4]
-	cmp r0, 0x6
-	bhi _08082384
-	lsls r0, 2
-	ldr r1, _08082324 @ =_08082328
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.align 2, 0
-_08082324: .4byte _08082328
-	.align 2, 0
-_08082328:
-	.4byte _08082344
-	.4byte _08082352
-	.4byte _08082360
-	.4byte _0808236E
-	.4byte _08082376
-	.4byte _0808237E
-	.4byte _08082388
-_08082344:
-	adds r0, r5, 0
-	bl TrainerBattleLoadArg8
-	ldr r1, [r4]
-	strb r0, [r1]
-	adds r5, 0x1
-	b _08082384
-_08082352:
-	adds r0, r5, 0
-	bl TrainerBattleLoadArg16
-	ldr r1, [r4]
-	strh r0, [r1]
-	adds r5, 0x2
-	b _08082384
-_08082360:
-	adds r0, r5, 0
-	bl TrainerBattleLoadArg32
-	ldr r1, [r4]
-	str r0, [r1]
-	adds r5, 0x4
-	b _08082384
-_0808236E:
-	ldr r1, [r4]
-	movs r0, 0
-	strb r0, [r1]
-	b _08082384
-_08082376:
-	ldr r1, [r4]
-	movs r0, 0
-	strh r0, [r1]
-	b _08082384
-_0808237E:
-	ldr r1, [r4]
-	movs r0, 0
-	str r0, [r1]
-_08082384:
-	adds r4, 0x8
-	b _08082312
-_08082388:
-	ldr r0, [r4]
-	str r5, [r0]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end TrainerBattleLoadArgs
+
 */
