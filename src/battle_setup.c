@@ -116,7 +116,7 @@ extern u32 gOtherText_CancelWithTerminator[];
 extern u16 gUnknown_020239F8;
 extern u16 gUnknown_0202E8DE;
 extern u8 gUnknown_02024D26;
-extern u16 gUnknown_0839B1F0[];
+extern u16 gBadgeFlags[];
 
 extern struct MapObject gMapObjects[];
 
@@ -1109,15 +1109,20 @@ bool8 sub_8082B10(struct TrainerEyeTrainer *a1, u16 a2)
 
 bool32 sub_8082B44(void)
 {
-    int j = 0;
-    u32 i = 0;
-    
-    for(i = 0; i < 8; ++i)
+    int badgeCount = 0;
+    u32 i;
+
+    for(i = 0; i < 8; i++)
     {
-        if (FlagGet(gUnknown_0839B1F0[i]) == 1 && ++j > 4)
-            return 1;
+        if (FlagGet(gBadgeFlags[i]) == TRUE)
+        {
+            badgeCount++;
+            if (badgeCount >= 5)
+                return TRUE;
+        }
     }
-    return 0;
+
+    return FALSE;
 }
 
 void sub_8082B78(void)
