@@ -617,7 +617,7 @@ gUnknown_0202FFA9: @ 202FFA9
 gUnknown_0202FFAA: @ 202FFAA
 	.space 0xA
 
-gUnknown_0202FFB4: @ 202FFB4
+gPokedexView: @ 202FFB4
 	.space 0x4
 
 gUnknown_0202FFB8: @ 202FFB8
