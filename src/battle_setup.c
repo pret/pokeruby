@@ -13,6 +13,9 @@
 #include "field_message_box.h"
 #include "trainer.h"
 
+#define NUM_TRAINER_EYE_TRAINERS 56
+#define TRAINER_REMATCH_STEPS 255
+
 extern void prev_quest_postbuffer_cursor_backup_reset(void);
 extern void overworld_poison_timer_set(void);
 extern void current_map_music_set__default_for_battle(u16);
@@ -43,7 +46,7 @@ extern bool32 GetSafariZoneFlag(void);
 extern void player_bitmagic(void);
 
 u8 GetWildBattleTransition(void);
-u8 sub_8082080(void);
+u8 GetTrainerBattleTransition(void);
 bool32 battle_exit_is_player_defeat(u32 a1);
 u8 *sub_808281C(void);
 u16 sub_8082C4C(u16 a1);
@@ -185,7 +188,7 @@ void task01_battle_start(u8 taskId)
         if (!FieldPoisonEffectIsRunning()) // is poison not active?
         {
             sub_811AABC(data[1]);
-            ++data[0]; // go to case 1.
+            data[0]++; // go to case 1.
         }
         break;
     case 1:
@@ -218,53 +221,41 @@ void CheckForSafariZoneAndProceed(void)
 
 void sub_8081A18(void)
 {
-    u8 transition;
-
     ScriptContext2_Enable();
     player_bitmagic();
     sub_80597F4();
     gMain.field_8 = sub_8081C8C;
     gUnknown_020239F8 = 0;
-    transition = GetWildBattleTransition();
-    task_add_01_battle_start(transition, 0);
+    task_add_01_battle_start(GetWildBattleTransition(), 0);
     sav12_xor_increment(7);
     sav12_xor_increment(8);
 }
 
 void sub_8081A5C(void)
 {
-    u8 transition;
-
     ScriptContext2_Enable();
     player_bitmagic();
     sub_80597F4();
     gMain.field_8 = sub_8081C8C;
     gUnknown_020239F8 = 1024;
-    transition = GetWildBattleTransition();
-    task_add_01_battle_start(transition, 0);
+    task_add_01_battle_start(GetWildBattleTransition(), 0);
     sav12_xor_increment(7);
     sav12_xor_increment(8);
 }
 
 void sub_8081AA4(void)
 {
-    u8 transition;
-
     ScriptContext2_Enable();
     player_bitmagic();
     sub_80597F4();
     gMain.field_8 = sub_80C824C;
     gUnknown_020239F8 = 128;
-    transition = GetWildBattleTransition();
-    task_add_01_battle_start(transition, 0);
+    task_add_01_battle_start(GetWildBattleTransition(), 0);
 }
 
 void task_add_01_battle_start_with_music_and_stats(void)
 {
-    u8 transition;
-
-    transition = sub_8082080();
-    task_add_01_battle_start(transition, 0);
+    task_add_01_battle_start(GetTrainerBattleTransition(), 0);
     sav12_xor_increment(7);
     sav12_xor_increment(9);
 }
@@ -280,26 +271,20 @@ void sub_8081AFC(void)
 
 void sub_8081B3C(void)
 {
-    u8 transition;
-
     ScriptContext2_Enable();
     gMain.field_8 = sub_8081CEC;
     gUnknown_020239F8 = 0;
-    transition = GetWildBattleTransition();
-    task_add_01_battle_start(transition, 0);
+    task_add_01_battle_start(GetWildBattleTransition(), 0);
     sav12_xor_increment(7);
     sav12_xor_increment(8);
 }
 
 void sub_8081B78(void)
 {
-    u8 transition;
-
     ScriptContext2_Enable();
     gMain.field_8 = sub_8081CEC;
     gUnknown_020239F8 = 0x2000;
-    transition = GetWildBattleTransition();
-    task_add_01_battle_start(transition, 0);
+    task_add_01_battle_start(GetWildBattleTransition(), 0);
     sav12_xor_increment(7);
     sav12_xor_increment(8);
 }
@@ -430,10 +415,10 @@ s8 sub_8081E90(void)
 
     flashUsed = sav1_get_flash_used_on_map();
 
-    if(flashUsed)
+    if (flashUsed)
         return 2;
 
-    if(!(MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior)))
+    if (!(MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior)))
     {
         switch (gMapHeader.light)
         {
@@ -489,22 +474,22 @@ u8 GetSumOfEnemyPartyLevel(u16 trainerNum, u8 numMons)
     {
     case 0:
         party = gTrainers[trainerNum].party;
-        for(i = 0; i < count; i++)
+        for (i = 0; i < count; i++)
             sum += ((struct TrainerPartyMember0 *)party)[i].level;
         break;
     case 1:
         party = gTrainers[trainerNum].party;
-        for(i = 0; i < count; i++)
+        for (i = 0; i < count; i++)
             sum += ((struct TrainerPartyMember1 *)party)[i].level;
         break;
     case 2:
         party = gTrainers[trainerNum].party;
-        for(i = 0; i < count; i++)
+        for (i = 0; i < count; i++)
             sum += ((struct TrainerPartyMember2 *)party)[i].level;
         break;
     case 3:
         party = gTrainers[trainerNum].party;
-        for(i = 0; i < count; i++)
+        for (i = 0; i < count; i++)
             sum += ((struct TrainerPartyMember3 *)party)[i].level;
         break;
     }
@@ -523,7 +508,7 @@ u8 GetWildBattleTransition(void)
         return gBattleTransitionTable_Wild[flashVar][1]; // use a white fade in instead of normal transition.
 }
 
-u8 sub_8082080(void)
+u8 GetTrainerBattleTransition(void)
 {
     struct Trainer *trainer;
     u8 trainerClass;
@@ -566,7 +551,7 @@ u8 sub_8082080(void)
         return gBattleTransitionTable_Trainer[flashVar][1];
 }
 
-s8 sub_8082138(void)
+u8 GetBattleTowerBattleTransition(void)
 {
     u8 monData = GetMonData(&gEnemyParty[0], MON_DATA_LEVEL);
 
@@ -716,42 +701,42 @@ void battle_80801F0(void)
     }
 }
 
-u8 *TrainerBattleConfigure(u8 *a1)
+u8 *TrainerBattleConfigure(u8 *data)
 {
     sub_80822BC();
-    gTrainerBattleMode = TrainerBattleLoadArg8(a1);
+    gTrainerBattleMode = TrainerBattleLoadArg8(data);
 
     switch (gTrainerBattleMode)
     {
     case 3:
-        TrainerBattleLoadArgs(gTrainerBattleSpecs_3, a1);
+        TrainerBattleLoadArgs(gTrainerBattleSpecs_3, data);
         return gUnknown_0819F878;
     case 4:
-        TrainerBattleLoadArgs(gTrainerBattleSpecs_2, a1);
+        TrainerBattleLoadArgs(gTrainerBattleSpecs_2, data);
         battle_80801F0();
         return gUnknown_0819F840;
     case 1:
     case 2:
-        TrainerBattleLoadArgs(gTrainerBattleSpecs_1, a1);
+        TrainerBattleLoadArgs(gTrainerBattleSpecs_1, data);
         battle_80801F0();
         return gUnknown_0819F818;
     case 6:
     case 8:
-        TrainerBattleLoadArgs(gTrainerBattleSpecs_4, a1);
+        TrainerBattleLoadArgs(gTrainerBattleSpecs_4, data);
         battle_80801F0();
         return gUnknown_0819F840;
     case 7:
-        TrainerBattleLoadArgs(gTrainerBattleSpecs_2, a1);
+        TrainerBattleLoadArgs(gTrainerBattleSpecs_2, data);
         battle_80801F0();
         gTrainerBattleOpponent = sub_8082C4C(gTrainerBattleOpponent);
         return gUnknown_0819F8AE;
     case 5:
-        TrainerBattleLoadArgs(gTrainerBattleSpecs_0, a1);
+        TrainerBattleLoadArgs(gTrainerBattleSpecs_0, data);
         battle_80801F0();
         gTrainerBattleOpponent = sub_8082C4C(gTrainerBattleOpponent);
         return gUnknown_0819F887;
     default:
-        TrainerBattleLoadArgs(gTrainerBattleSpecs_0, a1);
+        TrainerBattleLoadArgs(gTrainerBattleSpecs_0, data);
         battle_80801F0();
         return gUnknown_0819F818;
     }
@@ -766,11 +751,11 @@ void TrainerWantsBattle(u8 ptr, u8 *a2)
     ScriptContext2_Enable();
 }
 
-u8 GetTrainerFlagFromScriptPointer(u8 *a1)
+u8 GetTrainerFlagFromScriptPointer(u8 *data)
 {
     u32 localFlag;
 
-    localFlag = TrainerBattleLoadArg16(a1 + 2);
+    localFlag = TrainerBattleLoadArg16(data + 2);
     return FlagGet(localFlag + 0x500);
 }
 
@@ -992,7 +977,7 @@ s32 sub_8082894(struct TrainerEyeTrainer *trainers, u16 trainerNum)
 {
     s32 i;
 
-    for (i = 0; i < 56; i++)
+    for (i = 0; i < NUM_TRAINER_EYE_TRAINERS; i++)
     {
         if (trainers[i].trainerNums[0] == trainerNum)
             return i;
@@ -1001,42 +986,42 @@ s32 sub_8082894(struct TrainerEyeTrainer *trainers, u16 trainerNum)
     return -1;
 }
 
-s32 sub_80828B8(struct TrainerEyeTrainer *a, u16 b)
+s32 sub_80828B8(struct TrainerEyeTrainer *trainers, u16 trainerNum)
 {
    s32 i;
 
-   for (i = 0; i < 56; i++)
+   for (i = 0; i < NUM_TRAINER_EYE_TRAINERS; i++)
    {
        s32 j;
 
-       for (j = 0; j < 5 && a[i].trainerNums[j] != 0; j++)
+       for (j = 0; j < 5 && trainers[i].trainerNums[j] != 0; j++)
        {
-           if (a[i].trainerNums[j] == b)
+           if (trainers[i].trainerNums[j] == trainerNum)
                return i;
        }
    }
    return -1;
 }
 
-bool32 sub_80828FC(struct TrainerEyeTrainer *a, u16 b, u16 c)
+bool32 sub_80828FC(struct TrainerEyeTrainer *trainers, u16 mapGroup, u16 mapNum)
 {
    int i;
    bool32 ret = FALSE;
 
-   for (i = 0; i < 56; i++)
+   for (i = 0; i < NUM_TRAINER_EYE_TRAINERS; i++)
    {
-       if (a[i].mapGroup == b && a[i].mapNum == c)
+       if (trainers[i].mapGroup == mapGroup && trainers[i].mapNum == mapNum)
        {
            if (gSaveBlock1.trainerRematches[i] != 0)
            {
                ret = TRUE;
                continue;
            }
-           if (trainer_flag_check(a[i].trainerNums[0]) == TRUE && (Random() % 100) <= 30)
+           if (trainer_flag_check(trainers[i].trainerNums[0]) == TRUE && (Random() % 100) <= 30)
            {
                int j = 1;
 
-               while (j < 5 && a[i].trainerNums[j] != 0 && trainer_flag_check(a[i].trainerNums[j]))
+               while (j < 5 && trainers[i].trainerNums[j] != 0 && trainer_flag_check(trainers[i].trainerNums[j]))
                    j++;
                gSaveBlock1.trainerRematches[i] = j;
 
@@ -1048,25 +1033,25 @@ bool32 sub_80828FC(struct TrainerEyeTrainer *a, u16 b, u16 c)
    return ret;
 }
 
-s32 sub_80829A8(struct TrainerEyeTrainer *a1, u16 a2, u16 a3)
+s32 sub_80829A8(struct TrainerEyeTrainer *trainers, u16 mapGroup, u16 mapNum)
 {
    s32 i;
 
-   for (i = 0; i < 56; i++)
+   for (i = 0; i < NUM_TRAINER_EYE_TRAINERS; i++)
    {
-       if (a1[i].mapGroup == a2 && a1[i].mapNum == a3 && gSaveBlock1.trainerRematches[i])
+       if (trainers[i].mapGroup == mapGroup && trainers[i].mapNum == mapNum && gSaveBlock1.trainerRematches[i])
            return 1;
    }
    return 0;
 }
 
-s32 sub_80829E8(struct TrainerEyeTrainer *a1, u16 a2, u16 a3)
+s32 sub_80829E8(struct TrainerEyeTrainer *trainers, u16 mapGroup, u16 mapNum)
 {
     s32 i;
 
-    for (i = 0; i < 56; i++)
+    for (i = 0; i < NUM_TRAINER_EYE_TRAINERS; i++)
     {
-        if (a1[i].mapGroup == a2 && a1[i].mapNum == a3)
+        if (trainers[i].mapGroup == mapGroup && trainers[i].mapNum == mapNum)
             return 1;
     }
     return 0;
@@ -1084,9 +1069,9 @@ bool8 sub_8082A18(struct TrainerEyeTrainer *trainers, u16 trainerNum)
 
 bool8 sub_8082A54(struct TrainerEyeTrainer *trainers, u16 trainerNum)
 {
-    s32 v2 = sub_80828B8(trainers, trainerNum);
+    s32 trainerEyeIndex = sub_80828B8(trainers, trainerNum);
 
-    if (v2 != -1 && v2 < 100 && gSaveBlock1.trainerRematches[v2])
+    if (trainerEyeIndex != -1 && trainerEyeIndex < 100 && gSaveBlock1.trainerRematches[trainerEyeIndex])
         return TRUE;
     else
         return FALSE;
@@ -1116,10 +1101,10 @@ u16 sub_8082A90(struct TrainerEyeTrainer *trainers, u16 trainerNum)
 
 void sub_8082AE4(struct TrainerEyeTrainer *trainers, u16 trainerNum)
 {
-    s32 var = sub_80828B8(trainers, trainerNum);
+    s32 trainerEyeIndex = sub_80828B8(trainers, trainerNum);
 
-    if (var != -1)
-        gSaveBlock1.trainerRematches[var] = 0;
+    if (trainerEyeIndex != -1)
+        gSaveBlock1.trainerRematches[trainerEyeIndex] = 0;
 }
 
 bool8 sub_8082B10(struct TrainerEyeTrainer *trainers, u16 trainerNum)
@@ -1137,7 +1122,7 @@ bool32 sub_8082B44(void)
     int badgeCount = 0;
     u32 i;
 
-    for(i = 0; i < 8; i++)
+    for (i = 0; i < 8; i++)
     {
         if (FlagGet(gBadgeFlags[i]) == TRUE)
         {
@@ -1154,8 +1139,8 @@ void sub_8082B78(void)
 {
     if (sub_8082B44())
     {
-        if (gSaveBlock1.trainerRematchStepCounter >= 255)
-            gSaveBlock1.trainerRematchStepCounter = 255;
+        if (gSaveBlock1.trainerRematchStepCounter >= TRAINER_REMATCH_STEPS)
+            gSaveBlock1.trainerRematchStepCounter = TRAINER_REMATCH_STEPS;
         else
             gSaveBlock1.trainerRematchStepCounter++;
     }
@@ -1163,31 +1148,31 @@ void sub_8082B78(void)
 
 bool32 sub_8082BA4(void)
 {
-    if (sub_8082B44() && gSaveBlock1.trainerRematchStepCounter >= 255)
+    if (sub_8082B44() && gSaveBlock1.trainerRematchStepCounter >= TRAINER_REMATCH_STEPS)
         return TRUE;
     else
         return FALSE;
 }
 
-void sub_8082BD0(u16 a1, u16 a2)
+void sub_8082BD0(u16 mapGroup, u16 mapNum)
 {
-    if (sub_8082BA4() && sub_80828FC(gTrainerEyeTrainers, a1, a2) == TRUE)
+    if (sub_8082BA4() && sub_80828FC(gTrainerEyeTrainers, mapGroup, mapNum) == TRUE)
         gSaveBlock1.trainerRematchStepCounter = 0;
 }
 
-s32 sub_8082C0C(u16 a1, u16 a2)
+s32 sub_8082C0C(u16 mapGroup, u16 mapNum)
 {
-    return sub_80829A8(gTrainerEyeTrainers, a1, a2);
+    return sub_80829A8(gTrainerEyeTrainers, mapGroup, mapNum);
 }
 
-s32 unref_sub_8082C2C(u16 a1, u16 a2)
+s32 unref_sub_8082C2C(u16 mapGroup, u16 mapNum)
 {
-    return sub_80829E8(gTrainerEyeTrainers, a1, a2);
+    return sub_80829E8(gTrainerEyeTrainers, mapGroup, mapNum);
 }
 
-u16 sub_8082C4C(u16 a1)
+u16 sub_8082C4C(u16 trainerNum)
 {
-    return sub_8082A90(gTrainerEyeTrainers, a1);
+    return sub_8082A90(gTrainerEyeTrainers, trainerNum);
 }
 
 s32 sub_8082C68(void)
