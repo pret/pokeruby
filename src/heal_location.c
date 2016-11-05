@@ -1,59 +1,69 @@
 #include "global.h"
 
-extern s8 gHealLocations[];
+#define NUM_HEAL_LOCATIONS 22
 
-
-u32 GetHealLocationIndexByMap(u16 arg_0, u16 arg_1)
+struct HealLocation
 {
-    u32 i = 0;
-    
-    s8 *temp = &(gHealLocations[0]);
-    
-    for ( ; i<=0x15; i++)
-    {
-        if (temp[0] != arg_0)
-        {
-            temp += 8;
-        }
-        else if (temp[1] != arg_1)
-        {
-            temp += 8;
-        }
-        else
-        {
-            return i + 1;
-        }
-    }
-    
-    return 0;
+	s8 group;
+	s8 map;
+	u16 x;
+	u16 y;
+};
+
+extern const struct HealLocation gHealLocations[];
+
+u32 GetHealLocationIndexByMap(u16 some_group, u16 some_map)
+{
+	u32 i = 0;
+	
+	const struct HealLocation *temp = gHealLocations;
+	
+	for (; i<NUM_HEAL_LOCATIONS; i++)
+	{
+		if (temp->group != some_group)
+		{
+			temp++;
+		}
+		else if (temp->map != some_map)
+		{
+			temp++;
+		}
+		else
+		{
+			return i + 1;
+		}
+	}
+	
+	return 0;
 }
 
-u32 GetHealLocationByMap(u16 arg_0, u16 arg_1)
+const struct HealLocation *GetHealLocationByMap(u16 some_group, 
+	u16 some_map)
 {
-    int temp = GetHealLocationIndexByMap(arg_0, arg_1);
-    
-    if (!temp)
-    {
-        return 0;
-    }
-    else
-    {
-        return (u32)(gHealLocations - 8 + (temp << 3));
-    }
+	int index = GetHealLocationIndexByMap(some_group, some_map);
+	
+	if (index == 0)
+	{
+		return NULL;
+	}
+	else
+	{
+		return &(gHealLocations[index - 1].group);
+	}
 }
 
-u32 GetHealLocation(u32 arg_0)
+const struct HealLocation *GetHealLocation(u32 index)
 {
-    if (arg_0 == 0)
-    {
-        return 0;
-    }
-    else if (arg_0 > 0x16)
-    {
-        return 0;
-    }
-    else
-    {
-        return (u32)(gHealLocations - 8 + (arg_0 << 3));
-    }
+	if (index == 0)
+	{
+		return NULL;
+	}
+	else if (index > NUM_HEAL_LOCATIONS)
+	{
+		return NULL;
+	}
+	else
+	{
+		return &(gHealLocations[index - 1].group);
+	}
 }
