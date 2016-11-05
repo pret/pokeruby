@@ -9,6 +9,8 @@
 #include "rng.h"
 #include "flag.h"
 #include "var.h"
+#include "script.h"
+#include "field_message_box.h"
 
 extern void prev_quest_postbuffer_cursor_backup_reset(void);
 extern void overworld_poison_timer_set(void);
@@ -28,15 +30,22 @@ extern void sub_80821D8(void);
 extern void sub_8082228(void);
 extern void sub_808260C(void);
 extern void sub_8082CB8(void);
-extern u8 * sub_80BCCE8(void);
-extern void ShowFieldMessage();
+extern u8 *sub_80BCCE8(void);
 extern void CB2_ChooseStarter(void);
 extern void sub_811AABC(u8);
 extern u8 sub_811AAE8(void);
-extern u32 GetMonData(struct Pokemon *mon, s32 field);
 extern u8 GetFieldObjectIdByLocalIdAndMap(u8, u8, u8);
-extern u32 sub_8082880(void);
+extern u8 *sub_8082880(void);
 extern u8 sub_803FC58(u16);
+extern bool32 FieldPoisonEffectIsRunning(void);
+extern bool32 GetSafariZoneFlag(void);
+extern void player_bitmagic(void);
+
+u8 GetHigherOrLowerLevelTransitionForWild(void);
+u8 sub_8082080(void);
+bool32 battle_exit_is_player_defeat(u32 a1);
+u8 *sub_808281C(void);
+u16 sub_8082C4C(u16 a1);
 
 extern u16 gScriptResult;
 
@@ -100,16 +109,16 @@ extern struct Trainer gTrainers[];
 extern u16 gTrainerBattleMode;
 extern u16 gTrainerBattleOpponent;
 extern u16 gTrainerMapObjectLocalId;
-extern u32 gTrainerIntroSpeech;
-extern u32 gTrainerDefeatSpeech;
-extern u32 gTrainerVictorySpeech;
-extern u32 gTrainerCannotBattleSpeech;
-extern u32 gTrainerBattleScriptReturnAddress;
-extern u32 gTrainerBattleEndScript;
+extern u8 *gTrainerIntroSpeech;
+extern u8 *gTrainerDefeatSpeech;
+extern u8 *gTrainerVictorySpeech;
+extern u8 *gTrainerCannotBattleSpeech;
+extern u8 *gTrainerBattleScriptReturnAddress;
+extern u8 *gTrainerBattleEndScript;
 
-extern u32 gTrainerEyeTrainers[];
+extern struct TrainerEyeTrainer gTrainerEyeTrainers[];
 
-extern u32 gOtherText_CancelWithTerminator[];
+extern u8 gOtherText_CancelWithTerminator[];
 
 extern u16 gUnknown_020239F8;
 extern u16 gUnknown_0202E8DE;
@@ -127,11 +136,11 @@ extern u8 gUnknown_0819F8AE[];
 extern u8 gUnknown_0819F80B[];
 extern u8 gUnknown_081C6C02[];
 
-extern u8 gTrainerBattleSpecs_0[];
-extern u8 gTrainerBattleSpecs_1[];
-extern u8 gTrainerBattleSpecs_2[];
-extern u8 gTrainerBattleSpecs_3[];
-extern u8 gTrainerBattleSpecs_4[];
+extern struct TrainerBattleSpec gTrainerBattleSpecs_0[];
+extern struct TrainerBattleSpec gTrainerBattleSpecs_1[];
+extern struct TrainerBattleSpec gTrainerBattleSpecs_2[];
+extern struct TrainerBattleSpec gTrainerBattleSpecs_3[];
+extern struct TrainerBattleSpec gTrainerBattleSpecs_4[];
 
 extern u8 gStringVar4[];
 
@@ -236,7 +245,7 @@ void task_add_01_battle_start_with_music_and_stats(void)
 
 void sub_8081AFC(void)
 {
-    CreateMaleMon(&gEnemyParty, SPECIES_RALTS, 5);
+    CreateMaleMon(&gEnemyParty[0], SPECIES_RALTS, 5);
     ScriptContext2_Enable();
     gMain.field_8 = c2_exit_to_overworld_1_continue_scripts_restart_music;
     gUnknown_020239F8 = 512;
@@ -304,8 +313,8 @@ void sub_8081C50(void)
 
 void sub_8081C8C(void)
 {
-    CpuFill16(0, 0x5000000, 0x1000200);
-    ResetOamRange(0, 0x80);
+    CpuFill16(0, (void *)BG_PLTT, BG_PLTT_SIZE);
+    ResetOamRange(0, 128);
 
     if (battle_exit_is_player_defeat(gUnknown_02024D26) == TRUE)
     {
@@ -320,8 +329,8 @@ void sub_8081C8C(void)
 
 void sub_8081CEC(void)
 {
-    CpuFill16(0, 0x5000000, 0x1000200);
-    ResetOamRange(0, 0x80);
+    CpuFill16(0, (void *)BG_PLTT, BG_PLTT_SIZE);
+    ResetOamRange(0, 128);
 
     if (battle_exit_is_player_defeat(gUnknown_02024D26) == TRUE)
         SetMainCallback2(c2_whiteout);
@@ -479,7 +488,7 @@ u8 GetSumOfEnemyPartyLevel(u16 trainerNum, u8 partyCount)
 u8 GetHigherOrLowerLevelTransitionForWild(void)
 {
     u8 flashVar = sub_8081E90();
-    u8 level = GetMonData(&gEnemyParty, MON_DATA_LEVEL);
+    u8 level = GetMonData(&gEnemyParty[0], MON_DATA_LEVEL);
 
     if (level < (u8)GetSumOfPartyMonLevel(1)) // is wild mon level than the player's mon level?
         return gBattleTransitionTable_Wild[flashVar][0];
@@ -532,7 +541,7 @@ u8 sub_8082080(void)
 
 s8 sub_8082138(void)
 {
-    u8 monData = GetMonData(&gEnemyParty, MON_DATA_LEVEL);
+    u8 monData = GetMonData(&gEnemyParty[0], MON_DATA_LEVEL);
 
     if (monData < (u8)GetSumOfPartyMonLevel(1))
         return 4;
@@ -604,12 +613,7 @@ u16 trainerflag_opponent(void)
 
 bool32 battle_exit_is_player_defeat(u32 a1)
 {
-    a1--;
-
-    if (a1 > 6)
-        return FALSE;
-
-    switch(a1)
+    switch (a1 - 1)
     {
     case 1:
     case 2:
@@ -621,9 +625,11 @@ bool32 battle_exit_is_player_defeat(u32 a1)
     case 6:
         return FALSE;
     }
+
+    return FALSE;
 }
 
-u32 sub_80822BC(void)
+u8 **sub_80822BC(void)
 {
     u32 *pointer;
 
@@ -635,9 +641,8 @@ u32 sub_80822BC(void)
     gTrainerVictorySpeech = 0;
     gTrainerCannotBattleSpeech = 0;
     gTrainerBattleScriptReturnAddress = 0;
-    pointer = &gTrainerBattleEndScript;
     gTrainerBattleEndScript = 0;
-    return pointer;
+    return &gTrainerBattleEndScript;
 }
 
 void TrainerBattleLoadArgs(struct TrainerBattleSpec *specs, u8 *data)
@@ -725,7 +730,7 @@ u8 *TrainerBattleConfigure(u8 *a1)
     }
 }
 
-void TrainerWantsBattle(u8 ptr, int a2)
+void TrainerWantsBattle(u8 ptr, u8 *a2)
 {
     gSelectedMapObject = ptr;
     gUnknown_0202E8DE = gMapObjects[ptr].localId;
@@ -734,7 +739,7 @@ void TrainerWantsBattle(u8 ptr, int a2)
     ScriptContext2_Enable();
 }
 
-u8 GetTrainerFlagFromScriptPointer(int a1)
+u8 GetTrainerFlagFromScriptPointer(u8 *a1)
 {
     u32 localFlag;
 
@@ -837,13 +842,12 @@ void sub_80826B0(void)
 
 void sub_80826D8(void)
 {
-    sub_808281C();
-    ShowFieldMessage();
+    ShowFieldMessage(sub_808281C());
 }
 
-u32 sub_80826E8(void)
+u8 *sub_80826E8(void)
 {
-    u32 *result = gTrainerBattleScriptReturnAddress;
+    u8 *result = gTrainerBattleScriptReturnAddress;
 
     if (!gTrainerBattleScriptReturnAddress)
         return gUnknown_081C6C02;
@@ -851,9 +855,9 @@ u32 sub_80826E8(void)
     return result;
 }
 
-u32 sub_8082700(void)
+u8 *sub_8082700(void)
 {
-    u32 *result = gTrainerBattleEndScript;
+    u8 *result = gTrainerBattleEndScript;
 
     if (!gTrainerBattleEndScript)
         return gUnknown_081C6C02;
@@ -922,7 +926,7 @@ void sub_8082728(void) // sets the music to be played after a battle
     }
 }
 
-u32 ReturnEmptyStringIfNull(u32 *result)
+u8 *ReturnEmptyStringIfNull(u8 *result)
 {
     if (result)
         return result;
@@ -930,43 +934,44 @@ u32 ReturnEmptyStringIfNull(u32 *result)
         return gOtherText_CancelWithTerminator;
 }
 
-u32 sub_808281C(void)
+u8 *sub_808281C(void)
 {
     return ReturnEmptyStringIfNull(gTrainerIntroSpeech);
 }
 
 u8 *sub_8082830(void)
 {
-    u32 *var;
+    u8 *str;
 
     if (gTrainerBattleOpponent == 1024)
-        var = sub_80BCCE8();
+        str = sub_80BCCE8();
     else
-        var = gTrainerDefeatSpeech;
+        str = gTrainerDefeatSpeech;
 
-    StringExpandPlaceholders(gStringVar4, ReturnEmptyStringIfNull(var));
+    StringExpandPlaceholders(gStringVar4, ReturnEmptyStringIfNull(str));
     return gStringVar4;
 }
 
-u32 unref_sub_808286C(void)
+u8 *unref_sub_808286C(void)
 {
     return ReturnEmptyStringIfNull(gTrainerVictorySpeech);
 }
 
-u32 sub_8082880(void)
+u8 *sub_8082880(void)
 {
     return ReturnEmptyStringIfNull(gTrainerCannotBattleSpeech);
 }
 
-s32 sub_8082894(u16 *ptr, u16 var)
+s32 sub_8082894(struct TrainerEyeTrainer *trainers, u16 trainerNum)
 {
     s32 i;
 
-    for(i = 0; i <= 55; i++)
+    for (i = 0; i < 56; i++)
     {
-        if(ptr[i * 8] == var)
+        if (trainers[i].trainerNums[0] == trainerNum)
             return i;
     }
+
     return -1;
 }
 
@@ -974,13 +979,13 @@ s32 sub_80828B8(struct TrainerEyeTrainer *a, u16 b)
 {
    s32 i;
 
-   for(i = 0; i < 56; i++)
+   for (i = 0; i < 56; i++)
    {
        s32 j;
 
-       for(j = 0; j < 5 && a[i].trainerNums[j] != 0; j++)
+       for (j = 0; j < 5 && a[i].trainerNums[j] != 0; j++)
        {
-           if(a[i].trainerNums[j] == b)
+           if (a[i].trainerNums[j] == b)
                return i;
        }
    }
@@ -1041,19 +1046,19 @@ s32 sub_80829E8(struct TrainerEyeTrainer *a1, u16 a2, u16 a3)
     return 0;
 }
 
-bool8 sub_8082A18(u16 *a1, u16 a2)
+bool8 sub_8082A18(struct TrainerEyeTrainer *trainers, u16 trainerNum)
 {
-    s32 v2 = sub_8082894(a1, a2);
+    s32 trainerEyeIndex = sub_8082894(trainers, trainerNum);
 
-    if (v2 != -1 && v2 < 100 && gSaveBlock1.trainerRematches[v2])
+    if (trainerEyeIndex != -1 && trainerEyeIndex < 100 && gSaveBlock1.trainerRematches[trainerEyeIndex])
         return TRUE;
     else
         return FALSE;
 }
 
-bool8 sub_8082A54(u16 *a1, u16 a2)
+bool8 sub_8082A54(struct TrainerEyeTrainer *trainers, u16 trainerNum)
 {
-    s32 v2 = sub_80828B8(a1, a2);
+    s32 v2 = sub_80828B8(trainers, trainerNum);
 
     if (v2 != -1 && v2 < 100 && gSaveBlock1.trainerRematches[v2])
         return TRUE;
@@ -1083,19 +1088,19 @@ u16 sub_8082A90(struct TrainerEyeTrainer *trainers, u16 trainerNum)
     return trainer->trainerNums[4];
 }
 
-void sub_8082AE4(u16 *a1, u16 a2)
+void sub_8082AE4(struct TrainerEyeTrainer *trainers, u16 trainerNum)
 {
-    s32 var = sub_80828B8(a1, a2);
+    s32 var = sub_80828B8(trainers, trainerNum);
 
     if (var != -1)
         gSaveBlock1.trainerRematches[var] = 0;
 }
 
-bool8 sub_8082B10(struct TrainerEyeTrainer *a1, u16 a2)
+bool8 sub_8082B10(struct TrainerEyeTrainer *trainers, u16 trainerNum)
 {
-    s32 var = sub_8082894(a1, a2);
+    s32 trainerEyeIndex = sub_8082894(trainers, trainerNum);
 
-    if (var != -1 && trainer_flag_check(a1[var].trainerNums[1]))
+    if (trainerEyeIndex != -1 && trainer_flag_check(trainers[trainerEyeIndex].trainerNums[1]))
         return TRUE;
     else
         return FALSE;
