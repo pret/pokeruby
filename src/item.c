@@ -48,6 +48,7 @@ enum
 
 struct Item *ItemId_GetItem(u16);
 u8 ItemId_GetPocket(u16);
+static void CompactPCItems(void);
 
 void CopyItemName(u16 itemId, u8 *string)
 {
@@ -60,7 +61,8 @@ void CopyItemName(u16 itemId, u8 *string)
         StringCopy(string, ItemId_GetItem(itemId)->name);
 }
 
-s8 CountUsedBagPocketSlots(u8 pocket)
+//Unreferenced
+static s8 CountUsedBagPocketSlots(u8 pocket)
 {
     u8 i;
     
@@ -299,7 +301,7 @@ void ClearItemSlots(struct ItemSlot *itemSlots, u8 b)
     }
 }
 
-s32 FindFreePCItemSlot(void)
+static s32 FindFreePCItemSlot(void)
 {
     s8 i;
     
@@ -381,8 +383,6 @@ bool8 AddPCItem(u16 itemId, u16 count)
     return TRUE;
 }
 
-void CompactPCItems(void);
-
 void RemovePCItem(u8 index, u16 count)
 {
     gSaveBlock1.pcItems[index].quantity -= count;
@@ -393,7 +393,7 @@ void RemovePCItem(u8 index, u16 count)
     }
 }
 
-void CompactPCItems(void)
+static void CompactPCItems(void)
 {
     u16 i;
     u16 j;
@@ -425,7 +425,7 @@ void SwapRegisteredBike(void)
     }
 }
 
-u16 SanitizeItemId(u16 itemId)
+static u16 SanitizeItemId(u16 itemId)
 {
     if (itemId > 0x15C)
         return 0;
