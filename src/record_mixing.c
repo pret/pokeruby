@@ -260,7 +260,7 @@ void sub_80B9484(u8 taskId)
         if(!gTasks[taskData[10]].isActive)
         {
             taskData[TD_STATE] = 2;
-            FlagSet(0x834);
+            FlagSet(SYS_MIX_RECORD);
             DestroyRecordMixingSprite();
             DestroyTask(taskData[15]);
         }

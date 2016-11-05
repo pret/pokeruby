@@ -190,6 +190,6 @@ void GiveGiftRibbonToParty(u8 index, u8 ribbonId)
             }
         }
         if(gotRibbon)
-            FlagSet(0x83B);
+            FlagSet(SYS_RIBBON_GET);
     }
 }

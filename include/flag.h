@@ -1,6 +1,8 @@
 #ifndef GUARD_FLAG_H
 #define GUARD_FLAG_H
 
+#include "flags.h"
+
 u8 *GetFlagPointer(u16 id);
 u8 FlagSet(u16 id);
 u8 FlagReset(u16 id);

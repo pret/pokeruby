@@ -21540,7 +21540,7 @@ _081355D6:
 	bl CreateTask
 	movs r0, 0
 	bl current_map_music_set__default_for_battle
-	bl sub_8082138
+	bl GetBattleTowerBattleTransition
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_811AABC
@@ -21577,7 +21577,7 @@ _08135606:
 	bl CreateTask
 	movs r0, 0
 	bl current_map_music_set__default_for_battle
-	bl sub_8082138
+	bl GetBattleTowerBattleTransition
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_811AABC
