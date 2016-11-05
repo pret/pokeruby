@@ -371,7 +371,7 @@ _080F9C98:
 	bl sub_806CA38
 	ldr r1, _080F9CB8 @ =gUnknown_02038694
 	strb r0, [r1]
-	ldr r2, _080F9CBC @ =gUnknown_0202E8CC
+	ldr r2, _080F9CBC @ =gSpecialVar_0x8004
 	ldrb r0, [r1]
 	strh r0, [r2]
 	adds r0, r4, 0
@@ -379,14 +379,14 @@ _080F9C98:
 	b _080F9CD8
 	.align 2, 0
 _080F9CB8: .4byte gUnknown_02038694
-_080F9CBC: .4byte gUnknown_0202E8CC
+_080F9CBC: .4byte gSpecialVar_0x8004
 _080F9CC0:
 	movs r0, 0x5
 	bl PlaySE
 	ldr r1, _080F9CE0 @ =gUnknown_02038694
 	movs r0, 0xFF
 	strb r0, [r1]
-	ldr r1, _080F9CE4 @ =gUnknown_0202E8CC
+	ldr r1, _080F9CE4 @ =gSpecialVar_0x8004
 	movs r0, 0xFF
 	strh r0, [r1]
 	adds r0, r4, 0
@@ -397,7 +397,7 @@ _080F9CD8:
 	bx r0
 	.align 2, 0
 _080F9CE0: .4byte gUnknown_02038694
-_080F9CE4: .4byte gUnknown_0202E8CC
+_080F9CE4: .4byte gSpecialVar_0x8004
 	thumb_func_end sub_80F9C6C
 
 	thumb_func_start sub_80F9CE8
@@ -619,13 +619,13 @@ _080F9E8C: .4byte gPaletteFade
 _080F9E90:
 	movs r0, 0x5
 	bl PlaySE
-	ldr r4, _080F9EC4 @ =gUnknown_0202E8CC
+	ldr r4, _080F9EC4 @ =gSpecialVar_0x8004
 	adds r0, r6, 0
 	bl sub_806CA38
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4]
-	ldr r5, _080F9EC8 @ =gUnknown_0202E8CE
+	ldr r5, _080F9EC8 @ =gSpecialVar_0x8005
 	ldrh r1, [r4]
 	movs r0, 0x64
 	muls r0, r1
@@ -639,13 +639,13 @@ _080F9E90:
 	bl sub_8123138
 	b _080F9EE2
 	.align 2, 0
-_080F9EC4: .4byte gUnknown_0202E8CC
-_080F9EC8: .4byte gUnknown_0202E8CE
+_080F9EC4: .4byte gSpecialVar_0x8004
+_080F9EC8: .4byte gSpecialVar_0x8005
 _080F9ECC: .4byte gPlayerParty
 _080F9ED0:
 	movs r0, 0x5
 	bl PlaySE
-	ldr r1, _080F9EE8 @ =gUnknown_0202E8CC
+	ldr r1, _080F9EE8 @ =gSpecialVar_0x8004
 	movs r0, 0xFF
 	strh r0, [r1]
 	adds r0, r6, 0
@@ -655,7 +655,7 @@ _080F9EE2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F9EE8: .4byte gUnknown_0202E8CC
+_080F9EE8: .4byte gSpecialVar_0x8004
 	thumb_func_end sub_80F9E64
 
 	thumb_func_start sub_80F9EEC
@@ -663,7 +663,7 @@ sub_80F9EEC: @ 80F9EEC
 	push {r4,lr}
 	sub sp, 0x4
 	ldr r0, _080F9F20 @ =gPlayerParty
-	ldr r1, _080F9F24 @ =gUnknown_0202E8CC
+	ldr r1, _080F9F24 @ =gSpecialVar_0x8004
 	ldrb r1, [r1]
 	ldr r2, _080F9F28 @ =gPlayerPartyCount
 	ldrb r2, [r2]
@@ -686,7 +686,7 @@ sub_80F9EEC: @ 80F9EEC
 	bx r0
 	.align 2, 0
 _080F9F20: .4byte gPlayerParty
-_080F9F24: .4byte gUnknown_0202E8CC
+_080F9F24: .4byte gSpecialVar_0x8004
 _080F9F28: .4byte gPlayerPartyCount
 _080F9F2C: .4byte c2_exit_to_overworld_2_switch
 _080F9F30: .4byte 0x02018000
@@ -703,7 +703,7 @@ sub_80F9F3C: @ 80F9F3C
 	movs r4, 0
 	adds r5, r1, 0
 _080F9F48:
-	ldr r0, _080F9F7C @ =gUnknown_0202E8CC
+	ldr r0, _080F9F7C @ =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
@@ -728,21 +728,21 @@ _080F9F66:
 	bx r0
 	.align 2, 0
 _080F9F78: .4byte gScriptResult
-_080F9F7C: .4byte gUnknown_0202E8CC
+_080F9F7C: .4byte gSpecialVar_0x8004
 _080F9F80: .4byte gPlayerParty
 	thumb_func_end sub_80F9F3C
 
 	thumb_func_start sub_80F9F84
 sub_80F9F84: @ 80F9F84
 	push {r4,r5,lr}
-	ldr r0, _080F9FC4 @ =gUnknown_0202E8CC
+	ldr r0, _080F9FC4 @ =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	movs r0, 0x64
 	adds r5, r1, 0
 	muls r5, r0
 	ldr r0, _080F9FC8 @ =gPlayerParty
 	adds r5, r0
-	ldr r0, _080F9FCC @ =gUnknown_0202E8CE
+	ldr r0, _080F9FCC @ =gSpecialVar_0x8005
 	ldrh r1, [r0]
 	adds r1, 0xD
 	adds r0, r5, 0
@@ -763,9 +763,9 @@ sub_80F9F84: @ 80F9F84
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F9FC4: .4byte gUnknown_0202E8CC
+_080F9FC4: .4byte gSpecialVar_0x8004
 _080F9FC8: .4byte gPlayerParty
-_080F9FCC: .4byte gUnknown_0202E8CE
+_080F9FCC: .4byte gSpecialVar_0x8005
 _080F9FD0: .4byte gStringVar1
 _080F9FD4: .4byte gStringVar2
 _080F9FD8: .4byte gMoveNames
@@ -898,14 +898,14 @@ sub_80FA0DC: @ 80FA0DC
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
-	ldr r0, _080FA13C @ =gUnknown_0202E8CC
+	ldr r0, _080FA13C @ =gSpecialVar_0x8004
 	mov r8, r0
 	ldrh r0, [r0]
 	movs r6, 0x64
 	muls r0, r6
 	ldr r5, _080FA140 @ =gPlayerParty
 	adds r0, r5
-	ldr r4, _080FA144 @ =gUnknown_0202E8CE
+	ldr r4, _080FA144 @ =gSpecialVar_0x8005
 	ldrb r2, [r4]
 	movs r1, 0
 	bl SetMonMoveSlot
@@ -919,7 +919,7 @@ sub_80FA0DC: @ 80FA0DC
 	cmp r4, 0x2
 	bhi _080FA130
 _080FA10E:
-	ldr r0, _080FA13C @ =gUnknown_0202E8CC
+	ldr r0, _080FA13C @ =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
@@ -942,15 +942,15 @@ _080FA130:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080FA13C: .4byte gUnknown_0202E8CC
+_080FA13C: .4byte gSpecialVar_0x8004
 _080FA140: .4byte gPlayerParty
-_080FA144: .4byte gUnknown_0202E8CE
+_080FA144: .4byte gSpecialVar_0x8005
 	thumb_func_end sub_80FA0DC
 
 	thumb_func_start sub_80FA148
 sub_80FA148: @ 80FA148
 	push {r4,lr}
-	ldr r0, _080FA170 @ =gUnknown_0202E8CC
+	ldr r0, _080FA170 @ =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
@@ -970,7 +970,7 @@ _080FA16A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080FA170: .4byte gUnknown_0202E8CC
+_080FA170: .4byte gSpecialVar_0x8004
 _080FA174: .4byte gPlayerParty
 _080FA178: .4byte gScriptResult
 	thumb_func_end sub_80FA148

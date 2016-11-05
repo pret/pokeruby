@@ -451,7 +451,7 @@ sub_80B7CE8: @ 80B7CE8
 	lsls r1, 3
 	adds r0, r1
 	ldr r0, [r0]
-	ldr r1, _080B7D08 @ =gUnknown_0202E8CE
+	ldr r1, _080B7D08 @ =gSpecialVar_0x8005
 	ldrh r1, [r1]
 	bl IsEnoughMoney
 	lsls r0, 24
@@ -460,21 +460,21 @@ sub_80B7CE8: @ 80B7CE8
 	bx r1
 	.align 2, 0
 _080B7D04: .4byte gSaveBlock1
-_080B7D08: .4byte gUnknown_0202E8CE
+_080B7D08: .4byte gSpecialVar_0x8005
 	thumb_func_end sub_80B7CE8
 
 	thumb_func_start sub_80B7D0C
 sub_80B7D0C: @ 80B7D0C
 	push {lr}
 	ldr r0, _080B7D1C @ =gSaveBlock1 + 0x490
-	ldr r1, _080B7D20 @ =gUnknown_0202E8CE
+	ldr r1, _080B7D20 @ =gSpecialVar_0x8005
 	ldrh r1, [r1]
 	bl sub_80B79E0
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080B7D1C: .4byte gSaveBlock1 + 0x490
-_080B7D20: .4byte gUnknown_0202E8CE
+_080B7D20: .4byte gSpecialVar_0x8005
 	thumb_func_end sub_80B7D0C
 
 	.align 2, 0 @ Don't pad with nop.

@@ -278,16 +278,16 @@ sub_8109B34: @ 8109B34
 	lsrs r1, 24
 	cmp r1, 0x78
 	bls _08109B54
-	ldr r1, _08109B4C @ =gUnknown_0202E8CC
+	ldr r1, _08109B4C @ =gSpecialVar_0x8004
 	ldr r2, _08109B50 @ =0x0000ffff
 	adds r0, r2, 0
 	strh r0, [r1]
 	b _08109B58
 	.align 2, 0
-_08109B4C: .4byte gUnknown_0202E8CC
+_08109B4C: .4byte gSpecialVar_0x8004
 _08109B50: .4byte 0x0000ffff
 _08109B54:
-	ldr r0, _08109B78 @ =gUnknown_0202E8CC
+	ldr r0, _08109B78 @ =gSpecialVar_0x8004
 	strh r1, [r0]
 _08109B58:
 	bl sub_8072DEC
@@ -303,7 +303,7 @@ _08109B58:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08109B78: .4byte gUnknown_0202E8CC
+_08109B78: .4byte gSpecialVar_0x8004
 	thumb_func_end sub_8109B34
 
 	thumb_func_start sub_8109B7C
@@ -345,7 +345,7 @@ _08109BC2:
 	beq _08109C28
 	movs r0, 0x5
 	bl PlaySE
-	ldr r5, _08109BFC @ =gUnknown_0202E8CE
+	ldr r5, _08109BFC @ =gSpecialVar_0x8005
 	bl GetMenuCursorPos
 	lsls r0, 24
 	lsrs r0, 24
@@ -365,7 +365,7 @@ _08109BC2:
 	bl sub_8109B34
 	b _08109C3E
 	.align 2, 0
-_08109BFC: .4byte gUnknown_0202E8CE
+_08109BFC: .4byte gSpecialVar_0x8005
 _08109C00: .4byte gTasks
 _08109C04:
 	ldr r0, _08109C24 @ =gStringVar1
@@ -452,11 +452,11 @@ sub_8109C90: @ 8109C90
 	movs r0, 0
 	strh r0, [r6]
 	ldr r4, _08109CE0 @ =gDecorations
-	ldr r5, _08109CE4 @ =gUnknown_0202E8CC
+	ldr r5, _08109CE4 @ =gSpecialVar_0x8004
 	ldrh r0, [r5]
 	lsls r0, 5
 	adds r2, r0, r4
-	ldr r0, _08109CE8 @ =gUnknown_0202E8D0
+	ldr r0, _08109CE8 @ =gSpecialVar_0x8006
 	ldrh r0, [r0]
 	lsls r0, 5
 	adds r0, r4
@@ -487,8 +487,8 @@ _08109CD6:
 	.align 2, 0
 _08109CDC: .4byte gScriptResult
 _08109CE0: .4byte gDecorations
-_08109CE4: .4byte gUnknown_0202E8CC
-_08109CE8: .4byte gUnknown_0202E8D0
+_08109CE4: .4byte gSpecialVar_0x8004
+_08109CE8: .4byte gSpecialVar_0x8006
 _08109CEC: .4byte gStringVar2
 	thumb_func_end sub_8109C90
 
@@ -528,7 +528,7 @@ sub_8109D04: @ 8109D04
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _08109D8C
-	ldr r5, _08109D70 @ =gUnknown_0202E8D0
+	ldr r5, _08109D70 @ =gSpecialVar_0x8006
 	ldr r0, _08109D74 @ =gUnknown_020388F5
 	ldrb r1, [r0]
 	ldr r0, _08109D78 @ =gUnknown_020388D0
@@ -537,7 +537,7 @@ sub_8109D04: @ 8109D04
 	ldrb r0, [r0]
 	strh r0, [r5]
 	ldr r0, _08109D7C @ =gStringVar3
-	ldr r1, _08109D80 @ =gUnknown_0202E8CC
+	ldr r1, _08109D80 @ =gSpecialVar_0x8004
 	ldrh r1, [r1]
 	lsls r1, 5
 	ldr r4, _08109D84 @ =gDecorations + 0x1
@@ -551,15 +551,15 @@ sub_8109D04: @ 8109D04
 	b _08109D94
 	.align 2, 0
 _08109D6C: .4byte gUnknown_020388F7
-_08109D70: .4byte gUnknown_0202E8D0
+_08109D70: .4byte gSpecialVar_0x8006
 _08109D74: .4byte gUnknown_020388F5
 _08109D78: .4byte gUnknown_020388D0
 _08109D7C: .4byte gStringVar3
-_08109D80: .4byte gUnknown_0202E8CC
+_08109D80: .4byte gSpecialVar_0x8004
 _08109D84: .4byte gDecorations + 0x1
 _08109D88: .4byte gStringVar2
 _08109D8C:
-	ldr r1, _08109DA4 @ =gUnknown_0202E8D0
+	ldr r1, _08109DA4 @ =gSpecialVar_0x8006
 	ldr r2, _08109DA8 @ =0x0000ffff
 	adds r0, r2, 0
 	strh r0, [r1]
@@ -571,7 +571,7 @@ _08109D94:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08109DA4: .4byte gUnknown_0202E8D0
+_08109DA4: .4byte gSpecialVar_0x8006
 _08109DA8: .4byte 0x0000ffff
 	thumb_func_end sub_8109D04
 
@@ -587,7 +587,7 @@ sub_8109DAC: @ 8109DAC
 	movs r2, 0x1D
 	movs r3, 0x13
 	bl MenuZeroFillWindowRect
-	ldr r1, _08109DDC @ =gUnknown_0202E8D0
+	ldr r1, _08109DDC @ =gSpecialVar_0x8006
 	movs r0, 0
 	strh r0, [r1]
 	adds r0, r4, 0
@@ -597,20 +597,20 @@ sub_8109DAC: @ 8109DAC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08109DDC: .4byte gUnknown_0202E8D0
+_08109DDC: .4byte gSpecialVar_0x8006
 	thumb_func_end sub_8109DAC
 
 	thumb_func_start sub_8109DE0
 sub_8109DE0: @ 8109DE0
 	push {r4-r6,lr}
 	ldr r4, _08109E20 @ =gSaveBlock1 + 0x2D94
-	ldr r6, _08109E24 @ =gUnknown_0202E8D0
+	ldr r6, _08109E24 @ =gSpecialVar_0x8006
 	ldrb r0, [r6]
 	bl sub_81340A8
-	ldr r0, _08109E28 @ =gUnknown_0202E8CC
+	ldr r0, _08109E28 @ =gSpecialVar_0x8004
 	ldrb r0, [r0]
 	bl IsThereStorageSpaceForDecoration
-	ldr r5, _08109E2C @ =gUnknown_0202E8CE
+	ldr r5, _08109E2C @ =gSpecialVar_0x8005
 	ldrh r1, [r5]
 	movs r0, 0xB
 	muls r0, r1
@@ -632,9 +632,9 @@ sub_8109DE0: @ 8109DE0
 	bx r0
 	.align 2, 0
 _08109E20: .4byte gSaveBlock1 + 0x2D94
-_08109E24: .4byte gUnknown_0202E8D0
-_08109E28: .4byte gUnknown_0202E8CC
-_08109E2C: .4byte gUnknown_0202E8CE
+_08109E24: .4byte gSpecialVar_0x8006
+_08109E28: .4byte gSpecialVar_0x8004
+_08109E2C: .4byte gSpecialVar_0x8005
 _08109E30: .4byte gSaveBlock2
 	thumb_func_end sub_8109DE0
 

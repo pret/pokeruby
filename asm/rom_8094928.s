@@ -928,7 +928,7 @@ _08095000:
 	ldrb r4, [r0]
 	cmp r4, 0x3
 	bne _0809503C
-	ldr r0, _08095028 @ =word_203855E
+	ldr r0, _08095028 @ =gScriptItemId
 	ldrh r0, [r0]
 	bl sub_8070E48
 	lsls r0, 24
@@ -943,7 +943,7 @@ _08095000:
 	b _0809503C
 	.align 2, 0
 _08095024: .4byte gUnknown_02038473
-_08095028: .4byte word_203855E
+_08095028: .4byte gScriptItemId
 _0809502C: .4byte 0x0201b000
 _08095030: .4byte 0x00000259
 _08095034:
@@ -1080,7 +1080,7 @@ _0809512C:
 	ldrb r0, [r0]
 	cmp r0, 0x3
 	bne _08095164
-	ldr r5, _08095158 @ =word_203855E
+	ldr r5, _08095158 @ =gScriptItemId
 	ldrh r0, [r5]
 	bl sub_8070E48
 	lsls r0, 24
@@ -1095,7 +1095,7 @@ _0809512C:
 	.align 2, 0
 _08095150: .4byte gPaletteFade
 _08095154: .4byte gUnknown_02038473
-_08095158: .4byte word_203855E
+_08095158: .4byte gScriptItemId
 _0809515C: .4byte gUnknown_03004AE4
 _08095160: .4byte sub_80952E4
 _08095164:
@@ -1127,7 +1127,7 @@ _08095178:
 	bne _0809521C
 	bl sub_806D5A4
 	ldr r3, _080951BC @ =gUnknown_03004AE4
-	ldr r0, _080951C0 @ =word_203855E
+	ldr r0, _080951C0 @ =gScriptItemId
 	ldrh r1, [r0]
 	ldr r2, _080951C4 @ =sub_80952E4
 	ldr r3, [r3]
@@ -1139,7 +1139,7 @@ _080951AA:
 _080951B4: .4byte gUnknown_02038473
 _080951B8: .4byte gPlayerParty
 _080951BC: .4byte gUnknown_03004AE4
-_080951C0: .4byte word_203855E
+_080951C0: .4byte gScriptItemId
 _080951C4: .4byte sub_80952E4
 _080951C8:
 	movs r0, 0x5
@@ -2396,7 +2396,7 @@ _08095C0C: .4byte gPlayerParty
 	thumb_func_start sub_8095C10
 sub_8095C10: @ 8095C10
 	push {lr}
-	ldr r0, _08095C24 @ =gUnknown_0202E8CC
+	ldr r0, _08095C24 @ =gSpecialVar_0x8004
 	ldrb r0, [r0]
 	bl sub_8095BB4
 	lsls r0, 24
@@ -2404,7 +2404,7 @@ sub_8095C10: @ 8095C10
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08095C24: .4byte gUnknown_0202E8CC
+_08095C24: .4byte gSpecialVar_0x8004
 	thumb_func_end sub_8095C10
 
 	thumb_func_start sub_8095C28
@@ -19532,7 +19532,7 @@ _0809E3A0:
 	ldrb r1, [r1]
 	adds r0, 0x7A
 	strb r1, [r0]
-	ldr r1, _0809E3C0 @ =gUnknown_0202E8CE
+	ldr r1, _0809E3C0 @ =gSpecialVar_0x8005
 	ldrb r0, [r0]
 	strh r0, [r1]
 	adds r0, r4, 0
@@ -19540,7 +19540,7 @@ _0809E3A0:
 	b _0809E3EE
 	.align 2, 0
 _0809E3BC: .4byte 0x02018000
-_0809E3C0: .4byte gUnknown_0202E8CE
+_0809E3C0: .4byte gSpecialVar_0x8005
 _0809E3C4:
 	movs r0, 0x20
 	bl PlaySE
@@ -19557,7 +19557,7 @@ _0809E3D4:
 	adds r0, 0x7A
 	movs r1, 0x4
 	strb r1, [r0]
-	ldr r0, _0809E3F8 @ =gUnknown_0202E8CE
+	ldr r0, _0809E3F8 @ =gSpecialVar_0x8005
 	strh r1, [r0]
 	adds r0, r4, 0
 	bl sub_809E0FC
@@ -19567,7 +19567,7 @@ _0809E3EE:
 	bx r0
 	.align 2, 0
 _0809E3F4: .4byte 0x02018000
-_0809E3F8: .4byte gUnknown_0202E8CE
+_0809E3F8: .4byte gSpecialVar_0x8005
 	thumb_func_end sub_809E260
 
 	thumb_func_start sub_809E3FC

@@ -13,7 +13,7 @@ extern void sub_80A2178(void);
 extern void sub_806451C(void);
 extern u8 FieldObjectFaceOppositeDirection(void *, u8);
 
-extern u16 gUnknown_0202E8E0;
+extern u16 gScriptFacing;
 
 bool8 walkrun_is_standing_still(void)
 {
@@ -116,7 +116,7 @@ void unref_sub_8064E5C(void)
 
 void sub_8064EAC(void)
 {
-    FieldObjectFaceOppositeDirection(&gMapObjects[gSelectedMapObject], gUnknown_0202E8E0);
+    FieldObjectFaceOppositeDirection(&gMapObjects[gSelectedMapObject], gScriptFacing);
 }
 
 void sub_8064ED4(void)

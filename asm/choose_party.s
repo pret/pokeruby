@@ -2092,7 +2092,7 @@ _08122E84:
 	ldr r1, _08122EA4 @ =gUnknown_03005CE0
 	movs r0, 0xFF
 	strb r0, [r1]
-	ldr r1, _08122EA8 @ =gUnknown_0202E8CC
+	ldr r1, _08122EA8 @ =gSpecialVar_0x8004
 	movs r0, 0xFF
 	strh r0, [r1]
 	adds r0, r4, 0
@@ -2103,7 +2103,7 @@ _08122E9C:
 	bx r0
 	.align 2, 0
 _08122EA4: .4byte gUnknown_03005CE0
-_08122EA8: .4byte gUnknown_0202E8CC
+_08122EA8: .4byte gSpecialVar_0x8004
 	thumb_func_end sub_8122E0C
 
 	thumb_func_start sub_8122EAC
@@ -2203,7 +2203,7 @@ sub_8122F70: @ 8122F70
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, _08122F88 @ =gUnknown_0202E8CC
+	ldr r2, _08122F88 @ =gSpecialVar_0x8004
 	ldr r1, _08122F8C @ =gUnknown_03005CE0
 	ldrb r1, [r1]
 	strh r1, [r2]
@@ -2211,7 +2211,7 @@ sub_8122F70: @ 8122F70
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08122F88: .4byte gUnknown_0202E8CC
+_08122F88: .4byte gSpecialVar_0x8004
 _08122F8C: .4byte gUnknown_03005CE0
 	thumb_func_end sub_8122F70
 

@@ -1,6 +1,7 @@
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
 	.include "constants/constants.inc"
+	.include "constants/variables.inc"
 
 	.section script_data, "aw", %progbits
 
@@ -9,24 +10,24 @@
 
 	.align 2
 gSpecialVars::
-	.4byte 0x202e8c4
-	.4byte 0x202e8c6
-	.4byte 0x202e8c8
-	.4byte 0x202e8ca
-	.4byte 0x202e8cc
-	.4byte 0x202e8ce
-	.4byte 0x202e8d0
-	.4byte 0x202e8d2
-	.4byte 0x202e8d4
-	.4byte 0x202e8d6
-	.4byte 0x202e8d8
-	.4byte 0x202e8da
-	.4byte 0x202e8e0
+	.4byte gSpecialVar_0x8000
+	.4byte gSpecialVar_0x8001
+	.4byte gSpecialVar_0x8002
+	.4byte gSpecialVar_0x8003
+	.4byte gSpecialVar_0x8004
+	.4byte gSpecialVar_0x8005
+	.4byte gSpecialVar_0x8006
+	.4byte gSpecialVar_0x8007
+	.4byte gSpecialVar_0x8008
+	.4byte gSpecialVar_0x8009
+	.4byte gSpecialVar_0x800A
+	.4byte gSpecialVar_0x800B
+	.4byte gScriptFacing
 	.4byte gScriptResult
-	.4byte 0x203855e
-	.4byte 0x202e8de
-	.4byte 0x203869e
-	.4byte 0x203869c
+	.4byte gScriptItemId
+	.4byte gScriptLastTalked
+	.4byte gSpecialVar_0x8010
+	.4byte gSpecialVar_0x8011
 
 	.include "data/specials.inc"
 

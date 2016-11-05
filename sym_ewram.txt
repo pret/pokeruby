@@ -418,34 +418,49 @@ gUnknown_0202E8C0: @ 202E8C0
 gUnknown_0202E8C2: @ 202E8C2
 	.space 0x2
 
-gUnknown_0202E8C4: @ 202E8C4
+gSpecialVar_0x8000: @ 202E8C4
 	.space 0x2
 
-gUnknown_0202E8C6: @ 202E8C6
+gSpecialVar_0x8001: @ 202E8C6
 	.space 0x2
 
-gUnknown_0202E8C8: @ 202E8C8
-	.space 0x4
-
-gUnknown_0202E8CC: @ 202E8CC
+gSpecialVar_0x8002: @ 202E8C8
 	.space 0x2
 
-gUnknown_0202E8CE: @ 202E8CE
+gSpecialVar_0x8003: @ 202E8CA
 	.space 0x2
 
-gUnknown_0202E8D0: @ 202E8D0
+gSpecialVar_0x8004: @ 202E8CC
 	.space 0x2
 
-gUnknown_0202E8D2: @ 202E8D2
-	.space 0xA
+gSpecialVar_0x8005: @ 202E8CE
+	.space 0x2
+
+gSpecialVar_0x8006: @ 202E8D0
+	.space 0x2
+
+gSpecialVar_0x8007: @ 202E8D2
+	.space 0x2
+
+gSpecialVar_0x8008: @ 202E8D4
+	.space 0x2
+
+gSpecialVar_0x8009: @ 202E8D6
+	.space 0x2
+
+gSpecialVar_0x800A: @ 202E8D8
+	.space 0x2
+
+gSpecialVar_0x800B: @ 202E8DA
+	.space 0x2
 
 gScriptResult: @ 202E8DC
 	.space 0x2
 
-gUnknown_0202E8DE: @ 202E8DE
+gScriptLastTalked: @ 202E8DE
 	.space 0x2
 
-gUnknown_0202E8E0: @ 202E8E0
+gScriptFacing: @ 202E8E0
 	.space 0x2
 
 gUnknown_0202E8E2: @ 202E8E2
@@ -743,7 +758,7 @@ gUnknown_0203855B: @ 203855B
 gUnknown_0203855C: @ 203855C
 	.space 0x2
 
-word_203855E: @ 203855E
+gScriptItemId: @ 203855E
 	.space 0x2
 
 gUnknown_02038560: @ 2038560
@@ -812,10 +827,10 @@ gUnknown_0203869A: @ 203869A
 gUnknown_0203869B: @ 203869B
 	.space 0x1
 
-gUnknown_0203869C: @ 203869C
+gSpecialVar_0x8011: @ 203869C
 	.space 0x2
 
-gUnknown_0203869E: @ 203869E
+gSpecialVar_0x8010: @ 203869E
 	.space 0x2
 
 gUnknown_020386A0: @ 20386A0

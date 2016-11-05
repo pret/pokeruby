@@ -23,7 +23,7 @@ extern u8 gUnknown_083D028A[2][3];
 extern u8 gUnknown_083D0290[9][4];
 
 extern u8 gUnknown_02038738[];  //Don't know what type this points to
-extern u16 gUnknown_0202E8CE;
+extern u16 gSpecialVar_0x8005;
 extern u32 gUnknown_03005D2C;
 extern u8 gUnknown_03000718;
 extern u8 gUnknown_0300071C[];
@@ -247,7 +247,7 @@ void sub_80B9484(u8 taskId)
     switch(taskData[TD_STATE])
     {
     case 0:
-        sub_8007270(gUnknown_0202E8CE);
+        sub_8007270(gSpecialVar_0x8005);
         VarSet(0x4000, 1);
         gUnknown_03000718 = 0;
         sub_80B92AC();

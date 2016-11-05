@@ -64555,7 +64555,7 @@ sub_802E03C: @ 802E03C
 	ands r0, r1
 	cmp r0, 0
 	bne _0802E062
-	ldr r0, _0802E074 @ =word_203855E
+	ldr r0, _0802E074 @ =gScriptItemId
 	ldrh r1, [r0]
 	movs r0, 0x1
 	bl dp01_build_cmdbuf_x23_aa_0
@@ -64567,7 +64567,7 @@ _0802E062:
 _0802E068: .4byte gMain
 _0802E06C: .4byte sub_800F808
 _0802E070: .4byte gPaletteFade
-_0802E074: .4byte word_203855E
+_0802E074: .4byte gScriptItemId
 	thumb_func_end sub_802E03C
 
 	thumb_func_start bx_wait_t1

@@ -9327,7 +9327,7 @@ sub_808A228: @ 808A228
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _0808A268 @ =word_203855E
+	ldr r0, _0808A268 @ =gScriptItemId
 	ldrh r0, [r0]
 	bl itemid_is_mail
 	lsls r0, 24
@@ -9353,7 +9353,7 @@ sub_808A228: @ 808A228
 	str r1, [r0]
 	b _0808A29A
 	.align 2, 0
-_0808A268: .4byte word_203855E
+_0808A268: .4byte gScriptItemId
 _0808A26C: .4byte gUnknown_0202E8F4
 _0808A270: .4byte gTasks
 _0808A274: .4byte sub_808A180
@@ -9394,7 +9394,7 @@ sub_808A2AC: @ 808A2AC
 	ands r0, r1
 	cmp r0, 0
 	bne _0808A2CA
-	ldr r0, _0808A2D4 @ =word_203855E
+	ldr r0, _0808A2D4 @ =gScriptItemId
 	ldrh r1, [r0]
 	ldr r2, _0808A2D8 @ =sub_808A228
 	adds r0, r3, 0
@@ -9404,7 +9404,7 @@ _0808A2CA:
 	bx r0
 	.align 2, 0
 _0808A2D0: .4byte gPaletteFade
-_0808A2D4: .4byte word_203855E
+_0808A2D4: .4byte gScriptItemId
 _0808A2D8: .4byte sub_808A228
 	thumb_func_end sub_808A2AC
 
@@ -9452,14 +9452,14 @@ sub_808A330: @ 808A330
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _0808A344 @ =word_203855E
+	ldr r1, _0808A344 @ =gScriptItemId
 	ldrh r1, [r1]
 	ldr r2, _0808A348 @ =sub_808A2DC
 	bl sub_806E964
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0808A344: .4byte word_203855E
+_0808A344: .4byte gScriptItemId
 _0808A348: .4byte sub_808A2DC
 	thumb_func_end sub_808A330
 
@@ -9551,7 +9551,7 @@ _0808A3F0:
 	thumb_func_start sub_808A3F8
 sub_808A3F8: @ 808A3F8
 	push {r4,lr}
-	ldr r0, _0808A460 @ =word_203855E
+	ldr r0, _0808A460 @ =gScriptItemId
 	ldrh r0, [r0]
 	bl itemid_is_mail
 	lsls r0, 24
@@ -9594,7 +9594,7 @@ sub_808A3F8: @ 808A3F8
 	bl SetMainCallback2
 	b _0808A4C6
 	.align 2, 0
-_0808A460: .4byte word_203855E
+_0808A460: .4byte gScriptItemId
 _0808A464: .4byte sub_808A330
 _0808A468: .4byte gPaletteFade
 _0808A46C: .4byte gUnknown_03005CE0
@@ -9609,7 +9609,7 @@ _0808A47E:
 	movs r1, 0x80
 	orrs r0, r1
 	strb r0, [r2, 0x8]
-	ldr r0, _0808A4A8 @ =word_203855E
+	ldr r0, _0808A4A8 @ =gScriptItemId
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _0808A4B4
@@ -9623,7 +9623,7 @@ _0808A47E:
 	b _0808A4C6
 	.align 2, 0
 _0808A4A4: .4byte gPaletteFade
-_0808A4A8: .4byte word_203855E
+_0808A4A8: .4byte gScriptItemId
 _0808A4AC: .4byte sub_808A2AC
 _0808A4B0: .4byte sub_808A358
 _0808A4B4:
@@ -9764,7 +9764,7 @@ sub_808A5BC: @ 808A5BC
 	bne _0808A5EA
 	ldr r0, _0808A5F4 @ =gUnknown_03005CE0
 	ldrb r0, [r0]
-	ldr r1, _0808A5F8 @ =word_203855E
+	ldr r1, _0808A5F8 @ =gScriptItemId
 	ldrh r1, [r1]
 	movs r2, 0
 	bl sub_806EBF0
@@ -9782,7 +9782,7 @@ _0808A5EA:
 	.align 2, 0
 _0808A5F0: .4byte gPaletteFade
 _0808A5F4: .4byte gUnknown_03005CE0
-_0808A5F8: .4byte word_203855E
+_0808A5F8: .4byte gScriptItemId
 _0808A5FC: .4byte gTasks
 _0808A600: .4byte sub_808A1E0
 	thumb_func_end sub_808A5BC
@@ -10861,7 +10861,7 @@ _0808AE82:
 	thumb_func_start sub_808AE8C
 sub_808AE8C: @ 808AE8C
 	push {r4-r6,lr}
-	ldr r0, _0808AED8 @ =word_203855E
+	ldr r0, _0808AED8 @ =gScriptItemId
 	ldrb r0, [r0]
 	subs r0, 0x21
 	lsls r0, 24
@@ -10896,10 +10896,10 @@ _0808AECE:
 	bl sub_806BC3C
 	b _0808AF10
 	.align 2, 0
-_0808AED8: .4byte word_203855E
+_0808AED8: .4byte gScriptItemId
 _0808AEDC: .4byte gPlayerParty
 _0808AEE0:
-	ldr r0, _0808AF04 @ =word_203855E
+	ldr r0, _0808AF04 @ =gScriptItemId
 	ldrh r0, [r0]
 	bl ItemIdToBattleMoveId
 	adds r1, r0, 0
@@ -10915,7 +10915,7 @@ _0808AEE0:
 	bl sub_806BC3C
 	b _0808AF10
 	.align 2, 0
-_0808AF04: .4byte word_203855E
+_0808AF04: .4byte gScriptItemId
 _0808AF08:
 	adds r0, r5, 0
 	movs r1, 0x8C
@@ -10951,7 +10951,7 @@ _0808AF24:
 	bl GetMonData
 	cmp r0, 0
 	bne _0808AF58
-	ldr r0, _0808AF7C @ =word_203855E
+	ldr r0, _0808AF7C @ =gScriptItemId
 	ldrh r2, [r0]
 	adds r0, r4, 0
 	movs r1, 0x3
@@ -10976,7 +10976,7 @@ _0808AF66:
 	bx r0
 	.align 2, 0
 _0808AF78: .4byte gPlayerParty
-_0808AF7C: .4byte word_203855E
+_0808AF7C: .4byte gScriptItemId
 	thumb_func_end sub_808AF20
 
 	thumb_func_start sub_808AF80
@@ -10993,7 +10993,7 @@ _0808AF84:
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0808AFC6
-	ldr r0, _0808AFB8 @ =word_203855E
+	ldr r0, _0808AFB8 @ =gScriptItemId
 	ldrh r0, [r0]
 	bl CheckIfItemIsTMHMOrEvolutionStone
 	lsls r0, 24
@@ -11006,7 +11006,7 @@ _0808AF84:
 	.align 2, 0
 _0808AFB0: .4byte 0x0201b260
 _0808AFB4: .4byte gUnknown_02038561
-_0808AFB8: .4byte word_203855E
+_0808AFB8: .4byte gScriptItemId
 _0808AFBC:
 	bl sub_808AE8C
 	b _0808AFC6
@@ -11083,7 +11083,7 @@ _0808B048:
 	beq _0808B08C
 	b _0808B0AC
 _0808B052:
-	ldr r0, _0808B070 @ =word_203855E
+	ldr r0, _0808B070 @ =gScriptItemId
 	ldrh r0, [r0]
 	bl CheckIfItemIsTMHMOrEvolutionStone
 	lsls r0, 24
@@ -11097,7 +11097,7 @@ _0808B052:
 	bl sub_806AF4C
 	b _0808B0AC
 	.align 2, 0
-_0808B070: .4byte word_203855E
+_0808B070: .4byte gScriptItemId
 _0808B074: .4byte sub_808B0C0
 _0808B078:
 	ldr r2, _0808B088 @ =sub_808B0C0
@@ -11185,7 +11185,7 @@ _0808B120:
 	cmp r0, 0
 	bne _0808B13C
 	ldr r3, _0808B170 @ =gUnknown_03004AE4
-	ldr r0, _0808B174 @ =word_203855E
+	ldr r0, _0808B174 @ =gScriptItemId
 	ldrh r1, [r0]
 	ldr r2, _0808B178 @ =sub_808B224
 	ldr r3, [r3]
@@ -11197,7 +11197,7 @@ _0808B13C:
 	bne _0808B154
 	movs r0, 0x5
 	bl PlaySE
-	ldr r0, _0808B174 @ =word_203855E
+	ldr r0, _0808B174 @ =gScriptItemId
 	ldrh r1, [r0]
 	ldr r2, _0808B17C @ =sub_808B2EC
 	adds r0, r4, 0
@@ -11215,7 +11215,7 @@ _0808B154:
 	.align 2, 0
 _0808B16C: .4byte gUnknown_02038561
 _0808B170: .4byte gUnknown_03004AE4
-_0808B174: .4byte word_203855E
+_0808B174: .4byte gScriptItemId
 _0808B178: .4byte sub_808B224
 _0808B17C: .4byte sub_808B2EC
 _0808B180: .4byte sub_808B2B4
@@ -11280,7 +11280,7 @@ sub_808B1EC: @ 808B1EC
 	cmp r0, 0
 	bne _0808B20E
 	ldr r3, _0808B218 @ =gUnknown_03004AE4
-	ldr r0, _0808B21C @ =word_203855E
+	ldr r0, _0808B21C @ =gScriptItemId
 	ldrh r1, [r0]
 	ldr r2, _0808B220 @ =sub_808B224
 	ldr r3, [r3]
@@ -11293,7 +11293,7 @@ _0808B20E:
 	.align 2, 0
 _0808B214: .4byte gPaletteFade
 _0808B218: .4byte gUnknown_03004AE4
-_0808B21C: .4byte word_203855E
+_0808B21C: .4byte gScriptItemId
 _0808B220: .4byte sub_808B224
 	thumb_func_end sub_808B1EC
 
@@ -11625,7 +11625,7 @@ sub_808B4A4: @ 808B4A4
 	bne _0808B4D2
 	ldr r0, _0808B4DC @ =gUnknown_03005CE0
 	ldrb r0, [r0]
-	ldr r1, _0808B4E0 @ =word_203855E
+	ldr r1, _0808B4E0 @ =gScriptItemId
 	ldrh r1, [r1]
 	movs r2, 0x1
 	bl sub_806EBF0
@@ -11643,7 +11643,7 @@ _0808B4D2:
 	.align 2, 0
 _0808B4D8: .4byte gPaletteFade
 _0808B4DC: .4byte gUnknown_03005CE0
-_0808B4E0: .4byte word_203855E
+_0808B4E0: .4byte gScriptItemId
 _0808B4E4: .4byte gTasks
 _0808B4E8: .4byte sub_808B4EC
 	thumb_func_end sub_808B4A4

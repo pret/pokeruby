@@ -5,12 +5,12 @@
 #include "var.h"
 
 extern u16 gScriptResult;
-extern u16 gUnknown_0202E8CC;
+extern u16 gSpecialVar_0x8004;
 extern struct Pokemon gPlayerParty[6];
 extern struct PokemonStorage gPokemonStorage;
-extern u16 gUnknown_0202E8CE;
+extern u16 gSpecialVar_0x8005;
 extern u16 gUnknown_0840CB04[];
-extern u16 gUnknown_0202E8D0;
+extern u16 gSpecialVar_0x8006;
 static EWRAM_DATA u16 sWinNumberDigit = 0;
 static EWRAM_DATA u16 sOtIdDigit = 0;
 
@@ -51,7 +51,7 @@ void PickLotteryCornerTicket(void)
     u32 box;
     u32 slot;
     
-    gUnknown_0202E8CC = 0;
+    gSpecialVar_0x8004 = 0;
     slot = 0;
     box = 0;
     for(i = 0; i < 6; i++)
@@ -66,9 +66,9 @@ void PickLotteryCornerTicket(void)
                 u32 otId = GetMonData(pkmn, MON_DATA_OT_ID);
                 u8 a = GetMatchingDigits(gScriptResult, otId);
                 
-                if(a > gUnknown_0202E8CC && a > 1)
+                if(a > gSpecialVar_0x8004 && a > 1)
                 {
-                    gUnknown_0202E8CC = a - 1;
+                    gSpecialVar_0x8004 = a - 1;
                     box = 14;
                     slot = i;
                 }
@@ -91,9 +91,9 @@ void PickLotteryCornerTicket(void)
                 u32 otId = GetBoxMonData(pkmn, MON_DATA_OT_ID);
                 u8 a = GetMatchingDigits(gScriptResult, otId);
                 
-                if(a > gUnknown_0202E8CC && a > 1)
+                if(a > gSpecialVar_0x8004 && a > 1)
                 {
-                    gUnknown_0202E8CC = a - 1;
+                    gSpecialVar_0x8004 = a - 1;
                     box = i;
                     slot = j;
                 }
@@ -101,18 +101,18 @@ void PickLotteryCornerTicket(void)
         }
     }
     
-    if(gUnknown_0202E8CC != 0)
+    if(gSpecialVar_0x8004 != 0)
     {
-        gUnknown_0202E8CE = gUnknown_0840CB04[gUnknown_0202E8CC - 1];
+        gSpecialVar_0x8005 = gUnknown_0840CB04[gSpecialVar_0x8004 - 1];
         
         if(box == 14)
         {
-            gUnknown_0202E8D0 = 0;
+            gSpecialVar_0x8006 = 0;
             GetMonData(&gPlayerParty[slot], MON_DATA_NICKNAME, gStringVar1);
         }
         else
         {
-            gUnknown_0202E8D0 = 1;
+            gSpecialVar_0x8006 = 1;
             GetBoxMonData(&gPokemonStorage.boxes[box][slot], MON_DATA_NICKNAME, gStringVar1);
         }
         StringGetEnd10(gStringVar1);

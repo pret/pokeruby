@@ -6187,7 +6187,7 @@ _080AE48E:
 	movs r0, 0x4
 	b _080AE50A
 _080AE49E:
-	ldr r0, _080AE4B0 @ =gUnknown_0203869C
+	ldr r0, _080AE4B0 @ =gSpecialVar_0x8011
 	ldrh r0, [r0]
 	cmp r0, 0x4
 	bhi _080AE4F2
@@ -6197,7 +6197,7 @@ _080AE49E:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_080AE4B0: .4byte gUnknown_0203869C
+_080AE4B0: .4byte gSpecialVar_0x8011
 _080AE4B4: .4byte _080AE4B8
 	.align 2, 0
 _080AE4B8:
@@ -6234,7 +6234,7 @@ _080AE4F2:
 	movs r0, 0
 	b _080AE50A
 _080AE4F6:
-	ldr r0, _080AE510 @ =gUnknown_0203869E
+	ldr r0, _080AE510 @ =gSpecialVar_0x8010
 	adds r2, r1, 0
 	ldrh r1, [r0]
 	movs r0, 0x2
@@ -6249,7 +6249,7 @@ _080AE50A:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080AE510: .4byte gUnknown_0203869E
+_080AE510: .4byte gSpecialVar_0x8010
 	thumb_func_end sub_80AE47C
 
 	thumb_func_start sub_80AE514
@@ -13239,7 +13239,7 @@ contest_get_move_excitement: @ 80B19FC
 	ldrb r1, [r0, 0x1]
 	lsls r1, 29
 	lsrs r1, 29
-	ldr r0, _080B1A28 @ =gUnknown_0203869C
+	ldr r0, _080B1A28 @ =gSpecialVar_0x8011
 	ldrh r2, [r0]
 	lsls r0, r2, 2
 	adds r0, r2
@@ -13251,7 +13251,7 @@ contest_get_move_excitement: @ 80B19FC
 	.align 2, 0
 _080B1A20: .4byte gContestExcitementTable
 _080B1A24: .4byte gContestMoves
-_080B1A28: .4byte gUnknown_0203869C
+_080B1A28: .4byte gSpecialVar_0x8011
 	thumb_func_end contest_get_move_excitement
 
 	thumb_func_start sub_80B1A2C
@@ -15401,7 +15401,7 @@ _080B2AB6:
 _080B2AC8: .4byte gUnknown_02038690
 _080B2ACC: .4byte gUnknown_02038695
 _080B2AD0:
-	ldr r0, _080B2AE4 @ =gUnknown_0203869C
+	ldr r0, _080B2AE4 @ =gSpecialVar_0x8011
 	ldrh r0, [r0]
 	cmp r0, 0x4
 	bhi _080B2B16
@@ -15411,7 +15411,7 @@ _080B2AD0:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_080B2AE4: .4byte gUnknown_0203869C
+_080B2AE4: .4byte gSpecialVar_0x8011
 _080B2AE8: .4byte _080B2AEC
 	.align 2, 0
 _080B2AEC:
@@ -15492,7 +15492,7 @@ _080B2B16:
 	mov r1, r9
 	cmp r1, 0xFF
 	beq _080B2BB8
-	ldr r0, _080B2BB0 @ =gUnknown_0203869C
+	ldr r0, _080B2BB0 @ =gSpecialVar_0x8011
 	ldrh r1, [r0]
 	ldr r0, _080B2BB4 @ =0x00002e06
 	add r0, r8
@@ -15505,7 +15505,7 @@ _080B2BA0: .4byte gUnknown_02038570
 _080B2BA4: .4byte 0x00002e04
 _080B2BA8: .4byte 0x00002e07
 _080B2BAC: .4byte 0x00002e12
-_080B2BB0: .4byte gUnknown_0203869C
+_080B2BB0: .4byte gSpecialVar_0x8011
 _080B2BB4: .4byte 0x00002e06
 _080B2BB8:
 	ldr r0, _080B2BC0 @ =0x00002e06
@@ -15659,7 +15659,7 @@ _080B2CCA:
 	.align 2, 0
 _080B2CD0: .4byte gSaveBlock1 + 0x2DFC
 _080B2CD4:
-	ldr r0, _080B2CE8 @ =gUnknown_0203869C
+	ldr r0, _080B2CE8 @ =gSpecialVar_0x8011
 	ldrh r0, [r0]
 	cmp r0, 0x4
 	bhi _080B2D14
@@ -15669,7 +15669,7 @@ _080B2CD4:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_080B2CE8: .4byte gUnknown_0203869C
+_080B2CE8: .4byte gSpecialVar_0x8011
 _080B2CEC: .4byte _080B2CF0
 	.align 2, 0
 _080B2CF0:

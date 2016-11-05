@@ -166,7 +166,7 @@ sub_8115238: @ 8115238
 	adds r0, r5, 0
 	movs r1, 0
 	bl memset
-	ldr r0, _081152C8 @ =gUnknown_0202E8CC
+	ldr r0, _081152C8 @ =gSpecialVar_0x8004
 	ldrh r2, [r0]
 	movs r0, 0x1
 	ands r0, r2
@@ -224,7 +224,7 @@ _08115276:
 	.align 2, 0
 _081152C0: .4byte gUnknown_083F8EC4
 _081152C4: .4byte 0x02019000
-_081152C8: .4byte gUnknown_0202E8CC
+_081152C8: .4byte gSpecialVar_0x8004
 _081152CC: .4byte gUnknown_083F8DF4
 _081152D0: .4byte gUnknown_083F8DF0
 _081152D4: .4byte gPlttBufferUnfaded
@@ -3174,7 +3174,7 @@ sub_8116AB0: @ 8116AB0
 	ldrb r4, [r4, 0x19]
 	cmp r0, r4
 	bcs _08116B08
-	ldr r1, _08116B04 @ =gUnknown_0202E8CC
+	ldr r1, _08116B04 @ =gSpecialVar_0x8004
 	movs r0, 0x1
 	b _08116B0C
 	.align 2, 0
@@ -3183,9 +3183,9 @@ _08116AF4: .4byte 0x0000ffff
 _08116AF8: .4byte gSaveBlock1
 _08116AFC: .4byte gTasks
 _08116B00: .4byte 0x00000494
-_08116B04: .4byte gUnknown_0202E8CC
+_08116B04: .4byte gSpecialVar_0x8004
 _08116B08:
-	ldr r1, _08116B34 @ =gUnknown_0202E8CC
+	ldr r1, _08116B34 @ =gSpecialVar_0x8004
 	movs r0, 0
 _08116B0C:
 	strh r0, [r1]
@@ -3208,7 +3208,7 @@ _08116B0C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08116B34: .4byte gUnknown_0202E8CC
+_08116B34: .4byte gSpecialVar_0x8004
 _08116B38: .4byte gTasks
 _08116B3C: .4byte sub_8116B40
 	thumb_func_end sub_8116AB0
@@ -4606,7 +4606,7 @@ sub_81175DC: @ 81175DC
 	cmp r0, 0x3C
 	ble _0811761C
 _08117608:
-	ldr r1, _0811762C @ =gUnknown_0202E8CC
+	ldr r1, _0811762C @ =gSpecialVar_0x8004
 	movs r0, 0x1
 	strh r0, [r1]
 	bl MenuZeroFillScreen
@@ -4620,7 +4620,7 @@ _0811761C:
 	.align 2, 0
 _08117624: .4byte gTasks
 _08117628: .4byte gMain
-_0811762C: .4byte gUnknown_0202E8CC
+_0811762C: .4byte gSpecialVar_0x8004
 	thumb_func_end sub_81175DC
 
 	thumb_func_start sub_8117630
@@ -4630,7 +4630,7 @@ sub_8117630: @ 8117630
 	lsls r4, 24
 	lsrs r4, 24
 	ldr r2, _0811768C @ =gUnknown_083F8DF0
-	ldr r0, _08117690 @ =gUnknown_0202E8CC
+	ldr r0, _08117690 @ =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	movs r0, 0x1
 	ands r0, r1
@@ -4668,7 +4668,7 @@ sub_8117630: @ 8117630
 	bx r0
 	.align 2, 0
 _0811768C: .4byte gUnknown_083F8DF0
-_08117690: .4byte gUnknown_0202E8CC
+_08117690: .4byte gSpecialVar_0x8004
 _08117694: .4byte gStringVar1
 _08117698: .4byte gStringVar4
 _0811769C: .4byte gUnknown_081C40DF
@@ -4712,7 +4712,7 @@ Task_Roulette_0: @ 81176A8
 	movs r2, 0x1
 	bl MenuPrint_RightAligned
 	ldr r2, _08117768 @ =gUnknown_083F8DF0
-	ldr r1, _0811776C @ =gUnknown_0202E8CC
+	ldr r1, _0811776C @ =gSpecialVar_0x8004
 	mov r8, r1
 	ldrh r1, [r1]
 	movs r0, 0x1
@@ -4763,7 +4763,7 @@ _0811775C: .4byte gTasks
 _08117760: .4byte gStringVar4
 _08117764: .4byte gOtherText_Coins
 _08117768: .4byte gUnknown_083F8DF0
-_0811776C: .4byte gUnknown_0202E8CC
+_0811776C: .4byte gSpecialVar_0x8004
 _08117770: .4byte gUnknown_081C4139
 _08117774: .4byte sub_8117630
 _08117778: .4byte 0x0000ffff

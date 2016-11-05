@@ -573,13 +573,13 @@ _0806832C:
 	ble _08068320
 	ldr r0, _08068358 @ =gSelectedMapObject
 	strb r3, [r0]
-	ldr r1, _0806835C @ =gUnknown_0202E8DE
+	ldr r1, _0806835C @ =gScriptLastTalked
 	adds r0, r2, r3
 	lsls r0, 2
 	adds r0, r5
 	ldrb r0, [r0, 0x8]
 	strh r0, [r1]
-	ldr r0, _08068360 @ =gUnknown_0202E8E0
+	ldr r0, _08068360 @ =gScriptFacing
 	strh r6, [r0]
 	adds r0, r3, 0
 	bl GetFieldObjectScriptPointerByFieldObjectId
@@ -590,8 +590,8 @@ _0806834E:
 	.align 2, 0
 _08068354: .4byte gLinkPlayerMapObjects
 _08068358: .4byte gSelectedMapObject
-_0806835C: .4byte gUnknown_0202E8DE
-_08068360: .4byte gUnknown_0202E8E0
+_0806835C: .4byte gScriptLastTalked
+_08068360: .4byte gScriptFacing
 	thumb_func_end sub_80682A8
 
 	thumb_func_start sub_8068364
@@ -663,13 +663,13 @@ _080683E4: .4byte gUnknown_0821664C
 _080683E8:
 	ldr r0, _08068414 @ =gSelectedMapObject
 	strb r3, [r0]
-	ldr r4, _08068418 @ =gUnknown_0202E8DE
+	ldr r4, _08068418 @ =gScriptLastTalked
 	adds r0, r2, r3
 	lsls r0, 2
 	adds r0, r1
 	ldrb r0, [r0, 0x8]
 	strh r0, [r4]
-	ldr r0, _0806841C @ =gUnknown_0202E8E0
+	ldr r0, _0806841C @ =gScriptFacing
 	strh r6, [r0]
 	adds r0, r3, 0
 	bl GetFieldObjectScriptPointerByFieldObjectId
@@ -683,8 +683,8 @@ _0806840C:
 	bx r1
 	.align 2, 0
 _08068414: .4byte gSelectedMapObject
-_08068418: .4byte gUnknown_0202E8DE
-_0806841C: .4byte gUnknown_0202E8E0
+_08068418: .4byte gScriptLastTalked
+_0806841C: .4byte gScriptFacing
 	thumb_func_end sub_8068364
 
 	thumb_func_start TryGetInvisibleMapObjectScript
@@ -755,13 +755,13 @@ _080684A4:
 	beq _080684F8
 	b _08068494
 _080684AA:
-	ldr r1, _080684CC @ =gUnknown_0202E8CC
+	ldr r1, _080684CC @ =gSpecialVar_0x8004
 	lsrs r0, r2, 16
 	movs r3, 0x96
 	lsls r3, 2
 	adds r0, r3
 	strh r0, [r1]
-	ldr r0, _080684D0 @ =gUnknown_0202E8CE
+	ldr r0, _080684D0 @ =gSpecialVar_0x8005
 	strh r2, [r0]
 	ldrh r0, [r1]
 	bl FlagGet
@@ -772,13 +772,13 @@ _080684AA:
 	ldr r0, _080684D4 @ =HiddenItemScript
 	b _080684FA
 	.align 2, 0
-_080684CC: .4byte gUnknown_0202E8CC
-_080684D0: .4byte gUnknown_0202E8CE
+_080684CC: .4byte gSpecialVar_0x8004
+_080684D0: .4byte gSpecialVar_0x8005
 _080684D4: .4byte HiddenItemScript
 _080684D8:
 	cmp r5, 0x2
 	bne _08068494
-	ldr r0, _080684F0 @ =gUnknown_0202E8CC
+	ldr r0, _080684F0 @ =gSpecialVar_0x8004
 	strh r2, [r0]
 	bl sub_80BC050
 	lsls r0, 24
@@ -787,7 +787,7 @@ _080684D8:
 	ldr r0, _080684F4 @ =gUnknown_081A2C51
 	b _080684FA
 	.align 2, 0
-_080684F0: .4byte gUnknown_0202E8CC
+_080684F0: .4byte gSpecialVar_0x8004
 _080684F4: .4byte gUnknown_081A2C51
 _080684F8:
 	adds r0, r2, 0

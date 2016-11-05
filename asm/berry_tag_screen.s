@@ -159,7 +159,7 @@ _0814615C:
 _08146168: .4byte gMain
 _0814616C: .4byte 0x0000043c
 _08146170:
-	ldr r0, _08146188 @ =word_203855E
+	ldr r0, _08146188 @ =gScriptItemId
 	ldrb r0, [r0]
 	adds r0, 0x7B
 	lsls r0, 24
@@ -171,10 +171,10 @@ _08146170:
 	strb r0, [r1]
 	b _0814620C
 	.align 2, 0
-_08146188: .4byte word_203855E
+_08146188: .4byte gScriptItemId
 _0814618C: .4byte gUnknown_0203932C
 _08146190:
-	ldr r0, _081461A8 @ =word_203855E
+	ldr r0, _081461A8 @ =gScriptItemId
 	ldrb r0, [r0]
 	adds r0, 0x7B
 	lsls r0, 24
@@ -185,7 +185,7 @@ _08146190:
 	adds r1, r0
 	b _08146212
 	.align 2, 0
-_081461A8: .4byte word_203855E
+_081461A8: .4byte gScriptItemId
 _081461AC: .4byte gMain
 _081461B0: .4byte 0x0000043c
 _081461B4:
@@ -591,7 +591,7 @@ _081464E0: .4byte gMain
 	thumb_func_start sub_81464E4
 sub_81464E4: @ 81464E4
 	push {r4-r7,lr}
-	ldr r4, _0814659C @ =word_203855E
+	ldr r4, _0814659C @ =gScriptItemId
 	ldrb r0, [r4]
 	adds r0, 0x7C
 	lsls r0, 24
@@ -669,7 +669,7 @@ _0814654E:
 	bl MenuPrint
 	b _081465BA
 	.align 2, 0
-_0814659C: .4byte word_203855E
+_0814659C: .4byte gScriptItemId
 _081465A0: .4byte gStringVar1
 _081465A4: .4byte gOtherText_Size
 _081465A8: .4byte gStringVar2
@@ -1047,7 +1047,7 @@ _0814686C:
 _0814686E:
 	strb r0, [r6, 0xC]
 _08146870:
-	ldr r2, _081468AC @ =word_203855E
+	ldr r2, _081468AC @ =gScriptItemId
 	movs r0, 0x3
 	lsls r0, 2
 	adds r0, r6
@@ -1074,7 +1074,7 @@ _08146870:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081468AC: .4byte word_203855E
+_081468AC: .4byte gScriptItemId
 _081468B0: .4byte gUnknown_03005D24
 _081468B4: .4byte gUnknown_0203932C
 _081468B8: .4byte gSprites
@@ -1089,7 +1089,7 @@ sub_81468BC: @ 81468BC
 	movs r3, 0x13
 	bl MenuZeroFillWindowRect
 	bl sub_81464E4
-	ldr r4, _081468F8 @ =word_203855E
+	ldr r4, _081468F8 @ =gScriptItemId
 	ldrb r0, [r4]
 	adds r0, 0x7B
 	lsls r0, 24
@@ -1108,7 +1108,7 @@ sub_81468BC: @ 81468BC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081468F8: .4byte word_203855E
+_081468F8: .4byte gScriptItemId
 _081468FC: .4byte gUnknown_0203932C
 	thumb_func_end sub_81468BC
 

@@ -3683,7 +3683,7 @@ sub_806F490: @ 806F490
 	adds r0, r1
 	ldr r1, _0806F514 @ =TaskDummy
 	str r1, [r0]
-	ldr r0, _0806F518 @ =word_203855E
+	ldr r0, _0806F518 @ =gScriptItemId
 	ldrh r1, [r0]
 	ldr r2, _0806F51C @ =sub_808B508
 	adds r0, r3, 0
@@ -3726,7 +3726,7 @@ _0806F506:
 _0806F50C: .4byte gPaletteFade
 _0806F510: .4byte gTasks
 _0806F514: .4byte TaskDummy
-_0806F518: .4byte word_203855E
+_0806F518: .4byte gScriptItemId
 _0806F51C: .4byte sub_808B508
 _0806F520: .4byte 0x0201c000
 _0806F524: .4byte gStringVar1
@@ -3792,7 +3792,7 @@ sub_806F588: @ 806F588
 	adds r0, r1
 	ldr r1, _0806F5F0 @ =TaskDummy
 	str r1, [r0]
-	ldr r0, _0806F5F4 @ =word_203855E
+	ldr r0, _0806F5F4 @ =gScriptItemId
 	ldrh r1, [r0]
 	ldr r2, _0806F5F8 @ =sub_808B508
 	adds r0, r3, 0
@@ -3823,7 +3823,7 @@ _0806F5E0:
 _0806F5E8: .4byte gPaletteFade
 _0806F5EC: .4byte gTasks
 _0806F5F0: .4byte TaskDummy
-_0806F5F4: .4byte word_203855E
+_0806F5F4: .4byte gScriptItemId
 _0806F5F8: .4byte sub_808B508
 _0806F5FC: .4byte gStringVar2
 _0806F600: .4byte 0x0201c000

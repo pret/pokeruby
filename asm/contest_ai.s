@@ -1316,7 +1316,7 @@ _0812923C:
 	thumb_func_start contest_ai_get_contest_type
 contest_ai_get_contest_type: @ 8129244
 	ldr r1, _08129258 @ =0x020192e4
-	ldr r0, _0812925C @ =gUnknown_0203869C
+	ldr r0, _0812925C @ =gSpecialVar_0x8011
 	ldrh r0, [r0]
 	strh r0, [r1, 0x18]
 	ldr r1, _08129260 @ =gUnknown_02039238
@@ -1326,7 +1326,7 @@ contest_ai_get_contest_type: @ 8129244
 	bx lr
 	.align 2, 0
 _08129258: .4byte 0x020192e4
-_0812925C: .4byte gUnknown_0203869C
+_0812925C: .4byte gSpecialVar_0x8011
 _08129260: .4byte gUnknown_02039238
 	thumb_func_end contest_ai_get_contest_type
 

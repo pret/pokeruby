@@ -34,7 +34,7 @@ extern void sub_80516C4(u8, u16);
 extern u8 unk_2000000[];
 extern u8 unk_2004000[];
 extern u16 gUnknown_020239F8;
-extern u16 word_203855E;
+extern u16 gScriptItemId;
 
 extern u16 word_3004858;
 
@@ -619,7 +619,7 @@ static void BuildSendCmd(u16 code)
         break;
     case 0xAAAB:
         gSendCmd[0] = 0xAAAB;
-        gSendCmd[1] = word_203855E;
+        gSendCmd[1] = gScriptItemId;
         break;
     case 0xCCCC:
         gSendCmd[0] = 0xCCCC;

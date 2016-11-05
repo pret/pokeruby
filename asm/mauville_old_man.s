@@ -219,7 +219,7 @@ _080F7B9C: .4byte gSaveBlock2
 sub_80F7BA0: @ 80F7BA0
 	push {r4-r7,lr}
 	ldr r1, _080F7C48 @ =gSaveBlock1 + 0x2D94
-	ldr r0, _080F7C4C @ =gUnknown_0202E8CC
+	ldr r0, _080F7C4C @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	adds r5, r1, 0
 	adds r5, 0xE
@@ -312,14 +312,14 @@ _080F7C3A:
 	bx r0
 	.align 2, 0
 _080F7C48: .4byte gSaveBlock1 + 0x2D94
-_080F7C4C: .4byte gUnknown_0202E8CC
+_080F7C4C: .4byte gSpecialVar_0x8004
 _080F7C50: .4byte gStringVar4
 	thumb_func_end sub_80F7BA0
 
 	thumb_func_start sub_80F7C54
 sub_80F7C54: @ 80F7C54
 	push {lr}
-	ldr r0, _080F7C6C @ =gUnknown_0202E8CC
+	ldr r0, _080F7C6C @ =gSpecialVar_0x8004
 	ldrb r0, [r0]
 	bl sub_80F7F80
 	bl MenuDisplayMessageBox
@@ -327,7 +327,7 @@ sub_80F7C54: @ 80F7C54
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F7C6C: .4byte gUnknown_0202E8CC
+_080F7C6C: .4byte gSpecialVar_0x8004
 	thumb_func_end sub_80F7C54
 
 	thumb_func_start sub_80F7C70
@@ -789,7 +789,7 @@ _080F7FCC:
 	.4byte _080F817A
 _080F7FE4:
 	ldr r2, _080F8034 @ =gSaveBlock1 + 0x2D94
-	ldr r0, _080F8038 @ =gUnknown_0202E8CC
+	ldr r0, _080F8038 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	adds r1, r2, 0
 	adds r1, 0xE
@@ -833,7 +833,7 @@ _080F8016:
 	b _080F817A
 	.align 2, 0
 _080F8034: .4byte gSaveBlock1 + 0x2D94
-_080F8038: .4byte gUnknown_0202E8CC
+_080F8038: .4byte gSpecialVar_0x8004
 _080F803C: .4byte 0x0000ffff
 _080F8040:
 	ldrb r1, [r6]

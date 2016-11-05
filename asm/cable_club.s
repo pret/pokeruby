@@ -973,7 +973,7 @@ sub_808347C: @ 808347C
 	push {r4,lr}
 	movs r3, 0x2
 	movs r2, 0x2
-	ldr r0, _08083494 @ =gUnknown_0202E8CC
+	ldr r0, _08083494 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0x2
 	beq _080834B0
@@ -983,7 +983,7 @@ sub_808347C: @ 808347C
 	beq _0808349E
 	b _080834CC
 	.align 2, 0
-_08083494: .4byte gUnknown_0202E8CC
+_08083494: .4byte gSpecialVar_0x8004
 _08083498:
 	cmp r0, 0x5
 	beq _080834C0
@@ -1233,7 +1233,7 @@ sub_8083664: @ 8083664
 	.align 2, 0
 _08083678: .4byte sub_8083710
 _0808367C:
-	ldr r0, _08083690 @ =gUnknown_0202E8CC
+	ldr r0, _08083690 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	subs r0, 0x1
 	cmp r0, 0x4
@@ -1244,7 +1244,7 @@ _0808367C:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_08083690: .4byte gUnknown_0202E8CC
+_08083690: .4byte gSpecialVar_0x8004
 _08083694: .4byte _08083698
 	.align 2, 0
 _08083698:
@@ -1545,7 +1545,7 @@ _080838E8:
 	ldr r0, _08083900 @ =0x000001cb
 	bl current_map_music_set__default_for_battle
 _080838EE:
-	ldr r0, _08083904 @ =gUnknown_0202E8CC
+	ldr r0, _08083904 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0x2
 	beq _08083918
@@ -1556,7 +1556,7 @@ _080838EE:
 	b _0808392E
 	.align 2, 0
 _08083900: .4byte 0x000001cb
-_08083904: .4byte gUnknown_0202E8CC
+_08083904: .4byte gSpecialVar_0x8004
 _08083908:
 	cmp r0, 0x5
 	beq _08083924
@@ -1605,7 +1605,7 @@ sub_8083958: @ 8083958
 	bl copy_player_party_from_sav1
 	bl copy_bags_and_unk_data_to_save_blocks
 	bl sub_810FEFC
-	ldr r0, _08083990 @ =gUnknown_0202E8CC
+	ldr r0, _08083990 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0x5
 	beq _0808397E
@@ -1623,7 +1623,7 @@ _0808397E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08083990: .4byte gUnknown_0202E8CC
+_08083990: .4byte gSpecialVar_0x8004
 _08083994: .4byte gUnknown_03004860
 _08083998: .4byte gMain
 _0808399C: .4byte sub_805465C
@@ -1633,7 +1633,7 @@ _080839A0: .4byte sub_8071B28
 	thumb_func_start sub_80839A4
 sub_80839A4: @ 80839A4
 	push {lr}
-	ldr r0, _080839CC @ =gUnknown_0202E8CC
+	ldr r0, _080839CC @ =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	subs r0, r1, 0x1
 	lsls r0, 16
@@ -1651,7 +1651,7 @@ _080839C0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080839CC: .4byte gUnknown_0202E8CC
+_080839CC: .4byte gSpecialVar_0x8004
 	thumb_func_end sub_80839A4
 
 	thumb_func_start sub_80839D0
@@ -1703,14 +1703,14 @@ _08083A20:
 	cmp r0, 0
 	beq _08083A7E
 	bl sub_8055574
-	ldr r0, _08083A3C @ =gUnknown_0202E8CE
+	ldr r0, _08083A3C @ =gSpecialVar_0x8005
 	ldrb r0, [r0]
 	bl sub_8007270
 	movs r0, 0x2
 	strh r0, [r5, 0x8]
 	b _08083A7E
 	.align 2, 0
-_08083A3C: .4byte gUnknown_0202E8CE
+_08083A3C: .4byte gSpecialVar_0x8005
 _08083A40:
 	bl sub_80554F8
 	cmp r0, 0x1
@@ -1928,14 +1928,14 @@ _08083BD8: .4byte sub_80B9484
 	thumb_func_start sub_8083BDC
 sub_8083BDC: @ 8083BDC
 	push {lr}
-	ldr r0, _08083BEC @ =gUnknown_0202E8D0
+	ldr r0, _08083BEC @ =gSpecialVar_0x8006
 	ldrb r0, [r0]
 	ldr r1, _08083BF0 @ =c2_exit_to_overworld_1_continue_scripts_restart_music
 	bl sub_8093130
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08083BEC: .4byte gUnknown_0202E8D0
+_08083BEC: .4byte gSpecialVar_0x8006
 _08083BF0: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
 	thumb_func_end sub_8083BDC
 
@@ -1945,7 +1945,7 @@ sub_8083BF4: @ 8083BF4
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, _08083C34 @ =gUnknown_0202E8D0
+	ldr r0, _08083C34 @ =gSpecialVar_0x8006
 	strh r4, [r0]
 	ldr r0, _08083C38 @ =gStringVar1
 	lsls r1, r4, 3
@@ -1970,7 +1970,7 @@ sub_8083BF4: @ 8083BF4
 	movs r0, 0x1
 	b _08083C4A
 	.align 2, 0
-_08083C34: .4byte gUnknown_0202E8D0
+_08083C34: .4byte gSpecialVar_0x8006
 _08083C38: .4byte gStringVar1
 _08083C3C: .4byte gLinkPlayers + 0x8
 _08083C40: .4byte gStringVar2

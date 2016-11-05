@@ -10,7 +10,7 @@
 sub_80E60D8: @ 80E60D8
 	push {r4-r7,lr}
 	movs r4, 0x3
-	ldr r0, _080E60F4 @ =gUnknown_0202E8CC
+	ldr r0, _080E60F4 @ =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	adds r7, r0, 0
 	cmp r1, 0xD
@@ -23,7 +23,7 @@ _080E60E8:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_080E60F4: .4byte gUnknown_0202E8CC
+_080E60F4: .4byte gSpecialVar_0x8004
 _080E60F8: .4byte _080E60FC
 	.align 2, 0
 _080E60FC:
@@ -62,7 +62,7 @@ _080E614C:
 	.align 2, 0
 _080E6150: .4byte gSaveBlock1 + 0x2B40
 _080E6154:
-	ldr r0, _080E6164 @ =gUnknown_0202E8CE
+	ldr r0, _080E6164 @ =gSpecialVar_0x8005
 	ldrh r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -71,7 +71,7 @@ _080E6154:
 	adds r1, r0, r1
 	b _080E624C
 	.align 2, 0
-_080E6164: .4byte gUnknown_0202E8CE
+_080E6164: .4byte gSpecialVar_0x8005
 _080E6168: .4byte gSaveBlock1 + 0x2B4C
 _080E616C:
 	ldr r0, _080E6194 @ =gSaveBlock1 + 0x2D94
@@ -99,39 +99,39 @@ _080E617C:
 _080E6194: .4byte gSaveBlock1 + 0x2D94
 _080E6198: .4byte sub_80546B8
 _080E619C:
-	ldr r0, _080E61B0 @ =gUnknown_0202E8CE
+	ldr r0, _080E61B0 @ =gSpecialVar_0x8005
 	ldrh r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
 	ldr r1, _080E61B4 @ =gSaveBlock1 + 0x273C
 	adds r1, r0, r1
-	ldr r0, _080E61B8 @ =gUnknown_0202E8D0
+	ldr r0, _080E61B8 @ =gSpecialVar_0x8006
 	ldrb r4, [r0]
 	b _080E6276
 	.align 2, 0
-_080E61B0: .4byte gUnknown_0202E8CE
+_080E61B0: .4byte gSpecialVar_0x8005
 _080E61B4: .4byte gSaveBlock1 + 0x273C
-_080E61B8: .4byte gUnknown_0202E8D0
+_080E61B8: .4byte gSpecialVar_0x8006
 _080E61BC:
-	ldr r0, _080E61D4 @ =gUnknown_0202E8CE
+	ldr r0, _080E61D4 @ =gSpecialVar_0x8005
 	ldrh r0, [r0]
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
 	ldr r0, _080E61D8 @ =gSaveBlock1 + 0x2754
 	adds r1, r0
-	ldr r0, _080E61DC @ =gUnknown_0202E8D0
+	ldr r0, _080E61DC @ =gSpecialVar_0x8006
 	ldrh r0, [r0]
 	lsls r0, 1
 	adds r1, r0
 	b _080E624A
 	.align 2, 0
-_080E61D4: .4byte gUnknown_0202E8CE
+_080E61D4: .4byte gSpecialVar_0x8005
 _080E61D8: .4byte gSaveBlock1 + 0x2754
-_080E61DC: .4byte gUnknown_0202E8D0
+_080E61DC: .4byte gSpecialVar_0x8006
 _080E61E0:
-	ldr r0, _080E61F4 @ =gUnknown_0202E8CE
+	ldr r0, _080E61F4 @ =gSpecialVar_0x8005
 	ldrh r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -141,7 +141,7 @@ _080E61E0:
 	movs r4, 0
 	b _080E6276
 	.align 2, 0
-_080E61F4: .4byte gUnknown_0202E8CE
+_080E61F4: .4byte gSpecialVar_0x8005
 _080E61F8: .4byte gSaveBlock1 + 0x273A
 _080E61FC:
 	movs r1, 0
@@ -156,25 +156,25 @@ _080E6200:
 _080E620C: .4byte gSaveBlock1 + 0x2B16
 _080E6210: .4byte 0x0000ffff
 _080E6214:
-	ldr r0, _080E6230 @ =gUnknown_0202E8CE
+	ldr r0, _080E6230 @ =gSpecialVar_0x8005
 	ldrh r0, [r0]
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
 	ldr r0, _080E6234 @ =gSaveBlock1 + 0x273C
 	adds r1, r0
-	ldr r0, _080E6238 @ =gUnknown_0202E8D0
+	ldr r0, _080E6238 @ =gSpecialVar_0x8006
 	ldrh r0, [r0]
 	lsls r0, 1
 	adds r1, r0
 	movs r4, 0
 	b _080E6276
 	.align 2, 0
-_080E6230: .4byte gUnknown_0202E8CE
+_080E6230: .4byte gSpecialVar_0x8005
 _080E6234: .4byte gSaveBlock1 + 0x273C
-_080E6238: .4byte gUnknown_0202E8D0
+_080E6238: .4byte gSpecialVar_0x8006
 _080E623C:
-	ldr r0, _080E6254 @ =gUnknown_0202E8CE
+	ldr r0, _080E6254 @ =gSpecialVar_0x8005
 	ldrh r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -188,7 +188,7 @@ _080E624C:
 	mov r12, r0
 	b _080E627A
 	.align 2, 0
-_080E6254: .4byte gUnknown_0202E8CE
+_080E6254: .4byte gSpecialVar_0x8005
 _080E6258: .4byte gSaveBlock1 + 0x2750
 _080E625C: .4byte sub_80546B8
 _080E6260:
@@ -1734,7 +1734,7 @@ _080E6E5C:
 	ldrb r0, [r5, 0x8]
 	cmp r0, 0
 	bne _080E6E82
-	ldr r4, _080E6ECC @ =gUnknown_0202E8CC
+	ldr r4, _080E6ECC @ =gSpecialVar_0x8004
 	bl sub_80E8094
 	lsls r0, 24
 	lsrs r0, 24
@@ -1744,7 +1744,7 @@ _080E6E82:
 	cmp r0, 0x9
 	bne _080E6E9C
 	bl sub_80E81C0
-	ldr r4, _080E6ECC @ =gUnknown_0202E8CC
+	ldr r4, _080E6ECC @ =gSpecialVar_0x8004
 	ldr r1, _080E6ED0 @ =0x00009c7c
 	adds r0, r5, r1
 	bl sub_80FA364
@@ -1765,7 +1765,7 @@ _080E6E9C:
 _080E6EB0:
 	strh r6, [r7]
 _080E6EB2:
-	ldr r4, _080E6ECC @ =gUnknown_0202E8CC
+	ldr r4, _080E6ECC @ =gSpecialVar_0x8004
 	bl sub_80E810C
 	lsls r0, 24
 	lsrs r0, 24
@@ -1776,7 +1776,7 @@ _080E6EBE:
 	b _080E6F5E
 	.align 2, 0
 _080E6EC8: .4byte gScriptResult
-_080E6ECC: .4byte gUnknown_0202E8CC
+_080E6ECC: .4byte gSpecialVar_0x8004
 _080E6ED0: .4byte 0x00009c7c
 _080E6ED4: .4byte 0x0000ffff
 _080E6ED8: .4byte sub_80E752C
@@ -11279,7 +11279,7 @@ _080EB7BE:
 	thumb_func_start sub_80EB7C4
 sub_80EB7C4: @ 80EB7C4
 	push {r4,r5,lr}
-	ldr r0, _080EB7D8 @ =gUnknown_0202E8CC
+	ldr r0, _080EB7D8 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0x1
 	beq _080EB7F0
@@ -11289,7 +11289,7 @@ sub_80EB7C4: @ 80EB7C4
 	beq _080EB7E6
 	b _080EB82E
 	.align 2, 0
-_080EB7D8: .4byte gUnknown_0202E8CC
+_080EB7D8: .4byte gSpecialVar_0x8004
 _080EB7DC:
 	cmp r0, 0x2
 	beq _080EB810

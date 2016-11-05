@@ -428,7 +428,7 @@ _0812358C: .4byte gCableCarPylonHookTilemapEntries
 _08123590: .4byte gMain
 _08123594: .4byte 0x0000043c
 _08123598:
-	ldr r0, _08123664 @ =gUnknown_0202E8CC
+	ldr r0, _08123664 @ =gSpecialVar_0x8004
 	ldrb r0, [r0]
 	bl sub_81248AC
 	ldr r0, _08123668 @ =gUnknown_02039274
@@ -521,7 +521,7 @@ _08123598:
 	adds r0, 0x1
 	b _0812370C
 	.align 2, 0
-_08123664: .4byte gUnknown_0202E8CC
+_08123664: .4byte gSpecialVar_0x8004
 _08123668: .4byte gUnknown_02039274
 _0812366C: .4byte 0x02019090
 _08123670: .4byte gMain
@@ -568,7 +568,7 @@ _081236B0:
 	ldr r0, _081236F4 @ =sub_8123878
 	movs r1, 0
 	bl CreateTask
-	ldr r0, _081236F8 @ =gUnknown_0202E8CC
+	ldr r0, _081236F8 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _08123700
@@ -580,7 +580,7 @@ _081236E8: .4byte 0x04000200
 _081236EC: .4byte sub_8123C40
 _081236F0: .4byte sub_8123724
 _081236F4: .4byte sub_8123878
-_081236F8: .4byte gUnknown_0202E8CC
+_081236F8: .4byte gSpecialVar_0x8004
 _081236FC: .4byte sub_81239E4
 _08123700:
 	ldr r0, _0812371C @ =sub_8123AF8
@@ -1326,7 +1326,7 @@ sub_8123CB8: @ 8123CB8
 	ldrb r0, [r6, 0x1]
 	cmp r0, 0xFF
 	beq _08123D84
-	ldr r0, _08123D24 @ =gUnknown_0202E8CC
+	ldr r0, _08123D24 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _08123D34
@@ -1367,7 +1367,7 @@ _08123D0A:
 	b _08123D84
 	.align 2, 0
 _08123D20: .4byte gUnknown_02039274
-_08123D24: .4byte gUnknown_0202E8CC
+_08123D24: .4byte gSpecialVar_0x8004
 _08123D28: .4byte 0x47800000
 _08123D2C: .4byte 0x3e0f5c29
 _08123D30: .4byte 0x3d89374c
@@ -1427,7 +1427,7 @@ sub_8123D98: @ 8123D98
 	bne _08123DA8
 	b _08123EB0
 _08123DA8:
-	ldr r0, _08123E08 @ =gUnknown_0202E8CC
+	ldr r0, _08123E08 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _08123E18
@@ -1468,7 +1468,7 @@ _08123DEC:
 	b _08123E68
 	.align 2, 0
 _08123E04: .4byte gUnknown_02039274
-_08123E08: .4byte gUnknown_0202E8CC
+_08123E08: .4byte gSpecialVar_0x8004
 _08123E0C: .4byte 0x47800000
 _08123E10: .4byte 0x3e0f5c29
 _08123E14: .4byte 0x3d89374c
@@ -1764,7 +1764,7 @@ _08124024:
 	strh r3, [r0]
 	adds r0, 0x2
 	strh r3, [r0]
-	ldr r0, _08124064 @ =gUnknown_0202E8CC
+	ldr r0, _08124064 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _0812406C
@@ -1782,7 +1782,7 @@ _08124024:
 	b _08124082
 	.align 2, 0
 _08124060: .4byte REG_WININ
-_08124064: .4byte gUnknown_0202E8CC
+_08124064: .4byte gSpecialVar_0x8004
 _08124068: .4byte gUnknown_02039274
 _0812406C:
 	ldr r1, _081240F4 @ =gUnknown_02039274
@@ -1902,7 +1902,7 @@ sub_8124118: @ 8124118
 	ldr r0, [r0]
 	str r0, [sp, 0x1C]
 	str r1, [sp, 0x20]
-	ldr r0, _08124240 @ =gUnknown_0202E8CC
+	ldr r0, _08124240 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	mov r8, r6
 	mov r10, r5
@@ -2004,7 +2004,7 @@ _08124230: .4byte gMtChimneyHikerGraphicsIDs
 _08124234: .4byte gMtChimneyHikerCoords
 _08124238: .4byte gMtChimneyHikerMovementDelayTable
 _0812423C: .4byte gUnknown_08401D9C
-_08124240: .4byte gUnknown_0202E8CC
+_08124240: .4byte gSpecialVar_0x8004
 _08124244: .4byte gSaveBlock2
 _08124248: .4byte sub_8123D98
 _0812424C: .4byte gSprites
@@ -2148,7 +2148,7 @@ _08124322:
 	lsrs r0, 16
 	add r0, r8
 	ldrb r0, [r0]
-	ldr r5, _08124410 @ =gUnknown_0202E8CC
+	ldr r5, _08124410 @ =gSpecialVar_0x8004
 	ldrh r4, [r5]
 	lsls r4, 2
 	add r1, sp, 0x1C
@@ -2218,7 +2218,7 @@ _08124400: .4byte gSpriteTemplate_8401D40
 _08124404: .4byte 0x00000109
 _08124408: .4byte 0xfff80000
 _0812440C: .4byte gSpriteTemplate_8401D70
-_08124410: .4byte gUnknown_0202E8CC
+_08124410: .4byte gSpecialVar_0x8004
 _08124414:
 	adds r0, r4, 0
 	movs r1, 0x7

@@ -170,13 +170,13 @@ _080BB5B8:
 	thumb_func_start sub_80BB5D0
 sub_80BB5D0: @ 80BB5D0
 	ldr r0, _080BB5DC @ =gUnknown_020387DC
-	ldr r1, _080BB5E0 @ =gUnknown_0202E8CC
+	ldr r1, _080BB5E0 @ =gSpecialVar_0x8004
 	ldrh r1, [r1]
 	strb r1, [r0]
 	bx lr
 	.align 2, 0
 _080BB5DC: .4byte gUnknown_020387DC
-_080BB5E0: .4byte gUnknown_0202E8CC
+_080BB5E0: .4byte gSpecialVar_0x8004
 	thumb_func_end sub_80BB5D0
 
 	thumb_func_start sub_80BB5E4
@@ -343,7 +343,7 @@ _080BB702:
 	thumb_func_start sub_80BB70C
 sub_80BB70C: @ 80BB70C
 	push {r4,lr}
-	ldr r4, _080BB720 @ =gUnknown_0202E8D2
+	ldr r4, _080BB720 @ =gSpecialVar_0x8007
 	bl sub_80BB66C
 	lsls r0, 24
 	lsrs r0, 24
@@ -352,7 +352,7 @@ sub_80BB70C: @ 80BB70C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080BB720: .4byte gUnknown_0202E8D2
+_080BB720: .4byte gSpecialVar_0x8007
 	thumb_func_end sub_80BB70C
 
 	thumb_func_start unref_sub_80BB724
@@ -1290,7 +1290,7 @@ _080BBE4E:
 	bcs _080BBE8E
 	ldr r0, [r2, 0x4]
 	ldrh r1, [r0, 0x14]
-	ldr r4, _080BBF8C @ =gUnknown_0202E8CC
+	ldr r4, _080BBF8C @ =gSpecialVar_0x8004
 	ldrh r0, [r4]
 	adds r0, 0xAE
 	adds r7, r4, 0
@@ -1320,13 +1320,13 @@ _080BBE8E:
 	ldrb r0, [r0]
 	cmp r5, r0
 	beq _080BBF5E
-	ldr r7, _080BBF90 @ =gUnknown_0202E8D0
+	ldr r7, _080BBF90 @ =gSpecialVar_0x8006
 	ldr r2, [sp, 0x8]
 	adds r1, r2, r6
 	ldrb r0, [r1]
 	lsrs r0, 4
 	strh r0, [r7]
-	ldr r6, _080BBF94 @ =gUnknown_0202E8D2
+	ldr r6, _080BBF94 @ =gSpecialVar_0x8007
 	ldrb r1, [r1]
 	movs r0, 0xF
 	ands r0, r1
@@ -1380,7 +1380,7 @@ _080BBEDA:
 	ldrb r0, [r4]
 	ldr r1, _080BBF9C @ =gScriptResult
 	strh r0, [r1]
-	ldr r2, _080BBF8C @ =gUnknown_0202E8CC
+	ldr r2, _080BBF8C @ =gSpecialVar_0x8004
 	ldrh r0, [r2]
 	adds r0, 0xAE
 	lsls r0, 16
@@ -1408,7 +1408,7 @@ _080BBEDA:
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
 	bl sub_805C78C
-	ldr r3, _080BBF8C @ =gUnknown_0202E8CC
+	ldr r3, _080BBF8C @ =gSpecialVar_0x8004
 	ldrh r0, [r3]
 	adds r0, 0x1
 	strh r0, [r3]
@@ -1434,9 +1434,9 @@ _080BBF7C: .4byte gSaveBlock1 + 0x1A1A
 _080BBF80: .4byte gSaveBlock1
 _080BBF84: .4byte gDecorations
 _080BBF88: .4byte gMapHeader
-_080BBF8C: .4byte gUnknown_0202E8CC
-_080BBF90: .4byte gUnknown_0202E8D0
-_080BBF94: .4byte gUnknown_0202E8D2
+_080BBF8C: .4byte gSpecialVar_0x8004
+_080BBF90: .4byte gSpecialVar_0x8006
+_080BBF94: .4byte gSpecialVar_0x8007
 _080BBF98: .4byte 0x00003f20
 _080BBF9C: .4byte gScriptResult
 _080BBFA0: .4byte gDecorations + 0x1C
@@ -3392,7 +3392,7 @@ _080BCEB2:
 	ldr r0, _080BCF08 @ =0x000008c2
 	bl FlagSet
 _080BCED4:
-	ldr r4, _080BCF14 @ =gUnknown_0202E8CC
+	ldr r4, _080BCF14 @ =gSpecialVar_0x8004
 	lsls r0, r5, 24
 	lsrs r0, 24
 	bl sub_80BCCA4
@@ -3419,7 +3419,7 @@ _080BCF04: .4byte 0x00004054
 _080BCF08: .4byte 0x000008c2
 _080BCF0C: .4byte gSaveBlock1
 _080BCF10: .4byte 0x00001a09
-_080BCF14: .4byte gUnknown_0202E8CC
+_080BCF14: .4byte gSpecialVar_0x8004
 _080BCF18: .4byte gScriptResult
 	thumb_func_end sub_80BCE90
 

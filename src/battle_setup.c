@@ -150,7 +150,7 @@ extern struct TrainerEyeTrainer gTrainerEyeTrainers[];
 extern u8 gOtherText_CancelWithTerminator[];
 
 extern u16 gUnknown_020239F8;
-extern u16 gUnknown_0202E8DE;
+extern u16 gScriptLastTalked;
 extern u8 gUnknown_02024D26;
 extern u16 gBadgeFlags[];
 
@@ -696,7 +696,7 @@ void battle_80801F0(void)
 {
     if (gTrainerMapObjectLocalId)
     {
-        gUnknown_0202E8DE = gTrainerMapObjectLocalId;
+        gScriptLastTalked = gTrainerMapObjectLocalId;
         gSelectedMapObject = GetFieldObjectIdByLocalIdAndMap(gTrainerMapObjectLocalId, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup);
     }
 }
@@ -745,7 +745,7 @@ u8 *TrainerBattleConfigure(u8 *data)
 void TrainerWantsBattle(u8 trainerMapObjId, u8 *trainerScript)
 {
     gSelectedMapObject = trainerMapObjId;
-    gUnknown_0202E8DE = gMapObjects[trainerMapObjId].localId;
+    gScriptLastTalked = gMapObjects[trainerMapObjId].localId;
     TrainerBattleConfigure(trainerScript + 1);
     ScriptContext1_SetupScript(gUnknown_0819F80B);
     ScriptContext2_Enable();

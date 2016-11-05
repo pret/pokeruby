@@ -245,13 +245,13 @@ _08042AA4: .4byte gStringVar1
 	thumb_func_start ScriptHatchMon
 ScriptHatchMon: @ 8042AA8
 	push {lr}
-	ldr r0, _08042AB8 @ =gUnknown_0202E8CC
+	ldr r0, _08042AB8 @ =gSpecialVar_0x8004
 	ldrb r0, [r0]
 	bl AddHatchedMonToParty
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08042AB8: .4byte gUnknown_0202E8CC
+_08042AB8: .4byte gSpecialVar_0x8004
 	thumb_func_end ScriptHatchMon
 
 	thumb_func_start sub_8042ABC
@@ -325,7 +325,7 @@ _08042B42:
 sub_8042B4C: @ 8042B4C
 	push {lr}
 	ldr r0, _08042B60 @ =gSaveBlock1 + 0x2F9C
-	ldr r1, _08042B64 @ =gUnknown_0202E8CC
+	ldr r1, _08042B64 @ =gSpecialVar_0x8004
 	ldrb r1, [r1]
 	bl sub_8042ABC
 	lsls r0, 24
@@ -334,7 +334,7 @@ sub_8042B4C: @ 8042B4C
 	bx r1
 	.align 2, 0
 _08042B60: .4byte gSaveBlock1 + 0x2F9C
-_08042B64: .4byte gUnknown_0202E8CC
+_08042B64: .4byte gSpecialVar_0x8004
 	thumb_func_end sub_8042B4C
 
 	thumb_func_start EggHatchCreateMonSprite
@@ -562,7 +562,7 @@ _08042D34:
 	ldr r1, _08042D74 @ =gUnknown_0300481C
 	ldr r0, _08042D78 @ =0x02018000
 	str r0, [r1]
-	ldr r1, _08042D7C @ =gUnknown_0202E8CC
+	ldr r1, _08042D7C @ =gSpecialVar_0x8004
 	ldrh r1, [r1]
 	strb r1, [r0, 0x4]
 	adds r0, 0x3A
@@ -579,17 +579,17 @@ _08042D34:
 	adds r0, 0x1
 	strb r0, [r1]
 	bl GetCurrentMapMusic
-	ldr r1, _08042D8C @ =gUnknown_0202E8CE
+	ldr r1, _08042D8C @ =gSpecialVar_0x8005
 	strh r0, [r1]
 	b _08042F6E
 	.align 2, 0
 _08042D74: .4byte gUnknown_0300481C
 _08042D78: .4byte 0x02018000
-_08042D7C: .4byte gUnknown_0202E8CC
+_08042D7C: .4byte gSpecialVar_0x8004
 _08042D80: .4byte VBlankCB_EggHatch
 _08042D84: .4byte gMain
 _08042D88: .4byte 0x0000043c
-_08042D8C: .4byte gUnknown_0202E8CE
+_08042D8C: .4byte gSpecialVar_0x8005
 _08042D90:
 	ldr r5, _08042DBC @ =gWindowConfig_81E6F84
 	adds r0, r5, 0
@@ -809,7 +809,7 @@ _08042F84: .4byte gUnknown_0300481C
 	thumb_func_start EggHatchSetMonNickname
 EggHatchSetMonNickname: @ 8042F88
 	push {lr}
-	ldr r0, _08042FA8 @ =gUnknown_0202E8CC
+	ldr r0, _08042FA8 @ =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
@@ -823,7 +823,7 @@ EggHatchSetMonNickname: @ 8042F88
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08042FA8: .4byte gUnknown_0202E8CC
+_08042FA8: .4byte gSpecialVar_0x8004
 _08042FAC: .4byte gPlayerParty
 _08042FB0: .4byte gStringVar3
 _08042FB4: .4byte c2_exit_to_overworld_2_switch

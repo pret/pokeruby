@@ -1010,14 +1010,14 @@ _08147C08:
 	.align 2, 0
 _08147C10: .4byte gUnknown_084121DC
 _08147C14:
-	ldr r0, _08147C24 @ =word_203855E
+	ldr r0, _08147C24 @ =gScriptItemId
 	ldrb r0, [r0]
 	bl sub_8147C90
 	ldr r0, _08147C28 @ =gUnknown_02039350
 	bl LoadCompressedObjectPalette
 	b _08147C40
 	.align 2, 0
-_08147C24: .4byte word_203855E
+_08147C24: .4byte gScriptItemId
 _08147C28: .4byte gUnknown_02039350
 _08147C2C:
 	ldr r0, _08147C34 @ =gBattleTerrainTiles_Building
@@ -1296,7 +1296,7 @@ sub_8147E40: @ 8147E40
 	muls r5, r0
 	ldr r0, _08147E98 @ =gPlayerParty
 	adds r5, r0
-	ldr r0, _08147E9C @ =word_203855E
+	ldr r0, _08147E9C @ =gScriptItemId
 	ldrh r4, [r0]
 	lsls r4, 3
 	ldr r0, _08147EA0 @ =gSaveBlock1 + 0x7F8
@@ -1326,7 +1326,7 @@ sub_8147E40: @ 8147E40
 	.align 2, 0
 _08147E94: .4byte gUnknown_02039310
 _08147E98: .4byte gPlayerParty
-_08147E9C: .4byte word_203855E
+_08147E9C: .4byte gScriptItemId
 _08147EA0: .4byte gSaveBlock1 + 0x7F8
 _08147EA4: .4byte gUnknown_02039312
 _08147EA8: .4byte gStringVar1

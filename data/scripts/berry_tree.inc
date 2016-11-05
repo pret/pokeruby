@@ -43,9 +43,9 @@ Route102_EventScript_1A1577:: @ 81A1577
 	closebutton
 	special 44
 	waitstate
-	compare 0x800e, 0
+	compare ITEM_ID, 0
 	jumpeq Route102_EventScript_1A1593
-	removeitem 0x800e, 1
+	removeitem ITEM_ID, 1
 	call Route102_EventScript_1A16A9
 
 Route102_EventScript_1A1593:: @ 81A1593

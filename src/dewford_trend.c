@@ -10,7 +10,7 @@ extern u8 ConvertEasyChatWordsToString(u8 *dst, u16 *words, u16, u16);
 extern struct EasyChatPair unk_2007800[5];
 extern struct EasyChatPair unk_2007900[5];
 extern u16 gScriptResult;
-extern u16 gUnknown_0202E8CC;
+extern u16 gSpecialVar_0x8004;
 
 void sub_80FA740(struct EasyChatPair *);
 void sub_80FA46C(struct EasyChatPair *, u16, u8);
@@ -514,7 +514,7 @@ _080FA5B8: .4byte gSaveBlock1 + 0x2DD4\n\
 
 void sub_80FA5BC(void)
 {
-    struct EasyChatPair *s = &gSaveBlock1.easyChatPairs[gUnknown_0202E8CC];
+    struct EasyChatPair *s = &gSaveBlock1.easyChatPairs[gSpecialVar_0x8004];
 
     ConvertEasyChatWordsToString(gStringVar1, s->words, 2, 1);
 }

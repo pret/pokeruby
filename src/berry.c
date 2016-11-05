@@ -19,10 +19,11 @@ extern u8 *GetFieldObjectScriptPointerForComparison();
 extern struct Berry gBerries[];
 extern u8 BerryTreeScript;
 extern struct BerryTree gUnknown_083CD780;
-extern u16 gUnknown_0202E8DE;
-extern u16 gUnknown_0202E8CC;
-extern u16 gUnknown_0202E8CE;
-extern u16 gUnknown_0202E8D0;
+extern u16 gScriptItemId;
+extern u16 gScriptLastTalked;
+extern u16 gSpecialVar_0x8004;
+extern u16 gSpecialVar_0x8005;
+extern u16 gSpecialVar_0x8006;
 
 u8 CalcBerryYield(struct BerryTree *tree);
 
@@ -388,17 +389,17 @@ void FieldObjectInteractionGetBerryTreeData(void)
     id = FieldObjectGetBerryTreeId(gSelectedMapObject);
     berry = GetBerryTypeByBerryTreeId(id);
     ResetBerryTreeSparkleFlag(id);
-    unk = gUnknown_0202E8DE;
+    unk = gScriptLastTalked;
     num = gSaveBlock1.location.mapNum;
     group = gSaveBlock1.location.mapGroup;
 
     if (sub_8060234(unk, num, group))
-        gUnknown_0202E8CC = 0xff;
+        gSpecialVar_0x8004 = 0xff;
     else
-        gUnknown_0202E8CC = (u8)GetStageByBerryTreeId(id);
+        gSpecialVar_0x8004 = (u8)GetStageByBerryTreeId(id);
 
-    gUnknown_0202E8CE = (u8)GetNumStagesWateredByBerryTreeId(id);
-    gUnknown_0202E8D0 = (u8)GetBerryCountByBerryTreeId(id);
+    gSpecialVar_0x8005 = (u8)GetNumStagesWateredByBerryTreeId(id);
+    gSpecialVar_0x8006 = (u8)GetBerryCountByBerryTreeId(id);
     GetBerryNameByBerryType(berry, gStringVar1);
 }
 
@@ -409,8 +410,7 @@ void sub_80B4EE4(void)
 
 void FieldObjectInteractionPlantBerryTree(void)
 {
-    extern u16 word_203855E;
-    u8 berry = ItemIdToBerryType(word_203855E);
+    u8 berry = ItemIdToBerryType(gScriptItemId);
     PlantBerryTree(FieldObjectGetBerryTreeId(gSelectedMapObject), berry, 1, 1);
     FieldObjectInteractionGetBerryTreeData();
 }
@@ -421,7 +421,7 @@ void FieldObjectInteractionPickBerryTree(void)
     u8 berry;
     id = FieldObjectGetBerryTreeId(gSelectedMapObject);
     berry = GetBerryTypeByBerryTreeId(id);
-    gUnknown_0202E8CC = AddBagItem(BerryTypeToItemId(berry), GetBerryCountByBerryTreeId(id));
+    gSpecialVar_0x8004 = AddBagItem(BerryTypeToItemId(berry), GetBerryCountByBerryTreeId(id));
 }
 
 void FieldObjectInteractionRemoveBerryTree(void)
@@ -431,7 +431,7 @@ void FieldObjectInteractionRemoveBerryTree(void)
     u8 group, num;
     id = FieldObjectGetBerryTreeId(gSelectedMapObject);
     RemoveBerryTree(id);
-    unk = gUnknown_0202E8DE;
+    unk = gScriptLastTalked;
     num = gSaveBlock1.location.mapNum;
     group = gSaveBlock1.location.mapGroup;
     sub_8060288(unk, num, group);

@@ -14,7 +14,7 @@
 void remove_some_task(void);
 void LoadCompressedObjectPic(void *);
 
-extern u16 gUnknown_0202E8CC;
+extern u16 gSpecialVar_0x8004;
 extern u16 gMiscClockMale_Pal[];
 extern u16 gMiscClockFemale_Pal[];
 extern u8 gMiscClock_Gfx[];
@@ -118,7 +118,7 @@ static void LoadWallClockGraphics(void)
     DmaClear16(3, PLTT, PLTT_SIZE);
     
     LZ77UnCompVram(gMiscClock_Gfx, (void *)VRAM);
-    if(gUnknown_0202E8CC == MALE)
+    if(gSpecialVar_0x8004 == MALE)
         LoadPalette(gMiscClockMale_Pal, 0, 32);
     else
         LoadPalette(gMiscClockFemale_Pal, 0, 32);

@@ -2397,9 +2397,9 @@ sub_80FF474: @ 80FF474
 	movs r6, 0
 	ldr r0, _080FF54C @ =gMapHeader
 	mov r8, r0
-	ldr r1, _080FF550 @ =gUnknown_0202E8CE
+	ldr r1, _080FF550 @ =gSpecialVar_0x8005
 	mov r9, r1
-	ldr r2, _080FF554 @ =gUnknown_0202E8D0
+	ldr r2, _080FF554 @ =gSpecialVar_0x8006
 	mov r10, r2
 	ldr r7, _080FF558 @ =gSaveBlock1
 _080FF490:
@@ -2472,7 +2472,7 @@ _080FF4E0:
 	strh r1, [r2]
 	ldr r1, _080FF568 @ =gUnknown_020391A6
 	ldrh r1, [r1]
-	ldr r4, _080FF56C @ =gUnknown_0202E8D2
+	ldr r4, _080FF56C @ =gSpecialVar_0x8007
 	strh r1, [r4]
 	ldrb r1, [r7, 0x5]
 	ldrb r2, [r7, 0x4]
@@ -2495,14 +2495,14 @@ _080FF4E0:
 	b _080FF57A
 	.align 2, 0
 _080FF54C: .4byte gMapHeader
-_080FF550: .4byte gUnknown_0202E8CE
-_080FF554: .4byte gUnknown_0202E8D0
+_080FF550: .4byte gSpecialVar_0x8005
+_080FF554: .4byte gSpecialVar_0x8006
 _080FF558: .4byte gSaveBlock1
 _080FF55C: .4byte 0x00003f20
 _080FF560: .4byte gUnknown_02038900
 _080FF564: .4byte gUnknown_020391A4
 _080FF568: .4byte gUnknown_020391A6
-_080FF56C: .4byte gUnknown_0202E8D2
+_080FF56C: .4byte gSpecialVar_0x8007
 _080FF570:
 	adds r0, r6, 0x1
 	lsls r0, 24
@@ -5255,12 +5255,12 @@ _08100A78: .4byte 0x0201f000
 	thumb_func_start sub_8100A7C
 sub_8100A7C: @ 8100A7C
 	push {r4-r6,lr}
-	ldr r6, _08100A9C @ =gUnknown_0202E8CE
+	ldr r6, _08100A9C @ =gSpecialVar_0x8005
 	movs r0, 0
 	strh r0, [r6]
 	ldr r2, _08100AA0 @ =gScriptResult
 	strh r0, [r2]
-	ldr r4, _08100AA4 @ =gUnknown_0202E8CC
+	ldr r4, _08100AA4 @ =gSpecialVar_0x8004
 	ldr r1, _08100AA8 @ =gUnknown_02039234
 	ldrh r0, [r4]
 	ldrb r1, [r1]
@@ -5270,17 +5270,17 @@ sub_8100A7C: @ 8100A7C
 	strh r0, [r2]
 	b _08100B0A
 	.align 2, 0
-_08100A9C: .4byte gUnknown_0202E8CE
+_08100A9C: .4byte gSpecialVar_0x8005
 _08100AA0: .4byte gScriptResult
-_08100AA4: .4byte gUnknown_0202E8CC
+_08100AA4: .4byte gSpecialVar_0x8004
 _08100AA8: .4byte gUnknown_02039234
 _08100AAC:
-	ldr r1, _08100AB4 @ =gUnknown_0202E8D0
+	ldr r1, _08100AB4 @ =gSpecialVar_0x8006
 	ldrb r0, [r2]
 	strh r0, [r1]
 	b _08100B0A
 	.align 2, 0
-_08100AB4: .4byte gUnknown_0202E8D0
+_08100AB4: .4byte gSpecialVar_0x8006
 _08100AB8:
 	ldr r3, _08100B10 @ =gDecorations
 	ldr r2, _08100B14 @ =0x0201f000
@@ -5345,9 +5345,9 @@ sub_8100B20: @ 8100B20
 	bcs _08100B64
 	adds r3, r0, 0
 	ldr r5, [r3, 0x4]
-	ldr r0, _08100B50 @ =gUnknown_0202E8CC
+	ldr r0, _08100B50 @ =gSpecialVar_0x8004
 	ldrh r4, [r0]
-	ldr r6, _08100B54 @ =gUnknown_0202E8CE
+	ldr r6, _08100B54 @ =gSpecialVar_0x8005
 _08100B38:
 	lsls r0, r2, 1
 	adds r0, r2
@@ -5361,8 +5361,8 @@ _08100B38:
 	b _08100B64
 	.align 2, 0
 _08100B4C: .4byte gMapHeader
-_08100B50: .4byte gUnknown_0202E8CC
-_08100B54: .4byte gUnknown_0202E8CE
+_08100B50: .4byte gSpecialVar_0x8004
+_08100B54: .4byte gSpecialVar_0x8005
 _08100B58:
 	adds r0, r2, 0x1
 	lsls r0, 24

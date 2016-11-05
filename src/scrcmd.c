@@ -152,16 +152,16 @@ extern u16 gUnknown_0202E8B6;
 extern u16 gUnknown_0202E8B8;
 extern u16 gUnknown_0202E8BA;
 extern u16 gUnknown_0202E8BC;
-extern u16 gUnknown_0202E8C4;
-extern u16 gUnknown_0202E8C6;
-extern u16 gUnknown_0202E8C8;
-extern u16 gUnknown_0202E8CC;
+extern u16 gSpecialVar_0x8000;
+extern u16 gSpecialVar_0x8001;
+extern u16 gSpecialVar_0x8002;
+extern u16 gSpecialVar_0x8004;
 
 extern u16 gScriptResult;
 
 extern u32 gUnknown_0202FF84[];
 
-extern u16 gUnknown_0203869C;
+extern u16 gSpecialVar_0x8011;
 
 extern SpecialFunc gSpecials[];
 extern u8 *gStdScripts[];
@@ -714,9 +714,9 @@ bool8 ScrCmd_checkdailyflags(struct ScriptContext *ctx)
 bool8 ScrCmd_resetvars(struct ScriptContext *ctx)
 {
     RtcCalcLocalTime();
-    gUnknown_0202E8C4 = gLocalTime.hours;
-    gUnknown_0202E8C6 = gLocalTime.minutes;
-    gUnknown_0202E8C8 = gLocalTime.seconds;
+    gSpecialVar_0x8000 = gLocalTime.hours;
+    gSpecialVar_0x8001 = gLocalTime.minutes;
+    gSpecialVar_0x8002 = gLocalTime.seconds;
     return FALSE;
 }
 
@@ -1571,7 +1571,7 @@ bool8 ScrCmd_checkattack(struct ScriptContext *ctx)
         if (!GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG) && pokemon_has_move(&gPlayerParty[i], moveId) == TRUE)
         {
             gScriptResult = i;
-            gUnknown_0202E8CC = species;
+            gSpecialVar_0x8004 = species;
             break;
         }
     }
@@ -1792,7 +1792,7 @@ bool8 ScrCmd_showcontestresults(struct ScriptContext *ctx)
 
 bool8 ScrCmd_contestlinktransfer(struct ScriptContext *ctx)
 {
-    sub_80C4980(gUnknown_0203869C);
+    sub_80C4980(gSpecialVar_0x8011);
     ScriptContext1_Stop();
     return TRUE;
 }

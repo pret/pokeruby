@@ -17,7 +17,6 @@
 	.include "constants/battle_tower_constants.inc"
 	.include "constants/opponent_constants.inc"
 	.include "constants/decorations.inc"
-	.include "constants/variables.inc"
 	.include "constants/songs.inc"
 	.include "constants/version.inc"
 	.include "constants/region_map_sections.inc"

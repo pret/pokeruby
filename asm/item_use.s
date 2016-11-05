@@ -11,7 +11,7 @@ sub_80C8FAC: @ 80C8FAC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r1, _080C8FD0 @ =word_203855E
+	ldr r1, _080C8FD0 @ =gScriptItemId
 	ldrh r0, [r1]
 	cmp r0, 0xAF
 	bne _080C8FD8
@@ -26,7 +26,7 @@ sub_80C8FAC: @ 80C8FAC
 	lsrs r3, r0, 24
 	b _080C8FE6
 	.align 2, 0
-_080C8FD0: .4byte word_203855E
+_080C8FD0: .4byte gScriptItemId
 _080C8FD4: .4byte gTasks
 _080C8FD8:
 	ldrh r0, [r1]
@@ -243,7 +243,7 @@ sub_80C9154: @ 80C9154
 	cmp r0, 0
 	bne _080C9180
 	mov r1, sp
-	ldr r0, _080C918C @ =word_203855E
+	ldr r0, _080C918C @ =gScriptItemId
 	ldrh r0, [r0]
 	strh r0, [r1, 0x20]
 	ldr r1, _080C9190 @ =sub_80A5D04
@@ -259,7 +259,7 @@ _080C9180:
 	bx r0
 	.align 2, 0
 _080C9188: .4byte gPaletteFade
-_080C918C: .4byte word_203855E
+_080C918C: .4byte gScriptItemId
 _080C9190: .4byte sub_80A5D04
 	thumb_func_end sub_80C9154
 
@@ -395,7 +395,7 @@ ItemUseOnFieldCB_Bike: @ 80C929C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r4, _080C92E0 @ =word_203855E
+	ldr r4, _080C92E0 @ =gScriptItemId
 	ldrh r0, [r4]
 	bl ItemId_GetSecondaryId
 	lsls r0, 24
@@ -421,7 +421,7 @@ _080C92CA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080C92E0: .4byte word_203855E
+_080C92E0: .4byte gScriptItemId
 	thumb_func_end ItemUseOnFieldCB_Bike
 
 	thumb_func_start CanFish
@@ -537,7 +537,7 @@ ItemUseOnFieldCB_Rod: @ 80C93B8
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, _080C93DC @ =word_203855E
+	ldr r0, _080C93DC @ =gScriptItemId
 	ldrh r0, [r0]
 	bl ItemId_GetSecondaryId
 	lsls r0, 24
@@ -549,7 +549,7 @@ ItemUseOnFieldCB_Rod: @ 80C93B8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080C93DC: .4byte word_203855E
+_080C93DC: .4byte gScriptItemId
 	thumb_func_end ItemUseOnFieldCB_Rod
 
 	thumb_func_start ItemUseOutOfBattle_Itemfinder
@@ -1666,7 +1666,7 @@ unref_sub_80C9BF8: @ 80C9BF8
 	movs r3, 0x14
 	bl MenuZeroFillWindowRect
 	ldr r4, _080C9C40 @ =gUnknown_083D61DC
-	ldr r0, _080C9C44 @ =word_203855E
+	ldr r0, _080C9C44 @ =gScriptItemId
 	ldrh r0, [r0]
 	bl ItemId_GetSecondaryId
 	lsls r0, 24
@@ -1681,11 +1681,11 @@ unref_sub_80C9BF8: @ 80C9BF8
 	.align 2, 0
 _080C9C3C: .4byte gTasks
 _080C9C40: .4byte gUnknown_083D61DC
-_080C9C44: .4byte word_203855E
+_080C9C44: .4byte gScriptItemId
 _080C9C48: .4byte sub_80C9BB8
 _080C9C4C:
 	ldr r4, _080C9C70 @ =gUnknown_083D61DC
-	ldr r0, _080C9C74 @ =word_203855E
+	ldr r0, _080C9C74 @ =gScriptItemId
 	ldrh r0, [r0]
 	bl ItemId_GetSecondaryId
 	lsls r0, 24
@@ -1702,7 +1702,7 @@ _080C9C68:
 	bx r0
 	.align 2, 0
 _080C9C70: .4byte gUnknown_083D61DC
-_080C9C74: .4byte word_203855E
+_080C9C74: .4byte gScriptItemId
 _080C9C78: .4byte sub_80C9BD8
 	thumb_func_end unref_sub_80C9BF8
 
@@ -1752,7 +1752,7 @@ _080C9CD8: .4byte gTasks
 _080C9CDC: .4byte c2_exit_to_overworld_2_switch
 _080C9CE0: .4byte sub_80A5B00
 _080C9CE4:
-	ldr r0, _080C9CFC @ =word_203855E
+	ldr r0, _080C9CFC @ =gScriptItemId
 	ldrh r0, [r0]
 	bl ItemId_GetFieldFunc
 	adds r1, r0, 0
@@ -1764,7 +1764,7 @@ _080C9CF4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080C9CFC: .4byte word_203855E
+_080C9CFC: .4byte gScriptItemId
 	thumb_func_end sub_80C9C7C
 
 	thumb_func_start sub_80C9D00
@@ -1773,7 +1773,7 @@ sub_80C9D00: @ 80C9D00
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, _080C9D28 @ =word_203855E
+	ldr r0, _080C9D28 @ =gScriptItemId
 	ldrh r0, [r0]
 	movs r1, 0x1
 	bl RemoveBagItem
@@ -1786,7 +1786,7 @@ sub_80C9D00: @ 80C9D00
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080C9D28: .4byte word_203855E
+_080C9D28: .4byte gScriptItemId
 _080C9D2C: .4byte gUnknown_081A1654
 	thumb_func_end sub_80C9D00
 
@@ -1989,7 +1989,7 @@ ItemUseOutOfBattle_TMHM: @ 80C9E90
 	movs r2, 0xD
 	movs r3, 0x14
 	bl MenuZeroFillWindowRect
-	ldr r0, _080C9EBC @ =word_203855E
+	ldr r0, _080C9EBC @ =gScriptItemId
 	ldrh r1, [r0]
 	movs r0, 0xA9
 	lsls r0, 1
@@ -2002,7 +2002,7 @@ ItemUseOutOfBattle_TMHM: @ 80C9E90
 	bl DisplayItemMessageOnField
 	b _080C9ED4
 	.align 2, 0
-_080C9EBC: .4byte word_203855E
+_080C9EBC: .4byte gScriptItemId
 _080C9EC0: .4byte gOtherText_BootedHM
 _080C9EC4: .4byte sub_80C9EE4
 _080C9EC8:
@@ -2060,7 +2060,7 @@ sub_80C9F10: @ 80C9F10
 	beq _080C9F5C
 _080C9F2A:
 	ldr r4, _080C9F68 @ =gStringVar1
-	ldr r0, _080C9F6C @ =word_203855E
+	ldr r0, _080C9F6C @ =gScriptItemId
 	ldrh r0, [r0]
 	bl ItemIdToBattleMoveId
 	lsls r0, 16
@@ -2087,7 +2087,7 @@ _080C9F5C:
 	.align 2, 0
 _080C9F64: .4byte gMain
 _080C9F68: .4byte gStringVar1
-_080C9F6C: .4byte word_203855E
+_080C9F6C: .4byte gScriptItemId
 _080C9F70: .4byte gMoveNames
 _080C9F74: .4byte gStringVar4
 _080C9F78: .4byte gOtherText_ContainsMove
@@ -2145,7 +2145,7 @@ _080C9FD8: .4byte sub_806F06C
 	thumb_func_start sub_80C9FDC
 sub_80C9FDC: @ 80C9FDC
 	push {r4,lr}
-	ldr r4, _080CA004 @ =word_203855E
+	ldr r4, _080CA004 @ =gScriptItemId
 	ldrh r0, [r4]
 	movs r1, 0x1
 	bl RemoveBagItem
@@ -2160,7 +2160,7 @@ sub_80C9FDC: @ 80C9FDC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080CA004: .4byte word_203855E
+_080CA004: .4byte gScriptItemId
 _080CA008: .4byte gStringVar2
 _080CA00C: .4byte gStringVar4
 _080CA010: .4byte gOtherText_UsedItem
@@ -2177,7 +2177,7 @@ ItemUseOutOfBattle_Repel: @ 80CA014
 	lsls r0, 16
 	cmp r0, 0
 	bne _080CA060
-	ldr r0, _080CA054 @ =word_203855E
+	ldr r0, _080CA054 @ =gScriptItemId
 	ldrh r0, [r0]
 	bl ItemId_GetHoldEffectParam
 	adds r1, r0, 0
@@ -2194,7 +2194,7 @@ ItemUseOutOfBattle_Repel: @ 80CA014
 	b _080CA06C
 	.align 2, 0
 _080CA050: .4byte 0x00004021
-_080CA054: .4byte word_203855E
+_080CA054: .4byte gScriptItemId
 _080CA058: .4byte gStringVar4
 _080CA05C: .4byte sub_80A5C48
 _080CA060:
@@ -2216,14 +2216,14 @@ _080CA078: .4byte sub_80A5C48
 sub_80CA07C: @ 80CA07C
 	push {lr}
 	bl sub_80A3E0C
-	ldr r0, _080CA090 @ =word_203855E
+	ldr r0, _080CA090 @ =gScriptItemId
 	ldrh r0, [r0]
 	ldr r1, _080CA094 @ =gStringVar2
 	bl CopyItemName
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080CA090: .4byte word_203855E
+_080CA090: .4byte gScriptItemId
 _080CA094: .4byte gStringVar2
 	thumb_func_end sub_80CA07C
 
@@ -2267,7 +2267,7 @@ ItemUseOutOfBattle_BlackWhiteFlute: @ 80CA0DC
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r5, r4, 0
-	ldr r0, _080CA10C @ =word_203855E
+	ldr r0, _080CA10C @ =gScriptItemId
 	ldrh r0, [r0]
 	cmp r0, 0x2B
 	bne _080CA124
@@ -2284,7 +2284,7 @@ ItemUseOutOfBattle_BlackWhiteFlute: @ 80CA0DC
 	adds r0, r4
 	b _080CA146
 	.align 2, 0
-_080CA10C: .4byte word_203855E
+_080CA10C: .4byte gScriptItemId
 _080CA110: .4byte 0x0000084d
 _080CA114: .4byte 0x0000084e
 _080CA118: .4byte gStringVar4
@@ -2447,7 +2447,7 @@ ItemUseInBattle_PokeBall: @ 80CA244
 	lsls r0, 24
 	cmp r0, 0
 	bne _080CA26C
-	ldr r0, _080CA268 @ =word_203855E
+	ldr r0, _080CA268 @ =gScriptItemId
 	ldrh r0, [r0]
 	movs r1, 0x1
 	bl RemoveBagItem
@@ -2455,7 +2455,7 @@ ItemUseInBattle_PokeBall: @ 80CA244
 	bl sub_80A7094
 	b _080CA284
 	.align 2, 0
-_080CA268: .4byte word_203855E
+_080CA268: .4byte gScriptItemId
 _080CA26C:
 	movs r0, 0
 	movs r1, 0xD
@@ -2520,7 +2520,7 @@ sub_80CA2BC: @ 80CA2BC
 	ble _080CA2FC
 	movs r0, 0x1
 	bl PlaySE
-	ldr r4, _080CA308 @ =word_203855E
+	ldr r4, _080CA308 @ =gScriptItemId
 	ldrh r0, [r4]
 	movs r1, 0x1
 	bl RemoveBagItem
@@ -2537,7 +2537,7 @@ _080CA2FC:
 	bx r0
 	.align 2, 0
 _080CA304: .4byte gTasks
-_080CA308: .4byte word_203855E
+_080CA308: .4byte gScriptItemId
 _080CA30C: .4byte sub_80CA294
 	thumb_func_end sub_80CA2BC
 
@@ -2561,7 +2561,7 @@ ItemUseInBattle_StatIncrease: @ 80CA310
 	muls r0, r4
 	ldr r1, _080CA364 @ =gPlayerParty
 	adds r0, r1
-	ldr r1, _080CA368 @ =word_203855E
+	ldr r1, _080CA368 @ =gScriptItemId
 	ldrh r1, [r1]
 	lsls r4, 24
 	lsrs r4, 24
@@ -2582,7 +2582,7 @@ ItemUseInBattle_StatIncrease: @ 80CA310
 _080CA35C: .4byte gUnknown_02024A6A
 _080CA360: .4byte gUnknown_02024E6C
 _080CA364: .4byte gPlayerParty
-_080CA368: .4byte word_203855E
+_080CA368: .4byte gScriptItemId
 _080CA36C: .4byte gOtherText_WontHaveAnyEffect
 _080CA370: .4byte sub_80A5C48
 _080CA374:
@@ -2712,7 +2712,7 @@ unref_sub_80CA448: @ 80CA448
 	movs r2, 0xD
 	movs r3, 0x14
 	bl MenuZeroFillWindowRect
-	ldr r4, _080CA494 @ =word_203855E
+	ldr r4, _080CA494 @ =gScriptItemId
 	ldrh r1, [r4]
 	movs r0, 0
 	movs r2, 0
@@ -2737,7 +2737,7 @@ unref_sub_80CA448: @ 80CA448
 	bl DisplayItemMessageOnField
 	b _080CA4B8
 	.align 2, 0
-_080CA494: .4byte word_203855E
+_080CA494: .4byte gScriptItemId
 _080CA498: .4byte gPlayerParty
 _080CA49C: .4byte gStringVar1
 _080CA4A0: .4byte gStringVar4
@@ -2807,7 +2807,7 @@ ItemUseOutOfBattle_EnigmaBerry: @ 80CA520
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _080CA544 @ =word_203855E
+	ldr r0, _080CA544 @ =gScriptItemId
 	ldrh r0, [r0]
 	bl sub_8070E48
 	lsls r0, 24
@@ -2823,7 +2823,7 @@ _080CA53A:
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_080CA544: .4byte word_203855E
+_080CA544: .4byte gScriptItemId
 _080CA548: .4byte _080CA54C
 	.align 2, 0
 _080CA54C:
@@ -2936,7 +2936,7 @@ ItemUseInBattle_EnigmaBerry: @ 80CA64C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _080CA66C @ =word_203855E
+	ldr r0, _080CA66C @ =gScriptItemId
 	ldrh r0, [r0]
 	bl sub_8070E48
 	lsls r0, 24
@@ -2949,7 +2949,7 @@ ItemUseInBattle_EnigmaBerry: @ 80CA64C
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_080CA66C: .4byte word_203855E
+_080CA66C: .4byte gScriptItemId
 _080CA670: .4byte _080CA674
 	.align 2, 0
 _080CA674:

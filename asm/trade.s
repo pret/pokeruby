@@ -7302,7 +7302,7 @@ _0804B7C0:
 	.4byte _0804B9E0
 _0804B7F4:
 	ldr r1, _0804B8E0 @ =gUnknown_020297D8
-	ldr r0, _0804B8E4 @ =gUnknown_0202E8CE
+	ldr r0, _0804B8E4 @ =gSpecialVar_0x8005
 	ldrh r0, [r0]
 	movs r6, 0
 	strb r0, [r1]
@@ -7407,7 +7407,7 @@ _0804B7F4:
 	b _0804B9F2
 	.align 2, 0
 _0804B8E0: .4byte gUnknown_020297D8
-_0804B8E4: .4byte gUnknown_0202E8CE
+_0804B8E4: .4byte gSpecialVar_0x8005
 _0804B8E8: .4byte gLinkPlayers + 0x8
 _0804B8EC: .4byte gSaveBlock2
 _0804B8F0: .4byte gEnemyParty
@@ -8495,7 +8495,7 @@ _0804C230: .4byte gStringVar3
 _0804C234: .4byte gPlayerParty
 _0804C238: .4byte gStringVar2
 _0804C23C:
-	ldr r0, _0804C280 @ =gUnknown_0202E8CC
+	ldr r0, _0804C280 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	lsls r4, r0, 4
 	subs r4, r0
@@ -8509,7 +8509,7 @@ _0804C23C:
 	ldr r0, _0804C28C @ =gStringVar3
 	adds r1, r4, 0
 	bl StringCopy10
-	ldr r0, _0804C290 @ =gUnknown_0202E8CE
+	ldr r0, _0804C290 @ =gSpecialVar_0x8005
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
@@ -8527,11 +8527,11 @@ _0804C278:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804C280: .4byte gUnknown_0202E8CC
+_0804C280: .4byte gSpecialVar_0x8004
 _0804C284: .4byte gIngameTrades
 _0804C288: .4byte gStringVar1
 _0804C28C: .4byte gStringVar3
-_0804C290: .4byte gUnknown_0202E8CE
+_0804C290: .4byte gSpecialVar_0x8005
 _0804C294: .4byte gPlayerParty
 _0804C298: .4byte gStringVar2
 	thumb_func_end sub_804C1A8
@@ -10567,7 +10567,7 @@ _0804D4B8:
 	.align 2, 0
 _0804D4C8: .4byte gMain
 _0804D4CC:
-	ldr r0, _0804D510 @ =gUnknown_0202E8CE
+	ldr r0, _0804D510 @ =gSpecialVar_0x8005
 	ldrb r0, [r0]
 	movs r1, 0
 	bl sub_804BA94
@@ -10599,7 +10599,7 @@ _0804D4CC:
 	bl TradeEvolutionScene
 	b _0804D538
 	.align 2, 0
-_0804D510: .4byte gUnknown_0202E8CE
+_0804D510: .4byte gSpecialVar_0x8005
 _0804D514: .4byte gUnknown_03005E94
 _0804D518: .4byte sub_804BBCC
 _0804D51C: .4byte gUnknown_020297D8
@@ -11060,7 +11060,7 @@ _0804D898: .4byte SpriteCallbackDummy
 	thumb_func_start sub_804D89C
 sub_804D89C: @ 804D89C
 	push {r4-r6,lr}
-	ldr r0, _0804D8D0 @ =gUnknown_0202E8CC
+	ldr r0, _0804D8D0 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	lsls r4, r0, 4
 	subs r4, r0
@@ -11084,7 +11084,7 @@ sub_804D89C: @ 804D89C
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0804D8D0: .4byte gUnknown_0202E8CC
+_0804D8D0: .4byte gSpecialVar_0x8004
 _0804D8D4: .4byte gIngameTrades
 _0804D8D8: .4byte gStringVar1
 _0804D8DC: .4byte gSpeciesNames
@@ -11095,14 +11095,14 @@ _0804D8E0: .4byte gStringVar2
 sub_804D8E4: @ 804D8E4
 	push {r4,lr}
 	sub sp, 0x20
-	ldr r0, _0804D92C @ =gUnknown_0202E8CC
+	ldr r0, _0804D92C @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	lsls r4, r0, 4
 	subs r4, r0
 	lsls r4, 2
 	ldr r0, _0804D930 @ =gIngameTrades
 	adds r4, r0
-	ldr r0, _0804D934 @ =gUnknown_0202E8CE
+	ldr r0, _0804D934 @ =gSpecialVar_0x8005
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
@@ -11126,9 +11126,9 @@ sub_804D8E4: @ 804D8E4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804D92C: .4byte gUnknown_0202E8CC
+_0804D92C: .4byte gSpecialVar_0x8004
 _0804D930: .4byte gIngameTrades
-_0804D934: .4byte gUnknown_0202E8CE
+_0804D934: .4byte gSpecialVar_0x8005
 _0804D938: .4byte gPlayerParty
 _0804D93C: .4byte gStringVar1
 _0804D940: .4byte gStringVar2
@@ -11359,7 +11359,7 @@ _0804DB28: .4byte gIngameTradeMail
 	thumb_func_start sub_804DB2C
 sub_804DB2C: @ 804DB2C
 	push {r4-r6,lr}
-	ldr r6, _0804DB58 @ =gUnknown_0202E8CE
+	ldr r6, _0804DB58 @ =gSpecialVar_0x8005
 	ldrh r0, [r6]
 	movs r5, 0x64
 	muls r0, r5
@@ -11378,7 +11378,7 @@ sub_804DB2C: @ 804DB2C
 	lsrs r0, 16
 	b _0804DB62
 	.align 2, 0
-_0804DB58: .4byte gUnknown_0202E8CE
+_0804DB58: .4byte gSpecialVar_0x8005
 _0804DB5C: .4byte gPlayerParty
 _0804DB60:
 	movs r0, 0
@@ -11391,16 +11391,16 @@ _0804DB62:
 	thumb_func_start sub_804DB68
 sub_804DB68: @ 804DB68
 	push {lr}
-	ldr r0, _0804DB7C @ =gUnknown_0202E8CE
+	ldr r0, _0804DB7C @ =gSpecialVar_0x8005
 	ldrb r0, [r0]
-	ldr r1, _0804DB80 @ =gUnknown_0202E8CC
+	ldr r1, _0804DB80 @ =gSpecialVar_0x8004
 	ldrb r1, [r1]
 	bl sub_804D948
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804DB7C: .4byte gUnknown_0202E8CE
-_0804DB80: .4byte gUnknown_0202E8CC
+_0804DB7C: .4byte gSpecialVar_0x8005
+_0804DB80: .4byte gSpecialVar_0x8004
 	thumb_func_end sub_804DB68
 
 	thumb_func_start sub_804DB84

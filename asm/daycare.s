@@ -469,7 +469,7 @@ _08041644: .4byte gPlayerParty
 sub_8041648: @ 8041648
 	push {lr}
 	ldr r0, _0804165C @ =gSaveBlock1 + 0x2F9C
-	ldr r1, _08041660 @ =gUnknown_0202E8CC
+	ldr r1, _08041660 @ =gSpecialVar_0x8004
 	ldrb r1, [r1]
 	bl sub_8041570
 	lsls r0, 16
@@ -478,7 +478,7 @@ sub_8041648: @ 8041648
 	bx r1
 	.align 2, 0
 _0804165C: .4byte gSaveBlock1 + 0x2F9C
-_08041660: .4byte gUnknown_0202E8CC
+_08041660: .4byte gSpecialVar_0x8004
 	thumb_func_end sub_8041648
 
 	thumb_func_start sub_8041664
@@ -619,17 +619,17 @@ _0804176C: .4byte gStringVar2
 sub_8041770: @ 8041770
 	push {lr}
 	ldr r0, _08041784 @ =gSaveBlock1 + 0x2F9C
-	ldr r1, _08041788 @ =gUnknown_0202E8CC
+	ldr r1, _08041788 @ =gSpecialVar_0x8004
 	ldrb r1, [r1]
 	bl sub_8041728
-	ldr r1, _0804178C @ =gUnknown_0202E8CE
+	ldr r1, _0804178C @ =gSpecialVar_0x8005
 	strh r0, [r1]
 	pop {r0}
 	bx r0
 	.align 2, 0
 _08041784: .4byte gSaveBlock1 + 0x2F9C
-_08041788: .4byte gUnknown_0202E8CC
-_0804178C: .4byte gUnknown_0202E8CE
+_08041788: .4byte gSpecialVar_0x8004
+_0804178C: .4byte gSpecialVar_0x8005
 	thumb_func_end sub_8041770
 
 	thumb_func_start sub_8041790
@@ -657,7 +657,7 @@ _080417B4: .4byte 0x000030b0
 	thumb_func_start sub_80417B8
 sub_80417B8: @ 80417B8
 	push {r4,r5,lr}
-	ldr r5, _080417D8 @ =gUnknown_0202E8CC
+	ldr r5, _080417D8 @ =gSpecialVar_0x8004
 	ldrh r1, [r5]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -671,7 +671,7 @@ sub_80417B8: @ 80417B8
 	movs r0, 0
 	b _080417EC
 	.align 2, 0
-_080417D8: .4byte gUnknown_0202E8CC
+_080417D8: .4byte gSpecialVar_0x8004
 _080417DC: .4byte gSaveBlock1 + 0x2F9C
 _080417E0:
 	ldrb r1, [r5]
@@ -2062,13 +2062,13 @@ _08042244:
 	str r0, [sp]
 	cmp r0, 0
 	bne _08042278
-	ldr r0, _08042274 @ =gUnknown_0202E8CC
+	ldr r0, _08042274 @ =gSpecialVar_0x8004
 	strh r6, [r0]
 	movs r0, 0x1
 	b _08042292
 	.align 2, 0
 _08042270: .4byte gPlayerParty
-_08042274: .4byte gUnknown_0202E8CC
+_08042274: .4byte gSpecialVar_0x8004
 _08042278:
 	subs r0, 0x1
 	str r0, [sp]

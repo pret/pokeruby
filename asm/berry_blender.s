@@ -323,7 +323,7 @@ sub_804E538: @ 804E538
 	movs r1, 0
 	strb r1, [r0]
 	strb r1, [r2]
-	ldr r0, _0804E564 @ =gUnknown_0202E8CC
+	ldr r0, _0804E564 @ =gSpecialVar_0x8004
 	ldrb r0, [r0]
 	bl sub_804E884
 	ldr r0, _0804E568 @ =sub_804E56C
@@ -333,7 +333,7 @@ sub_804E538: @ 804E538
 	.align 2, 0
 _0804E55C: .4byte gUnknown_03004854
 _0804E560: .4byte 0x02018000
-_0804E564: .4byte gUnknown_0202E8CC
+_0804E564: .4byte gSpecialVar_0x8004
 _0804E568: .4byte sub_804E56C
 	thumb_func_end sub_804E538
 
@@ -864,7 +864,7 @@ sub_804E990: @ 804E990
 	adds r0, r2
 	str r1, [r0]
 	movs r2, 0
-	ldr r5, _0804E9E0 @ =gUnknown_0202E8CC
+	ldr r5, _0804E9E0 @ =gSpecialVar_0x8004
 	adds r4, r3, 0
 	movs r3, 0
 _0804E9B4:
@@ -887,7 +887,7 @@ _0804E9B4:
 	.align 2, 0
 _0804E9D8: .4byte gUnknown_03004854
 _0804E9DC: .4byte 0x02018000
-_0804E9E0: .4byte gUnknown_0202E8CC
+_0804E9E0: .4byte gSpecialVar_0x8004
 _0804E9E4: .4byte sub_804E9F8
 _0804E9E8:
 	ldr r0, _0804E9F4 @ =sub_804F378
@@ -1227,7 +1227,7 @@ _0804ED48:
 	movs r4, 0xBE
 	lsls r4, 1
 	adds r0, r4
-	ldr r1, _0804ED8C @ =word_203855E
+	ldr r1, _0804ED8C @ =gScriptItemId
 	ldrh r1, [r1]
 	bl sub_804E844
 	ldr r0, _0804ED90 @ =gBlockSendBuffer
@@ -1244,7 +1244,7 @@ _0804ED48:
 	str r5, [r0]
 	b _0804F0CE
 	.align 2, 0
-_0804ED8C: .4byte word_203855E
+_0804ED8C: .4byte gScriptItemId
 _0804ED90: .4byte gBlockSendBuffer
 _0804ED94:
 	bl sub_8007ECC
@@ -2050,7 +2050,7 @@ _0804F3A0:
 	.4byte _0804F754
 _0804F3F8:
 	bl sub_804F0F4
-	ldr r4, _0804F46C @ =word_203855E
+	ldr r4, _0804F46C @ =gScriptItemId
 	ldrh r1, [r4]
 	movs r0, 0
 	bl sub_80516C4
@@ -2105,7 +2105,7 @@ _0804F442:
 	strb r2, [r3, 0x1]
 	b _0804F7E6
 	.align 2, 0
-_0804F46C: .4byte word_203855E
+_0804F46C: .4byte gScriptItemId
 _0804F470: .4byte gUnknown_03004854
 _0804F474:
 	bl sub_804E2EC
@@ -2499,7 +2499,7 @@ _0804F754:
 	ldr r0, _0804F80C @ =sub_80501FC
 	bl SetMainCallback2
 	movs r4, 0
-	ldr r0, _0804F810 @ =gUnknown_0202E8CC
+	ldr r0, _0804F810 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r4, r0
 	bge _0804F7B8
@@ -2521,7 +2521,7 @@ _0804F792:
 	lsls r3, 17
 	adds r5, r3
 	adds r4, 0x1
-	ldr r0, _0804F810 @ =gUnknown_0202E8CC
+	ldr r0, _0804F810 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r4, r0
 	blt _0804F792
@@ -2560,7 +2560,7 @@ _0804F7E6:
 _0804F804: .4byte gUnknown_03004854
 _0804F808: .4byte 0x0000014b
 _0804F80C: .4byte sub_80501FC
-_0804F810: .4byte gUnknown_0202E8CC
+_0804F810: .4byte gSpecialVar_0x8004
 _0804F814: .4byte gUnknown_08216308
 _0804F818: .4byte 0x00000193
 	thumb_func_end sub_804F378
@@ -3364,7 +3364,7 @@ sub_804FE70: @ 804FE70
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0x4
-	ldr r0, _0804FF40 @ =gUnknown_0202E8CC
+	ldr r0, _0804FF40 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _0804FEB6
@@ -3468,7 +3468,7 @@ _0804FF26:
 	adds r0, 0x1
 	b _0804FFCA
 	.align 2, 0
-_0804FF40: .4byte gUnknown_0202E8CC
+_0804FF40: .4byte gSpecialVar_0x8004
 _0804FF44: .4byte gSendCmd
 _0804FF48: .4byte gRecvCmds
 _0804FF4C: .4byte 0x00004444
@@ -3596,7 +3596,7 @@ _0805003E:
 	bge _0805005C
 	b _0804FED8
 _0805005C:
-	ldr r0, _080500A0 @ =gUnknown_0202E8CC
+	ldr r0, _080500A0 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _08050088
@@ -3631,7 +3631,7 @@ _08050088:
 	.align 2, 0
 _08050098: .4byte gMPlay_BGM
 _0805009C: .4byte gUnknown_03004854
-_080500A0: .4byte gUnknown_0202E8CC
+_080500A0: .4byte gSpecialVar_0x8004
 _080500A4: .4byte gRecvCmds
 	thumb_func_end sub_804FE70
 
@@ -4863,14 +4863,14 @@ _080509CC:
 	lsls r0, 24
 	lsrs r4, r0, 24
 _080509E4:
-	ldr r0, _080509F4 @ =gUnknown_0202E8CC
+	ldr r0, _080509F4 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r4, r0
 	bcc _080509CC
 	b _08050C82
 	.align 2, 0
 _080509F0: .4byte gUnknown_03004854
-_080509F4: .4byte gUnknown_0202E8CC
+_080509F4: .4byte gSpecialVar_0x8004
 _080509F8:
 	ldr r1, _08050A24 @ =gUnknown_03004854
 	ldr r3, [r1]
@@ -7647,7 +7647,7 @@ _08051F86:
 	movs r1, 0x1
 	movs r2, 0xF
 	bl MenuPrintMessage
-	ldr r0, _08051FF4 @ =word_203855E
+	ldr r0, _08051FF4 @ =gScriptItemId
 	ldrh r0, [r0]
 	movs r1, 0x1
 	bl RemoveBagItem
@@ -7662,7 +7662,7 @@ _08051FE2:
 	.align 2, 0
 _08051FEC: .4byte gUnknown_03004854
 _08051FF0: .4byte sub_8052BD0
-_08051FF4: .4byte word_203855E
+_08051FF4: .4byte gScriptItemId
 _08051FF8:
 	bl MenuUpdateWindowText
 	lsls r0, 24
