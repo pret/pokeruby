@@ -1454,7 +1454,7 @@ sub_80BE284: @ 80BE284
 	negs r2, r2
 	ands r0, r2
 	orrs r0, r1
-	ldr r1, _080BE314 @ =gSpecialVar_0x8010
+	ldr r1, _080BE314 @ =gScriptContestRank
 	ldrb r1, [r1]
 	ands r3, r1
 	lsls r3, 3
@@ -1489,7 +1489,7 @@ _080BE304: .4byte gSaveBlock1 + 0x2A98
 _080BE308: .4byte 0xfffffca0
 _080BE30C: .4byte gUnknown_03005D38
 _080BE310: .4byte gScriptContestCategory
-_080BE314: .4byte gSpecialVar_0x8010
+_080BE314: .4byte gScriptContestRank
 _080BE318: .4byte gUnknown_02038694
 _080BE31C: .4byte gPlayerParty
 	thumb_func_end sub_80BE284

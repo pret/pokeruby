@@ -359,7 +359,7 @@ LilycoveCity_ContestLobby_EventScript_158C35:: @ 8158C35
 
 LilycoveCity_ContestLobby_EventScript_158C42:: @ 8158C42
 	msgbox LilycoveCity_ContestLobby_Text_188703, 4
-	setvar 0x8010, 0
+	setvar CONTEST_RANK, 0
 	choosecontestpkmn
 	compare 0x8004, 255
 	jumpeq LilycoveCity_ContestLobby_EventScript_158CEA
@@ -484,7 +484,7 @@ LilycoveCity_ContestLobby_EventScript_158DEE:: @ 8158DEE
 	setvar 0x4086, 1
 	special 86
 	setvar 0x4088, 5
-	setvar 0x8010, 3
+	setvar CONTEST_RANK, 3
 	call LilycoveCity_ContestLobby_EventScript_158F08
 	end
 
@@ -572,7 +572,7 @@ LilycoveCity_ContestLobby_EventScript_158EB0:: @ 8158EB0
 	compare RESULT, 1
 	jumpeq LilycoveCity_ContestLobby_EventScript_158EE8
 	setvar 0x800b, 8
-	setvar 0x8010, 3
+	setvar CONTEST_RANK, 3
 	call LilycoveCity_ContestLobby_EventScript_1A4E92
 	call LilycoveCity_ContestLobby_EventScript_158F86
 	special 83
@@ -587,7 +587,7 @@ LilycoveCity_ContestLobby_EventScript_158EE8:: @ 8158EE8
 	copyvar 0x4094, 0x1
 	additem ITEM_CONTEST_PASS, 1
 	setvar 0x800b, 8
-	setvar 0x8010, 3
+	setvar CONTEST_RANK, 3
 	setvar 0x4099, 1
 	setflag 2107
 	end

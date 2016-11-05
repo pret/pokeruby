@@ -167,7 +167,7 @@ sub_80C4CF8: @ 80C4CF8
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080C4D40
-	ldr r0, _080C4D30 @ =gSpecialVar_0x8010
+	ldr r0, _080C4D30 @ =gScriptContestRank
 	ldrh r0, [r0]
 	cmp r0, 0x3
 	bne _080C4D40
@@ -185,7 +185,7 @@ sub_80C4CF8: @ 80C4CF8
 	.align 2, 0
 _080C4D28: .4byte gUnknown_02038690
 _080C4D2C: .4byte gUnknown_02038695
-_080C4D30: .4byte gSpecialVar_0x8010
+_080C4D30: .4byte gScriptContestRank
 _080C4D34: .4byte gUnknown_02038678
 _080C4D38: .4byte 0x0000031f
 _080C4D3C: .4byte gSpecialVar_0x8004
@@ -540,7 +540,7 @@ GiveMonArtistRibbon: @ 80C4FBC
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080C5038
-	ldr r0, _080C502C @ =gSpecialVar_0x8010
+	ldr r0, _080C502C @ =gScriptContestRank
 	ldrh r0, [r0]
 	cmp r0, 0x3
 	bne _080C5038
@@ -568,7 +568,7 @@ _080C501C: .4byte gUnknown_02038694
 _080C5020: .4byte gPlayerParty
 _080C5024: .4byte gUnknown_02038690
 _080C5028: .4byte gUnknown_02038695
-_080C502C: .4byte gSpecialVar_0x8010
+_080C502C: .4byte gScriptContestRank
 _080C5030: .4byte gUnknown_02038678
 _080C5034: .4byte 0x0000031f
 _080C5038:

@@ -830,7 +830,7 @@ gUnknown_0203869B: @ 203869B
 gScriptContestCategory: @ 203869C
 	.space 0x2
 
-gSpecialVar_0x8010: @ 203869E
+gScriptContestRank: @ 203869E
 	.space 0x2
 
 gUnknown_020386A0: @ 20386A0

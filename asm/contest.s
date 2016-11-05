@@ -6234,7 +6234,7 @@ _080AE4F2:
 	movs r0, 0
 	b _080AE50A
 _080AE4F6:
-	ldr r0, _080AE510 @ =gSpecialVar_0x8010
+	ldr r0, _080AE510 @ =gScriptContestRank
 	adds r2, r1, 0
 	ldrh r1, [r0]
 	movs r0, 0x2
@@ -6249,7 +6249,7 @@ _080AE50A:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080AE510: .4byte gSpecialVar_0x8010
+_080AE510: .4byte gScriptContestRank
 	thumb_func_end sub_80AE47C
 
 	thumb_func_start sub_80AE514

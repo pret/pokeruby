@@ -8,7 +8,7 @@ SlateportCity_ContestLobby_MapScript1_155417:: @ 8155417
 
 SlateportCity_ContestLobby_EventScript_15541D:: @ 815541D
 	setvar 0x800b, 7
-	setvar 0x8010, 2
+	setvar CONTEST_RANK, 2
 	call SlateportCity_ContestLobby_EventScript_1A4E92
 	call SlateportCity_ContestLobby_EventScript_155448
 	special 83

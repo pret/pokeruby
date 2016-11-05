@@ -8,7 +8,7 @@ VerdanturfTown_ContestLobby_MapScript1_153D70:: @ 8153D70
 
 VerdanturfTown_ContestLobby_EventScript_153D76:: @ 8153D76
 	setvar 0x800b, 5
-	setvar 0x8010, 0
+	setvar CONTEST_RANK, 0
 	call VerdanturfTown_ContestLobby_EventScript_1A4E92
 	call VerdanturfTown_ContestLobby_EventScript_153DA1
 	special 83

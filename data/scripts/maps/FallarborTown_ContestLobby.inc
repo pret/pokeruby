@@ -8,7 +8,7 @@ FallarborTown_ContestLobby_MapScript1_1539C7:: @ 81539C7
 
 FallarborTown_ContestLobby_EventScript_1539CD:: @ 81539CD
 	setvar 0x800b, 6
-	setvar 0x8010, 1
+	setvar CONTEST_RANK, 1
 	call FallarborTown_ContestLobby_EventScript_1A4E92
 	call FallarborTown_ContestLobby_EventScript_1539F8
 	special 83

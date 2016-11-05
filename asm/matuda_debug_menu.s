@@ -829,7 +829,7 @@ _080AA17A:
 	cmp r5, 0x5
 	bls _080AA17A
 	ldr r1, _080AA258 @ =gScriptContestCategory
-	ldr r4, _080AA25C @ =gSpecialVar_0x8010
+	ldr r4, _080AA25C @ =gScriptContestRank
 	movs r0, 0
 	strh r0, [r4]
 	strh r0, [r1]
@@ -900,7 +900,7 @@ _080AA24C: .4byte gUnknown_083C9276
 _080AA250: .4byte gUnknown_083C9364
 _080AA254: .4byte gMenuWindow
 _080AA258: .4byte gScriptContestCategory
-_080AA25C: .4byte gSpecialVar_0x8010
+_080AA25C: .4byte gScriptContestRank
 _080AA260: .4byte gUnknown_083C9337
 _080AA264: .4byte gUnknown_083C933B
 _080AA268: .4byte gUnknown_083C92B4
@@ -2178,7 +2178,7 @@ _080AAC1A:
 	strh r4, [r0]
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, _080AAC58 @ =gSpecialVar_0x8010
+	ldr r0, _080AAC58 @ =gScriptContestRank
 	ldrb r1, [r0]
 	adds r0, r4, 0
 	bl sub_80AE398
@@ -2195,7 +2195,7 @@ _080AAC1A:
 	bx r0
 	.align 2, 0
 _080AAC54: .4byte gScriptContestCategory
-_080AAC58: .4byte gSpecialVar_0x8010
+_080AAC58: .4byte gScriptContestRank
 	thumb_func_end sub_80AABF0
 
 	thumb_func_start sub_80AAC5C
@@ -2205,16 +2205,16 @@ sub_80AAC5C: @ 80AAC5C
 	lsls r1, 24
 	cmp r1, 0
 	ble _080AAC78
-	ldr r1, _080AAC74 @ =gSpecialVar_0x8010
+	ldr r1, _080AAC74 @ =gScriptContestRank
 	ldrh r0, [r1]
 	adds r0, 0x1
 	strh r0, [r1]
 	adds r4, r1, 0
 	b _080AAC86
 	.align 2, 0
-_080AAC74: .4byte gSpecialVar_0x8010
+_080AAC74: .4byte gScriptContestRank
 _080AAC78:
-	ldr r0, _080AACBC @ =gSpecialVar_0x8010
+	ldr r0, _080AACBC @ =gScriptContestRank
 	ldrh r2, [r0]
 	adds r4, r0, 0
 	cmp r2, 0
@@ -2247,7 +2247,7 @@ _080AAC92:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080AACBC: .4byte gSpecialVar_0x8010
+_080AACBC: .4byte gScriptContestRank
 _080AACC0: .4byte gScriptContestCategory
 	thumb_func_end sub_80AAC5C
 
