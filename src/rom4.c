@@ -260,47 +260,47 @@ void sub_8052F5C(void)
 void flag_var_implications_of_teleport_(void)
 {
     player_avatar_init_params_reset();
-    FlagReset(2091);
-    FlagReset(2093);
-    FlagReset(2092);
-    FlagReset(2089);
-    FlagReset(2088);
+    FlagReset(SYS_CYCLING_ROAD);
+    FlagReset(SYS_CRUISE_MODE);
+    FlagReset(SYS_SAFARI_MODE);
+    FlagReset(SYS_USE_STRENGTH);
+    FlagReset(SYS_USE_FLASH);
 }
 
 void new_game(void)
 {
     player_avatar_init_params_reset();
-    FlagReset(2091);
-    FlagReset(2093);
-    FlagReset(2092);
-    FlagReset(2089);
-    FlagReset(2088);
+    FlagReset(SYS_CYCLING_ROAD);
+    FlagReset(SYS_CRUISE_MODE);
+    FlagReset(SYS_SAFARI_MODE);
+    FlagReset(SYS_USE_STRENGTH);
+    FlagReset(SYS_USE_FLASH);
     ScriptContext2_RunNewScript(gUnknown_0819FC9F);
 }
 
 void sub_8053014(void)
 {
     player_avatar_init_params_reset();
-    FlagReset(2091);
-    FlagReset(2093);
-    FlagReset(2092);
-    FlagReset(2089);
-    FlagReset(2088);
+    FlagReset(SYS_CYCLING_ROAD);
+    FlagReset(SYS_CRUISE_MODE);
+    FlagReset(SYS_SAFARI_MODE);
+    FlagReset(SYS_USE_STRENGTH);
+    FlagReset(SYS_USE_FLASH);
 }
 
 void sub_8053050(void)
 {
     player_avatar_init_params_reset();
-    FlagReset(2091);
-    FlagReset(2093);
-    FlagReset(2092);
-    FlagReset(2089);
-    FlagReset(2088);
+    FlagReset(SYS_CYCLING_ROAD);
+    FlagReset(SYS_CRUISE_MODE);
+    FlagReset(SYS_SAFARI_MODE);
+    FlagReset(SYS_USE_STRENGTH);
+    FlagReset(SYS_USE_FLASH);
 }
 
 void sub_805308C(void)
 {
-    FlagReset(2092);
+    FlagReset(SYS_SAFARI_MODE);
     sub_8054164();
     ResetCyclingRoadChallengeData();
     mapnumbers_history_shift_sav1_0_2_4_out();
@@ -698,7 +698,7 @@ void sub_8053994(u32 a1)
     sub_80806E4();
     sub_8054164();
     if (v2)
-        FlagReset(2088);
+        FlagReset(SYS_USE_FLASH);
     sub_8053C98();
     sav1_reset_battle_music_maybe();
     mapheader_run_script_with_tag_x3();
@@ -748,7 +748,7 @@ struct UnkPlayerStruct *sub_8053AA8(void)
 
 u8 sub_8053B00(struct UnkPlayerStruct *playerStruct, u16 a2, u8 a3)
 {
-    if (a3 != 8 && FlagGet(2093))
+    if (a3 != 8 && FlagGet(SYS_CRUISE_MODE))
         return 1;
     if (a3 == 5)
         return 16;
@@ -765,7 +765,7 @@ u8 sub_8053B00(struct UnkPlayerStruct *playerStruct, u16 a2, u8 a3)
 
 u8 sub_8053B60(struct UnkPlayerStruct *playerStruct, u8 a2, u16 a3, u8 a4)
 {
-    if (FlagGet(2093) && a4 == 6)
+    if (FlagGet(SYS_CRUISE_MODE) && a4 == 6)
         return 4;
     if (sub_8056F24(a3) == TRUE)
         return 2;
@@ -813,7 +813,7 @@ void sub_8053C98(void)
 {
     if (!gMapHeader.cave)
         gSaveBlock1.flashUsed = 0;
-    else if (FlagGet(2088))
+    else if (FlagGet(SYS_USE_FLASH))
         gSaveBlock1.flashUsed = 1;
     else
         gSaveBlock1.flashUsed = gUnknown_0839ACE8;
@@ -839,7 +839,7 @@ void sub_8053D14(u16 mapDataId)
 
 bool16 sub_8053D30(struct WarpData *warp)
 {
-    if (!FlagGet(2090))
+    if (!FlagGet(SYS_WEATHER_CTRL))
         return FALSE;
     if (warp->mapGroup != 0)
         return FALSE;
@@ -955,7 +955,7 @@ void sav1_reset_battle_music_maybe(void)
 
 void sub_8053F0C(void)
 {
-    if (FlagGet(16385) != TRUE)
+    if (FlagGet(SPECIAL_FLAG_1) != TRUE)
     {
         u16 newMusic = warp1_target_get_music();
         u16 currentMusic = GetCurrentMapMusic();
@@ -1002,7 +1002,7 @@ u8 is_warp1_light_level_8_or_9(void)
 void sub_8053FF8(void)
 {
     u16 music = warp1_target_get_music();
-    if (FlagGet(16385) != TRUE && music != GetCurrentMapMusic())
+    if (FlagGet(SPECIAL_FLAG_1) != TRUE && music != GetCurrentMapMusic())
     {
         u8 speed = is_warp1_light_level_8_or_9();
         FadeOutMapMusic(speed);

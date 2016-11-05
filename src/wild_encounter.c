@@ -766,9 +766,9 @@ bool8 RepelCheck(bool8 level)
 
 void ApplyFluteEncounterRateMod(u32 *a1)
 {
-    if(FlagGet(0x84D) == 1)
+    if(FlagGet(SYS_ENC_UP_ITEM) == 1)
         *a1 = *a1 + *a1 / 2;
-    else if(FlagGet(0x84E) == 1)
+    else if(FlagGet(SYS_ENC_DOWN_ITEM) == 1)
         *a1 = *a1 / 2;
 }
 

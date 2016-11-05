@@ -25,7 +25,7 @@ void HandleDrawSaveWindowInfo(s16 left, s16 top)
     if (sub_809473C())
         width = 13;
 
-    if (FlagGet(2049)) // player has Pokédex?
+    if (FlagGet(SYS_POKEDEX_GET))
     {
         // print info + dex information.
         MenuDrawTextWindow(left, top, left + width, top + 11);
@@ -53,7 +53,7 @@ void sub_80946C8(u16 left, u16 top)
     if (sub_809473C())
         width = 13;
 
-    if (FlagGet(2049)) // player has Pokédex?
+    if (FlagGet(SYS_POKEDEX_GET))
         MenuZeroFillWindowRect(left, top, left + width, top + 11);
     else
         MenuZeroFillWindowRect(left, top, left + width, top + 9);
@@ -112,14 +112,12 @@ void PrintSavePlayTime(s16 x, s16 y)
 u8 GetBadgeCount(void)
 {
     u8 badgeCount = 0;
-    int badgeFlag = 0x807; // first badge flag is located here.
-    
-    for(;badgeFlag <= 0x80E; badgeFlag++)
-    {
-        if ( FlagGet(badgeFlag) )
+    int badgeFlag;
+
+    for (badgeFlag = BADGE01_GET; badgeFlag <= BADGE08_GET; badgeFlag++)
+        if (FlagGet(badgeFlag))
             badgeCount++;
-    }
-    
+
     return badgeCount;
 }
 
@@ -127,7 +125,7 @@ u16 GetPokedexSeenCount()
 {
     u16 pokedexSeenCount;
     
-    if ( IsNationalPokedex() ) // national dex check?
+    if (IsNationalPokedex())
         pokedexSeenCount = GetNationalPokedexCount(1);
     else
         pokedexSeenCount = GetHoennPokedexCount(1);

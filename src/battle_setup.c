@@ -620,7 +620,7 @@ u8 TrainerBattleLoadArg8(u8 *ptr)
 
 u16 trainerflag_opponent(void)
 {
-    return gTrainerBattleOpponent + 1280;
+    return TRAINER_FLAG_START + gTrainerBattleOpponent;
 }
 
 bool32 battle_exit_is_player_defeat(u32 a1)
@@ -753,10 +753,8 @@ void TrainerWantsBattle(u8 ptr, u8 *a2)
 
 u8 GetTrainerFlagFromScriptPointer(u8 *data)
 {
-    u32 localFlag;
-
-    localFlag = TrainerBattleLoadArg16(data + 2);
-    return FlagGet(localFlag + 0x500);
+    u32 flag = TrainerBattleLoadArg16(data + 2);
+    return FlagGet(TRAINER_FLAG_START + flag);
 }
 
 void sub_8082524(void)
@@ -788,17 +786,17 @@ void unref_sub_8082590(void)
 
 u8 trainer_flag_check(u16 flag)
 {
-    return FlagGet(flag + 0x500);
+    return FlagGet(TRAINER_FLAG_START + flag);
 }
 
 void trainer_flag_set(u16 flag)
 {
-    FlagSet(flag + 0x500);
+    FlagSet(TRAINER_FLAG_START + flag);
 }
 
 void trainer_flag_clear(u16 flag)
 {
-    FlagReset(flag + 0x500);
+    FlagReset(TRAINER_FLAG_START + flag);
 }
 
 void sub_80825E4(void)
