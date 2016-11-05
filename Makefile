@@ -1,4 +1,3 @@
-
 SHELL := /bin/bash -o pipefail
 
 AS      := $(DEVKITARM)/bin/arm-none-eabi-as
