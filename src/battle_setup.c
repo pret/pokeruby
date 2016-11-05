@@ -41,7 +41,7 @@ extern bool32 FieldPoisonEffectIsRunning(void);
 extern bool32 GetSafariZoneFlag(void);
 extern void player_bitmagic(void);
 
-u8 GetHigherOrLowerLevelTransitionForWild(void);
+u8 GetWildBattleTransition(void);
 u8 sub_8082080(void);
 bool32 battle_exit_is_player_defeat(u32 a1);
 u8 *sub_808281C(void);
@@ -61,14 +61,39 @@ struct Trainer
 /* 0x18 */ bool8 doubleBattle;
 /* 0x1C */ u32 aiFlags;
 /* 0x20 */ u8 partySize;
-/* 0x24 */ struct TrainerPartyMember *party;
+/* 0x24 */ void *party;
 };
 
-struct TrainerPartyMember
+struct TrainerPartyMember0
 {
     u16 iv;
     u8 level;
     u16 species;
+};
+
+struct TrainerPartyMember1
+{
+    u16 iv;
+    u8 level;
+    u16 species;
+    u16 moves[4];
+};
+
+struct TrainerPartyMember2
+{
+    u16 iv;
+    u8 level;
+    u16 species;
+    u16 heldItem;
+};
+
+struct TrainerPartyMember3
+{
+    u16 iv;
+    u8 level;
+    u16 species;
+    u16 heldItem;
+    u16 moves[4];
 };
 
 struct TrainerBattleSpec
@@ -199,7 +224,7 @@ void sub_8081A18(void)
     sub_80597F4();
     gMain.field_8 = sub_8081C8C;
     gUnknown_020239F8 = 0;
-    transition = GetHigherOrLowerLevelTransitionForWild();
+    transition = GetWildBattleTransition();
     task_add_01_battle_start(transition, 0);
     sav12_xor_increment(7);
     sav12_xor_increment(8);
@@ -214,7 +239,7 @@ void sub_8081A5C(void)
     sub_80597F4();
     gMain.field_8 = sub_8081C8C;
     gUnknown_020239F8 = 1024;
-    transition = GetHigherOrLowerLevelTransitionForWild();
+    transition = GetWildBattleTransition();
     task_add_01_battle_start(transition, 0);
     sav12_xor_increment(7);
     sav12_xor_increment(8);
@@ -229,7 +254,7 @@ void sub_8081AA4(void)
     sub_80597F4();
     gMain.field_8 = sub_80C824C;
     gUnknown_020239F8 = 128;
-    transition = GetHigherOrLowerLevelTransitionForWild();
+    transition = GetWildBattleTransition();
     task_add_01_battle_start(transition, 0);
 }
 
@@ -259,7 +284,7 @@ void sub_8081B3C(void)
     ScriptContext2_Enable();
     gMain.field_8 = sub_8081CEC;
     gUnknown_020239F8 = 0;
-    transition = GetHigherOrLowerLevelTransitionForWild();
+    transition = GetWildBattleTransition();
     task_add_01_battle_start(transition, 0);
     sav12_xor_increment(7);
     sav12_xor_increment(8);
@@ -272,7 +297,7 @@ void sub_8081B78(void)
     ScriptContext2_Enable();
     gMain.field_8 = sub_8081CEC;
     gUnknown_020239F8 = 0x2000;
-    transition = GetHigherOrLowerLevelTransitionForWild();
+    transition = GetWildBattleTransition();
     task_add_01_battle_start(transition, 0);
     sav12_xor_increment(7);
     sav12_xor_increment(8);
@@ -422,70 +447,71 @@ s8 sub_8081E90(void)
     return 3;
 }
 
-u16 GetSumOfPartyMonLevel(u8 fixCount)
+u16 GetSumOfPartyMonLevel(u8 numMons)
 {
     u32 monData;
-    u8 returnThis = 0;
-    int loopCounter;
+    u8 sum = 0;
+    int i;
 
-    for (loopCounter = 0; loopCounter <= 5; loopCounter++)
+    for (i = 0; i < 6; i++)
     {
-        monData = GetMonData(&gPlayerParty[loopCounter], MON_DATA_SPECIES2);
-        if (monData != 412 && monData) // if the pokemon in question is either NOT Ten question marks or an egg, proceed
-        // note that it actually considers the 26 glitch mons to be "valid".
+        monData = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
+        if (monData != 412 && monData)
         {
-            if (GetMonData(&gPlayerParty[loopCounter], MON_DATA_HP))
+            if (GetMonData(&gPlayerParty[i], MON_DATA_HP))
             {
-                returnThis += GetMonData(&gPlayerParty[loopCounter], MON_DATA_LEVEL);
+                sum += GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
 
-                fixCount--;
-                if (!fixCount) // has it reached 0?
+                numMons--;
+                if (numMons == 0)
                     break;
             }
         }
     }
-    return returnThis;
+
+    return sum;
 }
 
-u8 GetSumOfEnemyPartyLevel(u16 trainerNum, u8 partyCount)
+u8 GetSumOfEnemyPartyLevel(u16 trainerNum, u8 numMons)
 {
-    // TODO: Clean this up.
     u8 i;
-    u8 returnThis; // v4
-    u32 _partyCount = partyCount;
-    struct TrainerPartyMember *party;
+    u8 sum;
+    u32 count = numMons;
+    void *party;
 
-    if (gTrainers[trainerNum].partySize < _partyCount) // is the actual party size smaller than the specified size?
-        _partyCount = gTrainers[trainerNum].partySize; // if so, set the specified size to the actual size. seems to be error correction?
+    if (gTrainers[trainerNum].partySize < count)
+        count = gTrainers[trainerNum].partySize;
 
-    returnThis = 0;
+    sum = 0;
+
     switch (gTrainers[trainerNum].partyFlags)
     {
     case 0:
         party = gTrainers[trainerNum].party;
-        for(i = 0; i < _partyCount; i++)
-            returnThis += party[i].level;
+        for(i = 0; i < count; i++)
+            sum += ((struct TrainerPartyMember0 *)party)[i].level;
         break;
     case 1:
         party = gTrainers[trainerNum].party;
-        for(i = 0; i < _partyCount; i++)
-            returnThis += party[i * 2].level;
+        for(i = 0; i < count; i++)
+            sum += ((struct TrainerPartyMember1 *)party)[i].level;
         break;
     case 2:
         party = gTrainers[trainerNum].party;
-        for(i = 0; i < _partyCount; i++)
-            returnThis += party[i].level;
+        for(i = 0; i < count; i++)
+            sum += ((struct TrainerPartyMember2 *)party)[i].level;
         break;
     case 3:
         party = gTrainers[trainerNum].party;
-        for(i = 0; i < _partyCount; i++)
-            returnThis += party[i * 2].level;
+        for(i = 0; i < count; i++)
+            sum += ((struct TrainerPartyMember3 *)party)[i].level;
         break;
     }
-    return returnThis;
+
+    return sum;
 }
 
-u8 GetHigherOrLowerLevelTransitionForWild(void)
+u8 GetWildBattleTransition(void)
 {
     u8 flashVar = sub_8081E90();
     u8 level = GetMonData(&gEnemyParty[0], MON_DATA_LEVEL);
