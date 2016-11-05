@@ -10,12 +10,12 @@ gSpecials::
 	.4byte sub_80BB63C
 	.4byte sub_80BBAF0
 	.4byte sub_80BC440
-	.4byte sub_80BC464
+	.4byte SecretBasePC_PackUp
 	.4byte sub_80BC114
 	.4byte sub_80BC56C
 	.4byte sub_80BC5BC
-	.4byte sub_80BC604
-	.4byte sub_80BC618
+	.4byte SecretBasePC_Decoration
+	.4byte SecretBasePC_Registry
 	.4byte sub_80BCE1C
 	.4byte sub_80BCE90
 	.4byte sub_80BBDD0
@@ -233,7 +233,7 @@ gSpecials::
 	.4byte GetLeadMonFriendshipScore
 	.4byte sub_8134548
 	.4byte sub_81347F8
-	.4byte sub_81352E4
+	.4byte CheckPartyBattleTowerBanlist
 	.4byte sub_8135474
 	.4byte sub_81360C0
 	.4byte sub_813556C
@@ -249,8 +249,8 @@ gSpecials::
 	.4byte sub_813601C
 	.4byte sub_810F404
 	.4byte ReducePlayerPartyToThree
-	.4byte sub_8139C74
-	.4byte sub_8139CB4
+	.4byte BedroomPC
+	.4byte PlayerPC
 	.4byte FieldShowRegionMap
 	.4byte sub_804D89C
 	.4byte sub_804DB68
@@ -258,7 +258,7 @@ gSpecials::
 	.4byte sub_804DB2C
 	.4byte GetWeekCount
 	.4byte sub_8145AEC
-	.4byte sub_8145B00
+	.4byte PickLotteryCornerTicket
 	.4byte ShowBerryBlenderRecordWindow
 	.4byte ResetTrickHouseEndRoomFlag
 	.4byte SetTrickHouseEndRoomFlag

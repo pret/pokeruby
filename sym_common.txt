@@ -179,7 +179,7 @@ gUnknown_0300485C: @ 300485C
 gUnknown_03004860: @ 3004860
 	.space 0x4
 
-gUnknown_03004864: @ 3004864
+gFieldLinkPlayerCount: @ 3004864
 	.space 0xC
 
 gUnknown_03004870: @ 3004870
@@ -413,21 +413,4 @@ gUnknown_03005FA0: @ 3005FA0
 	.space 0x30
 
 	.include "m4a_2.o"
-
-	.align 4
-gMPlay_BGM: @ 3007380
-	.space 0x40
-
-gMPlay_SE1: @ 30073C0
-	.space 0x40
-
-gMPlay_SE2: @ 3007400
-	.space 0x40
-
-gMPlayMemAccArea: @ 3007440
-	.space 0x10
-
-gMPlay_SE3: @ 3007450
-	.space 0x40
-
 	.include "agb_flash.o"

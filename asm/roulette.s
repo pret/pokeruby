@@ -1,6 +1,6 @@
-	.include "constants/gba_constants.s"
-	.include "constants/species_constants.s"
-	.include "asm/macros.s"
+	.include "constants/gba_constants.inc"
+	.include "constants/species_constants.inc"
+	.include "asm/macros.inc"
 
 	.syntax unified
 
@@ -4829,7 +4829,7 @@ _081177F8: .4byte sub_81175DC
 PlayRoulette: @ 81177FC
 	push {lr}
 	bl ScriptContext2_Enable
-	ldr r0, _08117828 @ =sub_81176A8
+	ldr r0, _08117828 @ =Task_Roulette_0
 	movs r1, 0
 	bl CreateTask
 	lsls r0, 24
@@ -7796,7 +7796,7 @@ _08118F64:
 	adds r1, 0x98
 	ldr r0, _08118F84 @ =0x3dae147b
 	str r0, [r1]
-	ldr r0, _08118F88 @ =prev_quest_read_x24_hm_usage
+	ldr r0, _08118F88 @ =sub_8118D2C
 	str r0, [r7, 0x1C]
 	movs r0, 0x5
 	strh r0, [r7, 0x30]

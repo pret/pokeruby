@@ -1,6 +1,6 @@
-	.include "constants/gba_constants.s"
-	.include "constants/species_constants.s"
-	.include "asm/macros.s"
+	.include "constants/gba_constants.inc"
+	.include "constants/species_constants.inc"
+	.include "asm/macros.inc"
 
 	.syntax unified
 
@@ -3254,7 +3254,7 @@ _0806F138:
 	subs r1, 0x21
 	lsls r1, 24
 	lsrs r1, 24
-	bl sub_8040374
+	bl CanMonLearnTMHM
 	cmp r0, 0
 	bne _0806F17C
 	ldr r4, _0806F16C @ =gStringVar4

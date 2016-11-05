@@ -1,31 +1,31 @@
 	.include "MPlayDef.s"
 
-	.equ	song_467_grp, voicegroup_8454C54
-	.equ	song_467_pri, 0
-	.equ	song_467_rev, reverb_set+50
-	.equ	song_467_mvl, 127
-	.equ	song_467_key, 0
-	.equ	song_467_tbs, 1
-	.equ	song_467_exg, 0
-	.equ	song_467_cmp, 1
+	.equ	bgm_radio_tower_occupied_grp, voicegroup_8454C54
+	.equ	bgm_radio_tower_occupied_pri, 0
+	.equ	bgm_radio_tower_occupied_rev, reverb_set+50
+	.equ	bgm_radio_tower_occupied_mvl, 127
+	.equ	bgm_radio_tower_occupied_key, 0
+	.equ	bgm_radio_tower_occupied_tbs, 1
+	.equ	bgm_radio_tower_occupied_exg, 0
+	.equ	bgm_radio_tower_occupied_cmp, 1
 
 	.section .rodata
-	.global	song_467
+	.global	bgm_radio_tower_occupied
 	.align	2
 
 @********************** Track  1 **********************@
 
-song_467_1:
-	.byte	KEYSH , song_467_key+0
-	.byte	TEMPO , 152*song_467_tbs/2
+bgm_radio_tower_occupied_1:
+	.byte	KEYSH , bgm_radio_tower_occupied_key+0
+	.byte	TEMPO , 152*bgm_radio_tower_occupied_tbs/2
 	.byte		VOICE , 21
-	.byte		VOL   , 79*song_467_mvl/mxv
+	.byte		VOL   , 79*bgm_radio_tower_occupied_mvl/mxv
 	.byte		PAN   , c_v+0
 	.byte		N06   , Cn4 , v112
 	.byte	W06
 	.byte		        Dn4 
 	.byte	W06
-song_467_1_B1:
+bgm_radio_tower_occupied_1_B1:
 	.byte		N06   , Ds4 , v112
 	.byte	W12
 	.byte		        Dn4 
@@ -82,7 +82,7 @@ song_467_1_B1:
 	.byte	W12
 	.byte		        Fs4 
 	.byte	W12
-song_467_1_000:
+bgm_radio_tower_occupied_1_000:
 	.byte	W12
 	.byte		N06   , Bn2 , v112
 	.byte	W48
@@ -90,11 +90,11 @@ song_467_1_000:
 	.byte	W36
 	.byte	PEND
 	.byte	PATT
-	 .word	song_467_1_000
+	 .word	bgm_radio_tower_occupied_1_000
 	.byte	PATT
-	 .word	song_467_1_000
+	 .word	bgm_radio_tower_occupied_1_000
 	.byte	W96
-song_467_1_001:
+bgm_radio_tower_occupied_1_001:
 	.byte	W21
 	.byte		N03   , Bn3 , v112
 	.byte	W03
@@ -107,7 +107,7 @@ song_467_1_001:
 	.byte		N36   , Ds4 
 	.byte	W12
 	.byte	PEND
-song_467_1_002:
+bgm_radio_tower_occupied_1_002:
 	.byte	W24
 	.byte		N24   , Dn4 , v112
 	.byte	W24
@@ -153,9 +153,9 @@ song_467_1_002:
 	.byte		        Fs4 
 	.byte	W06
 	.byte	PATT
-	 .word	song_467_1_001
+	 .word	bgm_radio_tower_occupied_1_001
 	.byte	PATT
-	 .word	song_467_1_002
+	 .word	bgm_radio_tower_occupied_1_002
 	.byte		N06   , As3 , v112
 	.byte	W36
 	.byte		N03   , Fs3 
@@ -194,7 +194,7 @@ song_467_1_002:
 	.byte	W06
 	.byte		        Dn3 
 	.byte	W06
-song_467_1_003:
+bgm_radio_tower_occupied_1_003:
 	.byte	W12
 	.byte		N06   , Fn3 , v112
 	.byte	W48
@@ -202,9 +202,9 @@ song_467_1_003:
 	.byte	W36
 	.byte	PEND
 	.byte	PATT
-	 .word	song_467_1_003
+	 .word	bgm_radio_tower_occupied_1_003
 	.byte	PATT
-	 .word	song_467_1_003
+	 .word	bgm_radio_tower_occupied_1_003
 	.byte	W12
 	.byte		N06   , Fn3 , v112
 	.byte	W48
@@ -289,21 +289,21 @@ song_467_1_003:
 	.byte		        Dn4 
 	.byte	W06
 	.byte	GOTO
-	 .word	song_467_1_B1
+	 .word	bgm_radio_tower_occupied_1_B1
 	.byte	FINE
 
 @********************** Track  2 **********************@
 
-song_467_2:
-	.byte	KEYSH , song_467_key+0
+bgm_radio_tower_occupied_2:
+	.byte	KEYSH , bgm_radio_tower_occupied_key+0
 	.byte		VOICE , 21
-	.byte		VOL   , 79*song_467_mvl/mxv
+	.byte		VOL   , 79*bgm_radio_tower_occupied_mvl/mxv
 	.byte		PAN   , c_v+0
 	.byte		N06   , Cn5 , v112
 	.byte	W06
 	.byte		        Dn5 
 	.byte	W06
-song_467_2_B1:
+bgm_radio_tower_occupied_2_B1:
 	.byte		N06   , Ds5 , v112
 	.byte	W12
 	.byte		        Dn5 
@@ -352,7 +352,7 @@ song_467_2_B1:
 	.byte	W12
 	.byte		        Ds5 
 	.byte	W12
-song_467_2_000:
+bgm_radio_tower_occupied_2_000:
 	.byte	W12
 	.byte		N06   , Fn3 , v112
 	.byte	W48
@@ -360,9 +360,9 @@ song_467_2_000:
 	.byte	W36
 	.byte	PEND
 	.byte	PATT
-	 .word	song_467_2_000
+	 .word	bgm_radio_tower_occupied_2_000
 	.byte	PATT
-	 .word	song_467_2_000
+	 .word	bgm_radio_tower_occupied_2_000
 	.byte		N06   , Gs3 , v112
 	.byte	W06
 	.byte		        Fn3 
@@ -395,7 +395,7 @@ song_467_2_000:
 	.byte	W06
 	.byte		        Dn3 
 	.byte	W06
-song_467_2_001:
+bgm_radio_tower_occupied_2_001:
 	.byte	W21
 	.byte		N03   , Dn4 , v112
 	.byte	W03
@@ -408,7 +408,7 @@ song_467_2_001:
 	.byte		N36   , Fs4 
 	.byte	W12
 	.byte	PEND
-song_467_2_002:
+bgm_radio_tower_occupied_2_002:
 	.byte	W24
 	.byte		N24   , Fn4 , v112
 	.byte	W24
@@ -438,9 +438,9 @@ song_467_2_002:
 	.byte		        Dn5 
 	.byte	W06
 	.byte	PATT
-	 .word	song_467_2_001
+	 .word	bgm_radio_tower_occupied_2_001
 	.byte	PATT
-	 .word	song_467_2_002
+	 .word	bgm_radio_tower_occupied_2_002
 	.byte		N06   , Ds4 , v112
 	.byte	W12
 	.byte		        Ds3 
@@ -591,18 +591,18 @@ song_467_2_002:
 	.byte		        Dn5 
 	.byte	W06
 	.byte	GOTO
-	 .word	song_467_2_B1
+	 .word	bgm_radio_tower_occupied_2_B1
 	.byte	FINE
 
 @********************** Track  3 **********************@
 
-song_467_3:
-	.byte	KEYSH , song_467_key+0
+bgm_radio_tower_occupied_3:
+	.byte	KEYSH , bgm_radio_tower_occupied_key+0
 	.byte		VOICE , 21
-	.byte		VOL   , 79*song_467_mvl/mxv
+	.byte		VOL   , 79*bgm_radio_tower_occupied_mvl/mxv
 	.byte		PAN   , c_v+0
 	.byte	W12
-song_467_3_B1:
+bgm_radio_tower_occupied_3_B1:
 	.byte		N06   , Fn2 , v112
 	.byte	W12
 	.byte		        Gs2 
@@ -613,7 +613,7 @@ song_467_3_B1:
 	.byte	W24
 	.byte		N36   , Dn2 
 	.byte	W36
-song_467_3_000:
+bgm_radio_tower_occupied_3_000:
 	.byte		N06   , Cn2 , v112
 	.byte	W12
 	.byte		        Cn3 
@@ -631,7 +631,7 @@ song_467_3_000:
 	.byte		        Gn2 
 	.byte	W12
 	.byte	PEND
-song_467_3_001:
+bgm_radio_tower_occupied_3_001:
 	.byte		N06   , Cn2 , v112
 	.byte	W12
 	.byte		N06   
@@ -650,10 +650,10 @@ song_467_3_001:
 	.byte	W12
 	.byte	PEND
 	.byte	PATT
-	 .word	song_467_3_000
+	 .word	bgm_radio_tower_occupied_3_000
 	.byte	PATT
-	 .word	song_467_3_001
-song_467_3_002:
+	 .word	bgm_radio_tower_occupied_3_001
+bgm_radio_tower_occupied_3_002:
 	.byte		N06   , Gs1 , v112
 	.byte	W12
 	.byte		        Gs2 
@@ -675,7 +675,7 @@ song_467_3_002:
 	.byte		        Cn2 
 	.byte	W06
 	.byte	PEND
-song_467_3_003:
+bgm_radio_tower_occupied_3_003:
 	.byte		N06   , Gs1 , v112
 	.byte	W12
 	.byte		        Gs2 
@@ -694,7 +694,7 @@ song_467_3_003:
 	.byte	W12
 	.byte	PEND
 	.byte	PATT
-	 .word	song_467_3_002
+	 .word	bgm_radio_tower_occupied_3_002
 	.byte		N06   , Gs1 , v112
 	.byte	W12
 	.byte		        Fn2 
@@ -712,19 +712,19 @@ song_467_3_003:
 	.byte		        Gs2 
 	.byte	W12
 	.byte	PATT
-	 .word	song_467_3_000
+	 .word	bgm_radio_tower_occupied_3_000
 	.byte	PATT
-	 .word	song_467_3_001
+	 .word	bgm_radio_tower_occupied_3_001
 	.byte	PATT
-	 .word	song_467_3_000
+	 .word	bgm_radio_tower_occupied_3_000
 	.byte	PATT
-	 .word	song_467_3_001
+	 .word	bgm_radio_tower_occupied_3_001
 	.byte	PATT
-	 .word	song_467_3_000
+	 .word	bgm_radio_tower_occupied_3_000
 	.byte	PATT
-	 .word	song_467_3_001
+	 .word	bgm_radio_tower_occupied_3_001
 	.byte	PATT
-	 .word	song_467_3_000
+	 .word	bgm_radio_tower_occupied_3_000
 	.byte		N06   , Cn2 , v112
 	.byte	W12
 	.byte		N06   
@@ -746,13 +746,13 @@ song_467_3_003:
 	.byte		        Fn2 
 	.byte	W06
 	.byte	PATT
-	 .word	song_467_3_002
+	 .word	bgm_radio_tower_occupied_3_002
 	.byte	PATT
-	 .word	song_467_3_003
+	 .word	bgm_radio_tower_occupied_3_003
 	.byte	PATT
-	 .word	song_467_3_002
+	 .word	bgm_radio_tower_occupied_3_002
 	.byte	PATT
-	 .word	song_467_3_003
+	 .word	bgm_radio_tower_occupied_3_003
 	.byte		N06   , Cn2 , v112
 	.byte	W12
 	.byte		        Cn3 
@@ -826,20 +826,20 @@ song_467_3_003:
 	.byte		N06   , Gs3 
 	.byte	W12
 	.byte	GOTO
-	 .word	song_467_3_B1
+	 .word	bgm_radio_tower_occupied_3_B1
 	.byte	FINE
 
 @********************** Track  4 **********************@
 
-song_467_4:
-	.byte	KEYSH , song_467_key+0
+bgm_radio_tower_occupied_4:
+	.byte	KEYSH , bgm_radio_tower_occupied_key+0
 	.byte		VOICE , 126
 	.byte		PAN   , c_v+0
-	.byte		VOL   , 41*song_467_mvl/mxv
+	.byte		VOL   , 41*bgm_radio_tower_occupied_mvl/mxv
 	.byte	W12
-song_467_4_B1:
+bgm_radio_tower_occupied_4_B1:
 	.byte	W96
-song_467_4_000:
+bgm_radio_tower_occupied_4_000:
 	.byte	W12
 	.byte		N12   , Gn5 , v032
 	.byte	W24
@@ -851,40 +851,40 @@ song_467_4_000:
 	.byte	W12
 	.byte	PEND
 	.byte	PATT
-	 .word	song_467_4_000
+	 .word	bgm_radio_tower_occupied_4_000
 	.byte	PATT
-	 .word	song_467_4_000
+	 .word	bgm_radio_tower_occupied_4_000
 	.byte	PATT
-	 .word	song_467_4_000
+	 .word	bgm_radio_tower_occupied_4_000
 	.byte	PATT
-	 .word	song_467_4_000
+	 .word	bgm_radio_tower_occupied_4_000
 	.byte	PATT
-	 .word	song_467_4_000
+	 .word	bgm_radio_tower_occupied_4_000
 	.byte	PATT
-	 .word	song_467_4_000
+	 .word	bgm_radio_tower_occupied_4_000
 	.byte	W96
 	.byte	PATT
-	 .word	song_467_4_000
+	 .word	bgm_radio_tower_occupied_4_000
 	.byte	PATT
-	 .word	song_467_4_000
+	 .word	bgm_radio_tower_occupied_4_000
 	.byte	PATT
-	 .word	song_467_4_000
+	 .word	bgm_radio_tower_occupied_4_000
 	.byte	PATT
-	 .word	song_467_4_000
+	 .word	bgm_radio_tower_occupied_4_000
 	.byte	PATT
-	 .word	song_467_4_000
+	 .word	bgm_radio_tower_occupied_4_000
 	.byte	PATT
-	 .word	song_467_4_000
+	 .word	bgm_radio_tower_occupied_4_000
 	.byte	PATT
-	 .word	song_467_4_000
+	 .word	bgm_radio_tower_occupied_4_000
 	.byte	PATT
-	 .word	song_467_4_000
+	 .word	bgm_radio_tower_occupied_4_000
 	.byte	PATT
-	 .word	song_467_4_000
+	 .word	bgm_radio_tower_occupied_4_000
 	.byte	PATT
-	 .word	song_467_4_000
+	 .word	bgm_radio_tower_occupied_4_000
 	.byte	PATT
-	 .word	song_467_4_000
+	 .word	bgm_radio_tower_occupied_4_000
 	.byte	W12
 	.byte		N12   , Gn5 , v032
 	.byte	W24
@@ -893,24 +893,24 @@ song_467_4_000:
 	.byte		        Gn5 , v036
 	.byte	W36
 	.byte	PATT
-	 .word	song_467_4_000
+	 .word	bgm_radio_tower_occupied_4_000
 	.byte	PATT
-	 .word	song_467_4_000
+	 .word	bgm_radio_tower_occupied_4_000
 	.byte	W96
 	.byte	W96
 	.byte	GOTO
-	 .word	song_467_4_B1
+	 .word	bgm_radio_tower_occupied_4_B1
 	.byte	FINE
 
 @********************** Track  5 **********************@
 
-song_467_5:
-	.byte	KEYSH , song_467_key+0
+bgm_radio_tower_occupied_5:
+	.byte	KEYSH , bgm_radio_tower_occupied_key+0
 	.byte		VOICE , 0
-	.byte		VOL   , 79*song_467_mvl/mxv
+	.byte		VOL   , 79*bgm_radio_tower_occupied_mvl/mxv
 	.byte		PAN   , c_v+4
 	.byte	W12
-song_467_5_B1:
+bgm_radio_tower_occupied_5_B1:
 	.byte		N48   , An2 , v112
 	.byte	W48
 	.byte		N12   , En1 
@@ -925,7 +925,7 @@ song_467_5_B1:
 	.byte	W06
 	.byte		N06   
 	.byte	W06
-song_467_5_000:
+bgm_radio_tower_occupied_5_000:
 	.byte		N12   , Cn1 , v112
 	.byte	W24
 	.byte		        En1 
@@ -936,17 +936,17 @@ song_467_5_000:
 	.byte	W24
 	.byte	PEND
 	.byte	PATT
-	 .word	song_467_5_000
+	 .word	bgm_radio_tower_occupied_5_000
 	.byte	PATT
-	 .word	song_467_5_000
+	 .word	bgm_radio_tower_occupied_5_000
 	.byte	PATT
-	 .word	song_467_5_000
+	 .word	bgm_radio_tower_occupied_5_000
 	.byte	PATT
-	 .word	song_467_5_000
+	 .word	bgm_radio_tower_occupied_5_000
 	.byte	PATT
-	 .word	song_467_5_000
+	 .word	bgm_radio_tower_occupied_5_000
 	.byte	PATT
-	 .word	song_467_5_000
+	 .word	bgm_radio_tower_occupied_5_000
 	.byte		N48   , An2 , v112
 	.byte	W48
 	.byte		N12   , En1 
@@ -962,27 +962,27 @@ song_467_5_000:
 	.byte		N06   
 	.byte	W06
 	.byte	PATT
-	 .word	song_467_5_000
+	 .word	bgm_radio_tower_occupied_5_000
 	.byte	PATT
-	 .word	song_467_5_000
+	 .word	bgm_radio_tower_occupied_5_000
 	.byte	PATT
-	 .word	song_467_5_000
+	 .word	bgm_radio_tower_occupied_5_000
 	.byte	PATT
-	 .word	song_467_5_000
+	 .word	bgm_radio_tower_occupied_5_000
 	.byte	PATT
-	 .word	song_467_5_000
+	 .word	bgm_radio_tower_occupied_5_000
 	.byte	PATT
-	 .word	song_467_5_000
+	 .word	bgm_radio_tower_occupied_5_000
 	.byte	PATT
-	 .word	song_467_5_000
+	 .word	bgm_radio_tower_occupied_5_000
 	.byte	PATT
-	 .word	song_467_5_000
+	 .word	bgm_radio_tower_occupied_5_000
 	.byte	PATT
-	 .word	song_467_5_000
+	 .word	bgm_radio_tower_occupied_5_000
 	.byte	PATT
-	 .word	song_467_5_000
+	 .word	bgm_radio_tower_occupied_5_000
 	.byte	PATT
-	 .word	song_467_5_000
+	 .word	bgm_radio_tower_occupied_5_000
 	.byte		N12   , Cn1 , v112
 	.byte	W24
 	.byte		        En1 
@@ -996,9 +996,9 @@ song_467_5_000:
 	.byte		N06   
 	.byte	W06
 	.byte	PATT
-	 .word	song_467_5_000
+	 .word	bgm_radio_tower_occupied_5_000
 	.byte	PATT
-	 .word	song_467_5_000
+	 .word	bgm_radio_tower_occupied_5_000
 	.byte		N48   , An2 , v112
 	.byte	W48
 	.byte		N12   , En1 
@@ -1026,24 +1026,24 @@ song_467_5_000:
 	.byte		N06   
 	.byte	W06
 	.byte	GOTO
-	 .word	song_467_5_B1
+	 .word	bgm_radio_tower_occupied_5_B1
 	.byte	FINE
 
 @******************************************************@
 	.align	2
 
-song_467:
+bgm_radio_tower_occupied:
 	.byte	5	@ NumTrks
 	.byte	0	@ NumBlks
-	.byte	song_467_pri	@ Priority
-	.byte	song_467_rev	@ Reverb.
+	.byte	bgm_radio_tower_occupied_pri	@ Priority
+	.byte	bgm_radio_tower_occupied_rev	@ Reverb.
 
-	.word	song_467_grp
+	.word	bgm_radio_tower_occupied_grp
 
-	.word	song_467_1
-	.word	song_467_2
-	.word	song_467_3
-	.word	song_467_4
-	.word	song_467_5
+	.word	bgm_radio_tower_occupied_1
+	.word	bgm_radio_tower_occupied_2
+	.word	bgm_radio_tower_occupied_3
+	.word	bgm_radio_tower_occupied_4
+	.word	bgm_radio_tower_occupied_5
 
 	.end

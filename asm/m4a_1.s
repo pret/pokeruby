@@ -1,6 +1,6 @@
-	.include "asm/macros.s"
-	.include "constants/gba_constants.s"
-	.include "constants/m4a_constants.s"
+	.include "asm/macros.inc"
+	.include "constants/gba_constants.inc"
+	.include "constants/m4a_constants.inc"
 
 	.syntax unified
 
@@ -678,7 +678,7 @@ sub_81DD520:
 	ldr r1, [r4, o_SoundChannel_wav]
 	add r2, r2, r1
 	add r2, r2, 0x10
-	ldr r5, =0x030007b8
+	ldr r5, =gUnknown_030007B8
 	ldr r6, =gDeltaEncodingTable
 	mov r7, 0x40
 	ldrb lr, [r2], 1
@@ -699,7 +699,7 @@ _081DD57C:
 	subs r7, r7, 2
 	bgt _081DD568
 _081DD594:
-	ldr r5, =0x030007b8
+	ldr r5, =gUnknown_030007B8
 	and r0, r3, 0x3F
 	ldrsb r1, [r5, r0]
 	pop {r0,r2,r5-r7,pc}

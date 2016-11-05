@@ -370,7 +370,7 @@ static void TestBlockTransfer(u32 a1, u32 a2, u32 a3)
         }
     }
 
-    val = GetBlockRecievedStatus();
+    val = GetBlockReceivedStatus();
 
     if (val == 0xF)
     {
@@ -889,7 +889,7 @@ bool8 sub_8007ECC(void)
     return retVal;
 }
 
-u8 GetBlockRecievedStatus(void)
+u8 GetBlockReceivedStatus(void)
 {
     return (gBlockReceived[3] << 3)
          | (gBlockReceived[2] << 2)
@@ -975,7 +975,7 @@ void Task_PrintTestData(u8 taskId)
     PrintHex(GetMultiplayerId(), 15, 12, 2);
     PrintHex(gLastSendQueueCount, 25, 1, 2);
     PrintHex(gLastRecvQueueCount, 25, 2, 2);
-    PrintHex(GetBlockRecievedStatus(), 15, 5, 2);
+    PrintHex(GetBlockReceivedStatus(), 15, 5, 2);
     PrintHex(gLinkDebugValue1, 2, 12, 8);
     PrintHex(gLinkDebugValue2, 2, 13, 8);
     PrintHex(GetSioMultiSI(), 25, 5, 1);

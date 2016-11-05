@@ -1,5 +1,5 @@
 	.align 2
-voicegroup_842FC88:: @ 842FC8
+voicegroup_pokemon_cry:: @ 842FC8
 	voice_keysplit_all voicegroup_842FEF8  @ 842FC88
 	voice_keysplit voicegroup_8430204, KeySplitTable_8455224  @ 842FC94
 	voice_square_1 0, 2, 0, 0, 15, 0  @ 842FCA0

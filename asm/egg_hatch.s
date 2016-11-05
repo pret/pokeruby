@@ -1,6 +1,6 @@
-	.include "constants/gba_constants.s"
-	.include "constants/species_constants.s"
-	.include "asm/macros.s"
+	.include "constants/gba_constants.inc"
+	.include "constants/species_constants.inc"
+	.include "asm/macros.inc"
 
 	.syntax unified
 
@@ -477,7 +477,7 @@ EggHatch: @ 8042C80
 	push {lr}
 	sub sp, 0x4
 	bl ScriptContext2_Enable
-	ldr r0, _08042CA8 @ =sub_8042CAC
+	ldr r0, _08042CA8 @ =Task_EggHatch
 	movs r1, 0xA
 	bl CreateTask
 	movs r0, 0x1
@@ -505,7 +505,7 @@ Task_EggHatch: @ 8042CAC
 	ands r0, r1
 	cmp r0, 0
 	bne _08042CD0
-	ldr r0, _08042CDC @ =sub_8042CE8
+	ldr r0, _08042CDC @ =CB2_EggHatch_0
 	bl SetMainCallback2
 	ldr r1, _08042CE0 @ =gUnknown_0300485C
 	ldr r0, _08042CE4 @ =sub_8080990
@@ -570,7 +570,7 @@ _08042D34:
 	bl ResetTasks
 	bl ResetSpriteData
 	bl FreeAllSpritePalettes
-	ldr r0, _08042D80 @ =sub_8042C6C
+	ldr r0, _08042D80 @ =VBlankCB_EggHatch
 	bl SetVBlankCallback
 	ldr r1, _08042D84 @ =gMain
 	ldr r2, _08042D88 @ =0x0000043c
@@ -789,7 +789,7 @@ _08042F40:
 	strh r4, [r0]
 	adds r0, 0x2
 	strh r4, [r0]
-	ldr r0, _08042F80 @ =sub_804300C
+	ldr r0, _08042F80 @ =CB2_EggHatch_1
 	bl SetMainCallback2
 	ldr r0, _08042F84 @ =gUnknown_0300481C
 	ldr r0, [r0]
@@ -930,7 +930,7 @@ _08043068:
 	ldrb r0, [r1, 0x2]
 	adds r0, 0x1
 	strb r0, [r1, 0x2]
-	ldr r0, _0804309C @ =c3_080472E4
+	ldr r0, _0804309C @ =Task_EggHatchPlayBGM
 	movs r1, 0x5
 	bl CreateTask
 	b _080432BA
@@ -977,7 +977,7 @@ _080430D2:
 	lsls r0, 2
 	adds r2, 0x1C
 	adds r0, r2
-	ldr r1, _080430F4 @ =sub_80432E4
+	ldr r1, _080430F4 @ =SpriteCB_Egg_0
 	str r1, [r0]
 	b _080432BA
 	.align 2, 0
@@ -1148,7 +1148,7 @@ _080431DA:
 	movs r2, 0
 	bl GetMonData
 	str r0, [sp]
-	ldr r0, _08043284 @ =sub_8042F88
+	ldr r0, _08043284 @ =EggHatchSetMonNickname
 	str r0, [sp, 0x4]
 	movs r0, 0x3
 	mov r1, r10
@@ -1217,7 +1217,7 @@ SpriteCB_Egg_0: @ 80432E4
 	asrs r0, 16
 	cmp r0, 0x14
 	ble _08043304
-	ldr r0, _08043300 @ =sub_804333C
+	ldr r0, _08043300 @ =SpriteCB_Egg_1
 	str r0, [r4, 0x1C]
 	movs r0, 0
 	strh r0, [r4, 0x2E]
@@ -1270,7 +1270,7 @@ SpriteCB_Egg_1: @ 804333C
 	asrs r0, 16
 	cmp r0, 0x14
 	ble _0804336C
-	ldr r0, _08043368 @ =sub_80433A0
+	ldr r0, _08043368 @ =SpriteCB_Egg_2
 	str r0, [r4, 0x1C]
 	strh r1, [r4, 0x2E]
 	strh r1, [r4, 0x32]
@@ -1322,7 +1322,7 @@ SpriteCB_Egg_2: @ 80433A0
 	asrs r0, 16
 	cmp r0, 0x26
 	ble _08043418
-	ldr r0, _08043404 @ =sub_8043460
+	ldr r0, _08043404 @ =SpriteCB_Egg_3
 	str r0, [r4, 0x1C]
 	strh r6, [r4, 0x2E]
 	ldr r5, _08043408 @ =gUnknown_0300481C
@@ -1406,7 +1406,7 @@ SpriteCB_Egg_3: @ 8043460
 	asrs r0, 16
 	cmp r0, 0x32
 	ble _0804347A
-	ldr r0, _08043480 @ =sub_8043484
+	ldr r0, _08043480 @ =SpriteCB_Egg_4
 	str r0, [r1, 0x1C]
 	movs r0, 0
 	strh r0, [r1, 0x2E]
@@ -1469,7 +1469,7 @@ _080434C0:
 	movs r1, 0x4
 	orrs r0, r1
 	strb r0, [r2]
-	ldr r0, _08043500 @ =sub_8043504
+	ldr r0, _08043500 @ =SpriteCB_Egg_5
 	str r0, [r5, 0x1C]
 	strh r4, [r5, 0x2E]
 _080434EE:

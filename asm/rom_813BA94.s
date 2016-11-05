@@ -1,6 +1,6 @@
-	.include "constants/gba_constants.s"
-	.include "constants/species_constants.s"
-	.include "asm/macros.s"
+	.include "constants/gba_constants.inc"
+	.include "constants/species_constants.inc"
+	.include "asm/macros.inc"
 
 	.syntax unified
 
@@ -6706,7 +6706,7 @@ FieldInitRegionMap: @ 813EEB4
 	movs r0, 0
 	strh r0, [r1]
 	str r4, [r2]
-	ldr r0, _0813EEE0 @ =sub_813EEE4
+	ldr r0, _0813EEE0 @ =CB2_FieldInitRegionMap
 	bl SetMainCallback2
 	pop {r4}
 	pop {r0}
@@ -6779,9 +6779,9 @@ CB2_FieldInitRegionMap: @ 813EEE4
 	movs r3, 0x13
 	bl MenuDrawTextWindow
 	bl sub_813F0C8
-	ldr r0, _0813EFA8 @ =sub_813EFC4
+	ldr r0, _0813EFA8 @ =CB2_FieldRegionMap
 	bl SetMainCallback2
-	ldr r0, _0813EFAC @ =sub_813EFB0
+	ldr r0, _0813EFAC @ =VBlankCB_FieldRegionMap
 	bl SetVBlankCallback
 	movs r0, 0x1
 	negs r0, r0
@@ -15014,7 +15014,7 @@ sub_8143088: @ 8143088
 	beq _081430EA
 	lsls r0, r2, 23
 	lsrs r0, 23
-	bl sub_80406D8
+	bl SpeciesToPokedexNum
 	lsls r0, 16
 	lsrs r6, r0, 16
 	ldr r0, _08143190 @ =0x0000ffff

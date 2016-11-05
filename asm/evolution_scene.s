@@ -1,6 +1,6 @@
-	.include "constants/gba_constants.s"
-	.include "constants/species_constants.s"
-	.include "asm/macros.s"
+	.include "constants/gba_constants.inc"
+	.include "constants/species_constants.inc"
+	.include "asm/macros.inc"
 
 	.syntax unified
 
@@ -97,7 +97,7 @@ BeginEvolutionScene: @ 8111924
 	lsrs r5, 24
 	lsls r6, 24
 	lsrs r6, 24
-	ldr r0, _08111978 @ =sub_81118A4
+	ldr r0, _08111978 @ =Task_BeginEvolutionScene
 	movs r1, 0
 	bl CreateTask
 	lsls r0, 24
@@ -117,7 +117,7 @@ BeginEvolutionScene: @ 8111924
 	strh r4, [r1, 0x10]
 	strh r5, [r1, 0x12]
 	strh r6, [r1, 0x20]
-	ldr r0, _08111980 @ =sub_8111894
+	ldr r0, _08111980 @ =CB2_BeginEvolutionScene
 	bl SetMainCallback2
 	pop {r3}
 	mov r8, r3
@@ -366,7 +366,7 @@ EvolutionScene: @ 8111984
 	orrs r0, r3
 	strb r0, [r1]
 	bl sub_8149954
-	ldr r0, _08111C74 @ =sub_811240C
+	ldr r0, _08111C74 @ =Task_EvolutionScene
 	movs r1, 0
 	bl CreateTask
 	lsls r1, r0, 24
@@ -407,12 +407,12 @@ EvolutionScene: @ 8111984
 	lsls r2, 5
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r0, _08111C84 @ =nullsub_73
+	ldr r0, _08111C84 @ =HBlankCB_EvolutionScene
 	bl SetHBlankCallback
-	ldr r0, _08111C88 @ =sub_8114FD4
+	ldr r0, _08111C88 @ =VBlankCB_EvolutionScene
 	bl SetVBlankCallback
 	bl m4aMPlayAllStop
-	ldr r0, _08111C8C @ =sub_8112270
+	ldr r0, _08111C8C @ =CB2_EvolutionSceneUpdate_0
 	bl SetMainCallback2
 	add sp, 0x38
 	pop {r3-r5}
@@ -610,11 +610,11 @@ CB2_EvolutionSceneLoadGraphics: @ 8111C90
 	lsls r2, 5
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r0, _08111E74 @ =nullsub_73
+	ldr r0, _08111E74 @ =HBlankCB_EvolutionScene
 	bl SetHBlankCallback
-	ldr r0, _08111E78 @ =sub_8114FD4
+	ldr r0, _08111E78 @ =VBlankCB_EvolutionScene
 	bl SetVBlankCallback
-	ldr r0, _08111E7C @ =sub_8112270
+	ldr r0, _08111E7C @ =CB2_EvolutionSceneUpdate_0
 	bl SetMainCallback2
 	movs r0, 0x1
 	negs r0, r0
@@ -791,9 +791,9 @@ _08111F88:
 	ldrb r0, [r1]
 	adds r0, 0x1
 	strb r0, [r1]
-	ldr r0, _08111FD4 @ =nullsub_73
+	ldr r0, _08111FD4 @ =HBlankCB_EvolutionScene
 	bl SetHBlankCallback
-	ldr r0, _08111FD8 @ =sub_811505C
+	ldr r0, _08111FD8 @ =VBlankCB_TradeEvolutionScene
 	bl SetVBlankCallback
 	b _081120D6
 	.align 2, 0
@@ -904,7 +904,7 @@ _081120B4:
 	movs r2, 0x10
 	movs r3, 0
 	bl BeginNormalPaletteFade
-	ldr r0, _081120E0 @ =sub_8112290
+	ldr r0, _081120E0 @ =CB2_EvolutionSceneUpdate_1
 	bl SetMainCallback2
 	movs r1, 0x80
 	lsls r1, 19
@@ -1036,7 +1036,7 @@ TradeEvolutionScene: @ 81120E4
 	orrs r0, r2
 	strb r0, [r1]
 	bl sub_8149954
-	ldr r0, _08112264 @ =sub_8112FE8
+	ldr r0, _08112264 @ =Task_TradeEvolutionScene
 	movs r1, 0
 	bl CreateTask
 	lsls r1, r0, 24
@@ -1066,7 +1066,7 @@ TradeEvolutionScene: @ 81120E4
 	strh r1, [r0, 0x1E]
 	mov r2, r10
 	strh r2, [r0, 0x20]
-	ldr r0, _0811226C @ =sub_8112290
+	ldr r0, _0811226C @ =CB2_EvolutionSceneUpdate_1
 	bl SetMainCallback2
 	add sp, 0x24
 	pop {r3-r5}
@@ -2354,7 +2354,7 @@ _08112D4A:
 	subs r2, 0x1
 	lsls r2, 24
 	lsrs r2, 24
-	ldr r3, _08112D84 @ =sub_8111C90
+	ldr r3, _08112D84 @ =CB2_EvolutionSceneLoadGraphics
 	ldr r4, _08112D88 @ =word_2024E82
 	ldrh r4, [r4]
 	str r4, [sp]
@@ -2379,7 +2379,7 @@ _08112D8C:
 	b _08112FD0
 _08112D9A:
 	ldr r1, [r4, 0x4]
-	ldr r0, _08112DC4 @ =sub_8112270
+	ldr r0, _08112DC4 @ =CB2_EvolutionSceneUpdate_0
 	cmp r1, r0
 	beq _08112DA4
 	b _08112FD0
@@ -3645,7 +3645,7 @@ _0811388A:
 	subs r2, 0x1
 	lsls r2, 24
 	lsrs r2, 24
-	ldr r3, _081138C4 @ =sub_8111E80
+	ldr r3, _081138C4 @ =CB2_TradeEvolutionSceneLoadGraphics
 	ldr r4, _081138C8 @ =word_2024E82
 	ldrh r4, [r4]
 	str r4, [sp]
@@ -3671,7 +3671,7 @@ _081138CC:
 _081138DA:
 	ldr r0, _08113904 @ =gMain
 	ldr r1, [r0, 0x4]
-	ldr r0, _08113908 @ =sub_8112290
+	ldr r0, _08113908 @ =CB2_EvolutionSceneUpdate_1
 	cmp r1, r0
 	beq _081138E6
 	b _08113B3A

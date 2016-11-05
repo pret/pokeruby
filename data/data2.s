@@ -1,7 +1,7 @@
 @ the second big chunk of data
 
-	.include "asm/macros.s"
-	.include "constants/constants.s"
+	.include "asm/macros.inc"
+	.include "constants/constants.inc"
 
 	.section .rodata
 
@@ -245,22 +245,22 @@ gSpriteAnimTable_81E7C64:: @ 81E7C64
 	.4byte gSpriteAnim_81E7C5C
 
 @ 81E7C74
-	.include "data/graphics/pokemon/front_pic_coords.s"
+	.include "data/graphics/pokemon/front_pic_coords.inc"
 
 @ 81E8354
-	.include "data/graphics/pokemon/front_pic_table.s"
+	.include "data/graphics/pokemon/front_pic_table.inc"
 
 @ 81E9114
-	.include "data/graphics/pokemon/back_pic_coords.s"
+	.include "data/graphics/pokemon/back_pic_coords.inc"
 
 @ 81E97F4
-	.include "data/graphics/pokemon/back_pic_table.s"
+	.include "data/graphics/pokemon/back_pic_table.inc"
 
 @ 81EA5B4
-	.include "data/graphics/pokemon/palette_table.s"
+	.include "data/graphics/pokemon/palette_table.inc"
 
 @ 81EB374
-	.include "data/graphics/pokemon/shiny_palette_table.s"
+	.include "data/graphics/pokemon/shiny_palette_table.inc"
 
 	.align 2
 gSpriteAnim_81EC134:: @ 81EC134
@@ -699,13 +699,13 @@ gUnknown_081EC2A4:: @ 81EC2A4
 	.4byte gSpriteAnimTable_81EC2A0
 
 @ 81EC3F0
-	.include "data/graphics/trainers/front_pic_coords.s"
+	.include "data/graphics/trainers/front_pic_coords.inc"
 
 @ 81EC53C
-	.include "data/graphics/trainers/front_pic_table.s"
+	.include "data/graphics/trainers/front_pic_table.inc"
 
 @ 81EC7D4
-	.include "data/graphics/trainers/front_pic_palette_table.s"
+	.include "data/graphics/trainers/front_pic_palette_table.inc"
 
 	.align 2
 gSpriteAnim_81ECA6C:: @ 81ECA6C
@@ -756,31 +756,31 @@ gUnknown_081ECACC:: @ 81ECACC
 	.4byte gSpriteAnimTable_81ECAC4
 
 @ 81ECAD8
-	.include "data/graphics/trainers/back_pic_coords.s"
+	.include "data/graphics/trainers/back_pic_coords.inc"
 
 @ 81ECAE4
-	.include "data/graphics/trainers/back_pic_table.s"
+	.include "data/graphics/trainers/back_pic_table.inc"
 
 @ 81ECAFC
-	.include "data/graphics/trainers/back_pic_palette_table.s"
+	.include "data/graphics/trainers/back_pic_palette_table.inc"
 
 @ 81ECB14
-	.include "data/enemy_mon_elevation.s"
+	.include "data/enemy_mon_elevation.inc"
 
 @ 81ECCB0
-	.include "data/trainer_parties.s"
+	.include "data/trainer_parties.inc"
 
 @ 81F0208
-	.include "data/text/trainer_class_names.s"
+	.include "data/text/trainer_class_names.inc"
 
 @ 81F04FC
-	.include "data/trainers.s"
+	.include "data/trainers.inc"
 
 @ 81F716C
-	.include "data/text/species_names.s"
+	.include "data/text/species_names.inc"
 
 @ 81F8320
-	.include "data/text/move_names.s"
+	.include "data/text/move_names.inc"
 
 	.align 2
 @ 81F9528
@@ -982,19 +982,19 @@ gSpriteAffineAnimTable_81F971C:: @ 81F971C
 	.4byte gSpriteAffineAnim_81F9704
 
 @ 81F9720
-	.include "data/type_effectiveness.s"
+	.include "data/type_effectiveness.inc"
 
 @ 81F9870
-	.include "data/text/type_names.s"
+	.include "data/text/type_names.inc"
 
 @ 81F98F0
-	.include "data/trainer_money.s"
+	.include "data/trainer_money.inc"
 
 @ 81F99CC
-	.include "data/text/ability_descriptions.s"
+	.include "data/text/ability_descriptions.inc"
 
 @ 81FA248
-	.include "data/text/ability_names.s"
+	.include "data/text/ability_names.inc"
 
 	.align 2
 gUnknown_081FA640:: @ 81FA640
@@ -1733,7 +1733,7 @@ gUnknown_081FAF5C:: @ 81FAF5C
 	.4byte sub_80347B8
 	.4byte sub_8034910
 	.4byte sub_8034AE0
-	.4byte c2_8123744
+	.4byte sub_8034BFC
 	.4byte sub_8034DC0
 	.4byte sub_8034F84
 	.4byte sub_8035030
@@ -1848,7 +1848,7 @@ gUnknown_081FB048:: @ 81FB048
 	.4byte nullsub_48
 
 @ 81FB12C
-	.include "data/battle_moves.s"
+	.include "data/battle_moves.inc"
 
 	.align 2
 gUnknown_081FC1D0:: @ 81FC1D0
@@ -1859,40 +1859,40 @@ gUnknown_081FC1D0:: @ 81FC1D0
 	.space 2
 
 @ 81FC1E0
-	.include "data/species_id_conversion_tables.s"
+	.include "data/species_id_conversion_tables.inc"
 
 @ 81FCB84
-	.include "data/spinda_spot_graphics.s"
+	.include "data/spinda_spot_graphics.inc"
 
 @ 81FCC14
-	.include "data/item_effects.s"
+	.include "data/item_effects.inc"
 
 @ 81FD070
-	.include "data/nature_stat_table.s"
+	.include "data/nature_stat_table.inc"
 
 @ 81FD0F0
-	.include "data/tm_hm_learnsets.s"
+	.include "data/tm_hm_learnsets.inc"
 
 @ 81FDDD0
-	.include "data/trainer_class_index_tables.s"
+	.include "data/trainer_class_index_tables.inc"
 
 @ 81FDE6A
-	.include "data/cry_id_table.s"
+	.include "data/cry_id_table.inc"
 
 @ 81FDF78
-	.include "data/experience_tables/tables.s"
+	.include "data/experience_tables/tables.inc"
 
 @ 81FEC18
-	.include "data/base_stats.s"
+	.include "data/base_stats.inc"
 
 @ 8201928
-	.include "data/level_up_learnsets.s"
+	.include "data/level_up_learnsets.inc"
 
 @ 8203B68
-	.include "data/evolution_table.s"
+	.include "data/evolution_table.inc"
 
 @ 8207BC8
-	.include "data/level_up_learnset_pointers.s"
+	.include "data/level_up_learnset_pointers.inc"
 
 gUnknown_08208238:: @ 8208238
 	.byte 0x03, 0x0C, 0x30, 0xC0
@@ -1989,10 +1989,10 @@ gUnknown_08208337:: @ 8208337
 	.string "ニドラン♀$", 13
 
 @ 8208344
-	.include "data/sine_table.s"
+	.include "data/sine_table.inc"
 
 @ 82085C4
-	.include "data/sine_degree_table.s"
+	.include "data/sine_degree_table.inc"
 
 	.align 2
 gBitTable:: @ 820872C
@@ -2055,14 +2055,14 @@ gUnknown_082087C4:: @ 82087C4
 	.byte 4, 8
 
 @ 82087DC
-	.include "data/crc16_table.s"
+	.include "data/crc16_table.inc"
 
 	.align 2
 gMiscBlank_Gfx:: @ 82089DC
 	.incbin "graphics/interface/blank.4bpp"
 
 @ 82091DC
-	.include "data/egg_moves.s"
+	.include "data/egg_moves.inc"
 
 	.align 2
 gUnknown_08209AC4:: @ 8209AC4
@@ -3297,7 +3297,7 @@ gSpriteAffineAnimTable_8215AC0:: @ 8215AC0
 	.4byte gSpriteAffineAnim_8215AB0
 
 @ 8215AC4
-	.include "data/ingame_trades.s"
+	.include "data/ingame_trades.inc"
 
 gTradeBallVerticalVelocityTable:: @ 8215BA0
 	.byte  0
@@ -3916,19 +3916,19 @@ gUnknown_082166D8:: @ 82166D8
 	.4byte sub_8055D38
 
 @ 82166E0
-	.include "data/tilesets/graphics.s"
+	.include "data/tilesets/graphics.inc"
 
 @ 8259C1C
-	.include "data/tilesets/metatiles.s"
+	.include "data/tilesets/metatiles.inc"
 
 @ 8286CF4
-	.include "data/tilesets/headers.s"
+	.include "data/tilesets/headers.inc"
 
-	.include "data/maps/_assets.s"
-	.include "data/maps/attributes_table.s"
-	.include "data/maps/headers.s"
-	.include "data/maps/_groups.s"
-	.include "data/maps/connections.s"
+	.include "data/maps/_assets.inc"
+	.include "data/maps/attributes_table.inc"
+	.include "data/maps/headers.inc"
+	.include "data/maps/_groups.inc"
+	.include "data/maps/connections.inc"
 
 	.align 2
 gUnknown_08308E28:: @ 8308E28
@@ -4782,10 +4782,10 @@ gUnknown_0830FD3C:: @ 830FD3C
 	.4byte CameraObject_2
 
 @ 830FD48
-	.include "data/graphics/field_objects/map_object_graphics.s"
+	.include "data/graphics/field_objects/map_object_graphics.inc"
 
 @ 8368528
-	.include "data/graphics/field_objects/field_effect_object_graphics.s"
+	.include "data/graphics/field_objects/field_effect_object_graphics.inc"
 
 	.align 2
 gUnknown_0836DA88:: @ 836DA88
@@ -5026,25 +5026,25 @@ gUnknown_0836DC09:: @ 836DC09
 	.byte DIR_SOUTH
 
 @ 836DC58
-	.include "data/graphics/field_objects/map_object_graphics_info_pointers.s"
+	.include "data/graphics/field_objects/map_object_graphics_info_pointers.inc"
 
 @ 836DFC0
-	.include "data/graphics/field_objects/field_effect_object_template_pointers.s"
+	.include "data/graphics/field_objects/field_effect_object_template_pointers.inc"
 
 @ 836E050
-	.include "data/graphics/field_objects/map_object_pic_tables.s"
+	.include "data/graphics/field_objects/map_object_pic_tables.inc"
 
 @ 83708C8
-	.include "data/graphics/field_objects/map_object_anims.s"
+	.include "data/graphics/field_objects/map_object_anims.inc"
 
 @ 83711C4
-	.include "data/graphics/field_objects/base_oam.s"
+	.include "data/graphics/field_objects/base_oam.inc"
 
 @ 8371204
-	.include "data/graphics/field_objects/map_object_subsprites.s"
+	.include "data/graphics/field_objects/map_object_subsprites.inc"
 
 @ 83718D4
-	.include "data/graphics/field_objects/map_object_graphics_info.s"
+	.include "data/graphics/field_objects/map_object_graphics_info.inc"
 
 	.align 2
 gUnknown_0837377C:: @ 837377C
@@ -5250,10 +5250,10 @@ gUnknown_0837399C:: @ 837399C
 	.4byte Unknown_8373988
 
 @ 83739AC
-	.include "data/graphics/field_objects/berry_tree_graphics_tables.s"
+	.include "data/graphics/field_objects/berry_tree_graphics_tables.inc"
 
 @ 8374524
-	.include "data/graphics/field_objects/field_effect_objects.s"
+	.include "data/graphics/field_objects/field_effect_objects.inc"
 
 	.align 1
 gUnknown_0837520C:: @ 837520C
@@ -7124,7 +7124,7 @@ gUnknown_08376364:: @ 8376364
 	.4byte sub_8069AA0
 	.4byte sub_8069864
 	.4byte sub_8069DD4
-	.4byte sub_80C7700
+	.4byte EndTruckSequence
 	.4byte sub_80BCF1C
 	.4byte sub_806A07C
 
@@ -9754,399 +9754,399 @@ gUnknown_0837F5E0:: @ 837F5E0
 	obj_tiles gMiscBlank_Gfx, 2048, 0xd755
 	obj_tiles gMiscBlank_Gfx, 2048, 0xd756
 
-	.include "data/maps/events/PetalburgCity.s"
-	.include "data/maps/events/SlateportCity.s"
-	.include "data/maps/events/MauvilleCity.s"
-	.include "data/maps/events/RustboroCity.s"
-	.include "data/maps/events/FortreeCity.s"
-	.include "data/maps/events/LilycoveCity.s"
-	.include "data/maps/events/MossdeepCity.s"
-	.include "data/maps/events/SootopolisCity.s"
-	.include "data/maps/events/EverGrandeCity.s"
-	.include "data/maps/events/LittlerootTown.s"
-	.include "data/maps/events/OldaleTown.s"
-	.include "data/maps/events/DewfordTown.s"
-	.include "data/maps/events/LavaridgeTown.s"
-	.include "data/maps/events/FallarborTown.s"
-	.include "data/maps/events/VerdanturfTown.s"
-	.include "data/maps/events/PacifidlogTown.s"
-	.include "data/maps/events/Route101.s"
-	.include "data/maps/events/Route102.s"
-	.include "data/maps/events/Route103.s"
-	.include "data/maps/events/Route104.s"
-	.include "data/maps/events/Route105.s"
-	.include "data/maps/events/Route106.s"
-	.include "data/maps/events/Route107.s"
-	.include "data/maps/events/Route108.s"
-	.include "data/maps/events/Route109.s"
-	.include "data/maps/events/Route110.s"
-	.include "data/maps/events/Route111.s"
-	.include "data/maps/events/Route112.s"
-	.include "data/maps/events/Route113.s"
-	.include "data/maps/events/Route114.s"
-	.include "data/maps/events/Route115.s"
-	.include "data/maps/events/Route116.s"
-	.include "data/maps/events/Route117.s"
-	.include "data/maps/events/Route118.s"
-	.include "data/maps/events/Route119.s"
-	.include "data/maps/events/Route120.s"
-	.include "data/maps/events/Route121.s"
-	.include "data/maps/events/Route122.s"
-	.include "data/maps/events/Route123.s"
-	.include "data/maps/events/Route124.s"
-	.include "data/maps/events/Route125.s"
-	.include "data/maps/events/Route126.s"
-	.include "data/maps/events/Route127.s"
-	.include "data/maps/events/Route128.s"
-	.include "data/maps/events/Route129.s"
-	.include "data/maps/events/Route130.s"
-	.include "data/maps/events/Route131.s"
-	.include "data/maps/events/Route132.s"
-	.include "data/maps/events/Route133.s"
-	.include "data/maps/events/Route134.s"
-	.include "data/maps/events/Underwater1.s"
-	.include "data/maps/events/Underwater2.s"
-	.include "data/maps/events/Underwater3.s"
-	.include "data/maps/events/Underwater4.s"
-	.include "data/maps/events/LittlerootTown_BrendansHouse_1F.s"
-	.include "data/maps/events/LittlerootTown_BrendansHouse_2F.s"
-	.include "data/maps/events/LittlerootTown_MaysHouse_1F.s"
-	.include "data/maps/events/LittlerootTown_MaysHouse_2F.s"
-	.include "data/maps/events/LittlerootTown_ProfessorBirchsLab.s"
-	.include "data/maps/events/OldaleTown_House1.s"
-	.include "data/maps/events/OldaleTown_House2.s"
-	.include "data/maps/events/OldaleTown_PokemonCenter_1F.s"
-	.include "data/maps/events/OldaleTown_PokemonCenter_2F.s"
-	.include "data/maps/events/OldaleTown_Mart.s"
-	.include "data/maps/events/DewfordTown_House1.s"
-	.include "data/maps/events/DewfordTown_PokemonCenter_1F.s"
-	.include "data/maps/events/DewfordTown_PokemonCenter_2F.s"
-	.include "data/maps/events/DewfordTown_Gym.s"
-	.include "data/maps/events/DewfordTown_Hall.s"
-	.include "data/maps/events/DewfordTown_House2.s"
-	.include "data/maps/events/LavaridgeTown_HerbShop.s"
-	.include "data/maps/events/LavaridgeTown_Gym_1F.s"
-	.include "data/maps/events/LavaridgeTown_Gym_B1F.s"
-	.include "data/maps/events/LavaridgeTown_House.s"
-	.include "data/maps/events/LavaridgeTown_Mart.s"
-	.include "data/maps/events/LavaridgeTown_PokemonCenter_1F.s"
-	.include "data/maps/events/LavaridgeTown_PokemonCenter_2F.s"
-	.include "data/maps/events/FallarborTown_Mart.s"
-	.include "data/maps/events/FallarborTown_ContestLobby.s"
-	.include "data/maps/events/FallarborTown_ContestHall.s"
-	.include "data/maps/events/FallarborTown_PokemonCenter_1F.s"
-	.include "data/maps/events/FallarborTown_PokemonCenter_2F.s"
-	.include "data/maps/events/FallarborTown_House1.s"
-	.include "data/maps/events/FallarborTown_House2.s"
-	.include "data/maps/events/VerdanturfTown_ContestLobby.s"
-	.include "data/maps/events/VerdanturfTown_ContestHall.s"
-	.include "data/maps/events/VerdanturfTown_Mart.s"
-	.include "data/maps/events/VerdanturfTown_PokemonCenter_1F.s"
-	.include "data/maps/events/VerdanturfTown_PokemonCenter_2F.s"
-	.include "data/maps/events/VerdanturfTown_WandasHouse.s"
-	.include "data/maps/events/VerdanturfTown_FriendshipRatersHouse.s"
-	.include "data/maps/events/VerdanturfTown_House.s"
-	.include "data/maps/events/PacifidlogTown_PokemonCenter_1F.s"
-	.include "data/maps/events/PacifidlogTown_PokemonCenter_2F.s"
-	.include "data/maps/events/PacifidlogTown_House1.s"
-	.include "data/maps/events/PacifidlogTown_House2.s"
-	.include "data/maps/events/PacifidlogTown_House3.s"
-	.include "data/maps/events/PacifidlogTown_House4.s"
-	.include "data/maps/events/PacifidlogTown_House5.s"
-	.include "data/maps/events/PetalburgCity_WallysHouse.s"
-	.include "data/maps/events/PetalburgCity_Gym.s"
-	.include "data/maps/events/PetalburgCity_House1.s"
-	.include "data/maps/events/PetalburgCity_House2.s"
-	.include "data/maps/events/PetalburgCity_PokemonCenter_1F.s"
-	.include "data/maps/events/PetalburgCity_PokemonCenter_2F.s"
-	.include "data/maps/events/PetalburgCity_Mart.s"
-	.include "data/maps/events/SlateportCity_SternsShipyard_1F.s"
-	.include "data/maps/events/SlateportCity_SternsShipyard_2F.s"
-	.include "data/maps/events/SlateportCity_ContestLobby.s"
-	.include "data/maps/events/SlateportCity_ContestHall.s"
-	.include "data/maps/events/SlateportCity_House1.s"
-	.include "data/maps/events/SlateportCity_PokemonFanClub.s"
-	.include "data/maps/events/SlateportCity_OceanicMuseum_1F.s"
-	.include "data/maps/events/SlateportCity_OceanicMuseum_2F.s"
-	.include "data/maps/events/SlateportCity_Harbor.s"
-	.include "data/maps/events/SlateportCity_House2.s"
-	.include "data/maps/events/SlateportCity_PokemonCenter_1F.s"
-	.include "data/maps/events/SlateportCity_PokemonCenter_2F.s"
-	.include "data/maps/events/SlateportCity_Mart.s"
-	.include "data/maps/events/MauvilleCity_Gym.s"
-	.include "data/maps/events/MauvilleCity_BikeShop.s"
-	.include "data/maps/events/MauvilleCity_House1.s"
-	.include "data/maps/events/MauvilleCity_GameCorner.s"
-	.include "data/maps/events/MauvilleCity_House2.s"
-	.include "data/maps/events/MauvilleCity_PokemonCenter_1F.s"
-	.include "data/maps/events/MauvilleCity_PokemonCenter_2F.s"
-	.include "data/maps/events/MauvilleCity_Mart.s"
-	.include "data/maps/events/RustboroCity_DevonCorp_1F.s"
-	.include "data/maps/events/RustboroCity_DevonCorp_2F.s"
-	.include "data/maps/events/RustboroCity_DevonCorp_3F.s"
-	.include "data/maps/events/RustboroCity_Gym.s"
-	.include "data/maps/events/RustboroCity_PokemonSchool.s"
-	.include "data/maps/events/RustboroCity_PokemonCenter_1F.s"
-	.include "data/maps/events/RustboroCity_PokemonCenter_2F.s"
-	.include "data/maps/events/RustboroCity_Mart.s"
-	.include "data/maps/events/RustboroCity_Flat1_1F.s"
-	.include "data/maps/events/RustboroCity_Flat1_2F.s"
-	.include "data/maps/events/RustboroCity_House1.s"
-	.include "data/maps/events/RustboroCity_CuttersHouse.s"
-	.include "data/maps/events/RustboroCity_House2.s"
-	.include "data/maps/events/RustboroCity_Flat2_1F.s"
-	.include "data/maps/events/RustboroCity_Flat2_2F.s"
-	.include "data/maps/events/RustboroCity_Flat2_3F.s"
-	.include "data/maps/events/RustboroCity_House3.s"
-	.include "data/maps/events/FortreeCity_House1.s"
-	.include "data/maps/events/FortreeCity_Gym.s"
-	.include "data/maps/events/FortreeCity_PokemonCenter_1F.s"
-	.include "data/maps/events/FortreeCity_PokemonCenter_2F.s"
-	.include "data/maps/events/FortreeCity_Mart.s"
-	.include "data/maps/events/FortreeCity_House2.s"
-	.include "data/maps/events/FortreeCity_House3.s"
-	.include "data/maps/events/FortreeCity_House4.s"
-	.include "data/maps/events/FortreeCity_House5.s"
-	.include "data/maps/events/FortreeCity_DecorationShop.s"
-	.include "data/maps/events/LilycoveCity_CoveLilyMotel_1F.s"
-	.include "data/maps/events/LilycoveCity_CoveLilyMotel_2F.s"
-	.include "data/maps/events/LilycoveCity_LilycoveMuseum_1F.s"
-	.include "data/maps/events/LilycoveCity_LilycoveMuseum_2F.s"
-	.include "data/maps/events/LilycoveCity_ContestLobby.s"
-	.include "data/maps/events/LilycoveCity_ContestHall.s"
-	.include "data/maps/events/LilycoveCity_PokemonCenter_1F.s"
-	.include "data/maps/events/LilycoveCity_PokemonCenter_2F.s"
-	.include "data/maps/events/LilycoveCity_UnusedMart.s"
-	.include "data/maps/events/LilycoveCity_PokemonTrainerFanClub.s"
-	.include "data/maps/events/LilycoveCity_Harbor.s"
-	.include "data/maps/events/LilycoveCity_EmptyMap.s"
-	.include "data/maps/events/LilycoveCity_MoveDeletersHouse.s"
-	.include "data/maps/events/LilycoveCity_House1.s"
-	.include "data/maps/events/LilycoveCity_House2.s"
-	.include "data/maps/events/LilycoveCity_House3.s"
-	.include "data/maps/events/LilycoveCity_House4.s"
-	.include "data/maps/events/LilycoveCity_DepartmentStore_1F.s"
-	.include "data/maps/events/LilycoveCity_DepartmentStore_2F.s"
-	.include "data/maps/events/LilycoveCity_DepartmentStore_3F.s"
-	.include "data/maps/events/LilycoveCity_DepartmentStore_4F.s"
-	.include "data/maps/events/LilycoveCity_DepartmentStore_5F.s"
-	.include "data/maps/events/LilycoveCity_DepartmentStoreRooftop.s"
-	.include "data/maps/events/LilycoveCity_DepartmentStoreElevator.s"
-	.include "data/maps/events/MossdeepCity_Gym.s"
-	.include "data/maps/events/MossdeepCity_House1.s"
-	.include "data/maps/events/MossdeepCity_House2.s"
-	.include "data/maps/events/MossdeepCity_PokemonCenter_1F.s"
-	.include "data/maps/events/MossdeepCity_PokemonCenter_2F.s"
-	.include "data/maps/events/MossdeepCity_Mart.s"
-	.include "data/maps/events/MossdeepCity_House3.s"
-	.include "data/maps/events/MossdeepCity_StevensHouse.s"
-	.include "data/maps/events/MossdeepCity_House4.s"
-	.include "data/maps/events/MossdeepCity_SpaceCenter_1F.s"
-	.include "data/maps/events/MossdeepCity_SpaceCenter_2F.s"
-	.include "data/maps/events/MossdeepCity_GameCorner_1F.s"
-	.include "data/maps/events/MossdeepCity_GameCorner_B1F.s"
-	.include "data/maps/events/SootopolisCity_Gym_1F.s"
-	.include "data/maps/events/SootopolisCity_Gym_B1F.s"
-	.include "data/maps/events/SootopolisCity_PokemonCenter_1F.s"
-	.include "data/maps/events/SootopolisCity_PokemonCenter_2F.s"
-	.include "data/maps/events/SootopolisCity_Mart.s"
-	.include "data/maps/events/SootopolisCity_House1.s"
-	.include "data/maps/events/SootopolisCity_House2.s"
-	.include "data/maps/events/SootopolisCity_House3.s"
-	.include "data/maps/events/SootopolisCity_House4.s"
-	.include "data/maps/events/SootopolisCity_House5.s"
-	.include "data/maps/events/SootopolisCity_House6.s"
-	.include "data/maps/events/SootopolisCity_House7.s"
-	.include "data/maps/events/SootopolisCity_House8.s"
-	.include "data/maps/events/EverGrandeCity_SidneysRoom.s"
-	.include "data/maps/events/EverGrandeCity_PhoebesRoom.s"
-	.include "data/maps/events/EverGrandeCity_GlaciasRoom.s"
-	.include "data/maps/events/EverGrandeCity_DrakesRoom.s"
-	.include "data/maps/events/EverGrandeCity_ChampionsRoom.s"
-	.include "data/maps/events/EverGrandeCity_Corridor1.s"
-	.include "data/maps/events/EverGrandeCity_Corridor2.s"
-	.include "data/maps/events/EverGrandeCity_Corridor3.s"
-	.include "data/maps/events/EverGrandeCity_Corridor4.s"
-	.include "data/maps/events/EverGrandeCity_Corridor5.s"
-	.include "data/maps/events/EverGrandeCity_PokemonLeague.s"
-	.include "data/maps/events/EverGrandeCity_HallOfFame.s"
-	.include "data/maps/events/EverGrandeCity_PokemonCenter_1F.s"
-	.include "data/maps/events/EverGrandeCity_PokemonCenter_2F.s"
-	.include "data/maps/events/Route104_MrBrineysHouse.s"
-	.include "data/maps/events/Route104_PrettyPetalFlowerShop.s"
-	.include "data/maps/events/Route111_WinstrateFamilysHouse.s"
-	.include "data/maps/events/Route111_OldLadysRestStop.s"
-	.include "data/maps/events/Route112_CableCarStation.s"
-	.include "data/maps/events/MtChimney_CableCarStation.s"
-	.include "data/maps/events/Route114_FossilManiacsHouse.s"
-	.include "data/maps/events/Route114_FossilManiacsTunnel.s"
-	.include "data/maps/events/Route114_LanettesHouse.s"
-	.include "data/maps/events/Route116_TunnelersRestHouse.s"
-	.include "data/maps/events/Route117_PokemonDayCare.s"
-	.include "data/maps/events/Route121_SafariZoneEntrance.s"
-	.include "data/maps/events/MeteorFalls_1F_1R.s"
-	.include "data/maps/events/MeteorFalls_1F_2R.s"
-	.include "data/maps/events/MeteorFalls_B1F_1R.s"
-	.include "data/maps/events/MeteorFalls_B1F_2R.s"
-	.include "data/maps/events/RusturfTunnel.s"
-	.include "data/maps/events/Underwater_SootopolisCity.s"
-	.include "data/maps/events/DesertRuins.s"
-	.include "data/maps/events/GraniteCave_1F.s"
-	.include "data/maps/events/GraniteCave_B1F.s"
-	.include "data/maps/events/GraniteCave_B2F.s"
-	.include "data/maps/events/GraniteCave_StevensRoom.s"
-	.include "data/maps/events/PetalburgWoods.s"
-	.include "data/maps/events/MtChimney.s"
-	.include "data/maps/events/JaggedPass.s"
-	.include "data/maps/events/FieryPath.s"
-	.include "data/maps/events/MtPyre_1F.s"
-	.include "data/maps/events/MtPyre_2F.s"
-	.include "data/maps/events/MtPyre_3F.s"
-	.include "data/maps/events/MtPyre_4F.s"
-	.include "data/maps/events/MtPyre_5F.s"
-	.include "data/maps/events/MtPyre_6F.s"
-	.include "data/maps/events/MtPyre_Exterior.s"
-	.include "data/maps/events/MtPyre_Summit.s"
-	.include "data/maps/events/AquaHideout_1F.s"
-	.include "data/maps/events/AquaHideout_B1F.s"
-	.include "data/maps/events/AquaHideout_B2F.s"
-	.include "data/maps/events/Underwater_SeafloorCavern.s"
-	.include "data/maps/events/SeafloorCavern_Entrance.s"
-	.include "data/maps/events/SeafloorCavern_Room1.s"
-	.include "data/maps/events/SeafloorCavern_Room2.s"
-	.include "data/maps/events/SeafloorCavern_Room3.s"
-	.include "data/maps/events/SeafloorCavern_Room4.s"
-	.include "data/maps/events/SeafloorCavern_Room5.s"
-	.include "data/maps/events/SeafloorCavern_Room6.s"
-	.include "data/maps/events/SeafloorCavern_Room7.s"
-	.include "data/maps/events/SeafloorCavern_Room8.s"
-	.include "data/maps/events/SeafloorCavern_Room9.s"
-	.include "data/maps/events/CaveOfOrigin_Entrance.s"
-	.include "data/maps/events/CaveOfOrigin_1F.s"
-	.include "data/maps/events/CaveOfOrigin_B1F.s"
-	.include "data/maps/events/CaveOfOrigin_B2F.s"
-	.include "data/maps/events/CaveOfOrigin_B3F.s"
-	.include "data/maps/events/CaveOfOrigin_B4F.s"
-	.include "data/maps/events/VictoryRoad_1F.s"
-	.include "data/maps/events/VictoryRoad_B1F.s"
-	.include "data/maps/events/VictoryRoad_B2F.s"
-	.include "data/maps/events/ShoalCave_LowTideEntranceRoom.s"
-	.include "data/maps/events/ShoalCave_LowTideInnerRoom.s"
-	.include "data/maps/events/ShoalCave_LowTideStairsRoom.s"
-	.include "data/maps/events/ShoalCave_LowTideLowerRoom.s"
-	.include "data/maps/events/ShoalCave_HighTideEntranceRoom.s"
-	.include "data/maps/events/ShoalCave_HighTideInnerRoom.s"
-	.include "data/maps/events/NewMauville_Entrance.s"
-	.include "data/maps/events/NewMauville_Inside.s"
-	.include "data/maps/events/AbandonedShip_Deck.s"
-	.include "data/maps/events/AbandonedShip_Corridors_1F.s"
-	.include "data/maps/events/AbandonedShip_Rooms_1F.s"
-	.include "data/maps/events/AbandonedShip_Corridors_B1F.s"
-	.include "data/maps/events/AbandonedShip_Rooms_B1F.s"
-	.include "data/maps/events/AbandonedShip_Rooms2_B1F.s"
-	.include "data/maps/events/AbandonedShip_Underwater1.s"
-	.include "data/maps/events/AbandonedShip_Room_B1F.s"
-	.include "data/maps/events/AbandonedShip_Rooms2_1F.s"
-	.include "data/maps/events/AbandonedShip_CaptainsOffice.s"
-	.include "data/maps/events/AbandonedShip_Underwater2.s"
-	.include "data/maps/events/AbandonedShip_HiddenFloorCorridors.s"
-	.include "data/maps/events/AbandonedShip_HiddenFloorRooms.s"
-	.include "data/maps/events/IslandCave.s"
-	.include "data/maps/events/AncientTomb.s"
-	.include "data/maps/events/Underwater_Route134.s"
-	.include "data/maps/events/Underwater_SealedChamber.s"
-	.include "data/maps/events/SealedChamber_OuterRoom.s"
-	.include "data/maps/events/SealedChamber_InnerRoom.s"
-	.include "data/maps/events/ScorchedSlab.s"
-	.include "data/maps/events/MagmaHideout_1F.s"
-	.include "data/maps/events/MagmaHideout_B1F.s"
-	.include "data/maps/events/MagmaHideout_B2F.s"
-	.include "data/maps/events/SkyPillar_Entrance.s"
-	.include "data/maps/events/SkyPillar_Outside.s"
-	.include "data/maps/events/SkyPillar_1F.s"
-	.include "data/maps/events/SkyPillar_2F.s"
-	.include "data/maps/events/SkyPillar_3F.s"
-	.include "data/maps/events/SkyPillar_4F.s"
-	.include "data/maps/events/ShoalCave_LowTideIceRoom.s"
-	.include "data/maps/events/SkyPillar_5F.s"
-	.include "data/maps/events/SkyPillar_Top.s"
-	.include "data/maps/events/SecretBase_RedCave1.s"
-	.include "data/maps/events/SecretBase_BrownCave1.s"
-	.include "data/maps/events/SecretBase_BlueCave1.s"
-	.include "data/maps/events/SecretBase_YellowCave1.s"
-	.include "data/maps/events/SecretBase_Tree1.s"
-	.include "data/maps/events/SecretBase_Shrub1.s"
-	.include "data/maps/events/SecretBase_RedCave2.s"
-	.include "data/maps/events/SecretBase_BrownCave2.s"
-	.include "data/maps/events/SecretBase_BlueCave2.s"
-	.include "data/maps/events/SecretBase_YellowCave2.s"
-	.include "data/maps/events/SecretBase_Tree2.s"
-	.include "data/maps/events/SecretBase_Shrub2.s"
-	.include "data/maps/events/SecretBase_RedCave3.s"
-	.include "data/maps/events/SecretBase_BrownCave3.s"
-	.include "data/maps/events/SecretBase_BlueCave3.s"
-	.include "data/maps/events/SecretBase_YellowCave3.s"
-	.include "data/maps/events/SecretBase_Tree3.s"
-	.include "data/maps/events/SecretBase_Shrub3.s"
-	.include "data/maps/events/SecretBase_RedCave4.s"
-	.include "data/maps/events/SecretBase_BrownCave4.s"
-	.include "data/maps/events/SecretBase_BlueCave4.s"
-	.include "data/maps/events/SecretBase_YellowCave4.s"
-	.include "data/maps/events/SecretBase_Tree4.s"
-	.include "data/maps/events/SecretBase_Shrub4.s"
-	.include "data/maps/events/SingleBattleColosseum.s"
-	.include "data/maps/events/TradeCenter.s"
-	.include "data/maps/events/RecordCorner.s"
-	.include "data/maps/events/DoubleBattleColosseum.s"
-	.include "data/maps/events/LinkContestRoom1.s"
-	.include "data/maps/events/LinkContestRoom2.s"
-	.include "data/maps/events/LinkContestRoom3.s"
-	.include "data/maps/events/LinkContestRoom4.s"
-	.include "data/maps/events/LinkContestRoom5.s"
-	.include "data/maps/events/LinkContestRoom6.s"
-	.include "data/maps/events/UnknownMap_25_29.s"
-	.include "data/maps/events/UnknownMap_25_30.s"
-	.include "data/maps/events/UnknownMap_25_31.s"
-	.include "data/maps/events/UnknownMap_25_32.s"
-	.include "data/maps/events/UnknownMap_25_33.s"
-	.include "data/maps/events/UnknownMap_25_34.s"
-	.include "data/maps/events/InsideOfTruck.s"
-	.include "data/maps/events/SSTidalCorridor.s"
-	.include "data/maps/events/SSTidalLowerDeck.s"
-	.include "data/maps/events/SSTidalRooms.s"
-	.include "data/maps/events/SafariZone_Northwest.s"
-	.include "data/maps/events/SafariZone_Northeast.s"
-	.include "data/maps/events/SafariZone_Southwest.s"
-	.include "data/maps/events/SafariZone_Southeast.s"
-	.include "data/maps/events/BattleTower_Outside.s"
-	.include "data/maps/events/BattleTower_Lobby.s"
-	.include "data/maps/events/BattleTower_Elevator.s"
-	.include "data/maps/events/BattleTower_Corridor.s"
-	.include "data/maps/events/BattleTower_BattleRoom.s"
-	.include "data/maps/events/SouthernIsland_Exterior.s"
-	.include "data/maps/events/SouthernIsland_Interior.s"
-	.include "data/maps/events/SafariZone_RestHouse.s"
-	.include "data/maps/events/Route104_Prototype.s"
-	.include "data/maps/events/Route104_PrototypePrettyPetalFlowerShop.s"
-	.include "data/maps/events/Route109_SeashoreHouse.s"
-	.include "data/maps/events/Route110_TrickHouseEntrance.s"
-	.include "data/maps/events/Route110_TrickHouseEnd.s"
-	.include "data/maps/events/Route110_TrickHouseCorridor.s"
-	.include "data/maps/events/Route110_TrickHousePuzzle1.s"
-	.include "data/maps/events/Route110_TrickHousePuzzle2.s"
-	.include "data/maps/events/Route110_TrickHousePuzzle3.s"
-	.include "data/maps/events/Route110_TrickHousePuzzle4.s"
-	.include "data/maps/events/Route110_TrickHousePuzzle5.s"
-	.include "data/maps/events/Route110_TrickHousePuzzle6.s"
-	.include "data/maps/events/Route110_TrickHousePuzzle7.s"
-	.include "data/maps/events/Route110_TrickHousePuzzle8.s"
-	.include "data/maps/events/Route110_SeasideCyclingRoadSouthEntrance.s"
-	.include "data/maps/events/Route110_SeasideCyclingRoadNorthEntrance.s"
-	.include "data/maps/events/Route113_GlassWorkshop.s"
-	.include "data/maps/events/Route123_BerryMastersHouse.s"
-	.include "data/maps/events/Route119_WeatherInstitute_1F.s"
-	.include "data/maps/events/Route119_WeatherInstitute_2F.s"
-	.include "data/maps/events/Route119_House.s"
+	.include "data/maps/events/PetalburgCity.inc"
+	.include "data/maps/events/SlateportCity.inc"
+	.include "data/maps/events/MauvilleCity.inc"
+	.include "data/maps/events/RustboroCity.inc"
+	.include "data/maps/events/FortreeCity.inc"
+	.include "data/maps/events/LilycoveCity.inc"
+	.include "data/maps/events/MossdeepCity.inc"
+	.include "data/maps/events/SootopolisCity.inc"
+	.include "data/maps/events/EverGrandeCity.inc"
+	.include "data/maps/events/LittlerootTown.inc"
+	.include "data/maps/events/OldaleTown.inc"
+	.include "data/maps/events/DewfordTown.inc"
+	.include "data/maps/events/LavaridgeTown.inc"
+	.include "data/maps/events/FallarborTown.inc"
+	.include "data/maps/events/VerdanturfTown.inc"
+	.include "data/maps/events/PacifidlogTown.inc"
+	.include "data/maps/events/Route101.inc"
+	.include "data/maps/events/Route102.inc"
+	.include "data/maps/events/Route103.inc"
+	.include "data/maps/events/Route104.inc"
+	.include "data/maps/events/Route105.inc"
+	.include "data/maps/events/Route106.inc"
+	.include "data/maps/events/Route107.inc"
+	.include "data/maps/events/Route108.inc"
+	.include "data/maps/events/Route109.inc"
+	.include "data/maps/events/Route110.inc"
+	.include "data/maps/events/Route111.inc"
+	.include "data/maps/events/Route112.inc"
+	.include "data/maps/events/Route113.inc"
+	.include "data/maps/events/Route114.inc"
+	.include "data/maps/events/Route115.inc"
+	.include "data/maps/events/Route116.inc"
+	.include "data/maps/events/Route117.inc"
+	.include "data/maps/events/Route118.inc"
+	.include "data/maps/events/Route119.inc"
+	.include "data/maps/events/Route120.inc"
+	.include "data/maps/events/Route121.inc"
+	.include "data/maps/events/Route122.inc"
+	.include "data/maps/events/Route123.inc"
+	.include "data/maps/events/Route124.inc"
+	.include "data/maps/events/Route125.inc"
+	.include "data/maps/events/Route126.inc"
+	.include "data/maps/events/Route127.inc"
+	.include "data/maps/events/Route128.inc"
+	.include "data/maps/events/Route129.inc"
+	.include "data/maps/events/Route130.inc"
+	.include "data/maps/events/Route131.inc"
+	.include "data/maps/events/Route132.inc"
+	.include "data/maps/events/Route133.inc"
+	.include "data/maps/events/Route134.inc"
+	.include "data/maps/events/Underwater1.inc"
+	.include "data/maps/events/Underwater2.inc"
+	.include "data/maps/events/Underwater3.inc"
+	.include "data/maps/events/Underwater4.inc"
+	.include "data/maps/events/LittlerootTown_BrendansHouse_1F.inc"
+	.include "data/maps/events/LittlerootTown_BrendansHouse_2F.inc"
+	.include "data/maps/events/LittlerootTown_MaysHouse_1F.inc"
+	.include "data/maps/events/LittlerootTown_MaysHouse_2F.inc"
+	.include "data/maps/events/LittlerootTown_ProfessorBirchsLab.inc"
+	.include "data/maps/events/OldaleTown_House1.inc"
+	.include "data/maps/events/OldaleTown_House2.inc"
+	.include "data/maps/events/OldaleTown_PokemonCenter_1F.inc"
+	.include "data/maps/events/OldaleTown_PokemonCenter_2F.inc"
+	.include "data/maps/events/OldaleTown_Mart.inc"
+	.include "data/maps/events/DewfordTown_House1.inc"
+	.include "data/maps/events/DewfordTown_PokemonCenter_1F.inc"
+	.include "data/maps/events/DewfordTown_PokemonCenter_2F.inc"
+	.include "data/maps/events/DewfordTown_Gym.inc"
+	.include "data/maps/events/DewfordTown_Hall.inc"
+	.include "data/maps/events/DewfordTown_House2.inc"
+	.include "data/maps/events/LavaridgeTown_HerbShop.inc"
+	.include "data/maps/events/LavaridgeTown_Gym_1F.inc"
+	.include "data/maps/events/LavaridgeTown_Gym_B1F.inc"
+	.include "data/maps/events/LavaridgeTown_House.inc"
+	.include "data/maps/events/LavaridgeTown_Mart.inc"
+	.include "data/maps/events/LavaridgeTown_PokemonCenter_1F.inc"
+	.include "data/maps/events/LavaridgeTown_PokemonCenter_2F.inc"
+	.include "data/maps/events/FallarborTown_Mart.inc"
+	.include "data/maps/events/FallarborTown_ContestLobby.inc"
+	.include "data/maps/events/FallarborTown_ContestHall.inc"
+	.include "data/maps/events/FallarborTown_PokemonCenter_1F.inc"
+	.include "data/maps/events/FallarborTown_PokemonCenter_2F.inc"
+	.include "data/maps/events/FallarborTown_House1.inc"
+	.include "data/maps/events/FallarborTown_House2.inc"
+	.include "data/maps/events/VerdanturfTown_ContestLobby.inc"
+	.include "data/maps/events/VerdanturfTown_ContestHall.inc"
+	.include "data/maps/events/VerdanturfTown_Mart.inc"
+	.include "data/maps/events/VerdanturfTown_PokemonCenter_1F.inc"
+	.include "data/maps/events/VerdanturfTown_PokemonCenter_2F.inc"
+	.include "data/maps/events/VerdanturfTown_WandasHouse.inc"
+	.include "data/maps/events/VerdanturfTown_FriendshipRatersHouse.inc"
+	.include "data/maps/events/VerdanturfTown_House.inc"
+	.include "data/maps/events/PacifidlogTown_PokemonCenter_1F.inc"
+	.include "data/maps/events/PacifidlogTown_PokemonCenter_2F.inc"
+	.include "data/maps/events/PacifidlogTown_House1.inc"
+	.include "data/maps/events/PacifidlogTown_House2.inc"
+	.include "data/maps/events/PacifidlogTown_House3.inc"
+	.include "data/maps/events/PacifidlogTown_House4.inc"
+	.include "data/maps/events/PacifidlogTown_House5.inc"
+	.include "data/maps/events/PetalburgCity_WallysHouse.inc"
+	.include "data/maps/events/PetalburgCity_Gym.inc"
+	.include "data/maps/events/PetalburgCity_House1.inc"
+	.include "data/maps/events/PetalburgCity_House2.inc"
+	.include "data/maps/events/PetalburgCity_PokemonCenter_1F.inc"
+	.include "data/maps/events/PetalburgCity_PokemonCenter_2F.inc"
+	.include "data/maps/events/PetalburgCity_Mart.inc"
+	.include "data/maps/events/SlateportCity_SternsShipyard_1F.inc"
+	.include "data/maps/events/SlateportCity_SternsShipyard_2F.inc"
+	.include "data/maps/events/SlateportCity_ContestLobby.inc"
+	.include "data/maps/events/SlateportCity_ContestHall.inc"
+	.include "data/maps/events/SlateportCity_House1.inc"
+	.include "data/maps/events/SlateportCity_PokemonFanClub.inc"
+	.include "data/maps/events/SlateportCity_OceanicMuseum_1F.inc"
+	.include "data/maps/events/SlateportCity_OceanicMuseum_2F.inc"
+	.include "data/maps/events/SlateportCity_Harbor.inc"
+	.include "data/maps/events/SlateportCity_House2.inc"
+	.include "data/maps/events/SlateportCity_PokemonCenter_1F.inc"
+	.include "data/maps/events/SlateportCity_PokemonCenter_2F.inc"
+	.include "data/maps/events/SlateportCity_Mart.inc"
+	.include "data/maps/events/MauvilleCity_Gym.inc"
+	.include "data/maps/events/MauvilleCity_BikeShop.inc"
+	.include "data/maps/events/MauvilleCity_House1.inc"
+	.include "data/maps/events/MauvilleCity_GameCorner.inc"
+	.include "data/maps/events/MauvilleCity_House2.inc"
+	.include "data/maps/events/MauvilleCity_PokemonCenter_1F.inc"
+	.include "data/maps/events/MauvilleCity_PokemonCenter_2F.inc"
+	.include "data/maps/events/MauvilleCity_Mart.inc"
+	.include "data/maps/events/RustboroCity_DevonCorp_1F.inc"
+	.include "data/maps/events/RustboroCity_DevonCorp_2F.inc"
+	.include "data/maps/events/RustboroCity_DevonCorp_3F.inc"
+	.include "data/maps/events/RustboroCity_Gym.inc"
+	.include "data/maps/events/RustboroCity_PokemonSchool.inc"
+	.include "data/maps/events/RustboroCity_PokemonCenter_1F.inc"
+	.include "data/maps/events/RustboroCity_PokemonCenter_2F.inc"
+	.include "data/maps/events/RustboroCity_Mart.inc"
+	.include "data/maps/events/RustboroCity_Flat1_1F.inc"
+	.include "data/maps/events/RustboroCity_Flat1_2F.inc"
+	.include "data/maps/events/RustboroCity_House1.inc"
+	.include "data/maps/events/RustboroCity_CuttersHouse.inc"
+	.include "data/maps/events/RustboroCity_House2.inc"
+	.include "data/maps/events/RustboroCity_Flat2_1F.inc"
+	.include "data/maps/events/RustboroCity_Flat2_2F.inc"
+	.include "data/maps/events/RustboroCity_Flat2_3F.inc"
+	.include "data/maps/events/RustboroCity_House3.inc"
+	.include "data/maps/events/FortreeCity_House1.inc"
+	.include "data/maps/events/FortreeCity_Gym.inc"
+	.include "data/maps/events/FortreeCity_PokemonCenter_1F.inc"
+	.include "data/maps/events/FortreeCity_PokemonCenter_2F.inc"
+	.include "data/maps/events/FortreeCity_Mart.inc"
+	.include "data/maps/events/FortreeCity_House2.inc"
+	.include "data/maps/events/FortreeCity_House3.inc"
+	.include "data/maps/events/FortreeCity_House4.inc"
+	.include "data/maps/events/FortreeCity_House5.inc"
+	.include "data/maps/events/FortreeCity_DecorationShop.inc"
+	.include "data/maps/events/LilycoveCity_CoveLilyMotel_1F.inc"
+	.include "data/maps/events/LilycoveCity_CoveLilyMotel_2F.inc"
+	.include "data/maps/events/LilycoveCity_LilycoveMuseum_1F.inc"
+	.include "data/maps/events/LilycoveCity_LilycoveMuseum_2F.inc"
+	.include "data/maps/events/LilycoveCity_ContestLobby.inc"
+	.include "data/maps/events/LilycoveCity_ContestHall.inc"
+	.include "data/maps/events/LilycoveCity_PokemonCenter_1F.inc"
+	.include "data/maps/events/LilycoveCity_PokemonCenter_2F.inc"
+	.include "data/maps/events/LilycoveCity_UnusedMart.inc"
+	.include "data/maps/events/LilycoveCity_PokemonTrainerFanClub.inc"
+	.include "data/maps/events/LilycoveCity_Harbor.inc"
+	.include "data/maps/events/LilycoveCity_EmptyMap.inc"
+	.include "data/maps/events/LilycoveCity_MoveDeletersHouse.inc"
+	.include "data/maps/events/LilycoveCity_House1.inc"
+	.include "data/maps/events/LilycoveCity_House2.inc"
+	.include "data/maps/events/LilycoveCity_House3.inc"
+	.include "data/maps/events/LilycoveCity_House4.inc"
+	.include "data/maps/events/LilycoveCity_DepartmentStore_1F.inc"
+	.include "data/maps/events/LilycoveCity_DepartmentStore_2F.inc"
+	.include "data/maps/events/LilycoveCity_DepartmentStore_3F.inc"
+	.include "data/maps/events/LilycoveCity_DepartmentStore_4F.inc"
+	.include "data/maps/events/LilycoveCity_DepartmentStore_5F.inc"
+	.include "data/maps/events/LilycoveCity_DepartmentStoreRooftop.inc"
+	.include "data/maps/events/LilycoveCity_DepartmentStoreElevator.inc"
+	.include "data/maps/events/MossdeepCity_Gym.inc"
+	.include "data/maps/events/MossdeepCity_House1.inc"
+	.include "data/maps/events/MossdeepCity_House2.inc"
+	.include "data/maps/events/MossdeepCity_PokemonCenter_1F.inc"
+	.include "data/maps/events/MossdeepCity_PokemonCenter_2F.inc"
+	.include "data/maps/events/MossdeepCity_Mart.inc"
+	.include "data/maps/events/MossdeepCity_House3.inc"
+	.include "data/maps/events/MossdeepCity_StevensHouse.inc"
+	.include "data/maps/events/MossdeepCity_House4.inc"
+	.include "data/maps/events/MossdeepCity_SpaceCenter_1F.inc"
+	.include "data/maps/events/MossdeepCity_SpaceCenter_2F.inc"
+	.include "data/maps/events/MossdeepCity_GameCorner_1F.inc"
+	.include "data/maps/events/MossdeepCity_GameCorner_B1F.inc"
+	.include "data/maps/events/SootopolisCity_Gym_1F.inc"
+	.include "data/maps/events/SootopolisCity_Gym_B1F.inc"
+	.include "data/maps/events/SootopolisCity_PokemonCenter_1F.inc"
+	.include "data/maps/events/SootopolisCity_PokemonCenter_2F.inc"
+	.include "data/maps/events/SootopolisCity_Mart.inc"
+	.include "data/maps/events/SootopolisCity_House1.inc"
+	.include "data/maps/events/SootopolisCity_House2.inc"
+	.include "data/maps/events/SootopolisCity_House3.inc"
+	.include "data/maps/events/SootopolisCity_House4.inc"
+	.include "data/maps/events/SootopolisCity_House5.inc"
+	.include "data/maps/events/SootopolisCity_House6.inc"
+	.include "data/maps/events/SootopolisCity_House7.inc"
+	.include "data/maps/events/SootopolisCity_House8.inc"
+	.include "data/maps/events/EverGrandeCity_SidneysRoom.inc"
+	.include "data/maps/events/EverGrandeCity_PhoebesRoom.inc"
+	.include "data/maps/events/EverGrandeCity_GlaciasRoom.inc"
+	.include "data/maps/events/EverGrandeCity_DrakesRoom.inc"
+	.include "data/maps/events/EverGrandeCity_ChampionsRoom.inc"
+	.include "data/maps/events/EverGrandeCity_Corridor1.inc"
+	.include "data/maps/events/EverGrandeCity_Corridor2.inc"
+	.include "data/maps/events/EverGrandeCity_Corridor3.inc"
+	.include "data/maps/events/EverGrandeCity_Corridor4.inc"
+	.include "data/maps/events/EverGrandeCity_Corridor5.inc"
+	.include "data/maps/events/EverGrandeCity_PokemonLeague.inc"
+	.include "data/maps/events/EverGrandeCity_HallOfFame.inc"
+	.include "data/maps/events/EverGrandeCity_PokemonCenter_1F.inc"
+	.include "data/maps/events/EverGrandeCity_PokemonCenter_2F.inc"
+	.include "data/maps/events/Route104_MrBrineysHouse.inc"
+	.include "data/maps/events/Route104_PrettyPetalFlowerShop.inc"
+	.include "data/maps/events/Route111_WinstrateFamilysHouse.inc"
+	.include "data/maps/events/Route111_OldLadysRestStop.inc"
+	.include "data/maps/events/Route112_CableCarStation.inc"
+	.include "data/maps/events/MtChimney_CableCarStation.inc"
+	.include "data/maps/events/Route114_FossilManiacsHouse.inc"
+	.include "data/maps/events/Route114_FossilManiacsTunnel.inc"
+	.include "data/maps/events/Route114_LanettesHouse.inc"
+	.include "data/maps/events/Route116_TunnelersRestHouse.inc"
+	.include "data/maps/events/Route117_PokemonDayCare.inc"
+	.include "data/maps/events/Route121_SafariZoneEntrance.inc"
+	.include "data/maps/events/MeteorFalls_1F_1R.inc"
+	.include "data/maps/events/MeteorFalls_1F_2R.inc"
+	.include "data/maps/events/MeteorFalls_B1F_1R.inc"
+	.include "data/maps/events/MeteorFalls_B1F_2R.inc"
+	.include "data/maps/events/RusturfTunnel.inc"
+	.include "data/maps/events/Underwater_SootopolisCity.inc"
+	.include "data/maps/events/DesertRuins.inc"
+	.include "data/maps/events/GraniteCave_1F.inc"
+	.include "data/maps/events/GraniteCave_B1F.inc"
+	.include "data/maps/events/GraniteCave_B2F.inc"
+	.include "data/maps/events/GraniteCave_StevensRoom.inc"
+	.include "data/maps/events/PetalburgWoods.inc"
+	.include "data/maps/events/MtChimney.inc"
+	.include "data/maps/events/JaggedPass.inc"
+	.include "data/maps/events/FieryPath.inc"
+	.include "data/maps/events/MtPyre_1F.inc"
+	.include "data/maps/events/MtPyre_2F.inc"
+	.include "data/maps/events/MtPyre_3F.inc"
+	.include "data/maps/events/MtPyre_4F.inc"
+	.include "data/maps/events/MtPyre_5F.inc"
+	.include "data/maps/events/MtPyre_6F.inc"
+	.include "data/maps/events/MtPyre_Exterior.inc"
+	.include "data/maps/events/MtPyre_Summit.inc"
+	.include "data/maps/events/AquaHideout_1F.inc"
+	.include "data/maps/events/AquaHideout_B1F.inc"
+	.include "data/maps/events/AquaHideout_B2F.inc"
+	.include "data/maps/events/Underwater_SeafloorCavern.inc"
+	.include "data/maps/events/SeafloorCavern_Entrance.inc"
+	.include "data/maps/events/SeafloorCavern_Room1.inc"
+	.include "data/maps/events/SeafloorCavern_Room2.inc"
+	.include "data/maps/events/SeafloorCavern_Room3.inc"
+	.include "data/maps/events/SeafloorCavern_Room4.inc"
+	.include "data/maps/events/SeafloorCavern_Room5.inc"
+	.include "data/maps/events/SeafloorCavern_Room6.inc"
+	.include "data/maps/events/SeafloorCavern_Room7.inc"
+	.include "data/maps/events/SeafloorCavern_Room8.inc"
+	.include "data/maps/events/SeafloorCavern_Room9.inc"
+	.include "data/maps/events/CaveOfOrigin_Entrance.inc"
+	.include "data/maps/events/CaveOfOrigin_1F.inc"
+	.include "data/maps/events/CaveOfOrigin_B1F.inc"
+	.include "data/maps/events/CaveOfOrigin_B2F.inc"
+	.include "data/maps/events/CaveOfOrigin_B3F.inc"
+	.include "data/maps/events/CaveOfOrigin_B4F.inc"
+	.include "data/maps/events/VictoryRoad_1F.inc"
+	.include "data/maps/events/VictoryRoad_B1F.inc"
+	.include "data/maps/events/VictoryRoad_B2F.inc"
+	.include "data/maps/events/ShoalCave_LowTideEntranceRoom.inc"
+	.include "data/maps/events/ShoalCave_LowTideInnerRoom.inc"
+	.include "data/maps/events/ShoalCave_LowTideStairsRoom.inc"
+	.include "data/maps/events/ShoalCave_LowTideLowerRoom.inc"
+	.include "data/maps/events/ShoalCave_HighTideEntranceRoom.inc"
+	.include "data/maps/events/ShoalCave_HighTideInnerRoom.inc"
+	.include "data/maps/events/NewMauville_Entrance.inc"
+	.include "data/maps/events/NewMauville_Inside.inc"
+	.include "data/maps/events/AbandonedShip_Deck.inc"
+	.include "data/maps/events/AbandonedShip_Corridors_1F.inc"
+	.include "data/maps/events/AbandonedShip_Rooms_1F.inc"
+	.include "data/maps/events/AbandonedShip_Corridors_B1F.inc"
+	.include "data/maps/events/AbandonedShip_Rooms_B1F.inc"
+	.include "data/maps/events/AbandonedShip_Rooms2_B1F.inc"
+	.include "data/maps/events/AbandonedShip_Underwater1.inc"
+	.include "data/maps/events/AbandonedShip_Room_B1F.inc"
+	.include "data/maps/events/AbandonedShip_Rooms2_1F.inc"
+	.include "data/maps/events/AbandonedShip_CaptainsOffice.inc"
+	.include "data/maps/events/AbandonedShip_Underwater2.inc"
+	.include "data/maps/events/AbandonedShip_HiddenFloorCorridors.inc"
+	.include "data/maps/events/AbandonedShip_HiddenFloorRooms.inc"
+	.include "data/maps/events/IslandCave.inc"
+	.include "data/maps/events/AncientTomb.inc"
+	.include "data/maps/events/Underwater_Route134.inc"
+	.include "data/maps/events/Underwater_SealedChamber.inc"
+	.include "data/maps/events/SealedChamber_OuterRoom.inc"
+	.include "data/maps/events/SealedChamber_InnerRoom.inc"
+	.include "data/maps/events/ScorchedSlab.inc"
+	.include "data/maps/events/MagmaHideout_1F.inc"
+	.include "data/maps/events/MagmaHideout_B1F.inc"
+	.include "data/maps/events/MagmaHideout_B2F.inc"
+	.include "data/maps/events/SkyPillar_Entrance.inc"
+	.include "data/maps/events/SkyPillar_Outside.inc"
+	.include "data/maps/events/SkyPillar_1F.inc"
+	.include "data/maps/events/SkyPillar_2F.inc"
+	.include "data/maps/events/SkyPillar_3F.inc"
+	.include "data/maps/events/SkyPillar_4F.inc"
+	.include "data/maps/events/ShoalCave_LowTideIceRoom.inc"
+	.include "data/maps/events/SkyPillar_5F.inc"
+	.include "data/maps/events/SkyPillar_Top.inc"
+	.include "data/maps/events/SecretBase_RedCave1.inc"
+	.include "data/maps/events/SecretBase_BrownCave1.inc"
+	.include "data/maps/events/SecretBase_BlueCave1.inc"
+	.include "data/maps/events/SecretBase_YellowCave1.inc"
+	.include "data/maps/events/SecretBase_Tree1.inc"
+	.include "data/maps/events/SecretBase_Shrub1.inc"
+	.include "data/maps/events/SecretBase_RedCave2.inc"
+	.include "data/maps/events/SecretBase_BrownCave2.inc"
+	.include "data/maps/events/SecretBase_BlueCave2.inc"
+	.include "data/maps/events/SecretBase_YellowCave2.inc"
+	.include "data/maps/events/SecretBase_Tree2.inc"
+	.include "data/maps/events/SecretBase_Shrub2.inc"
+	.include "data/maps/events/SecretBase_RedCave3.inc"
+	.include "data/maps/events/SecretBase_BrownCave3.inc"
+	.include "data/maps/events/SecretBase_BlueCave3.inc"
+	.include "data/maps/events/SecretBase_YellowCave3.inc"
+	.include "data/maps/events/SecretBase_Tree3.inc"
+	.include "data/maps/events/SecretBase_Shrub3.inc"
+	.include "data/maps/events/SecretBase_RedCave4.inc"
+	.include "data/maps/events/SecretBase_BrownCave4.inc"
+	.include "data/maps/events/SecretBase_BlueCave4.inc"
+	.include "data/maps/events/SecretBase_YellowCave4.inc"
+	.include "data/maps/events/SecretBase_Tree4.inc"
+	.include "data/maps/events/SecretBase_Shrub4.inc"
+	.include "data/maps/events/SingleBattleColosseum.inc"
+	.include "data/maps/events/TradeCenter.inc"
+	.include "data/maps/events/RecordCorner.inc"
+	.include "data/maps/events/DoubleBattleColosseum.inc"
+	.include "data/maps/events/LinkContestRoom1.inc"
+	.include "data/maps/events/LinkContestRoom2.inc"
+	.include "data/maps/events/LinkContestRoom3.inc"
+	.include "data/maps/events/LinkContestRoom4.inc"
+	.include "data/maps/events/LinkContestRoom5.inc"
+	.include "data/maps/events/LinkContestRoom6.inc"
+	.include "data/maps/events/UnknownMap_25_29.inc"
+	.include "data/maps/events/UnknownMap_25_30.inc"
+	.include "data/maps/events/UnknownMap_25_31.inc"
+	.include "data/maps/events/UnknownMap_25_32.inc"
+	.include "data/maps/events/UnknownMap_25_33.inc"
+	.include "data/maps/events/UnknownMap_25_34.inc"
+	.include "data/maps/events/InsideOfTruck.inc"
+	.include "data/maps/events/SSTidalCorridor.inc"
+	.include "data/maps/events/SSTidalLowerDeck.inc"
+	.include "data/maps/events/SSTidalRooms.inc"
+	.include "data/maps/events/SafariZone_Northwest.inc"
+	.include "data/maps/events/SafariZone_Northeast.inc"
+	.include "data/maps/events/SafariZone_Southwest.inc"
+	.include "data/maps/events/SafariZone_Southeast.inc"
+	.include "data/maps/events/BattleTower_Outside.inc"
+	.include "data/maps/events/BattleTower_Lobby.inc"
+	.include "data/maps/events/BattleTower_Elevator.inc"
+	.include "data/maps/events/BattleTower_Corridor.inc"
+	.include "data/maps/events/BattleTower_BattleRoom.inc"
+	.include "data/maps/events/SouthernIsland_Exterior.inc"
+	.include "data/maps/events/SouthernIsland_Interior.inc"
+	.include "data/maps/events/SafariZone_RestHouse.inc"
+	.include "data/maps/events/Route104_Prototype.inc"
+	.include "data/maps/events/Route104_PrototypePrettyPetalFlowerShop.inc"
+	.include "data/maps/events/Route109_SeashoreHouse.inc"
+	.include "data/maps/events/Route110_TrickHouseEntrance.inc"
+	.include "data/maps/events/Route110_TrickHouseEnd.inc"
+	.include "data/maps/events/Route110_TrickHouseCorridor.inc"
+	.include "data/maps/events/Route110_TrickHousePuzzle1.inc"
+	.include "data/maps/events/Route110_TrickHousePuzzle2.inc"
+	.include "data/maps/events/Route110_TrickHousePuzzle3.inc"
+	.include "data/maps/events/Route110_TrickHousePuzzle4.inc"
+	.include "data/maps/events/Route110_TrickHousePuzzle5.inc"
+	.include "data/maps/events/Route110_TrickHousePuzzle6.inc"
+	.include "data/maps/events/Route110_TrickHousePuzzle7.inc"
+	.include "data/maps/events/Route110_TrickHousePuzzle8.inc"
+	.include "data/maps/events/Route110_SeasideCyclingRoadSouthEntrance.inc"
+	.include "data/maps/events/Route110_SeasideCyclingRoadNorthEntrance.inc"
+	.include "data/maps/events/Route113_GlassWorkshop.inc"
+	.include "data/maps/events/Route123_BerryMastersHouse.inc"
+	.include "data/maps/events/Route119_WeatherInstitute_1F.inc"
+	.include "data/maps/events/Route119_WeatherInstitute_2F.inc"
+	.include "data/maps/events/Route119_House.inc"
 Route124_DivingTreasureHuntersHouse_MapObjects:: @ 839300C
 	object_event 1, MAP_OBJ_GFX_MAN_6, 0, 5, 0, 4, 0, 0, 9, 0, 0, 0, 0, 0, 0, Route124_DivingTreasureHuntersHouse_EventScript_163E04, 0, 0, 0
 
@@ -11019,10 +11019,10 @@ gTrainerBattleSpecs_4:: @ 839AE28
 	.4byte gTrainerBattleScriptReturnAddress, 6
 
 @ 839AE70
-	.include "data/trainer_eye_trainers.s"
+	.include "data/trainer_eye_trainers.inc"
 
 	.align 2
-gUnknown_0839B1F0:: @ 839B1F0
+gBadgeFlags:: @ 839B1F0
 	.2byte 0x0807, 0x0808, 0x0809, 0x080a, 0x080b, 0x080c, 0x080d, 0x080e
 
 TrainerCardColorName_Bronze:
@@ -11185,7 +11185,7 @@ gSpriteTemplate_839B528:: @ 839B528
 	spr_template 0xFFFF, 4100, gOamData_839B4D8, gSpriteAnimTable_839B508, gSpriteImageTable_839B4F0, gDummySpriteAffineAnimTable, objc_exclamation_mark_probably
 
 @ 839B540
-	.include "data/wild_mons.s"
+	.include "data/wild_mons.inc"
 
 	.align 2
 gWildFeebasRoute119Data:: @ 839DBFC
@@ -11687,7 +11687,7 @@ gUnknown_0839FA7C:: @ 839FA7C
 	.incbin "graphics/pokedex/noball.4bpp.lz"
 
 @ 839FAC4
-	.include "data/pokedex_orders.s"
+	.include "data/pokedex_orders.inc"
 
 	.align 2
 gOamData_83A0404:: @ 83A0404
@@ -11915,13 +11915,13 @@ gUnknown_083A05F8:: @ 83A05F8
 	.string "$"
 
 @ 83A05F9
-	.include "data/pokedex_entries.s"
+	.include "data/pokedex_entries.inc"
 
 gUnknown_083B4EC4:: @ 83B4EC4
 	.space 32
 
 @ 83B4EE4
-	.include "data/graphics/pokemon/footprint_table.s"
+	.include "data/graphics/pokemon/footprint_table.inc"
 
 gUnknown_083B5558:: @ 83B5558
 	.incbin "baserom.gba", 0x3b5558, 0x24
@@ -12979,13 +12979,13 @@ gUnknown_083BBCA0:: @ 83BBCA0
 	.4byte PCText_Plain
 
 @ 83BBD20
-	.include "data/graphics/pokemon/icon_table.s"
+	.include "data/graphics/pokemon/icon_table.inc"
 
 @ 83BC400
-	.include "data/graphics/pokemon/icon_palette_indices.s"
+	.include "data/graphics/pokemon/icon_palette_indices.inc"
 
 @ 83BC5B8
-	.include "data/graphics/pokemon/icon_palette_table.s"
+	.include "data/graphics/pokemon/icon_palette_table.inc"
 
 	.align 2
 gOamData_83BC5E8:: @ 83BC5E8
@@ -13067,10 +13067,10 @@ gSpriteImageSizes:: @ 83BC668
 	.2byte 0x400 @ 4×8
 
 @ 83BC680
-	.include "data/text/move_descriptions.s"
+	.include "data/text/move_descriptions.inc"
 
 @ 83C0F60
-	.include "data/text/nature_names.s"
+	.include "data/text/nature_names.inc"
 
 	.align 2
 gUnknown_083C1068:: @ 83C1068
@@ -13735,7 +13735,7 @@ gSpriteTemplate_83C1E04:: @ 83C1E04
 	spr_template 0xFFFF, 30020, gOamData_83C1D58, gSpriteAnimTable_83C1D68, gSpriteImageTable_83C1D6C, gSpriteAffineAnimTable_83C1DFC, SpriteCallbackDummy
 
 @ 83C1E1C
-	.include "data/graphics/berries/graphics_table.s"
+	.include "data/graphics/berries/graphics_table.inc"
 
 	.align 2
 gUnknown_083C1F74:: @ 83C1F74
@@ -13785,10 +13785,10 @@ gBattleAnimSpriteTemplate_83C2010:: @ 83C2010
 	spr_template 0, 0, gDummyOamData, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80A8818
 
 @ 83C2028
-	.include "data/text/item_descriptions.s"
+	.include "data/text/item_descriptions.inc"
 
 @ 83C5564
-	.include "data/items.s"
+	.include "data/items.inc"
 
 @ 83C9150
 	.string "テストです$" @ "test"
@@ -13963,7 +13963,7 @@ gUnknown_083C9400:: @ 83C9400
 	.incbin "baserom.gba", 0x003c9400, 0x8
 
 @ 83C9408
-	.include "data/contest_opponents.s"
+	.include "data/contest_opponents.inc"
 
 gUnknown_083CA308:: @ 83CA308
 	.byte 19,  0
@@ -14131,7 +14131,7 @@ gUnknown_083CA4CC:: @ 83CA4CC
 gUnknown_083CA4D4:: @ 83CA4D4
 	spr_template 0xABE0, 0xABE0, gOamData_837DF2C, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
-	.include "data/text/contest_strings.s"
+	.include "data/text/contest_strings.inc"
 
 gUnknownText_MissedTurn:: @ 83CC355
 	.string "Missed turn$"
@@ -14297,7 +14297,7 @@ gUnknown_083CC5A4:: @ 83CC5A4
 	.incbin "baserom.gba", 0x003cc5a4, 0x10
 
 @ 83CC5B4
-	.include "data/contest_excitement_table.s"
+	.include "data/contest_excitement_table.inc"
 
 	.align 2
 gUnknown_083CC5D0:: @ 83CC5D0
@@ -14361,17 +14361,17 @@ gUnknown_083CC738:: @ 83CC738
 	.incbin "baserom.gba", 0x003cc738, 0x8
 
 @ 83CC740
-	.include "data/text/berry_descriptions.s"
+	.include "data/text/berry_descriptions.inc"
 
 @ 83CD2CC
-	.include "data/berries.s"
+	.include "data/berries.inc"
 
 	.align 2
 gUnknown_083CD780:: @ 83CD780
 	.4byte 0, 0
 
 @ 83CD788
-	.include "data/multichoice.s"
+	.include "data/multichoice.inc"
 
 	.align 2
 gUnknown_083CE048:: @ 83CE048
@@ -14397,11 +14397,11 @@ gUnknown_083CE048:: @ 83CE048
 
 	.align 2
 gSpriteImage_83CE094:: @ 83CE094
-	.incbin "graphics/unknown_sprites/83CE588/0.4bpp"
+	.incbin "graphics/naming_screen/pc_icon/0.4bpp"
 
 	.align 2
 gSpriteImage_83CE154:: @ 83CE154
-	.incbin "graphics/unknown_sprites/83CE588/1.4bpp"
+	.incbin "graphics/naming_screen/pc_icon/1.4bpp"
 
 	.align 2
 	.incbin "baserom.gba", 0x003ce214, 0x4
@@ -14765,10 +14765,10 @@ gUnknown_083CF58C:: @ 83CF58C
 	obj_pal gMenuMoneyPal, 0x2722
 
 @ 83CF594
-	.include "data/contest_moves.s"
+	.include "data/contest_moves.inc"
 
 @ 83D00AC
-	.include "data/contest_effects.s"
+	.include "data/contest_effects.inc"
 
 @ A lookup table with TRUE for each combo starter ID and FALSE for ID 0,
 @ which means "not a combo starter move".
@@ -14779,27 +14779,30 @@ gComboStarterLookupTable:: @ 83D016C
 	.endr
 
 @ 83D01AC
-	.include "data/contest_effect_funcs.s"
+	.include "data/contest_effect_funcs.inc"
 
 	.align 2
-gUnknown_083D026C:: @ 83D026C
-	.4byte 0x0202713c
+recordMixingSecretBases:: @ 83D026C
+	@ gSaveBlock1.secretBases
+	.4byte gSaveBlock1 + 0x1A08
 
 	.align 2
-gUnknown_083D0270:: @ 83D0270
-	.4byte 0x02027e6c
+recordMixingTvShows:: @ 83D0270
+	@ gSaveBlock1.tvShows
+	.4byte gSaveBlock1 + 0x2738
 
 	.align 2
 gUnknown_083D0274:: @ 83D0274
-	.4byte 0x020281f0
+	.4byte gSaveBlock1 + 0x2ABC
 
 	.align 2
 gUnknown_083D0278:: @ 83D0278
-	.4byte 0x020284c8
+	.4byte gSaveBlock1 + 0x2D94
 
 	.align 2
-gUnknown_083D027C:: @ 83D027C
-	.4byte 0x02028508
+recordMixingEasyChatPairs:: @ 83D027C
+	@ gSaveBlock1.easyChatPairs
+	.4byte gSaveBlock1 + 0x2DD4
 
 	.align 2
 gUnknown_083D0280:: @ 83D0280
@@ -14935,7 +14938,7 @@ gOtherText_RL:: @ 83D0409
 	.string "  RL$"
 
 @ 83D040E
-	.include "data/text/song_names.s"
+	.include "data/text/song_names.inc"
 
 gUnknown_083D1358:: @ 83D1358
 	.incbin "baserom.gba", 0x003d1358, 0x1c
@@ -15539,7 +15542,7 @@ gMapObjectPic_MovingBox: @ 83D28AC
 gMapObjectPalette19: @ 83D292C
 	.incbin "graphics/map_objects/palettes/19.gbapal"
 
-gUnknown_083D294C:: @ 83D294C
+gTruckCamera_HorizontalTable:: @ 83D294C
 	.byte  0
 	.byte  0
 	.byte  0
@@ -20829,19 +20832,19 @@ gUnknown_083DBEAC:: @ 83DBEAC
 	.incbin "baserom.gba", 0x003dbeac, 0x80
 
 @ 83DBF2C
-	.include "data/text/easy_chat/group_words.s"
+	.include "data/text/easy_chat/group_words.inc"
 
 @ 83DE138
-	.include "data/text/easy_chat/words_by_letter.s"
+	.include "data/text/easy_chat/words_by_letter.inc"
 
 @ 83DEFFA
-	.include "data/text/easy_chat/group_sizes.s"
+	.include "data/text/easy_chat/group_sizes.inc"
 
 @ 83DF010
-	.include "data/text/easy_chat/group_orders.s"
+	.include "data/text/easy_chat/group_orders.inc"
 
 @ 83DFE6C
-	.include "data/text/easy_chat/group_name_table.s"
+	.include "data/text/easy_chat/group_name_table.inc"
 
 gUnknown_083DFEC4:: @ 83DFEC4
 	.incbin "baserom.gba", 0x003dfec4, 0x4
@@ -21016,13 +21019,13 @@ gPokenavCityMap_Petalburg_0:: @ 83E0F6C
 	.incbin "graphics/pokenav/city_maps/petalburg_0.bin.lz"
 
 @ 83E0FC8
-	.include "data/text/ribbon_descriptions.s"
+	.include "data/text/ribbon_descriptions.inc"
 
 @ 83E1204
-	.include "data/text/gift_ribbon_descriptions.s"
+	.include "data/text/gift_ribbon_descriptions.inc"
 
 @ 83E178C
-	.include "data/text/trainer_eye_descriptions.s"
+	.include "data/text/trainer_eye_descriptions.inc"
 
 	.align 2
 gUnknown_083E31B0:: @ 83E31B0
@@ -22219,10 +22222,10 @@ gUnknown_083E6B04:: @ 83E6B04
 	.incbin "graphics/pokenav/region_map_map.bin.lz"
 
 @ 83E6E50
-	.include "data/region_map_sections.s"
+	.include "data/region_map_sections.inc"
 
 @ 83E6FF4
-	.include "data/region_map_locations.s"
+	.include "data/region_map_locations.inc"
 
 gUnknown_083E7684:: @ 83E7684
 	.incbin "baserom.gba", 0x003e7684, 0x34
@@ -22362,10 +22365,10 @@ gSpriteTemplate_83E7A38:: @ 83E7A38
 	spr_template 2, 2, gOamData_83E79DC, gSpriteAnimTable_83E7A1C, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 @ 83E7A50
-	.include "data/cute_sketch.s"
+	.include "data/cute_sketch.inc"
 
 @ 83E9FD0
-	.include "data/decorations.s"
+	.include "data/decorations.inc"
 
 	.align 2
 gUnknown_083EC5E4:: @ 83EC5E4
@@ -23879,101 +23882,101 @@ gUnknown_083F6140:: @ 83F6140
 	.space 4
 
 	.align 2
-gUnknown_083F6144:: @ 83F6144
-	.4byte sub_810752C
-	.4byte sub_810756C
-	.4byte sub_81075AC
-	.4byte sub_81075EC
-	.4byte sub_810762C
-	.4byte sub_8107668
-	.4byte sub_81076D0
-	.4byte sub_8107738
-	.4byte sub_81077A0
-	.4byte sub_8107808
-	.4byte sub_810787C
-	.4byte sub_81078F0
-	.4byte sub_8107964
-	.4byte sub_81079D8
-	.4byte sub_8107A48
-	.4byte sub_8107AB8
-	.4byte sub_8107B34
-	.4byte sub_8107BB0
-	.4byte sub_8107BE8
-	.4byte sub_8107C20
-	.4byte sub_8107C58
-	.4byte sub_8107C90
-	.4byte sub_8107CE0
-	.4byte sub_8107D30
-	.4byte sub_8107D80
-	.4byte sub_8107DD0
-	.4byte sub_8107E10
-	.4byte sub_8107E50
-	.4byte sub_8107EB4
-	.4byte sub_8107F1C
-	.4byte sub_8107F84
-	.4byte sub_8107FF0
-	.4byte sub_8108060
-	.4byte sub_81080D0
-	.4byte sub_81080F0
-	.4byte sub_81081CC
-	.4byte sub_81081F4
-	.4byte sub_81083D4
-	.4byte sub_8108424
-	.4byte sub_810845C
-	.4byte tai28_unk
-	.4byte tai29_unk
-	.4byte nullsub_25
-	.4byte nullsub_26
-	.4byte tai2C_unk
-	.4byte sub_8108630
-	.4byte sub_8108648
-	.4byte sub_8108670
-	.4byte tai30_unk
-	.4byte dp15_simulate_damage_bonus_jump_if_eq
-	.4byte nullsub_71
-	.4byte nullsub_90
-	.4byte sub_8108964
-	.4byte sub_8108A28
-	.4byte sub_8108AEC
-	.4byte sub_8108B48
-	.4byte sub_8108B90
-	.4byte sub_8108BD8
-	.4byte sub_8108C40
-	.4byte sub_8108CA8
-	.4byte sub_8108D10
-	.4byte tai3D_unk
-	.4byte dp15_determine_move_damage_jump_if_not_fatal
-	.4byte tai40_unk
-	.4byte sub_8109010
-	.4byte sub_81090E4
-	.4byte sub_81091D4
-	.4byte tai43_unk
-	.4byte sub_8109330
-	.4byte sub_81093B8
-	.4byte sub_81093C8
-	.4byte sub_810942C
-	.4byte dp15_get_held_item_x12__8
-	.4byte tai49_unk
-	.4byte sub_810950C
-	.4byte sub_8109554
-	.4byte sub_810959C
-	.4byte sub_81095C0
-	.4byte sub_8109604
-	.4byte sub_810962C
-	.4byte sub_8109654
-	.4byte sub_810967C
-	.4byte nullsub_27
-	.4byte nullsub_28
-	.4byte nullsub_29
-	.4byte nullsub_30
-	.4byte nullsub_31
-	.4byte nullsub_32
-	.4byte sub_81096DC
-	.4byte sub_810970C
-	.4byte sub_810972C
-	.4byte dp15_compare_attacker_defender_levels
-	.4byte sub_8109824
-	.4byte sub_8109874
+gBattleAICmdTable:: @ 83F6144
+	.4byte BattleAICmd_if_random
+	.4byte BattleAICmd_if_not_random
+	.4byte BattleAICmd_if_random_1
+	.4byte BattleAICmd_if_not_random_1
+	.4byte BattleAICmd_score
+	.4byte BattleAICmd_if_hp_less_than
+	.4byte BattleAICmd_if_hp_more_than
+	.4byte BattleAICmd_if_hp_equal
+	.4byte BattleAICmd_if_hp_not_equal
+	.4byte BattleAICmd_if_status
+	.4byte BattleAICmd_if_not_status
+	.4byte BattleAICmd_if_status2
+	.4byte BattleAICmd_if_not_status2
+	.4byte BattleAICmd_if_status3
+	.4byte BattleAICmd_if_not_status3
+	.4byte BattleAICmd_if_status4
+	.4byte BattleAICmd_if_not_status4
+	.4byte BattleAICmd_if_less_than
+	.4byte BattleAICmd_if_more_than
+	.4byte BattleAICmd_if_equal
+	.4byte BattleAICmd_if_not_equal
+	.4byte BattleAICmd_if_less_than_32
+	.4byte BattleAICmd_if_more_than_32
+	.4byte BattleAICmd_if_equal_32
+	.4byte BattleAICmd_if_not_equal_32
+	.4byte BattleAICmd_if_move
+	.4byte BattleAICmd_if_not_move
+	.4byte BattleAICmd_if_in_bytes
+	.4byte BattleAICmd_if_not_in_bytes
+	.4byte BattleAICmd_if_in_words
+	.4byte BattleAICmd_if_not_in_words
+	.4byte BattleAICmd_if_user_can_damage
+	.4byte BattleAICmd_if_user_cant_damage
+	.4byte BattleAICmd_unk_21
+	.4byte BattleAICmd_get_type
+	.4byte BattleAICmd_unk_23
+	.4byte BattleAICmd_unk_24
+	.4byte BattleAICmd_get_move
+	.4byte BattleAICmd_if_type
+	.4byte BattleAICmd_unk_27
+	.4byte BattleAICmd_if_would_go_first
+	.4byte BattleAICmd_if_would_not_go_first
+	.4byte BattleAICmd_unk_2A
+	.4byte BattleAICmd_unk_2B
+	.4byte BattleAICmd_count_alive_pokemon
+	.4byte BattleAICmd_unk_2D
+	.4byte BattleAICmd_unk_2E
+	.4byte BattleAICmd_get_ability
+	.4byte BattleAICmd_unk_30
+	.4byte BattleAICmd_if_damage_bonus
+	.4byte BattleAICmd_unk_32
+	.4byte BattleAICmd_unk_33
+	.4byte BattleAICmd_if_status_in_party
+	.4byte BattleAICmd_if_status_not_in_party
+	.4byte BattleAICmd_unk_36
+	.4byte BattleAICmd_if_effect
+	.4byte BattleAICmd_if_not_effect
+	.4byte BattleAICmd_if_stat_level_less_than
+	.4byte BattleAICmd_if_stat_level_more_than
+	.4byte BattleAICmd_if_stat_level_equal
+	.4byte BattleAICmd_if_stat_level_not_equal
+	.4byte BattleAICmd_if_can_faint
+	.4byte BattleAICmd_if_cant_faint
+	.4byte BattleAICmd_unk_3F
+	.4byte BattleAICmd_unk_40
+	.4byte BattleAICmd_if_move_effect
+	.4byte BattleAICmd_if_not_move_effect
+	.4byte BattleAICmd_if_last_move_did_damage
+	.4byte BattleAICmd_if_encored
+	.4byte BattleAICmd_unk_45
+	.4byte BattleAICmd_if_random_2
+	.4byte BattleAICmd_unk_47
+	.4byte BattleAICmd_get_hold_effect
+	.4byte BattleAICmd_get_gender
+	.4byte BattleAICmd_is_first_turn
+	.4byte BattleAICmd_get_stockpile_count
+	.4byte BattleAICmd_unk_4C
+	.4byte BattleAICmd_get_item
+	.4byte BattleAICmd_unk_4E
+	.4byte BattleAICmd_unk_4F
+	.4byte BattleAICmd_unk_50
+	.4byte BattleAICmd_get_protect_count
+	.4byte BattleAICmd_unk_52
+	.4byte BattleAICmd_unk_53
+	.4byte BattleAICmd_unk_54
+	.4byte BattleAICmd_unk_55
+	.4byte BattleAICmd_unk_56
+	.4byte BattleAICmd_unk_57
+	.4byte BattleAICmd_call
+	.4byte BattleAICmd_jump
+	.4byte BattleAICmd_unk_5A
+	.4byte BattleAICmd_if_level_cond
+	.4byte BattleAICmd_if_taunted
+	.4byte BattleAICmd_if_not_taunted
 
 gUnknown_083F62BC:: @ 83F62BC
 	.incbin "baserom.gba", 0x003f62bc, 0x1c
@@ -24230,7 +24233,7 @@ gSpriteTemplate_83F7B40:: @ 83F7B40
 	spr_template 4096, 4096, gOamData_83F7B08, gSpriteAnimTable_83F7B24, NULL, gDummySpriteAffineAnimTable, sub_810B230
 
 @ 83F7B58
-	.include "data/clock_hand_coords.s"
+	.include "data/clock_hand_coords.inc"
 
 gUnknown_083F7E28:: @ 83F7E28
 	.incbin "baserom.gba", 0x003f7e28, 0x80
@@ -25402,7 +25405,7 @@ gCryMeterNeedleSpritePalettes:: @ 83FB79C
 	null_obj_pal
 
 @ 83FB7AC
-	.include "data/landmarks.s"
+	.include "data/landmarks.inc"
 
 	.align 2
 gUnknown_083FBB88:: @ 83FBB88
@@ -25761,7 +25764,7 @@ gUnknown_083FDB44:: @ 83FDB44
 gUnknown_083FDFF4:: @ 83FDFF4
 	.incbin "graphics/battle_transitions/elite_four_bg_map.bin"
 
-	.include "data/text/battle_strings.s"
+	.include "data/text/battle_strings.inc"
 
 gUnknown_084016BC:: @ 84016BC
 	.incbin "baserom.gba", 0x004016bc, 0xec
@@ -26943,16 +26946,16 @@ gRoamerLocations:: @ 8402E80
 	.byte 0xFF,0xFF,0xFF,0xFF,0xFF,0xFF
 
 @ 8402F00
-	.include "data/battle_tower/trainers.s"
+	.include "data/battle_tower/trainers.inc"
 
 @ 8403860
-	.include "data/battle_tower/held_items.s"
+	.include "data/battle_tower/held_items.inc"
 
 @ 84038E0
-	.include "data/battle_tower/level_50_mons.s"
+	.include "data/battle_tower/level_50_mons.inc"
 
 @ 8404BA0
-	.include "data/battle_tower/level_100_mons.s"
+	.include "data/battle_tower/level_100_mons.inc"
 
 gUnknown_08405E60:: @ 8405E60
 	.incbin "baserom.gba", 0x00405e60, 0x1e
@@ -27114,10 +27117,10 @@ gUnknown_08406288:: @ 8406288
 
 	.align 2
 gUnknown_08406298:: @ 8406298
-	.4byte SecretBaseText_ItemStorage, sub_8139E40
-	.4byte gPCText_Mailbox, sub_8139E6C
-	.4byte SecretBaseText_Decoration, sub_8139ED8
-	.4byte SecretBaseText_TurnOff, sub_8139EF8
+	.4byte SecretBaseText_ItemStorage, PlayerPC_ItemStorage
+	.4byte gPCText_Mailbox, PlayerPC_Mailbox
+	.4byte SecretBaseText_Decoration, PlayerPC_Decoration
+	.4byte SecretBaseText_TurnOff, PlayerPC_TurnOff
 
 gUnknown_084062B8:: @ 84062B8
 	.incbin "baserom.gba", 0x004062b8, 0x4
@@ -27127,10 +27130,10 @@ gUnknown_084062BC:: @ 84062BC
 
 	.align 2
 gUnknown_084062C0:: @ 84062C0
-	.4byte PCText_WithdrawItem, sub_813A118
-	.4byte PCText_DepositItem, sub_813A0A0
-	.4byte PCText_TossItem, sub_813A198
-	.4byte gUnknownText_Exit, sub_813A21C
+	.4byte PCText_WithdrawItem, ItemStorage_Withdraw
+	.4byte PCText_DepositItem, ItemStorage_Deposit
+	.4byte PCText_TossItem, ItemStorage_Toss
+	.4byte gUnknownText_Exit, ItemStorage_Exit
 
 	.align 2
 gUnknown_084062E0:: @ 84062E0
@@ -27149,10 +27152,10 @@ gNewGamePCItems:: @ 84062F0
 
 	.align 2
 gUnknown_084062F8:: @ 84062F8
-	.4byte OtherText_Read, sub_813B428
-	.4byte gOtherText_MoveToBag, sub_813B510
-	.4byte OtherText_Give, sub_813B630
-	.4byte gOtherText_CancelNoTerminator, sub_813B734
+	.4byte OtherText_Read, Mailbox_Read
+	.4byte gOtherText_MoveToBag, Mailbox_MoveToBag
+	.4byte OtherText_Give, Mailbox_Give
+	.4byte gOtherText_CancelNoTerminator, Mailbox_Cancel
 
 gUnknown_08406318:: @ 8406318
 	.string "{STR_VAR_1}{CLEAR_TO 80}$"
@@ -28071,7 +28074,7 @@ gUnknown_0840B869:: @ 840B869
 gUnknown_0840B878::
 	.incbin "baserom.gba", 0x0040B878, 0xf
 
-	.include "data/text/credits.s"
+	.include "data/text/credits.inc"
 
 gUnknown_0840CA00:: @ 840CA00
 	.incbin "baserom.gba", 0x0040ca00, 0x8
@@ -30216,7 +30219,7 @@ gUnknown_08411980:: @ 8411980
 	.incbin "graphics/misc/clock_small.4bpp.lz"
 
 @ 8411A10
-	.include "data/mon_pokeblock_anims.s"
+	.include "data/mon_pokeblock_anims.inc"
 
 	.align 2
 gSpriteAffineAnim_8411E90:: @ 8411E90
@@ -30915,7 +30918,7 @@ gUnknown_084170F4:: @ 84170F4
 	.incbin "baserom.gba", 0x004170f4, 0xD0
 
 @ 84171C4
-	.include "data/bard_music.s"
+	.include "data/bard_music.inc"
 
 UnknownString_1stRound:
 	.string "1st round$"
@@ -31140,7 +31143,7 @@ gOtherText_FourQuestions:: @ 842C7D6
 	.string "????$"
 
 @ 842C7DB
-	.include "data/text/easy_chat/group_name_strings.s"
+	.include "data/text/easy_chat/group_name_strings.inc"
 
 gOtherText_ThreeQuestions:: @ 842C890
 	.string "???$"
@@ -31354,7 +31357,7 @@ gOtherText_LinkStandby:: @ 842CEAF
 	.string "Link standby...$"
 
 @ 842CEBF
-	.include "data/text/landmarks.s"
+	.include "data/text/landmarks.inc"
 
 gOtherText_Terminator4:: @ 842D0E6
 	.string "$"
@@ -31718,38 +31721,38 @@ gUnknown_0842F5BC:: @ 842F5BC
 
 	.align 2
 gSubspriteTables_842F5C0:: @ 842F5C0
-	.4byte  1, gSubspriteTable_203A380
-	.4byte  1, gSubspriteTable_203A380
-	.4byte  2, gSubspriteTable_203A380
-	.4byte  3, gSubspriteTable_203A380
-	.4byte  4, gSubspriteTable_203A380
-	.4byte  5, gSubspriteTable_203A380
-	.4byte  6, gSubspriteTable_203A380
-	.4byte  7, gSubspriteTable_203A380
-	.4byte  8, gSubspriteTable_203A380
-	.4byte  9, gSubspriteTable_203A380
-	.4byte 10, gSubspriteTable_203A380
-	.4byte 11, gSubspriteTable_203A380
-	.4byte 12, gSubspriteTable_203A380
-	.4byte 13, gSubspriteTable_203A380
-	.4byte 14, gSubspriteTable_203A380
-	.4byte 15, gSubspriteTable_203A380
-	.4byte  1, gSubspriteTable_203A380
-	.4byte 17, gSubspriteTable_203A380
-	.4byte 18, gSubspriteTable_203A380
-	.4byte 19, gSubspriteTable_203A380
-	.4byte 20, gSubspriteTable_203A380
-	.4byte 21, gSubspriteTable_203A380
-	.4byte 22, gSubspriteTable_203A380
-	.4byte 23, gSubspriteTable_203A380
-	.4byte 24, gSubspriteTable_203A380
-	.4byte 25, gSubspriteTable_203A380
-	.4byte 26, gSubspriteTable_203A380
-	.4byte 27, gSubspriteTable_203A380
-	.4byte 28, gSubspriteTable_203A380
-	.4byte 29, gSubspriteTable_203A380
-	.4byte 30, gSubspriteTable_203A380
-	.4byte 31, gSubspriteTable_203A380
+	.4byte  1, gMenuCursorSubsprites
+	.4byte  1, gMenuCursorSubsprites
+	.4byte  2, gMenuCursorSubsprites
+	.4byte  3, gMenuCursorSubsprites
+	.4byte  4, gMenuCursorSubsprites
+	.4byte  5, gMenuCursorSubsprites
+	.4byte  6, gMenuCursorSubsprites
+	.4byte  7, gMenuCursorSubsprites
+	.4byte  8, gMenuCursorSubsprites
+	.4byte  9, gMenuCursorSubsprites
+	.4byte 10, gMenuCursorSubsprites
+	.4byte 11, gMenuCursorSubsprites
+	.4byte 12, gMenuCursorSubsprites
+	.4byte 13, gMenuCursorSubsprites
+	.4byte 14, gMenuCursorSubsprites
+	.4byte 15, gMenuCursorSubsprites
+	.4byte  1, gMenuCursorSubsprites
+	.4byte 17, gMenuCursorSubsprites
+	.4byte 18, gMenuCursorSubsprites
+	.4byte 19, gMenuCursorSubsprites
+	.4byte 20, gMenuCursorSubsprites
+	.4byte 21, gMenuCursorSubsprites
+	.4byte 22, gMenuCursorSubsprites
+	.4byte 23, gMenuCursorSubsprites
+	.4byte 24, gMenuCursorSubsprites
+	.4byte 25, gMenuCursorSubsprites
+	.4byte 26, gMenuCursorSubsprites
+	.4byte 27, gMenuCursorSubsprites
+	.4byte 28, gMenuCursorSubsprites
+	.4byte 29, gMenuCursorSubsprites
+	.4byte 30, gMenuCursorSubsprites
+	.4byte 31, gMenuCursorSubsprites
 
 	.align 2
 gUnknown_0842F6C0:: @ 842F6C0
@@ -31775,7 +31778,7 @@ gUnknown_0842F6C0:: @ 842F6C0
 
 	.align 2
 gUnknown_0842F758:: @ 842F758
-	.4byte 3, gSubspriteTable_203A380
+	.4byte 3, gMenuCursorSubsprites
 	.4byte 0, 2
 	.4byte 0, 66
 	.4byte 0, 105
