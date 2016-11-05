@@ -148,7 +148,7 @@ SECTIONS {
         asm/menu_helpers.o(.text);
         asm/script_pokemon_util_80F99CC.o(.text);
         src/dewford_trend.o(.text);
-        asm/heal_location.o(.text);
+        src/heal_location.o(.text);
         asm/region_map.o(.text);
         asm/cute_sketch.o(.text);
         asm/decoration.o(.text);
@@ -165,7 +165,7 @@ SECTIONS {
         asm/roulette.o(.text);
         asm/pokedex_cry_screen.o(.text);
         src/coins.o(.text);
-        asm/landmark.o(.text);
+        src/landmark.o(.text);
         asm/fldeff_strength.o(.text);
         asm/battle_transition.o(.text);
         asm/battle_811DA74.o(.text);
