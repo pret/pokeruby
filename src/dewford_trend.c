@@ -1,13 +1,11 @@
 #include "global.h"
 #include "link.h"
 #include "rng.h"
-
+#include "flag.h"
 
 extern u8 GetLinkPlayerCount(void);
 extern u16 sub_80EB72C(u16);
 extern u8 ConvertEasyChatWordsToString(u8 *dst, u16 *words, u16, u16);
-extern u8 FlagGet(u16);
-extern u8 FlagSet(u16);
 
 extern struct EasyChatPair unk_2007800[5];
 extern struct EasyChatPair unk_2007900[5];
@@ -23,16 +21,16 @@ bool8 SB1ContainsWords(u16 *);
 void sub_80FA17C(void)
 {
     u16 i;
-    
+
     for(i = 0; i < 5; i++)
     {
         gSaveBlock1.easyChatPairs[i].words[0] = sub_80EB72C(10);
-        
+
         if(Random() & 1)
             gSaveBlock1.easyChatPairs[i].words[1] = sub_80EB72C(12);
         else
             gSaveBlock1.easyChatPairs[i].words[1] = sub_80EB72C(13);
-        
+
         gSaveBlock1.easyChatPairs[i].unk1_6 = Random() & 1;
         sub_80FA740(&gSaveBlock1.easyChatPairs[i]);
     }
@@ -45,17 +43,17 @@ void sub_80FA220(u16 a)
     u16 i;
     u32 sp0;
     u32 sp4;
-    
+
     if(a != 0)
     {
         sp0 = a * 5;
-        
+
         for(i = 0; i < 5; i++)
         {
             //_080FA24A
             u32 r2 = sp0;
             u32 r4;
-            
+
             if(gSaveBlock1.easyChatPairs[i].unk1_6 == 0)
             {
                 if(gSaveBlock1.easyChatPairs[i].unk0_0 >= r2)
@@ -75,13 +73,13 @@ void sub_80FA220(u16 a)
             {
                 sp4 = r4 % gSaveBlock1.easyChatPairs[i].unk0_7;
                 r4 = r4 / gSaveBlock1.easyChatPairs[i].unk0_7;
-                
+
                 if(r4 == 0)
                     gSaveBlock1.easyChatPairs[i].unk1_6 = 1;
                 else
                     gSaveBlock1.easyChatPairs[i].unk1_6 = 0;
-                
-                
+
+
                 if(gSaveBlock1.easyChatPairs[i].unk1_6)
                 {
                     gSaveBlock1.easyChatPairs[i].unk0_0 += sp4;
@@ -93,7 +91,7 @@ void sub_80FA220(u16 a)
             }
             //_080FA310
             gSaveBlock1.easyChatPairs[i].unk0_0 = r4;
-            
+
             if(gSaveBlock1.easyChatPairs[i].unk0_0 == gSaveBlock1.easyChatPairs[i].unk0_7)
                 gSaveBlock1.easyChatPairs[i].unk1_6 = 0;
         }
@@ -281,7 +279,7 @@ bool8 sub_80FA364(u16 *a)
 {
     struct EasyChatPair s = {0};
     u16 i;
-    
+
     if(!SB1ContainsWords(a))
     {
         if(!FlagGet(0x833))
@@ -294,19 +292,19 @@ bool8 sub_80FA364(u16 *a)
                 return 1;
             }
         }
-        
+
         //_080FA3C8
         s.words[0] = a[0];
         s.words[1] = a[1];
         s.unk1_6 = 1;
         sub_80FA740(&s);
-        
+
         for(i = 0; i < 5; i++)
         {
             if(sub_80FA670(&s, &gSaveBlock1.easyChatPairs[i], 0))
             {
                 u16 r3 = 4;
-                
+
                 while(r3 > i)
                 {
                     gSaveBlock1.easyChatPairs[r3] = gSaveBlock1.easyChatPairs[r3 - 1];
@@ -325,17 +323,17 @@ bool8 sub_80FA364(u16 *a)
 void sub_80FA46C(struct EasyChatPair *s, u16 b, u8 c)
 {
     u16 h;
-    
+
     for(h = 0; h < b; h++)
     {
         u16 i;
-        
+
         for(i = h + 1; i < b; i++)
         {
             if(sub_80FA670(&s[i], &s[h], c))
             {
                 struct EasyChatPair temp;
-                
+
                 temp = s[i];
                 s[i] = s[h];
                 s[h] = temp;
@@ -353,16 +351,16 @@ void sub_80FA4E4(u8 *a, u32 b)
     struct EasyChatPair *src;
     struct EasyChatPair *dst;
     u16 players = GetLinkPlayerCount();
-    
+
     for(i = 0; i < players; i++)
         memcpy(&unk_2007800[i * 5], a + i * b, 40);
-    
+
     //_080FA520
-    
+
     src = unk_2007800;
     //dst = unk_2007900
     dst = (u8 *)src + 0x100;   //ToDo: Get this part to match
-    
+
     r7 = 0;
     //_080FA530
     for(i = 0; i < players; i++)
@@ -517,14 +515,14 @@ _080FA5B8: .4byte gSaveBlock1 + 0x2DD4\n\
 void sub_80FA5BC(void)
 {
     struct EasyChatPair *s = &gSaveBlock1.easyChatPairs[gUnknown_0202E8CC];
-    
+
     ConvertEasyChatWordsToString(gStringVar1, s->words, 2, 1);
 }
 
 void sub_80FA5E4(void)
 {
     u16 result = 0;
-    
+
     if (gSaveBlock1.easyChatPairs[0].unk0_0 - gSaveBlock1.easyChatPairs[1].unk0_0 < 2)
     {
         asm("":::"r2"); //Force the compiler to store address of gSaveBlock1 in r3 instead of r2
@@ -592,7 +590,7 @@ bool8 sub_80FA670(struct EasyChatPair *a, struct EasyChatPair *b, u8 c)
 void sub_80FA740(struct EasyChatPair *s)
 {
     u16 r4;
-    
+
     r4 = Random() % 98;
     if(r4 > 50)
     {
@@ -608,7 +606,7 @@ void sub_80FA740(struct EasyChatPair *s)
 bool8 SB1ContainsWords(u16 *a)
 {
     u16 i;
-    
+
     for(i = 0; i < 5; i++)
     {
         if(IsEasyChatPairEqual(a, gSaveBlock1.easyChatPairs[i].words) != 0)
@@ -620,7 +618,7 @@ bool8 SB1ContainsWords(u16 *a)
 bool8 IsEasyChatPairEqual(u16 *words1, u16 *words2)
 {
     u16 i;
-    
+
     for(i = 0; i < 2; i++)
     {
         if(*(words1++) != *(words2++))
@@ -633,7 +631,7 @@ s16 sub_80FA828(struct EasyChatPair *a, u16 b)
 {
     s16 i;
     struct EasyChatPair *s = unk_2007900;
-    
+
     for(i = 0; i < b; i++)
     {
         if(IsEasyChatPairEqual(a->words, s->words))

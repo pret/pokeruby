@@ -112,7 +112,7 @@ struct MapHeader
     u8 name;
     u8 cave;
     u8 weather;
-    u8 light;
+    /* 0x17 */ u8 light;
     u8 filler_18;
     u8 escapeRope;
     u8 flags;
@@ -165,7 +165,7 @@ struct MapObject
     /*0x0C*/ struct Coords16 coords1;
     /*0x10*/ struct Coords16 coords2;
     /*0x14*/ struct Coords16 coords3;
-    /*0x18*/ u8 mapobj_unk_18;
+    /*0x18*/ u8 mapobj_unk_18:4;
     /*0x19*/ u8 mapobj_unk_19;
     /*0x1A*/ u8 mapobj_unk_1A;
     /*0x1B*/ u8 mapobj_unk_1B;

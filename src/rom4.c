@@ -9,6 +9,8 @@
 #include "text.h"
 #include "link.h"
 #include "sprite.h"
+#include "flag.h"
+#include "var.h"
 
 #ifdef SAPPHIRE
 #define LEGENDARY_MUSIC BGM_OOAME  // Heavy Rain
@@ -133,8 +135,6 @@ extern s32 gUnknown_0839ACE8;
 extern u32 gUnknown_08216694[];
 
 extern struct UnkWarpStruct *GetHealLocation(u8);
-extern u16 VarGet(u16);
-extern u8 FlagGet(u16);
 extern u8 GetSav1Weather(void);
 extern void PlayerGetDestCoords(u16 *, u16 *);
 extern u8 sub_810D32C(void);

@@ -47,7 +47,7 @@ SECTIONS {
         src/rtc.o(.text);
         src/main_menu.o(.text);
         asm/rom3.o(.text);
-        asm/decompress.o(.text);
+        src/decompress.o(.text);
         asm/rom_800D42C.o(.text);
         src/pokemon_1.o(.text);
         asm/calculate_base_damage.o(.text);
@@ -97,7 +97,7 @@ SECTIONS {
         asm/title_screen.o(.text);
         asm/weather.o(.text);
         asm/rom_8080874.o(.text);
-        asm/battle_setup.o(.text);
+        src/battle_setup.o(.text);
         asm/cable_club.o(.text);
         asm/mori_debug_menu.o(.text);
         asm/trainer_see.o(.text);
@@ -130,7 +130,7 @@ SECTIONS {
         asm/contest_link_80C2020.o(.text);
         asm/script_pokemon_util_80C4BF0.o(.text);
         src/field_poison.o(.text);
-        asm/big_shroomish_barboach.o(.text);
+        src/pokemon_size_record.o(.text);
         asm/fldeff_80C5CD4.o(.text);
         src/truck_scene.o(.text);
         asm/porthole.o(.text);
@@ -164,7 +164,8 @@ SECTIONS {
         asm/evolution_scene.o(.text);
         asm/roulette.o(.text);
         asm/pokedex_cry_screen.o(.text);
-        asm/coins.o(.text);
+        src/landmark.o(.text);
+        src/coins.o(.text);
         src/landmark.o(.text);
         asm/fldeff_strength.o(.text);
         asm/battle_transition.o(.text);
@@ -672,7 +673,7 @@ SECTIONS {
         sound/songs/bgm_battle35.o(.rodata);
         sound/songs/bgm_battle38.o(.rodata);
         sound/songs/bgm_battle30.o(.rodata);
-        sound/songs/song_467.o(.rodata);
+        sound/songs/bgm_radio_tower_occupied.o(.rodata);
     } =0
 
     lib_rodata :

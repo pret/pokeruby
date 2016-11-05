@@ -11022,7 +11022,7 @@ gTrainerBattleSpecs_4:: @ 839AE28
 	.include "data/trainer_eye_trainers.inc"
 
 	.align 2
-gUnknown_0839B1F0:: @ 839B1F0
+gBadgeFlags:: @ 839B1F0
 	.2byte 0x0807, 0x0808, 0x0809, 0x080a, 0x080b, 0x080c, 0x080d, 0x080e
 
 TrainerCardColorName_Bronze:
@@ -15209,7 +15209,7 @@ gUnknown_083D17E2:: @ 83D17E2
 gUnknown_083D180C:: @ 83D180C
 	.incbin "baserom.gba", 0x003d180c, 0x80
 
-gUnknown_083D188C:: @ 83D188C
+gOtherText_DecimalPoint:: @ 83D188C
 	.string ".$"
 
 gUnknown_083D188E:: @ 83D188E

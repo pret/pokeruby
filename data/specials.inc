@@ -56,7 +56,7 @@ gSpecials::
 	.4byte sub_8082718
 	.4byte sub_8082564
 	.4byte sub_80847C8
-	.4byte sub_8082728
+	.4byte PlayTrainerEncounterMusic
 	.4byte sub_8082C68
 	.4byte sub_8082C9C
 	.4byte sub_80826B0
@@ -119,9 +119,9 @@ gSpecials::
 	.4byte sub_8109C90
 	.4byte sub_8109CF0
 	.4byte sub_8109DE0
-	.4byte GetBigShroomishInfo
+	.4byte GetShroomishSizeRecordInfo
 	.4byte CompareShroomishSize
-	.4byte GetBigBarboachInfo
+	.4byte GetBarboachSizeRecordInfo
 	.4byte CompareBarboachSize
 	.4byte sub_80BF9B4
 	.4byte sub_80BFAE0

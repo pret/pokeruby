@@ -7,7 +7,6 @@
 #include "task.h"
 #include "text.h"
 
-extern void LZ77UnCompVram(const void *src, void *dest);
 extern void remove_some_task(void);
 extern void sub_80546F0(void);
 extern u16 sub_8090FF4(void);

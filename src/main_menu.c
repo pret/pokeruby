@@ -26,7 +26,6 @@ extern u16 GetPokedexSeenCount(void);
 extern u8 GetBadgeCount(void);
 extern void DoNamingScreen(u8 r0, struct SaveBlock2 *r1, u16 r2, u16 r3, u8 s0, MainCallback s4);
 extern void CB2_NewGame(void);
-extern void LZ77UnCompVram(const void *src, void *dest);
 extern void DecompressPicFromTable_2(const struct SpriteSheet *, u8, u8, void *, void *, u32);
 extern void LoadCompressedObjectPalette(const struct SpritePalette *);
 extern u8 CreateBirchSprite(u8, u8, u8);

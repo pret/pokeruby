@@ -2,9 +2,7 @@
 #include "pokemon.h"
 #include "rng.h"
 #include "string_util.h"
-
-extern bool8 VarSet(u16 id, u16 value);
-extern u16 VarGet(u16 id);
+#include "var.h"
 
 extern u16 gScriptResult;
 extern u16 gUnknown_0202E8CC;

@@ -110,7 +110,7 @@ struct WarpData
 struct ItemSlot
 {
     u16 itemId;
-    u8 quantity;
+    u16 quantity;
 };
 
 struct Pokeblock
@@ -234,7 +234,9 @@ struct SaveBlock1
     /*0x2EFC*/ struct SB1_2EFC_Struct sb1_2EFC_struct[5];
     /*0x2F9C*/ u8 filler_2F9C[0xA0];
     /*0x303C*/ u8 filler_303C[0x38];
-    /*0x3074*/ u8 filler_3074[0xD0];
+    /*0x3074*/ u8 filler_3074[0x9C];
+    /*0x3110*/ u8 giftRibbons[7];
+    /*0x3117*/ u8 filler_311B[0x2D];
     /*0x3144*/ struct Roamer roamer;
     /*0x3158*/ u8 filler_3158[0x8];
     /*0x3160*/ struct EnigmaBerry enigmaBerry;

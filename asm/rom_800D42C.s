@@ -3227,12 +3227,12 @@ _0800EEE4:
 	bl bitmask_all_link_players_but_self
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _0800EEF8 @ =gUnknown_03004428
+	ldr r1, _0800EEF8 @ =gPlayerParty + 2 * 0x64
 	movs r2, 0xC8
 	bl SendBlock
 	b _0800EF96
 	.align 2, 0
-_0800EEF8: .4byte gUnknown_03004428
+_0800EEF8: .4byte gPlayerParty + 2 * 0x64
 _0800EEFC:
 	bl GetBlockReceivedStatus
 	movs r1, 0x3
@@ -3242,7 +3242,7 @@ _0800EEFC:
 	b _0800F008
 _0800EF0A:
 	bl ResetBlockReceivedFlags
-	ldr r0, _0800EF20 @ =gUnknown_03004688
+	ldr r0, _0800EF20 @ =gEnemyParty + 2 * 0x64
 	lsls r1, r5, 8
 	ldr r2, _0800EF24 @ =gBlockRecvBuffer
 	adds r1, r2
@@ -3250,7 +3250,7 @@ _0800EF0A:
 	bl memcpy
 	b _0800EF96
 	.align 2, 0
-_0800EF20: .4byte gUnknown_03004688
+_0800EF20: .4byte gEnemyParty + 2 * 0x64
 _0800EF24: .4byte gBlockRecvBuffer
 _0800EF28:
 	bl sub_8007ECC
@@ -3260,12 +3260,12 @@ _0800EF28:
 	bl bitmask_all_link_players_but_self
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _0800EF44 @ =gUnknown_030044F0
+	ldr r1, _0800EF44 @ =gPlayerParty + 4 * 0x64
 	movs r2, 0xC8
 	bl SendBlock
 	b _0800EF96
 	.align 2, 0
-_0800EF44: .4byte gUnknown_030044F0
+_0800EF44: .4byte gPlayerParty + 4 * 0x64
 _0800EF48:
 	bl GetBlockReceivedStatus
 	movs r1, 0x3
@@ -3273,7 +3273,7 @@ _0800EF48:
 	cmp r1, 0x3
 	bne _0800F008
 	bl ResetBlockReceivedFlags
-	ldr r4, _0800EFA0 @ =gUnknown_03004750
+	ldr r4, _0800EFA0 @ =gEnemyParty + 4 * 0x64
 	lsls r1, r5, 8
 	ldr r0, _0800EFA4 @ =gBlockRecvBuffer
 	adds r1, r0
@@ -3304,7 +3304,7 @@ _0800EF96:
 	strb r0, [r1]
 	b _0800F008
 	.align 2, 0
-_0800EFA0: .4byte gUnknown_03004750
+_0800EFA0: .4byte gEnemyParty + 4 * 0x64
 _0800EFA4: .4byte gBlockRecvBuffer
 _0800EFA8: .4byte 0xfffffe70
 _0800EFAC: .4byte 0xfffffed4
@@ -3996,10 +3996,10 @@ _0800F548:
 	.align 2, 0
 _0800F54C: .4byte gPlayerParty
 _0800F550:
-	ldr r0, _0800F554 @ =gUnknown_0300448C
+	ldr r0, _0800F554 @ =gPlayerParty + 3 * 0x64
 	b _0800F5C8
 	.align 2, 0
-_0800F554: .4byte gUnknown_0300448C
+_0800F554: .4byte gPlayerParty + 3 * 0x64
 _0800F558:
 	ldr r2, _0800F578 @ =gLinkPlayers
 	adds r0, r7, r2
@@ -4046,10 +4046,10 @@ _0800F5A0:
 	.align 2, 0
 _0800F5A4: .4byte gPlayerParty
 _0800F5A8:
-	ldr r0, _0800F5AC @ =gUnknown_0300448C
+	ldr r0, _0800F5AC @ =gPlayerParty + 3 * 0x64
 	b _0800F5C8
 	.align 2, 0
-_0800F5AC: .4byte gUnknown_0300448C
+_0800F5AC: .4byte gPlayerParty + 3 * 0x64
 _0800F5B0:
 	adds r0, r7, r2
 	ldrh r2, [r0, 0x18]
@@ -4073,7 +4073,7 @@ _0800F5C8:
 	.align 2, 0
 _0800F5D4: .4byte gEnemyParty
 _0800F5D8:
-	ldr r0, _0800F5F4 @ =gUnknown_030046EC
+	ldr r0, _0800F5F4 @ =gEnemyParty + 3 * 0x64
 	adds r1, r5, 0
 	movs r2, 0xC8
 	bl memcpy
@@ -4087,7 +4087,7 @@ _0800F5E2:
 	ble _0800F524
 	b _0800F770
 	.align 2, 0
-_0800F5F4: .4byte gUnknown_030046EC
+_0800F5F4: .4byte gEnemyParty + 3 * 0x64
 _0800F5F8:
 	bl sub_8007ECC
 	lsls r0, 24
@@ -4140,15 +4140,15 @@ _0800F65C:
 	cmp r0, 0x3
 	bne _0800F6FA
 _0800F660:
-	ldr r0, _0800F664 @ =gUnknown_03004428
+	ldr r0, _0800F664 @ =gPlayerParty + 2 * 0x64
 	b _0800F6E0
 	.align 2, 0
-_0800F664: .4byte gUnknown_03004428
+_0800F664: .4byte gPlayerParty + 2 * 0x64
 _0800F668:
-	ldr r0, _0800F66C @ =gUnknown_03004554
+	ldr r0, _0800F66C @ =gPlayerParty + 5 * 0x64
 	b _0800F6E0
 	.align 2, 0
-_0800F66C: .4byte gUnknown_03004554
+_0800F66C: .4byte gPlayerParty + 5 * 0x64
 _0800F670:
 	ldr r2, _0800F690 @ =gLinkPlayers
 	adds r0, r7, r2
@@ -4190,15 +4190,15 @@ _0800F6B4:
 	cmp r2, 0x3
 	bne _0800F6FA
 _0800F6B8:
-	ldr r0, _0800F6BC @ =gUnknown_03004428
+	ldr r0, _0800F6BC @ =gPlayerParty + 2 * 0x64
 	b _0800F6E0
 	.align 2, 0
-_0800F6BC: .4byte gUnknown_03004428
+_0800F6BC: .4byte gPlayerParty + 2 * 0x64
 _0800F6C0:
-	ldr r0, _0800F6C4 @ =gUnknown_03004554
+	ldr r0, _0800F6C4 @ =gPlayerParty + 5 * 0x64
 	b _0800F6E0
 	.align 2, 0
-_0800F6C4: .4byte gUnknown_03004554
+_0800F6C4: .4byte gPlayerParty + 5 * 0x64
 _0800F6C8:
 	adds r0, r7, r2
 	ldrh r2, [r0, 0x18]
@@ -4213,16 +4213,16 @@ _0800F6DA:
 	cmp r2, 0x3
 	bne _0800F6FA
 _0800F6DE:
-	ldr r0, _0800F6EC @ =gUnknown_03004688
+	ldr r0, _0800F6EC @ =gEnemyParty + 2 * 0x64
 _0800F6E0:
 	adds r1, r5, 0
 	movs r2, 0x64
 	bl memcpy
 	b _0800F6FA
 	.align 2, 0
-_0800F6EC: .4byte gUnknown_03004688
+_0800F6EC: .4byte gEnemyParty + 2 * 0x64
 _0800F6F0:
-	ldr r0, _0800F77C @ =gUnknown_030047B4
+	ldr r0, _0800F77C @ =gEnemyParty + 5 * 0x64
 	adds r1, r5, 0
 	movs r2, 0x64
 	bl memcpy
@@ -4281,7 +4281,7 @@ _0800F770:
 	strb r0, [r1]
 	b _0800F7E0
 	.align 2, 0
-_0800F77C: .4byte gUnknown_030047B4
+_0800F77C: .4byte gEnemyParty + 5 * 0x64
 _0800F780: .4byte gPlayerParty
 _0800F784: .4byte gEnemyParty
 _0800F788: .4byte gUnknown_02024D1E

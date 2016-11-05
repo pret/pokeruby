@@ -467,7 +467,7 @@ gSongTable:: @ 845548C
 	song bgm_battle35, 0, 0
 	song bgm_battle38, 0, 0
 	song bgm_battle30, 0, 0
-	song song_467, 0, 0
+	song bgm_radio_tower_occupied, 0, 0
 
 	.align 2
 dummy_song_header: @ 845632C

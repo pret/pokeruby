@@ -8,6 +8,8 @@
 #include "sound.h"
 #include "string_util.h"
 #include "task.h"
+#include "flag.h"
+#include "var.h"
 
 extern void *recordMixingSecretBases;
 extern void *recordMixingTvShows;
@@ -41,8 +43,6 @@ extern void sub_80FA4E4(void *, u32, u8);
 extern void sub_80B9C6C(void *, u32, u8, void *);
 extern void sub_80B9F3C(void *, u8);
 extern u16 sub_8126338(void);
-extern bool8 VarSet(u16, u8);
-extern u8 FlagSet(u16);
 extern u8 sub_8083664(void);
 extern void sub_80720B0(void);
 extern void CreateRecordMixingSprite(void);

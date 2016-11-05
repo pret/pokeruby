@@ -11,7 +11,6 @@
 #include "sound.h"
 
 //Functions that need to be put in headers
-void LZ77UnCompVram(const void *src, void *dest);
 void remove_some_task(void);
 void LoadCompressedObjectPic(void *);
 
