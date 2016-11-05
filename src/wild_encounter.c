@@ -3,6 +3,8 @@
 #include "pokemon.h"
 #include "rng.h"
 #include "script.h"
+#include "flag.h"
+#include "var.h"
 
 struct WildPokemon {
     u8 minLevel;
@@ -38,8 +40,6 @@ extern u8 MetatileBehavior_IsBridge(u8);
 extern void PlayerGetDestCoords(u16 *x, u16 *y);
 extern void sub_80BEA50(u16);
 extern void sav12_xor_increment(u8);
-extern u8 FlagGet(u16);
-extern u16 VarGet(u16);
 extern int MapGridGetMetatileBehaviorAt(int x, int y);
 
 extern u8 gWildEncountersDisabled;

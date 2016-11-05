@@ -1,4 +1,5 @@
 #include "global.h"
+#include "flag.h"
 
 extern u8 gUnknown_0202E8E2[];
 

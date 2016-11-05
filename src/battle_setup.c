@@ -7,6 +7,8 @@
 #include "fieldmap.h"
 #include "string_util.h"
 #include "rng.h"
+#include "flag.h"
+#include "var.h"
 
 extern void prev_quest_postbuffer_cursor_backup_reset(void);
 extern void overworld_poison_timer_set(void);
@@ -14,9 +16,6 @@ extern void current_map_music_set__default_for_battle(u16);
 extern void c2_exit_to_overworld_1_continue_scripts_restart_music(void);
 extern void c2_exit_to_overworld_2_switch(void);
 extern void npc_set_running_behaviour_etc(struct MapObject *, u8);
-extern u8 FlagGet(u16);
-extern u8 FlagSet(u16);
-extern void FlagReset(u16);
 extern void c2_whiteout(void);
 extern void sub_800E7C4(void);
 extern void sub_8081AA4(void);
@@ -93,7 +92,6 @@ extern void PlayNewMapMusic(u16);
 extern u8 ScriptGiveMon(u16, u8, u16, u32, u32, u8);
 
 extern void (*gUnknown_0300485C)(void);
-extern u16 *GetVarPointer(u16);
 
 extern struct Pokemon gEnemyParty[];
 extern struct Pokemon gPlayerParty[];

@@ -1,7 +1,7 @@
 #include "global.h"
 #include "menu.h"
+#include "flag.h"
 
-extern u8 FlagGet(u16);
 extern u8 gOtherText_Player[];
 extern u8 gOtherText_Badges[];
 extern u8 gOtherText_Pokedex[];

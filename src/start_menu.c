@@ -8,6 +8,7 @@
 #include "sprite.h"
 #include "string_util.h"
 #include "task.h"
+#include "flag.h"
 
 //External functions
 extern void sub_8064E2C(void);
@@ -40,7 +41,6 @@ extern void sub_80597F4(void);
 extern void player_bitmagic(void);
 extern bool32 GetSafariZoneFlag(void);
 extern u8 *sub_8072C44(u8 *, s32, u8, u8);
-extern u8 FlagGet(u16);
 extern bool32 is_c1_link_related_active(void);
 
 //Menu actions

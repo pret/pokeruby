@@ -11,10 +11,10 @@
 #include "field_message_box.h"
 #include "sound.h"
 #include "string_util.h"
+#include "flag.h"
+#include "var.h"
 
 extern void ClearRamScript(void);
-extern u16 *GetVarPointer(u16);
-extern u16 VarGet(u16);
 extern void sub_8126160(u8);
 extern u8 AddBagItem(u16, u16);
 extern u8 RemoveBagItem(u16, u16);
@@ -27,9 +27,6 @@ extern u8 IsThereStorageSpaceForDecoration(u8);
 extern s8 sub_81340A8(u8);
 extern u8 sub_8134074(u8);
 extern u8 sub_8133FE4(u8);
-extern void FlagSet(u16);
-extern void FlagReset(u16);
-extern u8 FlagGet(u16);
 extern void sav12_xor_increment(u8);
 extern void sub_8081594(u8);
 extern void sub_8053CE4(u32);

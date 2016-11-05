@@ -2,12 +2,11 @@
 #include "global.h"
 #include "pokemon.h"
 #include "species.h"
+#include "flag.h"
+#include "var.h"
 
 extern u16 SpeciesToNationalPokedexNum(u16);
 extern u16 sub_8090D54(u16, u8);
-extern bool8 VarSet(u16, u16);
-extern u16 *GetVarPointer(u16);
-extern u8 FlagSet(u16);
 
 struct UnknownStruct
 {
