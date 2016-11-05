@@ -113,8 +113,7 @@ SECTIONS {
         asm/rom_8094928.o(.text);
         asm/item_menu.o(.text);
         asm/battle_anim_80A7E7C.o(.text);
-		src/item.o(.text);
-        asm/item.o(.text);
+        src/item.o(.text);
         asm/matuda_debug_menu.o(.text);
         asm/contest.o(.text);
         asm/shop.o(.text);
