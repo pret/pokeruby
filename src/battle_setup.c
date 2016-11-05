@@ -11,6 +11,7 @@
 #include "var.h"
 #include "script.h"
 #include "field_message_box.h"
+#include "trainer.h"
 
 extern void prev_quest_postbuffer_cursor_backup_reset(void);
 extern void overworld_poison_timer_set(void);
@@ -896,7 +897,7 @@ void sub_8082718()
     ShowFieldMessage(sub_8082880());
 }
 
-void sub_8082728(void) // sets the music to be played after a battle
+void PlayTrainerEncounterMusic(void)
 {
     u16 music;
 
@@ -904,48 +905,47 @@ void sub_8082728(void) // sets the music to be played after a battle
     {
         switch (sub_803FC58(gTrainerBattleOpponent))
         {
-        // TODO: Replace with music constants.
-        case 0:
-            music = 380;
+        case TRAINER_ENCOUNTER_MUSIC_MALE:
+            music = BGM_BOYEYE;
             break;
-        case 1:
-            music = 407;
+        case TRAINER_ENCOUNTER_MUSIC_FEMALE:
+            music = BGM_GIRLEYE;
             break;
-        case 2:
-            music = 379;
+        case TRAINER_ENCOUNTER_MUSIC_GIRL:
+            music = BGM_SYOUJOEYE;
             break;
-        case 4:
-            music = 416;
+        case TRAINER_ENCOUNTER_MUSIC_INTENSE:
+            music = BGM_HAGESHII;
             break;
-        case 5:
-            music = 417;
+        case TRAINER_ENCOUNTER_MUSIC_COOL:
+            music = BGM_KAKKOII;
             break;
-        case 6:
-            music = 419;
+        case TRAINER_ENCOUNTER_MUSIC_AQUA:
+            music = BGM_AQA_0;
             break;
-        case 7:
-            music = 441;
+        case TRAINER_ENCOUNTER_MUSIC_MAGMA:
+            music = BGM_MGM0;
             break;
-        case 8:
-            music = 385;
+        case TRAINER_ENCOUNTER_MUSIC_SWIMMER:
+            music = BGM_SWIMEYE;
             break;
-        case 9:
-            music = 449;
+        case TRAINER_ENCOUNTER_MUSIC_TWINS:
+            music = BGM_HUTAGO;
             break;
-        case 10:
-            music = 450;
+        case TRAINER_ENCOUNTER_MUSIC_ELITE_FOUR:
+            music = BGM_SITENNOU;
             break;
-        case 11:
-            music = 451;
+        case TRAINER_ENCOUNTER_MUSIC_HIKER:
+            music = BGM_YAMA_EYE;
             break;
-        case 12:
-            music = 453;
+        case TRAINER_ENCOUNTER_MUSIC_INTERVIEWER:
+            music = BGM_INTER_V;
             break;
-        case 13:
-            music = 397;
+        case TRAINER_ENCOUNTER_MUSIC_RICH:
+            music = BGM_TEST;
             break;
         default:
-            music = 423;
+            music = BGM_AYASII;
         }
 
         PlayNewMapMusic(music);

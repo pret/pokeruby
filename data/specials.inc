@@ -56,7 +56,7 @@ gSpecials::
 	.4byte sub_8082718
 	.4byte sub_8082564
 	.4byte sub_80847C8
-	.4byte sub_8082728
+	.4byte PlayTrainerEncounterMusic
 	.4byte sub_8082C68
 	.4byte sub_8082C9C
 	.4byte sub_80826B0
