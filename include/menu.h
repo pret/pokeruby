@@ -60,8 +60,6 @@ u8 InitMenu(u8, u8, u8, u8, u8, u8);
 void RedrawMenuCursor(u8, u8);
 void unref_sub_8072DC0(void);
 void sub_8072DCC(u8);
-void sub_8072DDC(u8);
-void sub_8072DEC(void);
 
 // clear_save_data_menu.c
 void c2_clear_save_data_screen_2(void);

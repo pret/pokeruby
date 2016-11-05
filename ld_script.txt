@@ -164,7 +164,6 @@ SECTIONS {
         asm/evolution_scene.o(.text);
         asm/roulette.o(.text);
         asm/pokedex_cry_screen.o(.text);
-        src/landmark.o(.text);
         src/coins.o(.text);
         src/landmark.o(.text);
         asm/fldeff_strength.o(.text);
