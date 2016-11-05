@@ -48,7 +48,7 @@ const struct HealLocation *GetHealLocationByMap(u16 some_group,
     }
     else
     {
-        return &(gHealLocations[index - 1].group);
+        return &gHealLocations[index - 1];
     }
 }
 
@@ -64,6 +64,6 @@ const struct HealLocation *GetHealLocation(u32 index)
     }
     else
     {
-        return &(gHealLocations[index - 1].group);
+        return &gHealLocations[index - 1];
     }
 }
