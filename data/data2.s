@@ -15209,7 +15209,7 @@ gUnknown_083D17E2:: @ 83D17E2
 gUnknown_083D180C:: @ 83D180C
 	.incbin "baserom.gba", 0x003d180c, 0x80
 
-gUnknown_083D188C:: @ 83D188C
+gOtherText_DecimalPoint:: @ 83D188C
 	.string ".$"
 
 gUnknown_083D188E:: @ 83D188E

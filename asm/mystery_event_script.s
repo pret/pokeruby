@@ -631,7 +631,7 @@ sub_81264F0: @ 81264F0
 	ldrb r1, [r2]
 	adds r2, 0x1
 	str r2, [r4, 0x8]
-	bl GiveSpecialRibbonToParty
+	bl GiveGiftRibbonToParty
 	ldr r0, _0812651C @ =gStringVar4
 	ldr r1, _08126520 @ =gOtherText_SpecialRibbonReceived
 	bl StringExpandPlaceholders
