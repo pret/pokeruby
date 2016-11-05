@@ -161,7 +161,7 @@ extern u16 gScriptResult;
 
 extern u32 gUnknown_0202FF84[];
 
-extern u16 gSpecialVar_0x8011;
+extern u16 gScriptContestCategory;
 
 extern SpecialFunc gSpecials[];
 extern u8 *gStdScripts[];
@@ -1792,7 +1792,7 @@ bool8 ScrCmd_showcontestresults(struct ScriptContext *ctx)
 
 bool8 ScrCmd_contestlinktransfer(struct ScriptContext *ctx)
 {
-    sub_80C4980(gSpecialVar_0x8011);
+    sub_80C4980(gScriptContestCategory);
     ScriptContext1_Stop();
     return TRUE;
 }

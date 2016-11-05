@@ -322,7 +322,7 @@ _080A9D6E:
 	bl sub_80C4B34
 	ldr r1, _080A9DAC @ =gUnknown_0203869B
 	strb r0, [r1]
-	ldr r0, _080A9DB0 @ =gSpecialVar_0x8011
+	ldr r0, _080A9DB0 @ =gScriptContestCategory
 	ldrb r0, [r0]
 	bl sub_80AE82C
 	movs r0, 0
@@ -338,7 +338,7 @@ _080A9D6E:
 	.align 2, 0
 _080A9DA8: .4byte gTasks
 _080A9DAC: .4byte gUnknown_0203869B
-_080A9DB0: .4byte gSpecialVar_0x8011
+_080A9DB0: .4byte gScriptContestCategory
 _080A9DB4: .4byte sub_80C8EBC
 _080A9DB8: .4byte sub_80A9DBC
 	thumb_func_end sub_80A9D58
@@ -828,7 +828,7 @@ _080AA17A:
 	lsrs r5, r0, 24
 	cmp r5, 0x5
 	bls _080AA17A
-	ldr r1, _080AA258 @ =gSpecialVar_0x8011
+	ldr r1, _080AA258 @ =gScriptContestCategory
 	ldr r4, _080AA25C @ =gSpecialVar_0x8010
 	movs r0, 0
 	strh r0, [r4]
@@ -899,7 +899,7 @@ _080AA248: .4byte gUnknown_02038570
 _080AA24C: .4byte gUnknown_083C9276
 _080AA250: .4byte gUnknown_083C9364
 _080AA254: .4byte gMenuWindow
-_080AA258: .4byte gSpecialVar_0x8011
+_080AA258: .4byte gScriptContestCategory
 _080AA25C: .4byte gSpecialVar_0x8010
 _080AA260: .4byte gUnknown_083C9337
 _080AA264: .4byte gUnknown_083C933B
@@ -2174,7 +2174,7 @@ _080AAC1A:
 	bl sub_80AA5BC
 	asrs r4, 24
 	strh r4, [r5, 0x34]
-	ldr r0, _080AAC54 @ =gSpecialVar_0x8011
+	ldr r0, _080AAC54 @ =gScriptContestCategory
 	strh r4, [r0]
 	lsls r4, 24
 	lsrs r4, 24
@@ -2194,7 +2194,7 @@ _080AAC1A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080AAC54: .4byte gSpecialVar_0x8011
+_080AAC54: .4byte gScriptContestCategory
 _080AAC58: .4byte gSpecialVar_0x8010
 	thumb_func_end sub_80AABF0
 
@@ -2231,7 +2231,7 @@ _080AAC86:
 _080AAC92:
 	ldrb r0, [r4]
 	bl sub_80AA5E8
-	ldr r0, _080AACC0 @ =gSpecialVar_0x8011
+	ldr r0, _080AACC0 @ =gScriptContestCategory
 	ldrb r0, [r0]
 	ldrb r1, [r4]
 	bl sub_80AE398
@@ -2248,7 +2248,7 @@ _080AAC92:
 	bx r0
 	.align 2, 0
 _080AACBC: .4byte gSpecialVar_0x8010
-_080AACC0: .4byte gSpecialVar_0x8011
+_080AACC0: .4byte gScriptContestCategory
 	thumb_func_end sub_80AAC5C
 
 	thumb_func_start sub_80AACC4
@@ -2328,7 +2328,7 @@ sub_80AAD44: @ 80AAD44
 _080AAD56:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	ldr r1, _080AAD7C @ =gSpecialVar_0x8011
+	ldr r1, _080AAD7C @ =gScriptContestCategory
 	ldrb r1, [r1]
 	bl sub_80AE770
 	strh r0, [r5]
@@ -2344,7 +2344,7 @@ _080AAD72:
 	bx r0
 	.align 2, 0
 _080AAD78: .4byte gUnknown_02038670
-_080AAD7C: .4byte gSpecialVar_0x8011
+_080AAD7C: .4byte gScriptContestCategory
 _080AAD80: .4byte sub_805469C
 	thumb_func_end sub_80AAD44
 
@@ -2707,7 +2707,7 @@ _080AB044:
 	subs r2, 0x1
 	cmp r2, r5
 	bgt _080AB044
-	ldr r1, _080AB080 @ =gSpecialVar_0x8011
+	ldr r1, _080AB080 @ =gScriptContestCategory
 	movs r0, 0
 	strh r0, [r1]
 	adds r4, r1, 0
@@ -2729,7 +2729,7 @@ _080AB058:
 	.align 2, 0
 _080AB078: .4byte gUnknown_02038695
 _080AB07C: .4byte gUnknown_02038690
-_080AB080: .4byte gSpecialVar_0x8011
+_080AB080: .4byte gScriptContestCategory
 	thumb_func_end sub_80AB02C
 
 	thumb_func_start unref_sub_80AB084

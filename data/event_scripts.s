@@ -27,7 +27,7 @@ gSpecialVars::
 	.4byte gScriptItemId
 	.4byte gScriptLastTalked
 	.4byte gSpecialVar_0x8010
-	.4byte gSpecialVar_0x8011
+	.4byte gScriptContestCategory
 
 	.include "data/specials.inc"
 

@@ -142,7 +142,7 @@ FallarborTown_ContestLobby_EventScript_1A5097:: @ 81A5097
 	switch RESULT
 	case 5, FallarborTown_ContestLobby_EventScript_1A503E
 	case 127, FallarborTown_ContestLobby_EventScript_1A503E
-	copyvar 0x8011, RESULT
+	copyvar CONTEST_CATEGORY, RESULT
 	jump FallarborTown_ContestLobby_EventScript_1A5048
 	end
 
@@ -231,7 +231,7 @@ LinkContestRoom1_EventScript_1A51E4:: @ 81A51E4
 	return
 
 LinkContestRoom1_EventScript_1A51EA:: @ 81A51EA
-	switch 0x8011
+	switch CONTEST_CATEGORY
 	case 0, LinkContestRoom1_EventScript_1A5227
 	case 1, LinkContestRoom1_EventScript_1A522D
 	case 2, LinkContestRoom1_EventScript_1A5233

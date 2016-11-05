@@ -88,7 +88,7 @@ sub_80C4C64: @ 80C4C64
 	thumb_func_start sub_80C4C78
 sub_80C4C78: @ 80C4C78
 	push {lr}
-	ldr r0, _080C4C8C @ =gSpecialVar_0x8011
+	ldr r0, _080C4C8C @ =gScriptContestCategory
 	ldrh r0, [r0]
 	cmp r0, 0x4
 	bhi _080C4CB8
@@ -98,7 +98,7 @@ sub_80C4C78: @ 80C4C78
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_080C4C8C: .4byte gSpecialVar_0x8011
+_080C4C8C: .4byte gScriptContestCategory
 _080C4C90: .4byte _080C4C94
 	.align 2, 0
 _080C4C94:
