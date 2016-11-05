@@ -742,11 +742,11 @@ u8 *TrainerBattleConfigure(u8 *data)
     }
 }
 
-void TrainerWantsBattle(u8 ptr, u8 *a2)
+void TrainerWantsBattle(u8 trainerMapObjId, u8 *trainerScript)
 {
-    gSelectedMapObject = ptr;
-    gUnknown_0202E8DE = gMapObjects[ptr].localId;
-    TrainerBattleConfigure(a2 + 1);
+    gSelectedMapObject = trainerMapObjId;
+    gUnknown_0202E8DE = gMapObjects[trainerMapObjId].localId;
+    TrainerBattleConfigure(trainerScript + 1);
     ScriptContext1_SetupScript(gUnknown_0819F80B);
     ScriptContext2_Enable();
 }
