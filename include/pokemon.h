@@ -337,6 +337,9 @@ struct PokemonStorage
     struct BoxPokemon boxes[14][30];
 };
 
+extern struct Pokemon gPlayerParty[6];
+extern struct Pokemon gEnemyParty[6];
+
 void ZeroBoxMonData(struct BoxPokemon *boxMon);
 void ZeroMonData(struct Pokemon *mon);
 void ZeroPlayerPartyMons(void);
