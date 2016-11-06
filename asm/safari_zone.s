@@ -6,270 +6,362 @@
 
 	.text
 
-	thumb_func_start GetSafariZoneFlag
-GetSafariZoneFlag: @ 80C8184
-	push {lr}
-	ldr r0, _080C8194 @ =0x0000082c
-	bl FlagGet
-	lsls r0, 24
-	lsrs r0, 24
-	pop {r1}
-	bx r1
-	.align 2, 0
-_080C8194: .4byte 0x0000082c
-	thumb_func_end GetSafariZoneFlag
+@	thumb_func_start GetSafariZoneFlag
+@GetSafariZoneFlag: @ 80C8184
+@	push {lr}
+@	ldr r0, _080C8194 @ =0x0000082c
+@	bl FlagGet
+@	lsls r0, 24
+@	lsrs r0, 24
+@	pop {r1}
+@	bx r1
+@	.align 2, 0
+@_080C8194: .4byte 0x0000082c
+@	thumb_func_end GetSafariZoneFlag
 
-	thumb_func_start SetSafariZoneFlag
-SetSafariZoneFlag: @ 80C8198
-	push {lr}
-	ldr r0, _080C81A4 @ =0x0000082c
-	bl FlagSet
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080C81A4: .4byte 0x0000082c
-	thumb_func_end SetSafariZoneFlag
+@	thumb_func_start SetSafariZoneFlag
+@SetSafariZoneFlag: @ 80C8198
+@	push {lr}
+@	ldr r0, _080C81A4 @ =0x0000082c
+@	bl FlagSet
+@	pop {r0}
+@	bx r0
+@	.align 2, 0
+@_080C81A4: .4byte 0x0000082c
+@	thumb_func_end SetSafariZoneFlag
 
-	thumb_func_start ResetSafariZoneFlag
-ResetSafariZoneFlag: @ 80C81A8
-	push {lr}
-	ldr r0, _080C81B4 @ =0x0000082c
-	bl FlagReset
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080C81B4: .4byte 0x0000082c
-	thumb_func_end ResetSafariZoneFlag
+@	thumb_func_start ResetSafariZoneFlag
+@ResetSafariZoneFlag: @ 80C81A8
+@	push {lr}
+@	ldr r0, _080C81B4 @ =0x0000082c
+@	bl FlagReset
+@	pop {r0}
+@	bx r0
+@	.align 2, 0
+@_080C81B4: .4byte 0x0000082c
+@	thumb_func_end ResetSafariZoneFlag
 
-	thumb_func_start sub_80C81B8
-sub_80C81B8: @ 80C81B8
-	push {lr}
-	movs r0, 0x11
-	bl sav12_xor_increment
-	bl SetSafariZoneFlag
-	bl sub_80C82D8
-	ldr r1, _080C81DC @ =gUnknown_02038808
-	movs r0, 0x1E
-	strb r0, [r1]
-	ldr r1, _080C81E0 @ =gUnknown_0203880A
-	movs r2, 0xFA
-	lsls r2, 1
-	adds r0, r2, 0
-	strh r0, [r1]
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080C81DC: .4byte gUnknown_02038808
-_080C81E0: .4byte gUnknown_0203880A
-	thumb_func_end sub_80C81B8
+@	thumb_func_start sub_80C81B8
+@sub_80C81B8: @ 80C81B8
+@	push {lr}
+@	movs r0, 0x11
+@	bl sav12_xor_increment
+@	bl SetSafariZoneFlag
+@	bl sub_80C82D8
+@	ldr r1, _080C81DC @ =gUnknown_02038808
+@	movs r0, 0x1E
+@	strb r0, [r1]
+@	ldr r1, _080C81E0 @ =gUnknown_0203880A
+@	movs r2, 0xFA
+@	lsls r2, 1
+@	adds r0, r2, 0
+@	strh r0, [r1]
+@	pop {r0}
+@	bx r0
+@	.align 2, 0
+@_080C81DC: .4byte gUnknown_02038808
+@_080C81E0: .4byte gUnknown_0203880A
+@	thumb_func_end sub_80C81B8
 
-	thumb_func_start sub_80C81E4
-sub_80C81E4: @ 80C81E4
-	push {lr}
-	bl ResetSafariZoneFlag
-	bl sub_80C82D8
-	ldr r1, _080C8200 @ =gUnknown_02038808
-	movs r0, 0
-	strb r0, [r1]
-	ldr r1, _080C8204 @ =gUnknown_0203880A
-	movs r0, 0
-	strh r0, [r1]
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080C8200: .4byte gUnknown_02038808
-_080C8204: .4byte gUnknown_0203880A
-	thumb_func_end sub_80C81E4
 
-	thumb_func_start safari_step
-safari_step: @ 80C8208
-	push {lr}
-	bl GetSafariZoneFlag
-	cmp r0, 0
-	beq _080C8224
-	bl sub_80C8508
-	ldr r1, _080C8228 @ =gUnknown_0203880A
-	ldrh r0, [r1]
-	subs r0, 0x1
-	strh r0, [r1]
-	lsls r0, 16
-	cmp r0, 0
-	beq _080C822C
-_080C8224:
-	movs r0, 0
-	b _080C8234
-	.align 2, 0
-_080C8228: .4byte gUnknown_0203880A
-_080C822C:
-	ldr r0, _080C8238 @ =gUnknown_081C3448
-	bl ScriptContext1_SetupScript
-	movs r0, 0x1
-_080C8234:
-	pop {r1}
-	bx r1
-	.align 2, 0
-_080C8238: .4byte gUnknown_081C3448
-	thumb_func_end safari_step
+@	thumb_func_start sub_80C81E4
+@sub_80C81E4: @ 80C81E4
+@	push {lr}
+@	bl ResetSafariZoneFlag
+@	bl sub_80C82D8
+@	ldr r1, _080C8200 @ =gUnknown_02038808
+@	movs r0, 0
+@	strb r0, [r1]
+@	ldr r1, _080C8204 @ =gUnknown_0203880A
+@	movs r0, 0
+@	strh r0, [r1]
+@	pop {r0}
+@	bx r0
+@	.align 2, 0
+@_080C8200: .4byte gUnknown_02038808
+@_080C8204: .4byte gUnknown_0203880A
+@	thumb_func_end sub_80C81E4
 
-	thumb_func_start sub_80C823C
-sub_80C823C: @ 80C823C
-	push {lr}
-	ldr r0, _080C8248 @ =gUnknown_081C342D
-	bl ScriptContext1_SetupScript
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080C8248: .4byte gUnknown_081C342D
-	thumb_func_end sub_80C823C
+@	thumb_func_start safari_step
+@safari_step: @ 80C8208
+@	push {lr}
+@	bl GetSafariZoneFlag
+@	cmp r0, 0
+@	beq _080C8224
+@	
+@	bl sub_80C8508
+@	
+@	// gUnknown_0203880A--
+@	ldr r1, _080C8228 @ =gUnknown_0203880A
+@	ldrh r0, [r1]
+@	subs r0, 0x1
+@	strh r0, [r1]
+@	lsls r0, 16
+@	
+@	// if gUnknown_0203880A != 0 return FALSE
+@	cmp r0, 0
+@	beq _080C822C
+@	
+@_080C8224:
+@	// return 0
+@	movs r0, 0
+@	b _080C8234
+@	.align 2, 0
+@_080C8228: .4byte gUnknown_0203880A
+@
+@_080C822C:
+@	ldr r0, _080C8238 @ =gUnknown_081C3448
+@	bl ScriptContext1_SetupScript
+@	
+@	// return 1
+@	movs r0, 0x1
+@_080C8234:
+@	pop {r1}
+@	bx r1
+@	.align 2, 0
+@_080C8238: .4byte gUnknown_081C3448
+@	thumb_func_end safari_step
 
-	thumb_func_start sub_80C824C
-sub_80C824C: @ 80C824C
-	push {lr}
-	ldr r0, _080C8260 @ =gUnknown_02038808
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _080C8268
-	ldr r0, _080C8264 @ =c2_exit_to_overworld_2_switch
-	bl SetMainCallback2
-	b _080C82B0
-	.align 2, 0
-_080C8260: .4byte gUnknown_02038808
-_080C8264: .4byte c2_exit_to_overworld_2_switch
-_080C8268:
-	ldr r0, _080C8288 @ =gUnknown_02024D26
-	ldrb r0, [r0]
-	cmp r0, 0x8
-	bne _080C829C
-	ldr r0, _080C828C @ =gUnknown_081C340A
-	bl ScriptContext2_RunNewScript
-	bl warp_in
-	ldr r1, _080C8290 @ =gUnknown_0300485C
-	ldr r0, _080C8294 @ =sub_8080E44
-	str r0, [r1]
-	ldr r0, _080C8298 @ =CB2_LoadMap
-	bl SetMainCallback2
-	b _080C82B0
-	.align 2, 0
-_080C8288: .4byte gUnknown_02024D26
-_080C828C: .4byte gUnknown_081C340A
-_080C8290: .4byte gUnknown_0300485C
-_080C8294: .4byte sub_8080E44
-_080C8298: .4byte CB2_LoadMap
-_080C829C:
-	cmp r0, 0x7
-	bne _080C82B0
-	ldr r0, _080C82B4 @ =gUnknown_081C3459
-	bl ScriptContext1_SetupScript
-	bl ScriptContext1_Stop
-	ldr r0, _080C82B8 @ =c2_exit_to_overworld_1_continue_scripts_restart_music
-	bl SetMainCallback2
-_080C82B0:
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080C82B4: .4byte gUnknown_081C3459
-_080C82B8: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
-	thumb_func_end sub_80C824C
 
-	thumb_func_start sub_80C82BC
-sub_80C82BC: @ 80C82BC
-	push {lr}
-	lsls r0, 24
-	lsrs r0, 20
-	ldr r1, _080C82D4 @ =gUnknown_0203880C
-	adds r0, r1
-	movs r1, 0
-	movs r2, 0x10
-	bl memset
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080C82D4: .4byte gUnknown_0203880C
-	thumb_func_end sub_80C82BC
 
-	thumb_func_start sub_80C82D8
-sub_80C82D8: @ 80C82D8
-	push {lr}
-	ldr r0, _080C82E8 @ =gUnknown_0203880C
-	movs r1, 0
-	movs r2, 0xA0
-	bl memset
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080C82E8: .4byte gUnknown_0203880C
-	thumb_func_end sub_80C82D8
 
-	thumb_func_start sub_80C82EC
-sub_80C82EC: @ 80C82EC
-	push {r4-r6,lr}
-	sub sp, 0x4
-	mov r4, sp
-	adds r4, 0x2
-	mov r0, sp
-	adds r1, r4, 0
-	bl GetXYCoordsOneStepInFrontOfPlayer
-	movs r3, 0
-	adds r5, r4, 0
-	ldr r4, _080C8344 @ =gSaveBlock1
-_080C8302:
-	ldr r1, _080C8348 @ =gUnknown_0203880C
-	lsls r0, r3, 4
-	adds r2, r0, r1
-	movs r1, 0x5
-	ldrsb r1, [r4, r1]
-	movs r0, 0x4
-	ldrsb r0, [r2, r0]
-	cmp r1, r0
-	bne _080C8358
-	mov r0, sp
-	movs r6, 0
-	ldrsh r1, [r2, r6]
-	movs r6, 0
-	ldrsh r0, [r0, r6]
-	cmp r1, r0
-	bne _080C8358
-	movs r0, 0x2
-	ldrsh r1, [r2, r0]
-	movs r6, 0
-	ldrsh r0, [r5, r6]
-	cmp r1, r0
-	bne _080C8358
-	ldr r0, _080C834C @ =gScriptResult
-	strh r3, [r0]
-	ldr r1, _080C8350 @ =gUnknown_083F7EB8
-	ldrb r0, [r2, 0x8]
-	lsls r0, 2
-	adds r0, r1
-	ldr r1, [r0]
-	ldr r0, _080C8354 @ =gStringVar1
-	bl StringCopy
-	b _080C836A
-	.align 2, 0
-_080C8344: .4byte gSaveBlock1
-_080C8348: .4byte gUnknown_0203880C
-_080C834C: .4byte gScriptResult
-_080C8350: .4byte gUnknown_083F7EB8
-_080C8354: .4byte gStringVar1
-_080C8358:
-	adds r0, r3, 0x1
-	lsls r0, 16
-	lsrs r3, r0, 16
-	cmp r3, 0x9
-	bls _080C8302
-	ldr r1, _080C8374 @ =gScriptResult
-	ldr r2, _080C8378 @ =0x0000ffff
-	adds r0, r2, 0
-	strh r0, [r1]
-_080C836A:
-	add sp, 0x4
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080C8374: .4byte gScriptResult
-_080C8378: .4byte 0x0000ffff
-	thumb_func_end sub_80C82EC
+@	thumb_func_start sub_80C823C
+@sub_80C823C: @ 80C823C
+@	push {lr}
+@	ldr r0, _080C8248 @ =gUnknown_081C342D
+@	bl ScriptContext1_SetupScript
+@	pop {r0}
+@	bx r0
+@	.align 2, 0
+@_080C8248: .4byte gUnknown_081C342D
+@	thumb_func_end sub_80C823C
+
+
+@	thumb_func_start sub_80C824C
+@sub_80C824C: @ 80C824C
+@	push {lr}
+@	
+@	// if (gUnknown_02038808 == 0) goto _080C8268
+@	ldr r0, _080C8260 @ =gUnknown_02038808
+@	ldrb r0, [r0]
+@	cmp r0, 0
+@	beq _080C8268
+@	
+@	ldr r0, _080C8264 @ =c2_exit_to_overworld_2_switch
+@	bl SetMainCallback2
+@	
+@	// return;
+@	b _080C82B0
+@	
+@	.align 2, 0
+@_080C8260: .4byte gUnknown_02038808
+@_080C8264: .4byte c2_exit_to_overworld_2_switch
+@
+@// gUnknown_02038808 == 0
+@_080C8268:
+@	
+@	// if (gUnknown_02024D26 != 8) goto _080C829C
+@	ldr r0, _080C8288 @ =gUnknown_02024D26
+@	ldrb r0, [r0]
+@	cmp r0, 0x8
+@	bne _080C829C
+@	
+@	
+@	ldr r0, _080C828C @ =gUnknown_081C340A
+@	bl ScriptContext2_RunNewScript
+@	
+@	bl warp_in
+@	
+@	ldr r1, _080C8290 @ =gUnknown_0300485C
+@	ldr r0, _080C8294 @ =sub_8080E44
+@	str r0, [r1]
+@	
+@	ldr r0, _080C8298 @ =CB2_LoadMap
+@	bl SetMainCallback2
+@	
+@	// return;
+@	b _080C82B0
+@	.align 2, 0
+@_080C8288: .4byte gUnknown_02024D26
+@_080C828C: .4byte gUnknown_081C340A
+@_080C8290: .4byte gUnknown_0300485C
+@_080C8294: .4byte sub_8080E44
+@_080C8298: .4byte CB2_LoadMap
+@_080C829C:
+@	// if (gUnknown_02024D26 != 7) return;
+@	cmp r0, 0x7
+@	bne _080C82B0
+@	
+@	ldr r0, _080C82B4 @ =gUnknown_081C3459
+@	bl ScriptContext1_SetupScript
+@	
+@	bl ScriptContext1_Stop
+@	
+@	ldr r0, _080C82B8 @ =c2_exit_to_overworld_1_continue_scripts_restart_music
+@	bl SetMainCallback2
+@	
+@_080C82B0:
+@	pop {r0}
+@	bx r0
+@	.align 2, 0
+@_080C82B4: .4byte gUnknown_081C3459
+@_080C82B8: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
+@	thumb_func_end sub_80C824C
+
+
+
+@	thumb_func_start sub_80C82BC
+@sub_80C82BC: @ 80C82BC
+@	push {lr}
+@	lsls r0, 24
+@	lsrs r0, 20
+@	ldr r1, _080C82D4 @ =gUnknown_0203880C
+@	adds r0, r1
+@	movs r1, 0
+@	movs r2, 0x10
+@	bl memset
+@	pop {r0}
+@	bx r0
+@	.align 2, 0
+@_080C82D4: .4byte gUnknown_0203880C
+@	thumb_func_end sub_80C82BC
+
+
+@	thumb_func_start sub_80C82D8
+@sub_80C82D8: @ 80C82D8
+@	push {lr}
+@	ldr r0, _080C82E8 @ =gUnknown_0203880C
+@	movs r1, 0
+@	movs r2, 0xA0
+@	bl memset
+@	pop {r0}
+@	bx r0
+@	.align 2, 0
+@_080C82E8: .4byte gUnknown_0203880C
+@	thumb_func_end sub_80C82D8
+
+
+@	thumb_func_start sub_80C82EC
+@sub_80C82EC: @ 80C82EC
+@	push {r4-r6,lr}
+@	sub sp, 0x4
+@	mov r4, sp
+@	adds r4, 0x2
+@	
+@	// r0 == &x
+@	mov r0, sp
+@	
+@	// r1 == &y
+@	adds r1, r4, 0
+@	bl GetXYCoordsOneStepInFrontOfPlayer
+@	
+@	// i in r3
+@	movs r3, 0
+@	
+@	// r5 = &y;
+@	adds r5, r4, 0
+@	
+@	ldr r4, _080C8344 @ =gSaveBlock1
+@_080C8302:
+@	
+@	//r2 = &gUnknown_0203880C[i]
+@	ldr r1, _080C8348 @ =gUnknown_0203880C
+@	lsls r0, r3, 4
+@	adds r2, r0, r1
+@	
+@	// r1 = gSaveBlock1.location.mapNum
+@	movs r1, 0x5
+@	ldrsb r1, [r4, r1]
+@	
+@	// r0 = r2->field_2
+@	movs r0, 0x4
+@	ldrsb r0, [r2, r0]
+@	
+@	// if (gSaveBlock1.location.mapNum != r2->mapNum) goto _080C8358
+@	cmp r1, r0
+@	bne _080C8358
+@	
+@	
+@	// r0 = &x
+@	mov r0, sp
+@	
+@	// r1 = r2->x
+@	movs r6, 0
+@	ldrsh r1, [r2, r6]
+@	
+@	// r0 = *((s16 *)(&x))
+@	movs r6, 0
+@	ldrsh r0, [r0, r6]
+@	
+@	// if (*((s16 *)(&x)) == r2->x) goto _080C8358
+@	cmp r1, r0
+@	bne _080C8358
+@	
+@	
+@	
+@	// r1 = r2->y
+@	movs r0, 0x2
+@	ldrsh r1, [r2, r0]
+@	
+@	// r0 = *((s16 *)(&y))
+@	movs r6, 0
+@	ldrsh r0, [r5, r6]
+@	
+@	//if (*((s16 *)(&y)) == r2->y) goto _080C8358
+@	cmp r1, r0
+@	bne _080C8358
+@	
+@	
+@	// gScriptResult = i
+@	ldr r0, _080C834C @ =gScriptResult
+@	strh r3, [r0]
+@	
+@	ldr r1, _080C8350 @ =gUnknown_083F7EB8
+@	
+@	ldrb r0, [r2, 0x8]
+@	lsls r0, 2
+@	adds r0, r1
+@	
+@	// r1 = (u8 *)(gUnknown_083F7EB8
+@	ldr r1, [r0]
+@	
+@	ldr r0, _080C8354 @ =gStringVar1
+@	bl StringCopy
+@	b _080C836A
+@	
+@	.align 2, 0
+@_080C8344: .4byte gSaveBlock1
+@_080C8348: .4byte gUnknown_0203880C
+@_080C834C: .4byte gScriptResult
+@_080C8350: .4byte gUnknown_083F7EB8
+@_080C8354: .4byte gStringVar1
+@_080C8358:
+@	adds r0, r3, 0x1
+@	lsls r0, 16
+@	lsrs r3, r0, 16
+@	
+@	cmp r3, 0x9
+@	bls _080C8302
+@	
+@	
+@	// gScriptResult = -1;
+@	ldr r1, _080C8374 @ =gScriptResult
+@	ldr r2, _080C8378 @ =0x0000ffff
+@	adds r0, r2, 0
+@	strh r0, [r1]
+@
+@_080C836A:
+@	add sp, 0x4
+@	pop {r4-r6}
+@	pop {r0}
+@	bx r0
+@	.align 2, 0
+@_080C8374: .4byte gScriptResult
+@_080C8378: .4byte 0x0000ffff
+@	thumb_func_end sub_80C82EC
+
+
+
 
 	thumb_func_start sub_80C837C
 sub_80C837C: @ 80C837C
@@ -286,6 +378,7 @@ sub_80C837C: @ 80C837C
 	movs r7, 0x5
 	ldrsb r7, [r0, r7]
 	mov r4, sp
+	
 	ldr r0, _080C83EC @ =gUnknown_0203880C
 	mov r12, r0
 _080C839C:
@@ -352,6 +445,8 @@ _080C8406:
 _080C8410: .4byte gScriptResult
 _080C8414: .4byte 0x0000ffff
 	thumb_func_end sub_80C837C
+
+
 
 	thumb_func_start unref_sub_80C8418
 unref_sub_80C8418: @ 80C8418
