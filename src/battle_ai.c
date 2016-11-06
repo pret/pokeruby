@@ -175,13 +175,14 @@ void sub_8107374(void)
             break;
         case 0:
             gUnknown_02039238 = BattleAIs[unk_2016800.unk11];
-            if(gBattleMons[gUnknown_02024C07].pp[unk_2016800.unk1] != 0)
+            if(gBattleMons[gUnknown_02024C07].pp[unk_2016800.unk1] == 0)
             {
-                asm("":::"r1"); //Prevent struct offset optimization
-                unk_2016800.unk2 = gBattleMons[gUnknown_02024C07].moves[unk_2016800.unk1];
+                unk_2016800.unk2 = 0;
             }
             else
-                unk_2016800.unk2 = 0;
+            {
+                unk_2016800.unk2 = gBattleMons[gUnknown_02024C07].moves[unk_2016800.unk1];
+            }
             unk_2016800.unk0++;
             break;
         case 1:
