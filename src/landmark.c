@@ -6,105 +6,67 @@
 struct Landmark
 {
     u8 *name;
-    u16 flag_id;
+    u16 flag;
 };
 
 struct LandmarkList
 {
     u8 mapSection;
-    u8 field_1;
-    u16 field_2;
-    
-    struct Landmark **landmarks;
+    u8 id;
+    const struct Landmark **landmarks;
 };
 
 extern const struct LandmarkList gLandmarkLists[];
 
-static const struct Landmark **GetLandmarks(u8 arg_0, u8 arg_1);
+static const struct Landmark **GetLandmarks(u8 mapSection, u8 id);
 
-u8 *GetLandmarkName(u8 arg_0, u8 arg_1, u8 count)
+u8 *GetLandmarkName(u8 mapSection, u8 id, u8 count)
 {
-    register struct Landmark **landmark_list asm("r4") 
-        = GetLandmarks(arg_0, arg_1);
-    
-    if (landmark_list == NULL)
-    {
+    const struct Landmark **landmarks = GetLandmarks(mapSection, id);
+
+    if (!landmarks)
         return NULL;
-    }
-    
+
     while (1)
     {
-        register struct Landmark *landmark asm("r1") = *landmark_list;
-        
-        u16 temp_flag_id = landmark->flag_id;
-        
-        if (temp_flag_id != 0xFFFF)
-        {
-            bool8 temp_flag = FlagGet(temp_flag_id);
-            
-            if (temp_flag == TRUE)
-            {
-                if (count == 0)
-                {
-                    break;
-                }
-                else
-                {
-                    count--;
-                    goto _0811A8F6;
-                }
-            }
-            else
-            {
-                goto _0811A8F6;
-            }
-        }
-        else
+        const struct Landmark *landmark = *landmarks;
+
+        if (landmark->flag == 0xFFFF || FlagGet(landmark->flag) == TRUE)
         {
             if (count == 0)
-            {
                 break;
-            }
             else
-            {
                 count--;
-                goto _0811A8F6;
-            }
         }
-        
-        continue;
-        
-        _0811A8F6:
-            landmark_list++;
-            
-            if (*landmark_list == NULL)
-            {
-                return NULL;
-            }
+
+        landmarks++;
+        if (!*landmarks)
+            return NULL;
     }
-    
-    return (*landmark_list)->name;
-    
+
+    return (*landmarks)->name;
 }
 
-static const struct Landmark **GetLandmarks(u8 arg_0, u8 arg_1)
+static const struct Landmark **GetLandmarks(u8 mapSection, u8 id)
 {
     u16 i = 0;
-    
+
     for (; gLandmarkLists[i].mapSection != MAPSEC_NONE; i++)
     {
-        if (gLandmarkLists[i].mapSection > arg_0)
+        if (gLandmarkLists[i].mapSection > mapSection)
             return NULL;
-        if (gLandmarkLists[i].mapSection == arg_0)
+        if (gLandmarkLists[i].mapSection == mapSection)
             break;
     }
+
     if (gLandmarkLists[i].mapSection == MAPSEC_NONE)
         return NULL;
-    
-    for (; gLandmarkLists[i].mapSection == arg_0; i++)
+
+    for (; gLandmarkLists[i].mapSection == mapSection; i++)
     {
-        if (gLandmarkLists[i].field_1 == arg_1)
+        if (gLandmarkLists[i].id == id)
             return gLandmarkLists[i].landmarks;
     }
+
     return NULL;
 }
