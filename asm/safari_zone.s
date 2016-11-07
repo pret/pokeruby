@@ -363,216 +363,369 @@
 
 
 
-	thumb_func_start sub_80C837C
-sub_80C837C: @ 80C837C
-	push {r4-r7,lr}
-	sub sp, 0x4
-	mov r4, sp
-	adds r4, 0x2
-	mov r0, sp
-	adds r1, r4, 0
-	bl PlayerGetDestCoords
-	movs r5, 0
-	adds r6, r4, 0
-	ldr r0, _080C83E8 @ =gSaveBlock1
-	movs r7, 0x5
-	ldrsb r7, [r0, r7]
-	mov r4, sp
-	
-	ldr r0, _080C83EC @ =gUnknown_0203880C
-	mov r12, r0
-_080C839C:
-	lsls r0, r5, 4
-	mov r1, r12
-	adds r2, r0, r1
-	movs r0, 0x4
-	ldrsb r0, [r2, r0]
-	cmp r7, r0
-	bne _080C83F4
-	ldrh r0, [r4]
-	ldrh r1, [r2]
-	subs r0, r1
-	strh r0, [r4]
-	adds r3, r6, 0
-	ldrh r0, [r3]
-	ldrh r1, [r2, 0x2]
-	subs r0, r1
-	strh r0, [r3]
-	movs r2, 0
-	ldrsh r0, [r4, r2]
-	cmp r0, 0
-	bge _080C83C8
-	negs r0, r0
-	strh r0, [r4]
-_080C83C8:
-	movs r2, 0
-	ldrsh r0, [r3, r2]
-	cmp r0, 0
-	bge _080C83D4
-	negs r0, r0
-	strh r0, [r3]
-_080C83D4:
-	movs r2, 0
-	ldrsh r0, [r4, r2]
-	movs r2, 0
-	ldrsh r1, [r6, r2]
-	adds r0, r1
-	cmp r0, 0x5
-	bgt _080C83F4
-	ldr r0, _080C83F0 @ =gScriptResult
-	strh r5, [r0]
-	b _080C8406
-	.align 2, 0
-_080C83E8: .4byte gSaveBlock1
-_080C83EC: .4byte gUnknown_0203880C
-_080C83F0: .4byte gScriptResult
-_080C83F4:
-	adds r0, r5, 0x1
-	lsls r0, 16
-	lsrs r5, r0, 16
-	cmp r5, 0x9
-	bls _080C839C
-	ldr r1, _080C8410 @ =gScriptResult
-	ldr r2, _080C8414 @ =0x0000ffff
-	adds r0, r2, 0
-	strh r0, [r1]
-_080C8406:
-	add sp, 0x4
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080C8410: .4byte gScriptResult
-_080C8414: .4byte 0x0000ffff
-	thumb_func_end sub_80C837C
+@	thumb_func_start sub_80C837C
+@sub_80C837C: @ 80C837C
+@	push {r4-r7,lr}
+@	sub sp, 0x4
+@	
+@	mov r4, sp
+@	adds r4, 0x2
+@	mov r0, sp
+@	adds r1, r4, 0
+@	
+@	// PlayerGetDestCoords(&x, &y);
+@	bl PlayerGetDestCoords
+@	
+@	// store i in r5
+@	movs r5, 0
+@	
+@	// store &y in r6
+@	adds r6, r4, 0
+@	
+@	// r7 = gSaveBlock1.location.mapNum
+@	ldr r0, _080C83E8 @ =gSaveBlock1
+@	movs r7, 0x5
+@	ldrsb r7, [r0, r7]
+@	
+@	
+@	// store &x in r4
+@	mov r4, sp
+@	
+@	// store &gUnknown_0203880C[0] in r12
+@	ldr r0, _080C83EC @ =gUnknown_0203880C
+@	mov r12, r0
+@	
+@	
+@_080C839C:
+@	// r2 = &gUnknown_0203880C[i]
+@	lsls r0, r5, 4
+@	mov r1, r12
+@	adds r2, r0, r1
+@	
+@	// r0 = gUnknown_0203880C[i].
+@	movs r0, 0x4
+@	ldrsb r0, [r2, r0]
+@	
+@	// if (gSaveBlock1.location.mapNum != gUnknown_0203880C[i].mapNum)
+@	// then goto _080C83F4
+@	cmp r7, r0
+@	bne _080C83F4
+@	
+@	
+@	// x -= (u16)gUnknown_0203880C[i].x;
+@	ldrh r0, [r4]
+@	ldrh r1, [r2]
+@	subs r0, r1
+@	strh r0, [r4]
+@	
+@	// r3 = &y
+@	adds r3, r6, 0
+@	
+@	// y -= (u16)gUnknown_0203880C[i].y;
+@	ldrh r0, [r3]
+@	ldrh r1, [r2, 0x2]
+@	subs r0, r1
+@	strh r0, [r3]
+@	
+@	
+@	// r0 = x
+@	movs r2, 0
+@	ldrsh r0, [r4, r2]
+@	
+@	// if (x >= 0) goto _080C83C8 (don't flip x's sign)
+@	cmp r0, 0
+@	bge _080C83C8
+@	
+@	// if (x < 0) {x = -x;}
+@	negs r0, r0
+@	strh r0, [r4]
+@_080C83C8:
+@	
+@	// r0 = y
+@	movs r2, 0
+@	ldrsh r0, [r3, r2]
+@	
+@	// if (y >= 0) goto _080C83D4 (don't flip y's sign)
+@	cmp r0, 0
+@	bge _080C83D4
+@	
+@	// if (y < 0) {y = -y;}
+@	negs r0, r0
+@	strh r0, [r3]
+@	
+@_080C83D4:
+@	// r0 = x
+@	movs r2, 0
+@	ldrsh r0, [r4, r2]
+@	
+@	// r1 = y
+@	movs r2, 0
+@	ldrsh r1, [r6, r2]
+@	
+@	// r0 = x + y
+@	adds r0, r1
+@	
+@	// if ((x + y) > 0x5) goto _080C83F4 (continue the loop)
+@	cmp r0, 0x5
+@	bgt _080C83F4
+@	
+@	// if ((x + y) <= 0x5) {gScriptResult = i; return;}
+@	ldr r0, _080C83F0 @ =gScriptResult
+@	strh r5, [r0]
+@	b _080C8406
+@	
+@	.align 2, 0
+@_080C83E8: .4byte gSaveBlock1
+@_080C83EC: .4byte gUnknown_0203880C
+@_080C83F0: .4byte gScriptResult
+@_080C83F4:
+@	// i++
+@	adds r0, r5, 0x1
+@	lsls r0, 16
+@	lsrs r5, r0, 16
+@	
+@	cmp r5, 0x9
+@	bls _080C839C
+@	ldr r1, _080C8410 @ =gScriptResult
+@	ldr r2, _080C8414 @ =0x0000ffff
+@	adds r0, r2, 0
+@	strh r0, [r1]
+@	
+@_080C8406:
+@	add sp, 0x4
+@	pop {r4-r7}
+@	pop {r0}
+@	bx r0
+@	.align 2, 0
+@_080C8410: .4byte gScriptResult
+@_080C8414: .4byte 0x0000ffff
+@	thumb_func_end sub_80C837C
 
 
 
-	thumb_func_start unref_sub_80C8418
-unref_sub_80C8418: @ 80C8418
-	push {lr}
-	bl sub_80C82EC
-	ldr r2, _080C8434 @ =gScriptResult
-	ldrh r1, [r2]
-	ldr r0, _080C8438 @ =0x0000ffff
-	cmp r1, r0
-	beq _080C8440
-	adds r0, r1, 0
-	lsls r0, 4
-	ldr r1, _080C843C @ =gUnknown_02038814
-	adds r0, r1
-	b _080C8442
-	.align 2, 0
-_080C8434: .4byte gScriptResult
-_080C8438: .4byte 0x0000ffff
-_080C843C: .4byte gUnknown_02038814
-_080C8440:
-	movs r0, 0
-_080C8442:
-	pop {r1}
-	bx r1
-	thumb_func_end unref_sub_80C8418
 
-	thumb_func_start sub_80C8448
-sub_80C8448: @ 80C8448
-	push {lr}
-	bl sub_80C837C
-	ldr r2, _080C8464 @ =gScriptResult
-	ldrh r1, [r2]
-	ldr r0, _080C8468 @ =0x0000ffff
-	cmp r1, r0
-	beq _080C8470
-	adds r0, r1, 0
-	lsls r0, 4
-	ldr r1, _080C846C @ =gUnknown_02038814
-	adds r0, r1
-	b _080C8472
-	.align 2, 0
-_080C8464: .4byte gScriptResult
-_080C8468: .4byte 0x0000ffff
-_080C846C: .4byte gUnknown_02038814
-_080C8470:
-	movs r0, 0
-_080C8472:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80C8448
 
-	thumb_func_start sub_80C8478
-sub_80C8478: @ 80C8478
-	push {r4-r7,lr}
-	mov r7, r9
-	mov r6, r8
-	push {r6,r7}
-	sub sp, 0x4
-	lsls r0, 24
-	movs r2, 0
-	ldr r3, _080C84E8 @ =gUnknown_0203880C
-	mov r6, sp
-	adds r6, 0x2
-	ldr r7, _080C84EC @ =gSaveBlock1
-	movs r1, 0x8
-	adds r1, r3
-	mov r9, r1
-	movs r4, 0xFF
-	lsls r4, 3
-	adds r1, r7, r4
-	lsrs r0, 21
-	adds r0, r1
-	mov r8, r0
-_080C84A0:
-	lsls r5, r2, 4
-	adds r4, r5, r3
-	movs r0, 0x4
-	ldrsb r0, [r4, r0]
-	cmp r0, 0
-	bne _080C84F0
-	movs r1, 0
-	ldrsh r0, [r4, r1]
-	cmp r0, 0
-	bne _080C84F0
-	movs r1, 0x2
-	ldrsh r0, [r4, r1]
-	cmp r0, 0
-	bne _080C84F0
-	mov r0, sp
-	adds r1, r6, 0
-	bl GetXYCoordsOneStepInFrontOfPlayer
-	ldrb r0, [r7, 0x5]
-	strb r0, [r4, 0x4]
-	mov r3, r9
-	adds r2, r5, r3
-	mov r3, r8
-	ldr r0, [r3]
-	ldr r1, [r3, 0x4]
-	str r0, [r2]
-	str r1, [r2, 0x4]
-	movs r0, 0x64
-	strb r0, [r4, 0x5]
-	mov r0, sp
-	ldrh r0, [r0]
-	strh r0, [r4]
-	ldrh r0, [r6]
-	strh r0, [r4, 0x2]
-	b _080C84FA
-	.align 2, 0
-_080C84E8: .4byte gUnknown_0203880C
-_080C84EC: .4byte gSaveBlock1
-_080C84F0:
-	adds r0, r2, 0x1
-	lsls r0, 24
-	lsrs r2, r0, 24
-	cmp r2, 0x9
-	bls _080C84A0
-_080C84FA:
-	add sp, 0x4
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80C8478
+@	thumb_func_start unref_sub_80C8418
+@unref_sub_80C8418: @ 80C8418
+@	push {lr}
+@	bl sub_80C82EC
+@	
+@	ldr r2, _080C8434 @ =gScriptResult
+@	ldrh r1, [r2]
+@	ldr r0, _080C8438 @ =0x0000ffff
+@	
+@	// if (gScriptResult == -1) return 0;
+@	cmp r1, r0
+@	beq _080C8440
+@	
+@	// r0 = gScriptResult << 4
+@	adds r0, r1, 0
+@	lsls r0, 4
+@	ldr r1, _080C843C @ =gUnknown_02038814
+@	adds r0, r1
+@	b _080C8442
+@	.align 2, 0
+@_080C8434: .4byte gScriptResult
+@_080C8438: .4byte 0x0000ffff
+@_080C843C: .4byte gUnknown_02038814
+@_080C8440:
+@	movs r0, 0
+@_080C8442:
+@	pop {r1}
+@	bx r1
+@	thumb_func_end unref_sub_80C8418
+
+
+
+@	thumb_func_start sub_80C8448
+@sub_80C8448: @ 80C8448
+@	push {lr}
+@	bl sub_80C837C
+@	ldr r2, _080C8464 @ =gScriptResult
+@	ldrh r1, [r2]
+@	ldr r0, _080C8468 @ =0x0000ffff
+@	cmp r1, r0
+@	beq _080C8470
+@	
+@	adds r0, r1, 0
+@	lsls r0, 4
+@	ldr r1, _080C846C @ =gUnknown_02038814
+@	adds r0, r1
+@	b _080C8472
+@	.align 2, 0
+@_080C8464: .4byte gScriptResult
+@_080C8468: .4byte 0x0000ffff
+@_080C846C: .4byte gUnknown_02038814
+@_080C8470:
+@	movs r0, 0
+@_080C8472:
+@	pop {r1}
+@	bx r1
+@	thumb_func_end sub_80C8448
+
+
+
+@	thumb_func_start sub_80C8478
+@sub_80C8478: @ 80C8478
+@	push {r4-r7,lr}
+@	mov r7, r9
+@	mov r6, r8
+@	push {r6,r7}
+@	
+@	// s16 x, y;
+@	sub sp, 0x4
+@	
+@	
+@	lsls r0, 24
+@	
+@	
+@	// store i in r2
+@	movs r2, 0
+@	
+@	
+@	// r3 = &gUnknown_0203880C[0]
+@	ldr r3, _080C84E8 @ =gUnknown_0203880C
+@	
+@	
+@	// r6 = &y
+@	mov r6, sp
+@	adds r6, 0x2
+@	
+@	// r7 = &gSaveBlock1
+@	ldr r7, _080C84EC @ =gSaveBlock1
+@	
+@	
+@	// r9 = &gUnknown_0203880C[0].some_index_0
+@	movs r1, 0x8
+@	adds r1, r3
+@	mov r9, r1
+@	
+@	// r1 = &gSaveBlock1.pokeblocks[0]
+@	movs r4, 0xFF
+@	lsls r4, 3
+@	adds r1, r7, r4
+@	
+@	// r8 = &gSaveBlock1.pokeblocks[pokeblock_index]
+@	lsrs r0, 21
+@	adds r0, r1
+@	mov r8, r0
+@	
+@_080C84A0:
+@	// r4 = &gUnknown_0203880C[i]
+@	lsls r5, r2, 4
+@	adds r4, r5, r3
+@	
+@	
+@	// if (gUnknown_0203880C[i].mapNum != 0) goto _080C84F0 (skip remainder
+@	// of for loop)
+@	movs r0, 0x4
+@	ldrsb r0, [r4, r0]
+@	cmp r0, 0
+@	bne _080C84F0
+@	
+@	// if (gUnknown_0203880C[i].x != 0) goto _080C84F0 (skip remainder of
+@	// for loop)
+@	movs r1, 0
+@	ldrsh r0, [r4, r1]
+@	cmp r0, 0
+@	bne _080C84F0
+@	
+@	
+@	// if (gUnknown_0203880C[i].y != 0) goto _080C84F0 (skip remainder of
+@	// for loop)
+@	movs r1, 0x2
+@	ldrsh r0, [r4, r1]
+@	cmp r0, 0
+@	bne _080C84F0
+@	
+@	
+@	
+@	// GetXYCoordsOneStepInFrontOfPlayer(&x, &y)
+@	mov r0, sp
+@	adds r1, r6, 0
+@	bl GetXYCoordsOneStepInFrontOfPlayer
+@	
+@	
+@	// Reminder:  
+@	// r7 == &gSaveBlock1
+@	// r4 == &gUnknown_0203880C[i]
+@	
+@	// gUnknown_0203880C[i].mapNum = gSaveBlock1.location.mapNum
+@	ldrb r0, [r7, 0x5]
+@	strb r0, [r4, 0x4]
+@	
+@	
+@	// r3 = &gUnknown_0203880C[0].some_index_0
+@	mov r3, r9
+@	
+@	// r2 = (( &gUnknown_0203880C[0].some_index_0 ) + ( i << 4 ))
+@	// r2 = &gUnknown_0203880C[i].some_index_0
+@	adds r2, r5, r3
+@	
+@	
+@	
+@	// r3 = &gSaveBlock1.pokeblocks[pokeblock_index]
+@	mov r3, r8
+@	
+@	// r0 = *((u32 *)(&gSaveBlock1.pokeblocks[pokeblock_index].color))
+@	// r1 = *((u32 *)(&gSaveBlock1.pokeblocks[pokeblock_index].bitter))
+@	ldr r0, [r3]
+@	ldr r1, [r3, 0x4]
+@	
+@	
+@	
+@	// *((u32 *)(&gUnknown_0203880C[i].some_index_0))
+@	// = *((u32 *)(&gSaveBlock1.pokeblocks[pokeblock_index].color))
+@	str r0, [r2]
+@	
+@	// *((u32 *)((&gUnknown_0203880C[i].some_index_0) + 4)
+@	// = *((u32 *)(&gSaveBlock1.pokeblocks[pokeblock_index].bitter))
+@	str r1, [r2, 0x4]
+@	
+@	
+@	
+@	// gUnknown_0203880C[i].field_3 = 0x64
+@	movs r0, 0x64
+@	strb r0, [r4, 0x5]
+@	
+@	
+@	mov r0, sp
+@	
+@	
+@	// gUnknown_0203880C[i].x = x;
+@	ldrh r0, [r0]
+@	strh r0, [r4]
+@	
+@	// gUnknown_0203880C[i].y = y;
+@	ldrh r0, [r6]
+@	strh r0, [r4, 0x2]
+@	
+@	// return
+@	b _080C84FA
+@	
+@	.align 2, 0
+@_080C84E8: .4byte gUnknown_0203880C
+@_080C84EC: .4byte gSaveBlock1
+@_080C84F0:
+@	// i++
+@	adds r0, r2, 0x1
+@	lsls r0, 24
+@	lsrs r2, r0, 24
+@	
+@	cmp r2, 0x9
+@	bls _080C84A0
+@	
+@_080C84FA:
+@	add sp, 0x4
+@	pop {r3,r4}
+@	mov r8, r3
+@	mov r9, r4
+@	pop {r4-r7}
+@	pop {r0}
+@	bx r0
+@	thumb_func_end sub_80C8478
+
+
 
 	thumb_func_start sub_80C8508
 sub_80C8508: @ 80C8508
