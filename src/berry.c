@@ -310,7 +310,7 @@ u8 CalcBerryYieldInternal(u16 max, u16 min, u8 water)
     u32 rand;
     u32 extraYield;
     
-    if(water == 0)
+    if (water == 0)
         return min;
     else
     {
@@ -318,7 +318,7 @@ u8 CalcBerryYieldInternal(u16 max, u16 min, u8 water)
         randMax = (max - min) * (water);
         rand = randMin + Random() % (randMax - randMin + 1);
         
-        if((rand & 3) > 1)
+        if ((rand & 3) > 1)
             extraYield = rand / 4 + 1;
         else
             extraYield = rand / 4;

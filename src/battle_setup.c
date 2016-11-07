@@ -260,6 +260,7 @@ void task_add_01_battle_start_with_music_and_stats(void)
     sav12_xor_increment(9);
 }
 
+//Initiates battle where Wally catches Ralts
 void sub_8081AFC(void)
 {
     CreateMaleMon(&gEnemyParty[0], SPECIES_RALTS, 5);
@@ -398,10 +399,11 @@ s8 sub_8081D3C(void)
         if (MetatileBehavior_IsBridge(tileBehavior) == TRUE)
             return 4;
     }
-    if (!(gSaveBlock1.location.mapGroup == 0 && gSaveBlock1.location.mapNum == 28) && GetSav1Weather() != 8)
-        return 9;
-    else
+    if (gSaveBlock1.location.mapGroup == 0 && gSaveBlock1.location.mapNum == 28)
         return 2;
+    if (GetSav1Weather() == 8)
+        return 2;
+    return 9;
 }
 
 s8 sub_8081E90(void)
@@ -418,7 +420,7 @@ s8 sub_8081E90(void)
     if (flashUsed)
         return 2;
 
-    if (!(MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior)))
+    if (!MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior))
     {
         switch (gMapHeader.light)
         {
@@ -435,26 +437,21 @@ s8 sub_8081E90(void)
 
 u16 GetSumOfPartyMonLevel(u8 numMons)
 {
-    u32 monData;
     u8 sum = 0;
     int i;
 
     for (i = 0; i < 6; i++)
     {
-        monData = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
-        if (monData != 412 && monData)
+        u32 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
+        
+        if (species != 412 && species != 0 && GetMonData(&gPlayerParty[i], MON_DATA_HP) != 0)
         {
-            if (GetMonData(&gPlayerParty[i], MON_DATA_HP))
-            {
-                sum += GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
-
-                numMons--;
-                if (numMons == 0)
-                    break;
-            }
+            sum += GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
+            numMons--;
+            if (numMons == 0)
+                break;
         }
     }
-
     return sum;
 }
 
@@ -637,14 +634,11 @@ bool32 battle_exit_is_player_defeat(u32 a1)
     case 6:
         return FALSE;
     }
-
     return FALSE;
 }
 
-u8 **sub_80822BC(void)
+void sub_80822BC(void)
 {
-    u32 *pointer;
-
     gTrainerBattleMode = 0;
     gTrainerBattleOpponent = 0;
     gTrainerMapObjectLocalId = 0;
@@ -654,7 +648,6 @@ u8 **sub_80822BC(void)
     gTrainerCannotBattleSpeech = 0;
     gTrainerBattleScriptReturnAddress = 0;
     gTrainerBattleEndScript = 0;
-    return &gTrainerBattleEndScript;
 }
 
 void TrainerBattleLoadArgs(struct TrainerBattleSpec *specs, u8 *data)
@@ -857,22 +850,18 @@ void sub_80826D8(void)
 
 u8 *sub_80826E8(void)
 {
-    u8 *result = gTrainerBattleScriptReturnAddress;
-
-    if (!gTrainerBattleScriptReturnAddress)
+    if (gTrainerBattleScriptReturnAddress)
+        return gTrainerBattleScriptReturnAddress;
+    else
         return gUnknown_081C6C02;
-
-    return result;
 }
 
 u8 *sub_8082700(void)
 {
-    u8 *result = gTrainerBattleEndScript;
-
-    if (!gTrainerBattleEndScript)
+    if (gTrainerBattleEndScript)
+        return gTrainerBattleEndScript;
+    else
         return gUnknown_081C6C02;
-
-    return result;
 }
 
 void sub_8082718()
@@ -930,22 +919,22 @@ void PlayTrainerEncounterMusic(void)
         default:
             music = BGM_AYASII;
         }
-
         PlayNewMapMusic(music);
     }
 }
 
-u8 *ReturnEmptyStringIfNull(u8 *result)
+//Returns an empty string if a null pointer was passed, otherwise returns str
+u8 *SanitizeString(u8 *str)
 {
-    if (result)
-        return result;
+    if (str)
+        return str;
     else
         return gOtherText_CancelWithTerminator;
 }
 
 u8 *sub_808281C(void)
 {
-    return ReturnEmptyStringIfNull(gTrainerIntroSpeech);
+    return SanitizeString(gTrainerIntroSpeech);
 }
 
 u8 *sub_8082830(void)
@@ -957,18 +946,18 @@ u8 *sub_8082830(void)
     else
         str = gTrainerDefeatSpeech;
 
-    StringExpandPlaceholders(gStringVar4, ReturnEmptyStringIfNull(str));
+    StringExpandPlaceholders(gStringVar4, SanitizeString(str));
     return gStringVar4;
 }
 
 u8 *unref_sub_808286C(void)
 {
-    return ReturnEmptyStringIfNull(gTrainerVictorySpeech);
+    return SanitizeString(gTrainerVictorySpeech);
 }
 
 u8 *sub_8082880(void)
 {
-    return ReturnEmptyStringIfNull(gTrainerCannotBattleSpeech);
+    return SanitizeString(gTrainerCannotBattleSpeech);
 }
 
 s32 sub_8082894(struct TrainerEyeTrainer *trainers, u16 trainerNum)
@@ -980,67 +969,60 @@ s32 sub_8082894(struct TrainerEyeTrainer *trainers, u16 trainerNum)
         if (trainers[i].trainerNums[0] == trainerNum)
             return i;
     }
-
     return -1;
 }
 
 s32 sub_80828B8(struct TrainerEyeTrainer *trainers, u16 trainerNum)
 {
-   s32 i;
+    s32 i;
+    s32 j;
 
-   for (i = 0; i < NUM_TRAINER_EYE_TRAINERS; i++)
-   {
-       s32 j;
-
-       for (j = 0; j < 5 && trainers[i].trainerNums[j] != 0; j++)
-       {
-           if (trainers[i].trainerNums[j] == trainerNum)
-               return i;
-       }
-   }
-   return -1;
+    for (i = 0; i < NUM_TRAINER_EYE_TRAINERS; i++)
+    {
+        for (j = 0; j < 5 && trainers[i].trainerNums[j] != 0; j++)
+        {
+            if (trainers[i].trainerNums[j] == trainerNum)
+                return i;
+        }
+    }
+    return -1;
 }
 
 bool32 sub_80828FC(struct TrainerEyeTrainer *trainers, u16 mapGroup, u16 mapNum)
 {
-   int i;
-   bool32 ret = FALSE;
+    int i;
+    bool32 ret = FALSE;
 
-   for (i = 0; i < NUM_TRAINER_EYE_TRAINERS; i++)
-   {
-       if (trainers[i].mapGroup == mapGroup && trainers[i].mapNum == mapNum)
-       {
-           if (gSaveBlock1.trainerRematches[i] != 0)
-           {
-               ret = TRUE;
-               continue;
-           }
-           if (trainer_flag_check(trainers[i].trainerNums[0]) == TRUE && (Random() % 100) <= 30)
-           {
-               int j = 1;
+    for (i = 0; i < NUM_TRAINER_EYE_TRAINERS; i++)
+    {
+        if (trainers[i].mapGroup == mapGroup && trainers[i].mapNum == mapNum)
+        {
+            if (gSaveBlock1.trainerRematches[i] != 0)
+                ret = TRUE;
+            else if (trainer_flag_check(trainers[i].trainerNums[0]) == TRUE && (Random() % 100) <= 30)
+            {
+                int j = 1;
 
-               while (j < 5 && trainers[i].trainerNums[j] != 0 && trainer_flag_check(trainers[i].trainerNums[j]))
-                   j++;
-               gSaveBlock1.trainerRematches[i] = j;
-
-               ret = TRUE;
-           }
-       }
-   }
-
+                while (j < 5 && trainers[i].trainerNums[j] != 0 && trainer_flag_check(trainers[i].trainerNums[j]))
+                    j++;
+                gSaveBlock1.trainerRematches[i] = j;
+                ret = TRUE;
+            }
+        }
+    }
    return ret;
 }
 
 s32 sub_80829A8(struct TrainerEyeTrainer *trainers, u16 mapGroup, u16 mapNum)
 {
-   s32 i;
+    s32 i;
 
-   for (i = 0; i < NUM_TRAINER_EYE_TRAINERS; i++)
-   {
-       if (trainers[i].mapGroup == mapGroup && trainers[i].mapNum == mapNum && gSaveBlock1.trainerRematches[i])
-           return 1;
-   }
-   return 0;
+    for (i = 0; i < NUM_TRAINER_EYE_TRAINERS; i++)
+    {
+        if (trainers[i].mapGroup == mapGroup && trainers[i].mapNum == mapNum && gSaveBlock1.trainerRematches[i])
+            return 1;
+    }
+    return 0;
 }
 
 s32 sub_80829E8(struct TrainerEyeTrainer *trainers, u16 mapGroup, u16 mapNum)
@@ -1083,9 +1065,7 @@ u16 sub_8082A90(struct TrainerEyeTrainer *trainers, u16 trainerNum)
 
     if (trainerEyeIndex == -1)
         return 0;
-
     trainer = &trainers[trainerEyeIndex];
-
     for (i = 1; i < 5; i++)
     {
         if (!trainer->trainerNums[i])
@@ -1093,7 +1073,6 @@ u16 sub_8082A90(struct TrainerEyeTrainer *trainers, u16 trainerNum)
         if (!trainer_flag_check(trainer->trainerNums[i]))
             return trainer->trainerNums[i];
     }
-
     return trainer->trainerNums[4];
 }
 
@@ -1129,7 +1108,6 @@ bool32 sub_8082B44(void)
                 return TRUE;
         }
     }
-
     return FALSE;
 }
 
