@@ -112,7 +112,7 @@ extern void CreatePokemartMenu(void *);
 extern void CreateDecorationShop1Menu(void *);
 extern void CreateDecorationShop2Menu(void *);
 extern void PlaySlotMachine(u8, void *);
-extern void PlantBerryTree(u8, u8, u8, u8);
+extern void PlantBerryTree(u8, u8, u8, bool8);
 extern bool8 GetPriceReduction(u8);
 extern void sub_80F99CC(void);
 extern void sub_80C48C8(void);
@@ -1756,9 +1756,9 @@ bool8 ScrCmd_event_8a(struct ScriptContext *ctx)
     u8 v3 = ScriptReadByte(ctx);
     u8 v4 = ScriptReadByte(ctx);
     if (!v3)
-        PlantBerryTree(v2, 0, v4, 0);
+        PlantBerryTree(v2, 0, v4, FALSE);
     else
-        PlantBerryTree(v2, v3, v4, 0);
+        PlantBerryTree(v2, v3, v4, FALSE);
     return FALSE;
 }
 

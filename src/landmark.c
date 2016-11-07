@@ -1,4 +1,7 @@
 #include "global.h"
+#include "flag.h"
+
+#define MAPSEC_NONE 0x58
 
 struct Landmark
 {
@@ -8,21 +11,21 @@ struct Landmark
 
 struct LandmarkList
 {
-    u8 field_0;
+    u8 mapSection;
     u8 field_1;
     u16 field_2;
     
-    struct Landmark **landmark_list;
+    struct Landmark **landmarks;
 };
 
 extern const struct LandmarkList gLandmarkLists[];
 
-const struct Landmark **GetLandmarkList(u8 arg_0, u8 arg_1);
+static const struct Landmark **GetLandmarks(u8 arg_0, u8 arg_1);
 
 u8 *GetLandmarkName(u8 arg_0, u8 arg_1, u8 count)
 {
     register struct Landmark **landmark_list asm("r4") 
-        = GetLandmarkList(arg_0, arg_1);
+        = GetLandmarks(arg_0, arg_1);
     
     if (landmark_list == NULL)
     {
@@ -84,44 +87,24 @@ u8 *GetLandmarkName(u8 arg_0, u8 arg_1, u8 count)
     
 }
 
-
-const struct Landmark **GetLandmarkList(u8 arg_0, u8 arg_1)
+static const struct Landmark **GetLandmarks(u8 arg_0, u8 arg_1)
 {
-    u16 i;
+    u16 i = 0;
     
-    i = 0;
-    
-    if (gLandmarkLists[0].field_0 == 0x58)
+    for (; gLandmarkLists[i].mapSection != MAPSEC_NONE; i++)
     {
-        return NULL;
-    }
-    
-    
-    for (; gLandmarkLists[i].field_0 != 0x58; i++)
-    {
-        if (gLandmarkLists[i].field_0 > arg_0)
-        {
+        if (gLandmarkLists[i].mapSection > arg_0)
             return NULL;
-        }
-        if (gLandmarkLists[i].field_0 == arg_0)
-        {
+        if (gLandmarkLists[i].mapSection == arg_0)
             break;
-        }
     }
-    
-    if (gLandmarkLists[i].field_0 == 0x58)
-    {
+    if (gLandmarkLists[i].mapSection == MAPSEC_NONE)
         return NULL;
-    }
     
-    for (; gLandmarkLists[i].field_0 == arg_0; i++)
+    for (; gLandmarkLists[i].mapSection == arg_0; i++)
     {
         if (gLandmarkLists[i].field_1 == arg_1)
-        {
-            return gLandmarkLists[i].landmark_list;
-        }
+            return gLandmarkLists[i].landmarks;
     }
-    
-    return 0;
+    return NULL;
 }
-
