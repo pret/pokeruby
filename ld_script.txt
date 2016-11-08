@@ -92,6 +92,7 @@ SECTIONS {
         src/task.o(.text);
         asm/rom5.o(.text);
         asm/title_screen.o(.text);
+        src/weather.o(.text);
         asm/weather.o(.text);
         asm/rom_8080874.o(.text);
         asm/battle_setup.o(.text);
