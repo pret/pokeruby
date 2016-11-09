@@ -914,11 +914,8 @@ gUnknown_02038808: @ 2038808
 gUnknown_0203880A: @ 203880A
 	.space 0x2
 
-gUnknown_0203880C: @ 203880C
-	.space 0x8
-
-gUnknown_02038814: @ 2038814
-	.space 0x98
+gUnkSafariZoneStructArr: @ 203880C
+	.space 0xa0
 
 gUnknown_020388AC: @ 20388AC
 	.space 0x4
