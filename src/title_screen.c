@@ -44,11 +44,20 @@ void CB2_GoToResetRtcScreen(void);
 void CB2_GoToCopyrightScreen(void);
 void sub_807C7E4(u8);
 
+#define _RGB(r, g, b) ((((b) & 31) << 10) + (((g) & 31) << 5) + ((r) & 31))
+
 #ifdef SAPPHIRE
-#define SHIFT_AMT 0
+//Red Kyogre markings
+#define MARKING_COLOR(c) RGB((c), 0, 0)
+#else
+//Blue Groundon markings
+#define MARKING_COLOR(c) RGB(0, 0, (c))
+#endif
+
+
+#ifdef SAPPHIRE
 #define PLTT_BUFFER_INDEX 26
 #else
-#define SHIFT_AMT 10
 #define PLTT_BUFFER_INDEX 21
 #endif
 
@@ -152,9 +161,9 @@ void sub_807BFE0(struct Sprite *sprite)
         {
             if (sprite->pos1.x <= 119)
             {
-                if (sprite->data1 <= 0x1E)
+                if (sprite->data1 < 31)
                     sprite->data1++;
-                if (sprite->data1 <= 0x1E)
+                if (sprite->data1 < 31)
                     sprite->data1++;
             }
             else
@@ -164,7 +173,7 @@ void sub_807BFE0(struct Sprite *sprite)
                 if (sprite->data1 != 0)
                     sprite->data1--;
             }
-            color = ((sprite->data1 & 0x1F) << 10) + ((sprite->data1 & 0x1F) << 5) | (sprite->data1 & 0x1F);
+            color = _RGB(sprite->data1, sprite->data1, sprite->data1);
             gPlttBufferFaded[0] = color;
             gPlttBufferFaded[PLTT_BUFFER_INDEX] = color;
         }
@@ -440,19 +449,23 @@ void CB2_GoToResetRtcScreen(void)
         SetMainCallback2(CB2_InitResetRtcScreen);
 }
 
-//Loads color of Kyogre or Groudon's body markings
+//bits 0-1: disable update if nonzero
+//bits 2-6: intensity
+//bit 7: fade direction
 void sub_807C7E4(u8 a)
 {
     u16 palette;
+
     
     if ((a & 3) == 0)
     {
-        u8 color = (a >> 2) & 0x1F;
+        u8 intensity = (a >> 2) & 0x1F;
 
         if (((a >> 2) & 0x20) == 0)
-            palette = color << SHIFT_AMT;
+            palette = MARKING_COLOR(intensity);
         else
-            palette = (0x1F - color) << SHIFT_AMT;
-        LoadPalette(&palette, 0xEF, 2);
-    }
+            palette = MARKING_COLOR(31 - intensity);
+        LoadPalette(&palette, 0xEF, sizeof(palette));
+   }
 }
+
