@@ -530,7 +530,7 @@ static void AddSpritesToOamBuffer(void)
     }
 }
 
-u8 CreateSprite(struct SpriteTemplate *template, u16 x, u16 y, u8 subpriority)
+u8 CreateSprite(struct SpriteTemplate *template, s16 x, s16 y, u8 subpriority)
 {
     u8 i;
 

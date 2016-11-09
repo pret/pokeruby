@@ -193,7 +193,7 @@ extern struct Sprite gSprites[];
 void ResetSpriteData(void);
 void AnimateSprites(void);
 void BuildOamBuffer(void);
-u8 CreateSprite(struct SpriteTemplate *template, u16 x, u16 y, u8 subpriority);
+u8 CreateSprite(struct SpriteTemplate *template, s16 x, s16 y, u8 subpriority);
 u8 CreateSpriteAtEnd(struct SpriteTemplate *template, u16 x, u16 y, u8 subpriority);
 u8 CreateInvisibleSprite(void (*callback)(struct Sprite *));
 u8 CreateSpriteAndAnimate(struct SpriteTemplate *template, s16 x, s16 y, u8 subpriority);
