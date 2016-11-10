@@ -10355,11 +10355,11 @@ gSpriteAnimTable_8393EC8:: @ 8393EC8
 
 	.align 2
 gSpriteTemplate_8393ECC:: @ 8393ECC
-	spr_template 1000, 1000, gOamData_8393EA4, gSpriteAnimTable_8393EC4, NULL, gDummySpriteAffineAnimTable, item_menu_type_2
+	spr_template 1000, 1000, gOamData_8393EA4, gSpriteAnimTable_8393EC4, NULL, gDummySpriteAffineAnimTable, SpriteCallback_VersionBannerLeft
 
 	.align 2
 gSpriteTemplate_8393EE4:: @ 8393EE4
-	spr_template 1000, 1000, gOamData_8393EAC, gSpriteAnimTable_8393EC8, NULL, gDummySpriteAffineAnimTable, sub_807BE90
+	spr_template 1000, 1000, gOamData_8393EAC, gSpriteAnimTable_8393EC8, NULL, gDummySpriteAffineAnimTable, SpriteCallback_VersionBannerRight
 
 	.align 2
 gUnknown_08393EFC:: @ 8393EFC
@@ -10425,7 +10425,7 @@ gSpriteAnimTable_8393F54:: @ 8393F54
 
 	.align 2
 gSpriteTemplate_8393F74:: @ 8393F74
-	spr_template 1001, 1001, gOamData_8393F0C, gSpriteAnimTable_8393F54, NULL, gDummySpriteAffineAnimTable, sub_807BEF0
+	spr_template 1001, 1001, gOamData_8393F0C, gSpriteAnimTable_8393F54, NULL, gDummySpriteAffineAnimTable, SpriteCallback_PressStartCopyrightBanner
 
 	.align 2
 gUnknown_08393F8C:: @ 8393F8C
@@ -10454,7 +10454,7 @@ gSpriteAnimTable_8393FBC:: @ 8393FBC
 
 	.align 2
 gSpriteTemplate_8393FC0:: @ 8393FC0
-	spr_template 1002, 1001, gOamData_8393FAC, gSpriteAnimTable_8393FBC, NULL, gDummySpriteAffineAnimTable, sub_807BFE0
+	spr_template 1002, 1001, gOamData_8393FAC, gSpriteAnimTable_8393FBC, NULL, gDummySpriteAffineAnimTable, SpriteCallback_PokemonLogoShine
 
 	.align 2
 gUnknown_08393FD8:: @ 8393FD8
