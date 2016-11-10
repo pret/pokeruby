@@ -123,11 +123,11 @@ extern bool8 FieldEffectActiveListContains(u8);
 extern void sub_8053588(u8);
 extern void MapGridSetMetatileIdAt(u32, u32, u16);
 extern u16 sub_8058790(u32, u32);
-extern bool8 task_overworld_door_add_if_role_69_for_opening_door_at(u32, u32);
-extern bool8 sub_805870C(u32, u32);
-extern bool8 sub_805877C(void);
-extern void sub_80586B4(u32, u32);
-extern void sub_80586E0(u32, u32);
+extern bool8 FieldAnimateDoorOpen(u32, u32);
+extern bool8 FieldAnimateDoorClose(u32, u32);
+extern bool8 FieldIsDoorAnimationRunning(void);
+extern void FieldSetDoorOpened(u32, u32);
+extern void FieldSetDoorClosed(u32, u32);
 extern void ScriptAddElevatorMenuItem(u8, u8, u8, u8);
 extern void ScriptShowElevatorMenu(void);
 extern u16 GetCoins(void);
@@ -1871,28 +1871,28 @@ bool8 ScrCmd_setmaptile(struct ScriptContext *ctx)
 
 bool8 ScrCmd_setdooropened(struct ScriptContext *ctx)
 {
-    u16 v3 = VarGet(ScriptReadHalfword(ctx));
-    u16 v4 = VarGet(ScriptReadHalfword(ctx));
-    v3 += 7;
-    v4 += 7;
-    PlaySE(sub_8058790(v3, v4));
-    task_overworld_door_add_if_role_69_for_opening_door_at(v3, v4);
+    u16 x = VarGet(ScriptReadHalfword(ctx));
+    u16 y = VarGet(ScriptReadHalfword(ctx));
+    x += 7;
+    y += 7;
+    PlaySE(sub_8058790(x, y));
+    FieldAnimateDoorOpen(x, y);
     return FALSE;
 }
 
 bool8 ScrCmd_setdoorclosed(struct ScriptContext *ctx)
 {
-    u16 v3 = VarGet(ScriptReadHalfword(ctx));
-    u16 v5 = VarGet(ScriptReadHalfword(ctx));
-    v3 += 7;
-    v5 += 7;
-    sub_805870C(v3, v5);
+    u16 x = VarGet(ScriptReadHalfword(ctx));
+    u16 y = VarGet(ScriptReadHalfword(ctx));
+    x += 7;
+    y += 7;
+    FieldAnimateDoorClose(x, y);
     return FALSE;
 }
 
-bool8 sub_8067D2C()
+bool8 IsDoorAnimationStopped()
 {
-    if (!sub_805877C())
+    if (!FieldIsDoorAnimationRunning())
         return TRUE;
     else
         return FALSE;
@@ -1900,27 +1900,27 @@ bool8 sub_8067D2C()
 
 bool8 ScrCmd_doorchange(struct ScriptContext *ctx)
 {
-    SetupNativeScript(ctx, sub_8067D2C);
+    SetupNativeScript(ctx, IsDoorAnimationStopped);
     return TRUE;
 }
 
 bool8 ScrCmd_setdooropened2(struct ScriptContext *ctx)
 {
-    u16 v3 = VarGet(ScriptReadHalfword(ctx));
-    u16 v5 = VarGet(ScriptReadHalfword(ctx));
-    v3 += 7;
-    v5 += 7;
-    sub_80586B4(v3, v5);
+    u16 x = VarGet(ScriptReadHalfword(ctx));
+    u16 y = VarGet(ScriptReadHalfword(ctx));
+    x += 7;
+    y += 7;
+    FieldSetDoorOpened(x, y);
     return FALSE;
 }
 
 bool8 ScrCmd_setdoorclosed2(struct ScriptContext *ctx)
 {
-    u16 v3 = VarGet(ScriptReadHalfword(ctx));
-    u16 v5 = VarGet(ScriptReadHalfword(ctx));
-    v3 += 7;
-    v5 += 7;
-    sub_80586E0(v3, v5);
+    u16 x = VarGet(ScriptReadHalfword(ctx));
+    u16 y = VarGet(ScriptReadHalfword(ctx));
+    x += 7;
+    y += 7;
+    FieldSetDoorClosed(x, y);
     return FALSE;
 }
 

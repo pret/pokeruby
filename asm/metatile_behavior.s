@@ -212,8 +212,8 @@ _08056EA8:
 	bx r1
 	thumb_func_end is_tile_x69_2_warp_door
 
-	thumb_func_start sub_8056EAC
-sub_8056EAC: @ 8056EAC
+	thumb_func_start MetatileBehavior_IsDoor
+MetatileBehavior_IsDoor: @ 8056EAC
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -229,7 +229,7 @@ _08056EBE:
 _08056EC0:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8056EAC
+	thumb_func_end MetatileBehavior_IsDoor
 
 	thumb_func_start MetatileBehavior_IsEscalator
 MetatileBehavior_IsEscalator: @ 8056EC4

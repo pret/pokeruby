@@ -1,27 +1,32 @@
 #include "global.h"
 #include "task.h"
 
-extern u8 sub_8056EAC(u8);
+extern u8 MetatileBehavior_IsDoor(u8);
 
-struct UnknownStruct
+struct DoorGraphics
 {
-    u16 unk0;
+    u16 metatileNum;
     u8 unk2;
-    u8 filler3;
-    u32 unk4;
-    u8 filler8[4];
+    void *tiles;
+    void *palette;
 };
 
-extern u8 gUnknown_0830F87C[];
-extern u8 gUnknown_0830F890[];
-extern struct UnknownStruct gDoorAnimGraphicsTable[];
+struct DoorAnimFrame
+{
+    u8 time;
+    u16 offset;
+};
 
-void sub_8058378(void *src)
+extern struct DoorAnimFrame gDoorOpenAnimFrames[];
+extern struct DoorAnimFrame gDoorCloseAnimFrames[];
+extern struct DoorGraphics gDoorAnimGraphicsTable[];
+
+static void CopyDoorTilesToVram(void *src)
 {
     CpuFastSet(src, (void *)(VRAM + 0x7F00), 0x40);
 }
 
-void door_build_blockdef(u16 *a, u16 b, u8 *c)
+static void door_build_blockdef(u16 *a, u16 b, u8 *c)
 {
     int i;
     u16 unk;
@@ -38,181 +43,192 @@ void door_build_blockdef(u16 *a, u16 b, u8 *c)
     }
 }
 
-void sub_80583CC(u32 a, u32 b, u8 *c)
+static void DrawCurrentDoorFrame(u32 x, u32 y, u8 *palette)
 {
     u16 arr[8];
     
-    door_build_blockdef(arr, 0x3F8, c);
-    DrawDoorMetatileAt(a, b - 1, arr);
-    door_build_blockdef(arr, 0x3FC, c + 4);
-    DrawDoorMetatileAt(a, b, arr);
+    door_build_blockdef(arr, 0x3F8, palette);
+    DrawDoorMetatileAt(x, y - 1, arr);
+    door_build_blockdef(arr, 0x3FC, palette + 4);
+    DrawDoorMetatileAt(x, y, arr);
 }
 
-void sub_805840C(u32 a, u32 b)
+static void DrawClosedDoor(u32 x, u32 y)
 {
-    CurrentMapDrawMetatileAt(a, b - 1);
-    CurrentMapDrawMetatileAt(a, b);
+    CurrentMapDrawMetatileAt(x, y - 1);
+    CurrentMapDrawMetatileAt(x, y);
 }
 
-void sub_8058428(u32 *a, u16 *b, u32 c, u32 d)
+static void DrawDoor(struct DoorGraphics *gfx, struct DoorAnimFrame *frame, u32 x, u32 y)
 {
-    if(b[1] == 0xFFFF)
-        sub_805840C(c, d);
+    if(frame->offset == 0xFFFF)
+        DrawClosedDoor(x, y);
     else
     {
-        sub_8058378(a[1] + b[1]);
-        sub_80583CC(c, d, a[2]);
+        CopyDoorTilesToVram(gfx->tiles + frame->offset);
+        DrawCurrentDoorFrame(x, y, gfx->palette);
     }
 }
 
-bool32 sub_8058464(u32 *a, u8 *b, s16 *c)
+enum
 {
-    if(c[5] == 0)
+    TD_FRAMELIST = 0,
+    TD_GFX = 2,
+    TD_FRAME = 4,
+    TD_COUNTER,
+    TD_X,
+    TD_Y
+};
+
+static bool32 sub_8058464(struct DoorGraphics *gfx, struct DoorAnimFrame *frames, s16 *taskData)
+{
+    if(taskData[TD_COUNTER] == 0)
     {
-        sub_8058428(a, &b[c[4] * 4], c[6], c[7]);
+        DrawDoor(gfx, &frames[taskData[TD_FRAME]], taskData[TD_X], taskData[TD_Y]);
     }
-    if(c[5] == b[c[4] * 4])
+    if(taskData[TD_COUNTER] == frames[taskData[TD_FRAME]].time)
     {
-        c[5] = 0;
-        c[4]++;
-        if(b[c[4] * 4] == 0)
+        taskData[TD_COUNTER] = 0;
+        taskData[TD_FRAME]++;
+        if(frames[taskData[TD_FRAME]].time == 0)
             return FALSE;
         else
             return TRUE;
     }
-    c[5]++;
+    taskData[TD_COUNTER]++;
     return TRUE;
 }
 
-void task50_overworld_door(u8 taskId)
+static void Task_AnimateDoor(u8 taskId)
 {
     u16 *taskData = gTasks[taskId].data;
-    u32 unk1 = taskData[0] << 16 | taskData[1];
-    u32 unk2 = taskData[2] << 16 | taskData[3];
+    struct DoorAnimFrame *frames = (struct DoorAnimFrame *)(taskData[TD_FRAMELIST] << 16 | taskData[TD_FRAMELIST + 1]);
+    struct DoorGraphics *gfx = (struct DoorGraphics *)(taskData[TD_GFX] << 16 | taskData[TD_GFX + 1]);
     
-    if(sub_8058464(unk2, unk1, taskData) == FALSE)
+    if(sub_8058464(gfx, frames, taskData) == FALSE)
         DestroyTask(taskId);
 }
 
-u8 *door_frame_last(u8 *a, u8 *unused)
+static struct DoorAnimFrame *door_frame_last(struct DoorAnimFrame *frame, void *unused)
 {
-    while(*a != 0)
-        a += 4;
-    return a - 4;
+    while(frame->time != 0)
+        frame++;
+    return frame - 1;
 }
 
-struct UnknownStruct *door_find(struct UnknownStruct *a, u16 b)
+static struct DoorGraphics *GetDoorGraphics(struct DoorGraphics *gfx, u16 metatileNum)
 {
-    while(a->unk4 != 0)
+    while(gfx->tiles != NULL)
     {
-        if(a->unk0 == b)
-            return a;
-        a++;
+        if(gfx->metatileNum == metatileNum)
+            return gfx;
+        gfx++;
     }
     return NULL;
 }
 
-s8 task_overworld_door_add_if_inactive(u32 a, u32 b, u32 c, u32 d)
+static s8 StartDoorAnimationTask(struct DoorGraphics *gfx, struct DoorAnimFrame *frames, u32 x, u32 y)
 {
-    if(FuncIsActiveTask(task50_overworld_door) == TRUE)
+    if(FuncIsActiveTask(Task_AnimateDoor) == TRUE)
         return -1;
     else
     {
-        u8 taskId = CreateTask(task50_overworld_door, 0x50);
+        u8 taskId = CreateTask(Task_AnimateDoor, 0x50);
         s16 *taskData = gTasks[taskId].data;
         
-        taskData[6] = c;
-        taskData[7] = d;
-        taskData[1] = b;
-        taskData[0] = b >> 16;
-        taskData[3] = a;
-        taskData[2] = a >> 16;
+        taskData[TD_X] = x;
+        taskData[TD_Y] = y;
+        
+        taskData[TD_FRAMELIST + 1] = (u32)frames;
+        taskData[TD_FRAMELIST] = (u32)frames >> 16;
+        
+        taskData[TD_GFX + 1] = (u32)gfx;
+        taskData[TD_GFX] = (u32)gfx >> 16;
+        
         return taskId;
     }
 }
 
-void sub_805859C(u32 unused, u32 b, u32 c)
+static void sub_805859C(void *unused, u32 x, u32 y)
 {
-    sub_805840C(b, c);
+    DrawClosedDoor(x, y);
 }
 
-void sub_80585AC(struct UnknownStruct *a, u32 b, u32 c)
+static void sub_80585AC(struct DoorGraphics *gfx, u32 x, u32 y)
 {
-    a = door_find(a, MapGridGetMetatileIdAt(b, c));
-    if(a != NULL)
-    {
-        sub_8058428(a, door_frame_last(gUnknown_0830F87C, gUnknown_0830F87C), b, c);
-    }
+    gfx = GetDoorGraphics(gfx, MapGridGetMetatileIdAt(x, y));
+    if(gfx != NULL)
+        DrawDoor(gfx, door_frame_last(gDoorOpenAnimFrames, gDoorOpenAnimFrames), x, y);
 }
 
-s8 sub_80585EC(struct UnknownStruct *a, u32 b, u32 c)
+static s8 StartDoorOpenAnimation(struct DoorGraphics *gfx, u32 x, u32 y)
 {
-    a = door_find(a, MapGridGetMetatileIdAt(b, c));
-    if(a == NULL)
+    gfx = GetDoorGraphics(gfx, MapGridGetMetatileIdAt(x, y));
+    if(gfx == NULL)
         return -1;
     else
-        return task_overworld_door_add_if_inactive(a, gUnknown_0830F87C, b, c);
+        return StartDoorAnimationTask(gfx, gDoorOpenAnimFrames, x, y);
 }
 
-s8 sub_805862C(struct UnknownStruct *a, u32 b, u32 c)
+static s8 StartDoorCloseAnimation(struct DoorGraphics *gfx, u32 x, u32 y)
 {
-    a = door_find(a, MapGridGetMetatileIdAt(b, c));
-    if(a == NULL)
+    gfx = GetDoorGraphics(gfx, MapGridGetMetatileIdAt(x, y));
+    if(gfx == NULL)
         return -1;
     else
-        return task_overworld_door_add_if_inactive(a, gUnknown_0830F890, b, c);
+        return StartDoorAnimationTask(gfx, gDoorCloseAnimFrames, x, y);
 }
 
-s8 cur_mapdata_get_door_x2_at(struct UnknownStruct *a, u32 b, u32 c)
+static s8 cur_mapdata_get_door_x2_at(struct DoorGraphics *gfx, u32 x, u32 y)
 {
-    a = door_find(a, MapGridGetMetatileIdAt(b, c));
-    if(a == NULL)
+    gfx = GetDoorGraphics(gfx, MapGridGetMetatileIdAt(x, y));
+    if(gfx == NULL)
         return -1;
     else
-        return a->unk2;
+        return gfx->unk2;
 }
 
-void unref_sub_805869C(u32 a, u32 b)
+static void unref_sub_805869C(u32 x, u32 y)
 {
-    sub_80585EC(gDoorAnimGraphicsTable, a, b);
+    StartDoorOpenAnimation(gDoorAnimGraphicsTable, x, y);
 }
 
-void sub_80586B4(u32 a, u32 b)
+void FieldSetDoorOpened(u32 x, u32 y)
 {
-    if(sub_8056EAC(MapGridGetMetatileBehaviorAt(a, b)) != 0)
-        sub_80585AC(gDoorAnimGraphicsTable, a, b);
+    if(MetatileBehavior_IsDoor(MapGridGetMetatileBehaviorAt(x, y)))
+        sub_80585AC(gDoorAnimGraphicsTable, x, y);
 }
 
-void sub_80586E0(u32 a, u32 b)
+void FieldSetDoorClosed(u32 x, u32 y)
 {
-    if(sub_8056EAC(MapGridGetMetatileBehaviorAt(a, b)) != 0)
-        sub_805859C(gDoorAnimGraphicsTable, a, b);
+    if(MetatileBehavior_IsDoor(MapGridGetMetatileBehaviorAt(x, y)))
+        sub_805859C(gDoorAnimGraphicsTable, x, y);
 }
 
-s8 sub_805870C(u32 a, u32 b)
+s8 FieldAnimateDoorClose(u32 x, u32 y)
 {
-    if(sub_8056EAC(MapGridGetMetatileBehaviorAt(a, b)) == 0)
+    if(!MetatileBehavior_IsDoor(MapGridGetMetatileBehaviorAt(x, y)))
         return -1;
     else
-        return sub_805862C(gDoorAnimGraphicsTable, a, b);
+        return StartDoorCloseAnimation(gDoorAnimGraphicsTable, x, y);
 }
 
-s8 task_overworld_door_add_if_role_69_for_opening_door_at(u32 a, u32 b)
+s8 FieldAnimateDoorOpen(u32 x, u32 y)
 {
-    if(sub_8056EAC(MapGridGetMetatileBehaviorAt(a, b)) == 0)
+    if(!MetatileBehavior_IsDoor(MapGridGetMetatileBehaviorAt(x, y)))
         return -1;
     else
-        return sub_80585EC(gDoorAnimGraphicsTable, a, b);
+        return StartDoorOpenAnimation(gDoorAnimGraphicsTable, x, y);
 }
 
-bool8 sub_805877C(void)
+bool8 FieldIsDoorAnimationRunning(void)
 {
-    return FuncIsActiveTask(task50_overworld_door);
+    return FuncIsActiveTask(Task_AnimateDoor);
 }
 
-u8 sub_8058790(u32 a, u32 b)
+u8 sub_8058790(u32 x, u32 y)
 {
-    if(cur_mapdata_get_door_x2_at(gDoorAnimGraphicsTable, a, b) == 0)
+    if(cur_mapdata_get_door_x2_at(gDoorAnimGraphicsTable, x, y) == 0)
         return 8;
     else
         return 18;
