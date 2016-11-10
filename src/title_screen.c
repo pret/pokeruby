@@ -7,6 +7,7 @@
 #include "task.h"
 
 extern void m4aSongNumStart(u16);
+extern void LoadCompressedObjectPic(void *);
 extern void CB2_InitCopyrightScreen(void);
 extern void CB2_InitMainMenu(void);
 extern void CB2_InitClearSaveDataScreen(void);
@@ -34,24 +35,24 @@ extern u8 gUnknown_08E9D8CC[];
 extern u8 gUnknown_08E9F624[];
 extern u8 gUnknown_08E9F7E4[];
 
-static void sub_807C454(void);
-void sub_807C46C(u8);
-void sub_807C580(u8);
-void sub_807C644(u8);
-void CB2_GoToMainMenu(void);
-void CB2_GoToClearSaveDataScreen(void);
-void CB2_GoToResetRtcScreen(void);
-void CB2_GoToCopyrightScreen(void);
-void sub_807C7E4(u8);
+static void MainCB2(void);
+static void Task_TitleScreenPhase1(u8);
+static void Task_TitleScreenPhase2(u8);
+static void Task_TitleScreenPart3(u8);
+static void CB2_GoToMainMenu(void);
+static void CB2_GoToClearSaveDataScreen(void);
+static void CB2_GoToResetRtcScreen(void);
+static void CB2_GoToCopyrightScreen(void);
+static void UpdateLegendaryMarkingColor(u8);
 
 #define _RGB(r, g, b) ((((b) & 31) << 10) + (((g) & 31) << 5) + ((r) & 31))
 
 #ifdef SAPPHIRE
 //Red Kyogre markings
-#define MARKING_COLOR(c) RGB((c), 0, 0)
+#define LEGENDARY_MARKING_COLOR(c) RGB((c), 0, 0)
 #else
 //Blue Groundon markings
-#define MARKING_COLOR(c) RGB(0, 0, (c))
+#define LEGENDARY_MARKING_COLOR(c) RGB(0, 0, (c))
 #endif
 
 
@@ -63,8 +64,9 @@ void sub_807C7E4(u8);
 
 #define CLEAR_SAVE_BUTTON_COMBO (B_BUTTON | SELECT_BUTTON | DPAD_UP)
 #define RESET_RTC_BUTTON_COMBO (B_BUTTON | SELECT_BUTTON | DPAD_LEFT)
+#define A_B_START_SELECT (A_BUTTON | B_BUTTON | START_BUTTON | SELECT_BUTTON)
 
-void item_menu_type_2(struct Sprite *sprite)
+void SpriteCallback_VersionBannerLeft(struct Sprite *sprite)
 {
     struct Task *task = &gTasks[sprite->data1];
     
@@ -78,7 +80,7 @@ void item_menu_type_2(struct Sprite *sprite)
     {
         if (task->data[5] != 0)
             task->data[5]--;
-        if (task->data[5] <= 63)
+        if (task->data[5] < 64)
         {
             sprite->invisible = FALSE;
             if (sprite->pos1.y != 66)
@@ -88,7 +90,7 @@ void item_menu_type_2(struct Sprite *sprite)
     }
 }
 
-void sub_807BE90(struct Sprite *sprite)
+void SpriteCallback_VersionBannerRight(struct Sprite *sprite)
 {
     struct Task *task = &gTasks[sprite->data1];
     
@@ -100,7 +102,7 @@ void sub_807BE90(struct Sprite *sprite)
     }
     else
     {
-        if (task->data[5] <= 63)
+        if (task->data[5] < 64)
         {
             sprite->invisible = FALSE;
             if (sprite->pos1.y != 66)
@@ -109,22 +111,22 @@ void sub_807BE90(struct Sprite *sprite)
     }
 }
 
-void sub_807BEF0(struct Sprite *sprite)
+void SpriteCallback_PressStartCopyrightBanner(struct Sprite *sprite)
 {
     if (sprite->data0 == 1)
     {
         sprite->data1++;
-        if (!(sprite->data1 & 0x10))
-            sprite->invisible = TRUE;
-        else
+        //Alternate between hidden and shown every 16th frame
+        if (sprite->data1 & 16)
             sprite->invisible = FALSE;
+        else
+            sprite->invisible = TRUE;
     }
     else
         sprite->invisible = FALSE;
 }
 
-
-void sub_807BF28(s16 x, s16 y)
+static void CreatePressStartBanner(s16 x, s16 y)
 {
     u8 i;
     u8 spriteId;
@@ -138,7 +140,7 @@ void sub_807BF28(s16 x, s16 y)
     }
 }
 
-void sub_807BF84(s16 x, s16 y)
+static void CreateCopyrightBanner(s16 x, s16 y)
 {
     u8 i;
     u8 spriteId;
@@ -151,16 +153,17 @@ void sub_807BF84(s16 x, s16 y)
     }
 }
 
-void sub_807BFE0(struct Sprite *sprite)
+void SpriteCallback_PokemonLogoShine(struct Sprite *sprite)
 {
-    u16 color;
-    
     if (gTasks[gUnknown_0202F7E4].data[1] == 0 && sprite->pos1.x <= 271)
     {
-        if (sprite->data0 != 0)
+        if (sprite->data0) //Flash background
         {
-            if (sprite->pos1.x <= 119)
+            u16 backgroundColor;
+            
+            if (sprite->pos1.x < DISPLAY_WIDTH / 2)
             {
+                //Brighten background color
                 if (sprite->data1 < 31)
                     sprite->data1++;
                 if (sprite->data1 < 31)
@@ -168,35 +171,35 @@ void sub_807BFE0(struct Sprite *sprite)
             }
             else
             {
+                //Darken background color
                 if (sprite->data1 != 0)
                     sprite->data1--;
                 if (sprite->data1 != 0)
                     sprite->data1--;
             }
-            color = _RGB(sprite->data1, sprite->data1, sprite->data1);
-            gPlttBufferFaded[0] = color;
-            gPlttBufferFaded[PLTT_BUFFER_INDEX] = color;
+            backgroundColor = _RGB(sprite->data1, sprite->data1, sprite->data1);
+            gPlttBufferFaded[0] = backgroundColor;
+            gPlttBufferFaded[PLTT_BUFFER_INDEX] = backgroundColor;
         }
         sprite->pos1.x += 4;
-        return;
     }
     else
     {
-        gPlttBufferFaded[0] = 0;
-        gPlttBufferFaded[PLTT_BUFFER_INDEX] = 0;
+        gPlttBufferFaded[0] = RGB_BLACK;
+        gPlttBufferFaded[PLTT_BUFFER_INDEX] = RGB_BLACK;
         DestroySprite(sprite);
     }
 }
 
-void sub_807C088(u8 a)
+static void StartPokemonLogoShine(bool8 flashBackground)
 {
     u8 spriteId = CreateSprite(&gSpriteTemplate_8393FC0, 0, 68, 0);
     
     gSprites[spriteId].oam.objMode = 2;
-    gSprites[spriteId].data0 = a;
+    gSprites[spriteId].data0 = flashBackground;
 }
 
-void sub_807C0C8(void)
+static void VBlankCB(void)
 {
     sub_8089668();
     LoadOam();
@@ -204,6 +207,12 @@ void sub_807C0C8(void)
     TransferPlttBuffer();
     REG_BG1VOFS = gUnknown_030041B4;
 }
+
+enum
+{
+    TD_COUNTER,
+    TD_SKIP,
+};
 
 void CB2_InitTitleScreen(void)
 {
@@ -215,7 +224,7 @@ void CB2_InitTitleScreen(void)
             REG_BLDCNT = 0;
             REG_BLDALPHA = 0;
             REG_BLDY = 0;
-            *((u16 *)PLTT) = 0x7FFF;
+            *((u16 *)PLTT) = RGB_WHITE;
             REG_DISPCNT = 0;
             REG_BG2CNT = 0;
             REG_BG1CNT = 0;
@@ -254,10 +263,10 @@ void CB2_InitTitleScreen(void)
             break;
         case 2:
         {
-            u8 taskId = CreateTask(sub_807C46C, 0);
+            u8 taskId = CreateTask(Task_TitleScreenPhase1, 0);
             
-            gTasks[taskId].data[0] = 0x100;
-            gTasks[taskId].data[1] = 0;
+            gTasks[taskId].data[TD_COUNTER] = 0x100;
+            gTasks[taskId].data[TD_SKIP] = FALSE;
             gTasks[taskId].data[2] = -16;
             gTasks[taskId].data[3] = -32;
             gUnknown_0202F7E4 = taskId;
@@ -266,7 +275,7 @@ void CB2_InitTitleScreen(void)
         }
         case 3:
             BeginNormalPaletteFade(-1, 1, 0x10, 0, 0xFFFF);
-            SetVBlankCallback(sub_807C0C8);
+            SetVBlankCallback(VBlankCB);
             gMain.state = 4;
             break;
         case 4:
@@ -274,8 +283,8 @@ void CB2_InitTitleScreen(void)
             u16 savedIme;
             
             sub_813CE30(0x78, 0x50, 0x100, 0);
-            REG_BG2X = 0xFFFFE300;
-            REG_BG2Y = 0xFFFFDF00;
+            REG_BG2X = -29 * 256;
+            REG_BG2Y = -33 * 256;
             REG_WIN0H = 0;
             REG_WIN0V = 0;
             REG_WIN1H = 0;
@@ -293,7 +302,12 @@ void CB2_InitTitleScreen(void)
             REG_IE |= INTR_FLAG_VBLANK;
             REG_IME = savedIme;
             REG_DISPSTAT |= DISPSTAT_VBLANK_INTR;
-            REG_DISPCNT = DISPCNT_MODE_1 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG2_ON | DISPCNT_OBJ_ON | DISPCNT_WIN0_ON | DISPCNT_OBJWIN_ON;
+            REG_DISPCNT = DISPCNT_MODE_1
+                        | DISPCNT_OBJ_1D_MAP
+                        | DISPCNT_BG2_ON
+                        | DISPCNT_OBJ_ON
+                        | DISPCNT_WIN0_ON
+                        | DISPCNT_OBJWIN_ON;
             m4aSongNumStart(0x19D);
             gMain.state = 5;
             break;
@@ -301,15 +315,15 @@ void CB2_InitTitleScreen(void)
         case 5:
             if (!UpdatePaletteFade())
             {
-                sub_807C088(0);
+                StartPokemonLogoShine(FALSE);
                 sub_8089944(0, 0xA0, 4, 4, 0, 4, 1);
-                SetMainCallback2(sub_807C454);
+                SetMainCallback2(MainCB2);
             }
             break;
     }
 }
 
-void sub_807C454(void)
+static void MainCB2(void)
 {
     RunTasks();
     AnimateSprites();
@@ -317,20 +331,23 @@ void sub_807C454(void)
     UpdatePaletteFade();
 }
 
-void sub_807C46C(u8 taskId)
+//Shine the Pokemon logo two more times, and fade in the version banner
+static void Task_TitleScreenPhase1(u8 taskId)
 {
-    if ((gMain.newKeys & (A_BUTTON | B_BUTTON | START_BUTTON | SELECT_BUTTON)) || gTasks[taskId].data[1] != 0)
+    //Skip to next phase when A, B, Start, or Select is pressed
+    if ((gMain.newKeys & A_B_START_SELECT) || gTasks[taskId].data[1] != 0)
     {
-        gTasks[taskId].data[1] = 1;
-        gTasks[taskId].data[0] = 0;
+        gTasks[taskId].data[TD_SKIP] = TRUE;
+        gTasks[taskId].data[TD_COUNTER] = 0;
     }
-    if (gTasks[taskId].data[0] != 0)
+    
+    if (gTasks[taskId].data[TD_COUNTER] != 0)
     {
-        u16 data0 = gTasks[taskId].data[0];
+        u16 frameNum = gTasks[taskId].data[TD_COUNTER];
         
-        if (data0 == 0xA0 || data0 == 0x40)
-            sub_807C088(1);
-        gTasks[taskId].data[0]--;
+        if (frameNum == 160 || frameNum == 64)
+            StartPokemonLogoShine(TRUE);
+        gTasks[taskId].data[TD_COUNTER]--;
     }
     else
     {
@@ -343,47 +360,59 @@ void sub_807C46C(u8 taskId)
         REG_BLDALPHA = 0x1F;
         REG_BLDY = 0;
         
-        //Version left
+        //Create left side of version banner
         spriteId = CreateSprite(&gSpriteTemplate_8393ECC, 0x62, 0x1A, 0);
         gSprites[spriteId].invisible = TRUE;
         gSprites[spriteId].data1 = taskId;
         
-        //Version right
+        //Create right side of version banner
         spriteId = CreateSprite(&gSpriteTemplate_8393EE4, 0xA2, 0x1A, 0);
         gSprites[spriteId].invisible = TRUE;
         gSprites[spriteId].data1 = taskId;
         
-        gTasks[taskId].data[5] = 0x58;
-        gTasks[taskId].data[0] = 0x90;
-        gTasks[taskId].func = sub_807C580;
+        gTasks[taskId].data[5] = 88;
+        gTasks[taskId].data[TD_COUNTER] = 144;
+        gTasks[taskId].func = Task_TitleScreenPhase2;
     }
 }
 
-void sub_807C580(u8 taskId)
+//Create "Press Start" and copyright banners, and slide Pokemon logo up
+static void Task_TitleScreenPhase2(u8 taskId)
 {
-    if ((gMain.newKeys & (A_BUTTON | B_BUTTON | START_BUTTON | SELECT_BUTTON)) || gTasks[taskId].data[1] != 0)
+    //Skip to next phase when A, B, Start, or Select is pressed
+    if ((gMain.newKeys & A_B_START_SELECT) || gTasks[taskId].data[TD_SKIP])
     {
-        gTasks[taskId].data[1] = 1;
-        gTasks[taskId].data[0] = 0;
+        gTasks[taskId].data[TD_SKIP] = TRUE;
+        gTasks[taskId].data[TD_COUNTER] = 0;
     }
-    if (gTasks[taskId].data[0] != 0)
-        gTasks[taskId].data[0]--;
+    
+    if (gTasks[taskId].data[TD_COUNTER] != 0)
+        gTasks[taskId].data[TD_COUNTER]--;
     else
     {
-        gTasks[taskId].data[1] = 1;
-        REG_DISPCNT = DISPCNT_MODE_1 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG1_ON | DISPCNT_BG2_ON | DISPCNT_OBJ_ON;
-        sub_807BF28(120, 108);
-        sub_807BF84(120, 148);
+        gTasks[taskId].data[TD_SKIP] = TRUE;
+        REG_DISPCNT = DISPCNT_MODE_1
+                    | DISPCNT_OBJ_1D_MAP
+                    | DISPCNT_BG0_ON
+                    | DISPCNT_BG1_ON
+                    | DISPCNT_BG2_ON
+                    | DISPCNT_OBJ_ON;
+        CreatePressStartBanner(DISPLAY_WIDTH / 2, 108);
+        CreateCopyrightBanner(DISPLAY_WIDTH / 2, 148);
         gTasks[taskId].data[4] = 0;
-        gTasks[taskId].func = sub_807C644;
+        gTasks[taskId].func = Task_TitleScreenPart3;
     }
-    if (!(gTasks[taskId].data[0] & 1) && gTasks[taskId].data[3] != 0)
+    
+    if (!(gTasks[taskId].data[TD_COUNTER] & 1) && gTasks[taskId].data[3] != 0)
         gTasks[taskId].data[3]++;
+    
+    //Slide Pokemon logo up
     REG_BG2Y = gTasks[taskId].data[3] * 256;
 }
 
-void sub_807C644(u8 taskId)
-{    
+//Show Kyogre/Groundon silhouette and process main title screen input
+static void Task_TitleScreenPart3(u8 taskId)
+{
     REG_BLDCNT = 0x2142;
     REG_BLDALPHA = 0x1F0F;
     REG_BLDY = 0;
@@ -408,14 +437,14 @@ void sub_807C644(u8 taskId)
         else
         {
             REG_BG2Y = 0;
-            gTasks[taskId].data[0]++;
-            if (gTasks[taskId].data[0] & 1)
+            gTasks[taskId].data[TD_COUNTER]++;
+            if (gTasks[taskId].data[TD_COUNTER] & 1)
             {
                 gTasks[taskId].data[4]++;
                 gUnknown_030041B4 = gTasks[taskId].data[4];
                 gUnknown_030042C0 = 0;
             }
-            sub_807C7E4(gTasks[taskId].data[0]);
+            UpdateLegendaryMarkingColor(gTasks[taskId].data[TD_COUNTER]);
             if ((gMPlay_BGM.status & 0xFFFF) == 0)
             {
                 BeginNormalPaletteFade(-1, 0, 0, 0x10, 0xFFFF);
@@ -425,46 +454,43 @@ void sub_807C644(u8 taskId)
     }
 }
 
-void CB2_GoToMainMenu(void)
+static void CB2_GoToMainMenu(void)
 {
     if (!UpdatePaletteFade())
         SetMainCallback2(CB2_InitMainMenu);
 }
 
-void CB2_GoToCopyrightScreen(void)
+static void CB2_GoToCopyrightScreen(void)
 {
     if (!UpdatePaletteFade())
         SetMainCallback2(CB2_InitCopyrightScreen);
 }
 
-void CB2_GoToClearSaveDataScreen(void)
+static void CB2_GoToClearSaveDataScreen(void)
 {
     if (!UpdatePaletteFade())
         SetMainCallback2(CB2_InitClearSaveDataScreen);
 }
 
-void CB2_GoToResetRtcScreen(void)
+static void CB2_GoToResetRtcScreen(void)
 {
     if (!UpdatePaletteFade())
         SetMainCallback2(CB2_InitResetRtcScreen);
 }
 
-//bits 0-1: disable update if nonzero
-//bits 2-6: intensity
-//bit 7: fade direction
-void sub_807C7E4(u8 a)
+static void UpdateLegendaryMarkingColor(u8 frameNum)
 {
     u16 palette;
-
     
-    if ((a & 3) == 0)
+    if ((frameNum % 4) == 0) //Change color every 4th frame
     {
-        u8 intensity = (a >> 2) & 0x1F;
-
-        if (((a >> 2) & 0x20) == 0)
-            palette = MARKING_COLOR(intensity);
+        u8 colorIntensity = (frameNum >> 2) & 31; //Take bits 2-6 of frameNum the color intensity
+        u8 fadeDarker = (frameNum >> 2) & 32;
+        
+        if (!fadeDarker)
+            palette = LEGENDARY_MARKING_COLOR(colorIntensity);
         else
-            palette = MARKING_COLOR(31 - intensity);
+            palette = LEGENDARY_MARKING_COLOR(31 - colorIntensity);
         LoadPalette(&palette, 0xEF, sizeof(palette));
    }
 }
