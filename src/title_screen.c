@@ -38,7 +38,7 @@ extern u8 gUnknown_08E9F7E4[];
 static void MainCB2(void);
 static void Task_TitleScreenPhase1(u8);
 static void Task_TitleScreenPhase2(u8);
-static void Task_TitleScreenPart3(u8);
+static void Task_TitleScreenPhase3(u8);
 static void CB2_GoToMainMenu(void);
 static void CB2_GoToClearSaveDataScreen(void);
 static void CB2_GoToResetRtcScreen(void);
@@ -54,7 +54,6 @@ static void UpdateLegendaryMarkingColor(u8);
 //Blue Groundon markings
 #define LEGENDARY_MARKING_COLOR(c) RGB(0, 0, (c))
 #endif
-
 
 #ifdef SAPPHIRE
 #define PLTT_BUFFER_INDEX 26
@@ -155,7 +154,7 @@ static void CreateCopyrightBanner(s16 x, s16 y)
 
 void SpriteCallback_PokemonLogoShine(struct Sprite *sprite)
 {
-    if (gTasks[gUnknown_0202F7E4].data[1] == 0 && sprite->pos1.x <= 271)
+    if (gTasks[gUnknown_0202F7E4].data[1] == 0 && sprite->pos1.x < 272)
     {
         if (sprite->data0) //Flash background
         {
@@ -216,110 +215,110 @@ enum
 
 void CB2_InitTitleScreen(void)
 {
-    switch(gMain.state)
+    switch (gMain.state)
     {
-        default:
-        case 0:
-            SetVBlankCallback(NULL);
-            REG_BLDCNT = 0;
-            REG_BLDALPHA = 0;
-            REG_BLDY = 0;
-            *((u16 *)PLTT) = RGB_WHITE;
-            REG_DISPCNT = 0;
-            REG_BG2CNT = 0;
-            REG_BG1CNT = 0;
-            REG_BG0CNT = 0;
-            REG_BG2HOFS = 0;
-            REG_BG2VOFS = 0;
-            REG_BG1HOFS = 0;
-            REG_BG1VOFS = 0;
-            REG_BG0HOFS = 0;
-            REG_BG0VOFS = 0;
-            DmaFill16(3, 0, (void *)VRAM, 0x18000);
-            DmaFill32(3, 0, (void *)OAM, 0x400);
-            DmaFill16(3, 0, (void *)(PLTT + 2), 0x3FE);
-            ResetPaletteFade();
-            gMain.state = 1;
-            break;
-        case 1:
-            LZ77UnCompVram(gUnknown_08E9D8CC, (void *)VRAM);
-            LZ77UnCompVram(gUnknown_08E9F7E4, (void *)(VRAM + 0x4800));
-            LoadPalette(gUnknown_08E9F624, 0, 0x1C0);
-            LZ77UnCompVram(gUnknown_08393250, (void *)(VRAM + 0x8000));
-            LZ77UnCompVram(gUnknown_083939EC, (void *)(VRAM + 0xC000));
-            LZ77UnCompVram(gUnknown_08393BF8, (void *)(VRAM + 0xC800));
-            LoadPalette(gUnknown_08393210, 0xE0, 0x40);
-            remove_some_task();
-            ResetTasks();
-            ResetSpriteData();
-            FreeAllSpritePalettes();
-            gReservedSpritePaletteCount = 14;
-            LoadCompressedObjectPic(gUnknown_08393EFC);
-            LoadCompressedObjectPic(gUnknown_08393F8C);
-            LoadCompressedObjectPic(gUnknown_08393FD8);
-            LoadPalette(gUnknown_08E9F624, 0x100, 0x1C0);
-            LoadSpritePalette(gUnknown_08393F9C);
-            gMain.state = 2;
-            break;
-        case 2:
+    default:
+    case 0:
+        SetVBlankCallback(NULL);
+        REG_BLDCNT = 0;
+        REG_BLDALPHA = 0;
+        REG_BLDY = 0;
+        *((u16 *)PLTT) = RGB_WHITE;
+        REG_DISPCNT = 0;
+        REG_BG2CNT = 0;
+        REG_BG1CNT = 0;
+        REG_BG0CNT = 0;
+        REG_BG2HOFS = 0;
+        REG_BG2VOFS = 0;
+        REG_BG1HOFS = 0;
+        REG_BG1VOFS = 0;
+        REG_BG0HOFS = 0;
+        REG_BG0VOFS = 0;
+        DmaFill16(3, 0, (void *)VRAM, 0x18000);
+        DmaFill32(3, 0, (void *)OAM, 0x400);
+        DmaFill16(3, 0, (void *)(PLTT + 2), 0x3FE);
+        ResetPaletteFade();
+        gMain.state = 1;
+        break;
+    case 1:
+        LZ77UnCompVram(gUnknown_08E9D8CC, (void *)VRAM);
+        LZ77UnCompVram(gUnknown_08E9F7E4, (void *)(VRAM + 0x4800));
+        LoadPalette(gUnknown_08E9F624, 0, 0x1C0);
+        LZ77UnCompVram(gUnknown_08393250, (void *)(VRAM + 0x8000));
+        LZ77UnCompVram(gUnknown_083939EC, (void *)(VRAM + 0xC000));
+        LZ77UnCompVram(gUnknown_08393BF8, (void *)(VRAM + 0xC800));
+        LoadPalette(gUnknown_08393210, 0xE0, 0x40);
+        remove_some_task();
+        ResetTasks();
+        ResetSpriteData();
+        FreeAllSpritePalettes();
+        gReservedSpritePaletteCount = 14;
+        LoadCompressedObjectPic(gUnknown_08393EFC);
+        LoadCompressedObjectPic(gUnknown_08393F8C);
+        LoadCompressedObjectPic(gUnknown_08393FD8);
+        LoadPalette(gUnknown_08E9F624, 0x100, 0x1C0);
+        LoadSpritePalette(gUnknown_08393F9C);
+        gMain.state = 2;
+        break;
+    case 2:
+    {
+        u8 taskId = CreateTask(Task_TitleScreenPhase1, 0);
+        
+        gTasks[taskId].data[TD_COUNTER] = 0x100;
+        gTasks[taskId].data[TD_SKIP] = FALSE;
+        gTasks[taskId].data[2] = -16;
+        gTasks[taskId].data[3] = -32;
+        gUnknown_0202F7E4 = taskId;
+        gMain.state = 3;
+        break;
+    }
+    case 3:
+        BeginNormalPaletteFade(-1, 1, 0x10, 0, 0xFFFF);
+        SetVBlankCallback(VBlankCB);
+        gMain.state = 4;
+        break;
+    case 4:
+    {
+        u16 savedIme;
+        
+        sub_813CE30(0x78, 0x50, 0x100, 0);
+        REG_BG2X = -29 * 256;
+        REG_BG2Y = -33 * 256;
+        REG_WIN0H = 0;
+        REG_WIN0V = 0;
+        REG_WIN1H = 0;
+        REG_WIN1V = 0;
+        REG_WININ = 0x1F1F;
+        REG_WINOUT = 0x3F1F;
+        REG_BLDCNT = 0x84;
+        REG_BLDALPHA = 0;
+        REG_BLDY = 0x8;
+        REG_BG0CNT = 0x180B;
+        REG_BG1CNT = 0x190A;
+        REG_BG2CNT = 0x4981;
+        savedIme = REG_IME;
+        REG_IME = 0;
+        REG_IE |= INTR_FLAG_VBLANK;
+        REG_IME = savedIme;
+        REG_DISPSTAT |= DISPSTAT_VBLANK_INTR;
+        REG_DISPCNT = DISPCNT_MODE_1
+                    | DISPCNT_OBJ_1D_MAP
+                    | DISPCNT_BG2_ON
+                    | DISPCNT_OBJ_ON
+                    | DISPCNT_WIN0_ON
+                    | DISPCNT_OBJWIN_ON;
+        m4aSongNumStart(0x19D);
+        gMain.state = 5;
+        break;
+    }
+    case 5:
+        if (!UpdatePaletteFade())
         {
-            u8 taskId = CreateTask(Task_TitleScreenPhase1, 0);
-            
-            gTasks[taskId].data[TD_COUNTER] = 0x100;
-            gTasks[taskId].data[TD_SKIP] = FALSE;
-            gTasks[taskId].data[2] = -16;
-            gTasks[taskId].data[3] = -32;
-            gUnknown_0202F7E4 = taskId;
-            gMain.state = 3;
-            break;
+            StartPokemonLogoShine(FALSE);
+            sub_8089944(0, 0xA0, 4, 4, 0, 4, 1);
+            SetMainCallback2(MainCB2);
         }
-        case 3:
-            BeginNormalPaletteFade(-1, 1, 0x10, 0, 0xFFFF);
-            SetVBlankCallback(VBlankCB);
-            gMain.state = 4;
-            break;
-        case 4:
-        {
-            u16 savedIme;
-            
-            sub_813CE30(0x78, 0x50, 0x100, 0);
-            REG_BG2X = -29 * 256;
-            REG_BG2Y = -33 * 256;
-            REG_WIN0H = 0;
-            REG_WIN0V = 0;
-            REG_WIN1H = 0;
-            REG_WIN1V = 0;
-            REG_WININ = 0x1F1F;
-            REG_WINOUT = 0x3F1F;
-            REG_BLDCNT = 0x84;
-            REG_BLDALPHA = 0;
-            REG_BLDY = 0x8;
-            REG_BG0CNT = 0x180B;
-            REG_BG1CNT = 0x190A;
-            REG_BG2CNT = 0x4981;
-            savedIme = REG_IME;
-            REG_IME = 0;
-            REG_IE |= INTR_FLAG_VBLANK;
-            REG_IME = savedIme;
-            REG_DISPSTAT |= DISPSTAT_VBLANK_INTR;
-            REG_DISPCNT = DISPCNT_MODE_1
-                        | DISPCNT_OBJ_1D_MAP
-                        | DISPCNT_BG2_ON
-                        | DISPCNT_OBJ_ON
-                        | DISPCNT_WIN0_ON
-                        | DISPCNT_OBJWIN_ON;
-            m4aSongNumStart(0x19D);
-            gMain.state = 5;
-            break;
-        }
-        case 5:
-            if (!UpdatePaletteFade())
-            {
-                StartPokemonLogoShine(FALSE);
-                sub_8089944(0, 0xA0, 4, 4, 0, 4, 1);
-                SetMainCallback2(MainCB2);
-            }
-            break;
+        break;
     }
 }
 
@@ -400,7 +399,7 @@ static void Task_TitleScreenPhase2(u8 taskId)
         CreatePressStartBanner(DISPLAY_WIDTH / 2, 108);
         CreateCopyrightBanner(DISPLAY_WIDTH / 2, 148);
         gTasks[taskId].data[4] = 0;
-        gTasks[taskId].func = Task_TitleScreenPart3;
+        gTasks[taskId].func = Task_TitleScreenPhase3;
     }
     
     if (!(gTasks[taskId].data[TD_COUNTER] & 1) && gTasks[taskId].data[3] != 0)
@@ -411,7 +410,7 @@ static void Task_TitleScreenPhase2(u8 taskId)
 }
 
 //Show Kyogre/Groundon silhouette and process main title screen input
-static void Task_TitleScreenPart3(u8 taskId)
+static void Task_TitleScreenPhase3(u8 taskId)
 {
     REG_BLDCNT = 0x2142;
     REG_BLDALPHA = 0x1F0F;
