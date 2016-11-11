@@ -4,9 +4,6 @@
 #include "script.h"
 #include "string_util.h"
 
-
-#define FLAG_ID_SAFARI_ZONE 0x082C
-
 struct UnkSafariZoneStruct
 {
     /*0x00*/ s16 x;
@@ -46,31 +43,29 @@ extern u8 *gUnknown_083F7EB8[];
 
 extern u16 gScriptResult;
 
-
 bool32 GetSafariZoneFlag(void)
 {
-    bool8 ret = FlagGet(FLAG_ID_SAFARI_ZONE);
-    
+    bool8 ret = FlagGet(SYS_SAFARI_MODE);
+
     return ret;
 }
 
 void SetSafariZoneFlag(void)
 {
-    FlagSet(FLAG_ID_SAFARI_ZONE);
+    FlagSet(SYS_SAFARI_MODE);
 }
 
 void ResetSafariZoneFlag(void)
 {
-    FlagReset(FLAG_ID_SAFARI_ZONE);
+    FlagReset(SYS_SAFARI_MODE);
 }
-
 
 void sub_80C81B8(void)
 {
     sav12_xor_increment(0x11);
     SetSafariZoneFlag();
     ClearEveryUnkSafariZoneStruct();
-    
+
     gUnknown_02038808 = 0x1E;
     gUnknown_0203880A = 0x1F4;
 }
@@ -79,7 +74,7 @@ void sub_80C81E4(void)
 {
     ResetSafariZoneFlag();
     ClearEveryUnkSafariZoneStruct();
-    
+
     gUnknown_02038808 = 0;
     gUnknown_0203880A = 0;
 }
@@ -90,15 +85,15 @@ bool8 safari_step(void)
     {
         return FALSE;
     }
-    
+
     sub_80C8508();
-    
+
     if (!(--gUnknown_0203880A))
     {
         ScriptContext1_SetupScript(&gUnknown_081C3448);
         return TRUE;
     }
-    
+
     return FALSE;
 }
 
@@ -130,7 +125,7 @@ void sub_80C824C(void)
 
 void ClearSingleUnkSafariZoneStruct(u8 index)
 {
-    memset(&gUnkSafariZoneStructArr[index], 0, 
+    memset(&gUnkSafariZoneStructArr[index], 0,
         sizeof(struct UnkSafariZoneStruct));
 }
 
@@ -139,7 +134,7 @@ void ClearEveryUnkSafariZoneStruct(void)
     // 10 is the number of struct UnkSafariZoneStruct's in
     // gUnkSafariZoneStructArr. It might be a good idea to create a #define
     // for it.
-    memset(gUnkSafariZoneStructArr, 0, sizeof(struct UnkSafariZoneStruct) 
+    memset(gUnkSafariZoneStructArr, 0, sizeof(struct UnkSafariZoneStruct)
         * 10);
 }
 
@@ -147,27 +142,27 @@ void sub_80C82EC(void)
 {
     s16 x, y;
     u16 i;
-    
+
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
-    
+
     // 10 is the number of struct UnkSafariZoneStruct's in
     // gUnkSafariZoneStructArr. It might be a good idea to create a #define
     // for it.
     for (i = 0; i < 10; i++)
     {
         if (gSaveBlock1.location.mapNum == gUnkSafariZoneStructArr[i].mapNum
-            && gUnkSafariZoneStructArr[i].x == x 
+            && gUnkSafariZoneStructArr[i].x == x
             && gUnkSafariZoneStructArr[i].y == y)
         {
             gScriptResult = i;
-            
+
             StringCopy(gStringVar1, gUnknown_083F7EB8
                 [gUnkSafariZoneStructArr[i].pokeblock.color]);
-            
+
             return;
         }
     }
-    
+
     gScriptResult = -1;
 }
 
@@ -175,20 +170,20 @@ void sub_80C837C(void)
 {
     s16 x, y;
     u16 i;
-    
+
     PlayerGetDestCoords(&x, &y);
-    
+
     // 10 is the number of struct UnkSafariZoneStruct's in
     // gUnkSafariZoneStructArr. It might be a good idea to create a #define
     // for it.
     for (i = 0; i < 10; i++)
     {
-        if (gSaveBlock1.location.mapNum 
+        if (gSaveBlock1.location.mapNum
             == gUnkSafariZoneStructArr[i].mapNum)
         {
             x -= gUnkSafariZoneStructArr[i].x;
             y -= gUnkSafariZoneStructArr[i].y;
-            
+
             if (x < 0)
             {
                 x *= -1;
@@ -197,7 +192,7 @@ void sub_80C837C(void)
             {
                 y *= -1;
             }
-            
+
             if ((x + y) <= 5)
             {
                 gScriptResult = i;
@@ -205,19 +200,19 @@ void sub_80C837C(void)
             }
         }
     }
-    
+
     gScriptResult = -1;
 }
 
 struct Pokeblock *unref_sub_80C8418(void)
 {
     sub_80C82EC();
-    
+
     if (gScriptResult == 0xFFFF)
     {
         return NULL;
     }
-    
+
     return &gUnkSafariZoneStructArr[gScriptResult].pokeblock;
 }
 
@@ -225,12 +220,12 @@ struct Pokeblock *unref_sub_80C8418(void)
 struct Pokeblock *sub_80C8448(void)
 {
     sub_80C837C();
-    
+
     if (gScriptResult == 0xFFFF)
     {
         return NULL;
     }
-    
+
     return &gUnkSafariZoneStructArr[gScriptResult].pokeblock;
 }
 
@@ -239,24 +234,24 @@ void sub_80C8478(u8 pokeblock_index)
 {
     s16 x, y;
     u8 i;
-    
+
     // 10 is the number of struct UnkSafariZoneStruct's in
     // gUnkSafariZoneStructArr. It might be a good idea to create a #define
     // for it.
     for (i = 0; i < 10; i++)
     {
-        if (gUnkSafariZoneStructArr[i].mapNum == 0 
+        if (gUnkSafariZoneStructArr[i].mapNum == 0
             && gUnkSafariZoneStructArr[i].x == 0
             && gUnkSafariZoneStructArr[i].y == 0)
         {
             GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
-            
-            gUnkSafariZoneStructArr[i].mapNum 
+
+            gUnkSafariZoneStructArr[i].mapNum
                 = gSaveBlock1.location.mapNum;
-            
+
             gUnkSafariZoneStructArr[i].pokeblock
                 = gSaveBlock1.pokeblocks[pokeblock_index];
-            
+
             gUnkSafariZoneStructArr[i].counter = 0x64;
             gUnkSafariZoneStructArr[i].x = x;
             gUnkSafariZoneStructArr[i].y = y;
@@ -268,7 +263,7 @@ void sub_80C8478(u8 pokeblock_index)
 void sub_80C8508(void)
 {
     u8 i;
-    
+
     // 10 is the number of struct UnkSafariZoneStruct's in
     // gUnkSafariZoneStructArr. It might be a good idea to create a #define
     // for it.
@@ -277,7 +272,7 @@ void sub_80C8508(void)
         if (gUnkSafariZoneStructArr[i].counter != 0)
         {
             gUnkSafariZoneStructArr[i].counter--;
-            
+
             if (gUnkSafariZoneStructArr[i].counter == 0)
             {
                 ClearSingleUnkSafariZoneStruct(i);
@@ -289,17 +284,15 @@ void sub_80C8508(void)
 bool8 unref_sub_80C853C(void)
 {
     sub_80C82EC();
-    
+
     if (gScriptResult == 0xFFFF)
     {
         return FALSE;
     }
-    
-    ConvertIntToDecimalStringN(gStringVar2, 
-        gUnkSafariZoneStructArr[gScriptResult].counter, 
+
+    ConvertIntToDecimalStringN(gStringVar2,
+        gUnkSafariZoneStructArr[gScriptResult].counter,
         STR_CONV_MODE_LEADING_ZEROS, 3);
-    
+
     return TRUE;
 }
-
-
