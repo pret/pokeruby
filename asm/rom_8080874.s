@@ -346,7 +346,7 @@ sub_8080AE4: @ 8080AE4
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl sub_8056EAC
+	bl MetatileBehavior_IsDoor
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -461,7 +461,7 @@ _08080BE4:
 	ldrsh r0, [r6, r1]
 	movs r2, 0
 	ldrsh r1, [r7, r2]
-	bl sub_80586B4
+	bl FieldSetDoorOpened
 	movs r0, 0x1
 	strh r0, [r5, 0x8]
 	b _08080CAE
@@ -499,7 +499,7 @@ _08080C40:
 	ldrsh r0, [r6, r1]
 	movs r2, 0
 	ldrsh r1, [r7, r2]
-	bl sub_805870C
+	bl FieldAnimateDoorClose
 	lsls r0, 24
 	asrs r0, 24
 	strh r0, [r5, 0xA]
@@ -1201,7 +1201,7 @@ _080811A8:
 	movs r2, 0
 	ldrsh r1, [r6, r2]
 	subs r1, 0x1
-	bl task_overworld_door_add_if_role_69_for_opening_door_at
+	bl FieldAnimateDoorOpen
 	lsls r0, 24
 	asrs r0, 24
 	strh r0, [r5, 0xA]
@@ -1262,7 +1262,7 @@ _08081240:
 	movs r2, 0
 	ldrsh r1, [r6, r2]
 	subs r1, 0x1
-	bl sub_805870C
+	bl FieldAnimateDoorClose
 	lsls r0, 24
 	asrs r0, 24
 	strh r0, [r5, 0xA]

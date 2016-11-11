@@ -4434,14 +4434,14 @@ DoorAnimTiles_33: @ 830F55C
 
 	.space 32
 
-gUnknown_0830F87C:: @ 830F87C
+gDoorOpenAnimFrames:: @ 830F87C
 	door_anim_frame 4, -1
 	door_anim_frame 4, 0
 	door_anim_frame 4, 0x100
 	door_anim_frame 4, 0x200
 	door_anim_frame 0, 0
 
-gUnknown_0830F890:: @ 830F890
+gDoorCloseAnimFrames:: @ 830F890
 	door_anim_frame 4, 0x200
 	door_anim_frame 4, 0x100
 	door_anim_frame 4, 0
