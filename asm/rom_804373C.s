@@ -4383,7 +4383,7 @@ sub_8045998: @ 8045998
 	ldr r1, _08045A3C @ =gUnknown_08400DE6
 	bl StringCopy
 	adds r7, r0, 0
-	ldr r0, _08045A40 @ =gUnknown_02038808
+	ldr r0, _08045A40 @ =gNumSafariBalls
 	ldrb r1, [r0]
 	adds r0, r7, 0
 	movs r2, 0xA
@@ -4450,7 +4450,7 @@ _08045A06:
 	.align 2, 0
 _08045A38: .4byte gUnknown_020238CC
 _08045A3C: .4byte gUnknown_08400DE6
-_08045A40: .4byte gUnknown_02038808
+_08045A40: .4byte gNumSafariBalls
 _08045A44: .4byte gUnknown_08400DF0
 _08045A48: .4byte gSprites
 _08045A4C: .4byte 0x02000520

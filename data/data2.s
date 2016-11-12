@@ -11192,9 +11192,8 @@ gWildFeebasRoute119Data:: @ 839DBFC
 	.byte 20, 25  @ Min/Max level
 	.2byte SPECIES_FEEBAS
 
-@ Some Feebas tile related data
 	.align 2
-gUnknown_0839DC00:: @ 839DC00
+gRoute119WaterTileData:: @ 839DC00
 	.2byte  0x0, 0x2D,   0x0
 	.2byte 0x2E, 0x5B,  0x83
 	.2byte 0x5C, 0x8B, 0x12A
@@ -24244,7 +24243,7 @@ gUnknown_083F7EA8:: @ 83F7EA8
 	.4byte sub_802E424, c2_exit_to_overworld_2_switch
 
 	.align 2
-gUnknown_083F7EB8:: @ 83F7EB8
+gPokeblockNames:: @ 83F7EB8
 	.4byte NULL
 	.4byte ContestStatsText_RedPokeBlock
 	.4byte ContestStatsText_BluePokeBlock

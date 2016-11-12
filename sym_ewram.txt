@@ -578,38 +578,8 @@ gUnknown_0202FF38: @ 202FF38
 gUnknown_0202FF58: @ 202FF58
 	.space 0x4
 
-gTrainerBattleMode: @ 202FF5C
-	.space 0x2
-
-gTrainerBattleOpponent: @ 202FF5E
-	.space 0x2
-
-gTrainerMapObjectLocalId: @ 202FF60
-	.space 0x4
-
-gTrainerIntroSpeech: @ 202FF64
-	.space 0x4
-
-gTrainerDefeatSpeech: @ 202FF68
-	.space 0x4
-
-gTrainerVictorySpeech: @ 202FF6C
-	.space 0x4
-
-gTrainerCannotBattleSpeech: @ 202FF70
-	.space 0x4
-
-gTrainerBattleScriptReturnAddress: @ 202FF74
-	.space 0x4
-
-gTrainerBattleEndScript: @ 202FF78
-	.space 0x4
-
-gWildEncountersDisabled: @ 202FF7C
-	.space 0x4
-
-gUnknown_0202FF80: @ 202FF80
-	.space 0x4
+	.include "src/battle_setup.o"
+	.include "src/wild_encounter.o"
 
 gUnknown_0202FF84: @ 202FF84
 	.space 0x4
@@ -908,14 +878,7 @@ gUnknown_02038800: @ 2038800
 gUnknown_02038804: @ 2038804
 	.space 0x4
 
-gUnknown_02038808: @ 2038808
-	.space 0x2
-
-gUnknown_0203880A: @ 203880A
-	.space 0x2
-
-gUnkSafariZoneStructArr: @ 203880C
-	.space 0xa0
+	.include "src/safari_zone.o"
 
 gUnknown_020388AC: @ 20388AC
 	.space 0x4
