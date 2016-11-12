@@ -68,6 +68,7 @@ SECTIONS {
         src/rom4.o(.text);
         asm/fieldmap.o(.text);
         asm/metatile_behavior.o(.text);
+        src/field_camera.o(.text);
         asm/field_camera.o(.text);
         src/field_door.o(.text);
         asm/field_player_avatar.o(.text);
