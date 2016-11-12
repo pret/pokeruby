@@ -9,7 +9,7 @@
 
 extern u8 sub_8015A98(u8, u8, u8);
 extern u8 battle_side_get_owner(u8);
-extern u32 battle_get_per_side_status(u8);
+extern s16 battle_get_per_side_status(u8);
 extern u8 b_first_side(u8, u8, u8);
 
 extern u16 gUnknown_020239F8;
@@ -288,13 +288,13 @@ void unref_sub_81074A0(u8 a)
 void sub_81074C4(u8 a, u8 b)
 {
     if(battle_side_get_owner(a) == 0)
-        unk_2016A00.unk20[battle_get_per_side_status(a) % 2] = b;
+        unk_2016A00.unk20[battle_get_per_side_status(a) & 1] = b;
 }
 
 void sub_81074F8(u8 a, u8 b)
 {
     if(battle_side_get_owner(a) == 0)
-        unk_2016A00.unk22[battle_get_per_side_status(a) % 2] = b;
+        unk_2016A00.unk22[battle_get_per_side_status(a) & 1] = b;
 }
 
 void BattleAICmd_if_random(void)
@@ -1210,214 +1210,67 @@ void BattleAICmd_unk_2E(void)
 
 void BattleAICmd_get_ability(void)
 {
-	u8 *ptr;
-	u8 ability;
-	u16 var;
-	struct BaseStats *stats;
-
-	if ( gAIScriptPtr[1] == 1 )
-		var = gUnknown_02024C07;
-	else
-		var = gUnknown_02024C08;
-
-	if ( battle_side_get_owner(var) )
-	{
-		unk_2016800.unk2 = gBattleMons[var].ability;
-		gAIScriptPtr += 2;
-		return;
-	}
-	ptr = unk_2016A00.unk20[battle_get_per_side_status(var) & 1];
-	if ( !ptr )
-	{
-		if((gBattleMons[var].ability == 0x17) || (gBattleMons[var].ability == 0x2A) || (gBattleMons[var].ability == 0x47))
-		{
-			//Stuff at _081086E4
-			gAIScriptPtr += 2; //tail merging at _08108784
-			return;
-		}	
-		else
-		{
-			*stats = gBaseStats[gBattleMons[var].species];
-			if ( !stats->ability1 )
-			{
-				unk_2016800.unk8 = stats->ability2;
-				gAIScriptPtr += 2;
-				return;
-			}
-			if ( !stats->ability2 )
-			{
-				unk_2016800.unk8 = stats->ability1;
-				gAIScriptPtr += 2;
-				return;
-			}
-			if ( Random() & 1 ) // huh? pick a random ability to return i guess?
-			{
-				unk_2016800.unk2 = stats->ability1;
-				gAIScriptPtr += 2;
-				return;
-			}
-			else
-			{
-				unk_2016800.unk2 = stats->ability2;
-				gAIScriptPtr += 2;
-				return;
-			}
-		}
-	}
-	unk_2016800.unk8 = *ptr;
-	gAIScriptPtr += 2;
+    u8 var;
+    
+    if(gAIScriptPtr[1] == 1)
+        var = gUnknown_02024C07;
+    else
+        var = gUnknown_02024C08;
+    if(battle_side_get_owner(var) == 0)
+    {
+        //register u8 unk asm("r1") = battle_get_per_side_status(var) & 1;
+        s32 unk = battle_get_per_side_status(var) & 1;
+        
+        if(unk_2016A00.unk20[unk] != 0)
+        {
+            ((struct UnknownStruct2 *)((u8 *)&unk_2016A00 - 512))->unk8 = unk_2016A00.unk20[unk];
+            gAIScriptPtr += 2;
+            return;
+        }
+        //_081086C8
+        if(gBattleMons[var].ability == 0x17 || gBattleMons[var].ability == 0x2A || gBattleMons[var].ability == 0x47)
+        {
+            //_081086E4
+            unk_2016800.unk8 = gBattleMons[var].ability;
+            gAIScriptPtr += 2;
+            return;
+        }
+        //_081086FC
+        if(gBaseStats[gBattleMons[var].species].ability1 != 0)
+        {
+            if(gBaseStats[gBattleMons[var].species].ability2 != 0)
+            {
+                if(Random() & 1)
+                {
+                    ((struct UnknownStruct2 *)((u8 *)&unk_2016A00 - 512))->unk8 = gBaseStats[gBattleMons[var].species].ability1;
+                    gAIScriptPtr += 2;
+                    return;
+                }
+                //_0810873C
+                else
+                {
+                    ((struct UnknownStruct2 *)((u8 *)&unk_2016A00 - 512))->unk8 = gBaseStats[gBattleMons[var].species].ability2;
+                    gAIScriptPtr += 2;
+                    return;
+                }
+            }
+            //_08108754
+            else
+            {
+                ((struct UnknownStruct2 *)((u8 *)&unk_2016A00 - 512))->unk8 = gBaseStats[gBattleMons[var].species].ability1;
+                gAIScriptPtr += 2;
+                return;
+            }
+        }
+        //_08108764
+        else
+        {
+            ((struct UnknownStruct2 *)((u8 *)&unk_2016A00 - 512))->unk8 = gBaseStats[gBattleMons[var].species].ability2;
+            gAIScriptPtr += 2;
+            return;
+        }
+    }
+    //_08108774
+    unk_2016800.unk8 = gBattleMons[var].ability;
+    gAIScriptPtr += 2;
 }
-
-/*
-	thumb_func_start BattleAICmd_get_ability
-BattleAICmd_get_ability: @ 8108670
-	push {r4-r7,lr}
-	ldr r0, _08108680 @ =gAIScriptPtr
-	ldr r0, [r0]
-	ldrb r0, [r0, 0x1]
-	cmp r0, 0x1
-	bne _08108688
-	ldr r0, _08108684 @ =gUnknown_02024C07
-	b _0810868A
-	.align 2, 0
-_08108680: .4byte gAIScriptPtr
-_08108684: .4byte gUnknown_02024C07
-_08108688:
-	ldr r0, _081086BC @ =gUnknown_02024C08
-_0810868A:
-	ldrb r4, [r0]
-	adds r0, r4, 0
-	bl battle_side_get_owner
-	lsls r0, 24
-	cmp r0, 0
-	bne _08108774
-	adds r0, r4, 0
-	bl battle_get_per_side_status
-	movs r7, 0x1
-	adds r1, r7, 0
-	ands r1, r0
-	ldr r6, _081086C0 @ =0x02016a00
-	adds r0, r6, 0
-	adds r0, 0x20
-	adds r3, r1, r0
-	ldrb r0, [r3]
-	cmp r0, 0
-	beq _081086C8
-	ldr r0, _081086C4 @ =0xfffffe00
-	adds r1, r6, r0
-	ldrb r0, [r3]
-	str r0, [r1, 0x8]
-	b _08108784
-	.align 2, 0
-_081086BC: .4byte gUnknown_02024C08
-_081086C0: .4byte 0x02016a00
-_081086C4: .4byte 0xfffffe00
-_081086C8:
-	ldr r1, _081086F4 @ =gBattleMons
-	movs r0, 0x58
-	muls r0, r4
-	adds r5, r0, r1
-	adds r0, r5, 0
-	adds r0, 0x20
-	ldrb r0, [r0]
-	adds r2, r1, 0
-	cmp r0, 0x17
-	beq _081086E4
-	cmp r0, 0x2A
-	beq _081086E4
-	cmp r0, 0x47
-	bne _081086FC
-_081086E4:
-	ldr r1, _081086F8 @ =0x02016800
-	movs r0, 0x58
-	muls r0, r4
-	adds r0, r2
-	adds r0, 0x20
-	ldrb r0, [r0]
-	str r0, [r1, 0x8]
-	b _08108784
-	.align 2, 0
-_081086F4: .4byte gBattleMons
-_081086F8: .4byte 0x02016800
-_081086FC:
-	ldr r4, _08108734 @ =gBaseStats
-	ldrh r0, [r5]
-	lsls r1, r0, 3
-	subs r1, r0
-	lsls r1, 2
-	adds r3, r1, r4
-	ldrb r0, [r3, 0x16]
-	cmp r0, 0
-	beq _08108764
-	ldrb r0, [r3, 0x17]
-	cmp r0, 0
-	beq _08108754
-	bl Random
-	adds r1, r7, 0
-	ands r1, r0
-	cmp r1, 0
-	beq _0810873C
-	ldr r0, _08108738 @ =0xfffffe00
-	adds r2, r6, r0
-	ldrh r1, [r5]
-	lsls r0, r1, 3
-	subs r0, r1
-	lsls r0, 2
-	adds r0, r4
-	ldrb r0, [r0, 0x16]
-	b _08108782
-	.align 2, 0
-_08108734: .4byte gBaseStats
-_08108738: .4byte 0xfffffe00
-_0810873C:
-	ldr r0, _08108750 @ =0xfffffe00
-	adds r2, r6, r0
-	ldrh r1, [r5]
-	lsls r0, r1, 3
-	subs r0, r1
-	lsls r0, 2
-	adds r0, r4
-	ldrb r0, [r0, 0x17]
-	b _08108782
-	.align 2, 0
-_08108750: .4byte 0xfffffe00
-_08108754:
-	ldr r0, _08108760 @ =0xfffffe00
-	adds r1, r6, r0
-	ldrb r0, [r3, 0x16]
-	str r0, [r1, 0x8]
-	b _08108784
-	.align 2, 0
-_08108760: .4byte 0xfffffe00
-_08108764:
-	ldr r0, _08108770 @ =0xfffffe00
-	adds r1, r6, r0
-	ldrb r0, [r3, 0x17]
-	str r0, [r1, 0x8]
-	b _08108784
-	.align 2, 0
-_08108770: .4byte 0xfffffe00
-_08108774:
-	ldr r2, _08108794 @ =0x02016800
-	ldr r1, _08108798 @ =gBattleMons
-	movs r0, 0x58
-	muls r0, r4
-	adds r0, r1
-	adds r0, 0x20
-	ldrb r0, [r0]
-_08108782:
-	str r0, [r2, 0x8]
-_08108784:
-	ldr r1, _0810879C @ =gAIScriptPtr
-	ldr r0, [r1]
-	adds r0, 0x2
-	str r0, [r1]
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08108794: .4byte 0x02016800
-_08108798: .4byte gBattleMons
-_0810879C: .4byte gAIScriptPtr
-	thumb_func_end BattleAICmd_get_ability
-*/
