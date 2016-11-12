@@ -17,11 +17,18 @@ extern u8 gUnknown_02024A60;
 extern u8 gUnknown_02024C07; 
 extern u8 gUnknown_02024C08;
 extern u8 gUnknown_02024C0C;
+extern u8 gUnknown_02024DEC;
+extern u8 gUnknown_02024C68;
+extern u8 gUnknown_02024BEC;
+extern u8 gUnknown_0201601C;
+extern u8 gUnknown_0201601F;
+extern u16 gUnknown_02024BE6;
+extern u8 gCritMultiplier;
 extern u16 gUnknown_02024C34[];
 extern u32 gUnknown_02024ACC[];
 extern u32 gUnknown_02024C98[];
 extern u16 gUnknown_02024C7A[];
-extern u16 gUnknown_02024A8C[];
+extern struct BattlePokemon gUnknown_02024A8C[];
 extern u8 gUnknown_030042E0[];
 extern u8 *gAIScriptPtr;
 extern u16 gTrainerBattleOpponent;
@@ -62,6 +69,22 @@ struct UnknownStruct3
     u8 unk20;
 };
 
+struct SmallBattleStruct1
+{
+	u8 unk1;
+	u8 unk2;
+	u8 unk3;
+	u8 unk4;
+};
+
+// move to battle.h before PR.
+struct BattleStruct /* 0x2000000 */
+{
+	u8 filler0[0x1601C];
+	struct SmallBattleStruct1 unk;
+};
+
+extern struct BattleStruct unk_2000000;
 extern struct UnknownStruct2 unk_2016800;
 extern struct UnknownStruct1 unk_2016A00;
 extern struct UnknownStruct3 unk_2016C00;
@@ -1274,3 +1297,274 @@ void BattleAICmd_get_ability(void)
     unk_2016800.unk8 = gBattleMons[var].ability;
     gAIScriptPtr += 2;
 }
+
+void BattleAICmd_unk_30(void)
+{
+	s8 loopCounter;
+	struct SmallBattleStruct1 * fucking_struct = &(unk_2000000.unk);
+	
+	gUnknown_02024DEC = 0;
+	fucking_struct -> unk1 = 0;
+	fucking_struct -> unk4 = 1;
+	gUnknown_02024C68 = 0;
+	gCritMultiplier = 1;
+	unk_2016800.unk8 = 0;
+	
+	for(loopCounter = 0; loopCounter <= 3; loopCounter++)
+	{
+		gUnknown_02024BEC = 40;
+		gUnknown_02024BE6 = gUnknown_02024A8C[gUnknown_02024C07].species;
+		
+		if (gUnknown_02024BE6)
+		{
+			move_effectiveness_something(gUnknown_02024BE6, gUnknown_02024C07, gUnknown_02024C08);
+			
+			// reduce by 1/3.
+			if (gUnknown_02024BEC == 120)
+				gUnknown_02024BEC = 80;
+			if(gUnknown_02024BEC == 240)
+				gUnknown_02024BEC = 160;
+			if(gUnknown_02024BEC == 30)
+				gUnknown_02024BEC = 20;
+			if(gUnknown_02024BEC == 15)
+				gUnknown_02024BEC = 10;
+			
+			if(gUnknown_02024C68 & 8)
+				gUnknown_02024BEC = 0;
+			
+			if (unk_2016800.unk8 < gUnknown_02024BEC)
+				unk_2016800.unk8 = gUnknown_02024BEC;
+		}
+	}
+	gAIScriptPtr += 1;
+}
+/*
+	thumb_func_start BattleAICmd_unk_30
+BattleAICmd_unk_30: @ 81087A0
+	push {r4-r7,lr}
+	mov r7, r8
+	push {r7}
+	ldr r0, _0810885C @ =gUnknown_02024DEC
+	movs r2, 0
+	strh r2, [r0]
+	ldr r1, _08108860 @ =0x02000000
+	ldr r3, _08108864 @ =0x0001601c
+	adds r0, r1, r3
+	movs r4, 0
+	strb r2, [r0]
+	adds r3, 0x3
+	adds r0, r1, r3
+	movs r3, 0x1
+	strb r3, [r0]
+	ldr r0, _08108868 @ =gUnknown_02024C68
+	strb r2, [r0]
+	ldr r0, _0810886C @ =gCritMultiplier
+	strb r3, [r0]
+	movs r0, 0xB4
+	lsls r0, 9
+	adds r1, r0
+	str r4, [r1, 0x8]
+	movs r5, 0
+	ldr r4, _08108870 @ =gUnknown_02024BEC
+	ldr r7, _08108874 @ =gUnknown_02024BE6
+	ldr r3, _08108878 @ =gUnknown_02024A8C
+	mov r8, r3
+	ldr r6, _0810887C @ =gUnknown_02024C07
+_081087DA:
+	movs r0, 0x28
+	str r0, [r4]
+	lsls r1, r5, 1
+	ldrb r2, [r6]
+	movs r0, 0x58
+	muls r0, r2
+	adds r1, r0
+	add r1, r8
+	ldrh r0, [r1]
+	strh r0, [r7]
+	lsls r0, 16
+	cmp r0, 0
+	beq _08108844
+	ldrh r0, [r7]
+	ldrb r1, [r6]
+	ldr r2, _08108880 @ =gUnknown_02024C08
+	ldrb r2, [r2]
+	bl move_effectiveness_something
+	ldr r0, [r4]
+	cmp r0, 0x78
+	bne _0810880A
+	movs r0, 0x50
+	str r0, [r4]
+_0810880A:
+	ldr r0, [r4]
+	cmp r0, 0xF0
+	bne _08108814
+	movs r0, 0xA0
+	str r0, [r4]
+_08108814:
+	ldr r0, [r4]
+	cmp r0, 0x1E
+	bne _0810881E
+	movs r0, 0x14
+	str r0, [r4]
+_0810881E:
+	ldr r0, [r4]
+	cmp r0, 0xF
+	bne _08108828
+	movs r0, 0xA
+	str r0, [r4]
+_08108828:
+	ldr r0, _08108868 @ =gUnknown_02024C68
+	ldrb r1, [r0]
+	movs r0, 0x8
+	ands r0, r1
+	cmp r0, 0
+	beq _08108838
+	movs r0, 0
+	str r0, [r4]
+_08108838:
+	ldr r2, _08108884 @ =0x02016800
+	ldr r0, [r2, 0x8]
+	ldr r1, [r4]
+	cmp r0, r1
+	bcs _08108844
+	str r1, [r2, 0x8]
+_08108844:
+	adds r5, 0x1
+	cmp r5, 0x3
+	ble _081087DA
+	ldr r1, _08108888 @ =gAIScriptPtr
+	ldr r0, [r1]
+	adds r0, 0x1
+	str r0, [r1]
+	pop {r3}
+	mov r8, r3
+	pop {r4-r7}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_0810885C: .4byte gUnknown_02024DEC
+_08108860: .4byte 0x02000000
+_08108864: .4byte 0x0001601c
+_08108868: .4byte gUnknown_02024C68
+_0810886C: .4byte gCritMultiplier
+_08108870: .4byte gUnknown_02024BEC
+_08108874: .4byte gUnknown_02024BE6
+_08108878: .4byte gUnknown_02024A8C
+_0810887C: .4byte gUnknown_02024C07
+_08108880: .4byte gUnknown_02024C08
+_08108884: .4byte 0x02016800
+_08108888: .4byte gAIScriptPtr
+	thumb_func_end BattleAICmd_unk_30
+*/
+
+__attribute__((naked))
+void BattleAICmd_if_damage_bonus(void)
+{
+	asm(".syntax unified\n\
+	push {r4,r5,lr}\n\
+	ldr r0, _08108928 @ =gUnknown_02024DEC\n\
+	movs r1, 0\n\
+	strh r1, [r0]\n\
+	ldr r2, _0810892C @ =0x02000000\n\
+	ldr r3, _08108930 @ =0x0001601c\n\
+	adds r0, r2, r3\n\
+	strb r1, [r0]\n\
+	adds r3, 0x3\n\
+	adds r0, r2, r3\n\
+	movs r3, 0x1\n\
+	strb r3, [r0]\n\
+	ldr r5, _08108934 @ =gUnknown_02024C68\n\
+	strb r1, [r5]\n\
+	ldr r0, _08108938 @ =gCritMultiplier\n\
+	strb r3, [r0]\n\
+	ldr r4, _0810893C @ =gUnknown_02024BEC\n\
+	movs r0, 0x28\n\
+	str r0, [r4]\n\
+	ldr r1, _08108940 @ =gUnknown_02024BE6\n\
+	movs r0, 0xB4\n\
+	lsls r0, 9\n\
+	adds r2, r0\n\
+	ldrh r0, [r2, 0x2]\n\
+	strh r0, [r1]\n\
+	ldrh r0, [r1]\n\
+	ldr r1, _08108944 @ =gUnknown_02024C07\n\
+	ldrb r1, [r1]\n\
+	ldr r2, _08108948 @ =gUnknown_02024C08\n\
+	ldrb r2, [r2]\n\
+	bl move_effectiveness_something\n\
+	ldr r0, [r4]\n\
+	cmp r0, 0x78\n\
+	bne _081088D6\n\
+	movs r0, 0x50\n\
+	str r0, [r4]\n\
+_081088D6:\n\
+	ldr r0, [r4]\n\
+	cmp r0, 0xF0\n\
+	bne _081088E0\n\
+	movs r0, 0xA0\n\
+	str r0, [r4]\n\
+_081088E0:\n\
+	ldr r0, [r4]\n\
+	cmp r0, 0x1E\n\
+	bne _081088EA\n\
+	movs r0, 0x14\n\
+	str r0, [r4]\n\
+_081088EA:\n\
+	ldr r0, [r4]\n\
+	cmp r0, 0xF\n\
+	bne _081088F4\n\
+	movs r0, 0xA\n\
+	str r0, [r4]\n\
+_081088F4:\n\
+	ldrb r1, [r5]\n\
+	movs r0, 0x8\n\
+	ands r0, r1\n\
+	cmp r0, 0\n\
+	beq _08108902\n\
+	movs r0, 0\n\
+	str r0, [r4]\n\
+_08108902:\n\
+	ldrb r0, [r4]\n\
+	ldr r3, _0810894C @ =gAIScriptPtr\n\
+	ldr r2, [r3]\n\
+	ldrb r1, [r2, 0x1]\n\
+	cmp r0, r1\n\
+	bne _08108950\n\
+	ldrb r1, [r2, 0x2]\n\
+	ldrb r0, [r2, 0x3]\n\
+	lsls r0, 8\n\
+	orrs r1, r0\n\
+	ldrb r0, [r2, 0x4]\n\
+	lsls r0, 16\n\
+	orrs r1, r0\n\
+	ldrb r0, [r2, 0x5]\n\
+	lsls r0, 24\n\
+	orrs r1, r0\n\
+	str r1, [r3]\n\
+	b _08108954\n\
+	.align 2, 0\n\
+_08108928: .4byte gUnknown_02024DEC\n\
+_0810892C: .4byte 0x02000000\n\
+_08108930: .4byte 0x0001601c\n\
+_08108934: .4byte gUnknown_02024C68\n\
+_08108938: .4byte gCritMultiplier\n\
+_0810893C: .4byte gUnknown_02024BEC\n\
+_08108940: .4byte gUnknown_02024BE6\n\
+_08108944: .4byte gUnknown_02024C07\n\
+_08108948: .4byte gUnknown_02024C08\n\
+_0810894C: .4byte gAIScriptPtr\n\
+_08108950:\n\
+	adds r0, r2, 0x6\n\
+	str r0, [r3]\n\
+_08108954:\n\
+	pop {r4,r5}\n\
+	pop {r0}\n\
+	bx r0\n\
+	.syntax divided\n");
+}
+
+void BattleAICmd_unk_32(void)
+{}
+
+void BattleAICmd_unk_33(void)
+{}
