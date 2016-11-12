@@ -1133,7 +1133,7 @@ _0810BC08:
 	adds r0, r1
 	ldrb r0, [r0]
 	lsls r0, 2
-	ldr r1, _0810BC7C @ =gUnknown_083F7EB8
+	ldr r1, _0810BC7C @ =gPokeblockNames
 	adds r0, r1
 	ldr r1, [r0]
 	mov r0, r9
@@ -1180,7 +1180,7 @@ _0810BC6C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0810BC7C: .4byte gUnknown_083F7EB8
+_0810BC7C: .4byte gPokeblockNames
 _0810BC80: .4byte gSaveBlock1 + 0x7F8
 	thumb_func_end sub_810BB88
 
@@ -2302,7 +2302,7 @@ sub_810C540: @ 810C540
 	movs r3, 0xB
 	bl MenuZeroFillWindowRect
 	ldr r0, _0810C5A4 @ =gStringVar1
-	ldr r4, _0810C5A8 @ =gUnknown_083F7EB8
+	ldr r4, _0810C5A8 @ =gPokeblockNames
 	ldr r3, _0810C5AC @ =gSaveBlock1
 	ldr r2, _0810C5B0 @ =gUnknown_02039248
 	ldrb r1, [r2]
@@ -2333,7 +2333,7 @@ sub_810C540: @ 810C540
 	.align 2, 0
 _0810C5A0: .4byte gWindowConfig_81E6E50
 _0810C5A4: .4byte gStringVar1
-_0810C5A8: .4byte gUnknown_083F7EB8
+_0810C5A8: .4byte gPokeblockNames
 _0810C5AC: .4byte gSaveBlock1
 _0810C5B0: .4byte gUnknown_02039248
 _0810C5B4: .4byte gStringVar4
@@ -2587,7 +2587,7 @@ sub_810C788: @ 810C788
 	lsls r4, 16
 	lsrs r4, 16
 	ldr r0, _0810C840 @ =gUnknown_030041C0
-	ldr r2, _0810C844 @ =gUnknown_083F7EB8
+	ldr r2, _0810C844 @ =gPokeblockNames
 	ldr r1, _0810C848 @ =0xfffff808
 	adds r5, r1
 	ldrh r1, [r7]
@@ -2655,7 +2655,7 @@ _0810C834: .4byte gEnemyParty
 _0810C838: .4byte gScriptItemId
 _0810C83C: .4byte gSaveBlock1 + 0x7F8
 _0810C840: .4byte gUnknown_030041C0
-_0810C844: .4byte gUnknown_083F7EB8
+_0810C844: .4byte gPokeblockNames
 _0810C848: .4byte 0xfffff808
 _0810C84C: .4byte gTasks
 _0810C850: .4byte sub_810C2C8
@@ -2670,9 +2670,9 @@ sub_810C854: @ 810C854
 	lsrs r5, 24
 	ldr r4, _0810C8B8 @ =gScriptItemId
 	ldrb r0, [r4]
-	bl sub_80C8478
+	bl SafariZoneActivatePokeblockFeeder
 	ldr r0, _0810C8BC @ =gStringVar1
-	ldr r3, _0810C8C0 @ =gUnknown_083F7EB8
+	ldr r3, _0810C8C0 @ =gPokeblockNames
 	ldr r2, _0810C8C4 @ =gSaveBlock1
 	ldrh r1, [r4]
 	lsls r1, 3
@@ -2712,7 +2712,7 @@ sub_810C854: @ 810C854
 	.align 2, 0
 _0810C8B8: .4byte gScriptItemId
 _0810C8BC: .4byte gStringVar1
-_0810C8C0: .4byte gUnknown_083F7EB8
+_0810C8C0: .4byte gPokeblockNames
 _0810C8C4: .4byte gSaveBlock1
 _0810C8C8: .4byte gScriptResult
 _0810C8CC: .4byte gTasks
@@ -3083,7 +3083,7 @@ sub_810CB44: @ 810CB44
 	movs r1, 0
 	bl sub_810CA9C
 	lsls r0, 24
-	ldr r1, _0810CB64 @ =gUnknown_083F7EB8
+	ldr r1, _0810CB64 @ =gPokeblockNames
 	lsrs r0, 22
 	adds r0, r1
 	ldr r1, [r0]
@@ -3093,7 +3093,7 @@ sub_810CB44: @ 810CB44
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0810CB64: .4byte gUnknown_083F7EB8
+_0810CB64: .4byte gPokeblockNames
 	thumb_func_end sub_810CB44
 
 	thumb_func_start sub_810CB68
@@ -3103,7 +3103,7 @@ sub_810CB68: @ 810CB68
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r4, 0
-	ldr r7, _0810CB98 @ =gUnknown_083F7EB8
+	ldr r7, _0810CB98 @ =gPokeblockNames
 _0810CB74:
 	lsls r1, r4, 3
 	ldr r0, _0810CB9C @ =gUnknown_083F7F9C
@@ -3122,7 +3122,7 @@ _0810CB74:
 	movs r0, 0x1
 	b _0810CBAC
 	.align 2, 0
-_0810CB98: .4byte gUnknown_083F7EB8
+_0810CB98: .4byte gPokeblockNames
 _0810CB9C: .4byte gUnknown_083F7F9C
 _0810CBA0:
 	adds r0, r4, 0x1

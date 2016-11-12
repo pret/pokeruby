@@ -14864,7 +14864,7 @@ sub_8014D98: @ 8014D98
 	strh r1, [r0]
 	ldr r0, _08014DE0 @ =gUnknown_030042A0
 	strh r1, [r0]
-	ldr r1, _08014DE4 @ =gUnknown_02038808
+	ldr r1, _08014DE4 @ =gNumSafariBalls
 	ldrb r0, [r1]
 	subs r0, 0x1
 	strb r0, [r1]
@@ -14885,7 +14885,7 @@ _08014DD4: .4byte gUnknown_02024A7A
 _08014DD8: .4byte gUnknown_02024A7E
 _08014DDC: .4byte gUnknown_030042A4
 _08014DE0: .4byte gUnknown_030042A0
-_08014DE4: .4byte gUnknown_02038808
+_08014DE4: .4byte gNumSafariBalls
 _08014DE8: .4byte gUnknown_02024C04
 _08014DEC: .4byte gUnknown_02024C10
 _08014DF0: .4byte gUnknown_081D9E48
