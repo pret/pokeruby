@@ -1,13 +1,33 @@
 #include "global.h"
 #include "fieldmap.h"
+#include "sprite.h"
 #include "text.h"
 
+//ToDo: argument types
+extern u8 MapGridGetMetatileLayerTypeAt();
+
+//ToDo: combine these buffers into a single 2-D array
+extern u16 gBG0TilemapBuffer[][0x400];
 extern u16 gBG1TilemapBuffer[];
 extern u16 gBG2TilemapBuffer[];
 
 extern u8 gUnknown_03000590[];
 extern u16 gUnknown_03000598;
 extern u16 gUnknown_0300059A;
+extern u16 gUnknown_03004898;
+extern u16 gUnknown_0300489C;
+
+struct CameraSomething
+{
+    void (*callback)(struct CameraSomething *);
+    u32 unk4;
+    s32 unk8;
+    s32 unkC;
+    s32 unk10;
+    s32 unk14;
+};
+
+extern struct CameraSomething gUnknown_03004880;
 
 struct Coords8
 {
@@ -17,7 +37,9 @@ struct Coords8
 
 void DrawWholeMapViewInternal(int x, int y, struct MapData *mapData);
 void DrawMetatileAt(struct MapData *mapData, u16, int, int);
-void DrawMetatile(u8, u8 *, u16);
+void DrawMetatile(s32 a, u16 *b, u16 c);
+//ToDo: argument types
+u8 AddCameraObject();
 
 void move_tilemap_camera_to_upper_left_corner_(u8 *a)
 {
@@ -29,17 +51,17 @@ void move_tilemap_camera_to_upper_left_corner_(u8 *a)
 }
 
 /*
-void tilemap_move_something(u8 *a, u32 b, u32 c, u32 d)
+void tilemap_move_something(u8 *a, u32 b, u32 c)
 {
     a[2] += b;
     a[2] &= 0x1F;
     a[3] += c;
-    a[3] &= d;
+    a[3] &= 0x1F;
 }
 */
 
 __attribute__((naked))
-void tilemap_move_something(u8 *a, u32 b, u32 c, u32 d)
+void tilemap_move_something(u8 *a, u32 b, u32 c)
 {
     asm(".syntax unified\n\
     ldrb r3, [r0, 0x2]\n\
@@ -245,3 +267,204 @@ void DrawMetatileAt(struct MapData *mapData, u16 b, int c, int d)
     }
     DrawMetatile(MapGridGetMetatileLayerTypeAt(c, d), (u8 *)r5 + id * 16, b);
 }
+
+void DrawMetatile(s32 a, u16 *b, u16 c)
+{
+    switch(a)
+    {
+        case 2:
+            gBG0TilemapBuffer[3][c] = b[0];
+            gBG0TilemapBuffer[3][c + 1] = b[1];
+            gBG0TilemapBuffer[3][c + 0x20] = b[2];
+            gBG0TilemapBuffer[3][c + 0x21] = b[3];
+            
+            gBG0TilemapBuffer[2][c] = 0;
+            gBG0TilemapBuffer[2][c + 1] = 0;
+            gBG0TilemapBuffer[2][c + 0x20] = 0;
+            gBG0TilemapBuffer[2][c + 0x21] = 0;
+            
+            gBG0TilemapBuffer[1][c] = b[4];
+            gBG0TilemapBuffer[1][c + 1] = b[5];
+            gBG0TilemapBuffer[1][c + 0x20] = b[6];
+            gBG0TilemapBuffer[1][c + 0x21] = b[7];
+            break;
+        case 1:
+            gBG0TilemapBuffer[3][c] = b[0];
+            gBG0TilemapBuffer[3][c + 1] = b[1];
+            gBG0TilemapBuffer[3][c + 0x20] = b[2];
+            gBG0TilemapBuffer[3][c + 0x21] = b[3];
+            
+            gBG0TilemapBuffer[2][c] = b[4];
+            gBG0TilemapBuffer[2][c + 1] = b[5];
+            gBG0TilemapBuffer[2][c + 0x20] = b[6];
+            gBG0TilemapBuffer[2][c + 0x21] = b[7];
+            
+            gBG0TilemapBuffer[1][c] = 0;
+            gBG0TilemapBuffer[1][c + 1] = 0;
+            gBG0TilemapBuffer[1][c + 0x20] = 0;
+            gBG0TilemapBuffer[1][c + 0x21] = 0;
+            break;
+        case 0:
+            gBG0TilemapBuffer[3][c] = 0x3014;
+            gBG0TilemapBuffer[3][c + 1] = 0x3014;
+            gBG0TilemapBuffer[3][c + 0x20] = 0x3014;
+            gBG0TilemapBuffer[3][c + 0x21] = 0x3014;
+            
+            gBG0TilemapBuffer[2][c] = b[0];
+            gBG0TilemapBuffer[2][c + 1] = b[1];
+            gBG0TilemapBuffer[2][c + 0x20] = b[2];
+            gBG0TilemapBuffer[2][c + 0x21] = b[3];
+            
+            gBG0TilemapBuffer[1][c] = b[4];
+            gBG0TilemapBuffer[1][c + 1] = b[5];
+            gBG0TilemapBuffer[1][c + 0x20] = b[6];
+            gBG0TilemapBuffer[1][c + 0x21] = b[7];
+            break;
+    }
+}
+
+/*
+s32 MapPosToBgTilemapOffset(u8 *a, s32 x, s32 y)
+{
+    x = (x - gSaveBlock1.pos.x) * 2;
+    if(x >= 32 || x < 0)
+        return -1;
+    x = x + a[2];
+    if(x >= 32)
+        x -= 32;
+    
+    y = (y - gSaveBlock1.pos.y) * 2;
+    if(y >= 32 || y < 0)
+        return -1;
+    y = y + a[3];
+    if(y >= 32)
+        y -= 32;
+    
+    return y * 32 + x;
+}
+*/
+
+s32 MapPosToBgTilemapOffset(u8 *a, s32 x, s32 y)
+{
+    x -= gSaveBlock1.pos.x;
+    x *= 2;
+    if(x >= 32 || x < 0)
+        return -1;
+    x = x + a[2];
+    if(x >= 32)
+        x -= 32;
+    
+    y = (y - gSaveBlock1.pos.y) * 2;
+    if(y >= 32 || y < 0)
+        return -1;
+    y = y + a[3];
+    if(y >= 32)
+        y -= 32;
+    
+    return y * 32 + x;
+}
+
+void CameraUpdateCallback(struct CameraSomething *a)
+{
+    if(a->unk4 != 0)
+    {
+        a->unk8 = gSprites[a->unk4].data2;
+        a->unkC = gSprites[a->unk4].data3;
+    }
+}
+
+void ResetCameraUpdateInfo(void)
+{
+    gUnknown_03004880.unk8 = 0;
+    gUnknown_03004880.unkC = 0;
+    gUnknown_03004880.unk10 = 0;
+    gUnknown_03004880.unk14 = 0;
+    gUnknown_03004880.unk4 = 0;
+    gUnknown_03004880.callback = 0;
+}
+
+u32 InitCameraUpdateCallback(u8 a)
+{
+    if(gUnknown_03004880.unk4 != 0)
+        DestroySprite(&gSprites[gUnknown_03004880.unk4]);
+    gUnknown_03004880.unk4 = AddCameraObject(a);
+    gUnknown_03004880.callback = CameraUpdateCallback;
+    return 0;
+}
+
+void CameraUpdate(void)
+{
+    int r4;
+    int r5;
+    int r0;
+    int r1;
+    int r7;
+    int r8;
+    
+    if(gUnknown_03004880.callback != NULL)
+        gUnknown_03004880.callback(&gUnknown_03004880);
+    r7 = gUnknown_03004880.unk8;
+    r8 = gUnknown_03004880.unkC;
+    r4 = 0;
+    r5 = 0;
+    r1 = gUnknown_03004880.unk10;
+    r0 = gUnknown_03004880.unk14;
+    
+    
+    if(r1 == 0 && r7 != 0)
+    {
+        if(r7 > 0)
+            r4 = 1;
+        else
+            r4 = -1;
+    }
+    if(r0 == 0 && r8 != 0)
+    {
+        if(r8 > 0)
+            r5 = 1;
+        else
+            r5 = -1;
+    }
+    if(r1 != 0 && r1 == -r7)
+    {
+        if(r7 > 0)
+            r4 = 1;
+        else
+            r4 = -1;
+    }
+    if(r0 != 0 && r0 == -r8)
+    {
+        if(r8 > 0)
+            r4 = 1;
+        else
+            r4 = -1;
+    }
+    
+    gUnknown_03004880.unk10 += r7;
+    gUnknown_03004880.unk10 = gUnknown_03004880.unk10 - 16 * (gUnknown_03004880.unk10 / 16);    
+    
+    gUnknown_03004880.unk14 += r8;
+    gUnknown_03004880.unk14 = gUnknown_03004880.unk14 - 16 * (gUnknown_03004880.unk14 / 16);
+    
+    if(r4 != 0 || r5 != 0)
+    {
+        CameraMove(r4, r5);
+        UpdateFieldObjectsForCameraUpdate(r4, r5);
+        RotatingGatePuzzleCameraUpdate(r4, r5);
+        ResetBerryTreeSparkleFlags();
+        tilemap_move_something(gUnknown_03000590, r4 * 2, r5 * 2);
+        RedrawMapSlicesForCameraUpdate(gUnknown_03000590, r4 * 2, r5 * 2);
+    }
+    
+    coords8_add(gUnknown_03000590, r7, r8);
+    gUnknown_0300489C -= r7;
+    gUnknown_03004898 -= r8;
+}
+
+/*
+void camera_move_and_redraw(int a, int b)
+{
+    CameraMove(a, b);
+    
+}
+*/
