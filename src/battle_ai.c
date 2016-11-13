@@ -17,9 +17,9 @@ extern u8 gUnknown_02024A60;
 extern u8 gUnknown_02024C07; 
 extern u8 gUnknown_02024C08;
 extern u8 gUnknown_02024C0C;
-extern u8 gUnknown_02024DEC;
+extern u16 gUnknown_02024DEC;
 extern u8 gUnknown_02024C68;
-extern u8 gUnknown_02024BEC;
+extern u32 gUnknown_02024BEC;
 extern u8 gUnknown_0201601C;
 extern u8 gUnknown_0201601F;
 extern u16 gUnknown_02024BE6;
@@ -1298,22 +1298,36 @@ void BattleAICmd_get_ability(void)
     gAIScriptPtr += 2;
 }
 
+extern struct
+{
+    u8 unknownStuff[0x16000];
+    struct
+    {
+        u8 filler0[0x1C];
+        u8 unk1C;
+        u8 filler1D[2];
+        u8 unk1F;
+        u8 filler16020[0x7E0];
+    } unk_2016000;
+    struct UnknownStruct2 unk_2016800;
+} ewram; //0x02000000
+
+
 void BattleAICmd_unk_30(void)
 {
-	s8 loopCounter;
-	struct SmallBattleStruct1 * fucking_struct = &(unk_2000000.unk);
-	
+	s32 loopCounter;
+    
 	gUnknown_02024DEC = 0;
-	fucking_struct -> unk1 = 0;
-	fucking_struct -> unk4 = 1;
+    ewram.unk_2016000.unk1C = 0;
+    ewram.unk_2016000.unk1F = 1;
 	gUnknown_02024C68 = 0;
 	gCritMultiplier = 1;
-	unk_2016800.unk8 = 0;
+	ewram.unk_2016800.unk8 = 0;
 	
 	for(loopCounter = 0; loopCounter <= 3; loopCounter++)
 	{
 		gUnknown_02024BEC = 40;
-		gUnknown_02024BE6 = gUnknown_02024A8C[gUnknown_02024C07].species;
+		gUnknown_02024BE6 = gBattleMons[gUnknown_02024C07].moves[loopCounter];
 		
 		if (gUnknown_02024BE6)
 		{
@@ -1332,12 +1346,14 @@ void BattleAICmd_unk_30(void)
 			if(gUnknown_02024C68 & 8)
 				gUnknown_02024BEC = 0;
 			
-			if (unk_2016800.unk8 < gUnknown_02024BEC)
-				unk_2016800.unk8 = gUnknown_02024BEC;
+			if (ewram.unk_2016800.unk8 < gUnknown_02024BEC)
+				ewram.unk_2016800.unk8 = gUnknown_02024BEC;
 		}
 	}
 	gAIScriptPtr += 1;
 }
+
+
 /*
 	thumb_func_start BattleAICmd_unk_30
 BattleAICmd_unk_30: @ 81087A0
