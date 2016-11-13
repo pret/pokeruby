@@ -118,7 +118,7 @@ AifData *read_aif(uint8_t * aif_file_data, unsigned long aif_file_data_size)
 	unsigned long num_sample_frames = 0;
 
 	// Read all the Chunks to populate the AifData struct.
-	while (pos < aif_file_data_size)
+	while ((pos + 8) < aif_file_data_size)
 	{
 		// Read Chunk id
 		memcpy(chunk_name, aif_file_data + pos, 4);
@@ -128,6 +128,11 @@ AifData *read_aif(uint8_t * aif_file_data, unsigned long aif_file_data_size)
 		chunk_size |= (aif_file_data[pos++] << 16);
 		chunk_size |= (aif_file_data[pos++] <<  8);
 		chunk_size |=  aif_file_data[pos++];
+
+		if ((pos + chunk_size) > aif_file_data_size)
+		{
+			FATAL_ERROR("%s chunk at 0x%lx reached end of file before finishing\n", chunk_name, pos);
+		}
 
 		if (strcmp(chunk_name, "COMM") == 0)
 		{
