@@ -159,6 +159,11 @@ AifData *read_aif(uint8_t * aif_file_data, unsigned long aif_file_data_size)
 			pos += 10;
 
 			aif_data->sample_rate = sample_rate;
+
+			if (aif_data->num_samples == 0)
+			{
+				aif_data->num_samples = num_sample_frames;
+			}
 		}
 		else if (strcmp(chunk_name, "MARK") == 0)
 		{
