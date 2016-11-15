@@ -205,9 +205,9 @@ gSpecials::
 	.4byte sub_80C8080
 	.4byte SetSSTidalFlag
 	.4byte ResetSSTidalFlag
-	.4byte sub_80C81B8
-	.4byte sub_80C81E4
-	.4byte sub_80C82EC
+	.4byte EnterSafariMode
+	.4byte ExitSafariMode
+	.4byte SafariZoneGetPokeblockNameInFeeder
 	.4byte sub_810BAF4
 	.4byte sub_810D32C
 	.4byte sub_810D378

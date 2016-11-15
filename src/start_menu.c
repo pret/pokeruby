@@ -26,7 +26,7 @@ extern void save_serialize_map(void);
 extern void PlayRainSoundEffect(void);
 extern void sub_8093130(u8, void (*)(void));
 extern void sub_805469C(void);
-extern void sub_80C823C(void);
+extern void SafariZoneRetirePrompt(void);
 extern void CB2_InitOptionMenu(void);
 extern void sub_8093110(void (*)(void));
 extern void sub_80EBA5C(void);
@@ -72,7 +72,7 @@ extern u16 gScriptResult;
 extern u8 (*gCallback_03004AE8)(void);
 extern u8 gUnknown_03004860;
 extern struct MenuItem gStartMenuItems[];
-extern u8 gUnknown_02038808;
+extern u8 gNumSafariBalls;
 
 EWRAM_DATA static u8 sStartMenuCursorPos = 0;
 EWRAM_DATA static u8 sNumStartMenuActions = 0;
@@ -208,7 +208,7 @@ static void BuildStartMenuActions_Link(void)
 //Show number of safari balls left
 static void DisplaySafariBallsWindow(void)
 {
-    sub_8072C44(gStringVar1, gUnknown_02038808, 12, 1);
+    sub_8072C44(gStringVar1, gNumSafariBalls, 12, 1);
     MenuDrawTextWindow(0, 0, 10, 5);
     MenuPrint(gOtherText_SafariStock, 1, 1);
 }
@@ -456,7 +456,7 @@ u8 StartMenu_ExitCallback(void)
 u8 StartMenu_RetireCallback(void)
 {
     sub_8071C20();
-    sub_80C823C();
+    SafariZoneRetirePrompt();
     return 1;
 }
 
@@ -473,7 +473,8 @@ u8 StartMenu_PlayerLinkCallback(void)
 }
 
 //Save dialog status
-enum {
+enum
+{
     SAVE_IN_PROGRESS,
     SAVE_SUCCESS,
     SAVE_CANCELED,

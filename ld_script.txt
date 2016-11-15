@@ -69,7 +69,7 @@ SECTIONS {
         asm/fieldmap.o(.text);
         asm/metatile_behavior.o(.text);
         asm/field_camera.o(.text);
-        asm/field_door.o(.text);
+        src/field_door.o(.text);
         asm/field_player_avatar.o(.text);
         asm/field_map_obj.o(.text);
         asm/field_ground_effect.o(.text);
@@ -94,7 +94,7 @@ SECTIONS {
         asm/rom_8074BAC.o(.text);
         src/task.o(.text);
         asm/rom5.o(.text);
-        asm/title_screen.o(.text);
+        src/title_screen.o(.text);
         asm/weather.o(.text);
         asm/rom_8080874.o(.text);
         src/battle_setup.o(.text);
@@ -135,7 +135,7 @@ SECTIONS {
         src/truck_scene.o(.text);
         asm/porthole.o(.text);
         asm/rotating_gate.o(.text);
-        asm/safari_zone.o(.text);
+        src/safari_zone.o(.text);
         asm/contest_link_80C857C.o(.text);
         asm/item_use.o(.text);
         asm/battle_anim_80CA710.o(.text);

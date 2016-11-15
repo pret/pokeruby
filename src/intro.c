@@ -141,7 +141,7 @@ void c2_copyright_1(void)
     }
 }
 
-void sub_813BA88(void)
+void CB2_InitCopyrightScreen(void)
 {
     SetUpCopyrightScreen();
 }

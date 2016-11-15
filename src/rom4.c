@@ -172,7 +172,7 @@ u8 sub_8053B60(struct UnkPlayerStruct *playerStruct, u8, u16, u8);
 u8 MetatileBehavior_IsSurfableWaterOrUnderwater(u8);
 bool8 sub_8056F24(u8);
 bool8 sub_8056F08(u8);
-bool8 sub_8056EAC(u8);
+bool8 MetatileBehavior_IsDoor(u8);
 bool8 MetatileBehavior_IsSouthArrowWarp(u8);
 bool8 MetatileBehavior_IsNorthArrowWarp(u8);
 bool8 MetatileBehavior_IsWestArrowWarp(u8);
@@ -769,7 +769,7 @@ u8 sub_8053B60(struct UnkPlayerStruct *playerStruct, u8 a2, u16 a3, u8 a4)
         return 4;
     if (sub_8056F24(a3) == TRUE)
         return 2;
-    if (sub_8056F08(a3) == TRUE || sub_8056EAC(a3) == TRUE)
+    if (sub_8056F08(a3) == TRUE || MetatileBehavior_IsDoor(a3) == TRUE)
         return 1;
     if (MetatileBehavior_IsSouthArrowWarp(a3) == TRUE)
         return 2;

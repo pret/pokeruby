@@ -25,8 +25,8 @@
 #include <stdint.h>
 
 /* extended.c */
-void ieee754_write_extended (double, unsigned char*);
-double ieee754_read_extended (unsigned char*);
+void ieee754_write_extended (double, uint8_t*);
+double ieee754_read_extended (uint8_t*);
 
 #ifdef _MSC_VER
 
@@ -50,8 +50,8 @@ do                                          \
 
 typedef struct {
 	unsigned long num_samples;
-	char *samples;
-	unsigned char midi_note;
+	uint8_t *samples;
+	uint8_t midi_note;
 	unsigned long loop_offset;
 	double sample_rate;
 } AifData;
@@ -79,7 +79,7 @@ void change_file_extension(char *filename, const char *new_extension)
 	memcpy(dot + 1, new_extension, 3);
 }
 
-AifData *read_aif(char * aif_file_data, unsigned long aif_file_data_size)
+AifData *read_aif(uint8_t * aif_file_data, unsigned long aif_file_data_size)
 {
 	AifData *aif_data = (AifData *)malloc(sizeof(AifData));
 
@@ -99,7 +99,7 @@ AifData *read_aif(char * aif_file_data, unsigned long aif_file_data_size)
 	unsigned long whole_chunk_size = aif_file_data[pos++] << 24;
 	whole_chunk_size |= (aif_file_data[pos++] << 16);
 	whole_chunk_size |= (aif_file_data[pos++] <<  8);
-	whole_chunk_size |= (unsigned char)aif_file_data[pos++];
+	whole_chunk_size |= (uint8_t)aif_file_data[pos++];
 
 	unsigned long expected_whole_chunk_size = aif_file_data_size - 8;
 	if (whole_chunk_size != expected_whole_chunk_size)
@@ -118,7 +118,7 @@ AifData *read_aif(char * aif_file_data, unsigned long aif_file_data_size)
 	unsigned long num_sample_frames = 0;
 
 	// Read all the Chunks to populate the AifData struct.
-	while (pos < aif_file_data_size)
+	while ((pos + 8) < aif_file_data_size)
 	{
 		// Read Chunk id
 		memcpy(chunk_name, aif_file_data + pos, 4);
@@ -129,10 +129,15 @@ AifData *read_aif(char * aif_file_data, unsigned long aif_file_data_size)
 		chunk_size |= (aif_file_data[pos++] <<  8);
 		chunk_size |=  aif_file_data[pos++];
 
+		if ((pos + chunk_size) > aif_file_data_size)
+		{
+			FATAL_ERROR("%s chunk at 0x%lx reached end of file before finishing\n", chunk_name, pos);
+		}
+
 		if (strcmp(chunk_name, "COMM") == 0)
 		{
 			short num_channels = (aif_file_data[pos++] << 8);
-			num_channels |= (unsigned char)aif_file_data[pos++];
+			num_channels |= (uint8_t)aif_file_data[pos++];
 			if (num_channels != 1)
 			{
 				FATAL_ERROR("numChannels (%d) in the COMM Chunk must be 1!\n", num_channels);
@@ -141,24 +146,29 @@ AifData *read_aif(char * aif_file_data, unsigned long aif_file_data_size)
 			num_sample_frames =  (aif_file_data[pos++] << 24);
 			num_sample_frames |= (aif_file_data[pos++] << 16);
 			num_sample_frames |= (aif_file_data[pos++] <<  8);
-			num_sample_frames |=  (unsigned char)aif_file_data[pos++];
+			num_sample_frames |=  (uint8_t)aif_file_data[pos++];
 
 			short sample_size = (aif_file_data[pos++] << 8);
-			sample_size |= (unsigned char)aif_file_data[pos++];
+			sample_size |= (uint8_t)aif_file_data[pos++];
 			if (sample_size != 8)
 			{
 				FATAL_ERROR("sampleSize (%d) in the COMM Chunk must be 8!\n", sample_size);
 			}
 
-			double sample_rate = ieee754_read_extended((unsigned char*)(aif_file_data + pos));
+			double sample_rate = ieee754_read_extended((uint8_t*)(aif_file_data + pos));
 			pos += 10;
 
 			aif_data->sample_rate = sample_rate;
+
+			if (aif_data->num_samples == 0)
+			{
+				aif_data->num_samples = num_sample_frames;
+			}
 		}
 		else if (strcmp(chunk_name, "MARK") == 0)
 		{
 			unsigned short num_markers = (aif_file_data[pos++] << 8);
-			num_markers |= (unsigned char)aif_file_data[pos++];
+			num_markers |= (uint8_t)aif_file_data[pos++];
 
 			unsigned long loop_start = 0;
 
@@ -166,15 +176,15 @@ AifData *read_aif(char * aif_file_data, unsigned long aif_file_data_size)
 			for (int i = 0; i < num_markers; i++)
 			{
 				unsigned short marker_id = (aif_file_data[pos++] << 8);
-				marker_id |= (unsigned char)aif_file_data[pos++];
+				marker_id |= (uint8_t)aif_file_data[pos++];
 
 				unsigned long marker_position = (aif_file_data[pos++] << 24);
 				marker_position |= (aif_file_data[pos++] << 16);
 				marker_position |= (aif_file_data[pos++] << 8);
-				marker_position |=  (unsigned char)aif_file_data[pos++];
+				marker_position |=  (uint8_t)aif_file_data[pos++];
 
 				// Marker id is a pascal-style string.
-				unsigned char marker_name_size = aif_file_data[pos++];
+				uint8_t marker_name_size = aif_file_data[pos++];
 				char *marker_name = (char *)malloc((marker_name_size + 1) * sizeof(char));
 				memcpy(marker_name, aif_file_data + pos, marker_name_size);
 				marker_name[marker_name_size] = '\0';
@@ -196,7 +206,7 @@ AifData *read_aif(char * aif_file_data, unsigned long aif_file_data_size)
 		}
 		else if (strcmp(chunk_name, "INST") == 0)
 		{
-			unsigned char midi_note = (unsigned char)aif_file_data[pos++];
+			uint8_t midi_note = (uint8_t)aif_file_data[pos++];
 
 			aif_data->midi_note = midi_note;
 
@@ -208,7 +218,7 @@ AifData *read_aif(char * aif_file_data, unsigned long aif_file_data_size)
 			// SKip offset and blockSize
 			pos += 8;
 
-			char *sample_data = (char *)malloc(num_sample_frames * sizeof(char));
+			uint8_t *sample_data = (uint8_t *)malloc(num_sample_frames * sizeof(uint8_t));
 			memcpy(sample_data, aif_file_data + pos, num_sample_frames);
 
 			aif_data->samples = sample_data;
@@ -263,7 +273,7 @@ void aif2pcm(const char *aif_filename)
 	fseek(aif_file, 0, SEEK_SET);
 
 	// Create buffer for samples.
-	char *aif_file_data = (char *)malloc(aif_file_length * sizeof(char));
+	uint8_t *aif_file_data = (uint8_t *)malloc(aif_file_length * sizeof(uint8_t));
 	if (!aif_file_data)
 	{
 		FATAL_ERROR("Failed to allocate buffer for aif file data!\n");
@@ -406,7 +416,7 @@ void pcm2aif(const char *pcm_filename, char base_note, long pitch_adjust, long l
 
 	// Common Chunk sampleRate
 	double sample_rate = pitch_adjust / 1024.0;
-	unsigned char sample_rate_buffer[10];
+	uint8_t sample_rate_buffer[10];
 	ieee754_write_extended(sample_rate, sample_rate_buffer);
 	for (int i = 0; i < 10; i++)
 	{
