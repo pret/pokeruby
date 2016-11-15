@@ -960,7 +960,7 @@ gUnknown_020391B4: @ 20391B4
 gUnknown_02039234: @ 2039234
 	.space 0x4
 
-gUnknown_02039238: @ 2039238
+gAIScriptPtr: @ 2039238
 	.space 0x4
 
 gUnknown_0203923C: @ 203923C
