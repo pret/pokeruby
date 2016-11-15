@@ -483,11 +483,7 @@ gUnknown_0202E8FA: @ 202E8FA
 
 	.include "src/start_menu.o"
 	.include "src/menu.o"
-
-	.align 2
-gUnknown_0202E9D8: @ 202E9D8
-	.space 0xF0
-
+	.include "src/tileset_anim.o"
 	.include "src/palette.o"
 
 	.align 2

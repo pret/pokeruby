@@ -88,7 +88,7 @@ SECTIONS {
         asm/rom_806D7F8.o(.text);
         src/start_menu.o(.text);
         src/menu.o(.text);
-        asm/tileset.o(.text);
+        src/tileset_anim.o(.text);
         src/palette.o(.text);
         src/sound.o(.text);
         asm/rom_8074BAC.o(.text);
