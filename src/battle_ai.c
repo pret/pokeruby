@@ -7,6 +7,12 @@
 #define AIScriptRead16(ptr) ((ptr)[0] | (ptr)[1] << 8)
 #define AIScriptRead8(ptr) ((ptr)[0])
 
+/* 
+this file is a mess. I stopped part way because it starts to involve a huge struct that begins at 0x2000000 and goes
+all the way to at least 0x2016800, in addition to extremely hard functions that I can't seem to get right. I am leaving this file
+as it currently is until someone bothers to document this huge struct.
+*/
+
 extern u8 sub_8015A98(u8, u8, u8);
 extern u8 battle_side_get_owner(u8);
 extern s16 battle_get_per_side_status(u8);
@@ -1298,6 +1304,7 @@ void BattleAICmd_get_ability(void)
     gAIScriptPtr += 2;
 }
 
+// this should probably be in battle.h after this file is fully decompiled.
 extern struct
 {
     u8 unknownStuff[0x16000];
@@ -1312,7 +1319,7 @@ extern struct
     struct UnknownStruct2 unk_2016800;
 } ewram; //0x02000000
 
-
+#ifdef NONMATCHING
 void BattleAICmd_unk_30(void)
 {
 	s32 loopCounter;
@@ -1352,127 +1359,129 @@ void BattleAICmd_unk_30(void)
 	}
 	gAIScriptPtr += 1;
 }
+#else
+__attribute__((naked))
+void BattleAICmd_unk_30(void)
+{
+	asm(".syntax unified\n\
+	push {r4-r7,lr}\n\
+	mov r7, r8\n\
+	push {r7}\n\
+	ldr r0, _0810885C @ =gUnknown_02024DEC\n\
+	movs r2, 0\n\
+	strh r2, [r0]\n\
+	ldr r1, _08108860 @ =0x02000000\n\
+	ldr r3, _08108864 @ =0x0001601c\n\
+	adds r0, r1, r3\n\
+	movs r4, 0\n\
+	strb r2, [r0]\n\
+	adds r3, 0x3\n\
+	adds r0, r1, r3\n\
+	movs r3, 0x1\n\
+	strb r3, [r0]\n\
+	ldr r0, _08108868 @ =gUnknown_02024C68\n\
+	strb r2, [r0]\n\
+	ldr r0, _0810886C @ =gCritMultiplier\n\
+	strb r3, [r0]\n\
+	movs r0, 0xB4\n\
+	lsls r0, 9\n\
+	adds r1, r0\n\
+	str r4, [r1, 0x8]\n\
+	movs r5, 0\n\
+	ldr r4, _08108870 @ =gUnknown_02024BEC\n\
+	ldr r7, _08108874 @ =gUnknown_02024BE6\n\
+	ldr r3, _08108878 @ =gUnknown_02024A8C\n\
+	mov r8, r3\n\
+	ldr r6, _0810887C @ =gUnknown_02024C07\n\
+_081087DA:\n\
+	movs r0, 0x28\n\
+	str r0, [r4]\n\
+	lsls r1, r5, 1\n\
+	ldrb r2, [r6]\n\
+	movs r0, 0x58\n\
+	muls r0, r2\n\
+	adds r1, r0\n\
+	add r1, r8\n\
+	ldrh r0, [r1]\n\
+	strh r0, [r7]\n\
+	lsls r0, 16\n\
+	cmp r0, 0\n\
+	beq _08108844\n\
+	ldrh r0, [r7]\n\
+	ldrb r1, [r6]\n\
+	ldr r2, _08108880 @ =gUnknown_02024C08\n\
+	ldrb r2, [r2]\n\
+	bl move_effectiveness_something\n\
+	ldr r0, [r4]\n\
+	cmp r0, 0x78\n\
+	bne _0810880A\n\
+	movs r0, 0x50\n\
+	str r0, [r4]\n\
+_0810880A:\n\
+	ldr r0, [r4]\n\
+	cmp r0, 0xF0\n\
+	bne _08108814\n\
+	movs r0, 0xA0\n\
+	str r0, [r4]\n\
+_08108814:\n\
+	ldr r0, [r4]\n\
+	cmp r0, 0x1E\n\
+	bne _0810881E\n\
+	movs r0, 0x14\n\
+	str r0, [r4]\n\
+_0810881E:\n\
+	ldr r0, [r4]\n\
+	cmp r0, 0xF\n\
+	bne _08108828\n\
+	movs r0, 0xA\n\
+	str r0, [r4]\n\
+_08108828:\n\
+	ldr r0, _08108868 @ =gUnknown_02024C68\n\
+	ldrb r1, [r0]\n\
+	movs r0, 0x8\n\
+	ands r0, r1\n\
+	cmp r0, 0\n\
+	beq _08108838\n\
+	movs r0, 0\n\
+	str r0, [r4]\n\
+_08108838:\n\
+	ldr r2, _08108884 @ =0x02016800\n\
+	ldr r0, [r2, 0x8]\n\
+	ldr r1, [r4]\n\
+	cmp r0, r1\n\
+	bcs _08108844\n\
+	str r1, [r2, 0x8]\n\
+_08108844:\n\
+	adds r5, 0x1\n\
+	cmp r5, 0x3\n\
+	ble _081087DA\n\
+	ldr r1, _08108888 @ =gAIScriptPtr\n\
+	ldr r0, [r1]\n\
+	adds r0, 0x1\n\
+	str r0, [r1]\n\
+	pop {r3}\n\
+	mov r8, r3\n\
+	pop {r4-r7}\n\
+	pop {r0}\n\
+	bx r0\n\
+	.align 2, 0\n\
+_0810885C: .4byte gUnknown_02024DEC\n\
+_08108860: .4byte 0x02000000\n\
+_08108864: .4byte 0x0001601c\n\
+_08108868: .4byte gUnknown_02024C68\n\
+_0810886C: .4byte gCritMultiplier\n\
+_08108870: .4byte gUnknown_02024BEC\n\
+_08108874: .4byte gUnknown_02024BE6\n\
+_08108878: .4byte gUnknown_02024A8C\n\
+_0810887C: .4byte gUnknown_02024C07\n\
+_08108880: .4byte gUnknown_02024C08\n\
+_08108884: .4byte 0x02016800\n\
+_08108888: .4byte gAIScriptPtr\n\
+	.syntax divided\n");
+}
+#endif
 
-
-/*
-	thumb_func_start BattleAICmd_unk_30
-BattleAICmd_unk_30: @ 81087A0
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	ldr r0, _0810885C @ =gUnknown_02024DEC
-	movs r2, 0
-	strh r2, [r0]
-	ldr r1, _08108860 @ =0x02000000
-	ldr r3, _08108864 @ =0x0001601c
-	adds r0, r1, r3
-	movs r4, 0
-	strb r2, [r0]
-	adds r3, 0x3
-	adds r0, r1, r3
-	movs r3, 0x1
-	strb r3, [r0]
-	ldr r0, _08108868 @ =gUnknown_02024C68
-	strb r2, [r0]
-	ldr r0, _0810886C @ =gCritMultiplier
-	strb r3, [r0]
-	movs r0, 0xB4
-	lsls r0, 9
-	adds r1, r0
-	str r4, [r1, 0x8]
-	movs r5, 0
-	ldr r4, _08108870 @ =gUnknown_02024BEC
-	ldr r7, _08108874 @ =gUnknown_02024BE6
-	ldr r3, _08108878 @ =gUnknown_02024A8C
-	mov r8, r3
-	ldr r6, _0810887C @ =gUnknown_02024C07
-_081087DA:
-	movs r0, 0x28
-	str r0, [r4]
-	lsls r1, r5, 1
-	ldrb r2, [r6]
-	movs r0, 0x58
-	muls r0, r2
-	adds r1, r0
-	add r1, r8
-	ldrh r0, [r1]
-	strh r0, [r7]
-	lsls r0, 16
-	cmp r0, 0
-	beq _08108844
-	ldrh r0, [r7]
-	ldrb r1, [r6]
-	ldr r2, _08108880 @ =gUnknown_02024C08
-	ldrb r2, [r2]
-	bl move_effectiveness_something
-	ldr r0, [r4]
-	cmp r0, 0x78
-	bne _0810880A
-	movs r0, 0x50
-	str r0, [r4]
-_0810880A:
-	ldr r0, [r4]
-	cmp r0, 0xF0
-	bne _08108814
-	movs r0, 0xA0
-	str r0, [r4]
-_08108814:
-	ldr r0, [r4]
-	cmp r0, 0x1E
-	bne _0810881E
-	movs r0, 0x14
-	str r0, [r4]
-_0810881E:
-	ldr r0, [r4]
-	cmp r0, 0xF
-	bne _08108828
-	movs r0, 0xA
-	str r0, [r4]
-_08108828:
-	ldr r0, _08108868 @ =gUnknown_02024C68
-	ldrb r1, [r0]
-	movs r0, 0x8
-	ands r0, r1
-	cmp r0, 0
-	beq _08108838
-	movs r0, 0
-	str r0, [r4]
-_08108838:
-	ldr r2, _08108884 @ =0x02016800
-	ldr r0, [r2, 0x8]
-	ldr r1, [r4]
-	cmp r0, r1
-	bcs _08108844
-	str r1, [r2, 0x8]
-_08108844:
-	adds r5, 0x1
-	cmp r5, 0x3
-	ble _081087DA
-	ldr r1, _08108888 @ =gAIScriptPtr
-	ldr r0, [r1]
-	adds r0, 0x1
-	str r0, [r1]
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0810885C: .4byte gUnknown_02024DEC
-_08108860: .4byte 0x02000000
-_08108864: .4byte 0x0001601c
-_08108868: .4byte gUnknown_02024C68
-_0810886C: .4byte gCritMultiplier
-_08108870: .4byte gUnknown_02024BEC
-_08108874: .4byte gUnknown_02024BE6
-_08108878: .4byte gUnknown_02024A8C
-_0810887C: .4byte gUnknown_02024C07
-_08108880: .4byte gUnknown_02024C08
-_08108884: .4byte 0x02016800
-_08108888: .4byte gAIScriptPtr
-	thumb_func_end BattleAICmd_unk_30
-*/
-
+// same function as above but no for loop.
 __attribute__((naked))
 void BattleAICmd_if_damage_bonus(void)
 {
