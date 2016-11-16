@@ -171,8 +171,8 @@ struct MapObject
     /*0x1B*/ u8 mapobj_unk_1B;
     /*0x1C*/ u8 mapobj_unk_1C;
     /*0x1D*/ u8 trainerRange_berryTreeId;
-    /*0x1E*/ u8 mapobj_unk_1E;
-    /*0x1E*/ u8 mapobj_unk_1F;
+	/*0x1E */ u8 mapobj_unk_1E;
+    /*0x1F*/ u8 mapobj_unk_1F;
     /*0x20*/ u8 mapobj_unk_20;
     /*0x21*/ u8 mapobj_unk_21;
     /*size = 0x24*/
