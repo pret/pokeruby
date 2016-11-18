@@ -11125,7 +11125,7 @@ gIsTrainerInRange:: @ 839B488
 	.4byte IsTrainerInRangeEast
 
 	.align 2
-gUnknown_0839B498:: @ 839B498
+gTrainerSeeFuncList:: @ 839B498
 	.4byte sub_8084394
 	.4byte sub_8084398
 	.4byte sub_80843DC
