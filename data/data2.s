@@ -11140,7 +11140,7 @@ gTrainerSeeFuncList:: @ 839B498
 	.4byte sub_80846C8
 
 	.align 2
-gUnknown_0839B4C8:: @ 839B4C8
+gTrainerSeeFuncList2:: @ 839B4C8
 	.4byte sub_80845C8
 	.4byte sub_80845FC
 	.4byte sub_8084654

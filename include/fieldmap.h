@@ -202,12 +202,12 @@ struct MapObjectGraphicsInfo
 
 struct PlayerAvatar
 {
-    u8 bitfield;
-    u8 bike;
-    u8 running2;
-    u8 running1;
-    u8 spriteId;
-    u8 mapObjectId;
+ /* 0x00 */ u8 bitfield;
+ /* 0x01 */ u8 bike;
+ /* 0x02 */ u8 running2;
+ /* 0x03 */ u8 running1;
+ /* 0x04 */ u8 spriteId;
+ /* 0x05 */ u8 mapObjectId;
     // TODO: rest of struct
 };
 
