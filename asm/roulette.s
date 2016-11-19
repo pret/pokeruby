@@ -55,7 +55,7 @@ _08115154:
 	cmp r0, 0
 	beq _08115170
 	ldr r1, _08115194 @ =0x040000d4
-	ldr r0, _08115198 @ =gBG1TilemapBuffer + 0x1C0
+	ldr r0, _08115198 @ =gBGTilemapBuffers + 0x800 + 0x1C0
 	str r0, [r1]
 	ldr r0, _0811519C @ =0x060021c0
 	str r0, [r1, 0x4]
@@ -81,7 +81,7 @@ _08115188: .4byte REG_BG1HOFS
 _0811518C: .4byte 0x02019000
 _08115190: .4byte REG_BLDALPHA
 _08115194: .4byte 0x040000d4
-_08115198: .4byte gBG1TilemapBuffer + 0x1C0
+_08115198: .4byte gBGTilemapBuffers + 0x800 + 0x1C0
 _0811519C: .4byte 0x060021c0
 _081151A0: .4byte 0x800001a0
 _081151A4:
@@ -91,7 +91,7 @@ _081151A4:
 	adds r0, r4, 0
 	strh r0, [r1]
 	adds r1, 0xCC
-	ldr r0, _081151C8 @ =gBG2TilemapBuffer + 0x1C0
+	ldr r0, _081151C8 @ =gBGTilemapBuffers + 0x1000 + 0x1C0
 	str r0, [r1]
 	ldr r0, _081151CC @ =0x0600f9c0
 	str r0, [r1, 0x4]
@@ -102,12 +102,12 @@ _081151A4:
 	b _08115218
 	.align 2, 0
 _081151C4: .4byte REG_BG0CNT
-_081151C8: .4byte gBG2TilemapBuffer + 0x1C0
+_081151C8: .4byte gBGTilemapBuffers + 0x1000 + 0x1C0
 _081151CC: .4byte 0x0600f9c0
 _081151D0: .4byte 0x800001a0
 _081151D4:
 	ldr r1, _081151E8 @ =0x040000d4
-	ldr r0, _081151EC @ =gBG2TilemapBuffer + 0x1C0
+	ldr r0, _081151EC @ =gBGTilemapBuffers + 0x1000 + 0x1C0
 	str r0, [r1]
 	ldr r0, _081151F0 @ =0x0600f9c0
 	str r0, [r1, 0x4]
@@ -117,7 +117,7 @@ _081151D4:
 	b _0811521A
 	.align 2, 0
 _081151E8: .4byte 0x040000d4
-_081151EC: .4byte gBG2TilemapBuffer + 0x1C0
+_081151EC: .4byte gBGTilemapBuffers + 0x1000 + 0x1C0
 _081151F0: .4byte 0x0600f9c0
 _081151F4: .4byte 0x800001a0
 _081151F8:
@@ -822,7 +822,7 @@ _081157EC:
 	.4byte _081158C8
 	.4byte _08115884
 _0811582C:
-	ldr r0, _08115844 @ =gBG2TilemapBuffer
+	ldr r0, _08115844 @ =gBGTilemapBuffers + 0x1000
 	movs r1, 0x10
 	str r1, [sp]
 	movs r1, 0xD
@@ -833,14 +833,14 @@ _0811582C:
 	bl sub_8124DDC
 	b _08115918
 	.align 2, 0
-_08115844: .4byte gBG2TilemapBuffer
+_08115844: .4byte gBGTilemapBuffers + 0x1000
 _08115848:
 	lsls r0, r4, 1
 	adds r0, r4
 	adds r0, 0xE
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r5, _0811587C @ =gBG2TilemapBuffer
+	ldr r5, _0811587C @ =gBGTilemapBuffers + 0x1000
 	movs r0, 0x10
 	str r0, [sp]
 	movs r4, 0xD
@@ -860,7 +860,7 @@ _08115848:
 	bl sub_8124E2C
 	b _08115918
 	.align 2, 0
-_0811587C: .4byte gBG2TilemapBuffer
+_0811587C: .4byte gBGTilemapBuffers + 0x1000
 _08115880: .4byte 0x02018a32
 _08115884:
 	subs r0, r4, 0x1
@@ -871,7 +871,7 @@ _08115884:
 	adds r1, 0xA
 	lsls r1, 24
 	lsrs r6, r1, 24
-	ldr r5, _081158C0 @ =gBG2TilemapBuffer
+	ldr r5, _081158C0 @ =gBGTilemapBuffers + 0x1000
 	movs r4, 0x10
 	str r4, [sp]
 	movs r0, 0xD
@@ -891,7 +891,7 @@ _08115884:
 	bl sub_8124E2C
 	b _08115918
 	.align 2, 0
-_081158C0: .4byte gBG2TilemapBuffer
+_081158C0: .4byte gBGTilemapBuffers + 0x1000
 _081158C4: .4byte 0x02018a80
 _081158C8:
 	adds r0, r4, 0
@@ -912,7 +912,7 @@ _081158C8:
 	adds r1, 0x7
 	lsls r1, 24
 	lsrs r6, r1, 24
-	ldr r4, _08115920 @ =gBG2TilemapBuffer
+	ldr r4, _08115920 @ =gBGTilemapBuffers + 0x1000
 	movs r0, 0x10
 	str r0, [sp]
 	movs r0, 0xD
@@ -936,7 +936,7 @@ _08115918:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08115920: .4byte gBG2TilemapBuffer
+_08115920: .4byte gBGTilemapBuffers + 0x1000
 _08115924: .4byte 0x02018a20
 	thumb_func_end sub_81157D0
 
@@ -4016,7 +4016,7 @@ sub_8117158: @ 8117158
 	movs r0, 0
 	movs r1, 0
 	bl sub_8117AA8
-	ldr r0, _081171A0 @ =gBG1TilemapBuffer
+	ldr r0, _081171A0 @ =gBGTilemapBuffers + 0x800
 	ldr r1, _081171A4 @ =0xfffff800
 	adds r4, r1
 	movs r1, 0x10
@@ -4036,7 +4036,7 @@ sub_8117158: @ 8117158
 	mov pc, r0
 	.align 2, 0
 _0811719C: .4byte 0x02019000
-_081171A0: .4byte gBG1TilemapBuffer
+_081171A0: .4byte gBGTilemapBuffers + 0x800
 _081171A4: .4byte 0xfffff800
 _081171A8: .4byte _081171AC
 	.align 2, 0
@@ -4169,7 +4169,7 @@ _0811727C:
 	bhi _08117350
 	add r5, sp, 0xC
 	ldr r7, [sp, 0x20]
-	ldr r0, _08117374 @ =gBG1TilemapBuffer
+	ldr r0, _08117374 @ =gBGTilemapBuffers + 0x800
 	mov r8, r0
 	ldr r6, [sp, 0x1C]
 	ldr r1, _08117378 @ =0x020189a0
@@ -4263,7 +4263,7 @@ _08117360:
 	bx r0
 	.align 2, 0
 _08117370: .4byte gUnknown_083F8C00
-_08117374: .4byte gBG1TilemapBuffer
+_08117374: .4byte gBGTilemapBuffers + 0x800
 _08117378: .4byte 0x020189a0
 _0811737C: .4byte 0x020189a4
 	thumb_func_end sub_8117158

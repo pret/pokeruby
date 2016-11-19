@@ -177,10 +177,7 @@ static u8 sWaitType;
 static u8 sLineLength;
 static struct GlyphBuffer sGlyphBuffer;
 
-EWRAM_DATA u16 gBG0TilemapBuffer[0x400] = {0};
-EWRAM_DATA u16 gBG1TilemapBuffer[0x400] = {0};
-EWRAM_DATA u16 gBG2TilemapBuffer[0x400] = {0};
-EWRAM_DATA u16 gBG3TilemapBuffer[0x400] = {0};
+EWRAM_DATA u16 gBGTilemapBuffers[4][0x400] = {0};
 
 EWRAM_DATA u8 gStringVar1[0x100] = {0};
 EWRAM_DATA u8 gStringVar2[0x100] = {0};

@@ -380,7 +380,7 @@ _08146338: .4byte gUnknown_08E78A84
 _0814633C: .4byte 0x06003000
 _08146340:
 	movs r1, 0
-	ldr r7, _0814635C @ =gBG2TilemapBuffer
+	ldr r7, _0814635C @ =gBGTilemapBuffers + 0x1000
 	adds r2, r7, 0
 	ldr r6, _08146360 @ =0x00004042
 	ldr r5, _08146364 @ =gSaveBlock2
@@ -395,7 +395,7 @@ _0814634E:
 	strh r6, [r0]
 	b _08146376
 	.align 2, 0
-_0814635C: .4byte gBG2TilemapBuffer
+_0814635C: .4byte gBGTilemapBuffers + 0x1000
 _08146360: .4byte 0x00004042
 _08146364: .4byte gSaveBlock2
 _08146368: .4byte 0x00005042

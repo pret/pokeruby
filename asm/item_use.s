@@ -2105,7 +2105,7 @@ sub_80C9F80: @ 80C9F80
 	movs r1, 0x7
 	movs r2, 0x1
 	bl DisplayYesNoMenu
-	ldr r0, _080C9FB8 @ =gBG1TilemapBuffer
+	ldr r0, _080C9FB8 @ =gBGTilemapBuffers + 0x800
 	movs r1, 0x4
 	str r1, [sp]
 	movs r1, 0x1
@@ -2122,7 +2122,7 @@ sub_80C9F80: @ 80C9F80
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080C9FB8: .4byte gBG1TilemapBuffer
+_080C9FB8: .4byte gBGTilemapBuffers + 0x800
 _080C9FBC: .4byte gUnknown_083D61F4
 	thumb_func_end sub_80C9F80
 
