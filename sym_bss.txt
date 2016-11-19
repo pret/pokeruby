@@ -86,36 +86,13 @@ gUnknown_030005A6: @ 30005A6
 	.include "src/script.o"
 	.include "src/start_menu.o"
 	.include "src/menu.o"
-
-	.align 2
-gUnknown_030006C0: @ 30006C0
-	.space 0x2
-
-gUnknown_030006C2: @ 30006C2
-	.space 0x2
-
-gUnknown_030006C4: @ 30006C4
-	.space 0x2
-
-gUnknown_030006C6: @ 30006C6
-	.space 0x2
-
-gUnknown_030006C8: @ 30006C8
-	.space 0x4
-
-gUnknown_030006CC: @ 30006CC
-	.space 0x4
-
-gUnknown_030006D0: @ 30006D0
-	.space 0x4
-
+	.include "src/tileset_anim.o"
 	.include "src/sound.o"
 
 gUnknown_030006DC: @ 30006DC
 	.space 0x4
 
-gUnknown_030006E0: @ 30006E0
-	.space 0x20
+	.include "src/field_effect.o"
 
 gUnknown_03000700: @ 3000700
 	.space 0x1

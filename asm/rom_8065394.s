@@ -1277,7 +1277,7 @@ _080688B4:
 	.align 2, 0
 _080688C8: .4byte Event_EggHatch
 _080688CC:
-	bl safari_step
+	bl SafariZoneTakeStep
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

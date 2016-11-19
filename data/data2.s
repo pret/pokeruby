@@ -11118,14 +11118,14 @@ gSpriteImage_839B408:: @ 839B408
 	.incbin "graphics/unknown_sprites/839B408.4bpp"
 
 	.align 2
-gUnknown_0839B488:: @ 839B488
+gIsTrainerInRange:: @ 839B488
 	.4byte IsTrainerInRangeSouth
 	.4byte IsTrainerInRangeNorth
 	.4byte IsTrainerInRangeWest
 	.4byte IsTrainerInRangeEast
 
 	.align 2
-gUnknown_0839B498:: @ 839B498
+gTrainerSeeFuncList:: @ 839B498
 	.4byte sub_8084394
 	.4byte sub_8084398
 	.4byte sub_80843DC
@@ -11140,7 +11140,7 @@ gUnknown_0839B498:: @ 839B498
 	.4byte sub_80846C8
 
 	.align 2
-gUnknown_0839B4C8:: @ 839B4C8
+gTrainerSeeFuncList2:: @ 839B4C8
 	.4byte sub_80845C8
 	.4byte sub_80845FC
 	.4byte sub_8084654
@@ -11192,9 +11192,8 @@ gWildFeebasRoute119Data:: @ 839DBFC
 	.byte 20, 25  @ Min/Max level
 	.2byte SPECIES_FEEBAS
 
-@ Some Feebas tile related data
 	.align 2
-gUnknown_0839DC00:: @ 839DC00
+gRoute119WaterTileData:: @ 839DC00
 	.2byte  0x0, 0x2D,   0x0
 	.2byte 0x2E, 0x5B,  0x83
 	.2byte 0x5C, 0x8B, 0x12A
@@ -11264,12 +11263,12 @@ gDarknessFieldMoveStreaksTilemap:: @ 839EE54
 	.incbin "graphics/misc/darkness_field_move_streaks_map.bin"
 
 	.align 2
-gUnknown_0839F0D4:: @ 839F0D4
+gFieldEffectScriptFuncs:: @ 839F0D4
 	.4byte FieldEffectCmd_loadtiles
 	.4byte FieldEffectCmd_loadfadedpal
 	.4byte FieldEffectCmd_loadpal
 	.4byte FieldEffectCmd_callnative
-	.4byte sub_8085700
+	.4byte FieldEffectCmd_end
 	.4byte FieldEffectCmd_loadgfx_callnative
 	.4byte FieldEffectCmd_loadtiles_callnative
 	.4byte FieldEffectCmd_loadfadedpal_callnative
@@ -24244,7 +24243,7 @@ gUnknown_083F7EA8:: @ 83F7EA8
 	.4byte sub_802E424, c2_exit_to_overworld_2_switch
 
 	.align 2
-gUnknown_083F7EB8:: @ 83F7EB8
+gPokeblockNames:: @ 83F7EB8
 	.4byte NULL
 	.4byte ContestStatsText_RedPokeBlock
 	.4byte ContestStatsText_BluePokeBlock

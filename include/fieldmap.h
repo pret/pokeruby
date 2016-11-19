@@ -166,13 +166,15 @@ struct MapObject
     /*0x10*/ struct Coords16 coords2;
     /*0x14*/ struct Coords16 coords3;
     /*0x18*/ u8 mapobj_unk_18:4;
-    /*0x19*/ u8 mapobj_unk_19;
+    /*0x18*/ u8 placeholder18:4;
+    /*0x19*/ u8 mapobj_unk_19:4;
+    /*0x19*/ u8 mapobj_unk_19b:4;
     /*0x1A*/ u8 mapobj_unk_1A;
     /*0x1B*/ u8 mapobj_unk_1B;
     /*0x1C*/ u8 mapobj_unk_1C;
     /*0x1D*/ u8 trainerRange_berryTreeId;
-    /*0x1E*/ u8 mapobj_unk_1E;
-    /*0x1E*/ u8 mapobj_unk_1F;
+    /*0x1E */ u8 mapobj_unk_1E;
+    /*0x1F*/ u8 mapobj_unk_1F;
     /*0x20*/ u8 mapobj_unk_20;
     /*0x21*/ u8 mapobj_unk_21;
     /*size = 0x24*/
@@ -200,12 +202,12 @@ struct MapObjectGraphicsInfo
 
 struct PlayerAvatar
 {
-    u8 bitfield;
-    u8 bike;
-    u8 running2;
-    u8 running1;
-    u8 spriteId;
-    u8 mapObjectId;
+ /* 0x00 */ u8 bitfield;
+ /* 0x01 */ u8 bike;
+ /* 0x02 */ u8 running2;
+ /* 0x03 */ u8 running1;
+ /* 0x04 */ u8 spriteId;
+ /* 0x05 */ u8 mapObjectId;
     // TODO: rest of struct
 };
 

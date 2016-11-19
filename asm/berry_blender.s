@@ -7692,7 +7692,7 @@ sub_805201C: @ 805201C
 	adds r6, r1, 0
 	movs r0, 0xFF
 	strb r0, [r6]
-	ldr r1, _080520B0 @ =gUnknown_083F7EB8
+	ldr r1, _080520B0 @ =gPokeblockNames
 	ldrb r0, [r5]
 	lsls r0, 2
 	adds r0, r1
@@ -7748,7 +7748,7 @@ sub_805201C: @ 805201C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080520B0: .4byte gUnknown_083F7EB8
+_080520B0: .4byte gPokeblockNames
 _080520B4: .4byte gOtherText_PokeBlockMade
 _080520B8: .4byte gUnknown_082162C8
 _080520BC: .4byte gOtherText_BlockLevelIs
@@ -8521,7 +8521,7 @@ _080526EC:
 	ldrb r0, [r1, 0x8]
 	cmp r0, 0
 	beq _080527A4
-	ldr r1, _080527B4 @ =gUnknown_083F7EB8
+	ldr r1, _080527B4 @ =gPokeblockNames
 	mov r2, r8
 	ldrb r0, [r2, 0x8]
 	lsls r0, 2
@@ -8605,7 +8605,7 @@ _080527A4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080527B4: .4byte gUnknown_083F7EB8
+_080527B4: .4byte gPokeblockNames
 _080527B8: .4byte gUnknown_082165F8
 	thumb_func_end sub_8052530
 

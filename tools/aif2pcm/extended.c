@@ -27,6 +27,7 @@
 
 #include <math.h>
 #include <string.h>
+#include <stdint.h>
 
 /*
  * Infinite & NAN values
@@ -62,7 +63,7 @@
  * Write IEEE Extended Precision Numbers
  */
 void
-ieee754_write_extended(double in, unsigned char* out)
+ieee754_write_extended(double in, uint8_t* out)
 {
 	int sgn, exp, shift;
 	double fraction, t;
@@ -114,17 +115,17 @@ done:
 	hexp = ((unsigned int) exp) & 0xFF;
 
 	/* big endian */
-	out[0] = ((unsigned char) sgn) << 7;
-	out[0] |= (unsigned char) lexp;
-	out[1] = (unsigned char) hexp;
-	out[2] = (unsigned char) (low >> 24);
-	out[3] = (unsigned char) ((low >> 16) & 0xFF);
-	out[4] = (unsigned char) ((low >> 8) & 0xFF);
-	out[5] = (unsigned char) (low & 0xFF);
-	out[6] = (unsigned char) (high >> 24);
-	out[7] = (unsigned char) ((high >> 16) & 0xFF);
-	out[8] = (unsigned char) ((high >> 8) & 0xFF);
-	out[9] = (unsigned char) (high & 0xFF);
+	out[0] = ((uint8_t) sgn) << 7;
+	out[0] |= (uint8_t) lexp;
+	out[1] = (uint8_t) hexp;
+	out[2] = (uint8_t) (low >> 24);
+	out[3] = (uint8_t) ((low >> 16) & 0xFF);
+	out[4] = (uint8_t) ((low >> 8) & 0xFF);
+	out[5] = (uint8_t) (low & 0xFF);
+	out[6] = (uint8_t) (high >> 24);
+	out[7] = (uint8_t) ((high >> 16) & 0xFF);
+	out[8] = (uint8_t) ((high >> 8) & 0xFF);
+	out[9] = (uint8_t) (high & 0xFF);
 
 	return;
 }
@@ -134,7 +135,7 @@ done:
  * Read IEEE Extended Precision Numbers
  */
 double
-ieee754_read_extended(unsigned char* in)
+ieee754_read_extended(uint8_t* in)
 {
 	int sgn, exp;
 	unsigned long low, high;

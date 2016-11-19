@@ -4,20 +4,19 @@
 #include "script.h"
 #include "string_util.h"
 
-struct UnkSafariZoneStruct
+struct PokeblockFeeder
 {
     /*0x00*/ s16 x;
     /*0x02*/ s16 y;
     /*0x04*/ s8 mapNum;
-    /*0x05*/ u8 counter;
-    /*0x06*/ u8 field_4;
-    /*0x07*/ u8 field_5;
+    /*0x05*/ u8 stepCounter;
     /*0x08*/ struct Pokeblock pokeblock;
 };
 
+#define NUM_POKEBLOCK_FEEDERS 10
 
-void ClearEveryUnkSafariZoneStruct(void);
-void sub_80C8508(void);
+void ClearAllPokeblockFeeders(void);
+void DecrementFeederStepCounters(void);
 extern void c2_exit_to_overworld_2_switch(void);
 extern void c2_exit_to_overworld_1_continue_scripts_restart_music(void);
 extern void sub_8080E44(void);
@@ -28,10 +27,10 @@ extern void GetXYCoordsOneStepInFrontOfPlayer(void *, void *);
 extern void PlayerGetDestCoords(u16 *, u16 *);
 
 extern u8 gUnknown_02024D26;
-extern u8 gUnknown_02038808;
-extern u16 gUnknown_0203880A;
 
-extern struct UnkSafariZoneStruct gUnkSafariZoneStructArr[10];
+EWRAM_DATA u8 gNumSafariBalls = 0;
+EWRAM_DATA static u16 gSafariZoneStepCounter = 0;
+EWRAM_DATA static struct PokeblockFeeder gPokeblockFeeders[NUM_POKEBLOCK_FEEDERS] = {0};
 
 extern void (*gUnknown_0300485C)(void);
 
@@ -39,15 +38,13 @@ extern u8 gUnknown_081C340A;
 extern u8 gUnknown_081C342D;
 extern u8 gUnknown_081C3448;
 extern u8 gUnknown_081C3459;
-extern u8 *gUnknown_083F7EB8[];
+extern u8 *gPokeblockNames[];
 
 extern u16 gScriptResult;
 
 bool32 GetSafariZoneFlag(void)
 {
-    bool8 ret = FlagGet(SYS_SAFARI_MODE);
-
-    return ret;
+    return FlagGet(SYS_SAFARI_MODE);
 }
 
 void SetSafariZoneFlag(void)
@@ -60,51 +57,48 @@ void ResetSafariZoneFlag(void)
     FlagReset(SYS_SAFARI_MODE);
 }
 
-void sub_80C81B8(void)
+void EnterSafariMode(void)
 {
     sav12_xor_increment(0x11);
     SetSafariZoneFlag();
-    ClearEveryUnkSafariZoneStruct();
-
-    gUnknown_02038808 = 0x1E;
-    gUnknown_0203880A = 0x1F4;
+    ClearAllPokeblockFeeders();
+    gNumSafariBalls = 30;
+    gSafariZoneStepCounter = 500;
 }
 
-void sub_80C81E4(void)
+void ExitSafariMode(void)
 {
     ResetSafariZoneFlag();
-    ClearEveryUnkSafariZoneStruct();
-
-    gUnknown_02038808 = 0;
-    gUnknown_0203880A = 0;
+    ClearAllPokeblockFeeders();
+    gNumSafariBalls = 0;
+    gSafariZoneStepCounter = 0;
 }
 
-bool8 safari_step(void)
+bool8 SafariZoneTakeStep(void)
 {
     if (GetSafariZoneFlag() == FALSE)
     {
         return FALSE;
     }
 
-    sub_80C8508();
-
-    if (!(--gUnknown_0203880A))
+    DecrementFeederStepCounters();
+    gSafariZoneStepCounter--;
+    if (gSafariZoneStepCounter == 0)
     {
         ScriptContext1_SetupScript(&gUnknown_081C3448);
         return TRUE;
     }
-
     return FALSE;
 }
 
-void sub_80C823C(void)
+void SafariZoneRetirePrompt(void)
 {
     ScriptContext1_SetupScript(&gUnknown_081C342D);
 }
 
 void sub_80C824C(void)
 {
-    if (gUnknown_02038808 != 0)
+    if (gNumSafariBalls != 0)
     {
         SetMainCallback2(c2_exit_to_overworld_2_switch);
     }
@@ -123,42 +117,31 @@ void sub_80C824C(void)
     }
 }
 
-void ClearSingleUnkSafariZoneStruct(u8 index)
+static void ClearPokeblockFeeder(u8 index)
 {
-    memset(&gUnkSafariZoneStructArr[index], 0,
-        sizeof(struct UnkSafariZoneStruct));
+    memset(&gPokeblockFeeders[index], 0, sizeof(struct PokeblockFeeder));
 }
 
-void ClearEveryUnkSafariZoneStruct(void)
+static void ClearAllPokeblockFeeders(void)
 {
-    // 10 is the number of struct UnkSafariZoneStruct's in
-    // gUnkSafariZoneStructArr. It might be a good idea to create a #define
-    // for it.
-    memset(gUnkSafariZoneStructArr, 0, sizeof(struct UnkSafariZoneStruct)
-        * 10);
+    memset(gPokeblockFeeders, 0, sizeof(gPokeblockFeeders));
 }
 
-void sub_80C82EC(void)
+void SafariZoneGetPokeblockNameInFeeder(void)
 {
     s16 x, y;
     u16 i;
 
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
 
-    // 10 is the number of struct UnkSafariZoneStruct's in
-    // gUnkSafariZoneStructArr. It might be a good idea to create a #define
-    // for it.
-    for (i = 0; i < 10; i++)
+    for (i = 0; i < NUM_POKEBLOCK_FEEDERS; i++)
     {
-        if (gSaveBlock1.location.mapNum == gUnkSafariZoneStructArr[i].mapNum
-            && gUnkSafariZoneStructArr[i].x == x
-            && gUnkSafariZoneStructArr[i].y == y)
+        if (gSaveBlock1.location.mapNum == gPokeblockFeeders[i].mapNum
+         && gPokeblockFeeders[i].x == x
+         && gPokeblockFeeders[i].y == y)
         {
             gScriptResult = i;
-
-            StringCopy(gStringVar1, gUnknown_083F7EB8
-                [gUnkSafariZoneStructArr[i].pokeblock.color]);
-
+            StringCopy(gStringVar1, gPokeblockNames[gPokeblockFeeders[i].pokeblock.color]);
             return;
         }
     }
@@ -166,33 +149,24 @@ void sub_80C82EC(void)
     gScriptResult = -1;
 }
 
-void sub_80C837C(void)
+static void GetPokeblockFeederWithinRange(void)
 {
     s16 x, y;
     u16 i;
 
     PlayerGetDestCoords(&x, &y);
 
-    // 10 is the number of struct UnkSafariZoneStruct's in
-    // gUnkSafariZoneStructArr. It might be a good idea to create a #define
-    // for it.
-    for (i = 0; i < 10; i++)
+    for (i = 0; i < NUM_POKEBLOCK_FEEDERS; i++)
     {
-        if (gSaveBlock1.location.mapNum
-            == gUnkSafariZoneStructArr[i].mapNum)
+        if (gSaveBlock1.location.mapNum == gPokeblockFeeders[i].mapNum)
         {
-            x -= gUnkSafariZoneStructArr[i].x;
-            y -= gUnkSafariZoneStructArr[i].y;
-
+            //Get absolute value of x and y distance from Pokeblock feeder on current map
+            x -= gPokeblockFeeders[i].x;
+            y -= gPokeblockFeeders[i].y;
             if (x < 0)
-            {
                 x *= -1;
-            }
             if (y < 0)
-            {
                 y *= -1;
-            }
-
             if ((x + y) <= 5)
             {
                 gScriptResult = i;
@@ -206,84 +180,68 @@ void sub_80C837C(void)
 
 struct Pokeblock *unref_sub_80C8418(void)
 {
-    sub_80C82EC();
+    SafariZoneGetPokeblockNameInFeeder();
 
     if (gScriptResult == 0xFFFF)
-    {
         return NULL;
-    }
-
-    return &gUnkSafariZoneStructArr[gScriptResult].pokeblock;
+    else
+        return &gPokeblockFeeders[gScriptResult].pokeblock;
 }
 
 
-struct Pokeblock *sub_80C8448(void)
+struct Pokeblock *SafariZoneGetActivePokeblock(void)
 {
-    sub_80C837C();
+    GetPokeblockFeederWithinRange();
 
     if (gScriptResult == 0xFFFF)
-    {
         return NULL;
-    }
-
-    return &gUnkSafariZoneStructArr[gScriptResult].pokeblock;
+    else
+        return &gPokeblockFeeders[gScriptResult].pokeblock;
 }
 
 
-void sub_80C8478(u8 pokeblock_index)
+void SafariZoneActivatePokeblockFeeder(u8 pokeblock_index)
 {
     s16 x, y;
     u8 i;
 
-    // 10 is the number of struct UnkSafariZoneStruct's in
-    // gUnkSafariZoneStructArr. It might be a good idea to create a #define
-    // for it.
-    for (i = 0; i < 10; i++)
+    for (i = 0; i < NUM_POKEBLOCK_FEEDERS; i++)
     {
-        if (gUnkSafariZoneStructArr[i].mapNum == 0
-            && gUnkSafariZoneStructArr[i].x == 0
-            && gUnkSafariZoneStructArr[i].y == 0)
+        //Find free entry in gPokeblockFeeders
+        if (gPokeblockFeeders[i].mapNum == 0
+         && gPokeblockFeeders[i].x == 0
+         && gPokeblockFeeders[i].y == 0)
         {
+            //Initialize Pokeblock feeder
             GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
-
-            gUnkSafariZoneStructArr[i].mapNum
-                = gSaveBlock1.location.mapNum;
-
-            gUnkSafariZoneStructArr[i].pokeblock
-                = gSaveBlock1.pokeblocks[pokeblock_index];
-
-            gUnkSafariZoneStructArr[i].counter = 0x64;
-            gUnkSafariZoneStructArr[i].x = x;
-            gUnkSafariZoneStructArr[i].y = y;
+            gPokeblockFeeders[i].mapNum = gSaveBlock1.location.mapNum;
+            gPokeblockFeeders[i].pokeblock = gSaveBlock1.pokeblocks[pokeblock_index];
+            gPokeblockFeeders[i].stepCounter = 100;
+            gPokeblockFeeders[i].x = x;
+            gPokeblockFeeders[i].y = y;
             break;
         }
     }
 }
 
-void sub_80C8508(void)
+static void DecrementFeederStepCounters(void)
 {
     u8 i;
 
-    // 10 is the number of struct UnkSafariZoneStruct's in
-    // gUnkSafariZoneStructArr. It might be a good idea to create a #define
-    // for it.
-    for (i = 0; i < 10; i++)
+    for (i = 0; i < NUM_POKEBLOCK_FEEDERS; i++)
     {
-        if (gUnkSafariZoneStructArr[i].counter != 0)
+        if (gPokeblockFeeders[i].stepCounter != 0)
         {
-            gUnkSafariZoneStructArr[i].counter--;
-
-            if (gUnkSafariZoneStructArr[i].counter == 0)
-            {
-                ClearSingleUnkSafariZoneStruct(i);
-            }
+            gPokeblockFeeders[i].stepCounter--;
+            if (gPokeblockFeeders[i].stepCounter == 0)
+                ClearPokeblockFeeder(i);
         }
     }
 }
 
 bool8 unref_sub_80C853C(void)
 {
-    sub_80C82EC();
+    SafariZoneGetPokeblockNameInFeeder();
 
     if (gScriptResult == 0xFFFF)
     {
@@ -291,7 +249,7 @@ bool8 unref_sub_80C853C(void)
     }
 
     ConvertIntToDecimalStringN(gStringVar2,
-        gUnkSafariZoneStructArr[gScriptResult].counter,
+        gPokeblockFeeders[gScriptResult].stepCounter,
         STR_CONV_MODE_LEADING_ZEROS, 3);
 
     return TRUE;

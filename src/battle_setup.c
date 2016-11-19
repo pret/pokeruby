@@ -121,15 +121,15 @@ extern struct Pokemon gEnemyParty[];
 extern struct Pokemon gPlayerParty[];
 extern struct Trainer gTrainers[];
 
-extern u16 gTrainerBattleMode;
-extern u16 gTrainerBattleOpponent;
-extern u16 gTrainerMapObjectLocalId;
-extern u8 *gTrainerIntroSpeech;
-extern u8 *gTrainerDefeatSpeech;
-extern u8 *gTrainerVictorySpeech;
-extern u8 *gTrainerCannotBattleSpeech;
-extern u8 *gTrainerBattleScriptReturnAddress;
-extern u8 *gTrainerBattleEndScript;
+EWRAM_DATA u16 gTrainerBattleMode = 0;
+EWRAM_DATA u16 gTrainerBattleOpponent = 0;
+EWRAM_DATA u16 gTrainerMapObjectLocalId = 0;
+EWRAM_DATA u8 *gTrainerIntroSpeech = NULL;
+EWRAM_DATA u8 *gTrainerDefeatSpeech = NULL;
+EWRAM_DATA u8 *gTrainerVictorySpeech = NULL;
+EWRAM_DATA u8 *gTrainerCannotBattleSpeech = NULL;
+EWRAM_DATA u8 *gTrainerBattleScriptReturnAddress = NULL;
+EWRAM_DATA u8 *gTrainerBattleEndScript = NULL;
 
 extern struct TrainerEyeTrainer gTrainerEyeTrainers[];
 
