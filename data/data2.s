@@ -11263,12 +11263,12 @@ gDarknessFieldMoveStreaksTilemap:: @ 839EE54
 	.incbin "graphics/misc/darkness_field_move_streaks_map.bin"
 
 	.align 2
-gUnknown_0839F0D4:: @ 839F0D4
+gFieldEffectScriptFuncs:: @ 839F0D4
 	.4byte FieldEffectCmd_loadtiles
 	.4byte FieldEffectCmd_loadfadedpal
 	.4byte FieldEffectCmd_loadpal
 	.4byte FieldEffectCmd_callnative
-	.4byte sub_8085700
+	.4byte FieldEffectCmd_end
 	.4byte FieldEffectCmd_loadgfx_callnative
 	.4byte FieldEffectCmd_loadtiles_callnative
 	.4byte FieldEffectCmd_loadfadedpal_callnative
