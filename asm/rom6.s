@@ -488,7 +488,7 @@ sub_810B68C: @ 810B68C
 	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
-	ldr r1, _0810B6B0 @ =gBG2TilemapBuffer
+	ldr r1, _0810B6B0 @ =gBGTilemapBuffers + 0x1000
 	ldr r2, _0810B6B4 @ =0x06007800
 	ldr r0, _0810B6B8 @ =0x040000d4
 	str r1, [r0]
@@ -499,7 +499,7 @@ sub_810B68C: @ 810B68C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0810B6B0: .4byte gBG2TilemapBuffer
+_0810B6B0: .4byte gBGTilemapBuffers + 0x1000
 _0810B6B4: .4byte 0x06007800
 _0810B6B8: .4byte 0x040000d4
 _0810B6BC: .4byte 0x80000400
@@ -862,12 +862,12 @@ _0810B9DC: .4byte gMenuPokeblock_Gfx
 _0810B9E0: .4byte 0x06008000
 _0810B9E4:
 	ldr r0, _0810B9F0 @ =gMenuPokeblock_Tilemap
-	ldr r1, _0810B9F4 @ =gBG2TilemapBuffer
+	ldr r1, _0810B9F4 @ =gBGTilemapBuffers + 0x1000
 	bl sub_800D238
 	b _0810BA0E
 	.align 2, 0
 _0810B9F0: .4byte gMenuPokeblock_Tilemap
-_0810B9F4: .4byte gBG2TilemapBuffer
+_0810B9F4: .4byte gBGTilemapBuffers + 0x1000
 _0810B9F8:
 	ldr r0, _0810BA04 @ =gMenuPokeblock_Pal
 	movs r1, 0
@@ -1317,7 +1317,7 @@ sub_810BD64: @ 810BD64
 	lsrs r3, r0, 16
 	movs r2, 0
 	ldr r5, _0810BDA4 @ =gUnknown_02039248
-	ldr r4, _0810BDA8 @ =gBG2TilemapBuffer
+	ldr r4, _0810BDA8 @ =gBGTilemapBuffers + 0x1000
 _0810BD70:
 	ldrb r0, [r5]
 	lsls r0, 1
@@ -1346,7 +1346,7 @@ _0810BD70:
 	bx r0
 	.align 2, 0
 _0810BDA4: .4byte gUnknown_02039248
-_0810BDA8: .4byte gBG2TilemapBuffer
+_0810BDA8: .4byte gBGTilemapBuffers + 0x1000
 	thumb_func_end sub_810BD64
 
 	thumb_func_start sub_810BDAC
@@ -1409,7 +1409,7 @@ _0810BE20:
 	bl sub_80F979C
 _0810BE28:
 	movs r6, 0
-	ldr r7, _0810BE94 @ =gBG2TilemapBuffer
+	ldr r7, _0810BE94 @ =gBGTilemapBuffers + 0x1000
 	movs r0, 0xF
 	mov r8, r0
 _0810BE30:
@@ -1461,7 +1461,7 @@ _0810BE30:
 	strh r2, [r0]
 	b _0810BECC
 	.align 2, 0
-_0810BE94: .4byte gBG2TilemapBuffer
+_0810BE94: .4byte gBGTilemapBuffers + 0x1000
 _0810BE98: .4byte 0x000001a1
 _0810BE9C: .4byte gUnknown_02039248
 _0810BEA0: .4byte gSaveBlock1 + 0x7F8
@@ -1887,7 +1887,7 @@ _0810C1D8:
 	lsls r0, 1
 	adds r1, r0, 0x1
 	lsls r5, r1, 5
-	ldr r3, _0810C238 @ =gBG2TilemapBuffer
+	ldr r3, _0810C238 @ =gBGTilemapBuffers + 0x1000
 	adds r0, 0x2
 	lsls r4, r0, 5
 _0810C208:
@@ -1914,7 +1914,7 @@ _0810C226:
 _0810C22C: .4byte 0x00001005
 _0810C230: .4byte gTasks
 _0810C234: .4byte gUnknown_02039248
-_0810C238: .4byte gBG2TilemapBuffer
+_0810C238: .4byte gBGTilemapBuffers + 0x1000
 	thumb_func_end sub_810C1C8
 
 	thumb_func_start sub_810C23C

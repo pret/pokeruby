@@ -9,7 +9,7 @@
 	thumb_func_start sub_80F9020
 sub_80F9020: @ 80F9020
 	push {r4,r5,lr}
-	ldr r4, _080F9054 @ =gBG1TilemapBuffer
+	ldr r4, _080F9054 @ =gBGTilemapBuffers + 0x800
 	movs r5, 0x80
 	lsls r5, 4
 	adds r0, r4, 0
@@ -31,7 +31,7 @@ sub_80F9020: @ 80F9020
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F9054: .4byte gBG1TilemapBuffer
+_080F9054: .4byte gBGTilemapBuffers + 0x800
 	thumb_func_end sub_80F9020
 
 	thumb_func_start sav2_get_text_speed
@@ -44,7 +44,7 @@ sav2_get_text_speed: @ 80F9058
 	bl MenuDisplayMessageBox
 	cmp r4, 0
 	beq _080F907C
-	ldr r0, _080F908C @ =gBG1TilemapBuffer
+	ldr r0, _080F908C @ =gBGTilemapBuffers + 0x800
 	movs r1, 0x4
 	str r1, [sp]
 	str r4, [sp, 0x4]
@@ -60,7 +60,7 @@ _080F907C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F908C: .4byte gBG1TilemapBuffer
+_080F908C: .4byte gBGTilemapBuffers + 0x800
 	thumb_func_end sav2_get_text_speed
 
 	thumb_func_start sub_80F9090
