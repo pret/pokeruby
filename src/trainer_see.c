@@ -31,7 +31,7 @@ extern bool8 (*gTrainerSeeFuncList2[])(u8, struct Task *, struct MapObject *);
 extern u32 gUnknown_0202FF84[];
 
 bool8 CheckTrainer(u8);
-bool8 CheckPathBetweenTrainerAndPlayer(struct MapObject *, u8, u8);
+bool8 CheckPathBetweenTrainerAndPlayer(struct MapObject2 *, u8, u8);
 void sub_80842C8(struct MapObject *, u8);
 void RunTrainerSeeFuncList(u8);
 void sub_80847D8(u8);
@@ -138,7 +138,7 @@ bool8 IsTrainerInRangeEast(struct MapObject *trainerObj, s16 vision, s16 x, s16 
         return FALSE;
 }
 
-bool8 CheckPathBetweenTrainerAndPlayer(struct MapObject *trainerObj, u8 playerCoord, u8 direction)
+bool8 CheckPathBetweenTrainerAndPlayer(struct MapObject2 *trainerObj, u8 playerCoord, u8 direction)
 {
     s16 x, y;
     u8 unk19_temp;
