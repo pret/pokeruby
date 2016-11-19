@@ -92,8 +92,7 @@ gUnknown_030005A6: @ 30005A6
 gUnknown_030006DC: @ 30006DC
 	.space 0x4
 
-gUnknown_030006E0: @ 30006E0
-	.space 0x20
+	.include "src/field_effect.o"
 
 gUnknown_03000700: @ 3000700
 	.space 0x1
