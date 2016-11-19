@@ -11118,14 +11118,14 @@ gSpriteImage_839B408:: @ 839B408
 	.incbin "graphics/unknown_sprites/839B408.4bpp"
 
 	.align 2
-gUnknown_0839B488:: @ 839B488
+gIsTrainerInRange:: @ 839B488
 	.4byte IsTrainerInRangeSouth
 	.4byte IsTrainerInRangeNorth
 	.4byte IsTrainerInRangeWest
 	.4byte IsTrainerInRangeEast
 
 	.align 2
-gUnknown_0839B498:: @ 839B498
+gTrainerSeeFuncList:: @ 839B498
 	.4byte sub_8084394
 	.4byte sub_8084398
 	.4byte sub_80843DC
@@ -11140,7 +11140,7 @@ gUnknown_0839B498:: @ 839B498
 	.4byte sub_80846C8
 
 	.align 2
-gUnknown_0839B4C8:: @ 839B4C8
+gTrainerSeeFuncList2:: @ 839B4C8
 	.4byte sub_80845C8
 	.4byte sub_80845FC
 	.4byte sub_8084654
