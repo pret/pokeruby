@@ -13816,7 +13816,7 @@ Unknown_83C91D6:
 	.string "Set all art museum items$"
 
 	.align 2
-gUnknown_083C91F0:: @ 83C91F0
+gMatsudaDebugMenuActions:: @ 83C91F0
 	.4byte Unknown_83C9166, sub_80A9C1C
 	.4byte Unknown_83C916E, sub_80A9BBC
 	.4byte Unknown_83C9190, sub_80A9C34
