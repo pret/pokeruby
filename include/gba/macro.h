@@ -82,4 +82,14 @@
     dmaRegs[5];                                                 \
 }
 
+#define STRINGIFY(x) #x
+#define INCBIN(type, var, file)             \
+    extern const type var[];                \
+    asm(".section .rodata\n"                \
+        ".global " STRINGIFY(var) "\n"      \
+        ".type " STRINGIFY(var) ",object\n" \
+        "" STRINGIFY(var) ":\n"             \
+        ".incbin " STRINGIFY(file) "\n"     \
+    );
+
 #endif // GUARD_GBA_MACRO_H

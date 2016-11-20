@@ -122,7 +122,6 @@ tidy:
 include castform.mk
 include tilesets.mk
 include fonts.mk
-include generated.mk
 include misc.mk
 
 %.s: ;
@@ -154,8 +153,22 @@ src/agb_flash_mx.o: CFLAGS := -O -mthumb-interwork
 src/m4a_2.o: CC1 := tools/agbcc/bin/old_agbcc
 src/m4a_4.o: CC1 := tools/agbcc/bin/old_agbcc
 
-src/text.o: src/text.c $(GEN_FONT_HEADERS)
-src/link.o: src/link.c $(GEN_LINK_HEADERS)
+TEXT_GFX_DATA := \
+	graphics/fonts/font0_lat.1bpp \
+	graphics/fonts/font1_lat.1bpp \
+	graphics/fonts/font0_jpn.1bpp \
+	graphics/fonts/font1_jpn.1bpp \
+	graphics/fonts/font6_braille.1bpp \
+	graphics/fonts/down_arrow.4bpp \
+	graphics/fonts/unknown_81E6692.gbapal \
+	graphics/fonts/default.gbapal \
+
+LINK_GFX_DATA := \
+	graphics/interface/link_test_digits.gbapal \
+	graphics/interface/link_test_digits.4bpp \
+
+src/text.o: src/text.c $(TEXT_GFX_DATA)
+src/link.o: src/link.c $(LINK_GFX_DATA)
 
 $(C_OBJS): %.o : %.c
 	@$(CPP) $(CPPFLAGS) -D $(VERSION) -D REVISION=$(REVISION) $< -o $*.i

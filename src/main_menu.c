@@ -46,6 +46,14 @@ extern u8 gMainMenuString_Time[];
 extern u8 gMainMenuString_Pokedex[];
 extern u8 gMainMenuString_Badges[];
 
+INCBIN(u16, gUnknown_081E764C, "graphics/birch_speech/bg0.gbapal")
+INCBIN(u16, gMainMenuUnkPalette, "graphics/birch_speech/bg1.gbapal")
+INCBIN(u16, gUnknown_081E768C, "graphics/birch_speech/shadow.4bpp.lz")
+INCBIN(u8, gUnknown_081E7834, "graphics/birch_speech/map.bin.lz")
+INCBIN(u16, gUnknown_081E795C, "graphics/birch_speech/bg2.gbapal")
+const u16 gUnknown_081E796C[8] = {0};
+INCBIN(u16, gMainMenuPalette, "graphics/misc/main_menu.gbapal")
+
 void CB2_MainMenu(void);
 void VBlankCB_MainMenu(void);
 void CB2_InitMainMenu(void);
@@ -69,8 +77,6 @@ static void PrintPlayTime(void);
 static void PrintPokedexCount(void);
 static void PrintBadgeCount(void);
 void Task_NewGameSpeech1(u8);
-
-extern u16 gMainMenuPalette[];
 
 //Task data
 enum {
@@ -649,15 +655,10 @@ extern const struct SpriteSheet gMonFrontPicTable[];
 extern const struct SpritePalette gMonPaletteTable[];
 extern struct SpriteTemplate gUnknown_02024E8C;
 extern void * const gUnknown_081FAF4C[];
-extern u16 gUnknown_081E795C[];
 extern u8 * const gUnknown_081E79B0[][2];
 extern u8 * const gMalePresetNames[][2];
 extern u8 * const gFemalePresetNames[][2];
 
-extern const u8 gUnknown_081E764C[];
-extern const u8 gUnknown_081E768C[];
-extern const u8 gUnknown_081E7834[];
-extern const u8 gUnknown_081E796C[];
 extern const u8 gSystemText_NewPara[];
 
 extern u8 gSpriteAffineAnimTable_81E79AC[];

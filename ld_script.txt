@@ -249,6 +249,7 @@ SECTIONS {
         src/string_util.o(.rodata);
         src/link.o(.rodata);
         src/rtc.o(.rodata);
+		src/main_menu.o(.rodata);
         data/data2.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);
