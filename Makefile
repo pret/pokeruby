@@ -167,8 +167,17 @@ LINK_GFX_DATA := \
 	graphics/interface/link_test_digits.gbapal \
 	graphics/interface/link_test_digits.4bpp \
 
+MAIN_MENU_GFX_DATA := \
+	graphics/birch_speech/bg0.gbapal \
+	graphics/birch_speech/bg1.gbapal \
+	graphics/birch_speech/shadow.4bpp.lz \
+	graphics/birch_speech/map.bin.lz \
+	graphics/birch_speech/bg2.gbapal \
+	graphics/misc/main_menu.gbapal
+
 src/text.o: src/text.c $(TEXT_GFX_DATA)
 src/link.o: src/link.c $(LINK_GFX_DATA)
+src/main_menu.o: src/main_menu.c $(MAIN_MENU_GFX_DATA)
 
 $(C_OBJS): %.o : %.c
 	@$(CPP) $(CPPFLAGS) -D $(VERSION) -D REVISION=$(REVISION) $< -o $*.i
