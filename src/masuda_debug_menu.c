@@ -53,7 +53,7 @@ struct DebugMenuAction
    u8 (*func)(void);
 };
 
-extern struct DebugMenuAction gMatsudaDebugMenuActions[];
+extern struct DebugMenuAction gMasudaDebugMenuActions[];
 
 s8 sub_80A9B78(void);
 void sub_80A9BE4(u8 taskId);
@@ -66,7 +66,7 @@ u8 unref_sub_80A9B28(void)
 {
 	MenuZeroFillScreen();
 	MenuDrawTextWindow(0, 0, 17, 18);
-	PrintMenuItems(1, 1, 7, gMatsudaDebugMenuActions);
+	PrintMenuItems(1, 1, 7, gMasudaDebugMenuActions);
 	InitMenu(0, 1, 1, 7, 0, 16);
 	gCallback_03004AE8 = sub_80A9B78;
 	return 0;
@@ -81,7 +81,7 @@ s8 sub_80A9B78(void)
 	case -2:
         return 0;
 	default:
-        gCallback_03004AE8 = gMatsudaDebugMenuActions[choice].func;
+        gCallback_03004AE8 = gMasudaDebugMenuActions[choice].func;
         return 0;
 	case -1:
         sub_8071C20();
