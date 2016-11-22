@@ -172,7 +172,7 @@ struct MapObject
     /*0x1B*/ u8 mapobj_unk_1B;
     /*0x1C*/ u8 mapobj_unk_1C;
     /*0x1D*/ u8 trainerRange_berryTreeId;
-    /*0x1E */ u8 mapobj_unk_1E;
+    /*0x1E*/ u8 mapobj_unk_1E;
     /*0x1F*/ u8 mapobj_unk_1F;
     /*0x20*/ u8 mapobj_unk_20;
     /*0x21*/ u8 mapobj_unk_21;
@@ -234,7 +234,7 @@ struct MapObject2
     /*0x1B*/ u8 mapobj_unk_1B;
     /*0x1C*/ u8 mapobj_unk_1C;
     /*0x1D*/ u8 trainerRange_berryTreeId;
-    /*0x1E */ u8 mapobj_unk_1E;
+    /*0x1E*/ u8 mapobj_unk_1E;
     /*0x1F*/ u8 mapobj_unk_1F;
     /*0x20*/ u8 mapobj_unk_20;
     /*0x21*/ u8 mapobj_unk_21;
@@ -261,14 +261,24 @@ struct MapObjectGraphicsInfo
     union AffineAnimCmd **affineAnims;
 };
 
+#define PLAYER_AVATAR_FLAG_0 (1 << 0)
+#define PLAYER_AVATAR_FLAG_1 (1 << 1)
+#define PLAYER_AVATAR_FLAG_2 (1 << 2)
+#define PLAYER_AVATAR_FLAG_3 (1 << 3)
+#define PLAYER_AVATAR_FLAG_4 (1 << 4)
+#define PLAYER_AVATAR_FLAG_5 (1 << 5)
+#define PLAYER_AVATAR_FLAG_6 (1 << 6)
+#define PLAYER_AVATAR_FLAG_7 (1 << 7)
+
 struct PlayerAvatar
 {
- /* 0x00 */ u8 bitfield;
+ /* 0x00 */ u8 flags;
  /* 0x01 */ u8 bike;
  /* 0x02 */ u8 running2;
  /* 0x03 */ u8 running1;
  /* 0x04 */ u8 spriteId;
  /* 0x05 */ u8 mapObjectId;
+ /* 0x06 */ u8 unk6;
     // TODO: rest of struct
 };
 
