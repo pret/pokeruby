@@ -390,14 +390,12 @@ u8 sub_8058F6C(s16, s16, u8);       //probably correct
 u32 CheckForRotatingGatePuzzleCollision(u8, s16, s16);
 void check_acro_bike_metatile(int unused1, int unused2, u8 c, u8 *d);
 
-//TODO: Figure out types
-#ifdef NONMATCHING
 u8 CheckForFieldObjectCollision(struct MapObject *a, s16 b, s16 c, u8 d, u8 e)
 {
     u8 sp0;
     
     sp0 = npc_block_way(a, b, c, d);
-    if (sp0 == 3 && sub_8058EF0(b, e, d))
+    if (sp0 == 3 && sub_8058EF0(b, c, d))
         return 5;
     if (ShouldJumpLedge(b, c, d))
     {
@@ -415,116 +413,6 @@ u8 CheckForFieldObjectCollision(struct MapObject *a, s16 b, s16 c, u8 d, u8 e)
     }
     return sp0;
 }
-#else
-__attribute__((naked))
-u8 CheckForFieldObjectCollision()
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x4\n\
-    ldr r4, [sp, 0x24]\n\
-    lsls r1, 16\n\
-    lsls r2, 16\n\
-    lsls r3, 24\n\
-    lsrs r6, r3, 24\n\
-    lsls r4, 24\n\
-    lsrs r4, 24\n\
-    mov r10, r4\n\
-    lsrs r7, r1, 16\n\
-    asrs r5, r1, 16\n\
-    lsrs r1, r2, 16\n\
-    mov r9, r1\n\
-    asrs r4, r2, 16\n\
-    adds r1, r5, 0\n\
-    adds r2, r4, 0\n\
-    adds r3, r6, 0\n\
-    bl npc_block_way\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    mov r1, sp\n\
-    strb r0, [r1]\n\
-    cmp r0, 0x3\n\
-    bne _08058E70\n\
-    adds r0, r5, 0\n\
-    adds r1, r4, 0\n\
-    adds r2, r6, 0\n\
-    bl sub_8058EF0\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    beq _08058E70\n\
-    movs r0, 0x5\n\
-    b _08058EDE\n\
-_08058E70:\n\
-    lsls r5, r7, 16\n\
-    asrs r0, r5, 16\n\
-    mov r8, r0\n\
-    mov r1, r9\n\
-    lsls r4, r1, 16\n\
-    asrs r7, r4, 16\n\
-    adds r1, r7, 0\n\
-    adds r2, r6, 0\n\
-    bl ShouldJumpLedge\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    beq _08058E94\n\
-    movs r0, 0x2B\n\
-    bl sav12_xor_increment\n\
-    movs r0, 0x6\n\
-    b _08058EDE\n\
-_08058E94:\n\
-    mov r0, sp\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0x4\n\
-    bne _08058EB0\n\
-    mov r0, r8\n\
-    adds r1, r7, 0\n\
-    adds r2, r6, 0\n\
-    bl sub_8058F6C\n\
-    lsls r0, 24\n\
-    cmp r0, 0\n\
-    beq _08058EB0\n\
-    movs r0, 0x7\n\
-    b _08058EDE\n\
-_08058EB0:\n\
-    mov r0, sp\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0\n\
-    bne _08058EDA\n\
-    asrs r5, 16\n\
-    asrs r4, 16\n\
-    adds r0, r6, 0\n\
-    adds r1, r5, 0\n\
-    adds r2, r4, 0\n\
-    bl CheckForRotatingGatePuzzleCollision\n\
-    cmp r0, 0\n\
-    beq _08058ECE\n\
-    movs r0, 0x8\n\
-    b _08058EDE\n\
-_08058ECE:\n\
-    adds r0, r5, 0\n\
-    adds r1, r4, 0\n\
-    mov r2, r10\n\
-    mov r3, sp\n\
-    bl check_acro_bike_metatile\n\
-_08058EDA:\n\
-    mov r0, sp\n\
-    ldrb r0, [r0]\n\
-_08058EDE:\n\
-    add sp, 0x4\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r1}\n\
-    bx r1\n\
-    .syntax divided\n");
-}
-#endif
 
 extern u8 GetFieldObjectIdByXYZ(u16, u16, int);
 extern u8 MapGridGetZCoordAt();
