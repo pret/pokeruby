@@ -176,6 +176,7 @@ struct MapObject
     /*0x1F*/ u8 mapobj_unk_1F;
     /*0x20*/ u8 mapobj_unk_20;
     /*0x21*/ u8 mapobj_unk_21;
+    /*0x22*/ u8 mapobj_unk_22;
     /*size = 0x24*/
 };
 
@@ -272,13 +273,14 @@ struct MapObjectGraphicsInfo
 
 struct PlayerAvatar
 {
- /* 0x00 */ u8 flags;
- /* 0x01 */ u8 bike;
- /* 0x02 */ u8 running2;
- /* 0x03 */ u8 running1;
- /* 0x04 */ u8 spriteId;
- /* 0x05 */ u8 mapObjectId;
- /* 0x06 */ u8 unk6;
+    /*0x00*/ u8 flags;
+    /*0x01*/ u8 bike;
+    /*0x02*/ u8 running2;
+    /*0x03*/ u8 running1;
+    /*0x04*/ u8 spriteId;
+    /*0x05*/ u8 mapObjectId;
+    /*0x06*/ u8 unk6;
+    /*0x07*/ u8 gender;
     // TODO: rest of struct
 };
 
