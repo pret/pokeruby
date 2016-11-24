@@ -13,6 +13,8 @@ struct GcmbStruct
 };
 
 extern u16 gUnknown_02039318;
+extern u16 gUnknown_02039358;
+extern u16 gUnknown_0203935A;
 
 extern u32 gUnknown_03005ED0;
 extern struct GcmbStruct gUnknown_03005EE0;
@@ -24,9 +26,17 @@ extern const u8 gUnknown_08406F28[];
 extern const u8 gUnknown_0840725C[];
 extern const u8 gUnknown_0840754C[];
 extern const u8 gUnknown_08407764[];
+extern union AffineAnimCmd *gUnknown_0840AE80[];
+extern const struct SpriteTemplate gSpriteTemplate_840AFF0;
 extern const u8 gUnknown_0840B008[];
 extern const u8 gUnknown_0840B018[];
 extern const struct SpritePalette gUnknown_0840B028[];
+extern const struct SpriteSheet gIntro2BrendanSpriteSheet;
+extern const struct SpriteSheet gIntro2MaySpriteSheet;
+extern const struct SpriteSheet gIntro2BicycleSpriteSheet;
+extern const struct SpriteSheet gIntro2LatiosSpriteSheet;
+extern const struct SpriteSheet gIntro2LatiasSpriteSheet;
+extern const struct SpritePalette gIntro2SpritePalettes[];
 
 extern const u8 gIntroCopyright_Gfx[];
 extern const u16 gIntroCopyright_Pal[];
@@ -34,15 +44,24 @@ extern const u16 gIntroCopyright_Tilemap[];
 
 extern void LoadCompressedObjectPic(struct SpriteSheet *);
 extern void CB2_InitTitleScreen(void);
+extern u8 sub_8148EC0(/*TODO: arg types*/);
+extern u8 sub_8149310(/*TODO: arg types*/);
+extern u8 sub_8149368(/*TODO: arg types*/);
 
 void CB2_813B7EC(void);
 void task_intro_1(u8);
 void task_intro_2(u8);
 void task_intro_3(u8);
 void task_intro_4(u8);
+void task_intro_5(u8);
+void task_intro_6(u8);
+void sub_813BF70(u8);
+void sub_813C080(u8);
 void intro_reset_and_hide_bgs(void);
 void sub_813CCE8(u8);
 u8 sub_813D584(/*TODO: arg types*/);
+void sub_813D788(struct Sprite *);
+void sub_813D880(struct Sprite *);
 sub_813D954(/*TODO: arg types*/);
 
 void sub_813B784(void)
@@ -238,4 +257,102 @@ void task_intro_3(u8 taskId)
         gTasks[taskId].data[6] = 0;
         gTasks[taskId].func = task_intro_4;
     }
+}
+
+void task_intro_4(u8 taskId)
+{
+    if (gUnknown_03005ED0 <= 0x387)
+    {
+        s32 r2;
+        
+        r2 = (gTasks[taskId].data[1] << 16) + (u16)gTasks[taskId].data[2] - 0xC000;
+        gTasks[taskId].data[1] = r2 >> 16;
+        gTasks[taskId].data[2] = r2;
+        REG_BG2VOFS = gTasks[taskId].data[1];
+        r2 = (gTasks[taskId].data[3] << 16) + (u16)gTasks[taskId].data[4] - 0x10000;
+        gTasks[taskId].data[3] = r2 >> 16;
+        gTasks[taskId].data[4] = r2;
+        REG_BG1VOFS = gTasks[taskId].data[3];
+        r2 = (gTasks[taskId].data[5] << 16) + (u16)gTasks[taskId].data[6] - 0x18000;
+        gTasks[taskId].data[5] = r2 >> 16;
+        gTasks[taskId].data[6] = r2;
+        REG_BG0VOFS = gTasks[taskId].data[5];
+        if (gUnknown_03005ED0 == 0x370)
+        {
+            u8 spriteId = CreateSprite(&gSpriteTemplate_840AFF0, 0xC8, 0xA0, 10);
+            
+            gSprites[spriteId].invisible = 1;
+        }
+    }
+    else
+    {
+        if (gUnknown_03005ED0 > 0x3EF)
+        {
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0xFFFF);
+            gTasks[taskId].func = task_intro_5;
+        }
+    }
+}
+
+void task_intro_5(u8 taskId)
+{
+    if (gUnknown_03005ED0 > 0x402)
+        gTasks[taskId].func = task_intro_6;
+}
+
+void task_intro_6(u8 taskId)
+{
+    intro_reset_and_hide_bgs();
+    SetVBlankCallback(NULL);
+    ResetSpriteData();
+    FreeAllSpritePalettes();
+    gUnknown_02039358 = 0;
+    gUnknown_0203935A = 0;
+#ifdef SAPPHIRE
+    load_intro_part2_graphics(0);
+#else
+    load_intro_part2_graphics(1);
+#endif
+    gTasks[taskId].func = sub_813BF70;
+}
+
+void sub_813BF70(u8 taskId)
+{
+    u8 spriteId;
+    
+    if (gUnknown_02039318 == 0)
+        LoadCompressedObjectPic(&gIntro2BrendanSpriteSheet);
+    else
+        LoadCompressedObjectPic(&gIntro2MaySpriteSheet);
+    LoadCompressedObjectPic(&gIntro2BicycleSpriteSheet);
+#ifdef SAPPHIRE
+    LoadCompressedObjectPic(&gIntro2LatiasSpriteSheet);
+#else
+    LoadCompressedObjectPic(&gIntro2LatiosSpriteSheet);
+#endif
+    LoadSpritePalettes(gIntro2SpritePalettes);
+    if (gUnknown_02039318 == 0)
+        spriteId = sub_8149310(0x110, 100);
+    else
+        spriteId = sub_8149368(0x110, 100);
+    gSprites[spriteId].callback = sub_813D788;
+    gSprites[spriteId].anims = gUnknown_0840AE80;
+    gTasks[taskId].data[1] = spriteId;
+#ifdef SAPPHIRE
+    spriteId = sapphire_sub_81494A0(-0x40, 0x3C);
+#else
+    spriteId = sub_8149424(-0x40, 0x3C);
+#endif
+    gSprites[spriteId].callback = sub_813D880;
+    gTasks[taskId].data[2] = spriteId;
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, 0xFFFF);
+    SetVBlankCallback(sub_813B784);
+#ifdef SAPPHIRE
+    gTasks[taskId].data[0] = sub_8148EC0(0, 0x4000, 0x40, 0x10);
+    sub_8148C78(0);
+#else
+    gTasks[taskId].data[0] = sub_8148EC0(1, 0x4000, 0x400, 0x10);
+    sub_8148C78(1);
+#endif
+    gTasks[taskId].func = sub_813C080;
 }
