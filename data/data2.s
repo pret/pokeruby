@@ -10502,66 +10502,21 @@ gUnknown_08396FC4:: @ 8396FC4
 
 	.align 2
 gUnknown_08396FC8:: @ 8396FC8
-	.4byte sub_807CAE8
-	.4byte nullsub_38
-	.4byte sub_807CAE8
-	.4byte sub_807CB0C
-	.4byte sub_807DE78
-	.4byte sub_807DEF4
-	.4byte sub_807DEC4
-	.4byte sub_807DF54
-	.4byte sub_807DF9C
-	.4byte nullsub_55
-	.4byte sub_807DFC0
-	.4byte sub_807DFD0
-	.4byte sub_807E364
-	.4byte sub_807E400
-	.4byte sub_807E3D0
-	.4byte sub_807E460
-	.4byte sub_807E9C8
-	.4byte snowflakes_progress2
-	.4byte sub_807EA18
-	.4byte sub_807EAC0
-	.4byte sub_807EE80
-	.4byte sub_807EFC0
-	.4byte sub_807EEF4
-	.4byte sub_807F34C
-	.4byte sub_807F49C
-	.4byte sub_807F52C
-	.4byte sub_807F4FC
-	.4byte sub_807F5EC
-	.4byte sub_807F7F8
-	.4byte sub_807F888
-	.4byte sub_807F858
-	.4byte sub_807F934
-	.4byte sub_807FE9C
-	.4byte sub_807FF4C
-	.4byte sub_807FF1C
-	.4byte sub_807FFC8
-	.4byte sub_807FB24
-	.4byte sub_807FBD8
-	.4byte sub_807FBA8
-	.4byte sub_807FC3C
-	.4byte sub_807F49C
-	.4byte sub_807F52C
-	.4byte sub_807F4FC
-	.4byte sub_807F5EC
-	.4byte sub_8080430
-	.4byte nullsub_56
-	.4byte sub_8080460
-	.4byte sub_8080470
-	.4byte sub_807E110
-	.4byte sub_807E174
-	.4byte sub_807E144
-	.4byte sub_807E258
-	.4byte sub_807EF24
-	.4byte sub_807EFC0
-	.4byte sub_807EF90
-	.4byte sub_807F34C
-	.4byte sub_8080474
-	.4byte sub_80804F8
-	.4byte sub_80804C8
-	.4byte sub_808056C
+	.4byte sub_807CAE8, nullsub_38, sub_807CAE8, sub_807CB0C
+	.4byte sub_807DE78, sub_807DEF4, sub_807DEC4, sub_807DF54
+	.4byte sub_807DF9C, nullsub_55, sub_807DFC0, sub_807DFD0
+	.4byte sub_807E364, sub_807E400, sub_807E3D0, sub_807E460
+	.4byte sub_807E9C8, snowflakes_progress2, sub_807EA18, sub_807EAC0
+	.4byte sub_807EE80, sub_807EFC0, sub_807EEF4, sub_807F34C
+	.4byte sub_807F49C, sub_807F52C, sub_807F4FC, sub_807F5EC
+	.4byte sub_807F7F8, sub_807F888, sub_807F858, sub_807F934
+	.4byte sub_807FE9C, sub_807FF4C, sub_807FF1C, sub_807FFC8
+	.4byte sub_807FB24, sub_807FBD8, sub_807FBA8, sub_807FC3C
+	.4byte sub_807F49C, sub_807F52C, sub_807F4FC, sub_807F5EC
+	.4byte sub_8080430, nullsub_56, sub_8080460, sub_8080470
+	.4byte sub_807E110, sub_807E174, sub_807E144, sub_807E258
+	.4byte sub_807EF24, sub_807EFC0, sub_807EF90, sub_807F34C
+	.4byte sub_8080474, sub_80804F8, sub_80804C8, sub_808056C
 
 	.align 2
 gUnknown_083970B8:: @ 83970B8
