@@ -4732,22 +4732,22 @@ gUnknown_0830FCAC:: @ 830FCAC
 
 	.align 2
 gUnknown_0830FCB4:: @ 830FCB4
-	.4byte sub_805A3B4
-	.4byte fish1
-	.4byte fish2
-	.4byte fish3
-	.4byte fish4
-	.4byte party_menu_update_status_condition_object
-	.4byte sub_805A5CC
-	.4byte fish7
-	.4byte fish8
-	.4byte sub_805A6B4
-	.4byte sub_805A6DC
-	.4byte sub_805A7BC
-	.4byte sub_805A808
-	.4byte fishD
-	.4byte sub_805A874
-	.4byte fishF
+	.4byte Fishing1
+	.4byte Fishing2
+	.4byte Fishing3
+	.4byte Fishing4
+	.4byte Fishing5
+	.4byte Fishing6
+	.4byte Fishing7
+	.4byte Fishing8
+	.4byte Fishing9
+	.4byte Fishing10
+	.4byte Fishing11
+	.4byte Fishing12
+	.4byte Fishing13
+	.4byte Fishing14
+	.4byte Fishing15
+	.4byte Fishing16
 
 	.align 1
 gUnknown_0830FCF4:: @ 830FCF4

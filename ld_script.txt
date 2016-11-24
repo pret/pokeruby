@@ -70,7 +70,7 @@ SECTIONS {
         asm/metatile_behavior.o(.text);
         src/field_camera.o(.text);
         src/field_door.o(.text);
-        asm/field_player_avatar.o(.text);
+        src/field_player_avatar.o(.text);
         asm/field_map_obj.o(.text);
         asm/field_ground_effect.o(.text);
         src/map_obj_80643A4.o(.text);
