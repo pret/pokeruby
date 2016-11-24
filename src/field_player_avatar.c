@@ -1,6 +1,9 @@
 #include "global.h"
 #include "fieldmap.h"
 #include "flag.h"
+#include "main.h"
+#include "menu.h"
+#include "rng.h"
 #include "script.h"
 #include "songs.h"
 #include "sprite.h"
@@ -19,6 +22,16 @@ extern u32 FieldEffectStart(u8);
 extern void PlayerGetDestCoords(s16 *, s16 *);
 extern bool8 MetatileBehavior_IsSurfableFishableWater(u8);
 extern bool8 FieldObjectCheckIfSpecialAnimFinishedOrInactive(struct MapObject *);
+extern bool8 FieldObjectSetSpecialAnim(struct MapObject *, u8);
+extern void sub_806451C(void);
+extern void sub_805B980(struct MapObject *, u8);
+extern void sub_8127ED0(u8, u8);
+extern bool8 player_should_look_direction_be_enforced_upon_movement(void);
+
+extern u8 gOtherText_OhABite[];
+extern u8 gOtherText_PokeOnHook[];
+extern u8 gOtherText_NotEvenANibble[];
+extern u8 gOtherText_ItGotAway[];
 
 extern struct
 {
@@ -41,6 +54,15 @@ extern u8 gUnknown_0830FC64[2][5][2];
 extern bool8 (*gUnknown_0830FC78[])(u8); //Duplicate of gUnknown_0830FC34
 extern u8 (*gUnknown_0830FC88[])(struct Task *, struct MapObject *, struct MapObject *);
 extern u8 (*gUnknown_0830FC94[])(struct Task *, struct MapObject *);
+extern u8 (*gUnknown_0830FC98[])(struct Task *, struct MapObject *);
+extern u8 gUnknown_0830FCA8[];
+extern u8 gUnknown_0830FCAC[];
+extern u8 (*gUnknown_0830FCB4[])(struct Task *);
+extern s16 gUnknown_0830FCF4[];
+extern s16 gUnknown_0830FCFA[];
+extern u8 gUnknown_0830FD00[];
+extern s16 gUnknown_0830FD02[];
+extern s16 gUnknown_0830FD08[];
 
 u32 sub_80587D8(void);
 bool8 sub_8058854(struct MapObject *a, u8 b);
@@ -55,6 +77,14 @@ u8 CheckMovementInputNotOnBike(u8);
 void sub_80593C4(u8);
 void PlayerGoSpeed0(u8);
 void npc_use_some_d2s(u8);
+
+//Functions
+bool8 player_is_anim_in_certain_ranges(void);
+bool8 sub_80592A4(void);
+bool8 PlayerIsAnimActive(void);
+bool8 PlayerCheckIfAnimFinishedOrInactive(void);
+u8 GetPlayerAvatarGraphicsIdByStateId(u8);
+void sub_805A954(void);
 
 void sub_80587B4(struct Sprite *sprite)
 {
@@ -516,9 +546,6 @@ void DoPlayerAvatarTransition(void)
     }
 }
 
-extern void sub_805B980(struct MapObject *, u8);
-u8 GetPlayerAvatarGraphicsIdByStateId(u8);
-
 void nullsub_49(struct MapObject *a)
 {
 }
@@ -547,8 +574,6 @@ void PlayerAvatarTransition_AcroBike(struct MapObject *a)
     sub_80E6084();
 }
 
-extern void sub_8127ED0(u8, u8);
-
 void PlayerAvatarTransition_Surfing(struct MapObject *a)
 {
     u8 unk;
@@ -576,11 +601,6 @@ void sub_80591F4(struct MapObject *a)
 {
     gPlayerAvatar.flags |= PLAYER_AVATAR_FLAG_5;
 }
-
-u8 player_is_anim_in_certain_ranges(void);
-u8 sub_80592A4(void);
-u8 PlayerIsAnimActive(void);
-u8 PlayerCheckIfAnimFinishedOrInactive(void);
 
 void sub_8059204(void)
 {
@@ -708,8 +728,6 @@ void PlayerJumpLedge(u8 a)
     PlaySE(SE_DANSA);
     player_npc_set_state_and_x22_etc(GetJumpLedgeAnimId(a), 8);
 }
-
-u8 player_should_look_direction_be_enforced_upon_movement(void);
 
 void sub_80594C0(void)
 {
@@ -1187,7 +1205,26 @@ void sub_8059FB4(u8 taskId)
         ;
 }
 
-/*
+extern u8 sub_806084C(u8);
+
+u8 sub_805A000(struct Task *task, struct MapObject *mapObject)
+{
+    gPlayerAvatar.unk6 = 1;
+    if (FieldObjectClearAnimIfSpecialAnimFinished(mapObject))
+    {
+        PlaySE(SE_DANSA);
+        FieldObjectSetSpecialAnim(mapObject, sub_806084C(mapObject->mapobj_unk_18));
+        task->data[1]++;
+        if (task->data[1] > 1)
+        {
+            gPlayerAvatar.unk6 = 0;
+            gPlayerAvatar.bike |= 0x20;
+            DestroyTask(FindTaskIdByFunc(sub_8059FB4));
+        }
+    }
+    return 0;
+}
+
 void sub_805A08C(u8);
 
 void sub_805A06C(void)
@@ -1212,4 +1249,405 @@ u8 sub_805A0D8(struct Task *task, struct MapObject *mapObject)
     PlaySE(SE_TK_WARPIN);
     return 1;
 }
-*/
+
+extern u8 GetOppositeDirection(u8);
+extern u8 GetFaceDirectionAnimId(u8);
+
+u8 sub_805A100(struct Task *task, struct MapObject *mapObject)
+{
+    u8 directions[4];
+    
+    memcpy(directions, gUnknown_0830FCA8, sizeof(directions));
+    if (FieldObjectClearAnimIfSpecialAnimFinished(mapObject))
+    {
+        u8 direction;
+        
+        FieldObjectSetSpecialAnim(mapObject, GetFaceDirectionAnimId(direction = directions[mapObject->placeholder18 - 1]));
+        if (direction == (u8)task->data[1])
+            task->data[2]++;
+        task->data[0]++;
+        if (task->data[2] > 3 && direction == GetOppositeDirection(task->data[1]))
+            task->data[0]++;
+    }
+    return 0;
+}
+
+u8 sub_805A178(struct Task *task, struct MapObject *mapObject)
+{
+    u8 arr[5];
+    
+    memcpy(arr, gUnknown_0830FCAC, sizeof(arr));
+    if (FieldObjectClearAnimIfSpecialAnimFinished(mapObject))
+    {
+        FieldObjectSetSpecialAnim(mapObject, arr[task->data[2]]);
+        task->data[0] = 1;
+    }
+    return 0;
+}
+
+u8 sub_805A1B8(struct Task *task, struct MapObject *mapObject)
+{
+    if (FieldObjectClearAnimIfSpecialAnimFinished(mapObject))
+    {
+        FieldObjectSetSpecialAnim(mapObject, GetSimpleGoAnimId(GetOppositeDirection(task->data[1])));
+        ScriptContext2_Disable();
+        gPlayerAvatar.unk6 = 0;
+        DestroyTask(FindTaskIdByFunc(sub_805A08C));
+    }
+    return 0;
+}
+
+void taskFF_0805D1D4(u8);
+
+void sub_805A20C(u8 a)
+{
+    u8 taskId;
+    
+    ScriptContext2_Enable();
+    sav1_reset_battle_music_maybe();
+    sub_8053F84();
+    gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_3;
+    gPlayerAvatar.flags |= PLAYER_AVATAR_FLAG_0;
+    gPlayerAvatar.unk6 = 1;
+    taskId = CreateTask(taskFF_0805D1D4, 0xFF);
+    gTasks[taskId].data[0] = a;
+    taskFF_0805D1D4(taskId);
+}
+
+void sub_805A2D0(u8);
+u8 sub_80608D0(u8);
+
+void taskFF_0805D1D4(u8 taskId)
+{
+    struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
+    
+    if (FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(playerMapObj))
+    {
+        if (!FieldObjectClearAnimIfSpecialAnimFinished(playerMapObj))
+            return;
+    }
+    sub_8127ED0(playerMapObj->mapobj_unk_1A, 2);
+    FieldObjectSetSpecialAnim(playerMapObj, sub_80608D0(gTasks[taskId].data[0]));
+    gTasks[taskId].func = sub_805A2D0;
+}
+
+void sub_805A2D0(u8 taskId)
+{
+    struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
+    
+    if (FieldObjectClearAnimIfSpecialAnimFinished(playerMapObj))
+    {
+        sub_805B980(playerMapObj, GetPlayerAvatarGraphicsIdByStateId(0));
+        FieldObjectSetSpecialAnim(playerMapObj, GetFaceDirectionAnimId(playerMapObj->mapobj_unk_18));
+        gPlayerAvatar.unk6 = 0;
+        ScriptContext2_Disable();
+        DestroySprite(&gSprites[playerMapObj->mapobj_unk_1A]);
+        DestroyTask(taskId);
+    }
+}
+
+void sub_805A37C(u8);
+
+void StartFishing(u8 a)
+{
+    u8 taskId = CreateTask(sub_805A37C, 0xFF);
+    
+    gTasks[taskId].data[15] = a;
+    sub_805A37C(taskId);
+}
+
+void sub_805A37C(u8 taskId)
+{
+    while (gUnknown_0830FCB4[gTasks[taskId].data[0]](&gTasks[taskId]))
+        ;
+}
+
+u8 sub_805A3B4(struct Task *task)
+{
+    ScriptContext2_Enable();
+    gPlayerAvatar.unk6 = 1;
+    task->data[0]++;
+    return 0;
+}
+
+u8 fish1(struct Task *task)
+{
+    s16 arr1[3];
+    s16 arr2[3];
+    struct MapObject *playerMapObj;
+    
+    memcpy(arr1, gUnknown_0830FCF4, sizeof(arr1));
+    memcpy(arr2, gUnknown_0830FCFA, sizeof(arr2));
+    task->data[12] = 0;
+    task->data[13] = arr1[task->data[15]] + (Random() % arr2[task->data[15]]);
+    task->data[14] = gMapObjects[gPlayerAvatar.mapObjectId].graphicsId;
+    playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
+    FieldObjectClearAnimIfSpecialAnimActive(playerMapObj);
+    playerMapObj->mapobj_bit_11 = 1;
+    sub_8059C3C(playerMapObj->mapobj_unk_18);
+    task->data[0]++;
+    return 0;
+}
+
+u8 fish2(struct Task *task)
+{
+    sub_805A954();
+    task->data[1]++;
+    if (task->data[1] > 0x3B)
+        task->data[0]++;
+    return 0;
+}
+
+u8 fish3(struct Task *task)
+{
+    u32 randVal;
+    
+    MenuDisplayMessageBox();
+    task->data[0]++;
+    task->data[1] = 0;
+    task->data[2] = 0;
+    randVal = Random();
+    randVal %= 10;
+    task->data[3] = randVal + 1;
+    if (task->data[12] == 0)
+        task->data[3] = randVal + 4;
+    if (task->data[3] > 9)
+        task->data[3] = 10;
+    return 1;
+}
+
+u8 fish4(struct Task *task)
+{
+    u8 dot[2];
+    
+    memcpy(dot, gUnknown_0830FD00, sizeof(dot));
+    sub_805A954();
+    task->data[1]++;
+    if (gMain.newKeys & A_BUTTON)
+    {
+        task->data[0] = 11;
+        if (task->data[12] != 0)
+            task->data[0] = 12;
+        return 1;
+    }
+    else
+    {
+        if (task->data[1] > 0x13)
+        {
+            task->data[1] = 0;
+            if (task->data[2] >= task->data[3])
+            {
+                task->data[0]++;
+                if (task->data[12] != 0)
+                    task->data[0]++;
+                task->data[12]++;
+            }
+            else
+            {
+                MenuPrint(dot, task->data[2] + 4, 15);
+                task->data[2]++;
+            }
+        }
+        return 0;
+    }
+}
+
+extern bool8 GetFishingWildMonListHeader(void);
+
+//TODO: rename this
+u8 party_menu_update_status_condition_object(struct Task *task)
+{
+    sub_805A954();
+    task->data[0]++;
+    if (!GetFishingWildMonListHeader() || (Random() & 1))
+        task->data[0] = 11;
+    else
+        StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], sub_805FE08(player_get_direction_lower_nybble()));
+    return 1;
+}
+
+u8 sub_805A5CC(struct Task *task)
+{
+    sub_805A954();
+    MenuPrint(gOtherText_OhABite, 4, 17);
+    task->data[0]++;
+    task->data[1] = 0;
+    return 0;
+}
+
+u8 fish7(struct Task *task)
+{
+    s16 arr[3];
+    
+    memcpy(arr, gUnknown_0830FD02, sizeof(arr));
+    sub_805A954();
+    task->data[1]++;
+    if (task->data[1] >= arr[task->data[15]])
+        task->data[0] = 12;
+    else if (gMain.newKeys & A_BUTTON)
+        task->data[0]++;
+    return 0;
+}
+
+u8 fish8(struct Task *task)
+{
+    s16 arr[3][2];
+    
+    memcpy(arr, gUnknown_0830FD08, sizeof(arr));
+    sub_805A954();
+    task->data[0]++;
+    if (task->data[12] < task->data[13])
+    {
+        task->data[0] = 3;
+    }
+    else if (task->data[12] < 2)
+    {
+        s16 randVal = Random() % 100;
+        
+        if (arr[task->data[15]][task->data[12]] > randVal)
+            task->data[0] = 3;
+    }
+    return 0;
+}
+
+u8 sub_805A6B4(struct Task *task)
+{
+    sub_805A954();
+    sub_8072044(gOtherText_PokeOnHook);
+    MenuDisplayMessageBox();
+    task->data[0]++;
+    task->data[1] = 0;
+    return 0;
+}
+
+extern void FishingWildEncounter(u8);
+
+u8 sub_805A6DC(struct Task *task)
+{
+    if (task->data[1] == 0)
+    {
+        sub_805A954();
+        if (task->data[1] == 0)
+        {
+            if (MenuUpdateWindowText())
+            {
+                struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
+                
+                sub_805B980(playerMapObj, task->data[14]);
+                FieldObjectTurn(playerMapObj, playerMapObj->placeholder18);
+                if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_3)
+                    sub_8127F28(gMapObjects[gPlayerAvatar.mapObjectId].mapobj_unk_1A, 0, 0);
+                gSprites[gPlayerAvatar.spriteId].pos2.x = 0;
+                gSprites[gPlayerAvatar.spriteId].pos2.y = 0;
+                MenuZeroFillScreen();
+                task->data[1]++;
+                return 0;
+            }
+            else
+            {
+                if (task->data[1] == 0)
+                    return 0;
+            }
+        }
+    }
+    //_0805A780
+    gPlayerAvatar.unk6 = 0;
+    ScriptContext2_Disable();
+    FishingWildEncounter(task->data[15]);
+    sub_80BE97C(1);
+    DestroyTask(FindTaskIdByFunc(sub_805A37C));
+    return 0;
+}
+
+u8 sub_805A7BC(struct Task *task)
+{
+    sub_805A954();
+    StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], sub_805FDF8(player_get_direction_lower_nybble()));
+    sub_8072044(gOtherText_NotEvenANibble);
+    task->data[0] = 13;
+    return 1;
+}
+
+u8 sub_805A808(struct Task *task)
+{
+    sub_805A954();
+    StartSpriteAnim(&gSprites[gPlayerAvatar.spriteId], sub_805FDF8(player_get_direction_lower_nybble()));
+    sub_8072044(gOtherText_ItGotAway);
+    task->data[0]++;
+    return 1;
+}
+
+u8 fishD(struct Task *task)
+{
+    sub_805A954();
+    MenuDisplayMessageBox();
+    task->data[0]++;
+    return 0;
+}
+
+u8 sub_805A874(struct Task *task)
+{
+    sub_805A954();
+    if (gSprites[gPlayerAvatar.spriteId].animEnded)
+    {
+        struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
+        
+        sub_805B980(playerMapObj, task->data[14]);
+        FieldObjectTurn(playerMapObj, playerMapObj->placeholder18);
+        if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_3)
+            sub_8127F28(gMapObjects[gPlayerAvatar.mapObjectId].mapobj_unk_1A, 0, 0);
+        gSprites[gPlayerAvatar.spriteId].pos2.x = 0;
+        gSprites[gPlayerAvatar.spriteId].pos2.y = 0;
+        task->data[0]++;
+    }
+    return 0;
+}
+
+u8 fishF(struct Task *task)
+{
+    if (MenuUpdateWindowText())
+    {
+        gPlayerAvatar.unk6 = 0;
+        ScriptContext2_Disable();
+        sub_806451C();
+        MenuZeroFillScreen();
+        sub_80BE97C(0);
+        DestroyTask(FindTaskIdByFunc(sub_805A37C));
+    }
+    return 0;
+}
+
+void sub_805A954(void)
+{
+    struct Sprite *playerSprite = &gSprites[gPlayerAvatar.spriteId];
+    u8 animCmdIndex;
+    u8 animType;
+    
+    AnimateSprite(playerSprite);
+    playerSprite->pos2.x = 0;
+    playerSprite->pos2.y = 0;
+    animCmdIndex = playerSprite->animCmdIndex;
+    if (playerSprite->anims[playerSprite->animNum][animCmdIndex].type == -1)
+    {
+        animCmdIndex--;
+    }
+    else
+    {
+        playerSprite->animDelayCounter++;
+        if (playerSprite->anims[playerSprite->animNum][animCmdIndex].type == -1)
+            animCmdIndex--;
+    }
+    animType = playerSprite->anims[playerSprite->animNum][animCmdIndex].type;
+    if (animType == 1 || animType == 2 || animType == 3)
+    {
+        playerSprite->pos2.x = 8;
+        if (player_get_direction_lower_nybble() == 3)
+            playerSprite->pos2.x = -8;
+    }
+    if (animType == 5)
+        playerSprite->pos2.y = -8;
+    if (animType == 10 || animType == 11)
+        playerSprite->pos2.y = 8;
+    if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_3)
+        sub_8127F28(gMapObjects[gPlayerAvatar.mapObjectId].mapobj_unk_1A, 1, playerSprite->pos2.y);
+}
