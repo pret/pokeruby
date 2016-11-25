@@ -337,7 +337,7 @@ gSaveFileStatus: @ 3005EB8
 gUnknown_03005EBC: @ 3005EBC
 	.space 0x14
 
-gUnknown_03005ED0: @ 3005ED0
+gIntroFrameCounter: @ 3005ED0
 	.space 0x10
 
 gUnknown_03005EE0: @ 3005EE0

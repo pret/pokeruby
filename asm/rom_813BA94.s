@@ -1672,7 +1672,7 @@ _0813D7C6:
 	adds r0, r4, 0
 	movs r1, 0
 	bl StartSpriteAnimIfDifferent
-	ldr r0, _0813D7E0 @ =gUnknown_03005ED0
+	ldr r0, _0813D7E0 @ =gIntroFrameCounter
 	ldr r0, [r0]
 	movs r1, 0x7
 	ands r0, r1
@@ -1682,7 +1682,7 @@ _0813D7C6:
 	adds r0, 0x1
 	b _0813D82E
 	.align 2, 0
-_0813D7E0: .4byte gUnknown_03005ED0
+_0813D7E0: .4byte gIntroFrameCounter
 _0813D7E4:
 	adds r0, r4, 0
 	movs r1, 0x2
@@ -1692,7 +1692,7 @@ _0813D7E4:
 	ldrsh r0, [r4, r1]
 	cmp r0, 0x78
 	ble _0813D802
-	ldr r0, _0813D808 @ =gUnknown_03005ED0
+	ldr r0, _0813D808 @ =gIntroFrameCounter
 	ldr r0, [r0]
 	movs r1, 0x7
 	ands r0, r1
@@ -1702,7 +1702,7 @@ _0813D802:
 	adds r0, r2, 0x1
 	b _0813D82E
 	.align 2, 0
-_0813D808: .4byte gUnknown_03005ED0
+_0813D808: .4byte gIntroFrameCounter
 _0813D80C:
 	adds r0, r4, 0
 	movs r1, 0x3
@@ -1723,7 +1723,7 @@ _0813D816:
 _0813D82E:
 	strh r0, [r4, 0x20]
 _0813D830:
-	ldr r0, _0813D84C @ =gUnknown_03005ED0
+	ldr r0, _0813D84C @ =gIntroFrameCounter
 	ldr r0, [r0]
 	movs r1, 0x7
 	ands r0, r1
@@ -1738,7 +1738,7 @@ _0813D83C:
 	strh r0, [r4, 0x26]
 	b _0813D87A
 	.align 2, 0
-_0813D84C: .4byte gUnknown_03005ED0
+_0813D84C: .4byte gIntroFrameCounter
 _0813D850:
 	bl Random
 	movs r1, 0x3
@@ -16866,7 +16866,7 @@ _08144F5C:
 	bl LoadSpritePalettes
 	movs r0, 0x78
 	movs r1, 0x2E
-	bl sub_8149310
+	bl intro_create_brendan_sprite
 	lsls r0, 24
 	lsrs r2, r0, 24
 	ldr r0, _08144FD0 @ =gTasks
@@ -16891,7 +16891,7 @@ _08144F5C:
 	movs r0, 0x88
 	lsls r0, 1
 	movs r1, 0x2E
-	bl sub_8149368
+	bl intro_create_may_sprite
 	b _08145034
 	.align 2, 0
 _08144FBC: .4byte gSaveBlock2
@@ -16914,7 +16914,7 @@ _08144FE0:
 	bl LoadSpritePalettes
 	movs r0, 0x78
 	movs r1, 0x2E
-	bl sub_8149368
+	bl intro_create_may_sprite
 	lsls r0, 24
 	lsrs r2, r0, 24
 	ldr r0, _0814506C @ =gTasks
@@ -16939,7 +16939,7 @@ _08144FE0:
 	movs r0, 0x88
 	lsls r0, 1
 	movs r1, 0x2E
-	bl sub_8149310
+	bl intro_create_brendan_sprite
 _08145034:
 	lsls r0, 24
 	lsrs r2, r0, 24

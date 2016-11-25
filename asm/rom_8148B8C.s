@@ -902,8 +902,8 @@ sub_81492A0: @ 81492A0
 _0814930C: .4byte gSprites
 	thumb_func_end sub_81492A0
 
-	thumb_func_start sub_8149310
-sub_8149310: @ 8149310
+	thumb_func_start intro_create_brendan_sprite
+intro_create_brendan_sprite: @ 8149310
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	adds r4, r1, 0
@@ -943,10 +943,10 @@ sub_8149310: @ 8149310
 _0814935C: .4byte gSpriteTemplate_8416CDC
 _08149360: .4byte gSpriteTemplate_8416D2C
 _08149364: .4byte gSprites
-	thumb_func_end sub_8149310
+	thumb_func_end intro_create_brendan_sprite
 
-	thumb_func_start sub_8149368
-sub_8149368: @ 8149368
+	thumb_func_start intro_create_may_sprite
+intro_create_may_sprite: @ 8149368
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	adds r4, r1, 0
@@ -986,7 +986,7 @@ sub_8149368: @ 8149368
 _081493B4: .4byte gSpriteTemplate_8416CF4
 _081493B8: .4byte gSpriteTemplate_8416D44
 _081493BC: .4byte gSprites
-	thumb_func_end sub_8149368
+	thumb_func_end intro_create_may_sprite
 
 	thumb_func_start nullsub_83
 nullsub_83: @ 81493C0
@@ -1045,8 +1045,8 @@ sub_81493C4: @ 81493C4
 _08149420: .4byte gSprites
 	thumb_func_end sub_81493C4
 
-	thumb_func_start sub_8149424
-sub_8149424: @ 8149424
+	thumb_func_start intro_create_latios_sprite
+intro_create_latios_sprite: @ 8149424
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -1102,10 +1102,10 @@ _08149490: .4byte gSpriteTemplate_8416D7C
 _08149494: .4byte 0xffe00000
 _08149498: .4byte gSprites
 _0814949C: .4byte sub_81493C4
-	thumb_func_end sub_8149424
+	thumb_func_end intro_create_latios_sprite
 
-	thumb_func_start sapphire_sub_81494A0
-sapphire_sub_81494A0: @ 81494A0
+	thumb_func_start intro_create_latias_sprite
+intro_create_latias_sprite: @ 81494A0
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -1161,7 +1161,7 @@ _0814950C: .4byte gSpriteTemplate_8416D94
 _08149510: .4byte 0xffe00000
 _08149514: .4byte gSprites
 _08149518: .4byte sub_81493C4
-	thumb_func_end sapphire_sub_81494A0
+	thumb_func_end intro_create_latias_sprite
 
 	thumb_func_start nullsub_84
 nullsub_84: @ 814951C

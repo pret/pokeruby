@@ -5,6 +5,7 @@
 #include "rng.h"
 #include "songs.h"
 #include "sound.h"
+#include "species.h"
 #include "sprite.h"
 #include "task.h"
 #include "trig.h"
@@ -20,7 +21,7 @@ extern u16 gUnknown_0203931A;
 extern u16 gUnknown_02039358;
 extern u16 gUnknown_0203935A;
 
-extern u32 gUnknown_03005ED0;
+extern u32 gIntroFrameCounter;
 extern struct GcmbStruct gUnknown_03005EE0;
 extern u16 gSaveFileStatus;
 extern u8 gReservedSpritePaletteCount;
@@ -62,17 +63,17 @@ extern void LoadCompressedObjectPic(const struct SpriteSheet *);
 extern void LoadCompressedObjectPalette(const struct SpritePalette *);
 extern void CB2_InitTitleScreen(void);
 extern u8 sub_8148EC0(/*TODO: arg types*/);
-extern u8 sub_8149310(/*TODO: arg types*/);
-extern u8 sub_8149368(/*TODO: arg types*/);
+extern u8 intro_create_brendan_sprite(/*TODO: arg types*/);
+extern u8 intro_create_may_sprite(/*TODO: arg types*/);
 
-void CB2_813B7EC(void);
-void task_intro_1(u8);
-void task_intro_2(u8);
-void task_intro_3(u8);
+static void MainCB2_EndIntro(void);
+static void Task_IntroLoadPart1Graphics(u8);
+static void Task_IntroFadeIn(u8);
+void Task_IntroWaterDrops(u8);
 void task_intro_4(u8);
 void task_intro_5(u8);
-void task_intro_6(u8);
-void task_intro_7(u8);
+void Task_IntroLoadPart2Graphics(u8);
+void Task_IntroStartBikeRide(u8);
 void task_intro_8(u8);
 void task_intro_9(u8);
 void task_intro_10(u8);
@@ -83,7 +84,7 @@ void task_intro_14(u8);
 void task_intro_15(u8);
 void task_intro_16(u8);
 void task_intro_17(u8);
-void task_intro_18(u8);
+void Task_IntroPokemonBattle(u8);
 void task_intro_19(u8);
 void sub_813CAF4(u8);
 void intro_reset_and_hide_bgs(void);
@@ -102,44 +103,44 @@ void sub_813E210(struct Sprite *);
 void sub_813E7C0(u8);
 void sub_813EB4C(u8);
 
-void sub_813B784(void)
+static void VBlankCB_Intro(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
 }
 
-void CB2_813B798(void)
+static void MainCB2_Intro(void)
 {
     RunTasks();
     AnimateSprites();
     BuildOamBuffer();
     UpdatePaletteFade();
     if (gMain.newKeys && !gPaletteFade.active)
-        SetMainCallback2(CB2_813B7EC);
-    else if (gUnknown_03005ED0 != -1)
-        gUnknown_03005ED0++;
+        SetMainCallback2(MainCB2_EndIntro);
+    else if (gIntroFrameCounter != -1)
+        gIntroFrameCounter++;
 }
 
-void CB2_813B7EC(void)
+static void MainCB2_EndIntro(void)
 {
     if (!UpdatePaletteFade())
         SetMainCallback2(CB2_InitTitleScreen);
 }
 
-void sub_813B808(u16 a1, u16 a2, u16 a3)
+static void LoadCopyrightGraphics(u16 a1, u16 a2, u16 a3)
 {
     LZ77UnCompVram(gIntroCopyright_Gfx, (void *)(VRAM + a1));
     LoadPalette(gIntroCopyright_Pal, a3, 0x20);
     CpuCopy16(gIntroCopyright_Tilemap, (void *)(VRAM + a2), 0x500);
 }
 
-void SerialCb_CopyrightScreen(void)
+static void SerialCb_CopyrightScreen(void)
 {
     GameCubeMultiBoot_HandleSerialInterrupt(&gUnknown_03005EE0);
 }
 
-u8 SetUpCopyrightScreen(void)
+static u8 SetUpCopyrightScreen(void)
 {
     u16 ime;
 
@@ -158,7 +159,7 @@ u8 SetUpCopyrightScreen(void)
         DmaFill32(3, 0, (void *)OAM, OAM_SIZE);
         DmaFill16(3, 0, (void *)(PLTT + 2), PLTT_SIZE - 2);
         ResetPaletteFade();
-        sub_813B808(0, 14336, 0);
+        LoadCopyrightGraphics(0, 14336, 0);
         remove_some_task();
         ResetTasks();
         ResetSpriteData();
@@ -170,7 +171,7 @@ u8 SetUpCopyrightScreen(void)
         REG_IE |= INTR_FLAG_VBLANK;
         REG_IME = ime;
         REG_DISPSTAT |= 8;
-        SetVBlankCallback(sub_813B784);
+        SetVBlankCallback(VBlankCB_Intro);
         REG_DISPCNT = 320;
         SetSerialCallback(SerialCb_CopyrightScreen);
         GameCubeMultiBoot_Init(&gUnknown_03005EE0);
@@ -190,8 +191,8 @@ u8 SetUpCopyrightScreen(void)
     case 141:
         if (UpdatePaletteFade())
             break;
-        CreateTask(task_intro_1, 0);
-        SetMainCallback2(CB2_813B798);
+        CreateTask(Task_IntroLoadPart1Graphics, 0);
+        SetMainCallback2(MainCB2_Intro);
         if (gUnknown_03005EE0.gcmb_field_2)
         {
             GameCubeMultiBoot_ExecuteProgram(&gUnknown_03005EE0);
@@ -225,7 +226,7 @@ void CB2_InitCopyrightScreen(void)
     SetUpCopyrightScreen();
 }
 
-void task_intro_1(u8 taskId)
+static void Task_IntroLoadPart1Graphics(u8 taskId)
 {
     SetVBlankCallback(NULL);
     gUnknown_02039318 = Random() & 1;
@@ -259,33 +260,41 @@ void task_intro_1(u8 taskId)
     CpuCopy16(gPlttBufferUnfaded + 0x100, gPlttBufferUnfaded + 0x1A5, 0x16);
     CpuCopy16(gPlttBufferUnfaded + 0x100, gPlttBufferUnfaded + 0x196, 0x14);
     gTasks[taskId].data[0] = sub_813D584(0xEC, -14, 0x200, 1, 0x78, 0);
-    gTasks[taskId].func = task_intro_2;
+    gTasks[taskId].func = Task_IntroFadeIn;
 }
 
-void task_intro_2(u8 taskId)
+static void Task_IntroFadeIn(u8 taskId)
 {
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, 0);
-    SetVBlankCallback(sub_813B784);
+    SetVBlankCallback(VBlankCB_Intro);
     REG_DISPCNT = 0x1F40;
-    gTasks[taskId].func = task_intro_3;
-    gUnknown_03005ED0 = 0;
+    gTasks[taskId].func = Task_IntroWaterDrops;
+    gIntroFrameCounter = 0;
     m4aSongNumStart(0x19E);
     ResetSerial();
 }
 
-void task_intro_3(u8 taskId)
+void Task_IntroWaterDrops(u8 taskId)
 {
-    if (gUnknown_03005ED0 == 0x4C)
+    //start moving rock
+    if (gIntroFrameCounter == 76)
         gSprites[gTasks[taskId].data[0]].data0 = 1;
-    if (gUnknown_03005ED0 == 0xFB)
+    
+    //drop rock
+    if (gIntroFrameCounter == 251)
         gSprites[gTasks[taskId].data[0]].data0 = 2;
-    if (gUnknown_03005ED0 == 0x170)
+        
+    //drop two more rocks
+    if (gIntroFrameCounter == 368)
         sub_813D584(0x30, 0, 0x400, 5, 0x70, 1);
-    if (gUnknown_03005ED0 == 0x180)
+    if (gIntroFrameCounter == 384)
         sub_813D584(0xC8, 0x3C, 0x400, 9, 0x80, 1);
-    if (gUnknown_03005ED0 == 0x230)
+    
+    //show GameFreak logo
+    if (gIntroFrameCounter == 560)
         sub_813D954(0x78, 0x50, CreateTask(sub_813CCE8, 0));
-    if (gUnknown_03005ED0 > 0x2E3)
+    
+    if (gIntroFrameCounter > 739)
     {
         gTasks[taskId].data[1] = 0x50;
         gTasks[taskId].data[2] = 0;
@@ -299,10 +308,11 @@ void task_intro_3(u8 taskId)
 
 void task_intro_4(u8 taskId)
 {
-    if (gUnknown_03005ED0 <= 0x387)
+    if (gIntroFrameCounter < 904)
     {
         s32 r2;
         
+        //slide backgrounds downward
         r2 = (gTasks[taskId].data[1] << 16) + (u16)gTasks[taskId].data[2] - 0xC000;
         gTasks[taskId].data[1] = r2 >> 16;
         gTasks[taskId].data[2] = r2;
@@ -315,7 +325,9 @@ void task_intro_4(u8 taskId)
         gTasks[taskId].data[5] = r2 >> 16;
         gTasks[taskId].data[6] = r2;
         REG_BG0VOFS = gTasks[taskId].data[5];
-        if (gUnknown_03005ED0 == 0x370)
+        
+        //show Lati@s sprite
+        if (gIntroFrameCounter == 880)
         {
             u8 spriteId = CreateSprite(&gSpriteTemplate_840AFF0, 0xC8, 0xA0, 10);
             
@@ -324,7 +336,8 @@ void task_intro_4(u8 taskId)
     }
     else
     {
-        if (gUnknown_03005ED0 > 0x3EF)
+        //fade to white
+        if (gIntroFrameCounter > 1007)
         {
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0xFFFF);
             gTasks[taskId].func = task_intro_5;
@@ -334,11 +347,11 @@ void task_intro_4(u8 taskId)
 
 void task_intro_5(u8 taskId)
 {
-    if (gUnknown_03005ED0 > 0x402)
-        gTasks[taskId].func = task_intro_6;
+    if (gIntroFrameCounter > 1026)
+        gTasks[taskId].func = Task_IntroLoadPart2Graphics;
 }
 
-void task_intro_6(u8 taskId)
+void Task_IntroLoadPart2Graphics(u8 taskId)
 {
     intro_reset_and_hide_bgs();
     SetVBlankCallback(NULL);
@@ -351,10 +364,10 @@ void task_intro_6(u8 taskId)
 #else
     load_intro_part2_graphics(1);
 #endif
-    gTasks[taskId].func = task_intro_7;
+    gTasks[taskId].func = Task_IntroStartBikeRide;
 }
 
-void task_intro_7(u8 taskId)
+void Task_IntroStartBikeRide(u8 taskId)
 {
     u8 spriteId;
     
@@ -370,21 +383,21 @@ void task_intro_7(u8 taskId)
 #endif
     LoadSpritePalettes(gIntro2SpritePalettes);
     if (gUnknown_02039318 == 0)
-        spriteId = sub_8149310(0x110, 100);
+        spriteId = intro_create_brendan_sprite(0x110, 100);
     else
-        spriteId = sub_8149368(0x110, 100);
+        spriteId = intro_create_may_sprite(0x110, 100);
     gSprites[spriteId].callback = sub_813D788;
     gSprites[spriteId].anims = gUnknown_0840AE80;
     gTasks[taskId].data[1] = spriteId;
 #ifdef SAPPHIRE
-    spriteId = sapphire_sub_81494A0(-0x40, 0x3C);
+    spriteId = intro_create_latias_sprite(-0x40, 0x3C);
 #else
-    spriteId = sub_8149424(-0x40, 0x3C);
+    spriteId = intro_create_latios_sprite(-0x40, 0x3C);
 #endif
     gSprites[spriteId].callback = sub_813D880;
     gTasks[taskId].data[2] = spriteId;
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, 0xFFFF);
-    SetVBlankCallback(sub_813B784);
+    SetVBlankCallback(VBlankCB_Intro);
 #ifdef SAPPHIRE
     gTasks[taskId].data[0] = sub_8148EC0(0, 0x4000, 0x40, 0x10);
     sub_8148C78(0);
@@ -400,22 +413,22 @@ void task_intro_8(u8 taskId)
     s16 a;
     u16 sine;
     
-    if (gUnknown_03005ED0 > 0x71F)
+    if (gIntroFrameCounter > 1823)
     {
         BeginNormalPaletteFade(0xFFFFFFFF, 0x10, 0, 0x10, 0xFFFF);
         gTasks[taskId].func = task_intro_9;
     }
-    if (gUnknown_03005ED0 == 0x455)
+    if (gIntroFrameCounter == 1109)
         gSprites[gTasks[taskId].data[1]].data0 = 1;
-    if (gUnknown_03005ED0 == 0x4BE)
+    if (gIntroFrameCounter == 1214)
         gSprites[gTasks[taskId].data[1]].data0 = 0;
-    if (gUnknown_03005ED0 == 0x572)
+    if (gIntroFrameCounter == 1394)
         gSprites[gTasks[taskId].data[2]].data0 = 1;
-    if (gUnknown_03005ED0 == 0x576)
+    if (gIntroFrameCounter == 1398)
         gSprites[gTasks[taskId].data[1]].data0 = 2;
-    if (gUnknown_03005ED0 == 0x632)
+    if (gIntroFrameCounter == 1586)
         gSprites[gTasks[taskId].data[1]].data0 = 3;
-    if (gUnknown_03005ED0 == 0x6BF)
+    if (gIntroFrameCounter == 1727)
         gSprites[gTasks[taskId].data[1]].data0 = 4;
     
     //TODO: Clean this up
@@ -433,7 +446,7 @@ void task_intro_8(u8 taskId)
 
 void task_intro_9(u8 taskId)
 {
-    if (gUnknown_03005ED0 > 0x814)
+    if (gIntroFrameCounter > 2068)
     {
         DestroyTask(gTasks[taskId].data[0]);
         gTasks[taskId].func = task_intro_10;
@@ -457,7 +470,7 @@ void task_intro_10(u8 taskId)
     REG_BG2CNT = 0x4883;
     REG_DISPCNT = 0x1441;
     gTasks[taskId].func = task_intro_11;
-    gUnknown_03005ED0 = 0;
+    gIntroFrameCounter = 0;
     m4aSongNumStart(0x1BA);
 }
 
@@ -474,13 +487,13 @@ void task_intro_11(u8 taskId)
         gTasks[taskId].func = task_intro_12;
     }
     sub_813CE30(0x78, 0x50, 0x10000 / gTasks[taskId].data[1], gTasks[taskId].data[0]);
-    if (gUnknown_03005ED0 == 0x2C)
+    if (gIntroFrameCounter == 44)
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0xFFFF);
 }
 
 void task_intro_12(u8 taskId)
 {
-    if (gUnknown_03005ED0 > 0x3B)
+    if (gIntroFrameCounter > 59)
         gTasks[taskId].func = task_intro_13;
 }
 
@@ -569,101 +582,101 @@ void task_intro_16(u8 taskId)
 void task_intro_17(u8 taskId)
 {
     gUnknown_0203931A = 0;
-    gTasks[taskId].func = task_intro_18;
+    gTasks[taskId].func = Task_IntroPokemonBattle;
 }
 
-void task_intro_18(u8 taskId)
+void Task_IntroPokemonBattle(u8 taskId)
 {
     u8 spriteId;
     
-    if (gUnknown_03005ED0 == 0x50)
+    if (gIntroFrameCounter == 80)
     {
-        spriteId = sub_813CE88(0x14B, 0xF0, 0xA0, 5, 1);
+        spriteId = sub_813CE88(SPECIES_SHARPEDO, 0xF0, 0xA0, 5, 1);
         gSprites[spriteId].callback = sub_813DB9C;
         gSprites[spriteId].data1 = 1;
         gSprites[spriteId].data2 = 0;
     }
-    if (gUnknown_03005ED0 == 0x98)
+    if (gIntroFrameCounter == 152)
     {
-        spriteId = sub_813CE88(0x169, 0, 0xA0, 4, 1);
+        spriteId = sub_813CE88(SPECIES_DUSKULL, 0, 0xA0, 4, 1);
         gSprites[spriteId].callback = sub_813DB9C;
         gSprites[spriteId].data1 = 2;
         gSprites[spriteId].data2 = 1;
     }
-    if (gUnknown_03005ED0 == 0xDB)
+    if (gIntroFrameCounter == 219)
     {
         sub_813D084(0);
         spriteId = sub_813CFA8(gUnknown_02039318, 0x110, 0x60, 6);
         gSprites[spriteId].callback = sub_813DE70;
         gTasks[taskId].data[1] = spriteId;
     }
-    if (gUnknown_03005ED0 == 0x130)
+    if (gIntroFrameCounter == 304)
     {
         gTasks[gTasks[taskId].data[15]].data[0] = 4;
         gSprites[gTasks[taskId].data[1]].data0 = 2;
     }
-    if (gUnknown_03005ED0 == 0x180)
+    if (gIntroFrameCounter == 384)
     {
         gTasks[gTasks[taskId].data[15]].data[0] = 0;
         gSprites[gTasks[taskId].data[1]].data0 = 4;
     }
-    if (gUnknown_03005ED0 == 0x190)
+    if (gIntroFrameCounter == 400)
     {
         BeginNormalPaletteFade(0xFF0000, 0, 0x10, 0, 0x7EFF);
     }
-    if (gUnknown_03005ED0 == 0x1B0)
+    if (gIntroFrameCounter == 432)
     {
         gSprites[gTasks[taskId].data[1]].data0 = 5;
     }
-    if (gUnknown_03005ED0 == 0x1CE)
+    if (gIntroFrameCounter == 462)
     {
         gSprites[gTasks[taskId].data[1]].data0 = 6;
         gTasks[gTasks[taskId].data[15]].data[0] = 2;
     }
-    if (gUnknown_03005ED0 == 0x1CF)
+    if (gIntroFrameCounter == 463)
     {
         sub_813D084(1);
-        spriteId = sub_813CE88(0x14B, 0xD0, 8, 5, 1);
+        spriteId = sub_813CE88(SPECIES_SHARPEDO, 0xD0, 8, 5, 1);
         gSprites[spriteId].callback = sub_813E10C;
         gTasks[taskId].data[2] = spriteId;
         sub_813E7C0(spriteId);
     }
-    if (gUnknown_03005ED0 == 0x21B)
+    if (gIntroFrameCounter == 539)
     {
-        spriteId = sub_813CE88(0x169, 0xF8, 0x10, 4, 1);
+        spriteId = sub_813CE88(SPECIES_DUSKULL, 0xF8, 0x10, 4, 1);
         gSprites[spriteId].callback = sub_813E10C;
         gTasks[taskId].data[3] = spriteId;
         sub_813E930(spriteId);
     }
-    if (gUnknown_03005ED0 == 0x26F)
+    if (gIntroFrameCounter == 623)
     {
         gSprites[gTasks[taskId].data[2]].data0 = 2;
         gSprites[gTasks[taskId].data[3]].data0 = 2;
         gTasks[gTasks[taskId].data[15]].data[0] = 3;
     }
-    if (gUnknown_03005ED0 == 0x270)
+    if (gIntroFrameCounter == 624)
     {
         sub_813D084(0);
-        spriteId = sub_813CE88(0x11B, 0x20, 0x98, 0, 0);
+        spriteId = sub_813CE88(SPECIES_MUDKIP, 0x20, 0x98, 0, 0);
         gSprites[spriteId].callback = sub_813E210;
         gTasks[taskId].data[4] = spriteId;
         sub_813EDBC(spriteId);
     }
-    if (gUnknown_03005ED0 == 0x2BC)
+    if (gIntroFrameCounter == 700)
     {
-        spriteId = sub_813CE88(0x118, -8, 0x90, 1, 0);
+        spriteId = sub_813CE88(SPECIES_TORCHIC, -8, 0x90, 1, 0);
         gSprites[spriteId].callback = sub_813E210;
         gTasks[taskId].data[5] = spriteId;
         sub_813EB4C(spriteId);
     }
-    if (gUnknown_03005ED0 == 0x308)
+    if (gIntroFrameCounter == 776)
     {
         gUnknown_0203931A = 1;
         gSprites[gTasks[taskId].data[4]].data0 = 2;
         gSprites[gTasks[taskId].data[5]].data0 = 2;
         gTasks[gTasks[taskId].data[15]].data[0] = 0;
     }
-    if (gUnknown_03005ED0 == 0x30D)
+    if (gIntroFrameCounter == 781)
     {
         sub_813D084(2);
         gSprites[gTasks[taskId].data[2]].data0 = 3;
@@ -673,16 +686,16 @@ void task_intro_18(u8 taskId)
         spriteId = CreateSprite(&gSpriteTemplate_840B1F4, 0x78, 0x50, 15);
         gSprites[spriteId].invisible = 1;
     }
-    if (gUnknown_03005ED0 == 0x320)
+    if (gIntroFrameCounter == 800)
         PlaySE(SE_OP_BASYU);
-    if (gUnknown_03005ED0 == 0x352)
+    if (gIntroFrameCounter == 850)
         BeginNormalPaletteFade(0xFFFFFFFF, 4, 0, 0x10, 0xFFFF);
-    if (gUnknown_03005ED0 == 0x3B2)
+    if (gIntroFrameCounter == 946)
         gTasks[taskId].func = task_intro_19;
 }
 
 void task_intro_19(u8 taskId)
 {
     DestroyTask(taskId);
-    SetMainCallback2(CB2_813B7EC);
+    SetMainCallback2(MainCB2_EndIntro);
 }
