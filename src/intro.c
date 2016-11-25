@@ -596,13 +596,13 @@ _0813C182:\n\
     bgt _0813C1AE\n\
     adds r0, r2, 0x1\n\
     strh r0, [r4, 0xE]\n\
-_0813C1AE:\n\
-    .ifdef SAPPHIRE\n\
-    movs r0, 0\n\
-    .else\n\
-    movs r0, 0x1\n\
-    .endif\n\
-    bl sub_8149020\n\
+_0813C1AE:\n"
+#ifdef SAPPHIRE
+    "movs r0, 0\n"
+#else
+    "movs r0, 0x1\n"
+#endif
+    "bl sub_8149020\n\
     add sp, 0x4\n\
     pop {r4-r7}\n\
     pop {r0}\n\
