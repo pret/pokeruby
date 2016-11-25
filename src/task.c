@@ -60,7 +60,7 @@ static void InsertTask(u8 newTaskId)
         gTasks[newTaskId].next = TAIL_SENTINEL;
         return;
     }
-    
+
     while (1)
     {
         if (gTasks[newTaskId].priority < gTasks[taskId].priority)
