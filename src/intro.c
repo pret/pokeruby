@@ -69,23 +69,23 @@ extern u8 intro_create_may_sprite(/*TODO: arg types*/);
 static void MainCB2_EndIntro(void);
 static void Task_IntroLoadPart1Graphics(u8);
 static void Task_IntroFadeIn(u8);
-void Task_IntroWaterDrops(u8);
-void task_intro_4(u8);
-void task_intro_5(u8);
-void Task_IntroLoadPart2Graphics(u8);
-void Task_IntroStartBikeRide(u8);
-void task_intro_8(u8);
-void task_intro_9(u8);
-void task_intro_10(u8);
-void task_intro_11(u8);
-void task_intro_12(u8);
-void task_intro_13(u8);
-void task_intro_14(u8);
-void task_intro_15(u8);
-void task_intro_16(u8);
-void task_intro_17(u8);
-void Task_IntroPokemonBattle(u8);
-void task_intro_19(u8);
+static void Task_IntroWaterDrops(u8);
+static void task_intro_4(u8);
+static void task_intro_5(u8);
+static void Task_IntroLoadPart2Graphics(u8);
+static void Task_IntroStartBikeRide(u8);
+static void task_intro_8(u8);
+static void task_intro_9(u8);
+static void task_intro_10(u8);
+static void task_intro_11(u8);
+static void task_intro_12(u8);
+static void task_intro_13(u8);
+static void task_intro_14(u8);
+static void task_intro_15(u8);
+static void task_intro_16(u8);
+static void task_intro_17(u8);
+static void Task_IntroPokemonBattle(u8);
+static void task_intro_19(u8);
 void sub_813CAF4(u8);
 void intro_reset_and_hide_bgs(void);
 void sub_813CCE8(u8);
@@ -170,9 +170,9 @@ static u8 SetUpCopyrightScreen(void)
         REG_IME = 0;
         REG_IE |= INTR_FLAG_VBLANK;
         REG_IME = ime;
-        REG_DISPSTAT |= 8;
+        REG_DISPSTAT |= DISPSTAT_VBLANK_INTR;
         SetVBlankCallback(VBlankCB_Intro);
-        REG_DISPCNT = 320;
+        REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON;
         SetSerialCallback(SerialCb_CopyrightScreen);
         GameCubeMultiBoot_Init(&gUnknown_03005EE0);
     default:
@@ -267,14 +267,14 @@ static void Task_IntroFadeIn(u8 taskId)
 {
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, 0);
     SetVBlankCallback(VBlankCB_Intro);
-    REG_DISPCNT = 0x1F40;
+    REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG_ALL_ON | DISPCNT_OBJ_ON;
     gTasks[taskId].func = Task_IntroWaterDrops;
     gIntroFrameCounter = 0;
     m4aSongNumStart(0x19E);
     ResetSerial();
 }
 
-void Task_IntroWaterDrops(u8 taskId)
+static void Task_IntroWaterDrops(u8 taskId)
 {
     //start moving rock
     if (gIntroFrameCounter == 76)
@@ -306,7 +306,7 @@ void Task_IntroWaterDrops(u8 taskId)
     }
 }
 
-void task_intro_4(u8 taskId)
+static void task_intro_4(u8 taskId)
 {
     if (gIntroFrameCounter < 904)
     {
@@ -345,13 +345,13 @@ void task_intro_4(u8 taskId)
     }
 }
 
-void task_intro_5(u8 taskId)
+static void task_intro_5(u8 taskId)
 {
     if (gIntroFrameCounter > 1026)
         gTasks[taskId].func = Task_IntroLoadPart2Graphics;
 }
 
-void Task_IntroLoadPart2Graphics(u8 taskId)
+static void Task_IntroLoadPart2Graphics(u8 taskId)
 {
     intro_reset_and_hide_bgs();
     SetVBlankCallback(NULL);
@@ -367,7 +367,7 @@ void Task_IntroLoadPart2Graphics(u8 taskId)
     gTasks[taskId].func = Task_IntroStartBikeRide;
 }
 
-void Task_IntroStartBikeRide(u8 taskId)
+static void Task_IntroStartBikeRide(u8 taskId)
 {
     u8 spriteId;
     
@@ -408,7 +408,7 @@ void Task_IntroStartBikeRide(u8 taskId)
     gTasks[taskId].func = task_intro_8;
 }
 
-void task_intro_8(u8 taskId)
+static void task_intro_8(u8 taskId)
 {
     s16 a;
     u16 sine;
@@ -444,7 +444,7 @@ void task_intro_8(u8 taskId)
 #endif
 }
 
-void task_intro_9(u8 taskId)
+static void task_intro_9(u8 taskId)
 {
     if (gIntroFrameCounter > 2068)
     {
@@ -453,7 +453,7 @@ void task_intro_9(u8 taskId)
     }
 }
 
-void task_intro_10(u8 taskId)
+static void task_intro_10(u8 taskId)
 {
     intro_reset_and_hide_bgs();
     LZ77UnCompVram(gUnknown_08409C04, (void *)VRAM);
@@ -468,13 +468,13 @@ void task_intro_10(u8 taskId)
     FreeAllSpritePalettes();
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, 0xFFFF);
     REG_BG2CNT = 0x4883;
-    REG_DISPCNT = 0x1441;
+    REG_DISPCNT = DISPCNT_MODE_1 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG2_ON | DISPCNT_OBJ_ON;
     gTasks[taskId].func = task_intro_11;
     gIntroFrameCounter = 0;
     m4aSongNumStart(0x1BA);
 }
 
-void task_intro_11(u8 taskId)
+static void task_intro_11(u8 taskId)
 {
     gTasks[taskId].data[0] += 0x400;
     if (gTasks[taskId].data[1] <= 0x6BF)
@@ -491,7 +491,7 @@ void task_intro_11(u8 taskId)
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0xFFFF);
 }
 
-void task_intro_12(u8 taskId)
+static void task_intro_12(u8 taskId)
 {
     if (gIntroFrameCounter > 59)
         gTasks[taskId].func = task_intro_13;
@@ -499,7 +499,7 @@ void task_intro_12(u8 taskId)
 
 extern u8 unk_2000000[][32];
 
-void task_intro_13(u8 taskId)
+static void task_intro_13(u8 taskId)
 {
     u16 i;
     void *vram;
@@ -539,7 +539,7 @@ void task_intro_13(u8 taskId)
     gTasks[taskId].func = task_intro_14;
 }
 
-void task_intro_14(u8 taskId)
+static void task_intro_14(u8 taskId)
 {
     u8 newTaskId;
     
@@ -549,14 +549,14 @@ void task_intro_14(u8 taskId)
     REG_WINOUT = 0x1D;
     REG_BG3CNT = 0x603;
     REG_BG0CNT = 0x700;
-    REG_DISPCNT = 0x3940;
+    REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG3_ON | DISPCNT_OBJ_ON | DISPCNT_WIN0_ON;
     gTasks[taskId].data[15] = CreateTask(sub_813CAF4, 0);
     gTasks[gTasks[taskId].data[15]].data[0] = 0;
     gTasks[taskId].data[0] = 0;
     gTasks[taskId].func = task_intro_15;
 }
 
-void task_intro_15(u8 taskId)
+static void task_intro_15(u8 taskId)
 {
     u16 foo = gTasks[taskId].data[0];
     
@@ -574,18 +574,18 @@ void task_intro_15(u8 taskId)
     }
 }
 
-void task_intro_16(u8 taskId)
+static void task_intro_16(u8 taskId)
 {
     gTasks[taskId].func = task_intro_17;
 }
 
-void task_intro_17(u8 taskId)
+static void task_intro_17(u8 taskId)
 {
     gUnknown_0203931A = 0;
     gTasks[taskId].func = Task_IntroPokemonBattle;
 }
 
-void Task_IntroPokemonBattle(u8 taskId)
+static void Task_IntroPokemonBattle(u8 taskId)
 {
     u8 spriteId;
     
@@ -694,7 +694,7 @@ void Task_IntroPokemonBattle(u8 taskId)
         gTasks[taskId].func = task_intro_19;
 }
 
-void task_intro_19(u8 taskId)
+static void task_intro_19(u8 taskId)
 {
     DestroyTask(taskId);
     SetMainCallback2(MainCB2_EndIntro);
