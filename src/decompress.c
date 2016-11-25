@@ -10,7 +10,7 @@ extern void *gUnknown_081FAF4C[];
 
 extern void DrawSpindaSpots(u16, u32, void *, u8);
 
-void sub_800D378(struct SpriteSheet *a, u32 b, u32 c, u32 d, void *e, s32 f, u32 g, u32 h);
+void sub_800D378(const struct SpriteSheet *a, u32 b, u32 c, u32 d, void *e, s32 f, u32 g, u32 h);
 
 void sub_800D238(const void *src, void *dest)
 {
@@ -22,7 +22,7 @@ void LZDecompressVram(const void *src, void *dest)
     LZ77UnCompVram(src, dest);
 }
 
-void LoadCompressedObjectPic(struct SpriteSheet *a)
+void LoadCompressedObjectPic(const struct SpriteSheet *a)
 {
     struct SpriteSheet spriteSheet;
     
@@ -33,7 +33,7 @@ void LoadCompressedObjectPic(struct SpriteSheet *a)
     LoadSpriteSheet(&spriteSheet);
 }
 
-void LoadCompressedObjectPicOverrideBuffer(struct SpriteSheet *a, void *buffer)
+void LoadCompressedObjectPicOverrideBuffer(const struct SpriteSheet *a, void *buffer)
 {
     struct SpriteSheet spriteSheet;
     
@@ -44,7 +44,7 @@ void LoadCompressedObjectPicOverrideBuffer(struct SpriteSheet *a, void *buffer)
     LoadSpriteSheet(&spriteSheet);
 }
 
-void LoadCompressedObjectPalette(struct SpritePalette *a)
+void LoadCompressedObjectPalette(const struct SpritePalette *a)
 {
     struct SpritePalette spritePalette;
     
@@ -54,7 +54,7 @@ void LoadCompressedObjectPalette(struct SpritePalette *a)
     LoadSpritePalette(&spritePalette);
 }
 
-void LoadCompressedObjectPaletteOverrideBuffer(struct SpritePalette *a, void *buffer)
+void LoadCompressedObjectPaletteOverrideBuffer(const struct SpritePalette *a, void *buffer)
 {
     struct SpritePalette spritePalette;
     
@@ -72,7 +72,7 @@ void DecompressPicFromTable_2(const struct SpriteSheet *a, u8 b, u8 c, void *d, 
         LZ77UnCompWram(a->data, e);
 }
 
-void sub_800D334(struct SpriteSheet *a, u32 b, u32 c, u32 d, void *dest, s32 f, u32 g)
+void sub_800D334(const struct SpriteSheet *a, u32 b, u32 c, u32 d, void *dest, s32 f, u32 g)
 {
     u32 unk;
     
@@ -83,7 +83,7 @@ void sub_800D334(struct SpriteSheet *a, u32 b, u32 c, u32 d, void *dest, s32 f, 
     sub_800D378(a, b, c, d, dest, f, g, unk);
 }
 
-void sub_800D378(struct SpriteSheet *a, u32 b, u32 c, u32 d, void *dest, s32 f, u32 g, u32 h)
+void sub_800D378(const struct SpriteSheet *a, u32 b, u32 c, u32 d, void *dest, s32 f, u32 g, u32 h)
 {
     u8 r7 = h;
     
