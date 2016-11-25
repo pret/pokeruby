@@ -395,14 +395,11 @@ void task_intro_7(u8 taskId)
     gTasks[taskId].func = task_intro_8;
 }
 
-#ifdef NONMATCHING
-//TODO: Fix Sin() arguments
 void task_intro_8(u8 taskId)
 {
-    s16 foo;
-    u16 bar;
+    s16 a;
+    u16 sine;
     
-    asm("nop");
     if (gUnknown_03005ED0 > 0x71F)
     {
         BeginNormalPaletteFade(0xFFFFFFFF, 0x10, 0, 0x10, 0xFFFF);
@@ -421,12 +418,10 @@ void task_intro_8(u8 taskId)
     if (gUnknown_03005ED0 == 0x6BF)
         gSprites[gTasks[taskId].data[1]].data0 = 4;
     
-    //foo = (u32)gTasks[taskId].data[3] / 4;
-    //gUnknown_0203935A = Sin(foo % 128, 0x30);
-    foo = (gTasks[taskId].data[3] / 4);
-    
-    bar = Sin(foo & 0x7F, 0x30);
-    gUnknown_0203935A = bar;
+    //TODO: Clean this up
+    a = (((u16)gTasks[taskId].data[3] << 16) >> 18) & 0x7F;
+    sine = Sin(a, 0x30);
+    gUnknown_0203935A = sine;
     if (gTasks[taskId].data[3] < 0x200)
         gTasks[taskId].data[3]++;
 #ifdef SAPPHIRE
@@ -435,196 +430,6 @@ void task_intro_8(u8 taskId)
     sub_8149020(1);
 #endif
 }
-#else
-__attribute__((naked))
-void task_intro_8(u8 taskId)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    sub sp, 0x4\n\
-    lsls r0, 24\n\
-    lsrs r4, r0, 24\n\
-    adds r6, r4, 0\n\
-    ldr r5, _0813C1BC @ =gUnknown_03005ED0\n\
-    ldr r1, [r5]\n\
-    ldr r0, _0813C1C0 @ =0x0000071f\n\
-    cmp r1, r0\n\
-    bls _0813C0B4\n\
-    movs r0, 0x1\n\
-    negs r0, r0\n\
-    ldr r1, _0813C1C4 @ =0x0000ffff\n\
-    str r1, [sp]\n\
-    movs r1, 0x10\n\
-    movs r2, 0\n\
-    movs r3, 0x10\n\
-    bl BeginNormalPaletteFade\n\
-    ldr r1, _0813C1C8 @ =gTasks\n\
-    lsls r0, r4, 2\n\
-    adds r0, r4\n\
-    lsls r0, 3\n\
-    adds r0, r1\n\
-    ldr r1, _0813C1CC @ =task_intro_9\n\
-    str r1, [r0]\n\
-_0813C0B4:\n\
-    ldr r1, [r5]\n\
-    ldr r0, _0813C1D0 @ =0x00000455\n\
-    ldr r3, _0813C1C8 @ =gTasks\n\
-    cmp r1, r0\n\
-    bne _0813C0D8\n\
-    ldr r2, _0813C1D4 @ =gSprites\n\
-    lsls r0, r4, 2\n\
-    adds r0, r4\n\
-    lsls r0, 3\n\
-    adds r0, r3\n\
-    movs r7, 0xA\n\
-    ldrsh r1, [r0, r7]\n\
-    lsls r0, r1, 4\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    adds r0, r2\n\
-    movs r1, 0x1\n\
-    strh r1, [r0, 0x2E]\n\
-_0813C0D8:\n\
-    ldr r1, [r5]\n\
-    ldr r0, _0813C1D8 @ =0x000004be\n\
-    cmp r1, r0\n\
-    bne _0813C0FA\n\
-    ldr r2, _0813C1D4 @ =gSprites\n\
-    lsls r0, r4, 2\n\
-    adds r0, r4\n\
-    lsls r0, 3\n\
-    adds r0, r3\n\
-    movs r7, 0xA\n\
-    ldrsh r1, [r0, r7]\n\
-    lsls r0, r1, 4\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    adds r0, r2\n\
-    movs r1, 0\n\
-    strh r1, [r0, 0x2E]\n\
-_0813C0FA:\n\
-    ldr r1, [r5]\n\
-    ldr r0, _0813C1DC @ =0x00000572\n\
-    cmp r1, r0\n\
-    bne _0813C11C\n\
-    ldr r2, _0813C1D4 @ =gSprites\n\
-    lsls r0, r4, 2\n\
-    adds r0, r4\n\
-    lsls r0, 3\n\
-    adds r0, r3\n\
-    movs r7, 0xC\n\
-    ldrsh r1, [r0, r7]\n\
-    lsls r0, r1, 4\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    adds r0, r2\n\
-    movs r1, 0x1\n\
-    strh r1, [r0, 0x2E]\n\
-_0813C11C:\n\
-    ldr r1, [r5]\n\
-    ldr r0, _0813C1E0 @ =0x00000576\n\
-    cmp r1, r0\n\
-    bne _0813C13E\n\
-    ldr r2, _0813C1D4 @ =gSprites\n\
-    lsls r0, r4, 2\n\
-    adds r0, r4\n\
-    lsls r0, 3\n\
-    adds r0, r3\n\
-    movs r7, 0xA\n\
-    ldrsh r1, [r0, r7]\n\
-    lsls r0, r1, 4\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    adds r0, r2\n\
-    movs r1, 0x2\n\
-    strh r1, [r0, 0x2E]\n\
-_0813C13E:\n\
-    ldr r1, [r5]\n\
-    ldr r0, _0813C1E4 @ =0x00000632\n\
-    cmp r1, r0\n\
-    bne _0813C160\n\
-    ldr r2, _0813C1D4 @ =gSprites\n\
-    lsls r0, r4, 2\n\
-    adds r0, r4\n\
-    lsls r0, 3\n\
-    adds r0, r3\n\
-    movs r7, 0xA\n\
-    ldrsh r1, [r0, r7]\n\
-    lsls r0, r1, 4\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    adds r0, r2\n\
-    movs r1, 0x3\n\
-    strh r1, [r0, 0x2E]\n\
-_0813C160:\n\
-    ldr r1, [r5]\n\
-    ldr r0, _0813C1E8 @ =0x000006bf\n\
-    cmp r1, r0\n\
-    bne _0813C182\n\
-    ldr r2, _0813C1D4 @ =gSprites\n\
-    lsls r0, r4, 2\n\
-    adds r0, r4\n\
-    lsls r0, 3\n\
-    adds r0, r3\n\
-    movs r4, 0xA\n\
-    ldrsh r1, [r0, r4]\n\
-    lsls r0, r1, 4\n\
-    adds r0, r1\n\
-    lsls r0, 2\n\
-    adds r0, r2\n\
-    movs r1, 0x4\n\
-    strh r1, [r0, 0x2E]\n\
-_0813C182:\n\
-    lsls r0, r6, 2\n\
-    adds r0, r6\n\
-    lsls r0, 3\n\
-    adds r4, r0, r3\n\
-    ldrh r0, [r4, 0xE]\n\
-    lsls r0, 16\n\
-    asrs r0, 18\n\
-    movs r1, 0x7F\n\
-    ands r0, r1\n\
-    movs r1, 0x30\n\
-    bl Sin\n\
-    ldr r1, _0813C1EC @ =gUnknown_0203935A\n\
-    strh r0, [r1]\n\
-    ldrh r2, [r4, 0xE]\n\
-    movs r7, 0xE\n\
-    ldrsh r1, [r4, r7]\n\
-    ldr r0, _0813C1F0 @ =0x000001ff\n\
-    cmp r1, r0\n\
-    bgt _0813C1AE\n\
-    adds r0, r2, 0x1\n\
-    strh r0, [r4, 0xE]\n\
-_0813C1AE:\n"
-#ifdef SAPPHIRE
-    "movs r0, 0\n"
-#else
-    "movs r0, 0x1\n"
-#endif
-    "bl sub_8149020\n\
-    add sp, 0x4\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_0813C1BC: .4byte gUnknown_03005ED0\n\
-_0813C1C0: .4byte 0x0000071f\n\
-_0813C1C4: .4byte 0x0000ffff\n\
-_0813C1C8: .4byte gTasks\n\
-_0813C1CC: .4byte task_intro_9\n\
-_0813C1D0: .4byte 0x00000455\n\
-_0813C1D4: .4byte gSprites\n\
-_0813C1D8: .4byte 0x000004be\n\
-_0813C1DC: .4byte 0x00000572\n\
-_0813C1E0: .4byte 0x00000576\n\
-_0813C1E4: .4byte 0x00000632\n\
-_0813C1E8: .4byte 0x000006bf\n\
-_0813C1EC: .4byte gUnknown_0203935A\n\
-_0813C1F0: .4byte 0x000001ff\n\
-    .syntax divided\n");
-}
-#endif
 
 void task_intro_9(u8 taskId)
 {
