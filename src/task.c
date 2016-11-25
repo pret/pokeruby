@@ -52,7 +52,6 @@ u8 CreateTask(TaskFunc func, u8 priority)
 static void InsertTask(u8 newTaskId)
 {
     u8 taskId = FindFirstActiveTask();
-    u8 nextTaskId;
 
     if (taskId == NUM_TASKS)
     {
@@ -75,8 +74,7 @@ static void InsertTask(u8 newTaskId)
             gTasks[taskId].prev = newTaskId;
             return;
         }
-        nextTaskId = gTasks[taskId].next;
-        if (nextTaskId == TAIL_SENTINEL)
+        if (gTasks[taskId].next == TAIL_SENTINEL)
         {
             // We've reached the end.
             gTasks[newTaskId].prev = taskId;
@@ -84,7 +82,7 @@ static void InsertTask(u8 newTaskId)
             gTasks[taskId].next = newTaskId;
             return;
         }
-        taskId = nextTaskId;
+        taskId = gTasks[taskId].next;
     }
 }
 
