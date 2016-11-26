@@ -2428,7 +2428,7 @@ _080AC664:
 	bl sub_80AF138
 	ldr r0, _080AC690 @ =gStringVar1
 	lsls r1, r7, 6
-	ldr r2, _080AC694 @ =gUnknown_02038572
+	ldr r2, _080AC694 @ =gUnknown_02038570 + 0x2
 	adds r1, r2
 	bl StringCopy
 	ldrh r1, [r5, 0x6]
@@ -2446,7 +2446,7 @@ _080AC664:
 	b _080AC6B0
 	.align 2, 0
 _080AC690: .4byte gStringVar1
-_080AC694: .4byte gUnknown_02038572
+_080AC694: .4byte gUnknown_02038570 + 0x2
 _080AC698: .4byte gStringVar2
 _080AC69C: .4byte gMoveNames
 _080AC6A0:
@@ -3369,7 +3369,7 @@ _080ACE0A:
 	bl sub_80AF138
 	ldr r0, _080ACE4C @ =gStringVar1
 	lsls r1, r7, 6
-	ldr r2, _080ACE50 @ =gUnknown_02038572
+	ldr r2, _080ACE50 @ =gUnknown_02038570 + 0x2
 	adds r1, r2
 	bl StringCopy
 	ldr r4, _080ACE54 @ =gStringVar4
@@ -3396,7 +3396,7 @@ _080ACE36:
 	.align 2, 0
 _080ACE48: .4byte 0x02019260
 _080ACE4C: .4byte gStringVar1
-_080ACE50: .4byte gUnknown_02038572
+_080ACE50: .4byte gUnknown_02038570 + 0x2
 _080ACE54: .4byte gStringVar4
 _080ACE58: .4byte gUnknown_083CC103
 _080ACE5C: .4byte gMenuWindow
@@ -3511,7 +3511,7 @@ _080ACF48:
 	bl sub_80AF138
 	ldr r0, _080ACF90 @ =gStringVar1
 	lsls r1, r7, 6
-	ldr r2, _080ACF94 @ =gUnknown_02038572
+	ldr r2, _080ACF94 @ =gUnknown_02038570 + 0x2
 	adds r1, r2
 	bl StringCopy
 	ldr r4, _080ACF98 @ =gStringVar4
@@ -3541,7 +3541,7 @@ _080ACF88:
 	bl _080AD8CA
 	.align 2, 0
 _080ACF90: .4byte gStringVar1
-_080ACF94: .4byte gUnknown_02038572
+_080ACF94: .4byte gUnknown_02038570 + 0x2
 _080ACF98: .4byte gStringVar4
 _080ACF9C: .4byte gUnknown_083CBD52
 _080ACFA0: .4byte gMenuWindow
@@ -3655,7 +3655,7 @@ _080AD070:
 	bl sub_80AF138
 	ldr r0, _080AD0D0 @ =gStringVar1
 	lsls r1, r7, 6
-	ldr r2, _080AD0D4 @ =gUnknown_02038572
+	ldr r2, _080AD0D4 @ =gUnknown_02038570 + 0x2
 	adds r1, r2
 	bl StringCopy
 	ldr r4, _080AD0D8 @ =gStringVar4
@@ -3685,7 +3685,7 @@ _080AD070:
 	.align 2, 0
 _080AD0CC: .4byte 0x02019260
 _080AD0D0: .4byte gStringVar1
-_080AD0D4: .4byte gUnknown_02038572
+_080AD0D4: .4byte gUnknown_02038570 + 0x2
 _080AD0D8: .4byte gStringVar4
 _080AD0DC: .4byte gUnknown_083CC075
 _080AD0E0: .4byte gMenuWindow
@@ -3859,7 +3859,7 @@ _080AD23A:
 	bl sub_80AF138
 	ldr r0, _080AD280 @ =gStringVar1
 	lsls r1, r7, 6
-	ldr r2, _080AD284 @ =gUnknown_02038572
+	ldr r2, _080AD284 @ =gUnknown_02038570 + 0x2
 	adds r1, r2
 	bl StringCopy
 	ldr r3, _080AD288 @ =0x02019204
@@ -3887,7 +3887,7 @@ _080AD274: .4byte gUnknown_083CC2D8
 _080AD278: .4byte gContestMoves
 _080AD27C: .4byte 0x02019260
 _080AD280: .4byte gStringVar1
-_080AD284: .4byte gUnknown_02038572
+_080AD284: .4byte gUnknown_02038570 + 0x2
 _080AD288: .4byte 0x02019204
 _080AD28C: .4byte gTasks
 _080AD290:
@@ -4242,7 +4242,7 @@ _080AD53C:
 	lsls r1, 20
 	lsrs r1, 29
 	lsls r1, 6
-	ldr r5, _080AD5B0 @ =gUnknown_02038572
+	ldr r5, _080AD5B0 @ =gUnknown_02038570 + 0x2
 	adds r1, r5
 	bl StringCopy
 	ldr r0, _080AD5B4 @ =gStringVar1
@@ -4285,7 +4285,7 @@ _080AD53C:
 	.align 2, 0
 _080AD5A8: .4byte gStringVar3
 _080AD5AC: .4byte 0x02019328
-_080AD5B0: .4byte gUnknown_02038572
+_080AD5B0: .4byte gUnknown_02038570 + 0x2
 _080AD5B4: .4byte gStringVar1
 _080AD5B8: .4byte gStringVar2
 _080AD5BC: .4byte gMoveNames
@@ -4365,7 +4365,7 @@ _080AD664:
 	bl sub_80B09B0
 	ldr r0, _080AD6B8 @ =gStringVar1
 	lsls r1, r7, 6
-	ldr r2, _080AD6BC @ =gUnknown_02038572
+	ldr r2, _080AD6BC @ =gUnknown_02038570 + 0x2
 	adds r1, r2
 	bl StringCopy
 	ldr r0, _080AD6C0 @ =gStringVar2
@@ -4399,7 +4399,7 @@ _080AD664:
 	.align 2, 0
 _080AD6B4: .4byte 0x02019260
 _080AD6B8: .4byte gStringVar1
-_080AD6BC: .4byte gUnknown_02038572
+_080AD6BC: .4byte gUnknown_02038570 + 0x2
 _080AD6C0: .4byte gStringVar2
 _080AD6C4: .4byte gMoveNames
 _080AD6C8: .4byte gStringVar4
@@ -4548,7 +4548,7 @@ _080AD7E8:
 	bl sub_80AF138
 	ldr r0, _080AD828 @ =gStringVar1
 	lsls r1, r7, 6
-	ldr r2, _080AD82C @ =gUnknown_02038572
+	ldr r2, _080AD82C @ =gUnknown_02038570 + 0x2
 	adds r1, r2
 	bl StringCopy
 	ldr r4, _080AD830 @ =gStringVar4
@@ -4574,7 +4574,7 @@ _080AD7E8:
 	b _080AD8CA
 	.align 2, 0
 _080AD828: .4byte gStringVar1
-_080AD82C: .4byte gUnknown_02038572
+_080AD82C: .4byte gUnknown_02038570 + 0x2
 _080AD830: .4byte gStringVar4
 _080AD834: .4byte gUnknown_083CB00D
 _080AD838: .4byte gMenuWindow
@@ -5043,7 +5043,7 @@ sub_80ADB88: @ 80ADB88
 	ldr r0, _080ADBF4 @ =gStringVar1
 	ldrb r1, [r6]
 	lsls r1, 6
-	ldr r2, _080ADBF8 @ =gUnknown_02038572
+	ldr r2, _080ADBF8 @ =gUnknown_02038570 + 0x2
 	adds r1, r2
 	bl StringCopy
 	ldr r6, _080ADBFC @ =gStringVar4
@@ -5076,7 +5076,7 @@ sub_80ADB88: @ 80ADB88
 _080ADBEC: .4byte gUnknown_02038695
 _080ADBF0: .4byte 0x02019260
 _080ADBF4: .4byte gStringVar1
-_080ADBF8: .4byte gUnknown_02038572
+_080ADBF8: .4byte gUnknown_02038570 + 0x2
 _080ADBFC: .4byte gStringVar4
 _080ADC00: .4byte gUnknown_083CB2F0
 _080ADC04: .4byte gMenuWindow
@@ -5804,7 +5804,7 @@ _080AE19A:
 	ldr r5, _080AE2C4 @ =gUnknown_02038695
 	ldrb r0, [r5]
 	lsls r0, 6
-	ldr r1, _080AE2C8 @ =gUnknown_02038572
+	ldr r1, _080AE2C8 @ =gUnknown_02038570 + 0x2
 	mov r8, r1
 	add r0, r8
 	mov r1, sp
@@ -5937,7 +5937,7 @@ _080AE19A:
 	b _080AE31E
 	.align 2, 0
 _080AE2C4: .4byte gUnknown_02038695
-_080AE2C8: .4byte gUnknown_02038572
+_080AE2C8: .4byte gUnknown_02038570 + 0x2
 _080AE2CC: .4byte gPlayerParty
 _080AE2D0:
 	cmp r2, 0xFF
@@ -6499,7 +6499,7 @@ sub_80AE6E4: @ 80AE6E4
 	strb r0, [r3, 0x2]
 	adds r3, 0x3
 	lsls r1, r4, 6
-	ldr r0, _080AE760 @ =gUnknown_02038572
+	ldr r0, _080AE760 @ =gUnknown_02038570 + 0x2
 	adds r1, r0
 	adds r0, r3, 0
 	bl sub_80AE598
@@ -6541,7 +6541,7 @@ sub_80AE6E4: @ 80AE6E4
 	bx r0
 	.align 2, 0
 _080AE75C: .4byte gUnknown_020238CC
-_080AE760: .4byte gUnknown_02038572
+_080AE760: .4byte gUnknown_02038570 + 0x2
 _080AE764: .4byte gUnknown_03004210
 _080AE768: .4byte gUnknown_02038696
 _080AE76C: .4byte gUnknown_083CA308
@@ -12550,7 +12550,7 @@ sub_80B146C: @ 80B146C
 	lsrs r5, r1, 24
 	ldr r0, _080B14C8 @ =gStringVar1
 	lsls r1, r4, 6
-	ldr r2, _080B14CC @ =gUnknown_02038572
+	ldr r2, _080B14CC @ =gUnknown_02038570 + 0x2
 	adds r1, r2
 	bl StringCopy
 	ldr r0, _080B14D0 @ =gStringVar2
@@ -12586,7 +12586,7 @@ sub_80B146C: @ 80B146C
 	b _080B1538
 	.align 2, 0
 _080B14C8: .4byte gStringVar1
-_080B14CC: .4byte gUnknown_02038572
+_080B14CC: .4byte gUnknown_02038570 + 0x2
 _080B14D0: .4byte gStringVar2
 _080B14D4: .4byte 0x02019260
 _080B14D8: .4byte gMoveNames

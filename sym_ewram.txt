@@ -749,10 +749,7 @@ gUnknown_0203856C: @ 203856C
 	.space 0x4
 
 gUnknown_02038570: @ 2038570
-	.space 0x2
-
-gUnknown_02038572: @ 2038572
-	.space 0xB
+	.space 0xD
 
 gUnknown_0203857D: @ 203857D
 	.space 0x11

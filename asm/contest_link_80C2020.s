@@ -301,7 +301,7 @@ _080C2296:
 	strb r0, [r2, 0x2]
 	adds r2, 0x3
 	lsls r6, r5, 6
-	ldr r7, _080C22EC @ =gUnknown_02038572
+	ldr r7, _080C22EC @ =gUnknown_02038570 + 0x2
 	adds r1, r6, r7
 	adds r0, r2, 0
 	bl StringCopy
@@ -332,7 +332,7 @@ _080C2296:
 	b _080C230A
 	.align 2, 0
 _080C22E8: .4byte gUnknown_020238CC
-_080C22EC: .4byte gUnknown_02038572
+_080C22EC: .4byte gUnknown_02038570 + 0x2
 _080C22F0: .4byte gUnknown_083D17E0
 _080C22F4: .4byte gUnknown_0203869A
 _080C22F8: .4byte gLinkPlayers + 0x8
@@ -1209,7 +1209,7 @@ _080C2A04:
 	bl StringCopy
 _080C2A10:
 	ldr r0, _080C2A58 @ =gStringVar2
-	ldr r1, _080C2A5C @ =gUnknown_02038572
+	ldr r1, _080C2A5C @ =gUnknown_02038570 + 0x2
 	adds r1, r4, r1
 	bl StringCopy
 	ldr r1, _080C2A60 @ =gContestText_PokeWon
@@ -1241,7 +1241,7 @@ _080C2A4A:
 	.align 2, 0
 _080C2A54: .4byte gUnknown_0203857D
 _080C2A58: .4byte gStringVar2
-_080C2A5C: .4byte gUnknown_02038572
+_080C2A5C: .4byte gUnknown_02038570 + 0x2
 _080C2A60: .4byte gContestText_PokeWon
 _080C2A64: .4byte 0x02018000
 _080C2A68: .4byte 0x0000ffff
@@ -4867,7 +4867,7 @@ sub_80C4698: @ 80C4698
 	lsls r1, 24
 	lsrs r4, r1, 24
 	lsls r1, r4, 6
-	ldr r0, _080C46E0 @ =gUnknown_02038572
+	ldr r0, _080C46E0 @ =gUnknown_02038570 + 0x2
 	adds r1, r0
 	adds r0, r5, 0
 	bl StringCopy
@@ -4897,7 +4897,7 @@ _080C46DA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080C46E0: .4byte gUnknown_02038572
+_080C46E0: .4byte gUnknown_02038570 + 0x2
 _080C46E4: .4byte gUnknown_0203869A
 _080C46E8: .4byte gLinkPlayers
 	thumb_func_end sub_80C4698

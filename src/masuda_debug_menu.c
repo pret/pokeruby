@@ -4,6 +4,9 @@
 #include "palette.h"
 #include "task.h"
 #include "link.h"
+#include "text.h"
+#include "sprite.h"
+#include "string_util.h"
 
 #define BIT(n) (1 << (n))
 
@@ -11,7 +14,9 @@ extern u8 gUnknown_0203869A;
 extern u8 gUnknown_0203869B;
 extern u8 gUnknown_02038695;
 extern u16 gScriptContestCategory;
+extern u16 gScriptContestRank;
 extern u8 (*gCallback_03004AE8)(void);
+extern void sub_80034D4(u8 *, u8 *);
 extern void sub_80AF668(void);
 extern void sub_80C2358(void);
 extern void sub_8071C20(void);
@@ -30,6 +35,13 @@ extern void sub_80B0F28(u8);
 extern void sub_80C8F34(u8);
 extern void sub_80A9DD8(u8);
 extern void sub_80A9F10(u8);
+extern void sub_805469C(void);
+extern void sub_80AE398(u8, u8);
+extern void sub_80AE098(u8);
+extern void sub_80AA5BC(u8);
+extern void sub_80AA5E8(u16);
+extern void sub_80AA658(u8);
+extern void sub_80AA614(u8, u8);
 
 extern struct Window gMenuWindow;
 
@@ -42,7 +54,35 @@ extern u16 gUnknown_03004280;
 extern u16 gUnknown_030041B0;
 extern u16 gUnknown_030041B8;
 
-extern u32 gUnknown_083C9228;
+extern u8 gUnknown_02038694;
+extern u8 gUnknown_083C9296[];
+extern u8 gUnknown_083C92A8[];
+extern u8 gUnknown_083C9282[];
+extern u8 gUnknown_0203857D[][64];
+extern u8 gUnknown_083C926E[][2];
+extern u8 unk_2000000[];
+extern u8 gMasudaDebugMenu_GoBackText[];
+extern u8 gMasudaDebugMenu_BattlePointsText[];
+extern u8 gMasudaDebugMenu_StartText[];
+
+extern u8 gUnknown_083C92BC[];
+extern u8 gUnknown_083C92B4[];
+extern struct SpriteTemplate gSpriteTemplate_83C92CC;
+
+extern u8 gMasudaDebugMenu_UnknownByteArray[];
+extern u32 gMasudaDebugMenuTextList1[];
+extern u8 gMasudaDebugMenuContestTopLeft[][2];
+
+struct UnknownStruct
+{
+	u8 text[2];
+	u8 unk2;
+	u8 filler3[35];
+	u8 unk26;
+	u8 filler[25];
+};
+
+extern struct UnknownStruct gUnknown_02038570[];
 
 extern bool8 gReceivedRemoteLinkPlayers;
 extern u16 gBlockRecvBuffer[MAX_LINK_PLAYERS][BLOCK_BUFFER_SIZE / 2];
@@ -61,6 +101,7 @@ void sub_80A9E04(u8 taskId);
 void sub_80A9E3C(u8 taskId);
 void sub_80A9ED8(u8);
 void sub_80A9E80(u8);
+void sub_80AA280(u8);
 
 u8 unref_sub_80A9B28(void)
 {
@@ -74,7 +115,7 @@ u8 unref_sub_80A9B28(void)
 
 s8 sub_80A9B78(void)
 {
-	s8 choice = ProcessMenuInput();
+    s8 choice = ProcessMenuInput();
 	
     switch(choice)
     {
@@ -89,7 +130,7 @@ s8 sub_80A9B78(void)
     }
 }
 
-s8 sub_80A9BBC(void)
+s8 MasudaDebugMenu_ContestResults(void)
 {
 	BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
 	CreateTask(sub_80A9BE4, 0xFF);
@@ -109,20 +150,20 @@ void sub_80A9BE4(u8 taskId)
 	}
 }
 
-s8 sub_80A9C1C(void)
+s8 MasudaDebugMenu_Contest(void)
 {
 	gUnknown_0203869A = 0;
 	sub_80AA10C();
 	return 0;
 }
 
-s8 sub_80A9C34(void)
+s8 MasudaDebugMenu_ContestComm(void)
 {
 	sub_80AA10C();
 	return 0;
 }
 
-s8 sub_80A9C40(void)
+s8 MasudaDebugMenu_CommTest(void)
 {
 	u8 newTaskId;
 	u8 newTaskId2;
@@ -284,92 +325,168 @@ void sub_80A9F50(void)
 	gUnknown_030041B8 = 0;
 }
 
-/*void sub_80A9FE4(void)
+void sub_80A9FE4(void)
 {
-	s32 var;
+	u8 *addr;
 	u32 i;
 	u8 ptr[5];
-	int ptr2; // huh?
 	
-	memcpy(&ptr, &gUnknown_083C9228, 5);
-	var = 0x6000000;
+	memcpy(ptr, gMasudaDebugMenu_UnknownByteArray, 5);
 
-	for(i = 0x18000; i > 0x1000; i -= 0x1000)
+	addr = (void *)VRAM;
+	i = VRAM_SIZE;
+
+	while(1)
 	{
-		ptr2 = 0;
-		REG_DMA3SAD = &ptr2; // huh?
-		REG_DMA3DAD = var;
-		REG_DMA3CNT = 0x85000400;
-		var += 0x1000;
+		DmaFill32(3, 0, addr, 0x1000);
+		addr += 0x1000;
+		i -= 0x1000;
+		if(i <= 0x1000)
+		{
+			DmaFill32(3, 0, addr, i);
+			break;
+		}
 	}
-	ptr2 = 0;
-	REG_DMA3SAD = &ptr2;
-	REG_DMA3DAD = var;
-	REG_DMA3CNT = (i >> 2) | 0x85000000;
-	sub_80034D4(0x6000000, &ptr);
+	sub_80034D4(VRAM, &ptr);
 	LoadFontDefaultPalette(&gWindowConfig_81E6C3C);
-}*/
+}
+
+void sub_80AA064(void)
+{
+	AnimateSprites();
+	BuildOamBuffer();
+	RunTasks();
+	UpdatePaletteFade();
+	if(gMain.newKeys == 4)
+		SetMainCallback2(sub_805469C);
+}
+
+void sub_80AA090(void)
+{
+	REG_BG0HOFS = gUnknown_030042A4;
+	REG_BG0VOFS = gUnknown_030042A0;
+	REG_BG1HOFS = gUnknown_030042C0;
+	REG_BG1VOFS = gUnknown_030041B4;
+	REG_BG2HOFS = gUnknown_03004288;
+	REG_BG2VOFS = gUnknown_03004280;
+	REG_BG3HOFS = gUnknown_030041B0;
+	REG_BG3VOFS = gUnknown_030041B8;
+	LoadOam();
+	ProcessSpriteCopyRequests();
+	TransferPlttBuffer();
+	sub_8089668();
+}
+
+void sub_80AA10C(void)
+{
+	u8 i;
+	u8 zero;
+	u8 spriteId;
+
+	gPaletteFade.bufferTransferDisabled = 1;
+	SetVBlankCallback(0);
+	sub_80A9F50();
+	dp12_8087EA4();
+	ResetPaletteFade();
+	ResetSpriteData();
+	ResetTasks();
+	FreeAllSpritePalettes();
+	sub_80A9FE4();	
+	SetVBlankCallback(sub_80AA090);
+	SetMainCallback2(sub_80AA064);
+	gPaletteFade.bufferTransferDisabled = 0;
+	gUnknown_02038694 = 0;
+
+	if(!(gUnknown_02038570[0].unk2))
+		sub_80AE398(0, 0);
+
+	sub_80AE098(gUnknown_02038694);
+
+	for(i = 0; i < 6; i++)
+	{
+		sub_8003460(&gMenuWindow, gMasudaDebugMenuTextList1[i], 
+			(0xA * i + 0x2A), gMasudaDebugMenuContestTopLeft[i][0], 
+			gMasudaDebugMenuContestTopLeft[i][1]);
+	}
+
+	gScriptContestCategory = gScriptContestRank = 0;
+	zero = 0;
+	sub_80AA5BC(zero);
+	sub_80AA5E8((u8)gScriptContestRank);
+	sub_8003460(&gMenuWindow, gMasudaDebugMenu_GoBackText, 0xD6, 0x12, 0x12);
+	sub_8003460(&gMenuWindow, gMasudaDebugMenu_BattlePointsText, 0xDC, zero, 0xC);
+	LoadSpriteSheet(gUnknown_083C92B4);
+	LoadSpritePalette(gUnknown_083C92BC);
+	sub_80AA280(3);
+	sub_80AA658(3);
+	sub_80AA614(3, zero);
+	spriteId = CreateSprite(&gSpriteTemplate_83C92CC, gUnknown_083C9296[3], gUnknown_083C92A8[1], 5);
+	gSprites[spriteId].data0 = 1;
+	gSprites[spriteId].data1 = 1;
+	gSprites[spriteId].data2 = 3;
+	gSprites[spriteId].data3 = zero; // only this assignment of zero is necessary. other replacements of 0 with zero do not change the asm, compiler will treat it the same.
+}
+
+void sub_80AA280(u8 var)
+{
+	u8 i;
+
+	FillWindowRect_DefaultPalette(&gMenuWindow, 0, 0, 0, 0x1E, 3);
+	StringCopy(unk_2000000, &gMasudaDebugMenu_StartText);
+	StringAppend(unk_2000000, &gUnknown_0203857D[var][0]);
+
+	for(i = 0; i < 4; i++)
+	{
+		if(var == i)
+		{
+			sub_8003460(&gMenuWindow, unk_2000000, (10 * i + 2), gUnknown_083C926E[i][0], gUnknown_083C926E[i][1]);
+		}
+		else
+		{
+			u8 *ptr = gUnknown_0203857D[i];
+			sub_8003460(&gMenuWindow, ptr, (10 * i + 2), gUnknown_083C926E[i][0], gUnknown_083C926E[i][1]);
+		}
+	}
+}
+
+void sub_80AA340(u8 var)
+{
+	ConvertIntToDecimalStringN(unk_2000000, gUnknown_02038570[var].unk26, STR_CONV_MODE_RIGHT_ALIGN, 3);
+	sub_8003460(&gMenuWindow, unk_2000000, 0x66, gUnknown_083C9282[0], gUnknown_083C9282[1]);
+}
 
 /*
-	thumb_func_start sub_80A9FE4
-sub_80A9FE4: @ 80A9FE4
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	sub sp, 0xC
-	ldr r1, _080AA054 @ =gUnknown_083C9228
-	mov r0, sp
-	movs r2, 0x5
-	bl memcpy
-	movs r2, 0xC0
-	lsls r2, 19
-	movs r3, 0xC0
-	lsls r3, 9
-	add r5, sp, 0x8
-	movs r6, 0
-	ldr r1, _080AA058 @ =0x040000d4
-	movs r4, 0x80
-	lsls r4, 5
-	mov r12, r5
-	ldr r7, _080AA05C @ =0x85000400
-	movs r0, 0x85
+	thumb_func_start sub_80AA340
+sub_80AA340: @ 80AA340
+	push {r4,lr}
+	sub sp, 0x4
 	lsls r0, 24
-	mov r8, r0
-_080AA012:
-	str r6, [sp, 0x8]
-	mov r0, r12
-	str r0, [r1]
-	str r2, [r1, 0x4]
-	str r7, [r1, 0x8]
-	ldr r0, [r1, 0x8]
-	adds r2, r4
-	subs r3, r4
-	cmp r3, r4
-	bhi _080AA012
-	str r6, [sp, 0x8]
-	str r5, [r1]
-	str r2, [r1, 0x4]
-	lsrs r0, r3, 2
-	mov r2, r8
-	orrs r0, r2
-	str r0, [r1, 0x8]
-	ldr r0, [r1, 0x8]
-	movs r0, 0xC0
-	lsls r0, 19
-	mov r1, sp
-	bl sub_80034D4
-	ldr r0, _080AA060 @ =gWindowConfig_81E6C3C
-	bl LoadFontDefaultPalette
-	add sp, 0xC
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
+	ldr r4, _080AA378 @ =0x02000000
+	ldr r1, _080AA37C @ =gUnknown_02038570
+	lsrs r0, 18
+	adds r0, r1
+	adds r0, 0x26
+	ldrb r1, [r0]
+	adds r0, r4, 0
+	movs r2, 0x1
+	movs r3, 0x3
+	bl ConvertIntToDecimalStringN
+	ldr r0, _080AA380 @ =gMenuWindow
+	ldr r1, _080AA384 @ =gUnknown_083C9282
+	ldrb r3, [r1]
+	ldrb r1, [r1, 0x1]
+	str r1, [sp]
+	adds r1, r4, 0
+	movs r2, 0x66
+	bl sub_8003460
+	add sp, 0x4
+	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080AA054: .4byte gUnknown_083C9228
-_080AA058: .4byte 0x040000d4
-_080AA05C: .4byte 0x85000400
-_080AA060: .4byte gWindowConfig_81E6C3C
-	thumb_func_end sub_80A9FE4
+_080AA378: .4byte 0x02000000
+_080AA37C: .4byte gUnknown_02038570
+_080AA380: .4byte gMenuWindow
+_080AA384: .4byte gUnknown_083C9282
+	thumb_func_end sub_80AA340
 */
