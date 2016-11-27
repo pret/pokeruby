@@ -1,4 +1,4 @@
-#include "global.h"
+#include "coins.h"
 #include "menu.h"
 #include "string_util.h"
 
@@ -6,7 +6,6 @@
 
 extern u8 gOtherText_Coins2[];
 
-void PrintCoins(s32, u8, u8, u8);
 
 void UpdateCoinsWindow(s32 a, u8 b, u8 c)
 {

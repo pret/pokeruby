@@ -1,29 +1,9 @@
-#include "global.h"
+#include "save.h"
+#include "gba/gba.h"
+#include "rom4.h"
 #include "gba/flash_internal.h"
 
-struct SaveSectionLocation
-{
-    void *data;
-    u16 size;
-};
-
-struct SaveSection
-{
-    u8 data[0xFF4];
-    u16 id;
-    u16 checksum;
-    u32 unknown;
-    u32 counter;
-};
-
-struct UnkSaveSection
-{
-    u8 data[0xFF4];
-    u32 unknown;
-};
-
 extern u32 sub_8053108(u8);
-extern void sav12_xor_increment(u8);
 extern u32 ProgramFlashSectorAndVerifyNBytes(u16 sectorNum, u8 *src, u32 n);
 
 extern struct SaveSection unk_2000000;
@@ -45,14 +25,6 @@ extern u32 gUnknown_03005EBC;
 extern struct SaveSectionLocation gSaveSectionLocations[];
 extern struct SaveSectionLocation gHallOfFameSaveSectionLocations[];
 extern u8 gUnknown_08401E24[];
-
-u8 sub_81252D8(u16, struct SaveSectionLocation *);
-u8 sub_8125440(u8, u8 *);
-u8 sub_81255B8(u16, struct SaveSectionLocation *);
-u8 sub_81258BC(u16, struct SaveSectionLocation *);
-u8 sub_8125BF8(u8, struct SaveSection *);
-u8 sub_8125974(struct SaveSectionLocation *);
-u16 sub_8125C10(void *, u16);
 
 void ClearSaveData(void)
 {

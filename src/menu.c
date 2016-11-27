@@ -1,3 +1,4 @@
+#include "menu_cursor.h"
 #include "global.h"
 #include "menu.h"
 #include "main.h"
@@ -27,12 +28,6 @@ static u8 sub_80724F4(u8, u8, u8, u8 * const [][2], u8);
 static void sub_8072620(u8, u8, u8, u8 * const [][2], u8);
 static void sub_8072D18(u8, u8);
 
-extern void sub_814A5C0(u8, u16, u8, u16, u8);
-extern void sub_814A880(u8, u8);
-extern void sub_814A904(void);
-extern void sub_814A958(u8);
-extern void sub_814A7FC(void);
-
 static struct Menu gMenu;
 
 EWRAM_DATA struct Window gMenuWindow = {0};
@@ -46,7 +41,7 @@ EWRAM_DATA u16 gMenuMessageBoxContentTileOffset = 0;
 
 extern const u8 *gUnknown_08376D74[][2];
 
-void InitMenuWindow(struct WindowConfig *winConfig)
+void InitMenuWindow(const struct WindowConfig *winConfig)
 {
     InitMenuWindowInternal(winConfig, 1);
 }

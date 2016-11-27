@@ -1,18 +1,16 @@
-#include "global.h"
+#include "wallclock.h"
+#include "decompress.h"
 #include "main.h"
 #include "menu.h"
 #include "palette.h"
 #include "rtc.h"
 #include "songs.h"
-#include "sprite.h"
 #include "task.h"
-#include "text.h"
 #include "trig.h"
 #include "sound.h"
 
 //Functions that need to be put in headers
 void remove_some_task(void);
-void LoadCompressedObjectPic(void *);
 
 extern u16 gSpecialVar_0x8004;
 extern u16 gMiscClockMale_Pal[];
@@ -26,8 +24,6 @@ extern u8 gOtherText_CorrectTimePrompt[];
 extern u8 * const gUnknown_08376D74[][2];
 extern s8 gClockHandCoords[][2];
 
-extern struct WindowConfig gWindowConfig_81E6C3C;
-extern struct WindowConfig gWindowConfig_81E6CE4;
 extern struct SpriteTemplate gSpriteTemplate_83F7AD8;
 extern struct SpriteTemplate gSpriteTemplate_83F7AF0;
 extern struct SpriteTemplate gSpriteTemplate_83F7B28;

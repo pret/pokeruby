@@ -1,6 +1,6 @@
+#include "decompress.h"
 #include "global.h"
 #include "species.h"
-#include "sprite.h"
 
 #define WRAM 0x02000000
 
@@ -9,8 +9,6 @@ extern struct SpriteSheet gMonBackPicTable[];
 extern void *gUnknown_081FAF4C[];
 
 extern void DrawSpindaSpots(u16, u32, void *, u8);
-
-void sub_800D378(const struct SpriteSheet *a, u32 b, u32 c, u32 d, void *e, s32 f, u32 g, u32 h);
 
 void sub_800D238(const void *src, void *dest)
 {

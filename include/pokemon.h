@@ -362,6 +362,8 @@ u16 sub_803B7C8(struct Pokemon *mon, u8 a2);
 void DeleteFirstMoveAndGiveMoveToMon(struct Pokemon *mon, u16 move);
 void DeleteFirstMoveAndGiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move);
 
+u8 sub_803C348(u8 a1);
+u8 sub_803C434(u8 a1);
 u8 GetMonGender(struct Pokemon *mon);
 u8 GetBoxMonGender(struct BoxPokemon *boxMon);
 u8 GetGenderFromSpeciesAndPersonality(u16 species, u32 personality);

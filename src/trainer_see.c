@@ -1,18 +1,21 @@
+#include "trainer_see.h"
+#include "field_player_avatar.h"
+#include "field_map_obj.h"
 #include "global.h"
 #include "fieldmap.h"
 #include "task.h"
 #include "sprite.h"
+#include "field_effect.h"
+#include "script.h"
 
 extern u8 * GetFieldObjectScriptPointerByFieldObjectId(u8);
 extern u8 * GetTrainerFlagFromScriptPointer(u8 *);
-extern u8 TrainerCanApproachPlayer(struct MapObject *);
 extern u8 sub_8060024(struct MapObject *, s16, s16, u8);
 extern u8 npc_block_way(struct MapObject *, s16, s16, u8);
 extern u8 npc_running_behaviour_by_direction(u8);
 extern u8 GetGoSpeed0AnimId(u8);
 extern u8 GetOppositeDirection(u8);
 extern u8 GetFaceDirectionAnimId(u8);
-extern bool8 FieldEffectActiveListContains(u8);
 extern bool8 FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(struct MapObject *);
 extern bool8 FieldObjectCheckIfSpecialAnimFinishedOrInactive(struct MapObject *);
 extern bool8 FieldObjectClearAnimIfSpecialAnimFinished(struct MapObject *);
@@ -22,7 +25,6 @@ extern void FieldObjectSetSpecialAnim(struct MapObject *, u8);
 extern void LoadWordFromTwoHalfwords(u32, u8 *);
 extern void StoreWordInTwoHalfwords(u32, u8 *);
 
-extern void sub_80842FC(void (*func)(u8));
 
 extern bool8 (*gIsTrainerInRange[])(struct MapObject *, u16, s16, s16);
 extern bool8 (*gTrainerSeeFuncList[])(u8, struct Task *, struct MapObject *);
@@ -30,11 +32,6 @@ extern bool8 (*gTrainerSeeFuncList2[])(u8, struct Task *, struct MapObject *);
 
 extern u32 gUnknown_0202FF84[];
 
-bool8 CheckTrainer(u8);
-bool8 CheckPathBetweenTrainerAndPlayer(struct MapObject2 *, u8, u8);
-void sub_80842C8(struct MapObject *, u8);
-void RunTrainerSeeFuncList(u8);
-void sub_80847D8(u8);
 
 bool8 CheckTrainers(void)
 {

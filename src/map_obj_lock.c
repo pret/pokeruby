@@ -1,9 +1,7 @@
-#include "global.h"
+#include "map_obj_lock.h"
+#include "field_player_avatar.h"
 #include "task.h"
-#include "fieldmap.h"
 
-extern void sub_80594C0(void);
-extern void sub_80597F4(void);
 extern void player_bitmagic(void);
 extern void sub_80643A4(struct MapObject *);
 extern void sub_8064470(u8);

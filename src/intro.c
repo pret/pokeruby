@@ -1,4 +1,11 @@
-#include "global.h"
+#include "intro.h"
+#include "gba/m4a_internal.h"
+#include "m4a.h"
+#include "libgncmultiboot.h"
+#include "save.h"
+#include "decompress.h"
+#include "title_screen.h"
+#include "new_game.h"
 #include "link.h"
 #include "main.h"
 #include "palette.h"
@@ -6,15 +13,8 @@
 #include "songs.h"
 #include "sound.h"
 #include "species.h"
-#include "sprite.h"
 #include "task.h"
 #include "trig.h"
-
-struct GcmbStruct
-{
-    u16 gcmb_field_0;
-    u8 gcmb_field_2;
-};
 
 extern u16 gUnknown_02039318;
 extern u16 gUnknown_0203931A;
@@ -59,12 +59,38 @@ extern const u8 gIntroCopyright_Gfx[];
 extern const u16 gIntroCopyright_Pal[];
 extern const u16 gIntroCopyright_Tilemap[];
 
-extern void LoadCompressedObjectPic(const struct SpriteSheet *);
-extern void LoadCompressedObjectPalette(const struct SpritePalette *);
-extern void CB2_InitTitleScreen(void);
+// rom_813BA94
+extern void sub_813CAF4(u8);
+extern void intro_reset_and_hide_bgs(void);
+extern void sub_813CCE8(u8);
+extern void sub_813CE30(u16, u16, u16, u16);
+extern u8 sub_813CE88(/*TODO: arg types*/);
+extern u8 sub_813CFA8(/*TODO: arg types*/);
+extern void sub_813D084(/*TODO: arg types*/);
+extern u8 sub_813D584(/*TODO: arg types*/);
+extern void sub_813D788(struct Sprite *);
+extern void sub_813D880(struct Sprite *);
+extern void sub_813D954(/*TODO: arg types*/);
+extern void sub_813DB9C(struct Sprite *);
+extern void sub_813DE70(struct Sprite *);
+extern void sub_813E10C(struct Sprite *);
+extern void sub_813E210(struct Sprite *);
+extern void sub_813E7C0(u8);
+extern void sub_813E930(/*TODO: arg types*/);
+extern void sub_813EB4C(u8);
+extern void sub_813EDBC(/*TODO: arg types*/);
+
+// rom_8148B8C
+extern void load_intro_part2_graphics(/*TODO: arg types*/);
+extern void sub_8148C78(/*TODO: arg types*/);
 extern u8 sub_8148EC0(/*TODO: arg types*/);
+extern void sub_8149020(/*TODO: arg types*/);
 extern u8 intro_create_brendan_sprite(/*TODO: arg types*/);
 extern u8 intro_create_may_sprite(/*TODO: arg types*/);
+extern u8 intro_create_latios_sprite(/*TODO: arg types*/);
+extern u8 intro_create_latias_sprite(/*TODO: arg types*/);
+
+extern void remove_some_task(void);
 
 static void MainCB2_EndIntro(void);
 static void Task_IntroLoadPart1Graphics(u8);
@@ -86,22 +112,6 @@ static void task_intro_16(u8);
 static void task_intro_17(u8);
 static void Task_IntroPokemonBattle(u8);
 static void task_intro_19(u8);
-void sub_813CAF4(u8);
-void intro_reset_and_hide_bgs(void);
-void sub_813CCE8(u8);
-void sub_813CE30(u16, u16, u16, u16);
-u8 sub_813CE88(/*TODO: arg types*/);
-u8 sub_813CFA8(/*TODO: arg types*/);
-u8 sub_813D584(/*TODO: arg types*/);
-void sub_813D788(struct Sprite *);
-void sub_813D880(struct Sprite *);
-sub_813D954(/*TODO: arg types*/);
-void sub_813DB9C(struct Sprite *);
-void sub_813DE70(struct Sprite *);
-void sub_813E10C(struct Sprite *);
-void sub_813E210(struct Sprite *);
-void sub_813E7C0(u8);
-void sub_813EB4C(u8);
 
 static void VBlankCB_Intro(void)
 {

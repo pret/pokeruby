@@ -1,7 +1,7 @@
 #ifndef GUARD_VAR_H
 #define GUARD_VAR_H
 
-#include "vars.h"
+#include "gba/types.h"
 
 u16 *GetVarPointer(u16 id);
 u16 VarGet(u16 id);

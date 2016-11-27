@@ -1,3 +1,5 @@
+#include "save_menu_util.h"
+#include "option_menu.h"
 #include "global.h"
 #include "text.h"
 #include "sprite.h"
@@ -11,6 +13,8 @@
 #include "pokemon.h"
 #include "menu.h"
 #include "sound.h"
+#include "title_screen.h"
+#include "decompress.h"
 
 #define BirchSpeechUpdateWindowText() ((u8)MenuUpdateWindowText_OverrideLineLength(24))
 
@@ -19,15 +23,8 @@ extern void CreatePokeballSprite(u8 r0, u8 r1, u8 r2, u8 r3, u8 s1, u8 s2, u8 s3
 extern bool32 IsMysteryGiftAvailable(void);
 extern void CB2_ContinueSavedGame(void);
 extern void CB2_InitMysteryEventMenu(void);
-extern void CB2_InitOptionMenu(void);
-extern void CB2_InitTitleScreen(void);
-extern void FormatPlayTime(u8 *str, u16 hours, u16 minutes, bool16 colon);
-extern u16 GetPokedexSeenCount(void);
-extern u8 GetBadgeCount(void);
 extern void DoNamingScreen(u8 r0, struct SaveBlock2 *r1, u16 r2, u16 r3, u8 s0, MainCallback s4);
 extern void CB2_NewGame(void);
-extern void DecompressPicFromTable_2(const struct SpriteSheet *, u8, u8, void *, void *, u32);
-extern void LoadCompressedObjectPalette(const struct SpritePalette *);
 extern u8 CreateBirchSprite(u8, u8, u8);
 extern u8 CreateTrainerSprite_BirchSpeech(u8, u16, u16, u8, void *);
 

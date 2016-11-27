@@ -1,4 +1,4 @@
-#include "global.h"
+#include "weather.h"
 #include "task.h"
 #include "sprite.h"
 #include "palette.h"
@@ -58,20 +58,6 @@ extern u8 gUnknown_083970C8;
 extern u8 (*gUnknown_0202FC48)[32];
 extern u8 (*gUnknown_0202F9E8)[32];
 
-void sub_807CA34(u8);
-void sub_807C9E4(u8);
-void sub_807CB10(void);
-extern void sub_807DB64(u8, u8);
-u8 sub_807CDC4(void);
-u8 sub_807CE24(void);
-u8 sub_807CE7C(void);
-void sub_807CEBC(u8, u8, s8);
-
-extern void sub_807D1BC(u8, u8, u8, u8, u16);
-extern void sub_807D304(int, u8, u16);
-extern void sub_807D424(u8, u16);
-
-void PlayRainSoundEffect(void);
 
 void sub_807C828(void) {
 	u8 index;
@@ -207,7 +193,7 @@ void sub_807CB10(void) {
 					v4 += v11;
 					dunno = v4 - v9;
 					if (dunno > 0) {
-						v4 -= dunno + ((u16)dunno >> 15) >> 1;
+						v4 -= (dunno + ((u16)dunno >> 15)) >> 1;
 					}
 					v1[v6][v2] = v4 >> 8;
 					if (v1[v6][v2] > 0x1f) {

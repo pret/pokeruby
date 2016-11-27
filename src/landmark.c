@@ -1,3 +1,4 @@
+#include "landmark.h"
 #include "global.h"
 #include "flag.h"
 

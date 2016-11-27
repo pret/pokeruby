@@ -1,4 +1,3 @@
-#include "global.h"
 #include "trig.h"
 
 extern s16 gSineTable[];

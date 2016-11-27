@@ -1,6 +1,6 @@
-#include "gba/gba.h"
+#include "pokemon_size_record.h"
 #include "global.h"
-#include "pokemon.h"
+#include "string_util.h"
 #include "species.h"
 #include "flag.h"
 #include "var.h"

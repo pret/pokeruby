@@ -1,3 +1,4 @@
+#include "tileset_anim.h"
 #include "global.h"
 
 extern u8 *gTilesetAnimTable_General_0[];

@@ -2,38 +2,21 @@
 #include "main.h"
 #include "text.h"
 #include "text_window.h"
+#include "palette.h"
 
 #define STD_MSG_BOX_LEFT    0
 #define STD_MSG_BOX_TOP    14
 #define STD_MSG_BOX_WIDTH  26
 #define STD_MSG_BOX_HEIGHT  4
 
-u16 SetTextWindowBaseTileNum(u16);
-void LoadTextWindowGraphics(struct Window *);
-void LoadTextWindowGraphics_OverridePalSlot(struct Window *, u8);
-void LoadTextWindowGraphics_OverrideFrameType(struct Window *, u8);
-void DrawTextWindow(struct Window *win, u8 left, u8 top, u8 right, u8 bottom);
-const struct FrameGraphics *GetTextWindowFrameGraphics(u8 frameType);
 static void LoadTextWindowTiles(u8, void *);
 static void LoadTextWindowPalette(u8, u8);
 static void DrawTextWindowInternal(u16 *dest, u16 baseTileNum, u8 left, u8 top, u8 right, u8 bottom);
-u16 SetMessageBoxBaseTileNum(u16);
-void unref_sub_80651DC(struct Window *, u8 *);
-void DisplayMessageBox(struct Window *);
 static u16 GetMessageBoxTilemapEntry(u16 tilemapEntry, u8 x, u8 y, u8 width, u8 height);
 static void DrawMessageBox(struct Window *win, u8 left, u8 top, u8 width, u8 height);
-void DrawStandardMessageBox(struct Window *win);
-void LoadMessageBoxTiles(struct Window *win);
-void ClearStandardMessageBox(struct Window *win);
 
 static u16 sTextWindowBaseTileNum;
 static u16 sMessageBoxBaseTileNum;
-
-struct FrameGraphics
-{
-    u8 *tiles;
-    u16 *palette;
-};
 
 extern const struct FrameGraphics gUnknown_083761F0[20];
 

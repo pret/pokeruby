@@ -1,5 +1,6 @@
 #include "global.h"
 #include "palette.h"
+#include "decompress.h"
 
 enum
 {
@@ -37,7 +38,6 @@ struct PaletteStruct
     u8 ps_field_9;
 };
 
-extern void sub_800D238(const void *src, void *dest);
 extern void BlendPalette(u16, u16, u8, u16);
 
 EWRAM_DATA u16 gPlttBufferUnfaded[0x200] = {0};

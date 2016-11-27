@@ -1,19 +1,17 @@
+#include "item.h"
+#include "main.h"
 #include "global.h"
 #include "text.h"
+#include "rng.h"
 
 #define FIRST_BERRY 0x85 // ITEM_CHERI_BERRY
 #define LAST_BERRY 0xaf // ITEM_ENIGMA_BERRY
 
 extern u8 GetStageByBerryTreeId(u8);
 extern u16 GetStageDurationByBerryType(u8);
-extern void SetMainCallback2(void*);
 extern void sub_80A68CC();
-extern u16 Random(void);
 extern u8 sub_8060234(u8, u8, u8);
-extern u8 AddBagItem(u16, u8);
 extern void sub_8060288(u8, u8, u8);
-extern u8 IsBagPocketNonEmpty(u8);
-extern void GetCameraCoords(s16*, s16*);
 extern u8 FieldObjectGetBerryTreeId(u8);
 extern u8 *GetFieldObjectScriptPointerForComparison();
 

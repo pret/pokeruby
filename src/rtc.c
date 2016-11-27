@@ -1,5 +1,3 @@
-#include "global.h"
-#include "siirtc.h"
 #include "rtc.h"
 #include "string_util.h"
 #include "text.h"
@@ -28,19 +26,6 @@ static const s32 sNumDaysInMonths[12] =
     30,
     31,
 };
-
-void RtcDisableInterrupts();
-void RtcRestoreInterrupts();
-u32 ConvertBcdToBinary(u8 bcd);
-bool8 IsLeapYear(u8 year);
-u16 ConvertDateToDayCount(u8 year, u8 month, u8 day);
-u16 RtcGetDayCount(struct SiiRtcInfo *rtc);
-void RtcGetInfo(struct SiiRtcInfo *rtc);
-void RtcGetDateTime(struct SiiRtcInfo *rtc);
-void RtcGetStatus(struct SiiRtcInfo *rtc);
-void RtcGetRawInfo(struct SiiRtcInfo *rtc);
-u16 RtcCheckInfo(struct SiiRtcInfo *rtc);
-void RtcCalcTimeDifference(struct SiiRtcInfo *rtc, struct Time *result, struct Time *t);
 
 void RtcDisableInterrupts()
 {

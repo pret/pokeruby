@@ -1,14 +1,14 @@
-#include "global.h"
+#include "intro.h"
+#include "title_screen.h"
 #include "gba/m4a_internal.h"
 #include "main.h"
 #include "palette.h"
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
+#include "decompress.h"
 
 extern void m4aSongNumStart(u16);
-extern void LoadCompressedObjectPic(void *);
-extern void CB2_InitCopyrightScreen(void);
 extern void CB2_InitMainMenu(void);
 extern void CB2_InitClearSaveDataScreen(void);
 extern void CB2_InitResetRtcScreen(void);

@@ -1,5 +1,5 @@
-#include "global.h"
 #include "var.h"
+#include "global.h"
 
 extern u16 *gSpecialVars[];
 
