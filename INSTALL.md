@@ -21,7 +21,7 @@ Finally, build the rom.
 
 # Windows
 
-Install [**devkitARM**](http://devkitpro.org/wiki/Getting_Started/devkitARM).
+Install [**devkitARM**](http://mirror.clarkson.edu/devkitPro/devkitARM/devkitARM_r45/).
 
 Then get the compiled tools from https://github.com/YamaArashi/pokeruby-tools. Copy the `tools/` folder over the `tools/` folder in your pokeruby directory.
 
