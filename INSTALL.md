@@ -2,7 +2,7 @@ First, you must put a Pokémon Ruby 1.0 (US) ROM in the root directory of the re
 
 # Linux
 
-Install [**devkitARM**](http://devkitpro.org/wiki/Getting_Started/devkitARM).
+Install [**devkitARM**](http://mirror.clarkson.edu/devkitPro/devkitARM/devkitARM_r45/).
 
 Make sure that there is an environment variable called DEVKITARM with the path of the directory before the "bin" directory containing "arm-none-eabi-as", "arm-none-eabi-cpp", "arm-none-eabi-ld" and "arm-none-eabi-objcopy".
 
