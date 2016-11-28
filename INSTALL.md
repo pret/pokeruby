@@ -2,7 +2,7 @@ First, you must put a Pokémon Ruby 1.0 (US) ROM in the root directory of the re
 
 # Linux
 
-Install [**devkitARM**](http://mirror.clarkson.edu/devkitPro/devkitARM/devkitARM_r45/).
+Install [**devkitARM**](http://devkitpro.org/wiki/Getting_Started/devkitARM).
 
 Make sure that there is an environment variable called DEVKITARM with the path of the directory before the "bin" directory containing "arm-none-eabi-as", "arm-none-eabi-cpp", "arm-none-eabi-ld" and "arm-none-eabi-objcopy".
 
@@ -21,7 +21,7 @@ Finally, build the rom.
 
 # Windows
 
-Install [**devkitARM**](http://mirror.clarkson.edu/devkitPro/devkitARM/devkitARM_r45/).
+Install [**devkitARM**](http://devkitpro.org/wiki/Getting_Started/devkitARM).
 
 Then get the compiled tools from https://github.com/YamaArashi/pokeruby-tools. Copy the `tools/` folder over the `tools/` folder in your pokeruby directory.
 
