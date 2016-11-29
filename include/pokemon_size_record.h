@@ -3,13 +3,13 @@
 
 #include "gba/types.h"
 
-void InitShroomishSizeRecord();
-void GetShroomishSizeRecordInfo();
-void CompareShroomishSize();
+void InitShroomishSizeRecord(void);
+void GetShroomishSizeRecordInfo(void);
+void CompareShroomishSize(void);
 
-void InitBarboachSizeRecord();
-void GetBarboachSizeRecordInfo();
-void CompareBarboachSize();
+void InitBarboachSizeRecord(void);
+void GetBarboachSizeRecordInfo(void);
+void CompareBarboachSize(void);
 
 void GiveGiftRibbonToParty(u8 index, u8 ribbonId);
 

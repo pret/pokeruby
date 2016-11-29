@@ -4,8 +4,8 @@
 #include "gba/types.h"
 #include <stddef.h>
 
-void sub_80B929C();
-void sub_80B92AC();
+void sub_80B929C(void);
+void sub_80B92AC(void);
 void sub_80B93B0(u32 a);
 void sub_80B9450(u8 taskId);
 void sub_80B9484(u8 taskId);
@@ -17,9 +17,9 @@ void sub_80B99E8(u8 taskId);
 void sub_80B9A1C(u8 taskId);
 void *LoadPtrFromTaskData(u16 *ptr);
 void StorePtrInTaskData(void *ptr, u16 *data);
-u8 GetMultiplayerId_();
+u8 GetMultiplayerId_(void);
 u16 *GetPlayerRecvBuffer(u8 player);
-void sub_80B9A78();
+void sub_80B9A78(void);
 void sub_80B9A88(u8 *a);
 void sub_80B9B1C(u8 *a, size_t size, u8 index);
 void sub_80B9B70(u8 *a, size_t size, u8 index);

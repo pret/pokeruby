@@ -5,12 +5,12 @@
 
 void DisableWildEncounters(bool8 disabled);
 bool8 StandardWildEncounter(u16 a, u16 b);
-void RockSmashWildEncounter();
-bool8 SweetScentWildEncounter();
-bool8 GetFishingWildMonListHeader();
+void RockSmashWildEncounter(void);
+bool8 SweetScentWildEncounter(void);
+bool8 GetFishingWildMonListHeader(void);
 void FishingWildEncounter(u8 rod);
 u16 GetLocalWildMon(bool8 *isWaterMon);
-u16 GetMirageIslandMon();
-bool8 UpdateRepelCounter();
+u16 GetMirageIslandMon(void);
+bool8 UpdateRepelCounter(void);
 
 #endif // GUARD_WILD_ENCOUNTER_H

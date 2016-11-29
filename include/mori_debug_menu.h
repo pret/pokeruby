@@ -3,18 +3,18 @@
 
 #include "gba/types.h"
 
-s8 sub_8083D4C();
+s8 sub_8083D4C(void);
 u8 MoriDebugMenu_SearchChild(u8 a1, u8 a2, u8 *ptr);
-s8 MoriDebugMenu_Egg();
-s8 MoriDebugMenu_MaleEgg();
-s8 MoriDebugMenu_1000Steps();
-s8 MoriDebugMenu_10000Steps();
-s8 MoriDebugMenu_MoveTutor();
-s8 MoriDebugMenu_BreedEgg();
-s8 MoriDebugMenu_LongName();
-s8 MoriDebugMenu_PokeblockCase();
-s8 MoriDebugMenuProcessInput();
-s8 InitMoriDebugMenu();
+s8 MoriDebugMenu_Egg(void);
+s8 MoriDebugMenu_MaleEgg(void);
+s8 MoriDebugMenu_1000Steps(void);
+s8 MoriDebugMenu_10000Steps(void);
+s8 MoriDebugMenu_MoveTutor(void);
+s8 MoriDebugMenu_BreedEgg(void);
+s8 MoriDebugMenu_LongName(void);
+s8 MoriDebugMenu_PokeblockCase(void);
+s8 MoriDebugMenuProcessInput(void);
+s8 InitMoriDebugMenu(void);
 
 
 #endif // GUARD_MORI_DEBUG_MENU_H

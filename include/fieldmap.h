@@ -289,8 +289,8 @@ extern u8 gSelectedMapObject;
 extern struct MapHeader gMapHeader;
 extern struct PlayerAvatar gPlayerAvatar;
 
-void not_trainer_hill_battle_pyramid();
-void sub_8055FC0();
+void not_trainer_hill_battle_pyramid(void);
+void sub_8055FC0(void);
 u8 MapGridGetZCoordAt();
 bool8 MapGridIsImpassableAt(s16, s16);
 int MapGridGetMetatileIdAt(int, int);

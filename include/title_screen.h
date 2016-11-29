@@ -8,6 +8,6 @@ void SpriteCallback_VersionBannerRight(struct Sprite *sprite);
 void SpriteCallback_PressStartCopyrightBanner(struct Sprite *sprite);
 void SpriteCallback_PokemonLogoShine(struct Sprite *sprite);
 
-void CB2_InitTitleScreen();
+void CB2_InitTitleScreen(void);
 
 #endif // GUARD_TITLE_SCREEN_H

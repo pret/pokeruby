@@ -4,7 +4,7 @@
 extern u32 gRngValue;
 
 //Returns a 16-bit pseudorandom number
-u16 Random();
+u16 Random(void);
 
 //Returns a 32-bit pseudorandom number
 #define Random32() (Random() | (Random() << 16))

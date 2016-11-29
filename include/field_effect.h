@@ -22,7 +22,7 @@ void FieldEffectFreeGraphicsResources(struct Sprite *sprite);
 void FieldEffectStop(struct Sprite *sprite, u8 id);
 void FieldEffectFreeTilesIfUnused(u16 tileStart);
 void FieldEffectFreePaletteIfUnused(u8 paletteNum);
-void FieldEffectActiveListClear();
+void FieldEffectActiveListClear(void);
 void FieldEffectActiveListAdd(u8 id);
 void FieldEffectActiveListRemove(u8 id);
 bool8 FieldEffectActiveListContains(u8 id);

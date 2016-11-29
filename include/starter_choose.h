@@ -5,7 +5,7 @@
 #include "sprite.h"
 
 u16 GetStarterPokemon(u16);
-extern void CB2_ChooseStarter();
+void CB2_ChooseStarter(void);
 void nullsub_72(struct Sprite *sprite);
 void sub_810A62C(struct Sprite *sprite);
 void sub_810A68C(struct Sprite *sprite);
