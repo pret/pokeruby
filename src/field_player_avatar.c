@@ -780,6 +780,7 @@ void PlayerOnBikeCollide(u8 a)
     PlayCollisionSoundIfNotFacingWarp(a);
     player_npc_set_state_and_x22_etc(GetStepInPlaceDelay16AnimId(a), 2);
 }
+
 static void PlayerNotOnBikeCollide(u8 a)
 {
     PlayCollisionSoundIfNotFacingWarp(a);
