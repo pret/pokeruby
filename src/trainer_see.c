@@ -1,7 +1,7 @@
+#include "global.h"
 #include "trainer_see.h"
 #include "field_player_avatar.h"
 #include "field_map_obj.h"
-#include "global.h"
 #include "fieldmap.h"
 #include "task.h"
 #include "sprite.h"

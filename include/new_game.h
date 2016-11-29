@@ -1,8 +1,6 @@
 #ifndef GUARD_NEW_GAME_H
 #define GUARD_NEW_GAME_H
 
-#include "gba/types.h"
-
 void write_word_to_mem(u32 a1, u8 *a2);
 void sub_8052D10(u8 *a1, u8 *a2);
 void set_player_trainer_id(void);

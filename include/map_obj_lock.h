@@ -1,8 +1,6 @@
 #ifndef GUARD_MAP_OBJ_LOCK_H
 #define GUARD_MAP_OBJ_LOCK_H
 
-#include "gba/types.h"
-
 bool8 walkrun_is_standing_still(void);
 void sub_8064CDC(u8 taskId);
 bool8 sub_8064CFC(void);

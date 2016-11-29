@@ -1,7 +1,6 @@
 #ifndef GUARD_DECOMPRESS_H
 #define GUARD_DECOMPRESS_H
 
-#include "gba/types.h"
 #include "sprite.h"
 
 void sub_800D238(const void *src, void *dest);

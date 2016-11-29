@@ -1,8 +1,6 @@
 #ifndef GUARD_SAVE_MENU_UTIL_H
 #define GUARD_SAVE_MENU_UTIL_H
 
-#include "gba/types.h"
-
 void HandleDrawSaveWindowInfo(s16 left, s16 top);
 void sub_80946C8(u16 left, u16 top);
 u8 sub_809473C(void);

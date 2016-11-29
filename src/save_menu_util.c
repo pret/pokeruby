@@ -1,3 +1,4 @@
+#include "global.h"
 #include "save_menu_util.h"
 #include "menu.h"
 #include "flag.h"

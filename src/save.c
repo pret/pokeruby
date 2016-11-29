@@ -1,3 +1,4 @@
+#include "global.h"
 #include "save.h"
 #include "gba/gba.h"
 #include "rom4.h"

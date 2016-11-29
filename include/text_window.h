@@ -1,7 +1,6 @@
 #ifndef GUARD_TEXT_WINDOW_H
 #define GUARD_TEXT_WINDOW_H
 
-#include "gba/types.h"
 #include "text.h"
 
 struct FrameGraphics

@@ -1,3 +1,4 @@
+#include "global.h"
 #include "wild_encounter.h"
 #include "field_player_avatar.h"
 #include "safari_zone.h"

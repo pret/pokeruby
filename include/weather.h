@@ -1,8 +1,6 @@
 #ifndef GUARD_WEATHER_H
 #define GUARD_WEATHER_H
 
-#include "gba/types.h"
-
 void sub_807C828(void);
 void DoWeatherEffect(u8 effect);
 void sub_807C988(u8 effect);

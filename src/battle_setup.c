@@ -1,3 +1,4 @@
+#include "global.h"
 #include "battle_setup.h"
 #include "safari_zone.h"
 #include "weather.h"

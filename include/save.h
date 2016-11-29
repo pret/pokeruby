@@ -1,8 +1,6 @@
 #ifndef GUARD_SAVE_H
 #define GUARD_SAVE_H
 
-#include "gba/types.h"
-
 struct SaveSectionLocation
 {
 	void *data;

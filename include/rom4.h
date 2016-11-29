@@ -1,8 +1,6 @@
 #ifndef GUARD_ROM4_H
 #define GUARD_ROM4_H
 
-#include "gba/types.h"
-
 void sav12_xor_increment(u8 index);
 void warp_in(void);
 void warp1_set(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);

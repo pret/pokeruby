@@ -1,3 +1,4 @@
+#include "global.h"
 #include "item.h"
 #include "string_util.h"
 

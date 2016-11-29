@@ -1,5 +1,5 @@
-#include "lottery_corner.h"
 #include "global.h"
+#include "lottery_corner.h"
 #include "rng.h"
 #include "string_util.h"
 #include "var.h"

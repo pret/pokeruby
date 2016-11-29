@@ -5,7 +5,6 @@
 #include "species.h"
 #include "main.h"
 #include "sprite.h"
-#include "berry.h"
 #include "flag.h"
 
 extern u8 gPlayerPartyCount;

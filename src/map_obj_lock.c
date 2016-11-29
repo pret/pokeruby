@@ -1,3 +1,4 @@
+#include "global.h"
 #include "map_obj_lock.h"
 #include "field_player_avatar.h"
 #include "task.h"

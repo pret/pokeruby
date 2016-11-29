@@ -1,3 +1,4 @@
+#include "global.h"
 #include "intro.h"
 #include "gba/m4a_internal.h"
 #include "m4a.h"

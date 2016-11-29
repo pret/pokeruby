@@ -1,7 +1,6 @@
 #ifndef GUARD_FIELD_EFFECT_H
 #define GUARD_FIELD_EFFECT_H
 
-#include "gba/types.h"
 #include "sprite.h"
 
 u32 FieldEffectStart(u8 id);

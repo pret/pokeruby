@@ -1,3 +1,4 @@
+#include "global.h"
 #include "mori_debug_menu.h"
 #include "start_menu.h"
 #include "menu.h"

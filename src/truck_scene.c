@@ -1,3 +1,4 @@
+#include "global.h"
 #include "truck_scene.h"
 #include "palette.h"
 #include "task.h"

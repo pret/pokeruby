@@ -1,8 +1,6 @@
 #ifndef GUARD_FIELD_PLAYER_AVATAR_H
 #define GUARD_FIELD_PLAYER_AVATAR_H
 
-#include "global.h"
-
 void player_step(u8 a, u16 b, u16 c);
 void SetPlayerAvatarTransitionFlags(u16 a);
 void sub_8059204(void);

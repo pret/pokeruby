@@ -1,3 +1,4 @@
+#include "global.h"
 #include "safari_zone.h"
 #include "field_player_avatar.h"
 #include "flag.h"

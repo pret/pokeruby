@@ -1,7 +1,6 @@
 #ifndef GUARD_STARTER_CHOOSE_H
 #define GUARD_STARTER_CHOOSE_H
 
-#include "gba/types.h"
 #include "sprite.h"
 
 u16 GetStarterPokemon(u16);

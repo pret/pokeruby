@@ -1,3 +1,4 @@
+#include "global.h"
 #include "menu_cursor.h"
 #include "sprite.h"
 #include "palette.h"

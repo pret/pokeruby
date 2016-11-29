@@ -1,7 +1,6 @@
 #ifndef GUARD_POKEDEX_H
 #define GUARD_POKEDEX_H
 
-#include "gba/types.h"
 #include "sprite.h"
 
 struct PokedexListItem

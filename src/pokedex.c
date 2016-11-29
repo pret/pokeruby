@@ -1,3 +1,4 @@
+#include "global.h"
 #include "pokedex.h"
 #include "gba/m4a_internal.h"
 #include "string_util.h"

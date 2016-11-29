@@ -1,6 +1,6 @@
 #include "global.h"
-#include "main.h"
 #include "sprite.h"
+#include "main.h"
 #include "palette.h"
 #include "menu_cursor.h"
 

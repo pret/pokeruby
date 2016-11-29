@@ -1,6 +1,6 @@
+#include "global.h"
 #include "item.h"
 #include "main.h"
-#include "global.h"
 #include "text.h"
 #include "rng.h"
 

@@ -1,4 +1,3 @@
-#include "menu_cursor.h"
 #include "global.h"
 #include "menu.h"
 #include "main.h"
@@ -6,6 +5,7 @@
 #include "songs.h"
 #include "text_window.h"
 #include "sound.h"
+#include "menu_cursor.h"
 
 struct Menu
 {

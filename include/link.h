@@ -1,8 +1,6 @@
 #ifndef GUARD_LINK_H
 #define GUARD_LINK_H
 
-#include "global.h"
-
 #define MAX_LINK_PLAYERS 4
 #define CMD_LENGTH 8
 #define QUEUE_CAPACITY 50

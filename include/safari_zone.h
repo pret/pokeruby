@@ -1,8 +1,6 @@
 #ifndef GUARD_SAFARI_ZONE_H
 #define GUARD_SAFARI_ZONE_H
 
-#include "gba/types.h"
-
 bool32 GetSafariZoneFlag(void);
 void SetSafariZoneFlag(void);
 void ResetSafariZoneFlag(void);

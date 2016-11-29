@@ -1,6 +1,6 @@
+#include "global.h"
 #include "field_player_avatar.h"
 #include "item.h"
-#include "global.h"
 #include "script.h"
 #include "rng.h"
 #include "palette.h"

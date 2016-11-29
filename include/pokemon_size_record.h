@@ -1,8 +1,6 @@
 #ifndef GUARD_POKEMON_SIZE_RECORD_H
 #define GUARD_POKEMON_SIZE_RECORD_H
 
-#include "gba/types.h"
-
 void InitShroomishSizeRecord(void);
 void GetShroomishSizeRecordInfo(void);
 void CompareShroomishSize(void);
@@ -13,5 +11,4 @@ void CompareBarboachSize(void);
 
 void GiveGiftRibbonToParty(u8 index, u8 ribbonId);
 
-
-#endif // GUARD_RECORD_MIXING_H
+#endif // GUARD_POKEMON_SIZE_RECORD_H

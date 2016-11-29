@@ -1,8 +1,6 @@
 #ifndef GUARD_FIELD_CAMERA_H
 #define GUARD_FIELD_CAMERA_H
 
-#include "gba/types.h"
-
 void move_tilemap_camera_to_upper_left_corner(void);
 void sub_8057A58(void);
 void sub_8057B14(u16 *a, u16 *b);

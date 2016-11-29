@@ -1,3 +1,4 @@
+#include "global.h"
 #include "starter_choose.h"
 #include "main.h"
 #include "menu.h"

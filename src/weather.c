@@ -1,3 +1,4 @@
+#include "global.h"
 #include "weather.h"
 #include "task.h"
 #include "sprite.h"

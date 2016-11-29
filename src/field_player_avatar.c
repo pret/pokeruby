@@ -1,3 +1,4 @@
+#include "global.h"
 #include "field_player_avatar.h"
 #include "field_map_obj.h"
 #include "rom4.h"
@@ -11,6 +12,7 @@
 #include "task.h"
 #include "field_effect.h"
 #include "wild_encounter.h"
+#include "fieldmap.h"
 
 struct UnknownStruct
 {

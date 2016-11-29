@@ -3,8 +3,6 @@
 
 #define MAX_SPRITES 64
 
-#include "global.h"
-
 struct SpriteSheet
 {
     u8 *data;

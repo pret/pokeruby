@@ -1,3 +1,4 @@
+#include "global.h"
 #include "heal_location.h"
 
 #define NUM_HEAL_LOCATIONS 22

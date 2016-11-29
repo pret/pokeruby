@@ -1,3 +1,4 @@
+#include "global.h"
 #include "record_mixing.h"
 #include "link.h"
 #include "menu.h"

@@ -1,8 +1,6 @@
 #ifndef GUARD_WILD_ENCOUNTER_H
 #define GUARD_WILD_ENCOUNTER_H
 
-#include "gba/types.h"
-
 void DisableWildEncounters(bool8 disabled);
 bool8 StandardWildEncounter(u16 a, u16 b);
 void RockSmashWildEncounter(void);

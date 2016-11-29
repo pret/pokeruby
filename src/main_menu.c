@@ -1,6 +1,6 @@
+#include "global.h"
 #include "save_menu_util.h"
 #include "option_menu.h"
-#include "global.h"
 #include "text.h"
 #include "sprite.h"
 #include "task.h"

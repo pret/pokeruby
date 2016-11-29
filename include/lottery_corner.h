@@ -1,8 +1,6 @@
 #ifndef GUARD_LOTTERY_CORNER_H
 #define GUARD_LOTTERY_CORNER_H
 
-#include "gba/types.h"
-
 void sub_8145A78(void);
 void sub_8145AA4(u16 a);
 void sub_8145AEC(void);

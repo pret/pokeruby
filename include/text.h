@@ -1,8 +1,6 @@
 #ifndef GUARD_TEXT_H
 #define GUARD_TEXT_H
 
-#include "global.h"
-
 #define CHAR_SPACE          0x00
 #define CHAR_QUESTION_MARK  0xAC
 #define CHAR_HYPHEN         0xAE

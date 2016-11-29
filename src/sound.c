@@ -1,7 +1,7 @@
 #include "global.h"
+#include "sound.h"
 #include "gba/m4a_internal.h"
 #include "task.h"
-#include "sound.h"
 #include "songs.h"
 #include "m4a.h"
 

@@ -1,5 +1,5 @@
-#include "landmark.h"
 #include "global.h"
+#include "landmark.h"
 #include "flag.h"
 
 #define MAPSEC_NONE 0x58

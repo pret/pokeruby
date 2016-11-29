@@ -1,7 +1,6 @@
 #ifndef GUARD_RECORD_MIXING_H
 #define GUARD_RECORD_MIXING_H
 
-#include "gba/types.h"
 #include <stddef.h>
 
 void sub_80B929C(void);

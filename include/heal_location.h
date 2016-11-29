@@ -1,7 +1,6 @@
 #ifndef GUARD_HEAL_LOCATION_H
 #define GUARD_HEAL_LOCATION_H
 
-#include "gba/types.h"
 #include "sprite.h"
 
 struct HealLocation
@@ -15,6 +14,5 @@ struct HealLocation
 u32 GetHealLocationIndexByMap(u16 mapGroup, u16 mapNum);
 const struct HealLocation *GetHealLocationByMap(u16 mapGroup, u16 mapNum);
 const struct HealLocation *GetHealLocation(u32 index);
-
 
 #endif // GUARD_HEAL_LOCATION_H

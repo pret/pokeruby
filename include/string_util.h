@@ -1,8 +1,6 @@
 #ifndef GUARD_STRING_UTIL_H
 #define GUARD_STRING_UTIL_H
 
-#include "gba/types.h"
-
 enum StringConvertMode
 {
     STR_CONV_MODE_LEFT_ALIGN,

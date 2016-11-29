@@ -1,8 +1,6 @@
 #ifndef GUARD_LIBGNCMULTIBOOT_H
 #define GUARD_LIBGNCMULTIBOOT_H
 
-#include "gba/types.h"
-
 struct GcmbStruct
 {
 	u16 gcmb_field_0;

@@ -1,5 +1,5 @@
-#include "decompress.h"
 #include "global.h"
+#include "decompress.h"
 #include "species.h"
 
 #define WRAM 0x02000000

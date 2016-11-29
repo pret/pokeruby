@@ -1,7 +1,7 @@
 #include "global.h"
+#include "text_window.h"
 #include "main.h"
 #include "text.h"
-#include "text_window.h"
 #include "palette.h"
 
 #define STD_MSG_BOX_LEFT    0

@@ -1,3 +1,4 @@
+#include "global.h"
 #include "rom4.h"
 #include "field_player_avatar.h"
 #include "menu.h"
@@ -22,6 +23,7 @@
 #include "field_camera.h"
 #include "field_effect.h"
 #include "wild_encounter.h"
+#include "fieldmap.h"
 
 #ifdef SAPPHIRE
 #define LEGENDARY_MUSIC BGM_OOAME  // Heavy Rain

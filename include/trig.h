@@ -1,8 +1,6 @@
 #ifndef GUARD_TRIG_H
 #define GUARD_TRIG_H
 
-#include "gba/types.h"
-
 s16 Sin(s16 index, s16 amplitude);
 s16 Cos(s16 index, s16 amplitude);
 s16 Sin2(u16 angle);

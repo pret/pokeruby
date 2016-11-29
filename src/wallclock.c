@@ -1,3 +1,4 @@
+#include "global.h"
 #include "wallclock.h"
 #include "decompress.h"
 #include "main.h"

@@ -1,3 +1,4 @@
+#include "global.h"
 #include "coins.h"
 #include "menu.h"
 #include "string_util.h"

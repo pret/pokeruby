@@ -1,5 +1,6 @@
-#include "intro.h"
+#include "global.h"
 #include "title_screen.h"
+#include "intro.h"
 #include "gba/m4a_internal.h"
 #include "main.h"
 #include "palette.h"

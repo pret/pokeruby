@@ -1,5 +1,5 @@
-#include "tileset_anim.h"
 #include "global.h"
+#include "tileset_anim.h"
 
 extern u8 *gTilesetAnimTable_General_0[];
 extern u8 *gTilesetAnimTable_General_1[];
