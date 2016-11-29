@@ -2,7 +2,7 @@
 #include "trainer_see.h"
 #include "field_player_avatar.h"
 #include "field_map_obj.h"
-#include "fieldmap.h"
+#include "asm_fieldmap.h"
 #include "task.h"
 #include "sprite.h"
 #include "field_effect.h"

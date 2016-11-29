@@ -1,6 +1,6 @@
 #include "global.h"
 #include "sprite.h"
-#include "fieldmap.h"
+#include "asm_fieldmap.h"
 #include "field_effect.h"
 
 extern u32 gUnknown_0202FF84[];

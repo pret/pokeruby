@@ -23,7 +23,7 @@
 #include "field_camera.h"
 #include "field_effect.h"
 #include "wild_encounter.h"
-#include "fieldmap.h"
+#include "asm_fieldmap.h"
 
 #ifdef SAPPHIRE
 #define LEGENDARY_MUSIC BGM_OOAME  // Heavy Rain

@@ -6,7 +6,7 @@
 #include "palette.h"
 #include "rtc.h"
 #include "pokemon.h"
-#include "fieldmap.h"
+#include "asm_fieldmap.h"
 #include "main.h"
 #include "menu.h"
 #include "decoration.h"

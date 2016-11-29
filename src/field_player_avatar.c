@@ -12,7 +12,7 @@
 #include "task.h"
 #include "field_effect.h"
 #include "wild_encounter.h"
-#include "fieldmap.h"
+#include "asm_fieldmap.h"
 
 struct UnknownStruct
 {
