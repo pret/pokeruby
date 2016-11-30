@@ -385,7 +385,7 @@ void sub_80FA4E4(u8 *a, u32 b)
 }
 #else
 __attribute__((naked))
-void sub_80FA4E4(u8 *a, u32 b)
+void sub_80FA4E4(struct EasyChatPair *a, u32 b, u8 c)
 {
     asm(".syntax unified\n\
 	push {r4-r7,lr}\n\

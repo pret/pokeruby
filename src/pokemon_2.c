@@ -3,11 +3,11 @@
 #include "text.h"
 #include "string_util.h"
 #include "pokemon.h"
+#include "rng.h"
 #include "species.h"
 #include "main.h"
 #include "sprite.h"
 #include "flag.h"
-#include "rng.h"
 
 extern u8 gPlayerPartyCount;
 extern struct Pokemon gPlayerParty[6];
@@ -108,7 +108,7 @@ u8 sub_803C434(u8 a1)
 
     if (sub_803C348(0) > 1)
     {
-        u32 r = Random();
+        u16 r = Random();
         register u32 val asm("r1") = mask2;
         val &= r;
         if (!val)

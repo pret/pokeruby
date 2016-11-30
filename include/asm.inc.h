@@ -76,7 +76,7 @@ void FieldSetDoorClosed(u32, u32);
 s8 FieldAnimateDoorClose(u32, u32);
 s8 FieldAnimateDoorOpen(u32, u32);
 bool8 FieldIsDoorAnimationRunning(void);
-u8 sub_8058790(u32 x, u32 y);
+u32 sub_8058790(u32 x, u32 y);
 
 // asm/field_map_obj.o
 void sub_805AA98();
@@ -204,7 +204,7 @@ bool8 pokemon_has_move(struct Pokemon *, u16);
 
 // asm/rom_8074BAC.o
 u8 battle_side_get_owner(u8);
-u32 battle_get_per_side_status(u8);
+u8 battle_get_per_side_status(u8);
 u8 battle_get_side_with_given_state(u8);
 
 // asm/rom_8080874.o
@@ -228,7 +228,7 @@ void sub_80815E0(u8 val);
 // asm/cable_club.o
 u8 sub_8083664(void);
 void sub_8083A84(TaskFunc);
-bool8 sub_8083BF4(u8 id);
+s32 sub_8083BF4(u8 id);
 
 // src/fldeff_emotion.o
 void sub_8084894(struct Sprite *sprite, u16 a2, u8 a3);
@@ -363,7 +363,7 @@ void sub_80F99CC(void);
 // src/dewford_trend.o
 void sub_80FA17C(void);
 void sub_80FA46C(struct EasyChatPair *, u16, u8);
-void sub_80FA4E4();
+void sub_80FA4E4(struct EasyChatPair *, u32, u8);
 bool8 sub_80FA670(struct EasyChatPair *, struct EasyChatPair *, u8);
 void sub_80FA740(struct EasyChatPair *);
 bool8 SB1ContainsWords(u16 *);

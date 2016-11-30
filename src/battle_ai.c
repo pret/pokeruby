@@ -1244,8 +1244,8 @@ void BattleAICmd_get_ability(void)
     if(battle_side_get_owner(var) == 0)
     {
         //register u8 unk asm("r1") = battle_get_per_side_status(var) & 1;
-        s32 unk = battle_get_per_side_status(var) & 1;
-        
+        u16 unk = battle_get_per_side_status(var) & 1;
+
         if(unk_2016A00.unk20[unk] != 0)
         {
             ((struct UnknownStruct2 *)((u8 *)&unk_2016A00 - 512))->unk8 = unk_2016A00.unk20[unk];
