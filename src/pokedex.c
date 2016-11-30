@@ -1,5 +1,6 @@
 #include "global.h"
 #include "pokedex.h"
+#include "asm.h"
 #include "gba/m4a_internal.h"
 #include "string_util.h"
 #include "m4a.h"
@@ -107,7 +108,6 @@ extern u8 gDexText_RegisterComplete[];
 extern void m4aMPlayVolumeControl(struct MusicPlayerInfo *mplayInfo, u16 trackBits, u16 volume);
 extern bool8 BeginNormalPaletteFade(u32, s8, u8, u8, u16);
 extern void remove_some_task(void);
-extern bool32 IsNationalPokedex(void);
 extern u8 sub_8091E3C(void);
 extern void sub_80690C8(void);
 extern void sub_805469C(void);

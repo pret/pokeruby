@@ -133,11 +133,13 @@ void sub_8090750(u8);
 void sub_8090A3C(u8);
 
 void sub_8090C68(void);
+u8 *GetPokemonCategory(u16);
 
 bool8 sub_8090D90(u16, u8);
 u16 GetNationalPokedexCount(u8);
 u16 GetHoennPokedexCount(u8);
 
+u16 sub_8090FF4(void);
 void sub_8091060(u16);
 void sub_8091154(u16 order, int i, int i1);
 void sub_80911C8(u16 num, int i, int i1);

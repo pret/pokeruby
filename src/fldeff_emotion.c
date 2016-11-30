@@ -1,4 +1,5 @@
 #include "global.h"
+#include "asm.h"
 #include "sprite.h"
 #include "asm_fieldmap.h"
 #include "field_effect.h"
@@ -7,11 +8,6 @@ extern u32 gUnknown_0202FF84[];
 
 extern struct SpriteTemplate gSpriteTemplate_839B510;
 extern struct SpriteTemplate gSpriteTemplate_839B528;
-
-bool8 TryGetFieldObjectIdByLocalIdAndMap(u8, u8, u8, u8 *);
-
-void sub_8084894(struct Sprite *sprite, u16 a2, u8 a3);
-void objc_exclamation_mark_probably(struct Sprite *sprite);
 
 u8 FldEff_ExclamationMarkIcon1(void)
 {

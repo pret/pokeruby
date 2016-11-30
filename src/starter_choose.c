@@ -1,18 +1,16 @@
 #include "global.h"
 #include "starter_choose.h"
+#include "asm.h"
 #include "main.h"
 #include "menu.h"
 #include "palette.h"
+#include "pokedex.h"
 #include "songs.h"
 #include "sound.h"
 #include "string_util.h"
 #include "task.h"
 #include "trig.h"
 #include "decompress.h"
-
-//Functions that need to be put in headers
-void remove_some_task(void);
-u16 SpeciesToNationalPokedexNum(u16);
 
 struct MonCoords
 {
@@ -54,7 +52,6 @@ static void Task_StarterChoose4(u8 taskId);
 static void Task_StarterChoose5(u8 taskId);
 static void Task_StarterChoose6(u8 taskId);
 
-extern u8 *GetPokemonCategory(u16);
 static void CreateStarterPokemonLabel(u8, u8);
 static u8 CreatePokemonFrontSprite(u16, u8, u8);
 

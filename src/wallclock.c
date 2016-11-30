@@ -1,5 +1,6 @@
 #include "global.h"
 #include "wallclock.h"
+#include "asm.h"
 #include "decompress.h"
 #include "main.h"
 #include "menu.h"
@@ -9,9 +10,6 @@
 #include "task.h"
 #include "trig.h"
 #include "sound.h"
-
-//Functions that need to be put in headers
-void remove_some_task(void);
 
 extern u16 gSpecialVar_0x8004;
 extern u16 gMiscClockMale_Pal[];

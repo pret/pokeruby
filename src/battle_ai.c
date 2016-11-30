@@ -1,5 +1,6 @@
 #include "global.h"
 #include "battle.h"
+#include "asm.h"
 #include "pokemon.h"
 #include "rng.h"
 
@@ -12,11 +13,6 @@ this file is a mess. I stopped part way because it starts to involve a huge stru
 all the way to at least 0x2016800, in addition to extremely hard functions that I can't seem to get right. I am leaving this file
 as it currently is until someone bothers to document this huge struct.
 */
-
-extern u8 sub_8015A98(u8, u8, u8);
-extern u8 battle_side_get_owner(u8);
-extern s16 battle_get_per_side_status(u8);
-extern u8 b_first_side(u8, u8, u8);
 
 extern u16 gUnknown_020239F8;
 extern u8 gUnknown_02024A60;

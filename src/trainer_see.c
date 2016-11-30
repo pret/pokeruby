@@ -1,5 +1,7 @@
 #include "global.h"
 #include "trainer_see.h"
+#include "asm.h"
+#include "battle_setup.h"
 #include "field_player_avatar.h"
 #include "field_map_obj.h"
 #include "asm_fieldmap.h"
@@ -7,24 +9,6 @@
 #include "sprite.h"
 #include "field_effect.h"
 #include "script.h"
-
-extern u8 * GetFieldObjectScriptPointerByFieldObjectId(u8);
-extern u8 * GetTrainerFlagFromScriptPointer(u8 *);
-extern u8 sub_8060024(struct MapObject *, s16, s16, u8);
-extern u8 npc_block_way(struct MapObject *, s16, s16, u8);
-extern u8 npc_running_behaviour_by_direction(u8);
-extern u8 GetGoSpeed0AnimId(u8);
-extern u8 GetOppositeDirection(u8);
-extern u8 GetFaceDirectionAnimId(u8);
-extern bool8 FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(struct MapObject *);
-extern bool8 FieldObjectCheckIfSpecialAnimFinishedOrInactive(struct MapObject *);
-extern bool8 FieldObjectClearAnimIfSpecialAnimFinished(struct MapObject *);
-extern void FieldObjectClearAnim(struct MapObject *);
-extern void TrainerWantsBattle(u8, u8 *);
-extern void FieldObjectSetSpecialAnim(struct MapObject *, u8);
-extern void LoadWordFromTwoHalfwords(u32, u8 *);
-extern void StoreWordInTwoHalfwords(u32, u8 *);
-
 
 extern bool8 (*gIsTrainerInRange[])(struct MapObject *, u16, s16, s16);
 extern bool8 (*gTrainerSeeFuncList[])(u8, struct Task *, struct MapObject *);

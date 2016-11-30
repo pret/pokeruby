@@ -294,6 +294,23 @@ struct SaveBlock2
     /*0xA8*/ u8 filler_A8[0x7E8];
 };
 
+struct UnkStruct_8054FF8_Substruct
+{
+	s16 x;
+	s16 y;
+	u8 field_8;
+};
+
+struct UnkStruct_8054FF8
+{
+	u8 a;
+	u8 b;
+	u8 c;
+	u8 d;
+	struct UnkStruct_8054FF8_Substruct sub;
+	u16 field_C;
+};
+
 extern struct SaveBlock2 gSaveBlock2;
 
 #endif // GUARD_GLOBAL_H

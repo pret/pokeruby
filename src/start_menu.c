@@ -1,8 +1,10 @@
 #include "global.h"
 #include "start_menu.h"
+#include "asm.h"
 #include "main.h"
 #include "menu.h"
 #include "palette.h"
+#include "pokedex.h"
 #include "script.h"
 #include "songs.h"
 #include "sound.h"
@@ -18,25 +20,6 @@
 #include "option_menu.h"
 #include "map_obj_lock.h"
 #include "save_menu_util.h"
-
-//External functions
-extern void sub_8047A1C(void);
-extern void sub_8047A34(void);
-extern void remove_some_task(void);
-extern void dp12_8087EA4(void);
-extern void sub_8093130(u8, void (*)(void));
-extern void sub_805469C(void);
-extern void SafariZoneRetirePrompt(void);
-extern void sub_8093110(void (*)(void));
-extern void sub_80EBA5C(void);
-extern void sub_80A53F8(void);
-extern void sub_8089A70(void);
-extern void CB2_InitPokedex(void);
-extern u16 GetNationalPokedexCount(u8);
-extern bool32 is_c1_link_related_active();
-extern void player_bitmagic(void);
-extern u8 *sub_8072C44(u8 *, s32, u8, u8);
-extern bool32 is_c1_link_related_active(void);
 
 //Menu actions
 enum {

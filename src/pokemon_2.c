@@ -1,4 +1,5 @@
 #include "global.h"
+#include "asm.h"
 #include "text.h"
 #include "string_util.h"
 #include "pokemon.h"
@@ -6,6 +7,7 @@
 #include "main.h"
 #include "sprite.h"
 #include "flag.h"
+#include "rng.h"
 
 extern u8 gPlayerPartyCount;
 extern struct Pokemon gPlayerParty[6];
@@ -48,11 +50,6 @@ extern u8 gUnknown_08208238[];
 extern u8 gUnknown_0820823C[];
 extern u8 gStatStageRatios[][2];
 extern u8 gHoldEffectToType[][2];
-
-extern u8 battle_side_get_owner(u8);
-extern u8 battle_get_side_with_given_state(u8);
-extern u32 battle_get_per_side_status(u8);
-extern u8 sub_8018324(u8, u8, u8, u8, u16);
 
 u8 sub_803C348(u8 a1)
 {

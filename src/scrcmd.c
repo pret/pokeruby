@@ -1,4 +1,7 @@
 #include "global.h"
+#include "asm.h"
+#include "battle_setup.h"
+#include "berry.h"
 #include "field_player_avatar.h"
 #include "item.h"
 #include "script.h"
@@ -20,101 +23,6 @@
 #include "map_obj_lock.h"
 #include "coins.h"
 #include "field_effect.h"
-
-extern void ClearRamScript(void);
-extern void sub_8126160(u8);
-extern u8 IsThereStorageSpaceForDecoration(u8);
-extern s8 sub_81340A8(u8);
-extern u8 sub_8134074(u8);
-extern u8 sub_8133FE4(u8);
-extern void sub_8081594(u8);
-extern void sub_8053CE4(u32);
-extern void DoTimeBasedEvents(void);
-extern void activate_per_step_callback(u8);
-extern void sub_8053D14(u16);
-extern void sub_8080E88(void);
-extern void player_avatar_init_params_reset(void);
-extern void sp13E_warp_to_last_warp(void);
-extern void sub_8080EF0(void);
-extern void sp13F_fall_to_last_warp(void);
-extern void sub_8053720(s16, s16);
-extern void sub_8080F68(void);
-extern void saved_warp2_set_2(s8, s8, s8, s8, s8, s8);
-extern void sub_8053690(s8, s8, s8, s8, s8);
-extern void sub_80536E4(s8, s8, s8, s8, s8);
-extern void sav1_set_battle_music_maybe(u16);
-extern void sub_8053F84(void);
-extern void sub_8053FB0(u16);
-extern u8 exec_movement(u8, u8, u8, void *);
-extern bool8 sub_80A212C(u8, u8, u8);
-extern void RemoveFieldObjectByLocalIdAndMap(u8, u8, u8);
-extern u8 show_sprite(u8, u8, u8);
-extern void sub_805C0F8(u8, u8, u8, s16, s16);
-extern void update_saveblock1_field_object_coords(u8, s16, s16);
-extern void sub_805C78C(u8, u8, u8);
-extern void npc_by_local_id_and_map_set_field_1_bit_x20(u8, u8, u8, u8);
-extern void sub_805BCF0(u8, u8, u8, u8);
-extern void sub_805BD48(u8, u8, u8);
-extern u8 FieldObjectFaceOppositeDirection(void *, u8);
-extern void FieldObjectTurnByLocalIdAndMap(u8, u8, u8, u8);
-extern void update_saveblock1_field_object_movement_behavior(u8, u8);
-extern u8 sub_805B410(u8, u8, s16, s16, u8, u8);
-extern void sub_8064990(u8, u8);
-extern bool32 is_c1_link_related_active(void);
-extern u8 GetFieldObjectIdByLocalIdAndMap(u8, u8, u8);
-extern u8 FieldObjectClearAnimIfSpecialAnimFinished(void *);
-extern void sub_80A2178(void);
-extern void sub_806451C(void);
-extern bool8 yes_no_box(u8, u8);
-extern bool8 sub_80B5054(u8, u8, u8, u8);
-extern bool8 sub_80B50B0(u8, u8, u8, u8, u8);
-extern bool8 sub_80B5578(u8, u8, u8, u8, u8);
-extern bool8 Multichoice(u8, u8, u8, u8);
-extern bool8 sub_80B58C4(u16, u8, u8);
-extern void *picbox_close(void);
-extern void sub_8106630(u32);
-extern void ShowContestWinner(void);
-extern u8 GetLeadMonIndex(void);
-extern u8 sub_80BF0B8(u32);
-extern void sub_80B79B8(u32 *, u32);
-extern void sub_80B79E0(u32 *, u32);
-extern bool8 IsEnoughMoney(u32, u32);
-extern void sub_80B7C14(u32, u8, u8);
-extern void RemoveMoneyLabelObject(u8, u8);
-extern void sub_80B7BEC(u32, u8, u8);
-extern void *TrainerBattleConfigure(u8 *);
-extern void sub_80825E4(void);
-extern u8 *sub_80826E8(void);
-extern u8 *sub_8082700(void);
-extern u8 trainer_flag_check(u16);
-extern void trainer_flag_set(u16);
-extern void trainer_flag_clear(u16);
-extern void ScriptWildBattle(u16, u8, u16);
-extern void sub_8081B3C(void);
-extern void CreatePokemartMenu(void *);
-extern void CreateDecorationShop1Menu(void *);
-extern void CreateDecorationShop2Menu(void *);
-extern void PlaySlotMachine(u8, void *);
-extern void PlantBerryTree(u8, u8, u8, bool8);
-extern bool8 GetPriceReduction(u8);
-extern void sub_80F99CC(void);
-extern void sub_80C48C8(void);
-extern void sub_80C4940(void);
-extern void sub_80C4980(u8);
-extern void sub_8053588(u8);
-extern u16 sub_8058790(u32, u32);
-extern bool8 FieldAnimateDoorOpen(u32, u32);
-extern bool8 FieldAnimateDoorClose(u32, u32);
-extern bool8 FieldIsDoorAnimationRunning(void);
-extern void FieldSetDoorOpened(u32, u32);
-extern void FieldSetDoorClosed(u32, u32);
-extern void ScriptAddElevatorMenuItem(u8, u8, u8, u8);
-extern void ScriptShowElevatorMenu(void);
-extern u8 ScriptGiveMon(u16, u8, u16, u32, u32, u8);
-extern u8 ScriptGiveEgg(u16);
-extern void ScriptSetMonMoveSlot(u8, u16, u8);
-extern bool8 pokemon_has_move(struct Pokemon *, u16);
-extern void c2_exit_to_overworld_1_continue_scripts_restart_music(void);
 
 typedef u16 (*SpecialFunc)(void);
 typedef void (*NativeFunc)(void);

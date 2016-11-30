@@ -1,5 +1,6 @@
 #include "global.h"
 #include "wild_encounter.h"
+#include "asm.h"
 #include "field_player_avatar.h"
 #include "safari_zone.h"
 #include "battle_setup.h"
@@ -33,14 +34,6 @@ struct WildPokemonHeader
     struct WildPokemonInfo *rockSmashMonsInfo;
     struct WildPokemonInfo *fishingMonsInfo;
 };
-
-extern bool8 sub_805759C(u8);
-extern s16 sub_810CAE4(u8, struct Pokeblock *);
-extern u8 MetatileBehavior_IsLandWildEncounter(u8);
-extern u8 sub_81344CC(void);
-extern u8 MetatileBehavior_IsWaterWildEncounter(u8);
-extern u8 MetatileBehavior_IsBridge(u8);
-extern void sub_80BEA50(u16);
 
 extern u16 gRoute119WaterTileData[];
 extern struct WildPokemonHeader gWildMonHeaders[];

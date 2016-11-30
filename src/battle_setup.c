@@ -1,5 +1,6 @@
 #include "global.h"
 #include "battle_setup.h"
+#include "asm.h"
 #include "safari_zone.h"
 #include "weather.h"
 #include "palette.h"
@@ -9,6 +10,7 @@
 #include "main.h"
 #include "species.h"
 #include "songs.h"
+#include "sound.h"
 #include "task.h"
 #include "string_util.h"
 #include "rng.h"
@@ -21,41 +23,6 @@
 
 #define NUM_TRAINER_EYE_TRAINERS 56
 #define TRAINER_REMATCH_STEPS 255
-
-extern void prev_quest_postbuffer_cursor_backup_reset(void);
-extern void overworld_poison_timer_set(void);
-extern void current_map_music_set__default_for_battle(u16);
-extern void c2_exit_to_overworld_1_continue_scripts_restart_music(void);
-extern void c2_exit_to_overworld_2_switch(void);
-extern void npc_set_running_behaviour_etc(struct MapObject *, u8);
-extern u8 npc_running_behaviour_by_direction(u8);
-extern void c2_whiteout(void);
-extern void sub_800E7C4(void);
-extern void sub_8081AA4(void);
-extern void sub_8081A18(void);
-extern void sub_8081C8C(void);
-extern void sub_8081CEC(void);
-extern void sub_8080E44(void);
-extern void sub_80821D8(void);
-extern void sub_8082228(void);
-extern void sub_808260C(void);
-extern void sub_8082CB8(void);
-extern void sub_811AAD8(u8);
-extern u8 *sub_80BCCE8(void);
-extern void sub_811AABC(u8);
-extern u8 sub_811AAE8(void);
-extern u8 GetFieldObjectIdByLocalIdAndMap(u8, u8, u8);
-extern u8 *sub_8082880(void);
-extern u8 sub_803FC58(u16);
-extern bool32 FieldPoisonEffectIsRunning(void);
-extern void player_bitmagic(void);
-extern void sub_80408BC();
-
-u8 GetWildBattleTransition(void);
-u8 GetTrainerBattleTransition(void);
-bool32 battle_exit_is_player_defeat(u32 a1);
-u8 *sub_808281C(void);
-u16 sub_8082C4C(u16 a1);
 
 extern u16 gScriptResult;
 
@@ -104,19 +71,6 @@ struct TrainerEyeTrainer
    u16 mapNum;
 };
 
-extern bool8 MetatileBehavior_IsTallGrass(char);
-extern bool8 MetatileBehavior_IsLongGrass(char);
-extern bool8 MetatileBehavior_IsSandOrDeepSand(char);
-extern bool8 MetatileBehavior_IsSurfableWaterOrUnderwater(char);
-extern bool8 MetatileBehavior_IsBridge(char);
-extern bool8 sub_80574C4(char);
-extern bool8 sub_80574D8(char);
-extern bool8 sub_8057568(char);
-extern u8 sub_8057450(u8);
-extern void PlayNewMapMusic(u16);
-
-extern u8 ScriptGiveMon(u16, u8, u16, u32, u32, u8);
-
 extern void (*gUnknown_0300485C)(void);
 
 extern struct Pokemon gEnemyParty[];
@@ -163,8 +117,6 @@ extern u8 gStringVar4[];
 
 extern u8 gBattleTransitionTable_Wild[][2];
 extern u8 gBattleTransitionTable_Trainer[][2];
-
-void sub_8082188(void);
 
 void task01_battle_start(u8 taskId)
 {

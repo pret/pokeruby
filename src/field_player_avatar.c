@@ -1,5 +1,6 @@
 #include "global.h"
 #include "field_player_avatar.h"
+#include "asm.h"
 #include "field_map_obj.h"
 #include "rom4.h"
 #include "flag.h"
@@ -13,94 +14,6 @@
 #include "field_effect.h"
 #include "wild_encounter.h"
 #include "asm_fieldmap.h"
-
-struct UnknownStruct
-{
-    u8 unk0;
-    u8 unk1;
-    u8 unk2;
-    s16 unk4;
-    s16 unk6;
-    u8 unk8;
-    u8 unk9;
-    u8 unkA_0:4;
-    u8 unkA_4:4;
-    u16 unkC;
-    u16 unkE;
-    u32 unk10;
-    u16 unk14;
-};
-
-extern u8 SpawnSpecialFieldObject(struct UnknownStruct *);
-extern u8 sub_8126B54(void);
-extern bool8 FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(struct MapObject *);
-extern u8 FieldObjectClearAnimIfSpecialAnimFinished(struct MapObject *);
-extern u8 FieldObjectGetSpecialAnim(struct MapObject *);
-extern bool8 FieldObjectSetSpecialAnim(struct MapObject *, u8);
-extern void FieldObjectClearAnim(struct MapObject *);
-extern s16 sub_80E6034(void);
-extern bool8 MetatileBehavior_IsSurfableFishableWater(u8);
-extern bool8 FieldObjectCheckIfSpecialAnimFinishedOrInactive(struct MapObject *);
-extern void sub_806451C(void);
-extern void sub_805B980(struct MapObject *, u8);
-extern void sub_8127ED0(u8, u8);
-extern bool8 is_tile_x69_2_warp_door(u8);
-extern bool8 pokemon_has_move(struct Pokemon *, u8);
-extern u8 GetSimpleGoAnimId(u8);
-extern u8 GetStepInPlaceDelay16AnimId(u8);
-extern u8 sub_806084C(u8);
-extern u8 GetOppositeDirection(u8);
-extern u8 GetFaceDirectionAnimId(u8);
-extern u8 sub_80608D0(u8);
-extern bool8 GetFishingWildMonListHeader(void);
-extern u8 npc_block_way(struct MapObject *, s16, s16, u8);
-extern u8 GetFieldObjectIdByXY(s16, s16);
-extern u8 sub_8056F08(u8);
-extern u8 GetLedgeJumpDirection(s16, s16, u8);
-extern u8 GetFieldObjectIdByXYZ(u16, u16, int);
-extern u32 CheckForRotatingGatePuzzleCollision(u8, s16, s16);
-extern u8 sub_805FDF8(u8);
-extern void sub_80BE97C(u8);
-extern void sub_8127F28(u8, u8, s16);
-extern u8 sub_805FE08(u8);
-extern void FieldObjectClearAnimIfSpecialAnimActive(struct MapObject *);
-extern u8 FieldObjectDirectionToImageAnimId(u8);
-extern u8 sub_805FD98(u8);
-extern u8 sub_805FDE8(u8);
-extern void sub_8053F84(void);
-extern u8 sub_80609D8(u8);
-extern u8 sub_8060A04(u8);
-extern u8 sub_8060A30(u8);
-extern u8 sub_8060A5C(u8);
-extern u8 sub_8060A88(u8);
-extern u8 sub_8060AB4(u8);
-extern u8 sub_8060878(u8);
-extern u8 sub_8060AE0(u8);
-extern u8 sub_8060B0C(u8);
-extern u8 sub_8060B38(u8);
-extern u8 sub_8060B64(u8);
-extern void objid_set_invisible(u8);
-extern void FieldObjectTurn(struct MapObject *, u8);
-extern u8 sub_8128124(u8 id);
-extern u8 sub_80607F4(u8 a);
-extern u8 GetGoSpeed0AnimId(u8 a);
-extern u8 sub_8060744(u8 a);
-extern u8 d2s_08064034(u8 a);
-extern u8 sub_806079C(u8 a);
-extern void FieldObjectForceSetSpecialAnim(struct MapObject *pObject, u8 a);
-extern u8 GetStepInPlaceDelay8AnimId(u8 a);
-extern u8 GetStepInPlaceDelay32AnimId(u8 a);
-extern u8 GetJumpLedgeAnimId(u8 a);
-
-// Bike
-extern void MovePlayerOnBike(u8, u16, u16);
-extern void sub_80E5B38(u16 i, u16 c);
-extern u8 sub_80E5DEC(u8);
-extern bool8 player_should_look_direction_be_enforced_upon_movement(void);
-extern void sub_80E5FCC(int i, int i1);
-extern void sub_80E6010(int i);
-extern void sub_80E6084();
-extern void sub_8126BC4(u8 unk_1B, u8 r6, s16 x, s16 y);
 
 extern u8 gOtherText_OhABite[];
 extern u8 gOtherText_PokeOnHook[];
@@ -149,7 +62,6 @@ static u8 GetForcedMovementByMetatileBehavior(void);
 static void MovePlayerNotOnBike(u8 a, u16 b);
 static u8 CheckMovementInputNotOnBike(u8 a);
 static u8 CheckForPlayerAvatarCollision(u8 a);
-u8 CheckForFieldObjectCollision(struct MapObject *a, s16 b, s16 c, u8 d, u8 e);
 static u8 sub_8058EF0(s16 a, s16 b, u8 c);
 static bool8 ShouldJumpLedge(s16 a, s16 b, u8 c);
 static u8 sub_8058F6C(s16 a, s16 b, u8 c);
@@ -159,22 +71,12 @@ static bool8 player_is_anim_in_certain_ranges(void);
 static bool8 sub_80592A4(void);
 static bool8 PlayerIsAnimActive(void);
 static bool8 PlayerCheckIfAnimFinishedOrInactive(void);
-void PlayerGoSpeed0(u8 a);
-void sub_80593C4(u8 a);
-void npc_use_some_d2s(u8 a);
-void sub_805940C(u8 a);
 static void PlayerNotOnBikeCollide(u8 a);
-void PlayerFaceDirection(u8 a);
-void PlayerTurnInPlace(u8 a);
-void PlayerJumpLedge(u8 a);
 static void PlayCollisionSoundIfNotFacingWarp(u8 a);
-u8 GetPlayerAvatarGraphicsIdByStateId(u8 a);
-void SetPlayerAvatarStateMask(u8 a);
 static void sub_8059D60(struct MapObject *a);
 static void StartStrengthAnim(u8 a, u8 b);
 static void sub_8059F94(void);
 static void sub_805A06C(void);
-void sub_805A20C(u8 a);
 
 void sub_80587B4(struct Sprite *sprite)
 {
@@ -1093,7 +995,7 @@ void SetPlayerAvatarExtraStateTransition(u8 a, u8 b)
 
 void InitPlayerAvatar(s16 a, s16 b, u8 c, u8 d)
 {
-    struct UnknownStruct s;
+    struct UnknownStruct_FPA s;
     u8 mapObjectId;
     struct MapObject *mapObject;
     

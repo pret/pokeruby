@@ -1,5 +1,6 @@
 #include "global.h"
 #include "save_menu_util.h"
+#include "asm.h"
 #include "menu.h"
 #include "flag.h"
 #include "string_util.h"

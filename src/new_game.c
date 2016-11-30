@@ -1,5 +1,7 @@
 #include "global.h"
 #include "new_game.h"
+#include "asm.h"
+#include "berry.h"
 #include "play_time.h"
 #include "pokemon_size_record.h"
 #include "script.h"
