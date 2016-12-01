@@ -5,7 +5,6 @@
 #include "species.h"
 #include "main.h"
 #include "sprite.h"
-#include "berry.h"
 #include "flag.h"
 
 extern u8 gPlayerPartyCount;
@@ -54,7 +53,6 @@ extern u8 battle_side_get_owner(u8);
 extern u8 battle_get_side_with_given_state(u8);
 extern u32 battle_get_per_side_status(u8);
 extern u8 sub_8018324(u8, u8, u8, u8, u16);
-extern u8 sub_803C348(u8);
 
 u8 sub_803C348(u8 a1)
 {

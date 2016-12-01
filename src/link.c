@@ -9,6 +9,7 @@
 #include "rng.h"
 #include "menu.h"
 #include "sound.h"
+#include "save.h"
 
 #define SIO_MULTI_CNT ((struct SioMultiCnt *)REG_ADDR_SIOCNT)
 

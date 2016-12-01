@@ -1,5 +1,5 @@
-#ifndef GUARD_FIELDMAP_H
-#define GUARD_FIELDMAP_H
+#ifndef GUARD_GLOBAL_FIELDMAP_H
+#define GUARD_GLOBAL_FIELDMAP_H
 
 enum
 {
@@ -289,4 +289,4 @@ extern u8 gSelectedMapObject;
 extern struct MapHeader gMapHeader;
 extern struct PlayerAvatar gPlayerAvatar;
 
-#endif // GUARD_FIELDMAP_H
+#endif // GUARD_GLOBAL_FIELDMAP_H

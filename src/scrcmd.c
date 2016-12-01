@@ -1,10 +1,12 @@
 #include "global.h"
+#include "field_player_avatar.h"
+#include "item.h"
 #include "script.h"
 #include "rng.h"
 #include "palette.h"
 #include "rtc.h"
 #include "pokemon.h"
-#include "fieldmap.h"
+#include "asm_fieldmap.h"
 #include "main.h"
 #include "menu.h"
 #include "decoration.h"
@@ -13,43 +15,33 @@
 #include "string_util.h"
 #include "flag.h"
 #include "var.h"
+#include "rom4.h"
+#include "weather.h"
+#include "map_obj_lock.h"
+#include "coins.h"
+#include "field_effect.h"
 
 extern void ClearRamScript(void);
 extern void sub_8126160(u8);
-extern u8 AddBagItem(u16, u16);
-extern u8 RemoveBagItem(u16, u16);
-extern u8 CheckBagHasSpace(u16, u16);
-extern u8 CheckBagHasItem(u16, u16);
-extern u8 GetPocketByItemId(u16);
-extern u8 AddPCItem(u16, u16);
-extern u8 CheckPCHasItem(u16, u16);
 extern u8 IsThereStorageSpaceForDecoration(u8);
 extern s8 sub_81340A8(u8);
 extern u8 sub_8134074(u8);
 extern u8 sub_8133FE4(u8);
-extern void sav12_xor_increment(u8);
 extern void sub_8081594(u8);
 extern void sub_8053CE4(u32);
-extern void fade_screen(u8, u8);
 extern void DoTimeBasedEvents(void);
-extern void SetSav1Weather(u32);
-extern void sub_80806E4(void);
-extern void sub_808073C(void);
 extern void activate_per_step_callback(u8);
 extern void sub_8053D14(u16);
-extern void warp1_set(s8, s8, s8, s8, s8);
 extern void sub_8080E88(void);
 extern void player_avatar_init_params_reset(void);
 extern void sp13E_warp_to_last_warp(void);
 extern void sub_8080EF0(void);
 extern void sp13F_fall_to_last_warp(void);
 extern void sub_8053720(s16, s16);
-extern void PlayerGetDestCoords(u16 *, u16 *);
 extern void sub_8080F68(void);
 extern void saved_warp2_set_2(s8, s8, s8, s8, s8, s8);
 extern void sub_8053690(s8, s8, s8, s8, s8);
 extern void sub_80536E4(s8, s8, s8, s8, s8);
-extern void sub_805363C(s8, s8, s8, s8, s8);
 extern void sav1_set_battle_music_maybe(u16);
 extern void sub_8053F84(void);
 extern void sub_8053FB0(u16);
@@ -63,17 +55,12 @@ extern void sub_805C78C(u8, u8, u8);
 extern void npc_by_local_id_and_map_set_field_1_bit_x20(u8, u8, u8, u8);
 extern void sub_805BCF0(u8, u8, u8, u8);
 extern void sub_805BD48(u8, u8, u8);
-extern u8 player_get_direction_lower_nybble(void);
 extern u8 FieldObjectFaceOppositeDirection(void *, u8);
 extern void FieldObjectTurnByLocalIdAndMap(u8, u8, u8, u8);
 extern void update_saveblock1_field_object_movement_behavior(u8, u8);
 extern u8 sub_805B410(u8, u8, s16, s16, u8, u8);
 extern void sub_8064990(u8, u8);
 extern bool32 is_c1_link_related_active(void);
-extern void sub_8064D20(void);
-extern bool8 sub_8064CFC(void);
-extern void sub_8064DD8(void);
-extern bool8 sub_8064DB4(void);
 extern u8 GetFieldObjectIdByLocalIdAndMap(u8, u8, u8);
 extern u8 FieldObjectClearAnimIfSpecialAnimFinished(void *);
 extern void sub_80A2178(void);
@@ -88,7 +75,6 @@ extern void *picbox_close(void);
 extern void sub_8106630(u32);
 extern void ShowContestWinner(void);
 extern u8 GetLeadMonIndex(void);
-extern void CopyItemName(u16, u8 *);
 extern u8 sub_80BF0B8(u32);
 extern void sub_80B79B8(u32 *, u32);
 extern void sub_80B79E0(u32 *, u32);
@@ -96,9 +82,6 @@ extern bool8 IsEnoughMoney(u32, u32);
 extern void sub_80B7C14(u32, u8, u8);
 extern void RemoveMoneyLabelObject(u8, u8);
 extern void sub_80B7BEC(u32, u8, u8);
-extern void ShowCoinsWindow(u32, u8, u8);
-extern void HideCoinsWindow(u8, u8);
-extern void UpdateCoinsWindow(u32, u8, u8);
 extern void *TrainerBattleConfigure(u8 *);
 extern void sub_80825E4(void);
 extern u8 *sub_80826E8(void);
@@ -118,10 +101,7 @@ extern void sub_80F99CC(void);
 extern void sub_80C48C8(void);
 extern void sub_80C4940(void);
 extern void sub_80C4980(u8);
-extern u32 FieldEffectStart(u8);
-extern bool8 FieldEffectActiveListContains(u8);
 extern void sub_8053588(u8);
-extern void MapGridSetMetatileIdAt(u32, u32, u16);
 extern u16 sub_8058790(u32, u32);
 extern bool8 FieldAnimateDoorOpen(u32, u32);
 extern bool8 FieldAnimateDoorClose(u32, u32);
@@ -130,9 +110,6 @@ extern void FieldSetDoorOpened(u32, u32);
 extern void FieldSetDoorClosed(u32, u32);
 extern void ScriptAddElevatorMenuItem(u8, u8, u8, u8);
 extern void ScriptShowElevatorMenu(void);
-extern u16 GetCoins(void);
-extern bool8 GiveCoins(u16);
-extern bool8 TakeCoins(u16);
 extern u8 ScriptGiveMon(u16, u8, u16, u32, u32, u8);
 extern u8 ScriptGiveEgg(u16);
 extern void ScriptSetMonMoveSlot(u8, u16, u8);

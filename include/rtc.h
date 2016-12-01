@@ -1,7 +1,7 @@
 #ifndef GUARD_RTC_UTIL_H
 #define GUARD_RTC_UTIL_H
 
-#include "global.h"
+#include "siirtc.h"
 
 #define RTC_INIT_ERROR         0x0001
 #define RTC_INIT_WARNING       0x0002
@@ -19,18 +19,30 @@
 
 extern struct Time gLocalTime;
 
-void RtcInit();
-u16 RtcGetErrorStatus();
-void RtcReset();
+void RtcDisableInterrupts(void);
+void RtcRestoreInterrupts(void);
+u32 ConvertBcdToBinary(u8 bcd);
+bool8 IsLeapYear(u8 year);
+u16 ConvertDateToDayCount(u8 year, u8 month, u8 day);
+u16 RtcGetDayCount(struct SiiRtcInfo *rtc);
+void RtcInit(void);
+u16 RtcGetErrorStatus(void);
+void RtcGetInfo(struct SiiRtcInfo *rtc);
+void RtcGetDateTime(struct SiiRtcInfo *rtc);
+void RtcGetStatus(struct SiiRtcInfo *rtc);
+void RtcGetRawInfo(struct SiiRtcInfo *rtc);
+u16 RtcCheckInfo(struct SiiRtcInfo *rtc);
+void RtcReset(void);
 void FormatDecimalTime(u8 *dest, s32 hour, s32 minute, s32 second);
 void FormatHexTime(u8 *dest, s32 hour, s32 minute, s32 second);
 void FormatHexRtcTime(u8 *dest);
 void FormatDecimalDate(u8 *dest, s32 year, s32 month, s32 day);
 void FormatHexDate(u8 *dest, s32 year, s32 month, s32 day);
-void RtcCalcLocalTime();
+void RtcCalcTimeDifference(struct SiiRtcInfo *rtc, struct Time *result, struct Time *t);
+void RtcCalcLocalTime(void);
 void RtcInitLocalTimeOffset(s32 hour, s32 minute);
 void RtcCalcLocalTimeOffset(s32 days, s32 hours, s32 minutes, s32 seconds);
 void CalcTimeDifference(struct Time *result, struct Time *t1, struct Time *t2);
-u32 RtcGetMinuteCount();
+u32 RtcGetMinuteCount(void);
 
 #endif // GUARD_RTC_UTIL_H

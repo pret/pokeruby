@@ -1,5 +1,5 @@
-#ifndef GUARD_BERRY_H
-#define GUARD_BERRY_H
+#ifndef GUARD_GLOBAL_BERRY_H
+#define GUARD_GLOBAL_BERRY_H
 
 struct Berry
 {
@@ -54,4 +54,4 @@ struct BerryTree
     u8 watered4:1;
 };
 
-#endif // GUARD_BERRY_H
+#endif // GUARD_GLOBAL_BERRY_H

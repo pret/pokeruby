@@ -1,5 +1,7 @@
 #include "global.h"
-#include "fieldmap.h"
+#include "field_camera.h"
+#include "field_player_avatar.h"
+#include "asm_fieldmap.h"
 #include "sprite.h"
 #include "text.h"
 
@@ -7,12 +9,8 @@ extern u16 gBGTilemapBuffers[4][0x400];
 
 
 //ToDo: argument types
-extern u8 MapGridGetMetatileLayerTypeAt();
-extern u8 player_get_direction_upper_nybble(void);
 extern void ResetBerryTreeSparkleFlags(void);
 extern void RotatingGatePuzzleCameraUpdate(s16, s16);
-extern int MapGridGetMetatileIdAt(int, int);
-extern int CameraMove(int, int);
 
 extern u8 gUnknown_0202E854;
 

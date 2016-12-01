@@ -1,4 +1,5 @@
 #include "global.h"
+#include "start_menu.h"
 #include "main.h"
 #include "menu.h"
 #include "palette.h"
@@ -9,37 +10,31 @@
 #include "string_util.h"
 #include "task.h"
 #include "flag.h"
+#include "rom4.h"
+#include "safari_zone.h"
+#include "field_player_avatar.h"
+#include "weather.h"
+#include "save.h"
+#include "option_menu.h"
+#include "map_obj_lock.h"
+#include "save_menu_util.h"
 
 //External functions
-extern void sub_8064E2C(void);
 extern void sub_8047A1C(void);
-extern u8 sub_8125E6C(void);
 extern void sub_8047A34(void);
-extern void sub_8125E2C(void);
 extern void remove_some_task(void);
 extern void dp12_8087EA4(void);
-extern void sav12_xor_increment(u8 index);
-extern bool8 sub_8125D44(u8);  //Saving related
-extern void HandleDrawSaveWindowInfo(u8, u8);
-extern void sub_80946C8(u8, u8);
-extern void save_serialize_map(void);
-extern void PlayRainSoundEffect(void);
 extern void sub_8093130(u8, void (*)(void));
 extern void sub_805469C(void);
 extern void SafariZoneRetirePrompt(void);
-extern void CB2_InitOptionMenu(void);
 extern void sub_8093110(void (*)(void));
 extern void sub_80EBA5C(void);
 extern void sub_80A53F8(void);
 extern void sub_8089A70(void);
 extern void CB2_InitPokedex(void);
 extern u16 GetNationalPokedexCount(u8);
-extern void fade_screen(u8, u8);
 extern bool32 is_c1_link_related_active();
-extern void sub_80594C0(void);
-extern void sub_80597F4(void);
 extern void player_bitmagic(void);
-extern bool32 GetSafariZoneFlag(void);
 extern u8 *sub_8072C44(u8 *, s32, u8, u8);
 extern bool32 is_c1_link_related_active(void);
 
@@ -87,25 +82,6 @@ extern u8 gSaveText_ThereIsAlreadyAFile[];
 extern u8 gSaveText_ThereIsADifferentFile[];
 extern u8 gSaveText_WouldYouLikeToSave[];
 extern u8 gOtherText_SafariStock[];
-
-//Public functions
-void CreateStartMenuTask(void (*func)(u8));
-void sub_80712B4(u8 taskId);
-void sub_8071310(void);
-u8 StartMenu_PokedexCallback(void);
-u8 StartMenu_PokemonCallback(void);
-u8 StartMenu_BagCallback(void);
-u8 StartMenu_PokenavCallback(void);
-u8 StartMenu_PlayerCallback(void);
-u8 StartMenu_SaveCallback(void);
-u8 StartMenu_OptionCallback(void);
-u8 StartMenu_ExitCallback(void);
-u8 StartMenu_RetireCallback(void);
-u8 StartMenu_PlayerLinkCallback(void);
-void InitSaveDialog(void);
-void sub_8071B28(void);
-void sub_8071C20(void);
-void AppendToList(u8 *list, u8 *pindex, u32 value);
 
 //Private functions
 static void BuildStartMenuActions(void);

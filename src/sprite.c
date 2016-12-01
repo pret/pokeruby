@@ -1,6 +1,8 @@
 #include "global.h"
-#include "main.h"
 #include "sprite.h"
+#include "main.h"
+#include "palette.h"
+#include "menu_cursor.h"
 
 #define MAX_SPRITE_COPY_REQUESTS 64
 
@@ -48,9 +50,6 @@ struct OamDimensions
     s8 width;
     s8 height;
 };
-
-void LoadPalette(u16 *, u16, u32);
-void sub_814A590(void);
 
 static void UpdateOamCoords(void);
 static void BuildSpritePriorities(void);

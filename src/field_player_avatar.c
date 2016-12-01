@@ -1,5 +1,7 @@
 #include "global.h"
-#include "fieldmap.h"
+#include "field_player_avatar.h"
+#include "field_map_obj.h"
+#include "rom4.h"
 #include "flag.h"
 #include "main.h"
 #include "menu.h"
@@ -7,8 +9,10 @@
 #include "script.h"
 #include "songs.h"
 #include "sound.h"
-#include "sprite.h"
 #include "task.h"
+#include "field_effect.h"
+#include "wild_encounter.h"
+#include "asm_fieldmap.h"
 
 struct UnknownStruct
 {
@@ -34,19 +38,12 @@ extern u8 FieldObjectClearAnimIfSpecialAnimFinished(struct MapObject *);
 extern u8 FieldObjectGetSpecialAnim(struct MapObject *);
 extern bool8 FieldObjectSetSpecialAnim(struct MapObject *, u8);
 extern void FieldObjectClearAnim(struct MapObject *);
-extern u8 sub_80E5DEC(u8);
 extern s16 sub_80E6034(void);
-extern u8 player_get_direction_upper_nybble(void);
-extern u8 player_get_direction_lower_nybble(void);
-extern u8 MapGridGetMetatileBehaviorAt(s32, s32);
-extern u32 FieldEffectStart(u8);
-extern void PlayerGetDestCoords(s16 *, s16 *);
 extern bool8 MetatileBehavior_IsSurfableFishableWater(u8);
 extern bool8 FieldObjectCheckIfSpecialAnimFinishedOrInactive(struct MapObject *);
 extern void sub_806451C(void);
 extern void sub_805B980(struct MapObject *, u8);
 extern void sub_8127ED0(u8, u8);
-extern bool8 player_should_look_direction_be_enforced_upon_movement(void);
 extern bool8 is_tile_x69_2_warp_door(u8);
 extern bool8 pokemon_has_move(struct Pokemon *, u8);
 extern u8 GetSimpleGoAnimId(u8);
@@ -56,19 +53,16 @@ extern u8 GetOppositeDirection(u8);
 extern u8 GetFaceDirectionAnimId(u8);
 extern u8 sub_80608D0(u8);
 extern bool8 GetFishingWildMonListHeader(void);
-extern void FishingWildEncounter(u8);
 extern u8 npc_block_way(struct MapObject *, s16, s16, u8);
 extern u8 GetFieldObjectIdByXY(s16, s16);
 extern u8 sub_8056F08(u8);
 extern u8 GetLedgeJumpDirection(s16, s16, u8);
 extern u8 GetFieldObjectIdByXYZ(u16, u16, int);
-extern u8 MapGridGetZCoordAt();
 extern u32 CheckForRotatingGatePuzzleCollision(u8, s16, s16);
 extern u8 sub_805FDF8(u8);
 extern void sub_80BE97C(u8);
 extern void sub_8127F28(u8, u8, s16);
 extern u8 sub_805FE08(u8);
-extern void sav1_reset_battle_music_maybe(void);
 extern void FieldObjectClearAnimIfSpecialAnimActive(struct MapObject *);
 extern u8 FieldObjectDirectionToImageAnimId(u8);
 extern u8 sub_805FD98(u8);
@@ -85,9 +79,28 @@ extern u8 sub_8060AE0(u8);
 extern u8 sub_8060B0C(u8);
 extern u8 sub_8060B38(u8);
 extern u8 sub_8060B64(u8);
-extern void MovePlayerOnBike(u8, u16, u16);
 extern void objid_set_invisible(u8);
 extern void FieldObjectTurn(struct MapObject *, u8);
+extern u8 sub_8128124(u8 id);
+extern u8 sub_80607F4(u8 a);
+extern u8 GetGoSpeed0AnimId(u8 a);
+extern u8 sub_8060744(u8 a);
+extern u8 d2s_08064034(u8 a);
+extern u8 sub_806079C(u8 a);
+extern void FieldObjectForceSetSpecialAnim(struct MapObject *pObject, u8 a);
+extern u8 GetStepInPlaceDelay8AnimId(u8 a);
+extern u8 GetStepInPlaceDelay32AnimId(u8 a);
+extern u8 GetJumpLedgeAnimId(u8 a);
+
+// Bike
+extern void MovePlayerOnBike(u8, u16, u16);
+extern void sub_80E5B38(u16 i, u16 c);
+extern u8 sub_80E5DEC(u8);
+extern bool8 player_should_look_direction_be_enforced_upon_movement(void);
+extern void sub_80E5FCC(int i, int i1);
+extern void sub_80E6010(int i);
+extern void sub_80E6084();
+extern void sub_8126BC4(u8 unk_1B, u8 r6, s16 x, s16 y);
 
 extern u8 gOtherText_OhABite[];
 extern u8 gOtherText_PokeOnHook[];

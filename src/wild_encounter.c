@@ -1,11 +1,15 @@
 #include "global.h"
+#include "wild_encounter.h"
+#include "field_player_avatar.h"
+#include "safari_zone.h"
+#include "battle_setup.h"
 #include "abilities.h"
-#include "fieldmap.h"
-#include "pokemon.h"
 #include "rng.h"
 #include "script.h"
 #include "flag.h"
 #include "var.h"
+#include "rom4.h"
+#include "vars.h"
 
 struct WildPokemon
 {
@@ -31,20 +35,12 @@ struct WildPokemonHeader
 };
 
 extern bool8 sub_805759C(u8);
-extern void GetXYCoordsOneStepInFrontOfPlayer(void *, void *);
 extern s16 sub_810CAE4(u8, struct Pokeblock *);
-extern bool32 GetSafariZoneFlag(void);
-extern u8 TestPlayerAvatarFlags(u8);
 extern u8 MetatileBehavior_IsLandWildEncounter(u8);
 extern u8 sub_81344CC(void);
 extern u8 MetatileBehavior_IsWaterWildEncounter(u8);
-extern void CheckForSafariZoneAndProceed(void);
 extern u8 MetatileBehavior_IsBridge(u8);
-extern void PlayerGetDestCoords(u16 *x, u16 *y);
 extern void sub_80BEA50(u16);
-extern void sav12_xor_increment(u8);
-extern int MapGridGetMetatileBehaviorAt(int x, int y);
-extern struct Pokeblock *SafariZoneGetActivePokeblock(void);
 
 extern u16 gRoute119WaterTileData[];
 extern struct WildPokemonHeader gWildMonHeaders[];

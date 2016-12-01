@@ -1,13 +1,11 @@
 #include "global.h"
-#include "berry.h"
+#include "item.h"
 #include "string_util.h"
 
 extern struct Berry *GetBerryInfo(u8 berry);
 
 extern u8 gOtherText_Berry2[];
 extern u8 gUnknown_02038560;
-
-typedef void (*ItemUseFunc)(u8);
 
 struct Item
 {
@@ -46,8 +44,6 @@ enum
     KEYITEMS_POCKET
 };
 
-struct Item *ItemId_GetItem(u16);
-u8 ItemId_GetPocket(u16);
 static void CompactPCItems(void);
 
 void CopyItemName(u16 itemId, u8 *string)

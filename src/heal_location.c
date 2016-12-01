@@ -1,14 +1,7 @@
 #include "global.h"
+#include "heal_location.h"
 
 #define NUM_HEAL_LOCATIONS 22
-
-struct HealLocation
-{
-    s8 group;
-    s8 map;
-    u16 x;
-    u16 y;
-};
 
 extern const struct HealLocation gHealLocations[];
 

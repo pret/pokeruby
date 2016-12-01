@@ -1,5 +1,6 @@
 #include "global.h"
 #include "task.h"
+#include "field_camera.h"
 
 extern u8 MetatileBehavior_IsDoor(u8);
 

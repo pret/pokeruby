@@ -39,7 +39,7 @@ void ScriptContext1_Init(void);
 bool8 ScriptContext2_RunScript(void);
 void ScriptContext1_SetupScript(u8 *ptr);
 void ScriptContext1_Stop(void);
-void EnableBothScriptContexts();
+void EnableBothScriptContexts(void);
 void ScriptContext2_RunNewScript(u8 *ptr);
 u8 *mapheader_get_tagged_pointer(u8 tag);
 void mapheader_run_script_by_tag(u8 tag);

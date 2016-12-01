@@ -12,8 +12,11 @@ enum
 void InitFieldMessageBox(void);
 bool8 ShowFieldMessage(u8 *message);
 bool8 ShowFieldAutoScrollMessage(u8 *message);
+bool8 unref_sub_8064BB8(u8 *message);
+bool8 unref_sub_8064BD0(u8 *message);
 void HideFieldMessageBox(void);
 u8 GetFieldMessageBoxMode(void);
 bool8 IsFieldMessageBoxHidden(void);
+void unref_sub_8064CA0(void);
 
 #endif // GUARD_FIELD_MESSAGE_BOX_H

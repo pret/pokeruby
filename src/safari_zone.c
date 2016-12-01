@@ -1,8 +1,11 @@
 #include "global.h"
+#include "safari_zone.h"
+#include "field_player_avatar.h"
 #include "flag.h"
 #include "main.h"
 #include "script.h"
 #include "string_util.h"
+#include "rom4.h"
 
 struct PokeblockFeeder
 {
@@ -15,16 +18,11 @@ struct PokeblockFeeder
 
 #define NUM_POKEBLOCK_FEEDERS 10
 
-void ClearAllPokeblockFeeders(void);
-void DecrementFeederStepCounters(void);
+static void ClearAllPokeblockFeeders(void);
+static void DecrementFeederStepCounters(void);
 extern void c2_exit_to_overworld_2_switch(void);
 extern void c2_exit_to_overworld_1_continue_scripts_restart_music(void);
 extern void sub_8080E44(void);
-extern void CB2_LoadMap(void);
-extern void sav12_xor_increment(u8);
-extern void warp_in(void);
-extern void GetXYCoordsOneStepInFrontOfPlayer(void *, void *);
-extern void PlayerGetDestCoords(u16 *, u16 *);
 
 extern u8 gUnknown_02024D26;
 

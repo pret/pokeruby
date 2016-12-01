@@ -1,4 +1,5 @@
 #include "global.h"
+#include "menu_cursor.h"
 #include "sprite.h"
 #include "palette.h"
 
@@ -28,11 +29,6 @@ extern u8 gUnknown_0203A3D1;
 extern u8 gUnknown_0203A3D2;
 extern u8 gUnknown_0203A3D3;
 extern u8 gUnknown_0203A3D4;
-
-void sub_814A7FC(void);
-void sub_814A958(u8 a1);
-void sub_814AD44(void);
-void sub_814ADF4(u8 a1);
 
 void sub_814A590(void)
 {

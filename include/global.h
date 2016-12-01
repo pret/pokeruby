@@ -95,8 +95,8 @@ struct SecretBaseRecord
 };
 
 #include "game_stat.h"
-#include "fieldmap.h"
-#include "berry.h"
+#include "global.fieldmap.h"
+#include "global.berry.h"
 #include "pokemon.h"
 
 struct WarpData
