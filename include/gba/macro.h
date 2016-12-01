@@ -82,4 +82,24 @@
     dmaRegs[5];                                                 \
 }
 
+#define u8_align 1
+#define s8_align 1
+#define u16_align 2
+#define s16_align 2
+#define u32_align 4
+#define s32_align 4
+
+#define QUOTE(x) #x
+#define EVAL_AND_QUOTE(x) QUOTE(x)
+
+#define INCBIN(type, var, file)                         \
+    extern const type var[];                            \
+    asm(".section .rodata\n"                            \
+        ".global " QUOTE(var) "\n"                      \
+        ".type " QUOTE(var) ",object\n"                 \
+        ".balign " EVAL_AND_QUOTE(type##_align) "\n"    \
+        "" QUOTE(var) ":\n"                             \
+        ".incbin " QUOTE(file) "\n"                     \
+    );
+
 #endif // GUARD_GBA_MACRO_H
