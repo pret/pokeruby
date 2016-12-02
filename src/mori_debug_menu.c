@@ -16,15 +16,15 @@ extern const struct MenuAction gMoriDebugMenuActions[];
 
 extern u8 gSpeciesNames[][11];
 
-s8 sub_8083D4C(void)
+bool8 sub_8083D4C(void)
 {
-     if ( gMain.newKeys & 1 )
+     if ( gMain.newKeys & A_BUTTON )
     {
         sub_8071C20();
-        return 1;
+        return TRUE;
     }
     else
-        return 0;
+        return FALSE;
 }
 
 u8 MoriDebugMenu_SearchChild(u8 a1, u8 a2, u8 *ptr)
@@ -121,7 +121,7 @@ s8 MoriDebugMenu_PokeblockCase(void)
     return 1;
 }
 
-s8 MoriDebugMenuProcessInput(void)
+bool8 MoriDebugMenuProcessInput(void)
 {
     s8 choice = ProcessMenuInput();
 
@@ -129,12 +129,12 @@ s8 MoriDebugMenuProcessInput(void)
     {
     default:
         gCallback_03004AE8 = gMoriDebugMenuActions[choice].func;
-        return 0;
+        return FALSE;
     case -2:
-        return 0;
+        return FALSE;
     case -1:
         sub_8071C20();
-        return 1;
+        return TRUE;
     }
 }
 
