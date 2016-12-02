@@ -134,12 +134,13 @@ static void npc_clear_strange_bits(struct MapObject *a)
     a->mapobj_bit_12 = 0;
     a->mapobj_bit_10 = 0;
     a->mapobj_bit_9 = 0;
-    gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_7;
+    gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_DASH;
 }
 
 static void MovePlayerAvatarUsingKeypadInput(u8 a, u16 b, u16 c)
 {
-    if ((gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_1) || (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_2))
+    if ((gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_MACH_BIKE)
+     || (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_ACRO_BIKE))
         MovePlayerOnBike(a, b, c);
     else
         MovePlayerNotOnBike(a, c);
@@ -375,16 +376,16 @@ void sub_8058D0C(u8 a, u16 b)
             PlayerNotOnBikeCollide(a);
         return;
     case 0:
-        if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_3)
+        if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
         {
             sub_80593C4(a);
             return;
         }
-        if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_4) && (b & 2) && FlagGet(0x860)
+        if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_4) && (b & 2) && FlagGet(SYS_B_DASH)
          && sub_80E5DEC(gMapObjects[gPlayerAvatar.mapObjectId].mapobj_unk_1E) == 0)
         {
             sub_805940C(a);
-            gPlayerAvatar.flags |= PLAYER_AVATAR_FLAG_7;
+            gPlayerAvatar.flags |= PLAYER_AVATAR_FLAG_DASH;
         }
         else
         {
@@ -430,7 +431,7 @@ u8 CheckForFieldObjectCollision(struct MapObject *a, s16 b, s16 c, u8 d, u8 e)
 
 static u8 sub_8058EF0(s16 a, s16 b, u8 c)
 {
-    if ((gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_3)
+    if ((gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
      && MapGridGetZCoordAt(a, b) == 3
      && GetFieldObjectIdByXYZ(a, b, 3) == 16)
     {
@@ -1259,8 +1260,8 @@ void sub_805A20C(u8 a)
     ScriptContext2_Enable();
     sav1_reset_battle_music_maybe();
     sub_8053F84();
-    gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_3;
-    gPlayerAvatar.flags |= PLAYER_AVATAR_FLAG_0;
+    gPlayerAvatar.flags &= ~PLAYER_AVATAR_FLAG_SURFING;
+    gPlayerAvatar.flags |= PLAYER_AVATAR_FLAG_ON_FOOT;
     gPlayerAvatar.unk6 = 1;
     taskId = CreateTask(taskFF_0805D1D4, 0xFF);
     gTasks[taskId].data[0] = a;
@@ -1483,7 +1484,7 @@ u8 Fishing11(struct Task *task)
                 
                 sub_805B980(playerMapObj, task->data[14]);
                 FieldObjectTurn(playerMapObj, playerMapObj->placeholder18);
-                if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_3)
+                if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
                     sub_8127F28(gMapObjects[gPlayerAvatar.mapObjectId].mapobj_unk_1A, 0, 0);
                 gSprites[gPlayerAvatar.spriteId].pos2.x = 0;
                 gSprites[gPlayerAvatar.spriteId].pos2.y = 0;
@@ -1541,7 +1542,7 @@ u8 Fishing15(struct Task *task)
         
         sub_805B980(playerMapObj, task->data[14]);
         FieldObjectTurn(playerMapObj, playerMapObj->placeholder18);
-        if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_3)
+        if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
             sub_8127F28(gMapObjects[gPlayerAvatar.mapObjectId].mapobj_unk_1A, 0, 0);
         gSprites[gPlayerAvatar.spriteId].pos2.x = 0;
         gSprites[gPlayerAvatar.spriteId].pos2.y = 0;
@@ -1595,6 +1596,6 @@ static void sub_805A954(void)
         playerSprite->pos2.y = -8;
     if (animType == 10 || animType == 11)
         playerSprite->pos2.y = 8;
-    if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_3)
+    if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
         sub_8127F28(gMapObjects[gPlayerAvatar.mapObjectId].mapobj_unk_1A, 1, playerSprite->pos2.y);
 }

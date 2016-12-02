@@ -262,14 +262,14 @@ struct MapObjectGraphicsInfo
     union AffineAnimCmd **affineAnims;
 };
 
-#define PLAYER_AVATAR_FLAG_0 (1 << 0)
-#define PLAYER_AVATAR_FLAG_1 (1 << 1)
-#define PLAYER_AVATAR_FLAG_2 (1 << 2)
-#define PLAYER_AVATAR_FLAG_3 (1 << 3)
-#define PLAYER_AVATAR_FLAG_4 (1 << 4)
-#define PLAYER_AVATAR_FLAG_5 (1 << 5)
-#define PLAYER_AVATAR_FLAG_6 (1 << 6)
-#define PLAYER_AVATAR_FLAG_7 (1 << 7)
+#define PLAYER_AVATAR_FLAG_ON_FOOT   (1 << 0)
+#define PLAYER_AVATAR_FLAG_MACH_BIKE (1 << 1)
+#define PLAYER_AVATAR_FLAG_ACRO_BIKE (1 << 2)
+#define PLAYER_AVATAR_FLAG_SURFING   (1 << 3)
+#define PLAYER_AVATAR_FLAG_4         (1 << 4)
+#define PLAYER_AVATAR_FLAG_5         (1 << 5)
+#define PLAYER_AVATAR_FLAG_6         (1 << 6)
+#define PLAYER_AVATAR_FLAG_DASH      (1 << 7)
 
 struct PlayerAvatar
 {
