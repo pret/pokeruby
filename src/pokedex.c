@@ -70,7 +70,7 @@ extern u8 gUnknown_08E96738[];
 extern u8 gUnknown_08E9C6DC[];
 extern u8 gUnknown_08E96888[];
 extern u8 gUnknown_08E96994[];
-extern u8 gUnknown_083A05CC[];
+extern struct SpriteSheet gUnknown_083A05CC;
 extern struct SpritePalette gUnknown_083A05DC[];
 extern u8 gUnknown_0839FA7C[];
 extern u8 gUnknown_0839F67C[];
@@ -771,7 +771,7 @@ bool8 sub_808D344(u8 a)
             ResetSpriteData();
             FreeAllSpritePalettes();
             gReservedSpritePaletteCount = 8;
-            LoadCompressedObjectPic(gUnknown_083A05CC);
+            LoadCompressedObjectPic(&gUnknown_083A05CC);
             LoadSpritePalettes(gUnknown_083A05DC);
             sub_808E978(a);
             gMain.state++;

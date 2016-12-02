@@ -15,7 +15,7 @@ extern u16 gSpecialVar_0x8004;
 extern u16 gMiscClockMale_Pal[];
 extern u16 gMiscClockFemale_Pal[];
 extern u8 gMiscClock_Gfx[];
-extern u8 gUnknown_083F7A90[];
+extern struct SpriteSheet gUnknown_083F7A90;
 extern struct SpritePalette gUnknown_083F7AA0;
 extern u8 gUnknown_08E95774[];
 extern u8 gUnknown_08E954B0[];
@@ -122,7 +122,7 @@ static void LoadWallClockGraphics(void)
     ResetSpriteData();
     ResetPaletteFade();
     FreeAllSpritePalettes();
-    LoadCompressedObjectPic(gUnknown_083F7A90);
+    LoadCompressedObjectPic(&gUnknown_083F7A90);
     LoadSpritePalettes(&gUnknown_083F7AA0);
     SetUpWindowConfig(&gWindowConfig_81E6C3C);
     InitMenuWindow(&gWindowConfig_81E6CE4);

@@ -11,6 +11,7 @@
 #include "task.h"
 #include "trig.h"
 #include "decompress.h"
+#include "sprite.h"
 
 struct MonCoords
 {
@@ -22,8 +23,8 @@ extern const u8 gStarterChoose_PokeballCoords[][2];
 extern u8 gUnknown_083F66F0[];
 extern u8 gBirchBagTilemap[];
 extern u8 gBirchGrassTilemap[];
-extern u8 gUnknown_083F7794[];
-extern u8 gUnknown_083F77A4[];
+extern struct SpriteSheet gUnknown_083F7794;
+extern struct SpriteSheet gUnknown_083F77A4;
 extern u8 gUnknown_083F62EC[];
 extern const u8 gStarterChoose_LabelCoords[][2];
 extern u16 gStarterMons[];
@@ -116,8 +117,8 @@ void CB2_ChooseStarter(void)
     ResetPaletteFade();
     FreeAllSpritePalettes();
     LoadPalette(gUnknown_083F62EC, 0, 0x40);
-    LoadCompressedObjectPic(gUnknown_083F7794);
-    LoadCompressedObjectPic(gUnknown_083F77A4);
+    LoadCompressedObjectPic(&gUnknown_083F7794);
+    LoadCompressedObjectPic(&gUnknown_083F77A4);
     LoadSpritePalettes(gUnknown_083F77B4);
     SetUpWindowConfig(&gWindowConfig_81E6C3C);
     InitMenuWindow(&gWindowConfig_81E6CE4);
