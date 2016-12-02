@@ -1,61 +1,6 @@
 #ifndef GUARD_MAIN_MENU_H
 #define GUARD_MAIN_MENU_H
 
-#include "gba/types.h"
-
-void CB2_MainMenu(void);
-void VBlankCB_MainMenu(void);
 void CB2_InitMainMenu(void);
-void Task_NewGameSpeech1(u8 taskId);
-// Task_NewGameSpeech2
-// Task_NewGameSpeech3
-// Task_NewGameSpeech4
-// Task_NewGameSpeech5
-// Task_NewGameSpeech6
-// Task_NewGameSpeech7
-// Task_NewGameSpeech8
-// Task_NewGameSpeech9
-// Task_NewGameSpeech10
-// Task_NewGameSpeech11
-// Task_NewGameSpeech12
-// Task_NewGameSpeech13
-// Task_NewGameSpeech14
-// Task_NewGameSpeech15
-// Task_NewGameSpeech16
-// Task_NewGameSpeech17
-// Task_NewGameSpeech18
-// Task_NewGameSpeech19
-// Task_NewGameSpeech20
-// Task_NewGameSpeech21
-// Task_NewGameSpeech22
-// Task_NewGameSpeech23
-// Task_NewGameSpeech24
-// Task_NewGameSpeech25
-// Task_NewGameSpeech26
-// Task_NewGameSpeech27
-// Task_NewGameSpeech28
-// Task_NewGameSpeech29
-// Task_NewGameSpeech30
-// Task_NewGameSpeech31
-// Task_NewGameSpeech32
-// Task_NewGameSpeech33
-// CB_ContinueNewGameSpeechPart2
-// nullsub_34
-// sub_800B240
-// CreateAzurillSprite
-// AddBirchSpeechObjects
-// Task_SpriteFadeOut
-// StartSpriteFadeOut
-// Task_SpriteFadeIn
-// StartSpriteFadeIn
-// sub_800B5A8
-// StartBackgroundFadeOut
-// sub_800B654
-// StartBackgroundFadeIn
-// CreateGenderMenu
-// GenderMenuProcessInput
-// CreateNameMenu
-// NameMenuProcessInput
-// SetPresetPlayerName
 
-#endif //GUARD_M4A_H
+#endif // GUARD_MAIN_MENU_H
