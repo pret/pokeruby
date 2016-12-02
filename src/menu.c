@@ -39,7 +39,7 @@ EWRAM_DATA u16 gMenuTextWindowTileOffset = 0;
 EWRAM_DATA u16 gMenuTextWindowContentTileOffset = 0;
 EWRAM_DATA u16 gMenuMessageBoxContentTileOffset = 0;
 
-extern const u8 *gUnknown_08376D74[][2];
+extern const struct MenuAction gUnknown_08376D74[];
 
 void InitMenuWindow(const struct WindowConfig *winConfig)
 {
@@ -540,25 +540,25 @@ u8 sub_807288C(u8 column)
     return gMenu.columnXCoords[column];
 }
 
-void PrintMenuItems(u8 left, u8 top, u8 menuItemCount, u8 * const menuItems[][2])
+void PrintMenuItems(u8 left, u8 top, u8 menuItemCount, const struct MenuAction menuItems[])
 {
     u8 i;
 
     for (i = 0; i < menuItemCount; i++)
-        MenuPrint(menuItems[i][0], left, top + 2 * i);
+        MenuPrint(menuItems[i].text, left, top + 2 * i);
 }
 
-void PrintMenuItemsReordered(u8 left, u8 top, u8 menuItemCount, u8 * const menuItems[][2], u8 *order)
+void PrintMenuItemsReordered(u8 left, u8 top, u8 menuItemCount, const struct MenuAction menuItems[], u8 *order)
 {
     u8 i;
 
     for (i = 0; i < menuItemCount; i++)
-        MenuPrint(menuItems[order[i]][0], left, top + 2 * i);
+        MenuPrint(menuItems[order[i]].text, left, top + 2 * i);
 }
 
 void InitYesNoMenu(u8 left, u8 top, u8 a3)
 {
-    PrintMenuItems(left + 1, top + 1, 2, (void *)gUnknown_08376D74);
+    PrintMenuItems(left + 1, top + 1, 2, gUnknown_08376D74);
     InitMenu(0, left + 1, top + 1, 2, 0, a3);
 }
 
