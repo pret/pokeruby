@@ -28,7 +28,7 @@ extern struct SpriteTemplate gSpriteTemplate_8393EE4;
 extern struct SpriteSheet gUnknown_08393EFC;
 extern struct SpriteTemplate gSpriteTemplate_8393F74;
 extern struct SpriteSheet gUnknown_08393F8C;
-extern u8 gUnknown_08393F9C[];
+extern const struct SpritePalette gUnknown_08393F9C[];
 extern struct SpriteTemplate gSpriteTemplate_8393FC0;
 extern struct SpriteSheet gUnknown_08393FD8;
 extern u8 gUnknown_08E9D8CC[];
@@ -257,7 +257,7 @@ void CB2_InitTitleScreen(void)
         LoadCompressedObjectPic(&gUnknown_08393F8C);
         LoadCompressedObjectPic(&gUnknown_08393FD8);
         LoadPalette(gUnknown_08E9F624, 0x100, 0x1C0);
-        LoadSpritePalette(gUnknown_08393F9C);
+        LoadSpritePalette(&gUnknown_08393F9C[0]);
         gMain.state = 2;
         break;
     case 2:
