@@ -23,7 +23,7 @@ void StoreWordInTwoHalfwords(u16 *, u32);
 void LoadWordFromTwoHalfwords(u16 *, u32);
 
 // asm/daycare.o
-u8 daycare_count_pokemon(u32);
+u8 daycare_count_pokemon(u8 *);
 void sub_8041324(struct BoxPokemon *, void *);
 void sub_8041790(int i);
 u16 sub_8041870(u16);
