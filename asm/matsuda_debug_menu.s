@@ -1346,18 +1346,18 @@ _080AAFD4: .4byte gUnknown_02038680
 _080AAFD8: .4byte gUnknown_02038678
 	thumb_func_end sub_80AAF30
 
-	thumb_func_start MasudaDebugMenu_SetHighScore
-MasudaDebugMenu_SetHighScore: @ 80AAFDC
+	thumb_func_start MatsudaDebugMenu_SetHighScore
+MatsudaDebugMenu_SetHighScore: @ 80AAFDC
 	push {lr}
 	bl sub_80AAF30
 	bl sub_8071C20
 	movs r0, 0x1
 	pop {r1}
 	bx r1
-	thumb_func_end MasudaDebugMenu_SetHighScore
+	thumb_func_end MatsudaDebugMenu_SetHighScore
 
-	thumb_func_start MasudaDebugMenu_ResetHighScore
-MasudaDebugMenu_ResetHighScore: @ 80AAFEC
+	thumb_func_start MatsudaDebugMenu_ResetHighScore
+MatsudaDebugMenu_ResetHighScore: @ 80AAFEC
 	push {r4,lr}
 	ldr r1, _080AB01C @ =gUnknown_0203856C
 	movs r0, 0
@@ -1387,10 +1387,10 @@ _080AB01C: .4byte gUnknown_0203856C
 _080AB020: .4byte gUnknown_02038678
 _080AB024: .4byte gUnknown_02038680
 _080AB028: .4byte gUnknown_02038670
-	thumb_func_end MasudaDebugMenu_ResetHighScore
+	thumb_func_end MatsudaDebugMenu_ResetHighScore
 
-	thumb_func_start MasudaDebugMenu_SetArtMuseumItems
-MasudaDebugMenu_SetArtMuseumItems: @ 80AB02C
+	thumb_func_start MatsudaDebugMenu_SetArtMuseumItems
+MatsudaDebugMenu_SetArtMuseumItems: @ 80AB02C
 	push {r4,r5,lr}
 	ldr r1, _080AB078 @ =gUnknown_02038695
 	movs r0, 0x3
@@ -1432,7 +1432,7 @@ _080AB058:
 _080AB078: .4byte gUnknown_02038695
 _080AB07C: .4byte gUnknown_02038690
 _080AB080: .4byte gScriptContestCategory
-	thumb_func_end MasudaDebugMenu_SetArtMuseumItems
+	thumb_func_end MatsudaDebugMenu_SetArtMuseumItems
 
 	thumb_func_start unref_sub_80AB084
 unref_sub_80AB084: @ 80AB084

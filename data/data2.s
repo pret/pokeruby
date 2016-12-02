@@ -13747,40 +13747,40 @@ gBattleAnimSpriteTemplate_83C2010:: @ 83C2010
 @ 83C9150
 	.string "テストです$" @ "test"
 
-gMasudaDebugMenu_ActionContestText:
+gMatsudaDebugMenu_ActionContestText:
 	.string "Contest$"
 
-gMasudaDebugMenu_ActionContestResultsText:
+gMatsudaDebugMenu_ActionContestResultsText:
 	.string "Contest results$"
 	.string "パラメータへんこう$" @ "Change parameter"
 	.string "わざ へんこう$" @ "Change move"
 
-gMasudaDebugMenu_ActionContestCommText:
+gMatsudaDebugMenu_ActionContestCommText:
 	.string "Contest (comm.)$"
 
-gMasudaDebugMenu_ActionCommTestText:
+gMatsudaDebugMenu_ActionCommTestText:
 	.string "Init comm. data$"
 
-gMasudaDebugMenu_ActionSetHighScoreText:
+gMatsudaDebugMenu_ActionSetHighScoreText:
 	.string "Set highest score$"
 
-gMasudaDebugMenu_ActionResetHighScoreText:
+gMatsudaDebugMenu_ActionResetHighScoreText:
 	.string "Reset highest score$"
 
-gMasudaDebugMenu_ActionSetAllArtMuseumText:
+gMatsudaDebugMenu_ActionSetAllArtMuseumText:
 	.string "Set all art museum items$"
 
 	.align 2
-gMasudaDebugMenuActions:: @ 83C91F0
-	.4byte gMasudaDebugMenu_ActionContestText, MasudaDebugMenu_Contest
-	.4byte gMasudaDebugMenu_ActionContestResultsText, MasudaDebugMenu_ContestResults
-	.4byte gMasudaDebugMenu_ActionContestCommText, MasudaDebugMenu_ContestComm
-	.4byte gMasudaDebugMenu_ActionCommTestText, MasudaDebugMenu_CommTest
-	.4byte gMasudaDebugMenu_ActionSetHighScoreText, MasudaDebugMenu_SetHighScore
-	.4byte gMasudaDebugMenu_ActionResetHighScoreText, MasudaDebugMenu_ResetHighScore
-	.4byte gMasudaDebugMenu_ActionSetAllArtMuseumText, MasudaDebugMenu_SetArtMuseumItems
+gMatsudaDebugMenuActions:: @ 83C91F0
+	.4byte gMatsudaDebugMenu_ActionContestText, MatsudaDebugMenu_Contest
+	.4byte gMatsudaDebugMenu_ActionContestResultsText, MatsudaDebugMenu_ContestResults
+	.4byte gMatsudaDebugMenu_ActionContestCommText, MatsudaDebugMenu_ContestComm
+	.4byte gMatsudaDebugMenu_ActionCommTestText, MatsudaDebugMenu_CommTest
+	.4byte gMatsudaDebugMenu_ActionSetHighScoreText, MatsudaDebugMenu_SetHighScore
+	.4byte gMatsudaDebugMenu_ActionResetHighScoreText, MatsudaDebugMenu_ResetHighScore
+	.4byte gMatsudaDebugMenu_ActionSetAllArtMuseumText, MatsudaDebugMenu_SetArtMuseumItems
 
-gMasudaDebugMenu_UnknownByteArray:: @ 83C9228
+gMatsudaDebugMenu_UnknownByteArray:: @ 83C9228
 	.byte 0xFC, 0x02, 0x0F, 0x00, 0xFF
 
 Unknown_083C922D:
@@ -13793,7 +13793,7 @@ Unknown_083C924E:
 gUnknown_083C926E:: @ 83C926E
 	.incbin "baserom.gba", 0x003c926e, 0x8
 
-gMasudaDebugMenuContestTopLeft:: @ 83C9276
+gMatsudaDebugMenuContestTopLeft:: @ 83C9276
 	.byte 0, 6
 	.byte 15, 6
 	.byte 0, 8
@@ -13852,37 +13852,37 @@ gUnknown_083C92E4:: @ 83C92E4
 	.4byte sub_80AABF0
 	.4byte sub_80AAD44
 
-gMasudaDebugMenu_StartText:: @ 83C932C
+gMatsudaDebugMenu_StartText:: @ 83C932C
 	.string "{COLOR CYAN}{HIGHLIGHT RED}$"
 	.string "かいし$" @ Start
 
-gMasudaDebugMenu_GoBackText:: @ 83C9337
+gMatsudaDebugMenu_GoBackText:: @ 83C9337
 	.string "もどる$" @ Go Back
 
-gMasudaDebugMenu_BattlePointsText:: @ 83C933B
+gMatsudaDebugMenu_BattlePointsText:: @ 83C933B
 	.string "{COLOR MAGENTA}BP.$"
 
-gMasudaDebugMenuText_Cool:
+gMatsudaDebugMenuText_Cool:
 	.string "かっこよさ$" @ coolness
-gMasudaDebugMenuText_Cute:
+gMatsudaDebugMenuText_Cute:
 	.string "かわいさ$" @ cuteness
-gMasudaDebugMenuText_Beauty:
+gMatsudaDebugMenuText_Beauty:
 	.string "うつくしさ$" @ beauty
-gMasudaDebugMenuText_Smart:
+gMatsudaDebugMenuText_Smart:
 	.string "かしこさ$" @ smartness
-gMasudaDebugMenuText_Tough:
+gMatsudaDebugMenuText_Tough:
 	.string "たくましさ$" @ toughness
-gMasudaDebugMenuText_Sheen:
+gMatsudaDebugMenuText_Sheen:
 	.string "けづや$" @ sheen
 
 	.align 2
-gMasudaDebugMenuTextList1:: @ 83C9364
-	.4byte gMasudaDebugMenuText_Cool
-	.4byte gMasudaDebugMenuText_Cute
-	.4byte gMasudaDebugMenuText_Beauty
-	.4byte gMasudaDebugMenuText_Smart
-	.4byte gMasudaDebugMenuText_Tough
-	.4byte gMasudaDebugMenuText_Sheen
+gMatsudaDebugMenuTextList1:: @ 83C9364
+	.4byte gMatsudaDebugMenuText_Cool
+	.4byte gMatsudaDebugMenuText_Cute
+	.4byte gMatsudaDebugMenuText_Beauty
+	.4byte gMatsudaDebugMenuText_Smart
+	.4byte gMatsudaDebugMenuText_Tough
+	.4byte gMatsudaDebugMenuText_Sheen
 
 Unknown_83C937C:
 	.string "かっこよさコンテスト$" @ Cool Contest
