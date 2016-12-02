@@ -342,7 +342,7 @@ _080C87EA:
 	mov r0, r10
 	movs r2, 0x40
 	bl memcpy
-	ldr r0, _080C8824 @ =gUnknown_02038572
+	ldr r0, _080C8824 @ =gUnknown_02038570 + 0x2
 	adds r4, r5, r0
 	ldrh r0, [r6, 0x1A]
 	cmp r0, 0x1
@@ -359,7 +359,7 @@ _080C87EA:
 _080C8818: .4byte gUnknown_02038570
 _080C881C: .4byte gLinkPlayers
 _080C8820: .4byte gBlockRecvBuffer
-_080C8824: .4byte gUnknown_02038572
+_080C8824: .4byte gUnknown_02038570 + 0x2
 _080C8828:
 	ldrb r0, [r4, 0xA]
 	cmp r0, 0xFC

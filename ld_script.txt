@@ -115,7 +115,8 @@ SECTIONS {
         asm/item_menu.o(.text);
         asm/battle_anim_80A7E7C.o(.text);
         src/item.o(.text);
-        asm/matuda_debug_menu.o(.text);
+        src/matsuda_debug_menu.o(.text);
+        asm/matsuda_debug_menu.o(.text);
         asm/contest.o(.text);
         asm/shop.o(.text);
         src/berry.o(.text);
