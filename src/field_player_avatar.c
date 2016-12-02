@@ -852,7 +852,7 @@ void sub_80597F4(void)
     
     npc_clear_strange_bits(playerMapObj);
     FieldObjectSetDirection(playerMapObj, playerMapObj->mapobj_unk_18);
-    if (TestPlayerAvatarFlags(6))
+    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
     {
         sub_80E6084();
         sub_80E6010(0);
@@ -914,7 +914,7 @@ bool8 PartyHasMonWithSurf(void)
 {
     u8 i;
     
-    if (!TestPlayerAvatarFlags(8))
+    if (!TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
     {
         for (i = 0; i < 6; i++)
         {
@@ -929,7 +929,7 @@ bool8 PartyHasMonWithSurf(void)
 
 bool8 IsPlayerSurfingNorth(void)
 {
-    if (player_get_direction_upper_nybble() == 2 && TestPlayerAvatarFlags(8))
+    if (player_get_direction_upper_nybble() == 2 && TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
         return TRUE;
     else
         return FALSE;
@@ -1029,7 +1029,7 @@ void InitPlayerAvatar(s16 a, s16 b, u8 c, u8 d)
 void sub_8059B88(u8 a)
 {
     gMapObjects[gPlayerAvatar.mapObjectId].mapobj_bit_13 = a;
-    if (TestPlayerAvatarFlags(8))
+    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
         gSprites[gMapObjects[gPlayerAvatar.mapObjectId].mapobj_unk_1A].invisible = a;
 }
 
