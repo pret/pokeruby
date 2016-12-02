@@ -60,11 +60,11 @@ extern u8 gUnknown_083C92A8[];
 extern u8 gUnknown_083C9282[];
 extern u8 gUnknown_0203857D[][64];
 extern u8 gUnknown_083C926E[][2];
-extern u8 gUnknown_083C928E[][2];
+extern const u8 gUnknown_083C928E[][2];
 extern u8 unk_2000000[];
-extern u8 gMasudaDebugMenu_GoBackText[];
-extern u8 gMasudaDebugMenu_BattlePointsText[];
-extern u8 gMasudaDebugMenu_StartText[];
+extern u8 gMatsudaDebugMenu_GoBackText[];
+extern u8 gMatsudaDebugMenu_BattlePointsText[];
+extern u8 gMatsudaDebugMenu_StartText[];
 
 extern u8 gUnknown_083C92BC[];
 extern u8 gUnknown_083C92B4[];
@@ -72,19 +72,23 @@ extern struct SpriteTemplate gSpriteTemplate_83C92CC;
 
 extern u8 gMoveNames[][13];
 
-extern u8 gMasudaDebugMenu_UnknownByteArray[];
-extern u32 gMasudaDebugMenuTextList1[];
-extern u8 gMasudaDebugMenuContestTopLeft[][2];
+extern u8 gMatsudaDebugMenu_UnknownByteArray[];
+extern u32 gMatsudaDebugMenuTextList1[];
+extern u8 gMatsudaDebugMenuContestTopLeft[][2];
 
 struct UnknownStruct
 {
     u8 text[2];
     u8 unk2;
-    u8 filler3[28];
-    u16 unk1E[1];
-    u8 filler4[5];
-    u8 unkArr[6];
-    u8 filler[20];
+    u8 filler3[27];
+    u16 unk1E[4];
+    u8 unk26;
+    u8 unk27;
+    u8 unk28;
+    u8 unk29;
+    u8 unk2A;
+    u8 unk2B;
+    u8 filler2C[20];
 };
 
 extern struct UnknownStruct gUnknown_02038570[];
@@ -98,7 +102,7 @@ struct DebugMenuAction
    u8 (*func)(void);
 };
 
-extern struct DebugMenuAction gMasudaDebugMenuActions[];
+extern struct DebugMenuAction gMatsudaDebugMenuActions[];
 
 s8 sub_80A9B78(void);
 void sub_80A9BE4(u8 taskId);
@@ -112,7 +116,7 @@ u8 unref_sub_80A9B28(void)
 {
     MenuZeroFillScreen();
     MenuDrawTextWindow(0, 0, 17, 18);
-    PrintMenuItems(1, 1, 7, gMasudaDebugMenuActions);
+    PrintMenuItems(1, 1, 7, gMatsudaDebugMenuActions);
     InitMenu(0, 1, 1, 7, 0, 16);
     gCallback_03004AE8 = sub_80A9B78;
     return 0;
@@ -127,7 +131,7 @@ s8 sub_80A9B78(void)
     case -2:
         return 0;
     default:
-        gCallback_03004AE8 = gMasudaDebugMenuActions[choice].func;
+        gCallback_03004AE8 = gMatsudaDebugMenuActions[choice].func;
         return 0;
     case -1:
         sub_8071C20();
@@ -135,7 +139,7 @@ s8 sub_80A9B78(void)
     }
 }
 
-s8 MasudaDebugMenu_ContestResults(void)
+s8 MatsudaDebugMenu_ContestResults(void)
 {
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
     CreateTask(sub_80A9BE4, 0xFF);
@@ -155,20 +159,20 @@ void sub_80A9BE4(u8 taskId)
     }
 }
 
-s8 MasudaDebugMenu_Contest(void)
+s8 MatsudaDebugMenu_Contest(void)
 {
     gUnknown_0203869A = 0;
     sub_80AA10C();
     return 0;
 }
 
-s8 MasudaDebugMenu_ContestComm(void)
+s8 MatsudaDebugMenu_ContestComm(void)
 {
     sub_80AA10C();
     return 0;
 }
 
-s8 MasudaDebugMenu_CommTest(void)
+s8 MatsudaDebugMenu_CommTest(void)
 {
     u8 newTaskId;
     u8 newTaskId2;
@@ -336,7 +340,7 @@ void sub_80A9FE4(void)
     u32 i;
     u8 ptr[5];
     
-    memcpy(ptr, gMasudaDebugMenu_UnknownByteArray, 5);
+    memcpy(ptr, gMatsudaDebugMenu_UnknownByteArray, 5);
 
     addr = (void *)VRAM;
     i = VRAM_SIZE;
@@ -409,17 +413,17 @@ void sub_80AA10C(void)
 
     for(i = 0; i < 6; i++)
     {
-        sub_8003460(&gMenuWindow, gMasudaDebugMenuTextList1[i], 
-            (0xA * i + 0x2A), gMasudaDebugMenuContestTopLeft[i][0], 
-            gMasudaDebugMenuContestTopLeft[i][1]);
+        sub_8003460(&gMenuWindow, gMatsudaDebugMenuTextList1[i], 
+            (0xA * i + 0x2A), gMatsudaDebugMenuContestTopLeft[i][0], 
+            gMatsudaDebugMenuContestTopLeft[i][1]);
     }
 
     gScriptContestCategory = gScriptContestRank = 0;
     zero = 0;
     sub_80AA5BC(zero);
     sub_80AA5E8((u8)gScriptContestRank);
-    sub_8003460(&gMenuWindow, gMasudaDebugMenu_GoBackText, 0xD6, 0x12, 0x12);
-    sub_8003460(&gMenuWindow, gMasudaDebugMenu_BattlePointsText, 0xDC, zero, 0xC);
+    sub_8003460(&gMenuWindow, gMatsudaDebugMenu_GoBackText, 0xD6, 0x12, 0x12);
+    sub_8003460(&gMenuWindow, gMatsudaDebugMenu_BattlePointsText, 0xDC, zero, 0xC);
     LoadSpriteSheet(gUnknown_083C92B4);
     LoadSpritePalette(gUnknown_083C92BC);
     sub_80AA280(3);
@@ -437,7 +441,7 @@ void sub_80AA280(u8 var)
     u8 i;
 
     FillWindowRect_DefaultPalette(&gMenuWindow, 0, 0, 0, 0x1E, 3);
-    StringCopy(unk_2000000, &gMasudaDebugMenu_StartText);
+    StringCopy(unk_2000000, &gMatsudaDebugMenu_StartText);
     StringAppend(unk_2000000, &gUnknown_0203857D[var][0]);
 
     for(i = 0; i < 4; i++)
@@ -454,484 +458,46 @@ void sub_80AA280(u8 var)
     }
 }
 
-#ifdef NONMATCHING
 void sub_80AA340(u8 var)
 {
-    ConvertIntToDecimalStringN(unk_2000000, gUnknown_02038570[var].unkArr[1], STR_CONV_MODE_RIGHT_ALIGN, 3);
+    ConvertIntToDecimalStringN(unk_2000000, gUnknown_02038570[var].unk26, STR_CONV_MODE_RIGHT_ALIGN, 3);
     sub_8003460(&gMenuWindow, unk_2000000, 0x66, gUnknown_083C9282[0], gUnknown_083C9282[1]);
 }
-#else
-__attribute__((naked))
-void sub_80AA340(u8 var)
-{
-    asm(".syntax unified\n\
-    push {r4,lr}\n\
-    sub sp, 0x4\n\
-    lsls r0, 24\n\
-    ldr r4, _080AA378 @ =0x02000000\n\
-    ldr r1, _080AA37C @ =gUnknown_02038570\n\
-    lsrs r0, 18\n\
-    adds r0, r1\n\
-    adds r0, 0x26\n\
-    ldrb r1, [r0]\n\
-    adds r0, r4, 0\n\
-    movs r2, 0x1\n\
-    movs r3, 0x3\n\
-    bl ConvertIntToDecimalStringN\n\
-    ldr r0, _080AA380 @ =gMenuWindow\n\
-    ldr r1, _080AA384 @ =gUnknown_083C9282\n\
-    ldrb r3, [r1]\n\
-    ldrb r1, [r1, 0x1]\n\
-    str r1, [sp]\n\
-    adds r1, r4, 0\n\
-    movs r2, 0x66\n\
-    bl sub_8003460\n\
-    add sp, 0x4\n\
-    pop {r4}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_080AA378: .4byte 0x02000000\n\
-_080AA37C: .4byte gUnknown_02038570\n\
-_080AA380: .4byte gMenuWindow\n\
-_080AA384: .4byte gUnknown_083C9282\n\
-    .syntax divided");
-}    
-#endif
 
-#ifdef NONMATCHING
 void sub_80AA388(u8 var)
 {
-    ConvertIntToDecimalStringN(unk_2000000, gUnknown_02038570[var].unkArr[3], STR_CONV_MODE_RIGHT_ALIGN, 3);
+    ConvertIntToDecimalStringN(unk_2000000, gUnknown_02038570[var].unk28, STR_CONV_MODE_RIGHT_ALIGN, 3);
     sub_8003460(&gMenuWindow, unk_2000000, 0x6C, gUnknown_083C9282[2], gUnknown_083C9282[3]);
 }
-#else
-__attribute__((naked))
-void sub_80AA388(u8 var)
-{
-    asm(".syntax unified\n\
-    push {r4,lr}\n\
-    sub sp, 0x4\n\
-    lsls r0, 24\n\
-    ldr r4, _080AA3C0 @ =0x02000000\n\
-    ldr r1, _080AA3C4 @ =gUnknown_02038570\n\
-    lsrs r0, 18\n\
-    adds r0, r1\n\
-    adds r0, 0x28\n\
-    ldrb r1, [r0]\n\
-    adds r0, r4, 0\n\
-    movs r2, 0x1\n\
-    movs r3, 0x3\n\
-    bl ConvertIntToDecimalStringN\n\
-    ldr r0, _080AA3C8 @ =gMenuWindow\n\
-    ldr r1, _080AA3CC @ =gUnknown_083C9282\n\
-    ldrb r3, [r1, 0x2]\n\
-    ldrb r1, [r1, 0x3]\n\
-    str r1, [sp]\n\
-    adds r1, r4, 0\n\
-    movs r2, 0x6C\n\
-    bl sub_8003460\n\
-    add sp, 0x4\n\
-    pop {r4}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_080AA3C0: .4byte 0x02000000\n\
-_080AA3C4: .4byte gUnknown_02038570\n\
-_080AA3C8: .4byte gMenuWindow\n\
-_080AA3CC: .4byte gUnknown_083C9282\n\
-    .syntax divided");
-}    
-#endif
 
-#ifdef NONMATCHING
 void sub_80AA3D0(u8 var)
 {
-    ConvertIntToDecimalStringN(unk_2000000, gUnknown_02038570[var].unkArr[2], STR_CONV_MODE_RIGHT_ALIGN, 3);
+    ConvertIntToDecimalStringN(unk_2000000, gUnknown_02038570[var].unk27, STR_CONV_MODE_RIGHT_ALIGN, 3);
     sub_8003460(&gMenuWindow, unk_2000000, 0x72, gUnknown_083C9282[4], gUnknown_083C9282[5]);
 }
-#else
-__attribute__((naked))
-void sub_80AA3D0(u8 var)
-{
-    asm(".syntax unified\n\
-    push {r4,lr}\n\
-    sub sp, 0x4\n\
-    lsls r0, 24\n\
-    ldr r4, _080AA408 @ =0x02000000\n\
-    ldr r1, _080AA40C @ =gUnknown_02038570\n\
-    lsrs r0, 18\n\
-    adds r0, r1\n\
-    adds r0, 0x27\n\
-    ldrb r1, [r0]\n\
-    adds r0, r4, 0\n\
-    movs r2, 0x1\n\
-    movs r3, 0x3\n\
-    bl ConvertIntToDecimalStringN\n\
-    ldr r0, _080AA410 @ =gMenuWindow\n\
-    ldr r1, _080AA414 @ =gUnknown_083C9282\n\
-    ldrb r3, [r1, 0x4]\n\
-    ldrb r1, [r1, 0x5]\n\
-    str r1, [sp]\n\
-    adds r1, r4, 0\n\
-    movs r2, 0x72\n\
-    bl sub_8003460\n\
-    add sp, 0x4\n\
-    pop {r4}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_080AA408: .4byte 0x02000000\n\
-_080AA40C: .4byte gUnknown_02038570\n\
-_080AA410: .4byte gMenuWindow\n\
-_080AA414: .4byte gUnknown_083C9282\n\
-    .syntax divided");
-}    
-#endif
 
-#ifdef NONMATCHING
 void sub_80AA418(u8 var)
 {
-    ConvertIntToDecimalStringN(unk_2000000, gUnknown_02038570[var].unkArr[4], STR_CONV_MODE_RIGHT_ALIGN, 3);
+    ConvertIntToDecimalStringN(unk_2000000, gUnknown_02038570[var].unk29, STR_CONV_MODE_RIGHT_ALIGN, 3);
     sub_8003460(&gMenuWindow, unk_2000000, 0x78, gUnknown_083C9282[6], gUnknown_083C9282[7]);
 }
-#else
-__attribute__((naked))
-void sub_80AA418(u8 var)
-{
-    asm(".syntax unified\n\
-    push {r4,lr}\n\
-    sub sp, 0x4\n\
-    lsls r0, 24\n\
-    ldr r4, _080AA450 @ =0x02000000\n\
-    ldr r1, _080AA454 @ =gUnknown_02038570\n\
-    lsrs r0, 18\n\
-    adds r0, r1\n\
-    adds r0, 0x29\n\
-    ldrb r1, [r0]\n\
-    adds r0, r4, 0\n\
-    movs r2, 0x1\n\
-    movs r3, 0x3\n\
-    bl ConvertIntToDecimalStringN\n\
-    ldr r0, _080AA458 @ =gMenuWindow\n\
-    ldr r1, _080AA45C @ =gUnknown_083C9282\n\
-    ldrb r3, [r1, 0x6]\n\
-    ldrb r1, [r1, 0x7]\n\
-    str r1, [sp]\n\
-    adds r1, r4, 0\n\
-    movs r2, 0x78\n\
-    bl sub_8003460\n\
-    add sp, 0x4\n\
-    pop {r4}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_080AA450: .4byte 0x02000000\n\
-_080AA454: .4byte gUnknown_02038570\n\
-_080AA458: .4byte gMenuWindow\n\
-_080AA45C: .4byte gUnknown_083C9282\n\
-    .syntax divided");
-}    
-#endif
 
-#ifdef NONMATCHING
 void sub_80AA460(u8 var)
 {
-    ConvertIntToDecimalStringN(unk_2000000, gUnknown_02038570[var].unkArr[5], STR_CONV_MODE_RIGHT_ALIGN, 3);
+    ConvertIntToDecimalStringN(unk_2000000, gUnknown_02038570[var].unk2A, STR_CONV_MODE_RIGHT_ALIGN, 3);
     sub_8003460(&gMenuWindow, unk_2000000, 0x7E, gUnknown_083C9282[8], gUnknown_083C9282[9]);
 }
-#else
-__attribute__((naked))
-void sub_80AA460(u8 var)
-{
-    asm(".syntax unified\n\
-    push {r4,lr}\n\
-    sub sp, 0x4\n\
-    lsls r0, 24\n\
-    ldr r4, _080AA498 @ =0x02000000\n\
-    ldr r1, _080AA49C @ =gUnknown_02038570\n\
-    lsrs r0, 18\n\
-    adds r0, r1\n\
-    adds r0, 0x2A\n\
-    ldrb r1, [r0]\n\
-    adds r0, r4, 0\n\
-    movs r2, 0x1\n\
-    movs r3, 0x3\n\
-    bl ConvertIntToDecimalStringN\n\
-    ldr r0, _080AA4A0 @ =gMenuWindow\n\
-    ldr r1, _080AA4A4 @ =gUnknown_083C9282\n\
-    ldrb r3, [r1, 0x8]\n\
-    ldrb r1, [r1, 0x9]\n\
-    str r1, [sp]\n\
-    adds r1, r4, 0\n\
-    movs r2, 0x7E\n\
-    bl sub_8003460\n\
-    add sp, 0x4\n\
-    pop {r4}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_080AA498: .4byte 0x02000000\n\
-_080AA49C: .4byte gUnknown_02038570\n\
-_080AA4A0: .4byte gMenuWindow\n\
-_080AA4A4: .4byte gUnknown_083C9282\n\
-    .syntax divided");
-}    
-#endif
 
-#ifdef NONMATCHING
 void sub_80AA4A8(u8 var)
 {
-    ConvertIntToDecimalStringN(unk_2000000, gUnknown_02038570[var].unkArr[6], STR_CONV_MODE_RIGHT_ALIGN, 3);
+    ConvertIntToDecimalStringN(unk_2000000, gUnknown_02038570[var].unk2B, STR_CONV_MODE_RIGHT_ALIGN, 3);
     sub_8003460(&gMenuWindow, unk_2000000, 0x84, gUnknown_083C9282[10], gUnknown_083C9282[11]);
 }
-#else
-__attribute__((naked))
-void sub_80AA4A8(u8 var)
-{
-    asm(".syntax unified\n\
-    push {r4,lr}\n\
-    sub sp, 0x4\n\
-    lsls r0, 24\n\
-    ldr r4, _080AA4E0 @ =0x02000000\n\
-    ldr r1, _080AA4E4 @ =gUnknown_02038570\n\
-    lsrs r0, 18\n\
-    adds r0, r1\n\
-    adds r0, 0x2B\n\
-    ldrb r1, [r0]\n\
-    adds r0, r4, 0\n\
-    movs r2, 0x1\n\
-    movs r3, 0x3\n\
-    bl ConvertIntToDecimalStringN\n\
-    ldr r0, _080AA4E8 @ =gMenuWindow\n\
-    ldr r1, _080AA4EC @ =gUnknown_083C9282\n\
-    ldrb r3, [r1, 0xA]\n\
-    ldrb r1, [r1, 0xB]\n\
-    str r1, [sp]\n\
-    adds r1, r4, 0\n\
-    movs r2, 0x84\n\
-    bl sub_8003460\n\
-    add sp, 0x4\n\
-    pop {r4}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_080AA4E0: .4byte 0x02000000\n\
-_080AA4E4: .4byte gUnknown_02038570\n\
-_080AA4E8: .4byte gMenuWindow\n\
-_080AA4EC: .4byte gUnknown_083C9282\n\
-    .syntax divided");
-}    
-#endif
 
-#ifdef NONMATCHING
 void sub_80AA4F0(u8 var1, u8 var2)
 {
-    u8 temp = gUnknown_083C928E[var2][0] + 7;
-    u8 temp2 = gUnknown_083C928E[var2][1] + 1;
-
-    FillWindowRect_DefaultPalette(&gMenuWindow, 0, temp, temp2, temp, temp2);
-    sub_8003460(&gMenuWindow, gMoveNames[gUnknown_02038570[var1].unk1E[var2]], var2 * 14 + 0x8A, temp, temp2);
+    FillWindowRect_DefaultPalette(&gMenuWindow, 0, gUnknown_083C928E[var2][0], gUnknown_083C928E[var2][1], gUnknown_083C928E[var2][0] + 7, gUnknown_083C928E[var2][1] + 1);
+    sub_8003460(&gMenuWindow, gMoveNames[gUnknown_02038570[var1].unk1E[var2]], 0x8A + var2 * 14, gUnknown_083C928E[var2][0], gUnknown_083C928E[var2][1]);
     ConvertIntToDecimalStringN(gStringVar1, gUnknown_02038570[var1].unk1E[var2], STR_CONV_MODE_LEADING_ZEROS, 3);
-    sub_8003460(&gMenuWindow, gStringVar1, var2 * 2 + 0xFA, temp, temp2);
+    sub_8003460(&gMenuWindow, gStringVar1, 0xFA + var2 * 6, gUnknown_083C928E[var2][0] + 7, gUnknown_083C928E[var2][1]);
 }
-#else
-__attribute__((naked))
-void sub_80AA4F0(u8 var1, u8 var2)
-{
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r10\n\
-    mov r6, r9\n\
-    mov r5, r8\n\
-    push {r5-r7}\n\
-    sub sp, 0x8\n\
-    adds r4, r0, 0\n\
-    adds r6, r1, 0\n\
-    lsls r4, 24\n\
-    lsrs r4, 24\n\
-    lsls r6, 24\n\
-    lsrs r6, 24\n\
-    ldr r7, _080AA5A8 @ =gMenuWindow\n\
-    ldr r0, _080AA5AC @ =gUnknown_083C928E\n\
-    lsls r5, r6, 1\n\
-    adds r1, r5, r0\n\
-    ldrb r1, [r1]\n\
-    mov r9, r1\n\
-    adds r0, 0x1\n\
-    adds r0, r5, r0\n\
-    ldrb r0, [r0]\n\
-    mov r10, r0\n\
-    movs r0, 0x7\n\
-    add r0, r9\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    mov r8, r0\n\
-    str r0, [sp]\n\
-    mov r0, r10\n\
-    adds r0, 0x1\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    str r0, [sp, 0x4]\n\
-    adds r0, r7, 0\n\
-    movs r1, 0\n\
-    mov r2, r9\n\
-    mov r3, r10\n\
-    bl FillWindowRect_DefaultPalette\n\
-    ldr r0, _080AA5B0 @ =gUnknown_02038570\n\
-    lsls r4, 6\n\
-    adds r4, r5, r4\n\
-    adds r0, 0x1E\n\
-    adds r4, r0\n\
-    ldrh r1, [r4]\n\
-    movs r0, 0xD\n\
-    muls r1, r0\n\
-    ldr r0, _080AA5B4 @ =gMoveNames\n\
-    adds r1, r0\n\
-    lsls r2, r6, 3\n\
-    subs r2, r6\n\
-    lsls r2, 17\n\
-    movs r0, 0x8A\n\
-    lsls r0, 16\n\
-    adds r2, r0\n\
-    lsrs r2, 16\n\
-    mov r0, r10\n\
-    str r0, [sp]\n\
-    adds r0, r7, 0\n\
-    mov r3, r9\n\
-    bl sub_8003460\n\
-    ldr r0, _080AA5B8 @ =gStringVar1\n\
-    mov r9, r0\n\
-    ldrh r1, [r4]\n\
-    movs r2, 0x2\n\
-    movs r3, 0x3\n\
-    bl ConvertIntToDecimalStringN\n\
-    adds r5, r6\n\
-    lsls r5, 17\n\
-    movs r0, 0xFA\n\
-    lsls r0, 16\n\
-    adds r5, r0\n\
-    lsrs r5, 16\n\
-    mov r0, r10\n\
-    str r0, [sp]\n\
-    adds r0, r7, 0\n\
-    mov r1, r9\n\
-    adds r2, r5, 0\n\
-    mov r3, r8\n\
-    bl sub_8003460\n\
-    add sp, 0x8\n\
-    pop {r3-r5}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    mov r10, r5\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_080AA5A8: .4byte gMenuWindow\n\
-_080AA5AC: .4byte gUnknown_083C928E\n\
-_080AA5B0: .4byte gUnknown_02038570\n\
-_080AA5B4: .4byte gMoveNames\n\
-_080AA5B8: .4byte gStringVar1\n\
-    .syntax divided");
-}
-#endif
-
-/*
-    thumb_func_start sub_80AA4F0
-sub_80AA4F0: @ 80AA4F0
-    push {r4-r7,lr}
-    mov r7, r10
-    mov r6, r9
-    mov r5, r8
-    push {r5-r7}
-    sub sp, 0x8
-    adds r4, r0, 0
-    adds r6, r1, 0
-    lsls r4, 24
-    lsrs r4, 24
-    lsls r6, 24
-    lsrs r6, 24
-    ldr r7, _080AA5A8 @ =gMenuWindow
-    ldr r0, _080AA5AC @ =gUnknown_083C928E
-    lsls r5, r6, 1
-    adds r1, r5, r0
-    ldrb r1, [r1]
-    mov r9, r1
-    adds r0, 0x1
-    adds r0, r5, r0
-    ldrb r0, [r0]
-    mov r10, r0
-    movs r0, 0x7
-    add r0, r9
-    lsls r0, 24
-    lsrs r0, 24
-    mov r8, r0
-    str r0, [sp]
-    mov r0, r10
-    adds r0, 0x1
-    lsls r0, 24
-    lsrs r0, 24
-    str r0, [sp, 0x4]
-    adds r0, r7, 0
-    movs r1, 0
-    mov r2, r9
-    mov r3, r10
-    bl FillWindowRect_DefaultPalette
-    ldr r0, _080AA5B0 @ =gUnknown_02038570
-    lsls r4, 6
-    adds r4, r5, r4
-    adds r0, 0x1E
-    adds r4, r0
-    ldrh r1, [r4]
-    movs r0, 0xD
-    muls r1, r0
-    ldr r0, _080AA5B4 @ =gMoveNames
-    adds r1, r0
-    lsls r2, r6, 3
-    subs r2, r6
-    lsls r2, 17
-    movs r0, 0x8A
-    lsls r0, 16
-    adds r2, r0
-    lsrs r2, 16
-    mov r0, r10
-    str r0, [sp]
-    adds r0, r7, 0
-    mov r3, r9
-    bl sub_8003460
-    ldr r0, _080AA5B8 @ =gStringVar1
-    mov r9, r0
-    ldrh r1, [r4]
-    movs r2, 0x2
-    movs r3, 0x3
-    bl ConvertIntToDecimalStringN
-    adds r5, r6
-    lsls r5, 17
-    movs r0, 0xFA
-    lsls r0, 16
-    adds r5, r0
-    lsrs r5, 16
-    mov r0, r10
-    str r0, [sp]
-    adds r0, r7, 0
-    mov r1, r9
-    adds r2, r5, 0
-    mov r3, r8
-    bl sub_8003460
-    add sp, 0x8
-    pop {r3-r5}
-    mov r8, r3
-    mov r9, r4
-    mov r10, r5
-    pop {r4-r7}
-    pop {r0}
-    bx r0
-    .align 2, 0
-_080AA5A8: .4byte gMenuWindow
-_080AA5AC: .4byte gUnknown_083C928E
-_080AA5B0: .4byte gUnknown_02038570
-_080AA5B4: .4byte gMoveNames
-_080AA5B8: .4byte gStringVar1
-    thumb_func_end sub_80AA4F0
-*/
