@@ -454,7 +454,7 @@ static bool8 ShouldJumpLedge(s16 a, s16 b, u8 c)
 
 static u8 sub_8058F6C(s16 a, s16 b, u8 c)
 {
-    if (FlagGet(0x829))
+    if (FlagGet(SYS_USE_STRENGTH))
     {
         u8 mapObjectId = GetFieldObjectIdByXY(a, b);
         
