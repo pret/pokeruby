@@ -1,17 +1,8 @@
 #include "global.h"
+#include "map_obj_lock.h"
+#include "asm.h"
+#include "field_player_avatar.h"
 #include "task.h"
-#include "fieldmap.h"
-
-extern void sub_80594C0(void);
-extern void sub_80597F4(void);
-extern void player_bitmagic(void);
-extern void sub_80643A4(struct MapObject *);
-extern void sub_8064470(u8);
-extern u8 GetFieldObjectIdByLocalIdAndMap(u8, u8, u8);
-extern u8 FieldObjectClearAnimIfSpecialAnimFinished(void *);
-extern void sub_80A2178(void);
-extern void sub_806451C(void);
-extern u8 FieldObjectFaceOppositeDirection(void *, u8);
 
 extern u16 gScriptFacing;
 

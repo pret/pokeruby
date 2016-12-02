@@ -1,5 +1,5 @@
 #include "global.h"
-#include "pokemon.h"
+#include "lottery_corner.h"
 #include "rng.h"
 #include "string_util.h"
 #include "var.h"
@@ -14,8 +14,6 @@ extern u16 gSpecialVar_0x8006;
 static EWRAM_DATA u16 sWinNumberDigit = 0;
 static EWRAM_DATA u16 sOtIdDigit = 0;
 
-void sub_8145D14(u32);
-u32 sub_8145D3C(void);
 static u8 GetMatchingDigits(u16, u16);
 
 void sub_8145A78(void)

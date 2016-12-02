@@ -1,14 +1,16 @@
 #include "global.h"
+#include "link.h"
+#include "asm.h"
 #include "main.h"
 #include "task.h"
 #include "text.h"
 #include "sprite.h"
 #include "songs.h"
-#include "link.h"
 #include "palette.h"
 #include "rng.h"
 #include "menu.h"
 #include "sound.h"
+#include "save.h"
 
 #define SIO_MULTI_CNT ((struct SioMultiCnt *)REG_ADDR_SIOCNT)
 
@@ -28,8 +30,6 @@ struct LinkTestBGInfo
     u32 dummy_8;
     u32 dummy_C;
 };
-
-extern void sub_80516C4(u8, u16);
 
 extern u8 unk_2000000[];
 extern u8 unk_2004000[];

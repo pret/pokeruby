@@ -1,12 +1,17 @@
 #include "global.h"
+#include "main.h"
+#include "asm.h"
+#include "play_time.h"
+#include "m4a.h"
 #include "gba/m4a_internal.h"
 #include "gba/flash_internal.h"
 #include "siirtc.h"
-#include "main.h"
 #include "rtc.h"
 #include "link.h"
 #include "rng.h"
+#include "rom4.h"
 #include "sound.h"
+#include "intro.h"
 
 extern struct SoundInfo gSoundInfo;
 extern u32 gUnknown_3004820;
@@ -61,14 +66,6 @@ u32 IntrMain_Buffer[0x200];
 u8 gPcmDmaCounter;
 
 EWRAM_DATA void (*gFlashTimerIntrFunc)(void) = NULL;
-
-extern void sub_800C35C(void);
-extern void remove_some_task(void);
-extern void c2_copyright_1();
-extern u32 sub_80558AC(void);
-extern u32 sub_8055910(void);
-extern u32 sub_8055940(void);
-extern void CheckForFlashMemory(void);
 
 static void UpdateLinkAndCallCallbacks(void);
 static void InitMainCallbacks(void);

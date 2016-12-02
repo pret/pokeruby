@@ -1,9 +1,15 @@
 #include "global.h"
+#include "new_game.h"
+#include "asm.h"
+#include "berry.h"
+#include "play_time.h"
+#include "pokemon_size_record.h"
+#include "script.h"
+#include "rom4.h"
+#include "pokedex.h"
+#include "lottery_corner.h"
 #include "rng.h"
 #include "rtc.h"
-#include "pokemon.h"
-
-extern void warp1_set(s8, s8, s8, s8, s8);
 
 extern u8 gUnknown_020297EC;
 

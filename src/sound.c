@@ -1,16 +1,16 @@
 #include "global.h"
+#include "sound.h"
+#include "asm.h"
 #include "gba/m4a_internal.h"
 #include "task.h"
-#include "sound.h"
 #include "songs.h"
+#include "m4a.h"
 
 struct Fanfare
 {
     u16 songNum;
     u16 duration;
 };
-
-extern u32 SpeciesToCryId(u32);
 
 extern u16 gUnknown_020239F8;
 extern struct MusicPlayerInfo *gMPlay_PokemonCry;

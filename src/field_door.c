@@ -1,7 +1,7 @@
 #include "global.h"
+#include "asm.h"
 #include "task.h"
-
-extern u8 MetatileBehavior_IsDoor(u8);
+#include "field_camera.h"
 
 struct DoorGraphics
 {
@@ -224,7 +224,7 @@ bool8 FieldIsDoorAnimationRunning(void)
     return FuncIsActiveTask(Task_AnimateDoor);
 }
 
-u8 sub_8058790(u32 x, u32 y)
+u32 sub_8058790(u32 x, u32 y)
 {
     if (cur_mapdata_get_door_x2_at(gDoorAnimGraphicsTable, x, y) == 0)
         return 8;

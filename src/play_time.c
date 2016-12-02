@@ -10,8 +10,6 @@ enum
 
 static u8 sPlayTimeCounterState;
 
-void PlayTimeCounter_SetToMax();
-
 void PlayTimeCounter_Reset()
 {
     sPlayTimeCounterState = STOPPED;

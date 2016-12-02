@@ -1,22 +1,13 @@
 #include "global.h"
+#include "asm.h"
 #include "link.h"
 #include "rng.h"
 #include "flag.h"
-
-extern u8 GetLinkPlayerCount(void);
-extern u16 sub_80EB72C(u16);
-extern u8 ConvertEasyChatWordsToString(u8 *dst, u16 *words, u16, u16);
 
 extern struct EasyChatPair unk_2007800[5];
 extern struct EasyChatPair unk_2007900[5];
 extern u16 gScriptResult;
 extern u16 gSpecialVar_0x8004;
-
-void sub_80FA740(struct EasyChatPair *);
-void sub_80FA46C(struct EasyChatPair *, u16, u8);
-bool8 sub_80FA670(struct EasyChatPair *, struct EasyChatPair *, u8);
-bool8 IsEasyChatPairEqual(u16 *, u16 *);
-bool8 SB1ContainsWords(u16 *);
 
 void sub_80FA17C(void)
 {
@@ -394,7 +385,7 @@ void sub_80FA4E4(u8 *a, u32 b)
 }
 #else
 __attribute__((naked))
-void sub_80FA4E4(u8 *a, u32 b)
+void sub_80FA4E4(struct EasyChatPair *a, u32 b, u8 c)
 {
     asm(".syntax unified\n\
 	push {r4-r7,lr}\n\

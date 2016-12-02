@@ -1,4 +1,6 @@
 #include "global.h"
+#include "clear_save_data_menu.h"
+#include "save.h"
 #include "task.h"
 #include "songs.h"
 #include "menu.h"
@@ -6,7 +8,6 @@
 #include "sprite.h"
 #include "palette.h"
 #include "sound.h"
-#include "clear_save_data_menu.h"
 
 extern u8 gSystemText_ClearAllSaveDataPrompt[];
 extern u8 gSystemText_ClearingData[];

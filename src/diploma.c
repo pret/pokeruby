@@ -1,15 +1,14 @@
 #include "global.h"
+#include "asm.h"
 #include "main.h"
 #include "menu.h"
 #include "palette.h"
+#include "pokedex.h"
+#include "rom4.h"
 #include "sprite.h"
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
-
-extern void remove_some_task(void);
-extern void sub_80546F0(void);
-extern u16 sub_8090FF4(void);
 
 extern u8 gDiplomaTiles[];
 extern u8 gDiplomaTilemap[];

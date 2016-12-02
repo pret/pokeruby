@@ -1,6 +1,8 @@
 #include "global.h"
-#include "main.h"
 #include "sprite.h"
+#include "main.h"
+#include "palette.h"
+#include "menu_cursor.h"
 
 #define MAX_SPRITE_COPY_REQUESTS 64
 
@@ -49,15 +51,12 @@ struct OamDimensions
     s8 height;
 };
 
-void LoadPalette(u16 *, u16, u32);
-void sub_814A590(void);
-
 static void UpdateOamCoords(void);
 static void BuildSpritePriorities(void);
 static void SortSprites(void);
 static void CopyMatricesToOamBuffer(void);
 static void AddSpritesToOamBuffer(void);
-static u8 CreateSpriteAt(u8 index, struct SpriteTemplate *template, s16 x, s16 y, u8 subpriority);
+static u8 CreateSpriteAt(u8 index, const struct SpriteTemplate *template, s16 x, s16 y, u8 subpriority);
 static void ClearSpriteCopyRequests(void);
 static void ResetOamMatrices(void);
 static void ResetSprite(struct Sprite *sprite);
@@ -530,7 +529,7 @@ static void AddSpritesToOamBuffer(void)
     }
 }
 
-u8 CreateSprite(struct SpriteTemplate *template, s16 x, s16 y, u8 subpriority)
+u8 CreateSprite(const struct SpriteTemplate *template, s16 x, s16 y, u8 subpriority)
 {
     u8 i;
 
@@ -541,7 +540,7 @@ u8 CreateSprite(struct SpriteTemplate *template, s16 x, s16 y, u8 subpriority)
     return MAX_SPRITES;
 }
 
-u8 CreateSpriteAtEnd(struct SpriteTemplate *template, u16 x, u16 y, u8 subpriority)
+u8 CreateSpriteAtEnd(const struct SpriteTemplate *template, u16 x, u16 y, u8 subpriority)
 {
     s16 i;
 
@@ -554,7 +553,7 @@ u8 CreateSpriteAtEnd(struct SpriteTemplate *template, u16 x, u16 y, u8 subpriori
 
 u8 CreateInvisibleSprite(void (*callback)(struct Sprite *))
 {
-    u8 index = CreateSprite((struct SpriteTemplate *)&gDummySpriteTemplate, 0, 0, 31);
+    u8 index = CreateSprite(&gDummySpriteTemplate, 0, 0, 31);
 
     if (index == MAX_SPRITES)
     {
@@ -568,7 +567,7 @@ u8 CreateInvisibleSprite(void (*callback)(struct Sprite *))
     }
 }
 
-static u8 CreateSpriteAt(u8 index, struct SpriteTemplate *template, s16 x, s16 y, u8 subpriority)
+static u8 CreateSpriteAt(u8 index, const struct SpriteTemplate *template, s16 x, s16 y, u8 subpriority)
 {
     struct Sprite *sprite = &gSprites[index];
 
@@ -1635,7 +1634,7 @@ void FreeAllSpritePalettes(void)
         sSpritePaletteTags[i] = 0xFFFF;
 }
 
-u8 LoadSpritePalette(struct SpritePalette *palette)
+u8 LoadSpritePalette(const struct SpritePalette *palette)
 {
     u8 index = IndexOfSpritePaletteTag(palette->tag);
 
@@ -1656,7 +1655,7 @@ u8 LoadSpritePalette(struct SpritePalette *palette)
     }
 }
 
-void LoadSpritePalettes(struct SpritePalette *palettes)
+void LoadSpritePalettes(const struct SpritePalette *palettes)
 {
     u8 i;
     for (i = 0; palettes[i].data != NULL; i++)

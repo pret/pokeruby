@@ -1,12 +1,8 @@
 #include "global.h"
+#include "asm.h"
 #include "sprite.h"
-#include "fieldmap.h"
-
-extern void SetObjectSubpriorityByZCoord(u8, struct Sprite *, u8);
-extern u8 FieldObjectDirectionToImageAnimId(u8);
-extern u32 FieldEffectStart(u8);
-extern void FieldObjectGetLocalIdAndMap(struct MapObject *, u8 *, u8 *, u8 *);
-extern struct MapObjectGraphicsInfo *GetFieldObjectGraphicsInfo(u8);
+#include "asm_fieldmap.h"
+#include "field_effect.h"
 
 typedef void (*SpriteStepFunc)(struct Sprite *sprite, u8 dir);
 

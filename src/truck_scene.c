@@ -1,19 +1,14 @@
 #include "global.h"
+#include "truck_scene.h"
+#include "asm.h"
 #include "palette.h"
 #include "task.h"
 #include "script.h"
 #include "songs.h"
 #include "sound.h"
+#include "field_camera.h"
 
 extern s8 gTruckCamera_HorizontalTable[];
-
-extern void SetCameraPanning(s16 a1, s16 a2);
-extern void sub_805BD90(u8 localId, u8 mapNum, u8 mapGroup, s16 x, s16 y);
-
-void Task_Truck1(u8 taskId);
-void Task_Truck2(u8 taskId);
-void Task_Truck3(u8 taskId);
-void ExecuteTruckSequence(void);
 
 s32 GetTruckCameraBobbingY(int a1)
 {

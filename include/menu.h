@@ -3,7 +3,7 @@
 
 #include "text.h"
 
-void InitMenuWindow(struct WindowConfig *);
+void InitMenuWindow(const struct WindowConfig *);
 void MultistepInitMenuWindowBegin(struct WindowConfig *);
 bool32 MultistepInitMenuWindowContinue(void);
 void unref_sub_8071DA4(struct WindowConfig *, u16);

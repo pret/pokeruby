@@ -1,0 +1,21 @@
+#ifndef GUARD_SAFARI_ZONE_H
+#define GUARD_SAFARI_ZONE_H
+
+bool32 GetSafariZoneFlag(void);
+void SetSafariZoneFlag(void);
+void ResetSafariZoneFlag(void);
+
+void EnterSafariMode(void);
+void ExitSafariMode(void);
+
+bool8 SafariZoneTakeStep(void);
+void SafariZoneRetirePrompt(void);
+void sub_80C824C(void);
+
+void SafariZoneGetPokeblockNameInFeeder(void);
+struct Pokeblock *unref_sub_80C8418(void);
+struct Pokeblock *SafariZoneGetActivePokeblock(void);
+void SafariZoneActivatePokeblockFeeder(u8 pokeblock_index);
+bool8 unref_sub_80C853C(void);
+
+#endif // GUARD_SAFARI_ZONE_H

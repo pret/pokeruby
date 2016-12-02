@@ -34,6 +34,8 @@
 #define SYS_ENC_UP_ITEM   0x84D
 #define SYS_ENC_DOWN_ITEM 0x84E
 
+#define SYS_B_DASH        0x860 // got Running Shoes
+
 // SPECIAL FLAGS (unknown purpose)
 
 #define SPECIAL_FLAG_1 0x4001

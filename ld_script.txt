@@ -70,7 +70,7 @@ SECTIONS {
         asm/metatile_behavior.o(.text);
         src/field_camera.o(.text);
         src/field_door.o(.text);
-        asm/field_player_avatar.o(.text);
+        src/field_player_avatar.o(.text);
         asm/field_map_obj.o(.text);
         asm/field_ground_effect.o(.text);
         src/map_obj_80643A4.o(.text);
@@ -95,6 +95,7 @@ SECTIONS {
         src/task.o(.text);
         asm/rom5.o(.text);
         src/title_screen.o(.text);
+        src/weather.o(.text);
         asm/weather.o(.text);
         asm/rom_8080874.o(.text);
         src/battle_setup.o(.text);

@@ -1,13 +1,10 @@
 #include "global.h"
+#include "asm.h"
 #include "field_message_box.h"
 #include "pokemon.h"
 #include "script.h"
 #include "string_util.h"
 #include "task.h"
-
-extern void AdjustFriendship(struct Pokemon *, u8);
-extern u8 pokemon_ailments_get_primary(u32);
-extern void DoFieldPoisonEffect(void);
 
 extern struct Pokemon gPlayerParty[6];
 extern u16 gScriptResult;

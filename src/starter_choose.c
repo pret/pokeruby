@@ -1,22 +1,16 @@
 #include "global.h"
+#include "starter_choose.h"
+#include "asm.h"
 #include "main.h"
 #include "menu.h"
 #include "palette.h"
-#include "pokemon.h"
+#include "pokedex.h"
 #include "songs.h"
 #include "sound.h"
-#include "sprite.h"
 #include "string_util.h"
 #include "task.h"
-#include "text.h"
 #include "trig.h"
-
-//Functions that need to be put in headers
-void remove_some_task(void);
-void LoadCompressedObjectPic(void *);
-void LoadCompressedObjectPalette(const struct SpritePalette *);
-u16 SpeciesToNationalPokedexNum(u16);
-void DecompressPicFromTable_2(const struct SpriteSheet *, u8, u8, void *, void *, u32);
+#include "decompress.h"
 
 struct MonCoords
 {
@@ -50,7 +44,6 @@ extern struct SpritePalette gUnknown_083F77B4[];
 extern struct SpriteTemplate gSpriteTemplate_83F77FC;
 extern struct SpriteTemplate gUnknown_02024E8C;
 
-u16 GetStarterPokemon(u16);
 static void MainCallback2(void);
 static void Task_StarterChoose1(u8 taskId);
 static void Task_StarterChoose2(u8 taskId);
@@ -59,10 +52,8 @@ static void Task_StarterChoose4(u8 taskId);
 static void Task_StarterChoose5(u8 taskId);
 static void Task_StarterChoose6(u8 taskId);
 
-extern u8 *GetPokemonCategory(u16);
 static void CreateStarterPokemonLabel(u8, u8);
 static u8 CreatePokemonFrontSprite(u16, u8, u8);
-void StarterPokemonSpriteAnimCallback(struct Sprite *);
 
 //Position of the sprite of the selected starter Pokemon
 #define STARTER_PKMN_POS_X 120

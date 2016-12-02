@@ -1,7 +1,9 @@
 #include "global.h"
+#include "asm.h"
 #include "text.h"
 #include "string_util.h"
 #include "pokemon.h"
+#include "rom4.h"
 #include "species.h"
 #include "main.h"
 #include "rng.h"
@@ -12,8 +14,6 @@
 
 //Extracts the lower 16 bits of a 32-bit number
 #define LOHALF(n) ((n) & 0xFFFF)
-
-extern u8 sav1_map_get_name();
 
 extern struct Pokemon gPlayerParty[6]; // 0x3004360
 extern struct Pokemon gEnemyParty[6]; // 0x30045C0

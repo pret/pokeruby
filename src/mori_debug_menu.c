@@ -1,14 +1,12 @@
+#include "global.h"
+#include "mori_debug_menu.h"
+#include "asm.h"
+#include "start_menu.h"
+#include "menu.h"
 #include "main.h"
 #include "string_util.h"
-#include "pokemon.h"
 
-extern void sub_8071C20(void);
-extern u16 sub_8041870(u16);
-extern void sub_810CA6C(s32);
 extern u8 (*gCallback_03004AE8)(void);
-
-extern u8 daycare_count_pokemon(u32);
-extern u8 daycare_relationship_score_from_savegame(void);
 
 struct DebugMenuAction
 {

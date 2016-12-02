@@ -1,22 +1,15 @@
 #include "global.h"
+#include "save_menu_util.h"
+#include "asm.h"
 #include "menu.h"
 #include "flag.h"
+#include "string_util.h"
+#include "pokedex.h"
 
 extern u8 gOtherText_Player[];
 extern u8 gOtherText_Badges[];
 extern u8 gOtherText_Pokedex[];
 extern u8 gOtherText_PlayTime[];
-
-extern void ConvertIntToDecimalStringN(u8 *dest, u32 value, int mode, u8 n);
-
-u8 sub_809473C(void);
-u8 GetBadgeCount(void);
-
-void PrintSavePlayerName(s16 x, s16 y);
-void PrintSaveMapName(s16 x, s16 y);
-void PrintSaveBadges(s16 x, s16 y);
-void PrintSavePokedexCount(s16 x, s16 y);
-void PrintSavePlayTime(s16 x, s16 y);
 
 void HandleDrawSaveWindowInfo(s16 left, s16 top)
 {

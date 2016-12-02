@@ -1,8 +1,9 @@
 #include "global.h"
+#include "record_mixing.h"
+#include "asm.h"
 #include "link.h"
 #include "menu.h"
-#include "pokemon.h"
-#include "rng.h"
+#include "rom4.h"
 #include "script.h"
 #include "songs.h"
 #include "sound.h"
@@ -32,38 +33,6 @@ extern u8 gOtherText_MixingRecordsWithFriend[];
 extern bool8 gReceivedRemoteLinkPlayers;
 extern u8 gBlockSendBuffer[BLOCK_BUFFER_SIZE];
 extern u16 gBlockRecvBuffer[MAX_LINK_PLAYERS][BLOCK_BUFFER_SIZE / 2];
-
-extern void sub_8083A84(TaskFunc);
-extern void sub_8041324(struct BoxPokemon *, void *);
-extern void sub_80BD674(void *, u32, u8);
-extern void sub_80BFD44(void *, u32, u8);
-extern void sub_80C0514(void *, u32, u8);
-// UB: sub_80FA4E4 declared with 3 arguments instead of 2
-extern void sub_80FA4E4(void *, u32, u8);
-extern void sub_80B9C6C(void *, u32, u8, void *);
-extern void sub_80B9F3C(void *, u8);
-extern u16 sub_8126338(void);
-extern u8 sub_8083664(void);
-extern void sub_80720B0(void);
-extern void CreateRecordMixingSprite(void);
-extern void DestroyRecordMixingSprite(void);
-extern u16 sub_8055588(void);
-extern void sub_80F7F30(void);
-extern void sub_8134AC0(void *);
-
-void sub_80B9484(u8);
-void sub_80B95F0(u8);
-void sub_80BA00C(u8);
-void sub_80B97DC(u8);
-void Task_CopyRecvBuffer(u8);
-void sub_80B9A1C(u8);
-u8 GetMultiplayerId_(void);
-void StorePtrInTaskData(void *, u16 *);
-void *LoadPtrFromTaskData(u16 *);
-void sub_80B9B1C(u8 *, size_t, u8);
-void sub_80B9B70(u8 *, size_t, u8);
-u16 *GetPlayerRecvBuffer(u8 player);
-void sub_80B9A78(void);
 
 #define BUFFER_CHUNK_SIZE 200
 

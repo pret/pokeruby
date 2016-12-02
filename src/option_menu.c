@@ -1,4 +1,5 @@
 #include "global.h"
+#include "option_menu.h"
 #include "main.h"
 #include "menu.h"
 #include "palette.h"

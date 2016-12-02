@@ -1,16 +1,34 @@
 #include "global.h"
-#include "fieldmap.h"
+#include "rom4.h"
+#include "asm.h"
+#include "asm_fieldmap.h"
+#include "battle_setup.h"
+#include "berry.h"
+#include "field_map_obj.h"
+#include "field_player_avatar.h"
+#include "menu.h"
+#include "weather.h"
+#include "task.h"
+#include "tileset_anim.h"
+#include "start_menu.h"
+#include "play_time.h"
+#include "truck_scene.h"
+#include "new_game.h"
+#include "heal_location.h"
+#include "field_message_box.h"
+#include "safari_zone.h"
 #include "script.h"
 #include "songs.h"
 #include "sound.h"
 #include "rng.h"
 #include "main.h"
 #include "palette.h"
-#include "text.h"
 #include "link.h"
-#include "sprite.h"
 #include "flag.h"
 #include "var.h"
+#include "field_camera.h"
+#include "field_effect.h"
+#include "wild_encounter.h"
 
 #ifdef SAPPHIRE
 #define LEGENDARY_MUSIC BGM_OOAME  // Heavy Rain
@@ -18,48 +36,10 @@
 #define LEGENDARY_MUSIC BGM_HIDERI // Drought
 #endif
 
-struct UnkWarpStruct
-{
-    s8 mapGroup;
-    s8 mapNum;
-    s16 x, y;
-};
-
 struct UnkTVStruct
 {
     u32 tv_field_0;
     u32 tv_field_4;
-};
-
-struct UnkPlayerStruct
-{
-    u8 player_field_0;
-    u8 player_field_1;
-};
-
-struct UnkInputStruct
-{
-    u8 input_field_0;
-    u8 input_field_1;
-    u8 input_field_2;
-    u8 input_field_3;
-};
-
-struct UnkStruct_8054FF8_Substruct
-{
-    s16 x;
-    s16 y;
-    u8 field_8;
-};
-
-struct UnkStruct_8054FF8
-{
-    u8 a;
-    u8 b;
-    u8 c;
-    u8 d;
-    struct UnkStruct_8054FF8_Substruct sub;
-    u16 field_C;
 };
 
 struct LinkPlayerMapObject
@@ -134,118 +114,6 @@ extern const struct WarpData gDummyWarpData;
 extern s32 gUnknown_0839ACE8;
 extern u32 gUnknown_08216694[];
 
-extern struct UnkWarpStruct *GetHealLocation(u8);
-extern u8 GetSav1Weather(void);
-extern void PlayerGetDestCoords(u16 *, u16 *);
-extern u8 sub_810D32C(void);
-extern u16 GetLocalWildMon(bool8 *);
-extern u16 GetMirageIslandMon(void);
-extern void ExecuteTruckSequence(void);
-extern void sub_8080B60(void);
-extern void sub_810CC80(void);
-extern void sub_8080AC4(void);
-extern void sub_8080A3C(void);
-extern void atk17_seteffectuser(void);
-extern void sub_80809B0(void);
-extern void sub_8080990(void);
-extern u8 sub_80BBB24(void);
-extern u16 MapGridGetMetatileBehaviorAt(int, int);
-extern u8 *sub_80682A8(void *, u8, u8);
-extern u8 *sub_8068E24(struct UnkStruct_8054FF8_Substruct *);
-extern bool8 MapGridIsImpassableAt(s16, s16);
-extern u8 ZCoordToPriority(u8);
-
-void sub_8053050(void);
-void warp_in(void);
-void sub_8053570(void);
-u8 sav1_map_get_light_level(void);
-u8 get_map_light_level_by_bank_and_number(s8, s8);
-bool8 is_light_level_1_2_3_5_or_6(u8);
-void sub_805363C(s8, s8, s8, s8, s8);
-void sub_807D874(u8);
-void sub_8082BD0(u16, u16);
-void player_avatar_init_params_reset(void);
-u8 TestPlayerAvatarFlags(u8);
-u8 player_get_direction_lower_nybble(void);
-u8 sub_8053B00(struct UnkPlayerStruct *playerStruct, u16, u8);
-u8 sub_8053B60(struct UnkPlayerStruct *playerStruct, u8, u16, u8);
-u8 MetatileBehavior_IsSurfableWaterOrUnderwater(u8);
-bool8 sub_8056F24(u8);
-bool8 sub_8056F08(u8);
-bool8 MetatileBehavior_IsDoor(u8);
-bool8 MetatileBehavior_IsSouthArrowWarp(u8);
-bool8 MetatileBehavior_IsNorthArrowWarp(u8);
-bool8 MetatileBehavior_IsWestArrowWarp(u8);
-bool8 MetatileBehavior_IsEastArrowWarp(u8);
-bool8 MetatileBehavior_IsLadder(u8);
-u16 cur_mapdata_block_role_at_screen_center_acc_to_sav1(void);
-bool32 sub_8053C44(void);
-void sub_8053C98(void);
-void sav1_reset_battle_music_maybe(void);
-void sub_8053F0C(void);
-u8 is_light_level_8_or_9(u8);
-void sub_8054164(void);
-void sub_8055354(void);
-void c2_overworld(void);
-void CB2_LoadMap2(void);
-void c2_80567AC(void);
-void c2_exit_to_overworld_2_link(void);
-void c2_exit_to_overworld_2_local(void);
-void FieldClearVBlankHBlankCallbacks(void);
-void SetFieldVBlankCallback(void);
-void VBlankCB_Field(void);
-bool32 sub_805483C(u8 *);
-bool32 sub_805493C(u8 *, u32);
-bool32 sub_8054A4C(u8 *);
-bool32 sub_8054A9C(u8 *a1);
-void do_load_map_stuff_loop(u8 *a1);
-void sub_8054BA8(void);
-void sub_8054C2C(void);
-void sub_8054C54(void);
-void sub_8054D4C(u32 a1);
-void sub_8054D90(void);
-void mli4_mapscripts_and_other(void);
-void sub_8054E20(void);
-void sub_8054E34(void);
-void sub_8054E60(void);
-void sub_8054E7C(void);
-void sub_8054E98(void);
-void sub_8054EC8(void);
-void sub_8054F48(void);
-void sub_8054F70(void);
-u16 sub_805530C(u16);
-void sub_8055340(u16 *);
-u16 sub_8055390(u32);
-u16 sub_80553E4(u32);
-u16 sub_8055408(u32);
-u16 sub_8055438(u32);
-bool32 sub_8055618(struct UnkStruct_8054FF8 *);
-bool32 sub_8055630(struct UnkStruct_8054FF8 *);
-u8 *sub_8055648(struct UnkStruct_8054FF8 *);
-bool32 sub_8055660(struct UnkStruct_8054FF8 *);
-u8 *sub_805568C(struct UnkStruct_8054FF8 *);
-u16 sub_8055758(u8 *);
-void sub_80557E8(void);
-void sub_80557F4(void);
-void sub_8055808(u8 *);
-void sub_8055824(void);
-void sub_8055840(u8 *);
-void sub_805585C(void);
-bool32 sub_8055870(void);
-void SpawnLinkPlayerMapObject(u8, s16, s16, u8);
-void InitLinkPlayerMapObjectPos(struct MapObject *, s16, s16);
-void sub_80555B0(int, int, struct UnkStruct_8054FF8 *);
-u8 sub_8055AE8(u8);
-void sub_8055B08(u8, u16 *, u16 *);
-u8 sub_8055B30(u8);
-u8 sub_8055B50(u8);
-u8 GetLinkPlayerIdAt(s16, s16);
-void sub_8055BFC(u8, u8);
-u8 npc_something3(u8, u8);
-u8 LinkPlayerDetectCollision(u8, u8, s16, s16);
-void CreateLinkPlayerSprite(u8);
-void SpriteCB_LinkPlayer(struct Sprite *);
-void sub_8056C50(u16, u16);
 
 void sub_8052F5C(void)
 {
@@ -515,9 +383,9 @@ void copy_saved_warp2_bank_and_enter_x_to_warp1(void)
 
 void sub_8053538(u8 a1)
 {
-    struct UnkWarpStruct *warp = GetHealLocation(a1);
+    const struct HealLocation *warp = GetHealLocation(a1);
     if (warp)
-        warp1_set(warp->mapGroup, warp->mapNum, -1, warp->x, warp->y);
+        warp1_set(warp->group, warp->map, -1, warp->x, warp->y);
 }
 
 void sub_8053570(void)
@@ -527,9 +395,9 @@ void sub_8053570(void)
 
 void sub_8053588(u8 a1)
 {
-    struct UnkWarpStruct *warp = GetHealLocation(a1);
+    const struct HealLocation *warp = GetHealLocation(a1);
     if (warp)
-        warp_set(&gSaveBlock1.warp3, warp->mapGroup, warp->mapNum, -1, warp->x, warp->y);
+        warp_set(&gSaveBlock1.warp3, warp->group, warp->map, -1, warp->x, warp->y);
 }
 
 void sub_80535C4(u16 a1, u16 a2)
@@ -589,9 +457,9 @@ void unref_sub_8053790(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y)
 
 void sub_80537CC(u8 a1)
 {
-    struct UnkWarpStruct *warp = GetHealLocation(a1);
+    const struct HealLocation *warp = GetHealLocation(a1);
     if (warp)
-        warp_set(&gSaveBlock1.warp1, warp->mapGroup, warp->mapNum, -1, warp->x, warp->y);
+        warp_set(&gSaveBlock1.warp1, warp->group, warp->map, -1, warp->x, warp->y);
 }
 
 void gpu_sync_bg_hide(void)
