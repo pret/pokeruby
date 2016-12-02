@@ -1,4 +1,6 @@
 #include "global.h"
+#include "berry.h"
+#include "asm.h"
 #include "item.h"
 #include "main.h"
 #include "text.h"
@@ -6,14 +8,6 @@
 
 #define FIRST_BERRY 0x85 // ITEM_CHERI_BERRY
 #define LAST_BERRY 0xaf // ITEM_ENIGMA_BERRY
-
-extern u8 GetStageByBerryTreeId(u8);
-extern u16 GetStageDurationByBerryType(u8);
-extern void sub_80A68CC();
-extern u8 sub_8060234(u8, u8, u8);
-extern void sub_8060288(u8, u8, u8);
-extern u8 FieldObjectGetBerryTreeId(u8);
-extern u8 *GetFieldObjectScriptPointerForComparison();
 
 extern struct Berry gBerries[];
 extern u8 BerryTreeScript;
@@ -23,8 +17,6 @@ extern u16 gScriptLastTalked;
 extern u16 gSpecialVar_0x8004;
 extern u16 gSpecialVar_0x8005;
 extern u16 gSpecialVar_0x8006;
-
-u8 CalcBerryYield(struct BerryTree *tree);
 
 void unref_sub_80B4884(void)
 {

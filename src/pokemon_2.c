@@ -1,7 +1,9 @@
 #include "global.h"
+#include "asm.h"
 #include "text.h"
 #include "string_util.h"
 #include "pokemon.h"
+#include "rng.h"
 #include "species.h"
 #include "main.h"
 #include "sprite.h"
@@ -49,11 +51,6 @@ extern u8 gUnknown_0820823C[];
 extern u8 gStatStageRatios[][2];
 extern u8 gHoldEffectToType[][2];
 
-extern u8 battle_side_get_owner(u8);
-extern u8 battle_get_side_with_given_state(u8);
-extern u32 battle_get_per_side_status(u8);
-extern u8 sub_8018324(u8, u8, u8, u8, u16);
-
 u8 sub_803C348(u8 a1)
 {
     s32 i;
@@ -87,6 +84,7 @@ u8 sub_803C348(u8 a1)
     return retVal;
 }
 
+#ifdef NONMATCHING
 u8 sub_803C434(u8 a1)
 {
     u32 status0 = battle_get_per_side_status(a1);
@@ -111,7 +109,7 @@ u8 sub_803C434(u8 a1)
 
     if (sub_803C348(0) > 1)
     {
-        u32 r = Random();
+        u16 r = Random();
         register u32 val asm("r1") = mask2;
         val &= r;
         if (!val)
@@ -133,6 +131,77 @@ u8 sub_803C434(u8 a1)
             return battle_get_side_with_given_state(status);
     }
 }
+#else
+__attribute__((naked))
+u8 sub_803C434(u8 a1) {
+    asm(".syntax unified\n\
+	push {r4-r6,lr}\n\
+	lsls r0, 24\n\
+	lsrs r0, 24\n\
+	bl battle_get_per_side_status\n\
+	movs r1, 0x1\n\
+	movs r6, 0x1\n\
+	adds r4, r6, 0\n\
+	ands r4, r0\n\
+	eors r4, r1\n\
+	adds r5, r4, 0\n\
+	ldr r0, _0803C45C\n\
+	ldrh r1, [r0]\n\
+	adds r0, r6, 0\n\
+	ands r0, r1\n\
+	cmp r0, 0\n\
+	bne _0803C460\n\
+	adds r0, r4, 0\n\
+	b _0803C4AA\n\
+	.align 2, 0\n\
+_0803C45C: .4byte gUnknown_020239F8\n\
+_0803C460:\n\
+	movs r0, 0\n\
+	bl sub_803C348\n\
+	lsls r0, 24\n\
+	lsrs r0, 24\n\
+	cmp r0, 0x1\n\
+	bls _0803C484\n\
+	bl Random\n\
+	adds r1, r6, 0\n\
+	ands r1, r0\n\
+	cmp r1, 0\n\
+	bne _0803C480\n\
+	movs r0, 0x2\n\
+	eors r0, r4\n\
+	b _0803C4AA\n\
+_0803C480:\n\
+	adds r0, r4, 0\n\
+	b _0803C4AA\n\
+_0803C484:\n\
+	ldr r0, _0803C49C\n\
+	ldrb r1, [r0]\n\
+	ldr r2, _0803C4A0\n\
+	lsls r0, r4, 2\n\
+	adds r0, r2\n\
+	ldr r0, [r0]\n\
+	ands r1, r0\n\
+	cmp r1, 0\n\
+	bne _0803C4A4\n\
+	adds r0, r4, 0\n\
+	b _0803C4AA\n\
+	.align 2, 0\n\
+_0803C49C: .4byte gUnknown_02024C0C\n\
+_0803C4A0: .4byte gBitTable\n\
+_0803C4A4:\n\
+	movs r0, 0x2\n\
+	eors r5, r0\n\
+	adds r0, r5, 0\n\
+_0803C4AA:\n\
+	bl battle_get_side_with_given_state\n\
+	lsls r0, 24\n\
+	lsrs r0, 24\n\
+	pop {r4-r6}\n\
+	pop {r1}\n\
+	bx r1\n\
+    .syntax divided\n");
+}
+#endif
 
 u8 GetMonGender(struct Pokemon *mon)
 {

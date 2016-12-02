@@ -1,5 +1,9 @@
 #include "global.h"
 #include "title_screen.h"
+#include "asm.h"
+#include "clear_save_data_menu.h"
+#include "m4a.h"
+#include "main_menu.h"
 #include "intro.h"
 #include "gba/m4a_internal.h"
 #include "main.h"
@@ -8,11 +12,6 @@
 #include "sprite.h"
 #include "task.h"
 #include "decompress.h"
-
-extern void m4aSongNumStart(u16);
-extern void CB2_InitMainMenu(void);
-extern void CB2_InitClearSaveDataScreen(void);
-extern void CB2_InitResetRtcScreen(void);
 
 extern u8 gReservedSpritePaletteCount;
 extern struct MusicPlayerInfo gMPlay_BGM;

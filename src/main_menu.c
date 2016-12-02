@@ -1,10 +1,13 @@
 #include "global.h"
+#include "main_menu.h"
+#include "asm.h"
 #include "save_menu_util.h"
 #include "option_menu.h"
 #include "text.h"
 #include "sprite.h"
 #include "task.h"
 #include "main.h"
+#include "rom4.h"
 #include "rtc.h"
 #include "songs.h"
 #include "palette.h"
@@ -17,16 +20,6 @@
 #include "decompress.h"
 
 #define BirchSpeechUpdateWindowText() ((u8)MenuUpdateWindowText_OverrideLineLength(24))
-
-extern void remove_some_task(void);
-extern void CreatePokeballSprite(u8 r0, u8 r1, u8 r2, u8 r3, u8 s1, u8 s2, u8 s3, u16 s4);
-extern bool32 IsMysteryGiftAvailable(void);
-extern void CB2_ContinueSavedGame(void);
-extern void CB2_InitMysteryEventMenu(void);
-extern void DoNamingScreen(u8 r0, struct SaveBlock2 *r1, u16 r2, u16 r3, u8 s0, MainCallback s4);
-extern void CB2_NewGame(void);
-extern u8 CreateBirchSprite(u8, u8, u8);
-extern u8 CreateTrainerSprite_BirchSpeech(u8, u16, u16, u8, void *);
 
 extern struct PaletteFadeControl gPaletteFade;
 extern u8 gSaveFileDeletedMessage[];
@@ -43,9 +36,6 @@ extern u8 gMainMenuString_Time[];
 extern u8 gMainMenuString_Pokedex[];
 extern u8 gMainMenuString_Badges[];
 
-void CB2_MainMenu(void);
-void VBlankCB_MainMenu(void);
-void CB2_InitMainMenu(void);
 static void sub_80096FC(void);
 static u32 InitMainMenu(bool8 a1);
 static void Task_MainMenuCheckSave(u8 taskId);
@@ -65,7 +55,6 @@ static void PrintPlayerName(void);
 static void PrintPlayTime(void);
 static void PrintPokedexCount(void);
 static void PrintBadgeCount(void);
-void Task_NewGameSpeech1(u8);
 
 extern u16 gMainMenuPalette[];
 

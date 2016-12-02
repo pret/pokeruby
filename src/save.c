@@ -1,11 +1,9 @@
 #include "global.h"
 #include "save.h"
+#include "asm.h"
 #include "gba/gba.h"
 #include "rom4.h"
 #include "gba/flash_internal.h"
-
-extern u32 sub_8053108(u8);
-extern u32 ProgramFlashSectorAndVerifyNBytes(u16 sectorNum, u8 *src, u32 n);
 
 extern struct SaveSection unk_2000000;
 

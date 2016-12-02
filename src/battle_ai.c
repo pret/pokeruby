@@ -1,5 +1,6 @@
 #include "global.h"
 #include "battle.h"
+#include "asm.h"
 #include "pokemon.h"
 #include "rng.h"
 
@@ -12,11 +13,6 @@ this file is a mess. I stopped part way because it starts to involve a huge stru
 all the way to at least 0x2016800, in addition to extremely hard functions that I can't seem to get right. I am leaving this file
 as it currently is until someone bothers to document this huge struct.
 */
-
-extern u8 sub_8015A98(u8, u8, u8);
-extern u8 battle_side_get_owner(u8);
-extern s16 battle_get_per_side_status(u8);
-extern u8 b_first_side(u8, u8, u8);
 
 extern u16 gUnknown_020239F8;
 extern u8 gUnknown_02024A60;
@@ -1248,8 +1244,8 @@ void BattleAICmd_get_ability(void)
     if(battle_side_get_owner(var) == 0)
     {
         //register u8 unk asm("r1") = battle_get_per_side_status(var) & 1;
-        s32 unk = battle_get_per_side_status(var) & 1;
-        
+        u16 unk = battle_get_per_side_status(var) & 1;
+
         if(unk_2016A00.unk20[unk] != 0)
         {
             ((struct UnknownStruct2 *)((u8 *)&unk_2016A00 - 512))->unk8 = unk_2016A00.unk20[unk];

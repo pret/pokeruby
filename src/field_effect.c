@@ -11,18 +11,6 @@ extern u8 *gFieldEffectScriptPointers[];
 
 extern FldEffCmd gFieldEffectScriptFuncs[];
 
-void FieldEffectScript_LoadTiles(u8 **script);
-void FieldEffectScript_LoadFadedPalette(u8 **script);
-void FieldEffectScript_LoadPalette(u8 **script);
-void FieldEffectScript_CallNative(u8 **script, u32 *val);
-void FieldEffectFreeGraphicsResources(struct Sprite *sprite);
-void FieldEffectStop(struct Sprite *sprite, u8 id);
-void FieldEffectFreeTilesIfUnused(u16 tileStart);
-void FieldEffectFreePaletteIfUnused(u8 paletteNum);
-void FieldEffectActiveListClear(void);
-void FieldEffectActiveListAdd(u8 id);
-void FieldEffectActiveListRemove(u8 id);
-
 u32 FieldEffectStart(u8 id)
 {
     u8 *script;

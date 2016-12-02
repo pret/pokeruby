@@ -1,5 +1,6 @@
 #include "global.h"
 #include "safari_zone.h"
+#include "asm.h"
 #include "field_player_avatar.h"
 #include "flag.h"
 #include "main.h"
@@ -20,9 +21,6 @@ struct PokeblockFeeder
 
 static void ClearAllPokeblockFeeders(void);
 static void DecrementFeederStepCounters(void);
-extern void c2_exit_to_overworld_2_switch(void);
-extern void c2_exit_to_overworld_1_continue_scripts_restart_music(void);
-extern void sub_8080E44(void);
 
 extern u8 gUnknown_02024D26;
 

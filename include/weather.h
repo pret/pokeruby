@@ -31,10 +31,13 @@ void sub_807D874(u8);
 // ...
 void sub_807DB64(u8, u8);
 // ...
+void PlayRainSoundEffect(void);
+// ...
 void SetSav1Weather(u32);
 u8 GetSav1Weather(void);
 void sub_80806E4(void);
 // ...
 void sub_808073C(void);
+void sub_8080750();
 
 #endif // GUARD_WEATHER_H
