@@ -3,6 +3,12 @@
 
 #include "text.h"
 
+struct MenuAction
+{
+   u8 *text;
+   u8 (*func)(void);
+};
+
 void InitMenuWindow(const struct WindowConfig *);
 void MultistepInitMenuWindowBegin(struct WindowConfig *);
 bool32 MultistepInitMenuWindowContinue(void);
@@ -36,8 +42,8 @@ u8 MoveMenuCursor4(s8);
 void sub_807274C(u8, u8, u8, u8, u8 * const [][2], u8, u32);
 s8 sub_80727CC(void);
 u8 sub_807288C(u8);
-void PrintMenuItems(u8, u8, u8, u8 * const [][2]);
-void PrintMenuItemsReordered(u8, u8, u8, u8 * const [][2], u8*);
+void PrintMenuItems(u8, u8, u8, const struct MenuAction[]);
+void PrintMenuItemsReordered(u8, u8, u8, const struct MenuAction[], u8*);
 void InitYesNoMenu(u8, u8, u8);
 void DisplayYesNoMenu(u8, u8, u32);
 s8 ProcessMenuInputNoWrap_(void);

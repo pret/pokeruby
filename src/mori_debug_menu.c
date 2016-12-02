@@ -8,17 +8,11 @@
 
 extern u8 (*gCallback_03004AE8)(void);
 
-struct DebugMenuAction
-{
-   u8 *text;
-   u8 (*func)(void);
-};
-
 extern u8 gUnknown_0839B24D[];
 extern u8 gUnknown_0839B255[];
 extern u8 gUnknown_0839B257[];
 
-extern struct DebugMenuAction gMoriDebugMenuActions[];
+extern const struct MenuAction gMoriDebugMenuActions[];
 
 extern u8 gSpeciesNames[][11];
 

@@ -20,7 +20,7 @@ extern struct SpritePalette gUnknown_083F7AA0;
 extern u8 gUnknown_08E95774[];
 extern u8 gUnknown_08E954B0[];
 extern u8 gOtherText_CorrectTimePrompt[];
-extern u8 * const gUnknown_08376D74[][2];
+extern const struct MenuAction gUnknown_08376D74[];
 extern s8 gClockHandCoords[][2];
 
 extern struct SpriteTemplate gSpriteTemplate_83F7AD8;
