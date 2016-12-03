@@ -13870,27 +13870,27 @@ gMatsudaDebugMenu_GoBackText:: @ 83C9337
 gMatsudaDebugMenu_BattlePointsText:: @ 83C933B
 	.string "{COLOR MAGENTA}BP.$"
 
-gMatsudaDebugMenuText_Cool:
+MatsudaDebugMenuText_Cool:
 	.string "かっこよさ$" @ coolness
-gMatsudaDebugMenuText_Cute:
+MatsudaDebugMenuText_Cute:
 	.string "かわいさ$" @ cuteness
-gMatsudaDebugMenuText_Beauty:
+MatsudaDebugMenuText_Beauty:
 	.string "うつくしさ$" @ beauty
-gMatsudaDebugMenuText_Smart:
+MatsudaDebugMenuText_Smart:
 	.string "かしこさ$" @ smartness
-gMatsudaDebugMenuText_Tough:
+MatsudaDebugMenuText_Tough:
 	.string "たくましさ$" @ toughness
-gMatsudaDebugMenuText_Sheen:
+MatsudaDebugMenuText_Sheen:
 	.string "けづや$" @ sheen
 
 	.align 2
 gMatsudaDebugMenuTextList1:: @ 83C9364
-	.4byte gMatsudaDebugMenuText_Cool
-	.4byte gMatsudaDebugMenuText_Cute
-	.4byte gMatsudaDebugMenuText_Beauty
-	.4byte gMatsudaDebugMenuText_Smart
-	.4byte gMatsudaDebugMenuText_Tough
-	.4byte gMatsudaDebugMenuText_Sheen
+	.4byte MatsudaDebugMenuText_Cool
+	.4byte MatsudaDebugMenuText_Cute
+	.4byte MatsudaDebugMenuText_Beauty
+	.4byte MatsudaDebugMenuText_Smart
+	.4byte MatsudaDebugMenuText_Tough
+	.4byte MatsudaDebugMenuText_Sheen
 
 MatsudaDebugMenuText_CoolContest:
 	.string "かっこよさコンテスト$" @ Cool Contest
