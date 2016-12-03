@@ -7,6 +7,7 @@
 #define AIScriptRead32(ptr) ((ptr)[0] | (ptr)[1] << 8 | (ptr)[2] << 16 | (ptr)[3] << 24)
 #define AIScriptRead16(ptr) ((ptr)[0] | (ptr)[1] << 8)
 #define AIScriptRead8(ptr) ((ptr)[0])
+#define AIScriptReadPtr(ptr) (u8*) AIScriptRead32(ptr)
 
 /* 
 this file is a mess. I stopped part way because it starts to involve a huge struct that begins at 0x2000000 and goes
@@ -327,7 +328,7 @@ void BattleAICmd_if_random(void)
 	u16 random = Random();
 	
 	if (!(random % 256 >= gAIScriptPtr[1])) // roll a random value. is it less than the parameter of the if_random call? (96 on if_random 80 will return true)
-		gAIScriptPtr = AIScriptRead32(gAIScriptPtr + 2);
+		gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
 	else
 		gAIScriptPtr += 6;	
 }
@@ -337,7 +338,7 @@ void BattleAICmd_if_not_random(void)
 	u16 random = Random();
 	
 	if (!(random % 256 <= gAIScriptPtr[1])) // roll a random value. is it greater than the parameter of the if_random call? (96 on if_random 80 will return true)
-		gAIScriptPtr = AIScriptRead32(gAIScriptPtr + 2);
+		gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
 	else
 		gAIScriptPtr += 6;
 }
@@ -347,7 +348,7 @@ void BattleAICmd_if_random_1(void) // if RNG Value equal to
 	u16 random = Random();
 	
 	if (random % 256 == gAIScriptPtr[1]) // roll a random value. is it greater than the parameter of the if_random call? (96 on if_random 80 will return true)
-		gAIScriptPtr = AIScriptRead32(gAIScriptPtr + 2);
+		gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
 	else
 		gAIScriptPtr += 6;
 }
@@ -357,7 +358,7 @@ void BattleAICmd_if_not_random_1(void) // if RNG value not equal to
 	u16 random = Random();
 	
 	if (random % 256 != gAIScriptPtr[1]) // roll a random value. is it greater than the parameter of the if_random call? (96 on if_random 80 will return true)
-		gAIScriptPtr = AIScriptRead32(gAIScriptPtr + 2);
+		gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
 	else
 		gAIScriptPtr += 6;
 }
@@ -382,7 +383,7 @@ void BattleAICmd_if_hp_less_than(void)
 		var = gUnknown_02024C08;
 	
 	if ((u32)(100 * gBattleMons[var].hp / gBattleMons[var].maxHP) < gAIScriptPtr[2])
-		gAIScriptPtr = AIScriptRead32(gAIScriptPtr + 3);
+		gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
 	else
 		gAIScriptPtr += 7;
 }
@@ -397,7 +398,7 @@ void BattleAICmd_if_hp_more_than(void)
 		var = gUnknown_02024C08;
 	
 	if ((u32)(100 * gBattleMons[var].hp / gBattleMons[var].maxHP) > gAIScriptPtr[2])
-		gAIScriptPtr = AIScriptRead32(gAIScriptPtr + 3);
+		gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
 	else
 		gAIScriptPtr += 7;
 }
@@ -412,7 +413,7 @@ void BattleAICmd_if_hp_equal(void)
 		var = gUnknown_02024C08;
 	
 	if ((u32)(100 * gBattleMons[var].hp / gBattleMons[var].maxHP) == gAIScriptPtr[2])
-		gAIScriptPtr = AIScriptRead32(gAIScriptPtr + 3);
+		gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
 	else
 		gAIScriptPtr += 7;
 }
@@ -427,7 +428,7 @@ void BattleAICmd_if_hp_not_equal(void)
 		var = gUnknown_02024C08;
 	
 	if ((u32)(100 * gBattleMons[var].hp / gBattleMons[var].maxHP) != gAIScriptPtr[2])
-		gAIScriptPtr = AIScriptRead32(gAIScriptPtr + 3);
+		gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
 	else
 		gAIScriptPtr += 7;
 }
@@ -445,7 +446,7 @@ void BattleAICmd_if_status(void)
 	temp = AIScriptRead32(gAIScriptPtr + 2);
 	
 	if (gBattleMons[var].status1 & temp)
-		gAIScriptPtr = AIScriptRead32(gAIScriptPtr + 6);
+		gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 6);
 	else
 		gAIScriptPtr += 10;
 }
@@ -463,7 +464,7 @@ void BattleAICmd_if_not_status(void)
 	temp = AIScriptRead32(gAIScriptPtr + 2);
 	
 	if (!(gBattleMons[var].status1 & temp))
-		gAIScriptPtr = AIScriptRead32(gAIScriptPtr + 6);
+		gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 6);
 	else
 		gAIScriptPtr += 10;
 }
@@ -481,7 +482,7 @@ void BattleAICmd_if_status2(void)
 	temp = AIScriptRead32(gAIScriptPtr + 2);
 	
 	if (gBattleMons[var].status2 & temp)
-		gAIScriptPtr = AIScriptRead32(gAIScriptPtr + 6);
+		gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 6);
 	else
 		gAIScriptPtr += 10;
 }
@@ -499,7 +500,7 @@ void BattleAICmd_if_not_status2(void)
 	temp = AIScriptRead32(gAIScriptPtr + 2);
 	
 	if (!(gBattleMons[var].status2 & temp))
-		gAIScriptPtr = AIScriptRead32(gAIScriptPtr + 6);
+		gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 6);
 	else
 		gAIScriptPtr += 10;
 }
@@ -517,7 +518,7 @@ void BattleAICmd_if_status3(void)
 	temp = AIScriptRead32(gAIScriptPtr + 2);
 	
 	if ( gUnknown_02024C98[var] & temp )
-		gAIScriptPtr = AIScriptRead32(gAIScriptPtr + 6);
+		gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 6);
 	else
 		gAIScriptPtr += 10;
 }
@@ -535,7 +536,7 @@ void BattleAICmd_if_not_status3(void)
 	temp = AIScriptRead32(gAIScriptPtr + 2);
 	
 	if (!(gUnknown_02024C98[var] & temp))
-		gAIScriptPtr = AIScriptRead32(gAIScriptPtr + 6);
+		gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 6);
 	else
 		gAIScriptPtr += 10;
 }
@@ -555,7 +556,7 @@ void BattleAICmd_if_status4(void)
 	temp2 = AIScriptRead32(gAIScriptPtr + 2);
 	
 	if ( gUnknown_02024C7A[temp] & temp2 )
-		gAIScriptPtr = AIScriptRead32(gAIScriptPtr + 6);
+		gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 6);
 	else
 		gAIScriptPtr += 10;
 }
@@ -575,7 +576,7 @@ void BattleAICmd_if_not_status4(void)
 	temp2 = AIScriptRead32(gAIScriptPtr + 2);
 	
 	if (!(gUnknown_02024C7A[temp] & temp2))
-		gAIScriptPtr = AIScriptRead32(gAIScriptPtr + 6);
+		gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 6);
 	else
 		gAIScriptPtr += 10;
 }
@@ -583,7 +584,7 @@ void BattleAICmd_if_not_status4(void)
 void BattleAICmd_if_less_than(void)
 {
 	if (unk_2016800.unk8 < gAIScriptPtr[1])
-		gAIScriptPtr = AIScriptRead32(gAIScriptPtr + 2);
+		gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
 	else
 		gAIScriptPtr += 6;
 }
@@ -591,7 +592,7 @@ void BattleAICmd_if_less_than(void)
 void BattleAICmd_if_more_than(void)
 {
 	if (unk_2016800.unk8 > gAIScriptPtr[1])
-		gAIScriptPtr = AIScriptRead32(gAIScriptPtr + 2);
+		gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
 	else
 		gAIScriptPtr += 6;
 }
@@ -599,7 +600,7 @@ void BattleAICmd_if_more_than(void)
 void BattleAICmd_if_equal(void)
 {
 	if (unk_2016800.unk8 == gAIScriptPtr[1])
-		gAIScriptPtr = AIScriptRead32(gAIScriptPtr + 2);
+		gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
 	else
 		gAIScriptPtr += 6;
 }
@@ -607,47 +608,47 @@ void BattleAICmd_if_equal(void)
 void BattleAICmd_if_not_equal(void)
 {
 	if (unk_2016800.unk8 != gAIScriptPtr[1])
-		gAIScriptPtr = AIScriptRead32(gAIScriptPtr + 2);
+		gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
 	else
 		gAIScriptPtr += 6;
 }
 
 void BattleAICmd_if_less_than_32(void)
 {
-	u8 *temp = AIScriptRead32(gAIScriptPtr + 1);
+	u8 *temp = AIScriptReadPtr(gAIScriptPtr + 1);
 
 	if (unk_2016800.unk8 < *temp)
-		gAIScriptPtr = AIScriptRead32(gAIScriptPtr + 5);
+		gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 5);
 	else
 		gAIScriptPtr += 9;
 }
 
 void BattleAICmd_if_more_than_32(void)
 {
-	u8 *temp = AIScriptRead32(gAIScriptPtr + 1);
+	u8 *temp = AIScriptReadPtr(gAIScriptPtr + 1);
 
 	if (unk_2016800.unk8 > *temp)
-		gAIScriptPtr = AIScriptRead32(gAIScriptPtr + 5);
+		gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 5);
 	else
 		gAIScriptPtr += 9;
 }
 
 void BattleAICmd_if_equal_32(void)
 {
-	u8 *temp = AIScriptRead32(gAIScriptPtr + 1);
+	u8 *temp = AIScriptReadPtr(gAIScriptPtr + 1);
 
 	if (unk_2016800.unk8 == *temp)
-		gAIScriptPtr = AIScriptRead32(gAIScriptPtr + 5);
+		gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 5);
 	else
 		gAIScriptPtr += 9;
 }
 
 void BattleAICmd_if_not_equal_32(void)
 {
-	u8 *temp = AIScriptRead32(gAIScriptPtr + 1);
+	u8 *temp = AIScriptReadPtr(gAIScriptPtr + 1);
 
 	if (unk_2016800.unk8 != *temp)
-		gAIScriptPtr = AIScriptRead32(gAIScriptPtr + 5);
+		gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 5);
 	else
 		gAIScriptPtr += 9;
 }
@@ -657,7 +658,7 @@ void BattleAICmd_if_move(void)
 	u16 move = AIScriptRead16(gAIScriptPtr + 1);
 
 	if (unk_2016800.unk2 == move)
-		gAIScriptPtr = AIScriptRead32(gAIScriptPtr + 3);
+		gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
 	else
 		gAIScriptPtr += 7;
 }
@@ -667,20 +668,20 @@ void BattleAICmd_if_not_move(void)
 	u16 move = AIScriptRead16(gAIScriptPtr + 1);
 
 	if (unk_2016800.unk2 != move)
-		gAIScriptPtr = AIScriptRead32(gAIScriptPtr + 3);
+		gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
 	else
 		gAIScriptPtr += 7;
 }
 
 void BattleAICmd_if_in_bytes(void)
 {
-    u8 *ptr = AIScriptRead32(gAIScriptPtr + 1);
+    u8 *ptr = AIScriptReadPtr(gAIScriptPtr + 1);
    
    while(*ptr != 0xFF)
    {
        if(unk_2016800.unk8 == *ptr)
        {
-           gAIScriptPtr = AIScriptRead32(gAIScriptPtr + 5);
+           gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 5);
            return;
        }
        ptr++;
@@ -690,7 +691,7 @@ void BattleAICmd_if_in_bytes(void)
 
 void BattleAICmd_if_not_in_bytes(void)
 {
-    u8 *ptr = AIScriptRead32(gAIScriptPtr + 1);
+    u8 *ptr = AIScriptReadPtr(gAIScriptPtr + 1);
    
    while(*ptr != 0xFF)
    {
@@ -701,18 +702,18 @@ void BattleAICmd_if_not_in_bytes(void)
        }
        ptr++;
    }
-   gAIScriptPtr = AIScriptRead32(gAIScriptPtr + 5);
+   gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 5);
 }
 
 void BattleAICmd_if_in_words(void)
 {
-    u16 *ptr = AIScriptRead32(gAIScriptPtr + 1);
+    u16 *ptr = (u16 *)AIScriptReadPtr(gAIScriptPtr + 1);
    
    while(*ptr != 0xFFFF)
    {
        if(unk_2016800.unk8 == *ptr)
        {
-           gAIScriptPtr = AIScriptRead32(gAIScriptPtr + 5);
+           gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 5);
            return;
        }
        ptr++;
@@ -722,7 +723,7 @@ void BattleAICmd_if_in_words(void)
 
 void BattleAICmd_if_not_in_words(void)
 {
-    u16 *ptr = AIScriptRead32(gAIScriptPtr + 1);
+    u16 *ptr = (u16 *)AIScriptReadPtr(gAIScriptPtr + 1);
    
    while(*ptr != 0xFFFF)
    {
@@ -733,7 +734,7 @@ void BattleAICmd_if_not_in_words(void)
        }
        ptr++;
    }
-   gAIScriptPtr = AIScriptRead32(gAIScriptPtr + 5);
+   gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 5);
 }
 
 void BattleAICmd_if_user_can_damage(void)
@@ -749,7 +750,7 @@ void BattleAICmd_if_user_can_damage(void)
    if(i == 4)
        gAIScriptPtr += 5;
    else
-       gAIScriptPtr = AIScriptRead32(gAIScriptPtr + 1);
+       gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
 }
 
 void BattleAICmd_if_user_cant_damage(void)
@@ -765,7 +766,7 @@ void BattleAICmd_if_user_cant_damage(void)
    if(i != 4)
        gAIScriptPtr += 5;
    else
-       gAIScriptPtr = AIScriptRead32(gAIScriptPtr + 1);
+       gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
 }
 
 void BattleAICmd_unk_21(void)
@@ -1062,7 +1063,7 @@ void BattleAICmd_get_move(void)
 void BattleAICmd_if_type(void)
 {
 	if ( gAIScriptPtr[1] == unk_2016800.unk8 )
-		gAIScriptPtr = AIScriptRead32(gAIScriptPtr + 2);
+		gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
 	else
 		gAIScriptPtr += 6;
 }
@@ -1070,7 +1071,7 @@ void BattleAICmd_if_type(void)
 void BattleAICmd_unk_27(void) // if_not_type
 {
 	if ( gAIScriptPtr[1] != unk_2016800.unk8 )
-		gAIScriptPtr = AIScriptRead32(gAIScriptPtr + 2);
+		gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
 	else
 		gAIScriptPtr += 6;
 }
@@ -1078,7 +1079,7 @@ void BattleAICmd_unk_27(void) // if_not_type
 void BattleAICmd_if_would_go_first(void)
 {
 	if ( b_first_side(gUnknown_02024C07, gUnknown_02024C08, 1) == gAIScriptPtr[1] )
-		gAIScriptPtr = AIScriptRead32(gAIScriptPtr + 2);
+		gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
 	else
 		gAIScriptPtr += 6;
 }
@@ -1086,7 +1087,7 @@ void BattleAICmd_if_would_go_first(void)
 void BattleAICmd_if_would_not_go_first(void)
 {
 	if ( b_first_side(gUnknown_02024C07, gUnknown_02024C08, 1) != gAIScriptPtr[1] )
-		gAIScriptPtr = AIScriptRead32(gAIScriptPtr + 2);
+		gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
 	else
 		gAIScriptPtr += 6;
 }
