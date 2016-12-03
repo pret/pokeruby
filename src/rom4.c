@@ -590,13 +590,13 @@ void walkrun_find_lowest_active_bit_in_bitfield(void)
 {
     gUnknown_02029810.player_field_1 = player_get_direction_lower_nybble();
 
-    if (TestPlayerAvatarFlags(2))
+    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE))
         gUnknown_02029810.player_field_0 = 2;
-    else if (TestPlayerAvatarFlags(4))
+    else if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_ACRO_BIKE))
         gUnknown_02029810.player_field_0 = 4;
-    else if (TestPlayerAvatarFlags(8))
+    else if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
         gUnknown_02029810.player_field_0 = 8;
-    else if (TestPlayerAvatarFlags(0x10))
+    else if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_4))
         gUnknown_02029810.player_field_0 = 16;
     else
         gUnknown_02029810.player_field_0 = 1;
@@ -803,7 +803,7 @@ void sub_8053E90(void)
             music = gSaveBlock1.battleMusic;
         else if (sav1_map_get_light_level() == 5)
             music = BGM_DEEPDEEP;
-        else if (TestPlayerAvatarFlags(8))
+        else if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
             music = BGM_NAMINORI;
     }
 
@@ -831,12 +831,12 @@ void sub_8053F0C(void)
         {
             if (currentMusic == BGM_DEEPDEEP || currentMusic == BGM_NAMINORI)
                 return;
-            if (TestPlayerAvatarFlags(8))
+            if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
                 newMusic = BGM_NAMINORI;
         }
         if (newMusic != currentMusic)
         {
-            if (TestPlayerAvatarFlags(6))
+            if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
                 FadeOutAndFadeInNewMapMusic(newMusic, 4, 4);
             else
                 FadeOutAndPlayNewMapMusic(newMusic, 8);

@@ -332,7 +332,7 @@ s8 sub_8081D3C(void)
         return 5;
     if (sub_80574D8(tileBehavior))
         return 6;
-    if (TestPlayerAvatarFlags(8))
+    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
     {
         if (sub_8057450(tileBehavior))
             return 5;

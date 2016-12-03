@@ -388,7 +388,7 @@ static bool8 DoWildEncounterRateDiceRoll(u16 encounterRate)
 static bool8 DoWildEncounterTest(u32 encounterRate, bool8 ignoreAbility)
 {
     encounterRate *= 16;
-    if (TestPlayerAvatarFlags(6))
+    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
         encounterRate = encounterRate * 80 / 100;
     ApplyFluteEncounterRateMod(&encounterRate);
     ApplyCleanseTagEncounterRateMod(&encounterRate);
@@ -463,7 +463,7 @@ bool8 StandardWildEncounter(u16 a, u16 b)
                 }
             }
             else if (MetatileBehavior_IsWaterWildEncounter(a) == TRUE
-             || (TestPlayerAvatarFlags(8) && MetatileBehavior_IsBridge(a) == TRUE))
+             || (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING) && MetatileBehavior_IsBridge(a) == TRUE))
             {
                 if (gWildMonHeaders[headerNum].waterMonsInfo)
                 {

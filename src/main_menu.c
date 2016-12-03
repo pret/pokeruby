@@ -57,9 +57,9 @@ extern const struct SpritePalette gMonPaletteTable[];
 extern struct SpriteTemplate gUnknown_02024E8C;
 extern void * const gUnknown_081FAF4C[];
 extern u16 gUnknown_081E795C[];
-extern u8 * const gUnknown_081E79B0[][2];
-extern u8 * const gMalePresetNames[][2];
-extern u8 * const gFemalePresetNames[][2];
+extern const struct MenuAction gUnknown_081E79B0[];
+extern const struct MenuAction gMalePresetNames[];
+extern const struct MenuAction gFemalePresetNames[];
 
 extern const u8 gUnknown_081E764C[];
 extern const u8 gUnknown_081E768C[];
@@ -1645,9 +1645,9 @@ static void SetPresetPlayerName(u8 index)
     u8 *name;
 
     if (gSaveBlock2.playerGender == MALE)
-        name = gMalePresetNames[index][0];
+        name = gMalePresetNames[index].text;
     else
-        name = gFemalePresetNames[index][0];
+        name = gFemalePresetNames[index].text;
 
     for (i = 0; i < 7; i++)
         gSaveBlock2.playerName[i] = name[i];

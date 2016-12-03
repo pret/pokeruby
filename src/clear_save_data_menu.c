@@ -11,7 +11,7 @@
 
 extern u8 gSystemText_ClearAllSaveDataPrompt[];
 extern u8 gSystemText_ClearingData[];
-extern u8 *gUnknown_08376D74[][2];
+extern const struct MenuAction gUnknown_08376D74[];
 
 static void VBlankCB_ClearSaveDataScreen(void);
 static void Task_InitMenu(u8);
