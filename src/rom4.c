@@ -1418,7 +1418,7 @@ bool32 sub_805493C(u8 *a1, u32 a2)
         sub_8054814();
         sub_8054C54();
         SetUpWindowConfig(&gWindowConfig_81E6C3C);
-        InitMenuWindow((u8 *)&gWindowConfig_81E6CE4);
+        InitMenuWindow(&gWindowConfig_81E6CE4);
         (*a1)++;
         break;
     case 5:
