@@ -20,7 +20,7 @@ void current_map_music_set__default_for_battle(u16);
 
 // asm/rom_8040EB4.o
 void StoreWordInTwoHalfwords(u16 *, u32);
-void LoadWordFromTwoHalfwords(u16 *, u32);
+void LoadWordFromTwoHalfwords(u16 *, u32 *);
 
 // asm/daycare.o
 u8 daycare_count_pokemon(u8 *);
