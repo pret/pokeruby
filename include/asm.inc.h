@@ -20,7 +20,7 @@ void current_map_music_set__default_for_battle(u16);
 
 // asm/rom_8040EB4.o
 void StoreWordInTwoHalfwords(u16 *, u32);
-void LoadWordFromTwoHalfwords(u16 *, u32);
+void LoadWordFromTwoHalfwords(u16 *, u32 *);
 
 // asm/daycare.o
 u8 daycare_count_pokemon(u8 *);
@@ -244,10 +244,6 @@ void sub_8089668(void);
 void sub_8089944(int i, int i1, int i2, int i3, int i4, int i5, int i6);
 void sub_8089A70(void);
 
-// asm/trainer_card.o
-void sub_8093110(void (*)(void));
-void sub_8093130(u8, void (*)(void));
-
 // asm/rom_8094928.o
 void sub_80961D8(void);
 u8 pokemon_ailments_get_primary(u32);
@@ -317,6 +313,7 @@ void sub_80C4940(void);
 void sub_80C4980(u8);
 
 // asm/script_pokemon_util_80C4BF0.o
+u8 sub_80C4D50(void);
 void ShowContestWinner(void);
 void HealPlayerParty();
 u8 ScriptGiveMon(u16, u8, u16, u32, u32, u8);

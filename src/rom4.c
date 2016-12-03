@@ -42,14 +42,6 @@ struct UnkTVStruct
     u32 tv_field_4;
 };
 
-struct LinkPlayerMapObject
-{
-    u8 active;
-    u8 linkPlayerId;
-    u8 mapObjId;
-    u8 mode;
-};
-
 struct UCoords32
 {
     u32 x, y;

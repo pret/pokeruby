@@ -11,6 +11,7 @@
 #include "sprite.h"
 #include "string_util.h"
 #include "task.h"
+#include "trainer_card.h"
 #include "flag.h"
 #include "rom4.h"
 #include "safari_zone.h"
