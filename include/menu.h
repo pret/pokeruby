@@ -10,7 +10,7 @@ struct MenuAction
 };
 
 void InitMenuWindow(const struct WindowConfig *);
-void MultistepInitMenuWindowBegin(struct WindowConfig *);
+void MultistepInitMenuWindowBegin(const struct WindowConfig *);
 bool32 MultistepInitMenuWindowContinue(void);
 void unref_sub_8071DA4(struct WindowConfig *, u16);
 void MenuLoadTextWindowGraphics_OverrideFrameType(u8);

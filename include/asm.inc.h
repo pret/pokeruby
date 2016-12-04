@@ -262,6 +262,11 @@ void sub_80A68CC();
 
 // asm/contest.o
 void sub_80AB1B0(void);
+void sub_80AE098(u8);
+void sub_80AE398(u8, u8);
+void sub_80AE82C(u8);
+void sub_80AF668(void);
+void sub_80B0F28(u8);
 void sub_80B2D1C(void);
 
 // asm/shop.o
@@ -308,9 +313,11 @@ void sub_80BFD44(void *, u32, u8);
 void sub_80C0514(void *, u32, u8);
 
 // asm/contest_link_80C2020.o
+void sub_80C2358(void);
 void sub_80C48C8(void);
 void sub_80C4940(void);
 void sub_80C4980(u8);
+u8 sub_80C4B34(u8 *);
 
 // asm/script_pokemon_util_80C4BF0.o
 u8 sub_80C4D50(void);
@@ -331,6 +338,13 @@ void DestroyRecordMixingSprite(void);
 void RotatingGatePuzzleCameraUpdate(s16, s16);
 void sub_80C8080();
 u32 CheckForRotatingGatePuzzleCollision(u8, s16, s16);
+
+// asm/contest_link_80C857C.o
+void sub_80C8734(u8);
+void sub_80C88AC(u8);
+void sub_80C8E1C(u8);
+void sub_80C8EBC(u8);
+void sub_80C8F34(u8);
 
 // asm/bike.o
 void MovePlayerOnBike(u8, u16, u16);
