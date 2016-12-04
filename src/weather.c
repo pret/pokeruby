@@ -65,9 +65,7 @@ void sub_807C828(void) {
 	u8 index;
 	if (!FuncIsActiveTask(&sub_807CA34)) {
 		index = AllocSpritePalette(0x1200);
-		CpuSet(&gUnknown_083970E8,
-			&gPlttBufferUnfaded[0x100 + index * 16],
-			CPU_SET_32BIT | 8);
+		CpuCopy32(&gUnknown_083970E8, &gPlttBufferUnfaded[0x100 + index * 16], 32);
 		sub_807CB10();
 		gWeather.unknown_6D5 = index;
 		gWeather.unknown_6D4 = AllocSpritePalette(0x1201);
