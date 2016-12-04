@@ -228,7 +228,9 @@ struct SaveBlock1
     /*0x2B04*/ u16 outbreakPokemonMoves[4];
     /*0x2B0C*/ u8 unk2B0C;
     /*0x2B0D*/ u8 outbreakPokemonProbability;
-    /*0x2B0E*/ u8 filler_2B0E[0x2C6];
+    /*0x2B0E*/ u8 filler_2B0E[0xE];
+	/*0x2B1C*/ u16 unk2B1C[4];
+	/*0x2B24*/ u8 filler_2B24[0x2B0];
     /*0x2DD4*/ struct EasyChatPair easyChatPairs[5]; //Dewford trend [0] and some other stuff
     /*0x2DFC*/ u8 filler_2DFC[0x100];
     /*0x2EFC*/ struct SB1_2EFC_Struct sb1_2EFC_struct[5];
@@ -270,6 +272,14 @@ struct Pokedex
     /*0x44*/ u8 seen[52];
 };
 
+struct SaveBlock2_Sub
+{
+	/*0x0000, 0x00A8*/ u8 filler_000[0x4C8];
+	/*0x04C8, 0x0570*/ u16 var_4C8;
+	/*0x04CA, 0x0572*/ u16 var_4CA;
+	/*0x04CC, 0x0574*/ u8 filler_4CC[0x31C];
+};
+
 struct SaveBlock2
 {
     /*0x00*/ u8 playerName[8];
@@ -291,7 +301,7 @@ struct SaveBlock2
     /*0x90*/ u8 filler_90[0x8];
     /*0x98*/ struct Time localTimeOffset;
     /*0xA0*/ struct Time lastBerryTreeUpdate;
-    /*0xA8*/ u8 filler_A8[0x7E8];
+    /*0xA8*/ struct SaveBlock2_Sub filler_A8;
 };
 
 struct UnkStruct_8054FF8_Substruct

@@ -67,7 +67,7 @@ void sub_8052DA8(void)
 
 void sub_8052DE4(void)
 {
-    CpuFill32(0, gSaveBlock2.filler_A8, sizeof(gSaveBlock2.filler_A8));
+    CpuFill32(0, &gSaveBlock2.filler_A8, sizeof(gSaveBlock2.filler_A8));
 }
 
 void sub_8052E04(void)

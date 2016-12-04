@@ -109,6 +109,7 @@ SECTIONS {
         src/option_menu.o(.text);
         src/pokedex.o(.text);
         asm/pokedex.o(.text);
+        src/trainer_card.o(.text);
         asm/trainer_card.o(.text);
         src/save_menu_util.o(.text);
         asm/rom_8094928.o(.text);
