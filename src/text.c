@@ -1922,10 +1922,10 @@ static void EmptyFunc(void)
 {
 }
 
-void InitWindowFromConfig(struct Window *win, struct WindowConfig *winConfig)
+void InitWindowFromConfig(struct Window *win, const struct WindowConfig *winConfig)
 {
     *win = sDefaultWindow;
-    win->config = winConfig;
+    win->config = (struct WindowConfig *)winConfig;
     win->textMode = winConfig->textMode;
     win->spacing = winConfig->spacing;
     win->fontNum = winConfig->fontNum;

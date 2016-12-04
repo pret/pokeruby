@@ -137,7 +137,7 @@ void SetUpWindowConfig(const struct WindowConfig *winConfig);
 u16 InitWindowTileData(struct Window *win, u16 startOffset);
 u32 MultistepInitWindowTileData(struct Window *win, u16 startOffset);
 bool32 MultistepLoadFont(void);
-void InitWindowFromConfig(struct Window *win, struct WindowConfig *winConfig);
+void InitWindowFromConfig(struct Window *win, const struct WindowConfig *winConfig);
 void InitWindow(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 left, u8 top);
 void sub_8002E4C(struct Window *win, const u8 *text, u16 tileDataStartOffset, u8 left, u16 top, u32 a6);
 void sub_8002E90(struct Window *win, const u8 *text);
