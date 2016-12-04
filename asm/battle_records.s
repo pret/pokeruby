@@ -452,7 +452,7 @@ sub_8110290: @ 8110290
 	lsls r2, r4, 3
 	subs r2, r4
 	lsls r2, 3
-	ldr r3, _081102D8 @ =gUnknown_0202FFF0 + 0x30
+	ldr r3, _081102D8 @ =gTrainerCards + 0x30
 	adds r1, r2, r3
 	subs r3, 0x30
 	adds r2, r3

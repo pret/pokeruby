@@ -5,15 +5,15 @@
 
 struct UnkPlayerStruct
 {
-	u8 player_field_0;
-	u8 player_field_1;
+    u8 player_field_0;
+    u8 player_field_1;
 };
 
 struct LinkPlayerMapObject {
-	u8 active;
-	u8 linkPlayerId;
-	u8 mapObjId;
-	u8 mode;
+    u8 active;
+    u8 linkPlayerId;
+    u8 mapObjId;
+    u8 mode;
 };
 
 // sub_8052F5C
