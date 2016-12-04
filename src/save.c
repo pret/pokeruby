@@ -522,7 +522,7 @@ u8 sub_8125B88(u8 a1, u8 *data, u16 size)
 
 u8 sub_8125BF8(u8 sector, struct SaveSection *section)
 {
-    ReadFlash(sector, 0, section, 0x1000);
+    ReadFlash(sector, 0, section->data, 0x1000);
     return 1;
 }
 
@@ -691,7 +691,7 @@ bool8 unref_sub_8125F4C(struct UnkSaveSection *a1)
     for (i = 0; i < 0x1000; i++)
         raw[i] = 0;
 
-    ReadFlash(gUnknown_08401E24[0], 0, a1, 4096);
+    ReadFlash(gUnknown_08401E24[0], 0, a1->data, 4096);
 
     if (a1->unknown != 0x8012025)
         return FALSE;

@@ -65,14 +65,14 @@ bool8 TrainerCanApproachPlayer(struct MapObject *trainerObj)
     if ( trainerObj->trainerType == 1 ) // trainers that don't spin
     {
         playerCoord = gIsTrainerInRange[trainerObj->mapobj_unk_18 - 1](trainerObj, trainerObj->trainerRange_berryTreeId, x, y);
-        return CheckPathBetweenTrainerAndPlayer(trainerObj, playerCoord, trainerObj->mapobj_unk_18);
+        return CheckPathBetweenTrainerAndPlayer((struct MapObject2 *)trainerObj, playerCoord, trainerObj->mapobj_unk_18);
     }
     else // spinners
     {
         for(i = 0; i < 4; i++)
         {
             playerCoord = gIsTrainerInRange[i](trainerObj, trainerObj->trainerRange_berryTreeId, x, y);
-            if ( CheckPathBetweenTrainerAndPlayer(trainerObj, playerCoord, i + 1) ) // directions are 1-4 instead of 0-3. south north west east
+            if ( CheckPathBetweenTrainerAndPlayer((struct MapObject2 *)trainerObj, playerCoord, i + 1) ) // directions are 1-4 instead of 0-3. south north west east
                 return playerCoord;
         }
         return FALSE;
@@ -135,7 +135,7 @@ bool8 CheckPathBetweenTrainerAndPlayer(struct MapObject2 *trainerObj, u8 playerC
 
     for(i = 0; i <= playerCoord - 1;)
     {
-        var = sub_8060024(trainerObj, x, y, direction);
+        var = sub_8060024((struct MapObject *)trainerObj, x, y, direction);
 
         if (var != 0 && (var & 1) != 0 )
             return FALSE;
@@ -150,7 +150,7 @@ bool8 CheckPathBetweenTrainerAndPlayer(struct MapObject2 *trainerObj, u8 playerC
     trainerObj->mapobj_unk_19 = 0;
     trainerObj->mapobj_unk_19b = 0;
 
-    var = npc_block_way(trainerObj, x, y, direction);
+    var = npc_block_way((struct MapObject *)trainerObj, x, y, direction);
 
     trainerObj->mapobj_unk_19 = unk19_temp;
     trainerObj->mapobj_unk_19b = unk19b_temp;
@@ -182,7 +182,7 @@ void sub_80842FC(TaskFunc func)
 void RunTrainerSeeFuncList(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    struct MapObject *trainerObj = (task->data[1] << 16) | (task->data[2]);
+    struct MapObject *trainerObj = (struct MapObject *)((task->data[1] << 16) | (task->data[2]));
 
     if (!trainerObj->active)
         SwitchTaskToFollowupFunc(taskId);
@@ -199,7 +199,7 @@ s8 sub_8084398(u8 taskId, struct Task *task, struct MapObject *trainerObj)
 {
     u8 direction;
 
-    FieldObjectGetLocalIdAndMap(trainerObj, &gUnknown_0202FF84[0], &gUnknown_0202FF84[1], &gUnknown_0202FF84[2]);
+    FieldObjectGetLocalIdAndMap(trainerObj, (u8 *)&gUnknown_0202FF84[0], (u8 *)&gUnknown_0202FF84[1], (u8 *)&gUnknown_0202FF84[2]);
     FieldEffectStart(0);
     
     direction = GetFaceDirectionAnimId(trainerObj->mapobj_unk_18);
@@ -351,7 +351,7 @@ void sub_80846E4(u8 taskId)
     struct MapObject *mapObj;
 
     // another mapObj loaded into by loadword?
-    LoadWordFromTwoHalfwords(&task->data[1], &mapObj);
+    LoadWordFromTwoHalfwords(&task->data[1], (u32 *)&mapObj);
     if(!task->data[7])
     {
         FieldObjectClearAnim(mapObj);
