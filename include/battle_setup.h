@@ -37,7 +37,7 @@ bool32 battle_exit_is_player_defeat(u32 a1);
 // battle_80801F0
 u8 *TrainerBattleConfigure(u8 *data);
 void TrainerWantsBattle(u8, u8 *);
-u8* GetTrainerFlagFromScriptPointer(u8 *data);
+bool32 GetTrainerFlagFromScriptPointer(u8 *data);
 // sub_8082524
 // sub_8082558
 // sub_8082564
