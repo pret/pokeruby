@@ -58,7 +58,7 @@ extern u8 (*gUnknown_083970B8[])(void);
 extern u8 *gUnknown_030006DC;
 extern u8 gUnknown_083970C8;
 extern u8 (*gUnknown_0202FC48)[32];
-extern u8 (*gUnknown_0202F9E8)[32];
+extern u8 gUnknown_0202F9E8[32];
 
 
 void sub_807C828(void) {
@@ -167,8 +167,7 @@ void sub_807CB10(void) {
 		if (v0 == 0) {
 			v1 = &gUnknown_0202F9E8;
 		} else {
-			v1 = &gUnknown_0202F9E8 + 0x260/4;
-			//v1 = &gUnknown_0202FC48;
+			v1 = &gUnknown_0202F9E8 + 19;
 		}
 		for (v2 = 0; (u16)v2 <= 0x1f; v2++) {
 			v4 = v2 << 8;
