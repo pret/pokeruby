@@ -200,6 +200,7 @@ void DoTimeBasedEvents(void);
 void CB2_InitResetRtcScreen(void);
 
 // asm/rom_806D7F8.o
+void GetMonNickname(struct Pokemon *mon, u8 *nickname);
 bool8 pokemon_has_move(struct Pokemon *, u16);
 
 // asm/rom_8074BAC.o
@@ -243,6 +244,7 @@ void sub_80895F8(u32 i, u32 i1, u32 i2);
 void sub_8089668(void);
 void sub_8089944(int i, int i1, int i2, int i3, int i4, int i5, int i6);
 void sub_8089A70(void);
+void sub_808AB90(void);
 
 // asm/rom_8094928.o
 void sub_80961D8(void);
@@ -390,6 +392,9 @@ void PlaySlotMachine(u8, void *);
 void sub_8106630(u32);
 
 // asm/rom6.o
+bool8 npc_before_player_of_type(u8);
+u8 oei_task_add(void);
+
 void sub_810C994(void);
 void sub_810CA6C(s32);
 s16 sub_810CAE4(u8, struct Pokeblock *);
@@ -465,6 +470,10 @@ void CB2_InitMysteryEventMenu(void);
 
 // asm/save_failed_screen.o
 void fullscreen_save_activate();
+
+// asm/rom_81473B8.s
+bool8 sub_81474C8(void);
+void sub_8147514(void);
 
 // asm/rom_8148B8C.o
 void load_intro_part2_graphics(/*TODO: arg types*/);
