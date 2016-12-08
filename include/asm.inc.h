@@ -471,7 +471,7 @@ void CB2_InitMysteryEventMenu(void);
 // asm/save_failed_screen.o
 void fullscreen_save_activate();
 
-// asm/rom_81473B8.s
+// asm/rom_81473B8.o
 bool8 sub_81474C8(void);
 void sub_8147514(void);
 
