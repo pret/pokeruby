@@ -364,17 +364,7 @@ gUnknown_02029816: @ 2029816
 gLinkPlayerMapObjects: @ 2029818
 	.space 0x10
 
-gUnknown_02029828: @ 2029828
-	.space 0x5000
-
-gMapHeader: @ 202E828
-	.space 0x1C
-
-gUnknown_0202E844: @ 202E844
-	.space 0xC
-
-gUnknown_0202E850: @ 202E850
-	.space 0x4
+	.include "src/fieldmap.o"
 
 gUnknown_0202E854: @ 202E854
 	.space 0x4
