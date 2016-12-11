@@ -520,8 +520,6 @@ static void task_intro_13(u8 taskId)
 
 static void task_intro_14(u8 taskId)
 {
-    u8 newTaskId;
-    
     REG_WIN0H = 0xF0;
     REG_WIN0V = 0xA0;
     REG_WININ = 0x1C;

@@ -58,7 +58,7 @@ void CopyItemName(u16 itemId, u8 *string)
 }
 
 //Unreferenced
-static s8 CountUsedBagPocketSlots(u8 pocket)
+s8 CountUsedBagPocketSlots(u8 pocket)
 {
     u8 i;
     

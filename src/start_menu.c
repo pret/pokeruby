@@ -76,7 +76,6 @@ static void BuildStartMenuActions_Link(void);
 static void DisplaySafariBallsWindow(void);
 static bool32 PrintStartMenuItemsMultistep(s16 *a, u32 b);
 static bool32 InitStartMenuMultistep(s16 *a, s16 *b);
-static void sub_8071230(void);
 static void Task_StartMenu(u8 taskId);
 static u8 StartMenu_InputProcessCallback(void);
 static u8 SaveCallback1(void);

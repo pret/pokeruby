@@ -81,7 +81,7 @@ static void sub_809323C(void);
 static void sub_8093254(void);
 static void sub_80932AC(Callback callBack);
 static void sub_80932E4(u8 arg1, Callback callBack);
-static void sub_8093324(void);
+void sub_8093324(void);
 static void nullsub_60(u8);
 static u32 sav12_xor_get_clamped_above(u8 index, u32 maxVal);
 static u8 sub_80934F4(struct TrainerCard *);
@@ -91,7 +91,7 @@ static void sub_8093598(void);
 static void sub_80935EC(void);
 static void sub_8093610(void);
 static void sub_8093688(void);
-static void sub_80936D4(void);
+void sub_80936D4(void);
 static void sub_80937A4(void);
 static void sub_80937BC(void);
 static void sub_80937D8(void);
@@ -106,13 +106,13 @@ static void sub_80939DC(u8 taskId);
 static void sub_8093A28(void);
 static u8 sub_8093A48(void);
 static void sub_8093A68(u8 taskId);
-static void sub_8093D7C(void);
+void sub_8093D7C(void);
 static void sub_8093DAC(void);
 static void sub_8093DC8(void);
 static void sub_8093DEC(void);
 static void sub_8093E04(void);
 static void sub_8093E28(void);
-static void sub_8093EA0(void);
+void sub_8093EA0(void);
 static void sub_8093EF8(void);
 static void sub_8093F14(void);
 static void sub_8093F48(void);
@@ -142,7 +142,7 @@ static void TrainerCard_Back_PrintLinkPokeblocks_Label(void);
 static void TrainerCard_Back_PrintLinkPokeblocks(void);
 static void TrainerCard_Back_PrintPokemonTrades_Label(void);
 static void TrainerCard_Back_PrintPokemonTrades(void);
-static void unref_sub_8094588(u16 left, u16 top);
+void unref_sub_8094588(u16 left, u16 top);
 
 void sub_8093110(Callback arg1) {
     sub_80932AC(arg1);
@@ -253,7 +253,7 @@ static void sub_80932E4(u8 arg1, Callback callBack) {
     StoreWordInTwoHalfwords(&task->data[TD_CALLBACK], (u32) callBack);
 }
 
-static void sub_8093324(void) {
+void sub_8093324(void) {
     u8 taskId = FindTaskIdByFunc(nullsub_60);
     struct Task *task = &gTasks[taskId];
     unk_2000000.var_1 = task->data[TD_0];
@@ -592,7 +592,7 @@ _080936D0: .4byte 0x02000000\n\
 
 #endif
 
-static void sub_80936D4(void) {
+void sub_80936D4(void) {
     unk_2000000.var_7 = FALSE;
     unk_2000000.var_8 = FALSE;
     unk_2000000.var_9 = FALSE;
@@ -1338,7 +1338,7 @@ bool8 sub_8093D50(void) {
 }
 
 __attribute__((naked))
-static void sub_8093D7C(void) {
+void sub_8093D7C(void) {
     asm(".syntax unified\n\
 	ldr r1, _08093DA0 @ =gUnknown_03004DE0\n\
 	ldr r0, _08093DA4 @ =REG_VCOUNT\n\
@@ -1471,7 +1471,7 @@ _08093E9C: .4byte 0x80000200\n\
     .syntax divided\n");
 }
 
-static void sub_8093EA0(void) {
+void sub_8093EA0(void) {
     LoadPalette(gUnknown_083B5EF8[unk_2000000.var_2], 0, 48 * 2);
     LoadPalette(gBadgesPalette, 48, 16 * 2);
     LoadPalette(gUnknown_083B5F4C, 64, 16 * 2);
@@ -2016,7 +2016,7 @@ static void TrainerCard_Back_PrintPokemonTrades(void) {
     MenuPrint_RightAligned(buffer, 28, 9);
 }
 
-static void unref_sub_8094588(u16 left, u16 top) {
+void unref_sub_8094588(u16 left, u16 top) {
     u8 *text = gOtherText_Boy;
 
     if (gSaveBlock2.playerGender == FEMALE) {

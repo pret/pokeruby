@@ -61,7 +61,6 @@ static u32 GetMonSize(u16 species, u16 b)
     u64 unk0;
     u32 r7;
     u32 var;
-    struct UnknownStruct *s;
     
     r7 = sub_8090D54(SpeciesToNationalPokedexNum(species), 0);
     var = TranslateBigMonSizeTableIndex(b);

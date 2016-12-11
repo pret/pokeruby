@@ -1,4 +1,5 @@
 #include "global.h"
+#include "blend_palette.h"
 #include "palette.h"
 
 void BlendPalette(u16 palOffset, u16 numEntries, u8 coeff, u16 blendColor)

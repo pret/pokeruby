@@ -12,8 +12,6 @@ extern s8 gTruckCamera_HorizontalTable[];
 
 s32 GetTruckCameraBobbingY(int a1)
 {
-    s32 result;
-
     if (!(a1 % 120))
         return -1;
     else if ((a1 % 10) <= 4)
@@ -24,8 +22,6 @@ s32 GetTruckCameraBobbingY(int a1)
 
 s32 GetTruckBoxMovement(int a1) // for the box movement?
 {
-    s32 result;
-    
     if (!((a1 + 120) % 180))
         return -1;
 

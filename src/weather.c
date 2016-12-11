@@ -192,7 +192,7 @@ void sub_807CB10(void) {
 					v4 += v11;
 					dunno = v4 - v9;
 					if (dunno > 0) {
-						v4 -= dunno + ((u16)dunno >> 15) >> 1;
+						v4 -= (dunno + ((u16)dunno >> 15)) >> 1;
 					}
 					v1[v6][v2] = v4 >> 8;
 					if (v1[v6][v2] > 0x1f) {

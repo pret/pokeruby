@@ -1697,7 +1697,7 @@ bool8 ScrCmd_setanimation(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 sub_8067B48()
+static bool8 sub_8067B48()
 {
     if (!FieldEffectActiveListContains(gUnknown_0202E8BC))
         return TRUE;
@@ -1775,7 +1775,7 @@ bool8 ScrCmd_setdoorclosed(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 IsDoorAnimationStopped()
+static bool8 IsDoorAnimationStopped()
 {
     if (!FieldIsDoorAnimationRunning())
         return TRUE;
