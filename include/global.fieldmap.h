@@ -3,10 +3,10 @@
 
 enum
 {
-    CONNECTION_DOWN = 1,
-    CONNECTION_UP,
-    CONNECTION_LEFT,
-    CONNECTION_RIGHT,
+    CONNECTION_SOUTH = 1,
+    CONNECTION_NORTH,
+    CONNECTION_WEST,
+    CONNECTION_EAST,
     CONNECTION_DIVE,
     CONNECTION_EMERGE
 };
@@ -28,8 +28,8 @@ struct MapData
 {
     s32 width;
     s32 height;
-    void *border;
-    void *map;
+    u16 *border;
+    u16 *map;
     struct Tileset *primaryTileset;
     struct Tileset *secondaryTileset;
 };
@@ -91,8 +91,8 @@ struct MapConnection
 {
     u8 direction;
     u32 offset;
-    s8 mapGroup;
-    s8 mapNum;
+    u8 mapGroup;
+    u8 mapNum;
 };
 
 struct MapConnections
