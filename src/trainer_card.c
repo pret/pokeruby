@@ -44,6 +44,8 @@ extern struct Struct2000000 unk_2000000;
 extern struct LinkPlayerMapObject gLinkPlayerMapObjects[];
 extern struct TrainerCard gTrainerCards[4];
 
+extern u8 gUnknown_03004DE0[]; // TODO: find out correct type
+
 extern u8 gUnknown_083B5EF4[];
 extern u16 *gUnknown_083B5EF8[5];
 extern u16 gUnknown_083B5F0C[];
@@ -220,51 +222,19 @@ static void sub_809323C(void) {
     UpdatePaletteFade();
 }
 
-__attribute__((naked))
 static void sub_8093254(void)
 {
-    asm(".syntax unified\n\
-    push {lr}\n\
-    bl LoadOam\n\
-    bl ProcessSpriteCopyRequests\n\
-    bl TransferPlttBuffer\n\
-    ldr r2, _0809329C @ =0x02000000\n\
-    ldrb r0, [r2, 0x6]\n\
-    adds r0, 0x1\n\
-    strb r0, [r2, 0x6]\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, 0x3B\n\
-    bls _0809327E\n\
-    movs r0, 0\n\
-    strb r0, [r2, 0x6]\n\
-    ldrb r0, [r2, 0x5]\n\
-    movs r1, 0x1\n\
-    eors r0, r1\n\
-    strb r0, [r2, 0x5]\n\
-_0809327E:\n\
-    ldrb r0, [r2, 0x4]\n\
-    cmp r0, 0\n\
-    beq _08093298\n\
-    ldr r1, _080932A0 @ =0x040000d4\n\
-    ldr r0, _080932A4 @ =gUnknown_03004DE0\n\
-    str r0, [r1]\n\
-    movs r2, 0xF0\n\
-    lsls r2, 3\n\
-    adds r0, r2\n\
-    str r0, [r1, 0x4]\n\
-    ldr r0, _080932A8 @ =0x800000a0\n\
-    str r0, [r1, 0x8]\n\
-    ldr r0, [r1, 0x8]\n\
-_08093298:\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_0809329C: .4byte 0x02000000\n\
-_080932A0: .4byte 0x040000d4\n\
-_080932A4: .4byte gUnknown_03004DE0\n\
-_080932A8: .4byte 0x800000a0\n\
-    .syntax divided\n");
+    LoadOam();
+    ProcessSpriteCopyRequests();
+    TransferPlttBuffer();
+    unk_2000000.var_6++;
+    if (unk_2000000.var_6 >= 60)
+    {
+        unk_2000000.var_6 = 0;
+        unk_2000000.var_5 ^= 1;
+    }
+    if (unk_2000000.var_4)
+        DmaCopy16(3, gUnknown_03004DE0, gUnknown_03004DE0 + 0x780, 320);
 }
 
 static void sub_80932AC(Callback callBack) {
