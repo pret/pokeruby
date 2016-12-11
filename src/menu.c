@@ -120,7 +120,7 @@ void MenuLoadTextWindowGraphics(void)
     LoadTextWindowGraphics(gMenuWindowPtr);
 }
 
-void BasicInitMenuWindow(struct WindowConfig *winConfig)
+void BasicInitMenuWindow(const struct WindowConfig *winConfig)
 {
     InitWindowFromConfig(gMenuWindowPtr, winConfig);
     gMenuWindowPtr->tileDataStartOffset = gMenuTextTileOffset;

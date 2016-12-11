@@ -237,6 +237,7 @@ void objc_exclamation_mark_probably(struct Sprite *sprite);
 
 // asm/rom_80859BC.o
 u8 CreateTrainerSprite_BirchSpeech(u8, u16, u16, u8, void *);
+void LoadTrainerGfx_TrainerCard(u8 gender, int, void *);
 u8 CreateBirchSprite(u8, u8, u8);
 void remove_some_task(void);
 void dp12_8087EA4(void);
@@ -292,6 +293,7 @@ void DoNamingScreen(u8 r0, struct SaveBlock2 *r1, u16 r2, u16 r3, u8 s0, MainCal
 bool8 IsEnoughMoney(u32, u32);
 void sub_80B79B8(u32 *, u32);
 void sub_80B79E0(u32 *, u32);
+void sub_80B7AEC(u32, u8 left, u8 top);
 void sub_80B7BEC(u32, u8, u8);
 void sub_80B7C14(u32, u8, u8);
 void RemoveMoneyLabelObject(u8, u8);
@@ -360,6 +362,7 @@ void sub_80E6084();
 
 // asm/easy_chat.o
 void sub_80E6764(void);
+void sub_80EB3FC(u8 *, u16);
 u8 ConvertEasyChatWordsToString(u8 *dst, u16 *words, u16, u16);
 u16 sub_80EB72C(u16);
 
@@ -394,7 +397,6 @@ void sub_8106630(u32);
 // asm/rom6.o
 bool8 npc_before_player_of_type(u8);
 u8 oei_task_add(void);
-
 void sub_810C994(void);
 void sub_810CA6C(s32);
 s16 sub_810CAE4(u8, struct Pokeblock *);
