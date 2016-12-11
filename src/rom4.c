@@ -42,14 +42,6 @@ struct UnkTVStruct
     u32 tv_field_4;
 };
 
-struct LinkPlayerMapObject
-{
-    u8 active;
-    u8 linkPlayerId;
-    u8 mapObjId;
-    u8 mode;
-};
-
 struct UCoords32
 {
     u32 x, y;
@@ -1418,7 +1410,7 @@ bool32 sub_805493C(u8 *a1, u32 a2)
         sub_8054814();
         sub_8054C54();
         SetUpWindowConfig(&gWindowConfig_81E6C3C);
-        InitMenuWindow((u8 *)&gWindowConfig_81E6CE4);
+        InitMenuWindow(&gWindowConfig_81E6CE4);
         (*a1)++;
         break;
     case 5:

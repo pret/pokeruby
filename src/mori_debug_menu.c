@@ -105,7 +105,7 @@ s8 MoriDebugMenu_BreedEgg(void)
 
 s8 MoriDebugMenu_LongName(void)
 {
-    SetMonData(gPlayerParty, 2, &gUnknown_0839B257);
+    SetMonData(gPlayerParty, MON_DATA_NICKNAME, gUnknown_0839B257);
     sub_8071C20();
     return 1;
 }

@@ -770,7 +770,7 @@ const struct WindowConfig gWindowConfig_81E6DA8 =
     (u16 *)BG_SCREEN_ADDR(11), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6DC4 =
+const struct WindowConfig WindowConfig_TrainerCard_Back_Values =
 {
     0, // BG number
     2, // BG character base block
@@ -791,7 +791,7 @@ const struct WindowConfig gWindowConfig_81E6DC4 =
     (u16 *)BG_SCREEN_ADDR(30), // tilemap
 };
 
-const struct WindowConfig gWindowConfig_81E6DE0 =
+const struct WindowConfig WindowConfig_TrainerCard_Back_Labels =
 {
     0, // BG number
     2, // BG character base block
@@ -1922,10 +1922,10 @@ static void EmptyFunc(void)
 {
 }
 
-void InitWindowFromConfig(struct Window *win, struct WindowConfig *winConfig)
+void InitWindowFromConfig(struct Window *win, const struct WindowConfig *winConfig)
 {
     *win = sDefaultWindow;
-    win->config = winConfig;
+    win->config = (struct WindowConfig *)winConfig;
     win->textMode = winConfig->textMode;
     win->spacing = winConfig->spacing;
     win->fontNum = winConfig->fontNum;

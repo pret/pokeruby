@@ -367,7 +367,7 @@ sub_81101FC: @ 81101FC
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 3
-	ldr r0, _08110220 @ =gUnknown_0202FFD4
+	ldr r0, _08110220 @ =gTrainerCards + 0x14
 	adds r1, r0
 	ldrh r0, [r1]
 	adds r0, 0x1
@@ -382,7 +382,7 @@ _0811021A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08110220: .4byte gUnknown_0202FFD4
+_08110220: .4byte gTrainerCards + 0x14
 _08110224: .4byte 0x0000270f
 	thumb_func_end sub_81101FC
 
@@ -392,7 +392,7 @@ sub_8110228: @ 8110228
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 3
-	ldr r0, _0811024C @ =gUnknown_0202FFD6
+	ldr r0, _0811024C @ =gTrainerCards + 0x16
 	adds r1, r0
 	ldrh r0, [r1]
 	adds r0, 0x1
@@ -407,7 +407,7 @@ _08110246:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0811024C: .4byte gUnknown_0202FFD6
+_0811024C: .4byte gTrainerCards + 0x16
 _08110250: .4byte 0x0000270f
 	thumb_func_end sub_8110228
 
@@ -452,7 +452,7 @@ sub_8110290: @ 8110290
 	lsls r2, r4, 3
 	subs r2, r4
 	lsls r2, 3
-	ldr r3, _081102D8 @ =gUnknown_0202FFF0
+	ldr r3, _081102D8 @ =gTrainerCards + 0x30
 	adds r1, r2, r3
 	subs r3, 0x30
 	adds r2, r3
@@ -477,7 +477,7 @@ sub_8110290: @ 8110290
 	bx r0
 	.align 2, 0
 _081102D4: .4byte gSaveBlock1 + 0x30B8
-_081102D8: .4byte gUnknown_0202FFF0
+_081102D8: .4byte gTrainerCards + 0x30
 _081102DC: .4byte gUnknown_02024D26
 _081102E0: .4byte gLinkPlayers
 _081102E4: .4byte gLinkPlayerMapObjects

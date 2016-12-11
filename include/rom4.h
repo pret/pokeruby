@@ -5,8 +5,15 @@
 
 struct UnkPlayerStruct
 {
-	u8 player_field_0;
-	u8 player_field_1;
+    u8 player_field_0;
+    u8 player_field_1;
+};
+
+struct LinkPlayerMapObject {
+    u8 active;
+    u8 linkPlayerId;
+    u8 mapObjId;
+    u8 mode;
 };
 
 // sub_8052F5C
@@ -17,7 +24,7 @@ void sub_8053050(void);
 // sub_805308C
 void sub_80530AC(void);
 void sav12_xor_increment(u8 index);
-u32 sub_8053108(u8);
+u32 sub_8053108(u8 index);
 // sav12_xor_set
 // sub_8053154
 // sub_8053198

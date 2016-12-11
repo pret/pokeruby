@@ -20,7 +20,7 @@ void current_map_music_set__default_for_battle(u16);
 
 // asm/rom_8040EB4.o
 void StoreWordInTwoHalfwords(u16 *, u32);
-void LoadWordFromTwoHalfwords(u16 *, u32);
+void LoadWordFromTwoHalfwords(u16 *, u32 *);
 
 // asm/daycare.o
 u8 daycare_count_pokemon(u8 *);
@@ -200,6 +200,7 @@ void DoTimeBasedEvents(void);
 void CB2_InitResetRtcScreen(void);
 
 // asm/rom_806D7F8.o
+void GetMonNickname(struct Pokemon *mon, u8 *nickname);
 bool8 pokemon_has_move(struct Pokemon *, u16);
 
 // asm/rom_8074BAC.o
@@ -236,6 +237,7 @@ void objc_exclamation_mark_probably(struct Sprite *sprite);
 
 // asm/rom_80859BC.o
 u8 CreateTrainerSprite_BirchSpeech(u8, u16, u16, u8, void *);
+void LoadTrainerGfx_TrainerCard(u8 gender, int, void *);
 u8 CreateBirchSprite(u8, u8, u8);
 void remove_some_task(void);
 void dp12_8087EA4(void);
@@ -243,10 +245,7 @@ void sub_80895F8(u32 i, u32 i1, u32 i2);
 void sub_8089668(void);
 void sub_8089944(int i, int i1, int i2, int i3, int i4, int i5, int i6);
 void sub_8089A70(void);
-
-// asm/trainer_card.o
-void sub_8093110(void (*)(void));
-void sub_8093130(u8, void (*)(void));
+void sub_808AB90(void);
 
 // asm/rom_8094928.o
 void sub_80961D8(void);
@@ -266,6 +265,11 @@ void sub_80A68CC();
 
 // asm/contest.o
 void sub_80AB1B0(void);
+void sub_80AE098(u8);
+void sub_80AE398(u8, u8);
+void sub_80AE82C(u8);
+void sub_80AF668(void);
+void sub_80B0F28(u8);
 void sub_80B2D1C(void);
 
 // asm/shop.o
@@ -289,6 +293,7 @@ void DoNamingScreen(u8 r0, struct SaveBlock2 *r1, u16 r2, u16 r3, u8 s0, MainCal
 bool8 IsEnoughMoney(u32, u32);
 void sub_80B79B8(u32 *, u32);
 void sub_80B79E0(u32 *, u32);
+void sub_80B7AEC(u32, u8 left, u8 top);
 void sub_80B7BEC(u32, u8, u8);
 void sub_80B7C14(u32, u8, u8);
 void RemoveMoneyLabelObject(u8, u8);
@@ -312,11 +317,14 @@ void sub_80BFD44(void *, u32, u8);
 void sub_80C0514(void *, u32, u8);
 
 // asm/contest_link_80C2020.o
+void sub_80C2358(void);
 void sub_80C48C8(void);
 void sub_80C4940(void);
 void sub_80C4980(u8);
+u8 sub_80C4B34(u8 *);
 
 // asm/script_pokemon_util_80C4BF0.o
+u8 sub_80C4D50(void);
 void ShowContestWinner(void);
 void HealPlayerParty();
 u8 ScriptGiveMon(u16, u8, u16, u32, u32, u8);
@@ -335,6 +343,13 @@ void RotatingGatePuzzleCameraUpdate(s16, s16);
 void sub_80C8080();
 u32 CheckForRotatingGatePuzzleCollision(u8, s16, s16);
 
+// asm/contest_link_80C857C.o
+void sub_80C8734(u8);
+void sub_80C88AC(u8);
+void sub_80C8E1C(u8);
+void sub_80C8EBC(u8);
+void sub_80C8F34(u8);
+
 // asm/bike.o
 void MovePlayerOnBike(u8, u16, u16);
 void sub_80E5B38(u16 i, u16 c);
@@ -347,6 +362,7 @@ void sub_80E6084();
 
 // asm/easy_chat.o
 void sub_80E6764(void);
+void sub_80EB3FC(u8 *, u16);
 u8 ConvertEasyChatWordsToString(u8 *dst, u16 *words, u16, u16);
 u16 sub_80EB72C(u16);
 
@@ -379,6 +395,8 @@ void PlaySlotMachine(u8, void *);
 void sub_8106630(u32);
 
 // asm/rom6.o
+bool8 npc_before_player_of_type(u8);
+u8 oei_task_add(void);
 void sub_810C994(void);
 void sub_810CA6C(s32);
 s16 sub_810CAE4(u8, struct Pokeblock *);
@@ -454,6 +472,10 @@ void CB2_InitMysteryEventMenu(void);
 
 // asm/save_failed_screen.o
 void fullscreen_save_activate();
+
+// asm/rom_81473B8.o
+bool8 sub_81474C8(void);
+void sub_8147514(void);
 
 // asm/rom_8148B8C.o
 void load_intro_part2_graphics(/*TODO: arg types*/);

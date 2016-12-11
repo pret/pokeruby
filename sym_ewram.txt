@@ -610,17 +610,8 @@ gUnknown_0202FFBA: @ 202FFBA
 gUnknown_0202FFBC: @ 202FFBC
 	.space 0x4
 
-gUnknown_0202FFC0: @ 202FFC0
-	.space 0x14
-
-gUnknown_0202FFD4: @ 202FFD4
-	.space 0x2
-
-gUnknown_0202FFD6: @ 202FFD6
-	.space 0x1A
-
-gUnknown_0202FFF0: @ 202FFF0
-	.space 0xB0
+gTrainerCards: @ 202FFC0
+	.space 0xE0
 
 gPokemonStorage: @ 20300A0
 	.space 0x4

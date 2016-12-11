@@ -65,7 +65,7 @@ bool8 gLinkVSyncDisabled;
 u32 IntrMain_Buffer[0x200];
 u8 gPcmDmaCounter;
 
-EWRAM_DATA void (*gFlashTimerIntrFunc)(void) = NULL;
+EWRAM_DATA void (**gFlashTimerIntrFunc)(void) = NULL;
 
 static void UpdateLinkAndCallCallbacks(void);
 static void InitMainCallbacks(void);

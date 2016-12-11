@@ -684,10 +684,10 @@ void TrainerWantsBattle(u8 trainerMapObjId, u8 *trainerScript)
     ScriptContext2_Enable();
 }
 
-u8* GetTrainerFlagFromScriptPointer(u8 *data)
+bool32 GetTrainerFlagFromScriptPointer(u8 *data)
 {
     u32 flag = TrainerBattleLoadArg16(data + 2);
-    return (u8*)FlagGet(TRAINER_FLAG_START + flag);
+    return FlagGet(TRAINER_FLAG_START + flag);
 }
 
 void sub_8082524(void)

@@ -505,7 +505,7 @@ void unref_sub_814ABE4(int a1)
 {
     struct Sprite *spr;
 
-    CpuSet(gUnknown_0842F5BC[a1], &gMenuCursorSubsprites, 0x28);
+    CpuCopy16(gUnknown_0842F5BC[a1], &gMenuCursorSubsprites, 80);
 
     if (gUnknown_0203A3D0 != 0x40)
     {

@@ -810,10 +810,10 @@ sub_8083314: @ 8083314
 	cmp r4, r0
 	bne _080833B6
 	movs r4, 0
-	ldr r6, _0808333C @ =gUnknown_0202FFC0
+	ldr r6, _0808333C @ =gTrainerCards
 	b _0808335A
 	.align 2, 0
-_0808333C: .4byte gUnknown_0202FFC0
+_0808333C: .4byte gTrainerCards
 _08083340:
 	lsls r1, r4, 8
 	ldr r0, _08083394 @ =gBlockRecvBuffer
