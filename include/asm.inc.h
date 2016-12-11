@@ -263,10 +263,16 @@ void sub_80A3714(void);
 void sub_80A53F8(void);
 void sub_80A68CC();
 
+// src/matsuda_debug_menu.o
+void sub_80AA280(u8);
+void sub_80AA5E8(u8);
+void sub_80AA658(u8);
+
 // asm/contest.o
 void sub_80AB1B0(void);
 void sub_80AE098(u8);
 void sub_80AE398(u8, u8);
+u32 sub_80AE770(u8, u8);
 void sub_80AE82C(u8);
 void sub_80AF668(void);
 void sub_80B0F28(u8);
