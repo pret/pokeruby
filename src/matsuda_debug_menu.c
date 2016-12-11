@@ -825,41 +825,165 @@ void sub_80AAA84(struct Sprite *sprite, u8 var2)
    	sub_80AA4A8(sprite->data2);
 }
 
+// a similar function is at 0x80AA908, however, it apparently returns the wrong type (u8 vs u16).
+u16 sub_80AAAC8(u32 a1, u16 a2, s8 a3) // first param is unused.
+{
+    s16 val = a2 + a3;
+
+    if (val > 354)
+        val = 1;
+    else if (val < 0)
+        val = 354;
+
+    return val;
+}
+
+void sub_80AAAF0(struct Sprite *sprite, u8 var2)
+{
+    u8 val = sprite->data2;
+
+	gContestMons[sprite->data2].moves[0] = sub_80AAAC8(val, gContestMons[sprite->data2].moves[0], var2);
+   	sub_80AA4F0(sprite->data2, 0);
+}
+
+void sub_80AAB30(struct Sprite *sprite, u8 var2)
+{
+    u8 val = sprite->data2;
+
+	gContestMons[sprite->data2].moves[1] = sub_80AAAC8(val, gContestMons[sprite->data2].moves[1], var2);
+   	sub_80AA4F0(sprite->data2, 1);
+}
+
+void sub_80AAB70(struct Sprite *sprite, u8 var2)
+{
+    u8 val = sprite->data2;
+
+	gContestMons[sprite->data2].moves[2] = sub_80AAAC8(val, gContestMons[sprite->data2].moves[2], var2);
+   	sub_80AA4F0(sprite->data2, 2);
+}
+
+void sub_80AABB0(struct Sprite *sprite, u8 var2)
+{
+    u8 val = sprite->data2;
+
+	gContestMons[sprite->data2].moves[3] = sub_80AAAC8(val, gContestMons[sprite->data2].moves[3], var2);
+   	sub_80AA4F0(sprite->data2, 3);
+}
+
+// hard/weird function #2
+__attribute__((naked))
+void sub_80AABF0(struct Sprite *sprite, u8 var2)
+{
+	asm(".syntax unified\n\
+	push {r4,r5,lr}\n\
+	adds r5, r0, 0\n\
+	lsls r1, 24\n\
+	movs r0, 0xFF\n\
+	cmp r1, 0\n\
+	ble _080AABFE\n\
+	movs r0, 0x1\n\
+_080AABFE:\n\
+	lsls r0, 24\n\
+	asrs r0, 24\n\
+	ldrh r1, [r5, 0x34]\n\
+	adds r0, r1\n\
+	lsls r0, 24\n\
+	lsrs r4, r0, 24\n\
+	asrs r0, 24\n\
+	cmp r0, 0\n\
+	bge _080AAC14\n\
+	movs r4, 0\n\
+	b _080AAC1A\n\
+_080AAC14:\n\
+	cmp r0, 0x4\n\
+	ble _080AAC1A\n\
+	movs r4, 0x4\n\
+_080AAC1A:\n\
+	lsls r4, 24\n\
+	lsrs r0, r4, 24\n\
+	bl sub_80AA5BC\n\
+	asrs r4, 24\n\
+	strh r4, [r5, 0x34]\n\
+	ldr r0, _080AAC54 @ =gScriptContestCategory\n\
+	strh r4, [r0]\n\
+	lsls r4, 24\n\
+	lsrs r4, 24\n\
+	ldr r0, _080AAC58 @ =gScriptContestRank\n\
+	ldrb r1, [r0]\n\
+	adds r0, r4, 0\n\
+	bl sub_80AE398\n\
+	ldrh r0, [r5, 0x32]\n\
+	lsls r0, 24\n\
+	lsrs r0, 24\n\
+	bl sub_80AA280\n\
+	ldrh r0, [r5, 0x32]\n\
+	lsls r0, 24\n\
+	lsrs r0, 24\n\
+	bl sub_80AA658\n\
+	pop {r4,r5}\n\
+	pop {r0}\n\
+	bx r0\n\
+	.align 2, 0\n\
+_080AAC54: .4byte gScriptContestCategory\n\
+_080AAC58: .4byte gScriptContestRank\n\
+	.syntax divided");
+}
+
 /*
-	thumb_func_start sub_80AA9B8
-sub_80AA9B8: @ 80AA9B8
+	thumb_func_start sub_80AABF0
+sub_80AABF0: @ 80AABF0
 	push {r4,r5,lr}
-	adds r4, r0, 0
-	ldrh r0, [r4, 0x32]
+	adds r5, r0, 0
+	lsls r1, 24
+	movs r0, 0xFF
+	cmp r1, 0
+	ble _080AABFE
+	movs r0, 0x1
+_080AABFE:
+	lsls r0, 24
+	asrs r0, 24
+	ldrh r1, [r5, 0x34]
+	adds r0, r1
+	lsls r0, 24
+	lsrs r4, r0, 24
+	asrs r0, 24
+	cmp r0, 0
+	bge _080AAC14
+	movs r4, 0
+	b _080AAC1A
+_080AAC14:
+	cmp r0, 0x4
+	ble _080AAC1A
+	movs r4, 0x4
+_080AAC1A:
+	lsls r4, 24
+	lsrs r0, r4, 24
+	bl sub_80AA5BC
+	asrs r4, 24
+	strh r4, [r5, 0x34]
+	ldr r0, _080AAC54 @ =gScriptContestCategory
+	strh r4, [r0]
+	lsls r4, 24
+	lsrs r4, 24
+	ldr r0, _080AAC58 @ =gScriptContestRank
+	ldrb r1, [r0]
+	adds r0, r4, 0
+	bl sub_80AE398
+	ldrh r0, [r5, 0x32]
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r5, _080AA9F8 @ =gContestMons
-	movs r3, 0x32
-	ldrsh r2, [r4, r3]
-	lsls r2, 6
-	adds r2, r5
-	adds r2, 0x27
-	ldrb r3, [r2]
-	lsls r2, r1, 24
-	asrs r2, 24
-	adds r1, r3, 0
-	bl sub_80AA908
-	movs r2, 0x32
-	ldrsh r1, [r4, r2]
-	lsls r1, 6
-	adds r1, r5
-	adds r1, 0x27
-	strb r0, [r1]
-	ldrh r0, [r4, 0x32]
+	bl sub_80AA280
+	ldrh r0, [r5, 0x32]
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80AA3D0
+	bl sub_80AA658
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080AA9F8: .4byte gContestMons
-	thumb_func_end sub_80AA9B8
+_080AAC54: .4byte gScriptContestCategory
+_080AAC58: .4byte gScriptContestRank
+	thumb_func_end sub_80AABF0
 */
 
 /*
