@@ -10,7 +10,7 @@
 sub_80C4BF0: @ 80C4BF0
 	push {r4,lr}
 	ldr r2, _080C4C1C @ =gSaveBlock1
-	ldr r1, _080C4C20 @ =gUnknown_02038570
+	ldr r1, _080C4C20 @ =gContestMons
 	ldrb r3, [r1, 0x15]
 	movs r4, 0x9B
 	lsls r4, 5
@@ -32,7 +32,7 @@ sub_80C4BF0: @ 80C4BF0
 	bx r0
 	.align 2, 0
 _080C4C1C: .4byte gSaveBlock1
-_080C4C20: .4byte gUnknown_02038570
+_080C4C20: .4byte gContestMons
 _080C4C24: .4byte 0x00001364
 	thumb_func_end sub_80C4BF0
 
@@ -161,7 +161,7 @@ sub_80C4CEC: @ 80C4CEC
 sub_80C4CF8: @ 80C4CF8
 	push {lr}
 	ldr r0, _080C4D28 @ =gUnknown_02038690
-	ldr r1, _080C4D2C @ =gUnknown_02038695
+	ldr r1, _080C4D2C @ =gContestPlayerMonIndex
 	ldrb r2, [r1]
 	adds r0, r2, r0
 	ldrb r0, [r0]
@@ -184,7 +184,7 @@ sub_80C4CF8: @ 80C4CF8
 	b _080C4D44
 	.align 2, 0
 _080C4D28: .4byte gUnknown_02038690
-_080C4D2C: .4byte gUnknown_02038695
+_080C4D2C: .4byte gContestPlayerMonIndex
 _080C4D30: .4byte gScriptContestRank
 _080C4D34: .4byte gUnknown_02038678
 _080C4D38: .4byte 0x0000031f
@@ -486,7 +486,7 @@ _080C4F6C: .4byte ShowContestWinnerCleanup
 sub_80C4F70: @ 80C4F70
 	push {r4,lr}
 	ldr r0, _080C4FA8 @ =0x00004010
-	ldr r4, _080C4FAC @ =gUnknown_02038570
+	ldr r4, _080C4FAC @ =gContestMons
 	ldrb r1, [r4, 0x15]
 	bl VarSet
 	ldr r0, _080C4FB0 @ =0x00004011
@@ -509,7 +509,7 @@ sub_80C4F70: @ 80C4F70
 	bx r0
 	.align 2, 0
 _080C4FA8: .4byte 0x00004010
-_080C4FAC: .4byte gUnknown_02038570
+_080C4FAC: .4byte gContestMons
 _080C4FB0: .4byte 0x00004011
 _080C4FB4: .4byte 0x00004012
 _080C4FB8: .4byte 0x00004013
@@ -534,7 +534,7 @@ GiveMonArtistRibbon: @ 80C4FBC
 	cmp r0, 0
 	bne _080C5038
 	ldr r0, _080C5024 @ =gUnknown_02038690
-	ldr r1, _080C5028 @ =gUnknown_02038695
+	ldr r1, _080C5028 @ =gContestPlayerMonIndex
 	ldrb r2, [r1]
 	adds r0, r2, r0
 	ldrb r0, [r0]
@@ -567,7 +567,7 @@ GiveMonArtistRibbon: @ 80C4FBC
 _080C501C: .4byte gUnknown_02038694
 _080C5020: .4byte gPlayerParty
 _080C5024: .4byte gUnknown_02038690
-_080C5028: .4byte gUnknown_02038695
+_080C5028: .4byte gContestPlayerMonIndex
 _080C502C: .4byte gScriptContestRank
 _080C5030: .4byte gUnknown_02038678
 _080C5034: .4byte 0x0000031f
@@ -611,7 +611,7 @@ ShowContestEntryMonPic: @ 80C5050
 	movs r2, 0x13
 	movs r3, 0xD
 	bl MenuDrawTextWindow
-	ldr r2, _080C5140 @ =gUnknown_02038570
+	ldr r2, _080C5140 @ =gContestMons
 	ldr r0, _080C5144 @ =gSpecialVar_0x8006
 	ldrh r1, [r0]
 	lsls r1, 6
@@ -703,7 +703,7 @@ _080C512A:
 	bx r0
 	.align 2, 0
 _080C513C: .4byte sub_80C5190
-_080C5140: .4byte gUnknown_02038570
+_080C5140: .4byte gContestMons
 _080C5144: .4byte gSpecialVar_0x8006
 _080C5148: .4byte gTasks
 _080C514C: .4byte gMonFrontPicTable

@@ -145,7 +145,7 @@ sub_80C8660: @ 80C8660
 	cmp r0, 0
 	beq _080C868E
 	bl GetMultiplayerId
-	ldr r1, _080C8698 @ =gUnknown_02038695
+	ldr r1, _080C8698 @ =gContestPlayerMonIndex
 	strb r0, [r1]
 	bl GetLinkPlayerCount
 	lsls r0, 24
@@ -163,7 +163,7 @@ _080C868E:
 	bx r0
 	.align 2, 0
 _080C8694: .4byte gReceivedRemoteLinkPlayers
-_080C8698: .4byte gUnknown_02038695
+_080C8698: .4byte gContestPlayerMonIndex
 _080C869C: .4byte gUnknown_0203869A
 	thumb_func_end sub_80C8660
 
@@ -290,10 +290,10 @@ _080C876C:
 	b _080C8896
 _080C8782:
 	ldr r0, _080C879C @ =gBlockSendBuffer
-	ldr r1, _080C87A0 @ =gUnknown_02038695
+	ldr r1, _080C87A0 @ =gContestPlayerMonIndex
 	ldrb r1, [r1]
 	lsls r1, 6
-	ldr r2, _080C87A4 @ =gUnknown_02038570
+	ldr r2, _080C87A4 @ =gContestMons
 	adds r1, r2
 	movs r2, 0x40
 	bl memcpy
@@ -302,14 +302,14 @@ _080C8782:
 	b _080C87BA
 	.align 2, 0
 _080C879C: .4byte gBlockSendBuffer
-_080C87A0: .4byte gUnknown_02038695
-_080C87A4: .4byte gUnknown_02038570
+_080C87A0: .4byte gContestPlayerMonIndex
+_080C87A4: .4byte gContestMons
 _080C87A8:
 	ldr r0, _080C87C4 @ =gBlockSendBuffer
-	ldr r1, _080C87C8 @ =gUnknown_02038695
+	ldr r1, _080C87C8 @ =gContestPlayerMonIndex
 	ldrb r1, [r1]
 	lsls r1, 6
-	ldr r2, _080C87CC @ =gUnknown_02038570
+	ldr r2, _080C87CC @ =gContestMons
 	adds r1, r2
 	movs r2, 0x40
 	bl memcpy
@@ -320,8 +320,8 @@ _080C87BA:
 	b _080C8896
 	.align 2, 0
 _080C87C4: .4byte gBlockSendBuffer
-_080C87C8: .4byte gUnknown_02038695
-_080C87CC: .4byte gUnknown_02038570
+_080C87C8: .4byte gContestPlayerMonIndex
+_080C87CC: .4byte gContestMons
 _080C87D0:
 	bl sub_80C85D8
 	lsls r0, 24
@@ -329,7 +329,7 @@ _080C87D0:
 	beq _080C8896
 	movs r7, 0
 	str r5, [sp]
-	ldr r0, _080C8818 @ =gUnknown_02038570
+	ldr r0, _080C8818 @ =gContestMons
 	ldr r6, _080C881C @ =gLinkPlayers
 	movs r5, 0
 	mov r10, r0
@@ -342,7 +342,7 @@ _080C87EA:
 	mov r0, r10
 	movs r2, 0x40
 	bl memcpy
-	ldr r0, _080C8824 @ =gUnknown_02038570 + 0x2
+	ldr r0, _080C8824 @ =gContestMons + 0x2
 	adds r4, r5, r0
 	ldrh r0, [r6, 0x1A]
 	cmp r0, 0x1
@@ -356,10 +356,10 @@ _080C87EA:
 	bl ConvertInternationalString
 	b _080C883E
 	.align 2, 0
-_080C8818: .4byte gUnknown_02038570
+_080C8818: .4byte gContestMons
 _080C881C: .4byte gLinkPlayers
 _080C8820: .4byte gBlockRecvBuffer
-_080C8824: .4byte gUnknown_02038570 + 0x2
+_080C8824: .4byte gContestMons + 0x2
 _080C8828:
 	ldrb r0, [r4, 0xA]
 	cmp r0, 0xFC
@@ -612,12 +612,12 @@ _080C8A08:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080C8A30
-	ldr r0, _080C8A1C @ =gUnknown_02038695
+	ldr r0, _080C8A1C @ =gContestPlayerMonIndex
 	movs r1, 0x1
 	bl sub_80C857C
 	b _080C8A2A
 	.align 2, 0
-_080C8A1C: .4byte gUnknown_02038695
+_080C8A1C: .4byte gContestPlayerMonIndex
 _080C8A20:
 	bl sub_80C85D8
 	lsls r0, 24
@@ -661,7 +661,7 @@ _080C8A64:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080C8AC2
-	ldr r0, _080C8A8C @ =gUnknown_02038695
+	ldr r0, _080C8A8C @ =gContestPlayerMonIndex
 	ldrb r1, [r0]
 	lsls r0, r1, 3
 	subs r0, r1
@@ -675,7 +675,7 @@ _080C8A64:
 	strh r0, [r4, 0x8]
 	b _080C8AC2
 	.align 2, 0
-_080C8A8C: .4byte gUnknown_02038695
+_080C8A8C: .4byte gContestPlayerMonIndex
 _080C8A90: .4byte 0x02019266
 _080C8A94:
 	bl sub_80C85D8

@@ -34,7 +34,7 @@ _08128910:
 	adds r0, r2, 0
 	adds r0, 0x40
 	strb r1, [r0]
-	ldr r1, _08128940 @ =gUnknown_02038570
+	ldr r1, _08128940 @ =gContestMons
 	ldrb r0, [r3]
 	lsls r0, 6
 	adds r1, 0x18
@@ -46,7 +46,7 @@ _08128910:
 	bx r0
 	.align 2, 0
 _0812893C: .4byte 0x020192e4
-_08128940: .4byte gUnknown_02038570
+_08128940: .4byte gContestMons
 	thumb_func_end sub_81288F4
 
 	thumb_func_start sub_8128944
@@ -1403,7 +1403,7 @@ _081292E0:
 	thumb_func_start contest_ai_get_move_excitement
 contest_ai_get_move_excitement: @ 81292E4
 	push {r4,lr}
-	ldr r2, _08129318 @ =gUnknown_02038570
+	ldr r2, _08129318 @ =gContestMons
 	ldr r4, _0812931C @ =0x020192e4
 	ldrb r1, [r4, 0x4]
 	lsls r1, 1
@@ -1427,7 +1427,7 @@ contest_ai_get_move_excitement: @ 81292E4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08129318: .4byte gUnknown_02038570
+_08129318: .4byte gContestMons
 _0812931C: .4byte 0x020192e4
 _08129320: .4byte gAIScriptPtr
 	thumb_func_end contest_ai_get_move_excitement
@@ -1582,7 +1582,7 @@ _0812942C:
 
 	thumb_func_start contest_ai_get_move_effect
 contest_ai_get_move_effect: @ 8129434
-	ldr r2, _08129460 @ =gUnknown_02038570
+	ldr r2, _08129460 @ =gContestMons
 	ldr r3, _08129464 @ =0x020192e4
 	ldrb r1, [r3, 0x4]
 	lsls r1, 1
@@ -1605,7 +1605,7 @@ contest_ai_get_move_effect: @ 8129434
 	str r0, [r1]
 	bx lr
 	.align 2, 0
-_08129460: .4byte gUnknown_02038570
+_08129460: .4byte gContestMons
 _08129464: .4byte 0x020192e4
 _08129468: .4byte gContestMoves
 _0812946C: .4byte gAIScriptPtr
@@ -1683,7 +1683,7 @@ _081294EC:
 
 	thumb_func_start contest_ai_get_move_effect_type
 contest_ai_get_move_effect_type: @ 81294F0
-	ldr r2, _08129524 @ =gUnknown_02038570
+	ldr r2, _08129524 @ =gContestMons
 	ldr r3, _08129528 @ =0x020192e4
 	ldrb r1, [r3, 0x4]
 	lsls r1, 1
@@ -1710,7 +1710,7 @@ contest_ai_get_move_effect_type: @ 81294F0
 	str r0, [r1]
 	bx lr
 	.align 2, 0
-_08129524: .4byte gUnknown_02038570
+_08129524: .4byte gContestMons
 _08129528: .4byte 0x020192e4
 _0812952C: .4byte gContestEffects
 _08129530: .4byte gContestMoves
@@ -1790,7 +1790,7 @@ _081295B4:
 	thumb_func_start contest_ai_check_move_has_highest_appeal
 contest_ai_check_move_has_highest_appeal: @ 81295B8
 	push {r4-r7,lr}
-	ldr r2, _08129610 @ =gUnknown_02038570
+	ldr r2, _08129610 @ =gContestMons
 	ldr r3, _08129614 @ =0x020192e4
 	ldrb r0, [r3, 0x4]
 	lsls r0, 1
@@ -1837,7 +1837,7 @@ _08129608:
 	movs r0, 0x1
 	b _08129626
 	.align 2, 0
-_08129610: .4byte gUnknown_02038570
+_08129610: .4byte gContestMons
 _08129614: .4byte 0x020192e4
 _08129618: .4byte gContestEffects
 _0812961C: .4byte gContestMoves
@@ -1896,7 +1896,7 @@ _08129678: .4byte gAIScriptPtr
 	thumb_func_start sub_812967C
 sub_812967C: @ 812967C
 	push {r4-r7,lr}
-	ldr r2, _081296D4 @ =gUnknown_02038570
+	ldr r2, _081296D4 @ =gContestMons
 	ldr r3, _081296D8 @ =0x020192e4
 	ldrb r0, [r3, 0x4]
 	lsls r0, 1
@@ -1943,7 +1943,7 @@ _081296CC:
 	movs r0, 0x1
 	b _081296EA
 	.align 2, 0
-_081296D4: .4byte gUnknown_02038570
+_081296D4: .4byte gContestMons
 _081296D8: .4byte 0x020192e4
 _081296DC: .4byte gContestEffects
 _081296E0: .4byte gContestMoves
@@ -2002,7 +2002,7 @@ _0812973C: .4byte gAIScriptPtr
 	thumb_func_start sub_8129740
 sub_8129740: @ 8129740
 	push {r4,lr}
-	ldr r2, _08129784 @ =gUnknown_02038570
+	ldr r2, _08129784 @ =gContestMons
 	ldr r4, _08129788 @ =0x020192e4
 	ldrb r1, [r4, 0x4]
 	lsls r1, 1
@@ -2035,7 +2035,7 @@ sub_8129740: @ 8129740
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08129784: .4byte gUnknown_02038570
+_08129784: .4byte gContestMons
 _08129788: .4byte 0x020192e4
 _0812978C: .4byte gContestEffects
 _08129790: .4byte gContestMoves
@@ -2185,7 +2185,7 @@ _08129894:
 	thumb_func_start sub_8129898
 sub_8129898: @ 8129898
 	push {r4,lr}
-	ldr r2, _081298DC @ =gUnknown_02038570
+	ldr r2, _081298DC @ =gContestMons
 	ldr r4, _081298E0 @ =0x020192e4
 	ldrb r1, [r4, 0x4]
 	lsls r1, 1
@@ -2218,7 +2218,7 @@ sub_8129898: @ 8129898
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081298DC: .4byte gUnknown_02038570
+_081298DC: .4byte gContestMons
 _081298E0: .4byte 0x020192e4
 _081298E4: .4byte gContestEffects
 _081298E8: .4byte gContestMoves
@@ -2368,7 +2368,7 @@ _081299EC:
 	thumb_func_start contest_ai_get_move_used_count
 contest_ai_get_move_used_count: @ 81299F0
 	push {r4,lr}
-	ldr r3, _08129A20 @ =gUnknown_02038570
+	ldr r3, _08129A20 @ =gContestMons
 	ldr r4, _08129A24 @ =0x020192e4
 	ldrb r0, [r4, 0x4]
 	lsls r0, 1
@@ -2392,7 +2392,7 @@ contest_ai_get_move_used_count: @ 81299F0
 	movs r0, 0
 	b _08129A30
 	.align 2, 0
-_08129A20: .4byte gUnknown_02038570
+_08129A20: .4byte gContestMons
 _08129A24: .4byte 0x020192e4
 _08129A28:
 	ldrb r0, [r0, 0xB]
@@ -2558,7 +2558,7 @@ contest_ai_check_combo_starter: @ 8129B44
 	mov r7, r8
 	push {r7}
 	movs r5, 0
-	ldr r3, _08129BAC @ =gUnknown_02038570
+	ldr r3, _08129BAC @ =gContestMons
 	ldr r2, _08129BB0 @ =0x020192e4
 	ldrb r1, [r2, 0x4]
 	lsls r1, 1
@@ -2610,7 +2610,7 @@ _08129B96:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08129BAC: .4byte gUnknown_02038570
+_08129BAC: .4byte gContestMons
 _08129BB0: .4byte 0x020192e4
 _08129BB4: .4byte gAIScriptPtr
 	thumb_func_end contest_ai_check_combo_starter
@@ -2697,7 +2697,7 @@ contest_ai_check_combo_finisher: @ 8129C40
 	mov r7, r8
 	push {r7}
 	movs r5, 0
-	ldr r3, _08129CA8 @ =gUnknown_02038570
+	ldr r3, _08129CA8 @ =gContestMons
 	ldr r2, _08129CAC @ =0x020192e4
 	ldrb r1, [r2, 0x4]
 	lsls r1, 1
@@ -2748,7 +2748,7 @@ _08129C90:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08129CA8: .4byte gUnknown_02038570
+_08129CA8: .4byte gContestMons
 _08129CAC: .4byte 0x020192e4
 _08129CB0: .4byte gAIScriptPtr
 	thumb_func_end contest_ai_check_combo_finisher
@@ -2833,7 +2833,7 @@ _08129D38: .4byte gAIScriptPtr
 contest_ai_check_would_finish_combo: @ 8129D3C
 	push {r4,r5,lr}
 	movs r5, 0
-	ldr r3, _08129D8C @ =gUnknown_02038570
+	ldr r3, _08129D8C @ =gContestMons
 	ldr r4, _08129D90 @ =0x020192e4
 	ldrb r0, [r4, 0x4]
 	lsls r0, 1
@@ -2872,7 +2872,7 @@ _08129D7A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08129D8C: .4byte gUnknown_02038570
+_08129D8C: .4byte gContestMons
 _08129D90: .4byte 0x020192e4
 _08129D94: .4byte gAIScriptPtr
 	thumb_func_end contest_ai_check_would_finish_combo
@@ -5166,7 +5166,7 @@ sub_812ADD8: @ 812ADD8
 	lsls r0, 8
 	orrs r4, r0
 	movs r3, 0
-	ldr r0, _0812AE0C @ =gUnknown_02038570
+	ldr r0, _0812AE0C @ =gContestMons
 	mov r12, r0
 	ldr r5, _0812AE10 @ =0x020192e4
 	adds r0, r5, 0
@@ -5183,7 +5183,7 @@ sub_812ADD8: @ 812ADD8
 	b _0812AE2E
 	.align 2, 0
 _0812AE08: .4byte gAIScriptPtr
-_0812AE0C: .4byte gUnknown_02038570
+_0812AE0C: .4byte gContestMons
 _0812AE10: .4byte 0x020192e4
 _0812AE14:
 	adds r3, 0x1

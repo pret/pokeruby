@@ -739,12 +739,13 @@ gUnknown_02038568: @ 2038568
 gUnknown_0203856C: @ 203856C
 	.space 0x4
 
-gUnknown_02038570: @ 2038570
+gContestMons: @ 2038570
 	.space 0xD
 
 gUnknown_0203857D: @ 203857D
 	.space 0x11
 
+	@ contest move space
 gUnknown_0203858E: @ 203858E
 	.space 0x8
 
@@ -769,7 +770,7 @@ gUnknown_02038690: @ 2038690
 gUnknown_02038694: @ 2038694
 	.space 0x1
 
-gUnknown_02038695: @ 2038695
+gContestPlayerMonIndex: @ 2038695
 	.space 0x1
 
 gUnknown_02038696: @ 2038696

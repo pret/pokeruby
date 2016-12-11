@@ -13870,62 +13870,62 @@ gMatsudaDebugMenu_GoBackText:: @ 83C9337
 gMatsudaDebugMenu_BattlePointsText:: @ 83C933B
 	.string "{COLOR MAGENTA}BP.$"
 
-gMatsudaDebugMenuText_Cool:
+MatsudaDebugMenuText_Cool:
 	.string "かっこよさ$" @ coolness
-gMatsudaDebugMenuText_Cute:
+MatsudaDebugMenuText_Cute:
 	.string "かわいさ$" @ cuteness
-gMatsudaDebugMenuText_Beauty:
+MatsudaDebugMenuText_Beauty:
 	.string "うつくしさ$" @ beauty
-gMatsudaDebugMenuText_Smart:
+MatsudaDebugMenuText_Smart:
 	.string "かしこさ$" @ smartness
-gMatsudaDebugMenuText_Tough:
+MatsudaDebugMenuText_Tough:
 	.string "たくましさ$" @ toughness
-gMatsudaDebugMenuText_Sheen:
+MatsudaDebugMenuText_Sheen:
 	.string "けづや$" @ sheen
 
 	.align 2
 gMatsudaDebugMenuTextList1:: @ 83C9364
-	.4byte gMatsudaDebugMenuText_Cool
-	.4byte gMatsudaDebugMenuText_Cute
-	.4byte gMatsudaDebugMenuText_Beauty
-	.4byte gMatsudaDebugMenuText_Smart
-	.4byte gMatsudaDebugMenuText_Tough
-	.4byte gMatsudaDebugMenuText_Sheen
+	.4byte MatsudaDebugMenuText_Cool
+	.4byte MatsudaDebugMenuText_Cute
+	.4byte MatsudaDebugMenuText_Beauty
+	.4byte MatsudaDebugMenuText_Smart
+	.4byte MatsudaDebugMenuText_Tough
+	.4byte MatsudaDebugMenuText_Sheen
 
-Unknown_83C937C:
+MatsudaDebugMenuText_CoolContest:
 	.string "かっこよさコンテスト$" @ Cool Contest
-Unknown_83C9387:
+MatsudaDebugMenuText_BeautyContest:
 	.string "うつくしさコンテスト$" @ Beauty Contest
-Unknown_83C9392:
+MatsudaDebugMenuText_CuteContest:
 	.string "かわいさコンテスト　$" @ Cute Contest
-Unknown_83C939D:
+MatsudaDebugMenuText_SmartContest:
 	.string "かしこさコンテスト　$" @ Smart Contest
-Unknown_83C93A8:
+MatsudaDebugMenuText_ToughContest:
 	.string "たくましさコンテスト$" @ Tough Contest
 
 	.align 2
-gUnknown_083C93B4:: @ 83C93B4
-	.4byte Unknown_83C937C
-	.4byte Unknown_83C9387
-	.4byte Unknown_83C9392
-	.4byte Unknown_83C939D
-	.4byte Unknown_83C93A8
+gMatsudaDebugMenuTextList2:: @ 83C93B4
+	.4byte MatsudaDebugMenuText_CoolContest
+	.4byte MatsudaDebugMenuText_BeautyContest
+	.4byte MatsudaDebugMenuText_CuteContest
+	.4byte MatsudaDebugMenuText_SmartContest
+	.4byte MatsudaDebugMenuText_ToughContest
 
-Unknown_83C93C8:
+MatsudaDebugMenuText_Fallarbor:
 	.string "ハジツゲ/ノーマル$" @ Fallarbor / Normal
-Unknown_83C93D2:
+MatsudaDebugMenuText_Verdanturf:
 	.string "シダケ/スーパー　$" @ Verdanturf / Super
-Unknown_83C93DC:
+MatsudaDebugMenuText_Slateport:
 	.string "カイナ/ハイパー　$" @ Slateport / Hyper
-Unknown_83C93E6:
+MatsudaDebugMenuText_Lilycove:
 	.string "ミナモ/マスター　$" @ Lilycove / Master
 
 	.align 2
-gUnknown_083C93F0:: @ 83C93F0
-	.4byte Unknown_83C93C8
-	.4byte Unknown_83C93D2
-	.4byte Unknown_83C93DC
-	.4byte Unknown_83C93E6
+gMatsudaDebugMenuTextList3:: @ 83C93F0
+	.4byte MatsudaDebugMenuText_Fallarbor @ Normal
+	.4byte MatsudaDebugMenuText_Verdanturf @ Super
+	.4byte MatsudaDebugMenuText_Slateport @ Hyper
+	.4byte MatsudaDebugMenuText_Lilycove @ Master
 
 gUnknown_083C9400:: @ 83C9400
 	.incbin "baserom.gba", 0x003c9400, 0x8
