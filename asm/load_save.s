@@ -6,88 +6,8 @@
 
 	.text
 
-	thumb_func_start sub_8047ACC
-sub_8047ACC: @ 8047ACC
-	push {r4-r7,lr}
-	ldr r0, _08047AFC @ =gSaveBlock1
-	ldr r4, _08047B00 @ =gMapObjects
-	movs r1, 0x9E
-	lsls r1, 4
-	adds r3, r0, r1
-	movs r2, 0xF
-_08047ADA:
-	adds r1, r3, 0
-	adds r0, r4, 0
-	ldm r0!, {r5-r7}
-	stm r1!, {r5-r7}
-	ldm r0!, {r5-r7}
-	stm r1!, {r5-r7}
-	ldm r0!, {r5-r7}
-	stm r1!, {r5-r7}
-	adds r4, 0x24
-	adds r3, 0x24
-	subs r2, 0x1
-	cmp r2, 0
-	bge _08047ADA
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08047AFC: .4byte gSaveBlock1
-_08047B00: .4byte gMapObjects
-	thumb_func_end sub_8047ACC
-
-	thumb_func_start save_deserialize_npcs
-save_deserialize_npcs: @ 8047B04
-	push {r4-r7,lr}
-	ldr r0, _08047B34 @ =gSaveBlock1
-	movs r1, 0x9E
-	lsls r1, 4
-	adds r4, r0, r1
-	ldr r3, _08047B38 @ =gMapObjects
-	movs r2, 0xF
-_08047B12:
-	adds r1, r3, 0
-	adds r0, r4, 0
-	ldm r0!, {r5-r7}
-	stm r1!, {r5-r7}
-	ldm r0!, {r5-r7}
-	stm r1!, {r5-r7}
-	ldm r0!, {r5-r7}
-	stm r1!, {r5-r7}
-	adds r4, 0x24
-	adds r3, 0x24
-	subs r2, 0x1
-	cmp r2, 0
-	bge _08047B12
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08047B34: .4byte gSaveBlock1
-_08047B38: .4byte gMapObjects
-	thumb_func_end save_deserialize_npcs
-
-	thumb_func_start save_serialize_game
-save_serialize_game: @ 8047B3C
-	push {lr}
-	bl SavePlayerParty
-	bl sub_8047ACC
-	pop {r0}
-	bx r0
-	thumb_func_end save_serialize_game
-
-	thumb_func_start save_deserialize_game
-save_deserialize_game: @ 8047B4C
-	push {lr}
-	bl LoadPlayerParty
-	bl save_deserialize_npcs
-	pop {r0}
-	bx r0
-	thumb_func_end save_deserialize_game
-
-	thumb_func_start copy_bags_and_unk_data_from_save_blocks
-copy_bags_and_unk_data_from_save_blocks: @ 8047B5C
+	thumb_func_start LoadPlayerData
+LoadPlayerData: @ 8047B5C
 	push {r4-r7,lr}
 	ldr r0, _08047C0C @ =gSaveBlock1
 	movs r1, 0xAC
@@ -185,10 +105,10 @@ _08047BE8:
 _08047C0C: .4byte gSaveBlock1
 _08047C10: .4byte gUnknown_020291F4
 _08047C14: .4byte 0x00002b4c
-	thumb_func_end copy_bags_and_unk_data_from_save_blocks
+	thumb_func_end LoadPlayerData
 
-	thumb_func_start copy_bags_and_unk_data_to_save_blocks
-copy_bags_and_unk_data_to_save_blocks: @ 8047C18
+	thumb_func_start SavePlayerData
+SavePlayerData: @ 8047C18
 	push {r4-r7,lr}
 	ldr r0, _08047CCC @ =gSaveBlock1
 	ldr r3, _08047CD0 @ =gUnknown_020291F4
@@ -289,6 +209,6 @@ _08047CAA:
 _08047CCC: .4byte gSaveBlock1
 _08047CD0: .4byte gUnknown_020291F4
 _08047CD4: .4byte 0x00002b4c
-	thumb_func_end copy_bags_and_unk_data_to_save_blocks
+	thumb_func_end SavePlayerData
 
 	.align 2, 0 @ Don't pad with nop.

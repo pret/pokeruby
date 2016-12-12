@@ -40,8 +40,8 @@ int sub_80479F8();
 void sub_8047A04();
 void SetSecretBase2Field_9_AndHideBG(void);
 void ClearSecretBase2Field_9_2(void);
-void save_serialize_game(void);
-void save_deserialize_game();
+void SaveSerializedGame(void);
+void LoadSerializedGame(void);
 
 // asm/berry_blender.o
 void sub_80516C4(u8, u16);

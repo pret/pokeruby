@@ -1603,7 +1603,7 @@ sub_8083958: @ 8083958
 	push {lr}
 	bl call_map_music_set_to_zero
 	bl LoadPlayerParty
-	bl copy_bags_and_unk_data_to_save_blocks
+	bl SavePlayerData
 	bl sub_810FEFC
 	ldr r0, _08083990 @ =gSpecialVar_0x8004
 	ldrh r0, [r0]
@@ -1644,7 +1644,7 @@ sub_80839A4: @ 80839A4
 	bne _080839C0
 _080839B8:
 	bl LoadPlayerParty
-	bl copy_bags_and_unk_data_to_save_blocks
+	bl SavePlayerData
 _080839C0:
 	movs r0, 0x7F
 	bl copy_saved_warp2_bank_and_enter_x_to_warp1

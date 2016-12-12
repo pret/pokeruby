@@ -550,27 +550,27 @@ u8 sub_8125C3C(u8 a1)
             sav12_xor_increment(10);
         for (i = 0; i < 2; i++)
             sub_81253C8(28 + i, gHallOfFameSaveSectionLocations[i].data, gHallOfFameSaveSectionLocations[i].size);
-        save_serialize_game();
+        SaveSerializedGame();
         save_write_to_flash(0xFFFF, gSaveSectionLocations);
         break;
     case 0:
     default:
-        save_serialize_game();
+        SaveSerializedGame();
         save_write_to_flash(0xFFFF, gSaveSectionLocations);
         break;
     case 1:
-        save_serialize_game();
+        SaveSerializedGame();
         for (i = 0; i < 5; i++)
             save_write_to_flash(i, gSaveSectionLocations);
         break;
     case 2:
-        save_serialize_game();
+        SaveSerializedGame();
         save_write_to_flash(0, gSaveSectionLocations);
         break;
     case 4:
         for (i = 28; i < 32; i++)
             EraseFlashSector(i);
-        save_serialize_game();
+        SaveSerializedGame();
         save_write_to_flash(0xFFFF, gSaveSectionLocations);
         break;
     }
@@ -592,7 +592,7 @@ u8 sub_8125D80(void)
 {
     if (gUnknown_3004820 != 1)
         return 1;
-    save_serialize_game();
+    SaveSerializedGame();
     sub_812546C(gSaveSectionLocations);
     return 0;
 }
@@ -629,7 +629,7 @@ u8 sub_8125E2C(void)
     if (gUnknown_3004820 != 1)
         return 1;
 
-    save_serialize_game();
+    SaveSerializedGame();
     sub_81254C8(gSaveSectionLocations);
     sub_812556C(gUnknown_03005EB4 + 1, gSaveSectionLocations);
     return 0;
@@ -669,7 +669,7 @@ u8 sub_8125EC8(u8 a1)
     case 0:
     default:
         result = sub_812587C(0xFFFF, gSaveSectionLocations);
-        save_deserialize_game();
+        LoadSerializedGame();
         gSaveFileStatus = result;
         gUnknown_03005EBC = 0;
         break;

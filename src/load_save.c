@@ -65,3 +65,51 @@ void LoadPlayerParty(void)
     for (i = 0; i < 6; i++)
         gPlayerParty[i] = gSaveBlock1.playerParty[i];
 }
+
+void SaveMapObjects(void)
+{
+	int i;
+	
+	for(i = 0; i < 16; i++)
+		gSaveBlock1.mapObjects[i] = gMapObjects[i];
+}
+
+void LoadMapObjects(void)
+{
+	int i;
+	
+	for(i = 0; i < 16; i++)
+		gMapObjects[i] = gSaveBlock1.mapObjects[i];
+}
+
+void SaveSerializedGame(void)
+{
+	SavePlayerParty();
+	SaveMapObjects();
+}
+
+void LoadSerializedGame(void)
+{
+	LoadPlayerParty();
+	LoadMapObjects();
+}
+
+/*
+	thumb_func_start save_serialize_game
+save_serialize_game: @ 8047B3C
+	push {lr}
+	bl SavePlayerParty
+	bl SaveMapObjects
+	pop {r0}
+	bx r0
+	thumb_func_end save_serialize_game
+
+	thumb_func_start save_deserialize_game
+save_deserialize_game: @ 8047B4C
+	push {lr}
+	bl LoadPlayerParty
+	bl LoadMapObjects
+	pop {r0}
+	bx r0
+	thumb_func_end save_deserialize_game
+*/

@@ -331,7 +331,7 @@ gSpecials::
 	.4byte sub_80FA148
 	.4byte sub_810F8FC
 	.4byte sub_80BC50C
-	.4byte copy_bags_and_unk_data_from_save_blocks
+	.4byte LoadPlayerData
 	.4byte sub_8081924
 	.4byte sub_810F950
 	.4byte sub_810F908
