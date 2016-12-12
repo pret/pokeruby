@@ -2,6 +2,7 @@
 #include "save.h"
 #include "asm.h"
 #include "gba/gba.h"
+#include "load_save.h"
 #include "rom4.h"
 #include "gba/flash_internal.h"
 

@@ -34,15 +34,6 @@ u8 daycare_relationship_score_from_savegame(void);
 // asm/rom_804373C.o
 void CreatePokeballSprite(u8 r0, u8 r1, u8 r2, u8 r3, u8 s1, u8 s2, u8 s3, u16 s4);
 
-// asm/load_save.o
-void CheckForFlashMemory(void);
-int sub_80479F8();
-void sub_8047A04();
-void SetSecretBase2Field_9_AndHideBG(void);
-void ClearSecretBase2Field_9_2(void);
-void SaveSerializedGame(void);
-void LoadSerializedGame(void);
-
 // asm/berry_blender.o
 void sub_80516C4(u8, u16);
 
@@ -499,3 +490,4 @@ u16 SetFlashTimerIntr(u8 timerNum, void (**intrFunc)(void));
 void ReadFlash(u16 sectorNum, u32 offset, u8 *dest, u32 size);
 u32 ProgramFlashSectorAndVerify();
 u32 ProgramFlashSectorAndVerifyNBytes(u16 sectorNum, u8 *src, u32 n);
+u16 IdentifyFlash(void);
