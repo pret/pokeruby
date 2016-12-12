@@ -310,7 +310,7 @@ gSaveBlock2: @ 2024EA4
 gSaveBlock1: @ 2025734
 	.space 0x3AC0
 
-gUnknown_020291F4: @ 20291F4
+gLoadedSaveData: @ items
 	.space 0x4D8
 
 gUnknown_020296CC: @ 20296CC
