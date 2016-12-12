@@ -488,19 +488,19 @@ void sub_80566F0(u8 a1) {
 	x2 = 15;
 	y2 = 14;
 	switch (a1) {
-		case 2:
+		case CONNECTION_NORTH:
 			y0 += 1;
 			y2 = 13;
 			break;
-		case 1:
+		case CONNECTION_SOUTH:
 			r8 = 1;
 			y2 = 13;
 			break;
-		case 3:
+		case CONNECTION_WEST:
 			x0 += 1;
 			x2 = 14;
 			break;
-		case 4:
+		case CONNECTION_EAST:
 			r9 = 1;
 			x2 = 14;
 			break;
@@ -521,8 +521,6 @@ void sub_80566F0(u8 a1) {
 	sav2_mapdata_clear();
 }
 
-#ifdef NONMATCHING
-// TODO FIXME returns are in the wrong order
 int GetMapBorderIdAt(int x, int y) {
 	struct MapData *mapData;
 	u16 block, block2;
@@ -533,7 +531,7 @@ int GetMapBorderIdAt(int x, int y) {
 		i *= y;
 		block = gUnknown_03004870.map[x + i];
 		if (block == 0x3ff) {
-			return -1;
+			goto fail;
 		}
 	} else {
 		mapData = gMapHeader.mapData;
@@ -541,166 +539,38 @@ int GetMapBorderIdAt(int x, int y) {
 		j += ((y + 1) & 1) * 2;
 		block2 = 0xc00 | mapData->border[j];
 		if (block2 == 0x3ff) {
-			return -1;
+			goto fail;
 		}
 	}
+	goto success;
+fail:
+	return -1;
+success:
+
 	if (x >= (gUnknown_03004870.width - 8)) {
-		if (gUnknown_0202E850.east) {
-			return CONNECTION_EAST;
-		} else {
+		if (!gUnknown_0202E850.east) {
 			return -1;
 		}
+		return CONNECTION_EAST;
 	} else if (x < 7) {
-		if (gUnknown_0202E850.west) {
-			return CONNECTION_WEST;
-		} else {
+		if (!gUnknown_0202E850.west) {
 			return -1;
 		}
+		return CONNECTION_WEST;
 	} else if (y >= (gUnknown_03004870.height - 7)) {
-		if (gUnknown_0202E850.south) {
-			return CONNECTION_SOUTH;
-		} else {
+		if (!gUnknown_0202E850.south) {
 			return -1;
 		}
+		return CONNECTION_SOUTH;
 	} else if (y < 7) {
-		if (gUnknown_0202E850.north) {
-			return CONNECTION_NORTH;
-		} else {
+		if (!gUnknown_0202E850.north) {
 			return -1;
 		}
+		return CONNECTION_NORTH;
+	} else {
+		return 0;
 	}
-	return 0;
 }
-#else
-__attribute__((naked))
-int GetMapBorderIdAt(int x, int y) {
-asm(
-"	.syntax unified\n"
-"\n"
-"	push {r4,r5,lr}\n"
-"	adds r4, r0, 0\n"
-"	adds r5, r1, 0\n"
-"	cmp r4, 0\n"
-"	blt _080567FC\n"
-"	ldr r1, _080567F4 @ =gUnknown_03004870\n"
-"	ldr r2, [r1]\n"
-"	cmp r4, r2\n"
-"	bge _080567FC\n"
-"	cmp r5, 0\n"
-"	blt _080567FC\n"
-"	ldr r0, [r1, 0x4]\n"
-"	cmp r5, r0\n"
-"	bge _080567FC\n"
-"	adds r0, r2, 0\n"
-"	muls r0, r5\n"
-"	adds r0, r4, r0\n"
-"	ldr r1, [r1, 0x8]\n"
-"	lsls r0, 1\n"
-"	adds r0, r1\n"
-"	ldrh r1, [r0]\n"
-"	ldr r0, _080567F8 @ =0x000003ff\n"
-"	cmp r1, r0\n"
-"	beq _08056894\n"
-"	b _08056824\n"
-"	.align 2, 0\n"
-"_080567F4: .4byte gUnknown_03004870\n"
-"_080567F8: .4byte 0x000003ff\n"
-"_080567FC:\n"
-"	ldr r0, _08056840 @ =gMapHeader\n"
-"	ldr r3, [r0]\n"
-"	adds r1, r4, 0x1\n"
-"	movs r2, 0x1\n"
-"	ands r1, r2\n"
-"	adds r0, r5, 0x1\n"
-"	ands r0, r2\n"
-"	lsls r0, 1\n"
-"	adds r1, r0\n"
-"	ldr r0, [r3, 0x8]\n"
-"	lsls r1, 1\n"
-"	adds r1, r0\n"
-"	ldrh r1, [r1]\n"
-"	movs r2, 0xC0\n"
-"	lsls r2, 4\n"
-"	adds r0, r2, 0\n"
-"	orrs r0, r1\n"
-"	ldr r1, _08056844 @ =0x000003ff\n"
-"	cmp r0, r1\n"
-"	beq _08056894\n"
-"_08056824:\n"
-"	ldr r1, _08056848 @ =gUnknown_03004870\n"
-"	ldr r0, [r1]\n"
-"	subs r0, 0x8\n"
-"	cmp r4, r0\n"
-"	blt _08056850\n"
-"	ldr r0, _0805684C @ =gUnknown_0202E850\n"
-"	ldrb r1, [r0]\n"
-"	movs r0, 0x8\n"
-"	ands r0, r1\n"
-"	cmp r0, 0\n"
-"	beq _08056894\n"
-"	movs r0, 0x4\n"
-"	b _080568A6\n"
-"	.align 2, 0\n"
-"_08056840: .4byte gMapHeader\n"
-"_08056844: .4byte 0x000003ff\n"
-"_08056848: .4byte gUnknown_03004870\n"
-"_0805684C: .4byte gUnknown_0202E850\n"
-"_08056850:\n"
-"	cmp r4, 0x6\n"
-"	bgt _08056868\n"
-"	ldr r0, _08056864 @ =gUnknown_0202E850\n"
-"	ldrb r1, [r0]\n"
-"	movs r0, 0x4\n"
-"	ands r0, r1\n"
-"	cmp r0, 0\n"
-"	beq _08056894\n"
-"	movs r0, 0x3\n"
-"	b _080568A6\n"
-"	.align 2, 0\n"
-"_08056864: .4byte gUnknown_0202E850\n"
-"_08056868:\n"
-"	ldr r0, [r1, 0x4]\n"
-"	subs r0, 0x7\n"
-"	cmp r5, r0\n"
-"	blt _08056884\n"
-"	ldr r0, _08056880 @ =gUnknown_0202E850\n"
-"	ldrb r1, [r0]\n"
-"	movs r0, 0x1\n"
-"	ands r0, r1\n"
-"	cmp r0, 0\n"
-"	beq _08056894\n"
-"	movs r0, 0x1\n"
-"	b _080568A6\n"
-"	.align 2, 0\n"
-"_08056880: .4byte gUnknown_0202E850\n"
-"_08056884:\n"
-"	cmp r5, 0x6\n"
-"	bgt _080568A4\n"
-"	ldr r0, _0805689C @ =gUnknown_0202E850\n"
-"	ldrb r1, [r0]\n"
-"	movs r0, 0x2\n"
-"	ands r0, r1\n"
-"	cmp r0, 0\n"
-"	bne _080568A0\n"
-"_08056894:\n"
-"	movs r0, 0x1\n"
-"	negs r0, r0\n"
-"	b _080568A6\n"
-"	.align 2, 0\n"
-"_0805689C: .4byte gUnknown_0202E850\n"
-"_080568A0:\n"
-"	movs r0, 0x2\n"
-"	b _080568A6\n"
-"_080568A4:\n"
-"	movs r0, 0\n"
-"_080568A6:\n"
-"	pop {r4,r5}\n"
-"	pop {r1}\n"
-"	bx r1\n"
-"	.syntax divided\n"
-);
-}
-#endif
 
 int GetPostCameraMoveMapBorderId(int x, int y) {
 	return GetMapBorderIdAt(gSaveBlock1.pos.x + 7 + x, gSaveBlock1.pos.y + 7 + y);
