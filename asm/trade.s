@@ -11765,7 +11765,7 @@ _0804DF48: .4byte 0x0000043c
 _0804DF4C: .4byte gUnknown_03004828
 _0804DF50: .4byte gSystemText_Saving
 _0804DF54:
-	bl sub_8047A1C
+	bl SetSecretBase2Field_9_AndHideBG
 	movs r0, 0x15
 	bl sav12_xor_increment
 	bl sub_8125D80
@@ -11803,7 +11803,7 @@ _0804DF9C:
 	lsrs r1, r0, 24
 	cmp r1, 0
 	beq _0804DFC0
-	bl sub_8047A34
+	bl ClearSecretBase2Field_9_2
 	ldr r0, _0804DFB8 @ =gMain
 	ldr r1, _0804DFBC @ =0x0000043c
 	adds r0, r1

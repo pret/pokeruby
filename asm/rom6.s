@@ -3921,7 +3921,7 @@ _0810D1B4:
 	movs r0, 0x1
 	bl sav12_xor_set
 _0810D1D4:
-	bl sub_8047A10
+	bl SetSecretBase2Field_9
 	ldr r0, _0810D1EC @ =gSaveBlock2
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0

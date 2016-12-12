@@ -6,156 +6,6 @@
 
 	.text
 
-	thumb_func_start CheckForFlashMemory
-CheckForFlashMemory: @ 80479CC
-	push {lr}
-	bl IdentifyFlash
-	lsls r0, 16
-	cmp r0, 0
-	bne _080479E8
-	ldr r1, _080479E4 @ =gUnknown_3004820
-	movs r0, 0x1
-	str r0, [r1]
-	bl InitFlashTimer
-	b _080479EE
-	.align 2, 0
-_080479E4: .4byte gUnknown_3004820
-_080479E8:
-	ldr r1, _080479F4 @ =gUnknown_3004820
-	movs r0, 0
-	str r0, [r1]
-_080479EE:
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080479F4: .4byte gUnknown_3004820
-	thumb_func_end CheckForFlashMemory
-
-	thumb_func_start sub_80479F8
-sub_80479F8: @ 80479F8
-	ldr r0, _08047A00 @ =gSaveBlock2
-	ldrb r0, [r0, 0x9]
-	bx lr
-	.align 2, 0
-_08047A00: .4byte gSaveBlock2
-	thumb_func_end sub_80479F8
-
-	thumb_func_start sub_8047A04
-sub_8047A04: @ 8047A04
-	ldr r1, _08047A0C @ =gSaveBlock2
-	movs r0, 0
-	strb r0, [r1, 0x9]
-	bx lr
-	.align 2, 0
-_08047A0C: .4byte gSaveBlock2
-	thumb_func_end sub_8047A04
-
-	thumb_func_start sub_8047A10
-sub_8047A10: @ 8047A10
-	ldr r1, _08047A18 @ =gSaveBlock2
-	movs r0, 0x1
-	strb r0, [r1, 0x9]
-	bx lr
-	.align 2, 0
-_08047A18: .4byte gSaveBlock2
-	thumb_func_end sub_8047A10
-
-	thumb_func_start sub_8047A1C
-sub_8047A1C: @ 8047A1C
-	push {lr}
-	movs r0, 0
-	bl gpu_sync_bg_hide
-	ldr r1, _08047A30 @ =gSaveBlock2
-	movs r0, 0x1
-	strb r0, [r1, 0x9]
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08047A30: .4byte gSaveBlock2
-	thumb_func_end sub_8047A1C
-
-	thumb_func_start sub_8047A34
-sub_8047A34: @ 8047A34
-	ldr r1, _08047A3C @ =gSaveBlock2
-	movs r0, 0
-	strb r0, [r1, 0x9]
-	bx lr
-	.align 2, 0
-_08047A3C: .4byte gSaveBlock2
-	thumb_func_end sub_8047A34
-
-	thumb_func_start sub_8047A40
-sub_8047A40: @ 8047A40
-	push {r4-r6,lr}
-	ldr r2, _08047A78 @ =gSaveBlock1
-	ldr r0, _08047A7C @ =gPlayerPartyCount
-	ldrb r1, [r0]
-	movs r3, 0x8D
-	lsls r3, 2
-	adds r0, r2, r3
-	strb r1, [r0]
-	movs r6, 0
-	movs r0, 0x8E
-	lsls r0, 2
-	adds r5, r2, r0
-	movs r4, 0
-_08047A5A:
-	ldr r1, _08047A80 @ =gPlayerParty
-	adds r1, r4, r1
-	adds r0, r5, 0
-	movs r2, 0x64
-	bl memcpy
-	adds r5, 0x64
-	adds r4, 0x64
-	adds r6, 0x1
-	cmp r6, 0x5
-	ble _08047A5A
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08047A78: .4byte gSaveBlock1
-_08047A7C: .4byte gPlayerPartyCount
-_08047A80: .4byte gPlayerParty
-	thumb_func_end sub_8047A40
-
-	thumb_func_start copy_player_party_from_sav1
-copy_player_party_from_sav1: @ 8047A84
-	push {r4-r6,lr}
-	ldr r0, _08047AC0 @ =gPlayerPartyCount
-	ldr r1, _08047AC4 @ =gSaveBlock1
-	movs r2, 0x8D
-	lsls r2, 2
-	adds r1, r2
-	ldrb r1, [r1]
-	strb r1, [r0]
-	ldr r4, _08047AC8 @ =gPlayerParty
-	movs r5, 0
-	movs r0, 0xFA
-	lsls r0, 1
-	adds r6, r4, r0
-_08047A9E:
-	ldr r1, _08047AC4 @ =gSaveBlock1
-	adds r1, r5, r1
-	movs r2, 0x8E
-	lsls r2, 2
-	adds r1, r2
-	adds r0, r4, 0
-	movs r2, 0x64
-	bl memcpy
-	adds r4, 0x64
-	adds r5, 0x64
-	cmp r4, r6
-	ble _08047A9E
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08047AC0: .4byte gPlayerPartyCount
-_08047AC4: .4byte gSaveBlock1
-_08047AC8: .4byte gPlayerParty
-	thumb_func_end copy_player_party_from_sav1
-
 	thumb_func_start sub_8047ACC
 sub_8047ACC: @ 8047ACC
 	push {r4-r7,lr}
@@ -221,7 +71,7 @@ _08047B38: .4byte gMapObjects
 	thumb_func_start save_serialize_game
 save_serialize_game: @ 8047B3C
 	push {lr}
-	bl sub_8047A40
+	bl SavePlayerParty
 	bl sub_8047ACC
 	pop {r0}
 	bx r0
@@ -230,7 +80,7 @@ save_serialize_game: @ 8047B3C
 	thumb_func_start save_deserialize_game
 save_deserialize_game: @ 8047B4C
 	push {lr}
-	bl copy_player_party_from_sav1
+	bl LoadPlayerParty
 	bl save_deserialize_npcs
 	pop {r0}
 	bx r0

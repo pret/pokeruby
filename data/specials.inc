@@ -39,8 +39,8 @@ gSpecials::
 	.4byte sub_8083614
 	.4byte GetLinkPartnerNames
 	.4byte sub_810DB28
-	.4byte sub_8047A40
-	.4byte copy_player_party_from_sav1
+	.4byte SavePlayerParty
+	.4byte LoadPlayerParty
 	.4byte sub_80C5568
 	.4byte sub_8083BDC
 	.4byte FieldObjectInteractionGetBerryTreeData

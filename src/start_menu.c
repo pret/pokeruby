@@ -811,14 +811,14 @@ static void Task_8071B64(u8 taskId)
                 (*step)++;
                 break;
             case 1:
-                sub_8047A1C();
+                SetSecretBase2Field_9_AndHideBG();
                 sub_8125E2C();
                 (*step)++;
                 break;
             case 2:
                 if(!sub_8125E6C())
                     break;
-                sub_8047A34();
+                ClearSecretBase2Field_9_2();
                 (*step)++;
                 break;
             case 3:

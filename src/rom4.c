@@ -454,7 +454,7 @@ void sub_80537CC(u8 a1)
         warp_set(&gSaveBlock1.warp1, warp->group, warp->map, -1, warp->x, warp->y);
 }
 
-void gpu_sync_bg_hide(void)
+void gpu_sync_bg_hide()
 {
     gSaveBlock1.warp1 = gSaveBlock1.warp2;
 }
@@ -1262,9 +1262,9 @@ void CB2_ContinueSavedGame(void)
     PlayTimeCounter_Start();
     ScriptContext1_Init();
     ScriptContext2_Disable();
-    if (sub_80479F8() == 1)
+    if (GetSecretBase2Field_9() == 1)
     {
-        sub_8047A04();
+        ClearSecretBase2Field_9();
         sub_8053778();
         warp_in();
         SetMainCallback2(CB2_LoadMap);
