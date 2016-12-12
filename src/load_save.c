@@ -34,28 +34,28 @@ void CheckForFlashMemory(void)
 
 u8 GetSecretBase2Field_9(void)
 {
-    return gSaveBlock2.sb2_field_9;
+    return gSaveBlock2.specialSaveWarp;
 }
 
 void ClearSecretBase2Field_9(void)
 {
-    gSaveBlock2.sb2_field_9 = 0;
+    gSaveBlock2.specialSaveWarp = 0;
 }
 
 void SetSecretBase2Field_9(void)
 {
-    gSaveBlock2.sb2_field_9 = 1;
+    gSaveBlock2.specialSaveWarp = 1;
 }
 
-void SetSecretBase2Field_9_AndHideBG(void) // note: no other function sets sb2_field_9 to values other than 0 or 1, hence clear and set distinctions.
+void SetSecretBase2Field_9_AndHideBG(void) // note: no other function sets specialSaveWarp to values other than 0 or 1, hence clear and set distinctions.
 {
     gpu_sync_bg_hide(0); // the function doesn't use the parameter passed to it, but this is necessary to match.
-    gSaveBlock2.sb2_field_9 = 1;
+    gSaveBlock2.specialSaveWarp = 1;
 }
 
 void ClearSecretBase2Field_9_2(void) // duplicate function
 {
-    gSaveBlock2.sb2_field_9 = 0;
+    gSaveBlock2.specialSaveWarp = 0;
 }
 
 void SavePlayerParty(void)
