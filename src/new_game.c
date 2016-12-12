@@ -102,7 +102,7 @@ void NewGameInitData(void)
     sub_8052DE4();
     memset(&gSaveBlock1, 0, sizeof(gSaveBlock1));
     sub_80A2B18();
-    gSaveBlock2.sb2_field_9 = 0;
+    gSaveBlock2.specialSaveWarp = 0;
     set_player_trainer_id();
     PlayTimeCounter_Reset();
     sub_8052D78();

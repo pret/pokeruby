@@ -38,10 +38,10 @@ void CreatePokeballSprite(u8 r0, u8 r1, u8 r2, u8 r3, u8 s1, u8 s2, u8 s3, u16 s
 void CheckForFlashMemory(void);
 int sub_80479F8();
 void sub_8047A04();
-void sub_8047A1C(void);
-void sub_8047A34(void);
-void save_serialize_game(void);
-void save_deserialize_game();
+void SetSecretBase2Field_9_AndHideBG(void);
+void ClearSecretBase2Field_9_2(void);
+void SaveSerializedGame(void);
+void LoadSerializedGame(void);
 
 // asm/berry_blender.o
 void sub_80516C4(u8, u16);

@@ -169,6 +169,11 @@ struct EasyChatPair
     u16 words[2];
 }; /*size = 0x8*/
 
+struct SaveBlock1_2B4C_Struct
+{ 
+	u8 filler[0x24]; 
+};
+
 struct SaveBlock1
 {
     /*0x00*/ struct Coords16 pos;
@@ -230,7 +235,9 @@ struct SaveBlock1
     /*0x2B0D*/ u8 outbreakPokemonProbability;
     /*0x2B0E*/ u8 filler_2B0E[0xE];
     /*0x2B1C*/ u16 unk2B1C[4];
-    /*0x2B24*/ u8 filler_2B24[0x2B0];
+    /*0x2B24*/ u8 filler_2B24[0x28];
+    /*0x2B4C*/ struct SaveBlock1_2B4C_Struct unkSave[16];
+    /*0x2D8C*/ u8 filler_2D8C[0x48];
     /*0x2DD4*/ struct EasyChatPair easyChatPairs[5]; //Dewford trend [0] and some other stuff
     /*0x2DFC*/ u8 filler_2DFC[0x100];
     /*0x2EFC*/ struct SB1_2EFC_Struct sb1_2EFC_struct[5];
@@ -284,7 +291,7 @@ struct SaveBlock2
 {
     /*0x00*/ u8 playerName[8];
     /*0x08*/ u8 playerGender; // MALE, FEMALE
-    /*0x09*/ u8 sb2_field_9;
+    /*0x09*/ u8 specialSaveWarp;
     /*0x0A*/ u8 playerTrainerId[4];
     /*0x0E*/ u16 playTimeHours;
     /*0x10*/ u8 playTimeMinutes;

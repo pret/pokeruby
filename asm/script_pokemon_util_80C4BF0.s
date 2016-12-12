@@ -1311,7 +1311,7 @@ SetBattleTowerPlayerParty: @ 80C55C8
 	ldrb r4, [r0]
 	cmp r4, 0
 	bne _080C55E4
-	bl copy_player_party_from_sav1
+	bl LoadPlayerParty
 	ldr r0, _080C55E0 @ =gScriptResult
 	strh r4, [r0]
 	b _080C55EE

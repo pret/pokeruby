@@ -496,7 +496,7 @@ _080BA038:
 	.4byte _080BA074
 	.4byte _080BA08E
 _080BA050:
-	bl sub_8047A1C
+	bl SetSecretBase2Field_9_AndHideBG
 	bl sub_8125E2C
 	b _080BA086
 _080BA05A:
@@ -504,7 +504,7 @@ _080BA05A:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080BA09C
-	bl sub_8047A34
+	bl ClearSecretBase2Field_9_2
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	movs r1, 0
