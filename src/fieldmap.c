@@ -156,8 +156,8 @@ void sub_8056134(int x, int y, struct MapHeader *mapHeader, int x2, int y2, int 
 
 void fillSouthConnection(struct MapHeader *mapHeader, struct MapHeader *connectedMapHeader, s32 offset) {
 	int x, y;
-	int x2, y2;
-	int width, height;
+	int x2;
+	int width;
 	int cWidth;
 
 	if (connectedMapHeader) {
@@ -190,9 +190,9 @@ void fillSouthConnection(struct MapHeader *mapHeader, struct MapHeader *connecte
 }
 
 void fillNorthConnection(struct MapHeader *mapHeader, struct MapHeader *connectedMapHeader, s32 offset) {
-	int x, y;
+	int x;
 	int x2, y2;
-	int width, height;
+	int width;
 	int cWidth, cHeight;
 
 	if (connectedMapHeader) {
@@ -229,9 +229,9 @@ void fillNorthConnection(struct MapHeader *mapHeader, struct MapHeader *connecte
 
 
 void fillWestConnection(struct MapHeader *mapHeader, struct MapHeader *connectedMapHeader, s32 offset) {
-	int x, y;
+	int y;
 	int x2, y2;
-	int width, height;
+	int height;
 	int cWidth, cHeight;
 	if (connectedMapHeader) {
 		cWidth = connectedMapHeader->mapData->width;
@@ -265,9 +265,9 @@ void fillWestConnection(struct MapHeader *mapHeader, struct MapHeader *connected
 
 void fillEastConnection(struct MapHeader *mapHeader, struct MapHeader *connectedMapHeader, s32 offset) {
 	int x, y;
-	int x2, y2;
-	int width, height;
-	int cWidth, cHeight;
+	int y2;
+	int height;
+	int cHeight;
 	if (connectedMapHeader) {
 		cHeight = connectedMapHeader->mapData->height;
 		x = mapHeader->mapData->width + 7;

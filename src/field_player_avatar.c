@@ -821,7 +821,7 @@ u8 PlayerGetZCoord(void)
     return gMapObjects[gPlayerAvatar.mapObjectId].elevation;
 }
 
-static void unref_sub_8059790(s16 a, s16 b)
+void unref_sub_8059790(s16 a, s16 b)
 {
     sub_805C058(&gMapObjects[gPlayerAvatar.mapObjectId], a, b);
 }
@@ -874,7 +874,7 @@ u8 GetPlayerAvatarGraphicsIdByStateId(u8 a)
     return GetPlayerAvatarGraphicsIdByStateIdAndGender(a, gPlayerAvatar.gender);
 }
 
-static u8 unref_sub_8059888(u8 a)
+u8 unref_sub_8059888(u8 a)
 {
     switch (a)
     {

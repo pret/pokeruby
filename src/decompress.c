@@ -107,7 +107,7 @@ void sub_800D378(const struct SpriteSheet *a, u32 b, u32 c, u32 d, void *dest, s
     DrawSpindaSpots(f, g, dest, r7);
 }
 
-static void Unused_LZDecompressWramIndirect(const void **src, void *dest)
+void Unused_LZDecompressWramIndirect(const void **src, void *dest)
 {
     LZ77UnCompWram(*src, dest);
 }

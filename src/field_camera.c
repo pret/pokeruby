@@ -427,7 +427,7 @@ void CameraUpdate(void)
     gUnknown_03004898 -= r8;
 }
 
-static void camera_move_and_redraw(int a, int b)
+void camera_move_and_redraw(int a, int b)
 {
     CameraMove(a, b);
     UpdateFieldObjectsForCameraUpdate(a, b);

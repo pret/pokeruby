@@ -59,7 +59,7 @@ void sub_8053720(s16, s16);
 // sub_8053778
 // unref_sub_8053790
 // sub_80537CC
-// gpu_sync_bg_hide
+void gpu_sync_bg_hide();
 // sub_8053818
 // sub_8053850
 // sub_80538B0

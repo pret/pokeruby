@@ -170,7 +170,6 @@ void sub_808C0B8(void)
 void ClearPokedexView(struct PokedexView *pokedexView)
 {
     u16 i;
-    struct UnknownStruct3 *p;
     
     for(i = 0; i <= 385; i++)
     {
@@ -1732,7 +1731,6 @@ void sub_808E6BC(void)
 u8 sub_808E71C(void)
 {
     u16 r2;
-    u16 r3;
     u16 r4 = gPokedexView->selectedPokemon;
     
     if((gMain.newKeys & DPAD_UP) && r4)
@@ -2177,8 +2175,6 @@ void sub_808F168(struct Sprite *sprite)
         
         if(gPokedexView->menuIsOpen != 0 && gPokedexView->menuY == r1)
         {
-            u8 data2;
-            
             sprite->invisible = 0;
             sprite->pos2.y = gPokedexView->menuCursorPos * 16;
             sprite->pos2.x = gSineTable[(u8)sprite->data2] / 64;

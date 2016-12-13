@@ -29,7 +29,6 @@ void PrintCoins(s32 a, u8 b, u8 c, u8 d)
     u8 string[16];
     u8 *ptr;
     u8 r1;
-    u8 r6;
     u8 foo;
     
     ConvertIntToDecimalString(string, a);

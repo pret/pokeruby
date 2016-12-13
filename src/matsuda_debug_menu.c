@@ -1,12 +1,15 @@
 #include "global.h"
+#include "asm.h"
+#include "link.h"
 #include "main.h"
 #include "menu.h"
 #include "palette.h"
-#include "task.h"
-#include "link.h"
-#include "text.h"
+#include "rom4.h"
 #include "sprite.h"
+#include "start_menu.h"
 #include "string_util.h"
+#include "task.h"
+#include "text.h"
 
 #define BIT(n) (1 << (n))
 
@@ -16,30 +19,6 @@ extern u8 gContestPlayerMonIndex;
 extern u16 gScriptContestCategory;
 extern u16 gScriptContestRank;
 extern u8 (*gCallback_03004AE8)(void);
-extern void sub_80034D4(u8 *, u8 *);
-extern void sub_80AF668(void);
-extern void sub_80C2358(void);
-extern void sub_8071C20(void);
-extern void sub_80AA10C(void);
-extern void sub_80A9C98(u8);
-extern void sub_80C8734(void);
-extern void sub_80A9CC0(u8);
-extern void sub_80C88AC(u8);
-extern void sub_80A9CDC(u8);
-extern void sub_80C8E1C(u8);
-extern void sub_80A9D58(u8);
-extern void sub_80C8EBC(u8);
-extern void sub_80A9DBC(u8);
-extern u8 sub_80C4B34(u8 *);
-extern void sub_80B0F28(u8);
-extern void sub_80C8F34(u8);
-extern void sub_80A9DD8(u8);
-extern void sub_80A9F10(u8);
-extern void sub_805469C(void);
-extern void sub_80AE398(u8, u8);
-extern void sub_80AE098(u8);
-extern void sub_80AA5BC(u8);
-extern u32 sub_80AE770(u8, u8);
 
 extern struct Window gMenuWindow;
 
@@ -64,16 +43,16 @@ extern u8 gMatsudaDebugMenu_GoBackText[];
 extern u8 gMatsudaDebugMenu_BattlePointsText[];
 extern u8 gMatsudaDebugMenu_StartText[];
 
-extern u8 gUnknown_083C92BC[];
-extern u8 gUnknown_083C92B4[];
+extern struct SpritePalette gUnknown_083C92BC;
+extern struct SpriteSheet gUnknown_083C92B4;
 extern struct SpriteTemplate gSpriteTemplate_83C92CC;
 
 extern u8 gMoveNames[][13];
 
 extern u8 gMatsudaDebugMenu_UnknownByteArray[];
-extern u32 gMatsudaDebugMenuTextList1[];
-extern u32 gMatsudaDebugMenuTextList2[];
-extern u32 gMatsudaDebugMenuTextList3[];
+extern u8* gMatsudaDebugMenuTextList1[];
+extern u8* gMatsudaDebugMenuTextList2[];
+extern u8* gMatsudaDebugMenuTextList3[];
 extern u8 gMatsudaDebugMenuContestTopLeft[][2];
 
 struct ContestPokemon
@@ -97,24 +76,24 @@ extern struct ContestPokemon gContestMons[];
 extern bool8 gReceivedRemoteLinkPlayers;
 extern u16 gBlockRecvBuffer[MAX_LINK_PLAYERS][BLOCK_BUFFER_SIZE / 2];
 
-struct DebugMenuAction
-{
-   u8 *text;
-   u8 (*func)(void);
-};
+extern struct MenuAction gMatsudaDebugMenuActions[];
 
-extern struct DebugMenuAction gMatsudaDebugMenuActions[];
-
-s8 sub_80A9B78(void);
-void sub_80A9BE4(u8 taskId);
-void sub_80A9E04(u8 taskId);
-void sub_80A9E3C(u8 taskId);
-void sub_80A9ED8(u8);
-void sub_80A9E80(u8);
-void sub_80AA280(u8);
-void sub_80AA5E8(u8);
-void sub_80AA614(u8, u8);
-void sub_80AA658(u8);
+static bool8 sub_80A9B78(void);
+static void sub_80A9BE4(u8 taskId);
+static void sub_80A9C98(u8);
+static void sub_80A9CC0(u8);
+static void sub_80A9CDC(u8);
+static void sub_80A9D58(u8);
+static void sub_80A9DBC(u8);
+static void sub_80A9DD8(u8);
+static void sub_80A9E04(u8 taskId);
+static void sub_80A9E3C(u8 taskId);
+static void sub_80A9E80(u8);
+static void sub_80A9ED8(u8);
+static void sub_80A9F10(u8);
+static void sub_80AA10C(void);
+static void sub_80AA5BC(u8);
+static void sub_80AA614(u8, u8);
 
 u8 unref_sub_80A9B28(void)
 {
@@ -126,20 +105,20 @@ u8 unref_sub_80A9B28(void)
     return 0;
 }
 
-s8 sub_80A9B78(void)
+static bool8 sub_80A9B78(void)
 {
     s8 choice = ProcessMenuInput();
     
     switch(choice)
     {
     case -2:
-        return 0;
+        return FALSE;
     default:
         gCallback_03004AE8 = gMatsudaDebugMenuActions[choice].func;
-        return 0;
+        return FALSE;
     case -1:
         sub_8071C20();
-        return 1;
+        return TRUE;
     }
 }
 
@@ -150,7 +129,7 @@ s8 MatsudaDebugMenu_ContestResults(void)
     return 1;
 }
 
-void sub_80A9BE4(u8 taskId)
+static void sub_80A9BE4(u8 taskId)
 {
     if(!gPaletteFade.active)
     {
@@ -189,23 +168,23 @@ s8 MatsudaDebugMenu_CommTest(void)
     return 1;
 }
 
-void sub_80A9C98(u8 taskId)
+static void sub_80A9C98(u8 taskId)
 {
     sub_80AE098(0);
     SetTaskFuncWithFollowupFunc(taskId, sub_80C8734, sub_80A9CC0);
 }
 
-void sub_80A9CC0(u8 taskId)
+static void sub_80A9CC0(u8 taskId)
 {
     SetTaskFuncWithFollowupFunc(taskId, sub_80C88AC, sub_80A9CDC);
 }
 
-void sub_80A9CDC(u8 taskId)
+static void sub_80A9CDC(u8 taskId)
 {
     SetTaskFuncWithFollowupFunc(taskId, sub_80C8E1C, sub_80A9D58);
 }
 
-void sub_80A9CF8(u8 taskId)
+static void sub_80A9CF8(u8 taskId)
 {
     if(gReceivedRemoteLinkPlayers == FALSE)
     {
@@ -215,13 +194,13 @@ void sub_80A9CF8(u8 taskId)
     }
 }
 
-void sub_80A9D30(u8 taskId)
+static void sub_80A9D30(u8 taskId)
 {
     sub_800832C();
     gTasks[taskId].func = sub_80A9CF8;
 }
 
-void sub_80A9D58(u8 taskId)
+static void sub_80A9D58(u8 taskId)
 {
    int i;
    u8 dest[4];
@@ -229,31 +208,31 @@ void sub_80A9D58(u8 taskId)
    for(i = 0; i < 4; i++)
        dest[i] = gTasks[taskId].data[5 + i];
 
-   gUnknown_0203869B = sub_80C4B34(&dest);
+   gUnknown_0203869B = sub_80C4B34(dest);
    sub_80AE82C((u8)gScriptContestCategory);
    sub_80B0F28(0);
    SetTaskFuncWithFollowupFunc(taskId, sub_80C8EBC, sub_80A9DBC);
 }
 
-void sub_80A9DBC(u8 taskId)
+static void sub_80A9DBC(u8 taskId)
 {
     SetTaskFuncWithFollowupFunc(taskId, sub_80C8F34, sub_80A9DD8);
 }
 
-void sub_80A9DD8(u8 taskId)
+static void sub_80A9DD8(u8 taskId)
 {
     DestroyTask(gTasks[taskId].data[10]);
     DestroyTask(taskId);
     sub_8071C20();
 }
 
-void sub_80A9E04(u8 taskId)
+static void sub_80A9E04(u8 taskId)
 {
     if(gMain.newKeys == 2)
         gTasks[(u8)gTasks[taskId].data[10]].func = sub_80A9D30;
 }
 
-void sub_80A9E3C(u8 taskId)
+static void sub_80A9E3C(u8 taskId)
 {
     u8 i;
     
@@ -266,7 +245,7 @@ void sub_80A9E3C(u8 taskId)
     gTasks[taskId].func = sub_80A9E80;
 }
 
-void sub_80A9E80(u8 taskId)
+static void sub_80A9E80(u8 taskId)
 {
     TaskFunc func;
 
@@ -292,7 +271,7 @@ void sub_80A9E80(u8 taskId)
     }
 }
 
-void sub_80A9ED8(u8 taskId)
+static void sub_80A9ED8(u8 taskId)
 {
     gTasks[taskId].data[0] = gTasks[taskId].data[0] + 1;
     if((gTasks[taskId].data[0]) == 101)
@@ -303,7 +282,7 @@ void sub_80A9ED8(u8 taskId)
     }
 }
 
-void sub_80A9F10(u8 taskId)
+static void sub_80A9F10(u8 taskId)
 {
     if(gReceivedRemoteLinkPlayers)
     {
@@ -316,7 +295,7 @@ void sub_80A9F10(u8 taskId)
     }
 }
 
-void sub_80A9F50(void)
+static void sub_80A9F50(void)
 {
     REG_DISPCNT = DISPCNT_OBJ_1D_MAP;
     REG_DISPCNT |= DISPCNT_OBJ_ON | DISPCNT_BG0_ON;
@@ -338,7 +317,7 @@ void sub_80A9F50(void)
     gUnknown_030041B8 = 0;
 }
 
-void sub_80A9FE4(void)
+static void sub_80A9FE4(void)
 {
     u8 *addr;
     u32 i;
@@ -360,11 +339,11 @@ void sub_80A9FE4(void)
             break;
         }
     }
-    sub_80034D4(VRAM, &ptr);
+    sub_80034D4((void *)VRAM, ptr);
     LoadFontDefaultPalette(&gWindowConfig_81E6C3C);
 }
 
-void sub_80AA064(void)
+static void sub_80AA064(void)
 {
     AnimateSprites();
     BuildOamBuffer();
@@ -374,7 +353,7 @@ void sub_80AA064(void)
         SetMainCallback2(sub_805469C);
 }
 
-void sub_80AA090(void)
+static void sub_80AA090(void)
 {
     REG_BG0HOFS = gUnknown_030042A4;
     REG_BG0VOFS = gUnknown_030042A0;
@@ -390,7 +369,7 @@ void sub_80AA090(void)
     sub_8089668();
 }
 
-void sub_80AA10C(void)
+static void sub_80AA10C(void)
 {
     u8 i;
     u8 zero;
@@ -428,8 +407,8 @@ void sub_80AA10C(void)
     sub_80AA5E8(gScriptContestRank);
     sub_8003460(&gMenuWindow, gMatsudaDebugMenu_GoBackText, 0xD6, 0x12, 0x12);
     sub_8003460(&gMenuWindow, gMatsudaDebugMenu_BattlePointsText, 0xDC, zero, 0xC);
-    LoadSpriteSheet(gUnknown_083C92B4);
-    LoadSpritePalette(gUnknown_083C92BC);
+    LoadSpriteSheet(&gUnknown_083C92B4);
+    LoadSpritePalette(&gUnknown_083C92BC);
     sub_80AA280(3);
     sub_80AA658(3);
     sub_80AA614(3, zero);
@@ -445,7 +424,7 @@ void sub_80AA280(u8 var)
     u8 i;
 
     FillWindowRect_DefaultPalette(&gMenuWindow, 0, 0, 0, 0x1E, 3);
-    StringCopy(unk_2000000, &gMatsudaDebugMenu_StartText);
+    StringCopy(unk_2000000, gMatsudaDebugMenu_StartText);
     StringAppend(unk_2000000, &gUnknown_0203857D[var][0]);
 
     for(i = 0; i < 4; i++)
@@ -462,43 +441,43 @@ void sub_80AA280(u8 var)
     }
 }
 
-void sub_80AA340(u8 var)
+static void sub_80AA340(u8 var)
 {
     ConvertIntToDecimalStringN(unk_2000000, gContestMons[var].cool, STR_CONV_MODE_RIGHT_ALIGN, 3);
     sub_8003460(&gMenuWindow, unk_2000000, 0x66, gUnknown_083C9282[0], gUnknown_083C9282[1]);
 }
 
-void sub_80AA388(u8 var)
+static void sub_80AA388(u8 var)
 {
     ConvertIntToDecimalStringN(unk_2000000, gContestMons[var].cute, STR_CONV_MODE_RIGHT_ALIGN, 3);
     sub_8003460(&gMenuWindow, unk_2000000, 0x6C, gUnknown_083C9282[2], gUnknown_083C9282[3]);
 }
 
-void sub_80AA3D0(u8 var)
+static void sub_80AA3D0(u8 var)
 {
     ConvertIntToDecimalStringN(unk_2000000, gContestMons[var].beauty, STR_CONV_MODE_RIGHT_ALIGN, 3);
     sub_8003460(&gMenuWindow, unk_2000000, 0x72, gUnknown_083C9282[4], gUnknown_083C9282[5]);
 }
 
-void sub_80AA418(u8 var)
+static void sub_80AA418(u8 var)
 {
     ConvertIntToDecimalStringN(unk_2000000, gContestMons[var].smart, STR_CONV_MODE_RIGHT_ALIGN, 3);
     sub_8003460(&gMenuWindow, unk_2000000, 0x78, gUnknown_083C9282[6], gUnknown_083C9282[7]);
 }
 
-void sub_80AA460(u8 var)
+static void sub_80AA460(u8 var)
 {
     ConvertIntToDecimalStringN(unk_2000000, gContestMons[var].tough, STR_CONV_MODE_RIGHT_ALIGN, 3);
     sub_8003460(&gMenuWindow, unk_2000000, 0x7E, gUnknown_083C9282[8], gUnknown_083C9282[9]);
 }
 
-void sub_80AA4A8(u8 var)
+static void sub_80AA4A8(u8 var)
 {
     ConvertIntToDecimalStringN(unk_2000000, gContestMons[var].sheen, STR_CONV_MODE_RIGHT_ALIGN, 3);
     sub_8003460(&gMenuWindow, unk_2000000, 0x84, gUnknown_083C9282[10], gUnknown_083C9282[11]);
 }
 
-void sub_80AA4F0(u8 var1, u8 var2)
+static void sub_80AA4F0(u8 var1, u8 var2)
 {
     FillWindowRect_DefaultPalette(&gMenuWindow, 0, gUnknown_083C928E[var2][0], gUnknown_083C928E[var2][1], gUnknown_083C928E[var2][0] + 7, gUnknown_083C928E[var2][1] + 1);
     sub_8003460(&gMenuWindow, gMoveNames[gContestMons[var1].moves[var2]], 0x8A + var2 * 14, gUnknown_083C928E[var2][0], gUnknown_083C928E[var2][1]);
@@ -506,7 +485,7 @@ void sub_80AA4F0(u8 var1, u8 var2)
     sub_8003460(&gMenuWindow, gStringVar1, 0xFA + var2 * 6, gUnknown_083C928E[var2][0] + 7, gUnknown_083C928E[var2][1]);
 }
 
-void sub_80AA5BC(u8 var)
+static void sub_80AA5BC(u8 var)
 {
 	sub_8003460(&gMenuWindow, gMatsudaDebugMenuTextList2[var], 0xC2, 3, 0x12);
 }
@@ -516,7 +495,7 @@ void sub_80AA5E8(u8 var)
 	sub_8003460(&gMenuWindow, gMatsudaDebugMenuTextList3[var], 0xE8, 3, 4);
 }
 
-void sub_80AA614(u8 var1, u8 var2)
+static void sub_80AA614(u8 var1, u8 var2)
 {
 	u16 var = sub_80AE770(var1, var2);
 
@@ -541,16 +520,16 @@ void sub_80AA658(u8 var)
 
 void SetDebugMonForContest(void)
 {
-	SetMonData(&gPlayerParty, MON_DATA_COOL, &gContestMons[gContestPlayerMonIndex].cool);
-	SetMonData(&gPlayerParty, MON_DATA_CUTE, &gContestMons[gContestPlayerMonIndex].cute);
-	SetMonData(&gPlayerParty, MON_DATA_BEAUTY, &gContestMons[gContestPlayerMonIndex].beauty);
-	SetMonData(&gPlayerParty, MON_DATA_SMART, &gContestMons[gContestPlayerMonIndex].smart);
-	SetMonData(&gPlayerParty, MON_DATA_TOUGH, &gContestMons[gContestPlayerMonIndex].tough);
-	SetMonData(&gPlayerParty, MON_DATA_SHEEN, &gContestMons[gContestPlayerMonIndex].sheen);
-	SetMonData(&gPlayerParty, MON_DATA_MOVE1, &gContestMons[gContestPlayerMonIndex].moves[0]);
-	SetMonData(&gPlayerParty, MON_DATA_MOVE2, &gContestMons[gContestPlayerMonIndex].moves[1]);
-	SetMonData(&gPlayerParty, MON_DATA_MOVE3, &gContestMons[gContestPlayerMonIndex].moves[2]);
-	SetMonData(&gPlayerParty, MON_DATA_MOVE4, &gContestMons[gContestPlayerMonIndex].moves[3]);
+	SetMonData(&gPlayerParty[0], MON_DATA_COOL, &gContestMons[gContestPlayerMonIndex].cool);
+	SetMonData(&gPlayerParty[0], MON_DATA_CUTE, &gContestMons[gContestPlayerMonIndex].cute);
+	SetMonData(&gPlayerParty[0], MON_DATA_BEAUTY, &gContestMons[gContestPlayerMonIndex].beauty);
+	SetMonData(&gPlayerParty[0], MON_DATA_SMART, &gContestMons[gContestPlayerMonIndex].smart);
+	SetMonData(&gPlayerParty[0], MON_DATA_TOUGH, &gContestMons[gContestPlayerMonIndex].tough);
+	SetMonData(&gPlayerParty[0], MON_DATA_SHEEN, &gContestMons[gContestPlayerMonIndex].sheen);
+	SetMonData(&gPlayerParty[0], MON_DATA_MOVE1, (const u8 *) &gContestMons[gContestPlayerMonIndex].moves[0]);
+	SetMonData(&gPlayerParty[0], MON_DATA_MOVE2, (const u8 *) &gContestMons[gContestPlayerMonIndex].moves[1]);
+	SetMonData(&gPlayerParty[0], MON_DATA_MOVE3, (const u8 *) &gContestMons[gContestPlayerMonIndex].moves[2]);
+	SetMonData(&gPlayerParty[0], MON_DATA_MOVE4, (const u8 *) &gContestMons[gContestPlayerMonIndex].moves[3]);
 }
 
 // too complicated
@@ -735,7 +714,7 @@ _080AA89C: .4byte gUnknown_083C92A8\n\
 	.syntax divided");
 }
 
-void sub_80AA8A0(struct Sprite *sprite, s8 var1, u8 var2)
+static void sub_80AA8A0(struct Sprite *sprite, s8 var1, u8 var2)
 {
 	if(var1 == 1)
 	{
@@ -765,7 +744,7 @@ void sub_80AA8F8(struct Sprite *sprite, s8 var1)
 	sub_80AA8A0(sprite, var1, 3);
 }
 
-u8 sub_80AA908(u32 a1, u8 a2, s8 a3) // first param is unused.
+static u8 sub_80AA908(u32 a1, u8 a2, s8 a3) // first param is unused.
 {
     s16 val = a2 + a3;
 
@@ -826,7 +805,7 @@ void sub_80AAA84(struct Sprite *sprite, u8 var2)
 }
 
 // a similar function is at 0x80AA908, however, it apparently returns the wrong type (u8 vs u16).
-u16 sub_80AAAC8(u32 a1, u16 a2, s8 a3) // first param is unused.
+static u16 sub_80AAAC8(u32 a1, u16 a2, s8 a3) // first param is unused.
 {
     s16 val = a2 + a3;
 
