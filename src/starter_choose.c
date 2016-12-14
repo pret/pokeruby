@@ -20,12 +20,12 @@ struct MonCoords
 
 extern void * const gUnknown_081FAF4C[];
 extern const u8 gStarterChoose_PokeballCoords[][2];
-extern u8 gUnknown_083F66F0[];
+extern u8 gBirchHelpGfx[];
 extern u8 gBirchBagTilemap[];
 extern u8 gBirchGrassTilemap[];
 extern struct SpriteSheet gUnknown_083F7794;
 extern struct SpriteSheet gUnknown_083F77A4;
-extern u8 gUnknown_083F62EC[];
+extern u8 gBirchBagGrassPal[];
 extern const u8 gStarterChoose_LabelCoords[][2];
 extern u16 gStarterMons[];
 extern union AffineAnimCmd *gUnknown_083F778C[];
@@ -108,7 +108,7 @@ void CB2_ChooseStarter(void)
     DmaFill32(3, 0, OAM, OAM_SIZE);
     DmaFill16(3, 0, PLTT, PLTT_SIZE);
     
-    LZ77UnCompVram(&gUnknown_083F66F0, (void *)VRAM);
+    LZ77UnCompVram(&gBirchHelpGfx, (void *)VRAM);
     LZ77UnCompVram(&gBirchBagTilemap, (void *)(VRAM + 0x3000));
     LZ77UnCompVram(&gBirchGrassTilemap, (void *)(VRAM + 0x3800));
     remove_some_task();
@@ -116,7 +116,7 @@ void CB2_ChooseStarter(void)
     ResetSpriteData();
     ResetPaletteFade();
     FreeAllSpritePalettes();
-    LoadPalette(gUnknown_083F62EC, 0, 0x40);
+    LoadPalette(gBirchBagGrassPal, 0, 0x40);
     LoadCompressedObjectPic(&gUnknown_083F7794);
     LoadCompressedObjectPic(&gUnknown_083F77A4);
     LoadSpritePalettes(gUnknown_083F77B4);

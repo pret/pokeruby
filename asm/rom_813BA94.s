@@ -14564,14 +14564,14 @@ _08143D24:
 	ldr r1, _08143DD0 @ =gReservedSpritePaletteCount
 	movs r0, 0x8
 	strb r0, [r1]
-	ldr r0, _08143DD4 @ =gUnknown_083F66F0
+	ldr r0, _08143DD4 @ =gBirchHelpGfx
 	movs r1, 0xC0
 	lsls r1, 19
 	bl LZ77UnCompVram
 	ldr r0, _08143DD8 @ =gBirchGrassTilemap
 	ldr r1, _08143DDC @ =0x06003800
 	bl LZ77UnCompVram
-	ldr r0, _08143DE0 @ =gUnknown_083F62EC + 0x2
+	ldr r0, _08143DE0 @ =gBirchBagGrassPal + 0x2
 	movs r1, 0x1
 	movs r2, 0x3E
 	bl LoadPalette
@@ -14640,10 +14640,10 @@ _08143D88:
 _08143DC8: .4byte gMain
 _08143DCC: .4byte 0x0000043c
 _08143DD0: .4byte gReservedSpritePaletteCount
-_08143DD4: .4byte gUnknown_083F66F0
+_08143DD4: .4byte gBirchHelpGfx
 _08143DD8: .4byte gBirchGrassTilemap
 _08143DDC: .4byte 0x06003800
-_08143DE0: .4byte gUnknown_083F62EC + 0x2
+_08143DE0: .4byte gBirchBagGrassPal + 0x2
 _08143DE4: .4byte 0x0201e000
 _08143DE8: .4byte 0x000007ff
 _08143DEC: .4byte 0x0201f800
