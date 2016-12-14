@@ -74,9 +74,16 @@ void sub_8146E50(void)
 			LoadPalette(&gSaveFailedClockPal, 0x100, 0x20);
 			SetUpWindowConfig(&gWindowConfig_81E6C3C);
 			InitMenuWindow(&gWindowConfig_81E6CE4);
+			// in revision 1.0, the text window is too small, causing text to overflow and create garbage. this is fixed in later revisions.
+#if (REVISION >= 1)
+			MenuDrawTextWindow(13, 6, 16, 9);
+			MenuDrawTextWindow(1, 10, 28, 19);
+			MenuPrint(gSystemText_SaveFailedBackupCheck, 2, 11);
+#else
 			MenuDrawTextWindow(13, 8, 16, 11);
 			MenuDrawTextWindow(1, 12, 28, 19);
 			MenuPrint(gSystemText_SaveFailedBackupCheck, 2, 13);
+#endif
 			BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
 			ime = REG_IME;
 			REG_IME = 0;
