@@ -6105,7 +6105,7 @@ sub_80A6178: @ 80A6178
 	adds r0, r4
 	lsls r0, 3
 	adds r0, r1
-	ldr r2, _080A61A4 @ =sub_814625C
+	ldr r2, _080A61A4 @ =BerryTagScreen_814625C
 	lsrs r1, r2, 16
 	strh r1, [r0, 0x18]
 	strh r2, [r0, 0x1A]
@@ -6114,7 +6114,7 @@ sub_80A6178: @ 80A6178
 	bx r0
 	.align 2, 0
 _080A61A0: .4byte gTasks
-_080A61A4: .4byte sub_814625C
+_080A61A4: .4byte BerryTagScreen_814625C
 	thumb_func_end sub_80A6178
 
 	thumb_func_start sub_80A61A8

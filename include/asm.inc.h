@@ -91,6 +91,7 @@ void FieldObjectGetLocalIdAndMap(struct MapObject *, u8 *, u8 *, u8 *);
 void sub_805BCF0(u8, u8, u8, u8);
 void sub_805BD48(u8, u8, u8);
 void sub_805BD90(u8 localId, u8 mapNum, u8 mapGroup, s16 x, s16 y);
+void gpu_pal_allocator_reset__manage_upper_four(void);
 void npc_coords_shift(struct MapObject *pObject, s16 x, s16 y);
 void sub_805C0F8(u8, u8, u8, s16, s16);
 void npc_coords_shift_still(struct MapObject *pObject);
@@ -252,7 +253,11 @@ void HideMapNamePopUpWindow();
 void sub_80A3684(void);
 void sub_80A3714(void);
 void sub_80A53F8(void);
+void sub_80A5B40(void);
 void sub_80A68CC();
+u8 sub_80A7D8C(u8 berry, int i, int i1);
+void sub_80A7DD4(void);
+u8 sub_80A7E5C(u8);
 
 // src/matsuda_debug_menu.o
 void sub_80AA280(u8);
@@ -369,6 +374,11 @@ void sub_80EBA5C(void);
 // asm/mauville_old_man.o
 void sub_80F7AA4(void);
 void sub_80F7F30(void);
+
+// asm/menu_helpers.o
+bool8 sub_80F9344(void);
+void sub_80F9368(void);
+void sub_80F9438(void);
 
 // asm/script_pokemon_util_80F99CC.o
 void sub_80F99CC(void);
