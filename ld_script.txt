@@ -146,7 +146,7 @@ SECTIONS {
         asm/pokenav.o(.text);
         asm/mon_markings.o(.text);
         asm/mauville_old_man.o(.text);
-        asm/mail.o(.text);
+        src/mail.o(.text);
         asm/menu_helpers.o(.text);
         asm/script_pokemon_util_80F99CC.o(.text);
         src/dewford_trend.o(.text);
