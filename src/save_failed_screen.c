@@ -5,16 +5,26 @@
 #include "task.h"
 #include "text.h"
 #include "menu.h"
+#include "save.h"
 
-extern void sub_8147048(void);
 extern void sub_8147218(void);
+extern void sub_8147154(void);
+extern void sub_81471A4(void);
+extern u8 sub_814737C(u32);
 
 extern u16 gUnknown_0203933C;
 extern u16 gUnknown_0203933E;
+extern u32 gUnknown_03005EA8;
+extern u32 gUnknown_03005EBC;
 
 extern u8 gBirchHelpGfx[];
 
 extern u8 gSystemText_SaveFailedBackupCheck[];
+extern u8 gSystemText_CheckCompleteSaveAttempt[];
+extern u8 gSystemText_BackupDamagedGameContinue[];
+extern u8 gSystemText_SaveCompletedPressA[];
+extern u8 gSystemText_SaveCompletedGameEnd[];
+
 extern u8 gBirchGrassTilemap[];
 extern u8 gBirchBagTilemap[];
 
@@ -23,6 +33,7 @@ extern const u8 gSaveFailedClockPal[];
 extern u8 gBirchBagGrassPal[];
 
 void sub_8146E50(void);
+void sub_8147048(void);
 
 void fullscreen_save_activate(u8 var)
 {
@@ -107,124 +118,118 @@ void sub_8146E50(void)
 	}
 }
 
+void sub_8147048(void)
+{
+	u8 clockVal = 0;
+
+	gUnknown_0203933E = 1;
+	
+	if(gUnknown_03005EA8)
+	{
+		while(1) // _0814705C
+		{
+			if(!sub_814737C(gUnknown_03005EA8))
+			{
+			#if (REVISION >= 1)
+				MenuDrawTextWindow(1, 10, 28, 19);
+				MenuPrint(gSystemText_CheckCompleteSaveAttempt, 2, 11);
+			#else
+				MenuDrawTextWindow(1, 12, 28, 19);
+				MenuPrint(gSystemText_CheckCompleteSaveAttempt, 2, 13);
+			#endif
+				sub_8125C3C(gUnknown_0203933C);
+			
+				if(gUnknown_03005EA8)
+				#if (REVISION >= 1)
+					MenuPrint(gSystemText_SaveFailedBackupCheck, 2, 11);
+				#else
+					MenuPrint(gSystemText_SaveFailedBackupCheck, 2, 13);
+				#endif
+			
+				clockVal++;
+			
+				if(!gUnknown_03005EA8 || clockVal > 2)
+					break; // go to _081470A6
+
+				continue;
+			}
+			goto gotoLabel2;
+		}
+	}
+	if(clockVal == 3) // _081470A6
+	{
+	#if (REVISION >= 1)
+		MenuDrawTextWindow(1, 10, 28, 19);
+		MenuPrint(gSystemText_BackupDamagedGameContinue, 2, 11);
+	#else
+		MenuDrawTextWindow(1, 12, 28, 19);
+		MenuPrint(gSystemText_BackupDamagedGameContinue, 2, 13);
+	#endif
+		SetMainCallback2(sub_81471A4);
+		goto gotoLabel; // this calls sub_81471A4 for some reason.
+	}
+	else // _081470E4
+	{
+	#if (REVISION >= 1)
+		MenuDrawTextWindow(1, 10, 28, 19);
+	#else
+		MenuDrawTextWindow(1, 12, 28, 19);
+	#endif
+		
+		if(!gUnknown_03005EBC) // cant continue game.
+		{
+		#if (REVISION >= 1)
+			MenuPrint(gSystemText_SaveCompletedGameEnd, 2, 11);
+		#else
+			MenuPrint(gSystemText_SaveCompletedGameEnd, 2, 13);
+		#endif
+			goto gotoLabel;
+		}
+		else // can continue game.
+			goto gotoLabel3;
+	}
+	// no matter what I do, i can't get rid of these gotos. They were seemingly labeled at the end by the developer and jumped to manually depending on the result.
+gotoLabel2: // _0814710C
+#if (REVISION >= 1)
+	MenuDrawTextWindow(1, 10, 28, 19);
+	MenuPrint(gSystemText_BackupDamagedGameContinue, 2, 11);
+#else
+	MenuDrawTextWindow(1, 12, 28, 19);
+	MenuPrint(gSystemText_BackupDamagedGameContinue, 2, 13);
+#endif
+	SetMainCallback2(sub_8147154);
+	return;
+
+gotoLabel3:
+#if (REVISION >= 1)
+	MenuPrint(gSystemText_SaveCompletedPressA, 2, 11);
+#else
+	MenuPrint(gSystemText_SaveCompletedPressA, 2, 13);
+#endif
+
+gotoLabel: // _0814713E
+	SetMainCallback2(sub_81471A4); // seemingly called twice?
+}
+
 /*
-	thumb_func_start sub_8146E50
-sub_8146E50: @ 8146E50
-	push {r4-r7,lr}
-	mov r7, r9
-	mov r6, r8
-	push {r6,r7}
-	sub sp, 0xC
-	ldr r0, _08146FB0 @ =gMain
-	ldr r1, _08146FB4 @ =0x0000043c
-	adds r7, r0, r1
-	ldrb r0, [r7]
-	cmp r0, 0
-	beq _08146E6C
-	cmp r0, 0x1
-	bne _08146E6C
-	b _0814701C
-_08146E6C:
-	movs r0, 0
-	bl SetVBlankCallback
-	movs r0, 0x80
-	lsls r0, 19
-	mov r9, r0
-	movs r1, 0
-	strh r1, [r0]
-	ldr r6, _08146FB8 @ =REG_BG3CNT
-	strh r1, [r6]
-	adds r0, 0xC
-	mov r8, r0
-	strh r1, [r0]
-	subs r0, 0x2
-	strh r1, [r0]
-	ldr r5, _08146FBC @ =REG_BG0CNT
-	strh r1, [r5]
-	adds r0, 0x12
-	strh r1, [r0]
-	adds r0, 0x2
-	strh r1, [r0]
-	subs r0, 0x6
-	strh r1, [r0]
-	adds r0, 0x2
-	strh r1, [r0]
-	subs r0, 0x6
-	strh r1, [r0]
-	adds r0, 0x2
-	strh r1, [r0]
-	subs r0, 0x6
-	strh r1, [r0]
-	adds r0, 0x2
-	strh r1, [r0]
-	add r0, sp, 0x4
-	strh r1, [r0]
-	ldr r2, _08146FC0 @ =0x040000d4
-	str r0, [r2]
-	movs r1, 0xC0
-	lsls r1, 19
-	str r1, [r2, 0x4]
-	ldr r0, _08146FC4 @ =0x8100c000
-	str r0, [r2, 0x8]
-	ldr r0, [r2, 0x8]
+	thumb_func_start sub_8147048
+sub_8147048: @ 8147048
+	push {r4,r5,lr}
 	movs r4, 0
-	str r4, [sp, 0x8]
-	add r0, sp, 0x8
-	str r0, [r2]
-	movs r0, 0xE0
-	lsls r0, 19
-	str r0, [r2, 0x4]
-	ldr r0, _08146FC8 @ =0x85000100
-	str r0, [r2, 0x8]
-	ldr r0, [r2, 0x8]
-	add r0, sp, 0x4
-	strh r4, [r0]
-	str r0, [r2]
-	movs r0, 0xA0
-	lsls r0, 19
-	str r0, [r2, 0x4]
-	ldr r0, _08146FCC @ =0x81000200
-	str r0, [r2, 0x8]
-	ldr r0, [r2, 0x8]
-	ldr r0, _08146FD0 @ =gUnknown_083F66F0
-	bl LZ77UnCompVram
-	ldr r0, _08146FD4 @ =gBirchBagTilemap
-	ldr r1, _08146FD8 @ =0x06003000
-	bl LZ77UnCompVram
-	ldr r0, _08146FDC @ =gBirchGrassTilemap
-	ldr r1, _08146FE0 @ =0x06003800
-	bl LZ77UnCompVram
-	ldr r0, _08146FE4 @ =gSaveFailedClockGfx_Small
-	ldr r1, _08146FE8 @ =0x06010020
-	bl LZ77UnCompVram
-	bl ResetSpriteData
-	bl ResetTasks
-	bl ResetPaletteFade
-	ldr r0, _08146FEC @ =gUnknown_083F62EC
-	movs r1, 0
-	movs r2, 0x40
-	bl LoadPalette
-	ldr r0, _08146FF0 @ =gUnknown_08411960
-	movs r1, 0x80
-	lsls r1, 1
-	movs r2, 0x20
-	bl LoadPalette
-	ldr r0, _08146FF4 @ =gWindowConfig_81E6C3C
-	bl SetUpWindowConfig
-	ldr r0, _08146FF8 @ =gWindowConfig_81E6CE4
-	bl InitMenuWindow
-	.if REVISION >= 1
-	movs r0, 0xD
-	movs r1, 0x6
-	movs r2, 0x10
-	movs r3, 0x9
-	.else
-	movs r0, 0xD
-	movs r1, 0x8
-	movs r2, 0x10
-	movs r3, 0xB
-	.endif
-	bl MenuDrawTextWindow
+	ldr r0, _081470C8 @ =gUnknown_0203933E
+	movs r1, 0x1
+	strh r1, [r0]
+	ldr r1, _081470CC @ =gUnknown_03005EA8
+	ldr r0, [r1]
+	cmp r0, 0
+	beq _081470A6
+	adds r5, r1, 0
+_0814705C:
+	ldr r0, [r5]
+	bl sub_814737C
+	lsls r0, 24
+	cmp r0, 0
+	bne _0814710C
 	.if REVISION >= 1
 	movs r0, 0x1
 	movs r1, 0xA
@@ -237,7 +242,7 @@ _08146E6C:
 	movs r3, 0x13
 	.endif
 	bl MenuDrawTextWindow
-	ldr r0, _08146FFC @ =gSystemText_SaveFailedBackupCheck
+	ldr r0, _081470D0 @ =gSystemText_CheckCompleteSaveAttempt
 	.if REVISION >= 1
 	movs r1, 0x2
 	movs r2, 0xB
@@ -246,95 +251,142 @@ _08146E6C:
 	movs r2, 0xD
 	.endif
 	bl MenuPrint
-	movs r0, 0x1
-	negs r0, r0
-	str r4, [sp]
-	movs r1, 0
-	movs r2, 0x10
-	movs r3, 0
-	bl BeginNormalPaletteFade
-	ldr r3, _08147000 @ =0x04000208 REG_IME
-	ldrh r2, [r3]
-	strh r4, [r3]
-	ldr r4, _08147004 @ =0x04000200
-	ldrh r0, [r4]
-	movs r1, 0x1
-	orrs r0, r1
-	strh r0, [r4]
-	strh r2, [r3]
-	ldr r2, _08147008 @ =REG_DISPSTAT
-	ldrh r0, [r2]
-	movs r1, 0x8
-	orrs r0, r1
-	strh r0, [r2]
-	ldr r0, _0814700C @ =sub_8146E3C
-	bl SetVBlankCallback
-	ldr r1, _08147010 @ =0x00000703
-	adds r0, r1, 0
-	strh r0, [r6] @ REG_BG3CNT = 0x703;
-	ldr r1, _08147014 @ =0x00000602
-	adds r0, r1, 0
-	mov r1, r8
-	strh r0, [r1] @ REG_BG2CNT = 0x602;
-	ldr r1, _08147018 @ =0x00001f08
-	adds r0, r1, 0
-	strh r0, [r5] @ REG_BG0CNT = 0x1f08; 
-	movs r1, 0xEA
-	lsls r1, 5
-	adds r0, r1, 0
-	mov r1, r9
-	strh r0, [r1]
-	ldrb r0, [r7]
-	adds r0, 0x1
-	strb r0, [r7]
-	b _08147032
-	.align 2, 0
-_08146FB0: .4byte gMain
-_08146FB4: .4byte 0x0000043c
-_08146FB8: .4byte REG_BG3CNT
-_08146FBC: .4byte REG_BG0CNT
-_08146FC0: .4byte 0x040000d4
-_08146FC4: .4byte 0x8100c000
-_08146FC8: .4byte 0x85000100
-_08146FCC: .4byte 0x81000200
-_08146FD0: .4byte gUnknown_083F66F0
-_08146FD4: .4byte gBirchBagTilemap
-_08146FD8: .4byte 0x06003000
-_08146FDC: .4byte gBirchGrassTilemap
-_08146FE0: .4byte 0x06003800
-_08146FE4: .4byte gSaveFailedClockGfx_Small
-_08146FE8: .4byte 0x06010020
-_08146FEC: .4byte gUnknown_083F62EC
-_08146FF0: .4byte gUnknown_08411960
-_08146FF4: .4byte gWindowConfig_81E6C3C
-_08146FF8: .4byte gWindowConfig_81E6CE4
-_08146FFC: .4byte gSystemText_SaveFailedBackupCheck
-_08147000: .4byte 0x04000208
-_08147004: .4byte 0x04000200
-_08147008: .4byte REG_DISPSTAT
-_0814700C: .4byte sub_8146E3C
-_08147010: .4byte 0x00000703
-_08147014: .4byte 0x00000602
-_08147018: .4byte 0x00001f08
-_0814701C:
-	bl UpdatePaletteFade
-	lsls r0, 24
+	ldr r0, _081470D4 @ =gUnknown_0203933C
+	ldrb r0, [r0]
+	bl sub_8125C3C
+	ldr r0, [r5]
 	cmp r0, 0
-	bne _08147032
-	ldr r0, _08147040 @ =sub_8147048
+	beq _08147096
+	ldr r0, _081470D8 @ =gSystemText_SaveFailedBackupCheck
+	.if REVISION >= 1
+	movs r1, 0x2
+	movs r2, 0xB
+	.else
+	movs r1, 0x2
+	movs r2, 0xD
+	.endif
+	bl MenuPrint
+_08147096:
+	adds r0, r4, 0x1
+	lsls r0, 24
+	lsrs r4, r0, 24
+	ldr r0, [r5]
+	cmp r0, 0
+	beq _081470A6
+	cmp r4, 0x2
+	bls _0814705C
+_081470A6:
+	cmp r4, 0x3
+	bne _081470E4
+	.if REVISION >= 1
+	movs r0, 0x1
+	movs r1, 0xA
+	movs r2, 0x1C
+	movs r3, 0x13
+	.else
+	movs r0, 0x1
+	movs r1, 0xC
+	movs r2, 0x1C
+	movs r3, 0x13
+	.endif
+	bl MenuDrawTextWindow
+	ldr r0, _081470DC @ =gSystemText_BackupDamagedGameContinue
+	.if REVISION >= 1
+	movs r1, 0x2
+	movs r2, 0xB
+	.else
+	movs r1, 0x2
+	movs r2, 0xD
+	.endif
+	bl MenuPrint
+	ldr r0, _081470E0 @ =sub_81471A4
 	bl SetMainCallback2
-	ldr r0, _08147044 @ =sub_8147218
-	bl SetVBlankCallback
-_08147032:
-	add sp, 0xC
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r7}
+	b _0814713E
+	.align 2, 0
+_081470C8: .4byte gUnknown_0203933E
+_081470CC: .4byte gUnknown_03005EA8
+_081470D0: .4byte gSystemText_CheckCompleteSaveAttempt
+_081470D4: .4byte gUnknown_0203933C
+_081470D8: .4byte gSystemText_SaveFailedBackupCheck
+_081470DC: .4byte gSystemText_BackupDamagedGameContinue
+_081470E0: .4byte sub_81471A4
+_081470E4:
+	.if REVISION >= 1
+	movs r0, 0x1
+	movs r1, 0xA
+	movs r2, 0x1C
+	movs r3, 0x13
+	.else
+	movs r0, 0x1
+	movs r1, 0xC
+	movs r2, 0x1C
+	movs r3, 0x13
+	.endif
+	bl MenuDrawTextWindow
+	ldr r0, _08147104 @ =gUnknown_03005EBC
+	ldr r0, [r0]
+	cmp r0, 0
+	bne _08147134
+	ldr r0, _08147108 @ =gSystemText_SaveCompletedGameEnd
+	.if REVISION >= 1
+	movs r1, 0x2
+	movs r2, 0xB
+	.else
+	movs r1, 0x2
+	movs r2, 0xD
+	.endif
+	bl MenuPrint
+	b _0814713E
+	.align 2, 0
+_08147104: .4byte gUnknown_03005EBC
+_08147108: .4byte gSystemText_SaveCompletedGameEnd
+_0814710C:
+	.if REVISION >= 1
+	movs r0, 0x1
+	movs r1, 0xA
+	movs r2, 0x1C
+	movs r3, 0x13
+	.else
+	movs r0, 0x1
+	movs r1, 0xC
+	movs r2, 0x1C
+	movs r3, 0x13
+	.endif
+	bl MenuDrawTextWindow
+	ldr r0, _0814712C @ =gSystemText_BackupDamagedGameContinue
+	.if REVISION >= 1
+	movs r1, 0x2
+	movs r2, 0xB
+	.else
+	movs r1, 0x2
+	movs r2, 0xD
+	.endif
+	bl MenuPrint
+	ldr r0, _08147130 @ =sub_8147154
+	bl SetMainCallback2
+	b _08147144
+	.align 2, 0
+_0814712C: .4byte gSystemText_BackupDamagedGameContinue
+_08147130: .4byte sub_8147154
+_08147134:
+	ldr r0, _0814714C @ =gSystemText_SaveCompletedPressA
+	.if REVISION >= 1
+	movs r1, 0x2
+	movs r2, 0xB
+	.else
+	movs r1, 0x2
+	movs r2, 0xD
+	.endif
+	bl MenuPrint
+_0814713E:
+	ldr r0, _08147150 @ =sub_81471A4
+	bl SetMainCallback2
+_08147144:
+	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08147040: .4byte sub_8147048
-_08147044: .4byte sub_8147218
-	thumb_func_end sub_8146E50
+_0814714C: .4byte gSystemText_SaveCompletedPressA
+_08147150: .4byte sub_81471A4
+	thumb_func_end sub_8147048
 */
