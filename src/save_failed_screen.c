@@ -6,10 +6,11 @@
 #include "text.h"
 #include "menu.h"
 #include "save.h"
+#include "m4a.h"
+#include "gba/flash_internal.h"
 
-extern void sub_8147218(void);
-extern void sub_8147154(void);
-extern void sub_81471A4(void);
+extern u8 unk_2000000[];
+
 extern u8 sub_814737C(u32);
 
 extern u16 gUnknown_0203933C;
@@ -24,6 +25,7 @@ extern u8 gSystemText_CheckCompleteSaveAttempt[];
 extern u8 gSystemText_BackupDamagedGameContinue[];
 extern u8 gSystemText_SaveCompletedPressA[];
 extern u8 gSystemText_SaveCompletedGameEnd[];
+extern u8 gSystemText_GameplayEnded[];
 
 extern u8 gBirchGrassTilemap[];
 extern u8 gBirchBagTilemap[];
@@ -34,6 +36,10 @@ extern u8 gBirchBagGrassPal[];
 
 void sub_8146E50(void);
 void sub_8147048(void);
+void sub_8147154(void);
+void sub_81471A4(void);
+void sub_81471EC(void);
+void sub_8147218(void);
 
 void fullscreen_save_activate(u8 var)
 {
@@ -211,182 +217,293 @@ gotoLabel: // _0814713E
 	SetMainCallback2(sub_81471A4); // seemingly called twice?
 }
 
+void sub_8147154(void)
+{
+	gUnknown_0203933E = 0;
+	
+	if(gMain.newKeys & A_BUTTON)
+	{
+	#if (REVISION >= 1)
+		MenuDrawTextWindow(1, 10, 28, 19);
+		MenuPrint(gSystemText_GameplayEnded, 2, 11);
+	#else
+		MenuDrawTextWindow(1, 12, 28, 19);
+		MenuPrint(gSystemText_GameplayEnded, 2, 13);
+	#endif
+		SetVBlankCallback(sub_8146E3C);
+		SetMainCallback2(sub_81471A4);
+	}
+}
+
+void sub_81471A4(void)
+{
+	u8 zero;
+
+	gUnknown_0203933E = zero = 0;
+	
+	if(gMain.newKeys & A_BUTTON)
+	{
+		BeginNormalPaletteFade(0xFFFFFFFF, 0, zero, 16, 0);
+		SetVBlankCallback(sub_8146E3C);
+		SetMainCallback2(sub_81471EC);
+	}
+}
+
+void sub_81471EC(void)
+{
+	if(!UpdatePaletteFade())
+	{
+		if(!gUnknown_03005EBC)
+			DoSoftReset();
+		else
+		{
+			SetMainCallback2((MainCallback)gUnknown_03005EBC);
+			gUnknown_03005EBC = 0;
+		}
+	}
+}
+
+// do later
+__attribute__((naked))
+void sub_8147218(void)
+{
+	asm(".syntax unified\n\
+	push {r4,r5,lr}\n\
+	ldr r0, _08147290 @ =gMain\n\
+	mov r12, r0\n\
+	ldr r0, [r0, 0x24]\n\
+	lsrs r4, r0, 3\n\
+	movs r0, 0x7\n\
+	ands r4, r0\n\
+	ldr r0, _08147294 @ =gUnknown_08411940\n\
+	ldr r1, [r0, 0x4]\n\
+	ldr r0, [r0]\n\
+	mov r2, r12\n\
+	str r0, [r2, 0x3C]\n\
+	str r1, [r2, 0x40]\n\
+	ldrh r1, [r2, 0x3E]\n\
+	ldr r0, _08147298 @ =0xfffffe00\n\
+	ands r0, r1\n\
+	movs r1, 0x70\n\
+	orrs r0, r1\n\
+	strh r0, [r2, 0x3E]\n\
+	mov r1, r12\n\
+	adds r1, 0x3C\n\
+	@.if REVISION >= 1\n\
+	@movs r0, 0x38\n\
+	@.else\n\
+	movs r0, 0x48\n\
+	@.endif\n\
+	strb r0, [r1]\n\
+	ldr r0, _0814729C @ =gUnknown_0203933E\n\
+	ldrh r0, [r0]\n\
+	cmp r0, 0\n\
+	beq _081472A8\n\
+	ldr r3, _081472A0 @ =gUnknown_08411948\n\
+	lsls r2, r4, 1\n\
+	adds r2, r4\n\
+	adds r0, r2, r3\n\
+	mov r4, r12\n\
+	adds r4, 0x40\n\
+	ldrb r5, [r0]\n\
+	ldrh r1, [r4]\n\
+	ldr r0, _081472A4 @ =0xfffffc00\n\
+	ands r0, r1\n\
+	orrs r0, r5\n\
+	strh r0, [r4]\n\
+	adds r0, r3, 0x2\n\
+	adds r0, r2, r0\n\
+	ldrb r1, [r0]\n\
+	lsls r1, 4\n\
+	adds r3, 0x1\n\
+	adds r2, r3\n\
+	ldrb r0, [r2]\n\
+	lsls r0, 3\n\
+	orrs r1, r0\n\
+	mov r3, r12\n\
+	adds r3, 0x3F\n\
+	movs r0, 0x1F\n\
+	ands r1, r0\n\
+	lsls r1, 1\n\
+	ldrb r2, [r3]\n\
+	movs r0, 0x3F\n\
+	negs r0, r0\n\
+	ands r0, r2\n\
+	orrs r0, r1\n\
+	strb r0, [r3]\n\
+	b _081472B8\n\
+	.align 2, 0\n\
+_08147290: .4byte gMain\n\
+_08147294: .4byte gUnknown_08411940\n\
+_08147298: .4byte 0xfffffe00\n\
+_0814729C: .4byte gUnknown_0203933E\n\
+_081472A0: .4byte gUnknown_08411948\n\
+_081472A4: .4byte 0xfffffc00\n\
+_081472A8:\n\
+	mov r2, r12\n\
+	adds r2, 0x40\n\
+	ldrh r1, [r2]\n\
+	ldr r0, _081472D8 @ =0xfffffc00\n\
+	ands r0, r1\n\
+	movs r1, 0x1\n\
+	orrs r0, r1\n\
+	strh r0, [r2]\n\
+_081472B8:\n\
+	ldr r0, _081472DC @ =gMain + 0x3C\n\
+	movs r1, 0xE0\n\
+	lsls r1, 19\n\
+	movs r2, 0x1\n\
+	bl CpuFastSet\n\
+	ldr r1, _081472E0 @ =gUnknown_0203933E\n\
+	ldrh r0, [r1, 0x2]\n\
+	cmp r0, 0\n\
+	beq _081472D0\n\
+	subs r0, 0x1\n\
+	strh r0, [r1, 0x2]\n\
+_081472D0:\n\
+	pop {r4,r5}\n\
+	pop {r0}\n\
+	bx r0\n\
+	.align 2, 0\n\
+_081472D8: .4byte 0xfffffc00\n\
+_081472DC: .4byte gMain + 0x3C\n\
+_081472E0: .4byte gUnknown_0203933E\n\
+	.syntax divided");
+}
+
+bool8 sub_81472E4(u16 var)
+{
+	u32 *ptr = unk_2000000;
+	u16 i;
+	
+	ReadFlash(var, 0, ptr, 4096);
+
+	for(i = 0; i < 0x400; i++, ptr++)
+		if(*ptr)
+			return TRUE;
+
+	return FALSE;
+}
+
+#ifdef NONMATCHING
+u32 sub_8147324(u16 var)
+{
+	// v1 isnt used. IDA artifact.
+	u32 var32 = 0;
+	u16 i; // v3
+	int var16; // v4
+	
+	for(var32 = 0; var32 < 0x82;)
+	{
+		for(i = 0, var16 = var32++; i < 0x1000; i++)
+			ProgramFlashByte(var, i, 0);
+		
+		var32 = sub_81472E4(var);
+		var16 = (u16)var16;
+		
+		if(var32 == 0)
+			break;
+	}
+
+	return var32 + var16;
+}
+#else
+__attribute__((naked))
+u32 sub_8147324(u16 var)
+{
+	asm(".syntax unified\n\
+	push {r4-r7,lr}\n\
+	mov r7, r8\n\
+	push {r7}\n\
+	lsls r0, 16\n\
+	lsrs r6, r0, 16\n\
+	movs r0, 0\n\
+	ldr r1, _08147374 @ =0x00000fff\n\
+	mov r8, r1\n\
+	ldr r7, _08147378 @ =ProgramFlashByte\n\
+_08147336:\n\
+	movs r4, 0\n\
+	adds r5, r0, 0x1\n\
+_0814733A:\n\
+	ldr r3, [r7]\n\
+	adds r0, r6, 0\n\
+	adds r1, r4, 0\n\
+	movs r2, 0\n\
+	bl _call_via_r3\n\
+	adds r0, r4, 0x1\n\
+	lsls r0, 16\n\
+	lsrs r4, r0, 16\n\
+	cmp r4, r8 @ compare i to var.\n\
+	bls _0814733A\n\
+	adds r0, r6, 0\n\
+	bl sub_81472E4\n\
+	lsls r0, 24\n\
+	lsrs r1, r0, 24\n\
+	lsls r0, r5, 16\n\
+	lsrs r0, 16\n\
+	cmp r1, 0\n\
+	beq _08147366\n\
+	cmp r0, 0x81\n\
+	bls _08147336\n\
+_08147366:\n\
+	adds r0, r1, 0 @ add var64 to the result from sub_81472E4(var)?\n\
+	pop {r3}\n\
+	mov r8, r3\n\
+	pop {r4-r7}\n\
+	pop {r1}\n\
+	bx r1\n\
+	.align 2, 0\n\
+_08147374: .4byte 0x00000fff\n\
+_08147378: .4byte ProgramFlashByte\n\
+	.syntax divided");
+}
+#endif
+
 /*
-	thumb_func_start sub_8147048
-sub_8147048: @ 8147048
-	push {r4,r5,lr}
+	thumb_func_start sub_8147324
+sub_8147324: @ 8147324
+	push {r4-r7,lr}
+	mov r7, r8
+	push {r7}
+	lsls r0, 16
+	lsrs r6, r0, 16
+	movs r0, 0
+	ldr r1, _08147374 @ =0x00000fff
+	mov r8, r1
+	ldr r7, _08147378 @ =ProgramFlashByte
+_08147336:
 	movs r4, 0
-	ldr r0, _081470C8 @ =gUnknown_0203933E
-	movs r1, 0x1
-	strh r1, [r0]
-	ldr r1, _081470CC @ =gUnknown_03005EA8
-	ldr r0, [r1]
-	cmp r0, 0
-	beq _081470A6
-	adds r5, r1, 0
-_0814705C:
-	ldr r0, [r5]
-	bl sub_814737C
-	lsls r0, 24
-	cmp r0, 0
-	bne _0814710C
-	.if REVISION >= 1
-	movs r0, 0x1
-	movs r1, 0xA
-	movs r2, 0x1C
-	movs r3, 0x13
-	.else
-	movs r0, 0x1
-	movs r1, 0xC
-	movs r2, 0x1C
-	movs r3, 0x13
-	.endif
-	bl MenuDrawTextWindow
-	ldr r0, _081470D0 @ =gSystemText_CheckCompleteSaveAttempt
-	.if REVISION >= 1
-	movs r1, 0x2
-	movs r2, 0xB
-	.else
-	movs r1, 0x2
-	movs r2, 0xD
-	.endif
-	bl MenuPrint
-	ldr r0, _081470D4 @ =gUnknown_0203933C
-	ldrb r0, [r0]
-	bl sub_8125C3C
-	ldr r0, [r5]
-	cmp r0, 0
-	beq _08147096
-	ldr r0, _081470D8 @ =gSystemText_SaveFailedBackupCheck
-	.if REVISION >= 1
-	movs r1, 0x2
-	movs r2, 0xB
-	.else
-	movs r1, 0x2
-	movs r2, 0xD
-	.endif
-	bl MenuPrint
-_08147096:
+	adds r5, r0, 0x1
+_0814733A:
+	ldr r3, [r7]
+	adds r0, r6, 0
+	adds r1, r4, 0
+	movs r2, 0
+	bl _call_via_r3
 	adds r0, r4, 0x1
+	lsls r0, 16
+	lsrs r4, r0, 16
+	cmp r4, r8 @ compare i to var.
+	bls _0814733A
+	adds r0, r6, 0
+	bl sub_81472E4
 	lsls r0, 24
-	lsrs r4, r0, 24
-	ldr r0, [r5]
-	cmp r0, 0
-	beq _081470A6
-	cmp r4, 0x2
-	bls _0814705C
-_081470A6:
-	cmp r4, 0x3
-	bne _081470E4
-	.if REVISION >= 1
-	movs r0, 0x1
-	movs r1, 0xA
-	movs r2, 0x1C
-	movs r3, 0x13
-	.else
-	movs r0, 0x1
-	movs r1, 0xC
-	movs r2, 0x1C
-	movs r3, 0x13
-	.endif
-	bl MenuDrawTextWindow
-	ldr r0, _081470DC @ =gSystemText_BackupDamagedGameContinue
-	.if REVISION >= 1
-	movs r1, 0x2
-	movs r2, 0xB
-	.else
-	movs r1, 0x2
-	movs r2, 0xD
-	.endif
-	bl MenuPrint
-	ldr r0, _081470E0 @ =sub_81471A4
-	bl SetMainCallback2
-	b _0814713E
+	lsrs r1, r0, 24
+	lsls r0, r5, 16
+	lsrs r0, 16
+	cmp r1, 0
+	beq _08147366
+	cmp r0, 0x81
+	bls _08147336
+_08147366:
+	adds r0, r1, 0 @ add var64 to the result from sub_81472E4(var)?
+	pop {r3}
+	mov r8, r3
+	pop {r4-r7}
+	pop {r1}
+	bx r1
 	.align 2, 0
-_081470C8: .4byte gUnknown_0203933E
-_081470CC: .4byte gUnknown_03005EA8
-_081470D0: .4byte gSystemText_CheckCompleteSaveAttempt
-_081470D4: .4byte gUnknown_0203933C
-_081470D8: .4byte gSystemText_SaveFailedBackupCheck
-_081470DC: .4byte gSystemText_BackupDamagedGameContinue
-_081470E0: .4byte sub_81471A4
-_081470E4:
-	.if REVISION >= 1
-	movs r0, 0x1
-	movs r1, 0xA
-	movs r2, 0x1C
-	movs r3, 0x13
-	.else
-	movs r0, 0x1
-	movs r1, 0xC
-	movs r2, 0x1C
-	movs r3, 0x13
-	.endif
-	bl MenuDrawTextWindow
-	ldr r0, _08147104 @ =gUnknown_03005EBC
-	ldr r0, [r0]
-	cmp r0, 0
-	bne _08147134
-	ldr r0, _08147108 @ =gSystemText_SaveCompletedGameEnd
-	.if REVISION >= 1
-	movs r1, 0x2
-	movs r2, 0xB
-	.else
-	movs r1, 0x2
-	movs r2, 0xD
-	.endif
-	bl MenuPrint
-	b _0814713E
-	.align 2, 0
-_08147104: .4byte gUnknown_03005EBC
-_08147108: .4byte gSystemText_SaveCompletedGameEnd
-_0814710C:
-	.if REVISION >= 1
-	movs r0, 0x1
-	movs r1, 0xA
-	movs r2, 0x1C
-	movs r3, 0x13
-	.else
-	movs r0, 0x1
-	movs r1, 0xC
-	movs r2, 0x1C
-	movs r3, 0x13
-	.endif
-	bl MenuDrawTextWindow
-	ldr r0, _0814712C @ =gSystemText_BackupDamagedGameContinue
-	.if REVISION >= 1
-	movs r1, 0x2
-	movs r2, 0xB
-	.else
-	movs r1, 0x2
-	movs r2, 0xD
-	.endif
-	bl MenuPrint
-	ldr r0, _08147130 @ =sub_8147154
-	bl SetMainCallback2
-	b _08147144
-	.align 2, 0
-_0814712C: .4byte gSystemText_BackupDamagedGameContinue
-_08147130: .4byte sub_8147154
-_08147134:
-	ldr r0, _0814714C @ =gSystemText_SaveCompletedPressA
-	.if REVISION >= 1
-	movs r1, 0x2
-	movs r2, 0xB
-	.else
-	movs r1, 0x2
-	movs r2, 0xD
-	.endif
-	bl MenuPrint
-_0814713E:
-	ldr r0, _08147150 @ =sub_81471A4
-	bl SetMainCallback2
-_08147144:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0814714C: .4byte gSystemText_SaveCompletedPressA
-_08147150: .4byte sub_81471A4
-	thumb_func_end sub_8147048
+_08147374: .4byte 0x00000fff
+_08147378: .4byte ProgramFlashByte
+	thumb_func_end sub_8147324
 */
