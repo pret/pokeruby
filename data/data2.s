@@ -21862,7 +21862,8 @@ gUnknown_083E5620:: @ 83E5620
 	.incbin "baserom.gba", 0x003e5620, 0xc
 
 gUnknown_083E562C:: @ 83E562C
-	.incbin "baserom.gba", 0x003e562c, 0x8
+	.2byte 0x6ACD, 0x51A5
+	.2byte 0x45FC, 0x38D4
 
 	.align 2
 gMailGraphicsTable:: @ 83E5634

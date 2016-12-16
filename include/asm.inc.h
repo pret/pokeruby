@@ -241,11 +241,17 @@ void sub_808AB90(void);
 
 // asm/rom_8094928.o
 void sub_80961D8(void);
+u8 sub_809D3A4(u16 arg0, void (*)(struct Sprite *), int, u8 arg3, u32 arg4);
+u16 sub_809D4A8(u16);
+void sub_809D510(struct Sprite *);
+void sub_809D580(u16);
+void sub_809D608(u16);
 u8 pokemon_ailments_get_primary(u32);
 u8 exec_movement(u8, u8, u8, void *);
 bool8 sub_80A212C(u8, u8, u8);
 void sub_80A2178(void);
 void sub_80A2B18(void);
+u16 sub_80A2D64(u16, u8 *);
 void AddMapNamePopUpWindowTask(void);
 void HideMapNamePopUpWindow();
 
@@ -493,6 +499,7 @@ u8 intro_create_brendan_sprite(/*TODO: arg types*/);
 u8 intro_create_may_sprite(/*TODO: arg types*/);
 u8 intro_create_latios_sprite(/*TODO: arg types*/);
 u8 intro_create_latias_sprite(/*TODO: arg types*/);
+void sub_814A568(u8*);
 
 // src/agb_flash.o
 u16 ReadFlashId(void);
