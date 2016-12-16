@@ -9,12 +9,20 @@
 #include "task.h"
 #include "text.h"
 
+struct UnkMailStruct
+{
+    u8 unk_0_0:2;
+    u8 unk_0_2:2;
+    u8 unk_0_4:4;
+};
+
 struct MailLayout {
     u8 var0;
     u8 var1;
     u8 var2;
-    u8 var3;
-    u8 (*var4)[];
+    u8 var3_0:4;
+    u8 var3_4:4;
+    struct UnkMailStruct *var4;
 };
 
 struct Unk2000000 {
@@ -604,114 +612,28 @@ _080F8E7C: .4byte gOtherText_From\n\
 }
 #endif
 
-#ifdef NONMATCHING
 static void sub_80F8E80(void) {
     u16 pos;
+    u8 x;
+    u8 y = 0;
 
-    if (unk_2000000.var10C->var0 > 0) {
-        u8 xPos;
-        u8 yPos;
-
-        for (pos = 0; pos < unk_2000000.var10C->var0; pos++) {
-            if (unk_2000000.words[pos][0] == 0xFF) {
-                continue;
-            }
-
-            if (unk_2000000.words[pos][0] == 0x00) {
-                continue;
-            }
-
-            // I assume the words are some kind of bitfield. Again, no idea what's going on here.
-            MenuPrint(unk_2000000.words[pos], xPos, yPos);
-
+    for (pos = 0; pos < unk_2000000.var10C->var0; pos++) {
+        if (unk_2000000.words[pos][0] == 0xFF) {
+            continue;
         }
+
+        if (unk_2000000.words[pos][0] == 0x00) {
+            continue;
+        }
+
+        x = unk_2000000.var10C->var4[pos].unk_0_4;
+        y += unk_2000000.var10C->var4[pos].unk_0_0;
+        MenuPrint(unk_2000000.words[pos], unk_2000000.var10C->var3_4 + x, unk_2000000.var10C->var3_0 + y);
+        y += 2;
     }
 
     MenuPrint(unk_2000000.varD8, unk_2000000.varF9, unk_2000000.var10C->var1);
 }
-#else
-__attribute__((naked))
-static void sub_80F8E80(void) {
-    asm(".syntax unified\n\
-	push {r4-r7,lr}\n\
-	mov r7, r8\n\
-	push {r7}\n\
-	movs r6, 0\n\
-	movs r4, 0\n\
-	ldr r1, _080F8F10 @ =0x02000000\n\
-	movs r0, 0x86\n\
-	lsls r0, 1\n\
-	adds r2, r1, r0\n\
-	ldr r0, [r2]\n\
-	ldrb r0, [r0]\n\
-	cmp r4, r0\n\
-	bcs _080F8EF6\n\
-	mov r8, r1\n\
-	adds r7, r2, 0\n\
-_080F8E9E:\n\
-	lsls r0, r4, 3\n\
-	subs r0, r4\n\
-	lsls r0, 2\n\
-	subs r0, r4\n\
-	mov r1, r8\n\
-	adds r5, r0, r1\n\
-	ldrb r0, [r5]\n\
-	cmp r0, 0xFF\n\
-	beq _080F8EE8\n\
-	cmp r0, 0\n\
-	beq _080F8EE8\n\
-	ldr r2, [r7]\n\
-	ldr r1, [r2, 0x4]\n\
-	lsls r0, r4, 2\n\
-	adds r0, r1\n\
-	ldr r0, [r0]\n\
-	lsls r3, r0, 24\n\
-	lsrs r3, 28\n\
-	lsls r0, 30\n\
-	lsrs r0, 30\n\
-	adds r0, r6, r0\n\
-	lsls r0, 24\n\
-	lsrs r6, r0, 24\n\
-	ldrb r2, [r2, 0x3]\n\
-	lsrs r1, r2, 4\n\
-	adds r1, r3\n\
-	lsls r2, 28\n\
-	lsrs r2, 28\n\
-	adds r2, r6, r2\n\
-	lsls r2, 24\n\
-	lsrs r2, 24\n\
-	adds r0, r5, 0\n\
-	bl MenuPrint\n\
-	adds r0, r6, 0x2\n\
-	lsls r0, 24\n\
-	lsrs r6, r0, 24\n\
-_080F8EE8:\n\
-	adds r0, r4, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r4, r0, 16\n\
-	ldr r0, [r7]\n\
-	ldrb r0, [r0]\n\
-	cmp r4, r0\n\
-	bcc _080F8E9E\n\
-_080F8EF6:\n\
-	ldr r0, _080F8F14 @ =0x020000d8\n\
-	adds r1, r0, 0\n\
-	adds r1, 0x21\n\
-	ldrb r1, [r1]\n\
-	ldr r2, [r0, 0x34]\n\
-	ldrb r2, [r2, 0x1]\n\
-	bl MenuPrint\n\
-	pop {r3}\n\
-	mov r8, r3\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_080F8F10: .4byte 0x02000000\n\
-_080F8F14: .4byte 0x020000d8\n\
-    .syntax divided\n");
-}
-#endif
 
 static void sub_80F8F18(void) {
     LoadOam();
