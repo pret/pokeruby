@@ -67,7 +67,7 @@ SECTIONS {
         src/new_game.o(.text);
         src/rom4.o(.text);
         src/fieldmap.o(.text);
-        asm/metatile_behavior.o(.text);
+        src/metatile_behavior.o(.text);
         src/field_camera.o(.text);
         src/field_door.o(.text);
         src/field_player_avatar.o(.text);
