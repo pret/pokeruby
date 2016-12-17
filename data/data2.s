@@ -23970,7 +23970,8 @@ gTraderDecorations:: @ 83F62E8
 	.byte DECOR_TIRE
 	.byte DECOR_PRETTY_FLOWERS
 
-gUnknown_083F62EC:: @ 83F62EC
+	.align 2
+gBirchBagGrassPal:: @ 83F62EC
 	.incbin "graphics/misc/birch_bag.gbapal"
 	.incbin "graphics/misc/birch_grass.gbapal"
 
@@ -23990,7 +23991,8 @@ gBirchBagTilemap:: @ 83F636C
 gBirchGrassTilemap:: @ 83F64F8
 	.incbin "graphics/misc/birch_grass_map.bin.lz"
 
-gUnknown_083F66F0:: @ 83F66F0
+	.align 2
+gBirchHelpGfx:: @ 83F66F0
 	.incbin "graphics/misc/birch_help.4bpp.lz"
 
 	.align 2
@@ -30188,10 +30190,10 @@ gUnknown_08411940:: @ 8411940
 gUnknown_08411948:: @ 8411948
 	.incbin "baserom.gba", 0x00411948, 0x18
 
-gUnknown_08411960:: @ 8411960
+gSaveFailedClockPal:: @ 8411960
 	.incbin "graphics/misc/clock_small.gbapal"
 
-gUnknown_08411980:: @ 8411980
+gSaveFailedClockGfx:: @ 8411980
 	.incbin "graphics/misc/clock_small.4bpp.lz"
 
 @ 8411A10
