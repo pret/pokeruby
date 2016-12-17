@@ -57,12 +57,6 @@ struct MailGraphics {
 };
 
 enum {
-    LANGUAGE_JAPANESE = 0,
-    LANGUAGE_ENGLISH = 1,
-    LANGUAGE_GERMAN = 5,
-};
-
-enum {
     ITEM_ORANGE_MAIL = 0x79,
     ITEM_HARBOR_MAIL,
     ITEM_GLITTER_MAIL,
@@ -103,7 +97,7 @@ void sub_80F890C(struct MailStruct *arg0, MainCallback arg1, bool8 arg2) {
     u8 buffer[4];
     u8 local1;
 
-    unk_2000000.varFF = 2;
+    unk_2000000.varFF = GAME_LANGUAGE;
 
     // Compiler uses [sub 1], while asm uses [ptr + FE]
     unk_2000000.varFE = 1;
@@ -479,7 +473,7 @@ static void sub_80F8DA0(void) {
         }
     }
 
-    if (unk_2000000.var100 == LANGUAGE_JAPANESE) {
+    if (unk_2000000.var100 == 0) {
         u8 *ptr;
         u16 length;
 

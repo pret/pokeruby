@@ -36,7 +36,7 @@ struct Window
 {
     u8 textMode;
     u8 fontNum;
-    u8 charset;
+    u8 language;
     u8 foregroundColor;
     u8 backgroundColor;
     u8 shadowColor;

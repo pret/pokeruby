@@ -32,7 +32,7 @@ static void IntrDummy(void);
 
 const u8 gGameVersion = GAME_VERSION;
 
-const u8 gGameLanguage = 2; // English
+const u8 gGameLanguage = GAME_LANGUAGE; // English
 
 const char BuildDateTime[] = "2002 10 15 20:34";
 
