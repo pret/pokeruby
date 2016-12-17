@@ -8,6 +8,7 @@
 #include "save.h"
 #include "m4a.h"
 #include "gba/flash_internal.h"
+#include "asm.h"
 
 extern u8 unk_2000000[];
 
@@ -372,10 +373,10 @@ _081472E0: .4byte gUnknown_0203933E\n\
 
 bool8 sub_81472E4(u16 var)
 {
-	u32 *ptr = unk_2000000;
+	u32 * ptr = (u32 *) unk_2000000;
 	u16 i;
 	
-	ReadFlash(var, 0, ptr, 4096);
+	ReadFlash(var, 0, (u8 *) ptr, 4096);
 
 	for(i = 0; i < 0x400; i++, ptr++)
 		if(*ptr)
