@@ -302,9 +302,9 @@ void sub_803ADE8(struct Pokemon *mon, struct UnknownPokemonStruct *src)
     StringCopy(nickname, src->nickname);
 
     if (nickname[0] == 0xFC && nickname[1] == 0x15)
-        language = 1;
+        language = LANGUAGE_JAPANESE;
     else
-        language = 2;
+        language = GAME_LANGUAGE;
 
     SetMonData(mon, MON_DATA_LANGUAGE, &language);
     StripExtCtrlCodes(nickname);

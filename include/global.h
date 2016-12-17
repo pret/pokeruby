@@ -29,6 +29,14 @@ enum
     VERSION_RUBY = 2,
 };
 
+enum LanguageId {
+	LANGUAGE_JAPANESE = 1,
+	LANGUAGE_ENGLISH = 2,
+	LANGUAGE_GERMAN = 5,
+};
+
+#define GAME_LANGUAGE (LANGUAGE_ENGLISH)
+
 enum
 {
     MALE,

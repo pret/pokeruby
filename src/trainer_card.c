@@ -148,7 +148,7 @@ void unref_sub_8094588(u16 left, u16 top);
 void sub_8093110(Callback arg1) {
     sub_80932AC(arg1);
     SetMainCallback2(sub_8093174);
-    unk_2000000.language = 2;
+    unk_2000000.language = GAME_LANGUAGE;
 }
 
 void sub_8093130(u8 playerIndex, Callback arg2) {
