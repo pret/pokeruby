@@ -297,15 +297,6 @@ void *picbox_close(void);
 // asm/naming_screen.o
 void DoNamingScreen(u8 r0, struct SaveBlock2 *r1, u16 r2, u16 r3, u8 s0, MainCallback s4);
 
-// asm/money.o
-bool8 IsEnoughMoney(u32, u32);
-void sub_80B79B8(u32 *, u32);
-void sub_80B79E0(u32 *, u32);
-void sub_80B7AEC(u32, u8 left, u8 top);
-void sub_80B7BEC(u32, u8, u8);
-void sub_80B7C14(u32, u8, u8);
-void RemoveMoneyLabelObject(u8, u8);
-
 // asm/secret_base.o
 void sub_80BB5B4(void);
 u8 sub_80BBB24(void);

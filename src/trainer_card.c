@@ -6,6 +6,7 @@
 #include "link.h"
 #include "main.h"
 #include "menu.h"
+#include "money.h"
 #include "palette.h"
 #include "pokedex.h"
 #include "rom4.h"

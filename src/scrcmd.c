@@ -12,6 +12,7 @@
 #include "asm_fieldmap.h"
 #include "main.h"
 #include "menu.h"
+#include "money.h"
 #include "decoration.h"
 #include "field_message_box.h"
 #include "sound.h"
