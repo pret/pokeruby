@@ -91,7 +91,8 @@ SECTIONS {
         src/tileset_anim.o(.text);
         src/palette.o(.text);
         src/sound.o(.text);
-        asm/rom_8074BAC.o(.text);
+        asm/battle_anim.o(.text);
+        asm/rom_8077ABC.o(.text);
         src/task.o(.text);
         asm/rom5.o(.text);
         src/title_screen.o(.text);
