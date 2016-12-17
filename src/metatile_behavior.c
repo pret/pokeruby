@@ -1,4 +1,5 @@
 #include "global.h"
+#include "metatile_behaviors.h"
 
 extern u8 gUnknown_08308E2C[];
 
@@ -19,7 +20,7 @@ bool8 sub_8056DA0(u8 var)
 
 bool8 MetatileBehavior_IsJumpEast(u8 var)
 {
-    if(var == 0x38)
+    if(var == MB_JUMP_EAST)
         return TRUE;
     else
         return FALSE;
@@ -27,7 +28,7 @@ bool8 MetatileBehavior_IsJumpEast(u8 var)
 
 bool8 MetatileBehavior_IsJumpWest(u8 var)
 {
-    if(var == 0x39)
+    if(var == MB_JUMP_WEST)
         return TRUE;
     else
         return FALSE;
@@ -35,7 +36,7 @@ bool8 MetatileBehavior_IsJumpWest(u8 var)
 
 bool8 MetatileBehavior_IsJumpNorth(u8 var)
 {
-    if(var == 0x3A)
+    if(var == MB_JUMP_NORTH)
         return TRUE;
     else
         return FALSE;
@@ -43,7 +44,7 @@ bool8 MetatileBehavior_IsJumpNorth(u8 var)
 
 bool8 MetatileBehavior_IsJumpSouth(u8 var)
 {
-    if(var == 0x3B)
+    if(var == MB_JUMP_SOUTH)
         return TRUE;
     else
         return FALSE;
@@ -51,7 +52,7 @@ bool8 MetatileBehavior_IsJumpSouth(u8 var)
 
 bool8 sub_8056E14(u8 var)
 {
-    if(var == 2 || var == 3)
+    if(var == MB_TALL_GRASS || var == MB_LONG_GRASS)
         return TRUE;
     else
         return FALSE;
@@ -59,7 +60,7 @@ bool8 sub_8056E14(u8 var)
 
 bool8 MetatileBehavior_IsSandOrDeepSand(u8 var)
 {
-    if(var == 0x21 || var == 0x6)
+    if(var == MB_SAND || var == MB_DEEP_SAND)
         return TRUE;
     else
         return FALSE;
@@ -67,7 +68,7 @@ bool8 MetatileBehavior_IsSandOrDeepSand(u8 var)
 
 bool8 MetatileBehavior_IsDeepSand(u8 var)
 {
-    if(var == 0x6)
+    if(var == MB_DEEP_SAND)
         return TRUE;
     else
         return FALSE;
@@ -75,7 +76,7 @@ bool8 MetatileBehavior_IsDeepSand(u8 var)
 
 bool8 MetatileBehavior_IsReflective(u8 var)
 {
-    if(var == 0x10 || var == 0x16 || var == 0x1A || var == 0x20 || var == 0x14 || var == 0x2B)
+    if(var == MB_POND_WATER || var == MB_PUDDLE || var == MB_1A || var == MB_ICE || var == MB_SOOTOPOLIS_DEEP_WATER || var == MB_REFLECTION_UNDER_BRIDGE)
         return TRUE;
     else
         return FALSE;
@@ -83,7 +84,7 @@ bool8 MetatileBehavior_IsReflective(u8 var)
 
 bool8 MetatileBehavior_IsIce(u8 var)
 {
-    if(var == 0x20)
+    if(var == MB_ICE)
         return TRUE;
     else
         return FALSE;
@@ -91,7 +92,7 @@ bool8 MetatileBehavior_IsIce(u8 var)
 
 bool8 is_tile_x69_2_warp_door(u8 var)
 {
-    if(var == 0x69)
+    if(var == MB_ANIMATED_DOOR)
         return TRUE;
     else
         return FALSE;
@@ -99,7 +100,7 @@ bool8 is_tile_x69_2_warp_door(u8 var)
 
 bool8 MetatileBehavior_IsDoor(u8 var)
 {
-    if(var == 0x8D || var == 0x69)
+    if(var == MB_8D || var == MB_ANIMATED_DOOR)
         return TRUE;
     else
         return FALSE;
@@ -107,7 +108,7 @@ bool8 MetatileBehavior_IsDoor(u8 var)
 
 bool8 MetatileBehavior_IsEscalator(u8 var)
 {
-    if(var == 0x6A || var == 0x6B)
+    if(var == MB_UP_ESCALATOR || var == MB_DOWN_ESCALATOR)
         return TRUE;
     else
         return FALSE;
@@ -115,7 +116,7 @@ bool8 MetatileBehavior_IsEscalator(u8 var)
 
 bool8 unref_sub_8056EE0(u8 var)
 {
-    if(var == 0x4)
+    if(var == MB_04)
         return TRUE;
     else
         return FALSE;
@@ -123,7 +124,7 @@ bool8 unref_sub_8056EE0(u8 var)
 
 bool8 MetatileBehavior_IsLadder(u8 var)
 {
-    if(var == 0x61)
+    if(var == MB_LADDER)
         return TRUE;
     else
         return FALSE;
@@ -131,7 +132,7 @@ bool8 MetatileBehavior_IsLadder(u8 var)
 
 bool8 sub_8056F08(u8 var)
 {
-    if(var == 0x60 || var == 0x6C || var == 0x6E)
+    if(var == MB_NON_ANIMATED_DOOR || var == MB_WATER_DOOR || var == MB_DEEP_SOUTH_WARP)
         return TRUE;
     else
         return FALSE;
@@ -139,7 +140,7 @@ bool8 sub_8056F08(u8 var)
 
 bool8 sub_8056F24(u8 var)
 {
-    if(var == 0x6E)
+    if(var == MB_DEEP_SOUTH_WARP)
         return TRUE;
     else
         return FALSE;
@@ -155,7 +156,7 @@ bool8 MetatileBehavior_IsSurfableWaterOrUnderwater(u8 var)
 
 bool8 MetatileBehavior_IsEastArrowWarp(u8 var)
 {
-    if(var == 0x62)
+    if(var == MB_EAST_ARROW_WARP)
         return TRUE;
     else
         return FALSE;
@@ -163,7 +164,7 @@ bool8 MetatileBehavior_IsEastArrowWarp(u8 var)
 
 bool8 MetatileBehavior_IsWestArrowWarp(u8 var)
 {
-    if(var == 0x63)
+    if(var == MB_WEST_ARROW_WARP)
         return TRUE;
     else
         return FALSE;
@@ -171,7 +172,7 @@ bool8 MetatileBehavior_IsWestArrowWarp(u8 var)
 
 bool8 MetatileBehavior_IsNorthArrowWarp(u8 var)
 {
-    if(var == 0x64 || var == 0x1B)
+    if(var == MB_NORTH_ARROW_WARP || var == MB_STAIRS_OUTSIDE_ABANDONED_SHIP)
         return TRUE;
     else
         return FALSE;
@@ -179,7 +180,7 @@ bool8 MetatileBehavior_IsNorthArrowWarp(u8 var)
 
 bool8 MetatileBehavior_IsSouthArrowWarp(u8 var)
 {
-    if(var == 0x65 || var == 0x6D || var == 0x1C)
+    if(var == MB_SOUTH_ARROW_WARP || var == MB_WATER_SOUTH_ARROW_WARP || var == MB_SHOAL_CAVE_ENTRANCE)
         return TRUE;
     else
         return FALSE;
@@ -202,8 +203,8 @@ bool8 MetatileBehavior_IsArrowWarp(u8 var)
 
 bool8 sub_8056FFC(u8 var)
 {
-    if((var >= 0x40 && var <= 0x48) || (var >= 0x50 && var <= 0x53)
-    || var == 0xD0 || var == 0xD2 || var == 0x13 || var == 0x20 || var == 0xBB || var == 0xBC)
+    if((var >= MB_WALK_EAST && var <= MB_TRICK_HOUSE_PUZZLE_8_FLOOR) || (var >= MB_EASTWARD_CURRENT && var <= MB_SOUTHWARD_CURRENT)
+    || var == MB_MUDDY_SLOPE || var == MB_CRACKED_FLOOR || var == MB_WATERFALL || var == MB_ICE || var == MB_BB || var == MB_BC)
         return TRUE;
     else
         return FALSE;
@@ -211,7 +212,7 @@ bool8 sub_8056FFC(u8 var)
 
 bool8 MetatileBehavior_IsIce_2(u8 var)
 {
-    if(var == 0x20)
+    if(var == MB_ICE)
         return TRUE;
     else
         return FALSE;
@@ -219,7 +220,7 @@ bool8 MetatileBehavior_IsIce_2(u8 var)
 
 bool8 MetatileBehavior_IsTrickHouseSlipperyFloor(u8 var)
 {
-    if(var == 0x48)
+    if(var == MB_TRICK_HOUSE_PUZZLE_8_FLOOR)
         return TRUE;
     else
         return FALSE;
@@ -227,7 +228,7 @@ bool8 MetatileBehavior_IsTrickHouseSlipperyFloor(u8 var)
 
 bool8 MetatileBehavior_0x05(u8 var)
 {
-    if(var == 0x5)
+    if(var == MB_05)
         return TRUE;
     else
         return FALSE;
@@ -235,7 +236,7 @@ bool8 MetatileBehavior_0x05(u8 var)
 
 bool8 MetatileBehavior_IsWalkNorth(u8 var)
 {
-    if(var == 0x42)
+    if(var == MB_WALK_NORTH)
         return TRUE;
     else
         return FALSE;
@@ -243,7 +244,7 @@ bool8 MetatileBehavior_IsWalkNorth(u8 var)
 
 bool8 MetatileBehavior_IsWalkSouth(u8 var)
 {
-    if(var == 0x43)
+    if(var == MB_WALK_SOUTH)
         return TRUE;
     else
         return FALSE;
@@ -251,7 +252,7 @@ bool8 MetatileBehavior_IsWalkSouth(u8 var)
 
 bool8 MetatileBehavior_IsWalkWest(u8 var)
 {
-    if(var == 0x41)
+    if(var == MB_WALK_WEST)
         return TRUE;
     else
         return FALSE;
@@ -259,7 +260,7 @@ bool8 MetatileBehavior_IsWalkWest(u8 var)
 
 bool8 MetatileBehavior_IsWalkEast(u8 var)
 {
-    if(var == 0x40)
+    if(var == MB_WALK_EAST)
         return TRUE;
     else
         return FALSE;
@@ -267,7 +268,7 @@ bool8 MetatileBehavior_IsWalkEast(u8 var)
 
 bool8 MetatileBehavior_IsNorthwardCurrent(u8 var)
 {
-    if(var == 0x52)
+    if(var == MB_NORTHWARD_CURRENT)
         return TRUE;
     else
         return FALSE;
@@ -275,7 +276,7 @@ bool8 MetatileBehavior_IsNorthwardCurrent(u8 var)
 
 bool8 MetatileBehavior_IsSouthwardCurrent(u8 var)
 {
-    if(var == 0x53)
+    if(var == MB_SOUTHWARD_CURRENT)
         return TRUE;
     else
         return FALSE;
@@ -283,7 +284,7 @@ bool8 MetatileBehavior_IsSouthwardCurrent(u8 var)
 
 bool8 MetatileBehavior_IsWestwardCurrent(u8 var)
 {
-    if(var == 0x51)
+    if(var == MB_WESTWARD_CURRENT)
         return TRUE;
     else
         return FALSE;
@@ -291,7 +292,7 @@ bool8 MetatileBehavior_IsWestwardCurrent(u8 var)
 
 bool8 MetatileBehavior_IsEastwardCurrent(u8 var)
 {
-    if(var == 0x50)
+    if(var == MB_EASTWARD_CURRENT)
         return TRUE;
     else
         return FALSE;
@@ -299,7 +300,7 @@ bool8 MetatileBehavior_IsEastwardCurrent(u8 var)
 
 bool8 MetatileBehavior_IsSlideNorth(u8 var)
 {
-    if(var == 0x46)
+    if(var == MB_SLIDE_NORTH)
         return TRUE;
     else
         return FALSE;
@@ -307,7 +308,7 @@ bool8 MetatileBehavior_IsSlideNorth(u8 var)
 
 bool8 MetatileBehavior_IsSlideSouth(u8 var)
 {
-    if(var == 0x47)
+    if(var == MB_SLIDE_SOUTH)
         return TRUE;
     else
         return FALSE;
@@ -315,7 +316,7 @@ bool8 MetatileBehavior_IsSlideSouth(u8 var)
 
 bool8 MetatileBehavior_IsSlideWest(u8 var)
 {
-    if(var == 0x45)
+    if(var == MB_SLIDE_WEST)
         return TRUE;
     else
         return FALSE;
@@ -323,7 +324,7 @@ bool8 MetatileBehavior_IsSlideWest(u8 var)
 
 bool8 MetatileBehavior_IsSlideEast(u8 var)
 {
-    if(var == 0x44)
+    if(var == MB_SLIDE_EAST)
         return TRUE;
     else
         return FALSE;
@@ -331,7 +332,7 @@ bool8 MetatileBehavior_IsSlideEast(u8 var)
 
 bool8 MetatileBehavior_IsCounter(u8 var)
 {
-    if(var == 0x80)
+    if(var == MB_COUNTER)
         return TRUE;
     else
         return FALSE;
@@ -341,7 +342,7 @@ bool8 MetatileBehavior_IsPlayerFacingTVScreen(u8 tile, u8 playerDir)
 {
     if(playerDir != 2) // if the player isn't facing north, forget about it.
         return FALSE;
-    else if(tile == 0x86) // is the player's north tile a TV?
+    else if(tile == MB_TELEVISION) // is the player's north tile a TV?
         return TRUE;
     else
         return FALSE;
@@ -349,7 +350,7 @@ bool8 MetatileBehavior_IsPlayerFacingTVScreen(u8 tile, u8 playerDir)
 
 bool8 MetatileBehavior_IsPC(u8 var)
 {
-    if(var == 0x83)
+    if(var == MB_PC)
         return TRUE;
     else
         return FALSE;
@@ -357,7 +358,7 @@ bool8 MetatileBehavior_IsPC(u8 var)
 
 bool8 is_tile_x84(u8 var)
 {
-    if(var == 0x84)
+    if(var == MB_84)
         return TRUE;
     else
         return FALSE;
@@ -365,8 +366,8 @@ bool8 is_tile_x84(u8 var)
 
 bool8 sub_80571C0(u8 var)
 {
-    if(var == 0x91 || var == 0x93 || var == 0x95 || var == 0x97 
-    || var == 0x99 || var == 0x9B || var == 0x9D)
+    if(var == MB_91 || var == MB_93 || var == MB_95 || var == MB_97 
+    || var == MB_99 || var == MB_9B || var == MB_9D)
         return TRUE;
     else
         return FALSE;
@@ -374,7 +375,7 @@ bool8 sub_80571C0(u8 var)
 
 bool8 sub_80571EC(u8 var)
 {
-    if(var == 0x90 || var == 0x92 || var == 0x94 || var == 0x9A)
+    if(var == MB_SECRET_BASE_SPOT_RED_CAVE || var == MB_SECRET_BASE_SPOT_BROWN_CAVE || var == MB_SECRET_BASE_SPOT_YELLOW_CAVE || var == MB_SECRET_BASE_SPOT_BLUE_CAVE)
         return TRUE;
     else
         return FALSE;
@@ -382,7 +383,7 @@ bool8 sub_80571EC(u8 var)
 
 bool8 sub_805720C(u8 var)
 {
-    if(var == 0x96 || var == 0x9C)
+    if(var == MB_SECRET_BASE_SPOT_TREE_1 || var == MB_SECRET_BASE_SPOT_TREE_2)
         return TRUE;
     else
         return FALSE;
@@ -390,7 +391,7 @@ bool8 sub_805720C(u8 var)
 
 bool8 is_tile_x98(u8 var)
 {
-    if(var == 0x98)
+    if(var == MB_SECRET_BASE_SPOT_SHRUB)
         return TRUE;
     else
         return FALSE;
@@ -398,7 +399,7 @@ bool8 is_tile_x98(u8 var)
 
 bool8 sub_8057238(u8 var)
 {
-    if(var == 0xB0)
+    if(var == MB_SECRET_BASE_PC)
         return TRUE;
     else
         return FALSE;
@@ -406,7 +407,7 @@ bool8 sub_8057238(u8 var)
 
 bool8 sub_805724C(u8 var)
 {
-    if(var == 0xB1)
+    if(var == MB_B1)
         return TRUE;
     else
         return FALSE;
@@ -414,7 +415,7 @@ bool8 sub_805724C(u8 var)
 
 bool8 unref_sub_8057260(u8 var)
 {
-    if(var == 0xB2)
+    if(var == MB_B2)
         return TRUE;
     else
         return FALSE;
@@ -422,7 +423,7 @@ bool8 unref_sub_8057260(u8 var)
 
 bool8 sub_8057274(u8 var)
 {
-    if(var == 0xB3)
+    if(var == MB_B3)
         return TRUE;
     else
         return FALSE;
@@ -430,7 +431,7 @@ bool8 sub_8057274(u8 var)
 
 bool8 sub_8057288(u8 var)
 {
-    if(var == 0xB9)
+    if(var == MB_B9)
         return TRUE;
     else
         return FALSE;
@@ -438,7 +439,7 @@ bool8 sub_8057288(u8 var)
 
 bool8 sub_805729C(u8 var)
 {
-    if(var == 0x0)
+    if(var == MB_NORMAL)
         return TRUE;
     else
         return FALSE;
@@ -446,7 +447,7 @@ bool8 sub_805729C(u8 var)
 
 bool8 sub_80572B0(u8 var)
 {
-    if(var == 0xB7)
+    if(var == MB_B7)
         return TRUE;
     else
         return FALSE;
@@ -454,7 +455,7 @@ bool8 sub_80572B0(u8 var)
 
 bool8 unref_sub_80572C4(u8 var)
 {
-    if(var == 0xB2)
+    if(var == MB_B2)
         return TRUE;
     else
         return FALSE;
@@ -462,7 +463,7 @@ bool8 unref_sub_80572C4(u8 var)
 
 bool8 sub_80572D8(u8 var)
 {
-    if(var == 0xB5)
+    if(var == MB_B5)
         return TRUE;
     else
         return FALSE;
@@ -470,7 +471,7 @@ bool8 sub_80572D8(u8 var)
 
 bool8 sub_80572EC(u8 var)
 {
-    if(var == 0xC3)
+    if(var == MB_C3)
         return TRUE;
     else
         return FALSE;
@@ -478,7 +479,7 @@ bool8 sub_80572EC(u8 var)
 
 bool8 sub_8057300(u8 var)
 {
-    if(var == 0xC2)
+    if(var == MB_C2)
         return TRUE;
     else
         return FALSE;
@@ -486,7 +487,7 @@ bool8 sub_8057300(u8 var)
 
 bool8 sub_8057314(u8 var)
 {
-    if(var == 0xB8)
+    if(var == MB_B8)
         return TRUE;
     else
         return FALSE;
@@ -494,7 +495,7 @@ bool8 sub_8057314(u8 var)
 
 bool8 sub_8057328(u8 var)
 {
-    if(var == 0xBE)
+    if(var == MB_BE)
         return TRUE;
     else
         return FALSE;
@@ -502,7 +503,7 @@ bool8 sub_8057328(u8 var)
 
 bool8 sub_805733C(u8 var)
 {
-    if(var == 0xBD)
+    if(var == MB_BD)
         return TRUE;
     else
         return FALSE;
@@ -510,7 +511,7 @@ bool8 sub_805733C(u8 var)
 
 bool8 sub_8057350(u8 var)
 {
-    if(var == 0xBA)
+    if(var == MB_BA)
         return TRUE;
     else
         return FALSE;
@@ -518,7 +519,7 @@ bool8 sub_8057350(u8 var)
 
 bool8 sub_8057364(u8 var)
 {
-    if(var == 0xBF)
+    if(var == MB_BF)
         return TRUE;
     else
         return FALSE;
@@ -526,7 +527,7 @@ bool8 sub_8057364(u8 var)
 
 bool8 sub_8057378(u8 var)
 {
-    if(var == 0xC4)
+    if(var == MB_C4)
         return TRUE;
     else
         return FALSE;
@@ -534,7 +535,7 @@ bool8 sub_8057378(u8 var)
 
 bool8 sub_805738C(u8 var)
 {
-    if(var == 0xC5)
+    if(var == MB_C5)
         return TRUE;
     else
         return FALSE;
@@ -542,7 +543,7 @@ bool8 sub_805738C(u8 var)
 
 bool8 MetatileBehavior_HasRipples(u8 var)
 {
-    if(var == 0x10 || var == 0x16 || var == 0x14)
+    if(var == MB_POND_WATER || var == MB_PUDDLE || var == MB_SOOTOPOLIS_DEEP_WATER)
         return TRUE;
     else
         return FALSE;
@@ -550,7 +551,7 @@ bool8 MetatileBehavior_HasRipples(u8 var)
 
 bool8 MetatileBehavior_IsPuddle(u8 var)
 {
-    if(var == 0x16)
+    if(var == MB_PUDDLE)
         return TRUE;
     else
         return FALSE;
@@ -558,7 +559,7 @@ bool8 MetatileBehavior_IsPuddle(u8 var)
 
 bool8 MetatileBehavior_IsTallGrass(u8 var)
 {
-    if(var == 0x2)
+    if(var == MB_TALL_GRASS)
         return TRUE;
     else
         return FALSE;
@@ -566,7 +567,7 @@ bool8 MetatileBehavior_IsTallGrass(u8 var)
 
 bool8 MetatileBehavior_IsLongGrass(u8 var)
 {
-    if(var == 0x3)
+    if(var == MB_LONG_GRASS)
         return TRUE;
     else
         return FALSE;
@@ -574,7 +575,7 @@ bool8 MetatileBehavior_IsLongGrass(u8 var)
 
 bool8 MetatileBehavior_IsBerryTreeSoil(u8 var)
 {
-    if(var == 0xA0)
+    if(var == MB_BERRY_TREE_SOIL)
         return TRUE;
     else
         return FALSE;
@@ -582,7 +583,7 @@ bool8 MetatileBehavior_IsBerryTreeSoil(u8 var)
 
 bool8 MetatileBehavior_IsAsh(u8 var)
 {
-    if(var == 0x24)
+    if(var == MB_ASH)
         return TRUE;
     else
         return FALSE;
@@ -590,7 +591,7 @@ bool8 MetatileBehavior_IsAsh(u8 var)
 
 bool8 MetatileBehavior_IsUnusedFootprintMetatile(u8 var)
 {
-    if(var == 0x25)
+    if(var == MB_25)
         return TRUE;
     else
         return FALSE;
@@ -598,7 +599,7 @@ bool8 MetatileBehavior_IsUnusedFootprintMetatile(u8 var)
 
 bool8 MetatileBehavior_IsBridge(u8 var)
 {
-    if(var >= 0x70 && var <= 0x73)
+    if(var >= MB_WARP_OR_BRIDGE && var <= MB_ROUTE120_NORTH_BRIDGE_2)
         return TRUE;
     else
         return FALSE;
@@ -606,7 +607,7 @@ bool8 MetatileBehavior_IsBridge(u8 var)
 
 u8 sub_8057450(u8 var)
 {
-    u8 result = var - 0x70;
+    u8 result = var - MB_WARP_OR_BRIDGE;
 
     if(result > 3)
         result = 0;
@@ -632,7 +633,7 @@ bool8 MetatileBehavior_IsWaterWildEncounter(u8 var)
 
 bool8 sub_80574C4(u8 var)
 {
-    if(var == 0xB)
+    if(var == MB_0B)
         return TRUE;
     else
         return FALSE;
@@ -640,7 +641,7 @@ bool8 sub_80574C4(u8 var)
 
 bool8 sub_80574D8(u8 var)
 {
-    if(var == 0xC)
+    if(var == MB_MOUNTAIN_TOP)
         return TRUE;
     else
         return FALSE;    
@@ -648,7 +649,7 @@ bool8 sub_80574D8(u8 var)
 
 bool8 sub_80574EC(u8 var)
 {
-    if(var == 0x11 || var == 0x12 || var == 0x14)
+    if(var == MB_SEMI_DEEP_WATER || var == MB_DEEP_WATER || var == MB_SOOTOPOLIS_DEEP_WATER)
         return TRUE;
     else
         return FALSE;
@@ -656,7 +657,7 @@ bool8 sub_80574EC(u8 var)
 
 bool8 sub_805750C(u8 var)
 {
-    if(var == 0x19 || var == 0x2A)
+    if(var == MB_NO_SURFACING || var == MB_SEAWEED_NO_SURFACING)
         return TRUE;
     else
         return FALSE;
@@ -664,7 +665,7 @@ bool8 sub_805750C(u8 var)
 
 bool8 MetatileBehavior_IsShallowFlowingWater(u8 var)
 {
-    if(var == 0x17 || var == 0x1B || var == 0x1C)
+    if(var == MB_SHALLOW_WATER || var == MB_STAIRS_OUTSIDE_ABANDONED_SHIP || var == MB_SHOAL_CAVE_ENTRANCE)
         return TRUE;
     else
         return FALSE;
@@ -672,7 +673,7 @@ bool8 MetatileBehavior_IsShallowFlowingWater(u8 var)
 
 bool8 sub_8057540(u8 var)
 {
-    if(var == 0x26)
+    if(var == MB_THIN_ICE)
         return TRUE;
     else
         return FALSE;
@@ -680,7 +681,7 @@ bool8 sub_8057540(u8 var)
 
 bool8 sub_8057554(u8 var)
 {
-    if(var == 0x27)
+    if(var == MB_CRACKED_ICE)
         return TRUE;
     else
         return FALSE;
@@ -688,7 +689,7 @@ bool8 sub_8057554(u8 var)
 
 bool8 sub_8057568(u8 var)
 {
-    if(var == 0x15 || var == 0x11 || var == 0x12)
+    if(var == MB_OCEAN_WATER || var == MB_SEMI_DEEP_WATER || var == MB_DEEP_WATER)
         return TRUE;
     else
         return FALSE;
@@ -696,7 +697,7 @@ bool8 sub_8057568(u8 var)
 
 bool8 unref_sub_8057584(u8 var)
 {
-    if(var == 0x18 || var == 0x1A)
+    if(var == MB_18 || var == MB_1A)
         return TRUE;
     else
         return FALSE;
@@ -712,7 +713,7 @@ bool8 sub_805759C(u8 var)
 
 bool8 MetatileBehavior_IsEastBlocked(u8 var)
 {
-    if(var == 0x30 || var == 0x34 || var == 0x36 || var == 0xC1 || var == 0xBE)
+    if(var == MB_IMPASSABLE_EAST || var == MB_IMPASSABLE_NORTHEAST || var == MB_IMPASSABLE_SOUTHEAST || var == MB_C1 || var == MB_BE)
         return TRUE;
     else
         return FALSE;
@@ -720,7 +721,7 @@ bool8 MetatileBehavior_IsEastBlocked(u8 var)
 
 bool8 MetatileBehavior_IsWestBlocked(u8 var)
 {
-    if(var == 0x31 || var == 0x35 || var == 0x37 || var == 0xC1 || var == 0xBE)
+    if(var == MB_IMPASSABLE_WEST || var == MB_IMPASSABLE_NORTHWEST || var == MB_IMPASSABLE_SOUTHWEST || var == MB_C1 || var == MB_BE)
         return TRUE;
     else
         return FALSE;
@@ -728,7 +729,7 @@ bool8 MetatileBehavior_IsWestBlocked(u8 var)
 
 bool8 MetatileBehavior_IsNorthBlocked(u8 var)
 {
-    if(var == 0x32 || var == 0x34 || var == 0x35 || var == 0xC0)
+    if(var == MB_IMPASSABLE_NORTH || var == MB_IMPASSABLE_NORTHEAST || var == MB_IMPASSABLE_NORTHWEST || var == MB_BED)
         return TRUE;
     else
         return FALSE;
@@ -736,7 +737,7 @@ bool8 MetatileBehavior_IsNorthBlocked(u8 var)
 
 bool8 MetatileBehavior_IsSouthBlocked(u8 var)
 {
-    if(var == 0x33 || var == 0x36 || var == 0x37 || var == 0xC0)
+    if(var == MB_IMPASSABLE_SOUTH || var == MB_IMPASSABLE_SOUTHEAST || var == MB_IMPASSABLE_SOUTHWEST || var == MB_BED)
         return TRUE;
     else
         return FALSE;
@@ -744,7 +745,7 @@ bool8 MetatileBehavior_IsSouthBlocked(u8 var)
 
 bool8 MetatileBehavior_IsShortGrass(u8 var)
 {
-    if(var == 0x7)
+    if(var == MB_SHORT_GRASS)
         return TRUE;
     else
         return FALSE;
@@ -752,7 +753,7 @@ bool8 MetatileBehavior_IsShortGrass(u8 var)
 
 bool8 MetatileBehavior_IsHotSprings(u8 var)
 {
-    if(var == 0x28)
+    if(var == MB_HOT_SPRINGS)
         return TRUE;
     else
         return FALSE;
@@ -760,7 +761,7 @@ bool8 MetatileBehavior_IsHotSprings(u8 var)
 
 bool8 MetatileBehavior_IsWaterfall(u8 var)
 {
-    if(var == 0x13)
+    if(var == MB_WATERFALL)
         return TRUE;
     else
         return FALSE;
@@ -768,7 +769,7 @@ bool8 MetatileBehavior_IsWaterfall(u8 var)
 
 bool8 MetatileBehavior_IsFortreeBridge(u8 var)
 {
-    if(var == 0x78)
+    if(var == MB_FORTREE_BRIDGE)
         return TRUE;
     else
         return FALSE;
@@ -776,7 +777,7 @@ bool8 MetatileBehavior_IsFortreeBridge(u8 var)
 
 bool8 sub_80576A0(u8 var)
 {
-    if(var == 0x74)
+    if(var == MB_PACIFIDLOG_VERTICAL_LOG_1)
         return TRUE;
     else
         return FALSE;
@@ -784,7 +785,7 @@ bool8 sub_80576A0(u8 var)
 
 bool8 sub_80576B4(u8 var)
 {
-    if(var == 0x75)
+    if(var == MB_PACIFIDLOG_VERTICAL_LOG_2)
         return TRUE;
     else
         return FALSE;
@@ -792,7 +793,7 @@ bool8 sub_80576B4(u8 var)
 
 bool8 sub_80576C8(u8 var)
 {
-    if(var == 0x76)
+    if(var == MB_PACIFIDLOG_HORIZONTAL_LOG_1)
         return TRUE;
     else
         return FALSE;
@@ -800,7 +801,7 @@ bool8 sub_80576C8(u8 var)
 
 bool8 sub_80576DC(u8 var)
 {
-    if(var == 0x77)
+    if(var == MB_PACIFIDLOG_HORIZONTAL_LOG_2)
         return TRUE;
     else
         return FALSE;
@@ -808,7 +809,7 @@ bool8 sub_80576DC(u8 var)
 
 bool8 MetatileBehavior_IsPacifidlogLog(u8 var)
 {
-    if(var >= 0x74 && var <= 0x77)
+    if(var >= MB_PACIFIDLOG_VERTICAL_LOG_1 && var <= MB_PACIFIDLOG_HORIZONTAL_LOG_2)
         return TRUE;
     else
         return FALSE;
@@ -816,7 +817,7 @@ bool8 MetatileBehavior_IsPacifidlogLog(u8 var)
 
 bool8 is_tile_x8C(u8 var)
 {
-    if(var == 0x8C)
+    if(var == MB_TRICK_HOUSE_PUZZLE_DOOR)
         return TRUE;
     else
         return FALSE;
@@ -824,7 +825,7 @@ bool8 is_tile_x8C(u8 var)
 
 bool8 is_tile_x85(u8 var)
 {
-    if(var == 0x85)
+    if(var == MB_REGION_MAP)
         return TRUE;
     else
         return FALSE;
@@ -832,7 +833,7 @@ bool8 is_tile_x85(u8 var)
 
 bool8 is_tile_x8B(u8 var)
 {
-    if(var == 0x8B)
+    if(var == MB_CLOSED_SOOTOPOLIS_GYM_DOOR)
         return TRUE;
     else
         return FALSE;
@@ -840,7 +841,7 @@ bool8 is_tile_x8B(u8 var)
 
 bool8 is_tile_x8A(u8 var)
 {
-    if(var == 0x8A)
+    if(var == MB_ROULETTE)
         return TRUE;
     else
         return FALSE;
@@ -848,7 +849,7 @@ bool8 is_tile_x8A(u8 var)
 
 bool8 is_tile_x87(u8 var)
 {
-    if(var == 0x87)
+    if(var == MB_POKEBLOCK_FEEDER)
         return TRUE;
     else
         return FALSE;
@@ -856,7 +857,7 @@ bool8 is_tile_x87(u8 var)
 
 bool8 MetatileBehavior_0xBB(u8 var)
 {
-    if(var == 0xBB)
+    if(var == MB_BB)
         return TRUE;
     else
         return FALSE;
@@ -864,7 +865,7 @@ bool8 MetatileBehavior_0xBB(u8 var)
 
 bool8 MetatileBehavior_0xBC(u8 var)
 {
-    if(var == 0xBC)
+    if(var == MB_BC)
         return TRUE;
     else
         return FALSE;
@@ -872,7 +873,7 @@ bool8 MetatileBehavior_0xBC(u8 var)
 
 bool8 sub_8057798(u8 var)
 {
-    if(var == 0x29)
+    if(var == MB_LAVARIDGE_GYM_B1F_WARP)
         return TRUE;
     else
         return FALSE;
@@ -880,7 +881,7 @@ bool8 sub_8057798(u8 var)
 
 bool8 is_role_x68(u8 var)
 {
-    if(var == 0x68)
+    if(var == MB_LAVARIDGE_GYM_1F_WARP)
         return TRUE;
     else
         return FALSE;
@@ -888,7 +889,7 @@ bool8 is_role_x68(u8 var)
 
 bool8 MetatileBehavior_IsAquaHideoutWarp(u8 var)
 {
-    if(var == 0x67)
+    if(var == MB_AQUA_HIDEOUT_WARP)
         return TRUE;
     else
         return FALSE;
@@ -896,7 +897,7 @@ bool8 MetatileBehavior_IsAquaHideoutWarp(u8 var)
 
 bool8 MetatileBehavior_IsSurfableFishableWater(u8 var)
 {
-    if(var == 0x10 || var == 0x15 || var == 0x11 || var == 0x12 || var == 0x14 || (u8)(var - 0x50) < 4)
+    if(var == MB_POND_WATER || var == MB_OCEAN_WATER || var == MB_SEMI_DEEP_WATER || var == MB_DEEP_WATER || var == MB_SOOTOPOLIS_DEEP_WATER || (var >= MB_EASTWARD_CURRENT && var <= MB_SOUTHWARD_CURRENT))
         return TRUE;
     else
         return FALSE;
@@ -904,7 +905,7 @@ bool8 MetatileBehavior_IsSurfableFishableWater(u8 var)
 
 bool8 sub_8057804(u8 var)
 {
-    if(var == 0xF)
+    if(var == MB_MT_PYRE_HOLE)
         return TRUE;
     else
         return FALSE;
@@ -912,7 +913,7 @@ bool8 sub_8057804(u8 var)
 
 bool8 sub_8057818(u8 var)
 {
-    if(var == 0x66)
+    if(var == MB_CRACKED_FLOOR_HOLE)
         return TRUE;
     else
         return FALSE;
@@ -920,7 +921,7 @@ bool8 sub_8057818(u8 var)
 
 bool8 sub_805782C(u8 var)
 {
-    if(var == 0xD2)
+    if(var == MB_CRACKED_FLOOR)
         return TRUE;
     else
         return FALSE;
@@ -928,7 +929,7 @@ bool8 sub_805782C(u8 var)
 
 bool8 MetatileBehavior_IsMuddySlope(u8 var)
 {
-    if(var == 0xD0)
+    if(var == MB_MUDDY_SLOPE)
         return TRUE;
     else
         return FALSE;
@@ -936,7 +937,7 @@ bool8 MetatileBehavior_IsMuddySlope(u8 var)
 
 bool8 MetatileBehavior_IsBumpySlope(u8 var)
 {
-    if(var == 0xD1)
+    if(var == MB_BUMPY_SLOPE)
         return TRUE;
     else
         return FALSE;
@@ -944,7 +945,7 @@ bool8 MetatileBehavior_IsBumpySlope(u8 var)
 
 bool8 MetatileBehavior_IsIsolatedVerticalRail(u8 var)
 {
-    if(var == 0xD3)
+    if(var == MB_ISOLATED_VERTICAL_RAIL)
         return TRUE;
     else
         return FALSE;
@@ -952,7 +953,7 @@ bool8 MetatileBehavior_IsIsolatedVerticalRail(u8 var)
 
 bool8 MetatileBehavior_IsIsolatedHorizontalRail(u8 var)
 {
-    if(var == 0xD4)
+    if(var == MB_ISOLATED_HORIZONTAL_RAIL)
         return TRUE;
     else
         return FALSE;
@@ -960,7 +961,7 @@ bool8 MetatileBehavior_IsIsolatedHorizontalRail(u8 var)
 
 bool8 MetatileBehavior_IsVerticalRail(u8 var)
 {
-    if(var == 0xD5)
+    if(var == MB_VERTICAL_RAIL)
         return TRUE;
     else
         return FALSE;
@@ -968,7 +969,7 @@ bool8 MetatileBehavior_IsVerticalRail(u8 var)
 
 bool8 MetatileBehavior_IsHorizontalRail(u8 var)
 {
-    if(var == 0xD6)
+    if(var == MB_HORIZONTAL_RAIL)
         return TRUE;
     else
         return FALSE;
@@ -976,7 +977,7 @@ bool8 MetatileBehavior_IsHorizontalRail(u8 var)
 
 bool8 MetatileBehavior_IsSeaweed(u8 var)
 {
-    if(var == 0x22 || var == 0x2A)
+    if(var == MB_SEAWEED || var == MB_SEAWEED_NO_SURFACING)
         return TRUE;
     else
         return FALSE;
@@ -984,7 +985,7 @@ bool8 MetatileBehavior_IsSeaweed(u8 var)
 
 bool8 MetatileBehavior_IsRunningDisallowed(u8 var)
 {
-    if(var == 0xA || var == 0x3 || var == 0x28 || MetatileBehavior_IsPacifidlogLog(var) != FALSE)
+    if(var == MB_NO_RUNNING || var == MB_LONG_GRASS || var == MB_HOT_SPRINGS || MetatileBehavior_IsPacifidlogLog(var) != FALSE)
         return TRUE;
     else
         return FALSE;
@@ -992,7 +993,7 @@ bool8 MetatileBehavior_IsRunningDisallowed(u8 var)
 
 bool8 sub_80578F8(u8 var)
 {
-    if(var == 0x02 || var == 0x03 || var == 0x24 || var == 0x9)
+    if(var == MB_TALL_GRASS || var == MB_LONG_GRASS || var == MB_ASH || var == MB_LONG_GRASS_SOUTH_EDGE)
         return TRUE;
     else
         return FALSE;
@@ -1000,7 +1001,7 @@ bool8 sub_80578F8(u8 var)
 
 bool8 sub_805791C(u8 var)
 {
-    if(var == 0x8E)
+    if(var == MB_8E)
         return TRUE;
     else
         return FALSE;
@@ -1008,7 +1009,7 @@ bool8 sub_805791C(u8 var)
 
 bool8 sub_8057930(u8 var)
 {
-    if(var == 0xE0)
+    if(var == MB_PICTURE_BOOK_SHELF)
         return TRUE;
     else
         return FALSE;
@@ -1016,7 +1017,7 @@ bool8 sub_8057930(u8 var)
 
 bool8 sub_8057944(u8 var)
 {
-    if(var == 0xE1)
+    if(var == MB_BOOKSHELF)
         return TRUE;
     else
         return FALSE;
@@ -1024,7 +1025,7 @@ bool8 sub_8057944(u8 var)
 
 bool8 sub_8057958(u8 var)
 {
-    if(var == 0xE2)
+    if(var == MB_POKEMON_CENTER_BOOKSHELF)
         return TRUE;
     else
         return FALSE;
@@ -1032,7 +1033,7 @@ bool8 sub_8057958(u8 var)
 
 bool8 sub_805796C(u8 var)
 {
-    if(var == 0xE3)
+    if(var == MB_VASE)
         return TRUE;
     else
         return FALSE;
@@ -1040,7 +1041,7 @@ bool8 sub_805796C(u8 var)
 
 bool8 sub_8057980(u8 var)
 {
-    if(var == 0xE4)
+    if(var == MB_TRASH_CAN)
         return TRUE;
     else
         return FALSE;
@@ -1048,7 +1049,7 @@ bool8 sub_8057980(u8 var)
 
 bool8 sub_8057994(u8 var)
 {
-    if(var == 0xE5)
+    if(var == MB_SHOP_SHELF)
         return TRUE;
     else
         return FALSE;
@@ -1056,7 +1057,7 @@ bool8 sub_8057994(u8 var)
 
 bool8 sub_80579A8(u8 var)
 {
-    if(var == 0xE6)
+    if(var == MB_BLUEPRINT)
         return TRUE;
     else
         return FALSE;
