@@ -21861,8 +21861,10 @@ gUnknown_083E5610:: @ 83E5610
 gUnknown_083E5620:: @ 83E5620
 	.incbin "baserom.gba", 0x003e5620, 0xc
 
+	.align 1
 gUnknown_083E562C:: @ 83E562C
-	.incbin "baserom.gba", 0x003e562c, 0x8
+	.2byte 0x6ACD, 0x51A5
+	.2byte 0x45FC, 0x38D4
 
 	.align 2
 gMailGraphicsTable:: @ 83E5634
@@ -21964,7 +21966,9 @@ gMailGraphicsTable:: @ 83E5634
 
 	.align 2
 Unknown_3E5724: @ 83E5724
-	.incbin "baserom.gba", 0x3e5724, 0xc
+	.4byte 0xC
+	.4byte 0xC
+	.4byte 0xC
 
 gUnknown_083E5730:: @ 83E5730
 	.byte 3, 15, 27, 52
@@ -21994,7 +21998,11 @@ gUnknown_083E5730:: @ 83E5730
 
 	.align 2
 Unknown_3E5790: @ 83E5790
-	.incbin "baserom.gba", 0x3e5790, 0x14
+	.4byte 0x8
+	.4byte 0x8
+	.4byte 0x8
+	.4byte 0x8
+	.4byte 0x4
 
 	.align 2
 gUnknown_083E57A4:: @ 83E57A4

@@ -448,7 +448,6 @@ u8 GetWildBattleTransition(void)
 u8 GetTrainerBattleTransition(void)
 {
     struct Trainer *trainer;
-    u8 trainerClass;
     u8 partyCount;
     u8 flashVar;
     u8 level;

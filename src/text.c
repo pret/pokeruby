@@ -1918,7 +1918,7 @@ static void MultistepLoadFont_LoadGlyph(struct Window *win, u16 startOffset, u8 
     }
 }
 
-static void EmptyFunc(void)
+void EmptyFunc(void)
 {
 }
 
@@ -3662,7 +3662,6 @@ void ConvertInternationalString(u8 *s, u8 language)
     if (language == CHARSET_JAPANESE)
     {
         u8 i;
-        u8 length;
 
         StripExtCtrlCodes(s);
         i = StringLength(s);

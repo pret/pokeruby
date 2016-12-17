@@ -1,10 +1,19 @@
 #include "global.h"
 #include "start_menu.h"
 #include "asm.h"
+#include "field_player_avatar.h"
+#include "flag.h"
+#include "load_save.h"
 #include "main.h"
+#include "map_obj_lock.h"
 #include "menu.h"
+#include "option_menu.h"
 #include "palette.h"
 #include "pokedex.h"
+#include "rom4.h"
+#include "safari_zone.h"
+#include "save.h"
+#include "save_menu_util.h"
 #include "script.h"
 #include "songs.h"
 #include "sound.h"
@@ -12,15 +21,7 @@
 #include "string_util.h"
 #include "task.h"
 #include "trainer_card.h"
-#include "flag.h"
-#include "rom4.h"
-#include "safari_zone.h"
-#include "field_player_avatar.h"
 #include "weather.h"
-#include "save.h"
-#include "option_menu.h"
-#include "map_obj_lock.h"
-#include "save_menu_util.h"
 
 //Menu actions
 enum {
@@ -76,7 +77,6 @@ static void BuildStartMenuActions_Link(void);
 static void DisplaySafariBallsWindow(void);
 static bool32 PrintStartMenuItemsMultistep(s16 *a, u32 b);
 static bool32 InitStartMenuMultistep(s16 *a, s16 *b);
-static void sub_8071230(void);
 static void Task_StartMenu(u8 taskId);
 static u8 StartMenu_InputProcessCallback(void);
 static u8 SaveCallback1(void);

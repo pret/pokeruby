@@ -41,8 +41,8 @@ extern u16 word_3004858;
 extern u8 gMultiText_LinkError[];
 
 static void InitLinkTestBG(u8, u8, u8, u8);
-static void InitLinkTestBG_Unused(u8, u8, u8, u8);
-static void LinkTestScreen();
+void InitLinkTestBG_Unused(u8, u8, u8, u8);
+void LinkTestScreen();
 static void InitLocalLinkPlayer(void);
 static void VBlankCB_LinkTest(void);
 static void InitLink(void);
@@ -60,15 +60,15 @@ static void LinkCB_BlockSendBegin(void);
 static void LinkCB_BlockSend(void);
 static void LinkCB_BlockSendEnd(void);
 static void sub_8007E04(void);
-static u32 sub_8007E40(void);
+u32 sub_8007E40(void);
 static void SetBlockReceivedFlag(u8);
 static u16 LinkTestCalcBlockChecksum(void *, u16);
 static void PrintHexDigit(u8, u8, u8);
 static void PrintHex(u32, u8, u8, u8);
 static void LinkCB_RequestPlayerDataExchange(void);
 static void Task_PrintTestData(u8);
-static bool8 sub_8008224(void);
-static u8 GetDummy2(void);
+bool8 sub_8008224(void);
+u8 GetDummy2(void);
 static void sub_8008350(void);
 static void sub_800837C(void);
 static void sub_80083E0(void);
@@ -90,8 +90,8 @@ static void DoRecv(void);
 static void DoSend(void);
 static void StopTimer(void);
 static void SendRecvDone(void);
-static void ResetSendBuffer(void);
-static void ResetRecvBuffer(void);
+void ResetSendBuffer(void);
+void ResetRecvBuffer(void);
 
 static struct BlockTransfer sBlockSend;
 static struct BlockTransfer sBlockRecv[MAX_LINK_PLAYERS];
@@ -212,7 +212,7 @@ static void InitLinkTestBG(u8 paletteNum, u8 bgNum, u8 screenBaseBlock, u8 charB
     }
 }
 
-static void InitLinkTestBG_Unused(u8 paletteNum, u8 bgNum, u8 screenBaseBlock, u8 charBaseBlock)
+void InitLinkTestBG_Unused(u8 paletteNum, u8 bgNum, u8 screenBaseBlock, u8 charBaseBlock)
 {
     LoadPalette(sLinkTestDigitPalette, 16 * paletteNum, 32);
     DmaCopy16(3, sLinkTestDigitTiles, BG_CHAR_ADDR(charBaseBlock), 0x220);
@@ -223,7 +223,7 @@ static void InitLinkTestBG_Unused(u8 paletteNum, u8 bgNum, u8 screenBaseBlock, u
     *gBGControlRegs[bgNum] = (screenBaseBlock << 8) | (charBaseBlock << 2);
 }
 
-static void LinkTestScreen(void)
+void LinkTestScreen(void)
 {
     s32 i;
     ResetSpriteData();
@@ -840,7 +840,7 @@ void sub_8007E24(void)
     gLinkCallback = sub_8007E04;
 }
 
-static u32 sub_8007E40(void)
+u32 sub_8007E40(void)
 {
     return dword_20238BC;
 }
@@ -1025,7 +1025,7 @@ u8 sub_8008218(void)
     return gSavedMultiplayerId;
 }
 
-static bool8 sub_8008224(void)
+bool8 sub_8008224(void)
 {
     s32 count = 0;
     s32 i;
@@ -1072,7 +1072,7 @@ bool8 IsLinkMaster(void)
     return EXTRACT_MASTER(gLinkStatus);
 }
 
-static u8 GetDummy2(void)
+u8 GetDummy2(void)
 {
     return sDummy2;
 }
@@ -1236,7 +1236,7 @@ void CB2_LinkError(void)
 
 static void CB2_PrintErrorMessage(void)
 {
-    u8 array[64]; // unused
+    u8 array[64] __attribute__((unused)); // unused
 
     switch (gMain.state)
     {
@@ -1772,7 +1772,7 @@ static void SendRecvDone(void)
     }
 }
 
-static void ResetSendBuffer(void)
+void ResetSendBuffer(void)
 {
     u8 i;
     u8 j;
@@ -1785,7 +1785,7 @@ static void ResetSendBuffer(void)
             gLink.sendQueue.data[i][j] = 0xEFFF;
 }
 
-static void ResetRecvBuffer(void)
+void ResetRecvBuffer(void)
 {
     u8 i;
     u8 j;

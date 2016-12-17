@@ -186,7 +186,7 @@ static s8 cur_mapdata_get_door_x2_at(struct DoorGraphics *gfx, u32 x, u32 y)
         return gfx->unk2;
 }
 
-static void unref_sub_805869C(u32 x, u32 y)
+void unref_sub_805869C(u32 x, u32 y)
 {
     StartDoorOpenAnimation(gDoorAnimGraphicsTable, x, y);
 }

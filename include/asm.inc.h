@@ -34,15 +34,6 @@ u8 daycare_relationship_score_from_savegame(void);
 // asm/rom_804373C.o
 void CreatePokeballSprite(u8 r0, u8 r1, u8 r2, u8 r3, u8 s1, u8 s2, u8 s3, u16 s4);
 
-// asm/load_save.o
-void CheckForFlashMemory(void);
-int sub_80479F8();
-void sub_8047A04();
-void SetSecretBase2Field_9_AndHideBG(void);
-void ClearSecretBase2Field_9_2(void);
-void SaveSerializedGame(void);
-void LoadSerializedGame(void);
-
 // asm/berry_blender.o
 void sub_80516C4(u8, u16);
 
@@ -100,6 +91,7 @@ void FieldObjectGetLocalIdAndMap(struct MapObject *, u8 *, u8 *, u8 *);
 void sub_805BCF0(u8, u8, u8, u8);
 void sub_805BD48(u8, u8, u8);
 void sub_805BD90(u8 localId, u8 mapNum, u8 mapGroup, s16 x, s16 y);
+void gpu_pal_allocator_reset__manage_upper_four(void);
 void npc_coords_shift(struct MapObject *pObject, s16 x, s16 y);
 void sub_805C0F8(u8, u8, u8, s16, s16);
 void npc_coords_shift_still(struct MapObject *pObject);
@@ -249,11 +241,17 @@ void sub_808AB90(void);
 
 // asm/rom_8094928.o
 void sub_80961D8(void);
+u8 sub_809D3A4(u16 arg0, void (*)(struct Sprite *), int, u8 arg3, u32 arg4);
+u16 sub_809D4A8(u16);
+void sub_809D510(struct Sprite *);
+void sub_809D580(u16);
+void sub_809D608(u16);
 u8 pokemon_ailments_get_primary(u32);
 u8 exec_movement(u8, u8, u8, void *);
 bool8 sub_80A212C(u8, u8, u8);
 void sub_80A2178(void);
 void sub_80A2B18(void);
+u16 sub_80A2D64(u16, u8 *);
 void AddMapNamePopUpWindowTask(void);
 void HideMapNamePopUpWindow();
 
@@ -261,12 +259,22 @@ void HideMapNamePopUpWindow();
 void sub_80A3684(void);
 void sub_80A3714(void);
 void sub_80A53F8(void);
+void sub_80A5B40(void);
 void sub_80A68CC();
+u8 sub_80A7D8C(u8 berry, int i, int i1);
+void sub_80A7DD4(void);
+u8 sub_80A7E5C(u8);
+
+// src/matsuda_debug_menu.o
+void sub_80AA280(u8);
+void sub_80AA5E8(u8);
+void sub_80AA658(u8);
 
 // asm/contest.o
 void sub_80AB1B0(void);
 void sub_80AE098(u8);
 void sub_80AE398(u8, u8);
+u32 sub_80AE770(u8, u8);
 void sub_80AE82C(u8);
 void sub_80AF668(void);
 void sub_80B0F28(u8);
@@ -372,6 +380,11 @@ void sub_80EBA5C(void);
 // asm/mauville_old_man.o
 void sub_80F7AA4(void);
 void sub_80F7F30(void);
+
+// asm/menu_helpers.o
+bool8 sub_80F9344(void);
+void sub_80F9368(void);
+void sub_80F9438(void);
 
 // asm/script_pokemon_util_80F99CC.o
 void sub_80F99CC(void);
@@ -486,6 +499,7 @@ u8 intro_create_brendan_sprite(/*TODO: arg types*/);
 u8 intro_create_may_sprite(/*TODO: arg types*/);
 u8 intro_create_latios_sprite(/*TODO: arg types*/);
 u8 intro_create_latias_sprite(/*TODO: arg types*/);
+void sub_814A568(u8*);
 
 // src/agb_flash.o
 u16 ReadFlashId(void);
@@ -493,3 +507,4 @@ u16 SetFlashTimerIntr(u8 timerNum, void (**intrFunc)(void));
 void ReadFlash(u16 sectorNum, u32 offset, u8 *dest, u32 size);
 u32 ProgramFlashSectorAndVerify();
 u32 ProgramFlashSectorAndVerifyNBytes(u16 sectorNum, u8 *src, u32 n);
+u16 IdentifyFlash(void);

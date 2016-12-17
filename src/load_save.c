@@ -1,7 +1,9 @@
 #include "global.h"
+#include "load_save.h"
+#include "asm.h"
 #include "main.h"
-#include "rom4.h"
 #include "pokemon.h"
+#include "rom4.h"
 
 extern u8 gPlayerPartyCount;
 extern u32 gUnknown_3004820;
@@ -18,9 +20,6 @@ struct LoadedSaveData
 
 extern struct LoadedSaveData gLoadedSaveData[];
 
-extern u16 IdentifyFlash(void);
-extern void gpu_sync_bg_hide();
-
 void CheckForFlashMemory(void)
 {
     if(!IdentifyFlash())
@@ -32,7 +31,7 @@ void CheckForFlashMemory(void)
         gUnknown_3004820 = 0;
 }
 
-u8 GetSecretBase2Field_9(void)
+bool32 GetSecretBase2Field_9(void)
 {
     return gSaveBlock2.specialSaveWarp;
 }
@@ -78,7 +77,7 @@ void LoadPlayerParty(void)
         gPlayerParty[i] = gSaveBlock1.playerParty[i];
 }
 
-void SaveMapObjects(void)
+static void SaveMapObjects(void)
 {
     int i;
     
@@ -86,7 +85,7 @@ void SaveMapObjects(void)
         gSaveBlock1.mapObjects[i] = gMapObjects[i];
 }
 
-void LoadMapObjects(void)
+static void LoadMapObjects(void)
 {
     int i;
     
