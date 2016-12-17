@@ -51,8 +51,7 @@ bool8 MetatileBehavior_IsJumpSouth(u8 var)
 
 bool8 sub_8056E14(u8 var)
 {
-    // that's an awfully complicated way to write (var - 2 < 2).
-    if(((var << 24) + 0xFE000000) >> 24 < 2)
+    if(var == 2 || var == 3)
         return TRUE;
     else
         return FALSE;
@@ -108,8 +107,7 @@ bool8 MetatileBehavior_IsDoor(u8 var)
 
 bool8 MetatileBehavior_IsEscalator(u8 var)
 {
-    // same bad practice as above.
-    if(((var << 24) + 0x96000000) >> 24 < 2)
+    if(var == 0x6A || var == 0x6B)
         return TRUE;
     else
         return FALSE;
@@ -204,7 +202,7 @@ bool8 MetatileBehavior_IsArrowWarp(u8 var)
 
 bool8 sub_8056FFC(u8 var)
 {
-    if((((var << 24) + 0xC0000000) >> 24 < 9) || (u8)(var - 0x50) < 4
+    if((var >= 0x40 && var <= 0x48) || (var >= 0x50 && var <= 0x53)
     || var == 0xD0 || var == 0xD2 || var == 0x13 || var == 0x20 || var == 0xBB || var == 0xBC)
         return TRUE;
     else
@@ -600,7 +598,7 @@ bool8 MetatileBehavior_IsUnusedFootprintMetatile(u8 var)
 
 bool8 MetatileBehavior_IsBridge(u8 var)
 {
-    if(((var << 24) + 0x90000000) >> 24 < 4)
+    if(var >= 0x70 && var <= 0x73)
         return TRUE;
     else
         return FALSE;
@@ -608,7 +606,7 @@ bool8 MetatileBehavior_IsBridge(u8 var)
 
 u8 sub_8057450(u8 var)
 {
-    u8 result = (((var << 24) - 0x70000000) >> 24);
+    u8 result = var - 0x70;
 
     if(result > 3)
         result = 0;
@@ -650,7 +648,7 @@ bool8 sub_80574D8(u8 var)
 
 bool8 sub_80574EC(u8 var)
 {
-    if(((var << 24) + 0xEF000000) >> 24 < 2 || var == 0x14)
+    if(var == 0x11 || var == 0x12 || var == 0x14)
         return TRUE;
     else
         return FALSE;
@@ -810,7 +808,7 @@ bool8 sub_80576DC(u8 var)
 
 bool8 MetatileBehavior_IsPacifidlogLog(u8 var)
 {
-    if(((var << 24) + 0x8C000000) >> 24 < 4)
+    if(var >= 0x74 && var <= 0x77)
         return TRUE;
     else
         return FALSE;
@@ -994,7 +992,7 @@ bool8 MetatileBehavior_IsRunningDisallowed(u8 var)
 
 bool8 sub_80578F8(u8 var)
 {
-    if(((var << 24) + 0xFE000000) >> 24 < 2 || var == 0x24 || var == 0x9)
+    if(var == 0x02 || var == 0x03 || var == 0x24 || var == 0x9)
         return TRUE;
     else
         return FALSE;
