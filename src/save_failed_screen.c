@@ -386,30 +386,31 @@ bool8 sub_81472E4(u16 var)
 }
 
 #ifdef NONMATCHING
-u32 sub_8147324(u16 var)
-{
-	// v1 isnt used. IDA artifact.
-	u32 var32 = 0;
-	u16 i; // v3
-	int var16; // v4
-	
-	for(var32 = 0; var32 < 0x82;)
-	{
-		for(i = 0, var16 = var32++; i < 0x1000; i++)
-			ProgramFlashByte(var, i, 0);
-		
-		var32 = sub_81472E4(var);
-		var16 = (u16)var16;
-		
-		if(var32 == 0)
-			break;
-	}
+bool8 sub_8147324(u16 arg0) {
+    u16 i2;
+    u16 i;
+    bool8 success;
 
-	return var32 + var16;
+    i = 0;
+    while (TRUE) {
+        u32 next;
+
+        i2 = 0;
+        next = i + 1;
+
+        for (; i2 < 0x1000; i2++) {
+            ProgramFlashByte(arg0, i2, 0);
+        }
+
+        if (!(success = sub_81472E4(arg0), (i = next)) || i >= 130) // matches except it checks r0 instead of r1. both are the same value, but the compiler prefers r1 for some reason.
+            break;
+    }
+
+    return success;
 }
 #else
 __attribute__((naked))
-u32 sub_8147324(u16 var)
+bool8 sub_8147324(u16 arg0)
 {
 	asm(".syntax unified\n\
 	push {r4-r7,lr}\n\
@@ -458,52 +459,3 @@ _08147378: .4byte ProgramFlashByte\n\
 	.syntax divided");
 }
 #endif
-
-/*
-	thumb_func_start sub_8147324
-sub_8147324: @ 8147324
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	lsls r0, 16
-	lsrs r6, r0, 16
-	movs r0, 0
-	ldr r1, _08147374 @ =0x00000fff
-	mov r8, r1
-	ldr r7, _08147378 @ =ProgramFlashByte
-_08147336:
-	movs r4, 0
-	adds r5, r0, 0x1
-_0814733A:
-	ldr r3, [r7]
-	adds r0, r6, 0
-	adds r1, r4, 0
-	movs r2, 0
-	bl _call_via_r3
-	adds r0, r4, 0x1
-	lsls r0, 16
-	lsrs r4, r0, 16
-	cmp r4, r8 @ compare i to var.
-	bls _0814733A
-	adds r0, r6, 0
-	bl sub_81472E4
-	lsls r0, 24
-	lsrs r1, r0, 24
-	lsls r0, r5, 16
-	lsrs r0, 16
-	cmp r1, 0
-	beq _08147366
-	cmp r0, 0x81
-	bls _08147336
-_08147366:
-	adds r0, r1, 0 @ add var64 to the result from sub_81472E4(var)?
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_08147374: .4byte 0x00000fff
-_08147378: .4byte ProgramFlashByte
-	thumb_func_end sub_8147324
-*/
