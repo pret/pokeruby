@@ -11,8 +11,6 @@
 
 extern u8 unk_2000000[];
 
-extern u8 sub_814737C(u32);
-
 extern u16 gUnknown_0203933C;
 extern u16 gUnknown_0203933E;
 extern u32 gUnknown_03005EA8;
@@ -40,6 +38,7 @@ void sub_8147154(void);
 void sub_81471A4(void);
 void sub_81471EC(void);
 void sub_8147218(void);
+bool8 sub_814737C(u32);
 
 void fullscreen_save_activate(u8 var)
 {
@@ -459,3 +458,17 @@ _08147378: .4byte ProgramFlashByte\n\
 	.syntax divided");
 }
 #endif
+
+bool8 sub_814737C(u32 var)
+{
+	u16 i;
+	
+	for(i = 0; i < 0x20; i++)
+		if(var & (1 << i) && !sub_8147324(i))
+			var &= ~(1 << i);
+
+	if(var == 0)
+		return FALSE;
+	else
+		return TRUE;
+}
