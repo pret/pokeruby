@@ -6,6 +6,8 @@
 #include "text_window.h"
 #include "sound.h"
 #include "menu_cursor.h"
+#include "map_obj_lock.h"
+#include "script.h"
 
 struct Menu
 {
@@ -40,6 +42,21 @@ EWRAM_DATA u16 gMenuTextWindowContentTileOffset = 0;
 EWRAM_DATA u16 gMenuMessageBoxContentTileOffset = 0;
 
 extern const struct MenuAction gUnknown_08376D74[];
+
+void sub_8071C20(void)
+{
+    PlaySE(SE_SELECT);
+    MenuZeroFillScreen();
+    sub_8064E2C();
+    ScriptContext2_Disable();
+    sub_8072DEC();
+}
+
+void AppendToList(u8 *list, u8 *pindex, u32 value)
+{
+    list[*pindex] = value;
+    (*pindex)++;
+}
 
 void InitMenuWindow(const struct WindowConfig *winConfig)
 {
