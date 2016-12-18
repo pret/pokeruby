@@ -10,12 +10,8 @@
 
 #define SET_SPRITE_TILE_RANGE(index, start, count) \
 {                                                  \
-    u16 *rangeStarts;                              \
-    u16 *rangeCounts;                              \
-    rangeStarts = sSpriteTileRanges;               \
-    rangeStarts[index * 2] = start;                \
-    rangeCounts = sSpriteTileRanges + 1;           \
-    rangeCounts[index * 2] = count;                \
+    sSpriteTileRanges[index * 2] = start;          \
+    (sSpriteTileRanges + 1)[index * 2] = count;    \
 }
 
 #define ALLOC_SPRITE_TILE(n)                             \
