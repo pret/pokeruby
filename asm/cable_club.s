@@ -2066,49 +2066,4 @@ _08083CE8: .4byte gTasks
 _08083CEC: .4byte sub_8083CA4
 	thumb_func_end unref_sub_8083CC8
 
-	thumb_func_start unref_sub_8083CF0
-unref_sub_8083CF0: @ 8083CF0
-	push {r4-r7,lr}
-	ldr r0, _08083D38 @ =0x04000128
-	ldr r4, [r0]
-	lsls r4, 26
-	lsrs r4, 30
-	ldr r0, _08083D3C @ =gUnknown_03004DA0
-	movs r1, 0xFF
-	strb r1, [r0]
-	ldr r1, _08083D40 @ =gUnknown_0839B24A
-	bl StringAppend
-	movs r5, 0
-	ldr r0, _08083D44 @ =word_3002910
-	movs r6, 0x1
-	eors r4, r6
-	lsls r4, 1
-	adds r7, r4, r0
-	movs r4, 0
-_08083D14:
-	ldrh r0, [r7]
-	asrs r0, r5
-	ands r0, r6
-	cmp r0, 0
-	beq _08083D28
-	ldr r1, _08083D48 @ =gUnknown_0839B22C
-	adds r1, r4, r1
-	ldr r0, _08083D3C @ =gUnknown_03004DA0
-	bl StringAppend
-_08083D28:
-	adds r4, 0x3
-	adds r5, 0x1
-	cmp r5, 0x9
-	ble _08083D14
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08083D38: .4byte 0x04000128
-_08083D3C: .4byte gUnknown_03004DA0
-_08083D40: .4byte gUnknown_0839B24A
-_08083D44: .4byte word_3002910
-_08083D48: .4byte gUnknown_0839B22C
-	thumb_func_end unref_sub_8083CF0
-
 	.align 2, 0 @ Don't pad with nop.
