@@ -11,7 +11,7 @@ needs to be decompiled before this.
 
 extern void DisplayItemMessageOnField(u8, u8*, u8*, u16);
 
-extern struct ItemSlot gNewGamePCItems[];
+extern u16 gNewGamePCItems[];
 
 extern u8 InitPlayerPCMenu;
 extern u8 gOtherText_WhatWillYouDo[];
@@ -21,70 +21,19 @@ extern u32 gUnknown_084062B8[];
 extern u32 gUnknown_084062BC[];
 extern u8 gUnknown_030007B4[][2];
 
-// this function is insane. It functionally matches, but the compiler is extremely insistent on gNewGamePCItems going in r5 instead of r1.
-#ifdef NONMATCHING
 void NewGameInitPCItems(void)
 {
-	u8 i = 0;
+    u8 i = 0;
 
-	ClearItemSlots(gSaveBlock1.pcItems, 0x32);
-	
-	for(;gNewGamePCItems[i].itemId && gNewGamePCItems[i].quantity; i++)
-		if(AddPCItem(gNewGamePCItems[i].itemId, gNewGamePCItems[i].quantity) != 1)
-			return;
+    ClearItemSlots(gSaveBlock1.pcItems, 0x32);
+
+    while (gNewGamePCItems[i * 2] && (gNewGamePCItems + 1)[i * 2])
+    {
+        if(AddPCItem(gNewGamePCItems[i * 2], (gNewGamePCItems + 1)[i * 2]) != 1)
+            break;
+        i++;
+    }
 }
-#else
-__attribute__((naked))
-void NewGameInitPCItems(void)
-{
-	asm(".syntax unified\n\
-	push {r4-r6,lr}\n\
-	movs r4, 0\n\
-	ldr r0, _08139C6C @ =gSaveBlock1 + 0x498\n\
-	movs r1, 0x32\n\
-	bl ClearItemSlots\n\
-	ldr r1, _08139C70 @ =gNewGamePCItems\n\
-	ldrh r0, [r1]\n\
-	cmp r0, 0\n\
-	beq _08139C64\n\
-	ldrh r0, [r1, 0x2]\n\
-	cmp r0, 0\n\
-	beq _08139C64\n\
-	adds r5, r1, 0\n\
-	adds r6, r5, 0x2\n\
-_08139C36:\n\
-	lsls r1, r4, 2\n\
-	adds r0, r1, r5\n\
-	ldrh r0, [r0]\n\
-	adds r1, r6\n\
-	ldrh r1, [r1]\n\
-	bl AddPCItem\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, 0x1\n\
-	bne _08139C64\n\
-	adds r0, r4, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r4, r0, 24\n\
-	lsls r1, r4, 2\n\
-	adds r0, r1, r5\n\
-	ldrh r0, [r0]\n\
-	cmp r0, 0\n\
-	beq _08139C64\n\
-	adds r0, r1, r6\n\
-	ldrh r0, [r0]\n\
-	cmp r0, 0\n\
-	bne _08139C36\n\
-_08139C64:\n\
-	pop {r4-r6}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_08139C6C: .4byte gSaveBlock1 + 0x498\n\
-_08139C70: .4byte gNewGamePCItems\n\
-	.syntax divided");
-}
-#endif
 
 void BedroomPC(void)
 {
