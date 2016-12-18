@@ -6,59 +6,6 @@
 
 	.text
 
-	thumb_func_start InitPlayerPCMenu
-InitPlayerPCMenu: @ 8139CF4
-	push {r4,r5,lr}
-	sub sp, 0x8
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	ldr r5, _08139D50 @ =gUnknown_030007B4
-	ldrb r3, [r5]
-	lsls r3, 1
-	adds r3, 0x1
-	lsls r3, 24
-	lsrs r3, 24
-	movs r0, 0
-	movs r1, 0
-	movs r2, 0xA
-	bl MenuDrawTextWindow
-	ldrb r2, [r5]
-	ldr r3, _08139D54 @ =gUnknown_08406298
-	ldr r0, _08139D58 @ =gUnknown_02039314
-	ldr r0, [r0]
-	str r0, [sp]
-	movs r0, 0x1
-	movs r1, 0x1
-	bl PrintMenuItemsReordered
-	ldrb r3, [r5]
-	movs r0, 0
-	str r0, [sp]
-	movs r0, 0x9
-	str r0, [sp, 0x4]
-	movs r0, 0
-	movs r1, 0x1
-	movs r2, 0x1
-	bl InitMenu
-	ldr r1, _08139D5C @ =gTasks
-	lsls r0, r4, 2
-	adds r0, r4
-	lsls r0, 3
-	adds r0, r1
-	ldr r1, _08139D60 @ =PlayerPCProcessMenuInput
-	str r1, [r0]
-	add sp, 0x8
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_08139D50: .4byte gUnknown_030007B4
-_08139D54: .4byte gUnknown_08406298
-_08139D58: .4byte gUnknown_02039314
-_08139D5C: .4byte gTasks
-_08139D60: .4byte PlayerPCProcessMenuInput
-	thumb_func_end InitPlayerPCMenu
-
 	thumb_func_start PlayerPCProcessMenuInput
 PlayerPCProcessMenuInput: @ 8139D64
 	push {r4,r5,lr}
