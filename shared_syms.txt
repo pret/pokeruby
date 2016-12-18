@@ -16,6 +16,8 @@ unk_2016800 = 0x2016800;
 unk_2016A00 = 0x2016A00;
 unk_2016C00 = 0x2016C00;
 
+unk_201FE00 = 0x201FE00;
+
 gSecretBaseRecord = 0x2017000;
 
 dword_2017100 = 0x2017100;

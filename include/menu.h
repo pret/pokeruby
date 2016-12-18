@@ -6,7 +6,7 @@
 struct MenuAction
 {
    u8 *text;
-   u8 (*func)(void);
+   u8 (*func)();
 };
 
 void InitMenuWindow(const struct WindowConfig *);
