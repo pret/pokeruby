@@ -72,6 +72,7 @@ SECTIONS {
         src/field_door.o(.text);
         src/field_player_avatar.o(.text);
         asm/field_map_obj.o(.text);
+        src/field_ground_effect.o(.text);
         asm/field_ground_effect.o(.text);
         src/map_obj_80643A4.o(.text);
         src/field_message_box.o(.text);
