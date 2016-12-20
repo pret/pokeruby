@@ -1,6 +1,8 @@
 #include "global.h"
 #include "asm_fieldmap.h"
 
+extern u32 gUnknown_08376008[];
+
 void FieldObjectUpdateMetatileBehaviors(struct MapObject *);
 void GetGroundEffectFlags_Reflection(struct MapObject *, u32 *);
 void GetGroundEffectFlags_TallGrassOnSpawn(struct MapObject *, u32 *);
@@ -16,6 +18,7 @@ void GetGroundEffectFlags_ShortGrass(struct MapObject *, u32 *);
 void GetGroundEffectFlags_HotSprings(struct MapObject *, u32 *);
 void GetGroundEffectFlags_Seaweed(struct MapObject *, u32 *);
 void GetGroundEffectFlags_JumpLanding(struct MapObject *, u32 *);
+u8 FieldObjectCheckForReflectiveSurface(struct MapObject *);
 
 void GetAllGroundEffectFlags_OnSpawn(struct MapObject *mapObj, u32 *flags)
 {
@@ -60,4 +63,26 @@ void FieldObjectUpdateMetatileBehaviors(struct MapObject *mapObj)
 {
     mapObj->mapobj_unk_1F = MapGridGetMetatileBehaviorAt(mapObj->coords3.x, mapObj->coords3.y);
     mapObj->mapobj_unk_1E = MapGridGetMetatileBehaviorAt(mapObj->coords2.x, mapObj->coords2.y);
+}
+
+void GetGroundEffectFlags_Reflection(struct MapObject *mapObj, u32 *flags)
+{
+    u32 reflectionFlags[2] = { 0x00000020, 0x00000010 };
+    u8 type;
+
+    type = FieldObjectCheckForReflectiveSurface(mapObj);
+
+    if (type)
+    {
+        if (!mapObj->mapobj_bit_17)
+        {
+            mapObj->mapobj_bit_17 = 0;
+            mapObj->mapobj_bit_17 = 1;
+            *flags |= reflectionFlags[type - 1];
+        }
+    }
+    else
+    {
+        mapObj->mapobj_bit_17 = 0;
+    }
 }

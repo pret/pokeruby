@@ -257,6 +257,9 @@ SECTIONS {
         src/link.o(.rodata);
         src/rtc.o(.rodata);
         data/data2.o(.rodata);
+        src/field_ground_effect.o(.rodata);
+        data/field_ground_effect.o(.rodata);
+        data/data_83760F0.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);
     } =0

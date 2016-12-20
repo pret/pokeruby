@@ -6,56 +6,6 @@
 
 	.text
 
-	thumb_func_start GetGroundEffectFlags_Reflection
-GetGroundEffectFlags_Reflection: @ 8063708
-	push {r4,r5,lr}
-	sub sp, 0x8
-	adds r4, r0, 0
-	adds r5, r1, 0
-	ldr r0, _0806374C @ =gUnknown_08376008
-	ldr r1, [r0, 0x4]
-	ldr r0, [r0]
-	str r0, [sp]
-	str r1, [sp, 0x4]
-	adds r0, r4, 0
-	bl FieldObjectCheckForReflectiveSurface
-	lsls r0, 24
-	lsrs r2, r0, 24
-	cmp r2, 0
-	beq _08063750
-	ldrb r1, [r4, 0x2]
-	lsls r0, r1, 30
-	cmp r0, 0
-	blt _0806375A
-	movs r0, 0x3
-	negs r0, r0
-	ands r0, r1
-	movs r1, 0x2
-	orrs r0, r1
-	strb r0, [r4, 0x2]
-	subs r0, r2, 0x1
-	lsls r0, 2
-	add r0, sp
-	ldr r1, [r5]
-	ldr r0, [r0]
-	orrs r1, r0
-	str r1, [r5]
-	b _0806375A
-	.align 2, 0
-_0806374C: .4byte gUnknown_08376008
-_08063750:
-	ldrb r1, [r4, 0x2]
-	movs r0, 0x3
-	negs r0, r0
-	ands r0, r1
-	strb r0, [r4, 0x2]
-_0806375A:
-	add sp, 0x8
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end GetGroundEffectFlags_Reflection
-
 	thumb_func_start GetGroundEffectFlags_TallGrassOnSpawn
 GetGroundEffectFlags_TallGrassOnSpawn: @ 8063764
 	push {r4,lr}
