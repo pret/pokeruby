@@ -3303,8 +3303,10 @@ gSpriteAffineAnimTable_8393184:: @ 8393184
 gSpriteTemplate_8393188:: @ 8393188
 	spr_template 10004, 10004, gOamData_837DFEC, gSpriteAnimTable_8393168, NULL, gSpriteAffineAnimTable_8393184, sub_807A544
 
+	.string "TASK OVER\n"
+	.string "タスクがオーバーしました$"
+
 	.align 2
-	.incbin "baserom.gba", 0x003931a0, 0x18
 Unknown_083931B8:
 	.incbin "baserom.gba", 0x003931b8, 0x20
 
