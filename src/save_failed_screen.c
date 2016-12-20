@@ -288,13 +288,13 @@ void sub_8147218(void)
 	orrs r0, r1\n\
 	strh r0, [r2, 0x3E]\n\
 	mov r1, r12\n\
-	adds r1, 0x3C\n\
-	@.if REVISION >= 1\n\
-	@movs r0, 0x38\n\
-	@.else\n\
-	movs r0, 0x48\n\
-	@.endif\n\
-	strb r0, [r1]\n\
+	adds r1, 0x3C\n"
+#if REVISION >= 1
+	"movs r0, 0x38\n"
+#else
+	"movs r0, 0x48\n"
+#endif
+	"strb r0, [r1]\n\
 	ldr r0, _0814729C @ =gUnknown_0203933E\n\
 	ldrh r0, [r0]\n\
 	cmp r0, 0\n\
