@@ -257,6 +257,12 @@ SECTIONS {
         src/link.o(.rodata);
         src/rtc.o(.rodata);
         data/data2.o(.rodata);
+        data/trade.o(.rodata);
+        data/berry_blender.o(.rodata);
+        src/new_game.o(.rodata);
+        data/rom4.o(.rodata);
+        data/tilesets.o(.rodata);
+        data/maps.o(.rodata);
         src/fieldmap.o(.rodata);
         data/metatile_behavior.o(.rodata);
         data/field_door.o(.rodata);
