@@ -30,6 +30,7 @@
 #include "var.h"
 #include "weather.h"
 #include "wild_encounter.h"
+#include "metatile_behavior.h"
 
 #ifdef SAPPHIRE
 #define LEGENDARY_MUSIC BGM_OOAME  // Heavy Rain

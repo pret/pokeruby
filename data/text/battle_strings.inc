@@ -1113,19 +1113,20 @@ BattleText_SafariBallsLeft:
 gUnknown_08400DF0:: @ 8400DF0
 BattleText_HighlightRed:
 	.string "{HIGHLIGHT RED}$"
-BattleText_Sleep:
+
+BattleText_Sleep::
 	.string "sleep$"
-BattleText_PoisonStatus:
+BattleText_PoisonStatus::
 	.string "poison$"
-BattleText_Burn:
+BattleText_Burn::
 	.string "burn$"
-BattleText_Paralysis:
+BattleText_Paralysis::
 	.string "paralysis$"
-BattleText_IceStatus:
+BattleText_IceStatus::
 	.string "ice$"
-BattleText_Confusion:
+BattleText_Confusion::
 	.string "confusion$"
-BattleText_Love:
+BattleText_Love::
 	.string "love$"
 
 gUnknown_08400E23:: @ 8400E23

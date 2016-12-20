@@ -5,9 +5,9 @@ extern u8 gUnknown_08308E2C[];
 
 bool8 MetatileBehavior_IsWaterfall(u8);
 
-s8 sub_8056D9C(void)
+bool8 sub_8056D9C(u8 var)
 {
-    return 1;
+    return TRUE;
 }
 
 bool8 sub_8056DA0(u8 var)

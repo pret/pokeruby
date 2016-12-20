@@ -5,9 +5,15 @@
 #include "menu.h"
 #include "main.h"
 #include "string_util.h"
+#include "link.h"
 
+#define SIO_MULTI_CNT ((struct SioMultiCnt *)REG_ADDR_SIOCNT)
+
+extern u8 gUnknown_03004DA0[];
 extern u8 (*gCallback_03004AE8)(void);
 
+extern u8 gUnknown_0839B22C[][3];
+extern u8 gUnknown_0839B24A[];
 extern u8 gUnknown_0839B24D[];
 extern u8 gUnknown_0839B255[];
 extern u8 gUnknown_0839B257[];
@@ -15,6 +21,17 @@ extern u8 gUnknown_0839B257[];
 extern const struct MenuAction gMoriDebugMenuActions[];
 
 extern u8 gSpeciesNames[][11];
+
+void unref_sub_8083CF0(void)
+{
+    int i;
+    int id = SIO_MULTI_CNT->id;
+    gUnknown_03004DA0[0] = EOS;
+    StringAppend(gUnknown_03004DA0, gUnknown_0839B24A);
+    for (i = 0; i < 10; i++)
+        if ((word_3002910[id ^ 1] >> i) & 1)
+            StringAppend(gUnknown_03004DA0, gUnknown_0839B22C[i]);
+}
 
 bool8 sub_8083D4C(void)
 {

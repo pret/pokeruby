@@ -72,6 +72,7 @@ SECTIONS {
         src/field_door.o(.text);
         src/field_player_avatar.o(.text);
         asm/field_map_obj.o(.text);
+        src/field_ground_effect.o(.text);
         asm/field_ground_effect.o(.text);
         src/map_obj_80643A4.o(.text);
         src/field_message_box.o(.text);
@@ -113,6 +114,8 @@ SECTIONS {
         src/trainer_card.o(.text);
         src/save_menu_util.o(.text);
         asm/rom_8094928.o(.text);
+        asm/fldeff_cut.o(.text);
+        asm/rom_80A2B18.o(.text);
         asm/item_menu.o(.text);
         asm/battle_anim_80A7E7C.o(.text);
         src/item.o(.text);
@@ -254,6 +257,14 @@ SECTIONS {
         src/link.o(.rodata);
         src/rtc.o(.rodata);
         data/data2.o(.rodata);
+        src/fieldmap.o(.rodata);
+        data/metatile_behavior.o(.rodata);
+        data/field_door.o(.rodata);
+        data/field_player_avatar.o(.rodata);
+        data/field_map_obj.o(.rodata);
+        src/field_ground_effect.o(.rodata);
+        data/field_ground_effect.o(.rodata);
+        data/data_83760F0.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);
     } =0

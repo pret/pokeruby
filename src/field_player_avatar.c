@@ -14,6 +14,7 @@
 #include "field_effect.h"
 #include "wild_encounter.h"
 #include "asm_fieldmap.h"
+#include "metatile_behavior.h"
 
 extern u8 gOtherText_OhABite[];
 extern u8 gOtherText_PokeOnHook[];

@@ -20,6 +20,7 @@
 #include "field_message_box.h"
 #include "trainer.h"
 #include "starter_choose.h"
+#include "metatile_behavior.h"
 
 #define NUM_TRAINER_EYE_TRAINERS 56
 #define TRAINER_REMATCH_STEPS 255

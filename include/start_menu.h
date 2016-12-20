@@ -17,7 +17,5 @@ u8 StartMenu_RetireCallback(void);
 u8 StartMenu_PlayerLinkCallback(void);
 void InitSaveDialog(void);
 void sub_8071B28(void);
-void sub_8071C20(void);
-void AppendToList(u8 *list, u8 *pindex, u32 value);
 
 #endif // GUARD_STARTER_CHOOSE_H

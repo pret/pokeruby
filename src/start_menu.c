@@ -832,18 +832,3 @@ static void Task_8071B64(u8 taskId)
         }
     }
 }
-
-void sub_8071C20(void)
-{
-    PlaySE(SE_SELECT);
-    MenuZeroFillScreen();
-    sub_8064E2C();
-    ScriptContext2_Disable();
-    sub_8072DEC();
-}
-
-void AppendToList(u8 *list, u8 *pindex, u32 value)
-{
-    list[*pindex] = value;
-    (*pindex)++;
-}
