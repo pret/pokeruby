@@ -42,7 +42,7 @@ EWRAM_DATA struct MapHeader gMapHeader = {0};
 EWRAM_DATA struct Camera gUnknown_0202E844 = {0};
 EWRAM_DATA static struct ConnectionFlags gUnknown_0202E850 = {0};
 
-extern const struct ConnectionFlags gUnknown_08308E28;
+static const struct ConnectionFlags sDummyConnectionFlags = {0};
 
 void mapheader_copy_mapdata_with_padding(struct MapHeader *mapHeader);
 void sub_80560AC(struct MapHeader *);
@@ -112,7 +112,7 @@ void sub_80560AC(struct MapHeader *mapHeader) {
 	int count;
 	count = mapHeader->connections->count;
 	connection = mapHeader->connections->connections;
-	gUnknown_0202E850 = gUnknown_08308E28;
+	gUnknown_0202E850 = sDummyConnectionFlags;
 	for (i = 0; i < count; i++, connection++) {
 		cMap = mapconnection_get_mapheader(connection);
 		offset = connection->offset;
