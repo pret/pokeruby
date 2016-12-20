@@ -3,28 +3,6 @@
 
 	.section .rodata
 
-@ Functions used to determine which category of tile the player is landing
-@ on after jumping over a ledge.
-	.align 2
-gJumpLanding_MetatileFunctionPointers:: @ 8376010
-	.4byte MetatileBehavior_IsTallGrass
-	.4byte MetatileBehavior_IsLongGrass
-	.4byte MetatileBehavior_IsPuddle
-	.4byte MetatileBehavior_IsSurfableWaterOrUnderwater
-	.4byte MetatileBehavior_IsShallowFlowingWater
-	.4byte sub_8056D9C
-
-@ This table contains bitmasks used for determining the animation that happens when the player lands on
-@ the ground after jumping over a ledge. Each entry corresponds to the gJumpLanding_MetatileFunctionPointers table.
-	.align 2
-gJumpLanding_Bitmasks:: @ 8376028
-	.4byte 0x00001000  @ Landing in tall grass
-	.4byte 0x00002000  @ Landing in long grass
-	.4byte 0x00004000  @ Landing on puddle
-	.4byte 0x00008000  @ Landing on surfable water or underwater
-	.4byte 0x00004000  @ Landing on shallow flowing water
-	.4byte 0x00010000  @ Landing on any other type of ground
-
 	.align 2
 gUnknown_08376040:: @ 8376040
 	.4byte MetatileBehavior_IsJumpSouth

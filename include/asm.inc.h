@@ -37,30 +37,6 @@ void CreatePokeballSprite(u8 r0, u8 r1, u8 r2, u8 r3, u8 s1, u8 s2, u8 s3, u16 s
 // asm/berry_blender.o
 void sub_80516C4(u8, u16);
 
-// asm/metatile_behavior.o
-bool8 MetatileBehavior_IsSandOrDeepSand(char);
-bool8 is_tile_x69_2_warp_door(u8);
-u8 MetatileBehavior_IsDoor(u8);
-bool8 MetatileBehavior_IsLadder(u8);
-u8 sub_8056F08(u8);
-bool8 sub_8056F24(u8);
-u8 MetatileBehavior_IsSurfableWaterOrUnderwater(u8);
-bool8 MetatileBehavior_IsEastArrowWarp(u8);
-bool8 MetatileBehavior_IsWestArrowWarp(u8);
-bool8 MetatileBehavior_IsNorthArrowWarp(u8);
-bool8 MetatileBehavior_IsSouthArrowWarp(u8);
-bool8 MetatileBehavior_IsTallGrass(char);
-bool8 MetatileBehavior_IsLongGrass(char);
-u8 MetatileBehavior_IsBridge(u8);
-u8 sub_8057450(u8);
-u8 MetatileBehavior_IsLandWildEncounter(u8);
-u8 MetatileBehavior_IsWaterWildEncounter(u8);
-bool8 sub_80574C4(char);
-bool8 sub_80574D8(char);
-bool8 sub_8057568(char);
-bool8 sub_805759C(u8);
-bool8 MetatileBehavior_IsSurfableFishableWater(u8);
-
 // src/field_door.o
 void FieldSetDoorOpened(u32, u32);
 void FieldSetDoorClosed(u32, u32);

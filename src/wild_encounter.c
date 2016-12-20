@@ -11,6 +11,7 @@
 #include "var.h"
 #include "rom4.h"
 #include "vars.h"
+#include "metatile_behavior.h"
 
 struct WildPokemon
 {
