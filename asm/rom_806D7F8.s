@@ -19,7 +19,7 @@ sub_806D7F8: @ 806D7F8
 	asrs r2, 16
 	adds r0, r1, 0
 	adds r1, r2, 0
-	bl sub_8046200
+	bl GetHPBarLevel
 	lsls r0, 24
 	lsrs r0, 24
 	movs r2, 0
@@ -1812,7 +1812,7 @@ sub_806E574: @ 806E574
 	asrs r3, 16
 	adds r0, r2, 0
 	adds r1, r3, 0
-	bl sub_8046200
+	bl GetHPBarLevel
 	lsls r0, 24
 	lsrs r3, r0, 24
 	adds r4, r3, 0
@@ -4082,7 +4082,7 @@ sub_806F7E8: @ 806F7E8
 	adds r0, r6, r2
 	movs r4, 0
 	ldrsh r0, [r0, r4]
-	bl sub_8046200
+	bl GetHPBarLevel
 	lsls r0, 24
 	lsrs r2, r0, 24
 	adds r3, r2, 0

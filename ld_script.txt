@@ -60,6 +60,7 @@ SECTIONS {
         asm/daycare.o(.text);
         asm/egg_hatch.o(.text);
         asm/rom_804373C.o(.text);
+        asm/smokescreen.o(.text);
         asm/pokeball.o(.text);
         src/load_save.o(.text);
         asm/trade.o(.text);

@@ -53325,7 +53325,7 @@ atkAC_remaininghptopower: @ 8028600
 	movs r2, 0x2C
 	ldrsh r1, [r1, r2]
 	movs r2, 0x30
-	bl sub_80461D4
+	bl GetScaledHPFraction
 	lsls r0, 24
 	lsrs r1, r0, 24
 	movs r3, 0
@@ -72968,7 +72968,7 @@ sub_80324F8: @ 80324F8
 	lsls r1, 16
 	asrs r1, 16
 	adds r0, r4, 0
-	bl sub_8046200
+	bl GetHPBarLevel
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -73098,7 +73098,7 @@ unref_sub_8032604: @ 8032604
 	lsls r1, 16
 	asrs r1, 16
 	adds r0, r4, 0
-	bl sub_8046200
+	bl GetHPBarLevel
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
