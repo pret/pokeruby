@@ -60,6 +60,7 @@ SECTIONS {
         asm/daycare.o(.text);
         asm/egg_hatch.o(.text);
         asm/rom_804373C.o(.text);
+        asm/pokeball.o(.text);
         src/load_save.o(.text);
         asm/trade.o(.text);
         asm/berry_blender.o(.text);
@@ -257,6 +258,7 @@ SECTIONS {
         src/link.o(.rodata);
         src/rtc.o(.rodata);
         data/data2.o(.rodata);
+        data/pokeball.o(.rodata);
         data/trade.o(.rodata);
         data/berry_blender.o(.rodata);
         src/new_game.o(.rodata);
