@@ -5,7 +5,7 @@
 	.syntax unified
 
 	.text
-	
+
 	thumb_func_start BattleAICmd_if_status_in_party
 BattleAICmd_if_status_in_party: @ 8108964
 	push {r4-r7,lr}
