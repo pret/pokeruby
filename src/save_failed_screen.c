@@ -385,80 +385,23 @@ bool8 sub_81472E4(u16 var)
 	return FALSE;
 }
 
-#ifdef NONMATCHING
-bool8 sub_8147324(u16 arg0) {
-    u16 i2;
-    u16 i;
-    bool8 success;
+bool8 sub_8147324(u16 arg0)
+{
+    u16 i, j;
+    bool8 success = TRUE;
 
-    i = 0;
-    while (TRUE) {
-        u32 next;
-
-        i2 = 0;
-        next = i + 1;
-
-        for (; i2 < 0x1000; i2++) {
-            ProgramFlashByte(arg0, i2, 0);
+    for (i = 0; success && i < 130; i++)
+    {
+        for (j = 0; j < 0x1000; j++)
+        {
+            ProgramFlashByte(arg0, j, 0);
         }
 
-        if (!(success = sub_81472E4(arg0), (i = next)) || i >= 130) // matches except it checks r0 instead of r1. both are the same value, but the compiler prefers r1 for some reason.
-            break;
+        success = sub_81472E4(arg0);
     }
 
     return success;
 }
-#else
-__attribute__((naked))
-bool8 sub_8147324(u16 arg0)
-{
-	asm(".syntax unified\n\
-	push {r4-r7,lr}\n\
-	mov r7, r8\n\
-	push {r7}\n\
-	lsls r0, 16\n\
-	lsrs r6, r0, 16\n\
-	movs r0, 0\n\
-	ldr r1, _08147374 @ =0x00000fff\n\
-	mov r8, r1\n\
-	ldr r7, _08147378 @ =ProgramFlashByte\n\
-_08147336:\n\
-	movs r4, 0\n\
-	adds r5, r0, 0x1\n\
-_0814733A:\n\
-	ldr r3, [r7]\n\
-	adds r0, r6, 0\n\
-	adds r1, r4, 0\n\
-	movs r2, 0\n\
-	bl _call_via_r3\n\
-	adds r0, r4, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r4, r0, 16\n\
-	cmp r4, r8 @ compare i to var.\n\
-	bls _0814733A\n\
-	adds r0, r6, 0\n\
-	bl sub_81472E4\n\
-	lsls r0, 24\n\
-	lsrs r1, r0, 24\n\
-	lsls r0, r5, 16\n\
-	lsrs r0, 16\n\
-	cmp r1, 0\n\
-	beq _08147366\n\
-	cmp r0, 0x81\n\
-	bls _08147336\n\
-_08147366:\n\
-	adds r0, r1, 0 @ add var64 to the result from sub_81472E4(var)?\n\
-	pop {r3}\n\
-	mov r8, r3\n\
-	pop {r4-r7}\n\
-	pop {r1}\n\
-	bx r1\n\
-	.align 2, 0\n\
-_08147374: .4byte 0x00000fff\n\
-_08147378: .4byte ProgramFlashByte\n\
-	.syntax divided");
-}
-#endif
 
 bool8 sub_814737C(u32 var)
 {
