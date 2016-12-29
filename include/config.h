@@ -12,4 +12,7 @@
 // European editions of Ruby/Sapphire and all editions of Emerald have this fix.
 // #define BUGFIX_TRAINERAPPROACH
 
+// Fixed in Emerald.
+// #define BUGFIX_SETMONIVS
+
 #endif // GUARD_CONFIG_H
