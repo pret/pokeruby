@@ -2,10 +2,7 @@
 #define GUARD_GLOBAL_H
 
 #include "gba/gba.h"
-
-#ifndef REVISION
-#define REVISION 0
-#endif
+#include "config.h"
 
 // Prevent cross-jump optimization.
 #define BLOCK_CROSS_JUMP asm("");

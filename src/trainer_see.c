@@ -20,7 +20,7 @@ extern u32 gUnknown_0202FF84[];
 bool8 CheckTrainers(void)
 {
     u8 i;
-    
+
     for(i = 0; i < 16; i++)
     {
         if ( gMapObjects[i].active )
@@ -60,7 +60,7 @@ bool8 TrainerCanApproachPlayer(struct MapObject *trainerObj)
     s16 x, y;
     u8 i;
     u8 playerCoord;
-    
+
     PlayerGetDestCoords(&x, &y);
     if ( trainerObj->trainerType == 1 ) // trainers that don't spin
     {
@@ -119,6 +119,12 @@ bool8 IsTrainerInRangeEast(struct MapObject *trainerObj, s16 vision, s16 x, s16 
         return FALSE;
 }
 
+#ifdef BUGFIX_TRAINERAPPROACH
+#define COLLISION_MASK ~1
+#else
+#define COLLISION_MASK 1
+#endif
+
 bool8 CheckPathBetweenTrainerAndPlayer(struct MapObject2 *trainerObj, u8 playerCoord, u8 direction)
 {
     s16 x, y;
@@ -127,21 +133,18 @@ bool8 CheckPathBetweenTrainerAndPlayer(struct MapObject2 *trainerObj, u8 playerC
     u8 i;
     u8 var;
 
-    if ( !playerCoord )
+    if (!playerCoord)
         return FALSE;
 
     x = trainerObj->coords2.x;
     y = trainerObj->coords2.y;
 
-    for(i = 0; i <= playerCoord - 1;)
+    for (i = 0; i <= playerCoord - 1; i++, MoveCoords(direction, &x, &y))
     {
         var = sub_8060024((struct MapObject *)trainerObj, x, y, direction);
 
-        if (var != 0 && (var & 1) != 0 )
+        if (var && (var & COLLISION_MASK))
             return FALSE;
-
-        i++;
-        MoveCoords(direction, &x, &y);
     }
 
     // preserve mapobj_unk_19 before clearing.
@@ -154,7 +157,7 @@ bool8 CheckPathBetweenTrainerAndPlayer(struct MapObject2 *trainerObj, u8 playerC
 
     trainerObj->mapobj_unk_19 = unk19_temp;
     trainerObj->mapobj_unk_19b = unk19b_temp;
-    if ( var == 4 )
+    if (var == 4)
         return playerCoord;
 
     return FALSE;
@@ -173,7 +176,7 @@ void sub_80842FC(TaskFunc func)
 {
     TaskFunc func2 = RunTrainerSeeFuncList;
     u8 taskId = FindTaskIdByFunc(func2);
-    
+
     SetTaskFuncWithFollowupFunc(taskId, RunTrainerSeeFuncList, func);
     gTasks[taskId].data[0] = 1;
     func2(taskId);
@@ -201,7 +204,7 @@ s8 sub_8084398(u8 taskId, struct Task *task, struct MapObject *trainerObj)
 
     FieldObjectGetLocalIdAndMap(trainerObj, (u8 *)&gUnknown_0202FF84[0], (u8 *)&gUnknown_0202FF84[1], (u8 *)&gUnknown_0202FF84[2]);
     FieldEffectStart(0);
-    
+
     direction = GetFaceDirectionAnimId(trainerObj->mapobj_unk_18);
 
     FieldObjectSetSpecialAnim(trainerObj, direction);
@@ -267,17 +270,17 @@ s8 sub_8084478(u8 taskId, struct Task *task, struct MapObject *trainerObj)
 s8 sub_8084534(u8 taskId, struct Task *task, struct MapObject *trainerObj) // technically only 1 parameter, but needs all 3 for TrainerSeeFuncList call.
 {
     struct MapObject *playerObj = &gMapObjects[gPlayerAvatar.mapObjectId];
-    
+
     if ( !FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(playerObj)
         || FieldObjectClearAnimIfSpecialAnimFinished(playerObj) )
     SwitchTaskToFollowupFunc(taskId);
-    
+
     return 0;
 }
 
 s8 sub_8084578(u8 taskId, struct Task *task, struct MapObject *trainerObj)
 {
-    if(!FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(trainerObj) 
+    if(!FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(trainerObj)
         || FieldObjectClearAnimIfSpecialAnimFinished(trainerObj))
     {
         FieldObjectSetSpecialAnim(trainerObj, 0x59);
@@ -290,13 +293,13 @@ s8 sub_80845AC(u8 taskId, struct Task *task, struct MapObject *trainerObj)
 {
     if ( FieldObjectClearAnimIfSpecialAnimFinished(trainerObj) )
         task->data[0] = 3;
-    
+
     return 0;
 }
 
 s8 sub_80845C8(u8 taskId, struct Task *task, struct MapObject *trainerObj)
 {
-    if(!FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(trainerObj) 
+    if(!FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(trainerObj)
         || FieldObjectClearAnimIfSpecialAnimFinished(trainerObj))
     {
         FieldObjectSetSpecialAnim(trainerObj, 0x3E);
@@ -327,7 +330,7 @@ s8 sub_8084654(u8 taskId, struct Task *task, struct MapObject *trainerObj)
     {
         trainerObj->mapobj_bit_26 = 0;
         trainerObj->mapobj_bit_2 = 1;
-        
+
         sprite = &gSprites[trainerObj->spriteId];
         sprite->oam.priority = 2;
         FieldObjectClearAnimIfSpecialAnimFinished(trainerObj);
