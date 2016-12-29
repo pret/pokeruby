@@ -83,7 +83,6 @@ void sub_80B79F8(u8 *buffer, u32 arg1, u8 arg2) {
     buffer[3] = EOS;
 }
 
-#ifdef NONMATCHING
 void sub_80B7A94(u32 arg0, u8 size, u8 x, u8 y) {
     u8 buffer[16];
     u8 stringWidth;
@@ -91,64 +90,14 @@ void sub_80B7A94(u32 arg0, u8 size, u8 x, u8 y) {
     sub_80B79F8(buffer, arg0, size);
     stringWidth = sub_8072CA4(buffer);
 
-    if (stringWidth >= (size + 1) * 8) {
+    if (stringWidth >= (size + 1) * 8)
         MenuPrint(buffer, x, y);
-    } else {
-        u8 pixelX = (size + 1) * 8 - stringWidth;
-        MenuPrint_PixelCoords(buffer, pixelX, y * 8, 1);
+    else
+    {
+        int xPlusOne = x + 1;
+        MenuPrint_PixelCoords(buffer, (xPlusOne + size) * 8 - stringWidth, y * 8, 1);
     }
 }
-#else
-
-__attribute__((naked))
-void sub_80B7A94(u32 arg0, u8 arg1, u8 x, u8 y) {
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    sub sp, 0x10\n\
-    adds r4, r0, 0\n\
-    lsls r1, 24\n\
-    lsrs r5, r1, 24\n\
-    lsls r2, 24\n\
-    lsrs r6, r2, 24\n\
-    lsls r3, 24\n\
-    lsrs r7, r3, 24\n\
-    mov r0, sp\n\
-    adds r1, r4, 0\n\
-    adds r2, r5, 0\n\
-    bl sub_80B79F8\n\
-    mov r0, sp\n\
-    bl sub_8072CA4\n\
-    lsls r0, 24\n\
-    lsrs r2, r0, 24\n\
-    adds r0, r5, 0x1\n\
-    lsls r0, 3\n\
-    cmp r2, r0\n\
-    blt _080B7ACE\n\
-    mov r0, sp\n\
-    adds r1, r6, 0\n\
-    adds r2, r7, 0\n\
-    bl MenuPrint\n\
-    b _080B7AE4\n\
-_080B7ACE:\n\
-    adds r1, r6, 0x1\n\
-    adds r1, r5\n\
-    lsls r1, 3\n\
-    subs r1, r2\n\
-    lsls r1, 24\n\
-    lsrs r1, 24\n\
-    lsls r2, r7, 3\n\
-    mov r0, sp\n\
-    movs r3, 0x1\n\
-    bl MenuPrint_PixelCoords\n\
-_080B7AE4:\n\
-    add sp, 0x10\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .syntax divided\n");
-}
-
-#endif
 
 void sub_80B7AEC(u32 arg0, u8 left, u8 top) {
     u8 buffer[32];

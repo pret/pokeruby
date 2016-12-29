@@ -12,7 +12,7 @@
 
 // In 1.0, the text window is too small, causing text to overflow.
 
-#if (REVISION >= 1)
+#ifdef BUGFIX_SAVEFAILEDSCREEN
 #define MSG_WIN_TOP 10
 #else
 #define MSG_WIN_TOP 12
@@ -52,29 +52,32 @@ extern const u8 gSaveFailedClockGfx[];
 extern const u8 gSaveFailedClockPal[];
 extern u8 gBirchBagGrassPal[];
 
-void sub_8146E50(void);
-void sub_8147048(void);
-void sub_8147154(void);
-void sub_81471A4(void);
-void sub_81471EC(void);
-void sub_8147218(void);
-bool8 sub_814737C(u32);
+static void VBlankCB(void);
+static void CB2_SaveFailedScreen(void);
+static void CB2_WipeSave(void);
+static void CB2_GameplayCannotBeContinued(void);
+static void CB2_FadeAndReturnToTitleScreen(void);
+static void CB2_ReturnToTitleScreen(void);
+static void VBlankCB_UpdateClockGraphics(void);
+static bool8 VerifySectorWipe(u16 sector);
+static bool8 WipeSector(u16 sector);
+static bool8 WipeSectors(u32 sectorBits);
 
-void fullscreen_save_activate(u8 var)
+void DoSaveFailedScreen(u8 var)
 {
-    SetMainCallback2(sub_8146E50);
+    SetMainCallback2(CB2_SaveFailedScreen);
     gUnknown_0203933C = var;
     gUnknown_0203933E.unk0 = 0;
 }
 
-void sub_8146E3C(void)
+static void VBlankCB(void)
 {
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
 }
 
-void sub_8146E50(void)
+static void CB2_SaveFailedScreen(void)
 {
     u16 ime;
 
@@ -119,7 +122,7 @@ void sub_8146E50(void)
             REG_IE |= INTR_FLAG_VBLANK;
             REG_IME = ime;
             REG_DISPSTAT |= DISPSTAT_VBLANK_INTR;
-            SetVBlankCallback(sub_8146E3C);
+            SetVBlankCallback(VBlankCB);
             REG_BG3CNT = 0x703;
             REG_BG2CNT = 0x602;
             REG_BG0CNT = 0x1f08;
@@ -129,29 +132,29 @@ void sub_8146E50(void)
         case 1:
             if (!UpdatePaletteFade())
             {
-                SetMainCallback2(sub_8147048);
-                SetVBlankCallback(sub_8147218);
+                SetMainCallback2(CB2_WipeSave);
+                SetVBlankCallback(VBlankCB_UpdateClockGraphics);
             }
             break;
     }
 }
 
-void sub_8147048(void)
+static void CB2_WipeSave(void)
 {
-    u8 clockVal = 0;
+    u8 wipeTries = 0;
 
     gUnknown_0203933E.unk0 = 1;
 
-    while (gUnknown_03005EA8 && clockVal < 3) // _0814705C
+    while (gUnknown_03005EA8 && wipeTries < 3)
     {
-        if (sub_814737C(gUnknown_03005EA8))
+        if (WipeSectors(gUnknown_03005EA8))
         {
             MenuDrawTextWindow(1, MSG_WIN_TOP, 28, 19);
             MenuPrint(gSystemText_BackupDamagedGameContinue, 2, MSG_WIN_TOP + 1);
-            SetMainCallback2(sub_8147154);
+            SetMainCallback2(CB2_GameplayCannotBeContinued);
             return;
         }
-        
+
         MenuDrawTextWindow(1, MSG_WIN_TOP, 28, 19);
         MenuPrint(gSystemText_CheckCompleteSaveAttempt, 2, MSG_WIN_TOP + 1);
         sub_8125C3C(gUnknown_0203933C);
@@ -159,16 +162,16 @@ void sub_8147048(void)
         if (gUnknown_03005EA8)
             MenuPrint(gSystemText_SaveFailedBackupCheck, 2, MSG_WIN_TOP + 1);
 
-        clockVal++;
+        wipeTries++;
     }
 
-    if (clockVal == 3) // _081470A6
+    if (wipeTries == 3)
     {
         MenuDrawTextWindow(1, MSG_WIN_TOP, 28, 19);
         MenuPrint(gSystemText_BackupDamagedGameContinue, 2, MSG_WIN_TOP + 1);
-        SetMainCallback2(sub_81471A4);
+        SetMainCallback2(CB2_FadeAndReturnToTitleScreen); // called again below
     }
-    else // _081470E4
+    else
     {
         MenuDrawTextWindow(1, MSG_WIN_TOP, 28, 19);
 
@@ -178,10 +181,10 @@ void sub_8147048(void)
             MenuPrint(gSystemText_SaveCompletedPressA, 2, MSG_WIN_TOP + 1);
     }
 
-    SetMainCallback2(sub_81471A4); // seemingly called twice?
+    SetMainCallback2(CB2_FadeAndReturnToTitleScreen);
 }
 
-void sub_8147154(void)
+static void CB2_GameplayCannotBeContinued(void)
 {
     gUnknown_0203933E.unk0 = 0;
 
@@ -189,12 +192,12 @@ void sub_8147154(void)
     {
         MenuDrawTextWindow(1, MSG_WIN_TOP, 28, 19);
         MenuPrint(gSystemText_GameplayEnded, 2, MSG_WIN_TOP + 1);
-        SetVBlankCallback(sub_8146E3C);
-        SetMainCallback2(sub_81471A4);
+        SetVBlankCallback(VBlankCB);
+        SetMainCallback2(CB2_FadeAndReturnToTitleScreen);
     }
 }
 
-void sub_81471A4(void)
+static void CB2_FadeAndReturnToTitleScreen(void)
 {
     u8 zero;
 
@@ -203,12 +206,12 @@ void sub_81471A4(void)
     if (gMain.newKeys & A_BUTTON)
     {
         BeginNormalPaletteFade(0xFFFFFFFF, 0, zero, 16, 0);
-        SetVBlankCallback(sub_8146E3C);
-        SetMainCallback2(sub_81471EC);
+        SetVBlankCallback(VBlankCB);
+        SetMainCallback2(CB2_ReturnToTitleScreen);
     }
 }
 
-void sub_81471EC(void)
+static void CB2_ReturnToTitleScreen(void)
 {
     if (!UpdatePaletteFade())
     {
@@ -224,7 +227,7 @@ void sub_81471EC(void)
     }
 }
 
-void sub_8147218(void)
+static void VBlankCB_UpdateClockGraphics(void)
 {
     unsigned int n = (gMain.vblankCounter2 >> 3) & 7;
 
@@ -248,12 +251,12 @@ void sub_8147218(void)
         gUnknown_0203933E.unk2--;
 }
 
-bool8 sub_81472E4(u16 var)
+static bool8 VerifySectorWipe(u16 sector)
 {
     u32 *ptr = (u32 *)unk_2000000;
     u16 i;
 
-    ReadFlash(var, 0, (u8 *)ptr, 4096);
+    ReadFlash(sector, 0, (u8 *)ptr, 4096);
 
     for (i = 0; i < 0x400; i++, ptr++)
         if (*ptr)
@@ -262,31 +265,31 @@ bool8 sub_81472E4(u16 var)
     return FALSE;
 }
 
-bool8 sub_8147324(u16 sector)
+static bool8 WipeSector(u16 sector)
 {
     u16 i, j;
-    bool8 success = TRUE;
+    bool8 failed = TRUE;
 
-    for (i = 0; success && i < 130; i++)
+    for (i = 0; failed && i < 130; i++)
     {
         for (j = 0; j < 0x1000; j++)
             ProgramFlashByte(sector, j, 0);
 
-        success = sub_81472E4(sector);
+        failed = VerifySectorWipe(sector);
     }
 
-    return success;
+    return failed;
 }
 
-bool8 sub_814737C(u32 var)
+static bool8 WipeSectors(u32 sectorBits)
 {
     u16 i;
 
     for (i = 0; i < 0x20; i++)
-        if (var & (1 << i) && !sub_8147324(i))
-            var &= ~(1 << i);
+        if ((sectorBits & (1 << i)) && !WipeSector(i))
+            sectorBits &= ~(1 << i);
 
-    if (var == 0)
+    if (sectorBits == 0)
         return FALSE;
     else
         return TRUE;
