@@ -6,125 +6,8 @@
 
 	.text
 
-	thumb_func_start sub_80B5054
-sub_80B5054: @ 80B5054
-	push {r4-r7,lr}
-	sub sp, 0x8
-	lsls r0, 24
-	lsrs r7, r0, 24
-	lsls r1, 24
-	lsrs r6, r1, 24
-	lsls r2, 24
-	lsrs r4, r2, 24
-	lsls r3, 24
-	lsrs r5, r3, 24
-	ldr r0, _080B5098 @ =sub_80B52B4
-	bl FuncIsActiveTask
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	beq _080B50A4
-	ldr r1, _080B509C @ =gScriptResult
-	movs r0, 0xFF
-	strh r0, [r1]
-	ldr r1, _080B50A0 @ =gMultichoiceLists
-	lsls r0, r4, 3
-	adds r0, r1
-	ldrb r2, [r0, 0x4]
-	ldr r3, [r0]
-	str r5, [sp]
-	movs r0, 0
-	str r0, [sp, 0x4]
-	adds r0, r7, 0
-	adds r1, r6, 0
-	bl sub_80B5138
-	movs r0, 0x1
-	b _080B50A6
-	.align 2, 0
-_080B5098: .4byte sub_80B52B4
-_080B509C: .4byte gScriptResult
-_080B50A0: .4byte gMultichoiceLists
-_080B50A4:
-	movs r0, 0
-_080B50A6:
-	add sp, 0x8
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80B5054
-
-	thumb_func_start sub_80B50B0
-sub_80B50B0: @ 80B50B0
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	sub sp, 0x8
-	ldr r4, [sp, 0x20]
-	lsls r0, 24
-	lsrs r0, 24
-	mov r8, r0
-	lsls r1, 24
-	lsrs r7, r1, 24
-	lsls r2, 24
-	lsrs r5, r2, 24
-	lsls r3, 24
-	lsrs r6, r3, 24
-	lsls r4, 24
-	lsrs r4, 24
-	ldr r0, _080B5100 @ =sub_80B52B4
-	bl FuncIsActiveTask
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	beq _080B510C
-	ldr r1, _080B5104 @ =gScriptResult
-	movs r0, 0xFF
-	strh r0, [r1]
-	ldr r1, _080B5108 @ =gMultichoiceLists
-	lsls r0, r5, 3
-	adds r0, r1
-	ldrb r2, [r0, 0x4]
-	ldr r3, [r0]
-	str r6, [sp]
-	str r4, [sp, 0x4]
-	mov r0, r8
-	adds r1, r7, 0
-	bl sub_80B5138
-	movs r0, 0x1
-	b _080B510E
-	.align 2, 0
-_080B5100: .4byte sub_80B52B4
-_080B5104: .4byte gScriptResult
-_080B5108: .4byte gMultichoiceLists
-_080B510C:
-	movs r0, 0
-_080B510E:
-	add sp, 0x8
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80B50B0
-
-	thumb_func_start GetStringWidthInTilesForScriptMenu
-GetStringWidthInTilesForScriptMenu: @ 80B511C
-	push {lr}
-	adds r1, r0, 0
-	ldr r0, _080B5134 @ =gWindowConfig_81E6CE4
-	bl GetStringWidthGivenWindowConfig
-	lsls r0, 24
-	lsrs r0, 24
-	adds r1, r0, 0x7
-	lsrs r0, r1, 3
-	pop {r1}
-	bx r1
-	.align 2, 0
-_080B5134: .4byte gWindowConfig_81E6CE4
-	thumb_func_end GetStringWidthInTilesForScriptMenu
-
-	thumb_func_start sub_80B5138
-sub_80B5138: @ 80B5138
+	thumb_func_start DrawMultichoiceMenu
+DrawMultichoiceMenu: @ 80B5138
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -247,7 +130,7 @@ _080B51B8:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80B5138
+	thumb_func_end DrawMultichoiceMenu
 
 	thumb_func_start sub_80B5230
 sub_80B5230: @ 80B5230

@@ -126,6 +126,7 @@ SECTIONS {
         asm/contest.o(.text);
         asm/shop.o(.text);
         src/berry.o(.text);
+        src/script_menu.o(.text);
         asm/script_menu.o(.text);
         asm/naming_screen.o(.text);
         src/money.o(.text);
