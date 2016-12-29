@@ -5,6 +5,7 @@
 #include "load_save.h"
 #include "rom4.h"
 #include "gba/flash_internal.h"
+#include "save_failed_screen.h"
 
 extern struct SaveSection unk_2000000;
 
@@ -585,7 +586,7 @@ u8 sub_8125D44(u8 a1)
     sub_8125C3C(a1);
     if (!gUnknown_03005EA8)
         return 1;
-    fullscreen_save_activate(a1);
+    DoSaveFailedScreen(a1);
     return 0xFF;
 }
 
@@ -602,7 +603,7 @@ bool8 sub_8125DA8(void)
 {
     u8 v0 = sub_812550C(14, gSaveSectionLocations);
     if (gUnknown_03005EA8)
-        fullscreen_save_activate(0);
+        DoSaveFailedScreen(0);
     if (v0 == 0xFF)
         return 1;
     else
@@ -613,7 +614,7 @@ u8 sub_8125DDC(void)
 {
     sub_812556C(14, gSaveSectionLocations);
     if (gUnknown_03005EA8)
-        fullscreen_save_activate(0);
+        DoSaveFailedScreen(0);
     return 0;
 }
 
@@ -621,7 +622,7 @@ u8 sub_8125E04(void)
 {
     sub_8125758(14, gSaveSectionLocations);
     if (gUnknown_03005EA8)
-        fullscreen_save_activate(0);
+        DoSaveFailedScreen(0);
     return 0;
 }
 
@@ -651,7 +652,7 @@ u8 sub_8125E6C(void)
         retVal = 1;
     }
     if (gUnknown_03005EA8)
-        fullscreen_save_activate(1);
+        DoSaveFailedScreen(1);
     return retVal;
 }
 

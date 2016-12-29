@@ -450,9 +450,6 @@ void sub_813EDBC(/*TODO: arg types*/);
 // asm/mystery_event_menu.o
 void CB2_InitMysteryEventMenu(void);
 
-// asm/save_failed_screen.o
-void fullscreen_save_activate(u8);
-
 // asm/rom_81473B8.o
 bool8 sub_81474C8(void);
 void sub_8147514(void);
