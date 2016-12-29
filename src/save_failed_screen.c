@@ -142,59 +142,42 @@ void sub_8147048(void)
 
     gUnknown_0203933E.unk0 = 1;
 
-    if (gUnknown_03005EA8)
+    while (gUnknown_03005EA8 && clockVal < 3) // _0814705C
     {
-        while(1) // _0814705C
+        if (sub_814737C(gUnknown_03005EA8))
         {
-            if (!sub_814737C(gUnknown_03005EA8))
-            {
-                MenuDrawTextWindow(1, MSG_WIN_TOP, 28, 19);
-                MenuPrint(gSystemText_CheckCompleteSaveAttempt, 2, MSG_WIN_TOP + 1);
-                sub_8125C3C(gUnknown_0203933C);
-
-                if (gUnknown_03005EA8)
-                    MenuPrint(gSystemText_SaveFailedBackupCheck, 2, MSG_WIN_TOP + 1);
-
-                clockVal++;
-
-                if (!gUnknown_03005EA8 || clockVal > 2)
-                    break; // go to _081470A6
-
-                continue;
-            }
-            goto gotoLabel2;
+            MenuDrawTextWindow(1, MSG_WIN_TOP, 28, 19);
+            MenuPrint(gSystemText_BackupDamagedGameContinue, 2, MSG_WIN_TOP + 1);
+            SetMainCallback2(sub_8147154);
+            return;
         }
+        
+        MenuDrawTextWindow(1, MSG_WIN_TOP, 28, 19);
+        MenuPrint(gSystemText_CheckCompleteSaveAttempt, 2, MSG_WIN_TOP + 1);
+        sub_8125C3C(gUnknown_0203933C);
+
+        if (gUnknown_03005EA8)
+            MenuPrint(gSystemText_SaveFailedBackupCheck, 2, MSG_WIN_TOP + 1);
+
+        clockVal++;
     }
+
     if (clockVal == 3) // _081470A6
     {
         MenuDrawTextWindow(1, MSG_WIN_TOP, 28, 19);
         MenuPrint(gSystemText_BackupDamagedGameContinue, 2, MSG_WIN_TOP + 1);
         SetMainCallback2(sub_81471A4);
-        goto gotoLabel; // this calls sub_81471A4 for some reason.
     }
     else // _081470E4
     {
         MenuDrawTextWindow(1, MSG_WIN_TOP, 28, 19);
 
         if (!gUnknown_03005EBC) // cant continue game.
-        {
             MenuPrint(gSystemText_SaveCompletedGameEnd, 2, MSG_WIN_TOP + 1);
-            goto gotoLabel;
-        }
         else // can continue game.
-            goto gotoLabel3;
+            MenuPrint(gSystemText_SaveCompletedPressA, 2, MSG_WIN_TOP + 1);
     }
-    // no matter what I do, i can't get rid of these gotos. They were seemingly labeled at the end by the developer and jumped to manually depending on the result.
-gotoLabel2: // _0814710C
-    MenuDrawTextWindow(1, MSG_WIN_TOP, 28, 19);
-    MenuPrint(gSystemText_BackupDamagedGameContinue, 2, MSG_WIN_TOP + 1);
-    SetMainCallback2(sub_8147154);
-    return;
 
-gotoLabel3:
-    MenuPrint(gSystemText_SaveCompletedPressA, 2, MSG_WIN_TOP + 1);
-
-gotoLabel: // _0814713E
     SetMainCallback2(sub_81471A4); // seemingly called twice?
 }
 
