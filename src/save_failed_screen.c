@@ -10,9 +10,9 @@
 #include "gba/flash_internal.h"
 #include "asm.h"
 
-// In 1.0, the text window is too small, causing text to overflow.
+// In English 1.0, the text window is too small, causing text to overflow.
 
-#ifdef BUGFIX_SAVEFAILEDSCREEN
+#ifdef BUGFIX_SAVEFAILEDSCREEN1
 #define MSG_WIN_TOP 10
 #else
 #define MSG_WIN_TOP 12
@@ -160,7 +160,12 @@ static void CB2_WipeSave(void)
         sub_8125C3C(gUnknown_0203933C);
 
         if (gUnknown_03005EA8)
+        {
+#ifdef BUGFIX_SAVEFAILEDSCREEN2
+            MenuDrawTextWindow(1, MSG_WIN_TOP, 28, 19);
+#endif
             MenuPrint(gSystemText_SaveFailedBackupCheck, 2, MSG_WIN_TOP + 1);
+        }
 
         wipeTries++;
     }
