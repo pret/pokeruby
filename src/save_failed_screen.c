@@ -10,12 +10,21 @@
 #include "gba/flash_internal.h"
 #include "asm.h"
 
+struct SaveFailedStruct
+{
+    u16 unk0;
+    u16 unk2;
+};
+
 extern u8 unk_2000000[];
 
 extern u16 gUnknown_0203933C;
-extern u16 gUnknown_0203933E;
+extern struct SaveFailedStruct gUnknown_0203933E;
 extern u32 gUnknown_03005EA8;
 extern u32 gUnknown_03005EBC;
+
+extern struct OamData gUnknown_08411940;
+extern u8 gUnknown_08411948[][3];
 
 extern u8 gBirchHelpGfx[];
 
@@ -45,7 +54,7 @@ void fullscreen_save_activate(u8 var)
 {
 	SetMainCallback2(sub_8146E50);
 	gUnknown_0203933C = var;
-	gUnknown_0203933E = 0;
+	gUnknown_0203933E.unk0 = 0;
 }
 
 void sub_8146E3C(void)
@@ -128,7 +137,7 @@ void sub_8147048(void)
 {
 	u8 clockVal = 0;
 
-	gUnknown_0203933E = 1;
+	gUnknown_0203933E.unk0 = 1;
 	
 	if(gUnknown_03005EA8)
 	{
@@ -219,7 +228,7 @@ gotoLabel: // _0814713E
 
 void sub_8147154(void)
 {
-	gUnknown_0203933E = 0;
+	gUnknown_0203933E.unk0 = 0;
 	
 	if(gMain.newKeys & A_BUTTON)
 	{
@@ -239,7 +248,7 @@ void sub_81471A4(void)
 {
 	u8 zero;
 
-	gUnknown_0203933E = zero = 0;
+	gUnknown_0203933E.unk0 = zero = 0;
 	
 	if(gMain.newKeys & A_BUTTON)
 	{
@@ -263,112 +272,32 @@ void sub_81471EC(void)
 	}
 }
 
-// do later
-__attribute__((naked))
 void sub_8147218(void)
 {
-	asm(".syntax unified\n\
-	push {r4,r5,lr}\n\
-	ldr r0, _08147290 @ =gMain\n\
-	mov r12, r0\n\
-	ldr r0, [r0, 0x24]\n\
-	lsrs r4, r0, 3\n\
-	movs r0, 0x7\n\
-	ands r4, r0\n\
-	ldr r0, _08147294 @ =gUnknown_08411940\n\
-	ldr r1, [r0, 0x4]\n\
-	ldr r0, [r0]\n\
-	mov r2, r12\n\
-	str r0, [r2, 0x3C]\n\
-	str r1, [r2, 0x40]\n\
-	ldrh r1, [r2, 0x3E]\n\
-	ldr r0, _08147298 @ =0xfffffe00\n\
-	ands r0, r1\n\
-	movs r1, 0x70\n\
-	orrs r0, r1\n\
-	strh r0, [r2, 0x3E]\n\
-	mov r1, r12\n\
-	adds r1, 0x3C\n"
-#if REVISION >= 1
-	"movs r0, 0x38\n"
+    unsigned int v0 = (gMain.vblankCounter2 >> 3) & 7;
+
+    gMain.oamBuffer[0] = gUnknown_08411940;
+    gMain.oamBuffer[0].x = 112;
+
+#if (REVISION >= 1)
+    gMain.oamBuffer[0].y = 56;
 #else
-	"movs r0, 0x48\n"
+    gMain.oamBuffer[0].y = 72;
 #endif
-	"strb r0, [r1]\n\
-	ldr r0, _0814729C @ =gUnknown_0203933E\n\
-	ldrh r0, [r0]\n\
-	cmp r0, 0\n\
-	beq _081472A8\n\
-	ldr r3, _081472A0 @ =gUnknown_08411948\n\
-	lsls r2, r4, 1\n\
-	adds r2, r4\n\
-	adds r0, r2, r3\n\
-	mov r4, r12\n\
-	adds r4, 0x40\n\
-	ldrb r5, [r0]\n\
-	ldrh r1, [r4]\n\
-	ldr r0, _081472A4 @ =0xfffffc00\n\
-	ands r0, r1\n\
-	orrs r0, r5\n\
-	strh r0, [r4]\n\
-	adds r0, r3, 0x2\n\
-	adds r0, r2, r0\n\
-	ldrb r1, [r0]\n\
-	lsls r1, 4\n\
-	adds r3, 0x1\n\
-	adds r2, r3\n\
-	ldrb r0, [r2]\n\
-	lsls r0, 3\n\
-	orrs r1, r0\n\
-	mov r3, r12\n\
-	adds r3, 0x3F\n\
-	movs r0, 0x1F\n\
-	ands r1, r0\n\
-	lsls r1, 1\n\
-	ldrb r2, [r3]\n\
-	movs r0, 0x3F\n\
-	negs r0, r0\n\
-	ands r0, r2\n\
-	orrs r0, r1\n\
-	strb r0, [r3]\n\
-	b _081472B8\n\
-	.align 2, 0\n\
-_08147290: .4byte gMain\n\
-_08147294: .4byte gUnknown_08411940\n\
-_08147298: .4byte 0xfffffe00\n\
-_0814729C: .4byte gUnknown_0203933E\n\
-_081472A0: .4byte gUnknown_08411948\n\
-_081472A4: .4byte 0xfffffc00\n\
-_081472A8:\n\
-	mov r2, r12\n\
-	adds r2, 0x40\n\
-	ldrh r1, [r2]\n\
-	ldr r0, _081472D8 @ =0xfffffc00\n\
-	ands r0, r1\n\
-	movs r1, 0x1\n\
-	orrs r0, r1\n\
-	strh r0, [r2]\n\
-_081472B8:\n\
-	ldr r0, _081472DC @ =gMain + 0x3C\n\
-	movs r1, 0xE0\n\
-	lsls r1, 19\n\
-	movs r2, 0x1\n\
-	bl CpuFastSet\n\
-	ldr r1, _081472E0 @ =gUnknown_0203933E\n\
-	ldrh r0, [r1, 0x2]\n\
-	cmp r0, 0\n\
-	beq _081472D0\n\
-	subs r0, 0x1\n\
-	strh r0, [r1, 0x2]\n\
-_081472D0:\n\
-	pop {r4,r5}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_081472D8: .4byte 0xfffffc00\n\
-_081472DC: .4byte gMain + 0x3C\n\
-_081472E0: .4byte gUnknown_0203933E\n\
-	.syntax divided");
+
+    if (gUnknown_0203933E.unk0)
+    {
+        gMain.oamBuffer[0].tileNum = gUnknown_08411948[v0][0];
+        gMain.oamBuffer[0].matrixNum = (gUnknown_08411948[v0][2] << 4) | (gUnknown_08411948[v0][1] << 3);
+    }
+    else
+    {
+        gMain.oamBuffer[0].tileNum = 1;
+    }
+
+    CpuFastCopy(gMain.oamBuffer, (void *)OAM, 4);
+    if (gUnknown_0203933E.unk2)
+        gUnknown_0203933E.unk2--;
 }
 
 bool8 sub_81472E4(u16 var)
