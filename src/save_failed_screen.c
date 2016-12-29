@@ -10,6 +10,16 @@
 #include "gba/flash_internal.h"
 #include "asm.h"
 
+// In 1.0, the text window is too small, causing text to overflow.
+
+#if (REVISION >= 1)
+#define MSG_WIN_TOP 10
+#else
+#define MSG_WIN_TOP 12
+#endif
+
+#define CLOCK_WIN_TOP (MSG_WIN_TOP - 4)
+
 struct SaveFailedStruct
 {
     u16 unk0;
@@ -100,16 +110,9 @@ void sub_8146E50(void)
 			LoadPalette(&gSaveFailedClockPal, 0x100, 0x20);
 			SetUpWindowConfig(&gWindowConfig_81E6C3C);
 			InitMenuWindow(&gWindowConfig_81E6CE4);
-			// in revision 1.0, the text window is too small, causing text to overflow and create garbage. this is fixed in later revisions.
-#if (REVISION >= 1)
-			MenuDrawTextWindow(13, 6, 16, 9);
-			MenuDrawTextWindow(1, 10, 28, 19);
-			MenuPrint(gSystemText_SaveFailedBackupCheck, 2, 11);
-#else
-			MenuDrawTextWindow(13, 8, 16, 11);
-			MenuDrawTextWindow(1, 12, 28, 19);
-			MenuPrint(gSystemText_SaveFailedBackupCheck, 2, 13);
-#endif
+			MenuDrawTextWindow(13, CLOCK_WIN_TOP, 16, CLOCK_WIN_TOP + 3); // clock window
+			MenuDrawTextWindow(1, MSG_WIN_TOP, 28, 19); // message window
+			MenuPrint(gSystemText_SaveFailedBackupCheck, 2, MSG_WIN_TOP + 1);
 			BeginNormalPaletteFade(0xFFFFFFFF, 0, 16, 0, 0);
 			ime = REG_IME;
 			REG_IME = 0;
@@ -145,21 +148,12 @@ void sub_8147048(void)
 		{
 			if(!sub_814737C(gUnknown_03005EA8))
 			{
-			#if (REVISION >= 1)
-				MenuDrawTextWindow(1, 10, 28, 19);
-				MenuPrint(gSystemText_CheckCompleteSaveAttempt, 2, 11);
-			#else
-				MenuDrawTextWindow(1, 12, 28, 19);
-				MenuPrint(gSystemText_CheckCompleteSaveAttempt, 2, 13);
-			#endif
+				MenuDrawTextWindow(1, MSG_WIN_TOP, 28, 19);
+				MenuPrint(gSystemText_CheckCompleteSaveAttempt, 2, MSG_WIN_TOP + 1);
 				sub_8125C3C(gUnknown_0203933C);
 			
 				if(gUnknown_03005EA8)
-				#if (REVISION >= 1)
-					MenuPrint(gSystemText_SaveFailedBackupCheck, 2, 11);
-				#else
-					MenuPrint(gSystemText_SaveFailedBackupCheck, 2, 13);
-				#endif
+					MenuPrint(gSystemText_SaveFailedBackupCheck, 2, MSG_WIN_TOP + 1);
 			
 				clockVal++;
 			
@@ -173,31 +167,18 @@ void sub_8147048(void)
 	}
 	if(clockVal == 3) // _081470A6
 	{
-	#if (REVISION >= 1)
-		MenuDrawTextWindow(1, 10, 28, 19);
-		MenuPrint(gSystemText_BackupDamagedGameContinue, 2, 11);
-	#else
-		MenuDrawTextWindow(1, 12, 28, 19);
-		MenuPrint(gSystemText_BackupDamagedGameContinue, 2, 13);
-	#endif
+		MenuDrawTextWindow(1, MSG_WIN_TOP, 28, 19);
+		MenuPrint(gSystemText_BackupDamagedGameContinue, 2, MSG_WIN_TOP + 1);
 		SetMainCallback2(sub_81471A4);
 		goto gotoLabel; // this calls sub_81471A4 for some reason.
 	}
 	else // _081470E4
 	{
-	#if (REVISION >= 1)
-		MenuDrawTextWindow(1, 10, 28, 19);
-	#else
-		MenuDrawTextWindow(1, 12, 28, 19);
-	#endif
+		MenuDrawTextWindow(1, MSG_WIN_TOP, 28, 19);
 		
 		if(!gUnknown_03005EBC) // cant continue game.
 		{
-		#if (REVISION >= 1)
-			MenuPrint(gSystemText_SaveCompletedGameEnd, 2, 11);
-		#else
-			MenuPrint(gSystemText_SaveCompletedGameEnd, 2, 13);
-		#endif
+			MenuPrint(gSystemText_SaveCompletedGameEnd, 2, MSG_WIN_TOP + 1);
 			goto gotoLabel;
 		}
 		else // can continue game.
@@ -205,22 +186,13 @@ void sub_8147048(void)
 	}
 	// no matter what I do, i can't get rid of these gotos. They were seemingly labeled at the end by the developer and jumped to manually depending on the result.
 gotoLabel2: // _0814710C
-#if (REVISION >= 1)
-	MenuDrawTextWindow(1, 10, 28, 19);
-	MenuPrint(gSystemText_BackupDamagedGameContinue, 2, 11);
-#else
-	MenuDrawTextWindow(1, 12, 28, 19);
-	MenuPrint(gSystemText_BackupDamagedGameContinue, 2, 13);
-#endif
+	MenuDrawTextWindow(1, MSG_WIN_TOP, 28, 19);
+	MenuPrint(gSystemText_BackupDamagedGameContinue, 2, MSG_WIN_TOP + 1);
 	SetMainCallback2(sub_8147154);
 	return;
 
 gotoLabel3:
-#if (REVISION >= 1)
-	MenuPrint(gSystemText_SaveCompletedPressA, 2, 11);
-#else
-	MenuPrint(gSystemText_SaveCompletedPressA, 2, 13);
-#endif
+	MenuPrint(gSystemText_SaveCompletedPressA, 2, MSG_WIN_TOP + 1);
 
 gotoLabel: // _0814713E
 	SetMainCallback2(sub_81471A4); // seemingly called twice?
@@ -232,13 +204,8 @@ void sub_8147154(void)
 	
 	if(gMain.newKeys & A_BUTTON)
 	{
-	#if (REVISION >= 1)
-		MenuDrawTextWindow(1, 10, 28, 19);
-		MenuPrint(gSystemText_GameplayEnded, 2, 11);
-	#else
-		MenuDrawTextWindow(1, 12, 28, 19);
-		MenuPrint(gSystemText_GameplayEnded, 2, 13);
-	#endif
+		MenuDrawTextWindow(1, MSG_WIN_TOP, 28, 19);
+		MenuPrint(gSystemText_GameplayEnded, 2, MSG_WIN_TOP + 1);
 		SetVBlankCallback(sub_8146E3C);
 		SetMainCallback2(sub_81471A4);
 	}
@@ -278,12 +245,7 @@ void sub_8147218(void)
 
     gMain.oamBuffer[0] = gUnknown_08411940;
     gMain.oamBuffer[0].x = 112;
-
-#if (REVISION >= 1)
-    gMain.oamBuffer[0].y = 56;
-#else
-    gMain.oamBuffer[0].y = 72;
-#endif
+    gMain.oamBuffer[0].y = (CLOCK_WIN_TOP + 1) * 8;
 
     if (gUnknown_0203933E.unk0)
     {
