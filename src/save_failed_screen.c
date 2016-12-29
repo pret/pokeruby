@@ -12,7 +12,7 @@
 
 // In 1.0, the text window is too small, causing text to overflow.
 
-#if (REVISION >= 1)
+#ifdef BUGFIX_SAVEFAILEDSCREEN
 #define MSG_WIN_TOP 10
 #else
 #define MSG_WIN_TOP 12

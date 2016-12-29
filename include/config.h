@@ -9,6 +9,11 @@
 #define BUGFIX_BERRY
 #endif
 
+#if REVISION >= 1
+#define BUGFIX_GLYPHWIDTH
+#define BUGFIX_SAVEFAILEDSCREEN
+#endif
+
 // European editions of Ruby/Sapphire and all editions of Emerald have this fix.
 // #define BUGFIX_TRAINERAPPROACH
 

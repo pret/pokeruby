@@ -3334,7 +3334,7 @@ static u8 GetGlyphWidth(struct Window *win, u32 glyph)
 {
     u8 width = 8;
 
-#if REVISION >= 1
+#ifdef BUGFIX_GLYPHWIDTH
     if (win->language != LANGUAGE_JAPANESE)
 #else
     if (win->language == LANGUAGE_ENGLISH)
