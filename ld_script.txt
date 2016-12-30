@@ -168,6 +168,8 @@ SECTIONS {
         src/starter_choose.o(.text);
         src/wallclock.o(.text);
         asm/rom6.o(.text);
+        asm/pokeblock.o(.text);
+        asm/rom_810CBB4.o(.text);
         asm/battle_records.o(.text);
         asm/pokedex_area_screen.o(.text);
         asm/evolution_scene.o(.text);
