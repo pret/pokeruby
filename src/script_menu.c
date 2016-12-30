@@ -20,6 +20,7 @@ extern u16 gScriptResult;
 
 void DrawMultichoiceMenu(u8, u8, u8, struct MenuAction *list, u8, u8);
 void sub_80B53B4(u8, u8, u8, struct MenuAction *list, u8);
+void task_yes_no_maybe(u8);
 
 bool8 sub_80B5054(u8 left, u8 top, u8 var3, u8 var4)
 {
@@ -168,4 +169,30 @@ void sub_80B53B4(u8 left, u8 top, u8 count, struct MenuAction *list, u8 var4)
     PrintMenuItems(left, top, count, list);
     InitMenu(0, left, top, count, 0, right - left - 1);
     sub_80B5230(left, top, right, bottom, var4, count);
+}
+
+bool8 yes_no_box(u8 var1, u8 var2)
+{
+	u8 taskId;
+
+	if(FuncIsActiveTask(task_yes_no_maybe) == 1)
+		return FALSE;
+	else
+	{
+		gScriptResult = 0xFF;
+		DisplayYesNoMenu(var1, var2, 1);
+		taskId = CreateTask(task_yes_no_maybe, 0x50);
+		gTasks[taskId].data[0] = var1;
+		gTasks[taskId].data[1] = var2;
+		return TRUE;
+	}
+}
+
+// unused
+bool8 IsScriptActive(void)
+{
+	if(gScriptResult == 0xFF)
+		return FALSE;
+	else
+		return TRUE;
 }
