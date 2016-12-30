@@ -315,14 +315,14 @@ void sub_80B5684(u8 taskId)
 
 bool8 TryCreatePCMenu(void)
 {
-	if(FuncIsActiveTask(sub_80B52B4) == 1)
-		return FALSE;
-	else
-	{
-		gScriptResult = 0xFF;
-		CreatePCMenu();
-		return TRUE;
-	}
+    if(FuncIsActiveTask(sub_80B52B4) == 1)
+        return FALSE;
+    else
+    {
+        gScriptResult = 0xFF;
+        CreatePCMenu();
+        return TRUE;
+    }
 }
 
 void CreatePCMenu(void)
@@ -362,53 +362,53 @@ void CreatePCMenu(void)
 
 void sub_80B5838(void)
 {
-	MenuDisplayMessageBox();
-	MenuPrint(gPCText_WhichPCShouldBeAccessed, 2, 15);
+    MenuDisplayMessageBox();
+    MenuPrint(gPCText_WhichPCShouldBeAccessed, 2, 15);
 }
 
 void task_picbox(u8 taskId)
 {
-	struct Task *task = &gTasks[taskId];
-	
-	switch(task->data[0])
-	{
-		case 0:
-			task->data[0]++;
-			break;
-		case 1:
-			break;
-		case 2:
-			FreeResourcesAndDestroySprite(&gSprites[task->data[2]]);
-			task->data[0]++;
-			break;
-		case 3:
-			MenuZeroFillWindowRect(task->data[3], task->data[4], task->data[3] + 9, task->data[4] + 10);
-			DestroyTask(taskId);
-			break;
-	}
+    struct Task *task = &gTasks[taskId];
+    
+    switch(task->data[0])
+    {
+        case 0:
+            task->data[0]++;
+            break;
+        case 1:
+            break;
+        case 2:
+            FreeResourcesAndDestroySprite(&gSprites[task->data[2]]);
+            task->data[0]++;
+            break;
+        case 3:
+            MenuZeroFillWindowRect(task->data[3], task->data[4], task->data[3] + 9, task->data[4] + 10);
+            DestroyTask(taskId);
+            break;
+    }
 }
 
 bool8 sub_80B58C4(u16 var1, u8 var2, u8 var3)
 {
-	u8 taskId;
-	u8 var;
+    u8 taskId;
+    u8 var;
 
-	if(FindTaskIdByFunc(task_picbox) != 0xFF)
-		return FALSE;
-	else
-	{
-		MenuDrawTextWindow(var2, var3, var2 + 9, var3 + 10);
-		taskId = CreateTask(task_picbox, 0x50);
-		gTasks[taskId].data[0] = 0;
-		gTasks[taskId].data[1] = var1;
-		var = CreateMonSprite_PicBox(var1, var2 * 8 + 40, var3 * 8 + 40, 0);
-		gTasks[taskId].data[2] = var;
-		gTasks[taskId].data[3] = var2;
-		gTasks[taskId].data[4] = var3;
-		gSprites[var].callback = SpriteCallbackDummy;
-		gSprites[var].oam.priority = 0;
-		return TRUE;
-	}
+    if(FindTaskIdByFunc(task_picbox) != 0xFF)
+        return FALSE;
+    else
+    {
+        MenuDrawTextWindow(var2, var3, var2 + 9, var3 + 10);
+        taskId = CreateTask(task_picbox, 0x50);
+        gTasks[taskId].data[0] = 0;
+        gTasks[taskId].data[1] = var1;
+        var = CreateMonSprite_PicBox(var1, var2 * 8 + 40, var3 * 8 + 40, 0);
+        gTasks[taskId].data[2] = var;
+        gTasks[taskId].data[3] = var2;
+        gTasks[taskId].data[4] = var3;
+        gSprites[var].callback = SpriteCallbackDummy;
+        gSprites[var].oam.priority = 0;
+        return TRUE;
+    }
 }
 
 void *picbox_close(void)
@@ -424,8 +424,8 @@ void *picbox_close(void)
 
 bool8 sub_80B59AC(void)
 {
-	if(FindTaskIdByFunc(task_picbox) == 0xFF)
-		return TRUE;
-	else
-		return FALSE;
+    if(FindTaskIdByFunc(task_picbox) == 0xFF)
+        return TRUE;
+    else
+        return FALSE;
 }
