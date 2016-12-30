@@ -4534,7 +4534,7 @@ ReshowPCMenuAfterHallOfFamePC: @ 810D64C
 	movs r2, 0x10
 	movs r3, 0
 	bl BeginNormalPaletteFade
-	bl sp109_CreatePCMenu
+	bl TryCreatePCMenu
 	bl sub_80B5838
 	ldr r0, _0810D680 @ =sub_810D684
 	movs r1, 0xA

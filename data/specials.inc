@@ -262,7 +262,7 @@ gSpecials::
 	.4byte ShowBerryBlenderRecordWindow
 	.4byte ResetTrickHouseEndRoomFlag
 	.4byte SetTrickHouseEndRoomFlag
-	.4byte sp109_CreatePCMenu
+	.4byte TryCreatePCMenu
 	.4byte AccessHallOfFamePC
 	.4byte sub_810D6A4
 	.4byte CheckLeadMonCool
