@@ -1686,7 +1686,7 @@ gUnknown_081A0009:: @ 81A0009
 	end
 
 EventScript_1A0023:
-	message UnknownString_81A0A01
+	message gPCText_WhichPCShouldBeAccessed
 	waittext
 	special 262
 	waitstate
@@ -2970,8 +2970,7 @@ UnusedMixRecordsSeeYouAgainText: @ 81A09D2
 UnknownString_81A09EC: @ 81A09EC
 	.string "{PLAYER} booted up the PC.$"
 
-gUnknown_081A0A01:: @ 81A0A01
-UnknownString_81A0A01: @ 81A0A01
+gPCText_WhichPCShouldBeAccessed:: @ 81A0A01
 	.string "Which PC should be accessed?$"
 
 UnknownString_81A0A1E: @ 81A0A1E
