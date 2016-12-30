@@ -26,8 +26,8 @@ static void MultistepInitMenuWindowInternal(const struct WindowConfig *, u16);
 static void InitMenuWindowInternal(const struct WindowConfig *, u16);
 static bool8 sub_80723D4(void);
 static u8 sub_8072484(u8, u8, u8, u8, u8, u8, u32);
-static u8 sub_80724F4(u8, u8, u8, u8 * const [][2], u8);
-static void sub_8072620(u8, u8, u8, u8 * const [][2], u8);
+static u8 sub_80724F4(u8, u8, u8, const struct MenuAction[], u8);
+static void sub_8072620(u8, u8, u8, const struct MenuAction[], u8);
 static void sub_8072D18(u8, u8);
 
 static struct Menu gMenu;
@@ -407,7 +407,7 @@ static u8 sub_8072484(u8 a1, u8 a2, u8 menuItemCount, u8 a4, u8 width, u8 a6, u3
     return a4;
 }
 
-static u8 sub_80724F4(u8 left, u8 top, u8 menuItemCount, u8 * const menuItems[][2], u8 columnCount)
+static u8 sub_80724F4(u8 left, u8 top, u8 menuItemCount, const struct MenuAction menuItems[], u8 columnCount)
 {
     u8 i;
     u8 maxWidth;
@@ -419,7 +419,7 @@ static u8 sub_80724F4(u8 left, u8 top, u8 menuItemCount, u8 * const menuItems[][
     maxWidth = 0;
     for (i = 0; i < menuItemCount; i++)
     {
-        u8 width = (sub_8072CA4(menuItems[i][0]) + 7) / 8;
+        u8 width = (sub_8072CA4(menuItems[i].text) + 7) / 8;
 
         if (width > maxWidth)
             maxWidth = width;
@@ -465,7 +465,7 @@ static u8 sub_80724F4(u8 left, u8 top, u8 menuItemCount, u8 * const menuItems[][
     return maxWidth;
 }
 
-static void sub_8072620(u8 left, u8 top, u8 menuItemCount, u8 * const menuItems[][2], u8 columnCount)
+static void sub_8072620(u8 left, u8 top, u8 menuItemCount, const struct MenuAction menuItems[], u8 columnCount)
 {
     u8 i;
     u8 maxWidth;
@@ -476,7 +476,7 @@ static void sub_8072620(u8 left, u8 top, u8 menuItemCount, u8 * const menuItems[
     maxWidth = 0;
     for (i = 0; i < menuItemCount; i++)
     {
-        u8 width = (sub_8072CA4(menuItems[i][0]) + 7) / 8;
+        u8 width = (sub_8072CA4(menuItems[i].text) + 7) / 8;
 
         if (width > maxWidth)
             maxWidth = width;
@@ -495,11 +495,11 @@ static void sub_8072620(u8 left, u8 top, u8 menuItemCount, u8 * const menuItems[
         u8 row = 0;
         u8 j;
         for (j = 0; i + j < menuItemCount; j += columnCount, row++)
-            MenuPrint(menuItems[i + j][0], left + gMenu.columnXCoords[i % columnCount], top + 2 * row);
+            MenuPrint(menuItems[i + j].text, left + gMenu.columnXCoords[i % columnCount], top + 2 * row);
     }
 }
 
-void sub_807274C(u8 left, u8 top, u8 menuItemCount, u8 a4, u8 * const menuItems[][2], u8 columnCount, u32 a7)
+void sub_807274C(u8 left, u8 top, u8 menuItemCount, u8 a4, const struct MenuAction menuItems[], u8 columnCount, u32 a7)
 {
     u8 maxWidth = sub_80724F4(left, top, menuItemCount, menuItems, columnCount);
 
