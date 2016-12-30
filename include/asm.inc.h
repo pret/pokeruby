@@ -397,6 +397,7 @@ void sub_811AAD8(u8);
 u8 sub_811AAE8(void);
 
 // asm/mystery_event_script.o
+u32 sub_812613C(u8 *);
 void sub_8126160(u8);
 u16 sub_8126338(void);
 
@@ -446,9 +447,6 @@ void sub_813E7C0(u8);
 void sub_813E930(/*TODO: arg types*/);
 void sub_813EB4C(u8);
 void sub_813EDBC(/*TODO: arg types*/);
-
-// asm/mystery_event_menu.o
-void CB2_InitMysteryEventMenu(void);
 
 // asm/rom_81473B8.o
 bool8 sub_81474C8(void);

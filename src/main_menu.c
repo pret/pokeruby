@@ -3,6 +3,7 @@
 #include "asm.h"
 #include "decompress.h"
 #include "menu.h"
+#include "mystery_event_menu.h"
 #include "option_menu.h"
 #include "palette.h"
 #include "rom4.h"
