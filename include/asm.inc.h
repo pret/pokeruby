@@ -448,9 +448,6 @@ void sub_813E930(/*TODO: arg types*/);
 void sub_813EB4C(u8);
 void sub_813EDBC(/*TODO: arg types*/);
 
-// asm/mystery_event_menu.o
-void CB2_InitMysteryEventMenu(void);
-
 // asm/rom_81473B8.o
 bool8 sub_81474C8(void);
 void sub_8147514(void);

@@ -11,6 +11,7 @@
 #include "sound.h"
 #include "save.h"
 #include "asm.h"
+#include "mystery_event_menu.h"
 
 extern u8 unk_2000000[];
 extern u8 gUnknown_02039338;
@@ -22,7 +23,10 @@ extern u8 gSystemText_DontCutLink[];
 extern u8 gSystemText_EventLoadSuccess[];
 extern u8 gSystemText_LoadingError[];
 
-void sub_81469E4(void);
+static void VBlankCB(void);
+static bool8 CheckLanguageMatch(void);
+static bool8 GetEventLoadMessage(u8 *dest, u32 status);
+static void CB2_MysteryEventMenu(void);
 
 static void VBlankCB(void)
 {
@@ -31,7 +35,7 @@ static void VBlankCB(void)
     TransferPlttBuffer();
 }
 
-bool8 sub_8146914(void)
+static bool8 CheckLanguageMatch(void)
 {
     bool8 val = FALSE;
 
@@ -59,29 +63,29 @@ void CB2_InitMysteryEventMenu(void)
     BuildOamBuffer();
     UpdatePaletteFade();
     FillPalette(0, 0, 2);
-    SetMainCallback2(sub_81469E4);
+    SetMainCallback2(CB2_MysteryEventMenu);
 }
 
-bool8 sub_81469AC(u8 *dest, u32 a2)
+static bool8 GetEventLoadMessage(u8 *dest, u32 status)
 {
     bool8 retVal = 1;
 
-    if (a2 == 0)
+    if (status == 0)
     {
         StringCopy(dest, gSystemText_EventLoadSuccess);
         retVal = 0;
     }
 
-    if (a2 == 2)
+    if (status == 2)
         retVal = 0;
 
-    if (a2 == 1)
+    if (status == 1)
         StringCopy(dest, gSystemText_LoadingError);
 
     return retVal;
 }
 
-void sub_81469E4(void)
+static void CB2_MysteryEventMenu(void)
 {
     u16 unkVal;
 
@@ -124,6 +128,69 @@ void sub_81469E4(void)
             if (MenuUpdateWindowText())
                 gMain.state++;
             break;
+#ifdef NONMATCHING
+        case 5:
+            if (GetLinkPlayerCount_2() != 2)
+            {
+                GetEventLoadMessage(gStringVar4, 1);
+                sub_8072044(gStringVar4);
+                gMain.state = 13;
+                break;
+            }
+            if (gMain.newKeys & A_BUTTON)
+            {
+                PlaySE(SE_SELECT);
+                sub_8007F4C();
+                MenuDrawTextWindow(6, 5, 23, 8);
+                MenuPrint(gSystemText_LoadingEvent, 7, 6);
+                gMain.state++;
+            }
+            else if (gMain.newKeys & B_BUTTON)
+            {
+                PlaySE(SE_SELECT);
+                CloseLink();
+                gMain.state = 15;
+            }
+            break;
+        case 6:
+            if (IsLinkConnectionEstablished())
+            {
+                if (!gReceivedRemoteLinkPlayers)
+                    break;
+
+                if (GetLinkPlayerDataExchangeStatusTimed() == 3)
+                {
+                    sub_800832C();
+                    MenuZeroFillWindowRect(6, 5, 23, 8);
+                    GetEventLoadMessage(gStringVar4, 1);
+                    sub_8072044(gStringVar4);
+                    gMain.state = 13;
+                    break;
+                }
+                else if (CheckLanguageMatch())
+                {
+                    sub_8072044(gSystemText_DontCutLink);
+                    gMain.state++;
+                }
+                else
+                {
+                    CloseLink();
+                    MenuZeroFillWindowRect(6, 5, 23, 8);
+                    GetEventLoadMessage(gStringVar4, 1);
+                    sub_8072044(gStringVar4);
+                    gMain.state = 13;
+                    break;
+                }
+            }
+            if (gMain.newKeys & B_BUTTON)
+            {
+                PlaySE(SE_SELECT);
+                CloseLink();
+                gMain.state = 15;
+                break;
+            }
+            break;
+#else
         case 5:
             if (GetLinkPlayerCount_2() != 2)
             {
@@ -158,7 +225,7 @@ void sub_81469E4(void)
                 {
                     sub_800832C();
                     MenuZeroFillWindowRect(6, 5, 23, 8);
-                    sub_81469AC(gStringVar4, 1);
+                    GetEventLoadMessage(gStringVar4, 1);
                     sub_8072044(gStringVar4);
                     ptr = (u8 *)&gMain;
                     offset1 = offsetof(struct Main, state);
@@ -166,7 +233,7 @@ void sub_81469E4(void)
                     ptr += offset1;
                     *ptr = 13;
                 }
-                else if (sub_8146914())
+                else if (CheckLanguageMatch())
                 {
                     register u8 *ptr2 asm("r1");
                     register int offset3 asm("r0");
@@ -185,7 +252,7 @@ void sub_81469E4(void)
                     CloseLink();
                     MenuZeroFillWindowRect(6, 5, 23, 8);
                 label:
-                    sub_81469AC(gStringVar4, 1);
+                    GetEventLoadMessage(gStringVar4, 1);
                     sub_8072044(gStringVar4);
                     ptr = (u8 *)&gMain;
                     offset2 = offsetof(struct Main, state);
@@ -202,6 +269,7 @@ void sub_81469E4(void)
                 break;
             }
             break;
+#endif
         case 7:
             if (MenuUpdateWindowText())
                 gMain.state++;
@@ -225,7 +293,7 @@ void sub_81469E4(void)
                 break;
             unkVal = sub_812613C(unk_2000000);
             CpuFill32(0, unk_2000000, 0x7D4);
-            if (!sub_81469AC(gStringVar4, unkVal))
+            if (!GetEventLoadMessage(gStringVar4, unkVal))
                 sub_8125D44(0);
             gMain.state++;
             break;
@@ -264,7 +332,7 @@ void sub_81469E4(void)
         {
             CloseLink();
             MenuZeroFillWindowRect(6, 5, 23, 8);
-            sub_81469AC(gStringVar4, 1);
+            GetEventLoadMessage(gStringVar4, 1);
             sub_8072044(gStringVar4);
             gMain.state = 13;
         }
