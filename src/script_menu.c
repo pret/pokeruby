@@ -13,14 +13,13 @@ struct MultichoiceListStruct
 
 extern struct MultichoiceListStruct gMultichoiceLists[];
 
-extern void sub_80B5230(u8, u8, u8, u8, u8, u8);
-extern void sub_80B52B4(u8);
-extern void task_yes_no_maybe(u8);
-
 extern u16 gScriptResult;
 
 void DrawMultichoiceMenu(u8, u8, u8, struct MenuAction *list, u8, u8);
 void sub_80B53B4(u8, u8, u8, struct MenuAction *list, u8);
+void sub_80B52B4(u8);
+void sub_80B5230(u8, u8, u8, u8, u8, u8);
+void task_yes_no_maybe(u8);
 
 bool8 sub_80B5054(u8 left, u8 top, u8 var3, u8 var4)
 {
@@ -195,4 +194,36 @@ bool8 IsScriptActive(void)
 		return FALSE;
 	else
 		return TRUE;
+}
+
+void task_yes_no_maybe(u8 taskId)
+{
+    u8 left, top;
+
+    if (gTasks[taskId].data[2] < 5)
+    {
+        gTasks[taskId].data[2]++;
+        return;
+    }
+
+    switch (ProcessMenuInputNoWrap())
+    {
+    case -2:
+        return;
+    case -1:
+    case 1:
+        PlaySE(5);
+        gScriptResult = 0;
+        break;
+    case 0:
+        gScriptResult = 1;
+        break;
+    }
+
+    left = gTasks[taskId].data[0];
+    top = gTasks[taskId].data[1];
+
+    MenuZeroFillWindowRect(left, top, left + 6, top + 5);
+    DestroyTask(taskId);
+    EnableBothScriptContexts();
 }
