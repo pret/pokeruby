@@ -15,12 +15,12 @@ extern struct MultichoiceListStruct gMultichoiceLists[];
 
 extern void sub_80B5230(u8, u8, u8, u8, u8, u8);
 extern void sub_80B52B4(u8);
+extern void task_yes_no_maybe(u8);
 
 extern u16 gScriptResult;
 
 void DrawMultichoiceMenu(u8, u8, u8, struct MenuAction *list, u8, u8);
 void sub_80B53B4(u8, u8, u8, struct MenuAction *list, u8);
-void task_yes_no_maybe(u8);
 
 bool8 sub_80B5054(u8 left, u8 top, u8 var3, u8 var4)
 {
