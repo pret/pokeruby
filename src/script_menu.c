@@ -11,7 +11,7 @@ struct MultichoiceListStruct
     u8 count;
 };
 
-extern struct MultichoiceListStruct gMultichoiceLists[];
+extern const struct MultichoiceListStruct gMultichoiceLists[];
 
 extern u16 gScriptResult;
 
@@ -20,6 +20,7 @@ void sub_80B53B4(u8, u8, u8, struct MenuAction *list, u8);
 void sub_80B52B4(u8);
 void sub_80B5230(u8, u8, u8, u8, u8, u8);
 void task_yes_no_maybe(u8);
+void sub_80B5684(u8);
 
 bool8 sub_80B5054(u8 left, u8 top, u8 var3, u8 var4)
 {
@@ -65,7 +66,7 @@ void DrawMultichoiceMenu(u8 left, u8 top, u8 count, struct MenuAction *list, u8 
         if(width < newWidth)
             width = newWidth;
     }
-    
+
     right = width;
     right = (right + left) + 1;
 
@@ -102,14 +103,14 @@ void sub_80B5230(u8 left, u8 top, u8 right, u8 bottom, u8 unkVar, u8 count)
 void sub_80B52B4(u8 taskId)
 {
     s8 var;
-    
+
     if(!gPaletteFade.active)
     {
         if(!gTasks[taskId].data[5])
             var = ProcessMenuInputNoWrap();
         else
             var = ProcessMenuInput();
-        
+
         if(var != -2)
         {
             if(var == -1)
@@ -119,8 +120,10 @@ void sub_80B52B4(u8 taskId)
                     PlaySE(5);
                     gScriptResult = 127;
                 }
-				else
-					return;
+                else
+                {
+                    return;
+                }
             }
             else
             {
@@ -136,14 +139,14 @@ void sub_80B52B4(u8 taskId)
 
 bool8 Multichoice(u8 var1, u8 var2, u8 var3, u8 var4)
 {
-	if(FuncIsActiveTask(sub_80B52B4) == 1)
-		return FALSE;
-	else
-	{
-		gScriptResult = 0xFF;
-		sub_80B53B4(var1, var2, gMultichoiceLists[var3].count, gMultichoiceLists[var3].list, var4);
-		return TRUE;
-	}
+    if(FuncIsActiveTask(sub_80B52B4) == 1)
+        return FALSE;
+    else
+    {
+        gScriptResult = 0xFF;
+        sub_80B53B4(var1, var2, gMultichoiceLists[var3].count, gMultichoiceLists[var3].list, var4);
+        return TRUE;
+    }
 }
 
 void sub_80B53B4(u8 left, u8 top, u8 count, struct MenuAction *list, u8 var4)
@@ -172,28 +175,28 @@ void sub_80B53B4(u8 left, u8 top, u8 count, struct MenuAction *list, u8 var4)
 
 bool8 yes_no_box(u8 var1, u8 var2)
 {
-	u8 taskId;
+    u8 taskId;
 
-	if(FuncIsActiveTask(task_yes_no_maybe) == 1)
-		return FALSE;
-	else
-	{
-		gScriptResult = 0xFF;
-		DisplayYesNoMenu(var1, var2, 1);
-		taskId = CreateTask(task_yes_no_maybe, 0x50);
-		gTasks[taskId].data[0] = var1;
-		gTasks[taskId].data[1] = var2;
-		return TRUE;
-	}
+    if(FuncIsActiveTask(task_yes_no_maybe) == 1)
+        return FALSE;
+    else
+    {
+        gScriptResult = 0xFF;
+        DisplayYesNoMenu(var1, var2, 1);
+        taskId = CreateTask(task_yes_no_maybe, 0x50);
+        gTasks[taskId].data[0] = var1;
+        gTasks[taskId].data[1] = var2;
+        return TRUE;
+    }
 }
 
 // unused
 bool8 IsScriptActive(void)
 {
-	if(gScriptResult == 0xFF)
-		return FALSE;
-	else
-		return TRUE;
+    if(gScriptResult == 0xFF)
+        return FALSE;
+    else
+        return TRUE;
 }
 
 void task_yes_no_maybe(u8 taskId)
@@ -226,4 +229,72 @@ void task_yes_no_maybe(u8 taskId)
     MenuZeroFillWindowRect(left, top, left + 6, top + 5);
     DestroyTask(taskId);
     EnableBothScriptContexts();
+}
+
+bool8 sub_80B5578(u8 left, u8 top, u8 multichoiceId, u8 a4, u8 columnCount)
+{
+    u8 bottom = 0;
+
+    if (FuncIsActiveTask(sub_80B5684) == TRUE)
+    {
+        return FALSE;
+    }
+    else
+    {
+        u8 taskId;
+        u8 width;
+
+        gScriptResult = 255;
+
+        sub_807274C(left, top, gMultichoiceLists[multichoiceId].count, 0, gMultichoiceLists[multichoiceId].list, columnCount, 0);
+
+        taskId = CreateTask(sub_80B5684, 80);
+
+        if (!((gMultichoiceLists[multichoiceId].count >> 1) < columnCount || (gMultichoiceLists[multichoiceId].count & 1))
+         || columnCount == 1 || gMultichoiceLists[multichoiceId].count == columnCount)
+        {
+            bottom = (2 * (gMultichoiceLists[multichoiceId].count / columnCount)) + 1 + top;
+        }
+        else
+        {
+            bottom = (2 * (gMultichoiceLists[multichoiceId].count / columnCount)) + 3 + top;
+        }
+
+        width = sub_807288C(columnCount);
+        gTasks[taskId].data[0] = left;
+        gTasks[taskId].data[1] = top;
+        gTasks[taskId].data[2] = width + left + 2;
+        gTasks[taskId].data[3] = bottom;
+        gTasks[taskId].data[4] = a4;
+        return TRUE;
+    }
+}
+
+void sub_80B5684(u8 taskId)
+{
+    s8 var = sub_80727CC();
+
+    if (var != -2)
+    {
+        if (var == -1)
+        {
+            if (!gTasks[taskId].data[4])
+            {
+                PlaySE(5);
+                gScriptResult = 127;
+            }
+            else
+            {
+                return;
+            }
+        }
+        else
+        {
+            gScriptResult = var;
+        }
+        sub_8072DEC();
+        MenuZeroFillWindowRect(gTasks[taskId].data[0], gTasks[taskId].data[1], gTasks[taskId].data[2], gTasks[taskId].data[3]);
+        DestroyTask(taskId);
+        EnableBothScriptContexts();
+    }
 }

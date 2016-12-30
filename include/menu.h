@@ -41,7 +41,7 @@ s8 ProcessMenuInput(void);
 s8 ProcessMenuInputNoWrap(void);
 u8 MoveMenuCursor3(s8);
 u8 MoveMenuCursor4(s8);
-void sub_807274C(u8, u8, u8, u8, u8 * const [][2], u8, u32);
+void sub_807274C(u8, u8, u8, u8, const struct MenuAction[], u8, u32);
 s8 sub_80727CC(void);
 u8 sub_807288C(u8);
 void PrintMenuItems(u8, u8, u8, const struct MenuAction[]);
