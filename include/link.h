@@ -124,11 +124,13 @@ struct Link
 
 extern struct Link gLink;
 extern u16 gRecvCmds[CMD_LENGTH][MAX_LINK_PLAYERS];
+extern u16 gLinkType;
 extern u32 gLinkStatus;
 extern u16 gSendCmd[CMD_LENGTH];
 extern u8 gShouldAdvanceLinkState;
 extern struct LinkPlayer gLinkPlayers[];
 extern u16 word_3002910[];
+extern bool8 gReceivedRemoteLinkPlayers;
 
 void Task_DestroySelf(u8);
 void sub_8007270(u8);

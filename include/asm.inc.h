@@ -397,6 +397,7 @@ void sub_811AAD8(u8);
 u8 sub_811AAE8(void);
 
 // asm/mystery_event_script.o
+u32 sub_812613C(u8 *);
 void sub_8126160(u8);
 u16 sub_8126338(void);
 
