@@ -171,6 +171,7 @@ static void CB2_MysteryEventMenu(void)
                 {
                     sub_8072044(gSystemText_DontCutLink);
                     gMain.state++;
+                    break;
                 }
                 else
                 {
