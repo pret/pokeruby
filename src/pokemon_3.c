@@ -11,6 +11,22 @@
 #include "rtc.h"
 #include "item.h"
 
+#define EVO_FRIENDSHIP       0x0001 // Pokémon levels up with friendship ≥ 220
+#define EVO_FRIENDSHIP_DAY   0x0002 // Pokémon levels up during the day with friendship ≥ 220
+#define EVO_FRIENDSHIP_NIGHT 0x0003 // Pokémon levels up at night with friendship ≥ 220
+#define EVO_LEVEL            0x0004 // Pokémon reaches the specified level
+#define EVO_TRADE            0x0005 // Pokémon is traded
+#define EVO_TRADE_ITEM       0x0006 // Pokémon is traded while it's holding the specified item
+#define EVO_ITEM             0x0007 // specified item is used on Pokémon
+#define EVO_LEVEL_ATK_GT_DEF 0x0008 // Pokémon reaches the specified level with attack > defense
+#define EVO_LEVEL_ATK_EQ_DEF 0x0009 // Pokémon reaches the specified level with attack = defense
+#define EVO_LEVEL_ATK_LT_DEF 0x000a // Pokémon reaches the specified level with attack < defense
+#define EVO_LEVEL_SILCOON    0x000b // Pokémon reaches the specified level with a Silcoon personality value
+#define EVO_LEVEL_CASCOON    0x000c // Pokémon reaches the specified level with a Cascoon personality value
+#define EVO_LEVEL_NINJASK    0x000d // Pokémon reaches the specified level (special value for Ninjask)
+#define EVO_LEVEL_SHEDINJA   0x000e // Pokémon reaches the specified level (special value for Shedinja)
+#define EVO_BEAUTY           0x000f // Pokémon levels up with beauty ≥ specified value
+
 struct Evolution
 {
     u16 method;
@@ -283,52 +299,52 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem)
         {
             switch (gEvolutionTable[species].evolutions[i].method)
             {
-            case 1:
+            case EVO_FRIENDSHIP:
                 if (friendship >= 220)
                     targetSpecies = gEvolutionTable[species].evolutions[i].targetSpecies;
                 break;
-            case 2:
+            case EVO_FRIENDSHIP_DAY:
                 RtcCalcLocalTime();
                 if (gLocalTime.hours >= 12 && gLocalTime.hours < 24 && friendship >= 220)
                     targetSpecies = gEvolutionTable[species].evolutions[i].targetSpecies;
                 break;
-            case 3:
+            case EVO_FRIENDSHIP_NIGHT:
                 RtcCalcLocalTime();
                 if (gLocalTime.hours >= 0 && gLocalTime.hours < 12 && friendship >= 220)
                     targetSpecies = gEvolutionTable[species].evolutions[i].targetSpecies;
                 break;
-            case 4:
+            case EVO_LEVEL:
                 if (gEvolutionTable[species].evolutions[i].param <= level)
                     targetSpecies = gEvolutionTable[species].evolutions[i].targetSpecies;
                 break;
-            case 8:
+            case EVO_LEVEL_ATK_GT_DEF:
                 if (gEvolutionTable[species].evolutions[i].param <= level)
                     if (GetMonData(mon, MON_DATA_ATK, 0) > GetMonData(mon, MON_DATA_DEF, 0))
                         targetSpecies = gEvolutionTable[species].evolutions[i].targetSpecies;
                 break;
-            case 9:
+            case EVO_LEVEL_ATK_EQ_DEF:
                 if (gEvolutionTable[species].evolutions[i].param <= level)
                     if (GetMonData(mon, MON_DATA_ATK, 0) == GetMonData(mon, MON_DATA_DEF, 0))
                         targetSpecies = gEvolutionTable[species].evolutions[i].targetSpecies;
                 break;
-            case 10:
+            case EVO_LEVEL_ATK_LT_DEF:
                 if (gEvolutionTable[species].evolutions[i].param <= level)
                     if (GetMonData(mon, MON_DATA_ATK, 0) < GetMonData(mon, MON_DATA_DEF, 0))
                         targetSpecies = gEvolutionTable[species].evolutions[i].targetSpecies;
                 break;
-            case 11:
+            case EVO_LEVEL_SILCOON:
                 if (gEvolutionTable[species].evolutions[i].param <= level && (upperPersonality % 10) <= 4)
                     targetSpecies = gEvolutionTable[species].evolutions[i].targetSpecies;
                 break;
-            case 12:
+            case EVO_LEVEL_CASCOON:
                 if (gEvolutionTable[species].evolutions[i].param <= level && (upperPersonality % 10) > 4)
                     targetSpecies = gEvolutionTable[species].evolutions[i].targetSpecies;
                 break;
-            case 13:
+            case EVO_LEVEL_NINJASK:
                 if (gEvolutionTable[species].evolutions[i].param <= level)
                     targetSpecies = gEvolutionTable[species].evolutions[i].targetSpecies;
                 break;
-            case 15:
+            case EVO_BEAUTY:
                 if (gEvolutionTable[species].evolutions[i].param <= beauty)
                     targetSpecies = gEvolutionTable[species].evolutions[i].targetSpecies;
                 break;
@@ -340,10 +356,10 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem)
         {
             switch (gEvolutionTable[species].evolutions[i].method)
             {
-            case 5:
+            case EVO_TRADE:
                 targetSpecies = gEvolutionTable[species].evolutions[i].targetSpecies;
                 break;
-            case 6:
+            case EVO_TRADE_ITEM:
                 if (gEvolutionTable[species].evolutions[i].param == heldItem)
                 {
                     heldItem = 0;
@@ -358,7 +374,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem)
     case 3:
         for (i = 0; i < 5; i++)
         {
-            if (gEvolutionTable[species].evolutions[i].method == 7
+            if (gEvolutionTable[species].evolutions[i].method == EVO_ITEM
              && gEvolutionTable[species].evolutions[i].param == evolutionItem)
             {
                 targetSpecies = gEvolutionTable[species].evolutions[i].targetSpecies;
