@@ -12,6 +12,9 @@ struct Fanfare
     u16 duration;
 };
 
+// Hack: different prototype than definition
+u32 SpeciesToCryId(u32);
+
 extern u16 gUnknown_020239F8;
 extern struct MusicPlayerInfo *gMPlay_PokemonCry;
 extern u8 gPokemonCryBGMDuckingCounter;

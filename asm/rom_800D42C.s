@@ -82431,7 +82431,7 @@ _080371D0:
 	mov r0, r10
 	movs r1, 0x4
 	movs r2, 0x4
-	bl sub_803F1DC
+	bl GetItemEffectParamOffset
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0
