@@ -50,7 +50,7 @@ SECTIONS {
         src/decompress.o(.text);
         asm/rom_800D42C.o(.text);
         src/pokemon_1.o(.text);
-        asm/calculate_base_damage.o(.text);
+        src/calculate_base_damage.o(.text);
         src/pokemon_2.o(.text);
         asm/pokemon_item_effect.o(.text);
         src/pokemon_3.o(.text);
