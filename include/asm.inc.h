@@ -11,7 +11,6 @@ void sub_8032AA8(u8 index, int i);
 
 // asm/rom_803D1FC.o
 u16 SpeciesToNationalPokedexNum(u16);
-u32 SpeciesToCryId(u32);
 void DrawSpindaSpots(u16, u32, void *, u8);
 u8 sub_803FC58(u16);
 void AdjustFriendship(struct Pokemon *, u8);
