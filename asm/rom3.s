@@ -2133,7 +2133,7 @@ dp01_build_cmdbuf_x0F_aa_b_cc_dddd_e_mlc_weather_00_x1Cbytes: @ 800C870
 	lsls r0, 24
 	cmp r0, 0
 	bne _0800C910
-	ldr r0, _0800C90C @ =word_2024DB8
+	ldr r0, _0800C90C @ =gBattleWeather
 	ldrh r0, [r0]
 	strb r0, [r7, 0xC]
 	ands r6, r0
@@ -2144,7 +2144,7 @@ dp01_build_cmdbuf_x0F_aa_b_cc_dddd_e_mlc_weather_00_x1Cbytes: @ 800C870
 	.align 2, 0
 _0800C904: .4byte gUnknown_03004040
 _0800C908: .4byte gUnknown_02024C0E
-_0800C90C: .4byte word_2024DB8
+_0800C90C: .4byte gBattleWeather
 _0800C910:
 	ldr r0, _0800C944 @ =gUnknown_03004040
 	movs r1, 0

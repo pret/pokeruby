@@ -6574,7 +6574,7 @@ _08010906:
 	strb r1, [r2]
 	ldr r3, _08010B00 @ =gUnknown_02024C08
 	strb r1, [r3]
-	ldr r4, _08010B04 @ =word_2024DB8
+	ldr r4, _08010B04 @ =gBattleWeather
 	strh r1, [r4]
 	ldr r1, _08010B08 @ =gUnknown_02024DBC
 	movs r2, 0
@@ -6804,7 +6804,7 @@ _08010AF4: .4byte gUnknown_02024C80
 _08010AF8: .4byte gUnknown_02024C7A
 _08010AFC: .4byte gUnknown_02024C07
 _08010B00: .4byte gUnknown_02024C08
-_08010B04: .4byte word_2024DB8
+_08010B04: .4byte gBattleWeather
 _08010B08: .4byte gUnknown_02024DBC
 _08010B0C: .4byte gUnknown_02024C6C
 _08010B10: .4byte gUnknown_020239F8
@@ -11323,7 +11323,7 @@ b_first_side: @ 8012FF0
 	ldrb r3, [r0]
 	cmp r3, 0x21
 	bne _0801305C
-	ldr r0, _08013074 @ =word_2024DB8
+	ldr r0, _08013074 @ =gBattleWeather
 	ldrh r1, [r0]
 	movs r0, 0x7
 	ands r0, r1
@@ -11332,7 +11332,7 @@ b_first_side: @ 8012FF0
 _0801305C:
 	cmp r3, 0x22
 	bne _08013078
-	ldr r0, _08013074 @ =word_2024DB8
+	ldr r0, _08013074 @ =gBattleWeather
 	ldrh r1, [r0]
 	movs r0, 0x60
 	ands r0, r1
@@ -11343,7 +11343,7 @@ _0801306C:
 	b _0801307A
 	.align 2, 0
 _08013070: .4byte gBattleMons
-_08013074: .4byte word_2024DB8
+_08013074: .4byte gBattleWeather
 _08013078:
 	movs r3, 0x1
 _0801307A:
@@ -11357,7 +11357,7 @@ _0801307A:
 	ldrb r2, [r0]
 	cmp r2, 0x21
 	bne _0801309A
-	ldr r0, _080130B4 @ =word_2024DB8
+	ldr r0, _080130B4 @ =gBattleWeather
 	ldrh r1, [r0]
 	movs r0, 0x7
 	ands r0, r1
@@ -11366,7 +11366,7 @@ _0801307A:
 _0801309A:
 	cmp r2, 0x22
 	bne _080130BA
-	ldr r0, _080130B4 @ =word_2024DB8
+	ldr r0, _080130B4 @ =gBattleWeather
 	ldrh r1, [r0]
 	movs r0, 0x60
 	ands r0, r1
@@ -11377,7 +11377,7 @@ _080130AA:
 	b _080130BC
 	.align 2, 0
 _080130B0: .4byte gBattleMons
-_080130B4: .4byte word_2024DB8
+_080130B4: .4byte gBattleWeather
 _080130B8:
 	movs r3, 0x1
 _080130BA:
@@ -17566,7 +17566,7 @@ _08016318: .4byte gUnknown_081D939A
 _0801631C: .4byte 0x02000000
 _08016320: .4byte 0x0001600e
 _08016324:
-	ldr r3, _0801635C @ =word_2024DB8
+	ldr r3, _0801635C @ =gBattleWeather
 	ldrh r2, [r3]
 	movs r0, 0x7
 	ands r0, r2
@@ -17596,7 +17596,7 @@ _08016332:
 	strb r0, [r1, 0x5]
 	b _0801639C
 	.align 2, 0
-_0801635C: .4byte word_2024DB8
+_0801635C: .4byte gBattleWeather
 _08016360: .4byte gUnknown_02024DBC
 _08016364: .4byte 0x0000fffe
 _08016368: .4byte 0x0000fffd
@@ -17633,7 +17633,7 @@ _0801639C:
 _080163A0: .4byte gUnknown_02024D1E
 _080163A4: .4byte gUnknown_081D8F62
 _080163A8:
-	ldr r3, _080163DC @ =word_2024DB8
+	ldr r3, _080163DC @ =gBattleWeather
 	ldrh r2, [r3]
 	movs r0, 0x18
 	ands r0, r2
@@ -17660,7 +17660,7 @@ _080163B6:
 	ldr r0, _080163EC @ =gUnknown_081D8FFF
 	b _080163F4
 	.align 2, 0
-_080163DC: .4byte word_2024DB8
+_080163DC: .4byte gBattleWeather
 _080163E0: .4byte gUnknown_02024DBC
 _080163E4: .4byte 0x0000fff7
 _080163E8: .4byte gUnknown_02024C10
@@ -17687,7 +17687,7 @@ _08016414: .4byte 0x02000000
 _08016418: .4byte 0x000160a4
 _0801641C: .4byte gUnknown_02024D1E
 _08016420:
-	ldr r3, _08016450 @ =word_2024DB8
+	ldr r3, _08016450 @ =gBattleWeather
 	ldrh r2, [r3]
 	movs r0, 0x60
 	ands r0, r2
@@ -17712,7 +17712,7 @@ _08016420:
 	ldr r0, _08016460 @ =gUnknown_081D9016
 	b _08016468
 	.align 2, 0
-_08016450: .4byte word_2024DB8
+_08016450: .4byte gBattleWeather
 _08016454: .4byte gUnknown_02024DBC
 _08016458: .4byte 0x0000ffdf
 _0801645C: .4byte gUnknown_02024C10
@@ -17741,7 +17741,7 @@ _08016488: .4byte gUnknown_081D9008
 _0801648C: .4byte 0x02000000
 _08016490: .4byte 0x0001600e
 _08016494:
-	ldr r3, _080164BC @ =word_2024DB8
+	ldr r3, _080164BC @ =gBattleWeather
 	ldrh r2, [r3]
 	movs r0, 0x80
 	ands r0, r2
@@ -17762,7 +17762,7 @@ _08016494:
 	ldr r0, _080164CC @ =gUnknown_081D8FFF
 	b _080164D4
 	.align 2, 0
-_080164BC: .4byte word_2024DB8
+_080164BC: .4byte gBattleWeather
 _080164C0: .4byte gUnknown_02024DBC
 _080164C4: .4byte 0x0000ff7f
 _080164C8: .4byte gUnknown_02024C10
@@ -21347,7 +21347,7 @@ _0801825C:
 	movs r0, 0
 	b _08018314
 _08018260:
-	ldr r1, _0801831C @ =word_2024DB8
+	ldr r1, _0801831C @ =gBattleWeather
 	ldrh r0, [r1]
 	movs r2, 0xE7
 	ands r2, r0
@@ -21447,7 +21447,7 @@ _08018314:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0801831C: .4byte word_2024DB8
+_0801831C: .4byte gBattleWeather
 _08018320: .4byte gBattleMons
 	thumb_func_end castform_switch
 
@@ -21766,7 +21766,7 @@ _080185A4:
 	.4byte _08018620
 	.4byte _080185D0
 _080185D0:
-	ldr r2, _080185EC @ =word_2024DB8
+	ldr r2, _080185EC @ =gBattleWeather
 	ldrh r1, [r2]
 	movs r0, 0x7
 	ands r0, r1
@@ -21780,11 +21780,11 @@ _080185D0:
 	movs r1, 0xA
 	b _08018638
 	.align 2, 0
-_080185EC: .4byte word_2024DB8
+_080185EC: .4byte gBattleWeather
 _080185F0: .4byte 0x02000000
 _080185F4: .4byte 0x000160a4
 _080185F8:
-	ldr r3, _08018614 @ =word_2024DB8
+	ldr r3, _08018614 @ =gBattleWeather
 	ldrh r1, [r3]
 	movs r2, 0x18
 	adds r0, r2, 0
@@ -21798,11 +21798,11 @@ _080185F8:
 	movs r1, 0xC
 	b _08018638
 	.align 2, 0
-_08018614: .4byte word_2024DB8
+_08018614: .4byte gBattleWeather
 _08018618: .4byte 0x02000000
 _0801861C: .4byte 0x000160a4
 _08018620:
-	ldr r3, _08018668 @ =word_2024DB8
+	ldr r3, _08018668 @ =gBattleWeather
 	ldrh r1, [r3]
 	movs r2, 0x60
 	adds r0, r2, 0
@@ -21838,14 +21838,14 @@ _08018656:
 	bl b_push_move_exec
 	bl _08019F76
 	.align 2, 0
-_08018668: .4byte word_2024DB8
+_08018668: .4byte gBattleWeather
 _0801866C: .4byte 0x02000000
 _08018670: .4byte 0x000160a4
 _08018674: .4byte 0x00016003
 _08018678: .4byte gUnknown_02024D1E
 _0801867C: .4byte gUnknown_081D901D
 _08018680:
-	ldr r2, _080186A8 @ =word_2024DB8
+	ldr r2, _080186A8 @ =gBattleWeather
 	ldrh r1, [r2]
 	movs r0, 0x4
 	ands r0, r1
@@ -21864,12 +21864,12 @@ _08018690:
 	strb r5, [r0]
 	bl _08019F22
 	.align 2, 0
-_080186A8: .4byte word_2024DB8
+_080186A8: .4byte gBattleWeather
 _080186AC: .4byte gUnknown_081D9704
 _080186B0: .4byte 0x02000000
 _080186B4: .4byte 0x00016003
 _080186B8:
-	ldr r2, _080186E0 @ =word_2024DB8
+	ldr r2, _080186E0 @ =gBattleWeather
 	ldrh r1, [r2]
 	movs r0, 0x10
 	ands r0, r1
@@ -21888,12 +21888,12 @@ _080186C8:
 	strb r2, [r0]
 	bl _08019F22
 	.align 2, 0
-_080186E0: .4byte word_2024DB8
+_080186E0: .4byte gBattleWeather
 _080186E4: .4byte gUnknown_081D9744
 _080186E8: .4byte 0x02000000
 _080186EC: .4byte 0x00016003
 _080186F0:
-	ldr r2, _08018718 @ =word_2024DB8
+	ldr r2, _08018718 @ =gBattleWeather
 	ldrh r1, [r2]
 	movs r0, 0x40
 	ands r0, r1
@@ -21912,7 +21912,7 @@ _08018700:
 	strb r5, [r0]
 	bl _08019F22
 	.align 2, 0
-_08018718: .4byte word_2024DB8
+_08018718: .4byte gBattleWeather
 _0801871C: .4byte gUnknown_081D97FE
 _08018720: .4byte 0x02000000
 _08018724: .4byte 0x00016003
@@ -22086,7 +22086,7 @@ _08018876:
 	beq _0801888E
 	bl _08019F76
 _0801888E:
-	ldr r0, _080188D0 @ =word_2024DB8
+	ldr r0, _080188D0 @ =gBattleWeather
 	ldrh r1, [r0]
 	movs r0, 0x7
 	ands r0, r1
@@ -22118,7 +22118,7 @@ _080188C4:
 	str r0, [r1]
 	bl _08019F22
 	.align 2, 0
-_080188D0: .4byte word_2024DB8
+_080188D0: .4byte gBattleWeather
 _080188D4: .4byte gUnknown_081D9730
 _080188D8: .4byte gUnknown_02024BEC
 _080188DC:
@@ -28938,7 +28938,7 @@ _0801C22E:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0801C27E
-	ldr r0, _0801C2A8 @ =word_2024DB8
+	ldr r0, _0801C2A8 @ =gBattleWeather
 	ldrh r1, [r0]
 	movs r0, 0x7
 	ands r0, r1
@@ -28971,7 +28971,7 @@ _0801C290:
 _0801C29C: .4byte 0xfffeffff
 _0801C2A0: .4byte 0xfffdffff
 _0801C2A4: .4byte 0xfffbffff
-_0801C2A8: .4byte word_2024DB8
+_0801C2A8: .4byte gBattleWeather
 _0801C2AC: .4byte gBattleMoves
 _0801C2B0:
 	movs r0, 0
@@ -29197,7 +29197,7 @@ _0801C430:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0801C482
-	ldr r0, _0801C574 @ =word_2024DB8
+	ldr r0, _0801C574 @ =gBattleWeather
 	ldrh r1, [r0]
 	movs r0, 0x60
 	ands r0, r1
@@ -29267,7 +29267,7 @@ _0801C4C0:
 	ldrb r0, [r0]
 	cmp r0, 0x8
 	bne _0801C518
-	ldr r0, _0801C574 @ =word_2024DB8
+	ldr r0, _0801C574 @ =gBattleWeather
 	ldrh r1, [r0]
 	movs r0, 0x18
 	ands r0, r1
@@ -29325,7 +29325,7 @@ _0801C544:
 	.align 2, 0
 _0801C56C: .4byte gUnknown_02024C07
 _0801C570: .4byte gBattleMoves
-_0801C574: .4byte word_2024DB8
+_0801C574: .4byte gBattleWeather
 _0801C578: .4byte gAccuracyStageRatios
 _0801C57C: .4byte gBattleMons
 _0801C580: .4byte gUnknown_02024C08
@@ -33722,7 +33722,7 @@ _0801E7EA:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0801E826
-	ldr r0, _0801E87C @ =word_2024DB8
+	ldr r0, _0801E87C @ =gBattleWeather
 	ldrh r1, [r0]
 	movs r0, 0x60
 	ands r0, r1
@@ -33778,7 +33778,7 @@ _0801E86E:
 	mov r10, r3
 	b _0801EA14
 	.align 2, 0
-_0801E87C: .4byte word_2024DB8
+_0801E87C: .4byte gBattleWeather
 _0801E880: .4byte gBattleMons
 _0801E884: .4byte gUnknown_02024C0A
 _0801E888:
@@ -47354,7 +47354,7 @@ _080256CC: .4byte gUnknown_02024C10
 	thumb_func_start sub_80256D0
 sub_80256D0: @ 80256D0
 	push {lr}
-	ldr r2, _080256F0 @ =word_2024DB8
+	ldr r2, _080256F0 @ =gBattleWeather
 	ldrh r0, [r2]
 	movs r1, 0x7
 	ands r1, r0
@@ -47370,7 +47370,7 @@ sub_80256D0: @ 80256D0
 	strb r0, [r1, 0x5]
 	b _0802570C
 	.align 2, 0
-_080256F0: .4byte word_2024DB8
+_080256F0: .4byte gBattleWeather
 _080256F4: .4byte gUnknown_02024C68
 _080256F8: .4byte gUnknown_02024D1E
 _080256FC:
@@ -50358,7 +50358,7 @@ _08026E90: .4byte gUnknown_02024C10
 	thumb_func_start sub_8026E94
 sub_8026E94: @ 8026E94
 	push {lr}
-	ldr r2, _08026EB4 @ =word_2024DB8
+	ldr r2, _08026EB4 @ =gBattleWeather
 	ldrh r1, [r2]
 	movs r0, 0x18
 	ands r0, r1
@@ -50374,7 +50374,7 @@ sub_8026E94: @ 8026E94
 	strb r0, [r1, 0x5]
 	b _08026ED2
 	.align 2, 0
-_08026EB4: .4byte word_2024DB8
+_08026EB4: .4byte gBattleWeather
 _08026EB8: .4byte gUnknown_02024C68
 _08026EBC: .4byte gUnknown_02024D1E
 _08026EC0:
@@ -50428,7 +50428,7 @@ _08026F0A:
 	beq _08026F20
 	b _0802701C
 _08026F20:
-	ldr r2, _08026F94 @ =word_2024DB8
+	ldr r2, _08026F94 @ =gBattleWeather
 	ldrh r1, [r2]
 	movs r0, 0x18
 	ands r0, r1
@@ -50486,7 +50486,7 @@ _08026F20:
 	movs r0, 0x1
 	b _08026FAC
 	.align 2, 0
-_08026F94: .4byte word_2024DB8
+_08026F94: .4byte gBattleWeather
 _08026F98: .4byte gUnknown_02024C07
 _08026F9C: .4byte gBattleMons
 _08026FA0: .4byte gUnknown_02024C98
@@ -53030,7 +53030,7 @@ move_weather_interaction: @ 80283B4
 	adds r3, r1, 0
 	cmp r0, 0x97
 	bne _080283D8
-	ldr r0, _08028410 @ =word_2024DB8
+	ldr r0, _08028410 @ =gBattleWeather
 	ldrh r1, [r0]
 	movs r0, 0x60
 	ands r0, r1
@@ -53066,7 +53066,7 @@ _080283FA:
 	b _0802841A
 	.align 2, 0
 _0802840C: .4byte gBattleMoves
-_08028410: .4byte word_2024DB8
+_08028410: .4byte gBattleWeather
 _08028414: .4byte gUnknown_02024C6C
 _08028418:
 	movs r0, 0x2
@@ -55063,7 +55063,7 @@ _080293E4: .4byte gUnknown_02024C10
 	thumb_func_start sub_80293E8
 sub_80293E8: @ 80293E8
 	push {lr}
-	ldr r2, _08029408 @ =word_2024DB8
+	ldr r2, _08029408 @ =gBattleWeather
 	ldrh r1, [r2]
 	movs r0, 0x60
 	ands r0, r1
@@ -55079,7 +55079,7 @@ sub_80293E8: @ 80293E8
 	strb r0, [r1, 0x5]
 	b _08029426
 	.align 2, 0
-_08029408: .4byte word_2024DB8
+_08029408: .4byte gBattleWeather
 _0802940C: .4byte gUnknown_02024C68
 _08029410: .4byte gUnknown_02024D1E
 _08029414:
@@ -55398,7 +55398,7 @@ atkC0_recoverbasedonsunlight: @ 802967C
 	ldrh r0, [r0, 0x2C]
 	cmp r1, r0
 	beq _0802975C
-	ldr r4, _080296F4 @ =word_2024DB8
+	ldr r4, _080296F4 @ =gBattleWeather
 	ldrh r0, [r4]
 	cmp r0, 0
 	beq _080296CE
@@ -55439,7 +55439,7 @@ _080296CE:
 _080296E8: .4byte gUnknown_02024C08
 _080296EC: .4byte gUnknown_02024C07
 _080296F0: .4byte gBattleMons
-_080296F4: .4byte word_2024DB8
+_080296F4: .4byte gBattleWeather
 _080296F8: .4byte gUnknown_02024BEC
 _080296FC:
 	ldrh r1, [r4]
@@ -56293,7 +56293,7 @@ _08029DA8: .4byte gUnknown_02024C10
 	thumb_func_start sub_8029DAC
 sub_8029DAC: @ 8029DAC
 	push {lr}
-	ldr r3, _08029DD0 @ =word_2024DB8
+	ldr r3, _08029DD0 @ =gBattleWeather
 	ldrh r1, [r3]
 	movs r2, 0x80
 	adds r0, r2, 0
@@ -56310,7 +56310,7 @@ sub_8029DAC: @ 8029DAC
 	strb r0, [r1, 0x5]
 	b _08029DEA
 	.align 2, 0
-_08029DD0: .4byte word_2024DB8
+_08029DD0: .4byte gBattleWeather
 _08029DD4: .4byte gUnknown_02024C68
 _08029DD8: .4byte gUnknown_02024D1E
 _08029DDC:
@@ -58875,7 +58875,7 @@ sub_802B1C0: @ 802B1C0
 	lsls r0, 24
 	cmp r0, 0
 	bne _0802B276
-	ldr r3, _0802B218 @ =word_2024DB8
+	ldr r3, _0802B218 @ =gBattleWeather
 	ldrb r0, [r3]
 	ldr r2, _0802B21C @ =0x02000000
 	cmp r0, 0
@@ -58896,7 +58896,7 @@ _0802B202:
 	strb r0, [r1]
 	b _0802B276
 	.align 2, 0
-_0802B218: .4byte word_2024DB8
+_0802B218: .4byte gBattleWeather
 _0802B21C: .4byte 0x02000000
 _0802B220: .4byte 0x0001601f
 _0802B224: .4byte 0x0001601c
