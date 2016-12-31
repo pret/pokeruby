@@ -458,5 +458,4 @@ u32 SpeciesToCryId(u16 species)
         return 200;
 
     return gSpeciesIdToCryId[species - 276];
-
 }
