@@ -9,6 +9,8 @@
 #include "sprite.h"
 #include "flag.h"
 
+extern void get_battle_strings_(u8 *);
+
 extern u8 gPlayerPartyCount;
 extern struct Pokemon gPlayerParty[6];
 extern u8 gEnemyPartyCount;
@@ -17,6 +19,15 @@ extern struct BattlePokemon gBattleMons[4];
 extern u8 * const gItemEffectTable[];
 extern u8 gUnknown_02024A60;
 extern struct BattleEnigmaBerry gEnigmaBerries[];
+extern u8 gUnknown_030041C0[];
+extern u8 gUnknown_03004290[];
+extern u8 gUnknown_02024C08;
+extern u8 gUnknown_02024E6C;
+
+extern u8 gUnknown_082082F8[];
+extern u8 gUnknown_083FFDB3[];
+extern u8 gUnknown_083FFDD3[];
+extern u8 *gUnknown_08400F58[];
 
 bool8 HealStatusConditions(struct Pokemon *mon, u32 unused, u32 healMask, u8 battleId)
 {
@@ -147,4 +158,12 @@ u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit)
     }
 
     return offset;
+}
+
+void sub_803F324(int a1)
+{
+    gUnknown_02024C08 = gUnknown_02024E6C;
+    StringCopy(gUnknown_030041C0, gUnknown_08400F58[gUnknown_082082F8[a1]]);
+    StringCopy(gUnknown_03004290, gUnknown_083FFDB3);
+    get_battle_strings_(gUnknown_083FFDD3);
 }

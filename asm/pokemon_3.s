@@ -6,41 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_803F324
-sub_803F324: @ 803F324
-	push {lr}
-	ldr r2, _0803F358 @ =gUnknown_02024C08
-	ldr r1, _0803F35C @ =gUnknown_02024E6C
-	ldrb r1, [r1]
-	strb r1, [r2]
-	ldr r3, _0803F360 @ =gUnknown_030041C0
-	ldr r2, _0803F364 @ =gUnknown_08400F58
-	ldr r1, _0803F368 @ =gUnknown_082082F8
-	adds r0, r1
-	ldrb r0, [r0]
-	lsls r0, 2
-	adds r0, r2
-	ldr r1, [r0]
-	adds r0, r3, 0
-	bl StringCopy
-	ldr r0, _0803F36C @ =gUnknown_03004290
-	ldr r1, _0803F370 @ =gUnknown_083FFDB3
-	bl StringCopy
-	ldr r0, _0803F374 @ =gUnknown_083FFDD3
-	bl get_battle_strings_
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0803F358: .4byte gUnknown_02024C08
-_0803F35C: .4byte gUnknown_02024E6C
-_0803F360: .4byte gUnknown_030041C0
-_0803F364: .4byte gUnknown_08400F58
-_0803F368: .4byte gUnknown_082082F8
-_0803F36C: .4byte gUnknown_03004290
-_0803F370: .4byte gUnknown_083FFDB3
-_0803F374: .4byte gUnknown_083FFDD3
-	thumb_func_end sub_803F324
-
 	thumb_func_start sub_803F378
 sub_803F378: @ 803F378
 	push {r4-r7,lr}
