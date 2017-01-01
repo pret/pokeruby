@@ -100,6 +100,7 @@ SECTIONS {
         asm/rom_8077ABC.o(.text);
         src/task.o(.text);
         asm/rom5.o(.text);
+        asm/battle_anim_807B69C.o(.text);
         src/title_screen.o(.text);
         src/weather.o(.text);
         asm/weather.o(.text);
