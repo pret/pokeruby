@@ -26,7 +26,7 @@ extern u8 gUnknown_02024C07;
 extern u8 gUnknown_02024C08;
 extern u8 gUnknown_02024C0C;
 extern u8 gXXX_CritRelated;
-extern u16 word_2024DB8;
+extern u16 gBattleWeather;
 extern struct BattleEnigmaBerry gEnigmaBerries[];
 extern u16 gBattleMovePower;
 extern struct SpriteTemplate gUnknown_02024E8C;

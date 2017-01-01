@@ -7,6 +7,9 @@
 #include "sprite.h"
 #include "berry.h"
 #include "item.h"
+#include "abilities.h"
+#include "hold_effects.h"
+#include "flag.h"
 
 extern u8 gPlayerPartyCount;
 extern struct Pokemon gPlayerParty[6];
@@ -21,7 +24,7 @@ extern struct BattlePokemon gBattleMons[4];
 extern u16 gUnknown_02024BE6;
 extern u8 byte_2024C06;
 extern u8 gCritMultiplier;
-extern u16 word_2024DB8;
+extern u16 gBattleWeather;
 extern struct BattleEnigmaBerry gEnigmaBerries[];
 extern u16 gBattleMovePower;
 extern struct SpriteTemplate gUnknown_02024E8C;
@@ -47,7 +50,6 @@ extern u8 gStatStageRatios[];
 extern u8 gHoldEffectToType[][2];
 
 extern u8 battle_side_get_owner(u8);
-extern u8 FlagGet(u16);
 extern u8 sub_8018324(u8, u8, u8, u8, u16);
 extern u8 sub_803C348(u8);
 
@@ -108,14 +110,14 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         defenderHoldEffectParam = ItemId_GetHoldEffectParam(defender->item);
     }
 
-    if (attacker->ability == 37 || attacker->ability == 74)
+    if (attacker->ability == ABILITY_HUGE_POWER || attacker->ability == ABILITY_PURE_POWER)
         attack *= 2;
 
     if (!(gUnknown_020239F8 & 0x902))
     {
         if ((gUnknown_020239F8 & 8)
             && gTrainerBattleOpponent != 1024
-            && FlagGet(2055)
+            && FlagGet(BADGE01_GET)
             && !battle_side_get_owner(a7))
             attack = (110 * attack) / 100;
 
@@ -123,7 +125,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         {
             if ((gUnknown_020239F8 & 8)
                 && gTrainerBattleOpponent != 1024
-                && FlagGet(2059)
+                && FlagGet(BADGE05_GET)
                 && !battle_side_get_owner(a8))
                 defense = (110 * defense) / 100;
 
@@ -131,7 +133,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
             {
                 if ((gUnknown_020239F8 & 8)
                     && gTrainerBattleOpponent != 1024
-                    && FlagGet(2061)
+                    && FlagGet(BADGE07_GET)
                     && !battle_side_get_owner(a7))
                     spAttack = (110 * spAttack) / 100;
 
@@ -139,7 +141,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
                 {
                     if ((gUnknown_020239F8 & 8)
                         && gTrainerBattleOpponent != 1024
-                        && FlagGet(2061)
+                        && FlagGet(BADGE07_GET)
                         && !battle_side_get_owner(a8))
                         spDefense = (110 * spDefense) / 100;
                 }
@@ -160,45 +162,45 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         }
     }
 
-    if (attackerHoldEffect == 29)
+    if (attackerHoldEffect == HOLD_EFFECT_CHOICE_BAND)
         attack = (150 * attack) / 100;
-    if (attackerHoldEffect == 34 && !(gUnknown_020239F8 & 0x100) && (attacker->species == SPECIES_LATIAS || attacker->species == SPECIES_LATIOS))
+    if (attackerHoldEffect == HOLD_EFFECT_SOUL_DEW && !(gUnknown_020239F8 & 0x100) && (attacker->species == SPECIES_LATIAS || attacker->species == SPECIES_LATIOS))
         spAttack = (150 * spAttack) / 100;
-    if (defenderHoldEffect == 34 && !(gUnknown_020239F8 & 0x100) && (defender->species == SPECIES_LATIAS || defender->species == SPECIES_LATIOS))
+    if (defenderHoldEffect == HOLD_EFFECT_SOUL_DEW && !(gUnknown_020239F8 & 0x100) && (defender->species == SPECIES_LATIAS || defender->species == SPECIES_LATIOS))
         spDefense = (150 * spDefense) / 100;
-    if (attackerHoldEffect == 35 && attacker->species == 373)
+    if (attackerHoldEffect == HOLD_EFFECT_DEEP_SEA_TOOTH && attacker->species == SPECIES_CLAMPERL)
         spAttack *= 2;
-    if (defenderHoldEffect == 36 && defender->species == 373)
+    if (defenderHoldEffect == HOLD_EFFECT_DEEP_SEA_SCALE && defender->species == SPECIES_CLAMPERL)
         spDefense *= 2;
-    if (attackerHoldEffect == 45 && attacker->species == 25)
+    if (attackerHoldEffect == HOLD_EFFECT_LIGHT_BALL && attacker->species == SPECIES_PIKACHU)
         spAttack *= 2;
-    if (defenderHoldEffect == 64 && defender->species == 132)
+    if (defenderHoldEffect == HOLD_EFFECT_METAL_POWDER && defender->species == SPECIES_DITTO)
         defense *= 2;
-    if (attackerHoldEffect == 65 && (attacker->species == SPECIES_CUBONE || attacker->species == SPECIES_MAROWAK))
+    if (attackerHoldEffect == HOLD_EFFECT_THICK_CLUB && (attacker->species == SPECIES_CUBONE || attacker->species == SPECIES_MAROWAK))
         attack *= 2;
-    if (defender->ability == 47 && (type == 10 || type == 15))
+    if (defender->ability == ABILITY_THICK_FAT && (type == TYPE_FIRE || type == TYPE_ICE))
         spAttack /= 2;
-    if (attacker->ability == 55)
+    if (attacker->ability == ABILITY_HUSTLE)
         attack = (150 * attack) / 100;
-    if (attacker->ability == 57 && sub_8018324(0xE, 0, 0x3A, 0, 0))
+    if (attacker->ability == ABILITY_PLUS && sub_8018324(0xE, 0, ABILITY_MINUS, 0, 0))
         spAttack = (150 * spAttack) / 100;
-    if (attacker->ability == 58 && sub_8018324(0xE, 0, 0x39, 0, 0))
+    if (attacker->ability == ABILITY_MINUS && sub_8018324(0xE, 0, ABILITY_PLUS, 0, 0))
         spAttack = (150 * spAttack) / 100;
-    if (attacker->ability == 62 && attacker->status1)
+    if (attacker->ability == ABILITY_GUTS && attacker->status1)
         attack = (150 * attack) / 100;
-    if (defender->ability == 63 && defender->status1)
+    if (defender->ability == ABILITY_MARVEL_SCALE && defender->status1)
         defense = (150 * defense) / 100;
-    if (type == 13 && sub_8018324(0xE, 0, 0, 0xFD, 0))
+    if (type == TYPE_ELECTRIC && sub_8018324(0xE, 0, 0, 0xFD, 0))
         gBattleMovePower /= 2;
-    if (type == 10 && sub_8018324(0xE, 0, 0, 0xFE, 0))
+    if (type == TYPE_FIRE && sub_8018324(0xE, 0, 0, 0xFE, 0))
         gBattleMovePower /= 2;
-    if (type == 12 && attacker->ability == 65 && attacker->hp <= (attacker->maxHP / 3))
+    if (type == TYPE_GRASS && attacker->ability == ABILITY_OVERGROW && attacker->hp <= (attacker->maxHP / 3))
         gBattleMovePower = (150 * gBattleMovePower) / 100;
-    if (type == 10 && attacker->ability == 66 && attacker->hp <= (attacker->maxHP / 3))
+    if (type == TYPE_FIRE && attacker->ability == ABILITY_BLAZE && attacker->hp <= (attacker->maxHP / 3))
         gBattleMovePower = (150 * gBattleMovePower) / 100;
-    if (type == 11 && attacker->ability == 67 && attacker->hp <= (attacker->maxHP / 3))
+    if (type == TYPE_WATER && attacker->ability == ABILITY_TORRENT && attacker->hp <= (attacker->maxHP / 3))
         gBattleMovePower = (150 * gBattleMovePower) / 100;
-    if (type == 6 && attacker->ability == 68 && attacker->hp <= (attacker->maxHP / 3))
+    if (type == TYPE_BUG && attacker->ability == ABILITY_SWARM && attacker->hp <= (attacker->maxHP / 3))
         gBattleMovePower = (150 * gBattleMovePower) / 100;
     if (gBattleMoves[gUnknown_02024BE6].effect == 7)
         defense /= 2;
@@ -229,7 +231,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 
         damage = (a / b) / 50;
 
-        if ((attacker->status1 & 0x10) && attacker->ability != 62)
+        if ((attacker->status1 & 0x10) && attacker->ability != ABILITY_GUTS)
             damage /= 2;
 
         if ((a4 & 1) && gCritMultiplier == 1)
@@ -284,37 +286,37 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
                 damage /= 2;
         }
 
-        if ((gUnknown_020239F8 & 1) && gBattleMoves[move].target == 8 && sub_803C348(2u) == 2)
+        if ((gUnknown_020239F8 & 1) && gBattleMoves[move].target == 8 && sub_803C348(2) == 2)
             damage /= 2;
 
-        if (!sub_8018324(0xE, 0, 0xD, 0, 0) && !sub_8018324(0xE, 0, 0x4D, 0, 0))
+        if (!sub_8018324(0xE, 0, ABILITY_CLOUD_NINE, 0, 0) && !sub_8018324(0xE, 0, ABILITY_AIR_LOCK, 0, 0))
         {
-            if (word_2024DB8 & 1)
+            if (gBattleWeather & 1)
             {
-                if (type == 10)
+                if (type == TYPE_FIRE)
                 {
                     damage /= 2;
                 }
-                else if (type == 11)
+                else if (type == TYPE_WATER)
                 {
                     damage = (15 * damage) / 10;
                 }
             }
-            if ((word_2024DB8 & 0x9F) && gUnknown_02024BE6 == 76)
+            if ((gBattleWeather & 0x9F) && gUnknown_02024BE6 == 76)
                 damage /= 2;
-            if (word_2024DB8 & 0x60)
+            if (gBattleWeather & 0x60)
             {
-                if (type == 10)
+                if (type == TYPE_FIRE)
                 {
                     damage = (15 * damage) / 10;
                 }
-                else if (type == 11)
+                else if (type == TYPE_WATER)
                 {
                     damage /= 2;
                 }
             }
         }
-        if ((dword_2017100[a7] & 1) && type == 10)
+        if ((dword_2017100[a7] & 1) && type == TYPE_FIRE)
             damage = (15 * damage) / 10;
     }
 
@@ -1381,7 +1383,7 @@ _0803C25C:\n\
 	lsls r0, 24\n\
 	cmp r0, 0\n\
 	bne _0803C30C\n\
-	ldr r2, _0803C2AC @ =word_2024DB8\n\
+	ldr r2, _0803C2AC @ =gBattleWeather\n\
 	ldrh r1, [r2]\n\
 	movs r0, 0x1\n\
 	ands r0, r1\n\
@@ -1397,7 +1399,7 @@ _0803C25C:\n\
 	.align 2, 0\n\
 _0803C2A4: .4byte gUnknown_020239F8\n\
 _0803C2A8: .4byte gBattleMoves\n\
-_0803C2AC: .4byte word_2024DB8\n\
+_0803C2AC: .4byte gBattleWeather\n\
 _0803C2B0:\n\
 	lsrs r0, r5, 31\n\
 	adds r0, r5, r0\n\

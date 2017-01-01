@@ -121,7 +121,7 @@ SECTIONS {
         asm/fldeff_cut.o(.text);
         asm/rom_80A2B18.o(.text);
         asm/item_menu.o(.text);
-        asm/battle_anim_80A7E7C.o(.text);
+        src/battle_anim_80A7E7C.o(.text);
         src/item.o(.text);
         src/matsuda_debug_menu.o(.text);
         asm/matsuda_debug_menu.o(.text);

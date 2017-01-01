@@ -212,7 +212,7 @@ _08108AE8: .4byte gAIScriptPtr
 	thumb_func_start BattleAICmd_unk_36
 BattleAICmd_unk_36: @ 8108AEC
 	push {lr}
-	ldr r2, _08108B3C @ =word_2024DB8
+	ldr r2, _08108B3C @ =gBattleWeather
 	ldrh r1, [r2]
 	movs r0, 0x7
 	ands r0, r1
@@ -255,7 +255,7 @@ _08108B2E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08108B3C: .4byte word_2024DB8
+_08108B3C: .4byte gBattleWeather
 _08108B40: .4byte 0x02016800
 _08108B44: .4byte gAIScriptPtr
 	thumb_func_end BattleAICmd_unk_36

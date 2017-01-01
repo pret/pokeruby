@@ -246,7 +246,7 @@ gUnknown_02024D28: @ 2024D28
 gUnknown_02024D68: @ 2024D68
 	.space 0x50
 
-word_2024DB8: @ 2024DB8
+gBattleWeather: @ 2024DB8
 	.space 0x4
 
 gUnknown_02024DBC: @ 2024DBC
