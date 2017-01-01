@@ -6,7 +6,7 @@
 #define TASK gTasks[task]
 #define SPRITE gSprites[TASK.data[0]]
 
-extern s16 gUnknown_03004B00[8];
+extern s16 gBattleAnimArgs[8];
 
 extern u8 gUnknown_02024BE0[];
 extern s32 gUnknown_0202F7B8;
@@ -48,19 +48,19 @@ static void sub_80A913C(u8 taskId);
 
 void sub_80A7E7C(u8 task) {
 	u8 sprite;
-	sprite = obj_id_for_side_relative_to_move(gUnknown_03004B00[0]);
+	sprite = obj_id_for_side_relative_to_move(gBattleAnimArgs[0]);
 	if (sprite == 0xff) {
 		move_anim_task_del(task);
 		return;
 	}
-	gSprites[sprite].pos2.x = gUnknown_03004B00[1];
-	gSprites[sprite].pos2.y = gUnknown_03004B00[2];
+	gSprites[sprite].pos2.x = gBattleAnimArgs[1];
+	gSprites[sprite].pos2.y = gBattleAnimArgs[2];
 	TASK.data[0] = sprite;
-	TASK.data[1] = gUnknown_03004B00[3];
-	TASK.data[2] = gUnknown_03004B00[4];
-	TASK.data[3] = gUnknown_03004B00[4];
-	TASK.data[4] = gUnknown_03004B00[1];
-	TASK.data[5] = gUnknown_03004B00[2];
+	TASK.data[1] = gBattleAnimArgs[3];
+	TASK.data[2] = gBattleAnimArgs[4];
+	TASK.data[3] = gBattleAnimArgs[4];
+	TASK.data[4] = gBattleAnimArgs[1];
+	TASK.data[5] = gBattleAnimArgs[2];
 	TASK.func = sub_80A7EF0;
 	sub_80A7EF0(task);
 }
@@ -95,14 +95,14 @@ void sub_80A7FA0(u8 task) {
 	bool8 r6;
 	u8 side;
 	r6 = 0;
-	if (gUnknown_03004B00[0] < 4) {
-		sprite = obj_id_for_side_relative_to_move(gUnknown_03004B00[0]);
+	if (gBattleAnimArgs[0] < 4) {
+		sprite = obj_id_for_side_relative_to_move(gBattleAnimArgs[0]);
 		if (sprite == 0xff) {
 			move_anim_task_del(task);
 			return;
 		}
-	} else if (gUnknown_03004B00[0] != 8) {
-		switch (gUnknown_03004B00[0]) {
+	} else if (gBattleAnimArgs[0] != 8) {
+		switch (gBattleAnimArgs[0]) {
 		case 4:
 			side = battle_get_side_with_given_state(0);
 			break;
@@ -128,14 +128,14 @@ void sub_80A7FA0(u8 task) {
 		move_anim_task_del(task);
 		return;
 	}
-	gSprites[sprite].pos2.x = gUnknown_03004B00[1];
-	gSprites[sprite].pos2.y = gUnknown_03004B00[2];
+	gSprites[sprite].pos2.x = gBattleAnimArgs[1];
+	gSprites[sprite].pos2.y = gBattleAnimArgs[2];
 	TASK.data[0] = sprite;
-	TASK.data[1] = gUnknown_03004B00[3];
-	TASK.data[2] = gUnknown_03004B00[4];
-	TASK.data[3] = gUnknown_03004B00[4];
-	TASK.data[4] = gUnknown_03004B00[1];
-	TASK.data[5] = gUnknown_03004B00[2];
+	TASK.data[1] = gBattleAnimArgs[3];
+	TASK.data[2] = gBattleAnimArgs[4];
+	TASK.data[3] = gBattleAnimArgs[4];
+	TASK.data[4] = gBattleAnimArgs[1];
+	TASK.data[5] = gBattleAnimArgs[2];
 	TASK.func = sub_80A808C;
 	sub_80A808C(task);
 }
@@ -166,20 +166,20 @@ static void sub_80A808C(u8 task) {
 
 void sub_80A8154(u8 task) {
 	u8 sprite;
-	sprite = obj_id_for_side_relative_to_move(gUnknown_03004B00[0]);
+	sprite = obj_id_for_side_relative_to_move(gBattleAnimArgs[0]);
 	if (sprite == 0xff) {
 		move_anim_task_del(task);
 		return;
 	}
-	gSprites[sprite].pos2.x += gUnknown_03004B00[1];
-	gSprites[sprite].pos2.y += gUnknown_03004B00[2];
+	gSprites[sprite].pos2.x += gBattleAnimArgs[1];
+	gSprites[sprite].pos2.y += gBattleAnimArgs[2];
 	TASK.data[0] = sprite;
 	TASK.data[1] = 0;
-	TASK.data[2] = gUnknown_03004B00[3];
+	TASK.data[2] = gBattleAnimArgs[3];
 	TASK.data[3] = 0;
-	TASK.data[4] = gUnknown_03004B00[4];
-	TASK.data[5] = gUnknown_03004B00[1] * 2;
-	TASK.data[6] = gUnknown_03004B00[2] * 2;
+	TASK.data[4] = gBattleAnimArgs[4];
+	TASK.data[5] = gBattleAnimArgs[1] * 2;
+	TASK.data[6] = gBattleAnimArgs[2] * 2;
 	TASK.func = sub_80A81D8;
 	sub_80A81D8(task);
 }
@@ -211,13 +211,13 @@ static void sub_80A81D8(u8 task) {
 }
 
 void sub_80A8314(u8 task) {
-	u8 sprite = obj_id_for_side_relative_to_move(gUnknown_03004B00[0]);
-	gSprites[sprite].pos2.x = gUnknown_03004B00[1];
+	u8 sprite = obj_id_for_side_relative_to_move(gBattleAnimArgs[0]);
+	gSprites[sprite].pos2.x = gBattleAnimArgs[1];
 	TASK.data[0] = sprite;
-	TASK.data[1] = gUnknown_03004B00[1];
-	TASK.data[2] = gUnknown_03004B00[2];
-	TASK.data[3] = gUnknown_03004B00[3];
-	TASK.data[4] = gUnknown_03004B00[4];
+	TASK.data[1] = gBattleAnimArgs[1];
+	TASK.data[2] = gBattleAnimArgs[2];
+	TASK.data[3] = gBattleAnimArgs[3];
+	TASK.data[4] = gBattleAnimArgs[4];
 	TASK.func = sub_80A8374;
 	sub_80A8374(task);
 }
@@ -248,17 +248,17 @@ void sub_80A8408(u8 task) {
 	u8 sprite;
 	u8 v1;
 	v1 = 1;
-	sprite = obj_id_for_side_relative_to_move(gUnknown_03004B00[0]);
-	if (gUnknown_03004B00[4] > 5) {
-		gUnknown_03004B00[4] = 5;
+	sprite = obj_id_for_side_relative_to_move(gBattleAnimArgs[0]);
+	if (gBattleAnimArgs[4] > 5) {
+		gBattleAnimArgs[4] = 5;
 	}
-	for (i = 0; i < gUnknown_03004B00[4]; i++) {
+	for (i = 0; i < gBattleAnimArgs[4]; i++) {
 		v1 <<= 1;
 	}
 	TASK.data[0] = sprite;
-	TASK.data[1] = gUnknown_03004B00[1];
-	TASK.data[2] = gUnknown_03004B00[2];
-	TASK.data[3] = gUnknown_03004B00[3];
+	TASK.data[1] = gBattleAnimArgs[1];
+	TASK.data[2] = gBattleAnimArgs[2];
+	TASK.data[3] = gBattleAnimArgs[3];
 	TASK.data[4] = v1;
 	TASK.func = sub_80A8488;
 	sub_80A8488(task);
@@ -285,7 +285,7 @@ static void sub_80A8488(u8 task) {
 
 void sub_80A8500(u8 task) {
 	if (battle_side_get_owner(gUnknown_0202F7C8)) {
-		gUnknown_03004B00[1] = -gUnknown_03004B00[1];
+		gBattleAnimArgs[1] = -gBattleAnimArgs[1];
 	}
 	sub_80A8408(task);
 }
@@ -293,14 +293,14 @@ void sub_80A8500(u8 task) {
 void sub_80A8530(struct Sprite *sprite) {
 	sprite->invisible = TRUE;
 	if (battle_side_get_owner(gUnknown_0202F7C8)) {
-		sprite->data1 = -gUnknown_03004B00[1];
+		sprite->data1 = -gBattleAnimArgs[1];
 	} else {
-		sprite->data1 = gUnknown_03004B00[1];
+		sprite->data1 = gBattleAnimArgs[1];
 	}
-	sprite->data0 = gUnknown_03004B00[0];
+	sprite->data0 = gBattleAnimArgs[0];
 	sprite->data2 = 0;
 	sprite->data3 = gUnknown_02024BE0[gUnknown_0202F7C8];
-	sprite->data4 = gUnknown_03004B00[0];
+	sprite->data4 = gBattleAnimArgs[0];
 	oamt_set_x3A_32(sprite, sub_80A85A4);
 	sprite->callback = sub_8078458;
 }
@@ -315,12 +315,12 @@ static void sub_80A85A4(struct Sprite *sprite) {
 void sub_80A85C8(struct Sprite *sprite) {
 	u8 spriteId;
 	sprite->invisible = TRUE;
-	spriteId = obj_id_for_side_relative_to_move(gUnknown_03004B00[2]);
-	sprite->data0 = gUnknown_03004B00[0];
+	spriteId = obj_id_for_side_relative_to_move(gBattleAnimArgs[2]);
+	sprite->data0 = gBattleAnimArgs[0];
 	sprite->data1 = 0;
-	sprite->data2 = gUnknown_03004B00[1];
+	sprite->data2 = gBattleAnimArgs[1];
 	sprite->data3 = spriteId;
-	sprite->data4 = gUnknown_03004B00[0];
+	sprite->data4 = gBattleAnimArgs[0];
 	oamt_set_x3A_32(sprite, sub_80A8614);
 	sprite->callback = sub_8078458;
 }
@@ -335,12 +335,12 @@ void sub_80A8614(struct Sprite *sprite) {
 void sub_80A8638(struct Sprite *sprite) {
 	int something;
 	int spriteId;
-	if (!gUnknown_03004B00[0]) {
+	if (!gBattleAnimArgs[0]) {
 		spriteId = gUnknown_02024BE0[gUnknown_0202F7C8];
 	} else {
 		spriteId = gUnknown_02024BE0[gUnknown_0202F7C9];
 	}
-	sprite->data0 = gUnknown_03004B00[2];
+	sprite->data0 = gBattleAnimArgs[2];
 	sprite->data1 = gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x;
 	sprite->data2 = gSprites[spriteId].pos1.x;
 	sprite->data3 = gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y;
@@ -352,12 +352,12 @@ void sub_80A8638(struct Sprite *sprite) {
 	sprite->data5 = gSprites[spriteId].pos2.x;
 	sprite->data6 = gSprites[spriteId].pos2.y;
 	sprite->invisible = TRUE;
-	if (gUnknown_03004B00[1] == 1) {
+	if (gBattleAnimArgs[1] == 1) {
 		sprite->data2 = something;
-	} else if (gUnknown_03004B00[1] == 2) {
+	} else if (gBattleAnimArgs[1] == 2) {
 		sprite->data1 = something;
 	}
-	sprite->data7 = gUnknown_03004B00[1];
+	sprite->data7 = gBattleAnimArgs[1];
 	sprite->data7 |= spriteId << 8;
 	sprite->callback = sub_80A86F4;
 }
@@ -389,23 +389,23 @@ static void sub_80A86F4(struct Sprite *sprite) {
 void sub_80A8764(struct Sprite *sprite) {
 	u8 v1;
 	u8 spriteId;
-	if (!gUnknown_03004B00[0]) {
+	if (!gBattleAnimArgs[0]) {
 		v1 = gUnknown_0202F7C8;
 	} else {
 		v1 = gUnknown_0202F7C9;
 	}
 	spriteId = gUnknown_02024BE0[v1];
 	if (battle_side_get_owner(v1)) {
-		gUnknown_03004B00[1] = -gUnknown_03004B00[1];
-		if (gUnknown_03004B00[3] == 1) {
-			gUnknown_03004B00[2] = -gUnknown_03004B00[2];
+		gBattleAnimArgs[1] = -gBattleAnimArgs[1];
+		if (gBattleAnimArgs[3] == 1) {
+			gBattleAnimArgs[2] = -gBattleAnimArgs[2];
 		}
 	}
-	sprite->data0 = gUnknown_03004B00[4];
+	sprite->data0 = gBattleAnimArgs[4];
 	sprite->data1 = gSprites[spriteId].pos1.x;
-	sprite->data2 = gSprites[spriteId].pos1.x + gUnknown_03004B00[1];
+	sprite->data2 = gSprites[spriteId].pos1.x + gBattleAnimArgs[1];
 	sprite->data3 = gSprites[spriteId].pos1.y;
-	sprite->data4 = gSprites[spriteId].pos1.y + gUnknown_03004B00[2];
+	sprite->data4 = gSprites[spriteId].pos1.y + gBattleAnimArgs[2];
 	sub_8078A5C(sprite);
 	sprite->data3 = 0;
 	sprite->data4 = 0;
@@ -419,29 +419,29 @@ void sub_80A8818(struct Sprite *sprite) {
 	u8 spriteId;
 	u8 v1;
 	sprite->invisible = TRUE;
-	if (!gUnknown_03004B00[0]) {
+	if (!gBattleAnimArgs[0]) {
 		v1 = gUnknown_0202F7C8;
 	} else {
 		v1 = gUnknown_0202F7C9;
 	}
 	spriteId = gUnknown_02024BE0[v1];
 	if (battle_side_get_owner(v1)) {
-		gUnknown_03004B00[1] = -gUnknown_03004B00[1];
-		if (gUnknown_03004B00[3] == 1) {
-		gUnknown_03004B00[2] = -gUnknown_03004B00[2];
+		gBattleAnimArgs[1] = -gBattleAnimArgs[1];
+		if (gBattleAnimArgs[3] == 1) {
+		gBattleAnimArgs[2] = -gBattleAnimArgs[2];
 		}
 	}
-	sprite->data0 = gUnknown_03004B00[4];
+	sprite->data0 = gBattleAnimArgs[4];
 	sprite->data1 = gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x;
-	sprite->data2 = sprite->data1 + gUnknown_03004B00[1];
+	sprite->data2 = sprite->data1 + gBattleAnimArgs[1];
 	sprite->data3 = gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y;
-	sprite->data4 = sprite->data3 + gUnknown_03004B00[2];
+	sprite->data4 = sprite->data3 + gBattleAnimArgs[2];
 	sub_8078A5C(sprite);
 	sprite->data3 = gSprites[spriteId].pos2.x << 8;
 	sprite->data4 = gSprites[spriteId].pos2.y << 8;
 	sprite->data5 = spriteId;
-	sprite->data6 = gUnknown_03004B00[5];
-	if (!gUnknown_03004B00[5]) {
+	sprite->data6 = gBattleAnimArgs[5];
+	if (!gBattleAnimArgs[5]) {
 		oamt_set_x3A_32(sprite, move_anim_8072740);
 	} else {
 		oamt_set_x3A_32(sprite, sub_80A88F0);
@@ -458,18 +458,18 @@ static void sub_80A88F0(struct Sprite *sprite) {
 
 void sub_80A8920(u8 task) {
 	s16 r7;
-	r7 = 0x8000 / gUnknown_03004B00[3];
+	r7 = 0x8000 / gBattleAnimArgs[3];
 	if (battle_side_get_owner(gUnknown_0202F7C8)) {
-		gUnknown_03004B00[1] = -gUnknown_03004B00[1];
-		gUnknown_03004B00[5] = -gUnknown_03004B00[5];
+		gBattleAnimArgs[1] = -gBattleAnimArgs[1];
+		gBattleAnimArgs[5] = -gBattleAnimArgs[5];
 	}
-	TASK.data[0] = obj_id_for_side_relative_to_move(gUnknown_03004B00[0]);
-	TASK.data[1] = (gUnknown_03004B00[1] << 8) / gUnknown_03004B00[3];
-	TASK.data[2] = gUnknown_03004B00[2];
-	TASK.data[3] = gUnknown_03004B00[3];
-	TASK.data[4] = gUnknown_03004B00[4];
-	TASK.data[5] = (gUnknown_03004B00[5] << 8) / gUnknown_03004B00[6];
-	TASK.data[6] = gUnknown_03004B00[6];
+	TASK.data[0] = obj_id_for_side_relative_to_move(gBattleAnimArgs[0]);
+	TASK.data[1] = (gBattleAnimArgs[1] << 8) / gBattleAnimArgs[3];
+	TASK.data[2] = gBattleAnimArgs[2];
+	TASK.data[3] = gBattleAnimArgs[3];
+	TASK.data[4] = gBattleAnimArgs[4];
+	TASK.data[5] = (gBattleAnimArgs[5] << 8) / gBattleAnimArgs[6];
+	TASK.data[6] = gBattleAnimArgs[6];
 	TASK.data[7] = r7;
 	TASK.func = sub_80A89B4;
 }
@@ -505,10 +505,10 @@ static void sub_80A8B3C(u8 task);
 
 void sub_80A8A80(u8 task) {
 	u8 spriteId;
-	switch (gUnknown_03004B00[0]) {
+	switch (gBattleAnimArgs[0]) {
 	case 0:
 	case 1:
-		spriteId = obj_id_for_side_relative_to_move(gUnknown_03004B00[0]);
+		spriteId = obj_id_for_side_relative_to_move(gBattleAnimArgs[0]);
 		break;
 	case 2:
 		if (!b_side_obj__get_some_boolean(gUnknown_0202F7C8 ^ 2)) {
@@ -530,9 +530,9 @@ void sub_80A8A80(u8 task) {
 	}
 	TASK.data[0] = spriteId;
 	if (battle_side_get_owner(gUnknown_0202F7C9)) {
-		TASK.data[1] = gUnknown_03004B00[1];
+		TASK.data[1] = gBattleAnimArgs[1];
 	} else {
-		TASK.data[1] = -gUnknown_03004B00[1];
+		TASK.data[1] = -gBattleAnimArgs[1];
 	}
 	TASK.func = sub_80A8B3C;
 }
@@ -549,15 +549,15 @@ static void sub_80A8B3C(u8 task) {
 void sub_80A8B88(u8 task) {
 	u8 spriteId;
 	if (battle_side_get_owner(gUnknown_0202F7C8)) {
-		gUnknown_03004B00[1] = -gUnknown_03004B00[1];
+		gBattleAnimArgs[1] = -gBattleAnimArgs[1];
 	}
-	spriteId = obj_id_for_side_relative_to_move(gUnknown_03004B00[4]);
-	TASK.data[0] = gUnknown_03004B00[0];
-	TASK.data[1] = gUnknown_03004B00[1];
-	TASK.data[2] = gUnknown_03004B00[2];
-	TASK.data[3] = gUnknown_03004B00[3];
+	spriteId = obj_id_for_side_relative_to_move(gBattleAnimArgs[4]);
+	TASK.data[0] = gBattleAnimArgs[0];
+	TASK.data[1] = gBattleAnimArgs[1];
+	TASK.data[2] = gBattleAnimArgs[2];
+	TASK.data[3] = gBattleAnimArgs[3];
 	TASK.data[4] = spriteId;
-	if (gUnknown_03004B00[4] == 0) {
+	if (gBattleAnimArgs[4] == 0) {
 		TASK.data[5] = gUnknown_0202F7C8;
 	} else {
 		TASK.data[5] = gUnknown_0202F7C9;
@@ -600,12 +600,12 @@ static void sub_80A8C0C(u8 task) {
 
 void sub_80A8D34(u8 task) {
 	u8 spriteId;
-	spriteId = obj_id_for_side_relative_to_move(gUnknown_03004B00[3]);
-	sub_8078E70(spriteId, gUnknown_03004B00[4]);
-	TASK.data[0] = gUnknown_03004B00[0];
-	TASK.data[1] = gUnknown_03004B00[1];
-	TASK.data[2] = gUnknown_03004B00[2];
-	TASK.data[3] = gUnknown_03004B00[2];
+	spriteId = obj_id_for_side_relative_to_move(gBattleAnimArgs[3]);
+	sub_8078E70(spriteId, gBattleAnimArgs[4]);
+	TASK.data[0] = gBattleAnimArgs[0];
+	TASK.data[1] = gBattleAnimArgs[1];
+	TASK.data[2] = gBattleAnimArgs[2];
+	TASK.data[3] = gBattleAnimArgs[2];
 	TASK.data[4] = spriteId;
 	TASK.data[10] = 0x100;
 	TASK.data[11] = 0x100;
@@ -634,22 +634,22 @@ static void sub_80A8D8C(u8 task) {
 
 void sub_80A8E04(u8 task) {
 	u8 spriteId;
-	spriteId = obj_id_for_side_relative_to_move(gUnknown_03004B00[2]);
+	spriteId = obj_id_for_side_relative_to_move(gBattleAnimArgs[2]);
 	sub_8078E70(spriteId, 0);
 	TASK.data[1] = 0;
-	TASK.data[2] = gUnknown_03004B00[0];
-	if (gUnknown_03004B00[3] != 1) {
+	TASK.data[2] = gBattleAnimArgs[0];
+	if (gBattleAnimArgs[3] != 1) {
 		TASK.data[3] = 0;
 	} else {
-		TASK.data[3] = gUnknown_03004B00[0] * gUnknown_03004B00[1];
+		TASK.data[3] = gBattleAnimArgs[0] * gBattleAnimArgs[1];
 	}
-	TASK.data[4] = gUnknown_03004B00[1];
+	TASK.data[4] = gBattleAnimArgs[1];
 	TASK.data[5] = spriteId;
-	TASK.data[6] = gUnknown_03004B00[3];
+	TASK.data[6] = gBattleAnimArgs[3];
 	if (sub_8076BE0()) {
 		TASK.data[7] = 1;
 	} else {
-		if (gUnknown_03004B00[2] == 0) {
+		if (gBattleAnimArgs[2] == 0) {
 			TASK.data[7] = !battle_side_get_owner(gUnknown_0202F7C8);
 		} else {
 			TASK.data[7] = !battle_side_get_owner(gUnknown_0202F7C9);
@@ -666,27 +666,27 @@ void sub_80A8E04(u8 task) {
 
 void sub_80A8EFC(u8 task) {
 	u8 spriteId;
-	spriteId = obj_id_for_side_relative_to_move(gUnknown_03004B00[2]);
+	spriteId = obj_id_for_side_relative_to_move(gBattleAnimArgs[2]);
 	sub_8078E70(spriteId, 0);
 	TASK.data[1] = 0;
-	TASK.data[2] = gUnknown_03004B00[0];
-	if (gUnknown_03004B00[2] == 0) {
+	TASK.data[2] = gBattleAnimArgs[0];
+	if (gBattleAnimArgs[2] == 0) {
 		if (battle_side_get_owner(gUnknown_0202F7C8)) {
-			gUnknown_03004B00[1] = -gUnknown_03004B00[1];
+			gBattleAnimArgs[1] = -gBattleAnimArgs[1];
 		}
 	} else {
 		if (battle_side_get_owner(gUnknown_0202F7C9)) {
-			gUnknown_03004B00[1] = -gUnknown_03004B00[1];
+			gBattleAnimArgs[1] = -gBattleAnimArgs[1];
 		}
 	}
-	if (gUnknown_03004B00[3] != 1) {
+	if (gBattleAnimArgs[3] != 1) {
 		TASK.data[3] = 0;
 	} else {
-		TASK.data[3] = gUnknown_03004B00[0] * gUnknown_03004B00[1];
+		TASK.data[3] = gBattleAnimArgs[0] * gBattleAnimArgs[1];
 	}
-	TASK.data[4] = gUnknown_03004B00[1];
+	TASK.data[4] = gBattleAnimArgs[1];
 	TASK.data[5] = spriteId;
-	TASK.data[6] = gUnknown_03004B00[3];
+	TASK.data[6] = gBattleAnimArgs[3];
 	TASK.data[7] = 1;
 	TASK.data[3] *= -1;
 	TASK.data[4] *= -1;
@@ -717,7 +717,7 @@ void sub_80A8FD8(u8 task) {
 }
 
 void sub_80A9058(u8 task) {
-	if (!gUnknown_03004B00[0]) {
+	if (!gBattleAnimArgs[0]) {
 		TASK.data[15] = gUnknown_0202F7BC / 12;
 		if (TASK.data[15] < 1) {
 			TASK.data[15] = 1;
@@ -737,14 +737,14 @@ void sub_80A9058(u8 task) {
 	TASK.data[14] = TASK.data[15] / 2;
 	TASK.data[13] = TASK.data[14] + (TASK.data[15] & 1);
 	TASK.data[12] = 0;
-	TASK.data[10] = gUnknown_03004B00[3];
-	TASK.data[11] = gUnknown_03004B00[4];
+	TASK.data[10] = gBattleAnimArgs[3];
+	TASK.data[11] = gBattleAnimArgs[4];
 	TASK.data[7] = obj_id_for_side_relative_to_move(1);
 	TASK.data[8] = gSprites[TASK.data[7]].pos2.x;
 	TASK.data[9] = gSprites[TASK.data[7]].pos2.y;
 	TASK.data[0] = 0;
-	TASK.data[1] = gUnknown_03004B00[1];
-	TASK.data[2] = gUnknown_03004B00[2];
+	TASK.data[1] = gBattleAnimArgs[1];
+	TASK.data[2] = gBattleAnimArgs[2];
 	TASK.func = sub_80A913C;
 }
 

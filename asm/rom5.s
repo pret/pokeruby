@@ -1940,7 +1940,7 @@ _0807BD20:
 	bl move_anim_task_del
 	b _0807BD4A
 _0807BD28:
-	ldr r0, _0807BD50 @ =gUnknown_03004B00
+	ldr r0, _0807BD50 @ =gBattleAnimArgs
 	movs r1, 0
 	strh r5, [r0]
 	strh r2, [r0, 0x2]
@@ -1961,7 +1961,7 @@ _0807BD4A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807BD50: .4byte gUnknown_03004B00
+_0807BD50: .4byte gBattleAnimArgs
 _0807BD54: .4byte gTasks
 _0807BD58: .4byte sub_80E32E0
 	thumb_func_end sub_807BB88
