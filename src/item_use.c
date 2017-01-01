@@ -34,7 +34,6 @@ extern void ItemUseOnFieldCB_Itemfinder(u8);
 extern void sub_80A5D04(void);
 extern bool8 sub_80E5EF4(void);
 extern void GetOnOffBike(u8);
-extern bool8 ItemfinderCheckForHiddenItems(struct MapEvents *events, int);
 extern void sub_80C9458(u8);
 extern void sub_80C9520(u8);
 extern u8 sub_80C9908(s16, s16);
@@ -49,6 +48,8 @@ extern u8 gOtherText_NoResponse[];
 extern u8 gUnknown_083D61F0[];
 
 extern u16 gScriptItemId;
+
+bool8 ItemfinderCheckForHiddenItems(struct MapEvents *events, int);
 
 void sub_80C8FAC(u8 taskId)
 {
@@ -283,4 +284,127 @@ void sub_80C9520(u8 taskId)
 	sub_8064E2C();
 	ScriptContext2_Disable();
 	DestroyTask(taskId);
+}
+
+// too much struct math.
+__attribute__((naked))
+bool8 ItemfinderCheckForHiddenItems(struct MapEvents *events, int var)
+{
+	asm(".syntax unified\n\
+	push {r4-r7,lr}\n\
+	mov r7, r9\n\
+	mov r6, r8\n\
+	push {r6,r7}\n\
+	sub sp, 0x4\n\
+	adds r5, r0, 0\n\
+	lsls r1, 24\n\
+	lsrs r6, r1, 24\n\
+	mov r4, sp\n\
+	adds r4, 0x2\n\
+	mov r0, sp\n\
+	adds r1, r4, 0\n\
+	bl PlayerGetDestCoords\n\
+	ldr r1, _080C9618 @ =gTasks\n\
+	lsls r0, r6, 2\n\
+	adds r0, r6\n\
+	lsls r0, 3\n\
+	adds r0, r1\n\
+	movs r1, 0\n\
+	strh r1, [r0, 0xC]\n\
+	movs r3, 0\n\
+	mov r9, r4\n\
+	ldrb r0, [r5, 0x3]\n\
+	cmp r3, r0\n\
+	bge _080C95FC\n\
+	subs r1, 0x5\n\
+	mov r8, r1\n\
+_080C9580:\n\
+	lsls r3, 16\n\
+	asrs r1, r3, 16\n\
+	ldr r2, [r5, 0x10]\n\
+	lsls r0, r1, 1\n\
+	adds r0, r1\n\
+	lsls r4, r0, 2\n\
+	adds r1, r4, r2\n\
+	ldrb r0, [r1, 0x5]\n\
+	adds r7, r3, 0\n\
+	cmp r0, 0x7\n\
+	bne _080C95EC\n\
+	movs r2, 0x96\n\
+	lsls r2, 2\n\
+	adds r0, r2, 0\n\
+	ldrh r1, [r1, 0xA]\n\
+	adds r0, r1\n\
+	lsls r0, 16\n\
+	lsrs r0, 16\n\
+	bl FlagGet\n\
+	lsls r0, 24\n\
+	cmp r0, 0\n\
+	bne _080C95EC\n\
+	ldr r1, [r5, 0x10]\n\
+	adds r1, r4, r1\n\
+	ldrh r2, [r1]\n\
+	adds r2, 0x7\n\
+	mov r0, sp\n\
+	ldrh r0, [r0]\n\
+	subs r2, r0\n\
+	ldrh r0, [r1, 0x2]\n\
+	adds r0, 0x7\n\
+	mov r3, r9\n\
+	ldrh r1, [r3]\n\
+	subs r0, r1\n\
+	lsls r0, 16\n\
+	lsrs r0, 16\n\
+	lsls r2, 16\n\
+	asrs r1, r2, 16\n\
+	movs r3, 0xE0\n\
+	lsls r3, 11\n\
+	adds r2, r3\n\
+	lsrs r2, 16\n\
+	cmp r2, 0xE\n\
+	bhi _080C95EC\n\
+	lsls r0, 16\n\
+	asrs r2, r0, 16\n\
+	cmp r2, r8\n\
+	blt _080C95EC\n\
+	cmp r2, 0x5\n\
+	bgt _080C95EC\n\
+	adds r0, r6, 0\n\
+	bl sub_80C9838\n\
+_080C95EC:\n\
+	movs r1, 0x80\n\
+	lsls r1, 9\n\
+	adds r0, r7, r1\n\
+	lsrs r3, r0, 16\n\
+	asrs r0, 16\n\
+	ldrb r2, [r5, 0x3]\n\
+	cmp r0, r2\n\
+	blt _080C9580\n\
+_080C95FC:\n\
+	adds r0, r6, 0\n\
+	bl sub_80C9720\n\
+	ldr r0, _080C9618 @ =gTasks\n\
+	lsls r1, r6, 2\n\
+	adds r1, r6\n\
+	lsls r1, 3\n\
+	adds r1, r0\n\
+	movs r3, 0xC\n\
+	ldrsh r0, [r1, r3]\n\
+	cmp r0, 0x1\n\
+	beq _080C961C\n\
+	movs r0, 0\n\
+	b _080C961E\n\
+	.align 2, 0\n\
+_080C9618: .4byte gTasks\n\
+_080C961C:\n\
+	movs r0, 0x1\n\
+_080C961E:\n\
+	add sp, 0x4\n\
+	pop {r3,r4}\n\
+	mov r8, r3\n\
+	mov r9, r4\n\
+	pop {r4-r7}\n\
+	pop {r1}\n\
+	bx r1\n\
+	.syntax divided");
 }
