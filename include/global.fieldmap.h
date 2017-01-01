@@ -59,7 +59,7 @@ struct CoordEvent
 {
     s16 x, y;
     u8 filler_4;
-	u8 filler_5;
+    u8 filler_5;
     u16 trigger;
     u16 index;
     u8 filler_A[0x2];
