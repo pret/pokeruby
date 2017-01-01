@@ -76,7 +76,7 @@ struct BgEvent
 
 struct MapEvents
 {
-    u8 mapObjectCount;
+    u32 mapObjectCount;
     u8 warpCount;
     u8 coordEventCount;
     u8 bgEventCount;

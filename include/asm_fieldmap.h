@@ -6,7 +6,7 @@ void sub_8055FC0(void);
 u8 MapGridGetZCoordAt();
 bool8 MapGridIsImpassableAt(s16, s16);
 int MapGridGetMetatileIdAt(int, int);
-int MapGridGetMetatileBehaviorAt(int x, int y); // return: (u8|u16|int) args: (int|s16|s32)
+u32 MapGridGetMetatileBehaviorAt(int x, int y); // return: (u8|u16|int) args: (int|s16|s32)
 u8 MapGridGetMetatileLayerTypeAt(/*TODO: arg types*/);
 void MapGridSetMetatileIdAt(u32, u32, u16);
 void save_serialize_map(void);

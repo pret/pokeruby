@@ -71,7 +71,7 @@ u8 GetPlayerAvatarGraphicsIdByStateId(u8 a);
 // GetPlayerAvatarGenderByGraphicsId
 // PartyHasMonWithSurf
 // IsPlayerSurfingNorth
-// IsPlayerFacingSurfableFishableWater
+bool8 IsPlayerFacingSurfableFishableWater(void);
 // ClearPlayerAvatarInfo
 void SetPlayerAvatarStateMask(u8 a);
 // GetPlayerAvatarGraphicsIdByCurrentState
@@ -91,7 +91,7 @@ void InitPlayerAvatar(s16 a, s16 b, u8 c, u8 d);
 // sub_805A178
 // sub_805A1B8
 void sub_805A20C(u8 a);
-// StartFishing
+void StartFishing(u8 a);
 // Fishing1
 // Fishing2
 // Fishing3
