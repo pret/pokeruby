@@ -8,24 +8,24 @@
 	.2byte \id
 	.endm
 
-	.macro sprite template, priority, argc=0, argv:vararg
+	.macro sprite template, priority, argv:vararg
 	.byte 0x02
 	.4byte \template
 	.byte \priority
-	.byte \argc
-	.if \argc > 0
+	.byte (.Lsprite_\@_2 - .Lsprite_\@_1) / 2
+.Lsprite_\@_1:
 	.2byte \argv
-	.endif
+.Lsprite_\@_2:
 	.endm
 
-	.macro createtask addr, priority, argc=0, argv:vararg
+	.macro createtask addr, priority, argv:vararg
 	.byte 0x03
 	.4byte \addr
 	.byte \priority
-	.byte \argc
-	.if \argc > 0
+	.byte (.Lcreatetask_\@_2 - .Lcreatetask_\@_1) / 2
+.Lcreatetask_\@_1:
 	.2byte \argv
-	.endif
+.Lcreatetask_\@_2:
 	.endm
 
 	.macro pause delay
@@ -167,13 +167,13 @@
 	.2byte \bldcnt
 	.endm
 
-	.macro createtask_1F addr, argc=0, argv:vararg
+	.macro createtask_1F addr, argv:vararg
 	.byte 0x1F
 	.4byte \addr
-	.byte \argc
-	.if \argc > 0
+	.byte (.Lcreatetask_1F_\@_2 - .Lcreatetask_1F_\@_1) / 2
+.Lcreatetask_1F_\@_1:
 	.2byte \argv
-	.endif
+.Lcreatetask_1F_\@_2:
 	.endm
 
 	.macro waitsound
