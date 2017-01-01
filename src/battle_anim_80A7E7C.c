@@ -505,7 +505,6 @@ static void sub_80A8B3C(u8 task);
 
 void sub_80A8A80(u8 task) {
 	u8 spriteId;
-	u8 *r5;
 	switch (gUnknown_03004B00[0]) {
 	case 0:
 	case 1:
@@ -667,7 +666,6 @@ void sub_80A8E04(u8 task) {
 
 void sub_80A8EFC(u8 task) {
 	u8 spriteId;
-	u8 side;
 	spriteId = obj_id_for_side_relative_to_move(gUnknown_03004B00[2]);
 	sub_8078E70(spriteId, 0);
 	TASK.data[1] = 0;
