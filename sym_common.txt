@@ -185,7 +185,7 @@ gDisableMusic: @ 3004AEC
 gUnknown_03004AF0: @ 3004AF0
 	.space 0x10
 
-gUnknown_03004B00: @ 3004B00
+gBattleAnimArgs: @ 3004B00
 	.space 0x10
 
 gUnknown_03004B10: @ 3004B10

@@ -53,7 +53,7 @@ _0807566E:
 	subs r2, 0x1
 	cmp r2, 0
 	bge _0807566E
-	ldr r1, _080756FC @ =gUnknown_03004B00
+	ldr r1, _080756FC @ =gBattleAnimArgs
 	movs r2, 0
 	adds r0, r1, 0
 	adds r0, 0xE
@@ -102,7 +102,7 @@ _080756EC: .4byte gUnknown_0202F7C9
 _080756F0: .4byte gUnknown_0202F7D2
 _080756F4: .4byte 0x0000ffff
 _080756F8: .4byte gUnknown_03004B10
-_080756FC: .4byte gUnknown_03004B00
+_080756FC: .4byte gBattleAnimArgs
 	thumb_func_end sub_8075624
 
 	thumb_func_start move_anim_start_t1
@@ -242,7 +242,7 @@ _08075824:
 	mov r1, r8
 	strh r1, [r3]
 _08075828:
-	ldr r1, _0807587C @ =gUnknown_03004B00
+	ldr r1, _0807587C @ =gBattleAnimArgs
 	movs r2, 0
 	adds r0, r1, 0
 	adds r0, 0xE
@@ -287,7 +287,7 @@ _08075862:
 	ldr r2, _08075890 @ =gUnknown_081C7160
 	b _08075896
 	.align 2, 0
-_0807587C: .4byte gUnknown_03004B00
+_0807587C: .4byte gBattleAnimArgs
 _08075880: .4byte gUnknown_0202F7A4
 _08075884: .4byte gUnknown_0202F7B0
 _08075888: .4byte 0x0000ffff
@@ -613,7 +613,7 @@ ma02_instanciate_template: @ 8075AC4
 	cmp r0, 0
 	beq _08075B14
 	adds r6, r5, 0
-	ldr r5, _08075B30 @ =gUnknown_03004B00
+	ldr r5, _08075B30 @ =gBattleAnimArgs
 	adds r3, r0, 0
 _08075AFC:
 	ldr r2, [r6]
@@ -642,7 +642,7 @@ _08075B14:
 	b _08075B36
 	.align 2, 0
 _08075B2C: .4byte gUnknown_0202F7A4
-_08075B30: .4byte gUnknown_03004B00
+_08075B30: .4byte gBattleAnimArgs
 _08075B34:
 	negs r0, r4
 _08075B36:
@@ -739,7 +739,7 @@ sub_8075BB8: @ 8075BB8
 	cmp r0, 0
 	beq _08075C08
 	adds r5, r4, 0
-	ldr r4, _08075C2C @ =gUnknown_03004B00
+	ldr r4, _08075C2C @ =gBattleAnimArgs
 	adds r3, r0, 0
 _08075BF0:
 	ldr r2, [r5]
@@ -770,7 +770,7 @@ _08075C08:
 	bx r0
 	.align 2, 0
 _08075C28: .4byte gUnknown_0202F7A4
-_08075C2C: .4byte gUnknown_03004B00
+_08075C2C: .4byte gBattleAnimArgs
 _08075C30: .4byte gUnknown_0202F7B2
 	thumb_func_end sub_8075BB8
 
@@ -2693,7 +2693,7 @@ ma10_080736AC: @ 8076B04
 	orrs r4, r0
 	adds r1, 0x4
 	str r1, [r5]
-	ldr r0, _08076B34 @ =gUnknown_03004B00
+	ldr r0, _08076B34 @ =gBattleAnimArgs
 	lsls r2, 1
 	adds r2, r0
 	strh r4, [r2]
@@ -2702,7 +2702,7 @@ ma10_080736AC: @ 8076B04
 	bx r0
 	.align 2, 0
 _08076B30: .4byte gUnknown_0202F7A4
-_08076B34: .4byte gUnknown_03004B00
+_08076B34: .4byte gBattleAnimArgs
 	thumb_func_end ma10_080736AC
 
 	thumb_func_start ma11_if_else
@@ -4144,7 +4144,7 @@ sub_8077610: @ 8077610
 	cmp r0, 0
 	beq _0807765A
 	adds r5, r4, 0
-	ldr r4, _0807767C @ =gUnknown_03004B00
+	ldr r4, _0807767C @ =gBattleAnimArgs
 	adds r3, r0, 0
 _08077642:
 	ldr r2, [r5]
@@ -4175,7 +4175,7 @@ _0807765A:
 	bx r0
 	.align 2, 0
 _08077678: .4byte gUnknown_0202F7A4
-_0807767C: .4byte gUnknown_03004B00
+_0807767C: .4byte gBattleAnimArgs
 _08077680: .4byte gUnknown_0202F7B3
 	thumb_func_end sub_8077610
 
@@ -4254,7 +4254,7 @@ ma21_08074164: @ 8077708
 	ldrb r0, [r3, 0x2]
 	lsls r0, 8
 	orrs r1, r0
-	ldr r0, _0807774C @ =gUnknown_03004B00
+	ldr r0, _0807774C @ =gBattleAnimArgs
 	lsls r2, 1
 	adds r2, r0
 	lsls r1, 16
@@ -4277,7 +4277,7 @@ ma21_08074164: @ 8077708
 	b _08077756
 	.align 2, 0
 _08077748: .4byte gUnknown_0202F7A4
-_0807774C: .4byte gUnknown_03004B00
+_0807774C: .4byte gBattleAnimArgs
 _08077750:
 	adds r0, r4, 0
 	adds r0, 0x8
