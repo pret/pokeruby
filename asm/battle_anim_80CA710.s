@@ -18176,7 +18176,7 @@ _080D3240:
 	adds r0, r6, 0
 	bl obj_translate_based_on_private_1_2_3_4
 	ldr r0, _080D32DC @ =SpriteCallbackDummy
-	bl object_new_hidden_with_callback
+	bl CreateInvisibleSpriteWithCallback
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24

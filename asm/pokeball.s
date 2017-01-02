@@ -2604,7 +2604,7 @@ sub_8047858: @ 8047858
 	lsrs r4, 24
 	ldr r5, _08047890 @ =oamc_804BEB4
 	adds r0, r5, 0
-	bl object_new_hidden_with_callback
+	bl CreateInvisibleSpriteWithCallback
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _08047894 @ =gSprites

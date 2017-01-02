@@ -174,9 +174,13 @@ struct EasyChatPair
     u16 words[2];
 }; /*size = 0x8*/
 
-struct SaveBlock1_2B4C_Struct
-{ 
-	u8 filler[0x24]; 
+struct MailStruct
+{
+    /*0x00*/ u16 words[9];
+    /*0x12*/ u8 playerName[8];
+    /*0x1A*/ u8 trainerId[4];
+    /*0x1E*/ u16 species;
+    /*0x20*/ u16 itemId;
 };
 
 struct SaveBlock1
@@ -241,7 +245,7 @@ struct SaveBlock1
     /*0x2B0E*/ u8 filler_2B0E[0xE];
     /*0x2B1C*/ u16 unk2B1C[4];
     /*0x2B24*/ u8 filler_2B24[0x28];
-    /*0x2B4C*/ struct SaveBlock1_2B4C_Struct unkSave[16];
+    /*0x2B4C*/ struct MailStruct mail[16];
     /*0x2D8C*/ u8 filler_2D8C[0x48];
     /*0x2DD4*/ struct EasyChatPair easyChatPairs[5]; //Dewford trend [0] and some other stuff
     /*0x2DFC*/ u8 filler_2DFC[0x100];

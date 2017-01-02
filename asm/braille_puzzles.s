@@ -6,8 +6,8 @@
 
 	.text
 
-	thumb_func_start sub_81473B8
-sub_81473B8: @ 81473B8
+	thumb_func_start ShouldDoBrailleDigEffect
+ShouldDoBrailleDigEffect: @ 81473B8
 	push {lr}
 	ldr r0, _081473E8 @ =0x0000084f
 	bl FlagGet
@@ -44,10 +44,10 @@ _08147400:
 _08147402:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_81473B8
+	thumb_func_end ShouldDoBrailleDigEffect
 
-	thumb_func_start sub_8147408
-sub_8147408: @ 8147408
+	thumb_func_start DoBrailleDigEffect
+DoBrailleDigEffect: @ 8147408
 	push {lr}
 	ldr r2, _08147460 @ =0x0000022a
 	movs r0, 0x10
@@ -89,10 +89,10 @@ _08147468: .4byte 0x00000e32
 _0814746C: .4byte 0x00000233
 _08147470: .4byte 0x00000e34
 _08147474: .4byte 0x0000084f
-	thumb_func_end sub_8147408
+	thumb_func_end DoBrailleDigEffect
 
-	thumb_func_start sub_8147478
-sub_8147478: @ 8147478
+	thumb_func_start CheckRelicanthWailord
+CheckRelicanthWailord: @ 8147478
 	push {r4,lr}
 	ldr r4, _081474B4 @ =gPlayerParty
 	adds r0, r4, 0
@@ -129,10 +129,10 @@ _081474C2:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8147478
+	thumb_func_end CheckRelicanthWailord
 
-	thumb_func_start sub_81474C8
-sub_81474C8: @ 81474C8
+	thumb_func_start ShouldDoBrailleStrengthEffect
+ShouldDoBrailleStrengthEffect: @ 81474C8
 	push {lr}
 	movs r0, 0x85
 	lsls r0, 4
@@ -169,10 +169,10 @@ _0814750C:
 _0814750E:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_81474C8
+	thumb_func_end ShouldDoBrailleStrengthEffect
 
-	thumb_func_start sub_8147514
-sub_8147514: @ 8147514
+	thumb_func_start DoBrailleStrengthEffect
+DoBrailleStrengthEffect: @ 8147514
 	push {lr}
 	movs r0, 0x28
 	bl FieldEffectActiveListRemove
@@ -216,10 +216,10 @@ _08147578: .4byte 0x0000022b
 _0814757C: .4byte 0x00000e32
 _08147580: .4byte 0x00000233
 _08147584: .4byte 0x00000e34
-	thumb_func_end sub_8147514
+	thumb_func_end DoBrailleStrengthEffect
 
-	thumb_func_start sub_8147588
-sub_8147588: @ 8147588
+	thumb_func_start ShouldDoBrailleFlyEffect
+ShouldDoBrailleFlyEffect: @ 8147588
 	push {lr}
 	ldr r0, _081475AC @ =0x00000852
 	bl FlagGet
@@ -247,10 +247,10 @@ _081475BC:
 _081475BE:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8147588
+	thumb_func_end ShouldDoBrailleFlyEffect
 
-	thumb_func_start sub_81475C4
-sub_81475C4: @ 81475C4
+	thumb_func_start DoBrailleFlyEffect
+DoBrailleFlyEffect: @ 81475C4
 	push {lr}
 	ldr r0, _081475D8 @ =gUnknown_0202FF84
 	ldr r1, _081475DC @ =gUnknown_03005CE0
@@ -263,7 +263,7 @@ sub_81475C4: @ 81475C4
 	.align 2, 0
 _081475D8: .4byte gUnknown_0202FF84
 _081475DC: .4byte gUnknown_03005CE0
-	thumb_func_end sub_81475C4
+	thumb_func_end DoBrailleFlyEffect
 
 	thumb_func_start FldEff_UseFlyAncientTomb
 FldEff_UseFlyAncientTomb: @ 81475E0
@@ -276,7 +276,7 @@ FldEff_UseFlyAncientTomb: @ 81475E0
 	adds r1, r0
 	lsls r1, 3
 	adds r1, r2
-	ldr r2, _08147608 @ =sub_814760C
+	ldr r2, _08147608 @ =UseFlyAncientTomb_Callback
 	lsrs r0, r2, 16
 	strh r0, [r1, 0x18]
 	strh r2, [r1, 0x1A]
@@ -285,21 +285,21 @@ FldEff_UseFlyAncientTomb: @ 81475E0
 	bx r1
 	.align 2, 0
 _08147604: .4byte gTasks
-_08147608: .4byte sub_814760C
+_08147608: .4byte UseFlyAncientTomb_Callback
 	thumb_func_end FldEff_UseFlyAncientTomb
 
-	thumb_func_start sub_814760C
-sub_814760C: @ 814760C
+	thumb_func_start UseFlyAncientTomb_Callback
+UseFlyAncientTomb_Callback: @ 814760C
 	push {lr}
 	movs r0, 0x3C
 	bl FieldEffectActiveListRemove
-	bl sub_814761C
+	bl UseFlyAncientTomb_Finish
 	pop {r0}
 	bx r0
-	thumb_func_end sub_814760C
+	thumb_func_end UseFlyAncientTomb_Callback
 
-	thumb_func_start sub_814761C
-sub_814761C: @ 814761C
+	thumb_func_start UseFlyAncientTomb_Finish
+UseFlyAncientTomb_Finish: @ 814761C
 	push {lr}
 	ldr r2, _08147674 @ =0x0000022a
 	movs r0, 0xE
@@ -341,17 +341,17 @@ _0814767C: .4byte 0x00000e32
 _08147680: .4byte 0x00000233
 _08147684: .4byte 0x00000e34
 _08147688: .4byte 0x00000852
-	thumb_func_end sub_814761C
+	thumb_func_end UseFlyAncientTomb_Finish
 
-	thumb_func_start sub_814768C
-sub_814768C: @ 814768C
+	thumb_func_start DoBrailleWait
+DoBrailleWait: @ 814768C
 	push {lr}
 	ldr r0, _081476A8 @ =0x00000851
 	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
 	bne _081476A2
-	ldr r0, _081476AC @ =sub_81476B0
+	ldr r0, _081476AC @ =Task_BrailleWait
 	movs r1, 0x50
 	bl CreateTask
 _081476A2:
@@ -359,11 +359,11 @@ _081476A2:
 	bx r0
 	.align 2, 0
 _081476A8: .4byte 0x00000851
-_081476AC: .4byte sub_81476B0
-	thumb_func_end sub_814768C
+_081476AC: .4byte Task_BrailleWait
+	thumb_func_end DoBrailleWait
 
-	thumb_func_start sub_81476B0
-sub_81476B0: @ 81476B0
+	thumb_func_start Task_BrailleWait
+Task_BrailleWait: @ 81476B0
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -400,7 +400,7 @@ _081476F0:
 	strh r0, [r4]
 	b _0814776A
 _081476FE:
-	bl sub_8147774
+	bl BrailleWait_CheckButtonPress
 	cmp r0, 0
 	beq _08147716
 	bl MenuZeroFillScreen
@@ -423,7 +423,7 @@ _08147716:
 	strh r0, [r4, 0x2]
 	b _0814776A
 _08147730:
-	bl sub_8147774
+	bl BrailleWait_CheckButtonPress
 	cmp r0, 0
 	beq _08147748
 	bl sub_8064E2C
@@ -453,10 +453,10 @@ _0814776A:
 	bx r0
 	.align 2, 0
 _08147770: .4byte gUnknown_0815EF19
-	thumb_func_end sub_81476B0
+	thumb_func_end Task_BrailleWait
 
-	thumb_func_start sub_8147774
-sub_8147774: @ 8147774
+	thumb_func_start BrailleWait_CheckButtonPress
+BrailleWait_CheckButtonPress: @ 8147774
 	push {lr}
 	movs r1, 0xFF
 	ldr r0, _081477A4 @ =gSaveBlock2
@@ -490,12 +490,12 @@ _081477AC:
 _081477AE:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8147774
+	thumb_func_end BrailleWait_CheckButtonPress
 
-	thumb_func_start sub_81477B4
-sub_81477B4: @ 81477B4
+	thumb_func_start DoSealedChamberShakingEffect1
+DoSealedChamberShakingEffect1: @ 81477B4
 	push {lr}
-	ldr r0, _081477E8 @ =sub_814782C
+	ldr r0, _081477E8 @ =SealedChamberShakingEffect
 	movs r1, 0x9
 	bl CreateTask
 	lsls r0, 24
@@ -519,14 +519,14 @@ sub_81477B4: @ 81477B4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_081477E8: .4byte sub_814782C
+_081477E8: .4byte SealedChamberShakingEffect
 _081477EC: .4byte gTasks
-	thumb_func_end sub_81477B4
+	thumb_func_end DoSealedChamberShakingEffect1
 
-	thumb_func_start sub_81477F0
-sub_81477F0: @ 81477F0
+	thumb_func_start DoSealedChamberShakingEffect2
+DoSealedChamberShakingEffect2: @ 81477F0
 	push {lr}
-	ldr r0, _08147824 @ =sub_814782C
+	ldr r0, _08147824 @ =SealedChamberShakingEffect
 	movs r1, 0x9
 	bl CreateTask
 	lsls r0, 24
@@ -550,12 +550,12 @@ sub_81477F0: @ 81477F0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08147824: .4byte sub_814782C
+_08147824: .4byte SealedChamberShakingEffect
 _08147828: .4byte gTasks
-	thumb_func_end sub_81477F0
+	thumb_func_end DoSealedChamberShakingEffect2
 
-	thumb_func_start sub_814782C
-sub_814782C: @ 814782C
+	thumb_func_start SealedChamberShakingEffect
+SealedChamberShakingEffect: @ 814782C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -601,6 +601,6 @@ _08147884:
 	bx r0
 	.align 2, 0
 _0814788C: .4byte gTasks
-	thumb_func_end sub_814782C
+	thumb_func_end SealedChamberShakingEffect
 
 	.align 2, 0 @ Don't pad with nop.

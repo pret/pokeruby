@@ -11237,7 +11237,7 @@ sub_80B09E4: @ 80B09E4
 	movs r1, 0x3
 	movs r2, 0xC0
 	lsls r2, 19
-	bl sub_8040F80
+	bl CopySpriteTiles
 	ldrb r0, [r7]
 	lsls r3, r0, 2
 	adds r3, r0
@@ -11253,7 +11253,7 @@ sub_80B09E4: @ 80B09E4
 	movs r1, 0x3
 	movs r2, 0xC0
 	lsls r2, 19
-	bl sub_8040F80
+	bl CopySpriteTiles
 	ldrh r0, [r4, 0x4]
 	lsls r0, 22
 	lsrs r0, 17
@@ -15223,7 +15223,7 @@ _080B2928: .4byte gContestMons
 sub_80B292C: @ 80B292C
 	push {lr}
 	ldr r0, _080B2958 @ =SpriteCallbackDummy
-	bl object_new_hidden_with_callback
+	bl CreateInvisibleSpriteWithCallback
 	ldr r1, _080B295C @ =gUnknown_02024BE0
 	strb r0, [r1, 0x3]
 	ldr r0, _080B2960 @ =gUnknown_02024C08

@@ -57,7 +57,7 @@ SECTIONS {
         asm/pokemon_3.o(.text);
         src/trig.o(.text);
         src/rng.o(.text);
-        asm/rom_8040EB4.o(.text);
+        asm/util.o(.text);
         src/blend_palette.o(.text);
         asm/daycare.o(.text);
         asm/egg_hatch.o(.text);
@@ -90,7 +90,6 @@ SECTIONS {
         asm/rom_806936C.o(.text);
         asm/reset_rtc_screen.o(.text);
         asm/party_menu.o(.text);
-        asm/rom_806D7F8.o(.text);
         src/start_menu.o(.text);
         src/menu.o(.text);
         src/tileset_anim.o(.text);
@@ -120,7 +119,8 @@ SECTIONS {
         src/save_menu_util.o(.text);
         asm/rom_8094928.o(.text);
         asm/fldeff_cut.o(.text);
-        asm/rom_80A2B18.o(.text);
+        asm/mail_data.o(.text);
+        asm/map_name_popup.o(.text);
         asm/item_menu.o(.text);
         src/battle_anim_80A7E7C.o(.text);
         src/item.o(.text);
@@ -209,7 +209,7 @@ SECTIONS {
         src/berry_tag_screen.o(.text);
         src/mystery_event_menu.o(.text);
         src/save_failed_screen.o(.text);
-        asm/rom_81473B8.o(.text);
+        asm/braille_puzzles.o(.text);
         asm/pokeblock_feed.o(.text);
         src/clear_save_data_menu.o(.text);
         asm/rom_8148B8C.o(.text);

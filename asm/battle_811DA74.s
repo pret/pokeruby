@@ -3628,7 +3628,7 @@ sub_811F864: @ 811F864
 	lsrs r0, 16
 	mov r8, r0
 	ldr r0, _0811F9B4 @ =sub_80312F0
-	bl object_new_hidden_with_callback
+	bl CreateInvisibleSpriteWithCallback
 	ldr r1, _0811F9B8 @ =gUnknown_0300434C
 	mov r9, r1
 	add r9, r6

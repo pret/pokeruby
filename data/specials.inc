@@ -279,8 +279,8 @@ gSpecials::
 	.4byte RemoveCameraDummy
 	.4byte GetPokeblockNameByMonNature
 	.4byte GetSecretBaseNearbyMapName
-	.4byte sub_8147478
-	.4byte sub_814768C
+	.4byte CheckRelicanthWailord
+	.4byte DoBrailleWait
 	.4byte sub_80818A4
 	.4byte sub_80818FC
 	.4byte ShowBattleTowerRecords
@@ -305,7 +305,7 @@ gSpecials::
 	.4byte IsStarterInParty
 	.4byte sub_80BC224
 	.4byte CheckFreePokemonStorageSpace
-	.4byte sub_81477B4
+	.4byte DoSealedChamberShakingEffect1
 	.4byte sub_810E944
 	.4byte GetShieldToyTVDecorationInfo
 	.4byte IsPokerusInParty
@@ -315,7 +315,7 @@ gSpecials::
 	.4byte sub_8081BB8
 	.4byte sub_8081C50
 	.4byte sub_8082524
-	.4byte sub_81477F0
+	.4byte DoSealedChamberShakingEffect2
 	.4byte sub_810F828
 	.4byte sub_807E25C
 	.4byte sp13E_warp_to_last_warp

@@ -6539,7 +6539,7 @@ sub_804B128: @ 804B128
 	ldrh r0, [r0]
 	str r0, [sp, 0xC]
 	add r0, sp, 0x10
-	bl sub_8040F34
+	bl DoBgAffineSet
 	ldr r1, _0804B1B8 @ =REG_BG2PA
 	add r0, sp, 0x10
 	ldrh r0, [r0]
@@ -7591,7 +7591,7 @@ sub_804BA64: @ 804BA64
 	lsls r0, 8
 	cmp r1, r0
 	bne _0804BA8C
-	bl sub_80690F0
+	bl UnlockNationalPokedex
 _0804BA8C:
 	pop {r0}
 	bx r0

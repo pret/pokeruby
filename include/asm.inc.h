@@ -448,8 +448,8 @@ void InitIntroTorchicAttackAnim(u8);
 void InitIntroMudkipAttackAnim(/*TODO: arg types*/);
 
 // asm/rom_81473B8.o
-bool8 sub_81474C8(void);
-void sub_8147514(void);
+bool8 ShouldDoBrailleStrengthEffect(void);
+void DoBrailleStrengthEffect(void);
 
 // asm/rom_8148B8C.o
 void load_intro_part2_graphics(/*TODO: arg types*/);

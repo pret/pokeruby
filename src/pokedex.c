@@ -109,7 +109,7 @@ extern void m4aMPlayVolumeControl(struct MusicPlayerInfo *mplayInfo, u16 trackBi
 extern bool8 BeginNormalPaletteFade(u32, s8, u8, u8, u16);
 extern void remove_some_task(void);
 extern u8 sub_8091E3C(void);
-extern void sub_80690C8(void);
+extern void LockNationalPokedex(void);
 extern void sub_805469C(void);
 extern u16 HoennToNationalOrder(u16);
 extern u16 NationalToHoennOrder(u16);
@@ -144,7 +144,7 @@ void sub_808C02C(void)
     gSaveBlock2.pokedex.unownPersonality = 0;
     gSaveBlock2.pokedex.spindaPersonality = 0;
     gSaveBlock2.pokedex.unknown3 = 0;
-    sub_80690C8();
+    LockNationalPokedex();
     for(i = 0; i <= 51; i++)
     {
         gSaveBlock2.pokedex.owned[i] = 0;

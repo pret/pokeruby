@@ -1550,7 +1550,7 @@ _08122A12:
 	adds r0, r5, 0
 	movs r1, 0x3
 	adds r2, r4, 0
-	bl sub_806E630
+	bl PartyMenuDrawHPBar
 _08122A36:
 	adds r0, r5, 0x1
 	lsls r0, 24
@@ -1752,7 +1752,7 @@ _08122B96:
 	ldrh r3, [r6, 0x12]
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl sub_806E574
+	bl PartyMenuDoDrawHPBar
 _08122BDA:
 	mov r0, r8
 	adds r0, 0x1

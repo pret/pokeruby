@@ -104,10 +104,10 @@ void HandleReadMail(struct MailStruct *arg0, MainCallback arg1, bool8 arg2) {
     unk_2000000.var104 = (MainCallback) sub_80EB3FC;
     unk_2000000.var108 = (MainCallback) ConvertEasyChatWordsToString;
 
-    mailDesign = arg0->var20 - ITEM_ORANGE_MAIL;
+    mailDesign = arg0->itemId - ITEM_ORANGE_MAIL;
 
     if (mailDesign <= 11) {
-        unk_2000000.varFA = arg0->var20 - ITEM_ORANGE_MAIL;
+        unk_2000000.varFA = arg0->itemId - ITEM_ORANGE_MAIL;
     } else {
         unk_2000000.varFA = 0;
         arg2 = FALSE;
@@ -124,7 +124,7 @@ void HandleReadMail(struct MailStruct *arg0, MainCallback arg1, bool8 arg2) {
             break;
     }
 
-    if (((sub_80A2D64(arg0->var1E, buffer) << 16) +0xFFFF0000) <= (410 << 16)) {
+    if (((sub_80A2D64(arg0->species, buffer) << 16) +0xFFFF0000) <= (410 << 16)) {
         switch (unk_2000000.varFA) {
             case 6:
                 unk_2000000.varFB = 1;
@@ -394,7 +394,7 @@ static u8 sub_80F8A28(void) {
         case 16: {
             u16 local1;
 
-            local1 = sub_809D4A8(unk_2000000.varF4->var1E);
+            local1 = sub_809D4A8(unk_2000000.varF4->species);
 
             switch (unk_2000000.varFB) {
                 case 1:
@@ -477,7 +477,7 @@ static void sub_80F8DA0(void) {
         u8 *ptr;
         u16 length;
 
-        ptr = sub_80F8D7C(unk_2000000.varD8, unk_2000000.varF4->var12);
+        ptr = sub_80F8D7C(unk_2000000.varD8, unk_2000000.varF4->playerName);
         StringCopy(ptr, gOtherText_From);
 
         length = StringLength(unk_2000000.varD8);
@@ -487,7 +487,7 @@ static void sub_80F8DA0(void) {
         u8 *ptr;
 
         ptr = StringCopy(unk_2000000.varD8, gOtherText_From);
-        sub_80F8D7C(ptr, unk_2000000.varF4->var12);
+        sub_80F8D7C(ptr, unk_2000000.varF4->playerName);
 
         unk_2000000.varF9 = unk_2000000.var10C->var2;
     }
@@ -671,7 +671,7 @@ static void sub_80F8FB4(void) {
     switch (unk_2000000.varFB) {
         case 2:
         case 1:
-            local1 = sub_809D4A8(unk_2000000.varF4->var1E);
+            local1 = sub_809D4A8(unk_2000000.varF4->species);
             sub_809D608(local1);
 
             sub_809D510(&gSprites[unk_2000000.varFC]);

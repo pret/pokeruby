@@ -130,7 +130,7 @@ void ItemMenu_ReadMail(u8 taskId)
 
 	if(!gPaletteFade.active)
 	{
-		mailStruct.var20 = gScriptItemId;
+		mailStruct.itemId = gScriptItemId;
 		HandleReadMail(&mailStruct, sub_80A5D04, 0);
 		DestroyTask(taskId);
 	}

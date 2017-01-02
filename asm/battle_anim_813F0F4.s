@@ -87,12 +87,12 @@ unref_sub_813F0F4: @ 813F0F4
 	lsls r6, 24
 	lsrs r6, 24
 	ldr r0, _0813F2D8 @ =SpriteCallbackDummy
-	bl object_new_hidden_with_callback
+	bl CreateInvisibleSpriteWithCallback
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x14]
 	ldr r0, _0813F2D8 @ =SpriteCallbackDummy
-	bl object_new_hidden_with_callback
+	bl CreateInvisibleSpriteWithCallback
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x18]
