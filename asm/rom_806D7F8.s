@@ -1254,8 +1254,8 @@ _0806E160: .4byte 0x0600f000
 _0806E164: .4byte 0xffffb000
 	thumb_func_end PartyMenuPutStatusTilemap
 
-	thumb_func_start sub_806E168
-sub_806E168: @ 806E168
+	thumb_func_start PartyMenuClearLevelStatusTilemap
+PartyMenuClearLevelStatusTilemap: @ 806E168
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -1307,7 +1307,7 @@ _0806E1B0:
 	.align 2, 0
 _0806E1C8: .4byte gUnknown_08376738
 _0806E1CC: .4byte 0x0600f000
-	thumb_func_end sub_806E168
+	thumb_func_end PartyMenuClearLevelStatusTilemap
 
 	thumb_func_start PartyMenuWriteTilemap
 PartyMenuWriteTilemap: @ 806E1D0
@@ -1788,8 +1788,8 @@ nullsub_13: @ 806E570
 	bx lr
 	thumb_func_end nullsub_13
 
-	thumb_func_start sub_806E574
-sub_806E574: @ 806E574
+	thumb_func_start PartyMenuDoDrawHPBar
+PartyMenuDoDrawHPBar: @ 806E574
 	push {r4-r6,lr}
 	sub sp, 0x18
 	lsls r0, 24
@@ -1883,10 +1883,10 @@ _0806E5E6:
 _0806E624: .4byte 0xffff8000
 _0806E628: .4byte gUnknown_08376858
 _0806E62C: .4byte 0x00003109
-	thumb_func_end sub_806E574
+	thumb_func_end PartyMenuDoDrawHPBar
 
-	thumb_func_start sub_806E630
-sub_806E630: @ 806E630
+	thumb_func_start PartyMenuDrawHPBar
+PartyMenuDrawHPBar: @ 806E630
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -1912,16 +1912,16 @@ sub_806E630: @ 806E630
 	adds r0, r5, 0
 	adds r1, r6, 0
 	adds r2, r4, 0
-	bl sub_806E574
+	bl PartyMenuDoDrawHPBar
 	pop {r3}
 	mov r8, r3
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_806E630
+	thumb_func_end PartyMenuDrawHPBar
 
-	thumb_func_start sub_806E674
-sub_806E674: @ 806E674
+	thumb_func_start PartyMenuTryDrawHPBar
+PartyMenuTryDrawHPBar: @ 806E674
 	push {r4-r6,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -1945,7 +1945,7 @@ sub_806E674: @ 806E674
 	adds r0, r5, 0
 	movs r1, 0x2
 	adds r2, r4, 0
-	bl sub_806E630
+	bl PartyMenuDrawHPBar
 	b _0806E6C0
 _0806E6AE:
 	bl IsDoubleBattle
@@ -1954,15 +1954,15 @@ _0806E6AE:
 	lsrs r1, 24
 	adds r0, r6, 0
 	adds r2, r4, 0
-	bl sub_806E630
+	bl PartyMenuDrawHPBar
 _0806E6C0:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_806E674
+	thumb_func_end PartyMenuTryDrawHPBar
 
-	thumb_func_start sub_806E6C8
-sub_806E6C8: @ 806E6C8
+	thumb_func_start PartyMenuDrawHPBars
+PartyMenuDrawHPBars: @ 806E6C8
 	push {r4-r6,lr}
 	movs r4, 0
 	movs r6, 0x64
@@ -1972,7 +1972,7 @@ _0806E6D0:
 	muls r1, r6
 	adds r1, r5
 	adds r0, r4, 0
-	bl sub_806E674
+	bl PartyMenuTryDrawHPBar
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -1983,7 +1983,7 @@ _0806E6D0:
 	bx r0
 	.align 2, 0
 _0806E6EC: .4byte gPlayerParty
-	thumb_func_end sub_806E6C8
+	thumb_func_end PartyMenuDrawHPBars
 
 	thumb_func_start sub_806E6F0
 sub_806E6F0: @ 806E6F0
@@ -2259,8 +2259,8 @@ _0806E8FC: .4byte 0x0201c000
 _0806E900: .4byte gPlayerParty
 	thumb_func_end sub_806E8D0
 
-	thumb_func_start sub_806E904
-sub_806E904: @ 806E904
+	thumb_func_start PartyMenuUpdateMonHeldItem
+PartyMenuUpdateMonHeldItem: @ 806E904
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r5, r0, 0
@@ -2309,10 +2309,10 @@ _0806E958:
 	bx r1
 	.align 2, 0
 _0806E960: .4byte gUnknown_0202E8F4
-	thumb_func_end sub_806E904
+	thumb_func_end PartyMenuUpdateMonHeldItem
 
-	thumb_func_start sub_806E964
-sub_806E964: @ 806E964
+	thumb_func_start PartyMenuTryGiveMonHeldItem
+PartyMenuTryGiveMonHeldItem: @ 806E964
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2386,7 +2386,7 @@ _0806E9F0:
 	adds r0, r4, 0
 	movs r1, 0x1
 	bl sub_806E834
-	ldr r0, _0806EA40 @ =sub_806EBB8
+	ldr r0, _0806EA40 @ =Task_ConfirmGiveHeldItem
 	movs r1, 0x5
 	bl CreateTask
 	adds r0, r5, 0
@@ -2403,11 +2403,11 @@ _0806EA30: .4byte gStringVar1
 _0806EA34: .4byte gStringVar2
 _0806EA38: .4byte gStringVar4
 _0806EA3C: .4byte gOtherText_AlreadyHolding
-_0806EA40: .4byte sub_806EBB8
+_0806EA40: .4byte Task_ConfirmGiveHeldItem
 _0806EA44:
 	ldr r0, [r4]
 	adds r1, r5, 0
-	bl sub_806E904
+	bl PartyMenuUpdateMonHeldItem
 	adds r0, r5, 0
 	movs r1, 0x1
 	bl RemoveBagItem
@@ -2423,7 +2423,7 @@ _0806EA66:
 	ldrb r0, [r4, 0x5]
 	mov r1, r9
 	movs r2, 0x1
-	bl sub_806EBF0
+	bl DisplayGiveHeldItemMessage
 	ldr r0, _0806EA88 @ =party_menu_link_mon_held_item_object
 	movs r1, 0x5
 	bl CreateTask
@@ -2437,7 +2437,7 @@ _0806EA78:
 	bx r0
 	.align 2, 0
 _0806EA88: .4byte party_menu_link_mon_held_item_object
-	thumb_func_end sub_806E964
+	thumb_func_end PartyMenuTryGiveMonHeldItem
 
 	thumb_func_start party_menu_link_mon_held_item_object
 party_menu_link_mon_held_item_object: @ 806EA8C
@@ -2472,8 +2472,8 @@ _0806EAC4: .4byte 0x0201c000
 _0806EAC8: .4byte gTasks
 	thumb_func_end party_menu_link_mon_held_item_object
 
-	thumb_func_start sub_806EACC
-sub_806EACC: @ 806EACC
+	thumb_func_start PartyMenuTryGiveMonHeldItem_806EACC
+PartyMenuTryGiveMonHeldItem_806EACC: @ 806EACC
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -2505,7 +2505,7 @@ sub_806EACC: @ 806EACC
 	bne _0806EB5C
 	ldr r0, [r4]
 	ldrh r1, [r4, 0x6]
-	bl sub_806E904
+	bl PartyMenuUpdateMonHeldItem
 	ldrh r0, [r4, 0x6]
 	bl itemid_is_mail
 	lsls r0, 24
@@ -2514,7 +2514,7 @@ sub_806EACC: @ 806EACC
 	ldrb r0, [r4, 0x5]
 	adds r1, r5, 0
 	movs r2, 0x1
-	bl sub_806EDB4
+	bl DisplayTakeHeldItemMessage
 	b _0806EB9A
 	.align 2, 0
 _0806EB30: .4byte 0x0201c000
@@ -2579,10 +2579,10 @@ _0806EBA8:
 	.align 2, 0
 _0806EBB0: .4byte gTasks
 _0806EBB4: .4byte party_menu_link_mon_held_item_object
-	thumb_func_end sub_806EACC
+	thumb_func_end PartyMenuTryGiveMonHeldItem_806EACC
 
-	thumb_func_start sub_806EBB8
-sub_806EBB8: @ 806EBB8
+	thumb_func_start Task_ConfirmGiveHeldItem
+Task_ConfirmGiveHeldItem: @ 806EBB8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -2599,7 +2599,7 @@ sub_806EBB8: @ 806EBB8
 	adds r1, r4
 	lsls r1, 3
 	adds r1, r0
-	ldr r0, _0806EBEC @ =sub_806EACC
+	ldr r0, _0806EBEC @ =PartyMenuTryGiveMonHeldItem_806EACC
 	str r0, [r1]
 _0806EBDE:
 	pop {r4}
@@ -2608,11 +2608,11 @@ _0806EBDE:
 	.align 2, 0
 _0806EBE4: .4byte gUnknown_0202E8F6
 _0806EBE8: .4byte gTasks
-_0806EBEC: .4byte sub_806EACC
-	thumb_func_end sub_806EBB8
+_0806EBEC: .4byte PartyMenuTryGiveMonHeldItem_806EACC
+	thumb_func_end Task_ConfirmGiveHeldItem
 
-	thumb_func_start sub_806EBF0
-sub_806EBF0: @ 806EBF0
+	thumb_func_start DisplayGiveHeldItemMessage
+DisplayGiveHeldItemMessage: @ 806EBF0
 	push {r4,r5,lr}
 	adds r4, r1, 0
 	adds r5, r2, 0
@@ -2647,10 +2647,10 @@ _0806EC34: .4byte gStringVar1
 _0806EC38: .4byte gStringVar2
 _0806EC3C: .4byte gStringVar4
 _0806EC40: .4byte gOtherText_WasGivenToHold
-	thumb_func_end sub_806EBF0
+	thumb_func_end DisplayGiveHeldItemMessage
 
-	thumb_func_start sub_806EC44
-sub_806EC44: @ 806EC44
+	thumb_func_start PartyMenuTryGiveMonMail
+PartyMenuTryGiveMonMail: @ 806EC44
 	push {r4,r5,lr}
 	adds r2, r1, 0
 	lsls r0, 24
@@ -2720,10 +2720,10 @@ _0806ECDA:
 	.align 2, 0
 _0806ECE0: .4byte gOtherText_MailTransferredMailbox
 _0806ECE4: .4byte party_menu_link_mon_held_item_object
-	thumb_func_end sub_806EC44
+	thumb_func_end PartyMenuTryGiveMonMail
 
-	thumb_func_start sub_806ECE8
-sub_806ECE8: @ 806ECE8
+	thumb_func_start PartyMenuTryGiveMonHeldItem_806ECE8
+PartyMenuTryGiveMonHeldItem_806ECE8: @ 806ECE8
 	push {r4-r6,lr}
 	sub sp, 0x4
 	adds r2, r1, 0
@@ -2789,7 +2789,7 @@ _0806ED7C:
 	ldrb r0, [r5, 0x5]
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_806EDB4
+	bl DisplayTakeHeldItemMessage
 	ldr r0, [r5]
 	movs r1, 0xC
 	mov r2, sp
@@ -2811,10 +2811,10 @@ _0806EDA2:
 	.align 2, 0
 _0806EDAC: .4byte gOtherText_BagFullCannotRemoveItem
 _0806EDB0: .4byte party_menu_link_mon_held_item_object
-	thumb_func_end sub_806ECE8
+	thumb_func_end PartyMenuTryGiveMonHeldItem_806ECE8
 
-	thumb_func_start sub_806EDB4
-sub_806EDB4: @ 806EDB4
+	thumb_func_start DisplayTakeHeldItemMessage
+DisplayTakeHeldItemMessage: @ 806EDB4
 	push {r4,r5,lr}
 	adds r4, r1, 0
 	adds r5, r2, 0
@@ -2849,10 +2849,10 @@ _0806EDF8: .4byte gStringVar1
 _0806EDFC: .4byte gStringVar2
 _0806EE00: .4byte gStringVar4
 _0806EE04: .4byte gOtherText_ReceivedTheThingFrom
-	thumb_func_end sub_806EDB4
+	thumb_func_end DisplayTakeHeldItemMessage
 
-	thumb_func_start sub_806EE08
-sub_806EE08: @ 806EE08
+	thumb_func_start DoTakeMail
+DoTakeMail: @ 806EE08
 	push {r4,lr}
 	adds r2, r1, 0
 	lsls r0, 24
@@ -2874,7 +2874,7 @@ sub_806EE08: @ 806EE08
 	ldr r0, _0806EE54 @ =gOtherText_SendRemovedMailPrompt
 	movs r1, 0x1
 	bl sub_806E834
-	ldr r0, _0806EE58 @ =sub_806EFEC
+	ldr r0, _0806EE58 @ =Task_ConfirmTakeHeldMail
 	movs r1, 0x5
 	bl CreateTask
 	pop {r4}
@@ -2885,11 +2885,11 @@ _0806EE48: .4byte gTasks
 _0806EE4C: .4byte TaskDummy
 _0806EE50: .4byte 0x0201c000
 _0806EE54: .4byte gOtherText_SendRemovedMailPrompt
-_0806EE58: .4byte sub_806EFEC
-	thumb_func_end sub_806EE08
+_0806EE58: .4byte Task_ConfirmTakeHeldMail
+	thumb_func_end DoTakeMail
 
-	thumb_func_start sub_806EE5C
-sub_806EE5C: @ 806EE5C
+	thumb_func_start Task_LoseMailMessage
+Task_LoseMailMessage: @ 806EE5C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -2967,10 +2967,10 @@ _0806EEF0:
 	.align 2, 0
 _0806EEF8: .4byte gTasks
 _0806EEFC: .4byte party_menu_link_mon_held_item_object
-	thumb_func_end sub_806EE5C
+	thumb_func_end Task_LoseMailMessage
 
-	thumb_func_start sub_806EF00
-sub_806EF00: @ 806EF00
+	thumb_func_start Task_ConfirmLoseMailMessage
+Task_ConfirmLoseMailMessage: @ 806EF00
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -2987,7 +2987,7 @@ sub_806EF00: @ 806EF00
 	adds r1, r4
 	lsls r1, 3
 	adds r1, r0
-	ldr r0, _0806EF34 @ =sub_806EE5C
+	ldr r0, _0806EF34 @ =Task_LoseMailMessage
 	str r0, [r1]
 _0806EF26:
 	pop {r4}
@@ -2996,11 +2996,11 @@ _0806EF26:
 	.align 2, 0
 _0806EF2C: .4byte gUnknown_0202E8F6
 _0806EF30: .4byte gTasks
-_0806EF34: .4byte sub_806EE5C
-	thumb_func_end sub_806EF00
+_0806EF34: .4byte Task_LoseMailMessage
+	thumb_func_end Task_ConfirmLoseMailMessage
 
-	thumb_func_start sub_806EF38
-sub_806EF38: @ 806EF38
+	thumb_func_start Task_TakeHeldMail
+Task_TakeHeldMail: @ 806EF38
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -3073,7 +3073,7 @@ _0806EFB6:
 	adds r0, r4
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, _0806EFE8 @ =sub_806EF00
+	ldr r1, _0806EFE8 @ =Task_ConfirmLoseMailMessage
 	str r1, [r0]
 _0806EFD8:
 	pop {r4}
@@ -3082,11 +3082,11 @@ _0806EFD8:
 	.align 2, 0
 _0806EFE0: .4byte gOtherText_MailRemovedMessageLost
 _0806EFE4: .4byte gTasks
-_0806EFE8: .4byte sub_806EF00
-	thumb_func_end sub_806EF38
+_0806EFE8: .4byte Task_ConfirmLoseMailMessage
+	thumb_func_end Task_TakeHeldMail
 
-	thumb_func_start sub_806EFEC
-sub_806EFEC: @ 806EFEC
+	thumb_func_start Task_ConfirmTakeHeldMail
+Task_ConfirmTakeHeldMail: @ 806EFEC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -3103,7 +3103,7 @@ sub_806EFEC: @ 806EFEC
 	adds r1, r4
 	lsls r1, 3
 	adds r1, r0
-	ldr r0, _0806F020 @ =sub_806EF38
+	ldr r0, _0806F020 @ =Task_TakeHeldMail
 	str r0, [r1]
 _0806F012:
 	pop {r4}
@@ -3112,8 +3112,8 @@ _0806F012:
 	.align 2, 0
 _0806F018: .4byte gUnknown_0202E8F6
 _0806F01C: .4byte gTasks
-_0806F020: .4byte sub_806EF38
-	thumb_func_end sub_806EFEC
+_0806F020: .4byte Task_TakeHeldMail
+	thumb_func_end Task_ConfirmTakeHeldMail
 
 	thumb_func_start ItemIdToBattleMoveId
 ItemIdToBattleMoveId: @ 806F024
@@ -3159,8 +3159,8 @@ _0806F064:
 	bx r1
 	thumb_func_end pokemon_has_move
 
-	thumb_func_start sub_806F06C
-sub_806F06C: @ 806F06C
+	thumb_func_start TeachMonTMMove
+TeachMonTMMove: @ 806F06C
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -3182,7 +3182,7 @@ sub_806F06C: @ 806F06C
 	adds r1, r5, 0
 	adds r2, r6, 0
 	bl sub_806E8D0
-	ldr r0, _0806F0B0 @ =sub_806F0B4
+	ldr r0, _0806F0B0 @ =Task_TeamMonTMMove
 	movs r1, 0x5
 	bl CreateTask
 	pop {r4-r6}
@@ -3191,11 +3191,11 @@ sub_806F06C: @ 806F06C
 	.align 2, 0
 _0806F0A8: .4byte gTasks
 _0806F0AC: .4byte TaskDummy
-_0806F0B0: .4byte sub_806F0B4
-	thumb_func_end sub_806F06C
+_0806F0B0: .4byte Task_TeamMonTMMove
+	thumb_func_end TeachMonTMMove
 
-	thumb_func_start sub_806F0B4
-sub_806F0B4: @ 806F0B4
+	thumb_func_start Task_TeamMonTMMove
+Task_TeamMonTMMove: @ 806F0B4
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -3285,7 +3285,7 @@ _0806F17C:
 	cmp r0, r1
 	beq _0806F198
 	adds r0, r6, 0
-	bl sub_806F1D0
+	bl Task_TeamMonTMMove2
 	b _0806F1B8
 	.align 2, 0
 _0806F194: .4byte 0xffff0000
@@ -3314,10 +3314,10 @@ _0806F1C0: .4byte gStringVar4
 _0806F1C4: .4byte gOtherText_WantsToLearn
 _0806F1C8: .4byte gTasks
 _0806F1CC: .4byte sub_806F358
-	thumb_func_end sub_806F0B4
+	thumb_func_end Task_TeamMonTMMove
 
-	thumb_func_start sub_806F1D0
-sub_806F1D0: @ 806F1D0
+	thumb_func_start Task_TeamMonTMMove2
+Task_TeamMonTMMove2: @ 806F1D0
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -3359,7 +3359,7 @@ _0806F220:
 	adds r1, r6
 	lsls r1, 3
 	adds r1, r0
-	ldr r0, _0806F250 @ =sub_806F254
+	ldr r0, _0806F250 @ =Task_TeamMonTMMove3
 	str r0, [r1]
 	pop {r4-r6}
 	pop {r0}
@@ -3372,11 +3372,11 @@ _0806F240: .4byte gStringVar4
 _0806F244: .4byte gOtherText_LearnedMove
 _0806F248: .4byte 0xfffff282
 _0806F24C: .4byte gTasks
-_0806F250: .4byte sub_806F254
-	thumb_func_end sub_806F1D0
+_0806F250: .4byte Task_TeamMonTMMove3
+	thumb_func_end Task_TeamMonTMMove2
 
-	thumb_func_start sub_806F254
-sub_806F254: @ 806F254
+	thumb_func_start Task_TeamMonTMMove3
+Task_TeamMonTMMove3: @ 806F254
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -3391,7 +3391,7 @@ sub_806F254: @ 806F254
 	adds r0, r4
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, _0806F288 @ =sub_806F28C
+	ldr r1, _0806F288 @ =Task_TeamMonTMMove4
 	str r1, [r0]
 _0806F276:
 	pop {r4}
@@ -3401,11 +3401,11 @@ _0806F276:
 _0806F27C: .4byte gUnknown_0202E8F6
 _0806F280: .4byte 0x0000016f
 _0806F284: .4byte gTasks
-_0806F288: .4byte sub_806F28C
-	thumb_func_end sub_806F254
+_0806F288: .4byte Task_TeamMonTMMove4
+	thumb_func_end Task_TeamMonTMMove3
 
-	thumb_func_start sub_806F28C
-sub_806F28C: @ 806F28C
+	thumb_func_start Task_TeamMonTMMove4
+Task_TeamMonTMMove4: @ 806F28C
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -3459,7 +3459,7 @@ _0806F2F2:
 	bx r0
 	.align 2, 0
 _0806F2F8: .4byte gTasks
-	thumb_func_end sub_806F28C
+	thumb_func_end Task_TeamMonTMMove4
 
 	thumb_func_start sub_806F2FC
 sub_806F2FC: @ 806F2FC
@@ -3584,7 +3584,7 @@ _0806F3E0:
 	bl PlaySE
 _0806F3EE:
 	adds r0, r5, 0
-	bl sub_806F614
+	bl StopTryingToTeachMove_806F614
 _0806F3F4:
 	pop {r4,r5}
 	pop {r0}
@@ -3665,8 +3665,8 @@ _0806F488: .4byte gTasks
 _0806F48C: .4byte sub_806F3FC
 	thumb_func_end sub_806F44C
 
-	thumb_func_start sub_806F490
-sub_806F490: @ 806F490
+	thumb_func_start TaughtMove
+TaughtMove: @ 806F490
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
@@ -3715,7 +3715,7 @@ sub_806F490: @ 806F490
 	adds r0, r4, 0
 	movs r1, 0x1
 	bl sub_806E834
-	ldr r0, _0806F538 @ =sub_806F53C
+	ldr r0, _0806F538 @ =TMMoveUpdateMoveSlot
 	movs r1, 0x5
 	bl CreateTask
 _0806F506:
@@ -3734,11 +3734,11 @@ _0806F528: .4byte gStringVar2
 _0806F52C: .4byte gMoveNames
 _0806F530: .4byte gStringVar4
 _0806F534: .4byte gOtherText_ForgetMove123_2
-_0806F538: .4byte sub_806F53C
-	thumb_func_end sub_806F490
+_0806F538: .4byte TMMoveUpdateMoveSlot
+	thumb_func_end TaughtMove
 
-	thumb_func_start sub_806F53C
-sub_806F53C: @ 806F53C
+	thumb_func_start TMMoveUpdateMoveSlot
+TMMoveUpdateMoveSlot: @ 806F53C
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -3764,7 +3764,7 @@ sub_806F53C: @ 806F53C
 	adds r1, r4, 0
 	bl SetMonMoveSlot
 	adds r0, r6, 0
-	bl sub_806F1D0
+	bl Task_TeamMonTMMove2
 _0806F57A:
 	pop {r4-r6}
 	pop {r0}
@@ -3772,10 +3772,10 @@ _0806F57A:
 	.align 2, 0
 _0806F580: .4byte gUnknown_0202E8F6
 _0806F584: .4byte 0x0201c000
-	thumb_func_end sub_806F53C
+	thumb_func_end TMMoveUpdateMoveSlot
 
-	thumb_func_start sub_806F588
-sub_806F588: @ 806F588
+	thumb_func_start StopTryingToTeachMove_806F588
+StopTryingToTeachMove_806F588: @ 806F588
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
@@ -3812,7 +3812,7 @@ sub_806F588: @ 806F588
 	adds r0, r4, 0
 	movs r1, 0x1
 	bl sub_806E834
-	ldr r0, _0806F610 @ =sub_806F67C
+	ldr r0, _0806F610 @ =StopTryingToTeachMove_806F67C
 	movs r1, 0x5
 	bl CreateTask
 _0806F5E0:
@@ -3830,11 +3830,11 @@ _0806F600: .4byte 0x0201c000
 _0806F604: .4byte gMoveNames
 _0806F608: .4byte gStringVar4
 _0806F60C: .4byte gOtherText_StopTryingTo
-_0806F610: .4byte sub_806F67C
-	thumb_func_end sub_806F588
+_0806F610: .4byte StopTryingToTeachMove_806F67C
+	thumb_func_end StopTryingToTeachMove_806F588
 
-	thumb_func_start sub_806F614
-sub_806F614: @ 806F614
+	thumb_func_start StopTryingToTeachMove_806F614
+StopTryingToTeachMove_806F614: @ 806F614
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	lsls r5, 24
@@ -3864,7 +3864,7 @@ sub_806F614: @ 806F614
 	adds r0, r5
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, _0806F678 @ =sub_806F67C
+	ldr r1, _0806F678 @ =StopTryingToTeachMove_806F67C
 	str r1, [r0]
 	pop {r4,r5}
 	pop {r0}
@@ -3876,11 +3876,11 @@ _0806F668: .4byte gMoveNames
 _0806F66C: .4byte gStringVar4
 _0806F670: .4byte gOtherText_StopTryingTo
 _0806F674: .4byte gTasks
-_0806F678: .4byte sub_806F67C
-	thumb_func_end sub_806F614
+_0806F678: .4byte StopTryingToTeachMove_806F67C
+	thumb_func_end StopTryingToTeachMove_806F614
 
-	thumb_func_start sub_806F67C
-sub_806F67C: @ 806F67C
+	thumb_func_start StopTryingToTeachMove_806F67C
+StopTryingToTeachMove_806F67C: @ 806F67C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -3897,7 +3897,7 @@ sub_806F67C: @ 806F67C
 	adds r1, r4
 	lsls r1, 3
 	adds r1, r0
-	ldr r0, _0806F6B0 @ =sub_806F6B4
+	ldr r0, _0806F6B0 @ =StopTryingToTeachMove_806F6B4
 	str r0, [r1]
 _0806F6A2:
 	pop {r4}
@@ -3906,11 +3906,11 @@ _0806F6A2:
 	.align 2, 0
 _0806F6A8: .4byte gUnknown_0202E8F6
 _0806F6AC: .4byte gTasks
-_0806F6B0: .4byte sub_806F6B4
-	thumb_func_end sub_806F67C
+_0806F6B0: .4byte StopTryingToTeachMove_806F6B4
+	thumb_func_end StopTryingToTeachMove_806F67C
 
-	thumb_func_start sub_806F6B4
-sub_806F6B4: @ 806F6B4
+	thumb_func_start StopTryingToTeachMove_806F6B4
+StopTryingToTeachMove_806F6B4: @ 806F6B4
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -4018,10 +4018,10 @@ _0806F7A8: .4byte gStringVar4
 _0806F7AC: .4byte gOtherText_WantsToLearn
 _0806F7B0: .4byte gTasks
 _0806F7B4: .4byte sub_806F358
-	thumb_func_end sub_806F6B4
+	thumb_func_end StopTryingToTeachMove_806F6B4
 
-	thumb_func_start sub_806F7B8
-sub_806F7B8: @ 806F7B8
+	thumb_func_start IsHMMove
+IsHMMove: @ 806F7B8
 	push {lr}
 	lsls r0, 16
 	lsrs r2, r0, 16
@@ -4049,7 +4049,7 @@ _0806F7D8:
 _0806F7E4:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806F7B8
+	thumb_func_end IsHMMove
 
 	thumb_func_start sub_806F7E8
 sub_806F7E8: @ 806F7E8
@@ -4484,8 +4484,8 @@ _0806FB74: .4byte gTasks
 _0806FB78: .4byte 0x0201c000
 	thumb_func_end sub_806FB44
 
-	thumb_func_start sub_806FB7C
-sub_806FB7C: @ 806FB7C
+	thumb_func_start IsHPRecoveryItem
+IsHPRecoveryItem: @ 806FB7C
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -4516,30 +4516,30 @@ _0806FBAC:
 _0806FBAE:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806FB7C
+	thumb_func_end IsHPRecoveryItem
 
-	thumb_func_start sub_806FBB4
-sub_806FBB4: @ 806FBB4
+	thumb_func_start PartyMenuUpdateLevelOrStatus
+PartyMenuUpdateLevelOrStatus: @ 806FBB4
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	lsls r4, r1, 24
 	lsrs r4, 24
 	adds r0, r4, 0
-	bl sub_806E168
+	bl PartyMenuClearLevelStatusTilemap
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl PartyMenuPrintMonLevelOrStatus
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_806FBB4
+	thumb_func_end PartyMenuUpdateLevelOrStatus
 
 	thumb_func_start GetMedicineItemEffectMessage
 GetMedicineItemEffectMessage: @ 806FBD0
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_8070E48
+	bl GetItemEffectType
 	lsls r0, 24
 	lsrs r0, 24
 	subs r0, 0x3
@@ -4716,13 +4716,13 @@ _0806FD88: .4byte gStringVar4
 _0806FD8C: .4byte gOtherText_WontHaveAnyEffect
 	thumb_func_end GetMedicineItemEffectMessage
 
-	thumb_func_start sub_806FD90
-sub_806FD90: @ 806FD90
+	thumb_func_start IsMedicineIneffective
+IsMedicineIneffective: @ 806FD90
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r0, r1, 16
 	lsrs r0, 16
-	bl sub_8070E48
+	bl GetItemEffectType
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xD
@@ -4743,7 +4743,7 @@ _0806FDBE:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806FD90
+	thumb_func_end IsMedicineIneffective
 
 	thumb_func_start ExecuteTableBasedItemEffect__
 ExecuteTableBasedItemEffect__: @ 806FDC4
@@ -4798,8 +4798,8 @@ _0806FE16:
 _0806FE28: .4byte gPlayerParty
 	thumb_func_end ExecuteTableBasedItemEffect__
 
-	thumb_func_start sub_806FE2C
-sub_806FE2C: @ 806FE2C
+	thumb_func_start UseMedicine
+UseMedicine: @ 806FE2C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -4832,12 +4832,12 @@ sub_806FE2C: @ 806FE2C
 	ldr r5, _0806FEDC @ =0x0201c000
 	ldr r0, [r5]
 	adds r1, r6, 0
-	bl sub_806FD90
+	bl IsMedicineIneffective
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806FEE0
 	adds r0, r6, 0
-	bl sub_806FB7C
+	bl IsHPRecoveryItem
 	lsls r0, 24
 	lsrs r0, 24
 	mov r9, r0
@@ -4935,7 +4935,7 @@ _0806FF3A:
 _0806FF4E:
 	ldr r0, [r4]
 	ldrb r1, [r4, 0x5]
-	bl sub_806FBB4
+	bl PartyMenuUpdateLevelOrStatus
 _0806FF56:
 	mov r0, r9
 	cmp r0, 0x1
@@ -5033,7 +5033,7 @@ _0807001C: .4byte gStringVar1
 _08070020: .4byte gStringVar4
 _08070024: .4byte gTasks
 _08070028: .4byte sub_806FB0C
-	thumb_func_end sub_806FE2C
+	thumb_func_end UseMedicine
 
 	thumb_func_start IsBlueYellowRedFlute
 IsBlueYellowRedFlute: @ 807002C
@@ -5178,7 +5178,7 @@ _08070134:
 	bl PlaySE
 	ldr r0, [r4]
 	ldrb r1, [r4, 0x5]
-	bl sub_806FBB4
+	bl PartyMenuUpdateLevelOrStatus
 	bl IsDoubleBattle
 	adds r1, r0, 0
 	lsls r1, 24
@@ -5362,8 +5362,8 @@ _080702DE:
 	bx r0
 	thumb_func_end sub_80701DC
 
-	thumb_func_start sub_80702E4
-sub_80702E4: @ 80702E4
+	thumb_func_start CreateItemUseMoveMenu
+CreateItemUseMoveMenu: @ 80702E4
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -5432,10 +5432,10 @@ _08070340:
 	.align 2, 0
 _0807036C: .4byte gPlayerParty
 _08070370: .4byte gMoveNames
-	thumb_func_end sub_80702E4
+	thumb_func_end CreateItemUseMoveMenu
 
-	thumb_func_start sub_8070374
-sub_8070374: @ 8070374
+	thumb_func_start Task_HandleItemUseMoveMenuInput
+Task_HandleItemUseMoveMenuInput: @ 8070374
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
@@ -5493,10 +5493,10 @@ _080703E4:
 	bx r0
 	.align 2, 0
 _080703EC: .4byte gUnknown_08376B54
-	thumb_func_end sub_8070374
+	thumb_func_end Task_HandleItemUseMoveMenuInput
 
-	thumb_func_start dp05_ether
-dp05_ether: @ 80703F0
+	thumb_func_start DoPPRecoveryItemEffect
+DoPPRecoveryItemEffect: @ 80703F0
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -5550,7 +5550,7 @@ _0807041C:
 	adds r0, r7
 	strh r1, [r0, 0x1E]
 	adds r0, r4, 0
-	bl ether_effect_related
+	bl DoRecoverPP
 	b _08070498
 	.align 2, 0
 _08070464: .4byte gItemEffectTable
@@ -5564,12 +5564,12 @@ _08070470:
 	bl sub_806D538
 	ldr r0, _080704A4 @ =0x0201c000
 	ldrb r0, [r0, 0x5]
-	bl sub_80702E4
+	bl CreateItemUseMoveMenu
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
 	adds r0, r7
-	ldr r1, _080704A8 @ =sub_8070374
+	ldr r1, _080704A8 @ =Task_HandleItemUseMoveMenuInput
 	str r1, [r0]
 	ldr r1, _080704AC @ =gMain
 	movs r0, 0
@@ -5583,12 +5583,12 @@ _08070498:
 	bx r0
 	.align 2, 0
 _080704A4: .4byte 0x0201c000
-_080704A8: .4byte sub_8070374
+_080704A8: .4byte Task_HandleItemUseMoveMenuInput
 _080704AC: .4byte gMain
-	thumb_func_end dp05_ether
+	thumb_func_end DoPPRecoveryItemEffect
 
-	thumb_func_start ether_effect_related_2
-ether_effect_related_2: @ 80704B0
+	thumb_func_start ItemUseMoveMenu_HandleMoveSelection
+ItemUseMoveMenu_HandleMoveSelection: @ 80704B0
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -5610,16 +5610,16 @@ ether_effect_related_2: @ 80704B0
 	lsrs r0, 24
 	strh r0, [r1, 0x1E]
 	adds r0, r4, 0
-	bl ether_effect_related
+	bl DoRecoverPP
 	pop {r4}
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080704EC: .4byte gTasks
-	thumb_func_end ether_effect_related_2
+	thumb_func_end ItemUseMoveMenu_HandleMoveSelection
 
-	thumb_func_start sub_80704F0
-sub_80704F0: @ 80704F0
+	thumb_func_start ItemUseMoveMenu_HandleCancel
+ItemUseMoveMenu_HandleCancel: @ 80704F0
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -5675,10 +5675,10 @@ _0807054C:
 _08070564: .4byte gTasks
 _08070568: .4byte 0x0201c000
 _0807056C: .4byte sub_808B0C0
-	thumb_func_end sub_80704F0
+	thumb_func_end ItemUseMoveMenu_HandleCancel
 
-	thumb_func_start ether_effect_related
-ether_effect_related: @ 8070570
+	thumb_func_start DoRecoverPP
+DoRecoverPP: @ 8070570
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -5754,10 +5754,10 @@ _08070614: .4byte gMoveNames
 _08070618: .4byte gStringVar4
 _0807061C: .4byte gTasks
 _08070620: .4byte sub_806FB0C
-	thumb_func_end ether_effect_related
+	thumb_func_end DoRecoverPP
 
-	thumb_func_start dp05_pp_up
-dp05_pp_up: @ 8070624
+	thumb_func_start DoPPUpItemEffect
+DoPPUpItemEffect: @ 8070624
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -5778,8 +5778,8 @@ dp05_pp_up: @ 8070624
 	bl sub_806D538
 	ldr r0, _08070674 @ =0x0201c000
 	ldrb r0, [r0, 0x5]
-	bl sub_80702E4
-	ldr r0, _08070678 @ =sub_8070374
+	bl CreateItemUseMoveMenu
+	ldr r0, _08070678 @ =Task_HandleItemUseMoveMenuInput
 	movs r1, 0x5
 	bl CreateTask
 	ldr r1, _0807067C @ =gMain
@@ -5792,12 +5792,12 @@ dp05_pp_up: @ 8070624
 _0807066C: .4byte gTasks
 _08070670: .4byte TaskDummy
 _08070674: .4byte 0x0201c000
-_08070678: .4byte sub_8070374
+_08070678: .4byte Task_HandleItemUseMoveMenuInput
 _0807067C: .4byte gMain
-	thumb_func_end dp05_pp_up
+	thumb_func_end DoPPUpItemEffect
 
-	thumb_func_start sub_8070680
-sub_8070680: @ 8070680
+	thumb_func_start DoRareCandyItemEffect
+DoRareCandyItemEffect: @ 8070680
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -5903,7 +5903,7 @@ _08070724:
 	adds r0, r4, 0
 	movs r1, 0x1
 	bl sub_806E834
-	ldr r0, _0807079C @ =sub_80707A0
+	ldr r0, _0807079C @ =Task_RareCandy1
 	movs r1, 0x5
 	bl CreateTask
 _0807077C:
@@ -5917,11 +5917,11 @@ _0807078C: .4byte gStringVar1
 _08070790: .4byte gStringVar2
 _08070794: .4byte gStringVar4
 _08070798: .4byte gOtherText_ElevatedTo
-_0807079C: .4byte sub_80707A0
-	thumb_func_end sub_8070680
+_0807079C: .4byte Task_RareCandy1
+	thumb_func_end DoRareCandyItemEffect
 
-	thumb_func_start sub_80707A0
-sub_80707A0: @ 80707A0
+	thumb_func_start Task_RareCandy1
+Task_RareCandy1: @ 80707A0
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -5954,7 +5954,7 @@ _080707CE:
 	adds r1, r4
 	lsls r1, 3
 	adds r1, r0
-	ldr r0, _080707FC @ =sub_8070800
+	ldr r0, _080707FC @ =Task_RareCandy2
 	str r0, [r1]
 _080707E8:
 	pop {r4}
@@ -5964,11 +5964,11 @@ _080707E8:
 _080707F0: .4byte gUnknown_0202E8F6
 _080707F4: .4byte gMain
 _080707F8: .4byte gTasks
-_080707FC: .4byte sub_8070800
-	thumb_func_end sub_80707A0
+_080707FC: .4byte Task_RareCandy2
+	thumb_func_end Task_RareCandy1
 
-	thumb_func_start sub_8070800
-sub_8070800: @ 8070800
+	thumb_func_start Task_RareCandy2
+Task_RareCandy2: @ 8070800
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -5992,7 +5992,7 @@ _0807081A:
 	adds r1, r4
 	lsls r1, 3
 	adds r1, r0
-	ldr r0, _08070844 @ =sub_8070AC8
+	ldr r0, _08070844 @ =Task_RareCandy3
 	str r0, [r1]
 _08070834:
 	pop {r4}
@@ -6001,8 +6001,8 @@ _08070834:
 	.align 2, 0
 _0807083C: .4byte gMain
 _08070840: .4byte gTasks
-_08070844: .4byte sub_8070AC8
-	thumb_func_end sub_8070800
+_08070844: .4byte Task_RareCandy3
+	thumb_func_end Task_RareCandy2
 
 	thumb_func_start sub_8070848
 sub_8070848: @ 8070848
@@ -6245,7 +6245,7 @@ sub_8070A20: @ 8070A20
 _08070A3A:
 	adds r0, r6, 0
 	adds r1, r7, 0
-	bl sub_806FBB4
+	bl PartyMenuUpdateLevelOrStatus
 _08070A42:
 	bl IsDoubleBattle
 	adds r5, r0, 0
@@ -6269,7 +6269,7 @@ _08070A42:
 	bl PartyMenuDoPrintHP
 	adds r0, r7, 0
 	adds r1, r6, 0
-	bl sub_806E674
+	bl PartyMenuTryDrawHPBar
 	ldr r4, _08070ABC @ =0x0201c000
 	ldrb r0, [r4, 0x4]
 	adds r1, r7, 0
@@ -6304,8 +6304,8 @@ _08070AC0: .4byte gUnknown_083769A8
 _08070AC4: .4byte 0xfffff261
 	thumb_func_end sub_8070A20
 
-	thumb_func_start sub_8070AC8
-sub_8070AC8: @ 8070AC8
+	thumb_func_start Task_RareCandy3
+Task_RareCandy3: @ 8070AC8
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -6462,7 +6462,7 @@ _08070BF4:
 	adds r0, r6
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, _08070C50 @ =sub_806F254
+	ldr r1, _08070C50 @ =Task_TeamMonTMMove3
 _08070C2A:
 	str r1, [r0]
 _08070C2C:
@@ -6477,8 +6477,8 @@ _08070C40: .4byte gMoveNames
 _08070C44: .4byte gStringVar4
 _08070C48: .4byte gOtherText_LearnedMove
 _08070C4C: .4byte gTasks
-_08070C50: .4byte sub_806F254
-	thumb_func_end sub_8070AC8
+_08070C50: .4byte Task_TeamMonTMMove3
+	thumb_func_end Task_RareCandy3
 
 	thumb_func_start sub_8070C54
 sub_8070C54: @ 8070C54
@@ -6600,7 +6600,7 @@ _08070D30:
 	adds r0, r6
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, _08070D8C @ =sub_806F254
+	ldr r1, _08070D8C @ =Task_TeamMonTMMove3
 _08070D66:
 	str r1, [r0]
 _08070D68:
@@ -6615,7 +6615,7 @@ _08070D7C: .4byte gMoveNames
 _08070D80: .4byte gStringVar4
 _08070D84: .4byte gOtherText_LearnedMove
 _08070D88: .4byte gTasks
-_08070D8C: .4byte sub_806F254
+_08070D8C: .4byte Task_TeamMonTMMove3
 	thumb_func_end sub_8070C54
 
 	thumb_func_start sub_8070D90
@@ -6641,8 +6641,8 @@ _08070DB4: .4byte gTasks
 _08070DB8: .4byte 0x0201c000
 	thumb_func_end sub_8070D90
 
-	thumb_func_start sub_8070DBC
-sub_8070DBC: @ 8070DBC
+	thumb_func_start DoEvolutionStoneItemEffect
+DoEvolutionStoneItemEffect: @ 8070DBC
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	adds r5, r2, 0
@@ -6701,10 +6701,10 @@ _08070E40:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8070DBC
+	thumb_func_end DoEvolutionStoneItemEffect
 
-	thumb_func_start sub_8070E48
-sub_8070E48: @ 8070E48
+	thumb_func_start GetItemEffectType
+GetItemEffectType: @ 8070E48
 	push {r4,r5,lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -6895,7 +6895,7 @@ _08070F8A:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8070E48
+	thumb_func_end GetItemEffectType
 
 	thumb_func_start unref_sub_8070F90
 unref_sub_8070F90: @ 8070F90

@@ -257,7 +257,7 @@ _0806B0C2:
 	.align 2, 0
 _0806B0D0: .4byte 0x0201b000
 _0806B0D4:
-	bl sub_806E6C8
+	bl PartyMenuDrawHPBars
 _0806B0D8:
 	ldr r1, _0806B0E8 @ =0x0201b000
 	movs r2, 0x99
@@ -4703,7 +4703,7 @@ sub_806D198: @ 806D198
 	muls r1, r6
 	adds r1, r5
 	bl nullsub_12
-	bl sub_806E6C8
+	bl PartyMenuDrawHPBars
 	mov r0, r10
 	bl sub_806CC74
 	pop {r3-r5}

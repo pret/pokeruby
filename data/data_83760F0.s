@@ -827,8 +827,8 @@ gUnknown_08376A5E:: @ 8376A5E
 
 	.align 2
 gUnknown_08376B54:: @ 8376B54
-	.4byte ether_effect_related_2
-	.4byte sub_80704F0
+	.4byte ItemUseMoveMenu_HandleMoveSelection
+	.4byte ItemUseMoveMenu_HandleCancel
 
 	.align 1
 Unknown_08376B5C:

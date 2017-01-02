@@ -1018,14 +1018,14 @@ ItemUseOutOfBattle_Medicine: @ 80C9DB0
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080C9DC4 @ =gUnknown_03004AE4
-	ldr r1, _080C9DC8 @ =sub_806FE2C
+	ldr r1, _080C9DC8 @ =UseMedicine
 	str r1, [r2]
 	bl sub_80C9D98
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080C9DC4: .4byte gUnknown_03004AE4
-_080C9DC8: .4byte sub_806FE2C
+_080C9DC8: .4byte UseMedicine
 	thumb_func_end ItemUseOutOfBattle_Medicine
 
 	thumb_func_start ItemUseOutOfBattle_SacredAsh
@@ -1090,14 +1090,14 @@ ItemUseOutOfBattle_PPRecovery: @ 80C9E3C
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080C9E50 @ =gUnknown_03004AE4
-	ldr r1, _080C9E54 @ =dp05_ether
+	ldr r1, _080C9E54 @ =DoPPRecoveryItemEffect
 	str r1, [r2]
 	bl sub_80C9D98
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080C9E50: .4byte gUnknown_03004AE4
-_080C9E54: .4byte dp05_ether
+_080C9E54: .4byte DoPPRecoveryItemEffect
 	thumb_func_end ItemUseOutOfBattle_PPRecovery
 
 	thumb_func_start ItemUseOutOfBattle_PPUp
@@ -1106,14 +1106,14 @@ ItemUseOutOfBattle_PPUp: @ 80C9E58
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080C9E6C @ =gUnknown_03004AE4
-	ldr r1, _080C9E70 @ =dp05_pp_up
+	ldr r1, _080C9E70 @ =DoPPUpItemEffect
 	str r1, [r2]
 	bl sub_80C9D98
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080C9E6C: .4byte gUnknown_03004AE4
-_080C9E70: .4byte dp05_pp_up
+_080C9E70: .4byte DoPPUpItemEffect
 	thumb_func_end ItemUseOutOfBattle_PPUp
 
 	thumb_func_start ItemUseOutOfBattle_RareCandy
@@ -1122,14 +1122,14 @@ ItemUseOutOfBattle_RareCandy: @ 80C9E74
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080C9E88 @ =gUnknown_03004AE4
-	ldr r1, _080C9E8C @ =sub_8070680
+	ldr r1, _080C9E8C @ =DoRareCandyItemEffect
 	str r1, [r2]
 	bl sub_80C9D98
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080C9E88: .4byte gUnknown_03004AE4
-_080C9E8C: .4byte sub_8070680
+_080C9E8C: .4byte DoRareCandyItemEffect
 	thumb_func_end ItemUseOutOfBattle_RareCandy
 
 	thumb_func_start ItemUseOutOfBattle_TMHM
@@ -1285,14 +1285,14 @@ sub_80C9FC0: @ 80C9FC0
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080C9FD4 @ =gUnknown_03004AE4
-	ldr r1, _080C9FD8 @ =sub_806F06C
+	ldr r1, _080C9FD8 @ =TeachMonTMMove
 	str r1, [r2]
 	bl sub_80C9D98
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080C9FD4: .4byte gUnknown_03004AE4
-_080C9FD8: .4byte sub_806F06C
+_080C9FD8: .4byte TeachMonTMMove
 	thumb_func_end sub_80C9FC0
 
 	thumb_func_start sub_80C9FDC
@@ -1581,14 +1581,14 @@ ItemUseOutOfBattle_EvolutionStone: @ 80CA228
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080CA23C @ =gUnknown_03004AE4
-	ldr r1, _080CA240 @ =sub_8070DBC
+	ldr r1, _080CA240 @ =DoEvolutionStoneItemEffect
 	str r1, [r2]
 	bl sub_80C9D98
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080CA23C: .4byte gUnknown_03004AE4
-_080CA240: .4byte sub_8070DBC
+_080CA240: .4byte DoEvolutionStoneItemEffect
 	thumb_func_end ItemUseOutOfBattle_EvolutionStone
 
 	thumb_func_start ItemUseInBattle_PokeBall
@@ -1813,14 +1813,14 @@ ItemUseInBattle_Medicine: @ 80CA3F4
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080CA408 @ =gUnknown_03004AE4
-	ldr r1, _080CA40C @ =sub_806FE2C
+	ldr r1, _080CA40C @ =UseMedicine
 	str r1, [r2]
 	bl sub_80CA3C0
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080CA408: .4byte gUnknown_03004AE4
-_080CA40C: .4byte sub_806FE2C
+_080CA40C: .4byte UseMedicine
 	thumb_func_end ItemUseInBattle_Medicine
 
 	thumb_func_start unref_sub_80CA410
@@ -1845,14 +1845,14 @@ ItemUseInBattle_PPRecovery: @ 80CA42C
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080CA440 @ =gUnknown_03004AE4
-	ldr r1, _080CA444 @ =dp05_ether
+	ldr r1, _080CA444 @ =DoPPRecoveryItemEffect
 	str r1, [r2]
 	bl sub_80CA3C0
 	pop {r0}
 	bx r0
 	.align 2, 0
 _080CA440: .4byte gUnknown_03004AE4
-_080CA444: .4byte dp05_ether
+_080CA444: .4byte DoPPRecoveryItemEffect
 	thumb_func_end ItemUseInBattle_PPRecovery
 
 	thumb_func_start unref_sub_80CA448
@@ -1962,7 +1962,7 @@ ItemUseOutOfBattle_EnigmaBerry: @ 80CA520
 	lsrs r4, r0, 24
 	ldr r0, _080CA544 @ =gScriptItemId
 	ldrh r0, [r0]
-	bl sub_8070E48
+	bl GetItemEffectType
 	lsls r0, 24
 	lsrs r0, 24
 	subs r0, 0x1
@@ -2091,7 +2091,7 @@ ItemUseInBattle_EnigmaBerry: @ 80CA64C
 	lsrs r4, r0, 24
 	ldr r0, _080CA66C @ =gScriptItemId
 	ldrh r0, [r0]
-	bl sub_8070E48
+	bl GetItemEffectType
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x15

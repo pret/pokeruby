@@ -887,7 +887,7 @@ _08094FA8:
 	.align 2, 0
 _08094FB8: .4byte 0x0201b000
 _08094FBC:
-	bl sub_806E6C8
+	bl PartyMenuDrawHPBars
 	ldr r1, _08094FCC @ =0x0201b000
 	movs r0, 0x99
 	lsls r0, 2
@@ -930,7 +930,7 @@ _08095000:
 	bne _0809503C
 	ldr r0, _08095028 @ =gScriptItemId
 	ldrh r0, [r0]
-	bl sub_8070E48
+	bl GetItemEffectType
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xA
@@ -1082,7 +1082,7 @@ _0809512C:
 	bne _08095164
 	ldr r5, _08095158 @ =gScriptItemId
 	ldrh r0, [r5]
-	bl sub_8070E48
+	bl GetItemEffectType
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xA
@@ -22120,7 +22120,7 @@ sub_809F7D0: @ 809F7D0
 	bl sub_809F760
 	lsls r0, 16
 	lsrs r0, 16
-	bl sub_806F7B8
+	bl IsHMMove
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

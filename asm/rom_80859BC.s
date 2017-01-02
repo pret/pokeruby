@@ -9398,7 +9398,7 @@ sub_808A2AC: @ 808A2AC
 	ldrh r1, [r0]
 	ldr r2, _0808A2D8 @ =sub_808A228
 	adds r0, r3, 0
-	bl sub_806E964
+	bl PartyMenuTryGiveMonHeldItem
 _0808A2CA:
 	pop {r0}
 	bx r0
@@ -9455,7 +9455,7 @@ sub_808A330: @ 808A330
 	ldr r1, _0808A344 @ =gScriptItemId
 	ldrh r1, [r1]
 	ldr r2, _0808A348 @ =sub_808A2DC
-	bl sub_806E964
+	bl PartyMenuTryGiveMonHeldItem
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -9767,7 +9767,7 @@ sub_808A5BC: @ 808A5BC
 	ldr r1, _0808A5F8 @ =gScriptItemId
 	ldrh r1, [r1]
 	movs r2, 0
-	bl sub_806EBF0
+	bl DisplayGiveHeldItemMessage
 	ldr r1, _0808A5FC @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
@@ -9871,7 +9871,7 @@ PokemonMenu_TakeItem: @ 808A688
 	bl sub_806D5A4
 	ldr r1, _0808A6B4 @ =sub_808A678
 	adds r0, r4, 0
-	bl sub_806ECE8
+	bl PartyMenuTryGiveMonHeldItem_806ECE8
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -9894,7 +9894,7 @@ PokemonMenu_TakeMail: @ 808A6B8
 	bl sub_806D5A4
 	ldr r1, _0808A6E4 @ =sub_808A678
 	adds r0, r4, 0
-	bl sub_806EE08
+	bl DoTakeMail
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -11201,7 +11201,7 @@ _0808B13C:
 	ldrh r1, [r0]
 	ldr r2, _0808B17C @ =sub_808B2EC
 	adds r0, r4, 0
-	bl sub_806E964
+	bl PartyMenuTryGiveMonHeldItem
 _0808B154:
 	ldrb r0, [r5]
 	cmp r0, 0x3
@@ -11210,7 +11210,7 @@ _0808B154:
 	bl PlaySE
 	ldr r1, _0808B180 @ =sub_808B2B4
 	adds r0, r4, 0
-	bl sub_806EC44
+	bl PartyMenuTryGiveMonMail
 	b _0808B1CE
 	.align 2, 0
 _0808B16C: .4byte gUnknown_02038561
@@ -11628,7 +11628,7 @@ sub_808B4A4: @ 808B4A4
 	ldr r1, _0808B4E0 @ =gScriptItemId
 	ldrh r1, [r1]
 	movs r2, 0x1
-	bl sub_806EBF0
+	bl DisplayGiveHeldItemMessage
 	ldr r1, _0808B4E4 @ =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
@@ -11726,7 +11726,7 @@ sub_808B564: @ 808B564
 	lsrs r0, 24
 	cmp r0, 0x4
 	beq _0808B594
-	ldr r2, _0808B590 @ =sub_806F490
+	ldr r2, _0808B590 @ =TaughtMove
 	movs r0, 0
 	movs r1, 0
 	movs r3, 0xFF
@@ -11734,9 +11734,9 @@ sub_808B564: @ 808B564
 	b _0808B5A0
 	.align 2, 0
 _0808B58C: .4byte gPaletteFade
-_0808B590: .4byte sub_806F490
+_0808B590: .4byte TaughtMove
 _0808B594:
-	ldr r2, _0808B5AC @ =sub_806F588
+	ldr r2, _0808B5AC @ =StopTryingToTeachMove_806F588
 	movs r0, 0
 	movs r1, 0
 	movs r3, 0xFF
@@ -11747,7 +11747,7 @@ _0808B5A0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0808B5AC: .4byte sub_806F588
+_0808B5AC: .4byte StopTryingToTeachMove_806F588
 _0808B5B0: .4byte sub_808B518
 	thumb_func_end sub_808B564
 
