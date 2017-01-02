@@ -2907,9 +2907,7 @@ static bool8 PlayerCanInterruptWait(struct Window *win)
         retVal = FALSE;
         break;
     case 3:
-        retVal = FALSE;
-        if (!gIsLinkContest)
-            retVal = TRUE;
+        retVal = gIsLinkContest ? FALSE : TRUE;
         break;
     case 1:
         retVal = (gBattleTypeFlags & BATTLE_TYPE_LINK) ? FALSE : TRUE;
