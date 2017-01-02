@@ -113,6 +113,8 @@ SECTIONS {
         src/wild_encounter.o(.text);
         src/field_effect.o(.text);
         asm/rom_80859BC.o(.text);
+        asm/unknown_task.o(.text);
+        asm/pokemon_menu.o(.text);
         src/option_menu.o(.text);
         src/pokedex.o(.text);
         asm/pokedex.o(.text);
