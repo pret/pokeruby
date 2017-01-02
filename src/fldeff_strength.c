@@ -20,7 +20,7 @@ extern u8 UseStrengthScript[];
 
 bool8 SetUpFieldMove_Strength(void)
 {
-    if (sub_81474C8())
+    if (ShouldDoBrailleStrengthEffect())
     {
         gScriptResult = gUnknown_03005CE0;
         gUnknown_0300485C = sub_808AB90;
@@ -62,9 +62,9 @@ bool8 FldEff_UseStrength(void)
 
 static void sub_811AA9C(void)
 {
-    if (sub_81474C8())
+    if (ShouldDoBrailleStrengthEffect())
     {
-        sub_8147514();
+        DoBrailleStrengthEffect();
     }
     else
     {

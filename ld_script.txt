@@ -209,7 +209,7 @@ SECTIONS {
         src/berry_tag_screen.o(.text);
         src/mystery_event_menu.o(.text);
         src/save_failed_screen.o(.text);
-        asm/rom_81473B8.o(.text);
+        asm/braille_puzzles.o(.text);
         asm/pokeblock_feed.o(.text);
         src/clear_save_data_menu.o(.text);
         asm/rom_8148B8C.o(.text);

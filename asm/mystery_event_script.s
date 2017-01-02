@@ -527,7 +527,7 @@ sub_8126524: @ 8126524
 sub_812658C: @ 812658C
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80690F0
+	bl UnlockNationalPokedex
 	ldr r0, _081265A8 @ =gStringVar4
 	ldr r1, _081265AC @ =gOtherText_DexUpgraded
 	bl StringExpandPlaceholders

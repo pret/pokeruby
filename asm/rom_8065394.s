@@ -2342,8 +2342,8 @@ sub_80690B4: @ 80690B4
 _080690C4: .4byte gSaveBlock1 + 0x1338
 	thumb_func_end sub_80690B4
 
-	thumb_func_start sub_80690C8
-sub_80690C8: @ 80690C8
+	thumb_func_start LockNationalPokedex
+LockNationalPokedex: @ 80690C8
 	push {lr}
 	ldr r0, _080690E4 @ =0x00004046
 	bl GetVarPointer
@@ -2359,10 +2359,10 @@ sub_80690C8: @ 80690C8
 _080690E4: .4byte 0x00004046
 _080690E8: .4byte gSaveBlock2
 _080690EC: .4byte 0x00000836
-	thumb_func_end sub_80690C8
+	thumb_func_end LockNationalPokedex
 
-	thumb_func_start sub_80690F0
-sub_80690F0: @ 80690F0
+	thumb_func_start UnlockNationalPokedex
+UnlockNationalPokedex: @ 80690F0
 	push {r4,r5,lr}
 	ldr r0, _0806911C @ =0x00004046
 	bl GetVarPointer
@@ -2387,7 +2387,7 @@ _0806911C: .4byte 0x00004046
 _08069120: .4byte gSaveBlock2
 _08069124: .4byte 0x00000302
 _08069128: .4byte 0x00000836
-	thumb_func_end sub_80690F0
+	thumb_func_end UnlockNationalPokedex
 
 	thumb_func_start IsNationalPokedex
 IsNationalPokedex: @ 806912C

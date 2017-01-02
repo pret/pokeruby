@@ -10445,7 +10445,7 @@ sub_808AB34: @ 808AB34
 	ldrsh r0, [r1, r2]
 	cmp r0, 0x5
 	bne _0808AB62
-	bl sub_8147588
+	bl ShouldDoBrailleFlyEffect
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808AB78
@@ -10619,7 +10619,7 @@ _0808ACA4: .4byte gUnknown_03005CE0
 	thumb_func_start SetUpFieldMove_Fly
 SetUpFieldMove_Fly: @ 808ACA8
 	push {lr}
-	bl sub_8147588
+	bl ShouldDoBrailleFlyEffect
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808ACD0
@@ -10627,13 +10627,13 @@ SetUpFieldMove_Fly: @ 808ACA8
 	ldr r0, _0808ACC4 @ =sub_808AB90
 	str r0, [r1]
 	ldr r1, _0808ACC8 @ =gUnknown_03005CE4
-	ldr r0, _0808ACCC @ =sub_81475C4
+	ldr r0, _0808ACCC @ =DoBrailleFlyEffect
 	b _0808ACF2
 	.align 2, 0
 _0808ACC0: .4byte gUnknown_0300485C
 _0808ACC4: .4byte sub_808AB90
 _0808ACC8: .4byte gUnknown_03005CE4
-_0808ACCC: .4byte sub_81475C4
+_0808ACCC: .4byte DoBrailleFlyEffect
 _0808ACD0:
 	ldr r0, _0808ACE4 @ =gMapHeader
 	ldrb r0, [r0, 0x17]

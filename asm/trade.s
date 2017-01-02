@@ -7591,7 +7591,7 @@ sub_804BA64: @ 804BA64
 	lsls r0, 8
 	cmp r1, r0
 	bne _0804BA8C
-	bl sub_80690F0
+	bl UnlockNationalPokedex
 _0804BA8C:
 	pop {r0}
 	bx r0
