@@ -3752,7 +3752,7 @@ _081456FC:
 	str r7, [sp, 0x8]
 	movs r4, 0x1
 	str r4, [sp, 0xC]
-	bl sub_800D378
+	bl LoadSpecialPokePic
 	ldr r2, _081457F8 @ =0x0000ffff
 	adds r0, r6, 0
 	movs r1, 0

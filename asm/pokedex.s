@@ -2336,7 +2336,7 @@ _08091958:
 	str r4, [sp, 0x8]
 	movs r4, 0x1
 	str r4, [sp, 0xC]
-	bl sub_800D378
+	bl LoadSpecialPokePic
 	b _080919CE
 	.align 2, 0
 _0809198C: .4byte gMonFrontPicTable
@@ -2367,7 +2367,7 @@ _0809199C:
 	str r4, [sp, 0x8]
 	movs r4, 0x1
 	str r4, [sp, 0xC]
-	bl sub_800D378
+	bl LoadSpecialPokePic
 _080919CE:
 	ldr r0, _08091A40 @ =gMonPaletteTable
 	adds r0, r6, r0

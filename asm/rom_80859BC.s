@@ -267,7 +267,7 @@ CreateMonSprite_FieldMove: @ 8085B88
 	str r3, [sp]
 	str r5, [sp, 0x4]
 	str r4, [sp, 0x8]
-	bl sub_800D334
+	bl HandleLoadSpecialPokePic
 	adds r0, r5, 0
 	mov r1, r10
 	adds r2, r4, 0

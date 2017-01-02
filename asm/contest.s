@@ -6900,7 +6900,7 @@ sub_80AE9FC: @ 80AE9FC
 	str r4, [sp]
 	str r5, [sp, 0x4]
 	str r6, [sp, 0x8]
-	bl sub_800D334
+	bl HandleLoadSpecialPokePic
 	adds r0, r5, 0
 	mov r1, r8
 	adds r2, r6, 0

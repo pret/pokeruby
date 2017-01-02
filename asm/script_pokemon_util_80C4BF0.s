@@ -654,7 +654,7 @@ ShowContestEntryMonPic: @ 80C5050
 	str r6, [sp, 0x4]
 	mov r4, r8
 	str r4, [sp, 0x8]
-	bl sub_800D334
+	bl HandleLoadSpecialPokePic
 	adds r0, r6, 0
 	mov r1, r9
 	mov r2, r8

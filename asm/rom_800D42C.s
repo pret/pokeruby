@@ -71369,7 +71369,7 @@ _080317DC:
 	str r6, [sp, 0x4]
 	str r7, [sp, 0x8]
 	adds r0, r5, 0
-	bl sub_800D334
+	bl HandleLoadSpecialPokePic
 	mov r1, r9
 	lsls r2, r1, 4
 	movs r0, 0x80
@@ -71533,7 +71533,7 @@ _08031944:
 	str r6, [sp, 0x4]
 	str r7, [sp, 0x8]
 	adds r0, r5, 0
-	bl sub_800D334
+	bl HandleLoadSpecialPokePic
 	mov r1, r9
 	lsls r2, r1, 4
 	movs r0, 0x80
@@ -72532,7 +72532,7 @@ _08032114:
 	ldr r4, [r4]
 _08032184:
 	str r4, [sp, 0x8]
-	bl sub_800D334
+	bl HandleLoadSpecialPokePic
 	b _08032202
 	.align 2, 0
 _0803218C: .4byte gUnknown_02024A6A
@@ -72585,7 +72585,7 @@ _080321A4:
 	add r4, r12
 	ldr r4, [r4]
 	str r4, [sp, 0x8]
-	bl sub_800D334
+	bl HandleLoadSpecialPokePic
 _08032202:
 	ldr r1, _08032318 @ =gUnknown_081FAF4C
 	mov r2, r10

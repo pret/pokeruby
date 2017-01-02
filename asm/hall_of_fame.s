@@ -3130,7 +3130,7 @@ sub_81436BC: @ 81436BC
 	str r7, [sp, 0x8]
 	movs r4, 0x1
 	str r4, [sp, 0xC]
-	bl sub_800D378
+	bl LoadSpecialPokePic
 	adds r0, r6, 0
 	ldr r1, [sp, 0x30]
 	adds r2, r7, 0

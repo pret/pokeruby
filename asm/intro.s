@@ -517,7 +517,7 @@ sub_813CE88: @ 813CE88
 	str r4, [sp, 0x8]
 	movs r4, 0x1
 	str r4, [sp, 0xC]
-	bl sub_800D378
+	bl LoadSpecialPokePic
 	b _0813CF1C
 	.align 2, 0
 _0813CEE4: .4byte gMonFrontPicTable
@@ -544,7 +544,7 @@ _0813CEF0:
 	str r7, [sp, 0x4]
 	str r6, [sp, 0x8]
 	str r6, [sp, 0xC]
-	bl sub_800D378
+	bl LoadSpecialPokePic
 _0813CF1C:
 	ldr r2, _0813CF9C @ =0x0000ffff
 	adds r0, r7, 0

@@ -6805,7 +6805,7 @@ _0804B330:
 	str r5, [sp, 0x4]
 	mov r4, r9
 	str r4, [sp, 0x8]
-	bl sub_800D334
+	bl HandleLoadSpecialPokePic
 	mov r0, r10
 	bl sub_8040990
 	bl LoadCompressedObjectPalette

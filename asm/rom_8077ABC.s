@@ -5036,7 +5036,7 @@ sub_8079F44: @ 8079F44
 	str r4, [sp, 0x8]
 	movs r4, 0x1
 	str r4, [sp, 0xC]
-	bl sub_800D378
+	bl LoadSpecialPokePic
 	b _0807A02E
 	.align 2, 0
 _08079FE0: .4byte gUnknown_0837F5E0
@@ -5071,7 +5071,7 @@ _08079FF0:
 	str r4, [sp, 0x8]
 	movs r4, 0
 	str r4, [sp, 0xC]
-	bl sub_800D378
+	bl LoadSpecialPokePic
 _0807A02E:
 	movs r2, 0x80
 	lsls r2, 18

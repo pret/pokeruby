@@ -7060,7 +7060,7 @@ sub_80981F0: @ 80981F0
 	str r4, [sp, 0x4]
 	str r7, [sp, 0x8]
 	movs r2, 0x1
-	bl sub_800D334
+	bl HandleLoadSpecialPokePic
 	ldr r1, _08098288 @ =0x000011e8
 	adds r0, r6, r1
 	ldr r0, [r0]
@@ -21994,7 +21994,7 @@ _0809F6D2:
 	str r4, [sp]
 	str r5, [sp, 0x4]
 	str r6, [sp, 0x8]
-	bl sub_800D334
+	bl HandleLoadSpecialPokePic
 	b _0809F74E
 	.align 2, 0
 _0809F70C: .4byte gMonFrontPicTable
