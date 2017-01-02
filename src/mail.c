@@ -92,7 +92,7 @@ static void sub_80F8F78(void);
 static void sub_80F8FB4(void);
 
 #ifdef NONMATCHING
-void sub_80F890C(struct MailStruct *arg0, MainCallback arg1, bool8 arg2) {
+void HandleReadMail(struct MailStruct *arg0, MainCallback arg1, bool8 arg2) {
     u16 mailDesign;
     u8 buffer[4];
     u8 local1;
@@ -151,7 +151,7 @@ void sub_80F890C(struct MailStruct *arg0, MainCallback arg1, bool8 arg2) {
 }
 #else
 __attribute__((naked))
-void sub_80F890C(struct MailStruct *arg0, MainCallback arg1, bool8 arg2) {
+void HandleReadMail(struct MailStruct *arg0, MainCallback arg1, bool8 arg2) {
     asm(".syntax unified\n\
 	push {r4-r6,lr}\n\
 	sub sp, 0x4\n\

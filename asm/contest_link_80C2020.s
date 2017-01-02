@@ -1357,7 +1357,7 @@ _080C2B14:
 	str r6, [sp, 0x4]
 	str r4, [sp, 0x8]
 	ldr r3, _080C2BE4 @ =0x02000000
-	bl sub_800D334
+	bl HandleLoadSpecialPokePic
 	adds r0, r6, 0
 	ldr r1, [sp, 0xC]
 	adds r2, r4, 0

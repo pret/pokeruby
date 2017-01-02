@@ -1900,7 +1900,7 @@ sub_813B454: @ 813B454
 	adds r0, r1
 	ldr r1, _0813B49C @ =sub_813B4F0
 	movs r2, 0x1
-	bl sub_80F890C
+	bl HandleReadMail
 	adds r0, r4, 0
 	bl DestroyTask
 _0813B488:

@@ -11,6 +11,35 @@ enum
     CONNECTION_EMERGE
 };
 
+// map types
+enum
+{
+	MAP_TYPE_0,
+	MAP_TYPE_TOWN,
+	MAP_TYPE_CITY,
+	MAP_TYPE_ROUTE,
+	MAP_TYPE_UNDERGROUND,
+	MAP_TYPE_UNDERWATER,
+	MAP_TYPE_6,
+	MAP_TYPE_7,
+	MAP_TYPE_INDOOR,
+	MAP_TYPE_SECRET_BASE
+};
+
+// map battle scenes
+enum
+{
+    MAP_BATTLE_SCENE_NORMAL,       // 0
+    MAP_BATTLE_SCENE_GYM,          // 1
+    MAP_BATTLE_SCENE_MAGMA,        // 2
+    MAP_BATTLE_SCENE_AQUA,         // 3
+    MAP_BATTLE_SCENE_SIDNEY,       // 4
+    MAP_BATTLE_SCENE_PHOEBE,       // 5
+    MAP_BATTLE_SCENE_GLACIA,       // 6
+    MAP_BATTLE_SCENE_DRAKE,        // 7
+    MAP_BATTLE_SCENE_BATTLE_TOWER, // 8
+};
+
 typedef void (*TilesetCB)(void);
 
 struct Tileset
@@ -113,7 +142,7 @@ struct MapHeader
     u8 name;
     u8 cave;
     u8 weather;
-    /* 0x17 */ u8 light;
+    /* 0x17 */ u8 mapType;
     u8 filler_18;
     u8 escapeRope;
     u8 flags;

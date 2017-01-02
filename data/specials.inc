@@ -50,7 +50,7 @@ gSpecials::
 	.4byte FieldObjectInteractionRemoveBerryTree
 	.4byte FieldObjectInteractionWaterBerryTree
 	.4byte PlayerHasBerries
-	.4byte sub_80B4940
+	.4byte IsEnigmaBerryValid
 	.4byte sub_8082558
 	.4byte sub_80826D8
 	.4byte sub_8082718

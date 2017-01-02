@@ -7366,7 +7366,7 @@ gUnknown_083CC738:: @ 83CC738
 	.include "data/berries.inc"
 
 	.align 2
-gUnknown_083CD780:: @ 83CD780
+gBlankBerryTree:: @ 83CD780
 	.4byte 0, 0
 
 @ 83CD788
@@ -8850,18 +8850,18 @@ gUnknown_083D61DC:: @ 83D61DC
 	.4byte Unknown_83D61BC
 
 	.align 2
-gUnknown_083D61E4:: @ 83D61E4
+gExitToOverworldFuncList:: @ 83D61E4
 	.4byte sub_808B020
 	.4byte c2_exit_to_overworld_2_switch
 	.4byte sub_810B96C
 
-gUnknown_083D61F0:: @ 83D61F0
+gItemFinderDirections:: @ 83D61F0
 	.byte DIR_NORTH, DIR_EAST, DIR_SOUTH, DIR_WEST
 
 	.align 2
 gUnknown_083D61F4:: @ 83D61F4
 	.4byte sub_80C9FC0
-	.4byte sub_80A5C48
+	.4byte CleanUpItemMenuMessage
 
 	.align 2
 gSpriteAnim_83D61FC:: @ 83D61FC
@@ -21640,7 +21640,7 @@ gOtherText_CantGetOffBike:: @ 840E929
 gOtherText_ItemfinderResponding:: @ 840E94E
 	.string "Oh!\nThe machine’s responding!\pThere’s an item buried around here!{PAUSE_UNTIL_PRESS}$"
 
-gOtherText_ItemfinderFoundItem:: @ 840E992
+gOtherText_ItemfinderItemUnderfoot:: @ 840E992
 	.string "The machine’s indicating something\nright underfoot!{PAUSE_UNTIL_PRESS}$"
 
 gOtherText_NoResponse:: @ 840E9C8

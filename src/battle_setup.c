@@ -304,24 +304,24 @@ s8 sub_8081D3C(void)
         return 1;
     if (MetatileBehavior_IsSandOrDeepSand(tileBehavior))
         return 2;
-    switch (gMapHeader.light)
+    switch (gMapHeader.mapType)
     {
-    case 1:
-    case 2:
-    case 3:
+    case MAP_TYPE_TOWN:
+    case MAP_TYPE_CITY:
+    case MAP_TYPE_ROUTE:
         break;
-    case 4:
+    case MAP_TYPE_UNDERGROUND:
         if (sub_80574C4(tileBehavior))
             return 8;
         if (MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior))
             return 5;
         return 7;
-    case 8:
-    case 9:
+    case MAP_TYPE_INDOOR:
+    case MAP_TYPE_SECRET_BASE:
         return 8;
-    case 5:
+    case MAP_TYPE_UNDERWATER:
         return 3;
-    case 6:
+    case MAP_TYPE_6:
         if (MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior))
             return 4;
         return 9;
@@ -362,11 +362,11 @@ s8 sub_8081E90(void)
 
     if (!MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior))
     {
-        switch (gMapHeader.light)
+        switch (gMapHeader.mapType)
         {
-        case 4:
+        case MAP_TYPE_UNDERGROUND:
             return 1;
-        case 5:
+        case MAP_TYPE_UNDERWATER:
             return 3;
         default:
             return 0;
@@ -384,7 +384,7 @@ u16 GetSumOfPartyMonLevel(u8 numMons)
     {
         u32 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
         
-        if (species != 412 && species != 0 && GetMonData(&gPlayerParty[i], MON_DATA_HP) != 0)
+        if (species != SPECIES_EGG && species != SPECIES_NONE && GetMonData(&gPlayerParty[i], MON_DATA_HP) != 0)
         {
             sum += GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
             numMons--;
