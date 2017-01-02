@@ -87,7 +87,9 @@ SECTIONS {
         asm/rom_8065394.o(.text);
         src/var.o(.text);
         src/flag.o(.text);
-        asm/rom_806936C.o(.text);
+        asm/coord_event_weather.o(.text);
+        asm/field_tasks.o(.text);
+        asm/clock.o(.text);
         asm/reset_rtc_screen.o(.text);
         asm/party_menu.o(.text);
         src/start_menu.o(.text);

@@ -158,9 +158,9 @@ bool32 IsMysteryGiftAvailable(void);
 int sub_80691DC(void);
 
 // asm/rom_806936C.o
-void overworld_ensure_per_step_coros_running();
-void activate_per_step_callback(u8);
-void wild_encounter_reset_coro_args(void);
+void SetUpFieldTasks();
+void ActivatePerStepCallback(u8);
+void ResetFieldTasksArgs(void);
 void DoTimeBasedEvents(void);
 
 // asm/reset_rtc_screen.o

@@ -139,31 +139,31 @@ gUnknown_083762F0:: @ 83762F0
 	.4byte gStringVar3
 
 	.align 2
-gUnknown_083762FC:: @ 83762FC
-	.4byte 0x1, sub_806936C
-	.4byte 0x2, sub_8069378
-	.4byte 0x3, sub_8069384
-	.4byte 0x4, sub_8069390
-	.4byte 0x5, sub_806939C
-	.4byte 0x6, sub_80693A8
-	.4byte 0x7, sub_80693B4
-	.4byte 0x8, sub_80693C0
-	.4byte 0x9, sub_80693CC
-	.4byte 0xa, sub_80693D8
-	.4byte 0xb, sub_80693E4
-	.4byte 0x14, sub_80693F0
-	.4byte 0x15, sub_80693FC
+gCoordEventWeatherFuncs:: @ 83762FC
+	.4byte 0x1, CoordEventWeather_Indoor
+	.4byte 0x2, CoordEventWeather_Sunny
+	.4byte 0x3, CoordEventWeather_Rain
+	.4byte 0x4, CoordEventWeather_Snowflakes
+	.4byte 0x5, CoordEventWeather_Thunderstorm
+	.4byte 0x6, CoordEventWeather_Fog
+	.4byte 0x7, CoordEventWeather_DiagonalFog
+	.4byte 0x8, CoordEventWeather_Snow
+	.4byte 0x9, CoordEventWeather_Sandstorm
+	.4byte 0xa, CoordEventWeather_Cloudy
+	.4byte 0xb, CoordEventWeather_Drought
+	.4byte 0x14, CoordEventWeather_UnderwaterFog
+	.4byte 0x15, CoordEventWeather_UnderwaterBubbles
 
 	.align 2
 gUnknown_08376364:: @ 8376364
-	.4byte nullsub_51
-	.4byte sub_8069F64
-	.4byte sub_8069AA0
-	.4byte sub_8069864
-	.4byte sub_8069DD4
+	.4byte DummyPerStepCallback
+	.4byte PerStepCallback_8069F64
+	.4byte PerStepCallback_8069AA0
+	.4byte PerStepCallback_8069864
+	.4byte PerStepCallback_8069DD4
 	.4byte EndTruckSequence
 	.4byte sub_80BCF1C
-	.4byte sub_806A07C
+	.4byte PerStepCallback_806A07C
 
 gUnknown_08376384:: @ 8376384
 	.incbin "baserom.gba", 0x00376384, 0x20

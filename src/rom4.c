@@ -536,8 +536,8 @@ void sub_80538F0(u8 mapGroup, u8 mapNum)
     sub_8072ED0();
     mapnumbers_history_shift_sav1_0_2_4_out();
     sub_8134394();
-    sub_808073C();
-    wild_encounter_reset_coro_args();
+    DoCurrentWeather();
+    ResetFieldTasksArgs();
     mapheader_run_script_with_tag_x5();
     AddMapNamePopUpWindowTask();
 }
@@ -1629,7 +1629,7 @@ void sub_8054D4C(u32 a1)
     sub_807C828();
     sub_8080750();
     if (!a1)
-        overworld_ensure_per_step_coros_running();
+        SetUpFieldTasks();
     mapheader_run_script_with_tag_x5();
 }
 

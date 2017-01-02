@@ -621,13 +621,13 @@ bool8 ScrCmd_resetweather(struct ScriptContext *ctx)
 
 bool8 ScrCmd_doweather(struct ScriptContext *ctx)
 {
-    sub_808073C();
+    DoCurrentWeather();
     return FALSE;
 }
 
 bool8 ScrCmd_tileeffect(struct ScriptContext *ctx)
 {
-    activate_per_step_callback(ScriptReadByte(ctx));
+    ActivatePerStepCallback(ScriptReadByte(ctx));
     return FALSE;
 }
 

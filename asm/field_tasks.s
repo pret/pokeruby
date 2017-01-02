@@ -6,157 +6,8 @@
 
 	.text
 
-	thumb_func_start sub_806936C
-sub_806936C: @ 806936C
-	push {lr}
-	movs r0, 0x1
-	bl sub_808070C
-	pop {r0}
-	bx r0
-	thumb_func_end sub_806936C
-
-	thumb_func_start sub_8069378
-sub_8069378: @ 8069378
-	push {lr}
-	movs r0, 0x2
-	bl sub_808070C
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8069378
-
-	thumb_func_start sub_8069384
-sub_8069384: @ 8069384
-	push {lr}
-	movs r0, 0x3
-	bl sub_808070C
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8069384
-
-	thumb_func_start sub_8069390
-sub_8069390: @ 8069390
-	push {lr}
-	movs r0, 0x4
-	bl sub_808070C
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8069390
-
-	thumb_func_start sub_806939C
-sub_806939C: @ 806939C
-	push {lr}
-	movs r0, 0x5
-	bl sub_808070C
-	pop {r0}
-	bx r0
-	thumb_func_end sub_806939C
-
-	thumb_func_start sub_80693A8
-sub_80693A8: @ 80693A8
-	push {lr}
-	movs r0, 0x6
-	bl sub_808070C
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80693A8
-
-	thumb_func_start sub_80693B4
-sub_80693B4: @ 80693B4
-	push {lr}
-	movs r0, 0x9
-	bl sub_808070C
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80693B4
-
-	thumb_func_start sub_80693C0
-sub_80693C0: @ 80693C0
-	push {lr}
-	movs r0, 0x7
-	bl sub_808070C
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80693C0
-
-	thumb_func_start sub_80693CC
-sub_80693CC: @ 80693CC
-	push {lr}
-	movs r0, 0x8
-	bl sub_808070C
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80693CC
-
-	thumb_func_start sub_80693D8
-sub_80693D8: @ 80693D8
-	push {lr}
-	movs r0, 0xB
-	bl sub_808070C
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80693D8
-
-	thumb_func_start sub_80693E4
-sub_80693E4: @ 80693E4
-	push {lr}
-	movs r0, 0xC
-	bl sub_808070C
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80693E4
-
-	thumb_func_start sub_80693F0
-sub_80693F0: @ 80693F0
-	push {lr}
-	movs r0, 0x14
-	bl sub_808070C
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80693F0
-
-	thumb_func_start sub_80693FC
-sub_80693FC: @ 80693FC
-	push {lr}
-	movs r0, 0x15
-	bl sub_808070C
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80693FC
-
-	thumb_func_start sub_8069408
-sub_8069408: @ 8069408
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	movs r2, 0
-	ldr r3, _08069428 @ =gUnknown_083762FC
-_08069412:
-	lsls r1, r2, 3
-	adds r0, r1, r3
-	ldrb r0, [r0]
-	cmp r0, r4
-	bne _0806942C
-	adds r0, r3, 0x4
-	adds r0, r1, r0
-	ldr r0, [r0]
-	bl _call_via_r0
-	b _08069436
-	.align 2, 0
-_08069428: .4byte gUnknown_083762FC
-_0806942C:
-	adds r0, r2, 0x1
-	lsls r0, 24
-	lsrs r2, r0, 24
-	cmp r2, 0xC
-	bls _08069412
-_08069436:
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8069408
-
-	thumb_func_start task_per_step_callback_manager
-task_per_step_callback_manager: @ 806943C
+	thumb_func_start Task_RunPerStepCallback
+Task_RunPerStepCallback: @ 806943C
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -177,10 +28,10 @@ task_per_step_callback_manager: @ 806943C
 	.align 2, 0
 _08069460: .4byte gTasks
 _08069464: .4byte gUnknown_08376364
-	thumb_func_end task_per_step_callback_manager
+	thumb_func_end Task_RunPerStepCallback
 
-	thumb_func_start sub_8069468
-sub_8069468: @ 8069468
+	thumb_func_start RunTimeBasedEvents
+RunTimeBasedEvents: @ 8069468
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r1, 0
@@ -222,10 +73,10 @@ _080694AC:
 	bx r0
 	.align 2, 0
 _080694B4: .4byte gMain
-	thumb_func_end sub_8069468
+	thumb_func_end RunTimeBasedEvents
 
-	thumb_func_start sub_80694B8
-sub_80694B8: @ 80694B8
+	thumb_func_start Task_RunTimeBasedEvents
+Task_RunTimeBasedEvents: @ 80694B8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -239,7 +90,7 @@ sub_80694B8: @ 80694B8
 	cmp r0, 0
 	bne _080694E0
 	adds r0, r4, 0
-	bl sub_8069468
+	bl RunTimeBasedEvents
 	adds r0, r4, 0x2
 	adds r1, r4, 0x4
 	bl sub_80540D0
@@ -249,12 +100,12 @@ _080694E0:
 	bx r0
 	.align 2, 0
 _080694E8: .4byte gTasks + 0x8
-	thumb_func_end sub_80694B8
+	thumb_func_end Task_RunTimeBasedEvents
 
-	thumb_func_start overworld_ensure_per_step_coros_running
-overworld_ensure_per_step_coros_running: @ 80694EC
+	thumb_func_start SetUpFieldTasks
+SetUpFieldTasks: @ 80694EC
 	push {r4,r5,lr}
-	ldr r5, _08069548 @ =task_per_step_callback_manager
+	ldr r5, _08069548 @ =Task_RunPerStepCallback
 	adds r0, r5, 0
 	bl FuncIsActiveTask
 	lsls r0, 24
@@ -273,7 +124,7 @@ overworld_ensure_per_step_coros_running: @ 80694EC
 	adds r1, r2
 	strh r4, [r1, 0x8]
 _08069516:
-	ldr r4, _08069550 @ =sub_806A1E8
+	ldr r4, _08069550 @ =Task_MuddySlope
 	adds r0, r4, 0
 	bl FuncIsActiveTask
 	lsls r0, 24
@@ -283,7 +134,7 @@ _08069516:
 	movs r1, 0x50
 	bl CreateTask
 _0806952C:
-	ldr r4, _08069554 @ =sub_80694B8
+	ldr r4, _08069554 @ =Task_RunTimeBasedEvents
 	adds r0, r4, 0
 	bl FuncIsActiveTask
 	lsls r0, 24
@@ -297,18 +148,18 @@ _08069542:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08069548: .4byte task_per_step_callback_manager
+_08069548: .4byte Task_RunPerStepCallback
 _0806954C: .4byte gTasks
-_08069550: .4byte sub_806A1E8
-_08069554: .4byte sub_80694B8
-	thumb_func_end overworld_ensure_per_step_coros_running
+_08069550: .4byte Task_MuddySlope
+_08069554: .4byte Task_RunTimeBasedEvents
+	thumb_func_end SetUpFieldTasks
 
-	thumb_func_start activate_per_step_callback
-activate_per_step_callback: @ 8069558
+	thumb_func_start ActivatePerStepCallback
+ActivatePerStepCallback: @ 8069558
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, _08069590 @ =task_per_step_callback_manager
+	ldr r0, _08069590 @ =Task_RunPerStepCallback
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r1, r0, 24
@@ -333,7 +184,7 @@ _0806957C:
 	strh r0, [r1]
 	b _0806959A
 	.align 2, 0
-_08069590: .4byte task_per_step_callback_manager
+_08069590: .4byte Task_RunPerStepCallback
 _08069594: .4byte gTasks + 0x8
 _08069598:
 	strh r4, [r1]
@@ -341,16 +192,16 @@ _0806959A:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end activate_per_step_callback
+	thumb_func_end ActivatePerStepCallback
 
-	thumb_func_start wild_encounter_reset_coro_args
-wild_encounter_reset_coro_args: @ 80695A0
+	thumb_func_start ResetFieldTasksArgs
+ResetFieldTasksArgs: @ 80695A0
 	push {lr}
-	ldr r0, _080695D0 @ =task_per_step_callback_manager
+	ldr r0, _080695D0 @ =Task_RunPerStepCallback
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r1, r0, 24
-	ldr r0, _080695D4 @ =sub_80694B8
+	ldr r0, _080695D4 @ =Task_RunTimeBasedEvents
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r1, r0, 24
@@ -368,15 +219,15 @@ _080695CA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080695D0: .4byte task_per_step_callback_manager
-_080695D4: .4byte sub_80694B8
+_080695D0: .4byte Task_RunPerStepCallback
+_080695D4: .4byte Task_RunTimeBasedEvents
 _080695D8: .4byte gTasks + 0x8
-	thumb_func_end wild_encounter_reset_coro_args
+	thumb_func_end ResetFieldTasksArgs
 
-	thumb_func_start nullsub_51
-nullsub_51: @ 80695DC
+	thumb_func_start DummyPerStepCallback
+DummyPerStepCallback: @ 80695DC
 	bx lr
-	thumb_func_end nullsub_51
+	thumb_func_end DummyPerStepCallback
 
 	thumb_func_start sub_80695E0
 sub_80695E0: @ 80695E0
@@ -721,8 +572,8 @@ _08069854:
 	bx r1
 	thumb_func_end sub_80697C8
 
-	thumb_func_start sub_8069864
-sub_8069864: @ 8069864
+	thumb_func_start PerStepCallback_8069864
+PerStepCallback_8069864: @ 8069864
 	push {r4-r7,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -905,7 +756,7 @@ _080699CE:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8069864
+	thumb_func_end PerStepCallback_8069864
 
 	thumb_func_start sub_80699D8
 sub_80699D8: @ 80699D8
@@ -1011,8 +862,8 @@ _08069A96:
 _08069A9C: .4byte 0x00000256
 	thumb_func_end sub_8069A3C
 
-	thumb_func_start sub_8069AA0
-sub_8069AA0: @ 8069AA0
+	thumb_func_start PerStepCallback_8069AA0
+PerStepCallback_8069AA0: @ 8069AA0
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1268,7 +1119,7 @@ _08069CA6:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8069AA0
+	thumb_func_end PerStepCallback_8069AA0
 
 	thumb_func_start sub_8069CB8
 sub_8069CB8: @ 8069CB8
@@ -1428,8 +1279,8 @@ _08069DCC: .4byte gMapHeader
 _08069DD0: .4byte 0x0000020e
 	thumb_func_end sub_8069D78
 
-	thumb_func_start sub_8069DD4
-sub_8069DD4: @ 8069DD4
+	thumb_func_start PerStepCallback_8069DD4
+PerStepCallback_8069DD4: @ 8069DD4
 	push {r4-r7,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -1628,10 +1479,10 @@ _08069F56:
 	bx r0
 	.align 2, 0
 _08069F60: .4byte 0x00000206
-	thumb_func_end sub_8069DD4
+	thumb_func_end PerStepCallback_8069DD4
 
-	thumb_func_start sub_8069F64
-sub_8069F64: @ 8069F64
+	thumb_func_start PerStepCallback_8069F64
+PerStepCallback_8069F64: @ 8069F64
 	push {r4,r5,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -1733,7 +1584,7 @@ _0806A02A:
 _0806A034: .4byte 0x00000206
 _0806A038: .4byte 0x00004048
 _0806A03C: .4byte 0x0000270e
-	thumb_func_end sub_8069F64
+	thumb_func_end PerStepCallback_8069F64
 
 	thumb_func_start sub_806A040
 sub_806A040: @ 806A040
@@ -1765,8 +1616,8 @@ _0806A074: .4byte 0x0000022f
 _0806A078: .4byte 0x00000237
 	thumb_func_end sub_806A040
 
-	thumb_func_start sub_806A07C
-sub_806A07C: @ 806A07C
+	thumb_func_start PerStepCallback_806A07C
+PerStepCallback_806A07C: @ 806A07C
 	push {r4-r7,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -1898,7 +1749,7 @@ _0806A182:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_806A07C
+	thumb_func_end PerStepCallback_806A07C
 
 	thumb_func_start sub_806A18C
 sub_806A18C: @ 806A18C
@@ -1950,8 +1801,8 @@ _0806A1BC:
 _0806A1E4: .4byte gUnknown_08376418
 	thumb_func_end sub_806A18C
 
-	thumb_func_start sub_806A1E8
-sub_806A1E8: @ 806A1E8
+	thumb_func_start Task_MuddySlope
+Task_MuddySlope: @ 806A1E8
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -2116,173 +1967,6 @@ _0806A312:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_806A1E8
-
-	thumb_func_start sub_806A328
-sub_806A328: @ 806A328
-	push {lr}
-	ldr r0, _0806A350 @ =0x00000835
-	bl FlagSet
-	bl RtcCalcLocalTime
-	ldr r2, _0806A354 @ =gSaveBlock2
-	adds r2, 0xA0
-	ldr r3, _0806A358 @ =gLocalTime
-	ldr r0, [r3]
-	ldr r1, [r3, 0x4]
-	str r0, [r2]
-	str r1, [r2, 0x4]
-	ldr r0, _0806A35C @ =0x00004040
-	ldrh r1, [r3]
-	bl VarSet
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0806A350: .4byte 0x00000835
-_0806A354: .4byte gSaveBlock2
-_0806A358: .4byte gLocalTime
-_0806A35C: .4byte 0x00004040
-	thumb_func_end sub_806A328
-
-	thumb_func_start DoTimeBasedEvents
-DoTimeBasedEvents: @ 806A360
-	push {r4,lr}
-	ldr r0, _0806A388 @ =0x00000835
-	bl FlagGet
-	lsls r0, 24
-	cmp r0, 0
-	beq _0806A380
-	bl RtcCalcLocalTime
-	ldr r4, _0806A38C @ =gLocalTime
-	adds r0, r4, 0
-	bl sub_806A390
-	adds r0, r4, 0
-	bl sub_806A3F4
-_0806A380:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0806A388: .4byte 0x00000835
-_0806A38C: .4byte gLocalTime
-	thumb_func_end DoTimeBasedEvents
-
-	thumb_func_start sub_806A390
-sub_806A390: @ 806A390
-	push {r4-r6,lr}
-	adds r5, r0, 0
-	ldr r0, _0806A3F0 @ =0x00004040
-	bl GetVarPointer
-	adds r6, r0, 0
-	ldrh r0, [r6]
-	movs r2, 0
-	ldrsh r1, [r5, r2]
-	cmp r0, r1
-	beq _0806A3EA
-	cmp r0, r1
-	bgt _0806A3EA
-	ldrh r4, [r5]
-	subs r4, r0
-	lsls r4, 16
-	lsrs r4, 16
-	bl sub_80690B4
-	adds r0, r4, 0
-	bl sub_80FA220
-	adds r0, r4, 0
-	bl sub_80BE8C4
-	adds r0, r4, 0
-	bl sub_8080834
-	adds r0, r4, 0
-	bl UpdatePartyPokerusTime
-	adds r0, r4, 0
-	bl sub_810D2F4
-	adds r0, r4, 0
-	bl UpdateBirchState
-	adds r0, r4, 0
-	bl sub_810F618
-	adds r0, r4, 0
-	bl sub_8145AA4
-	ldrh r0, [r5]
-	strh r0, [r6]
-_0806A3EA:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0806A3F0: .4byte 0x00004040
-	thumb_func_end sub_806A390
-
-	thumb_func_start sub_806A3F4
-sub_806A3F4: @ 806A3F4
-	push {r4-r6,lr}
-	sub sp, 0x8
-	adds r5, r0, 0
-	mov r4, sp
-	ldr r6, _0806A448 @ =gSaveBlock2 + 0xA0
-	mov r0, sp
-	adds r1, r6, 0
-	adds r2, r5, 0
-	bl CalcTimeDifference
-	mov r0, sp
-	movs r2, 0
-	ldrsh r1, [r0, r2]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r1, r0, 4
-	subs r1, r0
-	lsls r1, 5
-	movs r2, 0x2
-	ldrsb r2, [r4, r2]
-	lsls r0, r2, 4
-	subs r0, r2
-	lsls r0, 2
-	adds r1, r0
-	movs r0, 0x3
-	ldrsb r0, [r4, r0]
-	adds r0, r1, r0
-	cmp r0, 0
-	beq _0806A43E
-	cmp r0, 0
-	blt _0806A43E
-	bl BerryTreeTimeUpdate
-	ldr r0, [r5]
-	ldr r1, [r5, 0x4]
-	str r0, [r6]
-	str r1, [r6, 0x4]
-_0806A43E:
-	add sp, 0x8
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0806A448: .4byte gSaveBlock2 + 0xA0
-	thumb_func_end sub_806A3F4
-
-	thumb_func_start sub_806A44C
-sub_806A44C: @ 806A44C
-	push {lr}
-	bl sub_806A328
-	ldr r0, _0806A45C @ =c2_exit_to_overworld_1_continue_scripts_restart_music
-	bl SetMainCallback2
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0806A45C: .4byte c2_exit_to_overworld_1_continue_scripts_restart_music
-	thumb_func_end sub_806A44C
-
-	thumb_func_start sub_806A460
-sub_806A460: @ 806A460
-	push {lr}
-	ldr r0, _0806A474 @ =Cb2_StartWallClock
-	bl SetMainCallback2
-	ldr r1, _0806A478 @ =gMain
-	ldr r0, _0806A47C @ =sub_806A44C
-	str r0, [r1, 0x8]
-	pop {r0}
-	bx r0
-	.align 2, 0
-_0806A474: .4byte Cb2_StartWallClock
-_0806A478: .4byte gMain
-_0806A47C: .4byte sub_806A44C
-	thumb_func_end sub_806A460
+	thumb_func_end Task_MuddySlope
 
 	.align 2, 0 @ Don't pad with nop.
