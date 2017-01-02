@@ -2488,7 +2488,7 @@ _0800E868:
 	strh r1, [r0]
 	ldr r0, _0800E94C @ =gUnknown_030041B8
 	strh r1, [r0]
-	bl sub_8081D3C
+	bl GetBattleTerrain
 	ldr r1, _0800E950 @ =gBattleTerrain
 	strb r0, [r1]
 	ldr r0, _0800E954 @ =gUnknown_03004210
