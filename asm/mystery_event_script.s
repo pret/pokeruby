@@ -527,7 +527,7 @@ sub_8126524: @ 8126524
 sub_812658C: @ 812658C
 	push {r4,lr}
 	adds r4, r0, 0
-	bl UnlockNationalPokedex
+	bl EnableNationalPokedex
 	ldr r0, _081265A8 @ =gStringVar4
 	ldr r1, _081265AC @ =gOtherText_DexUpgraded
 	bl StringExpandPlaceholders
@@ -739,7 +739,7 @@ _08126750: .4byte gOtherText_NewTrainerInHoenn
 sub_8126754: @ 8126754
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80691BC
+	bl EnableResetRTC
 	ldr r0, _08126770 @ =gStringVar4
 	ldr r1, _08126774 @ =gSystemText_ClockAdjustmentUsable
 	bl StringExpandPlaceholders

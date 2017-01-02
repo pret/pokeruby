@@ -7,7 +7,7 @@
 #include "species.h"
 #include "main.h"
 #include "sprite.h"
-#include "flag.h"
+#include "event_data.h"
 #include "rtc.h"
 #include "item.h"
 

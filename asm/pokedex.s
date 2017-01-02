@@ -158,7 +158,7 @@ _080908A0:
 	movs r2, 0
 	movs r3, 0xD0
 	bl sub_8072BD8
-	bl IsNationalPokedex
+	bl IsNationalPokedexEnabled
 	cmp r0, 0
 	bne _080908CC
 	adds r0, r6, 0
@@ -3018,7 +3018,7 @@ _08091EA6:
 	movs r1, 0x1
 	movs r2, 0x7E
 	bl LoadPalette
-	bl IsNationalPokedex
+	bl IsNationalPokedexEnabled
 	cmp r0, 0
 	bne _08091F10
 	movs r4, 0
@@ -3377,7 +3377,7 @@ sub_80921B0: @ 80921B0
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	beq _080921E4
-	bl IsNationalPokedex
+	bl IsNationalPokedexEnabled
 	ldr r6, _080921DC @ =gUnknown_083B586C
 	cmp r0, 0
 	bne _080921F0
@@ -3388,7 +3388,7 @@ _080921D8: .4byte gTasks
 _080921DC: .4byte gUnknown_083B586C
 _080921E0: .4byte gUnknown_083B58A4
 _080921E4:
-	bl IsNationalPokedex
+	bl IsNationalPokedexEnabled
 	ldr r6, _0809221C @ =gUnknown_083B5850
 	cmp r0, 0
 	bne _080921F0
@@ -3458,7 +3458,7 @@ _08092230:
 	bl sub_8092E10
 	ldr r4, _080922C8 @ =gSaveBlock2
 	strb r0, [r4, 0x19]
-	bl IsNationalPokedex
+	bl IsNationalPokedexEnabled
 	cmp r0, 0
 	bne _08092288
 	movs r0, 0
@@ -4269,7 +4269,7 @@ _08092904:
 	.align 2, 0
 _08092910: .4byte gUnknown_083B57FC
 _08092914:
-	bl IsNationalPokedex
+	bl IsNationalPokedexEnabled
 	cmp r0, 0
 	bne _08092940
 	ldr r2, _0809293C @ =gUnknown_083B57FC
@@ -4647,7 +4647,7 @@ sub_8092B68: @ 8092B68
 	movs r2, 0x40
 	movs r3, 0x1
 	bl MenuPrint_PixelCoords
-	bl IsNationalPokedex
+	bl IsNationalPokedexEnabled
 	cmp r0, 0
 	beq _08092C5E
 	ldrh r0, [r6, 0xE]

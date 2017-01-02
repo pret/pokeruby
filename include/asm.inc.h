@@ -151,11 +151,6 @@ void overworld_poison_timer_set(void);
 void prev_quest_postbuffer_cursor_backup_reset(void);
 u8 *sub_8068E24(struct UnkStruct_8054FF8_Substruct *);
 u8 *GetFieldObjectScriptPointerForComparison();
-void sub_8069030(void);
-void sub_806906C(void);
-bool32 IsNationalPokedex(void);
-bool32 IsMysteryGiftAvailable(void);
-int sub_80691DC(void);
 
 // asm/rom_806936C.o
 void SetUpFieldTasks();

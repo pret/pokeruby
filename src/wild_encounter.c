@@ -7,10 +7,8 @@
 #include "abilities.h"
 #include "rng.h"
 #include "script.h"
-#include "flag.h"
-#include "var.h"
+#include "event_data.h"
 #include "rom4.h"
-#include "vars.h"
 #include "metatile_behavior.h"
 
 struct WildPokemon

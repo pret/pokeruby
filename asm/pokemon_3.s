@@ -1914,7 +1914,7 @@ SpeciesToPokedexNum: @ 80406D8
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
-	bl IsNationalPokedex
+	bl IsNationalPokedexEnabled
 	cmp r0, 0
 	beq _080406F2
 	adds r0, r4, 0

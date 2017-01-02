@@ -2,8 +2,7 @@
 #include "pokemon_size_record.h"
 #include "string_util.h"
 #include "species.h"
-#include "flag.h"
-#include "var.h"
+#include "event_data.h"
 
 extern u16 SpeciesToNationalPokedexNum(u16);
 extern u16 sub_8090D54(u16, u8);

@@ -1756,7 +1756,7 @@ _08086744: .4byte gPaletteFade
 sub_8086748: @ 8086748
 	push {lr}
 	bl sub_8053E90
-	bl pal_fill_for_maplights
+	bl pal_fill_for_map_transition
 	bl ScriptContext2_Enable
 	bl player_bitmagic
 	ldr r0, _0808676C @ =sub_8086774
@@ -2408,7 +2408,7 @@ _08086C2C: .4byte gSprites
 sub_8086C30: @ 8086C30
 	push {lr}
 	bl sub_8053FF8
-	bl sub_8080918
+	bl fade_8080918
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8086C30
@@ -2454,7 +2454,7 @@ _08086C90: .4byte sub_8086A68
 sub_8086C94: @ 8086C94
 	push {lr}
 	bl sub_8053E90
-	bl pal_fill_for_maplights
+	bl pal_fill_for_map_transition
 	bl ScriptContext2_Enable
 	ldr r0, _08086CB4 @ =sub_8086CBC
 	movs r1, 0
@@ -3422,7 +3422,7 @@ sub_80873D8: @ 80873D8
 	push {r4,lr}
 	adds r4, r0, 0
 	bl sub_8053FF8
-	bl sub_8080918
+	bl fade_8080918
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
@@ -3473,7 +3473,7 @@ _08087444: .4byte sub_80871D0
 mapldr_080851BC: @ 8087448
 	push {lr}
 	bl sub_8053E90
-	bl pal_fill_for_maplights
+	bl pal_fill_for_map_transition
 	bl ScriptContext2_Enable
 	ldr r0, _08087468 @ =gUnknown_0300485C
 	movs r1, 0
@@ -3925,7 +3925,7 @@ sub_80877AC: @ 80877AC
 	cmp r0, 0
 	bne _080877CA
 	bl sub_8053FF8
-	bl sub_8080918
+	bl fade_8080918
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
@@ -4117,7 +4117,7 @@ sub_8087914: @ 8087914
 	cmp r0, 0
 	bne _08087940
 	bl sub_8053FF8
-	bl sub_8080918
+	bl fade_8080918
 _08087940:
 	ldr r0, _080879BC @ =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
@@ -4227,7 +4227,7 @@ _08087A20:
 mapldr_080859D4: @ 8087A28
 	push {lr}
 	bl sub_8053E90
-	bl pal_fill_for_maplights
+	bl pal_fill_for_map_transition
 	bl ScriptContext2_Enable
 	bl player_bitmagic
 	ldr r1, _08087A64 @ =gUnknown_0300485C
@@ -4633,7 +4633,7 @@ _08087D48:
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
 	bl sub_8053FF8
-	bl sub_8080918
+	bl fade_8080918
 _08087D5E:
 	add sp, 0x8
 	pop {r4,r5}
@@ -4687,7 +4687,7 @@ _08087DC8: .4byte sub_8087BBC
 mapldr_08085D88: @ 8087DCC
 	push {lr}
 	bl sub_8053E90
-	bl pal_fill_for_maplights
+	bl pal_fill_for_map_transition
 	bl ScriptContext2_Enable
 	bl player_bitmagic
 	ldr r1, _08087E0C @ =gUnknown_0300485C
@@ -6908,7 +6908,7 @@ sub_8088F10: @ 8088F10
 	lsls r0, 24
 	cmp r0, 0
 	beq _08088F2A
-	bl sub_8080918
+	bl fade_8080918
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]

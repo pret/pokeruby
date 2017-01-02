@@ -4,7 +4,7 @@
 #include "palette.h"
 #include "script.h"
 #include "sound.h"
-#include "flag.h"
+#include "event_data.h"
 #include "sprite.h"
 
 struct MultichoiceListStruct
