@@ -127,7 +127,7 @@ void sub_80C9154(u8 taskId)
 
 	if(!gPaletteFade.active)
 	{
-		mailStruct.var20 = gScriptItemId;
+		mailStruct.itemId = gScriptItemId;
 		sub_80F890C(&mailStruct, sub_80A5D04, 0);
 		DestroyTask(taskId);
 	}
