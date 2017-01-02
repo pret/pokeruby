@@ -148,6 +148,7 @@ SECTIONS {
         asm/rotating_gate.o(.text);
         src/safari_zone.o(.text);
         asm/contest_link_80C857C.o(.text);
+        src/item_use.o(.text);
         asm/item_use.o(.text);
         asm/battle_anim_80CA710.o(.text);
         asm/bike.o(.text);

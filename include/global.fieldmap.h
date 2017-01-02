@@ -58,7 +58,8 @@ struct WarpEvent
 struct CoordEvent
 {
     s16 x, y;
-    u8 filler_4[0x2];
+    u8 filler_4;
+    u8 filler_5;
     u16 trigger;
     u16 index;
     u8 filler_A[0x2];
@@ -76,7 +77,7 @@ struct BgEvent
 
 struct MapEvents
 {
-    u8 mapObjectCount;
+    u32 mapObjectCount;
     u8 warpCount;
     u8 coordEventCount;
     u8 bgEventCount;
