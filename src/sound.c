@@ -15,7 +15,7 @@ struct Fanfare
 // Hack: different prototype than definition
 u32 SpeciesToCryId(u32);
 
-extern u16 gUnknown_020239F8;
+extern u16 gBattleTypeFlags;
 extern struct MusicPlayerInfo *gMPlay_PokemonCry;
 extern u8 gPokemonCryBGMDuckingCounter;
 
@@ -329,7 +329,7 @@ void PlayCry4(u16 species, s8 pan, u8 mode)
     }
     else
     {
-        if (!(gUnknown_020239F8 & 0x40))
+        if (!(gBattleTypeFlags & 0x40))
             m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 85);
         PlayCryInternal(species, pan, 125, 10, mode);
     }

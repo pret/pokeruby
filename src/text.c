@@ -178,7 +178,7 @@ EWRAM_DATA u8 gStringVar2[0x100] = {0};
 EWRAM_DATA u8 gStringVar3[0x100] = {0};
 EWRAM_DATA u8 gStringVar4[0x100] = {0};
 
-extern u16 gUnknown_020239F8;
+extern u16 gBattleTypeFlags;
 extern u8 gUnknown_0203869A;
 extern u8 gTileBuffer[];
 
@@ -2911,7 +2911,7 @@ static bool8 PlayerCanInterruptWait(struct Window *win)
             retVal = TRUE;
         break;
     case 1:
-        retVal &= ~(gUnknown_020239F8 >> 1);
+        retVal &= ~(gBattleTypeFlags >> 1);
         break;
     }
 

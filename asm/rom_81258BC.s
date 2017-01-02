@@ -1177,7 +1177,7 @@ dp01_tbl6_exec_completed: @ 812B7C0
 	adds r0, r1
 	ldr r1, _0812B808 @ =sub_812B484
 	str r1, [r0]
-	ldr r0, _0812B80C @ =gUnknown_020239F8
+	ldr r0, _0812B80C @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x2
 	ands r0, r1
@@ -1201,7 +1201,7 @@ dp01_tbl6_exec_completed: @ 812B7C0
 _0812B800: .4byte gUnknown_03004330
 _0812B804: .4byte gUnknown_02024A60
 _0812B808: .4byte sub_812B484
-_0812B80C: .4byte gUnknown_020239F8
+_0812B80C: .4byte gBattleTypeFlags
 _0812B810: .4byte gUnknown_02023A60
 _0812B814:
 	ldr r2, _0812B830 @ =gUnknown_02024A64
@@ -2191,7 +2191,7 @@ sub_812BF54: @ 812BF54
 	movs r0, 0x3
 	bl BeginFastPaletteFade
 	bl dp01_tbl6_exec_completed
-	ldr r0, _0812BFA4 @ =gUnknown_020239F8
+	ldr r0, _0812BFA4 @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x6
 	ands r0, r1
@@ -2211,7 +2211,7 @@ _0812BF90:
 _0812BF98: .4byte gUnknown_02024D26
 _0812BF9C: .4byte gUnknown_02023A60
 _0812BFA0: .4byte gUnknown_02024A60
-_0812BFA4: .4byte gUnknown_020239F8
+_0812BFA4: .4byte gBattleTypeFlags
 _0812BFA8: .4byte gUnknown_03004330
 _0812BFAC: .4byte sub_812B6AC
 	thumb_func_end sub_812BF54
@@ -21501,7 +21501,7 @@ _08135588:
 	beq _08135600
 	b _08135648
 _0813558E:
-	ldr r1, _081355A4 @ =gUnknown_020239F8
+	ldr r1, _081355A4 @ =gBattleTypeFlags
 	movs r3, 0x84
 	lsls r3, 1
 	adds r0, r3, 0
@@ -21511,7 +21511,7 @@ _0813558E:
 	bl sub_8134DD4
 	b _081355D6
 	.align 2, 0
-_081355A4: .4byte gUnknown_020239F8
+_081355A4: .4byte gBattleTypeFlags
 _081355A8: .4byte gTrainerBattleOpponent
 _081355AC:
 	movs r5, 0
@@ -21565,7 +21565,7 @@ _08135606:
 	adds r5, 0x1
 	cmp r5, 0x2
 	ble _08135606
-	ldr r1, _08135658 @ =gUnknown_020239F8
+	ldr r1, _08135658 @ =gBattleTypeFlags
 	ldr r2, _0813565C @ =0x00000808
 	adds r0, r2, 0
 	strh r0, [r1]
@@ -21589,7 +21589,7 @@ _08135648:
 	.align 2, 0
 _08135650: .4byte gEnemyParty
 _08135654: .4byte gSaveBlock2 + 0x4CC
-_08135658: .4byte gUnknown_020239F8
+_08135658: .4byte gBattleTypeFlags
 _0813565C: .4byte 0x00000808
 _08135660: .4byte gTrainerBattleOpponent
 _08135664: .4byte sub_8135534
@@ -25550,7 +25550,7 @@ _08137596:
 	lsls r0, 24
 	cmp r0, 0
 	beq _08137626
-	ldr r0, _0813769C @ =gUnknown_020239F8
+	ldr r0, _0813769C @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x40
 	ands r0, r1
@@ -25644,7 +25644,7 @@ _0813768C: .4byte gUnknown_02024A60
 _08137690: .4byte 0x02017810
 _08137694: .4byte gUnknown_02024A6A
 _08137698: .4byte gPlayerParty
-_0813769C: .4byte gUnknown_020239F8
+_0813769C: .4byte gBattleTypeFlags
 _081376A0: .4byte gUnknown_0300434C
 _081376A4: .4byte gSprites
 _081376A8: .4byte gUnknown_03004340
@@ -26001,7 +26001,7 @@ dp01_tbl5_exec_completed: @ 813796C
 	adds r0, r1
 	ldr r1, _081379B4 @ =sub_813726C
 	str r1, [r0]
-	ldr r0, _081379B8 @ =gUnknown_020239F8
+	ldr r0, _081379B8 @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x2
 	ands r0, r1
@@ -26025,7 +26025,7 @@ dp01_tbl5_exec_completed: @ 813796C
 _081379AC: .4byte gUnknown_03004330
 _081379B0: .4byte gUnknown_02024A60
 _081379B4: .4byte sub_813726C
-_081379B8: .4byte gUnknown_020239F8
+_081379B8: .4byte gBattleTypeFlags
 _081379BC: .4byte gUnknown_02023A60
 _081379C0:
 	ldr r2, _081379DC @ =gUnknown_02024A64
@@ -30171,7 +30171,7 @@ sub_8139BB8: @ 8139BB8
 	movs r0, 0x3
 	bl BeginFastPaletteFade
 	bl dp01_tbl5_exec_completed
-	ldr r0, _08139C08 @ =gUnknown_020239F8
+	ldr r0, _08139C08 @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x6
 	ands r0, r1
@@ -30191,7 +30191,7 @@ _08139BF4:
 _08139BFC: .4byte gUnknown_02024D26
 _08139C00: .4byte gUnknown_02023A60
 _08139C04: .4byte gUnknown_02024A60
-_08139C08: .4byte gUnknown_020239F8
+_08139C08: .4byte gBattleTypeFlags
 _08139C0C: .4byte gUnknown_03004330
 _08139C10: .4byte sub_813746C
 	thumb_func_end sub_8139BB8

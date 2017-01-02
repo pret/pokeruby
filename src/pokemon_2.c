@@ -17,7 +17,7 @@ extern struct Pokemon gEnemyParty[6];
 extern u16 unk_20160BC[];
 extern struct SecretBaseRecord gSecretBaseRecord;
 extern u32 dword_2017100[];
-extern u16 gUnknown_020239F8;
+extern u16 gBattleTypeFlags;
 extern u8 gUnknown_02024A60;
 extern struct BattlePokemon gBattleMons[4];
 extern u16 gUnknown_02024BE6;
@@ -98,7 +98,7 @@ u8 sub_803C434(u8 a1)
     status = status_ ^ mask1;
 
     {
-        register u16 val_ asm("r1") = gUnknown_020239F8;
+        register u16 val_ asm("r1") = gBattleTypeFlags;
         u32 val = mask2;
         val &= val_;
         if (!val)
@@ -154,7 +154,7 @@ u8 sub_803C434(u8 a1) {
 	adds r0, r4, 0\n\
 	b _0803C4AA\n\
 	.align 2, 0\n\
-_0803C45C: .4byte gUnknown_020239F8\n\
+_0803C45C: .4byte gBattleTypeFlags\n\
 _0803C460:\n\
 	movs r0, 0\n\
 	bl sub_803C348\n\
@@ -1187,7 +1187,7 @@ void CreateSecretBaseEnemyParty(struct SecretBaseRecord *secretBaseRecord)
         }
     }
 
-    gUnknown_020239F8 = 8;
+    gBattleTypeFlags = 8;
     gTrainerBattleOpponent = 1024;
 }
 

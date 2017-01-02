@@ -45,7 +45,7 @@ _08077B00:
 	bl battle_get_per_side_status
 	lsls r0, 24
 	lsrs r0, 22
-	ldr r1, _08077B24 @ =gUnknown_020239F8
+	ldr r1, _08077B24 @ =gBattleTypeFlags
 	ldrh r2, [r1]
 	movs r1, 0x1
 	ands r1, r2
@@ -56,14 +56,14 @@ _08077B00:
 	b _08077BF4
 	.align 2, 0
 _08077B20: .4byte gUnknown_0837F578
-_08077B24: .4byte gUnknown_020239F8
+_08077B24: .4byte gBattleTypeFlags
 _08077B28:
 	ldr r4, _08077B48 @ =gUnknown_0837F578
 	adds r0, r5, 0
 	bl battle_get_per_side_status
 	lsls r0, 24
 	lsrs r0, 22
-	ldr r1, _08077B4C @ =gUnknown_020239F8
+	ldr r1, _08077B4C @ =gBattleTypeFlags
 	ldrh r2, [r1]
 	movs r1, 0x1
 	ands r1, r2
@@ -74,7 +74,7 @@ _08077B28:
 	b _08077BF4
 	.align 2, 0
 _08077B48: .4byte gUnknown_0837F578
-_08077B4C: .4byte gUnknown_020239F8
+_08077B4C: .4byte gBattleTypeFlags
 _08077B50:
 	bl sub_8076BE0
 	lsls r0, 24
@@ -506,7 +506,7 @@ _08077E94:
 	ldr r3, _08077EDC @ =gUnknown_0837F578
 	lsls r0, 24
 	lsrs r0, 22
-	ldr r1, _08077EE0 @ =gUnknown_020239F8
+	ldr r1, _08077EE0 @ =gBattleTypeFlags
 	ldrh r2, [r1]
 	movs r1, 0x1
 	ands r1, r2
@@ -539,7 +539,7 @@ _08077ED4:
 	bx r1
 	.align 2, 0
 _08077EDC: .4byte gUnknown_0837F578
-_08077EE0: .4byte gUnknown_020239F8
+_08077EE0: .4byte gBattleTypeFlags
 	thumb_func_end sub_8077E44
 
 	thumb_func_start sub_8077EE4
@@ -1963,13 +1963,13 @@ _080788FE:
 
 	thumb_func_start IsDoubleBattle
 IsDoubleBattle: @ 8078904
-	ldr r0, _08078910 @ =gUnknown_020239F8
+	ldr r0, _08078910 @ =gBattleTypeFlags
 	ldrb r1, [r0]
 	movs r0, 0x1
 	ands r0, r1
 	bx lr
 	.align 2, 0
-_08078910: .4byte gUnknown_020239F8
+_08078910: .4byte gBattleTypeFlags
 	thumb_func_end IsDoubleBattle
 
 	thumb_func_start sub_8078914

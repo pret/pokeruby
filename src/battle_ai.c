@@ -15,7 +15,7 @@ all the way to at least 0x2016800, in addition to extremely hard functions that 
 as it currently is until someone bothers to document this huge struct.
 */
 
-extern u16 gUnknown_020239F8;
+extern u16 gBattleTypeFlags;
 extern u8 gUnknown_02024A60;
 extern u8 gUnknown_02024C07; 
 extern u8 gUnknown_02024C08;
@@ -103,7 +103,7 @@ void sub_81070D4(void)
     
     for(i = 0; (u32)i < 48; i++)
         data[i] = 0;
-    if((gUnknown_020239F8 & 8) && gTrainerBattleOpponent != 0x400 && !(gUnknown_020239F8 & 0x982))
+    if((gBattleTypeFlags & 8) && gTrainerBattleOpponent != 0x400 && !(gBattleTypeFlags & 0x982))
     {
         for(i = 0; i < 4; i++)
         {
@@ -140,7 +140,7 @@ void sub_810715C(void)
     unk_2016C00.unk20 = 0;
     gUnknown_02024C07 = gUnknown_02024A60;
     
-    if(gUnknown_020239F8 & 1)
+    if(gBattleTypeFlags & 1)
     {
         gUnknown_02024C08 = Random() & 2;
         
@@ -150,11 +150,11 @@ void sub_810715C(void)
     else
         gUnknown_02024C08 = gUnknown_02024A60 ^ 1;
     
-    if(gUnknown_020239F8 & 0x80)
+    if(gBattleTypeFlags & 0x80)
         unk_2016800.aiFlags = 0x40000000;
-    else if(gUnknown_020239F8 & 0x400)
+    else if(gBattleTypeFlags & 0x400)
         unk_2016800.aiFlags = 0x20000000;
-    else if(gUnknown_020239F8 & 0x10)
+    else if(gBattleTypeFlags & 0x10)
         unk_2016800.aiFlags = 0x80000000;
     else
         unk_2016800.aiFlags = gTrainers[gTrainerBattleOpponent].aiFlags;
@@ -1134,7 +1134,7 @@ _0810855E:\n\
 	ldr r0, _081085B0 @ =gPlayerParty\n\
 	mov r9, r0\n\
 _08108574:\n\
-	ldr r0, _081085B4 @ =gUnknown_020239F8\n\
+	ldr r0, _081085B4 @ =gBattleTypeFlags\n\
 	ldrh r1, [r0]\n\
 	movs r0, 0x1\n\
 	ands r0, r1\n\
@@ -1161,7 +1161,7 @@ _08108574:\n\
 _081085A8: .4byte gUnknown_02024C08\n\
 _081085AC: .4byte gEnemyParty\n\
 _081085B0: .4byte gPlayerParty\n\
-_081085B4: .4byte gUnknown_020239F8\n\
+_081085B4: .4byte gBattleTypeFlags\n\
 _081085B8: .4byte gUnknown_02024A6A\n\
 _081085BC:\n\
 	ldr r1, _08108624 @ =gUnknown_02024A6A\n\

@@ -1921,7 +1921,7 @@ ItemUseInBattle_Escape: @ 80CA4C8
 	movs r2, 0xD
 	movs r3, 0x14
 	bl MenuZeroFillWindowRect
-	ldr r0, _080CA4F8 @ =gUnknown_020239F8
+	ldr r0, _080CA4F8 @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x8
 	ands r0, r1
@@ -1935,7 +1935,7 @@ ItemUseInBattle_Escape: @ 80CA4C8
 	bl DisplayItemMessageOnField
 	b _080CA516
 	.align 2, 0
-_080CA4F8: .4byte gUnknown_020239F8
+_080CA4F8: .4byte gBattleTypeFlags
 _080CA4FC: .4byte gStringVar4
 _080CA500: .4byte sub_80A7094
 _080CA504:

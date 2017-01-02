@@ -666,7 +666,7 @@ _0803FD74:
 _0803FD84:
 	cmp r5, 0x3
 	bne _0803FDB4
-	ldr r0, _0803FE60 @ =gUnknown_020239F8
+	ldr r0, _0803FE60 @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x8
 	ands r0, r1
@@ -776,7 +776,7 @@ _0803FE56:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0803FE60: .4byte gUnknown_020239F8
+_0803FE60: .4byte gBattleTypeFlags
 _0803FE64: .4byte gTrainers
 _0803FE68: .4byte gTrainerBattleOpponent
 _0803FE6C: .4byte gUnknown_082082FE
@@ -1960,7 +1960,7 @@ _08040724: .4byte gUnknown_02024E84
 	thumb_func_start sub_8040728
 sub_8040728: @ 8040728
 	push {lr}
-	ldr r0, _0804073C @ =gUnknown_020239F8
+	ldr r0, _0804073C @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x80
 	lsls r0, 5
@@ -1970,7 +1970,7 @@ sub_8040728: @ 8040728
 	ldr r0, _08040740 @ =0x000001cf
 	b _080408B2
 	.align 2, 0
-_0804073C: .4byte gUnknown_020239F8
+_0804073C: .4byte gBattleTypeFlags
 _08040740: .4byte 0x000001cf
 _08040744:
 	movs r0, 0x80
@@ -2595,7 +2595,7 @@ _08040C34: .4byte gStringVar4
 	thumb_func_start sub_8040C38
 sub_8040C38: @ 8040C38
 	push {r4,r5,lr}
-	ldr r0, _08040C90 @ =gUnknown_020239F8
+	ldr r0, _08040C90 @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	ldr r0, _08040C94 @ =0x00002008
 	ands r0, r1
@@ -2636,7 +2636,7 @@ _08040C82:
 	bl SetMonData
 	b _08040CAC
 	.align 2, 0
-_08040C90: .4byte gUnknown_020239F8
+_08040C90: .4byte gBattleTypeFlags
 _08040C94: .4byte 0x00002008
 _08040C98: .4byte gEnemyParty
 _08040C9C: .4byte gBaseStats

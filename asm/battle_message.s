@@ -136,7 +136,7 @@ _08120BB0:
 	.4byte _08120DE8
 	.4byte _08120E50
 _08120BC8:
-	ldr r0, _08120BEC @ =gUnknown_020239F8
+	ldr r0, _08120BEC @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x8
 	ands r0, r1
@@ -156,7 +156,7 @@ _08120BE8:
 	ldr r6, _08120BF4 @ =gUnknown_084005DB
 	b _08120F70
 	.align 2, 0
-_08120BEC: .4byte gUnknown_020239F8
+_08120BEC: .4byte gBattleTypeFlags
 _08120BF0: .4byte gUnknown_084005C7
 _08120BF4: .4byte gUnknown_084005DB
 _08120BF8:
@@ -203,7 +203,7 @@ _08120C40:
 	lsls r0, 24
 	cmp r0, 0
 	bne _08120C7C
-	ldr r0, _08120C68 @ =gUnknown_020239F8
+	ldr r0, _08120C68 @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x1
 	ands r0, r1
@@ -219,7 +219,7 @@ _08120C64:
 	ldr r6, _08120C70 @ =gUnknown_084006F1
 	b _08120F70
 	.align 2, 0
-_08120C68: .4byte gUnknown_020239F8
+_08120C68: .4byte gBattleTypeFlags
 _08120C6C: .4byte gUnknown_084006A4
 _08120C70: .4byte gUnknown_084006F1
 _08120C74:
@@ -228,7 +228,7 @@ _08120C74:
 	.align 2, 0
 _08120C78: .4byte gUnknown_0840069C
 _08120C7C:
-	ldr r0, _08120C94 @ =gUnknown_020239F8
+	ldr r0, _08120C94 @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x1
 	ands r0, r1
@@ -241,7 +241,7 @@ _08120C7C:
 	ldr r6, _08120C98 @ =gUnknown_0840065C
 	b _08120F70
 	.align 2, 0
-_08120C94: .4byte gUnknown_020239F8
+_08120C94: .4byte gBattleTypeFlags
 _08120C98: .4byte gUnknown_0840065C
 _08120C9C:
 	movs r0, 0x2
@@ -290,7 +290,7 @@ _08120CF0: .4byte gUnknown_08400709
 _08120CF4:
 	cmp r2, 0x1
 	beq _08120D04
-	ldr r0, _08120D08 @ =gUnknown_020239F8
+	ldr r0, _08120D08 @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x1
 	ands r0, r1
@@ -300,7 +300,7 @@ _08120D04:
 	ldr r6, _08120D0C @ =gUnknown_08400727
 	b _08120F70
 	.align 2, 0
-_08120D08: .4byte gUnknown_020239F8
+_08120D08: .4byte gBattleTypeFlags
 _08120D0C: .4byte gUnknown_08400727
 _08120D10:
 	ldr r6, _08120D1C @ =gUnknown_08400749
@@ -320,7 +320,7 @@ _08120D24:
 	lsls r0, 4
 	cmp r1, r0
 	bne _08120D54
-	ldr r0, _08120D48 @ =gUnknown_020239F8
+	ldr r0, _08120D48 @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x40
 	ands r0, r1
@@ -333,7 +333,7 @@ _08120D40:
 	b _08120F70
 	.align 2, 0
 _08120D44: .4byte gTrainerBattleOpponent
-_08120D48: .4byte gUnknown_020239F8
+_08120D48: .4byte gBattleTypeFlags
 _08120D4C: .4byte gUnknown_08400771
 _08120D50: .4byte gUnknown_08400781
 _08120D54:
@@ -354,7 +354,7 @@ _08120D5C:
 	ldrb r3, [r0]
 	cmp r3, 0
 	beq _08120D82
-	ldr r0, _08120D90 @ =gUnknown_020239F8
+	ldr r0, _08120D90 @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x1
 	ands r0, r1
@@ -366,7 +366,7 @@ _08120D82:
 	.align 2, 0
 _08120D88: .4byte 0x00016003
 _08120D8C: .4byte 0x000160c1
-_08120D90: .4byte gUnknown_020239F8
+_08120D90: .4byte gBattleTypeFlags
 _08120D94: .4byte gUnknown_084006B3
 _08120D98:
 	cmp r3, 0x1
@@ -387,7 +387,7 @@ _08120DAC:
 _08120DB0: .4byte gUnknown_084006D5
 _08120DB4: .4byte gUnknown_084006C6
 _08120DB8:
-	ldr r0, _08120DD4 @ =gUnknown_020239F8
+	ldr r0, _08120DD4 @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x2
 	ands r0, r1
@@ -403,7 +403,7 @@ _08120DD0:
 	ldr r6, _08120DDC @ =gUnknown_0840068C
 	b _08120F70
 	.align 2, 0
-_08120DD4: .4byte gUnknown_020239F8
+_08120DD4: .4byte gBattleTypeFlags
 _08120DD8: .4byte gUnknown_0840067C
 _08120DDC: .4byte gUnknown_0840068C
 _08120DE0:
@@ -491,7 +491,7 @@ _08120E7C:
 _08120E90: .4byte gUnknown_030041C0
 _08120E94: .4byte gUnknown_083FFEFC
 _08120E98:
-	ldr r0, _08120EAC @ =gUnknown_020239F8
+	ldr r0, _08120EAC @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x40
 	ands r0, r1
@@ -501,7 +501,7 @@ _08120E98:
 	ldr r6, _08120EB4 @ =gUnknown_083FFFF7
 	b _08120F70
 	.align 2, 0
-_08120EAC: .4byte gUnknown_020239F8
+_08120EAC: .4byte gBattleTypeFlags
 _08120EB0: .4byte gUnknown_083FFFEA
 _08120EB4: .4byte gUnknown_083FFFF7
 _08120EB8:
@@ -518,7 +518,7 @@ _08120EB8:
 	eors r0, r1
 	strb r0, [r5]
 _08120ED2:
-	ldr r0, _08120EF0 @ =gUnknown_020239F8
+	ldr r0, _08120EF0 @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x40
 	ands r0, r1
@@ -534,7 +534,7 @@ _08120ED2:
 	beq _08120EFE
 	b _08120F70
 	.align 2, 0
-_08120EF0: .4byte gUnknown_020239F8
+_08120EF0: .4byte gBattleTypeFlags
 _08120EF4: .4byte gUnknown_030041C0
 _08120EF8:
 	cmp r0, 0x3
@@ -975,7 +975,7 @@ _081212A8:
 	adds r2, r4, 0
 	cmp r0, 0
 	beq _0812131C
-	ldr r0, _081212D0 @ =gUnknown_020239F8
+	ldr r0, _081212D0 @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x8
 	ands r0, r1
@@ -986,7 +986,7 @@ _081212A8:
 	b _081212E6
 	.align 2, 0
 _081212CC: .4byte gUnknown_02024C07
-_081212D0: .4byte gUnknown_020239F8
+_081212D0: .4byte gBattleTypeFlags
 _081212D4: .4byte gUnknown_08400791
 _081212D8: .4byte gUnknown_08400797
 _081212DC:
@@ -1089,7 +1089,7 @@ _081213A8:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812140C
-	ldr r0, _081213F8 @ =gUnknown_020239F8
+	ldr r0, _081213F8 @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x8
 	ands r0, r1
@@ -1124,7 +1124,7 @@ _081213E8:
 	b _08121908
 	.align 2, 0
 _081213F4: .4byte gUnknown_02024C07
-_081213F8: .4byte gUnknown_020239F8
+_081213F8: .4byte gBattleTypeFlags
 _081213FC: .4byte gUnknown_08400791
 _08121400: .4byte gUnknown_08400797
 _08121404: .4byte gUnknown_02024A6A
@@ -1145,7 +1145,7 @@ _0812141C:
 	lsls r0, 24
 	cmp r0, 0
 	beq _08121480
-	ldr r0, _0812146C @ =gUnknown_020239F8
+	ldr r0, _0812146C @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x8
 	ands r0, r1
@@ -1180,7 +1180,7 @@ _0812145C:
 	b _08121908
 	.align 2, 0
 _08121468: .4byte gUnknown_02024C08
-_0812146C: .4byte gUnknown_020239F8
+_0812146C: .4byte gBattleTypeFlags
 _08121470: .4byte gUnknown_08400791
 _08121474: .4byte gUnknown_08400797
 _08121478: .4byte gUnknown_02024A6A
@@ -1201,7 +1201,7 @@ _08121490:
 	lsls r0, 24
 	cmp r0, 0
 	beq _081214F4
-	ldr r0, _081214E0 @ =gUnknown_020239F8
+	ldr r0, _081214E0 @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x8
 	ands r0, r1
@@ -1236,7 +1236,7 @@ _081214D0:
 	b _08121908
 	.align 2, 0
 _081214DC: .4byte gUnknown_02024C0A
-_081214E0: .4byte gUnknown_020239F8
+_081214E0: .4byte gBattleTypeFlags
 _081214E4: .4byte gUnknown_08400791
 _081214E8: .4byte gUnknown_08400797
 _081214EC: .4byte gUnknown_02024A6A
@@ -1257,7 +1257,7 @@ _08121504:
 	lsls r0, 24
 	cmp r0, 0
 	beq _08121568
-	ldr r0, _08121554 @ =gUnknown_020239F8
+	ldr r0, _08121554 @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x8
 	ands r0, r1
@@ -1292,7 +1292,7 @@ _08121544:
 	b _08121908
 	.align 2, 0
 _08121550: .4byte gUnknown_02024A60
-_08121554: .4byte gUnknown_020239F8
+_08121554: .4byte gBattleTypeFlags
 _08121558: .4byte gUnknown_08400791
 _0812155C: .4byte gUnknown_08400797
 _08121560: .4byte gUnknown_02024A6A
@@ -1316,7 +1316,7 @@ _08121578:
 	adds r2, r4, 0
 	cmp r0, 0
 	beq _081215E8
-	ldr r0, _081215D4 @ =gUnknown_020239F8
+	ldr r0, _081215D4 @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x8
 	ands r0, r1
@@ -1353,7 +1353,7 @@ _081215BC:
 	.align 2, 0
 _081215CC: .4byte 0x02000000
 _081215D0: .4byte 0x00016003
-_081215D4: .4byte gUnknown_020239F8
+_081215D4: .4byte gBattleTypeFlags
 _081215D8: .4byte gUnknown_08400791
 _081215DC: .4byte gUnknown_08400797
 _081215E0: .4byte gUnknown_02024A6A
@@ -1419,7 +1419,7 @@ _08121652:
 	.align 2, 0
 _0812165C: .4byte gMoveNames
 _08121660:
-	ldr r0, _081216AC @ =gUnknown_020239F8
+	ldr r0, _081216AC @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x2
 	ands r0, r1
@@ -1456,7 +1456,7 @@ _08121660:
 	mov r4, sp
 	b _081219E6
 	.align 2, 0
-_081216AC: .4byte gUnknown_020239F8
+_081216AC: .4byte gBattleTypeFlags
 _081216B0: .4byte gUnknown_02024C04
 _081216B4: .4byte gLinkPlayers
 _081216B8: .4byte 0x02000000
@@ -1543,7 +1543,7 @@ _0812174C:
 	.align 2, 0
 _08121764: .4byte gTrainerBattleOpponent
 _08121768:
-	ldr r0, _08121784 @ =gUnknown_020239F8
+	ldr r0, _08121784 @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x80
 	lsls r0, 1
@@ -1556,7 +1556,7 @@ _08121768:
 	movs r1, 0xD
 	b _081217AE
 	.align 2, 0
-_08121784: .4byte gUnknown_020239F8
+_08121784: .4byte gBattleTypeFlags
 _08121788:
 	movs r0, 0x80
 	lsls r0, 4
@@ -1606,7 +1606,7 @@ _081217C0:
 _081217E4: .4byte gTrainerBattleOpponent
 _081217E8: .4byte 0x02017002
 _081217EC:
-	ldr r0, _08121804 @ =gUnknown_020239F8
+	ldr r0, _08121804 @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x80
 	lsls r0, 1
@@ -1618,7 +1618,7 @@ _081217EC:
 	mov r4, sp
 	b _081219E6
 	.align 2, 0
-_08121804: .4byte gUnknown_020239F8
+_08121804: .4byte gBattleTypeFlags
 _08121808:
 	movs r0, 0x80
 	lsls r0, 4
@@ -1723,7 +1723,7 @@ _081218C0:
 	lsls r0, 24
 	cmp r0, 0
 	beq _08121934
-	ldr r0, _08121920 @ =gUnknown_020239F8
+	ldr r0, _08121920 @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x8
 	ands r0, r1
@@ -1765,7 +1765,7 @@ _0812190E:
 	.align 2, 0
 _08121918: .4byte 0x02000000
 _0812191C: .4byte 0x00016003
-_08121920: .4byte gUnknown_020239F8
+_08121920: .4byte gBattleTypeFlags
 _08121924: .4byte gUnknown_08400791
 _08121928: .4byte gUnknown_08400797
 _0812192C: .4byte gEnemyParty
@@ -2076,7 +2076,7 @@ _08121B64:
 	.align 2, 0
 _08121B84: .4byte gPlayerParty
 _08121B88:
-	ldr r0, _08121BA0 @ =gUnknown_020239F8
+	ldr r0, _08121BA0 @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x8
 	ands r0, r1
@@ -2087,7 +2087,7 @@ _08121B88:
 	bl StringAppend
 	b _08121BB0
 	.align 2, 0
-_08121BA0: .4byte gUnknown_020239F8
+_08121BA0: .4byte gBattleTypeFlags
 _08121BA4: .4byte gUnknown_08400797
 _08121BA8:
 	ldr r1, _08121BD4 @ =gUnknown_08400791
@@ -2196,7 +2196,7 @@ _08121C78:
 	ldrb r0, [r0, 0x2]
 	lsls r0, 8
 	orrs r2, r0
-	ldr r0, _08121CC4 @ =gUnknown_020239F8
+	ldr r0, _08121CC4 @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x2
 	ands r0, r1
@@ -2228,7 +2228,7 @@ _08121C78:
 	ldr r1, _08121CDC @ =gUnknown_08400A85
 	b _08121CE2
 	.align 2, 0
-_08121CC4: .4byte gUnknown_020239F8
+_08121CC4: .4byte gBattleTypeFlags
 _08121CC8: .4byte gLinkPlayers
 _08121CCC: .4byte 0x02000000
 _08121CD0: .4byte 0x000160cb
