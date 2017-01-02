@@ -70,7 +70,7 @@ sub_80AACC4: @ 80AACC4
 	cmp r0, 0
 	bne _080AACF4
 	bl SetDebugMonForContest
-	ldr r0, _080AACFC @ =gUnknown_0203869A
+	ldr r0, _080AACFC @ =gIsLinkContest
 	ldrb r1, [r0]
 	movs r0, 0x1
 	ands r0, r1
@@ -87,7 +87,7 @@ _080AACF4:
 	bx r0
 	.align 2, 0
 _080AACF8: .4byte gPaletteFade
-_080AACFC: .4byte gUnknown_0203869A
+_080AACFC: .4byte gIsLinkContest
 _080AAD00: .4byte 0x02000000
 _080AAD04: .4byte sub_80AB47C
 	thumb_func_end sub_80AACC4

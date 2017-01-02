@@ -152,7 +152,7 @@ sub_80C8660: @ 80C8660
 	lsrs r0, 24
 	cmp r0, 0x4
 	bne _080C868E
-	ldr r1, _080C869C @ =gUnknown_0203869A
+	ldr r1, _080C869C @ =gIsLinkContest
 	movs r0, 0x1
 	strb r0, [r1]
 	adds r0, r4, 0
@@ -164,7 +164,7 @@ _080C868E:
 	.align 2, 0
 _080C8694: .4byte gReceivedRemoteLinkPlayers
 _080C8698: .4byte gContestPlayerMonIndex
-_080C869C: .4byte gUnknown_0203869A
+_080C869C: .4byte gIsLinkContest
 	thumb_func_end sub_80C8660
 
 	thumb_func_start sub_80C86A0

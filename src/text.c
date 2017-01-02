@@ -180,7 +180,7 @@ EWRAM_DATA u8 gStringVar3[0x100] = {0};
 EWRAM_DATA u8 gStringVar4[0x100] = {0};
 
 extern u16 gBattleTypeFlags;
-extern u8 gUnknown_0203869A;
+extern u8 gIsLinkContest;
 extern u8 gTileBuffer[];
 
 vu16 *const gBGControlRegs[] =
@@ -2908,7 +2908,7 @@ static bool8 PlayerCanInterruptWait(struct Window *win)
         break;
     case 3:
         retVal = FALSE;
-        if (!gUnknown_0203869A)
+        if (!gIsLinkContest)
             retVal = TRUE;
         break;
     case 1:

@@ -370,7 +370,7 @@ _080C4E78:
 	lsrs r1, 24
 	mov r0, r9
 	bl sub_80C4698
-	ldr r0, _080C4EAC @ =gUnknown_0203869A
+	ldr r0, _080C4EAC @ =gIsLinkContest
 	ldrb r1, [r0]
 	movs r0, 0x1
 	ands r0, r1
@@ -388,7 +388,7 @@ _080C4E78:
 _080C4EA0: .4byte gUnknown_02038670
 _080C4EA4: .4byte gSpecialVar_0x8006
 _080C4EA8: .4byte gStringVar1
-_080C4EAC: .4byte gUnknown_0203869A
+_080C4EAC: .4byte gIsLinkContest
 _080C4EB0: .4byte gStringVar2
 _080C4EB4: .4byte gLinkPlayers + 0x8
 _080C4EB8:
@@ -821,7 +821,7 @@ _080C5222:
 	thumb_func_start ScriptGetMultiplayerId
 ScriptGetMultiplayerId: @ 80C5228
 	push {r4,lr}
-	ldr r0, _080C5244 @ =gUnknown_0203869A
+	ldr r0, _080C5244 @ =gIsLinkContest
 	ldrb r1, [r0]
 	movs r0, 0x1
 	ands r0, r1
@@ -834,7 +834,7 @@ ScriptGetMultiplayerId: @ 80C5228
 	strh r0, [r4]
 	b _080C5252
 	.align 2, 0
-_080C5244: .4byte gUnknown_0203869A
+_080C5244: .4byte gIsLinkContest
 _080C5248: .4byte gScriptResult
 _080C524C:
 	ldr r1, _080C5258 @ =gScriptResult
@@ -851,7 +851,7 @@ _080C5258: .4byte gScriptResult
 	thumb_func_start ScriptRandom
 ScriptRandom: @ 80C525C
 	push {r4,lr}
-	ldr r0, _080C5280 @ =gUnknown_0203869A
+	ldr r0, _080C5280 @ =gIsLinkContest
 	ldrb r1, [r0]
 	movs r0, 0x1
 	ands r0, r1
@@ -868,7 +868,7 @@ ScriptRandom: @ 80C525C
 	ldr r4, _080C5290 @ =gScriptResult
 	b _080C529E
 	.align 2, 0
-_080C5280: .4byte gUnknown_0203869A
+_080C5280: .4byte gIsLinkContest
 _080C5284: .4byte gUnknown_03005D28
 _080C5288: .4byte 0x41c64e6d
 _080C528C: .4byte 0x00006073
