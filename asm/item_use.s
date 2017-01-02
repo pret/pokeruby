@@ -948,7 +948,7 @@ ItemUseOutOfBattle_WailmerPail: @ 80C9D30
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl WaterBerryTree
+	bl TryToWaterBerryTree
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

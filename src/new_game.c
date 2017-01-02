@@ -118,7 +118,7 @@ void NewGameInitData(void)
     sub_80BD7A8();
     sub_80BDAB4();
     sub_80BB5B4();
-    sub_80B4A90();
+    ClearBerryTrees();
     gSaveBlock1.money = 3000;
     sub_80AB1B0();
     sub_80530AC();

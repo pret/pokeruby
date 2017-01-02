@@ -66,6 +66,15 @@ enum
     OPTIONS_BATTLE_STYLE_SET
 };
 
+enum
+{
+    BAG_ITEMS = 1,
+    BAG_POKEBALLS,
+    BAG_TMsHMs,
+    BAG_BERRIES,
+    BAG_KEYITEMS
+};
+
 struct Coords16
 {
     s16 x;

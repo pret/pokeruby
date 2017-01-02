@@ -9682,7 +9682,7 @@ sub_80A7CF8: @ 80A7CF8
 	lsrs r4, r0, 24
 	cmp r4, 0x2A
 	bne _080A7D44
-	bl sub_80B4940
+	bl IsEnigmaBerryValid
 	cmp r0, 0x1
 	bne _080A7D44
 	ldr r4, _080A7D34 @ =gSaveBlock1 + 0x317C

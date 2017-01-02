@@ -7366,7 +7366,7 @@ gUnknown_083CC738:: @ 83CC738
 	.include "data/berries.inc"
 
 	.align 2
-gUnknown_083CD780:: @ 83CD780
+gBlankBerryTree:: @ 83CD780
 	.4byte 0, 0
 
 @ 83CD788

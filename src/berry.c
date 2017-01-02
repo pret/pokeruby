@@ -11,36 +11,36 @@
 
 extern struct Berry gBerries[];
 extern u8 BerryTreeScript;
-extern struct BerryTree gUnknown_083CD780;
+extern struct BerryTree gBlankBerryTree;
 extern u16 gScriptItemId;
 extern u16 gScriptLastTalked;
 extern u16 gSpecialVar_0x8004;
 extern u16 gSpecialVar_0x8005;
 extern u16 gSpecialVar_0x8006;
 
-void unref_sub_80B4884(void)
+// unused
+void ClearEnigmaBerries(void)
 {
     CpuFill16(0, &gSaveBlock1.enigmaBerry, sizeof(gSaveBlock1.enigmaBerry));
 }
 
-// setEnigmaBerry
-void sub_80B48A8(u8 *src)
+void SetEnigmaBerry(u8 *src)
 {
-    unsigned int i;
+    u32 i;
     u8 *dest = (u8*)&gSaveBlock1.enigmaBerry;
     
     for (i = 0; i < sizeof(gSaveBlock1.enigmaBerry); i++)
         dest[i] = src[i];
+
     gSaveBlock1.enigmaBerry.berry.description1 = gSaveBlock1.enigmaBerry.description1;
     gSaveBlock1.enigmaBerry.berry.description2 = gSaveBlock1.enigmaBerry.description2;
 }
 
-// checksum
-u32 sub_80B48F8(struct EnigmaBerry *enigmaBerry)
+u32 GetEnigmaBerryChecksum(struct EnigmaBerry *enigmaBerry)
 {
     u8 *description1;
     u8 *description2;
-    unsigned int i;
+    u32 i;
     u32 checksum;
     u8 *dest;
 
@@ -51,7 +51,7 @@ u32 sub_80B48F8(struct EnigmaBerry *enigmaBerry)
 
     dest = (u8*)enigmaBerry;
     checksum = 0;
-    for (i = 0; i < ((int)&gSaveBlock1.enigmaBerry.checksum - (int)&gSaveBlock1.enigmaBerry); i++)
+    for (i = 0; i < ((u32)&gSaveBlock1.enigmaBerry.checksum - (u32)&gSaveBlock1.enigmaBerry); i++)
     {
         checksum += dest[i];
     }
@@ -62,20 +62,20 @@ u32 sub_80B48F8(struct EnigmaBerry *enigmaBerry)
     return checksum;
 }
 
-bool32 sub_80B4940(void)
+bool32 IsEnigmaBerryValid(void)
 {
     if (!gSaveBlock1.enigmaBerry.berry.stageDuration)
         return FALSE;
     if (!gSaveBlock1.enigmaBerry.berry.maxYield)
         return FALSE;
-    if (sub_80B48F8(&gSaveBlock1.enigmaBerry) != gSaveBlock1.enigmaBerry.checksum)
+    if (GetEnigmaBerryChecksum(&gSaveBlock1.enigmaBerry) != gSaveBlock1.enigmaBerry.checksum)
         return FALSE;
     return TRUE;
 }
 
 struct Berry *GetBerryInfo(u8 berry)
 {
-    if (berry == 0x2B && sub_80B4940())
+    if (berry == 0x2B && IsEnigmaBerryValid())
         return &gSaveBlock1.enigmaBerry.berry;
     else
     {
@@ -123,7 +123,7 @@ bool32 IsPlayerFacingPlantedBerryTree(void)
         return FALSE;
 }
 
-u8 WaterBerryTree(void)
+u8 TryToWaterBerryTree(void)
 {
     if (GetFieldObjectScriptPointerForComparison() != &BerryTreeScript)
         return 0;
@@ -131,11 +131,11 @@ u8 WaterBerryTree(void)
         return FieldObjectInteractionWaterBerryTree();
 }
 
-void sub_80B4A90(void)
+void ClearBerryTrees(void)
 {
     int i;
     struct SaveBlock1 *saveBlock1 = &gSaveBlock1;
-    struct BerryTree berryTree = gUnknown_083CD780;
+    struct BerryTree berryTree = gBlankBerryTree;
     
     for (i = 0; i < 128; i++)
         saveBlock1->berryTrees[i] = berryTree;
@@ -164,7 +164,7 @@ bool32 BerryTreeGrow(struct BerryTree *tree)
         tree->berryYield = 0;
         tree->stage = 2;
         if (++tree->regrowthCount == 10)
-            *tree = gUnknown_083CD780;
+            *tree = gBlankBerryTree;
         break;
     }
     return TRUE;
@@ -183,7 +183,7 @@ void BerryTreeTimeUpdate(int time)
         {
             if (time >= GetStageDurationByBerryType(tree->berry) * 71)
             {
-                *tree = gUnknown_083CD780;
+                *tree = gBlankBerryTree;
             }
             else
             {
@@ -212,7 +212,7 @@ void PlantBerryTree(u8 id, u8 berry, u8 stage, bool8 sparkle)
 {
     struct BerryTree *tree = GetBerryTreeInfo(id);
     
-    *tree = gUnknown_083CD780;
+    *tree = gBlankBerryTree;
     tree->berry = berry;
     tree->secondsUntilNextStage = GetStageDurationByBerryType(berry);
     tree->stage = stage;
@@ -229,7 +229,7 @@ void PlantBerryTree(u8 id, u8 berry, u8 stage, bool8 sparkle)
 
 void RemoveBerryTree(u8 id)
 {
-    gSaveBlock1.berryTrees[id] = gUnknown_083CD780;
+    gSaveBlock1.berryTrees[id] = gBlankBerryTree;
 }
 
 u8 GetBerryTypeByBerryTreeId(u8 id)
@@ -387,7 +387,7 @@ void FieldObjectInteractionRemoveBerryTree(void)
 
 u8 PlayerHasBerries(void)
 {
-    return IsBagPocketNonEmpty(4);
+    return IsBagPocketNonEmpty(BAG_BERRIES);
 }
 
 void ResetBerryTreeSparkleFlags(void)
