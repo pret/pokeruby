@@ -1184,7 +1184,7 @@ _08046D5A:
 	ands r0, r1
 	cmp r0, 0
 	beq _08046DAE
-	ldr r0, _08046D9C @ =gUnknown_020239F8
+	ldr r0, _08046D9C @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x40
 	ands r0, r1
@@ -1201,7 +1201,7 @@ _08046D5A:
 _08046D90: .4byte gUnknown_02024A6A
 _08046D94: .4byte gPlayerParty
 _08046D98: .4byte 0x02017840
-_08046D9C: .4byte gUnknown_020239F8
+_08046D9C: .4byte gBattleTypeFlags
 _08046DA0: .4byte gMPlay_BGM
 _08046DA4:
 	ldr r0, _08046DC8 @ =gMPlay_BGM

@@ -1031,7 +1031,7 @@ sub_80834E4: @ 80834E4
 	ldr r2, _08083504 @ =0x00001133
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r1, _08083508 @ =gUnknown_020239F8
+	ldr r1, _08083508 @ =gBattleTypeFlags
 	movs r0, 0
 	strh r0, [r1]
 	movs r0, 0x2
@@ -1042,7 +1042,7 @@ sub_80834E4: @ 80834E4
 	.align 2, 0
 _08083500: .4byte gLinkType
 _08083504: .4byte 0x00001133
-_08083508: .4byte gUnknown_020239F8
+_08083508: .4byte gBattleTypeFlags
 	thumb_func_end sub_80834E4
 
 	thumb_func_start sub_808350C
@@ -1055,7 +1055,7 @@ sub_808350C: @ 808350C
 	ldr r3, _08083534 @ =0x00003311
 	adds r0, r3, 0
 	strh r0, [r1]
-	ldr r0, _08083538 @ =gUnknown_020239F8
+	ldr r0, _08083538 @ =gBattleTypeFlags
 	strh r2, [r0]
 	movs r0, 0x2
 	movs r1, 0x4
@@ -1066,7 +1066,7 @@ sub_808350C: @ 808350C
 _0808352C: .4byte gScriptResult
 _08083530: .4byte gLinkType
 _08083534: .4byte 0x00003311
-_08083538: .4byte gUnknown_020239F8
+_08083538: .4byte gBattleTypeFlags
 	thumb_func_end sub_808350C
 
 	thumb_func_start sub_808353C
@@ -1185,7 +1185,7 @@ sub_8083614: @ 8083614
 	ldr r2, _08083634 @ =0x00004411
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r1, _08083638 @ =gUnknown_020239F8
+	ldr r1, _08083638 @ =gBattleTypeFlags
 	movs r0, 0
 	strh r0, [r1]
 	movs r0, 0x2
@@ -1196,7 +1196,7 @@ sub_8083614: @ 8083614
 	.align 2, 0
 _08083630: .4byte gLinkType
 _08083634: .4byte 0x00004411
-_08083638: .4byte gUnknown_020239F8
+_08083638: .4byte gBattleTypeFlags
 	thumb_func_end sub_8083614
 
 	thumb_func_start sub_808363C
@@ -1206,7 +1206,7 @@ sub_808363C: @ 808363C
 	ldr r2, _0808365C @ =0x00006601
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r1, _08083660 @ =gUnknown_020239F8
+	ldr r1, _08083660 @ =gBattleTypeFlags
 	movs r0, 0
 	strh r0, [r1]
 	movs r0, 0x4
@@ -1217,7 +1217,7 @@ sub_808363C: @ 808363C
 	.align 2, 0
 _08083658: .4byte gLinkType
 _0808365C: .4byte 0x00006601
-_08083660: .4byte gUnknown_020239F8
+_08083660: .4byte gBattleTypeFlags
 	thumb_func_end sub_808363C
 
 	thumb_func_start sub_8083664
@@ -1562,20 +1562,20 @@ _08083908:
 	beq _08083924
 	b _0808392E
 _0808390E:
-	ldr r1, _08083914 @ =gUnknown_020239F8
+	ldr r1, _08083914 @ =gBattleTypeFlags
 	movs r0, 0xA
 	b _0808392C
 	.align 2, 0
-_08083914: .4byte gUnknown_020239F8
+_08083914: .4byte gBattleTypeFlags
 _08083918:
-	ldr r1, _08083920 @ =gUnknown_020239F8
+	ldr r1, _08083920 @ =gBattleTypeFlags
 	movs r0, 0xB
 	b _0808392C
 	.align 2, 0
-_08083920: .4byte gUnknown_020239F8
+_08083920: .4byte gBattleTypeFlags
 _08083924:
 	bl ReducePlayerPartyToThree
-	ldr r1, _08083948 @ =gUnknown_020239F8
+	ldr r1, _08083948 @ =gBattleTypeFlags
 	movs r0, 0x4B
 _0808392C:
 	strh r0, [r1]
@@ -1592,7 +1592,7 @@ _08083940:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08083948: .4byte gUnknown_020239F8
+_08083948: .4byte gBattleTypeFlags
 _0808394C: .4byte sub_800E7C4
 _08083950: .4byte gMain
 _08083954: .4byte sub_8083958

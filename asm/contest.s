@@ -876,7 +876,7 @@ _080AB8CC:
 	strb r3, [r1, 0x2]
 	movs r2, 0x2
 	strb r2, [r1, 0x3]
-	ldr r0, _080AB92C @ =gUnknown_020239F8
+	ldr r0, _080AB92C @ =gBattleTypeFlags
 	strh r4, [r0]
 	ldr r4, _080AB930 @ =gUnknown_02024C07
 	strb r2, [r4]
@@ -892,7 +892,7 @@ _080AB8CC:
 	.align 2, 0
 _080AB924: .4byte 0x02019204
 _080AB928: .4byte gUnknown_02024A72
-_080AB92C: .4byte gUnknown_020239F8
+_080AB92C: .4byte gBattleTypeFlags
 _080AB930: .4byte gUnknown_02024C07
 _080AB934: .4byte gUnknown_02024C08
 _080AB938: .4byte gUnknown_02024BE0

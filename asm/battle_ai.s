@@ -1649,7 +1649,7 @@ _08109598: .4byte gUnknown_02024CA8
 	thumb_func_start BattleAICmd_unk_4C
 BattleAICmd_unk_4C: @ 810959C
 	ldr r2, _081095B4 @ =0x02016800
-	ldr r0, _081095B8 @ =gUnknown_020239F8
+	ldr r0, _081095B8 @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x1
 	ands r0, r1
@@ -1661,7 +1661,7 @@ BattleAICmd_unk_4C: @ 810959C
 	bx lr
 	.align 2, 0
 _081095B4: .4byte 0x02016800
-_081095B8: .4byte gUnknown_020239F8
+_081095B8: .4byte gBattleTypeFlags
 _081095BC: .4byte gAIScriptPtr
 	thumb_func_end BattleAICmd_unk_4C
 

@@ -24,7 +24,7 @@ gUnknown_020238C8: @ 20238C8
 gUnknown_020238CC: @ 20238CC
 	.space 0x12C
 
-gUnknown_020239F8: @ 20239F8
+gBattleTypeFlags: @ 20239F8
 	.space 0x4
 
 gUnknown_020239FC: @ 20239FC

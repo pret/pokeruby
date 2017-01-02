@@ -71,7 +71,7 @@ sub_806AF4C: @ 806AF4C
 	lsrs r3, 24
 	cmp r1, 0xFF
 	beq _0806AF64
-	ldr r0, _0806AF84 @ =gUnknown_020239F8
+	ldr r0, _0806AF84 @ =gBattleTypeFlags
 	strh r1, [r0]
 _0806AF64:
 	ldr r0, _0806AF88 @ =0x0201b000
@@ -90,7 +90,7 @@ _0806AF64:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806AF84: .4byte gUnknown_020239F8
+_0806AF84: .4byte gBattleTypeFlags
 _0806AF88: .4byte 0x0201b000
 	thumb_func_end sub_806AF4C
 
@@ -777,7 +777,7 @@ _0806B524: .4byte 0x0000ffff
 	thumb_func_start IsLinkDoubleBattle
 IsLinkDoubleBattle: @ 806B528
 	push {lr}
-	ldr r0, _0806B53C @ =gUnknown_020239F8
+	ldr r0, _0806B53C @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x4B
 	ands r0, r1
@@ -786,7 +786,7 @@ IsLinkDoubleBattle: @ 806B528
 	movs r0, 0
 	b _0806B542
 	.align 2, 0
-_0806B53C: .4byte gUnknown_020239F8
+_0806B53C: .4byte gBattleTypeFlags
 _0806B540:
 	movs r0, 0x1
 _0806B542:
