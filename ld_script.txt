@@ -113,12 +113,17 @@ SECTIONS {
         src/wild_encounter.o(.text);
         src/field_effect.o(.text);
         asm/rom_80859BC.o(.text);
+        asm/unknown_task.o(.text);
+        asm/pokemon_menu.o(.text);
         src/option_menu.o(.text);
         src/pokedex.o(.text);
         asm/pokedex.o(.text);
         src/trainer_card.o(.text);
         src/save_menu_util.o(.text);
         asm/rom_8094928.o(.text);
+        asm/pokemon_icon.o(.text);
+        asm/pokemon_summary_screen.o(.text);
+        asm/script_movement.o(.text);
         asm/fldeff_cut.o(.text);
         asm/mail_data.o(.text);
         asm/map_name_popup.o(.text);
@@ -213,7 +218,12 @@ SECTIONS {
         asm/braille_puzzles.o(.text);
         asm/pokeblock_feed.o(.text);
         src/clear_save_data_menu.o(.text);
-        asm/rom_8148B8C.o(.text);
+        asm/intro_credits_graphics.o(.text);
+        asm/evolution_graphics.o(.text);
+        asm/bard_music.o(.text);
+        asm/fldeff_teleport.o(.text);
+        asm/unknown_debug_menu.o(.text);
+        asm/name_string_util.o(.text);
         src/menu_cursor.o(.text);
     } =0
 

@@ -455,7 +455,7 @@ u8 intro_create_brendan_sprite(/*TODO: arg types*/);
 u8 intro_create_may_sprite(/*TODO: arg types*/);
 u8 intro_create_latios_sprite(/*TODO: arg types*/);
 u8 intro_create_latias_sprite(/*TODO: arg types*/);
-void sub_814A568(u8*);
+void SanitizeNameString(u8*);
 
 // src/agb_flash.o
 u16 ReadFlashId(void);

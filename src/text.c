@@ -5,6 +5,7 @@
 #include "songs.h"
 #include "palette.h"
 #include "sound.h"
+#include "battle.h"
 
 enum
 {
@@ -179,7 +180,7 @@ EWRAM_DATA u8 gStringVar3[0x100] = {0};
 EWRAM_DATA u8 gStringVar4[0x100] = {0};
 
 extern u16 gBattleTypeFlags;
-extern u8 gUnknown_0203869A;
+extern u8 gIsLinkContest;
 extern u8 gTileBuffer[];
 
 vu16 *const gBGControlRegs[] =
@@ -2906,12 +2907,10 @@ static bool8 PlayerCanInterruptWait(struct Window *win)
         retVal = FALSE;
         break;
     case 3:
-        retVal = FALSE;
-        if (!gUnknown_0203869A)
-            retVal = TRUE;
+        retVal = gIsLinkContest ? FALSE : TRUE;
         break;
     case 1:
-        retVal &= ~(gBattleTypeFlags >> 1);
+        retVal = (gBattleTypeFlags & BATTLE_TYPE_LINK) ? FALSE : TRUE;
         break;
     }
 

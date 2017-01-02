@@ -304,7 +304,7 @@ _08042B08:
 	adds r1, r6, 0
 	bl StringCopy
 	adds r0, r4, 0
-	bl sub_814A568
+	bl SanitizeNameString
 	movs r0, 0x1
 	b _08042B42
 	.align 2, 0

@@ -631,7 +631,7 @@ _0800D8F4:
 	.4byte _0800DA84
 _0800D918:
 	ldr r4, _0800D954 @ =gBattleTerrainTable
-	ldr r5, _0800D958 @ =gUnknown_0300428C
+	ldr r5, _0800D958 @ =gBattleTerrain
 	ldrb r1, [r5]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -659,7 +659,7 @@ _0800D918:
 	b _0800DA66
 	.align 2, 0
 _0800D954: .4byte gBattleTerrainTable
-_0800D958: .4byte gUnknown_0300428C
+_0800D958: .4byte gBattleTerrain
 _0800D95C: .4byte 0x06008000
 _0800D960: .4byte 0x0600d000
 _0800D964:
@@ -1861,7 +1861,7 @@ _0800E3A0:
 	cmp r0, 0
 	bne _0800E3EC
 	ldr r4, _0800E3DC @ =gBattleTerrainTable
-	ldr r5, _0800E3E0 @ =gUnknown_0300428C
+	ldr r5, _0800E3E0 @ =gBattleTerrain
 	ldrb r1, [r5]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -1885,7 +1885,7 @@ _0800E3D2:
 	b _0800E3FC
 	.align 2, 0
 _0800E3DC: .4byte gBattleTerrainTable
-_0800E3E0: .4byte gUnknown_0300428C
+_0800E3E0: .4byte gBattleTerrain
 _0800E3E4: .4byte 0x06004000
 _0800E3E8: .4byte 0x0600e000
 _0800E3EC:
@@ -2039,7 +2039,7 @@ _0800E50C:
 	.4byte _0800E57C
 _0800E530:
 	ldr r2, _0800E544 @ =gBattleTerrainTable
-	ldr r0, _0800E548 @ =gUnknown_0300428C
+	ldr r0, _0800E548 @ =gBattleTerrain
 	ldrb r1, [r0]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -2049,7 +2049,7 @@ _0800E530:
 	b _0800E57E
 	.align 2, 0
 _0800E544: .4byte gBattleTerrainTable
-_0800E548: .4byte gUnknown_0300428C
+_0800E548: .4byte gBattleTerrain
 _0800E54C:
 	ldr r0, _0800E550 @ =gBattleTerrainTiles_Stadium
 	b _0800E57E
@@ -2170,7 +2170,7 @@ _0800E618:
 	.4byte _0800E688
 _0800E63C:
 	ldr r2, _0800E650 @ =gBattleTerrainTable
-	ldr r0, _0800E654 @ =gUnknown_0300428C
+	ldr r0, _0800E654 @ =gBattleTerrain
 	ldrb r1, [r0]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -2181,7 +2181,7 @@ _0800E63C:
 	b _0800E68A
 	.align 2, 0
 _0800E650: .4byte gBattleTerrainTable
-_0800E654: .4byte gUnknown_0300428C
+_0800E654: .4byte gBattleTerrain
 _0800E658:
 	ldr r0, _0800E65C @ =gBattleTerrainTilemap_Stadium
 	b _0800E68A
@@ -2305,7 +2305,7 @@ _0800E72C:
 	.4byte _0800E7A4
 _0800E750:
 	ldr r2, _0800E764 @ =gBattleTerrainTable
-	ldr r0, _0800E768 @ =gUnknown_0300428C
+	ldr r0, _0800E768 @ =gBattleTerrain
 	ldrb r1, [r0]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -2316,7 +2316,7 @@ _0800E750:
 	b _0800E7A6
 	.align 2, 0
 _0800E764: .4byte gBattleTerrainTable
-_0800E768: .4byte gUnknown_0300428C
+_0800E768: .4byte gBattleTerrain
 _0800E76C:
 	ldr r0, _0800E770 @ =gBattleTerrainPalette_BuildingGym
 	b _0800E7A6
@@ -2488,8 +2488,8 @@ _0800E868:
 	strh r1, [r0]
 	ldr r0, _0800E94C @ =gUnknown_030041B8
 	strh r1, [r0]
-	bl sub_8081D3C
-	ldr r1, _0800E950 @ =gUnknown_0300428C
+	bl GetBattleTerrain
+	ldr r1, _0800E950 @ =gBattleTerrain
 	strb r0, [r1]
 	ldr r0, _0800E954 @ =gUnknown_03004210
 	adds r1, r4, 0
@@ -2539,7 +2539,7 @@ _0800E940: .4byte gUnknown_03004288
 _0800E944: .4byte gUnknown_03004280
 _0800E948: .4byte gUnknown_030041B0
 _0800E94C: .4byte gUnknown_030041B8
-_0800E950: .4byte gUnknown_0300428C
+_0800E950: .4byte gBattleTerrain
 _0800E954: .4byte gUnknown_03004210
 _0800E958: .4byte gUnknown_030041D0
 _0800E95C: .4byte gWindowConfig_81E71D0
@@ -3438,7 +3438,7 @@ _0800F03E:
 	beq _0800F0D4
 	adds r0, r7, 0
 	movs r1, 0
-	bl sub_814A518
+	bl PadNameString
 _0800F0D4:
 	adds r7, 0x20
 	movs r0, 0x1
@@ -7811,7 +7811,7 @@ bc_load_battlefield: @ 8011334
 	bl battle_get_side_with_given_state
 	ldr r4, _08011370 @ =gUnknown_02024A60
 	strb r0, [r4]
-	ldr r0, _08011374 @ =gUnknown_0300428C
+	ldr r0, _08011374 @ =gBattleTerrain
 	ldrb r1, [r0]
 	movs r0, 0
 	bl dp01_build_cmdbuf_x2E_a
@@ -7830,7 +7830,7 @@ _08011364:
 	.align 2, 0
 _0801136C: .4byte gUnknown_02024A64
 _08011370: .4byte gUnknown_02024A60
-_08011374: .4byte gUnknown_0300428C
+_08011374: .4byte gBattleTerrain
 _08011378: .4byte gUnknown_030042D4
 _0801137C: .4byte sub_8011384
 _08011380: .4byte gUnknown_02024D1E
@@ -56507,7 +56507,7 @@ atkCC_callterrainattack: @ 8029F50
 	str r0, [r2]
 	ldr r4, _08029FA8 @ =gUnknown_02024BE6
 	ldr r1, _08029FAC @ =gNaturePowerMoves
-	ldr r0, _08029FB0 @ =gUnknown_0300428C
+	ldr r0, _08029FB0 @ =gBattleTerrain
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r1
@@ -56542,7 +56542,7 @@ _08029FA0: .4byte gUnknown_02024C6C
 _08029FA4: .4byte 0xfffffbff
 _08029FA8: .4byte gUnknown_02024BE6
 _08029FAC: .4byte gNaturePowerMoves
-_08029FB0: .4byte gUnknown_0300428C
+_08029FB0: .4byte gBattleTerrain
 _08029FB4: .4byte gUnknown_02024C08
 _08029FB8: .4byte gUnknown_081D6BBC
 _08029FBC: .4byte gBattleMoves
@@ -58470,7 +58470,7 @@ _0802AEAA:
 	thumb_func_start sub_802AEB0
 sub_802AEB0: @ 802AEB0
 	push {lr}
-	ldr r0, _0802AEC4 @ =gUnknown_0300428C
+	ldr r0, _0802AEC4 @ =gBattleTerrain
 	ldrb r0, [r0]
 	cmp r0, 0x7
 	bhi _0802AF4C
@@ -58480,7 +58480,7 @@ sub_802AEB0: @ 802AEB0
 	ldr r0, [r0]
 	mov pc, r0
 	.align 2, 0
-_0802AEC4: .4byte gUnknown_0300428C
+_0802AEC4: .4byte gBattleTerrain
 _0802AEC8: .4byte _0802AECC
 	.align 2, 0
 _0802AECC:
@@ -59050,7 +59050,7 @@ atkEB_settypetoterrain: @ 802B330
 	adds r0, r3
 	mov r12, r0
 	ldr r5, _0802B3A8 @ =gTerrainToType
-	ldr r4, _0802B3AC @ =gUnknown_0300428C
+	ldr r4, _0802B3AC @ =gBattleTerrain
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r2, [r0]
@@ -59095,7 +59095,7 @@ atkEB_settypetoterrain: @ 802B330
 _0802B3A0: .4byte gBattleMons
 _0802B3A4: .4byte gUnknown_02024C07
 _0802B3A8: .4byte gTerrainToType
-_0802B3AC: .4byte gUnknown_0300428C
+_0802B3AC: .4byte gBattleTerrain
 _0802B3B0: .4byte gUnknown_030041C0
 _0802B3B4: .4byte gUnknown_02024C10
 _0802B3B8:

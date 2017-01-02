@@ -154,42 +154,42 @@ void task_add_01_battle_start(u8 transition, u16 song)
 void CheckForSafariZoneAndProceed(void)
 {
     if (GetSafariZoneFlag())
-        sub_8081AA4();
+        StartBattle_Safari();
     else
-        sub_8081A18();
+        StartBattle_StandardWild();
 }
 
-void sub_8081A18(void)
+void StartBattle_StandardWild(void)
 {
     ScriptContext2_Enable();
     player_bitmagic();
     sub_80597F4();
-    gMain.field_8 = sub_8081C8C;
+    gMain.field_8 = HandleWildBattleEnd;
     gBattleTypeFlags = 0;
     task_add_01_battle_start(GetWildBattleTransition(), 0);
     sav12_xor_increment(7);
     sav12_xor_increment(8);
 }
 
-void sub_8081A5C(void)
+void StartBattle_Roamer(void)
 {
     ScriptContext2_Enable();
     player_bitmagic();
     sub_80597F4();
-    gMain.field_8 = sub_8081C8C;
-    gBattleTypeFlags = 1024;
+    gMain.field_8 = HandleWildBattleEnd;
+    gBattleTypeFlags = BATTLE_TYPE_ROAMER;
     task_add_01_battle_start(GetWildBattleTransition(), 0);
     sav12_xor_increment(7);
     sav12_xor_increment(8);
 }
 
-void sub_8081AA4(void)
+void StartBattle_Safari(void)
 {
     ScriptContext2_Enable();
     player_bitmagic();
     sub_80597F4();
     gMain.field_8 = sub_80C824C;
-    gBattleTypeFlags = 128;
+    gBattleTypeFlags = BATTLE_TYPE_SAFARI;
     task_add_01_battle_start(GetWildBattleTransition(), 0);
 }
 
@@ -201,50 +201,50 @@ void task_add_01_battle_start_with_music_and_stats(void)
 }
 
 //Initiates battle where Wally catches Ralts
-void sub_8081AFC(void)
+void StartBattle_WallyTutorial(void)
 {
     CreateMaleMon(&gEnemyParty[0], SPECIES_RALTS, 5);
     ScriptContext2_Enable();
     gMain.field_8 = c2_exit_to_overworld_1_continue_scripts_restart_music;
-    gBattleTypeFlags = 512;
+    gBattleTypeFlags = BATTLE_TYPE_WALLY_TUTORIAL;
     task_add_01_battle_start(8, 0);
 }
 
-void sub_8081B3C(void)
+void StartBattle_ScriptedWild(void)
 {
     ScriptContext2_Enable();
-    gMain.field_8 = sub_8081CEC;
+    gMain.field_8 = HandleScriptedWildBattleEnd;
     gBattleTypeFlags = 0;
     task_add_01_battle_start(GetWildBattleTransition(), 0);
     sav12_xor_increment(7);
     sav12_xor_increment(8);
 }
 
-void sub_8081B78(void)
+void StartBattle_SouthernIsland(void)
 {
     ScriptContext2_Enable();
-    gMain.field_8 = sub_8081CEC;
-    gBattleTypeFlags = 0x2000;
+    gMain.field_8 = HandleScriptedWildBattleEnd;
+    gBattleTypeFlags = BATTLE_TYPE_LEGENDARY;
     task_add_01_battle_start(GetWildBattleTransition(), 0);
     sav12_xor_increment(7);
     sav12_xor_increment(8);
 }
 
-void sub_8081BB8(void)
+void StartBattle_Rayquaza(void)
 {
     ScriptContext2_Enable();
-    gMain.field_8 = sub_8081CEC;
-    gBattleTypeFlags = 0x2000;
+    gMain.field_8 = HandleScriptedWildBattleEnd;
+    gBattleTypeFlags = BATTLE_TYPE_LEGENDARY;
     task_add_01_battle_start(0, BGM_BATTLE34);
     sav12_xor_increment(7);
     sav12_xor_increment(8);
 }
 
-void sub_8081BF8(void)
+void StartBattle_GroudonKyogre(void)
 {
     ScriptContext2_Enable();
-    gMain.field_8 = sub_8081CEC;
-    gBattleTypeFlags = 12288;
+    gMain.field_8 = HandleScriptedWildBattleEnd;
+    gBattleTypeFlags = BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_KYOGRE_GROUDON;
     if (gGameVersion == 2)
         task_add_01_battle_start(0xB, BGM_BATTLE34); // KYOGRE
     else
@@ -253,17 +253,17 @@ void sub_8081BF8(void)
     sav12_xor_increment(8);
 }
 
-void sub_8081C50(void)
+void StartBattle_Regi(void)
 {
     ScriptContext2_Enable();
-    gMain.field_8 = sub_8081CEC;
-    gBattleTypeFlags = 24576;
+    gMain.field_8 = HandleScriptedWildBattleEnd;
+    gBattleTypeFlags = BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_REGI;
     task_add_01_battle_start(0xA, BGM_BATTLE36);
     sav12_xor_increment(7);
     sav12_xor_increment(8);
 }
 
-void sub_8081C8C(void)
+void HandleWildBattleEnd(void)
 {
     CpuFill16(0, (void *)BG_PLTT, BG_PLTT_SIZE);
     ResetOamRange(0, 128);
@@ -279,7 +279,7 @@ void sub_8081C8C(void)
     }
 }
 
-void sub_8081CEC(void)
+void HandleScriptedWildBattleEnd(void)
 {
     CpuFill16(0, (void *)BG_PLTT, BG_PLTT_SIZE);
     ResetOamRange(0, 128);
@@ -290,7 +290,7 @@ void sub_8081CEC(void)
         SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
 }
 
-s8 sub_8081D3C(void)
+s8 GetBattleTerrain(void)
 {
     u16 tileBehavior;
     s16 x, y;
@@ -346,7 +346,7 @@ s8 sub_8081D3C(void)
     return 9;
 }
 
-s8 sub_8081E90(void)
+s8 GetBattleTransitionTypeByMap(void)
 {
     u8 flashUsed;
     u16 tileBehavior;
@@ -436,7 +436,7 @@ u8 GetSumOfEnemyPartyLevel(u16 trainerNum, u8 numMons)
 
 u8 GetWildBattleTransition(void)
 {
-    u8 flashVar = sub_8081E90();
+    u8 flashVar = GetBattleTransitionTypeByMap();
     u8 level = GetMonData(&gEnemyParty[0], MON_DATA_LEVEL);
 
     if (level < (u8)GetSumOfPartyMonLevel(1)) // is wild mon level than the player's mon level?
@@ -478,7 +478,7 @@ u8 GetTrainerBattleTransition(void)
     else
         partyCount = 1;
 
-    flashVar = sub_8081E90();
+    flashVar = GetBattleTransitionTypeByMap();
     level = GetSumOfEnemyPartyLevel(gTrainerBattleOpponent, partyCount);
 
     if (level < (u8)GetSumOfPartyMonLevel(partyCount)) // is wild mon level than the player's mon level?
@@ -497,13 +497,13 @@ u8 GetBattleTowerBattleTransition(void)
         return 3;
 }
 
-void sub_8082168(void)
+void ChooseStarter(void)
 {
     SetMainCallback2(CB2_ChooseStarter);
-    gMain.field_8 = sub_8082188;
+    gMain.field_8 = CB2_GiveStarter;
 }
 
-void sub_8082188(void)
+void CB2_GiveStarter(void)
 {
     u16 starterPoke;
 
@@ -512,19 +512,19 @@ void sub_8082188(void)
     ScriptGiveMon(starterPoke, 5, 0, 0, 0, 0);
     ResetTasks();
     sub_80408BC();
-    SetMainCallback2(sub_80821D8);
+    SetMainCallback2(CB2_StartFirstBattle);
     sub_811AAD8(0);
 }
 
-void sub_80821D8(void)
+void CB2_StartFirstBattle(void)
 {
     UpdatePaletteFade();
     RunTasks();
 
     if (sub_811AAE8() == TRUE)
     {
-        gBattleTypeFlags = 16;
-        gMain.field_8 = sub_8082228;
+        gBattleTypeFlags = BATTLE_TYPE_FIRST_BATTLE;
+        gMain.field_8 = HandleFirstBattleEnd;
         SetMainCallback2(sub_800E7C4);
         prev_quest_postbuffer_cursor_backup_reset();
         overworld_poison_timer_set();
@@ -533,7 +533,7 @@ void sub_80821D8(void)
     }
 }
 
-void sub_8082228(void)
+void HandleFirstBattleEnd(void)
 {
     sav1_reset_battle_music_maybe();
     SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
@@ -733,7 +733,7 @@ void trainer_flag_clear(u16 flag)
 
 void sub_80825E4(void)
 {
-    gBattleTypeFlags = 8;
+    gBattleTypeFlags = BATTLE_TYPE_TRAINER;
     gMain.field_8 = sub_808260C;
     task_add_01_battle_start_with_music_and_stats();
     ScriptContext1_Stop();
@@ -776,7 +776,7 @@ void do_choose_name_or_words_screen(void)
 
 void sub_80826B0(void)
 {
-    gBattleTypeFlags = 8;
+    gBattleTypeFlags = BATTLE_TYPE_TRAINER;
     gMain.field_8 = do_choose_name_or_words_screen;
     task_add_01_battle_start_with_music_and_stats();
     ScriptContext1_Stop();

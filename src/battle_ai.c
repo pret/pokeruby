@@ -101,19 +101,22 @@ void sub_81070D4(void)
     s32 i;
     u8 *data = (u8 *)&unk_2016A00;
     
-    for(i = 0; (u32)i < 48; i++)
+    for (i = 0; (u32)i < 48; i++)
         data[i] = 0;
-    if((gBattleTypeFlags & 8) && gTrainerBattleOpponent != 0x400 && !(gBattleTypeFlags & 0x982))
+	if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+     && gTrainerBattleOpponent != 0x400
+     && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_SAFARI | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_EREADER_TRAINER)))
     {
-        for(i = 0; i < 4; i++)
+        for (i = 0; i < 4; i++)
         {
-            if(gTrainers[gTrainerBattleOpponent].items[i] != 0)
+            if (gTrainers[gTrainerBattleOpponent].items[i] != 0)
             {
                 unk_2016A00.items[unk_2016A00.unk8] = gTrainers[gTrainerBattleOpponent].items[i];
                 unk_2016A00.unk8++;
             }
         }
     }
+
     sub_810715C();
 }
 
@@ -140,7 +143,7 @@ void sub_810715C(void)
     unk_2016C00.unk20 = 0;
     gUnknown_02024C07 = gUnknown_02024A60;
     
-    if(gBattleTypeFlags & 1)
+    if(gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
         gUnknown_02024C08 = Random() & 2;
         
@@ -149,12 +152,12 @@ void sub_810715C(void)
     }
     else
         gUnknown_02024C08 = gUnknown_02024A60 ^ 1;
-    
-    if(gBattleTypeFlags & 0x80)
+
+    if(gBattleTypeFlags & BATTLE_TYPE_SAFARI)
         unk_2016800.aiFlags = 0x40000000;
-    else if(gBattleTypeFlags & 0x400)
+    else if(gBattleTypeFlags & BATTLE_TYPE_ROAMER)
         unk_2016800.aiFlags = 0x20000000;
-    else if(gBattleTypeFlags & 0x10)
+    else if(gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
         unk_2016800.aiFlags = 0x80000000;
     else
         unk_2016800.aiFlags = gTrainers[gTrainerBattleOpponent].aiFlags;

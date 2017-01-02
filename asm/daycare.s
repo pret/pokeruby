@@ -194,7 +194,7 @@ sub_80413C8: @ 80413C8
 	bl StringCopy
 	adds r0, r6, 0
 	movs r1, 0xFC
-	bl sub_814A518
+	bl PadNameString
 	adds r6, 0x8
 	adds r0, r7, 0
 	adds r1, r6, 0

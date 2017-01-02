@@ -442,7 +442,7 @@ bool8 StandardWildEncounter(u16 a, u16 b)
                             roamer = &gSaveBlock1.roamer;
                             if (RepelCheck(roamer->level))
                             {
-                                sub_8081A5C();
+                                StartBattle_Roamer();
                                 return 1;
                             }
                         }
@@ -476,7 +476,7 @@ bool8 StandardWildEncounter(u16 a, u16 b)
                             roamer = &gSaveBlock1.roamer;
                             if (RepelCheck(roamer->level))
                             {
-                                sub_8081A5C();
+                                StartBattle_Roamer();
                                 return 1;
                             }
                         }
@@ -541,7 +541,7 @@ bool8 SweetScentWildEncounter(void)
                 return FALSE;
             if (sub_81344CC() == TRUE)
             {
-                sub_8081A5C();
+                StartBattle_Roamer();
                 return TRUE;
             }
             if (DoMassOutbreakEncounterTest() == TRUE)
@@ -558,7 +558,7 @@ bool8 SweetScentWildEncounter(void)
                 return FALSE;
             if (sub_81344CC() == TRUE)
             {
-                sub_8081A5C();
+                StartBattle_Roamer();
                 return TRUE;
             }
             GenerateWildMon(wildPokemonInfo, 1, FALSE);

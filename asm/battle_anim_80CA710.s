@@ -50345,7 +50345,7 @@ sub_80E2B74: @ 80E2B74
 	ldrsh r0, [r0, r1]
 	bl sub_80E1DC4
 	adds r2, r0, 0
-	ldr r0, _080E2B9C @ =gUnknown_0300428C
+	ldr r0, _080E2B9C @ =gBattleTerrain
 	ldrb r0, [r0]
 	cmp r0, 0x9
 	bhi _080E2C4A
@@ -50356,7 +50356,7 @@ sub_80E2B74: @ 80E2B74
 	mov pc, r0
 	.align 2, 0
 _080E2B98: .4byte gBattleAnimArgs
-_080E2B9C: .4byte gUnknown_0300428C
+_080E2B9C: .4byte gBattleTerrain
 _080E2BA0: .4byte _080E2BA4
 	.align 2, 0
 _080E2BA4:
@@ -52936,7 +52936,7 @@ sub_80E4008: @ 80E4008
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080E4020 @ =gBattleAnimArgs
-	ldr r1, _080E4024 @ =gUnknown_0300428C
+	ldr r1, _080E4024 @ =gBattleTerrain
 	ldrb r1, [r1]
 	strh r1, [r2]
 	bl move_anim_task_del
@@ -52944,7 +52944,7 @@ sub_80E4008: @ 80E4008
 	bx r0
 	.align 2, 0
 _080E4020: .4byte gBattleAnimArgs
-_080E4024: .4byte gUnknown_0300428C
+_080E4024: .4byte gBattleTerrain
 	thumb_func_end sub_80E4008
 
 	thumb_func_start sub_80E4028

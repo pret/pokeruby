@@ -1598,7 +1598,7 @@ bool8 ScrCmd_setwildbattle(struct ScriptContext *ctx)
 
 bool8 ScrCmd_dowildbattle(struct ScriptContext *ctx)
 {
-    sub_8081B3C();
+    StartBattle_ScriptedWild();
     ScriptContext1_Stop();
     return TRUE;
 }

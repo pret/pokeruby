@@ -156,8 +156,8 @@ gSpecials::
 	.4byte sub_8053E90
 	.4byte sub_806A460
 	.4byte sub_810D6B8
-	.4byte sub_8082168
-	.4byte sub_8081AFC
+	.4byte ChooseStarter
+	.4byte StartBattle_WallyTutorial
 	.4byte sub_80BF9F8
 	.4byte sub_80F9A0C
 	.4byte sub_810CA00
@@ -311,9 +311,9 @@ gSpecials::
 	.4byte IsPokerusInParty
 	.4byte sub_8069D78
 	.4byte sub_810F758
-	.4byte sub_8081BF8
-	.4byte sub_8081BB8
-	.4byte sub_8081C50
+	.4byte StartBattle_GroudonKyogre
+	.4byte StartBattle_Rayquaza
+	.4byte StartBattle_Regi
 	.4byte sub_8082524
 	.4byte DoSealedChamberShakingEffect2
 	.4byte sub_810F828
@@ -323,7 +323,7 @@ gSpecials::
 	.4byte ShowContestEntryMonPic
 	.4byte sub_80C5164
 	.4byte sub_8134AB4
-	.4byte sub_8081B78
+	.4byte StartBattle_SouthernIsland
 	.4byte SetRoute119Weather
 	.4byte SetRoute123Weather
 	.4byte ScriptGetMultiplayerId

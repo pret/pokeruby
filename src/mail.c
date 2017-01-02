@@ -448,7 +448,7 @@ u8 *sub_80F8D7C(u8 *dest, u8 *src) {
     u16 length;
 
     StringCopy(dest, src);
-    sub_814A568(dest);
+    SanitizeNameString(dest);
 
     length = StringLength(dest);
 

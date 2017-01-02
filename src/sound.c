@@ -5,6 +5,7 @@
 #include "task.h"
 #include "songs.h"
 #include "m4a.h"
+#include "battle.h"
 
 struct Fanfare
 {
@@ -329,7 +330,7 @@ void PlayCry4(u16 species, s8 pan, u8 mode)
     }
     else
     {
-        if (!(gBattleTypeFlags & 0x40))
+        if (!(gBattleTypeFlags & BATTLE_TYPE_40))
             m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 85);
         PlayCryInternal(species, pan, 125, 10, mode);
     }

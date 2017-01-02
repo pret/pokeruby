@@ -47,7 +47,7 @@ gUnknown_03004284: @ 3004284
 gUnknown_03004288: @ 3004288
 	.space 0x4
 
-gUnknown_0300428C: @ 300428C
+gBattleTerrain: @ 300428C
 	.space 0x4
 
 gUnknown_03004290: @ 3004290

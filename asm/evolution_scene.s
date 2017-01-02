@@ -201,7 +201,7 @@ EvolutionScene: @ 8111984
 	ldr r0, _08111C3C @ =gUnknown_03004210
 	adds r1, r4, 0
 	bl InitWindowFromConfig
-	ldr r1, _08111C40 @ =gUnknown_0300428C
+	ldr r1, _08111C40 @ =gBattleTerrain
 	movs r0, 0x9
 	strb r0, [r1]
 	bl sub_800D6D4
@@ -435,7 +435,7 @@ _08111C30: .4byte gUnknown_03004280
 _08111C34: .4byte gUnknown_030041B0
 _08111C38: .4byte gUnknown_030041B8
 _08111C3C: .4byte gUnknown_03004210
-_08111C40: .4byte gUnknown_0300428C
+_08111C40: .4byte gBattleTerrain
 _08111C44: .4byte gReservedSpritePaletteCount
 _08111C48: .4byte gStringVar1
 _08111C4C: .4byte gStringVar2
@@ -540,7 +540,7 @@ CB2_EvolutionSceneLoadGraphics: @ 8111C90
 	ldr r0, _08111E4C @ =gUnknown_03004210
 	adds r1, r4, 0
 	bl InitWindowFromConfig
-	ldr r1, _08111E50 @ =gUnknown_0300428C
+	ldr r1, _08111E50 @ =gBattleTerrain
 	movs r0, 0x9
 	strb r0, [r1]
 	bl sub_800D6D4
@@ -647,7 +647,7 @@ _08111E40: .4byte gUnknown_03004280
 _08111E44: .4byte gUnknown_030041B0
 _08111E48: .4byte gUnknown_030041B8
 _08111E4C: .4byte gUnknown_03004210
-_08111E50: .4byte gUnknown_0300428C
+_08111E50: .4byte gBattleTerrain
 _08111E54: .4byte gReservedSpritePaletteCount
 _08111E58: .4byte gMonFrontPicTable
 _08111E5C: .4byte gMonFrontPicCoords
