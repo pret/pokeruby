@@ -11563,7 +11563,7 @@ _080EB9C4: .4byte 0x0000ffff
 	thumb_func_start sub_80EB9C8
 sub_80EB9C8: @ 80EB9C8
 	push {lr}
-	bl IsNationalPokedex
+	bl IsNationalPokedexEnabled
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}

@@ -3,7 +3,7 @@
 #include "asm.h"
 #include "field_map_obj.h"
 #include "rom4.h"
-#include "flag.h"
+#include "event_data.h"
 #include "main.h"
 #include "menu.h"
 #include "rng.h"

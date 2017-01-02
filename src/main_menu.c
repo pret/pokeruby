@@ -16,6 +16,7 @@
 #include "task.h"
 #include "text.h"
 #include "title_screen.h"
+#include "event_data.h"
 
 #define BirchSpeechUpdateWindowText() ((u8)MenuUpdateWindowText_OverrideLineLength(24))
 
@@ -277,7 +278,7 @@ void Task_MainMenuCheckSave(u8 taskId)
     switch (gSaveFileStatus)
     {
     case 1:
-        if (IsMysteryGiftAvailable() == TRUE)
+        if (IsMysteryGiftEnabled() == TRUE)
             gTasks[taskId].data[TD_MENULAYOUT] = HAS_MYSTERY_GIFT;
         else
             gTasks[taskId].data[TD_MENULAYOUT] = HAS_SAVED_GAME;
@@ -300,7 +301,7 @@ void Task_MainMenuCheckSave(u8 taskId)
         gTasks[taskId].data[TD_MENULAYOUT] = HAS_SAVED_GAME;
         gTasks[taskId].func = Task_MainMenuWaitForSaveErrorAck;
 
-        if (IsMysteryGiftAvailable() == TRUE)
+        if (IsMysteryGiftEnabled() == TRUE)
             gTasks[taskId].data[TD_MENULAYOUT] = HAS_MYSTERY_GIFT;
         else
             gTasks[taskId].data[TD_MENULAYOUT] = HAS_SAVED_GAME;

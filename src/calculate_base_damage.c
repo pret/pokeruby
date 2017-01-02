@@ -9,7 +9,7 @@
 #include "item.h"
 #include "abilities.h"
 #include "hold_effects.h"
-#include "flag.h"
+#include "event_data.h"
 
 extern u8 gPlayerPartyCount;
 extern struct Pokemon gPlayerParty[6];

@@ -84,9 +84,8 @@ SECTIONS {
         src/text_window.o(.text);
         src/script.o(.text);
         src/scrcmd.o(.text);
-        asm/rom_8065394.o(.text);
-        src/var.o(.text);
-        src/flag.o(.text);
+        asm/field_control_avatar.o(.text);
+        src/event_data.o(.text);
         asm/coord_event_weather.o(.text);
         asm/field_tasks.o(.text);
         asm/clock.o(.text);

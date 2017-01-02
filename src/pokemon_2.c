@@ -7,7 +7,7 @@
 #include "species.h"
 #include "main.h"
 #include "sprite.h"
-#include "flag.h"
+#include "event_data.h"
 
 extern u8 gPlayerPartyCount;
 extern struct Pokemon gPlayerParty[6];

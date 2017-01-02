@@ -72,7 +72,7 @@ sub_806A390: @ 806A390
 	subs r4, r0
 	lsls r4, 16
 	lsrs r4, 16
-	bl sub_80690B4
+	bl ClearUpperFlags
 	adds r0, r4, 0
 	bl sub_80FA220
 	adds r0, r4, 0

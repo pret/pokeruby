@@ -9,7 +9,7 @@
 #include "field_map_obj.h"
 #include "field_message_box.h"
 #include "field_player_avatar.h"
-#include "flag.h"
+#include "event_data.h"
 #include "heal_location.h"
 #include "link.h"
 #include "load_save.h"
@@ -27,7 +27,6 @@
 #include "task.h"
 #include "tileset_anim.h"
 #include "truck_scene.h"
-#include "var.h"
 #include "weather.h"
 #include "wild_encounter.h"
 #include "metatile_behavior.h"
@@ -518,7 +517,7 @@ void sub_80538F0(u8 mapGroup, u8 mapNum)
     warp_shift();
     set_current_map_header_from_sav1_save_old_name();
     sub_8053154();
-    sub_806906C();
+    ClearTempFieldEventData();
     ResetCyclingRoadChallengeData();
     prev_quest_postbuffer_cursor_backup_reset();
     sub_8082BD0(mapGroup, mapNum);
@@ -551,7 +550,7 @@ void sub_8053994(u32 a1)
     sub_8053154();
     v2 = is_light_level_1_2_3_5_or_6(gMapHeader.light);
     v3 = is_light_level_8_or_9(gMapHeader.light);
-    sub_806906C();
+    ClearTempFieldEventData();
     ResetCyclingRoadChallengeData();
     prev_quest_postbuffer_cursor_backup_reset();
     sub_8082BD0(gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum);

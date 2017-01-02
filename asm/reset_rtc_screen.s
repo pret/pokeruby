@@ -1225,7 +1225,7 @@ _0806AE08:
 	ldr r0, _0806AE54 @ =0x00004040
 	ldrh r1, [r4]
 	bl VarSet
-	bl sub_80691A0
+	bl DisableResetRTC
 	ldr r0, _0806AE58 @ =gSystemText_ClockResetDataSave
 	bl ResetRtcScreen_ShowMessage
 	movs r0, 0x4

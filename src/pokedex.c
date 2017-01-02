@@ -12,6 +12,7 @@
 #include "songs.h"
 #include "sound.h"
 #include "task.h"
+#include "event_data.h"
 
 // I'm #define-ing these just for now so I can keep using the old unkXXX member names
 #define unk60E selectedPokemon
@@ -109,7 +110,7 @@ extern void m4aMPlayVolumeControl(struct MusicPlayerInfo *mplayInfo, u16 trackBi
 extern bool8 BeginNormalPaletteFade(u32, s8, u8, u8, u16);
 extern void remove_some_task(void);
 extern u8 sub_8091E3C(void);
-extern void LockNationalPokedex(void);
+extern void DisableNationalPokedex(void);
 extern void sub_805469C(void);
 extern u16 HoennToNationalOrder(u16);
 extern u16 NationalToHoennOrder(u16);
@@ -144,7 +145,7 @@ void sub_808C02C(void)
     gSaveBlock2.pokedex.unownPersonality = 0;
     gSaveBlock2.pokedex.spindaPersonality = 0;
     gSaveBlock2.pokedex.unknown3 = 0;
-    LockNationalPokedex();
+    DisableNationalPokedex();
     for(i = 0; i <= 51; i++)
     {
         gSaveBlock2.pokedex.owned[i] = 0;
@@ -279,14 +280,14 @@ void CB2_InitPokedex(void)
             ClearPokedexView(gPokedexView);
             CreateTask(Task_PokedexShowMainScreen, 0);
             gPokedexView->dexMode = gSaveBlock2.pokedex.unknown1;
-            if(!IsNationalPokedex())
+            if(!IsNationalPokedexEnabled())
                 gPokedexView->dexMode = DEX_MODE_HOENN;
             gPokedexView->dexOrder = gSaveBlock2.pokedex.order;
             gPokedexView->selectedPokemon = gUnknown_0202FFB8;
             gPokedexView->unk62C = gUnknown_0202FFBA;
             gPokedexView->selectedScreen = PAGE_SCREEN;
             gPokedexView->unk64E = 0;
-            if(!IsNationalPokedex())
+            if(!IsNationalPokedexEnabled())
             {
                 gPokedexView->unk61A = GetHoennPokedexCount(0);
                 gPokedexView->unk61C = GetHoennPokedexCount(1);
@@ -531,7 +532,7 @@ void sub_808CB8C(u8 taskId)
             gPokedexView->unk62C = gPokedexView->unk62A;
             gPokedexView->selectedPokemon = gPokedexView->unk610;
             gPokedexView->dexMode = gPokedexView->unk614;
-            if(!IsNationalPokedex())
+            if(!IsNationalPokedexEnabled())
                 gPokedexView->dexMode = DEX_MODE_HOENN;
             gPokedexView->dexOrder = gPokedexView->unk618;
             gTasks[taskId].func = Task_PokedexShowMainScreen;
@@ -544,7 +545,7 @@ void Task_ClosePokedex(u8 taskId)
     if(!gPaletteFade.active)
     {
         gSaveBlock2.pokedex.unknown1 = gPokedexView->dexMode;
-        if(!IsNationalPokedex())
+        if(!IsNationalPokedexEnabled())
             gSaveBlock2.pokedex.unknown1 = 0;
         gSaveBlock2.pokedex.order = gPokedexView->dexOrder;
         DestroyTask(taskId);
@@ -715,7 +716,7 @@ void Task_PokedexResultsScreenReturnToMainScreen(u8 taskId)
         gPokedexView->unk62C = gPokedexView->unk62A;
         gPokedexView->selectedPokemon = gPokedexView->unk610;
         gPokedexView->dexMode = gPokedexView->unk614;
-        if(!IsNationalPokedex())
+        if(!IsNationalPokedexEnabled())
             gPokedexView->dexMode = DEX_MODE_HOENN;
         gPokedexView->dexOrder = gPokedexView->unk618;
         gTasks[taskId].func = Task_PokedexShowMainScreen;
@@ -729,7 +730,7 @@ void Task_PokedexResultsScreenExitPokedex(u8 taskId)
         gPokedexView->unk62C = gPokedexView->unk62A;
         gPokedexView->selectedPokemon = gPokedexView->unk610;
         gPokedexView->dexMode = gPokedexView->unk614;
-        if(!IsNationalPokedex())
+        if(!IsNationalPokedexEnabled())
             gPokedexView->dexMode = DEX_MODE_HOENN;
         gPokedexView->dexOrder = gPokedexView->unk618;
         gTasks[taskId].func = Task_ClosePokedex;
@@ -826,7 +827,7 @@ void sub_808D640(void)
 {
     if(gPokedexView->unk64C_1)
         LoadPalette(gUnknown_0839F67C + 0x2, 1, 0xBE);
-    else if(!IsNationalPokedex())
+    else if(!IsNationalPokedexEnabled())
         LoadPalette(gPokedexMenu_Pal + 0x2, 1, 0xBE);
     else
         LoadPalette(gUnknown_0839F73C + 0x2, 1, 0xBE);
@@ -847,7 +848,7 @@ void SortPokedex(u8 dexMode, u8 sortMode)
             vars[1] = 1;
             break;
         case DEX_MODE_NATIONAL:
-            if(IsNationalPokedex())
+            if(IsNationalPokedexEnabled())
             {
                 vars[0] = 386;
                 vars[1] = 0;
@@ -3141,7 +3142,7 @@ void sub_8090750(u8 taskId)
             break;
         case 3:
             sub_8072BD8(gDexText_RegisterComplete, 2, 0, 0xD0);
-            if(!IsNationalPokedex())
+            if(!IsNationalPokedexEnabled())
                 sub_8091154(NationalToHoennOrder(dexNum), 13, 3);
             else
                 sub_8091154(dexNum, 13, 3);

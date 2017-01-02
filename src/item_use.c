@@ -10,7 +10,7 @@
 #include "rom4.h"
 #include "metatile_behavior.h"
 #include "field_player_avatar.h"
-#include "flag.h"
+#include "event_data.h"
 #include "map_obj_lock.h"
 #include "script.h"
 #include "field_player_avatar.h"

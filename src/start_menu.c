@@ -2,7 +2,7 @@
 #include "start_menu.h"
 #include "asm.h"
 #include "field_player_avatar.h"
-#include "flag.h"
+#include "event_data.h"
 #include "load_save.h"
 #include "main.h"
 #include "map_obj_lock.h"

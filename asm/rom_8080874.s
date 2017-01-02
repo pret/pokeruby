@@ -6,8 +6,8 @@
 
 	.text
 
-	thumb_func_start palette_bg_faded_fill_black
-palette_bg_faded_fill_black: @ 8080874
+	thumb_func_start palette_bg_fill_white
+palette_bg_fill_white: @ 8080874
 	push {lr}
 	sub sp, 0x4
 	ldr r0, _0808088C @ =0x7fff7fff
@@ -23,10 +23,10 @@ palette_bg_faded_fill_black: @ 8080874
 _0808088C: .4byte 0x7fff7fff
 _08080890: .4byte gPlttBufferFaded
 _08080894: .4byte 0x01000100
-	thumb_func_end palette_bg_faded_fill_black
+	thumb_func_end palette_bg_fill_white
 
-	thumb_func_start palette_bg_faded_fill_white
-palette_bg_faded_fill_white: @ 8080898
+	thumb_func_start palette_bg_fill_black
+palette_bg_fill_black: @ 8080898
 	push {lr}
 	sub sp, 0x4
 	movs r0, 0
@@ -41,10 +41,10 @@ palette_bg_faded_fill_white: @ 8080898
 	.align 2, 0
 _080808B0: .4byte gPlttBufferFaded
 _080808B4: .4byte 0x01000100
-	thumb_func_end palette_bg_faded_fill_white
+	thumb_func_end palette_bg_fill_black
 
-	thumb_func_start pal_fill_for_maplights
-pal_fill_for_maplights: @ 80808B8
+	thumb_func_start pal_fill_for_map_transition
+pal_fill_for_map_transition: @ 80808B8
 	push {r4,lr}
 	bl get_map_light_from_warp0
 	adds r4, r0, 0
@@ -67,18 +67,18 @@ _080808E2:
 	movs r0, 0
 	movs r1, 0
 	bl fade_screen
-	bl palette_bg_faded_fill_white
+	bl palette_bg_fill_black
 	b _080808FC
 _080808F0:
 	movs r0, 0x2
 	movs r1, 0
 	bl fade_screen
-	bl palette_bg_faded_fill_black
+	bl palette_bg_fill_white
 _080808FC:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end pal_fill_for_maplights
+	thumb_func_end pal_fill_for_map_transition
 
 	thumb_func_start pal_fill_black
 pal_fill_black: @ 8080904
@@ -86,13 +86,13 @@ pal_fill_black: @ 8080904
 	movs r0, 0
 	movs r1, 0
 	bl fade_screen
-	bl palette_bg_faded_fill_white
+	bl palette_bg_fill_black
 	pop {r0}
 	bx r0
 	thumb_func_end pal_fill_black
 
-	thumb_func_start sub_8080918
-sub_8080918: @ 8080918
+	thumb_func_start fade_8080918
+fade_8080918: @ 8080918
 	push {r4,lr}
 	bl sav1_map_get_light_level
 	adds r4, r0, 0
@@ -122,7 +122,7 @@ _08080950:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8080918
+	thumb_func_end fade_8080918
 
 	thumb_func_start sub_8080958
 sub_8080958: @ 8080958
@@ -226,7 +226,7 @@ _08080A06:
 	ldrb r0, [r1, 0x4]
 	cmp r0, 0x1
 	beq _08080A36
-	bl pal_fill_for_maplights
+	bl pal_fill_for_map_transition
 _08080A1C:
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
@@ -250,7 +250,7 @@ sub_8080A3C: @ 8080A3C
 	push {lr}
 	bl ScriptContext2_Enable
 	bl sub_8053E90
-	bl palette_bg_faded_fill_white
+	bl palette_bg_fill_black
 	ldr r0, _08080A58 @ =task_mpl_807DD60
 	movs r1, 0xA
 	bl CreateTask
@@ -293,7 +293,7 @@ _08080A90:
 	lsls r0, 24
 	cmp r0, 0
 	beq _08080ABC
-	bl pal_fill_for_maplights
+	bl pal_fill_for_map_transition
 _08080A9E:
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
@@ -318,7 +318,7 @@ sub_8080AC4: @ 8080AC4
 	push {lr}
 	bl ScriptContext2_Enable
 	bl sub_8053E90
-	bl palette_bg_faded_fill_white
+	bl palette_bg_fill_black
 	ldr r0, _08080AE0 @ =sub_8080A5C
 	movs r1, 0xA
 	bl CreateTask
@@ -381,7 +381,7 @@ _08080B44: .4byte task_map_chg_seq_0807E20C
 mapldr_default: @ 8080B48
 	push {lr}
 	bl sub_8053E90
-	bl pal_fill_for_maplights
+	bl pal_fill_for_map_transition
 	bl sub_8080AE4
 	bl ScriptContext2_Enable
 	pop {r0}
@@ -403,7 +403,7 @@ sub_8080B60: @ 8080B60
 sub_8080B78: @ 8080B78
 	push {lr}
 	bl sub_8053E90
-	bl pal_fill_for_maplights
+	bl pal_fill_for_map_transition
 	movs r0, 0x2E
 	bl PlaySE
 	ldr r0, _08080B98 @ =task_map_chg_seq_0807E2CC
@@ -792,7 +792,7 @@ sub_8080E88: @ 8080E88
 	push {lr}
 	bl ScriptContext2_Enable
 	bl sub_8053FF8
-	bl sub_8080918
+	bl fade_8080918
 	bl PlayRainSoundEffect
 	movs r0, 0x9
 	bl PlaySE
@@ -815,7 +815,7 @@ sp13E_warp_to_last_warp: @ 8080EC0
 	push {lr}
 	bl ScriptContext2_Enable
 	bl sub_8053FF8
-	bl sub_8080918
+	bl fade_8080918
 	bl PlayRainSoundEffect
 	ldr r0, _08080EE4 @ =gUnknown_0300485C
 	ldr r1, _08080EE8 @ =mapldr_default
@@ -903,7 +903,7 @@ sub_8080F68: @ 8080F68
 	push {lr}
 	bl ScriptContext2_Enable
 	bl sub_8053FF8
-	bl sub_8080918
+	bl fade_8080918
 	movs r0, 0x2D
 	bl PlaySE
 	ldr r0, _08080F90 @ =task0A_fade_n_map_maybe
@@ -924,7 +924,7 @@ _08080F98: .4byte sub_8080B78
 sub_8080F9C: @ 8080F9C
 	push {lr}
 	bl ScriptContext2_Enable
-	bl sub_8080918
+	bl fade_8080918
 	ldr r0, _08080FB8 @ =task0A_fade_n_map_maybe
 	movs r1, 0xA
 	bl CreateTask
@@ -999,7 +999,7 @@ sub_808102C: @ 808102C
 	push {lr}
 	bl ScriptContext2_Enable
 	bl sub_8053FF8
-	bl sub_8080918
+	bl fade_8080918
 	movs r0, 0x9
 	bl PlaySE
 	ldr r0, _0808104C @ =sub_8080FC4
@@ -1304,7 +1304,7 @@ _080812A2:
 	b _080812BC
 _080812A8:
 	bl sub_8053FF8
-	bl sub_8080918
+	bl fade_8080918
 	bl PlayRainSoundEffect
 	movs r0, 0
 	strh r0, [r5, 0x8]
@@ -1379,7 +1379,7 @@ sub_8081334: @ 8081334
 	push {lr}
 	bl ScriptContext2_Enable
 	bl sub_8053FF8
-	bl sub_8080918
+	bl fade_8080918
 	bl PlayRainSoundEffect
 	movs r0, 0x9
 	bl PlaySE

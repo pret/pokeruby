@@ -2,7 +2,7 @@
 #include "save_menu_util.h"
 #include "asm.h"
 #include "menu.h"
-#include "flag.h"
+#include "event_data.h"
 #include "string_util.h"
 #include "pokedex.h"
 
@@ -118,7 +118,7 @@ u16 GetPokedexSeenCount()
 {
     u16 pokedexSeenCount;
 
-    if (IsNationalPokedex())
+    if (IsNationalPokedexEnabled())
         pokedexSeenCount = GetNationalPokedexCount(1);
     else
         pokedexSeenCount = GetHoennPokedexCount(1);
