@@ -29815,7 +29815,7 @@ sub_81398BC: @ 81398BC
 	lsrs r0, 16
 	mov r8, r0
 	ldr r0, _08139A10 @ =sub_80312F0
-	bl object_new_hidden_with_callback
+	bl CreateInvisibleSpriteWithCallback
 	ldr r1, _08139A14 @ =gUnknown_0300434C
 	mov r9, r1
 	add r9, r6

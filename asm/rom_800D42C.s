@@ -6209,7 +6209,7 @@ _0801065A:
 	cmp r0, 0
 	bne _080106FA
 	ldr r0, _0801069C @ =objc_dp11b_pingpong
-	bl object_new_hidden_with_callback
+	bl CreateInvisibleSpriteWithCallback
 	lsls r0, 24
 	lsrs r5, r0, 24
 	mov r0, r8
@@ -20796,7 +20796,7 @@ _08017DC0:
 	b _08017F94
 _08017DDC:
 	lsrs r0, r1, 16
-	bl sub_804114C
+	bl CountTrailingZeroBits
 	ldr r1, _08017E04 @ =0x02000000
 	ldr r7, _08017E08 @ =0x00016003
 	adds r1, r7
@@ -67573,7 +67573,7 @@ sub_802F934: @ 802F934
 	lsrs r0, 16
 	mov r8, r0
 	ldr r0, _0802FA84 @ =sub_80312F0
-	bl object_new_hidden_with_callback
+	bl CreateInvisibleSpriteWithCallback
 	ldr r1, _0802FA88 @ =gUnknown_0300434C
 	mov r9, r1
 	add r9, r6
@@ -77414,7 +77414,7 @@ sub_803495C: @ 803495C
 	lsrs r0, 16
 	mov r8, r0
 	ldr r0, _08034AC4 @ =sub_80312F0
-	bl object_new_hidden_with_callback
+	bl CreateInvisibleSpriteWithCallback
 	ldr r1, _08034AC8 @ =gUnknown_0300434C
 	mov r10, r1
 	add r10, r6
@@ -86633,7 +86633,7 @@ sub_8039430: @ 8039430
 	lsrs r0, 16
 	mov r8, r0
 	ldr r0, _08039598 @ =sub_80312F0
-	bl object_new_hidden_with_callback
+	bl CreateInvisibleSpriteWithCallback
 	ldr r1, _0803959C @ =gUnknown_0300434C
 	mov r10, r1
 	add r10, r6

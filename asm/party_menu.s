@@ -1861,7 +1861,7 @@ sub_806BD58: @ 806BD58
 	lsls r4, 24
 	lsrs r4, 24
 	ldr r0, _0806BD7C @ =SpriteCallbackDummy
-	bl object_new_hidden_with_callback
+	bl CreateInvisibleSpriteWithCallback
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -3606,7 +3606,7 @@ sub_806CA60: @ 806CA60
 	movs r1, 0
 	bl CreateTask
 	ldr r0, _0806CAE8 @ =SpriteCallbackDummy
-	bl object_new_hidden_with_callback
+	bl CreateInvisibleSpriteWithCallback
 	strb r0, [r5, 0x1]
 	ldrb r1, [r5, 0x1]
 	adds r0, r4, 0

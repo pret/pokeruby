@@ -82,7 +82,7 @@ unref_sub_812620C: @ 812620C
 	adds r1, r5
 	subs r1, r4
 	adds r0, r4, 0
-	bl sub_8041174
+	bl CalcCRC16
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
@@ -812,7 +812,7 @@ sub_81267C0: @ 81267C0
 	adds r1, r0
 	subs r1, r4
 	adds r0, r4, 0
-	bl sub_8041174
+	bl CalcCRC16
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r5, r0

@@ -5657,7 +5657,7 @@ sub_807A4A0: @ 807A4A0
 	lsrs r6, 24
 	ldr r0, _0807A538 @ =SpriteCallbackDummy
 	mov r10, r0
-	bl object_new_hidden_with_callback
+	bl CreateInvisibleSpriteWithCallback
 	mov r8, r0
 	mov r0, r8
 	lsls r0, 24

@@ -57,7 +57,7 @@ SECTIONS {
         asm/pokemon_3.o(.text);
         src/trig.o(.text);
         src/rng.o(.text);
-        asm/rom_8040EB4.o(.text);
+        asm/util.o(.text);
         src/blend_palette.o(.text);
         asm/daycare.o(.text);
         asm/egg_hatch.o(.text);
