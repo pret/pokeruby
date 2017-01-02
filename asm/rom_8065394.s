@@ -1914,7 +1914,7 @@ trigger_activate: @ 8068D7C
 	cmp r1, 0
 	bne _08068D92
 	ldrb r0, [r4, 0x6]
-	bl sub_8069408
+	bl DoCoordEventWeather
 	b _08068DB2
 _08068D92:
 	ldrh r0, [r4, 0x6]
