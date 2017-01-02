@@ -185,7 +185,7 @@ _0806B020:
 	muls r2, r3
 	ldr r3, _0806B050 @ =gPlayerParty
 	adds r2, r3
-	bl sub_806D90C
+	bl TryCreatePartyMenuMonIcon
 	b _0806B114
 	.align 2, 0
 _0806B048: .4byte 0x00000266
@@ -199,14 +199,14 @@ _0806B054:
 	adds r1, r4, r0
 	b _0806B0E0
 _0806B060:
-	bl sub_806DA98
+	bl LoadHeldItemIconGraphics
 	b _0806B0D8
 _0806B066:
 	movs r1, 0x98
 	lsls r1, 2
 	adds r0, r4, r1
 	ldrb r0, [r0]
-	bl sub_806DC34
+	bl CreateHeldItemIcons_806DC34
 	movs r2, 0x99
 	lsls r2, 2
 	adds r1, r4, r2
@@ -233,10 +233,10 @@ _0806B07A:
 	.align 2, 0
 _0806B0A0: .4byte 0x00000266
 _0806B0A4:
-	bl sub_806E334
+	bl PartyMenuPrintMonsLevelOrStatus
 	b _0806B0D8
 _0806B0AA:
-	bl sub_806E0C4
+	bl PrintPartyMenuMonNicknames
 	ldr r1, _0806B0B8 @ =0x0201b000
 	movs r0, 0x99
 	lsls r0, 2
@@ -245,7 +245,7 @@ _0806B0AA:
 	.align 2, 0
 _0806B0B8: .4byte 0x0201b000
 _0806B0BC:
-	bl sub_806E53C
+	bl PartyMenuTryPrintMonsHP
 	b _0806B0D8
 _0806B0C2:
 	bl nullsub_13
@@ -774,8 +774,8 @@ _0806B520: .4byte REG_BG3VOFS
 _0806B524: .4byte 0x0000ffff
 	thumb_func_end sub_806B4A8
 
-	thumb_func_start sub_806B528
-sub_806B528: @ 806B528
+	thumb_func_start IsLinkDoubleBattle
+IsLinkDoubleBattle: @ 806B528
 	push {lr}
 	ldr r0, _0806B53C @ =gUnknown_020239F8
 	ldrh r1, [r0]
@@ -792,7 +792,7 @@ _0806B540:
 _0806B542:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806B528
+	thumb_func_end IsLinkDoubleBattle
 
 	thumb_func_start sub_806B548
 sub_806B548: @ 806B548
@@ -833,7 +833,7 @@ sub_806B58C: @ 806B58C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0
@@ -844,7 +844,7 @@ sub_806B58C: @ 806B58C
 	.align 2, 0
 _0806B5A4: .4byte gUnknown_0202E8FA
 _0806B5A8:
-	bl sub_806B528
+	bl IsLinkDoubleBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -909,7 +909,7 @@ _0806B628:
 	movs r1, 0
 	b _0806B8A8
 _0806B638:
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806B666
@@ -932,7 +932,7 @@ _0806B660:
 	ldrb r1, [r4, 0x3]
 	b _0806B8BC
 _0806B666:
-	bl sub_806B528
+	bl IsLinkDoubleBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -954,7 +954,7 @@ _0806B684:
 	movs r1, 0x1
 	b _0806B8A8
 _0806B694:
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806B6C2
@@ -977,7 +977,7 @@ _0806B6BC:
 	ldrb r1, [r4, 0x5]
 	b _0806B8BC
 _0806B6C2:
-	bl sub_806B528
+	bl IsLinkDoubleBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1021,7 +1021,7 @@ _0806B714:
 	ldrb r1, [r4, 0x5]
 	b _0806B8BC
 _0806B71A:
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806B74A
@@ -1044,7 +1044,7 @@ _0806B744:
 	ldrb r1, [r4, 0x7]
 	b _0806B8BC
 _0806B74A:
-	bl sub_806B528
+	bl IsLinkDoubleBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1088,7 +1088,7 @@ _0806B79C:
 	ldrb r1, [r4, 0x7]
 	b _0806B8BC
 _0806B7A2:
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806B7D2
@@ -1112,7 +1112,7 @@ _0806B7CC:
 	ldrb r1, [r4, 0x9]
 	b _0806B8BC
 _0806B7D2:
-	bl sub_806B528
+	bl IsLinkDoubleBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1159,7 +1159,7 @@ _0806B82C:
 	ldrb r1, [r4, 0x9]
 	b _0806B8BC
 _0806B832:
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806B84C
@@ -1171,7 +1171,7 @@ _0806B832:
 	.align 2, 0
 _0806B848: .4byte gPlayerPartyCount
 _0806B84C:
-	bl sub_806B528
+	bl IsLinkDoubleBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1714,7 +1714,7 @@ sub_806BC3C: @ 806BC3C
 	lsls r5, 24
 	lsrs r5, 24
 	ldr r6, _0806BCB0 @ =gUnknown_08376918
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r4, 2
 	lsls r0, 24
 	lsrs r0, 24
@@ -2176,8 +2176,8 @@ sub_806BF74: @ 806BF74
 	mov r0, r9
 	adds r1, r5, 0
 	movs r2, 0
-	bl sub_806DA44
-	bl sub_806B528
+	bl UpdateMonIconFrame_806DA44
+	bl IsLinkDoubleBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2328,7 +2328,7 @@ _0806C0CC: .4byte 0x0201b000
 _0806C0D0: .4byte 0x00000261
 _0806C0D4: .4byte gUnknown_083768B8
 _0806C0D8:
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	lsrs r7, r0, 24
 	cmp r5, 0x5
@@ -2436,7 +2436,7 @@ _0806C1A4:
 	lsrs r1, 24
 	mov r0, r9
 	movs r2, 0x1
-	bl sub_806DA44
+	bl UpdateMonIconFrame_806DA44
 	movs r2, 0x2E
 	ldrsh r0, [r4, r2]
 	cmp r5, r0
@@ -3082,7 +3082,7 @@ sub_806C658: @ 806C658
 	mov r0, r8
 	adds r1, r6, 0
 	movs r2, 0
-	bl sub_806DA44
+	bl UpdateMonIconFrame_806DA44
 	cmp r6, 0x5
 	bhi _0806C6A8
 	lsls r0, r6, 1
@@ -3321,7 +3321,7 @@ _0806C84A:
 	lsrs r1, 24
 	mov r0, r8
 	movs r2, 0x1
-	bl sub_806DA44
+	bl UpdateMonIconFrame_806DA44
 	movs r3, 0x2E
 	ldrsh r0, [r4, r3]
 	cmp r6, r0
@@ -3362,7 +3362,7 @@ sub_806C890: @ 806C890
 	adds r0, r6, 0
 	adds r1, r4, 0
 	movs r2, 0
-	bl sub_806DA44
+	bl UpdateMonIconFrame_806DA44
 	cmp r4, 0x5
 	bhi _0806C8DC
 	lsls r0, r4, 1
@@ -3430,7 +3430,7 @@ sub_806C92C: @ 806C92C
 	ldrh r0, [r1, 0x30]
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806C96A
@@ -4020,11 +4020,11 @@ _0806CDCC:
 	ldr r4, _0806CE1C @ =0x02001000
 	ldrb r0, [r4]
 	ldrb r1, [r4, 0x5]
-	bl sub_806DDA0
+	bl GetMonIconSpriteId_maybe
 	strb r0, [r4, 0x3]
 	ldrb r0, [r4]
 	ldrb r1, [r4, 0x6]
-	bl sub_806DDA0
+	bl GetMonIconSpriteId_maybe
 	strb r0, [r4, 0x4]
 	ldrb r3, [r4, 0x5]
 	cmp r3, 0
@@ -4515,12 +4515,12 @@ sub_806D198: @ 806D198
 	ldrb r0, [r4]
 	ldrb r1, [r4, 0x5]
 	ldrb r2, [r4, 0x4]
-	bl sub_806DE50
+	bl SetMonIconSpriteId_maybe
 	ldrb r0, [r4]
 	ldrb r1, [r4, 0x6]
 	ldrb r2, [r4, 0x3]
-	bl sub_806DE50
-	bl battle_type_is_double
+	bl SetMonIconSpriteId_maybe
+	bl IsDoubleBattle
 	ldr r5, _0806D368 @ =gSprites
 	ldrb r1, [r4, 0x3]
 	lsls r3, r1, 4
@@ -4541,7 +4541,7 @@ sub_806D198: @ 806D198
 	movs r1, 0
 	mov r8, r1
 	strh r0, [r3, 0x20]
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	ldrb r1, [r4, 0x3]
 	lsls r3, r1, 4
 	adds r3, r1
@@ -4580,9 +4580,9 @@ sub_806D198: @ 806D198
 	adds r1, r5
 	mov r9, r1
 	add r0, r9
-	ldr r7, _0806D370 @ =sub_806DA38
+	ldr r7, _0806D370 @ =UpdateMonIconFrame_806DA38
 	str r7, [r0]
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	ldrb r1, [r4, 0x4]
 	lsls r3, r1, 4
 	adds r3, r1
@@ -4599,7 +4599,7 @@ sub_806D198: @ 806D198
 	adds r2, r6
 	ldrb r0, [r2]
 	strh r0, [r3, 0x20]
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	ldrb r1, [r4, 0x4]
 	lsls r3, r1, 4
 	adds r3, r1
@@ -4645,14 +4645,14 @@ sub_806D198: @ 806D198
 	ldrh r1, [r1, 0x2E]
 	lsls r1, 24
 	lsrs r1, 24
-	bl sub_806DDA0
+	bl GetMonIconSpriteId_maybe
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
 	add r1, r9
-	ldr r0, _0806D374 @ =sub_806DA0C
+	ldr r0, _0806D374 @ =UpdateMonIconFrame_806DA0C
 	str r0, [r1]
 	ldrb r0, [r4, 0x5]
 	movs r6, 0x64
@@ -4667,17 +4667,17 @@ sub_806D198: @ 806D198
 	adds r1, r0, 0
 	muls r1, r6
 	adds r1, r5
-	bl sub_806E2C0
+	bl PartyMenuPrintMonLevelOrStatus
 	ldrb r0, [r4, 0x5]
 	adds r1, r0, 0
 	muls r1, r6
 	adds r1, r5
-	bl sub_806E07C
+	bl TryPrintPartyMenuMonNickname
 	ldrb r0, [r4, 0x5]
 	adds r1, r0, 0
 	muls r1, r6
 	adds r1, r5
-	bl sub_806E4E8
+	bl PartyMenuTryPrintHP
 	ldrb r0, [r4, 0x5]
 	adds r1, r0, 0
 	muls r1, r6
@@ -4687,17 +4687,17 @@ sub_806D198: @ 806D198
 	adds r1, r0, 0
 	muls r1, r6
 	adds r1, r5
-	bl sub_806E2C0
+	bl PartyMenuPrintMonLevelOrStatus
 	ldrb r0, [r4, 0x6]
 	adds r1, r0, 0
 	muls r1, r6
 	adds r1, r5
-	bl sub_806E07C
+	bl TryPrintPartyMenuMonNickname
 	ldrb r0, [r4, 0x6]
 	adds r1, r0, 0
 	muls r1, r6
 	adds r1, r5
-	bl sub_806E4E8
+	bl PartyMenuTryPrintHP
 	ldrb r0, [r4, 0x6]
 	adds r1, r0, 0
 	muls r1, r6
@@ -4717,8 +4717,8 @@ sub_806D198: @ 806D198
 _0806D364: .4byte 0x02001000
 _0806D368: .4byte gSprites
 _0806D36C: .4byte gUnknown_08376678
-_0806D370: .4byte sub_806DA38
-_0806D374: .4byte sub_806DA0C
+_0806D370: .4byte UpdateMonIconFrame_806DA38
+_0806D374: .4byte UpdateMonIconFrame_806DA0C
 _0806D378: .4byte gPlayerParty
 	thumb_func_end sub_806D198
 
@@ -4726,7 +4726,7 @@ _0806D378: .4byte gPlayerParty
 sub_806D37C: @ 806D37C
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_809D638
+	bl UpdateMonIconFrame
 	ldrh r2, [r4, 0x24]
 	movs r0, 0x24
 	ldrsh r1, [r4, r0]
@@ -4740,11 +4740,11 @@ sub_806D37C: @ 806D37C
 	movs r1, 0
 	strh r0, [r4, 0x2E]
 	strh r1, [r4, 0x32]
-	ldr r0, _0806D3A4 @ =sub_806DA38
+	ldr r0, _0806D3A4 @ =UpdateMonIconFrame_806DA38
 	str r0, [r4, 0x1C]
 	b _0806D3AE
 	.align 2, 0
-_0806D3A4: .4byte sub_806DA38
+_0806D3A4: .4byte UpdateMonIconFrame_806DA38
 _0806D3A8:
 	ldrh r0, [r4, 0x2E]
 	adds r0, r2, r0
@@ -4890,7 +4890,7 @@ sub_806D4AC: @ 806D4AC
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl sub_806DDA0
+	bl GetMonIconSpriteId_maybe
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _0806D4FC @ =gSprites
@@ -4932,7 +4932,7 @@ sub_806D50C: @ 806D50C
 	lsrs r0, 24
 	lsls r1, 24
 	lsrs r1, 24
-	bl sub_806DDA0
+	bl GetMonIconSpriteId_maybe
 	ldr r2, _0806D534 @ =gSprites
 	lsls r0, 24
 	lsrs r0, 24
@@ -5036,7 +5036,7 @@ sub_806D5B8: @ 806D5B8
 	lsls r5, 24
 	lsrs r5, 24
 	ldr r6, _0806D658 @ =gUnknown_08376948
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r4, r5, 2
 	lsls r0, 24
 	lsrs r0, 24
@@ -5047,7 +5047,7 @@ sub_806D5B8: @ 806D5B8
 	adds r1, r6
 	ldrb r1, [r1]
 	mov r10, r1
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 1
@@ -5057,7 +5057,7 @@ sub_806D5B8: @ 806D5B8
 	adds r1, r6
 	ldrb r1, [r1, 0x1]
 	mov r9, r1
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 1
@@ -5067,7 +5067,7 @@ sub_806D5B8: @ 806D5B8
 	adds r1, r6
 	ldrb r1, [r1, 0x2]
 	mov r8, r1
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 1
@@ -5118,7 +5118,7 @@ sub_806D668: @ 806D668
 	lsls r5, 24
 	lsrs r5, 24
 	ldr r6, _0806D708 @ =gUnknown_08376978
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r4, r5, 2
 	lsls r0, 24
 	lsrs r0, 24
@@ -5129,7 +5129,7 @@ sub_806D668: @ 806D668
 	adds r1, r6
 	ldrb r1, [r1]
 	mov r10, r1
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 1
@@ -5139,7 +5139,7 @@ sub_806D668: @ 806D668
 	adds r1, r6
 	ldrb r1, [r1, 0x1]
 	mov r9, r1
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 1
@@ -5149,7 +5149,7 @@ sub_806D668: @ 806D668
 	adds r1, r6
 	ldrb r1, [r1, 0x2]
 	mov r8, r1
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 1

@@ -279,7 +279,7 @@ _0807AF88:
 	lsrs r1, 16
 	adds r0, r4, 0
 	bl sub_8032984
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807AFEC

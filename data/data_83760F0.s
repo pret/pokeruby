@@ -337,7 +337,7 @@ gSpriteAnimTable_8376604:: @ 8376604
 
 	.align 2
 gSpriteTemplate_837660C:: @ 837660C
-	spr_template 55120, 55120, gOamData_83765EC, gSpriteAnimTable_8376604, NULL, gDummySpriteAffineAnimTable, sub_806DD7C
+	spr_template 55120, 55120, gOamData_83765EC, gSpriteAnimTable_8376604, NULL, gDummySpriteAffineAnimTable, SpriteCB_HeldItemIcon_806DD7C
 
 	.align 2
 gUnknown_08376624:: @ 8376624
@@ -20620,7 +20620,7 @@ gSpriteAnimTable_840B14C:: @ 840B14C
 
 	.align 2
 gSpriteTemplate_840B150:: @ 840B150
-	spr_template 2003, 2004, gOamData_840B13C, gSpriteAnimTable_840B14C, NULL, gDummySpriteAffineAnimTable, GetCurrentTrainerHillMapId
+	spr_template 2003, 2004, gOamData_840B13C, gSpriteAnimTable_840B14C, NULL, gDummySpriteAffineAnimTable, sub_813E980
 
 gUnknown_0840B168:: @ 840B168
 	.incbin "baserom.gba", 0x0040b168, 0x8

@@ -444,8 +444,8 @@ void sub_813E10C(struct Sprite *);
 void sub_813E210(struct Sprite *);
 void sub_813E7C0(u8);
 void sub_813E930(/*TODO: arg types*/);
-void sub_813EB4C(u8);
-void sub_813EDBC(/*TODO: arg types*/);
+void InitIntroTorchicAttackAnim(u8);
+void InitIntroMudkipAttackAnim(/*TODO: arg types*/);
 
 // asm/rom_81473B8.o
 bool8 sub_81474C8(void);

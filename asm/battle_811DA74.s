@@ -182,11 +182,11 @@ _0811DBBC: .4byte 0x02017810
 sub_811DBC0: @ 811DBC0
 	push {r4-r6,lr}
 	movs r6, 0
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _0811DBE4
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _0811DC18
@@ -330,7 +330,7 @@ sub_811DCA0: @ 811DCA0
 	lsls r1, 2
 	adds r1, r4
 	strb r2, [r1, 0x9]
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _0811DD56
@@ -5467,7 +5467,7 @@ _08120748:
 	mov r9, r0
 	ldrh r0, [r1, 0x8]
 	strb r0, [r7]
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _08120768

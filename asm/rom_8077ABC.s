@@ -1266,7 +1266,7 @@ _08078400:
 	bl sub_8078104
 _08078406:
 	adds r0, r4, 0
-	bl sub_809D638
+	bl UpdateMonIconFrame
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1961,8 +1961,8 @@ _080788FE:
 	bx r1
 	thumb_func_end sub_8078874
 
-	thumb_func_start battle_type_is_double
-battle_type_is_double: @ 8078904
+	thumb_func_start IsDoubleBattle
+IsDoubleBattle: @ 8078904
 	ldr r0, _08078910 @ =gUnknown_020239F8
 	ldrb r1, [r0]
 	movs r0, 0x1
@@ -1970,7 +1970,7 @@ battle_type_is_double: @ 8078904
 	bx lr
 	.align 2, 0
 _08078910: .4byte gUnknown_020239F8
-	thumb_func_end battle_type_is_double
+	thumb_func_end IsDoubleBattle
 
 	thumb_func_start sub_8078914
 sub_8078914: @ 8078914
@@ -5594,7 +5594,7 @@ _0807A41E:
 	bl sub_8077ABC
 	lsls r0, 24
 	lsrs r7, r0, 24
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807A470

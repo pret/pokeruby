@@ -1973,7 +1973,7 @@ sub_80C3024: @ 80C3024
 	cmp r3, 0
 	beq _080C30B0
 	adds r1, r6, 0
-	bl sub_809D4F4
+	bl GetMonIconPtr
 	lsls r1, r5, 9
 	adds r0, r1
 	adds r0, 0x80
@@ -2031,7 +2031,7 @@ _080C30A8: .4byte 0x84000060
 _080C30AC: .4byte 0x0600c000
 _080C30B0:
 	adds r1, r6, 0
-	bl sub_809D4F4
+	bl GetMonIconPtr
 	lsls r1, r5, 9
 	adds r0, r1
 	adds r0, 0x80

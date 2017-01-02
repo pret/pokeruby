@@ -275,7 +275,7 @@ battle_make_oam_normal_battle: @ 8043914
 	mov r10, r0
 	movs r0, 0
 	str r0, [sp]
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _08043A28
@@ -1060,7 +1060,7 @@ sub_8043F44: @ 8043F44
 	lsrs r6, r0, 24
 	movs r5, 0
 	movs r4, 0
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _08043F70
@@ -1135,7 +1135,7 @@ sub_8043FC0: @ 8043FC0
 	mov r0, sp
 	movs r2, 0x1E
 	bl memcpy
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _08044010
@@ -1291,7 +1291,7 @@ sub_80440EC: @ 80440EC
 	adds r4, r0, r1
 	movs r0, 0x3A
 	ldrsh r5, [r4, r0]
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1854,7 +1854,7 @@ _0804458E:
 	bne _080445A2
 	b _080447D4
 _080445A2:
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _080445BA
@@ -1890,7 +1890,7 @@ _080445BA:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080446DC
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _080445FA
@@ -2178,7 +2178,7 @@ _08044854:
 	movs r7, 0x1
 	cmp r4, 0
 	beq _08044864
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _0804486A
@@ -3630,7 +3630,7 @@ _0804535A:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080453D4
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _080453D4
@@ -3887,7 +3887,7 @@ draw_status_ailment_maybe: @ 8045540
 	movs r1, 0x37
 	bl GetMonData
 	adds r4, r0, 0
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	movs r3, 0x12
 	mov r8, r3
@@ -4092,7 +4092,7 @@ _080456FC:
 	ldr r2, _080457DC @ =REG_BG2HOFS
 	adds r0, r6, 0
 	bl CpuSet
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -4556,7 +4556,7 @@ _08045AEE:
 	movs r3, 0
 	bl sub_8045C78
 _08045B22:
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x4]
@@ -4767,7 +4767,7 @@ _08045CBC:
 	ldr r1, [r6, 0xC]
 	ldr r2, [r6, 0x4]
 	movs r3, 0x8
-	bl sub_8046188
+	bl GetScaledExpFraction
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0
@@ -5400,8 +5400,8 @@ _08046154:
 	bx r0
 	thumb_func_end sub_8046128
 
-	thumb_func_start sub_8046188
-sub_8046188: @ 8046188
+	thumb_func_start GetScaledExpFraction
+GetScaledExpFraction: @ 8046188
 	push {r4-r7,lr}
 	adds r6, r2, 0
 	lsls r3, 27
@@ -5440,7 +5440,7 @@ _080461C8:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8046188
+	thumb_func_end GetScaledExpFraction
 
 	thumb_func_start GetScaledHPFraction
 GetScaledHPFraction: @ 80461D4

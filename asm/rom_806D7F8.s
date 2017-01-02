@@ -6,8 +6,8 @@
 
 	.text
 
-	thumb_func_start sub_806D7F8
-sub_806D7F8: @ 806D7F8
+	thumb_func_start SetMonIconAnimByHP
+SetMonIconAnimByHP: @ 806D7F8
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -48,10 +48,10 @@ _0806D830:
 	bx r0
 	.align 2, 0
 _0806D848: .4byte gSprites
-	thumb_func_end sub_806D7F8
+	thumb_func_end SetMonIconAnimByHP
 
-	thumb_func_start sub_806D84C
-sub_806D84C: @ 806D84C
+	thumb_func_start SetMonIconAnim
+SetMonIconAnim: @ 806D84C
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	adds r6, r1, 0
@@ -71,14 +71,14 @@ sub_806D84C: @ 806D84C
 	lsrs r2, 16
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_806D7F8
+	bl SetMonIconAnimByHP
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_806D84C
+	thumb_func_end SetMonIconAnim
 
-	thumb_func_start sub_806D880
-sub_806D880: @ 806D880
+	thumb_func_start CreatePartyMenuMonIcon
+CreatePartyMenuMonIcon: @ 806D880
 	push {r4-r6,lr}
 	mov r6, r10
 	mov r5, r9
@@ -121,17 +121,17 @@ sub_806D880: @ 806D880
 	adds r0, r4, 0
 	mov r2, r9
 	mov r3, r10
-	bl sub_809D2FC
+	bl CreateMonIcon
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r6, 0
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl sub_806DE50
+	bl SetMonIconSpriteId_maybe
 	adds r0, r4, 0
 	mov r1, r8
-	bl sub_806D84C
+	bl SetMonIconAnim
 	add sp, 0x8
 	pop {r3-r5}
 	mov r8, r3
@@ -143,10 +143,10 @@ sub_806D880: @ 806D880
 	.align 2, 0
 _0806D904: .4byte gUnknown_08376678
 _0806D908: .4byte sub_809D62C
-	thumb_func_end sub_806D880
+	thumb_func_end CreatePartyMenuMonIcon
 
-	thumb_func_start sub_806D90C
-sub_806D90C: @ 806D90C
+	thumb_func_start TryCreatePartyMenuMonIcon
+TryCreatePartyMenuMonIcon: @ 806D90C
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -162,7 +162,7 @@ sub_806D90C: @ 806D90C
 	bl GetMonData
 	cmp r0, 0
 	beq _0806D95A
-	bl sub_806B528
+	bl IsLinkDoubleBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -171,24 +171,24 @@ sub_806D90C: @ 806D90C
 	adds r1, r5, 0
 	movs r2, 0x2
 	adds r3, r4, 0
-	bl sub_806D880
+	bl CreatePartyMenuMonIcon
 	b _0806D95A
 _0806D946:
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
 	mov r0, r8
 	adds r1, r7, 0
 	adds r3, r4, 0
-	bl sub_806D880
+	bl CreatePartyMenuMonIcon
 _0806D95A:
 	pop {r3}
 	mov r8, r3
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_806D90C
+	thumb_func_end TryCreatePartyMenuMonIcon
 
 	thumb_func_start unref_sub_806D964
 unref_sub_806D964: @ 806D964
@@ -205,7 +205,7 @@ _0806D96E:
 	adds r2, r0
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_806D90C
+	bl TryCreatePartyMenuMonIcon
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -222,8 +222,8 @@ _0806D994: .4byte gPlayerParty
 _0806D998: .4byte gPlayerPartyCount
 	thumb_func_end unref_sub_806D964
 
-	thumb_func_start sub_806D99C
-sub_806D99C: @ 806D99C
+	thumb_func_start CreateMonIcon_806D99C
+CreateMonIcon_806D99C: @ 806D99C
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -254,18 +254,18 @@ sub_806D99C: @ 806D99C
 	mov r7, r8
 	ldr r4, [r7, 0x18]
 	str r4, [sp, 0x4]
-	bl sub_809D2FC
+	bl CreateMonIcon
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r6, 0
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl sub_806DE50
+	bl SetMonIconSpriteId_maybe
 	ldrh r1, [r7, 0x10]
 	ldrh r2, [r7, 0x12]
 	adds r0, r4, 0
-	bl sub_806D7F8
+	bl SetMonIconAnimByHP
 	add sp, 0x8
 	pop {r3}
 	mov r8, r3
@@ -275,13 +275,13 @@ sub_806D99C: @ 806D99C
 	.align 2, 0
 _0806DA04: .4byte gUnknown_08376678
 _0806DA08: .4byte sub_809D62C
-	thumb_func_end sub_806D99C
+	thumb_func_end CreateMonIcon_806D99C
 
-	thumb_func_start sub_806DA0C
-sub_806DA0C: @ 806DA0C
+	thumb_func_start UpdateMonIconFrame_806DA0C
+UpdateMonIconFrame_806DA0C: @ 806DA0C
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_809D638
+	bl UpdateMonIconFrame
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -301,18 +301,18 @@ _0806DA32:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_806DA0C
+	thumb_func_end UpdateMonIconFrame_806DA0C
 
-	thumb_func_start sub_806DA38
-sub_806DA38: @ 806DA38
+	thumb_func_start UpdateMonIconFrame_806DA38
+UpdateMonIconFrame_806DA38: @ 806DA38
 	push {lr}
-	bl sub_809D638
+	bl UpdateMonIconFrame
 	pop {r0}
 	bx r0
-	thumb_func_end sub_806DA38
+	thumb_func_end UpdateMonIconFrame_806DA38
 
-	thumb_func_start sub_806DA44
-sub_806DA44: @ 806DA44
+	thumb_func_start UpdateMonIconFrame_806DA44
+UpdateMonIconFrame_806DA44: @ 806DA44
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -322,7 +322,7 @@ sub_806DA44: @ 806DA44
 	lsrs r4, r2, 24
 	cmp r1, 0x5
 	bhi _0806DA8E
-	bl sub_806DDA0
+	bl GetMonIconSpriteId_maybe
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r3, _0806DA7C @ =gSprites
@@ -338,16 +338,16 @@ sub_806DA44: @ 806DA44
 	adds r0, r3, 0
 	adds r0, 0x1C
 	adds r0, r2, r0
-	ldr r1, _0806DA80 @ =sub_806DA38
+	ldr r1, _0806DA80 @ =UpdateMonIconFrame_806DA38
 	b _0806DA8C
 	.align 2, 0
 _0806DA7C: .4byte gSprites
-_0806DA80: .4byte sub_806DA38
+_0806DA80: .4byte UpdateMonIconFrame_806DA38
 _0806DA84:
 	adds r0, r3, 0
 	adds r0, 0x1C
 	adds r0, r2, r0
-	ldr r1, _0806DA94 @ =sub_806DA0C
+	ldr r1, _0806DA94 @ =UpdateMonIconFrame_806DA0C
 _0806DA8C:
 	str r1, [r0]
 _0806DA8E:
@@ -355,11 +355,11 @@ _0806DA8E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0806DA94: .4byte sub_806DA0C
-	thumb_func_end sub_806DA44
+_0806DA94: .4byte UpdateMonIconFrame_806DA0C
+	thumb_func_end UpdateMonIconFrame_806DA44
 
-	thumb_func_start sub_806DA98
-sub_806DA98: @ 806DA98
+	thumb_func_start LoadHeldItemIconGraphics
+LoadHeldItemIconGraphics: @ 806DA98
 	push {lr}
 	ldr r0, _0806DAAC @ =gUnknown_083765DC
 	bl LoadSpriteSheet
@@ -370,10 +370,10 @@ sub_806DA98: @ 806DA98
 	.align 2, 0
 _0806DAAC: .4byte gUnknown_083765DC
 _0806DAB0: .4byte gUnknown_083765E4
-	thumb_func_end sub_806DA98
+	thumb_func_end LoadHeldItemIconGraphics
 
-	thumb_func_start sub_806DAB4
-sub_806DAB4: @ 806DAB4
+	thumb_func_start SpriteCB_HeldItemIcon
+SpriteCB_HeldItemIcon: @ 806DAB4
 	push {r4,lr}
 	adds r4, r0, 0
 	ldrh r1, [r4, 0x3C]
@@ -419,10 +419,10 @@ _0806DB06:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_806DAB4
+	thumb_func_end SpriteCB_HeldItemIcon
 
-	thumb_func_start sub_806DB0C
-sub_806DB0C: @ 806DB0C
+	thumb_func_start CreateHeldItemIcon
+CreateHeldItemIcon: @ 806DB0C
 	push {r4-r6,lr}
 	mov r6, r9
 	mov r5, r8
@@ -464,7 +464,7 @@ sub_806DB0C: @ 806DB0C
 	movs r0, 0x1C
 	add r8, r0
 	add r4, r8
-	ldr r0, _0806DB8C @ =sub_806DAB4
+	ldr r0, _0806DB8C @ =SpriteCB_HeldItemIcon
 	str r0, [r4]
 	strh r6, [r5, 0x3C]
 	adds r0, r5, 0
@@ -482,11 +482,11 @@ sub_806DB0C: @ 806DB0C
 	.align 2, 0
 _0806DB84: .4byte gSprites
 _0806DB88: .4byte gSpriteTemplate_837660C
-_0806DB8C: .4byte sub_806DAB4
-	thumb_func_end sub_806DB0C
+_0806DB8C: .4byte SpriteCB_HeldItemIcon
+	thumb_func_end CreateHeldItemIcon
 
-	thumb_func_start sub_806DB90
-sub_806DB90: @ 806DB90
+	thumb_func_start CreateHeldItemIcons
+CreateHeldItemIcons: @ 806DB90
 	push {r4-r7,lr}
 	adds r6, r0, 0
 	adds r7, r1, 0
@@ -521,7 +521,7 @@ _0806DBAC:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_806DB0C
+	bl CreateHeldItemIcon
 _0806DBD8:
 	adds r0, r5, 0x1
 	lsls r0, 16
@@ -554,7 +554,7 @@ _0806DBF0:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_806DB0C
+	bl CreateHeldItemIcon
 _0806DC1C:
 	adds r0, r5, 0x1
 	lsls r0, 16
@@ -569,10 +569,10 @@ _0806DC28:
 	bx r0
 	.align 2, 0
 _0806DC30: .4byte gEnemyParty
-	thumb_func_end sub_806DB90
+	thumb_func_end CreateHeldItemIcons
 
-	thumb_func_start sub_806DC34
-sub_806DC34: @ 806DC34
+	thumb_func_start CreateHeldItemIcons_806DC34
+CreateHeldItemIcons_806DC34: @ 806DC34
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -598,7 +598,7 @@ _0806DC50:
 	beq _0806DCB0
 	mov r0, r8
 	adds r1, r7, 0
-	bl sub_806DDA0
+	bl GetMonIconSpriteId_maybe
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
@@ -626,7 +626,7 @@ _0806DC50:
 	strh r0, [r1, 0x3C]
 	mov r0, r8
 	adds r1, r7, 0
-	bl sub_806DF60
+	bl SetHeldItemIconVisibility
 	add r4, r10
 	ldr r1, [r4]
 	adds r0, r6, 0
@@ -648,10 +648,10 @@ _0806DCB0:
 _0806DCC8: .4byte gSprites
 _0806DCCC: .4byte gPlayerParty
 _0806DCD0: .4byte gSpriteTemplate_837660C
-	thumb_func_end sub_806DC34
+	thumb_func_end CreateHeldItemIcons_806DC34
 
-	thumb_func_start sub_806DCD4
-sub_806DCD4: @ 806DCD4
+	thumb_func_start CreateHeldItemIcon_806DCD4
+CreateHeldItemIcon_806DCD4: @ 806DCD4
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -659,7 +659,7 @@ sub_806DCD4: @ 806DCD4
 	lsrs r1, 24
 	lsls r2, 16
 	lsrs r7, r2, 16
-	bl sub_806DDA0
+	bl GetMonIconSpriteId_maybe
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -734,10 +734,10 @@ _0806DD5C:
 	bx r0
 	.align 2, 0
 _0806DD78: .4byte gSprites
-	thumb_func_end sub_806DCD4
+	thumb_func_end CreateHeldItemIcon_806DCD4
 
-	thumb_func_start sub_806DD7C
-sub_806DD7C: @ 806DD7C
+	thumb_func_start SpriteCB_HeldItemIcon_806DD7C
+SpriteCB_HeldItemIcon_806DD7C: @ 806DD7C
 	ldrh r2, [r0, 0x3C]
 	lsls r2, 24
 	lsrs r2, 24
@@ -755,10 +755,10 @@ sub_806DD7C: @ 806DD7C
 	bx lr
 	.align 2, 0
 _0806DD9C: .4byte gSprites
-	thumb_func_end sub_806DD7C
+	thumb_func_end SpriteCB_HeldItemIcon_806DD7C
 
-	thumb_func_start sub_806DDA0
-sub_806DDA0: @ 806DDA0
+	thumb_func_start GetMonIconSpriteId_maybe
+GetMonIconSpriteId_maybe: @ 806DDA0
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
@@ -845,10 +845,10 @@ _0806DE46:
 	bx r1
 	.align 2, 0
 _0806DE4C: .4byte gTasks
-	thumb_func_end sub_806DDA0
+	thumb_func_end GetMonIconSpriteId_maybe
 
-	thumb_func_start sub_806DE50
-sub_806DE50: @ 806DE50
+	thumb_func_start SetMonIconSpriteId_maybe
+SetMonIconSpriteId_maybe: @ 806DE50
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
@@ -960,16 +960,16 @@ _0806DF24:
 	.align 2, 0
 _0806DF2C: .4byte gTasks
 _0806DF30: .4byte 0xffffff00
-	thumb_func_end sub_806DE50
+	thumb_func_end SetMonIconSpriteId_maybe
 
-	thumb_func_start sub_806DF34
-sub_806DF34: @ 806DF34
+	thumb_func_start GetHeldItemIconSpriteIdByMon_maybe
+GetHeldItemIconSpriteIdByMon_maybe: @ 806DF34
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, 24
 	lsrs r1, 24
-	bl sub_806DDA0
+	bl GetMonIconSpriteId_maybe
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _0806DF5C @ =gSprites
@@ -984,10 +984,10 @@ sub_806DF34: @ 806DF34
 	bx r1
 	.align 2, 0
 _0806DF5C: .4byte gSprites
-	thumb_func_end sub_806DF34
+	thumb_func_end GetHeldItemIconSpriteIdByMon_maybe
 
-	thumb_func_start sub_806DF60
-sub_806DF60: @ 806DF60
+	thumb_func_start SetHeldItemIconVisibility
+SetHeldItemIconVisibility: @ 806DF60
 	push {r4-r6,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -995,7 +995,7 @@ sub_806DF60: @ 806DF60
 	lsls r4, 24
 	lsrs r4, 24
 	adds r1, r4, 0
-	bl sub_806DF34
+	bl GetHeldItemIconSpriteIdByMon_maybe
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r6, r5, 0
@@ -1065,7 +1065,7 @@ _0806DFF6:
 	bx r0
 	.align 2, 0
 _0806DFFC: .4byte gSprites
-	thumb_func_end sub_806DF60
+	thumb_func_end SetHeldItemIconVisibility
 
 	thumb_func_start box_print
 box_print: @ 806E000
@@ -1104,8 +1104,8 @@ _0806E048: .4byte gWindowConfig_81E6CAC
 _0806E04C: .4byte 0x06014000
 	thumb_func_end box_print
 
-	thumb_func_start sub_806E050
-sub_806E050: @ 806E050
+	thumb_func_start PrintPartyMenuMonNickname
+PrintPartyMenuMonNickname: @ 806E050
 	push {r4,r5,lr}
 	sub sp, 0xC
 	adds r4, r0, 0
@@ -1125,10 +1125,10 @@ sub_806E050: @ 806E050
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_806E050
+	thumb_func_end PrintPartyMenuMonNickname
 
-	thumb_func_start sub_806E07C
-sub_806E07C: @ 806E07C
+	thumb_func_start TryPrintPartyMenuMonNickname
+TryPrintPartyMenuMonNickname: @ 806E07C
 	push {r4-r6,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -1139,7 +1139,7 @@ sub_806E07C: @ 806E07C
 	bl GetMonData
 	cmp r0, 0
 	beq _0806E0BC
-	bl sub_806B528
+	bl IsLinkDoubleBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1147,24 +1147,24 @@ sub_806E07C: @ 806E07C
 	adds r0, r5, 0
 	movs r1, 0x2
 	adds r2, r4, 0
-	bl sub_806E050
+	bl PrintPartyMenuMonNickname
 	b _0806E0BC
 _0806E0AA:
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r6, 0
 	adds r2, r4, 0
-	bl sub_806E050
+	bl PrintPartyMenuMonNickname
 _0806E0BC:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_806E07C
+	thumb_func_end TryPrintPartyMenuMonNickname
 
-	thumb_func_start sub_806E0C4
-sub_806E0C4: @ 806E0C4
+	thumb_func_start PrintPartyMenuMonNicknames
+PrintPartyMenuMonNicknames: @ 806E0C4
 	push {r4-r6,lr}
 	movs r4, 0
 	movs r6, 0x64
@@ -1174,7 +1174,7 @@ _0806E0CC:
 	muls r1, r6
 	adds r1, r5
 	adds r0, r4, 0
-	bl sub_806E07C
+	bl TryPrintPartyMenuMonNickname
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -1185,7 +1185,7 @@ _0806E0CC:
 	bx r0
 	.align 2, 0
 _0806E0E8: .4byte gPlayerParty
-	thumb_func_end sub_806E0C4
+	thumb_func_end PrintPartyMenuMonNicknames
 
 	thumb_func_start GetMonNickname
 GetMonNickname: @ 806E0EC
@@ -1201,8 +1201,8 @@ GetMonNickname: @ 806E0EC
 	bx r1
 	thumb_func_end GetMonNickname
 
-	thumb_func_start sub_806E104
-sub_806E104: @ 806E104
+	thumb_func_start PartyMenuPutStatusTilemap
+PartyMenuPutStatusTilemap: @ 806E104
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsls r1, 24
@@ -1252,14 +1252,14 @@ _0806E142:
 _0806E15C: .4byte gUnknown_08376738
 _0806E160: .4byte 0x0600f000
 _0806E164: .4byte 0xffffb000
-	thumb_func_end sub_806E104
+	thumb_func_end PartyMenuPutStatusTilemap
 
 	thumb_func_start sub_806E168
 sub_806E168: @ 806E168
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_806B528
+	bl IsLinkDoubleBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1267,7 +1267,7 @@ sub_806E168: @ 806E168
 	movs r3, 0x2
 	b _0806E186
 _0806E17E:
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	lsrs r3, r0, 24
 _0806E186:
@@ -1309,8 +1309,8 @@ _0806E1C8: .4byte gUnknown_08376738
 _0806E1CC: .4byte 0x0600f000
 	thumb_func_end sub_806E168
 
-	thumb_func_start sub_806E1D0
-sub_806E1D0: @ 806E1D0
+	thumb_func_start PartyMenuWriteTilemap
+PartyMenuWriteTilemap: @ 806E1D0
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, 24
@@ -1328,10 +1328,10 @@ sub_806E1D0: @ 806E1D0
 	bx lr
 	.align 2, 0
 _0806E1F0: .4byte 0x0600f000
-	thumb_func_end sub_806E1D0
+	thumb_func_end PartyMenuWriteTilemap
 
-	thumb_func_start sub_806E1F4
-sub_806E1F4: @ 806E1F4
+	thumb_func_start PartyMenuDoPrintLevel
+PartyMenuDoPrintLevel: @ 806E1F4
 	push {r4-r6,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -1358,7 +1358,7 @@ sub_806E1F4: @ 806E1F4
 	lsls r2, 24
 	lsrs r2, 24
 	movs r0, 0x40
-	bl sub_806E1D0
+	bl PartyMenuWriteTilemap
 	ldr r6, _0806E27C @ =gStringVar1
 	movs r0, 0xFC
 	strb r0, [r6]
@@ -1400,10 +1400,10 @@ _0806E284: .4byte 0x01000020
 _0806E288: .4byte gWindowConfig_81E6CAC
 _0806E28C: .4byte 0xffffff00
 _0806E290: .4byte 0x06014200
-	thumb_func_end sub_806E1F4
+	thumb_func_end PartyMenuDoPrintLevel
 
-	thumb_func_start sub_806E294
-sub_806E294: @ 806E294
+	thumb_func_start PartyMenuPrintLevel
+PartyMenuPrintLevel: @ 806E294
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -1419,14 +1419,14 @@ sub_806E294: @ 806E294
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_806E1F4
+	bl PartyMenuDoPrintLevel
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_806E294
+	thumb_func_end PartyMenuPrintLevel
 
-	thumb_func_start sub_806E2C0
-sub_806E2C0: @ 806E2C0
+	thumb_func_start PartyMenuPrintMonLevelOrStatus
+PartyMenuPrintMonLevelOrStatus: @ 806E2C0
 	push {r4-r7,lr}
 	adds r5, r1, 0
 	lsls r0, 24
@@ -1442,10 +1442,10 @@ sub_806E2C0: @ 806E2C0
 	cmp r0, 0
 	bne _0806E32E
 	adds r0, r5, 0
-	bl sub_80A1CD8
+	bl GetMonStatusAndPokerus
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_806B528
+	bl IsLinkDoubleBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1453,7 +1453,7 @@ sub_806E2C0: @ 806E2C0
 	movs r6, 0x2
 	b _0806E302
 _0806E2FA:
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	lsrs r6, r0, 24
 _0806E302:
@@ -1466,26 +1466,26 @@ _0806E302:
 	lsrs r2, 24
 	adds r0, r7, 0
 	adds r1, r6, 0
-	bl sub_806E104
+	bl PartyMenuPutStatusTilemap
 	b _0806E324
 _0806E31A:
 	adds r0, r7, 0
 	adds r1, r6, 0
 	adds r2, r5, 0
-	bl sub_806E294
+	bl PartyMenuPrintLevel
 _0806E324:
 	adds r0, r7, 0
 	adds r1, r6, 0
 	adds r2, r5, 0
-	bl sub_806E3C0
+	bl PartyMenuPutNicknameTilemap
 _0806E32E:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_806E2C0
+	thumb_func_end PartyMenuPrintMonLevelOrStatus
 
-	thumb_func_start sub_806E334
-sub_806E334: @ 806E334
+	thumb_func_start PartyMenuPrintMonsLevelOrStatus
+PartyMenuPrintMonsLevelOrStatus: @ 806E334
 	push {r4-r6,lr}
 	movs r4, 0
 	movs r6, 0x64
@@ -1495,7 +1495,7 @@ _0806E33C:
 	muls r1, r6
 	adds r1, r5
 	adds r0, r4, 0
-	bl sub_806E2C0
+	bl PartyMenuPrintMonLevelOrStatus
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -1506,10 +1506,10 @@ _0806E33C:
 	bx r0
 	.align 2, 0
 _0806E358: .4byte gPlayerParty
-	thumb_func_end sub_806E334
+	thumb_func_end PartyMenuPrintMonsLevelOrStatus
 
-	thumb_func_start sub_806E35C
-sub_806E35C: @ 806E35C
+	thumb_func_start PartyMenuDoPutNicknameTilemap
+PartyMenuDoPutNicknameTilemap: @ 806E35C
 	push {r4-r7,lr}
 	ldr r4, [sp, 0x14]
 	lsls r0, 16
@@ -1549,20 +1549,20 @@ _0806E3A4: .4byte gUnknown_08376738
 _0806E3A8:
 	movs r0, 0x42
 	adds r1, r3, 0
-	bl sub_806E1D0
+	bl PartyMenuWriteTilemap
 	b _0806E3BA
 _0806E3B2:
 	movs r0, 0x44
 	adds r1, r3, 0
-	bl sub_806E1D0
+	bl PartyMenuWriteTilemap
 _0806E3BA:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_806E35C
+	thumb_func_end PartyMenuDoPutNicknameTilemap
 
-	thumb_func_start sub_806E3C0
-sub_806E3C0: @ 806E3C0
+	thumb_func_start PartyMenuPutNicknameTilemap
+PartyMenuPutNicknameTilemap: @ 806E3C0
 	push {r4-r6,lr}
 	mov r6, r9
 	mov r5, r8
@@ -1597,7 +1597,7 @@ sub_806E3C0: @ 806E3C0
 	adds r0, r4, 0
 	adds r2, r6, 0
 	mov r3, r8
-	bl sub_806E35C
+	bl PartyMenuDoPutNicknameTilemap
 	add sp, 0x4
 	pop {r3,r4}
 	mov r8, r3
@@ -1607,10 +1607,10 @@ sub_806E3C0: @ 806E3C0
 	bx r0
 	.align 2, 0
 _0806E41C: .4byte gStringVar1
-	thumb_func_end sub_806E3C0
+	thumb_func_end PartyMenuPutNicknameTilemap
 
-	thumb_func_start sub_806E420
-sub_806E420: @ 806E420
+	thumb_func_start PartyMenuDoPrintHP
+PartyMenuDoPrintHP: @ 806E420
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -1666,10 +1666,10 @@ _0806E494: .4byte 0x01000040
 _0806E498: .4byte gWindowConfig_81E6CAC
 _0806E49C: .4byte 0xffffff00
 _0806E4A0: .4byte 0x06014300
-	thumb_func_end sub_806E420
+	thumb_func_end PartyMenuDoPrintHP
 
-	thumb_func_start sub_806E4A4
-sub_806E4A4: @ 806E4A4
+	thumb_func_start PartyMenuPrintHP
+PartyMenuPrintHP: @ 806E4A4
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -1695,16 +1695,16 @@ sub_806E4A4: @ 806E4A4
 	adds r0, r5, 0
 	adds r1, r6, 0
 	adds r2, r4, 0
-	bl sub_806E420
+	bl PartyMenuDoPrintHP
 	pop {r3}
 	mov r8, r3
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_806E4A4
+	thumb_func_end PartyMenuPrintHP
 
-	thumb_func_start sub_806E4E8
-sub_806E4E8: @ 806E4E8
+	thumb_func_start PartyMenuTryPrintHP
+PartyMenuTryPrintHP: @ 806E4E8
 	push {r4-r6,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -1720,7 +1720,7 @@ sub_806E4E8: @ 806E4E8
 	bl GetMonData
 	cmp r0, 0
 	bne _0806E534
-	bl sub_806B528
+	bl IsLinkDoubleBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1728,24 +1728,24 @@ sub_806E4E8: @ 806E4E8
 	adds r0, r5, 0
 	movs r1, 0x2
 	adds r2, r4, 0
-	bl sub_806E4A4
+	bl PartyMenuPrintHP
 	b _0806E534
 _0806E522:
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r6, 0
 	adds r2, r4, 0
-	bl sub_806E4A4
+	bl PartyMenuPrintHP
 _0806E534:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_806E4E8
+	thumb_func_end PartyMenuTryPrintHP
 
-	thumb_func_start sub_806E53C
-sub_806E53C: @ 806E53C
+	thumb_func_start PartyMenuTryPrintMonsHP
+PartyMenuTryPrintMonsHP: @ 806E53C
 	push {r4-r6,lr}
 	movs r4, 0
 	movs r6, 0x64
@@ -1755,7 +1755,7 @@ _0806E544:
 	muls r1, r6
 	adds r1, r5
 	adds r0, r4, 0
-	bl sub_806E4E8
+	bl PartyMenuTryPrintHP
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -1766,7 +1766,7 @@ _0806E544:
 	bx r0
 	.align 2, 0
 _0806E560: .4byte gPlayerParty
-	thumb_func_end sub_806E53C
+	thumb_func_end PartyMenuTryPrintMonsHP
 
 	thumb_func_start unref_sub_806E564
 unref_sub_806E564: @ 806E564
@@ -1937,7 +1937,7 @@ sub_806E674: @ 806E674
 	bl GetMonData
 	cmp r0, 0
 	bne _0806E6C0
-	bl sub_806B528
+	bl IsLinkDoubleBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1948,7 +1948,7 @@ sub_806E674: @ 806E674
 	bl sub_806E630
 	b _0806E6C0
 _0806E6AE:
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -2451,7 +2451,7 @@ party_menu_link_mon_held_item_object: @ 806EA8C
 	ldr r4, _0806EAC4 @ =0x0201c000
 	ldrb r0, [r4, 0x4]
 	ldrb r1, [r4, 0x5]
-	bl sub_806DF60
+	bl SetHeldItemIconVisibility
 	ldr r2, _0806EAC8 @ =gTasks
 	ldrb r1, [r4, 0x4]
 	lsls r0, r1, 2
@@ -3428,7 +3428,7 @@ _0806F2B2:
 	ldr r4, _0806F2D4 @ =0x0201c000
 	ldrb r0, [r4, 0x4]
 	ldrb r1, [r4, 0x5]
-	bl sub_806DF60
+	bl SetHeldItemIconVisibility
 	ldr r1, _0806F2D8 @ =0xfffff282
 	adds r0, r4, r1
 	movs r1, 0
@@ -3474,7 +3474,7 @@ sub_806F2FC: @ 806F2FC
 	ldr r4, _0806F330 @ =0x0201c000
 	ldrb r0, [r4, 0x4]
 	ldrb r1, [r4, 0x5]
-	bl sub_806DF60
+	bl SetHeldItemIconVisibility
 	ldr r1, _0806F334 @ =0xfffff282
 	adds r0, r4, r1
 	movs r1, 0
@@ -4117,7 +4117,7 @@ _0806F850:
 	strb r1, [r5, 0xC]
 _0806F862:
 	ldr r4, _0806F8A4 @ =gUnknown_08376858
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	movs r2, 0x80
 	lsls r2, 5
 	adds r1, r6, r2
@@ -4238,12 +4238,12 @@ _0806F964:
 	ldr r4, _0806F9DC @ =0x0201c000
 	ldrb r0, [r4, 0x4]
 	ldrb r1, [r4, 0x5]
-	bl sub_806DDA0
+	bl GetMonIconSpriteId_maybe
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, [r4]
-	bl sub_806D84C
-	bl battle_type_is_double
+	bl SetMonIconAnim
+	bl IsDoubleBattle
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -4296,7 +4296,7 @@ _0806F9F0:
 	lsls r2, 5
 	adds r0, r1, r2
 	ldrb r4, [r0, 0x5]
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -4305,7 +4305,7 @@ _0806F9F0:
 	lsls r3, 16
 	lsrs r3, 16
 	adds r0, r4, 0
-	bl sub_806E420
+	bl PartyMenuDoPrintHP
 _0806FA10:
 	add sp, 0x18
 	pop {r4-r7}
@@ -4358,11 +4358,11 @@ sub_806FA18: @ 806FA18
 	ldr r1, _0806FAD0 @ =0xfffe6000
 	adds r6, r1
 	ldrb r1, [r6, 0x1]
-	bl sub_806DDA0
+	bl GetMonIconSpriteId_maybe
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, [r4]
-	bl sub_806D84C
+	bl SetMonIconAnim
 	ldr r2, _0806FAD4 @ =gSprites
 	ldrb r1, [r6, 0x2]
 	lsls r0, r1, 4
@@ -4407,7 +4407,7 @@ _0806FAE4:
 	lsls r1, 5
 	adds r0, r6, r1
 	ldrb r4, [r0, 0x5]
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -4416,7 +4416,7 @@ _0806FAE4:
 	lsls r3, 16
 	lsrs r3, 16
 	adds r0, r4, 0
-	bl sub_806E420
+	bl PartyMenuDoPrintHP
 _0806FB04:
 	add sp, 0x14
 	pop {r4-r7}
@@ -4528,7 +4528,7 @@ sub_806FBB4: @ 806FBB4
 	bl sub_806E168
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_806E2C0
+	bl PartyMenuPrintMonLevelOrStatus
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -4925,7 +4925,7 @@ _0806FF34:
 _0806FF3A:
 	ldr r4, _0806FF88 @ =0x0201c000
 	ldr r0, [r4]
-	bl sub_80A1CD8
+	bl GetMonStatusAndPokerus
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x6
@@ -5007,7 +5007,7 @@ _0806FFE6:
 	bl GetMedicineItemEffectMessage
 	ldrb r0, [r4, 0x5]
 	ldr r1, [r4]
-	bl sub_806E07C
+	bl TryPrintPartyMenuMonNickname
 	ldr r0, _08070020 @ =gStringVar4
 	movs r1, 0x1
 	bl sub_806E834
@@ -5179,7 +5179,7 @@ _08070134:
 	ldr r0, [r4]
 	ldrb r1, [r4, 0x5]
 	bl sub_806FBB4
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -5268,7 +5268,7 @@ sub_80701DC: @ 80701DC
 	bl GetMonData
 	cmp r0, 0
 	beq _0807023A
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -6235,7 +6235,7 @@ sub_8070A20: @ 8070A20
 	lsls r0, 24
 	lsrs r7, r0, 24
 	adds r0, r6, 0
-	bl sub_80A1CD8
+	bl GetMonStatusAndPokerus
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -6247,7 +6247,7 @@ _08070A3A:
 	adds r1, r7, 0
 	bl sub_806FBB4
 _08070A42:
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
@@ -6266,19 +6266,19 @@ _08070A42:
 	adds r0, r7, 0
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl sub_806E420
+	bl PartyMenuDoPrintHP
 	adds r0, r7, 0
 	adds r1, r6, 0
 	bl sub_806E674
 	ldr r4, _08070ABC @ =0x0201c000
 	ldrb r0, [r4, 0x4]
 	adds r1, r7, 0
-	bl sub_806DDA0
+	bl GetMonIconSpriteId_maybe
 	lsls r0, 24
 	lsrs r0, 24
 	adds r1, r6, 0
-	bl sub_806D84C
-	bl battle_type_is_double
+	bl SetMonIconAnim
+	bl IsDoubleBattle
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24

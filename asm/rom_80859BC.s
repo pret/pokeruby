@@ -9300,7 +9300,7 @@ sub_808A1E0: @ 808A1E0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_806DF60
+	bl SetHeldItemIconVisibility
 	movs r0, 0
 	movs r1, 0
 	bl sub_806D538

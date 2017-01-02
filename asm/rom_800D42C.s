@@ -49567,7 +49567,7 @@ _08026832:
 	adds r1, r2
 	adds r1, r0
 	strb r5, [r1]
-	bl sub_806B528
+	bl IsLinkDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _08026850
@@ -62952,11 +62952,11 @@ _0802D318: .4byte 0x02017810
 sub_802D31C: @ 802D31C
 	push {r4-r7,lr}
 	movs r6, 0
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _0802D340
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _0802D374
@@ -63133,7 +63133,7 @@ _0802D488:
 	ldr r5, _0802D4F0 @ =gPlayerParty
 	adds r0, r5
 	bl sub_80324F8
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _0802D4BE
@@ -63247,7 +63247,7 @@ _0802D55E:
 	ands r0, r1
 	cmp r0, 0
 	bne _0802D64C
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _0802D5EE
@@ -63699,7 +63699,7 @@ sub_802D924: @ 802D924
 	str r7, [sp, 0x8]
 	ldrh r2, [r1, 0xA]
 	str r2, [sp, 0xC]
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -63776,7 +63776,7 @@ _0802D96A:
 	movs r1, 0xB
 	bl dp01_build_cmdbuf_x21_a_bb
 	strb r5, [r4]
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -64117,7 +64117,7 @@ sub_802DCB0: @ 802DCB0
 	adds r0, r1
 	ldrb r4, [r0, 0xC]
 	ldrb r6, [r0, 0x8]
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -64184,7 +64184,7 @@ sub_802DD10: @ 802DD10
 	adds r0, r7, 0
 	movs r1, 0x38
 	bl GetMonData
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -70181,7 +70181,7 @@ _08030ECC:
 	mov r9, r0
 	ldrh r0, [r1, 0x8]
 	strb r0, [r7]
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _08030EEC
@@ -71804,7 +71804,7 @@ unref_sub_8031BA0: @ 8031BA0
 	adds r4, 0x8
 	adds r0, r4, 0
 	bl LoadSpritePalette
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _08031BD8
@@ -71883,7 +71883,7 @@ _08031C40:
 	.align 2, 0
 _08031C58: .4byte gUnknown_0820A4D4
 _08031C5C:
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _08031CC4
@@ -73010,7 +73010,7 @@ _08032568:
 	negs r0, r0
 	ands r0, r2
 	strb r0, [r1]
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _08032590
@@ -73020,7 +73020,7 @@ _08032568:
 	.align 2, 0
 _0803258C: .4byte 0x02017800
 _08032590:
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080325B2
@@ -73057,7 +73057,7 @@ sub_80325B8: @ 80325B8
 	adds r0, r5, 0
 	ands r0, r2
 	strb r0, [r1]
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080325F2
@@ -73160,7 +73160,7 @@ sub_8032638: @ 8032638
 	mov r1, r8
 	bl sub_80324F8
 _080326AA:
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080326CE
@@ -73349,7 +73349,7 @@ sub_80327CC: @ 80327CC
 	lsls r0, 2
 	adds r0, r7
 	strh r5, [r0, 0x2E]
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _0803288A
@@ -73931,11 +73931,11 @@ _08032C84: .4byte 0x02017810
 sub_8032C88: @ 8032C88
 	push {r4-r7,lr}
 	movs r6, 0
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _08032CAC
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _08032CE0
@@ -74206,7 +74206,7 @@ _08032EAE:
 	beq _08032EC6
 	b _08032FE0
 _08032EC6:
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _08032F58
@@ -79743,7 +79743,7 @@ sub_8035C44: @ 8035C44
 	adds r0, r1
 	ldrh r0, [r0, 0x8]
 	strb r0, [r7]
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _08035C7E
@@ -83046,11 +83046,11 @@ _0803767C: .4byte 0x02017810
 sub_8037680: @ 8037680
 	push {r4-r7,lr}
 	movs r6, 0
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080376A4
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080376D8
@@ -83368,7 +83368,7 @@ _0803790E:
 	adds r0, r5
 	strb r4, [r0, 0x9]
 _0803791A:
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080379B2
@@ -88441,7 +88441,7 @@ sub_803A2C4: @ 803A2C4
 	adds r0, r1
 	ldrh r0, [r0, 0x8]
 	strb r0, [r7]
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _0803A2FE

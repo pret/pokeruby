@@ -761,7 +761,7 @@ sub_80CACEC: @ 80CACEC
 	lsls r0, 24
 	cmp r0, 0
 	bne _080CAD06
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _080CAD0E
@@ -1333,7 +1333,7 @@ sub_80CB144: @ 80CB144
 	lsls r0, 24
 	cmp r0, 0
 	bne _080CB170
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -5561,7 +5561,7 @@ _080CD1AC:
 	ldr r0, _080CD1F0 @ =gUnknown_0202F7C9
 _080CD1AE:
 	ldrb r6, [r0]
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080CD1F8
@@ -13722,7 +13722,7 @@ _080D1006:
 	movs r0, 0x1
 	adds r4, r0, 0
 	eors r4, r1
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D107E
@@ -28244,7 +28244,7 @@ _080D7FD0:
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	beq _080D7FE8
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	bne _080D7FF4
@@ -35489,7 +35489,7 @@ _080DB7DA:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080DB810
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DB810
@@ -35820,7 +35820,7 @@ _080DBA66:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080DBAAE
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080DBAAE
@@ -46104,7 +46104,7 @@ sub_80E0A4C: @ 80E0A4C
 	orrs r1, r0
 	strb r1, [r5]
 _080E0AC4:
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080E0B40
@@ -50892,7 +50892,7 @@ sub_80E2F2C: @ 80E2F2C
 	orrs r1, r0
 	strb r1, [r4]
 _080E2FAC:
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080E3028
@@ -51432,7 +51432,7 @@ _080E33C0:
 	orrs r1, r0
 	strb r1, [r4]
 _080E3432:
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080E34A4

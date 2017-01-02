@@ -6714,7 +6714,7 @@ _0812E260:
 	bl battle_get_per_side_status
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -12284,7 +12284,7 @@ sub_8130D20: @ 8130D20
 	lsls r0, 24
 	cmp r0, 0
 	bne _08130DA8
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	lsrs r7, r0, 24
 	cmp r7, 0x1
@@ -25546,7 +25546,7 @@ _08137596:
 	ands r0, r1
 	cmp r0, 0
 	bne _08137684
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _08137626

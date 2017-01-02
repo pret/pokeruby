@@ -183,7 +183,7 @@ _080F9B14:
 	muls r2, r3
 	ldr r3, _080F9B44 @ =gPlayerParty
 	adds r2, r3
-	bl sub_806D90C
+	bl TryCreatePartyMenuMonIcon
 	b _080F9BF0
 	.align 2, 0
 _080F9B3C: .4byte 0x00000266
@@ -197,14 +197,14 @@ _080F9B48:
 	adds r1, r4, r0
 	b _080F9BBC
 _080F9B54:
-	bl sub_806DA98
+	bl LoadHeldItemIconGraphics
 	b _080F9BB4
 _080F9B5A:
 	movs r1, 0x98
 	lsls r1, 2
 	adds r0, r4, r1
 	ldrb r0, [r0]
-	bl sub_806DC34
+	bl CreateHeldItemIcons_806DC34
 	movs r2, 0x99
 	lsls r2, 2
 	adds r1, r4, r2
@@ -231,10 +231,10 @@ _080F9B6E:
 	.align 2, 0
 _080F9B94: .4byte 0x00000266
 _080F9B98:
-	bl sub_806E334
+	bl PartyMenuPrintMonsLevelOrStatus
 	b _080F9BB4
 _080F9B9E:
-	bl sub_806E0C4
+	bl PrintPartyMenuMonNicknames
 	ldr r1, _080F9BAC @ =0x0201b000
 	movs r0, 0x99
 	lsls r0, 2
@@ -450,7 +450,7 @@ _080F9D30:
 	muls r2, r3
 	ldr r3, _080F9D60 @ =gPlayerParty
 	adds r2, r3
-	bl sub_806D90C
+	bl TryCreatePartyMenuMonIcon
 	b _080F9E0C
 	.align 2, 0
 _080F9D58: .4byte 0x00000266
@@ -464,14 +464,14 @@ _080F9D64:
 	adds r1, r4, r0
 	b _080F9DD8
 _080F9D70:
-	bl sub_806DA98
+	bl LoadHeldItemIconGraphics
 	b _080F9DD0
 _080F9D76:
 	movs r1, 0x98
 	lsls r1, 2
 	adds r0, r4, r1
 	ldrb r0, [r0]
-	bl sub_806DC34
+	bl CreateHeldItemIcons_806DC34
 	movs r2, 0x99
 	lsls r2, 2
 	adds r1, r4, r2
@@ -498,10 +498,10 @@ _080F9D8A:
 	.align 2, 0
 _080F9DB0: .4byte 0x00000266
 _080F9DB4:
-	bl sub_806E334
+	bl PartyMenuPrintMonsLevelOrStatus
 	b _080F9DD0
 _080F9DBA:
-	bl sub_806E0C4
+	bl PrintPartyMenuMonNicknames
 	ldr r1, _080F9DC8 @ =0x0201b000
 	movs r0, 0x99
 	lsls r0, 2

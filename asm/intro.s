@@ -4021,8 +4021,8 @@ _0813E978: .4byte gSprites
 _0813E97C: .4byte gSpriteTemplate_840B124
 	thumb_func_end sub_813E930
 
-	thumb_func_start GetCurrentTrainerHillMapId
-GetCurrentTrainerHillMapId: @ 813E980
+	thumb_func_start sub_813E980
+sub_813E980: @ 813E980
 	push {r4,r5,lr}
 	adds r3, r0, 0
 	ldr r0, _0813E994 @ =gUnknown_0203931A
@@ -4137,7 +4137,7 @@ _0813EA50:
 	.align 2, 0
 _0813EA58: .4byte gSprites
 _0813EA5C: .4byte gSineTable
-	thumb_func_end GetCurrentTrainerHillMapId
+	thumb_func_end sub_813E980
 
 	thumb_func_start sub_813EA60
 sub_813EA60: @ 813EA60
@@ -4256,8 +4256,8 @@ _0813EB44: .4byte gSpriteTemplate_840B150
 _0813EB48: .4byte gUnknown_0840B168
 	thumb_func_end sub_813EA60
 
-	thumb_func_start sub_813EB4C
-sub_813EB4C: @ 813EB4C
+	thumb_func_start InitIntroTorchicAttackAnim
+InitIntroTorchicAttackAnim: @ 813EB4C
 	push {r4,r5,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -4311,7 +4311,7 @@ _0813EB84:
 _0813EBB0: .4byte gSpriteTemplate_840B170
 _0813EBB4: .4byte gSprites
 _0813EBB8: .4byte gUnknown_0840B188
-	thumb_func_end sub_813EB4C
+	thumb_func_end InitIntroTorchicAttackAnim
 
 	thumb_func_start sub_813EBBC
 sub_813EBBC: @ 813EBBC
@@ -4575,8 +4575,8 @@ _0813EDB4: .4byte gSpriteTemplate_840B1B0
 _0813EDB8: .4byte gSineTable
 	thumb_func_end sub_813EC90
 
-	thumb_func_start sub_813EDBC
-sub_813EDBC: @ 813EDBC
+	thumb_func_start InitIntroMudkipAttackAnim
+InitIntroMudkipAttackAnim: @ 813EDBC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -4608,7 +4608,7 @@ _0813EDEE:
 	.align 2, 0
 _0813EDF4: .4byte gSpriteTemplate_840B1C8
 _0813EDF8: .4byte gSprites
-	thumb_func_end sub_813EDBC
+	thumb_func_end InitIntroMudkipAttackAnim
 
 	thumb_func_start sub_813EDFC
 sub_813EDFC: @ 813EDFC
