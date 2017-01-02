@@ -22,34 +22,34 @@
 #define BADGE07_GET 0x80D
 #define BADGE08_GET 0x80E
 
-#define SYS_USE_FLASH     0x828
-#define SYS_USE_STRENGTH  0x829
-#define SYS_WEATHER_CTRL  0x82A
-#define SYS_CYCLING_ROAD  0x82B
-#define SYS_SAFARI_MODE   0x82C
-#define SYS_CRUISE_MODE   0x82D
+#define SYS_USE_FLASH        0x828
+#define SYS_USE_STRENGTH     0x829
+#define SYS_WEATHER_CTRL     0x82A
+#define SYS_CYCLING_ROAD     0x82B
+#define SYS_SAFARI_MODE      0x82C
+#define SYS_CRUISE_MODE      0x82D
 
-#define SYS_TV_HOME       0x830
-#define SYS_TV_WATCH      0x831
-#define SYS_TV_START      0x832
-#define SYS_POPWORD_INPUT 0x833
-#define SYS_MIX_RECORD    0x834
-#define SYS_CLOCK_SET     0x835
-#define SYS_NATIONAL_DEX  0x836
-#define SYS_CAVE_SHIP     0x837
-#define SYS_CAVE_WONDER   0x838
-#define SYS_CAVE_BATTLE   0x839
-#define SYS_SHOAL_TIDE    0x83A
-#define SYS_RIBBON_GET    0x83B
+#define SYS_TV_HOME          0x830
+#define SYS_TV_WATCH         0x831
+#define SYS_TV_START         0x832
+#define SYS_POPWORD_INPUT    0x833
+#define SYS_MIX_RECORD       0x834
+#define SYS_CLOCK_SET        0x835
+#define SYS_NATIONAL_DEX     0x836
+#define SYS_CAVE_SHIP        0x837
+#define SYS_CAVE_WONDER      0x838
+#define SYS_CAVE_BATTLE      0x839
+#define SYS_SHOAL_TIDE       0x83A
+#define SYS_RIBBON_GET       0x83B
 
-#define SYS_PC_LANETTE    0x84B
-#define SYS_EXDATA_ENABLE 0x84C
-#define SYS_ENC_UP_ITEM   0x84D
-#define SYS_ENC_DOWN_ITEM 0x84E
-#define SYS_SHOW_DIG      0x84F
-#define SYS_SHOW_STRENGTH 0x850
-#define SYS_SHOW_WAIT     0x851
-#define SYS_SHOW_FLY      0x852
+#define SYS_PC_LANETTE       0x84B
+#define SYS_EXDATA_ENABLE    0x84C
+#define SYS_ENC_UP_ITEM      0x84D
+#define SYS_ENC_DOWN_ITEM    0x84E
+#define SYS_BRAILLE_DIG      0x84F
+#define SYS_BRAILLE_STRENGTH 0x850
+#define SYS_BRAILLE_WAIT     0x851
+#define SYS_BRAILLE_FLY      0x852
 
 #define SYS_B_DASH        0x860 // got Running Shoes
 
