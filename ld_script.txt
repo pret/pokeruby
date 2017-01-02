@@ -213,7 +213,12 @@ SECTIONS {
         asm/braille_puzzles.o(.text);
         asm/pokeblock_feed.o(.text);
         src/clear_save_data_menu.o(.text);
-        asm/rom_8148B8C.o(.text);
+        asm/intro_credits_graphics.o(.text);
+        asm/evolution_graphics.o(.text);
+        asm/bard_music.o(.text);
+        asm/fldeff_teleport.o(.text);
+        asm/unknown_debug_menu.o(.text);
+        asm/rom_814A518.o(.text);
         src/menu_cursor.o(.text);
     } =0
 
