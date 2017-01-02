@@ -20200,7 +20200,7 @@ gIntroTiles::
 	.incbin "graphics/intro/intro.4bpp.lz"
 
 	.align 2
-gUnknown_08406974:: @ 8406974
+gIntro1BGPals:: @ 8406974
 	.incbin "graphics/intro/intro1_bgpal1.gbapal"
 	.incbin "graphics/intro/intro1_bgpal2.gbapal"
 	.incbin "graphics/intro/intro1_bgpal3.gbapal"
@@ -20219,47 +20219,47 @@ gUnknown_08406974:: @ 8406974
 	.incbin "graphics/intro/intro1_bgpal16.gbapal"
 
 	.align 2
-gUnknown_08406B74:: @ 8406B74
+gIntro1BG0_Tilemap:: @ 8406B74
 	.incbin "graphics/intro/intro1_bg0_map.bin.lz"
 
 	.align 2
-gUnknown_08406F28:: @ 8406F28
+gIntro1BG1_Tilemap:: @ 8406F28
 	.incbin "graphics/intro/intro1_bg1_map.bin.lz"
 
 	.align 2
-gUnknown_0840725C:: @ 840725C
+gIntro1BG2_Tilemap:: @ 840725C
 	.incbin "graphics/intro/intro1_bg2_map.bin.lz"
 
 	.align 2
-gUnknown_0840754C:: @ 840754C
+gIntro1BG3_Tilemap:: @ 840754C
 	.incbin "graphics/intro/intro1_bg3_map.bin.lz"
 
 	.align 2
-gUnknown_08407764:: @ 8407764
+gIntro1BGLeavesGfx:: @ 8407764
 	.incbin "graphics/intro/introgfx.4bpp.lz"
 
 	.align 2
-gUnknown_084098D4:: @ 84098D4
+gIntro3PokeballPal:: @ 84098D4
 	.incbin "graphics/intro/intro3_pokeball.gbapal"
 
 	.align 2
-gUnknown_08409AD4:: @ 8409AD4
+gIntro3Pokeball_Tilemap:: @ 8409AD4
 	.incbin "graphics/intro/intro3_pokeball_map.bin.lz"
 
 	.align 2
-gUnknown_08409C04:: @ 8409C04
+gIntro3Pokeball_Gfx:: @ 8409C04
 	.incbin "graphics/intro/intro3_pokeball.8bpp.lz"
 
 	.align 2
-gUnknown_0840A758:: @ 840A758
+gIntro3Streaks_Pal:: @ 840A758
 	.incbin "graphics/intro/intro3_streaks.gbapal"
 
 	.align 2
-gUnknown_0840A778:: @ 840A778
+gIntro3Streaks_Gfx:: @ 840A778
 	.incbin "graphics/intro/intro3_streaks.4bpp.lz"
 
 	.align 2
-gUnknown_0840A7E4:: @ 840A7E4
+gIntro3Streaks_Tilemap:: @ 840A7E4
 	.incbin "graphics/intro/intro3_streaks_map.bin.lz"
 
 	.align 2
@@ -20675,22 +20675,22 @@ gSpriteTemplate_840B1F4:: @ 840B1F4
 	spr_template 2003, 2003, gOamData_840B1E0, gSpriteAnimTable_840B1F0, NULL, gDummySpriteAffineAnimTable, sub_813EDFC
 
 	.align 2
-gUnknown_0840B20C:: @ 840B20C
+gIntro3PokeballGfx_Table:: @ 840B20C
 	obj_tiles gInterfaceGfx_PokeBall, 0x100, 2002
 	.space 8
 
 	.align 2
-gUnknown_0840B21C:: @ 840B21C
+gIntro3MiscGfx_Table:: @ 840B21C
 	obj_tiles gIntro3MiscTiles, 0xa00, 2003
 	.space 8
 
 	.align 2
-gUnknown_0840B22C:: @ 840B22C
+gInterfacePokeballPal_Table:: @ 840B22C
 	obj_pal gInterfacePal_PokeBall, 2002
 	.space 8
 
 	.align 2
-gUnknown_0840B23C:: @ 840B23C
+gIntro3MiscPal_Table:: @ 840B23C
 	obj_pal gIntro3Misc1Palette, 2003
 	obj_pal gIntro3Misc2Palette, 2004
 	.space 8
