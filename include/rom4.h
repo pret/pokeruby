@@ -72,7 +72,7 @@ void player_avatar_init_params_reset(void);
 u8 sub_8053B00(struct UnkPlayerStruct *playerStruct, u16 a2, u8 a3);
 u8 sub_8053B60(struct UnkPlayerStruct *playerStruct, u8, u16, u8);
 u16 cur_mapdata_block_role_at_screen_center_acc_to_sav1(void);
-bool32 sub_8053C44(void);
+bool32 IsBikingAllowedByMap(void);
 void sub_8053C98(void);
 void sub_8053CE4(s32 a1);
 u8 sav1_get_flash_used_on_map(void);

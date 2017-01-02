@@ -412,8 +412,8 @@ _080C98FA:
 	bx r0
 	thumb_func_end sub_80C9838
 
-	thumb_func_start sub_80C9908
-sub_80C9908: @ 80C9908
+	thumb_func_start GetPlayerDirectionTowardsHiddenItem
+GetPlayerDirectionTowardsHiddenItem: @ 80C9908
 	push {r4,r5,lr}
 	lsls r0, 16
 	lsls r1, 16
@@ -484,10 +484,10 @@ _080C9976:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80C9908
+	thumb_func_end GetPlayerDirectionTowardsHiddenItem
 
-	thumb_func_start sub_80C997C
-sub_80C997C: @ 80C997C
+	thumb_func_start SetPlayerDirectionTowardsItem
+SetPlayerDirectionTowardsItem: @ 80C997C
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	lsls r5, 24
@@ -536,10 +536,10 @@ sub_80C997C: @ 80C997C
 	bx r0
 	.align 2, 0
 _080C99E8: .4byte gMapObjects
-	thumb_func_end sub_80C997C
+	thumb_func_end SetPlayerDirectionTowardsItem
 
-	thumb_func_start sub_80C99EC
-sub_80C99EC: @ 80C99EC
+	thumb_func_start DisplayItemRespondingMessageAndExitItemfinder
+DisplayItemRespondingMessageAndExitItemfinder: @ 80C99EC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -561,7 +561,7 @@ sub_80C99EC: @ 80C99EC
 	cmp r0, 0x1
 	bne _080C9A24
 	ldr r1, _080C9A30 @ =gOtherText_ItemfinderResponding
-	ldr r2, _080C9A34 @ =sub_80C9520
+	ldr r2, _080C9A34 @ =ExitItemfinder
 	adds r0, r4, 0
 	movs r3, 0
 	bl DisplayItemMessageOnField
@@ -572,11 +572,11 @@ _080C9A24:
 	.align 2, 0
 _080C9A2C: .4byte gMapObjects
 _080C9A30: .4byte gOtherText_ItemfinderResponding
-_080C9A34: .4byte sub_80C9520
-	thumb_func_end sub_80C99EC
+_080C9A34: .4byte ExitItemfinder
+	thumb_func_end DisplayItemRespondingMessageAndExitItemfinder
 
-	thumb_func_start sub_80C9A38
-sub_80C9A38: @ 80C9A38
+	thumb_func_start RotatePlayerAndExitItemfinder
+RotatePlayerAndExitItemfinder: @ 80C9A38
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -608,12 +608,12 @@ sub_80C9A38: @ 80C9A38
 	cmp r0, 0
 	bne _080C9AAE
 _080C9A78:
-	ldr r1, _080C9ABC @ =gUnknown_083D61F0
+	ldr r1, _080C9ABC @ =gItemFinderDirections
 	movs r2, 0xA
 	ldrsh r0, [r4, r2]
 	adds r0, r1
 	ldrb r0, [r0]
-	bl sub_80C997C
+	bl SetPlayerDirectionTowardsItem
 	movs r0, 0x1
 	strh r0, [r4, 0x4]
 	ldrh r0, [r4, 0xA]
@@ -628,8 +628,8 @@ _080C9A78:
 	asrs r0, 16
 	cmp r0, 0x4
 	bne _080C9AAE
-	ldr r1, _080C9AC0 @ =gOtherText_ItemfinderFoundItem
-	ldr r2, _080C9AC4 @ =sub_80C9520
+	ldr r1, _080C9AC0 @ =gOtherText_ItemfinderItemUnderfoot
+	ldr r2, _080C9AC4 @ =ExitItemfinder
 	adds r0, r5, 0
 	movs r3, 0
 	bl DisplayItemMessageOnField
@@ -640,10 +640,10 @@ _080C9AAE:
 	.align 2, 0
 _080C9AB4: .4byte gTasks + 0x8
 _080C9AB8: .4byte gMapObjects
-_080C9ABC: .4byte gUnknown_083D61F0
-_080C9AC0: .4byte gOtherText_ItemfinderFoundItem
-_080C9AC4: .4byte sub_80C9520
-	thumb_func_end sub_80C9A38
+_080C9ABC: .4byte gItemFinderDirections
+_080C9AC0: .4byte gOtherText_ItemfinderItemUnderfoot
+_080C9AC4: .4byte ExitItemfinder
+	thumb_func_end RotatePlayerAndExitItemfinder
 
 	thumb_func_start ItemUseOutOfBattle_PokeblockCase
 ItemUseOutOfBattle_PokeblockCase: @ 80C9AC8
@@ -680,7 +680,7 @@ _080C9AF4:
 	movs r0, 0
 	bl sub_810BA7C
 	adds r0, r4, 0
-	bl unknown_ItemMenu_Confirm
+	bl ItemMenu_ConfirmNormalFade
 	b _080C9B2A
 	.align 2, 0
 _080C9B14: .4byte gTasks
@@ -691,7 +691,7 @@ _080C9B18:
 	movs r0, 0x1
 	bl sub_810BA7C
 	adds r0, r5, 0
-	bl sub_80C9038
+	bl ItemMenu_ConfirmComplexFade
 _080C9B2A:
 	pop {r4,r5}
 	pop {r0}
@@ -733,7 +733,7 @@ ItemUseOutOfBattle_CoinCase: @ 80C9B38
 	movs r2, 0xD
 	movs r3, 0x14
 	bl MenuZeroFillWindowRect
-	ldr r2, _080C9B9C @ =sub_80A5C48
+	ldr r2, _080C9B9C @ =CleanUpItemMenuMessage
 	adds r0, r5, 0
 	adds r1, r4, 0
 	movs r3, 0x1
@@ -744,9 +744,9 @@ _080C9B8C: .4byte gStringVar1
 _080C9B90: .4byte gStringVar4
 _080C9B94: .4byte gOtherText_Coins3
 _080C9B98: .4byte gTasks
-_080C9B9C: .4byte sub_80A5C48
+_080C9B9C: .4byte CleanUpItemMenuMessage
 _080C9BA0:
-	ldr r2, _080C9BB4 @ =sub_80A5C9C
+	ldr r2, _080C9BB4 @ =CleanUpOverworldMessage
 	adds r0, r5, 0
 	adds r1, r4, 0
 	movs r3, 0
@@ -756,7 +756,7 @@ _080C9BAC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080C9BB4: .4byte sub_80A5C9C
+_080C9BB4: .4byte CleanUpOverworldMessage
 	thumb_func_end ItemUseOutOfBattle_CoinCase
 
 	thumb_func_start sub_80C9BB8
@@ -771,7 +771,7 @@ sub_80C9BB8: @ 80C9BB8
 	cmp r0, 0
 	beq _080C9BD0
 	adds r0, r2, 0
-	bl sub_80A5C48
+	bl CleanUpItemMenuMessage
 _080C9BD0:
 	pop {r0}
 	bx r0
@@ -791,7 +791,7 @@ sub_80C9BD8: @ 80C9BD8
 	cmp r0, 0
 	beq _080C9BF0
 	adds r0, r2, 0
-	bl sub_80A5C9C
+	bl CleanUpOverworldMessage
 _080C9BF0:
 	pop {r0}
 	bx r0
@@ -874,7 +874,7 @@ sub_80C9C7C: @ 80C9C7C
 	ldr r0, _080C9CCC @ =sub_80C9D00
 	str r0, [r1]
 	ldr r1, _080C9CD0 @ =gUnknown_0300485C
-	ldr r0, _080C9CD4 @ =sub_80A5CC4
+	ldr r0, _080C9CD4 @ =ExecuteItemUseFromBlackPalette
 	str r0, [r1]
 	ldr r1, _080C9CD8 @ =gTasks
 	lsls r0, r4, 2
@@ -886,7 +886,7 @@ sub_80C9C7C: @ 80C9C7C
 	movs r3, 0
 	strh r1, [r0, 0x18]
 	strh r2, [r0, 0x1A]
-	ldr r1, _080C9CE0 @ =sub_80A5B00
+	ldr r1, _080C9CE0 @ =HandleItemMenuPaletteFade
 	str r1, [r0]
 	movs r0, 0x1
 	negs r0, r0
@@ -900,10 +900,10 @@ sub_80C9C7C: @ 80C9C7C
 _080C9CC8: .4byte gUnknown_03005D00
 _080C9CCC: .4byte sub_80C9D00
 _080C9CD0: .4byte gUnknown_0300485C
-_080C9CD4: .4byte sub_80A5CC4
+_080C9CD4: .4byte ExecuteItemUseFromBlackPalette
 _080C9CD8: .4byte gTasks
 _080C9CDC: .4byte c2_exit_to_overworld_2_switch
-_080C9CE0: .4byte sub_80A5B00
+_080C9CE0: .4byte HandleItemMenuPaletteFade
 _080C9CE4:
 	ldr r0, _080C9CFC @ =gScriptItemId
 	ldrh r0, [r0]
@@ -1005,7 +1005,7 @@ sub_80C9D98: @ 80C9D98
 	ldr r2, _080C9DAC @ =gUnknown_02038561
 	movs r1, 0
 	strb r1, [r2]
-	bl unknown_ItemMenu_Confirm
+	bl ItemMenu_ConfirmNormalFade
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -1072,7 +1072,7 @@ _080C9E10:
 	movs r0, 0x4
 	strb r0, [r1]
 	adds r0, r6, 0
-	bl unknown_ItemMenu_Confirm
+	bl ItemMenu_ConfirmNormalFade
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -1340,7 +1340,7 @@ ItemUseOutOfBattle_Repel: @ 80CA014
 	bl VarSet
 	bl sub_80C9FDC
 	ldr r1, _080CA058 @ =gStringVar4
-	ldr r2, _080CA05C @ =sub_80A5C48
+	ldr r2, _080CA05C @ =CleanUpItemMenuMessage
 	adds r0, r4, 0
 	movs r3, 0x1
 	bl DisplayItemMessageOnField
@@ -1349,10 +1349,10 @@ ItemUseOutOfBattle_Repel: @ 80CA014
 _080CA050: .4byte 0x00004021
 _080CA054: .4byte gScriptItemId
 _080CA058: .4byte gStringVar4
-_080CA05C: .4byte sub_80A5C48
+_080CA05C: .4byte CleanUpItemMenuMessage
 _080CA060:
 	ldr r1, _080CA074 @ =gOtherText_RepelLingers
-	ldr r2, _080CA078 @ =sub_80A5C48
+	ldr r2, _080CA078 @ =CleanUpItemMenuMessage
 	adds r0, r4, 0
 	movs r3, 0x1
 	bl DisplayItemMessageOnField
@@ -1362,7 +1362,7 @@ _080CA06C:
 	bx r0
 	.align 2, 0
 _080CA074: .4byte gOtherText_RepelLingers
-_080CA078: .4byte sub_80A5C48
+_080CA078: .4byte CleanUpItemMenuMessage
 	thumb_func_end ItemUseOutOfBattle_Repel
 
 	thumb_func_start sub_80CA07C
@@ -1400,7 +1400,7 @@ sub_80CA098: @ 80CA098
 	movs r0, 0x75
 	bl PlaySE
 	ldr r1, _080CA0D4 @ =gStringVar4
-	ldr r2, _080CA0D8 @ =sub_80A5C48
+	ldr r2, _080CA0D8 @ =CleanUpItemMenuMessage
 	adds r0, r4, 0
 	movs r3, 0x1
 	bl DisplayItemMessageOnField
@@ -1411,7 +1411,7 @@ _080CA0C8:
 	.align 2, 0
 _080CA0D0: .4byte gTasks
 _080CA0D4: .4byte gStringVar4
-_080CA0D8: .4byte sub_80A5C48
+_080CA0D8: .4byte CleanUpItemMenuMessage
 	thumb_func_end sub_80CA098
 
 	thumb_func_start ItemUseOutOfBattle_BlackWhiteFlute
@@ -1616,7 +1616,7 @@ _080CA26C:
 	movs r3, 0x14
 	bl MenuZeroFillWindowRect
 	ldr r1, _080CA28C @ =gOtherText_BoxIsFull
-	ldr r2, _080CA290 @ =sub_80A5C48
+	ldr r2, _080CA290 @ =CleanUpItemMenuMessage
 	adds r0, r4, 0
 	movs r3, 0x1
 	bl DisplayItemMessageOnField
@@ -1626,7 +1626,7 @@ _080CA284:
 	bx r0
 	.align 2, 0
 _080CA28C: .4byte gOtherText_BoxIsFull
-_080CA290: .4byte sub_80A5C48
+_080CA290: .4byte CleanUpItemMenuMessage
 	thumb_func_end ItemUseInBattle_PokeBall
 
 	thumb_func_start sub_80CA294
@@ -1726,7 +1726,7 @@ ItemUseInBattle_StatIncrease: @ 80CA310
 	cmp r2, 0
 	beq _080CA374
 	ldr r1, _080CA36C @ =gOtherText_WontHaveAnyEffect
-	ldr r2, _080CA370 @ =sub_80A5C48
+	ldr r2, _080CA370 @ =CleanUpItemMenuMessage
 	adds r0, r5, 0
 	movs r3, 0x1
 	bl DisplayItemMessageOnField
@@ -1737,7 +1737,7 @@ _080CA360: .4byte gUnknown_02024E6C
 _080CA364: .4byte gPlayerParty
 _080CA368: .4byte gScriptItemId
 _080CA36C: .4byte gOtherText_WontHaveAnyEffect
-_080CA370: .4byte sub_80A5C48
+_080CA370: .4byte CleanUpItemMenuMessage
 _080CA374:
 	ldr r0, _080CA38C @ =gTasks
 	lsls r1, r5, 2
@@ -1898,7 +1898,7 @@ _080CA4A4: .4byte gOtherText_SnapConfusion
 _080CA4A8: .4byte sub_80A7094
 _080CA4AC:
 	ldr r1, _080CA4C0 @ =gOtherText_WontHaveAnyEffect
-	ldr r2, _080CA4C4 @ =sub_80A5C48
+	ldr r2, _080CA4C4 @ =CleanUpItemMenuMessage
 	adds r0, r5, 0
 	movs r3, 0x1
 	bl DisplayItemMessageOnField
@@ -1908,7 +1908,7 @@ _080CA4B8:
 	bx r0
 	.align 2, 0
 _080CA4C0: .4byte gOtherText_WontHaveAnyEffect
-_080CA4C4: .4byte sub_80A5C48
+_080CA4C4: .4byte CleanUpItemMenuMessage
 	thumb_func_end unref_sub_80CA448
 
 	thumb_func_start ItemUseInBattle_Escape

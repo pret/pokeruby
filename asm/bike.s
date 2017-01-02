@@ -1947,8 +1947,8 @@ _080E5EEE:
 	bx r1
 	thumb_func_end sub_80E5EC0
 
-	thumb_func_start sub_80E5EF4
-sub_80E5EF4: @ 80E5EF4
+	thumb_func_start IsBikingDisallowedByPlayer
+IsBikingDisallowedByPlayer: @ 80E5EF4
 	push {r4,lr}
 	sub sp, 0x4
 	ldr r0, _080E5F30 @ =gPlayerAvatar
@@ -1985,7 +1985,7 @@ _080E5F36:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80E5EF4
+	thumb_func_end IsBikingDisallowedByPlayer
 
 	thumb_func_start player_should_look_direction_be_enforced_upon_movement
 player_should_look_direction_be_enforced_upon_movement: @ 80E5F40

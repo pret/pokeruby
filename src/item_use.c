@@ -15,43 +15,43 @@
 #include "script.h"
 #include "field_player_avatar.h"
 #include "sound.h"
+#include "songs.h"
 
-extern void (* const gUnknown_083D61E4[])();
+extern void (* const gExitToOverworldFuncList[])();
 extern void (* gUnknown_03005D00)(u8);
 extern void (* gUnknown_0300485C)(void);
 
-extern void sub_80A5B00(u8);
-extern void sub_80A5CC4(void);
-extern void sub_80C8FAC(u8);
+extern void HandleItemMenuPaletteFade(u8);
+extern void ExecuteItemUseFromBlackPalette(void);
 extern void DisplayItemMessageOnField(u8, u8*, TaskFunc, u16);
-extern void sub_80A5C48(u8);
-extern void sub_80A5C9C(u8);
+extern void CleanUpItemMenuMessage(u8);
+extern void CleanUpOverworldMessage(u8);
 extern void ItemUseOutOfBattle_TMHM(u8);
 extern void ItemUseOutOfBattle_EvolutionStone(u8);
 extern void ItemUseOnFieldCB_Bike(u8);
 extern void ItemUseOnFieldCB_Rod(u8);
 extern void ItemUseOnFieldCB_Itemfinder(u8);
 extern void sub_80A5D04(void);
-extern bool8 sub_80E5EF4(void);
+extern bool8 IsBikingDisallowedByPlayer(void);
 extern void GetOnOffBike(u8);
-extern void sub_80C9458(u8);
-extern void sub_80C9520(u8);
-extern u8 sub_80C9908(s16, s16);
-extern void sub_80C997C(u8);
-extern void sub_80C99EC(u8);
-extern void sub_80C9A38(u8);
+extern u8 GetPlayerDirectionTowardsHiddenItem(s16, s16);
+extern void SetPlayerDirectionTowardsItem(u8);
+extern void DisplayItemRespondingMessageAndExitItemfinder(u8);
+extern void RotatePlayerAndExitItemfinder(u8);
 
 extern u8 gOtherText_DadsAdvice[];
 extern u8 gOtherText_CantGetOffBike[];
 extern u8 gOtherText_NoResponse[];
 
-extern u8 gUnknown_083D61F0[];
+extern u8 gItemFinderDirections[];
 
 extern u16 gScriptItemId;
 
 bool8 ItemfinderCheckForHiddenItems(struct MapEvents *events, int);
+void RunItemfinderResults(u8);
+void ExitItemfinder(u8);
 
-void sub_80C8FAC(u8 taskId)
+void ExecuteSwitchToOverworldFromItemUse(u8 taskId)
 {
     u8 taskData;
 
@@ -60,20 +60,20 @@ void sub_80C8FAC(u8 taskId)
     else
         taskData = ItemId_GetType(gScriptItemId) - 1;
 
-    gTasks[taskId].data[8] = (u32)gUnknown_083D61E4[taskData] >> 16;
-    gTasks[taskId].data[9] = (u32)gUnknown_083D61E4[taskData];
-    gTasks[taskId].func = sub_80A5B00;
+    gTasks[taskId].data[8] = (u32)gExitToOverworldFuncList[taskData] >> 16;
+    gTasks[taskId].data[9] = (u32)gExitToOverworldFuncList[taskData];
+    gTasks[taskId].func = HandleItemMenuPaletteFade;
 }
 
-void unknown_ItemMenu_Confirm(u8 var)
+void ItemMenu_ConfirmNormalFade(u8 var)
 {
-	sub_80C8FAC(var);
+	ExecuteSwitchToOverworldFromItemUse(var);
 	BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
 }
 
-void sub_80C9038(u8 var)
+void ItemMenu_ConfirmComplexFade(u8 var)
 {
-	sub_80C8FAC(var);
+	ExecuteSwitchToOverworldFromItemUse(var);
 	fade_screen(1, 0);
 }
 
@@ -81,34 +81,37 @@ void SetUpItemUseOnFieldCallback(u8 taskId)
 {
 	if(gTasks[taskId].data[2] != 1)
 	{
-		gUnknown_0300485C = (void *)sub_80A5CC4;
-		unknown_ItemMenu_Confirm(taskId);
+		gUnknown_0300485C = (void *)ExecuteItemUseFromBlackPalette;
+		ItemMenu_ConfirmNormalFade(taskId);
 	}
 	else
 		gUnknown_03005D00(taskId);
 }
 
-void sub_80C9098(u8 var1, u8 var2, const u8 *var3)
+void HandleDeniedItemUseMessage(u8 var1, u8 playerMenuStatus, const u8 *var3)
 {
 	StringExpandPlaceholders(gStringVar4, var3);
 	
-	if(!var2)
+	switch(playerMenuStatus)
 	{
-		MenuZeroFillWindowRect(0, 13, 13, 20);
-		DisplayItemMessageOnField(var1, gStringVar4, sub_80A5C48, 1);
+		case 0: // Item Menu
+			MenuZeroFillWindowRect(0, 13, 13, 20);
+			DisplayItemMessageOnField(var1, gStringVar4, CleanUpItemMenuMessage, 1);
+			break;
+		default: // Field
+			DisplayItemMessageOnField(var1, gStringVar4, CleanUpOverworldMessage, 0);
+			break;
 	}
-	else
-		DisplayItemMessageOnField(var1, gStringVar4, sub_80A5C9C, 0);
 }
 
-void DisplayDadsAdviceCannotUseItemMessage(u8 var1, u8 var2)
+void DisplayDadsAdviceCannotUseItemMessage(u8 var1, u8 playerMenuStatus)
 {
-	sub_80C9098(var1, var2, gOtherText_DadsAdvice);
+	HandleDeniedItemUseMessage(var1, playerMenuStatus, gOtherText_DadsAdvice);
 }
 
-void sub_80C9104(u8 var1, u8 var2)
+void DisplayCantGetOffBikeItemMessage(u8 var1, u8 playerMenuStatus)
 {
-	sub_80C9098(var1, var2, gOtherText_CantGetOffBike);
+	HandleDeniedItemUseMessage(var1, playerMenuStatus, gOtherText_CantGetOffBike);
 }
 
 u8 CheckIfItemIsTMHMOrEvolutionStone(u16 itemId)
@@ -121,14 +124,14 @@ u8 CheckIfItemIsTMHMOrEvolutionStone(u16 itemId)
 		return 0;
 }
 
-void sub_80C9154(u8 taskId)
+void ItemMenu_ReadMail(u8 taskId)
 {
 	struct MailStruct mailStruct;
 
 	if(!gPaletteFade.active)
 	{
 		mailStruct.var20 = gScriptItemId;
-		sub_80F890C(&mailStruct, sub_80A5D04, 0);
+		HandleReadMail(&mailStruct, sub_80A5D04, 0);
 		DestroyTask(taskId);
 	}
 }
@@ -136,7 +139,7 @@ void sub_80C9154(u8 taskId)
 void ItemUseOutOfBattle_Mail(u8 taskId)
 {
 	BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
-	gTasks[taskId].func = sub_80C9154;
+	gTasks[taskId].func = ItemMenu_ReadMail;
 }
 
 void ItemUseOutOfBattle_Bike(u8 taskId)
@@ -147,17 +150,17 @@ void ItemUseOutOfBattle_Bike(u8 taskId)
 	PlayerGetDestCoords(&x, &y);
 	tileBehavior = MapGridGetMetatileBehaviorAt(x, y);
 	
-	if(FlagGet(0x82B) == TRUE
+	if(FlagGet(SYS_CYCLING_ROAD) == TRUE // on cycling road?
 		|| MetatileBehavior_IsVerticalRail(tileBehavior) == TRUE
 		|| MetatileBehavior_IsHorizontalRail(tileBehavior) == TRUE
 		|| MetatileBehavior_IsIsolatedVerticalRail(tileBehavior) == TRUE
 		|| MetatileBehavior_IsIsolatedHorizontalRail(tileBehavior) == TRUE)
 	{
-		sub_80C9104(taskId, gTasks[taskId].data[2]);
+		DisplayCantGetOffBikeItemMessage(taskId, gTasks[taskId].data[2]);
 	}
 	else
 	{
-		if(sub_8053C44() == TRUE && sub_80E5EF4() == FALSE)
+		if(IsBikingAllowedByMap() == TRUE && IsBikingDisallowedByPlayer() == FALSE)
 		{
 			gUnknown_03005D00 = (void *)ItemUseOnFieldCB_Bike;
 			SetUpItemUseOnFieldCallback(taskId);
@@ -236,15 +239,15 @@ void ItemUseOutOfBattle_Itemfinder(u8 var)
 void ItemUseOnFieldCB_Itemfinder(u8 taskId)
 {
     if(ItemfinderCheckForHiddenItems(gMapHeader.events, taskId) == TRUE)
-        gTasks[taskId].func = sub_80C9458;
+        gTasks[taskId].func = RunItemfinderResults;
     else
-        DisplayItemMessageOnField(taskId, gOtherText_NoResponse, sub_80C9520, 0);
+        DisplayItemMessageOnField(taskId, gOtherText_NoResponse, ExitItemfinder, 0);
 }
 
-void sub_80C9458(u8 taskId)
+void RunItemfinderResults(u8 taskId)
 {
-    u8 var;
     u8 playerDir;
+	u8 playerDirToItem;
     u8 i;
     s16 *data = gTasks[taskId].data;
 
@@ -252,33 +255,34 @@ void sub_80C9458(u8 taskId)
     {
         if(data[4] == 4)
         {
-            var = sub_80C9908(data[0], data[1]);
-            if(var)
+            playerDirToItem = GetPlayerDirectionTowardsHiddenItem(data[0], data[1]);
+            if(playerDirToItem)
             {
-                sub_80C997C(gUnknown_083D61F0[var - 1]);
-                gTasks[taskId].func = sub_80C99EC;
+                SetPlayerDirectionTowardsItem(gItemFinderDirections[playerDirToItem - 1]);
+                gTasks[taskId].func = DisplayItemRespondingMessageAndExitItemfinder;
             }
-            else
+            else // player is above hidden item.
             {
                 playerDir = player_get_direction_lower_nybble();
 
+				// rotate player clockwise depending on current direction.
                 for (i = 0; i < 4; i++)
-                    if (playerDir == gUnknown_083D61F0[i])
+                    if (playerDir == gItemFinderDirections[i])
                         data[5] = (i + 1) & 3;
 
-                gTasks[taskId].func = sub_80C9A38;
+                gTasks[taskId].func = RotatePlayerAndExitItemfinder;
                 data[3] = 0;
                 data[2] = 0;
             }
 			return;
         }
-        PlaySE(0x48);
+        PlaySE(SE_DAUGI); // play the itemfinder jingle 4 times before executing the itemfinder.
         data[4]++;
     }
     data[3] = (data[3] + 1) & 0x1F;
 }
 
-void sub_80C9520(u8 taskId)
+void ExitItemfinder(u8 taskId)
 {
 	MenuZeroFillWindowRect(0, 14, 29, 19);
 	sub_8064E2C();

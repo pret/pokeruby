@@ -10104,7 +10104,7 @@ sub_808A848: @ 808A848
 	adds r0, r1
 	ldr r1, _0808A8A4 @ =sub_808A8A8
 	movs r2, 0x1
-	bl sub_80F890C
+	bl HandleReadMail
 _0808A890:
 	pop {r4,r5}
 	pop {r0}
