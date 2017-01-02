@@ -177,7 +177,7 @@ void sub_8081A5C(void)
     player_bitmagic();
     sub_80597F4();
     gMain.field_8 = sub_8081C8C;
-    gBattleTypeFlags = 1024;
+    gBattleTypeFlags = BATTLE_TYPE_ROAMER;
     task_add_01_battle_start(GetWildBattleTransition(), 0);
     sav12_xor_increment(7);
     sav12_xor_increment(8);
@@ -189,7 +189,7 @@ void sub_8081AA4(void)
     player_bitmagic();
     sub_80597F4();
     gMain.field_8 = sub_80C824C;
-    gBattleTypeFlags = 128;
+    gBattleTypeFlags = BATTLE_TYPE_SAFARI;
     task_add_01_battle_start(GetWildBattleTransition(), 0);
 }
 
@@ -206,7 +206,7 @@ void sub_8081AFC(void)
     CreateMaleMon(&gEnemyParty[0], SPECIES_RALTS, 5);
     ScriptContext2_Enable();
     gMain.field_8 = c2_exit_to_overworld_1_continue_scripts_restart_music;
-    gBattleTypeFlags = 512;
+    gBattleTypeFlags = BATTLE_TYPE_WALLY_TUTORIAL;
     task_add_01_battle_start(8, 0);
 }
 
@@ -224,7 +224,7 @@ void sub_8081B78(void)
 {
     ScriptContext2_Enable();
     gMain.field_8 = sub_8081CEC;
-    gBattleTypeFlags = 0x2000;
+    gBattleTypeFlags = BATTLE_TYPE_LEGENDARY;
     task_add_01_battle_start(GetWildBattleTransition(), 0);
     sav12_xor_increment(7);
     sav12_xor_increment(8);
@@ -234,7 +234,7 @@ void sub_8081BB8(void)
 {
     ScriptContext2_Enable();
     gMain.field_8 = sub_8081CEC;
-    gBattleTypeFlags = 0x2000;
+    gBattleTypeFlags = BATTLE_TYPE_LEGENDARY;
     task_add_01_battle_start(0, BGM_BATTLE34);
     sav12_xor_increment(7);
     sav12_xor_increment(8);
@@ -244,7 +244,7 @@ void sub_8081BF8(void)
 {
     ScriptContext2_Enable();
     gMain.field_8 = sub_8081CEC;
-    gBattleTypeFlags = 12288;
+    gBattleTypeFlags = BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_KYOGRE_GROUDON;
     if (gGameVersion == 2)
         task_add_01_battle_start(0xB, BGM_BATTLE34); // KYOGRE
     else
@@ -257,7 +257,7 @@ void sub_8081C50(void)
 {
     ScriptContext2_Enable();
     gMain.field_8 = sub_8081CEC;
-    gBattleTypeFlags = 24576;
+    gBattleTypeFlags = BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_REGI;
     task_add_01_battle_start(0xA, BGM_BATTLE36);
     sav12_xor_increment(7);
     sav12_xor_increment(8);
@@ -523,7 +523,7 @@ void sub_80821D8(void)
 
     if (sub_811AAE8() == TRUE)
     {
-        gBattleTypeFlags = 16;
+        gBattleTypeFlags = BATTLE_TYPE_FIRST_BATTLE;
         gMain.field_8 = sub_8082228;
         SetMainCallback2(sub_800E7C4);
         prev_quest_postbuffer_cursor_backup_reset();
@@ -733,7 +733,7 @@ void trainer_flag_clear(u16 flag)
 
 void sub_80825E4(void)
 {
-    gBattleTypeFlags = 8;
+    gBattleTypeFlags = BATTLE_TYPE_TRAINER;
     gMain.field_8 = sub_808260C;
     task_add_01_battle_start_with_music_and_stats();
     ScriptContext1_Stop();
@@ -776,7 +776,7 @@ void do_choose_name_or_words_screen(void)
 
 void sub_80826B0(void)
 {
-    gBattleTypeFlags = 8;
+    gBattleTypeFlags = BATTLE_TYPE_TRAINER;
     gMain.field_8 = do_choose_name_or_words_screen;
     task_add_01_battle_start_with_music_and_stats();
     ScriptContext1_Stop();

@@ -5,6 +5,7 @@
 #include "songs.h"
 #include "palette.h"
 #include "sound.h"
+#include "battle.h"
 
 enum
 {
@@ -2911,7 +2912,7 @@ static bool8 PlayerCanInterruptWait(struct Window *win)
             retVal = TRUE;
         break;
     case 1:
-        retVal &= ~(gBattleTypeFlags >> 1);
+        retVal = (gBattleTypeFlags & BATTLE_TYPE_LINK) ? FALSE : TRUE;
         break;
     }
 

@@ -10,6 +10,7 @@
 #include "abilities.h"
 #include "hold_effects.h"
 #include "event_data.h"
+#include "battle.h"
 
 extern u8 gPlayerPartyCount;
 extern struct Pokemon gPlayerParty[6];
@@ -113,33 +114,33 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     if (attacker->ability == ABILITY_HUGE_POWER || attacker->ability == ABILITY_PURE_POWER)
         attack *= 2;
 
-    if (!(gBattleTypeFlags & 0x902))
+    if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_EREADER_TRAINER)))
     {
-        if ((gBattleTypeFlags & 8)
+        if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
             && gTrainerBattleOpponent != 1024
             && FlagGet(BADGE01_GET)
             && !battle_side_get_owner(a7))
             attack = (110 * attack) / 100;
 
-        if (!(gBattleTypeFlags & 0x902))
+        if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_EREADER_TRAINER)))
         {
-            if ((gBattleTypeFlags & 8)
+            if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
                 && gTrainerBattleOpponent != 1024
                 && FlagGet(BADGE05_GET)
                 && !battle_side_get_owner(a8))
                 defense = (110 * defense) / 100;
 
-            if (!(gBattleTypeFlags & 0x902))
+            if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_EREADER_TRAINER)))
             {
-                if ((gBattleTypeFlags & 8)
+                if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
                     && gTrainerBattleOpponent != 1024
                     && FlagGet(BADGE07_GET)
                     && !battle_side_get_owner(a7))
                     spAttack = (110 * spAttack) / 100;
 
-                if (!(gBattleTypeFlags & 0x902))
+                if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_EREADER_TRAINER)))
                 {
-                    if ((gBattleTypeFlags & 8)
+                    if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
                         && gTrainerBattleOpponent != 1024
                         && FlagGet(BADGE07_GET)
                         && !battle_side_get_owner(a8))
@@ -164,9 +165,9 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 
     if (attackerHoldEffect == HOLD_EFFECT_CHOICE_BAND)
         attack = (150 * attack) / 100;
-    if (attackerHoldEffect == HOLD_EFFECT_SOUL_DEW && !(gBattleTypeFlags & 0x100) && (attacker->species == SPECIES_LATIAS || attacker->species == SPECIES_LATIOS))
+    if (attackerHoldEffect == HOLD_EFFECT_SOUL_DEW && !(gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER) && (attacker->species == SPECIES_LATIAS || attacker->species == SPECIES_LATIOS))
         spAttack = (150 * spAttack) / 100;
-    if (defenderHoldEffect == HOLD_EFFECT_SOUL_DEW && !(gBattleTypeFlags & 0x100) && (defender->species == SPECIES_LATIAS || defender->species == SPECIES_LATIOS))
+    if (defenderHoldEffect == HOLD_EFFECT_SOUL_DEW && !(gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER) && (defender->species == SPECIES_LATIAS || defender->species == SPECIES_LATIOS))
         spDefense = (150 * spDefense) / 100;
     if (attackerHoldEffect == HOLD_EFFECT_DEEP_SEA_TOOTH && attacker->species == SPECIES_CLAMPERL)
         spAttack *= 2;
@@ -236,13 +237,13 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 
         if ((a4 & 1) && gCritMultiplier == 1)
         {
-            if ((gBattleTypeFlags & 1) && sub_803C348(2) == 2)
+            if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && sub_803C348(2) == 2)
                 damage = 2 * (damage / 3);
             else
                 damage /= 2;
         }
 
-        if ((gBattleTypeFlags & 1) && gBattleMoves[move].target == 8 && sub_803C348(2) == 2)
+        if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && gBattleMoves[move].target == 8 && sub_803C348(2) == 2)
             damage /= 2;
 
         if (damage == 0)
@@ -280,13 +281,13 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 
         if ((a4 & 2) && gCritMultiplier == 1)
         {
-            if ((gBattleTypeFlags & 1) && sub_803C348(2) == 2)
+            if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && sub_803C348(2) == 2)
                 damage = 2 * (damage / 3);
             else
                 damage /= 2;
         }
 
-        if ((gBattleTypeFlags & 1) && gBattleMoves[move].target == 8 && sub_803C348(2) == 2)
+        if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && gBattleMoves[move].target == 8 && sub_803C348(2) == 2)
             damage /= 2;
 
         if (!sub_8018324(0xE, 0, ABILITY_CLOUD_NINE, 0, 0) && !sub_8018324(0xE, 0, ABILITY_AIR_LOCK, 0, 0))
