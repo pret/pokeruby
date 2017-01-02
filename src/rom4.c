@@ -655,11 +655,11 @@ u16 cur_mapdata_block_role_at_screen_center_acc_to_sav1(void)
 
 bool32 IsBikingAllowedByMap(void)
 {
-	// is player in cycling road entrance?
+    // is player in cycling road entrance?
     if (gSaveBlock1.location.mapGroup == 29 && (gSaveBlock1.location.mapNum == 11 || gSaveBlock1.location.mapNum == 12))
         return TRUE;
 
-	// is player indoor, in a secret base, or underwater?
+    // is player indoor, in a secret base, or underwater?
     if (gMapHeader.mapType == MAP_TYPE_INDOOR)
         return FALSE;
     if (gMapHeader.mapType == MAP_TYPE_SECRET_BASE)
@@ -667,11 +667,11 @@ bool32 IsBikingAllowedByMap(void)
     if (gMapHeader.mapType == MAP_TYPE_UNDERWATER)
         return FALSE;
 	
-	// is player in SeafloorCavern_Room9?
+    // is player in SeafloorCavern_Room9?
     if (gSaveBlock1.location.mapGroup == 24 && gSaveBlock1.location.mapNum == 36)
         return FALSE;
 	
-	// is player in CaveOfOrigin_B4F?
+    // is player in CaveOfOrigin_B4F?
     if (gSaveBlock1.location.mapGroup == 24 && gSaveBlock1.location.mapNum == 42)
         return FALSE;
 	
