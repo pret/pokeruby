@@ -121,6 +121,9 @@ SECTIONS {
         src/trainer_card.o(.text);
         src/save_menu_util.o(.text);
         asm/rom_8094928.o(.text);
+        asm/pokemon_icon.o(.text);
+        asm/pokemon_summary_screen.o(.text);
+        asm/script_movement.o(.text);
         asm/fldeff_cut.o(.text);
         asm/mail_data.o(.text);
         asm/map_name_popup.o(.text);
