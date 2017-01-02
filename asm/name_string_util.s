@@ -6,8 +6,8 @@
 
 	.text
 
-	thumb_func_start sub_814A518
-sub_814A518: @ 814A518
+	thumb_func_start PadNameString
+PadNameString: @ 814A518
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	lsls r1, 24
@@ -49,10 +49,10 @@ _0814A55A:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_814A518
+	thumb_func_end PadNameString
 
-	thumb_func_start sub_814A568
-sub_814A568: @ 814A568
+	thumb_func_start SanitizeNameString
+SanitizeNameString: @ 814A568
 	push {r4,lr}
 	adds r4, r0, 0
 	bl StringLength
@@ -71,6 +71,6 @@ _0814A588:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_814A568
+	thumb_func_end SanitizeNameString
 
 	.align 2, 0 @ Don't pad with nop.

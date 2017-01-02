@@ -203,7 +203,7 @@ _080A2C3A:
 	ldr r3, _080A2D14 @ =gSaveBlock1 + 0x2B5E
 	adds r0, r3
 	movs r1, 0
-	bl sub_814A518
+	bl PadNameString
 	movs r3, 0
 	mov r2, r10
 	ldr r5, _080A2D18 @ =gSaveBlock1 + 0x2B66

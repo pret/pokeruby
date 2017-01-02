@@ -218,7 +218,7 @@ SECTIONS {
         asm/bard_music.o(.text);
         asm/fldeff_teleport.o(.text);
         asm/unknown_debug_menu.o(.text);
-        asm/rom_814A518.o(.text);
+        asm/name_string_util.o(.text);
         src/menu_cursor.o(.text);
     } =0
 

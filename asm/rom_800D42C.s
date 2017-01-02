@@ -3438,7 +3438,7 @@ _0800F03E:
 	beq _0800F0D4
 	adds r0, r7, 0
 	movs r1, 0
-	bl sub_814A518
+	bl PadNameString
 _0800F0D4:
 	adds r7, 0x20
 	movs r0, 0x1

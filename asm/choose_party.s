@@ -1743,7 +1743,7 @@ _08122B96:
 	mov r0, r9
 	bl StringGetEnd10
 	mov r0, r9
-	bl sub_814A568
+	bl SanitizeNameString
 	adds r0, r4, 0
 	movs r1, 0x3
 	mov r2, r9
