@@ -1,4 +1,4 @@
-UnknownString_81AD135:: @ 81AD135
+gTVNewsText_EnergyGuru1:: @ 81AD135
 	.string "Greetings!\n"
 	.string "It’s time for POKéMON NEWS.\p"
 	.string "SLATEPORT’s most popular kind of guy,\n"
@@ -13,7 +13,7 @@ UnknownString_81AD135:: @ 81AD135
 	.string "would be well worth your while that day.\p"
 	.string "That’s the news on POKéMON NEWS.$"
 
-UnknownString_81AD2E0:: @ 81AD2E0
+gTVNewsText_EnergyGuru2:: @ 81AD2E0
 	.string "Greetings!\n"
 	.string "It’s time for POKéMON NEWS.\p"
 	.string "This is the news you’ve all been\n"
@@ -27,7 +27,7 @@ UnknownString_81AD2E0:: @ 81AD2E0
 	.string "to your heart’s content?\p"
 	.string "That’s the news on POKéMON NEWS.$"
 
-UnknownString_81AD434:: @ 81AD434
+gTVNewsText_EnergyGuru3:: @ 81AD434
 	.string "Greetings!\n"
 	.string "It’s time for POKéMON NEWS.\p"
 	.string "This is the news you’ve all been\n"
@@ -42,7 +42,7 @@ UnknownString_81AD434:: @ 81AD434
 	.string "a most enjoyable shopping trip?\p"
 	.string "That’s the news on POKéMON NEWS.$"
 
-UnknownString_81AD5B0:: @ 81AD5B0
+gTVNewsText_GameCorner1:: @ 81AD5B0
 	.string "Greetings!\n"
 	.string "It’s time for POKéMON NEWS.\p"
 	.string "It’s approaching!\n"
@@ -53,7 +53,7 @@ UnknownString_81AD5B0:: @ 81AD5B0
 	.string "may be lucky on this particular day!\p"
 	.string "That’s the news on POKéMON NEWS.$"
 
-UnknownString_81AD6AE:: @ 81AD6AE
+gTVNewsText_GameCorner2:: @ 81AD6AE
 	.string "Greetings!\n"
 	.string "It’s time for POKéMON NEWS.\p"
 	.string "It’s here!\n"
@@ -66,7 +66,7 @@ UnknownString_81AD6AE:: @ 81AD6AE
 	.string "This is the place!\p"
 	.string "That’s the news on POKéMON NEWS.$"
 
-UnknownString_81AD7A7:: @ 81AD7A7
+gTVNewsText_GameCorner3:: @ 81AD7A7
 	.string "Greetings!\n"
 	.string "It’s time for POKéMON NEWS.\p"
 	.string "It’s here!\n"
@@ -79,7 +79,7 @@ UnknownString_81AD7A7:: @ 81AD7A7
 	.string "The location is MAUVILLE CITY.\p"
 	.string "That’s the news on POKéMON NEWS.$"
 
-UnknownString_81AD8B4:: @ 81AD8B4
+gTVNewsText_LilycoveDepartment1:: @ 81AD8B4
 	.string "Greetings!\n"
 	.string "It’s time for POKéMON NEWS.\p"
 	.string "We’ve just received wonderful news\n"
@@ -90,7 +90,7 @@ UnknownString_81AD8B4:: @ 81AD8B4
 	.string "you’ve always wanted could be yours!\p"
 	.string "That’s the news on POKéMON NEWS.$"
 
-UnknownString_81AD9D3:: @ 81AD9D3
+gTVNewsText_LilycoveDepartment2:: @ 81AD9D3
 	.string "Greetings!\n"
 	.string "It’s time for POKéMON NEWS.\p"
 	.string "This is the news you’ve all been\n"
@@ -103,7 +103,7 @@ UnknownString_81AD9D3:: @ 81AD9D3
 	.string "with them all!\p"
 	.string "That’s the news on POKéMON NEWS.$"
 
-UnknownString_81ADB01:: @ 81ADB01
+gTVNewsText_LilycoveDepartment3:: @ 81ADB01
 	.string "Greetings!\n"
 	.string "It’s time for POKéMON NEWS.\p"
 	.string "This is the news you’ve all been\n"
@@ -116,27 +116,28 @@ UnknownString_81ADB01:: @ 81ADB01
 	.string "with them all!\p"
 	.string "That’s the news on POKéMON NEWS.$"
 
-UnknownString_81ADC2F:: @ 81ADC2F
+	@ all text advertisements below are unused.
+gTVUnusedText_DevonCorporation:: @ 81ADC2F
 	.string "This program has been brought to you\n"
 	.string "by the DEVON CORPORATION.$"
 
-UnknownString_81ADC6E:: @ 81ADC6E
+gTVUnusedText_Contests:: @ 81ADC6E
 	.string "What’s important is love for POKéMON.\p"
 	.string "What you need is a little courage.\p"
 	.string "Let your cherished POKéMON take\n"
 	.string "center stage! POKéMON CONTESTS!$"
 
-UnknownString_81ADCF7:: @ 81ADCF7
+gTVUnusedText_DayCare:: @ 81ADCF7
 	.string "We raise your beloved POKéMON with\n"
 	.string "all of our love!\p"
 	.string "For all your POKéMON-training needs,\n"
 	.string "visit our DAY CARE on ROUTE 117.$"
 
-UnknownString_81ADD71:: @ 81ADD71
+gTVUnusedText_LavaridgeSpa:: @ 81ADD71
 	.string "The cauldron of good times and laughs!\n"
 	.string "LAVARIDGE SPA.$"
 
-UnknownString_81ADDA7:: @ 81ADDA7
+gTVUnusedText_LilycoveDepartment:: @ 81ADDA7
 	.string "Overflowing with great merchandise\n"
 	.string "and excitement!\p"
 	.string "A great place to find that something\n"

@@ -7807,7 +7807,7 @@ gUnknown_083D13E4:: @ 83D13E4
 gUnknown_083D13EC:: @ 83D13EC
 	.incbin "baserom.gba", 0x003d13ec, 0xc
 
-gUnknown_083D13F8:: @ 83D13F8
+gPokeOutbreakSpeciesList:: @ 83D13F8
 	.2byte	SPECIES_SURSKIT
 	.2byte	MOVE_BUBBLE, MOVE_QUICK_ATTACK, MOVE_NONE, MOVE_NONE
 	.byte	3
@@ -7834,25 +7834,25 @@ gUnknown_083D13F8:: @ 83D13F8
 	.byte	MAPSEC_Route116
 
 	.align 2
-gUnknown_083D1434:: @ 83D1434
+gTVNewsTextGroup1:: @ 83D1434
 	.4byte 0x0
-	.4byte UnknownString_81AD135
-	.4byte UnknownString_81AD5B0
-	.4byte UnknownString_81AD8B4
+	.4byte gTVNewsText_EnergyGuru1
+	.4byte gTVNewsText_GameCorner1
+	.4byte gTVNewsText_LilycoveDepartment1
 
 	.align 2
-gUnknown_083D1444:: @ 83D1444
+gTVNewsTextGroup2:: @ 83D1444
 	.4byte 0x0
-	.4byte UnknownString_81AD2E0
-	.4byte UnknownString_81AD6AE
-	.4byte UnknownString_81AD9D3
+	.4byte gTVNewsText_EnergyGuru2
+	.4byte gTVNewsText_GameCorner2
+	.4byte gTVNewsText_LilycoveDepartment2
 
 	.align 2
-gUnknown_083D1454:: @ 83D1454
+gTVNewsTextGroup3:: @ 83D1454
 	.4byte 0x0
-	.4byte UnknownString_81AD434
-	.4byte UnknownString_81AD7A7
-	.4byte UnknownString_81ADB01
+	.4byte gTVNewsText_EnergyGuru3
+	.4byte gTVNewsText_GameCorner3
+	.4byte gTVNewsText_LilycoveDepartment3
 
 	.align 2
 gUnknown_083D1464:: @ 83D1464
@@ -7861,152 +7861,152 @@ gUnknown_083D1464:: @ 83D1464
 	.4byte gStringVar3
 
 	.align 2
-gUnknown_083D1470:: @ 83D1470
-	.4byte UnknownString_81A8EC9
-	.4byte UnknownString_81A9048
-	.4byte UnknownString_81A9067
-	.4byte UnknownString_81A9088
-	.4byte UnknownString_81A90B4
-	.4byte UnknownString_81A911F
-	.4byte UnknownString_81A9152
-	.4byte UnknownString_81A91C6
+gTVFanClubTextGroup:: @ 83D1470
+	.4byte gTVFanClubText1
+	.4byte gTVFanClubText2
+	.4byte gTVFanClubText3
+	.4byte gTVFanClubText4
+	.4byte gTVFanClubText5
+	.4byte gTVFanClubText6
+	.4byte gTVFanClubText7
+	.4byte gTVFanClubText8
 
 	.align 2
-gUnknown_083D1490:: @ 83D1490
-	.4byte UnknownString_81A9581
-	.4byte UnknownString_81A9694
-	.4byte UnknownString_81A971B
-	.4byte UnknownString_81A974B
-	.4byte UnknownString_81A979F
-	.4byte UnknownString_81A97D0
+gTVRecentHappeningsTextGroup:: @ 83D1490
+	.4byte gTVRecentHappeningsText1
+	.4byte gTVRecentHappeningsText2
+	.4byte gTVRecentHappeningsText3
+	.4byte gTVRecentHappeningsText4
+	.4byte gTVRecentHappeningsText5
+	.4byte gTVRecentHappeningsText6
 
 	.align 2
-gUnknown_083D14A8:: @ 83D14A8
-	.4byte UnknownString_81A8917
-	.4byte UnknownString_81A8AE5
-	.4byte UnknownString_81A8B9D
-	.4byte UnknownString_81A8C77
-	.4byte UnknownString_81A8D45
+gTVFanClubOpinionsTextGroup:: @ 83D14A8
+	.4byte gTVFanClubOpinionsText1
+	.4byte gTVFanClubOpinionsText2
+	.4byte gTVFanClubOpinionsText3
+	.4byte gTVFanClubOpinionsText4
+	.4byte gTVFanClubOpinionsText5
 
 	.align 2
-gUnknown_083D14BC:: @ 83D14BC
-	.4byte UnknownString_81A986F
+gTVPokemonOutbreakTextGroup:: @ 83D14BC
+	.4byte gTVPokemonOutbreakText
 
 	.align 2
-gUnknown_083D14C0:: @ 83D14C0
-	.4byte UnknownString_81AAD23
-	.4byte UnknownString_81AADD5
-	.4byte UnknownString_81AAE31
-	.4byte UnknownString_81AAE9D
-	.4byte UnknownString_81AAF03
-	.4byte UnknownString_81AAF8A
-	.4byte UnknownString_81AB040
-	.4byte UnknownString_81AB0C8
-	.4byte UnknownString_81AB13D
-	.4byte UnknownString_81AB1C6
-	.4byte UnknownString_81AB266
-	.4byte UnknownString_81AB2DB
+gTVPokemonTodayTextGroup:: @ 83D14C0
+	.4byte gTVPokemonTodayText1
+	.4byte gTVPokemonTodayText2
+	.4byte gTVPokemonTodayText3
+	.4byte gTVPokemonTodayText4
+	.4byte gTVPokemonTodayText5
+	.4byte gTVPokemonTodayText6
+	.4byte gTVPokemonTodayText7
+	.4byte gTVPokemonTodayText8
+	.4byte gTVPokemonTodayText9
+	.4byte gTVPokemonTodayText10
+	.4byte gTVPokemonTodayText11
+	.4byte gTVPokemonTodayText12
 
 	.align 2
-gUnknown_083D14F0:: @ 83D14F0
-	.4byte UnknownString_81AB381
-	.4byte UnknownString_81AB435
-	.4byte UnknownString_81AB507
-	.4byte UnknownString_81AB5B8
-	.4byte UnknownString_81AB61F
-	.4byte UnknownString_81AB6B0
-	.4byte UnknownString_81AB78D
-	.4byte UnknownString_81AB7FE
-	.4byte UnknownString_81AB835
-	.4byte UnknownString_81AB873
-	.4byte UnknownString_81AB92E
-	.4byte UnknownString_81AB95E
-	.4byte UnknownString_81ABB75
+gTVSmartShopperTextGroup:: @ 83D14F0
+	.4byte gTVSmartShopperText1
+	.4byte gTVSmartShopperText2
+	.4byte gTVSmartShopperText3
+	.4byte gTVSmartShopperText4
+	.4byte gTVSmartShopperText5
+	.4byte gTVSmartShopperText6
+	.4byte gTVSmartShopperText7
+	.4byte gTVSmartShopperText8
+	.4byte gTVSmartShopperText9
+	.4byte gTVSmartShopperText10
+	.4byte gTVSmartShopperText11
+	.4byte gTVSmartShopperText12
+	.4byte gTVSmartShopperText13
 
 	.align 2
-gUnknown_083D1524:: @ 83D1524
-	.4byte UnknownString_81A72DE
-	.4byte UnknownString_81A736B
-	.4byte UnknownString_81A73CA
-	.4byte UnknownString_81A744D
-	.4byte UnknownString_81A7508
-	.4byte UnknownString_81A75CE
-	.4byte UnknownString_81A768D
-	.4byte UnknownString_81A76C5
-	.4byte UnknownString_81A774F
+gTVBravoTrainerTextGroup:: @ 83D1524
+	.4byte gTVBravoTrainerText1
+	.4byte gTVBravoTrainerText2
+	.4byte gTVBravoTrainerText3
+	.4byte gTVBravoTrainerText4
+	.4byte gTVBravoTrainerText5
+	.4byte gTVBravoTrainerText6
+	.4byte gTVBravoTrainerText7
+	.4byte gTVBravoTrainerText8
+	.4byte gTVBravoTrainerText9
 
 	.align 2
-gUnknown_083D1548:: @ 83D1548
-	.4byte UnknownString_81A7B93
-	.4byte UnknownString_81A7C26
-	.4byte UnknownString_81A7C7D
-	.4byte UnknownString_81A7D4A
-	.4byte UnknownString_81A7E0C
-	.4byte UnknownString_81A7F0E
-	.4byte UnknownString_81A8004
-	.4byte UnknownString_81A8119
-	.4byte UnknownString_81A811E
-	.4byte UnknownString_81A8123
-	.4byte UnknownString_81A8128
-	.4byte UnknownString_81A812D
-	.4byte UnknownString_81A8133
-	.4byte UnknownString_81A81BC
-	.4byte UnknownString_81A8267
+gTVBravoTrainerBattleTowerTextGroup:: @ 83D1548
+	.4byte gTVBravoTrainerBattleTowerText1
+	.4byte gTVBravoTrainerBattleTowerText2
+	.4byte gTVBravoTrainerBattleTowerText3
+	.4byte gTVBravoTrainerBattleTowerText4
+	.4byte gTVBravoTrainerBattleTowerText5
+	.4byte gTVBravoTrainerBattleTowerText6
+	.4byte gTVBravoTrainerBattleTowerText7
+	.4byte gTVBravoTrainerBattleTowerText8
+	.4byte gTVBravoTrainerBattleTowerText9
+	.4byte gTVBravoTrainerBattleTowerText10
+	.4byte gTVBravoTrainerBattleTowerText11
+	.4byte gTVBravoTrainerBattleTowerText12
+	.4byte gTVBravoTrainerBattleTowerText13
+	.4byte gTVBravoTrainerBattleTowerText14
+	.4byte gTVBravoTrainerBattleTowerText15
 
 	.align 2
-gUnknown_083D1584:: @ 83D1584
-	.4byte UnknownString_81A99D9
-	.4byte UnknownString_81A9AF0
-	.4byte UnknownString_81A9B69
-	.4byte UnknownString_81A9BEF
-	.4byte UnknownString_81A9C6A
-	.4byte UnknownString_81A9CF8
-	.4byte UnknownString_81A9D74
-	.4byte UnknownString_81A9DF3
-	.4byte UnknownString_81A9E75
-	.4byte UnknownString_81A9F06
-	.4byte UnknownString_81A9F9F
-	.4byte UnknownString_81AA01E
-	.4byte UnknownString_81AA09D
-	.4byte UnknownString_81AA0D7
-	.4byte UnknownString_81AA138
-	.4byte UnknownString_81AA166
-	.4byte UnknownString_81AA1C0
-	.4byte UnknownString_81AA1EA
-	.4byte UnknownString_81AA28A
+gTVNameRaterTextGroup:: @ 83D1584
+	.4byte gTVNameRaterText1
+	.4byte gTVNameRaterText2
+	.4byte gTVNameRaterText3
+	.4byte gTVNameRaterText4
+	.4byte gTVNameRaterText5
+	.4byte gTVNameRaterText6
+	.4byte gTVNameRaterText7
+	.4byte gTVNameRaterText8
+	.4byte gTVNameRaterText9
+	.4byte gTVNameRaterText10
+	.4byte gTVNameRaterText11
+	.4byte gTVNameRaterText12
+	.4byte gTVNameRaterText13
+	.4byte gTVNameRaterText14
+	.4byte gTVNameRaterText15
+	.4byte gTVNameRaterText16
+	.4byte gTVNameRaterText17
+	.4byte gTVNameRaterText18
+	.4byte gTVNameRaterText19
 
 	.align 2
-gUnknown_083D15D0:: @ 83D15D0
-	.4byte UnknownString_81AA814
-	.4byte UnknownString_81AA8C6
-	.4byte UnknownString_81AA9B2
-	.4byte UnknownString_81AAA5C
-	.4byte UnknownString_81AAB11
-	.4byte UnknownString_81AABB4
-	.4byte UnknownString_81AAC47
+gTVPokemonTodayFailedCaptureTextGroup:: @ 83D15D0
+	.4byte gTVPokemonTodayFailedCaptureText1
+	.4byte gTVPokemonTodayFailedCaptureText2
+	.4byte gTVPokemonTodayFailedCaptureText3
+	.4byte gTVPokemonTodayFailedCaptureText4
+	.4byte gTVPokemonTodayFailedCaptureText5
+	.4byte gTVPokemonTodayFailedCaptureText6
+	.4byte gTVPokemonTodayFailedCaptureText7
 
 	.align 2
-gUnknown_083D15EC:: @ 83D15EC
-	.4byte UnknownString_81AA344
-	.4byte UnknownString_81AA5F3
+gTVFishingGuruAdviceTextGroup:: @ 83D15EC
+	.4byte gTVFishingGuruAdviceText1
+	.4byte gTVFishingGuruAdviceText2
 
 	.align 2
-gUnknown_083D15F4:: @ 83D15F4
-	.4byte UnknownString_81ABC51
-	.4byte UnknownString_81ABD94
-	.4byte UnknownString_81ABDF2
+gTVWorldOfMastersTextGroup:: @ 83D15F4
+	.4byte gTVWorldOfMastersText1
+	.4byte gTVWorldOfMastersText2
+	.4byte gTVWorldOfMastersText3
 
 	.align 2
-gUnknown_083D1600:: @ 83D1600
-	.4byte UnknownString_81AC90D
-	.4byte UnknownString_81ACA02
-	.4byte UnknownString_81ACAAA
-	.4byte UnknownString_81ACC07
-	.4byte UnknownString_81ACD13
-	.4byte UnknownString_81ACDFA
-	.4byte UnknownString_81ACEE7
-	.4byte UnknownString_81ACF49
-	.4byte UnknownString_81AD00A
+gTVGabbyAndTyTextGroup:: @ 83D1600
+	.4byte gTVGabbyAndTyText1
+	.4byte gTVGabbyAndTyText2
+	.4byte gTVGabbyAndTyText3
+	.4byte gTVGabbyAndTyText4
+	.4byte gTVGabbyAndTyText5
+	.4byte gTVGabbyAndTyText6
+	.4byte gTVGabbyAndTyText7
+	.4byte gTVGabbyAndTyText8
+	.4byte gTVGabbyAndTyText9
 
 	.align 2
 gUnknown_083D1624:: @ 83D1624
