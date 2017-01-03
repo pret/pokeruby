@@ -78714,8 +78714,8 @@ sub_8035428: @ 8035428
 	ands r0, r1
 	cmp r0, 0
 	beq _080354F8
-	bl sub_810715C
-	bl sub_81072A8
+	bl BattleAI_SetupAIData
+	bl BattleAI_GetAIActionToUse
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0x4

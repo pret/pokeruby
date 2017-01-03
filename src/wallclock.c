@@ -20,7 +20,7 @@ extern struct SpritePalette gUnknown_083F7AA0;
 extern u8 gUnknown_08E95774[];
 extern u8 gUnknown_08E954B0[];
 extern u8 gOtherText_CorrectTimePrompt[];
-extern const struct MenuAction gUnknown_08376D74[];
+extern const struct MenuAction gMenuYesNoItems[];
 extern s8 gClockHandCoords[][2];
 
 extern struct SpriteTemplate gSpriteTemplate_83F7AD8;
@@ -297,7 +297,7 @@ static void Task_SetClock3(u8 taskId)
     MenuDrawTextWindow(2, 16, 27, 19);
     MenuPrint(gOtherText_CorrectTimePrompt, 3, 17);
     MenuDrawTextWindow(23, 8, 29, 13);
-    PrintMenuItems(24, 9, 2, gUnknown_08376D74);
+    PrintMenuItems(24, 9, 2, gMenuYesNoItems);
     InitMenu(0, 24, 9, 2, 1, 5);
     gTasks[taskId].func = Task_SetClock4;
 }

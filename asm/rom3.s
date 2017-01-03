@@ -69,7 +69,7 @@ _0800B8A0:
 	str r5, [r0]
 	bl sub_8075624
 	bl sub_8040710
-	bl sub_81070D4
+	bl BattleAI_HandleItemUseBeforeAISetup
 	ldr r0, _0800B940 @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x10

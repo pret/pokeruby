@@ -28,28 +28,28 @@ extern struct GcmbStruct gUnknown_03005EE0;
 extern u16 gSaveFileStatus;
 extern u8 gReservedSpritePaletteCount;
 
-extern const u16 gUnknown_08406974[];
-extern const u8 gUnknown_08406B74[];
-extern const u8 gUnknown_08406F28[];
-extern const u8 gUnknown_0840725C[];
-extern const u8 gUnknown_0840754C[];
-extern const u8 gUnknown_08407764[];
-extern const u8 gUnknown_084098D4[];
-extern const u8 gUnknown_08409AD4[];
-extern const u8 gUnknown_08409C04[];
-extern const u16 gUnknown_0840A758[];
-extern const u8 gUnknown_0840A778[];
-extern const u8 gUnknown_0840A7E4[];
+extern const u16 gIntro1BGPals[];
+extern const u8 gIntro1BG0_Tilemap[];
+extern const u8 gIntro1BG1_Tilemap[];
+extern const u8 gIntro1BG2_Tilemap[];
+extern const u8 gIntro1BG3_Tilemap[];
+extern const u8 gIntro1BGLeavesGfx[];
+extern const u8 gIntro3PokeballPal[];
+extern const u8 gIntro3Pokeball_Tilemap[];
+extern const u8 gIntro3Pokeball_Gfx[];
+extern const u16 gIntro3Streaks_Pal[];
+extern const u8 gIntro3Streaks_Gfx[];
+extern const u8 gIntro3Streaks_Tilemap[];
 extern union AnimCmd *gUnknown_0840AE80[];
 extern const struct SpriteTemplate gSpriteTemplate_840AFF0;
 extern const struct SpriteSheet gUnknown_0840B008;
 extern const struct SpriteSheet gUnknown_0840B018;
 extern const struct SpritePalette gUnknown_0840B028[];
 extern const struct SpriteTemplate gSpriteTemplate_840B1F4;
-extern const struct SpriteSheet gUnknown_0840B20C;
-extern const struct SpriteSheet gUnknown_0840B21C;
-extern const struct SpritePalette gUnknown_0840B22C;
-extern const struct SpritePalette gUnknown_0840B23C[];
+extern const struct SpriteSheet gIntro3PokeballGfx_Table;
+extern const struct SpriteSheet gIntro3MiscGfx_Table;
+extern const struct SpritePalette gInterfacePokeballPal_Table;
+extern const struct SpritePalette gIntro3MiscPal_Table[];
 extern const struct SpriteSheet gIntro2BrendanSpriteSheet;
 extern const struct SpriteSheet gIntro2MaySpriteSheet;
 extern const struct SpriteSheet gIntro2BicycleSpriteSheet;
@@ -65,16 +65,16 @@ static void MainCB2_EndIntro(void);
 static void Task_IntroLoadPart1Graphics(u8);
 static void Task_IntroFadeIn(u8);
 static void Task_IntroWaterDrops(u8);
-static void task_intro_4(u8);
-static void task_intro_5(u8);
+static void Task_IntroScrollDownAndShowEon(u8);
+static void Task_IntroWaitToSetupPart2(u8);
 static void Task_IntroLoadPart2Graphics(u8);
 static void Task_IntroStartBikeRide(u8);
-static void task_intro_8(u8);
-static void task_intro_9(u8);
-static void task_intro_10(u8);
-static void task_intro_11(u8);
-static void task_intro_12(u8);
-static void task_intro_13(u8);
+static void Task_IntroHandleBikeAndEonMovement(u8);
+static void Task_IntroWaitToSetupPart3(u8);
+static void Task_IntroLoadPart3Graphics(u8);
+static void Task_IntroSpinAndZoomPokeball(u8);
+static void Task_IntroWaitToSetupPart3DoubleFight(u8);
+static void Task_IntroLoadPart3Streaks(u8);
 static void task_intro_14(u8);
 static void task_intro_15(u8);
 static void task_intro_16(u8);
@@ -214,16 +214,16 @@ static void Task_IntroLoadPart1Graphics(u8 taskId)
     REG_BG2VOFS = 0x50;
     REG_BG1VOFS = 0x18;
     REG_BG0VOFS = 0x28;
-    LZ77UnCompVram(gUnknown_08407764, (void *)VRAM);
-    LZ77UnCompVram(gUnknown_08406B74, (void *)(VRAM + 0x8000));
+    LZ77UnCompVram(gIntro1BGLeavesGfx, (void *)VRAM);
+    LZ77UnCompVram(gIntro1BG0_Tilemap, (void *)(VRAM + 0x8000));
     DmaClear16(3, VRAM + 0x8800, 0x800);
-    LZ77UnCompVram(gUnknown_08406F28, (void *)(VRAM + 0x9000));
+    LZ77UnCompVram(gIntro1BG1_Tilemap, (void *)(VRAM + 0x9000));
     DmaClear16(3, VRAM + 0x9800, 0x800);
-    LZ77UnCompVram(gUnknown_0840725C, (void *)(VRAM + 0xA000));
+    LZ77UnCompVram(gIntro1BG2_Tilemap, (void *)(VRAM + 0xA000));
     DmaClear16(3, VRAM + 0xA800, 0x800);
-    LZ77UnCompVram(gUnknown_0840754C, (void *)(VRAM + 0xB000));
+    LZ77UnCompVram(gIntro1BG3_Tilemap, (void *)(VRAM + 0xB000));
     DmaClear16(3, VRAM + 0xB800, 0x800);
-    LoadPalette(gUnknown_08406974, 0, 0x200);
+    LoadPalette(gIntro1BGPals, 0, 0x200);
     REG_BG3CNT = 0x9603;
     REG_BG2CNT = 0x9402;
     REG_BG1CNT = 0x9201;
@@ -281,11 +281,11 @@ static void Task_IntroWaterDrops(u8 taskId)
         gTasks[taskId].data[4] = 0;
         gTasks[taskId].data[5] = 0x28;
         gTasks[taskId].data[6] = 0;
-        gTasks[taskId].func = task_intro_4;
+        gTasks[taskId].func = Task_IntroScrollDownAndShowEon;
     }
 }
 
-static void task_intro_4(u8 taskId)
+static void Task_IntroScrollDownAndShowEon(u8 taskId)
 {
     if (gIntroFrameCounter < 904)
     {
@@ -319,12 +319,12 @@ static void task_intro_4(u8 taskId)
         if (gIntroFrameCounter > 1007)
         {
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0xFFFF);
-            gTasks[taskId].func = task_intro_5;
+            gTasks[taskId].func = Task_IntroWaitToSetupPart2;
         }
     }
 }
 
-static void task_intro_5(u8 taskId)
+static void Task_IntroWaitToSetupPart2(u8 taskId)
 {
     if (gIntroFrameCounter > 1026)
         gTasks[taskId].func = Task_IntroLoadPart2Graphics;
@@ -384,10 +384,10 @@ static void Task_IntroStartBikeRide(u8 taskId)
     gTasks[taskId].data[0] = sub_8148EC0(1, 0x4000, 0x400, 0x10);
     sub_8148C78(1);
 #endif
-    gTasks[taskId].func = task_intro_8;
+    gTasks[taskId].func = Task_IntroHandleBikeAndEonMovement;
 }
 
-static void task_intro_8(u8 taskId)
+static void Task_IntroHandleBikeAndEonMovement(u8 taskId)
 {
     s16 a;
     u16 sine;
@@ -395,7 +395,7 @@ static void task_intro_8(u8 taskId)
     if (gIntroFrameCounter > 1823)
     {
         BeginNormalPaletteFade(0xFFFFFFFF, 0x10, 0, 0x10, 0xFFFF);
-        gTasks[taskId].func = task_intro_9;
+        gTasks[taskId].func = Task_IntroWaitToSetupPart3;
     }
     if (gIntroFrameCounter == 1109)
         gSprites[gTasks[taskId].data[1]].data0 = 1;
@@ -423,21 +423,21 @@ static void task_intro_8(u8 taskId)
 #endif
 }
 
-static void task_intro_9(u8 taskId)
+static void Task_IntroWaitToSetupPart3(u8 taskId)
 {
     if (gIntroFrameCounter > 2068)
     {
         DestroyTask(gTasks[taskId].data[0]);
-        gTasks[taskId].func = task_intro_10;
+        gTasks[taskId].func = Task_IntroLoadPart3Graphics;
     }
 }
 
-static void task_intro_10(u8 taskId)
+static void Task_IntroLoadPart3Graphics(u8 taskId)
 {
     intro_reset_and_hide_bgs();
-    LZ77UnCompVram(gUnknown_08409C04, (void *)VRAM);
-    LZ77UnCompVram(gUnknown_08409AD4, (void *)(VRAM + 0x4000));
-    LoadPalette(gUnknown_084098D4, 0, 0x200);
+    LZ77UnCompVram(gIntro3Pokeball_Gfx, (void *)VRAM);
+    LZ77UnCompVram(gIntro3Pokeball_Tilemap, (void *)(VRAM + 0x4000));
+    LoadPalette(gIntro3PokeballPal, 0, 0x200);
     gTasks[taskId].data[0] = 0;
     gTasks[taskId].data[1] = 0;
     gTasks[taskId].data[2] = 0;
@@ -448,12 +448,12 @@ static void task_intro_10(u8 taskId)
     BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, 0xFFFF);
     REG_BG2CNT = 0x4883;
     REG_DISPCNT = DISPCNT_MODE_1 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG2_ON | DISPCNT_OBJ_ON;
-    gTasks[taskId].func = task_intro_11;
+    gTasks[taskId].func = Task_IntroSpinAndZoomPokeball;
     gIntroFrameCounter = 0;
     m4aSongNumStart(0x1BA);
 }
 
-static void task_intro_11(u8 taskId)
+static void Task_IntroSpinAndZoomPokeball(u8 taskId)
 {
     gTasks[taskId].data[0] += 0x400;
     if (gTasks[taskId].data[1] <= 0x6BF)
@@ -463,22 +463,22 @@ static void task_intro_11(u8 taskId)
     }
     else
     {
-        gTasks[taskId].func = task_intro_12;
+        gTasks[taskId].func = Task_IntroWaitToSetupPart3DoubleFight;
     }
     sub_813CE30(0x78, 0x50, 0x10000 / gTasks[taskId].data[1], gTasks[taskId].data[0]);
     if (gIntroFrameCounter == 44)
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 0x10, 0xFFFF);
 }
 
-static void task_intro_12(u8 taskId)
+static void Task_IntroWaitToSetupPart3DoubleFight(u8 taskId)
 {
     if (gIntroFrameCounter > 59)
-        gTasks[taskId].func = task_intro_13;
+        gTasks[taskId].func = Task_IntroLoadPart3Streaks;
 }
 
 extern u8 unk_2000000[][32];
 
-static void task_intro_13(u8 taskId)
+static void Task_IntroLoadPart3Streaks(u8 taskId)
 {
     u16 i;
     void *vram;
@@ -505,16 +505,16 @@ static void task_intro_13(u8 taskId)
     sub_813D084(1);
     gPlttBufferUnfaded[0xF2] = RGB_BLACK;
     gPlttBufferFaded[0xF2] = RGB_BLACK;
-    LZ77UnCompVram(gUnknown_0840A778, (void *)(VRAM + 0x4000));
-    LZ77UnCompVram(gUnknown_0840A7E4, (void *)(VRAM + 0x7000));
-    LoadPalette(gUnknown_0840A758, 0, 0x20);
+    LZ77UnCompVram(gIntro3Streaks_Gfx, (void *)(VRAM + 0x4000));
+    LZ77UnCompVram(gIntro3Streaks_Tilemap, (void *)(VRAM + 0x7000));
+    LoadPalette(gIntro3Streaks_Pal, 0, 0x20);
     ResetSpriteData();
     FreeAllSpritePalettes();
     gReservedSpritePaletteCount = 8;
-    LoadCompressedObjectPic(&gUnknown_0840B20C);
-    LoadCompressedObjectPic(&gUnknown_0840B21C);
-    LoadCompressedObjectPalette(&gUnknown_0840B22C);
-    LoadSpritePalettes(gUnknown_0840B23C);
+    LoadCompressedObjectPic(&gIntro3PokeballGfx_Table);
+    LoadCompressedObjectPic(&gIntro3MiscGfx_Table);
+    LoadCompressedObjectPalette(&gInterfacePokeballPal_Table);
+    LoadSpritePalettes(gIntro3MiscPal_Table);
     gTasks[taskId].func = task_intro_14;
 }
 
