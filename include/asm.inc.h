@@ -170,6 +170,9 @@ u8 battle_side_get_owner(u8);
 u8 battle_get_per_side_status(u8);
 u8 battle_get_side_with_given_state(u8);
 
+// asm/weather.o
+void SetWeather(u32);
+
 // asm/rom_8080874.o
 void pal_fill_black();
 void sub_8080990(void);

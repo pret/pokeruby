@@ -4,22 +4,6 @@
 	.section .rodata
 
 	.align 2
-gCoordEventWeatherFuncs:: @ 83762FC
-	.4byte 0x1, CoordEventWeather_Indoor
-	.4byte 0x2, CoordEventWeather_Sunny
-	.4byte 0x3, CoordEventWeather_Rain
-	.4byte 0x4, CoordEventWeather_Snowflakes
-	.4byte 0x5, CoordEventWeather_Thunderstorm
-	.4byte 0x6, CoordEventWeather_Fog
-	.4byte 0x7, CoordEventWeather_DiagonalFog
-	.4byte 0x8, CoordEventWeather_Snow
-	.4byte 0x9, CoordEventWeather_Sandstorm
-	.4byte 0xa, CoordEventWeather_Cloudy
-	.4byte 0xb, CoordEventWeather_Drought
-	.4byte 0x14, CoordEventWeather_UnderwaterFog
-	.4byte 0x15, CoordEventWeather_UnderwaterBubbles
-
-	.align 2
 gUnknown_08376364:: @ 8376364
 	.4byte DummyPerStepCallback
 	.4byte PerStepCallback_8069F64
