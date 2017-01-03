@@ -3475,7 +3475,7 @@ sub_804997C: @ 804997C
 	ldr r3, _080499C0 @ =sub_80484F4
 	movs r4, 0x4
 	str r4, [sp]
-	bl sub_809D8BC
+	bl ShowPokemonSummaryScreen
 	b _080499E0
 	.align 2, 0
 _080499B4: .4byte gPaletteFade
@@ -3495,7 +3495,7 @@ _080499C4:
 	ldr r3, _080499EC @ =sub_80484F4
 	movs r4, 0x4
 	str r4, [sp]
-	bl sub_809D8BC
+	bl ShowPokemonSummaryScreen
 _080499E0:
 	add sp, 0x4
 	pop {r4}

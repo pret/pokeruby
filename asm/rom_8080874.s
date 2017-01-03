@@ -453,7 +453,7 @@ _08080BD0:
 _08080BE4:
 	movs r0, 0
 	bl sub_8080958
-	bl player_bitmagic
+	bl FreezeMapObjects
 	adds r0, r6, 0
 	adds r1, r7, 0
 	bl PlayerGetDestCoords
@@ -534,7 +534,7 @@ _08080C84:
 	cmp r0, 0x1
 	beq _08080CAE
 _08080C9A:
-	bl sub_806451C
+	bl UnfreezeMapObjects
 	movs r0, 0x4
 	strh r0, [r5, 0x8]
 	b _08080CAE
@@ -582,7 +582,7 @@ _08080CE4:
 _08080CEE:
 	movs r0, 0
 	bl sub_8080958
-	bl player_bitmagic
+	bl FreezeMapObjects
 	adds r0, r6, 0
 	adds r1, r7, 0
 	bl PlayerGetDestCoords
@@ -625,7 +625,7 @@ _08080D50:
 	lsls r0, 24
 	cmp r0, 0
 	beq _08080D6E
-	bl sub_806451C
+	bl UnfreezeMapObjects
 	movs r0, 0x3
 	strh r0, [r5, 0x8]
 	b _08080D6E
@@ -659,7 +659,7 @@ task_map_chg_seq_0807E2CC: @ 8080D74
 	.align 2, 0
 _08080D94: .4byte gTasks
 _08080D98:
-	bl player_bitmagic
+	bl FreezeMapObjects
 	bl ScriptContext2_Enable
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
@@ -669,7 +669,7 @@ _08080DA8:
 	bl sub_8080E70
 	cmp r0, 0
 	beq _08080DBE
-	bl sub_806451C
+	bl UnfreezeMapObjects
 	bl ScriptContext2_Disable
 	adds r0, r5, 0
 	bl DestroyTask
@@ -1116,7 +1116,7 @@ _08081118:
 	beq _08081142
 	b _08081152
 _0808111E:
-	bl player_bitmagic
+	bl FreezeMapObjects
 	bl ScriptContext2_Enable
 	b _0808113A
 _08081128:
@@ -1183,7 +1183,7 @@ _08081194:
 	.4byte _0808128C
 	.4byte _080812A8
 _080811A8:
-	bl player_bitmagic
+	bl FreezeMapObjects
 	adds r0, r4, 0
 	adds r1, r6, 0
 	bl PlayerGetDestCoords
@@ -1344,7 +1344,7 @@ _080812F0:
 	beq _0808131A
 	b _0808132A
 _080812F6:
-	bl player_bitmagic
+	bl FreezeMapObjects
 	bl ScriptContext2_Enable
 	b _08081312
 _08081300:

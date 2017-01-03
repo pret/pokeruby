@@ -4,141 +4,6 @@
 	.section .rodata
 
 	.align 2
-Unknown_83760F0:
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-
-	.align 2
-Unknown_8376130:
-	.4byte sub_806456C
-	.4byte sub_806456C
-	.4byte sub_806456C
-	.4byte sub_806456C
-	.4byte sub_806456C
-	.4byte sub_806456C
-	.4byte sub_806456C
-	.4byte sub_806456C
-
-	.align 2
-Unknown_8376150:
-	.4byte sub_806456C
-	.4byte sub_8064590
-	.4byte sub_8064590
-	.4byte sub_806456C
-	.4byte sub_8064590
-	.4byte sub_8064590
-
-	.align 2
-Unknown_8376168:
-	.4byte sub_80645B8
-	.4byte sub_80645B8
-	.4byte sub_80645B8
-	.4byte sub_80645B8
-
-	.align 2
-Unknown_8376178:
-	.4byte sub_80645DC
-	.4byte sub_80645DC
-
-	.align 2
-gUnknown_08376180:: @ 8376180
-	.4byte Unknown_83760F0
-	.4byte Unknown_8376130
-	.4byte Unknown_8376150
-	.4byte Unknown_8376168
-	.4byte Unknown_8376178
-
-	.align 1
-gUnknown_08376194:: @ 8376194
-	.2byte 16, 8, 6, 4, 2
-Unknown_837619E:
-	.byte  -4,  -6,  -8, -10, -11, -12, -12, -12, -11, -10,  -9,  -8,  -6,  -4,   0,   0
-Unknown_83761AE:
-	.byte   0,  -2,  -3,  -4,  -5,  -6,  -6,  -6,  -5,  -5,  -4,  -3,  -2,   0,   0,   0
-Unknown_83761BE:
-	.byte  -2,  -4,  -6,  -8,  -9, -10, -10, -10,  -9,  -8,  -6,  -5,  -3,  -2,   0,   0
-
-	.align 2
-gUnknown_083761D0:: @ 83761D0
-	.4byte Unknown_837619E
-	.4byte Unknown_83761AE
-	.4byte Unknown_83761BE
-
-	.align 1
-gUnknown_083761DC:: @ 83761DC
-	.2byte 0x10, 0x10, 0x20
-
-gUnknown_083761E2:: @ 83761E2
-	.byte 0, 0, 1
-
-	.align 1
-gUnknown_083761E6:: @ 83761E6
-	.2byte 0x20, 0x20, 0x40
-
-gUnknown_083761EC:: @ 83761EC
-	.byte 1, 1, 2
-
-	.align 2
-gUnknown_083761F0:: @ 83761F0
-	.4byte gTextWindowFrame1_Gfx, gTextWindowFrame1_Pal
-	.4byte gTextWindowFrame2_Gfx, gTextWindowFrame2_Pal
-	.4byte gTextWindowFrame3_Gfx, gTextWindowFrame3_Pal
-	.4byte gTextWindowFrame4_Gfx, gTextWindowFrame4_Pal
-	.4byte gTextWindowFrame5_Gfx, gTextWindowFrame5_Pal
-	.4byte gTextWindowFrame6_Gfx, gTextWindowFrame6_Pal
-	.4byte gTextWindowFrame7_Gfx, gTextWindowFrame7_Pal
-	.4byte gTextWindowFrame8_Gfx, gTextWindowFrame8_Pal
-	.4byte gTextWindowFrame9_Gfx, gTextWindowFrame9_Pal
-	.4byte gTextWindowFrame10_Gfx, gTextWindowFrame10_Pal
-	.4byte gTextWindowFrame11_Gfx, gTextWindowFrame11_Pal
-	.4byte gTextWindowFrame12_Gfx, gTextWindowFrame12_Pal
-	.4byte gTextWindowFrame13_Gfx, gTextWindowFrame13_Pal
-	.4byte gTextWindowFrame14_Gfx, gTextWindowFrame14_Pal
-	.4byte gTextWindowFrame15_Gfx, gTextWindowFrame15_Pal
-	.4byte gTextWindowFrame16_Gfx, gTextWindowFrame16_Pal
-	.4byte gTextWindowFrame17_Gfx, gTextWindowFrame17_Pal
-	.4byte gTextWindowFrame18_Gfx, gTextWindowFrame18_Pal
-	.4byte gTextWindowFrame19_Gfx, gTextWindowFrame19_Pal
-	.4byte gTextWindowFrame20_Gfx, gTextWindowFrame20_Pal
-
-	.align 1
-gMessageBoxTilemap:: @ 8376290
-	.incbin "graphics/text_window/message_box_map.bin"
-
-	.align 2
-gUnknown_083762D8:: @ 83762D8
-	.4byte NULL
-
-gScriptConditionTable:: @ 83762DC
-	@     <  =  >
-	.byte 1, 0, 0 @ <
-	.byte 0, 1, 0 @ =
-	.byte 0, 0, 1 @ >
-	.byte 1, 1, 0 @ <=
-	.byte 0, 1, 1 @ >=
-	.byte 1, 0, 1 @ !=
-
-	.align 2
-gUnknown_083762F0:: @ 83762F0
-	.4byte gStringVar1
-	.4byte gStringVar2
-	.4byte gStringVar3
-
-	.align 2
 gCoordEventWeatherFuncs:: @ 83762FC
 	.4byte 0x1, CoordEventWeather_Indoor
 	.4byte 0x2, CoordEventWeather_Sunny
@@ -953,7 +818,7 @@ gUnknown_08376BB4:: @ 8376BB4
 	.align 2
 gUnknown_08376C74:: @ 8376C74
 	.4byte sub_8089CD4, sub_806AFD0, 0
-	.4byte sub_8095118, sub_8094E58, 0
+	.4byte SetUpBattlePokemonMenu, SetUpBattlePartyMenu, 0
 	.4byte sub_80F9C6C, sub_80F9ACC, 0
 	.4byte sub_80F9C6C, sub_806AFD0, 0
 	.4byte sub_81222B0, sub_8121E78, 0
@@ -5216,10 +5081,10 @@ gUnknown_083B5F8C:: @ 83B5F8C
 
 	.align 2
 gUnknown_083B5FCC:: @ 83B5FCC
-	.4byte OtherText_Summary, sub_8095544
-	.4byte gOtherText_CancelNoTerminator, sub_80958C4
-	.4byte OtherText_Shift, sub_8095584
-	.4byte OtherText_SendOut, sub_8095584
+	.4byte OtherText_Summary, BattlePokemonMenu_Summary
+	.4byte gOtherText_CancelNoTerminator, BattlePokemonMenu_Cancel
+	.4byte OtherText_Shift, BattlePokemonMenu_Shift
+	.4byte OtherText_SendOut, BattlePokemonMenu_Shift
 
 Unknown_83B5FEC: @ 83B5FEC
 	.byte 2, 0, 1

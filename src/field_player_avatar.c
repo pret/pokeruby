@@ -1558,7 +1558,7 @@ u8 Fishing16(struct Task *task)
     {
         gPlayerAvatar.unk6 = 0;
         ScriptContext2_Disable();
-        sub_806451C();
+        UnfreezeMapObjects();
         MenuZeroFillScreen();
         sub_80BE97C(0);
         DestroyTask(FindTaskIdByFunc(Task_Fishing));

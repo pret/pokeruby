@@ -6,8 +6,8 @@
 
 	.text
 
-	thumb_func_start sub_8094E58
-sub_8094E58: @ 8094E58
+	thumb_func_start SetUpBattlePartyMenu
+SetUpBattlePartyMenu: @ 8094E58
 	push {r4,r5,lr}
 	ldr r1, _08094E78 @ =0x0201b000
 	movs r2, 0x99
@@ -247,7 +247,7 @@ _0809504A:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8094E58
+	thumb_func_end SetUpBattlePartyMenu
 
 	thumb_func_start sub_8095050
 sub_8095050: @ 8095050
@@ -347,8 +347,8 @@ _08095110: .4byte gUnknown_083B5FF4
 _08095114: .4byte gUnknown_083B5FCC
 	thumb_func_end sub_8095050
 
-	thumb_func_start sub_8095118
-sub_8095118: @ 8095118
+	thumb_func_start SetUpBattlePokemonMenu
+SetUpBattlePokemonMenu: @ 8095118
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -446,7 +446,7 @@ _080951C8:
 	adds r0, r4, 0
 	bl sub_8095050
 	ldr r1, _0809520C @ =sub_8095408
-	ldr r2, _08095210 @ =sub_8095118
+	ldr r2, _08095210 @ =SetUpBattlePokemonMenu
 	adds r0, r4, 0
 	bl SetTaskFuncWithFollowupFunc
 	b _08095268
@@ -454,7 +454,7 @@ _080951C8:
 _08095204: .4byte gPlayerParty
 _08095208: .4byte gStringVar1
 _0809520C: .4byte sub_8095408
-_08095210: .4byte sub_8095118
+_08095210: .4byte SetUpBattlePokemonMenu
 _08095214:
 	ldr r5, _08095224 @ =gUnknown_02038473
 	ldrb r0, [r5]
@@ -506,7 +506,7 @@ _08095268:
 _08095270: .4byte gUnknown_0202E8F4
 _08095274: .4byte gTasks
 _08095278: .4byte sub_809527C
-	thumb_func_end sub_8095118
+	thumb_func_end SetUpBattlePokemonMenu
 
 	thumb_func_start sub_809527C
 sub_809527C: @ 809527C
@@ -634,7 +634,7 @@ sub_809535C: @ 809535C
 	movs r1, 0x80
 	orrs r0, r1
 	strb r0, [r2, 0x8]
-	ldr r2, _08095384 @ =sub_8095118
+	ldr r2, _08095384 @ =SetUpBattlePokemonMenu
 	movs r0, 0x1
 	movs r1, 0xFF
 	movs r3, 0x5
@@ -645,7 +645,7 @@ sub_809535C: @ 809535C
 	bx r0
 	.align 2, 0
 _08095380: .4byte gPaletteFade
-_08095384: .4byte sub_8095118
+_08095384: .4byte SetUpBattlePokemonMenu
 _08095388: .4byte sub_809538C
 	thumb_func_end sub_809535C
 
@@ -678,7 +678,7 @@ _08095392:
 	bl sub_8095050
 	ldrb r0, [r4]
 	ldr r1, _080953E8 @ =sub_8095408
-	ldr r2, _080953EC @ =sub_8095118
+	ldr r2, _080953EC @ =SetUpBattlePokemonMenu
 	bl SetTaskFuncWithFollowupFunc
 	ldr r0, _080953F0 @ =sub_806AEDC
 	bl SetMainCallback2
@@ -689,7 +689,7 @@ _080953DC: .4byte gUnknown_020384F0
 _080953E0: .4byte gPlayerParty
 _080953E4: .4byte gStringVar1
 _080953E8: .4byte sub_8095408
-_080953EC: .4byte sub_8095118
+_080953EC: .4byte SetUpBattlePokemonMenu
 _080953F0: .4byte sub_806AEDC
 _080953F4:
 	bl sub_80F9344
@@ -781,7 +781,7 @@ _080954A4:
 	movs r0, 0x5
 	bl PlaySE
 	adds r0, r4, 0
-	bl sub_80958C4
+	bl BattlePokemonMenu_Cancel
 _080954B8:
 	pop {r4-r7}
 	pop {r0}
@@ -798,7 +798,7 @@ sub_80954C0: @ 80954C0
 	cmp r0, 0
 	bne _080954D4
 	adds r0, r1, 0
-	bl sub_80958C4
+	bl BattlePokemonMenu_Cancel
 _080954D4:
 	pop {r0}
 	bx r0
@@ -806,8 +806,8 @@ _080954D4:
 _080954D8: .4byte gUnknown_0202E8F6
 	thumb_func_end sub_80954C0
 
-	thumb_func_start sub_80954DC
-sub_80954DC: @ 80954DC
+	thumb_func_start BattleShowPokemonSummaryScreen
+BattleShowPokemonSummaryScreen: @ 80954DC
 	push {r4,r5,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -839,7 +839,7 @@ sub_80954DC: @ 80954DC
 	movs r1, 0x4
 	str r1, [sp]
 	adds r1, r5, 0
-	bl sub_809D8BC
+	bl ShowPokemonSummaryScreen
 _08095522:
 	add sp, 0x4
 	pop {r4,r5}
@@ -852,10 +852,10 @@ _08095534: .4byte 0x00000262
 _08095538: .4byte gPlayerParty
 _0809553C: .4byte gPlayerPartyCount
 _08095540: .4byte sub_809535C
-	thumb_func_end sub_80954DC
+	thumb_func_end BattleShowPokemonSummaryScreen
 
-	thumb_func_start sub_8095544
-sub_8095544: @ 8095544
+	thumb_func_start BattlePokemonMenu_Summary
+BattlePokemonMenu_Summary: @ 8095544
 	push {r4,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -868,7 +868,7 @@ sub_8095544: @ 8095544
 	adds r0, r4
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, _08095580 @ =sub_80954DC
+	ldr r1, _08095580 @ =BattleShowPokemonSummaryScreen
 	str r1, [r0]
 	movs r0, 0x1
 	negs r0, r0
@@ -883,11 +883,11 @@ sub_8095544: @ 8095544
 	bx r0
 	.align 2, 0
 _0809557C: .4byte gTasks
-_08095580: .4byte sub_80954DC
-	thumb_func_end sub_8095544
+_08095580: .4byte BattleShowPokemonSummaryScreen
+	thumb_func_end BattlePokemonMenu_Summary
 
-	thumb_func_start sub_8095584
-sub_8095584: @ 8095584
+	thumb_func_start BattlePokemonMenu_Shift
+BattlePokemonMenu_Shift: @ 8095584
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1228,10 +1228,10 @@ _080958B4: .4byte gUnknown_02024A6A
 _080958B8: .4byte gUnknown_02024E6C
 _080958BC: .4byte gTasks
 _080958C0: .4byte sub_809527C
-	thumb_func_end sub_8095584
+	thumb_func_end BattlePokemonMenu_Shift
 
-	thumb_func_start sub_80958C4
-sub_80958C4: @ 80958C4
+	thumb_func_start BattlePokemonMenu_Cancel
+BattlePokemonMenu_Cancel: @ 80958C4
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	lsls r5, 24
@@ -1258,6 +1258,6 @@ sub_80958C4: @ 80958C4
 	.align 2, 0
 _080958FC: .4byte gTasks
 _08095900: .4byte gUnknown_083B5FF4
-	thumb_func_end sub_80958C4
+	thumb_func_end BattlePokemonMenu_Cancel
 
 	.align 2, 0 @ Don't pad with nop.

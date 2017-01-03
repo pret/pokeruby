@@ -10936,14 +10936,14 @@ ItemUseMoveMenu_HandleCancel: @ 80704F0
 	adds r0, r1
 	lsls r0, 3
 	adds r0, r2
-	ldr r1, _08070538 @ =sub_8095118
+	ldr r1, _08070538 @ =SetUpBattlePokemonMenu
 	b _0807054C
 	.align 2, 0
 _08070528: .4byte gMain
 _0807052C: .4byte 0x0000043d
 _08070530: .4byte gTasks
 _08070534: .4byte 0x0201c000
-_08070538: .4byte sub_8095118
+_08070538: .4byte SetUpBattlePokemonMenu
 _0807053C:
 	ldr r2, _08070564 @ =gTasks
 	ldr r0, _08070568 @ =0x0201c000

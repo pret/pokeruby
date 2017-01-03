@@ -375,8 +375,8 @@ _08095B9A:
 _08095BB0: .4byte gPlayerParty
 	thumb_func_end sub_8095B6C
 
-	thumb_func_start sub_8095BB4
-sub_8095BB4: @ 8095BB4
+	thumb_func_start CountAlivePartyMonsExceptOne
+CountAlivePartyMonsExceptOne: @ 8095BB4
 	push {r4-r7,lr}
 	lsls r0, 24
 	movs r5, 0
@@ -421,14 +421,14 @@ _08095BF6:
 	bx r1
 	.align 2, 0
 _08095C0C: .4byte gPlayerParty
-	thumb_func_end sub_8095BB4
+	thumb_func_end CountAlivePartyMonsExceptOne
 
 	thumb_func_start sub_8095C10
 sub_8095C10: @ 8095C10
 	push {lr}
 	ldr r0, _08095C24 @ =gSpecialVar_0x8004
 	ldrb r0, [r0]
-	bl sub_8095BB4
+	bl CountAlivePartyMonsExceptOne
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -437,8 +437,8 @@ sub_8095C10: @ 8095C10
 _08095C24: .4byte gSpecialVar_0x8004
 	thumb_func_end sub_8095C10
 
-	thumb_func_start sub_8095C28
-sub_8095C28: @ 8095C28
+	thumb_func_start StorageSystemGetPartySize
+StorageSystemGetPartySize: @ 8095C28
 	push {r4,r5,lr}
 	movs r4, 0
 	movs r5, 0
@@ -467,7 +467,7 @@ _08095C46:
 	bx r1
 	.align 2, 0
 _08095C5C: .4byte gPlayerParty
-	thumb_func_end sub_8095C28
+	thumb_func_end StorageSystemGetPartySize
 
 	thumb_func_start unref_sub_8095C60
 unref_sub_8095C60: @ 8095C60
@@ -665,8 +665,8 @@ _08095DC4: .4byte 0x040000d4
 _08095DC8: .4byte 0x81000800
 	thumb_func_end unref_sub_8095D08
 
-	thumb_func_start sub_8095DCC
-sub_8095DCC: @ 8095DCC
+	thumb_func_start StorageSystemGetNextMonIndex
+StorageSystemGetNextMonIndex: @ 8095DCC
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -779,10 +779,10 @@ _08095E94:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8095DCC
+	thumb_func_end StorageSystemGetNextMonIndex
 
-	thumb_func_start sub_8095EA0
-sub_8095EA0: @ 8095EA0
+	thumb_func_start StorageSystemClearMessageWindow
+StorageSystemClearMessageWindow: @ 8095EA0
 	push {lr}
 	movs r0, 0x2
 	movs r1, 0xF
@@ -791,10 +791,10 @@ sub_8095EA0: @ 8095EA0
 	bl MenuFillWindowRectWithBlankTile
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8095EA0
+	thumb_func_end StorageSystemClearMessageWindow
 
-	thumb_func_start sub_8095EB4
-sub_8095EB4: @ 8095EB4
+	thumb_func_start Task_PokemonStorageSystem
+Task_PokemonStorageSystem: @ 8095EB4
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -826,7 +826,7 @@ _08095EE0:
 	.4byte _080960DC
 _08095EF4:
 	ldrb r0, [r4, 0xA]
-	bl sub_8096168
+	bl StorageSystemCreatePrimaryMenu
 	bl MenuDisplayMessageBox
 	ldr r1, _08095F18 @ =gUnknown_083B600C
 	movs r2, 0xA
@@ -915,7 +915,7 @@ _08095F92:
 	b _080960F4
 _08095FA2:
 	strh r2, [r4, 0xA]
-	bl sub_8095EA0
+	bl StorageSystemClearMessageWindow
 	ldr r0, _08095FC4 @ =gUnknown_083B600C
 	movs r2, 0xA
 	ldrsh r1, [r4, r2]
@@ -947,12 +947,12 @@ _08095FE8:
 	ldrsh r0, [r4, r3]
 	cmp r0, 0
 	bne _08096008
-	bl sub_8095C28
+	bl StorageSystemGetPartySize
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x6
 	bne _08096008
-	bl sub_8095EA0
+	bl StorageSystemClearMessageWindow
 	ldr r0, _08096004 @ =gPCText_PartyFull2
 	b _08096022
 	.align 2, 0
@@ -962,12 +962,12 @@ _08096008:
 	ldrsh r0, [r4, r1]
 	cmp r0, 0x1
 	bne _08096034
-	bl sub_8095C28
+	bl StorageSystemGetPartySize
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _08096034
-	bl sub_8095EA0
+	bl StorageSystemClearMessageWindow
 	ldr r0, _08096030 @ =gPCText_OnlyOne
 _08096022:
 	movs r1, 0x2
@@ -1014,7 +1014,7 @@ _0809606A:
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0xA]
-	bl sub_8095EA0
+	bl StorageSystemClearMessageWindow
 	ldr r1, _0809608C @ =gUnknown_083B600C
 	movs r3, 0xA
 	ldrsh r0, [r4, r3]
@@ -1043,7 +1043,7 @@ _080960A8:
 	lsrs r0, 24
 	strh r0, [r4, 0xA]
 _080960B8:
-	bl sub_8095EA0
+	bl StorageSystemClearMessageWindow
 	ldr r1, _080960D8 @ =gUnknown_083B600C
 	movs r2, 0xA
 	ldrsh r0, [r4, r2]
@@ -1077,12 +1077,12 @@ _080960F4:
 	bx r0
 	.align 2, 0
 _080960FC: .4byte gPaletteFade
-	thumb_func_end sub_8095EB4
+	thumb_func_end Task_PokemonStorageSystem
 
-	thumb_func_start sub_8096100
-sub_8096100: @ 8096100
+	thumb_func_start ShowPokemonStorageSystem
+ShowPokemonStorageSystem: @ 8096100
 	push {lr}
-	ldr r0, _08096128 @ =sub_8095EB4
+	ldr r0, _08096128 @ =Task_PokemonStorageSystem
 	movs r1, 0x50
 	bl CreateTask
 	lsls r0, 24
@@ -1099,14 +1099,14 @@ sub_8096100: @ 8096100
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08096128: .4byte sub_8095EB4
+_08096128: .4byte Task_PokemonStorageSystem
 _0809612C: .4byte gTasks
-	thumb_func_end sub_8096100
+	thumb_func_end ShowPokemonStorageSystem
 
 	thumb_func_start sub_8096130
 sub_8096130: @ 8096130
 	push {lr}
-	ldr r0, _0809615C @ =sub_8095EB4
+	ldr r0, _0809615C @ =Task_PokemonStorageSystem
 	movs r1, 0x50
 	bl CreateTask
 	lsls r0, 24
@@ -1125,13 +1125,13 @@ sub_8096130: @ 8096130
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809615C: .4byte sub_8095EB4
+_0809615C: .4byte Task_PokemonStorageSystem
 _08096160: .4byte gTasks
 _08096164: .4byte gUnknown_02038474
 	thumb_func_end sub_8096130
 
-	thumb_func_start sub_8096168
-sub_8096168: @ 8096168
+	thumb_func_start StorageSystemCreatePrimaryMenu
+StorageSystemCreatePrimaryMenu: @ 8096168
 	push {r4,lr}
 	sub sp, 0x8
 	adds r4, r0, 0
@@ -1161,7 +1161,7 @@ sub_8096168: @ 8096168
 	bx r0
 	.align 2, 0
 _080961A4: .4byte gUnknown_083B600C
-	thumb_func_end sub_8096168
+	thumb_func_end StorageSystemCreatePrimaryMenu
 
 	thumb_func_start sub_80961A8
 sub_80961A8: @ 80961A8
@@ -2393,7 +2393,7 @@ _08096B74:
 	adds r4, r5
 	ldrb r4, [r4]
 	str r4, [sp]
-	bl sub_809D8BC
+	bl ShowPokemonSummaryScreen
 	b _08096BCC
 	.align 2, 0
 _08096B98: .4byte 0x00002690
@@ -12587,7 +12587,7 @@ _0809BC64:
 	ldr r3, _0809BCB0 @ =0x0000268d
 	adds r0, r4, r3
 	strb r1, [r0]
-	bl sub_8095C28
+	bl StorageSystemGetPartySize
 	subs r0, 0x1
 	ldr r2, _0809BCB4 @ =0x0000268c
 	adds r1, r4, r2
@@ -12850,7 +12850,7 @@ sub_809BE80: @ 809BE80
 	bne _0809BEB4
 	ldr r0, _0809BEB0 @ =gUnknown_020384E5
 	ldrb r0, [r0]
-	bl sub_8095BB4
+	bl CountAlivePartyMonsExceptOne
 	lsls r0, 24
 	cmp r0, 0
 	bne _0809BEB4
@@ -12882,7 +12882,7 @@ sub_809BEBC: @ 809BEBC
 	bne _0809BEFC
 	ldr r0, _0809BF08 @ =gUnknown_020384E5
 	ldrb r0, [r0]
-	bl sub_8095BB4
+	bl CountAlivePartyMonsExceptOne
 	lsls r0, 24
 	cmp r0, 0
 	bne _0809BEFC

@@ -1590,7 +1590,7 @@ mapldr_080842E8: @ 80865DC
 	movs r1, 0
 	bl CreateTask
 	bl ScriptContext2_Enable
-	bl player_bitmagic
+	bl FreezeMapObjects
 	ldr r1, _08086600 @ =gUnknown_0300485C
 	movs r0, 0
 	str r0, [r1]
@@ -1693,7 +1693,7 @@ mapldr_08084390: @ 8086684
 	bl FieldObjectTurn
 _080866C6:
 	bl ScriptContext2_Enable
-	bl player_bitmagic
+	bl FreezeMapObjects
 	ldr r1, _080866E8 @ =gUnknown_0300485C
 	movs r0, 0
 	str r0, [r1]
@@ -1740,7 +1740,7 @@ _0808671E:
 	cmp r0, 0
 	bne _08086738
 	bl ScriptContext2_Disable
-	bl sub_806451C
+	bl UnfreezeMapObjects
 	adds r0, r5, 0
 	bl DestroyTask
 _08086738:
@@ -1758,7 +1758,7 @@ sub_8086748: @ 8086748
 	bl sub_8053E90
 	bl pal_fill_for_map_transition
 	bl ScriptContext2_Enable
-	bl player_bitmagic
+	bl FreezeMapObjects
 	ldr r0, _0808676C @ =sub_8086774
 	movs r1, 0
 	bl CreateTask
@@ -2115,7 +2115,7 @@ sub_80869F8: @ 80869F8
 	strb r0, [r1, 0x6]
 	bl ScriptContext2_Disable
 	bl CameraObjectReset1
-	bl sub_806451C
+	bl UnfreezeMapObjects
 	bl InstallCameraPanAheadCallback
 	ldr r0, _08086A28 @ =sub_8086774
 	bl FindTaskIdByFunc
@@ -2196,7 +2196,7 @@ _08086A9C: .4byte gUnknown_0839F2E8
 sub_8086AA0: @ 8086AA0
 	push {r4,lr}
 	adds r4, r0, 0
-	bl player_bitmagic
+	bl FreezeMapObjects
 	bl CameraObjectReset2
 	ldrb r0, [r4, 0xA]
 	bl sub_80B4824
@@ -3193,7 +3193,7 @@ sub_808722C: @ 808722C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
-	bl player_bitmagic
+	bl FreezeMapObjects
 	bl CameraObjectReset2
 	movs r0, 0
 	bl SetCameraPanningCallback
@@ -3539,7 +3539,7 @@ sub_80874CC: @ 80874CC
 	adds r5, r0, 0
 	adds r4, r1, 0
 	bl CameraObjectReset2
-	bl player_bitmagic
+	bl FreezeMapObjects
 	ldr r1, _080874F8 @ =gPlayerAvatar
 	movs r0, 0x1
 	strb r0, [r1, 0x6]
@@ -3654,7 +3654,7 @@ sub_808759C: @ 808759C
 	movs r0, 0
 	strb r0, [r1, 0x6]
 	bl ScriptContext2_Disable
-	bl sub_806451C
+	bl UnfreezeMapObjects
 	ldr r0, _080875D0 @ =sub_8087470
 	bl FindTaskIdByFunc
 	lsls r0, 24
@@ -3801,7 +3801,7 @@ sub_80876C8: @ 80876C8
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	adds r4, r1, 0
-	bl player_bitmagic
+	bl FreezeMapObjects
 	bl CameraObjectReset2
 	ldr r1, _080876F4 @ =gPlayerAvatar
 	movs r0, 0x1
@@ -4044,7 +4044,7 @@ _080878A4:
 sub_80878A8: @ 80878A8
 	push {lr}
 	bl ScriptContext2_Enable
-	bl player_bitmagic
+	bl FreezeMapObjects
 	ldr r0, _080878C0 @ =sub_80878C4
 	movs r1, 0x50
 	bl CreateTask
@@ -4229,7 +4229,7 @@ mapldr_080859D4: @ 8087A28
 	bl sub_8053E90
 	bl pal_fill_for_map_transition
 	bl ScriptContext2_Enable
-	bl player_bitmagic
+	bl FreezeMapObjects
 	ldr r1, _08087A64 @ =gUnknown_0300485C
 	movs r0, 0
 	str r0, [r1]
@@ -4357,7 +4357,7 @@ _08087B12:
 	ands r0, r1
 	strb r0, [r6, 0x1]
 	bl ScriptContext2_Disable
-	bl sub_806451C
+	bl UnfreezeMapObjects
 	ldr r0, _08087B58 @ =sub_8087A74
 	bl FindTaskIdByFunc
 	lsls r0, 24
@@ -4453,7 +4453,7 @@ sub_8087BEC: @ 8087BEC
 	push {r4,lr}
 	adds r4, r0, 0
 	bl ScriptContext2_Enable
-	bl player_bitmagic
+	bl FreezeMapObjects
 	bl CameraObjectReset2
 	bl player_get_direction_lower_nybble
 	lsls r0, 24
@@ -4689,7 +4689,7 @@ mapldr_08085D88: @ 8087DCC
 	bl sub_8053E90
 	bl pal_fill_for_map_transition
 	bl ScriptContext2_Enable
-	bl player_bitmagic
+	bl FreezeMapObjects
 	ldr r1, _08087E0C @ =gUnknown_0300485C
 	movs r0, 0
 	str r0, [r1]
@@ -4991,7 +4991,7 @@ sub_8087FDC: @ 8087FDC
 	bne _08088050
 	bl ScriptContext2_Disable
 	bl CameraObjectReset1
-	bl sub_806451C
+	bl UnfreezeMapObjects
 	ldr r0, _08088064 @ =sub_8087E1C
 	bl FindTaskIdByFunc
 	lsls r0, 24
@@ -6207,7 +6207,7 @@ sub_8088984: @ 8088984
 	push {r6}
 	adds r4, r0, 0
 	bl ScriptContext2_Enable
-	bl player_bitmagic
+	bl FreezeMapObjects
 	ldr r5, _080889DC @ =gPlayerAvatar
 	movs r0, 0x1
 	strb r0, [r5, 0x6]
@@ -6410,7 +6410,7 @@ sub_8088AF4: @ 8088AF4
 	ldrb r0, [r4, 0x1A]
 	movs r1, 0x1
 	bl sub_8127ED0
-	bl sub_806451C
+	bl UnfreezeMapObjects
 	bl ScriptContext2_Disable
 	movs r0, 0x9
 	bl FieldEffectActiveListRemove

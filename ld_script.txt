@@ -78,7 +78,7 @@ SECTIONS {
         asm/field_map_obj.o(.text);
         src/field_ground_effect.o(.text);
         asm/field_ground_effect.o(.text);
-        src/map_obj_80643A4.o(.text);
+        src/field_map_obj_helpers.o(.text);
         src/field_message_box.o(.text);
         src/map_obj_lock.o(.text);
         src/text_window.o(.text);
@@ -307,6 +307,10 @@ SECTIONS {
         data/field_map_obj.o(.rodata);
         src/field_ground_effect.o(.rodata);
         data/field_ground_effect.o(.rodata);
+        data/field_map_obj_helpers.o(.rodata);
+        data/text_window.o(.rodata);
+        data/script.o(.rodata);
+        data/scrcmd.o(.rodata);
         data/data_83760F0.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);

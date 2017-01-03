@@ -135,10 +135,10 @@ void FieldObjectUpdateZCoord(struct MapObject *pObject);
 void SetObjectSubpriorityByZCoord(u8, struct Sprite *, u8);
 
 // src/map_obj_80643A4.o
-bool8 sub_80643A4(struct MapObject *);
-void player_bitmagic(void);
-void sub_8064470(u8);
-void sub_806451C(void);
+bool8 FreezeMapObject(struct MapObject *);
+void FreezeMapObjects(void);
+void FreezeMapObjectsExceptOne(u8);
+void UnfreezeMapObjects(void);
 void sub_806487C(struct Sprite *sprite, bool8 invisible);
 void sub_8064990(u8, u8);
 

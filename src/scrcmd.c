@@ -1102,7 +1102,7 @@ bool8 ScrCmd_releaseall(struct ScriptContext *ctx)
     objectId = GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0);
     FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[objectId]);
     sub_80A2178();
-    sub_806451C();
+    UnfreezeMapObjects();
     return FALSE;
 }
 
@@ -1116,7 +1116,7 @@ bool8 ScrCmd_release(struct ScriptContext *ctx)
     objectId = GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0);
     FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[objectId]);
     sub_80A2178();
-    sub_806451C();
+    UnfreezeMapObjects();
     return FALSE;
 }
 

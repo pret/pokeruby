@@ -59,8 +59,8 @@ _0809D8B4: .4byte gUnknown_030041B0
 _0809D8B8: .4byte gUnknown_030041B8
 	thumb_func_end sub_809D85C
 
-	thumb_func_start sub_809D8BC
-sub_809D8BC: @ 809D8BC
+	thumb_func_start ShowPokemonSummaryScreen
+ShowPokemonSummaryScreen: @ 809D8BC
 	push {r4-r7,lr}
 	ldr r4, [sp, 0x14]
 	lsls r4, 24
@@ -215,7 +215,7 @@ _0809D9D6:
 	bx r0
 	.align 2, 0
 _0809D9EC: .4byte sub_809DE44
-	thumb_func_end sub_809D8BC
+	thumb_func_end ShowPokemonSummaryScreen
 
 	thumb_func_start sub_809D9F0
 sub_809D9F0: @ 809D9F0
@@ -230,7 +230,7 @@ sub_809D9F0: @ 809D9F0
 	lsrs r5, 16
 	movs r4, 0x2
 	str r4, [sp]
-	bl sub_809D8BC
+	bl ShowPokemonSummaryScreen
 	ldr r0, _0809DA18 @ =0x02018000
 	adds r0, 0x7C
 	strh r5, [r0]
@@ -267,15 +267,15 @@ _0809DA38:
 	.4byte _0809DA54
 	.4byte _0809DA6C
 _0809DA54:
-	ldr r0, _0809DA58 @ =sub_809E19C
+	ldr r0, _0809DA58 @ =SummaryScreenHandleKeyInput
 	b _0809DA6E
 	.align 2, 0
-_0809DA58: .4byte sub_809E19C
+_0809DA58: .4byte SummaryScreenHandleKeyInput
 _0809DA5C:
-	ldr r0, _0809DA60 @ =sub_809E19C
+	ldr r0, _0809DA60 @ =SummaryScreenHandleKeyInput
 	b _0809DA6E
 	.align 2, 0
-_0809DA60: .4byte sub_809E19C
+_0809DA60: .4byte SummaryScreenHandleKeyInput
 _0809DA64:
 	ldr r0, _0809DA68 @ =sub_809EB40
 	b _0809DA6E
@@ -1035,8 +1035,8 @@ _0809E0F4: .4byte gUnknownPalette_81E6692+0x1C
 _0809E0F8: .4byte gFontDefaultPalette
 	thumb_func_end sub_809E044
 
-	thumb_func_start sub_809E0FC
-sub_809E0FC: @ 809E0FC
+	thumb_func_start SummaryScreenExit
+SummaryScreenExit: @ 809E0FC
 	push {r4,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -1065,7 +1065,7 @@ sub_809E0FC: @ 809E0FC
 	.align 2, 0
 _0809E134: .4byte gTasks
 _0809E138: .4byte sub_809E13C
-	thumb_func_end sub_809E0FC
+	thumb_func_end SummaryScreenExit
 
 	thumb_func_start sub_809E13C
 sub_809E13C: @ 809E13C
@@ -1109,8 +1109,8 @@ _0809E194: .4byte gMPlay_BGM
 _0809E198: .4byte 0x0000ffff
 	thumb_func_end sub_809E13C
 
-	thumb_func_start sub_809E19C
-sub_809E19C: @ 809E19C
+	thumb_func_start SummaryScreenHandleKeyInput
+SummaryScreenHandleKeyInput: @ 809E19C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -1130,7 +1130,7 @@ sub_809E19C: @ 809E19C
 	movs r1, 0x1
 	negs r1, r1
 	adds r0, r4, 0
-	bl sub_809F1B8
+	bl SummaryScreenHandleUpDownInput
 	b _0809E25A
 	.align 2, 0
 _0809E1C8: .4byte gPaletteFade
@@ -1142,7 +1142,7 @@ _0809E1D0:
 	beq _0809E1E2
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_809F1B8
+	bl SummaryScreenHandleUpDownInput
 	b _0809E25A
 _0809E1E2:
 	movs r0, 0x20
@@ -1158,7 +1158,7 @@ _0809E1F6:
 	movs r1, 0x1
 	negs r1, r1
 	adds r0, r4, 0
-	bl sub_809F134
+	bl SummaryScreenHandleLeftRightInput
 	b _0809E25A
 _0809E202:
 	ldrh r1, [r5, 0x2E]
@@ -1174,7 +1174,7 @@ _0809E202:
 _0809E218:
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_809F134
+	bl SummaryScreenHandleLeftRightInput
 	b _0809E25A
 _0809E222:
 	ldrh r1, [r5, 0x2E]
@@ -1187,13 +1187,13 @@ _0809E222:
 	cmp r0, 0x1
 	bls _0809E23A
 	adds r0, r4, 0
-	bl sub_809EA50
+	bl SummaryScreenHandleAButton
 _0809E23A:
 	ldrb r0, [r5, 0xB]
 	cmp r0, 0
 	bne _0809E25A
 	adds r0, r4, 0
-	bl sub_809E0FC
+	bl SummaryScreenExit
 	b _0809E25A
 	.align 2, 0
 _0809E248: .4byte 0x02018000
@@ -1203,12 +1203,12 @@ _0809E24C:
 	cmp r0, 0
 	beq _0809E25A
 	adds r0, r4, 0
-	bl sub_809E0FC
+	bl SummaryScreenExit
 _0809E25A:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_809E19C
+	thumb_func_end SummaryScreenHandleKeyInput
 
 	thumb_func_start sub_809E260
 sub_809E260: @ 809E260
@@ -1302,7 +1302,7 @@ _0809E314:
 	movs r1, 0x1
 	negs r1, r1
 	adds r0, r4, 0
-	bl sub_809F134
+	bl SummaryScreenHandleLeftRightInput
 	b _0809E3EE
 	.align 2, 0
 _0809E320: .4byte 0x02018000
@@ -1346,7 +1346,7 @@ _0809E360:
 _0809E36C:
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_809F134
+	bl SummaryScreenHandleLeftRightInput
 	b _0809E3EE
 	.align 2, 0
 _0809E378: .4byte 0x02018000
@@ -1379,7 +1379,7 @@ _0809E3A0:
 	ldrb r0, [r0]
 	strh r0, [r1]
 	adds r0, r4, 0
-	bl sub_809E0FC
+	bl SummaryScreenExit
 	b _0809E3EE
 	.align 2, 0
 _0809E3BC: .4byte 0x02018000
@@ -1403,7 +1403,7 @@ _0809E3D4:
 	ldr r0, _0809E3F8 @ =gSpecialVar_0x8005
 	strh r1, [r0]
 	adds r0, r4, 0
-	bl sub_809E0FC
+	bl SummaryScreenExit
 _0809E3EE:
 	pop {r4,r5}
 	pop {r0}
@@ -2200,8 +2200,8 @@ _0809EA34:
 _0809EA4C: .4byte 0x02018010
 	thumb_func_end sub_809E8F0
 
-	thumb_func_start sub_809EA50
-sub_809EA50: @ 809EA50
+	thumb_func_start SummaryScreenHandleAButton
+SummaryScreenHandleAButton: @ 809EA50
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -2252,7 +2252,7 @@ _0809EA8C:
 _0809EABC: .4byte 0x02018000
 _0809EAC0: .4byte gTasks
 _0809EAC4: .4byte sub_809E3FC
-	thumb_func_end sub_809EA50
+	thumb_func_end SummaryScreenHandleAButton
 
 	thumb_func_start sub_809EAC8
 sub_809EAC8: @ 809EAC8
@@ -2298,7 +2298,7 @@ _0809EAEE:
 	adds r0, r5
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, _0809EB3C @ =sub_809E19C
+	ldr r1, _0809EB3C @ =SummaryScreenHandleKeyInput
 	str r1, [r0]
 	pop {r4-r6}
 	pop {r0}
@@ -2306,7 +2306,7 @@ _0809EAEE:
 	.align 2, 0
 _0809EB34: .4byte 0x02018000
 _0809EB38: .4byte gTasks
-_0809EB3C: .4byte sub_809E19C
+_0809EB3C: .4byte SummaryScreenHandleKeyInput
 	thumb_func_end sub_809EAC8
 
 	thumb_func_start sub_809EB40
@@ -3070,8 +3070,8 @@ _0809F12A:
 _0809F130: .4byte sub_809EE74
 	thumb_func_end sub_809F0D0
 
-	thumb_func_start sub_809F134
-sub_809F134: @ 809F134
+	thumb_func_start SummaryScreenHandleLeftRightInput
+SummaryScreenHandleLeftRightInput: @ 809F134
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -3134,10 +3134,10 @@ _0809F1A6:
 _0809F1AC: .4byte 0x02018010
 _0809F1B0: .4byte sub_80A1334
 _0809F1B4: .4byte sub_80A1500
-	thumb_func_end sub_809F134
+	thumb_func_end SummaryScreenHandleLeftRightInput
 
-	thumb_func_start sub_809F1B8
-sub_809F1B8: @ 809F1B8
+	thumb_func_start SummaryScreenHandleUpDownInput
+SummaryScreenHandleUpDownInput: @ 809F1B8
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -3173,7 +3173,7 @@ _0809F1F4:
 	ldrb r1, [r2, 0x9]
 	ldrb r2, [r2, 0xA]
 	adds r3, r4, 0
-	bl sub_8095DCC
+	bl StorageSystemGetNextMonIndex
 	b _0809F22C
 _0809F202:
 	bl sub_80F9344
@@ -3235,7 +3235,7 @@ _0809F270:
 _0809F278: .4byte 0x02018010
 _0809F27C: .4byte gTasks
 _0809F280: .4byte sub_809F43C
-	thumb_func_end sub_809F1B8
+	thumb_func_end SummaryScreenHandleUpDownInput
 
 	thumb_func_start sub_809F284
 sub_809F284: @ 809F284
@@ -4158,7 +4158,7 @@ _0809F960:
 	adds r0, r5, 0
 	movs r1, 0x1
 _0809F972:
-	bl sub_809F134
+	bl SummaryScreenHandleLeftRightInput
 	ldrb r1, [r4, 0x1E]
 	movs r0, 0x1
 	bl sub_80A1488
