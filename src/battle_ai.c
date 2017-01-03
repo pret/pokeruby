@@ -3,11 +3,18 @@
 #include "asm.h"
 #include "pokemon.h"
 #include "rng.h"
+#include "abilities.h"
 
 #define AIScriptRead32(ptr) ((ptr)[0] | (ptr)[1] << 8 | (ptr)[2] << 16 | (ptr)[3] << 24)
 #define AIScriptRead16(ptr) ((ptr)[0] | (ptr)[1] << 8)
 #define AIScriptRead8(ptr) ((ptr)[0])
 #define AIScriptReadPtr(ptr) (u8*) AIScriptRead32(ptr)
+
+enum
+{
+	TARGET,
+	USER
+};
 
 extern u16 gBattleTypeFlags;
 extern u8 gUnknown_02024A60;
@@ -388,7 +395,7 @@ void BattleAICmd_if_hp_less_than(void)
 {
 	u16 var;
 	
-	if ( gAIScriptPtr[1] == 1 )
+	if (gAIScriptPtr[1] == USER)
 		var = gUnknown_02024C07;
 	else
 		var = gUnknown_02024C08;
@@ -403,7 +410,7 @@ void BattleAICmd_if_hp_more_than(void)
 {
 	u16 var;
 	
-	if ( gAIScriptPtr[1] == 1 )
+	if (gAIScriptPtr[1] == USER)
 		var = gUnknown_02024C07;
 	else
 		var = gUnknown_02024C08;
@@ -418,7 +425,7 @@ void BattleAICmd_if_hp_equal(void)
 {
 	u16 var;
 	
-	if ( gAIScriptPtr[1] == 1 )
+	if (gAIScriptPtr[1] == USER)
 		var = gUnknown_02024C07;
 	else
 		var = gUnknown_02024C08;
@@ -433,7 +440,7 @@ void BattleAICmd_if_hp_not_equal(void)
 {
 	u16 var;
 	
-	if ( gAIScriptPtr[1] == 1 )
+	if (gAIScriptPtr[1] == USER)
 		var = gUnknown_02024C07;
 	else
 		var = gUnknown_02024C08;
@@ -449,7 +456,7 @@ void BattleAICmd_if_status(void)
 	u16 var;
 	u32 temp;
 
-	if ( gAIScriptPtr[1] == 1 )
+	if (gAIScriptPtr[1] == USER)
 		var = gUnknown_02024C07;
 	else
 		var = gUnknown_02024C08;
@@ -467,7 +474,7 @@ void BattleAICmd_if_not_status(void)
 	u16 var;
 	u32 temp;
 
-	if ( gAIScriptPtr[1] == 1 )
+	if (gAIScriptPtr[1] == USER)
 		var = gUnknown_02024C07;
 	else
 		var = gUnknown_02024C08;
@@ -485,7 +492,7 @@ void BattleAICmd_if_status2(void)
 	u8 var;
 	u32 temp;
 
-	if ( gAIScriptPtr[1] == 1 )
+	if (gAIScriptPtr[1] == USER)
 		var = gUnknown_02024C07;
 	else
 		var = gUnknown_02024C08;
@@ -503,7 +510,7 @@ void BattleAICmd_if_not_status2(void)
 	u8 var;
 	u32 temp;
 
-	if ( gAIScriptPtr[1] == 1 )
+	if (gAIScriptPtr[1] == USER)
 		var = gUnknown_02024C07;
 	else
 		var = gUnknown_02024C08;
@@ -521,7 +528,7 @@ void BattleAICmd_if_status3(void)
 	u8 var;
 	u32 temp;
 	
-	if ( gAIScriptPtr[1] == 1 )
+	if (gAIScriptPtr[1] == USER)
 		var = gUnknown_02024C07;
 	else
 		var = gUnknown_02024C08;
@@ -539,7 +546,7 @@ void BattleAICmd_if_not_status3(void)
 	u8 var;
 	u32 temp;
 	
-	if ( gAIScriptPtr[1] == 1 )
+	if (gAIScriptPtr[1] == USER)
 		var = gUnknown_02024C07;
 	else
 		var = gUnknown_02024C08;
@@ -558,7 +565,7 @@ void BattleAICmd_if_status4(void)
 	u32 temp;
 	u32 temp2;
 	
-	if ( gAIScriptPtr[1] == 1 )
+	if (gAIScriptPtr[1] == USER)
 		var = gUnknown_02024C07;
 	else
 		var = gUnknown_02024C08;
@@ -578,7 +585,7 @@ void BattleAICmd_if_not_status4(void)
 	u32 temp;
 	u32 temp2;
 	
-	if (gAIScriptPtr[1] == 1)
+	if (gAIScriptPtr[1] == USER)
 		var = gUnknown_02024C07;
 	else
 		var = gUnknown_02024C08;
@@ -1063,7 +1070,7 @@ _081083D0: .4byte gAIScriptPtr\n\
 
 void BattleAICmd_get_move(void)
 {
-	if ( gAIScriptPtr[1] == 1 )
+	if (gAIScriptPtr[1] == USER)
 		gAIThinkingSpace.unk8 = gUnknown_02024C34[gUnknown_02024C07];
 	else
 		gAIThinkingSpace.unk8 = gUnknown_02024C34[gUnknown_02024C08];
@@ -1249,13 +1256,13 @@ void BattleAICmd_get_ability(void)
 {
     u8 var;
     
-    if(gAIScriptPtr[1] == 1)
+    if(gAIScriptPtr[1] == USER)
         var = gUnknown_02024C07;
     else
         var = gUnknown_02024C08;
-    if(battle_side_get_owner(var) == 0)
+
+    if(battle_side_get_owner(var) == TARGET)
     {
-        //register u8 unk asm("r1") = battle_get_per_side_status(var) & 1;
         u16 unk = battle_get_per_side_status(var) & 1;
 
         if(unk_2016A00.unk20[unk] != 0)
@@ -1264,52 +1271,54 @@ void BattleAICmd_get_ability(void)
             gAIScriptPtr += 2;
             return;
         }
-        //_081086C8
-        if(gBattleMons[var].ability == 0x17 || gBattleMons[var].ability == 0x2A || gBattleMons[var].ability == 0x47)
+
+        // abilities that prevent fleeing.
+        if(gBattleMons[var].ability == ABILITY_SHADOW_TAG || gBattleMons[var].ability == ABILITY_MAGNET_PULL || gBattleMons[var].ability == ABILITY_ARENA_TRAP)
         {
-            //_081086E4
             gAIThinkingSpace.unk8 = gBattleMons[var].ability;
             gAIScriptPtr += 2;
             return;
         }
-        //_081086FC
-        if(gBaseStats[gBattleMons[var].species].ability1 != 0)
+
+        if(gBaseStats[gBattleMons[var].species].ability1 != ABILITY_NONE)
         {
-            if(gBaseStats[gBattleMons[var].species].ability2 != 0)
+            if(gBaseStats[gBattleMons[var].species].ability2 != ABILITY_NONE)
             {
+                // AI is guessing what ability?
                 if(Random() & 1)
                 {
-                    ((struct AI_ThinkingStruct *)((u8 *)&unk_2016A00 - 512))->unk8 = gBaseStats[gBattleMons[var].species].ability1;
+                    ((struct AI_ThinkingStruct *)((u8 *)&unk_2016A00 - 0x200))->unk8 = gBaseStats[gBattleMons[var].species].ability1;
                     gAIScriptPtr += 2;
                     return;
                 }
-                //_0810873C
                 else
                 {
-                    ((struct AI_ThinkingStruct *)((u8 *)&unk_2016A00 - 512))->unk8 = gBaseStats[gBattleMons[var].species].ability2;
+                    ((struct AI_ThinkingStruct *)((u8 *)&unk_2016A00 - 0x200))->unk8 = gBaseStats[gBattleMons[var].species].ability2;
                     gAIScriptPtr += 2;
                     return;
                 }
             }
-            //_08108754
             else
             {
-                ((struct AI_ThinkingStruct *)((u8 *)&unk_2016A00 - 512))->unk8 = gBaseStats[gBattleMons[var].species].ability1;
+                ((struct AI_ThinkingStruct *)((u8 *)&unk_2016A00 - 0x200))->unk8 = gBaseStats[gBattleMons[var].species].ability1; // it's definitely ability 1.
                 gAIScriptPtr += 2;
                 return;
             }
         }
-        //_08108764
         else
         {
-            ((struct AI_ThinkingStruct *)((u8 *)&unk_2016A00 - 512))->unk8 = gBaseStats[gBattleMons[var].species].ability2;
+            ((struct AI_ThinkingStruct *)((u8 *)&unk_2016A00 - 0x200))->unk8 = gBaseStats[gBattleMons[var].species].ability2; // AI cant actually reach this part since every mon has at least 1 ability.
             gAIScriptPtr += 2;
             return;
         }
     }
-    //_08108774
-    gAIThinkingSpace.unk8 = gBattleMons[var].ability;
-    gAIScriptPtr += 2;
+    else
+    {
+        // The AI knows its own ability.
+        gAIThinkingSpace.unk8 = gBattleMons[var].ability;
+        gAIScriptPtr += 2;
+        return;
+    }
 }
 
 // this should probably be in battle.h after this file is fully decompiled.
