@@ -28,8 +28,8 @@ typedef struct UnkBard2 {
     /* 0x04 */ u16 var04;
                u8 pad06[4];
     /* 0x0A */ u16 var0A;
-               u8 pad0C[18];
-    /* 0x18 */ UnkBard3 var18[7]; // The size of this array likely is wrong
+               u8 pad0C[12];
+    /* 0x18 */ UnkBard3 var18[6];
 } UnkBard2;
 
 extern BardSound *gBardMusicTable[];
@@ -49,29 +49,28 @@ BardSound *sub_814A2D0(u16 arg0, u16 arg1) {
 }
 
 #ifdef NONMATCHING
-void sub_814A2EC(UnkBard2 *dest, UnkBard (*src)[], u16 arg2) {
-    u32 i;
-    s32 n;
+int sub_814A2EC(UnkBard2 *dest, UnkBard *src, u16 arg2) {
+    int i;
+    int n;
 
-    for (i = 0; i < 5; i++) {
+    for (i = 0; i < 6; i++) {
         s8 var01;
-        u32 i1;
 
-        dest->var18[i].var00 = src[i]->var00;
-        if (src[i]->var00 == 0xFF) {
+        dest->var18[i].var00 = src[i].var00;
+        if (src[i].var00 == 0xFF) {
             continue;
         }
 
-        var01 = src[i]->var01;
-        i1 = gUnknown_084170F4[src[i]->var00];
-        dest->var18[i].var02 = i1 + var01;
-        dest->var18[i].var06 = src[i]->var04;
+        var01 = src[i].var01;
+        dest->var18[i].var02 = var01 + gUnknown_084170F4[src[i].var00];
+        dest->var18[i].var06 = src[i].var04;
         dest->var04 += 1;
     }
 
+    i = 6;
 
-    for (n = 0; n < 6; n++) {
-        dest->var18[n + 1].var04 = sub_814A2B8(30 + arg2, n);
+    for (n = 0; n < i; n++) {
+        dest->var18[n].var04 = sub_814A2B8(30 + arg2, n);
     }
 
     dest->var00 += 1;
