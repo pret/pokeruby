@@ -170,6 +170,8 @@ SECTIONS {
         asm/region_map.o(.text);
         asm/cute_sketch.o(.text);
         asm/decoration.o(.text);
+        src/decoration.o(.text);
+        asm/decoration.o(.text_80FE868);
         asm/slot_machine.o(.text);
         asm/contest_painting.o(.text);
         src/battle_ai.o(.text);
