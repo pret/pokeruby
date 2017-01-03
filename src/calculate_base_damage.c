@@ -61,10 +61,10 @@ extern u8 sub_803C348(u8);
 }
 
 #ifdef NONMATCHING
-s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *defender, u32 move, u8 a4, u16 powerOverride, u8 typeOverride, u8 a7, u8 a8)
+s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *defender, u32 move, u16 a4, u16 powerOverride, u8 typeOverride, u8 a7, u8 a8)
 {
     s32 i;
-    s32 damage = 0;
+    s32 damage;
     u8 type;
     u16 attack, defense;
     u16 spAttack, spDefense;
@@ -206,7 +206,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     if (gBattleMoves[gUnknown_02024BE6].effect == 7)
         defense /= 2;
 
-    if (type <= 8)
+    if (type < TYPE_MYSTERY) // is physical?
     {
         if (gCritMultiplier == 2)
         {
@@ -246,14 +246,15 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && gBattleMoves[move].target == 8 && sub_803C348(2) == 2)
             damage /= 2;
 
+        // moves always do at least 1 damage.
         if (damage == 0)
             damage = 1;
     }
 
-    if (type == 9)
-        damage = 0;
+    if (type == TYPE_MYSTERY)
+        damage = 0; // is ??? type. does 0 damage.
 
-    if (type > 9)
+    if (type > TYPE_MYSTERY) // is special?
     {
         if (gCritMultiplier == 2)
         {
@@ -290,33 +291,33 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && gBattleMoves[move].target == 8 && sub_803C348(2) == 2)
             damage /= 2;
 
+		// are effects of weather negated with cloud nine or air lock?
         if (!sub_8018324(0xE, 0, ABILITY_CLOUD_NINE, 0, 0) && !sub_8018324(0xE, 0, ABILITY_AIR_LOCK, 0, 0))
         {
+			// rain?
             if (gBattleWeather & 1)
             {
                 if (type == TYPE_FIRE)
-                {
                     damage /= 2;
-                }
                 else if (type == TYPE_WATER)
-                {
                     damage = (15 * damage) / 10;
-                }
             }
+
+            // does lack of sun half solar beam damage?
             if ((gBattleWeather & 0x9F) && gUnknown_02024BE6 == 76)
                 damage /= 2;
+			
+            // sunny?
             if (gBattleWeather & 0x60)
             {
                 if (type == TYPE_FIRE)
-                {
                     damage = (15 * damage) / 10;
-                }
                 else if (type == TYPE_WATER)
-                {
                     damage /= 2;
-                }
             }
         }
+
+        // flash fire triggered?
         if ((dword_2017100[a7] & 1) && type == TYPE_FIRE)
             damage = (15 * damage) / 10;
     }
@@ -325,7 +326,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 }
 #else
 __attribute__((naked))
-s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *defender, u32 move, u8 a4, u16 powerOverride, u8 typeOverride, u8 a7, u8 a8)
+s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *defender, u32 move, u16 a4, u16 powerOverride, u8 typeOverride, u8 a7, u8 a8)
 {
     asm(".syntax unified\n\
 	push {r4-r7,lr}\n\
