@@ -160,7 +160,7 @@ void BattleAI_SetupAIData(void)
     else
         gUnknown_02024C08 = gUnknown_02024A60 ^ 1;
 
-	// special AI flag cases.
+    // special AI flag cases.
     if(gBattleTypeFlags & BATTLE_TYPE_SAFARI)
         gAIThinkingSpace.aiFlags = 0x40000000;
     else if(gBattleTypeFlags & BATTLE_TYPE_ROAMER)
@@ -236,7 +236,7 @@ void BattleAI_DoAIProcessing(void)
             break;
         case 1:
             if(gAIThinkingSpace.unk2 != 0)
-                gBattleAICmdTable[*(u8 *)gAIScriptPtr]();  //weird...
+                gBattleAICmdTable[*(u8 *)gAIScriptPtr](); // run AI command.
             else
             {
                 gAIThinkingSpace.score[gAIThinkingSpace.moveConsidered] = 0;
