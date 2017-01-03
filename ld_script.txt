@@ -121,6 +121,8 @@ SECTIONS {
         src/trainer_card.o(.text);
         src/save_menu_util.o(.text);
         asm/rom_8094928.o(.text);
+        asm/battle_party_menu.o(.text);
+        asm/pokemon_storage_system.o(.text);
         asm/pokemon_icon.o(.text);
         asm/pokemon_summary_screen.o(.text);
         asm/script_movement.o(.text);
@@ -144,6 +146,13 @@ SECTIONS {
         asm/sound_check_menu.o(.text);
         asm/secret_base.o(.text);
         asm/tv.o(.text);
+        src/tv.o(.text);
+        asm/tv.o(.text_80BE8EC);
+        src/tv.o(.text_b);
+        asm/tv.o(.text_80BF544);
+        src/tv.o(.text_c);
+        asm/tv.o(.text_80C1C5C);
+        src/tv.o(.text_d);
         asm/contest_link_80C2020.o(.text);
         asm/script_pokemon_util_80C4BF0.o(.text);
         src/field_poison.o(.text);
@@ -170,6 +179,8 @@ SECTIONS {
         asm/region_map.o(.text);
         asm/cute_sketch.o(.text);
         asm/decoration.o(.text);
+        src/decoration.o(.text);
+        asm/decoration.o(.text_80FE868);
         asm/slot_machine.o(.text);
         asm/contest_painting.o(.text);
         src/battle_ai.o(.text);
@@ -220,7 +231,7 @@ SECTIONS {
         src/clear_save_data_menu.o(.text);
         asm/intro_credits_graphics.o(.text);
         asm/evolution_graphics.o(.text);
-        asm/bard_music.o(.text);
+        src/bard_music.o(.text);
         asm/fldeff_teleport.o(.text);
         asm/unknown_debug_menu.o(.text);
         asm/name_string_util.o(.text);

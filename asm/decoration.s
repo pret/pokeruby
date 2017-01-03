@@ -764,60 +764,7 @@ sub_80FE7D4: @ 80FE7D4
 _080FE7E8: .4byte gUnknown_083EC5E4
 	thumb_func_end sub_80FE7D4
 
-	thumb_func_start sub_80FE7EC
-sub_80FE7EC: @ 80FE7EC
-	push {r4,lr}
-	sub sp, 0x8
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	bl sub_8072DEC
-	movs r0, 0
-	movs r1, 0
-	movs r2, 0x1D
-	movs r3, 0x13
-	bl MenuZeroFillWindowRect
-	adds r0, r4, 0
-	bl sub_80FEC94
-	ldr r0, _080FE858 @ =gUnknown_020388F6
-	ldrb r0, [r0]
-	bl sub_80FECB8
-	movs r0, 0xF
-	movs r1, 0xC
-	movs r2, 0x1D
-	movs r3, 0x13
-	bl MenuDrawTextWindow
-	ldr r4, _080FE85C @ =gUnknown_020388F2
-	ldr r0, _080FE860 @ =gUnknown_020388F4
-	ldrb r0, [r0]
-	ldrb r1, [r4]
-	adds r0, r1
-	lsls r0, 24
-	lsrs r0, 24
-	bl sub_80FECE0
-	ldr r0, _080FE864 @ =gUnknown_020388F3
-	ldrb r3, [r0]
-	adds r3, 0x1
-	lsls r3, 24
-	lsrs r3, 24
-	ldrb r0, [r4]
-	str r0, [sp]
-	movs r0, 0xD
-	str r0, [sp, 0x4]
-	movs r0, 0
-	movs r1, 0x1
-	movs r2, 0x2
-	bl InitMenu
-	add sp, 0x8
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080FE858: .4byte gUnknown_020388F6
-_080FE85C: .4byte gUnknown_020388F2
-_080FE860: .4byte gUnknown_020388F4
-_080FE864: .4byte gUnknown_020388F3
-	thumb_func_end sub_80FE7EC
+	.section .text_80FE868
 
 	thumb_func_start sub_80FE868
 sub_80FE868: @ 80FE868
