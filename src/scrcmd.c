@@ -55,10 +55,30 @@ extern u8 *gStdScripts_End[];
 extern u8 gSpeciesNames[][11];
 extern u8 gMoveNames[][13];
 
-extern u8 gScriptConditionTable[6][3];
-extern u8 * const gUnknown_083762F0[];
 extern u8 * const gUnknown_083CE048[];
 extern struct Decoration gDecorations[];
+
+// This is defined in here so the optimizer can't see its value when compiling
+// script.c.
+void * const gNullScriptPtr = NULL;
+
+static const u8 sScriptConditionTable[6][3] =
+{
+//  <  =  >
+    1, 0, 0, // <
+    0, 1, 0, // =
+    0, 0, 1, // >
+    1, 1, 0, // <=
+    0, 1, 1, // >=
+    1, 0, 1, // !=
+};
+
+static u8 * const sScriptStringVars[] =
+{
+    gStringVar1,
+    gStringVar2,
+    gStringVar3,
+};
 
 bool8 ScrCmd_snop(struct ScriptContext *ctx)
 {
@@ -135,7 +155,7 @@ bool8 ScrCmd_jumpif(struct ScriptContext *ctx)
 {
     u8 condition = ScriptReadByte(ctx);
     u8 *ptr = (u8 *)ScriptReadWord(ctx);
-    if (gScriptConditionTable[condition][ctx->comparisonResult] == 1)
+    if (sScriptConditionTable[condition][ctx->comparisonResult] == 1)
         ScriptJump(ctx, ptr);
     return FALSE;
 }
@@ -144,7 +164,7 @@ bool8 ScrCmd_callif(struct ScriptContext *ctx)
 {
     u8 condition = ScriptReadByte(ctx);
     u8 *ptr = (u8 *)ScriptReadWord(ctx);
-    if (gScriptConditionTable[condition][ctx->comparisonResult] == 1)
+    if (sScriptConditionTable[condition][ctx->comparisonResult] == 1)
         ScriptCall(ctx, ptr);
     return FALSE;
 }
@@ -175,7 +195,7 @@ bool8 ScrCmd_if5(struct ScriptContext *ctx)
 {
     u8 condition = ScriptReadByte(ctx);
     u8 *ptr = (u8 *)(ScriptReadWord(ctx) - gUnknown_0202E8B0);
-    if (gScriptConditionTable[condition][ctx->comparisonResult] == 1)
+    if (sScriptConditionTable[condition][ctx->comparisonResult] == 1)
         ScriptJump(ctx, ptr);
     return FALSE;
 }
@@ -184,7 +204,7 @@ bool8 ScrCmd_if6(struct ScriptContext *ctx)
 {
     u8 condition = ScriptReadByte(ctx);
     u8 *ptr = (u8 *)(ScriptReadWord(ctx) - gUnknown_0202E8B0);
-    if (gScriptConditionTable[condition][ctx->comparisonResult] == 1)
+    if (sScriptConditionTable[condition][ctx->comparisonResult] == 1)
         ScriptCall(ctx, ptr);
     return FALSE;
 }
@@ -211,7 +231,7 @@ bool8 ScrCmd_jumpstdif(struct ScriptContext *ctx)
 {
     u8 condition = ScriptReadByte(ctx);
     u8 index = ScriptReadByte(ctx);
-    if (gScriptConditionTable[condition][ctx->comparisonResult] == 1)
+    if (sScriptConditionTable[condition][ctx->comparisonResult] == 1)
     {
         u8 **ptr = &gStdScripts[index];
         if (ptr < gStdScripts_End)
@@ -224,7 +244,7 @@ bool8 ScrCmd_callstdif(struct ScriptContext *ctx)
 {
     u8 condition = ScriptReadByte(ctx);
     u8 index = ScriptReadByte(ctx);
-    if (gScriptConditionTable[condition][ctx->comparisonResult] == 1)
+    if (sScriptConditionTable[condition][ctx->comparisonResult] == 1)
     {
         u8 **ptr = &gStdScripts[index];
         if (ptr < gStdScripts_End)
@@ -1325,14 +1345,14 @@ bool8 ScrCmd_bufferpoke(struct ScriptContext *ctx)
 {
     u8 stringVarIndex = ScriptReadByte(ctx);
     u16 species = VarGet(ScriptReadHalfword(ctx));
-    StringCopy(gUnknown_083762F0[stringVarIndex], gSpeciesNames[species]);
+    StringCopy(sScriptStringVars[stringVarIndex], gSpeciesNames[species]);
     return FALSE;
 }
 
 bool8 ScrCmd_bufferfirstpoke(struct ScriptContext *ctx)
 {
     u8 stringVarIndex = ScriptReadByte(ctx);
-    u8 *dest = gUnknown_083762F0[stringVarIndex];
+    u8 *dest = sScriptStringVars[stringVarIndex];
     u8 partyIndex = GetLeadMonIndex();
     u32 species = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPECIES, NULL);
     StringCopy(dest, gSpeciesNames[species]);
@@ -1343,8 +1363,8 @@ bool8 ScrCmd_bufferpartypoke(struct ScriptContext *ctx)
 {
     u8 stringVarIndex = ScriptReadByte(ctx);
     u16 partyIndex = VarGet(ScriptReadHalfword(ctx));
-    GetMonData(&gPlayerParty[partyIndex], MON_DATA_NICKNAME, gUnknown_083762F0[stringVarIndex]);
-    StringGetEnd10(gUnknown_083762F0[stringVarIndex]);
+    GetMonData(&gPlayerParty[partyIndex], MON_DATA_NICKNAME, sScriptStringVars[stringVarIndex]);
+    StringGetEnd10(sScriptStringVars[stringVarIndex]);
     return FALSE;
 }
 
@@ -1352,7 +1372,7 @@ bool8 ScrCmd_bufferitem(struct ScriptContext *ctx)
 {
     u8 stringVarIndex = ScriptReadByte(ctx);
     u16 itemId = VarGet(ScriptReadHalfword(ctx));
-    CopyItemName(itemId, gUnknown_083762F0[stringVarIndex]);
+    CopyItemName(itemId, sScriptStringVars[stringVarIndex]);
     return FALSE;
 }
 
@@ -1360,7 +1380,7 @@ bool8 ScrCmd_bufferdecor(struct ScriptContext *ctx)
 {
     u8 stringVarIndex = ScriptReadByte(ctx);
     u16 decorId = VarGet(ScriptReadHalfword(ctx));
-    StringCopy(gUnknown_083762F0[stringVarIndex], gDecorations[decorId].name);
+    StringCopy(sScriptStringVars[stringVarIndex], gDecorations[decorId].name);
     return FALSE;
 }
 
@@ -1368,7 +1388,7 @@ bool8 ScrCmd_bufferattack(struct ScriptContext *ctx)
 {
     u8 stringVarIndex = ScriptReadByte(ctx);
     u16 moveId = VarGet(ScriptReadHalfword(ctx));
-    StringCopy(gUnknown_083762F0[stringVarIndex], gMoveNames[moveId]);
+    StringCopy(sScriptStringVars[stringVarIndex], gMoveNames[moveId]);
     return FALSE;
 }
 
@@ -1377,7 +1397,7 @@ bool8 ScrCmd_buffernum(struct ScriptContext *ctx)
     u8 stringVarIndex = ScriptReadByte(ctx);
     u16 v1 = VarGet(ScriptReadHalfword(ctx));
     u8 v2 = sub_80BF0B8(v1);
-    ConvertIntToDecimalStringN(gUnknown_083762F0[stringVarIndex], v1, 0, v2);
+    ConvertIntToDecimalStringN(sScriptStringVars[stringVarIndex], v1, 0, v2);
     return FALSE;
 }
 
@@ -1385,7 +1405,7 @@ bool8 ScrCmd_bufferstd(struct ScriptContext *ctx)
 {
     u8 stringVarIndex = ScriptReadByte(ctx);
     u16 index = VarGet(ScriptReadHalfword(ctx));
-    StringCopy(gUnknown_083762F0[stringVarIndex], gUnknown_083CE048[index]);
+    StringCopy(sScriptStringVars[stringVarIndex], gUnknown_083CE048[index]);
     return FALSE;
 }
 
@@ -1393,7 +1413,7 @@ bool8 ScrCmd_buffertext(struct ScriptContext *ctx)
 {
     u8 stringVarIndex = ScriptReadByte(ctx);
     u8 *text = (u8 *)ScriptReadWord(ctx);
-    StringCopy(gUnknown_083762F0[stringVarIndex], text);
+    StringCopy(sScriptStringVars[stringVarIndex], text);
     return FALSE;
 }
 
@@ -1409,7 +1429,7 @@ bool8 ScrCmd_vbuffer(struct ScriptContext *ctx)
     u8 stringVarIndex = ScriptReadByte(ctx);
     u32 addr = ScriptReadWord(ctx);
     u8 *src = (u8 *)(addr - gUnknown_0202E8B0);
-    u8 *dest = gUnknown_083762F0[stringVarIndex];
+    u8 *dest = sScriptStringVars[stringVarIndex];
     StringCopy(dest, src);
     return FALSE;
 }

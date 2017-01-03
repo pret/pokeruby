@@ -309,8 +309,8 @@ SECTIONS {
         data/field_ground_effect.o(.rodata);
         data/field_map_obj_helpers.o(.rodata);
         data/text_window.o(.rodata);
-        data/script.o(.rodata);
-        data/scrcmd.o(.rodata);
+        src/script.o(.rodata);
+        src/scrcmd.o(.rodata);
         src/coord_event_weather.o(.rodata);
         data/data_83760F0.o(.rodata);
         src/m4a_tables.o(.rodata);
