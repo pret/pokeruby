@@ -4750,7 +4750,7 @@ _0809FDF8:
 	adds r0, r6, 0
 	movs r1, 0xB
 	movs r2, 0xE
-	bl sub_80A0798
+	bl PokemonSummaryScreen_PrintTrainerMemo
 _0809FE4C:
 	add sp, 0xC
 	pop {r4-r6}
@@ -5890,203 +5890,7 @@ _080A0786:
 _080A0794: .4byte gOtherText_EggDayCare
 	thumb_func_end sub_80A0708
 
-	thumb_func_start sub_80A0798
-sub_80A0798: @ 80A0798
-	push {r4-r7,lr}
-	mov r7, r9
-	mov r6, r8
-	push {r6,r7}
-	adds r7, r0, 0
-	lsls r1, 24
-	lsrs r1, 24
-	mov r9, r1
-	lsls r2, 24
-	lsrs r2, 24
-	mov r8, r2
-	ldr r5, _080A0838 @ =gStringVar4
-	bl GetNature
-	lsls r0, 24
-	lsrs r4, r0, 24
-	ldr r1, _080A083C @ =gNatureNames
-	lsls r0, r4, 2
-	adds r0, r1
-	ldr r1, [r0]
-	adds r0, r5, 0
-	movs r2, 0xE
-	bl sub_80A1E9C
-	adds r5, r0, 0
-	cmp r4, 0x5
-	beq _080A07DA
-	cmp r4, 0x15
-	beq _080A07DA
-	ldr r1, _080A0840 @ =gOtherText_Terminator4
-	bl StringCopy
-	adds r5, r0, 0
-_080A07DA:
-	ldr r1, _080A0844 @ =gOtherText_Nature
-	adds r0, r5, 0
-	bl StringCopy
-	adds r5, r0, 0
-	adds r0, r7, 0
-	bl sub_80A0664
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _080A0898
-	adds r0, r7, 0
-	movs r1, 0x23
-	bl GetMonData
-	lsls r0, 24
-	lsrs r6, r0, 24
-	adds r0, r7, 0
-	movs r1, 0x24
-	bl GetMonData
-	cmp r0, 0
-	bne _080A0850
-	adds r0, r5, 0
-	movs r1, 0x5
-	bl sub_80A203C
-	adds r5, r0, 0
-	movs r0, 0xFE
-	strb r0, [r5]
-	adds r5, 0x1
-	ldr r4, _080A0848 @ =gStringVar1
-	adds r0, r4, 0
-	adds r1, r6, 0
-	bl sub_80FC02C
-	adds r0, r5, 0
-	adds r1, r4, 0
-	movs r2, 0xE
-	bl sub_80A1E9C
-	adds r5, r0, 0
-	ldr r1, _080A084C @ =gOtherText_Egg2
-	bl StringCopy
-	b _080A0934
-	.align 2, 0
-_080A0838: .4byte gStringVar4
-_080A083C: .4byte gNatureNames
-_080A0840: .4byte gOtherText_Terminator4
-_080A0844: .4byte gOtherText_Nature
-_080A0848: .4byte gStringVar1
-_080A084C: .4byte gOtherText_Egg2
-_080A0850:
-	cmp r6, 0x57
-	bhi _080A08E8
-	adds r0, r7, 0
-	movs r1, 0x24
-	bl GetMonData
-	adds r1, r0, 0
-	lsls r1, 24
-	lsrs r1, 24
-	adds r0, r5, 0
-	bl sub_80A203C
-	adds r5, r0, 0
-	movs r0, 0xFE
-	strb r0, [r5]
-	adds r5, 0x1
-	ldr r4, _080A0890 @ =gStringVar1
-	adds r0, r4, 0
-	adds r1, r6, 0
-	bl sub_80FC02C
-	adds r0, r5, 0
-	adds r1, r4, 0
-	movs r2, 0xE
-	bl sub_80A1E9C
-	adds r5, r0, 0
-	ldr r1, _080A0894 @ =gOtherText_Met
-	bl StringCopy
-	b _080A0934
-	.align 2, 0
-_080A0890: .4byte gStringVar1
-_080A0894: .4byte gOtherText_Met
-_080A0898:
-	adds r0, r7, 0
-	movs r1, 0x25
-	bl GetMonData
-	lsls r0, 24
-	movs r1, 0xFF
-	lsls r1, 24
-	adds r0, r1
-	lsrs r0, 24
-	cmp r0, 0x2
-	bhi _080A08E8
-	adds r0, r7, 0
-	movs r1, 0x23
-	bl GetMonData
-	lsls r0, 24
-	lsrs r6, r0, 24
-	cmp r6, 0xFF
-	bne _080A08E4
-	adds r0, r7, 0
-	movs r1, 0x24
-	bl GetMonData
-	adds r1, r0, 0
-	lsls r1, 24
-	lsrs r1, 24
-	adds r0, r5, 0
-	bl sub_80A203C
-	adds r5, r0, 0
-	movs r0, 0xFE
-	strb r0, [r5]
-	adds r5, 0x1
-	ldr r1, _080A08E0 @ =gOtherText_FatefulEncounter
-	b _080A08F0
-	.align 2, 0
-_080A08E0: .4byte gOtherText_FatefulEncounter
-_080A08E4:
-	cmp r6, 0x57
-	bls _080A08FC
-_080A08E8:
-	movs r0, 0xFE
-	strb r0, [r5]
-	adds r5, 0x1
-	ldr r1, _080A08F8 @ =gOtherText_ObtainedInTrade
-_080A08F0:
-	adds r0, r5, 0
-	bl StringCopy
-	b _080A0934
-	.align 2, 0
-_080A08F8: .4byte gOtherText_ObtainedInTrade
-_080A08FC:
-	adds r0, r7, 0
-	movs r1, 0x24
-	bl GetMonData
-	adds r1, r0, 0
-	lsls r1, 24
-	lsrs r1, 24
-	adds r0, r5, 0
-	bl sub_80A203C
-	adds r5, r0, 0
-	movs r0, 0xFE
-	strb r0, [r5]
-	adds r5, 0x1
-	ldr r4, _080A094C @ =gStringVar1
-	adds r0, r4, 0
-	adds r1, r6, 0
-	bl sub_80FC02C
-	adds r0, r5, 0
-	adds r1, r4, 0
-	movs r2, 0xE
-	bl sub_80A1E9C
-	adds r5, r0, 0
-	ldr r1, _080A0950 @ =gOtherText_Met2
-	bl StringCopy
-_080A0934:
-	ldr r0, _080A0954 @ =gStringVar4
-	mov r1, r9
-	mov r2, r8
-	bl MenuPrint
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080A094C: .4byte gStringVar1
-_080A0950: .4byte gOtherText_Met2
-_080A0954: .4byte gStringVar4
-	thumb_func_end sub_80A0798
+    .section .text_80A0958
 
 	thumb_func_start sub_80A0958
 sub_80A0958: @ 80A0958
@@ -9039,8 +8843,8 @@ sub_80A1FF8: @ 80A1FF8
 _080A2038: .4byte gStringVar4
 	thumb_func_end sub_80A1FF8
 
-	thumb_func_start sub_80A203C
-sub_80A203C: @ 80A203C
+	thumb_func_start PokemonSummaryScreen_CopyPokemonLevel
+PokemonSummaryScreen_CopyPokemonLevel: @ 80A203C
 	push {r4,lr}
 	sub sp, 0xC
 	adds r4, r0, 0
@@ -9069,7 +8873,7 @@ _080A2052:
 	bx r1
 	.align 2, 0
 _080A2074: .4byte gOtherText_Comma
-	thumb_func_end sub_80A203C
+	thumb_func_end PokemonSummaryScreen_CopyPokemonLevel
 
 	thumb_func_start sub_80A2078
 sub_80A2078: @ 80A2078
