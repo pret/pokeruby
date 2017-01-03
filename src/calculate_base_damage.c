@@ -64,7 +64,7 @@ extern u8 sub_803C348(u8);
 s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *defender, u32 move, u16 a4, u16 powerOverride, u8 typeOverride, u8 a7, u8 a8)
 {
     s32 i;
-    s32 damage;
+    s32 damage = 0;
     u8 type;
     u16 attack, defense;
     u16 spAttack, spDefense;
