@@ -1,4 +1,5 @@
 	.include "constants/gba_constants.inc"
+	.include "constants/misc_constants.inc"
 	.include "constants/species_constants.inc"
 	.include "asm/macros.inc"
 
@@ -940,7 +941,7 @@ _080BDEA6:
 sub_80BDEAC: @ 80BDEAC
 	push {lr}
 	adds r1, r0, 0
-	movs r2, 0x2
+	movs r2, GAME_LANGUAGE
 	ldrb r0, [r1]
 	cmp r0, 0xFC
 	bne _080BDEC0
@@ -1104,7 +1105,7 @@ _080BDFDE:
 	strh r0, [r5, 0x10]
 	adds r0, r5, 0
 	bl sub_80BE138
-	movs r0, 0x2
+	movs r0, GAME_LANGUAGE
 	strb r0, [r5, 0x2]
 	adds r0, r6, 0
 	bl sub_80BDEAC
@@ -1237,7 +1238,7 @@ _080BE0A2:
 	bl StringCopy
 	adds r0, r4, 0
 	bl sub_80BE138
-	movs r0, 0x2
+	movs r0, GAME_LANGUAGE
 	strb r0, [r4, 0x2]
 _080BE112:
 	pop {r4-r7}
@@ -1367,7 +1368,7 @@ sub_80BE188: @ 80BE188
 	strb r0, [r4, 0x13]
 	adds r0, r4, 0
 	bl sub_80BE160
-	movs r0, 0x2
+	movs r0, GAME_LANGUAGE
 	strb r0, [r4, 0x1E]
 	adds r0, r5, 0
 	bl sub_80BDEAC
@@ -1558,7 +1559,7 @@ _080BE39E:
 	strb r0, [r6, 0x1B]
 	adds r0, r6, 0
 	bl sub_80BE160
-	movs r0, 0x2
+	movs r0, GAME_LANGUAGE
 	strb r0, [r6, 0x1D]
 	pop {r4-r6}
 	pop {r0}
@@ -1639,7 +1640,7 @@ _080BE420:
 	bl StringCopy
 	adds r0, r5, 0
 	bl sub_80BE138
-	movs r0, 0x2
+	movs r0, GAME_LANGUAGE
 	strb r0, [r5, 0x3]
 _080BE458:
 	pop {r4-r7}
@@ -1654,544 +1655,8 @@ _080BE470: .4byte gMapHeader
 _080BE474: .4byte gSaveBlock2
 	thumb_func_end sub_80BE3BC
 
-	thumb_func_start sub_80BE478
-sub_80BE478: @ 80BE478
-	push {r4-r7,lr}
-	mov r7, r9
-	mov r6, r8
-	push {r6,r7}
-	bl sub_80BF478
-	ldr r0, _080BE554 @ =gScriptResult
-	ldrh r0, [r0]
-	cmp r0, 0x1
-	beq _080BE548
-	ldr r0, _080BE558 @ =gSpecialVar_0x8004
-	mov r8, r0
-	ldrh r0, [r0]
-	movs r7, 0x64
-	muls r0, r7
-	ldr r6, _080BE55C @ =gPlayerParty
-	adds r0, r6
-	ldr r4, _080BE560 @ =gStringVar1
-	movs r1, 0x2
-	adds r2, r4, 0
-	bl GetMonData
-	ldr r1, _080BE564 @ =gSaveBlock2
-	mov r9, r1
-	mov r0, r9
-	bl StringLength
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, 0x1
-	bls _080BE548
-	adds r0, r4, 0
-	bl StringLength
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, 0x1
-	bls _080BE548
-	ldr r0, _080BE568 @ =gUnknown_03005D38
-	ldrb r0, [r0]
-	lsls r0, 24
-	asrs r0, 24
-	lsls r4, r0, 3
-	adds r4, r0
-	lsls r4, 2
-	ldr r0, _080BE56C @ =gSaveBlock1 + 0x2738
-	adds r4, r0
-	movs r0, 0x5
-	strb r0, [r4]
-	movs r5, 0x1
-	strb r5, [r4, 0x1]
-	mov r1, r8
-	ldrh r0, [r1]
-	muls r0, r7
-	adds r0, r6
-	movs r1, 0xB
-	movs r2, 0
-	bl GetMonData
-	strh r0, [r4, 0x2]
-	bl Random
-	lsls r0, 16
-	lsrs r0, 16
-	movs r1, 0x3
-	bl __umodsi3
-	strb r0, [r4, 0x1A]
-	bl Random
-	lsls r0, 16
-	lsrs r0, 16
-	ands r0, r5
-	strb r0, [r4, 0x1B]
-	ldrh r0, [r4, 0x2]
-	bl sub_80BF674
-	strh r0, [r4, 0x1C]
-	adds r0, r4, 0
-	adds r0, 0xF
-	mov r1, r9
-	bl StringCopy
-	mov r1, r8
-	ldrh r0, [r1]
-	muls r0, r7
-	adds r0, r6
-	adds r5, r4, 0x4
-	movs r1, 0x2
-	adds r2, r5, 0
-	bl GetMonData
-	adds r0, r4, 0
-	bl sub_80BE160
-	movs r0, 0x2
-	strb r0, [r4, 0x1E]
-	adds r0, r5, 0
-	bl sub_80BDEAC
-	strb r0, [r4, 0x1F]
-	adds r0, r5, 0
-	bl StripExtCtrlCodes
-_080BE548:
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080BE554: .4byte gScriptResult
-_080BE558: .4byte gSpecialVar_0x8004
-_080BE55C: .4byte gPlayerParty
-_080BE560: .4byte gStringVar1
-_080BE564: .4byte gSaveBlock2
-_080BE568: .4byte gUnknown_03005D38
-_080BE56C: .4byte gSaveBlock1 + 0x2738
-	thumb_func_end sub_80BE478
 
-	thumb_func_start StartMassOutbreak
-StartMassOutbreak: @ 80BE570
-	push {r4,lr}
-	ldr r0, _080BE5F0 @ =gSpecialVar_0x8004
-	ldrh r1, [r0]
-	lsls r0, r1, 3
-	adds r0, r1
-	lsls r0, 2
-	ldr r2, _080BE5F4 @ =gSaveBlock1 + 0x2738
-	adds r0, r2
-	ldrh r3, [r0, 0xC]
-	movs r4, 0xF1
-	lsls r4, 2
-	adds r1, r2, r4
-	strh r3, [r1]
-	ldrb r3, [r0, 0x10]
-	adds r4, 0x2
-	adds r1, r2, r4
-	strb r3, [r1]
-	ldrb r3, [r0, 0x11]
-	adds r4, 0x1
-	adds r1, r2, r4
-	strb r3, [r1]
-	ldrb r3, [r0, 0x14]
-	adds r4, 0x1
-	adds r1, r2, r4
-	strb r3, [r1]
-	ldrb r3, [r0, 0x2]
-	adds r4, 0x1
-	adds r1, r2, r4
-	strb r3, [r1]
-	ldrh r3, [r0, 0xE]
-	adds r4, 0x1
-	adds r1, r2, r4
-	strh r3, [r1]
-	ldrh r3, [r0, 0x4]
-	adds r4, 0x2
-	adds r1, r2, r4
-	strh r3, [r1]
-	ldrh r3, [r0, 0x6]
-	adds r4, 0x2
-	adds r1, r2, r4
-	strh r3, [r1]
-	ldrh r3, [r0, 0x8]
-	adds r4, 0x2
-	adds r1, r2, r4
-	strh r3, [r1]
-	ldrh r3, [r0, 0xA]
-	adds r4, 0x2
-	adds r1, r2, r4
-	strh r3, [r1]
-	ldrb r3, [r0, 0x3]
-	adds r4, 0x2
-	adds r1, r2, r4
-	strb r3, [r1]
-	ldrb r1, [r0, 0x13]
-	ldr r3, _080BE5F8 @ =0x000003d5
-	adds r0, r2, r3
-	strb r1, [r0]
-	adds r4, 0x2
-	adds r2, r4
-	movs r0, 0x2
-	strh r0, [r2]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080BE5F0: .4byte gSpecialVar_0x8004
-_080BE5F4: .4byte gSaveBlock1 + 0x2738
-_080BE5F8: .4byte 0x000003d5
-	thumb_func_end StartMassOutbreak
-
-	thumb_func_start sub_80BE5FC
-sub_80BE5FC: @ 80BE5FC
-	push {r4,lr}
-	ldr r0, _080BE64C @ =gUnknown_03005D38
-	ldrb r0, [r0]
-	lsls r0, 24
-	asrs r0, 24
-	lsls r4, r0, 3
-	adds r4, r0
-	lsls r4, 2
-	ldr r0, _080BE650 @ =gSaveBlock1 + 0x2738
-	adds r4, r0
-	movs r0, 0x1
-	strb r0, [r4]
-	strb r0, [r4, 0x1]
-	adds r0, r4, 0
-	adds r0, 0x10
-	ldr r1, _080BE654 @ =gSaveBlock2
-	bl StringCopy
-	bl GetLeadMonIndex
-	lsls r0, 24
-	lsrs r0, 24
-	movs r1, 0x64
-	muls r0, r1
-	ldr r1, _080BE658 @ =gPlayerParty
-	adds r0, r1
-	movs r1, 0xB
-	movs r2, 0
-	bl GetMonData
-	strh r0, [r4, 0x2]
-	adds r0, r4, 0
-	bl sub_80BE160
-	movs r0, 0x2
-	strb r0, [r4, 0x18]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080BE64C: .4byte gUnknown_03005D38
-_080BE650: .4byte gSaveBlock1 + 0x2738
-_080BE654: .4byte gSaveBlock2
-_080BE658: .4byte gPlayerParty
-	thumb_func_end sub_80BE5FC
-
-	thumb_func_start sub_80BE65C
-sub_80BE65C: @ 80BE65C
-	push {r4-r6,lr}
-	ldr r0, _080BE694 @ =gUnknown_03005D38
-	ldrb r0, [r0]
-	lsls r0, 24
-	asrs r0, 24
-	lsls r4, r0, 3
-	adds r4, r0
-	lsls r4, 2
-	ldr r0, _080BE698 @ =gSaveBlock1 + 0x2738
-	adds r4, r0
-	movs r6, 0
-	movs r5, 0x2
-	strb r5, [r4]
-	movs r0, 0x1
-	strb r0, [r4, 0x1]
-	adds r0, r4, 0
-	adds r0, 0x10
-	ldr r1, _080BE69C @ =gSaveBlock2
-	bl StringCopy
-	strh r6, [r4, 0x2]
-	adds r0, r4, 0
-	bl sub_80BE160
-	strb r5, [r4, 0x18]
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080BE694: .4byte gUnknown_03005D38
-_080BE698: .4byte gSaveBlock1 + 0x2738
-_080BE69C: .4byte gSaveBlock2
-	thumb_func_end sub_80BE65C
-
-	thumb_func_start sub_80BE6A0
-sub_80BE6A0: @ 80BE6A0
-	push {r4-r6,lr}
-	mov r6, r8
-	push {r6}
-	ldr r0, _080BE760 @ =gUnknown_03005D38
-	ldrb r0, [r0]
-	lsls r0, 24
-	asrs r0, 24
-	lsls r4, r0, 3
-	adds r4, r0
-	lsls r4, 2
-	ldr r0, _080BE764 @ =gSaveBlock1 + 0x2738
-	adds r4, r0
-	movs r0, 0x3
-	strb r0, [r4]
-	movs r0, 0x1
-	strb r0, [r4, 0x1]
-	bl GetLeadMonIndex
-	lsls r0, 24
-	lsrs r0, 24
-	movs r1, 0x64
-	mov r8, r1
-	mov r1, r8
-	muls r1, r0
-	adds r0, r1, 0
-	ldr r6, _080BE768 @ =gPlayerParty
-	adds r0, r6
-	movs r1, 0x20
-	movs r2, 0
-	bl GetMonData
-	lsrs r0, 4
-	movs r1, 0xF
-	ands r0, r1
-	ldrb r2, [r4, 0x4]
-	movs r1, 0x10
-	negs r1, r1
-	ands r1, r2
-	orrs r1, r0
-	strb r1, [r4, 0x4]
-	ldr r0, _080BE76C @ =gSpecialVar_0x8007
-	ldrb r0, [r0]
-	lsls r0, 4
-	movs r2, 0xF
-	ands r1, r2
-	orrs r1, r0
-	strb r1, [r4, 0x4]
-	adds r0, r4, 0x5
-	ldr r1, _080BE770 @ =gSaveBlock2
-	bl StringCopy
-	bl GetLeadMonIndex
-	lsls r0, 24
-	lsrs r0, 24
-	mov r1, r8
-	muls r1, r0
-	adds r0, r1, 0
-	adds r0, r6
-	adds r5, r4, 0
-	adds r5, 0x10
-	movs r1, 0x2
-	adds r2, r5, 0
-	bl GetMonData
-	bl GetLeadMonIndex
-	lsls r0, 24
-	lsrs r0, 24
-	mov r1, r8
-	muls r1, r0
-	adds r0, r1, 0
-	adds r0, r6
-	movs r1, 0xB
-	movs r2, 0
-	bl GetMonData
-	strh r0, [r4, 0x2]
-	adds r0, r4, 0
-	bl sub_80BE160
-	movs r0, 0x2
-	strb r0, [r4, 0xD]
-	adds r0, r5, 0
-	bl sub_80BDEAC
-	strb r0, [r4, 0xE]
-	adds r0, r5, 0
-	bl StripExtCtrlCodes
-	pop {r3}
-	mov r8, r3
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080BE760: .4byte gUnknown_03005D38
-_080BE764: .4byte gSaveBlock1 + 0x2738
-_080BE768: .4byte gPlayerParty
-_080BE76C: .4byte gSpecialVar_0x8007
-_080BE770: .4byte gSaveBlock2
-	thumb_func_end sub_80BE6A0
-
-	thumb_func_start nullsub_21
-nullsub_21: @ 80BE774
-	bx lr
-	thumb_func_end nullsub_21
-
-	thumb_func_start sub_80BE778
-sub_80BE778: @ 80BE778
-	push {r4-r6,lr}
-	ldr r0, _080BE83C @ =0x00000804
-	bl FlagGet
-	lsls r0, 24
-	cmp r0, 0
-	beq _080BE836
-	movs r1, 0
-	ldr r3, _080BE840 @ =gSaveBlock1
-	ldr r2, _080BE844 @ =0x00002738
-_080BE78C:
-	lsls r0, r1, 3
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r3
-	adds r0, r2
-	ldrb r0, [r0]
-	cmp r0, 0x29
-	beq _080BE836
-	adds r0, r1, 0x1
-	lsls r0, 24
-	lsrs r1, r0, 24
-	cmp r1, 0x17
-	bls _080BE78C
-	ldr r0, _080BE848 @ =0x00000147
-	bl sub_80BF77C
-	lsls r0, 24
-	lsrs r5, r0, 24
-	cmp r5, 0
-	bne _080BE836
-	ldr r6, _080BE84C @ =gSaveBlock1 + 0x2738
-	adds r0, r6, 0
-	bl sub_80BF720
-	ldr r4, _080BE850 @ =gUnknown_03005D38
-	strb r0, [r4]
-	lsls r0, 24
-	asrs r0, 24
-	movs r1, 0x1
-	negs r1, r1
-	cmp r0, r1
-	beq _080BE836
-	bl Random
-	lsls r0, 16
-	lsrs r0, 16
-	movs r1, 0x5
-	bl __umodsi3
-	lsls r0, 16
-	lsrs r0, 16
-	movs r1, 0
-	ldrsb r1, [r4, r1]
-	lsls r4, r1, 3
-	adds r4, r1
-	lsls r4, 2
-	adds r4, r6
-	movs r1, 0x29
-	strb r1, [r4]
-	movs r3, 0x1
-	strb r3, [r4, 0x1]
-	ldr r2, _080BE854 @ =gUnknown_083D13F8
-	lsls r1, r0, 1
-	adds r1, r0
-	lsls r1, 2
-	adds r1, r2
-	ldrb r0, [r1, 0xA]
-	strb r0, [r4, 0x14]
-	strb r5, [r4, 0x2]
-	strb r5, [r4, 0x3]
-	ldrh r0, [r1]
-	movs r2, 0
-	strh r0, [r4, 0xC]
-	strh r5, [r4, 0xE]
-	ldrh r0, [r1, 0x2]
-	strh r0, [r4, 0x4]
-	ldrh r0, [r1, 0x4]
-	strh r0, [r4, 0x6]
-	ldrh r0, [r1, 0x6]
-	strh r0, [r4, 0x8]
-	ldrh r0, [r1, 0x8]
-	strh r0, [r4, 0xA]
-	ldrb r0, [r1, 0xB]
-	strb r0, [r4, 0x10]
-	strb r2, [r4, 0x11]
-	strb r2, [r4, 0x12]
-	movs r0, 0x32
-	strb r0, [r4, 0x13]
-	strb r2, [r4, 0x15]
-	strh r3, [r4, 0x16]
-	adds r0, r4, 0
-	bl sub_80BE160
-	movs r0, 0x2
-	strb r0, [r4, 0x18]
-_080BE836:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080BE83C: .4byte 0x00000804
-_080BE840: .4byte gSaveBlock1
-_080BE844: .4byte 0x00002738
-_080BE848: .4byte 0x00000147
-_080BE84C: .4byte gSaveBlock1 + 0x2738
-_080BE850: .4byte gUnknown_03005D38
-_080BE854: .4byte gUnknown_083D13F8
-	thumb_func_end sub_80BE778
-
-	thumb_func_start EndMassOutbreak
-EndMassOutbreak: @ 80BE858
-	push {r4,lr}
-	ldr r0, _080BE8B4 @ =gSaveBlock1
-	ldr r2, _080BE8B8 @ =0x00002afc
-	adds r1, r0, r2
-	movs r3, 0
-	movs r2, 0
-	strh r2, [r1]
-	ldr r4, _080BE8BC @ =0x00002afe
-	adds r1, r0, r4
-	strb r3, [r1]
-	adds r4, 0x1
-	adds r1, r0, r4
-	strb r3, [r1]
-	adds r4, 0x1
-	adds r1, r0, r4
-	strb r3, [r1]
-	adds r4, 0x1
-	adds r1, r0, r4
-	strb r3, [r1]
-	adds r4, 0x1
-	adds r1, r0, r4
-	strh r2, [r1]
-	adds r4, 0x2
-	adds r1, r0, r4
-	strh r2, [r1]
-	adds r4, 0x2
-	adds r1, r0, r4
-	strh r2, [r1]
-	adds r4, 0x2
-	adds r1, r0, r4
-	strh r2, [r1]
-	adds r4, 0x2
-	adds r1, r0, r4
-	strh r2, [r1]
-	adds r4, 0x2
-	adds r1, r0, r4
-	strb r3, [r1]
-	adds r4, 0x1
-	adds r1, r0, r4
-	strb r3, [r1]
-	ldr r1, _080BE8C0 @ =0x00002b0e
-	adds r0, r1
-	strh r2, [r0]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080BE8B4: .4byte gSaveBlock1
-_080BE8B8: .4byte 0x00002afc
-_080BE8BC: .4byte 0x00002afe
-_080BE8C0: .4byte 0x00002b0e
-	thumb_func_end EndMassOutbreak
-
-	thumb_func_start sub_80BE8C4
-sub_80BE8C4: @ 80BE8C4
-	push {r4,lr}
-	adds r4, r0, 0
-	lsls r4, 16
-	lsrs r4, 16
-	adds r0, r4, 0
-	bl sub_80BE8EC
-	adds r0, r4, 0
-	bl UpdateMassOutbreakTimeLeft
-	adds r0, r4, 0
-	bl sub_80BEE84
-	adds r0, r4, 0
-	bl sub_80BEA5C
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80BE8C4
+    .section .text_80BE8EC
 
 	thumb_func_start sub_80BE8EC
 sub_80BE8EC: @ 80BE8EC
@@ -2368,7 +1833,7 @@ sub_80BE9D4: @ 80BE9D4
 	bl StringCopy
 	adds r0, r4, 0
 	bl sub_80BE138
-	movs r0, 0x2
+	movs r0, GAME_LANGUAGE
 	strb r0, [r4, 0x6]
 _080BEA36:
 	pop {r4,r5}
@@ -2472,7 +1937,7 @@ sub_80BEA88: @ 80BEA88
 	bl StringCopy
 	adds r0, r4, 0
 	bl sub_80BE138
-	movs r0, 0x2
+	movs r0, GAME_LANGUAGE
 	strb r0, [r4, 0xB]
 _080BEB04:
 	pop {r4-r7}
@@ -3780,46 +3245,7 @@ _080BF4EC: .4byte gUnknown_03005D38
 _080BF4F0: .4byte gSaveBlock1 + 0x2738
 	thumb_func_end sub_80BF4BC
 
-	thumb_func_start sub_80BF4F4
-sub_80BF4F4: @ 80BF4F4
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	movs r1, 0x64
-	adds r4, r0, 0
-	muls r4, r1
-	ldr r0, _080BF530 @ =gPlayerParty
-	adds r4, r0
-	ldr r5, _080BF534 @ =gStringVar1
-	adds r0, r4, 0
-	movs r1, 0x2
-	adds r2, r5, 0
-	bl GetMonData
-	adds r0, r4, 0
-	movs r1, 0xB
-	movs r2, 0
-	bl GetMonData
-	movs r1, 0xB
-	muls r0, r1
-	ldr r1, _080BF538 @ =gSpeciesNames
-	adds r0, r1
-	adds r1, r5, 0
-	bl StringCompareWithoutExtCtrlCodes
-	cmp r0, 0
-	beq _080BF53C
-	movs r0, 0x1
-	b _080BF53E
-	.align 2, 0
-_080BF530: .4byte gPlayerParty
-_080BF534: .4byte gStringVar1
-_080BF538: .4byte gSpeciesNames
-_080BF53C:
-	movs r0, 0
-_080BF53E:
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80BF4F4
+.section .text_80BF544
 
 	thumb_func_start sub_80BF544
 sub_80BF544: @ 80BF544
@@ -8493,48 +7919,7 @@ nullsub_22: @ 80C1BF4
 	bx lr
 	thumb_func_end nullsub_22
 
-	thumb_func_start DoTVShowPokemonNewsMassOutbreak
-DoTVShowPokemonNewsMassOutbreak: @ 80C1BF8
-	push {r4,lr}
-	ldr r0, _080C1C40 @ =gSpecialVar_0x8004
-	ldrh r0, [r0]
-	lsls r4, r0, 3
-	adds r4, r0
-	lsls r4, 2
-	ldr r0, _080C1C44 @ =gSaveBlock1 + 0x2738
-	adds r4, r0
-	ldr r0, _080C1C48 @ =gStringVar1
-	ldrb r1, [r4, 0x10]
-	movs r2, 0
-	bl sub_80FBFB4
-	ldr r0, _080C1C4C @ =gStringVar2
-	ldrh r2, [r4, 0xC]
-	movs r1, 0xB
-	muls r1, r2
-	ldr r2, _080C1C50 @ =gSpeciesNames
-	adds r1, r2
-	bl StringCopy
-	bl TVShowDone
-	bl StartMassOutbreak
-	ldr r1, _080C1C54 @ =gUnknown_083D14BC
-	ldr r0, _080C1C58 @ =gUnknown_020387E8
-	ldrb r0, [r0]
-	lsls r0, 2
-	adds r0, r1
-	ldr r0, [r0]
-	bl ShowFieldMessage
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080C1C40: .4byte gSpecialVar_0x8004
-_080C1C44: .4byte gSaveBlock1 + 0x2738
-_080C1C48: .4byte gStringVar1
-_080C1C4C: .4byte gStringVar2
-_080C1C50: .4byte gSpeciesNames
-_080C1C54: .4byte gUnknown_083D14BC
-_080C1C58: .4byte gUnknown_020387E8
-	thumb_func_end DoTVShowPokemonNewsMassOutbreak
+.section .text_80C1C5C
 
 	thumb_func_start DoTVShowInSearchOfTrainers
 DoTVShowInSearchOfTrainers: @ 80C1C5C
@@ -8936,42 +8321,5 @@ _080C1FD4: .4byte gSpeciesNames
 _080C1FD8: .4byte gUnknown_083D15F4
 	thumb_func_end DoTVShowTheWorldOfMasters
 
-	thumb_func_start TVShowDone
-TVShowDone: @ 80C1FDC
-	ldr r1, _080C2000 @ =gScriptResult
-	movs r0, 0x1
-	strh r0, [r1]
-	ldr r1, _080C2004 @ =gUnknown_020387E8
-	movs r0, 0
-	strb r0, [r1]
-	ldr r2, _080C2008 @ =gSaveBlock1
-	ldr r0, _080C200C @ =gSpecialVar_0x8004
-	ldrh r1, [r0]
-	lsls r0, r1, 3
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldr r1, _080C2010 @ =0x00002739
-	adds r0, r1
-	movs r1, 0
-	strb r1, [r0]
-	bx lr
-	.align 2, 0
-_080C2000: .4byte gScriptResult
-_080C2004: .4byte gUnknown_020387E8
-_080C2008: .4byte gSaveBlock1
-_080C200C: .4byte gSpecialVar_0x8004
-_080C2010: .4byte 0x00002739
-	thumb_func_end TVShowDone
-
-	thumb_func_start sub_80C2014
-sub_80C2014: @ 80C2014
-	ldr r1, _080C201C @ =gUnknown_020387E8
-	movs r0, 0
-	strb r0, [r1]
-	bx lr
-	.align 2, 0
-_080C201C: .4byte gUnknown_020387E8
-	thumb_func_end sub_80C2014
 
 	.align 2, 0 @ Don't pad with nop.

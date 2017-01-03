@@ -278,12 +278,24 @@ void sub_80BD674(void *, u32, u8);
 void sub_80BD7A8(void);
 void UpdateTVScreensOnMap(u32, u32);
 void sub_80BDAB4(void);
+u8 sub_80BDEAC(u8 *);
+void sub_80BE160(TVShow *);
+void sub_80BE8EC(u16);
+void UpdateMassOutbreakTimeLeft(u16);
 void sub_80BE97C(u8);
 void sub_80BEA50(u16);
+void sub_80BEA5C(u16);
 bool8 GetPriceReduction(u8);
+void sub_80BEE84(u16);
 u8 sub_80BF0B8(u32);
+void sub_80BF478(void);
+u16 sub_80BF674(u16 species);
+s8 sub_80BF720(TVShow *);
+u8 sub_80BF77C(u32);
 void sub_80BFD44(void *, u32, u8);
 void sub_80C0514(void *, u32, u8);
+void StartMassOutbreak(void);
+void TVShowDone(void);
 
 // asm/contest_link_80C2020.o
 void sub_80C2358(void);
@@ -360,6 +372,7 @@ bool8 SB1ContainsWords(u16 *);
 bool8 IsEasyChatPairEqual(u16 *, u16 *);
 
 // asm/region_map.o
+void sub_80FBFB4(u8 *str, u8 region, u8);
 void CopyMapName();
 
 // asm/slot_machine.o
