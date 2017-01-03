@@ -1264,7 +1264,7 @@ void CB2_ContinueSavedGame(void)
     ResetSafariZoneFlag_();
     sub_805338C();
     sub_8053198();
-    sub_806451C();
+    UnfreezeMapObjects();
     DoTimeBasedEvents();
     sub_805308C();
     sub_8055FC0();

@@ -17,7 +17,7 @@ extern u8 gUnknown_083761E2[];
 extern s16 gUnknown_083761E6[];
 extern u8 gUnknown_083761EC[];
 
-bool8 sub_80643A4(struct MapObject *mapObject)
+bool8 FreezeMapObject(struct MapObject *mapObject)
 {
     if (mapObject->mapobj_bit_6 || mapObject->mapobj_bit_8)
     {
@@ -34,23 +34,23 @@ bool8 sub_80643A4(struct MapObject *mapObject)
     }
 }
 
-void player_bitmagic()
+void FreezeMapObjects()
 {
     u8 i;
     for (i = 0; i < 16; i++)
         if (gMapObjects[i].active && i != gPlayerAvatar.mapObjectId)
-            sub_80643A4(&gMapObjects[i]);
+            FreezeMapObject(&gMapObjects[i]);
 }
 
-void sub_8064470(u8 a1)
+void FreezeMapObjectsExceptOne(u8 a1)
 {
     u8 i;
     for (i = 0; i < 16; i++)
         if (i != a1 && gMapObjects[i].active && i != gPlayerAvatar.mapObjectId)
-            sub_80643A4(&gMapObjects[i]);
+            FreezeMapObject(&gMapObjects[i]);
 }
 
-void npc_sync_anim_pause_bits(struct MapObject *mapObject)
+void UnfreezeMapObject(struct MapObject *mapObject)
 {
     if (mapObject->active && mapObject->mapobj_bit_8)
     {
@@ -60,39 +60,39 @@ void npc_sync_anim_pause_bits(struct MapObject *mapObject)
     }
 }
 
-void sub_806451C(void)
+void UnfreezeMapObjects(void)
 {
     u8 i;
     for (i = 0; i < 16; i++)
         if (gMapObjects[i].active)
-            npc_sync_anim_pause_bits(&gMapObjects[i]);
+            UnfreezeMapObject(&gMapObjects[i]);
 }
 
-void little_step(struct Sprite *sprite, u8 dir)
+void Step1(struct Sprite *sprite, u8 dir)
 {
     sprite->pos1.x += gDirectionToVector[dir].x;
     sprite->pos1.y += gDirectionToVector[dir].y;
 }
 
-void sub_806456C(struct Sprite *sprite, u8 dir)
+void Step2(struct Sprite *sprite, u8 dir)
 {
     sprite->pos1.x += 2 * gDirectionToVector[dir].x;
     sprite->pos1.y += 2 * gDirectionToVector[dir].y;
 }
 
-void sub_8064590(struct Sprite *sprite, u8 dir)
+void Step3(struct Sprite *sprite, u8 dir)
 {
     sprite->pos1.x += 2 * gDirectionToVector[dir].x + gDirectionToVector[dir].x;
     sprite->pos1.y += 2 * gDirectionToVector[dir].y + gDirectionToVector[dir].y;
 }
 
-void sub_80645B8(struct Sprite *sprite, u8 dir)
+void Step4(struct Sprite *sprite, u8 dir)
 {
     sprite->pos1.x += 4 * gDirectionToVector[dir].x;
     sprite->pos1.y += 4 * gDirectionToVector[dir].y;
 }
 
-void sub_80645DC(struct Sprite *sprite, u8 dir)
+void Step8(struct Sprite *sprite, u8 dir)
 {
     sprite->pos1.x += 8 * gDirectionToVector[dir].x;
     sprite->pos1.y += 8 * gDirectionToVector[dir].y;
@@ -131,7 +131,7 @@ bool8 sub_806468C(struct Sprite *sprite)
 {
     if (!(sprite->data4 & 1))
     {
-        little_step(sprite, sprite->data3);
+        Step1(sprite, sprite->data3);
         sprite->data5++;
     }
 
@@ -168,7 +168,7 @@ u8 sub_8064704(struct Sprite *sprite)
     v2 = 0;
 
     if (sprite->data4)
-        little_step(sprite, sprite->data3);
+        Step1(sprite, sprite->data3);
 
     sprite->pos2.y = sub_80646C8(sprite->data6 >> v6[sprite->data4], sprite->data5);
 
@@ -198,7 +198,7 @@ u8 sub_806478C(struct Sprite *sprite)
     v2 = 0;
 
     if (sprite->data4 && !(sprite->data6 & 1))
-        little_step(sprite, sprite->data3);
+        Step1(sprite, sprite->data3);
 
     sprite->pos2.y = sub_80646C8(sprite->data6 >> v6[sprite->data4], sprite->data5);
 

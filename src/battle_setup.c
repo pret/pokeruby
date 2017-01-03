@@ -162,7 +162,7 @@ void CheckForSafariZoneAndProceed(void)
 void StartBattle_StandardWild(void)
 {
     ScriptContext2_Enable();
-    player_bitmagic();
+    FreezeMapObjects();
     sub_80597F4();
     gMain.field_8 = HandleWildBattleEnd;
     gBattleTypeFlags = 0;
@@ -174,7 +174,7 @@ void StartBattle_StandardWild(void)
 void StartBattle_Roamer(void)
 {
     ScriptContext2_Enable();
-    player_bitmagic();
+    FreezeMapObjects();
     sub_80597F4();
     gMain.field_8 = HandleWildBattleEnd;
     gBattleTypeFlags = BATTLE_TYPE_ROAMER;
@@ -186,7 +186,7 @@ void StartBattle_Roamer(void)
 void StartBattle_Safari(void)
 {
     ScriptContext2_Enable();
-    player_bitmagic();
+    FreezeMapObjects();
     sub_80597F4();
     gMain.field_8 = sub_80C824C;
     gBattleTypeFlags = BATTLE_TYPE_SAFARI;

@@ -483,7 +483,7 @@ _080A241C:
 	lsls r0, 2
 	ldr r1, _080A2448 @ =gMapObjects
 	adds r0, r1
-	bl npc_sync_anim_pause_bits
+	bl UnfreezeMapObject
 _080A2432:
 	adds r0, r5, 0x1
 	lsls r0, 24
@@ -571,7 +571,7 @@ _080A24C8:
 	adds r1, r6, 0
 	bl sub_80A2348
 	adds r0, r4, 0
-	bl sub_80643A4
+	bl FreezeMapObject
 	b _080A24FA
 	.align 2, 0
 _080A24E0: .4byte gMapObjects

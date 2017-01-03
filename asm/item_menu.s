@@ -7553,7 +7553,7 @@ sub_80A6D1C: @ 80A6D1C
 	cmp r5, 0x1
 	bne _080A6D80
 	bl ScriptContext2_Enable
-	bl player_bitmagic
+	bl FreezeMapObjects
 	bl sub_80594C0
 	bl sub_80597F4
 	ldr r1, _080A6D78 @ =gScriptItemId

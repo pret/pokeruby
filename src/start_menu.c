@@ -280,7 +280,7 @@ void sub_8071310(void)
 {
     if(!is_c1_link_related_active())
     {
-        player_bitmagic();
+        FreezeMapObjects();
         sub_80594C0();
         sub_80597F4();
     }

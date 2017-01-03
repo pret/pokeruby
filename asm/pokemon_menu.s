@@ -645,7 +645,7 @@ sub_8089F44: @ 8089F44
 	ldr r3, _08089FC8 @ =sub_8089F14
 	str r5, [sp]
 	adds r1, r4, 0
-	bl sub_809D8BC
+	bl ShowPokemonSummaryScreen
 _08089FA2:
 	add sp, 0x4
 	pop {r4,r5}

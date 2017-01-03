@@ -1035,7 +1035,7 @@ sub_81225D4: @ 81225D4
 	ldr r3, _08122658 @ =sub_81225A4
 	str r5, [sp]
 	adds r1, r4, 0
-	bl sub_809D8BC
+	bl ShowPokemonSummaryScreen
 _08122632:
 	add sp, 0x4
 	pop {r4,r5}
@@ -2335,7 +2335,7 @@ sub_8123034: @ 8123034
 	ldr r3, _081230B8 @ =sub_8123004
 	str r5, [sp]
 	adds r1, r4, 0
-	bl sub_809D8BC
+	bl ShowPokemonSummaryScreen
 _08123092:
 	add sp, 0x4
 	pop {r4,r5}

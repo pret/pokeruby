@@ -60,7 +60,7 @@ gSpecials::
 	.4byte sub_8082C68
 	.4byte sub_8082C9C
 	.4byte sub_80826B0
-	.4byte sub_8096100
+	.4byte ShowPokemonStorageSystem
 	.4byte CheckForAlivePartyMons
 	.4byte TurnOffTVScreen
 	.4byte DoTVShow

@@ -135,10 +135,10 @@ void FieldObjectUpdateZCoord(struct MapObject *pObject);
 void SetObjectSubpriorityByZCoord(u8, struct Sprite *, u8);
 
 // src/map_obj_80643A4.o
-bool8 sub_80643A4(struct MapObject *);
-void player_bitmagic(void);
-void sub_8064470(u8);
-void sub_806451C(void);
+bool8 FreezeMapObject(struct MapObject *);
+void FreezeMapObjects(void);
+void FreezeMapObjectsExceptOne(u8);
+void UnfreezeMapObjects(void);
 void sub_806487C(struct Sprite *sprite, bool8 invisible);
 void sub_8064990(u8, u8);
 
@@ -169,6 +169,9 @@ bool8 pokemon_has_move(struct Pokemon *, u16);
 u8 battle_side_get_owner(u8);
 u8 battle_get_per_side_status(u8);
 u8 battle_get_side_with_given_state(u8);
+
+// asm/weather.o
+void SetWeather(u32);
 
 // asm/rom_8080874.o
 void pal_fill_black();

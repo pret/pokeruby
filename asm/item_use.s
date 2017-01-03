@@ -528,7 +528,7 @@ SetPlayerDirectionTowardsItem: @ 80C997C
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl npc_sync_anim_pause_bits
+	bl UnfreezeMapObject
 	adds r0, r5, 0
 	bl PlayerTurnInPlace
 	pop {r4,r5}
