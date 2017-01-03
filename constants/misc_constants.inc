@@ -31,3 +31,5 @@
 
 	.equiv MALE, 0
 	.equiv FEMALE, 1
+
+	.equiv GAME_LANGUAGE, 2

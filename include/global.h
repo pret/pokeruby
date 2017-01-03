@@ -183,6 +183,84 @@ struct EasyChatPair
     u16 words[2];
 }; /*size = 0x8*/
 
+struct TVShowCommon {
+    /*0x00*/ u8 var00;
+    /*0x01*/ u8 var01;
+};
+
+struct TVShowFanClubLetter {
+    /*0x00*/ u8 var00;
+    /*0x01*/ u8 var01;
+    /*0x02*/ u16 species;
+    u8 pad04[12];
+    /*0x10*/ u8 playerName[8];
+    /*0x18*/ u8 var18;
+};
+
+struct TVShowRecentHappenings {
+    /*0x00*/ u8 var00;
+    /*0x01*/ u8 var01;
+    /*0x02*/ u16 var02;
+    u8 pad04[12];
+    /*0x10*/ u8 var10[8];
+    /*0x18*/ u8 var18;
+    u8 pad19[10];
+};
+
+struct TVShowFanclubOpinions {
+    /*0x00*/ u8 var00;
+    /*0x01*/ u8 var01;
+    /*0x02*/ u16 var02;
+    /*0x04*/ u8 var04A:4;
+    u8 var04B:4;
+    /*0x04*/ u8 var05[8];
+    /*0x0D*/ u8 var0D;
+    /*0x0E*/ u8 var0E;
+    /*0x0F*/ u8 var0F;
+    /*0x10*/ u8 var10[8];
+};
+
+struct TVShowNameRaterShow {
+    /*0x00*/ u8 var00;
+    /*0x01*/ u8 var01;
+    /*0x02*/ u16 species;
+    /*0x04*/ u8 pokemonName[11];
+    /*0x0F*/ u8 trainerName[11];
+    /*0x1A*/ u8 random;
+    /*0x1B*/ u8 random2;
+    /*0x1C*/ u16 var1C;
+    /*0x1E*/ u8 language;
+    /*0x1F*/ u8 var1F;
+};
+
+struct TVShowMassOutbreak {
+    /*0x00*/ u8 var00;
+    /*0x01*/ u8 var01;
+    /*0x02*/ u8 var02;
+    /*0x03*/ u8 var03;
+    /*0x04*/ u16 moves[4];
+    /*0x0C*/ u16 species;
+    /*0x0E*/ u16 var0E;
+    /*0x10*/ u8 locationMapNum;
+    /*0x11*/ u8 locationMapGroup;
+    /*0x12*/ u8 var12;
+    /*0x13*/ u8 probability;
+    /*0x14*/ u8 level;
+    /*0x15*/ u8 var15;
+    /*0x16*/ u16 var16;
+    /*0x18*/ u8 var18;
+    u8 pad19[11];
+};
+
+typedef union TVShow {
+    struct TVShowCommon common;
+    struct TVShowFanClubLetter fanclubLetter;
+    struct TVShowRecentHappenings recentHappenings;
+    struct TVShowFanclubOpinions fanclubOpinions;
+    struct TVShowNameRaterShow nameRaterShow;
+    struct TVShowMassOutbreak massOutbreak;
+} TVShow;
+
 struct MailStruct
 {
     /*0x00*/ u16 words[9];
@@ -241,17 +319,19 @@ struct SaveBlock1
     /*0x2704*/ u8 decorDoll[40];
     /*0x272C*/ u8 decorCushion[10];
     /*0x2736*/ u8 padding_2736[2];
-    /*0x2738*/ u8 tvShows[24][36]; // TODO: TV show struct
+    /*0x2738*/ TVShow tvShows[24];
     /*0x2A98*/ u8 filler_2A98[0x64];
     /*0x2AFC*/ u16 outbreakPokemonSpecies;
     /*0x2AFE*/ u8 outbreakLocationMapNum;
     /*0x2AFF*/ u8 outbreakLocationMapGroup;
     /*0x2B00*/ u8 outbreakPokemonLevel;
-    /*0x2B01*/ u8 filler_2B01[3];
+    /*0x2B01*/ u8 outbreakUnk1;
+    /*0x2B02*/ u16 outbreakUnk2;
     /*0x2B04*/ u16 outbreakPokemonMoves[4];
-    /*0x2B0C*/ u8 unk2B0C;
+    /*0x2B0C*/ u8 outbreakUnk4;
     /*0x2B0D*/ u8 outbreakPokemonProbability;
-    /*0x2B0E*/ u8 filler_2B0E[0xE];
+    /*0x2B0E*/ u16 outbreakUnk5;
+    /*0x2B10*/ u8 filler_2B0E[0xC];
     /*0x2B1C*/ u16 unk2B1C[4];
     /*0x2B24*/ u8 filler_2B24[0x28];
     /*0x2B4C*/ struct MailStruct mail[16];
