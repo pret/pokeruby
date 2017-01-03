@@ -3182,21 +3182,21 @@ gStatusScreen_Pal:: @ 8E73468
 
 	.align 2
 gUnknown_08E73508:: @ 8E73508
-	.incbin "graphics/unknown/unknown_E73508.bin"
+	.incbin "graphics/interface/status_screen.bin"
 
 	.align 2
 gStatusScreen_Tilemap:: @ 8E73D08
-	.incbin "graphics/interface/status_screen.bin.lz"
+	.incbin "graphics/interface/status_screen_pokemon_skills.bin.lz"
 
 gUnknown_08E73E88:: @ 8E73E88
-	.incbin "graphics/unknown/unknown_E73E88.bin"
+	.incbin "graphics/interface/status_screen_battle_moves.bin"
 
 gUnknown_08E74688:: @ 8E74688
-	.incbin "graphics/unknown/unknown_E74688.bin"
+	.incbin "graphics/interface/status_screen_contest_moves.bin"
 
 	.align 2
 gUnknown_08E74E88:: @ 8E74E88
-	.incbin "graphics/unknown/unknown_E74E88.bin.lz"
+	.incbin "graphics/interface/pokemon_info.bin.lz"
 
 	.align 2
 gBagMaleTiles:: @ 8E75024
@@ -3323,7 +3323,7 @@ gPokeblockGold_Pal::
 
 	.align 2
 gUnknown_08E782FC:: @ 8E782FC
-	.incbin "graphics/unknown/unknown_E782FC.bin.lz"
+	.incbin "graphics/interface/pokeblock_feeding_bg_map.bin.lz"
 
 	.align 2
 gBerryCheck_Gfx:: @ 8E783FC
@@ -3335,11 +3335,11 @@ gBerryCheck_Pal:: @ 8E7883C
 
 	.align 2
 gUnknown_08E788E4:: @ 8E788E4
-	.incbin "graphics/unknown/unknown_E788E4.bin.lz"
+	.incbin "graphics/interface/berry_tag.bin.lz"
 
 	.align 2
 gUnknown_08E78A84:: @ 8E78A84
-	.incbin "graphics/unknown/unknown_E78A84.bin.lz"
+	.incbin "graphics/interface/berry_tag_title.bin.lz"
 
 	.align 2
 gBerryCheckCircle_Gfx:: @ 8E78BB4
@@ -3961,7 +3961,7 @@ gUnknown_08E94550:: @ 8E94550
 	.incbin "graphics/unknown/unknown_E94550.bin"
 
 gUnknown_08E945D0:: @ 8E945D0
-	.incbin "graphics/unknown/unknown_E945D0.bin"
+	.incbin "graphics/interface/wordgroup_layout.bin"
 
 gUnknown_08E94AD0:: @ 8E94AD0
 	.incbin "graphics/unknown/unknown_E94AD0.bin"
@@ -3972,11 +3972,11 @@ gUnknown_08E953D0:: @ 8E953D0
 
 	.align 2
 gUnknown_08E954B0:: @ 8E954B0
-	.incbin "graphics/unknown/unknown_E954B0.bin.lz"
+	.incbin "graphics/misc/wallclock_edit.bin.lz"
 
 	.align 2
 gUnknown_08E95774:: @ 8E95774
-	.incbin "graphics/unknown/unknown_E95774.bin.lz"
+	.incbin "graphics/misc/wallclock_view.bin.lz"
 
 	.align 2
 gUnknown_08E95A18:: @ 8E95A18
@@ -3990,10 +3990,10 @@ gUnknown_08E95AB8:: @ 8E95AB8
 	.incbin "graphics/unknown/unknown_E95AB8.bin"
 
 gUnknown_08E95FB8:: @ 8E95FB8
-	.incbin "graphics/unknown/unknown_E95FB8.bin"
+	.incbin "graphics/slot_machine/slots_layout.bin"
 
 gUnknown_08E964B8:: @ 8E964B8
-	.incbin "graphics/unknown/unknown_E964B8.bin"
+	.incbin "graphics/contest/contest_words.bin"
 
 gUnknown_08E966B8:: @ 8E966B8
 	.incbin "graphics/unknown/unknown_E966B8.gbapal"
@@ -4010,23 +4010,23 @@ gUnknown_08E96738:: @ 8E96738
 
 	.align 2
 gUnknown_08E96888:: @ 8E96888
-	.incbin "graphics/unknown/unknown_E96888.bin.lz"
+	.incbin "graphics/pokedex/pokedex_list_menu.bin.lz"
 
 	.align 2
 gUnknown_08E96994:: @ 8E96994
-	.incbin "graphics/unknown/unknown_E96994.bin.lz"
+	.incbin "graphics/pokedex/pokedex_listing_menu.bin.lz"
 
 	.align 2
 gUnknown_08E96ACC:: @ 8E96ACC
-	.incbin "graphics/unknown/unknown_E96ACC.bin.lz"
+	.incbin "graphics/pokedex/pokedex_navbar.bin.lz"
 
 	.align 2
 gUnknown_08E96B58:: @ 8E96B58
-	.incbin "graphics/unknown/unknown_E96B58.bin.lz"
+	.incbin "graphics/pokedex/pokedex_navbar_3.bin.lz"
 
 	.align 2
 gUnknown_08E96BD4:: @ 8E96BD4
-	.incbin "graphics/unknown/unknown_E96BD4.bin.lz"
+	.incbin "graphics/pokedex/pokedex_detail_layout.bin.lz"
 
 	.align 2
 gUnknown_08E96D2C:: @ 8E96D2C
@@ -4218,7 +4218,7 @@ gUnknown_08E99FB0:: @ 8E99FB0
 
 	.align 2
 gUnknown_08E9A100:: @ 8E9A100
-	.incbin "graphics/unknown/unknown_E9A100.bin"
+	.incbin "graphics/pokenav/bottom_toolbar.bin"
 
 gUnknown_08E9A300:: @ 8E9A300
 	.incbin "graphics/unknown/unknown_E9A300.bin"
@@ -4242,7 +4242,7 @@ gUnknown_08E9AC2C:: @ 8E9AC2C
 
 	.align 2
 gUnknown_08E9AC4C:: @ 8E9AC4C
-	.incbin "graphics/unknown/unknown_E9AC4C.bin.lz"
+	.incbin "graphics/pokenav/condition_screen.bin.lz"
 
 @ text window frames
 
