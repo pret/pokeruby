@@ -1002,7 +1002,7 @@ gStartMenuItems:: @ 8376D24
 	.4byte SystemText_Player, StartMenu_PlayerLinkCallback
 
 	.align 2
-gUnknown_08376D74:: @ 8376D74
+gMenuYesNoItems:: @ 8376D74
 	.4byte OtherText_Yes, 0
 	.4byte OtherText_No, 0
 

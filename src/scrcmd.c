@@ -558,9 +558,9 @@ bool8 ScrCmd_fadescreen(struct ScriptContext *ctx)
 
 bool8 ScrCmd_fadescreendelay(struct ScriptContext *ctx)
 {
-    u8 val1 = ScriptReadByte(ctx);
-    u8 val2 = ScriptReadByte(ctx);
-    fade_screen(val1, val2);
+    u8 duration = ScriptReadByte(ctx);
+    u8 delay = ScriptReadByte(ctx);
+    fade_screen(duration, delay);
     SetupNativeScript(ctx, sub_8066248);
     return TRUE;
 }
@@ -1835,8 +1835,8 @@ bool8 ScrCmd_checkcoins(struct ScriptContext *ctx)
 
 bool8 ScrCmd_givecoins(struct ScriptContext *ctx)
 {
-    u16 v2 = VarGet(ScriptReadHalfword(ctx));
-    if (GiveCoins(v2) == TRUE)
+    u16 coins = VarGet(ScriptReadHalfword(ctx));
+    if (GiveCoins(coins) == TRUE)
         gScriptResult = 0;
     else
         gScriptResult = 1;
@@ -1846,8 +1846,8 @@ bool8 ScrCmd_givecoins(struct ScriptContext *ctx)
 
 bool8 ScrCmd_removecoins(struct ScriptContext *ctx)
 {
-    u16 v2 = VarGet(ScriptReadHalfword(ctx));
-    if (TakeCoins(v2) == TRUE)
+    u16 coins = VarGet(ScriptReadHalfword(ctx));
+    if (TakeCoins(coins) == TRUE)
         gScriptResult = 0;
     else
         gScriptResult = 1;
