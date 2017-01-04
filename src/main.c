@@ -333,8 +333,7 @@ static void SerialIntr(void)
 }
 
 static void IntrDummy(void)
-{
-}
+{}
 
 static void WaitForVBlank(void)
 {

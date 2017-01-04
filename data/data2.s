@@ -11,7 +11,7 @@ gUnknown_081E764C:: @ 81E764C
 	.incbin "graphics/birch_speech/bg1.gbapal"
 
 	.align 2
-gUnknown_081E768C:: @ 81E768C
+gBirchIntroShadowGfx:: @ 81E768C
 	.incbin "graphics/birch_speech/shadow.4bpp.lz"
 
 	.align 2

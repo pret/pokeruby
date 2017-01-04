@@ -26,23 +26,11 @@ struct MonCoords
 };
 
 extern struct PaletteFadeControl gPaletteFade;
-extern u8 gSaveFileDeletedMessage[];
-extern u8 gSaveFileCorruptMessage[];
-extern u8 gBoardNotInstalledMessage[];
-extern u8 gBatteryDryMessage[];
+
 extern u16 gSaveFileStatus;
-extern u8 gMainMenuString_Continue[];
-extern u8 gMainMenuString_NewGame[];
-extern u8 gMainMenuString_MysteryEvents[];
-extern u8 gMainMenuString_Option[];
-extern u8 gMainMenuString_Player[];
-extern u8 gMainMenuString_Time[];
-extern u8 gMainMenuString_Pokedex[];
-extern u8 gMainMenuString_Badges[];
 
 extern u16 gMainMenuPalette[];
 
-//Text Strings
 extern const u8 gBirchSpeech_Welcome[];
 extern const u8 gBirchSpeech_ThisIsPokemon[];
 extern const u8 gBirchSpeech_WorldInhabitedByPokemon[];
@@ -52,6 +40,18 @@ extern const u8 gBirchSpeech_WhatsYourName[];
 extern u8 gBirchSpeech_SoItsPlayer[];
 extern u8 gBirchSpeech_AhOkayYouArePlayer[];
 extern u8 gBirchSpeech_AreYouReady[];
+extern u8 gSaveFileDeletedMessage[];
+extern u8 gSaveFileCorruptMessage[];
+extern u8 gBoardNotInstalledMessage[];
+extern u8 gBatteryDryMessage[];
+extern u8 gMainMenuString_Continue[];
+extern u8 gMainMenuString_NewGame[];
+extern u8 gMainMenuString_MysteryEvents[];
+extern u8 gMainMenuString_Option[];
+extern u8 gMainMenuString_Player[];
+extern u8 gMainMenuString_Time[];
+extern u8 gMainMenuString_Pokedex[];
+extern u8 gMainMenuString_Badges[];
 
 extern const struct MonCoords gMonFrontPicCoords[];
 extern const struct SpriteSheet gMonFrontPicTable[];
@@ -64,7 +64,7 @@ extern const struct MenuAction gMalePresetNames[];
 extern const struct MenuAction gFemalePresetNames[];
 
 extern const u8 gUnknown_081E764C[];
-extern const u8 gUnknown_081E768C[];
+extern const u8 gBirchIntroShadowGfx[];
 extern const u8 gUnknown_081E7834[];
 extern const u8 gUnknown_081E796C[];
 extern const u8 gSystemText_NewPara[];
@@ -103,7 +103,7 @@ enum {
 
 static void CB2_MainMenu(void);
 static void VBlankCB_MainMenu(void);
-static void sub_80096FC(void);
+static void CB2_InitMainMenuFromOptions(void);
 static u32 InitMainMenu(bool8 a1);
 static void Task_MainMenuCheckSave(u8 taskId);
 static void Task_MainMenuWaitForSaveErrorAck(u8 taskId);
@@ -157,16 +157,16 @@ static void Task_NewGameSpeech32(u8 taskId);
 static void Task_NewGameSpeech33(u8 taskId);
 static void CB_ContinueNewGameSpeechPart2();
 static void nullsub_34(struct Sprite *sprite);
-static void sub_800B240(struct Sprite *sprite);
+static void ShrinkPlayerSprite(struct Sprite *sprite);
 static u8 CreateAzurillSprite(u8 x, u8 y);
 static void AddBirchSpeechObjects(u8 taskId);
 static void Task_SpriteFadeOut(u8 taskId);
 static void StartSpriteFadeOut(u8 taskId, u8 interval);
 static void Task_SpriteFadeIn(u8 taskId);
 static void StartSpriteFadeIn(u8 taskId, u8 interval);
-static void sub_800B5A8(u8 taskId);
+static void HandleFloorShadowFadeOut(u8 taskId);
 static void StartBackgroundFadeOut(u8 taskId, u8 interval);
-static void sub_800B654(u8 taskId);
+static void HandleFloorShadowFadeIn(u8 taskId);
 static void StartBackgroundFadeIn(u8 taskId, u8 interval);
 static void CreateGenderMenu(u8 left, u8 top);
 static s8 GenderMenuProcessInput(void);
@@ -194,7 +194,7 @@ void CB2_InitMainMenu(void)
     InitMainMenu(FALSE);
 }
 
-static void sub_80096FC(void)
+static void CB2_InitMainMenuFromOptions(void)
 {
     InitMainMenu(TRUE);
 }
@@ -582,7 +582,7 @@ void Task_MainMenuPressedA(u8 taskId)
         DestroyTask(taskId);
         break;
     case OPTION:
-        gMain.field_8 = sub_80096FC;
+        gMain.field_8 = CB2_InitMainMenuFromOptions;
         SetMainCallback2(CB2_InitOptionMenu);
         DestroyTask(taskId);
         break;
@@ -728,7 +728,7 @@ static void Task_NewGameSpeech1(u8 taskId)
     REG_BLDCNT = 0;
     REG_BLDALPHA = 0;
     REG_BLDY = 0;
-    LZ77UnCompVram(gUnknown_081E768C, (void *)BG_VRAM);
+    LZ77UnCompVram(gBirchIntroShadowGfx, (void *)BG_VRAM);
     LZ77UnCompVram(gUnknown_081E7834, (void *)(BG_VRAM + 0x3800));
     LoadPalette(gUnknown_081E764C, 0, 0x40);
     LoadPalette(gUnknown_081E796C, 1, 0x10);
@@ -1261,7 +1261,7 @@ static void Task_NewGameSpeech30(u8 taskId)
             gSprites[spriteId].affineAnims = (union AffineAnimCmd **)gSpriteAffineAnimTable_81E79AC;
             InitSpriteAffineAnim(&gSprites[spriteId]);
             StartSpriteAffineAnim(&gSprites[spriteId], 0);
-            gSprites[spriteId].callback = sub_800B240;
+            gSprites[spriteId].callback = ShrinkPlayerSprite;
             BeginNormalPaletteFade(0x0000FFFF, 0, 0, 0x10, 0);
             FadeOutBGM(4);
             gTasks[taskId].func = Task_NewGameSpeech31;
@@ -1326,7 +1326,7 @@ void CB_ContinueNewGameSpeechPart2()
 
     ResetPaletteFade();
 
-    LZ77UnCompVram(gUnknown_081E768C, (void *)BG_VRAM);
+    LZ77UnCompVram(gBirchIntroShadowGfx, (void *)BG_VRAM);
     LZ77UnCompVram(gUnknown_081E7834, (void *)(BG_VRAM + 0x3800));
 
     LoadPalette(gUnknown_081E764C, 0, 0x40);
@@ -1390,7 +1390,7 @@ void nullsub_34(struct Sprite *sprite)
 {
 }
 
-void sub_800B240(struct Sprite *sprite)
+void ShrinkPlayerSprite(struct Sprite *sprite)
 {
     u32 y = (sprite->pos1.y << 16) + sprite->data0 + 0xC000;
     sprite->pos1.y = y >> 16;
@@ -1534,22 +1534,16 @@ enum {
     TD_DELAY,
 };
 
-static void sub_800B5A8(u8 taskId)
+static void HandleFloorShadowFadeOut(u8 taskId)
 {
     if (gTasks[taskId].data[TD_DELAY])
-    {
         gTasks[taskId].data[TD_DELAY]--;
-    }
     else
     {
         if (gTasks[taskId].data[TD_FADELEVEL] == 8)
-        {
             DestroyTask(taskId);
-        }
         else if (gTasks[taskId].data[TD_FRAMECOUNTER])
-        {
             gTasks[taskId].data[TD_FRAMECOUNTER]--;
-        }
         else
         {
             gTasks[taskId].data[TD_FRAMECOUNTER] = gTasks[taskId].data[TD_INTERVAL];
@@ -1562,7 +1556,7 @@ static void sub_800B5A8(u8 taskId)
 //Launches a helper task to fade out the background
 static void StartBackgroundFadeOut(u8 taskId, u8 interval)
 {
-    u8 newTaskId = CreateTask(sub_800B5A8, 0);
+    u8 newTaskId = CreateTask(HandleFloorShadowFadeOut, 0);
     gTasks[newTaskId].data[TD_PARENT_TASK_ID] = taskId;
     gTasks[newTaskId].data[TD_FADELEVEL] = 0;
     gTasks[newTaskId].data[TD_DELAY] = 8;
@@ -1570,24 +1564,18 @@ static void StartBackgroundFadeOut(u8 taskId, u8 interval)
     gTasks[newTaskId].data[TD_FRAMECOUNTER] = interval;
 }
 
-static void sub_800B654(u8 taskId)
+static void HandleFloorShadowFadeIn(u8 taskId)
 {
     if (gTasks[taskId].data[TD_DELAY])
-    {
         gTasks[taskId].data[TD_DELAY]--;
-    }
     else
     {
         if (gTasks[taskId].data[TD_FADELEVEL] == 0)
-        {
             DestroyTask(taskId);
-        }
         else
         {
             if (gTasks[taskId].data[TD_FRAMECOUNTER])
-            {
                 gTasks[taskId].data[TD_FRAMECOUNTER]--;
-            }
             else
             {
                 gTasks[taskId].data[TD_FRAMECOUNTER] = gTasks[taskId].data[TD_INTERVAL];
@@ -1601,7 +1589,7 @@ static void sub_800B654(u8 taskId)
 //Launches a helper task to fade in the background
 static void StartBackgroundFadeIn(u8 taskId, u8 interval)
 {
-    u8 newTaskId = CreateTask(sub_800B654, 0);
+    u8 newTaskId = CreateTask(HandleFloorShadowFadeIn, 0);
     gTasks[newTaskId].data[TD_PARENT_TASK_ID] = taskId;
     gTasks[newTaskId].data[TD_FADELEVEL] = 8;
     gTasks[newTaskId].data[TD_DELAY] = 8;
