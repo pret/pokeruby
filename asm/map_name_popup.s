@@ -9,7 +9,7 @@
 	thumb_func_start unref_sub_80A2F44
 unref_sub_80A2F44: @ 80A2F44
 	push {lr}
-	bl sub_8071C20
+	bl CloseMenu
 	bl AddMapNamePopUpWindowTask
 	movs r0, 0x1
 	pop {r1}

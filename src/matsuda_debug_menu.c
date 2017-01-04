@@ -129,7 +129,7 @@ static bool8 sub_80A9B78(void)
         gCallback_03004AE8 = gMatsudaDebugMenuActions[choice].func;
         return FALSE;
     case -1:
-        sub_8071C20();
+        CloseMenu();
         return TRUE;
     }
 }
@@ -202,7 +202,7 @@ static void sub_80A9CF8(u8 taskId)
     {
         DestroyTask(gTasks[taskId].data[10]);
         DestroyTask(taskId);
-        sub_8071C20();
+        CloseMenu();
     }
 }
 
@@ -235,7 +235,7 @@ static void sub_80A9DD8(u8 taskId)
 {
     DestroyTask(gTasks[taskId].data[10]);
     DestroyTask(taskId);
-    sub_8071C20();
+    CloseMenu();
 }
 
 static void sub_80A9E04(u8 taskId)
@@ -1036,7 +1036,7 @@ void sub_80AAF30(void)
 int MatsudaDebugMenu_SetHighScore(void)
 {
     sub_80AAF30();
-    sub_8071C20();
+    CloseMenu();
     return 1;
 }
 
@@ -1052,7 +1052,7 @@ int MatsudaDebugMenu_ResetHighScore(void)
         gUnknown_02038680[i] = 0;
         gUnknown_02038678[i] = 0;
     }
-    sub_8071C20();
+    CloseMenu();
     return 1;
 }
 
@@ -1067,7 +1067,7 @@ int MatsudaDebugMenu_SetArtMuseumItems(void)
         gUnknown_02038690[i] = 3 - i;
     for (gScriptContestCategory = 0; gScriptContestCategory < 5; gScriptContestCategory++)
         sub_80B2A7C(0xFF);
-    sub_8071C20();
+    CloseMenu();
     return 1;
 }
 

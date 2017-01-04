@@ -79,7 +79,7 @@ _0814A4A0: .4byte gUnknown_02024D1E
 _0814A4A4: .4byte gCallback_03004AE8
 _0814A4A8: .4byte gUnknown_0842C29C
 _0814A4AC:
-	bl sub_8071C20
+	bl CloseMenu
 	movs r0, 0x1
 _0814A4B2:
 	pop {r1}
@@ -115,7 +115,7 @@ sub_814A4B8: @ 814A4B8
 	ldr r0, _0814A514 @ =0x0000055a
 	adds r2, r0
 	strh r1, [r2]
-	bl sub_8071C20
+	bl CloseMenu
 	movs r0, 0x1
 	pop {r4}
 	pop {r1}
