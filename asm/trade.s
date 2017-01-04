@@ -10676,11 +10676,11 @@ _0804D5A4: .4byte 0x0000043c
 _0804D5A8:
 	movs r0, 0x4
 	strb r0, [r1]
-	ldr r1, _0804D5B4 @ =gUnknown_3001BB4
+	ldr r1, _0804D5B4 @ =gSoftResetDisabled
 	movs r0, 0x1
 	b _0804D612
 	.align 2, 0
-_0804D5B4: .4byte gUnknown_3001BB4
+_0804D5B4: .4byte gSoftResetDisabled
 _0804D5B8:
 	ldr r0, _0804D5F4 @ =gUnknown_03005E94
 	ldr r1, _0804D5F8 @ =sub_804DC88
@@ -11886,7 +11886,7 @@ _0804E04C:
 	cmp r0, 0
 	beq _0804E11A
 	bl sub_8125E04
-	ldr r1, _0804E06C @ =gUnknown_3001BB4
+	ldr r1, _0804E06C @ =gSoftResetDisabled
 	movs r0, 0
 	strb r0, [r1]
 	ldr r0, _0804E070 @ =gMain
@@ -11896,7 +11896,7 @@ _0804E04C:
 	strb r1, [r0]
 	b _0804E11A
 	.align 2, 0
-_0804E06C: .4byte gUnknown_3001BB4
+_0804E06C: .4byte gSoftResetDisabled
 _0804E070: .4byte gMain
 _0804E074: .4byte 0x0000043c
 _0804E078:

@@ -808,7 +808,7 @@ SetUpFieldMove_SecretPower: @ 80C62C4
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl sub_80571EC
+	bl MetatileBehavior_IsSecretBaseCave
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -829,7 +829,7 @@ _080C6328: .4byte gUnknown_03005CE4
 _080C632C: .4byte sub_80C639C
 _080C6330:
 	adds r0, r4, 0
-	bl sub_805720C
+	bl MetatileBehavior_IsSecretBaseTree
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -848,7 +848,7 @@ _080C6358: .4byte gUnknown_03005CE4
 _080C635C: .4byte sub_80C64A8
 _080C6360:
 	adds r0, r4, 0
-	bl is_tile_x98
+	bl MetatileBehavior_IsSecretBaseShrub
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

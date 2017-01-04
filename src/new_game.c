@@ -141,7 +141,7 @@ void NewGameInitData(void)
     sub_80F7AA4();
     sub_80FA17C();
     sub_810FA54();
-    sub_8145A78();
+    ResetLotteryCorner();
     sub_8052E04();
     ScriptContext2_RunNewScript(gUnknown_0819FA81);
 }

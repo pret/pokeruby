@@ -2225,7 +2225,7 @@ _080BED00:
 	asrs r0, 24
 	cmp r0, 0x13
 	bgt _080BED40
-	ldr r1, _080BED3C @ =gUnknown_083D1444
+	ldr r1, _080BED3C @ =gTVNewsTextGroup2
 	subs r2, 0x1
 	b _080BED44
 	.align 2, 0
@@ -2233,9 +2233,9 @@ _080BED2C: .4byte gSaveBlock1
 _080BED30: .4byte 0x00002abe
 _080BED34: .4byte 0x00002abd
 _080BED38: .4byte gLocalTime
-_080BED3C: .4byte gUnknown_083D1444
+_080BED3C: .4byte gTVNewsTextGroup2
 _080BED40:
-	ldr r1, _080BED54 @ =gUnknown_083D1454
+	ldr r1, _080BED54 @ =gTVNewsTextGroup3
 	ldr r2, _080BED58 @ =0x00002abc
 _080BED44:
 	adds r0, r4, r2
@@ -2246,7 +2246,7 @@ _080BED44:
 	bl ShowFieldMessage
 	b _080BED82
 	.align 2, 0
-_080BED54: .4byte gUnknown_083D1454
+_080BED54: .4byte gTVNewsTextGroup3
 _080BED58: .4byte 0x00002abc
 _080BED5C:
 	ldrh r1, [r1]
@@ -2258,7 +2258,7 @@ _080BED5C:
 	adds r1, r4, r0
 	movs r0, 0
 	strb r0, [r1]
-	ldr r1, _080BED98 @ =gUnknown_083D1434
+	ldr r1, _080BED98 @ =gTVNewsTextGroup1
 	ldr r2, _080BED9C @ =0x00002abc
 	adds r0, r4, r2
 	ldrb r0, [r0]
@@ -2277,7 +2277,7 @@ _080BED86:
 	.align 2, 0
 _080BED90: .4byte gStringVar1
 _080BED94: .4byte 0x00002abd
-_080BED98: .4byte gUnknown_083D1434
+_080BED98: .4byte gTVNewsTextGroup1
 _080BED9C: .4byte 0x00002abc
 _080BEDA0: .4byte gScriptResult
 	thumb_func_end sub_80BECE8
@@ -6112,7 +6112,7 @@ _080C0B74:
 _080C0B78:
 	strb r0, [r1]
 _080C0B7A:
-	ldr r0, _080C0B98 @ =gUnknown_083D1524
+	ldr r0, _080C0B98 @ =gTVBravoTrainerTextGroup
 	lsls r1, r5, 2
 	adds r1, r0
 	ldr r0, [r1]
@@ -6124,7 +6124,7 @@ _080C0B7A:
 _080C0B8C: .4byte gStringVar1
 _080C0B90: .4byte gSpeciesNames
 _080C0B94: .4byte gUnknown_020387E8
-_080C0B98: .4byte gUnknown_083D1524
+_080C0B98: .4byte gTVBravoTrainerTextGroup
 	thumb_func_end DoTVShowBravoTrainerPokemonProfile
 
 	thumb_func_start DoTVShowBravoTrainerBattleTowerProfile
@@ -6385,7 +6385,7 @@ _080C0DC0:
 	bl StringCopy
 	bl TVShowDone
 _080C0DDE:
-	ldr r0, _080C0DFC @ =gUnknown_083D1548
+	ldr r0, _080C0DFC @ =gTVBravoTrainerBattleTowerTextGroup
 	lsls r1, r5, 2
 	adds r1, r0
 	ldr r0, [r1]
@@ -6397,7 +6397,7 @@ _080C0DDE:
 _080C0DF0: .4byte gStringVar1
 _080C0DF4: .4byte gStringVar2
 _080C0DF8: .4byte gSpeciesNames
-_080C0DFC: .4byte gUnknown_083D1548
+_080C0DFC: .4byte gTVBravoTrainerBattleTowerTextGroup
 	thumb_func_end DoTVShowBravoTrainerBattleTowerProfile
 
 	thumb_func_start DoTVShowTodaysSmartShopper
@@ -6640,7 +6640,7 @@ _080C1004:
 	bl TVShowConvertInternationalString
 	bl TVShowDone
 _080C1014:
-	ldr r0, _080C102C @ =gUnknown_083D14F0
+	ldr r0, _080C102C @ =gTVSmartShopperTextGroup
 	lsls r1, r6, 2
 	adds r1, r0
 	ldr r0, [r1]
@@ -6650,7 +6650,7 @@ _080C1014:
 	bx r0
 	.align 2, 0
 _080C1028: .4byte gStringVar1
-_080C102C: .4byte gUnknown_083D14F0
+_080C102C: .4byte gTVSmartShopperTextGroup
 	thumb_func_end DoTVShowTodaysSmartShopper
 
 	thumb_func_start DoTVShowTheNameRaterShow
@@ -7024,7 +7024,7 @@ _080C1370:
 	bl TVShowConvertInternationalString
 	bl TVShowDone
 _080C138A:
-	ldr r0, _080C13A8 @ =gUnknown_083D1584
+	ldr r0, _080C13A8 @ =gTVNameRaterTextGroup
 	lsls r1, r7, 2
 	adds r1, r0
 	ldr r0, [r1]
@@ -7036,7 +7036,7 @@ _080C138A:
 	.align 2, 0
 _080C13A0: .4byte gStringVar1
 _080C13A4: .4byte gStringVar2
-_080C13A8: .4byte gUnknown_083D1584
+_080C13A8: .4byte gTVNameRaterTextGroup
 	thumb_func_end DoTVShowTheNameRaterShow
 
 	thumb_func_start DoTVShowPokemonTodaySuccessfulCapture
@@ -7280,7 +7280,7 @@ _080C15D4: .4byte gUnknown_020387E8
 _080C15D8:
 	bl TVShowDone
 _080C15DC:
-	ldr r0, _080C15F0 @ =gUnknown_083D14C0
+	ldr r0, _080C15F0 @ =gTVPokemonTodayTextGroup
 	lsls r1, r6, 2
 	adds r1, r0
 	ldr r0, [r1]
@@ -7289,7 +7289,7 @@ _080C15DC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080C15F0: .4byte gUnknown_083D14C0
+_080C15F0: .4byte gTVPokemonTodayTextGroup
 	thumb_func_end DoTVShowPokemonTodaySuccessfulCapture
 
 	thumb_func_start DoTVShowPokemonTodayFailedCapture
@@ -7437,7 +7437,7 @@ _080C1734: .4byte gUnknown_020387E8
 _080C1738:
 	bl TVShowDone
 _080C173C:
-	ldr r0, _080C1750 @ =gUnknown_083D15D0
+	ldr r0, _080C1750 @ =gTVPokemonTodayFailedCaptureTextGroup
 	lsls r1, r5, 2
 	adds r1, r0
 	ldr r0, [r1]
@@ -7446,7 +7446,7 @@ _080C173C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080C1750: .4byte gUnknown_083D15D0
+_080C1750: .4byte gTVPokemonTodayFailedCaptureTextGroup
 	thumb_func_end DoTVShowPokemonTodayFailedCapture
 
 	thumb_func_start DoTVShowPokemonFanClubLetter
@@ -7649,7 +7649,7 @@ _080C193C:
 _080C1958: .4byte gStringVar4
 _080C195C: .4byte gUnknown_020387E8
 _080C1960:
-	ldr r0, _080C1974 @ =gUnknown_083D1470
+	ldr r0, _080C1974 @ =gTVFanClubTextGroup
 	lsls r1, r7, 2
 	adds r1, r0
 	ldr r0, [r1]
@@ -7659,7 +7659,7 @@ _080C196C:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080C1974: .4byte gUnknown_083D1470
+_080C1974: .4byte gTVFanClubTextGroup
 	thumb_func_end DoTVShowPokemonFanClubLetter
 
 	thumb_func_start DoTVShowRecentHappenings
@@ -7796,7 +7796,7 @@ _080C1ACC:
 _080C1AE8: .4byte gStringVar4
 _080C1AEC: .4byte gUnknown_020387E8
 _080C1AF0:
-	ldr r0, _080C1B04 @ =gUnknown_083D1490
+	ldr r0, _080C1B04 @ =gTVRecentHappeningsTextGroup
 	lsls r1, r6, 2
 	adds r1, r0
 	ldr r0, [r1]
@@ -7806,7 +7806,7 @@ _080C1AFC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080C1B04: .4byte gUnknown_083D1490
+_080C1B04: .4byte gTVRecentHappeningsTextGroup
 	thumb_func_end DoTVShowRecentHappenings
 
 	thumb_func_start DoTVShowPokemonFanClubOpinions
@@ -7900,7 +7900,7 @@ _080C1BC0:
 	bl sub_80EB3FC
 	bl TVShowDone
 _080C1BD6:
-	ldr r0, _080C1BF0 @ =gUnknown_083D14A8
+	ldr r0, _080C1BF0 @ =gTVFanClubOpinionsTextGroup
 	lsls r1, r5, 2
 	adds r1, r0
 	ldr r0, [r1]
@@ -7911,7 +7911,7 @@ _080C1BD6:
 	.align 2, 0
 _080C1BE8: .4byte gStringVar1
 _080C1BEC: .4byte gStringVar3
-_080C1BF0: .4byte gUnknown_083D14A8
+_080C1BF0: .4byte gTVFanClubOpinionsTextGroup
 	thumb_func_end DoTVShowPokemonFanClubOpinions
 
 	thumb_func_start nullsub_22
@@ -8108,7 +8108,7 @@ _080C1DB6:
 	strb r0, [r1]
 	bl TakeTVShowInSearchOfTrainersOffTheAir
 _080C1DF8:
-	ldr r0, _080C1E34 @ =gUnknown_083D1600
+	ldr r0, _080C1E34 @ =gTVGabbyAndTyTextGroup
 	lsls r1, r7, 2
 	adds r1, r0
 	ldr r0, [r1]
@@ -8127,7 +8127,7 @@ _080C1E24: .4byte gStringVar3
 _080C1E28: .4byte 0x00002b12
 _080C1E2C: .4byte gScriptResult
 _080C1E30: .4byte gUnknown_020387E8
-_080C1E34: .4byte gUnknown_083D1600
+_080C1E34: .4byte gTVGabbyAndTyTextGroup
 	thumb_func_end DoTVShowInSearchOfTrainers
 
 	thumb_func_start DoTVShowPokemonAngler
@@ -8209,7 +8209,7 @@ _080C1EBC:
 	bl sub_80BF088
 	bl TVShowDone
 _080C1EE4:
-	ldr r0, _080C1F04 @ =gUnknown_083D15EC
+	ldr r0, _080C1F04 @ =gTVFishingGuruAdviceTextGroup
 	lsls r1, r5, 2
 	adds r1, r0
 	ldr r0, [r1]
@@ -8221,7 +8221,7 @@ _080C1EE4:
 _080C1EF8: .4byte gStringVar1
 _080C1EFC: .4byte gStringVar2
 _080C1F00: .4byte gSpeciesNames
-_080C1F04: .4byte gUnknown_083D15EC
+_080C1F04: .4byte gTVFishingGuruAdviceTextGroup
 	thumb_func_end DoTVShowPokemonAngler
 
 	thumb_func_start DoTVShowTheWorldOfMasters
@@ -8305,7 +8305,7 @@ _080C1F8C:
 	bl StringCopy
 	bl TVShowDone
 _080C1FB6:
-	ldr r0, _080C1FD8 @ =gUnknown_083D15F4
+	ldr r0, _080C1FD8 @ =gTVWorldOfMastersTextGroup
 	lsls r1, r5, 2
 	adds r1, r0
 	ldr r0, [r1]
@@ -8318,7 +8318,7 @@ _080C1FC8: .4byte gStringVar1
 _080C1FCC: .4byte gStringVar2
 _080C1FD0: .4byte gStringVar3
 _080C1FD4: .4byte gSpeciesNames
-_080C1FD8: .4byte gUnknown_083D15F4
+_080C1FD8: .4byte gTVWorldOfMastersTextGroup
 	thumb_func_end DoTVShowTheWorldOfMasters
 
 

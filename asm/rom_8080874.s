@@ -357,7 +357,7 @@ sub_8080AE4: @ 8080AE4
 _08080B18: .4byte sub_8080B9C
 _08080B1C:
 	adds r0, r4, 0
-	bl sub_8056F08
+	bl MetatileBehavior_IsNonAnimDoor
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _08080B40 @ =task_map_chg_seq_0807E2CC

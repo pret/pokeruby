@@ -5295,13 +5295,13 @@ _08050D44:
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
-	ldr r1, _08050D6C @ =gUnknown_3001BB4
+	ldr r1, _08050D6C @ =gSoftResetDisabled
 	movs r0, 0x1
 	strb r0, [r1]
 	b _08050E28
 	.align 2, 0
 _08050D68: .4byte gUnknown_03004854
-_08050D6C: .4byte gUnknown_3001BB4
+_08050D6C: .4byte gSoftResetDisabled
 _08050D70:
 	bl sub_8125E2C
 	ldr r0, _08050D7C @ =gUnknown_03004854
@@ -5389,13 +5389,13 @@ _08050E06:
 	str r0, [r1]
 	cmp r0, 0x5
 	ble _08050E28
-	ldr r1, _08050E24 @ =gUnknown_3001BB4
+	ldr r1, _08050E24 @ =gSoftResetDisabled
 	movs r0, 0
 	strb r0, [r1]
 	movs r0, 0x1
 	b _08050E2A
 	.align 2, 0
-_08050E24: .4byte gUnknown_3001BB4
+_08050E24: .4byte gSoftResetDisabled
 _08050E28:
 	movs r0, 0
 _08050E2A:

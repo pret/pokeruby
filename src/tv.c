@@ -35,8 +35,8 @@ extern u8 gUnknown_020387E8;
 extern struct UnkTvStruct gUnknown_03005D38;
 
 extern u8 gSpeciesNames[][11];
-extern u8 *gUnknown_083D14BC[];
-extern struct OutbreakPokemon gUnknown_083D13F8[5];
+extern u8 *gTVPokemonOutbreakTextGroup[];
+extern struct OutbreakPokemon gPokeOutbreakSpeciesList[5];
 
 void sub_80BE478(void) {
     u16 playerNameLength;
@@ -202,16 +202,16 @@ void sub_80BE778(void) {
         tvShow->massOutbreak.var00 = TVSHOW_MASS_OUTBREAK;
         tvShow->massOutbreak.var01 = 1;
 
-        tvShow->massOutbreak.level = gUnknown_083D13F8[val].level;
+        tvShow->massOutbreak.level = gPokeOutbreakSpeciesList[val].level;
         tvShow->massOutbreak.var02 = 0;
         tvShow->massOutbreak.var03 = 0;
-        tvShow->massOutbreak.species = gUnknown_083D13F8[val].species;
+        tvShow->massOutbreak.species = gPokeOutbreakSpeciesList[val].species;
         tvShow->massOutbreak.var0E = 0;
-        tvShow->massOutbreak.moves[0] = gUnknown_083D13F8[val].moves[0];
-        tvShow->massOutbreak.moves[1] = gUnknown_083D13F8[val].moves[1];
-        tvShow->massOutbreak.moves[2] = gUnknown_083D13F8[val].moves[2];
-        tvShow->massOutbreak.moves[3] = gUnknown_083D13F8[val].moves[3];
-        tvShow->massOutbreak.locationMapNum = gUnknown_083D13F8[val].location;
+        tvShow->massOutbreak.moves[0] = gPokeOutbreakSpeciesList[val].moves[0];
+        tvShow->massOutbreak.moves[1] = gPokeOutbreakSpeciesList[val].moves[1];
+        tvShow->massOutbreak.moves[2] = gPokeOutbreakSpeciesList[val].moves[2];
+        tvShow->massOutbreak.moves[3] = gPokeOutbreakSpeciesList[val].moves[3];
+        tvShow->massOutbreak.locationMapNum = gPokeOutbreakSpeciesList[val].location;
         tvShow->massOutbreak.locationMapGroup = 0;
         tvShow->massOutbreak.var12 = 0;
         tvShow->massOutbreak.probability = 0x32;
@@ -276,7 +276,7 @@ void DoTVShowPokemonNewsMassOutbreak(void) {
     TVShowDone();
     StartMassOutbreak();
 
-    ShowFieldMessage(gUnknown_083D14BC[gUnknown_020387E8]);
+    ShowFieldMessage(gTVPokemonOutbreakTextGroup[gUnknown_020387E8]);
 }
 
 asm(".section .text_d");

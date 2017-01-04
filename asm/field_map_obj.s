@@ -10911,7 +10911,7 @@ _0805F950:
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
-	ldr r3, _0805F984 @ =sub_8056E14
+	ldr r3, _0805F984 @ =MetatileBehavior_IsPokeGrass
 	ldr r4, [r4]
 	adds r0, r6, 0
 	adds r1, r7, 0
@@ -10924,7 +10924,7 @@ _0805F978:
 	bx r1
 	.align 2, 0
 _0805F980: .4byte gUnknown_08375594
-_0805F984: .4byte sub_8056E14
+_0805F984: .4byte MetatileBehavior_IsPokeGrass
 	thumb_func_end mss_08062EA4
 
 	thumb_func_start FieldObjectCB_TreeDisguise

@@ -105,7 +105,7 @@ void LoadSerializedGame(void)
     LoadMapObjects();
 }
 
-void LoadPlayerData(void)
+void LoadPlayerBag(void)
 {
     int i;
 
@@ -129,12 +129,12 @@ void LoadPlayerData(void)
     for(i = 0; i < 46; i++)
         gLoadedSaveData->berries[i] = gSaveBlock1.bagPocket_Berries[i];
 
-    // load mail
+    // load mail.
     for(i = 0; i < 16; i++)
         gLoadedSaveData->mail[i] = gSaveBlock1.mail[i];
 }
 
-void SavePlayerData(void)
+void SavePlayerBag(void)
 {
     int i;
 
@@ -158,7 +158,7 @@ void SavePlayerData(void)
     for(i = 0; i < 46; i++)
         gSaveBlock1.bagPocket_Berries[i] = gLoadedSaveData->berries[i];
 
-    // save mail
+    // save mail.
     for(i = 0; i < 16; i++)
         gSaveBlock1.mail[i] = gLoadedSaveData->mail[i];
 }

@@ -60,7 +60,7 @@ u16 gKeyRepeatStartDelay;
 u8 gUnknown_3001764;
 struct Main gMain;
 u16 gKeyRepeatContinueDelay;
-u8 gUnknown_3001BB4;
+u8 gSoftResetDisabled;
 IntrFunc gIntrTable[INTR_COUNT];
 bool8 gLinkVSyncDisabled;
 u32 IntrMain_Buffer[0x200];
@@ -91,7 +91,7 @@ void AgbMain()
     InitMapMusic();
     SeedRngWithRtc();
 
-    gUnknown_3001BB4 = 0;
+    gSoftResetDisabled = FALSE;
 
     if (gUnknown_3004820 != 1)
         SetMainCallback2(0);
@@ -102,7 +102,7 @@ void AgbMain()
     {
         ReadKeys();
 
-        if (!gUnknown_3001BB4
+        if (gSoftResetDisabled == FALSE
          && (gMain.heldKeysRaw & A_BUTTON)
          && (gMain.heldKeysRaw & B_START_SELECT) == B_START_SELECT)
             DoSoftReset();
@@ -333,8 +333,7 @@ static void SerialIntr(void)
 }
 
 static void IntrDummy(void)
-{
-}
+{}
 
 static void WaitForVBlank(void)
 {

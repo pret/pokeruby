@@ -628,9 +628,9 @@ u8 sub_8053B60(struct UnkPlayerStruct *playerStruct, u8 a2, u16 a3, u8 a4)
 {
     if (FlagGet(SYS_CRUISE_MODE) && a4 == 6)
         return 4;
-    if (sub_8056F24(a3) == TRUE)
+    if (MetatileBehavior_IsDeepSouthWarp(a3) == TRUE)
         return 2;
-    if (sub_8056F08(a3) == TRUE || MetatileBehavior_IsDoor(a3) == TRUE)
+    if (MetatileBehavior_IsNonAnimDoor(a3) == TRUE || MetatileBehavior_IsDoor(a3) == TRUE)
         return 1;
     if (MetatileBehavior_IsSouthArrowWarp(a3) == TRUE)
         return 2;

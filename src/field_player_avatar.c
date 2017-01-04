@@ -467,7 +467,7 @@ static u8 sub_8058F6C(s16 a, s16 b, u8 c)
                 b = gMapObjects[mapObjectId].coords2.y;
                 MoveCoords(c, &a, &b);
                 if (npc_block_way(&gMapObjects[mapObjectId], a, b, c) == 0
-                 && sub_8056F08(MapGridGetMetatileBehaviorAt(a, b)) == 0)
+                 && MetatileBehavior_IsNonAnimDoor(MapGridGetMetatileBehaviorAt(a, b)) == 0)
                 {
                     StartStrengthAnim(mapObjectId, c);
                     return 1;
@@ -787,7 +787,7 @@ static void PlayCollisionSoundIfNotFacingWarp(u8 a)
         {
             PlayerGetDestCoords(&x, &y);
             MoveCoords(2, &x, &y);
-            if (is_tile_x69_2_warp_door(MapGridGetMetatileBehaviorAt(x, y)))
+            if (MetatileBehavior_IsWarpDoor(MapGridGetMetatileBehaviorAt(x, y)))
                 return;
         }
         PlaySE(SE_WALL_HIT);

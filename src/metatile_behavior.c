@@ -5,12 +5,13 @@ extern u8 gUnknown_08308E2C[];
 
 bool8 MetatileBehavior_IsWaterfall(u8);
 
-bool8 sub_8056D9C(u8 var)
+// only used as default case for checking jump landing in field_ground_effect.
+bool8 MetatileBehavior_IsATile(u8 var)
 {
     return TRUE;
 }
 
-bool8 sub_8056DA0(u8 var)
+bool8 MetatileBehavior_IsEncounterTile(u8 var)
 {
     if((gUnknown_08308E2C[var] & 1) != 0)
         return TRUE;
@@ -50,7 +51,7 @@ bool8 MetatileBehavior_IsJumpSouth(u8 var)
         return FALSE;
 }
 
-bool8 sub_8056E14(u8 var)
+bool8 MetatileBehavior_IsPokeGrass(u8 var)
 {
     if(var == MB_TALL_GRASS || var == MB_LONG_GRASS)
         return TRUE;
@@ -90,7 +91,7 @@ bool8 MetatileBehavior_IsIce(u8 var)
         return FALSE;
 }
 
-bool8 is_tile_x69_2_warp_door(u8 var)
+bool8 MetatileBehavior_IsWarpDoor(u8 var)
 {
     if(var == MB_ANIMATED_DOOR)
         return TRUE;
@@ -130,7 +131,7 @@ bool8 MetatileBehavior_IsLadder(u8 var)
         return FALSE;
 }
 
-bool8 sub_8056F08(u8 var)
+bool8 MetatileBehavior_IsNonAnimDoor(u8 var)
 {
     if(var == MB_NON_ANIMATED_DOOR || var == MB_WATER_DOOR || var == MB_DEEP_SOUTH_WARP)
         return TRUE;
@@ -138,7 +139,7 @@ bool8 sub_8056F08(u8 var)
         return FALSE;
 }
 
-bool8 sub_8056F24(u8 var)
+bool8 MetatileBehavior_IsDeepSouthWarp(u8 var)
 {
     if(var == MB_DEEP_SOUTH_WARP)
         return TRUE;
@@ -201,7 +202,7 @@ bool8 MetatileBehavior_IsArrowWarp(u8 var)
         return var2;
 }
 
-bool8 sub_8056FFC(u8 var)
+bool8 MetatileBehavior_IsMoveTile(u8 var)
 {
     if((var >= MB_WALK_EAST && var <= MB_TRICK_HOUSE_PUZZLE_8_FLOOR) || (var >= MB_EASTWARD_CURRENT && var <= MB_SOUTHWARD_CURRENT)
     || var == MB_MUDDY_SLOPE || var == MB_CRACKED_FLOOR || var == MB_WATERFALL || var == MB_ICE || var == MB_BB || var == MB_BC)
@@ -340,7 +341,7 @@ bool8 MetatileBehavior_IsCounter(u8 var)
 
 bool8 MetatileBehavior_IsPlayerFacingTVScreen(u8 tile, u8 playerDir)
 {
-    if(playerDir != 2) // if the player isn't facing north, forget about it.
+    if(playerDir != CONNECTION_NORTH) // if the player isn't facing north, forget about it.
         return FALSE;
     else if(tile == MB_TELEVISION) // is the player's north tile a TV?
         return TRUE;
@@ -373,7 +374,7 @@ bool8 sub_80571C0(u8 var)
         return FALSE;
 }
 
-bool8 sub_80571EC(u8 var)
+bool8 MetatileBehavior_IsSecretBaseCave(u8 var)
 {
     if(var == MB_SECRET_BASE_SPOT_RED_CAVE || var == MB_SECRET_BASE_SPOT_BROWN_CAVE || var == MB_SECRET_BASE_SPOT_YELLOW_CAVE || var == MB_SECRET_BASE_SPOT_BLUE_CAVE)
         return TRUE;
@@ -381,7 +382,7 @@ bool8 sub_80571EC(u8 var)
         return FALSE;
 }
 
-bool8 sub_805720C(u8 var)
+bool8 MetatileBehavior_IsSecretBaseTree(u8 var)
 {
     if(var == MB_SECRET_BASE_SPOT_TREE_1 || var == MB_SECRET_BASE_SPOT_TREE_2)
         return TRUE;
@@ -389,7 +390,7 @@ bool8 sub_805720C(u8 var)
         return FALSE;
 }
 
-bool8 is_tile_x98(u8 var)
+bool8 MetatileBehavior_IsSecretBaseShrub(u8 var)
 {
     if(var == MB_SECRET_BASE_SPOT_SHRUB)
         return TRUE;
@@ -397,7 +398,7 @@ bool8 is_tile_x98(u8 var)
         return FALSE;
 }
 
-bool8 sub_8057238(u8 var)
+bool8 MetatileBehavior_IsSecretBasePC(u8 var)
 {
     if(var == MB_SECRET_BASE_PC)
         return TRUE;
@@ -617,7 +618,7 @@ u8 sub_8057450(u8 var)
 
 bool8 MetatileBehavior_IsLandWildEncounter(u8 var)
 {
-    if(MetatileBehavior_IsSurfableWaterOrUnderwater(var) == FALSE && sub_8056DA0(var) == TRUE)
+    if(MetatileBehavior_IsSurfableWaterOrUnderwater(var) == FALSE && MetatileBehavior_IsEncounterTile(var) == TRUE)
         return TRUE;
     else
         return FALSE;
@@ -625,7 +626,7 @@ bool8 MetatileBehavior_IsLandWildEncounter(u8 var)
 
 bool8 MetatileBehavior_IsWaterWildEncounter(u8 var)
 {
-    if(MetatileBehavior_IsSurfableWaterOrUnderwater(var) == TRUE && sub_8056DA0(var) == TRUE)
+    if(MetatileBehavior_IsSurfableWaterOrUnderwater(var) == TRUE && MetatileBehavior_IsEncounterTile(var) == TRUE)
         return TRUE;
     else
         return FALSE;
@@ -671,7 +672,7 @@ bool8 MetatileBehavior_IsShallowFlowingWater(u8 var)
         return FALSE;
 }
 
-bool8 sub_8057540(u8 var)
+bool8 MetatileBehavior_IsThinIce(u8 var)
 {
     if(var == MB_THIN_ICE)
         return TRUE;
@@ -679,7 +680,7 @@ bool8 sub_8057540(u8 var)
         return FALSE;
 }
 
-bool8 sub_8057554(u8 var)
+bool8 MetatileBehavior_IsCrackedIce(u8 var)
 {
     if(var == MB_CRACKED_ICE)
         return TRUE;
@@ -815,7 +816,7 @@ bool8 MetatileBehavior_IsPacifidlogLog(u8 var)
         return FALSE;
 }
 
-bool8 is_tile_x8C(u8 var)
+bool8 MetatileBehavior_IsTrickHousePuzzleDoor(u8 var)
 {
     if(var == MB_TRICK_HOUSE_PUZZLE_DOOR)
         return TRUE;
@@ -823,7 +824,7 @@ bool8 is_tile_x8C(u8 var)
         return FALSE;
 }
 
-bool8 is_tile_x85(u8 var)
+bool8 MetatileBehavior_IsRegionMap(u8 var)
 {
     if(var == MB_REGION_MAP)
         return TRUE;
@@ -831,7 +832,7 @@ bool8 is_tile_x85(u8 var)
         return FALSE;
 }
 
-bool8 is_tile_x8B(u8 var)
+bool8 MetatileBehavior_IsClosedSootpolisGymDoor(u8 var)
 {
     if(var == MB_CLOSED_SOOTOPOLIS_GYM_DOOR)
         return TRUE;
@@ -839,7 +840,7 @@ bool8 is_tile_x8B(u8 var)
         return FALSE;
 }
 
-bool8 is_tile_x8A(u8 var)
+bool8 MetatileBehavior_IsRoulette(u8 var)
 {
     if(var == MB_ROULETTE)
         return TRUE;
@@ -847,7 +848,7 @@ bool8 is_tile_x8A(u8 var)
         return FALSE;
 }
 
-bool8 is_tile_x87(u8 var)
+bool8 MetatileBehavior_IsPokeblockFeeder(u8 var)
 {
     if(var == MB_POKEBLOCK_FEEDER)
         return TRUE;
@@ -871,7 +872,7 @@ bool8 MetatileBehavior_0xBC(u8 var)
         return FALSE;
 }
 
-bool8 sub_8057798(u8 var)
+bool8 MetatileBehavior_IsLavaridgeB1FWarp(u8 var)
 {
     if(var == MB_LAVARIDGE_GYM_B1F_WARP)
         return TRUE;
@@ -879,7 +880,7 @@ bool8 sub_8057798(u8 var)
         return FALSE;
 }
 
-bool8 is_role_x68(u8 var)
+bool8 MetatileBehavior_IsLavaridge1FWarp(u8 var)
 {
     if(var == MB_LAVARIDGE_GYM_1F_WARP)
         return TRUE;
@@ -903,7 +904,7 @@ bool8 MetatileBehavior_IsSurfableFishableWater(u8 var)
         return FALSE;
 }
 
-bool8 sub_8057804(u8 var)
+bool8 MetatileBehavior_IsMtPyreHole(u8 var)
 {
     if(var == MB_MT_PYRE_HOLE)
         return TRUE;
@@ -911,7 +912,7 @@ bool8 sub_8057804(u8 var)
         return FALSE;
 }
 
-bool8 sub_8057818(u8 var)
+bool8 MetatileBehavior_IsCrackedFloorHole(u8 var)
 {
     if(var == MB_CRACKED_FLOOR_HOLE)
         return TRUE;
@@ -919,7 +920,7 @@ bool8 sub_8057818(u8 var)
         return FALSE;
 }
 
-bool8 sub_805782C(u8 var)
+bool8 MetatileBehavior_IsCrackedFloor(u8 var)
 {
     if(var == MB_CRACKED_FLOOR)
         return TRUE;
@@ -1007,7 +1008,7 @@ bool8 sub_805791C(u8 var)
         return FALSE;
 }
 
-bool8 sub_8057930(u8 var)
+bool8 MetatileBehavior_IsPictureBookShelf(u8 var)
 {
     if(var == MB_PICTURE_BOOK_SHELF)
         return TRUE;
@@ -1015,7 +1016,7 @@ bool8 sub_8057930(u8 var)
         return FALSE;
 }
 
-bool8 sub_8057944(u8 var)
+bool8 MetatileBehavior_IsBookShelf(u8 var)
 {
     if(var == MB_BOOKSHELF)
         return TRUE;
@@ -1023,7 +1024,7 @@ bool8 sub_8057944(u8 var)
         return FALSE;
 }
 
-bool8 sub_8057958(u8 var)
+bool8 MetatileBehavior_IsPokeCenterBookShelf(u8 var)
 {
     if(var == MB_POKEMON_CENTER_BOOKSHELF)
         return TRUE;
@@ -1031,7 +1032,7 @@ bool8 sub_8057958(u8 var)
         return FALSE;
 }
 
-bool8 sub_805796C(u8 var)
+bool8 MetatileBehavior_IsVase(u8 var)
 {
     if(var == MB_VASE)
         return TRUE;
@@ -1039,7 +1040,7 @@ bool8 sub_805796C(u8 var)
         return FALSE;
 }
 
-bool8 sub_8057980(u8 var)
+bool8 MetatileBehavior_IsTrashCan(u8 var)
 {
     if(var == MB_TRASH_CAN)
         return TRUE;
@@ -1047,7 +1048,7 @@ bool8 sub_8057980(u8 var)
         return FALSE;
 }
 
-bool8 sub_8057994(u8 var)
+bool8 MetatileBehavior_IsShopShelf(u8 var)
 {
     if(var == MB_SHOP_SHELF)
         return TRUE;
@@ -1055,7 +1056,7 @@ bool8 sub_8057994(u8 var)
         return FALSE;
 }
 
-bool8 sub_80579A8(u8 var)
+bool8 MetatileBehavior_IsBlueprint(u8 var)
 {
     if(var == MB_BLUEPRINT)
         return TRUE;
