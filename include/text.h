@@ -8,6 +8,7 @@
 #define CHAR_COLON          0xF0
 #define EXT_CTRL_CODE_BEGIN 0xFC // extended control code
 #define PLACEHOLDER_BEGIN   0xFD // string placeholder
+#define CHAR_NEWLINE        0xFE
 #define EOS                 0xFF // end of string
 
 struct WindowConfig
