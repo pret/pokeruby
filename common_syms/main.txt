@@ -2,7 +2,7 @@ gKeyRepeatStartDelay
 gUnknown_3001764
 gMain
 gKeyRepeatContinueDelay
-gUnknown_3001BB4
+gSoftResetDisabled
 gIntrTable
 gLinkVSyncDisabled
 IntrMain_Buffer

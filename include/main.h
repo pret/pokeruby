@@ -45,7 +45,7 @@ struct Main
 
 extern u8 gUnknown_3001764;
 extern struct Main gMain;
-extern u8 gUnknown_3001BB4;
+extern bool8 gSoftResetDisabled;
 extern bool8 gLinkVSyncDisabled;
 
 extern const u8 gGameVersion;
