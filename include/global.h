@@ -24,6 +24,7 @@ enum
 {
     VERSION_SAPPHIRE = 1,
     VERSION_RUBY = 2,
+    VERSION_EMERALD = 3,
 };
 
 enum LanguageId {

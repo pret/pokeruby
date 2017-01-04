@@ -40,14 +40,14 @@ void PokemonSummaryScreen_PrintTrainerMemo(struct Pokemon *pokemon, u8 left, u8 
 
         if (GetMonData(pokemon, MON_DATA_MET_LEVEL) == 0) {
             ptr = PokemonSummaryScreen_CopyPokemonLevel(ptr, 5);
-            ptr[0] = CHAR_NEWLINE;
+            *ptr = CHAR_NEWLINE;
             ptr++;
 
             CopyLocationName(gStringVar1, locationMet);
             ptr = sub_80A1E9C(ptr, gStringVar1, 14);
             StringCopy(ptr, gOtherText_Egg2);
         } else if (locationMet >= 88) {
-            ptr[0] = CHAR_NEWLINE;
+            *ptr = CHAR_NEWLINE;
             ptr++;
 
             StringCopy(ptr, gOtherText_ObtainedInTrade);
@@ -55,7 +55,7 @@ void PokemonSummaryScreen_PrintTrainerMemo(struct Pokemon *pokemon, u8 left, u8 
             u8 levelMet = GetMonData(pokemon, MON_DATA_MET_LEVEL);
 
             ptr = PokemonSummaryScreen_CopyPokemonLevel(ptr, levelMet);
-            ptr[0] = CHAR_NEWLINE;
+            *ptr = CHAR_NEWLINE;
             ptr++;
 
             CopyLocationName(gStringVar1, locationMet);
@@ -65,8 +65,8 @@ void PokemonSummaryScreen_PrintTrainerMemo(struct Pokemon *pokemon, u8 left, u8 
     } else {
         gameMet = GetMonData(pokemon, MON_DATA_MET_GAME);
 
-        if (!(gameMet == VERSION_RUBY || gameMet == VERSION_SAPPHIRE || gameMet == 3)) {
-            ptr[0] = CHAR_NEWLINE;
+        if (!(gameMet == VERSION_RUBY || gameMet == VERSION_SAPPHIRE || gameMet == VERSION_EMERALD)) {
+            *ptr = CHAR_NEWLINE;
             ptr++;
 
             StringCopy(ptr, gOtherText_ObtainedInTrade);
@@ -76,12 +76,12 @@ void PokemonSummaryScreen_PrintTrainerMemo(struct Pokemon *pokemon, u8 left, u8 
                 u8 levelMet = GetMonData(pokemon, MON_DATA_MET_LEVEL);
 
                 ptr = PokemonSummaryScreen_CopyPokemonLevel(ptr, levelMet);
-                ptr[0] = CHAR_NEWLINE;
+                *ptr = CHAR_NEWLINE;
                 ptr++;
 
                 StringCopy(ptr, gOtherText_FatefulEncounter);
             } else if (locationMet >= 88) {
-                ptr[0] = CHAR_NEWLINE;
+                *ptr = CHAR_NEWLINE;
                 ptr++;
 
                 StringCopy(ptr, gOtherText_ObtainedInTrade);
@@ -89,7 +89,7 @@ void PokemonSummaryScreen_PrintTrainerMemo(struct Pokemon *pokemon, u8 left, u8 
                 u8 levelMet = GetMonData(pokemon, MON_DATA_MET_LEVEL);
 
                 ptr = PokemonSummaryScreen_CopyPokemonLevel(ptr, levelMet);
-                ptr[0] = CHAR_NEWLINE;
+                *ptr = CHAR_NEWLINE;
                 ptr++;
 
                 CopyLocationName(gStringVar1, locationMet);
