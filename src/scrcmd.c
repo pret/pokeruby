@@ -1085,7 +1085,7 @@ bool8 ScrCmd_lockall(struct ScriptContext *ctx)
     }
     else
     {
-        sub_8064D20();
+        ScriptFreezeMapObjects();
         SetupNativeScript(ctx, sub_8064CFC);
         return TRUE;
     }
@@ -1106,7 +1106,7 @@ bool8 ScrCmd_lock(struct ScriptContext *ctx)
         }
         else
         {
-            sub_8064D20();
+            ScriptFreezeMapObjects();
             SetupNativeScript(ctx, sub_8064CFC);
         }
 

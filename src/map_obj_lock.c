@@ -36,7 +36,7 @@ bool8 sub_8064CFC(void)
     }
 }
 
-void sub_8064D20(void)
+void ScriptFreezeMapObjects(void)
 {
     FreezeMapObjects();
     CreateTask(sub_8064CDC, 80);

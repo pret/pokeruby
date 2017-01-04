@@ -1259,7 +1259,7 @@ _080BE134: .4byte gSaveBlock2
 sub_80BE138: @ 80BE138
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80BFB94
+	bl GetPlayerTrainerId
 	strb r0, [r4, 0x1E]
 	lsrs r2, r0, 8
 	strb r2, [r4, 0x1F]
@@ -1282,7 +1282,7 @@ sub_80BE138: @ 80BE138
 sub_80BE160: @ 80BE160
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80BFB94
+	bl GetPlayerTrainerId
 	adds r1, r4, 0
 	adds r1, 0x20
 	strb r0, [r1]
@@ -2832,7 +2832,7 @@ sub_80BF1B4: @ 80BF1B4
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldr r7, _080BF1F4 @ =gSaveBlock1 + 0x2738
-	bl sub_80BFB94
+	bl GetPlayerTrainerId
 	adds r5, r0, 0
 	movs r4, 0x5
 _080BF1C4:
@@ -4054,7 +4054,7 @@ _080BFB0C: .4byte gStringVar1
 	thumb_func_start sub_80BFB10
 sub_80BFB10: @ 80BFB10
 	push {r4,lr}
-	bl sub_80BFB94
+	bl GetPlayerTrainerId
 	adds r4, r0, 0
 	ldr r0, _080BFB38 @ =gSpecialVar_0x8004
 	ldrh r1, [r0]
@@ -4127,8 +4127,8 @@ _080BFB90:
 	bx r1
 	thumb_func_end sub_80BFB54
 
-	thumb_func_start sub_80BFB94
-sub_80BFB94: @ 80BFB94
+	thumb_func_start GetPlayerTrainerId
+GetPlayerTrainerId: @ 80BFB94
 	ldr r2, _080BFBAC @ =gSaveBlock2
 	ldrb r0, [r2, 0xD]
 	lsls r0, 24
@@ -4143,7 +4143,7 @@ sub_80BFB94: @ 80BFB94
 	bx lr
 	.align 2, 0
 _080BFBAC: .4byte gSaveBlock2
-	thumb_func_end sub_80BFB94
+	thumb_func_end GetPlayerTrainerId
 
 	thumb_func_start CheckForBigMovieOrEmergencyNewsOnTV
 CheckForBigMovieOrEmergencyNewsOnTV: @ 80BFBB0

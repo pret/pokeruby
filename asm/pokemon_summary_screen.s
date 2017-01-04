@@ -5739,8 +5739,8 @@ _080A065C: .4byte 0x0000044c
 _080A0660: .4byte 0x0000103d
 	thumb_func_end sub_80A057C
 
-	thumb_func_start sub_80A0664
-sub_80A0664: @ 80A0664
+	thumb_func_start PokemonSummaryScreen_CheckOT
+PokemonSummaryScreen_CheckOT: @ 80A0664
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	ldr r0, _080A06A0 @ =0x02018000
@@ -5774,7 +5774,7 @@ _080A06A4: .4byte gEnemyParty
 _080A06A8: .4byte gLinkPlayers
 _080A06AC: .4byte gStringVar1
 _080A06B0:
-	bl sub_80BFB94
+	bl GetPlayerTrainerId
 	adds r5, r0, 0
 	ldr r0, _080A06F0 @ =0x0000ffff
 	ands r5, r0
@@ -5813,7 +5813,7 @@ _080A0702:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80A0664
+	thumb_func_end PokemonSummaryScreen_CheckOT
 
 	thumb_func_start sub_80A0708
 sub_80A0708: @ 80A0708
@@ -5855,7 +5855,7 @@ _080A073C:
 _080A0750: .4byte gOtherText_EggNicePlace
 _080A0754:
 	adds r0, r4, 0
-	bl sub_80A0664
+	bl PokemonSummaryScreen_CheckOT
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A0768

@@ -18,7 +18,7 @@ extern const u8 gOtherText_FatefulEncounter[];
 extern const u8 gOtherText_Met2[];
 
 u8 *sub_80A1E9C(u8 *dest, u8 *src, u8);
-u8 sub_80A0664(struct Pokemon *pokemon);
+u8 PokemonSummaryScreen_CheckOT(struct Pokemon *pokemon);
 u8 *PokemonSummaryScreen_CopyPokemonLevel(u8 *dest, u8 level);
 
 void PokemonSummaryScreen_PrintTrainerMemo(struct Pokemon *pokemon, u8 left, u8 top) {
@@ -35,7 +35,7 @@ void PokemonSummaryScreen_PrintTrainerMemo(struct Pokemon *pokemon, u8 left, u8 
 
     ptr = StringCopy(ptr, gOtherText_Nature);
 
-    if (sub_80A0664(pokemon) == TRUE) {
+    if (PokemonSummaryScreen_CheckOT(pokemon) == TRUE) {
         locationMet = GetMonData(pokemon, MON_DATA_MET_LOCATION);
 
         if (GetMonData(pokemon, MON_DATA_MET_LEVEL) == 0) {
