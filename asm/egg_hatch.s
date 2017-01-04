@@ -304,7 +304,7 @@ _08042B08:
 	adds r1, r6, 0
 	bl StringCopy
 	adds r0, r4, 0
-	bl sub_814A568
+	bl SanitizeNameString
 	movs r0, 0x1
 	b _08042B42
 	.align 2, 0
@@ -409,7 +409,7 @@ _08042BB4:
 	str r5, [sp, 0x4]
 	mov r4, r8
 	str r4, [sp, 0x8]
-	bl sub_800D334
+	bl HandleLoadSpecialPokePic
 	adds r0, r7, 0
 	bl sub_8040990
 	bl LoadCompressedObjectPalette

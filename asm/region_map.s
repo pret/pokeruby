@@ -3034,8 +3034,8 @@ _080FC026:
 	bx r1
 	thumb_func_end CopyMapName
 
-	thumb_func_start sub_80FC02C
-sub_80FC02C: @ 80FC02C
+	thumb_func_start CopyLocationName
+CopyLocationName: @ 80FC02C
 	push {lr}
 	lsls r1, 16
 	lsrs r1, 16
@@ -3051,7 +3051,7 @@ _080FC042:
 	bx r1
 	.align 2, 0
 _080FC048: .4byte gOtherText_Hideout
-	thumb_func_end sub_80FC02C
+	thumb_func_end CopyLocationName
 
 	thumb_func_start sub_80FC04C
 sub_80FC04C: @ 80FC04C

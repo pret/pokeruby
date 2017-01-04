@@ -3,7 +3,7 @@
 #include "asm.h"
 #include "field_map_obj.h"
 #include "rom4.h"
-#include "flag.h"
+#include "event_data.h"
 #include "main.h"
 #include "menu.h"
 #include "rng.h"
@@ -1558,7 +1558,7 @@ u8 Fishing16(struct Task *task)
     {
         gPlayerAvatar.unk6 = 0;
         ScriptContext2_Disable();
-        sub_806451C();
+        UnfreezeMapObjects();
         MenuZeroFillScreen();
         sub_80BE97C(0);
         DestroyTask(FindTaskIdByFunc(Task_Fishing));

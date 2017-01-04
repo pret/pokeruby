@@ -82,7 +82,7 @@ unref_sub_812620C: @ 812620C
 	adds r1, r5
 	subs r1, r4
 	adds r0, r4, 0
-	bl sub_8041174
+	bl CalcCRC16
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
@@ -369,7 +369,7 @@ sub_8126438: @ 8126438
 	mov r7, r8
 	push {r7}
 	adds r7, r0, 0
-	bl sub_80B4940
+	bl IsEnigmaBerryValid
 	mov r8, r0
 	adds r0, r7, 0
 	bl ScriptReadWord
@@ -385,7 +385,7 @@ sub_8126438: @ 8126438
 	movs r2, 0x7
 	bl StringCopyN
 	adds r0, r4, 0
-	bl sub_80B48A8
+	bl SetEnigmaBerry
 	ldr r4, _0812648C @ =gStringVar2
 	adds r0, r4, 0
 	adds r1, r5, 0
@@ -422,7 +422,7 @@ _081264B8:
 	bl StringExpandPlaceholders
 	movs r0, 0x2
 	str r0, [r7, 0x6C]
-	bl sub_80B4940
+	bl IsEnigmaBerryValid
 	cmp r0, 0x1
 	bne _081264E0
 	ldr r0, _081264DC @ =0x0000402d
@@ -527,7 +527,7 @@ sub_8126524: @ 8126524
 sub_812658C: @ 812658C
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80690F0
+	bl EnableNationalPokedex
 	ldr r0, _081265A8 @ =gStringVar4
 	ldr r1, _081265AC @ =gOtherText_DexUpgraded
 	bl StringExpandPlaceholders
@@ -739,7 +739,7 @@ _08126750: .4byte gOtherText_NewTrainerInHoenn
 sub_8126754: @ 8126754
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_80691BC
+	bl EnableResetRTC
 	ldr r0, _08126770 @ =gStringVar4
 	ldr r1, _08126774 @ =gSystemText_ClockAdjustmentUsable
 	bl StringExpandPlaceholders
@@ -812,7 +812,7 @@ sub_81267C0: @ 81267C0
 	adds r1, r0
 	subs r1, r4
 	adds r0, r4, 0
-	bl sub_8041174
+	bl CalcCRC16
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r5, r0

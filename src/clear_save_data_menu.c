@@ -11,7 +11,7 @@
 
 extern u8 gSystemText_ClearAllSaveDataPrompt[];
 extern u8 gSystemText_ClearingData[];
-extern const struct MenuAction gUnknown_08376D74[];
+extern const struct MenuAction gMenuYesNoItems[];
 
 static void VBlankCB_ClearSaveDataScreen(void);
 static void Task_InitMenu(u8);
@@ -48,7 +48,7 @@ static void Task_InitMenu(u8 taskId)
     MenuPrint(gSystemText_ClearAllSaveDataPrompt, 3, 15);
 
     MenuDrawTextWindow(2, 1, 8, 6);
-    PrintMenuItems(3, 2, 2, gUnknown_08376D74);
+    PrintMenuItems(3, 2, 2, gMenuYesNoItems);
     InitMenu(0, 3, 2, 2, 1, 5);
 
     gTasks[taskId].func = Task_ProcessMenuInput;

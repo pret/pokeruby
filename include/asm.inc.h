@@ -135,10 +135,10 @@ void FieldObjectUpdateZCoord(struct MapObject *pObject);
 void SetObjectSubpriorityByZCoord(u8, struct Sprite *, u8);
 
 // src/map_obj_80643A4.o
-bool8 sub_80643A4(struct MapObject *);
-void player_bitmagic(void);
-void sub_8064470(u8);
-void sub_806451C(void);
+bool8 FreezeMapObject(struct MapObject *);
+void FreezeMapObjects(void);
+void FreezeMapObjectsExceptOne(u8);
+void UnfreezeMapObjects(void);
 void sub_806487C(struct Sprite *sprite, bool8 invisible);
 void sub_8064990(u8, u8);
 
@@ -151,16 +151,11 @@ void overworld_poison_timer_set(void);
 void prev_quest_postbuffer_cursor_backup_reset(void);
 u8 *sub_8068E24(struct UnkStruct_8054FF8_Substruct *);
 u8 *GetFieldObjectScriptPointerForComparison();
-void sub_8069030(void);
-void sub_806906C(void);
-bool32 IsNationalPokedex(void);
-bool32 IsMysteryGiftAvailable(void);
-int sub_80691DC(void);
 
 // asm/rom_806936C.o
-void overworld_ensure_per_step_coros_running();
-void activate_per_step_callback(u8);
-void wild_encounter_reset_coro_args(void);
+void SetUpFieldTasks();
+void ActivatePerStepCallback(u8);
+void ResetFieldTasksArgs(void);
 void DoTimeBasedEvents(void);
 
 // asm/reset_rtc_screen.o
@@ -174,6 +169,9 @@ bool8 pokemon_has_move(struct Pokemon *, u16);
 u8 battle_side_get_owner(u8);
 u8 battle_get_per_side_status(u8);
 u8 battle_get_side_with_given_state(u8);
+
+// asm/weather.o
+void SetWeather(u32);
 
 // asm/rom_8080874.o
 void pal_fill_black();
@@ -283,12 +281,24 @@ void sub_80BD674(void *, u32, u8);
 void sub_80BD7A8(void);
 void UpdateTVScreensOnMap(u32, u32);
 void sub_80BDAB4(void);
+u8 sub_80BDEAC(u8 *);
+void sub_80BE160(TVShow *);
+void sub_80BE8EC(u16);
+void UpdateMassOutbreakTimeLeft(u16);
 void sub_80BE97C(u8);
 void sub_80BEA50(u16);
+void sub_80BEA5C(u16);
 bool8 GetPriceReduction(u8);
+void sub_80BEE84(u16);
 u8 sub_80BF0B8(u32);
+void sub_80BF478(void);
+u16 sub_80BF674(u16 species);
+s8 sub_80BF720(TVShow *);
+u8 sub_80BF77C(u32);
 void sub_80BFD44(void *, u32, u8);
 void sub_80C0514(void *, u32, u8);
+void StartMassOutbreak(void);
+void TVShowDone(void);
 
 // asm/contest_link_80C2020.o
 void sub_80C2358(void);
@@ -365,6 +375,8 @@ bool8 SB1ContainsWords(u16 *);
 bool8 IsEasyChatPairEqual(u16 *, u16 *);
 
 // asm/region_map.o
+void sub_80FBFB4(u8 *str, u8 region, u8);
+u8 *CopyLocationName(u8 *dest, u8 location);
 void CopyMapName();
 
 // asm/slot_machine.o
@@ -444,12 +456,12 @@ void sub_813E10C(struct Sprite *);
 void sub_813E210(struct Sprite *);
 void sub_813E7C0(u8);
 void sub_813E930(/*TODO: arg types*/);
-void sub_813EB4C(u8);
-void sub_813EDBC(/*TODO: arg types*/);
+void InitIntroTorchicAttackAnim(u8);
+void InitIntroMudkipAttackAnim(/*TODO: arg types*/);
 
 // asm/rom_81473B8.o
-bool8 sub_81474C8(void);
-void sub_8147514(void);
+bool8 ShouldDoBrailleStrengthEffect(void);
+void DoBrailleStrengthEffect(void);
 
 // asm/rom_8148B8C.o
 void load_intro_part2_graphics(/*TODO: arg types*/);
@@ -460,7 +472,7 @@ u8 intro_create_brendan_sprite(/*TODO: arg types*/);
 u8 intro_create_may_sprite(/*TODO: arg types*/);
 u8 intro_create_latios_sprite(/*TODO: arg types*/);
 u8 intro_create_latias_sprite(/*TODO: arg types*/);
-void sub_814A568(u8*);
+void SanitizeNameString(u8*);
 
 // src/agb_flash.o
 u16 ReadFlashId(void);

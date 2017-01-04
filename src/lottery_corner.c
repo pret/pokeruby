@@ -2,7 +2,7 @@
 #include "lottery_corner.h"
 #include "rng.h"
 #include "string_util.h"
-#include "var.h"
+#include "event_data.h"
 
 extern u16 gScriptResult;
 extern u16 gSpecialVar_0x8004;

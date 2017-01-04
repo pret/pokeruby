@@ -279,7 +279,7 @@ _0807AF88:
 	lsrs r1, 16
 	adds r0, r4, 0
 	bl sub_8032984
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807AFEC
@@ -420,7 +420,7 @@ _0807B0E8:
 	bl sub_8032350
 	b _0807B168
 _0807B0F2:
-	ldr r2, _0807B108 @ =gUnknown_020239F8
+	ldr r2, _0807B108 @ =gBattleTypeFlags
 	ldrh r1, [r2]
 	movs r0, 0x80
 	ands r0, r1
@@ -432,7 +432,7 @@ _0807B0F2:
 	ldrb r0, [r0, 0x8]
 	b _0807B122
 	.align 2, 0
-_0807B108: .4byte gUnknown_020239F8
+_0807B108: .4byte gBattleTypeFlags
 _0807B10C: .4byte gSaveBlock2
 _0807B110:
 	ldrh r1, [r2]
@@ -650,7 +650,7 @@ _0807B2CC: .4byte gSprites
 _0807B2D0: .4byte SpriteCallbackDummy
 _0807B2D4: .4byte gUnknown_02024E84
 _0807B2D8:
-	ldr r2, _0807B328 @ =gUnknown_020239F8
+	ldr r2, _0807B328 @ =gBattleTypeFlags
 	ldrh r1, [r2]
 	movs r0, 0x80
 	ands r0, r1
@@ -688,7 +688,7 @@ _0807B2D8:
 	adds r0, r6, 0
 	b _0807B37C
 	.align 2, 0
-_0807B328: .4byte gUnknown_020239F8
+_0807B328: .4byte gBattleTypeFlags
 _0807B32C: .4byte gSaveBlock2
 _0807B330: .4byte gUnknown_02024E8C
 _0807B334: .4byte gTrainerBackPicCoords
@@ -918,7 +918,7 @@ sub_807B508: @ 807B508
 	bcc _0807B518
 	b _0807B68A
 _0807B518:
-	ldr r2, _0807B534 @ =gUnknown_020239F8
+	ldr r2, _0807B534 @ =gBattleTypeFlags
 	ldrh r1, [r2]
 	movs r0, 0x80
 	ands r0, r1
@@ -930,7 +930,7 @@ _0807B518:
 	b _0807B550
 	.align 2, 0
 _0807B530: .4byte gUnknown_02024A68
-_0807B534: .4byte gUnknown_020239F8
+_0807B534: .4byte gBattleTypeFlags
 _0807B538:
 	ldrh r1, [r2]
 	movs r0, 0x80
@@ -976,7 +976,7 @@ _0807B58C: .4byte gUnknown_03004340
 _0807B590: .4byte gUnknown_02024A6A
 _0807B594: .4byte gEnemyParty
 _0807B598:
-	ldr r0, _0807B5C0 @ =gUnknown_020239F8
+	ldr r0, _0807B5C0 @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x80
 	ands r0, r1
@@ -995,7 +995,7 @@ _0807B598:
 	bl sub_8045A5C
 	b _0807B5E4
 	.align 2, 0
-_0807B5C0: .4byte gUnknown_020239F8
+_0807B5C0: .4byte gBattleTypeFlags
 _0807B5C4: .4byte gUnknown_02024A6A
 _0807B5C8: .4byte gPlayerParty
 _0807B5CC:
@@ -1065,7 +1065,7 @@ _0807B654: .4byte gUnknown_03004340
 _0807B658: .4byte gUnknown_02024A6A
 _0807B65C: .4byte gEnemyParty
 _0807B660:
-	ldr r0, _0807B690 @ =gUnknown_020239F8
+	ldr r0, _0807B690 @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x80
 	ands r0, r1
@@ -1089,7 +1089,7 @@ _0807B68A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0807B690: .4byte gUnknown_020239F8
+_0807B690: .4byte gBattleTypeFlags
 _0807B694: .4byte gUnknown_02024A6A
 _0807B698: .4byte gPlayerParty
 	thumb_func_end sub_807B508

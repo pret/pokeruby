@@ -37,7 +37,7 @@ BattleAIs:: @ 81DA01C
 	.4byte AI_Unused
 	.4byte AI_Roaming
 	.4byte AI_Safari
-	.4byte AI_FleeInDanger
+	.4byte AI_GoEasy
 
 AI_CheckBadMove: @ 81DA09C
 	is_most_powerful_move
@@ -3127,12 +3127,14 @@ AI_Safari: @ 81DC0FE
 AI_Safari_Flee: @ 81DC104
 	flee
 
-AI_FleeInDanger: @ 81DC105
-	if_hp_equal TARGET, 20, AI_FleeInDanger_Flee
-	if_hp_less_than TARGET, 20, AI_FleeInDanger_Flee
+@ This AI is used by the wild Poochyena in the first battle in the game.
+@ If it reduces your health to 20% or below, it will flee, allowing you to win.
+AI_GoEasy: @ 81DC105
+	if_hp_equal TARGET, 20, AI_GoEasy_Flee
+	if_hp_less_than TARGET, 20, AI_GoEasy_Flee
 	end
 
-AI_FleeInDanger_Flee: @ 81DC114
+AI_GoEasy_Flee: @ 81DC114
 	flee
 
 AI_Unused: @ 81DC115

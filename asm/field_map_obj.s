@@ -12654,7 +12654,7 @@ FieldObjectSetSpecialAnim: @ 8060550
 	cmp r6, 0
 	bne _08060590
 	adds r0, r4, 0
-	bl npc_sync_anim_pause_bits
+	bl UnfreezeMapObject
 	strb r5, [r4, 0x1C]
 	ldrb r0, [r4]
 	movs r1, 0x40

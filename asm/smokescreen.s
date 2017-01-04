@@ -32,7 +32,7 @@ sub_8046234: @ 8046234
 	bl LoadCompressedObjectPalette
 _08046266:
 	ldr r0, _08046378 @ =sub_8046388
-	bl object_new_hidden_with_callback
+	bl CreateInvisibleSpriteWithCallback
 	mov r8, r0
 	mov r0, r8
 	lsls r0, 24

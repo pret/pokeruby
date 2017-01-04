@@ -87,12 +87,12 @@ unref_sub_813F0F4: @ 813F0F4
 	lsls r6, 24
 	lsrs r6, 24
 	ldr r0, _0813F2D8 @ =SpriteCallbackDummy
-	bl object_new_hidden_with_callback
+	bl CreateInvisibleSpriteWithCallback
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x14]
 	ldr r0, _0813F2D8 @ =SpriteCallbackDummy
-	bl object_new_hidden_with_callback
+	bl CreateInvisibleSpriteWithCallback
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x18]
@@ -1344,7 +1344,7 @@ sub_813FBB8: @ 813FBB8
 	push {r6,r7}
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r0, _0813FBD8 @ =gUnknown_020239F8
+	ldr r0, _0813FBD8 @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x80
 	lsls r0, 2
@@ -1355,7 +1355,7 @@ sub_813FBB8: @ 813FBB8
 	movs r5, 0xB
 	b _0813FBE0
 	.align 2, 0
-_0813FBD8: .4byte gUnknown_020239F8
+_0813FBD8: .4byte gBattleTypeFlags
 _0813FBDC:
 	movs r6, 0x17
 	movs r5, 0x5

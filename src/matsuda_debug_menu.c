@@ -20,7 +20,7 @@ extern u16 gUnknown_02038678[];
 extern u16 gUnknown_02038680[];
 extern u8 gUnknown_02038690[];
 extern u8 gUnknown_02038694;
-extern u8 gUnknown_0203869A;
+extern u8 gIsLinkContest;
 extern u8 gUnknown_0203869B;
 extern u8 gContestPlayerMonIndex;
 extern u16 gScriptContestCategory;
@@ -147,7 +147,7 @@ static void sub_80A9BE4(u8 taskId)
     {
         DestroyTask(taskId);
 
-        if(!(gUnknown_0203869A & 1))
+        if(!(gIsLinkContest & 1))
             sub_80AF668();
 
         sub_80C2358();
@@ -156,7 +156,7 @@ static void sub_80A9BE4(u8 taskId)
 
 s8 MatsudaDebugMenu_Contest(void)
 {
-    gUnknown_0203869A = 0;
+    gIsLinkContest = 0;
     sub_80AA10C();
     return 0;
 }
@@ -301,7 +301,7 @@ static void sub_80A9F10(u8 taskId)
         gContestPlayerMonIndex = GetMultiplayerId();
         if(GetLinkPlayerCount() == 4)
         {
-            gUnknown_0203869A = 1;
+            gIsLinkContest = 1;
             SwitchTaskToFollowupFunc(taskId);
         }
     }
@@ -760,7 +760,7 @@ void sub_80AACC4(void)
     if (!gPaletteFade.active)
     {
         SetDebugMonForContest();
-        if (!(gUnknown_0203869A & 1))
+        if (!(gIsLinkContest & 1))
             sub_80AE82C(unk_2000000[0]);
         SetMainCallback2(sub_80AB47C);
     }

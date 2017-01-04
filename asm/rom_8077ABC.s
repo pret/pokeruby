@@ -45,7 +45,7 @@ _08077B00:
 	bl battle_get_per_side_status
 	lsls r0, 24
 	lsrs r0, 22
-	ldr r1, _08077B24 @ =gUnknown_020239F8
+	ldr r1, _08077B24 @ =gBattleTypeFlags
 	ldrh r2, [r1]
 	movs r1, 0x1
 	ands r1, r2
@@ -56,14 +56,14 @@ _08077B00:
 	b _08077BF4
 	.align 2, 0
 _08077B20: .4byte gUnknown_0837F578
-_08077B24: .4byte gUnknown_020239F8
+_08077B24: .4byte gBattleTypeFlags
 _08077B28:
 	ldr r4, _08077B48 @ =gUnknown_0837F578
 	adds r0, r5, 0
 	bl battle_get_per_side_status
 	lsls r0, 24
 	lsrs r0, 22
-	ldr r1, _08077B4C @ =gUnknown_020239F8
+	ldr r1, _08077B4C @ =gBattleTypeFlags
 	ldrh r2, [r1]
 	movs r1, 0x1
 	ands r1, r2
@@ -74,7 +74,7 @@ _08077B28:
 	b _08077BF4
 	.align 2, 0
 _08077B48: .4byte gUnknown_0837F578
-_08077B4C: .4byte gUnknown_020239F8
+_08077B4C: .4byte gBattleTypeFlags
 _08077B50:
 	bl sub_8076BE0
 	lsls r0, 24
@@ -506,7 +506,7 @@ _08077E94:
 	ldr r3, _08077EDC @ =gUnknown_0837F578
 	lsls r0, 24
 	lsrs r0, 22
-	ldr r1, _08077EE0 @ =gUnknown_020239F8
+	ldr r1, _08077EE0 @ =gBattleTypeFlags
 	ldrh r2, [r1]
 	movs r1, 0x1
 	ands r1, r2
@@ -539,7 +539,7 @@ _08077ED4:
 	bx r1
 	.align 2, 0
 _08077EDC: .4byte gUnknown_0837F578
-_08077EE0: .4byte gUnknown_020239F8
+_08077EE0: .4byte gBattleTypeFlags
 	thumb_func_end sub_8077E44
 
 	thumb_func_start sub_8077EE4
@@ -1266,7 +1266,7 @@ _08078400:
 	bl sub_8078104
 _08078406:
 	adds r0, r4, 0
-	bl sub_809D638
+	bl UpdateMonIconFrame
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1961,16 +1961,16 @@ _080788FE:
 	bx r1
 	thumb_func_end sub_8078874
 
-	thumb_func_start battle_type_is_double
-battle_type_is_double: @ 8078904
-	ldr r0, _08078910 @ =gUnknown_020239F8
+	thumb_func_start IsDoubleBattle
+IsDoubleBattle: @ 8078904
+	ldr r0, _08078910 @ =gBattleTypeFlags
 	ldrb r1, [r0]
 	movs r0, 0x1
 	ands r0, r1
 	bx lr
 	.align 2, 0
-_08078910: .4byte gUnknown_020239F8
-	thumb_func_end battle_type_is_double
+_08078910: .4byte gBattleTypeFlags
+	thumb_func_end IsDoubleBattle
 
 	thumb_func_start sub_8078914
 sub_8078914: @ 8078914
@@ -5036,7 +5036,7 @@ sub_8079F44: @ 8079F44
 	str r4, [sp, 0x8]
 	movs r4, 0x1
 	str r4, [sp, 0xC]
-	bl sub_800D378
+	bl LoadSpecialPokePic
 	b _0807A02E
 	.align 2, 0
 _08079FE0: .4byte gUnknown_0837F5E0
@@ -5071,7 +5071,7 @@ _08079FF0:
 	str r4, [sp, 0x8]
 	movs r4, 0
 	str r4, [sp, 0xC]
-	bl sub_800D378
+	bl LoadSpecialPokePic
 _0807A02E:
 	movs r2, 0x80
 	lsls r2, 18
@@ -5594,7 +5594,7 @@ _0807A41E:
 	bl sub_8077ABC
 	lsls r0, 24
 	lsrs r7, r0, 24
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807A470
@@ -5657,7 +5657,7 @@ sub_807A4A0: @ 807A4A0
 	lsrs r6, 24
 	ldr r0, _0807A538 @ =SpriteCallbackDummy
 	mov r10, r0
-	bl object_new_hidden_with_callback
+	bl CreateInvisibleSpriteWithCallback
 	mov r8, r0
 	mov r0, r8
 	lsls r0, 24

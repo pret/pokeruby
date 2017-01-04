@@ -604,7 +604,7 @@ _080481BA:
 	str r0, [sp, 0x4]
 	adds r0, r5, 0
 	ldr r1, _080482AC @ =sub_809D62C
-	bl sub_809D2FC
+	bl CreateMonIcon
 	mov r2, r8
 	ldr r1, [r2]
 	adds r1, 0x34
@@ -661,7 +661,7 @@ _0804822C:
 	str r0, [sp, 0x4]
 	adds r0, r5, 0
 	ldr r1, _080482AC @ =sub_809D62C
-	bl sub_809D2FC
+	bl CreateMonIcon
 	mov r2, r8
 	ldr r1, [r2]
 	adds r1, 0x3A
@@ -689,14 +689,14 @@ _080482A8: .4byte 0xfff40000
 _080482AC: .4byte sub_809D62C
 _080482B0: .4byte gEnemyParty
 _080482B4:
-	bl sub_806DA98
+	bl LoadHeldItemIconGraphics
 	ldr r0, _080482D0 @ =gUnknown_03004824
 	ldr r1, [r0]
 	adds r0, r1, 0
 	adds r0, 0x42
 	adds r1, 0x34
 	movs r2, 0
-	bl sub_806DB90
+	bl CreateHeldItemIcons
 	ldr r1, _080482D4 @ =gMain
 	ldr r0, _080482D8 @ =0x0000043c
 	adds r1, r0
@@ -712,7 +712,7 @@ _080482DC:
 	adds r0, 0x42
 	adds r1, 0x34
 	movs r2, 0x1
-	bl sub_806DB90
+	bl CreateHeldItemIcons
 	ldr r1, _080482F8 @ =gMain
 	ldr r2, _080482FC @ =0x0000043c
 	adds r1, r2
@@ -1176,7 +1176,7 @@ _080486DE:
 	str r0, [sp, 0x4]
 	adds r0, r5, 0
 	ldr r1, _080487D8 @ =sub_809D62C
-	bl sub_809D2FC
+	bl CreateMonIcon
 	mov r2, r8
 	ldr r1, [r2]
 	adds r1, 0x34
@@ -1233,7 +1233,7 @@ _08048752:
 	str r0, [sp, 0x4]
 	adds r0, r5, 0
 	ldr r1, _080487D8 @ =sub_809D62C
-	bl sub_809D2FC
+	bl CreateMonIcon
 	mov r2, r8
 	ldr r1, [r2]
 	adds r1, 0x3A
@@ -1266,14 +1266,14 @@ _080487DC: .4byte gEnemyParty
 _080487E0: .4byte gMain
 _080487E4: .4byte 0x0000043c
 _080487E8:
-	bl sub_806DA98
+	bl LoadHeldItemIconGraphics
 	ldr r0, _08048804 @ =gUnknown_03004824
 	ldr r1, [r0]
 	adds r0, r1, 0
 	adds r0, 0x42
 	adds r1, 0x34
 	movs r2, 0
-	bl sub_806DB90
+	bl CreateHeldItemIcons
 	ldr r1, _08048808 @ =gMain
 	ldr r5, _0804880C @ =0x0000043c
 	adds r1, r5
@@ -1289,7 +1289,7 @@ _08048810:
 	adds r0, 0x42
 	adds r1, 0x34
 	movs r2, 0x1
-	bl sub_806DB90
+	bl CreateHeldItemIcons
 	ldr r1, _0804882C @ =gMain
 	ldr r0, _08048830 @ =0x0000043c
 	adds r1, r0
@@ -3475,7 +3475,7 @@ sub_804997C: @ 804997C
 	ldr r3, _080499C0 @ =sub_80484F4
 	movs r4, 0x4
 	str r4, [sp]
-	bl sub_809D8BC
+	bl ShowPokemonSummaryScreen
 	b _080499E0
 	.align 2, 0
 _080499B4: .4byte gPaletteFade
@@ -3495,7 +3495,7 @@ _080499C4:
 	ldr r3, _080499EC @ =sub_80484F4
 	movs r4, 0x4
 	str r4, [sp]
-	bl sub_809D8BC
+	bl ShowPokemonSummaryScreen
 _080499E0:
 	add sp, 0x4
 	pop {r4}
@@ -6539,7 +6539,7 @@ sub_804B128: @ 804B128
 	ldrh r0, [r0]
 	str r0, [sp, 0xC]
 	add r0, sp, 0x10
-	bl sub_8040F34
+	bl DoBgAffineSet
 	ldr r1, _0804B1B8 @ =REG_BG2PA
 	add r0, sp, 0x10
 	ldrh r0, [r0]
@@ -6805,7 +6805,7 @@ _0804B330:
 	str r5, [sp, 0x4]
 	mov r4, r9
 	str r4, [sp, 0x8]
-	bl sub_800D334
+	bl HandleLoadSpecialPokePic
 	mov r0, r10
 	bl sub_8040990
 	bl LoadCompressedObjectPalette
@@ -7591,7 +7591,7 @@ sub_804BA64: @ 804BA64
 	lsls r0, 8
 	cmp r1, r0
 	bne _0804BA8C
-	bl sub_80690F0
+	bl EnableNationalPokedex
 _0804BA8C:
 	pop {r0}
 	bx r0

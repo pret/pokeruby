@@ -2,7 +2,7 @@
 #include "asm.h"
 #include "link.h"
 #include "rng.h"
-#include "flag.h"
+#include "event_data.h"
 
 extern struct EasyChatPair unk_2007800[5];
 extern struct EasyChatPair unk_2007900[5];

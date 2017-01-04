@@ -17783,7 +17783,7 @@ sub_80F4824: @ 80F4824
 	str r5, [sp, 0x4]
 	str r4, [sp, 0x8]
 	movs r2, 0x1
-	bl sub_800D334
+	bl HandleLoadSpecialPokePic
 	adds r0, r5, 0
 	mov r1, r8
 	adds r2, r4, 0

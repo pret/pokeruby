@@ -182,15 +182,15 @@ _0811DBBC: .4byte 0x02017810
 sub_811DBC0: @ 811DBC0
 	push {r4-r6,lr}
 	movs r6, 0
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _0811DBE4
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _0811DC18
-	ldr r0, _0811DC04 @ =gUnknown_020239F8
+	ldr r0, _0811DC04 @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x40
 	ands r0, r1
@@ -214,7 +214,7 @@ _0811DBE4:
 	bne _0811DC50
 	b _0811DC4E
 	.align 2, 0
-_0811DC04: .4byte gUnknown_020239F8
+_0811DC04: .4byte gBattleTypeFlags
 _0811DC08: .4byte gSprites
 _0811DC0C: .4byte gUnknown_03004340
 _0811DC10: .4byte gUnknown_02024A60
@@ -330,11 +330,11 @@ sub_811DCA0: @ 811DCA0
 	lsls r1, 2
 	adds r1, r4
 	strb r2, [r1, 0x9]
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _0811DD56
-	ldr r0, _0811DDC4 @ =gUnknown_020239F8
+	ldr r0, _0811DDC4 @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x40
 	ands r0, r1
@@ -426,7 +426,7 @@ _0811DDB4:
 	.align 2, 0
 _0811DDBC: .4byte gUnknown_02024A60
 _0811DDC0: .4byte 0x02017810
-_0811DDC4: .4byte gUnknown_020239F8
+_0811DDC4: .4byte gBattleTypeFlags
 _0811DDC8: .4byte gUnknown_0300434C
 _0811DDCC: .4byte gSprites
 _0811DDD0: .4byte gUnknown_03004340
@@ -1021,7 +1021,7 @@ sub_811E29C: @ 811E29C
 	ands r0, r1
 	cmp r0, 0
 	bne _0811E302
-	ldr r0, _0811E2D0 @ =gUnknown_020239F8
+	ldr r0, _0811E2D0 @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x2
 	ands r0, r1
@@ -1038,7 +1038,7 @@ sub_811E29C: @ 811E29C
 	b _0811E302
 	.align 2, 0
 _0811E2CC: .4byte gPaletteFade
-_0811E2D0: .4byte gUnknown_020239F8
+_0811E2D0: .4byte gBattleTypeFlags
 _0811E2D4: .4byte gUnknown_03004330
 _0811E2D8: .4byte gUnknown_02024A60
 _0811E2DC: .4byte sub_811E258
@@ -1078,7 +1078,7 @@ dp01_tbl3_exec_completed: @ 811E314
 	adds r0, r1
 	ldr r1, _0811E35C @ =sub_811DA94
 	str r1, [r0]
-	ldr r0, _0811E360 @ =gUnknown_020239F8
+	ldr r0, _0811E360 @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x2
 	ands r0, r1
@@ -1102,7 +1102,7 @@ dp01_tbl3_exec_completed: @ 811E314
 _0811E354: .4byte gUnknown_03004330
 _0811E358: .4byte gUnknown_02024A60
 _0811E35C: .4byte sub_811DA94
-_0811E360: .4byte gUnknown_020239F8
+_0811E360: .4byte gBattleTypeFlags
 _0811E364: .4byte gUnknown_02023A60
 _0811E368:
 	ldr r2, _0811E384 @ =gUnknown_02024A64
@@ -3628,7 +3628,7 @@ sub_811F864: @ 811F864
 	lsrs r0, 16
 	mov r8, r0
 	ldr r0, _0811F9B4 @ =sub_80312F0
-	bl object_new_hidden_with_callback
+	bl CreateInvisibleSpriteWithCallback
 	ldr r1, _0811F9B8 @ =gUnknown_0300434C
 	mov r9, r1
 	add r9, r6
@@ -3900,7 +3900,7 @@ sub_811FAE4: @ 811FAE4
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
-	ldr r0, _0811FB14 @ =gUnknown_020239F8
+	ldr r0, _0811FB14 @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x40
 	ands r0, r1
@@ -3921,7 +3921,7 @@ _0811FB0A:
 	bl sub_803FC34
 	b _0811FB34
 	.align 2, 0
-_0811FB14: .4byte gUnknown_020239F8
+_0811FB14: .4byte gBattleTypeFlags
 _0811FB18: .4byte gUnknown_02024A60
 _0811FB1C: .4byte 0x0000fff0
 _0811FB20: .4byte gLinkPlayers
@@ -5467,11 +5467,11 @@ _08120748:
 	mov r9, r0
 	ldrh r0, [r1, 0x8]
 	strb r0, [r7]
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _08120768
-	ldr r0, _0812078C @ =gUnknown_020239F8
+	ldr r0, _0812078C @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x40
 	ands r0, r1
@@ -5494,7 +5494,7 @@ _08120768:
 	b _081207EC
 	.align 2, 0
 _08120788: .4byte gUnknown_02024A60
-_0812078C: .4byte gUnknown_020239F8
+_0812078C: .4byte gBattleTypeFlags
 _08120790: .4byte gUnknown_02023A60
 _08120794: .4byte gUnknown_02024A6A
 _08120798:

@@ -365,7 +365,7 @@ _08147B70:
 	str r4, [sp]
 	str r5, [sp, 0x4]
 	str r6, [sp, 0x8]
-	bl sub_800D334
+	bl HandleLoadSpecialPokePic
 	b _08147C40
 	.align 2, 0
 _08147BAC: .4byte gMonFrontPicTable

@@ -12,6 +12,7 @@
 #include "sprite.h"
 #include "task.h"
 #include "decompress.h"
+#include "event_data.h"
 
 extern u8 gReservedSpritePaletteCount;
 extern struct MusicPlayerInfo gMPlay_BGM;
@@ -427,7 +428,7 @@ static void Task_TitleScreenPhase3(u8 taskId)
         if ((gMain.heldKeys & CLEAR_SAVE_BUTTON_COMBO) == CLEAR_SAVE_BUTTON_COMBO)
             SetMainCallback2(CB2_GoToClearSaveDataScreen);
         if ((gMain.heldKeys & RESET_RTC_BUTTON_COMBO) == RESET_RTC_BUTTON_COMBO
-          && sub_80691DC() == 1)
+          && CanResetRTC() == 1)
         {
             FadeOutBGM(4);
             BeginNormalPaletteFade(-1, 0, 0, 0x10, 0);

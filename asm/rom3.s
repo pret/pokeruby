@@ -9,7 +9,7 @@
 	thumb_func_start sub_800B858
 sub_800B858: @ 800B858
 	push {lr}
-	ldr r0, _0800B87C @ =gUnknown_020239F8
+	ldr r0, _0800B87C @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x2
 	ands r0, r1
@@ -24,7 +24,7 @@ _0800B876:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800B87C: .4byte gUnknown_020239F8
+_0800B87C: .4byte gBattleTypeFlags
 _0800B880: .4byte sub_8083C50
 	thumb_func_end sub_800B858
 
@@ -69,8 +69,8 @@ _0800B8A0:
 	str r5, [r0]
 	bl sub_8075624
 	bl sub_8040710
-	bl sub_81070D4
-	ldr r0, _0800B940 @ =gUnknown_020239F8
+	bl BattleAI_HandleItemUseBeforeAISetup
+	ldr r0, _0800B940 @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x10
 	ands r0, r1
@@ -111,7 +111,7 @@ _0800B930: .4byte gUnknown_02024E64
 _0800B934: .4byte nullsub_91
 _0800B938: .4byte gUnknown_02024A72
 _0800B93C: .4byte gUnknown_02024A64
-_0800B940: .4byte gUnknown_020239F8
+_0800B940: .4byte gBattleTypeFlags
 _0800B944: .4byte gEnemyParty
 _0800B948: .4byte gUnknown_020239FC
 _0800B94C: .4byte gUnknown_02024C78
@@ -120,7 +120,7 @@ _0800B94C: .4byte gUnknown_02024C78
 	thumb_func_start sub_800B950
 sub_800B950: @ 800B950
 	push {r4,r5,lr}
-	ldr r0, _0800B964 @ =gUnknown_020239F8
+	ldr r0, _0800B964 @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x2
 	ands r0, r1
@@ -129,12 +129,12 @@ sub_800B950: @ 800B950
 	bl sub_800BA78
 	b _0800B96C
 	.align 2, 0
-_0800B964: .4byte gUnknown_020239F8
+_0800B964: .4byte gBattleTypeFlags
 _0800B968:
 	bl sub_800B9A8
 _0800B96C:
 	bl sub_800BD54
-	ldr r0, _0800B9A0 @ =gUnknown_020239F8
+	ldr r0, _0800B9A0 @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x40
 	ands r0, r1
@@ -160,14 +160,14 @@ _0800B99A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0800B9A0: .4byte gUnknown_020239F8
+_0800B9A0: .4byte gBattleTypeFlags
 _0800B9A4: .4byte gUnknown_02024A68
 	thumb_func_end sub_800B950
 
 	thumb_func_start sub_800B9A8
 sub_800B9A8: @ 800B9A8
 	push {r4,lr}
-	ldr r0, _0800B9CC @ =gUnknown_020239F8
+	ldr r0, _0800B9CC @ =gBattleTypeFlags
 	ldrh r2, [r0]
 	movs r0, 0x1
 	ands r0, r2
@@ -184,7 +184,7 @@ sub_800B9A8: @ 800B9A8
 	ldr r0, _0800B9DC @ =sub_812B468
 	b _0800B9FC
 	.align 2, 0
-_0800B9CC: .4byte gUnknown_020239F8
+_0800B9CC: .4byte gBattleTypeFlags
 _0800B9D0: .4byte gUnknown_030042D4
 _0800B9D4: .4byte sub_8010800
 _0800B9D8: .4byte gUnknown_03004330
@@ -267,7 +267,7 @@ sub_800BA78: @ 800BA78
 	mov r6, r9
 	mov r5, r8
 	push {r5-r7}
-	ldr r6, _0800BAB8 @ =gUnknown_020239F8
+	ldr r6, _0800BAB8 @ =gBattleTypeFlags
 	ldrh r1, [r6]
 	movs r5, 0x1
 	movs r4, 0x1
@@ -295,7 +295,7 @@ sub_800BA78: @ 800BA78
 	movs r0, 0x2
 	b _0800BD3E
 	.align 2, 0
-_0800BAB8: .4byte gUnknown_020239F8
+_0800BAB8: .4byte gBattleTypeFlags
 _0800BABC: .4byte gUnknown_030042D4
 _0800BAC0: .4byte sub_8010800
 _0800BAC4: .4byte gUnknown_03004330
@@ -632,7 +632,7 @@ sub_800BD54: @ 800BD54
 	mov r6, r9
 	mov r5, r8
 	push {r5-r7}
-	ldr r0, _0800BD74 @ =gUnknown_020239F8
+	ldr r0, _0800BD74 @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x40
 	ands r0, r1
@@ -644,7 +644,7 @@ _0800BD6C:
 	mov r8, r0
 	b _0800BE7E
 	.align 2, 0
-_0800BD74: .4byte gUnknown_020239F8
+_0800BD74: .4byte gBattleTypeFlags
 _0800BD78:
 	movs r5, 0
 	movs r0, 0x1
@@ -797,7 +797,7 @@ dp01_prepare_buffer: @ 800BE9C
 	adds r5, r3, 0
 	lsls r2, 16
 	lsrs r2, 16
-	ldr r0, _0800BEC4 @ =gUnknown_020239F8
+	ldr r0, _0800BEC4 @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x2
 	ands r0, r1
@@ -809,7 +809,7 @@ dp01_prepare_buffer: @ 800BE9C
 	bl dp01_prepare_buffer_wireless_probably
 	b _0800BF1A
 	.align 2, 0
-_0800BEC4: .4byte gUnknown_020239F8
+_0800BEC4: .4byte gBattleTypeFlags
 _0800BEC8:
 	cmp r5, 0
 	beq _0800BED2
@@ -1393,7 +1393,7 @@ sub_800C35C: @ 800C35C
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0800C458
-	ldr r0, _0800C390 @ =gUnknown_020239F8
+	ldr r0, _0800C390 @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x20
 	ands r0, r1
@@ -1410,7 +1410,7 @@ sub_800C35C: @ 800C35C
 	b _0800C44C
 	.align 2, 0
 _0800C38C: .4byte gReceivedRemoteLinkPlayers
-_0800C390: .4byte gUnknown_020239F8
+_0800C390: .4byte gBattleTypeFlags
 _0800C394: .4byte gLinkPlayers
 _0800C398: .4byte 0x00002211
 _0800C39C: .4byte gBlockRecvBuffer
@@ -1620,7 +1620,7 @@ _0800C50E:
 	bl memcpy
 	adds r0, r4, 0
 	bl sub_80155A4
-	ldr r0, _0800C598 @ =gUnknown_020239F8
+	ldr r0, _0800C598 @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x4
 	ands r0, r1
@@ -1664,7 +1664,7 @@ _0800C588: .4byte gUnknown_02024A64
 _0800C58C: .4byte gBitTable
 _0800C590: .4byte gUnknown_02023A60
 _0800C594: .4byte 0x00015008
-_0800C598: .4byte gUnknown_020239F8
+_0800C598: .4byte gBattleTypeFlags
 _0800C59C: .4byte gUnknown_02024C07
 _0800C5A0: .4byte 0x00015002
 _0800C5A4: .4byte gUnknown_02024C08

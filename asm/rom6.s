@@ -423,7 +423,7 @@ FldEff_UseDig: @ 810B5F8
 	lsrs r0, r2, 16
 	strh r0, [r1, 0x18]
 	strh r2, [r1, 0x1A]
-	bl sub_81473B8
+	bl ShouldDoBrailleDigEffect
 	lsls r0, 24
 	cmp r0, 0
 	bne _0810B624
@@ -443,12 +443,12 @@ sub_810B634: @ 810B634
 	push {r4,lr}
 	movs r0, 0x26
 	bl FieldEffectActiveListRemove
-	bl sub_81473B8
+	bl ShouldDoBrailleDigEffect
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0
 	beq _0810B64E
-	bl sub_8147408
+	bl DoBrailleDigEffect
 	b _0810B666
 _0810B64E:
 	ldr r0, _0810B66C @ =task08_080A1C44

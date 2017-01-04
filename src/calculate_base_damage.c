@@ -9,7 +9,8 @@
 #include "item.h"
 #include "abilities.h"
 #include "hold_effects.h"
-#include "flag.h"
+#include "event_data.h"
+#include "battle.h"
 
 extern u8 gPlayerPartyCount;
 extern struct Pokemon gPlayerParty[6];
@@ -19,7 +20,7 @@ extern struct Pokemon gEnemyParty[6];
 extern u16 unk_20160BC[];
 extern struct SecretBaseRecord gSecretBaseRecord;
 extern u32 dword_2017100[];
-extern u16 gUnknown_020239F8;
+extern u16 gBattleTypeFlags;
 extern struct BattlePokemon gBattleMons[4];
 extern u16 gUnknown_02024BE6;
 extern u8 byte_2024C06;
@@ -113,33 +114,33 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     if (attacker->ability == ABILITY_HUGE_POWER || attacker->ability == ABILITY_PURE_POWER)
         attack *= 2;
 
-    if (!(gUnknown_020239F8 & 0x902))
+    if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_EREADER_TRAINER)))
     {
-        if ((gUnknown_020239F8 & 8)
+        if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
             && gTrainerBattleOpponent != 1024
             && FlagGet(BADGE01_GET)
             && !battle_side_get_owner(a7))
             attack = (110 * attack) / 100;
 
-        if (!(gUnknown_020239F8 & 0x902))
+        if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_EREADER_TRAINER)))
         {
-            if ((gUnknown_020239F8 & 8)
+            if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
                 && gTrainerBattleOpponent != 1024
                 && FlagGet(BADGE05_GET)
                 && !battle_side_get_owner(a8))
                 defense = (110 * defense) / 100;
 
-            if (!(gUnknown_020239F8 & 0x902))
+            if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_EREADER_TRAINER)))
             {
-                if ((gUnknown_020239F8 & 8)
+                if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
                     && gTrainerBattleOpponent != 1024
                     && FlagGet(BADGE07_GET)
                     && !battle_side_get_owner(a7))
                     spAttack = (110 * spAttack) / 100;
 
-                if (!(gUnknown_020239F8 & 0x902))
+                if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_EREADER_TRAINER)))
                 {
-                    if ((gUnknown_020239F8 & 8)
+                    if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
                         && gTrainerBattleOpponent != 1024
                         && FlagGet(BADGE07_GET)
                         && !battle_side_get_owner(a8))
@@ -164,9 +165,9 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 
     if (attackerHoldEffect == HOLD_EFFECT_CHOICE_BAND)
         attack = (150 * attack) / 100;
-    if (attackerHoldEffect == HOLD_EFFECT_SOUL_DEW && !(gUnknown_020239F8 & 0x100) && (attacker->species == SPECIES_LATIAS || attacker->species == SPECIES_LATIOS))
+    if (attackerHoldEffect == HOLD_EFFECT_SOUL_DEW && !(gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER) && (attacker->species == SPECIES_LATIAS || attacker->species == SPECIES_LATIOS))
         spAttack = (150 * spAttack) / 100;
-    if (defenderHoldEffect == HOLD_EFFECT_SOUL_DEW && !(gUnknown_020239F8 & 0x100) && (defender->species == SPECIES_LATIAS || defender->species == SPECIES_LATIOS))
+    if (defenderHoldEffect == HOLD_EFFECT_SOUL_DEW && !(gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER) && (defender->species == SPECIES_LATIAS || defender->species == SPECIES_LATIOS))
         spDefense = (150 * spDefense) / 100;
     if (attackerHoldEffect == HOLD_EFFECT_DEEP_SEA_TOOTH && attacker->species == SPECIES_CLAMPERL)
         spAttack *= 2;
@@ -236,13 +237,13 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 
         if ((a4 & 1) && gCritMultiplier == 1)
         {
-            if ((gUnknown_020239F8 & 1) && sub_803C348(2) == 2)
+            if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && sub_803C348(2) == 2)
                 damage = 2 * (damage / 3);
             else
                 damage /= 2;
         }
 
-        if ((gUnknown_020239F8 & 1) && gBattleMoves[move].target == 8 && sub_803C348(2) == 2)
+        if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && gBattleMoves[move].target == 8 && sub_803C348(2) == 2)
             damage /= 2;
 
         if (damage == 0)
@@ -280,13 +281,13 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
 
         if ((a4 & 2) && gCritMultiplier == 1)
         {
-            if ((gUnknown_020239F8 & 1) && sub_803C348(2) == 2)
+            if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && sub_803C348(2) == 2)
                 damage = 2 * (damage / 3);
             else
                 damage /= 2;
         }
 
-        if ((gUnknown_020239F8 & 1) && gBattleMoves[move].target == 8 && sub_803C348(2) == 2)
+        if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && gBattleMoves[move].target == 8 && sub_803C348(2) == 2)
             damage /= 2;
 
         if (!sub_8018324(0xE, 0, ABILITY_CLOUD_NINE, 0, 0) && !sub_8018324(0xE, 0, ABILITY_AIR_LOCK, 0, 0))
@@ -475,7 +476,7 @@ _0803BB4C:\n\
 	lsls r0, r6, 17\n\
 	lsrs r6, r0, 16\n\
 _0803BB50:\n\
-	ldr r0, _0803BCB8 @ =gUnknown_020239F8\n\
+	ldr r0, _0803BCB8 @ =gBattleTypeFlags\n\
 	ldrh r1, [r0]\n\
 	ldr r0, _0803BCBC @ =0x00000902\n\
 	ands r0, r1\n\
@@ -510,7 +511,7 @@ _0803BB5E:\n\
 	lsls r0, 16\n\
 	lsrs r6, r0, 16\n\
 _0803BB98:\n\
-	ldr r0, _0803BCB8 @ =gUnknown_020239F8\n\
+	ldr r0, _0803BCB8 @ =gBattleTypeFlags\n\
 	ldrh r1, [r0]\n\
 	ldr r0, _0803BCBC @ =0x00000902\n\
 	ands r0, r1\n\
@@ -545,7 +546,7 @@ _0803BB98:\n\
 	lsrs r0, 16\n\
 	str r0, [sp, 0x14]\n\
 _0803BBE2:\n\
-	ldr r0, _0803BCB8 @ =gUnknown_020239F8\n\
+	ldr r0, _0803BCB8 @ =gBattleTypeFlags\n\
 	ldrh r1, [r0]\n\
 	ldr r0, _0803BCBC @ =0x00000902\n\
 	ands r0, r1\n\
@@ -581,7 +582,7 @@ _0803BBE2:\n\
 	lsrs r0, 16\n\
 	mov r8, r0\n\
 _0803BC2E:\n\
-	ldr r0, _0803BCB8 @ =gUnknown_020239F8\n\
+	ldr r0, _0803BCB8 @ =gBattleTypeFlags\n\
 	ldrh r1, [r0]\n\
 	ldr r0, _0803BCBC @ =0x00000902\n\
 	ands r0, r1\n\
@@ -649,7 +650,7 @@ _0803BC9E:\n\
 	mov r8, r0\n\
 	b _0803BCDC\n\
 	.align 2, 0\n\
-_0803BCB8: .4byte gUnknown_020239F8\n\
+_0803BCB8: .4byte gBattleTypeFlags\n\
 _0803BCBC: .4byte 0x00000902\n\
 _0803BCC0: .4byte gTrainerBattleOpponent\n\
 _0803BCC4: .4byte 0x00000807\n\
@@ -675,7 +676,7 @@ _0803BCF0:\n\
 	mov r0, r10\n\
 	cmp r0, 0x22\n\
 	bne _0803BD28\n\
-	ldr r0, _0803BFDC @ =gUnknown_020239F8\n\
+	ldr r0, _0803BFDC @ =gBattleTypeFlags\n\
 	ldrh r1, [r0]\n\
 	movs r0, 0x80\n\
 	lsls r0, 1\n\
@@ -703,7 +704,7 @@ _0803BD28:\n\
 	ldr r0, [sp, 0x1C]\n\
 	cmp r0, 0x22\n\
 	bne _0803BD60\n\
-	ldr r0, _0803BFDC @ =gUnknown_020239F8\n\
+	ldr r0, _0803BFDC @ =gBattleTypeFlags\n\
 	ldrh r1, [r0]\n\
 	movs r0, 0x80\n\
 	lsls r0, 1\n\
@@ -1049,7 +1050,7 @@ _0803BFC4:\n\
 	ldr r2, _0803BFF8 @ =gStatStageRatios\n\
 	b _0803C006\n\
 	.align 2, 0\n\
-_0803BFDC: .4byte gUnknown_020239F8\n\
+_0803BFDC: .4byte gBattleTypeFlags\n\
 _0803BFE0: .4byte 0xfffffe69\n\
 _0803BFE4: .4byte 0x00000175\n\
 _0803BFE8: .4byte gBattleMovePower\n\
@@ -1154,7 +1155,7 @@ _0803C0A8:\n\
 	ldrb r1, [r4]\n\
 	cmp r1, 0x1\n\
 	bne _0803C0EA\n\
-	ldr r0, _0803C0E0 @ =gUnknown_020239F8\n\
+	ldr r0, _0803C0E0 @ =gBattleTypeFlags\n\
 	ldrh r0, [r0]\n\
 	ands r1, r0\n\
 	cmp r1, 0\n\
@@ -1172,13 +1173,13 @@ _0803C0A8:\n\
 	b _0803C0EA\n\
 	.align 2, 0\n\
 _0803C0DC: .4byte gStatStageRatios\n\
-_0803C0E0: .4byte gUnknown_020239F8\n\
+_0803C0E0: .4byte gBattleTypeFlags\n\
 _0803C0E4:\n\
 	lsrs r0, r5, 31\n\
 	adds r0, r5, r0\n\
 	asrs r5, r0, 1\n\
 _0803C0EA:\n\
-	ldr r0, _0803C148 @ =gUnknown_020239F8\n\
+	ldr r0, _0803C148 @ =gBattleTypeFlags\n\
 	ldrh r1, [r0]\n\
 	movs r0, 0x1\n\
 	ands r0, r1\n\
@@ -1229,7 +1230,7 @@ _0803C132:\n\
 	ldr r2, _0803C154 @ =gStatStageRatios\n\
 	b _0803C162\n\
 	.align 2, 0\n\
-_0803C148: .4byte gUnknown_020239F8\n\
+_0803C148: .4byte gBattleTypeFlags\n\
 _0803C14C: .4byte gBattleMoves\n\
 _0803C150: .4byte gCritMultiplier\n\
 _0803C154: .4byte gStatStageRatios\n\
@@ -1314,7 +1315,7 @@ _0803C1D6:\n\
 	ldrb r1, [r4]\n\
 	cmp r1, 0x1\n\
 	bne _0803C22A\n\
-	ldr r0, _0803C220 @ =gUnknown_020239F8\n\
+	ldr r0, _0803C220 @ =gBattleTypeFlags\n\
 	ldrh r0, [r0]\n\
 	ands r1, r0\n\
 	cmp r1, 0\n\
@@ -1332,13 +1333,13 @@ _0803C1D6:\n\
 	b _0803C22A\n\
 	.align 2, 0\n\
 _0803C21C: .4byte gStatStageRatios\n\
-_0803C220: .4byte gUnknown_020239F8\n\
+_0803C220: .4byte gBattleTypeFlags\n\
 _0803C224:\n\
 	lsrs r0, r5, 31\n\
 	adds r0, r5, r0\n\
 	asrs r5, r0, 1\n\
 _0803C22A:\n\
-	ldr r0, _0803C2A4 @ =gUnknown_020239F8\n\
+	ldr r0, _0803C2A4 @ =gBattleTypeFlags\n\
 	ldrh r1, [r0]\n\
 	movs r0, 0x1\n\
 	ands r0, r1\n\
@@ -1397,7 +1398,7 @@ _0803C25C:\n\
 	beq _0803C2B8\n\
 	b _0803C2C4\n\
 	.align 2, 0\n\
-_0803C2A4: .4byte gUnknown_020239F8\n\
+_0803C2A4: .4byte gBattleTypeFlags\n\
 _0803C2A8: .4byte gBattleMoves\n\
 _0803C2AC: .4byte gBattleWeather\n\
 _0803C2B0:\n\

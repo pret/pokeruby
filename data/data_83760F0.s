@@ -4,166 +4,15 @@
 	.section .rodata
 
 	.align 2
-Unknown_83760F0:
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-	.4byte little_step
-
-	.align 2
-Unknown_8376130:
-	.4byte sub_806456C
-	.4byte sub_806456C
-	.4byte sub_806456C
-	.4byte sub_806456C
-	.4byte sub_806456C
-	.4byte sub_806456C
-	.4byte sub_806456C
-	.4byte sub_806456C
-
-	.align 2
-Unknown_8376150:
-	.4byte sub_806456C
-	.4byte sub_8064590
-	.4byte sub_8064590
-	.4byte sub_806456C
-	.4byte sub_8064590
-	.4byte sub_8064590
-
-	.align 2
-Unknown_8376168:
-	.4byte sub_80645B8
-	.4byte sub_80645B8
-	.4byte sub_80645B8
-	.4byte sub_80645B8
-
-	.align 2
-Unknown_8376178:
-	.4byte sub_80645DC
-	.4byte sub_80645DC
-
-	.align 2
-gUnknown_08376180:: @ 8376180
-	.4byte Unknown_83760F0
-	.4byte Unknown_8376130
-	.4byte Unknown_8376150
-	.4byte Unknown_8376168
-	.4byte Unknown_8376178
-
-	.align 1
-gUnknown_08376194:: @ 8376194
-	.2byte 16, 8, 6, 4, 2
-Unknown_837619E:
-	.byte  -4,  -6,  -8, -10, -11, -12, -12, -12, -11, -10,  -9,  -8,  -6,  -4,   0,   0
-Unknown_83761AE:
-	.byte   0,  -2,  -3,  -4,  -5,  -6,  -6,  -6,  -5,  -5,  -4,  -3,  -2,   0,   0,   0
-Unknown_83761BE:
-	.byte  -2,  -4,  -6,  -8,  -9, -10, -10, -10,  -9,  -8,  -6,  -5,  -3,  -2,   0,   0
-
-	.align 2
-gUnknown_083761D0:: @ 83761D0
-	.4byte Unknown_837619E
-	.4byte Unknown_83761AE
-	.4byte Unknown_83761BE
-
-	.align 1
-gUnknown_083761DC:: @ 83761DC
-	.2byte 0x10, 0x10, 0x20
-
-gUnknown_083761E2:: @ 83761E2
-	.byte 0, 0, 1
-
-	.align 1
-gUnknown_083761E6:: @ 83761E6
-	.2byte 0x20, 0x20, 0x40
-
-gUnknown_083761EC:: @ 83761EC
-	.byte 1, 1, 2
-
-	.align 2
-gUnknown_083761F0:: @ 83761F0
-	.4byte gTextWindowFrame1_Gfx, gTextWindowFrame1_Pal
-	.4byte gTextWindowFrame2_Gfx, gTextWindowFrame2_Pal
-	.4byte gTextWindowFrame3_Gfx, gTextWindowFrame3_Pal
-	.4byte gTextWindowFrame4_Gfx, gTextWindowFrame4_Pal
-	.4byte gTextWindowFrame5_Gfx, gTextWindowFrame5_Pal
-	.4byte gTextWindowFrame6_Gfx, gTextWindowFrame6_Pal
-	.4byte gTextWindowFrame7_Gfx, gTextWindowFrame7_Pal
-	.4byte gTextWindowFrame8_Gfx, gTextWindowFrame8_Pal
-	.4byte gTextWindowFrame9_Gfx, gTextWindowFrame9_Pal
-	.4byte gTextWindowFrame10_Gfx, gTextWindowFrame10_Pal
-	.4byte gTextWindowFrame11_Gfx, gTextWindowFrame11_Pal
-	.4byte gTextWindowFrame12_Gfx, gTextWindowFrame12_Pal
-	.4byte gTextWindowFrame13_Gfx, gTextWindowFrame13_Pal
-	.4byte gTextWindowFrame14_Gfx, gTextWindowFrame14_Pal
-	.4byte gTextWindowFrame15_Gfx, gTextWindowFrame15_Pal
-	.4byte gTextWindowFrame16_Gfx, gTextWindowFrame16_Pal
-	.4byte gTextWindowFrame17_Gfx, gTextWindowFrame17_Pal
-	.4byte gTextWindowFrame18_Gfx, gTextWindowFrame18_Pal
-	.4byte gTextWindowFrame19_Gfx, gTextWindowFrame19_Pal
-	.4byte gTextWindowFrame20_Gfx, gTextWindowFrame20_Pal
-
-	.align 1
-gMessageBoxTilemap:: @ 8376290
-	.incbin "graphics/text_window/message_box_map.bin"
-
-	.align 2
-gUnknown_083762D8:: @ 83762D8
-	.4byte NULL
-
-gScriptConditionTable:: @ 83762DC
-	@     <  =  >
-	.byte 1, 0, 0 @ <
-	.byte 0, 1, 0 @ =
-	.byte 0, 0, 1 @ >
-	.byte 1, 1, 0 @ <=
-	.byte 0, 1, 1 @ >=
-	.byte 1, 0, 1 @ !=
-
-	.align 2
-gUnknown_083762F0:: @ 83762F0
-	.4byte gStringVar1
-	.4byte gStringVar2
-	.4byte gStringVar3
-
-	.align 2
-gUnknown_083762FC:: @ 83762FC
-	.4byte 0x1, sub_806936C
-	.4byte 0x2, sub_8069378
-	.4byte 0x3, sub_8069384
-	.4byte 0x4, sub_8069390
-	.4byte 0x5, sub_806939C
-	.4byte 0x6, sub_80693A8
-	.4byte 0x7, sub_80693B4
-	.4byte 0x8, sub_80693C0
-	.4byte 0x9, sub_80693CC
-	.4byte 0xa, sub_80693D8
-	.4byte 0xb, sub_80693E4
-	.4byte 0x14, sub_80693F0
-	.4byte 0x15, sub_80693FC
-
-	.align 2
 gUnknown_08376364:: @ 8376364
-	.4byte nullsub_51
-	.4byte sub_8069F64
-	.4byte sub_8069AA0
-	.4byte sub_8069864
-	.4byte sub_8069DD4
+	.4byte DummyPerStepCallback
+	.4byte PerStepCallback_8069F64
+	.4byte PerStepCallback_8069AA0
+	.4byte PerStepCallback_8069864
+	.4byte PerStepCallback_8069DD4
 	.4byte EndTruckSequence
 	.4byte sub_80BCF1C
-	.4byte sub_806A07C
+	.4byte PerStepCallback_806A07C
 
 gUnknown_08376384:: @ 8376384
 	.incbin "baserom.gba", 0x00376384, 0x20
@@ -337,7 +186,7 @@ gSpriteAnimTable_8376604:: @ 8376604
 
 	.align 2
 gSpriteTemplate_837660C:: @ 837660C
-	spr_template 55120, 55120, gOamData_83765EC, gSpriteAnimTable_8376604, NULL, gDummySpriteAffineAnimTable, sub_806DD7C
+	spr_template 55120, 55120, gOamData_83765EC, gSpriteAnimTable_8376604, NULL, gDummySpriteAffineAnimTable, SpriteCB_HeldItemIcon_806DD7C
 
 	.align 2
 gUnknown_08376624:: @ 8376624
@@ -827,8 +676,8 @@ gUnknown_08376A5E:: @ 8376A5E
 
 	.align 2
 gUnknown_08376B54:: @ 8376B54
-	.4byte ether_effect_related_2
-	.4byte sub_80704F0
+	.4byte ItemUseMoveMenu_HandleMoveSelection
+	.4byte ItemUseMoveMenu_HandleCancel
 
 	.align 1
 Unknown_08376B5C:
@@ -953,7 +802,7 @@ gUnknown_08376BB4:: @ 8376BB4
 	.align 2
 gUnknown_08376C74:: @ 8376C74
 	.4byte sub_8089CD4, sub_806AFD0, 0
-	.4byte sub_8095118, sub_8094E58, 0
+	.4byte SetUpBattlePokemonMenu, SetUpBattlePartyMenu, 0
 	.4byte sub_80F9C6C, sub_80F9ACC, 0
 	.4byte sub_80F9C6C, sub_806AFD0, 0
 	.4byte sub_81222B0, sub_8121E78, 0
@@ -1002,7 +851,7 @@ gStartMenuItems:: @ 8376D24
 	.4byte SystemText_Player, StartMenu_PlayerLinkCallback
 
 	.align 2
-gUnknown_08376D74:: @ 8376D74
+gMenuYesNoItems:: @ 8376D74
 	.4byte OtherText_Yes, 0
 	.4byte OtherText_No, 0
 
@@ -5216,10 +5065,10 @@ gUnknown_083B5F8C:: @ 83B5F8C
 
 	.align 2
 gUnknown_083B5FCC:: @ 83B5FCC
-	.4byte OtherText_Summary, sub_8095544
-	.4byte gOtherText_CancelNoTerminator, sub_80958C4
-	.4byte OtherText_Shift, sub_8095584
-	.4byte OtherText_SendOut, sub_8095584
+	.4byte OtherText_Summary, BattlePokemonMenu_Summary
+	.4byte gOtherText_CancelNoTerminator, BattlePokemonMenu_Cancel
+	.4byte OtherText_Shift, BattlePokemonMenu_Shift
+	.4byte OtherText_SendOut, BattlePokemonMenu_Shift
 
 Unknown_83B5FEC: @ 83B5FEC
 	.byte 2, 0, 1
@@ -7366,7 +7215,7 @@ gUnknown_083CC738:: @ 83CC738
 	.include "data/berries.inc"
 
 	.align 2
-gUnknown_083CD780:: @ 83CD780
+gBlankBerryTree:: @ 83CD780
 	.4byte 0, 0
 
 @ 83CD788
@@ -7959,7 +7808,30 @@ gUnknown_083D13EC:: @ 83D13EC
 	.incbin "baserom.gba", 0x003d13ec, 0xc
 
 gUnknown_083D13F8:: @ 83D13F8
-	.incbin "baserom.gba", 0x003d13f8, 0x3c
+	.2byte	SPECIES_SURSKIT
+	.2byte	MOVE_BUBBLE, MOVE_QUICK_ATTACK, MOVE_NONE, MOVE_NONE
+	.byte	3
+	.byte	MAPSEC_Route102
+
+	.2byte	SPECIES_SURSKIT
+	.2byte	MOVE_BUBBLE, MOVE_QUICK_ATTACK, MOVE_NONE, MOVE_NONE
+	.byte	15
+	.byte	MAPSEC_Route114
+
+	.2byte	SPECIES_SURSKIT
+	.2byte	MOVE_BUBBLE, MOVE_QUICK_ATTACK, MOVE_NONE, MOVE_NONE
+	.byte	15
+	.byte	MAPSEC_Route117
+
+	.2byte	SPECIES_SURSKIT
+	.2byte	MOVE_BUBBLE, MOVE_QUICK_ATTACK, MOVE_NONE, MOVE_NONE
+	.byte	28
+	.byte	MAPSEC_Route120
+
+	.2byte	SPECIES_SKITTY
+	.2byte	MOVE_GROWL, MOVE_TACKLE, MOVE_NONE, MOVE_NONE
+	.byte	15
+	.byte	MAPSEC_Route116
 
 	.align 2
 gUnknown_083D1434:: @ 83D1434
@@ -8850,18 +8722,18 @@ gUnknown_083D61DC:: @ 83D61DC
 	.4byte Unknown_83D61BC
 
 	.align 2
-gUnknown_083D61E4:: @ 83D61E4
+gExitToOverworldFuncList:: @ 83D61E4
 	.4byte sub_808B020
 	.4byte c2_exit_to_overworld_2_switch
 	.4byte sub_810B96C
 
-gUnknown_083D61F0:: @ 83D61F0
+gItemFinderDirections:: @ 83D61F0
 	.byte DIR_NORTH, DIR_EAST, DIR_SOUTH, DIR_WEST
 
 	.align 2
 gUnknown_083D61F4:: @ 83D61F4
 	.4byte sub_80C9FC0
-	.4byte sub_80A5C48
+	.4byte CleanUpItemMenuMessage
 
 	.align 2
 gSpriteAnim_83D61FC:: @ 83D61FC
@@ -20200,7 +20072,7 @@ gIntroTiles::
 	.incbin "graphics/intro/intro.4bpp.lz"
 
 	.align 2
-gUnknown_08406974:: @ 8406974
+gIntro1BGPals:: @ 8406974
 	.incbin "graphics/intro/intro1_bgpal1.gbapal"
 	.incbin "graphics/intro/intro1_bgpal2.gbapal"
 	.incbin "graphics/intro/intro1_bgpal3.gbapal"
@@ -20219,47 +20091,47 @@ gUnknown_08406974:: @ 8406974
 	.incbin "graphics/intro/intro1_bgpal16.gbapal"
 
 	.align 2
-gUnknown_08406B74:: @ 8406B74
+gIntro1BG0_Tilemap:: @ 8406B74
 	.incbin "graphics/intro/intro1_bg0_map.bin.lz"
 
 	.align 2
-gUnknown_08406F28:: @ 8406F28
+gIntro1BG1_Tilemap:: @ 8406F28
 	.incbin "graphics/intro/intro1_bg1_map.bin.lz"
 
 	.align 2
-gUnknown_0840725C:: @ 840725C
+gIntro1BG2_Tilemap:: @ 840725C
 	.incbin "graphics/intro/intro1_bg2_map.bin.lz"
 
 	.align 2
-gUnknown_0840754C:: @ 840754C
+gIntro1BG3_Tilemap:: @ 840754C
 	.incbin "graphics/intro/intro1_bg3_map.bin.lz"
 
 	.align 2
-gUnknown_08407764:: @ 8407764
+gIntro1BGLeavesGfx:: @ 8407764
 	.incbin "graphics/intro/introgfx.4bpp.lz"
 
 	.align 2
-gUnknown_084098D4:: @ 84098D4
+gIntro3PokeballPal:: @ 84098D4
 	.incbin "graphics/intro/intro3_pokeball.gbapal"
 
 	.align 2
-gUnknown_08409AD4:: @ 8409AD4
+gIntro3Pokeball_Tilemap:: @ 8409AD4
 	.incbin "graphics/intro/intro3_pokeball_map.bin.lz"
 
 	.align 2
-gUnknown_08409C04:: @ 8409C04
+gIntro3Pokeball_Gfx:: @ 8409C04
 	.incbin "graphics/intro/intro3_pokeball.8bpp.lz"
 
 	.align 2
-gUnknown_0840A758:: @ 840A758
+gIntro3Streaks_Pal:: @ 840A758
 	.incbin "graphics/intro/intro3_streaks.gbapal"
 
 	.align 2
-gUnknown_0840A778:: @ 840A778
+gIntro3Streaks_Gfx:: @ 840A778
 	.incbin "graphics/intro/intro3_streaks.4bpp.lz"
 
 	.align 2
-gUnknown_0840A7E4:: @ 840A7E4
+gIntro3Streaks_Tilemap:: @ 840A7E4
 	.incbin "graphics/intro/intro3_streaks_map.bin.lz"
 
 	.align 2
@@ -20620,7 +20492,7 @@ gSpriteAnimTable_840B14C:: @ 840B14C
 
 	.align 2
 gSpriteTemplate_840B150:: @ 840B150
-	spr_template 2003, 2004, gOamData_840B13C, gSpriteAnimTable_840B14C, NULL, gDummySpriteAffineAnimTable, GetCurrentTrainerHillMapId
+	spr_template 2003, 2004, gOamData_840B13C, gSpriteAnimTable_840B14C, NULL, gDummySpriteAffineAnimTable, sub_813E980
 
 gUnknown_0840B168:: @ 840B168
 	.incbin "baserom.gba", 0x0040b168, 0x8
@@ -20675,22 +20547,22 @@ gSpriteTemplate_840B1F4:: @ 840B1F4
 	spr_template 2003, 2003, gOamData_840B1E0, gSpriteAnimTable_840B1F0, NULL, gDummySpriteAffineAnimTable, sub_813EDFC
 
 	.align 2
-gUnknown_0840B20C:: @ 840B20C
+gIntro3PokeballGfx_Table:: @ 840B20C
 	obj_tiles gInterfaceGfx_PokeBall, 0x100, 2002
 	.space 8
 
 	.align 2
-gUnknown_0840B21C:: @ 840B21C
+gIntro3MiscGfx_Table:: @ 840B21C
 	obj_tiles gIntro3MiscTiles, 0xa00, 2003
 	.space 8
 
 	.align 2
-gUnknown_0840B22C:: @ 840B22C
+gInterfacePokeballPal_Table:: @ 840B22C
 	obj_pal gInterfacePal_PokeBall, 2002
 	.space 8
 
 	.align 2
-gUnknown_0840B23C:: @ 840B23C
+gIntro3MiscPal_Table:: @ 840B23C
 	obj_pal gIntro3Misc1Palette, 2003
 	obj_pal gIntro3Misc2Palette, 2004
 	.space 8
@@ -21640,7 +21512,7 @@ gOtherText_CantGetOffBike:: @ 840E929
 gOtherText_ItemfinderResponding:: @ 840E94E
 	.string "Oh!\nThe machine’s responding!\pThere’s an item buried around here!{PAUSE_UNTIL_PRESS}$"
 
-gOtherText_ItemfinderFoundItem:: @ 840E992
+gOtherText_ItemfinderItemUnderfoot:: @ 840E992
 	.string "The machine’s indicating something\nright underfoot!{PAUSE_UNTIL_PRESS}$"
 
 gOtherText_NoResponse:: @ 840E9C8

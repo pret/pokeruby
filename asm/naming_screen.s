@@ -2846,7 +2846,7 @@ sub_80B6EFC: @ 80B6EFC
 	str r2, [sp, 0x4]
 	movs r2, 0x34
 	movs r3, 0x18
-	bl sub_809D2FC
+	bl CreateMonIcon
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _080B6F40 @ =gSprites

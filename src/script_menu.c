@@ -4,7 +4,7 @@
 #include "palette.h"
 #include "script.h"
 #include "sound.h"
-#include "flag.h"
+#include "event_data.h"
 #include "sprite.h"
 
 struct MultichoiceListStruct
@@ -336,7 +336,7 @@ void CreatePCMenu(void)
     else
         width = 8;
 
-    if(FlagGet(0x804)) // player has cleared game?
+    if(FlagGet(SYS_GAME_CLEAR)) // player has cleared game?
     {
         numChoices = 4;
         MenuDrawTextWindow(0, 0, width + 2, 9);
@@ -350,7 +350,7 @@ void CreatePCMenu(void)
         MenuPrint(gPCText_LogOff, 1, 5);
     }
 
-    if(FlagGet(0x84B)) // player met lanette?
+    if(FlagGet(SYS_PC_LANETTE)) // player met lanette?
         MenuPrint(gPCText_LanettesPC, 1, 1);
     else
         MenuPrint(gPCText_SomeonesPC, 1, 1);

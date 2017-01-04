@@ -9,7 +9,7 @@
 #include "field_map_obj.h"
 #include "field_message_box.h"
 #include "field_player_avatar.h"
-#include "flag.h"
+#include "event_data.h"
 #include "heal_location.h"
 #include "link.h"
 #include "load_save.h"
@@ -27,7 +27,6 @@
 #include "task.h"
 #include "tileset_anim.h"
 #include "truck_scene.h"
-#include "var.h"
 #include "weather.h"
 #include "wild_encounter.h"
 #include "metatile_behavior.h"
@@ -518,7 +517,7 @@ void sub_80538F0(u8 mapGroup, u8 mapNum)
     warp_shift();
     set_current_map_header_from_sav1_save_old_name();
     sub_8053154();
-    sub_806906C();
+    ClearTempFieldEventData();
     ResetCyclingRoadChallengeData();
     prev_quest_postbuffer_cursor_backup_reset();
     sub_8082BD0(mapGroup, mapNum);
@@ -536,8 +535,8 @@ void sub_80538F0(u8 mapGroup, u8 mapNum)
     sub_8072ED0();
     mapnumbers_history_shift_sav1_0_2_4_out();
     sub_8134394();
-    sub_808073C();
-    wild_encounter_reset_coro_args();
+    DoCurrentWeather();
+    ResetFieldTasksArgs();
     mapheader_run_script_with_tag_x5();
     AddMapNamePopUpWindowTask();
 }
@@ -549,9 +548,9 @@ void sub_8053994(u32 a1)
 
     set_current_map_header_from_sav1_save_old_name();
     sub_8053154();
-    v2 = is_light_level_1_2_3_5_or_6(gMapHeader.light);
-    v3 = is_light_level_8_or_9(gMapHeader.light);
-    sub_806906C();
+    v2 = is_light_level_1_2_3_5_or_6(gMapHeader.mapType);
+    v3 = is_light_level_8_or_9(gMapHeader.mapType);
+    ClearTempFieldEventData();
     ResetCyclingRoadChallengeData();
     prev_quest_postbuffer_cursor_backup_reset();
     sub_8082BD0(gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum);
@@ -616,7 +615,7 @@ u8 sub_8053B00(struct UnkPlayerStruct *playerStruct, u16 a2, u8 a3)
         return 16;
     if (MetatileBehavior_IsSurfableWaterOrUnderwater(a2) == 1)
         return 8;
-    if (sub_8053C44() != 1)
+    if (IsBikingAllowedByMap() != TRUE)
         return 1;
     if (playerStruct->player_field_0 == 2)
         return 2;
@@ -654,20 +653,28 @@ u16 cur_mapdata_block_role_at_screen_center_acc_to_sav1(void)
     return MapGridGetMetatileBehaviorAt(gSaveBlock1.pos.x + 7, gSaveBlock1.pos.y + 7);
 }
 
-bool32 sub_8053C44(void)
+bool32 IsBikingAllowedByMap(void)
 {
+    // is player in cycling road entrance?
     if (gSaveBlock1.location.mapGroup == 29 && (gSaveBlock1.location.mapNum == 11 || gSaveBlock1.location.mapNum == 12))
         return TRUE;
-    if (gMapHeader.light == 8)
+
+    // is player indoor, in a secret base, or underwater?
+    if (gMapHeader.mapType == MAP_TYPE_INDOOR)
         return FALSE;
-    if (gMapHeader.light == 9)
+    if (gMapHeader.mapType == MAP_TYPE_SECRET_BASE)
         return FALSE;
-    if (gMapHeader.light == 5)
+    if (gMapHeader.mapType == MAP_TYPE_UNDERWATER)
         return FALSE;
+	
+    // is player in SeafloorCavern_Room9?
     if (gSaveBlock1.location.mapGroup == 24 && gSaveBlock1.location.mapNum == 36)
         return FALSE;
+	
+    // is player in CaveOfOrigin_B4F?
     if (gSaveBlock1.location.mapGroup == 24 && gSaveBlock1.location.mapNum == 42)
         return FALSE;
+	
     return TRUE;
 }
 
@@ -855,7 +862,7 @@ void sub_8053FB0(u16 music)
 u8 is_warp1_light_level_8_or_9(void)
 {
     struct MapHeader *mapHeader = warp1_get_mapheader();
-    if (is_light_level_8_or_9(mapHeader->light) == TRUE)
+    if (is_light_level_8_or_9(mapHeader->mapType) == TRUE)
         return 2;
     else
         return 4;
@@ -940,7 +947,7 @@ void sub_8054164(void)
 
 u8 get_map_light_level_by_bank_and_number(s8 mapGroup, s8 mapNum)
 {
-    return get_mapheader_by_bank_and_number(mapGroup, mapNum)->light;
+    return get_mapheader_by_bank_and_number(mapGroup, mapNum)->mapType;
 }
 
 u8 get_map_light_level_from_warp(struct WarpData *warp)
@@ -1257,7 +1264,7 @@ void CB2_ContinueSavedGame(void)
     ResetSafariZoneFlag_();
     sub_805338C();
     sub_8053198();
-    sub_806451C();
+    UnfreezeMapObjects();
     DoTimeBasedEvents();
     sub_805308C();
     sub_8055FC0();
@@ -1629,7 +1636,7 @@ void sub_8054D4C(u32 a1)
     sub_807C828();
     sub_8080750();
     if (!a1)
-        overworld_ensure_per_step_coros_running();
+        SetUpFieldTasks();
     mapheader_run_script_with_tag_x5();
 }
 

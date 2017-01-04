@@ -1880,43 +1880,43 @@ _0807DCD0:
 	.4byte _0807DD40
 _0807DCF8:
 	movs r0, 0x1
-	bl sub_808070C
+	bl SetWeather
 	b _0807DD46
 _0807DD00:
 	movs r0, 0x2
-	bl sub_808070C
+	bl SetWeather
 	b _0807DD46
 _0807DD08:
 	movs r0, 0x3
-	bl sub_808070C
+	bl SetWeather
 	b _0807DD46
 _0807DD10:
 	movs r0, 0x4
-	bl sub_808070C
+	bl SetWeather
 	b _0807DD46
 _0807DD18:
 	movs r0, 0x5
-	bl sub_808070C
+	bl SetWeather
 	b _0807DD46
 _0807DD20:
 	movs r0, 0x6
-	bl sub_808070C
+	bl SetWeather
 	b _0807DD46
 _0807DD28:
 	movs r0, 0x9
-	bl sub_808070C
+	bl SetWeather
 	b _0807DD46
 _0807DD30:
 	movs r0, 0x7
-	bl sub_808070C
+	bl SetWeather
 	b _0807DD46
 _0807DD38:
 	movs r0, 0x8
-	bl sub_808070C
+	bl SetWeather
 	b _0807DD46
 _0807DD40:
 	movs r0, 0xB
-	bl sub_808070C
+	bl SetWeather
 _0807DD46:
 	pop {r0}
 	bx r0
@@ -7387,8 +7387,8 @@ _08080704: .4byte gSaveBlock1
 _08080708: .4byte gMapHeader
 	thumb_func_end sub_80806E4
 
-	thumb_func_start sub_808070C
-sub_808070C: @ 808070C
+	thumb_func_start SetWeather
+SetWeather: @ 808070C
 	push {lr}
 	bl SetSav1Weather
 	bl GetSav1Weather
@@ -7397,10 +7397,10 @@ sub_808070C: @ 808070C
 	bl DoWeatherEffect
 	pop {r0}
 	bx r0
-	thumb_func_end sub_808070C
+	thumb_func_end SetWeather
 
-	thumb_func_start sub_8080724
-sub_8080724: @ 8080724
+	thumb_func_start SetWeather_Unused
+SetWeather_Unused: @ 8080724
 	push {lr}
 	bl SetSav1Weather
 	bl GetSav1Weather
@@ -7409,10 +7409,10 @@ sub_8080724: @ 8080724
 	bl sub_807C988
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8080724
+	thumb_func_end SetWeather_Unused
 
-	thumb_func_start sub_808073C
-sub_808073C: @ 808073C
+	thumb_func_start DoCurrentWeather
+DoCurrentWeather: @ 808073C
 	push {lr}
 	bl GetSav1Weather
 	lsls r0, 24
@@ -7420,7 +7420,7 @@ sub_808073C: @ 808073C
 	bl DoWeatherEffect
 	pop {r0}
 	bx r0
-	thumb_func_end sub_808073C
+	thumb_func_end DoCurrentWeather
 
 	thumb_func_start sub_8080750
 sub_8080750: @ 8080750

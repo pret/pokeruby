@@ -611,7 +611,7 @@ sub_8106AC4: @ 8106AC4
 	ldr r4, [r7]
 	ldr r4, [r4]
 	str r4, [sp, 0x8]
-	bl sub_800D334
+	bl HandleLoadSpecialPokePic
 	mov r2, r8
 	ldr r1, [r2]
 	ldr r0, _08106B3C @ =gUnknown_03005E10
@@ -644,7 +644,7 @@ _08106B40:
 	ldr r4, [r7]
 	ldr r4, [r4]
 	str r4, [sp, 0x8]
-	bl sub_800D334
+	bl HandleLoadSpecialPokePic
 	mov r0, r8
 	ldr r1, [r0]
 	ldr r0, _08106B8C @ =gUnknown_03005E10

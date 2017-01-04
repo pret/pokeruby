@@ -2,7 +2,7 @@
 #include "safari_zone.h"
 #include "asm.h"
 #include "field_player_avatar.h"
-#include "flag.h"
+#include "event_data.h"
 #include "main.h"
 #include "script.h"
 #include "string_util.h"

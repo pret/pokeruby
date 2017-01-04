@@ -1395,7 +1395,7 @@ _0813B036:
 	mov r0, r8
 	bl StringCopy
 	mov r0, r8
-	bl sub_814A568
+	bl SanitizeNameString
 	mov r0, r8
 	movs r1, 0x15
 	adds r2, r5, 0
@@ -1683,7 +1683,7 @@ sub_813B294: @ 813B294
 	adds r0, r4, 0
 	bl StringCopy
 	adds r0, r4, 0
-	bl sub_814A568
+	bl SanitizeNameString
 	ldr r4, _0813B2F4 @ =gStringVar4
 	ldr r1, _0813B2F8 @ =gOtherText_WhatWillYouDoMail
 	adds r0, r4, 0
@@ -1900,7 +1900,7 @@ sub_813B454: @ 813B454
 	adds r0, r1
 	ldr r1, _0813B49C @ =sub_813B4F0
 	movs r2, 0x1
-	bl sub_80F890C
+	bl HandleReadMail
 	adds r0, r4, 0
 	bl DestroyTask
 _0813B488:

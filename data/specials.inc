@@ -50,7 +50,7 @@ gSpecials::
 	.4byte FieldObjectInteractionRemoveBerryTree
 	.4byte FieldObjectInteractionWaterBerryTree
 	.4byte PlayerHasBerries
-	.4byte sub_80B4940
+	.4byte IsEnigmaBerryValid
 	.4byte sub_8082558
 	.4byte sub_80826D8
 	.4byte sub_8082718
@@ -60,7 +60,7 @@ gSpecials::
 	.4byte sub_8082C68
 	.4byte sub_8082C9C
 	.4byte sub_80826B0
-	.4byte sub_8096100
+	.4byte ShowPokemonStorageSystem
 	.4byte CheckForAlivePartyMons
 	.4byte TurnOffTVScreen
 	.4byte DoTVShow
@@ -156,8 +156,8 @@ gSpecials::
 	.4byte sub_8053E90
 	.4byte sub_806A460
 	.4byte sub_810D6B8
-	.4byte sub_8082168
-	.4byte sub_8081AFC
+	.4byte ChooseStarter
+	.4byte StartBattle_WallyTutorial
 	.4byte sub_80BF9F8
 	.4byte sub_80F9A0C
 	.4byte sub_810CA00
@@ -279,8 +279,8 @@ gSpecials::
 	.4byte RemoveCameraDummy
 	.4byte GetPokeblockNameByMonNature
 	.4byte GetSecretBaseNearbyMapName
-	.4byte sub_8147478
-	.4byte sub_814768C
+	.4byte CheckRelicanthWailord
+	.4byte DoBrailleWait
 	.4byte sub_80818A4
 	.4byte sub_80818FC
 	.4byte ShowBattleTowerRecords
@@ -305,17 +305,17 @@ gSpecials::
 	.4byte IsStarterInParty
 	.4byte sub_80BC224
 	.4byte CheckFreePokemonStorageSpace
-	.4byte sub_81477B4
+	.4byte DoSealedChamberShakingEffect1
 	.4byte sub_810E944
 	.4byte GetShieldToyTVDecorationInfo
 	.4byte IsPokerusInParty
 	.4byte sub_8069D78
 	.4byte sub_810F758
-	.4byte sub_8081BF8
-	.4byte sub_8081BB8
-	.4byte sub_8081C50
+	.4byte StartBattle_GroudonKyogre
+	.4byte StartBattle_Rayquaza
+	.4byte StartBattle_Regi
 	.4byte sub_8082524
-	.4byte sub_81477F0
+	.4byte DoSealedChamberShakingEffect2
 	.4byte sub_810F828
 	.4byte sub_807E25C
 	.4byte sp13E_warp_to_last_warp
@@ -323,7 +323,7 @@ gSpecials::
 	.4byte ShowContestEntryMonPic
 	.4byte sub_80C5164
 	.4byte sub_8134AB4
-	.4byte sub_8081B78
+	.4byte StartBattle_SouthernIsland
 	.4byte SetRoute119Weather
 	.4byte SetRoute123Weather
 	.4byte ScriptGetMultiplayerId

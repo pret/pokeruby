@@ -4560,7 +4560,7 @@ sub_807794C: @ 807794C
 	lsls r0, 24
 	cmp r0, 0
 	bne _080779F6
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080779F6
@@ -4646,7 +4646,7 @@ sub_80779FC: @ 80779FC
 	lsls r0, 24
 	cmp r0, 0
 	bne _08077A88
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _08077A88

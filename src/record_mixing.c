@@ -9,8 +9,7 @@
 #include "sound.h"
 #include "string_util.h"
 #include "task.h"
-#include "flag.h"
-#include "var.h"
+#include "event_data.h"
 
 extern void *recordMixingSecretBases;
 extern void *recordMixingTvShows;

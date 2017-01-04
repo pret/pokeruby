@@ -11,6 +11,7 @@
 #include "menu.h"
 #include "sound.h"
 #include "save.h"
+#include "battle.h"
 
 #define SIO_MULTI_CNT ((struct SioMultiCnt *)REG_ADDR_SIOCNT)
 
@@ -33,7 +34,7 @@ struct LinkTestBGInfo
 
 extern u8 unk_2000000[];
 extern u8 unk_2004000[];
-extern u16 gUnknown_020239F8;
+extern u16 gBattleTypeFlags;
 extern u16 gScriptItemId;
 
 extern u16 word_3004858;
@@ -1107,7 +1108,7 @@ static void sub_800837C(void)
 
     if (count == totalCount)
     {
-        gUnknown_020239F8 &= 0xFFDF;
+        gBattleTypeFlags &= ~BATTLE_TYPE_20;
         gLinkVSyncDisabled = TRUE;
         CloseLink();
         gLinkCallback = NULL;
@@ -1131,7 +1132,7 @@ static void sub_80083E0(void)
 
     if (count == totalCount)
     {
-        gUnknown_020239F8 &= 0xFFDF;
+        gBattleTypeFlags &= ~BATTLE_TYPE_20;
         gLinkVSyncDisabled = TRUE;
         CloseLink();
         gLinkCallback = 0;

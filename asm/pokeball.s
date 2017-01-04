@@ -1174,7 +1174,7 @@ _08046D34:
 	cmp r5, r0
 	bne _08046DAE
 _08046D5A:
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _08046DAE
@@ -1184,7 +1184,7 @@ _08046D5A:
 	ands r0, r1
 	cmp r0, 0
 	beq _08046DAE
-	ldr r0, _08046D9C @ =gUnknown_020239F8
+	ldr r0, _08046D9C @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x40
 	ands r0, r1
@@ -1201,7 +1201,7 @@ _08046D5A:
 _08046D90: .4byte gUnknown_02024A6A
 _08046D94: .4byte gPlayerParty
 _08046D98: .4byte 0x02017840
-_08046D9C: .4byte gUnknown_020239F8
+_08046D9C: .4byte gBattleTypeFlags
 _08046DA0: .4byte gMPlay_BGM
 _08046DA4:
 	ldr r0, _08046DC8 @ =gMPlay_BGM
@@ -1209,7 +1209,7 @@ _08046DA4:
 	movs r2, 0x80
 	bl m4aMPlayVolumeControl
 _08046DAE:
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _08046DC4
@@ -1738,7 +1738,7 @@ _080471B8:
 	ldrb r0, [r5, 0x6]
 	strh r0, [r5, 0x3A]
 	strh r1, [r5, 0x2E]
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _08047214
@@ -1813,7 +1813,7 @@ sub_8047254: @ 8047254
 	ble _080472A4
 	movs r0, 0
 	strh r0, [r5, 0x2E]
-	bl battle_type_is_double
+	bl IsDoubleBattle
 	lsls r0, 24
 	cmp r0, 0
 	beq _080472A0
@@ -2604,7 +2604,7 @@ sub_8047858: @ 8047858
 	lsrs r4, 24
 	ldr r5, _08047890 @ =oamc_804BEB4
 	adds r0, r5, 0
-	bl object_new_hidden_with_callback
+	bl CreateInvisibleSpriteWithCallback
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _08047894 @ =gSprites

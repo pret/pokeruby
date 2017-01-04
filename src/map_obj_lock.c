@@ -36,9 +36,9 @@ bool8 sub_8064CFC(void)
     }
 }
 
-void sub_8064D20(void)
+void ScriptFreezeMapObjects(void)
 {
-    player_bitmagic();
+    FreezeMapObjects();
     CreateTask(sub_8064CDC, 80);
 }
 
@@ -53,7 +53,7 @@ void sub_8064D38(u8 taskId)
     }
     if (!task->data[1] && !gMapObjects[gSelectedMapObject].mapobj_bit_1)
     {
-        sub_80643A4(&gMapObjects[gSelectedMapObject]);
+        FreezeMapObject(&gMapObjects[gSelectedMapObject]);
         task->data[1] = 1;
     }
     if (task->data[0] && task->data[1])
@@ -76,11 +76,11 @@ bool8 sub_8064DB4(void)
 void sub_8064DD8(void)
 {
     u8 taskId;
-    sub_8064470(gSelectedMapObject);
+    FreezeMapObjectsExceptOne(gSelectedMapObject);
     taskId = CreateTask(sub_8064D38, 80);
     if (!gMapObjects[gSelectedMapObject].mapobj_bit_1)
     {
-        sub_80643A4(&gMapObjects[gSelectedMapObject]);
+        FreezeMapObject(&gMapObjects[gSelectedMapObject]);
         gTasks[taskId].data[1] = 1;
     }
 }
@@ -90,7 +90,7 @@ void sub_8064E2C(void)
     u8 objectId = GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0);
     FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[objectId]);
     sub_80A2178();
-    sub_806451C();
+    UnfreezeMapObjects();
 }
 
 void unref_sub_8064E5C(void)
@@ -102,7 +102,7 @@ void unref_sub_8064E5C(void)
     objectId = GetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0);
     FieldObjectClearAnimIfSpecialAnimFinished(&gMapObjects[objectId]);
     sub_80A2178();
-    sub_806451C();
+    UnfreezeMapObjects();
 }
 
 void sub_8064EAC(void)

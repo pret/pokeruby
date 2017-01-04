@@ -41,7 +41,7 @@ EWRAM_DATA u16 gMenuTextWindowTileOffset = 0;
 EWRAM_DATA u16 gMenuTextWindowContentTileOffset = 0;
 EWRAM_DATA u16 gMenuMessageBoxContentTileOffset = 0;
 
-extern const struct MenuAction gUnknown_08376D74[];
+extern const struct MenuAction gMenuYesNoItems[];
 
 void sub_8071C20(void)
 {
@@ -575,7 +575,7 @@ void PrintMenuItemsReordered(u8 left, u8 top, u8 menuItemCount, const struct Men
 
 void InitYesNoMenu(u8 left, u8 top, u8 a3)
 {
-    PrintMenuItems(left + 1, top + 1, 2, gUnknown_08376D74);
+    PrintMenuItems(left + 1, top + 1, 2, gMenuYesNoItems);
     InitMenu(0, left + 1, top + 1, 2, 0, a3);
 }
 

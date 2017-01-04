@@ -1,7 +1,7 @@
 #include "global.h"
 #include "script.h"
 #include "asm_fieldmap.h"
-#include "var.h"
+#include "event_data.h"
 
 #define RAM_SCRIPT_MAGIC 51
 
@@ -15,7 +15,7 @@ static bool8 sScriptContext2Enabled;
 
 extern ScrCmdFunc gScriptCmdTable[];
 extern ScrCmdFunc gScriptCmdTableEnd[];
-extern void *gUnknown_083762D8;
+extern void *gNullScriptPtr;
 
 void InitScriptContext(struct ScriptContext *ctx, void *cmdTable, void *cmdTableEnd)
 {
@@ -83,7 +83,7 @@ u8 RunScript(struct ScriptContext *ctx)
                 return 0;
             }
 
-            if (ctx->scriptPtr == gUnknown_083762D8)
+            if (ctx->scriptPtr == gNullScriptPtr)
             {
                 while (1)
                     asm("svc 2"); // HALT

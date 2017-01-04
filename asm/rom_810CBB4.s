@@ -1133,7 +1133,7 @@ _0810D460:
 _0810D470:
 	ldr r1, _0810D484 @ =gSpecialVar_0x8006
 	strh r0, [r1]
-	bl IsNationalPokedex
+	bl IsNationalPokedexEnabled
 	lsls r0, 16
 	lsrs r0, 16
 	pop {r1}

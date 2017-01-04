@@ -37,7 +37,7 @@ void SetSav1Weather(u32);
 u8 GetSav1Weather(void);
 void sub_80806E4(void);
 // ...
-void sub_808073C(void);
+void DoCurrentWeather(void);
 void sub_8080750();
 
 #endif // GUARD_WEATHER_H

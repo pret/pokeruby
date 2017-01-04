@@ -113,7 +113,7 @@ _08121EC0:
 	muls r2, r3
 	ldr r3, _08121EF0 @ =gPlayerParty
 	adds r2, r3
-	bl sub_806D90C
+	bl TryCreatePartyMenuMonIcon
 	b _08122020
 	.align 2, 0
 _08121EE8: .4byte 0x00000266
@@ -127,7 +127,7 @@ _08121EF4:
 	adds r1, r4, r0
 	b _08121FE8
 _08121F00:
-	bl sub_806DA98
+	bl LoadHeldItemIconGraphics
 	ldr r1, _08121F10 @ =0x0201b000
 	movs r2, 0x99
 	lsls r2, 2
@@ -140,7 +140,7 @@ _08121F14:
 	lsls r1, 2
 	adds r0, r4, r1
 	ldrb r0, [r0]
-	bl sub_806DC34
+	bl CreateHeldItemIcons_806DC34
 	movs r2, 0x99
 	lsls r2, 2
 	adds r1, r4, r2
@@ -167,7 +167,7 @@ _08121F28:
 	.align 2, 0
 _08121F50: .4byte 0x00000266
 _08121F54:
-	bl sub_806E334
+	bl PartyMenuPrintMonsLevelOrStatus
 	ldr r1, _08121F64 @ =0x0201b000
 	movs r2, 0x99
 	lsls r2, 2
@@ -176,7 +176,7 @@ _08121F54:
 	.align 2, 0
 _08121F64: .4byte 0x0201b000
 _08121F68:
-	bl sub_806E0C4
+	bl PrintPartyMenuMonNicknames
 	b _08121FE0
 _08121F6E:
 	movs r5, 0
@@ -1035,7 +1035,7 @@ sub_81225D4: @ 81225D4
 	ldr r3, _08122658 @ =sub_81225A4
 	str r5, [sp]
 	adds r1, r4, 0
-	bl sub_809D8BC
+	bl ShowPokemonSummaryScreen
 _08122632:
 	add sp, 0x4
 	pop {r4,r5}
@@ -1348,7 +1348,7 @@ _08122890:
 	adds r1, r4, r2
 	b _081228CA
 _081228A4:
-	bl sub_806DA98
+	bl LoadHeldItemIconGraphics
 	b _081228C2
 _081228AA:
 	movs r1, 0x98
@@ -1407,7 +1407,7 @@ _081228F0:
 	adds r1, r5, 0
 	movs r2, 0x3
 	adds r3, r4, 0
-	bl sub_806D880
+	bl CreatePartyMenuMonIcon
 _08122912:
 	ldr r0, _0812294C @ =gUnknown_02023A00
 	lsls r1, r5, 5
@@ -1421,7 +1421,7 @@ _08122912:
 	adds r0, r6, 0
 	adds r1, r4, 0
 	movs r2, 0x3
-	bl sub_806D99C
+	bl CreateMonIcon_806D99C
 	adds r0, r6, 0
 	adds r1, r4, 0
 	bl sub_806D50C
@@ -1464,7 +1464,7 @@ _08122958:
 	lsrs r2, 16
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl sub_806DCD4
+	bl CreateHeldItemIcon_806DCD4
 _08122984:
 	ldr r0, _081229B4 @ =gUnknown_02023A00
 	lsls r1, r5, 5
@@ -1477,7 +1477,7 @@ _08122984:
 	lsrs r1, 24
 	ldrh r2, [r2, 0x2]
 	adds r0, r6, 0
-	bl sub_806DCD4
+	bl CreateHeldItemIcon_806DCD4
 _0812299E:
 	adds r0, r5, 0x1
 	lsls r0, 24
@@ -1510,9 +1510,9 @@ _081229C0:
 	adds r0, r5, 0
 	movs r1, 0x3
 	adds r2, r4, 0
-	bl sub_806E4A4
+	bl PartyMenuPrintHP
 	adds r0, r4, 0
-	bl sub_80A1CD8
+	bl GetMonStatusAndPokerus
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -1524,7 +1524,7 @@ _081229C0:
 	lsrs r2, 24
 	adds r0, r5, 0
 	movs r1, 0x3
-	bl sub_806E104
+	bl PartyMenuPutStatusTilemap
 	b _08122A12
 	.align 2, 0
 _08122A00: .4byte gPlayerParty
@@ -1534,7 +1534,7 @@ _08122A04:
 	adds r2, r6
 	adds r0, r5, 0
 	movs r1, 0x3
-	bl sub_806E294
+	bl PartyMenuPrintLevel
 _08122A12:
 	adds r4, r5, 0
 	muls r4, r7
@@ -1542,15 +1542,15 @@ _08122A12:
 	adds r0, r5, 0
 	movs r1, 0x3
 	adds r2, r4, 0
-	bl sub_806E3C0
+	bl PartyMenuPutNicknameTilemap
 	adds r0, r5, 0
 	movs r1, 0x3
 	adds r2, r4, 0
-	bl sub_806E050
+	bl PrintPartyMenuMonNickname
 	adds r0, r5, 0
 	movs r1, 0x3
 	adds r2, r4, 0
-	bl sub_806E630
+	bl PartyMenuDrawHPBar
 _08122A36:
 	adds r0, r5, 0x1
 	lsls r0, 24
@@ -1690,7 +1690,7 @@ _08122B2E:
 	ldrh r3, [r6, 0x12]
 	adds r0, r5, 0
 	movs r1, 0x3
-	bl sub_806E420
+	bl PartyMenuDoPrintHP
 	ldrh r0, [r6, 0x10]
 	cmp r0, 0
 	bne _08122B64
@@ -1715,7 +1715,7 @@ _08122B76:
 	lsls r2, 24
 	lsrs r2, 24
 	movs r1, 0x3
-	bl sub_806E104
+	bl PartyMenuPutStatusTilemap
 	b _08122B96
 	.align 2, 0
 _08122B88: .4byte gUnknown_02023A14
@@ -1723,7 +1723,7 @@ _08122B8C:
 	ldrb r2, [r6, 0xF]
 	adds r0, r5, 0
 	movs r1, 0x3
-	bl sub_806E1F4
+	bl PartyMenuDoPrintLevel
 _08122B96:
 	mov r2, r10
 	adds r6, r7, r2
@@ -1736,14 +1736,14 @@ _08122B96:
 	str r5, [sp]
 	movs r2, 0x3
 	adds r3, r4, 0
-	bl sub_806E35C
+	bl PartyMenuDoPutNicknameTilemap
 	mov r0, r9
 	adds r1, r5, 0
 	bl StringCopy
 	mov r0, r9
 	bl StringGetEnd10
 	mov r0, r9
-	bl sub_814A568
+	bl SanitizeNameString
 	adds r0, r4, 0
 	movs r1, 0x3
 	mov r2, r9
@@ -1752,7 +1752,7 @@ _08122B96:
 	ldrh r3, [r6, 0x12]
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl sub_806E574
+	bl PartyMenuDoDrawHPBar
 _08122BDA:
 	mov r0, r8
 	adds r0, 0x1
@@ -1873,7 +1873,7 @@ _08122CA8:
 	muls r2, r3
 	ldr r3, _08122CD8 @ =gPlayerParty
 	adds r2, r3
-	bl sub_806D90C
+	bl TryCreatePartyMenuMonIcon
 	b _08122D84
 	.align 2, 0
 _08122CD0: .4byte 0x00000266
@@ -1887,14 +1887,14 @@ _08122CDC:
 	adds r1, r4, r0
 	b _08122D50
 _08122CE8:
-	bl sub_806DA98
+	bl LoadHeldItemIconGraphics
 	b _08122D48
 _08122CEE:
 	movs r1, 0x98
 	lsls r1, 2
 	adds r0, r4, r1
 	ldrb r0, [r0]
-	bl sub_806DC34
+	bl CreateHeldItemIcons_806DC34
 	movs r2, 0x99
 	lsls r2, 2
 	adds r1, r4, r2
@@ -1921,10 +1921,10 @@ _08122D02:
 	.align 2, 0
 _08122D28: .4byte 0x00000266
 _08122D2C:
-	bl sub_806E334
+	bl PartyMenuPrintMonsLevelOrStatus
 	b _08122D48
 _08122D32:
-	bl sub_806E0C4
+	bl PrintPartyMenuMonNicknames
 	ldr r1, _08122D40 @ =0x0201b000
 	movs r0, 0x99
 	lsls r0, 2
@@ -2335,7 +2335,7 @@ sub_8123034: @ 8123034
 	ldr r3, _081230B8 @ =sub_8123004
 	str r5, [sp]
 	adds r1, r4, 0
-	bl sub_809D8BC
+	bl ShowPokemonSummaryScreen
 _08123092:
 	add sp, 0x4
 	pop {r4,r5}

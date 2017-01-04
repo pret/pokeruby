@@ -15,7 +15,7 @@ struct LoadedSaveData
     struct ItemSlot pokeBalls[16];
     struct ItemSlot TMsHMs[64];
     struct ItemSlot berries[46];
-    struct SaveBlock1_2B4C_Struct unknownSaveData[16];
+    struct MailStruct mail[16];
 };
 
 extern struct LoadedSaveData gLoadedSaveData[];
@@ -129,9 +129,9 @@ void LoadPlayerData(void)
     for(i = 0; i < 46; i++)
         gLoadedSaveData->berries[i] = gSaveBlock1.bagPocket_Berries[i];
 
-    // load misc data.
+    // load mail
     for(i = 0; i < 16; i++)
-        gLoadedSaveData->unknownSaveData[i] = gSaveBlock1.unkSave[i];
+        gLoadedSaveData->mail[i] = gSaveBlock1.mail[i];
 }
 
 void SavePlayerData(void)
@@ -158,7 +158,7 @@ void SavePlayerData(void)
     for(i = 0; i < 46; i++)
         gSaveBlock1.bagPocket_Berries[i] = gLoadedSaveData->berries[i];
 
-    // save misc data.
+    // save mail
     for(i = 0; i < 16; i++)
-        gSaveBlock1.unkSave[i] = gLoadedSaveData->unknownSaveData[i];
+        gSaveBlock1.mail[i] = gLoadedSaveData->mail[i];
 }

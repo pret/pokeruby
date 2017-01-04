@@ -7,7 +7,6 @@
 
 extern u8 gOtherText_Coins2[];
 
-
 void UpdateCoinsWindow(s32 a, u8 b, u8 c)
 {
     PrintCoins(a, 4, b + 2, c + 1);

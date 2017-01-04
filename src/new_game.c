@@ -10,6 +10,7 @@
 #include "lottery_corner.h"
 #include "rng.h"
 #include "rtc.h"
+#include "event_data.h"
 
 extern u8 gUnknown_020297EC;
 
@@ -114,11 +115,11 @@ void NewGameInitData(void)
     set_player_trainer_id();
     PlayTimeCounter_Reset();
     sub_8052D78();
-    sub_8069030();
+    InitEventData();
     sub_80BD7A8();
     sub_80BDAB4();
     sub_80BB5B4();
-    sub_80B4A90();
+    ClearBerryTrees();
     gSaveBlock1.money = 3000;
     sub_80AB1B0();
     sub_80530AC();
