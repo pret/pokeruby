@@ -376,6 +376,7 @@ bool8 IsEasyChatPairEqual(u16 *, u16 *);
 
 // asm/region_map.o
 void sub_80FBFB4(u8 *str, u8 region, u8);
+u8 *CopyLocationName(u8 *dest, u8 location);
 void CopyMapName();
 
 // asm/slot_machine.o
