@@ -88,7 +88,7 @@ sub_806A390: @ 806A390
 	adds r0, r4, 0
 	bl sub_810F618
 	adds r0, r4, 0
-	bl sub_8145AA4
+	bl SetRandomLotteryNumber
 	ldrh r0, [r5]
 	strh r0, [r6]
 _0806A3EA:

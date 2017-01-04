@@ -11,7 +11,7 @@ void SavePlayerParty(void);
 void LoadPlayerParty(void);
 void SaveSerializedGame(void);
 void LoadSerializedGame(void);
-void LoadPlayerData(void);
-void SavePlayerData(void);
+void LoadPlayerBag(void);
+void SavePlayerBag(void);
 
 #endif // GUARD_LOAD_SAVE_H

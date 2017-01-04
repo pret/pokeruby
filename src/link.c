@@ -462,7 +462,7 @@ static void HandleReceiveRemoteLinkPlayer(u8 multiplayerId)
         gReceivedRemoteLinkPlayers = TRUE;
 }
 
-static void ProcessRecvCmds(u8 a1)
+static void ProcessRecvCmds(u8 unusedParam)
 {
     u16 i;
     for (i = 0; i < MAX_LINK_PLAYERS; i++)
@@ -830,7 +830,7 @@ static void LinkCB_BlockSendEnd(void)
 
 static void sub_8007E04(void)
 {
-    GetMultiplayerId();
+    GetMultiplayerId(); // whats the point of calling this if you dont use the multiplayer ID?
     BuildSendCmd(0x4444);
     dword_20238BC++;
 }
