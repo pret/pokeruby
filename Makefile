@@ -104,7 +104,7 @@ compare_sapphire_rev2: sapphire_rev2
 	@$(SHA1) sapphire_rev2.sha1
 
 clean: tidy
-	rm -f sound/programmable_wave_samples/*.bin sound/direct_sound_samples/*.bin sound/**/*.pcm
+	rm -f sound/programmable_wave_samples/*.bin sound/direct_sound_samples/*.bin
 	rm -f $(SONG_OBJS)
 	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.rl' \) -exec rm {} +
 
@@ -126,7 +126,6 @@ include generated.mk
 include misc.mk
 
 %.s: ;
-%.bin: ;
 %.png: ;
 %.pal: ;
 %.aif: ;
@@ -137,8 +136,8 @@ include misc.mk
 %.gbapal: %.pal ; $(GFX) $< $@
 %.lz: % ; $(GFX) $< $@
 %.rl: % ; $(GFX) $< $@
-%.pcm: %.aif  ; $(AIF) $< $@
-%.bin: %.aif  ; $(AIF) $< $@
+%.bin: %.aif ; $(AIF) $< $@
+sound/direct_sound_samples/cry_%.bin: sound/direct_sound_samples/cry_%.aif ; $(AIF) $< $@ --compress
 sound/songs/%.s: sound/songs/%.mid
 	cd $(@D) && ../../$(MID) $(<F)
 
