@@ -1164,16 +1164,13 @@ gUnknown_08400E42:: @ 8400E42
 BattleText_Wally:
 	.string "WALLY$"
 
-gUnknown_08400E48:: @ 8400E48
-BattleText_Win:
+BattleText_Win:: @ 8400E48
 	.string "{HIGHLIGHT TRANSPARENT}Win$"
 
-gUnknown_08400E4F:: @ 8400E4F
-BattleText_Loss:
+BattleText_Loss:: @ 8400E4F
 	.string "{HIGHLIGHT TRANSPARENT}Loss$"
 
-gUnknown_08400E57:: @ 8400E57
-BattleText_Tie:
+BattleText_Tie:: @ 8400E57
 	.string "{HIGHLIGHT TRANSPARENT}Tie$"
 
 gUnknown_08400E5E:: @ 8400E5E
