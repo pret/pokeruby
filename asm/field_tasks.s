@@ -1361,7 +1361,7 @@ _08069E4A:
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r4, 0
-	bl sub_8057540
+	bl MetatileBehavior_IsThinIce
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1377,7 +1377,7 @@ _08069E4A:
 _08069E8C: .4byte 0x00004022
 _08069E90:
 	adds r0, r4, 0
-	bl sub_8057554
+	bl MetatileBehavior_IsCrackedIce
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1676,7 +1676,7 @@ _0806A0EE:
 	lsls r0, r6, 24
 	lsrs r6, r0, 24
 	adds r0, r6, 0
-	bl sub_8057818
+	bl MetatileBehavior_IsCrackedFloorHole
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806A106
@@ -1704,7 +1704,7 @@ _0806A122:
 	ldrh r0, [r4]
 	strh r0, [r5, 0x6]
 	adds r0, r6, 0
-	bl sub_805782C
+	bl MetatileBehavior_IsCrackedFloor
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806A182

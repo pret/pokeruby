@@ -5950,7 +5950,7 @@ _0810104C:
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl sub_8057238
+	bl MetatileBehavior_IsSecretBasePC
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

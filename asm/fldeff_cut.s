@@ -68,7 +68,7 @@ _080A2552:
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl sub_8056E14
+	bl MetatileBehavior_IsPokeGrass
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

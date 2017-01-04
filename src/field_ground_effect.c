@@ -227,7 +227,7 @@ void GetGroundEffectFlags_JumpLanding(struct MapObject *mapObj, u32 *flags)
         MetatileBehavior_IsPuddle,
         MetatileBehavior_IsSurfableWaterOrUnderwater,
         MetatileBehavior_IsShallowFlowingWater,
-        sub_8056D9C,
+        MetatileBehavior_IsATile,
     };
 
     static const u32 jumpLandingFlags[] =

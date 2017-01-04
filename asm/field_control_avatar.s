@@ -50,7 +50,7 @@ process_overworld_input: @ 8067F18
 	bl cur_mapdata_block_role_at_player_pos
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8056FFC
+	bl MetatileBehavior_IsMoveTile
 	lsls r0, 24
 	lsrs r7, r0, 24
 	cmp r6, 0x2
@@ -829,7 +829,7 @@ _08068524:
 _08068538: .4byte gUnknown_081A0009
 _0806853C:
 	adds r0, r5, 0
-	bl is_tile_x8B
+	bl MetatileBehavior_IsClosedSootpolisGymDoor
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -851,7 +851,7 @@ _08068554:
 _08068568: .4byte gUnknown_081A4363
 _0806856C:
 	adds r0, r5, 0
-	bl is_tile_x87
+	bl MetatileBehavior_IsPokeblockFeeder
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -862,7 +862,7 @@ _0806856C:
 _08068580: .4byte gUnknown_081C346A
 _08068584:
 	adds r0, r5, 0
-	bl is_tile_x8C
+	bl MetatileBehavior_IsTrickHousePuzzleDoor
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -873,7 +873,7 @@ _08068584:
 _08068598: .4byte gUnknown_081616E1
 _0806859C:
 	adds r0, r5, 0
-	bl is_tile_x85
+	bl MetatileBehavior_IsRegionMap
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -895,7 +895,7 @@ _080685B4:
 _080685C8: .4byte Event_RunningShoesManual
 _080685CC:
 	adds r0, r5, 0
-	bl sub_8057930
+	bl MetatileBehavior_IsPictureBookShelf
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -906,7 +906,7 @@ _080685CC:
 _080685E0: .4byte PictureBookShelfScript
 _080685E4:
 	adds r0, r5, 0
-	bl sub_8057944
+	bl MetatileBehavior_IsBookShelf
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -917,7 +917,7 @@ _080685E4:
 _080685F8: .4byte BookshelfScript
 _080685FC:
 	adds r0, r5, 0
-	bl sub_8057958
+	bl MetatileBehavior_IsPokeCenterBookShelf
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -928,7 +928,7 @@ _080685FC:
 _08068610: .4byte PokemonCenterBookshelfScript
 _08068614:
 	adds r0, r5, 0
-	bl sub_805796C
+	bl MetatileBehavior_IsVase
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -939,7 +939,7 @@ _08068614:
 _08068628: .4byte VaseScript
 _0806862C:
 	adds r0, r5, 0
-	bl sub_8057980
+	bl MetatileBehavior_IsTrashCan
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -950,7 +950,7 @@ _0806862C:
 _08068640: .4byte TrashCanScript
 _08068644:
 	adds r0, r5, 0
-	bl sub_8057994
+	bl MetatileBehavior_IsShopShelf
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -961,7 +961,7 @@ _08068644:
 _08068658: .4byte ShopShelfScript
 _0806865C:
 	adds r0, r5, 0
-	bl sub_80579A8
+	bl MetatileBehavior_IsBlueprint
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -983,7 +983,7 @@ _08068674:
 	cmp r4, r0
 	bne _080686EC
 	adds r0, r5, 0
-	bl sub_8057238
+	bl MetatileBehavior_IsSecretBasePC
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1234,7 +1234,7 @@ sub_8068870: @ 8068870
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_8057818
+	bl MetatileBehavior_IsCrackedFloorHole
 	lsls r0, 24
 	cmp r0, 0
 	bne _08068884
@@ -1543,7 +1543,7 @@ sub_8068A64: @ 8068A64
 _08068ABC: .4byte gMapHeader
 _08068AC0:
 	adds r0, r4, 0
-	bl sub_8057798
+	bl MetatileBehavior_IsLavaridgeB1FWarp
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1553,7 +1553,7 @@ _08068AC0:
 	b _08068B2A
 _08068AD6:
 	adds r0, r4, 0
-	bl is_role_x68
+	bl MetatileBehavior_IsLavaridge1FWarp
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1573,7 +1573,7 @@ _08068AEC:
 	b _08068B2A
 _08068B02:
 	adds r0, r4, 0
-	bl sub_8057804
+	bl MetatileBehavior_IsMtPyreHole
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1602,7 +1602,7 @@ sub_8068B30: @ 8068B30
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl is_tile_x69_2_warp_door
+	bl MetatileBehavior_IsWarpDoor
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1620,19 +1620,19 @@ sub_8068B30: @ 8068B30
 	cmp r0, 0x1
 	beq _08068BAA
 	adds r0, r4, 0
-	bl sub_8056F08
+	bl MetatileBehavior_IsNonAnimDoor
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _08068BAA
 	adds r0, r4, 0
-	bl sub_8057798
+	bl MetatileBehavior_IsLavaridgeB1FWarp
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _08068BAA
 	adds r0, r4, 0
-	bl is_role_x68
+	bl MetatileBehavior_IsLavaridge1FWarp
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1644,7 +1644,7 @@ sub_8068B30: @ 8068B30
 	cmp r0, 0x1
 	beq _08068BAA
 	adds r0, r4, 0
-	bl sub_8057804
+	bl MetatileBehavior_IsMtPyreHole
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1820,7 +1820,7 @@ map_warp_consider_2_to_inside: @ 8068CA8
 _08068CDC: .4byte gMapHeader
 _08068CE0:
 	adds r0, r4, 0
-	bl is_tile_x69_2_warp_door
+	bl MetatileBehavior_IsWarpDoor
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
