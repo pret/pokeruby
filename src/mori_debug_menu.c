@@ -37,7 +37,7 @@ bool8 sub_8083D4C(void)
 {
      if ( gMain.newKeys & A_BUTTON )
     {
-        sub_8071C20();
+        CloseMenu();
         return TRUE;
     }
     else
@@ -67,7 +67,7 @@ s8 MoriDebugMenu_Egg(void)
 {
     if ( daycare_count_pokemon(gSaveBlock1.filler_2F9C) == 2 && daycare_relationship_score_from_savegame() )
         sub_8041940();
-    sub_8071C20();
+    CloseMenu();
 
     return 1;
 }
@@ -76,7 +76,7 @@ s8 MoriDebugMenu_MaleEgg(void)
 {
     if ( daycare_count_pokemon(gSaveBlock1.filler_2F9C) == 2 && daycare_relationship_score_from_savegame() )
         sub_8041950();
-    sub_8071C20();
+    CloseMenu();
 
     return 1;
 }
@@ -84,21 +84,21 @@ s8 MoriDebugMenu_MaleEgg(void)
 s8 MoriDebugMenu_1000Steps(void)
 {
     sub_8041790(1000);
-    sub_8071C20();
+    CloseMenu();
     return 1;    
 }
 
 s8 MoriDebugMenu_10000Steps(void)
 {
     sub_8041790(10000);
-    sub_8071C20();
+    CloseMenu();
     return 1;    
 }
 
 s8 MoriDebugMenu_MoveTutor(void)
 {
     sub_8132670();
-    sub_8071C20();
+    CloseMenu();
     return 1;
 }
 
@@ -116,14 +116,14 @@ s8 MoriDebugMenu_BreedEgg(void)
         }
     }
     gSaveBlock1.filler_30B6 = -3;
-    sub_8071C20();
+    CloseMenu();
     return 1;
 }
 
 s8 MoriDebugMenu_LongName(void)
 {
     SetMonData(gPlayerParty, MON_DATA_NICKNAME, gUnknown_0839B257);
-    sub_8071C20();
+    CloseMenu();
     return 1;
 }
 
@@ -134,7 +134,7 @@ s8 MoriDebugMenu_PokeblockCase(void)
     for(loopCounter = 0; loopCounter <= 39; loopCounter++)
         sub_810CA6C((u8)loopCounter);
     
-    sub_8071C20();
+    CloseMenu();
     return 1;
 }
 
@@ -150,7 +150,7 @@ bool8 MoriDebugMenuProcessInput(void)
     case -2:
         return FALSE;
     case -1:
-        sub_8071C20();
+        CloseMenu();
         return TRUE;
     }
 }

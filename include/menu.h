@@ -9,7 +9,7 @@ struct MenuAction
    u8 (*func)();
 };
 
-void sub_8071C20(void);
+void CloseMenu(void);
 void AppendToList(u8 *list, u8 *pindex, u32 value);
 void InitMenuWindow(const struct WindowConfig *);
 void MultistepInitMenuWindowBegin(const struct WindowConfig *);

@@ -43,7 +43,7 @@ EWRAM_DATA u16 gMenuMessageBoxContentTileOffset = 0;
 
 extern const struct MenuAction gMenuYesNoItems[];
 
-void sub_8071C20(void)
+void CloseMenu(void)
 {
     PlaySE(SE_SELECT);
     MenuZeroFillScreen();

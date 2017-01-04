@@ -317,7 +317,7 @@ static u8 StartMenu_InputProcessCallback(void)
     }
     if(gMain.newKeys & (START_BUTTON | B_BUTTON))
     {
-        sub_8071C20();
+        CloseMenu();
         return 1;
     }
     return 0;
@@ -408,14 +408,14 @@ u8 StartMenu_OptionCallback(void)
 //When player selects EXIT
 u8 StartMenu_ExitCallback(void)
 {
-    sub_8071C20();
+    CloseMenu();
     return 1;
 }
 
 //When player selects RETIRE
 u8 StartMenu_RetireCallback(void)
 {
-    sub_8071C20();
+    CloseMenu();
     SafariZoneRetirePrompt();
     return 1;
 }
