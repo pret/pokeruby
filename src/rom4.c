@@ -731,7 +731,7 @@ bool16 sub_8053D30(struct WarpData *warp)
 
 bool16 sub_8053D6C(struct WarpData *warp)
 {
-    if (VarGet(16563))
+    if (VarGet(0x40B3))
         return FALSE;
     if (warp->mapGroup != 32)
         return FALSE;
