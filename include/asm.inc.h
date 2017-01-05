@@ -9,15 +9,17 @@ u8 sub_8015A98(u8, u8, u8);
 u8 sub_8018324(u8, u8, u8, u8, u16);
 void sub_8032AA8(u8 index, int i);
 
-// asm/rom_803D1FC.o
+// src/pokemon_3.o
 u16 SpeciesToNationalPokedexNum(u16);
+
+// asm/pokemon_3.o
 void DrawSpindaSpots(u16, u32, void *, u8);
 u8 sub_803FC58(u16);
 void AdjustFriendship(struct Pokemon *, u8);
 void sub_80408BC();
 void current_map_music_set__default_for_battle(u16);
 
-// asm/rom_8040EB4.o
+// asm/util.o
 void StoreWordInTwoHalfwords(u16 *, u32);
 void LoadWordFromTwoHalfwords(u16 *, u32 *);
 
@@ -30,7 +32,7 @@ void sub_8041940(void);
 void sub_8041950(void);
 u8 daycare_relationship_score_from_savegame(void);
 
-// asm/rom_804373C.o
+// asm/pokeball.o
 void CreatePokeballSprite(u8 r0, u8 r1, u8 r2, u8 r3, u8 s1, u8 s2, u8 s3, u16 s4);
 
 // asm/berry_blender.o
@@ -134,7 +136,7 @@ u8 ZCoordToPriority(u8);
 void FieldObjectUpdateZCoord(struct MapObject *pObject);
 void SetObjectSubpriorityByZCoord(u8, struct Sprite *, u8);
 
-// src/map_obj_80643A4.o
+// src/field_map_obj_helpers.o
 bool8 FreezeMapObject(struct MapObject *);
 void FreezeMapObjects(void);
 void FreezeMapObjectsExceptOne(u8);
@@ -142,7 +144,7 @@ void UnfreezeMapObjects(void);
 void sub_806487C(struct Sprite *sprite, bool8 invisible);
 void sub_8064990(u8, u8);
 
-// asm/rom_8065394.o
+// asm/field_control_avatar.o
 void sub_8067EEC(struct UnkInputStruct *pStruct);
 void process_overworld_input(struct UnkInputStruct *pStruct, u16 keys, u16 heldKeys);
 int sub_8068024(struct UnkInputStruct *pStruct);
@@ -152,23 +154,26 @@ void prev_quest_postbuffer_cursor_backup_reset(void);
 u8 *sub_8068E24(struct UnkStruct_8054FF8_Substruct *);
 u8 *GetFieldObjectScriptPointerForComparison();
 
-// asm/rom_806936C.o
+// asm/field_tasks.o
 void SetUpFieldTasks();
 void ActivatePerStepCallback(u8);
 void ResetFieldTasksArgs(void);
+
+// asm/clock.o
 void DoTimeBasedEvents(void);
 
 // asm/reset_rtc_screen.o
 void CB2_InitResetRtcScreen(void);
 
-// asm/rom_806D7F8.o
+// asm/party_menu.o
 void GetMonNickname(struct Pokemon *mon, u8 *nickname);
 bool8 pokemon_has_move(struct Pokemon *, u16);
 
-// asm/rom_8074BAC.o
+// asm/rom_8077ABC.o
 u8 battle_side_get_owner(u8);
 u8 battle_get_per_side_status(u8);
 u8 battle_get_side_with_given_state(u8);
+bool8 IsDoubleBattle();
 
 // asm/weather.o
 void SetWeather(u32);
@@ -204,27 +209,41 @@ void objc_exclamation_mark_probably(struct Sprite *sprite);
 u8 CreateTrainerSprite_BirchSpeech(u8, u16, u16, u8, void *);
 void LoadTrainerGfx_TrainerCard(u8 gender, int, void *);
 u8 CreateBirchSprite(u8, u8, u8);
+
+// asm/unknown_task.o
 void remove_some_task(void);
 void dp12_8087EA4(void);
 void sub_80895F8(u32 i, u32 i1, u32 i2);
 void sub_8089668(void);
 void sub_8089944(int i, int i1, int i2, int i3, int i4, int i5, int i6);
+
+// asm/pokemon_menu.o
 void sub_8089A70(void);
 void sub_808AB90(void);
 
-// asm/rom_8094928.o
+// asm/pokemon_storage_system.o
 void sub_80961D8(void);
+
+// asm/pokemon_icon.o
 u8 sub_809D3A4(u16 arg0, void (*)(struct Sprite *), int, u8 arg3, u32 arg4);
 u16 sub_809D4A8(u16);
 void sub_809D510(struct Sprite *);
 void sub_809D580(u16);
 void sub_809D608(u16);
+
+// asm/pokemon_summary_screen.o
 u8 pokemon_ailments_get_primary(u32);
+
+// asm/script_movement.o
 u8 exec_movement(u8, u8, u8, void *);
 bool8 sub_80A212C(u8, u8, u8);
 void sub_80A2178(void);
+
+// asm/mail_data.o
 void sub_80A2B18(void);
 u16 sub_80A2D64(u16, u8 *);
+
+// asm/map_name_popup.o
 void AddMapNamePopUpWindowTask(void);
 void HideMapNamePopUpWindow();
 
@@ -258,7 +277,7 @@ void CreatePokemartMenu(void *);
 void CreateDecorationShop1Menu(void *);
 void CreateDecorationShop2Menu(void *);
 
-// asm/script_menu.o
+// src/script_menu.o
 bool8 sub_80B5054(u8, u8, u8, u8);
 bool8 sub_80B50B0(u8, u8, u8, u8, u8);
 bool8 Multichoice(u8, u8, u8, u8);
@@ -297,6 +316,8 @@ s8 sub_80BF720(TVShow *);
 u8 sub_80BF77C(u32);
 void sub_80BFD44(void *, u32, u8);
 void sub_80C0514(void *, u32, u8);
+
+// src/tv.o
 void StartMassOutbreak(void);
 void TVShowDone(void);
 
@@ -376,8 +397,8 @@ bool8 IsEasyChatPairEqual(u16 *, u16 *);
 
 // asm/region_map.o
 void sub_80FBFB4(u8 *str, u8 region, u8);
-u8 *CopyLocationName(u8 *dest, u8 location);
 void CopyMapName();
+u8 *CopyLocationName(u8 *dest, u8 location);
 
 // asm/slot_machine.o
 void PlaySlotMachine(u8, void *);
@@ -388,9 +409,13 @@ void sub_8106630(u32);
 // asm/rom6.o
 bool8 npc_before_player_of_type(u8);
 u8 oei_task_add(void);
+
+// asm/pokeblock.o
 void sub_810C994(void);
 void sub_810CA6C(s32);
 s16 sub_810CAE4(u8, struct Pokeblock *);
+
+// asm/rom_810CBB4.o
 void sub_810CC80(void);
 u8 sub_810D32C(void);
 void ResetCyclingRoadChallengeData(void);
@@ -407,9 +432,11 @@ void sub_811AABC(u8);
 void sub_811AAD8(u8);
 u8 sub_811AAE8(void);
 
-// asm/mystery_event_script.o
+// src/mystery_event_script.o
 u32 sub_812613C(u8 *);
 void sub_8126160(u8);
+
+// asm/mystery_event_script.o
 u16 sub_8126338(void);
 
 // asm/field_effect_helpers.o
@@ -435,10 +462,10 @@ void sub_8134394();
 u8 sub_81344CC(void);
 void sub_8134AC0(void *);
 
-// asm/player_pc.o
+// src/player_pc.o
 void NewGameInitPCItems(void);
 
-// asm/rom_813BA94.o
+// asm/intro.o
 void sub_813CAF4(u8);
 void intro_reset_and_hide_bgs(void);
 void sub_813CCE8(u8);
@@ -459,11 +486,11 @@ void sub_813E930(/*TODO: arg types*/);
 void InitIntroTorchicAttackAnim(u8);
 void InitIntroMudkipAttackAnim(/*TODO: arg types*/);
 
-// asm/rom_81473B8.o
+// asm/braille_puzzles.o
 bool8 ShouldDoBrailleStrengthEffect(void);
 void DoBrailleStrengthEffect(void);
 
-// asm/rom_8148B8C.o
+// asm/intro_credits_graphics.o
 void load_intro_part2_graphics(/*TODO: arg types*/);
 void sub_8148C78(/*TODO: arg types*/);
 u8 sub_8148EC0(/*TODO: arg types*/);
@@ -472,6 +499,8 @@ u8 intro_create_brendan_sprite(/*TODO: arg types*/);
 u8 intro_create_may_sprite(/*TODO: arg types*/);
 u8 intro_create_latios_sprite(/*TODO: arg types*/);
 u8 intro_create_latias_sprite(/*TODO: arg types*/);
+
+// asm/name_string_util.o
 void SanitizeNameString(u8*);
 
 // src/agb_flash.o

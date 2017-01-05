@@ -355,18 +355,8 @@ gUnknown_08376978:: @ 8376978
 
 	.align 2
 gUnknown_083769A8:: @ 83769A8
-	.byte  0,  3
-	.byte 11,  1
-	.byte 11,  4
-	.byte 11,  7
-	.byte 11, 10
-	.byte 11, 13
-	.byte  0,  1
-	.byte  0,  8
-	.byte 11,  1
-	.byte 11,  5
-	.byte 11,  9
-	.byte 11, 13
+	.byte  0,  3, 11,  1, 11,  4, 11,  7, 11, 10, 11, 13
+	.byte  0,  1,  0,  8, 11,  1, 11,  5, 11,  9, 11, 13
 
 	.align 2
 gUnknown_083769C0:: @ 83769C0
