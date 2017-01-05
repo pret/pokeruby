@@ -32,8 +32,6 @@ extern struct MusicPlayerInfo gMPlay_SE1;
 extern struct MusicPlayerInfo gMPlay_SE2;
 extern struct MusicPlayerInfo gMPlay_SE3;
 
-extern struct Fanfare gFanfares[];
-
 extern struct ToneData voicegroup_8452590[];
 extern struct ToneData voicegroup_8452B90[];
 extern struct ToneData voicegroup_8453190[];
@@ -43,6 +41,22 @@ extern struct ToneData voicegroup_84537C0[];
 extern struct ToneData voicegroup_8453DC0[];
 extern struct ToneData voicegroup_84543C0[];
 extern struct ToneData voicegroup_84549C0[];
+
+static const struct Fanfare sFanfares[] =
+{
+    { BGM_FANFA1,      80 },
+    { BGM_FANFA4,     160 },
+    { BGM_FANFA5,     220 },
+    { BGM_ME_WAZA,    220 },
+    { BGM_ME_ASA,     160 },
+    { BGM_ME_BACHI,   340 },
+    { BGM_ME_WASURE,  180 },
+    { BGM_ME_KINOMI,  120 },
+    { BGM_ME_TAMA,    710 },
+    { BGM_ME_B_BIG,   250 },
+    { BGM_ME_B_SMALL, 150 },
+    { BGM_ME_ZANNEN,  160 },
+};
 
 static void Task_Fanfare(u8 taskId);
 static void CreateFanfareTask(void);
@@ -174,14 +188,10 @@ bool8 IsNotWaitingForBGMStop(void)
 
 void PlayFanfareByFanfareNum(u8 fanfareNum)
 {
-    struct Fanfare *fanfares;
-    struct Fanfare *fanfare;
     u16 songNum;
     m4aMPlayStop(&gMPlay_BGM);
-    fanfares = gFanfares;
-    fanfare = &fanfares[fanfareNum];
-    songNum = fanfare->songNum;
-    sFanfareCounter = fanfare->duration;
+    songNum = sFanfares[fanfareNum].songNum;
+    sFanfareCounter = sFanfares[fanfareNum].duration;
     m4aSongNumStart(songNum);
 }
 
@@ -205,7 +215,7 @@ bool8 WaitFanfare(bool8 stop)
 
 void StopFanfareByFanfareNum(u8 fanfareNum)
 {
-    m4aSongNumStop(gFanfares[fanfareNum].songNum);
+    m4aSongNumStop(sFanfares[fanfareNum].songNum);
 }
 
 void PlayFanfare(u16 songNum)
@@ -213,8 +223,7 @@ void PlayFanfare(u16 songNum)
     s32 i;
     for (i = 0; (u32)i < 12; i++)
     {
-        struct Fanfare *fanfare = &gFanfares[i];
-        if (fanfare->songNum == songNum)
+        if (sFanfares[i].songNum == songNum)
         {
             PlayFanfareByFanfareNum(i);
             CreateFanfareTask();

@@ -4,21 +4,6 @@
 	.section .rodata
 
 	.align 2
-gFanfares:: @ 837DEF4
-	.2byte BGM_FANFA1,      80
-	.2byte BGM_FANFA4,     160
-	.2byte BGM_FANFA5,     220
-	.2byte BGM_ME_WAZA,    220
-	.2byte BGM_ME_ASA,     160
-	.2byte BGM_ME_BACHI,   340
-	.2byte BGM_ME_WASURE,  180
-	.2byte BGM_ME_KINOMI,  120
-	.2byte BGM_ME_TAMA,    710
-	.2byte BGM_ME_B_BIG,   250
-	.2byte BGM_ME_B_SMALL, 150
-	.2byte BGM_ME_ZANNEN,  160
-
-	.align 2
 gOamData_837DF24:: @ 837DF24
 	.2byte 0x0000
 	.2byte 0x0000

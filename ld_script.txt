@@ -322,6 +322,7 @@ SECTIONS {
         src/menu.o(.rodata);
         data/tileset_anim.o(.rodata);
         src/palette.o(.rodata);
+        src/sound.o(.rodata);
         data/data_83760F0.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);
