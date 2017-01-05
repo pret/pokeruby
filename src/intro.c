@@ -1350,3 +1350,98 @@ u8 sub_813D584(u16 a, s16 b, u16 c, u16 d, u16 e, u8 f)
     
     return oldSpriteId;
 }
+
+void sub_813D788(struct Sprite *sprite)
+{
+    switch (sprite->data0)
+    {
+        case 0:
+            StartSpriteAnimIfDifferent(sprite, 0);
+            sprite->pos1.x--;
+            break;
+        case 1:
+            StartSpriteAnimIfDifferent(sprite, 0);
+            if (gIntroFrameCounter & 7)
+                return;
+            sprite->pos1.x++;
+            break;
+        case 2:
+            StartSpriteAnimIfDifferent(sprite, 2);
+            if (sprite->pos1.x <= 0x78 || (gIntroFrameCounter & 7))
+                sprite->pos1.x++;
+            break;
+        case 3:
+            StartSpriteAnimIfDifferent(sprite, 3);
+            break;
+        case 4:
+            StartSpriteAnimIfDifferent(sprite, 0);
+            if (sprite->pos1.x > -32)
+                sprite->pos1.x -= 2;
+            break;
+    }
+    if (gIntroFrameCounter & 7)
+        return;
+    if (sprite->pos2.y != 0)
+    {
+        sprite->pos2.y = 0;
+    }
+    else
+    {
+        switch (Random() & 3)
+        {
+            case 0:
+                sprite->pos2.y = -1;
+                break;
+            case 1:
+                sprite->pos2.y = 1;
+                break;
+            case 2:
+            case 3:
+                sprite->pos2.y = 0;
+                break;
+        }
+    }
+}
+
+void sub_813D880(struct Sprite *sprite)
+{
+    switch (sprite->data0)
+    {
+        case 0:
+            break;
+        case 1:
+            if (sprite->pos2.x + sprite->pos1.x < 0x130)
+                sprite->pos2.x += 8;
+            else
+                sprite->data0 = 2;
+            break;
+        case 2:
+            if (sprite->pos2.x + sprite->pos1.x > 0x78)
+                sprite->pos2.x -= 1;
+            else
+                sprite->data0 = 3;
+            break;
+        case 3:
+            if (sprite->pos2.x > 0)
+                sprite->pos2.x -= 2;
+            break;
+    }
+    sprite->pos2.y = Sin((u8)sprite->data1, 8) - gUnknown_0203935A;
+    sprite->data1 += 4;
+}
+
+void sub_813D908(struct Sprite *sprite)
+{
+    if (gTasks[sprite->data0].data[0] == 0)
+    {
+        sprite->invisible = TRUE;
+    }
+    else if (gTasks[sprite->data0].data[0] != 4)
+    {
+        sprite->invisible = FALSE;
+    }
+    else
+    {
+        DestroySprite(sprite);
+    }
+}
