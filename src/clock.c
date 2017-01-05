@@ -21,42 +21,42 @@ void sub_806A328(void);
 
 void sub_806A328(void)
 {
-	FlagSet(0x835);
-	RtcCalcLocalTime();
-	gSaveBlock2.lastBerryTreeUpdate = gLocalTime;
-	VarSet(0x4040, gLocalTime.days);
+    FlagSet(0x835);
+    RtcCalcLocalTime();
+    gSaveBlock2.lastBerryTreeUpdate = gLocalTime;
+    VarSet(0x4040, gLocalTime.days);
 }
 
 void DoTimeBasedEvents(void)
 {
-	if(FlagGet(0x835))
-	{
-		RtcCalcLocalTime();
-		sub_806A390(&gLocalTime);
-		sub_806A3F4(&gLocalTime);
-	}		
+    if(FlagGet(0x835))
+    {
+        RtcCalcLocalTime();
+        sub_806A390(&gLocalTime);
+        sub_806A3F4(&gLocalTime);
+    }        
 }
 
 void sub_806A390(struct Time *time)
 {
-	u16 *varPtr = GetVarPointer(0x4040);
-	int days = *varPtr;
-	u16 newDays;
-	
-	if(days != time->days && days <= time->days)
-	{
-		newDays = time->days - days;
-		ClearUpperFlags();
-		sub_80FA220(newDays);
-		sub_80BE8C4(newDays);
-		sub_8080834(newDays);
-		UpdatePartyPokerusTime(newDays);
-		sub_810D2F4(newDays);
-		UpdateBirchState(newDays);
-		sub_810F618(newDays);
-		SetRandomLotteryNumber(newDays);
-		*varPtr = time->days;
-	}
+    u16 *varPtr = GetVarPointer(0x4040);
+    int days = *varPtr;
+    u16 newDays;
+    
+    if(days != time->days && days <= time->days)
+    {
+        newDays = time->days - days;
+        ClearUpperFlags();
+        sub_80FA220(newDays);
+        sub_80BE8C4(newDays);
+        sub_8080834(newDays);
+        UpdatePartyPokerusTime(newDays);
+        sub_810D2F4(newDays);
+        UpdateBirchState(newDays);
+        sub_810F618(newDays);
+        SetRandomLotteryNumber(newDays);
+        *varPtr = time->days;
+    }
 }
 
 void sub_806A3F4(struct Time *time)
@@ -80,12 +80,12 @@ void sub_806A3F4(struct Time *time)
 
 void sub_806A44C(void)
 {
-	sub_806A328();
-	SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
+    sub_806A328();
+    SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
 }
 
 void sub_806A460(void)
 {
-	SetMainCallback2(Cb2_StartWallClock);
-	gMain.field_8 = sub_806A44C;
+    SetMainCallback2(Cb2_StartWallClock);
+    gMain.field_8 = sub_806A44C;
 }
