@@ -359,10 +359,10 @@ extern struct SaveBlock1 gSaveBlock1;
 
 struct Time
 {
-    s16 days;
-    s8 hours;
-    s8 minutes;
-    s8 seconds;
+ /* 0x00 */ s16 days;
+ /* 0x02 */ s8 hours;
+ /* 0x03 */ s8 minutes;
+ /* 0x04 */ s8 seconds;
 };
 
 struct Pokedex
@@ -386,7 +386,7 @@ struct SaveBlock2_Sub
 	/*0x04CC, 0x0574*/ u8 filler_4CC[0x31C];
 };
 
-struct SaveBlock2
+struct SaveBlock2 /* 0x02024EA4 */
 {
     /*0x00*/ u8 playerName[8];
     /*0x08*/ u8 playerGender; // MALE, FEMALE
