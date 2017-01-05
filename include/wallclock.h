@@ -4,7 +4,7 @@
 #include "sprite.h"
 
 void CB2_StartWallClock(void);
-void Cb2_ViewWallClock(void);
+void CB2_ViewWallClock(void);
 
 void sub_810B05C(struct Sprite *sprite);
 void sub_810B0F4(struct Sprite *sprite);

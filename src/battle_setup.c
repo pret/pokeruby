@@ -164,7 +164,7 @@ void StartBattle_StandardWild(void)
     ScriptContext2_Enable();
     FreezeMapObjects();
     sub_80597F4();
-    gMain.field_8 = HandleWildBattleEnd;
+    gMain.savedCallback = HandleWildBattleEnd;
     gBattleTypeFlags = 0;
     task_add_01_battle_start(GetWildBattleTransition(), 0);
     sav12_xor_increment(7);
@@ -176,7 +176,7 @@ void StartBattle_Roamer(void)
     ScriptContext2_Enable();
     FreezeMapObjects();
     sub_80597F4();
-    gMain.field_8 = HandleWildBattleEnd;
+    gMain.savedCallback = HandleWildBattleEnd;
     gBattleTypeFlags = BATTLE_TYPE_ROAMER;
     task_add_01_battle_start(GetWildBattleTransition(), 0);
     sav12_xor_increment(7);
@@ -188,7 +188,7 @@ void StartBattle_Safari(void)
     ScriptContext2_Enable();
     FreezeMapObjects();
     sub_80597F4();
-    gMain.field_8 = sub_80C824C;
+    gMain.savedCallback = sub_80C824C;
     gBattleTypeFlags = BATTLE_TYPE_SAFARI;
     task_add_01_battle_start(GetWildBattleTransition(), 0);
 }
@@ -205,7 +205,7 @@ void StartBattle_WallyTutorial(void)
 {
     CreateMaleMon(&gEnemyParty[0], SPECIES_RALTS, 5);
     ScriptContext2_Enable();
-    gMain.field_8 = c2_exit_to_overworld_1_continue_scripts_restart_music;
+    gMain.savedCallback = c2_exit_to_overworld_1_continue_scripts_restart_music;
     gBattleTypeFlags = BATTLE_TYPE_WALLY_TUTORIAL;
     task_add_01_battle_start(8, 0);
 }
@@ -213,7 +213,7 @@ void StartBattle_WallyTutorial(void)
 void StartBattle_ScriptedWild(void)
 {
     ScriptContext2_Enable();
-    gMain.field_8 = HandleScriptedWildBattleEnd;
+    gMain.savedCallback = HandleScriptedWildBattleEnd;
     gBattleTypeFlags = 0;
     task_add_01_battle_start(GetWildBattleTransition(), 0);
     sav12_xor_increment(7);
@@ -223,7 +223,7 @@ void StartBattle_ScriptedWild(void)
 void StartBattle_SouthernIsland(void)
 {
     ScriptContext2_Enable();
-    gMain.field_8 = HandleScriptedWildBattleEnd;
+    gMain.savedCallback = HandleScriptedWildBattleEnd;
     gBattleTypeFlags = BATTLE_TYPE_LEGENDARY;
     task_add_01_battle_start(GetWildBattleTransition(), 0);
     sav12_xor_increment(7);
@@ -233,7 +233,7 @@ void StartBattle_SouthernIsland(void)
 void StartBattle_Rayquaza(void)
 {
     ScriptContext2_Enable();
-    gMain.field_8 = HandleScriptedWildBattleEnd;
+    gMain.savedCallback = HandleScriptedWildBattleEnd;
     gBattleTypeFlags = BATTLE_TYPE_LEGENDARY;
     task_add_01_battle_start(0, BGM_BATTLE34);
     sav12_xor_increment(7);
@@ -243,7 +243,7 @@ void StartBattle_Rayquaza(void)
 void StartBattle_GroudonKyogre(void)
 {
     ScriptContext2_Enable();
-    gMain.field_8 = HandleScriptedWildBattleEnd;
+    gMain.savedCallback = HandleScriptedWildBattleEnd;
     gBattleTypeFlags = BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_KYOGRE_GROUDON;
     if (gGameVersion == 2)
         task_add_01_battle_start(0xB, BGM_BATTLE34); // KYOGRE
@@ -256,7 +256,7 @@ void StartBattle_GroudonKyogre(void)
 void StartBattle_Regi(void)
 {
     ScriptContext2_Enable();
-    gMain.field_8 = HandleScriptedWildBattleEnd;
+    gMain.savedCallback = HandleScriptedWildBattleEnd;
     gBattleTypeFlags = BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_REGI;
     task_add_01_battle_start(0xA, BGM_BATTLE36);
     sav12_xor_increment(7);
@@ -500,7 +500,7 @@ u8 GetBattleTowerBattleTransition(void)
 void ChooseStarter(void)
 {
     SetMainCallback2(CB2_ChooseStarter);
-    gMain.field_8 = CB2_GiveStarter;
+    gMain.savedCallback = CB2_GiveStarter;
 }
 
 void CB2_GiveStarter(void)
@@ -524,7 +524,7 @@ void CB2_StartFirstBattle(void)
     if (sub_811AAE8() == TRUE)
     {
         gBattleTypeFlags = BATTLE_TYPE_FIRST_BATTLE;
-        gMain.field_8 = HandleFirstBattleEnd;
+        gMain.savedCallback = HandleFirstBattleEnd;
         SetMainCallback2(sub_800E7C4);
         prev_quest_postbuffer_cursor_backup_reset();
         overworld_poison_timer_set();
@@ -734,7 +734,7 @@ void trainer_flag_clear(u16 flag)
 void sub_80825E4(void)
 {
     gBattleTypeFlags = BATTLE_TYPE_TRAINER;
-    gMain.field_8 = sub_808260C;
+    gMain.savedCallback = sub_808260C;
     task_add_01_battle_start_with_music_and_stats();
     ScriptContext1_Stop();
 }
@@ -777,7 +777,7 @@ void do_choose_name_or_words_screen(void)
 void sub_80826B0(void)
 {
     gBattleTypeFlags = BATTLE_TYPE_TRAINER;
-    gMain.field_8 = do_choose_name_or_words_screen;
+    gMain.savedCallback = do_choose_name_or_words_screen;
     task_add_01_battle_start_with_music_and_stats();
     ScriptContext1_Stop();
 }

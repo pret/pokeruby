@@ -189,7 +189,7 @@ void CB2_StartWallClock(void)
 }
 
 //View, but don't set, the clock
-void Cb2_ViewWallClock(void)
+void CB2_ViewWallClock(void)
 {
     u8 taskId;
     s16 angle1;
@@ -332,7 +332,7 @@ static void Task_SetClock5(u8 taskId)
 static void Task_SetClock6(u8 taskId)
 {
     if(!gPaletteFade.active)
-        SetMainCallback2((MainCallback)gMain.field_8);
+        SetMainCallback2((MainCallback)gMain.savedCallback);
 }
 
 static void Task_ViewClock1(u8 taskId)
@@ -358,7 +358,7 @@ static void Task_ViewClock3(u8 taskId)
 static void Task_ViewClock4(u8 taskId)
 {
     if(!gPaletteFade.active)
-        SetMainCallback2((MainCallback)gMain.field_8);
+        SetMainCallback2((MainCallback)gMain.savedCallback);
 }
 
 static u8 CalcMinHandDelta(u16 speed)

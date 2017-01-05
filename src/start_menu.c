@@ -399,7 +399,7 @@ u8 StartMenu_OptionCallback(void)
     {
         PlayRainSoundEffect();
         SetMainCallback2(CB2_InitOptionMenu);
-        gMain.field_8 = sub_805469C;
+        gMain.savedCallback = sub_805469C;
         return 1;
     }
     return 0;
@@ -826,7 +826,7 @@ static void Task_8071B64(u8 taskId)
                 (*step)++;
                 break;
             case 4:
-                SetMainCallback2(gMain.field_8);
+                SetMainCallback2(gMain.savedCallback);
                 DestroyTask(taskId);
                 break;                
         }

@@ -1135,7 +1135,7 @@ void CB2_LoadMap(void)
     ScriptContext2_Disable();
     set_callback1(NULL);
     SetMainCallback2(sub_810CC80);
-    gMain.field_8 = CB2_LoadMap2;
+    gMain.savedCallback = CB2_LoadMap2;
 }
 
 void CB2_LoadMap2(void)
