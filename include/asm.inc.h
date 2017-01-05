@@ -446,7 +446,7 @@ void sub_813CE30(u16, u16, u16, u16);
 u8 sub_813CE88(u16, s16, u16, u16, u8);
 u8 sub_813CFA8(u16, u16, u16, u16);
 void sub_813D084(u8);
-u8 sub_813D584(/*TODO: arg types*/);
+u8 sub_813D584(u16, s16, u16, u16, u16, u8);
 void sub_813D788(struct Sprite *);
 void sub_813D880(struct Sprite *);
 void sub_813D954(/*TODO: arg types*/);

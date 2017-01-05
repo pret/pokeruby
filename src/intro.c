@@ -18,6 +18,10 @@
 #include "task.h"
 #include "trig.h"
 
+extern void *species_and_otid_get_pal(/*TODO: arg types*/);
+extern void sub_8143648(int, u8);
+extern void sub_8143680(int, u8);
+
 struct MonCoords
 {
     u8 x, y;
@@ -70,6 +74,8 @@ extern const struct SpriteSheet gIntro2LatiosSpriteSheet;
 extern const struct SpriteSheet gIntro2LatiasSpriteSheet;
 extern const struct SpritePalette gIntro2SpritePalettes[];
 
+extern const struct SpriteTemplate gSpriteTemplate_840AE20;
+
 extern const u8 gIntroCopyright_Gfx[];
 extern const u16 gIntroCopyright_Pal[];
 extern const u16 gIntroCopyright_Tilemap[];
@@ -77,6 +83,8 @@ extern const u16 gIntroCopyright_Tilemap[];
 extern const u16 gUnknown_08393E64[];
 extern union AnimCmd *gUnknown_0840B064[];
 extern void *gUnknown_0840B5A0[];
+
+extern const s16 gSineTable[];
 
 static void MainCB2_EndIntro(void);
 static void Task_IntroLoadPart1Graphics(u8);
@@ -99,6 +107,11 @@ static void task_intro_17(u8);
 void Task_IntroPokemonBattle(u8);
 static void task_intro_19(u8);
 void task_intro_20(u8 taskId);  //should be static, but the compiler complains
+
+void sub_813D220(struct Sprite *sprite);
+void sub_813D368(struct Sprite *sprite);
+void sub_813D414(struct Sprite *sprite);
+void sub_813D484(struct Sprite *sprite);
 
 static void VBlankCB_Intro(void)
 {
@@ -1049,10 +1062,6 @@ void sub_813CE30(u16 a, u16 b, u16 c, u16 d)
     REG_BG2Y = dest.dy;
 }
 
-extern void *species_and_otid_get_pal(/*TODO: arg types*/);
-extern void sub_8143648(int, u8);
-extern void sub_8143680(int, u8);
-
 u8 sub_813CE88(u16 a, s16 b, u16 c, u16 d, u8 e)
 {
     void *pal;
@@ -1131,4 +1140,213 @@ void sub_813D0CC(struct Sprite *sprite)
     {
         DestroySprite(sprite);
     }
+}
+
+void sub_813D158(struct Sprite *sprite)
+{
+    if (gSprites[sprite->data7].data7 != 0)
+    {
+        sprite->invisible = TRUE;
+        sprite->pos1.x += sprite->pos2.x;
+        sprite->pos1.y += sprite->pos2.y;
+        StartSpriteAnim(sprite, 3);
+        sprite->data2 = 0x400;
+        sprite->data3 = 8 * (sprite->data1 & 3);
+        sprite->callback = sub_813D0CC;
+        sprite->oam.shape = 1;
+        sprite->oam.size = 3;
+        CalcCenterToCornerVec(sprite, 1, 3, 2);
+    }
+    else
+    {
+        sprite->pos2.x = gSprites[sprite->data7].pos2.x;
+        sprite->pos2.y = gSprites[sprite->data7].pos2.y;
+        sprite->pos1.x = gSprites[sprite->data7].pos1.x;
+        sprite->pos1.y = gSprites[sprite->data7].pos1.y;
+    }
+}
+
+void sub_813D208(struct Sprite *sprite)
+{
+    if (sprite->data0 != 0)
+        sprite->callback = sub_813D220;
+}
+
+void sub_813D220(struct Sprite *sprite)
+{
+    if (sprite->pos1.x <= 116)
+    {
+        sprite->pos1.y += sprite->pos2.y;
+        sprite->pos2.y = 0;
+        sprite->pos1.x += 4;
+        sprite->pos2.x = -4;
+        sprite->data4 = 128;
+        sprite->callback = sub_813D368;
+    }
+    else
+    {
+        u16 data2;
+        u16 data3;
+        u16 data4;
+        s16 sin1;
+        s16 sin2;
+        s16 sin3;
+        s16 sin4;
+        s16 var1;
+        s16 var2;
+        s16 var3;
+        s16 var4;
+        s16 temp;
+        
+        data4 = sprite->data4;
+        sin1 = gSineTable[(u8)data4];
+        sin2 = gSineTable[(u8)(data4 + 64)];
+        sprite->data4 += 2;
+        sprite->pos2.y = sin1 / 32;
+        sprite->pos1.x--;
+        if (sprite->pos1.x & 1)
+            sprite->pos1.y++;
+        temp = -sin2 / 16;
+        data2 = sprite->data2;
+        data3 = sprite->data3;
+        sin3 = gSineTable[(u8)(temp - 16)];
+        sin4 = gSineTable[(u8)(temp + 48)];
+        var1 = sin4 * data2 / 256;
+        var2 = -sin3 * data3 / 256;
+        var3 = sin3 * data2 / 256;
+        var4 = sin4 * data3 / 256;
+        SetOamMatrix(sprite->data1, data2, 0, 0, data3);
+        SetOamMatrix(sprite->data1 + 1, var1, var3, var2, var4);
+        SetOamMatrix(sprite->data1 + 2, var1, var3, var2 * 2, var4 * 2);
+    }
+}
+
+void sub_813D368(struct Sprite *sprite)
+{
+    SetOamMatrix(sprite->data1, sprite->data6 + 64, 0, 0, sprite->data6 + 64);
+    SetOamMatrix(sprite->data1 + 1, sprite->data6 + 64, 0, 0, sprite->data6 + 64);
+    SetOamMatrix(sprite->data1 + 2, sprite->data6 + 64, 0, 0, sprite->data6 + 64);
+    if (sprite->data4 != 64)
+    {
+        u16 data4;
+        
+        sprite->data4 -= 8;
+        data4 = sprite->data4;
+        sprite->pos2.x = gSineTable[(u8)(data4 + 64)] / 64;
+        sprite->pos2.y = gSineTable[(u8)data4] / 64;
+    }
+    else
+    {
+        sprite->data4 = 0;
+        sprite->callback = sub_813D414;
+    }
+}
+
+void sub_813D414(struct Sprite *sprite)
+{
+    if (sprite->data0 != 2)
+    {
+        s16 r2;
+        
+        sprite->data4 += 8;
+        r2 = gSineTable[(u8)sprite->data4] / 16 + 64;
+        sprite->pos2.x = gSineTable[(u8)(r2 + 64)] / 64;
+        sprite->pos2.y = gSineTable[(u8)r2] / 64;
+    }
+    else
+    {
+        sprite->callback = sub_813D484;
+    }
+}
+
+void sub_813D484(struct Sprite *sprite)
+{
+    if (sprite->pos1.y < sprite->data5)
+    {
+        sprite->pos1.y += 4;
+    }
+    else
+    {
+        sprite->data7 = 1;
+        sprite->invisible = TRUE;
+        sprite->pos1.x += sprite->pos2.x;
+        sprite->pos1.y += sprite->pos2.y;
+        StartSpriteAnim(sprite, 3);
+        sprite->data2 = 0x400;
+        sprite->data3 = 8 * (sprite->data1 & 3);
+        sprite->callback = sub_813D0CC;
+        sprite->oam.shape = 1;
+        sprite->oam.size = 3;
+        CalcCenterToCornerVec(sprite, 1, 3, 2);
+    }
+}
+
+//Duplicate function
+void sub_813D504(struct Sprite *sprite)
+{
+    if (sprite->pos1.y < sprite->data5)
+    {
+        sprite->pos1.y += 4;
+    }
+    else
+    {
+        sprite->data7 = 1;
+        sprite->invisible = TRUE;
+        sprite->pos1.x += sprite->pos2.x;
+        sprite->pos1.y += sprite->pos2.y;
+        StartSpriteAnim(sprite, 3);
+        sprite->data2 = 0x400;
+        sprite->data3 = 8 * (sprite->data1 & 3);
+        sprite->callback = sub_813D0CC;
+        sprite->oam.shape = 1;
+        sprite->oam.size = 3;
+        CalcCenterToCornerVec(sprite, 1, 3, 2);
+    }
+}
+
+u8 sub_813D584(u16 a, s16 b, u16 c, u16 d, u16 e, u8 f)
+{
+    u8 spriteId;
+    u8 oldSpriteId;
+    
+    spriteId = CreateSprite(&gSpriteTemplate_840AE20, a, b, 0);
+    gSprites[spriteId].data0 = 0;
+    gSprites[spriteId].data7 = 0;
+    gSprites[spriteId].data1 = d;
+    gSprites[spriteId].data2 = c;
+    gSprites[spriteId].data3 = c;
+    gSprites[spriteId].data5 = e;
+    gSprites[spriteId].data6 = c;
+    gSprites[spriteId].oam.affineMode = 3;
+    gSprites[spriteId].oam.matrixNum = d;
+    CalcCenterToCornerVec(&gSprites[spriteId], 0, 2, 2);
+    StartSpriteAnim(&gSprites[spriteId], 2);
+    if (f == 0)
+        gSprites[spriteId].callback = sub_813D208;
+    else
+        gSprites[spriteId].callback = sub_813D504;
+    oldSpriteId = spriteId;
+    
+    spriteId = CreateSprite(&gSpriteTemplate_840AE20, a, b, 0);
+    gSprites[spriteId].data7 = oldSpriteId;
+    gSprites[spriteId].data1 = d + 1;
+    gSprites[spriteId].oam.affineMode = 3;
+    gSprites[spriteId].oam.matrixNum = d + 1;
+    CalcCenterToCornerVec(&gSprites[spriteId], 0, 2, 2);
+    gSprites[spriteId].callback = sub_813D158;
+    
+    spriteId = CreateSprite(&gSpriteTemplate_840AE20, a, b, 0);
+    gSprites[spriteId].data7 = oldSpriteId;
+    gSprites[spriteId].data1 = d + 2;
+    StartSpriteAnim(&gSprites[spriteId], 1);
+    gSprites[spriteId].oam.affineMode = 3;
+    gSprites[spriteId].oam.matrixNum = d + 2;
+    CalcCenterToCornerVec(&gSprites[spriteId], 0, 2, 2);
+    gSprites[spriteId].callback = sub_813D158;
+    
+    SetOamMatrix(d, c + 32, 0, 0, c + 32);
+    SetOamMatrix(d + 1, c + 32, 0, 0, c + 32);
+    SetOamMatrix(d + 2, c + 32, 0, 0, 2 * (c + 32));
+    
+    return oldSpriteId;
 }
