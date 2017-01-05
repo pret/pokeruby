@@ -4,24 +4,6 @@
 	.section .rodata
 
 	.align 2
-gStartMenuItems:: @ 8376D24
-	.4byte SystemText_Pokedex, StartMenu_PokedexCallback
-	.4byte SystemText_Pokemon, StartMenu_PokemonCallback
-	.4byte SystemText_BAG, StartMenu_BagCallback
-	.4byte SystemText_Pokenav, StartMenu_PokenavCallback
-	.4byte SystemText_Player, StartMenu_PlayerCallback
-	.4byte SystemText_Save, StartMenu_SaveCallback
-	.4byte SystemText_Option, StartMenu_OptionCallback
-	.4byte SystemText_Exit, StartMenu_ExitCallback
-	.4byte SystemText_Retire, StartMenu_RetireCallback
-	.4byte SystemText_Player, StartMenu_PlayerLinkCallback
-
-	.align 2
-gMenuYesNoItems:: @ 8376D74
-	.4byte OtherText_Yes, 0
-	.4byte OtherText_No, 0
-
-	.align 2
 TilesetAnimTiles_General_0_1: @ 8376D84
 	.incbin "data/tilesets/primary/general/anim/0/1.4bpp"
 
@@ -23077,23 +23059,23 @@ gSystemText_LR:: @ 842C465
 gSystemText_LA:: @ 842C46B
 	.string "{PALETTE 15}L=A$"
 
-SystemText_Pokedex:
+SystemText_Pokedex::
 	.string "POKéDEX$"
-SystemText_Pokemon:
+SystemText_Pokemon::
 	.string "POKéMON$"
-SystemText_BAG:
+SystemText_BAG::
 	.string "BAG$"
-SystemText_Pokenav:
+SystemText_Pokenav::
 	.string "POKéNAV$"
-SystemText_Player:
+SystemText_Player::
 	.string "{PLAYER}$"
-SystemText_Save:
+SystemText_Save::
 	.string "SAVE$"
-SystemText_Option:
+SystemText_Option::
 	.string "OPTION$"
-SystemText_Exit:
+SystemText_Exit::
 	.string "EXIT$"
-SystemText_Retire: @ safari zone?
+SystemText_Retire:: @ safari zone?
 	.string "RETIRE$"
 
 gOtherText_SafariStock:: @ 842C4A9

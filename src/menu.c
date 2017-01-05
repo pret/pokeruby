@@ -22,6 +22,9 @@ struct Menu
     u8 columnXCoords[8];
 };
 
+extern u8 OtherText_Yes[];
+extern u8 OtherText_No[];
+
 static void MultistepInitMenuWindowInternal(const struct WindowConfig *, u16);
 static void InitMenuWindowInternal(const struct WindowConfig *, u16);
 static bool8 sub_80723D4(void);
@@ -41,7 +44,11 @@ EWRAM_DATA u16 gMenuTextWindowTileOffset = 0;
 EWRAM_DATA u16 gMenuTextWindowContentTileOffset = 0;
 EWRAM_DATA u16 gMenuMessageBoxContentTileOffset = 0;
 
-extern const struct MenuAction gMenuYesNoItems[];
+const struct MenuAction gMenuYesNoItems[] =
+{
+    { OtherText_Yes, NULL },
+    { OtherText_No, NULL },
+};
 
 void CloseMenu(void)
 {
