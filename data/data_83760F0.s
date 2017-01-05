@@ -4,33 +4,8 @@
 	.section .rodata
 
 	.align 2
-gUnknown_08376364:: @ 8376364
-	.4byte DummyPerStepCallback
-	.4byte PerStepCallback_8069F64
-	.4byte PerStepCallback_8069AA0
-	.4byte PerStepCallback_8069864
-	.4byte PerStepCallback_8069DD4
-	.4byte EndTruckSequence
-	.4byte sub_80BCF1C
-	.4byte PerStepCallback_806A07C
-
-gUnknown_08376384:: @ 8376384
-	.incbin "baserom.gba", 0x00376384, 0x20
-
-gUnknown_083763A4:: @ 83763A4
-	.incbin "baserom.gba", 0x003763a4, 0x20
-
-gUnknown_083763C4:: @ 83763C4
-	.incbin "baserom.gba", 0x003763c4, 0x20
-
-gUnknown_083763E4:: @ 83763E4
-	.incbin "baserom.gba", 0x003763e4, 0x30
-
-gUnknown_08376414:: @ 8376414
-	.space 4
-
-gUnknown_08376418:: @ 8376418
-	.incbin "baserom.gba", 0x00376418, 0x44
+gUnknown_08376420:: @ 8376420
+	.incbin "baserom.gba", 0x00376420, 0x3C
 
 	.align 2
 gOamData_837645C:: @ 837645C

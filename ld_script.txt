@@ -315,6 +315,7 @@ SECTIONS {
         src/script.o(.rodata);
         src/scrcmd.o(.rodata);
         src/coord_event_weather.o(.rodata);
+        data/field_tasks.o(.rodata);
         data/data_83760F0.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);
