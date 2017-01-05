@@ -18,6 +18,16 @@
 #include "task.h"
 #include "trig.h"
 
+extern void *species_and_otid_get_pal(/*TODO: arg types*/);
+extern void sub_8143648(int, u8);
+extern void sub_8143680(int, u8);
+
+struct MonCoords
+{
+    u8 x, y;
+};
+
+extern struct SpriteTemplate gUnknown_02024E8C;
 extern u16 gUnknown_02039318;
 extern u16 gUnknown_0203931A;
 extern u16 gUnknown_02039358;
@@ -27,6 +37,13 @@ extern u32 gIntroFrameCounter;
 extern struct GcmbStruct gUnknown_03005EE0;
 extern u16 gSaveFileStatus;
 extern u8 gReservedSpritePaletteCount;
+extern struct SpriteSheet gMonFrontPicTable[];
+extern struct MonCoords gMonFrontPicCoords[];
+extern struct SpriteSheet gMonBackPicTable[];
+extern struct MonCoords gMonBackPicCoords[];
+extern struct SpriteSheet gTrainerBackPicTable[];
+extern struct MonCoords gTrainerBackPicCoords[];
+extern struct SpritePalette gTrainerBackPicPaletteTable[];
 
 extern const u16 gIntro1BGPals[];
 extern const u8 gIntro1BG0_Tilemap[];
@@ -57,9 +74,17 @@ extern const struct SpriteSheet gIntro2LatiosSpriteSheet;
 extern const struct SpriteSheet gIntro2LatiasSpriteSheet;
 extern const struct SpritePalette gIntro2SpritePalettes[];
 
+extern const struct SpriteTemplate gSpriteTemplate_840AE20;
+
 extern const u8 gIntroCopyright_Gfx[];
 extern const u16 gIntroCopyright_Pal[];
 extern const u16 gIntroCopyright_Tilemap[];
+
+extern const u16 gUnknown_08393E64[];
+extern union AnimCmd *gUnknown_0840B064[];
+extern void *gUnknown_0840B5A0[];
+
+extern const s16 gSineTable[];
 
 static void MainCB2_EndIntro(void);
 static void Task_IntroLoadPart1Graphics(u8);
@@ -79,8 +104,14 @@ static void task_intro_14(u8);
 static void task_intro_15(u8);
 static void task_intro_16(u8);
 static void task_intro_17(u8);
-static void Task_IntroPokemonBattle(u8);
+void Task_IntroPokemonBattle(u8);
 static void task_intro_19(u8);
+void task_intro_20(u8 taskId);  //should be static, but the compiler complains
+
+void sub_813D220(struct Sprite *sprite);
+void sub_813D368(struct Sprite *sprite);
+void sub_813D414(struct Sprite *sprite);
+void sub_813D484(struct Sprite *sprite);
 
 static void VBlankCB_Intro(void)
 {
@@ -527,7 +558,7 @@ static void task_intro_14(u8 taskId)
     REG_BG3CNT = 0x603;
     REG_BG0CNT = 0x700;
     REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG3_ON | DISPCNT_OBJ_ON | DISPCNT_WIN0_ON;
-    gTasks[taskId].data[15] = CreateTask(sub_813CAF4, 0);
+    gTasks[taskId].data[15] = CreateTask(task_intro_20, 0);
     gTasks[gTasks[taskId].data[15]].data[0] = 0;
     gTasks[taskId].data[0] = 0;
     gTasks[taskId].func = task_intro_15;
@@ -562,7 +593,7 @@ static void task_intro_17(u8 taskId)
     gTasks[taskId].func = Task_IntroPokemonBattle;
 }
 
-static void Task_IntroPokemonBattle(u8 taskId)
+void Task_IntroPokemonBattle(u8 taskId)
 {
     u8 spriteId;
     
@@ -675,4 +706,742 @@ static void task_intro_19(u8 taskId)
 {
     DestroyTask(taskId);
     SetMainCallback2(MainCB2_EndIntro);
+}
+
+void task_intro_20(u8 taskId)
+{
+    gTasks[taskId].data[15]++;
+    switch (gTasks[taskId].data[0])
+    {
+    case 0:
+        REG_DISPCNT = 0x3940;
+        REG_BG2CNT = 0;
+        gTasks[taskId].data[0] = 0xFF;
+        break;
+    case 2:
+        BeginNormalPaletteFade(1, 0, 0x10, 0, 0xFFFF);
+        REG_BG2CNT = 0x0E07;
+        REG_DISPCNT = 0x3D40;
+        gTasks[taskId].data[1] = 0;
+        gTasks[taskId].data[2] = 0;
+        gTasks[taskId].data[0] = 20;
+        //fall through
+    case 20:
+        REG_BG2VOFS = gTasks[taskId].data[1];
+        REG_BG2HOFS = gTasks[taskId].data[2];
+        gTasks[taskId].data[1] += 6;
+        gTasks[taskId].data[2] -= 8;
+        break;
+    case 3:
+        BeginNormalPaletteFade(1, 0, 0x10, 0, 0xFFFF);
+        REG_BG2CNT = 0x0E07;
+        REG_DISPCNT = 0x3D40;
+        gTasks[taskId].data[1] = 0;
+        gTasks[taskId].data[2] = 0;
+        gTasks[taskId].data[0] = 0x1E;
+        //fall through
+    case 0x1E:
+        REG_BG2VOFS = gTasks[taskId].data[1];
+        REG_BG2HOFS = gTasks[taskId].data[2];
+        gTasks[taskId].data[1] -= 6;
+        gTasks[taskId].data[2] += 8;
+        break;
+    case 4:
+        BeginNormalPaletteFade(1, 5, 0, 0x10, 0x37F7);
+        REG_BG2CNT = 0x0E07;
+        REG_DISPCNT = 0x3D40;
+        gTasks[taskId].data[1] = 0;
+        gTasks[taskId].data[2] = 0;
+        gTasks[taskId].data[3] = 8;
+        gTasks[taskId].data[0] = 0x28;
+        //fall through
+    case 0x28:
+        REG_BG2VOFS = gTasks[taskId].data[1];
+        REG_BG2HOFS = gTasks[taskId].data[2];
+        gTasks[taskId].data[1] -= gTasks[taskId].data[3];
+        gTasks[taskId].data[2] += gTasks[taskId].data[3];
+        if (!(gTasks[taskId].data[15] & 7) && gTasks[taskId].data[3] != 0)
+            gTasks[taskId].data[3]--;
+        break;
+    case 0xFF:  //needed to prevent jump table optimization
+        break;
+    }
+}
+
+void intro_reset_and_hide_bgs(void)
+{
+    REG_DISPCNT = 0;
+    REG_BG3HOFS = 0;
+    REG_BG3VOFS = 0;
+    REG_BG2HOFS = 0;
+    REG_BG2VOFS = 0;
+    REG_BG1HOFS = 0;
+    REG_BG1VOFS = 0;
+    REG_BG0HOFS = 0;
+    REG_BG0VOFS = 0;
+    REG_BLDCNT = 0;
+    REG_BLDALPHA = 0;
+    REG_BLDY = 0;
+}
+
+#ifdef NONMATCHING
+void sub_813CCE8(u8 taskId)
+{
+    switch (gTasks[taskId].data[0])
+    {
+    default:
+    case 0:
+        REG_BLDCNT = 0x3F50;
+        REG_BLDALPHA = 0x1000;
+        REG_BLDY = 0;
+        gTasks[taskId].data[1] = 0x40;
+        gTasks[taskId].data[0] = 1;
+        return;
+    case 1:
+        if (gTasks[taskId].data[1] != 0)
+        {
+            u32 foo;
+            u32 bar asm("r2");
+            
+            gTasks[taskId].data[1]--;
+            //tail merge at _0813CDC2
+            foo = gTasks[taskId].data[1] + (gTasks[taskId].data[1] < 0);
+            bar = 0x1FE;
+            REG_BLDALPHA = gUnknown_08393E64[(foo & bar) / 2];
+        }
+        else
+        {
+            REG_BLDALPHA = gUnknown_08393E64[0];
+            gTasks[taskId].data[1] = 0x80;
+            gTasks[taskId].data[0]++;
+        }
+        return;
+    case 2:
+        if (gTasks[taskId].data[1] != 0)
+        {
+            //tail merge at _0813CE0E
+            gTasks[taskId].data[1]--;
+        }
+        else
+        {
+            gTasks[taskId].data[1] = 0;  //redundant?
+            gTasks[taskId].data[0]++;
+        }
+        return;
+    case 3:
+        if (gTasks[taskId].data[1] <= 0x3D)
+        {
+            u32 foo;
+            u32 bar asm("r2");
+            
+            gTasks[taskId].data[1]++;
+            //_0813CDC2
+            foo = gTasks[taskId].data[1] + (gTasks[taskId].data[1] < 0);
+            bar = 0x1FE;
+            REG_BLDALPHA = gUnknown_08393E64[(foo & bar) / 2];
+        }
+        else
+        {
+            //_0813CDE0
+            REG_BLDALPHA = gUnknown_08393E64[0x1F];
+            gTasks[taskId].data[1] = 0x10;
+            gTasks[taskId].data[0]++;
+        }
+        return;
+    case 4:
+        if (gTasks[taskId].data[1] != 0)
+        {
+            gTasks[taskId].data[1]--;
+        }
+        else
+        {
+            REG_BLDCNT = 0;
+            REG_BLDALPHA = 0;
+            REG_BLDY = 0;
+            DestroyTask(taskId);
+        }
+        return;
+    }
+}
+#else
+__attribute__((naked))
+void sub_813CCE8(u8 taskId)
+{
+    asm("\n\
+    .equ REG_BLDCNT, 0x4000050\n\
+    .equ REG_BLDALPHA, 0x4000052\n\
+    .syntax unified\n\
+    push {r4,lr}\n\
+    lsls r0, 24\n\
+    lsrs r3, r0, 24\n\
+    ldr r1, _0813CD0C @ =gTasks\n\
+    lsls r0, r3, 2\n\
+    adds r0, r3\n\
+    lsls r0, 3\n\
+    adds r0, r1\n\
+    movs r2, 0x8\n\
+    ldrsh r0, [r0, r2]\n\
+    adds r2, r1, 0\n\
+    cmp r0, 0x4\n\
+    bhi _0813CD28\n\
+    lsls r0, 2\n\
+    ldr r1, _0813CD10 @ =_0813CD14\n\
+    adds r0, r1\n\
+    ldr r0, [r0]\n\
+    mov pc, r0\n\
+    .align 2, 0\n\
+_0813CD0C: .4byte gTasks\n\
+_0813CD10: .4byte _0813CD14\n\
+    .align 2, 0\n\
+_0813CD14:\n\
+    .4byte _0813CD28\n\
+    .4byte _0813CD5C\n\
+    .4byte _0813CD8C\n\
+    .4byte _0813CDA8\n\
+    .4byte _0813CDFC\n\
+_0813CD28:\n\
+    ldr r1, _0813CD54 @ =REG_BLDCNT\n\
+    ldr r4, _0813CD58 @ =0x00003f50\n\
+    adds r0, r4, 0\n\
+    strh r0, [r1]\n\
+    adds r1, 0x2\n\
+    movs r4, 0x80\n\
+    lsls r4, 5\n\
+    adds r0, r4, 0\n\
+    strh r0, [r1]\n\
+    adds r1, 0x2\n\
+    movs r0, 0\n\
+    strh r0, [r1]\n\
+    lsls r0, r3, 2\n\
+    adds r0, r3\n\
+    lsls r0, 3\n\
+    adds r0, r2\n\
+    movs r1, 0x40\n\
+    strh r1, [r0, 0xA]\n\
+    movs r1, 0x1\n\
+    strh r1, [r0, 0x8]\n\
+    b _0813CE26\n\
+    .align 2, 0\n\
+_0813CD54: .4byte REG_BLDCNT\n\
+_0813CD58: .4byte 0x00003f50\n\
+_0813CD5C:\n\
+    lsls r0, r3, 2\n\
+    adds r0, r3\n\
+    lsls r0, 3\n\
+    adds r2, r0, r2\n\
+    ldrh r1, [r2, 0xA]\n\
+    movs r3, 0xA\n\
+    ldrsh r0, [r2, r3]\n\
+    cmp r0, 0\n\
+    beq _0813CD78\n\
+    subs r0, r1, 0x1\n\
+    strh r0, [r2, 0xA]\n\
+    movs r4, 0xA\n\
+    ldrsh r0, [r2, r4]\n\
+    b _0813CDC2\n\
+_0813CD78:\n\
+    ldr r1, _0813CD84 @ =REG_BLDALPHA\n\
+    ldr r0, _0813CD88 @ =gUnknown_08393E64\n\
+    ldrh r0, [r0]\n\
+    strh r0, [r1]\n\
+    movs r0, 0x80\n\
+    b _0813CDEA\n\
+    .align 2, 0\n\
+_0813CD84: .4byte REG_BLDALPHA\n\
+_0813CD88: .4byte gUnknown_08393E64\n\
+_0813CD8C:\n\
+    lsls r0, r3, 2\n\
+    adds r0, r3\n\
+    lsls r0, 3\n\
+    adds r1, r0, r2\n\
+    ldrh r0, [r1, 0xA]\n\
+    movs r3, 0xA\n\
+    ldrsh r2, [r1, r3]\n\
+    cmp r2, 0\n\
+    bne _0813CE0E\n\
+    strh r2, [r1, 0xA]\n\
+    ldrh r0, [r1, 0x8]\n\
+    adds r0, 0x1\n\
+    strh r0, [r1, 0x8]\n\
+    b _0813CE26\n\
+_0813CDA8:\n\
+    lsls r0, r3, 2\n\
+    adds r0, r3\n\
+    lsls r0, 3\n\
+    adds r2, r0, r2\n\
+    ldrh r1, [r2, 0xA]\n\
+    movs r4, 0xA\n\
+    ldrsh r0, [r2, r4]\n\
+    cmp r0, 0x3D\n\
+    bgt _0813CDE0\n\
+    adds r0, r1, 0x1\n\
+    strh r0, [r2, 0xA]\n\
+    movs r1, 0xA\n\
+    ldrsh r0, [r2, r1]\n\
+_0813CDC2:\n\
+    lsrs r1, r0, 31\n\
+    adds r0, r1\n\
+    movs r2, 0xFF\n\
+    lsls r2, 1\n\
+    ldr r3, _0813CDD8 @ =REG_BLDALPHA\n\
+    ldr r1, _0813CDDC @ =gUnknown_08393E64\n\
+    ands r0, r2\n\
+    adds r0, r1\n\
+    ldrh r0, [r0]\n\
+    strh r0, [r3]\n\
+    b _0813CE26\n\
+    .align 2, 0\n\
+_0813CDD8: .4byte REG_BLDALPHA\n\
+_0813CDDC: .4byte gUnknown_08393E64\n\
+_0813CDE0:\n\
+    ldr r1, _0813CDF4 @ =REG_BLDALPHA\n\
+    ldr r0, _0813CDF8 @ =gUnknown_08393E64\n\
+    ldrh r0, [r0, 0x3E]\n\
+    strh r0, [r1]\n\
+    movs r0, 0x10\n\
+_0813CDEA:\n\
+    strh r0, [r2, 0xA]\n\
+    ldrh r0, [r2, 0x8]\n\
+    adds r0, 0x1\n\
+    strh r0, [r2, 0x8]\n\
+    b _0813CE26\n\
+    .align 2, 0\n\
+_0813CDF4: .4byte REG_BLDALPHA\n\
+_0813CDF8: .4byte gUnknown_08393E64\n\
+_0813CDFC:\n\
+    lsls r0, r3, 2\n\
+    adds r0, r3\n\
+    lsls r0, 3\n\
+    adds r1, r0, r2\n\
+    ldrh r0, [r1, 0xA]\n\
+    movs r4, 0xA\n\
+    ldrsh r2, [r1, r4]\n\
+    cmp r2, 0\n\
+    beq _0813CE14\n\
+_0813CE0E:\n\
+    subs r0, 0x1\n\
+    strh r0, [r1, 0xA]\n\
+    b _0813CE26\n\
+_0813CE14:\n\
+    ldr r0, _0813CE2C @ =REG_BLDCNT\n\
+    strh r2, [r0]\n\
+    adds r0, 0x2\n\
+    strh r2, [r0]\n\
+    adds r0, 0x2\n\
+    strh r2, [r0]\n\
+    adds r0, r3, 0\n\
+    bl DestroyTask\n\
+_0813CE26:\n\
+    pop {r4}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
+_0813CE2C: .4byte REG_BLDCNT\n\
+    .syntax divided\n");
+}
+#endif
+
+void sub_813CE30(u16 a, u16 b, u16 c, u16 d)
+{
+    struct BgAffineSrcData src;
+    struct BgAffineDstData dest;
+    
+    src.texX = 0x8000;
+    src.texY = 0x8000;
+    src.scrX = a;
+    src.scrY = b;
+    src.sx = c;
+    src.sy = c;
+    src.alpha = d;
+    BgAffineSet(&src, &dest, 1);
+    REG_BG2PA = dest.pa;
+    REG_BG2PB = dest.pb;
+    REG_BG2PC = dest.pc;
+    REG_BG2PD = dest.pd;
+    REG_BG2X = dest.dx;
+    REG_BG2Y = dest.dy;
+}
+
+u8 sub_813CE88(u16 a, s16 b, u16 c, u16 d, u8 e)
+{
+    void *pal;
+    u8 spriteId;
+    
+    if (e != 0)
+        LoadSpecialPokePic(&gMonFrontPicTable[a], gMonFrontPicCoords[a].x, gMonFrontPicCoords[a].y, 0x2000000, gUnknown_0840B5A0[d], a, 0, 1);
+    else
+        LoadSpecialPokePic(&gMonBackPicTable[a], gMonBackPicCoords[a].x, gMonBackPicCoords[a].y, 0x2000000, gUnknown_0840B5A0[d], a, 0, 0);
+    pal = species_and_otid_get_pal(a, 0, 0xFFFF);
+    LoadCompressedPalette(pal, 0x100 + d * 0x10, 0x20);
+    sub_8143648(d, d);
+    spriteId = CreateSprite(&gUnknown_02024E8C, b, c, (d + 1) * 4);
+    gSprites[spriteId].oam.paletteNum = d;
+    gSprites[spriteId].oam.priority = 1;
+    return spriteId;
+}
+
+u8 sub_813CFA8(u16 a, u16 b, u16 c, u16 d)
+{
+    u8 spriteId;
+    
+    DecompressPicFromTable_2(&gTrainerBackPicTable[a], gTrainerBackPicCoords[a].x, gTrainerBackPicCoords[a].y, (void *)0x2000000, gUnknown_0840B5A0[d], a);
+    LoadCompressedPalette(gTrainerBackPicPaletteTable[a].data, 0x100 + d * 0x10, 0x20);
+    sub_8143680(d, d);
+    gUnknown_02024E8C.anims = gUnknown_0840B064;
+    spriteId = CreateSprite(&gUnknown_02024E8C, b, c, 1);
+    gSprites[spriteId].oam.paletteNum = d;
+    gSprites[spriteId].oam.priority = 1;
+    return spriteId;
+}
+
+void sub_813D084(u8 a)
+{
+    u16 color;
+    
+    switch (a)
+    {
+    default:
+    case 0:
+        color = 0x3FF6;
+        break;
+    case 1:
+        color = 0x31DF;
+        break;
+    case 2:
+        color = 0x518C;
+        break;
+    }
+    gPlttBufferUnfaded[0xF1] = color;
+    gPlttBufferFaded[0xF1] = color;
+}
+
+void sub_813D0CC(struct Sprite *sprite)
+{
+    u8 r0;
+    
+    if (sprite->data2 > 0xBF)
+    {
+        if (sprite->data3 != 0)
+        {
+            sprite->data3--;
+        }
+        else
+        {
+            sprite->invisible = FALSE;
+            SetOamMatrix(sprite->data1, sprite->data2, 0, 0, sprite->data2);
+            sprite->data2 = (sprite->data2 * 95) / 100;
+            r0 = (sprite->data2 - 0xC0) / 128 + 9;
+            if (r0 > 15)
+                r0 = 15;
+            sprite->oam.paletteNum = r0;
+        }
+    }
+    else
+    {
+        DestroySprite(sprite);
+    }
+}
+
+void sub_813D158(struct Sprite *sprite)
+{
+    if (gSprites[sprite->data7].data7 != 0)
+    {
+        sprite->invisible = TRUE;
+        sprite->pos1.x += sprite->pos2.x;
+        sprite->pos1.y += sprite->pos2.y;
+        StartSpriteAnim(sprite, 3);
+        sprite->data2 = 0x400;
+        sprite->data3 = 8 * (sprite->data1 & 3);
+        sprite->callback = sub_813D0CC;
+        sprite->oam.shape = 1;
+        sprite->oam.size = 3;
+        CalcCenterToCornerVec(sprite, 1, 3, 2);
+    }
+    else
+    {
+        sprite->pos2.x = gSprites[sprite->data7].pos2.x;
+        sprite->pos2.y = gSprites[sprite->data7].pos2.y;
+        sprite->pos1.x = gSprites[sprite->data7].pos1.x;
+        sprite->pos1.y = gSprites[sprite->data7].pos1.y;
+    }
+}
+
+void sub_813D208(struct Sprite *sprite)
+{
+    if (sprite->data0 != 0)
+        sprite->callback = sub_813D220;
+}
+
+void sub_813D220(struct Sprite *sprite)
+{
+    if (sprite->pos1.x <= 116)
+    {
+        sprite->pos1.y += sprite->pos2.y;
+        sprite->pos2.y = 0;
+        sprite->pos1.x += 4;
+        sprite->pos2.x = -4;
+        sprite->data4 = 128;
+        sprite->callback = sub_813D368;
+    }
+    else
+    {
+        u16 data2;
+        u16 data3;
+        u16 data4;
+        s16 sin1;
+        s16 sin2;
+        s16 sin3;
+        s16 sin4;
+        s16 var1;
+        s16 var2;
+        s16 var3;
+        s16 var4;
+        s16 temp;
+        
+        data4 = sprite->data4;
+        sin1 = gSineTable[(u8)data4];
+        sin2 = gSineTable[(u8)(data4 + 64)];
+        sprite->data4 += 2;
+        sprite->pos2.y = sin1 / 32;
+        sprite->pos1.x--;
+        if (sprite->pos1.x & 1)
+            sprite->pos1.y++;
+        temp = -sin2 / 16;
+        data2 = sprite->data2;
+        data3 = sprite->data3;
+        sin3 = gSineTable[(u8)(temp - 16)];
+        sin4 = gSineTable[(u8)(temp + 48)];
+        var1 = sin4 * data2 / 256;
+        var2 = -sin3 * data3 / 256;
+        var3 = sin3 * data2 / 256;
+        var4 = sin4 * data3 / 256;
+        SetOamMatrix(sprite->data1, data2, 0, 0, data3);
+        SetOamMatrix(sprite->data1 + 1, var1, var3, var2, var4);
+        SetOamMatrix(sprite->data1 + 2, var1, var3, var2 * 2, var4 * 2);
+    }
+}
+
+void sub_813D368(struct Sprite *sprite)
+{
+    SetOamMatrix(sprite->data1, sprite->data6 + 64, 0, 0, sprite->data6 + 64);
+    SetOamMatrix(sprite->data1 + 1, sprite->data6 + 64, 0, 0, sprite->data6 + 64);
+    SetOamMatrix(sprite->data1 + 2, sprite->data6 + 64, 0, 0, sprite->data6 + 64);
+    if (sprite->data4 != 64)
+    {
+        u16 data4;
+        
+        sprite->data4 -= 8;
+        data4 = sprite->data4;
+        sprite->pos2.x = gSineTable[(u8)(data4 + 64)] / 64;
+        sprite->pos2.y = gSineTable[(u8)data4] / 64;
+    }
+    else
+    {
+        sprite->data4 = 0;
+        sprite->callback = sub_813D414;
+    }
+}
+
+void sub_813D414(struct Sprite *sprite)
+{
+    if (sprite->data0 != 2)
+    {
+        s16 r2;
+        
+        sprite->data4 += 8;
+        r2 = gSineTable[(u8)sprite->data4] / 16 + 64;
+        sprite->pos2.x = gSineTable[(u8)(r2 + 64)] / 64;
+        sprite->pos2.y = gSineTable[(u8)r2] / 64;
+    }
+    else
+    {
+        sprite->callback = sub_813D484;
+    }
+}
+
+void sub_813D484(struct Sprite *sprite)
+{
+    if (sprite->pos1.y < sprite->data5)
+    {
+        sprite->pos1.y += 4;
+    }
+    else
+    {
+        sprite->data7 = 1;
+        sprite->invisible = TRUE;
+        sprite->pos1.x += sprite->pos2.x;
+        sprite->pos1.y += sprite->pos2.y;
+        StartSpriteAnim(sprite, 3);
+        sprite->data2 = 0x400;
+        sprite->data3 = 8 * (sprite->data1 & 3);
+        sprite->callback = sub_813D0CC;
+        sprite->oam.shape = 1;
+        sprite->oam.size = 3;
+        CalcCenterToCornerVec(sprite, 1, 3, 2);
+    }
+}
+
+//Duplicate function
+void sub_813D504(struct Sprite *sprite)
+{
+    if (sprite->pos1.y < sprite->data5)
+    {
+        sprite->pos1.y += 4;
+    }
+    else
+    {
+        sprite->data7 = 1;
+        sprite->invisible = TRUE;
+        sprite->pos1.x += sprite->pos2.x;
+        sprite->pos1.y += sprite->pos2.y;
+        StartSpriteAnim(sprite, 3);
+        sprite->data2 = 0x400;
+        sprite->data3 = 8 * (sprite->data1 & 3);
+        sprite->callback = sub_813D0CC;
+        sprite->oam.shape = 1;
+        sprite->oam.size = 3;
+        CalcCenterToCornerVec(sprite, 1, 3, 2);
+    }
+}
+
+u8 sub_813D584(u16 a, s16 b, u16 c, u16 d, u16 e, u8 f)
+{
+    u8 spriteId;
+    u8 oldSpriteId;
+    
+    spriteId = CreateSprite(&gSpriteTemplate_840AE20, a, b, 0);
+    gSprites[spriteId].data0 = 0;
+    gSprites[spriteId].data7 = 0;
+    gSprites[spriteId].data1 = d;
+    gSprites[spriteId].data2 = c;
+    gSprites[spriteId].data3 = c;
+    gSprites[spriteId].data5 = e;
+    gSprites[spriteId].data6 = c;
+    gSprites[spriteId].oam.affineMode = 3;
+    gSprites[spriteId].oam.matrixNum = d;
+    CalcCenterToCornerVec(&gSprites[spriteId], 0, 2, 2);
+    StartSpriteAnim(&gSprites[spriteId], 2);
+    if (f == 0)
+        gSprites[spriteId].callback = sub_813D208;
+    else
+        gSprites[spriteId].callback = sub_813D504;
+    oldSpriteId = spriteId;
+    
+    spriteId = CreateSprite(&gSpriteTemplate_840AE20, a, b, 0);
+    gSprites[spriteId].data7 = oldSpriteId;
+    gSprites[spriteId].data1 = d + 1;
+    gSprites[spriteId].oam.affineMode = 3;
+    gSprites[spriteId].oam.matrixNum = d + 1;
+    CalcCenterToCornerVec(&gSprites[spriteId], 0, 2, 2);
+    gSprites[spriteId].callback = sub_813D158;
+    
+    spriteId = CreateSprite(&gSpriteTemplate_840AE20, a, b, 0);
+    gSprites[spriteId].data7 = oldSpriteId;
+    gSprites[spriteId].data1 = d + 2;
+    StartSpriteAnim(&gSprites[spriteId], 1);
+    gSprites[spriteId].oam.affineMode = 3;
+    gSprites[spriteId].oam.matrixNum = d + 2;
+    CalcCenterToCornerVec(&gSprites[spriteId], 0, 2, 2);
+    gSprites[spriteId].callback = sub_813D158;
+    
+    SetOamMatrix(d, c + 32, 0, 0, c + 32);
+    SetOamMatrix(d + 1, c + 32, 0, 0, c + 32);
+    SetOamMatrix(d + 2, c + 32, 0, 0, 2 * (c + 32));
+    
+    return oldSpriteId;
+}
+
+void sub_813D788(struct Sprite *sprite)
+{
+    switch (sprite->data0)
+    {
+        case 0:
+            StartSpriteAnimIfDifferent(sprite, 0);
+            sprite->pos1.x--;
+            break;
+        case 1:
+            StartSpriteAnimIfDifferent(sprite, 0);
+            if (gIntroFrameCounter & 7)
+                return;
+            sprite->pos1.x++;
+            break;
+        case 2:
+            StartSpriteAnimIfDifferent(sprite, 2);
+            if (sprite->pos1.x <= 0x78 || (gIntroFrameCounter & 7))
+                sprite->pos1.x++;
+            break;
+        case 3:
+            StartSpriteAnimIfDifferent(sprite, 3);
+            break;
+        case 4:
+            StartSpriteAnimIfDifferent(sprite, 0);
+            if (sprite->pos1.x > -32)
+                sprite->pos1.x -= 2;
+            break;
+    }
+    if (gIntroFrameCounter & 7)
+        return;
+    if (sprite->pos2.y != 0)
+    {
+        sprite->pos2.y = 0;
+    }
+    else
+    {
+        switch (Random() & 3)
+        {
+            case 0:
+                sprite->pos2.y = -1;
+                break;
+            case 1:
+                sprite->pos2.y = 1;
+                break;
+            case 2:
+            case 3:
+                sprite->pos2.y = 0;
+                break;
+        }
+    }
+}
+
+void sub_813D880(struct Sprite *sprite)
+{
+    switch (sprite->data0)
+    {
+        case 0:
+            break;
+        case 1:
+            if (sprite->pos2.x + sprite->pos1.x < 0x130)
+                sprite->pos2.x += 8;
+            else
+                sprite->data0 = 2;
+            break;
+        case 2:
+            if (sprite->pos2.x + sprite->pos1.x > 0x78)
+                sprite->pos2.x -= 1;
+            else
+                sprite->data0 = 3;
+            break;
+        case 3:
+            if (sprite->pos2.x > 0)
+                sprite->pos2.x -= 2;
+            break;
+    }
+    sprite->pos2.y = Sin((u8)sprite->data1, 8) - gUnknown_0203935A;
+    sprite->data1 += 4;
+}
+
+void sub_813D908(struct Sprite *sprite)
+{
+    if (gTasks[sprite->data0].data[0] == 0)
+    {
+        sprite->invisible = TRUE;
+    }
+    else if (gTasks[sprite->data0].data[0] != 4)
+    {
+        sprite->invisible = FALSE;
+    }
+    else
+    {
+        DestroySprite(sprite);
+    }
 }

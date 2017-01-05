@@ -31,6 +31,8 @@ void CpuSet(const void *src, void *dest, u32 control);
 
 void CpuFastSet(const void *src, void *dest, u32 control);
 
+void BgAffineSet(struct BgAffineSrcData *src, struct BgAffineDstData *dest, s32 count);
+
 void ObjAffineSet(struct ObjAffineSrcData *src, void *dest, s32 count, s32 offset);
 
 void LZ77UnCompWram(const void *src, void *dest);
