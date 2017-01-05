@@ -4,13 +4,6 @@
 	.section .rodata
 
 	.align 2
-gDummyPaletteStructTemplate:: @ 837DEE4
-	.2byte 0xFFFF
-	.space 9
-	.byte 0x20
-	.space 4
-
-	.align 2
 gFanfares:: @ 837DEF4
 	.2byte BGM_FANFA1,      80
 	.2byte BGM_FANFA4,     160
