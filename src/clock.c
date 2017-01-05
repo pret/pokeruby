@@ -15,11 +15,12 @@ extern void sub_810D2F4(u16);
 extern void UpdateBirchState(u16);
 extern void sub_810F618(u16);
 
-void sub_806A390(struct Time *time);
-void sub_806A3F4(struct Time *time);
-void sub_806A328(void);
+static void InitTimeBasedEvents(void);
+static void UpdatePerDay(struct Time *time);
+static void UpdatePerSecond(struct Time *time);
+static void ReturnFromStartWallClock(void);
 
-void sub_806A328(void)
+static void InitTimeBasedEvents(void)
 {
     FlagSet(SYS_CLOCK_SET);
     RtcCalcLocalTime();
@@ -32,18 +33,18 @@ void DoTimeBasedEvents(void)
     if (FlagGet(SYS_CLOCK_SET))
     {
         RtcCalcLocalTime();
-        sub_806A390(&gLocalTime);
-        sub_806A3F4(&gLocalTime);
+        UpdatePerDay(&gLocalTime);
+        UpdatePerSecond(&gLocalTime);
     }
 }
 
-void sub_806A390(struct Time *time)
+static void UpdatePerDay(struct Time *time)
 {
     u16 *varPtr = GetVarPointer(VAR_DAYS);
     int days = *varPtr;
     u16 newDays;
 
-    if(days != time->days && days <= time->days)
+    if (days != time->days && days <= time->days)
     {
         newDays = time->days - days;
         ClearUpperFlags();
@@ -59,7 +60,7 @@ void sub_806A390(struct Time *time)
     }
 }
 
-void sub_806A3F4(struct Time *time)
+static void UpdatePerSecond(struct Time *time)
 {
     struct Time newTime;
     s32 totalSeconds;
@@ -68,9 +69,9 @@ void sub_806A3F4(struct Time *time)
     totalSeconds = 1440 * newTime.days + 60 * newTime.hours + newTime.minutes;
 
     // there's no way to get the correct assembly other than with this nested if check. so dumb.
-    if(totalSeconds != 0)
+    if (totalSeconds != 0)
     {
-        if(totalSeconds >= 0)
+        if (totalSeconds >= 0)
         {
             BerryTreeTimeUpdate(totalSeconds);
             gSaveBlock2.lastBerryTreeUpdate = *time;
@@ -78,14 +79,14 @@ void sub_806A3F4(struct Time *time)
     }
 }
 
-void sub_806A44C(void)
+static void ReturnFromStartWallClock(void)
 {
-    sub_806A328();
+    InitTimeBasedEvents();
     SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
 }
 
-void sub_806A460(void)
+void StartWallClock(void)
 {
-    SetMainCallback2(Cb2_StartWallClock);
-    gMain.field_8 = sub_806A44C;
+    SetMainCallback2(CB2_StartWallClock);
+    gMain.field_8 = ReturnFromStartWallClock;
 }

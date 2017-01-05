@@ -150,7 +150,7 @@ static void WallClockInit(void)
 }
 
 //Allow player to set the clock
-void Cb2_StartWallClock(void)
+void CB2_StartWallClock(void)
 {
     u8 taskId;
     u8 spriteId;
