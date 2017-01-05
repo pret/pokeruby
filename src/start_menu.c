@@ -37,11 +37,6 @@ enum {
     MENU_ACTION_PLAYER_LINK
 };
 
-struct MenuItem {
-    u8 *text;
-    u8 (*callback)(void);
-};
-
 static u8 (*saveDialogCallback)(void);
 static u8 saveDialogTimer;    //Number of frames to keep the window on screen after save was completed
 static bool8 savingComplete;
@@ -88,7 +83,7 @@ static u8 StartMenu_ExitCallback(void);
 static u8 StartMenu_RetireCallback(void);
 static u8 StartMenu_PlayerLinkCallback(void);
 
-static const struct MenuItem sStartMenuItems[] =
+static const struct MenuAction sStartMenuItems[] =
 {
     { SystemText_Pokedex, StartMenu_PokedexCallback },
     { SystemText_Pokemon, StartMenu_PokemonCallback },
@@ -337,12 +332,12 @@ static u8 StartMenu_InputProcessCallback(void)
     if(gMain.newKeys & A_BUTTON)
     {
         PlaySE(SE_SELECT);
-        if(sStartMenuItems[sCurrentStartMenuActions[sStartMenuCursorPos]].callback == StartMenu_PokedexCallback)
+        if(sStartMenuItems[sCurrentStartMenuActions[sStartMenuCursorPos]].func == StartMenu_PokedexCallback)
         {
             if(GetNationalPokedexCount(0) == 0)
                 return 0;
         }
-        gCallback_03004AE8 = sStartMenuItems[sCurrentStartMenuActions[sStartMenuCursorPos]].callback;
+        gCallback_03004AE8 = sStartMenuItems[sCurrentStartMenuActions[sStartMenuCursorPos]].func;
         if(gCallback_03004AE8 != StartMenu_SaveCallback &&
            gCallback_03004AE8 != StartMenu_ExitCallback &&
            gCallback_03004AE8 != StartMenu_RetireCallback)
