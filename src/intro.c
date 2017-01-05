@@ -1105,3 +1105,30 @@ void sub_813D084(u8 a)
     gPlttBufferUnfaded[0xF1] = color;
     gPlttBufferFaded[0xF1] = color;
 }
+
+void sub_813D0CC(struct Sprite *sprite)
+{
+    u8 r0;
+    
+    if (sprite->data2 > 0xBF)
+    {
+        if (sprite->data3 != 0)
+        {
+            sprite->data3--;
+        }
+        else
+        {
+            sprite->invisible = FALSE;
+            SetOamMatrix(sprite->data1, sprite->data2, 0, 0, sprite->data2);
+            sprite->data2 = (sprite->data2 * 95) / 100;
+            r0 = (sprite->data2 - 0xC0) / 128 + 9;
+            if (r0 > 15)
+                r0 = 15;
+            sprite->oam.paletteNum = r0;
+        }
+    }
+    else
+    {
+        DestroySprite(sprite);
+    }
+}
