@@ -21,7 +21,7 @@ void sub_806A328(void);
 
 void sub_806A328(void)
 {
-    FlagSet(0x835);
+    FlagSet(SYS_CLOCK_SET);
     RtcCalcLocalTime();
     gSaveBlock2.lastBerryTreeUpdate = gLocalTime;
     VarSet(0x4040, gLocalTime.days);
@@ -29,12 +29,12 @@ void sub_806A328(void)
 
 void DoTimeBasedEvents(void)
 {
-    if(FlagGet(0x835))
+    if (FlagGet(SYS_CLOCK_SET))
     {
         RtcCalcLocalTime();
         sub_806A390(&gLocalTime);
         sub_806A3F4(&gLocalTime);
-    }        
+    }
 }
 
 void sub_806A390(struct Time *time)
@@ -42,7 +42,7 @@ void sub_806A390(struct Time *time)
     u16 *varPtr = GetVarPointer(0x4040);
     int days = *varPtr;
     u16 newDays;
-    
+
     if(days != time->days && days <= time->days)
     {
         newDays = time->days - days;
