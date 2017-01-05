@@ -57,7 +57,7 @@ bool8 PokemonSummaryScreen_CheckOT(struct Pokemon *mon)
     return FALSE;
 }
 
-void sub_80A0708(struct Pokemon *mon, u8 left, u8 top)
+void PokemonSummaryScreen_PrintEggTrainerMemo(struct Pokemon *mon, u8 left, u8 top)
 {
     u8 locationMet;
     u8 gameMet = GetMonData(mon, MON_DATA_MET_GAME);

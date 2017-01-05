@@ -4614,7 +4614,7 @@ _0809FD0A:
 	adds r0, r6, 0
 	movs r1, 0xB
 	movs r2, 0xE
-	bl sub_80A0708
+	bl PokemonSummaryScreen_PrintEggTrainerMemo
 	b _0809FE4C
 	.align 2, 0
 _0809FD18: .4byte gOtherText_EggLongTime
