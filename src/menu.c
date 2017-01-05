@@ -143,7 +143,7 @@ void BasicInitMenuWindow(const struct WindowConfig *winConfig)
     gMenuWindowPtr->tileDataStartOffset = gMenuTextTileOffset;
 }
 
-void MenuPrint(u8 *str, u8 left, u8 top)
+void MenuPrint(const u8 *str, u8 left, u8 top)
 {
     sub_8003460(gMenuWindowPtr, str, gMenuTextTileOffset, left, top);
 }

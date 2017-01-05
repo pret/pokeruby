@@ -18,7 +18,7 @@ void unref_sub_8071DA4(struct WindowConfig *, u16);
 void MenuLoadTextWindowGraphics_OverrideFrameType(u8);
 void MenuLoadTextWindowGraphics(void);
 void BasicInitMenuWindow(const struct WindowConfig *);
-void MenuPrint(u8 *, u8, u8);
+void MenuPrint(const u8 *, u8, u8);
 void MenuZeroFillWindowRect(u8, u8, u8, u8);
 void MenuFillWindowRectWithBlankTile(u8, u8, u8, u8);
 void MenuZeroFillScreen(void);
