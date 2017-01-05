@@ -18,6 +18,12 @@
 #include "task.h"
 #include "trig.h"
 
+struct MonCoords
+{
+    u8 x, y;
+};
+
+extern struct SpriteTemplate gUnknown_02024E8C;
 extern u16 gUnknown_02039318;
 extern u16 gUnknown_0203931A;
 extern u16 gUnknown_02039358;
@@ -27,6 +33,13 @@ extern u32 gIntroFrameCounter;
 extern struct GcmbStruct gUnknown_03005EE0;
 extern u16 gSaveFileStatus;
 extern u8 gReservedSpritePaletteCount;
+extern struct SpriteSheet gMonFrontPicTable[];
+extern struct MonCoords gMonFrontPicCoords[];
+extern struct SpriteSheet gMonBackPicTable[];
+extern struct MonCoords gMonBackPicCoords[];
+extern struct SpriteSheet gTrainerBackPicTable[];
+extern struct MonCoords gTrainerBackPicCoords[];
+extern struct SpritePalette gTrainerBackPicPaletteTable[];
 
 extern const u16 gIntro1BGPals[];
 extern const u8 gIntro1BG0_Tilemap[];
@@ -61,6 +74,10 @@ extern const u8 gIntroCopyright_Gfx[];
 extern const u16 gIntroCopyright_Pal[];
 extern const u16 gIntroCopyright_Tilemap[];
 
+extern const u16 gUnknown_08393E64[];
+extern union AnimCmd *gUnknown_0840B064[];
+extern void *gUnknown_0840B5A0[];
+
 static void MainCB2_EndIntro(void);
 static void Task_IntroLoadPart1Graphics(u8);
 static void Task_IntroFadeIn(u8);
@@ -79,8 +96,9 @@ static void task_intro_14(u8);
 static void task_intro_15(u8);
 static void task_intro_16(u8);
 static void task_intro_17(u8);
-static void Task_IntroPokemonBattle(u8);
+void Task_IntroPokemonBattle(u8);
 static void task_intro_19(u8);
+void task_intro_20(u8 taskId);  //should be static, but the compiler complains
 
 static void VBlankCB_Intro(void)
 {
@@ -527,7 +545,7 @@ static void task_intro_14(u8 taskId)
     REG_BG3CNT = 0x603;
     REG_BG0CNT = 0x700;
     REG_DISPCNT = DISPCNT_MODE_0 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG3_ON | DISPCNT_OBJ_ON | DISPCNT_WIN0_ON;
-    gTasks[taskId].data[15] = CreateTask(sub_813CAF4, 0);
+    gTasks[taskId].data[15] = CreateTask(task_intro_20, 0);
     gTasks[gTasks[taskId].data[15]].data[0] = 0;
     gTasks[taskId].data[0] = 0;
     gTasks[taskId].func = task_intro_15;
@@ -562,7 +580,7 @@ static void task_intro_17(u8 taskId)
     gTasks[taskId].func = Task_IntroPokemonBattle;
 }
 
-static void Task_IntroPokemonBattle(u8 taskId)
+void Task_IntroPokemonBattle(u8 taskId)
 {
     u8 spriteId;
     
@@ -675,4 +693,415 @@ static void task_intro_19(u8 taskId)
 {
     DestroyTask(taskId);
     SetMainCallback2(MainCB2_EndIntro);
+}
+
+void task_intro_20(u8 taskId)
+{
+    gTasks[taskId].data[15]++;
+    switch (gTasks[taskId].data[0])
+    {
+    case 0:
+        REG_DISPCNT = 0x3940;
+        REG_BG2CNT = 0;
+        gTasks[taskId].data[0] = 0xFF;
+        break;
+    case 2:
+        BeginNormalPaletteFade(1, 0, 0x10, 0, 0xFFFF);
+        REG_BG2CNT = 0x0E07;
+        REG_DISPCNT = 0x3D40;
+        gTasks[taskId].data[1] = 0;
+        gTasks[taskId].data[2] = 0;
+        gTasks[taskId].data[0] = 20;
+        //fall through
+    case 20:
+        REG_BG2VOFS = gTasks[taskId].data[1];
+        REG_BG2HOFS = gTasks[taskId].data[2];
+        gTasks[taskId].data[1] += 6;
+        gTasks[taskId].data[2] -= 8;
+        break;
+    case 3:
+        BeginNormalPaletteFade(1, 0, 0x10, 0, 0xFFFF);
+        REG_BG2CNT = 0x0E07;
+        REG_DISPCNT = 0x3D40;
+        gTasks[taskId].data[1] = 0;
+        gTasks[taskId].data[2] = 0;
+        gTasks[taskId].data[0] = 0x1E;
+        //fall through
+    case 0x1E:
+        REG_BG2VOFS = gTasks[taskId].data[1];
+        REG_BG2HOFS = gTasks[taskId].data[2];
+        gTasks[taskId].data[1] -= 6;
+        gTasks[taskId].data[2] += 8;
+        break;
+    case 4:
+        BeginNormalPaletteFade(1, 5, 0, 0x10, 0x37F7);
+        REG_BG2CNT = 0x0E07;
+        REG_DISPCNT = 0x3D40;
+        gTasks[taskId].data[1] = 0;
+        gTasks[taskId].data[2] = 0;
+        gTasks[taskId].data[3] = 8;
+        gTasks[taskId].data[0] = 0x28;
+        //fall through
+    case 0x28:
+        REG_BG2VOFS = gTasks[taskId].data[1];
+        REG_BG2HOFS = gTasks[taskId].data[2];
+        gTasks[taskId].data[1] -= gTasks[taskId].data[3];
+        gTasks[taskId].data[2] += gTasks[taskId].data[3];
+        if (!(gTasks[taskId].data[15] & 7) && gTasks[taskId].data[3] != 0)
+            gTasks[taskId].data[3]--;
+        break;
+    case 0xFF:  //needed to prevent jump table optimization
+        break;
+    }
+}
+
+void intro_reset_and_hide_bgs(void)
+{
+    REG_DISPCNT = 0;
+    REG_BG3HOFS = 0;
+    REG_BG3VOFS = 0;
+    REG_BG2HOFS = 0;
+    REG_BG2VOFS = 0;
+    REG_BG1HOFS = 0;
+    REG_BG1VOFS = 0;
+    REG_BG0HOFS = 0;
+    REG_BG0VOFS = 0;
+    REG_BLDCNT = 0;
+    REG_BLDALPHA = 0;
+    REG_BLDY = 0;
+}
+
+#ifdef NONMATCHING
+void sub_813CCE8(u8 taskId)
+{
+    switch (gTasks[taskId].data[0])
+    {
+    default:
+    case 0:
+        REG_BLDCNT = 0x3F50;
+        REG_BLDALPHA = 0x1000;
+        REG_BLDY = 0;
+        gTasks[taskId].data[1] = 0x40;
+        gTasks[taskId].data[0] = 1;
+        return;
+    case 1:
+        if (gTasks[taskId].data[1] != 0)
+        {
+            u32 foo;
+            u32 bar asm("r2");
+            
+            gTasks[taskId].data[1]--;
+            //tail merge at _0813CDC2
+            foo = gTasks[taskId].data[1] + (gTasks[taskId].data[1] < 0);
+            bar = 0x1FE;
+            REG_BLDALPHA = gUnknown_08393E64[(foo & bar) / 2];
+        }
+        else
+        {
+            REG_BLDALPHA = gUnknown_08393E64[0];
+            gTasks[taskId].data[1] = 0x80;
+            gTasks[taskId].data[0]++;
+        }
+        return;
+    case 2:
+        if (gTasks[taskId].data[1] != 0)
+        {
+            //tail merge at _0813CE0E
+            gTasks[taskId].data[1]--;
+        }
+        else
+        {
+            gTasks[taskId].data[1] = 0;  //redundant?
+            gTasks[taskId].data[0]++;
+        }
+        return;
+    case 3:
+        if (gTasks[taskId].data[1] <= 0x3D)
+        {
+            u32 foo;
+            u32 bar asm("r2");
+            
+            gTasks[taskId].data[1]++;
+            //_0813CDC2
+            foo = gTasks[taskId].data[1] + (gTasks[taskId].data[1] < 0);
+            bar = 0x1FE;
+            REG_BLDALPHA = gUnknown_08393E64[(foo & bar) / 2];
+        }
+        else
+        {
+            //_0813CDE0
+            REG_BLDALPHA = gUnknown_08393E64[0x1F];
+            gTasks[taskId].data[1] = 0x10;
+            gTasks[taskId].data[0]++;
+        }
+        return;
+    case 4:
+        if (gTasks[taskId].data[1] != 0)
+        {
+            gTasks[taskId].data[1]--;
+        }
+        else
+        {
+            REG_BLDCNT = 0;
+            REG_BLDALPHA = 0;
+            REG_BLDY = 0;
+            DestroyTask(taskId);
+        }
+        return;
+    }
+}
+#else
+__attribute__((naked))
+void sub_813CCE8(u8 taskId)
+{
+    asm("\n\
+    .equ REG_BLDCNT, 0x4000050\n\
+    .equ REG_BLDALPHA, 0x4000052\n\
+    .syntax unified\n\
+    push {r4,lr}\n\
+    lsls r0, 24\n\
+    lsrs r3, r0, 24\n\
+    ldr r1, _0813CD0C @ =gTasks\n\
+    lsls r0, r3, 2\n\
+    adds r0, r3\n\
+    lsls r0, 3\n\
+    adds r0, r1\n\
+    movs r2, 0x8\n\
+    ldrsh r0, [r0, r2]\n\
+    adds r2, r1, 0\n\
+    cmp r0, 0x4\n\
+    bhi _0813CD28\n\
+    lsls r0, 2\n\
+    ldr r1, _0813CD10 @ =_0813CD14\n\
+    adds r0, r1\n\
+    ldr r0, [r0]\n\
+    mov pc, r0\n\
+    .align 2, 0\n\
+_0813CD0C: .4byte gTasks\n\
+_0813CD10: .4byte _0813CD14\n\
+    .align 2, 0\n\
+_0813CD14:\n\
+    .4byte _0813CD28\n\
+    .4byte _0813CD5C\n\
+    .4byte _0813CD8C\n\
+    .4byte _0813CDA8\n\
+    .4byte _0813CDFC\n\
+_0813CD28:\n\
+    ldr r1, _0813CD54 @ =REG_BLDCNT\n\
+    ldr r4, _0813CD58 @ =0x00003f50\n\
+    adds r0, r4, 0\n\
+    strh r0, [r1]\n\
+    adds r1, 0x2\n\
+    movs r4, 0x80\n\
+    lsls r4, 5\n\
+    adds r0, r4, 0\n\
+    strh r0, [r1]\n\
+    adds r1, 0x2\n\
+    movs r0, 0\n\
+    strh r0, [r1]\n\
+    lsls r0, r3, 2\n\
+    adds r0, r3\n\
+    lsls r0, 3\n\
+    adds r0, r2\n\
+    movs r1, 0x40\n\
+    strh r1, [r0, 0xA]\n\
+    movs r1, 0x1\n\
+    strh r1, [r0, 0x8]\n\
+    b _0813CE26\n\
+    .align 2, 0\n\
+_0813CD54: .4byte REG_BLDCNT\n\
+_0813CD58: .4byte 0x00003f50\n\
+_0813CD5C:\n\
+    lsls r0, r3, 2\n\
+    adds r0, r3\n\
+    lsls r0, 3\n\
+    adds r2, r0, r2\n\
+    ldrh r1, [r2, 0xA]\n\
+    movs r3, 0xA\n\
+    ldrsh r0, [r2, r3]\n\
+    cmp r0, 0\n\
+    beq _0813CD78\n\
+    subs r0, r1, 0x1\n\
+    strh r0, [r2, 0xA]\n\
+    movs r4, 0xA\n\
+    ldrsh r0, [r2, r4]\n\
+    b _0813CDC2\n\
+_0813CD78:\n\
+    ldr r1, _0813CD84 @ =REG_BLDALPHA\n\
+    ldr r0, _0813CD88 @ =gUnknown_08393E64\n\
+    ldrh r0, [r0]\n\
+    strh r0, [r1]\n\
+    movs r0, 0x80\n\
+    b _0813CDEA\n\
+    .align 2, 0\n\
+_0813CD84: .4byte REG_BLDALPHA\n\
+_0813CD88: .4byte gUnknown_08393E64\n\
+_0813CD8C:\n\
+    lsls r0, r3, 2\n\
+    adds r0, r3\n\
+    lsls r0, 3\n\
+    adds r1, r0, r2\n\
+    ldrh r0, [r1, 0xA]\n\
+    movs r3, 0xA\n\
+    ldrsh r2, [r1, r3]\n\
+    cmp r2, 0\n\
+    bne _0813CE0E\n\
+    strh r2, [r1, 0xA]\n\
+    ldrh r0, [r1, 0x8]\n\
+    adds r0, 0x1\n\
+    strh r0, [r1, 0x8]\n\
+    b _0813CE26\n\
+_0813CDA8:\n\
+    lsls r0, r3, 2\n\
+    adds r0, r3\n\
+    lsls r0, 3\n\
+    adds r2, r0, r2\n\
+    ldrh r1, [r2, 0xA]\n\
+    movs r4, 0xA\n\
+    ldrsh r0, [r2, r4]\n\
+    cmp r0, 0x3D\n\
+    bgt _0813CDE0\n\
+    adds r0, r1, 0x1\n\
+    strh r0, [r2, 0xA]\n\
+    movs r1, 0xA\n\
+    ldrsh r0, [r2, r1]\n\
+_0813CDC2:\n\
+    lsrs r1, r0, 31\n\
+    adds r0, r1\n\
+    movs r2, 0xFF\n\
+    lsls r2, 1\n\
+    ldr r3, _0813CDD8 @ =REG_BLDALPHA\n\
+    ldr r1, _0813CDDC @ =gUnknown_08393E64\n\
+    ands r0, r2\n\
+    adds r0, r1\n\
+    ldrh r0, [r0]\n\
+    strh r0, [r3]\n\
+    b _0813CE26\n\
+    .align 2, 0\n\
+_0813CDD8: .4byte REG_BLDALPHA\n\
+_0813CDDC: .4byte gUnknown_08393E64\n\
+_0813CDE0:\n\
+    ldr r1, _0813CDF4 @ =REG_BLDALPHA\n\
+    ldr r0, _0813CDF8 @ =gUnknown_08393E64\n\
+    ldrh r0, [r0, 0x3E]\n\
+    strh r0, [r1]\n\
+    movs r0, 0x10\n\
+_0813CDEA:\n\
+    strh r0, [r2, 0xA]\n\
+    ldrh r0, [r2, 0x8]\n\
+    adds r0, 0x1\n\
+    strh r0, [r2, 0x8]\n\
+    b _0813CE26\n\
+    .align 2, 0\n\
+_0813CDF4: .4byte REG_BLDALPHA\n\
+_0813CDF8: .4byte gUnknown_08393E64\n\
+_0813CDFC:\n\
+    lsls r0, r3, 2\n\
+    adds r0, r3\n\
+    lsls r0, 3\n\
+    adds r1, r0, r2\n\
+    ldrh r0, [r1, 0xA]\n\
+    movs r4, 0xA\n\
+    ldrsh r2, [r1, r4]\n\
+    cmp r2, 0\n\
+    beq _0813CE14\n\
+_0813CE0E:\n\
+    subs r0, 0x1\n\
+    strh r0, [r1, 0xA]\n\
+    b _0813CE26\n\
+_0813CE14:\n\
+    ldr r0, _0813CE2C @ =REG_BLDCNT\n\
+    strh r2, [r0]\n\
+    adds r0, 0x2\n\
+    strh r2, [r0]\n\
+    adds r0, 0x2\n\
+    strh r2, [r0]\n\
+    adds r0, r3, 0\n\
+    bl DestroyTask\n\
+_0813CE26:\n\
+    pop {r4}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
+_0813CE2C: .4byte REG_BLDCNT\n\
+    .syntax divided\n");
+}
+#endif
+
+void sub_813CE30(u16 a, u16 b, u16 c, u16 d)
+{
+    struct BgAffineSrcData src;
+    struct BgAffineDstData dest;
+    
+    src.texX = 0x8000;
+    src.texY = 0x8000;
+    src.scrX = a;
+    src.scrY = b;
+    src.sx = c;
+    src.sy = c;
+    src.alpha = d;
+    BgAffineSet(&src, &dest, 1);
+    REG_BG2PA = dest.pa;
+    REG_BG2PB = dest.pb;
+    REG_BG2PC = dest.pc;
+    REG_BG2PD = dest.pd;
+    REG_BG2X = dest.dx;
+    REG_BG2Y = dest.dy;
+}
+
+extern void *species_and_otid_get_pal(/*TODO: arg types*/);
+extern void sub_8143648(int, u8);
+extern void sub_8143680(int, u8);
+
+u8 sub_813CE88(u16 a, s16 b, u16 c, u16 d, u8 e)
+{
+    void *pal;
+    u8 spriteId;
+    
+    if (e != 0)
+        LoadSpecialPokePic(&gMonFrontPicTable[a], gMonFrontPicCoords[a].x, gMonFrontPicCoords[a].y, 0x2000000, gUnknown_0840B5A0[d], a, 0, 1);
+    else
+        LoadSpecialPokePic(&gMonBackPicTable[a], gMonBackPicCoords[a].x, gMonBackPicCoords[a].y, 0x2000000, gUnknown_0840B5A0[d], a, 0, 0);
+    pal = species_and_otid_get_pal(a, 0, 0xFFFF);
+    LoadCompressedPalette(pal, 0x100 + d * 0x10, 0x20);
+    sub_8143648(d, d);
+    spriteId = CreateSprite(&gUnknown_02024E8C, b, c, (d + 1) * 4);
+    gSprites[spriteId].oam.paletteNum = d;
+    gSprites[spriteId].oam.priority = 1;
+    return spriteId;
+}
+
+u8 sub_813CFA8(u16 a, u16 b, u16 c, u16 d)
+{
+    u8 spriteId;
+    
+    DecompressPicFromTable_2(&gTrainerBackPicTable[a], gTrainerBackPicCoords[a].x, gTrainerBackPicCoords[a].y, (void *)0x2000000, gUnknown_0840B5A0[d], a);
+    LoadCompressedPalette(gTrainerBackPicPaletteTable[a].data, 0x100 + d * 0x10, 0x20);
+    sub_8143680(d, d);
+    gUnknown_02024E8C.anims = gUnknown_0840B064;
+    spriteId = CreateSprite(&gUnknown_02024E8C, b, c, 1);
+    gSprites[spriteId].oam.paletteNum = d;
+    gSprites[spriteId].oam.priority = 1;
+    return spriteId;
+}
+
+void sub_813D084(u8 a)
+{
+    u16 color;
+    
+    switch (a)
+    {
+    default:
+    case 0:
+        color = 0x3FF6;
+        break;
+    case 1:
+        color = 0x31DF;
+        break;
+    case 2:
+        color = 0x518C;
+        break;
+    }
+    gPlttBufferUnfaded[0xF1] = color;
+    gPlttBufferFaded[0xF1] = color;
 }
