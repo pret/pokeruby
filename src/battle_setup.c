@@ -26,6 +26,7 @@
 
 extern u16 gScriptResult;
 
+// IV + LEVEL + SPECIES
 struct TrainerPartyMember0
 {
     u16 iv;
@@ -33,6 +34,7 @@ struct TrainerPartyMember0
     u16 species;
 };
 
+// IV + LEVEL + SPECIES + MOVES
 struct TrainerPartyMember1
 {
     u16 iv;
@@ -41,6 +43,7 @@ struct TrainerPartyMember1
     u16 moves[4];
 };
 
+// IV + LEVEL + SPECIES + ITEMS
 struct TrainerPartyMember2
 {
     u16 iv;
@@ -49,6 +52,7 @@ struct TrainerPartyMember2
     u16 heldItem;
 };
 
+// IV + LEVEL + SPECIES + ITEMS + MOVES
 struct TrainerPartyMember3
 {
     u16 iv;
@@ -448,7 +452,7 @@ u8 GetWildBattleTransition(void)
 u8 GetTrainerBattleTransition(void)
 {
     struct Trainer *trainer;
-    u8 partyCount;
+    u8 minPartyCount;
     u8 flashVar;
     u8 level;
 
@@ -474,14 +478,14 @@ u8 GetTrainerBattleTransition(void)
         return 16;
 
     if (trainer[gTrainerBattleOpponent].doubleBattle == TRUE)
-        partyCount = 2; // double battles always at least have 2 pokemon.
+        minPartyCount = 2; // double battles always at least have 2 pokemon.
     else
-        partyCount = 1;
+        minPartyCount = 1;
 
     flashVar = GetBattleTransitionTypeByMap();
-    level = GetSumOfEnemyPartyLevel(gTrainerBattleOpponent, partyCount);
+    level = GetSumOfEnemyPartyLevel(gTrainerBattleOpponent, minPartyCount);
 
-    if (level < (u8)GetSumOfPartyMonLevel(partyCount)) // is wild mon level than the player's mon level?
+    if (level < (u8)GetSumOfPartyMonLevel(minPartyCount)) // is wild mon level than the player's mon level?
         return gBattleTransitionTable_Trainer[flashVar][0];
     else
         return gBattleTransitionTable_Trainer[flashVar][1];

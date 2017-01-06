@@ -22179,7 +22179,7 @@ _08135B0E:
 	adds r0, 0xC
 	ldr r4, _08135B88 @ =gSaveBlock2 + 0xA
 	adds r1, r4, 0
-	bl sub_8052D10
+	bl copy_word_to_mem
 	adds r0, r5, 0x4
 	subs r4, 0xA
 	adds r1, r4, 0
@@ -22708,7 +22708,7 @@ _08135F2A:
 	adds r0, 0xC
 	ldr r4, _08135FAC @ =gSaveBlock2 + 0xA
 	adds r1, r4, 0
-	bl sub_8052D10
+	bl copy_word_to_mem
 	adds r0, r7, 0x4
 	subs r4, 0xA
 	adds r1, r4, 0
