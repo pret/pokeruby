@@ -15212,36 +15212,25 @@ gUnknown_083F60AC:: @ 83F60AC
 
 	.align 2
 gUnknown_083F60C0:: @ 83F60C0
-	.4byte OtherText_NonstopSuperCool
-	.4byte OtherText_Terminator6
-	.4byte OtherText_GoodLookingPoke
-	.4byte OtherText_Terminator7
-	.4byte OtherText_MarvelousGreat
-	.4byte OtherText_Terminator8
-	.4byte OtherText_CenturyLastVenus
-	.4byte OtherText_Terminator9
-	.4byte OtherText_Terminator10
-	.4byte OtherText_DazzlingSlime
-	.4byte OtherText_PokeCenterIdol
-	.4byte OtherText_Terminator11
-	.4byte OtherText_LovelyAndSweet
-	.4byte OtherText_Terminator12
-	.4byte OtherText_ThePretty
-	.4byte OtherText_WinningPortrait
-	.4byte OtherText_GiveUsWink
-	.4byte OtherText_Terminator13
-	.4byte OtherText_SmartnessMaestro
-	.4byte OtherText_Terminator15
-	.4byte OtherText_ChosenPokeAmong
-	.4byte OtherText_Terminator15
-	.4byte OtherText_TheExcellent
-	.4byte OtherText_ItsMomentOfElegance
-	.4byte OtherText_PowerfullyMuscular
-	.4byte OtherText_Terminator16
-	.4byte OtherText_StrongErEst
-	.4byte OtherText_Terminator17
-	.4byte OtherText_MightyTough
-	.4byte OtherText_Exclamation
+	.4byte OtherText_NonstopSuperCool, OtherText_Terminator6
+	.4byte OtherText_GoodLookingPoke, OtherText_Terminator7
+	.4byte OtherText_MarvelousGreat, OtherText_Terminator8
+
+	.4byte OtherText_CenturyLastVenus, OtherText_Terminator9
+	.4byte OtherText_Terminator10, OtherText_DazzlingSlime
+	.4byte OtherText_PokeCenterIdol, OtherText_Terminator11
+
+	.4byte OtherText_LovelyAndSweet, OtherText_Terminator12
+	.4byte OtherText_ThePretty, OtherText_WinningPortrait
+	.4byte OtherText_GiveUsWink, OtherText_Terminator13
+
+	.4byte OtherText_SmartnessMaestro, OtherText_Terminator15
+	.4byte OtherText_ChosenPokeAmong, OtherText_Terminator15
+	.4byte OtherText_TheExcellent, OtherText_ItsMomentOfElegance
+
+	.4byte OtherText_PowerfullyMuscular, OtherText_Terminator16
+	.4byte OtherText_StrongErEst, OtherText_Terminator17
+	.4byte OtherText_MightyTough, OtherText_Exclamation
 
 	.align 2
 gOamData_83F6138:: @ 83F6138
