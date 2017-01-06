@@ -1193,7 +1193,7 @@ void BattleAICmd_get_ability(void)
 
         if(unk_2016A00.unk20[unk] != 0)
         {
-            ((struct AI_ThinkingStruct *)((u8 *)&unk_2016A00 - 512))->unk8 = unk_2016A00.unk20[unk];
+            ((struct AI_ThinkingStruct *)((u8 *)&unk_2016A00 - 0x200))->unk8 = unk_2016A00.unk20[unk];
             gAIScriptPtr += 2;
             return;
         }
