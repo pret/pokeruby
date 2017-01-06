@@ -4,10 +4,10 @@
 	.section .rodata
 
 gUnknown_0840B7BC:: @ 840B7BC
-	.incbin "baserom.gba", 0x0040b7bc, 0x40
+	.incbin "graphics/credits/palette_1.gbapal"
 
 gUnknown_0840B7FC:: @ 840B7FC
-	.incbin "baserom.gba", 0x0040b7fc, 0x40
+	.incbin "graphics/credits/ampersand.4bpp"
 
 gUnknown_0840B83C:: @ 840B83C
 	.incbin "baserom.gba", 0x0040b83c, 0xf
@@ -59,10 +59,12 @@ gUnknown_0840CA94:: @ 840CA94
 	.4byte Unknown_840CA8C
 
 gUnknown_0840CAA0:: @ 840CAA0
-	.incbin "baserom.gba", 0x0040caa0, 0x10
+	obj_tiles gHallOfFame, 6144, 1001
+	null_obj_tiles
 
 gUnknown_0840CAB0:: @ 840CAB0
-	.incbin "baserom.gba", 0x0040cab0, 0x10
+	obj_pal unk_201f800, 1001
+	null_obj_pal
 
 	.align 2
 gOamData_840CAC0:: @ 840CAC0
