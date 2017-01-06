@@ -24,7 +24,7 @@ extern u16 gUnknown_02024BE6;
 extern u32 gUnknown_02024BEC;
 extern u8 gUnknown_02024C07; // something player?
 extern u8 gUnknown_02024C08; // something opponent?
-extern u8 gUnknown_02024C0C; 
+extern u8 gUnknown_02024C0C;
 extern u8 gUnknown_02024C68;
 extern u16 gUnknown_02024DEC;
 extern u16 gUnknown_02024C34[];
@@ -43,10 +43,10 @@ extern struct BattleMove gBattleMoves[];
 extern struct BaseStats gBaseStats[];
 extern void (*gBattleAICmdTable[])(void);
 
-/* 
-gAIScriptPtr is a pointer to the next battle AI cmd command to read. 
-when a command finishes processing, gAIScriptPtr is incremented by 
-the number of bytes that the current command had reserved for arguments 
+/*
+gAIScriptPtr is a pointer to the next battle AI cmd command to read.
+when a command finishes processing, gAIScriptPtr is incremented by
+the number of bytes that the current command had reserved for arguments
 in order to read the next command correctly. refer to battle_ai_scripts.s for the
 AI scripts.
 */
@@ -79,7 +79,7 @@ void BattleAI_HandleItemUseBeforeAISetup(void)
 {
     s32 i;
     u8 *data = (u8 *)&unk_2016A00;
-    
+
     for (i = 0; (u32)i < 48; i++)
         data[i] = 0;
     if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
@@ -116,7 +116,7 @@ void BattleAI_SetupAIData(void)
     for(i = 0; i < 4; i++)
     {
         u16 rand;
-        
+
         if(gBitTable[i] & r7)
             gAIThinkingSpace.score[i] = 0;
         rand = Random();
@@ -125,11 +125,11 @@ void BattleAI_SetupAIData(void)
 
     unk_2016C00.unk20 = 0;
     gUnknown_02024C07 = gUnknown_02024A60;
-    
+
     if(gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
         gUnknown_02024C08 = Random() & 2;
-        
+
         if(gUnknown_02024C0C & gBitTable[gUnknown_02024C08])
             gUnknown_02024C08 ^= 2;
     }
@@ -153,7 +153,7 @@ u8 BattleAI_GetAIActionToUse(void)
     u8 arr2[4];
     u8 r5;
     s32 i;
-    
+
     sub_810745C();
     while(gAIThinkingSpace.aiFlags != 0)
     {
@@ -235,7 +235,7 @@ void BattleAI_DoAIProcessing(void)
 void sub_810745C(void)
 {
     s32 i;
-    
+
     for(i = 0; i < 8; i++)
     {
         // this is the same as dividing it by 2, but for some reason, >> 1 is needed to match the asm.
@@ -250,7 +250,7 @@ void sub_810745C(void)
 void unref_sub_81074A0(u8 a)
 {
     s32 i;
-    
+
     for(i = 0; i < 8; i++)
         unk_2016A00.unk0[a / 2][i] = 0;
 }
@@ -270,17 +270,17 @@ void sub_81074F8(u8 a, u8 b)
 void BattleAICmd_if_random(void)
 {
     u16 random = Random();
-    
+
     if (!(random % 256 >= gAIScriptPtr[1])) // roll a random value. is it less than the parameter of the if_random call? (96 on if_random 80 will return true)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
     else
-        gAIScriptPtr += 6;  
+        gAIScriptPtr += 6;
 }
 
 void BattleAICmd_if_not_random(void)
 {
     u16 random = Random();
-    
+
     if (!(random % 256 <= gAIScriptPtr[1])) // roll a random value. is it greater than the parameter of the if_random call? (96 on if_random 80 will return true)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
     else
@@ -290,7 +290,7 @@ void BattleAICmd_if_not_random(void)
 void BattleAICmd_if_random_1(void) // if RNG Value equal to
 {
     u16 random = Random();
-    
+
     if (random % 256 == gAIScriptPtr[1]) // roll a random value. is it greater than the parameter of the if_random call? (96 on if_random 80 will return true)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
     else
@@ -300,7 +300,7 @@ void BattleAICmd_if_random_1(void) // if RNG Value equal to
 void BattleAICmd_if_not_random_1(void) // if RNG value not equal to
 {
     u16 random = Random();
-    
+
     if (random % 256 != gAIScriptPtr[1]) // roll a random value. is it greater than the parameter of the if_random call? (96 on if_random 80 will return true)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
     else
@@ -310,7 +310,7 @@ void BattleAICmd_if_not_random_1(void) // if RNG value not equal to
 void BattleAICmd_score(void)
 {
     gAIThinkingSpace.score[gAIThinkingSpace.moveConsidered] += gAIScriptPtr[1]; // add the result to the array of the move consider's score.
-    
+
     if(gAIThinkingSpace.score[gAIThinkingSpace.moveConsidered] < 0) // if the score is negative, flatten it to 0.
         gAIThinkingSpace.score[gAIThinkingSpace.moveConsidered] = 0;
 
@@ -320,12 +320,12 @@ void BattleAICmd_score(void)
 void BattleAICmd_if_hp_less_than(void)
 {
     u16 var;
-    
+
     if (gAIScriptPtr[1] == USER)
         var = gUnknown_02024C07;
     else
         var = gUnknown_02024C08;
-    
+
     if ((u32)(100 * gBattleMons[var].hp / gBattleMons[var].maxHP) < gAIScriptPtr[2])
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
     else
@@ -335,12 +335,12 @@ void BattleAICmd_if_hp_less_than(void)
 void BattleAICmd_if_hp_more_than(void)
 {
     u16 var;
-    
+
     if (gAIScriptPtr[1] == USER)
         var = gUnknown_02024C07;
     else
         var = gUnknown_02024C08;
-    
+
     if ((u32)(100 * gBattleMons[var].hp / gBattleMons[var].maxHP) > gAIScriptPtr[2])
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
     else
@@ -350,12 +350,12 @@ void BattleAICmd_if_hp_more_than(void)
 void BattleAICmd_if_hp_equal(void)
 {
     u16 var;
-    
+
     if (gAIScriptPtr[1] == USER)
         var = gUnknown_02024C07;
     else
         var = gUnknown_02024C08;
-    
+
     if ((u32)(100 * gBattleMons[var].hp / gBattleMons[var].maxHP) == gAIScriptPtr[2])
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
     else
@@ -365,12 +365,12 @@ void BattleAICmd_if_hp_equal(void)
 void BattleAICmd_if_hp_not_equal(void)
 {
     u16 var;
-    
+
     if (gAIScriptPtr[1] == USER)
         var = gUnknown_02024C07;
     else
         var = gUnknown_02024C08;
-    
+
     if ((u32)(100 * gBattleMons[var].hp / gBattleMons[var].maxHP) != gAIScriptPtr[2])
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
     else
@@ -386,9 +386,9 @@ void BattleAICmd_if_status(void)
         var = gUnknown_02024C07;
     else
         var = gUnknown_02024C08;
-    
+
     temp = AIScriptRead32(gAIScriptPtr + 2);
-    
+
     if (gBattleMons[var].status1 & temp)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 6);
     else
@@ -404,9 +404,9 @@ void BattleAICmd_if_not_status(void)
         var = gUnknown_02024C07;
     else
         var = gUnknown_02024C08;
-    
+
     temp = AIScriptRead32(gAIScriptPtr + 2);
-    
+
     if (!(gBattleMons[var].status1 & temp))
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 6);
     else
@@ -422,9 +422,9 @@ void BattleAICmd_if_status2(void)
         var = gUnknown_02024C07;
     else
         var = gUnknown_02024C08;
-    
+
     temp = AIScriptRead32(gAIScriptPtr + 2);
-    
+
     if (gBattleMons[var].status2 & temp)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 6);
     else
@@ -440,9 +440,9 @@ void BattleAICmd_if_not_status2(void)
         var = gUnknown_02024C07;
     else
         var = gUnknown_02024C08;
-    
+
     temp = AIScriptRead32(gAIScriptPtr + 2);
-    
+
     if (!(gBattleMons[var].status2 & temp))
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 6);
     else
@@ -453,14 +453,14 @@ void BattleAICmd_if_status3(void)
 {
     u8 var;
     u32 temp;
-    
+
     if (gAIScriptPtr[1] == USER)
         var = gUnknown_02024C07;
     else
         var = gUnknown_02024C08;
-    
+
     temp = AIScriptRead32(gAIScriptPtr + 2);
-    
+
     if ( gUnknown_02024C98[var] & temp )
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 6);
     else
@@ -471,14 +471,14 @@ void BattleAICmd_if_not_status3(void)
 {
     u8 var;
     u32 temp;
-    
+
     if (gAIScriptPtr[1] == USER)
         var = gUnknown_02024C07;
     else
         var = gUnknown_02024C08;
-    
+
     temp = AIScriptRead32(gAIScriptPtr + 2);
-    
+
     if (!(gUnknown_02024C98[var] & temp))
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 6);
     else
@@ -490,15 +490,15 @@ void BattleAICmd_if_status4(void)
     u8 var;
     u32 temp;
     u32 temp2;
-    
+
     if (gAIScriptPtr[1] == USER)
         var = gUnknown_02024C07;
     else
         var = gUnknown_02024C08;
-    
+
     temp = battle_get_per_side_status(var) & 1;
     temp2 = AIScriptRead32(gAIScriptPtr + 2);
-    
+
     if ( gUnknown_02024C7A[temp] & temp2 )
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 6);
     else
@@ -510,15 +510,15 @@ void BattleAICmd_if_not_status4(void)
     u8 var;
     u32 temp;
     u32 temp2;
-    
+
     if (gAIScriptPtr[1] == USER)
         var = gUnknown_02024C07;
     else
         var = gUnknown_02024C08;
-    
+
     temp = battle_get_per_side_status(var) & 1;
     temp2 = AIScriptRead32(gAIScriptPtr + 2);
-    
+
     if (!(gUnknown_02024C7A[temp] & temp2))
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 6);
     else
@@ -620,7 +620,7 @@ void BattleAICmd_if_not_move(void)
 void BattleAICmd_if_in_bytes(void)
 {
     u8 *ptr = AIScriptReadPtr(gAIScriptPtr + 1);
-   
+
    while(*ptr != 0xFF)
    {
        if(gAIThinkingSpace.unk8 == *ptr)
@@ -636,7 +636,7 @@ void BattleAICmd_if_in_bytes(void)
 void BattleAICmd_if_not_in_bytes(void)
 {
     u8 *ptr = AIScriptReadPtr(gAIScriptPtr + 1);
-   
+
    while(*ptr != 0xFF)
    {
        if(gAIThinkingSpace.unk8 == *ptr)
@@ -652,7 +652,7 @@ void BattleAICmd_if_not_in_bytes(void)
 void BattleAICmd_if_in_words(void)
 {
     u16 *ptr = (u16 *)AIScriptReadPtr(gAIScriptPtr + 1);
-   
+
    while(*ptr != 0xFFFF)
    {
        if(gAIThinkingSpace.unk8 == *ptr)
@@ -668,7 +668,7 @@ void BattleAICmd_if_in_words(void)
 void BattleAICmd_if_not_in_words(void)
 {
     u16 *ptr = (u16 *)AIScriptReadPtr(gAIScriptPtr + 1);
-   
+
    while(*ptr != 0xFFFF)
    {
        if(gAIThinkingSpace.unk8 == *ptr)
@@ -684,7 +684,7 @@ void BattleAICmd_if_not_in_words(void)
 void BattleAICmd_if_user_can_damage(void)
 {
    s32 i;
-   
+
    for(i = 0; i < 4; i++)
    {
        if (gBattleMons[gUnknown_02024C07].moves[i] != 0
@@ -700,7 +700,7 @@ void BattleAICmd_if_user_can_damage(void)
 void BattleAICmd_if_user_cant_damage(void)
 {
    s32 i;
-   
+
    for(i = 0; i < 4; i++)
    {
        if (gBattleMons[gUnknown_02024C07].moves[i] != 0
@@ -1181,7 +1181,7 @@ void BattleAICmd_unk_2E(void)
 void BattleAICmd_get_ability(void)
 {
     u8 var;
-    
+
     if(gAIScriptPtr[1] == USER)
         var = gUnknown_02024C07;
     else
@@ -1260,16 +1260,16 @@ void BattleAICmd_unk_30(void)
     gCritMultiplier = 1;
     ai = &battle_2000000.ai;
     ai->unk8 = 0;
-    
+
     for(i = 0; i < 4; i++)
     {
         gUnknown_02024BEC = 40;
         gUnknown_02024BE6 = gBattleMons[gUnknown_02024C07].moves[i];
-        
+
         if (gUnknown_02024BE6)
         {
             move_effectiveness_something(gUnknown_02024BE6, gUnknown_02024C07, gUnknown_02024C08);
-            
+
             // reduce by 1/3.
             if (gUnknown_02024BEC == 120)
                 gUnknown_02024BEC = 80;
@@ -1279,7 +1279,7 @@ void BattleAICmd_unk_30(void)
                 gUnknown_02024BEC = 20;
             if(gUnknown_02024BEC == 15)
                 gUnknown_02024BEC = 10;
-            
+
             if(gUnknown_02024C68 & 8)
                 gUnknown_02024BEC = 0;
 
