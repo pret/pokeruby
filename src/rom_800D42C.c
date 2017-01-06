@@ -3,13 +3,6 @@
 #include "link.h"
 #include "text.h"
 
-struct Unk2000000
-{
-                  u8 filler0[0x160CB];
-    /* 0x160CB */ u8 linkPlayerIndex;
-};
-
-extern struct Unk2000000 unk_2000000;
 extern u16 gBattleTypeFlags;
 extern u8 gUnknown_02024D26;
 
@@ -32,7 +25,7 @@ extern u8 BattleText_Tie[];
 
 #define PRINT_MESSAGE_LEFT(text, tileDataStartOffset)       PRINT_MESSAGE(text, tileDataStartOffset, LEFT_MESSAGE_X)
 #define PRINT_MESSAGE_RIGHT(text, tileDataStartOffset)      PRINT_MESSAGE(text, tileDataStartOffset, RIGHT_MESSAGE_X)
-
+//
 void sub_800DC24(void) {
 
     if (gUnknown_02024D26 == 3) {

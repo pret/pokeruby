@@ -32,4 +32,39 @@ struct Trainer
 	/*0x24*/ void *party;
 };
 
+struct AI_ThinkingStruct /* 0x2016800 */
+{
+/* 0x00 */ u8 unk0;
+/* 0x01 */ u8 moveConsidered;
+/* 0x02 */ u16 unk2;
+/* 0x04 */ s8 score[4]; // score?
+/* 0x08 */ u32 unk8;
+/* 0x0C */ u32 aiFlags;
+/* 0x10 */ u8 unk10;
+/* 0x11 */ u8 aiLogicId;
+/* 0x12 */ u8 filler12[6];
+/* 0x18 */ u8 unk18[4];
+};
+
+struct SmallBattleStruct1
+{
+	u8 unk1;
+	u8 unk2;
+	u8 unk3;
+	u8 unk4;
+};
+
+struct BattleStruct /* 0x2000000 */
+{
+	u8 filler0[0x1601C];
+	struct SmallBattleStruct1 unk;
+	u8 filler1[0xAB]; // 0x2016020
+	/* 0x160CB */ u8 linkPlayerIndex;
+	u8 filler2[0x734];
+	struct AI_ThinkingStruct ai;
+};
+
+extern struct BattleStruct unk_2000000;
+extern struct AI_ThinkingStruct gAIThinkingSpace;
+
 #endif // GUARD_BATTLE_H

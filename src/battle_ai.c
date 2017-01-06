@@ -61,44 +61,12 @@ struct UnknownStruct1
 /* 0x2C */ u8 unk8;
 };
 
-struct AI_ThinkingStruct /* 0x2016800 */
-{
-/* 0x00 */ u8 unk0;
-/* 0x01 */ u8 moveConsidered;
-/* 0x02 */ u16 unk2;
-/* 0x04 */ s8 score[4]; // score?
-/* 0x08 */ u32 unk8;
-/* 0x0C */ u32 aiFlags;
-/* 0x10 */ u8 unk10;
-/* 0x11 */ u8 aiLogicId;
-/* 0x12 */ u8 filler12[6];
-/* 0x18 */ u8 unk18[4];
-};
-
 struct UnknownStruct3
 {
     u8 filler0[0x20];
     u8 unk20;
 };
 
-struct SmallBattleStruct1
-{
-	u8 unk1;
-	u8 unk2;
-	u8 unk3;
-	u8 unk4;
-};
-
-struct BattleStruct /* 0x2000000 */
-{
-	u8 filler0[0x1601C];
-	struct SmallBattleStruct1 unk;
-	u8 filler1[0x7E0]; // 0x2016020
-	struct AI_ThinkingStruct ai;
-};
-
-extern struct BattleStruct unk_2000000;
-extern struct AI_ThinkingStruct gAIThinkingSpace;
 extern struct UnknownStruct1 unk_2016A00;
 extern struct UnknownStruct3 unk_2016C00;
 
