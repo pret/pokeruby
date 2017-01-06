@@ -372,6 +372,8 @@ struct PokemonStorage
 {
     u8 currentBox;
     struct BoxPokemon boxes[14][30];
+    u8 boxNames[14][9];
+    u8 unkArray[14];
 };
 
 extern struct Pokemon gPlayerParty[6];

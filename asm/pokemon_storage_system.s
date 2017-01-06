@@ -270,7 +270,7 @@ _08095AF0:
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 4
-	ldr r1, _08095B20 @ =gUnknown_020300A4
+	ldr r1, _08095B20 @ =gPokemonStorage + 0x4
 	adds r0, r1
 	adds r0, r6, r0
 	movs r1, 0xB
@@ -292,7 +292,7 @@ _08095B0C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_08095B20: .4byte gUnknown_020300A4
+_08095B20: .4byte gPokemonStorage + 0x4
 	thumb_func_end sub_8095ADC
 
 	thumb_func_start sub_8095B24
@@ -310,7 +310,7 @@ _08095B36:
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 4
-	ldr r1, _08095B54 @ =gUnknown_020300A4
+	ldr r1, _08095B54 @ =gPokemonStorage + 0x4
 	adds r0, r1
 	adds r0, r5, r0
 	movs r1, 0xB
@@ -321,7 +321,7 @@ _08095B36:
 	asrs r0, 16
 	b _08095B66
 	.align 2, 0
-_08095B54: .4byte gUnknown_020300A4
+_08095B54: .4byte gPokemonStorage + 0x4
 _08095B58:
 	adds r0, r4, 0x1
 	lsls r0, 16
@@ -1222,7 +1222,7 @@ _080961F0:
 _08096214:
 	lsls r0, r5, 3
 	adds r0, r5
-	ldr r6, _0809625C @ =gUnknown_020383E4
+	ldr r6, _0809625C @ =gPokemonStorage + 0x8344
 	adds r0, r6
 	ldr r1, _08096260 @ =gPCText_BOX
 	bl StringCopy
@@ -1254,7 +1254,7 @@ _0809623E:
 	bx r0
 	.align 2, 0
 _08096258: .4byte gPokemonStorage
-_0809625C: .4byte gUnknown_020383E4
+_0809625C: .4byte gPokemonStorage + 0x8344
 _08096260: .4byte gPCText_BOX
 	thumb_func_end sub_80961D8
 
@@ -1802,7 +1802,7 @@ sub_809665C: @ 809665C
 	ldrb r0, [r0]
 	lsls r1, r0, 3
 	adds r1, r0
-	ldr r0, _080966BC @ =gUnknown_020383E4
+	ldr r0, _080966BC @ =gPokemonStorage + 0x8344
 	adds r1, r0
 	adds r0, r2, 0
 	bl StringCopy
@@ -1819,7 +1819,7 @@ sub_809665C: @ 809665C
 	.align 2, 0
 _080966B4: .4byte gUnknown_02038478
 _080966B8: .4byte gStringVar1
-_080966BC: .4byte gUnknown_020383E4
+_080966BC: .4byte gPokemonStorage + 0x8344
 _080966C0:
 	movs r0, 0x22
 _080966C2:
@@ -6352,7 +6352,7 @@ sub_8098C48: @ 8098C48
 	lsls r0, r1, 4
 	subs r0, r1
 	lsls r0, 5
-	ldr r1, _08098CCC @ =gUnknown_020300A4
+	ldr r1, _08098CCC @ =gPokemonStorage + 0x4
 	adds r6, r0, r1
 	movs r0, 0
 	mov r8, r0
@@ -6406,7 +6406,7 @@ _08098C70:
 	str r0, [r1]
 	b _08098CE8
 	.align 2, 0
-_08098CCC: .4byte gUnknown_020300A4
+_08098CCC: .4byte gPokemonStorage + 0x4
 _08098CD0: .4byte gUnknown_083B6DB4
 _08098CD4: .4byte 0x00001050
 _08098CD8:
@@ -6468,7 +6468,7 @@ sub_8098D20: @ 8098D20
 	mov r9, r0
 	adds r0, r4
 	lsls r0, 4
-	ldr r1, _08098DD4 @ =gUnknown_020300A4
+	ldr r1, _08098DD4 @ =gPokemonStorage + 0x4
 	adds r0, r1
 	adds r7, r2, r0
 	adds r0, r7, 0
@@ -6534,7 +6534,7 @@ _08098DC4:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08098DD4: .4byte gUnknown_020300A4
+_08098DD4: .4byte gPokemonStorage + 0x4
 _08098DD8: .4byte gUnknown_083B6DB4
 _08098DDC: .4byte 0x00001050
 	thumb_func_end sub_8098D20
@@ -6746,7 +6746,7 @@ _08098F42:
 	lsls r7, r6, 2
 	adds r1, r7, r6
 	lsls r1, 4
-	ldr r2, _08099004 @ =gUnknown_020300A4
+	ldr r2, _08099004 @ =gPokemonStorage + 0x4
 	adds r4, r1, r2
 	adds r0, r4
 	movs r1, 0x41
@@ -6829,7 +6829,7 @@ _08098FC8:
 _08098FF8: .4byte gUnknown_083B6DB4
 _08098FFC: .4byte 0x0000117d
 _08099000: .4byte 0x00001050
-_08099004: .4byte gUnknown_020300A4
+_08099004: .4byte gPokemonStorage + 0x4
 _08099008: .4byte sub_8098E24
 	thumb_func_end sub_8098EE0
 
@@ -9494,7 +9494,7 @@ _0809A478:
 	ldr r1, [sp, 0x28]
 	lsls r5, r1, 3
 	adds r5, r1
-	ldr r4, _0809A57C @ =gUnknown_020383E4
+	ldr r4, _0809A57C @ =gPokemonStorage + 0x8344
 	adds r5, r4
 	adds r1, r5, 0
 	bl sub_809A1BC
@@ -9610,7 +9610,7 @@ _0809A4DE:
 _0809A570: .4byte 0x00000cec
 _0809A574: .4byte 0x0000dac9
 _0809A578: .4byte 0x000008ca
-_0809A57C: .4byte gUnknown_020383E4
+_0809A57C: .4byte gPokemonStorage + 0x8344
 _0809A580: .4byte gUnknown_083BB0A8
 _0809A584: .4byte gUnknown_083B6DB4
 _0809A588: .4byte 0x00000cf8
@@ -10452,7 +10452,7 @@ _0809ABC0:
 	lsls r1, r2, 2
 	adds r1, r2
 	lsls r1, 4
-	ldr r2, _0809ABF4 @ =gUnknown_020300A4
+	ldr r2, _0809ABF4 @ =gPokemonStorage + 0x4
 	adds r1, r2
 	adds r0, r1
 	movs r1, 0xB
@@ -10463,7 +10463,7 @@ _0809ABEA:
 	b _0809ABFA
 	.align 2, 0
 _0809ABF0: .4byte gUnknown_020384E5
-_0809ABF4: .4byte gUnknown_020300A4
+_0809ABF4: .4byte gPokemonStorage + 0x4
 _0809ABF8:
 	movs r0, 0
 _0809ABFA:
@@ -11603,7 +11603,7 @@ _0809B488:
 	lsls r1, r5, 2
 	adds r1, r5
 	lsls r1, 4
-	ldr r2, _0809B4C0 @ =gUnknown_020300A4
+	ldr r2, _0809B4C0 @ =gPokemonStorage + 0x4
 	adds r1, r2
 	adds r0, r1
 	ldr r1, _0809B4C4 @ =gUnknown_083B6DB4
@@ -11623,7 +11623,7 @@ _0809B4AA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809B4C0: .4byte gUnknown_020300A4
+_0809B4C0: .4byte gPokemonStorage + 0x4
 _0809B4C4: .4byte gUnknown_083B6DB4
 _0809B4C8: .4byte 0x000025b4
 _0809B4CC: .4byte gUnknown_020384E7
@@ -11712,7 +11712,7 @@ _0809B568:
 	lsls r1, r2, 2
 	adds r1, r2
 	lsls r1, 4
-	ldr r2, _0809B588 @ =gUnknown_020300A4
+	ldr r2, _0809B588 @ =gPokemonStorage + 0x4
 	adds r1, r2
 	adds r0, r1
 	bl ZeroBoxMonData
@@ -11720,7 +11720,7 @@ _0809B582:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809B588: .4byte gUnknown_020300A4
+_0809B588: .4byte gPokemonStorage + 0x4
 	thumb_func_end sub_809B548
 
 	thumb_func_start diegohint1
@@ -11756,7 +11756,7 @@ _0809B5C0:
 	lsls r1, r6, 2
 	adds r1, r6
 	lsls r1, 4
-	ldr r2, _0809B614 @ =gUnknown_020300A4
+	ldr r2, _0809B614 @ =gPokemonStorage + 0x4
 	adds r1, r2
 	adds r0, r1
 	ldr r1, _0809B618 @ =gUnknown_083B6DB4
@@ -11788,7 +11788,7 @@ _0809B5E2:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0809B614: .4byte gUnknown_020300A4
+_0809B614: .4byte gPokemonStorage + 0x4
 _0809B618: .4byte gUnknown_083B6DB4
 _0809B61C: .4byte 0x00002618
 _0809B620: .4byte 0x000025b4
@@ -12362,7 +12362,7 @@ _0809BA9A:
 	lsls r1, r2, 2
 	adds r1, r2
 	lsls r1, 4
-	ldr r2, _0809BB78 @ =gUnknown_020300A4
+	ldr r2, _0809BB78 @ =gPokemonStorage + 0x4
 	adds r1, r2
 	adds r0, r1
 	movs r1, 0x50
@@ -12462,7 +12462,7 @@ _0809BB5C:
 _0809BB6C: .4byte 0x0000267f
 _0809BB70: .4byte 0x0000ffff
 _0809BB74: .4byte 0x00002681
-_0809BB78: .4byte gUnknown_020300A4
+_0809BB78: .4byte gPokemonStorage + 0x4
 _0809BB7C: .4byte 0x00002686
 _0809BB80: .4byte 0x00002682
 _0809BB84: .4byte 0x0000267e
@@ -12817,7 +12817,7 @@ _0809BE34:
 	lsls r1, r2, 2
 	adds r1, r2
 	lsls r1, 4
-	ldr r2, _0809BE7C @ =gUnknown_020300A4
+	ldr r2, _0809BE7C @ =gPokemonStorage + 0x4
 	adds r1, r2
 	adds r0, r1
 	movs r1, 0x8
@@ -12832,7 +12832,7 @@ _0809BE68:
 _0809BE70: .4byte gUnknown_020384E4
 _0809BE74: .4byte gUnknown_020384E5
 _0809BE78: .4byte gPlayerParty
-_0809BE7C: .4byte gUnknown_020300A4
+_0809BE7C: .4byte gPokemonStorage + 0x4
 	thumb_func_end sub_809BDD8
 
 	thumb_func_start sub_809BE80
@@ -13045,7 +13045,7 @@ _0809BFEE:
 	lsls r1, r2, 2
 	adds r1, r2
 	lsls r1, 4
-	ldr r2, _0809C024 @ =gUnknown_020300A4
+	ldr r2, _0809C024 @ =gPokemonStorage + 0x4
 	adds r1, r2
 	adds r0, r1
 	movs r1, 0x1
@@ -13056,7 +13056,7 @@ _0809C018:
 	bx r0
 	.align 2, 0
 _0809C020: .4byte gUnknown_020384E5
-_0809C024: .4byte gUnknown_020300A4
+_0809C024: .4byte gPokemonStorage + 0x4
 	thumb_func_end sub_809BF74
 
 	thumb_func_start sub_809C028
