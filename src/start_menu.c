@@ -554,7 +554,7 @@ static void Task_SaveDialog(u8 taskId)
 
 static void sub_8071700(void)
 {
-    sub_80946C8(0, 0);
+    HandleCloseSaveWindow(0, 0);
 }
 
 static void HideSaveDialog(void)

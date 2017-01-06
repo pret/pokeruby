@@ -15,7 +15,8 @@ void HandleDrawSaveWindowInfo(s16 left, s16 top)
 {
     u32 width = 12;
 
-    if (sub_809473C())
+	// old handle for setting window width?
+    if (IsResizeSaveWindowEnabled())
         width = 13;
 
     if (FlagGet(SYS_POKEDEX_GET))
@@ -39,11 +40,12 @@ void HandleDrawSaveWindowInfo(s16 left, s16 top)
     }
 }
 
-void sub_80946C8(u16 left, u16 top)
+void HandleCloseSaveWindow(u16 left, u16 top)
 {
     u32 width = 12;
 
-    if (sub_809473C())
+    // old handle for setting window width?
+    if (IsResizeSaveWindowEnabled())
         width = 13;
 
     if (FlagGet(SYS_POKEDEX_GET))
@@ -52,9 +54,14 @@ void sub_80946C8(u16 left, u16 top)
         MenuZeroFillWindowRect(left, top, left + width, top + 9);
 }
 
-u8 sub_809473C()
+/* 
+theory: This function was used to handle the save menu window's width being auto sized from 
+either 12 or 13 in an older source. Whatever was here might have either been optimized out by 
+GF's compiler or was dummied out to always return a TRUE at some point.
+*/
+u8 IsResizeSaveWindowEnabled(void) // i don't know what else to name it..
 {
-    return 1;
+    return TRUE;
 }
 
 void PrintSavePlayerName(s16 x, s16 y)
