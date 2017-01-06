@@ -28,9 +28,9 @@ enum
 };
 
 enum LanguageId {
-	LANGUAGE_JAPANESE = 1,
-	LANGUAGE_ENGLISH = 2,
-	LANGUAGE_GERMAN = 5,
+    LANGUAGE_JAPANESE = 1,
+    LANGUAGE_ENGLISH = 2,
+    LANGUAGE_GERMAN = 5,
 };
 
 #define GAME_LANGUAGE (LANGUAGE_ENGLISH)
@@ -359,10 +359,10 @@ extern struct SaveBlock1 gSaveBlock1;
 
 struct Time
 {
- /* 0x00 */ s16 days;
- /* 0x02 */ s8 hours;
- /* 0x03 */ s8 minutes;
- /* 0x04 */ s8 seconds;
+    /*0x00*/ s16 days;
+    /*0x02*/ s8 hours;
+    /*0x03*/ s8 minutes;
+    /*0x04*/ s8 seconds;
 };
 
 struct Pokedex
@@ -380,10 +380,10 @@ struct Pokedex
 
 struct SaveBlock2_Sub
 {
-	/*0x0000, 0x00A8*/ u8 filler_000[0x4C8];
-	/*0x04C8, 0x0570*/ u16 var_4C8;
-	/*0x04CA, 0x0572*/ u16 var_4CA;
-	/*0x04CC, 0x0574*/ u8 filler_4CC[0x31C];
+    /*0x0000, 0x00A8*/ u8 filler_000[0x4C8];
+    /*0x04C8, 0x0570*/ u16 var_4C8;
+    /*0x04CA, 0x0572*/ u16 var_4CA;
+    /*0x04CC, 0x0574*/ u8 filler_4CC[0x31C];
 };
 
 struct SaveBlock2 /* 0x02024EA4 */
@@ -397,12 +397,12 @@ struct SaveBlock2 /* 0x02024EA4 */
     /*0x11*/ u8 playTimeSeconds;
     /*0x12*/ u8 playTimeVBlanks;
     /*0x13*/ u8 optionsButtonMode;  // OPTIONS_BUTTON_MODE_[NORMAL/LR/L_EQUALS_A]
-                   u16 optionsTextSpeed:3; // OPTIONS_TEXT_SPEED_[SLOW/MID/FAST]
-                   u16 optionsWindowFrameType:5; // Specifies one of the 20 decorative borders for text boxes
-                   u16 optionsSound:1; // OPTIONS_SOUND_[MONO/STEREO]
-                   u16 optionsBattleStyle:1; // OPTIONS_BATTLE_STYLE_[SHIFT/SET]
-                   u16 optionsBattleSceneOff:1; // whether battle animations are disabled
-                   u16 regionMapZoom:1; // whether the map is zoomed in
+    /*0x14*/ u16 optionsTextSpeed:3; // OPTIONS_TEXT_SPEED_[SLOW/MID/FAST]
+             u16 optionsWindowFrameType:5; // Specifies one of the 20 decorative borders for text boxes
+             u16 optionsSound:1; // OPTIONS_SOUND_[MONO/STEREO]
+             u16 optionsBattleStyle:1; // OPTIONS_BATTLE_STYLE_[SHIFT/SET]
+             u16 optionsBattleSceneOff:1; // whether battle animations are disabled
+             u16 regionMapZoom:1; // whether the map is zoomed in
     /*0x18*/ struct Pokedex pokedex;
     /*0x90*/ u8 filler_90[0x8];
     /*0x98*/ struct Time localTimeOffset;
@@ -412,19 +412,19 @@ struct SaveBlock2 /* 0x02024EA4 */
 
 struct UnkStruct_8054FF8_Substruct
 {
-	s16 x;
-	s16 y;
-	u8 field_8;
+    s16 x;
+    s16 y;
+    u8 field_8;
 };
 
 struct UnkStruct_8054FF8
 {
-	u8 a;
-	u8 b;
-	u8 c;
-	u8 d;
-	struct UnkStruct_8054FF8_Substruct sub;
-	u16 field_C;
+    u8 a;
+    u8 b;
+    u8 c;
+    u8 d;
+    struct UnkStruct_8054FF8_Substruct sub;
+    u16 field_C;
 };
 
 extern struct SaveBlock2 gSaveBlock2;
