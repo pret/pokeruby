@@ -4,4 +4,11 @@
 	.section .rodata
 
 gUnknown_083F868C:: @ 83F868C
-	.incbin "baserom.gba", 0x003f868c, 0x30
+	.string "ヌケニン$"
+
+	.string "{COLOR DARK_GREY}{HIGHLIGHT WHITE2}{SHADOW LIGHT_GREY}$"
+	.string "▶\n $"
+	.string "       \n▶$"
+	.string "       \n $"
+
+	.space 9
