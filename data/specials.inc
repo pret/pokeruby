@@ -199,7 +199,7 @@ gSpecials::
 	.4byte ShowLinkBattleRecords
 	.4byte sub_80B7CE8
 	.4byte sub_80B7D0C
-	.4byte DoWhiteOut
+	.4byte ExecuteWhiteOut
 	.4byte sp0C8_whiteout_maybe
 	.4byte sub_80C8040
 	.4byte sub_80C8080

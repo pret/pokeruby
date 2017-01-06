@@ -16,24 +16,24 @@ enum
 	USER
 };
 
+extern void move_effectiveness_something(u16, u8, u8);
+
 extern u16 gBattleTypeFlags;
 extern u8 gUnknown_02024A60;
-extern u8 gUnknown_02024C07; 
-extern u8 gUnknown_02024C08;
-extern u8 gUnknown_02024C0C;
-extern u16 gUnknown_02024DEC;
-extern u8 gUnknown_02024C68;
-extern u32 gUnknown_02024BEC;
-extern u8 gUnknown_0201601C;
-extern u8 gUnknown_0201601F;
 extern u16 gUnknown_02024BE6;
-extern u8 gCritMultiplier;
+extern u32 gUnknown_02024BEC;
+extern u8 gUnknown_02024C07; // something player?
+extern u8 gUnknown_02024C08; // something opponent?
+extern u8 gUnknown_02024C0C; 
+extern u8 gUnknown_02024C68;
+extern u16 gUnknown_02024DEC;
 extern u16 gUnknown_02024C34[];
 extern u32 gUnknown_02024ACC[];
 extern u32 gUnknown_02024C98[];
 extern u16 gUnknown_02024C7A[];
 extern struct BattlePokemon gUnknown_02024A8C[];
 extern u8 gUnknown_030042E0[];
+extern u8 gCritMultiplier;
 extern u16 gTrainerBattleOpponent;
 extern u32 gBitTable[];
 extern u8 *BattleAIs[];
@@ -61,43 +61,12 @@ struct UnknownStruct1
 /* 0x2C */ u8 unk8;
 };
 
-struct AI_ThinkingStruct /* 0x2016800 */
-{
-/* 0x00 */ u8 unk0;
-/* 0x01 */ u8 moveConsidered;
-/* 0x02 */ u16 unk2;
-/* 0x04 */ s8 score[4]; // score?
-/* 0x08 */ u32 unk8;
-/* 0x0C */ u32 aiFlags;
-/* 0x10 */ u8 unk10;
-/* 0x11 */ u8 aiLogicId;
-/* 0x12 */ u8 filler12[6];
-/* 0x18 */ u8 unk18[4];
-};
-
 struct UnknownStruct3
 {
     u8 filler0[0x20];
     u8 unk20;
 };
 
-struct SmallBattleStruct1
-{
-	u8 unk1;
-	u8 unk2;
-	u8 unk3;
-	u8 unk4;
-};
-
-// move to battle.h before PR.
-struct BattleStruct /* 0x2000000 */
-{
-	u8 filler0[0x1601C];
-	struct SmallBattleStruct1 unk;
-};
-
-extern struct BattleStruct unk_2000000;
-extern struct AI_ThinkingStruct gAIThinkingSpace;
 extern struct UnknownStruct1 unk_2016A00;
 extern struct UnknownStruct3 unk_2016C00;
 
@@ -263,63 +232,20 @@ void BattleAI_DoAIProcessing(void)
     }
 }
 
-#ifdef NONMATCHING
 void sub_810745C(void)
 {
     s32 i;
     
     for(i = 0; i < 8; i++)
     {
-        if(unk_2016A00.unk0[gUnknown_02024C08 / 2][i] == 0)
+        // this is the same as dividing it by 2, but for some reason, >> 1 is needed to match the asm.
+        if(unk_2016A00.unk0[gUnknown_02024C08 >> 1][i] == 0)
         {
-            //gUnknown_02024C34[gUnknown_02024C08] += 0;
-            unk_2016A00.unk0[gUnknown_02024C08 / 2][i] = gUnknown_02024C34[gUnknown_02024C08];
+            unk_2016A00.unk0[gUnknown_02024C08 >> 1][i] = gUnknown_02024C34[gUnknown_02024C08];
             return;
         }
     }
 }
-#else
-__attribute__((naked))
-void sub_810745C(void)
-{
-    asm(".syntax unified\n\
-    push {r4-r6,lr}\n\
-    movs r2, 0\n\
-    ldr r3, _08107488 @ =gUnknown_02024C08\n\
-    ldr r5, _0810748C @ =0x02016a00\n\
-    ldr r6, _08107490 @ =gUnknown_02024C34\n\
-    adds r4, r3, 0\n\
-_08107468:\n\
-    lsls r0, r2, 1\n\
-    ldrb r1, [r4]\n\
-    lsrs r1, 1\n\
-    lsls r1, 4\n\
-    adds r0, r1\n\
-    adds r1, r0, r5\n\
-    ldrh r0, [r1]\n\
-    cmp r0, 0\n\
-    bne _08107494\n\
-    ldrb r0, [r3]\n\
-    lsls r0, 1\n\
-    adds r0, r6\n\
-    ldrh r0, [r0]\n\
-    strh r0, [r1]\n\
-    b _0810749A\n\
-    .align 2, 0\n\
-_08107488: .4byte gUnknown_02024C08\n\
-_0810748C: .4byte 0x02016a00\n\
-_08107490: .4byte gUnknown_02024C34\n\
-_08107494:\n\
-    adds r2, 0x1\n\
-    cmp r2, 0x7\n\
-    ble _08107468\n\
-_0810749A:\n\
-    pop {r4-r6}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .syntax divided");
-}
-#endif
 
 void unref_sub_81074A0(u8 a)
 {
@@ -1321,37 +1247,22 @@ void BattleAICmd_get_ability(void)
     }
 }
 
-// this should probably be in battle.h after this file is fully decompiled.
-extern struct
-{
-    u8 unknownStuff[0x16000];
-    struct
-    {
-        u8 filler0[0x1C];
-        u8 unk1C;
-        u8 filler1D[2];
-        u8 unk1F;
-        u8 filler16020[0x7E0];
-    } unk_2016000;
-    struct AI_ThinkingStruct gAIThinkingSpace;
-} ewram; //0x02000000
-
 #ifdef NONMATCHING
 void BattleAICmd_unk_30(void)
 {
-	s32 loopCounter;
+	s32 i;
     
 	gUnknown_02024DEC = 0;
-    ewram.unk_2016000.unk1C = 0;
-    ewram.unk_2016000.unk1F = 1;
+    unk_2000000.unk.unk1 = 0;
+    unk_2000000.unk.unk4 = 1;
 	gUnknown_02024C68 = 0;
 	gCritMultiplier = 1;
-	ewram.gAIThinkingSpace.unk8 = 0;
+	unk_2000000.ai.unk0 = 0;
 	
-	for(loopCounter = 0; loopCounter <= 3; loopCounter++)
+	for(i = 0; i < 4; i++)
 	{
 		gUnknown_02024BEC = 40;
-		gUnknown_02024BE6 = gBattleMons[gUnknown_02024C07].moves[loopCounter];
+		gUnknown_02024BE6 = gBattleMons[gUnknown_02024C07].moves[i];
 		
 		if (gUnknown_02024BE6)
 		{
@@ -1370,8 +1281,8 @@ void BattleAICmd_unk_30(void)
 			if(gUnknown_02024C68 & 8)
 				gUnknown_02024BEC = 0;
 			
-			if (ewram.gAIThinkingSpace.unk8 < gUnknown_02024BEC)
-				ewram.gAIThinkingSpace.unk8 = gUnknown_02024BEC;
+			if (unk_2000000.ai.unk0 < gUnknown_02024BEC)
+				unk_2000000.ai.unk0 = gUnknown_02024BEC;
 		}
 	}
 	gAIScriptPtr += 1;

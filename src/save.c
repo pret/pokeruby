@@ -548,8 +548,8 @@ u8 sub_8125C3C(u8 a1)
         for (i = 28; i < 32; i++)
             EraseFlashSector(i);
     case 3:
-        if (sub_8053108(10) < 999)
-            sav12_xor_increment(10);
+        if (GetGameStat(10) < 999)
+            IncrementGameStat(10);
         for (i = 0; i < 2; i++)
             sub_81253C8(28 + i, gHallOfFameSaveSectionLocations[i].data, gHallOfFameSaveSectionLocations[i].size);
         SaveSerializedGame();

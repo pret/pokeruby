@@ -7570,7 +7570,7 @@ UpdateRainCounter: @ 8080854
 	bne _0808086E
 _08080868:
 	movs r0, 0x28
-	bl sav12_xor_increment
+	bl IncrementGameStat
 _0808086E:
 	pop {r0}
 	bx r0

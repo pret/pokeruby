@@ -29,19 +29,19 @@ const struct SB1_2EFC_Struct gUnknown_08216604 =
     }
 };
 
-void write_word_to_mem(u32 a1, u8 *a2)
+void write_word_to_mem(u32 var, u8 *dataPtr)
 {
-    a2[0] = a1;
-    a2[1] = a1 >> 8;
-    a2[2] = a1 >> 16;
-    a2[3] = a1 >> 24;
+    dataPtr[0] = var;
+    dataPtr[1] = var >> 8;
+    dataPtr[2] = var >> 16;
+    dataPtr[3] = var >> 24;
 }
 
-void sub_8052D10(u8 *a1, u8 *a2)
+void copy_word_to_mem(u8 *copyTo, u8 *copyFrom)
 {
     s32 i;
     for (i = 0; i < 4; i++)
-        a1[i] = a2[i];
+        copyTo[i] = copyFrom[i];
 }
 
 void set_player_trainer_id(void)
@@ -49,6 +49,7 @@ void set_player_trainer_id(void)
     write_word_to_mem((Random() << 16) | Random(), gSaveBlock2.playerTrainerId);
 }
 
+// L=A isnt set here for some reason.
 void SetDefaultOptions(void)
 {
     gSaveBlock2.optionsTextSpeed = OPTIONS_TEXT_SPEED_MID;
@@ -59,7 +60,7 @@ void SetDefaultOptions(void)
     gSaveBlock2.regionMapZoom = FALSE;
 }
 
-void sub_8052D78(void)
+void ClearPokedexFlags(void)
 {
     gUnknown_03005CE8 = 0;
     memset(&gSaveBlock2.pokedex.owned, 0, sizeof(gSaveBlock2.pokedex.owned));
@@ -79,7 +80,7 @@ void sub_8052DE4(void)
     CpuFill32(0, &gSaveBlock2.filler_A8, sizeof(gSaveBlock2.filler_A8));
 }
 
-void sub_8052E04(void)
+void WarpToTruck(void)
 {
     warp1_set(25, 40, -1, -1, -1); // inside of truck
     warp_in();
@@ -114,7 +115,7 @@ void NewGameInitData(void)
     gSaveBlock2.specialSaveWarp = 0;
     set_player_trainer_id();
     PlayTimeCounter_Reset();
-    sub_8052D78();
+    ClearPokedexFlags();
     InitEventData();
     sub_80BD7A8();
     sub_80BDAB4();
@@ -122,7 +123,7 @@ void NewGameInitData(void)
     ClearBerryTrees();
     gSaveBlock1.money = 3000;
     sub_80AB1B0();
-    sub_80530AC();
+    ResetGameStats();
     sub_8052DA8();
     InitLinkBattleRecords();
     InitShroomishSizeRecord();
@@ -142,6 +143,6 @@ void NewGameInitData(void)
     sub_80FA17C();
     sub_810FA54();
     ResetLotteryCorner();
-    sub_8052E04();
+    WarpToTruck();
     ScriptContext2_RunNewScript(gUnknown_0819FA81);
 }

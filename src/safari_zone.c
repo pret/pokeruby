@@ -55,7 +55,7 @@ void ResetSafariZoneFlag(void)
 
 void EnterSafariMode(void)
 {
-    sav12_xor_increment(0x11);
+    IncrementGameStat(0x11);
     SetSafariZoneFlag();
     ClearAllPokeblockFeeders();
     gNumSafariBalls = 30;

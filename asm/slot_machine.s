@@ -1254,7 +1254,7 @@ sub_81021FC: @ 81021FC
 	cmp r0, 0
 	beq _08102220
 	movs r0, 0x1C
-	bl sav12_xor_increment
+	bl IncrementGameStat
 _08102220:
 	ldrh r1, [r4, 0x8]
 	movs r0, 0x4

@@ -1369,7 +1369,7 @@ sub_80F8438: @ 80F8438
 	bne _080F8444
 	movs r0, 0
 _080F8444:
-	bl sub_8053108
+	bl GetGameStat
 	pop {r1}
 	bx r1
 	thumb_func_end sub_80F8438

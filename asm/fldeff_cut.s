@@ -148,7 +148,7 @@ FldEff_UseCutOnGrass: @ 80A2604
 	strh r0, [r1, 0x18]
 	strh r2, [r1, 0x1A]
 	movs r0, 0x12
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	movs r0, 0
 	pop {r1}
 	bx r1
@@ -190,7 +190,7 @@ FldEff_UseCutOnTree: @ 80A2654
 	strh r0, [r1, 0x18]
 	strh r2, [r1, 0x1A]
 	movs r0, 0x12
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	movs r0, 0
 	pop {r1}
 	bx r1

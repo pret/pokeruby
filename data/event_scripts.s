@@ -1324,7 +1324,7 @@ EverGrandeCity_HallOfFame_EventScript_19FC70:: @ 819FC70
 	setflag 2141
 	return
 
-gUnknown_0819FC74:: @ 819FC74
+EventScript_LeagueWhiteOut:: @ 819FC74
 	call EverGrandeCity_HallOfFame_EventScript_19FD09
 	call EventScript_19FC84
 	jump gUnknown_0819FC9F

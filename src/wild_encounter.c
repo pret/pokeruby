@@ -596,7 +596,7 @@ void FishingWildEncounter(u8 rod)
           gWildMonHeaders[GetCurrentMapWildMonHeader()].fishingMonsInfo,
           rod);
     }
-    sav12_xor_increment(12);
+    IncrementGameStat(12);
     sub_80BEA50(species);
     CheckForSafariZoneAndProceed();
 }

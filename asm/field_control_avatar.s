@@ -222,7 +222,7 @@ _08068076:
 	cmp r0, 0
 	beq _08068098
 	movs r0, 0x5
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	mov r0, sp
 	adds r1, r4, 0
 	adds r2, r6, 0
@@ -1271,7 +1271,7 @@ _080688B4:
 	cmp r0, 0
 	beq _080688CC
 	movs r0, 0xD
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	ldr r0, _080688C8 @ =Event_EggHatch
 	b _080688E8
 	.align 2, 0

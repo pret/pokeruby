@@ -44618,7 +44618,7 @@ atk60_cmd60: @ 8024298
 	ldr r0, _080242C4 @ =gUnknown_02024C10
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x1]
-	bl sav12_xor_increment
+	bl IncrementGameStat
 _080242B2:
 	ldr r1, _080242C4 @ =gUnknown_02024C10
 	ldr r0, [r1]

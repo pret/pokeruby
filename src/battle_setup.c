@@ -26,6 +26,7 @@
 
 extern u16 gScriptResult;
 
+// IV + LEVEL + SPECIES
 struct TrainerPartyMember0
 {
     u16 iv;
@@ -33,6 +34,7 @@ struct TrainerPartyMember0
     u16 species;
 };
 
+// IV + LEVEL + SPECIES + MOVES
 struct TrainerPartyMember1
 {
     u16 iv;
@@ -41,6 +43,7 @@ struct TrainerPartyMember1
     u16 moves[4];
 };
 
+// IV + LEVEL + SPECIES + ITEMS
 struct TrainerPartyMember2
 {
     u16 iv;
@@ -49,6 +52,7 @@ struct TrainerPartyMember2
     u16 heldItem;
 };
 
+// IV + LEVEL + SPECIES + ITEMS + MOVES
 struct TrainerPartyMember3
 {
     u16 iv;
@@ -167,8 +171,8 @@ void StartBattle_StandardWild(void)
     gMain.savedCallback = HandleWildBattleEnd;
     gBattleTypeFlags = 0;
     task_add_01_battle_start(GetWildBattleTransition(), 0);
-    sav12_xor_increment(7);
-    sav12_xor_increment(8);
+    IncrementGameStat(7);
+    IncrementGameStat(8);
 }
 
 void StartBattle_Roamer(void)
@@ -179,8 +183,8 @@ void StartBattle_Roamer(void)
     gMain.savedCallback = HandleWildBattleEnd;
     gBattleTypeFlags = BATTLE_TYPE_ROAMER;
     task_add_01_battle_start(GetWildBattleTransition(), 0);
-    sav12_xor_increment(7);
-    sav12_xor_increment(8);
+    IncrementGameStat(7);
+    IncrementGameStat(8);
 }
 
 void StartBattle_Safari(void)
@@ -196,8 +200,8 @@ void StartBattle_Safari(void)
 void task_add_01_battle_start_with_music_and_stats(void)
 {
     task_add_01_battle_start(GetTrainerBattleTransition(), 0);
-    sav12_xor_increment(7);
-    sav12_xor_increment(9);
+    IncrementGameStat(7);
+    IncrementGameStat(9);
 }
 
 //Initiates battle where Wally catches Ralts
@@ -216,8 +220,8 @@ void StartBattle_ScriptedWild(void)
     gMain.savedCallback = HandleScriptedWildBattleEnd;
     gBattleTypeFlags = 0;
     task_add_01_battle_start(GetWildBattleTransition(), 0);
-    sav12_xor_increment(7);
-    sav12_xor_increment(8);
+    IncrementGameStat(7);
+    IncrementGameStat(8);
 }
 
 void StartBattle_SouthernIsland(void)
@@ -226,8 +230,8 @@ void StartBattle_SouthernIsland(void)
     gMain.savedCallback = HandleScriptedWildBattleEnd;
     gBattleTypeFlags = BATTLE_TYPE_LEGENDARY;
     task_add_01_battle_start(GetWildBattleTransition(), 0);
-    sav12_xor_increment(7);
-    sav12_xor_increment(8);
+    IncrementGameStat(7);
+    IncrementGameStat(8);
 }
 
 void StartBattle_Rayquaza(void)
@@ -236,8 +240,8 @@ void StartBattle_Rayquaza(void)
     gMain.savedCallback = HandleScriptedWildBattleEnd;
     gBattleTypeFlags = BATTLE_TYPE_LEGENDARY;
     task_add_01_battle_start(0, BGM_BATTLE34);
-    sav12_xor_increment(7);
-    sav12_xor_increment(8);
+    IncrementGameStat(7);
+    IncrementGameStat(8);
 }
 
 void StartBattle_GroudonKyogre(void)
@@ -249,8 +253,8 @@ void StartBattle_GroudonKyogre(void)
         task_add_01_battle_start(0xB, BGM_BATTLE34); // KYOGRE
     else
         task_add_01_battle_start(0x6, BGM_BATTLE34); // GROUDON
-    sav12_xor_increment(7);
-    sav12_xor_increment(8);
+    IncrementGameStat(7);
+    IncrementGameStat(8);
 }
 
 void StartBattle_Regi(void)
@@ -259,8 +263,8 @@ void StartBattle_Regi(void)
     gMain.savedCallback = HandleScriptedWildBattleEnd;
     gBattleTypeFlags = BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_REGI;
     task_add_01_battle_start(0xA, BGM_BATTLE36);
-    sav12_xor_increment(7);
-    sav12_xor_increment(8);
+    IncrementGameStat(7);
+    IncrementGameStat(8);
 }
 
 void HandleWildBattleEnd(void)
@@ -270,7 +274,7 @@ void HandleWildBattleEnd(void)
 
     if (battle_exit_is_player_defeat(gUnknown_02024D26) == TRUE)
     {
-        SetMainCallback2(c2_whiteout);
+        SetMainCallback2(CB2_WhiteOut);
     }
     else
     {
@@ -285,7 +289,7 @@ void HandleScriptedWildBattleEnd(void)
     ResetOamRange(0, 128);
 
     if (battle_exit_is_player_defeat(gUnknown_02024D26) == TRUE)
-        SetMainCallback2(c2_whiteout);
+        SetMainCallback2(CB2_WhiteOut);
     else
         SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
 }
@@ -448,7 +452,7 @@ u8 GetWildBattleTransition(void)
 u8 GetTrainerBattleTransition(void)
 {
     struct Trainer *trainer;
-    u8 partyCount;
+    u8 minPartyCount;
     u8 flashVar;
     u8 level;
 
@@ -474,14 +478,14 @@ u8 GetTrainerBattleTransition(void)
         return 16;
 
     if (trainer[gTrainerBattleOpponent].doubleBattle == TRUE)
-        partyCount = 2; // double battles always at least have 2 pokemon.
+        minPartyCount = 2; // double battles always at least have 2 pokemon.
     else
-        partyCount = 1;
+        minPartyCount = 1;
 
     flashVar = GetBattleTransitionTypeByMap();
-    level = GetSumOfEnemyPartyLevel(gTrainerBattleOpponent, partyCount);
+    level = GetSumOfEnemyPartyLevel(gTrainerBattleOpponent, minPartyCount);
 
-    if (level < (u8)GetSumOfPartyMonLevel(partyCount)) // is wild mon level than the player's mon level?
+    if (level < (u8)GetSumOfPartyMonLevel(minPartyCount)) // is wild mon level than the player's mon level?
         return gBattleTransitionTable_Trainer[flashVar][0];
     else
         return gBattleTransitionTable_Trainer[flashVar][1];
@@ -528,8 +532,8 @@ void CB2_StartFirstBattle(void)
         SetMainCallback2(sub_800E7C4);
         prev_quest_postbuffer_cursor_backup_reset();
         overworld_poison_timer_set();
-        sav12_xor_increment(7);
-        sav12_xor_increment(8);
+        IncrementGameStat(7);
+        IncrementGameStat(8);
     }
 }
 
@@ -747,7 +751,7 @@ void sub_808260C(void)
     }
     else if (battle_exit_is_player_defeat(gUnknown_02024D26) == TRUE)
     {
-        SetMainCallback2(c2_whiteout);
+        SetMainCallback2(CB2_WhiteOut);
     }
     else
     {
@@ -764,7 +768,7 @@ void do_choose_name_or_words_screen(void)
     }
     else if (battle_exit_is_player_defeat(gUnknown_02024D26) == TRUE)
     {
-        SetMainCallback2(c2_whiteout);
+        SetMainCallback2(CB2_WhiteOut);
     }
     else
     {

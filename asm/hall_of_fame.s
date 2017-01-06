@@ -1562,7 +1562,7 @@ _08142A98:
 _08142AA0:
 	strh r1, [r0, 0x8]
 	movs r0, 0xA
-	bl sub_8053108
+	bl GetGameStat
 	ldr r2, _08142AF0 @ =gTasks
 	adds r1, r6, r5
 	lsls r1, 3

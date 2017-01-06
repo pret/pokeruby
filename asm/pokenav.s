@@ -9571,7 +9571,7 @@ _080F088C:
 	bne _080F08C6
 _080F089A:
 	movs r0, 0x9
-	bl sub_8053108
+	bl GetGameStat
 	adds r1, r0, 0
 	ldr r0, _080F08E0 @ =0x0001869f
 	cmp r1, r0

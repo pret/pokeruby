@@ -283,8 +283,8 @@ void sub_8093390(struct TrainerCard *arg1) {
     arg1->playTimeHours = gSaveBlock2.playTimeHours;
     arg1->playTimeMinutes = gSaveBlock2.playTimeMinutes;
 
-    playTime = sub_8053108(GAME_STAT_FIRST_HOF_PLAY_TIME);
-    enteredHallOfFame = sub_8053108(GAME_STAT_ENTERED_HOF);
+    playTime = GetGameStat(GAME_STAT_FIRST_HOF_PLAY_TIME);
+    enteredHallOfFame = GetGameStat(GAME_STAT_ENTERED_HOF);
     if (!enteredHallOfFame) {
         playTime = 0;
     }
@@ -345,7 +345,7 @@ u8 sub_80934C4(u8 id) {
 } 
 
 static u32 sav12_xor_get_clamped_above(u8 index, u32 maxVal) {
-    u32 value = sub_8053108(index);
+    u32 value = GetGameStat(index);
 
     if (value > maxVal) {
         value = maxVal;
