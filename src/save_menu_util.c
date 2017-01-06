@@ -15,7 +15,7 @@ void HandleDrawSaveWindowInfo(s16 left, s16 top)
 {
     u32 width = 12;
 
-	// old handle for setting window width?
+    // old handle for setting window width?
     if (IsResizeSaveWindowEnabled())
         width = 13;
 
