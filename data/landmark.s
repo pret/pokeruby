@@ -1,3 +1,8 @@
+	.include "asm/macros.inc"
+	.include "constants/constants.inc"
+
+	.section .rodata
+
 	.align 2
 Landmark_FlowerShop:
 	.4byte gLandmarkName_FlowerShop
