@@ -603,21 +603,18 @@ gUnknown_081A4363:: @ 81A4363
 	releaseall
 	end
 
-gUnknown_081A436F:: @ 81A436F
 SingleBattleColosseum_EventScript_1A436F:: @ 81A436F
 	setvar 0x8005, 0
 	special 32
 	waitstate
 	end
 
-gUnknown_081A4379:: @ 81A4379
 SingleBattleColosseum_EventScript_1A4379:: @ 81A4379
 	setvar 0x8005, 1
 	special 32
 	waitstate
 	end
 
-gUnknown_081A4383:: @ 81A4383
 DoubleBattleColosseum_EventScript_1A4383:: @ 81A4383
 	fadescreen 1
 	special 41
@@ -629,7 +626,6 @@ DoubleBattleColosseum_EventScript_1A4383:: @ 81A4383
 	waitstate
 	end
 
-gUnknown_081A439E:: @ 81A439E
 DoubleBattleColosseum_EventScript_1A439E:: @ 81A439E
 	fadescreen 1
 	special 41
@@ -641,7 +637,6 @@ DoubleBattleColosseum_EventScript_1A439E:: @ 81A439E
 	waitstate
 	end
 
-gUnknown_081A43B9:: @ 81A43B9
 DoubleBattleColosseum_EventScript_1A43B9:: @ 81A43B9
 	fadescreen 1
 	special 41
@@ -653,7 +648,6 @@ DoubleBattleColosseum_EventScript_1A43B9:: @ 81A43B9
 	waitstate
 	end
 
-gUnknown_081A43D4:: @ 81A43D4
 DoubleBattleColosseum_EventScript_1A43D4:: @ 81A43D4
 	fadescreen 1
 	special 41
@@ -668,14 +662,12 @@ DoubleBattleColosseum_EventScript_1A43D4:: @ 81A43D4
 DoubleBattleColosseum_EventScript_1A43EF:: @ 81A43EF
 	end
 
-gUnknown_081A43F0:: @ 81A43F0
 TradeCenter_EventScript_1A43F0:: @ 81A43F0
 	setvar 0x8005, 0
 	special 33
 	waitstate
 	end
 
-gUnknown_081A43FA:: @ 81A43FA
 TradeCenter_EventScript_1A43FA:: @ 81A43FA
 	setvar 0x8005, 1
 	special 33
@@ -694,7 +686,6 @@ TradeCenter_EventScript_1A43FA:: @ 81A43FA
 	waitstate
 	end
 
-gUnknown_081A4418:: @ 81A4418
 RecordCorner_EventScript_1A4418:: @ 81A4418
 	setvar 0x8005, 0
 	special 27
@@ -703,7 +694,6 @@ RecordCorner_EventScript_1A4418:: @ 81A4418
 	jumpif 5, RecordCorner_EventScript_1A446C
 	end
 
-gUnknown_081A442D:: @ 81A442D
 RecordCorner_EventScript_1A442D:: @ 81A442D
 	setvar 0x8005, 1
 	special 27
@@ -712,7 +702,6 @@ RecordCorner_EventScript_1A442D:: @ 81A442D
 	jumpif 5, RecordCorner_EventScript_1A446C
 	end
 
-gUnknown_081A4442:: @ 81A4442
 RecordCorner_EventScript_1A4442:: @ 81A4442
 	setvar 0x8005, 2
 	special 27
@@ -721,7 +710,6 @@ RecordCorner_EventScript_1A4442:: @ 81A4442
 	jumpif 5, RecordCorner_EventScript_1A446C
 	end
 
-gUnknown_081A4457:: @ 81A4457
 RecordCorner_EventScript_1A4457:: @ 81A4457
 	setvar 0x8005, 3
 	special 27
@@ -738,8 +726,8 @@ RecordCorner_EventScript_1A446C:: @ 81A446C
 	releaseall
 	end
 
-gUnknown_081A4479:: @ 81A4479
-	message UnknownString_81A4D1C
+TradeRoom_ReadTrainerCard1:: @ 81A4479
+	message CableClub_LookAtTrainerCard1
 	waittext
 	waitbutton
 	fadescreen 1
@@ -747,8 +735,8 @@ gUnknown_081A4479:: @ 81A4479
 	waitstate
 	end
 
-gUnknown_081A4487:: @ 81A4487
-	message UnknownString_81A4D45
+TradeRoom_ReadTrainerCard2:: @ 81A4487
+	message CableClub_LookAtTrainerCard2
 	waittext
 	waitbutton
 	fadescreen 1
@@ -756,8 +744,8 @@ gUnknown_081A4487:: @ 81A4487
 	waitstate
 	end
 
-gUnknown_081A4495:: @ 81A4495
-	message UnknownString_81A4CF6
+TradeRoom_TooBusyToNotice:: @ 81A4495
+	message CableClub_TooBusyToNotice
 	waittext
 	waitbutton
 	closebutton
@@ -801,15 +789,15 @@ RecordCorner_EventScript_1A44D6:: @ 81A44D6
 	closebutton
 	end
 
-gUnknown_081A44E5:: @ 81A44E5
-	msgbox UnknownString_81A4C6E, 5
+TradeRoom_PromptToCancelLink:: @ 81A44E5
+	msgbox TradeRoom_WillLinkBeTerminated, 5
 	compare RESULT, 1
-	jumpeq gUnknown_081A44FE
+	jumpeq TradeRoom_TerminateLink
 	hidebox 0, 0, 29, 19
 	end
 
-gUnknown_081A44FE:: @ 81A44FE
-	message2 UnknownString_81A4CAF
+TradeRoom_TerminateLink:: @ 81A44FE
+	message2 TradeRoom_TerminatingLink
 	waittext
 	special 5
 	end

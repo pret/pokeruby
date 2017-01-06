@@ -47,13 +47,13 @@ _0810FFAE:
 	bge _0810FFAE
 	movs r0, 0x17
 	movs r1, 0
-	bl sav12_xor_set
+	bl SetGameStat
 	movs r0, 0x18
 	movs r1, 0
-	bl sav12_xor_set
+	bl SetGameStat
 	movs r0, 0x19
 	movs r1, 0
-	bl sav12_xor_set
+	bl SetGameStat
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -264,12 +264,12 @@ _0811013A:
 	movs r4, 0x19
 _0811013C:
 	adds r0, r4, 0
-	bl sub_8053108
+	bl GetGameStat
 	ldr r1, _08110154 @ =0x0000270e
 	cmp r0, r1
 	bhi _0811014E
 	adds r0, r4, 0
-	bl sav12_xor_increment
+	bl IncrementGameStat
 _0811014E:
 	pop {r4}
 	pop {r0}
@@ -488,7 +488,7 @@ PrintLinkBattleWinsLossesDraws: @ 81102E8
 	push {r4,lr}
 	ldr r4, _08110338 @ =gStringVar1
 	movs r0, 0x17
-	bl sub_8053108
+	bl GetGameStat
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0x1
@@ -496,7 +496,7 @@ PrintLinkBattleWinsLossesDraws: @ 81102E8
 	bl ConvertIntToDecimalStringN_DigitWidth6
 	ldr r4, _0811033C @ =gStringVar2
 	movs r0, 0x18
-	bl sub_8053108
+	bl GetGameStat
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0x1
@@ -504,7 +504,7 @@ PrintLinkBattleWinsLossesDraws: @ 81102E8
 	bl ConvertIntToDecimalStringN_DigitWidth6
 	ldr r4, _08110340 @ =gStringVar3
 	movs r0, 0x19
-	bl sub_8053108
+	bl GetGameStat
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0x1

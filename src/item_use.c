@@ -231,7 +231,7 @@ void ItemUseOnFieldCB_Rod(u8 taskId)
 
 void ItemUseOutOfBattle_Itemfinder(u8 var)
 {
-	sav12_xor_increment(0x27);
+	IncrementGameStat(0x27);
 	gUnknown_03005D00 = (void *)ItemUseOnFieldCB_Itemfinder;
 	SetUpItemUseOnFieldCallback(var);
 }

@@ -776,7 +776,7 @@ _0810D1A8:
 	bl FlagSet
 _0810D1B4:
 	movs r0, 0x1
-	bl sub_8053108
+	bl GetGameStat
 	cmp r0, 0
 	bne _0810D1D4
 	ldr r2, _0810D1EC @ =gSaveBlock2
@@ -788,7 +788,7 @@ _0810D1B4:
 	ldrb r0, [r2, 0x11]
 	orrs r1, r0
 	movs r0, 0x1
-	bl sav12_xor_set
+	bl SetGameStat
 _0810D1D4:
 	bl SetSecretBase2Field_9
 	ldr r0, _0810D1EC @ =gSaveBlock2
@@ -843,7 +843,7 @@ _0810D23A:
 	cmp r6, 0x1
 	bne _0810D250
 	movs r0, 0x2A
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	ldr r0, _0810D264 @ =0x0000083b
 	bl FlagSet
 _0810D250:
@@ -863,13 +863,13 @@ _0810D268: .4byte sub_8141F90
 	thumb_func_start sp0C8_whiteout_maybe
 sp0C8_whiteout_maybe: @ 810D26C
 	push {lr}
-	ldr r0, _0810D27C @ =c2_whiteout
+	ldr r0, _0810D27C @ =CB2_WhiteOut
 	bl SetMainCallback2
 	movs r0, 0
 	pop {r1}
 	bx r1
 	.align 2, 0
-_0810D27C: .4byte c2_whiteout
+_0810D27C: .4byte CB2_WhiteOut
 	thumb_func_end sp0C8_whiteout_maybe
 
 	thumb_func_start sub_810D280
@@ -5215,7 +5215,7 @@ _0810F400: .4byte 0x00004026
 sub_810F404: @ 810F404
 	push {lr}
 	movs r0, 0x20
-	bl sub_8053108
+	bl GetGameStat
 	lsls r0, 16
 	lsrs r0, 16
 	pop {r1}
@@ -5395,7 +5395,7 @@ GivLeadMonEffortRibbon: @ 810F54C
 	push {lr}
 	sub sp, 0x4
 	movs r0, 0x2A
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	ldr r0, _0810F580 @ =0x0000083b
 	bl FlagSet
 	movs r1, 0x1

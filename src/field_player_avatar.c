@@ -415,7 +415,7 @@ u8 CheckForFieldObjectCollision(struct MapObject *a, s16 b, s16 c, u8 d, u8 e)
         return 5;
     if (ShouldJumpLedge(b, c, d))
     {
-        sav12_xor_increment(0x2B);
+        IncrementGameStat(0x2B);
         return 6;
     }
     if (sp0 == 4 && sub_8058F6C(b, c, d))

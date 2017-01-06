@@ -357,7 +357,7 @@ static u8 StartMenu_PokedexCallback(void)
 {
     if(!gPaletteFade.active)
     {
-        sav12_xor_increment(0x29);
+        IncrementGameStat(0x29);
         PlayRainSoundEffect();
         SetMainCallback2(CB2_InitPokedex);
         return 1;
@@ -679,7 +679,7 @@ static u8 SaveDialogCB_DoSave(void)
 {
     u8 a;
     
-    sav12_xor_increment(0);
+    IncrementGameStat(0);
     if(gUnknown_020297EC == TRUE)
     {
         a = sub_8125D44(4);

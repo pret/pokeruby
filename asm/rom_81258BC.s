@@ -21803,7 +21803,7 @@ _08135820:
 	adds r0, r5, r2
 	ldrh r1, [r0]
 	movs r0, 0x20
-	bl sav12_xor_set
+	bl SetGameStat
 	b _0813589A
 	.align 2, 0
 _08135830: .4byte 0x00000572
@@ -21985,7 +21985,7 @@ _081359A0:
 	adds r0, r3, r1
 	ldrh r1, [r0]
 	movs r0, 0x20
-	bl sav12_xor_set
+	bl SetGameStat
 	b _08135A0A
 	.align 2, 0
 _081359B0: .4byte 0x00000572
@@ -22093,7 +22093,7 @@ _08135A66:
 	adds r5, r0, 0
 	movs r0, 0x20
 	adds r1, r5, 0
-	bl sav12_xor_set
+	bl SetGameStat
 	ldr r1, _08135A90 @ =0x0000270f
 	cmp r5, r1
 	bhi _08135AA4
@@ -22107,7 +22107,7 @@ _08135A94:
 	ldrh r5, [r1]
 	movs r0, 0x20
 	adds r1, r5, 0
-	bl sav12_xor_set
+	bl SetGameStat
 	ldr r1, _08135AAC @ =0x0000270f
 	cmp r5, r1
 	bls _08135AB4
@@ -22651,7 +22651,7 @@ _08135EBA:
 	cmp r0, 0
 	beq _08135EC8
 	movs r0, 0x2A
-	bl sav12_xor_increment
+	bl IncrementGameStat
 _08135EC8:
 	pop {r3}
 	mov r8, r3

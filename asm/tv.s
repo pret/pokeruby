@@ -638,7 +638,7 @@ sub_80BDC14: @ 80BDC14
 	adds r4, r1
 	strb r0, [r4]
 	movs r0, 0x6
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -1136,7 +1136,7 @@ sub_80BE028: @ 80BE028
 	movs r1, 0x18
 	bl sub_80BF55C
 	movs r0, 0x5
-	bl sub_8053108
+	bl GetGameStat
 	strh r0, [r4, 0x6]
 	movs r0, 0x19
 	strb r0, [r4]
@@ -1921,7 +1921,7 @@ sub_80BEA88: @ 80BEA88
 	ldrh r0, [r5, 0x2]
 	strh r0, [r4, 0x2]
 	movs r0, 0x5
-	bl sub_8053108
+	bl GetGameStat
 	ldrh r1, [r5, 0x6]
 	subs r0, r1
 	strh r0, [r4, 0x6]

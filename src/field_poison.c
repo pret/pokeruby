@@ -100,7 +100,7 @@ void Task_WhiteOut(u8 taskId)
     }
 }
 
-void DoWhiteOut(void)
+void ExecuteWhiteOut(void)
 {
     CreateTask(Task_WhiteOut, 0x50);
     ScriptContext1_Stop();

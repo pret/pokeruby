@@ -1820,7 +1820,7 @@ sub_80B3B80: @ 80B3B80
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x26
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	ldr r5, _080B3BC0 @ =gSaveBlock1 + 0x490
 	ldr r0, _080B3BC4 @ =gUnknown_020386A0
 	ldr r1, [r0]

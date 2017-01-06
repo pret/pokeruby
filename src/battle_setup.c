@@ -171,8 +171,8 @@ void StartBattle_StandardWild(void)
     gMain.savedCallback = HandleWildBattleEnd;
     gBattleTypeFlags = 0;
     task_add_01_battle_start(GetWildBattleTransition(), 0);
-    sav12_xor_increment(7);
-    sav12_xor_increment(8);
+    IncrementGameStat(7);
+    IncrementGameStat(8);
 }
 
 void StartBattle_Roamer(void)
@@ -183,8 +183,8 @@ void StartBattle_Roamer(void)
     gMain.savedCallback = HandleWildBattleEnd;
     gBattleTypeFlags = BATTLE_TYPE_ROAMER;
     task_add_01_battle_start(GetWildBattleTransition(), 0);
-    sav12_xor_increment(7);
-    sav12_xor_increment(8);
+    IncrementGameStat(7);
+    IncrementGameStat(8);
 }
 
 void StartBattle_Safari(void)
@@ -200,8 +200,8 @@ void StartBattle_Safari(void)
 void task_add_01_battle_start_with_music_and_stats(void)
 {
     task_add_01_battle_start(GetTrainerBattleTransition(), 0);
-    sav12_xor_increment(7);
-    sav12_xor_increment(9);
+    IncrementGameStat(7);
+    IncrementGameStat(9);
 }
 
 //Initiates battle where Wally catches Ralts
@@ -220,8 +220,8 @@ void StartBattle_ScriptedWild(void)
     gMain.savedCallback = HandleScriptedWildBattleEnd;
     gBattleTypeFlags = 0;
     task_add_01_battle_start(GetWildBattleTransition(), 0);
-    sav12_xor_increment(7);
-    sav12_xor_increment(8);
+    IncrementGameStat(7);
+    IncrementGameStat(8);
 }
 
 void StartBattle_SouthernIsland(void)
@@ -230,8 +230,8 @@ void StartBattle_SouthernIsland(void)
     gMain.savedCallback = HandleScriptedWildBattleEnd;
     gBattleTypeFlags = BATTLE_TYPE_LEGENDARY;
     task_add_01_battle_start(GetWildBattleTransition(), 0);
-    sav12_xor_increment(7);
-    sav12_xor_increment(8);
+    IncrementGameStat(7);
+    IncrementGameStat(8);
 }
 
 void StartBattle_Rayquaza(void)
@@ -240,8 +240,8 @@ void StartBattle_Rayquaza(void)
     gMain.savedCallback = HandleScriptedWildBattleEnd;
     gBattleTypeFlags = BATTLE_TYPE_LEGENDARY;
     task_add_01_battle_start(0, BGM_BATTLE34);
-    sav12_xor_increment(7);
-    sav12_xor_increment(8);
+    IncrementGameStat(7);
+    IncrementGameStat(8);
 }
 
 void StartBattle_GroudonKyogre(void)
@@ -253,8 +253,8 @@ void StartBattle_GroudonKyogre(void)
         task_add_01_battle_start(0xB, BGM_BATTLE34); // KYOGRE
     else
         task_add_01_battle_start(0x6, BGM_BATTLE34); // GROUDON
-    sav12_xor_increment(7);
-    sav12_xor_increment(8);
+    IncrementGameStat(7);
+    IncrementGameStat(8);
 }
 
 void StartBattle_Regi(void)
@@ -263,8 +263,8 @@ void StartBattle_Regi(void)
     gMain.savedCallback = HandleScriptedWildBattleEnd;
     gBattleTypeFlags = BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_REGI;
     task_add_01_battle_start(0xA, BGM_BATTLE36);
-    sav12_xor_increment(7);
-    sav12_xor_increment(8);
+    IncrementGameStat(7);
+    IncrementGameStat(8);
 }
 
 void HandleWildBattleEnd(void)
@@ -274,7 +274,7 @@ void HandleWildBattleEnd(void)
 
     if (battle_exit_is_player_defeat(gUnknown_02024D26) == TRUE)
     {
-        SetMainCallback2(c2_whiteout);
+        SetMainCallback2(CB2_WhiteOut);
     }
     else
     {
@@ -289,7 +289,7 @@ void HandleScriptedWildBattleEnd(void)
     ResetOamRange(0, 128);
 
     if (battle_exit_is_player_defeat(gUnknown_02024D26) == TRUE)
-        SetMainCallback2(c2_whiteout);
+        SetMainCallback2(CB2_WhiteOut);
     else
         SetMainCallback2(c2_exit_to_overworld_1_continue_scripts_restart_music);
 }
@@ -532,8 +532,8 @@ void CB2_StartFirstBattle(void)
         SetMainCallback2(sub_800E7C4);
         prev_quest_postbuffer_cursor_backup_reset();
         overworld_poison_timer_set();
-        sav12_xor_increment(7);
-        sav12_xor_increment(8);
+        IncrementGameStat(7);
+        IncrementGameStat(8);
     }
 }
 
@@ -751,7 +751,7 @@ void sub_808260C(void)
     }
     else if (battle_exit_is_player_defeat(gUnknown_02024D26) == TRUE)
     {
-        SetMainCallback2(c2_whiteout);
+        SetMainCallback2(CB2_WhiteOut);
     }
     else
     {
@@ -768,7 +768,7 @@ void do_choose_name_or_words_screen(void)
     }
     else if (battle_exit_is_player_defeat(gUnknown_02024D26) == TRUE)
     {
-        SetMainCallback2(c2_whiteout);
+        SetMainCallback2(CB2_WhiteOut);
     }
     else
     {

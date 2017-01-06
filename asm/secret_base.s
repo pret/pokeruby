@@ -2058,7 +2058,7 @@ _080BC460: .4byte 0x00001a16
 SecretBasePC_PackUp: @ 80BC464
 	push {lr}
 	movs r0, 0x14
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	bl sub_80BC440
 	pop {r0}
 	bx r0
@@ -2149,7 +2149,7 @@ sub_80BC50C: @ 80BC50C
 	push {r4,r5,lr}
 	bl sub_80BC474
 	movs r0, 0x14
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	ldr r4, _080BC530 @ =gSaveBlock1
 	ldr r0, _080BC534 @ =0x00001a16
 	adds r4, r0

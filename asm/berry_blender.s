@@ -4998,13 +4998,13 @@ _08050AEA:
 	cmp r0, 0
 	bne _08050B00
 	movs r0, 0x22
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	b _08050C82
 	.align 2, 0
 _08050AFC: .4byte gUnknown_03004834
 _08050B00:
 	movs r0, 0x21
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	b _08050C82
 _08050B08:
 	ldr r0, _08050B2C @ =gUnknown_03004854

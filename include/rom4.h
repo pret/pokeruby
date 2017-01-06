@@ -22,10 +22,10 @@ struct LinkPlayerMapObject {
 // sub_8053014
 void sub_8053050(void);
 // sub_805308C
-void sub_80530AC(void);
-void sav12_xor_increment(u8 index);
-u32 sub_8053108(u8 index);
-// sav12_xor_set
+void ResetGameStats(void);
+void IncrementGameStat(u8 index);
+u32 GetGameStat(u8 index);
+// SetGameStat
 // sub_8053154
 // sub_8053198
 void update_saveblock1_field_object_coords(u8, s16, s16);
@@ -117,7 +117,7 @@ void c2_overworld(void);
 // sub_80543DC
 // sub_80543E8
 void CB2_NewGame(void);
-void c2_whiteout(void);
+void CB2_WhiteOut(void);
 void CB2_LoadMap(void);
 void CB2_LoadMap2(void);
 // sub_8054534

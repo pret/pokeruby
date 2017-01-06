@@ -543,7 +543,7 @@ bool8 ScrCmd_checkflag(struct ScriptContext *ctx)
 
 bool8 ScrCmd_inccounter(struct ScriptContext *ctx)
 {
-    sav12_xor_increment(ScriptReadByte(ctx));
+    IncrementGameStat(ScriptReadByte(ctx));
     return FALSE;
 }
 

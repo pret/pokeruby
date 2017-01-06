@@ -1747,7 +1747,7 @@ _081127BE:
 	movs r1, 0x3
 	bl sub_8090D90
 	movs r0, 0xE
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	b _08112FD0
 	.align 2, 0
 _08112834: .4byte gPaletteFade
@@ -3055,7 +3055,7 @@ _08113316:
 	movs r1, 0x3
 	bl sub_8090D90
 	movs r0, 0xE
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	b _08113B3A
 	.align 2, 0
 _08113390: .4byte gPaletteFade

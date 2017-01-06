@@ -123,7 +123,7 @@ void NewGameInitData(void)
     ClearBerryTrees();
     gSaveBlock1.money = 3000;
     sub_80AB1B0();
-    sub_80530AC();
+    ResetGameStats();
     sub_8052DA8();
     InitLinkBattleRecords();
     InitShroomishSizeRecord();

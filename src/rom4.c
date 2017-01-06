@@ -74,25 +74,25 @@ extern struct UnkTVStruct gUnknown_03004870;
 extern u16 gUnknown_03004898;
 extern u16 gUnknown_0300489C;
 
-extern u8 gUnknown_0819FC74[];
+extern u8 EventScript_LeagueWhiteOut[];
 extern u8 gUnknown_0819FC9F[];
-extern u8 gUnknown_081A436F[];
-extern u8 gUnknown_081A4379[];
-extern u8 gUnknown_081A4383[];
-extern u8 gUnknown_081A439E[];
-extern u8 gUnknown_081A43B9[];
-extern u8 gUnknown_081A43D4[];
-extern u8 gUnknown_081A43F0[];
-extern u8 gUnknown_081A43FA[];
-extern u8 gUnknown_081A4418[];
-extern u8 gUnknown_081A442D[];
-extern u8 gUnknown_081A4442[];
-extern u8 gUnknown_081A4457[];
-extern u8 gUnknown_081A4479[];
-extern u8 gUnknown_081A4487[];
-extern u8 gUnknown_081A4495[];
-extern u8 gUnknown_081A44E5[];
-extern u8 gUnknown_081A44FE[];
+extern u8 SingleBattleColosseum_EventScript_1A436F[];
+extern u8 SingleBattleColosseum_EventScript_1A4379[];
+extern u8 DoubleBattleColosseum_EventScript_1A4383[];
+extern u8 DoubleBattleColosseum_EventScript_1A439E[];
+extern u8 DoubleBattleColosseum_EventScript_1A43B9[];
+extern u8 DoubleBattleColosseum_EventScript_1A43D4[];
+extern u8 TradeCenter_EventScript_1A43F0[];
+extern u8 TradeCenter_EventScript_1A43FA[];
+extern u8 RecordCorner_EventScript_1A4418[];
+extern u8 RecordCorner_EventScript_1A442D[];
+extern u8 RecordCorner_EventScript_1A4442[];
+extern u8 RecordCorner_EventScript_1A4457[];
+extern u8 TradeRoom_ReadTrainerCard1[];
+extern u8 TradeRoom_ReadTrainerCard2[];
+extern u8 TradeRoom_TooBusyToNotice[];
+extern u8 TradeRoom_PromptToCancelLink[];
+extern u8 TradeRoom_TerminateLink[];
 extern u8 gUnknown_081A4508[];
 
 extern struct UCoords32 gUnknown_0821664C[];
@@ -108,9 +108,9 @@ extern s32 gUnknown_0839ACE8;
 extern u32 gUnknown_08216694[];
 
 
-void sub_8052F5C(void)
+void DoWhiteOut(void)
 {
-    ScriptContext2_RunNewScript(gUnknown_0819FC74);
+    ScriptContext2_RunNewScript(EventScript_LeagueWhiteOut);
     gSaveBlock1.money /= 2;
     HealPlayerParty();
     sub_8053050();
@@ -168,14 +168,15 @@ void sub_805308C(void)
     sub_8134348();
 }
 
-void sub_80530AC(void)
+void ResetGameStats(void)
 {
     s32 i;
+
     for (i = 0; i < NUM_GAME_STATS; i++)
         gSaveBlock1.gameStats[i] = 0;
 }
 
-void sav12_xor_increment(u8 index)
+void IncrementGameStat(u8 index)
 {
     if (index < NUM_GAME_STATS)
     {
@@ -186,7 +187,7 @@ void sav12_xor_increment(u8 index)
     }
 }
 
-u32 sub_8053108(u8 index)
+u32 GetGameStat(u8 index)
 {
     if (index >= NUM_GAME_STATS)
         return 0;
@@ -194,7 +195,7 @@ u32 sub_8053108(u8 index)
     return gSaveBlock1.gameStats[index];
 }
 
-void sav12_xor_set(u8 index, u32 value)
+void SetGameStat(u8 index, u32 value)
 {
     if (index < NUM_GAME_STATS)
         gSaveBlock1.gameStats[index] = value;
@@ -512,6 +513,7 @@ bool8 sub_80538D0(u16 x, u16 y)
 void sub_80538F0(u8 mapGroup, u8 mapNum)
 {
     s32 i;
+
     warp1_set(mapGroup, mapNum, -1, -1, -1);
     sub_8053F0C();
     warp_shift();
@@ -530,8 +532,10 @@ void sub_80538F0(u8 mapGroup, u8 mapNum)
     not_trainer_hill_battle_pyramid();
     sub_8056D38(gMapHeader.mapData);
     apply_map_tileset2_palette(gMapHeader.mapData);
+
     for (i = 6; i < 12; i++)
         sub_807D874(i);
+
     sub_8072ED0();
     mapnumbers_history_shift_sav1_0_2_4_out();
     sub_8134394();
@@ -1106,7 +1110,7 @@ void CB2_NewGame(void)
     SetMainCallback2(c2_overworld);
 }
 
-void c2_whiteout(void)
+void CB2_WhiteOut(void)
 {
     u8 val;
     gMain.state++;
@@ -1115,7 +1119,7 @@ void c2_whiteout(void)
         FieldClearVBlankHBlankCallbacks();
         StopMapMusic();
         ResetSafariZoneFlag_();
-        sub_8052F5C();
+        DoWhiteOut();
         player_avatar_init_params_reset();
         ScriptContext1_Init();
         ScriptContext2_Disable();
@@ -2155,12 +2159,13 @@ u8 *sub_805568C(struct UnkStruct_8054FF8 *a1)
     if (linkPlayerId != 4)
     {
         if (!a1->b)
-            return gUnknown_081A4495;
+            return TradeRoom_TooBusyToNotice;
         if (gUnknown_03000580[linkPlayerId] != 0x80)
-            return gUnknown_081A4495;
+            return TradeRoom_TooBusyToNotice;
         if (!sub_8083BF4(linkPlayerId))
-            return gUnknown_081A4479;
-        return gUnknown_081A4487;
+            return TradeRoom_ReadTrainerCard1;
+		else
+			return TradeRoom_ReadTrainerCard2;
     }
 
     return sub_80682A8(&unkStruct, a1->field_C, a1->d);
@@ -2168,29 +2173,29 @@ u8 *sub_805568C(struct UnkStruct_8054FF8 *a1)
 
 u16 sub_8055758(u8 *script)
 {
-    if (script == gUnknown_081A4383)
+    if (script == DoubleBattleColosseum_EventScript_1A4383)
         return 10;
-    if (script == gUnknown_081A439E)
+    if (script == DoubleBattleColosseum_EventScript_1A439E)
         return 9;
-    if (script == gUnknown_081A43B9)
+    if (script == DoubleBattleColosseum_EventScript_1A43B9)
         return 10;
-    if (script == gUnknown_081A43D4)
+    if (script == DoubleBattleColosseum_EventScript_1A43D4)
         return 9;
-    if (script == gUnknown_081A4418)
+    if (script == RecordCorner_EventScript_1A4418)
         return 10;
-    if (script == gUnknown_081A442D)
+    if (script == RecordCorner_EventScript_1A442D)
         return 9;
-    if (script == gUnknown_081A4442)
+    if (script == RecordCorner_EventScript_1A4442)
         return 10;
-    if (script == gUnknown_081A4457)
+    if (script == RecordCorner_EventScript_1A4457)
         return 9;
-    if (script == gUnknown_081A436F)
+    if (script == SingleBattleColosseum_EventScript_1A436F)
         return 10;
-    if (script == gUnknown_081A4379)
+    if (script == SingleBattleColosseum_EventScript_1A4379)
         return 9;
-    if (script == gUnknown_081A43F0)
+    if (script == TradeCenter_EventScript_1A43F0)
         return 10;
-    if (script == gUnknown_081A43FA)
+    if (script == TradeCenter_EventScript_1A43FA)
         return 9;
     return 0;
 }
@@ -2217,7 +2222,7 @@ void sub_8055808(u8 *script)
 void sub_8055824(void)
 {
     PlaySE(SE_WIN_OPEN);
-    ScriptContext1_SetupScript(gUnknown_081A44E5);
+    ScriptContext1_SetupScript(TradeRoom_PromptToCancelLink);
     ScriptContext2_Enable();
 }
 
@@ -2230,7 +2235,7 @@ void sub_8055840(u8 *script)
 
 void sub_805585C(void)
 {
-    ScriptContext1_SetupScript(gUnknown_081A44FE);
+    ScriptContext1_SetupScript(TradeRoom_TerminateLink);
     ScriptContext2_Enable();
 }
 

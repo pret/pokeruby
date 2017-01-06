@@ -2555,7 +2555,7 @@ sub_811659C: @ 811659C
 	cmp r0, 0
 	beq _08116624
 	movs r0, 0x1D
-	bl sub_8053108
+	bl GetGameStat
 	ldrh r1, [r4, 0x1E]
 	adds r1, 0x1
 	strh r1, [r4, 0x1E]
@@ -2566,7 +2566,7 @@ sub_811659C: @ 811659C
 	movs r0, 0x1E
 	ldrsh r1, [r4, r0]
 	movs r0, 0x1D
-	bl sav12_xor_set
+	bl SetGameStat
 _081165E4:
 	ldr r1, _081165F8 @ =sub_811677C
 	ldr r2, _081165FC @ =0x0000ffff
