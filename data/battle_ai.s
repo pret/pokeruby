@@ -100,5 +100,18 @@ gBattleAICmdTable:: @ 83F6144
 	.4byte BattleAICmd_if_taunted
 	.4byte BattleAICmd_if_not_taunted
 
+	.align 1
 gUnknown_083F62BC:: @ 83F62BC
-	.incbin "baserom.gba", 0x003f62bc, 0x1c
+	.2byte EFFECT_EXPLOSION
+	.2byte EFFECT_DREAM_EATER
+	.2byte EFFECT_RAZOR_WIND
+	.2byte EFFECT_SKY_ATTACK
+	.2byte EFFECT_RECHARGE
+	.2byte EFFECT_SKULL_BASH
+	.2byte EFFECT_SOLARBEAM
+	.2byte EFFECT_SPIT_UP
+	.2byte EFFECT_FOCUS_PUNCH
+	.2byte EFFECT_SUPERPOWER
+	.2byte EFFECT_ERUPTION
+	.2byte EFFECT_OVERHEAT
+	.2byte -1
