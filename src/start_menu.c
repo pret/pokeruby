@@ -281,22 +281,15 @@ void CreateStartMenuTask(void (*func)(u8))
     SetTaskFuncWithFollowupFunc(taskId, Task_StartMenu, func);
 }
 
-struct MyTask {
-    TaskFunc func;
-    bool8 isActive;
-    u8 prev;
-    u8 next;
-    u8 priority;
-    s16 var1;
-};
-
 void sub_80712B4(u8 taskId)
 {
-    switch(((struct MyTask *)&gTasks[taskId])->var1)
+	struct Task *task = &gTasks[taskId];
+
+    switch(task->data[0])
     {
         case 0:
             gCallback_03004AE8 = StartMenu_InputProcessCallback;
-            ((struct MyTask *)&gTasks[taskId])->var1++;
+            task->data[0]++;
             break;
         case 1:
             if(gCallback_03004AE8() == 1)

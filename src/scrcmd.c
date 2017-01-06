@@ -561,7 +561,7 @@ bool8 ScrCmd_darken(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 sub_8066248(void)
+bool8 IsPaletteNotActive(void)
 {
     if (!gPaletteFade.active)
         return TRUE;
@@ -572,7 +572,7 @@ bool8 sub_8066248(void)
 bool8 ScrCmd_fadescreen(struct ScriptContext *ctx)
 {
     fade_screen(ScriptReadByte(ctx), 0);
-    SetupNativeScript(ctx, sub_8066248);
+    SetupNativeScript(ctx, IsPaletteNotActive);
     return TRUE;
 }
 
@@ -581,7 +581,7 @@ bool8 ScrCmd_fadescreendelay(struct ScriptContext *ctx)
     u8 duration = ScriptReadByte(ctx);
     u8 delay = ScriptReadByte(ctx);
     fade_screen(duration, delay);
-    SetupNativeScript(ctx, sub_8066248);
+    SetupNativeScript(ctx, IsPaletteNotActive);
     return TRUE;
 }
 
@@ -1170,7 +1170,7 @@ bool8 ScrCmd_closebutton(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 sub_80670C0()
+bool8 WaitForAorBPress(void)
 {
     if (gMain.newKeys & A_BUTTON)
         return TRUE;
@@ -1181,7 +1181,7 @@ bool8 sub_80670C0()
 
 bool8 ScrCmd_waitbutton(struct ScriptContext *ctx)
 {
-    SetupNativeScript(ctx, sub_80670C0);
+    SetupNativeScript(ctx, WaitForAorBPress);
     return TRUE;
 }
 
