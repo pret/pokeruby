@@ -330,6 +330,18 @@ SECTIONS {
         src/palette.o(.rodata);
         src/sound.o(.rodata);
         data/data_83760F0.o(.rodata);
+        data/diploma.o(.rodata);
+        data/strings.o(.rodata);
+        data/berry_tag_screen.o(.rodata);
+        data/save_failed_screen.o(.rodata);
+        data/pokeblock_feed.o(.rodata);
+        data/intro_credits_graphics.o(.rodata);
+        data/evolution_graphics.o(.rodata);
+        data/bard_music.o(.rodata);
+        data/unknown_debug_menu.o(.rodata);
+        data/strings2.o(.rodata);
+        data/menu_cursor.o(.rodata);
+        data/mystery_event_msg.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);
     } =0
