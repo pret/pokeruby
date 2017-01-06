@@ -393,7 +393,7 @@ _0807B95E:
 	lsls r0, 2
 	ldr r1, _0807B9C8 @ =gSprites
 	adds r0, r1
-	ldr r1, _0807B9CC @ =gUnknown_083931D8
+	ldr r1, _0807B9CC @ =gSubspriteTables_83931D8
 	bl SetSubspriteTables
 	ldr r1, _0807B9D0 @ =gTasks
 	lsls r0, r6, 2
@@ -414,7 +414,7 @@ _0807B9BC: .4byte 0xfffa0000
 _0807B9C0: .4byte REG_BLDCNT
 _0807B9C4: .4byte gSpriteTemplate_83931E0
 _0807B9C8: .4byte gSprites
-_0807B9CC: .4byte gUnknown_083931D8
+_0807B9CC: .4byte gSubspriteTables_83931D8
 _0807B9D0: .4byte gTasks
 _0807B9D4: .4byte sub_807B9D8
 	thumb_func_end sub_807B920
