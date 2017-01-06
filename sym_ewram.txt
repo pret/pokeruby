@@ -606,13 +606,7 @@ gTrainerCards: @ 202FFC0
 	.space 0xE0
 
 gPokemonStorage: @ 20300A0
-	.space 0x4
-
-gUnknown_020300A4: @ 20300A4
-	.space 0x8340
-
-gUnknown_020383E4: @ 20383E4
-	.space 0x8C
+	.space 0x83D0
 
 gUnknown_02038470: @ 2038470
 	.space 0x3

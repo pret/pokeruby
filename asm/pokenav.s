@@ -17339,7 +17339,7 @@ _080F44FC:
 	lsls r1, r2, 2
 	adds r1, r2
 	lsls r1, 4
-	ldr r2, _080F451C @ =gUnknown_020300A4
+	ldr r2, _080F451C @ =gPokemonStorage + 0x4
 	adds r1, r2
 	adds r0, r1
 	adds r1, r4, 0
@@ -17347,7 +17347,7 @@ _080F44FC:
 	bl GetBoxMonData
 	b _080F453C
 	.align 2, 0
-_080F451C: .4byte gUnknown_020300A4
+_080F451C: .4byte gPokemonStorage + 0x4
 _080F4520:
 	lsls r1, r0, 2
 	adds r1, r0
@@ -17357,7 +17357,7 @@ _080F4520:
 	lsls r1, r2, 2
 	adds r1, r2
 	lsls r1, 4
-	ldr r2, _080F4544 @ =gUnknown_020300A4
+	ldr r2, _080F4544 @ =gPokemonStorage + 0x4
 	adds r1, r2
 	adds r0, r1
 	adds r1, r4, 0
@@ -17367,7 +17367,7 @@ _080F453C:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_080F4544: .4byte gUnknown_020300A4
+_080F4544: .4byte gPokemonStorage + 0x4
 	thumb_func_end sub_80F44B0
 
 	thumb_func_start sub_80F4548
@@ -17401,7 +17401,7 @@ _080F4574:
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 4
-	ldr r2, _080F459C @ =gUnknown_020300A4
+	ldr r2, _080F459C @ =gPokemonStorage + 0x4
 	adds r1, r2
 	adds r0, r1
 	movs r1, 0x8
@@ -17413,7 +17413,7 @@ _080F4592:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080F459C: .4byte gUnknown_020300A4
+_080F459C: .4byte gPokemonStorage + 0x4
 	thumb_func_end sub_80F4548
 
 	thumb_func_start sub_80F45A0
@@ -17472,7 +17472,7 @@ _080F4608:
 	adds r0, r5, r0
 	lsls r1, r2, 3
 	adds r1, r2
-	ldr r2, _080F4638 @ =gUnknown_020383E4
+	ldr r2, _080F4638 @ =gPokemonStorage + 0x8344
 	adds r1, r2
 	movs r2, 0x40
 	movs r3, 0
@@ -17488,7 +17488,7 @@ _080F4624:
 	b _080F4676
 	.align 2, 0
 _080F4634: .4byte 0x000088e9
-_080F4638: .4byte gUnknown_020383E4
+_080F4638: .4byte gPokemonStorage + 0x8344
 _080F463C: .4byte gUnknown_083DFEC4
 _080F4640: .4byte 0x00008937
 _080F4644:
@@ -18432,7 +18432,7 @@ _080F4DAA:
 	ldr r0, _080F4EA4 @ =0x000087d8
 	adds r0, r4
 	mov r9, r0
-	ldr r1, _080F4EA8 @ =gUnknown_020300A4
+	ldr r1, _080F4EA8 @ =gPokemonStorage + 0x4
 	mov r8, r1
 _080F4DCA:
 	ldrb r0, [r6]
@@ -18541,7 +18541,7 @@ _080F4E98: .4byte gUnknown_083DFEC4
 _080F4E9C: .4byte 0x00008fe6
 _080F4EA0: .4byte 0x00008fe7
 _080F4EA4: .4byte 0x000087d8
-_080F4EA8: .4byte gUnknown_020300A4
+_080F4EA8: .4byte gPokemonStorage + 0x4
 _080F4EAC: .4byte 0xffff00ff
 _080F4EB0: .4byte 0xffe0ffff
 _080F4EB4: .4byte 0xffffff00
@@ -21141,7 +21141,7 @@ _080F6278:
 	adds r5, r7, r1
 	ldr r0, _080F6310 @ =0x00008fe7
 	adds r4, r7, r0
-	ldr r1, _080F6314 @ =gUnknown_020300A4
+	ldr r1, _080F6314 @ =gPokemonStorage + 0x4
 	mov r8, r1
 	ldr r0, _080F6318 @ =0x000041a0
 	add r0, r8
@@ -21205,7 +21205,7 @@ _080F62FE:
 	.align 2, 0
 _080F630C: .4byte 0x00008fe6
 _080F6310: .4byte 0x00008fe7
-_080F6314: .4byte gUnknown_020300A4
+_080F6314: .4byte gPokemonStorage + 0x4
 _080F6318: .4byte 0x000041a0
 _080F631C:
 	movs r0, 0
@@ -21336,7 +21336,7 @@ _080F63FC:
 	lsls r1, r2, 2
 	adds r1, r2
 	lsls r1, 4
-	ldr r2, _080F6488 @ =gUnknown_020300A4
+	ldr r2, _080F6488 @ =gPokemonStorage + 0x4
 	adds r1, r2
 	adds r0, r1
 	movs r1, 0x51
@@ -21393,7 +21393,7 @@ _080F646E:
 _080F647C: .4byte gUnknown_083DFEC4
 _080F6480: .4byte 0x00008fe6
 _080F6484: .4byte 0x00008fe7
-_080F6488: .4byte gUnknown_020300A4
+_080F6488: .4byte gPokemonStorage + 0x4
 _080F648C: .4byte 0xffff00ff
 _080F6490: .4byte 0xffe0ffff
 _080F6494: .4byte 0xffffff00
@@ -21544,7 +21544,7 @@ _080F65B4:
 	lsls r1, r7, 2
 	adds r1, r7
 	lsls r1, 4
-	ldr r2, _080F6620 @ =gUnknown_020300A4
+	ldr r2, _080F6620 @ =gPokemonStorage + 0x4
 	adds r1, r2
 	adds r0, r1
 	bl GetLevelFromBoxMonExp
@@ -21587,7 +21587,7 @@ _080F65FC:
 	beq _080F663C
 	b _080F6656
 	.align 2, 0
-_080F6620: .4byte gUnknown_020300A4
+_080F6620: .4byte gPokemonStorage + 0x4
 _080F6624:
 	strb r1, [r5]
 	movs r0, 0x1

@@ -5616,7 +5616,7 @@ _0810F6FC:
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 4
-	ldr r1, _0810F718 @ =gUnknown_020300A4
+	ldr r1, _0810F718 @ =gPokemonStorage + 0x4
 	adds r0, r1
 	adds r0, r6, r0
 	movs r1, 0xB
@@ -5627,7 +5627,7 @@ _0810F6FC:
 	movs r0, 0x1
 	b _0810F732
 	.align 2, 0
-_0810F718: .4byte gUnknown_020300A4
+_0810F718: .4byte gPokemonStorage + 0x4
 _0810F71C:
 	adds r0, r4, 0x1
 	lsls r0, 16
