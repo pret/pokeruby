@@ -13,9 +13,10 @@
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
+#include "items.h"
 
 #define OFFSET_7B (123)
-#define FIRST_BERRY (0x85) // ITEM_CHERI_BERRY
+#define FIRST_BERRY ITEM_CHERI_BERRY
 
 struct Struct2000000 {
     /*0x00*/ u8 filler_0[0x1FFFF];

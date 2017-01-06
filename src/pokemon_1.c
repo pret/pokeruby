@@ -8,6 +8,7 @@
 #include "main.h"
 #include "rng.h"
 #include "sprite.h"
+#include "items.h"
 
 //Extracts the upper 16 bits of a 32-bit number
 #define HIHALF(n) (((n) & 0xFFFF0000) >> 16)
@@ -341,7 +342,7 @@ void sub_803AF78(struct Pokemon *mon, struct UnknownPokemonStruct *dest)
     dest->species = GetMonData(mon, MON_DATA_SPECIES, NULL);
     heldItem = GetMonData(mon, MON_DATA_HELD_ITEM, NULL);
 
-    if (heldItem == 175)
+    if (heldItem == ITEM_ENIGMA_BERRY)
         heldItem = 0;
 
     dest->heldItem = heldItem;

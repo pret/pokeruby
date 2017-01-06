@@ -8,6 +8,7 @@
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
+#include "items.h"
 
 struct UnkMailStruct
 {
@@ -54,21 +55,6 @@ struct MailGraphics {
     u16 var0E;
     u16 color10;
     u16 color12;
-};
-
-enum {
-    ITEM_ORANGE_MAIL = 0x79,
-    ITEM_HARBOR_MAIL,
-    ITEM_GLITTER_MAIL,
-    ITEM_MECH_MAIL,
-    ITEM_WOOD_MAIL,
-    ITEM_WAVE_MAIL,
-    ITEM_BEAD_MAIL,
-    ITEM_SHADOW_MAIL,
-    ITEM_TROPIC_MAIL,
-    ITEM_DREAM_MAIL,
-    ITEM_FAB_MAIL,
-    ITEM_RETRO_MAIL,
 };
 
 extern struct Unk2000000 unk_2000000;

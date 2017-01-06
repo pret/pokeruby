@@ -11,6 +11,7 @@
 #include "hold_effects.h"
 #include "event_data.h"
 #include "battle.h"
+#include "items.h"
 
 extern u8 gPlayerPartyCount;
 extern struct Pokemon gPlayerParty[6];
@@ -89,7 +90,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     spAttack = attacker->spAttack;
     spDefense = defender->spDefense;
 
-    if (attacker->item == 175)
+    if (attacker->item == ITEM_ENIGMA_BERRY)
     {
         attackerHoldEffect = gEnigmaBerries[a7].holdEffect;
         attackerHoldEffectParam = gEnigmaBerries[a7].holdEffectParam;
@@ -100,7 +101,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         attackerHoldEffectParam = ItemId_GetHoldEffectParam(attacker->item);
     }
 
-    if (defender->item == 175)
+    if (defender->item == ITEM_ENIGMA_BERRY)
     {
         defenderHoldEffect = gEnigmaBerries[a8].holdEffect;
         defenderHoldEffectParam = gEnigmaBerries[a8].holdEffectParam;

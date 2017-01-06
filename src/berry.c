@@ -5,9 +5,10 @@
 #include "main.h"
 #include "text.h"
 #include "rng.h"
+#include "items.h"
 
-#define FIRST_BERRY 0x85 // ITEM_CHERI_BERRY
-#define LAST_BERRY 0xaf // ITEM_ENIGMA_BERRY
+#define FIRST_BERRY ITEM_CHERI_BERRY
+#define LAST_BERRY  ITEM_ENIGMA_BERRY
 
 extern struct Berry gBerries[];
 extern u8 BerryTreeScript;

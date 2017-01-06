@@ -10,6 +10,7 @@
 #include "event_data.h"
 #include "rtc.h"
 #include "item.h"
+#include "items.h"
 
 #define EVO_FRIENDSHIP       0x0001 // Pokémon levels up with friendship ≥ 220
 #define EVO_FRIENDSHIP_DAY   0x0002 // Pokémon levels up during the day with friendship ≥ 220
@@ -100,10 +101,10 @@ u8 GetItemEffectParamOffset(u16 itemId, u8 effectByte, u8 effectBit)
 
     temp = gItemEffectTable[itemId - 13];
 
-    if (!temp && itemId != 175)
+    if (!temp && itemId != ITEM_ENIGMA_BERRY)
         return 0;
 
-    if (itemId == 175)
+    if (itemId == ITEM_ENIGMA_BERRY)
     {
         temp = gEnigmaBerries[gUnknown_02024A60].itemEffect;
     }
@@ -213,7 +214,7 @@ u8 *sub_803F378(u16 itemId)
     int i;
     u8 *itemEffect;
 
-    if (itemId == 175)
+    if (itemId == ITEM_ENIGMA_BERRY)
     {
         if (gMain.inBattle)
         {
@@ -281,7 +282,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem)
     u16 upperPersonality = personality >> 16;
     u8 holdEffect;
 
-    if (heldItem == 175)
+    if (heldItem == ITEM_ENIGMA_BERRY)
         holdEffect = gSaveBlock1.enigmaBerry.holdEffect;
     else
         holdEffect = ItemId_GetHoldEffect(heldItem);

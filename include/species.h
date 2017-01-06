@@ -388,6 +388,6 @@
 #define SPECIES_JIRACHI    0x199
 #define SPECIES_DEOXYS     0x19a
 #define SPECIES_CHIMECHO   0x19b
-#define SPECIES_EGG   0x19c
+#define SPECIES_EGG        0x19c
 
 #endif // GUARD_SPECIES_H
