@@ -1253,11 +1253,11 @@ void BattleAICmd_unk_30(void)
 	s32 i;
     
 	gUnknown_02024DEC = 0;
-    unk_2000000.unk.unk1 = 0;
-    unk_2000000.unk.unk4 = 1;
+    battle_2000000.unk.unk1 = 0;
+    battle_2000000.unk.unk4 = 1;
 	gUnknown_02024C68 = 0;
 	gCritMultiplier = 1;
-	unk_2000000.ai.unk0 = 0;
+	battle_2000000.ai.unk0 = 0;
 	
 	for(i = 0; i < 4; i++)
 	{
@@ -1281,8 +1281,8 @@ void BattleAICmd_unk_30(void)
 			if(gUnknown_02024C68 & 8)
 				gUnknown_02024BEC = 0;
 			
-			if (unk_2000000.ai.unk0 < gUnknown_02024BEC)
-				unk_2000000.ai.unk0 = gUnknown_02024BEC;
+			if (battle_2000000.ai.unk0 < gUnknown_02024BEC)
+				battle_2000000.ai.unk0 = gUnknown_02024BEC;
 		}
 	}
 	gAIScriptPtr += 1;

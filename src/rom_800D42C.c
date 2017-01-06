@@ -39,7 +39,7 @@ void sub_800DC24(void) {
         if (gUnknown_02024D26 == 1) {
 
             // lp_field_18 = player position?
-            switch (gLinkPlayers[unk_2000000.linkPlayerIndex].lp_field_18) {
+            switch (gLinkPlayers[battle_2000000.linkPlayerIndex].lp_field_18) {
                 case 0:
                 case 2: PRINT_MESSAGE_LEFT(BattleText_Win, 160);
                     PRINT_MESSAGE_RIGHT(BattleText_Loss, 168);
@@ -52,7 +52,7 @@ void sub_800DC24(void) {
             }
         } else {
 
-            switch (gLinkPlayers[unk_2000000.linkPlayerIndex].lp_field_18) {
+            switch (gLinkPlayers[battle_2000000.linkPlayerIndex].lp_field_18) {
                 case 1:
                 case 3: PRINT_MESSAGE_LEFT(BattleText_Win, 160);
                     PRINT_MESSAGE_RIGHT(BattleText_Loss, 168);
@@ -70,7 +70,7 @@ void sub_800DC24(void) {
 
 
     if (gUnknown_02024D26 == 1) {
-        if (gLinkPlayers[unk_2000000.linkPlayerIndex].lp_field_18 != 0) {
+        if (gLinkPlayers[battle_2000000.linkPlayerIndex].lp_field_18 != 0) {
             PRINT_MESSAGE_RIGHT(BattleText_Win, 160);
             PRINT_MESSAGE_LEFT(BattleText_Loss, 168);
         } else {
@@ -78,7 +78,7 @@ void sub_800DC24(void) {
             PRINT_MESSAGE_RIGHT(BattleText_Loss, 168);
         }
     } else {
-        if (gLinkPlayers[unk_2000000.linkPlayerIndex].lp_field_18 != 0) {
+        if (gLinkPlayers[battle_2000000.linkPlayerIndex].lp_field_18 != 0) {
             PRINT_MESSAGE_LEFT(BattleText_Win, 160);
             PRINT_MESSAGE_RIGHT(BattleText_Loss, 168);
         } else {

@@ -64,7 +64,7 @@ struct BattleStruct /* 0x2000000 */
 	struct AI_ThinkingStruct ai;
 };
 
-extern struct BattleStruct unk_2000000;
+extern struct BattleStruct battle_2000000;
 extern struct AI_ThinkingStruct gAIThinkingSpace;
 
 #endif // GUARD_BATTLE_H
