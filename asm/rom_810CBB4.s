@@ -1453,7 +1453,7 @@ sub_810D6B8: @ 810D6B8
 	ldr r0, _0810D6D0 @ =gMain
 	ldr r1, _0810D6D4 @ =c2_exit_to_overworld_2_switch
 	str r1, [r0, 0x8]
-	ldr r0, _0810D6D8 @ =Cb2_ViewWallClock
+	ldr r0, _0810D6D8 @ =CB2_ViewWallClock
 	bl SetMainCallback2
 	bl ScriptContext2_Enable
 	pop {r0}
@@ -1461,7 +1461,7 @@ sub_810D6B8: @ 810D6B8
 	.align 2, 0
 _0810D6D0: .4byte gMain
 _0810D6D4: .4byte c2_exit_to_overworld_2_switch
-_0810D6D8: .4byte Cb2_ViewWallClock
+_0810D6D8: .4byte CB2_ViewWallClock
 	thumb_func_end sub_810D6B8
 
 	thumb_func_start ResetCyclingRoadChallengeData

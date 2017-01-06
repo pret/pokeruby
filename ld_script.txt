@@ -93,6 +93,12 @@ SECTIONS {
         src/clock.o(.text);
         asm/reset_rtc_screen.o(.text);
         asm/party_menu.o(.text);
+        src/party_menu.o(.text);
+        asm/party_menu.o(.text_806E884);
+        src/party_menu.o(.text_b);
+        asm/party_menu.o(.text_80701DC);
+        src/party_menu.o(.text_c);
+        asm/party_menu.o(.text_8070968);
         src/start_menu.o(.text);
         src/menu.o(.text);
         src/tileset_anim.o(.text);
@@ -315,6 +321,14 @@ SECTIONS {
         src/script.o(.rodata);
         src/scrcmd.o(.rodata);
         src/coord_event_weather.o(.rodata);
+        data/field_tasks.o(.rodata);
+        data/reset_rtc_screen.o(.rodata);
+        data/party_menu.o(.rodata);
+        src/start_menu.o(.rodata);
+        src/menu.o(.rodata);
+        data/tileset_anim.o(.rodata);
+        src/palette.o(.rodata);
+        src/sound.o(.rodata);
         data/data_83760F0.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);

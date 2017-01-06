@@ -310,7 +310,7 @@ static void Task_OptionMenuFadeOut(u8 taskId)
     if(!gPaletteFade.active)
     {
         DestroyTask(taskId);
-        SetMainCallback2(gMain.field_8);
+        SetMainCallback2(gMain.savedCallback);
     }
 }
 

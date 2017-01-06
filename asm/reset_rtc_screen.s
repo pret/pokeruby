@@ -655,7 +655,7 @@ Task_ResetRtc_1: @ 806A958
 	lsls r0, r4, 1
 	adds r0, r4
 	lsls r0, 2
-	ldr r1, _0806A9A0 @ =gUnknown_08376414
+	ldr r1, _0806A9A0 @ =gUnknown_08376420 - 0xC
 	adds r2, r0, r1
 	ldr r1, _0806A9A4 @ =gMain
 	ldrh r3, [r1, 0x2E]
@@ -675,7 +675,7 @@ Task_ResetRtc_1: @ 806A958
 	b _0806A9CC
 	.align 2, 0
 _0806A99C: .4byte gTasks + 0x8
-_0806A9A0: .4byte gUnknown_08376414
+_0806A9A0: .4byte gUnknown_08376420 - 0xC
 _0806A9A4: .4byte gMain
 _0806A9A8: .4byte Task_ResetRtc_2
 _0806A9AC:

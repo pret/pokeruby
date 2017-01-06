@@ -154,7 +154,7 @@ gSpecials::
 	.4byte CableCarWarp
 	.4byte sub_8123218
 	.4byte sub_8053E90
-	.4byte sub_806A460
+	.4byte StartWallClock
 	.4byte sub_810D6B8
 	.4byte ChooseStarter
 	.4byte StartBattle_WallyTutorial

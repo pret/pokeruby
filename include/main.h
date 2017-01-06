@@ -12,7 +12,7 @@ struct Main
     /*0x000*/ MainCallback callback1;
     /*0x004*/ MainCallback callback2;
 
-    /*0x008*/ MainCallback field_8;
+    /*0x008*/ MainCallback savedCallback;
 
     /*0x00C*/ IntrCallback vblankCallback;
     /*0x010*/ IntrCallback hblankCallback;

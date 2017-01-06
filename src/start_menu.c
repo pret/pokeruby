@@ -37,11 +37,6 @@ enum {
     MENU_ACTION_PLAYER_LINK
 };
 
-struct MenuItem {
-    u8 *text;
-    u8 (*callback)(void);
-};
-
 static u8 (*saveDialogCallback)(void);
 static u8 saveDialogTimer;    //Number of frames to keep the window on screen after save was completed
 static bool8 savingComplete;
@@ -51,7 +46,6 @@ extern u16 gSaveFileStatus;
 extern u16 gScriptResult;
 extern u8 (*gCallback_03004AE8)(void);
 extern u8 gUnknown_03004860;
-extern struct MenuItem gStartMenuItems[];
 extern u8 gNumSafariBalls;
 
 EWRAM_DATA static u8 sStartMenuCursorPos = 0;
@@ -67,6 +61,41 @@ extern u8 gSaveText_ThereIsAlreadyAFile[];
 extern u8 gSaveText_ThereIsADifferentFile[];
 extern u8 gSaveText_WouldYouLikeToSave[];
 extern u8 gOtherText_SafariStock[];
+extern u8 SystemText_Pokedex[];
+extern u8 SystemText_Pokemon[];
+extern u8 SystemText_BAG[];
+extern u8 SystemText_Pokenav[];
+extern u8 SystemText_Player[];
+extern u8 SystemText_Save[];
+extern u8 SystemText_Option[];
+extern u8 SystemText_Exit[];
+extern u8 SystemText_Retire[];
+extern u8 SystemText_Player[];
+
+static u8 StartMenu_PokedexCallback(void);
+static u8 StartMenu_PokemonCallback(void);
+static u8 StartMenu_BagCallback(void);
+static u8 StartMenu_PokenavCallback(void);
+static u8 StartMenu_PlayerCallback(void);
+static u8 StartMenu_SaveCallback(void);
+static u8 StartMenu_OptionCallback(void);
+static u8 StartMenu_ExitCallback(void);
+static u8 StartMenu_RetireCallback(void);
+static u8 StartMenu_PlayerLinkCallback(void);
+
+static const struct MenuAction sStartMenuItems[] =
+{
+    { SystemText_Pokedex, StartMenu_PokedexCallback },
+    { SystemText_Pokemon, StartMenu_PokemonCallback },
+    { SystemText_BAG, StartMenu_BagCallback },
+    { SystemText_Pokenav, StartMenu_PokenavCallback },
+    { SystemText_Player, StartMenu_PlayerCallback },
+    { SystemText_Save, StartMenu_SaveCallback },
+    { SystemText_Option, StartMenu_OptionCallback },
+    { SystemText_Exit, StartMenu_ExitCallback },
+    { SystemText_Retire, StartMenu_RetireCallback },
+    { SystemText_Player, StartMenu_PlayerLinkCallback },
+};
 
 //Private functions
 static void BuildStartMenuActions(void);
@@ -180,7 +209,7 @@ static bool32 PrintStartMenuItemsMultistep(s16 *index, u32 n)
     
     do
     {
-        MenuPrint(gStartMenuItems[sCurrentStartMenuActions[_index]].text, 23, 2 + _index * 2);
+        MenuPrint(sStartMenuItems[sCurrentStartMenuActions[_index]].text, 23, 2 + _index * 2);
         _index++;
         if(_index >= sNumStartMenuActions)
         {
@@ -303,12 +332,12 @@ static u8 StartMenu_InputProcessCallback(void)
     if(gMain.newKeys & A_BUTTON)
     {
         PlaySE(SE_SELECT);
-        if(gStartMenuItems[sCurrentStartMenuActions[sStartMenuCursorPos]].callback == StartMenu_PokedexCallback)
+        if(sStartMenuItems[sCurrentStartMenuActions[sStartMenuCursorPos]].func == StartMenu_PokedexCallback)
         {
             if(GetNationalPokedexCount(0) == 0)
                 return 0;
         }
-        gCallback_03004AE8 = gStartMenuItems[sCurrentStartMenuActions[sStartMenuCursorPos]].callback;
+        gCallback_03004AE8 = sStartMenuItems[sCurrentStartMenuActions[sStartMenuCursorPos]].func;
         if(gCallback_03004AE8 != StartMenu_SaveCallback &&
            gCallback_03004AE8 != StartMenu_ExitCallback &&
            gCallback_03004AE8 != StartMenu_RetireCallback)
@@ -324,7 +353,7 @@ static u8 StartMenu_InputProcessCallback(void)
 }
 
 //When player selects POKEDEX
-u8 StartMenu_PokedexCallback(void)
+static u8 StartMenu_PokedexCallback(void)
 {
     if(!gPaletteFade.active)
     {
@@ -337,7 +366,7 @@ u8 StartMenu_PokedexCallback(void)
 }
 
 //When player selects POKEMON
-u8 StartMenu_PokemonCallback(void)
+static u8 StartMenu_PokemonCallback(void)
 {
     if(!gPaletteFade.active)
     {
@@ -349,7 +378,7 @@ u8 StartMenu_PokemonCallback(void)
 }
 
 //When player selects BAG
-u8 StartMenu_BagCallback(void)
+static u8 StartMenu_BagCallback(void)
 {
     if(!gPaletteFade.active)
     {
@@ -361,7 +390,7 @@ u8 StartMenu_BagCallback(void)
 }
 
 //When player selects POKENAV
-u8 StartMenu_PokenavCallback(void)
+static u8 StartMenu_PokenavCallback(void)
 {
     if(!gPaletteFade.active)
     {
@@ -373,7 +402,7 @@ u8 StartMenu_PokenavCallback(void)
 }
 
 //When player selects his/her name
-u8 StartMenu_PlayerCallback(void)
+static u8 StartMenu_PlayerCallback(void)
 {
     if(!gPaletteFade.active)
     {
@@ -385,7 +414,7 @@ u8 StartMenu_PlayerCallback(void)
 }
 
 //When player selects SAVE
-u8 StartMenu_SaveCallback(void)
+static u8 StartMenu_SaveCallback(void)
 {
     sub_8072DEC();
     gCallback_03004AE8 = SaveCallback1;
@@ -393,27 +422,27 @@ u8 StartMenu_SaveCallback(void)
 }
 
 //When player selects OPTION
-u8 StartMenu_OptionCallback(void)
+static u8 StartMenu_OptionCallback(void)
 {
     if(!gPaletteFade.active)
     {
         PlayRainSoundEffect();
         SetMainCallback2(CB2_InitOptionMenu);
-        gMain.field_8 = sub_805469C;
+        gMain.savedCallback = sub_805469C;
         return 1;
     }
     return 0;
 }
 
 //When player selects EXIT
-u8 StartMenu_ExitCallback(void)
+static u8 StartMenu_ExitCallback(void)
 {
     CloseMenu();
     return 1;
 }
 
 //When player selects RETIRE
-u8 StartMenu_RetireCallback(void)
+static u8 StartMenu_RetireCallback(void)
 {
     CloseMenu();
     SafariZoneRetirePrompt();
@@ -421,7 +450,7 @@ u8 StartMenu_RetireCallback(void)
 }
 
 //When player selects their name in multiplayer mode
-u8 StartMenu_PlayerLinkCallback(void)
+static u8 StartMenu_PlayerLinkCallback(void)
 {
     if(!gPaletteFade.active)
     {
@@ -826,7 +855,7 @@ static void Task_8071B64(u8 taskId)
                 (*step)++;
                 break;
             case 4:
-                SetMainCallback2(gMain.field_8);
+                SetMainCallback2(gMain.savedCallback);
                 DestroyTask(taskId);
                 break;                
         }

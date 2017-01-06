@@ -582,7 +582,7 @@ void Task_MainMenuPressedA(u8 taskId)
         DestroyTask(taskId);
         break;
     case OPTION:
-        gMain.field_8 = CB2_InitMainMenuFromOptions;
+        gMain.savedCallback = CB2_InitMainMenuFromOptions;
         SetMainCallback2(CB2_InitOptionMenu);
         DestroyTask(taskId);
         break;

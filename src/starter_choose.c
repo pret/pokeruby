@@ -266,7 +266,7 @@ static void Task_StarterChoose5(u8 taskId)
         case 0:		//YES
             //Return the starter choice and exit.
             gScriptResult = gTasks[taskId].data[TD_STARTERSELECTION];
-            SetMainCallback2(gMain.field_8);
+            SetMainCallback2(gMain.savedCallback);
             break;
         case 1:     //NO
         case -1:    //B button
