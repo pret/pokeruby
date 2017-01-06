@@ -368,7 +368,7 @@ SECTIONS {
         data/secret_base.o(.rodata);
         data/tv.o(.rodata);
         data/contest_link_80C2020.o(.rodata);
-        data/pokemon_size_record.o(.rodata);
+        src/pokemon_size_record.o(.rodata);
         data/fldeff_80C5CD4.o(.rodata);
         data/truck_scene.o(.rodata);
         data/rotating_gate.o(.rodata);

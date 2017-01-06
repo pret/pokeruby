@@ -719,8 +719,8 @@ GetPokemonCategory: @ 8090D3C
 _08090D50: .4byte gPokedexEntries
 	thumb_func_end GetPokemonCategory
 
-	thumb_func_start sub_8090D54
-sub_8090D54: @ 8090D54
+	thumb_func_start GetPokedexHeightWeight
+GetPokedexHeightWeight: @ 8090D54
 	push {lr}
 	lsls r0, 16
 	lsrs r2, r0, 16
@@ -754,7 +754,7 @@ _08090D88:
 	bx r1
 	.align 2, 0
 _08090D8C: .4byte gPokedexEntries
-	thumb_func_end sub_8090D54
+	thumb_func_end GetPokedexHeightWeight
 
 	thumb_func_start sub_8090D90
 sub_8090D90: @ 8090D90

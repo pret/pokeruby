@@ -57653,7 +57653,7 @@ _0802AA08:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
-	bl sub_8090D54
+	bl GetPokedexHeightWeight
 	ldrh r1, [r4]
 	lsls r0, 16
 	lsrs r0, 16
