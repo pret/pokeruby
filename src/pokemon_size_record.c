@@ -38,8 +38,6 @@ static const struct UnknownStruct sBigMonSizeTable[] =
     { 1700,   1,    -26 },
 };
 
-#define VAR_SHROOMISH_SIZE_RECORD 0x4047
-#define VAR_BARBOACH_SIZE_RECORD 0x404F
 #define CM_PER_INCH 2.54
 
 static u32 GetMonSizeHash(struct Pokemon *pkmn)
