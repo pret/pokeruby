@@ -4,16 +4,24 @@
 #include "string_util.h"
 #include "event_data.h"
 #include "species.h"
+#include "items.h"
 
 extern u16 gScriptResult;
 extern u16 gSpecialVar_0x8004;
 extern struct Pokemon gPlayerParty[6];
 extern struct PokemonStorage gPokemonStorage;
 extern u16 gSpecialVar_0x8005;
-extern u16 gUnknown_0840CB04[];
 extern u16 gSpecialVar_0x8006;
 static EWRAM_DATA u16 sWinNumberDigit = 0;
 static EWRAM_DATA u16 sOtIdDigit = 0;
+
+static const u16 sLotteryPrizes[] =
+{
+    ITEM_PP_UP,
+    ITEM_EXP_SHARE,
+    ITEM_MAX_REVIVE,
+    ITEM_MASTER_BALL,
+};
 
 static u8 GetMatchingDigits(u16, u16);
 
@@ -103,7 +111,7 @@ void PickLotteryCornerTicket(void)
     
     if(gSpecialVar_0x8004 != 0)
     {
-        gSpecialVar_0x8005 = gUnknown_0840CB04[gSpecialVar_0x8004 - 1];
+        gSpecialVar_0x8005 = sLotteryPrizes[gSpecialVar_0x8004 - 1];
         
         if(box == 14)
         {

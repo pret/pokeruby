@@ -19507,6 +19507,3 @@ gSpriteAnimTable_840CAE0:: @ 840CAE0
 	.align 2
 gSpriteTemplate_840CAEC:: @ 840CAEC
 	spr_template 1001, 1001, gOamData_840CAC0, gSpriteAnimTable_840CAE0, NULL, gDummySpriteAffineAnimTable, sub_814580C
-
-gUnknown_0840CB04:: @ 840CB04
-	.incbin "baserom.gba", 0x0040cb04, 0x8

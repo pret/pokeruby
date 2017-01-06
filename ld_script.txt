@@ -330,6 +330,7 @@ SECTIONS {
         src/palette.o(.rodata);
         src/sound.o(.rodata);
         data/data_83760F0.o(.rodata);
+        src/lottery_corner.o(.rodata);
         data/diploma.o(.rodata);
         data/strings.o(.rodata);
         data/berry_tag_screen.o(.rodata);
