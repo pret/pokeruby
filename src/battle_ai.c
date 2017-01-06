@@ -270,7 +270,7 @@ void sub_810745C(void)
     
     for(i = 0; i < 8; i++)
     {
-		// this is the same as dividing it by 2, but for some reason, >> 1 is needed to match the asm.
+        // this is the same as dividing it by 2, but for some reason, >> 1 is needed to match the asm.
         if(unk_2016A00.unk0[gUnknown_02024C08 >> 1][i] == 0)
         {
             unk_2016A00.unk0[gUnknown_02024C08 >> 1][i] = gUnknown_02024C34[gUnknown_02024C08];
