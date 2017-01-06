@@ -1,3 +1,8 @@
+	.include "asm/macros.inc"
+	.include "constants/constants.inc"
+
+	.section .rodata
+
 gUnknown_083E7A50:: @ 83E7A50
 	.byte 0x00, 0x1D, 0x1C
 	.byte 0x0E, 0x1E, 0x1B
