@@ -104,7 +104,7 @@ compare_sapphire_rev2: sapphire_rev2
 	@$(SHA1) sapphire_rev2.sha1
 
 clean: tidy
-	rm -f sound/programmable_wave_samples/*.bin sound/direct_sound_samples/*.bin
+	rm -f sound/direct_sound_samples/*.bin
 	rm -f $(SONG_OBJS)
 	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.rl' \) -exec rm {} +
 
