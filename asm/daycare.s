@@ -6,36 +6,6 @@
 
 	.text
 
-@	thumb_func_start daycare_count_pokemon
-@daycare_count_pokemon: @ 80412F0
-@	push {r4-r6,lr}
-@	adds r6, r0, 0
-@	movs r5, 0
-@	movs r4, 0
-@_080412F8:
-@	lsls r0, r4, 2
-@	adds r0, r4
-@	lsls r0, 4
-@	adds r0, r6, r0
-@	movs r1, 0xB
-@	bl GetBoxMonData
-@	cmp r0, 0
-@	beq _08041310
-@	adds r0, r5, 0x1
-@	lsls r0, 24
-@	lsrs r5, r0, 24
-@_08041310:
-@	adds r0, r4, 0x1
-@	lsls r0, 24
-@	lsrs r4, r0, 24
-@	cmp r4, 0x1
-@	bls _080412F8
-@	adds r0, r5, 0
-@	pop {r4-r6}
-@	pop {r1}
-@	bx r1
-@	thumb_func_end daycare_count_pokemon
-
 	thumb_func_start sub_8041324
 sub_8041324: @ 8041324
 	push {r4-r7,lr}
