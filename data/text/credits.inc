@@ -703,256 +703,307 @@ gCreditsEntryPointerTable:: @ 840C5F0
 	.4byte CreditsCredits
 	.4byte CreditsTerminator
 	.4byte CreditsTerminator
+
 	.4byte CreditsTerminator
 	.4byte CreditsDirector
 	.4byte CreditsMasuda
 	.4byte CreditsTerminator
 	.4byte CreditsTerminator
+
 	.4byte CreditsTerminator
 	.4byte CreditsArtDirector
 	.4byte CreditsSugimori
 	.4byte CreditsTerminator
 	.4byte CreditsTerminator
+
 	.4byte CreditsTerminator
 	.4byte CreditsBattleDirector
 	.4byte CreditsMorimoto
 	.4byte CreditsTerminator
 	.4byte CreditsTerminator
+
 	.4byte CreditsTerminator
 	.4byte CreditsMainProgrammer
 	.4byte CreditsTetsuyaWatanabe
 	.4byte CreditsTerminator
 	.4byte CreditsTerminator
+
 	.4byte CreditsBattleSystemProgrammer
 	.4byte CreditsSogabe
 	.4byte CreditsFieldSystemProgrammer
 	.4byte CreditsTamada
 	.4byte CreditsTerminator
+
 	.4byte CreditsProgrammers
 	.4byte CreditsMori
 	.4byte CreditsKagaya
 	.4byte CreditsMatsuda
 	.4byte CreditsTerminator
+
 	.4byte CreditsProgrammers
 	.4byte CreditsHiroyukiNakamura
 	.4byte CreditsTaya
 	.4byte CreditsNohara
 	.4byte CreditsTerminator
+
 	.4byte CreditsProgrammers
 	.4byte CreditsTomomichiOhta
 	.4byte CreditsIwasawa
 	.4byte CreditsTakenoriOhta
 	.4byte CreditsTerminator
+
 	.4byte CreditsTerminator
 	.4byte CreditsMainGraphicDesigner
 	.4byte CreditsYoshida
 	.4byte CreditsTerminator
 	.4byte CreditsTerminator
+
 	.4byte CreditsPOKeMONGraphicDesigners
 	.4byte CreditsSugimori
 	.4byte CreditsYoshida
 	.4byte CreditsTerminator
 	.4byte CreditsTerminator
+
 	.4byte CreditsPOKeMONGraphicDesigners
 	.4byte CreditsFujiwara
 	.4byte CreditsSatoshiOhta
 	.4byte CreditsIwashita
 	.4byte CreditsTerminator
+
 	.4byte CreditsPOKeMONGraphicDesigners
 	.4byte CreditsTomita
 	.4byte CreditsUnno
 	.4byte CreditsEo
 	.4byte CreditsTerminator
+
 	.4byte CreditsPOKeMONDesigners
 	.4byte CreditsMorimoto
 	.4byte CreditsOkutani
 	.4byte CreditsNishida
 	.4byte CreditsTerminator
+
 	.4byte CreditsPOKeMONDesigners
 	.4byte CreditsSaito
 	.4byte CreditsYoshikawa
 	.4byte CreditsTerminator
 	.4byte CreditsTerminator
+
 	.4byte CreditsMusicComposition
 	.4byte CreditsIchinose
 	.4byte CreditsAoki
 	.4byte CreditsMasuda
 	.4byte CreditsTerminator
+
 	.4byte CreditsTerminator
 	.4byte CreditsSoundEffectsPOKeMONVoices
 	.4byte CreditsAoki
 	.4byte CreditsTerminator
 	.4byte CreditsTerminator
+
 	.4byte CreditsGameDesigners
 	.4byte CreditsMasuda
 	.4byte CreditsMorimoto
 	.4byte CreditsNishino
 	.4byte CreditsTerminator
+
 	.4byte CreditsGameDesigners
 	.4byte CreditsMatsushima
 	.4byte CreditsTetsujiOhta
 	.4byte CreditsSato
 	.4byte CreditsKawachimaru
+
 	.4byte CreditsGameDesigners
 	.4byte CreditsShimoyamada
 	.4byte CreditsOhmori
 	.4byte CreditsTakahashi
 	.4byte CreditsTerminator
+
 	.4byte CreditsPlotScenario
 	.4byte CreditsMasuda
 	.4byte CreditsTomisawa
 	.4byte CreditsNishino
 	.4byte CreditsTerminator
+
 	.4byte CreditsGameScenario
 	.4byte CreditsToshinobuMatsumiya
 	.4byte CreditsTomisawa
 	.4byte CreditsTerminator
 	.4byte CreditsTerminator
+
 	.4byte CreditsScriptDesigners
 	.4byte CreditsNohara
 	.4byte CreditsTetsujiOhta
 	.4byte CreditsTomomichiOhta
 	.4byte CreditsTerminator
+
 	.4byte CreditsMapDesigners
 	.4byte CreditsOhmori
 	.4byte CreditsTetsujiOhta
 	.4byte CreditsNishino
 	.4byte CreditsTerminator
+
 	.4byte CreditsMapDataDesigners
 	.4byte CreditsTetsujiOhta
 	.4byte CreditsTakahashi
 	.4byte CreditsTerminator
 	.4byte CreditsTerminator
+
 	.4byte CreditsParametricDesigners
 	.4byte CreditsNishino
 	.4byte CreditsMorimoto
 	.4byte CreditsTetsujiOhta
 	.4byte CreditsShimoyamada
+
 	.4byte CreditsTerminator
 	.4byte CreditsPOKeDEXText
 	.4byte CreditsMatsushima
 	.4byte CreditsTerminator
 	.4byte CreditsTerminator
+
 	.4byte CreditsEnvironmentToolProgrammers
 	.4byte CreditsSogabe
 	.4byte CreditsTamada
 	.4byte CreditsHiroyukiNakamura
 	.4byte CreditsMori
+
 	.4byte CreditsProductTesting
 	.4byte CreditsSuperMarioClub
 	.4byte CreditsTada
 	.4byte CreditsOhnishi
 	.4byte CreditsOkamura
+
 	.4byte CreditsSpecialThanks
 	.4byte CreditsTominaga
 	.4byte CreditsYoshiroTajiri
 	.4byte CreditsSasaki
 	.4byte CreditsTerminator
+
 	.4byte CreditsSpecialThanks
 	.4byte CreditsHamano
 	.4byte CreditsChieMatsumiya
 	.4byte CreditsShinozaki
 	.4byte CreditsFujii
+
 	.4byte CreditsSpecialThanks
 	.4byte CreditsSuyama
 	.4byte CreditsMitsuhara
 	.4byte CreditsKomura
 	.4byte CreditsOhashi
+
 	.4byte CreditsSpecialThanks
 	.4byte CreditsTakizawa
 	.4byte CreditsTakada
 	.4byte CreditsKondo
 	.4byte CreditsMashima
+
 	.4byte CreditsInformationSupervisors
 	.4byte CreditsEnomoto
 	.4byte CreditsTerada
 	.4byte CreditsSakurai
 	.4byte CreditsSagawa
+
 	.4byte CreditsCoordinators
 	.4byte CreditsKyokoWatanabe
 	.4byte CreditsNakano
 	.4byte CreditsTerminator
 	.4byte CreditsTerminator
+
 	.4byte CreditsTaskManagers
 	.4byte CreditsYamagami
 	.4byte CreditsNomoto
 	.4byte CreditsTerminator
 	.4byte CreditsTerminator
+
 	.4byte CreditsProducers
 	.4byte CreditsJinnai
 	.4byte CreditsIzushi
 	.4byte CreditsTsuru
 	.4byte CreditsTerminator
+
 	.4byte CreditsTerminator
 	.4byte CreditsExecutiveDirector
 	.4byte CreditsSatoshiTajiri
 	.4byte CreditsTerminator
 	.4byte CreditsTerminator
+
 	.4byte CreditsTerminator
 	.4byte CreditsExecutiveProducers
 	.4byte CreditsIwata
 	.4byte CreditsTerminator
 	.4byte CreditsTerminator
+
 	.4byte CreditsTerminator
 	.4byte CreditsExecutiveProducers
 	.4byte CreditsIshihara
 	.4byte CreditsTerminator
 	.4byte CreditsTerminator
+
 	.4byte CreditsEnglishVersionCoordinators
 	.4byte CreditsHiroNakamura
 	.4byte CreditsMcMahill
 	.4byte CreditsTerminator
 	.4byte CreditsTerminator
+
 	.4byte CreditsTerminator
 	.4byte CreditsTranslator
 	.4byte CreditsOgasawara
 	.4byte CreditsTerminator
 	.4byte CreditsTerminator
+
 	.4byte CreditsProgrammers
 	.4byte CreditsMurakawa
 	.4byte CreditsYamamoto
 	.4byte CreditsFunakoshi
 	.4byte CreditsKinashi
+
 	.4byte CreditsGraphicDesigners
 	.4byte CreditsYamamoto
 	.4byte CreditsKinashi
 	.4byte CreditsTerminator
 	.4byte CreditsTerminator
+
 	.4byte CreditsProductSupport
 	.4byte CreditsNakamichi
 	.4byte CreditsHara
 	.4byte CreditsTerminator
 	.4byte CreditsTerminator
+
 	.4byte CreditsTerminator
 	.4byte CreditsArtwork
 	.4byte CreditsOkada
 	.4byte CreditsTerminator
 	.4byte CreditsTerminator
+
 	.4byte CreditsTerminator
 	.4byte CreditsTextEditor
 	.4byte CreditsLillygren
 	.4byte CreditsTerminator
 	.4byte CreditsTerminator
+
 	.4byte CreditsNOAProductTesting
 	.4byte CreditsHertzog
 	.4byte CreditsRidgeway
 	.4byte CreditsTerminator
 	.4byte CreditsTerminator
+
 	.4byte CreditsBrailleCodeCheck
 	.4byte CreditsNFotB
 	.4byte CreditsMaurer
 	.4byte CreditsJapanBrailleLibrary
 	.4byte CreditsEBU
+
 	.4byte CreditsBrailleCodeCheck
 	.4byte CreditsABA
 	.4byte CreditsRNZFotB
 	.4byte CreditsTerminator
 	.4byte CreditsTerminator
+
 	.4byte CreditsSpecialThanks
 	.4byte CreditsFord
 	.4byte CreditsBarlow
 	.4byte CreditsUesugi
 	.4byte CreditsUyama
+
 	.4byte CreditsSpecialThanks
 	.4byte CreditsHowitt
 	.4byte CreditsTilden

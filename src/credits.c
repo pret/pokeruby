@@ -9,6 +9,72 @@
 #include "task.h"
 #include "text.h"
 
+enum {
+    PAGE_TITLE,
+    PAGE_DIRECTOR,
+    PAGE_ART_DIRECTOR,
+    PAGE_BATTLE_DIRECTOR,
+    PAGE_MAIN_PROGRAMMER,
+    PAGE_BATTLE_SYSTEM_PROGRAMMER,
+    PAGE_PROGRAMMERS_1,
+    PAGE_PROGRAMMERS_2,
+    PAGE_PROGRAMMERS_3,
+    PAGE_MAIN_GRAHPICS_DESIGNER,
+    PAGE_POKEMON_GRAHPIC_DESIGNERS_1,
+    PAGE_POKEMON_GRAHPIC_DESIGNERS_2,
+    PAGE_POKEMON_GRAHPIC_DESIGNERS_3,
+    PAGE_POKEMON_DESIGNERS_1,
+    PAGE_POKEMON_DESIGNERS_2,
+    PAGE_MUSIC_COMPOSITION,
+    PAGE_SOUND_EFFECTS,
+    PAGE_GAME_DESIGNERS_1,
+    PAGE_GAME_DESIGNERS_2,
+    PAGE_GAME_DESIGNERS_3,
+    PAGE_PLOT_SCENARIO,
+    PAGE_GAME_SCENARIO,
+    PAGE_SCRIPT_DESIGNERS,
+    PAGE_MAP_DESIGNERS,
+    PAGE_MAP_DATA_DESIGNERS,
+    PAGE_PARAMETRIC_DESIGNERS,
+    PAGE_POKEDEX_TEXT,
+    PAGE_ENVIRONMENT_TOOLS,
+    PAGE_PRODUCT_TESTING,
+    PAGE_SPECIAL_THANKS,
+    PAGE_SPECIAL_THANKS_1,
+    PAGE_SPECIAL_THANKS_2,
+    PAGE_SPECIAL_THANKS_3,
+    PAGE_INFORMATION_SUPERVISORS,
+    PAGE_COORDINATORS,
+    PAGE_TASK_MANAGERS,
+    PAGE_PRODUCERS,
+    PAGE_EXECUTIVE_DIRECTOR,
+    PAGE_EXECUTIVE_PRODUCERS_1,
+    PAGE_EXECUTIVE_PRODUCERS_2,
+    PAGE_TRANSLATION_COORDINATOR,
+    PAGE_TRANSLATORS,
+    PAGE_PROGRAMMERS,
+    PAGE_GRAPHIC_DESIGNERS,
+    PAGE_PRODUCT_SUPPORT,
+    PAGE_ARTWORK,
+    PAGE_TEXT_EDITOR,
+    PAGE_NOA_TESTING,
+    PAGE_BRAILLE_CODE_CHECK_1,
+    PAGE_BRAILLE_CODE_CHECK_2,
+    PAGE_SPECIAL_THANKS_4,
+    PAGE_SPECIAL_THANKS_5,
+
+    PAGE_COUNT
+};
+
+#define UNK_DEFINE_82 (0x82)
+
+#define COLOR_DARK_GREEN 0x1967
+#define COLOR_LIGHT_GREEN 0x328D
+
+enum {
+    TD_CURRENT_PAGE = 2,
+};
+
 struct Unk201C000 {
     u8 pad_00[0x88];
     u16 var_88;
@@ -20,6 +86,11 @@ struct HallOfFame {
     u8 sheet0[0x800];
     u8 sheet1[0x800];
     u8 sheet2[0x800];
+};
+
+struct CreditsEntry {
+    u8 var_0;
+    u8 *text;
 };
 
 extern struct Unk201C000 unk_201C000;
@@ -45,6 +116,7 @@ extern u8 gBirchHelpGfx[];
 //  data/credits
 extern u16 gUnknown_0840B7BC[32];
 extern u16 gUnknown_0840B7FC[32];
+extern struct CreditsEntry *gCreditsEntryPointerTable[][5];
 extern struct SpriteSheet gUnknown_0840CAA0;
 extern struct SpritePalette gUnknown_0840CAB0;
 
@@ -62,8 +134,9 @@ static void sub_8144024(u8 taskId);
 static void sub_8144080(u8 taskId);
 static void sub_8144114(u8 taskId);
 static void sub_8144130(void);
+static void sub_81441B8(u8 taskId);
+static u8 sub_8144454(u8 page, u8 taskId);
 
-void sub_81441B8(u8 taskId);
 void sub_8144514(u8 taskId);
 u8 sub_8144ECC(u8 data, u8 taskId);
 void sub_81450AC(u8 taskId);
@@ -83,15 +156,18 @@ static void sub_814395C(void) {
     BuildOamBuffer();
     UpdatePaletteFade();
 
-    if (!(gMain.heldKeys & B_BUTTON)) {
+    if (!(gMain.heldKeys & B_BUTTON))
+    {
         return;
     }
 
-    if (!gUnknown_02039324) {
+    if (!gUnknown_02039324)
+    {
         return;
     }
 
-    if (gTasks[gUnknown_02039322].func != sub_8143B68) {
+    if (gTasks[gUnknown_02039322].func != sub_8143B68)
+    {
         return;
     }
 
@@ -108,7 +184,7 @@ void sub_81439D0(void) {
     s16 taskId3;
     u8 taskId2;
     u16 savedIme;
-    struct Unk201C000 * c000;
+    struct Unk201C000 *c000;
 
     sub_8144130();
     SetVBlankCallback(NULL);
@@ -122,8 +198,10 @@ void sub_81439D0(void) {
     gTasks[taskId].data[11] = 0;
     gTasks[taskId].data[13] = 1;
 
-    while (TRUE) {
-        if (sub_8144ECC(0, taskId)) {
+    while (TRUE)
+    {
+        if (sub_8144ECC(0, taskId))
+        {
             break;
         }
     }
@@ -171,7 +249,8 @@ void sub_81439D0(void) {
 }
 
 void sub_8143B38(u8 taskId) {
-    if (gPaletteFade.active) {
+    if (gPaletteFade.active)
+    {
         return;
     }
 
@@ -181,7 +260,8 @@ void sub_8143B38(u8 taskId) {
 void sub_8143B68(u8 taskId) {
     u16 data11;
 
-    if (gTasks[taskId].data[4]) {
+    if (gTasks[taskId].data[4])
+    {
         s16 secondaryTaskId;
 
         secondaryTaskId = gTasks[taskId].data[1];
@@ -195,12 +275,15 @@ void sub_8143B68(u8 taskId) {
     gUnknown_02039320 = 0;
     data11 = gTasks[taskId].data[11];
 
-    if (gTasks[taskId].data[11] == 1) {
+    if (gTasks[taskId].data[11] == 1)
+    {
         gTasks[taskId].data[13] = data11;
         gTasks[taskId].data[11] = 0;
         BeginNormalPaletteFade(-1, 0, 0, 16, 0);
         gTasks[taskId].func = sub_8143BFC;
-    } else if (gTasks[taskId].data[11] == 2) {
+    }
+    else if (gTasks[taskId].data[11] == 2)
+    {
         gTasks[taskId].data[13] = data11;
         gTasks[taskId].data[11] = 0;
         BeginNormalPaletteFade(-1, 0, 0, 16, 0);
@@ -209,7 +292,8 @@ void sub_8143B68(u8 taskId) {
 }
 
 static void sub_8143BFC(u8 taskId) {
-    if (gPaletteFade.active) {
+    if (gPaletteFade.active)
+    {
         return;
     }
 
@@ -223,7 +307,8 @@ static void c2_080C9BFC(u8 taskId) {
 
     SetVBlankCallback(NULL);
 
-    if (!sub_8144ECC(gTasks[taskId].data[7], taskId)) {
+    if (!sub_8144ECC(gTasks[taskId].data[7], taskId))
+    {
         return;
     }
 
@@ -240,7 +325,8 @@ static void c2_080C9BFC(u8 taskId) {
 }
 
 static void sub_8143CC0(u8 taskId) {
-    if (gPaletteFade.active) {
+    if (gPaletteFade.active)
+    {
         return;
     }
 
@@ -252,58 +338,58 @@ static void sub_8143CC0(u8 taskId) {
 #ifdef NONMATCHING
 static void sub_8143D04(u8 taskId) {
     switch (gMain.state) {
-        default:
-        case 0: {
-            u16 i;
+    default:
+    case 0: {
+        u16 i;
 
-            ResetSpriteData();
-            FreeAllSpritePalettes();
-            gReservedSpritePaletteCount = 8;
-            LZ77UnCompVram(&gBirchHelpGfx, (void *) VRAM);
-            LZ77UnCompVram(&gBirchBagTilemap, (void *) (VRAM + 0x3800));
-            LoadPalette(gBirchBagGrassPal + 2, 1, 31 * 2);
+        ResetSpriteData();
+        FreeAllSpritePalettes();
+        gReservedSpritePaletteCount = 8;
+        LZ77UnCompVram(&gBirchHelpGfx, (void *) VRAM);
+        LZ77UnCompVram(&gBirchBagTilemap, (void *) (VRAM + 0x3800));
+        LoadPalette(gBirchBagGrassPal + 2, 1, 31 * 2);
 
-            for (i = 0; i < 0x800; i++) {
-                gHallOfFame.sheet0[i] = 0x11;
-            }
-
-            for (i = 0; i < 0x800; i++) {
-                gHallOfFame.sheet1[i] = 0x22;
-            }
-
-            for (i = 0; i < 0x800; i++) {
-                gHallOfFame.sheet2[i] = 0x33;
-            }
-
-            unk_201f800[0] = 0;
-            unk_201f800[1] = 0x53FF;
-            unk_201f800[2] = 0x529F;
-            unk_201f800[3] = 0x7E94;
-
-            LoadSpriteSheet(&gUnknown_0840CAA0);
-            LoadSpritePalette(&gUnknown_0840CAB0);
-
-            gMain.state += 1;
-            break;
+        for (i = 0; i < 0x800; i++) {
+            gHallOfFame.sheet0[i] = 0x11;
         }
 
-        case 1: {
-            gTasks[taskId].data[3] = CreateTask(sub_8144514, 0);
-            gTasks[gTasks[taskId].data[3]].data[0] = 1;
-            gTasks[gTasks[taskId].data[3]].data[1] = taskId;
-            gTasks[gTasks[taskId].data[3]].data[2] = gTasks[taskId].data[7];
-
-            BeginNormalPaletteFade(-1, 0, 16, 0, 0);
-            REG_BG3HOFS = 0;
-            REG_BG3VOFS = 32;
-            REG_BG3CNT = 0x703;
-            REG_DISPCNT = 0x1940;
-
-            gMain.state = 0;
-            gUnknown_0203935C = 0;
-            gTasks[taskId].func = sub_8143B38;
-            break;
+        for (i = 0; i < 0x800; i++) {
+            gHallOfFame.sheet1[i] = 0x22;
         }
+
+        for (i = 0; i < 0x800; i++) {
+            gHallOfFame.sheet2[i] = 0x33;
+        }
+
+        unk_201f800[0] = 0;
+        unk_201f800[1] = 0x53FF; // light yellow
+        unk_201f800[2] = 0x529F; // light red
+        unk_201f800[3] = 0x7E94; // light blue
+
+        LoadSpriteSheet(&gUnknown_0840CAA0);
+        LoadSpritePalette(&gUnknown_0840CAB0);
+
+        gMain.state += 1;
+        break;
+    }
+
+    case 1: {
+        gTasks[taskId].data[3] = CreateTask(sub_8144514, 0);
+        gTasks[gTasks[taskId].data[3]].data[0] = 1;
+        gTasks[gTasks[taskId].data[3]].data[1] = taskId;
+        gTasks[gTasks[taskId].data[3]].data[2] = gTasks[taskId].data[7];
+
+        BeginNormalPaletteFade(-1, 0, 16, 0, 0);
+        REG_BG3HOFS = 0;
+        REG_BG3VOFS = 32;
+        REG_BG3CNT = 0x703;
+        REG_DISPCNT = 0x1940;
+
+        gMain.state = 0;
+        gUnknown_0203935C = 0;
+        gTasks[taskId].func = sub_8143B38;
+        break;
+    }
     }
 }
 #else
@@ -508,7 +594,8 @@ _08143EB8: .4byte sub_8143B38\n\
 #endif
 
 static void sub_8143EBC(u8 taskId) {
-    if (gTasks[taskId].data[12]) {
+    if (gTasks[taskId].data[12])
+    {
         gTasks[taskId].data[12] -= 1;
         return;
     }
@@ -518,7 +605,8 @@ static void sub_8143EBC(u8 taskId) {
 }
 
 static void sub_8143F04(u8 taskId) {
-    if (gPaletteFade.active) {
+    if (gPaletteFade.active)
+    {
         return;
     }
 
@@ -549,7 +637,8 @@ static void sub_8143F3C(u8 taskId) {
 }
 
 static void sub_8143FDC(u8 taskId) {
-    if (gTasks[taskId].data[0]) {
+    if (gTasks[taskId].data[0])
+    {
         gTasks[taskId].data[0] -= 1;
         return;
     }
@@ -559,7 +648,8 @@ static void sub_8143FDC(u8 taskId) {
 }
 
 static void sub_8144024(u8 taskId) {
-    if (gPaletteFade.active) {
+    if (gPaletteFade.active)
+    {
         return;
     }
 
@@ -571,29 +661,34 @@ static void sub_8144024(u8 taskId) {
 }
 
 static void sub_8144080(u8 taskId) {
-    if (gPaletteFade.active) {
+    if (gPaletteFade.active)
+    {
         return;
     }
 
-    if (gTasks[taskId].data[0] == 0) {
+    if (gTasks[taskId].data[0] == 0)
+    {
         FadeOutBGM(4);
         BeginNormalPaletteFade(-1, 8, 0, 16, 0xFFFF);
         gTasks[taskId].func = sub_8144114;
         return;
     }
 
-    if (gMain.newKeys) {
+    if (gMain.newKeys)
+    {
         FadeOutBGM(4);
         BeginNormalPaletteFade(-1, 8, 0, 16, 0xFFFF);
         gTasks[taskId].func = sub_8144114;
         return;
     }
 
-    if (gTasks[taskId].data[0] == 7144) {
+    if (gTasks[taskId].data[0] == 7144)
+    {
         FadeOutBGM(8);
     }
 
-    if (gTasks[taskId].data[0] == 6840) {
+    if (gTasks[taskId].data[0] == 6840)
+    {
         m4aSongNumStart(BGM_END);
     }
 
@@ -601,7 +696,8 @@ static void sub_8144080(u8 taskId) {
 }
 
 static void sub_8144114(u8 taskId) {
-    if (gPaletteFade.active) {
+    if (gPaletteFade.active)
+    {
         return;
     }
 
@@ -624,7 +720,197 @@ static void sub_8144130(void) {
     REG_BLDALPHA = 0;
     REG_BLDY = 0;
 
-    DmaFill16(3, 0, (void *)VRAM, VRAM_SIZE);
-    DmaFill32(3, 0, (void *)OAM, OAM_SIZE);
-    DmaFill16(3, 0, (void *)(PLTT + 2), PLTT_SIZE - 2);
+    DmaFill16(3, 0, (void *) VRAM, VRAM_SIZE);
+    DmaFill32(3, 0, (void *) OAM, OAM_SIZE);
+    DmaFill16(3, 0, (void *) (PLTT + 2), PLTT_SIZE - 2);
+}
+
+static void sub_81441B8(u8 taskId) {
+    u16 i;
+
+    switch (gTasks[taskId].data[0])
+    {
+    case 0:
+    case 6:
+    case 7:
+    case 8:
+    case 9:
+    default:
+        if (gPaletteFade.active)
+        {
+            return;
+        }
+        gTasks[taskId].data[0] = 1;
+        gTasks[taskId].data[3] = 0x58;
+        gTasks[gTasks[taskId].data[1]].data[14] = 0;
+        gUnknown_02039320 = 0;
+        return;
+
+    case 1:
+        if (gTasks[taskId].data[3] != 0)
+        {
+            gTasks[taskId].data[3] -= 1;
+            return;
+        }
+
+        gTasks[taskId].data[0] += 1;
+        return;
+
+    case 2:
+        REG_DISPCNT &= ~DISPCNT_BG0_ON;
+
+        if (gTasks[gTasks[taskId].data[1]].func == sub_8143B68)
+        {
+            if (gTasks[taskId].data[TD_CURRENT_PAGE] < PAGE_COUNT)
+            {
+
+                for (i = 0; i < 5; i++)
+                {
+                    sub_8072BD8(gCreditsEntryPointerTable[gTasks[taskId].data[TD_CURRENT_PAGE]][i]->text, 0,
+                                9 + i * 2, 240);
+                }
+
+                gTasks[taskId].data[TD_CURRENT_PAGE] += 1;
+                gTasks[taskId].data[0] += 1;
+
+                gTasks[gTasks[taskId].data[1]].data[14] = 1;
+
+                if (gTasks[gTasks[taskId].data[1]].data[13] == 1)
+                {
+                    BeginNormalPaletteFade(0x300, 0, 16, 0, COLOR_LIGHT_GREEN);
+                }
+                else
+                {
+                    BeginNormalPaletteFade(0x300, 0, 16, 0, COLOR_DARK_GREEN);
+                }
+                return;
+            }
+
+
+            gTasks[taskId].data[0] = 10;
+            return;
+        }
+
+        gTasks[gTasks[taskId].data[1]].data[14] = 0;
+        return;
+
+    case 3:
+        REG_DISPCNT |= DISPCNT_BG0_ON;
+
+        if (gPaletteFade.active)
+        {
+            return;
+        }
+
+        gTasks[taskId].data[3] = UNK_DEFINE_82;
+        gTasks[taskId].data[0] += 1;
+        return;
+
+    case 4:
+        if (gTasks[taskId].data[3] != 0)
+        {
+            gTasks[taskId].data[3] -= 1;
+            return;
+        }
+
+        if (sub_8144454((u8) gTasks[taskId].data[2], (u8) gTasks[taskId].data[1]))
+        {
+            gTasks[taskId].data[0] += 1;
+            return;
+        }
+
+        gTasks[taskId].data[0] += 1;
+
+        if (gTasks[gTasks[taskId].data[1]].data[13] == 1)
+        {
+            BeginNormalPaletteFade(0x300, 0, 0, 16, COLOR_LIGHT_GREEN);
+        }
+        else
+        {
+            BeginNormalPaletteFade(0x300, 0, 0, 16, COLOR_DARK_GREEN);
+        }
+
+        return;
+
+    case 5:
+        if (gPaletteFade.active)
+        {
+            return;
+        }
+
+        MenuZeroFillWindowRect(0, 9, 29, 19);
+        gTasks[taskId].data[0] = 2;
+        return;
+
+    case 10:
+        gTasks[gTasks[taskId].data[1]].data[4] = 1;
+        DestroyTask(taskId);
+        return;
+    }
+}
+
+#define LAST_PAGE (PAGE_TEXT_EDITOR)
+
+static u8 sub_8144454(u8 page, u8 taskId) {
+    // Starts with bike + ocean + morning
+
+    if (page == PAGE_PROGRAMMERS_1)
+    {
+        // Grass patch
+        gTasks[taskId].data[11] = 2;
+    }
+
+    if (page == PAGE_POKEMON_GRAHPIC_DESIGNERS_3)
+    {
+        // Bike + ocean + sunset
+        gTasks[taskId].data[7] = 1;
+        gTasks[taskId].data[11] = 1;
+    }
+
+    if (page == PAGE_GAME_DESIGNERS_2)
+    {
+        // Grass patch
+        gTasks[taskId].data[11] = 2;
+    }
+
+    if (page == PAGE_MAP_DATA_DESIGNERS)
+    {
+        // Bike + forest + sunset
+        gTasks[taskId].data[7] = 2;
+        gTasks[taskId].data[11] = 1;
+    }
+
+    if (page == PAGE_SPECIAL_THANKS_1)
+    {
+        // Grass patch
+        gTasks[taskId].data[11] = 2;
+    }
+
+    if (page == PAGE_TASK_MANAGERS)
+    {
+        // Bike + forest + sunset
+        gTasks[taskId].data[7] = 3;
+        gTasks[taskId].data[11] = 1;
+    }
+
+    if (page == PAGE_TRANSLATION_COORDINATOR)
+    {
+        // Grass patch
+        gTasks[taskId].data[11] = 2;
+    }
+
+    if (page == LAST_PAGE)
+    {
+        // Bike + town + night
+        gTasks[taskId].data[7] = 4;
+        gTasks[taskId].data[11] = 1;
+    }
+
+    if (gTasks[taskId].data[11] != 0)
+    {
+        // Returns true if changed?
+        return TRUE;
+    }
+
+    return FALSE;
 }
