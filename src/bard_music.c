@@ -1,58 +1,62 @@
 #include "global.h"
 #include "asm.h"
 
-struct BardSound {
+struct BardSound
+{
     u8 pad_00[48];
-} BardSound;
+};
 
-struct UnkBard {
-    /* 0x00 */ u8 var00;
-    /* 0x01 */ s8 var01;
-    /* 0x02 */ u16 var02;
-    /* 0x04 */ u16 var04;
-    /* 0x06 */ u16 var06;
-} UnkBard;
+struct UnkBard
+{
+    /*0x00*/ u8 var00;
+    /*0x01*/ s8 var01;
+    /*0x02*/ u16 var02;
+    /*0x04*/ u16 var04;
+    /*0x06*/ u16 var06;
+};
 
-struct UnkBard3 {
-    /* 0x00 */ u16 var00;
-    /* 0x02 */ u16 var02;
-    /* 0x04 */ s16 var04;
-    /* 0x06 */ u16 var06;
-} UnkBard3;
+struct UnkBard3
+{
+    /*0x00*/ u16 var00;
+    /*0x02*/ u16 var02;
+    /*0x04*/ s16 var04;
+    /*0x06*/ u16 var06;
+};
 
-struct UnkBard2 {
-    /* 0x00 */ u8 var00;
-    /* 0x01 */ u8 var01;
-    /* 0x02 */ u8 var02;
-    /* 0x03 */ u8 var03;
-    /* 0x04 */ u16 var04;
-               u8 pad06[4];
-    /* 0x0A */ u16 var0A;
-               u8 pad0C[12];
-    /* 0x18 */ struct UnkBard3 var18[6];
-} UnkBard2;
+struct UnkBard2
+{
+    /*0x00*/ u8 var00;
+    /*0x01*/ u8 var01;
+    /*0x02*/ u8 var02;
+    /*0x03*/ u8 var03;
+    /*0x04*/ u16 var04;
+             u8 pad06[4];
+    /*0x0A*/ u16 var0A;
+             u8 pad0C[12];
+    /*0x18*/ struct UnkBard3 var18[6];
+};
 
 extern struct BardSound *gBardMusicTable[];
 extern s16 *gUnknown_08417068[];
 extern u32 gUnknown_084170F4[];
 
-s16 sub_814A2B8(s32 arg0, s32 arg1) {
+static s16 sub_814A2B8(u32 arg0, u32 arg1)
+{
     return gUnknown_08417068[arg0][arg1];
 }
 
-struct BardSound *sub_814A2D0(u16 arg0, u16 arg1) {
-    struct BardSound *sounds;
-
-    sounds = gBardMusicTable[arg0];
-
+struct BardSound *sub_814A2D0(u16 arg0, u16 arg1)
+{
+    struct BardSound *sounds = gBardMusicTable[arg0];
+    
     return &sounds[arg1];
 }
 
-int sub_814A2EC(struct UnkBard2 *dest, struct UnkBard *src, u16 arg2)
+s32 sub_814A2EC(struct UnkBard2 *dest, struct UnkBard *src, u16 arg2)
 {
-    int i;
-    int j;
-    int thirty;
+    s32 i;
+    s32 j;
+    s32 thirty;
     
     for (i = 0; i < 6; i++)
     {
