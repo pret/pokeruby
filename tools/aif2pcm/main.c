@@ -128,9 +128,8 @@ char *new_file_extension(char *filename, char *ext)
 	return new_filename;
 }
 
-AifData *read_aif(struct Bytes *aif)
+void read_aif(struct Bytes *aif, AifData *aif_data)
 {
-	AifData *aif_data = (AifData *)malloc(sizeof(AifData));
 	aif_data->has_loop = false;
 	aif_data->num_samples = 0;
 
@@ -279,8 +278,6 @@ AifData *read_aif(struct Bytes *aif)
 			pos += chunk_size;
 		}
 	}
-
-	return aif_data;
 }
 
 // This is a table of deltas between sample values in compressed PCM data.
@@ -506,7 +503,8 @@ do { \
 void aif2pcm(const char *aif_filename, const char *pcm_filename, bool compress)
 {
 	struct Bytes *aif = read_bytearray(aif_filename);
-	AifData *aif_data = read_aif(aif);
+	AifData aif_data = {0};
+	read_aif(aif, &aif_data);
 
 	int header_size = 0x10;
 	struct Bytes *pcm;
@@ -515,25 +513,25 @@ void aif2pcm(const char *aif_filename, const char *pcm_filename, bool compress)
 	if (compress)
 	{
 		struct Bytes *input = malloc(sizeof(struct Bytes));
-		input->data = aif_data->samples;
-		input->length = aif_data->num_samples;
+		input->data = aif_data.samples;
+		input->length = aif_data.num_samples;
 		pcm = delta_compress(input);
 		free(input);
 	}
 	else
 	{
 		pcm = malloc(sizeof(struct Bytes));
-		pcm->data = aif_data->samples;
-		pcm->length = aif_data->num_samples;
+		pcm->data = aif_data.samples;
+		pcm->length = aif_data.num_samples;
 	}
 	output.length = header_size + pcm->length;
 	output.data = malloc(output.length);
 
-	uint32_t pitch_adjust = (uint32_t)(aif_data->sample_rate * 1024);
-	uint32_t loop_offset = (uint32_t)(aif_data->loop_offset);
-	uint32_t adjusted_num_samples = (uint32_t)(aif_data->num_samples - 1);
+	uint32_t pitch_adjust = (uint32_t)(aif_data.sample_rate * 1024);
+	uint32_t loop_offset = (uint32_t)(aif_data.loop_offset);
+	uint32_t adjusted_num_samples = (uint32_t)(aif_data.num_samples - 1);
 	uint32_t flags = 0;
-	if (aif_data->has_loop) flags |= 0x40000000;
+	if (aif_data.has_loop) flags |= 0x40000000;
 	if (compress) flags |= 1;
 	STORE_U32_LE(output.data + 0, flags);
 	STORE_U32_LE(output.data + 4, pitch_adjust);
@@ -546,8 +544,7 @@ void aif2pcm(const char *aif_filename, const char *pcm_filename, bool compress)
 	free(aif);
 	free(pcm);
 	free(output.data);
-	free(aif_data->samples);
-	free(aif_data);
+	free(aif_data.samples);
 }
 
 // Reads a .pcm file containing an array of 8-bit samples and produces an .aif file.
