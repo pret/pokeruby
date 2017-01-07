@@ -68,17 +68,16 @@ struct Unk03005E20 {
     u8 var_1F;
 };
 
-extern u8 gUnknown_03000750;
-extern struct Unk03005E20 gUnknown_03005E20;
-extern u8 gUnknown_03005E40[];
-extern u16 (*gUnknown_03005E90)[];
-
 extern u8 unk_2000000[];
 extern u8 unk_2015de0[];
+extern u8 gUnknown_03000750;
 extern u16 gUnknown_03000752;
 extern u16 gUnknown_03000754;
 extern struct Unk3000756 gUnknown_03000756;
+extern struct Unk03005E20 gUnknown_03005E20;
+extern u8 gUnknown_03005E40[];
 extern struct ContestEntry *gUnknown_03005E8C;
+extern u16 (*gUnknown_03005E90)[];
 
 extern u16 (*gUnknown_03005E10)[32][32];
 
@@ -233,112 +232,34 @@ void CB2_QuitContestPainting(void) {
     SetMainCallback2(gMain.savedCallback);
 }
 
-__attribute__((naked))
-void HoldContestPainting(void) {
-    asm(".syntax unified\n\
-	push {lr}\n\
-	sub sp, 0x4\n\
-	ldr r3, _08106844 @ =gUnknown_03000750\n\
-	ldrb r1, [r3]\n\
-	cmp r1, 0x1\n\
-	beq _08106880\n\
-	cmp r1, 0x1\n\
-	bgt _08106848\n\
-	cmp r1, 0\n\
-	beq _0810684E\n\
-	b _081068E6\n\
-	.align 2, 0\n\
-_08106844: .4byte gUnknown_03000750\n\
-_08106848:\n\
-	cmp r1, 0x2\n\
-	beq _081068C0\n\
-	b _081068E6\n\
-_0810684E:\n\
-	ldr r0, _08106874 @ =gPaletteFade\n\
-	ldrb r1, [r0, 0x7]\n\
-	movs r0, 0x80\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	bne _0810685E\n\
-	movs r0, 0x1\n\
-	strb r0, [r3]\n\
-_0810685E:\n\
-	ldr r0, _08106878 @ =gUnknown_03000756\n\
-	ldrb r0, [r0]\n\
-	cmp r0, 0\n\
-	beq _081068E6\n\
-	ldr r1, _0810687C @ =gUnknown_03000754\n\
-	ldrh r0, [r1]\n\
-	cmp r0, 0\n\
-	beq _081068E6\n\
-	subs r0, 0x1\n\
-	b _081068E4\n\
-	.align 2, 0\n\
-_08106874: .4byte gPaletteFade\n\
-_08106878: .4byte gUnknown_03000756\n\
-_0810687C: .4byte gUnknown_03000754\n\
-_08106880:\n\
-	ldr r0, _081068B4 @ =gMain\n\
-	ldrh r2, [r0, 0x2E]\n\
-	ands r1, r2\n\
-	cmp r1, 0\n\
-	bne _08106892\n\
-	movs r0, 0x2\n\
-	ands r0, r2\n\
-	cmp r0, 0\n\
-	beq _081068A4\n\
-_08106892:\n\
-	movs r0, 0x2\n\
-	strb r0, [r3]\n\
-	subs r0, 0x3\n\
-	movs r1, 0\n\
-	str r1, [sp]\n\
-	movs r2, 0\n\
-	movs r3, 0x10\n\
-	bl BeginNormalPaletteFade\n\
-_081068A4:\n\
-	ldr r0, _081068B8 @ =gUnknown_03000756\n\
-	ldrb r0, [r0]\n\
-	cmp r0, 0\n\
-	beq _081068E6\n\
-	ldr r1, _081068BC @ =gUnknown_03000754\n\
-	movs r0, 0\n\
-	b _081068E4\n\
-	.align 2, 0\n\
-_081068B4: .4byte gMain\n\
-_081068B8: .4byte gUnknown_03000756\n\
-_081068BC: .4byte gUnknown_03000754\n\
-_081068C0:\n\
-	ldr r0, _081068EC @ =gPaletteFade\n\
-	ldrb r1, [r0, 0x7]\n\
-	movs r0, 0x80\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	bne _081068D2\n\
-	ldr r0, _081068F0 @ =CB2_QuitContestPainting\n\
-	bl SetMainCallback2\n\
-_081068D2:\n\
-	ldr r0, _081068F4 @ =gUnknown_03000756\n\
-	ldrb r0, [r0]\n\
-	cmp r0, 0\n\
-	beq _081068E6\n\
-	ldr r1, _081068F8 @ =gUnknown_03000754\n\
-	ldrh r0, [r1]\n\
-	cmp r0, 0x1D\n\
-	bhi _081068E6\n\
-	adds r0, 0x1\n\
-_081068E4:\n\
-	strh r0, [r1]\n\
-_081068E6:\n\
-	add sp, 0x4\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_081068EC: .4byte gPaletteFade\n\
-_081068F0: .4byte CB2_QuitContestPainting\n\
-_081068F4: .4byte gUnknown_03000756\n\
-_081068F8: .4byte gUnknown_03000754\n\
-    .syntax divided\n");
+void HoldContestPainting(void)
+{
+    switch (gUnknown_03000750)
+    {
+    case 0:
+        if (!gPaletteFade.active)
+            gUnknown_03000750 = 1;
+        if (gUnknown_03000756.var_0 != 0 && gUnknown_03000754 != 0)
+            gUnknown_03000754--;
+        break;
+    case 1:
+        if ((gMain.newKeys & 1) || (gMain.newKeys & 2))
+        {
+            u8 two = 2;  //needed to make the asm match
+            
+            gUnknown_03000750 = two;
+            BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
+        }
+        if (gUnknown_03000756.var_0 != 0)
+            gUnknown_03000754 = 0;
+        break;
+    case 2:
+        if (!gPaletteFade.active)
+            SetMainCallback2(CB2_QuitContestPainting);
+        if (gUnknown_03000756.var_0 != 0 && gUnknown_03000754 <= 0x1D)
+            gUnknown_03000754++;
+        break;
+    }
 }
 
 void ContestPaintingInitWindow(u8 arg0) {
