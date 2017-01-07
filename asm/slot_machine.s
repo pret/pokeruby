@@ -7609,14 +7609,14 @@ sub_81050C4: @ 81050C4
 	movs r2, 0xC
 	orrs r1, r2
 	strb r1, [r0, 0x5]
-	ldr r1, _081050FC @ =gUnknown_083ED704
+	ldr r1, _081050FC @ =gSubspriteTables_83ED704
 	bl SetSubspriteTables
 	pop {r0}
 	bx r0
 	.align 2, 0
 _081050F4: .4byte gSpriteTemplate_83ED444
 _081050F8: .4byte gSprites
-_081050FC: .4byte gUnknown_083ED704
+_081050FC: .4byte gSubspriteTables_83ED704
 	thumb_func_end sub_81050C4
 
 	thumb_func_start sub_8105100
@@ -7764,7 +7764,7 @@ sub_81051C0: @ 81051C0
 	mov r3, r8
 	orrs r0, r3
 	strb r0, [r1]
-	ldr r1, _08105274 @ =gUnknown_083ED73C
+	ldr r1, _08105274 @ =gSubspriteTables_83ED73C
 	adds r0, r2, 0
 	bl SetSubspriteTables
 	ldr r6, _08105278 @ =0x02000000
@@ -7795,7 +7795,7 @@ sub_81051C0: @ 81051C0
 	mov r3, r8
 	orrs r0, r3
 	strb r0, [r1]
-	ldr r1, _08105280 @ =gUnknown_083ED75C
+	ldr r1, _08105280 @ =gSubspriteTables_83ED75C
 	adds r0, r2, 0
 	bl SetSubspriteTables
 	adds r6, 0x4A
@@ -7810,10 +7810,10 @@ sub_81051C0: @ 81051C0
 	.align 2, 0
 _0810526C: .4byte gSpriteTemplate_83ED474
 _08105270: .4byte gSprites
-_08105274: .4byte gUnknown_083ED73C
+_08105274: .4byte gSubspriteTables_83ED73C
 _08105278: .4byte 0x02000000
 _0810527C: .4byte gSpriteTemplate_83ED48C
-_08105280: .4byte gUnknown_083ED75C
+_08105280: .4byte gSubspriteTables_83ED75C
 	thumb_func_end sub_81051C0
 
 	thumb_func_start sub_8105284
@@ -7850,7 +7850,7 @@ sub_8105284: @ 8105284
 	movs r2, 0x2
 	orrs r1, r2
 	strb r1, [r3]
-	ldr r1, _081052E4 @ =gUnknown_083ED78C
+	ldr r1, _081052E4 @ =gSubspriteTables_83ED78C
 	bl SetSubspriteTables
 	ldr r0, _081052E8 @ =0x02000000
 	adds r0, 0x42
@@ -7862,7 +7862,7 @@ sub_8105284: @ 8105284
 _081052D8: .4byte gSpriteTemplate_83ED4A4
 _081052DC: .4byte gSpriteCoordOffsetX
 _081052E0: .4byte gSprites
-_081052E4: .4byte gUnknown_083ED78C
+_081052E4: .4byte gSubspriteTables_83ED78C
 _081052E8: .4byte 0x02000000
 	thumb_func_end sub_8105284
 
@@ -7997,7 +7997,7 @@ sub_81053A0: @ 81053A0
 	mov r3, r8
 	orrs r0, r3
 	strb r0, [r2, 0x5]
-	ldr r0, _08105454 @ =gUnknown_083ED7B4
+	ldr r0, _08105454 @ =gSubspriteTables_83ED7B4
 	mov r9, r0
 	adds r0, r2, 0
 	mov r1, r9
@@ -8045,7 +8045,7 @@ sub_81053A0: @ 81053A0
 	.align 2, 0
 _0810544C: .4byte gSpriteTemplate_83ED4D4
 _08105450: .4byte gSprites
-_08105454: .4byte gUnknown_083ED7B4
+_08105454: .4byte gSubspriteTables_83ED7B4
 _08105458: .4byte 0x02000000
 	thumb_func_end sub_81053A0
 
@@ -8079,7 +8079,7 @@ sub_810545C: @ 810545C
 	movs r2, 0x4
 	orrs r1, r2
 	strb r1, [r0, 0x5]
-	ldr r1, _081054B0 @ =gUnknown_083ED7D4
+	ldr r1, _081054B0 @ =gSubspriteTables_83ED7D4
 	bl SetSubspriteTables
 	ldr r0, _081054B4 @ =0x02000000
 	adds r0, 0x40
@@ -8090,7 +8090,7 @@ sub_810545C: @ 810545C
 	.align 2, 0
 _081054A8: .4byte gSpriteTemplate_83ED4EC
 _081054AC: .4byte gSprites
-_081054B0: .4byte gUnknown_083ED7D4
+_081054B0: .4byte gSubspriteTables_83ED7D4
 _081054B4: .4byte 0x02000000
 	thumb_func_end sub_810545C
 
@@ -10258,7 +10258,7 @@ _08106468:
 	movs r1, 0
 	movs r2, 0xA0
 	bl LoadPalette
-	ldr r0, _081064B4 @ =gUnknown_083EDE24
+	ldr r0, _081064B4 @ =gPalette_83EDE24
 	movs r1, 0xD0
 	movs r2, 0x20
 	bl LoadPalette
@@ -10271,7 +10271,7 @@ _081064A4: .4byte 0x02010000
 _081064A8: .4byte 0x040000d4
 _081064AC: .4byte 0x80000800
 _081064B0: .4byte gUnknown_08E95A18
-_081064B4: .4byte gUnknown_083EDE24
+_081064B4: .4byte gPalette_83EDE24
 	thumb_func_end sub_8106448
 
 	thumb_func_start sub_81064B8
