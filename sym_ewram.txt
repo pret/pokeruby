@@ -6,9 +6,8 @@
 	.space 0x2E8
 
 	.include "src/link.o"
-	
-	.align 2
 
+	.align 2
 gUnknown_020238C4: @ 20238C4
 	.space 0x1
 

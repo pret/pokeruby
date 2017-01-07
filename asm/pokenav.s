@@ -12455,7 +12455,7 @@ _080F1F4A:
 	movs r1, 0x3
 	orrs r0, r1
 	strb r0, [r4, 0x1]
-	ldr r0, _080F1FB0 @ =gUnknown_083E4450
+	ldr r0, _080F1FB0 @ =gSpriteAffineAnimTable_83E4450
 	str r0, [r4, 0x10]
 	adds r0, r4, 0
 	bl InitSpriteAffineAnim
@@ -12489,7 +12489,7 @@ _080F1F4A:
 	b _080F1FE4
 	.align 2, 0
 _080F1FAC: .4byte 0x00006dad
-_080F1FB0: .4byte gUnknown_083E4450
+_080F1FB0: .4byte gSpriteAffineAnimTable_83E4450
 _080F1FB4: .4byte sub_80F2240
 _080F1FB8: .4byte gUnknown_083DFEC4
 _080F1FBC: .4byte 0x0000030f
