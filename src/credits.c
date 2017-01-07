@@ -338,58 +338,58 @@ static void sub_8143CC0(u8 taskId) {
 #ifdef NONMATCHING
 static void sub_8143D04(u8 taskId) {
     switch (gMain.state) {
-        default:
-        case 0: {
-            u16 i;
+    default:
+    case 0: {
+        u16 i;
 
-            ResetSpriteData();
-            FreeAllSpritePalettes();
-            gReservedSpritePaletteCount = 8;
-            LZ77UnCompVram(&gBirchHelpGfx, (void *) VRAM);
-            LZ77UnCompVram(&gBirchBagTilemap, (void *) (VRAM + 0x3800));
-            LoadPalette(gBirchBagGrassPal + 2, 1, 31 * 2);
+        ResetSpriteData();
+        FreeAllSpritePalettes();
+        gReservedSpritePaletteCount = 8;
+        LZ77UnCompVram(&gBirchHelpGfx, (void *) VRAM);
+        LZ77UnCompVram(&gBirchBagTilemap, (void *) (VRAM + 0x3800));
+        LoadPalette(gBirchBagGrassPal + 2, 1, 31 * 2);
 
-            for (i = 0; i < 0x800; i++) {
-                gHallOfFame.sheet0[i] = 0x11;
-            }
-
-            for (i = 0; i < 0x800; i++) {
-                gHallOfFame.sheet1[i] = 0x22;
-            }
-
-            for (i = 0; i < 0x800; i++) {
-                gHallOfFame.sheet2[i] = 0x33;
-            }
-
-            unk_201f800[0] = 0;
-            unk_201f800[1] = 0x53FF; // light yellow
-            unk_201f800[2] = 0x529F; // light red
-            unk_201f800[3] = 0x7E94; // light blue
-
-            LoadSpriteSheet(&gUnknown_0840CAA0);
-            LoadSpritePalette(&gUnknown_0840CAB0);
-
-            gMain.state += 1;
-            break;
+        for (i = 0; i < 0x800; i++) {
+            gHallOfFame.sheet0[i] = 0x11;
         }
 
-        case 1: {
-            gTasks[taskId].data[3] = CreateTask(sub_8144514, 0);
-            gTasks[gTasks[taskId].data[3]].data[0] = 1;
-            gTasks[gTasks[taskId].data[3]].data[1] = taskId;
-            gTasks[gTasks[taskId].data[3]].data[2] = gTasks[taskId].data[7];
-
-            BeginNormalPaletteFade(-1, 0, 16, 0, 0);
-            REG_BG3HOFS = 0;
-            REG_BG3VOFS = 32;
-            REG_BG3CNT = 0x703;
-            REG_DISPCNT = 0x1940;
-
-            gMain.state = 0;
-            gUnknown_0203935C = 0;
-            gTasks[taskId].func = sub_8143B38;
-            break;
+        for (i = 0; i < 0x800; i++) {
+            gHallOfFame.sheet1[i] = 0x22;
         }
+
+        for (i = 0; i < 0x800; i++) {
+            gHallOfFame.sheet2[i] = 0x33;
+        }
+
+        unk_201f800[0] = 0;
+        unk_201f800[1] = 0x53FF; // light yellow
+        unk_201f800[2] = 0x529F; // light red
+        unk_201f800[3] = 0x7E94; // light blue
+
+        LoadSpriteSheet(&gUnknown_0840CAA0);
+        LoadSpritePalette(&gUnknown_0840CAB0);
+
+        gMain.state += 1;
+        break;
+    }
+
+    case 1: {
+        gTasks[taskId].data[3] = CreateTask(sub_8144514, 0);
+        gTasks[gTasks[taskId].data[3]].data[0] = 1;
+        gTasks[gTasks[taskId].data[3]].data[1] = taskId;
+        gTasks[gTasks[taskId].data[3]].data[2] = gTasks[taskId].data[7];
+
+        BeginNormalPaletteFade(-1, 0, 16, 0, 0);
+        REG_BG3HOFS = 0;
+        REG_BG3VOFS = 32;
+        REG_BG3CNT = 0x703;
+        REG_DISPCNT = 0x1940;
+
+        gMain.state = 0;
+        gUnknown_0203935C = 0;
+        gTasks[taskId].func = sub_8143B38;
+        break;
+    }
     }
 }
 #else
@@ -730,122 +730,122 @@ static void sub_81441B8(u8 taskId) {
 
     switch (gTasks[taskId].data[0])
     {
-        case 0:
-        case 6:
-        case 7:
-        case 8:
-        case 9:
-        default:
-            if (gPaletteFade.active)
-            {
-                return;
-            }
-            gTasks[taskId].data[0] = 1;
-            gTasks[taskId].data[3] = 0x58;
-            gTasks[gTasks[taskId].data[1]].data[14] = 0;
-            gUnknown_02039320 = 0;
+    case 0:
+    case 6:
+    case 7:
+    case 8:
+    case 9:
+    default:
+        if (gPaletteFade.active)
+        {
             return;
+        }
+        gTasks[taskId].data[0] = 1;
+        gTasks[taskId].data[3] = 0x58;
+        gTasks[gTasks[taskId].data[1]].data[14] = 0;
+        gUnknown_02039320 = 0;
+        return;
 
-        case 1:
-            if (gTasks[taskId].data[3] != 0)
-            {
-                gTasks[taskId].data[3] -= 1;
-                return;
-            }
-
-            gTasks[taskId].data[0] += 1;
+    case 1:
+        if (gTasks[taskId].data[3] != 0)
+        {
+            gTasks[taskId].data[3] -= 1;
             return;
+        }
 
-        case 2:
-            REG_DISPCNT &= ~DISPCNT_BG0_ON;
+        gTasks[taskId].data[0] += 1;
+        return;
 
-            if (gTasks[gTasks[taskId].data[1]].func == sub_8143B68)
+    case 2:
+        REG_DISPCNT &= ~DISPCNT_BG0_ON;
+
+        if (gTasks[gTasks[taskId].data[1]].func == sub_8143B68)
+        {
+            if (gTasks[taskId].data[TD_CURRENT_PAGE] < PAGE_COUNT)
             {
-                if (gTasks[taskId].data[TD_CURRENT_PAGE] < PAGE_COUNT)
+
+                for (i = 0; i < 5; i++)
                 {
-
-                    for (i = 0; i < 5; i++)
-                    {
-                        sub_8072BD8(gCreditsEntryPointerTable[gTasks[taskId].data[TD_CURRENT_PAGE]][i]->text, 0,
-                                    9 + i * 2, 240);
-                    }
-
-                    gTasks[taskId].data[TD_CURRENT_PAGE] += 1;
-                    gTasks[taskId].data[0] += 1;
-
-                    gTasks[gTasks[taskId].data[1]].data[14] = 1;
-
-                    if (gTasks[gTasks[taskId].data[1]].data[13] == 1)
-                    {
-                        BeginNormalPaletteFade(0x300, 0, 16, 0, COLOR_LIGHT_GREEN);
-                    }
-                    else
-                    {
-                        BeginNormalPaletteFade(0x300, 0, 16, 0, COLOR_DARK_GREEN);
-                    }
-                    return;
+                    sub_8072BD8(gCreditsEntryPointerTable[gTasks[taskId].data[TD_CURRENT_PAGE]][i]->text, 0,
+                                9 + i * 2, 240);
                 }
 
-
-                gTasks[taskId].data[0] = 10;
-                return;
-            }
-
-            gTasks[gTasks[taskId].data[1]].data[14] = 0;
-            return;
-
-        case 3:
-            REG_DISPCNT |= DISPCNT_BG0_ON;
-
-            if (gPaletteFade.active)
-            {
-                return;
-            }
-
-            gTasks[taskId].data[3] = UNK_DEFINE_82;
-            gTasks[taskId].data[0] += 1;
-            return;
-
-        case 4:
-            if (gTasks[taskId].data[3] != 0)
-            {
-                gTasks[taskId].data[3] -= 1;
-                return;
-            }
-
-            if (sub_8144454((u8) gTasks[taskId].data[2], (u8) gTasks[taskId].data[1]))
-            {
+                gTasks[taskId].data[TD_CURRENT_PAGE] += 1;
                 gTasks[taskId].data[0] += 1;
+
+                gTasks[gTasks[taskId].data[1]].data[14] = 1;
+
+                if (gTasks[gTasks[taskId].data[1]].data[13] == 1)
+                {
+                    BeginNormalPaletteFade(0x300, 0, 16, 0, COLOR_LIGHT_GREEN);
+                }
+                else
+                {
+                    BeginNormalPaletteFade(0x300, 0, 16, 0, COLOR_DARK_GREEN);
+                }
                 return;
             }
 
+
+            gTasks[taskId].data[0] = 10;
+            return;
+        }
+
+        gTasks[gTasks[taskId].data[1]].data[14] = 0;
+        return;
+
+    case 3:
+        REG_DISPCNT |= DISPCNT_BG0_ON;
+
+        if (gPaletteFade.active)
+        {
+            return;
+        }
+
+        gTasks[taskId].data[3] = UNK_DEFINE_82;
+        gTasks[taskId].data[0] += 1;
+        return;
+
+    case 4:
+        if (gTasks[taskId].data[3] != 0)
+        {
+            gTasks[taskId].data[3] -= 1;
+            return;
+        }
+
+        if (sub_8144454((u8) gTasks[taskId].data[2], (u8) gTasks[taskId].data[1]))
+        {
             gTasks[taskId].data[0] += 1;
-
-            if (gTasks[gTasks[taskId].data[1]].data[13] == 1)
-            {
-                BeginNormalPaletteFade(0x300, 0, 0, 16, COLOR_LIGHT_GREEN);
-            }
-            else
-            {
-                BeginNormalPaletteFade(0x300, 0, 0, 16, COLOR_DARK_GREEN);
-            }
-
             return;
+        }
 
-        case 5:
-            if (gPaletteFade.active)
-            {
-                return;
-            }
+        gTasks[taskId].data[0] += 1;
 
-            MenuZeroFillWindowRect(0, 9, 29, 19);
-            gTasks[taskId].data[0] = 2;
+        if (gTasks[gTasks[taskId].data[1]].data[13] == 1)
+        {
+            BeginNormalPaletteFade(0x300, 0, 0, 16, COLOR_LIGHT_GREEN);
+        }
+        else
+        {
+            BeginNormalPaletteFade(0x300, 0, 0, 16, COLOR_DARK_GREEN);
+        }
+
+        return;
+
+    case 5:
+        if (gPaletteFade.active)
+        {
             return;
+        }
 
-        case 10:
-            gTasks[gTasks[taskId].data[1]].data[4] = 1;
-            DestroyTask(taskId);
-            return;
+        MenuZeroFillWindowRect(0, 9, 29, 19);
+        gTasks[taskId].data[0] = 2;
+        return;
+
+    case 10:
+        gTasks[gTasks[taskId].data[1]].data[4] = 1;
+        DestroyTask(taskId);
+        return;
     }
 }
 
