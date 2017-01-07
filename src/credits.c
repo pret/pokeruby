@@ -4,6 +4,7 @@
 #include "menu.h"
 #include "palette.h"
 #include "songs.h"
+#include "sound.h"
 #include "sprite.h"
 #include "task.h"
 #include "text.h"
@@ -47,7 +48,7 @@ extern u16 gUnknown_0840B7FC[32];
 extern struct SpriteSheet gUnknown_0840CAA0;
 extern struct SpritePalette gUnknown_0840CAB0;
 
-void sub_8143B38(u8 taskId);
+static void sub_8143B38(u8 taskId);
 void sub_8143B68(u8 taskId);
 static void sub_8143BFC(u8 taskId);
 static void c2_080C9BFC(u8 taskId);
@@ -56,14 +57,18 @@ static void sub_8143D04(u8 taskId);
 static void sub_8143EBC(u8 taskId);
 static void sub_8143F04(u8 taskId);
 static void sub_8143F3C(u8 taskId);
+static void sub_8143FDC(u8 taskId);
+static void sub_8144024(u8 taskId);
+static void sub_8144080(u8 taskId);
+static void sub_8144114(u8 taskId);
+static void sub_8144130(void);
 
-void sub_8143FDC(u8 taskId);
-void sub_8144130(void);
 void sub_81441B8(u8 taskId);
 void sub_8144514(u8 taskId);
 u8 sub_8144ECC(u8 data, u8 taskId);
 void sub_81450AC(u8 taskId);
 void sub_8145128(u16, u16, u16);
+void sub_81452D0(int, int);
 void sub_81458DC(void);
 
 static void sub_8143948(void) {
@@ -334,7 +339,7 @@ _08143D24:\n\
 	ldr r0, _08143DD8 @ =gBirchGrassTilemap\n\
 	ldr r1, _08143DDC @ =0x06003800\n\
 	bl LZ77UnCompVram\n\
-	ldr r0, _08143DE0 @ =0x0840281a\n\
+	ldr r0, _08143DE0 @ =gBirchBagGrassPal + 2\n\
 	movs r1, 0x1\n\
 	movs r2, 0x3E\n\
 	bl LoadPalette\n\
@@ -541,4 +546,85 @@ static void sub_8143F3C(u8 taskId) {
 
     gTasks[taskId].data[0] = 0x100;
     gTasks[taskId].func = sub_8143FDC;
+}
+
+static void sub_8143FDC(u8 taskId) {
+    if (gTasks[taskId].data[0]) {
+        gTasks[taskId].data[0] -= 1;
+        return;
+    }
+
+    BeginNormalPaletteFade(-1, 6, 0, 16, 0);
+    gTasks[taskId].func = sub_8144024;
+}
+
+static void sub_8144024(u8 taskId) {
+    if (gPaletteFade.active) {
+        return;
+    }
+
+    sub_81452D0(0x3800, 0);
+
+    BeginNormalPaletteFade(-1, 0, 0, 0, 0);
+    gTasks[taskId].data[0] = 7200;
+    gTasks[taskId].func = sub_8144080;
+}
+
+static void sub_8144080(u8 taskId) {
+    if (gPaletteFade.active) {
+        return;
+    }
+
+    if (gTasks[taskId].data[0] == 0) {
+        FadeOutBGM(4);
+        BeginNormalPaletteFade(-1, 8, 0, 16, 0xFFFF);
+        gTasks[taskId].func = sub_8144114;
+        return;
+    }
+
+    if (gMain.newKeys) {
+        FadeOutBGM(4);
+        BeginNormalPaletteFade(-1, 8, 0, 16, 0xFFFF);
+        gTasks[taskId].func = sub_8144114;
+        return;
+    }
+
+    if (gTasks[taskId].data[0] == 7144) {
+        FadeOutBGM(8);
+    }
+
+    if (gTasks[taskId].data[0] == 6840) {
+        m4aSongNumStart(BGM_END);
+    }
+
+    gTasks[taskId].data[0] -= 1;
+}
+
+static void sub_8144114(u8 taskId) {
+    if (gPaletteFade.active) {
+        return;
+    }
+
+    SoftReset(0xFF);
+}
+
+static void sub_8144130(void) {
+    REG_DISPCNT = 0;
+
+    REG_BG3HOFS = 0;
+    REG_BG3VOFS = 0;
+    REG_BG2HOFS = 0;
+    REG_BG2VOFS = 0;
+    REG_BG1HOFS = 0;
+    REG_BG1VOFS = 0;
+    REG_BG0HOFS = 0;
+    REG_BG0VOFS = 0;
+
+    REG_BLDCNT = 0;
+    REG_BLDALPHA = 0;
+    REG_BLDY = 0;
+
+    DmaFill16(3, 0, (void *)VRAM, VRAM_SIZE);
+    DmaFill32(3, 0, (void *)OAM, OAM_SIZE);
+    DmaFill16(3, 0, (void *)(PLTT + 2), PLTT_SIZE - 2);
 }
