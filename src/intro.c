@@ -1070,7 +1070,7 @@ void sub_813CE30(u16 scrX, u16 scrY, u16 zoom, u16 alpha)
     REG_BG2Y = dest.dy;
 }
 
-u8 sub_813CE88(u16 species, s16 x, s16 y, u16 d, u8 front)
+u16 sub_813CE88(u16 species, s16 x, s16 y, u16 d, u8 front)
 {
     void *pal;
     u8 spriteId;
