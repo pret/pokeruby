@@ -1,0 +1,544 @@
+#include "global.h"
+#include "m4a.h"
+#include "main.h"
+#include "menu.h"
+#include "palette.h"
+#include "songs.h"
+#include "sprite.h"
+#include "task.h"
+#include "text.h"
+
+struct Unk201C000 {
+    u8 pad_00[0x88];
+    u16 var_88;
+    u16 var_8A;
+    u16 var_8C;
+};
+
+struct HallOfFame {
+    u8 sheet0[0x800];
+    u8 sheet1[0x800];
+    u8 sheet2[0x800];
+};
+
+extern struct Unk201C000 unk_201C000;
+
+extern struct HallOfFame gHallOfFame;
+extern u8 unk_201e800[0x800];
+extern u8 unk_201f000[0x800];
+extern u16 unk_201f800[];
+
+extern s16 gUnknown_02039320;
+extern u16 gUnknown_02039322;
+extern u8 gUnknown_02039324;
+extern u8 gUnknown_02039325;
+extern u16 gUnknown_0203935C;
+
+extern u8 gReservedSpritePaletteCount;
+
+// data/starter_choose
+extern u16 gBirchBagGrassPal[32];
+extern u8 gBirchBagTilemap[];
+extern u8 gBirchHelpGfx[];
+
+//  data/credits
+extern u16 gUnknown_0840B7BC[32];
+extern u16 gUnknown_0840B7FC[32];
+extern struct SpriteSheet gUnknown_0840CAA0;
+extern struct SpritePalette gUnknown_0840CAB0;
+
+void sub_8143B38(u8 taskId);
+void sub_8143B68(u8 taskId);
+static void sub_8143BFC(u8 taskId);
+static void c2_080C9BFC(u8 taskId);
+static void sub_8143CC0(u8 taskId);
+static void sub_8143D04(u8 taskId);
+static void sub_8143EBC(u8 taskId);
+static void sub_8143F04(u8 taskId);
+static void sub_8143F3C(u8 taskId);
+
+void sub_8143FDC(u8 taskId);
+void sub_8144130(void);
+void sub_81441B8(u8 taskId);
+void sub_8144514(u8 taskId);
+u8 sub_8144ECC(u8 data, u8 taskId);
+void sub_81450AC(u8 taskId);
+void sub_8145128(u16, u16, u16);
+void sub_81458DC(void);
+
+static void sub_8143948(void) {
+    LoadOam();
+    ProcessSpriteCopyRequests();
+    TransferPlttBuffer();
+}
+
+static void sub_814395C(void) {
+    RunTasks();
+    AnimateSprites();
+    BuildOamBuffer();
+    UpdatePaletteFade();
+
+    if (!(gMain.heldKeys & B_BUTTON)) {
+        return;
+    }
+
+    if (!gUnknown_02039324) {
+        return;
+    }
+
+    if (gTasks[gUnknown_02039322].func != sub_8143B68) {
+        return;
+    }
+
+    sub_8143948();
+    RunTasks();
+    AnimateSprites();
+    BuildOamBuffer();
+    UpdatePaletteFade();
+    gUnknown_02039325 = 1;
+}
+
+void sub_81439D0(void) {
+    u8 taskId;
+    s16 taskId3;
+    u8 taskId2;
+    u16 savedIme;
+    struct Unk201C000 * c000;
+
+    sub_8144130();
+    SetVBlankCallback(NULL);
+    ResetPaletteFade();
+    ResetTasks();
+
+    taskId = CreateTask(sub_8143B38, 0);
+
+    gTasks[taskId].data[4] = 0;
+    gTasks[taskId].data[7] = 0;
+    gTasks[taskId].data[11] = 0;
+    gTasks[taskId].data[13] = 1;
+
+    while (TRUE) {
+        if (sub_8144ECC(0, taskId)) {
+            break;
+        }
+    }
+
+    taskId3 = gTasks[taskId].data[1];
+    gTasks[taskId3].data[0] = 40;
+
+    SetUpWindowConfig(&gWindowConfig_81E7208);
+    InitMenuWindow(&gWindowConfig_81E7208);
+    LoadPalette(&gUnknown_0840B7BC, 0x80, sizeof(gUnknown_0840B7BC));
+
+    CpuCopy16(&gUnknown_0840B7FC, (void *) (VRAM + 0xBEE0), sizeof(gUnknown_0840B7FC));
+
+    REG_BG0VOFS = 0xFFFC;
+
+    taskId2 = CreateTask(sub_81441B8, 0);
+
+    gTasks[taskId2].data[1] = taskId;
+    gTasks[taskId].data[15] = taskId2;
+
+    BeginNormalPaletteFade(-1, 0, 16, 0, 0);
+
+
+    savedIme = REG_IME;
+    REG_IME = 0;
+    REG_IE |= INTR_FLAG_VBLANK;
+    REG_IME = savedIme;
+    REG_DISPSTAT |= DISPSTAT_VBLANK_INTR;
+
+
+    SetVBlankCallback(sub_8143948);
+    m4aSongNumStart(BGM_THANKFOR);
+    SetMainCallback2(sub_814395C);
+    gUnknown_02039325 = 0;
+
+    c000 = &unk_201C000;
+
+    sub_81458DC();
+
+    c000->var_88 = 0;
+    c000->var_8A = 0;
+    c000->var_8C = 0;
+
+    gUnknown_02039322 = taskId;
+}
+
+void sub_8143B38(u8 taskId) {
+    if (gPaletteFade.active) {
+        return;
+    }
+
+    gTasks[taskId].func = sub_8143B68;
+}
+
+void sub_8143B68(u8 taskId) {
+    u16 data11;
+
+    if (gTasks[taskId].data[4]) {
+        s16 secondaryTaskId;
+
+        secondaryTaskId = gTasks[taskId].data[1];
+        gTasks[secondaryTaskId].data[0] = 30;
+
+        gTasks[taskId].data[12] = 0x100;
+        gTasks[taskId].func = sub_8143EBC;
+        return;
+    }
+
+    gUnknown_02039320 = 0;
+    data11 = gTasks[taskId].data[11];
+
+    if (gTasks[taskId].data[11] == 1) {
+        gTasks[taskId].data[13] = data11;
+        gTasks[taskId].data[11] = 0;
+        BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+        gTasks[taskId].func = sub_8143BFC;
+    } else if (gTasks[taskId].data[11] == 2) {
+        gTasks[taskId].data[13] = data11;
+        gTasks[taskId].data[11] = 0;
+        BeginNormalPaletteFade(-1, 0, 0, 16, 0);
+        gTasks[taskId].func = sub_8143CC0;
+    }
+}
+
+static void sub_8143BFC(u8 taskId) {
+    if (gPaletteFade.active) {
+        return;
+    }
+
+    REG_DISPCNT = 0;
+    sub_81450AC(taskId);
+    gTasks[taskId].func = c2_080C9BFC;
+}
+
+static void c2_080C9BFC(u8 taskId) {
+    u16 backup;
+
+    SetVBlankCallback(NULL);
+
+    if (!sub_8144ECC(gTasks[taskId].data[7], taskId)) {
+        return;
+    }
+
+    BeginNormalPaletteFade(-1, 0, 16, 0, 0);
+
+    backup = REG_IME;
+    REG_IME = 0;
+    REG_IE |= INTR_FLAG_VBLANK;
+    REG_IME = backup;
+    REG_DISPSTAT |= DISPSTAT_VBLANK_INTR;
+
+    SetVBlankCallback(sub_8143948);
+    gTasks[taskId].func = sub_8143B38;
+}
+
+static void sub_8143CC0(u8 taskId) {
+    if (gPaletteFade.active) {
+        return;
+    }
+
+    REG_DISPCNT = 0;
+    sub_81450AC(taskId);
+    gTasks[taskId].func = sub_8143D04;
+}
+
+#ifdef NONMATCHING
+static void sub_8143D04(u8 taskId) {
+    switch (gMain.state) {
+        default:
+        case 0: {
+            u16 i;
+
+            ResetSpriteData();
+            FreeAllSpritePalettes();
+            gReservedSpritePaletteCount = 8;
+            LZ77UnCompVram(&gBirchHelpGfx, (void *) VRAM);
+            LZ77UnCompVram(&gBirchBagTilemap, (void *) (VRAM + 0x3800));
+            LoadPalette(gBirchBagGrassPal + 2, 1, 31 * 2);
+
+            for (i = 0; i < 0x800; i++) {
+                gHallOfFame.sheet0[i] = 0x11;
+            }
+
+            for (i = 0; i < 0x800; i++) {
+                gHallOfFame.sheet1[i] = 0x22;
+            }
+
+            for (i = 0; i < 0x800; i++) {
+                gHallOfFame.sheet2[i] = 0x33;
+            }
+
+            unk_201f800[0] = 0;
+            unk_201f800[1] = 0x53FF;
+            unk_201f800[2] = 0x529F;
+            unk_201f800[3] = 0x7E94;
+
+            LoadSpriteSheet(&gUnknown_0840CAA0);
+            LoadSpritePalette(&gUnknown_0840CAB0);
+
+            gMain.state += 1;
+            break;
+        }
+
+        case 1: {
+            gTasks[taskId].data[3] = CreateTask(sub_8144514, 0);
+            gTasks[gTasks[taskId].data[3]].data[0] = 1;
+            gTasks[gTasks[taskId].data[3]].data[1] = taskId;
+            gTasks[gTasks[taskId].data[3]].data[2] = gTasks[taskId].data[7];
+
+            BeginNormalPaletteFade(-1, 0, 16, 0, 0);
+            REG_BG3HOFS = 0;
+            REG_BG3VOFS = 32;
+            REG_BG3CNT = 0x703;
+            REG_DISPCNT = 0x1940;
+
+            gMain.state = 0;
+            gUnknown_0203935C = 0;
+            gTasks[taskId].func = sub_8143B38;
+            break;
+        }
+    }
+}
+#else
+__attribute__((naked))
+static void sub_8143D04(u8 taskId) {
+    asm(".syntax unified\n\
+	push {r4-r7,lr}\n\
+	mov r7, r9\n\
+	mov r6, r8\n\
+	push {r6,r7}\n\
+	sub sp, 0x4\n\
+	lsls r0, 24\n\
+	lsrs r6, r0, 24\n\
+	ldr r0, _08143DC8 @ =gMain\n\
+	ldr r1, _08143DCC @ =0x0000043c\n\
+	adds r1, r0\n\
+	mov r8, r1\n\
+	ldrb r7, [r1]\n\
+	cmp r7, 0\n\
+	beq _08143D24\n\
+	cmp r7, 0x1\n\
+	beq _08143E0C\n\
+_08143D24:\n\
+	bl ResetSpriteData\n\
+	bl FreeAllSpritePalettes\n\
+	ldr r1, _08143DD0 @ =gReservedSpritePaletteCount\n\
+	movs r0, 0x8\n\
+	strb r0, [r1]\n\
+	ldr r0, _08143DD4 @ =gBirchHelpGfx\n\
+	movs r1, 0xC0\n\
+	lsls r1, 19\n\
+	bl LZ77UnCompVram\n\
+	ldr r0, _08143DD8 @ =gBirchGrassTilemap\n\
+	ldr r1, _08143DDC @ =0x06003800\n\
+	bl LZ77UnCompVram\n\
+	ldr r0, _08143DE0 @ =0x0840281a\n\
+	movs r1, 0x1\n\
+	movs r2, 0x3E\n\
+	bl LoadPalette\n\
+	movs r1, 0\n\
+	ldr r4, _08143DE4 @ =0x0201e000\n\
+	movs r3, 0x11\n\
+	ldr r2, _08143DE8 @ =0x000007ff\n\
+_08143D56:\n\
+	adds r0, r1, r4\n\
+	strb r3, [r0]\n\
+	adds r0, r1, 0x1\n\
+	lsls r0, 16\n\
+	lsrs r1, r0, 16\n\
+	cmp r1, r2\n\
+	bls _08143D56\n\
+	movs r1, 0\n\
+	ldr r2, _08143DEC @ =0x0201f800\n\
+	ldr r6, _08143DF0 @ =gUnknown_0840CAA0\n\
+	ldr r0, _08143DF4 @ =0xfffff000\n\
+	adds r5, r2, r0\n\
+	movs r4, 0x22\n\
+	ldr r3, _08143DE8 @ =0x000007ff\n\
+_08143D72:\n\
+	adds r0, r1, r5\n\
+	strb r4, [r0]\n\
+	adds r0, r1, 0x1\n\
+	lsls r0, 16\n\
+	lsrs r1, r0, 16\n\
+	cmp r1, r3\n\
+	bls _08143D72\n\
+	movs r1, 0\n\
+	ldr r5, _08143DF8 @ =0x0201f000\n\
+	movs r4, 0x33\n\
+	ldr r3, _08143DE8 @ =0x000007ff\n\
+_08143D88:\n\
+	adds r0, r1, r5\n\
+	strb r4, [r0]\n\
+	adds r0, r1, 0x1\n\
+	lsls r0, 16\n\
+	lsrs r1, r0, 16\n\
+	cmp r1, r3\n\
+	bls _08143D88\n\
+	movs r0, 0\n\
+	strh r0, [r2]\n\
+	ldr r1, _08143DFC @ =0x000053ff\n\
+	adds r0, r1, 0\n\
+	strh r0, [r2, 0x2]\n\
+	ldr r1, _08143E00 @ =0x0000529f\n\
+	adds r0, r1, 0\n\
+	strh r0, [r2, 0x4]\n\
+	ldr r1, _08143E04 @ =0x00007e94\n\
+	adds r0, r1, 0\n\
+	strh r0, [r2, 0x6]\n\
+	adds r0, r6, 0\n\
+	bl LoadSpriteSheet\n\
+	ldr r0, _08143E08 @ =gUnknown_0840CAB0\n\
+	bl LoadSpritePalette\n\
+	ldr r1, _08143DC8 @ =gMain\n\
+	ldr r2, _08143DCC @ =0x0000043c\n\
+	adds r1, r2\n\
+	ldrb r0, [r1]\n\
+	adds r0, 0x1\n\
+	strb r0, [r1]\n\
+	b _08143E90\n\
+	.align 2, 0\n\
+_08143DC8: .4byte gMain\n\
+_08143DCC: .4byte 0x0000043c\n\
+_08143DD0: .4byte gReservedSpritePaletteCount\n\
+_08143DD4: .4byte gBirchHelpGfx\n\
+_08143DD8: .4byte gBirchGrassTilemap\n\
+_08143DDC: .4byte 0x06003800\n\
+_08143DE0: .4byte gBirchBagGrassPal + 2\n\
+_08143DE4: .4byte 0x0201e000\n\
+_08143DE8: .4byte 0x000007ff\n\
+_08143DEC: .4byte 0x0201f800\n\
+_08143DF0: .4byte gUnknown_0840CAA0\n\
+_08143DF4: .4byte 0xfffff000\n\
+_08143DF8: .4byte 0x0201f000\n\
+_08143DFC: .4byte 0x000053ff\n\
+_08143E00: .4byte 0x0000529f\n\
+_08143E04: .4byte 0x00007e94\n\
+_08143E08: .4byte gUnknown_0840CAB0\n\
+_08143E0C:\n\
+	ldr r0, _08143EA0 @ =sub_8144514\n\
+	movs r1, 0\n\
+	bl CreateTask\n\
+	ldr r2, _08143EA4 @ =gTasks\n\
+	lsls r4, r6, 2\n\
+	adds r4, r6\n\
+	lsls r4, 3\n\
+	adds r4, r2\n\
+	lsls r0, 24\n\
+	lsrs r0, 24\n\
+	movs r1, 0\n\
+	mov r9, r1\n\
+	movs r5, 0\n\
+	strh r0, [r4, 0xE]\n\
+	movs r0, 0xE\n\
+	ldrsh r1, [r4, r0]\n\
+	lsls r0, r1, 2\n\
+	adds r0, r1\n\
+	lsls r0, 3\n\
+	adds r0, r2\n\
+	strh r7, [r0, 0x8]\n\
+	movs r0, 0xE\n\
+	ldrsh r1, [r4, r0]\n\
+	lsls r0, r1, 2\n\
+	adds r0, r1\n\
+	lsls r0, 3\n\
+	adds r0, r2\n\
+	strh r6, [r0, 0xA]\n\
+	movs r0, 0xE\n\
+	ldrsh r1, [r4, r0]\n\
+	lsls r0, r1, 2\n\
+	adds r0, r1\n\
+	lsls r0, 3\n\
+	adds r0, r2\n\
+	ldrh r1, [r4, 0x16]\n\
+	strh r1, [r0, 0xC]\n\
+	movs r0, 0x1\n\
+	negs r0, r0\n\
+	str r5, [sp]\n\
+	movs r1, 0\n\
+	movs r2, 0x10\n\
+	movs r3, 0\n\
+	bl BeginNormalPaletteFade\n\
+	ldr r0, _08143EA8 @ =REG_BG3HOFS\n\
+	strh r5, [r0]\n\
+	ldr r1, _08143EAC @ =REG_BG3VOFS\n\
+	movs r0, 0x20\n\
+	strh r0, [r1]\n\
+	subs r1, 0x10\n\
+	ldr r2, _08143EB0 @ =0x00000703\n\
+	adds r0, r2, 0\n\
+	strh r0, [r1]\n\
+	subs r1, 0xE\n\
+	movs r2, 0xCA\n\
+	lsls r2, 5\n\
+	adds r0, r2, 0\n\
+	strh r0, [r1]\n\
+	mov r1, r9\n\
+	mov r0, r8\n\
+	strb r1, [r0]\n\
+	ldr r0, _08143EB4 @ =gUnknown_0203935C\n\
+	strh r5, [r0]\n\
+	ldr r0, _08143EB8 @ =sub_8143B38\n\
+	str r0, [r4]\n\
+_08143E90:\n\
+	add sp, 0x4\n\
+	pop {r3,r4}\n\
+	mov r8, r3\n\
+	mov r9, r4\n\
+	pop {r4-r7}\n\
+	pop {r0}\n\
+	bx r0\n\
+	.align 2, 0\n\
+_08143EA0: .4byte sub_8144514\n\
+_08143EA4: .4byte gTasks\n\
+_08143EA8: .4byte 0x4000000 + 0x1c\n\
+_08143EAC: .4byte 0x4000000 + 0x1e\n\
+_08143EB0: .4byte 0x00000703\n\
+_08143EB4: .4byte gUnknown_0203935C\n\
+_08143EB8: .4byte sub_8143B38\n\
+    .syntax divided\n");
+}
+#endif
+
+static void sub_8143EBC(u8 taskId) {
+    if (gTasks[taskId].data[12]) {
+        gTasks[taskId].data[12] -= 1;
+        return;
+    }
+
+    BeginNormalPaletteFade(-1, 12, 0, 16, 0);
+    gTasks[taskId].func = sub_8143F04;
+}
+
+static void sub_8143F04(u8 taskId) {
+    if (gPaletteFade.active) {
+        return;
+    }
+
+    sub_81450AC(taskId);
+    gTasks[taskId].func = sub_8143F3C;
+}
+
+static void sub_8143F3C(u8 taskId) {
+    u16 backup;
+
+    sub_8144130();
+    ResetPaletteFade();
+    sub_8145128(0, 0x3800, 0);
+    ResetSpriteData();
+    FreeAllSpritePalettes();
+    BeginNormalPaletteFade(-1, 8, 16, 0, 0);
+
+    REG_BG0CNT = 0x700;
+    backup = REG_IME;
+    REG_IME = 0;
+    REG_IE |= INTR_FLAG_VBLANK;
+    REG_IME = backup;
+    REG_DISPSTAT |= DISPSTAT_VBLANK_INTR;
+    REG_DISPCNT = 0x140;
+
+    gTasks[taskId].data[0] = 0x100;
+    gTasks[taskId].func = sub_8143FDC;
+}
