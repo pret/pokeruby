@@ -465,27 +465,8 @@ void sub_8134AC0(void *);
 // src/player_pc.o
 void NewGameInitPCItems(void);
 
-// asm/intro.o
-void sub_813CAF4(u8);
-void intro_reset_and_hide_bgs(void);
-void sub_813CCE8(u8);
+// src/intro.o
 void sub_813CE30(u16, u16, u16, u16);
-u16 sub_813CE88(u16, s16, s16, u16, u8);
-u8 sub_813CFA8(u16, u16, u16, u16);
-void sub_813D084(u8);
-u8 CreateWaterDrop(s16, s16, u16, u16, u16, u8);
-void sub_813D788(struct Sprite *);
-void sub_813D880(struct Sprite *);
-u8 CreateGameFreakLogo(s16, s16, u8);
-void sub_813DB9C(struct Sprite *);
-void sub_813DE70(struct Sprite *);
-void sub_813E10C(struct Sprite *);
-void sub_813E210(struct Sprite *);
-void sub_813E580(u16, u16);
-void sub_813E7C0(u8);
-void sub_813E930(/*TODO: arg types*/);
-void InitIntroTorchicAttackAnim(u8);
-void InitIntroMudkipAttackAnim(/*TODO: arg types*/);
 
 // asm/braille_puzzles.o
 bool8 ShouldDoBrailleStrengthEffect(void);
