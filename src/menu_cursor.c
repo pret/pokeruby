@@ -13,7 +13,7 @@ extern struct SpriteTemplate gSpriteTemplate_842F298[];
 extern struct Subsprite *gUnknown_0842F5BC[];
 
 extern struct SubspriteTable gSubspriteTables_842F5C0[];
-extern struct SubspriteTable gUnknown_0842F6C0[];
+extern struct SubspriteTable gSubspriteTables_842F6C0[];
 extern struct SubspriteTable gUnknown_0842F758[];
 
 extern struct Subsprite gUnknown_0842F780;
@@ -601,6 +601,6 @@ void sub_814ADF4(u8 a1)
         a1 = 0;
 
     if (gUnknown_0203A3D2 != 0x40)
-        SetSubspriteTables(&gSprites[gUnknown_0203A3D2], &gUnknown_0842F6C0[a1]);
+        SetSubspriteTables(&gSprites[gUnknown_0203A3D2], &gSubspriteTables_842F6C0[a1]);
     return;
 }
