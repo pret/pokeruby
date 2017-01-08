@@ -833,7 +833,7 @@ int main(int argc, char **argv)
 		}
 	}
 
-	if (strcmp(extension, "aif") == 0)
+	if (strcmp(extension, "aif") == 0 || strcmp(extension, "aiff") == 0)
 	{
 		if (argc >= 3)
 		{
