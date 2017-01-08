@@ -400,11 +400,9 @@ struct Bytes *delta_compress(struct Bytes *pcm)
 			break;
 		}
 		hi = 0;
-		diff = pcm->data[i++] - base;
-		if (diff > 49)
-		{
-			diff = -diff;
-		}
+		diff = ((int8_t)pcm->data[i++]) - base;
+		if (diff > 49) diff = 49;
+		if (diff < -64) diff = -64;
 		if (diff < 0)
 		{
 			for (l = 8; l < 16; l++)
@@ -429,8 +427,9 @@ struct Bytes *delta_compress(struct Bytes *pcm)
 		}
 		for (k = 0; k < 31; k++)
 		{
-			diff = pcm->data[i++] - base;
-			if (diff > 49) diff = -diff;
+			diff = ((int8_t)pcm->data[i++]) - base;
+			if (diff > 49) diff = 49;
+			if (diff < -64) diff = -64;
 			if (diff < 0)
 			{
 				for (l = 8; l < 16; l++)
@@ -453,8 +452,9 @@ struct Bytes *delta_compress(struct Bytes *pcm)
 			{
 				break;
 			}
-			diff = pcm->data[i++] - base;
-			if (diff > 49) diff = -diff;
+			diff = ((int8_t)pcm->data[i++]) - base;
+			if (diff > 49) diff = 49;
+			if (diff < -64) diff = -64;
 			if (diff < 0)
 			{
 				for (l = 8; l < 16; l++)
