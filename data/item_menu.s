@@ -70,8 +70,9 @@ gUnknown_083C16FC:: @ 83C16FC
 	.4byte sub_80A65AC
 	.4byte sub_80A6618
 
+	.align 1
 gUnknown_083C1704:: @ 83C1704
-	.incbin "baserom.gba", 0x003c1704, 0x4
+	.2byte 0x41EE, 0x7FFF
 
 gUnknown_083C1708:: @ 83C1708
 	.byte 4, 5
@@ -81,7 +82,7 @@ gUnknown_083C170A:: @ 83C170A
 
 	.align 2
 gPalette_83C170C:: @ 83C170C
-	.incbin "baserom.gba", 0x003c170c, 0x20
+	.incbin "graphics/unknown/83C170C.gbapal"
 
 	.align 2
 gSpriteImage_83C172C:: @ 83C172C

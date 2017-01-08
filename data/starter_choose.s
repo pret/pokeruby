@@ -73,7 +73,10 @@ gOamData_83F76DC:: @ 83F76DC
 
 	.align 2
 gUnknown_083F76E4:: @ 83F76E4
-	.incbin "baserom.gba", 0x003f76e4, 0x8
+	.byte  60, 32
+	.byte 120, 56
+	.byte 180, 32
+	.byte   0,  0
 
 	.align 2
 gSpriteAnim_83F76EC:: @ 83F76EC
@@ -124,8 +127,11 @@ gSpriteAnimTable_83F7750:: @ 83F7750
 gSpriteAnimTable_83F7758:: @ 83F7758
 	.4byte gSpriteAnim_83F7744
 
-Unknown_83F775C:
-	.incbin "baserom.gba", 0x003f775c, 0x18
+	.align 2
+gSpriteAffineAnim_83F775C:: @ 83F775C
+	obj_rot_scal_anim_frame 0x10, 0x10, 0, 0
+	obj_rot_scal_anim_frame 0x10, 0x10, 0, 15
+	obj_rot_scal_anim_end
 
 	.align 2
 gSpriteAffineAnim_83F7774:: @ 83F7774
@@ -134,8 +140,8 @@ gSpriteAffineAnim_83F7774:: @ 83F7774
 	obj_rot_scal_anim_end
 
 	.align 2
-gUnknown_083F778C:: @ 83F778C
-	.4byte Unknown_83F775C
+gSpriteAffineAnimTable_83F778C:: @ 83F778C
+	.4byte gSpriteAffineAnim_83F775C
 
 	.align 2
 gSpriteAffineAnimTable_83F7790:: @ 83F7790
