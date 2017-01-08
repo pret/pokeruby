@@ -1291,111 +1291,40 @@ void BattleAICmd_unk_30(void)
     gAIScriptPtr += 1;
 }
 
-// same function as above but no for loop.
-__attribute__((naked))
 void BattleAICmd_if_damage_bonus(void)
 {
-    asm(".syntax unified\n\
-    push {r4,r5,lr}\n\
-    ldr r0, _08108928 @ =gUnknown_02024DEC\n\
-    movs r1, 0\n\
-    strh r1, [r0]\n\
-    ldr r2, _0810892C @ =0x02000000\n\
-    ldr r3, _08108930 @ =0x0001601c\n\
-    adds r0, r2, r3\n\
-    strb r1, [r0]\n\
-    adds r3, 0x3\n\
-    adds r0, r2, r3\n\
-    movs r3, 0x1\n\
-    strb r3, [r0]\n\
-    ldr r5, _08108934 @ =gUnknown_02024C68\n\
-    strb r1, [r5]\n\
-    ldr r0, _08108938 @ =gCritMultiplier\n\
-    strb r3, [r0]\n\
-    ldr r4, _0810893C @ =gUnknown_02024BEC\n\
-    movs r0, 0x28\n\
-    str r0, [r4]\n\
-    ldr r1, _08108940 @ =gUnknown_02024BE6\n\
-    movs r0, 0xB4\n\
-    lsls r0, 9\n\
-    adds r2, r0\n\
-    ldrh r0, [r2, 0x2]\n\
-    strh r0, [r1]\n\
-    ldrh r0, [r1]\n\
-    ldr r1, _08108944 @ =gUnknown_02024C07\n\
-    ldrb r1, [r1]\n\
-    ldr r2, _08108948 @ =gUnknown_02024C08\n\
-    ldrb r2, [r2]\n\
-    bl move_effectiveness_something\n\
-    ldr r0, [r4]\n\
-    cmp r0, 0x78\n\
-    bne _081088D6\n\
-    movs r0, 0x50\n\
-    str r0, [r4]\n\
-_081088D6:\n\
-    ldr r0, [r4]\n\
-    cmp r0, 0xF0\n\
-    bne _081088E0\n\
-    movs r0, 0xA0\n\
-    str r0, [r4]\n\
-_081088E0:\n\
-    ldr r0, [r4]\n\
-    cmp r0, 0x1E\n\
-    bne _081088EA\n\
-    movs r0, 0x14\n\
-    str r0, [r4]\n\
-_081088EA:\n\
-    ldr r0, [r4]\n\
-    cmp r0, 0xF\n\
-    bne _081088F4\n\
-    movs r0, 0xA\n\
-    str r0, [r4]\n\
-_081088F4:\n\
-    ldrb r1, [r5]\n\
-    movs r0, 0x8\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _08108902\n\
-    movs r0, 0\n\
-    str r0, [r4]\n\
-_08108902:\n\
-    ldrb r0, [r4]\n\
-    ldr r3, _0810894C @ =gAIScriptPtr\n\
-    ldr r2, [r3]\n\
-    ldrb r1, [r2, 0x1]\n\
-    cmp r0, r1\n\
-    bne _08108950\n\
-    ldrb r1, [r2, 0x2]\n\
-    ldrb r0, [r2, 0x3]\n\
-    lsls r0, 8\n\
-    orrs r1, r0\n\
-    ldrb r0, [r2, 0x4]\n\
-    lsls r0, 16\n\
-    orrs r1, r0\n\
-    ldrb r0, [r2, 0x5]\n\
-    lsls r0, 24\n\
-    orrs r1, r0\n\
-    str r1, [r3]\n\
-    b _08108954\n\
-    .align 2, 0\n\
-_08108928: .4byte gUnknown_02024DEC\n\
-_0810892C: .4byte 0x02000000\n\
-_08108930: .4byte 0x0001601c\n\
-_08108934: .4byte gUnknown_02024C68\n\
-_08108938: .4byte gCritMultiplier\n\
-_0810893C: .4byte gUnknown_02024BEC\n\
-_08108940: .4byte gUnknown_02024BE6\n\
-_08108944: .4byte gUnknown_02024C07\n\
-_08108948: .4byte gUnknown_02024C08\n\
-_0810894C: .4byte gAIScriptPtr\n\
-_08108950:\n\
-    adds r0, r2, 0x6\n\
-    str r0, [r3]\n\
-_08108954:\n\
-    pop {r4,r5}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .syntax divided\n");
+    struct AI_ThinkingStruct *ai;
+    u8 damageVar;
+
+    gUnknown_02024DEC = 0;
+    battle_2000000.unk.unk1 = 0;
+    battle_2000000.unk.unk4 = 1;
+    gUnknown_02024C68 = 0;
+    gCritMultiplier = 1;
+
+    gUnknown_02024BEC = 40;
+    gUnknown_02024BE6 = (ai = &battle_2000000.ai)->unk2;
+    
+    move_effectiveness_something(gUnknown_02024BE6, gUnknown_02024C07, gUnknown_02024C08);
+    
+    if (gUnknown_02024BEC == 120)
+        gUnknown_02024BEC = 80;
+    if(gUnknown_02024BEC == 240)
+        gUnknown_02024BEC = 160;
+    if(gUnknown_02024BEC == 30)
+        gUnknown_02024BEC = 20;
+    if(gUnknown_02024BEC == 15)
+        gUnknown_02024BEC = 10;
+
+    if(gUnknown_02024C68 & 8)
+        gUnknown_02024BEC = 0;
+
+    // i have to store 2024BEC in a local variable before the comparison or else it will not match.
+    damageVar = gUnknown_02024BEC;
+    if(damageVar == gAIScriptPtr[1])
+        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
+    else
+        gAIScriptPtr += 6;
 }
 
 void BattleAICmd_unk_32(void)
