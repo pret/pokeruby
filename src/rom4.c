@@ -26,7 +26,7 @@
 #include "start_menu.h"
 #include "task.h"
 #include "tileset_anim.h"
-#include "truck_scene.h"
+#include "field_special_scene.h"
 #include "weather.h"
 #include "wild_encounter.h"
 #include "metatile_behavior.h"

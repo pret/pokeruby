@@ -1,5 +1,5 @@
 #include "global.h"
-#include "truck_scene.h"
+#include "field_special_scene.h"
 #include "asm.h"
 #include "palette.h"
 #include "task.h"
@@ -10,8 +10,6 @@
 #include "rom4.h"
 #include "event_data.h"
 #include "sprite.h"
-
-extern u8 gUnknown_0202E85D;
 
 extern s8 gTruckCamera_HorizontalTable[];
 
