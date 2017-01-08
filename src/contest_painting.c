@@ -14,7 +14,8 @@
 #define MOSAIC_BIT_OBJ_HSIZE (8)
 #define MOSAIC_BIT_OBJ_VSIZE (12)
 
-enum {
+enum
+{
     CONTEST_COOL,
     CONTEST_BEAUTY,
     CONTEST_CUTE,
@@ -22,7 +23,8 @@ enum {
     CONTEST_TOUGH,
 };
 
-enum {
+enum
+{
     CONTESTRESULT_COOL = 9,
     CONTESTRESULT_BEAUTY = 13,
     CONTESTRESULT_CUTE = 2,
@@ -30,26 +32,36 @@ enum {
     CONTESTRESULT_TOUGH = 6,
 };
 
-struct ContestEntry {
-    /* 0x00 */ u8 var0;
-    /* 0x04 */ u32 var4;
-    /* 0x08 */ u16 var8;
-    /* 0x0A */ u8 contestType;
-    /* 0x0B */ u8 pokemon_name[POKEMON_NAME_LENGTH];
-    /* 0x15 */ u8 pad15;
-    /* 0x16 */ u8 trainer_name[OT_NAME_LENGTH];
+struct Unk2015E00
+{
+    u16 unk2015e00[128][32];
+    u16 unk2017e00[0];
 };
 
-struct Unk3000756 {
-    /* 0x00 */ u8 var_0;
+struct ContestEntry
+{
+    /*0x00*/ u8 var0;
+    /*0x04*/ u32 var4;
+    /*0x08*/ u16 var8;
+    /*0x0A*/ u8 contestType;
+    /*0x0B*/ u8 pokemon_name[POKEMON_NAME_LENGTH];
+    /*0x15*/ u8 pad15;
+    /*0x16*/ u8 trainer_name[OT_NAME_LENGTH];
 };
 
-struct LabelPair {
+struct Unk3000756
+{
+    /*0x00*/ u8 var_0;
+};
+
+struct LabelPair
+{
     u8 (*prefix)[];
     u8 (*suffix)[];
 };
 
-struct Unk03005E20 {
+struct Unk03005E20
+{
     u8 var_0;
     u8 pad1[3];
     u16 (*var_4)[][32];
@@ -69,17 +81,17 @@ struct Unk03005E20 {
 };
 
 extern u8 unk_2000000[];
-extern u8 unk_2015de0[];
+extern struct ContestEntry unk_2015de0;
+extern struct Unk2015E00 unk_2015e00;
 extern u8 gUnknown_03000750;
 extern u16 gUnknown_03000752;
 extern u16 gUnknown_03000754;
 extern struct Unk3000756 gUnknown_03000756;
+extern u16 (*gUnknown_03005E10)[][32];
 extern struct Unk03005E20 gUnknown_03005E20;
 extern u8 gUnknown_03005E40[];
 extern struct ContestEntry *gUnknown_03005E8C;
 extern u16 (*gUnknown_03005E90)[];
-
-extern u16 (*gUnknown_03005E10)[32][32];
 
 extern const struct SpriteSheet gMonFrontPicTable[];
 extern const struct MonCoords gMonFrontPicCoords[];
@@ -112,24 +124,25 @@ extern u16 gUnknown_083F6140[];
 extern u8 gContestText_ContestWinner[];
 extern u8 gOtherText_Unknown1[];
 
-void HoldContestPainting(void);
-void ShowContestPainting();
-void ContestPaintingInitWindow(u8 arg0);
-void ContestPaintingInitVars(u8 arg0);
-void sub_8107090(u8 arg0, u8 arg1);
-void ContestPaintingPrintCaption(u8 arg0, u8 arg1);
-void ContestPaintingInitBG(void);
-void CB2_HoldContestPainting(void);
-void VBlankCB_ContestPainting(void);
+static void ShowContestPainting();
+static void CB2_HoldContestPainting(void);
+static void HoldContestPainting(void);
+static void ContestPaintingInitWindow(u8 arg0);
+static void ContestPaintingPrintCaption(u8 arg0, u8 arg1);
+static void ContestPaintingInitBG(void);
+static void ContestPaintingInitVars(u8 arg0);
+static void VBlankCB_ContestPainting(void);
+void sub_8106B90();  //should be static
+static void sub_8107090(u8 arg0, u8 arg1);
 
-void sub_80FC7A0(struct Unk03005E20*);
-void sub_80FDA18(struct Unk03005E20*);
-void sub_80FD8CC(struct Unk03005E20*);
+extern void sub_80FC7A0(struct Unk03005E20*);
+extern void sub_80FDA18(struct Unk03005E20*);
+extern void sub_80FD8CC(struct Unk03005E20*);
 extern void *species_and_otid_get_pal();
-void sub_8106B90();
 
 __attribute__((naked))
-void sub_8106630(u32 arg0) {
+void sub_8106630(u32 arg0)
+{
     asm(".syntax unified\n\
 	push {r4-r7,lr}\n\
 	ldr r2, _0810665C @ =0x02015de0\n\
@@ -165,14 +178,14 @@ void CB2_ContestPainting(void)
     ShowContestPainting();
 }
 
-void ShowContestPainting(void)
+static void ShowContestPainting(void)
 {
     switch (gMain.state)
     {
     case 0:
         remove_some_task();
         SetVBlankCallback(NULL);
-        gUnknown_03005E8C = (struct ContestEntry *)&unk_2015de0;
+        gUnknown_03005E8C = &unk_2015de0;
         ContestPaintingInitVars(TRUE);
         ContestPaintingInitBG();
         gMain.state++;
@@ -223,16 +236,18 @@ void ShowContestPainting(void)
     }
 }
 
-void CB2_HoldContestPainting(void) {
+static void CB2_HoldContestPainting(void)
+{
     HoldContestPainting();
     UpdatePaletteFade();
 }
 
-void CB2_QuitContestPainting(void) {
+static void CB2_QuitContestPainting(void)
+{
     SetMainCallback2(gMain.savedCallback);
 }
 
-void HoldContestPainting(void)
+static void HoldContestPainting(void)
 {
     switch (gUnknown_03000750)
     {
@@ -262,23 +277,24 @@ void HoldContestPainting(void)
     }
 }
 
-void ContestPaintingInitWindow(u8 arg0) {
+static void ContestPaintingInitWindow(u8 arg0)
+{
     InitMenuWindow(&gWindowConfig_81E7160);
     SetUpWindowConfig(&gWindowConfig_81E7160);
 }
 
-void ContestPaintingPrintCaption(u8 contestType, u8 arg1) {
+static void ContestPaintingPrintCaption(u8 contestType, u8 arg1)
+{
     u8 xPos, yPos;
     u8 *ptr;
     u8 type;
 
-    if (arg1 == TRUE) {
+    if (arg1 == TRUE)
         return;
-    }
-
     ptr = gUnknown_03005E40;
     type = gUnknown_03005E8C->contestType;
-    if (contestType < 8) {
+    if (contestType < 8)
+    {
         ptr = StringCopy(ptr, gUnknown_083F60AC[type]);
         ptr = StringCopy(ptr, gContestText_ContestWinner);
         ptr = StringCopy(ptr, gUnknown_03005E8C->trainer_name);
@@ -293,7 +309,9 @@ void ContestPaintingPrintCaption(u8 contestType, u8 arg1) {
 
         xPos = 6;
         yPos = 14;
-    } else {
+    }
+    else
+    {
         ptr = StringCopy(ptr, *gUnknown_083F60C0[type].prefix);
         ptr = StringCopy10(ptr, gUnknown_03005E8C->pokemon_name);
         ptr = StringCopy(ptr, *gUnknown_083F60C0[type].suffix);
@@ -301,11 +319,11 @@ void ContestPaintingPrintCaption(u8 contestType, u8 arg1) {
         xPos = 3;
         yPos = 14;
     }
-
     MenuPrint_PixelCoords(gUnknown_03005E40, xPos * 8 + 1, yPos * 8, 1);
 }
 
-void ContestPaintingInitBG(void) {
+static void ContestPaintingInitBG(void)
+{
     REG_DISPCNT = 0;
     REG_IE |= INTR_FLAG_VBLANK;
     REG_BG0CNT = 0x0C42;
@@ -315,20 +333,26 @@ void ContestPaintingInitBG(void) {
     REG_BLDY = 0;
 }
 
-void ContestPaintingInitVars(bool8 arg0) {
-    if (arg0 == 0) {
+static void ContestPaintingInitVars(bool8 arg0)
+{
+    if (arg0 == FALSE)
+    {
         gUnknown_03000756.var_0 = FALSE;
         gUnknown_03000752 = 0;
         gUnknown_03000754 = 0;
-    } else {
+    }
+    else
+    {
         gUnknown_03000756.var_0 = TRUE;
         gUnknown_03000752 = 15;
         gUnknown_03000754 = 30;
     }
 }
 
-void ContestPaintingMosaic(void) {
-    if (gUnknown_03000756.var_0 == FALSE) {
+static void ContestPaintingMosaic(void)
+{
+    if (gUnknown_03000756.var_0 == FALSE)
+    {
         REG_MOSAIC = 0;
         return;
     }
@@ -339,19 +363,23 @@ void ContestPaintingMosaic(void) {
     REG_MOSAIC = (gUnknown_03000752 << 12) | (gUnknown_03000752 << 8) | (gUnknown_03000752 << 4) | (gUnknown_03000752 << 0);
 }
 
-void VBlankCB_ContestPainting(void) {
+static void VBlankCB_ContestPainting(void)
+{
     ContestPaintingMosaic();
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
 }
 
-struct MonCoords {
-    u8 x, y;
+
+struct MonCoords
+{
+    u8 x;
+    u8 y;
 };
 
 #ifdef NONMATCHING
-void sub_8106AC4(u16 species, u8 arg1) {
+static void sub_8106AC4(u16 species, u8 arg1) {
     void *pal;
 
     // Unsure what gUnknown_03005E8C->var0 is supposed to be.
@@ -384,7 +412,7 @@ void sub_8106AC4(u16 species, u8 arg1) {
 }
 #else
 __attribute__((naked))
-void sub_8106AC4(u16 arg0, u8 arg2) {
+static void sub_8106AC4(u16 arg0, u8 arg2) {
     asm(".syntax unified\n\
 	push {r4-r7,lr}\n\
 	mov r7, r8\n\
@@ -480,8 +508,44 @@ _08106B8C: .4byte gUnknown_03005E10\n\
 }
 #endif
 
+#ifdef NONMATCHING
+void sub_8106B90(u8 a[][8][8][4], u16 b[], u16 c[][8][8][8])
+{
+    u16 i;
+    u16 j;
+    u16 k;
+    u16 l;
+    
+    for (i = 0; i < 8; i++)
+    {
+        for (j = 0; j < 8; j++)
+        {
+            for (k = 0; k < 8; k++)
+            {
+                for (l = 0; l < 8; l++)
+                {
+                    //u8 *arr = a[i][j][k];
+                    //u8 r1 = arr[l / 2];
+                    u8 r1 = a[i][j][k][l / 2];
+                    
+                    if (l & 1)
+                        r1 /= 16;
+                    else
+                        r1 %= 16;
+                    //_08106BEA
+                    if (r1 == 0)
+                        c[i][k][j][l] = 0x8000;
+                    else
+                        c[i][k][j][l] = b[r1];
+                }
+            }
+        }
+    }
+}
+#else
 __attribute__((naked))
-void sub_8106B90() {
+void sub_8106B90()
+{
     asm(".syntax unified\n\
 	push {r4-r7,lr}\n\
 	mov r7, r10\n\
@@ -581,481 +645,146 @@ _08106C08:\n\
 	bx r0\n\
     .syntax divided\n");
 }
+#endif
 
-#ifdef NONMATCHING
-void sub_8106C40(u8 arg0, u8 arg1) {
+static void sub_8106C40(u8 arg0, u8 arg1)
+{
+    u8 x, y;
+    
     LoadPalette(gPictureFramePalettes, 0, 128 * 2);
-
-    if (arg1 == 1) {
-        switch (gUnknown_03005E8C->contestType / 3) {
-            case CONTEST_COOL:
-                RLUnCompVram(gPictureFrameTiles_0, (void *) VRAM);
-                RLUnCompWram(gPictureFrameTilemap_0, gUnknown_03005E10);
-                break;
-
-            case CONTEST_BEAUTY:
-                RLUnCompVram(gPictureFrameTiles_1, (void *) VRAM);
-                RLUnCompWram(gPictureFrameTilemap_1, gUnknown_03005E10);
-                break;
-
-            case CONTEST_CUTE:
-                RLUnCompVram(gPictureFrameTiles_2, (void *) VRAM);
-                RLUnCompWram(gPictureFrameTilemap_2, gUnknown_03005E10);
-                break;
-
-            case CONTEST_SMART:
-                RLUnCompVram(gPictureFrameTiles_3, (void *) VRAM);
-                RLUnCompWram(gPictureFrameTilemap_3, gUnknown_03005E10);
-                break;
-
-            case CONTEST_TOUGH:
-                RLUnCompVram(gPictureFrameTiles_4, (void *) VRAM);
-                RLUnCompWram(gPictureFrameTilemap_4, gUnknown_03005E10);
-                break;
-        }
-
+    if (arg1 == 1)
+    {
+        switch (gUnknown_03005E8C->contestType / 3)
         {
-            u8 x;
-            u8 y;
-
-            u16 (*vram)[32][32] = (void *) (VRAM + 0x6000);
-
-            // Set the background
-            for (y = 0; y < 20; y++) {
-                for (x = 0; x < 32; x++) {
-                    (*vram)[y][x] = 1 << 12 | 21;
-                }
-            }
-
-            // Copy the image frame
-            for (y = 0; y < 10; y++) {
-                for (x = 0; x < 18; x++) {
-                    (*vram)[y + 2][x + 6] = (*gUnknown_03005E10)[y + 2][x + 6];
-                }
-            }
-
-            // Re-set the entire top row to the first top frame part
-            for (x = 0; x < 16; x++) {
-                (*vram)[2][x + 7] = (*gUnknown_03005E10)[2][7];
-            }
+        case CONTEST_COOL:
+            RLUnCompVram(gPictureFrameTiles_0, (void *) VRAM);
+            RLUnCompWram(gPictureFrameTilemap_0, gUnknown_03005E10);
+            break;
+        case CONTEST_BEAUTY:
+            RLUnCompVram(gPictureFrameTiles_1, (void *) VRAM);
+            RLUnCompWram(gPictureFrameTilemap_1, gUnknown_03005E10);
+            break;
+        case CONTEST_CUTE:
+            RLUnCompVram(gPictureFrameTiles_2, (void *) VRAM);
+            RLUnCompWram(gPictureFrameTilemap_2, gUnknown_03005E10);
+            break;
+        case CONTEST_SMART:
+            RLUnCompVram(gPictureFrameTiles_3, (void *) VRAM);
+            RLUnCompWram(gPictureFrameTilemap_3, gUnknown_03005E10);
+            break;
+        case CONTEST_TOUGH:
+            RLUnCompVram(gPictureFrameTiles_4, (void *) VRAM);
+            RLUnCompWram(gPictureFrameTilemap_4, gUnknown_03005E10);
+            break;
+        }
+        
+        #define VRAM_PICTURE_DATA(x, y) (((u16 *)(VRAM + 0x6000))[(y) * 32 + (x)])
+        
+        // Set the background
+        for (y = 0; y < 20; y++) 
+        {
+            for (x = 0; x < 32; x++)
+                VRAM_PICTURE_DATA(x, y) = 0x1015;
         }
 
-        // def_8106C7A
-    } else {
-        if (arg0 < 8) {
-            RLUnCompVram(gPictureFrameTiles_5, (void *) VRAM);
-            RLUnCompVram(gPictureFrameTilemap_5, (void *) (VRAM + 0x6000));
-            return;
+        // Copy the image frame
+        for (y = 0; y < 10; y++)
+        {
+            for (x = 0; x < 18; x++)
+                VRAM_PICTURE_DATA(x + 6, y + 2) = (*gUnknown_03005E10)[y + 2][x + 6];
         }
 
-        switch (gUnknown_03005E8C->contestType / 3) {
-            case CONTEST_COOL:
-                RLUnCompVram(gPictureFrameTiles_0, (void *) VRAM);
-                RLUnCompVram(gPictureFrameTilemap_0, (void *) (VRAM + 0x6000));
-                break;
-
-            case CONTEST_BEAUTY:
-                RLUnCompVram(gPictureFrameTiles_1, (void *) VRAM);
-                RLUnCompVram(gPictureFrameTilemap_1, (void *) (VRAM + 0x6000));
-                break;
-
-            case CONTEST_CUTE:
-                RLUnCompVram(gPictureFrameTiles_2, (void *) VRAM);
-                RLUnCompVram(gPictureFrameTilemap_2, (void *) (VRAM + 0x6000));
-                break;
-
-            case CONTEST_SMART:
-                RLUnCompVram(gPictureFrameTiles_3, (void *) VRAM);
-                RLUnCompVram(gPictureFrameTilemap_3, (void *) (VRAM + 0x6000));
-                break;
-
-            case CONTEST_TOUGH:
-                RLUnCompVram(gPictureFrameTiles_4, (void *) VRAM);
-                RLUnCompVram(gPictureFrameTilemap_4, (void *) (VRAM + 0x6000));
-                break;
+        // Re-set the entire top row to the first top frame part
+        for (x = 0; x < 16; x++)
+            VRAM_PICTURE_DATA(x + 7, 2) = (*gUnknown_03005E10)[2][7];
+    
+        #undef VRAM_PICTURE_DATA
+    }
+    else if (arg0 < 8)
+    {
+        RLUnCompVram(gPictureFrameTiles_5, (void *) VRAM);
+        RLUnCompVram(gPictureFrameTilemap_5, (void *) (VRAM + 0x6000));
+    }
+    else
+    {
+        switch (gUnknown_03005E8C->contestType / 3)
+        {
+        case CONTEST_COOL:
+            RLUnCompVram(gPictureFrameTiles_0, (void *) VRAM);
+            RLUnCompVram(gPictureFrameTilemap_0, (void *) (VRAM + 0x6000));
+            break;
+        case CONTEST_BEAUTY:
+            RLUnCompVram(gPictureFrameTiles_1, (void *) VRAM);
+            RLUnCompVram(gPictureFrameTilemap_1, (void *) (VRAM + 0x6000));
+            break;
+        case CONTEST_CUTE:
+            RLUnCompVram(gPictureFrameTiles_2, (void *) VRAM);
+            RLUnCompVram(gPictureFrameTilemap_2, (void *) (VRAM + 0x6000));
+            break;
+        case CONTEST_SMART:
+            RLUnCompVram(gPictureFrameTiles_3, (void *) VRAM);
+            RLUnCompVram(gPictureFrameTilemap_3, (void *) (VRAM + 0x6000));
+            break;
+        case CONTEST_TOUGH:
+            RLUnCompVram(gPictureFrameTiles_4, (void *) VRAM);
+            RLUnCompVram(gPictureFrameTilemap_4, (void *) (VRAM + 0x6000));
+            break;
         }
     }
 }
-#else
-__attribute__((naked))
-void sub_8106C40(u8 arg0, u8 arg1) {
-    asm(".syntax unified\n\
-	push {r4-r7,lr}\n\
-	adds r4, r1, 0\n\
-	lsls r0, 24\n\
-	lsrs r5, r0, 24\n\
-	lsls r4, 24\n\
-	lsrs r4, 24\n\
-	ldr r0, _08106C7C @ =gPictureFramePalettes\n\
-	movs r2, 0x80\n\
-	lsls r2, 1\n\
-	movs r1, 0\n\
-	bl LoadPalette\n\
-	cmp r4, 0x1\n\
-	beq _08106C5E\n\
-	b _08106DB4\n\
-_08106C5E:\n\
-	ldr r0, _08106C80 @ =gUnknown_03005E8C\n\
-	ldr r0, [r0]\n\
-	ldrb r0, [r0, 0xA]\n\
-	movs r1, 0x3\n\
-	bl __udivsi3\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, 0x4\n\
-	bhi _08106D1C\n\
-	lsls r0, 2\n\
-	ldr r1, _08106C84 @ =_08106C88\n\
-	adds r0, r1\n\
-	ldr r0, [r0]\n\
-	mov pc, r0\n\
-	.align 2, 0\n\
-_08106C7C: .4byte gPictureFramePalettes\n\
-_08106C80: .4byte gUnknown_03005E8C\n\
-_08106C84: .4byte _08106C88\n\
-	.align 2, 0\n\
-_08106C88:\n\
-	.4byte _08106C9C\n\
-	.4byte _08106CB4\n\
-	.4byte _08106CCC\n\
-	.4byte _08106CE4\n\
-	.4byte _08106D08\n\
-_08106C9C:\n\
-	ldr r0, _08106CAC @ =gPictureFrameTiles_0\n\
-	movs r1, 0xC0\n\
-	lsls r1, 19\n\
-	bl RLUnCompVram\n\
-	ldr r0, _08106CB0 @ =gPictureFrameTilemap_0\n\
-	b _08106CF0\n\
-	.align 2, 0\n\
-_08106CAC: .4byte gPictureFrameTiles_0\n\
-_08106CB0: .4byte gPictureFrameTilemap_0\n\
-_08106CB4:\n\
-	ldr r0, _08106CC4 @ =gPictureFrameTiles_1\n\
-	movs r1, 0xC0\n\
-	lsls r1, 19\n\
-	bl RLUnCompVram\n\
-	ldr r0, _08106CC8 @ =gPictureFrameTilemap_1\n\
-	b _08106CF0\n\
-	.align 2, 0\n\
-_08106CC4: .4byte gPictureFrameTiles_1\n\
-_08106CC8: .4byte gPictureFrameTilemap_1\n\
-_08106CCC:\n\
-	ldr r0, _08106CDC @ =gPictureFrameTiles_2\n\
-	movs r1, 0xC0\n\
-	lsls r1, 19\n\
-	bl RLUnCompVram\n\
-	ldr r0, _08106CE0 @ =gPictureFrameTilemap_2\n\
-	b _08106CF0\n\
-	.align 2, 0\n\
-_08106CDC: .4byte gPictureFrameTiles_2\n\
-_08106CE0: .4byte gPictureFrameTilemap_2\n\
-_08106CE4:\n\
-	ldr r0, _08106CFC @ =gPictureFrameTiles_3\n\
-	movs r1, 0xC0\n\
-	lsls r1, 19\n\
-	bl RLUnCompVram\n\
-	ldr r0, _08106D00 @ =gPictureFrameTilemap_3\n\
-_08106CF0:\n\
-	ldr r1, _08106D04 @ =gUnknown_03005E10\n\
-	ldr r1, [r1]\n\
-	bl RLUnCompWram\n\
-	b _08106D1C\n\
-	.align 2, 0\n\
-_08106CFC: .4byte gPictureFrameTiles_3\n\
-_08106D00: .4byte gPictureFrameTilemap_3\n\
-_08106D04: .4byte gUnknown_03005E10\n\
-_08106D08:\n\
-	ldr r0, _08106D98 @ =gPictureFrameTiles_4\n\
-	movs r1, 0xC0\n\
-	lsls r1, 19\n\
-	bl RLUnCompVram\n\
-	ldr r0, _08106D9C @ =gPictureFrameTilemap_4\n\
-	ldr r1, _08106DA0 @ =gUnknown_03005E10\n\
-	ldr r1, [r1]\n\
-	bl RLUnCompWram\n\
-_08106D1C:\n\
-	movs r1, 0\n\
-	ldr r5, _08106DA4 @ =0x06006000\n\
-	ldr r0, _08106DA8 @ =0x00001015\n\
-	adds r4, r0, 0\n\
-_08106D24:\n\
-	movs r3, 0\n\
-	lsls r2, r1, 5\n\
-_08106D28:\n\
-	adds r0, r2, r3\n\
-	lsls r0, 1\n\
-	adds r0, r5\n\
-	strh r4, [r0]\n\
-	adds r0, r3, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r3, r0, 24\n\
-	cmp r3, 0x1F\n\
-	bls _08106D28\n\
-	adds r0, r1, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r1, r0, 24\n\
-	cmp r1, 0x13\n\
-	bls _08106D24\n\
-	movs r1, 0\n\
-	ldr r0, _08106DAC @ =0x0600608c\n\
-	mov r12, r0\n\
-	ldr r7, _08106DA0 @ =gUnknown_03005E10\n\
-_08106D4C:\n\
-	movs r3, 0\n\
-	adds r6, r1, 0x1\n\
-	lsls r5, r1, 5\n\
-	lsls r4, r1, 6\n\
-_08106D54:\n\
-	adds r2, r5, r3\n\
-	lsls r2, 1\n\
-	add r2, r12\n\
-	ldr r0, [r7]\n\
-	adds r0, r4, r0\n\
-	lsls r1, r3, 1\n\
-	adds r0, r1\n\
-	adds r0, 0x8C\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r2]\n\
-	adds r0, r3, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r3, r0, 24\n\
-	cmp r3, 0x11\n\
-	bls _08106D54\n\
-	lsls r0, r6, 24\n\
-	lsrs r1, r0, 24\n\
-	cmp r1, 0x9\n\
-	bls _08106D4C\n\
-	movs r3, 0\n\
-	ldr r4, _08106DB0 @ =0x0600608e\n\
-	ldr r2, _08106DA0 @ =gUnknown_03005E10\n\
-_08106D80:\n\
-	lsls r1, r3, 1\n\
-	adds r1, r4\n\
-	ldr r0, [r2]\n\
-	adds r0, 0x8E\n\
-	ldrh r0, [r0]\n\
-	strh r0, [r1]\n\
-	adds r0, r3, 0x1\n\
-	lsls r0, 24\n\
-	lsrs r3, r0, 24\n\
-	cmp r3, 0xF\n\
-	bls _08106D80\n\
-	b _08106E86\n\
-	.align 2, 0\n\
-_08106D98: .4byte gPictureFrameTiles_4\n\
-_08106D9C: .4byte gPictureFrameTilemap_4\n\
-_08106DA0: .4byte gUnknown_03005E10\n\
-_08106DA4: .4byte 0x06006000\n\
-_08106DA8: .4byte 0x00001015\n\
-_08106DAC: .4byte 0x0600608c\n\
-_08106DB0: .4byte 0x0600608e\n\
-_08106DB4:\n\
-	cmp r5, 0x7\n\
-	bhi _08106DD0\n\
-	ldr r0, _08106DC8 @ =gPictureFrameTiles_5\n\
-	movs r1, 0xC0\n\
-	lsls r1, 19\n\
-	bl RLUnCompVram\n\
-	ldr r0, _08106DCC @ =gPictureFrameTilemap_5\n\
-	b _08106E60\n\
-	.align 2, 0\n\
-_08106DC8: .4byte gPictureFrameTiles_5\n\
-_08106DCC: .4byte gPictureFrameTilemap_5\n\
-_08106DD0:\n\
-	ldr r0, _08106DF0 @ =gUnknown_03005E8C\n\
-	ldr r0, [r0]\n\
-	ldrb r0, [r0, 0xA]\n\
-	movs r1, 0x3\n\
-	bl __udivsi3\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	cmp r0, 0x4\n\
-	bhi _08106E86\n\
-	lsls r0, 2\n\
-	ldr r1, _08106DF4 @ =_08106DF8\n\
-	adds r0, r1\n\
-	ldr r0, [r0]\n\
-	mov pc, r0\n\
-	.align 2, 0\n\
-_08106DF0: .4byte gUnknown_03005E8C\n\
-_08106DF4: .4byte _08106DF8\n\
-	.align 2, 0\n\
-_08106DF8:\n\
-	.4byte _08106E0C\n\
-	.4byte _08106E24\n\
-	.4byte _08106E3C\n\
-	.4byte _08106E54\n\
-	.4byte _08106E74\n\
-_08106E0C:\n\
-	ldr r0, _08106E1C @ =gPictureFrameTiles_0\n\
-	movs r1, 0xC0\n\
-	lsls r1, 19\n\
-	bl RLUnCompVram\n\
-	ldr r0, _08106E20 @ =gPictureFrameTilemap_0\n\
-	b _08106E60\n\
-	.align 2, 0\n\
-_08106E1C: .4byte gPictureFrameTiles_0\n\
-_08106E20: .4byte gPictureFrameTilemap_0\n\
-_08106E24:\n\
-	ldr r0, _08106E34 @ =gPictureFrameTiles_1\n\
-	movs r1, 0xC0\n\
-	lsls r1, 19\n\
-	bl RLUnCompVram\n\
-	ldr r0, _08106E38 @ =gPictureFrameTilemap_1\n\
-	b _08106E60\n\
-	.align 2, 0\n\
-_08106E34: .4byte gPictureFrameTiles_1\n\
-_08106E38: .4byte gPictureFrameTilemap_1\n\
-_08106E3C:\n\
-	ldr r0, _08106E4C @ =gPictureFrameTiles_2\n\
-	movs r1, 0xC0\n\
-	lsls r1, 19\n\
-	bl RLUnCompVram\n\
-	ldr r0, _08106E50 @ =gPictureFrameTilemap_2\n\
-	b _08106E60\n\
-	.align 2, 0\n\
-_08106E4C: .4byte gPictureFrameTiles_2\n\
-_08106E50: .4byte gPictureFrameTilemap_2\n\
-_08106E54:\n\
-	ldr r0, _08106E68 @ =gPictureFrameTiles_3\n\
-	movs r1, 0xC0\n\
-	lsls r1, 19\n\
-	bl RLUnCompVram\n\
-	ldr r0, _08106E6C @ =gPictureFrameTilemap_3\n\
-_08106E60:\n\
-	ldr r1, _08106E70 @ =0x06006000\n\
-	bl RLUnCompVram\n\
-	b _08106E86\n\
-	.align 2, 0\n\
-_08106E68: .4byte gPictureFrameTiles_3\n\
-_08106E6C: .4byte gPictureFrameTilemap_3\n\
-_08106E70: .4byte 0x06006000\n\
-_08106E74:\n\
-	ldr r0, _08106E8C @ =gPictureFrameTiles_4\n\
-	movs r1, 0xC0\n\
-	lsls r1, 19\n\
-	bl RLUnCompVram\n\
-	ldr r0, _08106E90 @ =gPictureFrameTilemap_4\n\
-	ldr r1, _08106E94 @ =0x06006000\n\
-	bl RLUnCompVram\n\
-_08106E86:\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_08106E8C: .4byte gPictureFrameTiles_4\n\
-_08106E90: .4byte gPictureFrameTilemap_4\n\
-_08106E94: .4byte 0x06006000\n\
-    .syntax divided\n");
-}
+
+static void sub_8106E98(u8 arg0)
+{
+    //Some hacks just to get the asm to match
+#ifndef NONMATCHING
+    asm(""::"r"(arg0));
 #endif
-
-#ifdef NONMATCHING
-void sub_8106E98(u8 arg0 ) {
+    
     gMain.oamBuffer[0] = gOamData_83F6138;
-
     gMain.oamBuffer[0].tileNum = 0;
+    
+#ifndef NONMATCHING
+    if (arg0) arg0 = gMain.oamBuffer[0].tileNum;
+#endif
+    
     gMain.oamBuffer[0].x = 88;
     gMain.oamBuffer[0].y = 24;
 }
-#else
-__attribute__((naked))
-void sub_8106E98(u8 arg0) {
-    asm(".syntax unified\n\
-	push {r4,lr}\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	ldr r4, _08106ED0 @ =gMain\n\
-	ldr r1, _08106ED4 @ =gOamData_83F6138\n\
-	ldr r2, [r1, 0x4]\n\
-	ldr r1, [r1]\n\
-	str r1, [r4, 0x3C]\n\
-	str r2, [r4, 0x40]\n\
-	adds r3, r4, 0\n\
-	adds r3, 0x40\n\
-	ldrh r2, [r3]\n\
-	ldr r1, _08106ED8 @ =0xfffffc00\n\
-	ands r1, r2\n\
-	strh r1, [r3]\n\
-	ldrh r1, [r4, 0x3E]\n\
-	ldr r0, _08106EDC @ =0xfffffe00\n\
-	ands r0, r1\n\
-	movs r1, 0x58\n\
-	orrs r0, r1\n\
-	strh r0, [r4, 0x3E]\n\
-	adds r1, r4, 0\n\
-	adds r1, 0x3C\n\
-	movs r0, 0x18\n\
-	strb r0, [r1]\n\
-	pop {r4}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_08106ED0: .4byte gMain\n\
-_08106ED4: .4byte gOamData_83F6138\n\
-_08106ED8: .4byte 0xfffffc00\n\
-_08106EDC: .4byte 0xfffffe00\n\
-    .syntax divided\n");
-}
-#endif
 
-u8 sub_8106EE0(u8 arg0) {
+static u8 sub_8106EE0(u8 arg0)
+{
     u8 contestType;
 
-    if (arg0 < 8) {
+    if (arg0 < 8)
         contestType = gUnknown_03005E8C->contestType;
-    } else {
+    else
         contestType = gUnknown_03005E8C->contestType / 3;
-    }
 
-    switch (contestType) {
-        case CONTEST_COOL:
-            return CONTESTRESULT_COOL;
-
-        case CONTEST_BEAUTY:
-            return CONTESTRESULT_BEAUTY;
-
-        case CONTEST_CUTE:
-            return CONTESTRESULT_CUTE;
-
-        case CONTEST_SMART:
-            return CONTESTRESULT_SMART;
-
-        case CONTEST_TOUGH:
-            return CONTESTRESULT_TOUGH;
+    switch (contestType)
+    {
+    case CONTEST_COOL:
+        return CONTESTRESULT_COOL;
+    case CONTEST_BEAUTY:
+        return CONTESTRESULT_BEAUTY;
+    case CONTEST_CUTE:
+        return CONTESTRESULT_CUTE;
+    case CONTEST_SMART:
+        return CONTESTRESULT_SMART;
+    case CONTEST_TOUGH:
+        return CONTESTRESULT_TOUGH;
     }
 
     return contestType;
 }
 
-#ifdef NONMATCHING
-void sub_8106F4C(void) {
-    gUnknown_03005E90 = (void *) 0x02017e00;
-    gUnknown_03005E10 = (void *) 0x02015e00;
+static void sub_8106F4C(void)
+{
+    gUnknown_03005E90 = &unk_2015e00.unk2017e00;
+    gUnknown_03005E10 = &unk_2015e00.unk2015e00;
 }
-#else
-__attribute__((naked))
-void sub_8106F4C(void) {
-    asm(".syntax unified\n\
-	ldr r0, _08106F5C @ =gUnknown_03005E90\n\
-	ldr r1, _08106F60 @ =0x02017e00\n\
-	str r1, [r0]\n\
-	ldr r0, _08106F64 @ =gUnknown_03005E10\n\
-	ldr r2, _08106F68 @ =0xffffe000\n\
-	adds r1, r2\n\
-	str r1, [r0]\n\
-	bx lr\n\
-	.align 2, 0\n\
-_08106F5C: .4byte gUnknown_03005E90\n\
-_08106F60: .4byte 0x02017e00\n\
-_08106F64: .4byte gUnknown_03005E10\n\
-_08106F68: .4byte 0xffffe000\n\
-    .syntax divided\n");
-}
-#endif
 
-void sub_8106F6C(u8 arg0) {
+static void sub_8106F6C(u8 arg0)
+{
     gUnknown_03005E20.var_4 = gUnknown_03005E10;
     gUnknown_03005E20.var_8 = gUnknown_03005E90;
     gUnknown_03005E20.var_18 = 0;
@@ -1067,18 +796,18 @@ void sub_8106F6C(u8 arg0) {
     gUnknown_03005E20.var_1D = 64;
     gUnknown_03005E20.var_1E = 64;
 
-    switch (arg0) {
-        case CONTESTRESULT_SMART:
-        case CONTESTRESULT_TOUGH:
-            gUnknown_03005E20.var_14 = 3;
-            break;
-
-        case CONTESTRESULT_COOL:
-        case CONTESTRESULT_BEAUTY:
-        case CONTESTRESULT_CUTE:
-        default:
-            gUnknown_03005E20.var_14 = 1;
-            break;
+    switch (arg0)
+    {
+    case CONTESTRESULT_SMART:
+    case CONTESTRESULT_TOUGH:
+        gUnknown_03005E20.var_14 = 3;
+        break;
+    case CONTESTRESULT_COOL:
+    case CONTESTRESULT_BEAUTY:
+    case CONTESTRESULT_CUTE:
+    default:
+        gUnknown_03005E20.var_14 = 1;
+        break;
     }
 
     gUnknown_03005E20.var_16 = 2;
@@ -1092,15 +821,11 @@ void sub_8106F6C(u8 arg0) {
     LoadPalette(gUnknown_03005E90, 256, 256 * 2);
 }
 
-void sub_8107090(u8 arg0, u8 arg1) {
-    u8 local0;
-
+static void sub_8107090(u8 arg0, u8 arg1)
+{
     sub_8106F4C();
     sub_8106AC4(gUnknown_03005E8C->var8, 0);
-
-    local0 = sub_8106EE0(arg0);
-    sub_8106F6C(local0);
-
+    sub_8106F6C(sub_8106EE0(arg0));
     sub_8106E98(arg0);
     sub_8106C40(arg0, arg1);
 }
