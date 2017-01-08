@@ -29,7 +29,7 @@ gSpriteImage_83E5928:: @ 83E5928
 
 	.align 2
 Palette_3E5948: @ 83E5948
-	.incbin "baserom.gba", 0x3e5948, 0x20
+	.incbin "graphics/interface/83E5948.gbapal"
 
 	.align 2
 gUnknown_083E5968:: @ 83E5968

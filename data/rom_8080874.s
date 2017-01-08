@@ -3,12 +3,13 @@
 
 	.section .rodata
 
+	.align 1
 gUnknown_0839ACDC:: @ 839ACDC
-	.incbin "baserom.gba", 0x0039acdc, 0xc
+	.2byte 0xC8, 0x48, 0x38, 0x28, 0x18, 0x0
 
 	.align 2
 gUnknown_0839ACE8:: @ 839ACE8
-	.byte 4
+	.4byte 4
 
 	.align 2
 gUnknown_0839ACEC:: @ 839ACEC

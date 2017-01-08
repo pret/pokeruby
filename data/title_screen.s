@@ -41,8 +41,40 @@ gUnknown_08393BF8:: @ 8393BF8
 LogoShineTiles: @ 8393D14
 	.incbin "graphics/title_screen/logo_shine.4bpp.lz"
 
+	.align 1
 gUnknown_08393E64:: @ 8393E64
-	.incbin "baserom.gba", 0x00393e64, 0x40
+	.2byte   0x10
+	.2byte  0x110
+	.2byte  0x210
+	.2byte  0x310
+	.2byte  0x410
+	.2byte  0x510
+	.2byte  0x610
+	.2byte  0x710
+	.2byte  0x810
+	.2byte  0x910
+	.2byte  0xA10
+	.2byte  0xB10
+	.2byte  0xC10
+	.2byte  0xD10
+	.2byte  0xE10
+	.2byte  0xF10
+	.2byte 0x100F
+	.2byte 0x100E
+	.2byte 0x100D
+	.2byte 0x100C
+	.2byte 0x100B
+	.2byte 0x100A
+	.2byte 0x1009
+	.2byte 0x1008
+	.2byte 0x1007
+	.2byte 0x1006
+	.2byte 0x1005
+	.2byte 0x1004
+	.2byte 0x1003
+	.2byte 0x1002
+	.2byte 0x1001
+	.2byte 0x1000
 
 	.align 2
 gOamData_8393EA4:: @ 8393EA4

@@ -12,6 +12,7 @@ gSpriteImage_83CE154:: @ 83CE154
 	.incbin "graphics/naming_screen/pc_icon/1.4bpp"
 
 @ XXX: what is this?
+	.align 2
 	.4byte 0x2000000
 
 	.align 2

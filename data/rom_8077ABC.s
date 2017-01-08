@@ -3,8 +3,16 @@
 
 	.section .rodata
 
+	.align 2
 gUnknown_0837F578:: @ 837F578
-	.incbin "baserom.gba", 0x0037f578, 0x20
+	.byte  72, 80,  0,  0
+	.byte 176, 40,  0,  0
+	.byte  48, 40,  0,  0
+	.byte 112, 80,  0,  0
+	.byte  32, 80,  0,  0
+	.byte 200, 40,  0,  0
+	.byte  90, 88,  0,  0
+	.byte 152, 32,  0,  0
 
 @ One entry for each of the four Castform forms.
 @ Coords are probably front pic coords or back pic coords, but this data does not seem to be

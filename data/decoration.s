@@ -261,4 +261,5 @@ gUnknown_083ECAA0:: @ 83ECAA0
 	.4byte sub_80FED3C
 
 @ XXX: what is this?
+	.align 2
 	.4byte 0x2000000

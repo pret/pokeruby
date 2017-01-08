@@ -173,5 +173,6 @@ gUnknown_083E57A4:: @ 83E57A4
 	.byte 5, 15, 15, 52
 	.4byte Unknown_3E5790
 
+@ XXX: what is this?
 	.align 2
-	.incbin "baserom.gba", 0x3e5804, 0x4
+	.4byte 0x2000000
