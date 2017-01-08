@@ -18,10 +18,10 @@ gUnknown_08406298:: @ 8406298
 	.4byte SecretBaseText_TurnOff, PlayerPC_TurnOff
 
 gUnknown_084062B8:: @ 84062B8
-	.incbin "baserom.gba", 0x004062b8, 0x4
+	.byte 0, 1, 2, 3
 
 gUnknown_084062BC:: @ 84062BC
-	.incbin "baserom.gba", 0x004062bc, 0x4
+	.byte 0, 1, 3
 
 	.align 2
 gUnknown_084062C0:: @ 84062C0
@@ -67,8 +67,11 @@ gUnknown_0840632A:: @ 840632A
 gUnknown_08406330:: @ 8406330
 	.string "{CLEAR_TO 32}$"
 
+	.align 1
 gUnknown_08406334:: @ 8406334
-	.incbin "baserom.gba", 0x00406334, 0x6
+	.2byte 0x5294
+	.2byte 0x6B5A
+	.2byte 0x7FFF
 
 gUnknown_0840633A:: @ 840633A
 	.string "{COLOR RED}{STR_VAR_1}$"
