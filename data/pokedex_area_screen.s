@@ -18,8 +18,15 @@ gUnknown_083F856E:: @ 83F856E
 	.2byte 328, 0, 34
 	.2byte 412, 0,  0
 
+	.align 1
 gUnknown_083F857A:: @ 83F857A
-	.incbin "baserom.gba", 0x003f857a, 0x12
+	.2byte 85, 2142
+	.2byte 68, 2119
+	.2byte 88,    0
+
+@ XXX: what is this?
+	.align 2
+	.4byte 0x2000000
 
 	.align 2
 gUnknown_083F858C:: @ 83F858C

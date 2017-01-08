@@ -30,8 +30,23 @@ gPokemonMenuActions:: @ 839F494
 	.4byte gMoveNames + 13 * MOVE_SOFT_BOILED, PokemonMenu_FieldMove
 	.4byte gMoveNames + 13 * MOVE_SWEET_SCENT, PokemonMenu_FieldMove
 
+	.align 1
 gUnknown_0839F554:: @ 839F554
-	.incbin "baserom.gba", 0x39f554, 0x1e
+	.2byte MOVE_CUT
+	.2byte MOVE_FLASH
+	.2byte MOVE_ROCK_SMASH
+	.2byte MOVE_STRENGTH
+	.2byte MOVE_SURF
+	.2byte MOVE_FLY
+	.2byte MOVE_DIVE
+	.2byte MOVE_WATERFALL
+	.2byte MOVE_TELEPORT
+	.2byte MOVE_DIG
+	.2byte MOVE_SECRET_POWER
+	.2byte MOVE_MILK_DRINK
+	.2byte MOVE_SOFT_BOILED
+	.2byte MOVE_SWEET_SCENT
+	.2byte 0xFF
 
 Unknown_39F572: @ 839F572
 	.byte 4, 5, 9, 0
