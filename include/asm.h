@@ -8,10 +8,17 @@
 
 struct UnkInputStruct
 {
-	u8 input_field_0;
-	u8 input_field_1;
-	u8 input_field_2;
-	u8 input_field_3;
+    u8 input_field_0_0:1;
+    u8 input_field_0_1:1;
+    u8 input_field_0_2:1;
+    u8 input_field_0_3:1;
+    u8 input_field_0_4:1;
+    u8 input_field_0_5:1;
+    u8 input_field_0_6:1;
+    u8 input_field_0_7:1;
+    u8 input_field_1;
+    u8 input_field_2;
+    u8 input_field_3;
 };
 
 struct UnknownStruct_FPA
