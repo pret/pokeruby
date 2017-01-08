@@ -3401,8 +3401,8 @@ gUnknown_08E8096C:: @ 8E8096C
 	.incbin "graphics/unknown/unknown_E8096C.4bpp.lz"
 
 	.align 2
-gUnknown_08E81098:: @ 8E81098
-	.incbin "graphics/unknown/unknown_E81098.bin.lz"
+gRouletteWheelTiles:: @ 8E81098
+	.incbin "graphics/roulette/wheel.8bpp.lz"
 
 	.align 2
 gRouletteCenter_Gfx::
