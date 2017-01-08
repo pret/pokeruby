@@ -55,6 +55,7 @@ typedef struct {
 	bool has_loop;
 	unsigned long loop_offset;
 	double sample_rate;
+	unsigned long real_num_samples;
 } AifData;
 
 struct Bytes {
@@ -245,6 +246,10 @@ void read_aif(struct Bytes *aif, AifData *aif_data)
 				}
 				else if (strcmp(marker_name, "END") == 0)
 				{
+					if (!aif_data->has_loop) {
+						aif_data->loop_offset = marker_position;
+						aif_data->has_loop = true;
+					}
 					aif_data->num_samples = marker_position;
 				}
 
@@ -270,6 +275,7 @@ void read_aif(struct Bytes *aif, AifData *aif_data)
 			memcpy(sample_data, &aif->data[pos], num_samples);
 
 			aif_data->samples = sample_data;
+			aif_data->real_num_samples = num_samples;
 			pos += chunk_size - 8;
 		}
 		else
@@ -514,7 +520,7 @@ void aif2pcm(const char *aif_filename, const char *pcm_filename, bool compress)
 	{
 		struct Bytes *input = malloc(sizeof(struct Bytes));
 		input->data = aif_data.samples;
-		input->length = aif_data.num_samples;
+		input->length = aif_data.real_num_samples;
 		pcm = delta_compress(input);
 		free(input);
 	}
@@ -522,7 +528,7 @@ void aif2pcm(const char *aif_filename, const char *pcm_filename, bool compress)
 	{
 		pcm = malloc(sizeof(struct Bytes));
 		pcm->data = aif_data.samples;
-		pcm->length = aif_data.num_samples;
+		pcm->length = aif_data.real_num_samples;
 	}
 	output.length = header_size + pcm->length;
 	output.data = malloc(output.length);
@@ -588,7 +594,7 @@ void pcm2aif(const char *pcm_filename, const char *aif_filename, uint32_t base_n
 	memcpy(aif_data->samples, pcm->data, pcm->length);
 
 	struct Bytes *aif = malloc(sizeof(struct Bytes));
-	aif->length = 54 + 60 + aif_data->num_samples;
+	aif->length = 54 + 60 + pcm->length;
 	aif->data = malloc(aif->length);
 
 	long pos = 0;
@@ -632,10 +638,10 @@ void pcm2aif(const char *pcm_filename, const char *aif_filename, uint32_t base_n
 	aif->data[pos++] = 1;  // 1 channel
 
 	// Common Chunk numSampleFrames
-	aif->data[pos++] = ((pcm->length >> 24) & 0xFF);
-	aif->data[pos++] = ((pcm->length >> 16) & 0xFF);
-	aif->data[pos++] = ((pcm->length >> 8)  & 0xFF);
-	aif->data[pos++] = (pcm->length & 0xFF);
+	aif->data[pos++] = ((aif_data->num_samples >> 24) & 0xFF);
+	aif->data[pos++] = ((aif_data->num_samples >> 16) & 0xFF);
+	aif->data[pos++] = ((aif_data->num_samples >> 8)  & 0xFF);
+	aif->data[pos++] = (aif_data->num_samples & 0xFF);
 
 	// Common Chunk sampleSize
 	aif->data[pos++] = 0;
@@ -650,24 +656,25 @@ void pcm2aif(const char *pcm_filename, const char *aif_filename, uint32_t base_n
 		aif->data[pos++] = sample_rate_buffer[i];
 	}
 
-	// Marker Chunk ckID
-	aif->data[pos++] = 'M';
-	aif->data[pos++] = 'A';
-	aif->data[pos++] = 'R';
-	aif->data[pos++] = 'K';
-
-	// Marker Chunk ckSize
-	aif->data[pos++] = 0;
-	aif->data[pos++] = 0;
-	aif->data[pos++] = 0;
-	aif->data[pos++] = 12 + (aif_data->has_loop ? 12 : 0);
-
-	// Marker Chunk numMarkers
-	aif->data[pos++] = 0;
-	aif->data[pos++] = (aif_data->has_loop ? 2 : 1);
-
 	if (aif_data->has_loop)
 	{
+
+		// Marker Chunk ckID
+		aif->data[pos++] = 'M';
+		aif->data[pos++] = 'A';
+		aif->data[pos++] = 'R';
+		aif->data[pos++] = 'K';
+
+		// Marker Chunk ckSize
+		aif->data[pos++] = 0;
+		aif->data[pos++] = 0;
+		aif->data[pos++] = 0;
+		aif->data[pos++] = 12 + (aif_data->has_loop ? 12 : 0);
+
+		// Marker Chunk numMarkers
+		aif->data[pos++] = 0;
+		aif->data[pos++] = (aif_data->has_loop ? 2 : 1);
+
 		// Marker loop start
 		aif->data[pos++] = 0;
 		aif->data[pos++] = 1;  // id = 1
@@ -684,22 +691,22 @@ void pcm2aif(const char *pcm_filename, const char *aif_filename, uint32_t base_n
 		aif->data[pos++] = 'A';
 		aif->data[pos++] = 'R';
 		aif->data[pos++] = 'T';  // markerName
+
+		// Marker loop end
+		aif->data[pos++] = 0;
+		aif->data[pos++] = (aif_data->has_loop ? 2 : 1);  // id = 2
+
+		long loop_end = aif_data->num_samples;
+		aif->data[pos++] = ((loop_end >> 24) & 0xFF);
+		aif->data[pos++] = ((loop_end >> 16) & 0xFF);
+		aif->data[pos++] = ((loop_end >> 8)  & 0xFF);
+		aif->data[pos++] = (loop_end & 0xFF);  // position
+
+		aif->data[pos++] = 3;  // pascal-style string length
+		aif->data[pos++] = 'E';
+		aif->data[pos++] = 'N';
+		aif->data[pos++] = 'D';
 	}
-
-	// Marker loop end
-	aif->data[pos++] = 0;
-	aif->data[pos++] = (aif_data->has_loop ? 2 : 1);  // id = 2
-
-	long loop_end = aif_data->num_samples;
-	aif->data[pos++] = ((loop_end >> 24) & 0xFF);
-	aif->data[pos++] = ((loop_end >> 16) & 0xFF);
-	aif->data[pos++] = ((loop_end >> 8)  & 0xFF);
-	aif->data[pos++] = (loop_end & 0xFF);  // position
-
-	aif->data[pos++] = 3;  // pascal-style string length
-	aif->data[pos++] = 'E';
-	aif->data[pos++] = 'N';
-	aif->data[pos++] = 'D';
 
 	// Instrument Chunk ckID
 	aif->data[pos++] = 'I';
