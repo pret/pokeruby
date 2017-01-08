@@ -5,7 +5,11 @@
 
 	.align 2
 gUnknown_08376420:: @ 8376420
-	.incbin "baserom.gba", 0x00376420, 0x3C
+	.byte   3,  0,  1,  0, 15, 39,  0,  2,  0,  0,  0,  0
+	.byte   4,  0,  0,  0, 23,  0,  1,  3,  0,  0,  0,  0
+	.byte   5,  0,  0,  0, 59,  0,  2,  4,  0,  0,  0,  0
+	.byte   6,  0,  0,  0, 59,  0,  3,  5,  0,  0,  0,  0
+	.byte   7,  0,  0,  0,  0,  0,  4,  0,  6,  0,  0,  0
 
 	.align 2
 gOamData_837645C:: @ 837645C
@@ -23,7 +27,7 @@ gSpriteImage_8376484:: @ 8376484
 
 	.align 2
 Palette_3764A4: @ 83764A4
-	.incbin "baserom.gba", 0x3764a4, 0x8
+	.incbin "graphics/unknown/83764A4.gbapal"
 
 	.align 2
 gSpriteImageTable_83764AC:: @ 83764AC

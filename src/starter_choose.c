@@ -28,7 +28,7 @@ extern struct SpriteSheet gUnknown_083F77A4;
 extern u8 gBirchBagGrassPal[];
 extern const u8 gStarterChoose_LabelCoords[][2];
 extern u16 gStarterMons[];
-extern union AffineAnimCmd *gUnknown_083F778C[];
+extern union AffineAnimCmd *gSpriteAffineAnimTable_83F778C[];
 extern u8 gOtherText_DoYouChoosePoke[];
 extern u16 gScriptResult;
 extern u8 gSpeciesNames[][11];
@@ -216,7 +216,7 @@ static void Task_StarterChoose2(u8 taskId)
           GetStarterPokemon(gTasks[taskId].data[TD_STARTERSELECTION]),
           gStarterChoose_PokeballCoords[selection][0],
           gStarterChoose_PokeballCoords[selection][1]);
-        gSprites[spriteId].affineAnims = gUnknown_083F778C;
+        gSprites[spriteId].affineAnims = gSpriteAffineAnimTable_83F778C;
         gSprites[spriteId].callback = StarterPokemonSpriteAnimCallback;
         gTasks[taskId].data[TD_PKMN_SPRITE_ID] = spriteId;
         
