@@ -1304,9 +1304,9 @@ void BattleAICmd_if_damage_bonus(void)
 
     gUnknown_02024BEC = 40;
     gUnknown_02024BE6 = (ai = &battle_2000000.ai)->unk2;
-    
+
     move_effectiveness_something(gUnknown_02024BE6, gUnknown_02024C07, gUnknown_02024C08);
-    
+
     if (gUnknown_02024BEC == 120)
         gUnknown_02024BEC = 80;
     if(gUnknown_02024BEC == 240)
