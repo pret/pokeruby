@@ -2280,7 +2280,7 @@ _0810C8F2:
 	movs r1, 0x1
 	orrs r0, r1
 	strb r0, [r4, 0x1]
-	ldr r0, _0810C914 @ =gUnknown_083F7F70
+	ldr r0, _0810C914 @ =gSpriteAffineAnimTable_83F7F70
 	str r0, [r4, 0x10]
 	adds r0, r4, 0
 	bl InitSpriteAffineAnim
@@ -2289,7 +2289,7 @@ _0810C8F2:
 	strh r5, [r4, 0x30]
 	b _0810C944
 	.align 2, 0
-_0810C914: .4byte gUnknown_083F7F70
+_0810C914: .4byte gSpriteAffineAnimTable_83F7F70
 _0810C918:
 	ldrh r0, [r4, 0x30]
 	adds r0, 0x1
