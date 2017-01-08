@@ -57,9 +57,6 @@ extern u16 gUnknown_02029814;
 extern bool8 gUnknown_02029816;
 extern struct LinkPlayerMapObject gLinkPlayerMapObjects[];
 
-extern u8 gUnknown_0202E85C;
-extern u8 gUnknown_0202E85D;
-
 extern u8 gUnknown_03000580[];
 extern u16 (*gUnknown_03000584)(u32);
 extern u8 gUnknown_03000588;
@@ -370,7 +367,7 @@ void saved_warp2_set_2(int unused, s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y
     warp_set(&gSaveBlock1.warp2, mapGroup, mapNum, warpId, x, y);
 }
 
-void copy_saved_warp2_bank_and_enter_x_to_warp1(void)
+void copy_saved_warp2_bank_and_enter_x_to_warp1(u8 unused)
 {
     gUnknown_020297F8 = gSaveBlock1.warp2;
 }
