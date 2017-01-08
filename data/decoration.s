@@ -42,95 +42,96 @@ gUnknown_083EC634:: @ 83EC634
 	.4byte sub_8109D04
 	.4byte sub_80FF058
 
+	.align 2
 gUnknown_083EC654:: @ 83EC654
-	.incbin "baserom.gba", 0x003ec654, 0x6
+	.2byte 0x6318, 0x739C, 0x7FFF
 
 gUnknown_083EC65A:: @ 83EC65A
-	.incbin "baserom.gba", 0x3ec65a, 0x6
+	.string "{PALETTE 13}{STR_VAR_1}$"
 
 Unknown_3EC660: @ 83EC660
-	.incbin "baserom.gba", 0x3ec660, 0x4
+	.byte 0, 1, 2, 3
 
 Unknown_3EC664: @ 83EC664
-	.incbin "baserom.gba", 0x3ec664, 0xc
+	.byte 0, 1, 2, 3, 4, 5, 8, 9, 10, 11, 12, 13
 
 Unknown_3EC670: @ 83EC670
-	.incbin "baserom.gba", 0x3ec670, 0x10
+	.byte 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15
 
 Unknown_3EC680: @ 83EC680
-	.incbin "baserom.gba", 0x3ec680, 0xc
+	.byte 0, 1, 4, 5, 8, 9, 12, 13, 16, 17, 20, 21
 
 Unknown_3EC68C: @ 83EC68C
-	.incbin "baserom.gba", 0x3ec68c, 0x8
+	.byte 0, 1, 2, 3, 4, 5, 6, 7
 
 Unknown_3EC694: @ 83EC694
-	.incbin "baserom.gba", 0x3ec694, 0x20
+	.byte 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31
 
 Unknown_3EC6B4: @ 83EC6B4
-	.incbin "baserom.gba", 0x3ec6b4, 0x24
+	.byte 0, 1, 2, 3, 4, 5, 8, 9, 10, 11, 12, 13, 16, 17, 18, 19, 20, 21, 24, 25, 26, 27, 28, 29, 32, 33, 34, 35, 36, 37, 40, 41, 42, 43, 44, 45
 
 Unknown_3EC6D8: @ 83EC6D8
-	.incbin "baserom.gba", 0x3ec6d8, 0x18
+	.byte 0, 1, 2, 3, 4, 5, 8, 9, 10, 11, 12, 13, 16, 17, 18, 19, 20, 21, 24, 25, 26, 27, 28, 29
 
 Unknown_3EC6F0: @ 83EC6F0
-	.incbin "baserom.gba", 0x3ec6f0, 0x4
+	.byte 0, 0, 0, 0
 
 Unknown_3EC6F4: @ 83EC6F4
-	.incbin "baserom.gba", 0x3ec6f4, 0x8
+	.byte 0, 0, 1, 1, 0, 0, 1, 1
 
 Unknown_3EC6FC: @ 83EC6FC
-	.incbin "baserom.gba", 0x3ec6fc, 0xc
+	.byte 0, 0, 1, 1, 2, 2, 0, 0, 1, 1, 2, 2
 
 Unknown_3EC708: @ 83EC708
-	.incbin "baserom.gba", 0x3ec708, 0x20
+	.byte 0, 0, 1, 1, 2, 2, 3, 3, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 4, 4, 5, 5, 6, 6, 7, 7
 
 Unknown_3EC728: @ 83EC728
-	.incbin "baserom.gba", 0x3ec728, 0x10
+	.byte 0, 0, 1, 1, 0, 0, 1, 1, 2, 2, 3, 3, 2, 2, 3, 3
 
 Unknown_3EC738: @ 83EC738
-	.incbin "baserom.gba", 0x3ec738, 0x8
+	.byte 0, 0, 0, 0, 1, 1, 1, 1
 
 Unknown_3EC740: @ 83EC740
-	.incbin "baserom.gba", 0x3ec740, 0xc
+	.byte 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2
 
 Unknown_3EC74C: @ 83EC74C
-	.incbin "baserom.gba", 0x3ec74c, 0x20
+	.byte 0, 0, 1, 1, 0, 0, 1, 1, 2, 2, 3, 3, 2, 2, 3, 3, 4, 4, 5, 5, 4, 4, 5, 5, 6, 6, 7, 7, 6, 6, 7, 7
 
 Unknown_3EC76C: @ 83EC76C
-	.incbin "baserom.gba", 0x3ec76c, 0x24
+	.byte 0, 0, 1, 1, 2, 2, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 6, 6, 7, 7, 8, 8
 
 Unknown_3EC790: @ 83EC790
-	.incbin "baserom.gba", 0x3ec790, 0x18
+	.byte 0, 0, 1, 1, 2, 2, 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 3, 3, 4, 4, 5, 5
 
 Unknown_3EC7A8: @ 83EC7A8
-	.incbin "baserom.gba", 0x3ec7a8, 0x4
+	.byte 4, 5, 6, 7
 
 Unknown_3EC7AC: @ 83EC7AC
-	.incbin "baserom.gba", 0x3ec7ac, 0x8
+	.byte 4, 5, 4, 5, 6, 7, 6, 7
 
 Unknown_3EC7B4: @ 83EC7B4
-	.incbin "baserom.gba", 0x3ec7b4, 0xc
+	.byte 4, 5, 4, 5, 4, 5, 6, 7, 6, 7, 6, 7
 
 Unknown_3EC7C0: @ 83EC7C0
-	.incbin "baserom.gba", 0x3ec7c0, 0x20
+	.byte 4, 5, 4, 5, 4, 5, 4, 5, 6, 7, 6, 7, 6, 7, 6, 7, 4, 5, 4, 5, 4, 5, 4, 5, 6, 7, 6, 7, 6, 7, 6, 7
 
 Unknown_3EC7E0: @ 83EC7E0
-	.incbin "baserom.gba", 0x3ec7e0, 0x10
+	.byte 4, 5, 4, 5, 6, 7, 6, 7, 4, 5, 4, 5, 6, 7, 6, 7
 
 Unknown_3EC7F0: @ 83EC7F0
-	.incbin "baserom.gba", 0x3ec7f0, 0x8
+	.byte 4, 5, 6, 7, 4, 5, 6, 7
 
 Unknown_3EC7F8: @ 83EC7F8
-	.incbin "baserom.gba", 0x3ec7f8, 0xc
+	.byte 4, 5, 6, 7, 4, 5, 6, 7, 4, 5, 6, 7
 
 Unknown_3EC804: @ 83EC804
-	.incbin "baserom.gba", 0x3ec804, 0x20
+	.byte 4, 5, 4, 5, 6, 7, 6, 7, 4, 5, 4, 5, 6, 7, 6, 7, 4, 5, 4, 5, 6, 7, 6, 7, 4, 5, 4, 5, 6, 7, 6, 7
 
 Unknown_3EC824: @ 83EC824
-	.incbin "baserom.gba", 0x3ec824, 0x24
+	.byte 4, 5, 4, 5, 4, 5, 6, 7, 6, 7, 6, 7, 4, 5, 4, 5, 4, 5, 6, 7, 6, 7, 6, 7, 4, 5, 4, 5, 4, 5, 6, 7, 6, 7, 6, 7
 
 Unknown_3EC848: @ 83EC848
-	.incbin "baserom.gba", 0x3ec848, 0x18
+	.byte 4, 5, 4, 5, 4, 5, 6, 7, 6, 7, 6, 7, 4, 5, 4, 5, 4, 5, 6, 7, 6, 7, 6, 7
 
 	.align 2
 gUnknown_083EC860:: @ 83EC860
@@ -146,7 +147,16 @@ gUnknown_083EC860:: @ 83EC860
 	.4byte Unknown_3EC6D8, Unknown_3EC790, Unknown_3EC848, 0x18
 
 gUnknown_083EC900:: @ 83EC900
-	.incbin "baserom.gba", 0x3ec900, 0x28
+	.byte 0, 1,  120, 78
+	.byte 1, 2, -128, 78
+	.byte 1, 3, -112, 86
+	.byte 1, 3, -112, 70
+	.byte 0, 2, -128, 70
+	.byte 2, 2,  120, 70
+	.byte 2, 3, -128, 86
+	.byte 2, 3, -128, 54
+	.byte 0, 3, -112, 70
+	.byte 1, 3, -112, 70
 
 	.align 2
 gSpriteAnim_83EC928:: @ 83EC928
@@ -187,18 +197,18 @@ gUnknown_083EC96C:: @ 83EC96C
 	.4byte sub_8100FB4
 
 gUnknown_083EC97C:: @ 83EC97C
-	.incbin "baserom.gba", 0x003ec97c, 0x8
+	.byte 4, 4, 4, 4, 0, 3, 3, 0
 
 gUnknown_083EC984:: @ 83EC984
-	.incbin "baserom.gba", 0x003ec984, 0x8
+	.byte 4, 4, 4, 4, 0, 4, 3, 0
 
 	.align 2
 gUnknown_083EC98C::
-	.incbin "baserom.gba", 0x003ec98c, 0x20
+	.incbin "graphics/unknown/83EC98C.gbapal"
 
 	.align 2
 Unknown_3EC9AC: @ 83EC9AC
-	.incbin "baserom.gba", 0x3ec9ac, 0x20
+	.incbin "graphics/unknown/83EC9AC.gbapal"
 
 	.align 2
 gUnknown_083EC9CC:: @ 83EC9CC
@@ -250,4 +260,5 @@ gUnknown_083ECAA0:: @ 83ECAA0
 	.4byte sub_8101848
 	.4byte sub_80FED3C
 
-	.incbin "baserom.gba", 0x003ecaa8, 0x4
+@ XXX: what is this?
+	.4byte 0x2000000

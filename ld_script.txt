@@ -61,6 +61,7 @@ SECTIONS {
         src/rng.o(.text);
         asm/util.o(.text);
         src/blend_palette.o(.text);
+		src/daycare.o(.text);
         asm/daycare.o(.text);
         asm/egg_hatch.o(.text);
         asm/rom_804373C.o(.text);
@@ -417,6 +418,7 @@ SECTIONS {
         data/diploma.o(.rodata);
         data/strings.o(.rodata);
         data/berry_tag_screen.o(.rodata);
+        src/save_failed_screen.o(.rodata);
         data/save_failed_screen.o(.rodata);
         data/pokeblock_feed.o(.rodata);
         data/intro_credits_graphics.o(.rodata);

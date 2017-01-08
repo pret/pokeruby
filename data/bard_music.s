@@ -3,76 +3,145 @@
 
 	.section .rodata
 
+	.align 1
 Unknown_8416F08:
-	.incbin "baserom.gba", 0x00416f08, 0x4
+	.2byte -768, 6144
+
+	.align 1
 Unknown_8416F0C:
-	.incbin "baserom.gba", 0x00416f0c, 0x4
+	.2byte 2304, 6144
+
+	.align 1
 Unknown_8416F10:
-	.incbin "baserom.gba", 0x00416f10, 0x4
+	.2byte 256, 6144
+
+	.align 1
 Unknown_8416F14:
-	.incbin "baserom.gba", 0x00416f14, 0x4
+	.2byte 1024, 6144
+
+	.align 1
 Unknown_8416F18:
-	.incbin "baserom.gba", 0x00416f18, 0x4
+	.2byte 2816, 6144
+
+	.align 1
 Unknown_8416F1C:
-	.incbin "baserom.gba", 0x00416f1c, 0x6
+	.2byte -768, -256, 6144
+
+	.align 1
 Unknown_8416F22:
-	.incbin "baserom.gba", 0x00416f22, 0x6
+	.2byte -768, 512, 6144
+
+	.align 1
 Unknown_8416F28:
-	.incbin "baserom.gba", 0x00416f28, 0x6
+	.2byte 512, 1024, 6144
+
+	.align 1
 Unknown_8416F2E:
-	.incbin "baserom.gba", 0x00416f2e, 0x6
+	.2byte 1536, 2048, 6144
+
+	.align 1
 Unknown_8416F34:
-	.incbin "baserom.gba", 0x00416f34, 0x6
+	.2byte 2304, 2048, 6144
+
+	.align 1
 Unknown_8416F3A:
-	.incbin "baserom.gba", 0x00416f3a, 0x8
+	.2byte -768, -256, -768, 6144
+
+	.align 1
 Unknown_8416F42:
-	.incbin "baserom.gba", 0x00416f42, 0x8
+	.2byte 1024, -768, 1024, 6144
+
+	.align 1
 Unknown_8416F4A:
-	.incbin "baserom.gba", 0x00416f4a, 0x8
+	.2byte 2304, 2048, 1536, 6144
+
+	.align 1
 Unknown_8416F52:
-	.incbin "baserom.gba", 0x00416f52, 0x8
+	.2byte 256, 512, 1024, 6144
+
+	.align 1
 Unknown_8416F5A:
-	.incbin "baserom.gba", 0x00416f5a, 0x8
+	.2byte 1536, 4096, 3328, 6144
+
+	.align 1
 Unknown_8416F62:
-	.incbin "baserom.gba", 0x00416f62, 0xA
+	.2byte 1024, 2304, 1024, 2304, 6144
+
+	.align 1
 Unknown_8416F6C:
-	.incbin "baserom.gba", 0x00416f6c, 0xA
+	.2byte 2304, 1024, 3328, 1024, 6144
+
+	.align 1
 Unknown_8416F76:
-	.incbin "baserom.gba", 0x00416f76, 0xA
+	.2byte 256, 512, 1024, 1536, 6144
+
+	.align 1
 Unknown_8416F80:
-	.incbin "baserom.gba", 0x00416f80, 0xA
+	.2byte 2048, 1536, 1024, 512, 6144
+
+	.align 1
 Unknown_8416F8A:
-	.incbin "baserom.gba", 0x00416f8a, 0xA
+	.2byte 3840, 3328, 2816, 2560, 6144
+
+	.align 1
 Unknown_8416F94:
-	.incbin "baserom.gba", 0x00416f94, 0xC
+	.2byte -768, -256, 256, 512, 1024, 6144
+
+	.align 1
 Unknown_8416FA0:
-	.incbin "baserom.gba", 0x00416fa0, 0xC
+	.2byte 2304, 2048, 1536, 1024, 512, 6144
+
+	.align 1
 Unknown_8416FAC:
-	.incbin "baserom.gba", 0x00416fac, 0xC
+	.2byte 256, 1024, 2304, 1024, 256, 6144
+
+	.align 1
 Unknown_8416FB8:
-	.incbin "baserom.gba", 0x00416fb8, 0xC
+	.2byte 2304, 1024, 2304, 1024, -768, 6144
+
+	.align 1
 Unknown_8416FC4:
-	.incbin "baserom.gba", 0x00416fc4, 0xC
+	.2byte 2816, 2048, 1024, 1024, 1536, 6144
+
+	.align 1
 Unknown_8416FD0:
-	.incbin "baserom.gba", 0x00416fd0, 0xE
+	.2byte -768, -256, 256, 512, 1024, 1536, 6144
+
+	.align 1
 Unknown_8416FDE:
-	.incbin "baserom.gba", 0x00416fde, 0xE
+	.2byte 2048, 1536, 1024, 512, 256, -256, 6144
+
+	.align 1
 Unknown_8416FEC:
-	.incbin "baserom.gba", 0x00416fec, 0xE
+	.2byte 256, 512, 1024, 256, 512, 4096, 6144
+
+	.align 1
 Unknown_8416FFA:
-	.incbin "baserom.gba", 0x00416ffa, 0xE
+	.2byte 1024, -768, 2304, 1024, 2304, 1024, 6144
+
+	.align 1
 Unknown_8417008:
-	.incbin "baserom.gba", 0x00417008, 0xE
+	.2byte 2048, 2304, 2048, 2304, 2048, 2304, 6144
+
+	.align 1
 Unknown_8417016:
-	.incbin "baserom.gba", 0x00417016, 0x10
+	.2byte 512, 256, 512, 256, 512, 1024, 512, 6144
+
+	.align 1
 Unknown_8417026:
-	.incbin "baserom.gba", 0x00417026, 0x10
+	.2byte 256, 256, -256, -256, -768, 1024, -768, 6144
+
+	.align 1
 Unknown_8417036:
-	.incbin "baserom.gba", 0x00417036, 0x10
+	.2byte 2048, 2304, 2816, 3328, 3584, 3328, 2816, 6144
+
+	.align 1
 Unknown_8417046:
-	.incbin "baserom.gba", 0x00417046, 0x10
+	.2byte 2048, 1536, 1024, 512, 3328, 2816, 2304, 6144
+
+	.align 1
 Unknown_8417056:
-	.incbin "baserom.gba", 0x00417056, 0x12
+	.2byte 768, 1024, 1536, 2048, 1792, 2048, 1024, 6144
 
 	.align 2
 gUnknown_08417068:: @ 8417068
@@ -112,8 +181,60 @@ gUnknown_08417068:: @ 8417068
 	.4byte Unknown_8417046
 	.4byte Unknown_8417056
 
+	.align 2
 gUnknown_084170F4:: @ 84170F4
-	.incbin "baserom.gba", 0x004170f4, 0xD0
+	.4byte  9
+	.4byte 22
+	.4byte 15
+	.4byte 16
+	.4byte 39
+	.4byte 21
+	.4byte  9
+	.4byte 30
+	.4byte 24
+	.4byte 15
+	.4byte 25
+	.4byte 12
+	.4byte 22
+	.4byte 45
+	.4byte 24
+	.4byte 15
+	.4byte 40
+	.4byte  9
+	.4byte 21
+	.4byte 42
+	.4byte 18
+	.4byte  9
+	.4byte 22
+	.4byte 15
+	.4byte 27
+	.4byte 48
+	.4byte 18
+	.4byte 27
+	.4byte 33
+	.4byte 24
+	.4byte 25
+	.4byte 39
+	.4byte 19
+	.4byte 16
+	.4byte 54
+	.4byte 18
+	.4byte  9
+	.4byte 45
+	.4byte 15
+	.4byte 12
+	.4byte 39
+	.4byte 23
+	.4byte  5
+	.4byte 45
+	.4byte 12
+	.4byte 21
+	.4byte 48
+	.4byte 12
+	.4byte 21
+	.4byte 69
+	.4byte 18
+	.4byte 15
 
 @ 84171C4
 	.include "data/bard_music.inc"

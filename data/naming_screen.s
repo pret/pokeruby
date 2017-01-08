@@ -11,8 +11,8 @@ gSpriteImage_83CE094:: @ 83CE094
 gSpriteImage_83CE154:: @ 83CE154
 	.incbin "graphics/naming_screen/pc_icon/1.4bpp"
 
-	.align 2
-	.incbin "baserom.gba", 0x003ce214, 0x4
+@ XXX: what is this?
+	.4byte 0x2000000
 
 	.align 2
 gUnknown_083CE218:: @ 83CE218
@@ -39,17 +39,21 @@ gUnknown_083CE250:: @ 83CE250
 	.4byte sub_80B626C
 	.4byte sub_80B6274
 
+	.align 1
 gUnknown_083CE258:: @ 83CE258
-	.incbin "baserom.gba", 0x003ce258, 0xa
+	.2byte 0, 0, 0, -1, 1
 
+	.align 1
 gUnknown_083CE262:: @ 83CE262
-	.incbin "baserom.gba", 0x003ce262, 0xa
+	.2byte 0, -1, 1, 0, 0
 
+	.align 1
 gUnknown_083CE26C:: @ 83CE26C
-	.incbin "baserom.gba", 0x003ce26c, 0x8
+	.2byte 0, 1, 1, 2
 
+	.align 1
 gUnknown_083CE274:: @ 83CE274
-	.incbin "baserom.gba", 0x003ce274, 0x8
+	.2byte 0, 0, 3, 0
 
 	.align 2
 gUnknown_083CE27C:: @ 83CE27C
@@ -64,10 +68,12 @@ gUnknown_083CE28C:: @ 83CE28C
 	.4byte 0x02000004
 
 gUnknown_083CE294:: @ 83CE294
-	.incbin "baserom.gba", 0x003ce294, 0x1b
+	.byte   1,  3,  5,  8, 10, 12, 14, 17, 19
+	.byte   1,  3,  5,  8, 10, 12, 14, 17, 19
+	.byte   1,  4,  7, 10, 13, 16, 16, 16, 19
 
 gUnknown_083CE2AF:: @ 83CE2AF
-	.incbin "baserom.gba", 0x003ce2af, 0x5
+	.byte 1, 2, 3
 
 	.align 2
 gUnknown_083CE2B4:: @ 83CE2B4
@@ -76,17 +82,21 @@ gUnknown_083CE2B4:: @ 83CE2B4
 	.4byte sub_80B6B9C
 	.4byte sub_80B6C08
 
+	.align 1
 gUnknown_083CE2C4:: @ 83CE2C4
-	.incbin "baserom.gba", 0x003ce2c4, 0x6
+	.2byte 1, 3, 2
 
+	.align 1
 gUnknown_083CE2CA:: @ 83CE2CA
-	.incbin "baserom.gba", 0x003ce2ca, 0x6
+	.2byte 4, 6, 5
 
+	.align 1
 gUnknown_083CE2D0:: @ 83CE2D0
-	.incbin "baserom.gba", 0x003ce2d0, 0x8
+	.2byte 0, -4, -2, -1
 
+	.align 1
 gUnknown_083CE2D8:: @ 83CE2D8
-	.incbin "baserom.gba", 0x003ce2d8, 0x8
+	.2byte 2,  3,  2,  1
 
 	.align 2
 gUnknown_083CE2E0:: @ 83CE2E0
@@ -104,8 +114,10 @@ gUnknown_083CE2F0:: @ 83CE2F0
 	.4byte sub_80B7670
 	.4byte sub_80B7660
 
+	.align 2
 gUnknown_083CE308:: @ 83CE308
-	.incbin "baserom.gba", 0x003ce308, 0x8
+	.4byte VRAM + 0xE000
+	.4byte VRAM + 0xE800
 
 	.align 2
 gUnknown_083CE310:: @ 83CE310
@@ -143,9 +155,8 @@ gUnknown_083CE368:: @ 83CE368
 	.4byte nullsub_62
 	.4byte sub_80B7924
 
-	.align 2
 gUnknown_083CE370:: @ 83CE370
-	.incbin "baserom.gba", 0x003ce370, 0x4
+	.string "♂$"
 
 	.align 2
 Unknown_83CE374:
@@ -202,38 +213,59 @@ gOamData_83CE4A8:: @ 83CE4A8
 	.2byte 0x0000
 
 	.align 2
-Unknown_3CE4B0:: @ 83CE4B0
-	.incbin "baserom.gba", 0x3ce4b0, 0x50
+gSubspriteTable_83CE4B0:: @ 83CE4B0
+	subsprite -20, -16, 1,   0, 32x8
+	subsprite  12, -16, 1,   4,  8x8
+	subsprite -20,  -8, 1,   5, 32x8
+	subsprite  12,  -8, 1,   9,  8x8
+	subsprite -20,   0, 1,  10, 32x8
+	subsprite  12,   0, 1,  14,  8x8
+	subsprite -20,   8, 1,  15, 32x8
+	subsprite  12,   8, 1,  19,  8x8
+
+@ unreferenced
+	.align 2
+gSubspriteTable_83CE4F0:: @ 83CE4F0
+	subsprite -12,  -4, 1,   0,  8x8
+	subsprite   4,  -4, 1,   1,  8x8
 
 	.align 2
-Unknown_3CE500:: @ 83CE500
-	.incbin "baserom.gba", 0x3ce500, 0x10
+gSubspriteTable_83CE500:: @ 83CE500
+	subsprite -12,  -4, 1,   0, 16x8
+	subsprite   4,  -4, 1,   2,  8x8
 
 	.align 2
-Unknown_3CE510:: @ 83CE510
-	.incbin "baserom.gba", 0x3ce510, 0x30
+gSubspriteTable_83CE510:: @ 83CE510
+	subsprite -20, -12, 1,   0, 32x8
+	subsprite  12, -12, 1,   4,  8x8
+	subsprite -20,  -4, 1,   5, 32x8
+	subsprite  12,  -4, 1,   9,  8x8
+	subsprite -20,   4, 1,  10, 32x8
+	subsprite  12,   4, 1,  14,  8x8
 
 	.align 2
-Unknown_3CE540:: @ 83CE540
-	.incbin "baserom.gba", 0x3ce540, 0x18
+gSubspriteTable_83CE540:: @ 83CE540
+	subsprite  -8, -12, 3,   0, 16x8
+	subsprite  -8,  -4, 3,   2, 16x8
+	subsprite  -8,   4, 3,   4, 16x8
 
 	.align 2
-gUnknown_083CE558:: @ 83CE558
-	.4byte 0x8, Unknown_3CE4B0
+gSubspriteTables_83CE558:: @ 83CE558
+	.4byte 8, gSubspriteTable_83CE4B0
 
 	.align 2
-gUnknown_083CE560:: @ 83CE560
-	.4byte 0x2, Unknown_3CE500
-	.4byte 0x2, Unknown_3CE500
-	.4byte 0x2, Unknown_3CE500
+gSubspriteTables_83CE560:: @ 83CE560
+	.4byte 2, gSubspriteTable_83CE500
+	.4byte 2, gSubspriteTable_83CE500
+	.4byte 2, gSubspriteTable_83CE500
 
 	.align 2
-gUnknown_083CE578:: @ 83CE578
-	.4byte 0x6, Unknown_3CE510
+gSubspriteTables_83CE578:: @ 83CE578
+	.4byte 6, gSubspriteTable_83CE510
 
 	.align 2
-gUnknown_083CE580:: @ 83CE580
-	.4byte 0x3, Unknown_3CE540
+gSubspriteTables_83CE580:: @ 83CE580
+	.4byte 3, gSubspriteTable_83CE540
 
 	.align 2
 gSpriteImageTable_83CE588:: @ 83CE588

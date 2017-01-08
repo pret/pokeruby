@@ -33,9 +33,6 @@ extern struct SaveFailedStruct gUnknown_0203933E;
 extern u32 gUnknown_03005EA8;
 extern u32 gUnknown_03005EBC;
 
-extern struct OamData gUnknown_08411940;
-extern u8 gUnknown_08411948[][3];
-
 extern u8 gBirchHelpGfx[];
 
 extern u8 gSystemText_SaveFailedBackupCheck[];
@@ -51,6 +48,35 @@ extern u8 gBirchBagTilemap[];
 extern const u8 gSaveFailedClockGfx[];
 extern const u8 gSaveFailedClockPal[];
 extern u8 gBirchBagGrassPal[];
+
+static const struct OamData sClockOamData =
+{
+    160, // Y
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0
+};
+
+static const u8 sClockFrames[8][3] =
+{
+    { 1, 0, 0 },
+    { 5, 0, 0 },
+    { 9, 0, 0 },
+    { 5, 0, 1 },
+    { 1, 0, 1 },
+    { 5, 1, 1 },
+    { 9, 1, 0 },
+    { 5, 1, 0 },
+};
 
 static void VBlankCB(void);
 static void CB2_SaveFailedScreen(void);
@@ -236,14 +262,14 @@ static void VBlankCB_UpdateClockGraphics(void)
 {
     unsigned int n = (gMain.vblankCounter2 >> 3) & 7;
 
-    gMain.oamBuffer[0] = gUnknown_08411940;
+    gMain.oamBuffer[0] = sClockOamData;
     gMain.oamBuffer[0].x = 112;
     gMain.oamBuffer[0].y = (CLOCK_WIN_TOP + 1) * 8;
 
     if (gUnknown_0203933E.unk0)
     {
-        gMain.oamBuffer[0].tileNum = gUnknown_08411948[n][0];
-        gMain.oamBuffer[0].matrixNum = (gUnknown_08411948[n][2] << 4) | (gUnknown_08411948[n][1] << 3);
+        gMain.oamBuffer[0].tileNum = sClockFrames[n][0];
+        gMain.oamBuffer[0].matrixNum = (sClockFrames[n][2] << 4) | (sClockFrames[n][1] << 3);
     }
     else
     {

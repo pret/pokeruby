@@ -3,59 +3,81 @@
 
 	.section .rodata
 
+	.align 2
 gUnknown_083DFEC4:: @ 83DFEC4
-	.incbin "baserom.gba", 0x003dfec4, 0x4
+	.4byte 0x2000000
 
+	.align 2
 gUnknown_083DFEC8:: @ 83DFEC8
-	.4byte 0x02039360
+	.4byte gTileBuffer
 
+	.align 1
 gUnknown_083DFECC:: @ 83DFECC
-	.incbin "baserom.gba", 0x003dfecc, 0x20
+	.incbin "graphics/pokenav/83DFECC.gbapal"
 
+	.align 1
 gUnknown_083DFEEC:: @ 83DFEEC
-	.incbin "baserom.gba", 0x003dfeec, 0xa0
+	.incbin "graphics/pokenav/83DFEEC.4bpp"
 
+	.align 2
 gUnknown_083DFF8C:: @ 83DFF8C
-	.incbin "baserom.gba", 0x003dff8c, 0xb0
+	.incbin "graphics/pokenav/83DFF8C.bin.lz"
 
+	.align 1
 gUnknown_083E003C:: @ 83E003C
-	.incbin "baserom.gba", 0x003e003c, 0x20
+	.incbin "graphics/pokenav/83E003C.gbapal"
 
+	.align 1
 gUnknown_083E005C:: @ 83E005C
-	.incbin "baserom.gba", 0x003e005c, 0x20
+	.incbin "graphics/pokenav/83E005C.4bpp"
 
+	.align 2
 gUnknown_083E007C:: @ 83E007C
-	.incbin "baserom.gba", 0x003e007c, 0xa8
+	.incbin "graphics/pokenav/83E007C.bin.lz"
 
+	.align 1
 gUnknown_083E0124:: @ 83E0124
-	.incbin "baserom.gba", 0x003e0124, 0x20
+	.incbin "graphics/pokenav/83E0124_pal.bin"
 
+	.align 1
 gUnknown_083E0144:: @ 83E0144
-	.incbin "baserom.gba", 0x003e0144, 0x68
+	.incbin "graphics/pokenav/83E0144_pal.bin"
 
+	.align 1
+	.incbin "graphics/pokenav/83E0164.bin"
+
+	.align 1
 gUnknown_083E01AC:: @ 83E01AC
-	.incbin "baserom.gba", 0x003e01ac, 0x48
+	.incbin "graphics/pokenav/83E01AC.bin"
 
+	.align 1
 gUnknown_083E01F4:: @ 83E01F4
-	.incbin "baserom.gba", 0x003e01f4, 0x60
+	.incbin "graphics/pokenav/83E01F4.bin"
 
+	.align 1
 gUnknown_083E0254:: @ 83E0254
-	.incbin "baserom.gba", 0x003e0254, 0x20
+	.incbin "graphics/pokenav/83E0254.gbapal"
 
+	.align 1
 gUnknown_083E0274:: @ 83E0274
-	.incbin "baserom.gba", 0x003e0274, 0x20
+	.incbin "graphics/pokenav/83E0274.gbapal"
 
 	.align 2
 gPokenavConditionSearch2_Pal:: @ 83E0294
 	.incbin "graphics/pokenav/condition_search2.gbapal"
 
+	.align 1
 gUnknown_083E02B4:: @ 83E02B4
-	.incbin "baserom.gba", 0x003e02b4, 0x60
+	.incbin "graphics/pokenav/83E02B4.gbapal"
 
+	.align 1
+	.incbin "graphics/pokenav/83E02D4.bin"
+
+	.align 1
 gUnknown_083E0314:: @ 83E0314
-	.incbin "baserom.gba", 0x003e0314, 0x20
+	.incbin "graphics/pokenav/83E0314.gbapal"
 
-	.align 2
+	.align 1
 gUnknown_083E0334:: @ 83E0334
 	.incbin "graphics/pokenav/trainereyes_misc_pal.bin" @ the original bytes have an "FF FF" instance which is incompatible with gbagfx to produce the bytes needed to match the original ROM, so I am forced to include it as a .bin until the lowest bit is properly handled or a better workaround is produced
 
@@ -63,14 +85,20 @@ gUnknown_083E0334:: @ 83E0334
 gUnknown_083E0354:: @ 83E0354
 	.incbin "graphics/pokenav/trainereyes_misc.4bpp.lz"
 
+	.align 1
 gUnknown_083E039C:: @ 83E039C
-	.incbin "baserom.gba", 0x003e039c, 0x4
+	.2byte 0x4280, 0x4282
 
+	.align 1
 gUnknown_083E03A0:: @ 83E03A0
-	.incbin "baserom.gba", 0x003e03a0, 0x8
+	.2byte 0x4000, 0x4000, 0x4281, 0x4283
 
+	.align 1
 gUnknown_083E03A8:: @ 83E03A8
-	.incbin "baserom.gba", 0x003e03a8, 0x64
+	.incbin "graphics/pokenav/83E03A8.gbapal"
+
+	.align 1
+	.incbin "graphics/pokenav/83E03C8.bin"
 
 gUnknown_083E040C:: @ 83E040C
 	.incbin "graphics/misc/ribbons_half.4bpp.lz"
@@ -248,7 +276,7 @@ gPokenavPokeballTiles::
 
 	.align 2
 gUnknown_083E3780: @ 83E3780
-	.incbin "baserom.gba", 0x3e3780, 0x20
+	.incbin "graphics/pokenav/83E3780.4bpp"
 
 	.align 2
 gPokenavSparkle_Pal::
@@ -262,8 +290,9 @@ gPokenavSparkle_Gfx::
 gPokenavUpDownArrows_Gfx::
 	.incbin "graphics/pokenav/arrows.4bpp"
 
-gUnknown_083E3BC0::
-	.incbin "baserom.gba", 0x003E3BC0, 0x20
+	.align 2
+gUnknown_083E3BC0:: @ 83E3BC0
+	.incbin "graphics/pokenav/83E3BC0.bin"
 
 	.align 2
 gTiles_083E3BE0::
@@ -289,11 +318,28 @@ PokenavBlueLightPalette:
 PokenavBlueLightTiles:
 	.incbin "graphics/pokenav/blue_light.4bpp"
 
+	.align 2
 Palette_3E42D8: @ 83E42D8
-	.incbin "baserom.gba", 0x3e42d8, 0x20
+	.incbin "graphics/pokenav/83E42D8.gbapal"
 
+	.align 1
 gUnknown_083E42F8:: @ 83E42F8
-	.incbin "baserom.gba", 0x003e42f8, 0x20
+	.2byte  0x408
+	.2byte  0x408
+	.2byte  0x507
+	.2byte  0x507
+	.2byte  0x606
+	.2byte  0x606
+	.2byte  0x805
+	.2byte  0x805
+	.2byte  0xA04
+	.2byte  0xA04
+	.2byte  0xC03
+	.2byte  0xC03
+	.2byte  0xE02
+	.2byte  0xE02
+	.2byte 0x1000
+	.2byte 0x1000
 
 	.align 2
 gOamData_83E4318:: @ 83E4318
@@ -448,11 +494,14 @@ gSpriteAnimTable_83E43E0:: @ 83E43E0
 	.4byte gSpriteAnim_83E43D0
 	.4byte gSpriteAnim_83E43D8
 
-Unknown_83E4440:
-	.incbin "baserom.gba", 0x003e4440, 0x10
+	.align 2
+gSpriteAffineAnim_83E4440:: @ 83E4440
+	obj_rot_scal_anim_frame 0x10, 0x10, 0, 16
+	obj_rot_scal_anim_end
 
-gUnknown_083E4450:: @ 83E4450
-	.4byte Unknown_83E4440
+	.align 2
+gSpriteAffineAnimTable_83E4450:: @ 83E4450
+	.4byte gSpriteAffineAnim_83E4440
 
 	.align 2
 gSpriteTemplate_83E4454:: @ 83E4454
@@ -553,14 +602,15 @@ gOamData_83E4560:: @ 83E4560
 
 	.align 2
 gUnknown_083E4568:: @ 83E4568
-	.incbin "baserom.gba", 0x003e4568, 0x8
+	obj_tiles NULL, 0x800, 6
 
 	.align 2
 gSpriteTemplate_83E4570:: @ 83E4570
 	spr_template 6, 6, gOamData_83E4560, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, sub_80F2E00
 
+	.align 2
 gUnknown_083E4588:: @ 83E4588
-	.incbin "baserom.gba", 0x003e4588, 0x8
+	obj_pal NULL, 6
 
 	.align 2
 gUnknown_083E4590:: @ 83E4590
@@ -645,11 +695,44 @@ gUnknown_083E4648:: @ 83E4648
 gSpriteTemplate_83E4660:: @ 83E4660
 	spr_template 3, 4, gOamData_83E4608, gSpriteAnimTable_83E4620, NULL, gDummySpriteAffineAnimTable, sub_80F3328
 
+	.align 1
 gUnknown_083E4678:: @ 83E4678
-	.incbin "baserom.gba", 0x003e4678, 0x20
+	.incbin "graphics/pokenav/83E4678.gbapal"
 
+	.align 2
 gUnknown_083E4698:: @ 83E4698
-	.incbin "baserom.gba", 0x003e4698, 0x80
+	.2byte  0, 0
+	.2byte  1, 0
+	.2byte  2, 0
+	.2byte  3, 0
+	.2byte  4, 0
+	.2byte  1, 1
+	.2byte  2, 1
+	.2byte  3, 1
+	.2byte  4, 1
+	.2byte  1, 2
+	.2byte  2, 2
+	.2byte  3, 2
+	.2byte  4, 2
+	.2byte  1, 3
+	.2byte  2, 3
+	.2byte  3, 3
+	.2byte  4, 3
+	.2byte  1, 4
+	.2byte  2, 4
+	.2byte  3, 4
+	.2byte  4, 4
+	.2byte  5, 0
+	.2byte  6, 0
+	.2byte  7, 1
+	.2byte  8, 2
+	.2byte  9, 1
+	.2byte  9, 3
+	.2byte  9, 4
+	.2byte 10, 3
+	.2byte 10, 4
+	.2byte 11, 0
+	.2byte 11, 1
 
 	.align 2
 gOamData_83E4718:: @ 83E4718
@@ -692,8 +775,18 @@ gUnknown_083E4784:: @ 83E4784
 gUnknown_083E478C:: @ 83E478C
 	obj_pal gPokenavSparkle_Pal, 0x000f
 
+	.align 2
 gUnknown_083E4794:: @ 83E4794
-	.incbin "baserom.gba", 0x003e4794, 0x28
+	.2byte   0, -35
+	.2byte  20, -28
+	.2byte  33, -10
+	.2byte  33,  10
+	.2byte  20,  28
+	.2byte   0,  35
+	.2byte -20,  28
+	.2byte -33,  10
+	.2byte -33, -10
+	.2byte -20, -28
 
 	.align 2
 gOamData_83E47BC:: @ 83E47BC
@@ -773,13 +866,301 @@ gSpriteTemplate_83E4878:: @ 83E4878
 	spr_template 26, 18, gOamData_83E4870, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 gUnknown_083E4890:: @ 83E4890
-	.incbin "baserom.gba", 0x003e4890, 0x100
+	.byte  4
+	.byte  5
+	.byte  6
+	.byte  7
+	.byte  8
+	.byte  9
+	.byte  9
+	.byte 10
+	.byte 10
+	.byte 11
+	.byte 11
+	.byte 12
+	.byte 12
+	.byte 13
+	.byte 13
+	.byte 13
+	.byte 13
+	.byte 14
+	.byte 14
+	.byte 14
+	.byte 14
+	.byte 15
+	.byte 15
+	.byte 15
+	.byte 15
+	.byte 16
+	.byte 16
+	.byte 16
+	.byte 16
+	.byte 16
+	.byte 16
+	.byte 17
+	.byte 17
+	.byte 17
+	.byte 17
+	.byte 17
+	.byte 17
+	.byte 18
+	.byte 18
+	.byte 18
+	.byte 18
+	.byte 18
+	.byte 18
+	.byte 19
+	.byte 19
+	.byte 19
+	.byte 19
+	.byte 19
+	.byte 19
+	.byte 19
+	.byte 19
+	.byte 20
+	.byte 20
+	.byte 20
+	.byte 20
+	.byte 20
+	.byte 20
+	.byte 20
+	.byte 20
+	.byte 21
+	.byte 21
+	.byte 21
+	.byte 21
+	.byte 21
+	.byte 21
+	.byte 21
+	.byte 21
+	.byte 22
+	.byte 22
+	.byte 22
+	.byte 22
+	.byte 22
+	.byte 22
+	.byte 22
+	.byte 22
+	.byte 22
+	.byte 22
+	.byte 23
+	.byte 23
+	.byte 23
+	.byte 23
+	.byte 23
+	.byte 23
+	.byte 23
+	.byte 23
+	.byte 23
+	.byte 23
+	.byte 24
+	.byte 24
+	.byte 24
+	.byte 24
+	.byte 24
+	.byte 24
+	.byte 24
+	.byte 24
+	.byte 24
+	.byte 24
+	.byte 25
+	.byte 25
+	.byte 25
+	.byte 25
+	.byte 25
+	.byte 25
+	.byte 25
+	.byte 25
+	.byte 25
+	.byte 25
+	.byte 25
+	.byte 25
+	.byte 26
+	.byte 26
+	.byte 26
+	.byte 26
+	.byte 26
+	.byte 26
+	.byte 26
+	.byte 26
+	.byte 26
+	.byte 26
+	.byte 26
+	.byte 26
+	.byte 27
+	.byte 27
+	.byte 27
+	.byte 27
+	.byte 27
+	.byte 27
+	.byte 27
+	.byte 27
+	.byte 27
+	.byte 27
+	.byte 27
+	.byte 27
+	.byte 27
+	.byte 27
+	.byte 28
+	.byte 28
+	.byte 28
+	.byte 28
+	.byte 28
+	.byte 28
+	.byte 28
+	.byte 28
+	.byte 28
+	.byte 28
+	.byte 28
+	.byte 28
+	.byte 28
+	.byte 28
+	.byte 29
+	.byte 29
+	.byte 29
+	.byte 29
+	.byte 29
+	.byte 29
+	.byte 29
+	.byte 29
+	.byte 29
+	.byte 29
+	.byte 29
+	.byte 29
+	.byte 29
+	.byte 29
+	.byte 29
+	.byte 29
+	.byte 30
+	.byte 30
+	.byte 30
+	.byte 30
+	.byte 30
+	.byte 30
+	.byte 30
+	.byte 30
+	.byte 30
+	.byte 30
+	.byte 30
+	.byte 30
+	.byte 30
+	.byte 30
+	.byte 30
+	.byte 30
+	.byte 31
+	.byte 31
+	.byte 31
+	.byte 31
+	.byte 31
+	.byte 31
+	.byte 31
+	.byte 31
+	.byte 31
+	.byte 31
+	.byte 31
+	.byte 31
+	.byte 31
+	.byte 31
+	.byte 31
+	.byte 31
+	.byte 31
+	.byte 32
+	.byte 32
+	.byte 32
+	.byte 32
+	.byte 32
+	.byte 32
+	.byte 32
+	.byte 32
+	.byte 32
+	.byte 32
+	.byte 32
+	.byte 32
+	.byte 32
+	.byte 32
+	.byte 32
+	.byte 32
+	.byte 32
+	.byte 32
+	.byte 33
+	.byte 33
+	.byte 33
+	.byte 33
+	.byte 33
+	.byte 33
+	.byte 33
+	.byte 33
+	.byte 33
+	.byte 33
+	.byte 33
+	.byte 33
+	.byte 33
+	.byte 33
+	.byte 33
+	.byte 33
+	.byte 33
+	.byte 33
+	.byte 33
+	.byte 34
+	.byte 34
+	.byte 34
+	.byte 34
+	.byte 34
+	.byte 34
+	.byte 34
+	.byte 34
+	.byte 34
+	.byte 34
+	.byte 34
+	.byte 34
+	.byte 34
+	.byte 34
+	.byte 34
+	.byte 34
+	.byte 34
+	.byte 34
+	.byte 34
+	.byte 34
+	.byte 35
 
+	.align 2
 gUnknown_083E4990:: @ 83E4990
-	.incbin "baserom.gba", 0x003e4990, 0xc
+	.4byte REG_WIN0H
+	.4byte ((DMA_ENABLE | DMA_START_HBLANK | DMA_32BIT | DMA_REPEAT | DMA_DEST_RELOAD) << 16) | 1
+	.4byte 1
 
+	.align 1
 gUnknown_083E499C:: @ 83E499C
-	.incbin "baserom.gba", 0x003e499c, 0x24
+	.2byte 0x43
+	.2byte 0x32
+	.2byte 0x33
+	.2byte 0x34
+	.2byte 0x35
+	.2byte 0x36
+	.2byte 0x44
+	.2byte 0x45
+	.2byte 0x46
+	.2byte 0x47
+	.2byte 0x48
+	.2byte 0x49
+	.2byte 0x4A
+	.2byte 0x4B
+	.2byte 0x4C
+	.2byte 0x4D
+	.2byte 0x4E
 
+	.align 2
 gUnknown_083E49C0:: @ 83E49C0
-	.incbin "baserom.gba", 0x003e49c0, 0x34
+	.2byte 0x109, 0xA
+	.2byte 0x10A, 0x2
+	.2byte 0x10B, 0x9
+	.2byte 0x10C, 0x3
+	.2byte 0x10D, 0x7
+	.2byte 0x10E, 0xB
+	.2byte 0x10F, 0xD
+	.2byte 0x110, 0xE
+	.2byte 0x105, 0xF
+	.2byte 0x106, 0xF
+	.2byte 0x107, 0xF
+	.2byte 0x108, 0xF
+	.2byte 0x14F, 0xF

@@ -2253,7 +2253,7 @@ sub_80B6A80: @ 80B6A80
 	lsls r4, 2
 	ldr r5, _080B6B00 @ =gSprites
 	adds r4, r5
-	ldr r1, _080B6B04 @ =gUnknown_083CE558
+	ldr r1, _080B6B04 @ =gSubspriteTables_83CE558
 	adds r0, r4, 0
 	bl SetSubspriteTables
 	ldr r0, _080B6B08 @ =gSpriteTemplate_83CE5F8
@@ -2268,7 +2268,7 @@ sub_80B6A80: @ 80B6A80
 	adds r2, r0
 	lsls r2, 2
 	adds r2, r5
-	ldr r1, _080B6B0C @ =gUnknown_083CE560
+	ldr r1, _080B6B0C @ =gSubspriteTables_83CE560
 	adds r0, r2, 0
 	bl SetSubspriteTables
 	ldr r0, _080B6B10 @ =gSpriteTemplate_83CE5E0
@@ -2297,9 +2297,9 @@ sub_80B6A80: @ 80B6A80
 _080B6AF8: .4byte gSpriteTemplate_83CE5C8
 _080B6AFC: .4byte 0x02000000
 _080B6B00: .4byte gSprites
-_080B6B04: .4byte gUnknown_083CE558
+_080B6B04: .4byte gSubspriteTables_83CE558
 _080B6B08: .4byte gSpriteTemplate_83CE5F8
-_080B6B0C: .4byte gUnknown_083CE560
+_080B6B0C: .4byte gSubspriteTables_83CE560
 _080B6B10: .4byte gSpriteTemplate_83CE5E0
 	thumb_func_end sub_80B6A80
 
@@ -2541,7 +2541,7 @@ sub_80B6CA8: @ 80B6CA8
 	lsls r0, 2
 	ldr r4, _080B6CF8 @ =gSprites
 	adds r0, r4
-	ldr r5, _080B6CFC @ =gUnknown_083CE578
+	ldr r5, _080B6CFC @ =gSubspriteTables_83CE578
 	adds r1, r5, 0
 	bl SetSubspriteTables
 	ldr r0, _080B6D00 @ =gSpriteTemplate_83CE628
@@ -2564,7 +2564,7 @@ sub_80B6CA8: @ 80B6CA8
 	.align 2, 0
 _080B6CF4: .4byte gSpriteTemplate_83CE610
 _080B6CF8: .4byte gSprites
-_080B6CFC: .4byte gUnknown_083CE578
+_080B6CFC: .4byte gSubspriteTables_83CE578
 _080B6D00: .4byte gSpriteTemplate_83CE628
 	thumb_func_end sub_80B6CA8
 
@@ -2816,7 +2816,7 @@ sub_80B6EBC: @ 80B6EBC
 	lsls r4, 2
 	ldr r0, _080B6EF4 @ =gSprites
 	adds r4, r0
-	ldr r1, _080B6EF8 @ =gUnknown_083CE580
+	ldr r1, _080B6EF8 @ =gSubspriteTables_83CE580
 	adds r0, r4, 0
 	bl SetSubspriteTables
 	ldrb r0, [r4, 0x5]
@@ -2829,7 +2829,7 @@ sub_80B6EBC: @ 80B6EBC
 	.align 2, 0
 _080B6EF0: .4byte gSpriteTemplate_83CE688
 _080B6EF4: .4byte gSprites
-_080B6EF8: .4byte gUnknown_083CE580
+_080B6EF8: .4byte gSubspriteTables_83CE580
 	thumb_func_end sub_80B6EBC
 
 	thumb_func_start sub_80B6EFC
