@@ -20,6 +20,7 @@ enum
 extern void move_effectiveness_something(u16, u8, u8);
 
 extern u16 gBattleTypeFlags;
+extern u16 gBattleWeather;
 extern u8 gUnknown_02024A60;
 extern u8 gUnknown_02024A6A[][2];
 extern u16 gUnknown_02024BE6;
@@ -1329,4 +1330,94 @@ void BattleAICmd_if_status_not_in_party(void)
             gAIScriptPtr += 10; // doesnt return?
     }
     gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 6);
+}
+
+void BattleAICmd_unk_36(void)
+{
+    if(gBattleWeather & 7)
+        gAIThinkingSpace.funcResult = 1;
+    if(gBattleWeather & 0x18)
+        gAIThinkingSpace.funcResult = 2;
+    if(gBattleWeather & 0x60)
+        gAIThinkingSpace.funcResult = 0;
+    if(gBattleWeather & 0x80)
+        gAIThinkingSpace.funcResult = 3;
+    
+    gAIScriptPtr += 1;
+}
+
+void BattleAICmd_if_effect(void)
+{
+    if(gBattleMoves[gAIThinkingSpace.unk2].effect == gAIScriptPtr[1])
+        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
+    else
+        gAIScriptPtr += 6;
+}
+
+void BattleAICmd_if_not_effect(void)
+{
+    if(gBattleMoves[gAIThinkingSpace.unk2].effect != gAIScriptPtr[1])
+        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
+    else
+        gAIScriptPtr += 6;
+}
+
+void BattleAICmd_if_stat_level_less_than(void)
+{
+    u32 party;
+
+    if(gAIScriptPtr[1] == USER)
+        party = gUnknown_02024C07;
+    else
+        party = gUnknown_02024C08;
+    
+    if(gBattleMons[party].statStages[gAIScriptPtr[2]] < gAIScriptPtr[3])
+        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
+    else
+        gAIScriptPtr += 8;
+}
+
+void BattleAICmd_if_stat_level_more_than(void)
+{
+    u32 party;
+
+    if(gAIScriptPtr[1] == USER)
+        party = gUnknown_02024C07;
+    else
+        party = gUnknown_02024C08;
+    
+    if(gBattleMons[party].statStages[gAIScriptPtr[2]] > gAIScriptPtr[3])
+        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
+    else
+        gAIScriptPtr += 8;
+}
+
+void BattleAICmd_if_stat_level_equal(void)
+{
+    u32 party;
+
+    if(gAIScriptPtr[1] == USER)
+        party = gUnknown_02024C07;
+    else
+        party = gUnknown_02024C08;
+    
+    if(gBattleMons[party].statStages[gAIScriptPtr[2]] == gAIScriptPtr[3])
+        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
+    else
+        gAIScriptPtr += 8;
+}
+
+void BattleAICmd_if_stat_level_not_equal(void)
+{
+    u32 party;
+
+    if(gAIScriptPtr[1] == USER)
+        party = gUnknown_02024C07;
+    else
+        party = gUnknown_02024C08;
+    
+    if(gBattleMons[party].statStages[gAIScriptPtr[2]] != gAIScriptPtr[3])
+        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
+    else
+        gAIScriptPtr += 8;
 }
