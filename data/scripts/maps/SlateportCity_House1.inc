@@ -28,7 +28,7 @@ SlateportCity_House1_EventScript_1556BF:: @ 81556BF
 
 SlateportCity_House1_EventScript_1556C9:: @ 81556C9
 	specialval RESULT, 327
-	compare RESULT, 412
+	compare RESULT, SPECIES_EGG
 	jumpeq SlateportCity_House1_EventScript_15571C
 	special 124
 	special 125
