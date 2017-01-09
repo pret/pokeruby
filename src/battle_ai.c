@@ -1258,3 +1258,40 @@ void BattleAICmd_unk_32(void)
 
 void BattleAICmd_unk_33(void)
 {}
+
+void BattleAICmd_if_status_in_party(void)
+{
+    struct Pokemon *party;
+    int i;
+    u32 statusToCompareTo;
+
+    if (gAIScriptPtr[1] == USER)
+    {
+        party = gEnemyParty;
+    }
+    else if (0)
+    {
+    // what is going on here?
+    follow_jump:
+        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 6);
+        return;
+    }
+    else
+    {
+        party = gPlayerParty;
+    }
+
+    statusToCompareTo = AIScriptRead32(gAIScriptPtr + 2);
+
+    for (i = 0; i < 6; i++)
+    {
+        u16 species = GetMonData(&party[i], MON_DATA_SPECIES);
+        u16 hp = GetMonData(&party[i], MON_DATA_HP);
+        u32 status = GetMonData(&party[i], MON_DATA_STATUS);
+
+        if (species != SPECIES_NONE && species != SPECIES_EGG && hp != 0 && status == statusToCompareTo)
+            goto follow_jump;
+    }
+
+    gAIScriptPtr += 10;
+}

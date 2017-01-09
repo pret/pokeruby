@@ -23,6 +23,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include <stdint.h>
+#include <limits.h>
 
 /* extended.c */
 void ieee754_write_extended (double, uint8_t*);
@@ -287,7 +288,7 @@ void read_aif(struct Bytes *aif, AifData *aif_data)
 }
 
 // This is a table of deltas between sample values in compressed PCM data.
-const int8_t gDeltaEncodingTable[] = {
+const int gDeltaEncodingTable[] = {
 	0, 1, 4, 9, 16, 25, 36, 49,
 	-64, -49, -36, -25, -16, -9, -4, -1,
 };
@@ -359,6 +360,26 @@ struct Bytes *delta_decompress(struct Bytes *delta, unsigned int expected_length
 	return pcm;
 }
 
+int get_delta_index(uint8_t sample, uint8_t prev_sample)
+{
+	int best_error = INT_MAX;
+	int best_index = -1;
+
+	for (int i = 0; i < 16; i++)
+	{
+		uint8_t new_sample = prev_sample + gDeltaEncodingTable[i];
+		int error = sample > new_sample ? sample - new_sample : new_sample - sample;
+
+		if (error < best_error)
+		{
+			best_error = error;
+			best_index = i;
+		}
+	}
+
+	return best_index;
+}
+
 struct Bytes *delta_compress(struct Bytes *pcm)
 {
 	struct Bytes *delta = malloc(sizeof(struct Bytes));
@@ -384,103 +405,42 @@ struct Bytes *delta_compress(struct Bytes *pcm)
 
 	delta->data = malloc(delta->length + 33);
 
-	uint8_t hi, lo;
 	unsigned int i = 0;
 	unsigned int j = 0;
 	int k;
-	int l;
-	int8_t base;
-	int8_t diff;
+	uint8_t base;
+	int delta_index;
+
 	while (i < pcm->length)
 	{
-		base = (int8_t)pcm->data[i++];
-		delta->data[j++] = (uint8_t)base;
+		base = pcm->data[i++];
+		delta->data[j++] = base;
+
 		if (i >= pcm->length)
 		{
 			break;
 		}
-		hi = 0;
-		diff = ((int8_t)pcm->data[i++]) - base;
-		if (diff > 49) diff = 49;
-		if (diff < -64) diff = -64;
-		if (diff < 0)
-		{
-			for (l = 8; l < 16; l++)
-			{
-				lo = l & 0xf;
-				if (diff <= gDeltaEncodingTable[l]) break;
-			}
-		}
-		else
-		{
-			for (l = 0; l < 8; l++)
-			{
-				lo = l & 0xf;
-				if (diff <= gDeltaEncodingTable[l]) break;
-			}
-		}
-		base += diff;
-		delta->data[j++] = (hi << 4) | lo;
-		if (i >= pcm->length)
-		{
-			break;
-		}
+		delta_index = get_delta_index(pcm->data[i++], base);
+		base += gDeltaEncodingTable[delta_index];
+		delta->data[j++] = delta_index;
+
 		for (k = 0; k < 31; k++)
 		{
-			diff = ((int8_t)pcm->data[i++]) - base;
-			if (diff > 49) diff = 49;
-			if (diff < -64) diff = -64;
-			if (diff < 0)
-			{
-				for (l = 8; l < 16; l++)
-				{
-					hi = l & 0xf;
-					if (diff <= gDeltaEncodingTable[l]) break;
-				}
-			}
-			else
-			{
-				for (l = 0; l < 8; l++)
-				{
-					hi = l & 0xf;
-					if (diff <= gDeltaEncodingTable[l]) break;
-				}
-			}
-			base += diff;
-			delta->data[j] = (hi << 4);
 			if (i >= pcm->length)
 			{
 				break;
 			}
-			diff = ((int8_t)pcm->data[i++]) - base;
-			if (diff > 49) diff = 49;
-			if (diff < -64) diff = -64;
-			if (diff < 0)
-			{
-				for (l = 8; l < 16; l++)
-				{
-					lo = l & 0xf;
-					if (diff <= gDeltaEncodingTable[l]) break;
-				}
-			}
-			else
-			{
-				for (l = 0; l < 8; l++)
-				{
-					lo = l & 0xf;
-					if (diff <= gDeltaEncodingTable[l]) break;
-				}
-			}
-			base += diff;
-			delta->data[j++] = (hi << 4) | lo;
+			delta_index = get_delta_index(pcm->data[i++], base);
+			base += gDeltaEncodingTable[delta_index];
+			delta->data[j] = (delta_index << 4);
+
 			if (i >= pcm->length)
 			{
 				break;
 			}
-		}
-		if (i >= pcm->length)
-		{
-			break;
+			delta_index = get_delta_index(pcm->data[i++], base);
+			base += gDeltaEncodingTable[delta_index];
+			delta->data[j++] |= delta_index;
 		}
 	}
 
