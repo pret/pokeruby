@@ -6,8 +6,8 @@
 
 	.text
 
-	thumb_func_start sub_8144514
-sub_8144514: @ 8144514
+	thumb_func_start task_d_8144514
+task_d_8144514: @ 8144514
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -120,7 +120,7 @@ _08144584:
 	movs r1, 0x32
 	b _0814460A
 	.align 2, 0
-_081445EC: .4byte sub_8143B68
+_081445EC: .4byte task_a_8143B68
 _081445F0: .4byte gUnknown_0840CA00
 _081445F4: .4byte gSprites
 _081445F8:
@@ -184,7 +184,7 @@ _08144658:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8144514
+	thumb_func_end task_d_8144514
 
 	thumb_func_start sub_8144664
 sub_8144664: @ 8144664
