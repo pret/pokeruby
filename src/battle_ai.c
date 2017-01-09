@@ -11,6 +11,8 @@
 #define AIScriptRead8(ptr) ((ptr)[0])
 #define AIScriptReadPtr(ptr) (u8*) AIScriptRead32(ptr)
 
+extern void sub_801CAF8(u8, u8);
+
 enum
 {
     TARGET,
@@ -24,7 +26,7 @@ extern u16 gBattleWeather;
 extern u8 gUnknown_02024A60;
 extern u8 gUnknown_02024A6A[][2];
 extern u16 gUnknown_02024BE6;
-extern u32 gUnknown_02024BEC;
+extern s32 gUnknown_02024BEC;
 extern u8 gUnknown_02024C07; // something player?
 extern u8 gUnknown_02024C08; // something opponent?
 extern u8 gUnknown_02024C0C;
@@ -1420,4 +1422,59 @@ void BattleAICmd_if_stat_level_not_equal(void)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
     else
         gAIScriptPtr += 8;
+}
+
+void BattleAICmd_if_can_faint(void)
+{
+    if(gBattleMoves[gAIThinkingSpace.unk2].power < 2)
+    {
+        gAIScriptPtr += 5;
+        return;
+    }
+    gUnknown_02024DEC = 0;
+    ((struct BattleStruct *)((u8 *)&gAIThinkingSpace - 0x16800))->unk.unk1 = 0;
+    ((struct BattleStruct *)((u8 *)&gAIThinkingSpace - 0x16800))->unk.unk4 = 1;
+    gUnknown_02024C68 = 0;
+    gCritMultiplier = 1;
+    gUnknown_02024BE6 = gAIThinkingSpace.unk2;
+    sub_801CAF8(gUnknown_02024C07, gUnknown_02024C08);
+    move_effectiveness_something(gUnknown_02024BE6, gUnknown_02024C07, gUnknown_02024C08);
+    
+    gUnknown_02024BEC = gUnknown_02024BEC * gAIThinkingSpace.unk18[gAIThinkingSpace.moveConsidered] / 100;
+    
+    // moves always do at least 1 damage.
+    if(gUnknown_02024BEC == 0)
+        gUnknown_02024BEC = 1;
+    
+    if(gBattleMons[gUnknown_02024C08].hp <= gUnknown_02024BEC)
+        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
+    else
+        gAIScriptPtr += 5;
+}
+
+void BattleAICmd_if_cant_faint(void)
+{
+    if(gBattleMoves[gAIThinkingSpace.unk2].power < 2)
+    {
+        gAIScriptPtr += 5;
+        return;
+    }
+
+    gUnknown_02024DEC = 0;
+    ((struct BattleStruct *)((u8 *)&gAIThinkingSpace - 0x16800))->unk.unk1 = 0;
+    ((struct BattleStruct *)((u8 *)&gAIThinkingSpace - 0x16800))->unk.unk4 = 1;
+    gUnknown_02024C68 = 0;
+    gCritMultiplier = 1;
+    gUnknown_02024BE6 = gAIThinkingSpace.unk2;
+    sub_801CAF8(gUnknown_02024C07, gUnknown_02024C08);
+    move_effectiveness_something(gUnknown_02024BE6, gUnknown_02024C07, gUnknown_02024C08);
+    
+    gUnknown_02024BEC = gUnknown_02024BEC * gAIThinkingSpace.unk18[gAIThinkingSpace.moveConsidered] / 100;
+
+    // this macro is missing the damage 0 = 1 assumption.
+
+    if(gBattleMons[gUnknown_02024C08].hp > gUnknown_02024BEC)
+        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
+    else
+        gAIScriptPtr += 5;
 }
