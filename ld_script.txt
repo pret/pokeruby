@@ -114,6 +114,7 @@ SECTIONS {
         src/title_screen.o(.text);
         src/weather.o(.text);
         asm/weather.o(.text);
+        src/rom_8080874.o(.text);
         asm/rom_8080874.o(.text);
         src/battle_setup.o(.text);
         asm/cable_club.o(.text);
