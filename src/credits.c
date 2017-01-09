@@ -72,7 +72,28 @@ enum {
 #define COLOR_LIGHT_GREEN 0x328D
 
 enum {
-    TD_CURRENT_PAGE = 2,
+    TDA_0 = 0,
+    TDA_TASK_C_ID = 1,
+    TDA_TASK_D_ID = 3,
+    TDA_4 = 4,
+    TDA_7 = 7, // Has something to do with the bike scene
+    TDA_11 = 11, // Gets set depending on whether the bike or the grass scene should be shown
+    TDA_12 = 12,
+    TDA_13 = 13,
+    TDA_14 = 14,
+    TDA_TASK_B_ID = 15,
+
+    // Appears to be responsible for text
+    TDB_0 = 0,
+    TDB_TASK_A_ID = 1,
+    TDB_CURRENT_PAGE = 2,
+    TDB_3 = 3,
+
+    TDC_0 = 0,
+
+    TDD_0 = 0,
+    TDD_1 = 1,
+    TDD_2 = 2,
 };
 
 struct Unk201C000 {
@@ -101,7 +122,7 @@ extern u8 unk_201f000[0x800];
 extern u16 unk_201f800[];
 
 extern s16 gUnknown_02039320;
-extern u16 gUnknown_02039322;
+extern u16 gUnknown_02039322; // TASK A
 extern u8 gUnknown_02039324;
 extern u8 gUnknown_02039325;
 extern u16 gUnknown_0203935C;
@@ -120,31 +141,31 @@ extern struct CreditsEntry *gCreditsEntryPointerTable[][5];
 extern struct SpriteSheet gUnknown_0840CAA0;
 extern struct SpritePalette gUnknown_0840CAB0;
 
-static void sub_8143B38(u8 taskId);
-void sub_8143B68(u8 taskId);
-static void sub_8143BFC(u8 taskId);
-static void c2_080C9BFC(u8 taskId);
-static void sub_8143CC0(u8 taskId);
-static void sub_8143D04(u8 taskId);
-static void sub_8143EBC(u8 taskId);
-static void sub_8143F04(u8 taskId);
-static void sub_8143F3C(u8 taskId);
-static void sub_8143FDC(u8 taskId);
-static void sub_8144024(u8 taskId);
-static void sub_8144080(u8 taskId);
-static void sub_8144114(u8 taskId);
+static void task_a_8143B38(u8 taskIdA);
+void task_a_8143B68(u8 taskIdA);
+static void task_a_8143BFC(u8 taskIdA);
+static void task_a_080C9BFC(u8 taskIdA);
+static void task_a_8143CC0(u8 taskIdA);
+static void task_a_8143D04(u8 taskIdA);
+static void task_a_8143EBC(u8 taskIdA);
+static void task_a_8143F04(u8 taskIdA);
+static void task_a_8143F3C(u8 taskIdA);
+static void task_a_8143FDC(u8 taskIdA);
+static void task_a_8144024(u8 taskIdA);
+static void task_a_8144080(u8 taskIdA);
+static void task_a_8144114(u8 taskIdA);
 static void sub_8144130(void);
-static void sub_81441B8(u8 taskId);
-static u8 sub_8144454(u8 page, u8 taskId);
+static void task_b_81441B8(u8 taskIdB);
+static u8 sub_8144454(u8 page, u8 taskIdA);
 
-void sub_8144514(u8 taskId);
-u8 sub_8144ECC(u8 data, u8 taskId);
-void sub_81450AC(u8 taskId);
+void task_d_8144514(u8 taskIdD);
+u8 sub_8144ECC(u8 data, u8 taskIdA);
+void sub_81450AC(u8 taskIdA);
 void sub_8145128(u16, u16, u16);
 void sub_81452D0(int, int);
 void sub_81458DC(void);
 
-static void sub_8143948(void) {
+static void vblank_8143948(void) {
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
@@ -166,12 +187,12 @@ static void sub_814395C(void) {
         return;
     }
 
-    if (gTasks[gUnknown_02039322].func != sub_8143B68)
+    if (gTasks[gUnknown_02039322].func != task_a_8143B68)
     {
         return;
     }
 
-    sub_8143948();
+    vblank_8143948();
     RunTasks();
     AnimateSprites();
     BuildOamBuffer();
@@ -180,9 +201,9 @@ static void sub_814395C(void) {
 }
 
 void sub_81439D0(void) {
-    u8 taskId;
-    s16 taskId3;
-    u8 taskId2;
+    u8 taskIdA;
+    s16 taskIdC;
+    u8 taskIdB;
     u16 savedIme;
     struct Unk201C000 *c000;
 
@@ -191,23 +212,23 @@ void sub_81439D0(void) {
     ResetPaletteFade();
     ResetTasks();
 
-    taskId = CreateTask(sub_8143B38, 0);
+    taskIdA = CreateTask(task_a_8143B38, 0);
 
-    gTasks[taskId].data[4] = 0;
-    gTasks[taskId].data[7] = 0;
-    gTasks[taskId].data[11] = 0;
-    gTasks[taskId].data[13] = 1;
+    gTasks[taskIdA].data[TDA_4] = 0;
+    gTasks[taskIdA].data[TDA_7] = 0;
+    gTasks[taskIdA].data[TDA_11] = 0;
+    gTasks[taskIdA].data[TDA_13] = 1;
 
     while (TRUE)
     {
-        if (sub_8144ECC(0, taskId))
+        if (sub_8144ECC(0, taskIdA))
         {
             break;
         }
     }
 
-    taskId3 = gTasks[taskId].data[1];
-    gTasks[taskId3].data[0] = 40;
+    taskIdC = gTasks[taskIdA].data[TDA_TASK_C_ID];
+    gTasks[taskIdC].data[TDC_0] = 40;
 
     SetUpWindowConfig(&gWindowConfig_81E7208);
     InitMenuWindow(&gWindowConfig_81E7208);
@@ -217,10 +238,10 @@ void sub_81439D0(void) {
 
     REG_BG0VOFS = 0xFFFC;
 
-    taskId2 = CreateTask(sub_81441B8, 0);
+    taskIdB = CreateTask(task_b_81441B8, 0);
 
-    gTasks[taskId2].data[1] = taskId;
-    gTasks[taskId].data[15] = taskId2;
+    gTasks[taskIdB].data[TDB_TASK_A_ID] = taskIdA;
+    gTasks[taskIdA].data[TDA_TASK_B_ID] = taskIdB;
 
     BeginNormalPaletteFade(-1, 0, 16, 0, 0);
 
@@ -232,7 +253,7 @@ void sub_81439D0(void) {
     REG_DISPSTAT |= DISPSTAT_VBLANK_INTR;
 
 
-    SetVBlankCallback(sub_8143948);
+    SetVBlankCallback(vblank_8143948);
     m4aSongNumStart(BGM_THANKFOR);
     SetMainCallback2(sub_814395C);
     gUnknown_02039325 = 0;
@@ -245,69 +266,69 @@ void sub_81439D0(void) {
     c000->var_8A = 0;
     c000->var_8C = 0;
 
-    gUnknown_02039322 = taskId;
+    gUnknown_02039322 = taskIdA;
 }
 
-void sub_8143B38(u8 taskId) {
+void task_a_8143B38(u8 taskIdA) {
     if (gPaletteFade.active)
     {
         return;
     }
 
-    gTasks[taskId].func = sub_8143B68;
+    gTasks[taskIdA].func = task_a_8143B68;
 }
 
-void sub_8143B68(u8 taskId) {
+void task_a_8143B68(u8 taskIdA) {
     u16 data11;
 
-    if (gTasks[taskId].data[4])
+    if (gTasks[taskIdA].data[TDA_4])
     {
-        s16 secondaryTaskId;
+        s16 taskIdC;
 
-        secondaryTaskId = gTasks[taskId].data[1];
-        gTasks[secondaryTaskId].data[0] = 30;
+        taskIdC = gTasks[taskIdA].data[TDA_TASK_C_ID];
+        gTasks[taskIdC].data[TDC_0] = 30;
 
-        gTasks[taskId].data[12] = 0x100;
-        gTasks[taskId].func = sub_8143EBC;
+        gTasks[taskIdA].data[TDA_12] = 0x100;
+        gTasks[taskIdA].func = task_a_8143EBC;
         return;
     }
 
     gUnknown_02039320 = 0;
-    data11 = gTasks[taskId].data[11];
+    data11 = gTasks[taskIdA].data[TDA_11];
 
-    if (gTasks[taskId].data[11] == 1)
+    if (gTasks[taskIdA].data[TDA_11] == 1)
     {
-        gTasks[taskId].data[13] = data11;
-        gTasks[taskId].data[11] = 0;
+        gTasks[taskIdA].data[TDA_13] = data11;
+        gTasks[taskIdA].data[TDA_11] = 0;
         BeginNormalPaletteFade(-1, 0, 0, 16, 0);
-        gTasks[taskId].func = sub_8143BFC;
+        gTasks[taskIdA].func = task_a_8143BFC;
     }
-    else if (gTasks[taskId].data[11] == 2)
+    else if (gTasks[taskIdA].data[TDA_11] == 2)
     {
-        gTasks[taskId].data[13] = data11;
-        gTasks[taskId].data[11] = 0;
+        gTasks[taskIdA].data[TDA_13] = data11;
+        gTasks[taskIdA].data[TDA_11] = 0;
         BeginNormalPaletteFade(-1, 0, 0, 16, 0);
-        gTasks[taskId].func = sub_8143CC0;
+        gTasks[taskIdA].func = task_a_8143CC0;
     }
 }
 
-static void sub_8143BFC(u8 taskId) {
+static void task_a_8143BFC(u8 taskIdA) {
     if (gPaletteFade.active)
     {
         return;
     }
 
     REG_DISPCNT = 0;
-    sub_81450AC(taskId);
-    gTasks[taskId].func = c2_080C9BFC;
+    sub_81450AC(taskIdA);
+    gTasks[taskIdA].func = task_a_080C9BFC;
 }
 
-static void c2_080C9BFC(u8 taskId) {
+static void task_a_080C9BFC(u8 taskIdA) {
     u16 backup;
 
     SetVBlankCallback(NULL);
 
-    if (!sub_8144ECC(gTasks[taskId].data[7], taskId))
+    if (!sub_8144ECC(gTasks[taskIdA].data[TDA_7], taskIdA))
     {
         return;
     }
@@ -320,23 +341,23 @@ static void c2_080C9BFC(u8 taskId) {
     REG_IME = backup;
     REG_DISPSTAT |= DISPSTAT_VBLANK_INTR;
 
-    SetVBlankCallback(sub_8143948);
-    gTasks[taskId].func = sub_8143B38;
+    SetVBlankCallback(vblank_8143948);
+    gTasks[taskIdA].func = task_a_8143B38;
 }
 
-static void sub_8143CC0(u8 taskId) {
+static void task_a_8143CC0(u8 taskIdA) {
     if (gPaletteFade.active)
     {
         return;
     }
 
     REG_DISPCNT = 0;
-    sub_81450AC(taskId);
-    gTasks[taskId].func = sub_8143D04;
+    sub_81450AC(taskIdA);
+    gTasks[taskIdA].func = task_a_8143D04;
 }
 
 #ifdef NONMATCHING
-static void sub_8143D04(u8 taskId) {
+static void task_a_8143D04(u8 taskIdA) {
     switch (gMain.state) {
     default:
     case 0: {
@@ -374,10 +395,10 @@ static void sub_8143D04(u8 taskId) {
     }
 
     case 1: {
-        gTasks[taskId].data[3] = CreateTask(sub_8144514, 0);
-        gTasks[gTasks[taskId].data[3]].data[0] = 1;
-        gTasks[gTasks[taskId].data[3]].data[1] = taskId;
-        gTasks[gTasks[taskId].data[3]].data[2] = gTasks[taskId].data[7];
+        gTasks[taskIdA].data[TDA_TASK_D_ID] = CreateTask(task_d_8144514, 0);
+        gTasks[gTasks[taskIdA].data[TDA_TASK_D_ID]].data[TDD_0] = 1;
+        gTasks[gTasks[taskIdA].data[TDA_TASK_D_ID]].data[TDD_1] = taskIdA;
+        gTasks[gTasks[taskIdA].data[TDA_TASK_D_ID]].data[TDD_2] = gTasks[taskIdA].data[TDA_7];
 
         BeginNormalPaletteFade(-1, 0, 16, 0, 0);
         REG_BG3HOFS = 0;
@@ -387,14 +408,14 @@ static void sub_8143D04(u8 taskId) {
 
         gMain.state = 0;
         gUnknown_0203935C = 0;
-        gTasks[taskId].func = sub_8143B38;
+        gTasks[taskIdA].func = task_a_8143B38;
         break;
     }
     }
 }
 #else
 __attribute__((naked))
-static void sub_8143D04(u8 taskId) {
+static void task_a_8143D04(u8 taskId) {
     asm(".syntax unified\n\
 	push {r4-r7,lr}\n\
 	mov r7, r9\n\
@@ -509,7 +530,7 @@ _08143E00: .4byte 0x0000529f\n\
 _08143E04: .4byte 0x00007e94\n\
 _08143E08: .4byte gUnknown_0840CAB0\n\
 _08143E0C:\n\
-	ldr r0, _08143EA0 @ =sub_8144514\n\
+	ldr r0, _08143EA0 @ =task_d_8144514\n\
 	movs r1, 0\n\
 	bl CreateTask\n\
 	ldr r2, _08143EA4 @ =gTasks\n\
@@ -582,39 +603,39 @@ _08143E90:\n\
 	pop {r0}\n\
 	bx r0\n\
 	.align 2, 0\n\
-_08143EA0: .4byte sub_8144514\n\
+_08143EA0: .4byte task_d_8144514\n\
 _08143EA4: .4byte gTasks\n\
 _08143EA8: .4byte 0x4000000 + 0x1c\n\
 _08143EAC: .4byte 0x4000000 + 0x1e\n\
 _08143EB0: .4byte 0x00000703\n\
 _08143EB4: .4byte gUnknown_0203935C\n\
-_08143EB8: .4byte sub_8143B38\n\
+_08143EB8: .4byte task_a_8143B38\n\
     .syntax divided\n");
 }
 #endif
 
-static void sub_8143EBC(u8 taskId) {
-    if (gTasks[taskId].data[12])
+static void task_a_8143EBC(u8 taskIdA) {
+    if (gTasks[taskIdA].data[TDA_12])
     {
-        gTasks[taskId].data[12] -= 1;
+        gTasks[taskIdA].data[TDA_12] -= 1;
         return;
     }
 
     BeginNormalPaletteFade(-1, 12, 0, 16, 0);
-    gTasks[taskId].func = sub_8143F04;
+    gTasks[taskIdA].func = task_a_8143F04;
 }
 
-static void sub_8143F04(u8 taskId) {
+static void task_a_8143F04(u8 taskIdA) {
     if (gPaletteFade.active)
     {
         return;
     }
 
-    sub_81450AC(taskId);
-    gTasks[taskId].func = sub_8143F3C;
+    sub_81450AC(taskIdA);
+    gTasks[taskIdA].func = task_a_8143F3C;
 }
 
-static void sub_8143F3C(u8 taskId) {
+static void task_a_8143F3C(u8 taskIdA) {
     u16 backup;
 
     sub_8144130();
@@ -632,22 +653,22 @@ static void sub_8143F3C(u8 taskId) {
     REG_DISPSTAT |= DISPSTAT_VBLANK_INTR;
     REG_DISPCNT = 0x140;
 
-    gTasks[taskId].data[0] = 0x100;
-    gTasks[taskId].func = sub_8143FDC;
+    gTasks[taskIdA].data[TDA_0] = 0x100;
+    gTasks[taskIdA].func = task_a_8143FDC;
 }
 
-static void sub_8143FDC(u8 taskId) {
-    if (gTasks[taskId].data[0])
+static void task_a_8143FDC(u8 taskIdA) {
+    if (gTasks[taskIdA].data[TDA_0])
     {
-        gTasks[taskId].data[0] -= 1;
+        gTasks[taskIdA].data[TDA_0] -= 1;
         return;
     }
 
     BeginNormalPaletteFade(-1, 6, 0, 16, 0);
-    gTasks[taskId].func = sub_8144024;
+    gTasks[taskIdA].func = task_a_8144024;
 }
 
-static void sub_8144024(u8 taskId) {
+static void task_a_8144024(u8 taskIdA) {
     if (gPaletteFade.active)
     {
         return;
@@ -656,21 +677,21 @@ static void sub_8144024(u8 taskId) {
     sub_81452D0(0x3800, 0);
 
     BeginNormalPaletteFade(-1, 0, 0, 0, 0);
-    gTasks[taskId].data[0] = 7200;
-    gTasks[taskId].func = sub_8144080;
+    gTasks[taskIdA].data[TDA_0] = 7200;
+    gTasks[taskIdA].func = task_a_8144080;
 }
 
-static void sub_8144080(u8 taskId) {
+static void task_a_8144080(u8 taskIdA) {
     if (gPaletteFade.active)
     {
         return;
     }
 
-    if (gTasks[taskId].data[0] == 0)
+    if (gTasks[taskIdA].data[TDA_0] == 0)
     {
         FadeOutBGM(4);
         BeginNormalPaletteFade(-1, 8, 0, 16, 0xFFFF);
-        gTasks[taskId].func = sub_8144114;
+        gTasks[taskIdA].func = task_a_8144114;
         return;
     }
 
@@ -678,24 +699,24 @@ static void sub_8144080(u8 taskId) {
     {
         FadeOutBGM(4);
         BeginNormalPaletteFade(-1, 8, 0, 16, 0xFFFF);
-        gTasks[taskId].func = sub_8144114;
+        gTasks[taskIdA].func = task_a_8144114;
         return;
     }
 
-    if (gTasks[taskId].data[0] == 7144)
+    if (gTasks[taskIdA].data[TDA_0] == 7144)
     {
         FadeOutBGM(8);
     }
 
-    if (gTasks[taskId].data[0] == 6840)
+    if (gTasks[taskIdA].data[TDA_0] == 6840)
     {
         m4aSongNumStart(BGM_END);
     }
 
-    gTasks[taskId].data[0] -= 1;
+    gTasks[taskIdA].data[TDA_0] -= 1;
 }
 
-static void sub_8144114(u8 taskId) {
+static void task_a_8144114(u8 taskIdA) {
     if (gPaletteFade.active)
     {
         return;
@@ -725,10 +746,10 @@ static void sub_8144130(void) {
     DmaFill16(3, 0, (void *) (PLTT + 2), PLTT_SIZE - 2);
 }
 
-static void sub_81441B8(u8 taskId) {
+static void task_b_81441B8(u8 taskIdB) {
     u16 i;
 
-    switch (gTasks[taskId].data[0])
+    switch (gTasks[taskIdB].data[TDB_0])
     {
     case 0:
     case 6:
@@ -740,42 +761,42 @@ static void sub_81441B8(u8 taskId) {
         {
             return;
         }
-        gTasks[taskId].data[0] = 1;
-        gTasks[taskId].data[3] = 0x58;
-        gTasks[gTasks[taskId].data[1]].data[14] = 0;
+        gTasks[taskIdB].data[TDB_0] = 1;
+        gTasks[taskIdB].data[TDB_3] = 0x58;
+        gTasks[gTasks[taskIdB].data[TDB_TASK_A_ID]].data[TDA_14] = 0;
         gUnknown_02039320 = 0;
         return;
 
     case 1:
-        if (gTasks[taskId].data[3] != 0)
+        if (gTasks[taskIdB].data[TDB_3] != 0)
         {
-            gTasks[taskId].data[3] -= 1;
+            gTasks[taskIdB].data[TDB_3] -= 1;
             return;
         }
 
-        gTasks[taskId].data[0] += 1;
+        gTasks[taskIdB].data[TDB_0] += 1;
         return;
 
     case 2:
         REG_DISPCNT &= ~DISPCNT_BG0_ON;
 
-        if (gTasks[gTasks[taskId].data[1]].func == sub_8143B68)
+        if (gTasks[gTasks[taskIdB].data[TDB_TASK_A_ID]].func == task_a_8143B68)
         {
-            if (gTasks[taskId].data[TD_CURRENT_PAGE] < PAGE_COUNT)
+            if (gTasks[taskIdB].data[TDB_CURRENT_PAGE] < PAGE_COUNT)
             {
 
                 for (i = 0; i < 5; i++)
                 {
-                    sub_8072BD8(gCreditsEntryPointerTable[gTasks[taskId].data[TD_CURRENT_PAGE]][i]->text, 0,
+                    sub_8072BD8(gCreditsEntryPointerTable[gTasks[taskIdB].data[TDB_CURRENT_PAGE]][i]->text, 0,
                                 9 + i * 2, 240);
                 }
 
-                gTasks[taskId].data[TD_CURRENT_PAGE] += 1;
-                gTasks[taskId].data[0] += 1;
+                gTasks[taskIdB].data[TDB_CURRENT_PAGE] += 1;
+                gTasks[taskIdB].data[TDB_0] += 1;
 
-                gTasks[gTasks[taskId].data[1]].data[14] = 1;
+                gTasks[gTasks[taskIdB].data[TDB_TASK_A_ID]].data[TDA_14] = 1;
 
-                if (gTasks[gTasks[taskId].data[1]].data[13] == 1)
+                if (gTasks[gTasks[taskIdB].data[TDB_TASK_A_ID]].data[TDA_13] == 1)
                 {
                     BeginNormalPaletteFade(0x300, 0, 16, 0, COLOR_LIGHT_GREEN);
                 }
@@ -787,11 +808,11 @@ static void sub_81441B8(u8 taskId) {
             }
 
 
-            gTasks[taskId].data[0] = 10;
+            gTasks[taskIdB].data[TDB_0] = 10;
             return;
         }
 
-        gTasks[gTasks[taskId].data[1]].data[14] = 0;
+        gTasks[gTasks[taskIdB].data[TDB_TASK_A_ID]].data[TDA_14] = 0;
         return;
 
     case 3:
@@ -802,26 +823,26 @@ static void sub_81441B8(u8 taskId) {
             return;
         }
 
-        gTasks[taskId].data[3] = UNK_DEFINE_82;
-        gTasks[taskId].data[0] += 1;
+        gTasks[taskIdB].data[TDB_3] = UNK_DEFINE_82;
+        gTasks[taskIdB].data[TDB_0] += 1;
         return;
 
     case 4:
-        if (gTasks[taskId].data[3] != 0)
+        if (gTasks[taskIdB].data[TDB_3] != 0)
         {
-            gTasks[taskId].data[3] -= 1;
+            gTasks[taskIdB].data[TDB_3] -= 1;
             return;
         }
 
-        if (sub_8144454((u8) gTasks[taskId].data[2], (u8) gTasks[taskId].data[1]))
+        if (sub_8144454((u8) gTasks[taskIdB].data[TDB_CURRENT_PAGE], (u8) gTasks[taskIdB].data[TDB_TASK_A_ID]))
         {
-            gTasks[taskId].data[0] += 1;
+            gTasks[taskIdB].data[TDB_0] += 1;
             return;
         }
 
-        gTasks[taskId].data[0] += 1;
+        gTasks[taskIdB].data[TDB_0] += 1;
 
-        if (gTasks[gTasks[taskId].data[1]].data[13] == 1)
+        if (gTasks[gTasks[taskIdB].data[TDB_TASK_A_ID]].data[TDA_13] == 1)
         {
             BeginNormalPaletteFade(0x300, 0, 0, 16, COLOR_LIGHT_GREEN);
         }
@@ -839,74 +860,74 @@ static void sub_81441B8(u8 taskId) {
         }
 
         MenuZeroFillWindowRect(0, 9, 29, 19);
-        gTasks[taskId].data[0] = 2;
+        gTasks[taskIdB].data[TDB_0] = 2;
         return;
 
     case 10:
-        gTasks[gTasks[taskId].data[1]].data[4] = 1;
-        DestroyTask(taskId);
+        gTasks[gTasks[taskIdB].data[TDB_TASK_A_ID]].data[TDA_4] = 1;
+        DestroyTask(taskIdB);
         return;
     }
 }
 
 #define LAST_PAGE (PAGE_TEXT_EDITOR)
 
-static u8 sub_8144454(u8 page, u8 taskId) {
+static u8 sub_8144454(u8 page, u8 taskIdA) {
     // Starts with bike + ocean + morning
 
     if (page == PAGE_PROGRAMMERS_1)
     {
         // Grass patch
-        gTasks[taskId].data[11] = 2;
+        gTasks[taskIdA].data[TDA_11] = 2;
     }
 
     if (page == PAGE_POKEMON_GRAHPIC_DESIGNERS_3)
     {
         // Bike + ocean + sunset
-        gTasks[taskId].data[7] = 1;
-        gTasks[taskId].data[11] = 1;
+        gTasks[taskIdA].data[TDA_7] = 1;
+        gTasks[taskIdA].data[TDA_11] = 1;
     }
 
     if (page == PAGE_GAME_DESIGNERS_2)
     {
         // Grass patch
-        gTasks[taskId].data[11] = 2;
+        gTasks[taskIdA].data[TDA_11] = 2;
     }
 
     if (page == PAGE_MAP_DATA_DESIGNERS)
     {
         // Bike + forest + sunset
-        gTasks[taskId].data[7] = 2;
-        gTasks[taskId].data[11] = 1;
+        gTasks[taskIdA].data[TDA_7] = 2;
+        gTasks[taskIdA].data[TDA_11] = 1;
     }
 
     if (page == PAGE_SPECIAL_THANKS_1)
     {
         // Grass patch
-        gTasks[taskId].data[11] = 2;
+        gTasks[taskIdA].data[TDA_11] = 2;
     }
 
     if (page == PAGE_TASK_MANAGERS)
     {
         // Bike + forest + sunset
-        gTasks[taskId].data[7] = 3;
-        gTasks[taskId].data[11] = 1;
+        gTasks[taskIdA].data[TDA_7] = 3;
+        gTasks[taskIdA].data[TDA_11] = 1;
     }
 
     if (page == PAGE_TRANSLATION_COORDINATOR)
     {
         // Grass patch
-        gTasks[taskId].data[11] = 2;
+        gTasks[taskIdA].data[TDA_11] = 2;
     }
 
     if (page == LAST_PAGE)
     {
         // Bike + town + night
-        gTasks[taskId].data[7] = 4;
-        gTasks[taskId].data[11] = 1;
+        gTasks[taskIdA].data[TDA_7] = 4;
+        gTasks[taskIdA].data[TDA_11] = 1;
     }
 
-    if (gTasks[taskId].data[11] != 0)
+    if (gTasks[taskIdA].data[TDA_11] != 0)
     {
         // Returns true if changed?
         return TRUE;
