@@ -43,9 +43,9 @@ void update_saveblock1_field_object_movement_behavior(u8, u8);
 void warp_in(void);
 void warp1_set(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
 // warp1_set_2
-// saved_warp2_set
+void saved_warp2_set(int unused, s8 mapGroup, s8 mapNum, s8 warpId);
 void saved_warp2_set_2(int unused, s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
-// copy_saved_warp2_bank_and_enter_x_to_warp1
+void copy_saved_warp2_bank_and_enter_x_to_warp1(u8 unused);
 // sub_8053538
 void sub_8053570(void);
 void sub_8053588(u8);

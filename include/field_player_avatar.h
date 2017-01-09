@@ -60,7 +60,7 @@ void GetXYCoordsOneStepInFrontOfPlayer(s16 *x, s16 *y);
 void PlayerGetDestCoords(s16 *, s16 *);
 u8 player_get_direction_lower_nybble(void);
 u8 player_get_direction_upper_nybble(void);
-// PlayerGetZCoord
+u8 PlayerGetZCoord(void);
 u8 TestPlayerAvatarFlags(u8);
 // sub_80597D0
 // GetPlayerAvatarObjectId

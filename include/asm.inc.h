@@ -193,6 +193,7 @@ void sp13E_warp_to_last_warp(void);
 void sub_8080EF0(void);
 void sp13F_fall_to_last_warp(void);
 void sub_8080F68(void);
+void sub_8080F9C(void);
 void sub_8081594(u8);
 void sub_80815E0(u8 val);
 
@@ -419,6 +420,8 @@ s16 sub_810CAE4(u8, struct Pokeblock *);
 void sub_810CC80(void);
 u8 sub_810D32C(void);
 void ResetCyclingRoadChallengeData(void);
+bool32 sub_810D9B0(u16);
+u8 sub_810D9EC(s8 *, s8 *, s16 *, s16 *);
 void ScriptAddElevatorMenuItem(u8, u8, u8, u8);
 void ScriptShowElevatorMenu(void);
 u8 GetLeadMonIndex(void);
