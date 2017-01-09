@@ -1295,3 +1295,38 @@ void BattleAICmd_if_status_in_party(void)
 
     gAIScriptPtr += 10;
 }
+
+void BattleAICmd_if_status_not_in_party(void)
+{
+    struct Pokemon *party;
+    int i;
+    u32 statusToCompareTo;
+    u8 *partyPtr;
+
+    // what weird code. needed to match
+    switch(gAIScriptPtr[1])
+    {
+        case 1:
+            partyPtr = (u8 *)gEnemyParty;
+            party = (struct Pokemon *)partyPtr;
+            break;
+        default:
+            partyPtr = (u8 *)gPlayerParty;
+            party = (struct Pokemon *)partyPtr;
+            break;
+    }
+
+    statusToCompareTo = AIScriptRead32(gAIScriptPtr + 2);
+
+    for (i = 0; i < 6; i++)
+    {
+        u16 species = GetMonData(&party[i], MON_DATA_SPECIES);
+        u16 hp = GetMonData(&party[i], MON_DATA_HP);
+        u32 status = GetMonData(&party[i], MON_DATA_STATUS);
+
+        // this jump is seemingly bugged. everytime the status is found, the AI's logic jumps further and further past its intended destination.
+        if (species != SPECIES_NONE && species != SPECIES_EGG && hp != 0 && status == statusToCompareTo)
+            gAIScriptPtr += 10; // doesnt return?
+    }
+    gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 6);
+}
