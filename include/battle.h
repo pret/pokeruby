@@ -38,7 +38,7 @@ struct AI_ThinkingStruct /* 0x2016800 */
 /* 0x01 */ u8 moveConsidered;
 /* 0x02 */ u16 unk2;
 /* 0x04 */ s8 score[4]; // score?
-/* 0x08 */ u32 unk8;
+/* 0x08 */ u32 funcResult;
 /* 0x0C */ u32 aiFlags;
 /* 0x10 */ u8 unk10;
 /* 0x11 */ u8 aiLogicId;
