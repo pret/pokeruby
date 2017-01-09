@@ -484,7 +484,7 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
             retVal = boxMon->unknown;
             break;
         case MON_DATA_SPECIES:
-            retVal = boxMon->isBadEgg ? 412 : substruct0->species;
+            retVal = boxMon->isBadEgg ? SPECIES_EGG : substruct0->species;
             break;
         case MON_DATA_HELD_ITEM:
             retVal = substruct0->heldItem;
@@ -645,7 +645,7 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
         case MON_DATA_SPECIES2:
             retVal = substruct0->species;
             if (substruct0->species && (substruct3->isEgg || boxMon->isBadEgg))
-                retVal = 412;
+                retVal = SPECIES_EGG;
             break;
         case MON_DATA_IVS:
             retVal = substruct3->hpIV | (substruct3->attackIV << 5) | (substruct3->defenseIV << 10) | (substruct3->speedIV << 15) | (substruct3->spAttackIV << 20) | (substruct3->spDefenseIV << 25);
@@ -1130,7 +1130,7 @@ u8 sub_803DAA0(void)
     {
         if (GetMonData(&gPlayerParty[i], MON_DATA_HP, NULL) != 0
          && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL) != SPECIES_NONE
-         && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL) != 412)
+         && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2, NULL) != SPECIES_EGG)
             aliveCount++;
     }
 
@@ -1232,7 +1232,7 @@ void GetSpeciesName(u8 *name, u16 species)
 
     for (i = 0; i <= POKEMON_NAME_LENGTH; i++)
     {
-        if (species > 412)
+        if (species > NUM_SPECIES)
             name[i] = gSpeciesNames[0][i];
         else
             name[i] = gSpeciesNames[species][i];
