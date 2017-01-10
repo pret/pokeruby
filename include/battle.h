@@ -58,7 +58,9 @@ struct BattleStruct /* 0x2000000 */
 {
 	u8 filler0[0x1601C];
 	struct SmallBattleStruct1 unk;
-	u8 filler1[0xAB]; // 0x2016020
+	u8 filler1[0x68]; // 0x2016020
+	u8 unk88;
+	u8 filler1_2[0x42];
 	/* 0x160CB */ u8 linkPlayerIndex;
 	u8 filler2[0x734];
 	struct AI_ThinkingStruct ai;

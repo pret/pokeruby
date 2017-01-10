@@ -1696,3 +1696,23 @@ void BattleAICmd_if_encored(void)
             return;
     }
 }
+
+void BattleAICmd_unk_45(void)
+{
+    gAIThinkingSpace.unk10 |= 0xB;
+}
+
+void BattleAICmd_if_random_2(void)
+{
+    u8 var = battle_2000000.unk88 * 5;
+    
+    if((u8)(Random() % 100) < var)
+        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
+    else
+        gAIScriptPtr += 5;
+}
+
+void BattleAICmd_unk_47(void)
+{
+    gAIThinkingSpace.unk10 |= 0xD;
+}
