@@ -36,8 +36,8 @@ extern u16 gUnknown_02024C34[];
 extern u32 gUnknown_02024ACC[];
 extern u32 gUnknown_02024C98[];
 extern u16 gUnknown_02024C7A[];
-extern struct BattlePokemon gUnknown_02024A8C[];
 extern struct BattlePokemon gBattleMons[];
+extern struct BattlePokemon gUnknown_02024A8C[];
 extern u8 gUnknown_030042E0[];
 extern u8 gCritMultiplier;
 extern u16 gTrainerBattleOpponent;
@@ -72,8 +72,17 @@ struct UnknownStruct3
     u8 unk20;
 };
 
+struct UnknownStruct4
+{
+    u8 filler0[0x3];
+    u16 unk4;
+    u16 unk6;
+    u8 filler8[0x14];
+};
+
 extern struct UnknownStruct1 unk_2016A00;
 extern struct UnknownStruct3 unk_2016C00;
+extern struct UnknownStruct4 gUnknown_02024CA8[];
 
 void BattleAI_SetupAIData(void);
 void BattleAI_DoAIProcessing(void);
@@ -1627,5 +1636,63 @@ void BattleAICmd_if_not_move_effect(void)
                     break;
             }
             gAIScriptPtr += 7;
+    }
+}
+
+void BattleAICmd_if_last_move_did_damage(void)
+{
+    u8 var;
+    
+    if(gAIScriptPtr[1] == USER)
+        var = gUnknown_02024C07;
+    else
+        var = gUnknown_02024C08;
+    
+    if(gAIScriptPtr[2] == 0)
+    {
+        if(gUnknown_02024CA8[var].unk4 == 0)
+        {
+            gAIScriptPtr += 7;
+            return;
+        }
+        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
+        return;
+    }
+    else if(gAIScriptPtr[2] != 1)
+    {
+        gAIScriptPtr += 7;
+        return;
+    }
+    else if(gUnknown_02024CA8[var].unk6 != 0)
+    {
+        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
+        return;
+    }
+    gAIScriptPtr += 7;
+}
+
+void BattleAICmd_if_encored(void)
+{
+    switch(gAIScriptPtr[1])
+    {
+        case 0: // _08109348
+            if(gUnknown_02024CA8[gUnknown_02024A60].unk4 == gAIThinkingSpace.unk2)
+            {
+                gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
+                return;
+            }
+            gAIScriptPtr += 6;
+            return;
+        case 1: // _08109370
+            if(gUnknown_02024CA8[gUnknown_02024A60].unk6 == gAIThinkingSpace.unk2)
+            {
+                gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
+                return;
+            }
+            gAIScriptPtr += 6;
+            return;
+        default:
+            gAIScriptPtr += 6;
+            return;
     }
 }
