@@ -1574,58 +1574,58 @@ void BattleAICmd_unk_40(void)
 
 void BattleAICmd_if_move_effect(void)
 {
-	int i;
-	
-	switch(gAIScriptPtr[1])
-	{
-		case 1:
-		case 3:
-			for(i = 0; i < 4; i++)
-			{
-				if(gBattleMons[gUnknown_02024C07].moves[i] != 0 && gBattleMoves[gBattleMons[gUnknown_02024C07].moves[i]].effect == gAIScriptPtr[2])
-					break;
-			}
-			if(i != 4)
-				gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
-			else
-				gAIScriptPtr += 7;
-			break;
-		case 0:
-		case 2:
-			for(i = 0; i < 8; i++)
-			{
-				if(gBattleMons[gUnknown_02024C07].moves[i] != 0 && gBattleMoves[unk_2016A00.unk0[gUnknown_02024C08 >> 1][i]].effect == gAIScriptPtr[2])
-					break;
-			}
-			gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
-	}
+    int i;
+    
+    switch(gAIScriptPtr[1])
+    {
+        case 1:
+        case 3:
+            for(i = 0; i < 4; i++)
+            {
+                if(gBattleMons[gUnknown_02024C07].moves[i] != 0 && gBattleMoves[gBattleMons[gUnknown_02024C07].moves[i]].effect == gAIScriptPtr[2])
+                    break;
+            }
+            if(i != 4)
+                gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
+            else
+                gAIScriptPtr += 7;
+            break;
+        case 0:
+        case 2:
+            for(i = 0; i < 8; i++)
+            {
+                if(gBattleMons[gUnknown_02024C07].moves[i] != 0 && gBattleMoves[unk_2016A00.unk0[gUnknown_02024C08 >> 1][i]].effect == gAIScriptPtr[2])
+                    break;
+            }
+            gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
+    }
 }
 
 void BattleAICmd_if_not_move_effect(void)
 {
-	int i;
-	
-	switch(gAIScriptPtr[1])
-	{
-		case 1:
-		case 3:
-			for(i = 0; i < 4; i++)
-			{
-				if(gBattleMons[gUnknown_02024C07].moves[i] != 0 && gBattleMoves[gBattleMons[gUnknown_02024C07].moves[i]].effect == gAIScriptPtr[2])
-					break;
-			}
-			if(i != 4)
-				gAIScriptPtr += 7;
-			else
-				gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
-			break;
-		case 0:
-		case 2:
-			for(i = 0; i < 8; i++)
-			{
-				if(unk_2016A00.unk0[gUnknown_02024C08 >> 1][i] != 0 && gBattleMoves[unk_2016A00.unk0[gUnknown_02024C08 >> 1][i]].effect == gAIScriptPtr[2])
-					break;
-			}
-			gAIScriptPtr += 7;
-	}
+    int i;
+    
+    switch(gAIScriptPtr[1])
+    {
+        case 1:
+        case 3:
+            for(i = 0; i < 4; i++)
+            {
+                if(gBattleMons[gUnknown_02024C07].moves[i] != 0 && gBattleMoves[gBattleMons[gUnknown_02024C07].moves[i]].effect == gAIScriptPtr[2])
+                    break;
+            }
+            if(i != 4)
+                gAIScriptPtr += 7;
+            else
+                gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
+            break;
+        case 0:
+        case 2:
+            for(i = 0; i < 8; i++)
+            {
+                if(unk_2016A00.unk0[gUnknown_02024C08 >> 1][i] != 0 && gBattleMoves[unk_2016A00.unk0[gUnknown_02024C08 >> 1][i]].effect == gAIScriptPtr[2])
+                    break;
+            }
+            gAIScriptPtr += 7;
+    }
 }
