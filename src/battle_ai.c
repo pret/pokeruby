@@ -26,7 +26,7 @@ extern u16 gBattleWeather;
 extern u8 gUnknown_02024A60;
 extern u8 gUnknown_02024A6A[][2];
 extern u16 gUnknown_02024BE6;
-extern s32 gUnknown_02024BEC;
+extern int gUnknown_02024BEC;
 extern u8 gUnknown_02024C07; // something player?
 extern u8 gUnknown_02024C08; // something opponent?
 extern u8 gUnknown_02024C0C;
@@ -171,13 +171,17 @@ u8 BattleAI_GetAIActionToUse(void)
         gAIThinkingSpace.aiLogicId++;
         gAIThinkingSpace.moveConsidered = 0;
     }
+
+    // will KO, need to use item or switch.
     if(gAIThinkingSpace.unk10 & 2)
         return 4;
     if(gAIThinkingSpace.unk10 & 4)
         return 5;
+
     r5 = 1;
     arr1[0] = gAIThinkingSpace.score[0];
     arr2[0] = 0;
+
     for(i = 1; i < 4; i++)
     {
         if(arr1[0] < (s8)gAIThinkingSpace.score[i])
@@ -192,6 +196,7 @@ u8 BattleAI_GetAIActionToUse(void)
             arr2[r5++] = i;
         }
     }
+
     return arr2[Random() % r5];
 }
 
@@ -1477,4 +1482,92 @@ void BattleAICmd_if_cant_faint(void)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
+}
+
+void BattleAICmd_unk_3F(void)
+{
+    int i;
+    u16 *temp_ptr = (u16 *)(gAIScriptPtr + 2);
+    
+    switch(gAIScriptPtr[1])
+    {
+        case 1:
+        case 3:
+            for(i = 0; i < 4; i++)
+            {
+                if(gBattleMons[gUnknown_02024C07].moves[i] == *temp_ptr)
+                    break;
+            }
+            if(i == 4)
+            {
+                gAIScriptPtr += 8;
+                return;
+            }
+            else
+            {
+                gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
+                return;
+            }
+        case 0:
+        case 2:
+            for(i = 0; i < 8; i++)
+            {
+                if(unk_2016A00.unk0[gUnknown_02024C08 >> 1][i] == *temp_ptr)
+                    break;
+            }
+            if(i == 8)
+            {
+                gAIScriptPtr += 8;
+                return;
+            }
+            else
+            {
+                gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
+                return;
+            }
+    }
+}
+
+void BattleAICmd_unk_40(void)
+{
+    int i;
+    u16 *temp_ptr = (u16 *)(gAIScriptPtr + 2);
+    
+    switch(gAIScriptPtr[1])
+    {
+        case 1:
+        case 3:
+            for(i = 0; i < 4; i++)
+            {
+                if(gBattleMons[gUnknown_02024C07].moves[i] == *temp_ptr)
+                    break;
+            }
+            if(i != 4)
+            {
+                gAIScriptPtr += 8;
+                return;
+            }
+            else
+            {
+                gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
+                return;
+            }
+        case 0:
+        case 2:
+            for(i = 0; i < 8; i++)
+            {
+                if(unk_2016A00.unk0[gUnknown_02024C08 >> 1][i] == *temp_ptr)
+                    break;
+            }
+            if(i != 8)
+            {
+                gAIScriptPtr += 8;
+                return;
+            }
+            else
+            {
+                gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
+                return;
+            }
+    }
 }
