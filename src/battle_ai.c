@@ -37,13 +37,13 @@ extern u32 gUnknown_02024ACC[];
 extern u32 gUnknown_02024C98[];
 extern u16 gUnknown_02024C7A[];
 extern struct BattlePokemon gUnknown_02024A8C[];
+extern struct BattlePokemon gBattleMons[];
 extern u8 gUnknown_030042E0[];
 extern u8 gCritMultiplier;
 extern u16 gTrainerBattleOpponent;
 extern u32 gBitTable[];
 extern u8 *BattleAIs[];
 extern struct Trainer gTrainers[];
-extern struct BattlePokemon gBattleMons[];
 extern struct BattleMove gBattleMoves[];
 extern struct BaseStats gBaseStats[];
 extern void (*gBattleAICmdTable[])(void);
@@ -1570,4 +1570,62 @@ void BattleAICmd_unk_40(void)
                 return;
             }
     }
+}
+
+void BattleAICmd_if_move_effect(void)
+{
+	int i;
+	
+	switch(gAIScriptPtr[1])
+	{
+		case 1:
+		case 3:
+			for(i = 0; i < 4; i++)
+			{
+				if(gBattleMons[gUnknown_02024C07].moves[i] != 0 && gBattleMoves[gBattleMons[gUnknown_02024C07].moves[i]].effect == gAIScriptPtr[2])
+					break;
+			}
+			if(i != 4)
+				gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
+			else
+				gAIScriptPtr += 7;
+			break;
+		case 0:
+		case 2:
+			for(i = 0; i < 8; i++)
+			{
+				if(gBattleMons[gUnknown_02024C07].moves[i] != 0 && gBattleMoves[unk_2016A00.unk0[gUnknown_02024C08 >> 1][i]].effect == gAIScriptPtr[2])
+					break;
+			}
+			gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
+	}
+}
+
+void BattleAICmd_if_not_move_effect(void)
+{
+	int i;
+	
+	switch(gAIScriptPtr[1])
+	{
+		case 1:
+		case 3:
+			for(i = 0; i < 4; i++)
+			{
+				if(gBattleMons[gUnknown_02024C07].moves[i] != 0 && gBattleMoves[gBattleMons[gUnknown_02024C07].moves[i]].effect == gAIScriptPtr[2])
+					break;
+			}
+			if(i != 4)
+				gAIScriptPtr += 7;
+			else
+				gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
+			break;
+		case 0:
+		case 2:
+			for(i = 0; i < 8; i++)
+			{
+				if(unk_2016A00.unk0[gUnknown_02024C08 >> 1][i] != 0 && gBattleMoves[unk_2016A00.unk0[gUnknown_02024C08 >> 1][i]].effect == gAIScriptPtr[2])
+					break;
+			}
+			gAIScriptPtr += 7;
+	}
 }
