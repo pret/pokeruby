@@ -5,6 +5,7 @@
 #include "rng.h"
 #include "abilities.h"
 #include "species.h"
+#include "item.h"
 
 #define AIScriptRead32(ptr) ((ptr)[0] | (ptr)[1] << 8 | (ptr)[2] << 16 | (ptr)[3] << 24)
 #define AIScriptRead16(ptr) ((ptr)[0] | (ptr)[1] << 8)
@@ -1715,4 +1716,44 @@ void BattleAICmd_if_random_2(void)
 void BattleAICmd_unk_47(void)
 {
     gAIThinkingSpace.unk10 |= 0xD;
+}
+
+void BattleAICmd_get_hold_effect(void)
+{
+    u8 var;
+    u32 funcResult;
+    u16 status;
+    u8 *aiPtr;
+    
+    if(gAIScriptPtr[1] == USER)
+        var = gUnknown_02024C07;
+    else
+        var = gUnknown_02024C08;
+    
+    if(battle_side_get_owner(var) == 0)
+    {
+        // weird pointer arithmetic is needed to match.
+        status = (battle_get_per_side_status(var) & 1);
+        aiPtr = (u8 *)&gAIThinkingSpace;
+        funcResult = ((struct UnknownStruct1 *)((u8 *)aiPtr + 0x202))->unk20[status];
+        gAIThinkingSpace.funcResult = funcResult;
+    }
+    else
+        gAIThinkingSpace.funcResult = ItemId_GetHoldEffect(gBattleMons[var].item);
+    
+    gAIScriptPtr += 2;
+}
+
+void BattleAICmd_get_gender(void)
+{
+    u8 var;
+    
+    if(gAIScriptPtr[1] == USER)
+        var = gUnknown_02024C07;
+    else
+        var = gUnknown_02024C08;
+    
+    gAIThinkingSpace.funcResult = GetGenderFromSpeciesAndPersonality(gBattleMons[var].species, gBattleMons[var].personality);
+    
+    gAIScriptPtr += 2;
 }
