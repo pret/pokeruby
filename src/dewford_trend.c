@@ -4,10 +4,20 @@
 #include "rng.h"
 #include "event_data.h"
 
-extern struct EasyChatPair unk_2007800[5];
-extern struct EasyChatPair unk_2007900[5];
+extern u8 unk_2000000[];
+
+#define ARRAY_2007800 ((struct EasyChatPair *)(unk_2000000 + 0x7800))
+#define ARRAY_2007900 ((struct EasyChatPair *)(unk_2000000 + 0x7900))
+
 extern u16 gScriptResult;
 extern u16 gSpecialVar_0x8004;
+
+static void sub_80FA46C(struct EasyChatPair *s, u16 b, u8 c);
+static bool8 sub_80FA670(struct EasyChatPair *a, struct EasyChatPair *b, u8 c);
+static void sub_80FA740(struct EasyChatPair *s);
+static bool8 SB1ContainsWords(u16 *a);
+static bool8 IsEasyChatPairEqual(u16 *words1, u16 *words2);
+static s16 sub_80FA828(struct EasyChatPair *a, u16 b);
 
 void sub_80FA17C(void)
 {
@@ -311,7 +321,7 @@ bool8 sub_80FA364(u16 *a)
     return 0;
 }
 
-void sub_80FA46C(struct EasyChatPair *s, u16 b, u8 c)
+static void sub_80FA46C(struct EasyChatPair *s, u16 b, u8 c)
 {
     u16 h;
 
@@ -333,8 +343,7 @@ void sub_80FA46C(struct EasyChatPair *s, u16 b, u8 c)
     }
 }
 
-#ifdef NONMATCHING
-void sub_80FA4E4(u8 *a, u32 b)
+void sub_80FA4E4(void *a, u32 b, u8 unused)
 {
     u16 i;
     u16 j;
@@ -344,16 +353,10 @@ void sub_80FA4E4(u8 *a, u32 b)
     u16 players = GetLinkPlayerCount();
 
     for(i = 0; i < players; i++)
-        memcpy(&unk_2007800[i * 5], a + i * b, 40);
-
-    //_080FA520
-
-    src = unk_2007800;
-    //dst = unk_2007900
-    dst = (u8 *)src + 0x100;   //ToDo: Get this part to match
-
+        memcpy(&ARRAY_2007800[i * 5], (u8 *)a + i * b, 40);
+    src = ARRAY_2007800;
+    dst = ARRAY_2007900;
     r7 = 0;
-    //_080FA530
     for(i = 0; i < players; i++)
     {
         for(j = 0; j < 5; j++)
@@ -364,144 +367,22 @@ void sub_80FA4E4(u8 *a, u32 b)
                 *(dst++) = *src;
                 r7++;
             }
-            //_080FA558
             else
             {
-                if(unk_2007900[foo].unk0_0 < src->unk0_0)
+                if(ARRAY_2007900[foo].unk0_0 < src->unk0_0)
                 {
-                    unk_2007900[foo] = *src;
+                    ARRAY_2007900[foo] = *src;
                 }
             }
-            //_080FA572
             src++;
         }
     }
-    //_080FA588
-    sub_80FA46C(unk_2007900, r7, 2);
-    src = unk_2007900;
+    sub_80FA46C(ARRAY_2007900, r7, 2);
+    src = ARRAY_2007900;
     dst = gSaveBlock1.easyChatPairs;
     for(i = 0; i < 5; i++)
         *(dst++) = *(src++);
 }
-#else
-__attribute__((naked))
-void sub_80FA4E4(struct EasyChatPair *a, u32 b, u8 c)
-{
-    asm(".syntax unified\n\
-	push {r4-r7,lr}\n\
-	mov r7, r8\n\
-	push {r7}\n\
-	sub sp, 0x4\n\
-	adds r6, r0, 0\n\
-	adds r5, r1, 0\n\
-	bl GetLinkPlayerCount\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	mov r8, r0\n\
-	movs r4, 0\n\
-	cmp r4, r8\n\
-	bcs _080FA520\n\
-_080FA500:\n\
-	lsls r0, r4, 2\n\
-	adds r0, r4\n\
-	lsls r0, 3\n\
-	ldr r1, _080FA554 @ =0x02007800\n\
-	adds r0, r1\n\
-	adds r1, r4, 0\n\
-	muls r1, r5\n\
-	adds r1, r6, r1\n\
-	movs r2, 0x28\n\
-	bl memcpy\n\
-	adds r0, r4, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r4, r0, 16\n\
-	cmp r4, r8\n\
-	bcc _080FA500\n\
-_080FA520:\n\
-	ldr r5, _080FA554 @ =0x02007800\n\
-	movs r0, 0x80\n\
-	lsls r0, 1\n\
-	adds r3, r5, r0\n\
-	movs r7, 0\n\
-	movs r4, 0\n\
-	cmp r4, r8\n\
-	bcs _080FA588\n\
-_080FA530:\n\
-	movs r6, 0\n\
-_080FA532:\n\
-	adds r0, r5, 0\n\
-	adds r1, r7, 0\n\
-	str r3, [sp]\n\
-	bl sub_80FA828\n\
-	lsls r0, 16\n\
-	asrs r0, 16\n\
-	ldr r3, [sp]\n\
-	cmp r0, 0\n\
-	bge _080FA558\n\
-	ldr r0, [r5]\n\
-	ldr r1, [r5, 0x4]\n\
-	stm r3!, {r0,r1}\n\
-	adds r0, r7, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r7, r0, 16\n\
-	b _080FA572\n\
-	.align 2, 0\n\
-_080FA554: .4byte 0x02007800\n\
-_080FA558:\n\
-	lsls r1, r0, 3\n\
-	ldr r0, _080FA5B4 @ =0x02007900\n\
-	adds r2, r1, r0\n\
-	ldrb r1, [r2]\n\
-	lsls r1, 25\n\
-	ldrb r0, [r5]\n\
-	lsls r0, 25\n\
-	cmp r1, r0\n\
-	bcs _080FA572\n\
-	ldr r0, [r5]\n\
-	ldr r1, [r5, 0x4]\n\
-	str r0, [r2]\n\
-	str r1, [r2, 0x4]\n\
-_080FA572:\n\
-	adds r5, 0x8\n\
-	adds r0, r6, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r6, r0, 16\n\
-	cmp r6, 0x4\n\
-	bls _080FA532\n\
-	adds r0, r4, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r4, r0, 16\n\
-	cmp r4, r8\n\
-	bcc _080FA530\n\
-_080FA588:\n\
-	ldr r4, _080FA5B4 @ =0x02007900\n\
-	adds r0, r4, 0\n\
-	adds r1, r7, 0\n\
-	movs r2, 0x2\n\
-	bl sub_80FA46C\n\
-	adds r5, r4, 0\n\
-	ldr r3, _080FA5B8 @ =gSaveBlock1 + 0x2DD4\n\
-	movs r4, 0\n\
-_080FA59A:\n\
-	ldm r5!, {r0,r1}\n\
-	stm r3!, {r0,r1}\n\
-	adds r0, r4, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r4, r0, 16\n\
-	cmp r4, 0x4\n\
-	bls _080FA59A\n\
-	add sp, 0x4\n\
-	pop {r3}\n\
-	mov r8, r3\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_080FA5B4: .4byte 0x02007900\n\
-_080FA5B8: .4byte gSaveBlock1 + 0x2DD4\n\
-    .syntax divided\n");
-}
-#endif
 
 void sub_80FA5BC(void)
 {
@@ -528,7 +409,7 @@ void sub_80FA648(void)
     gScriptResult = (gSaveBlock1.easyChatPairs[0].words[0] + gSaveBlock1.easyChatPairs[0].words[1]) & 7;
 }
 
-bool8 sub_80FA670(struct EasyChatPair *a, struct EasyChatPair *b, u8 c)
+static bool8 sub_80FA670(struct EasyChatPair *a, struct EasyChatPair *b, u8 c)
 {
     switch(c)
     {
@@ -578,7 +459,7 @@ bool8 sub_80FA670(struct EasyChatPair *a, struct EasyChatPair *b, u8 c)
     return Random() & 1;
 }
 
-void sub_80FA740(struct EasyChatPair *s)
+static void sub_80FA740(struct EasyChatPair *s)
 {
     u16 r4;
 
@@ -594,7 +475,7 @@ void sub_80FA740(struct EasyChatPair *s)
     s->unk2 = Random();
 }
 
-bool8 SB1ContainsWords(u16 *a)
+static bool8 SB1ContainsWords(u16 *a)
 {
     u16 i;
 
@@ -606,7 +487,7 @@ bool8 SB1ContainsWords(u16 *a)
     return FALSE;
 }
 
-bool8 IsEasyChatPairEqual(u16 *words1, u16 *words2)
+static bool8 IsEasyChatPairEqual(u16 *words1, u16 *words2)
 {
     u16 i;
 
@@ -618,10 +499,10 @@ bool8 IsEasyChatPairEqual(u16 *words1, u16 *words2)
     return TRUE;
 }
 
-s16 sub_80FA828(struct EasyChatPair *a, u16 b)
+static s16 sub_80FA828(struct EasyChatPair *a, u16 b)
 {
     s16 i;
-    struct EasyChatPair *s = unk_2007900;
+    struct EasyChatPair *s = ARRAY_2007900;
 
     for(i = 0; i < b; i++)
     {
