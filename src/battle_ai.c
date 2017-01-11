@@ -12,7 +12,7 @@
 #define AIScriptRead8(ptr) ((ptr)[0])
 #define AIScriptReadPtr(ptr) (u8*) AIScriptRead32(ptr)
 
-#define AI_THINKING_STRUCT ((struct AI_ThinkingStruct *)(&battle_2000000 + 0x16800))
+#define AI_THINKING_STRUCT ((struct AI_ThinkingStruct *)((u8 *)&battle_2000000 + 0x16800))
 #define AI_ARRAY_160CC     ((&battle_2000000 + 0x160CC))
 
 extern void sub_801CAF8(u8, u8);
@@ -31,11 +31,11 @@ extern u16 gBattleWeather;
 extern u8 gUnknown_02024A60;
 extern u8 gUnknown_02024A6A[][2];
 extern u16 gUnknown_02024BE6;
-extern int gUnknown_02024BEC;
+extern int gBattleMoveDamage;
 extern u8 gUnknown_02024C07; // something player?
 extern u8 gUnknown_02024C08; // something opponent?
 extern u8 gUnknown_02024C0C;
-extern u8 gUnknown_02024C68;
+extern u8 gBattleMoveFlags;
 extern u16 gUnknown_02024DEC;
 extern u16 gUnknown_02024C34[];
 extern u32 gUnknown_02024ACC[];
@@ -52,6 +52,8 @@ extern struct Trainer gTrainers[];
 extern struct BattleMove gBattleMoves[];
 extern struct BaseStats gBaseStats[];
 extern void (*gBattleAICmdTable[])(void);
+
+extern const u16 gUnknown_083F62BC[];
 
 // needed to match the hack that is get_item, thanks cam, someone else clean this up later.
 extern u8 unk_2000000[];
@@ -786,6 +788,70 @@ void BattleAICmd_unk_23(void)
     gAIScriptPtr += 1;
 }
 
+#ifdef NONMATCHING
+void BattleAICmd_unk_24(void)
+{
+    int i, j;
+    s32 damage;
+    s32 damages[4];
+
+    for (i = 0; gUnknown_083F62BC[i] != 0xFFFF; i++)
+        if (gBattleMoves[AI_THINKING_STRUCT->unk2].effect == gUnknown_083F62BC[i])
+            break;
+
+    if (gBattleMoves[AI_THINKING_STRUCT->unk2].power > 1
+     && gUnknown_083F62BC[i] == 0xFFFF)
+    {
+        gUnknown_02024DEC = 0;
+        *((u8 *)&battle_2000000 + 0x1601C) = 0;
+        *((u8 *)&battle_2000000 + 0x1601F) = 1;
+        gBattleMoveFlags = 0;
+        gCritMultiplier = 1;
+
+        for (i = 0; i < 4; i++)
+        {
+            for (j = 0; gUnknown_083F62BC[j] != 0xFFFF; j++)
+            {
+                if (gBattleMoves[gBattleMons[gUnknown_02024C07].moves[i]].effect == gUnknown_083F62BC[j])
+                    break;
+            }
+
+            if (gBattleMons[gUnknown_02024C07].moves[i]
+             && gUnknown_083F62BC[j] == 0xFFFF
+             && gBattleMoves[gBattleMons[gUnknown_02024C07].moves[i]].power > 1)
+            {
+                gUnknown_02024BE6 = gBattleMons[gUnknown_02024C07].moves[i];
+                sub_801CAF8(gUnknown_02024C07, gUnknown_02024C08);
+                move_effectiveness_something(gUnknown_02024BE6, gUnknown_02024C07, gUnknown_02024C08);
+                damage = (gBattleMoveDamage * AI_THINKING_STRUCT->unk18[i]) / 100;
+                damages[i] = damage;
+                if (!damage)
+                    damages[i] = 1;
+            }
+            else
+            {
+                damages[i] = 0;
+            }
+        }
+
+        for (i = 0; i < 4; i++)
+            if (damages[i] > damages[AI_THINKING_STRUCT->moveConsidered])
+                break;
+
+        if (i == 4)
+            AI_THINKING_STRUCT->funcResult = 2;
+        else
+            AI_THINKING_STRUCT->funcResult = 1;
+    }
+    else
+    {
+        AI_THINKING_STRUCT->funcResult = 0;
+        gAIScriptPtr += 1;
+    }
+
+    gAIScriptPtr += 1;
+}
+#else
 __attribute__((naked))
 void BattleAICmd_unk_24(void)
 {
@@ -850,7 +916,7 @@ _08108250:\n\
     adds r0, r5, r2\n\
     movs r2, 0x1\n\
     strb r2, [r0]\n\
-    ldr r0, _08108340 @ =gUnknown_02024C68\n\
+    ldr r0, _08108340 @ =gBattleMoveFlags\n\
     strb r1, [r0]\n\
     ldr r0, _08108344 @ =gCritMultiplier\n\
     strb r2, [r0]\n\
@@ -933,7 +999,7 @@ _081082BA:\n\
     bl move_effectiveness_something\n\
     mov r4, sp\n\
     add r4, r8\n\
-    ldr r2, _08108358 @ =gUnknown_02024BEC\n\
+    ldr r2, _08108358 @ =gBattleMoveDamage\n\
     ldr r0, _08108334 @ =0x02016800\n\
     adds r0, 0x18\n\
     adds r0, r6, r0\n\
@@ -955,13 +1021,13 @@ _08108330: .4byte gBattleMoves\n\
 _08108334: .4byte 0x02016800\n\
 _08108338: .4byte gUnknown_02024DEC\n\
 _0810833C: .4byte 0xfffff81c\n\
-_08108340: .4byte gUnknown_02024C68\n\
+_08108340: .4byte gBattleMoveFlags\n\
 _08108344: .4byte gCritMultiplier\n\
 _08108348: .4byte gBattleMons\n\
 _0810834C: .4byte gUnknown_02024C07\n\
 _08108350: .4byte gUnknown_02024BE6\n\
 _08108354: .4byte gUnknown_02024C08\n\
-_08108358: .4byte gUnknown_02024BEC\n\
+_08108358: .4byte gBattleMoveDamage\n\
 _0810835C:\n\
     mov r1, sp\n\
     add r1, r8\n\
@@ -1029,6 +1095,7 @@ _081083B8:\n\
 _081083D0: .4byte gAIScriptPtr\n\
     .syntax divided\n");
 }
+#endif // NONMATCHING
 
 void BattleAICmd_get_move(void)
 {
@@ -1216,14 +1283,14 @@ void BattleAICmd_unk_30(void)
     gUnknown_02024DEC = 0;
     battle_2000000.unk.unk1 = 0;
     battle_2000000.unk.unk4 = 1;
-    gUnknown_02024C68 = 0;
+    gBattleMoveFlags = 0;
     gCritMultiplier = 1;
     ai = &battle_2000000.ai;
     ai->funcResult = 0;
 
     for(i = 0; i < 4; i++)
     {
-        gUnknown_02024BEC = 40;
+        gBattleMoveDamage = 40;
         gUnknown_02024BE6 = gBattleMons[gUnknown_02024C07].moves[i];
 
         if (gUnknown_02024BE6)
@@ -1231,21 +1298,21 @@ void BattleAICmd_unk_30(void)
             move_effectiveness_something(gUnknown_02024BE6, gUnknown_02024C07, gUnknown_02024C08);
 
             // reduce by 1/3.
-            if (gUnknown_02024BEC == 120)
-                gUnknown_02024BEC = 80;
-            if(gUnknown_02024BEC == 240)
-                gUnknown_02024BEC = 160;
-            if(gUnknown_02024BEC == 30)
-                gUnknown_02024BEC = 20;
-            if(gUnknown_02024BEC == 15)
-                gUnknown_02024BEC = 10;
+            if (gBattleMoveDamage == 120)
+                gBattleMoveDamage = 80;
+            if(gBattleMoveDamage == 240)
+                gBattleMoveDamage = 160;
+            if(gBattleMoveDamage == 30)
+                gBattleMoveDamage = 20;
+            if(gBattleMoveDamage == 15)
+                gBattleMoveDamage = 10;
 
-            if(gUnknown_02024C68 & 8)
-                gUnknown_02024BEC = 0;
+            if(gBattleMoveFlags & 8)
+                gBattleMoveDamage = 0;
 
             ai2 = &battle_2000000.ai;
-            if (ai2->funcResult < gUnknown_02024BEC)
-                ai2->funcResult = gUnknown_02024BEC;
+            if (ai2->funcResult < gBattleMoveDamage)
+                ai2->funcResult = gBattleMoveDamage;
         }
     }
     gAIScriptPtr += 1;
@@ -1259,28 +1326,28 @@ void BattleAICmd_if_damage_bonus(void)
     gUnknown_02024DEC = 0;
     battle_2000000.unk.unk1 = 0;
     battle_2000000.unk.unk4 = 1;
-    gUnknown_02024C68 = 0;
+    gBattleMoveFlags = 0;
     gCritMultiplier = 1;
 
-    gUnknown_02024BEC = 40;
+    gBattleMoveDamage = 40;
     gUnknown_02024BE6 = (ai = &battle_2000000.ai)->unk2;
 
     move_effectiveness_something(gUnknown_02024BE6, gUnknown_02024C07, gUnknown_02024C08);
 
-    if (gUnknown_02024BEC == 120)
-        gUnknown_02024BEC = 80;
-    if(gUnknown_02024BEC == 240)
-        gUnknown_02024BEC = 160;
-    if(gUnknown_02024BEC == 30)
-        gUnknown_02024BEC = 20;
-    if(gUnknown_02024BEC == 15)
-        gUnknown_02024BEC = 10;
+    if (gBattleMoveDamage == 120)
+        gBattleMoveDamage = 80;
+    if(gBattleMoveDamage == 240)
+        gBattleMoveDamage = 160;
+    if(gBattleMoveDamage == 30)
+        gBattleMoveDamage = 20;
+    if(gBattleMoveDamage == 15)
+        gBattleMoveDamage = 10;
 
-    if(gUnknown_02024C68 & 8)
-        gUnknown_02024BEC = 0;
+    if(gBattleMoveFlags & 8)
+        gBattleMoveDamage = 0;
 
     // i have to store 2024BEC in a local variable before the comparison or else it will not match.
-    damageVar = gUnknown_02024BEC;
+    damageVar = gBattleMoveDamage;
     if(damageVar == gAIScriptPtr[1])
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
     else
@@ -1465,19 +1532,19 @@ void BattleAICmd_if_can_faint(void)
     gUnknown_02024DEC = 0;
     ((struct BattleStruct *)((u8 *)&gAIThinkingSpace - 0x16800))->unk.unk1 = 0;
     ((struct BattleStruct *)((u8 *)&gAIThinkingSpace - 0x16800))->unk.unk4 = 1;
-    gUnknown_02024C68 = 0;
+    gBattleMoveFlags = 0;
     gCritMultiplier = 1;
     gUnknown_02024BE6 = gAIThinkingSpace.unk2;
     sub_801CAF8(gUnknown_02024C07, gUnknown_02024C08);
     move_effectiveness_something(gUnknown_02024BE6, gUnknown_02024C07, gUnknown_02024C08);
     
-    gUnknown_02024BEC = gUnknown_02024BEC * gAIThinkingSpace.unk18[gAIThinkingSpace.moveConsidered] / 100;
+    gBattleMoveDamage = gBattleMoveDamage * gAIThinkingSpace.unk18[gAIThinkingSpace.moveConsidered] / 100;
     
     // moves always do at least 1 damage.
-    if(gUnknown_02024BEC == 0)
-        gUnknown_02024BEC = 1;
+    if(gBattleMoveDamage == 0)
+        gBattleMoveDamage = 1;
     
-    if(gBattleMons[gUnknown_02024C08].hp <= gUnknown_02024BEC)
+    if(gBattleMons[gUnknown_02024C08].hp <= gBattleMoveDamage)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
@@ -1494,17 +1561,17 @@ void BattleAICmd_if_cant_faint(void)
     gUnknown_02024DEC = 0;
     ((struct BattleStruct *)((u8 *)&gAIThinkingSpace - 0x16800))->unk.unk1 = 0;
     ((struct BattleStruct *)((u8 *)&gAIThinkingSpace - 0x16800))->unk.unk4 = 1;
-    gUnknown_02024C68 = 0;
+    gBattleMoveFlags = 0;
     gCritMultiplier = 1;
     gUnknown_02024BE6 = gAIThinkingSpace.unk2;
     sub_801CAF8(gUnknown_02024C07, gUnknown_02024C08);
     move_effectiveness_something(gUnknown_02024BE6, gUnknown_02024C07, gUnknown_02024C08);
     
-    gUnknown_02024BEC = gUnknown_02024BEC * gAIThinkingSpace.unk18[gAIThinkingSpace.moveConsidered] / 100;
+    gBattleMoveDamage = gBattleMoveDamage * gAIThinkingSpace.unk18[gAIThinkingSpace.moveConsidered] / 100;
 
     // this macro is missing the damage 0 = 1 assumption.
 
-    if(gBattleMons[gUnknown_02024C08].hp > gUnknown_02024BEC)
+    if(gBattleMons[gUnknown_02024C08].hp > gBattleMoveDamage)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;

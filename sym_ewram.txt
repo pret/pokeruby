@@ -122,7 +122,7 @@ gUnknown_02024BE8: @ 2024BE8
 gUnknown_02024BEA: @ 2024BEA
 	.space 0x2
 
-gUnknown_02024BEC: @ 2024BEC
+gBattleMoveDamage: @ 2024BEC
 	.space 0x4
 
 gUnknown_02024BF0: @ 2024BF0
@@ -194,7 +194,7 @@ gUnknown_02024C5C: @ 2024C5C
 gUnknown_02024C60: @ 2024C60
 	.space 0x8
 
-gUnknown_02024C68: @ 2024C68
+gBattleMoveFlags: @ 2024C68
 	.space 0x4
 
 gUnknown_02024C6C: @ 2024C6C

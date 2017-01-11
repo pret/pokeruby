@@ -9414,7 +9414,7 @@ _0806F8FC:
 	strh r3, [r0]
 _0806F900:
 	adds r5, r0, 0
-	ldr r1, _0806F940 @ =gUnknown_02024BEC
+	ldr r1, _0806F940 @ =gBattleMoveDamage
 	ldrh r0, [r5]
 	negs r0, r0
 	str r0, [r1]
@@ -9442,7 +9442,7 @@ _0806F900:
 	bl StringExpandPlaceholders
 	b _0806F964
 	.align 2, 0
-_0806F940: .4byte gUnknown_02024BEC
+_0806F940: .4byte gBattleMoveDamage
 _0806F944: .4byte 0x0201c000
 _0806F948: .4byte gStringVar1
 _0806F94C: .4byte gStringVar2
