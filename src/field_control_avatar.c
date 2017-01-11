@@ -66,47 +66,48 @@ extern u8 Event_EggHatch[];
 extern u8 gUnknown_0815FD0D[];
 extern u8 gUnknown_081C6BDE[];
 
+static void player_get_pos_to_and_height(struct MapPosition *);
+static void player_get_next_pos_and_height(struct MapPosition *);
 static u16 cur_mapdata_block_role_at_player_pos(int);
-void player_get_pos_to_and_height(struct MapPosition *);
+static bool8 sub_80681F0(struct MapPosition *position, u16 b, u8 c);
+static u8 *TryGetScriptOnPressingA(struct MapPosition *position, u8 b, u8 c);
+static u8 *sub_8068364(struct MapPosition *, u8, u8);
+static u8 *TryGetInvisibleMapObjectScript(struct MapPosition *, u8, u8 c);
+static u8 *sub_8068500(struct MapPosition *, u8, u8);
+static u8 *TryGetFieldMoveScript(struct MapPosition *, u8, u8);
+static bool32 sub_8068770(void);
+static bool32 sub_80687A4(void);
+static bool8 sub_80687E4(struct MapPosition *, u16, u16);
+bool8 mapheader_trigger_activate_at__run_now(struct MapPosition *);
+bool8 sub_8068870(u16 a);
+bool8 sub_8068894(void);
+static void happiness_algorithm_step(void);
+static bool8 overworld_poison_step(void);
+static bool8 is_it_battle_time_3(u16);
+static bool8 mapheader_run_first_tag2_script_list_match_conditionally(struct MapPosition *, u16, u8);
+bool8 sub_8068A64(struct MapPosition *, u16);
+static bool8 sub_8068B30(u16);
+static bool8 is_non_stair_warp_tile(u16, u8);
+static s8 map_warp_check_packed(struct MapHeader *, struct MapPosition *);
+static void sub_8068C30(struct MapHeader *, s8, struct MapPosition *);
+static bool8 map_warp_consider_2_to_inside(struct MapPosition *, u16, u8);
+static s8 map_warp_check(struct MapHeader *, u16, u16, u8);
+static u8 *mapheader_trigger_activate_at(struct MapHeader *, u16, u16, u8);
+static struct BgEvent *FindInvisibleMapObjectByPosition(struct MapHeader *, u16, u16, u8);
+u8 sub_8068F18(void);
+
 extern u8 mapheader_run_first_tag2_script_list_match(void);
-extern bool32 sub_80687A4(void);
-extern u8 sub_80687E4(struct MapPosition *, u16, u16);
-extern u8 is_it_battle_time_3(u16);
-extern u8 mapheader_run_first_tag2_script_list_match_conditionally(struct MapPosition *, u16, u8);
-void player_get_next_pos_and_height(struct MapPosition *);
-u8 sub_80681F0(struct MapPosition *position, u16 b, u8 c);
-extern u8 map_warp_consider_2_to_inside(struct MapPosition *, u16, u8);
-extern bool32 sub_8068770(void);
 extern void sub_8071310(void);
 extern int sub_80A6D1C(void);
-extern u8 mapheader_trigger_activate_at__run_now(struct MapPosition *);
-extern u8 sub_8068A64(struct MapPosition *, u16);
-extern u8 sub_8068870(u16);
-extern u8 sub_8068894(void);
-u8 *TryGetScriptOnPressingA(struct MapPosition *position, u8 b, u8 c);
-u8 *sub_8068364(struct MapPosition *, u8, u8);
-u8 *TryGetInvisibleMapObjectScript(struct MapPosition *, u8, u8 c);
-u8 *sub_8068500(struct MapPosition *, u8, u8);
-u8 *TryGetFieldMoveScript(struct MapPosition *, u8, u8);
-extern struct BgEvent *FindInvisibleMapObjectByPosition(struct MapHeader *, u16, u16, u8);
 extern u8 sub_80BC050();
-extern u8 sub_8068F18(void);
-extern u8 *mapheader_trigger_activate_at(struct MapHeader *, u16, u16, u8);
-extern void happiness_algorithm_step(void);
-extern u8 overworld_poison_step(void);
 extern u8 sub_80422A0(void);
 extern int sub_810D9B0(int);
 extern s32 overworld_poison(void);
-extern s8 map_warp_check_packed(struct MapHeader *, struct MapPosition *);
-extern u8 is_non_stair_warp_tile(u16, u8);
-extern void sub_8068C30(struct MapHeader *, s8, struct MapPosition *);
 extern void sub_8080E88();
 extern void walkrun_find_lowest_active_bit_in_bitfield(void);
-extern u8 sub_8068B30(u16);
 extern void sub_8080F2C(u8);
 extern void sub_8080F48(void);
 extern void sub_8080F58(void);
-extern s8 map_warp_check(struct MapHeader *, u16, u16, u8);
 extern void sub_80BC038();
 extern void DoCoordEventWeather(u8);
 
@@ -191,54 +192,53 @@ int sub_8068024(struct UnkInputStruct *s)
     player_get_pos_to_and_height(&position);
     r4 = MapGridGetMetatileBehaviorAt(position.x, position.y);
     if (CheckTrainers() == TRUE)
-        return 1;
+        return TRUE;
     if (mapheader_run_first_tag2_script_list_match() == 1)
-        return 1;
+        return TRUE;
     if (s->input_field_0_7 && sub_80687A4() == 1)
-        return 1;
+        return TRUE;
     if (s->input_field_0_6)
     {
         IncrementGameStat(5);
         if (sub_80687E4(&position, r4, r6) == 1)
-            return 1;
+            return TRUE;
     }
     if (s->input_field_0_1 && is_it_battle_time_3(r4) == 1)
-        return 1;
+        return TRUE;
     if (s->input_field_0_4 && s->input_field_2 == r6)
     {
         if (mapheader_run_first_tag2_script_list_match_conditionally(&position, r4, r6) == 1)
-            return 1;
+            return TRUE;
     }
     player_get_next_pos_and_height(&position);
     r4 = MapGridGetMetatileBehaviorAt(position.x, position.y);
     if (s->input_field_0_0 && sub_80681F0(&position, r4, r6) == 1)
-        return 1;
+        return TRUE;
     if (s->input_field_0_5 && s->input_field_2 == r6)
     {
         if (map_warp_consider_2_to_inside(&position, r4, r6) == 1)
-            return 1;
+            return TRUE;
     }
     if (s->input_field_0_0 && sub_8068770() == 1)
-        return 1;
+        return TRUE;
     if (s->input_field_0_2)
     {
         PlaySE(SE_WIN_OPEN);
         sub_8071310();
-        return 1;
+        return TRUE;
     }
-    //_08068154
     if (s->input_field_0_3 && sub_80A6D1C() == 1)
-        return 1;
+        return TRUE;
     return FALSE;
 }
 
-void player_get_pos_to_and_height(struct MapPosition *position)
+static void player_get_pos_to_and_height(struct MapPosition *position)
 {
     PlayerGetDestCoords(&position->x, &position->y);
     position->height = PlayerGetZCoord();
 }
 
-void player_get_next_pos_and_height(struct MapPosition *position)
+static void player_get_next_pos_and_height(struct MapPosition *position)
 {
     s16 x, y;
     
@@ -258,7 +258,7 @@ static u16 cur_mapdata_block_role_at_player_pos(int unused)
     return MapGridGetMetatileBehaviorAt(x, y);
 }
 
-u8 sub_80681F0(struct MapPosition *position, u16 b, u8 c)
+static bool8 sub_80681F0(struct MapPosition *position, u16 b, u8 c)
 {
     u8 *script = TryGetScriptOnPressingA(position, b, c);
     
@@ -276,7 +276,7 @@ u8 sub_80681F0(struct MapPosition *position, u16 b, u8 c)
     return TRUE;
 }
 
-u8 *TryGetScriptOnPressingA(struct MapPosition *position, u8 b, u8 c)
+static u8 *TryGetScriptOnPressingA(struct MapPosition *position, u8 b, u8 c)
 {
     u8 *script;
     
@@ -318,7 +318,7 @@ u8 *sub_80682A8(struct MapPosition *position, u8 unused, u8 c)
     return GetFieldObjectScriptPointerByFieldObjectId(r3);
 }
 
-u8 *sub_8068364(struct MapPosition *position, u8 b, u8 c)
+static u8 *sub_8068364(struct MapPosition *position, u8 b, u8 c)
 {
     u8 r3;
     u8 *script;
@@ -341,7 +341,7 @@ u8 *sub_8068364(struct MapPosition *position, u8 b, u8 c)
     return script;
 }
 
-u8 *TryGetInvisibleMapObjectScript(struct MapPosition *position, u8 unused, u8 c)
+static u8 *TryGetInvisibleMapObjectScript(struct MapPosition *position, u8 unused, u8 c)
 {
     struct BgEvent *bgEvent = FindInvisibleMapObjectByPosition(&gMapHeader, position->x - 7, position->y - 7, position->height);
     
@@ -390,7 +390,7 @@ u8 *TryGetInvisibleMapObjectScript(struct MapPosition *position, u8 unused, u8 c
     return bgEvent->script;
 }
 
-u8 *sub_8068500(struct MapPosition *position, u8 b, u8 c)
+static u8 *sub_8068500(struct MapPosition *position, u8 b, u8 c)
 {
     s8 height;
     
@@ -398,8 +398,7 @@ u8 *sub_8068500(struct MapPosition *position, u8 b, u8 c)
         return Event_TV;
     if (MetatileBehavior_IsPC(b) == TRUE)
         return gUnknown_081A0009;
-    //misspelled: should be Sootopolis
-    if (MetatileBehavior_IsClosedSootpolisGymDoor(b) == TRUE)
+    if (MetatileBehavior_IsClosedSootopolisGymDoor(b) == TRUE)
         return ClosedSootopolisGymDoorScript;
     if (is_tile_x84(b) == TRUE)
         return gUnknown_081A4363;
@@ -440,7 +439,7 @@ u8 *sub_8068500(struct MapPosition *position, u8 b, u8 c)
     return NULL;
 }
 
-u8 *TryGetFieldMoveScript(struct MapPosition *unused1, u8 b, u8 unused2)
+static u8 *TryGetFieldMoveScript(struct MapPosition *unused1, u8 b, u8 unused2)
 {
     if (FlagGet(0x80B) == TRUE && PartyHasMonWithSurf() == TRUE && IsPlayerFacingSurfableFishableWater() == TRUE)
         return UseSurfScript;
@@ -454,7 +453,7 @@ u8 *TryGetFieldMoveScript(struct MapPosition *unused1, u8 b, u8 unused2)
     return NULL;
 }
 
-bool32 sub_8068770(void)
+static bool32 sub_8068770(void)
 {
     if (FlagGet(0x80D) && sub_8068F18() == 2)
     {
@@ -464,7 +463,7 @@ bool32 sub_8068770(void)
     return FALSE;
 }
 
-bool32 sub_80687A4(void)
+static bool32 sub_80687A4(void)
 {
     if (FlagGet(0x80D) && gMapHeader.mapType == 5 && sub_8068F18() == 1)
     {
@@ -475,7 +474,7 @@ bool32 sub_80687A4(void)
 }
 
 #ifdef NONMATCHING
-u8 sub_80687E4(struct MapPosition *position, u16 b, u16 unused)
+static bool8 sub_80687E4(struct MapPosition *position, u16 b, u16 unused)
 {
     if (mapheader_trigger_activate_at__run_now(position) != TRUE
      && sub_8068A64(position, b) != TRUE && sub_8068870(b) != TRUE
@@ -485,7 +484,7 @@ u8 sub_80687E4(struct MapPosition *position, u16 b, u16 unused)
 }
 #else
 __attribute__((naked))
-u8 sub_80687E4(struct MapPosition *position, u16 b, u16 unused)
+static bool8 sub_80687E4(struct MapPosition *position, u16 b, u16 unused)
 {
     asm(".syntax unified\n\
     push {r4-r6,lr}\n\
@@ -533,7 +532,7 @@ _08068836:\n\
 }
 #endif
 
-u8 mapheader_trigger_activate_at__run_now(struct MapPosition *position)
+bool8 mapheader_trigger_activate_at__run_now(struct MapPosition *position)
 {
     u8 *script = mapheader_trigger_activate_at(&gMapHeader, position->x - 7, position->y - 7, position->height);
     
@@ -544,7 +543,7 @@ u8 mapheader_trigger_activate_at__run_now(struct MapPosition *position)
 }
 
 //can be u8, u16, or u32
-u8 sub_8068870(u16 a)
+bool8 sub_8068870(u16 a)
 {
     if (MetatileBehavior_IsCrackedFloorHole(a))
     {
@@ -554,7 +553,7 @@ u8 sub_8068870(u16 a)
     return FALSE;
 }
 
-u8 sub_8068894(void)
+bool8 sub_8068894(void)
 {
     sub_8082B78();
     happiness_algorithm_step();
@@ -584,7 +583,7 @@ void unref_sub_80688F8(void)
     VarSet(0x402A, 0);
 }
 
-void happiness_algorithm_step(void)
+static void happiness_algorithm_step(void)
 {
     u16 *ptr = GetVarPointer(0x402A);
     int i;
@@ -608,7 +607,7 @@ void overworld_poison_timer_set(void)
     VarSet(0x402B, 0);
 }
 
-u8 overworld_poison_step(void)
+static bool8 overworld_poison_step(void)
 {
     u16 *ptr;
     
@@ -638,7 +637,7 @@ void prev_quest_postbuffer_cursor_backup_reset(void)
     gUnknown_0202E8C0 = 0;
 }
 
-u8 is_it_battle_time_3(u16 a)
+static bool8 is_it_battle_time_3(u16 a)
 {
     if (gUnknown_0202E8C0 < 4)
     {
@@ -659,7 +658,7 @@ u8 is_it_battle_time_3(u16 a)
     }
 }
 
-u8 mapheader_run_first_tag2_script_list_match_conditionally(struct MapPosition *position, u16 b, u8 c)
+static bool8 mapheader_run_first_tag2_script_list_match_conditionally(struct MapPosition *position, u16 b, u8 c)
 {
     s8 r6 = map_warp_check_packed(&gMapHeader, position);
     
@@ -673,7 +672,7 @@ u8 mapheader_run_first_tag2_script_list_match_conditionally(struct MapPosition *
     return FALSE;
 }
 
-u8 sub_8068A64(struct MapPosition *position, u16 b)
+bool8 sub_8068A64(struct MapPosition *position, u16 b)
 {
     s8 r4 = map_warp_check_packed(&gMapHeader, position);
     
@@ -712,7 +711,7 @@ u8 sub_8068A64(struct MapPosition *position, u16 b)
     return FALSE;
 }
 
-u8 sub_8068B30(u16 a)
+static bool8 sub_8068B30(u16 a)
 {
     if (MetatileBehavior_IsWarpDoor(a) != TRUE
      && MetatileBehavior_IsLadder(a) != TRUE
@@ -726,7 +725,7 @@ u8 sub_8068B30(u16 a)
     return TRUE;
 }
 
-u8 is_non_stair_warp_tile(u16 a, u8 b)
+static bool8 is_non_stair_warp_tile(u16 a, u8 b)
 {
     switch (b)
     {
@@ -742,12 +741,12 @@ u8 is_non_stair_warp_tile(u16 a, u8 b)
     return FALSE;
 }
 
-s8 map_warp_check_packed(struct MapHeader *mapHeader, struct MapPosition *position)
+static s8 map_warp_check_packed(struct MapHeader *mapHeader, struct MapPosition *position)
 {
     return map_warp_check(mapHeader, position->x - 7, position->y - 7, position->height);
 }
 
-void sub_8068C30(struct MapHeader *unused, s8 b, struct MapPosition *position)
+static void sub_8068C30(struct MapHeader *unused, s8 b, struct MapPosition *position)
 {
     struct WarpEvent *warpEvent = &gMapHeader.events->warps[b];
     
@@ -767,7 +766,7 @@ void sub_8068C30(struct MapHeader *unused, s8 b, struct MapPosition *position)
     }
 }
 
-u8 map_warp_consider_2_to_inside(struct MapPosition *position, u16 b, u8 c)
+static bool8 map_warp_consider_2_to_inside(struct MapPosition *position, u16 b, u8 c)
 {
     s8 r4;
     
@@ -793,7 +792,7 @@ u8 map_warp_consider_2_to_inside(struct MapPosition *position, u16 b, u8 c)
     return FALSE;
 }
 
-s8 map_warp_check(struct MapHeader *mapHeader, u16 b, u16 c, u8 d)
+static s8 map_warp_check(struct MapHeader *mapHeader, u16 b, u16 c, u8 d)
 {
     s32 i;
     struct WarpEvent *warpEvent = mapHeader->events->warps;
@@ -810,7 +809,7 @@ s8 map_warp_check(struct MapHeader *mapHeader, u16 b, u16 c, u8 d)
     return -1;
 }
 
-u8 *trigger_activate(struct CoordEvent *coordEvent)
+static u8 *trigger_activate(struct CoordEvent *coordEvent)
 {
     if (coordEvent != NULL)
     {
@@ -830,7 +829,7 @@ u8 *trigger_activate(struct CoordEvent *coordEvent)
     return NULL;
 }
 
-u8 *mapheader_trigger_activate_at(struct MapHeader *mapHeader, u16 b, u16 c, u8 d)
+static u8 *mapheader_trigger_activate_at(struct MapHeader *mapHeader, u16 b, u16 c, u8 d)
 {
     s32 i;
     struct CoordEvent *coordEvents = mapHeader->events->coordEvents;
@@ -857,7 +856,7 @@ u8 *sub_8068E24(struct MapPosition *position)
     return mapheader_trigger_activate_at(&gMapHeader, position->x - 7, position->y - 7, position->height);
 }
 
-struct BgEvent *FindInvisibleMapObjectByPosition(struct MapHeader *mapHeader, u16 b, u16 c, u8 d)
+static struct BgEvent *FindInvisibleMapObjectByPosition(struct MapHeader *mapHeader, u16 b, u16 c, u8 d)
 {
     u8 i;
     struct BgEvent *bgEvents = mapHeader->events->bgEvents;

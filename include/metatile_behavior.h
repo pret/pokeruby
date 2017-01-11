@@ -103,7 +103,7 @@ bool8 sub_80576DC(u8);
 bool8 MetatileBehavior_IsPacifidlogLog(u8);
 bool8 MetatileBehavior_IsTrickHousePuzzleDoor(u8);
 bool8 MetatileBehavior_IsRegionMap(u8);
-bool8 MetatileBehavior_IsClosedSootpolisGymDoor(u8);
+bool8 MetatileBehavior_IsClosedSootopolisGymDoor(u8);
 bool8 MetatileBehavior_IsRoulette(u8);
 bool8 MetatileBehavior_IsPokeblockFeeder(u8);
 bool8 MetatileBehavior_0xBB(u8);
