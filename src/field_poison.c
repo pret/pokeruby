@@ -106,7 +106,7 @@ void ExecuteWhiteOut(void)
     ScriptContext1_Stop();
 }
 
-u8 overworld_poison(void)
+s32 overworld_poison(void)
 {
     struct Pokemon *pkmn = &gPlayerParty[0];
     u32 numPoisoned = 0;

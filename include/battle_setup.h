@@ -71,7 +71,7 @@ u8 *sub_8082880(void);
 // sub_8082AE4
 // sub_8082B10
 // sub_8082B44
-// sub_8082B78
+void sub_8082B78(void);
 // sub_8082BA4
 void sub_8082BD0(u16, u16);
 // sub_8082C0C

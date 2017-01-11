@@ -410,11 +410,11 @@ struct SaveBlock2 /* 0x02024EA4 */
     /*0xA8*/ struct SaveBlock2_Sub filler_A8;
 };
 
-struct UnkStruct_8054FF8_Substruct
+struct MapPosition
 {
     s16 x;
     s16 y;
-    u8 field_8;
+    u8 height;
 };
 
 struct UnkStruct_8054FF8
@@ -423,7 +423,7 @@ struct UnkStruct_8054FF8
     u8 b;
     u8 c;
     u8 d;
-    struct UnkStruct_8054FF8_Substruct sub;
+    struct MapPosition sub;
     u16 field_C;
 };
 

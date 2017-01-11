@@ -148,10 +148,10 @@ void sub_8064990(u8, u8);
 void sub_8067EEC(struct UnkInputStruct *pStruct);
 void process_overworld_input(struct UnkInputStruct *pStruct, u16 keys, u16 heldKeys);
 int sub_8068024(struct UnkInputStruct *pStruct);
-u8 *sub_80682A8(void *, u8, u8);
+u8 *sub_80682A8(struct MapPosition *, u8, u8);
 void overworld_poison_timer_set(void);
 void prev_quest_postbuffer_cursor_backup_reset(void);
-u8 *sub_8068E24(struct UnkStruct_8054FF8_Substruct *);
+u8 *sub_8068E24(struct MapPosition *);
 u8 *GetFieldObjectScriptPointerForComparison();
 
 // asm/field_tasks.o

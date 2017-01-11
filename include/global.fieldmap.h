@@ -80,14 +80,15 @@ struct WarpEvent
 {
     s16 x, y;
     s8 warpId;
-    s8 mapGroup;
-    s8 mapNum;
+    u8 mapGroup;
+    u8 mapNum;
+    u8 unk7;
 };
 
 struct CoordEvent
 {
     s16 x, y;
-    u8 filler_4;
+    u8 unk4;
     u8 filler_5;
     u16 trigger;
     u16 index;
@@ -98,7 +99,7 @@ struct CoordEvent
 struct BgEvent
 {
     s16 x, y;
-    u8 filler_4;
+    u8 unk4;
     u8 kind;
     s16 filler_6;
     u8 *script;

@@ -391,7 +391,7 @@ void sub_8053588(u8 a1)
         warp_set(&gSaveBlock1.warp3, warp->group, warp->map, -1, warp->x, warp->y);
 }
 
-void sub_80535C4(u16 a1, u16 a2)
+void sub_80535C4(s16 a1, s16 a2)
 {
     u8 v4 = sav1_map_get_light_level();
     u8 v5 = get_map_light_level_by_bank_and_number(gUnknown_020297F8.mapGroup, gUnknown_020297F8.mapNum);
@@ -2099,7 +2099,7 @@ void sub_80555B0(int linkPlayerId, int a2, struct UnkStruct_8054FF8 *a3)
     sub_8055B08(linkPlayerId, &x, &y);
     a3->sub.x = x;
     a3->sub.y = y;
-    a3->sub.field_8 = sub_8055B50(linkPlayerId);
+    a3->sub.height = sub_8055B50(linkPlayerId);
     a3->field_C = MapGridGetMetatileBehaviorAt(x, y);
 }
 
@@ -2141,7 +2141,7 @@ bool32 sub_8055660(struct UnkStruct_8054FF8 *a1)
 
 u8 *sub_805568C(struct UnkStruct_8054FF8 *a1)
 {
-    struct UnkStruct_8054FF8_Substruct unkStruct;
+    struct MapPosition unkStruct;
     u8 linkPlayerId;
 
     if (a1->c && a1->c != 2)
@@ -2150,7 +2150,7 @@ u8 *sub_805568C(struct UnkStruct_8054FF8 *a1)
     unkStruct = a1->sub;
     unkStruct.x += gUnknown_0821664C[a1->d].x;
     unkStruct.y += gUnknown_0821664C[a1->d].y;
-    unkStruct.field_8 = 0;
+    unkStruct.height = 0;
     linkPlayerId = GetLinkPlayerIdAt(unkStruct.x, unkStruct.y);
 
     if (linkPlayerId != 4)

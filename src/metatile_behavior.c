@@ -832,7 +832,7 @@ bool8 MetatileBehavior_IsRegionMap(u8 var)
         return FALSE;
 }
 
-bool8 MetatileBehavior_IsClosedSootpolisGymDoor(u8 var)
+bool8 MetatileBehavior_IsClosedSootopolisGymDoor(u8 var)
 {
     if(var == MB_CLOSED_SOOTOPOLIS_GYM_DOOR)
         return TRUE;
