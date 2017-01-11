@@ -1798,7 +1798,7 @@ void BattleAICmd_unk_4C(void)
     gAIScriptPtr += 1;
 }
 
-// needed to match the hack that is get_item, thanks cam
+// needed to match the hack that is get_item, thanks cam, someone else clean this up later.
 extern u8 unk_2000000[];
 
 #define AI_THINKING_STRUCT ((struct AI_ThinkingStruct *)(unk_2000000 + 0x16800))
@@ -1816,4 +1816,25 @@ void BattleAICmd_get_item(void)
     AI_THINKING_STRUCT->funcResult = unk_2000000[0x160CC + var * 2];
     
     gAIScriptPtr += 2;
+}
+
+void BattleAICmd_unk_4E(void)
+{
+    gAIThinkingSpace.funcResult = gBattleMoves[gAIThinkingSpace.funcResult].type;
+    
+    gAIScriptPtr += 1;
+}
+
+void BattleAICmd_unk_4F(void)
+{
+    gAIThinkingSpace.funcResult = gBattleMoves[gAIThinkingSpace.funcResult].power;
+    
+    gAIScriptPtr += 1;
+}
+
+void BattleAICmd_unk_50(void)
+{
+    gAIThinkingSpace.funcResult = gBattleMoves[gAIThinkingSpace.funcResult].effect;
+	
+	gAIScriptPtr += 1;
 }
