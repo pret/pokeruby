@@ -146,7 +146,7 @@ void process_overworld_input(struct UnkInputStruct *pStruct, u16 keys, u16 heldK
     u8 r6 = gPlayerAvatar.running1;
     u8 r9 = gPlayerAvatar.running2;
     bool8 r7 = MetatileBehavior_IsMoveTile(cur_mapdata_block_role_at_player_pos(r9));
-    
+
     if ((r6 == 2 && r7 == FALSE) || r6 == 0)
     {
         if (sub_80E6034() != 4)
@@ -242,7 +242,7 @@ static void player_get_pos_to_and_height(struct MapPosition *position)
 static void player_get_next_pos_and_height(struct MapPosition *position)
 {
     s16 x, y;
-    
+
     GetXYCoordsOneStepInFrontOfPlayer(&position->x, &position->y);
     PlayerGetDestCoords(&x, &y);
     if (MapGridGetZCoordAt(x, y) != 0)
@@ -254,7 +254,7 @@ static void player_get_next_pos_and_height(struct MapPosition *position)
 static u16 cur_mapdata_block_role_at_player_pos(int unused)
 {
     s16 x, y;
-    
+
     PlayerGetDestCoords(&x, &y);
     return MapGridGetMetatileBehaviorAt(x, y);
 }
@@ -262,17 +262,17 @@ static u16 cur_mapdata_block_role_at_player_pos(int unused)
 static bool8 sub_80681F0(struct MapPosition *position, u16 b, u8 c)
 {
     u8 *script = TryGetScriptOnPressingA(position, b, c);
-    
+
     if (script == NULL)
         return FALSE;
-    
+
     if (script != gUnknown_0815281E
      && script != gUnknown_08152C39
      && script != gUnknown_0815F36C
      && script != gUnknown_0815F43A
      && script != gUnknown_081A0009)
         PlaySE(5);
-    
+
     ScriptContext1_SetupScript(script);
     return TRUE;
 }
@@ -280,7 +280,7 @@ static bool8 sub_80681F0(struct MapPosition *position, u16 b, u8 c)
 static u8 *TryGetScriptOnPressingA(struct MapPosition *position, u8 b, u8 c)
 {
     u8 *script;
-    
+
     script = sub_8068364(position, b, c);
     if (script != NULL)
         return script;
@@ -293,7 +293,7 @@ static u8 *TryGetScriptOnPressingA(struct MapPosition *position, u8 b, u8 c)
     script = TryGetFieldMoveScript(position, b, c);
     if (script != NULL)
         return script;
-    
+
     return NULL;
 }
 
@@ -301,7 +301,7 @@ u8 *sub_80682A8(struct MapPosition *position, u8 unused, u8 c)
 {
     u8 r3;
     s32 i;
-    
+
     if (!MetatileBehavior_IsCounter(MapGridGetMetatileBehaviorAt(position->x, position->y)))
         r3 = GetFieldObjectIdByXYZ(position->x, position->y, position->height);
     else
@@ -323,7 +323,7 @@ static u8 *sub_8068364(struct MapPosition *position, u8 b, u8 c)
 {
     u8 r3;
     u8 *script;
-    
+
     r3 = GetFieldObjectIdByXYZ(position->x, position->y, position->height);
     if (r3 == 16 || gMapObjects[r3].localId == 0xFF)
     {
@@ -345,7 +345,7 @@ static u8 *sub_8068364(struct MapPosition *position, u8 b, u8 c)
 static u8 *TryGetInvisibleMapObjectScript(struct MapPosition *position, u8 unused, u8 c)
 {
     struct BgEvent *bgEvent = FindInvisibleMapObjectByPosition(&gMapHeader, position->x - 7, position->y - 7, position->height);
-    
+
     if (bgEvent == NULL)
         return NULL;
     if (bgEvent->script == NULL)
@@ -394,7 +394,7 @@ static u8 *TryGetInvisibleMapObjectScript(struct MapPosition *position, u8 unuse
 static u8 *sub_8068500(struct MapPosition *position, u8 b, u8 c)
 {
     s8 height;
-    
+
     if (MetatileBehavior_IsPlayerFacingTVScreen(b, c) == TRUE)
         return Event_TV;
     if (MetatileBehavior_IsPC(b) == TRUE)
@@ -492,7 +492,7 @@ static bool8 sub_80687E4(struct MapPosition *position, u16 b, u16 unused)
 bool8 mapheader_trigger_activate_at__run_now(struct MapPosition *position)
 {
     u8 *script = mapheader_trigger_activate_at(&gMapHeader, position->x - 7, position->y - 7, position->height);
-    
+
     if (script == NULL)
         return FALSE;
     ScriptContext1_SetupScript(script);
@@ -544,13 +544,13 @@ static void happiness_algorithm_step(void)
 {
     u16 *ptr = GetVarPointer(VAR_HAPPINESS_STEP_COUNTER);
     int i;
-    
+
     (*ptr)++;
     (*ptr) %= 128;
     if (*ptr == 0)
     {
         struct Pokemon *pkmn = gPlayerParty;
-        
+
         for (i = 5; i >= 0; i--)
         {
             AdjustFriendship(pkmn, 5);
@@ -567,7 +567,7 @@ void overworld_poison_timer_set(void)
 static bool8 overworld_poison_step(void)
 {
     u16 *ptr;
-    
+
     if (gMapHeader.mapType != 9)
     {
         ptr = GetVarPointer(VAR_POISON_STEP_COUNTER);
@@ -618,7 +618,7 @@ static bool8 is_it_battle_time_3(u16 a)
 static bool8 mapheader_run_first_tag2_script_list_match_conditionally(struct MapPosition *position, u16 b, u8 c)
 {
     s8 r6 = map_warp_check_packed(&gMapHeader, position);
-    
+
     if (is_non_stair_warp_tile(b, c) == TRUE && r6 != -1)
     {
         walkrun_find_lowest_active_bit_in_bitfield();
@@ -632,7 +632,7 @@ static bool8 mapheader_run_first_tag2_script_list_match_conditionally(struct Map
 bool8 sub_8068A64(struct MapPosition *position, u16 b)
 {
     s8 r4 = map_warp_check_packed(&gMapHeader, position);
-    
+
     if (r4 != -1 && sub_8068B30(b) == TRUE)
     {
         walkrun_find_lowest_active_bit_in_bitfield();
@@ -706,7 +706,7 @@ static s8 map_warp_check_packed(struct MapHeader *mapHeader, struct MapPosition 
 static void sub_8068C30(struct MapHeader *unused, s8 b, struct MapPosition *position)
 {
     struct WarpEvent *warpEvent = &gMapHeader.events->warps[b];
-    
+
     if (warpEvent->mapNum == 0x7F)
     {
         copy_saved_warp2_bank_and_enter_x_to_warp1(warpEvent->mapGroup);
@@ -714,7 +714,7 @@ static void sub_8068C30(struct MapHeader *unused, s8 b, struct MapPosition *posi
     else
     {
         struct MapHeader *mapHeader;
-        
+
         warp1_set_2(warpEvent->unk7, warpEvent->mapNum, warpEvent->mapGroup);
         sub_80535C4(position->x, position->y);
         mapHeader = get_mapheader_by_bank_and_number(warpEvent->unk7, warpEvent->mapNum);
@@ -726,7 +726,7 @@ static void sub_8068C30(struct MapHeader *unused, s8 b, struct MapPosition *posi
 static bool8 map_warp_consider_2_to_inside(struct MapPosition *position, u16 b, u8 c)
 {
     s8 r4;
-    
+
     if (c == 2)
     {
         if (sub_80571C0(b) == TRUE)
@@ -754,7 +754,7 @@ static s8 map_warp_check(struct MapHeader *mapHeader, u16 b, u16 c, u8 d)
     s32 i;
     struct WarpEvent *warpEvent = mapHeader->events->warps;
     u8 warpCount = mapHeader->events->warpCount;
-    
+
     for (i = 0; i < warpCount; i++, warpEvent++)
     {
         if ((u16)warpEvent->x == b && (u16)warpEvent->y == c)
@@ -792,7 +792,7 @@ static u8 *mapheader_trigger_activate_at(struct MapHeader *mapHeader, u16 b, u16
     struct CoordEvent *coordEvents = mapHeader->events->coordEvents;
     u8 coordEventCount = mapHeader->events->coordEventCount;
     u8 *script;
-    
+
     for (i = 0; i < coordEventCount; i++)
     {
         if ((u16)coordEvents[i].x == b && (u16)coordEvents[i].y == c)
@@ -818,7 +818,7 @@ static struct BgEvent *FindInvisibleMapObjectByPosition(struct MapHeader *mapHea
     u8 i;
     struct BgEvent *bgEvents = mapHeader->events->bgEvents;
     u8 bgEventCount = mapHeader->events->bgEventCount;
-    
+
     for (i = 0; i < bgEventCount; i++)
     {
         if ((u16)bgEvents[i].x == b && (u16)bgEvents[i].y == c)
@@ -859,7 +859,7 @@ u8 sub_8068F18(void)
 {
     s16 x, y;
     u8 r5;
-    
+
     PlayerGetDestCoords(&x, &y);
     r5 = MapGridGetMetatileBehaviorAt(x, y);
     if (gMapHeader.mapType == 5 && sub_805750C(r5) == 0)
@@ -879,7 +879,7 @@ u8 *GetFieldObjectScriptPointerForComparison(void)
 {
     u8 r4;
     struct MapPosition position;
-    
+
     r4 = player_get_direction_upper_nybble();
     player_get_next_pos_and_height(&position);
     return sub_8068364(&position, MapGridGetMetatileBehaviorAt(position.x, position.y), r4);
@@ -888,7 +888,7 @@ u8 *GetFieldObjectScriptPointerForComparison(void)
 int sub_8068FEC(void)
 {
     struct MapPosition position;
-    
+
     player_get_direction_upper_nybble();  //unnecessary
     player_get_pos_to_and_height(&position);
     MapGridGetMetatileBehaviorAt(position.x, position.y);  //unnecessary
