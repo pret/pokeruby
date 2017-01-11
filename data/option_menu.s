@@ -5,8 +5,9 @@
 
 	.align 2
 gUnknown_0839F5FC:: @ 839F5FC
-	.incbin "baserom.gba", 0x0039f5fc, 0x40
+	.incbin "graphics/misc/option_menu_text.gbapal"
 
+@ note: this is only used in the Japanese release
 	.align 2
 gUnknown_0839F63C:: @ 839F63C
-	.incbin "baserom.gba", 0x0039f63c, 0x40
+	.incbin "graphics/misc/option_menu_equals_sign.4bpp"

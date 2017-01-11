@@ -23,6 +23,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include <stdint.h>
+#include <limits.h>
 
 /* extended.c */
 void ieee754_write_extended (double, uint8_t*);
@@ -55,6 +56,7 @@ typedef struct {
 	bool has_loop;
 	unsigned long loop_offset;
 	double sample_rate;
+	unsigned long real_num_samples;
 } AifData;
 
 struct Bytes {
@@ -245,6 +247,10 @@ void read_aif(struct Bytes *aif, AifData *aif_data)
 				}
 				else if (strcmp(marker_name, "END") == 0)
 				{
+					if (!aif_data->has_loop) {
+						aif_data->loop_offset = marker_position;
+						aif_data->has_loop = true;
+					}
 					aif_data->num_samples = marker_position;
 				}
 
@@ -270,6 +276,7 @@ void read_aif(struct Bytes *aif, AifData *aif_data)
 			memcpy(sample_data, &aif->data[pos], num_samples);
 
 			aif_data->samples = sample_data;
+			aif_data->real_num_samples = num_samples;
 			pos += chunk_size - 8;
 		}
 		else
@@ -281,7 +288,7 @@ void read_aif(struct Bytes *aif, AifData *aif_data)
 }
 
 // This is a table of deltas between sample values in compressed PCM data.
-const int8_t gDeltaEncodingTable[] = {
+const int gDeltaEncodingTable[] = {
 	0, 1, 4, 9, 16, 25, 36, 49,
 	-64, -49, -36, -25, -16, -9, -4, -1,
 };
@@ -353,6 +360,26 @@ struct Bytes *delta_decompress(struct Bytes *delta, unsigned int expected_length
 	return pcm;
 }
 
+int get_delta_index(uint8_t sample, uint8_t prev_sample)
+{
+	int best_error = INT_MAX;
+	int best_index = -1;
+
+	for (int i = 0; i < 16; i++)
+	{
+		uint8_t new_sample = prev_sample + gDeltaEncodingTable[i];
+		int error = sample > new_sample ? sample - new_sample : new_sample - sample;
+
+		if (error < best_error)
+		{
+			best_error = error;
+			best_index = i;
+		}
+	}
+
+	return best_index;
+}
+
 struct Bytes *delta_compress(struct Bytes *pcm)
 {
 	struct Bytes *delta = malloc(sizeof(struct Bytes));
@@ -378,103 +405,42 @@ struct Bytes *delta_compress(struct Bytes *pcm)
 
 	delta->data = malloc(delta->length + 33);
 
-	uint8_t hi, lo;
 	unsigned int i = 0;
 	unsigned int j = 0;
 	int k;
-	int l;
-	int8_t base;
-	int8_t diff;
+	uint8_t base;
+	int delta_index;
+
 	while (i < pcm->length)
 	{
-		base = (int8_t)pcm->data[i++];
-		delta->data[j++] = (uint8_t)base;
+		base = pcm->data[i++];
+		delta->data[j++] = base;
+
 		if (i >= pcm->length)
 		{
 			break;
 		}
-		hi = 0;
-		diff = pcm->data[i++] - base;
-		if (diff > 49)
-		{
-			diff = -diff;
-		}
-		if (diff < 0)
-		{
-			for (l = 8; l < 16; l++)
-			{
-				lo = l & 0xf;
-				if (diff <= gDeltaEncodingTable[l]) break;
-			}
-		}
-		else
-		{
-			for (l = 0; l < 8; l++)
-			{
-				lo = l & 0xf;
-				if (diff <= gDeltaEncodingTable[l]) break;
-			}
-		}
-		base += diff;
-		delta->data[j++] = (hi << 4) | lo;
-		if (i >= pcm->length)
-		{
-			break;
-		}
+		delta_index = get_delta_index(pcm->data[i++], base);
+		base += gDeltaEncodingTable[delta_index];
+		delta->data[j++] = delta_index;
+
 		for (k = 0; k < 31; k++)
 		{
-			diff = pcm->data[i++] - base;
-			if (diff > 49) diff = -diff;
-			if (diff < 0)
-			{
-				for (l = 8; l < 16; l++)
-				{
-					hi = l & 0xf;
-					if (diff <= gDeltaEncodingTable[l]) break;
-				}
-			}
-			else
-			{
-				for (l = 0; l < 8; l++)
-				{
-					hi = l & 0xf;
-					if (diff <= gDeltaEncodingTable[l]) break;
-				}
-			}
-			base += diff;
-			delta->data[j] = (hi << 4);
 			if (i >= pcm->length)
 			{
 				break;
 			}
-			diff = pcm->data[i++] - base;
-			if (diff > 49) diff = -diff;
-			if (diff < 0)
-			{
-				for (l = 8; l < 16; l++)
-				{
-					lo = l & 0xf;
-					if (diff <= gDeltaEncodingTable[l]) break;
-				}
-			}
-			else
-			{
-				for (l = 0; l < 8; l++)
-				{
-					lo = l & 0xf;
-					if (diff <= gDeltaEncodingTable[l]) break;
-				}
-			}
-			base += diff;
-			delta->data[j++] = (hi << 4) | lo;
+			delta_index = get_delta_index(pcm->data[i++], base);
+			base += gDeltaEncodingTable[delta_index];
+			delta->data[j] = (delta_index << 4);
+
 			if (i >= pcm->length)
 			{
 				break;
 			}
-		}
-		if (i >= pcm->length)
-		{
-			break;
+			delta_index = get_delta_index(pcm->data[i++], base);
+			base += gDeltaEncodingTable[delta_index];
+			delta->data[j++] |= delta_index;
 		}
 	}
 
@@ -514,7 +480,7 @@ void aif2pcm(const char *aif_filename, const char *pcm_filename, bool compress)
 	{
 		struct Bytes *input = malloc(sizeof(struct Bytes));
 		input->data = aif_data.samples;
-		input->length = aif_data.num_samples;
+		input->length = aif_data.real_num_samples;
 		pcm = delta_compress(input);
 		free(input);
 	}
@@ -522,7 +488,7 @@ void aif2pcm(const char *aif_filename, const char *pcm_filename, bool compress)
 	{
 		pcm = malloc(sizeof(struct Bytes));
 		pcm->data = aif_data.samples;
-		pcm->length = aif_data.num_samples;
+		pcm->length = aif_data.real_num_samples;
 	}
 	output.length = header_size + pcm->length;
 	output.data = malloc(output.length);
@@ -588,7 +554,7 @@ void pcm2aif(const char *pcm_filename, const char *aif_filename, uint32_t base_n
 	memcpy(aif_data->samples, pcm->data, pcm->length);
 
 	struct Bytes *aif = malloc(sizeof(struct Bytes));
-	aif->length = 54 + 60 + aif_data->num_samples;
+	aif->length = 54 + 60 + pcm->length;
 	aif->data = malloc(aif->length);
 
 	long pos = 0;
@@ -632,10 +598,10 @@ void pcm2aif(const char *pcm_filename, const char *aif_filename, uint32_t base_n
 	aif->data[pos++] = 1;  // 1 channel
 
 	// Common Chunk numSampleFrames
-	aif->data[pos++] = ((pcm->length >> 24) & 0xFF);
-	aif->data[pos++] = ((pcm->length >> 16) & 0xFF);
-	aif->data[pos++] = ((pcm->length >> 8)  & 0xFF);
-	aif->data[pos++] = (pcm->length & 0xFF);
+	aif->data[pos++] = ((aif_data->num_samples >> 24) & 0xFF);
+	aif->data[pos++] = ((aif_data->num_samples >> 16) & 0xFF);
+	aif->data[pos++] = ((aif_data->num_samples >> 8)  & 0xFF);
+	aif->data[pos++] = (aif_data->num_samples & 0xFF);
 
 	// Common Chunk sampleSize
 	aif->data[pos++] = 0;
@@ -650,24 +616,25 @@ void pcm2aif(const char *pcm_filename, const char *aif_filename, uint32_t base_n
 		aif->data[pos++] = sample_rate_buffer[i];
 	}
 
-	// Marker Chunk ckID
-	aif->data[pos++] = 'M';
-	aif->data[pos++] = 'A';
-	aif->data[pos++] = 'R';
-	aif->data[pos++] = 'K';
-
-	// Marker Chunk ckSize
-	aif->data[pos++] = 0;
-	aif->data[pos++] = 0;
-	aif->data[pos++] = 0;
-	aif->data[pos++] = 12 + (aif_data->has_loop ? 12 : 0);
-
-	// Marker Chunk numMarkers
-	aif->data[pos++] = 0;
-	aif->data[pos++] = (aif_data->has_loop ? 2 : 1);
-
 	if (aif_data->has_loop)
 	{
+
+		// Marker Chunk ckID
+		aif->data[pos++] = 'M';
+		aif->data[pos++] = 'A';
+		aif->data[pos++] = 'R';
+		aif->data[pos++] = 'K';
+
+		// Marker Chunk ckSize
+		aif->data[pos++] = 0;
+		aif->data[pos++] = 0;
+		aif->data[pos++] = 0;
+		aif->data[pos++] = 12 + (aif_data->has_loop ? 12 : 0);
+
+		// Marker Chunk numMarkers
+		aif->data[pos++] = 0;
+		aif->data[pos++] = (aif_data->has_loop ? 2 : 1);
+
 		// Marker loop start
 		aif->data[pos++] = 0;
 		aif->data[pos++] = 1;  // id = 1
@@ -684,22 +651,22 @@ void pcm2aif(const char *pcm_filename, const char *aif_filename, uint32_t base_n
 		aif->data[pos++] = 'A';
 		aif->data[pos++] = 'R';
 		aif->data[pos++] = 'T';  // markerName
+
+		// Marker loop end
+		aif->data[pos++] = 0;
+		aif->data[pos++] = (aif_data->has_loop ? 2 : 1);  // id = 2
+
+		long loop_end = aif_data->num_samples;
+		aif->data[pos++] = ((loop_end >> 24) & 0xFF);
+		aif->data[pos++] = ((loop_end >> 16) & 0xFF);
+		aif->data[pos++] = ((loop_end >> 8)  & 0xFF);
+		aif->data[pos++] = (loop_end & 0xFF);  // position
+
+		aif->data[pos++] = 3;  // pascal-style string length
+		aif->data[pos++] = 'E';
+		aif->data[pos++] = 'N';
+		aif->data[pos++] = 'D';
 	}
-
-	// Marker loop end
-	aif->data[pos++] = 0;
-	aif->data[pos++] = (aif_data->has_loop ? 2 : 1);  // id = 2
-
-	long loop_end = aif_data->num_samples;
-	aif->data[pos++] = ((loop_end >> 24) & 0xFF);
-	aif->data[pos++] = ((loop_end >> 16) & 0xFF);
-	aif->data[pos++] = ((loop_end >> 8)  & 0xFF);
-	aif->data[pos++] = (loop_end & 0xFF);  // position
-
-	aif->data[pos++] = 3;  // pascal-style string length
-	aif->data[pos++] = 'E';
-	aif->data[pos++] = 'N';
-	aif->data[pos++] = 'D';
 
 	// Instrument Chunk ckID
 	aif->data[pos++] = 'I';
@@ -826,7 +793,7 @@ int main(int argc, char **argv)
 		}
 	}
 
-	if (strcmp(extension, "aif") == 0)
+	if (strcmp(extension, "aif") == 0 || strcmp(extension, "aiff") == 0)
 	{
 		if (argc >= 3)
 		{

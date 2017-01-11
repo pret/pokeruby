@@ -167,8 +167,7 @@ SECTIONS {
         src/field_poison.o(.text);
         src/pokemon_size_record.o(.text);
         asm/fldeff_80C5CD4.o(.text);
-        src/truck_scene.o(.text);
-        asm/porthole.o(.text);
+        src/field_special_scene.o(.text);
         asm/rotating_gate.o(.text);
         src/safari_zone.o(.text);
         asm/contest_link_80C857C.o(.text);
@@ -229,7 +228,6 @@ SECTIONS {
         asm/battle_anim_813F0F4.o(.text);
         asm/hall_of_fame.o(.text);
         src/credits.o(.text);
-        asm/credits.o(.text);
         src/lottery_corner.o(.text);
         src/diploma.o(.text);
         src/berry_tag_screen.o(.text);
@@ -371,7 +369,7 @@ SECTIONS {
         data/contest_link_80C2020.o(.rodata);
         src/pokemon_size_record.o(.rodata);
         data/fldeff_80C5CD4.o(.rodata);
-        data/truck_scene.o(.rodata);
+        data/field_special_scene.o(.rodata);
         data/rotating_gate.o(.rodata);
         data/item_use.o(.rodata);
         data/battle_anim_80CA710.o(.rodata);

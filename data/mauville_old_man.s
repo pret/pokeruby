@@ -3,8 +3,14 @@
 
 	.section .rodata
 
+	.align 1
 gUnknown_083E537C:: @ 83E537C
-	.incbin "baserom.gba", 0x003e537c, 0xc
+	ec_word SISTER
+	ec_word EATS
+	ec_word SWEETS
+	ec_word VORACIOUS
+	ec_word AND
+	ec_word DROOLING
 
 	.align 2
 gUnknown_083E5388:: @ 83E5388
@@ -28,8 +34,14 @@ gUnknown_083E53A8:: @ 83E53A8
 	.4byte OtherText_LyingInGreenGrass
 	.4byte OtherText_SecretBasesWonderful
 
+	.align 1
 gUnknown_083E53C8:: @ 83E53C8
-	.incbin "baserom.gba", 0x003e53c8, 0x18
+	.2byte  0x0, 0
+	.2byte  0xC, 0
+	.2byte  0xD, 0
+	.2byte 0x12, 0
+	.2byte 0x13, 0
+	.2byte 0x15, 0
 
 	.align 2
 gUnknown_083E53E0:: @ 83E53E0
@@ -72,5 +84,8 @@ gUnknown_083E53E0:: @ 83E53E0
 gUnknown_083E5610:: @ 83E5610
 	.4byte 0x131, UnknownString_81B0763, UnknownString_81B0781, UnknownString_81B0797
 
+	.align 2
 gUnknown_083E5620:: @ 83E5620
-	.incbin "baserom.gba", 0x003e5620, 0xc
+	.4byte 0x24
+	.4byte gSaveBlock1 + 0x2D94
+	.4byte 0xC

@@ -26,7 +26,7 @@
 #include "start_menu.h"
 #include "task.h"
 #include "tileset_anim.h"
-#include "truck_scene.h"
+#include "field_special_scene.h"
 #include "weather.h"
 #include "wild_encounter.h"
 #include "metatile_behavior.h"
@@ -56,9 +56,6 @@ extern struct UnkPlayerStruct gUnknown_02029810;
 extern u16 gUnknown_02029814;
 extern bool8 gUnknown_02029816;
 extern struct LinkPlayerMapObject gLinkPlayerMapObjects[];
-
-extern u8 gUnknown_0202E85C;
-extern u8 gUnknown_0202E85D;
 
 extern u8 gUnknown_03000580[];
 extern u16 (*gUnknown_03000584)(u32);

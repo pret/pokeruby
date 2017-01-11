@@ -79,7 +79,7 @@ gSpriteAnimTable_840B360:: @ 840B360
 	.4byte gSpriteAnim_840B358
 
 gUnknown_0840B378:: @ 840B378
-	.incbin "baserom.gba", 0x0040b378, 0xc
+	.byte 0, 0, 0, 5, 1, 2, 2, 3, 5, 5, 4, 4
 
 	.align 2
 gUnknown_0840B384:: @ 840B384
@@ -144,8 +144,28 @@ gSpriteTemplate_840B4A4:: @ 840B4A4
 gSpriteTemplate_840B4BC:: @ 840B4BC
 	spr_template 55031, 55031, gOamData_837DF24, gSpriteAnimTable_840B360, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
+	.align 1
 gUnknown_0840B4D4:: @ 840B4D4
-	.incbin "baserom.gba", 0x0040b4d4, 0x28
+	.2byte 0x7ADF
+	.2byte 0x7AF0
+	.2byte 0x53D7
+	.2byte 0x3FFF
+	.2byte 0x7297
+	.2byte 0x67F5
+	.2byte 0x7B2C
+	.2byte 0x2B7E
+	.2byte 0x431F
+	.2byte 0x7BDD
+	.2byte 0x2A3F
+	.2byte 0x293F
+	.2byte    0x0
+	.2byte  0x201
+	.2byte  0x403
+	.2byte  0x101
+	.2byte  0x100
+	.2byte  0x503
+	.2byte  0x506
+	.2byte    0x4
 
 	.align 2
 gBattleAnimSpriteTemplate_840B4FC:: @ 840B4FC

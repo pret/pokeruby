@@ -3,13 +3,28 @@
 
 	.section .rodata
 
+	.align 2
 gUnknown_083D613C:: @ 83D613C
-	.incbin "baserom.gba", 0x003d613c, 0x60
+	.byte  1, 0, 1, 0, 0, 0, 0, 0
+	.byte  1, 1, 1, 0, 0, 0, 0, 0
+	.byte  1, 0, 1, 1, 0, 0, 0, 0
+	.byte  1, 1, 1, 1, 0, 0, 0, 0
+	.byte  1, 0, 1, 0, 1, 0, 0, 0
+	.byte  1, 1, 1, 0, 1, 0, 0, 0
+	.byte  1, 0, 1, 1, 1, 0, 0, 0
+	.byte  1, 0, 1, 0, 1, 1, 0, 0
+	.byte  1, 1, 1, 1, 1, 0, 0, 0
+	.byte  1, 1, 1, 0, 1, 1, 0, 0
+	.byte  1, 0, 1, 1, 1, 1, 0, 0
+	.byte  1, 1, 1, 1, 1, 1, 0, 0
 
 Unknown_83D619C::
-	.incbin "baserom.gba", 0x003d619c, 0x20
+	.string "この　チケットで　ふねに　のりほうだい\n"
+	.string "はやく　のってみたいな$"
+
 Unknown_83D61BC::
-	.incbin "baserom.gba", 0x003d61bc, 0x20
+	.string "この　チケットで　ふねに　のりほうだい\n"
+	.string "はやく　のってみたいな$"
 
 	.align 2
 gUnknown_083D61DC:: @ 83D61DC

@@ -1,5 +1,5 @@
 #include "global.h"
-#include "truck_scene.h"
+#include "field_special_scene.h"
 #include "asm.h"
 #include "palette.h"
 #include "task.h"
@@ -7,8 +7,14 @@
 #include "songs.h"
 #include "sound.h"
 #include "field_camera.h"
+#include "rom4.h"
+#include "event_data.h"
+#include "sprite.h"
 
 extern s8 gTruckCamera_HorizontalTable[];
+
+extern u8 gUnknown_083D295F[];
+extern u8 gUnknown_083D2961[];
 
 s32 GetTruckCameraBobbingY(int a1)
 {
@@ -65,10 +71,10 @@ void Task_Truck2(u8 taskId)
     s16 box1;
     s16 box2;
     s16 box3;
-    
+
     data[0]++;
     data[2]++;
-    
+
     if (data[0] > 5)
     {
         data[0] = 0;
@@ -82,7 +88,7 @@ void Task_Truck2(u8 taskId)
     {
         if (gTruckCamera_HorizontalTable[data[1]] == 2)
             gTasks[taskId].func = Task_Truck3;
-        
+
         cameraXpan = gTruckCamera_HorizontalTable[data[1]];
         cameraYpan = GetTruckCameraBobbingY(data[2]);
         SetCameraPanning(cameraXpan, cameraYpan);
@@ -217,4 +223,113 @@ void EndTruckSequence(void)
         sub_805BD90(2, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, 0, -3);
         sub_805BD90(3, gSaveBlock1.location.mapNum, gSaveBlock1.location.mapGroup, -3, 0);
     }
+}
+
+bool8 sub_80C7754(void)
+{
+    s8 mapGroup, mapNum;
+    s16 x, y;
+
+    if (sub_810D9EC(&mapGroup, &mapNum, &x, &y))
+    {
+        return FALSE;
+    }
+    else
+    {
+        warp1_set(mapGroup, mapNum, -1, x, y);
+        return TRUE;
+    }
+}
+
+void sub_80C77A0(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    u16 *var = GetVarPointer(0x40B4);
+    struct WarpData *location = &gSaveBlock1.location;
+
+    switch (data[0])
+    {
+    case 0:
+        if (!gPaletteFade.active)
+        {
+            data[1] = 0;
+            data[0] = 2;
+        }
+        break;
+    case 1:
+        if (gMain.newKeys & A_BUTTON)
+            data[1] = 1;
+        if (!sub_80A212C(0xFF, location->mapNum, location->mapGroup))
+            return;
+        if (sub_810D9B0(1) == TRUE)
+        {
+            if (*var == 2)
+                *var = 9;
+            else
+                *var = 10;
+            data[0] = 3;
+            return;
+        }
+        data[0] = 2;
+    case 2:
+        if (data[1])
+        {
+            data[0] = 3;
+            return;
+        }
+
+        if (*var == 2)
+        {
+            exec_movement(0xFF, location->mapNum, location->mapGroup, gUnknown_083D295F);
+            data[0] = 1;
+        }
+        else
+        {
+            exec_movement(0xFF, location->mapNum, location->mapGroup, gUnknown_083D2961);
+            data[0] = 1;
+        }
+        break;
+    case 3:
+        FlagReset(0x4001);
+        FlagReset(0x4000);
+        copy_saved_warp2_bank_and_enter_x_to_warp1(0);
+        sp13E_warp_to_last_warp();
+        DestroyTask(taskId);
+        break;
+    }
+}
+
+void sub_80C78A0(void)
+{
+    u8 spriteId = AddPseudoFieldObject(0x8C, SpriteCallbackDummy, 112, 80, 0);
+
+    gSprites[spriteId].coordOffsetEnabled = FALSE;
+
+    if (VarGet(0x40B4) == 2)
+    {
+        StartSpriteAnim(&gSprites[spriteId], FieldObjectDirectionToImageAnimId(4));
+    }
+    else
+    {
+        StartSpriteAnim(&gSprites[spriteId], FieldObjectDirectionToImageAnimId(3));
+    }
+}
+
+void sub_80C791C(void)
+{
+    sub_80C78A0();
+    gMapObjects[gPlayerAvatar.mapObjectId].mapobj_bit_13 = TRUE;
+    pal_fill_black();
+    CreateTask(sub_80C77A0, 80);
+    ScriptContext2_Enable();
+}
+
+void sub_80C7958(void)
+{
+    FlagSet(SYS_CRUISE_MODE);
+    FlagSet(0x4001);
+    FlagSet(0x4000);
+    saved_warp2_set(0, gSaveBlock1.location.mapGroup, gSaveBlock1.location.mapNum, -1);
+    sub_80C7754();
+    sub_8080F9C();
 }

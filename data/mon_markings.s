@@ -11,11 +11,17 @@ gUnknown_083E49F4:: @ 83E49F4
 gUnknown_083E4A14:: @ 83E4A14
 	.incbin "graphics/misc/mon_markings.4bpp"
 
-gUnknown_083E5214:: @ 83E5214
-	.incbin "baserom.gba", 0x003e5214, 0x8
+	.align 2
+gOamData_83E5214:: @ 83E5214
+	.2byte 0x0
+	.2byte 0xC000
+	.2byte 0x0
 
-gUnknown_083E521C:: @ 83E521C
-	.space 8
+	.align 2
+gOamData_83E521C:: @ 83E521C
+	.2byte 0x0
+	.2byte 0x0
+	.2byte 0x0
 
 	.align 2
 gSpriteAnim_83E5224:: @ 83E5224
@@ -95,8 +101,11 @@ gSpriteAnimTable_83E52AC:: @ 83E52AC
 	.4byte gSpriteAnim_83E529C
 	.4byte gSpriteAnim_83E52A4
 
-gUnknown_083E52B4:: @ 83E52B4
-	.incbin "baserom.gba", 0x003E52B4, 0x8
+	.align 2
+gOamData_83E52B4:: @ 83E52B4
+	.2byte 0x4000
+	.2byte 0x4000
+	.2byte 0x0
 
 	.align 2
 gSpriteAnim_83E52BC:: @ 83E52BC

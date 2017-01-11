@@ -4,6 +4,7 @@
 #include "pokemon.h"
 #include "rng.h"
 #include "abilities.h"
+#include "species.h"
 
 #define AIScriptRead32(ptr) ((ptr)[0] | (ptr)[1] << 8 | (ptr)[2] << 16 | (ptr)[3] << 24)
 #define AIScriptRead16(ptr) ((ptr)[0] | (ptr)[1] << 8)
@@ -20,6 +21,7 @@ extern void move_effectiveness_something(u16, u8, u8);
 
 extern u16 gBattleTypeFlags;
 extern u8 gUnknown_02024A60;
+extern u8 gUnknown_02024A6A[][2];
 extern u16 gUnknown_02024BE6;
 extern u32 gUnknown_02024BEC;
 extern u8 gUnknown_02024C07; // something player?
@@ -1042,128 +1044,52 @@ void BattleAICmd_unk_2A(void)
 void BattleAICmd_unk_2B(void)
 {}
 
-__attribute__((naked))
 void BattleAICmd_count_alive_pokemon(void)
 {
-    asm(".syntax unified\n\
-    push {r4-r7,lr}\n\
-    mov r7, r9\n\
-    mov r6, r8\n\
-    push {r6,r7}\n\
-    ldr r1, _08108550 @ =0x02016800\n\
-    movs r0, 0\n\
-    str r0, [r1, 0x8]\n\
-    ldr r0, _08108554 @ =gAIScriptPtr\n\
-    ldr r0, [r0]\n\
-    ldrb r0, [r0, 0x1]\n\
-    cmp r0, 0x1\n\
-    bne _0810855C\n\
-    ldr r0, _08108558 @ =gUnknown_02024C07\n\
-    b _0810855E\n\
-    .align 2, 0\n\
-_08108550: .4byte 0x02016800\n\
-_08108554: .4byte gAIScriptPtr\n\
-_08108558: .4byte gUnknown_02024C07\n\
-_0810855C:\n\
-    ldr r0, _081085A8 @ =gUnknown_02024C08\n\
-_0810855E:\n\
-    ldrb r5, [r0]\n\
-    adds r0, r5, 0\n\
-    bl battle_side_get_owner\n\
-    lsls r0, 24\n\
-    ldr r1, _081085AC @ =gEnemyParty\n\
-    mov r9, r1\n\
-    cmp r0, 0\n\
-    bne _08108574\n\
-    ldr r0, _081085B0 @ =gPlayerParty\n\
-    mov r9, r0\n\
-_08108574:\n\
-    ldr r0, _081085B4 @ =gBattleTypeFlags\n\
-    ldrh r1, [r0]\n\
-    movs r0, 0x1\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _081085BC\n\
-    ldr r4, _081085B8 @ =gUnknown_02024A6A\n\
-    lsls r0, r5, 1\n\
-    adds r0, r4\n\
-    ldrb r0, [r0]\n\
-    mov r8, r0\n\
-    adds r0, r5, 0\n\
-    bl battle_get_per_side_status\n\
-    movs r1, 0x2\n\
-    eors r0, r1\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    bl battle_get_side_with_given_state\n\
-    lsls r0, 24\n\
-    lsrs r0, 23\n\
-    adds r0, r4\n\
-    ldrb r6, [r0]\n\
-    b _081085C6\n\
-    .align 2, 0\n\
-_081085A8: .4byte gUnknown_02024C08\n\
-_081085AC: .4byte gEnemyParty\n\
-_081085B0: .4byte gPlayerParty\n\
-_081085B4: .4byte gBattleTypeFlags\n\
-_081085B8: .4byte gUnknown_02024A6A\n\
-_081085BC:\n\
-    ldr r1, _08108624 @ =gUnknown_02024A6A\n\
-    lsls r0, r5, 1\n\
-    adds r0, r1\n\
-    ldrb r6, [r0]\n\
-    mov r8, r6\n\
-_081085C6:\n\
-    movs r5, 0\n\
-    ldr r7, _08108628 @ =0x02016800\n\
-_081085CA:\n\
-    cmp r5, r8\n\
-    beq _08108608\n\
-    cmp r5, r6\n\
-    beq _08108608\n\
-    movs r0, 0x64\n\
-    muls r0, r5\n\
-    mov r1, r9\n\
-    adds r4, r1, r0\n\
-    adds r0, r4, 0\n\
-    movs r1, 0x39\n\
-    bl GetMonData\n\
-    cmp r0, 0\n\
-    beq _08108608\n\
-    adds r0, r4, 0\n\
-    movs r1, 0x41\n\
-    bl GetMonData\n\
-    cmp r0, 0\n\
-    beq _08108608\n\
-    adds r0, r4, 0\n\
-    movs r1, 0x41\n\
-    bl GetMonData\n\
-    movs r1, 0xCE\n\
-    lsls r1, 1\n\
-    cmp r0, r1\n\
-    beq _08108608\n\
-    ldr r0, [r7, 0x8]\n\
-    adds r0, 0x1\n\
-    str r0, [r7, 0x8]\n\
-_08108608:\n\
-    adds r5, 0x1\n\
-    cmp r5, 0x5\n\
-    ble _081085CA\n\
-    ldr r1, _0810862C @ =gAIScriptPtr\n\
-    ldr r0, [r1]\n\
-    adds r0, 0x2\n\
-    str r0, [r1]\n\
-    pop {r3,r4}\n\
-    mov r8, r3\n\
-    mov r9, r4\n\
-    pop {r4-r7}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .align 2, 0\n\
-_08108624: .4byte gUnknown_02024A6A\n\
-_08108628: .4byte 0x02016800\n\
-_0810862C: .4byte gAIScriptPtr\n\
-    .syntax divided");
+    u8 index;
+    struct Pokemon *party;
+    struct AI_ThinkingStruct *ai = &battle_2000000.ai;
+    int i;
+    u8 var, var2;
+
+    ai->unk8 = 0;
+
+    if (gAIScriptPtr[1] == USER)
+        index = gUnknown_02024C07;
+    else
+        index = gUnknown_02024C08;
+
+    if (battle_side_get_owner(index) == 0)
+        party = gPlayerParty;
+    else
+        party = gEnemyParty;
+
+    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+    {
+        u32 status;
+        var = gUnknown_02024A6A[index][0];
+        status = battle_get_per_side_status(index) ^ 2;
+        var2 = gUnknown_02024A6A[battle_get_side_with_given_state(status)][0];
+    }
+    else
+    {
+        var = gUnknown_02024A6A[index][0];
+        var2 = gUnknown_02024A6A[index][0];
+    }
+
+    for (i = 0; i < 6; i++)
+    {
+        struct AI_ThinkingStruct *ai2 = &battle_2000000.ai;
+        if (i != var && i != var2
+         && GetMonData(&party[i], MON_DATA_HP) != 0
+         && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_NONE
+         && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_EGG)
+        {
+            ai2->unk8++;
+        }
+    }
+
+    gAIScriptPtr += 2;
 }
 
 void BattleAICmd_unk_2D(void)
@@ -1403,3 +1329,40 @@ void BattleAICmd_unk_32(void)
 
 void BattleAICmd_unk_33(void)
 {}
+
+void BattleAICmd_if_status_in_party(void)
+{
+    struct Pokemon *party;
+    int i;
+    u32 statusToCompareTo;
+
+    if (gAIScriptPtr[1] == USER)
+    {
+        party = gEnemyParty;
+    }
+    else if (0)
+    {
+    // what is going on here?
+    follow_jump:
+        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 6);
+        return;
+    }
+    else
+    {
+        party = gPlayerParty;
+    }
+
+    statusToCompareTo = AIScriptRead32(gAIScriptPtr + 2);
+
+    for (i = 0; i < 6; i++)
+    {
+        u16 species = GetMonData(&party[i], MON_DATA_SPECIES);
+        u16 hp = GetMonData(&party[i], MON_DATA_HP);
+        u32 status = GetMonData(&party[i], MON_DATA_STATUS);
+
+        if (species != SPECIES_NONE && species != SPECIES_EGG && hp != 0 && status == statusToCompareTo)
+            goto follow_jump;
+    }
+
+    gAIScriptPtr += 10;
+}

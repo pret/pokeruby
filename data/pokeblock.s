@@ -4,7 +4,31 @@
 	.section .rodata
 
 gUnknown_083F7E28:: @ 83F7E28
-	.incbin "baserom.gba", 0x003f7e28, 0x80
+	.byte  0,  0,  0,  0,  0
+	.byte  1,  0,  0,  0, -1
+	.byte  1,  0, -1,  0,  0
+	.byte  1, -1,  0,  0,  0
+	.byte  1,  0,  0, -1,  0
+	.byte -1,  0,  0,  0,  1
+	.byte  0,  0,  0,  0,  0
+	.byte  0,  0, -1,  0,  1
+	.byte  0, -1,  0,  0,  1
+	.byte  0,  0,  0, -1,  1
+	.byte -1,  0,  1,  0,  0
+	.byte  0,  0,  1,  0, -1
+	.byte  0,  0,  0,  0,  0
+	.byte  0, -1,  1,  0,  0
+	.byte  0,  0,  1, -1,  0
+	.byte -1,  1,  0,  0,  0
+	.byte  0,  1,  0,  0, -1
+	.byte  0,  1, -1,  0,  0
+	.byte  0,  0,  0,  0,  0
+	.byte  0,  1,  0, -1,  0
+	.byte -1,  0,  0,  1,  0
+	.byte  0,  0,  0,  1, -1
+	.byte  0,  0, -1,  1,  0
+	.byte  0, -1,  0,  1,  0
+	.byte  0,  0,  0,  0,  0
 
 	.align 2
 gUnknown_083F7EA8:: @ 83F7EA8
@@ -69,12 +93,17 @@ gSpriteAnim_83F7F3C:: @ 83F7F3C
 gSpriteAnimTable_83F7F44:: @ 83F7F44
 	.4byte gSpriteAnim_83F7F3C
 
-Unknown_83F7F48:
-	.incbin "baserom.gba", 0x003f7f48, 0x28
+	.align 2
+gSpriteAffineAnim_83F7F48:: @ 83F7F48
+	obj_rot_scal_anim_frame 0x0, 0x0, -2, 2
+	obj_rot_scal_anim_frame 0x0, 0x0, 2, 4
+	obj_rot_scal_anim_frame 0x0, 0x0, -2, 4
+	obj_rot_scal_anim_frame 0x0, 0x0, 2, 2
+	obj_rot_scal_anim_end
 
 	.align 2
-gUnknown_083F7F70:: @ 83F7F70
-	.4byte Unknown_83F7F48
+gSpriteAffineAnimTable_83F7F70:: @ 83F7F70
+	.4byte gSpriteAffineAnim_83F7F48
 
 	.align 2
 gUnknown_083F7F74:: @ 83F7F74
@@ -89,4 +118,8 @@ gSpriteTemplate_83F7F84:: @ 83F7F84
 	spr_template 14800, 14800, gOamData_83F7F34, gSpriteAnimTable_83F7F44, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy
 
 gUnknown_083F7F9C:: @ 83F7F9C
-	.incbin "baserom.gba", 0x003f7f9c, 0x28
+	.byte  1, 20,  0,  0,  0,  0, 20,  0
+	.byte  2,  0, 20,  0,  0,  0, 20,  0
+	.byte  3,  0,  0, 20,  0,  0, 20,  0
+	.byte  4,  0,  0,  0, 20,  0, 20,  0
+	.byte  5,  0,  0,  0,  0, 20, 20,  0

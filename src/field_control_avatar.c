@@ -103,7 +103,6 @@ extern void sub_8071310(void);
 extern int sub_80A6D1C(void);
 extern u8 sub_80BC050();
 extern u8 sub_80422A0(void);
-extern int sub_810D9B0(int);
 extern s32 overworld_poison(void);
 extern void sub_8080E88();
 extern void walkrun_find_lowest_active_bit_in_bitfield(void);
