@@ -389,12 +389,7 @@ void sub_80F99CC(void);
 
 // src/dewford_trend.o
 void sub_80FA17C(void);
-void sub_80FA46C(struct EasyChatPair *, u16, u8);
-void sub_80FA4E4(struct EasyChatPair *, u32, u8);
-bool8 sub_80FA670(struct EasyChatPair *, struct EasyChatPair *, u8);
-void sub_80FA740(struct EasyChatPair *);
-bool8 SB1ContainsWords(u16 *);
-bool8 IsEasyChatPairEqual(u16 *, u16 *);
+void sub_80FA4E4(void *, u32, u8);
 
 // asm/region_map.o
 void sub_80FBFB4(u8 *str, u8 region, u8);
