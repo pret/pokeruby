@@ -16,6 +16,8 @@
 #define AI_ARRAY_160CC     ((&battle_2000000 + 0x160CC))
 
 extern void sub_801CAF8(u8, u8);
+extern void sub_81098C4(u8 *);
+extern u8 sub_8109908(void);
 
 enum
 {
@@ -1864,3 +1866,20 @@ void BattleAICmd_unk_55(void) {}
 void BattleAICmd_unk_56(void) {}
 
 void BattleAICmd_unk_57(void) {}
+
+void BattleAICmd_call(void)
+{
+    sub_81098C4(gAIScriptPtr + 5);
+    gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
+}
+
+void BattleAICmd_jump(void)
+{
+    gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
+}
+
+void BattleAICmd_unk_5A(void)
+{
+    if(sub_8109908() == 0)
+        gAIThinkingSpace.unk10 |= 1;
+}
