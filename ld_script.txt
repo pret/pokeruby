@@ -195,7 +195,6 @@ SECTIONS {
         asm/slot_machine.o(.text);
         src/contest_painting.o(.text);
         src/battle_ai.o(.text);
-        asm/battle_ai.o(.text);
         asm/trader.o(.text);
         src/starter_choose.o(.text);
         src/wallclock.o(.text);

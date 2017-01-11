@@ -16,7 +16,6 @@
 #define AI_ARRAY_160CC     ((&battle_2000000 + 0x160CC))
 
 extern void sub_801CAF8(u8, u8);
-extern void sub_81098C4(u8 *);
 extern u8 sub_8109908(void);
 
 enum
@@ -77,7 +76,8 @@ struct UnknownStruct1
 
 struct UnknownStruct3
 {
-    u8 filler0[0x20];
+    u8 *ptr[4]; // might be 8 pointers
+    u8 filler0[0x10];
     u8 unk20;
 };
 
@@ -103,6 +103,7 @@ extern struct UnknownStruct4 gUnknown_02024CA8[];
 void BattleAI_SetupAIData(void);
 void BattleAI_DoAIProcessing(void);
 void sub_810745C(void);
+void sub_81098C4(u8 *);
 
 // if the AI is a Link battle, safari, battle tower, or ereader, it will ignore considering item uses.
 void BattleAI_HandleItemUseBeforeAISetup(void)
@@ -1930,4 +1931,26 @@ void BattleAICmd_if_not_taunted(void)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
+}
+
+void sub_81098C4(u8 *var)
+{
+    unk_2016C00.ptr[unk_2016C00.unk20++] = var;
+}
+
+void unref_sub_81098E4(void)
+{
+    unk_2016C00.ptr[unk_2016C00.unk20++] = gAIScriptPtr;
+}
+
+bool8 sub_8109908(void)
+{
+    if(unk_2016C00.unk20 != 0)
+    {
+        --unk_2016C00.unk20;
+        gAIScriptPtr = unk_2016C00.ptr[unk_2016C00.unk20];
+        return TRUE;
+    }
+    else
+        return FALSE;
 }
