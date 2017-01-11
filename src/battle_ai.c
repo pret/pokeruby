@@ -78,7 +78,11 @@ struct UnknownStruct4
     u8 filler0[0x3];
     u16 unk4;
     u16 unk6;
-    u8 filler8[0x14];
+    u8 filler8;
+    u8 unk9;
+    u8 fillerA[0xC];
+    u8 unk16;
+    u8 filler17[0x4];
 };
 
 extern struct UnknownStruct1 unk_2016A00;
@@ -1721,7 +1725,6 @@ void BattleAICmd_unk_47(void)
 void BattleAICmd_get_hold_effect(void)
 {
     u8 var;
-    u32 funcResult;
     u16 status;
     u8 *aiPtr;
     
@@ -1735,8 +1738,7 @@ void BattleAICmd_get_hold_effect(void)
         // weird pointer arithmetic is needed to match.
         status = (battle_get_per_side_status(var) & 1);
         aiPtr = (u8 *)&gAIThinkingSpace;
-        funcResult = ((struct UnknownStruct1 *)((u8 *)aiPtr + 0x202))->unk20[status];
-        gAIThinkingSpace.funcResult = funcResult;
+        gAIThinkingSpace.funcResult = ((struct UnknownStruct1 *)((u8 *)aiPtr + 0x202))->unk20[status];
     }
     else
         gAIThinkingSpace.funcResult = ItemId_GetHoldEffect(gBattleMons[var].item);
@@ -1754,6 +1756,34 @@ void BattleAICmd_get_gender(void)
         var = gUnknown_02024C08;
     
     gAIThinkingSpace.funcResult = GetGenderFromSpeciesAndPersonality(gBattleMons[var].species, gBattleMons[var].personality);
+    
+    gAIScriptPtr += 2;
+}
+
+void BattleAICmd_is_first_turn(void)
+{
+    u8 var;
+
+    if(gAIScriptPtr[1] == USER)
+        var = gUnknown_02024C07;
+    else
+        var = gUnknown_02024C08;
+    
+    gAIThinkingSpace.funcResult = gUnknown_02024CA8[var].unk16;
+    
+    gAIScriptPtr += 2;
+}
+
+void BattleAICmd_get_stockpile_count(void)
+{
+    u8 var;
+
+    if(gAIScriptPtr[1] == USER)
+        var = gUnknown_02024C07;
+    else
+        var = gUnknown_02024C08;
+    
+    gAIThinkingSpace.funcResult = gUnknown_02024CA8[var].unk9;
     
     gAIScriptPtr += 2;
 }
