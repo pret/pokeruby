@@ -5,11 +5,18 @@
 #include "rng.h"
 #include "abilities.h"
 #include "species.h"
+#include "item.h"
 
 #define AIScriptRead32(ptr) ((ptr)[0] | (ptr)[1] << 8 | (ptr)[2] << 16 | (ptr)[3] << 24)
 #define AIScriptRead16(ptr) ((ptr)[0] | (ptr)[1] << 8)
 #define AIScriptRead8(ptr) ((ptr)[0])
 #define AIScriptReadPtr(ptr) (u8*) AIScriptRead32(ptr)
+
+#define AI_THINKING_STRUCT ((struct AI_ThinkingStruct *)(&battle_2000000 + 0x16800))
+#define AI_ARRAY_160CC     ((&battle_2000000 + 0x160CC))
+
+extern void sub_801CAF8(u8, u8);
+extern u8 sub_8109908(void);
 
 enum
 {
@@ -20,10 +27,11 @@ enum
 extern void move_effectiveness_something(u16, u8, u8);
 
 extern u16 gBattleTypeFlags;
+extern u16 gBattleWeather;
 extern u8 gUnknown_02024A60;
 extern u8 gUnknown_02024A6A[][2];
 extern u16 gUnknown_02024BE6;
-extern u32 gUnknown_02024BEC;
+extern int gUnknown_02024BEC;
 extern u8 gUnknown_02024C07; // something player?
 extern u8 gUnknown_02024C08; // something opponent?
 extern u8 gUnknown_02024C0C;
@@ -33,6 +41,7 @@ extern u16 gUnknown_02024C34[];
 extern u32 gUnknown_02024ACC[];
 extern u32 gUnknown_02024C98[];
 extern u16 gUnknown_02024C7A[];
+extern struct BattlePokemon gBattleMons[];
 extern struct BattlePokemon gUnknown_02024A8C[];
 extern u8 gUnknown_030042E0[];
 extern u8 gCritMultiplier;
@@ -40,10 +49,12 @@ extern u16 gTrainerBattleOpponent;
 extern u32 gBitTable[];
 extern u8 *BattleAIs[];
 extern struct Trainer gTrainers[];
-extern struct BattlePokemon gBattleMons[];
 extern struct BattleMove gBattleMoves[];
 extern struct BaseStats gBaseStats[];
 extern void (*gBattleAICmdTable[])(void);
+
+// needed to match the hack that is get_item, thanks cam, someone else clean this up later.
+extern u8 unk_2000000[];
 
 /*
 gAIScriptPtr is a pointer to the next battle AI cmd command to read.
@@ -65,16 +76,34 @@ struct UnknownStruct1
 
 struct UnknownStruct3
 {
-    u8 filler0[0x20];
+    u8 *ptr[4]; // might be 8 pointers
+    u8 filler0[0x10];
     u8 unk20;
+};
+
+struct UnknownStruct4
+{
+    u8 filler0[0x3];
+    u16 unk4;
+    u16 unk6;
+    u8 unk8;
+    u8 unk9;
+    u8 fillerA[0x9];
+    u8 taunt:4;
+    u8 unkC:4;
+    u8 fillerD[0x2];
+    u8 unk16;
+    u8 filler17[0x4];
 };
 
 extern struct UnknownStruct1 unk_2016A00;
 extern struct UnknownStruct3 unk_2016C00;
+extern struct UnknownStruct4 gUnknown_02024CA8[];
 
 void BattleAI_SetupAIData(void);
 void BattleAI_DoAIProcessing(void);
 void sub_810745C(void);
+void sub_81098C4(u8 *);
 
 // if the AI is a Link battle, safari, battle tower, or ereader, it will ignore considering item uses.
 void BattleAI_HandleItemUseBeforeAISetup(void)
@@ -168,13 +197,17 @@ u8 BattleAI_GetAIActionToUse(void)
         gAIThinkingSpace.aiLogicId++;
         gAIThinkingSpace.moveConsidered = 0;
     }
+
+    // will KO, need to use item or switch.
     if(gAIThinkingSpace.unk10 & 2)
         return 4;
     if(gAIThinkingSpace.unk10 & 4)
         return 5;
+
     r5 = 1;
     arr1[0] = gAIThinkingSpace.score[0];
     arr2[0] = 0;
+
     for(i = 1; i < 4; i++)
     {
         if(arr1[0] < (s8)gAIThinkingSpace.score[i])
@@ -189,6 +222,7 @@ u8 BattleAI_GetAIActionToUse(void)
             arr2[r5++] = i;
         }
     }
+
     return arr2[Random() % r5];
 }
 
@@ -529,7 +563,7 @@ void BattleAICmd_if_not_status4(void)
 
 void BattleAICmd_if_less_than(void)
 {
-    if (gAIThinkingSpace.unk8 < gAIScriptPtr[1])
+    if (gAIThinkingSpace.funcResult < gAIScriptPtr[1])
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
@@ -537,7 +571,7 @@ void BattleAICmd_if_less_than(void)
 
 void BattleAICmd_if_more_than(void)
 {
-    if (gAIThinkingSpace.unk8 > gAIScriptPtr[1])
+    if (gAIThinkingSpace.funcResult > gAIScriptPtr[1])
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
@@ -545,7 +579,7 @@ void BattleAICmd_if_more_than(void)
 
 void BattleAICmd_if_equal(void)
 {
-    if (gAIThinkingSpace.unk8 == gAIScriptPtr[1])
+    if (gAIThinkingSpace.funcResult == gAIScriptPtr[1])
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
@@ -553,7 +587,7 @@ void BattleAICmd_if_equal(void)
 
 void BattleAICmd_if_not_equal(void)
 {
-    if (gAIThinkingSpace.unk8 != gAIScriptPtr[1])
+    if (gAIThinkingSpace.funcResult != gAIScriptPtr[1])
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
@@ -563,7 +597,7 @@ void BattleAICmd_if_less_than_32(void)
 {
     u8 *temp = AIScriptReadPtr(gAIScriptPtr + 1);
 
-    if (gAIThinkingSpace.unk8 < *temp)
+    if (gAIThinkingSpace.funcResult < *temp)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 5);
     else
         gAIScriptPtr += 9;
@@ -573,7 +607,7 @@ void BattleAICmd_if_more_than_32(void)
 {
     u8 *temp = AIScriptReadPtr(gAIScriptPtr + 1);
 
-    if (gAIThinkingSpace.unk8 > *temp)
+    if (gAIThinkingSpace.funcResult > *temp)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 5);
     else
         gAIScriptPtr += 9;
@@ -583,7 +617,7 @@ void BattleAICmd_if_equal_32(void)
 {
     u8 *temp = AIScriptReadPtr(gAIScriptPtr + 1);
 
-    if (gAIThinkingSpace.unk8 == *temp)
+    if (gAIThinkingSpace.funcResult == *temp)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 5);
     else
         gAIScriptPtr += 9;
@@ -593,7 +627,7 @@ void BattleAICmd_if_not_equal_32(void)
 {
     u8 *temp = AIScriptReadPtr(gAIScriptPtr + 1);
 
-    if (gAIThinkingSpace.unk8 != *temp)
+    if (gAIThinkingSpace.funcResult != *temp)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 5);
     else
         gAIScriptPtr += 9;
@@ -625,7 +659,7 @@ void BattleAICmd_if_in_bytes(void)
 
    while(*ptr != 0xFF)
    {
-       if(gAIThinkingSpace.unk8 == *ptr)
+       if(gAIThinkingSpace.funcResult == *ptr)
        {
            gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 5);
            return;
@@ -641,7 +675,7 @@ void BattleAICmd_if_not_in_bytes(void)
 
    while(*ptr != 0xFF)
    {
-       if(gAIThinkingSpace.unk8 == *ptr)
+       if(gAIThinkingSpace.funcResult == *ptr)
        {
            gAIScriptPtr += 9;
            return;
@@ -657,7 +691,7 @@ void BattleAICmd_if_in_words(void)
 
    while(*ptr != 0xFFFF)
    {
-       if(gAIThinkingSpace.unk8 == *ptr)
+       if(gAIThinkingSpace.funcResult == *ptr)
        {
            gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 5);
            return;
@@ -673,7 +707,7 @@ void BattleAICmd_if_not_in_words(void)
 
    while(*ptr != 0xFFFF)
    {
-       if(gAIThinkingSpace.unk8 == *ptr)
+       if(gAIThinkingSpace.funcResult == *ptr)
        {
            gAIScriptPtr += 9;
            return;
@@ -717,7 +751,7 @@ void BattleAICmd_if_user_cant_damage(void)
 
 void BattleAICmd_unk_21(void)
 {
-    gAIThinkingSpace.unk8 = gUnknown_030042E0[19];
+    gAIThinkingSpace.funcResult = gUnknown_030042E0[19];
     gAIScriptPtr += 1;
 }
 
@@ -728,19 +762,19 @@ void BattleAICmd_get_type(void)
     switch(typeVar)
     {
         case 1:
-            gAIThinkingSpace.unk8 = gBattleMons[gUnknown_02024C07].type1;
+            gAIThinkingSpace.funcResult = gBattleMons[gUnknown_02024C07].type1;
             break;
         case 0:
-            gAIThinkingSpace.unk8 = gBattleMons[gUnknown_02024C08].type1;
+            gAIThinkingSpace.funcResult = gBattleMons[gUnknown_02024C08].type1;
             break;
         case 3:
-            gAIThinkingSpace.unk8 = gBattleMons[gUnknown_02024C07].type2;
+            gAIThinkingSpace.funcResult = gBattleMons[gUnknown_02024C07].type2;
             break;
         case 2:
-            gAIThinkingSpace.unk8 = gBattleMons[gUnknown_02024C08].type2;
+            gAIThinkingSpace.funcResult = gBattleMons[gUnknown_02024C08].type2;
             break;
         case 4:
-            gAIThinkingSpace.unk8 = gBattleMoves[gAIThinkingSpace.unk2].type;
+            gAIThinkingSpace.funcResult = gBattleMoves[gAIThinkingSpace.unk2].type;
             break;
     }
     gAIScriptPtr += 2;
@@ -748,7 +782,7 @@ void BattleAICmd_get_type(void)
 
 void BattleAICmd_unk_23(void)
 {
-    gAIThinkingSpace.unk8 = gBattleMoves[gAIThinkingSpace.unk2].power;
+    gAIThinkingSpace.funcResult = gBattleMoves[gAIThinkingSpace.unk2].power;
     gAIScriptPtr += 1;
 }
 
@@ -999,16 +1033,16 @@ _081083D0: .4byte gAIScriptPtr\n\
 void BattleAICmd_get_move(void)
 {
     if (gAIScriptPtr[1] == USER)
-        gAIThinkingSpace.unk8 = gUnknown_02024C34[gUnknown_02024C07];
+        gAIThinkingSpace.funcResult = gUnknown_02024C34[gUnknown_02024C07];
     else
-        gAIThinkingSpace.unk8 = gUnknown_02024C34[gUnknown_02024C08];
+        gAIThinkingSpace.funcResult = gUnknown_02024C34[gUnknown_02024C08];
 
     gAIScriptPtr += 2;
 }
 
 void BattleAICmd_if_type(void)
 {
-    if ( gAIScriptPtr[1] == gAIThinkingSpace.unk8 )
+    if ( gAIScriptPtr[1] == gAIThinkingSpace.funcResult )
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
@@ -1016,7 +1050,7 @@ void BattleAICmd_if_type(void)
 
 void BattleAICmd_unk_27(void) // if_not_type
 {
-    if ( gAIScriptPtr[1] != gAIThinkingSpace.unk8 )
+    if ( gAIScriptPtr[1] != gAIThinkingSpace.funcResult )
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
@@ -1052,7 +1086,7 @@ void BattleAICmd_count_alive_pokemon(void)
     int i;
     u8 var, var2;
 
-    ai->unk8 = 0;
+    ai->funcResult = 0;
 
     if (gAIScriptPtr[1] == USER)
         index = gUnknown_02024C07;
@@ -1085,7 +1119,7 @@ void BattleAICmd_count_alive_pokemon(void)
          && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_NONE
          && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_EGG)
         {
-            ai2->unk8++;
+            ai2->funcResult++;
         }
     }
 
@@ -1094,13 +1128,13 @@ void BattleAICmd_count_alive_pokemon(void)
 
 void BattleAICmd_unk_2D(void)
 {
-    gAIThinkingSpace.unk8 = gAIThinkingSpace.unk2;
+    gAIThinkingSpace.funcResult = gAIThinkingSpace.unk2;
     gAIScriptPtr += 1;
 }
 
 void BattleAICmd_unk_2E(void)
 {
-    gAIThinkingSpace.unk8 = gBattleMoves[gAIThinkingSpace.unk2].effect;
+    gAIThinkingSpace.funcResult = gBattleMoves[gAIThinkingSpace.unk2].effect;
     gAIScriptPtr += 1;
 }
 
@@ -1119,7 +1153,7 @@ void BattleAICmd_get_ability(void)
 
         if(unk_2016A00.unk20[unk] != 0)
         {
-            ((struct AI_ThinkingStruct *)((u8 *)&unk_2016A00 - 512))->unk8 = unk_2016A00.unk20[unk];
+            ((struct AI_ThinkingStruct *)((u8 *)&unk_2016A00 - 0x200))->funcResult = unk_2016A00.unk20[unk];
             gAIScriptPtr += 2;
             return;
         }
@@ -1127,7 +1161,7 @@ void BattleAICmd_get_ability(void)
         // abilities that prevent fleeing.
         if(gBattleMons[var].ability == ABILITY_SHADOW_TAG || gBattleMons[var].ability == ABILITY_MAGNET_PULL || gBattleMons[var].ability == ABILITY_ARENA_TRAP)
         {
-            gAIThinkingSpace.unk8 = gBattleMons[var].ability;
+            gAIThinkingSpace.funcResult = gBattleMons[var].ability;
             gAIScriptPtr += 2;
             return;
         }
@@ -1139,27 +1173,27 @@ void BattleAICmd_get_ability(void)
                 // AI is guessing what ability?
                 if(Random() & 1)
                 {
-                    ((struct AI_ThinkingStruct *)((u8 *)&unk_2016A00 - 0x200))->unk8 = gBaseStats[gBattleMons[var].species].ability1;
+                    ((struct AI_ThinkingStruct *)((u8 *)&unk_2016A00 - 0x200))->funcResult = gBaseStats[gBattleMons[var].species].ability1;
                     gAIScriptPtr += 2;
                     return;
                 }
                 else
                 {
-                    ((struct AI_ThinkingStruct *)((u8 *)&unk_2016A00 - 0x200))->unk8 = gBaseStats[gBattleMons[var].species].ability2;
+                    ((struct AI_ThinkingStruct *)((u8 *)&unk_2016A00 - 0x200))->funcResult = gBaseStats[gBattleMons[var].species].ability2;
                     gAIScriptPtr += 2;
                     return;
                 }
             }
             else
             {
-                ((struct AI_ThinkingStruct *)((u8 *)&unk_2016A00 - 0x200))->unk8 = gBaseStats[gBattleMons[var].species].ability1; // it's definitely ability 1.
+                ((struct AI_ThinkingStruct *)((u8 *)&unk_2016A00 - 0x200))->funcResult = gBaseStats[gBattleMons[var].species].ability1; // it's definitely ability 1.
                 gAIScriptPtr += 2;
                 return;
             }
         }
         else
         {
-            ((struct AI_ThinkingStruct *)((u8 *)&unk_2016A00 - 0x200))->unk8 = gBaseStats[gBattleMons[var].species].ability2; // AI cant actually reach this part since every mon has at least 1 ability.
+            ((struct AI_ThinkingStruct *)((u8 *)&unk_2016A00 - 0x200))->funcResult = gBaseStats[gBattleMons[var].species].ability2; // AI cant actually reach this part since every mon has at least 1 ability.
             gAIScriptPtr += 2;
             return;
         }
@@ -1167,7 +1201,7 @@ void BattleAICmd_get_ability(void)
     else
     {
         // The AI knows its own ability.
-        gAIThinkingSpace.unk8 = gBattleMons[var].ability;
+        gAIThinkingSpace.funcResult = gBattleMons[var].ability;
         gAIScriptPtr += 2;
         return;
     }
@@ -1185,7 +1219,7 @@ void BattleAICmd_unk_30(void)
     gUnknown_02024C68 = 0;
     gCritMultiplier = 1;
     ai = &battle_2000000.ai;
-    ai->unk8 = 0;
+    ai->funcResult = 0;
 
     for(i = 0; i < 4; i++)
     {
@@ -1210,118 +1244,47 @@ void BattleAICmd_unk_30(void)
                 gUnknown_02024BEC = 0;
 
             ai2 = &battle_2000000.ai;
-            if (ai2->unk8 < gUnknown_02024BEC)
-                ai2->unk8 = gUnknown_02024BEC;
+            if (ai2->funcResult < gUnknown_02024BEC)
+                ai2->funcResult = gUnknown_02024BEC;
         }
     }
     gAIScriptPtr += 1;
 }
 
-// same function as above but no for loop.
-__attribute__((naked))
 void BattleAICmd_if_damage_bonus(void)
 {
-    asm(".syntax unified\n\
-    push {r4,r5,lr}\n\
-    ldr r0, _08108928 @ =gUnknown_02024DEC\n\
-    movs r1, 0\n\
-    strh r1, [r0]\n\
-    ldr r2, _0810892C @ =0x02000000\n\
-    ldr r3, _08108930 @ =0x0001601c\n\
-    adds r0, r2, r3\n\
-    strb r1, [r0]\n\
-    adds r3, 0x3\n\
-    adds r0, r2, r3\n\
-    movs r3, 0x1\n\
-    strb r3, [r0]\n\
-    ldr r5, _08108934 @ =gUnknown_02024C68\n\
-    strb r1, [r5]\n\
-    ldr r0, _08108938 @ =gCritMultiplier\n\
-    strb r3, [r0]\n\
-    ldr r4, _0810893C @ =gUnknown_02024BEC\n\
-    movs r0, 0x28\n\
-    str r0, [r4]\n\
-    ldr r1, _08108940 @ =gUnknown_02024BE6\n\
-    movs r0, 0xB4\n\
-    lsls r0, 9\n\
-    adds r2, r0\n\
-    ldrh r0, [r2, 0x2]\n\
-    strh r0, [r1]\n\
-    ldrh r0, [r1]\n\
-    ldr r1, _08108944 @ =gUnknown_02024C07\n\
-    ldrb r1, [r1]\n\
-    ldr r2, _08108948 @ =gUnknown_02024C08\n\
-    ldrb r2, [r2]\n\
-    bl move_effectiveness_something\n\
-    ldr r0, [r4]\n\
-    cmp r0, 0x78\n\
-    bne _081088D6\n\
-    movs r0, 0x50\n\
-    str r0, [r4]\n\
-_081088D6:\n\
-    ldr r0, [r4]\n\
-    cmp r0, 0xF0\n\
-    bne _081088E0\n\
-    movs r0, 0xA0\n\
-    str r0, [r4]\n\
-_081088E0:\n\
-    ldr r0, [r4]\n\
-    cmp r0, 0x1E\n\
-    bne _081088EA\n\
-    movs r0, 0x14\n\
-    str r0, [r4]\n\
-_081088EA:\n\
-    ldr r0, [r4]\n\
-    cmp r0, 0xF\n\
-    bne _081088F4\n\
-    movs r0, 0xA\n\
-    str r0, [r4]\n\
-_081088F4:\n\
-    ldrb r1, [r5]\n\
-    movs r0, 0x8\n\
-    ands r0, r1\n\
-    cmp r0, 0\n\
-    beq _08108902\n\
-    movs r0, 0\n\
-    str r0, [r4]\n\
-_08108902:\n\
-    ldrb r0, [r4]\n\
-    ldr r3, _0810894C @ =gAIScriptPtr\n\
-    ldr r2, [r3]\n\
-    ldrb r1, [r2, 0x1]\n\
-    cmp r0, r1\n\
-    bne _08108950\n\
-    ldrb r1, [r2, 0x2]\n\
-    ldrb r0, [r2, 0x3]\n\
-    lsls r0, 8\n\
-    orrs r1, r0\n\
-    ldrb r0, [r2, 0x4]\n\
-    lsls r0, 16\n\
-    orrs r1, r0\n\
-    ldrb r0, [r2, 0x5]\n\
-    lsls r0, 24\n\
-    orrs r1, r0\n\
-    str r1, [r3]\n\
-    b _08108954\n\
-    .align 2, 0\n\
-_08108928: .4byte gUnknown_02024DEC\n\
-_0810892C: .4byte 0x02000000\n\
-_08108930: .4byte 0x0001601c\n\
-_08108934: .4byte gUnknown_02024C68\n\
-_08108938: .4byte gCritMultiplier\n\
-_0810893C: .4byte gUnknown_02024BEC\n\
-_08108940: .4byte gUnknown_02024BE6\n\
-_08108944: .4byte gUnknown_02024C07\n\
-_08108948: .4byte gUnknown_02024C08\n\
-_0810894C: .4byte gAIScriptPtr\n\
-_08108950:\n\
-    adds r0, r2, 0x6\n\
-    str r0, [r3]\n\
-_08108954:\n\
-    pop {r4,r5}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .syntax divided\n");
+    struct AI_ThinkingStruct *ai;
+    u8 damageVar;
+
+    gUnknown_02024DEC = 0;
+    battle_2000000.unk.unk1 = 0;
+    battle_2000000.unk.unk4 = 1;
+    gUnknown_02024C68 = 0;
+    gCritMultiplier = 1;
+
+    gUnknown_02024BEC = 40;
+    gUnknown_02024BE6 = (ai = &battle_2000000.ai)->unk2;
+
+    move_effectiveness_something(gUnknown_02024BE6, gUnknown_02024C07, gUnknown_02024C08);
+
+    if (gUnknown_02024BEC == 120)
+        gUnknown_02024BEC = 80;
+    if(gUnknown_02024BEC == 240)
+        gUnknown_02024BEC = 160;
+    if(gUnknown_02024BEC == 30)
+        gUnknown_02024BEC = 20;
+    if(gUnknown_02024BEC == 15)
+        gUnknown_02024BEC = 10;
+
+    if(gUnknown_02024C68 & 8)
+        gUnknown_02024BEC = 0;
+
+    // i have to store 2024BEC in a local variable before the comparison or else it will not match.
+    damageVar = gUnknown_02024BEC;
+    if(damageVar == gAIScriptPtr[1])
+        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
+    else
+        gAIScriptPtr += 6;
 }
 
 void BattleAICmd_unk_32(void)
@@ -1365,4 +1328,629 @@ void BattleAICmd_if_status_in_party(void)
     }
 
     gAIScriptPtr += 10;
+}
+
+void BattleAICmd_if_status_not_in_party(void)
+{
+    struct Pokemon *party;
+    int i;
+    u32 statusToCompareTo;
+    u8 *partyPtr;
+
+    // what weird code. needed to match
+    switch(gAIScriptPtr[1])
+    {
+        case 1:
+            partyPtr = (u8 *)gEnemyParty;
+            party = (struct Pokemon *)partyPtr;
+            break;
+        default:
+            partyPtr = (u8 *)gPlayerParty;
+            party = (struct Pokemon *)partyPtr;
+            break;
+    }
+
+    statusToCompareTo = AIScriptRead32(gAIScriptPtr + 2);
+
+    for (i = 0; i < 6; i++)
+    {
+        u16 species = GetMonData(&party[i], MON_DATA_SPECIES);
+        u16 hp = GetMonData(&party[i], MON_DATA_HP);
+        u32 status = GetMonData(&party[i], MON_DATA_STATUS);
+
+        // this jump is seemingly bugged. everytime the status is found, the AI's logic jumps further and further past its intended destination.
+        if (species != SPECIES_NONE && species != SPECIES_EGG && hp != 0 && status == statusToCompareTo)
+            gAIScriptPtr += 10; // doesnt return?
+    }
+    gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 6);
+}
+
+void BattleAICmd_unk_36(void)
+{
+    if(gBattleWeather & 7)
+        gAIThinkingSpace.funcResult = 1;
+    if(gBattleWeather & 0x18)
+        gAIThinkingSpace.funcResult = 2;
+    if(gBattleWeather & 0x60)
+        gAIThinkingSpace.funcResult = 0;
+    if(gBattleWeather & 0x80)
+        gAIThinkingSpace.funcResult = 3;
+    
+    gAIScriptPtr += 1;
+}
+
+void BattleAICmd_if_effect(void)
+{
+    if(gBattleMoves[gAIThinkingSpace.unk2].effect == gAIScriptPtr[1])
+        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
+    else
+        gAIScriptPtr += 6;
+}
+
+void BattleAICmd_if_not_effect(void)
+{
+    if(gBattleMoves[gAIThinkingSpace.unk2].effect != gAIScriptPtr[1])
+        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
+    else
+        gAIScriptPtr += 6;
+}
+
+void BattleAICmd_if_stat_level_less_than(void)
+{
+    u32 party;
+
+    if(gAIScriptPtr[1] == USER)
+        party = gUnknown_02024C07;
+    else
+        party = gUnknown_02024C08;
+    
+    if(gBattleMons[party].statStages[gAIScriptPtr[2]] < gAIScriptPtr[3])
+        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
+    else
+        gAIScriptPtr += 8;
+}
+
+void BattleAICmd_if_stat_level_more_than(void)
+{
+    u32 party;
+
+    if(gAIScriptPtr[1] == USER)
+        party = gUnknown_02024C07;
+    else
+        party = gUnknown_02024C08;
+    
+    if(gBattleMons[party].statStages[gAIScriptPtr[2]] > gAIScriptPtr[3])
+        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
+    else
+        gAIScriptPtr += 8;
+}
+
+void BattleAICmd_if_stat_level_equal(void)
+{
+    u32 party;
+
+    if(gAIScriptPtr[1] == USER)
+        party = gUnknown_02024C07;
+    else
+        party = gUnknown_02024C08;
+    
+    if(gBattleMons[party].statStages[gAIScriptPtr[2]] == gAIScriptPtr[3])
+        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
+    else
+        gAIScriptPtr += 8;
+}
+
+void BattleAICmd_if_stat_level_not_equal(void)
+{
+    u32 party;
+
+    if(gAIScriptPtr[1] == USER)
+        party = gUnknown_02024C07;
+    else
+        party = gUnknown_02024C08;
+    
+    if(gBattleMons[party].statStages[gAIScriptPtr[2]] != gAIScriptPtr[3])
+        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
+    else
+        gAIScriptPtr += 8;
+}
+
+void BattleAICmd_if_can_faint(void)
+{
+    if(gBattleMoves[gAIThinkingSpace.unk2].power < 2)
+    {
+        gAIScriptPtr += 5;
+        return;
+    }
+    gUnknown_02024DEC = 0;
+    ((struct BattleStruct *)((u8 *)&gAIThinkingSpace - 0x16800))->unk.unk1 = 0;
+    ((struct BattleStruct *)((u8 *)&gAIThinkingSpace - 0x16800))->unk.unk4 = 1;
+    gUnknown_02024C68 = 0;
+    gCritMultiplier = 1;
+    gUnknown_02024BE6 = gAIThinkingSpace.unk2;
+    sub_801CAF8(gUnknown_02024C07, gUnknown_02024C08);
+    move_effectiveness_something(gUnknown_02024BE6, gUnknown_02024C07, gUnknown_02024C08);
+    
+    gUnknown_02024BEC = gUnknown_02024BEC * gAIThinkingSpace.unk18[gAIThinkingSpace.moveConsidered] / 100;
+    
+    // moves always do at least 1 damage.
+    if(gUnknown_02024BEC == 0)
+        gUnknown_02024BEC = 1;
+    
+    if(gBattleMons[gUnknown_02024C08].hp <= gUnknown_02024BEC)
+        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
+    else
+        gAIScriptPtr += 5;
+}
+
+void BattleAICmd_if_cant_faint(void)
+{
+    if(gBattleMoves[gAIThinkingSpace.unk2].power < 2)
+    {
+        gAIScriptPtr += 5;
+        return;
+    }
+
+    gUnknown_02024DEC = 0;
+    ((struct BattleStruct *)((u8 *)&gAIThinkingSpace - 0x16800))->unk.unk1 = 0;
+    ((struct BattleStruct *)((u8 *)&gAIThinkingSpace - 0x16800))->unk.unk4 = 1;
+    gUnknown_02024C68 = 0;
+    gCritMultiplier = 1;
+    gUnknown_02024BE6 = gAIThinkingSpace.unk2;
+    sub_801CAF8(gUnknown_02024C07, gUnknown_02024C08);
+    move_effectiveness_something(gUnknown_02024BE6, gUnknown_02024C07, gUnknown_02024C08);
+    
+    gUnknown_02024BEC = gUnknown_02024BEC * gAIThinkingSpace.unk18[gAIThinkingSpace.moveConsidered] / 100;
+
+    // this macro is missing the damage 0 = 1 assumption.
+
+    if(gBattleMons[gUnknown_02024C08].hp > gUnknown_02024BEC)
+        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
+    else
+        gAIScriptPtr += 5;
+}
+
+void BattleAICmd_unk_3F(void)
+{
+    int i;
+    u16 *temp_ptr = (u16 *)(gAIScriptPtr + 2);
+    
+    switch(gAIScriptPtr[1])
+    {
+        case 1:
+        case 3:
+            for(i = 0; i < 4; i++)
+            {
+                if(gBattleMons[gUnknown_02024C07].moves[i] == *temp_ptr)
+                    break;
+            }
+            if(i == 4)
+            {
+                gAIScriptPtr += 8;
+                return;
+            }
+            else
+            {
+                gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
+                return;
+            }
+        case 0:
+        case 2:
+            for(i = 0; i < 8; i++)
+            {
+                if(unk_2016A00.unk0[gUnknown_02024C08 >> 1][i] == *temp_ptr)
+                    break;
+            }
+            if(i == 8)
+            {
+                gAIScriptPtr += 8;
+                return;
+            }
+            else
+            {
+                gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
+                return;
+            }
+    }
+}
+
+void BattleAICmd_unk_40(void)
+{
+    int i;
+    u16 *temp_ptr = (u16 *)(gAIScriptPtr + 2);
+    
+    switch(gAIScriptPtr[1])
+    {
+        case 1:
+        case 3:
+            for(i = 0; i < 4; i++)
+            {
+                if(gBattleMons[gUnknown_02024C07].moves[i] == *temp_ptr)
+                    break;
+            }
+            if(i != 4)
+            {
+                gAIScriptPtr += 8;
+                return;
+            }
+            else
+            {
+                gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
+                return;
+            }
+        case 0:
+        case 2:
+            for(i = 0; i < 8; i++)
+            {
+                if(unk_2016A00.unk0[gUnknown_02024C08 >> 1][i] == *temp_ptr)
+                    break;
+            }
+            if(i != 8)
+            {
+                gAIScriptPtr += 8;
+                return;
+            }
+            else
+            {
+                gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
+                return;
+            }
+    }
+}
+
+void BattleAICmd_if_move_effect(void)
+{
+    int i;
+    
+    switch(gAIScriptPtr[1])
+    {
+        case 1:
+        case 3:
+            for(i = 0; i < 4; i++)
+            {
+                if(gBattleMons[gUnknown_02024C07].moves[i] != 0 && gBattleMoves[gBattleMons[gUnknown_02024C07].moves[i]].effect == gAIScriptPtr[2])
+                    break;
+            }
+            if(i != 4)
+                gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
+            else
+                gAIScriptPtr += 7;
+            break;
+        case 0:
+        case 2:
+            for(i = 0; i < 8; i++)
+            {
+                if(gBattleMons[gUnknown_02024C07].moves[i] != 0 && gBattleMoves[unk_2016A00.unk0[gUnknown_02024C08 >> 1][i]].effect == gAIScriptPtr[2])
+                    break;
+            }
+            gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
+    }
+}
+
+void BattleAICmd_if_not_move_effect(void)
+{
+    int i;
+    
+    switch(gAIScriptPtr[1])
+    {
+        case 1:
+        case 3:
+            for(i = 0; i < 4; i++)
+            {
+                if(gBattleMons[gUnknown_02024C07].moves[i] != 0 && gBattleMoves[gBattleMons[gUnknown_02024C07].moves[i]].effect == gAIScriptPtr[2])
+                    break;
+            }
+            if(i != 4)
+                gAIScriptPtr += 7;
+            else
+                gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
+            break;
+        case 0:
+        case 2:
+            for(i = 0; i < 8; i++)
+            {
+                if(unk_2016A00.unk0[gUnknown_02024C08 >> 1][i] != 0 && gBattleMoves[unk_2016A00.unk0[gUnknown_02024C08 >> 1][i]].effect == gAIScriptPtr[2])
+                    break;
+            }
+            gAIScriptPtr += 7;
+    }
+}
+
+void BattleAICmd_if_last_move_did_damage(void)
+{
+    u8 var;
+    
+    if(gAIScriptPtr[1] == USER)
+        var = gUnknown_02024C07;
+    else
+        var = gUnknown_02024C08;
+    
+    if(gAIScriptPtr[2] == 0)
+    {
+        if(gUnknown_02024CA8[var].unk4 == 0)
+        {
+            gAIScriptPtr += 7;
+            return;
+        }
+        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
+        return;
+    }
+    else if(gAIScriptPtr[2] != 1)
+    {
+        gAIScriptPtr += 7;
+        return;
+    }
+    else if(gUnknown_02024CA8[var].unk6 != 0)
+    {
+        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
+        return;
+    }
+    gAIScriptPtr += 7;
+}
+
+void BattleAICmd_if_encored(void)
+{
+    switch(gAIScriptPtr[1])
+    {
+        case 0: // _08109348
+            if(gUnknown_02024CA8[gUnknown_02024A60].unk4 == gAIThinkingSpace.unk2)
+            {
+                gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
+                return;
+            }
+            gAIScriptPtr += 6;
+            return;
+        case 1: // _08109370
+            if(gUnknown_02024CA8[gUnknown_02024A60].unk6 == gAIThinkingSpace.unk2)
+            {
+                gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
+                return;
+            }
+            gAIScriptPtr += 6;
+            return;
+        default:
+            gAIScriptPtr += 6;
+            return;
+    }
+}
+
+void BattleAICmd_unk_45(void)
+{
+    gAIThinkingSpace.unk10 |= 0xB;
+}
+
+void BattleAICmd_if_random_2(void)
+{
+    u8 var = battle_2000000.unk88 * 5;
+    
+    if((u8)(Random() % 100) < var)
+        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
+    else
+        gAIScriptPtr += 5;
+}
+
+void BattleAICmd_unk_47(void)
+{
+    gAIThinkingSpace.unk10 |= 0xD;
+}
+
+void BattleAICmd_get_hold_effect(void)
+{
+    u8 var;
+    u16 status;
+    u8 *aiPtr;
+    
+    if(gAIScriptPtr[1] == USER)
+        var = gUnknown_02024C07;
+    else
+        var = gUnknown_02024C08;
+    
+    if(battle_side_get_owner(var) == 0)
+    {
+        // weird pointer arithmetic is needed to match.
+        status = (battle_get_per_side_status(var) & 1);
+        aiPtr = (u8 *)&gAIThinkingSpace;
+        gAIThinkingSpace.funcResult = ((struct UnknownStruct1 *)((u8 *)aiPtr + 0x202))->unk20[status];
+    }
+    else
+        gAIThinkingSpace.funcResult = ItemId_GetHoldEffect(gBattleMons[var].item);
+    
+    gAIScriptPtr += 2;
+}
+
+void BattleAICmd_get_gender(void)
+{
+    u8 var;
+    
+    if(gAIScriptPtr[1] == USER)
+        var = gUnknown_02024C07;
+    else
+        var = gUnknown_02024C08;
+    
+    gAIThinkingSpace.funcResult = GetGenderFromSpeciesAndPersonality(gBattleMons[var].species, gBattleMons[var].personality);
+    
+    gAIScriptPtr += 2;
+}
+
+void BattleAICmd_is_first_turn(void)
+{
+    u8 var;
+
+    if(gAIScriptPtr[1] == USER)
+        var = gUnknown_02024C07;
+    else
+        var = gUnknown_02024C08;
+    
+    gAIThinkingSpace.funcResult = gUnknown_02024CA8[var].unk16;
+    
+    gAIScriptPtr += 2;
+}
+
+void BattleAICmd_get_stockpile_count(void)
+{
+    u8 var;
+
+    if(gAIScriptPtr[1] == USER)
+        var = gUnknown_02024C07;
+    else
+        var = gUnknown_02024C08;
+    
+    gAIThinkingSpace.funcResult = gUnknown_02024CA8[var].unk9;
+    
+    gAIScriptPtr += 2;
+}
+
+void BattleAICmd_unk_4C(void)
+{
+    gAIThinkingSpace.funcResult = gBattleTypeFlags & 1;
+    
+    gAIScriptPtr += 1;
+}
+
+void BattleAICmd_get_item(void)
+{
+    u8 var;
+    
+    if (gAIScriptPtr[1] == USER)
+        var = gUnknown_02024C07;
+    else
+        var = gUnknown_02024C08;
+   
+    // this hack and a half matches. whatever. i dont care. someone else fix this mess later.
+    ((struct AI_ThinkingStruct *)(unk_2000000 + 0x16800))->funcResult = unk_2000000[0x160CC + var * 2];
+    
+    gAIScriptPtr += 2;
+}
+
+void BattleAICmd_unk_4E(void)
+{
+    gAIThinkingSpace.funcResult = gBattleMoves[gAIThinkingSpace.funcResult].type;
+    
+    gAIScriptPtr += 1;
+}
+
+void BattleAICmd_unk_4F(void)
+{
+    gAIThinkingSpace.funcResult = gBattleMoves[gAIThinkingSpace.funcResult].power;
+    
+    gAIScriptPtr += 1;
+}
+
+void BattleAICmd_unk_50(void)
+{
+    gAIThinkingSpace.funcResult = gBattleMoves[gAIThinkingSpace.funcResult].effect;
+    
+    gAIScriptPtr += 1;
+}
+
+void BattleAICmd_get_protect_count(void)
+{
+    u8 var;
+    
+    if(gAIScriptPtr[1] == USER)
+        var = gUnknown_02024C07;
+    else
+        var = gUnknown_02024C08;
+
+    gAIThinkingSpace.funcResult = gUnknown_02024CA8[var].unk8;
+    
+    gAIScriptPtr += 2;
+}
+
+void BattleAICmd_unk_52(void) {}
+
+void BattleAICmd_unk_53(void) {}
+
+void BattleAICmd_unk_54(void) {}
+
+void BattleAICmd_unk_55(void) {}
+
+void BattleAICmd_unk_56(void) {}
+
+void BattleAICmd_unk_57(void) {}
+
+void BattleAICmd_call(void)
+{
+    sub_81098C4(gAIScriptPtr + 5);
+    gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
+}
+
+void BattleAICmd_jump(void)
+{
+    gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
+}
+
+void BattleAICmd_unk_5A(void)
+{
+    if(sub_8109908() == 0)
+        gAIThinkingSpace.unk10 |= 1;
+}
+
+void BattleAICmd_if_level_cond(void)
+{
+    switch(gAIScriptPtr[1])
+    {
+        case 0:
+            if(gBattleMons[gUnknown_02024C07].level > gBattleMons[gUnknown_02024C08].level)
+            {
+                gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
+                return;
+            }
+            gAIScriptPtr += 6;
+            return;
+        case 1:
+            if(gBattleMons[gUnknown_02024C07].level < gBattleMons[gUnknown_02024C08].level)
+            {
+                gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
+                return;
+            }
+            gAIScriptPtr += 6;
+            return;
+        case 2:
+            if(gBattleMons[gUnknown_02024C07].level == gBattleMons[gUnknown_02024C08].level)
+            {
+                gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
+                return;
+            }
+            gAIScriptPtr += 6;
+            return;
+    }
+}
+
+void BattleAICmd_if_taunted(void)
+{
+    if(gUnknown_02024CA8[gUnknown_02024C08].taunt)
+        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
+    else
+        gAIScriptPtr += 5;
+}
+
+void BattleAICmd_if_not_taunted(void)
+{
+    if(!(gUnknown_02024CA8[gUnknown_02024C08].taunt))
+        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
+    else
+        gAIScriptPtr += 5;
+}
+
+void sub_81098C4(u8 *var)
+{
+    unk_2016C00.ptr[unk_2016C00.unk20++] = var;
+}
+
+void unref_sub_81098E4(void)
+{
+    unk_2016C00.ptr[unk_2016C00.unk20++] = gAIScriptPtr;
+}
+
+bool8 sub_8109908(void)
+{
+    if(unk_2016C00.unk20 != 0)
+    {
+        --unk_2016C00.unk20;
+        gAIScriptPtr = unk_2016C00.ptr[unk_2016C00.unk20];
+        return TRUE;
+    }
+    else
+        return FALSE;
 }

@@ -113,6 +113,7 @@ SECTIONS {
         src/title_screen.o(.text);
         src/weather.o(.text);
         asm/weather.o(.text);
+        src/rom_8080874.o(.text);
         asm/rom_8080874.o(.text);
         src/battle_setup.o(.text);
         asm/cable_club.o(.text);
@@ -128,6 +129,7 @@ SECTIONS {
         asm/pokedex.o(.text);
         src/trainer_card.o(.text);
         src/save_menu_util.o(.text);
+        src/rom_8094928.o(.text);
         asm/rom_8094928.o(.text);
         asm/battle_party_menu.o(.text);
         asm/pokemon_storage_system.o(.text);
@@ -192,7 +194,6 @@ SECTIONS {
         asm/slot_machine.o(.text);
         src/contest_painting.o(.text);
         src/battle_ai.o(.text);
-        asm/battle_ai.o(.text);
         asm/trader.o(.text);
         src/starter_choose.o(.text);
         src/wallclock.o(.text);
