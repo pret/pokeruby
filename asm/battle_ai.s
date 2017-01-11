@@ -6,61 +6,6 @@
 
 	.text
 
-	thumb_func_start BattleAICmd_unk_4C
-BattleAICmd_unk_4C: @ 810959C
-	ldr r2, _081095B4 @ =0x02016800
-	ldr r0, _081095B8 @ =gBattleTypeFlags
-	ldrh r1, [r0]
-	movs r0, 0x1
-	ands r0, r1
-	str r0, [r2, 0x8]
-	ldr r1, _081095BC @ =gAIScriptPtr
-	ldr r0, [r1]
-	adds r0, 0x1
-	str r0, [r1]
-	bx lr
-	.align 2, 0
-_081095B4: .4byte 0x02016800
-_081095B8: .4byte gBattleTypeFlags
-_081095BC: .4byte gAIScriptPtr
-	thumb_func_end BattleAICmd_unk_4C
-
-	thumb_func_start BattleAICmd_get_item
-BattleAICmd_get_item: @ 81095C0
-	push {lr}
-	ldr r0, _081095D4 @ =gAIScriptPtr
-	ldr r1, [r0]
-	ldrb r1, [r1, 0x1]
-	adds r2, r0, 0
-	cmp r1, 0x1
-	bne _081095DC
-	ldr r0, _081095D8 @ =gUnknown_02024C07
-	b _081095DE
-	.align 2, 0
-_081095D4: .4byte gAIScriptPtr
-_081095D8: .4byte gUnknown_02024C07
-_081095DC:
-	ldr r0, _081095F8 @ =gUnknown_02024C08
-_081095DE:
-	ldrb r0, [r0]
-	ldr r1, _081095FC @ =0x02016800
-	lsls r0, 1
-	adds r0, r1
-	ldr r3, _08109600 @ =0xfffff8cc
-	adds r0, r3
-	ldrb r0, [r0]
-	str r0, [r1, 0x8]
-	ldr r0, [r2]
-	adds r0, 0x2
-	str r0, [r2]
-	pop {r0}
-	bx r0
-	.align 2, 0
-_081095F8: .4byte gUnknown_02024C08
-_081095FC: .4byte 0x02016800
-_08109600: .4byte 0xfffff8cc
-	thumb_func_end BattleAICmd_get_item
-
 	thumb_func_start BattleAICmd_unk_4E
 BattleAICmd_unk_4E: @ 8109604
 	ldr r3, _08109620 @ =0x02016800

@@ -12,6 +12,9 @@
 #define AIScriptRead8(ptr) ((ptr)[0])
 #define AIScriptReadPtr(ptr) (u8*) AIScriptRead32(ptr)
 
+#define AI_THINKING_STRUCT ((struct AI_ThinkingStruct *)(&battle_2000000 + 0x16800))
+#define AI_ARRAY_160CC     ((&battle_2000000 + 0x160CC))
+
 extern void sub_801CAF8(u8, u8);
 
 enum
@@ -1784,6 +1787,33 @@ void BattleAICmd_get_stockpile_count(void)
         var = gUnknown_02024C08;
     
     gAIThinkingSpace.funcResult = gUnknown_02024CA8[var].unk9;
+    
+    gAIScriptPtr += 2;
+}
+
+void BattleAICmd_unk_4C(void)
+{
+    gAIThinkingSpace.funcResult = gBattleTypeFlags & 1;
+    
+    gAIScriptPtr += 1;
+}
+
+// needed to match the hack that is get_item, thanks cam
+extern u8 unk_2000000[];
+
+#define AI_THINKING_STRUCT ((struct AI_ThinkingStruct *)(unk_2000000 + 0x16800))
+
+void BattleAICmd_get_item(void)
+{
+    u8 var;
+    
+    if (gAIScriptPtr[1] == USER)
+        var = gUnknown_02024C07;
+    else
+        var = gUnknown_02024C08;
+   
+    // this hack and a half matches. whatever. i dont care. someone else fix this mess later.
+    AI_THINKING_STRUCT->funcResult = unk_2000000[0x160CC + var * 2];
     
     gAIScriptPtr += 2;
 }

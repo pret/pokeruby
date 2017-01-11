@@ -54,6 +54,11 @@ struct SmallBattleStruct1
 	u8 unk4;
 };
 
+struct SmallItemStruct
+{
+	u8 item[2][2];
+};
+
 struct BattleStruct /* 0x2000000 */
 {
 	u8 filler0[0x1601C];
@@ -62,8 +67,9 @@ struct BattleStruct /* 0x2000000 */
 	u8 unk88;
 	u8 filler1_2[0x42];
 	/* 0x160CB */ u8 linkPlayerIndex;
-	u8 filler2[0x734];
-	struct AI_ThinkingStruct ai;
+	struct SmallItemStruct item;
+	u8 filler2[0x730];
+	struct AI_ThinkingStruct ai; /* 0x2016800 */
 };
 
 extern struct BattleStruct battle_2000000;
