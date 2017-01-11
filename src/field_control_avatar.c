@@ -112,33 +112,21 @@ extern void sub_8080F58(void);
 extern void sub_80BC038();
 extern void DoCoordEventWeather(u8);
 
-__attribute__((naked))
 void sub_8067EEC(struct UnkInputStruct *s)
 {
-    asm(".syntax unified\n\
-    push {r4,r5,lr}\n\
-    movs r1, 0x2\n\
-    negs r1, r1\n\
-    movs r3, 0x3\n\
-    negs r3, r3\n\
-    movs r4, 0x5\n\
-    negs r4, r4\n\
-    movs r5, 0x9\n\
-    negs r5, r5\n\
-    movs r2, 0\n\
-    strb r2, [r0]\n\
-    ldrb r2, [r0, 0x1]\n\
-    ands r1, r2\n\
-    ands r1, r3\n\
-    ands r1, r4\n\
-    ands r1, r5\n\
-    strb r1, [r0, 0x1]\n\
-    movs r1, 0\n\
-    strb r1, [r0, 0x2]\n\
-    pop {r4,r5}\n\
-    pop {r0}\n\
-    bx r0\n\
-    .syntax divided\n");
+    s->input_field_0_0 = 0;
+    s->input_field_0_1 = 0;
+    s->input_field_0_2 = 0;
+    s->input_field_0_3 = 0;
+    s->input_field_0_4 = 0;
+    s->input_field_0_5 = 0;
+    s->input_field_0_6 = 0;
+    s->input_field_0_7 = 0;
+    s->input_field_1_0 = 0;
+    s->input_field_1_1 = 0;
+    s->input_field_1_2 = 0;
+    s->input_field_1_3 = 0;
+    s->input_field_2 = 0;
 }
 
 void process_overworld_input(struct UnkInputStruct *pStruct, u16 keys, u16 heldKeys)
