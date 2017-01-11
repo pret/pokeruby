@@ -81,7 +81,7 @@ struct UnknownStruct4
     u8 filler0[0x3];
     u16 unk4;
     u16 unk6;
-    u8 filler8;
+    u8 unk8;
     u8 unk9;
     u8 fillerA[0xC];
     u8 unk16;
@@ -1835,6 +1835,32 @@ void BattleAICmd_unk_4F(void)
 void BattleAICmd_unk_50(void)
 {
     gAIThinkingSpace.funcResult = gBattleMoves[gAIThinkingSpace.funcResult].effect;
-	
-	gAIScriptPtr += 1;
+    
+    gAIScriptPtr += 1;
 }
+
+void BattleAICmd_get_protect_count(void)
+{
+    u8 var;
+    
+    if(gAIScriptPtr[1] == USER)
+        var = gUnknown_02024C07;
+    else
+        var = gUnknown_02024C08;
+
+    gAIThinkingSpace.funcResult = gUnknown_02024CA8[var].unk8;
+    
+    gAIScriptPtr += 2;
+}
+
+void BattleAICmd_unk_52(void) {}
+
+void BattleAICmd_unk_53(void) {}
+
+void BattleAICmd_unk_54(void) {}
+
+void BattleAICmd_unk_55(void) {}
+
+void BattleAICmd_unk_56(void) {}
+
+void BattleAICmd_unk_57(void) {}
