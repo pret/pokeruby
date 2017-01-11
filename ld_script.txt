@@ -387,7 +387,7 @@ SECTIONS {
         data/decoration.o(.rodata);
         data/slot_machine.o(.rodata);
         data/contest_painting.o(.rodata);
-        data/battle_ai.o(.rodata);
+        src/battle_ai.o(.rodata);
         data/trader.o(.rodata);
         data/starter_choose.o(.rodata);
         data/wallclock.o(.rodata);

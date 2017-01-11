@@ -6,6 +6,7 @@
 #include "abilities.h"
 #include "species.h"
 #include "item.h"
+#include "battle_move_effects.h"
 
 #define AIScriptRead32(ptr) ((ptr)[0] | (ptr)[1] << 8 | (ptr)[2] << 16 | (ptr)[3] << 24)
 #define AIScriptRead16(ptr) ((ptr)[0] | (ptr)[1] << 8)
@@ -51,9 +52,6 @@ extern u8 *BattleAIs[];
 extern struct Trainer gTrainers[];
 extern struct BattleMove gBattleMoves[];
 extern struct BaseStats gBaseStats[];
-extern void (*gBattleAICmdTable[])(void);
-
-extern const u16 gUnknown_083F62BC[];
 
 // needed to match the hack that is get_item, thanks cam, someone else clean this up later.
 extern u8 unk_2000000[];
@@ -101,6 +99,221 @@ struct UnknownStruct4
 extern struct UnknownStruct1 unk_2016A00;
 extern struct UnknownStruct3 unk_2016C00;
 extern struct UnknownStruct4 gUnknown_02024CA8[];
+
+static void BattleAICmd_if_random(void);
+static void BattleAICmd_if_not_random(void);
+static void BattleAICmd_if_random_1(void);
+static void BattleAICmd_if_not_random_1(void);
+static void BattleAICmd_score(void);
+static void BattleAICmd_if_hp_less_than(void);
+static void BattleAICmd_if_hp_more_than(void);
+static void BattleAICmd_if_hp_equal(void);
+static void BattleAICmd_if_hp_not_equal(void);
+static void BattleAICmd_if_status(void);
+static void BattleAICmd_if_not_status(void);
+static void BattleAICmd_if_status2(void);
+static void BattleAICmd_if_not_status2(void);
+static void BattleAICmd_if_status3(void);
+static void BattleAICmd_if_not_status3(void);
+static void BattleAICmd_if_status4(void);
+static void BattleAICmd_if_not_status4(void);
+static void BattleAICmd_if_less_than(void);
+static void BattleAICmd_if_more_than(void);
+static void BattleAICmd_if_equal(void);
+static void BattleAICmd_if_not_equal(void);
+static void BattleAICmd_if_less_than_32(void);
+static void BattleAICmd_if_more_than_32(void);
+static void BattleAICmd_if_equal_32(void);
+static void BattleAICmd_if_not_equal_32(void);
+static void BattleAICmd_if_move(void);
+static void BattleAICmd_if_not_move(void);
+static void BattleAICmd_if_in_bytes(void);
+static void BattleAICmd_if_not_in_bytes(void);
+static void BattleAICmd_if_in_words(void);
+static void BattleAICmd_if_not_in_words(void);
+static void BattleAICmd_if_user_can_damage(void);
+static void BattleAICmd_if_user_cant_damage(void);
+static void BattleAICmd_unk_21(void);
+static void BattleAICmd_get_type(void);
+static void BattleAICmd_unk_23(void);
+static void BattleAICmd_unk_24(void);
+static void BattleAICmd_get_move(void);
+static void BattleAICmd_if_type(void);
+static void BattleAICmd_unk_27(void);
+static void BattleAICmd_if_would_go_first(void);
+static void BattleAICmd_if_would_not_go_first(void);
+static void BattleAICmd_unk_2A(void);
+static void BattleAICmd_unk_2B(void);
+static void BattleAICmd_count_alive_pokemon(void);
+static void BattleAICmd_unk_2D(void);
+static void BattleAICmd_unk_2E(void);
+static void BattleAICmd_get_ability(void);
+static void BattleAICmd_unk_30(void);
+static void BattleAICmd_if_damage_bonus(void);
+static void BattleAICmd_unk_32(void);
+static void BattleAICmd_unk_33(void);
+static void BattleAICmd_if_status_in_party(void);
+static void BattleAICmd_if_status_not_in_party(void);
+static void BattleAICmd_unk_36(void);
+static void BattleAICmd_if_effect(void);
+static void BattleAICmd_if_not_effect(void);
+static void BattleAICmd_if_stat_level_less_than(void);
+static void BattleAICmd_if_stat_level_more_than(void);
+static void BattleAICmd_if_stat_level_equal(void);
+static void BattleAICmd_if_stat_level_not_equal(void);
+static void BattleAICmd_if_can_faint(void);
+static void BattleAICmd_if_cant_faint(void);
+static void BattleAICmd_unk_3F(void);
+static void BattleAICmd_unk_40(void);
+static void BattleAICmd_if_move_effect(void);
+static void BattleAICmd_if_not_move_effect(void);
+static void BattleAICmd_if_last_move_did_damage(void);
+static void BattleAICmd_if_encored(void);
+static void BattleAICmd_unk_45(void);
+static void BattleAICmd_if_random_2(void);
+static void BattleAICmd_unk_47(void);
+static void BattleAICmd_get_hold_effect(void);
+static void BattleAICmd_get_gender(void);
+static void BattleAICmd_is_first_turn(void);
+static void BattleAICmd_get_stockpile_count(void);
+static void BattleAICmd_unk_4C(void);
+static void BattleAICmd_get_item(void);
+static void BattleAICmd_unk_4E(void);
+static void BattleAICmd_unk_4F(void);
+static void BattleAICmd_unk_50(void);
+static void BattleAICmd_get_protect_count(void);
+static void BattleAICmd_unk_52(void);
+static void BattleAICmd_unk_53(void);
+static void BattleAICmd_unk_54(void);
+static void BattleAICmd_unk_55(void);
+static void BattleAICmd_unk_56(void);
+static void BattleAICmd_unk_57(void);
+static void BattleAICmd_call(void);
+static void BattleAICmd_jump(void);
+static void BattleAICmd_unk_5A(void);
+static void BattleAICmd_if_level_cond(void);
+static void BattleAICmd_if_taunted(void);
+static void BattleAICmd_if_not_taunted(void);
+
+typedef void (*BattleAICmdFunc)(void);
+
+static const BattleAICmdFunc sBattleAICmdTable[] =
+{
+    BattleAICmd_if_random,
+    BattleAICmd_if_not_random,
+    BattleAICmd_if_random_1,
+    BattleAICmd_if_not_random_1,
+    BattleAICmd_score,
+    BattleAICmd_if_hp_less_than,
+    BattleAICmd_if_hp_more_than,
+    BattleAICmd_if_hp_equal,
+    BattleAICmd_if_hp_not_equal,
+    BattleAICmd_if_status,
+    BattleAICmd_if_not_status,
+    BattleAICmd_if_status2,
+    BattleAICmd_if_not_status2,
+    BattleAICmd_if_status3,
+    BattleAICmd_if_not_status3,
+    BattleAICmd_if_status4,
+    BattleAICmd_if_not_status4,
+    BattleAICmd_if_less_than,
+    BattleAICmd_if_more_than,
+    BattleAICmd_if_equal,
+    BattleAICmd_if_not_equal,
+    BattleAICmd_if_less_than_32,
+    BattleAICmd_if_more_than_32,
+    BattleAICmd_if_equal_32,
+    BattleAICmd_if_not_equal_32,
+    BattleAICmd_if_move,
+    BattleAICmd_if_not_move,
+    BattleAICmd_if_in_bytes,
+    BattleAICmd_if_not_in_bytes,
+    BattleAICmd_if_in_words,
+    BattleAICmd_if_not_in_words,
+    BattleAICmd_if_user_can_damage,
+    BattleAICmd_if_user_cant_damage,
+    BattleAICmd_unk_21,
+    BattleAICmd_get_type,
+    BattleAICmd_unk_23,
+    BattleAICmd_unk_24,
+    BattleAICmd_get_move,
+    BattleAICmd_if_type,
+    BattleAICmd_unk_27,
+    BattleAICmd_if_would_go_first,
+    BattleAICmd_if_would_not_go_first,
+    BattleAICmd_unk_2A,
+    BattleAICmd_unk_2B,
+    BattleAICmd_count_alive_pokemon,
+    BattleAICmd_unk_2D,
+    BattleAICmd_unk_2E,
+    BattleAICmd_get_ability,
+    BattleAICmd_unk_30,
+    BattleAICmd_if_damage_bonus,
+    BattleAICmd_unk_32,
+    BattleAICmd_unk_33,
+    BattleAICmd_if_status_in_party,
+    BattleAICmd_if_status_not_in_party,
+    BattleAICmd_unk_36,
+    BattleAICmd_if_effect,
+    BattleAICmd_if_not_effect,
+    BattleAICmd_if_stat_level_less_than,
+    BattleAICmd_if_stat_level_more_than,
+    BattleAICmd_if_stat_level_equal,
+    BattleAICmd_if_stat_level_not_equal,
+    BattleAICmd_if_can_faint,
+    BattleAICmd_if_cant_faint,
+    BattleAICmd_unk_3F,
+    BattleAICmd_unk_40,
+    BattleAICmd_if_move_effect,
+    BattleAICmd_if_not_move_effect,
+    BattleAICmd_if_last_move_did_damage,
+    BattleAICmd_if_encored,
+    BattleAICmd_unk_45,
+    BattleAICmd_if_random_2,
+    BattleAICmd_unk_47,
+    BattleAICmd_get_hold_effect,
+    BattleAICmd_get_gender,
+    BattleAICmd_is_first_turn,
+    BattleAICmd_get_stockpile_count,
+    BattleAICmd_unk_4C,
+    BattleAICmd_get_item,
+    BattleAICmd_unk_4E,
+    BattleAICmd_unk_4F,
+    BattleAICmd_unk_50,
+    BattleAICmd_get_protect_count,
+    BattleAICmd_unk_52,
+    BattleAICmd_unk_53,
+    BattleAICmd_unk_54,
+    BattleAICmd_unk_55,
+    BattleAICmd_unk_56,
+    BattleAICmd_unk_57,
+    BattleAICmd_call,
+    BattleAICmd_jump,
+    BattleAICmd_unk_5A,
+    BattleAICmd_if_level_cond,
+    BattleAICmd_if_taunted,
+    BattleAICmd_if_not_taunted,
+};
+
+#ifdef NONMATCHING
+static
+#endif
+const u16 sDiscouragedPowerfulMoveEffects[] =
+{
+    EFFECT_EXPLOSION,
+    EFFECT_DREAM_EATER,
+    EFFECT_RAZOR_WIND,
+    EFFECT_SKY_ATTACK,
+    EFFECT_RECHARGE,
+    EFFECT_SKULL_BASH,
+    EFFECT_SOLARBEAM,
+    EFFECT_SPIT_UP,
+    EFFECT_FOCUS_PUNCH,
+    EFFECT_SUPERPOWER,
+    EFFECT_ERUPTION,
+    EFFECT_OVERHEAT,
+    0xFFFF
+};
 
 void BattleAI_SetupAIData(void);
 void BattleAI_DoAIProcessing(void);
@@ -250,7 +463,7 @@ void BattleAI_DoAIProcessing(void)
             break;
         case 1:
             if(gAIThinkingSpace.unk2 != 0)
-                gBattleAICmdTable[*(u8 *)gAIScriptPtr](); // run AI command.
+                sBattleAICmdTable[*(u8 *)gAIScriptPtr](); // run AI command.
             else
             {
                 gAIThinkingSpace.score[gAIThinkingSpace.moveConsidered] = 0;
@@ -305,7 +518,7 @@ void sub_81074F8(u8 a, u8 b)
         unk_2016A00.unk22[battle_get_per_side_status(a) & 1] = b;
 }
 
-void BattleAICmd_if_random(void)
+static void BattleAICmd_if_random(void)
 {
     u16 random = Random();
 
@@ -315,7 +528,7 @@ void BattleAICmd_if_random(void)
         gAIScriptPtr += 6;
 }
 
-void BattleAICmd_if_not_random(void)
+static void BattleAICmd_if_not_random(void)
 {
     u16 random = Random();
 
@@ -325,7 +538,7 @@ void BattleAICmd_if_not_random(void)
         gAIScriptPtr += 6;
 }
 
-void BattleAICmd_if_random_1(void) // if RNG Value equal to
+static void BattleAICmd_if_random_1(void) // if RNG Value equal to
 {
     u16 random = Random();
 
@@ -335,7 +548,7 @@ void BattleAICmd_if_random_1(void) // if RNG Value equal to
         gAIScriptPtr += 6;
 }
 
-void BattleAICmd_if_not_random_1(void) // if RNG value not equal to
+static void BattleAICmd_if_not_random_1(void) // if RNG value not equal to
 {
     u16 random = Random();
 
@@ -345,7 +558,7 @@ void BattleAICmd_if_not_random_1(void) // if RNG value not equal to
         gAIScriptPtr += 6;
 }
 
-void BattleAICmd_score(void)
+static void BattleAICmd_score(void)
 {
     gAIThinkingSpace.score[gAIThinkingSpace.moveConsidered] += gAIScriptPtr[1]; // add the result to the array of the move consider's score.
 
@@ -355,7 +568,7 @@ void BattleAICmd_score(void)
     gAIScriptPtr += 2; // AI return.
 }
 
-void BattleAICmd_if_hp_less_than(void)
+static void BattleAICmd_if_hp_less_than(void)
 {
     u16 var;
 
@@ -370,7 +583,7 @@ void BattleAICmd_if_hp_less_than(void)
         gAIScriptPtr += 7;
 }
 
-void BattleAICmd_if_hp_more_than(void)
+static void BattleAICmd_if_hp_more_than(void)
 {
     u16 var;
 
@@ -385,7 +598,7 @@ void BattleAICmd_if_hp_more_than(void)
         gAIScriptPtr += 7;
 }
 
-void BattleAICmd_if_hp_equal(void)
+static void BattleAICmd_if_hp_equal(void)
 {
     u16 var;
 
@@ -400,7 +613,7 @@ void BattleAICmd_if_hp_equal(void)
         gAIScriptPtr += 7;
 }
 
-void BattleAICmd_if_hp_not_equal(void)
+static void BattleAICmd_if_hp_not_equal(void)
 {
     u16 var;
 
@@ -415,7 +628,7 @@ void BattleAICmd_if_hp_not_equal(void)
         gAIScriptPtr += 7;
 }
 
-void BattleAICmd_if_status(void)
+static void BattleAICmd_if_status(void)
 {
     u16 var;
     u32 temp;
@@ -433,7 +646,7 @@ void BattleAICmd_if_status(void)
         gAIScriptPtr += 10;
 }
 
-void BattleAICmd_if_not_status(void)
+static void BattleAICmd_if_not_status(void)
 {
     u16 var;
     u32 temp;
@@ -451,7 +664,7 @@ void BattleAICmd_if_not_status(void)
         gAIScriptPtr += 10;
 }
 
-void BattleAICmd_if_status2(void)
+static void BattleAICmd_if_status2(void)
 {
     u8 var;
     u32 temp;
@@ -469,7 +682,7 @@ void BattleAICmd_if_status2(void)
         gAIScriptPtr += 10;
 }
 
-void BattleAICmd_if_not_status2(void)
+static void BattleAICmd_if_not_status2(void)
 {
     u8 var;
     u32 temp;
@@ -487,7 +700,7 @@ void BattleAICmd_if_not_status2(void)
         gAIScriptPtr += 10;
 }
 
-void BattleAICmd_if_status3(void)
+static void BattleAICmd_if_status3(void)
 {
     u8 var;
     u32 temp;
@@ -505,7 +718,7 @@ void BattleAICmd_if_status3(void)
         gAIScriptPtr += 10;
 }
 
-void BattleAICmd_if_not_status3(void)
+static void BattleAICmd_if_not_status3(void)
 {
     u8 var;
     u32 temp;
@@ -523,7 +736,7 @@ void BattleAICmd_if_not_status3(void)
         gAIScriptPtr += 10;
 }
 
-void BattleAICmd_if_status4(void)
+static void BattleAICmd_if_status4(void)
 {
     u8 var;
     u32 temp;
@@ -543,7 +756,7 @@ void BattleAICmd_if_status4(void)
         gAIScriptPtr += 10;
 }
 
-void BattleAICmd_if_not_status4(void)
+static void BattleAICmd_if_not_status4(void)
 {
     u8 var;
     u32 temp;
@@ -563,7 +776,7 @@ void BattleAICmd_if_not_status4(void)
         gAIScriptPtr += 10;
 }
 
-void BattleAICmd_if_less_than(void)
+static void BattleAICmd_if_less_than(void)
 {
     if (gAIThinkingSpace.funcResult < gAIScriptPtr[1])
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
@@ -571,7 +784,7 @@ void BattleAICmd_if_less_than(void)
         gAIScriptPtr += 6;
 }
 
-void BattleAICmd_if_more_than(void)
+static void BattleAICmd_if_more_than(void)
 {
     if (gAIThinkingSpace.funcResult > gAIScriptPtr[1])
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
@@ -579,7 +792,7 @@ void BattleAICmd_if_more_than(void)
         gAIScriptPtr += 6;
 }
 
-void BattleAICmd_if_equal(void)
+static void BattleAICmd_if_equal(void)
 {
     if (gAIThinkingSpace.funcResult == gAIScriptPtr[1])
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
@@ -587,7 +800,7 @@ void BattleAICmd_if_equal(void)
         gAIScriptPtr += 6;
 }
 
-void BattleAICmd_if_not_equal(void)
+static void BattleAICmd_if_not_equal(void)
 {
     if (gAIThinkingSpace.funcResult != gAIScriptPtr[1])
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
@@ -595,7 +808,7 @@ void BattleAICmd_if_not_equal(void)
         gAIScriptPtr += 6;
 }
 
-void BattleAICmd_if_less_than_32(void)
+static void BattleAICmd_if_less_than_32(void)
 {
     u8 *temp = AIScriptReadPtr(gAIScriptPtr + 1);
 
@@ -605,7 +818,7 @@ void BattleAICmd_if_less_than_32(void)
         gAIScriptPtr += 9;
 }
 
-void BattleAICmd_if_more_than_32(void)
+static void BattleAICmd_if_more_than_32(void)
 {
     u8 *temp = AIScriptReadPtr(gAIScriptPtr + 1);
 
@@ -615,7 +828,7 @@ void BattleAICmd_if_more_than_32(void)
         gAIScriptPtr += 9;
 }
 
-void BattleAICmd_if_equal_32(void)
+static void BattleAICmd_if_equal_32(void)
 {
     u8 *temp = AIScriptReadPtr(gAIScriptPtr + 1);
 
@@ -625,7 +838,7 @@ void BattleAICmd_if_equal_32(void)
         gAIScriptPtr += 9;
 }
 
-void BattleAICmd_if_not_equal_32(void)
+static void BattleAICmd_if_not_equal_32(void)
 {
     u8 *temp = AIScriptReadPtr(gAIScriptPtr + 1);
 
@@ -635,7 +848,7 @@ void BattleAICmd_if_not_equal_32(void)
         gAIScriptPtr += 9;
 }
 
-void BattleAICmd_if_move(void)
+static void BattleAICmd_if_move(void)
 {
     u16 move = AIScriptRead16(gAIScriptPtr + 1);
 
@@ -645,7 +858,7 @@ void BattleAICmd_if_move(void)
         gAIScriptPtr += 7;
 }
 
-void BattleAICmd_if_not_move(void)
+static void BattleAICmd_if_not_move(void)
 {
     u16 move = AIScriptRead16(gAIScriptPtr + 1);
 
@@ -655,7 +868,7 @@ void BattleAICmd_if_not_move(void)
         gAIScriptPtr += 7;
 }
 
-void BattleAICmd_if_in_bytes(void)
+static void BattleAICmd_if_in_bytes(void)
 {
     u8 *ptr = AIScriptReadPtr(gAIScriptPtr + 1);
 
@@ -671,7 +884,7 @@ void BattleAICmd_if_in_bytes(void)
    gAIScriptPtr += 9;
 }
 
-void BattleAICmd_if_not_in_bytes(void)
+static void BattleAICmd_if_not_in_bytes(void)
 {
     u8 *ptr = AIScriptReadPtr(gAIScriptPtr + 1);
 
@@ -687,7 +900,7 @@ void BattleAICmd_if_not_in_bytes(void)
    gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 5);
 }
 
-void BattleAICmd_if_in_words(void)
+static void BattleAICmd_if_in_words(void)
 {
     u16 *ptr = (u16 *)AIScriptReadPtr(gAIScriptPtr + 1);
 
@@ -703,7 +916,7 @@ void BattleAICmd_if_in_words(void)
    gAIScriptPtr += 9;
 }
 
-void BattleAICmd_if_not_in_words(void)
+static void BattleAICmd_if_not_in_words(void)
 {
     u16 *ptr = (u16 *)AIScriptReadPtr(gAIScriptPtr + 1);
 
@@ -719,7 +932,7 @@ void BattleAICmd_if_not_in_words(void)
    gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 5);
 }
 
-void BattleAICmd_if_user_can_damage(void)
+static void BattleAICmd_if_user_can_damage(void)
 {
    s32 i;
 
@@ -735,7 +948,7 @@ void BattleAICmd_if_user_can_damage(void)
        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
 }
 
-void BattleAICmd_if_user_cant_damage(void)
+static void BattleAICmd_if_user_cant_damage(void)
 {
    s32 i;
 
@@ -751,13 +964,13 @@ void BattleAICmd_if_user_cant_damage(void)
        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
 }
 
-void BattleAICmd_unk_21(void)
+static void BattleAICmd_unk_21(void)
 {
     gAIThinkingSpace.funcResult = gUnknown_030042E0[19];
     gAIScriptPtr += 1;
 }
 
-void BattleAICmd_get_type(void)
+static void BattleAICmd_get_type(void)
 {
     u8 typeVar = gAIScriptPtr[1];
 
@@ -782,25 +995,25 @@ void BattleAICmd_get_type(void)
     gAIScriptPtr += 2;
 }
 
-void BattleAICmd_unk_23(void)
+static void BattleAICmd_unk_23(void)
 {
     gAIThinkingSpace.funcResult = gBattleMoves[gAIThinkingSpace.unk2].power;
     gAIScriptPtr += 1;
 }
 
 #ifdef NONMATCHING
-void BattleAICmd_unk_24(void)
+static void BattleAICmd_unk_24(void)
 {
     int i, j;
     s32 damage;
     s32 damages[4];
 
-    for (i = 0; gUnknown_083F62BC[i] != 0xFFFF; i++)
-        if (gBattleMoves[AI_THINKING_STRUCT->unk2].effect == gUnknown_083F62BC[i])
+    for (i = 0; sDiscouragedPowerfulMoveEffects[i] != 0xFFFF; i++)
+        if (gBattleMoves[AI_THINKING_STRUCT->unk2].effect == sDiscouragedPowerfulMoveEffects[i])
             break;
 
     if (gBattleMoves[AI_THINKING_STRUCT->unk2].power > 1
-     && gUnknown_083F62BC[i] == 0xFFFF)
+     && sDiscouragedPowerfulMoveEffects[i] == 0xFFFF)
     {
         gUnknown_02024DEC = 0;
         *((u8 *)&battle_2000000 + 0x1601C) = 0;
@@ -810,14 +1023,14 @@ void BattleAICmd_unk_24(void)
 
         for (i = 0; i < 4; i++)
         {
-            for (j = 0; gUnknown_083F62BC[j] != 0xFFFF; j++)
+            for (j = 0; sDiscouragedPowerfulMoveEffects[j] != 0xFFFF; j++)
             {
-                if (gBattleMoves[gBattleMons[gUnknown_02024C07].moves[i]].effect == gUnknown_083F62BC[j])
+                if (gBattleMoves[gBattleMons[gUnknown_02024C07].moves[i]].effect == sDiscouragedPowerfulMoveEffects[j])
                     break;
             }
 
             if (gBattleMons[gUnknown_02024C07].moves[i]
-             && gUnknown_083F62BC[j] == 0xFFFF
+             && sDiscouragedPowerfulMoveEffects[j] == 0xFFFF
              && gBattleMoves[gBattleMons[gUnknown_02024C07].moves[i]].power > 1)
             {
                 gUnknown_02024BE6 = gBattleMons[gUnknown_02024C07].moves[i];
@@ -853,7 +1066,7 @@ void BattleAICmd_unk_24(void)
 }
 #else
 __attribute__((naked))
-void BattleAICmd_unk_24(void)
+static void BattleAICmd_unk_24(void)
 {
     asm(".syntax unified\n\
     push {r4-r7,lr}\n\
@@ -863,7 +1076,7 @@ void BattleAICmd_unk_24(void)
     push {r5-r7}\n\
     sub sp, 0x14\n\
     movs r3, 0\n\
-    ldr r0, _08108328 @ =gUnknown_083F62BC\n\
+    ldr r0, _08108328 @ =sDiscouragedPowerfulMoveEffects\n\
     ldrh r1, [r0]\n\
     ldr r4, _0810832C @ =0x0000ffff\n\
     ldr r6, _08108330 @ =gBattleMoves\n\
@@ -876,7 +1089,7 @@ void BattleAICmd_unk_24(void)
     lsls r0, 2\n\
     adds r0, r6\n\
     ldrb r2, [r0]\n\
-    ldr r1, _08108328 @ =gUnknown_083F62BC\n\
+    ldr r1, _08108328 @ =sDiscouragedPowerfulMoveEffects\n\
 _0810821E:\n\
     ldrh r0, [r1]\n\
     cmp r2, r0\n\
@@ -898,7 +1111,7 @@ _0810822E:\n\
     b _081083B2\n\
 _08108240:\n\
     lsls r0, r3, 1\n\
-    ldr r1, _08108328 @ =gUnknown_083F62BC\n\
+    ldr r1, _08108328 @ =sDiscouragedPowerfulMoveEffects\n\
     adds r0, r1\n\
     ldrh r3, [r0]\n\
     ldr r0, _0810832C @ =0x0000ffff\n\
@@ -922,7 +1135,7 @@ _08108250:\n\
     strb r2, [r0]\n\
     movs r6, 0\n\
     mov r9, r3\n\
-    ldr r0, _08108328 @ =gUnknown_083F62BC\n\
+    ldr r0, _08108328 @ =sDiscouragedPowerfulMoveEffects\n\
     ldrh r0, [r0]\n\
     str r0, [sp, 0x10]\n\
 _08108276:\n\
@@ -951,7 +1164,7 @@ _08108276:\n\
     lsls r0, 2\n\
     adds r0, r2\n\
     ldrb r2, [r0]\n\
-    ldr r1, _08108328 @ =gUnknown_083F62BC\n\
+    ldr r1, _08108328 @ =sDiscouragedPowerfulMoveEffects\n\
 _081082AA:\n\
     ldrh r0, [r1]\n\
     cmp r2, r0\n\
@@ -973,7 +1186,7 @@ _081082BA:\n\
     cmp r0, 0\n\
     beq _0810835C\n\
     lsls r0, r3, 1\n\
-    ldr r2, _08108328 @ =gUnknown_083F62BC\n\
+    ldr r2, _08108328 @ =sDiscouragedPowerfulMoveEffects\n\
     adds r0, r2\n\
     ldrh r0, [r0]\n\
     cmp r0, r9\n\
@@ -1015,7 +1228,7 @@ _081082BA:\n\
     str r0, [r4]\n\
     b _08108364\n\
     .align 2, 0\n\
-_08108328: .4byte gUnknown_083F62BC\n\
+_08108328: .4byte sDiscouragedPowerfulMoveEffects\n\
 _0810832C: .4byte 0x0000ffff\n\
 _08108330: .4byte gBattleMoves\n\
 _08108334: .4byte 0x02016800\n\
@@ -1097,7 +1310,7 @@ _081083D0: .4byte gAIScriptPtr\n\
 }
 #endif // NONMATCHING
 
-void BattleAICmd_get_move(void)
+static void BattleAICmd_get_move(void)
 {
     if (gAIScriptPtr[1] == USER)
         gAIThinkingSpace.funcResult = gUnknown_02024C34[gUnknown_02024C07];
@@ -1107,7 +1320,7 @@ void BattleAICmd_get_move(void)
     gAIScriptPtr += 2;
 }
 
-void BattleAICmd_if_type(void)
+static void BattleAICmd_if_type(void)
 {
     if ( gAIScriptPtr[1] == gAIThinkingSpace.funcResult )
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
@@ -1115,7 +1328,7 @@ void BattleAICmd_if_type(void)
         gAIScriptPtr += 6;
 }
 
-void BattleAICmd_unk_27(void) // if_not_type
+static void BattleAICmd_unk_27(void) // if_not_type
 {
     if ( gAIScriptPtr[1] != gAIThinkingSpace.funcResult )
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
@@ -1123,7 +1336,7 @@ void BattleAICmd_unk_27(void) // if_not_type
         gAIScriptPtr += 6;
 }
 
-void BattleAICmd_if_would_go_first(void)
+static void BattleAICmd_if_would_go_first(void)
 {
     if ( b_first_side(gUnknown_02024C07, gUnknown_02024C08, 1) == gAIScriptPtr[1] )
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
@@ -1131,7 +1344,7 @@ void BattleAICmd_if_would_go_first(void)
         gAIScriptPtr += 6;
 }
 
-void BattleAICmd_if_would_not_go_first(void)
+static void BattleAICmd_if_would_not_go_first(void)
 {
     if ( b_first_side(gUnknown_02024C07, gUnknown_02024C08, 1) != gAIScriptPtr[1] )
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
@@ -1139,13 +1352,13 @@ void BattleAICmd_if_would_not_go_first(void)
         gAIScriptPtr += 6;
 }
 
-void BattleAICmd_unk_2A(void)
+static void BattleAICmd_unk_2A(void)
 {}
 
-void BattleAICmd_unk_2B(void)
+static void BattleAICmd_unk_2B(void)
 {}
 
-void BattleAICmd_count_alive_pokemon(void)
+static void BattleAICmd_count_alive_pokemon(void)
 {
     u8 index;
     struct Pokemon *party;
@@ -1193,19 +1406,19 @@ void BattleAICmd_count_alive_pokemon(void)
     gAIScriptPtr += 2;
 }
 
-void BattleAICmd_unk_2D(void)
+static void BattleAICmd_unk_2D(void)
 {
     gAIThinkingSpace.funcResult = gAIThinkingSpace.unk2;
     gAIScriptPtr += 1;
 }
 
-void BattleAICmd_unk_2E(void)
+static void BattleAICmd_unk_2E(void)
 {
     gAIThinkingSpace.funcResult = gBattleMoves[gAIThinkingSpace.unk2].effect;
     gAIScriptPtr += 1;
 }
 
-void BattleAICmd_get_ability(void)
+static void BattleAICmd_get_ability(void)
 {
     u8 var;
 
@@ -1274,7 +1487,7 @@ void BattleAICmd_get_ability(void)
     }
 }
 
-void BattleAICmd_unk_30(void)
+static void BattleAICmd_unk_30(void)
 {
     s32 i;
     struct AI_ThinkingStruct *ai;
@@ -1318,7 +1531,7 @@ void BattleAICmd_unk_30(void)
     gAIScriptPtr += 1;
 }
 
-void BattleAICmd_if_damage_bonus(void)
+static void BattleAICmd_if_damage_bonus(void)
 {
     struct AI_ThinkingStruct *ai;
     u8 damageVar;
@@ -1354,13 +1567,13 @@ void BattleAICmd_if_damage_bonus(void)
         gAIScriptPtr += 6;
 }
 
-void BattleAICmd_unk_32(void)
+static void BattleAICmd_unk_32(void)
 {}
 
-void BattleAICmd_unk_33(void)
+static void BattleAICmd_unk_33(void)
 {}
 
-void BattleAICmd_if_status_in_party(void)
+static void BattleAICmd_if_status_in_party(void)
 {
     struct Pokemon *party;
     int i;
@@ -1397,7 +1610,7 @@ void BattleAICmd_if_status_in_party(void)
     gAIScriptPtr += 10;
 }
 
-void BattleAICmd_if_status_not_in_party(void)
+static void BattleAICmd_if_status_not_in_party(void)
 {
     struct Pokemon *party;
     int i;
@@ -1432,7 +1645,7 @@ void BattleAICmd_if_status_not_in_party(void)
     gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 6);
 }
 
-void BattleAICmd_unk_36(void)
+static void BattleAICmd_unk_36(void)
 {
     if(gBattleWeather & 7)
         gAIThinkingSpace.funcResult = 1;
@@ -1446,7 +1659,7 @@ void BattleAICmd_unk_36(void)
     gAIScriptPtr += 1;
 }
 
-void BattleAICmd_if_effect(void)
+static void BattleAICmd_if_effect(void)
 {
     if(gBattleMoves[gAIThinkingSpace.unk2].effect == gAIScriptPtr[1])
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
@@ -1454,7 +1667,7 @@ void BattleAICmd_if_effect(void)
         gAIScriptPtr += 6;
 }
 
-void BattleAICmd_if_not_effect(void)
+static void BattleAICmd_if_not_effect(void)
 {
     if(gBattleMoves[gAIThinkingSpace.unk2].effect != gAIScriptPtr[1])
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
@@ -1462,7 +1675,7 @@ void BattleAICmd_if_not_effect(void)
         gAIScriptPtr += 6;
 }
 
-void BattleAICmd_if_stat_level_less_than(void)
+static void BattleAICmd_if_stat_level_less_than(void)
 {
     u32 party;
 
@@ -1477,7 +1690,7 @@ void BattleAICmd_if_stat_level_less_than(void)
         gAIScriptPtr += 8;
 }
 
-void BattleAICmd_if_stat_level_more_than(void)
+static void BattleAICmd_if_stat_level_more_than(void)
 {
     u32 party;
 
@@ -1492,7 +1705,7 @@ void BattleAICmd_if_stat_level_more_than(void)
         gAIScriptPtr += 8;
 }
 
-void BattleAICmd_if_stat_level_equal(void)
+static void BattleAICmd_if_stat_level_equal(void)
 {
     u32 party;
 
@@ -1507,7 +1720,7 @@ void BattleAICmd_if_stat_level_equal(void)
         gAIScriptPtr += 8;
 }
 
-void BattleAICmd_if_stat_level_not_equal(void)
+static void BattleAICmd_if_stat_level_not_equal(void)
 {
     u32 party;
 
@@ -1522,7 +1735,7 @@ void BattleAICmd_if_stat_level_not_equal(void)
         gAIScriptPtr += 8;
 }
 
-void BattleAICmd_if_can_faint(void)
+static void BattleAICmd_if_can_faint(void)
 {
     if(gBattleMoves[gAIThinkingSpace.unk2].power < 2)
     {
@@ -1550,7 +1763,7 @@ void BattleAICmd_if_can_faint(void)
         gAIScriptPtr += 5;
 }
 
-void BattleAICmd_if_cant_faint(void)
+static void BattleAICmd_if_cant_faint(void)
 {
     if(gBattleMoves[gAIThinkingSpace.unk2].power < 2)
     {
@@ -1577,7 +1790,7 @@ void BattleAICmd_if_cant_faint(void)
         gAIScriptPtr += 5;
 }
 
-void BattleAICmd_unk_3F(void)
+static void BattleAICmd_unk_3F(void)
 {
     int i;
     u16 *temp_ptr = (u16 *)(gAIScriptPtr + 2);
@@ -1621,7 +1834,7 @@ void BattleAICmd_unk_3F(void)
     }
 }
 
-void BattleAICmd_unk_40(void)
+static void BattleAICmd_unk_40(void)
 {
     int i;
     u16 *temp_ptr = (u16 *)(gAIScriptPtr + 2);
@@ -1665,7 +1878,7 @@ void BattleAICmd_unk_40(void)
     }
 }
 
-void BattleAICmd_if_move_effect(void)
+static void BattleAICmd_if_move_effect(void)
 {
     int i;
     
@@ -1694,7 +1907,7 @@ void BattleAICmd_if_move_effect(void)
     }
 }
 
-void BattleAICmd_if_not_move_effect(void)
+static void BattleAICmd_if_not_move_effect(void)
 {
     int i;
     
@@ -1723,7 +1936,7 @@ void BattleAICmd_if_not_move_effect(void)
     }
 }
 
-void BattleAICmd_if_last_move_did_damage(void)
+static void BattleAICmd_if_last_move_did_damage(void)
 {
     u8 var;
     
@@ -1755,7 +1968,7 @@ void BattleAICmd_if_last_move_did_damage(void)
     gAIScriptPtr += 7;
 }
 
-void BattleAICmd_if_encored(void)
+static void BattleAICmd_if_encored(void)
 {
     switch(gAIScriptPtr[1])
     {
@@ -1781,12 +1994,12 @@ void BattleAICmd_if_encored(void)
     }
 }
 
-void BattleAICmd_unk_45(void)
+static void BattleAICmd_unk_45(void)
 {
     gAIThinkingSpace.unk10 |= 0xB;
 }
 
-void BattleAICmd_if_random_2(void)
+static void BattleAICmd_if_random_2(void)
 {
     u8 var = battle_2000000.unk88 * 5;
     
@@ -1796,12 +2009,12 @@ void BattleAICmd_if_random_2(void)
         gAIScriptPtr += 5;
 }
 
-void BattleAICmd_unk_47(void)
+static void BattleAICmd_unk_47(void)
 {
     gAIThinkingSpace.unk10 |= 0xD;
 }
 
-void BattleAICmd_get_hold_effect(void)
+static void BattleAICmd_get_hold_effect(void)
 {
     u8 var;
     u16 status;
@@ -1825,7 +2038,7 @@ void BattleAICmd_get_hold_effect(void)
     gAIScriptPtr += 2;
 }
 
-void BattleAICmd_get_gender(void)
+static void BattleAICmd_get_gender(void)
 {
     u8 var;
     
@@ -1839,7 +2052,7 @@ void BattleAICmd_get_gender(void)
     gAIScriptPtr += 2;
 }
 
-void BattleAICmd_is_first_turn(void)
+static void BattleAICmd_is_first_turn(void)
 {
     u8 var;
 
@@ -1853,7 +2066,7 @@ void BattleAICmd_is_first_turn(void)
     gAIScriptPtr += 2;
 }
 
-void BattleAICmd_get_stockpile_count(void)
+static void BattleAICmd_get_stockpile_count(void)
 {
     u8 var;
 
@@ -1867,14 +2080,14 @@ void BattleAICmd_get_stockpile_count(void)
     gAIScriptPtr += 2;
 }
 
-void BattleAICmd_unk_4C(void)
+static void BattleAICmd_unk_4C(void)
 {
     gAIThinkingSpace.funcResult = gBattleTypeFlags & 1;
     
     gAIScriptPtr += 1;
 }
 
-void BattleAICmd_get_item(void)
+static void BattleAICmd_get_item(void)
 {
     u8 var;
     
@@ -1889,28 +2102,28 @@ void BattleAICmd_get_item(void)
     gAIScriptPtr += 2;
 }
 
-void BattleAICmd_unk_4E(void)
+static void BattleAICmd_unk_4E(void)
 {
     gAIThinkingSpace.funcResult = gBattleMoves[gAIThinkingSpace.funcResult].type;
     
     gAIScriptPtr += 1;
 }
 
-void BattleAICmd_unk_4F(void)
+static void BattleAICmd_unk_4F(void)
 {
     gAIThinkingSpace.funcResult = gBattleMoves[gAIThinkingSpace.funcResult].power;
     
     gAIScriptPtr += 1;
 }
 
-void BattleAICmd_unk_50(void)
+static void BattleAICmd_unk_50(void)
 {
     gAIThinkingSpace.funcResult = gBattleMoves[gAIThinkingSpace.funcResult].effect;
     
     gAIScriptPtr += 1;
 }
 
-void BattleAICmd_get_protect_count(void)
+static void BattleAICmd_get_protect_count(void)
 {
     u8 var;
     
@@ -1924,36 +2137,36 @@ void BattleAICmd_get_protect_count(void)
     gAIScriptPtr += 2;
 }
 
-void BattleAICmd_unk_52(void) {}
+static void BattleAICmd_unk_52(void) {}
 
-void BattleAICmd_unk_53(void) {}
+static void BattleAICmd_unk_53(void) {}
 
-void BattleAICmd_unk_54(void) {}
+static void BattleAICmd_unk_54(void) {}
 
-void BattleAICmd_unk_55(void) {}
+static void BattleAICmd_unk_55(void) {}
 
-void BattleAICmd_unk_56(void) {}
+static void BattleAICmd_unk_56(void) {}
 
-void BattleAICmd_unk_57(void) {}
+static void BattleAICmd_unk_57(void) {}
 
-void BattleAICmd_call(void)
+static void BattleAICmd_call(void)
 {
     sub_81098C4(gAIScriptPtr + 5);
     gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
 }
 
-void BattleAICmd_jump(void)
+static void BattleAICmd_jump(void)
 {
     gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
 }
 
-void BattleAICmd_unk_5A(void)
+static void BattleAICmd_unk_5A(void)
 {
     if(sub_8109908() == 0)
         gAIThinkingSpace.unk10 |= 1;
 }
 
-void BattleAICmd_if_level_cond(void)
+static void BattleAICmd_if_level_cond(void)
 {
     switch(gAIScriptPtr[1])
     {
@@ -1984,7 +2197,7 @@ void BattleAICmd_if_level_cond(void)
     }
 }
 
-void BattleAICmd_if_taunted(void)
+static void BattleAICmd_if_taunted(void)
 {
     if(gUnknown_02024CA8[gUnknown_02024C08].taunt)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
@@ -1992,7 +2205,7 @@ void BattleAICmd_if_taunted(void)
         gAIScriptPtr += 5;
 }
 
-void BattleAICmd_if_not_taunted(void)
+static void BattleAICmd_if_not_taunted(void)
 {
     if(!(gUnknown_02024CA8[gUnknown_02024C08].taunt))
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
