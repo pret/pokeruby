@@ -474,64 +474,20 @@ static bool32 sub_80687A4(void)
     return FALSE;
 }
 
-#ifdef NONMATCHING
 static bool8 sub_80687E4(struct MapPosition *position, u16 b, u16 unused)
 {
-    if (mapheader_trigger_activate_at__run_now(position) != TRUE
-     && sub_8068A64(position, b) != TRUE && sub_8068870(b) != TRUE
-     && sub_8068894() != TRUE && UpdateRepelCounter() != TRUE)
-        return FALSE;
-    return TRUE;
+    if (mapheader_trigger_activate_at__run_now(position) == TRUE)
+        return TRUE;
+    if (sub_8068A64(position, b) == TRUE)
+        return TRUE;
+    if (sub_8068870(b) == TRUE)
+        return TRUE;
+    if (sub_8068894() == TRUE)
+        return TRUE;
+    if (UpdateRepelCounter() == TRUE)
+        return TRUE;
+    return FALSE;
 }
-#else
-__attribute__((naked))
-static bool8 sub_80687E4(struct MapPosition *position, u16 b, u16 unused)
-{
-    asm(".syntax unified\n\
-    push {r4-r6,lr}\n\
-    adds r5, r0, 0\n\
-    lsls r1, 16\n\
-    lsrs r4, r1, 16\n\
-    adds r6, r4, 0\n\
-    bl mapheader_trigger_activate_at__run_now\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, 0x1\n\
-    beq _08068834\n\
-    adds r0, r5, 0\n\
-    adds r1, r4, 0\n\
-    bl sub_8068A64\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, 0x1\n\
-    beq _08068834\n\
-    adds r0, r6, 0\n\
-    bl sub_8068870\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, 0x1\n\
-    beq _08068834\n\
-    bl sub_8068894\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, 0x1\n\
-    beq _08068834\n\
-    bl UpdateRepelCounter\n\
-    lsls r0, 24\n\
-    lsrs r0, 24\n\
-    cmp r0, 0x1\n\
-    beq _08068834\n\
-    movs r0, 0\n\
-    b _08068836\n\
-_08068834:\n\
-    movs r0, 0x1\n\
-_08068836:\n\
-    pop {r4-r6}\n\
-    pop {r1}\n\
-    bx r1\n\
-    .syntax divided\n");
-}
-#endif
 
 bool8 mapheader_trigger_activate_at__run_now(struct MapPosition *position)
 {
