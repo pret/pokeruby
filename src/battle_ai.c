@@ -88,7 +88,10 @@ struct UnknownStruct4
     u16 unk6;
     u8 unk8;
     u8 unk9;
-    u8 fillerA[0xC];
+    u8 fillerA[0x9];
+    u8 taunt:4;
+    u8 unkC:4;
+    u8 fillerD[0x2];
     u8 unk16;
     u8 filler17[0x4];
 };
@@ -1911,4 +1914,20 @@ void BattleAICmd_if_level_cond(void)
             gAIScriptPtr += 6;
             return;
     }
+}
+
+void BattleAICmd_if_taunted(void)
+{
+    if(gUnknown_02024CA8[gUnknown_02024C08].taunt)
+        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
+    else
+        gAIScriptPtr += 5;
+}
+
+void BattleAICmd_if_not_taunted(void)
+{
+    if(!(gUnknown_02024CA8[gUnknown_02024C08].taunt))
+        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
+    else
+        gAIScriptPtr += 5;
 }
