@@ -3,6 +3,7 @@
 #include "battle_setup.h"
 #include "event_data.h"
 #include "field_player_avatar.h"
+#include "flags.h"
 #include "metatile_behavior.h"
 #include "rom4.h"
 #include "safari_zone.h"
@@ -10,6 +11,7 @@
 #include "songs.h"
 #include "sound.h"
 #include "trainer_see.h"
+#include "vars.h"
 #include "wild_encounter.h"
 
 struct Coords32
@@ -441,11 +443,11 @@ static u8 *sub_8068500(struct MapPosition *position, u8 b, u8 c)
 
 static u8 *TryGetFieldMoveScript(struct MapPosition *unused1, u8 b, u8 unused2)
 {
-    if (FlagGet(0x80B) == TRUE && PartyHasMonWithSurf() == TRUE && IsPlayerFacingSurfableFishableWater() == TRUE)
+    if (FlagGet(BADGE05_GET) == TRUE && PartyHasMonWithSurf() == TRUE && IsPlayerFacingSurfableFishableWater() == TRUE)
         return UseSurfScript;
     if (MetatileBehavior_IsWaterfall(b) == TRUE)
     {
-        if (FlagGet(0x80E) == TRUE && IsPlayerSurfingNorth() == TRUE)
+        if (FlagGet(BADGE08_GET) == TRUE && IsPlayerSurfingNorth() == TRUE)
             return UseWaterfallScript;
         else
             return CannotUseWaterfallScript;
@@ -455,7 +457,7 @@ static u8 *TryGetFieldMoveScript(struct MapPosition *unused1, u8 b, u8 unused2)
 
 static bool32 sub_8068770(void)
 {
-    if (FlagGet(0x80D) && sub_8068F18() == 2)
+    if (FlagGet(BADGE07_GET) && sub_8068F18() == 2)
     {
         ScriptContext1_SetupScript(UseDiveScript);
         return TRUE;
@@ -465,7 +467,7 @@ static bool32 sub_8068770(void)
 
 static bool32 sub_80687A4(void)
 {
-    if (FlagGet(0x80D) && gMapHeader.mapType == 5 && sub_8068F18() == 1)
+    if (FlagGet(BADGE07_GET) && gMapHeader.mapType == 5 && sub_8068F18() == 1)
     {
         ScriptContext1_SetupScript(UnderwaterUseDiveScript);
         return TRUE;
@@ -580,12 +582,12 @@ bool8 sub_8068894(void)
 
 void unref_sub_80688F8(void)
 {
-    VarSet(0x402A, 0);
+    VarSet(VAR_HAPPINESS_STEP_COUNTER, 0);
 }
 
 static void happiness_algorithm_step(void)
 {
-    u16 *ptr = GetVarPointer(0x402A);
+    u16 *ptr = GetVarPointer(VAR_HAPPINESS_STEP_COUNTER);
     int i;
     
     (*ptr)++;
@@ -604,7 +606,7 @@ static void happiness_algorithm_step(void)
 
 void overworld_poison_timer_set(void)
 {
-    VarSet(0x402B, 0);
+    VarSet(VAR_POISON_STEP_COUNTER, 0);
 }
 
 static bool8 overworld_poison_step(void)
@@ -613,7 +615,7 @@ static bool8 overworld_poison_step(void)
     
     if (gMapHeader.mapType != 9)
     {
-        ptr = GetVarPointer(0x402B);
+        ptr = GetVarPointer(VAR_POISON_STEP_COUNTER);
         (*ptr)++;
         (*ptr) %= 4;
         if (*ptr == 0)
