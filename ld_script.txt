@@ -105,6 +105,7 @@ SECTIONS {
         src/tileset_anim.o(.text);
         src/palette.o(.text);
         src/sound.o(.text);
+        src/battle_anim.o(.text);
         asm/battle_anim.o(.text);
         asm/rom_8077ABC.o(.text);
         src/task.o(.text);
