@@ -54,6 +54,9 @@ extern struct BattleMove gBattleMoves[];
 extern struct BaseStats gBaseStats[];
 extern void (*gBattleAICmdTable[])(void);
 
+// needed to match the hack that is get_item, thanks cam, someone else clean this up later.
+extern u8 unk_2000000[];
+
 /*
 gAIScriptPtr is a pointer to the next battle AI cmd command to read.
 when a command finishes processing, gAIScriptPtr is incremented by
@@ -1800,11 +1803,6 @@ void BattleAICmd_unk_4C(void)
     gAIScriptPtr += 1;
 }
 
-// needed to match the hack that is get_item, thanks cam, someone else clean this up later.
-extern u8 unk_2000000[];
-
-#define AI_THINKING_STRUCT ((struct AI_ThinkingStruct *)(unk_2000000 + 0x16800))
-
 void BattleAICmd_get_item(void)
 {
     u8 var;
@@ -1815,7 +1813,7 @@ void BattleAICmd_get_item(void)
         var = gUnknown_02024C08;
    
     // this hack and a half matches. whatever. i dont care. someone else fix this mess later.
-    AI_THINKING_STRUCT->funcResult = unk_2000000[0x160CC + var * 2];
+    ((struct AI_ThinkingStruct *)(unk_2000000 + 0x16800))->funcResult = unk_2000000[0x160CC + var * 2];
     
     gAIScriptPtr += 2;
 }
@@ -1882,4 +1880,35 @@ void BattleAICmd_unk_5A(void)
 {
     if(sub_8109908() == 0)
         gAIThinkingSpace.unk10 |= 1;
+}
+
+void BattleAICmd_if_level_cond(void)
+{
+    switch(gAIScriptPtr[1])
+    {
+        case 0:
+            if(gBattleMons[gUnknown_02024C07].level > gBattleMons[gUnknown_02024C08].level)
+            {
+                gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
+                return;
+            }
+            gAIScriptPtr += 6;
+            return;
+        case 1:
+            if(gBattleMons[gUnknown_02024C07].level < gBattleMons[gUnknown_02024C08].level)
+            {
+                gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
+                return;
+            }
+            gAIScriptPtr += 6;
+            return;
+        case 2:
+            if(gBattleMons[gUnknown_02024C07].level == gBattleMons[gUnknown_02024C08].level)
+            {
+                gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
+                return;
+            }
+            gAIScriptPtr += 6;
+            return;
+    }
 }
