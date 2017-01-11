@@ -9,7 +9,8 @@ struct UnkPlayerStruct
     u8 player_field_1;
 };
 
-struct LinkPlayerMapObject {
+struct LinkPlayerMapObject
+{
     u8 active;
     u8 linkPlayerId;
     u8 mapObjId;
@@ -35,21 +36,21 @@ void update_saveblock1_field_object_movement_behavior(u8, u8);
 // warp_shift
 // warp_set
 // warp_data_is_not_neg_1
-// get_mapheader_by_bank_and_number
+struct MapHeader * const get_mapheader_by_bank_and_number(u16 mapGroup, u16 mapNum);
 // warp1_get_mapheader
 // set_current_map_header_from_sav1_save_old_name
 // sub_805338C
 // sub_80533CC
 void warp_in(void);
 void warp1_set(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
-// warp1_set_2
-// saved_warp2_set
+void warp1_set_2(s8 mapGroup, s8 mapNum, s8 warpId);
+void saved_warp2_set(int unused, s8 mapGroup, s8 mapNum, s8 warpId);
 void saved_warp2_set_2(int unused, s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
-// copy_saved_warp2_bank_and_enter_x_to_warp1
+void copy_saved_warp2_bank_and_enter_x_to_warp1(u8 unused);
 // sub_8053538
 void sub_8053570(void);
 void sub_8053588(u8);
-// sub_80535C4
+void sub_80535C4(s16 a1, s16 a2);
 void sub_805363C(s8 mapGroup, s8 mapNum, s8 warpId, s8 x, s8 y);
 // sub_8053678
 void sub_8053690(s8, s8, s8, s8, s8);
@@ -62,8 +63,8 @@ void sub_8053720(s16, s16);
 void gpu_sync_bg_hide();
 // sub_8053818
 // sub_8053850
-// sub_80538B0
-// sub_80538D0
+bool8 sub_80538B0(u16 x, u16 y);
+bool8 sub_80538D0(u16 x, u16 y);
 // sub_80538F0
 // sub_8053994
 void player_avatar_init_params_reset(void);

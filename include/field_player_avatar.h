@@ -69,8 +69,8 @@ void sub_80597F4(void);
 u8 sub_805983C(u8 a, u8 b);
 u8 GetPlayerAvatarGraphicsIdByStateId(u8 a);
 // GetPlayerAvatarGenderByGraphicsId
-// PartyHasMonWithSurf
-// IsPlayerSurfingNorth
+bool8 PartyHasMonWithSurf(void);
+bool8 IsPlayerSurfingNorth(void);
 bool8 IsPlayerFacingSurfableFishableWater(void);
 // ClearPlayerAvatarInfo
 void SetPlayerAvatarStateMask(u8 a);
