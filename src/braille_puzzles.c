@@ -4,15 +4,26 @@
 #include "asm.h"
 #include "field_camera.h"
 #include "field_effect.h"
+#include "map_obj_lock.h"
 #include "sound.h"
 #include "script.h"
 #include "songs.h"
 #include "species.h"
+#include "task.h"
+#include "menu.h"
 
 extern u8 gPlayerPartyCount;
 extern u8 gUnknown_03005CE0;
 
 extern u32 gUnknown_0202FF84[];
+
+extern u8 gUnknown_0815EF19[];
+
+void UseFlyAncientTomb_Callback(void);
+void UseFlyAncientTomb_Finish(void);
+void Task_BrailleWait(u8 taskId);
+bool32 BrailleWait_CheckButtonPress(void);
+void SealedChamberShakingEffect(u8 taskId);
 
 bool8 ShouldDoBrailleDigEffect(void)
 {
@@ -100,4 +111,152 @@ void DoBrailleFlyEffect(void)
 {
     gUnknown_0202FF84[0] = gUnknown_03005CE0;
     FieldEffectStart(0x3C);
+}
+
+bool8 FldEff_UseFlyAncientTomb(void)
+{
+    u8 taskId = oei_task_add();
+    
+    gTasks[taskId].data[8] = (u32)UseFlyAncientTomb_Callback >> 16;
+    gTasks[taskId].data[9] = (u32)UseFlyAncientTomb_Callback;
+    return FALSE;
+}
+
+void UseFlyAncientTomb_Callback(void)
+{
+    FieldEffectActiveListRemove(0x3C);
+    UseFlyAncientTomb_Finish();
+}
+
+void UseFlyAncientTomb_Finish(void)
+{
+    MapGridSetMetatileIdAt(14, 26, 554);
+    MapGridSetMetatileIdAt(15, 26, 555);
+    MapGridSetMetatileIdAt(16, 26, 556);
+    MapGridSetMetatileIdAt(14, 27, 3634);
+    MapGridSetMetatileIdAt(15, 27, 563);
+    MapGridSetMetatileIdAt(16, 27, 3636);
+    DrawWholeMapView();
+    PlaySE(SE_BAN);
+    FlagSet(SYS_BRAILLE_FLY);
+    ScriptContext2_Disable();
+}
+
+void DoBrailleWait(void)
+{
+    if(!FlagGet(SYS_BRAILLE_WAIT))
+        CreateTask(Task_BrailleWait, 0x50);
+}
+
+void Task_BrailleWait(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+
+    switch(data[0])
+    {
+        case 0:
+            data[1] = 7200;
+            data[0] = 1;
+            break;
+        case 1:
+            if(BrailleWait_CheckButtonPress() != FALSE)
+            {
+                MenuZeroFillScreen();
+                PlaySE(5);
+                data[0] = 2;
+            }
+            else
+            {
+                data[1] = data[1] - 1;
+                if(data[1] == 0)
+                {
+                    MenuZeroFillScreen();
+                    data[0] = 3;
+                    data[1] = 30;
+                }
+            }
+            break;
+        case 2:
+            if(BrailleWait_CheckButtonPress() == FALSE)
+            {
+                data[1] = data[1] - 1;
+                if(data[1] == 0)
+                    data[0] = 4;
+                break;
+            }
+            sub_8064E2C();
+            DestroyTask(taskId);
+            ScriptContext2_Disable();
+            break;
+        case 3:
+            data[1] = data[1] - 1;
+            if(data[1] == 0)
+                data[0] = 4;
+            break;
+        case 4:
+            sub_8064E2C();
+            ScriptContext1_SetupScript(gUnknown_0815EF19);
+            DestroyTask(taskId);
+            break;
+    }
+}
+
+bool32 BrailleWait_CheckButtonPress(void)
+{
+    u16 var = 0xFF;
+    
+    if(gSaveBlock2.optionsButtonMode == 1)
+        var |= 0x300;
+    if(gSaveBlock2.optionsButtonMode == 2)
+        var |= 0x200;
+    
+    if((var & gMain.newKeys) != FALSE)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+void DoSealedChamberShakingEffect1(void)
+{
+    u8 taskId = CreateTask(SealedChamberShakingEffect, 0x9);
+    
+    gTasks[taskId].data[1] = 0;
+    gTasks[taskId].data[2] = 0;
+    gTasks[taskId].data[4] = 2;
+    gTasks[taskId].data[5] = 5;
+    gTasks[taskId].data[6] = 50;
+    SetCameraPanningCallback(0);
+}
+
+void DoSealedChamberShakingEffect2(void)
+{
+    u8 taskId = CreateTask(SealedChamberShakingEffect, 0x9);
+    
+    gTasks[taskId].data[1] = 0;
+    gTasks[taskId].data[2] = 0;
+    gTasks[taskId].data[4] = 3;
+    gTasks[taskId].data[5] = 5;
+    gTasks[taskId].data[6] = 2;
+    SetCameraPanningCallback(0);
+}
+
+void SealedChamberShakingEffect(u8 taskId)
+{
+    struct Task *task = &gTasks[taskId];
+    
+    task->data[1]++;
+
+    if(!(task->data[1] % task->data[5]))
+    {
+        task->data[1] = 0;
+        task->data[2]++;
+        task->data[4] = -task->data[4];
+        SetCameraPanning(0, task->data[4]);
+        if(task->data[2] == task->data[6])
+        {
+            DestroyTask(taskId);
+            EnableBothScriptContexts();
+            InstallCameraPanAheadCallback();
+        }
+    }
 }
