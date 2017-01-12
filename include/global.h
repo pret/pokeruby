@@ -271,7 +271,7 @@ struct MailStruct
     /*0x20*/ u16 itemId;
 };
 
-struct SaveBlock1
+struct SaveBlock1 /* 0x02025734 */
 {
     /*0x00*/ struct Coords16 pos;
     /*0x04*/ struct WarpData location;
