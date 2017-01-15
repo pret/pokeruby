@@ -242,7 +242,7 @@ SECTIONS {
         asm/evolution_graphics.o(.text);
         src/bard_music.o(.text);
         src/fldeff_teleport.o(.text);
-        asm/unknown_debug_menu.o(.text);
+        src/unknown_debug_menu.o(.text);
         src/name_string_util.o(.text);
         src/menu_cursor.o(.text);
     } =0
