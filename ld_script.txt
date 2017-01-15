@@ -330,6 +330,7 @@ SECTIONS {
         src/palette.o(.rodata);
         src/sound.o(.rodata);
         data/battle_anim.o(.rodata);
+        src/battle_anim.o(.rodata);
         data/rom_8077ABC.o(.rodata);
         data/map_events.o(.rodata);
         data/data_8393054.o(.rodata);
