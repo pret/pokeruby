@@ -19,7 +19,7 @@ struct LinkPlayerMapObject
 
 // sub_8052F5C
 // flag_var_implications_of_teleport_
-// new_game
+void new_game(void);
 // sub_8053014
 void sub_8053050(void);
 // sub_805308C
@@ -102,7 +102,7 @@ u8 get_map_light_level_by_bank_and_number(s8 mapGroup, s8 mapNum);
 u8 sav1_map_get_light_level(void);
 // get_map_light_from_warp0
 bool8 is_light_level_1_2_3_5_or_6(u8 a1);
-// is_light_level_1_2_3_or_6
+bool8 is_light_level_1_2_3_or_6(u8 a1);
 u8 is_light_level_8_or_9(u8);
 // unref_sub_8054260
 u8 sav1_map_get_name();
