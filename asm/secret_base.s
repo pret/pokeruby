@@ -943,7 +943,7 @@ sub_80BBB90: @ 80BBB90
 	push {r4,lr}
 	sub sp, 0x4
 	bl ScriptContext2_Enable
-	bl HideMapNamePopUpWindow
+	bl HideMapNamePopup
 	mov r4, sp
 	adds r4, 0x2
 	movs r2, 0x88

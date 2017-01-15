@@ -141,7 +141,7 @@ SECTIONS {
         asm/script_movement.o(.text);
         asm/fldeff_cut.o(.text);
         asm/mail_data.o(.text);
-        asm/map_name_popup.o(.text);
+        src/map_name_popup.o(.text);
         asm/item_menu.o(.text);
         src/battle_anim_80A7E7C.o(.text);
         src/item.o(.text);

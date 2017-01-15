@@ -539,7 +539,7 @@ void sub_80538F0(u8 mapGroup, u8 mapNum)
     DoCurrentWeather();
     ResetFieldTasksArgs();
     mapheader_run_script_with_tag_x5();
-    AddMapNamePopUpWindowTask();
+    ShowMapNamePopup();
 }
 
 void sub_8053994(u32 a1)
@@ -1029,7 +1029,7 @@ void c1_overworld_normal(u16 newKeys, u16 heldKeys)
         if (sub_8068024(&inputStruct) == 1)
         {
             ScriptContext2_Enable();
-            HideMapNamePopUpWindow();
+            HideMapNamePopup();
         }
         else
         {
@@ -1254,7 +1254,7 @@ void sub_80546F0(void)
 void sub_805470C(void)
 {
     if (gMapHeader.flags == 1 && sub_80BBB24() == 1)
-        AddMapNamePopUpWindowTask();
+        ShowMapNamePopup();
     sub_8080B60();
 }
 
@@ -1449,7 +1449,7 @@ bool32 sub_805493C(u8 *a1, u32 a2)
         break;
     case 11:
         if (gMapHeader.flags == 1 && sub_80BBB24() == 1)
-            AddMapNamePopUpWindowTask();
+            ShowMapNamePopup();
         (*a1)++;
         break;
     case 12:
