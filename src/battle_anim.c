@@ -7,9 +7,45 @@
 #include "sprite.h"
 #include "task.h"
 
+#define SCRIPT_READ_8(ptr)  ((ptr)[0])
+#define SCRIPT_READ_16(ptr) ((ptr)[0] | ((ptr)[1] << 8))
+#define SCRIPT_READ_32(ptr) ((ptr)[0] + ((ptr)[1] << 8) + ((ptr)[2] << 16) + ((ptr)[3] << 24))
+
+#define REG_BGCNT_BITFIELD(n) (*(struct BGCntrlBitfield *)REG_ADDR_BG##n##CNT)
+
+#define EWRAM_14800 ((u16 *)(unk_2000000 + 0x14800))
+#define EWRAM_17800 ((struct UnknownStruct1 *)(unk_2000000 + 0x17800))
+#define EWRAM_17810 ((struct UnknownStruct3 *)(unk_2000000 + 0x17810))
+#define EWRAM_18000 ((u16 *)(unk_2000000 + 0x18000))
+#define EWRAM_19348 (*(u16 *)(unk_2000000 + 0x19348))
+
+struct BGCntrlBitfield
+{
+    volatile u16 priority:2;
+    volatile u16 charBaseBlock:2;
+    volatile u16 field_0_2:4;
+    volatile u16 field_1_0:5;
+    volatile u16 areaOverflowMode:1;
+    volatile u16 screenSize:2;
+};
+
+struct BattleAnimBackground
+{
+    void *image;
+    void *palette;
+    void *tilemap;
+};
+
 struct UnknownStruct1
 {
     u8 unk0;
+};
+
+struct UnknownStruct2
+{
+    void *unk0;
+    u16 *unk4;
+    u8 unk8;
 };
 
 struct UnknownStruct3
@@ -18,29 +54,31 @@ struct UnknownStruct3
     u8 filler1[0xB];
 };
 
+extern u8 unk_2000000[];
 extern u16 gUnknown_02024A6A[4];
 extern u8 gUnknown_02024BE0[];
 extern u8 gUnknown_02024C07;
 extern u8 gUnknown_02024C08;
-extern const u8 *gUnknown_0202F7A4;
-extern const u8 *gUnknown_0202F7A8;
-extern void (*gUnknown_0202F7AC)(void);
-extern s8 gUnknown_0202F7B0;
-extern u8 gUnknown_0202F7B1;
-extern u8 gUnknown_0202F7B2;
-extern u8 gUnknown_0202F7B3;
-extern u32 gUnknown_0202F7B4;
-extern u32 gUnknown_0202F7B8;
-extern u16 gUnknown_0202F7BC;
-extern u8 gUnknown_0202F7BE;
-extern u8 gUnknown_0202F7C2[];
-extern u8 gUnknown_0202F7C4;
-extern u8 gUnknown_0202F7C5;
-extern u16 gUnknown_0202F7C6;
-extern u8 gUnknown_0202F7C8;
-extern u8 gUnknown_0202F7C9;
-extern u16 gUnknown_0202F7CA[4];
-extern u8 gUnknown_0202F7D2;
+EWRAM_DATA const u8 *gBattleAnimScriptPtr = NULL;
+EWRAM_DATA const u8 *gBattleAnimScriptRetAddr = NULL;
+EWRAM_DATA void (*gUnknown_0202F7AC)(void) = NULL;
+EWRAM_DATA s8 gUnknown_0202F7B0 = 0;
+EWRAM_DATA u8 gUnknown_0202F7B1 = 0;
+EWRAM_DATA u8 gUnknown_0202F7B2 = 0;
+EWRAM_DATA u8 gUnknown_0202F7B3 = 0;
+EWRAM_DATA u32 gUnknown_0202F7B4 = 0;
+EWRAM_DATA u32 gUnknown_0202F7B8 = 0;
+EWRAM_DATA u16 gUnknown_0202F7BC = 0;
+EWRAM_DATA u8 gUnknown_0202F7BE = 0;
+EWRAM_DATA u16 gUnknown_0202F7C0 = 0;
+EWRAM_DATA u8 gUnknown_0202F7C2[2] = {0};
+EWRAM_DATA u8 gUnknown_0202F7C4 = 0;
+EWRAM_DATA u8 gUnknown_0202F7C5 = 0;
+EWRAM_DATA u16 gUnknown_0202F7C6 = 0;
+EWRAM_DATA u8 gUnknown_0202F7C8 = 0;
+EWRAM_DATA u8 gUnknown_0202F7C9 = 0;
+EWRAM_DATA u16 gUnknown_0202F7CA[4] = {0};
+EWRAM_DATA u8 gUnknown_0202F7D2 = 0;
 extern u16 gUnknown_030041B4;
 extern u16 gUnknown_03004200;
 extern u16 gUnknown_03004240;
@@ -57,18 +95,135 @@ extern struct MusicPlayerInfo gMPlay_SE1;
 extern struct MusicPlayerInfo gMPlay_SE2;
 
 extern const u16 gUnknown_081C7160[];
-extern void (*gUnknown_0837F4B8[])(void);
 extern const u8 *const gBattleAnims_Moves[];
 extern const struct SpriteSheet gBattleAnimPicTable[];
 extern const struct SpritePalette gBattleAnimPaletteTable[];
+extern const struct BattleAnimBackground gBattleAnimBackgroundTable[];
 
-extern u8 unk_2000000[];
+extern void sub_8079E24();
+extern void sub_8043EB4();
+extern u8 sub_8079E90();
+extern u8 sub_8077ABC();
+extern u8 sub_8078874(u8);
+extern void sub_8078914();
+extern u8 sub_80AEB1C();
+extern void sub_80E4EF8(int, int, int, int, u16, u8, int);
+extern void sub_800D238();
+extern u8 sub_80789BC();
+extern void sub_80AB2AC(void);
+extern void sub_800D7B8(void);
 
-#define EWRAM_14800 ((u16 *)(unk_2000000 + 0x14800))
-#define EWRAM_17800 ((struct UnknownStruct1 *)(unk_2000000 + 0x17800))
-#define EWRAM_17810 ((struct UnknownStruct3 *)(unk_2000000 + 0x17810))
-#define EWRAM_18000 ((u16 *)(unk_2000000 + 0x18000))
-#define EWRAM_19348 (*(u16 *)(unk_2000000 + 0x19348))
+void move_something(const u8 *const moveAnims[], u16 b, u8 c);
+static void sub_80759D0(void);
+static void ScriptCmd_loadsprite(void);
+static void ScriptCmd_unloadsprite(void);
+static void ScriptCmd_sprite(void);
+static void ScriptCmd_createtask(void);
+static void ScriptCmd_delay(void);
+static void ScriptCmd_wait(void);
+static void ScriptCmd_hang1(void);
+static void ScriptCmd_hang2(void);
+static void ScriptCmd_end(void);
+static void ScriptCmd_playse(void);
+static void ScriptCmd_monbg(void);
+bool8 b_side_obj__get_some_boolean(u8 a);
+void sub_8076034(u8, u8);
+static void sub_8076380(void);
+static void task_pA_ma0A_obj_to_bg_pal(u8);
+static void ScriptCmd_clearmonbg(void);
+static void sub_807672C(u8);
+static void sub_80767C4(void);
+static void ma23_8073484(void);
+static void sub_80769A4(u8);
+static void ScriptCmd_setalpha(void);
+static void sub_8076A78(void);
+static void ScriptCmd_blendoff(void);
+static void ScriptCmd_call(void);
+static void ScriptCmd_return(void);
+static void ScriptCmd_setvar(void);
+static void ScriptCmd_ifelse(void);
+static void ScriptCmd_jumpif(void);
+static void ScriptCmd_jump(void);
+u8 sub_8076BE0(void);
+static void ScriptCmd_fadetobg(void);
+static void sub_8076C4C(void);
+static void task_p5_load_battle_screen_elements(u8);
+static void sub_8076DB8(u16);
+static void dp01t_11_3_message_for_player_only(void);
+static void ScriptCmd_restorebg(void);
+static void ScriptCmd_waitbgfadeout(void);
+static void ScriptCmd_waitbgfadein(void);
+static void ScriptCmd_changebg(void);
+void ma19_08073BC8(void);
+void ma1A_8073C00(void);
+void ma1B_8073C2C(void);
+void ma1C_8073ED0(void);
+void ma1D_08073FB4(void);
+void sub_8077610(void);
+void ma20_wait_for_something(void);
+void ma21_08074164(void);
+void sub_807775C(void);
+void sub_8077320(void);
+void sub_80773B4(void);
+void sub_807779C(void);
+void sub_8077808(void);
+void sub_807784C(void);
+void ma2B_make_side_invisible(void);
+void ma2C_make_side_visible(void);
+void sub_807794C(void);
+void sub_80779FC(void);
+void ma2F_stop_music(void);
+
+static void (*const sScriptCmdTable[])(void) = {
+    ScriptCmd_loadsprite,
+    ScriptCmd_unloadsprite,
+    ScriptCmd_sprite,
+    ScriptCmd_createtask,
+    ScriptCmd_delay,
+    ScriptCmd_wait,
+    ScriptCmd_hang1,
+    ScriptCmd_hang2,
+    ScriptCmd_end,
+    ScriptCmd_playse,
+    ScriptCmd_monbg,
+    ScriptCmd_clearmonbg,
+    ScriptCmd_setalpha,
+    ScriptCmd_blendoff,
+    ScriptCmd_call,
+    ScriptCmd_return,
+    ScriptCmd_setvar,
+    ScriptCmd_ifelse,
+    ScriptCmd_jumpif,
+    ScriptCmd_jump,
+    ScriptCmd_fadetobg,
+    ScriptCmd_restorebg,
+    ScriptCmd_waitbgfadeout,
+    ScriptCmd_waitbgfadein,
+    ScriptCmd_changebg,
+    ma19_08073BC8,
+    ma1A_8073C00,
+    ma1B_8073C2C,
+    ma1C_8073ED0,
+    ma1D_08073FB4,
+    sub_8076A78,
+    sub_8077610,
+    ma20_wait_for_something,
+    ma21_08074164,
+    sub_80767C4,
+    ma23_8073484,
+    sub_807775C,
+    sub_8076C4C,
+    sub_8077320,
+    sub_80773B4,
+    sub_807779C,
+    sub_8077808,
+    sub_807784C,
+    ma2B_make_side_invisible,
+    ma2C_make_side_visible,
+    sub_807794C,
+    sub_80779FC,
+    ma2F_stop_music,
+};
 
 void sub_8075624(void)
 {
@@ -96,19 +251,12 @@ void sub_8075624(void)
     gUnknown_0202F7D2 = 0;
 }
 
-extern void move_something(const u8 *const moveAnims[], u16 b, u8 c);
-
 void move_anim_start_t1(u16 a)
 {
     gUnknown_0202F7C8 = gUnknown_02024C07;
     gUnknown_0202F7C9 = gUnknown_02024C08;
     move_something(gBattleAnims_Moves, a, 1);
 }
-
-extern u8 sub_8076BE0(void);
-extern void sub_8079E24();
-extern void sub_8043EB4();
-extern void sub_80759D0(void);
 
 void move_something(const u8 *const moveAnims[], u16 b, u8 c)
 {
@@ -139,7 +287,7 @@ void move_something(const u8 *const moveAnims[], u16 b, u8 c)
         gBattleAnimArgs[i] = 0;
     gUnknown_0202F7C2[0] = 0xFF;
     gUnknown_0202F7C2[1] = -1;
-    gUnknown_0202F7A4 = moveAnims[b];
+    gBattleAnimScriptPtr = moveAnims[b];
     gUnknown_0202F7B1 = 1;
     gUnknown_0202F7B0 = 0;
     gUnknown_0202F7AC = sub_80759D0;
@@ -185,7 +333,7 @@ void move_anim_related_task_del(u8 taskId)
     gUnknown_0202F7B3--;
 }
 
-void sub_8075940(u16 a)
+static void sub_8075940(u16 a)
 {
     s32 i;
     
@@ -199,7 +347,7 @@ void sub_8075940(u16 a)
     }
 }
 
-void sub_8075970(u16 a)
+static void sub_8075970(u16 a)
 {
     s32 i;
     
@@ -213,7 +361,7 @@ void sub_8075970(u16 a)
     }
 }
 
-void move_anim_waiter(void)
+static void move_anim_waiter(void)
 {
     if (gUnknown_0202F7B0 <= 0)
     {
@@ -226,46 +374,42 @@ void move_anim_waiter(void)
     }
 }
 
-void sub_80759D0(void)
+static void sub_80759D0(void)
 {
     do
     {
-        gUnknown_0837F4B8[*gUnknown_0202F7A4]();
+        sScriptCmdTable[SCRIPT_READ_8(gBattleAnimScriptPtr)]();
     } while (gUnknown_0202F7B0 == 0 && gUnknown_0202F7B1 != 0);
 }
 
-void ma00_load_graphics(void)
+static void ScriptCmd_loadsprite(void)
 {
-    u32 r4;
+    u16 r4;
     
-    //TODO: Clean this up
-    gUnknown_0202F7A4++;
-    r4 = gUnknown_0202F7A4[0] | (gUnknown_0202F7A4[1] << 8);
+    gBattleAnimScriptPtr++;
+    r4 = SCRIPT_READ_16(gBattleAnimScriptPtr);
     LoadCompressedObjectPic(&gBattleAnimPicTable[r4 - 10000]);
     LoadCompressedObjectPalette(&gBattleAnimPaletteTable[r4 - 10000]);
-    gUnknown_0202F7A4 += 2;
+    gBattleAnimScriptPtr += 2;
     sub_8075940(r4 - 10000);
     gUnknown_0202F7B0 = 1;
     gUnknown_0202F7AC = move_anim_waiter;
 }
 
-void ma01_080728D0(void)
+static void ScriptCmd_unloadsprite(void)
 {
-    u32 r4;
+    u16 r4;
     
-    gUnknown_0202F7A4++;
-    r4 = gUnknown_0202F7A4[0] | (gUnknown_0202F7A4[1] << 8);
+    gBattleAnimScriptPtr++;
+    r4 = SCRIPT_READ_16(gBattleAnimScriptPtr);
     FreeSpriteTilesByTag(gBattleAnimPicTable[r4 - 10000].tag);
     FreeSpritePaletteByTag(gBattleAnimPicTable[r4 - 10000].tag);
-    gUnknown_0202F7A4 += 2;
+    gBattleAnimScriptPtr += 2;
     sub_8075970(r4 - 10000);
 }
 
-extern u8 sub_8079E90();
-extern u8 sub_8077ABC();
-
 #ifdef NONMATCHING
-void ma02_instanciate_template(void)
+static void ScriptCmd_sprite(void)
 {
     s32 i;
     struct SpriteTemplate *r7;
@@ -276,17 +420,17 @@ void ma02_instanciate_template(void)
     u8 r2;
     s8 r1;
     
-    gUnknown_0202F7A4++;
-    r7 = (struct SpriteTemplate *)(gUnknown_0202F7A4[0] + (gUnknown_0202F7A4[1] << 8) + (gUnknown_0202F7A4[2] << 16) + (gUnknown_0202F7A4[3] << 24));
-    gUnknown_0202F7A4 += 4;
-    r4 = *gUnknown_0202F7A4;
-    gUnknown_0202F7A4++;
-    r0 = *gUnknown_0202F7A4;
-    gUnknown_0202F7A4++;
+    gBattleAnimScriptPtr++;
+    r7 = (struct SpriteTemplate *)(SCRIPT_READ_32(gBattleAnimScriptPtr));
+    gBattleAnimScriptPtr += 4;
+    r4 = SCRIPT_READ_8(gBattleAnimScriptPtr);
+    gBattleAnimScriptPtr++;
+    r0 = SCRIPT_READ_8(gBattleAnimScriptPtr);
+    gBattleAnimScriptPtr++;
     for (i = 0; i < r0; i++)
     {
-        gBattleAnimArgs[i] = gUnknown_0202F7A4[0] | (gUnknown_0202F7A4[1] << 8);
-        gUnknown_0202F7A4 += 2;
+        gBattleAnimArgs[i] = SCRIPT_READ_16(gBattleAnimScriptPtr);
+        gBattleAnimScriptPtr += 2;
     }
     if (r4 & 0x80)
     {
@@ -320,11 +464,11 @@ void ma02_instanciate_template(void)
 }
 #else
 __attribute__((naked))
-void ma02_instanciate_template(void)
+static void ScriptCmd_sprite(void)
 {
     asm(".syntax unified\n\
     push {r4-r7,lr}\n\
-    ldr r5, _08075B2C @ =gUnknown_0202F7A4\n\
+    ldr r5, _08075B2C @ =gBattleAnimScriptPtr\n\
     ldr r1, [r5]\n\
     adds r3, r1, 0x1\n\
     str r3, [r5]\n\
@@ -377,7 +521,7 @@ _08075B14:\n\
     subs r0, 0x40\n\
     b _08075B36\n\
     .align 2, 0\n\
-_08075B2C: .4byte gUnknown_0202F7A4\n\
+_08075B2C: .4byte gBattleAnimScriptPtr\n\
 _08075B30: .4byte gBattleAnimArgs\n\
 _08075B34:\n\
     negs r0, r4\n\
@@ -449,46 +593,46 @@ _08075BB4: .4byte gUnknown_0202F7B2\n\
 }
 #endif
 
-void sub_8075BB8(void)
+static void ScriptCmd_createtask(void)
 {
     TaskFunc taskFunc;
     u8 taskPriority;
     u8 taskId;
-    u8 r0;
+    u8 numArgs;
     s32 i;
     
-    gUnknown_0202F7A4++;
-    taskFunc = (TaskFunc)(gUnknown_0202F7A4[0] + (gUnknown_0202F7A4[1] << 8) + (gUnknown_0202F7A4[2] << 16) + (gUnknown_0202F7A4[3] << 24));
-    gUnknown_0202F7A4 += 4;
-    taskPriority = *gUnknown_0202F7A4;
-    gUnknown_0202F7A4++;
-    r0 = *gUnknown_0202F7A4;
-    gUnknown_0202F7A4++;
-    for (i = 0; i < r0; i++)
+    gBattleAnimScriptPtr++;
+    taskFunc = (TaskFunc)SCRIPT_READ_32(gBattleAnimScriptPtr);
+    gBattleAnimScriptPtr += 4;
+    taskPriority = SCRIPT_READ_8(gBattleAnimScriptPtr);
+    gBattleAnimScriptPtr++;
+    numArgs = SCRIPT_READ_8(gBattleAnimScriptPtr);
+    gBattleAnimScriptPtr++;
+    for (i = 0; i < numArgs; i++)
     {
-        gBattleAnimArgs[i] = gUnknown_0202F7A4[0] | (gUnknown_0202F7A4[1] << 8);
-        gUnknown_0202F7A4 += 2;
+        gBattleAnimArgs[i] = SCRIPT_READ_16(gBattleAnimScriptPtr);
+        gBattleAnimScriptPtr += 2;
     }
     taskId = CreateTask(taskFunc, taskPriority);
     taskFunc(taskId);
     gUnknown_0202F7B2++;
 }
 
-void ma04_wait_countdown(void)
+static void ScriptCmd_delay(void)
 {
-    gUnknown_0202F7A4++;
-    gUnknown_0202F7B0 = *gUnknown_0202F7A4;
+    gBattleAnimScriptPtr++;
+    gUnknown_0202F7B0 = SCRIPT_READ_8(gBattleAnimScriptPtr);
     if (gUnknown_0202F7B0 == 0)
         gUnknown_0202F7B0 = -1;
-    gUnknown_0202F7A4++;
+    gBattleAnimScriptPtr++;
     gUnknown_0202F7AC = move_anim_waiter;
 }
 
-void sub_8075C74(void)
+static void ScriptCmd_wait(void)
 {
     if (gUnknown_0202F7B2 == 0)
     {
-        gUnknown_0202F7A4++;
+        gBattleAnimScriptPtr++;
         gUnknown_0202F7B0 = 0;
     }
     else
@@ -497,15 +641,15 @@ void sub_8075C74(void)
     }
 }
 
-void nullsub_53(void)
+static void ScriptCmd_hang1(void)
 {
 }
 
-void nullsub_88(void)
+static void ScriptCmd_hang2(void)
 {
 }
 
-void sub_8075CB0(void)
+static void ScriptCmd_end(void)
 {
     s32 i;
     int zero = 0;
@@ -554,18 +698,14 @@ void sub_8075CB0(void)
     }
 }
 
-void ma09_play_sound(void)
+static void ScriptCmd_playse(void)
 {
-    gUnknown_0202F7A4++;
-    PlaySE(gUnknown_0202F7A4[0] | (gUnknown_0202F7A4[1] << 8));
-    gUnknown_0202F7A4 += 2;
+    gBattleAnimScriptPtr++;
+    PlaySE(SCRIPT_READ_16(gBattleAnimScriptPtr));
+    gBattleAnimScriptPtr += 2;
 }
 
-extern void task_pA_ma0A_obj_to_bg_pal(u8);
-extern bool8 b_side_obj__get_some_boolean(u8);
-extern void sub_8076034(u8, u8);
-
-void sub_8075DE0(void)
+static void ScriptCmd_monbg(void)
 {
     u8 r6;
     u8 r5;
@@ -574,8 +714,8 @@ void sub_8075DE0(void)
     u16 r4;
     u8 taskId;
     
-    gUnknown_0202F7A4++;
-    r6 = *gUnknown_0202F7A4;
+    gBattleAnimScriptPtr++;
+    r6 = SCRIPT_READ_8(gBattleAnimScriptPtr);
     if (r6 == 0)
         r6 = 2;
     else if (r6 == 1)
@@ -642,10 +782,8 @@ void sub_8075DE0(void)
         gTasks[taskId].data[6] = r5;
         gUnknown_0202F7C2[1] = taskId;
     }
-    gUnknown_0202F7A4++;
+    gBattleAnimScriptPtr++;
 }
-
-extern u8 sub_8078874(u8);
 
 #ifdef NONMATCHING
 bool8 b_side_obj__get_some_boolean(u8 a)
@@ -734,30 +872,6 @@ _0807602E:\n\
     .syntax divided\n");
 }
 #endif
-
-struct UnknownStruct2
-{
-    void *unk0;
-    u16 *unk4;
-    u8 unk8;
-};
-
-struct BGCntrlBitfield
-{
-    volatile u16 priority:2;
-    volatile u16 charBaseBlock:2;
-    volatile u16 field_0_2:4;
-    volatile u16 field_1_0:5;
-    volatile u16 areaOverflowMode:1;
-    volatile u16 screenSize:2;
-};
-
-#define REG_BGCNT_BITFIELD(n) (*(struct BGCntrlBitfield *)REG_ADDR_BG##n##CNT)
-
-extern void sub_8078914();
-extern u8 sub_80AEB1C();
-extern void sub_8076380(void);
-extern void sub_80E4EF8(int, int, int, int, u16, u8, int);
 
 void sub_8076034(u8 a, u8 b)
 {
@@ -862,7 +976,7 @@ void sub_8076034(u8 a, u8 b)
     }
 }
 
-void sub_8076380(void)
+static void sub_8076380(void)
 {
     int i;
     int j;
@@ -967,7 +1081,7 @@ void sub_8076464(u8 a)
     }
 }
 
-void task_pA_ma0A_obj_to_bg_pal(u8 taskId)
+static void task_pA_ma0A_obj_to_bg_pal(u8 taskId)
 {
     u8 r4;
     u8 r6;
@@ -1004,16 +1118,14 @@ void task_pA_ma0A_obj_to_bg_pal(u8 taskId)
     }
 }
 
-extern void sub_807672C(u8);
-
-void ma0B_0807324C(void)
+static void ScriptCmd_clearmonbg(void)
 {
     u8 r4;
     u8 r5;
     u8 taskId;
     
-    gUnknown_0202F7A4++;
-    r4 = *gUnknown_0202F7A4;
+    gBattleAnimScriptPtr++;
+    r4 = SCRIPT_READ_8(gBattleAnimScriptPtr);
     if (r4 == 0)
         r4 = 2;
     else if (r4 == 1)
@@ -1031,10 +1143,10 @@ void ma0B_0807324C(void)
     taskId = CreateTask(sub_807672C, 5);
     gTasks[taskId].data[0] = r4;
     gTasks[taskId].data[2] = r5;
-    gUnknown_0202F7A4++;
+    gBattleAnimScriptPtr++;
 }
 
-void sub_807672C(u8 taskId)
+static void sub_807672C(u8 taskId)
 {
     u8 var;
     u8 r4;
@@ -1064,15 +1176,15 @@ void sub_807672C(u8 taskId)
     }
 }
 
-void sub_80767C4(void)
+static void sub_80767C4(void)
 {
     u8 r5;
     u8 r4;
     u8 r0;
     u8 r1;
     
-    gUnknown_0202F7A4++;
-    r5 = *gUnknown_0202F7A4;
+    gBattleAnimScriptPtr++;
+    r5 = SCRIPT_READ_8(gBattleAnimScriptPtr);
     if (r5 == 0)
         r5 = 2;
     else if (r5 == 1)
@@ -1104,19 +1216,17 @@ void sub_80767C4(void)
         sub_8076034(r4, r1);
         gSprites[gUnknown_02024BE0[r4]].invisible = FALSE;
     }
-    gUnknown_0202F7A4++;
+    gBattleAnimScriptPtr++;
 }
 
-extern void sub_80769A4(u8);
-
-void ma23_8073484(void)
+static void ma23_8073484(void)
 {
     u8 r5;
     u8 r6;
     u8 taskId;
     
-    gUnknown_0202F7A4++;
-    r5 = *gUnknown_0202F7A4;
+    gBattleAnimScriptPtr++;
+    r5 = SCRIPT_READ_8(gBattleAnimScriptPtr);
     if (r5 == 0)
         r5 = 2;
     else if (r5 == 1)
@@ -1134,10 +1244,10 @@ void ma23_8073484(void)
     taskId = CreateTask(sub_80769A4, 5);
     gTasks[taskId].data[0] = r5;
     gTasks[taskId].data[2] = r6;
-    gUnknown_0202F7A4++;
+    gBattleAnimScriptPtr++;
 }
 
-void sub_80769A4(u8 taskId)
+static void sub_80769A4(u8 taskId)
 {
     u8 r0;
     u8 r4;
@@ -1161,104 +1271,102 @@ void sub_80769A4(u8 taskId)
     }
 }
 
-void sub_8076A3C(void)
+static void ScriptCmd_setalpha(void)
 {
     u16 r3;
     u16 r1;
     
-    gUnknown_0202F7A4++;
-    r3 = *(gUnknown_0202F7A4++);
-    r1 = *(gUnknown_0202F7A4++) << 8;
+    gBattleAnimScriptPtr++;
+    r3 = *(gBattleAnimScriptPtr++);
+    r1 = *(gBattleAnimScriptPtr++) << 8;
     REG_BLDCNT = 0x3F40;
     REG_BLDALPHA = r3 | r1;
 }
 
-void sub_8076A78(void)
+static void sub_8076A78(void)
 {
     u16 r3;
     u16 r1;
     
-    gUnknown_0202F7A4++;
-    r3 = *(gUnknown_0202F7A4++);
-    r1 = *(gUnknown_0202F7A4++) << 8;
+    gBattleAnimScriptPtr++;
+    r3 = *(gBattleAnimScriptPtr++);
+    r1 = *(gBattleAnimScriptPtr++) << 8;
     REG_BLDCNT = r3 | r1;
 }
 
-void sub_8076AA0(void)
+static void ScriptCmd_blendoff(void)
 {
-    gUnknown_0202F7A4++;
+    gBattleAnimScriptPtr++;
     REG_BLDCNT = 0;
     REG_BLDALPHA = 0;
 }
 
-void ma0E_call(void)
+static void ScriptCmd_call(void)
 {
     u32 addr;
     
-    gUnknown_0202F7A4++;
-    gUnknown_0202F7A8 = gUnknown_0202F7A4 + 4;  //store return address
-    addr = gUnknown_0202F7A4[0] + (gUnknown_0202F7A4[1] << 8) + (gUnknown_0202F7A4[2] << 16) + (gUnknown_0202F7A4[3] << 24);
-    gUnknown_0202F7A4 = (u8 *)addr;
+    gBattleAnimScriptPtr++;
+    gBattleAnimScriptRetAddr = gBattleAnimScriptPtr + 4;
+    addr = SCRIPT_READ_32(gBattleAnimScriptPtr);
+    gBattleAnimScriptPtr = (u8 *)addr;
 }
 
-//script return
-void sub_8076AF0(void)
+static void ScriptCmd_return(void)
 {
-    gUnknown_0202F7A4 = gUnknown_0202F7A8;
+    gBattleAnimScriptPtr = gBattleAnimScriptRetAddr;
 }
 
-void ma10_080736AC(void)
+static void ScriptCmd_setvar(void)
 {
-    const u8 *addr = gUnknown_0202F7A4;
+    const u8 *addr = gBattleAnimScriptPtr;
     u16 r4;
     u8 r2;
     
-    gUnknown_0202F7A4++;
-    r2 = *(gUnknown_0202F7A4++);
-    r4 = gUnknown_0202F7A4[0] | (gUnknown_0202F7A4[1] << 8);
-    gUnknown_0202F7A4 = addr + 4;
+    gBattleAnimScriptPtr++;
+    r2 = SCRIPT_READ_8(gBattleAnimScriptPtr);
+    gBattleAnimScriptPtr++;
+    r4 = SCRIPT_READ_16(gBattleAnimScriptPtr);
+    gBattleAnimScriptPtr = addr + 4;
     gBattleAnimArgs[r2] = r4;
 }
 
-void ma11_if_else(void)
+static void ScriptCmd_ifelse(void)
 {
     u32 addr;
     
-    gUnknown_0202F7A4++;
+    gBattleAnimScriptPtr++;
     if (gUnknown_0202F7C4 & 1)
-        gUnknown_0202F7A4 += 4;
-    addr = gUnknown_0202F7A4[0] + (gUnknown_0202F7A4[1] << 8) + (gUnknown_0202F7A4[2] << 16) + (gUnknown_0202F7A4[3] << 24);
-    gUnknown_0202F7A4 = (u8 *)addr;
+        gBattleAnimScriptPtr += 4;
+    addr = SCRIPT_READ_32(gBattleAnimScriptPtr);
+    gBattleAnimScriptPtr = (u8 *)addr;
 }
 
-void ma12_cond_if(void)
+static void ScriptCmd_jumpif(void)
 {
-    const u8 *r4 = gUnknown_0202F7A4;
     u8 r1;
     u32 addr;
     
-    gUnknown_0202F7A4++;
-    r1 = *gUnknown_0202F7A4;
-    gUnknown_0202F7A4++;
+    gBattleAnimScriptPtr++;
+    r1 = SCRIPT_READ_8(gBattleAnimScriptPtr);
+    gBattleAnimScriptPtr++;
     if (r1 == gUnknown_0202F7C4)
     {
-        addr = gUnknown_0202F7A4[0] + (gUnknown_0202F7A4[1] << 8) + (gUnknown_0202F7A4[2] << 16) + (gUnknown_0202F7A4[3] << 24);
-        gUnknown_0202F7A4 = (u8 *)addr;
+        addr = SCRIPT_READ_32(gBattleAnimScriptPtr);
+        gBattleAnimScriptPtr = (u8 *)addr;
     }
     else
     {
-        gUnknown_0202F7A4 = r4 + 6;
+        gBattleAnimScriptPtr += 4;
     }
 }
 
-//script goto
-void sub_8076BBC(void)
+static void ScriptCmd_jump(void)
 {
     u32 addr;
     
-    gUnknown_0202F7A4++;
-    addr = gUnknown_0202F7A4[0] + (gUnknown_0202F7A4[1] << 8) + (gUnknown_0202F7A4[2] << 16) + (gUnknown_0202F7A4[3] << 24);
-    gUnknown_0202F7A4 = (u8 *)addr;
+    gBattleAnimScriptPtr++;
+    addr = SCRIPT_READ_32(gBattleAnimScriptPtr);
+    gBattleAnimScriptPtr = (u8 *)addr;
 }
 
 u8 sub_8076BE0(void)
@@ -1269,32 +1377,31 @@ u8 sub_8076BE0(void)
         return FALSE;
 }
 
-extern void task_p5_load_battle_screen_elements(u8);
-
-void ma14_load_background(void)
+static void ScriptCmd_fadetobg(void)
 {
     u8 r4;
     u8 taskId;
     
-    gUnknown_0202F7A4++;
-    r4 = *(gUnknown_0202F7A4++);
+    gBattleAnimScriptPtr++;
+    r4 = SCRIPT_READ_8(gBattleAnimScriptPtr);
+    gBattleAnimScriptPtr++;
     taskId = CreateTask(task_p5_load_battle_screen_elements, 5);
     gTasks[taskId].data[0] = r4;
     gUnknown_0202F7C5 = 1;
 }
 
-void sub_8076C4C(void)
+static void sub_8076C4C(void)
 {
     u8 r8;
     u8 r7;
     u8 r6;
     u8 taskId;
     
-    gUnknown_0202F7A4++;
-    r8 = gUnknown_0202F7A4[0];
-    r7 = gUnknown_0202F7A4[1];
-    r6 = gUnknown_0202F7A4[2];
-    gUnknown_0202F7A4 += 3;
+    gBattleAnimScriptPtr++;
+    r8 = gBattleAnimScriptPtr[0];
+    r7 = gBattleAnimScriptPtr[1];
+    r6 = gBattleAnimScriptPtr[2];
+    gBattleAnimScriptPtr += 3;
     taskId = CreateTask(task_p5_load_battle_screen_elements, 5);
     if (sub_8076BE0() != 0)
         gTasks[taskId].data[0] = r6;
@@ -1305,10 +1412,7 @@ void sub_8076C4C(void)
     gUnknown_0202F7C5 = 1;
 }
 
-extern void sub_8076DB8(u16);
-extern void dp01t_11_3_message_for_player_only(void);
-
-void task_p5_load_battle_screen_elements(u8 taskId)
+static void task_p5_load_battle_screen_elements(u8 taskId)
 {
     if (gTasks[taskId].data[10] == 0)
     {
@@ -1344,19 +1448,7 @@ void task_p5_load_battle_screen_elements(u8 taskId)
     }
 }
 
-struct BattleAnimBackground
-{
-    void *image;
-    void *palette;
-    void *tilemap;
-};
-
-extern const struct BattleAnimBackground gBattleAnimBackgroundTable[];
-
-extern void sub_800D238();
-extern u8 sub_80789BC();
-
-void sub_8076DB8(u16 a)
+static void sub_8076DB8(u16 a)
 {
     if (sub_8076BE0())
     {
@@ -1380,10 +1472,7 @@ void sub_8076DB8(u16 a)
     }
 }
 
-extern void sub_80AB2AC(void);
-extern void sub_800D7B8(void);
-
-void dp01t_11_3_message_for_player_only(void)
+static void dp01t_11_3_message_for_player_only(void)
 {
     if (sub_8076BE0())
         sub_80AB2AC();
@@ -1391,21 +1480,21 @@ void dp01t_11_3_message_for_player_only(void)
         sub_800D7B8();
 }
 
-void ma15_load_battle_screen_elements(void)
+static void ScriptCmd_restorebg(void)
 {
     u8 taskId;
     
-    gUnknown_0202F7A4++;
+    gBattleAnimScriptPtr++;
     taskId = CreateTask(task_p5_load_battle_screen_elements, 5);
     gTasks[taskId].data[0] = 0xFFFF;
     gUnknown_0202F7C5 = 1;
 }
 
-void ma16_wait_for_battle_screen_elements_s2(void)
+static void ScriptCmd_waitbgfadeout(void)
 {
     if (gUnknown_0202F7C5 == 2)
     {
-        gUnknown_0202F7A4++;
+        gBattleAnimScriptPtr++;
         gUnknown_0202F7B0 = 0;
     }
     else
@@ -1414,11 +1503,11 @@ void ma16_wait_for_battle_screen_elements_s2(void)
     }
 }
 
-void sub_8076F44(void)
+static void ScriptCmd_waitbgfadein(void)
 {
     if (gUnknown_0202F7C5 == 0)
     {
-        gUnknown_0202F7A4++;
+        gBattleAnimScriptPtr++;
         gUnknown_0202F7B0 = 0;
     }
     else
@@ -1427,11 +1516,11 @@ void sub_8076F44(void)
     }
 }
 
-void ma18_load_background_probably(void)
+static void ScriptCmd_changebg(void)
 {
-    gUnknown_0202F7A4++;
-    sub_8076DB8(*gUnknown_0202F7A4);
-    gUnknown_0202F7A4++;
+    gBattleAnimScriptPtr++;
+    sub_8076DB8(SCRIPT_READ_8(gBattleAnimScriptPtr));
+    gBattleAnimScriptPtr++;
 }
 
 /*

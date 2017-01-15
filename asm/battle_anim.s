@@ -258,7 +258,7 @@ _08077162:
 	thumb_func_start ma19_08073BC8
 ma19_08073BC8: @ 807716C
 	push {r4,r5,lr}
-	ldr r5, _080771A0 @ =gUnknown_0202F7A4
+	ldr r5, _080771A0 @ =gBattleAnimScriptPtr
 	ldr r0, [r5]
 	adds r1, r0, 0x1
 	str r1, [r5]
@@ -281,13 +281,13 @@ ma19_08073BC8: @ 807716C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080771A0: .4byte gUnknown_0202F7A4
+_080771A0: .4byte gBattleAnimScriptPtr
 	thumb_func_end ma19_08073BC8
 
 	thumb_func_start ma1A_8073C00
 ma1A_8073C00: @ 80771A4
 	push {r4,lr}
-	ldr r4, _080771CC @ =gUnknown_0202F7A4
+	ldr r4, _080771CC @ =gBattleAnimScriptPtr
 	ldr r1, [r4]
 	adds r0, r1, 0x1
 	str r0, [r4]
@@ -304,7 +304,7 @@ ma1A_8073C00: @ 80771A4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080771CC: .4byte gUnknown_0202F7A4
+_080771CC: .4byte gBattleAnimScriptPtr
 	thumb_func_end ma1A_8073C00
 
 	thumb_func_start ma1B_8073C2C
@@ -314,7 +314,7 @@ ma1B_8073C2C: @ 80771D0
 	mov r6, r9
 	mov r5, r8
 	push {r5-r7}
-	ldr r0, _08077280 @ =gUnknown_0202F7A4
+	ldr r0, _08077280 @ =gBattleAnimScriptPtr
 	mov r10, r0
 	ldr r0, [r0]
 	adds r1, r0, 0x1
@@ -393,7 +393,7 @@ ma1B_8073C2C: @ 80771D0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08077280: .4byte gUnknown_0202F7A4
+_08077280: .4byte gBattleAnimScriptPtr
 _08077284: .4byte c3_08073CEC
 _08077288: .4byte gTasks
 _0807728C: .4byte gUnknown_0202F7B3
@@ -484,7 +484,7 @@ sub_8077320: @ 8077320
 	mov r5, r9
 	mov r4, r8
 	push {r4-r6}
-	ldr r0, _080773A4 @ =gUnknown_0202F7A4
+	ldr r0, _080773A4 @ =gBattleAnimScriptPtr
 	mov r9, r0
 	ldr r0, [r0]
 	adds r1, r0, 0x1
@@ -543,7 +543,7 @@ sub_8077320: @ 8077320
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080773A4: .4byte gUnknown_0202F7A4
+_080773A4: .4byte gBattleAnimScriptPtr
 _080773A8: .4byte c3_08073CEC
 _080773AC: .4byte gTasks
 _080773B0: .4byte gUnknown_0202F7B3
@@ -556,7 +556,7 @@ sub_80773B4: @ 80773B4
 	mov r6, r9
 	mov r5, r8
 	push {r5-r7}
-	ldr r0, _08077464 @ =gUnknown_0202F7A4
+	ldr r0, _08077464 @ =gBattleAnimScriptPtr
 	mov r10, r0
 	ldr r0, [r0]
 	adds r1, r0, 0x1
@@ -635,7 +635,7 @@ sub_80773B4: @ 80773B4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08077464: .4byte gUnknown_0202F7A4
+_08077464: .4byte gBattleAnimScriptPtr
 _08077468: .4byte c3_08073CEC
 _0807746C: .4byte gTasks
 _08077470: .4byte gUnknown_0202F7B3
@@ -647,7 +647,7 @@ ma1C_8073ED0: @ 8077474
 	mov r6, r9
 	mov r5, r8
 	push {r5,r6}
-	ldr r6, _080774EC @ =gUnknown_0202F7A4
+	ldr r6, _080774EC @ =gBattleAnimScriptPtr
 	ldr r0, [r6]
 	adds r1, r0, 0x1
 	str r1, [r6]
@@ -701,7 +701,7 @@ ma1C_8073ED0: @ 8077474
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080774EC: .4byte gUnknown_0202F7A4
+_080774EC: .4byte gBattleAnimScriptPtr
 _080774F0: .4byte sub_80774FC
 _080774F4: .4byte gTasks
 _080774F8: .4byte gUnknown_0202F7B3
@@ -760,7 +760,7 @@ ma1D_08073FB4: @ 8077558
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
-	ldr r6, _080775BC @ =gUnknown_0202F7A4
+	ldr r6, _080775BC @ =gBattleAnimScriptPtr
 	ldr r0, [r6]
 	adds r1, r0, 0x1
 	str r1, [r6]
@@ -805,7 +805,7 @@ ma1D_08073FB4: @ 8077558
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080775BC: .4byte gUnknown_0202F7A4
+_080775BC: .4byte gBattleAnimScriptPtr
 _080775C0: .4byte sub_80775CC
 _080775C4: .4byte gTasks
 _080775C8: .4byte gUnknown_0202F7B3
@@ -849,7 +849,7 @@ _0807760C: .4byte gUnknown_0202F7B3
 	thumb_func_start sub_8077610
 sub_8077610: @ 8077610
 	push {r4-r6,lr}
-	ldr r4, _08077678 @ =gUnknown_0202F7A4
+	ldr r4, _08077678 @ =gBattleAnimScriptPtr
 	ldr r1, [r4]
 	adds r3, r1, 0x1
 	str r3, [r4]
@@ -901,7 +901,7 @@ _0807765A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08077678: .4byte gUnknown_0202F7A4
+_08077678: .4byte gBattleAnimScriptPtr
 _0807767C: .4byte gBattleAnimArgs
 _08077680: .4byte gUnknown_0202F7B3
 	thumb_func_end sub_8077610
@@ -953,7 +953,7 @@ _080776E4:
 	ldr r0, _080776FC @ =gUnknown_03004AF0
 	movs r2, 0
 	strh r1, [r0]
-	ldr r1, _08077700 @ =gUnknown_0202F7A4
+	ldr r1, _08077700 @ =gBattleAnimScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -965,14 +965,14 @@ _080776F6:
 	bx r0
 	.align 2, 0
 _080776FC: .4byte gUnknown_03004AF0
-_08077700: .4byte gUnknown_0202F7A4
+_08077700: .4byte gBattleAnimScriptPtr
 _08077704: .4byte gUnknown_0202F7B0
 	thumb_func_end ma20_wait_for_something
 
 	thumb_func_start ma21_08074164
 ma21_08074164: @ 8077708
 	push {r4-r6,lr}
-	ldr r5, _08077748 @ =gUnknown_0202F7A4
+	ldr r5, _08077748 @ =gBattleAnimScriptPtr
 	ldr r4, [r5]
 	adds r3, r4, 0x1
 	str r3, [r5]
@@ -1003,7 +1003,7 @@ ma21_08074164: @ 8077708
 	str r1, [r5]
 	b _08077756
 	.align 2, 0
-_08077748: .4byte gUnknown_0202F7A4
+_08077748: .4byte gBattleAnimScriptPtr
 _0807774C: .4byte gBattleAnimArgs
 _08077750:
 	adds r0, r4, 0
@@ -1018,7 +1018,7 @@ _08077756:
 	thumb_func_start sub_807775C
 sub_807775C: @ 807775C
 	push {r4,lr}
-	ldr r4, _0807778C @ =gUnknown_0202F7A4
+	ldr r4, _0807778C @ =gBattleAnimScriptPtr
 	ldr r0, [r4]
 	adds r0, 0x1
 	str r0, [r4]
@@ -1040,7 +1040,7 @@ sub_807775C: @ 807775C
 	str r1, [r4]
 	b _08077796
 	.align 2, 0
-_0807778C: .4byte gUnknown_0202F7A4
+_0807778C: .4byte gBattleAnimScriptPtr
 _08077790:
 	ldr r0, [r4]
 	adds r0, 0x4
@@ -1054,7 +1054,7 @@ _08077796:
 	thumb_func_start sub_807779C
 sub_807779C: @ 807779C
 	push {r4,lr}
-	ldr r0, _080777B0 @ =gUnknown_0202F7A4
+	ldr r0, _080777B0 @ =gBattleAnimScriptPtr
 	ldr r1, [r0]
 	ldrb r2, [r1, 0x1]
 	adds r1, 0x2
@@ -1064,7 +1064,7 @@ sub_807779C: @ 807779C
 	ldr r0, _080777B4 @ =gUnknown_0202F7C9
 	b _080777BA
 	.align 2, 0
-_080777B0: .4byte gUnknown_0202F7A4
+_080777B0: .4byte gBattleAnimScriptPtr
 _080777B4: .4byte gUnknown_0202F7C9
 _080777B8:
 	ldr r0, _080777FC @ =gUnknown_0202F7C8
@@ -1110,7 +1110,7 @@ _08077804: .4byte REG_BG2CNT
 	thumb_func_start sub_8077808
 sub_8077808: @ 8077808
 	push {lr}
-	ldr r0, _08077840 @ =gUnknown_0202F7A4
+	ldr r0, _08077840 @ =gBattleAnimScriptPtr
 	ldr r1, [r0]
 	adds r1, 0x1
 	str r1, [r0]
@@ -1137,7 +1137,7 @@ _0807783A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08077840: .4byte gUnknown_0202F7A4
+_08077840: .4byte gBattleAnimScriptPtr
 _08077844: .4byte REG_BG1CNT
 _08077848: .4byte REG_BG2CNT
 	thumb_func_end sub_8077808
@@ -1145,7 +1145,7 @@ _08077848: .4byte REG_BG2CNT
 	thumb_func_start sub_807784C
 sub_807784C: @ 807784C
 	push {r4-r7,lr}
-	ldr r1, _0807787C @ =gUnknown_0202F7A4
+	ldr r1, _0807787C @ =gBattleAnimScriptPtr
 	ldr r0, [r1]
 	ldrb r6, [r0, 0x1]
 	adds r0, 0x2
@@ -1166,7 +1166,7 @@ sub_807784C: @ 807784C
 	ldrb r0, [r5]
 	b _0807788A
 	.align 2, 0
-_0807787C: .4byte gUnknown_0202F7A4
+_0807787C: .4byte gBattleAnimScriptPtr
 _08077880: .4byte gUnknown_0202F7C8
 _08077884: .4byte gUnknown_0202F7C9
 _08077888:
@@ -1211,7 +1211,7 @@ _080778CC: .4byte REG_BG2CNT
 	thumb_func_start ma2B_make_side_invisible
 ma2B_make_side_invisible: @ 80778D0
 	push {r4,lr}
-	ldr r4, _08077904 @ =gUnknown_0202F7A4
+	ldr r4, _08077904 @ =gBattleAnimScriptPtr
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x1]
 	bl obj_id_for_side_relative_to_move
@@ -1237,14 +1237,14 @@ _080778F8:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08077904: .4byte gUnknown_0202F7A4
+_08077904: .4byte gBattleAnimScriptPtr
 _08077908: .4byte gSprites
 	thumb_func_end ma2B_make_side_invisible
 
 	thumb_func_start ma2C_make_side_visible
 ma2C_make_side_visible: @ 807790C
 	push {r4,lr}
-	ldr r4, _08077944 @ =gUnknown_0202F7A4
+	ldr r4, _08077944 @ =gBattleAnimScriptPtr
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x1]
 	bl obj_id_for_side_relative_to_move
@@ -1271,14 +1271,14 @@ _08077936:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08077944: .4byte gUnknown_0202F7A4
+_08077944: .4byte gBattleAnimScriptPtr
 _08077948: .4byte gSprites
 	thumb_func_end ma2C_make_side_visible
 
 	thumb_func_start sub_807794C
 sub_807794C: @ 807794C
 	push {r4-r7,lr}
-	ldr r1, _08077998 @ =gUnknown_0202F7A4
+	ldr r1, _08077998 @ =gBattleAnimScriptPtr
 	ldr r0, [r1]
 	ldrb r7, [r0, 0x1]
 	adds r0, 0x2
@@ -1311,7 +1311,7 @@ sub_807794C: @ 807794C
 	movs r0, 0
 	b _080779B0
 	.align 2, 0
-_08077998: .4byte gUnknown_0202F7A4
+_08077998: .4byte gBattleAnimScriptPtr
 _0807799C: .4byte gUnknown_0202F7C8
 _080779A0: .4byte gUnknown_0202F7C9
 _080779A4:
@@ -1364,7 +1364,7 @@ _080779F6:
 	thumb_func_start sub_80779FC
 sub_80779FC: @ 80779FC
 	push {r4-r7,lr}
-	ldr r1, _08077A48 @ =gUnknown_0202F7A4
+	ldr r1, _08077A48 @ =gBattleAnimScriptPtr
 	ldr r0, [r1]
 	ldrb r7, [r0, 0x1]
 	adds r0, 0x2
@@ -1397,7 +1397,7 @@ sub_80779FC: @ 80779FC
 	movs r0, 0
 	b _08077A60
 	.align 2, 0
-_08077A48: .4byte gUnknown_0202F7A4
+_08077A48: .4byte gBattleAnimScriptPtr
 _08077A4C: .4byte gUnknown_0202F7C8
 _08077A50: .4byte gUnknown_0202F7C9
 _08077A54:
@@ -1441,7 +1441,7 @@ ma2F_stop_music: @ 8077A94
 	bl m4aMPlayStop
 	ldr r0, _08077AB4 @ =gMPlay_SE2
 	bl m4aMPlayStop
-	ldr r1, _08077AB8 @ =gUnknown_0202F7A4
+	ldr r1, _08077AB8 @ =gBattleAnimScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -1450,7 +1450,7 @@ ma2F_stop_music: @ 8077A94
 	.align 2, 0
 _08077AB0: .4byte gMPlay_SE1
 _08077AB4: .4byte gMPlay_SE2
-_08077AB8: .4byte gUnknown_0202F7A4
+_08077AB8: .4byte gBattleAnimScriptPtr
 	thumb_func_end ma2F_stop_music
 
 	.align 2, 0 @ Don't pad with nop.
