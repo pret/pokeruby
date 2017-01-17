@@ -136,11 +136,11 @@ static void sub_8076380(void);
 static void task_pA_ma0A_obj_to_bg_pal(u8);
 static void ScriptCmd_clearmonbg(void);
 static void sub_807672C(u8);
-static void sub_80767C4(void);
-static void ma23_8073484(void);
+static void ScriptCmd_monbg_22(void);
+static void ScriptCmd_clearmonbg_23(void);
 static void sub_80769A4(u8);
 static void ScriptCmd_setalpha(void);
-static void sub_8076A78(void);
+static void ScriptCmd_setbldcnt(void);
 static void ScriptCmd_blendoff(void);
 static void ScriptCmd_call(void);
 static void ScriptCmd_return(void);
@@ -150,7 +150,7 @@ static void ScriptCmd_jumpif(void);
 static void ScriptCmd_jump(void);
 bool8 sub_8076BE0(void);
 static void ScriptCmd_fadetobg(void);
-static void sub_8076C4C(void);
+static void ScriptCmd_fadetobg_25(void);
 static void task_p5_load_battle_screen_elements(u8);
 static void sub_8076DB8(u16);
 static void dp01t_11_3_message_for_player_only(void);
@@ -158,28 +158,28 @@ static void ScriptCmd_restorebg(void);
 static void ScriptCmd_waitbgfadeout(void);
 static void ScriptCmd_waitbgfadein(void);
 static void ScriptCmd_changebg(void);
-static void ma19_08073BC8(void);
-static void ma1A_8073C00(void);
-static void ma1B_8073C2C(void);
+static void ScriptCmd_panse_19(void);
+static void ScriptCmd_setpan(void);
+static void ScriptCmd_panse_1B(void);
 static void c3_08073CEC(u8);
-static void sub_8077320(void);
-static void sub_80773B4(void);
-static void ma1C_8073ED0(void);
+static void ScriptCmd_panse_26(void);
+static void ScriptCmd_panse_27(void);
+static void ScriptCmd_panse_1C(void);
 static void sub_80774FC(u8);
-static void ma1D_08073FB4(void);
+static void ScriptCmd_panse_1D(void);
 static void sub_80775CC(u8);
-static void sub_8077610(void);
-static void ma20_wait_for_something(void);
-static void ma21_08074164(void);
-static void sub_807775C(void);
-static void sub_807779C(void);
-static void sub_8077808(void);
-static void sub_807784C(void);
-static void ma2B_make_side_invisible(void);
-static void ma2C_make_side_visible(void);
-static void sub_807794C(void);
-static void sub_80779FC(void);
-static void ma2F_stop_music(void);
+static void ScriptCmd_createtask_1F(void);
+static void ScriptCmd_waitsound(void);
+static void ScriptCmd_jumpvareq(void);
+static void ScriptCmd_jumpunkcond(void);
+static void ScriptCmd_monbgprio_28(void);
+static void ScriptCmd_monbgprio_29(void);
+static void ScriptCmd_monbgprio_2A(void);
+static void ScriptCmd_invisible(void);
+static void ScriptCmd_visible(void);
+static void ScriptCmd_doublebattle_2D(void);
+static void ScriptCmd_doublebattle_2E(void);
+static void ScriptCmd_stopsound(void);
 
 static void (*const sScriptCmdTable[])(void) = {
     ScriptCmd_loadsprite,
@@ -207,29 +207,29 @@ static void (*const sScriptCmdTable[])(void) = {
     ScriptCmd_waitbgfadeout,
     ScriptCmd_waitbgfadein,
     ScriptCmd_changebg,
-    ma19_08073BC8,
-    ma1A_8073C00,
-    ma1B_8073C2C,
-    ma1C_8073ED0,
-    ma1D_08073FB4,
-    sub_8076A78,
-    sub_8077610,
-    ma20_wait_for_something,
-    ma21_08074164,
-    sub_80767C4,
-    ma23_8073484,
-    sub_807775C,
-    sub_8076C4C,
-    sub_8077320,
-    sub_80773B4,
-    sub_807779C,
-    sub_8077808,
-    sub_807784C,
-    ma2B_make_side_invisible,
-    ma2C_make_side_visible,
-    sub_807794C,
-    sub_80779FC,
-    ma2F_stop_music,
+    ScriptCmd_panse_19,
+    ScriptCmd_setpan,
+    ScriptCmd_panse_1B,
+    ScriptCmd_panse_1C,
+    ScriptCmd_panse_1D,
+    ScriptCmd_setbldcnt,
+    ScriptCmd_createtask_1F,
+    ScriptCmd_waitsound,
+    ScriptCmd_jumpvareq,
+    ScriptCmd_monbg_22,
+    ScriptCmd_clearmonbg_23,
+    ScriptCmd_jumpunkcond,
+    ScriptCmd_fadetobg_25,
+    ScriptCmd_panse_26,
+    ScriptCmd_panse_27,
+    ScriptCmd_monbgprio_28,
+    ScriptCmd_monbgprio_29,
+    ScriptCmd_monbgprio_2A,
+    ScriptCmd_invisible,
+    ScriptCmd_visible,
+    ScriptCmd_doublebattle_2D,
+    ScriptCmd_doublebattle_2E,
+    ScriptCmd_stopsound,
 };
 
 void sub_8075624(void)
@@ -1179,7 +1179,7 @@ static void sub_807672C(u8 taskId)
     }
 }
 
-static void sub_80767C4(void)
+static void ScriptCmd_monbg_22(void)
 {
     u8 r5;
     u8 r4;
@@ -1222,7 +1222,7 @@ static void sub_80767C4(void)
     gBattleAnimScriptPtr++;
 }
 
-static void ma23_8073484(void)
+static void ScriptCmd_clearmonbg_23(void)
 {
     u8 r5;
     u8 r6;
@@ -1286,7 +1286,7 @@ static void ScriptCmd_setalpha(void)
     REG_BLDALPHA = r3 | r1;
 }
 
-static void sub_8076A78(void)
+static void ScriptCmd_setbldcnt(void)
 {
     u16 r3;
     u16 r1;
@@ -1394,7 +1394,7 @@ static void ScriptCmd_fadetobg(void)
     gUnknown_0202F7C5 = 1;
 }
 
-static void sub_8076C4C(void)
+static void ScriptCmd_fadetobg_25(void)
 {
     u8 r8;
     u8 r7;
@@ -1738,7 +1738,7 @@ s16 sub_807712C(s16 a, s16 b, s16 c)
     return var;
 }
 
-static void ma19_08073BC8(void)
+static void ScriptCmd_panse_19(void)
 {
     u16 r4;
     s8 r0;
@@ -1750,7 +1750,7 @@ static void ma19_08073BC8(void)
     gBattleAnimScriptPtr += 3;
 }
 
-static void ma1A_8073C00(void)
+static void ScriptCmd_setpan(void)
 {
     s8 r0;
     
@@ -1760,7 +1760,7 @@ static void ma1A_8073C00(void)
     gBattleAnimScriptPtr++;
 }
 
-static void ma1B_8073C2C(void)
+static void ScriptCmd_panse_1B(void)
 {
     u16 songNum;
     s8 r0;
@@ -1927,7 +1927,7 @@ _0807731C: .4byte gUnknown_0202F7B3\n\
 }
 #endif
 
-static void sub_8077320(void)
+static void ScriptCmd_panse_26(void)
 {
     u16 r8;
     s8 r4;
@@ -1953,7 +1953,7 @@ static void sub_8077320(void)
     gBattleAnimScriptPtr += 6;
 }
 
-static void sub_80773B4(void)
+static void ScriptCmd_panse_27(void)
 {
     u16 r9;
     u8 r4;
@@ -1985,7 +1985,7 @@ static void sub_80773B4(void)
     gBattleAnimScriptPtr += 6;
 }
 
-static void ma1C_8073ED0(void)
+static void ScriptCmd_panse_1C(void)
 {
     u16 r5;
     u8 r0;
@@ -2036,7 +2036,7 @@ static void sub_80774FC(u8 taskId)
     }
 }
 
-static void ma1D_08073FB4(void)
+static void ScriptCmd_panse_1D(void)
 {
     u16 r5;
     u8 r0;
@@ -2071,7 +2071,7 @@ static void sub_80775CC(u8 taskId)
     }
 }
 
-static void sub_8077610(void)
+static void ScriptCmd_createtask_1F(void)
 {
     TaskFunc func;
     u8 numArgs;
@@ -2093,7 +2093,7 @@ static void sub_8077610(void)
     gUnknown_0202F7B3++;
 }
 
-static void ma20_wait_for_something(void)
+static void ScriptCmd_waitsound(void)
 {
     if (gUnknown_0202F7B3 != 0)
     {
@@ -2122,7 +2122,7 @@ static void ma20_wait_for_something(void)
     }
 }
 
-static void ma21_08074164(void)
+static void ScriptCmd_jumpvareq(void)
 {
     u8 r2;
     s16 r1;
@@ -2142,7 +2142,7 @@ static void ma21_08074164(void)
     }
 }
 
-static void sub_807775C(void)
+static void ScriptCmd_jumpunkcond(void)
 {
     u8 *addr;
     
@@ -2158,7 +2158,7 @@ static void sub_807775C(void)
     }
 }
 
-static void sub_807779C(void)
+static void ScriptCmd_monbgprio_28(void)
 {
     u8 r2;
     u8 r0;
@@ -2178,7 +2178,7 @@ static void sub_807779C(void)
     }
 }
 
-static void sub_8077808(void)
+static void ScriptCmd_monbgprio_29(void)
 {
     gBattleAnimScriptPtr++;
     if (!sub_8076BE0())
@@ -2188,7 +2188,7 @@ static void sub_8077808(void)
     }
 }
 
-static void sub_807784C(void)
+static void ScriptCmd_monbgprio_2A(void)
 {
     u8 r6;
     u8 r4;
@@ -2211,7 +2211,7 @@ static void sub_807784C(void)
     }
 }
 
-static void ma2B_make_side_invisible(void)
+static void ScriptCmd_invisible(void)
 {
     u8 r0;
     u8 spriteId;
@@ -2225,7 +2225,7 @@ static void ma2B_make_side_invisible(void)
     gBattleAnimScriptPtr += 2;
 }
 
-static void ma2C_make_side_visible(void)
+static void ScriptCmd_visible(void)
 {
     u8 r0;
     u8 spriteId;
@@ -2239,7 +2239,7 @@ static void ma2C_make_side_visible(void)
     gBattleAnimScriptPtr += 2;
 }
 
-static void sub_807794C(void)
+static void ScriptCmd_doublebattle_2D(void)
 {
     u8 r7;
     u8 r4;
@@ -2273,7 +2273,7 @@ static void sub_807794C(void)
     }
 }
 
-static void sub_80779FC(void)
+static void ScriptCmd_doublebattle_2E(void)
 {
     u8 r7;
     u8 r4;
@@ -2301,7 +2301,7 @@ static void sub_80779FC(void)
     }
 }
 
-static void ma2F_stop_music(void)
+static void ScriptCmd_stopsound(void)
 {
     m4aMPlayStop(&gMPlay_SE1);
     m4aMPlayStop(&gMPlay_SE2);
