@@ -1,9 +1,9 @@
 #include "global.h"
 #include "field_camera.h"
 #include "asm.h"
+#include "asm_fieldmap.h"
 #include "berry.h"
 #include "field_player_avatar.h"
-#include "asm_fieldmap.h"
 #include "sprite.h"
 #include "text.h"
 

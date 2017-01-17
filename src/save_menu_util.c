@@ -1,10 +1,10 @@
 #include "global.h"
 #include "save_menu_util.h"
 #include "asm.h"
-#include "menu.h"
 #include "event_data.h"
-#include "string_util.h"
+#include "menu.h"
 #include "pokedex.h"
+#include "string_util.h"
 
 extern u8 gOtherText_Player[];
 extern u8 gOtherText_Badges[];

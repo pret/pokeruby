@@ -1,11 +1,11 @@
 #include "global.h"
-#include "task.h"
+#include "event_data.h"
 #include "menu.h"
 #include "palette.h"
 #include "script.h"
 #include "sound.h"
-#include "event_data.h"
 #include "sprite.h"
+#include "task.h"
 
 struct MultichoiceListStruct
 {

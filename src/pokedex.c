@@ -1,18 +1,18 @@
 #include "global.h"
 #include "pokedex.h"
 #include "asm.h"
-#include "gba/m4a_internal.h"
-#include "string_util.h"
-#include "m4a.h"
 #include "decompress.h"
+#include "event_data.h"
+#include "gba/m4a_internal.h"
+#include "m4a.h"
 #include "main.h"
 #include "menu.h"
 #include "palette.h"
 #include "rng.h"
 #include "songs.h"
 #include "sound.h"
+#include "string_util.h"
 #include "task.h"
-#include "event_data.h"
 
 // I'm #define-ing these just for now so I can keep using the old unkXXX member names
 #define unk60E selectedPokemon

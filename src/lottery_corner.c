@@ -1,11 +1,11 @@
 #include "global.h"
 #include "lottery_corner.h"
-#include "rng.h"
-#include "string_util.h"
 #include "event_data.h"
-#include "species.h"
-#include "text.h"
 #include "items.h"
+#include "rng.h"
+#include "species.h"
+#include "string_util.h"
+#include "text.h"
 
 extern u16 gScriptResult;
 extern u16 gSpecialVar_0x8004;

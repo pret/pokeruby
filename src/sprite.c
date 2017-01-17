@@ -1,8 +1,8 @@
 #include "global.h"
 #include "sprite.h"
 #include "main.h"
-#include "palette.h"
 #include "menu_cursor.h"
+#include "palette.h"
 
 #define MAX_SPRITE_COPY_REQUESTS 64
 

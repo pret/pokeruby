@@ -1,11 +1,11 @@
 #include "global.h"
 #include "mori_debug_menu.h"
 #include "asm.h"
-#include "start_menu.h"
-#include "menu.h"
-#include "main.h"
-#include "string_util.h"
 #include "link.h"
+#include "main.h"
+#include "menu.h"
+#include "start_menu.h"
+#include "string_util.h"
 
 #define SIO_MULTI_CNT ((struct SioMultiCnt *)REG_ADDR_SIOCNT)
 

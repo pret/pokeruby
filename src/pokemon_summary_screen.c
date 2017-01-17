@@ -1,9 +1,9 @@
 #include "global.h"
 #include "asm.h"
+#include "link.h"
 #include "menu.h"
 #include "pokemon.h"
 #include "string_util.h"
-#include "link.h"
 
 extern struct Pokemon *unk_2018000;
 

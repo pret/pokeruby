@@ -1,15 +1,15 @@
 #include "global.h"
 #include "wild_encounter.h"
-#include "asm.h"
-#include "field_player_avatar.h"
-#include "safari_zone.h"
-#include "battle_setup.h"
 #include "abilities.h"
-#include "rng.h"
-#include "script.h"
+#include "asm.h"
+#include "battle_setup.h"
 #include "event_data.h"
-#include "rom4.h"
+#include "field_player_avatar.h"
 #include "metatile_behavior.h"
+#include "rng.h"
+#include "rom4.h"
+#include "safari_zone.h"
+#include "script.h"
 
 struct WildPokemon
 {

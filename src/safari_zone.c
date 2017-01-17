@@ -1,13 +1,13 @@
 #include "global.h"
 #include "safari_zone.h"
 #include "asm.h"
-#include "field_player_avatar.h"
 #include "event_data.h"
+#include "field_player_avatar.h"
 #include "main.h"
+#include "rom4.h"
 #include "script.h"
 #include "string_util.h"
 #include "text.h"
-#include "rom4.h"
 
 struct PokeblockFeeder
 {

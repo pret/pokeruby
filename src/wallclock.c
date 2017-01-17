@@ -7,9 +7,9 @@
 #include "palette.h"
 #include "rtc.h"
 #include "songs.h"
+#include "sound.h"
 #include "task.h"
 #include "trig.h"
-#include "sound.h"
 
 extern u16 gSpecialVar_0x8004;
 extern u16 gMiscClockMale_Pal[];

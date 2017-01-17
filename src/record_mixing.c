@@ -1,6 +1,7 @@
 #include "global.h"
 #include "record_mixing.h"
 #include "asm.h"
+#include "event_data.h"
 #include "link.h"
 #include "menu.h"
 #include "rom4.h"
@@ -9,7 +10,6 @@
 #include "sound.h"
 #include "string_util.h"
 #include "task.h"
-#include "event_data.h"
 
 extern void *recordMixingSecretBases;
 extern void *recordMixingTvShows;

@@ -1,12 +1,12 @@
 #include "global.h"
-#include "battle.h"
+#include "abilities.h"
 #include "asm.h"
+#include "battle.h"
+#include "battle_move_effects.h"
+#include "item.h"
 #include "pokemon.h"
 #include "rng.h"
-#include "abilities.h"
 #include "species.h"
-#include "item.h"
-#include "battle_move_effects.h"
 
 #define AIScriptRead32(ptr) ((ptr)[0] | (ptr)[1] << 8 | (ptr)[2] << 16 | (ptr)[3] << 24)
 #define AIScriptRead16(ptr) ((ptr)[0] | (ptr)[1] << 8)

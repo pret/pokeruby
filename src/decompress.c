@@ -1,7 +1,7 @@
 #include "global.h"
 #include "decompress.h"
-#include "species.h"
 #include "asm.h"
+#include "species.h"
 #include "text.h"
 
 #define WRAM 0x02000000

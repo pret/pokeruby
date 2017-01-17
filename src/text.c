@@ -1,11 +1,11 @@
 #include "global.h"
 #include "text.h"
-#include "main.h"
-#include "string_util.h"
-#include "songs.h"
-#include "palette.h"
-#include "sound.h"
 #include "battle.h"
+#include "main.h"
+#include "palette.h"
+#include "songs.h"
+#include "sound.h"
+#include "string_util.h"
 
 enum
 {

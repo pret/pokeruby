@@ -1,17 +1,17 @@
 #include "global.h"
 #include "starter_choose.h"
 #include "asm.h"
+#include "decompress.h"
 #include "main.h"
 #include "menu.h"
 #include "palette.h"
 #include "pokedex.h"
 #include "songs.h"
 #include "sound.h"
+#include "sprite.h"
 #include "string_util.h"
 #include "task.h"
 #include "trig.h"
-#include "decompress.h"
-#include "sprite.h"
 
 struct MonCoords
 {

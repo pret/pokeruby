@@ -1,9 +1,9 @@
 #include "global.h"
 #include "pokemon_size_record.h"
-#include "string_util.h"
-#include "species.h"
-#include "text.h"
 #include "event_data.h"
+#include "species.h"
+#include "string_util.h"
+#include "text.h"
 
 extern u16 SpeciesToNationalPokedexNum(u16);
 extern u16 GetPokedexHeightWeight(u16, u8);

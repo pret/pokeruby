@@ -2,6 +2,7 @@
 #include "main_menu.h"
 #include "asm.h"
 #include "decompress.h"
+#include "event_data.h"
 #include "menu.h"
 #include "mystery_event_menu.h"
 #include "option_menu.h"
@@ -16,7 +17,6 @@
 #include "task.h"
 #include "text.h"
 #include "title_screen.h"
-#include "event_data.h"
 
 #define BirchSpeechUpdateWindowText() ((u8)MenuUpdateWindowText_OverrideLineLength(24))
 

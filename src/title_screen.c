@@ -2,17 +2,17 @@
 #include "title_screen.h"
 #include "asm.h"
 #include "clear_save_data_menu.h"
-#include "m4a.h"
-#include "main_menu.h"
-#include "intro.h"
+#include "decompress.h"
+#include "event_data.h"
 #include "gba/m4a_internal.h"
+#include "intro.h"
+#include "m4a.h"
 #include "main.h"
+#include "main_menu.h"
 #include "palette.h"
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
-#include "decompress.h"
-#include "event_data.h"
 
 extern u8 gReservedSpritePaletteCount;
 extern struct MusicPlayerInfo gMPlay_BGM;

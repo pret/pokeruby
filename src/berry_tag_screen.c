@@ -3,6 +3,7 @@
 #include "asm.h"
 #include "berry.h"
 #include "decompress.h"
+#include "items.h"
 #include "main.h"
 #include "menu.h"
 #include "palette.h"
@@ -13,7 +14,6 @@
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
-#include "items.h"
 
 #define OFFSET_7B (123)
 #define FIRST_BERRY ITEM_CHERI_BERRY

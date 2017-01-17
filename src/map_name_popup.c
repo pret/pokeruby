@@ -1,8 +1,8 @@
 #include "global.h"
-#include "menu.h"
-#include "event_data.h"
-#include "task.h"
 #include "asm.h"
+#include "event_data.h"
+#include "menu.h"
+#include "task.h"
 
 EWRAM_DATA static u8 sTaskId = 0;
 

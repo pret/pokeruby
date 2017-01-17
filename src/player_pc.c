@@ -1,14 +1,14 @@
 #include "global.h"
-#include "item.h"
-#include "task.h"
-#include "menu.h"
-#include "sound.h"
-#include "main.h"
-#include "script.h"
-#include "palette.h"
-#include "weather.h"
 #include "asm.h"
+#include "item.h"
+#include "main.h"
+#include "menu.h"
+#include "palette.h"
+#include "script.h"
+#include "sound.h"
 #include "string_util.h"
+#include "task.h"
+#include "weather.h"
 
 extern void DisplayItemMessageOnField(u8, u8*, TaskFunc, u16);
 extern void ItemStorageMenuProcessInput(u8);

@@ -1,6 +1,6 @@
 #include "global.h"
-#include "field_effect.h"
 #include "asm.h"
+#include "field_effect.h"
 #include "pokemon.h"
 #include "script.h"
 #include "task.h"

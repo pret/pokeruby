@@ -1,8 +1,8 @@
 #include "global.h"
 #include "asm.h"
-#include "task.h"
 #include "field_camera.h"
 #include "metatile_behavior.h"
+#include "task.h"
 
 struct DoorGraphics
 {

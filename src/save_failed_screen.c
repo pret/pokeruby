@@ -1,14 +1,14 @@
 #include "global.h"
+#include "asm.h"
+#include "gba/flash_internal.h"
+#include "m4a.h"
 #include "main.h"
-#include "sprite.h"
+#include "menu.h"
 #include "palette.h"
+#include "save.h"
+#include "sprite.h"
 #include "task.h"
 #include "text.h"
-#include "menu.h"
-#include "save.h"
-#include "m4a.h"
-#include "gba/flash_internal.h"
-#include "asm.h"
 
 // In English 1.0, the text window is too small, causing text to overflow.
 

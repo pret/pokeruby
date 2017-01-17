@@ -1,8 +1,8 @@
 #include "global.h"
 #include "text_window.h"
 #include "main.h"
-#include "text.h"
 #include "palette.h"
+#include "text.h"
 
 #define STD_MSG_BOX_LEFT    0
 #define STD_MSG_BOX_TOP    14

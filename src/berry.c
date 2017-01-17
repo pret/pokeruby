@@ -2,10 +2,10 @@
 #include "berry.h"
 #include "asm.h"
 #include "item.h"
-#include "main.h"
-#include "text.h"
-#include "rng.h"
 #include "items.h"
+#include "main.h"
+#include "rng.h"
+#include "text.h"
 
 #define FIRST_BERRY ITEM_CHERI_BERRY
 #define LAST_BERRY  ITEM_ENIGMA_BERRY
