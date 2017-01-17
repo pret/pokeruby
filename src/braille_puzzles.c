@@ -11,6 +11,7 @@
 #include "species.h"
 #include "task.h"
 #include "menu.h"
+#include "text.h"
 
 extern u8 gPlayerPartyCount;
 extern u8 gUnknown_03005CE0;

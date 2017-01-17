@@ -5,9 +5,6 @@
 #include "string_util.h"
 #include "link.h"
 
-extern u8 gStringVar1[];
-extern u8 gStringVar4[];
-
 extern struct Pokemon *unk_2018000;
 
 extern u8 *(gNatureNames[]);

@@ -5,6 +5,7 @@
 #include "script.h"
 #include "string_util.h"
 #include "task.h"
+#include "text.h"
 
 extern struct Pokemon gPlayerParty[6];
 extern u16 gScriptResult;

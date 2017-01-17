@@ -2,6 +2,7 @@
 #include "asm.h"
 #include "link.h"
 #include "rng.h"
+#include "text.h"
 #include "event_data.h"
 
 extern u8 unk_2000000[];

@@ -13,7 +13,6 @@
 extern u8 gDiplomaTiles[];
 extern u8 gDiplomaTilemap[];
 extern u8 gDiplomaPalettes[];
-extern u8 gStringVar1[];
 extern u8 gOtherText_NationalDex[];
 extern u8 gOtherText_HoennDex[];
 extern u8 gOtherText_DiplomaCertificationGameFreak[];

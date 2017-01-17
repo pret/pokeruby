@@ -12,6 +12,7 @@
 #include "songs.h"
 #include "sound.h"
 #include "task.h"
+#include "text.h"
 #include "string_util.h"
 #include "rng.h"
 #include "event_data.h"
@@ -116,8 +117,6 @@ extern struct TrainerBattleSpec gTrainerBattleSpecs_1[];
 extern struct TrainerBattleSpec gTrainerBattleSpecs_2[];
 extern struct TrainerBattleSpec gTrainerBattleSpecs_3[];
 extern struct TrainerBattleSpec gTrainerBattleSpecs_4[];
-
-extern u8 gStringVar4[];
 
 extern u8 gBattleTransitionTable_Wild[][2];
 extern u8 gBattleTransitionTable_Trainer[][2];

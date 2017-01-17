@@ -6,6 +6,7 @@
 #include "main.h"
 #include "script.h"
 #include "string_util.h"
+#include "text.h"
 #include "rom4.h"
 
 struct PokeblockFeeder

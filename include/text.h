@@ -134,6 +134,11 @@ extern const struct WindowConfig gWindowConfig_81E725C;
 extern const struct WindowConfig gWindowConfig_81E7278;
 extern const struct WindowConfig gWindowConfig_81E7294;
 
+extern u8 gStringVar1[];
+extern u8 gStringVar2[];
+extern u8 gStringVar3[];
+extern u8 gStringVar4[];
+
 void LoadFontDefaultPalette(const struct WindowConfig *winConfig);
 void SetUpWindowConfig(const struct WindowConfig *winConfig);
 u16 InitWindowTileData(struct Window *win, u16 startOffset);

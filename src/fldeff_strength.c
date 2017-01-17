@@ -4,6 +4,7 @@
 #include "pokemon.h"
 #include "script.h"
 #include "task.h"
+#include "text.h"
 
 static void sub_811AA18(void);
 static void sub_811AA38(void);

@@ -71,8 +71,6 @@ extern const u8 gSystemText_NewPara[];
 
 extern u8 gSpriteAffineAnimTable_81E79AC[];
 
-extern u8 gStringVar4[];
-
 extern u8 unk_2000000[];
 
 //Task data

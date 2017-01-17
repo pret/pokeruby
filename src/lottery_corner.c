@@ -4,6 +4,7 @@
 #include "string_util.h"
 #include "event_data.h"
 #include "species.h"
+#include "text.h"
 #include "items.h"
 
 extern u16 gScriptResult;
