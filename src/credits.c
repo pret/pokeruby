@@ -7,10 +7,12 @@
 #include "palette.h"
 #include "songs.h"
 #include "sound.h"
-#include "species.h"
-#include "sprite.h"
-#include "task.h"
-#include "text.h"
+
+asm(".set REG_BASE, 0x4000000");
+asm(".set OFFSET_REG_BLDCNT,      0x50");
+asm(".set OFFSET_REG_BLDALPHA,    0x52");
+asm(".set REG_BLDCNT,      REG_BASE + OFFSET_REG_BLDCNT");
+asm(".set REG_BLDALPHA,    REG_BASE + OFFSET_REG_BLDALPHA");
 
 u32 NationalPokedexNumToSpecies(u16 nationalNum);
 
@@ -18,18 +20,7 @@ struct MonCoords {
     u8 x, y;
 };
 
-
 extern void *species_and_otid_get_pal(u32, u16, u16);
-
-asm(".set REG_BASE, 0x4000000");
-asm(".set OFFSET_REG_BG3HOFS,     0x1c");
-asm(".set OFFSET_REG_BG3VOFS,     0x1e");
-asm(".set OFFSET_REG_BLDCNT,      0x50");
-asm(".set OFFSET_REG_BLDALPHA,    0x52");
-asm(".set REG_BG3HOFS,     REG_BASE + OFFSET_REG_BG3HOFS");
-asm(".set REG_BG3VOFS,     REG_BASE + OFFSET_REG_BG3VOFS");
-asm(".set REG_BLDCNT,      REG_BASE + OFFSET_REG_BLDCNT");
-asm(".set REG_BLDALPHA,    REG_BASE + OFFSET_REG_BLDALPHA");
 
 enum {
     PAGE_TITLE,
@@ -132,17 +123,12 @@ enum {
 };
 
 struct Unk201C000 {
-    u8 pad_00[0x88];
-    u16 var_88;
-    u16 var_8A;
-    u16 var_8C;
-    u16 var_8E;
-};
-
-struct HallOfFame {
-    u8 sheet0[0x800];
-    u8 sheet1[0x800];
-    u8 sheet2[0x800];
+    u16 unk0[8];
+    u8 pad_10[0x78];
+    u16 unk88;
+    u16 unk8A;
+    u16 unk8C;
+    u16 unk8E;
 };
 
 struct CreditsEntry {
@@ -170,7 +156,6 @@ extern s16 gUnknown_02039320;
 extern u16 gUnknown_02039322; // TASK A
 extern u8 gUnknown_02039324;
 extern u8 gUnknown_02039325;
-
 extern u16 gUnknown_02039358;
 extern u16 gUnknown_0203935A;
 extern s16 gUnknown_0203935C;
@@ -233,11 +218,11 @@ static void task_a_8144114(u8 taskIdA);
 static void sub_8144130(void);
 static void task_b_81441B8(u8 taskIdB);
 static u8 sub_8144454(u8 page, u8 taskIdA);
-void task_d_8144514(u8 taskIdD);
+static void task_d_8144514(u8 taskIdD);
 static bool8 sub_8144ECC(u8 data, u8 taskIdA);
 static void sub_81450AC(u8 taskIdA);
 void sub_8145128(u16, u16, u16);
-void sub_81452D0(u16 arg0, u16 arg1);
+static void sub_81452D0(u16 arg0, u16 arg1);
 static void spritecb_player_8145378(struct Sprite *sprite);
 static void spritecb_rival_8145420(struct Sprite *sprite);
 u8 sub_81456B4(u16 nationalNum, u16 x, u16 y, u16 arg3);
@@ -339,9 +324,9 @@ void sub_81439D0(void) {
 
     sub_81458DC();
 
-    c000->var_88 = 0;
-    c000->var_8A = 0;
-    c000->var_8C = 0;
+    c000->unk88 = 0;
+    c000->unk8A = 0;
+    c000->unk8C = 0;
 
     gUnknown_02039322 = taskIdA;
 }
@@ -455,7 +440,7 @@ void task_a_8143D04(u8 taskIdA)
             HALL_OF_FAME_SHEET_1[i] = 0x22;
         for (i = 0; i < 0x800; i++)
             HALL_OF_FAME_SHEET_2[i] = 0x33;
-        
+
         EWRAM_1F800[0] = 0;
         EWRAM_1F800[1] = 0x53FF; // light yellow
         EWRAM_1F800[2] = 0x529F; // light red
@@ -810,36 +795,25 @@ static u8 sub_8144454(u8 page, u8 taskIdA) {
 
 #define UNK_DEFINE_44 (0x44)
 
-struct UnknownStruct
+#define EWRAM_1C000 (*(struct Unk201C000 *)(unk_2000000 + 0x1C000))
+
+static void task_d_8144514(u8 taskIdD)
 {
-    u16 unk0[0x44];
-    u16 unk88;
-    u16 unk8A;
-    u16 unk8C;
-    u16 unk8E;
-};
-
-#define EWRAM_1C000 (*(struct UnknownStruct *)(unk_2000000 + 0x1C000))
-
-extern void task_a_8143B68(u8);
-
-void task_d_8144514(u8 taskId)
-{
-    struct UnknownStruct *r6 = &EWRAM_1C000;
+    struct Unk201C000 *r6 = &EWRAM_1C000;
     u8 r2;
-    
-    switch (gTasks[taskId].data[TDD_STATE])
+
+    switch (gTasks[taskIdD].data[TDD_STATE])
     {
     case 0:
         break;
     case 1:
-        if (r6->unk8A == 0 && gTasks[gTasks[taskId].data[TDD_TASK_A_ID]].data[14] == 0)
+        if (r6->unk8A == 0 && gTasks[gTasks[taskIdD].data[TDD_TASK_A_ID]].data[TDA_14] == 0)
             break;
-        gTasks[gTasks[taskId].data[TDD_TASK_A_ID]].data[TDA_14] = 0;
-        gTasks[taskId].data[TDD_STATE]++;
+        gTasks[gTasks[taskIdD].data[TDD_TASK_A_ID]].data[TDA_14] = 0;
+        gTasks[taskIdD].data[TDD_STATE]++;
         break;
     case 2:
-        if (r6->unk88 == 68 || gTasks[gTasks[taskId].data[TDD_TASK_A_ID]].func != task_a_8143B68)
+        if (r6->unk88 == UNK_DEFINE_44 || gTasks[gTasks[taskIdD].data[TDD_TASK_A_ID]].func != task_a_8143B68)
             break;
         r2 = sub_81456B4(r6->unk0[r6->unk8C], gUnknown_0840CA00[r6->unk8A][0], gUnknown_0840CA00[r6->unk8A][1], r6->unk8A);
         if (r6->unk8C < r6->unk8E - 1)
@@ -857,14 +831,14 @@ void task_d_8144514(u8 taskId)
             r6->unk8A = 0;
         else
             r6->unk8A++;
-        gTasks[taskId].data[TDD_3] = 50;
-        gTasks[taskId].data[TDD_STATE]++;
+        gTasks[taskIdD].data[TDD_3] = 50;
+        gTasks[taskIdD].data[TDD_STATE]++;
         break;
     case 3:
-        if (gTasks[taskId].data[TDD_3] != 0)
-            gTasks[taskId].data[TDD_3]--;
+        if (gTasks[taskIdD].data[TDD_3] != 0)
+            gTasks[taskIdD].data[TDD_3]--;
         else
-            gTasks[taskId].data[TDD_STATE] = 1;
+            gTasks[taskIdD].data[TDD_STATE] = 1;
         break;
     }
 }
@@ -1658,15 +1632,15 @@ _0814528C:\n\
     .syntax divided\n");
 }
 
-void sub_81452D0(u16 arg0, u16 arg1)
+static void sub_81452D0(u16 arg0, u16 arg1)
 {
     u16 i;
     u16 foo = arg1 / 16;
     u16 bar = foo * 4096;
-    
+
     for (i = 0; i < 0x400; i ++)
         ((u16 *)(VRAM + arg0))[i] = bar + 1;
-    
+
     sub_814524C(&gUnknown_0840B83C, 3, 7, arg0, arg1);
     sub_814524C(&gUnknown_0840B84B, 7, 7, arg0, arg1);
     sub_814524C(&gUnknown_0840B85A, 11, 7, arg0, arg1);
