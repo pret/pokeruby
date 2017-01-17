@@ -209,6 +209,7 @@ SECTIONS {
         src/landmark.o(.text);
         src/fldeff_strength.o(.text);
         asm/battle_transition.o(.text);
+        src/battle_811DA74.o(.text);
         asm/battle_811DA74.o(.text);
         asm/battle_message.o(.text);
         asm/choose_party.o(.text);
