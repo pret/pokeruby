@@ -150,6 +150,13 @@ struct CreditsEntry {
     u8 *text;
 };
 
+extern u8 unk_2000000[];
+
+#define EWRAM_1F800          ((u16 *)(unk_2000000 + 0x1F800))
+#define HALL_OF_FAME_SHEET_0 ((u8 *)(unk_2000000 + 0x1E000))
+#define HALL_OF_FAME_SHEET_1 ((u8 *)(unk_2000000 + 0x1E800))
+#define HALL_OF_FAME_SHEET_2 ((u8 *)(unk_2000000 + 0x1F000))
+
 extern struct Unk201C000 unk_201C000;
 
 extern struct HallOfFame gHallOfFame;
@@ -168,7 +175,6 @@ extern u16 gUnknown_02039358;
 extern u16 gUnknown_0203935A;
 extern s16 gUnknown_0203935C;
 
-
 extern u8 gReservedSpritePaletteCount;
 
 // data/data2
@@ -177,7 +183,7 @@ extern struct SpriteSheet gMonFrontPicTable[];
 
 // data/starter_choose
 extern u16 gBirchBagGrassPal[32];
-extern u8 gBirchBagTilemap[];
+extern u8 gBirchGrassTilemap[];
 extern u8 gBirchHelpGfx[];
 
 // data/hall_of_fame
@@ -186,7 +192,11 @@ extern void *gUnknown_0840B5A0[];
 // data/credits
 extern u16 gUnknown_0840B7BC[32];
 extern u16 gUnknown_0840B7FC[32];
+extern u8 gUnknown_0840B83C[];
+extern u8 gUnknown_0840B84B[];
 extern u8 gUnknown_0840B85A[];
+extern u8 gUnknown_0840B869[];
+extern u8 gUnknown_0840B878[];
 extern struct CreditsEntry *gCreditsEntryPointerTable[][5];
 extern u8 gUnknown_0840CA00[][2];
 extern struct SpriteSheet gUnknown_0840CAA0;
@@ -423,36 +433,33 @@ static void task_a_8143CC0(u8 taskIdA) {
     gTasks[taskIdA].func = task_a_8143D04;
 }
 
-#ifdef NONMATCHING
-void task_a_8143D04(u8 taskIdA) {
-    switch (gMain.state) {
+void task_a_8143D04(u8 taskIdA)
+{
+    switch (gMain.state)
+    {
     default:
-    case 0: {
+    case 0:
+    {
         u16 i;
 
         ResetSpriteData();
         FreeAllSpritePalettes();
         gReservedSpritePaletteCount = 8;
         LZ77UnCompVram(&gBirchHelpGfx, (void *) VRAM);
-        LZ77UnCompVram(&gBirchBagTilemap, (void *) (VRAM + 0x3800));
-        LoadPalette(gBirchBagGrassPal + 2, 1, 31 * 2);
+        LZ77UnCompVram(&gBirchGrassTilemap, (void *) (VRAM + 0x3800));
+        LoadPalette(gBirchBagGrassPal + 1, 1, 31 * 2);
 
-        for (i = 0; i < 0x800; i++) {
-            gHallOfFame.sheet0[i] = 0x11;
-        }
-
-        for (i = 0; i < 0x800; i++) {
-            gHallOfFame.sheet1[i] = 0x22;
-        }
-
-        for (i = 0; i < 0x800; i++) {
-            gHallOfFame.sheet2[i] = 0x33;
-        }
-
-        unk_201f800[0] = 0;
-        unk_201f800[1] = 0x53FF; // light yellow
-        unk_201f800[2] = 0x529F; // light red
-        unk_201f800[3] = 0x7E94; // light blue
+        for (i = 0; i < 0x800; i++)
+            HALL_OF_FAME_SHEET_0[i] = 0x11;
+        for (i = 0; i < 0x800; i++)
+            HALL_OF_FAME_SHEET_1[i] = 0x22;
+        for (i = 0; i < 0x800; i++)
+            HALL_OF_FAME_SHEET_2[i] = 0x33;
+        
+        EWRAM_1F800[0] = 0;
+        EWRAM_1F800[1] = 0x53FF; // light yellow
+        EWRAM_1F800[2] = 0x529F; // light red
+        EWRAM_1F800[3] = 0x7E94; // light blue
 
         LoadSpriteSheet(&gUnknown_0840CAA0);
         LoadSpritePalette(&gUnknown_0840CAB0);
@@ -460,8 +467,7 @@ void task_a_8143D04(u8 taskIdA) {
         gMain.state += 1;
         break;
     }
-
-    case 1: {
+    case 1:
         gTasks[taskIdA].data[TDA_TASK_D_ID] = CreateTask(task_d_8144514, 0);
         gTasks[gTasks[taskIdA].data[TDA_TASK_D_ID]].data[TDD_STATE] = 1;
         gTasks[gTasks[taskIdA].data[TDA_TASK_D_ID]].data[TDD_TASK_A_ID] = taskIdA;
@@ -478,209 +484,7 @@ void task_a_8143D04(u8 taskIdA) {
         gTasks[taskIdA].func = task_a_8143B38;
         break;
     }
-    }
 }
-#else
-__attribute__((naked))
-void task_a_8143D04(u8 taskId) {
-    asm(".syntax unified\n\
-	push {r4-r7,lr}\n\
-	mov r7, r9\n\
-	mov r6, r8\n\
-	push {r6,r7}\n\
-	sub sp, 0x4\n\
-	lsls r0, 24\n\
-	lsrs r6, r0, 24\n\
-	ldr r0, _08143DC8 @ =gMain\n\
-	ldr r1, _08143DCC @ =0x0000043c\n\
-	adds r1, r0\n\
-	mov r8, r1\n\
-	ldrb r7, [r1]\n\
-	cmp r7, 0\n\
-	beq _08143D24\n\
-	cmp r7, 0x1\n\
-	beq _08143E0C\n\
-_08143D24:\n\
-	bl ResetSpriteData\n\
-	bl FreeAllSpritePalettes\n\
-	ldr r1, _08143DD0 @ =gReservedSpritePaletteCount\n\
-	movs r0, 0x8\n\
-	strb r0, [r1]\n\
-	ldr r0, _08143DD4 @ =gBirchHelpGfx\n\
-	movs r1, 0xC0\n\
-	lsls r1, 19\n\
-	bl LZ77UnCompVram\n\
-	ldr r0, _08143DD8 @ =gBirchGrassTilemap\n\
-	ldr r1, _08143DDC @ =0x06003800\n\
-	bl LZ77UnCompVram\n\
-	ldr r0, _08143DE0 @ =gBirchBagGrassPal + 2\n\
-	movs r1, 0x1\n\
-	movs r2, 0x3E\n\
-	bl LoadPalette\n\
-	movs r1, 0\n\
-	ldr r4, _08143DE4 @ =0x0201e000\n\
-	movs r3, 0x11\n\
-	ldr r2, _08143DE8 @ =0x000007ff\n\
-_08143D56:\n\
-	adds r0, r1, r4\n\
-	strb r3, [r0]\n\
-	adds r0, r1, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r1, r0, 16\n\
-	cmp r1, r2\n\
-	bls _08143D56\n\
-	movs r1, 0\n\
-	ldr r2, _08143DEC @ =0x0201f800\n\
-	ldr r6, _08143DF0 @ =gUnknown_0840CAA0\n\
-	ldr r0, _08143DF4 @ =0xfffff000\n\
-	adds r5, r2, r0\n\
-	movs r4, 0x22\n\
-	ldr r3, _08143DE8 @ =0x000007ff\n\
-_08143D72:\n\
-	adds r0, r1, r5\n\
-	strb r4, [r0]\n\
-	adds r0, r1, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r1, r0, 16\n\
-	cmp r1, r3\n\
-	bls _08143D72\n\
-	movs r1, 0\n\
-	ldr r5, _08143DF8 @ =0x0201f000\n\
-	movs r4, 0x33\n\
-	ldr r3, _08143DE8 @ =0x000007ff\n\
-_08143D88:\n\
-	adds r0, r1, r5\n\
-	strb r4, [r0]\n\
-	adds r0, r1, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r1, r0, 16\n\
-	cmp r1, r3\n\
-	bls _08143D88\n\
-	movs r0, 0\n\
-	strh r0, [r2]\n\
-	ldr r1, _08143DFC @ =0x000053ff\n\
-	adds r0, r1, 0\n\
-	strh r0, [r2, 0x2]\n\
-	ldr r1, _08143E00 @ =0x0000529f\n\
-	adds r0, r1, 0\n\
-	strh r0, [r2, 0x4]\n\
-	ldr r1, _08143E04 @ =0x00007e94\n\
-	adds r0, r1, 0\n\
-	strh r0, [r2, 0x6]\n\
-	adds r0, r6, 0\n\
-	bl LoadSpriteSheet\n\
-	ldr r0, _08143E08 @ =gUnknown_0840CAB0\n\
-	bl LoadSpritePalette\n\
-	ldr r1, _08143DC8 @ =gMain\n\
-	ldr r2, _08143DCC @ =0x0000043c\n\
-	adds r1, r2\n\
-	ldrb r0, [r1]\n\
-	adds r0, 0x1\n\
-	strb r0, [r1]\n\
-	b _08143E90\n\
-	.align 2, 0\n\
-_08143DC8: .4byte gMain\n\
-_08143DCC: .4byte 0x0000043c\n\
-_08143DD0: .4byte gReservedSpritePaletteCount\n\
-_08143DD4: .4byte gBirchHelpGfx\n\
-_08143DD8: .4byte gBirchGrassTilemap\n\
-_08143DDC: .4byte 0x06003800\n\
-_08143DE0: .4byte gBirchBagGrassPal + 2\n\
-_08143DE4: .4byte 0x0201e000\n\
-_08143DE8: .4byte 0x000007ff\n\
-_08143DEC: .4byte 0x0201f800\n\
-_08143DF0: .4byte gUnknown_0840CAA0\n\
-_08143DF4: .4byte 0xfffff000\n\
-_08143DF8: .4byte 0x0201f000\n\
-_08143DFC: .4byte 0x000053ff\n\
-_08143E00: .4byte 0x0000529f\n\
-_08143E04: .4byte 0x00007e94\n\
-_08143E08: .4byte gUnknown_0840CAB0\n\
-_08143E0C:\n\
-	ldr r0, _08143EA0 @ =task_d_8144514\n\
-	movs r1, 0\n\
-	bl CreateTask\n\
-	ldr r2, _08143EA4 @ =gTasks\n\
-	lsls r4, r6, 2\n\
-	adds r4, r6\n\
-	lsls r4, 3\n\
-	adds r4, r2\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	movs r1, 0\n\
-	mov r9, r1\n\
-	movs r5, 0\n\
-	strh r0, [r4, 0xE]\n\
-	movs r0, 0xE\n\
-	ldrsh r1, [r4, r0]\n\
-	lsls r0, r1, 2\n\
-	adds r0, r1\n\
-	lsls r0, 3\n\
-	adds r0, r2\n\
-	strh r7, [r0, 0x8]\n\
-	movs r0, 0xE\n\
-	ldrsh r1, [r4, r0]\n\
-	lsls r0, r1, 2\n\
-	adds r0, r1\n\
-	lsls r0, 3\n\
-	adds r0, r2\n\
-	strh r6, [r0, 0xA]\n\
-	movs r0, 0xE\n\
-	ldrsh r1, [r4, r0]\n\
-	lsls r0, r1, 2\n\
-	adds r0, r1\n\
-	lsls r0, 3\n\
-	adds r0, r2\n\
-	ldrh r1, [r4, 0x16]\n\
-	strh r1, [r0, 0xC]\n\
-	movs r0, 0x1\n\
-	negs r0, r0\n\
-	str r5, [sp]\n\
-	movs r1, 0\n\
-	movs r2, 0x10\n\
-	movs r3, 0\n\
-	bl BeginNormalPaletteFade\n\
-	ldr r0, _08143EA8 @ =REG_BG3HOFS\n\
-	strh r5, [r0]\n\
-	ldr r1, _08143EAC @ =REG_BG3VOFS\n\
-	movs r0, 0x20\n\
-	strh r0, [r1]\n\
-	subs r1, 0x10\n\
-	ldr r2, _08143EB0 @ =0x00000703\n\
-	adds r0, r2, 0\n\
-	strh r0, [r1]\n\
-	subs r1, 0xE\n\
-	movs r2, 0xCA\n\
-	lsls r2, 5\n\
-	adds r0, r2, 0\n\
-	strh r0, [r1]\n\
-	mov r1, r9\n\
-	mov r0, r8\n\
-	strb r1, [r0]\n\
-	ldr r0, _08143EB4 @ =gUnknown_0203935C\n\
-	strh r5, [r0]\n\
-	ldr r0, _08143EB8 @ =sub_8143B38\n\
-	str r0, [r4]\n\
-_08143E90:\n\
-	add sp, 0x4\n\
-	pop {r3,r4}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_08143EA0: .4byte task_d_8144514\n\
-_08143EA4: .4byte gTasks\n\
-_08143EA8: .4byte 0x4000000 + 0x1c\n\
-_08143EAC: .4byte 0x4000000 + 0x1e\n\
-_08143EB0: .4byte 0x00000703\n\
-_08143EB4: .4byte gUnknown_0203935C\n\
-_08143EB8: .4byte task_a_8143B38\n\
-    .syntax divided\n");
-}
-
-#endif
 
 static void task_a_8143EBC(u8 taskIdA) {
     if (gTasks[taskIdA].data[TDA_12])
@@ -1006,264 +810,64 @@ static u8 sub_8144454(u8 page, u8 taskIdA) {
 
 #define UNK_DEFINE_44 (0x44)
 
-#ifdef NONMATCHING
-void task_d_8144514(u8 taskIdD) {
-    u8 local1;
+struct UnknownStruct
+{
+    u16 unk0[0x44];
+    u16 unk88;
+    u16 unk8A;
+    u16 unk8C;
+    u16 unk8E;
+};
 
-    switch (gTasks[taskIdD].data[TDD_STATE])
+#define EWRAM_1C000 (*(struct UnknownStruct *)(unk_2000000 + 0x1C000))
+
+extern void task_a_8143B68(u8);
+
+void task_d_8144514(u8 taskId)
+{
+    struct UnknownStruct *r6 = &EWRAM_1C000;
+    u8 r2;
+    
+    switch (gTasks[taskId].data[TDD_STATE])
     {
     case 0:
         break;
-
     case 1:
-        if (unk_201C000.var_8A == 0 && gTasks[gTasks[taskIdD].data[TDD_TASK_A_ID]].data[TDA_14])
-        {
+        if (r6->unk8A == 0 && gTasks[gTasks[taskId].data[TDD_TASK_A_ID]].data[14] == 0)
             break;
-        }
-
-        gTasks[gTasks[taskIdD].data[TDD_TASK_A_ID]].data[TDA_14] = 0;
-        gTasks[taskIdD].data[TDD_STATE] += 1;
-
+        gTasks[gTasks[taskId].data[TDD_TASK_A_ID]].data[TDA_14] = 0;
+        gTasks[taskId].data[TDD_STATE]++;
         break;
-
     case 2:
-        if (unk_201C000.var_88 == UNK_DEFINE_44)
-        {
+        if (r6->unk88 == 68 || gTasks[gTasks[taskId].data[TDD_TASK_A_ID]].func != task_a_8143B68)
             break;
-        }
-
-        if (gTasks[gTasks[taskIdD].data[TDD_TASK_A_ID]].func != task_a_8143B68)
+        r2 = sub_81456B4(r6->unk0[r6->unk8C], gUnknown_0840CA00[r6->unk8A][0], gUnknown_0840CA00[r6->unk8A][1], r6->unk8A);
+        if (r6->unk8C < r6->unk8E - 1)
         {
-            break;
-        }
-
-        local1 = sub_81456B4(
-                unk_201C000.var_00[unk_201C000.var_8C],
-                gUnknown_0840CA00[unk_201C000.var_8A][0],
-                gUnknown_0840CA00[unk_201C000.var_8A][1],
-                unk_201C000.var_8A
-        );
-
-        if (unk_201C000.var_8C > unk_201C000.var_8E - 1)
-        {
-            unk_201C000.var_8C += 1;
-            gSprites[local1].data3 = 50;
+            r6->unk8C++;
+            gSprites[r2].data3 = 50;
         }
         else
         {
-            unk_201C000.var_8C = 0;
-            gSprites[local1].data3 = 512;
+            r6->unk8C = 0;
+            gSprites[r2].data3 = 512;
         }
-
-        unk_201C000.var_88 += 1;
-
-        if (unk_201C000.var_8A == 2)
-        {
-            unk_201C000.var_8A = 0;
-        }
+        r6->unk88++;
+        if (r6->unk8A == 2)
+            r6->unk8A = 0;
         else
-        {
-            unk_201C000.var_8A += 1;
-        }
-
-        gTasks[taskIdD].data[TDD_3] = 50;
-        gTasks[taskIdD].data[TDD_STATE] += 1;
+            r6->unk8A++;
+        gTasks[taskId].data[TDD_3] = 50;
+        gTasks[taskId].data[TDD_STATE]++;
         break;
-
     case 3:
-        if (gTasks[taskIdD].data[TDD_3] != 0)
-        {
-            gTasks[taskIdD].data[TDD_3] -= 1;
-            break;
-        }
-
-        gTasks[taskIdD].data[TDD_STATE] = 1;
+        if (gTasks[taskId].data[TDD_3] != 0)
+            gTasks[taskId].data[TDD_3]--;
+        else
+            gTasks[taskId].data[TDD_STATE] = 1;
         break;
     }
 }
-#else
-__attribute__((naked))
-void task_d_8144514(u8 taskIdD) {
-    asm(".syntax unified\n\
-	push {r4-r7,lr}\n\
-	mov r7, r9\n\
-	mov r6, r8\n\
-	push {r6,r7}\n\
-	lsls r0, 24\n\
-	lsrs r0, 24\n\
-	mov r8, r0\n\
-	ldr r6, _08144548 @ =0x0201c000\n\
-	ldr r3, _0814454C @ =gTasks\n\
-	lsls r0, 2\n\
-	add r0, r8\n\
-	lsls r0, 3\n\
-	adds r2, r0, r3\n\
-	movs r1, 0x8\n\
-	ldrsh r0, [r2, r1]\n\
-	cmp r0, 0x1\n\
-	beq _08144550\n\
-	cmp r0, 0x1\n\
-	bgt _0814453C\n\
-	b _08144658\n\
-_0814453C:\n\
-	cmp r0, 0x2\n\
-	beq _08144584\n\
-	cmp r0, 0x3\n\
-	bne _08144546\n\
-	b _08144644\n\
-_08144546:\n\
-	b _08144658\n\
-	.align 2, 0\n\
-_08144548: .4byte 0x0201c000\n\
-_0814454C: .4byte gTasks\n\
-_08144550:\n\
-	adds r0, r6, 0\n\
-	adds r0, 0x8A\n\
-	ldrh r0, [r0]\n\
-	cmp r0, 0\n\
-	bne _0814456E\n\
-	movs r4, 0xA\n\
-	ldrsh r0, [r2, r4]\n\
-	lsls r1, r0, 2\n\
-	adds r1, r0\n\
-	lsls r1, 3\n\
-	adds r1, r3\n\
-	movs r4, 0x24\n\
-	ldrsh r0, [r1, r4]\n\
-	cmp r0, 0\n\
-	beq _08144658\n\
-_0814456E:\n\
-	movs r0, 0xA\n\
-	ldrsh r1, [r2, r0]\n\
-	lsls r0, r1, 2\n\
-	adds r0, r1\n\
-	lsls r0, 3\n\
-	adds r0, r3\n\
-	movs r1, 0\n\
-	strh r1, [r0, 0x24]\n\
-	ldrh r0, [r2, 0x8]\n\
-	adds r0, 0x1\n\
-	b _08144656\n\
-_08144584:\n\
-	adds r0, r6, 0\n\
-	adds r0, 0x88\n\
-	ldrh r1, [r0]\n\
-	mov r9, r0\n\
-	cmp r1, 0x44\n\
-	beq _08144658\n\
-	movs r4, 0xA\n\
-	ldrsh r1, [r2, r4]\n\
-	lsls r0, r1, 2\n\
-	adds r0, r1\n\
-	lsls r0, 3\n\
-	adds r0, r3\n\
-	ldr r1, [r0]\n\
-	ldr r0, _081445EC @ =sub_8143B68\n\
-	cmp r1, r0\n\
-	bne _08144658\n\
-	adds r7, r6, 0\n\
-	adds r7, 0x8C\n\
-	ldrh r0, [r7]\n\
-	lsls r0, 1\n\
-	adds r0, r6\n\
-	ldrh r0, [r0]\n\
-	ldr r4, _081445F0 @ =gUnknown_0840CA00\n\
-	adds r5, r6, 0\n\
-	adds r5, 0x8A\n\
-	ldrh r3, [r5]\n\
-	lsls r2, r3, 1\n\
-	adds r1, r2, r4\n\
-	ldrb r1, [r1]\n\
-	adds r4, 0x1\n\
-	adds r2, r4\n\
-	ldrb r2, [r2]\n\
-	bl sub_81456B4\n\
-	lsls r0, 24\n\
-	lsrs r2, r0, 24\n\
-	ldrh r1, [r7]\n\
-	adds r0, r6, 0\n\
-	adds r0, 0x8E\n\
-	ldrh r0, [r0]\n\
-	subs r0, 0x1\n\
-	cmp r1, r0\n\
-	bge _081445F8\n\
-	adds r0, r1, 0x1\n\
-	strh r0, [r7]\n\
-	ldr r1, _081445F4 @ =gSprites\n\
-	lsls r0, r2, 4\n\
-	adds r0, r2\n\
-	lsls r0, 2\n\
-	adds r0, r1\n\
-	movs r1, 0x32\n\
-	b _0814460A\n\
-	.align 2, 0\n\
-_081445EC: .4byte task_a_8143B68\n\
-_081445F0: .4byte gUnknown_0840CA00\n\
-_081445F4: .4byte gSprites\n\
-_081445F8:\n\
-	movs r0, 0\n\
-	strh r0, [r7]\n\
-	ldr r1, _08144620 @ =gSprites\n\
-	lsls r0, r2, 4\n\
-	adds r0, r2\n\
-	lsls r0, 2\n\
-	adds r0, r1\n\
-	movs r1, 0x80\n\
-	lsls r1, 2\n\
-_0814460A:\n\
-	strh r1, [r0, 0x34]\n\
-	mov r1, r9\n\
-	ldrh r0, [r1]\n\
-	adds r0, 0x1\n\
-	strh r0, [r1]\n\
-	ldrh r0, [r5]\n\
-	cmp r0, 0x2\n\
-	bne _08144624\n\
-	movs r0, 0\n\
-	b _08144626\n\
-	.align 2, 0\n\
-_08144620: .4byte gSprites\n\
-_08144624:\n\
-	adds r0, 0x1\n\
-_08144626:\n\
-	strh r0, [r5]\n\
-	ldr r0, _08144640 @ =gTasks\n\
-	mov r2, r8\n\
-	lsls r1, r2, 2\n\
-	add r1, r8\n\
-	lsls r1, 3\n\
-	adds r1, r0\n\
-	movs r0, 0x32\n\
-	strh r0, [r1, 0xE]\n\
-	ldrh r0, [r1, 0x8]\n\
-	adds r0, 0x1\n\
-	strh r0, [r1, 0x8]\n\
-	b _08144658\n\
-	.align 2, 0\n\
-_08144640: .4byte gTasks\n\
-_08144644:\n\
-	ldrh r1, [r2, 0xE]\n\
-	movs r3, 0xE\n\
-	ldrsh r0, [r2, r3]\n\
-	cmp r0, 0\n\
-	beq _08144654\n\
-	subs r0, r1, 0x1\n\
-	strh r0, [r2, 0xE]\n\
-	b _08144658\n\
-_08144654:\n\
-	movs r0, 0x1\n\
-_08144656:\n\
-	strh r0, [r2, 0x8]\n\
-_08144658:\n\
-	pop {r3,r4}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-    .syntax divided\n");
-}
-#endif
 
 __attribute__((naked))
 void task_c_8144664(u8 taskIdC) {
@@ -1982,7 +1586,7 @@ u16 sub_8145208(u8 arg0) {
 }
 
 __attribute__((naked))
-void sub_814524C(int arg0, u8 arg1, u8 arg2, u16 arg3, int arg4) {
+void sub_814524C(void *arg0, u8 arg1, u8 arg2, u16 arg3, int arg4) {
     asm(".syntax unified\n\
 	push {r4-r7,lr}\n\
 	mov r7, r10\n\
@@ -2054,100 +1658,22 @@ _0814528C:\n\
     .syntax divided\n");
 }
 
-#ifdef NONMATCHING
-void sub_81452D0(u16 arg0, u16 arg1) {
+void sub_81452D0(u16 arg0, u16 arg1)
+{
     u16 i;
-
-
+    u16 foo = arg1 / 16;
+    u16 bar = foo * 4096;
+    
     for (i = 0; i < 0x400; i ++)
-    {
-        (u16 *) (VRAM + )
-    }
-    sub_814524C(&gUnknown_0840B85A, 7, 7, arg0, arg1);
-    sub_814524C(&gUnknown_0840B869, 11, 7, arg0, arg1);
-    sub_814524C(&gUnknown_0840B878, 15, 7, arg0, arg1);
-    sub_814524C(&gUnknown_0840B85A, 19, 7, arg0, arg1);
+        ((u16 *)(VRAM + arg0))[i] = bar + 1;
+    
+    sub_814524C(&gUnknown_0840B83C, 3, 7, arg0, arg1);
+    sub_814524C(&gUnknown_0840B84B, 7, 7, arg0, arg1);
+    sub_814524C(&gUnknown_0840B85A, 11, 7, arg0, arg1);
+    sub_814524C(&gUnknown_0840B85A, 16, 7, arg0, arg1);
+    sub_814524C(&gUnknown_0840B869, 20, 7, arg0, arg1);
+    sub_814524C(&gUnknown_0840B878, 24, 7, arg0, arg1);
 }
-#else
-__attribute__((naked))
-void sub_81452D0(u16 arg0, u16 arg1) {
-    asm(".syntax unified\n\
-	push {r4-r7,lr}\n\
-	sub sp, 0x4\n\
-	lsls r0, 16\n\
-	lsrs r5, r0, 16\n\
-	lsls r1, 16\n\
-	lsrs r6, r1, 16\n\
-	lsrs r1, 20\n\
-	lsls r1, 28\n\
-	lsrs r1, 16\n\
-	movs r2, 0\n\
-	ldr r7, _08145360 @ =gUnknown_0840B83C\n\
-	movs r4, 0xC0\n\
-	lsls r4, 19\n\
-	adds r1, 0x1\n\
-	ldr r3, _08145364 @ =0x000003ff\n\
-_081452EE:\n\
-	lsls r0, r2, 1\n\
-	adds r0, r5\n\
-	adds r0, r4\n\
-	strh r1, [r0]\n\
-	adds r0, r2, 0x1\n\
-	lsls r0, 16\n\
-	lsrs r2, r0, 16\n\
-	cmp r2, r3\n\
-	bls _081452EE\n\
-	str r6, [sp]\n\
-	adds r0, r7, 0\n\
-	movs r1, 0x3\n\
-	movs r2, 0x7\n\
-	adds r3, r5, 0\n\
-	bl sub_814524C\n\
-	ldr r0, _08145368 @ =gUnknown_0840B84B\n\
-	str r6, [sp]\n\
-	movs r1, 0x7\n\
-	movs r2, 0x7\n\
-	adds r3, r5, 0\n\
-	bl sub_814524C\n\
-	ldr r4, _0814536C @ =gUnknown_0840B85A\n\
-	str r6, [sp]\n\
-	adds r0, r4, 0\n\
-	movs r1, 0xB\n\
-	movs r2, 0x7\n\
-	adds r3, r5, 0\n\
-	bl sub_814524C\n\
-	str r6, [sp]\n\
-	adds r0, r4, 0\n\
-	movs r1, 0x10\n\
-	movs r2, 0x7\n\
-	adds r3, r5, 0\n\
-	bl sub_814524C\n\
-	ldr r0, _08145370 @ =gUnknown_0840B869\n\
-	str r6, [sp]\n\
-	movs r1, 0x14\n\
-	movs r2, 0x7\n\
-	adds r3, r5, 0\n\
-	bl sub_814524C\n\
-	ldr r0, _08145374 @ =gUnknown_0840B878\n\
-	str r6, [sp]\n\
-	movs r1, 0x18\n\
-	movs r2, 0x7\n\
-	adds r3, r5, 0\n\
-	bl sub_814524C\n\
-	add sp, 0x4\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.align 2, 0\n\
-_08145360: .4byte gUnknown_0840B83C\n\
-_08145364: .4byte 0x000003ff\n\
-_08145368: .4byte gUnknown_0840B84B\n\
-_0814536C: .4byte gUnknown_0840B85A\n\
-_08145370: .4byte gUnknown_0840B869\n\
-_08145374: .4byte gUnknown_0840B878\n\
-    .syntax divided\n");
-}
-#endif
 
 static void spritecb_player_8145378(struct Sprite *sprite) {
     if (gUnknown_0203935C != 0)
