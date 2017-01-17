@@ -134,6 +134,8 @@ extern const struct WindowConfig gWindowConfig_81E725C;
 extern const struct WindowConfig gWindowConfig_81E7278;
 extern const struct WindowConfig gWindowConfig_81E7294;
 
+extern u16 gBGTilemapBuffers[4][0x400];
+
 extern u8 gStringVar1[];
 extern u8 gStringVar2[];
 extern u8 gStringVar3[];

@@ -30,7 +30,6 @@ struct BerryTagStatus
 };
 
 extern struct Struct2000000 unk_2000000;
-extern u16 gBGTilemapBuffers[4][0x400];
 extern u8 gUnknown_0203932C;
 extern struct BerryTagStatus gUnknown_0203932E;
 extern u16 gScriptItemId;

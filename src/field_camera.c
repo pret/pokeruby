@@ -7,8 +7,6 @@
 #include "sprite.h"
 #include "text.h"
 
-extern u16 gBGTilemapBuffers[4][0x400];
-
 extern u8 gUnknown_0202E854;
 
 
