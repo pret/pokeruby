@@ -907,37 +907,37 @@ gUnknown_081F9674:: @ 81F9674
 
 	.align 2
 gUnknown_081F9680:: @ 81F9680
-	.4byte 0x030041D0
+	.4byte gUnknown_030041D0
 	.2byte 0x20
 	.byte 0x13
 	.byte 0x10
 	.4byte BG_VRAM + 0xE104
 
-	.4byte 0x03004250
+	.4byte gUnknown_03004250
 	.2byte 0x40
 	.byte 0x13
 	.byte 0x10
 	.4byte BG_VRAM + 0xF104
 
-	.4byte 0x030041D0
+	.4byte gUnknown_030041D0
 	.2byte 0x60
 	.byte 0x13
 	.byte 0x30
 	.4byte BG_VRAM + 0xE204
 
-	.4byte 0x03004250
+	.4byte gUnknown_03004250
 	.2byte 0x80
 	.byte 0x13
 	.byte 0x30
 	.4byte BG_VRAM + 0xF204
 
-	.4byte 0x030041D0
+	.4byte gUnknown_030041D0
 	.2byte 0x20
 	.byte 0x13
 	.byte 0x18
 	.4byte BG_VRAM + 0xE1C4
 
-	.4byte 0x03004250
+	.4byte gUnknown_03004250
 	.2byte 0x40
 	.byte 0x13
 	.byte 0x18

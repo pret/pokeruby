@@ -28,11 +28,11 @@ recordMixingEasyChatPairs:: @ 83D027C
 
 	.align 2
 gUnknown_083D0280:: @ 83D0280
-	.4byte 0x02038738
+	.4byte gUnknown_02038738
 
 	.align 2
 gUnknown_083D0284:: @ 83D0284
-	.4byte 0x02024f4c
+	.4byte gSaveBlock2+0xA8
 
 gUnknown_083D0288:: @ 83D0288
 	.byte 1, 0
