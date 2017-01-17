@@ -80,7 +80,7 @@ static void LoadWallClockGraphics(void)
 {
     u8 *addr;
     u32 size;
-    
+
     SetVBlankCallback(0);
     REG_DISPCNT = 0;
     REG_BG3CNT = 0;
@@ -95,7 +95,7 @@ static void LoadWallClockGraphics(void)
     REG_BG1VOFS = 0;
     REG_BG0HOFS = 0;
     REG_BG0VOFS = 0;
-    
+
     addr = (void *)VRAM;
     size = 0x18000;
     while(1)
@@ -111,7 +111,7 @@ static void LoadWallClockGraphics(void)
     }
     DmaClear32(3, OAM, OAM_SIZE);
     DmaClear16(3, PLTT, PLTT_SIZE);
-    
+
     LZ77UnCompVram(gMiscClock_Gfx, (void *)VRAM);
     if(gSpecialVar_0x8004 == MALE)
         LoadPalette(gMiscClockMale_Pal, 0, 32);
@@ -131,7 +131,7 @@ static void LoadWallClockGraphics(void)
 static void WallClockInit(void)
 {
     u16 ime;
-    
+
     BeginNormalPaletteFade(-1, 0, 0x10, 0, 0);
     ime = REG_IME;
     REG_IME = 0;
@@ -154,10 +154,10 @@ void CB2_StartWallClock(void)
 {
     u8 taskId;
     u8 spriteId;
-    
+
     LoadWallClockGraphics();
     LZ77UnCompVram(&gUnknown_08E954B0, (void *)(VRAM + 0x3800));
-    
+
     taskId = CreateTask(Task_SetClock1, 0);
     gTasks[taskId].data[TD_HOURS] = 10;
     gTasks[taskId].data[TD_MINUTES] = 0;
@@ -166,25 +166,25 @@ void CB2_StartWallClock(void)
     gTasks[taskId].data[TD_SETSPEED] = 0;
     gTasks[taskId].data[TD_MHAND_ANGLE] = 0;
     gTasks[taskId].data[TD_HHAND_ANGLE] = 300;
-    
+
     spriteId = CreateSprite(&gSpriteTemplate_83F7AD8, 0x78, 0x50, 1);
     gSprites[spriteId].data0 = taskId;
     gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[spriteId].oam.matrixNum = 0;
-    
+
     spriteId = CreateSprite(&gSpriteTemplate_83F7AF0, 0x78, 0x50, 0);
     gSprites[spriteId].data0 = taskId;
     gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[spriteId].oam.matrixNum = 1;
-    
+
     spriteId = CreateSprite(&gSpriteTemplate_83F7B28, 0x78, 0x50, 2);
     gSprites[spriteId].data0 = taskId;
     gSprites[spriteId].data1 = 45;
-    
+
     spriteId = CreateSprite(&gSpriteTemplate_83F7B40, 0x78, 0x50, 2);
     gSprites[spriteId].data0 = taskId;
     gSprites[spriteId].data1 = 90;
-    
+
     WallClockInit();
 }
 
@@ -195,10 +195,10 @@ void CB2_ViewWallClock(void)
     s16 angle1;
     s16 angle2;
     u8 spriteId;
-    
+
     LoadWallClockGraphics();
     LZ77UnCompVram(gUnknown_08E95774, (void *)(VRAM + 0x3800));
-    
+
     taskId = CreateTask(Task_ViewClock1, 0);
     InitClockWithRtc(taskId);
     if(gTasks[taskId].data[TD_PERIOD] == 0)
@@ -211,25 +211,25 @@ void CB2_ViewWallClock(void)
         angle1 = 90;
         angle2 = 135;
     }
-    
+
     spriteId = CreateSprite(&gSpriteTemplate_83F7AD8, 120, 80, 1);
     gSprites[spriteId].data0 = taskId;
     gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[spriteId].oam.matrixNum = 0;
-    
+
     spriteId = CreateSprite(&gSpriteTemplate_83F7AF0, 120, 80, 0);
     gSprites[spriteId].data0 = taskId;
     gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
     gSprites[spriteId].oam.matrixNum = 1;
-    
+
     spriteId = CreateSprite(&gSpriteTemplate_83F7B28, 120, 80, 2);
     gSprites[spriteId].data0 = taskId;
     gSprites[spriteId].data1 = angle1;
-    
+
     spriteId = CreateSprite(&gSpriteTemplate_83F7B40, 120, 80, 2);
     gSprites[spriteId].data0 = taskId;
     gSprites[spriteId].data1 = angle2;
-    
+
     WallClockInit();
 }
 
@@ -377,7 +377,7 @@ static u8 CalcMinHandDelta(u16 speed)
 static u16 CalcNewMinHandAngle(u16 angle, u8 direction, u8 speed)
 {
     u8 delta = CalcMinHandDelta(speed);
-    
+
     switch(direction)
     {
         case BACKWARD:
@@ -435,7 +435,7 @@ static u8 AdvanceClock(u8 taskId, u8 direction)
 static void UpdateClockPeriod(u8 taskId, u8 direction)
 {
     u8 hours = gTasks[taskId].data[TD_HOURS];
-    
+
     switch(direction)
     {
         case BACKWARD:
@@ -483,20 +483,20 @@ void sub_810B05C(struct Sprite *sprite)
     s16 cos;
     u16 x;
     u16 y;
-    
+
     angle = gTasks[sprite->data0].data[TD_MHAND_ANGLE];
     sin = Sin2(angle) / 16;
     cos = Cos2(angle) / 16;
     SetOamMatrix(0, cos, sin, -sin, cos);
     x = gClockHandCoords[angle][0];
     y = gClockHandCoords[angle][1];
-    
+
     //Manual sign extension
     if(x > 0x80)
         x |= 0xFF00;
     if(y > 0x80)
         y |= 0xFF00;
-    
+
     sprite->pos2.x = x;
     sprite->pos2.y = y;
 }
@@ -508,20 +508,20 @@ void sub_810B0F4(struct Sprite *sprite)
     s16 cos;
     u16 x;
     u16 y;
-    
+
     angle = gTasks[sprite->data0].data[TD_HHAND_ANGLE];
     sin = Sin2(angle) / 16;
     cos = Cos2(angle) / 16;
     SetOamMatrix(1, cos, sin, -sin, cos);
     x = gClockHandCoords[angle][0];
     y = gClockHandCoords[angle][1];
-    
+
     //Manual sign extension
     if(x > 0x80)
         x |= 0xFF00;
     if(y > 0x80)
         y |= 0xFF00;
-    
+
     sprite->pos2.x = x;
     sprite->pos2.y = y;
 }
@@ -530,7 +530,7 @@ void sub_810B18C(struct Sprite *sprite)
 {
     s16 sin;
     s16 cos;
-    
+
     if(gTasks[sprite->data0].data[TD_PERIOD] != AM)
     {
         if((u16)(sprite->data1 - 60) <= 29)
@@ -555,7 +555,7 @@ void sub_810B230(struct Sprite *sprite)
 {
     s16 sin;
     s16 cos;
-    
+
     if(gTasks[sprite->data0].data[TD_PERIOD] != AM)
     {
         if(sprite->data1 >= 105 && sprite->data1 < 135)

@@ -116,7 +116,7 @@ void sub_811DB84(void)
 void sub_811DBC0(void)
 {
     bool8 r6 = FALSE;
-    
+
     if (!IsDoubleBattle() || (IsDoubleBattle() && (gBattleTypeFlags & 0x40)))
     {
         if (gSprites[gUnknown_03004340[gUnknown_02024A60]].callback == SpriteCallbackDummy)
@@ -140,7 +140,7 @@ void sub_811DBC0(void)
 void sub_811DCA0(void)
 {
     u8 r2;
-    
+
     if (!(EWRAM_17810[gUnknown_02024A60].unk0 & 8))
     {
         r2 = EWRAM_17810[gUnknown_02024A60 ^ 2].unk0 & 8;
@@ -174,7 +174,7 @@ void sub_811DDE8(void)
 void bx_t3_healthbar_update(void)
 {
     s16 r4;
-    
+
     r4 = sub_8045C78(gUnknown_02024A60, gUnknown_03004340[gUnknown_02024A60], 0, 0);
     sub_8043DFC(gUnknown_03004340[gUnknown_02024A60]);
     if (r4 != -1)
@@ -233,7 +233,7 @@ void bx_blink_t3(void)
         {
             gSprites[spriteId].invisible ^= 1;
         }
-        gSprites[spriteId].data1++;   
+        gSprites[spriteId].data1++;
     }
 }
 
@@ -317,7 +317,7 @@ void sub_811E29C(void)
 void dp01_tbl3_exec_completed(void)
 {
     u8 multiplayerId;
-    
+
     gUnknown_03004330[gUnknown_02024A60] = sub_811DA94;
     if (gBattleTypeFlags & 2)
     {
@@ -352,7 +352,7 @@ void dp01t_00_3_getattr(void)
     u8 unk[4];
     int r6 = 0;
     s32 i;
-    
+
     if (*((u8 *)&gUnknown_02023A60 + 2 + gUnknown_02024A60 * 0x200) == 0)
     {
         r6 = dp01_getattr_by_ch1_for_player_pokemon(gUnknown_02024A6A[gUnknown_02024A60], unk);
@@ -360,7 +360,7 @@ void dp01t_00_3_getattr(void)
     else
     {
         u8 r4 = *((u8 *)&gUnknown_02023A60 + gUnknown_02024A60 * 0x200 + 2);
-        
+
         for (i = 0; i < 6; i++)
         {
             if (r4 & 1)

@@ -69,7 +69,7 @@ static void UpdateLegendaryMarkingColor(u8);
 void SpriteCallback_VersionBannerLeft(struct Sprite *sprite)
 {
     struct Task *task = &gTasks[sprite->data1];
-    
+
     if (task->data[1] != 0)
     {
         sprite->oam.objMode = 0;
@@ -93,7 +93,7 @@ void SpriteCallback_VersionBannerLeft(struct Sprite *sprite)
 void SpriteCallback_VersionBannerRight(struct Sprite *sprite)
 {
     struct Task *task = &gTasks[sprite->data1];
-    
+
     if (task->data[1] != 0)
     {
         sprite->oam.objMode = 0;
@@ -130,7 +130,7 @@ static void CreatePressStartBanner(s16 x, s16 y)
 {
     u8 i;
     u8 spriteId;
-    
+
     x -= 32;
     for (i = 0; i < 3; i++, x += 32)
     {
@@ -144,7 +144,7 @@ static void CreateCopyrightBanner(s16 x, s16 y)
 {
     u8 i;
     u8 spriteId;
-    
+
     x -= 64;
     for (i = 0; i < 5; i++, x += 32)
     {
@@ -160,7 +160,7 @@ void SpriteCallback_PokemonLogoShine(struct Sprite *sprite)
         if (sprite->data0) //Flash background
         {
             u16 backgroundColor;
-            
+
             if (sprite->pos1.x < DISPLAY_WIDTH / 2)
             {
                 //Brighten background color
@@ -194,7 +194,7 @@ void SpriteCallback_PokemonLogoShine(struct Sprite *sprite)
 static void StartPokemonLogoShine(bool8 flashBackground)
 {
     u8 spriteId = CreateSprite(&gSpriteTemplate_8393FC0, 0, 68, 0);
-    
+
     gSprites[spriteId].oam.objMode = 2;
     gSprites[spriteId].data0 = flashBackground;
 }
@@ -264,7 +264,7 @@ void CB2_InitTitleScreen(void)
     case 2:
     {
         u8 taskId = CreateTask(Task_TitleScreenPhase1, 0);
-        
+
         gTasks[taskId].data[TD_COUNTER] = 0x100;
         gTasks[taskId].data[TD_SKIP] = FALSE;
         gTasks[taskId].data[2] = -16;
@@ -281,7 +281,7 @@ void CB2_InitTitleScreen(void)
     case 4:
     {
         u16 savedIme;
-        
+
         sub_813CE30(0x78, 0x50, 0x100, 0);
         REG_BG2X = -29 * 256;
         REG_BG2Y = -33 * 256;
@@ -340,11 +340,11 @@ static void Task_TitleScreenPhase1(u8 taskId)
         gTasks[taskId].data[TD_SKIP] = TRUE;
         gTasks[taskId].data[TD_COUNTER] = 0;
     }
-    
+
     if (gTasks[taskId].data[TD_COUNTER] != 0)
     {
         u16 frameNum = gTasks[taskId].data[TD_COUNTER];
-        
+
         if (frameNum == 160 || frameNum == 64)
             StartPokemonLogoShine(TRUE);
         gTasks[taskId].data[TD_COUNTER]--;
@@ -352,24 +352,24 @@ static void Task_TitleScreenPhase1(u8 taskId)
     else
     {
         u8 spriteId;
-        
+
         REG_DISPCNT = DISPCNT_MODE_1 | DISPCNT_OBJ_1D_MAP | DISPCNT_BG2_ON | DISPCNT_OBJ_ON;
         REG_WININ = 0;
         REG_WINOUT = 0;
         REG_BLDCNT = 0x3F50;
         REG_BLDALPHA = 0x1F;
         REG_BLDY = 0;
-        
+
         //Create left side of version banner
         spriteId = CreateSprite(&gSpriteTemplate_8393ECC, 0x62, 0x1A, 0);
         gSprites[spriteId].invisible = TRUE;
         gSprites[spriteId].data1 = taskId;
-        
+
         //Create right side of version banner
         spriteId = CreateSprite(&gSpriteTemplate_8393EE4, 0xA2, 0x1A, 0);
         gSprites[spriteId].invisible = TRUE;
         gSprites[spriteId].data1 = taskId;
-        
+
         gTasks[taskId].data[5] = 88;
         gTasks[taskId].data[TD_COUNTER] = 144;
         gTasks[taskId].func = Task_TitleScreenPhase2;
@@ -385,7 +385,7 @@ static void Task_TitleScreenPhase2(u8 taskId)
         gTasks[taskId].data[TD_SKIP] = TRUE;
         gTasks[taskId].data[TD_COUNTER] = 0;
     }
-    
+
     if (gTasks[taskId].data[TD_COUNTER] != 0)
         gTasks[taskId].data[TD_COUNTER]--;
     else
@@ -402,10 +402,10 @@ static void Task_TitleScreenPhase2(u8 taskId)
         gTasks[taskId].data[4] = 0;
         gTasks[taskId].func = Task_TitleScreenPhase3;
     }
-    
+
     if (!(gTasks[taskId].data[TD_COUNTER] & 1) && gTasks[taskId].data[3] != 0)
         gTasks[taskId].data[3]++;
-    
+
     //Slide Pokemon logo up
     REG_BG2Y = gTasks[taskId].data[3] * 256;
 }
@@ -416,7 +416,7 @@ static void Task_TitleScreenPhase3(u8 taskId)
     REG_BLDCNT = 0x2142;
     REG_BLDALPHA = 0x1F0F;
     REG_BLDY = 0;
-    
+
     if ((gMain.newKeys & A_BUTTON) || (gMain.newKeys & START_BUTTON))
     {
         FadeOutBGM(4);
@@ -481,12 +481,12 @@ static void CB2_GoToResetRtcScreen(void)
 static void UpdateLegendaryMarkingColor(u8 frameNum)
 {
     u16 palette;
-    
+
     if ((frameNum % 4) == 0) //Change color every 4th frame
     {
         u8 colorIntensity = (frameNum >> 2) & 31; //Take bits 2-6 of frameNum the color intensity
         u8 fadeDarker = (frameNum >> 2) & 32;
-        
+
         if (!fadeDarker)
             palette = LEGENDARY_MARKING_COLOR(colorIntensity);
         else

@@ -386,7 +386,7 @@ u16 GetSumOfPartyMonLevel(u8 numMons)
     for (i = 0; i < 6; i++)
     {
         u32 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES2);
-        
+
         if (species != SPECIES_EGG && species != SPECIES_NONE && GetMonData(&gPlayerParty[i], MON_DATA_HP) != 0)
         {
             sum += GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);

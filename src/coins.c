@@ -29,7 +29,7 @@ void PrintCoins(s32 a, u8 b, u8 c, u8 d)
     u8 *ptr;
     u8 r1;
     u8 foo;
-    
+
     ConvertIntToDecimalString(string, a);
     r1 = (b * 6 + 0x21 - 8 * (b + 2));
     c = c - r1 / 8;
@@ -58,7 +58,7 @@ u16 GetCoins(void)
 bool8 GiveCoins(u16 coins)
 {
     u32 newCoins;
-    
+
     if(GetCoins() >= MAX_COINS)
         return FALSE;
     newCoins = coins + gSaveBlock1.coins;

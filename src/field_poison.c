@@ -15,7 +15,7 @@ bool32 CheckMonIsValid(struct Pokemon *pkmn)
 {
     // UB: Too few arguments for function 'GetMonData'
     u16 species2 = GetMonData(pkmn, MON_DATA_SPECIES2);
-    
+
     if (species2 == 0 || species2 == 0x19C)
         return FALSE;
     else
@@ -26,7 +26,7 @@ bool32 AllMonsFainted(void)
 {
     struct Pokemon *pkmn = &gPlayerParty[0];
     int i;
-    
+
     for (i = 0; i < 6; i++, pkmn++)
     {
         // UB: Too few arguments for function 'GetMonData'
@@ -40,7 +40,7 @@ void MonFaintFromPoisonOnField(u8 partyMember)
 {
     struct Pokemon *pkmn = &gPlayerParty[partyMember];
     u32 val = 0;
-    
+
     AdjustFriendship(pkmn, 7);
     SetMonData(pkmn, MON_DATA_STATUS, (u8*)&val);
     GetMonData(pkmn, MON_DATA_NICKNAME, gStringVar1);
@@ -50,7 +50,7 @@ void MonFaintFromPoisonOnField(u8 partyMember)
 bool32 CheckMonFaintedFromPoison(u8 partyMember)
 {
     struct Pokemon *pkmn = &gPlayerParty[partyMember];
-    
+
     // UB: Too few arguments for function 'GetMonData'
     if (CheckMonIsValid(pkmn) && GetMonData(pkmn, MON_DATA_HP) == 0
      && pokemon_ailments_get_primary(GetMonData(pkmn, MON_DATA_STATUS)) == 1)
@@ -69,7 +69,7 @@ enum
 void Task_WhiteOut(u8 taskId)
 {
     s16 *taskData = gTasks[taskId].data;
-    
+
     switch (taskData[TD_STATE])
     {
         case 0: //Check if Pokemon have fainted due to poison
@@ -113,11 +113,11 @@ s32 overworld_poison(void)
     u32 numPoisoned = 0;
     u32 numFainting = 0;
     int i;
-    
+
     for(i = 0; i < 6; i++)
     {
         u32 hp;
-        
+
         // UB: Too few arguments for function 'GetMonData'
         if (GetMonData(pkmn, MON_DATA_SANITY_BIT2) != 0
          && pokemon_ailments_get_primary(GetMonData(pkmn, MON_DATA_STATUS)) == 1)

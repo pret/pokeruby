@@ -667,15 +667,15 @@ bool32 IsBikingAllowedByMap(void)
         return FALSE;
     if (gMapHeader.mapType == MAP_TYPE_UNDERWATER)
         return FALSE;
-	
+
     // is player in SeafloorCavern_Room9?
     if (gSaveBlock1.location.mapGroup == 24 && gSaveBlock1.location.mapNum == 36)
         return FALSE;
-	
+
     // is player in CaveOfOrigin_B4F?
     if (gSaveBlock1.location.mapGroup == 24 && gSaveBlock1.location.mapNum == 42)
         return FALSE;
-	
+
     return TRUE;
 }
 

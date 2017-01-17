@@ -92,7 +92,7 @@ static u32 sub_80587D8(void)
 void player_step(u8 a, u16 b, u16 c)
 {
     struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
-    
+
     sub_8059D60(playerMapObj);
     if (gPlayerAvatar.unk6 == 0)
     {
@@ -116,7 +116,7 @@ static bool8 sub_8058854(struct MapObject *a, u8 b)
      && !FieldObjectClearAnimIfSpecialAnimFinished(a))
     {
         u8 specialAnim = FieldObjectGetSpecialAnim(a);
-        
+
         if (specialAnim > 24 && specialAnim < 29 && b != 0 && a->placeholder18 != b)
         {
             FieldObjectClearAnim(a);
@@ -161,11 +161,11 @@ static u8 TryDoMetatileBehaviorForcedMovement(void)
 static u8 GetForcedMovementByMetatileBehavior(void)
 {
     u8 i;
-    
+
     if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_5))
     {
         u8 r5 = gMapObjects[gPlayerAvatar.mapObjectId].mapobj_unk_1E;
-        
+
         for (i = 0; i < 18; i++)
         {
             if (gUnknown_0830FB58[i](r5))
@@ -180,7 +180,7 @@ u8 ForcedMovement_None(void)
     if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_6)
     {
         struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
-        
+
         playerMapObj->mapobj_bit_9 = 0;
         playerMapObj->mapobj_bit_11 = 1;
         FieldObjectSetDirection(playerMapObj, playerMapObj->mapobj_unk_18);
@@ -193,7 +193,7 @@ static u8 DoForcedMovement(u8 a, void (*b)(u8))
 {
     struct PlayerAvatar *playerAvatar = &gPlayerAvatar;
     u8 r7 = CheckForPlayerAvatarCollision(a);
-    
+
     playerAvatar->flags |= PLAYER_AVATAR_FLAG_6;
     if (r7 != 0)
     {
@@ -222,7 +222,7 @@ static u8 DoForcedMovement(u8 a, void (*b)(u8))
 static u8 DoForcedMovementInCurrentDirection(void (*a)(u8))
 {
     struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
-    
+
     playerMapObj->mapobj_bit_10 = 1;
     return DoForcedMovement(playerMapObj->placeholder18, a);
 }
@@ -275,7 +275,7 @@ u8 sub_8058B54(void)
 static u8 ForcedMovement_Slide(u8 a, void (*b)(u8))
 {
     struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
-    
+
     playerMapObj->mapobj_bit_10 = 1;
     playerMapObj->mapobj_bit_9 = 1;
     return DoForcedMovement(a, b);
@@ -316,7 +316,7 @@ u8 sub_8058C10(void)
 u8 ForcedMovement_MuddySlope(void)
 {
     struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
-    
+
     if (playerMapObj->placeholder18 != 2 || sub_80E6034() <= 3)
     {
         sub_80E6010(0);
@@ -366,7 +366,7 @@ void PlayerNotOnBikeTurningInPlace(u8 a, u16 b)
 void sub_8058D0C(u8 a, u16 b)
 {
     u8 r1 = CheckForPlayerAvatarCollision(a);
-    
+
     switch (r1)
     {
     case 6:
@@ -399,7 +399,7 @@ static u8 CheckForPlayerAvatarCollision(u8 a)
 {
     s16 x, y;
     struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
-    
+
     x = playerMapObj->coords2.x;
     y = playerMapObj->coords2.y;
     MoveCoords(a, &x, &y);
@@ -409,7 +409,7 @@ static u8 CheckForPlayerAvatarCollision(u8 a)
 u8 CheckForFieldObjectCollision(struct MapObject *a, s16 b, s16 c, u8 d, u8 e)
 {
     u8 sp0;
-    
+
     sp0 = npc_block_way(a, b, c, d);
     if (sp0 == 3 && sub_8058EF0(b, c, d))
         return 5;
@@ -420,7 +420,7 @@ u8 CheckForFieldObjectCollision(struct MapObject *a, s16 b, s16 c, u8 d, u8 e)
     }
     if (sp0 == 4 && sub_8058F6C(b, c, d))
         return 7;
-    
+
     if (sp0 == 0)
     {
         if (CheckForRotatingGatePuzzleCollision(d, b, c))
@@ -458,7 +458,7 @@ static u8 sub_8058F6C(s16 a, s16 b, u8 c)
     if (FlagGet(SYS_USE_STRENGTH))
     {
         u8 mapObjectId = GetFieldObjectIdByXY(a, b);
-        
+
         if (mapObjectId != 16)
         {
             if (gMapObjects[mapObjectId].graphicsId == 0x57)
@@ -481,7 +481,7 @@ static u8 sub_8058F6C(s16 a, s16 b, u8 c)
 static void check_acro_bike_metatile(int unused1, int unused2, u8 c, u8 *d)
 {
     u8 i;
-    
+
     for (i = 0; i < 5; i++)
     {
         if (gUnknown_0830FBF8[i](c))
@@ -502,7 +502,7 @@ static void DoPlayerAvatarTransition(void)
 {
     u8 i;
     u32 flags = gPlayerAvatar.bike;
-    
+
     if (flags != 0)
     {
         for (i = 0; i < 8; i++, flags >>= 1)
@@ -555,7 +555,7 @@ void PlayerAvatarTransition_AcroBike(struct MapObject *a)
 void PlayerAvatarTransition_Surfing(struct MapObject *a)
 {
     u8 unk;
-    
+
     sub_805B980(a, GetPlayerAvatarGraphicsIdByStateId(3));
     FieldObjectTurn(a, a->placeholder18);
     SetPlayerAvatarStateMask(8);
@@ -601,7 +601,7 @@ void sub_8059204(void)
 static bool8 player_is_anim_in_certain_ranges(void)
 {
     u8 unk = gMapObjects[gPlayerAvatar.mapObjectId].mapobj_unk_1C;
-    
+
     if (unk < 4
      || (unk >= 16 && unk < 0x15)
      || (unk >= 25 && unk < 41)
@@ -780,7 +780,7 @@ static void PlayCollisionSoundIfNotFacingWarp(u8 a)
 {
     s16 x, y;
     u8 unk = gMapObjects[gPlayerAvatar.mapObjectId].mapobj_unk_1E;
-    
+
     if (!gUnknown_0830FC34[a - 1](unk))
     {
         if (a == 2)
@@ -850,7 +850,7 @@ void sub_80597E8(void)
 void sub_80597F4(void)
 {
     struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
-    
+
     npc_clear_strange_bits(playerMapObj);
     FieldObjectSetDirection(playerMapObj, playerMapObj->mapobj_unk_18);
     if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
@@ -914,7 +914,7 @@ u8 GetPlayerAvatarGenderByGraphicsId(u8 a)
 bool8 PartyHasMonWithSurf(void)
 {
     u8 i;
-    
+
     if (!TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
     {
         for (i = 0; i < 6; i++)
@@ -941,7 +941,7 @@ bool8 IsPlayerFacingSurfableFishableWater(void)
     struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
     s16 x = playerMapObj->coords2.x;
     s16 y = playerMapObj->coords2.y;
-    
+
     MoveCoords(playerMapObj->mapobj_unk_18, &x, &y);
     if (npc_block_way(playerMapObj, x, y, playerMapObj->mapobj_unk_18) == 3 && PlayerGetZCoord() == 3
      && MetatileBehavior_IsSurfableFishableWater(MapGridGetMetatileBehaviorAt(x, y)))
@@ -965,7 +965,7 @@ void SetPlayerAvatarStateMask(u8 a)
 static u8 GetPlayerAvatarStateTransitionByGraphicsId(u8 a, u8 gender)
 {
     u8 i;
-    
+
     for (i = 0; i < 5; i++)
     {
         if (gUnknown_0830FC64[gender][i][0] == a)
@@ -978,7 +978,7 @@ u8 GetPlayerAvatarGraphicsIdByCurrentState(void)
 {
     u8 i;
     u8 r5 = gPlayerAvatar.flags;
-    
+
     for (i = 0; i < 5; i++)
     {
         if (gUnknown_0830FC64[gPlayerAvatar.gender][i][1] & r5)
@@ -990,7 +990,7 @@ u8 GetPlayerAvatarGraphicsIdByCurrentState(void)
 void SetPlayerAvatarExtraStateTransition(u8 a, u8 b)
 {
     u8 unk = GetPlayerAvatarStateTransitionByGraphicsId(a, gPlayerAvatar.gender);
-    
+
     gPlayerAvatar.bike |= unk | b;
     DoPlayerAvatarTransition();
 }
@@ -1000,7 +1000,7 @@ void InitPlayerAvatar(s16 a, s16 b, u8 c, u8 d)
     struct UnknownStruct_FPA s;
     u8 mapObjectId;
     struct MapObject *mapObject;
-    
+
     s.unk0 = 0xFF;
     s.unk1 = GetPlayerAvatarGraphicsIdByStateIdAndGender(0, d);
     s.unk4 = a - 7;
@@ -1065,7 +1065,7 @@ static void sub_8059D60(struct MapObject *a)
     s16 y;
     u8 r6;
     u8 r8 = a->mapobj_unk_1E;
-    
+
     for (x = 0, r6 = 1; x < 4; x++, r6++)
     {
         if (gUnknown_0830FC78[x](r8) && r6 == a->placeholder18)
@@ -1087,7 +1087,7 @@ static void sub_8059E2C(u8 taskId);
 static void StartStrengthAnim(u8 a, u8 b)
 {
     u8 taskId = CreateTask(sub_8059E2C, 0xFF);
-    
+
     gTasks[taskId].data[1] = a;
     gTasks[taskId].data[2] = b;
     sub_8059E2C(taskId);
@@ -1150,7 +1150,7 @@ static void sub_8059FB4(u8 taskId);
 static void sub_8059F94(void)
 {
     u8 taskId = CreateTask(sub_8059FB4, 0xFF);
-    
+
     sub_8059FB4(taskId);
 }
 
@@ -1185,7 +1185,7 @@ static void sub_805A08C(u8 taskId);
 static void sub_805A06C(void)
 {
     u8 taskId = CreateTask(sub_805A08C, 0xFF);
-    
+
     sub_805A08C(taskId);
 }
 
@@ -1208,12 +1208,12 @@ u8 sub_805A0D8(struct Task *task, struct MapObject *mapObject)
 u8 sub_805A100(struct Task *task, struct MapObject *mapObject)
 {
     u8 directions[4];
-    
+
     memcpy(directions, gUnknown_0830FCA8, sizeof(directions));
     if (FieldObjectClearAnimIfSpecialAnimFinished(mapObject))
     {
         u8 direction;
-        
+
         FieldObjectSetSpecialAnim(mapObject, GetFaceDirectionAnimId(direction = directions[mapObject->placeholder18 - 1]));
         if (direction == (u8)task->data[1])
             task->data[2]++;
@@ -1227,7 +1227,7 @@ u8 sub_805A100(struct Task *task, struct MapObject *mapObject)
 u8 sub_805A178(struct Task *task, struct MapObject *mapObject)
 {
     u8 arr[5];
-    
+
     memcpy(arr, gUnknown_0830FCAC, sizeof(arr));
     if (FieldObjectClearAnimIfSpecialAnimFinished(mapObject))
     {
@@ -1257,7 +1257,7 @@ static void sub_805A2D0(u8 taskId);
 void sub_805A20C(u8 a)
 {
     u8 taskId;
-    
+
     ScriptContext2_Enable();
     sav1_reset_battle_music_maybe();
     sub_8053F84();
@@ -1272,7 +1272,7 @@ void sub_805A20C(u8 a)
 static void taskFF_0805D1D4(u8 taskId)
 {
     struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
-    
+
     if (FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(playerMapObj))
     {
         if (!FieldObjectClearAnimIfSpecialAnimFinished(playerMapObj))
@@ -1286,7 +1286,7 @@ static void taskFF_0805D1D4(u8 taskId)
 static void sub_805A2D0(u8 taskId)
 {
     struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
-    
+
     if (FieldObjectClearAnimIfSpecialAnimFinished(playerMapObj))
     {
         sub_805B980(playerMapObj, GetPlayerAvatarGraphicsIdByStateId(0));
@@ -1306,7 +1306,7 @@ static void sub_805A954(void);
 void StartFishing(u8 a)
 {
     u8 taskId = CreateTask(Task_Fishing, 0xFF);
-    
+
     gTasks[taskId].data[15] = a;
     Task_Fishing(taskId);
 }
@@ -1330,7 +1330,7 @@ u8 Fishing2(struct Task *task)
     s16 arr1[3];
     s16 arr2[3];
     struct MapObject *playerMapObj;
-    
+
     memcpy(arr1, gUnknown_0830FCF4, sizeof(arr1));
     memcpy(arr2, gUnknown_0830FCFA, sizeof(arr2));
     task->data[12] = 0;
@@ -1356,7 +1356,7 @@ u8 Fishing3(struct Task *task)
 u8 Fishing4(struct Task *task)
 {
     u32 randVal;
-    
+
     MenuDisplayMessageBox();
     task->data[0]++;
     task->data[1] = 0;
@@ -1374,7 +1374,7 @@ u8 Fishing4(struct Task *task)
 u8 Fishing5(struct Task *task)
 {
     u8 dot[2];
-    
+
     memcpy(dot, gUnknown_0830FD00, sizeof(dot));
     sub_805A954();
     task->data[1]++;
@@ -1430,7 +1430,7 @@ u8 Fishing7(struct Task *task)
 u8 Fishing8(struct Task *task)
 {
     s16 arr[3];
-    
+
     memcpy(arr, gUnknown_0830FD02, sizeof(arr));
     sub_805A954();
     task->data[1]++;
@@ -1444,7 +1444,7 @@ u8 Fishing8(struct Task *task)
 u8 Fishing9(struct Task *task)
 {
     s16 arr[3][2];
-    
+
     memcpy(arr, gUnknown_0830FD08, sizeof(arr));
     sub_805A954();
     task->data[0]++;
@@ -1455,7 +1455,7 @@ u8 Fishing9(struct Task *task)
     else if (task->data[12] < 2)
     {
         s16 randVal = Random() % 100;
-        
+
         if (arr[task->data[15]][task->data[12]] > randVal)
             task->data[0] = 3;
     }
@@ -1482,7 +1482,7 @@ u8 Fishing11(struct Task *task)
             if (MenuUpdateWindowText())
             {
                 struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
-                
+
                 sub_805B980(playerMapObj, task->data[14]);
                 FieldObjectTurn(playerMapObj, playerMapObj->placeholder18);
                 if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
@@ -1540,7 +1540,7 @@ u8 Fishing15(struct Task *task)
     if (gSprites[gPlayerAvatar.spriteId].animEnded)
     {
         struct MapObject *playerMapObj = &gMapObjects[gPlayerAvatar.mapObjectId];
-        
+
         sub_805B980(playerMapObj, task->data[14]);
         FieldObjectTurn(playerMapObj, playerMapObj->placeholder18);
         if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING)
@@ -1571,7 +1571,7 @@ static void sub_805A954(void)
     struct Sprite *playerSprite = &gSprites[gPlayerAvatar.spriteId];
     u8 animCmdIndex;
     u8 animType;
-    
+
     AnimateSprite(playerSprite);
     playerSprite->pos2.x = 0;
     playerSprite->pos2.y = 0;

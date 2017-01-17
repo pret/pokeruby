@@ -120,7 +120,7 @@ u8 unref_sub_80A9B28(void)
 static bool8 sub_80A9B78(void)
 {
     s8 choice = ProcessMenuInput();
-    
+
     switch(choice)
     {
     case -2:
@@ -171,7 +171,7 @@ s8 MatsudaDebugMenu_CommTest(void)
 {
     u8 newTaskId;
     u8 newTaskId2;
-    
+
     newTaskId = CreateTask(sub_80A9E3C, 0);
     SetTaskFuncWithFollowupFunc(newTaskId, sub_80A9E3C, sub_80A9C98);
     newTaskId2 = CreateTask(sub_80A9E04, 1);
@@ -247,7 +247,7 @@ static void sub_80A9E04(u8 taskId)
 static void sub_80A9E3C(u8 taskId)
 {
     u8 i;
-    
+
     OpenLink();
 
     for(i = 0; i < 4; i++)
@@ -268,7 +268,7 @@ static void sub_80A9E80(u8 taskId)
         if(GetLinkPlayerCount_2() > 3)
         {
             gTasks[taskId].data[0] = 0;
-    
+
             if(IsLinkMaster())
             {
                 func = sub_80A9ED8;
@@ -334,7 +334,7 @@ static void sub_80A9FE4(void)
     u8 *addr;
     u32 i;
     u8 ptr[5];
-    
+
     memcpy(ptr, gMatsudaDebugMenu_UnknownByteArray, 5);
 
     addr = (void *)VRAM;
@@ -395,7 +395,7 @@ static void sub_80AA10C(void)
     ResetSpriteData();
     ResetTasks();
     FreeAllSpritePalettes();
-    sub_80A9FE4();    
+    sub_80A9FE4();
     SetVBlankCallback(sub_80AA090);
     SetMainCallback2(sub_80AA064);
     gPaletteFade.bufferTransferDisabled = 0;
@@ -408,8 +408,8 @@ static void sub_80AA10C(void)
 
     for(i = 0; i < 6; i++)
     {
-        sub_8003460(&gMenuWindow, gMatsudaDebugMenuTextList1[i], 
-            (0xA * i + 0x2A), gMatsudaDebugMenuContestTopLeft[i][0], 
+        sub_8003460(&gMenuWindow, gMatsudaDebugMenuTextList1[i],
+            (0xA * i + 0x2A), gMatsudaDebugMenuContestTopLeft[i][0],
             gMatsudaDebugMenuContestTopLeft[i][1]);
     }
 
@@ -727,7 +727,7 @@ void sub_80AABF0(struct Sprite *sprite, s8 var2)
 {
     s8 a = (var2 > 0) ? 1 : -1;
     s8 r4 = sprite->data3 + a;
-    
+
     if (r4 < 0)
         r4 = 0;
     else if (r4 > 4)
@@ -781,7 +781,7 @@ void sub_80AAD44(struct Sprite *sprite, s8 var2)
     if (var2 == 1)
     {
         int i;
-        
+
         SetDebugMonForContest();
         for (i = 0; i < 4; i++)
             gUnknown_02038670[i] = sub_80AE770(i, gScriptContestCategory);
@@ -799,22 +799,22 @@ void sub_80AAD84(u8 *string, u8 b, u8 c, u8 d)
     //u32 sp44;
     //u32 sp48;
     u32 sp58;
-    
+
     gMain.state = 0;
-    
+
     r5 = d + 1;
     //Could also be DmaClear32
     DmaFill32(3, 0, (u8 *)VRAM + 0x18000 - r5 * 256, 0x100);
-    
+
     r7 = StringLength(string);
     if (r7 > 8)
         r7 = 8;
     sp58 = d * 2;
-    
+
     //More stuff
-    
+
     r7_2 = 0x7C - sp58;
-    
+
 }
 */
 
@@ -1000,7 +1000,7 @@ void unref_sub_80AAEE8(s32 a, u8 b, u8 c, u8 d)
 {
     u8 string[12];
     u8 offset = 0;
-    
+
     if (a < 0)
     {
         string[0] = 0xAE;
@@ -1013,7 +1013,7 @@ void unref_sub_80AAEE8(s32 a, u8 b, u8 c, u8 d)
 void sub_80AAF30(void)
 {
     s32 i;
-    
+
     gUnknown_0203856C = 1;
     gContestPlayerMonIndex = 3;
     sub_80AE098(0);
@@ -1044,7 +1044,7 @@ int MatsudaDebugMenu_SetHighScore(void)
 int MatsudaDebugMenu_ResetHighScore(void)
 {
     s32 i;
-    
+
     gUnknown_0203856C = 0;
     for (i = 0; i < 4; i++)
     {
@@ -1060,7 +1060,7 @@ int MatsudaDebugMenu_ResetHighScore(void)
 int MatsudaDebugMenu_SetArtMuseumItems(void)
 {
     s32 i;
-    
+
     gContestPlayerMonIndex = 3;
     sub_80AE098(0);
     for (i = 3; i > -1; i--)
@@ -1076,7 +1076,7 @@ void unref_sub_80AB084(u8 *text)
     u16 savedIme;
     u8 *addr;
     size_t size;
-    
+
     REG_BG0HOFS = 0;
     REG_BG0VOFS = 0;
     REG_BG1HOFS = 0;
@@ -1090,7 +1090,7 @@ void unref_sub_80AB084(u8 *text)
     REG_WIN1H = 0;
     REG_WIN1V = 0;
     REG_DISPCNT = 0x1F40;
-    
+
     savedIme = REG_IME;
     REG_IME = 0;
     REG_IE |= INTR_FLAG_VBLANK;
@@ -1099,7 +1099,7 @@ void unref_sub_80AB084(u8 *text)
     ResetTasks();
     ResetSpriteData();
     SetMainCallback2(sub_80AB184);
-    
+
     addr = (void *)VRAM;
     size = 0x18000;
     while(1)

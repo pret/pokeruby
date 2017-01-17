@@ -37,11 +37,11 @@ void ResetLotteryCorner(void)
 void SetRandomLotteryNumber(u16 i)
 {
     u32 var = Random();
-    
+
     while(--i != 0xFFFF)
         var = var * 1103515245 + 12345;
 
-    SetLotteryNumber(var);    
+    SetLotteryNumber(var);
 }
 
 void RetrieveLotteryNumber(void)
@@ -56,14 +56,14 @@ void PickLotteryCornerTicket(void)
     u16 j;
     u32 box;
     u32 slot;
-    
+
     gSpecialVar_0x8004 = 0;
     slot = 0;
     box = 0;
     for(i = 0; i < 6; i++)
     {
         struct Pokemon *pkmn = &gPlayerParty[i];
-        
+
         // UB: Too few arguments for function GetMonData
         if(GetMonData(pkmn, MON_DATA_SPECIES) != SPECIES_NONE)
         {
@@ -72,7 +72,7 @@ void PickLotteryCornerTicket(void)
             {
                 u32 otId = GetMonData(pkmn, MON_DATA_OT_ID);
                 u8 numMatchingDigits = GetMatchingDigits(gScriptResult, otId);
-                
+
                 if(numMatchingDigits > gSpecialVar_0x8004 && numMatchingDigits > 1)
                 {
                     gSpecialVar_0x8004 = numMatchingDigits - 1;
@@ -84,7 +84,7 @@ void PickLotteryCornerTicket(void)
         else // pokemon are always arranged from populated spots first to unpopulated, so the moment a NONE species is found, that's the end of the list.
             break;
     }
-    
+
     // player has 14 boxes.
     for(i = 0; i < 14; i++)
     {
@@ -92,14 +92,14 @@ void PickLotteryCornerTicket(void)
         for(j = 0; j < 30; j++)
         {
             struct BoxPokemon *pkmn = &gPokemonStorage.boxes[i][j];
-            
+
             // UB: Too few arguments for function GetMonData
             if(GetBoxMonData(pkmn, MON_DATA_SPECIES) != SPECIES_NONE &&
             !GetBoxMonData(pkmn, MON_DATA_IS_EGG))
             {
                 u32 otId = GetBoxMonData(pkmn, MON_DATA_OT_ID);
                 u8 numMatchingDigits = GetMatchingDigits(gScriptResult, otId);
-                
+
                 if(numMatchingDigits > gSpecialVar_0x8004 && numMatchingDigits > 1)
                 {
                     gSpecialVar_0x8004 = numMatchingDigits - 1;
@@ -109,11 +109,11 @@ void PickLotteryCornerTicket(void)
             }
         }
     }
-    
+
     if(gSpecialVar_0x8004 != 0)
     {
         gSpecialVar_0x8005 = sLotteryPrizes[gSpecialVar_0x8004 - 1];
-        
+
         if(box == 14)
         {
             gSpecialVar_0x8006 = 0;
@@ -132,12 +132,12 @@ static u8 GetMatchingDigits(u16 winNumber, u16 otId)
 {
     u8 i;
     u8 matchingDigits = 0;
-    
+
     for(i = 0; i < 5; i++)
     {
         sWinNumberDigit = winNumber % 10;
         sOtIdDigit = otId % 10;
-        
+
         if(sWinNumberDigit == sOtIdDigit)
         {
             winNumber = winNumber / 10;
@@ -164,7 +164,7 @@ u32 GetLotteryNumber(void)
 {
     u16 highNum = VarGet(VAR_POKELOT_RND1);
     u16 lowNum = VarGet(VAR_POKELOT_RND2);
-    
+
     return (lowNum << 16) | highNum;
 }
 

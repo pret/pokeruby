@@ -369,7 +369,7 @@ void sub_80B5838(void)
 void task_picbox(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    
+
     switch(task->data[0])
     {
         case 0:

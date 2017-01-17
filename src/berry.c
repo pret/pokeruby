@@ -29,7 +29,7 @@ void SetEnigmaBerry(u8 *src)
 {
     u32 i;
     u8 *dest = (u8*)&gSaveBlock1.enigmaBerry;
-    
+
     for (i = 0; i < sizeof(gSaveBlock1.enigmaBerry); i++)
         dest[i] = src[i];
 
@@ -94,7 +94,7 @@ struct BerryTree *GetBerryTreeInfo(u8 id)
 bool32 FieldObjectInteractionWaterBerryTree(void)
 {
     struct BerryTree *tree = GetBerryTreeInfo(FieldObjectGetBerryTreeId(gSelectedMapObject));
-    
+
     switch (tree->stage)
     {
     case 1:
@@ -137,7 +137,7 @@ void ClearBerryTrees(void)
     int i;
     struct SaveBlock1 *saveBlock1 = &gSaveBlock1;
     struct BerryTree berryTree = gBlankBerryTree;
-    
+
     for (i = 0; i < 128; i++)
         saveBlock1->berryTrees[i] = berryTree;
 }
@@ -175,7 +175,7 @@ void BerryTreeTimeUpdate(int time)
 {
     int i;
     struct BerryTree *tree;
-    
+
     for (i = 0; i < 128; i++)
     {
         tree = &gSaveBlock1.berryTrees[i];
@@ -189,7 +189,7 @@ void BerryTreeTimeUpdate(int time)
             else
             {
                 int time2 = time;
-                
+
                 while (time2 != 0)
                 {
                     if (tree->secondsUntilNextStage > time2)
@@ -212,7 +212,7 @@ void BerryTreeTimeUpdate(int time)
 void PlantBerryTree(u8 id, u8 berry, u8 stage, bool8 sparkle)
 {
     struct BerryTree *tree = GetBerryTreeInfo(id);
-    
+
     *tree = gBlankBerryTree;
     tree->berry = berry;
     tree->secondsUntilNextStage = GetStageDurationByBerryType(berry);
@@ -246,7 +246,7 @@ u8 GetStageByBerryTreeId(u8 id)
 u8 ItemIdToBerryType(u16 item)
 {
     u16 berry = item - FIRST_BERRY;
-    
+
     if (berry > LAST_BERRY - FIRST_BERRY)
         return 1;
     else
@@ -256,7 +256,7 @@ u8 ItemIdToBerryType(u16 item)
 u16 BerryTypeToItemId(u16 berry)
 {
     u16 item = berry - 1;
-    
+
     if (item > LAST_BERRY - FIRST_BERRY)
         return FIRST_BERRY;
     else
@@ -277,7 +277,7 @@ void ResetBerryTreeSparkleFlag(u8 id)
 u8 BerryTreeGetNumStagesWatered(struct BerryTree *tree)
 {
     u8 count = 0;
-    
+
     if (tree->watered1)
         count++;
     if (tree->watered2)
@@ -300,7 +300,7 @@ u8 CalcBerryYieldInternal(u16 max, u16 min, u8 water)
     u32 randMax;
     u32 rand;
     u32 extraYield;
-    
+
     if (water == 0)
         return min;
     else
@@ -308,7 +308,7 @@ u8 CalcBerryYieldInternal(u16 max, u16 min, u8 water)
         randMin = (max - min) * (water - 1);
         randMax = (max - min) * (water);
         rand = randMin + Random() % (randMax - randMin + 1);
-        
+
         if ((rand & 3) > 1)
             extraYield = rand / 4 + 1;
         else
@@ -322,7 +322,7 @@ u8 CalcBerryYield(struct BerryTree *tree)
     struct Berry *berry = GetBerryInfo(tree->berry);
     u8 min = berry->minYield;
     u8 max = berry->maxYield;
-    
+
     return CalcBerryYieldInternal(max, min, BerryTreeGetNumStagesWatered(tree));
 }
 
@@ -343,7 +343,7 @@ void FieldObjectInteractionGetBerryTreeData(void)
     u8 unk;
     u8 group;
     u8 num;
-    
+
     id = FieldObjectGetBerryTreeId(gSelectedMapObject);
     berry = GetBerryTypeByBerryTreeId(id);
     ResetBerryTreeSparkleFlag(id);
@@ -367,7 +367,7 @@ void sub_80B4EE4(void)
 void FieldObjectInteractionPlantBerryTree(void)
 {
     u8 berry = ItemIdToBerryType(gScriptItemId);
-    
+
     PlantBerryTree(FieldObjectGetBerryTreeId(gSelectedMapObject), berry, 1, TRUE);
     FieldObjectInteractionGetBerryTreeData();
 }
@@ -376,7 +376,7 @@ void FieldObjectInteractionPickBerryTree(void)
 {
     u8 id = FieldObjectGetBerryTreeId(gSelectedMapObject);
     u8 berry = GetBerryTypeByBerryTreeId(id);
-    
+
     gSpecialVar_0x8004 = AddBagItem(BerryTypeToItemId(berry), GetBerryCountByBerryTreeId(id));
 }
 

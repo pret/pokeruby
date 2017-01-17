@@ -1655,7 +1655,7 @@ static void BattleAICmd_unk_36(void)
         gAIThinkingSpace.funcResult = 0;
     if(gBattleWeather & 0x80)
         gAIThinkingSpace.funcResult = 3;
-    
+
     gAIScriptPtr += 1;
 }
 
@@ -1683,7 +1683,7 @@ static void BattleAICmd_if_stat_level_less_than(void)
         party = gUnknown_02024C07;
     else
         party = gUnknown_02024C08;
-    
+
     if(gBattleMons[party].statStages[gAIScriptPtr[2]] < gAIScriptPtr[3])
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
     else
@@ -1698,7 +1698,7 @@ static void BattleAICmd_if_stat_level_more_than(void)
         party = gUnknown_02024C07;
     else
         party = gUnknown_02024C08;
-    
+
     if(gBattleMons[party].statStages[gAIScriptPtr[2]] > gAIScriptPtr[3])
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
     else
@@ -1713,7 +1713,7 @@ static void BattleAICmd_if_stat_level_equal(void)
         party = gUnknown_02024C07;
     else
         party = gUnknown_02024C08;
-    
+
     if(gBattleMons[party].statStages[gAIScriptPtr[2]] == gAIScriptPtr[3])
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
     else
@@ -1728,7 +1728,7 @@ static void BattleAICmd_if_stat_level_not_equal(void)
         party = gUnknown_02024C07;
     else
         party = gUnknown_02024C08;
-    
+
     if(gBattleMons[party].statStages[gAIScriptPtr[2]] != gAIScriptPtr[3])
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
     else
@@ -1750,13 +1750,13 @@ static void BattleAICmd_if_can_faint(void)
     gUnknown_02024BE6 = gAIThinkingSpace.unk2;
     sub_801CAF8(gUnknown_02024C07, gUnknown_02024C08);
     move_effectiveness_something(gUnknown_02024BE6, gUnknown_02024C07, gUnknown_02024C08);
-    
+
     gBattleMoveDamage = gBattleMoveDamage * gAIThinkingSpace.unk18[gAIThinkingSpace.moveConsidered] / 100;
-    
+
     // moves always do at least 1 damage.
     if(gBattleMoveDamage == 0)
         gBattleMoveDamage = 1;
-    
+
     if(gBattleMons[gUnknown_02024C08].hp <= gBattleMoveDamage)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
     else
@@ -1779,7 +1779,7 @@ static void BattleAICmd_if_cant_faint(void)
     gUnknown_02024BE6 = gAIThinkingSpace.unk2;
     sub_801CAF8(gUnknown_02024C07, gUnknown_02024C08);
     move_effectiveness_something(gUnknown_02024BE6, gUnknown_02024C07, gUnknown_02024C08);
-    
+
     gBattleMoveDamage = gBattleMoveDamage * gAIThinkingSpace.unk18[gAIThinkingSpace.moveConsidered] / 100;
 
     // this macro is missing the damage 0 = 1 assumption.
@@ -1794,7 +1794,7 @@ static void BattleAICmd_unk_3F(void)
 {
     int i;
     u16 *temp_ptr = (u16 *)(gAIScriptPtr + 2);
-    
+
     switch(gAIScriptPtr[1])
     {
         case 1:
@@ -1838,7 +1838,7 @@ static void BattleAICmd_unk_40(void)
 {
     int i;
     u16 *temp_ptr = (u16 *)(gAIScriptPtr + 2);
-    
+
     switch(gAIScriptPtr[1])
     {
         case 1:
@@ -1881,7 +1881,7 @@ static void BattleAICmd_unk_40(void)
 static void BattleAICmd_if_move_effect(void)
 {
     int i;
-    
+
     switch(gAIScriptPtr[1])
     {
         case 1:
@@ -1910,7 +1910,7 @@ static void BattleAICmd_if_move_effect(void)
 static void BattleAICmd_if_not_move_effect(void)
 {
     int i;
-    
+
     switch(gAIScriptPtr[1])
     {
         case 1:
@@ -1939,12 +1939,12 @@ static void BattleAICmd_if_not_move_effect(void)
 static void BattleAICmd_if_last_move_did_damage(void)
 {
     u8 var;
-    
+
     if(gAIScriptPtr[1] == USER)
         var = gUnknown_02024C07;
     else
         var = gUnknown_02024C08;
-    
+
     if(gAIScriptPtr[2] == 0)
     {
         if(gUnknown_02024CA8[var].unk4 == 0)
@@ -2002,7 +2002,7 @@ static void BattleAICmd_unk_45(void)
 static void BattleAICmd_if_random_2(void)
 {
     u8 var = battle_2000000.unk88 * 5;
-    
+
     if((u8)(Random() % 100) < var)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
     else
@@ -2019,12 +2019,12 @@ static void BattleAICmd_get_hold_effect(void)
     u8 var;
     u16 status;
     u8 *aiPtr;
-    
+
     if(gAIScriptPtr[1] == USER)
         var = gUnknown_02024C07;
     else
         var = gUnknown_02024C08;
-    
+
     if(battle_side_get_owner(var) == 0)
     {
         // weird pointer arithmetic is needed to match.
@@ -2034,21 +2034,21 @@ static void BattleAICmd_get_hold_effect(void)
     }
     else
         gAIThinkingSpace.funcResult = ItemId_GetHoldEffect(gBattleMons[var].item);
-    
+
     gAIScriptPtr += 2;
 }
 
 static void BattleAICmd_get_gender(void)
 {
     u8 var;
-    
+
     if(gAIScriptPtr[1] == USER)
         var = gUnknown_02024C07;
     else
         var = gUnknown_02024C08;
-    
+
     gAIThinkingSpace.funcResult = GetGenderFromSpeciesAndPersonality(gBattleMons[var].species, gBattleMons[var].personality);
-    
+
     gAIScriptPtr += 2;
 }
 
@@ -2060,9 +2060,9 @@ static void BattleAICmd_is_first_turn(void)
         var = gUnknown_02024C07;
     else
         var = gUnknown_02024C08;
-    
+
     gAIThinkingSpace.funcResult = gUnknown_02024CA8[var].unk16;
-    
+
     gAIScriptPtr += 2;
 }
 
@@ -2074,66 +2074,66 @@ static void BattleAICmd_get_stockpile_count(void)
         var = gUnknown_02024C07;
     else
         var = gUnknown_02024C08;
-    
+
     gAIThinkingSpace.funcResult = gUnknown_02024CA8[var].unk9;
-    
+
     gAIScriptPtr += 2;
 }
 
 static void BattleAICmd_unk_4C(void)
 {
     gAIThinkingSpace.funcResult = gBattleTypeFlags & 1;
-    
+
     gAIScriptPtr += 1;
 }
 
 static void BattleAICmd_get_item(void)
 {
     u8 var;
-    
+
     if (gAIScriptPtr[1] == USER)
         var = gUnknown_02024C07;
     else
         var = gUnknown_02024C08;
-   
+
     // this hack and a half matches. whatever. i dont care. someone else fix this mess later.
     ((struct AI_ThinkingStruct *)(unk_2000000 + 0x16800))->funcResult = unk_2000000[0x160CC + var * 2];
-    
+
     gAIScriptPtr += 2;
 }
 
 static void BattleAICmd_unk_4E(void)
 {
     gAIThinkingSpace.funcResult = gBattleMoves[gAIThinkingSpace.funcResult].type;
-    
+
     gAIScriptPtr += 1;
 }
 
 static void BattleAICmd_unk_4F(void)
 {
     gAIThinkingSpace.funcResult = gBattleMoves[gAIThinkingSpace.funcResult].power;
-    
+
     gAIScriptPtr += 1;
 }
 
 static void BattleAICmd_unk_50(void)
 {
     gAIThinkingSpace.funcResult = gBattleMoves[gAIThinkingSpace.funcResult].effect;
-    
+
     gAIScriptPtr += 1;
 }
 
 static void BattleAICmd_get_protect_count(void)
 {
     u8 var;
-    
+
     if(gAIScriptPtr[1] == USER)
         var = gUnknown_02024C07;
     else
         var = gUnknown_02024C08;
 
     gAIThinkingSpace.funcResult = gUnknown_02024CA8[var].unk8;
-    
+
     gAIScriptPtr += 2;
 }
 

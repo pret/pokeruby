@@ -54,9 +54,9 @@ void HandleCloseSaveWindow(u16 left, u16 top)
         MenuZeroFillWindowRect(left, top, left + width, top + 9);
 }
 
-/* 
-theory: This function was used to handle the save menu window's width being auto sized from 
-either 12 or 13 in an older source. Whatever was here might have either been optimized out by 
+/*
+theory: This function was used to handle the save menu window's width being auto sized from
+either 12 or 13 in an older source. Whatever was here might have either been optimized out by
 GF's compiler or was dummied out to always return a TRUE at some point.
 */
 u8 IsResizeSaveWindowEnabled(void) // i don't know what else to name it..

@@ -191,7 +191,7 @@ static void BuildStartMenuActions_Link(void)
         AddStartMenuAction(MENU_ACTION_POKENAV);
     AddStartMenuAction(MENU_ACTION_PLAYER_LINK);
     AddStartMenuAction(MENU_ACTION_OPTION);
-    AddStartMenuAction(MENU_ACTION_EXIT);    
+    AddStartMenuAction(MENU_ACTION_EXIT);
 }
 
 //Show number of safari balls left
@@ -206,7 +206,7 @@ static void DisplaySafariBallsWindow(void)
 static bool32 PrintStartMenuItemsMultistep(s16 *index, u32 n)
 {
     int _index = *index;
-    
+
     do
     {
         MenuPrint(sStartMenuItems[sCurrentStartMenuActions[_index]].text, 23, 2 + _index * 2);
@@ -258,7 +258,7 @@ static void InitStartMenu(void)
 {
     s16 step = 0;
     s16 index = 0;
-    
+
     while(InitStartMenuMultistep(&step, &index) == FALSE)
         ;
 }
@@ -275,7 +275,7 @@ static void Task_StartMenu(u8 taskId)
 void CreateStartMenuTask(void (*func)(u8))
 {
     u8 taskId;
-    
+
     InitMenuWindow(&gWindowConfig_81E6CE4);
     taskId = CreateTask(Task_StartMenu, 0x50);
     SetTaskFuncWithFollowupFunc(taskId, Task_StartMenu, func);
@@ -490,7 +490,7 @@ static u8 SaveCallback2(void)
             return TRUE;
     }
     return FALSE;
-} 
+}
 
 static void sub_807160C(void)
 {
@@ -528,13 +528,13 @@ static void DisplaySaveMessageWithCallback(u8 *ptr, u8 (*func)(void))
 static void Task_SaveDialog(u8 taskId)
 {
     u8 status = RunSaveDialogCallback();
-    
+
     switch(status)
     {
         case SAVE_CANCELED:
         case SAVE_ERROR:
             gScriptResult = 0;
-            break;        
+            break;
         case SAVE_SUCCESS:
             gScriptResult = status;
             break;
@@ -671,7 +671,7 @@ static u8 SaveDialogCB_DisplaySavingMessage(void)
 static u8 SaveDialogCB_DoSave(void)
 {
     u8 a;
-    
+
     IncrementGameStat(0);
     if(gUnknown_020297EC == TRUE)
     {
@@ -682,7 +682,7 @@ static u8 SaveDialogCB_DoSave(void)
     {
         a = sub_8125D44(0);
     }
-    
+
     if(a == 1)
     {
         //"(Player) saved the game."
@@ -693,7 +693,7 @@ static u8 SaveDialogCB_DoSave(void)
         //"Save error. Please exchange the backup memory."
         DisplaySaveMessageWithCallback(gSystemText_SaveErrorExchangeBackup, SaveDialogCB_SaveError);
     }
-    
+
     SaveDialogStartTimeout();
     return SAVE_IN_PROGRESS;
 }
@@ -753,7 +753,7 @@ static bool32 sub_80719FC(u8 *step)
         {
             u8 *addr;
             u32 size;
-            
+
             REG_DISPCNT = 0;
             SetVBlankCallback(NULL);
             remove_some_task();
@@ -787,7 +787,7 @@ static bool32 sub_80719FC(u8 *step)
         case 3:
         {
             u32 savedIme;
-            
+
             BlendPalettes(-1, 0x10, 0);
             SetVBlankCallback(sub_80719F0);
             savedIme = REG_IME;
@@ -821,7 +821,7 @@ static void sub_8071B54(void)
 static void Task_8071B64(u8 taskId)
 {
     s16 *step = gTasks[taskId].data;
-    
+
     if(!gPaletteFade.active)
     {
         switch(*step)
@@ -850,7 +850,7 @@ static void Task_8071B64(u8 taskId)
             case 4:
                 SetMainCallback2(gMain.savedCallback);
                 DestroyTask(taskId);
-                break;                
+                break;
         }
     }
 }

@@ -8,7 +8,7 @@ extern const struct HealLocation gHealLocations[];
 u32 GetHealLocationIndexByMap(u16 mapGroup, u16 mapNum)
 {
     u32 i;
-    
+
     for (i = 0; i < NUM_HEAL_LOCATIONS; i++)
     {
         if(gHealLocations[i].group == mapGroup && gHealLocations[i].map == mapNum)
@@ -20,7 +20,7 @@ u32 GetHealLocationIndexByMap(u16 mapGroup, u16 mapNum)
 const struct HealLocation *GetHealLocationByMap(u16 mapGroup, u16 mapNum)
 {
     u32 index = GetHealLocationIndexByMap(mapGroup, mapNum);
-    
+
     if (index == 0)
         return NULL;
     else

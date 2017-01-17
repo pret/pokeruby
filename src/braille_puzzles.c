@@ -104,7 +104,7 @@ bool8 ShouldDoBrailleFlyEffect(void)
         if(gSaveBlock1.pos.x == 8 && gSaveBlock1.pos.y == 25)
             return TRUE;
     }
-    
+
     return FALSE;
 }
 
@@ -117,7 +117,7 @@ void DoBrailleFlyEffect(void)
 bool8 FldEff_UseFlyAncientTomb(void)
 {
     u8 taskId = oei_task_add();
-    
+
     gTasks[taskId].data[8] = (u32)UseFlyAncientTomb_Callback >> 16;
     gTasks[taskId].data[9] = (u32)UseFlyAncientTomb_Callback;
     return FALSE;
@@ -205,12 +205,12 @@ void Task_BrailleWait(u8 taskId)
 bool32 BrailleWait_CheckButtonPress(void)
 {
     u16 var = 0xFF;
-    
+
     if(gSaveBlock2.optionsButtonMode == 1)
         var |= 0x300;
     if(gSaveBlock2.optionsButtonMode == 2)
         var |= 0x200;
-    
+
     if((var & gMain.newKeys) != FALSE)
         return TRUE;
     else
@@ -220,7 +220,7 @@ bool32 BrailleWait_CheckButtonPress(void)
 void DoSealedChamberShakingEffect1(void)
 {
     u8 taskId = CreateTask(SealedChamberShakingEffect, 0x9);
-    
+
     gTasks[taskId].data[1] = 0;
     gTasks[taskId].data[2] = 0;
     gTasks[taskId].data[4] = 2;
@@ -232,7 +232,7 @@ void DoSealedChamberShakingEffect1(void)
 void DoSealedChamberShakingEffect2(void)
 {
     u8 taskId = CreateTask(SealedChamberShakingEffect, 0x9);
-    
+
     gTasks[taskId].data[1] = 0;
     gTasks[taskId].data[2] = 0;
     gTasks[taskId].data[4] = 3;
@@ -244,7 +244,7 @@ void DoSealedChamberShakingEffect2(void)
 void SealedChamberShakingEffect(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    
+
     task->data[1]++;
 
     if(!(task->data[1] % task->data[5]))

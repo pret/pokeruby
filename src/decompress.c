@@ -23,7 +23,7 @@ void LZDecompressVram(const void *src, void *dest)
 void LoadCompressedObjectPic(const struct SpriteSheet *a)
 {
     struct SpriteSheet spriteSheet;
-    
+
     LZ77UnCompWram(a->data, (void *)WRAM);
     spriteSheet.data = (void *)WRAM;
     spriteSheet.size = a->size;
@@ -34,7 +34,7 @@ void LoadCompressedObjectPic(const struct SpriteSheet *a)
 void LoadCompressedObjectPicOverrideBuffer(const struct SpriteSheet *a, void *buffer)
 {
     struct SpriteSheet spriteSheet;
-    
+
     LZ77UnCompWram(a->data, buffer);
     spriteSheet.data = buffer;
     spriteSheet.size = a->size;
@@ -45,7 +45,7 @@ void LoadCompressedObjectPicOverrideBuffer(const struct SpriteSheet *a, void *bu
 void LoadCompressedObjectPalette(const struct SpritePalette *a)
 {
     struct SpritePalette spritePalette;
-    
+
     LZ77UnCompWram(a->data, (void *)WRAM);
     spritePalette.data = (void *)WRAM;
     spritePalette.tag = a->tag;
@@ -55,7 +55,7 @@ void LoadCompressedObjectPalette(const struct SpritePalette *a)
 void LoadCompressedObjectPaletteOverrideBuffer(const struct SpritePalette *a, void *buffer)
 {
     struct SpritePalette spritePalette;
-    
+
     LZ77UnCompWram(a->data, buffer);
     spritePalette.data = buffer;
     spritePalette.tag = a->tag;
@@ -73,7 +73,7 @@ void DecompressPicFromTable_2(const struct SpriteSheet *a, u8 b, u8 c, void *d, 
 void HandleLoadSpecialPokePic(const struct SpriteSheet *spriteSheet, u32 b, u32 c, u32 d, void *dest, s32 species, u32 g)
 {
     u32 frontOrBack;
-    
+
 	// gUnknown_081FAF4C appears to be a list of pointers to locations to store poke pics for back and front pic here. the first and third pointers are used for back while the others are used for front.
     if (dest == gUnknown_081FAF4C[0] || dest == gUnknown_081FAF4C[2])
         frontOrBack = 0; // backPic
@@ -86,11 +86,11 @@ void HandleLoadSpecialPokePic(const struct SpriteSheet *spriteSheet, u32 b, u32 
 void LoadSpecialPokePic(const struct SpriteSheet *spriteSheet, u32 b, u32 c, u32 d, void *dest, s32 species, u32 g, u32 frontOrBack)
 {
     u8 frontOrBack8 = frontOrBack;
-    
+
     if (species == SPECIES_UNOWN)
     {
         u16 i = (((g & 0x3000000) >> 18) | ((g & 0x30000) >> 12) | ((g & 0x300) >> 6) | (g & 3)) % 0x1C;
-        
+
 		// if it is Unown A, set the index to where Unown begins, otherwise add the egg index to get the correct letter to load.
         if (i == 0)
             i = SPECIES_UNOWN;

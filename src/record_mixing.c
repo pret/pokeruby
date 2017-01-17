@@ -59,7 +59,7 @@ void sub_80B92AC(void)
 {
     sub_80BC300();
     sub_80C045C();
-    
+
     memcpy(unk_2018000.secretBases, recordMixingSecretBases, sizeof(unk_2018000.secretBases));
     memcpy(unk_2018000.tvShows, recordMixingTvShows, sizeof(unk_2018000.tvShows));
     memcpy(unk_2018000.filler1004, gUnknown_083D0274, 0x40);
@@ -70,7 +70,7 @@ void sub_80B92AC(void)
     sub_8041324(gSaveBlock1.filler_2F9C, gUnknown_02038738);
     memcpy(unk_2018000.filler10AC, gUnknown_083D0280, 0x78);
     memcpy(unk_2018000.filler1124, gUnknown_083D0284, 0xA4);
-    
+
     if(GetMultiplayerId() == 0)
         unk_2018000.filler11C8[0] = sub_8126338();
 }
@@ -211,7 +211,7 @@ void sub_80B9450(u8 taskId)
 void sub_80B9484(u8 taskId)
 {
     s16 *taskData = gTasks[taskId].data;
-    
+
     switch(taskData[TD_STATE])
     {
     case 0:
@@ -268,7 +268,7 @@ void sub_80B9484(u8 taskId)
 void sub_80B95F0(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    
+
     switch(task->data[TD_STATE])
     {
     case 0:
@@ -290,7 +290,7 @@ void sub_80B95F0(u8 taskId)
     case 101:
     {
         u8 players = GetLinkPlayerCount_2();
-        
+
         if(IsLinkMaster() == 1)
         {
             if(players == sub_800820C())
@@ -339,7 +339,7 @@ void sub_80B95F0(u8 taskId)
     case 2:
     {
         u8 subTaskId;
-        
+
         task->data[6] = GetLinkPlayerCount_2();
         task->data[TD_STATE] = 0;
         task->data[5] = GetMultiplayerId_();
@@ -366,13 +366,13 @@ void sub_80B95F0(u8 taskId)
 void sub_80B97DC(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    
+
     switch(task->data[TD_STATE])
     {
         case 0: //Copy record data to send buffer
         {
             void *recordData = (u8 *)LoadPtrFromTaskData(&task->data[2]) + BUFFER_CHUNK_SIZE * task->data[4];
-            
+
             memcpy(gBlockSendBuffer, recordData, BUFFER_CHUNK_SIZE);
             task->data[TD_STATE]++;
             break;
@@ -402,18 +402,18 @@ void Task_CopyRecvBuffer(u8 taskId)
     struct Task *task = &gTasks[taskId];
     s32 recvStatus = GetBlockReceivedStatus();
     u32 sp8 = 0;
-    
+
     if(recvStatus == sub_8008198())
     {
         u8 player;
-        
+
         for(player = 0; player < GetLinkPlayerCount(); player++)
         {
             //_080B98D4
             u8 *ptr;
             void *src;
             u8 *dst;
-            
+
             if((recvStatus >> player) & 1)
             {
                 ptr = LoadPtrFromTaskData(&task->data[5]);
@@ -441,7 +441,7 @@ void Task_CopyRecvBuffer(u8 taskId)
 void sub_80B99B4(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    
+
     if(!gTasks[task->data[10]].isActive)
         DestroyTask(taskId);
 }
@@ -449,7 +449,7 @@ void sub_80B99B4(u8 taskId)
 void sub_80B99E8(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
-    
+
     task->func = sub_80B99B4;
     if(gUnknown_03000718 == 1)
         sub_80B93B0(task->data[5]);
@@ -492,7 +492,7 @@ void sub_80B9A88(u8 *a)
     u32 i;
     u32 id;
     u32 players = GetLinkPlayerCount();
-    
+
     switch(players)
     {
     case 2:
@@ -518,7 +518,7 @@ void sub_80B9B1C(u8 *a, size_t size, u8 index)
 {
     u8 arr[4];
     u8 *ptr;
-    
+
     sub_80B9A88(arr);
     //Probably not how it was originally written, but this matches.
     memcpy(a + index * size, (ptr = gUnknown_083D0278), 0x40);
@@ -623,7 +623,7 @@ u8 sub_80B9C4C(u8 *a)
 {
     int i;
     u8 r2 = 0;
-    
+
     for(i = 0; i < 0x100; i++)
         r2 += a[i];
     return r2;
@@ -647,7 +647,7 @@ struct UnkStruct1
     u32 unk48;
     u32 unk4C;
     u32 unk50;
-    
+
 };
 
 /*
@@ -657,7 +657,7 @@ extern void sub_80B9C6C(void *a, u32 b, u8 c, void *d)
     struct UnkStruct1 s;
     u16 r8;
     u16 r3;
-    
+
     s.unk2C = a;
     s.unk30 = b;
     s.unk38 = d;
@@ -666,15 +666,15 @@ extern void sub_80B9C6C(void *a, u32 b, u8 c, void *d)
     SeedRng(gLinkPlayers[0].trainerId);
     r8 = GetLinkPlayerCount();
     r3 = 0;
-    
+
     s.unk4C = 12;
-    
+
     while(r3 < 4)
     {
 
         s.unk4[r3] |= 0xFF;
         s.unk8[r3] = 0;
-        
+
         s.unk1C[r3][0] = 0;
         s.unk1C[r3][1] = 0;
         r3++;
@@ -683,7 +683,7 @@ extern void sub_80B9C6C(void *a, u32 b, u8 c, void *d)
     r3 = 0;
     s.unk50 = r8 << 16;
     s.unk48 = s.unk30 * s.unk34;
-    
+
     if(s.unk3C < r8)
     {
         do  //_080B9D00
@@ -691,7 +691,7 @@ extern void sub_80B9C6C(void *a, u32 b, u8 c, void *d)
             u32 *r6 = (u32 *)(s.unk2C + s.unk30 * r3);
             if(r6[0x1C] != 0 && r6[0x1C] > 0)
             {
-                
+
             }
             //_080B9D3C
         }

@@ -307,7 +307,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
             // does lack of sun half solar beam damage?
             if ((gBattleWeather & 0x9F) && gUnknown_02024BE6 == 76)
                 damage /= 2;
-			
+
             // sunny?
             if (gBattleWeather & 0x60)
             {
