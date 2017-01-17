@@ -467,76 +467,83 @@ _08083038: .4byte sub_808303C
 	thumb_func_start sub_808303C
 sub_808303C: @ 808303C
 	push {r4-r7,lr}
-	mov r7, r9
-	mov r6, r8
-	push {r6,r7}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	lsls r0, r4, 2
-	adds r0, r4
-	lsls r0, 3
-	mov r8, r0
-	ldr r0, _080830D0 @ =gTasks + 0x8
-	mov r9, r0
-	mov r7, r8
-	add r7, r9
-	bl GetLinkPlayerCount_2
 	lsls r0, 24
 	lsrs r5, r0, 24
-	adds r0, r4, 0
+	lsls r0, r5, 2
+	adds r0, r5
+	lsls r0, 3
+	ldr r1, _08083098 @ =0x03004b38
+	adds r7, r0, r1
+	bl GetLinkPlayerCount_2
+	lsls r0, 24
+	lsrs r6, r0, 24
+	adds r0, r5, 0
 	bl sub_8082E28
 	cmp r0, 0x1
-	beq _080830C2
-	adds r0, r4, 0
+	beq _080830DA
+	adds r0, r5, 0
 	bl sub_8082EB8
 	cmp r0, 0x1
-	beq _080830C2
-	adds r0, r4, 0
+	beq _080830DA
+	adds r0, r5, 0
 	bl sub_8082DF4
 	cmp r0, 0x1
-	beq _080830C2
-	adds r6, r5, 0
-	adds r0, r4, 0
-	adds r1, r6, 0
+	beq _080830DA
+	lsls r4, r6, 24
+	lsrs r1, r4, 24
+	adds r0, r5, 0
 	bl sub_8082D60
-	ldr r0, _080830D4 @ =gMain
+	ldr r0, _0808309C @ =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
 	cmp r0, 0
-	beq _080830C2
+	beq _080830DA
+	ldr r0, _080830A0 @ =gLinkType
+	ldrh r1, [r0]
+	ldr r0, _080830A4 @ =0x00002255
+	cmp r1, r0
+	bne _080830A8
+	cmp r6, 0x1
+	bhi _080830B0
+	b _080830DA
+	.align 2, 0
+_08083098: .4byte 0x03004b38
+_0808309C: .4byte gMain
+_080830A0: .4byte gLinkType
+_080830A4: .4byte 0x00002255
+_080830A8:
 	movs r1, 0x2
 	ldrsh r0, [r7, r1]
-	cmp r5, r0
-	blt _080830C2
-	adds r0, r6, 0
+	cmp r0, r6
+	bgt _080830DA
+_080830B0:
+	lsrs r0, r4, 24
 	bl sub_80081C8
 	bl sub_8082D4C
-	ldr r0, _080830D8 @ =gStringVar1
-	adds r1, r5, 0
+	ldr r0, _080830E0 @ =gStringVar1
+	adds r1, r6, 0
 	movs r2, 0
 	movs r3, 0x1
 	bl ConvertIntToDecimalStringN
-	ldr r0, _080830DC @ =gUnknown_081A4975
+	ldr r0, _080830E4 @ =gUnknown_081A4975
 	bl ShowFieldAutoScrollMessage
-	mov r0, r9
-	subs r0, 0x8
-	add r0, r8
-	ldr r1, _080830E0 @ =sub_80830E4
+	ldr r1, _080830E8 @ =gTasks
+	lsls r0, r5, 2
+	adds r0, r5
+	lsls r0, 3
+	adds r0, r1
+	ldr r1, _080830EC @ =sub_80830E4
 	str r1, [r0]
-_080830C2:
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
+_080830DA:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080830D0: .4byte gTasks + 0x8
-_080830D4: .4byte gMain
-_080830D8: .4byte gStringVar1
-_080830DC: .4byte gUnknown_081A4975
-_080830E0: .4byte sub_80830E4
+_080830E0: .4byte gStringVar1
+_080830E4: .4byte gUnknown_081A4975
+_080830E8: .4byte gTasks
+_080830EC: .4byte sub_80830E4
 	thumb_func_end sub_808303C
 
 	thumb_func_start sub_80830E4
@@ -801,14 +808,14 @@ sub_8083314: @ 8083314
 	adds r0, r5, 0
 	bl sub_8082DF4
 	cmp r0, 0x1
-	beq _080833B6
+	beq _080833CA
 	bl GetBlockReceivedStatus
 	adds r4, r0, 0
 	bl sub_8008198
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
-	bne _080833B6
+	bne _080833CA
 	movs r4, 0
 	ldr r6, _0808333C @ =gTrainerCards
 	b _0808335A
@@ -816,7 +823,7 @@ sub_8083314: @ 8083314
 _0808333C: .4byte gTrainerCards
 _08083340:
 	lsls r1, r4, 8
-	ldr r0, _08083394 @ =gBlockRecvBuffer
+	ldr r0, _080833A0 @ =gBlockRecvBuffer
 	adds r1, r0
 	lsls r0, r4, 3
 	subs r0, r4
@@ -837,39 +844,49 @@ _0808335A:
 	bl SetSuppressLinkErrorMessage
 	bl ResetBlockReceivedFlags
 	bl HideFieldMessageBox
-	ldr r0, _08083398 @ =gScriptResult
-	ldrh r0, [r0]
-	cmp r0, 0x1
-	bne _080833A4
-	ldr r0, _0808339C @ =gLinkType
+	ldr r0, _080833A4 @ =gScriptResult
+	ldrh r2, [r0]
+	cmp r2, 0x1
+	bne _080833B8
+	ldr r0, _080833A8 @ =gLinkType
 	ldrh r1, [r0]
-	ldr r0, _080833A0 @ =0x00004411
+	ldr r0, _080833AC @ =0x00004411
+	cmp r1, r0
+	beq _08083390
+	ldr r0, _080833B0 @ =0x00006601
+	cmp r1, r0
+	bne _08083390
+	ldr r0, _080833B4 @ =0x03002970
+	strb r2, [r0]
+_08083390:
 	bl sub_8082D4C
 	bl EnableBothScriptContexts
 	adds r0, r5, 0
 	bl DestroyTask
-	b _080833B6
+	b _080833CA
 	.align 2, 0
-_08083394: .4byte gBlockRecvBuffer
-_08083398: .4byte gScriptResult
-_0808339C: .4byte gLinkType
-_080833A0: .4byte 0x00004411
-_080833A4:
+_080833A0: .4byte gBlockRecvBuffer
+_080833A4: .4byte gScriptResult
+_080833A8: .4byte gLinkType
+_080833AC: .4byte 0x00004411
+_080833B0: .4byte 0x00006601
+_080833B4: .4byte 0x03002970
+_080833B8:
 	bl sub_800832C
-	ldr r0, _080833BC @ =gTasks
+	ldr r0, _080833D0 @ =gTasks
 	lsls r1, r5, 2
 	adds r1, r5
 	lsls r1, 3
 	adds r1, r0
-	ldr r0, _080833C0 @ =sub_80833C4
+	ldr r0, _080833D4 @ =sub_80833C4
 	str r0, [r1]
-_080833B6:
+_080833CA:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080833BC: .4byte gTasks
-_080833C0: .4byte sub_80833C4
+_080833D0: .4byte gTasks
+_080833D4: .4byte sub_80833C4
 	thumb_func_end sub_8083314
 
 	thumb_func_start sub_80833C4

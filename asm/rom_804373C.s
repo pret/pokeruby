@@ -1207,7 +1207,7 @@ _0804404C:
 	movs r0, 0x4
 	strb r0, [r3]
 	adds r3, 0x1
-	movs r0, 0xF0
+	movs r0, 0xAD
 	strb r0, [r3]
 	adds r3, 0x1
 	strb r1, [r3]

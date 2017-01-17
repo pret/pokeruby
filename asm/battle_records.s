@@ -651,9 +651,10 @@ ShowLinkBattleRecords: @ 811043C
 	ldr r0, _0811048C @ =gSaveBlock1 + 0x30B8
 	bl PrintLinkBattleWinsLossesDraws
 	ldr r0, _08110490 @ =gOtherText_WinLoseDraw
-	movs r1, 0xC
-	movs r2, 0x6
-	bl MenuPrint
+	movs r1, 0x58
+	movs r2, 0x30
+	movs r3, 0x1
+	bl MenuPrint_PixelCoords
 	movs r4, 0
 _08110468:
 	lsls r0, r4, 4

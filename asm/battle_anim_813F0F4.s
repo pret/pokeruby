@@ -5020,9 +5020,9 @@ _08141882:
 	lsrs r0, 16
 	cmp r0, r7
 	bne _081418A2
-	ldr r0, _081418EC @ =gBattleAnimPicTable + (233 * 8)
+	ldr r0, _081418EC @ =0x0838a094
 	bl LoadCompressedObjectPic
-	ldr r0, _081418F0 @ =gBattleAnimPaletteTable + (233 * 8)
+	ldr r0, _081418F0 @ =0x0838a99c
 	bl LoadCompressedObjectPalette
 _081418A2:
 	ldr r5, _081418F4 @ =sub_814191C
@@ -5057,8 +5057,8 @@ _081418A2:
 _081418E0: .4byte 0x02017810
 _081418E4: .4byte 0x0000ffff
 _081418E8: .4byte 0x000027f9
-_081418EC: .4byte gBattleAnimPicTable + (233 * 8)
-_081418F0: .4byte gBattleAnimPaletteTable + (233 * 8)
+_081418EC: .4byte 0x0838a094
+_081418F0: .4byte 0x0838a99c
 _081418F4: .4byte sub_814191C
 _081418F8: .4byte gTasks
 _081418FC:
@@ -5438,9 +5438,9 @@ sub_8141BD4: @ 8141BD4
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, _08141BFC @ =gBattleAnimPicTable + (269 * 8)
+	ldr r0, _08141BFC @ =0x0838a1b4
 	bl LoadCompressedObjectPic
-	ldr r0, _08141C00 @ =gBattleAnimPaletteTable + (269 * 8)
+	ldr r0, _08141C00 @ =0x0838aabc
 	bl LoadCompressedObjectPalette
 	ldr r0, _08141C04 @ =0x0000281d
 	bl IndexOfSpritePaletteTag
@@ -5450,8 +5450,8 @@ sub_8141BD4: @ 8141BD4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08141BFC: .4byte gBattleAnimPicTable + (269 * 8)
-_08141C00: .4byte gBattleAnimPaletteTable + (269 * 8)
+_08141BFC: .4byte 0x0838a1b4
+_08141C00: .4byte 0x0838aabc
 _08141C04: .4byte 0x0000281d
 	thumb_func_end sub_8141BD4
 

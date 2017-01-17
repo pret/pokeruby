@@ -111,11 +111,6 @@ void sub_80B7AEC(u32 arg0, u8 left, u8 top) {
     ptr = ConvertIntToDecimalString(ptr, arg0);
 
     MenuPrint_RightAligned(buffer, left, top);
-
-    ptr[0] = 0xFC;
-    ptr[1] = 0x14;
-    ptr[2] = 0x00;
-    ptr[3] = 0xFF;
 }
 
 __attribute__((naked))

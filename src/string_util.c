@@ -137,6 +137,19 @@ u16 StringLength(const u8 *str)
     return length;
 }
 
+int de_sub_8006CA8(u8 *str, int n)
+{
+    int i = 0;
+
+    while (i < n && str[i] != EOS)
+        i++;
+
+    if (i == n)
+        i = 0;
+
+    return i;
+}
+
 s32 StringCompare(const u8 *str1, const u8 *str2)
 {
     while (*str1 == *str2)

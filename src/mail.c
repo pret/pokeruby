@@ -148,9 +148,9 @@ void HandleReadMail(struct MailStruct *arg0, MainCallback arg1, bool8 arg2) {
 	ldr r2, _080F8958 @ =0x02000000\n\
 	adds r1, r2, 0\n\
 	adds r1, 0xFF\n\
-	movs r0, 0x2\n\
+	movs r0, 0x5\n\
 	strb r0, [r1]\n\
-	adds r0, 0xFE\n\
+	adds r0, 0xFB\n\
 	adds r1, r2, r0\n\
 	movs r0, 0x1\n\
 	strb r0, [r1]\n\
@@ -487,17 +487,17 @@ static void sub_80F8DA0(void) {
 	push {r7}\n\
 	movs r6, 0\n\
 	movs r5, 0\n\
-	ldr r2, _080F8E3C @ =0x02000000\n\
+	ldr r2, _080F91EC @ =0x02000000\n\
 	movs r0, 0x86\n\
 	lsls r0, 1\n\
 	adds r1, r2, r0\n\
 	ldr r0, [r1]\n\
 	ldrb r0, [r0]\n\
 	cmp r5, r0\n\
-	bcs _080F8E04\n\
+	bcs _080F91B4\n\
 	mov r8, r2\n\
 	adds r7, r1, 0\n\
-_080F8DBE:\n\
+_080F916E:\n\
 	lsls r0, r5, 3\n\
 	subs r0, r5\n\
 	lsls r0, 2\n\
@@ -531,24 +531,24 @@ _080F8DBE:\n\
 	lsrs r5, r0, 16\n\
 	ldrb r1, [r1]\n\
 	cmp r5, r1\n\
-	bcc _080F8DBE\n\
-_080F8E04:\n\
-	ldr r2, _080F8E40 @ =0x020000d8\n\
+	bcc _080F916E\n\
+_080F91B4:\n\
+	ldr r2, _080F91F0 @ =0x020000d8\n\
 	adds r4, r2, 0\n\
 	subs r4, 0xD8\n\
 	adds r0, r2, 0\n\
 	adds r0, 0x28\n\
 	ldrb r0, [r0]\n\
 	cmp r0, 0\n\
-	bne _080F8E48\n\
+	bne _080F91F8\n\
 	ldr r1, [r2, 0x1C]\n\
 	adds r1, 0x12\n\
 	adds r0, r2, 0\n\
 	bl sub_80F8D7C\n\
 	adds r2, r0, 0\n\
-	ldr r1, _080F8E44 @ =gOtherText_From\n\
+	ldr r1, _080F91F4 @ =gOtherText_From\n\
 	bl StringCopy\n\
-	ldr r0, _080F8E40 @ =0x020000d8\n\
+	ldr r0, _080F91F0 @ =0x020000d8\n\
 	bl StringLength\n\
 	movs r2, 0x86\n\
 	lsls r2, 1\n\
@@ -556,13 +556,13 @@ _080F8E04:\n\
 	ldr r1, [r1]\n\
 	ldrb r1, [r1, 0x2]\n\
 	subs r1, r0\n\
-	b _080F8E6A\n\
+	b _080F921A\n\
 	.align 2, 0\n\
-_080F8E3C: .4byte 0x02000000\n\
-_080F8E40: .4byte 0x020000d8\n\
-_080F8E44: .4byte gOtherText_From\n\
-_080F8E48:\n\
-	ldr r1, _080F8E7C @ =gOtherText_From\n\
+_080F91EC: .4byte 0x02000000\n\
+_080F91F0: .4byte 0x020000d8\n\
+_080F91F4: .4byte gOtherText_From\n\
+_080F91F8:\n\
+	ldr r1, _080F922C @ =gOtherText_From\n\
 	adds r0, r2, 0\n\
 	bl StringCopy\n\
 	adds r2, r0, 0\n\
@@ -577,7 +577,7 @@ _080F8E48:\n\
 	adds r0, r4, r1\n\
 	ldr r0, [r0]\n\
 	ldrb r1, [r0, 0x2]\n\
-_080F8E6A:\n\
+_080F921A:\n\
 	adds r0, r4, 0\n\
 	adds r0, 0xF9\n\
 	strb r1, [r0]\n\
@@ -587,7 +587,7 @@ _080F8E6A:\n\
 	pop {r0}\n\
 	bx r0\n\
 	.align 2, 0\n\
-_080F8E7C: .4byte gOtherText_From\n\
+_080F922C: .4byte gOtherText_From\n\
     .syntax divided\n");
 }
 #endif

@@ -68,18 +68,29 @@ enum {
     PAGE_PROGRAMMERS,
     PAGE_GRAPHIC_DESIGNERS,
     PAGE_PRODUCT_SUPPORT,
+
+#ifdef GERMAN
+    PAGE_NOE_TESTING,
+    PAGE_BRAILLE_CODE_CHECK_1,
+#else
     PAGE_ARTWORK,
     PAGE_TEXT_EDITOR,
     PAGE_NOA_TESTING,
     PAGE_BRAILLE_CODE_CHECK_1,
     PAGE_BRAILLE_CODE_CHECK_2,
+#endif
+
     PAGE_SPECIAL_THANKS_4,
     PAGE_SPECIAL_THANKS_5,
 
     PAGE_COUNT
 };
 
+#ifdef GERMAN
+#define UNK_DEFINE_82 (0x8D)
+#else
 #define UNK_DEFINE_82 (0x82)
+#endif
 
 #define COLOR_DARK_GREEN 0x1967
 #define COLOR_LIGHT_GREEN 0x328D
@@ -124,7 +135,7 @@ enum {
 
 struct Unk201C000 {
     u16 unk0[8];
-    u8 pad_10[0x78];
+    u8 pad_10[0x72];
     u16 unk88;
     u16 unk8A;
     u16 unk8C;
@@ -727,7 +738,11 @@ static void task_b_81441B8(u8 taskIdB) {
     }
 }
 
+#ifdef GERMAN
+#define LAST_PAGE (PAGE_NOE_TESTING)
+#else
 #define LAST_PAGE (PAGE_TEXT_EDITOR)
+#endif
 
 static u8 sub_8144454(u8 page, u8 taskIdA) {
     // Starts with bike + ocean + morning
@@ -793,7 +808,11 @@ static u8 sub_8144454(u8 page, u8 taskIdA) {
     return FALSE;
 }
 
+#ifdef GERMAN
+#define UNK_DEFINE_44 (0x41)
+#else
 #define UNK_DEFINE_44 (0x44)
+#endif
 
 #define EWRAM_1C000 (*(struct Unk201C000 *)(unk_2000000 + 0x1C000))
 
@@ -1169,7 +1188,11 @@ _0814492C:\n\
     .syntax divided\n");
 }
 
+#ifdef GERMAN
+#define UNK_DEF_1F3 (554)
+#else
 #define UNK_DEF_1F3 (499)
+#endif
 
 void task_e_8144934(u8 taskIdE) {
     s16 taskIdC;
@@ -1234,7 +1257,11 @@ void task_e_8144934(u8 taskIdE) {
     }
 }
 
+#ifdef GERMAN
+#define UNK_DEFINE_45 (8)
+#else
 #define UNK_DEFINE_45 (0x45)
+#endif
 
 static void sub_8144A68(u8 data, u8 taskIdA) {
     switch (data)
@@ -1560,7 +1587,7 @@ u16 sub_8145208(u8 arg0) {
 }
 
 __attribute__((naked))
-void sub_814524C(void *arg0, u8 arg1, u8 arg2, u16 arg3, int arg4) {
+static void sub_814524C(void *arg0, u8 arg1, u8 arg2, u16 arg3, int arg4) {
     asm(".syntax unified\n\
 	push {r4-r7,lr}\n\
 	mov r7, r10\n\
@@ -1641,12 +1668,10 @@ static void sub_81452D0(u16 arg0, u16 arg1)
     for (i = 0; i < 0x400; i ++)
         ((u16 *)(VRAM + arg0))[i] = bar + 1;
 
-    sub_814524C(&gUnknown_0840B83C, 3, 7, arg0, arg1);
-    sub_814524C(&gUnknown_0840B84B, 7, 7, arg0, arg1);
-    sub_814524C(&gUnknown_0840B85A, 11, 7, arg0, arg1);
-    sub_814524C(&gUnknown_0840B85A, 16, 7, arg0, arg1);
-    sub_814524C(&gUnknown_0840B869, 20, 7, arg0, arg1);
-    sub_814524C(&gUnknown_0840B878, 24, 7, arg0, arg1);
+    sub_814524C(&gUnknown_0840B85A, 7, 7, arg0, arg1);
+    sub_814524C(&gUnknown_0840B869, 11, 7, arg0, arg1);
+    sub_814524C(&gUnknown_0840B878, 15, 7, arg0, arg1);
+    sub_814524C(&gUnknown_0840B85A, 19, 7, arg0, arg1);
 }
 
 static void spritecb_player_8145378(struct Sprite *sprite) {
@@ -2232,8 +2257,8 @@ void sub_81458DC(void) {
 	mov r5, r8\n\
 	push {r5-r7}\n\
 	sub sp, 0x4\n\
-	ldr r7, _0814597C @ =0x0201c000\n\
-	ldr r0, _08145980 @ =0x00004023\n\
+	ldr r7, _08145978 @ =0x0201c000\n\
+	ldr r0, _0814597C @ =0x00004023\n\
 	bl VarGet\n\
 	lsls r0, 16\n\
 	lsrs r0, 16\n\
@@ -2246,7 +2271,7 @@ void sub_81458DC(void) {
 	mov r10, r0\n\
 	movs r4, 0x1\n\
 	movs r5, 0\n\
-	ldr r0, _08145984 @ =0x00000181\n\
+	ldr r0, _08145980 @ =0x00000181\n\
 	mov r8, r0\n\
 _0814590E:\n\
 	adds r0, r4, 0\n\
@@ -2254,7 +2279,7 @@ _0814590E:\n\
 	bl sub_8090D90\n\
 	lsls r0, 24\n\
 	adds r6, r7, 0\n\
-	adds r6, 0x90\n\
+	adds r6, 0x8A\n\
 	cmp r0, 0\n\
 	beq _0814592C\n\
 	lsls r0, r5, 1\n\
@@ -2270,14 +2295,14 @@ _0814592C:\n\
 	cmp r4, r8\n\
 	bls _0814590E\n\
 	adds r4, r5, 0\n\
-	ldr r0, _08145984 @ =0x00000181\n\
+	ldr r0, _08145980 @ =0x00000181\n\
 	lsls r1, r4, 16\n\
 	mov r9, r1\n\
-	movs r2, 0x8E\n\
+	movs r2, 0x88\n\
 	adds r2, r7\n\
 	mov r8, r2\n\
 	adds r1, r7, 0\n\
-	adds r1, 0x86\n\
+	adds r1, 0x80\n\
 	str r1, [sp]\n\
 	cmp r4, r0\n\
 	bhi _08145964\n\
@@ -2294,36 +2319,37 @@ _08145954:\n\
 	cmp r4, r2\n\
 	bls _08145954\n\
 _08145964:\n\
-	movs r2, 0xE5\n\
-	lsls r2, 2\n\
+	ldr r2, _08145984 @ =0x0000038e\n\
 	adds r0, r7, r2\n\
 	strh r5, [r0]\n\
 	mov r1, r9\n\
 	lsrs r0, r1, 16\n\
-	cmp r0, 0x43\n\
+	cmp r0, 0x40\n\
 	bhi _08145988\n\
 	mov r2, r8\n\
 	strh r5, [r2]\n\
 	b _0814598E\n\
 	.align 2, 0\n\
-_0814597C: .4byte 0x0201c000\n\
-_08145980: .4byte 0x00004023\n\
-_08145984: .4byte 0x00000181\n\
+_08145978: .4byte 0x0201c000\n\
+_0814597C: .4byte 0x00004023\n\
+_08145980: .4byte 0x00000181\n\
+_08145984: .4byte 0x0000038e\n\
 _08145988:\n\
-	movs r0, 0x44\n\
+	movs r0, 0x41\n\
 	mov r1, r8\n\
 	strh r0, [r1]\n\
 _0814598E:\n\
 	movs r5, 0\n\
-	movs r2, 0xE5\n\
-	lsls r2, 2\n\
+	ldr r2, _08145998 @ =0x0000038e\n\
 	adds r4, r7, r2\n\
 	mov r9, r5\n\
-	b _0814599E\n\
-_0814599A:\n\
-	cmp r5, 0x43\n\
-	bhi _081459EE\n\
-_0814599E:\n\
+	b _081459A0\n\
+	.align 2, 0\n\
+_08145998: .4byte 0x0000038e\n\
+_0814599C:\n\
+	cmp r5, 0x40\n\
+	bhi _081459F0\n\
+_081459A0:\n\
 	bl Random\n\
 	lsls r0, 16\n\
 	lsrs r0, 16\n\
@@ -2348,7 +2374,7 @@ _0814599E:\n\
 	lsls r0, 16\n\
 	lsrs r0, 16\n\
 	cmp r2, r0\n\
-	beq _081459E8\n\
+	beq _081459EA\n\
 	ldrh r0, [r4]\n\
 	lsls r0, 1\n\
 	adds r0, r6, r0\n\
@@ -2359,21 +2385,21 @@ _0814599E:\n\
 	adds r0, r6, r0\n\
 	mov r1, r9\n\
 	strh r1, [r0]\n\
-_081459E8:\n\
+_081459EA:\n\
 	ldrh r0, [r4]\n\
 	cmp r0, 0\n\
-	bne _0814599A\n\
-_081459EE:\n\
+	bne _0814599C\n\
+_081459F0:\n\
 	mov r2, r8\n\
 	ldrh r0, [r2]\n\
-	cmp r0, 0x43\n\
-	bhi _08145A26\n\
+	cmp r0, 0x40\n\
+	bhi _08145A28\n\
 	adds r5, r0, 0\n\
 	movs r2, 0\n\
-	cmp r5, 0x43\n\
-	bhi _08145A5C\n\
+	cmp r5, 0x40\n\
+	bhi _08145A5E\n\
 	mov r3, r8\n\
-_08145A00:\n\
+_08145A02:\n\
 	lsls r1, r5, 1\n\
 	adds r1, r7, r1\n\
 	lsls r0, r2, 1\n\
@@ -2385,21 +2411,21 @@ _08145A00:\n\
 	lsrs r2, r0, 16\n\
 	ldrh r0, [r3]\n\
 	cmp r2, r0\n\
-	bne _08145A1A\n\
+	bne _08145A1C\n\
 	movs r2, 0\n\
-_08145A1A:\n\
+_08145A1C:\n\
 	adds r0, r5, 0x1\n\
 	lsls r0, 16\n\
 	lsrs r5, r0, 16\n\
-	cmp r5, 0x43\n\
-	bls _08145A00\n\
-	b _08145A5C\n\
-_08145A26:\n\
+	cmp r5, 0x40\n\
+	bls _08145A02\n\
+	b _08145A5E\n\
+_08145A28:\n\
 	movs r4, 0\n\
 	ldrh r0, [r7]\n\
 	cmp r0, r10\n\
-	beq _08145A42\n\
-_08145A2E:\n\
+	beq _08145A44\n\
+_08145A30:\n\
 	adds r0, r4, 0x1\n\
 	lsls r0, 16\n\
 	lsrs r4, r0, 16\n\
@@ -2407,15 +2433,15 @@ _08145A2E:\n\
 	adds r0, r7, r0\n\
 	ldrh r0, [r0]\n\
 	cmp r0, r10\n\
-	beq _08145A42\n\
-	cmp r4, 0x43\n\
-	bls _08145A2E\n\
-_08145A42:\n\
+	beq _08145A44\n\
+	cmp r4, 0x40\n\
+	bls _08145A30\n\
+_08145A44:\n\
 	mov r1, r8\n\
 	ldrh r0, [r1]\n\
 	subs r0, 0x1\n\
 	cmp r4, r0\n\
-	bge _08145A5C\n\
+	bge _08145A5E\n\
 	lsls r0, r4, 1\n\
 	adds r0, r7, r0\n\
 	ldr r2, [sp]\n\
@@ -2423,13 +2449,13 @@ _08145A42:\n\
 	strh r1, [r0]\n\
 	mov r0, r10\n\
 	strh r0, [r2]\n\
-	b _08145A62\n\
-_08145A5C:\n\
+	b _08145A64\n\
+_08145A5E:\n\
 	mov r2, r10\n\
 	ldr r1, [sp]\n\
 	strh r2, [r1]\n\
-_08145A62:\n\
-	movs r0, 0x44\n\
+_08145A64:\n\
+	movs r0, 0x41\n\
 	mov r1, r8\n\
 	strh r0, [r1]\n\
 	add sp, 0x4\n\

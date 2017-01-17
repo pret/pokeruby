@@ -752,13 +752,13 @@ sub_80B5F70: @ 80B5F70
 	bne _080B5FC8
 	mov r0, sp
 	ldrh r0, [r0]
-	subs r0, 0x6
+	subs r0, 0x7
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0x1
 	bhi _080B5FC8
 	mov r1, sp
-	movs r0, 0x5
+	movs r0, 0x6
 	strh r0, [r1]
 _080B5FC8:
 	mov r0, sp
@@ -1243,13 +1243,13 @@ _080B630C:
 	cmp r0, 0
 	bge _080B633A
 	mov r1, sp
-	movs r0, 0x8
+	movs r0, 0x9
 	strh r0, [r1]
 _080B633A:
 	mov r0, sp
 	movs r1, 0
 	ldrsh r0, [r0, r1]
-	cmp r0, 0x8
+	cmp r0, 0x9
 	ble _080B634A
 	mov r1, sp
 	movs r0, 0
@@ -1268,12 +1268,12 @@ _080B634A:
 	subs r0, 0x6
 	lsls r0, 16
 	lsrs r0, 16
-	cmp r0, 0x1
+	cmp r0, 0x2
 	bhi _080B638A
 	cmp r1, 0
 	ble _080B6384
 	mov r1, sp
-	movs r0, 0x8
+	movs r0, 0x9
 	b _080B6388
 	.align 2, 0
 _080B6374: .4byte gMain
@@ -1289,7 +1289,7 @@ _080B638A:
 	mov r0, sp
 	movs r2, 0
 	ldrsh r0, [r0, r2]
-	cmp r0, 0x8
+	cmp r0, 0x9
 	bne _080B63AC
 	ldrh r0, [r4]
 	strh r0, [r5, 0xC]
@@ -1303,7 +1303,7 @@ _080B638A:
 	.align 2, 0
 _080B63A8: .4byte gUnknown_083CE26C
 _080B63AC:
-	cmp r6, 0x8
+	cmp r6, 0x9
 	bne _080B63CA
 	movs r1, 0
 	ldrsh r0, [r4, r1]
@@ -1324,7 +1324,7 @@ _080B63CA:
 	mov r0, sp
 	movs r1, 0
 	ldrsh r0, [r0, r1]
-	cmp r0, 0x8
+	cmp r0, 0x9
 	bne _080B6408
 	movs r2, 0
 	ldrsh r0, [r4, r2]
@@ -1889,8 +1889,9 @@ sub_80B67EC: @ 80B67EC
 	asrs r0, 16
 	ldr r1, _080B6808 @ =0x02000000
 	ldrb r2, [r1, 0xE]
-	lsls r1, r2, 3
+	lsls r1, r2, 2
 	adds r1, r2
+	lsls r1, 1
 	adds r0, r1
 	adds r0, r3
 	ldrb r0, [r0]
@@ -1961,7 +1962,7 @@ _080B6874: .4byte gSprites
 	thumb_func_start sub_80B6878
 sub_80B6878: @ 80B6878
 	push {lr}
-	movs r0, 0x8
+	movs r0, 0x9
 	movs r1, 0x2
 	bl sub_80B680C
 	pop {r0}
@@ -2094,7 +2095,7 @@ sub_80B6958: @ 80B6958
 	bl sub_80B6858
 	movs r1, 0
 	ldrsh r0, [r4, r1]
-	cmp r0, 0x7
+	cmp r0, 0x8
 	ble _080B698C
 	movs r1, 0
 	ldrsh r0, [r5, r1]
@@ -2142,7 +2143,7 @@ _080B69B0:
 	strb r2, [r3]
 	movs r1, 0x2E
 	ldrsh r0, [r4, r1]
-	cmp r0, 0x8
+	cmp r0, 0x9
 	bne _080B69DA
 	movs r0, 0x4
 	orrs r2, r0

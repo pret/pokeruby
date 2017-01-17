@@ -5976,17 +5976,18 @@ _08098948: .4byte 0x02002694
 _0809894C: .4byte 0xffffeb66
 _08098950: .4byte gUnknown_083B6DF4
 _08098954:
-	ldr r0, _0809896C @ =0x02002694
-	adds r1, r0, 0
+	ldr r4, _0809896C @ =0x02002694
+	adds r1, r4, 0
 	adds r1, 0x50
+	adds r0, r4, 0
 	bl StringCopy
-	adds r2, r0, 0
 	ldr r1, _08098970 @ =gUnknown_083B6DF4
 	lsls r0, r5, 3
 	adds r0, r1
 	ldr r1, [r0]
-	adds r0, r2, 0
-	b _080989FE
+	adds r0, r4, 0
+	bl de_sub_8073174
+	b _08098A06
 	.align 2, 0
 _0809896C: .4byte 0x02002694
 _08098970: .4byte gUnknown_083B6DF4
@@ -6054,6 +6055,7 @@ _080989F4:
 	ldr r1, [r1]
 _080989FE:
 	bl StringCopy
+_08098A06:
 	adds r2, r0, 0
 	ldr r0, _08098A34 @ =0x020026a6
 	adds r3, r0, 0

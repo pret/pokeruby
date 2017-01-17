@@ -51,7 +51,7 @@ static void Task_TriggerHandshake(u8);
 static void TestBlockTransfer(u32, u32, u32);
 static void LinkTestProcessKeyInput(void);
 static void CB2_LinkTest(void);
-static void HandleReceiveRemoteLinkPlayer(u8);
+void HandleReceiveRemoteLinkPlayer(u8);
 static void ProcessRecvCmds(u8);
 static void BuildSendCmd(u16);
 static void sub_8007B44(void);
@@ -62,7 +62,7 @@ static void LinkCB_BlockSend(void);
 static void LinkCB_BlockSendEnd(void);
 static void sub_8007E04(void);
 u32 sub_8007E40(void);
-static void SetBlockReceivedFlag(u8);
+void SetBlockReceivedFlag(u8);
 static u16 LinkTestCalcBlockChecksum(void *, u16);
 static void PrintHexDigit(u8, u8, u8);
 static void PrintHex(u32, u8, u8, u8);
@@ -118,6 +118,8 @@ u32 gLinkDebugValue1;
 struct LinkPlayerBlock localLinkPlayerBlock;
 bool8 gLinkErrorOccurred;
 u32 gLinkDebugValue2;
+u8 deUnkValue1;
+u8 deUnkValue2;
 bool8 gLinkPlayerPending[MAX_LINK_PLAYERS];
 struct LinkPlayer gLinkPlayers[MAX_LINK_PLAYERS];
 bool8 gBlockReceived[MAX_LINK_PLAYERS];
@@ -171,13 +173,13 @@ static const u8 sDebugMessages[7][12] =
 
 static const u8 sColorCodes[] = _"{HIGHLIGHT TRANSPARENT}{COLOR WHITE2}";
 
-static const u32 sBlockRequestLookupTable[5 * 2] =
+const struct BlockRequest sBlockRequestLookupTable[5] =
 {
-    (u32)gBlockSendBuffer, 200,
-    (u32)gBlockSendBuffer, 200,
-    (u32)gBlockSendBuffer, 100,
-    (u32)gBlockSendBuffer, 220,
-    (u32)gBlockSendBuffer,  40,
+    {gBlockSendBuffer, 200},
+    {gBlockSendBuffer, 200},
+    {gBlockSendBuffer, 100},
+    {gBlockSendBuffer, 220},
+    {gBlockSendBuffer, 40},
 };
 
 static const u8 sTestString[] = _"テストな";
@@ -448,7 +450,7 @@ u16 LinkMain2(u16 *heldKeys)
     return gLinkStatus;
 }
 
-static void HandleReceiveRemoteLinkPlayer(u8 multiplayerId)
+void HandleReceiveRemoteLinkPlayer(u8 multiplayerId)
 {
     u32 pendingLinkPlayerCount = 0;
     s32 i;
@@ -462,6 +464,7 @@ static void HandleReceiveRemoteLinkPlayer(u8 multiplayerId)
         gReceivedRemoteLinkPlayers = TRUE;
 }
 
+#ifdef NONMATCHING
 static void ProcessRecvCmds(u8 unusedParam)
 {
     u16 i;
@@ -573,6 +576,442 @@ static void ProcessRecvCmds(u8 unusedParam)
         }
     }
 }
+#else
+__attribute__((naked))
+static void ProcessRecvCmds(u8 unusedParam)
+{
+    asm(".syntax unified\n\
+	push {r4-r7,lr}\n\
+	mov r7, r10\n\
+	mov r6, r9\n\
+	mov r5, r8\n\
+	push {r5-r7}\n\
+	sub sp, 0x4\n\
+	movs r7, 0\n\
+	ldr r0, _0800786C @ =gRecvCmds\n\
+	adds r0, 0x8\n\
+	mov r10, r0\n\
+_08007824:\n\
+	ldr r0, _08007870 @ =word_3002910\n\
+	lsls r3, r7, 1\n\
+	adds r2, r3, r0\n\
+	movs r1, 0\n\
+	strh r1, [r2]\n\
+	ldr r4, _0800786C @ =gRecvCmds\n\
+	adds r1, r3, r4\n\
+	ldrh r0, [r1]\n\
+	mov r8, r3\n\
+	adds r5, r7, 0x1\n\
+	str r5, [sp]\n\
+	cmp r0, 0\n\
+	bne _08007840\n\
+	b _08007B54\n\
+_08007840:\n\
+	ldrh r1, [r1]\n\
+	ldr r0, _08007874 @ =0x00005fff\n\
+	cmp r1, r0\n\
+	bne _0800784A\n\
+	b _08007A92\n\
+_0800784A:\n\
+	cmp r1, r0\n\
+	bgt _08007898\n\
+	ldr r0, _08007878 @ =0x00004444\n\
+	cmp r1, r0\n\
+	bne _08007856\n\
+	b _08007B4C\n\
+_08007856:\n\
+	cmp r1, r0\n\
+	bgt _08007884\n\
+	ldr r0, _0800787C @ =0x00002222\n\
+	cmp r1, r0\n\
+	beq _080078EC\n\
+	ldr r0, _08007880 @ =0x00002ffe\n\
+	cmp r1, r0\n\
+	bne _08007868\n\
+	b _08007A9C\n\
+_08007868:\n\
+	b _08007B54\n\
+	.align 2, 0\n\
+_0800786C: .4byte gRecvCmds\n\
+_08007870: .4byte word_3002910\n\
+_08007874: .4byte 0x00005fff\n\
+_08007878: .4byte 0x00004444\n\
+_0800787C: .4byte 0x00002222\n\
+_08007880: .4byte 0x00002ffe\n\
+_08007884:\n\
+	ldr r0, _08007894 @ =0x00005555\n\
+	cmp r1, r0\n\
+	beq _0800793C\n\
+	adds r0, 0x11\n\
+	cmp r1, r0\n\
+	beq _0800793C\n\
+	b _08007B54\n\
+	.align 2, 0\n\
+_08007894: .4byte 0x00005555\n\
+_08007898:\n\
+	ldr r0, _080078B4 @ =0x0000aaab\n\
+	cmp r1, r0\n\
+	bne _080078A0\n\
+	b _08007AB2\n\
+_080078A0:\n\
+	cmp r1, r0\n\
+	bgt _080078C0\n\
+	ldr r0, _080078B8 @ =0x00008888\n\
+	cmp r1, r0\n\
+	beq _08007970\n\
+	ldr r0, _080078BC @ =0x0000aaaa\n\
+	cmp r1, r0\n\
+	bne _080078B2\n\
+	b _08007AAC\n\
+_080078B2:\n\
+	b _08007B54\n\
+	.align 2, 0\n\
+_080078B4: .4byte 0x0000aaab\n\
+_080078B8: .4byte 0x00008888\n\
+_080078BC: .4byte 0x0000aaaa\n\
+_080078C0:\n\
+	ldr r0, _080078D4 @ =0x0000cafe\n\
+	cmp r1, r0\n\
+	bne _080078C8\n\
+	b _08007B4C\n\
+_080078C8:\n\
+	cmp r1, r0\n\
+	bgt _080078DC\n\
+	ldr r0, _080078D8 @ =0x0000bbbb\n\
+	cmp r1, r0\n\
+	beq _08007948\n\
+	b _08007B54\n\
+	.align 2, 0\n\
+_080078D4: .4byte 0x0000cafe\n\
+_080078D8: .4byte 0x0000bbbb\n\
+_080078DC:\n\
+	ldr r0, _080078E8 @ =0x0000cccc\n\
+	cmp r1, r0\n\
+	bne _080078E4\n\
+	b _08007AC2\n\
+_080078E4:\n\
+	b _08007B54\n\
+	.align 2, 0\n\
+_080078E8: .4byte 0x0000cccc\n\
+_080078EC:\n\
+	bl InitLocalLinkPlayer\n\
+	ldr r0, _08007930 @ =localLinkPlayerBlock\n\
+	adds r2, r0, 0\n\
+	adds r2, 0x10\n\
+	ldr r1, _08007934 @ =localLinkPlayer\n\
+	ldm r1!, {r3,r4,r6}\n\
+	stm r2!, {r3,r4,r6}\n\
+	ldm r1!, {r3,r5,r6}\n\
+	stm r2!, {r3,r5,r6}\n\
+	ldr r1, [r1]\n\
+	str r1, [r2]\n\
+	ldr r4, _08007938 @ =0x081f4578\n\
+	adds r2, r0, 0\n\
+	adds r1, r4, 0\n\
+	ldm r1!, {r3,r5,r6}\n\
+	stm r2!, {r3,r5,r6}\n\
+	ldrh r3, [r1]\n\
+	strh r3, [r2]\n\
+	ldrb r1, [r1, 0x2]\n\
+	strb r1, [r2, 0x2]\n\
+	adds r1, r0, 0\n\
+	adds r1, 0x2C\n\
+	ldm r4!, {r2,r5,r6}\n\
+	stm r1!, {r2,r5,r6}\n\
+	ldrh r2, [r4]\n\
+	strh r2, [r1]\n\
+	ldrb r2, [r4, 0x2]\n\
+	strb r2, [r1, 0x2]\n\
+	movs r1, 0x3C\n\
+	bl InitBlockSend\n\
+	b _08007B54\n\
+	.align 2, 0\n\
+_08007930: .4byte localLinkPlayerBlock\n\
+_08007934: .4byte localLinkPlayer\n\
+_08007938: .4byte 0x081f4578\n\
+_0800793C:\n\
+	ldr r1, _08007944 @ =byte_3002A68\n\
+	movs r0, 0x1\n\
+	strb r0, [r1]\n\
+	b _08007B54\n\
+	.align 2, 0\n\
+_08007944: .4byte byte_3002A68\n\
+_08007948:\n\
+	adds r1, r3, r7\n\
+	lsls r1, 2\n\
+	ldr r5, _08007968 @ =0x030003f8\n\
+	adds r1, r5\n\
+	movs r6, 0\n\
+	strh r6, [r1]\n\
+	mov r2, r10\n\
+	adds r0, r3, r2\n\
+	ldrh r0, [r0]\n\
+	strh r0, [r1, 0x2]\n\
+	ldr r0, _0800796C @ =gRecvCmds\n\
+	adds r0, 0x10\n\
+	adds r0, r3, r0\n\
+	ldrh r0, [r0]\n\
+	strb r0, [r1, 0x9]\n\
+	b _08007B54\n\
+	.align 2, 0\n\
+_08007968: .4byte 0x030003f8\n\
+_0800796C: .4byte gRecvCmds\n\
+_08007970:\n\
+	adds r0, r3, r7\n\
+	lsls r0, 2\n\
+	ldr r5, _080079B0 @ =0x030003f8\n\
+	adds r4, r0, r5\n\
+	ldrh r1, [r4, 0x2]\n\
+	movs r0, 0x80\n\
+	lsls r0, 1\n\
+	adds r6, r5, 0\n\
+	mov r9, r6\n\
+	cmp r1, r0\n\
+	bls _080079BC\n\
+	ldr r6, _080079B4 @ =0x02000000\n\
+	movs r2, 0\n\
+	adds r5, r3, 0\n\
+	adds r3, r4, 0\n\
+	ldr r4, _080079B8 @ =gRecvCmds\n\
+_08007990:\n\
+	ldrh r1, [r3]\n\
+	lsrs r1, 1\n\
+	adds r1, r2\n\
+	lsls r1, 1\n\
+	adds r1, r6\n\
+	adds r2, 0x1\n\
+	lsls r0, r2, 3\n\
+	adds r0, r5, r0\n\
+	adds r0, r4\n\
+	ldrh r0, [r0]\n\
+	strh r0, [r1]\n\
+	lsls r2, 16\n\
+	lsrs r2, 16\n\
+	cmp r2, 0x6\n\
+	bls _08007990\n\
+	b _080079E8\n\
+	.align 2, 0\n\
+_080079B0: .4byte 0x030003f8\n\
+_080079B4: .4byte 0x02000000\n\
+_080079B8: .4byte gRecvCmds\n\
+_080079BC:\n\
+	movs r2, 0\n\
+	ldr r0, _08007A50 @ =gBlockRecvBuffer\n\
+	mov r12, r0\n\
+	adds r5, r3, 0\n\
+	ldr r6, _08007A54 @ =gRecvCmds\n\
+	lsls r3, r7, 8\n\
+_080079C8:\n\
+	ldrh r1, [r4]\n\
+	lsrs r1, 1\n\
+	adds r1, r2\n\
+	lsls r1, 1\n\
+	adds r1, r3\n\
+	add r1, r12\n\
+	adds r2, 0x1\n\
+	lsls r0, r2, 3\n\
+	adds r0, r5, r0\n\
+	adds r0, r6\n\
+	ldrh r0, [r0]\n\
+	strh r0, [r1]\n\
+	lsls r2, 16\n\
+	lsrs r2, 16\n\
+	cmp r2, 0x6\n\
+	bls _080079C8\n\
+_080079E8:\n\
+	mov r2, r8\n\
+	adds r1, r2, r7\n\
+	lsls r1, 2\n\
+	add r1, r9\n\
+	ldrh r0, [r1]\n\
+	adds r0, 0xE\n\
+	strh r0, [r1]\n\
+	lsls r0, 16\n\
+	lsrs r0, 16\n\
+	ldrh r1, [r1, 0x2]\n\
+	cmp r0, r1\n\
+	bcs _08007A02\n\
+	b _08007B54\n\
+_08007A02:\n\
+	ldr r0, _08007A58 @ =gLinkPlayerPending\n\
+	adds r0, r7, r0\n\
+	ldrb r0, [r0]\n\
+	cmp r0, 0x1\n\
+	bne _08007A88\n\
+	lsls r1, r7, 8\n\
+	ldr r0, _08007A50 @ =gBlockRecvBuffer\n\
+	adds r5, r1, r0\n\
+	lsls r4, r7, 3\n\
+	subs r1, r4, r7\n\
+	lsls r1, 2\n\
+	ldr r0, _08007A5C @ =gLinkPlayers\n\
+	adds r1, r0\n\
+	adds r0, r5, 0\n\
+	adds r0, 0x10\n\
+	ldm r0!, {r2,r3,r6}\n\
+	stm r1!, {r2,r3,r6}\n\
+	ldm r0!, {r2,r3,r6}\n\
+	stm r1!, {r2,r3,r6}\n\
+	ldr r0, [r0]\n\
+	str r0, [r1]\n\
+	ldr r6, _08007A60 @ =0x081f4578\n\
+	adds r0, r5, 0\n\
+	adds r1, r6, 0\n\
+	bl strcmp\n\
+	cmp r0, 0\n\
+	bne _08007A48\n\
+	adds r0, r5, 0\n\
+	adds r0, 0x2C\n\
+	adds r1, r6, 0\n\
+	bl strcmp\n\
+	cmp r0, 0\n\
+	beq _08007A68\n\
+_08007A48:\n\
+	ldr r0, _08007A64 @ =CB2_LinkError\n\
+	bl SetMainCallback2\n\
+	b _08007A70\n\
+	.align 2, 0\n\
+_08007A50: .4byte gBlockRecvBuffer\n\
+_08007A54: .4byte gRecvCmds\n\
+_08007A58: .4byte gLinkPlayerPending\n\
+_08007A5C: .4byte gLinkPlayers\n\
+_08007A60: .4byte 0x081f4578\n\
+_08007A64: .4byte CB2_LinkError\n\
+_08007A68:\n\
+	lsls r0, r7, 24\n\
+	lsrs r0, 24\n\
+	bl HandleReceiveRemoteLinkPlayer\n\
+_08007A70:\n\
+	subs r2, r4, r7\n\
+	lsls r2, 2\n\
+	ldr r1, _08007A84 @ =0x03002988\n\
+	adds r0, r2, r1\n\
+	adds r1, r2\n\
+	ldrb r1, [r1, 0x12]\n\
+	bl ConvertInternationalString\n\
+	b _08007B54\n\
+	.align 2, 0\n\
+_08007A84: .4byte 0x03002988\n\
+_08007A88:\n\
+	lsls r0, r7, 24\n\
+	lsrs r0, 24\n\
+	bl SetBlockReceivedFlag\n\
+	b _08007B54\n\
+_08007A92:\n\
+	ldr r0, _08007A98 @ =u8_array_3002B78\n\
+	b _08007A9E\n\
+	.align 2, 0\n\
+_08007A98: .4byte u8_array_3002B78\n\
+_08007A9C:\n\
+	ldr r0, _08007AA8 @ =u8_array_3002B70\n\
+_08007A9E:\n\
+	adds r0, r7, r0\n\
+	movs r1, 0x1\n\
+	strb r1, [r0]\n\
+	b _08007B54\n\
+	.align 2, 0\n\
+_08007AA8: .4byte u8_array_3002B70\n\
+_08007AAC:\n\
+	bl sub_8007E24\n\
+	b _08007B54\n\
+_08007AB2:\n\
+	lsls r0, r7, 24\n\
+	lsrs r0, 24\n\
+	mov r4, r10\n\
+	adds r1, r3, r4\n\
+	ldrh r1, [r1]\n\
+	bl sub_80516C4\n\
+	b _08007B54\n\
+_08007AC2:\n\
+	ldr r4, _08007ADC @ =0x03002970\n\
+	ldrb r0, [r4]\n\
+	cmp r0, 0x1\n\
+	bne _08007AE4\n\
+	movs r0, 0x2\n\
+	strb r0, [r4]\n\
+	ldr r1, _08007AE0 @ =deUnkValue1\n\
+	mov r5, r10\n\
+	adds r0, r3, r5\n\
+	ldrh r0, [r0]\n\
+	strb r0, [r1]\n\
+	b _08007B54\n\
+	.align 2, 0\n\
+_08007ADC: .4byte 0x03002970\n\
+_08007AE0: .4byte deUnkValue1\n\
+_08007AE4:\n\
+	subs r0, 0x2\n\
+	lsls r0, 24\n\
+	lsrs r0, 24\n\
+	cmp r0, 0x1\n\
+	bhi _08007B26\n\
+	mov r6, r10\n\
+	adds r0, r3, r6\n\
+	ldrh r0, [r0]\n\
+	lsls r0, 3\n\
+	ldr r2, _08007B14 @ =0x081f4548\n\
+	adds r1, r0, r2\n\
+	ldr r1, [r1]\n\
+	ldr r3, _08007B18 @ =0x081f454c\n\
+	adds r0, r3\n\
+	ldrh r2, [r0]\n\
+	movs r0, 0\n\
+	bl SendBlock\n\
+	ldrb r0, [r4]\n\
+	cmp r0, 0x2\n\
+	bne _08007B1C\n\
+	movs r0, 0x1\n\
+	strb r0, [r4]\n\
+	b _08007B54\n\
+	.align 2, 0\n\
+_08007B14: .4byte 0x081f4548\n\
+_08007B18: .4byte 0x081f454c\n\
+_08007B1C:\n\
+	movs r5, 0\n\
+	strb r5, [r4]\n\
+	adds r6, r7, 0x1\n\
+	str r6, [sp]\n\
+	b _08007B54\n\
+_08007B26:\n\
+	mov r1, r10\n\
+	adds r0, r3, r1\n\
+	ldrh r0, [r0]\n\
+	lsls r0, 3\n\
+	ldr r2, _08007B44 @ =0x081f4548\n\
+	adds r1, r0, r2\n\
+	ldr r1, [r1]\n\
+	ldr r3, _08007B48 @ =0x081f454c\n\
+	adds r0, r3\n\
+	ldrh r2, [r0]\n\
+	movs r0, 0\n\
+	bl SendBlock\n\
+	b _08007B54\n\
+	.align 2, 0\n\
+_08007B44: .4byte 0x081f4548\n\
+_08007B48: .4byte 0x081f454c\n\
+_08007B4C:\n\
+	mov r4, r10\n\
+	adds r0, r3, r4\n\
+	ldrh r0, [r0]\n\
+	strh r0, [r2]\n\
+_08007B54:\n\
+	ldr r5, [sp]\n\
+	lsls r0, r5, 16\n\
+	lsrs r7, r0, 16\n\
+	cmp r7, 0x3\n\
+	bhi _08007B60\n\
+	b _08007824\n\
+_08007B60:\n\
+	add sp, 0x4\n\
+	pop {r3-r5}\n\
+	mov r8, r3\n\
+	mov r9, r4\n\
+	mov r10, r5\n\
+	pop {r4-r7}\n\
+	pop {r0}\n\
+	bx r0\n\
+    .syntax divided\n");
+}
+#endif
 
 static void BuildSendCmd(u16 code)
 {
@@ -676,6 +1115,7 @@ void OpenLinkTimed(void)
 {
     sPlayerDataExchangeStatus = EXCHANGE_NOT_STARTED;
     gLinkTimeOutCounter = 0;
+	ResetBlockSend();
     OpenLink();
 }
 
@@ -898,7 +1338,7 @@ u8 GetBlockReceivedStatus(void)
          | gBlockReceived[0];
 }
 
-static void SetBlockReceivedFlag(u8 multiplayerId)
+void SetBlockReceivedFlag(u8 multiplayerId)
 {
     gBlockReceived[multiplayerId] = TRUE;
 }

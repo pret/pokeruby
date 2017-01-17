@@ -2516,7 +2516,7 @@ _080A4470:
 	bl ItemId_GetItem
 	adds r1, r0, 0
 	adds r0, r7, 0
-	movs r2, 0x60
+	movs r2, 0x63
 	movs r3, 0
 	bl sub_8072C74
 	ldr r0, _080A44F0 @ =gStringVar1
