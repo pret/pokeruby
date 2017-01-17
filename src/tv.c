@@ -3,7 +3,6 @@
 #include "event_data.h"
 #include "field_message_box.h"
 #include "flags.h"
-#include "global.h"
 #include "rng.h"
 #include "string_util.h"
 #include "text.h"

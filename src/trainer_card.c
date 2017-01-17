@@ -342,7 +342,7 @@ void sub_8093390(struct TrainerCard *arg1) {
 
 u8 sub_80934C4(u8 id) {
     return gTrainerCards[id].stars;
-} 
+}
 
 static u32 sav12_xor_get_clamped_above(u8 index, u32 maxVal) {
     u32 value = GetGameStat(index);

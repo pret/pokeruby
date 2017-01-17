@@ -2,6 +2,7 @@
 #include "main_menu.h"
 #include "asm.h"
 #include "decompress.h"
+#include "event_data.h"
 #include "menu.h"
 #include "mystery_event_menu.h"
 #include "option_menu.h"
@@ -16,7 +17,6 @@
 #include "task.h"
 #include "text.h"
 #include "title_screen.h"
-#include "event_data.h"
 
 #define BirchSpeechUpdateWindowText() ((u8)MenuUpdateWindowText_OverrideLineLength(24))
 
@@ -70,8 +70,6 @@ extern const u8 gUnknown_081E796C[];
 extern const u8 gSystemText_NewPara[];
 
 extern u8 gSpriteAffineAnimTable_81E79AC[];
-
-extern u8 gStringVar4[];
 
 extern u8 unk_2000000[];
 

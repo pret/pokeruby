@@ -29,7 +29,6 @@ struct Unk201B260 {
 
 extern struct Unk201B260 unk_201B260;
 extern struct Unk201C000 unk_201C000;
-extern u8 gStringVar1[];
 extern u8 gUnknown_0202E8F4;
 extern u8 gUnknown_0202E8F6;
 

@@ -3,6 +3,7 @@
 #include "asm.h"
 #include "berry.h"
 #include "decompress.h"
+#include "items.h"
 #include "main.h"
 #include "menu.h"
 #include "palette.h"
@@ -13,7 +14,6 @@
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
-#include "items.h"
 
 #define OFFSET_7B (123)
 #define FIRST_BERRY ITEM_CHERI_BERRY
@@ -30,7 +30,6 @@ struct BerryTagStatus
 };
 
 extern struct Struct2000000 unk_2000000;
-extern u16 gBGTilemapBuffers[4][0x400];
 extern u8 gUnknown_0203932C;
 extern struct BerryTagStatus gUnknown_0203932E;
 extern u16 gScriptItemId;

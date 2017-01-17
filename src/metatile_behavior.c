@@ -367,7 +367,7 @@ bool8 is_tile_x84(u8 var)
 
 bool8 sub_80571C0(u8 var)
 {
-    if(var == MB_91 || var == MB_93 || var == MB_95 || var == MB_97 
+    if(var == MB_91 || var == MB_93 || var == MB_95 || var == MB_97
     || var == MB_99 || var == MB_9B || var == MB_9D)
         return TRUE;
     else
@@ -645,7 +645,7 @@ bool8 sub_80574D8(u8 var)
     if(var == MB_MOUNTAIN_TOP)
         return TRUE;
     else
-        return FALSE;    
+        return FALSE;
 }
 
 bool8 sub_80574EC(u8 var)

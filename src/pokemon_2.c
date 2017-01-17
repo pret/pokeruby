@@ -1,13 +1,13 @@
 #include "global.h"
 #include "asm.h"
-#include "text.h"
-#include "string_util.h"
+#include "event_data.h"
+#include "main.h"
 #include "pokemon.h"
 #include "rng.h"
 #include "species.h"
-#include "main.h"
 #include "sprite.h"
-#include "event_data.h"
+#include "string_util.h"
+#include "text.h"
 
 extern u8 gPlayerPartyCount;
 extern struct Pokemon gPlayerParty[6];

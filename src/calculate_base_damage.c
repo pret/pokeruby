@@ -1,17 +1,17 @@
 #include "global.h"
-#include "text.h"
-#include "string_util.h"
+#include "abilities.h"
+#include "battle.h"
+#include "berry.h"
+#include "event_data.h"
+#include "hold_effects.h"
+#include "item.h"
+#include "items.h"
+#include "main.h"
 #include "pokemon.h"
 #include "species.h"
-#include "main.h"
 #include "sprite.h"
-#include "berry.h"
-#include "item.h"
-#include "abilities.h"
-#include "hold_effects.h"
-#include "event_data.h"
-#include "battle.h"
-#include "items.h"
+#include "string_util.h"
+#include "text.h"
 
 extern u8 gPlayerPartyCount;
 extern struct Pokemon gPlayerParty[6];
@@ -307,7 +307,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
             // does lack of sun half solar beam damage?
             if ((gBattleWeather & 0x9F) && gUnknown_02024BE6 == 76)
                 damage /= 2;
-			
+
             // sunny?
             if (gBattleWeather & 0x60)
             {

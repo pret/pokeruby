@@ -1,9 +1,9 @@
 #include "global.h"
 #include "weather.h"
 #include "asm.h"
-#include "task.h"
-#include "sprite.h"
 #include "palette.h"
+#include "sprite.h"
+#include "task.h"
 
 struct Weather {
 	u8 filler_000[0x200];
