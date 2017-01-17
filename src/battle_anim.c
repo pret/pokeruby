@@ -11,7 +11,9 @@
 #define SCRIPT_READ_16(ptr) ((ptr)[0] | ((ptr)[1] << 8))
 #define SCRIPT_READ_32(ptr) ((ptr)[0] + ((ptr)[1] << 8) + ((ptr)[2] << 16) + ((ptr)[3] << 24))
 
-#define REG_BGCNT_BITFIELD(n) (*(struct BGCntrlBitfield *)REG_ADDR_BG##n##CNT)
+#define REG_BGnCNT_BITFIELD(n) (*(struct BGCntrlBitfield *)REG_ADDR_BG##n##CNT)
+#define REG_BG1CNT_BITFIELD REG_BGnCNT_BITFIELD(1)
+#define REG_BG2CNT_BITFIELD REG_BGnCNT_BITFIELD(2)
 
 #define EWRAM_14800 ((u16 *)(unk_2000000 + 0x14800))
 #define EWRAM_17800 ((struct UnknownStruct1 *)(unk_2000000 + 0x17800))
@@ -89,7 +91,7 @@ extern u16 gUnknown_030042C0;
 extern u16 gUnknown_030042C4;
 extern u16 gUnknown_03004AF0;
 extern u16 gUnknown_03004B10[8];
-extern u16 gBattleAnimArgs[8];
+extern s16 gBattleAnimArgs[8];
 extern struct MusicPlayerInfo gMPlay_BGM;
 extern struct MusicPlayerInfo gMPlay_SE1;
 extern struct MusicPlayerInfo gMPlay_SE2;
@@ -112,6 +114,8 @@ extern void sub_800D238();
 extern u8 sub_80789BC();
 extern void sub_80AB2AC(void);
 extern void sub_800D7B8(void);
+extern u8 obj_id_for_side_relative_to_move();
+extern u8 battle_get_per_side_status_permutated();
 
 void move_something(const u8 *const moveAnims[], u16 b, u8 c);
 static void sub_80759D0(void);
@@ -132,11 +136,11 @@ static void sub_8076380(void);
 static void task_pA_ma0A_obj_to_bg_pal(u8);
 static void ScriptCmd_clearmonbg(void);
 static void sub_807672C(u8);
-static void sub_80767C4(void);
-static void ma23_8073484(void);
+static void ScriptCmd_monbg_22(void);
+static void ScriptCmd_clearmonbg_23(void);
 static void sub_80769A4(u8);
 static void ScriptCmd_setalpha(void);
-static void sub_8076A78(void);
+static void ScriptCmd_setbldcnt(void);
 static void ScriptCmd_blendoff(void);
 static void ScriptCmd_call(void);
 static void ScriptCmd_return(void);
@@ -144,9 +148,9 @@ static void ScriptCmd_setvar(void);
 static void ScriptCmd_ifelse(void);
 static void ScriptCmd_jumpif(void);
 static void ScriptCmd_jump(void);
-u8 sub_8076BE0(void);
+bool8 sub_8076BE0(void);
 static void ScriptCmd_fadetobg(void);
-static void sub_8076C4C(void);
+static void ScriptCmd_fadetobg_25(void);
 static void task_p5_load_battle_screen_elements(u8);
 static void sub_8076DB8(u16);
 static void dp01t_11_3_message_for_player_only(void);
@@ -154,25 +158,28 @@ static void ScriptCmd_restorebg(void);
 static void ScriptCmd_waitbgfadeout(void);
 static void ScriptCmd_waitbgfadein(void);
 static void ScriptCmd_changebg(void);
-void ma19_08073BC8(void);
-void ma1A_8073C00(void);
-void ma1B_8073C2C(void);
-void ma1C_8073ED0(void);
-void ma1D_08073FB4(void);
-void sub_8077610(void);
-void ma20_wait_for_something(void);
-void ma21_08074164(void);
-void sub_807775C(void);
-void sub_8077320(void);
-void sub_80773B4(void);
-void sub_807779C(void);
-void sub_8077808(void);
-void sub_807784C(void);
-void ma2B_make_side_invisible(void);
-void ma2C_make_side_visible(void);
-void sub_807794C(void);
-void sub_80779FC(void);
-void ma2F_stop_music(void);
+static void ScriptCmd_panse_19(void);
+static void ScriptCmd_setpan(void);
+static void ScriptCmd_panse_1B(void);
+static void c3_08073CEC(u8);
+static void ScriptCmd_panse_26(void);
+static void ScriptCmd_panse_27(void);
+static void ScriptCmd_panse_1C(void);
+static void sub_80774FC(u8);
+static void ScriptCmd_panse_1D(void);
+static void sub_80775CC(u8);
+static void ScriptCmd_createtask_1F(void);
+static void ScriptCmd_waitsound(void);
+static void ScriptCmd_jumpvareq(void);
+static void ScriptCmd_jumpunkcond(void);
+static void ScriptCmd_monbgprio_28(void);
+static void ScriptCmd_monbgprio_29(void);
+static void ScriptCmd_monbgprio_2A(void);
+static void ScriptCmd_invisible(void);
+static void ScriptCmd_visible(void);
+static void ScriptCmd_doublebattle_2D(void);
+static void ScriptCmd_doublebattle_2E(void);
+static void ScriptCmd_stopsound(void);
 
 static void (*const sScriptCmdTable[])(void) = {
     ScriptCmd_loadsprite,
@@ -200,29 +207,29 @@ static void (*const sScriptCmdTable[])(void) = {
     ScriptCmd_waitbgfadeout,
     ScriptCmd_waitbgfadein,
     ScriptCmd_changebg,
-    ma19_08073BC8,
-    ma1A_8073C00,
-    ma1B_8073C2C,
-    ma1C_8073ED0,
-    ma1D_08073FB4,
-    sub_8076A78,
-    sub_8077610,
-    ma20_wait_for_something,
-    ma21_08074164,
-    sub_80767C4,
-    ma23_8073484,
-    sub_807775C,
-    sub_8076C4C,
-    sub_8077320,
-    sub_80773B4,
-    sub_807779C,
-    sub_8077808,
-    sub_807784C,
-    ma2B_make_side_invisible,
-    ma2C_make_side_visible,
-    sub_807794C,
-    sub_80779FC,
-    ma2F_stop_music,
+    ScriptCmd_panse_19,
+    ScriptCmd_setpan,
+    ScriptCmd_panse_1B,
+    ScriptCmd_panse_1C,
+    ScriptCmd_panse_1D,
+    ScriptCmd_setbldcnt,
+    ScriptCmd_createtask_1F,
+    ScriptCmd_waitsound,
+    ScriptCmd_jumpvareq,
+    ScriptCmd_monbg_22,
+    ScriptCmd_clearmonbg_23,
+    ScriptCmd_jumpunkcond,
+    ScriptCmd_fadetobg_25,
+    ScriptCmd_panse_26,
+    ScriptCmd_panse_27,
+    ScriptCmd_monbgprio_28,
+    ScriptCmd_monbgprio_29,
+    ScriptCmd_monbgprio_2A,
+    ScriptCmd_invisible,
+    ScriptCmd_visible,
+    ScriptCmd_doublebattle_2D,
+    ScriptCmd_doublebattle_2E,
+    ScriptCmd_stopsound,
 };
 
 void sub_8075624(void)
@@ -295,17 +302,13 @@ void move_something(const u8 *const moveAnims[], u16 b, u8 c)
         gUnknown_03004B10[i] |= 0xFFFF;
     if (c != 0)
     {
-        i = 0;
-        while (1)
+        for (i = 0; gUnknown_081C7160[i] != 0xFFFF; i++)
         {
-            if (gUnknown_081C7160[i] == 0xFFFF)
-                break;
             if (b == gUnknown_081C7160[i])
             {
                 m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 128);
                 break;
             }
-            i++;
         }
     }
     gUnknown_030042C4 = 0;
@@ -906,9 +909,9 @@ void sub_8076034(u8 a, u8 b)
         addr2 = (void *)s.unk4;
         DmaFill16(3, 0xFF, addr2, 0x1000);
         
-        REG_BGCNT_BITFIELD(1).priority = 2;
-        REG_BGCNT_BITFIELD(1).screenSize = 1;
-        REG_BGCNT_BITFIELD(1).areaOverflowMode = 0;
+        REG_BG1CNT_BITFIELD.priority = 2;
+        REG_BG1CNT_BITFIELD.screenSize = 1;
+        REG_BG1CNT_BITFIELD.areaOverflowMode = 0;
         
         spriteId = gUnknown_02024BE0[a];
         gUnknown_030042C0 = -(gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x) + 32;
@@ -928,7 +931,7 @@ void sub_8076034(u8 a, u8 b)
             r2 = 0;
         else
             r2 = battle_get_per_side_status(a);
-        sub_80E4EF8(0, 0, r2, s.unk8, (u32)s.unk0, (((s32)s.unk4 - VRAM) / 2048), REG_BGCNT_BITFIELD(1).charBaseBlock);
+        sub_80E4EF8(0, 0, r2, s.unk8, (u32)s.unk0, (((s32)s.unk4 - VRAM) / 2048), REG_BG1CNT_BITFIELD.charBaseBlock);
         if (sub_8076BE0() != 0)
             sub_8076380();
     }
@@ -956,9 +959,9 @@ void sub_8076034(u8 a, u8 b)
         addr2 = (void *)(VRAM + 0xF000);
         DmaFill32(3, 0, addr2, 0x800);
         
-        REG_BGCNT_BITFIELD(2).priority = 2;
-        REG_BGCNT_BITFIELD(2).screenSize = 1;
-        REG_BGCNT_BITFIELD(2).areaOverflowMode = 0;
+        REG_BG2CNT_BITFIELD.priority = 2;
+        REG_BG2CNT_BITFIELD.screenSize = 1;
+        REG_BG2CNT_BITFIELD.areaOverflowMode = 0;
         
         spriteId = gUnknown_02024BE0[a];
         gUnknown_03004288 = -(gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x) + 32;
@@ -972,7 +975,7 @@ void sub_8076034(u8 a, u8 b)
         addr3 = (void *)(PLTT + 0x120);
         DmaCopy32(3, gPlttBufferUnfaded + 0x100 + a * 16, addr3, 32);
         
-        sub_80E4EF8(0, 0, battle_get_per_side_status(a), 9, 0x6000, 0x1E, REG_BGCNT_BITFIELD(2).charBaseBlock);
+        sub_80E4EF8(0, 0, battle_get_per_side_status(a), 9, 0x6000, 0x1E, REG_BG2CNT_BITFIELD.charBaseBlock);
     }
 }
 
@@ -1176,7 +1179,7 @@ static void sub_807672C(u8 taskId)
     }
 }
 
-static void sub_80767C4(void)
+static void ScriptCmd_monbg_22(void)
 {
     u8 r5;
     u8 r4;
@@ -1219,7 +1222,7 @@ static void sub_80767C4(void)
     gBattleAnimScriptPtr++;
 }
 
-static void ma23_8073484(void)
+static void ScriptCmd_clearmonbg_23(void)
 {
     u8 r5;
     u8 r6;
@@ -1283,7 +1286,7 @@ static void ScriptCmd_setalpha(void)
     REG_BLDALPHA = r3 | r1;
 }
 
-static void sub_8076A78(void)
+static void ScriptCmd_setbldcnt(void)
 {
     u16 r3;
     u16 r1;
@@ -1369,7 +1372,8 @@ static void ScriptCmd_jump(void)
     gBattleAnimScriptPtr = (u8 *)addr;
 }
 
-u8 sub_8076BE0(void)
+//IsContest, maybe
+bool8 sub_8076BE0(void)
 {
     if (!gMain.inBattle)
         return TRUE;
@@ -1390,7 +1394,7 @@ static void ScriptCmd_fadetobg(void)
     gUnknown_0202F7C5 = 1;
 }
 
-static void sub_8076C4C(void)
+static void ScriptCmd_fadetobg_25(void)
 {
     u8 r8;
     u8 r7;
@@ -1523,18 +1527,783 @@ static void ScriptCmd_changebg(void)
     gBattleAnimScriptPtr++;
 }
 
+//Weird control flow
 /*
-void sub_8076F98(u8 a)
+s8 sub_8076F98(s8 a)
 {
     if (!sub_8076BE0() && (EWRAM_17810[gUnknown_0202F7C8].unk0 & 0x10))
     {
-        battle_side_get_owner(gUnknown_0202F7C8);
+        a = battle_side_get_owner(gUnknown_0202F7C8) ? 0xC0 : 0x3F;
     }
     //_08076FDC
     else
     {
-        
+        if (sub_8076BE0())
+        {
+            if (gUnknown_0202F7C8 == gUnknown_0202F7C9 && gUnknown_0202F7C8 == 2
+             && a == 0x3F)
+            {
+                //jump to _0807707A
+                if (a < -0x40)
+                    a = 0xC0;
+                return a;
+            }  
+        }
+        //_08077004
+        else
+        {
+            if (battle_side_get_owner(gUnknown_0202F7C8) == 0)
+            {
+                if (battle_side_get_owner(gUnknown_0202F7C9) == 0)
+            }
+            //_08077042
+            else
+            {
+                
+            }
+            //_0807706C
+        }
     }
     //_0807706E
 }
 */
+__attribute__((naked))
+s8 sub_8076F98(s8 a)
+{
+    asm(".syntax unified\n\
+    push {r4,lr}\n\
+    lsls r0, 24\n\
+    lsrs r4, r0, 24\n\
+    bl sub_8076BE0\n\
+    lsls r0, 24\n\
+    cmp r0, 0\n\
+    bne _08076FDC\n\
+    ldr r0, _08076FD4 @ =gUnknown_0202F7C8\n\
+    ldrb r2, [r0]\n\
+    lsls r0, r2, 1\n\
+    adds r0, r2\n\
+    lsls r0, 2\n\
+    ldr r1, _08076FD8 @ =0x02017810\n\
+    adds r0, r1\n\
+    ldrb r1, [r0]\n\
+    movs r0, 0x10\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _08076FDC\n\
+    adds r0, r2, 0\n\
+    bl battle_side_get_owner\n\
+    lsls r0, 24\n\
+    movs r4, 0xC0\n\
+    cmp r0, 0\n\
+    beq _0807706E\n\
+    movs r4, 0x3F\n\
+    b _0807706E\n\
+    .align 2, 0\n\
+_08076FD4: .4byte gUnknown_0202F7C8\n\
+_08076FD8: .4byte 0x02017810\n\
+_08076FDC:\n\
+    bl sub_8076BE0\n\
+    lsls r0, 24\n\
+    cmp r0, 0\n\
+    beq _08077004\n\
+    ldr r0, _08076FFC @ =gUnknown_0202F7C8\n\
+    ldr r1, _08077000 @ =gUnknown_0202F7C9\n\
+    ldrb r0, [r0]\n\
+    ldrb r1, [r1]\n\
+    cmp r0, r1\n\
+    bne _08077068\n\
+    cmp r0, 0x2\n\
+    bne _08077068\n\
+    cmp r4, 0x3F\n\
+    beq _0807707A\n\
+    b _08077068\n\
+    .align 2, 0\n\
+_08076FFC: .4byte gUnknown_0202F7C8\n\
+_08077000: .4byte gUnknown_0202F7C9\n\
+_08077004:\n\
+    ldr r0, _0807702C @ =gUnknown_0202F7C8\n\
+    ldrb r0, [r0]\n\
+    bl battle_side_get_owner\n\
+    lsls r0, 24\n\
+    cmp r0, 0\n\
+    bne _08077042\n\
+    ldr r0, _08077030 @ =gUnknown_0202F7C9\n\
+    ldrb r0, [r0]\n\
+    bl battle_side_get_owner\n\
+    lsls r0, 24\n\
+    cmp r0, 0\n\
+    bne _0807706E\n\
+    lsls r0, r4, 24\n\
+    asrs r1, r0, 24\n\
+    cmp r1, 0x3F\n\
+    bne _08077034\n\
+    movs r4, 0xC0\n\
+    b _0807706E\n\
+    .align 2, 0\n\
+_0807702C: .4byte gUnknown_0202F7C8\n\
+_08077030: .4byte gUnknown_0202F7C9\n\
+_08077034:\n\
+    movs r0, 0x40\n\
+    negs r0, r0\n\
+    cmp r1, r0\n\
+    beq _0807706E\n\
+    negs r0, r1\n\
+    lsls r0, 24\n\
+    b _0807706C\n\
+_08077042:\n\
+    ldr r0, _08077064 @ =gUnknown_0202F7C9\n\
+    ldrb r0, [r0]\n\
+    bl battle_side_get_owner\n\
+    lsls r0, 24\n\
+    lsrs r0, 24\n\
+    cmp r0, 0x1\n\
+    bne _08077068\n\
+    lsls r0, r4, 24\n\
+    asrs r0, 24\n\
+    movs r1, 0x40\n\
+    negs r1, r1\n\
+    cmp r0, r1\n\
+    bne _0807706E\n\
+    movs r4, 0x3F\n\
+    b _0807706E\n\
+    .align 2, 0\n\
+_08077064: .4byte gUnknown_0202F7C9\n\
+_08077068:\n\
+    lsls r0, r4, 24\n\
+    negs r0, r0\n\
+_0807706C:\n\
+    lsrs r4, r0, 24\n\
+_0807706E:\n\
+    lsls r0, r4, 24\n\
+    asrs r0, 24\n\
+    cmp r0, 0x3F\n\
+    ble _0807707A\n\
+    movs r4, 0x3F\n\
+    b _08077088\n\
+_0807707A:\n\
+    lsls r0, r4, 24\n\
+    asrs r0, 24\n\
+    movs r1, 0x40\n\
+    negs r1, r1\n\
+    cmp r0, r1\n\
+    bge _08077088\n\
+    movs r4, 0xC0\n\
+_08077088:\n\
+    lsls r0, r4, 24\n\
+    asrs r0, 24\n\
+    pop {r4}\n\
+    pop {r1}\n\
+    bx r1\n\
+    .syntax divided\n");
+}
+
+s8 sub_8077094(s8 a)
+{
+    if (!sub_8076BE0() && (EWRAM_17810[gUnknown_0202F7C8].unk0 & 0x10))
+    {
+        if (battle_side_get_owner(gUnknown_0202F7C8) != 0)
+            a = 0x3F;
+        else
+            a = 0xC0;
+    }
+    else
+    {
+        if (battle_side_get_owner(gUnknown_0202F7C8) != 0 || sub_8076BE0() != 0)
+            a = -a;
+    }
+    return a;
+}
+
+s16 sub_8077104(s16 a)
+{
+    s16 var = a;
+    
+    if (var > 63)
+        var = 63;
+    else if (var < -64)
+        var = -64;
+    return var;
+}
+
+s16 sub_807712C(s16 a, s16 b, s16 c)
+{
+    u16 var;
+    
+    if (a < b)
+        var = ((c < 0) ? -c : c);
+    else if (a > b)
+        var = -((c < 0) ? -c : c);
+    else
+        var = 0;
+    return var;
+}
+
+static void ScriptCmd_panse_19(void)
+{
+    u16 r4;
+    s8 r0;
+    
+    gBattleAnimScriptPtr++;
+    r4 = SCRIPT_READ_16(gBattleAnimScriptPtr);
+    r0 = SCRIPT_READ_8(gBattleAnimScriptPtr + 2);
+    PlaySE12WithPanning(r4, sub_8076F98(r0));
+    gBattleAnimScriptPtr += 3;
+}
+
+static void ScriptCmd_setpan(void)
+{
+    s8 r0;
+    
+    gBattleAnimScriptPtr++;
+    r0 = SCRIPT_READ_8(gBattleAnimScriptPtr);
+    SE12PanpotControl(sub_8076F98(r0));
+    gBattleAnimScriptPtr++;
+}
+
+static void ScriptCmd_panse_1B(void)
+{
+    u16 songNum;
+    s8 r0;
+    s8 r4;
+    s8 r6;
+    u8 r7;
+    s8 panning;
+    s8 r8;
+    u8 taskId;
+    
+    gBattleAnimScriptPtr++;
+    songNum = SCRIPT_READ_16(gBattleAnimScriptPtr);
+    r0 = SCRIPT_READ_8(gBattleAnimScriptPtr + 2);
+    r4 = SCRIPT_READ_8(gBattleAnimScriptPtr + 3);
+    r6 = SCRIPT_READ_8(gBattleAnimScriptPtr + 4);
+    r7 = SCRIPT_READ_8(gBattleAnimScriptPtr + 5);
+    panning = sub_8076F98(r0);
+    r8 = sub_8076F98(r4);
+    r4 = sub_807712C(panning, r8, r6);
+    taskId = CreateTask(c3_08073CEC, 1);
+    gTasks[taskId].data[0] = panning;
+    gTasks[taskId].data[1] = r8;
+    gTasks[taskId].data[2] = r4;
+    gTasks[taskId].data[3] = r7;
+    gTasks[taskId].data[4] = panning;
+    PlaySE12WithPanning(songNum, panning);
+    gUnknown_0202F7B3++;
+    gBattleAnimScriptPtr += 6;
+}
+
+#ifdef NONMATCHING
+static void c3_08073CEC(u8 taskId)
+{
+    u16 r7 = 0;
+    s16 r0;
+    s16 r6;
+    s16 r3;
+    s16 r4;
+    int foo;
+    
+    r0 = gTasks[taskId].data[8];
+    gTasks[taskId].data[8]++;
+    if (r0 >= gTasks[taskId].data[3])
+    {
+        gTasks[taskId].data[8] = r7;
+        r6 = gTasks[taskId].data[0];
+        r3 = gTasks[taskId].data[1];
+        foo = gTasks[taskId].data[4] + gTasks[taskId].data[2];
+        r4 = foo;
+        gTasks[taskId].data[4] = r4;
+        if (gTasks[taskId].data[2] == 0)
+        {
+            r4 = r3;
+            DestroyTask(taskId);
+            gUnknown_0202F7B3--;
+        }
+        //_080772D8
+        else
+        {
+            if (r6 < r3)
+            {
+                if (r4 < r3)
+                    goto check;
+                DestroyTask(taskId);
+                gUnknown_0202F7B3--;
+            }
+            else
+            {
+                if (r4 <= r3)
+                    r7 = 1;
+              check:
+                if (r7 != 0)
+                {
+                    DestroyTask(taskId);
+                    gUnknown_0202F7B3--;
+                }
+            }
+        }
+        //_080772F8
+        SE12PanpotControl(r4);
+    }
+    //_08077314
+}
+#else
+__attribute__((naked))
+static void c3_08073CEC(u8 taskId)
+{
+    asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+    lsls r0, 24\n\
+    lsrs r5, r0, 24\n\
+    movs r7, 0\n\
+    ldr r1, _080772D4 @ =gTasks\n\
+    lsls r0, r5, 2\n\
+    adds r0, r5\n\
+    lsls r0, 3\n\
+    adds r2, r0, r1\n\
+    ldrh r0, [r2, 0x18]\n\
+    adds r1, r0, 0x1\n\
+    strh r1, [r2, 0x18]\n\
+    lsls r0, 16\n\
+    asrs r0, 16\n\
+    movs r3, 0xE\n\
+    ldrsh r1, [r2, r3]\n\
+    cmp r0, r1\n\
+    blt _08077314\n\
+    strh r7, [r2, 0x18]\n\
+    ldrh r6, [r2, 0x8]\n\
+    ldrh r3, [r2, 0xA]\n\
+    movs r4, 0x10\n\
+    ldrsh r0, [r2, r4]\n\
+    movs r4, 0xC\n\
+    ldrsh r1, [r2, r4]\n\
+    adds r0, r1\n\
+    lsls r0, 16\n\
+    lsrs r4, r0, 16\n\
+    strh r4, [r2, 0x10]\n\
+    cmp r1, 0\n\
+    bne _080772D8\n\
+    lsls r2, r3, 16\n\
+    b _080772FC\n\
+    .align 2, 0\n\
+_080772D4: .4byte gTasks\n\
+_080772D8:\n\
+    lsls r1, r6, 16\n\
+    lsls r0, r3, 16\n\
+    asrs r3, r0, 16\n\
+    adds r2, r0, 0\n\
+    cmp r1, r2\n\
+    bge _080772EE\n\
+    lsls r0, r4, 16\n\
+    asrs r0, 16\n\
+    cmp r0, r3\n\
+    blt _080772F8\n\
+    b _080772FC\n\
+_080772EE:\n\
+    lsls r0, r4, 16\n\
+    asrs r0, 16\n\
+    cmp r0, r3\n\
+    bgt _080772F8\n\
+    movs r7, 0x1\n\
+_080772F8:\n\
+    cmp r7, 0\n\
+    beq _0807730C\n\
+_080772FC:\n\
+    lsrs r4, r2, 16\n\
+    adds r0, r5, 0\n\
+    bl DestroyTask\n\
+    ldr r1, _0807731C @ =gUnknown_0202F7B3\n\
+    ldrb r0, [r1]\n\
+    subs r0, 0x1\n\
+    strb r0, [r1]\n\
+_0807730C:\n\
+    lsls r0, r4, 24\n\
+    asrs r0, 24\n\
+    bl SE12PanpotControl\n\
+_08077314:\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .align 2, 0\n\
+_0807731C: .4byte gUnknown_0202F7B3\n\
+    .syntax divided\n");
+}
+#endif
+
+static void ScriptCmd_panse_26(void)
+{
+    u16 r8;
+    s8 r4;
+    s8 r5;
+    s8 r6;
+    u8 r10;
+    u8 taskId;
+    
+    gBattleAnimScriptPtr++;
+    r8 = SCRIPT_READ_16(gBattleAnimScriptPtr);
+    r4 = SCRIPT_READ_8(gBattleAnimScriptPtr + 2);
+    r5 = SCRIPT_READ_8(gBattleAnimScriptPtr + 3);
+    r6 = SCRIPT_READ_8(gBattleAnimScriptPtr + 4);
+    r10 = SCRIPT_READ_8(gBattleAnimScriptPtr + 5);
+    taskId = CreateTask(c3_08073CEC, 1);
+    gTasks[taskId].data[0] = r4;
+    gTasks[taskId].data[1] = r5;
+    gTasks[taskId].data[2] = r6;
+    gTasks[taskId].data[3] = r10;
+    gTasks[taskId].data[4] = r4;
+    PlaySE12WithPanning(r8, r4);
+    gUnknown_0202F7B3++;
+    gBattleAnimScriptPtr += 6;
+}
+
+static void ScriptCmd_panse_27(void)
+{
+    u16 r9;
+    u8 r4;
+    u8 r8;
+    u8 r7;
+    u8 r0;
+    s8 r6;
+    s8 r5;
+    s8 r4_2;
+    u8 taskId;
+    
+    gBattleAnimScriptPtr++;
+    r9 = SCRIPT_READ_16(gBattleAnimScriptPtr);
+    r0 = SCRIPT_READ_8(gBattleAnimScriptPtr + 2);
+    r4 = SCRIPT_READ_8(gBattleAnimScriptPtr + 3);
+    r8 = SCRIPT_READ_8(gBattleAnimScriptPtr + 4);
+    r7 = SCRIPT_READ_8(gBattleAnimScriptPtr + 5);
+    r6 = sub_8077094(r0);
+    r5 = sub_8077094(r4);
+    r4_2 = sub_8077094(r8);
+    taskId = CreateTask(c3_08073CEC, 1);
+    gTasks[taskId].data[0] = r6;
+    gTasks[taskId].data[1] = r5;
+    gTasks[taskId].data[2] = r4_2;
+    gTasks[taskId].data[3] = r7;
+    gTasks[taskId].data[4] = r6;
+    PlaySE12WithPanning(r9, r6);
+    gUnknown_0202F7B3++;
+    gBattleAnimScriptPtr += 6;
+}
+
+static void ScriptCmd_panse_1C(void)
+{
+    u16 r5;
+    u8 r0;
+    u8 r8;
+    u8 r9;
+    s8 r4;
+    u8 taskId;
+    
+    gBattleAnimScriptPtr++;
+    r5 = SCRIPT_READ_16(gBattleAnimScriptPtr);
+    r0 = SCRIPT_READ_8(gBattleAnimScriptPtr + 2);
+    r8 = SCRIPT_READ_8(gBattleAnimScriptPtr + 3);
+    r9 = SCRIPT_READ_8(gBattleAnimScriptPtr + 4);
+    r4 = sub_8076F98(r0);
+    taskId = CreateTask(sub_80774FC, 1);
+    gTasks[taskId].data[0] = r5;
+    gTasks[taskId].data[1] = r4;
+    gTasks[taskId].data[2] = r8;
+    gTasks[taskId].data[3] = r9;
+    gTasks[taskId].data[8] = r8;
+    gTasks[taskId].func(taskId);
+    gUnknown_0202F7B3++;
+    gBattleAnimScriptPtr += 5;
+}
+
+static void sub_80774FC(u8 taskId)
+{
+    s16 data8;
+    u16 r0;
+    s8 r1;
+    u8 r4;
+    
+    data8 = gTasks[taskId].data[8];
+    gTasks[taskId].data[8]++;
+    if (data8 >= gTasks[taskId].data[2])
+    {
+        gTasks[taskId].data[8] = 0;
+        r0 = gTasks[taskId].data[0];
+        r1 = gTasks[taskId].data[1];
+        gTasks[taskId].data[3]--;
+        r4 = gTasks[taskId].data[3];
+        PlaySE12WithPanning(r0, r1);
+        if (r4 == 0)
+        {
+            DestroyTask(taskId);
+            gUnknown_0202F7B3--;
+        }
+    }
+}
+
+static void ScriptCmd_panse_1D(void)
+{
+    u16 r5;
+    u8 r0;
+    u8 r8;
+    s8 r4;
+    u8 taskId;
+    
+    gBattleAnimScriptPtr++;
+    r5 = SCRIPT_READ_16(gBattleAnimScriptPtr);
+    r0 = SCRIPT_READ_8(gBattleAnimScriptPtr + 2);
+    r8 = SCRIPT_READ_8(gBattleAnimScriptPtr + 3);
+    r4 = sub_8076F98(r0);
+    taskId = CreateTask(sub_80775CC, 1);
+    gTasks[taskId].data[0] = r5;
+    gTasks[taskId].data[1] = r4;
+    gTasks[taskId].data[2] = r8;
+    gUnknown_0202F7B3++;
+    gBattleAnimScriptPtr += 4;
+}
+
+static void sub_80775CC(u8 taskId)
+{
+    s16 r0;
+    
+    r0 = gTasks[taskId].data[2];
+    gTasks[taskId].data[2]--;
+    if (r0 <= 0)
+    {
+        PlaySE12WithPanning(gTasks[taskId].data[0], gTasks[taskId].data[1]);
+        DestroyTask(taskId);
+        gUnknown_0202F7B3--;
+    }
+}
+
+static void ScriptCmd_createtask_1F(void)
+{
+    TaskFunc func;
+    u8 numArgs;
+    int i;
+    u8 taskId;
+    
+    gBattleAnimScriptPtr++;
+    func = (TaskFunc)SCRIPT_READ_32(gBattleAnimScriptPtr);
+    gBattleAnimScriptPtr += 4;
+    numArgs = SCRIPT_READ_8(gBattleAnimScriptPtr);
+    gBattleAnimScriptPtr++;
+    for (i = 0; i < numArgs; i++)
+    {
+        gBattleAnimArgs[i] = SCRIPT_READ_16(gBattleAnimScriptPtr);
+        gBattleAnimScriptPtr += 2;
+    }
+    taskId = CreateTask(func, 1);
+    func(taskId);
+    gUnknown_0202F7B3++;
+}
+
+static void ScriptCmd_waitsound(void)
+{
+    if (gUnknown_0202F7B3 != 0)
+    {
+        gUnknown_03004AF0 = 0;
+        gUnknown_0202F7B0 = 1;
+    }
+    else if (IsSEPlaying())
+    {
+        gUnknown_03004AF0++;
+        if (gUnknown_03004AF0 > 0x5A)
+        {
+            m4aMPlayStop(&gMPlay_SE1);
+            m4aMPlayStop(&gMPlay_SE2);
+            gUnknown_03004AF0 = 0;
+        }
+        else
+        {
+            gUnknown_0202F7B0 = 1;
+        }
+    }
+    else
+    {
+        gUnknown_03004AF0 = 0;
+        gBattleAnimScriptPtr++;
+        gUnknown_0202F7B0 = 0;
+    }
+}
+
+static void ScriptCmd_jumpvareq(void)
+{
+    u8 r2;
+    s16 r1;
+    u8 *addr;
+    
+    gBattleAnimScriptPtr++;
+    r2 = SCRIPT_READ_8(gBattleAnimScriptPtr);
+    r1 = SCRIPT_READ_16(gBattleAnimScriptPtr + 1);
+    if (r1 == gBattleAnimArgs[r2])
+    {
+        addr = (u8 *)SCRIPT_READ_32(gBattleAnimScriptPtr + 3);
+        gBattleAnimScriptPtr = addr;
+    }
+    else
+    {
+        gBattleAnimScriptPtr += 7;
+    }
+}
+
+static void ScriptCmd_jumpunkcond(void)
+{
+    u8 *addr;
+    
+    gBattleAnimScriptPtr++;
+    if (sub_8076BE0())
+    {
+        addr = (u8 *)SCRIPT_READ_32(gBattleAnimScriptPtr);
+        gBattleAnimScriptPtr = addr;
+    }
+    else
+    {
+        gBattleAnimScriptPtr += 4;
+    }
+}
+
+static void ScriptCmd_monbgprio_28(void)
+{
+    u8 r2;
+    u8 r0;
+    u8 r4;
+    
+    r2 = SCRIPT_READ_8(gBattleAnimScriptPtr + 1);
+    gBattleAnimScriptPtr += 2;
+    if (r2 != 0)
+        r0 = gUnknown_0202F7C9;
+    else
+        r0 = gUnknown_0202F7C8;
+    r4 = battle_get_per_side_status(r0);
+    if (!sub_8076BE0() && (r4 == 0 || r4 == 3))
+    {
+        REG_BG1CNT_BITFIELD.priority = 1;
+        REG_BG2CNT_BITFIELD.priority = 2;
+    }
+}
+
+static void ScriptCmd_monbgprio_29(void)
+{
+    gBattleAnimScriptPtr++;
+    if (!sub_8076BE0())
+    {
+        REG_BG1CNT_BITFIELD.priority = 1;
+        REG_BG2CNT_BITFIELD.priority = 2;
+    }
+}
+
+static void ScriptCmd_monbgprio_2A(void)
+{
+    u8 r6;
+    u8 r4;
+    u8 r0;
+    
+    r6 = SCRIPT_READ_8(gBattleAnimScriptPtr + 1);
+    gBattleAnimScriptPtr += 2;
+    if (battle_side_get_owner(gUnknown_0202F7C8) != battle_side_get_owner(gUnknown_0202F7C9))
+    {
+        if (r6 != 0)
+            r0 = gUnknown_0202F7C9;
+        else
+            r0 = gUnknown_0202F7C8;
+        r4 = battle_get_per_side_status(r0);
+        if (!sub_8076BE0() && (r4 == 0 || r4 == 3))
+        {
+            REG_BG1CNT_BITFIELD.priority = 1;
+            REG_BG2CNT_BITFIELD.priority = 2;
+        }
+    }
+}
+
+static void ScriptCmd_invisible(void)
+{
+    u8 r0;
+    u8 spriteId;
+    
+    r0 = SCRIPT_READ_8(gBattleAnimScriptPtr + 1);
+    spriteId = obj_id_for_side_relative_to_move(r0);
+    if (spriteId != 0xFF)
+    {
+        gSprites[spriteId].invisible = TRUE;
+    }
+    gBattleAnimScriptPtr += 2;
+}
+
+static void ScriptCmd_visible(void)
+{
+    u8 r0;
+    u8 spriteId;
+    
+    r0 = SCRIPT_READ_8(gBattleAnimScriptPtr + 1);
+    spriteId = obj_id_for_side_relative_to_move(r0);
+    if (spriteId != 0xFF)
+    {
+        gSprites[spriteId].invisible = FALSE;
+    }
+    gBattleAnimScriptPtr += 2;
+}
+
+static void ScriptCmd_doublebattle_2D(void)
+{
+    u8 r7;
+    u8 r4;
+    u8 spriteId;
+    
+    r7 = SCRIPT_READ_8(gBattleAnimScriptPtr + 1);
+    gBattleAnimScriptPtr += 2;
+    if (!sub_8076BE0() && IsDoubleBattle()
+     && battle_side_get_owner(gUnknown_0202F7C8) == battle_side_get_owner(gUnknown_0202F7C9))
+    {
+        if (r7 == 0)
+        {
+            r4 = battle_get_per_side_status_permutated(gUnknown_0202F7C8);
+            spriteId = obj_id_for_side_relative_to_move(0);
+        }
+        else
+        {
+            r4 = battle_get_per_side_status_permutated(gUnknown_0202F7C9);
+            spriteId = obj_id_for_side_relative_to_move(1);
+        }
+        if (spriteId != 0xFF)
+        {
+            gSprites[spriteId].invisible = FALSE;
+            if (r4 == 2)
+                gSprites[spriteId].oam.priority = 3;
+            if (r4 == 1)
+                sub_8076464(0);
+            else
+                sub_8076464(1);
+        }
+    }
+}
+
+static void ScriptCmd_doublebattle_2E(void)
+{
+    u8 r7;
+    u8 r4;
+    u8 spriteId;
+    
+    r7 = SCRIPT_READ_8(gBattleAnimScriptPtr  + 1);
+    gBattleAnimScriptPtr += 2;
+    if (!sub_8076BE0() && IsDoubleBattle()
+     && battle_side_get_owner(gUnknown_0202F7C8) == battle_side_get_owner(gUnknown_0202F7C9))
+    {
+        if (r7 == 0)
+        {
+            r4 = battle_get_per_side_status_permutated(gUnknown_0202F7C8);
+            spriteId = obj_id_for_side_relative_to_move(0);
+        }
+        else
+        {
+            r4 = battle_get_per_side_status_permutated(gUnknown_0202F7C9);
+            spriteId = obj_id_for_side_relative_to_move(1);
+        }
+        if (spriteId != 0xFF && r4 == 2)
+        {
+            gSprites[spriteId].oam.priority = 2;
+        }
+    }
+}
+
+static void ScriptCmd_stopsound(void)
+{
+    m4aMPlayStop(&gMPlay_SE1);
+    m4aMPlayStop(&gMPlay_SE2);
+    gBattleAnimScriptPtr++;
+}
