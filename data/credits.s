@@ -27,9 +27,11 @@ gUnknown_0840B878::
 	.include "data/text/credits.inc"
 
 gUnknown_0840CA00:: @ 840CA00
-	.incbin "baserom.gba", 0x0040ca00, 0x8
+	.byte 104, 36
+	.byte 120, 36
+	.byte 136, 36
 
-
+	.align 2
 gSpriteAnim_840CA08:
 	obj_image_anim_frame 0, 8
 	obj_image_anim_frame 64, 8
