@@ -15034,7 +15034,7 @@ sub_80B2790: @ 80B2790
 	movs r1, 0
 	movs r2, 0x14
 	bl memset
-	bl sub_8075624
+	bl battle_anim_clear_some_data
 	ldr r1, _080B27F8 @ =gUnknown_02024E84
 	movs r2, 0
 	adds r0, r1, 0x3

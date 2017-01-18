@@ -46,6 +46,7 @@ SECTIONS {
         src/link.o(.text);
         src/rtc.o(.text);
         src/main_menu.o(.text);
+        src/rom3.o(.text);
         asm/rom3.o(.text);
         src/decompress.o(.text);
         asm/rom_800D42C.o(.text);

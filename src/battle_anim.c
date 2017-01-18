@@ -232,7 +232,7 @@ static void (*const sScriptCmdTable[])(void) = {
     ScriptCmd_stopsound,
 };
 
-void sub_8075624(void)
+void battle_anim_clear_some_data(void)
 {
     s32 i;
 
