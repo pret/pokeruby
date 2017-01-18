@@ -2271,7 +2271,7 @@ _0800E868:
 	strb r0, [r1]
 	ldr r0, _0800E96C @ =sub_800FCFC
 	bl SetVBlankCallback
-	bl sub_800B884
+	bl setup_poochyena_battle
 	ldr r0, _0800E970 @ =gBattleTypeFlags
 	ldrh r1, [r0]
 	movs r0, 0x40
