@@ -1,5 +1,6 @@
 #include "global.h"
 #include "asm.h"
+#include "battle.h"
 #include "items.h"
 #include "link.h"
 #include "pokemon.h"
@@ -123,15 +124,14 @@ void sub_800B9A8(void)
     }
 }
 
-#if 0
 void sub_800BA78(void)
 {
-    u8 r5;
+    u8 multiplayerId;
     int i;
     
-    if (!(gBattleTypeFlags & 1))
+    if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
     {
-        if (gBattleTypeFlags & 4)
+        if (gBattleTypeFlags & BATTLE_TYPE_WILD)
         {
             gUnknown_030042D4 = sub_8010800;
             gUnknown_03004330[0] = sub_802BF74;
@@ -139,22 +139,20 @@ void sub_800BA78(void)
             gUnknown_03004330[1] = sub_8037510;
             gUnknown_02024A72[1] = 1;
             gUnknown_02024A68 = 2;
-            return;
         }
-        //_0800BAD8
         else
         {
             gUnknown_03004330[1] = sub_802BF74;
             gUnknown_02024A72[1] = 0;
             gUnknown_03004330[0] = sub_8037510;
+            gUnknown_02024A72[0] = 1;
             gUnknown_02024A68 = 2;
-            return;
         }
+        return;
     }
-    //_0800BB04
-    if ((gBattleTypeFlags & 0x41) == 1)
+    if ((gBattleTypeFlags & (BATTLE_TYPE_40 | BATTLE_TYPE_DOUBLE)) == BATTLE_TYPE_DOUBLE)
     {
-        if (gBattleTypeFlags & 4)
+        if (gBattleTypeFlags & BATTLE_TYPE_WILD)
         {
             gUnknown_030042D4 = sub_8010800;
             gUnknown_03004330[0] = sub_802BF74;
@@ -180,256 +178,80 @@ void sub_800BA78(void)
             gUnknown_02024A68 = 4;
             
         }
-        //_0800BB74
         return;
     }
-    //_0800BB90
-    r5 = GetMultiplayerId();
-    if (gBattleTypeFlags & 4)
+    multiplayerId = GetMultiplayerId();
+    if (gBattleTypeFlags & BATTLE_TYPE_WILD)
         gUnknown_030042D4 = sub_8010800;
-    //_0800BBBC  one HUGE loop
     for (i = 0; i < 4; i++)
     {
         switch (gLinkPlayers[i].lp_field_18)
         {
-            case 0:
-            case 3:
-                sub_8094978(gLinkPlayers[i].lp_field_18, 0);
-                break;
-            case 1:
-            case 2:
-                sub_8094978(gLinkPlayers[i].lp_field_18, 1);
-                break;
+        case 0:
+        case 3:
+            sub_8094978(gLinkPlayers[i].lp_field_18, 0);
+            break;
+        case 1:
+        case 2:
+            sub_8094978(gLinkPlayers[i].lp_field_18, 1);
+            break;
         }
-        //_0800BC06
-        if (i == r5)
-        {
-            gUnknown_03004330[gLinkPlayers[i].lp_field_18] = sub_802BF74;
-            switch (gLinkPlayers[i].lp_field_18)
-            {
-                case 0:
-                case 3:
-                    gUnknown_02024A72[gLinkPlayers[i].lp_field_18] = 0;
-                    //goto _0800BD12
-                    gUnknown_02024A6A[gLinkPlayers[i].lp_field_18] = 0;
-                    continue;
-                    //break;
-                case 1:
-                case 2:
-                    gUnknown_02024A72[gLinkPlayers[i].lp_field_18] = 2;
-                    //goto _0800BD24
-                    gUnknown_02024A6A[gLinkPlayers[i].lp_field_18] = 3;
-                    continue;
-                    //break;
-            }
-        }
-        //_0800BC56
-        else
-        {
-            if ((!(gLinkPlayers[i].lp_field_18 & 1) && !(gLinkPlayers[r5].lp_field_18 & 1))
-             || ((gLinkPlayers[i].lp_field_18 & 1) && !(gLinkPlayers[r5].lp_field_18 & 1)))
-            {
-                
-            //_0800BC92
-            gUnknown_03004330[gLinkPlayers[i].lp_field_18] = sub_811DA78;
-            switch (gLinkPlayers[i].lp_field_18)
-            {
-                case 0:
-                case 3:
-                    gUnknown_02024A72[gLinkPlayers[i].lp_field_18] = 0;
-                    //goto _0800BD12
-                    gUnknown_02024A6A[gLinkPlayers[i].lp_field_18] = 0;
-                    continue;
-                    //break;
-                case 1:
-                case 2:
-                    gUnknown_02024A72[gLinkPlayers[i].lp_field_18] = 2;
-                    //goto _0800BD22
-                    gUnknown_02024A6A[gLinkPlayers[i].lp_field_18] = 3;
-                    continue;
-                    //break;
-            }
-            
-            }
-            
-            gUnknown_03004330[gLinkPlayers[i].lp_field_18] = sub_8037510;
-            switch (gLinkPlayers[i].lp_field_18)
-            {
-                case 0:
-                case 3:
-                    gUnknown_02024A72[gLinkPlayers[i].lp_field_18] = 1;
-                    //_0800BD12
-                    gUnknown_02024A6A[gLinkPlayers[i].lp_field_18] = 0;
-                    break;
-                case 1:
-                case 2:
-                    gUnknown_02024A72[gLinkPlayers[i].lp_field_18] = 3;
-                    //_0800BD22
-                    gUnknown_02024A6A[gLinkPlayers[i].lp_field_18] = 3;
-                    break;
-            }
-        }
-        //_0800BD12 or _0800BD24 ?
         
-    }
-}
-
-/*
-void sub_800BA78(void)
-{
-    u8 r5;
-    int i;
-    
-    if (!(gBattleTypeFlags & 1))
-    {
-        if (gBattleTypeFlags & 4)
-        {
-            gUnknown_030042D4 = sub_8010800;
-            gUnknown_03004330[0] = sub_802BF74;
-            gUnknown_02024A72[0] = 0;
-            gUnknown_03004330[1] = sub_8037510;
-            gUnknown_02024A72[1] = 1;
-            gUnknown_02024A68 = 2;
-            asm("");
-            return;
-        }
-        //_0800BAD8
-        else
-        {
-            gUnknown_03004330[1] = sub_802BF74;
-            gUnknown_02024A72[1] = 0;
-            gUnknown_03004330[0] = sub_8037510;
-            gUnknown_02024A68 = 2;
-            return;
-        }
-    }
-    //_0800BB04
-    if ((gBattleTypeFlags & 0x41) == 1)
-    {
-        if (gBattleTypeFlags & 4)
-        {
-            gUnknown_030042D4 = sub_8010800;
-            gUnknown_03004330[0] = sub_802BF74;
-            gUnknown_02024A72[0] = 0;
-            gUnknown_03004330[1] = sub_8037510;
-            gUnknown_02024A72[1] = 1;
-            gUnknown_03004330[2] = sub_802BF74;
-            gUnknown_02024A72[2] = 2;
-            gUnknown_03004330[3] = sub_8037510;
-            gUnknown_02024A72[3] = 3;
-            gUnknown_02024A68 = 4;
-        }
-        else
-        {
-            gUnknown_03004330[1] = sub_802BF74;
-            gUnknown_02024A72[1] = 0;
-            gUnknown_03004330[0] = sub_8037510;
-            gUnknown_02024A72[0] = 1;
-            gUnknown_03004330[3] = sub_802BF74;
-            gUnknown_02024A72[3] = 2;
-            gUnknown_03004330[2] = sub_8037510;
-            gUnknown_02024A72[2] = 3;
-            gUnknown_02024A68 = 4;
-            
-        }
-        //_0800BB74
-        return;
-    }
-    //_0800BB90
-    r5 = GetMultiplayerId();
-    if (gBattleTypeFlags & 4)
-        gUnknown_030042D4 = sub_8010800;
-    //_0800BBBC  one HUGE loop
-    for (i = 0; i < 4; i++)
-    {
-        switch (gLinkPlayers[i].lp_field_18)
-        {
-            case 0:
-            case 3:
-                sub_8094978(gLinkPlayers[i].lp_field_18, 0);
-                break;
-            case 1:
-            case 2:
-                sub_8094978(gLinkPlayers[i].lp_field_18, 1);
-                break;
-        }
-        //_0800BC06
-        if (i == r5)
+        if (i == multiplayerId)
         {
             gUnknown_03004330[gLinkPlayers[i].lp_field_18] = sub_802BF74;
             switch (gLinkPlayers[i].lp_field_18)
             {
+            case 0:
+            case 3:
+                gUnknown_02024A72[gLinkPlayers[i].lp_field_18] = 0;
+                gUnknown_02024A6A[gLinkPlayers[i].lp_field_18] = 0;
+                break;
+            case 1:
+            case 2:
+                gUnknown_02024A72[gLinkPlayers[i].lp_field_18] = 2;
+                gUnknown_02024A6A[gLinkPlayers[i].lp_field_18] = 3;
+                break;
+            }
+        }
+        else
+        {
+            if ((!(gLinkPlayers[i].lp_field_18 & 1) && !(gLinkPlayers[multiplayerId].lp_field_18 & 1))
+             || ((gLinkPlayers[i].lp_field_18 & 1) && (gLinkPlayers[multiplayerId].lp_field_18 & 1)))
+            {
+                gUnknown_03004330[gLinkPlayers[i].lp_field_18] = sub_811DA78;
+                switch (gLinkPlayers[i].lp_field_18)
+                {
                 case 0:
                 case 3:
                     gUnknown_02024A72[gLinkPlayers[i].lp_field_18] = 0;
-                    //goto _0800BD12
                     gUnknown_02024A6A[gLinkPlayers[i].lp_field_18] = 0;
-                    continue;
-                    //break;
+                    break;
                 case 1:
                 case 2:
                     gUnknown_02024A72[gLinkPlayers[i].lp_field_18] = 2;
-                    //goto _0800BD24
                     gUnknown_02024A6A[gLinkPlayers[i].lp_field_18] = 3;
-                    continue;
-                    //break;
+                    break;
+                }
             }
-        }
-        //_0800BC56
-        else
-        {
-            if (!(gLinkPlayers[i].lp_field_18 & 1))
-            {
-                if (gLinkPlayers[r5].lp_field_18 & 1)
-                    goto _0800BCD8;
-            }
-            //_0800BC80
             else
             {
-                if (!(gLinkPlayers[r5].lp_field_18 & 1))
-                    goto _0800BCD8;
-            }
-            //_0800BC92
-            gUnknown_03004330[gLinkPlayers[i].lp_field_18] = sub_811DA78;
-            switch (gLinkPlayers[i].lp_field_18)
-            {
-                case 0:
-                case 3:
-                    gUnknown_02024A72[gLinkPlayers[i].lp_field_18] = 0;
-                    //goto _0800BD12
-                    gUnknown_02024A6A[gLinkPlayers[i].lp_field_18] = 0;
-                    continue;
-                    //break;
-                case 1:
-                case 2:
-                    gUnknown_02024A72[gLinkPlayers[i].lp_field_18] = 2;
-                    //goto _0800BD22
-                    gUnknown_02024A6A[gLinkPlayers[i].lp_field_18] = 3;
-                    continue;
-                    //break;
-            }
-            
-          _0800BCD8:
-            gUnknown_03004330[gLinkPlayers[i].lp_field_18] = sub_8037510;
-            switch (gLinkPlayers[i].lp_field_18)
-            {
+                gUnknown_03004330[gLinkPlayers[i].lp_field_18] = sub_8037510;
+                switch (gLinkPlayers[i].lp_field_18)
+                {
                 case 0:
                 case 3:
                     gUnknown_02024A72[gLinkPlayers[i].lp_field_18] = 1;
-                    //_0800BD12
                     gUnknown_02024A6A[gLinkPlayers[i].lp_field_18] = 0;
                     break;
                 case 1:
                 case 2:
                     gUnknown_02024A72[gLinkPlayers[i].lp_field_18] = 3;
-                    //_0800BD22
                     gUnknown_02024A6A[gLinkPlayers[i].lp_field_18] = 3;
                     break;
+                }
             }
         }
-        //_0800BD12 or _0800BD24 ?
-        
     }
+    gUnknown_02024A68 = 4;
 }
-*/
-#endif
