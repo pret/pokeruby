@@ -6,60 +6,6 @@
 
 	.text
 
-	thumb_func_start sub_811EC04
-sub_811EC04: @ 811EC04
-	push {lr}
-	bl dp01_tbl3_exec_completed
-	pop {r0}
-	bx r0
-	thumb_func_end sub_811EC04
-
-	thumb_func_start sub_811EC10
-sub_811EC10: @ 811EC10
-	push {r4,r5,lr}
-	ldr r1, _0811EC34 @ =gUnknown_02023A60
-	ldr r0, _0811EC38 @ =gUnknown_02024A60
-	ldrb r2, [r0]
-	lsls r0, r2, 9
-	adds r1, 0x2
-	adds r1, r0, r1
-	ldrb r0, [r1]
-	cmp r0, 0
-	bne _0811EC40
-	ldr r0, _0811EC3C @ =gUnknown_02024A6A
-	lsls r1, r2, 1
-	adds r1, r0
-	ldrb r0, [r1]
-	bl sub_811EC68
-	b _0811EC5E
-	.align 2, 0
-_0811EC34: .4byte gUnknown_02023A60
-_0811EC38: .4byte gUnknown_02024A60
-_0811EC3C: .4byte gUnknown_02024A6A
-_0811EC40:
-	ldrb r4, [r1]
-	movs r5, 0
-_0811EC44:
-	movs r0, 0x1
-	ands r0, r4
-	cmp r0, 0
-	beq _0811EC52
-	adds r0, r5, 0
-	bl sub_811EC68
-_0811EC52:
-	lsrs r4, 1
-	adds r0, r5, 0x1
-	lsls r0, 24
-	lsrs r5, r0, 24
-	cmp r5, 0x5
-	bls _0811EC44
-_0811EC5E:
-	bl dp01_tbl3_exec_completed
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_811EC10
-
 	thumb_func_start sub_811EC68
 sub_811EC68: @ 811EC68
 	push {r4-r7,lr}

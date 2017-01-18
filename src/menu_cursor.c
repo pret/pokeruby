@@ -1,7 +1,7 @@
 #include "global.h"
 #include "menu_cursor.h"
-#include "sprite.h"
 #include "palette.h"
+#include "sprite.h"
 
 extern struct SpriteSheet gUnknown_0842F140[];
 extern struct SpriteSheet gUnknown_0842F1C0[];

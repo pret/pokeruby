@@ -1,6 +1,6 @@
 #include "global.h"
-#include "text.h"
 #include "string_util.h"
+#include "text.h"
 
 void PadNameString(u8 *a1, u8 a2)
 {

@@ -1,15 +1,15 @@
 #include "global.h"
 #include "wild_encounter.h"
-#include "asm.h"
-#include "field_player_avatar.h"
-#include "safari_zone.h"
-#include "battle_setup.h"
 #include "abilities.h"
-#include "rng.h"
-#include "script.h"
+#include "asm.h"
+#include "battle_setup.h"
 #include "event_data.h"
-#include "rom4.h"
+#include "field_player_avatar.h"
 #include "metatile_behavior.h"
+#include "rng.h"
+#include "rom4.h"
+#include "safari_zone.h"
+#include "script.h"
 
 struct WildPokemon
 {
@@ -66,7 +66,7 @@ static u16 GetRoute119WaterTileNum(s16 x, s16 y, u8 section)
     u16 yMin = gRoute119WaterTileData[section * 3 + 0];
     u16 yMax = gRoute119WaterTileData[section * 3 + 1];
     u16 tileNum = gRoute119WaterTileData[section * 3 + 2];
-    
+
     for (yCur = yMin; yCur <= yMax; yCur++)
     {
         for (xCur = 0; xCur < gMapHeader.mapData->width; xCur++)
@@ -96,7 +96,7 @@ static bool8 CheckFeebas(void)
         GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
         x -= 7;
         y -= 7;
-        
+
 #ifdef NONMATCHING
         if (y >= gRoute119WaterTileData[3 * 1 + 0] && y <= gRoute119WaterTileData[3 * 1 + 1])
             route119section = 1;
@@ -111,7 +111,7 @@ static bool8 CheckFeebas(void)
                 route119section = 2;
         }
 #endif
-        
+
         if (Random() % 100 > 49) //50% chance of encountering Feebas
             return FALSE;
         FeebasSeedRng(gSaveBlock1.easyChatPairs[0].unk2);
@@ -185,7 +185,7 @@ static u8 ChooseWildMonIndex_Water(void)
     if (rand >= 90 && rand < 95)    //5% chance
         return 2;
     if (rand >= 95 && rand < 99)    //4% chance
-        return 3; 
+        return 3;
     else                            //1% chance
         return 4;
 }

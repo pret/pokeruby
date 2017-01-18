@@ -235,7 +235,7 @@ static void (*const sScriptCmdTable[])(void) = {
 void sub_8075624(void)
 {
     s32 i;
-    
+
     gUnknown_0202F7B0 = 0;
     gUnknown_0202F7B1 = 0;
     gUnknown_0202F7B2 = 0;
@@ -268,7 +268,7 @@ void move_anim_start_t1(u16 a)
 void move_something(const u8 *const moveAnims[], u16 b, u8 c)
 {
     s32 i;
-    
+
     if (sub_8076BE0() == 0)
     {
         sub_8079E24();
@@ -339,7 +339,7 @@ void move_anim_related_task_del(u8 taskId)
 static void sub_8075940(u16 a)
 {
     s32 i;
-    
+
     for (i = 0; i < 8; i++)
     {
         if (gUnknown_03004B10[i] == 0xFFFF)
@@ -353,7 +353,7 @@ static void sub_8075940(u16 a)
 static void sub_8075970(u16 a)
 {
     s32 i;
-    
+
     for (i = 0; i < 8; i++)
     {
         if (gUnknown_03004B10[i] == a)
@@ -388,7 +388,7 @@ static void sub_80759D0(void)
 static void ScriptCmd_loadsprite(void)
 {
     u16 r4;
-    
+
     gBattleAnimScriptPtr++;
     r4 = SCRIPT_READ_16(gBattleAnimScriptPtr);
     LoadCompressedObjectPic(&gBattleAnimPicTable[r4 - 10000]);
@@ -402,7 +402,7 @@ static void ScriptCmd_loadsprite(void)
 static void ScriptCmd_unloadsprite(void)
 {
     u16 r4;
-    
+
     gBattleAnimScriptPtr++;
     r4 = SCRIPT_READ_16(gBattleAnimScriptPtr);
     FreeSpriteTilesByTag(gBattleAnimPicTable[r4 - 10000].tag);
@@ -422,7 +422,7 @@ static void ScriptCmd_sprite(void)
     u16 r6;
     u8 r2;
     s8 r1;
-    
+
     gBattleAnimScriptPtr++;
     r7 = (struct SpriteTemplate *)(SCRIPT_READ_32(gBattleAnimScriptPtr));
     gBattleAnimScriptPtr += 4;
@@ -444,7 +444,7 @@ static void ScriptCmd_sprite(void)
             r4 = -r4;
         _r0 = sub_8079E90(gUnknown_0202F7C9);
         r1 = r4;
-        
+
     }
     else
     {
@@ -459,7 +459,7 @@ static void ScriptCmd_sprite(void)
     r6 = _r0 + r1;
     if ((s16)r6 < 3)
         r6 = 3;
-        
+
     r4 = sub_8077ABC(gUnknown_0202F7C9, 2);
     r2 = sub_8077ABC(gUnknown_0202F7C9, 3);
     CreateSpriteAndAnimate(r7, r4, r2, r6);
@@ -603,7 +603,7 @@ static void ScriptCmd_createtask(void)
     u8 taskId;
     u8 numArgs;
     s32 i;
-    
+
     gBattleAnimScriptPtr++;
     taskFunc = (TaskFunc)SCRIPT_READ_32(gBattleAnimScriptPtr);
     gBattleAnimScriptPtr += 4;
@@ -656,7 +656,7 @@ static void ScriptCmd_end(void)
 {
     s32 i;
     int zero = 0;
-    
+
     if (gUnknown_0202F7B2 != 0 || gUnknown_0202F7B3 != 0
      || gUnknown_0202F7C2[0] != 0xFF || gUnknown_0202F7C2[1] != 0xFF)
     {
@@ -664,7 +664,7 @@ static void ScriptCmd_end(void)
         gUnknown_0202F7B0 = 1;
         return;
     }
-    
+
     if (IsSEPlaying())
     {
         gUnknown_03004AF0++;
@@ -716,7 +716,7 @@ static void ScriptCmd_monbg(void)
     u8 r7;
     u16 r4;
     u8 taskId;
-    
+
     gBattleAnimScriptPtr++;
     r6 = SCRIPT_READ_8(gBattleAnimScriptPtr);
     if (r6 == 0)
@@ -754,7 +754,7 @@ static void ScriptCmd_monbg(void)
         gTasks[taskId].data[5] = r7;
         gTasks[taskId].data[6] = r5;
         gUnknown_0202F7C2[0] = taskId;
-    
+
     }
     r5 ^= 2;
     if (r6 > 1 && b_side_obj__get_some_boolean(r5))
@@ -881,7 +881,7 @@ void sub_8076034(u8 a, u8 b)
     volatile u8 pointlessZero;
     u16 *addr2;
     u8 spriteId;
-    
+
     if (b == 0)
     {
         struct UnknownStruct2 s;
@@ -889,7 +889,7 @@ void sub_8076034(u8 a, u8 b)
         u32 size;
         u8 r2;
         u16 *addr3;
-        
+
         sub_8078914(&s);
         addr = s.unk0;
         size = 0x2000;
@@ -908,25 +908,25 @@ void sub_8076034(u8 a, u8 b)
         pointlessZero = 0;
         addr2 = (void *)s.unk4;
         DmaFill16(3, 0xFF, addr2, 0x1000);
-        
+
         REG_BG1CNT_BITFIELD.priority = 2;
         REG_BG1CNT_BITFIELD.screenSize = 1;
         REG_BG1CNT_BITFIELD.areaOverflowMode = 0;
-        
+
         spriteId = gUnknown_02024BE0[a];
         gUnknown_030042C0 = -(gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x) + 32;
         if (sub_8076BE0() != 0 && sub_80AEB1C(EWRAM_19348) != 0)
             gUnknown_030042C0--;
         gUnknown_030041B4 = -(gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y) + 32;
         gSprites[gUnknown_02024BE0[a]].invisible = TRUE;
-        
+
         REG_BG1HOFS = gUnknown_030042C0;
         REG_BG1VOFS = gUnknown_030041B4;
-        
+
         LoadPalette(gPlttBufferUnfaded + 0x100 + a * 16, s.unk8 * 16, 32);
         addr3 = (u16 *)PLTT + s.unk8 * 16;
         DmaCopy32(3, gPlttBufferUnfaded + 0x100 + a * 16, addr3, 32);
-        
+
         if (sub_8076BE0() != 0)
             r2 = 0;
         else
@@ -940,7 +940,7 @@ void sub_8076034(u8 a, u8 b)
         u8 *addr;
         u32 size;
         u16 *addr3;
-        
+
         addr = (void *)(VRAM + 0x6000);
         size = 0x2000;
         while (1)
@@ -958,23 +958,23 @@ void sub_8076034(u8 a, u8 b)
         pointlessZero = 0;
         addr2 = (void *)(VRAM + 0xF000);
         DmaFill32(3, 0, addr2, 0x800);
-        
+
         REG_BG2CNT_BITFIELD.priority = 2;
         REG_BG2CNT_BITFIELD.screenSize = 1;
         REG_BG2CNT_BITFIELD.areaOverflowMode = 0;
-        
+
         spriteId = gUnknown_02024BE0[a];
         gUnknown_03004288 = -(gSprites[spriteId].pos1.x + gSprites[spriteId].pos2.x) + 32;
         gUnknown_03004280 = -(gSprites[spriteId].pos1.y + gSprites[spriteId].pos2.y) + 32;
         gSprites[gUnknown_02024BE0[a]].invisible = TRUE;
-        
+
         REG_BG2HOFS = gUnknown_03004288;
         REG_BG2VOFS = gUnknown_03004280;
-        
+
         LoadPalette(gPlttBufferUnfaded + 0x100 + a * 16, 0x90, 32);
         addr3 = (void *)(PLTT + 0x120);
         DmaCopy32(3, gPlttBufferUnfaded + 0x100 + a * 16, addr3, 32);
-        
+
         sub_80E4EF8(0, 0, battle_get_per_side_status(a), 9, 0x6000, 0x1E, REG_BG2CNT_BITFIELD.charBaseBlock);
     }
 }
@@ -985,7 +985,7 @@ static void sub_8076380(void)
     int j;
     struct UnknownStruct2 s;
     u16 *ptr;
-    
+
     if (sub_80AEB1C(EWRAM_19348) != 0)
     {
         sub_8078914(&s);
@@ -995,7 +995,7 @@ static void sub_8076380(void)
             for (j = 0; j < 4; j++)
             {
                 u16 temp = ptr[j + i * 32];
-                
+
                 ptr[j + i * 32] = ptr[7 - j + i * 32];
                 ptr[7 - j + i * 32] = temp;
             }
@@ -1013,7 +1013,7 @@ void sub_80763FC(u16 a, u16 *b, u32 c, u8 d)
     u8 i;
     u8 j;
     u32 r9;
-    
+
     if (d == 0)
         r9 = 32;
     else
@@ -1032,12 +1032,12 @@ void sub_8076464(u8 a)
     u32 size;
     volatile u8 pointlessZero;
     struct UnknownStruct2 s;
-    
+
     sub_8078914(&s);
     if (a == 0 || sub_8076BE0() != 0)
     {
         u16 *addr2;
-        
+
         addr = s.unk0;
         size = 0x2000;
         while (1)
@@ -1061,7 +1061,7 @@ void sub_8076464(u8 a)
     else
     {
         u16 *addr2;
-        
+
         addr = (void *)(VRAM + 0x6000);
         size = 0x2000;
         while (1)
@@ -1091,7 +1091,7 @@ static void task_pA_ma0A_obj_to_bg_pal(u8 taskId)
     s16 r3;
     s16 r2;
     struct UnknownStruct2 s;
-    
+
     r4 = gTasks[taskId].data[0];
     r6 = gTasks[taskId].data[6];
     sub_8078914(&s);
@@ -1101,7 +1101,7 @@ static void task_pA_ma0A_obj_to_bg_pal(u8 taskId)
     {
         u16 *src;
         u16 *dst;
-    
+
         gUnknown_030042C0 = r3 + gTasks[taskId].data[3];
         gUnknown_030041B4 = r2 + gTasks[taskId].data[4];
         src = gPlttBufferFaded + 0x100 + r6 * 16;
@@ -1112,7 +1112,7 @@ static void task_pA_ma0A_obj_to_bg_pal(u8 taskId)
     {
         u16 *src;
         u16 *dst;
-    
+
         gUnknown_03004288 = r3 + gTasks[taskId].data[3];
         gUnknown_03004280 = r2 + gTasks[taskId].data[4];
         src = gPlttBufferFaded + 0x100 + r6 * 16;
@@ -1126,7 +1126,7 @@ static void ScriptCmd_clearmonbg(void)
     u8 r4;
     u8 r5;
     u8 taskId;
-    
+
     gBattleAnimScriptPtr++;
     r4 = SCRIPT_READ_8(gBattleAnimScriptPtr);
     if (r4 == 0)
@@ -1153,7 +1153,7 @@ static void sub_807672C(u8 taskId)
 {
     u8 var;
     u8 r4;
-    
+
     gTasks[taskId].data[1]++;
     if (gTasks[taskId].data[1] != 1)
     {
@@ -1185,7 +1185,7 @@ static void ScriptCmd_monbg_22(void)
     u8 r4;
     u8 r0;
     u8 r1;
-    
+
     gBattleAnimScriptPtr++;
     r5 = SCRIPT_READ_8(gBattleAnimScriptPtr);
     if (r5 == 0)
@@ -1227,7 +1227,7 @@ static void ScriptCmd_clearmonbg_23(void)
     u8 r5;
     u8 r6;
     u8 taskId;
-    
+
     gBattleAnimScriptPtr++;
     r5 = SCRIPT_READ_8(gBattleAnimScriptPtr);
     if (r5 == 0)
@@ -1255,7 +1255,7 @@ static void sub_80769A4(u8 taskId)
     u8 r0;
     u8 r4;
     u8 r5;
-    
+
     gTasks[taskId].data[1]++;
     if (gTasks[taskId].data[1] != 1)
     {
@@ -1278,7 +1278,7 @@ static void ScriptCmd_setalpha(void)
 {
     u16 r3;
     u16 r1;
-    
+
     gBattleAnimScriptPtr++;
     r3 = *(gBattleAnimScriptPtr++);
     r1 = *(gBattleAnimScriptPtr++) << 8;
@@ -1290,7 +1290,7 @@ static void ScriptCmd_setbldcnt(void)
 {
     u16 r3;
     u16 r1;
-    
+
     gBattleAnimScriptPtr++;
     r3 = *(gBattleAnimScriptPtr++);
     r1 = *(gBattleAnimScriptPtr++) << 8;
@@ -1307,7 +1307,7 @@ static void ScriptCmd_blendoff(void)
 static void ScriptCmd_call(void)
 {
     u32 addr;
-    
+
     gBattleAnimScriptPtr++;
     gBattleAnimScriptRetAddr = gBattleAnimScriptPtr + 4;
     addr = SCRIPT_READ_32(gBattleAnimScriptPtr);
@@ -1324,7 +1324,7 @@ static void ScriptCmd_setvar(void)
     const u8 *addr = gBattleAnimScriptPtr;
     u16 r4;
     u8 r2;
-    
+
     gBattleAnimScriptPtr++;
     r2 = SCRIPT_READ_8(gBattleAnimScriptPtr);
     gBattleAnimScriptPtr++;
@@ -1336,7 +1336,7 @@ static void ScriptCmd_setvar(void)
 static void ScriptCmd_ifelse(void)
 {
     u32 addr;
-    
+
     gBattleAnimScriptPtr++;
     if (gUnknown_0202F7C4 & 1)
         gBattleAnimScriptPtr += 4;
@@ -1348,7 +1348,7 @@ static void ScriptCmd_jumpif(void)
 {
     u8 r1;
     u32 addr;
-    
+
     gBattleAnimScriptPtr++;
     r1 = SCRIPT_READ_8(gBattleAnimScriptPtr);
     gBattleAnimScriptPtr++;
@@ -1366,7 +1366,7 @@ static void ScriptCmd_jumpif(void)
 static void ScriptCmd_jump(void)
 {
     u32 addr;
-    
+
     gBattleAnimScriptPtr++;
     addr = SCRIPT_READ_32(gBattleAnimScriptPtr);
     gBattleAnimScriptPtr = (u8 *)addr;
@@ -1385,7 +1385,7 @@ static void ScriptCmd_fadetobg(void)
 {
     u8 r4;
     u8 taskId;
-    
+
     gBattleAnimScriptPtr++;
     r4 = SCRIPT_READ_8(gBattleAnimScriptPtr);
     gBattleAnimScriptPtr++;
@@ -1400,7 +1400,7 @@ static void ScriptCmd_fadetobg_25(void)
     u8 r7;
     u8 r6;
     u8 taskId;
-    
+
     gBattleAnimScriptPtr++;
     r8 = gBattleAnimScriptPtr[0];
     r7 = gBattleAnimScriptPtr[1];
@@ -1434,7 +1434,7 @@ static void task_p5_load_battle_screen_elements(u8 taskId)
     else if (gTasks[taskId].data[10] == 2)
     {
         s16 data0 = (u16)gTasks[taskId].data[0];
-        
+
         if (data0 == -1)
             dp01t_11_3_message_for_player_only();
         else
@@ -1459,7 +1459,7 @@ static void sub_8076DB8(u16 a)
         void *tilemap = gBattleAnimBackgroundTable[a].tilemap;
         void *dmaSrc;
         void *dmaDest;
-        
+
         sub_800D238(tilemap, sub_8076BE0() ? EWRAM_14800 : EWRAM_18000);
         sub_80763FC(sub_80789BC(), sub_8076BE0() ? EWRAM_14800 : EWRAM_18000, 0x100, 0);
         dmaSrc = sub_8076BE0() ? EWRAM_14800 : EWRAM_18000;
@@ -1487,7 +1487,7 @@ static void dp01t_11_3_message_for_player_only(void)
 static void ScriptCmd_restorebg(void)
 {
     u8 taskId;
-    
+
     gBattleAnimScriptPtr++;
     taskId = CreateTask(task_p5_load_battle_screen_elements, 5);
     gTasks[taskId].data[0] = 0xFFFF;
@@ -1547,7 +1547,7 @@ s8 sub_8076F98(s8 a)
                 if (a < -0x40)
                     a = 0xC0;
                 return a;
-            }  
+            }
         }
         //_08077004
         else
@@ -1559,7 +1559,7 @@ s8 sub_8076F98(s8 a)
             //_08077042
             else
             {
-                
+
             }
             //_0807706C
         }
@@ -1717,7 +1717,7 @@ s8 sub_8077094(s8 a)
 s16 sub_8077104(s16 a)
 {
     s16 var = a;
-    
+
     if (var > 63)
         var = 63;
     else if (var < -64)
@@ -1728,7 +1728,7 @@ s16 sub_8077104(s16 a)
 s16 sub_807712C(s16 a, s16 b, s16 c)
 {
     u16 var;
-    
+
     if (a < b)
         var = ((c < 0) ? -c : c);
     else if (a > b)
@@ -1742,7 +1742,7 @@ static void ScriptCmd_panse_19(void)
 {
     u16 r4;
     s8 r0;
-    
+
     gBattleAnimScriptPtr++;
     r4 = SCRIPT_READ_16(gBattleAnimScriptPtr);
     r0 = SCRIPT_READ_8(gBattleAnimScriptPtr + 2);
@@ -1753,7 +1753,7 @@ static void ScriptCmd_panse_19(void)
 static void ScriptCmd_setpan(void)
 {
     s8 r0;
-    
+
     gBattleAnimScriptPtr++;
     r0 = SCRIPT_READ_8(gBattleAnimScriptPtr);
     SE12PanpotControl(sub_8076F98(r0));
@@ -1770,7 +1770,7 @@ static void ScriptCmd_panse_1B(void)
     s8 panning;
     s8 r8;
     u8 taskId;
-    
+
     gBattleAnimScriptPtr++;
     songNum = SCRIPT_READ_16(gBattleAnimScriptPtr);
     r0 = SCRIPT_READ_8(gBattleAnimScriptPtr + 2);
@@ -1800,7 +1800,7 @@ static void c3_08073CEC(u8 taskId)
     s16 r3;
     s16 r4;
     int foo;
-    
+
     r0 = gTasks[taskId].data[8];
     gTasks[taskId].data[8]++;
     if (r0 >= gTasks[taskId].data[3])
@@ -1935,7 +1935,7 @@ static void ScriptCmd_panse_26(void)
     s8 r6;
     u8 r10;
     u8 taskId;
-    
+
     gBattleAnimScriptPtr++;
     r8 = SCRIPT_READ_16(gBattleAnimScriptPtr);
     r4 = SCRIPT_READ_8(gBattleAnimScriptPtr + 2);
@@ -1964,7 +1964,7 @@ static void ScriptCmd_panse_27(void)
     s8 r5;
     s8 r4_2;
     u8 taskId;
-    
+
     gBattleAnimScriptPtr++;
     r9 = SCRIPT_READ_16(gBattleAnimScriptPtr);
     r0 = SCRIPT_READ_8(gBattleAnimScriptPtr + 2);
@@ -1993,7 +1993,7 @@ static void ScriptCmd_panse_1C(void)
     u8 r9;
     s8 r4;
     u8 taskId;
-    
+
     gBattleAnimScriptPtr++;
     r5 = SCRIPT_READ_16(gBattleAnimScriptPtr);
     r0 = SCRIPT_READ_8(gBattleAnimScriptPtr + 2);
@@ -2017,7 +2017,7 @@ static void sub_80774FC(u8 taskId)
     u16 r0;
     s8 r1;
     u8 r4;
-    
+
     data8 = gTasks[taskId].data[8];
     gTasks[taskId].data[8]++;
     if (data8 >= gTasks[taskId].data[2])
@@ -2043,7 +2043,7 @@ static void ScriptCmd_panse_1D(void)
     u8 r8;
     s8 r4;
     u8 taskId;
-    
+
     gBattleAnimScriptPtr++;
     r5 = SCRIPT_READ_16(gBattleAnimScriptPtr);
     r0 = SCRIPT_READ_8(gBattleAnimScriptPtr + 2);
@@ -2060,7 +2060,7 @@ static void ScriptCmd_panse_1D(void)
 static void sub_80775CC(u8 taskId)
 {
     s16 r0;
-    
+
     r0 = gTasks[taskId].data[2];
     gTasks[taskId].data[2]--;
     if (r0 <= 0)
@@ -2077,7 +2077,7 @@ static void ScriptCmd_createtask_1F(void)
     u8 numArgs;
     int i;
     u8 taskId;
-    
+
     gBattleAnimScriptPtr++;
     func = (TaskFunc)SCRIPT_READ_32(gBattleAnimScriptPtr);
     gBattleAnimScriptPtr += 4;
@@ -2127,7 +2127,7 @@ static void ScriptCmd_jumpvareq(void)
     u8 r2;
     s16 r1;
     u8 *addr;
-    
+
     gBattleAnimScriptPtr++;
     r2 = SCRIPT_READ_8(gBattleAnimScriptPtr);
     r1 = SCRIPT_READ_16(gBattleAnimScriptPtr + 1);
@@ -2145,7 +2145,7 @@ static void ScriptCmd_jumpvareq(void)
 static void ScriptCmd_jumpunkcond(void)
 {
     u8 *addr;
-    
+
     gBattleAnimScriptPtr++;
     if (sub_8076BE0())
     {
@@ -2163,7 +2163,7 @@ static void ScriptCmd_monbgprio_28(void)
     u8 r2;
     u8 r0;
     u8 r4;
-    
+
     r2 = SCRIPT_READ_8(gBattleAnimScriptPtr + 1);
     gBattleAnimScriptPtr += 2;
     if (r2 != 0)
@@ -2193,7 +2193,7 @@ static void ScriptCmd_monbgprio_2A(void)
     u8 r6;
     u8 r4;
     u8 r0;
-    
+
     r6 = SCRIPT_READ_8(gBattleAnimScriptPtr + 1);
     gBattleAnimScriptPtr += 2;
     if (battle_side_get_owner(gUnknown_0202F7C8) != battle_side_get_owner(gUnknown_0202F7C9))
@@ -2215,7 +2215,7 @@ static void ScriptCmd_invisible(void)
 {
     u8 r0;
     u8 spriteId;
-    
+
     r0 = SCRIPT_READ_8(gBattleAnimScriptPtr + 1);
     spriteId = obj_id_for_side_relative_to_move(r0);
     if (spriteId != 0xFF)
@@ -2229,7 +2229,7 @@ static void ScriptCmd_visible(void)
 {
     u8 r0;
     u8 spriteId;
-    
+
     r0 = SCRIPT_READ_8(gBattleAnimScriptPtr + 1);
     spriteId = obj_id_for_side_relative_to_move(r0);
     if (spriteId != 0xFF)
@@ -2244,7 +2244,7 @@ static void ScriptCmd_doublebattle_2D(void)
     u8 r7;
     u8 r4;
     u8 spriteId;
-    
+
     r7 = SCRIPT_READ_8(gBattleAnimScriptPtr + 1);
     gBattleAnimScriptPtr += 2;
     if (!sub_8076BE0() && IsDoubleBattle()
@@ -2278,7 +2278,7 @@ static void ScriptCmd_doublebattle_2E(void)
     u8 r7;
     u8 r4;
     u8 spriteId;
-    
+
     r7 = SCRIPT_READ_8(gBattleAnimScriptPtr  + 1);
     gBattleAnimScriptPtr += 2;
     if (!sub_8076BE0() && IsDoubleBattle()

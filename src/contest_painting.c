@@ -194,7 +194,7 @@ static void ShowContestPainting(void)
     {
         u8 *addr;
         size_t size;
-        
+
         ResetPaletteFade();
         addr = (void *)VRAM;
         size = 0x18000;
@@ -261,7 +261,7 @@ static void HoldContestPainting(void)
         if ((gMain.newKeys & 1) || (gMain.newKeys & 2))
         {
             u8 two = 2;  //needed to make the asm match
-            
+
             gUnknown_03000750 = two;
             BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, 0);
         }
@@ -515,7 +515,7 @@ void sub_8106B90(u8 a[][8][8][4], u16 b[], u16 c[][8][8][8])
     u16 j;
     u16 k;
     u16 l;
-    
+
     for (i = 0; i < 8; i++)
     {
         for (j = 0; j < 8; j++)
@@ -527,7 +527,7 @@ void sub_8106B90(u8 a[][8][8][4], u16 b[], u16 c[][8][8][8])
                     //u8 *arr = a[i][j][k];
                     //u8 r1 = arr[l / 2];
                     u8 r1 = a[i][j][k][l / 2];
-                    
+
                     if (l & 1)
                         r1 /= 16;
                     else
@@ -650,7 +650,7 @@ _08106C08:\n\
 static void sub_8106C40(u8 arg0, u8 arg1)
 {
     u8 x, y;
-    
+
     LoadPalette(gPictureFramePalettes, 0, 128 * 2);
     if (arg1 == 1)
     {
@@ -677,11 +677,11 @@ static void sub_8106C40(u8 arg0, u8 arg1)
             RLUnCompWram(gPictureFrameTilemap_4, gUnknown_03005E10);
             break;
         }
-        
+
         #define VRAM_PICTURE_DATA(x, y) (((u16 *)(VRAM + 0x6000))[(y) * 32 + (x)])
-        
+
         // Set the background
-        for (y = 0; y < 20; y++) 
+        for (y = 0; y < 20; y++)
         {
             for (x = 0; x < 32; x++)
                 VRAM_PICTURE_DATA(x, y) = 0x1015;
@@ -697,7 +697,7 @@ static void sub_8106C40(u8 arg0, u8 arg1)
         // Re-set the entire top row to the first top frame part
         for (x = 0; x < 16; x++)
             VRAM_PICTURE_DATA(x + 7, 2) = (*gUnknown_03005E10)[2][7];
-    
+
         #undef VRAM_PICTURE_DATA
     }
     else if (arg0 < 8)
@@ -739,14 +739,14 @@ static void sub_8106E98(u8 arg0)
 #ifndef NONMATCHING
     asm(""::"r"(arg0));
 #endif
-    
+
     gMain.oamBuffer[0] = gOamData_83F6138;
     gMain.oamBuffer[0].tileNum = 0;
-    
+
 #ifndef NONMATCHING
     if (arg0) arg0 = gMain.oamBuffer[0].tileNum;
 #endif
-    
+
     gMain.oamBuffer[0].x = 88;
     gMain.oamBuffer[0].y = 24;
 }

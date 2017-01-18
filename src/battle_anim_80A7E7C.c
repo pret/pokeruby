@@ -1,6 +1,6 @@
 #include "global.h"
-#include "task.h"
 #include "sprite.h"
+#include "task.h"
 #include "trig.h"
 
 #define TASK gTasks[task]

@@ -40,7 +40,7 @@ gUnknown_08396FA8:: @ 8396FA8
 
 	.align 2
 gUnknown_08396FC4:: @ 8396FC4
-	.4byte 0x0202f7e8
+	.4byte gUnknown_0202F7E8
 
 	.align 2
 gUnknown_08396FC8:: @ 8396FC8

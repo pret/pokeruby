@@ -690,7 +690,7 @@ BattleScript_1D7377: @ 81D7377
 	resultmessage
 	waitmessage 64
 	jumpifbyte 4, 0x2024c68, 41, BattleScript_1D7396
-	copyarray 0x30041c0, 0x20160e0, 6
+	copyarray gUnknown_030041C0, 0x20160e0, 6
 	printstring BATTLE_TEXT_HitMulti
 	waitmessage 64
 
@@ -1493,7 +1493,7 @@ BattleScript_1D7C90: @ 81D7C90
 	resultmessage
 	waitmessage 64
 	jumpifbyte 0, 0x20160e4, 0, BattleScript_1D7CAF
-	copyarray 0x30041c0, 0x20160e0, 6
+	copyarray gUnknown_030041C0, 0x20160e0, 6
 	printstring BATTLE_TEXT_HitMulti
 	waitmessage 64
 

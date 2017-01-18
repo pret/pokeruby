@@ -1,10 +1,10 @@
 #include "global.h"
-#include "main.h"
-#include "rtc.h"
+#include "berry.h"
 #include "event_data.h"
 #include "lottery_corner.h"
-#include "berry.h"
+#include "main.h"
 #include "rom4.h"
+#include "rtc.h"
 #include "wallclock.h"
 
 extern void sub_80FA220(u16);

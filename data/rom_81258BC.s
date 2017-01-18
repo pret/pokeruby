@@ -689,7 +689,8 @@ gUnknown_08402D08:: @ 8402D08
 	.byte 1, 9, 2, 0
 	.space 8
 
-	.incbin "baserom.gba", 0x402d48, 0x8
+	.4byte 0xFF00FFEF
+	.4byte gTileBuffer
 
 	.align 2
 gOamData_8402D50:: @ 8402D50

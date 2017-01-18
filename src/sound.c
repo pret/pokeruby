@@ -1,11 +1,11 @@
 #include "global.h"
 #include "sound.h"
 #include "asm.h"
-#include "gba/m4a_internal.h"
-#include "task.h"
-#include "songs.h"
-#include "m4a.h"
 #include "battle.h"
+#include "gba/m4a_internal.h"
+#include "m4a.h"
+#include "songs.h"
+#include "task.h"
 
 struct Fanfare
 {

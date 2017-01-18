@@ -1,11 +1,11 @@
 #include "global.h"
 #include "mori_debug_menu.h"
 #include "asm.h"
-#include "start_menu.h"
-#include "menu.h"
-#include "main.h"
-#include "string_util.h"
 #include "link.h"
+#include "main.h"
+#include "menu.h"
+#include "start_menu.h"
+#include "string_util.h"
 
 #define SIO_MULTI_CNT ((struct SioMultiCnt *)REG_ADDR_SIOCNT)
 
@@ -49,7 +49,7 @@ u8 MoriDebugMenu_SearchChild(u8 a1, u8 a2, u8 *ptr)
     u8 localPtr[52];
     u16 monData;
     u16 var;
-    
+
     monData = GetMonData(gPlayerParty, 11, ptr);
     var = sub_8041870(monData);
     StringCopy(localPtr, gSpeciesNames[monData]);
@@ -85,14 +85,14 @@ s8 MoriDebugMenu_1000Steps(void)
 {
     sub_8041790(1000);
     CloseMenu();
-    return 1;    
+    return 1;
 }
 
 s8 MoriDebugMenu_10000Steps(void)
 {
     sub_8041790(10000);
     CloseMenu();
-    return 1;    
+    return 1;
 }
 
 s8 MoriDebugMenu_MoveTutor(void)
@@ -130,10 +130,10 @@ s8 MoriDebugMenu_LongName(void)
 s8 MoriDebugMenu_PokeblockCase(void)
 {
     s32 loopCounter;
-    
+
     for(loopCounter = 0; loopCounter <= 39; loopCounter++)
         sub_810CA6C((u8)loopCounter);
-    
+
     CloseMenu();
     return 1;
 }

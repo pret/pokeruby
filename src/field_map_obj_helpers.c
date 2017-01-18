@@ -1,8 +1,8 @@
 #include "global.h"
 #include "asm.h"
-#include "sprite.h"
 #include "asm_fieldmap.h"
 #include "field_effect.h"
+#include "sprite.h"
 
 typedef void (*SpriteStepFunc)(struct Sprite *sprite, u8 dir);
 

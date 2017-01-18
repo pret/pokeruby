@@ -15,11 +15,6 @@
 #define POKEMON_NAME_LENGTH 10
 #define OT_NAME_LENGTH 7
 
-extern u8 gStringVar1[];
-extern u8 gStringVar2[];
-extern u8 gStringVar3[];
-extern u8 gStringVar4[];
-
 enum
 {
     VERSION_SAPPHIRE = 1,
