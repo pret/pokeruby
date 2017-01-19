@@ -14,7 +14,10 @@ extern u8 unk_2000000[];
 
 extern u16 gBattleTypeFlags;
 extern u16 gBlockRecvBuffer[MAX_LINK_PLAYERS][BLOCK_BUFFER_SIZE / 2];
-extern u32 gBitTable[];
+extern const u32 gBitTable[];
+extern u16 gBattleWeather;
+extern const struct BattleMove gBattleMoves[];
+extern struct BattlePokemon gBattleMons[];
 
 extern u8 gUnknown_020238C4;
 extern u8 gUnknown_020238C5;
@@ -27,13 +30,21 @@ extern u32 gUnknown_02024A64;
 extern u8 gUnknown_02024A68;
 extern u16 gUnknown_02024A6A[];
 extern u8 gUnknown_02024A72[];
+extern u16 gUnknown_02024BE6;
+extern u16 gUnknown_02024BE8;
+extern u16 gUnknown_02024C04;
+extern u8 byte_2024C06;
 extern u8 gUnknown_02024C07;
 extern u8 gUnknown_02024C08;
 extern u8 gUnknown_02024C0A;
+extern u8 gUnknown_02024C0B;
 extern u8 gUnknown_02024C0C;
+extern u8 gUnknown_02024C0E;
 extern u8 gUnknown_02024C78;
+extern u8 gUnknown_02024D26;
 extern u8 gUnknown_02024E60[];
 extern u8 gUnknown_02024E64[];
+extern u8 gUnknown_03004040[];
 extern void (*gUnknown_030042D4)(void);
 extern void (*gUnknown_03004330[])(void);
 
@@ -60,6 +71,8 @@ extern void sub_800C1A8(u8);
 extern void sub_800C47C(u8);
 extern void sub_8007F4C(void);
 extern u8 sub_8007ECC(void);
+extern void sub_80155A4();
+extern u8 sub_8018324();
 
 void sub_800B858(void)
 {
@@ -295,7 +308,7 @@ void sub_800BD54(void)
                     {
                         if (GetMonData(&gPlayerParty[j], MON_DATA_HP) != 0
                          && GetMonData(&gPlayerParty[j], MON_DATA_SPECIES2) != 0
-                         && GetMonData(&gPlayerParty[j], MON_DATA_SPECIES2) != 0x19C
+                         && GetMonData(&gPlayerParty[j], MON_DATA_SPECIES2) != SPECIES_EGG
                          && GetMonData(&gPlayerParty[j], MON_DATA_IS_EGG) == 0)
                         {
                             gUnknown_02024A6A[i] = j;
@@ -306,7 +319,7 @@ void sub_800BD54(void)
                     {
                         if (GetMonData(&gEnemyParty[j], MON_DATA_HP) != 0
                          && GetMonData(&gEnemyParty[j], MON_DATA_SPECIES2) != 0
-                         && GetMonData(&gEnemyParty[j], MON_DATA_SPECIES2) != 0x19C
+                         && GetMonData(&gEnemyParty[j], MON_DATA_SPECIES2) != SPECIES_EGG
                          && GetMonData(&gEnemyParty[j], MON_DATA_IS_EGG) == 0)
                         {
                             gUnknown_02024A6A[i] = j;
@@ -319,8 +332,8 @@ void sub_800BD54(void)
                     if (!(gUnknown_02024A72[i] & 1))
                     {
                         if (GetMonData(&gPlayerParty[j], MON_DATA_HP) != 0
-                         && GetMonData(&gPlayerParty[j], MON_DATA_SPECIES) != 0  //Why is this one not SPECIES2 like the rest?
-                         && GetMonData(&gPlayerParty[j], MON_DATA_SPECIES2) != 0x19C
+                         && GetMonData(&gPlayerParty[j], MON_DATA_SPECIES) != 0  //Probably a typo by Game Freak. The rest use SPECIES2
+                         && GetMonData(&gPlayerParty[j], MON_DATA_SPECIES2) != SPECIES_EGG
                          && GetMonData(&gPlayerParty[j], MON_DATA_IS_EGG) == 0
                          && gUnknown_02024A6A[i - 2] != j)
                         {
@@ -332,7 +345,7 @@ void sub_800BD54(void)
                     {
                         if (GetMonData(&gEnemyParty[j], MON_DATA_HP) != 0
                          && GetMonData(&gEnemyParty[j], MON_DATA_SPECIES2) != 0
-                         && GetMonData(&gEnemyParty[j], MON_DATA_SPECIES2) != 0x19C
+                         && GetMonData(&gEnemyParty[j], MON_DATA_SPECIES2) != SPECIES_EGG
                          && GetMonData(&gEnemyParty[j], MON_DATA_IS_EGG) == 0
                          && gUnknown_02024A6A[i - 2] != j)
                         {
@@ -524,12 +537,8 @@ void sub_800C35C(void)
     }
 }
 
-/*
-extern void sub_80155A4();
-
 void sub_800C47C(u8 taskId)
 {
-    //s16 r3;
     u16 r7;
     u8 r4;
     u8 r2;
@@ -542,35 +551,229 @@ void sub_800C47C(u8 taskId)
             gTasks[taskId].data[12] = 0;
             gTasks[taskId].data[15] = 0;
         }
-        //_0800C4B6
-        //r3 = gTasks[taskId].data[15];
-        asm(""::"r"(unk_2000000));
-        r4 = EWRAM_15000[gTasks[taskId].data[15] + 1];
-        r7 = EWRAM_15000[gTasks[taskId].data[15] + 4] | (EWRAM_15000[gTasks[taskId].data[15] + 5] << 8);
-        switch (EWRAM_15000[gTasks[taskId].data[15]])
+        r4 = unk_2000000[0x15000 + gTasks[taskId].data[15] + 1];
+        r7 = unk_2000000[0x15000 + gTasks[taskId].data[15] + 4] | (unk_2000000[0x15000 + gTasks[taskId].data[15] + 5] << 8);
+        switch (unk_2000000[0x15000 + gTasks[taskId].data[15] + 0])
         {
-            case 0:
-                if (gUnknown_02024A64 & gBitTable[r4])
-                    return;
-                memcpy(gUnknown_02023A60[r4], &EWRAM_15000[gTasks[taskId].data[15] + 8], r7);
-                sub_80155A4(r4);
-                if (!(gBattleTypeFlags & 4))
-                {
-                    gUnknown_02024C07 = EWRAM_15000[gTasks[taskId].data[15] + 2];
-                    gUnknown_02024C08 = EWRAM_15000[gTasks[taskId].data[15] + 3];
-                    gUnknown_02024C0C = EWRAM_15000[gTasks[taskId].data[15] + 6];
-                    gUnknown_02024C0A = EWRAM_15000[gTasks[taskId].data[15] + 7];
-                }
-                break;
-            case 1:
-                memcpy(gUnknown_02024260[r4], &EWRAM_15000[gTasks[taskId].data[15] + 8], r7);
-                break;
-            case 2:
-                r2 = EWRAM_15000[gTasks[taskId].data[15] + 8];
-                gUnknown_02024A64 &= ~(gBitTable[r4] << (r2 * 4));
-                break;
+        case 0:
+            if (gUnknown_02024A64 & gBitTable[r4])
+                return;
+            memcpy(gUnknown_02023A60[r4], &unk_2000000[0x15000 + gTasks[taskId].data[15] + 8], r7);
+            sub_80155A4(r4);
+            if (!(gBattleTypeFlags & BATTLE_TYPE_WILD))
+            {
+                gUnknown_02024C07 = unk_2000000[0x15000 + gTasks[taskId].data[15] + 2];
+                gUnknown_02024C08 = unk_2000000[0x15000 + gTasks[taskId].data[15] + 3];
+                gUnknown_02024C0C = unk_2000000[0x15000 + gTasks[taskId].data[15] + 6];
+                gUnknown_02024C0A = unk_2000000[0x15000 + gTasks[taskId].data[15] + 7];
+            }
+            break;
+        case 1:
+            memcpy(gUnknown_02024260[r4], &unk_2000000[0x15000 + gTasks[taskId].data[15] + 8], r7);
+            break;
+        case 2:
+            r2 = unk_2000000[0x15000 + gTasks[taskId].data[15] + 8];
+            gUnknown_02024A64 &= ~(gBitTable[r4] << (r2 * 4));
+            break;
         }
         gTasks[taskId].data[15] = gTasks[taskId].data[15] + r7 + 8;
+    }
+}
+
+void dp01_build_cmdbuf_x00_a_b_0(u8 a, int b, int c)
+{
+    gUnknown_03004040[0] = 0;
+    gUnknown_03004040[1] = b;
+    gUnknown_03004040[2] = c;
+    gUnknown_03004040[3] = 0;
+    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+}
+
+void dp01_build_cmdbuf_x01_a_b_0(u8 a, int b, int c)
+{
+    gUnknown_03004040[0] = 1;
+    gUnknown_03004040[1] = b;
+    gUnknown_03004040[2] = c;
+    gUnknown_03004040[3] = 0;
+    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+}
+
+void dp01_build_cmdbuf_x02_a_b_varargs(u8 a, int b, int c, u8 d, u8 *e)
+{
+    int i;
+    
+    gUnknown_03004040[0] = 2;
+    gUnknown_03004040[1] = b;
+    gUnknown_03004040[2] = c;
+    for (i = 0; i < d; i++)
+        gUnknown_03004040[3 + i] = *(e++);
+    dp01_prepare_buffer(a, gUnknown_03004040, d + 3);
+}
+
+void unref_sub_800C6A4(u8 a, int b, u8 c, u8 *d)
+{
+    int i;
+    
+    gUnknown_03004040[0] = 3;
+    gUnknown_03004040[1] = b;
+    gUnknown_03004040[2] = c;
+    for (i = 0; i < c; i++)
+        gUnknown_03004040[3 + i] = *(d++);
+    dp01_prepare_buffer(a, gUnknown_03004040, c + 3);
+}
+
+void dp01_build_cmdbuf_x04_4_4_4(u8 a)
+{
+    gUnknown_03004040[0] = 4;
+    gUnknown_03004040[1] = 4;
+    gUnknown_03004040[2] = 4;
+    gUnknown_03004040[3] = 4;
+    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+}
+
+void sub_800C704(u8 a, int b, int c)
+{
+    gUnknown_03004040[0] = 5;
+    gUnknown_03004040[1] = b;
+    gUnknown_03004040[2] = c;
+    gUnknown_03004040[3] = 5;
+    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+}
+
+void dp01_build_cmdbuf_x06_a(u8 a, int b)
+{
+    gUnknown_03004040[0] = 6;
+    gUnknown_03004040[1] = b;
+    dp01_prepare_buffer(a, gUnknown_03004040, 2);
+}
+
+void dp01_build_cmdbuf_x07_7_7_7(u8 a)
+{
+    gUnknown_03004040[0] = 7;
+    gUnknown_03004040[1] = 7;
+    gUnknown_03004040[2] = 7;
+    gUnknown_03004040[3] = 7;
+    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+}
+
+void dp01_build_cmdbuf_x08_8_8_8(u8 a)
+{
+    gUnknown_03004040[0] = 8;
+    gUnknown_03004040[1] = 8;
+    gUnknown_03004040[2] = 8;
+    gUnknown_03004040[3] = 8;
+    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+}
+
+void dp01_build_cmdbuf_x09_9_9_9(u8 a)
+{
+    gUnknown_03004040[0] = 9;
+    gUnknown_03004040[1] = 9;
+    gUnknown_03004040[2] = 9;
+    gUnknown_03004040[3] = 9;
+    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+}
+
+void dp01_build_cmdbuf_x0A_A_A_A(u8 a)
+{
+    gUnknown_03004040[0] = 10;
+    gUnknown_03004040[1] = 10;
+    gUnknown_03004040[2] = 10;
+    gUnknown_03004040[3] = 10;
+    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+}
+
+void dp01_build_cmdbuf_x0B_B_B_B(u8 a)
+{
+    gUnknown_03004040[0] = 11;
+    gUnknown_03004040[1] = 11;
+    gUnknown_03004040[2] = 11;
+    gUnknown_03004040[3] = 11;
+    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+}
+
+void dp01_build_cmdbuf_x0C_C_C_C(u8 a)
+{
+    gUnknown_03004040[0] = 12;
+    gUnknown_03004040[1] = 12;
+    gUnknown_03004040[2] = 12;
+    gUnknown_03004040[3] = 12;
+    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+}
+
+void dp01_build_cmdbuf_x0D_a(u8 a, int b)
+{
+    gUnknown_03004040[0] = 13;
+    gUnknown_03004040[1] = b;
+    dp01_prepare_buffer(a, gUnknown_03004040, 2);
+}
+
+void unref_sub_800C828(u8 a, u8 b, u8 *c)
+{
+    int i;
+    
+    gUnknown_03004040[0] = 14;
+    gUnknown_03004040[1] = b;
+    for (i = 0; i < b * 3; i++)
+        gUnknown_03004040[2 + i] = *(c++);
+    dp01_prepare_buffer(a, gUnknown_03004040, b * 3 + 2);
+}
+
+void dp01_build_cmdbuf_x0F_aa_b_cc_dddd_e_mlc_weather_00_x1Cbytes(u8 a, u16 b, u8 c, u16 d, int e, u8 f, u8 *g)
+{
+    gUnknown_03004040[0] = 15;
+    gUnknown_03004040[1] = b;
+    gUnknown_03004040[2] = (b & 0xFF00) >> 8;
+    gUnknown_03004040[3] = c;
+    gUnknown_03004040[4] = d;
+    gUnknown_03004040[5] = (d & 0xFF00) >> 8;
+    gUnknown_03004040[6] = e;
+    gUnknown_03004040[7] = (e & 0x0000FF00) >> 8;
+    gUnknown_03004040[8] = (e & 0x00FF0000) >> 16;
+    gUnknown_03004040[9] = (e & 0xFF000000) >> 24;
+    gUnknown_03004040[10] = f;
+    gUnknown_03004040[11] = gUnknown_02024C0E;
+    if (sub_8018324(14, 0, 13, 0, 0) == 0 && sub_8018324(14, 0, 0x4D, 0, 0) == 0)
+    {
+        gUnknown_03004040[12] = gBattleWeather;
+        gUnknown_03004040[13] = (gBattleWeather & 0xFF00) >> 8;
+    }
+    else
+    {
+        gUnknown_03004040[12] = 0;
+        gUnknown_03004040[13] = 0;
+    }
+    gUnknown_03004040[14] = 0;
+    gUnknown_03004040[15] = 0;
+    memcpy(gUnknown_03004040 + 16, g, 0x1C);
+    dp01_prepare_buffer(a, gUnknown_03004040, 0x2C);
+}
+
+/*
+void dp01_build_cmdbuf_x10_TODO(u8 a, u16 b)
+{
+    int i;
+    
+    gUnknown_03004040[0] = 16;
+    gUnknown_03004040[1] = gUnknown_02024D26;
+    gUnknown_03004040[2] = b;
+    gUnknown_03004040[3] = b >> 8;
+    //UB: alignment?
+    *((u16 *)(gUnknown_03004040 + 4)) = gUnknown_02024BE6;
+    *((u16 *)(gUnknown_03004040 + 6)) = gUnknown_02024BE8;
+    *((u16 *)(gUnknown_03004040 + 8)) = gUnknown_02024C04;
+    gUnknown_03004040[10] = byte_2024C06;
+    gUnknown_03004040[11] = unk_2000000[0x16000 + 3];
+    gUnknown_03004040[12] = unk_2000000[0x16000 + 0x5E];
+    gUnknown_03004040[13] = unk_2000000[0x16000 + 0xC1];
+    gUnknown_03004040[14] = gUnknown_02024C0B;
+    gUnknown_03004040[15] = gBattleMoves[gUnknown_02024BE6].type;
+    for (i = 0; i < 4; i++)
+        gUnknown_03004040[16 + i] = gBattleMons[i].ability;
+    for (i = 0; i < 16; i++)
+    {
+        gUnknown_03004040[20 + i] = gUnknown_030041C0[i];
+        //Finish later
     }
 }
 */
