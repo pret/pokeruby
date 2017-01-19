@@ -10,8 +10,11 @@
 extern u8 unk_2000000[];
 
 #define EWRAM_14000 ((u8 *)(unk_2000000 + 0x14000))
+#define EWRAM_15000 ((u8 *)(unk_2000000 + 0x15000))
 
 extern u16 gBattleTypeFlags;
+extern u16 gBlockRecvBuffer[MAX_LINK_PLAYERS][BLOCK_BUFFER_SIZE / 2];
+extern u32 gBitTable[];
 
 extern u8 gUnknown_020238C4;
 extern u8 gUnknown_020238C5;
@@ -480,3 +483,94 @@ void sub_800C1A8(u8 taskId)
         break;
     }
 }
+
+//fix me
+void sub_800C35C(void)
+{
+    u8 i;  //r4
+    s32 j;  //r2
+    u16 r6;  //r6
+    u8 *recvBuffer;  //r3
+    u8 *dest;  //r5
+    u8 *src;  //r4
+    
+    if (gReceivedRemoteLinkPlayers != 0 && (gBattleTypeFlags & 0x20) && gLinkPlayers[0].linkType == 0x2211)
+    {
+        for (i = 0; i < GetLinkPlayerCount(); i++)
+        {
+            if (GetBlockReceivedStatus() & gBitTable[i])
+            {
+                ResetBlockReceivedFlag(i);
+                recvBuffer = (u8 *)&gBlockRecvBuffer[i];
+#ifndef NONMATCHING
+                asm("");
+                recvBuffer = (u8 *)&gBlockRecvBuffer[i];
+#endif
+                r6 = gBlockRecvBuffer[i][2];
+                if (gTasks[gUnknown_020238C5].data[14] + 9 + r6 > 0x1000)
+                {
+                    gTasks[gUnknown_020238C5].data[12] = gTasks[gUnknown_020238C5].data[14];
+                    gTasks[gUnknown_020238C5].data[14] = 0;
+                }
+                //_0800C402
+                dest = EWRAM_15000 + gTasks[gUnknown_020238C5].data[14];
+                src = recvBuffer;
+                for (j = 0; j < r6 + 8; j++)
+                    dest[j] = src[j];
+                gTasks[gUnknown_020238C5].data[14] = gTasks[gUnknown_020238C5].data[14] + r6 + 8;
+            }
+            //_0800C446
+        }
+    }
+}
+
+/*
+extern void sub_80155A4();
+
+void sub_800C47C(u8 taskId)
+{
+    //s16 r3;
+    u16 r7;
+    u8 r4;
+    u8 r2;
+    
+    if (gTasks[taskId].data[15] != gTasks[taskId].data[14])
+    {
+        if (gTasks[taskId].data[15] > gTasks[taskId].data[14]
+         && gTasks[taskId].data[15] == gTasks[taskId].data[12])
+        {
+            gTasks[taskId].data[12] = 0;
+            gTasks[taskId].data[15] = 0;
+        }
+        //_0800C4B6
+        //r3 = gTasks[taskId].data[15];
+        asm(""::"r"(unk_2000000));
+        r4 = EWRAM_15000[gTasks[taskId].data[15] + 1];
+        r7 = EWRAM_15000[gTasks[taskId].data[15] + 4] | (EWRAM_15000[gTasks[taskId].data[15] + 5] << 8);
+        switch (EWRAM_15000[gTasks[taskId].data[15]])
+        {
+            case 0:
+                if (gUnknown_02024A64 & gBitTable[r4])
+                    return;
+                memcpy(gUnknown_02023A60[r4], &EWRAM_15000[gTasks[taskId].data[15] + 8], r7);
+                sub_80155A4(r4);
+                if (!(gBattleTypeFlags & 4))
+                {
+                    gUnknown_02024C07 = EWRAM_15000[gTasks[taskId].data[15] + 2];
+                    gUnknown_02024C08 = EWRAM_15000[gTasks[taskId].data[15] + 3];
+                    gUnknown_02024C0C = EWRAM_15000[gTasks[taskId].data[15] + 6];
+                    gUnknown_02024C0A = EWRAM_15000[gTasks[taskId].data[15] + 7];
+                }
+                break;
+            case 1:
+                memcpy(gUnknown_02024260[r4], &EWRAM_15000[gTasks[taskId].data[15] + 8], r7);
+                break;
+            case 2:
+                r2 = EWRAM_15000[gTasks[taskId].data[15] + 8];
+                gUnknown_02024A64 &= ~(gBitTable[r4] << (r2 * 4));
+                break;
+        }
+        gTasks[taskId].data[15] = gTasks[taskId].data[15] + r7 + 8;
+    }
+}
+*/
