@@ -60,7 +60,7 @@ extern u8 sub_8007ECC(void);
 
 void sub_800B858(void)
 {
-    if (gBattleTypeFlags & 2)
+    if (gBattleTypeFlags & BATTLE_TYPE_LINK)
     {
         OpenLink();
         CreateTask(sub_8083C50, 0);
@@ -85,7 +85,7 @@ void setup_poochyena_battle(void)
     battle_anim_clear_some_data();
     sub_8040710();
     BattleAI_HandleItemUseBeforeAISetup();
-    if (gBattleTypeFlags & 0x10)
+    if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
     {
         ZeroEnemyPartyMons();
         CreateMon(&gEnemyParty[0], SPECIES_POOCHYENA, 2, 32, 0, 0, 0, 0);
@@ -100,12 +100,12 @@ void sub_800B950(void)
 {
     s32 i;
     
-    if (gBattleTypeFlags & 2)
+    if (gBattleTypeFlags & BATTLE_TYPE_LINK)
         sub_800BA78();
     else
         sub_800B9A8();
     sub_800BD54();
-    if (!(gBattleTypeFlags & 0x40))
+    if (!(gBattleTypeFlags & BATTLE_TYPE_40))
     {
         for (i = 0; i < gUnknown_02024A68; i++)
             sub_8094978(i, 0);
@@ -114,12 +114,12 @@ void sub_800B950(void)
 
 void sub_800B9A8(void)
 {
-    if (!(gBattleTypeFlags & 1))
+    if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
     {
         gUnknown_030042D4 = sub_8010800;
-        if (gBattleTypeFlags & 0x80)
+        if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
             gUnknown_03004330[0] = sub_812B468;
-        else if (gBattleTypeFlags & 0x200)
+        else if (gBattleTypeFlags & BATTLE_TYPE_WALLY_TUTORIAL)
             gUnknown_03004330[0] = sub_8137224;
         else
             gUnknown_03004330[0] = sub_802BF74;
@@ -347,7 +347,7 @@ void dp01_prepare_buffer(u8 a, u8 *b, u16 c)
 {
     int i;
     
-    if (gBattleTypeFlags & 2)
+    if (gBattleTypeFlags & BATTLE_TYPE_LINK)
     {
         dp01_prepare_buffer_wireless_probably(a, c, b);
     }
