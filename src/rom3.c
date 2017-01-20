@@ -1039,3 +1039,370 @@ _0800CB50: .4byte gUnknown_03004290\n\
 _0800CB54: .4byte gUnknown_030041C0\n\
     .syntax divided\n");
 }
+
+void dp01_build_cmdbuf_x12_a_bb(u8 a, int b, u16 c)
+{
+    gUnknown_03004040[0] = 18;
+    gUnknown_03004040[1] = b;
+    gUnknown_03004040[2] = c;
+    gUnknown_03004040[3] = (c & 0xFF00) >> 8;
+    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+}
+
+void unref_sub_800CB84(u8 a, int b)
+{
+    gUnknown_03004040[0] = 19;
+    gUnknown_03004040[1] = b;
+    dp01_prepare_buffer(a, gUnknown_03004040, 2);
+}
+
+void sub_800CBA4(u8 a, int b, int c, u8 *d)
+{
+    u32 i;
+    
+    gUnknown_03004040[0] = 20;
+    gUnknown_03004040[1] = b;
+    gUnknown_03004040[2] = c;
+    gUnknown_03004040[3] = 0;
+    for (i = 0; i < 20; i++)
+        gUnknown_03004040[4 + i] = d[i];
+    dp01_prepare_buffer(a, gUnknown_03004040, 24);
+}
+
+void sub_800CBE0(u8 a, u8 *b)
+{
+    int i;
+    
+    gUnknown_03004040[0] = 21;
+    for (i = 0; i < 3; i++)
+        gUnknown_03004040[1 + i] = b[i];
+    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+}
+
+void dp01_build_cmdbuf_x16_a_b_c_ptr_d_e_f(u8 a, int b, int c, int d, u8 *e)
+{
+    int i;
+    
+    gUnknown_03004040[0] = 22;
+    gUnknown_03004040[1] = b;
+    gUnknown_03004040[2] = c;
+    gUnknown_03004040[3] = d;
+    for (i = 0; i < 3; i++)
+        gUnknown_03004040[4 + i] = e[i];
+    dp01_prepare_buffer(a, gUnknown_03004040, 8);  //but only 7 bytes were written
+}
+
+void dp01_build_cmdbuf_x17_17_17_17(u8 a)
+{
+    gUnknown_03004040[0] = 23;
+    gUnknown_03004040[1] = 23;
+    gUnknown_03004040[2] = 23;
+    gUnknown_03004040[3] = 23;
+    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+}
+
+void dp01_build_cmdbuf_x18_0_aa_health_bar_update(u8 a, s16 b)
+{
+    gUnknown_03004040[0] = 24;
+    gUnknown_03004040[1] = 0;
+    gUnknown_03004040[2] = b;
+    gUnknown_03004040[3] = (b & 0xFF00) >> 8;
+    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+}
+
+void dp01_build_cmdbuf_x19_a_bb(u8 a, int b, s16 c)
+{
+    gUnknown_03004040[0] = 25;
+    gUnknown_03004040[1] = b;
+    gUnknown_03004040[2] = c;
+    gUnknown_03004040[3] = (c & 0xFF00) >> 8;
+    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+}
+
+void dp01_build_cmdbuf_x1A_aaaa_bbbb(u8 a, u32 b, u32 c)
+{
+    gUnknown_03004040[0] = 26;
+    gUnknown_03004040[1] = b;
+    gUnknown_03004040[2] = (b & 0x0000FF00) >> 8;
+    gUnknown_03004040[3] = (b & 0x00FF0000) >> 16;
+    gUnknown_03004040[4] = (b & 0xFF000000) >> 24;
+    gUnknown_03004040[5] = c;
+    gUnknown_03004040[6] = (c & 0x0000FF00) >> 8;
+    gUnknown_03004040[7] = (c & 0x00FF0000) >> 16;
+    gUnknown_03004040[8] = (c & 0xFF000000) >> 24;
+    dp01_prepare_buffer(a, gUnknown_03004040, 9);
+}
+
+void dp01_build_cmdbuf_x1B_aaaa_b(u8 a, int b, u32 c)
+{
+    gUnknown_03004040[0] = 27;
+    gUnknown_03004040[1] = b;
+    gUnknown_03004040[2] = c;
+    gUnknown_03004040[3] = (c & 0x0000FF00) >> 8;
+    gUnknown_03004040[4] = (c & 0x00FF0000) >> 16;
+    gUnknown_03004040[5] = (c & 0xFF000000) >> 24;
+    dp01_prepare_buffer(a, gUnknown_03004040, 6);
+}
+
+void dp01_build_cmdbuf_x1C_a(u8 a, int b)
+{
+    gUnknown_03004040[0] = 28;
+    gUnknown_03004040[1] = b;
+    dp01_prepare_buffer(a, gUnknown_03004040, 2);
+}
+
+void dp01_build_cmdbuf_x1D_1D_numargs_varargs(u8 a, u16 b, u8 *c)
+{
+    int i;
+    
+    gUnknown_03004040[0] = 29;
+    gUnknown_03004040[1] = 29;
+    gUnknown_03004040[2] = b;
+    gUnknown_03004040[3] = (b & 0xFF00) >> 8;
+    for (i = 0; i < b; i++)
+        gUnknown_03004040[4 + i] = *(c++);
+    dp01_prepare_buffer(a, gUnknown_03004040, b + 4);
+}
+
+void unref_sub_800CDD4(u8 a, u32 b, u16 c, u8 *d)
+{
+    int i;
+    
+    gUnknown_03004040[0] = 30;
+    gUnknown_03004040[1] = b;
+    gUnknown_03004040[2] = (b & 0x0000FF00) >> 8;
+    gUnknown_03004040[3] = (b & 0x00FF0000) >> 16;
+    gUnknown_03004040[4] = (b & 0xFF000000) >> 24;
+    gUnknown_03004040[5] = c;
+    gUnknown_03004040[6] = (c & 0xFF00) >> 8;
+    for (i = 0; i < c; i++)
+        gUnknown_03004040[7 + i] = *(d++);
+    dp01_prepare_buffer(a, gUnknown_03004040, c + 7);
+}
+
+void unref_sub_800CE3C(u8 a, u16 b, u8 *c)
+{
+    int i;
+    
+    gUnknown_03004040[0] = 31;
+    gUnknown_03004040[1] = b;
+    gUnknown_03004040[2] = (b & 0xFF00) >> 8;
+    for (i = 0; i < b; i++)
+        gUnknown_03004040[3 + i] = *(c++);
+    dp01_prepare_buffer(a, gUnknown_03004040, b + 3);
+}
+
+void unref_sub_800CE84(u8 a, u16 b, u8 *c)
+{
+    int i;
+    
+    gUnknown_03004040[0] = 32;
+    gUnknown_03004040[1] = b;
+    gUnknown_03004040[2] = (b & 0xFF00) >> 8;
+    for (i = 0; i < b; i++)
+        gUnknown_03004040[3 + i] = *(c++);
+    dp01_prepare_buffer(a, gUnknown_03004040, b + 3);
+}
+
+void dp01_build_cmdbuf_x21_a_bb(u8 a, int b, u16 c)
+{
+    gUnknown_03004040[0] = 33;
+    gUnknown_03004040[1] = b;
+    gUnknown_03004040[2] = c;
+    gUnknown_03004040[3] = (c & 0xFF00) >> 8;
+    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+}
+
+void dp01_build_cmdbuf_x22_a_three_bytes(u8 a, int b, u8 *c)
+{
+    int i;
+    
+    gUnknown_03004040[0] = 34;
+    gUnknown_03004040[1] = b;
+    for (i = 0; i < 3; i++)
+        gUnknown_03004040[2 + i] = c[i];
+    dp01_prepare_buffer(a, gUnknown_03004040, 5);
+}
+
+void dp01_build_cmdbuf_x23_aa_0(u8 a, u16 b)
+{
+    gUnknown_03004040[0] = 35;
+    gUnknown_03004040[1] = b;
+    gUnknown_03004040[2] = (b & 0xFF00) >> 8;
+    gUnknown_03004040[3] = 0;
+    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+}
+
+void dp01_build_cmdbuf_x24_aa_0(u8 a, u16 b)
+{
+    gUnknown_03004040[0] = 36;
+    gUnknown_03004040[1] = b;
+    gUnknown_03004040[2] = (b & 0xFF00) >> 8;
+    gUnknown_03004040[3] = 0;
+    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+}
+
+void dp01_build_cmdbuf_x25_25_25_25(u8 a)
+{
+    gUnknown_03004040[0] = 37;
+    gUnknown_03004040[1] = 37;
+    gUnknown_03004040[2] = 37;
+    gUnknown_03004040[3] = 37;
+    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+}
+
+void dp01_build_cmdbuf_x26_a(u8 a, int b)
+{
+    gUnknown_03004040[0] = 38;
+    gUnknown_03004040[1] = b;
+    dp01_prepare_buffer(a, gUnknown_03004040, 2);
+}
+
+void dp01_build_cmdbuf_x27_27_27_27(u8 a)
+{
+    gUnknown_03004040[0] = 39;
+    gUnknown_03004040[1] = 39;
+    gUnknown_03004040[2] = 39;
+    gUnknown_03004040[3] = 39;
+    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+}
+
+void dp01_build_cmdbuf_x28_28_28_28(u8 a)
+{
+    gUnknown_03004040[0] = 40;
+    gUnknown_03004040[1] = 40;
+    gUnknown_03004040[2] = 40;
+    gUnknown_03004040[3] = 40;
+    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+}
+
+void dp01_build_cmdbuf_x29_29_29_29(u8 a)
+{
+    gUnknown_03004040[0] = 41;
+    gUnknown_03004040[1] = 41;
+    gUnknown_03004040[2] = 41;
+    gUnknown_03004040[3] = 41;
+    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+}
+
+void dp01_build_cmdbuf_x2A_2A_2A_2A(u8 a)
+{
+    gUnknown_03004040[0] = 42;
+    gUnknown_03004040[1] = 42;
+    gUnknown_03004040[2] = 42;
+    gUnknown_03004040[3] = 42;
+    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+}
+
+void dp01_build_cmdbuf_x2B_aa_0(u8 a, u16 b)
+{
+    gUnknown_03004040[0] = 43;
+    gUnknown_03004040[1] = b;
+    gUnknown_03004040[2] = (b & 0xFF00) >> 8;
+    gUnknown_03004040[3] = 0;
+    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+}
+
+void sub_800D074(u8 a, u16 b)
+{
+    gUnknown_03004040[0] = 44;
+    gUnknown_03004040[1] = b;
+    gUnknown_03004040[2] = (b & 0xFF00) >> 8;
+    gUnknown_03004040[3] = 0;
+    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+}
+
+void dp01_build_cmdbuf_x2D_2D_2D_2D(u8 a)
+{
+    gUnknown_03004040[0] = 45;
+    gUnknown_03004040[1] = 45;
+    gUnknown_03004040[2] = 45;
+    gUnknown_03004040[3] = 45;
+    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+}
+
+void dp01_build_cmdbuf_x2E_a(u8 a, int b)
+{
+    gUnknown_03004040[0] = 46;
+    gUnknown_03004040[1] = b;
+    dp01_prepare_buffer(a, gUnknown_03004040, 2);
+}
+
+void dp01_build_cmdbuf_x2F_2F_2F_2F(u8 a)
+{
+    gUnknown_03004040[0] = 47;
+    gUnknown_03004040[1] = 47;
+    gUnknown_03004040[2] = 47;
+    gUnknown_03004040[3] = 47;
+    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+}
+
+void dp01_build_cmdbuf_x30_TODO(u8 a, u8 *b, u8 c)
+{
+    int i;
+    
+    gUnknown_03004040[0] = 48;
+    gUnknown_03004040[1] = c & 0x7F;
+    gUnknown_03004040[2] = (c & 0x80) >> 7;
+    gUnknown_03004040[3] = 48;
+    for (i = 0; i < 48; i++)
+        gUnknown_03004040[4 + i] = b[i];
+    dp01_prepare_buffer(a, gUnknown_03004040, 52);
+}
+
+void dp01_build_cmdbuf_x31_31_31_31(u8 a)
+{
+    gUnknown_03004040[0] = 49;
+    gUnknown_03004040[1] = 49;
+    gUnknown_03004040[2] = 49;
+    gUnknown_03004040[3] = 49;
+    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+}
+
+void dp01_build_cmdbuf_x32_32_32_32(u8 a)
+{
+    gUnknown_03004040[0] = 50;
+    gUnknown_03004040[1] = 50;
+    gUnknown_03004040[2] = 50;
+    gUnknown_03004040[3] = 50;
+    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+}
+
+void dp01_build_cmdbuf_x33_a_33_33(u8 a, int b)
+{
+    gUnknown_03004040[0] = 51;
+    gUnknown_03004040[1] = b;
+    gUnknown_03004040[2] = 51;
+    gUnknown_03004040[3] = 51;
+    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+}
+
+void dp01_build_cmdbuf_x34_a_bb_aka_battle_anim(u8 a, int b, u16 c)
+{
+    gUnknown_03004040[0] = 52;
+    gUnknown_03004040[1] = b;
+    gUnknown_03004040[2] = c;
+    gUnknown_03004040[3] = (c & 0xFF00) >> 8;
+    dp01_prepare_buffer(a, gUnknown_03004040, 4);
+}
+
+void sub_800D1D8(u8 a, int b)
+{
+    gUnknown_03004040[0] = 53;
+    gUnknown_03004040[1] = b;
+    dp01_prepare_buffer(a, gUnknown_03004040, 2);
+}
+
+void dp01_build_cmdbuf_x38_a(u8 a, int b)
+{
+    gUnknown_03004040[0] = 54;
+    gUnknown_03004040[1] = b;
+    dp01_prepare_buffer(a, gUnknown_03004040, 2);
+}
+
+void dp01_build_cmdbuf_x37_a(u8 a, int b)
+{
+    gUnknown_03004040[0] = 55;
+    gUnknown_03004040[1] = b;
+    dp01_prepare_buffer(a, gUnknown_03004040, 2);
+}
