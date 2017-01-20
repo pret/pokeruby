@@ -302,7 +302,7 @@ struct MapObjectGraphicsInfo
 #define PLAYER_AVATAR_FLAG_6         (1 << 6)
 #define PLAYER_AVATAR_FLAG_DASH      (1 << 7)
 
-struct PlayerAvatar
+struct PlayerAvatar /* 0x202E858 */
 {
     /*0x00*/ u8 flags;
     /*0x01*/ u8 bike;
@@ -312,6 +312,9 @@ struct PlayerAvatar
     /*0x05*/ u8 mapObjectId;
     /*0x06*/ u8 unk6;
     /*0x07*/ u8 gender;
+	u8 filler8[0x2];
+	u8 unkA;
+	u8 unkB;
     // TODO: rest of struct
 };
 
