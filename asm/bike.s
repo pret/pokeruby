@@ -5,60 +5,7 @@
 	.syntax unified
 
 	.text
-
-	thumb_func_start MovePlayerOnAcroBike
-MovePlayerOnAcroBike: @ 80E52DC
-	push {r4,lr}
-	sub sp, 0x4
-	mov r3, sp
-	strb r0, [r3]
-	lsls r1, 16
-	lsrs r1, 16
-	lsls r2, 16
-	lsrs r2, 16
-	ldr r4, _080E5310 @ =gUnknown_083DB5B0
-	mov r0, sp
-	bl CheckMovementInputAcroBike
-	lsls r0, 24
-	lsrs r0, 22
-	adds r0, r4
-	mov r1, sp
-	ldrb r1, [r1]
-	ldr r2, [r0]
-	adds r0, r1, 0
-	bl _call_via_r2
-	add sp, 0x4
-	pop {r4}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_080E5310: .4byte gUnknown_083DB5B0
-	thumb_func_end MovePlayerOnAcroBike
-
-	thumb_func_start CheckMovementInputAcroBike
-CheckMovementInputAcroBike: @ 80E5314
-	push {r4,lr}
-	lsls r1, 16
-	lsrs r1, 16
-	lsls r2, 16
-	lsrs r2, 16
-	ldr r4, _080E5338 @ =gUnknown_083DB5E4
-	ldr r3, _080E533C @ =gPlayerAvatar
-	ldrb r3, [r3, 0x8]
-	lsls r3, 2
-	adds r3, r4
-	ldr r3, [r3]
-	bl _call_via_r3
-	lsls r0, 24
-	lsrs r0, 24
-	pop {r4}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_080E5338: .4byte gUnknown_083DB5E4
-_080E533C: .4byte gPlayerAvatar
-	thumb_func_end CheckMovementInputAcroBike
-
+	
 	thumb_func_start CheckMovementInputAcroBikeNormal
 CheckMovementInputAcroBikeNormal: @ 80E5340
 	push {r4-r6,lr}
