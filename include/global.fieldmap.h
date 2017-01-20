@@ -312,7 +312,8 @@ struct PlayerAvatar /* 0x202E858 */
     /*0x05*/ u8 mapObjectId;
     /*0x06*/ u8 unk6;
     /*0x07*/ u8 gender;
-	u8 filler8[0x3];
+	u8 filler8[0x2];
+	u8 unkA;
 	u8 unkB;
     // TODO: rest of struct
 };
